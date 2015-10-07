@@ -475,7 +475,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		PathGlyphsNV["emScale"]
 	)
 
-	ignoreMissing..GLenum(
+	IgnoreMissing..GLenum(
 		"PathGlyphIndexArrayNV",
 		"",
 
@@ -489,7 +489,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		PathGlyphsNV["emScale"]
 	)
 
-	ignoreMissing..GLenum(
+	IgnoreMissing..GLenum(
 		"PathMemoryGlyphIndexArrayNV",
 		"",
 
@@ -512,7 +512,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GLuint.IN("srcPath", "")
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"WeightPathsNV",
 		"",
 
@@ -726,7 +726,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"StencilThenCoverFillPathNV",
 		"",
 
@@ -736,7 +736,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"StencilThenCoverStrokePathNV",
 		"",
 
@@ -746,7 +746,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	ignoreMissing..numPathsExpression..void(
+	IgnoreMissing..numPathsExpression..void(
 		"StencilThenCoverFillPathInstancedNV",
 		"",
 
@@ -761,7 +761,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	ignoreMissing..numPathsExpression..void(
+	IgnoreMissing..numPathsExpression..void(
 		"StencilThenCoverStrokePathInstancedNV",
 		"",
 
@@ -776,7 +776,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	ignoreMissing..GLenum(
+	IgnoreMissing..GLenum(
 		"PathGlyphIndexRangeNV",
 		"",
 
@@ -788,7 +788,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GLuint.IN("baseAndCount", "")
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"ProgramPathFragmentInputGenNV",
 		"",
 
@@ -922,7 +922,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		nullable..Check(1)..GLfloat_p.OUT("tangentY", "")
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"MatrixLoad3x2fNV",
 		"",
 
@@ -930,7 +930,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		Check(3 * 2)..const..GLfloat_p.IN("m", "")
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"MatrixLoad3x3fNV",
 		"",
 
@@ -938,7 +938,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		Check(3 * 3)..const..GLfloat_p.IN("m", "")
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"MatrixLoadTranspose3x3fNV",
 		"",
 
@@ -946,7 +946,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["MatrixLoad3x3fNV"]["m"]
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"MatrixMult3x2fNV",
 		"",
 
@@ -954,7 +954,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		Check(3 * 2)..const..GLfloat_p.IN("m", "")
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"MatrixMult3x3fNV",
 		"",
 
@@ -962,7 +962,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["MatrixLoad3x3fNV"]["m"]
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"MatrixMultTranspose3x3fNV",
 		"",
 
@@ -970,7 +970,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["MatrixLoad3x3fNV"]["m"]
 	)
 
-	ignoreMissing..void(
+	IgnoreMissing..void(
 		"GetProgramResourcefvNV",
 		"",
 

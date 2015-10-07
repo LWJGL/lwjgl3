@@ -32,7 +32,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 		<strong>LWJGL note</strong>: The closure and raw APIs are not exposed.
 		"""
-	
+
 	ShortConstant(
 		"Types used to create custom ##FFICIF.",
 
@@ -76,7 +76,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"BAD_TYPEDEF".enum,
 		"BAD_ABI".enum
 	)
-	
+
 	LongConstant(
 		"Data types. These are the addresses of libffi's predefined ##FFIType structs.",
 
@@ -163,29 +163,29 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 	void_p(
 		"closure_alloc",
-	    "Allocates an ##FFIClosure structure.",
+		"Allocates an ##FFIClosure structure.",
 
-	    autoSizeResult..size_t.IN("size", "the number of bytes to allocate", "FFIClosure##SIZEOF"),
-	    Check(1)..void_pp.OUT("code", "a buffer in which to place the returned executable address"),
+		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate", "FFIClosure##SIZEOF"),
+		Check(1)..void_pp.OUT("code", "a buffer in which to place the returned executable address"),
 
-	    returnDoc = "a pointer to the writable address"
+		returnDoc = "a pointer to the writable address"
 	)
 
 	void(
 		"closure_free",
-	    "Frees memory allocated using #closure_alloc().",
+		"Frees memory allocated using #closure_alloc().",
 
-	    void_p.IN("writable", "the address of an ##FFIClosure structure")
+		void_p.IN("writable", "the address of an ##FFIClosure structure")
 	)
 
 	ffi_status(
 		"prep_closure_loc",
-	    "",
+		"",
 
-	    ffi_closure_p.IN("closure", "the address of an ##FFIClosure object; this is the writable address returned by #closure_alloc()."),
-	    ffi_cif_p.IN("cif", "the ##FFICIF describing the function parameters"),
-	    FFI_CLOSURE_FUN.IN("fun", "the function which will be called when the closure is invoked"),
-	    nullable..voidptr.IN("user_data", "an arbitrary datum that is passed, uninterpreted, to your closure function"),
-	    voidptr.IN("codeloc", "the executable address returned by #closure_alloc().")
+		ffi_closure_p.IN("closure", "the address of an ##FFIClosure object; this is the writable address returned by #closure_alloc()."),
+		ffi_cif_p.IN("cif", "the ##FFICIF describing the function parameters"),
+		FFI_CLOSURE_FUN.IN("fun", "the function which will be called when the closure is invoked"),
+		nullable..voidptr.IN("user_data", "an arbitrary datum that is passed, uninterpreted, to your closure function"),
+		voidptr.IN("codeloc", "the executable address returned by #closure_alloc().")
 	)
 }

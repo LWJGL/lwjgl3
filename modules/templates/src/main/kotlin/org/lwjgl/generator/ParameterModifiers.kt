@@ -16,7 +16,7 @@ object const : QualifiedTypeModifier() {
 
 // Parameter
 
-object virtual : ParameterModifier() {
+object Virtual : ParameterModifier() {
 	override val isSpecial = false
 }
 
@@ -91,7 +91,7 @@ class AutoSize(
 	}
 }
 
-object autoSizeResult : ParameterModifier() {
+object AutoSizeResult : ParameterModifier() {
 	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.paramType === ParameterType.IN )
@@ -347,6 +347,6 @@ class Construct(
 }
 
 /** Returns the address of the return value, instead of the return value itself. */
-object address : ReturnValueModifier() {
+object Address : ReturnValueModifier() {
 	override val isSpecial = false
 }

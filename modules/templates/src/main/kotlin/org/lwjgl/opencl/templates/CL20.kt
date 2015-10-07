@@ -292,7 +292,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"a bit-field that is used to specify allocation and usage information",
 			"CL10#MEM_READ_WRITE CL10#MEM_WRITE_ONLY CL10#MEM_READ_ONLY #MEM_SVM_FINE_GRAIN_BUFFER #MEM_SVM_ATOMICS"
 		),
-		autoSizeResult..size_t.IN("size", "the size in bytes of the SVM buffer to be allocated"),
+		AutoSizeResult..size_t.IN("size", "the size in bytes of the SVM buffer to be allocated"),
 		unsigned_int.IN(
 			"alignment",
 			"""

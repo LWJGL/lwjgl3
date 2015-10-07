@@ -80,7 +80,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		autoSizeResult..int_p.OUT("nelements", "returns the number of GLXFBConfigs in the returned list")
+		AutoSizeResult..int_p.OUT("nelements", "returns the number of GLXFBConfigs in the returned list")
 	)
 
 	GLXFBConfig_p(
@@ -90,7 +90,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		DISPLAY,
 		int.IN("screen", "the screen number"),
 		nullable..nullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
-		autoSizeResult..int_p.OUT("nelements", "returns the number of GLXFBConfigs matched")
+		AutoSizeResult..int_p.OUT("nelements", "returns the number of GLXFBConfigs matched")
 	)
 
 	int(

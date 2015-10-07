@@ -19,7 +19,7 @@ class Reuse(override val reference: String) : FunctionModifier(), ReferenceModif
  * This is useful for functions that have been added long after the initial release of a particular extension, or
  * as a workaround for buggy drivers.
  */
-object ignoreMissing : FunctionModifier() {
+object IgnoreMissing : FunctionModifier() {
 	override val isSpecial = false
 }
 
@@ -108,7 +108,7 @@ class Code(
 fun statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
 
 /** Marks a function without arguments as a macro. */
-object macro : FunctionModifier() {
+object Macro : FunctionModifier() {
 	override val isSpecial = false
 
 	protected override fun validate(func: NativeClassFunction) {

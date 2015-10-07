@@ -48,7 +48,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 		)
 	)
 
-	DependsOn("GL_EXT_direct_state_access")..ignoreMissing..void(
+	DependsOn("GL_EXT_direct_state_access")..IgnoreMissing..void(
 		"NamedBufferPageCommitmentEXT",
 		"Direct-state-access version of #BufferPageCommitmentARB().",
 
@@ -58,7 +58,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 		GLboolean.IN("commit", "the commit state")
 	)
 
-	DependsOn("GL_ARB_direct_state_access")..ignoreMissing..void(
+	DependsOn("GL_ARB_direct_state_access")..IgnoreMissing..void(
 		"NamedBufferPageCommitmentARB",
 		"Direct-state-access version of #BufferPageCommitmentARB().",
 

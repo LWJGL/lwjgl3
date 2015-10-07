@@ -30,9 +30,9 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 
 	// Error & stats output
 
-	(address..voidptr_p)(
+	(Address..voidptr_p)(
 		"malloc_message",
-	    "Returns the {@code je_malloc_message} variable."
+		"Returns the {@code je_malloc_message} variable."
 	)
 
 	// Standard API
@@ -44,7 +44,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		of object.
 		""",
 
-		autoSizeResult..size_t.IN("size", "the number of bytes to allocate")
+		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
 	void_p(
@@ -54,8 +54,8 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 	    {@code num * size}, with the exception that the allocated memory is explicitly initialized to zero bytes.
 	    """,
 
-		autoSizeResult..size_t.IN("num", "the number of objects to allocate"),
-		autoSizeResult..size_t.IN("size", "the size of each object, in bytes")
+		AutoSizeResult..size_t.IN("num", "the number of objects to allocate"),
+		AutoSizeResult..size_t.IN("size", "the size of each object, in bytes")
 	)
 
 	int(
@@ -78,7 +78,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		""",
 
 		size_t.IN("alignment", "the allocation alignment, in bytes"),
-		autoSizeResult..size_t.IN("size", "the number of bytes to allocate")
+		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
 	void_p(
@@ -92,7 +92,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		""",
 
 		nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
-		autoSizeResult..size_t.IN("size", "the number of bytes to allocate")
+		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
 	void(
@@ -113,7 +113,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		0, or if request size overflows due to size class and/or alignment constraints.
 		""",
 
-		autoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
+		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
 		flags
 	)
 
@@ -126,7 +126,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		""",
 
 		nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
-		autoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
+		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
 		flags
 	)
 
@@ -177,7 +177,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		and/or alignment constraints.
 		""",
 
-		autoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
+		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
 		flags
 	)
 

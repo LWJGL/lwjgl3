@@ -17,12 +17,12 @@ ENABLE_WARNINGS()""")
 
 	// Versions
 
-	macro..charASCII_p("JEMALLOC_VERSION", "Returns the version string.")
-	macro..int("JEMALLOC_VERSION_MAJOR", "Returns the major version.")
-	macro..int("JEMALLOC_VERSION_MINOR", "Returns the minor version.")
-	macro..int("JEMALLOC_VERSION_BUGFIX", "Returns the bugfix version.")
-	macro..int("JEMALLOC_VERSION_NREV", "Returns the revision number.")
-	macro..charASCII_p("JEMALLOC_VERSION_GID", "Returns the globally unique identifier (git commit hash).")
+	Macro..charASCII_p("JEMALLOC_VERSION", "Returns the version string.")
+	Macro..int("JEMALLOC_VERSION_MAJOR", "Returns the major version.")
+	Macro..int("JEMALLOC_VERSION_MINOR", "Returns the minor version.")
+	Macro..int("JEMALLOC_VERSION_BUGFIX", "Returns the bugfix version.")
+	Macro..int("JEMALLOC_VERSION_NREV", "Returns the revision number.")
+	Macro..charASCII_p("JEMALLOC_VERSION_GID", "Returns the globally unique identifier (git commit hash).")
 
 	// Non-standard API
 
@@ -46,7 +46,7 @@ ENABLE_WARNINGS()""")
 		size_t.IN("a", "the alignment")
 	)
 
-	macro..unsigned_int(
+	Macro..unsigned_int(
 		"MALLOCX_ZERO",
 		"""
 		Initialize newly allocated memory to contain zero bytes. In the growing reallocation case, the real size prior to reallocation defines the boundary
@@ -64,7 +64,7 @@ ENABLE_WARNINGS()""")
 		unsigned_int.IN("tc", "the thread-specific cache")
 	)
 
-	macro..unsigned_int(
+	Macro..unsigned_int(
 		"MALLOCX_TCACHE_NONE",
 		"""
 		Do not use a thread-specific cache (tcache).  Unless #MALLOCX_TCACHE() or {@code MALLOCX_TCACHE_NONE} is specified, an automatically managed tcache

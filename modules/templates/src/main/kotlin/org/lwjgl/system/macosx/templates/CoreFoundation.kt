@@ -29,9 +29,9 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"FALSE" expr "0"
 	)
 
-	macro..CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for $NULL, if you'd rather use a named constant.")
-	macro..CFAllocatorRef("kCFAllocatorSystemDefault", "Default system allocator; you rarely need to use this.")
-	macro..CFAllocatorRef(
+	Macro..CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for $NULL, if you'd rather use a named constant.")
+	Macro..CFAllocatorRef("kCFAllocatorSystemDefault", "Default system allocator; you rarely need to use this.")
+	Macro..CFAllocatorRef(
 		"kCFAllocatorMalloc",
 		"""
 		This allocator uses {@code malloc()}, {@code realloc()}, and {@code free()}. This should not be generally used; stick to #kCFAllocatorDefault()
@@ -39,21 +39,21 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		was obtained as a result of {@code malloc()} type functions.
 		"""
 	)
-	macro..CFAllocatorRef(
+	Macro..CFAllocatorRef(
 		"kCFAllocatorMallocZone",
 		"""
 		This allocator explicitly uses the default malloc zone, returned by {@code malloc_default_zone()}. It should only be used when an object is safe to be
 		allocated in non-scanned memory.
 		"""
 	)
-	macro..CFAllocatorRef(
+	Macro..CFAllocatorRef(
 		"kCFAllocatorNull",
 		"""
 		Null allocator which does nothing and allocates no memory. This allocator is useful as the "bytesDeallocator" in {@code CFData} or "contentsDeallocator"
 		in {@code CFString} where the memory should not be freed.
 		"""
 	)
-	macro..CFAllocatorRef(
+	Macro..CFAllocatorRef(
 		"kCFAllocatorUseContext",
 		"Special allocator argument to CFAllocatorCreate which means \"use the functions given in the context to allocate the allocator itself as well\"."
 	)

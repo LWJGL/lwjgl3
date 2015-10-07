@@ -12,7 +12,7 @@ val WGL_NV_vertex_array_range = "WGLNVVertexArrayRange".nativeClassWGL("WGL_NV_v
 		"AllocateMemoryNV",
 		"",
 
-		autoSizeResult..GLsizei.IN("size", ""),
+		AutoSizeResult..GLsizei.IN("size", ""),
 		GLfloat.IN("readfreq", ""),
 		GLfloat.IN("writefreq", ""),
 		GLfloat.IN("priority", "")

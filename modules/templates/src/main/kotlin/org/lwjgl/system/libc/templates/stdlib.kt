@@ -12,7 +12,7 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 	)
 
 	nativeDirective(
-"""#ifdef LWJGL_WINDOWS
+		"""#ifdef LWJGL_WINDOWS
 	#define aligned_alloc(alignment, size) _aligned_malloc(size, alignment)
 	#define aligned_free _aligned_free
 #else
@@ -34,7 +34,7 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		either $NULL, or a unique pointer value that can later be successfully passed to #free().
 		""",
 
-		autoSizeResult..size_t.IN("size", "the number of bytes to allocate")
+		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
 	void_p(
@@ -45,8 +45,8 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		#free().
 		""",
 
-		autoSizeResult..size_t.IN("nmemb", "the number of elements to allocate"),
-		autoSizeResult..size_t.IN("size", "the number of bytes to allocate per element")
+		AutoSizeResult..size_t.IN("nmemb", "the number of elements to allocate"),
+		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate per element")
 	)
 
 	void_p(
@@ -60,7 +60,7 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		""",
 
 		nullable..void_p.IN("ptr", "the memory block to reallocate"),
-		autoSizeResult..size_t.IN("size", "the new memory block size, in bytes")
+		AutoSizeResult..size_t.IN("size", "the new memory block size, in bytes")
 	)
 
 	void(
@@ -81,7 +81,7 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		""",
 
 		size_t.IN("alignment", "the alignment. Must be a power of two value."),
-		autoSizeResult..size_t.IN("size", "the number of bytes to allocate. Must be a multiple of {@code alignment}.")
+		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate. Must be a multiple of {@code alignment}.")
 	)
 
 	void(

@@ -30,7 +30,7 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 	}
 
 	private val Iterable<NativeClassFunction>.hasDeprecated: Boolean
-		get() = this.any { it has deprecatedGL }
+		get() = this.any { it has DeprecatedGL }
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }
@@ -47,7 +47,7 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 				function[ReferenceGL].function
 			else
 				function.stripPostfix(stripType = true)
-			writer.printOpenGLJavaDoc(documentation, xmlName, function has deprecatedGL)
+			writer.printOpenGLJavaDoc(documentation, xmlName, function has DeprecatedGL)
 			return true
 		}
 		return false
@@ -58,7 +58,7 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 			writer.print(", boolean fc")
 	}
 
-	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.has(deprecatedGL)
+	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.has(DeprecatedGL)
 
 	override fun addParameterChecks(
 		checks: MutableList<String>,
@@ -84,7 +84,7 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 		// even if the current context is forward compatible. We don't want that because
 		// we prefer to throw an exception instead of letting GL raise an error and it's
 		// also the only way to support the pseudo-fc mode.
-		if ( function has deprecatedGL )
+		if ( function has DeprecatedGL )
 			"GL.getFunctionAddress(provider, \"${function.nativeName}\", fc)"
 		else
 			super.getFunctionAddressCall(function);
@@ -121,15 +121,15 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 
 		if ( hasDeprecated ) {
 			print("(fc || checkFunctions(")
-			nativeClass.printPointers(this, printPointer) { it has deprecatedGL }
+			nativeClass.printPointers(this, printPointer) { it has DeprecatedGL }
 			print(")) && ")
 		}
 
 		print("checkFunctions(")
 		if ( hasDeprecated )
-			nativeClass.printPointers(this, printPointer) { !(it has deprecatedGL || it has ignoreMissing) }
+			nativeClass.printPointers(this, printPointer) { !(it has DeprecatedGL || it has IgnoreMissing) }
 		else
-			nativeClass.printPointers(this, printPointer) { !(it has ignoreMissing) }
+			nativeClass.printPointers(this, printPointer) { !(it has IgnoreMissing) }
 
 		println(");")
 

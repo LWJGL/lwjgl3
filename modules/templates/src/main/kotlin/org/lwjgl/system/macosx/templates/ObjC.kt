@@ -274,7 +274,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"objc_copyClassList",
 			"Creates and returns a list of pointers to all registered class definitions.",
 
-			nullable..autoSizeResult..unsigned_int_p.OUT(
+			nullable..AutoSizeResult..unsigned_int_p.OUT(
 				"outCount",
 				"an integer pointer used to store the number of classes returned by this function in the list. This parameter may be #nil"
 			),
@@ -382,7 +382,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"Describes the instance variables declared by a class.",
 
 			nullable..Class.IN("cls", "the class to inspect"),
-			nullable..autoSizeResult..unsigned_int_p.OUT(
+			nullable..AutoSizeResult..unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -471,7 +471,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"Describes the instance methods implemented by a class.",
 
 			nullable..Class.IN("cls", "the class you want to inspect"),
-			nullable..autoSizeResult..unsigned_int_p.OUT(
+			nullable..AutoSizeResult..unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -504,7 +504,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"Describes the protocols adopted by a class.",
 
 			nullable..Class.IN("cls", "the class you want to inspect"),
-			nullable..autoSizeResult..unsigned_int_p.OUT(
+			nullable..AutoSizeResult..unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -537,7 +537,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"Describes the properties declared by a class.",
 
 			nullable..Class.IN("cls", "the class you want to inspect"),
-			nullable..autoSizeResult..unsigned_int_p.OUT(
+			nullable..AutoSizeResult..unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -976,7 +976,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"Returns an array of property attributes for a given property.",
 
 			objc_property_t.IN("property", "the property whose attributes you want to copy"),
-			autoSizeResult..unsigned_int_p.OUT("outCount", "the number of attributes returned in the array"),
+			AutoSizeResult..unsigned_int_p.OUT("outCount", "the number of attributes returned in the array"),
 
 			returnDoc = "an array of property attributes. You must free the array with free()."
 		)
@@ -1014,7 +1014,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"objc_copyProtocolList",
 			"Returns an array of all the protocols known to the runtime.",
 
-			autoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of protocols in the returned array"),
+			AutoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of protocols in the returned array"),
 
 			returnDoc =
 			"""
@@ -1090,7 +1090,7 @@ void myMethodIMP(id self, SEL _cmd)
 			Protocol_p.IN("p", "a protocol"),
 			BOOL.IN("isRequiredMethod", "a Boolean value that indicates whether returned methods should be required methods (pass #YES to specify required methods)"),
 			BOOL.IN("isInstanceMethod", "a Boolean value that indicates whether returned methods should be instance methods (pass #YES to specify instance methods)"),
-			autoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of method description structures in the returned array"),
+			AutoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of method description structures in the returned array"),
 
 			returnDoc =
 			"""
@@ -1122,7 +1122,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"Returns an array of the properties declared by a protocol.",
 
 			Protocol_p.IN("proto", "a protocol"),
-			autoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
+			AutoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
 
 			returnDoc =
 			"""
@@ -1138,7 +1138,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"eturns an array of the protocols adopted by a protocol.",
 
 			Protocol_p.IN("proto", "a protocol"),
-			autoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
+			AutoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
 
 			returnDoc =
 			"""
@@ -1249,7 +1249,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"objc_copyImageNames",
 			"Returns the names of all the loaded Objective-C frameworks and dynamic libraries.",
 
-			autoSizeResult..unsigned_int_p.OUT("outCount", "the number of names in the returned array"),
+			AutoSizeResult..unsigned_int_p.OUT("outCount", "the number of names in the returned array"),
 
 			returnDoc = "an array of C strings representing the names of all the loaded Objective-C frameworks and dynamic libraries"
 		)
@@ -1268,7 +1268,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"Returns the names of all the classes within a specified library or framework.",
 
 			const..charUTF8_p.IN("image", "the library or framework you are inquiring about"),
-			autoSizeResult..unsigned_int_p.OUT("outCount", "the number of names in the returned array"),
+			AutoSizeResult..unsigned_int_p.OUT("outCount", "the number of names in the returned array"),
 
 			returnDoc = "an array of C strings representing all of the class names within the specified library or framework"
 		)

@@ -52,7 +52,7 @@ private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CA
 		}
 
 		print("checkFunctions(")
-		nativeClass.printPointers(this, printPointer) { !(it has ignoreMissing) }
+		nativeClass.printPointers(this, printPointer) { !(it has IgnoreMissing) }
 		println(");")
 
 		print("\n\t\treturn GLES.checkExtension(\"")

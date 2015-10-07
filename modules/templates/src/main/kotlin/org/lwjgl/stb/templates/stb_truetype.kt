@@ -671,8 +671,8 @@ int main(int arg, char **argv)
 		float.IN("scale_x", "the horizontal scale"),
 		float.IN("scale_y", "the vertical scale"),
 		int.IN("codepoint", "the unicode codepoint to render"),
-		Check(1)..autoSizeResult..int_p.OUT("width", "returns the bitmap width"),
-		Check(1)..autoSizeResult..int_p.OUT("height", "returns the bitmap height"),
+		Check(1)..AutoSizeResult..int_p.OUT("width", "returns the bitmap width"),
+		Check(1)..AutoSizeResult..int_p.OUT("height", "returns the bitmap height"),
 		Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
 		Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
@@ -687,8 +687,8 @@ int main(int arg, char **argv)
 		float.IN("shift_x", "the horizontal subpixel shift"),
 		float.IN("shift_y", "the vertical subpixel shift"),
 		int.IN("codepoint", "the unicode codepoint to render"),
-		Check(1)..autoSizeResult..int_p.OUT("width", "returns the bitmap width"),
-		Check(1)..autoSizeResult..int_p.OUT("height", "returns the bitmap height"),
+		Check(1)..AutoSizeResult..int_p.OUT("width", "returns the bitmap width"),
+		Check(1)..AutoSizeResult..int_p.OUT("height", "returns the bitmap height"),
 		Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
 		Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
@@ -769,8 +769,8 @@ int main(int arg, char **argv)
 		float.IN("scale_x", "the horizontal scale"),
 		float.IN("scale_y", "the vertical scale"),
 		int.IN("glyph", "the glyph index to render"),
-		Check(1)..autoSizeResult..int_p.OUT("width", "returns the bitmap width"),
-		Check(1)..autoSizeResult..int_p.OUT("height", "returns the bitmap height"),
+		Check(1)..AutoSizeResult..int_p.OUT("width", "returns the bitmap width"),
+		Check(1)..AutoSizeResult..int_p.OUT("height", "returns the bitmap height"),
 		Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
 		Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
@@ -785,8 +785,8 @@ int main(int arg, char **argv)
 		float.IN("shift_x", "the horizontal subpixel shift"),
 		float.IN("shift_y", "the vertical subpixel shift"),
 		int.IN("glyph", "the glyph index to render"),
-		Check(1)..autoSizeResult..int_p.OUT("width", "returns the bitmap width"),
-		Check(1)..autoSizeResult..int_p.OUT("height", "returns the bitmap height"),
+		Check(1)..AutoSizeResult..int_p.OUT("width", "returns the bitmap width"),
+		Check(1)..AutoSizeResult..int_p.OUT("height", "returns the bitmap height"),
 		Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
 		Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
@@ -1008,7 +1008,7 @@ int main(int arg, char **argv)
 		""",
 
 		const..stbtt_fontinfo_p.IN("font", "an ##STBTTFontinfo struct"),
-		autoSizeResult..int_p.OUT("length", "returns the string length, in bytes"),
+		AutoSizeResult..int_p.OUT("length", "returns the string length, in bytes"),
 		int.IN("platformID", "the platform ID", PlatformIDs),
 		int.IN("encodingID", "the encoding ID", "$EncodingIDsUnicode $EncodingIDsMicrosoft $EncodingIDsMac"),
 		int.IN("languageID", "the language ID", "$LanguageIDsMicrosoft $LanguageIDsMac"),

@@ -147,7 +147,7 @@ class Parameter(
 
 	/** Returns true if this is an output parameter with the autoSizeResult modifier. */
 	val isAutoSizeResultOut: Boolean
-		get() = paramType === OUT && has(autoSizeResult)
+		get() = paramType === OUT && has(AutoSizeResult)
 
 	val asJavaMethodParam: String
 		get() = "$javaMethodType $name"

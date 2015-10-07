@@ -48,7 +48,7 @@ val ARB_instanced_arrays = "ARBInstancedArrays".nativeClassGL("ARB_instanced_arr
 		GLuint.IN("divisor", "the divisor value")
 	)
 
-	DependsOn("GL_EXT_direct_state_access")..ignoreMissing..void(
+	DependsOn("GL_EXT_direct_state_access")..IgnoreMissing..void(
 		"VertexArrayVertexAttribDivisorEXT",
 		"""
 		${registryLinkTo("EXT", "direct_state_access")} version of #VertexAttribDivisorARB().

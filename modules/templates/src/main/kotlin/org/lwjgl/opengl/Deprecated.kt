@@ -7,7 +7,7 @@ package org.lwjgl.opengl
 import org.lwjgl.generator.*
 
 /** Marks an OpenGL function as deprecated; its function address will not be loaded in a forward-compatible context. */
-object deprecatedGL : FunctionModifier() {
+object DeprecatedGL : FunctionModifier() {
 	override val isSpecial = false
 	override protected fun validate(func: NativeClassFunction) {
 		if ( !func.nativeClass.postfix.isEmpty() )

@@ -612,7 +612,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function may only be called from the main thread.
 		""",
 
-		autoSizeResult..int_p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
+		AutoSizeResult..int_p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
 
 		returnDoc = "an array of monitor handlers, or $NULL if no monitors were found or if an error occured",
 		since = "GLFW 3.0"
@@ -724,7 +724,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		autoSizeResult..int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
+		AutoSizeResult..int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
 
 		returnDoc = "an array of video modes, or $NULL if an error occured",
 		since = "GLFW 1.0"
@@ -1879,7 +1879,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		int.IN("joy", "the joystick to query"),
-		autoSizeResult..int_p.OUT("count", "where to store the number of axis values in the returned array. This is set to zero if an error occurred."),
+		AutoSizeResult..int_p.OUT("count", "where to store the number of axis values in the returned array. This is set to zero if an error occurred."),
 
 		returnDoc = "an array of axis values, or $NULL if the joystick is not present",
 		since = "GLFW 2.2"
@@ -1897,7 +1897,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		int.IN("joy", "the joystick to query"),
-		autoSizeResult..int_p.OUT("count", "where to store the number of button states in the returned array. This is set to zero if an error occurred."),
+		AutoSizeResult..int_p.OUT("count", "where to store the number of button states in the returned array. This is set to zero if an error occurred."),
 
 		returnDoc = "an array of button states, or $NULL if the joystick is not present",
 		since = "GLFW 2.2"
