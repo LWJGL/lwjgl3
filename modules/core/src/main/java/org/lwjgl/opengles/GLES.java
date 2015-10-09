@@ -227,7 +227,7 @@ public final class GLES {
 			int[] GL_VERSIONS = {
 				-1, // OpenGL ES 1.0 not supported
 				0, // OpenGL ES 2.0
-				1 // OpenGL ES 3.0 to 3.1
+				2 // OpenGL ES 3.0 to 3.2
 			};
 
 			Set<String> supportedExtensions = new HashSet<String>(128);
