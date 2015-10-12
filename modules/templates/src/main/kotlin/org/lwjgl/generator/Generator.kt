@@ -222,7 +222,7 @@ class Generator(
 			it.generateJava()
 		}
 
-		if ( nativeClass.binding == null && nativeClass.functions.any() ) {
+		if ( nativeClass.functions.any() { it.hasCustomJNI } ) {
 			generateNative(nativeClass) {
 				generateOutput(nativeClass, it) {
 					it.generateNative()

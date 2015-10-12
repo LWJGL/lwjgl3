@@ -214,6 +214,9 @@ class NativeClass(
 
 		if ( hasFunctions ) {
 			if ( binding != null ) {
+				if ( functions.any { it.hasCustomJNI } )
+					println("\n\tstatic { LWJGLUtil.initialize(); }")
+
 				generateFunctionAddresses(binding)
 				binding.generateFunctionGetters(this, this@NativeClass)
 			} else {
@@ -284,14 +287,14 @@ class NativeClass(
 		if ( binding != null ) {
 			// Generate typedefs for casting the function pointers
 			println()
-			functions.asSequence().filter { !it.has(Reuse) }.forEach {
+			functions.asSequence().filter { it.hasCustomJNI }.forEach {
 				it.generateFunctionDefinition(this)
 			}
 		}
 
 		println("\nEXTERN_C_ENTER")
 
-		functions.asSequence().filter { !it.has(Reuse) }.forEach {
+		functions.asSequence().filter { it.hasCustomJNI }.forEach {
 			println()
 			it.generateFunction(this)
 		}
@@ -387,7 +390,7 @@ class NativeClass(
 	fun NativeClass.reuse(functionName: String): NativeClassFunction {
 		val reference = this[functionName]
 
-		val func = Reuse(this.className)..NativeClassFunction(
+		val func = NativeClassFunction(
 			returns = reference.returns,
 			simpleName = reference.simpleName,
 			name = reference.name,

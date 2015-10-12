@@ -8,12 +8,6 @@ class DependsOn(override val reference: String, val postfix: String? = null) : F
 	override val isSpecial = false
 }
 
-class Reuse(override val reference: String) : FunctionModifier(), ReferenceModifier {
-	companion object : ModifierKey<Reuse>
-
-	override val isSpecial = true
-}
-
 /**
  * Can be used to mark a function as optional. FunctionProviders should ignore such functions if they're missing.
  * This is useful for functions that have been added long after the initial release of a particular extension, or

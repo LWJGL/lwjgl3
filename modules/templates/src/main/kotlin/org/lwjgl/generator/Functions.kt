@@ -163,6 +163,9 @@ class NativeClassFunction(
 
 	private val methodLink: String get() = "#$simpleName()"
 
+	val hasCustomJNI: Boolean
+		get() = nativeClass.binding == null || (has(Code) && this[Code] let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null })
+
 	private val isSimpleFunction: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
 
@@ -208,10 +211,10 @@ class NativeClassFunction(
 					else {
 						when {
 							bufferParam.nativeType !is PointerType
-							                             -> it.error("Buffer reference must be a pointer type: AutoSize($reference)")
+														 -> it.error("Buffer reference must be a pointer type: AutoSize($reference)")
 							!bufferParam.isBufferPointer -> it.error("Buffer reference must not be a opaque pointer: AutoSize($reference)")
 							bufferParam.nativeType is StructType && !bufferParam.has(StructBuffer)
-							                             -> it.error("Struct reference must be annotated with StructBuffer: AutoSize($reference)")
+														 -> it.error("Struct reference must be annotated with StructBuffer: AutoSize($reference)")
 						}
 
 						if ( bufferParam.nativeType is CharSequenceType && bufferParam.nativeType.charMapping == CharMapping.UTF16 )
@@ -420,7 +423,7 @@ class NativeClassFunction(
 	fun generateMethods(writer: PrintWriter) {
 		val simpleFunction = isSimpleFunction
 
-		if ( nativeClass.binding == null )
+		if ( hasCustomJNI )
 			writer.generateNativeMethod(simpleFunction)
 
 		if ( !simpleFunction ) {
@@ -455,19 +458,20 @@ class NativeClassFunction(
 		if ( !nativeOnly ) print('n')
 		print(name)
 		print("(")
-		printList(getNativeParams()) {
+
+		val nativeParams = getNativeParams()
+		if ( nativeClass.binding != null ) {
+			print("long $FUNCTION_ADDRESS")
+			if ( nativeParams.any() ) print(", ")
+		}
+		printList(nativeParams) {
 			it.asNativeMethodParam
 		}
-
-		var hasNativeParams = this@NativeClassFunction.hasNativeParams
 		if ( returnsStructValue ) {
-			if ( hasNativeParams ) print(", ") else hasNativeParams = true
+			if ( nativeClass.binding != null || nativeParams.any() ) print(", ")
 			print("long $RESULT")
 		}
-		if ( nativeClass.binding != null ) {
-			if ( hasNativeParams ) print(", ")
-			print("long $FUNCTION_ADDRESS")
-		}
+
 		println(");\n")
 	}
 
@@ -572,7 +576,7 @@ class NativeClassFunction(
 		// Step 4: Call the native method
 		generateCodeBeforeNative(code, ApplyTo.NORMAL)
 
-		if ( nativeClass.binding == null || !returns.has(Address) ) {
+		if ( hasCustomJNI || !returns.has(Address) ) {
 			generateNativeMethodCall(code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL)) {
 				printList(getNativeParams()) {
 					it.asNativeMethodCallParam(this@NativeClassFunction, NORMAL)
@@ -699,12 +703,19 @@ class NativeClassFunction(
 			}
 		}
 
-		if ( nativeClass.binding == null || hasUnsafeMethod ) {
+		if ( hasUnsafeMethod ) {
 			print("n$name(")
 		} else {
-			print("${nativeClass.binding.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}(")
-			print("$FUNCTION_ADDRESS")
-			if ( hasNativeParams ) print(", ")
+			print(
+				if ( hasCustomJNI )
+					"n$name("
+				else
+					"${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}("
+			)
+			if ( nativeClass.binding != null ) {
+				print("$FUNCTION_ADDRESS")
+				if ( hasNativeParams ) print(", ")
+			}
 		}
 		printParams()
 		print(")")
@@ -1212,14 +1223,19 @@ class NativeClassFunction(
 		print(name.asJNIName)
 		print("(")
 		print("JNIEnv *$JNIENV, jclass clazz")
+		if ( nativeClass.binding != null )
+			print(", jlong $FUNCTION_ADDRESS")
 		getNativeParams() forEach {
 			print(", ${it.asJNIFunctionParam}")
 		}
-		if ( nativeClass.binding != null )
-			print(", jlong $FUNCTION_ADDRESS")
 		if ( returnsStructValue )
 			print(", jlong $RESULT")
 		println(") {")
+
+		// Cast function address to pointer
+
+		if ( nativeClass.binding != null )
+			println("\t${name}PROC $name = (${name}PROC)(intptr_t)$FUNCTION_ADDRESS;")
 
 		// Cast addresses to pointers
 
@@ -1229,11 +1245,6 @@ class NativeClassFunction(
 			if ( !pointerType.endsWith('*') ) print(' ')
 			println("${it.name} = ($pointerType)(intptr_t)${it.name}$POINTER_POSTFIX;")
 		}
-
-		// Cast function address to pointer
-
-		if ( nativeClass.binding != null )
-			println("\t${name}PROC $name = (${name}PROC)(intptr_t)$FUNCTION_ADDRESS;")
 
 		// Custom code
 
