@@ -42,7 +42,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"""
 	)
 
-	GetLastError..HMODULE(
+	SaveLastError..HMODULE(
 		"GetModuleHandle",
 		"Retrieves a module handle for the specified module. The module must have been loaded by the calling process.",
 
@@ -59,7 +59,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	GetLastError..HMODULE(
+	SaveLastError..HMODULE(
 		"LoadLibrary",
 		"Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded.",
 
@@ -82,7 +82,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	GetLastError..FARPROC(
+	SaveLastError..FARPROC(
 		"GetProcAddress",
 		"Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL).",
 
@@ -96,7 +96,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	GetLastError..BOOL(
+	SaveLastError..BOOL(
 		"FreeLibrary",
 		"""
 		Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module

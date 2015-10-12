@@ -7,6 +7,7 @@
 #endif
 #include "common_tools.h"
 #include <stdlib.h>
+#include <errno.h>
 
 JavaVM *jvm;
 
@@ -55,7 +56,7 @@ inline void detachCurrentThread(void) {
 	typedef struct {
 		JNIEnv* env;
 		jint errnum;
-		jint lastError;
+		jint LastError;
 	} EnvData;
 
 	BOOL WINAPI DllMain(HINSTANCE hDLL, DWORD fdwReason, LPVOID lpvReserved) {
@@ -98,11 +99,11 @@ inline void detachCurrentThread(void) {
 		return getEnvData()->env;
 	}
 
-	inline void setErrno(jint errnum) { getEnvData()->errnum = errnum; }
+	inline void saveErrno(void) { getEnvData()->errnum = errno; }
 	inline jint getErrno(void) { return getEnvData()->errnum; }
 
-	void setLastError(jint lastError) { getEnvData()->lastError = lastError; }
-	inline jint getLastError(void) { return getEnvData()->lastError; }
+	inline void saveLastError(void) { getEnvData()->LastError = (jint)GetLastError(); }
+	inline jint getLastError(void) { return getEnvData()->LastError; }
 #else
 	#include <pthread.h>
 	pthread_key_t envTLS = 0;
@@ -153,7 +154,7 @@ inline void detachCurrentThread(void) {
 		return getEnvData()->env;
 	}
 
-	void setErrno(jint errnum) { getEnvData()->errnum = errnum; }
+	inline void saveErrno(void) { getEnvData()->errnum = errno; }
 	inline jint getErrno(void) { return getEnvData()->errnum; }
 #endif
 

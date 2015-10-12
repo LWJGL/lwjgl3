@@ -99,6 +99,8 @@ class Code(
 	)
 }
 
+val SaveErrno = Code(nativeAfterCall = "\tsaveErrno();")
+
 fun statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
 
 /** Marks a function without arguments as a macro. */
