@@ -22,9 +22,6 @@ val UINT = IntegerType("UINT", PrimitiveMapping.INT, unsigned = true)
 val DWORD = IntegerType("DWORD", PrimitiveMapping.INT)
 val LONG = IntegerType("LONG", PrimitiveMapping.INT)
 val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
-private val LONGLONG = PrimitiveType("LONGLONG", PrimitiveMapping.LONG) // Only LARGE_INTEGER uses this
-
-val DWORD_PTR = PrimitiveType("DWORD_PTR", PrimitiveMapping.POINTER)
 
 val UINT_p = UINT.p
 val FLOAT_p = FLOAT.p
@@ -75,9 +72,3 @@ private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
 	LONG.member("bottom")
 }
 val RECT = RECT_STRUCT.nativeType
-
-val LARGE_INTEGER_p = struct_p(WINDOWS_PACKAGE, "LARGE_INTEGER") {
-	nativeImport ("WindowsLWJGL.h")
-	// LARGE_INTEGER is a union really, but we don't care about the other stuff.
-	LONGLONG.member("QuadPart")
-}

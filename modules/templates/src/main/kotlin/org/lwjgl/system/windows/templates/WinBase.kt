@@ -105,33 +105,4 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 
 		HMODULE.IN("handle", "a handle to the loaded library module")
 	)
-
-	BOOL(
-		"QueryPerformanceFrequency",
-		"Retrieves the frequency of the high-resolution performance counter, if one exists. The frequency cannot change while the system is running.",
-
-		LARGE_INTEGER_p.OUT(
-			"frequency",
-			"""
-			a pointer to a variable that receives the current performance-counter frequency, in counts per second. If the installed hardware does not support a
-			high-resolution performance counter, this parameter can be zero.
-			"""
-		)
-	)
-
-	BOOL(
-		"QueryPerformanceCounter",
-		"""
-		Retrieves the current value of the high-resolution performance counter.
-
-		On a multiprocessor computer, it should not matter which processor is called. However, you can get different results on different processors due to bugs
-		in the basic input/output system (BIOS) or the hardware abstraction layer (HAL). To specify processor affinity for a thread, use the
-		Kernel32#SetThreadAffinityMask() function.
-		""",
-
-		LARGE_INTEGER_p.OUT(
-			"frequency",
-			"a pointer to a variable that receives the current performance-counter value, in counts."
-		)
-	)
 }
