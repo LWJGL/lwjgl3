@@ -84,7 +84,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 	ALvoid(
 		"Buffer3f",
-		"Sets the the dimensional value of a buffer parameter.",
+		"Sets the dimensional value of a buffer parameter.",
 
 		ALuint.IN("buffer", "the buffer to modify"),
 		ALenum.IN("paramName", "the parameter to modify"),

@@ -45,7 +45,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	 *
 	 * <p>This method may only be used inside a OVRLogCallback invocation.</p>
 	 *
-	 * @param message the the OVRLogCallback {@code message} argument
+	 * @param message the OVRLogCallback {@code message} argument
 	 *
 	 * @return the message as a String
 	 */

@@ -107,7 +107,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		""",
 
 		UINT.IN("id", "a valid GPU id"),
-		nullable..HGLRC.IN("shareContext", "must either be NULL or that of an associated context created with the the same GPU ID as {@code id}"),
+		nullable..HGLRC.IN("shareContext", "must either be NULL or that of an associated context created with the same GPU ID as {@code id}"),
 		nullTerminated..nullable..const..int_p.IN("attribList", "a 0-terminated list of attributes for the context")
 	)
 

@@ -36,7 +36,7 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 	 *
 	 * <p>This method may only be used inside a STBIReadCallback invocation.</p>
 	 *
-	 * @param data the the STBIReadCallback {@code data} argument
+	 * @param data the STBIReadCallback {@code data} argument
 	 * @param size the STBIReadCallback {@code size} argument
 	 *
 	 * @return the data as a ByteBuffer
@@ -120,7 +120,7 @@ val stbi_write_func = "stbi_write_func_p".callback(
 	 *
 	 * <p>This method may only be used inside a STBIWriteCallback invocation.</p>
 	 *
-	 * @param data the the STBIWriteCallback {@code data} argument
+	 * @param data the STBIWriteCallback {@code data} argument
 	 * @param size the STBIWriteCallback {@code size} argument
 	 *
 	 * @return the data as a ByteBuffer

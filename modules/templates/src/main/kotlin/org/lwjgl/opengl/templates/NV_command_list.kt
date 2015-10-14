@@ -14,7 +14,7 @@ val NV_command_list = "NVCommandList".nativeClassGL("NV_command_list", postfix =
 
 		This extension adds a few new features designed to provide very low overhead batching and replay of rendering commands and state changes:
 		${ul(
-			"A state object, which stores a pre-validated representation of the the state of (almost) the entire pipeline.",
+			"A state object, which stores a pre-validated representation of the state of (almost) the entire pipeline.",
 		    """
 		    A more flexible and extensible MultiDrawIndirect (MDI) type of mechanism, using a token-based command stream, allowing to setup binding state and
 		    emit draw calls.

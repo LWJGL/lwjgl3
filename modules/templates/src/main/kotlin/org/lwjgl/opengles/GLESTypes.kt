@@ -81,7 +81,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	 * <p>This method may only be used inside a GLDebugMessageCallback invocation.</p>
 	 *
 	 * @param length  the GLDebugMessageCallback {@code length} argument
-	 * @param message the the GLDebugMessageCallback {@code message} argument
+	 * @param message the GLDebugMessageCallback {@code message} argument
 	 *
 	 * @return the message as a String
 	 */
@@ -133,7 +133,7 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
 	 * <p>This method may only be used inside a GLDebugMessageKHRCallback invocation.</p>
 	 *
 	 * @param length  the GLDebugMessageKHRCallback {@code length} argument
-	 * @param message the the GLDebugMessageKHRCallback {@code message} argument
+	 * @param message the GLDebugMessageKHRCallback {@code message} argument
 	 *
 	 * @return the message as a String
 	 */
