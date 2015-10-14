@@ -9,12 +9,10 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.libffi.Closure;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The Gears demo implemented using GLFW. */
@@ -36,13 +34,13 @@ public class Gears extends AbstractGears {
 	@Override
 	protected void init() {
 		glfwSetErrorCallback(errorfun = GLFWErrorCallback.createPrint());
-		if ( glfwInit() != GL11.GL_TRUE )
+		if ( glfwInit() != GLFW_TRUE )
 			throw new IllegalStateException("Unable to initialize glfw");
 
 		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
-		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
 		keyfun = new GLFWKeyCallback() {
 			@Override
@@ -52,7 +50,7 @@ public class Gears extends AbstractGears {
 
 				switch ( key ) {
 					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GL_TRUE);
+						glfwSetWindowShouldClose(window, GLFW_TRUE);
 						break;
 					case GLFW_KEY_F:
 						if ( glfwGetWindowMonitor(window) == NULL )
@@ -125,7 +123,7 @@ public class Gears extends AbstractGears {
 		long lastUpdate = System.currentTimeMillis();
 		int frames = 0;
 
-		while ( glfwWindowShouldClose(window) == GL_FALSE ) {
+		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
 			glfwPollEvents();
 
 			if ( toggleMode != null ) {

@@ -7,7 +7,6 @@ package org.lwjgl.demo.stb;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.stb.STBTTAlignedQuad;
@@ -116,7 +115,7 @@ public final class TruetypeOversample {
 
 				switch ( key ) {
 					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GL_TRUE);
+						glfwSetWindowShouldClose(window, GLFW_TRUE);
 						break;
 					case GLFW_KEY_O:
 						font = (font + 1) % 3 + (font / 3) * 3;
@@ -331,12 +330,12 @@ public final class TruetypeOversample {
 
 	private void createWindow(String title) {
 		glfwSetErrorCallback(errorfun);
-		if ( glfwInit() != GL11.GL_TRUE )
+		if ( glfwInit() != GLFW_TRUE )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
 		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
 		this.window = glfwCreateWindow(ww, wh, title, NULL, NULL);
 		if ( window == NULL )
@@ -375,7 +374,7 @@ public final class TruetypeOversample {
 			load_fonts();
 
 			long time = System.nanoTime();
-			while ( glfwWindowShouldClose(window) == GL_FALSE ) {
+			while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
 				glfwPollEvents();
 
 				long t = System.nanoTime();

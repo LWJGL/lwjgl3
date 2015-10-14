@@ -86,22 +86,22 @@ public final class CLGLInteropDemo {
 
 		GLFWErrorCallback errorfun;
 		glfwSetErrorCallback(errorfun = GLFWErrorCallback.createPrint());
-		if ( glfwInit() != GL_TRUE ) {
+		if ( glfwInit() != GLFW_TRUE ) {
 			System.out.println("Unable to initialize glfw");
 			System.exit(-1);
 		}
 
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		if ( LWJGLUtil.getPlatform() == Platform.MACOSX ) {
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		} else
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 		final boolean debugGL = params.contains("debugGL");
 		if ( debugGL )
-			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
 		List<CLPlatform> platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
 			@Override

@@ -69,7 +69,7 @@ public final class Truetype extends FontDemo {
 		FloatBuffer y = BufferUtils.createFloatBuffer(1);
 		STBTTAlignedQuad q = STBTTAlignedQuad.malloc();
 
-		while ( glfwWindowShouldClose(getWindow()) == GL_FALSE ) {
+		while ( glfwWindowShouldClose(getWindow()) == GLFW_FALSE ) {
 			glfwPollEvents();
 
 			glClear(GL_COLOR_BUFFER_BIT);

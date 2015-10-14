@@ -43,7 +43,7 @@ public final class EasyFont extends FontDemo {
 		glClearColor(43f / 255f, 43f / 255f, 43f / 255f, 0f); // BG color
 		glColor3f(169f / 255f, 183f / 255f, 198f / 255f); // Text color
 
-		while ( glfwWindowShouldClose(getWindow()) == GL_FALSE ) {
+		while ( glfwWindowShouldClose(getWindow()) == GLFW_FALSE ) {
 			glfwPollEvents();
 
 			glClear(GL_COLOR_BUFFER_BIT);

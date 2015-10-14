@@ -6,7 +6,6 @@ package org.lwjgl.demo.stb;
 
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.libffi.Closure;
 
@@ -106,7 +105,7 @@ abstract class FontDemo {
 
 				switch ( key ) {
 					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GL_TRUE);
+						glfwSetWindowShouldClose(window, GLFW_TRUE);
 						break;
 					case GLFW_KEY_PAGE_UP:
 						setLineOffset(lineOffset - wh / FontDemo.this.lineHeight);
@@ -184,12 +183,12 @@ abstract class FontDemo {
 
 	private void init(String title) {
 		errorfun.set();
-		if ( glfwInit() != GL11.GL_TRUE )
+		if ( glfwInit() != GLFW_TRUE )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
 		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
 		this.window = glfwCreateWindow(ww, wh, title, NULL, NULL);
 		if ( window == NULL )

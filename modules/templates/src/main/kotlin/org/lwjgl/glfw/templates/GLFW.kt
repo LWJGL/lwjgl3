@@ -23,19 +23,25 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	IntConstant(
 		"The major version number of the GLFW library. This is incremented when the API is changed in non-compatible ways.",
 
-		"VERSION_MAJOR"..3
+		"VERSION_MAJOR" expr "3"
 	)
 
 	IntConstant(
 		"The minor version number of the GLFW library. This is incremented when features are added to the API but it remains backward-compatible.",
 
-		"VERSION_MINOR"..1
+		"VERSION_MINOR" expr "2"
 	)
 
 	IntConstant(
 		"The revision number of the GLFW library. This is incremented when a bug fix release is made that does not contain any API changes.",
 
-		"VERSION_REVISION"..1
+		"VERSION_REVISION" expr "0"
+	)
+
+	IntConstant(
+		"Boolean values.",
+		"TRUE"..1,
+		"FALSE"..0
 	)
 
 	IntConstant(
@@ -491,7 +497,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		If this function fails, it calls #Terminate() before returning. If it succeeds, you should call #Terminate() before the application exits.
 
-		Additional calls to this function after successful initialization but before termination will return GL11##GL_TRUE immediately.
+		Additional calls to this function after successful initialization but before termination will return #TRUE immediately.
 
 		Notes:
 		${ul(
@@ -499,16 +505,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"""
 			<b>Mac OS X</b>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the application's
 			bundle, if present.
-			""",
 			"""
-		    <b>X11</b>: If the {@code LC_CTYPE} category of the current locale is set to {@code "C"} then the environment's locale will be applied to that
-		    category. This is done because character input will not function when {@code LC_CTYPE} is set to {@code "C"}. If another locale was set before this
-		    function was called, it will be left untouched.
-		    """
 		)}
 		""",
 
-		returnDoc = "GL11##GL_TRUE if successful, or GL11##GL_FALSE if an error occured.",
+		returnDoc = "#TRUE if successful, or #FALSE if an error occured.",
 		since = "GLFW 1.0"
 	)
 
@@ -819,11 +820,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		${table(
 			tr(th("Name"), th("Default value"), th("Supported values")),
 
-			tr(td("#RESIZABLE"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-			tr(td("#VISIBLE"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-			tr(td("#DECORATED"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-			tr(td("#AUTO_ICONIFY"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-			tr(td("#FLOATING"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#RESIZABLE"), td("#TRUE"), td("#TRUE or #FALSE")),
+			tr(td("#VISIBLE"), td("#TRUE"), td("#TRUE or #FALSE")),
+			tr(td("#DECORATED"), td("#TRUE"), td("#TRUE or #FALSE")),
+			tr(td("#AUTO_ICONIFY"), td("#TRUE"), td("#TRUE or #FALSE")),
+			tr(td("#FLOATING"), td("#TRUE"), td("#TRUE or #FALSE")),
 
 			tr(td("#RED_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
 			tr(td("#GREEN_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
@@ -839,8 +840,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			tr(td("#SAMPLES"), td("0"), td("0 to Integer##MAX_VALUE")),
 			tr(td("#REFRESH_RATE"), td("0"), td("0 to Integer##MAX_VALUE")),
 
-			tr(td("#STEREO"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-			tr(td("#SRGB_CAPABLE"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#STEREO"), td("#FALSE"), td("#TRUE or #FALSE")),
+			tr(td("#SRGB_CAPABLE"), td("#FALSE"), td("#TRUE or #FALSE")),
 
 			tr(td("#CLIENT_API"), td("#OPENGL_API"), td(ClientAPIValues)),
 			tr(td("#CONTEXT_VERSION_MAJOR"), td("1"), td("Any valid major version number of the chosen client API")),
@@ -849,8 +850,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			tr(td("#CONTEXT_ROBUSTNESS"), td("#NO_ROBUSTNESS"), td(ContextRobustnessValues)),
 			tr(td("#CONTEXT_RELEASE_BEHAVIOR"), td("#ANY_RELEASE_BEHAVIOR"), td(ContextReleaseBehaviorValues)),
 
-			tr(td("#OPENGL_FORWARD_COMPAT"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-			tr(td("#OPENGL_DEBUG_CONTEXT"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#OPENGL_FORWARD_COMPAT"), td("#FALSE"), td("#TRUE or #FALSE")),
+			tr(td("#OPENGL_DEBUG_CONTEXT"), td("#FALSE"), td("#TRUE or #FALSE")),
 			tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues))
 		)}
 
@@ -1500,11 +1501,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"""
 		)}
 
-		If {@code mode} is #STICKY_KEYS, the value must be either GL11##GL_TRUE to enable sticky keys, or GL11##GL_FALSE to disable it. If sticky keys are
+		If {@code mode} is #STICKY_KEYS, the value must be either #TRUE to enable sticky keys, or #FALSE to disable it. If sticky keys are
 		enabled, a key press will ensure that #GetKey() returns #PRESS the next time it is called even if the key had been released before the call. This is
 		useful when you are only interested in whether keys have been pressed but not when or in which order.
 
-		If {@code mode} is #STICKY_MOUSE_BUTTONS, the value must be either GL11##GL_TRUE to enable sticky mouse buttons, or GL11##GL_FALSE to
+		If {@code mode} is #STICKY_MOUSE_BUTTONS, the value must be either #TRUE to enable sticky mouse buttons, or #FALSE to
 		disable it. If sticky mouse buttons are enabled, a mouse button press will ensure that #GetMouseButton() returns #PRESS the next
 		time it is called even if the mouse button had been released before the call. This is useful when you are only interested in whether mouse buttons have
 		been pressed but not when or in which order.
@@ -1863,7 +1864,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		int.IN("joy", "joystick to query"),
 
-		returnDoc = "GL11##GL_TRUE if the joystick is present, or GL11##GL_FALSE otherwise",
+		returnDoc = "#TRUE if the joystick is present, or #FALSE otherwise",
 		since = "GLFW 3.0"
 	)
 
@@ -2085,7 +2086,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		const..charASCII_p.IN("extension", "the ASCII encoded name of the extension"),
 
-		returnDoc = "GL11##GL_TRUE if the extension is available, or GL11##GL_FALSE otherwise",
+		returnDoc = "#TRUE if the extension is available, or #FALSE otherwise",
 
 		since = "GLFW 1.0"
 	)

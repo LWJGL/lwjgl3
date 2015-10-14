@@ -55,7 +55,7 @@ public final class Events {
 
 	private static void demo() {
 		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
 		long window = glfwCreateWindow(640, 480, "GLFW Event Demo", NULL, NULL);
 		if ( window == 0L )

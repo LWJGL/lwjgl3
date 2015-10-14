@@ -7,7 +7,6 @@ package org.lwjgl.demo.glfw;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -36,10 +35,10 @@ public final class Threads {
 	public static void main(String[] args) {
 		GLFWErrorCallback errorfun = GLFWErrorCallback.createPrint();
 		glfwSetErrorCallback(errorfun);
-		if ( glfwInit() != GL11.GL_TRUE )
+		if ( glfwInit() != GLFW_TRUE )
 			throw new IllegalStateException("Failed to initialize GLFW.");
 
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
 		CountDownLatch quit = new CountDownLatch(1);
 
@@ -54,7 +53,7 @@ public final class Threads {
 				@Override
 				public void invoke(long window, int key, int scancode, int action, int mods) {
 					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-						glfwSetWindowShouldClose(window, GL_TRUE);
+						glfwSetWindowShouldClose(window, GLFW_TRUE);
 				}
 			});
 			glfwSetWindowPos(window, 200 + 250 * i, 200);
@@ -69,7 +68,7 @@ public final class Threads {
 			glfwWaitEvents();
 
 			for ( int i = 0; i < titles.length; i++ ) {
-				if ( glfwWindowShouldClose(threads[i].window) == GL_TRUE ) {
+				if ( glfwWindowShouldClose(threads[i].window) == GLFW_TRUE ) {
 					quit.countDown();
 					break out;
 				}

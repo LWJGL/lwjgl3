@@ -9,7 +9,6 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALContext;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.stb.STBVorbisInfo;
 import org.lwjgl.system.libffi.Closure;
@@ -62,13 +61,13 @@ public final class Vorbis {
 
 			if ( !decoder.play(source, buffers) ) {
 				System.err.println("Playback failed.");
-				glfwSetWindowShouldClose(window, GL_TRUE);
+				glfwSetWindowShouldClose(window, GLFW_TRUE);
 			}
 
-			while ( glfwWindowShouldClose(window) == GL_FALSE ) {
+			while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
 				if ( !renderer.paused && !decoder.update(source, true) ) {
 					System.err.println("Playback failed.");
-					glfwSetWindowShouldClose(window, GL_TRUE);
+					glfwSetWindowShouldClose(window, GLFW_TRUE);
 				}
 
 				float progress = decoder.getProgress();
@@ -278,12 +277,12 @@ public final class Vorbis {
 
 		Renderer(final Decoder decoder, String title) {
 			errorCallback = GLFWErrorCallback.createPrint().set();
-			if ( glfwInit() != GL11.GL_TRUE )
+			if ( glfwInit() != GLFW_TRUE )
 				throw new IllegalStateException("Unable to initialize GLFW");
 
 			glfwDefaultWindowHints();
-			glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-			glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+			glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+			glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 			window = glfwCreateWindow(WIDTH, HEIGHT, title, NULL, NULL);
 			if ( window == NULL )
@@ -304,7 +303,7 @@ public final class Vorbis {
 
 					switch ( key ) {
 						case GLFW_KEY_ESCAPE:
-							glfwSetWindowShouldClose(window, GL_TRUE);
+							glfwSetWindowShouldClose(window, GLFW_TRUE);
 							break;
 						case GLFW_KEY_HOME:
 							decoder.rewind();

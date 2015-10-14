@@ -38,7 +38,7 @@ public final class MultipleWindows {
 
 	private static void demo() {
 		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
 		Window[] windows = new Window[4];
 
@@ -56,7 +56,7 @@ public final class MultipleWindows {
 			glfwSetCursorEnterCallback(handle, window.cursorenterfun = new GLFWCursorEnterCallback() {
 				@Override
 				public void invoke(long window, int entered) {
-					if ( entered == GL_TRUE )
+					if ( entered == GLFW_TRUE )
 						System.out.println("Mouse entered window: " + windowIndex);
 				}
 			});

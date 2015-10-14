@@ -7,7 +7,6 @@ package org.lwjgl.demo.stb;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.libffi.Closure;
 
@@ -110,7 +109,7 @@ public final class Image {
 
 				switch ( key ) {
 					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GL_TRUE);
+						glfwSetWindowShouldClose(window, GLFW_TRUE);
 						break;
 					case GLFW_KEY_KP_ADD:
 					case GLFW_KEY_EQUAL:
@@ -164,12 +163,12 @@ public final class Image {
 
 	private void init() {
 		errorfun.set();
-		if ( glfwInit() != GL11.GL_TRUE )
+		if ( glfwInit() != GLFW_TRUE )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
 		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
@@ -223,7 +222,7 @@ public final class Image {
 
 		glEnable(GL_TEXTURE_2D);
 
-		while ( glfwWindowShouldClose(window) == GL_FALSE ) {
+		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
 			glfwPollEvents();
 
 			glClear(GL_COLOR_BUFFER_BIT);
