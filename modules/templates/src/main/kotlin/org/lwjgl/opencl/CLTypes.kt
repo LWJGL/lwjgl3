@@ -201,8 +201,7 @@ val cl_create_context_callback = "cl_create_context_callback".callback(
 		"a pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error"
 	),
 	AutoSize("private_info")..size_t.IN("cb", "the number of bytes in the {@code private_info} pointer"),
-	void_p.IN("user_data", "the user-specified value that was passed when calling CL10##clCreateContext() or CL10##clCreateContextFromType()"),
-	samConstructor = "CL10"
+	void_p.IN("user_data", "the user-specified value that was passed when calling CL10##clCreateContext() or CL10##clCreateContextFromType()")
 ) {
 	documentation = "Instances of this interface may be passed to the CL10##clCreateContext() and CL10##clCreateContextFromType() methods."
 	useSystemCallConvention()
@@ -237,8 +236,7 @@ val cl_program_callback = "cl_program_callback".callback(
 	void_p.IN(
 		"user_data",
 		"the user-specified value that was passed when calling CL10##clBuildProgram(), CL12##clCompileProgram() or CL12##clLinkProgram()"
-	),
-	samConstructor = "CL10"
+	)
 ) {
 	documentation = "Instances of this interface may be passed to the CL10##clBuildProgram(), CL12##clCompileProgram() and CL12##clLinkProgram() methods."
 	useSystemCallConvention()
@@ -247,8 +245,7 @@ val cl_program_callback = "cl_program_callback".callback(
 val cl_native_kernel = "cl_native_kernel".callback(
 	OPENCL_PACKAGE, void, "CLNativeKernel",
 	"Will be called by the OpenCL using CL10##clEnqueueNativeKernel().",
-	void_p.IN("args", "a pointer to the arguments list"),
-	samConstructor = "CL10"
+	void_p.IN("args", "a pointer to the arguments list")
 ) {
 	documentation = "Instances of this interface may be passed to the CL10##clEnqueueNativeKernel() method."
 	useSystemCallConvention()
@@ -258,8 +255,7 @@ val cl_mem_object_destructor_callback = "cl_mem_object_destructor_callback".call
 	OPENCL_PACKAGE, void, "CLMemObjectDestructorCallback",
 	"Will be called when a memory object is deleted.",
 	cl_mem.IN("memobj", "the memory object that was deleted"),
-	void_p.IN("user_data", "the user-specified value that was passed when calling CL11##clSetMemObjectDestructorCallback()"),
-	samConstructor = "CL11"
+	void_p.IN("user_data", "the user-specified value that was passed when calling CL11##clSetMemObjectDestructorCallback()")
 ) {
 	documentation = "Instances of this interface may be passed to the CL11##clSetMemObjectDestructorCallback() method."
 	useSystemCallConvention()
@@ -280,8 +276,7 @@ val cl_event_callback = "cl_event_callback".callback(
 	    {@code event_command_exec_status} instead.
 	    """
 	),
-	void_p.IN("user_data", "the user-specified value that was passed when calling CL11##clSetEventCallback()"),
-	samConstructor = "CL11"
+	void_p.IN("user_data", "the user-specified value that was passed when calling CL11##clSetEventCallback()")
 ) {
 	documentation = "Instances of this interface may be passed to the CL11##clSetEventCallback() method."
 	useSystemCallConvention()
@@ -293,8 +288,7 @@ val cl_svmfree_callback = "cl_svmfree_callback".callback(
 	cl_command_queue.IN("queue", "a valid host command-queue"),
 	AutoSize("svm_pointers")..cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
 	void_pp.IN("svm_pointers", "an array of shared virtual memory pointers to be freed"),
-	void_p.IN("user_data", "the user-specified value that was passed when calling CL20##clEnqueueSVMFree()"),
-	samConstructor = "CL20"
+	void_p.IN("user_data", "the user-specified value that was passed when calling CL20##clEnqueueSVMFree()")
 ) {
 	documentation = "Instances of this interface may be passed to the CL20##clEnqueueSVMFree() method."
 	useSystemCallConvention()

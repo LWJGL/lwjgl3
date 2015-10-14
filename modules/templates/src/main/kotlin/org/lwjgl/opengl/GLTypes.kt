@@ -72,8 +72,7 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 	GLenum.IN("severity", "the message severity"),
 	AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	void_p.IN("userParam", "the user-specified value that was passed when calling AMDDebugOutput##glDebugMessageCallbackAMD()"),
-	samConstructor = "AMDDebugOutput"
+	void_p.IN("userParam", "the user-specified value that was passed when calling AMDDebugOutput##glDebugMessageCallbackAMD()")
 ) {
 	documentation = "Instances of this interface may be passed to the AMDDebugOutput##glDebugMessageCallbackAMD() method."
 	useSystemCallConvention()
@@ -125,8 +124,7 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 	GLenum.IN("severity", "the message severity"),
 	AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	const..void_p.IN("userParam", "the user-specified value that was passed when calling ARBDebugOutput##glDebugMessageCallbackARB()"),
-	samConstructor = "ARBDebugOutput"
+	const..void_p.IN("userParam", "the user-specified value that was passed when calling ARBDebugOutput##glDebugMessageCallbackARB()")
 ) {
 	documentation = "Instances of this interface may be passed to the ARBDebugOutput##glDebugMessageCallbackARB() method."
 	useSystemCallConvention()
@@ -186,8 +184,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	const..void_p.IN("userParam",
 		"the user-specified value that was passed when calling GL43##glDebugMessageCallback() or KHRDebug##glDebugMessageCallback()"
-	),
-	samConstructor = "GL43,KHRDebug"
+	)
 ) {
 	documentation = "Instances of this interface may be passed to the GL43##glDebugMessageCallback() and KHRDebug##glDebugMessageCallback() methods."
 	useSystemCallConvention()

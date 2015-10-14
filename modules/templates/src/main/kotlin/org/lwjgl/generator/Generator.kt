@@ -116,10 +116,8 @@ class Generator(
 			return struct
 		}
 
-		fun register(callback: CallbackFunction, samConstructor: String?) {
+		fun register(callback: CallbackFunction) {
 			callbacks add callback
-			if ( samConstructor == null )
-				return
 		}
 
 		fun <T : CustomClass> register(customClass: T): T {

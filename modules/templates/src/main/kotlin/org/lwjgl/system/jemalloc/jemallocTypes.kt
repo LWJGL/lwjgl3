@@ -13,8 +13,7 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	"Will be called by the JEmalloc##je_malloc_usable_size() method.",
 
 	void_p.IN("cbopaque", "the opaque pointer passed to JEmalloc##je_malloc_usable_size()"),
-	nullTerminated..const..charASCII_p.IN("s", "the message"),
-	samConstructor = "JEmalloc"
+	nullTerminated..const..charASCII_p.IN("s", "the message")
 ) {
 	documentation = "Instances of this interface may be passed to the JEmalloc##je_malloc_usable_size() method."
 	additionalCode = """
@@ -63,9 +62,7 @@ val chunk_alloc_t = "chunk_alloc_t".callback(
 	size_t.IN("alignment", ""),
 	bool_p.INOUT("zero", ""),
 	bool_p.INOUT("commit", ""),
-	unsigned_int.IN("arena_ind", ""),
-
-	samConstructor = "JEmalloc"
+	unsigned_int.IN("arena_ind", "")
 ) {
 	documentation = "Instances of this interface may be set to the ##ChunkHooks struct."
 }
@@ -77,9 +74,7 @@ val chunk_dalloc_t = "chunk_dalloc_t".callback(
 	void_p.IN("chunk", ""),
 	size_t.IN("size", ""),
 	bool.IN("committed", ""),
-	unsigned_int.IN("arena_ind", ""),
-
-	samConstructor = "JEmalloc"
+	unsigned_int.IN("arena_ind", "")
 ) {
 	documentation = "Instances of this interface may be set to the ##ChunkHooks struct."
 }
@@ -92,9 +87,7 @@ val chunk_commit_t = "chunk_commit_t".callback(
 	size_t.IN("size", ""),
 	size_t.IN("offset", ""),
 	size_t.IN("length", ""),
-	unsigned_int.IN("arena_ind", ""),
-
-	samConstructor = "JEmalloc"
+	unsigned_int.IN("arena_ind", "")
 ) {
 	documentation = "Instances of this interface may be set to the ##ChunkHooks struct."
 }
@@ -107,9 +100,7 @@ val chunk_decommit_t = "chunk_decommit_t".callback(
 	size_t.IN("size", ""),
 	size_t.IN("offset", ""),
 	size_t.IN("length", ""),
-	unsigned_int.IN("arena_ind", ""),
-
-	samConstructor = "JEmalloc"
+	unsigned_int.IN("arena_ind", "")
 ) {
 	documentation = "Instances of this interface may be set to the ##ChunkHooks struct."
 }
@@ -122,9 +113,7 @@ val chunk_purge_t = "chunk_purge_t".callback(
 	size_t.IN("size", ""),
 	size_t.IN("offset", ""),
 	size_t.IN("length", ""),
-	unsigned_int.IN("arena_ind", ""),
-
-	samConstructor = "JEmalloc"
+	unsigned_int.IN("arena_ind", "")
 ) {
 	documentation = "Instances of this interface may be set to the ##ChunkHooks struct."
 }
@@ -138,9 +127,7 @@ val chunk_split_t = "chunk_split_t".callback(
 	size_t.IN("size_a", ""),
 	size_t.IN("size_b", ""),
 	bool.IN("committed", ""),
-	unsigned_int.IN("arena_ind", ""),
-
-	samConstructor = "JEmalloc"
+	unsigned_int.IN("arena_ind", "")
 ) {
 	documentation = "Instances of this interface may be set to the ##ChunkHooks struct."
 }
@@ -154,9 +141,7 @@ val chunk_merge_t = "chunk_merge_t".callback(
 	void_p.IN("chunk_b", ""),
 	size_t.IN("size_b", ""),
 	bool.IN("committed", ""),
-	unsigned_int.IN("arena_ind", ""),
-
-	samConstructor = "JEmalloc"
+	unsigned_int.IN("arena_ind", "")
 ) {
 	documentation = "Instances of this interface may be set to the ##ChunkHooks struct."
 }

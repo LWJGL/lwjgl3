@@ -153,13 +153,12 @@ fun String.callback(
 	vararg signature: Parameter,
 	returnDoc: String = "",
 	since: String = "",
-	samConstructor: String? = null,
 	init: (CallbackFunction.() -> Unit)? = null
 ): CallbackType {
 	val callback = CallbackFunction(packageName, className, returns, *signature)
 	if ( init != null )
 		callback.init()
 	callback.functionDoc = callback.toJavaDoc(functionDoc, signature.asSequence(), returns, returnDoc, since)
-	Generator.register(callback, samConstructor)
+	Generator.register(callback)
 	return CallbackType(callback, this)
 }

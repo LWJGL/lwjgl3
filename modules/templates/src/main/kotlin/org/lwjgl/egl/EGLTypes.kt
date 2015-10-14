@@ -79,8 +79,7 @@ val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
 	const..void_p.IN("key", ""),
 	AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
 	const..void_p.IN("value", ""),
-	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", ""),
-	samConstructor = "ANDROIDBlobCache"
+	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
 	documentation = "Instances of this interface may be passed to the ANDROIDBlobCache##eglSetBlobCacheFuncsANDROID() method."
 	additionalCode = """
@@ -111,8 +110,7 @@ val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
 	const..void_p.IN("key", ""),
 	AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
 	void_p.IN("value", ""),
-	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", ""),
-	samConstructor = "ANDROIDBlobCache"
+	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
 	documentation = "Instances of this interface may be passed to the ANDROIDBlobCache##eglSetBlobCacheFuncsANDROID() method."
 	additionalCode = """

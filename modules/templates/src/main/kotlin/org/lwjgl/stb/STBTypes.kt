@@ -27,8 +27,7 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 	void_p.IN("user", "a pointer to user data"),
 	char_p.IN("data", "the data buffer to fill"),
 	AutoSize("data")..int.IN("size", "the number of bytes to read"),
-	returnDoc = "the number of bytes actually read",
-	samConstructor = "STBImage"
+	returnDoc = "the number of bytes actually read"
 ) {
 	documentation = "Instances of this interface may be set to the {@code read} field of the ##STBIIOCallbacks struct."
 	additionalCode = """
@@ -73,8 +72,7 @@ val stbi_io_callbacks_skip = "stbi_io_callbacks.skip".callback(
 	STB_PACKAGE, void, "STBISkipCallback",
 	"The {@code stbi_io_callbacks.skip} callback.",
 	void_p.IN("user", "a pointer to user data"),
-	int.IN("n", "the number of bytes to skip if positive, or <em>unget</em> the last {@code -n} bytes if negative"),
-	samConstructor = "STBImage"
+	int.IN("n", "the number of bytes to skip if positive, or <em>unget</em> the last {@code -n} bytes if negative")
 ) {
 	documentation = "Instances of this interface may be set to the {@code skip} field of the ##STBIIOCallbacks struct."
 }
@@ -83,8 +81,7 @@ val stbi_io_callbacks_eof = "stbi_io_callbacks.eof".callback(
 	STB_PACKAGE, int, "STBIEOFCallback",
 	"The {@code stbi_io_callbacks.eof} callback.",
 	void_p.IN("user", "a pointer to user data"),
-	returnDoc = "nonzero if we are at the end of file/data",
-	samConstructor = "STBImage"
+	returnDoc = "nonzero if we are at the end of file/data"
 ) {
 	documentation = "Instances of this interface may be set to the {@code eof} field of the ##STBIIOCallbacks struct."
 }
@@ -114,8 +111,7 @@ val stbi_write_func = "stbi_write_func_p".callback(
 	"The {@code stbi_write_func} callback.",
 	void_p.IN("context", "the context passed to the write function"),
 	void_p.IN("data", "the data to write"),
-	AutoSize("data")..int.IN("size", "the number of bytes in {@code data}"),
-	samConstructor = "STBImageWrite"
+	AutoSize("data")..int.IN("size", "the number of bytes in {@code data}")
 ) {
 	documentation = "Instances of this interface may be used with the ##STBImageWrite {@code write_type_to_func} functions."
 	additionalCode = """

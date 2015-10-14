@@ -49,8 +49,7 @@ val objc_method_description_p = objc_method_description.p
 val EnumerationMutationHandler = "EnumerationMutationHandler".callback(
 	MACOSX_PACKAGE, void, "EnumerationMutationHandler",
 	"Will be called when an object is mutated during a foreach iteration.",
-	id.IN("id", "the object that was mutated"),
-	samConstructor = "ObjCRuntime"
+	id.IN("id", "the object that was mutated")
 ) {
 	documentation = "A mutation handler."
 }
