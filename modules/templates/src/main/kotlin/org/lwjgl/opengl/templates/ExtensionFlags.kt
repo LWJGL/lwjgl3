@@ -404,7 +404,7 @@ val ARB_shader_texture_image_samples = EXT_FLAG.nativeClassGL("ARB_shader_textur
 
 		This extension provides GLSL built-in functions allowing shaders to query the number of samples of a texture.
 
-		Requires ${GL43.core}. ${GL45.promoted}
+		Requires GLSL 1.50 or ${ARB_texture_multisample.link}.
 		"""
 }
 val ARB_shader_texture_lod = EXT_FLAG.nativeClassGL("ARB_shader_texture_lod", postfix = ARB) {
@@ -1005,6 +1005,22 @@ val KHR_texture_compression_astc_hdr = EXT_FLAG.nativeClassGL("KHR_texture_compr
 		When true, the $registryLink extension is supported.
 
 		This extension corresponds to the ASTC HDR Profile, see ${KHR_texture_compression_astc_ldr.link} for details.
+		"""
+}
+
+val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGL("KHR_texture_compression_astc_sliced_3d", postfix = KHR) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		Adaptive Scalable Texture Compression (ASTC) is a new texture compression technology that offers unprecendented flexibility, while producing better or
+		comparable results than existing texture compressions at all bit rates. It includes support for 2D and slice-based 3D textures, with low and high
+		dynamic range, at bitrates from below 1 bit/pixel up to 8 bits/pixel in fine steps.
+
+		This extension extends the functionality of ${KHR_texture_compression_astc_ldr.link} to include slice-based 3D textures for textures using the LDR
+		profile in the same way as the HDR profile allows slice-based 3D textures.
+
+		Requires ${KHR_texture_compression_astc_ldr.link}.
 		"""
 }
 

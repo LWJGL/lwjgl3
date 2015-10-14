@@ -10,7 +10,7 @@ import org.lwjgl.opengles.*
 val OVR_multiview = "OVRMultiview".nativeClassGLES("OVR_multiview", postfix = OVR) {
 	documentation =
 		"""
-		Native bindings to the $registryLink extension.
+		Native bindings to the ${registryLink("OVR", "multiview")} extension.
 
 		The method of stereo rendering supported in OpenGL is currently achieved by rendering to the two eye buffers sequentially. This typically incurs double
 		the application and driver overhead, despite the fact that the command streams and render states are almost identical.

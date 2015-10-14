@@ -280,6 +280,22 @@ val KHR_robust_buffer_access_behavior = EXT_FLAG.nativeClassGLES("KHR_robust_buf
 		"""
 }
 
+val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGLES("KHR_texture_compression_astc_sliced_3d", postfix = KHR) {
+	documentation =
+		"""
+		Native bindings to the ${registryLink("KHR", "texture_compression_astc_sliced_3d")} extension.
+
+		Adaptive Scalable Texture Compression (ASTC) is a new texture compression technology that offers unprecendented flexibility, while producing better or
+		comparable results than existing texture compressions at all bit rates. It includes support for 2D and slice-based 3D textures, with low and high
+		dynamic range, at bitrates from below 1 bit/pixel up to 8 bits/pixel in fine steps.
+
+		This extension extends the functionality of ${KHR_texture_compression_astc_ldr.link} to include slice-based 3D textures for textures using the LDR
+		profile in the same way as the HDR profile allows slice-based 3D textures.
+
+		Requires ${KHR_texture_compression_astc_ldr.link}.
+		"""
+}
+
 val NV_explicit_attrib_location = EXT_FLAG.nativeClassGLES("NV_explicit_attrib_location", postfix = NV) {
 	documentation =
 		"""

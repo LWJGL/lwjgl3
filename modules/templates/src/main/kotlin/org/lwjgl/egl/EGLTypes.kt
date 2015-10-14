@@ -56,6 +56,92 @@ val EGLImage = "EGLImage".opaque_p
 val EGLAttribKHR = typedef(intptr_t, "EGLAttribKHR")
 val EGLAttribKHR_p = EGLAttribKHR.p
 
+// KHR_debug
+val EGLObjectKHR = "EGLObjectKHR".opaque_p
+val EGLLabelKHR = "EGLLabelKHR".opaque_p
+val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
+		EGL_PACKAGE, void, "EGLDebugMessageKHRCallback",
+		"Will be called when a debug message is generated.",
+		EGLenum.IN("error", "will contain an EGL error code, or EGL10##EGL_SUCCESS, as applicable"),
+		const..charASCII_p.IN("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
+		EGLint.IN("messageType", "will contain one of the debug message types"),
+		EGLLabelKHR.IN(
+			"threadLabel",
+			"""
+			will contain the label attached to the current thread. The {@code threadLabel} will be $NULL if not set by the application. If the message is from
+			an internal thread, the label will be $NULL.
+			"""
+		),
+		EGLLabelKHR.IN(
+			"objectLabel",
+			"""
+			will contain the label attached to the primary object of the message; Labels will be $NULL if not set by the application. The primary object should
+			be the object the function operates on, see table 13.2 which provides the recommended mapping between functions and their primary object. This
+			{@code objectLabel} may be $NULL even though the application labeled the object. This is because it is possible an error was raised while executing
+			the command before the primary object was validated, therefore its label can not be included in the callback.
+			"""
+		),
+		nullable..const..charUTF8_p.IN(
+			"message",
+			"""
+			 will contain a platform specific debug string message; This string should provide added information to the application developer regarding the
+			 condition that generated the message. The format of a message is implementation-defined, although it should represent a concise description of the
+			 event that caused the message to be generated. Message strings can be $NULL and should not be assumed otherwise.
+			"""
+		)
+) {
+	documentation = "Instances of this interface may be passed to the KHRDebug##eglDebugMessageControlKHR() method."
+	useSystemCallConvention()
+	additionalCode = """
+	/**
+	 * Converts the specified {@link EGLDebugMessageKHRCallback} argument to a String.
+	 *
+	 * <p>This method may only be used inside an EGLDebugMessageKHRCallback invocation.</p>
+	 *
+	 * @param command the EGLDebugMessageKHRCallback {@code command} argument
+	 *
+	 * @return the command as a String
+	 */
+	public static String getCommand(long command) {
+		return memDecodeASCII(command);
+	}
+
+	/**
+	 * Converts the specified {@link EGLDebugMessageKHRCallback} argument to a String.
+	 *
+	 * <p>This method may only be used inside an EGLDebugMessageKHRCallback invocation.</p>
+	 *
+	 * @param message the EGLDebugMessageKHRCallback {@code message} argument
+	 *
+	 * @return the message as a String
+	 */
+	public static String getMessage(long message) {
+		return memDecodeUTF8(message);
+	}
+
+	/** A functional interface for {@link EGLDebugMessageKHRCallback}. */
+	public interface SAMString {
+		void invoke(int error, String command, int messageType, long threadLabel, long objectLabel, String message);
+	}
+
+	/**
+	 * Creates a {@link EGLDebugMessageKHRCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link EGLDebugMessageKHRCallback} instance
+	 */
+	public static EGLDebugMessageKHRCallback createString(final SAMString sam) {
+		return new EGLDebugMessageKHRCallback() {
+			@Override
+			public void invoke(int error, long command, int messageType, long threadLabel, long objectLabel, long message) {
+				sam.invoke(error, getCommand(command), messageType, threadLabel, objectLabel, getMessage(message));
+			}
+		};
+	}
+	"""
+}
+
 // KHR_fence_sync
 val EGLSyncKHR = "EGLSyncKHR".opaque_p
 val EGLTimeKHR = typedef(khronos_utime_nanoseconds_t, "EGLTimeKHR")
