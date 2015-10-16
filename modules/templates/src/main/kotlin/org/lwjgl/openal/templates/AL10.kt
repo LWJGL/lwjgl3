@@ -373,7 +373,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Returns the float value of a listener parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-		Check(1)..returnValue..ALfloat_p.OUT("value", "the parameter value")
+		Check(1)..ReturnParam..ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -381,7 +381,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Returns the integer value of a listener parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-		Check(1)..returnValue..ALint_p.OUT("value", "the parameter value")
+		Check(1)..ReturnParam..ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -407,7 +407,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Requests a number of source names.",
 
 		AutoSize("srcNames")..ALsizei.IN("n", "the number of source names to generated"),
-		returnValue..ALuint_p.OUT("srcNames", "the buffer that will receive the source names")
+		ReturnParam..ALuint_p.OUT("srcNames", "the buffer that will receive the source names")
 	)
 
 	ALvoid(
@@ -469,7 +469,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query", SourceAttributes),
-		Check(1)..returnValue..ALfloat_p.OUT("value", "the parameter value")
+		Check(1)..ReturnParam..ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -498,7 +498,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query", SourceAttributes),
-		Check(1)..returnValue..ALint_p.OUT("value", "the parameter value")
+		Check(1)..ReturnParam..ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -529,7 +529,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("sourceName", "the target source"),
 		AutoSize("bufferNames")..ALsizei.IN("numEntries", "the number of buffers to unqueue"),
-		returnValue..ALuint_p.OUT("bufferNames", "the buffer names")
+		ReturnParam..ALuint_p.OUT("bufferNames", "the buffer names")
 	)
 
 	ALvoid(
@@ -624,7 +624,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Requests a number of buffer names.",
 
 		AutoSize("bufferNames")..ALsizei.IN("n", "the number of buffer names to generate"),
-		returnValue..ALuint_p.OUT("bufferNames", "the buffer that will receive the buffer names")
+		ReturnParam..ALuint_p.OUT("bufferNames", "the buffer that will receive the buffer names")
 	)
 
 	ALvoid(
@@ -648,7 +648,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("bufferName", "the buffer to query"),
 		ALenum.IN("paramName", "the parameter to query", BufferAttributes),
-		Check(1)..returnValue..ALfloat_p.OUT("value", "the parameter value")
+		Check(1)..ReturnParam..ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -657,7 +657,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("bufferName", "the buffer to query"),
 		ALenum.IN("paramName", "the parameter to query", BufferAttributes),
-		Check(1)..returnValue..ALint_p.OUT("value", "the parameter value")
+		Check(1)..ReturnParam..ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(

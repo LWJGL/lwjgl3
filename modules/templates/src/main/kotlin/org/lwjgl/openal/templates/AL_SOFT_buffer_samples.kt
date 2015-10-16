@@ -20,7 +20,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 			The conversion done by the implementation is hidden from the app. This makes it difficult for the app to know what kind of precision it will have,
 			and impossible to request a storage precision.
 			""",
-		    "Conversion is not guaranteed, so the application can be restricted in the formats that can be loaded depending on the implementation."
+			"Conversion is not guaranteed, so the application can be restricted in the formats that can be loaded depending on the implementation."
 		)}
 		If the application could specify the internal storage format, as well as use a separate format to specify the incoming data's format, it would allow to
 		add more input formats (signed 8-bit, 32-bit int, and float, for example), with no undue burden placed on the implementation beyond needing some
@@ -137,8 +137,8 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		"Queries if a storage format is supported by the implementation",
 
 		ALCenum.IN("format", "the format to query", InternalFormatParameters),
-	    returnDoc =
-	        """
+		returnDoc =
+		"""
 	        false if the specified {@code format} is not a recognized storage format. Otherwise, if it returns true it may be specified as the
 	        {@code internalformat} for #BufferSamplesSOFT().
 	        """

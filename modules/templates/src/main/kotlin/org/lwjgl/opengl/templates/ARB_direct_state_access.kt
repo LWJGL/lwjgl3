@@ -132,6 +132,6 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
 	GL45 reuse "CreateQueries"
 	GL45 reuse "GetQueryBufferObjecti64v"
 	GL45 reuse "GetQueryBufferObjectiv"
-    GL45 reuse "GetQueryBufferObjectui64v"
-    GL45 reuse "GetQueryBufferObjectuiv"
+	GL45 reuse "GetQueryBufferObjectui64v"
+	GL45 reuse "GetQueryBufferObjectuiv"
 }

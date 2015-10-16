@@ -215,7 +215,7 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 
 		GLuint.IN("program", ""),
 		GLuint.IN("index", ""),
-		returnValue..Check(1)..GLint_p.OUT("location", "")
+		ReturnParam..Check(1)..GLint_p.OUT("location", "")
 	)
 
 	void(

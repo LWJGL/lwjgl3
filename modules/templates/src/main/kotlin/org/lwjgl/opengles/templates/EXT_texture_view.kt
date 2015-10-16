@@ -21,9 +21,9 @@ val EXT_texture_view = "EXTTextureView".nativeClassGLES("EXT_texture_view", post
 		No new object types are added. Conceptually, a texture object is split into the following parts:
 		${ul(
 			"A data store holding texel data.",
-		    "State describing which portions of the data store to use, and how to interpret the data elements.",
-		    "An embedded sampler object.",
-		    "Various other texture parameters."
+			"State describing which portions of the data store to use, and how to interpret the data elements.",
+			"An embedded sampler object.",
+			"Various other texture parameters."
 		)}
 		With this extension, multiple textures can share a data store and have different state describing which portions of the data store to use and how to
 		interpret the data elements. The data store is refcounted and not destroyed until the last texture sharing it is deleted.

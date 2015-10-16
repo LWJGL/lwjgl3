@@ -33,13 +33,13 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		results of a texture lookup from an integer texture are undefined:
 		${ul(
 			"for fixed-function fragment processing, or",
-		    "for shader texture accesses expecting floating-point return values."
+			"for shader texture accesses expecting floating-point return values."
 		)}
 		The color components used for per-fragment operations and written into a color buffer are undefined:
 		${ul(
 			"for fixed-function fragment processing with an integer color buffer,",
-		    "for fragment shaders that write floating-point color components to an integer color buffer, or",
-		    "for fragment shaders that write integer color components to a color buffer with floating point or normalized integer components."
+			"for fragment shaders that write floating-point color components to an integer color buffer, or",
+			"for fragment shaders that write integer color components to a color buffer with floating point or normalized integer components."
 		)}
 		Requires ${GL20.core} and ${registryLinkTo("NV", "gpu_program4")} or ${registryLinkTo("EXT", "gpu_shader4")}. ${GL30.promoted}
 		"""
@@ -152,7 +152,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -161,6 +161,6 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLuint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("params", "")
 	)
 }

@@ -880,7 +880,7 @@ void myMethodIMP(id self, SEL _cmd)
 			""",
 
 			Method.IN("m", "the method to inspect"),
-			Return(null)..charUTF8_p.OUT("dst", "the reference string to store the description"),
+			ReturnParam..charUTF8_p.OUT("dst", "the reference string to store the description"),
 			AutoSize("dst")..size_t.IN("dst_len", "the maximum number of characters that can be stored in {@code dst}")
 		)
 
@@ -895,7 +895,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 			Method.IN("m", "the method you want to inquire about"),
 			unsigned_int.IN("index", "the index of the parameter you want to inquire about"),
-			Return(null)..charUTF8_p.OUT("dst", "the reference string to store the description"),
+			ReturnParam..charUTF8_p.OUT("dst", "the reference string to store the description"),
 			AutoSize("dst")..size_t.IN("dst_len", "the maximum number of characters that can be stored in {@code dst}")
 		)
 

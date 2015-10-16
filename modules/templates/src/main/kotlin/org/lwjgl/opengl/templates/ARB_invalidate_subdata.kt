@@ -22,9 +22,9 @@ val ARB_invalidate_subdata = "ARBInvalidateSubdata".nativeClassGL("ARB_invalidat
 		Examples of when this may be useful include:
 		${ol(
 			"invalidating a multisample texture after resolving it into a non-multisample texture.",
-		    "invalidating depth/stencil buffers after using them to generate a color buffer.",
-		    "invalidating a subregion of a framebuffer rather than clearing it before rendering to it, when the whole subregion will be overwritten.",
-		    """
+			"invalidating depth/stencil buffers after using them to generate a color buffer.",
+			"invalidating a subregion of a framebuffer rather than clearing it before rendering to it, when the whole subregion will be overwritten.",
+			"""
 		    invalidating dynamically generated data (e.g. textures written by FBO rendering or CopyTexSubImage, buffers written by transform feedback, etc.)
 		    after it is no longer needed but before the end of the frame.
 		    """
@@ -36,17 +36,17 @@ val ARB_invalidate_subdata = "ARBInvalidateSubdata".nativeClassGL("ARB_invalidat
 		This extension is a superset of the ${registryLinkTo("EXT", "discard_framebuffer")} extension with the following additions:
 		${ul(
 			"The parameters to InvalidateFramebufferEXT are extended for MRT support and Desktop-GL-only buffer enums.",
-		    "New functions to invalidate a region of a texture image or buffer object data store."
+			"New functions to invalidate a region of a texture image or buffer object data store."
 		)}
 		Requires ${GL20.core}. ${GL43.promoted}
 		"""
 
 	GL43 reuse "InvalidateTexSubImage"
-    GL43 reuse "InvalidateTexImage"
+	GL43 reuse "InvalidateTexImage"
 
-    GL43 reuse "InvalidateBufferSubData"
-    GL43 reuse "InvalidateBufferData"
+	GL43 reuse "InvalidateBufferSubData"
+	GL43 reuse "InvalidateBufferData"
 
-    GL43 reuse "InvalidateFramebuffer"
-    GL43 reuse "InvalidateSubFramebuffer"
+	GL43 reuse "InvalidateFramebuffer"
+	GL43 reuse "InvalidateSubFramebuffer"
 }

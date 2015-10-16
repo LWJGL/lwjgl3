@@ -57,7 +57,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 	)
 	val autoSizeDoc = "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."
 
-	for ( i in 1..4 ) {
+	for (i in 1..4) {
 		val glslType = if ( i == 1) "int64_t" else "i64vec$i"
 		val valueDoc = "a pointer to an array of {@code count} values that will be used to update the specified $glslType variable"
 
@@ -148,7 +148,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		returnValue..Check(1)..GLint64_p.OUT("params", "the value of the specified uniform variable")
+		ReturnParam..Check(1)..GLint64_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	void(
@@ -157,7 +157,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		returnValue..Check(1)..GLuint64_p.OUT("params", "the value of the specified uniform variable")
+		ReturnParam..Check(1)..GLuint64_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	void(
@@ -167,7 +167,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
 		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values to write in {@code params}"),
-		returnValue..GLint64_p.OUT("params", "the value of the specified uniform variable")
+		ReturnParam..GLint64_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	void(
@@ -177,6 +177,6 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
 		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values to write in {@code params}"),
-		returnValue..GLuint64_p.OUT("params", "the value of the specified uniform variable")
+		ReturnParam..GLuint64_p.OUT("params", "the value of the specified uniform variable")
 	)
 }

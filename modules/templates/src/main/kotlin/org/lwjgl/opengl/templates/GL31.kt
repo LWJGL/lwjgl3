@@ -324,7 +324,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 			"uniformNames",
 			"an array of pointers to buffers containing the names of the queried uniforms"
 		),
-		returnValue..GLuint_p.OUT("uniformIndices", "an array that will receive the indices of the uniforms")
+		ReturnParam..GLuint_p.OUT("uniformIndices", "an array that will receive the indices of the uniforms")
 	)
 
 	void(
@@ -338,7 +338,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		),
 		SingleValue("uniformIndex")..const..GLuint_p.IN("uniformIndices", "an array of {@code uniformCount} integers containing the indices of uniforms within {@code program}"),
 		GLenum.IN("pname", "the property of the each uniform in {@code uniformIndices} that should be written into the corresponding element of {@code params}"),
-		returnValue..GLint_p.OUT("params", "an array of {@code uniformCount} integers which are to receive the value of {@code pname} for each uniform in {@code uniformIndices}")
+		ReturnParam..GLint_p.OUT("params", "an array of {@code uniformCount} integers which are to receive the value of {@code pname} for each uniform in {@code uniformIndices}")
 	)
 
 	void(
@@ -376,7 +376,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		GLuint.IN("program", "the name of a program containing the uniform block"),
 		GLuint.IN("uniformBlockIndex", "the index of the uniform block within {@code program}"),
 		GLenum.IN("pname", "the name of the parameter to query", UniformBlockParameters),
-		Check(1)..returnValue..GLint_p.OUT("params", "the address of a variable to receive the result of the query")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "the address of a variable to receive the result of the query")
 	)
 
 	void(

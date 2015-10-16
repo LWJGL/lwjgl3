@@ -19,7 +19,7 @@ val WGL_ARB_robustness_application_isolation = "WGLARBRobustnessApplicationIsola
 		application causes a graphics reset to occur:
 		${ol(
 			"No other application on the system is affected by the graphics reset.",
-		    "No other application on the system receives any notification that the graphics reset occurred."
+			"No other application on the system receives any notification that the graphics reset occurred."
 		)}
 
 		Requires ${WGL_ARB_extensions_string.link} and ${WGL_ARB_create_context_robustness.link}.
@@ -50,7 +50,7 @@ val WGL_ARB_robustness_share_group_isolation = EXT_FLAG.nativeClassWGL("WGL_ARB_
 			No other share group within the application is affected by the graphics reset. Additionally, no other application on the system is affected by the
 			graphics reset.
 			""",
-		    """
+			"""
 		    No other share group within the application receives any notification that the graphics reset occurred. Additionally, no other application on the
 		    system receives any notification that the graphics reset occurred.
 		    """

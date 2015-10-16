@@ -505,7 +505,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("texture", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "")
 	)
 
 	void(
@@ -515,7 +515,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("texture", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -526,7 +526,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("target", ""),
 		GLint.IN("level", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "")
 	)
 
 	void(
@@ -537,7 +537,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("target", ""),
 		GLint.IN("level", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	/*
@@ -599,7 +599,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("width", ""),
 		GLsizei.IN("height", "")
 	)
-	
+
 	/*
 	OpenGL 1.2.1: New multitexture commands and queries prefix "Multi"
     before "Tex" and add an initial "enum texunit" parameter (to identify
@@ -735,7 +735,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -745,7 +745,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -755,7 +755,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("coord", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLdouble_p.OUT("params", "")
+		Check(1)..ReturnParam..GLdouble_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -765,7 +765,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("coord", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -775,7 +775,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("coord", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -963,7 +963,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -973,7 +973,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -984,7 +984,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("target", ""),
 		GLint.IN("level", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -995,7 +995,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("target", ""),
 		GLint.IN("level", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -1112,7 +1112,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -1121,7 +1121,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		Check(1)..returnValue..GLdouble_p.OUT("params", "")
+		Check(1)..ReturnParam..GLdouble_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -1130,7 +1130,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		Check(1)..returnValue..void_pp.OUT("params", "")
+		Check(1)..ReturnParam..void_pp.OUT("params", "")
 	)
 
 	/*
@@ -1146,7 +1146,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLenum.IN("pname", ""),
 		GLuint.IN("index", ""),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL30")..IgnoreMissing..void(
@@ -1155,7 +1155,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLenum.IN("pname", ""),
 		GLuint.IN("index", ""),
-		Check(1)..returnValue..GLdouble_p.OUT("params", "")
+		Check(1)..ReturnParam..GLdouble_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL30")..IgnoreMissing..void(
@@ -1164,7 +1164,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLenum.IN("pname", ""),
 		GLuint.IN("index", ""),
-		Check(1)..returnValue..void_pp.OUT("params", "")
+		Check(1)..ReturnParam..void_pp.OUT("params", "")
 	)
 
 	/*
@@ -1204,7 +1204,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL13")..void(
@@ -1213,7 +1213,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		Check(1)..returnValue..GLboolean_p.OUT("params", "")
+		Check(1)..ReturnParam..GLboolean_p.OUT("params", "")
 	)
 
 	/*
@@ -1305,7 +1305,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("program", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	DependsOn("GL_ARB_vertex_program")..void(
@@ -1634,7 +1634,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("buffer", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	DependsOn("OpenGL15")..void(
@@ -1990,7 +1990,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("texture", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	DependsOn("GL_EXT_texture_integer")..void(
@@ -2000,7 +2000,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("texture", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLuint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("params", "")
 	)
 
 	/*
@@ -2036,7 +2036,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	DependsOn("GL_EXT_texture_integer")..void(
@@ -2046,7 +2046,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLuint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("params", "")
 	)
 
 	/*
@@ -2266,7 +2266,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("renderbuffer", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	/*
@@ -2367,7 +2367,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("framebuffer", ""),
 		GLenum.IN("attachment", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "")
 	)
 
 	/*
@@ -2431,7 +2431,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("framebuffer", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("param", "")
+		Check(1)..ReturnParam..GLint_p.OUT("param", "")
 	)
 
 	// OpenGL 3.0: New buffer data copy command
@@ -2705,7 +2705,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("vaobj", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("param", "")
+		Check(1)..ReturnParam..GLint_p.OUT("param", "")
 	)
 
 	DependsOn("OpenGL30")..void(
@@ -2714,7 +2714,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("vaobj", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..void_pp.OUT("param", "")
+		Check(1)..ReturnParam..void_pp.OUT("param", "")
 	)
 
 	DependsOn("OpenGL30")..void(
@@ -2724,7 +2724,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("vaobj", ""),
 		GLuint.IN("index", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..GLint_p.OUT("param", "")
+		Check(1)..ReturnParam..GLint_p.OUT("param", "")
 	)
 
 	DependsOn("OpenGL30")..void(
@@ -2734,7 +2734,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("vaobj", ""),
 		GLuint.IN("index", ""),
 		GLenum.IN("pname", ""),
-		Check(1)..returnValue..void_pp.OUT("param", "")
+		Check(1)..ReturnParam..void_pp.OUT("param", "")
 	)
 
 	/*

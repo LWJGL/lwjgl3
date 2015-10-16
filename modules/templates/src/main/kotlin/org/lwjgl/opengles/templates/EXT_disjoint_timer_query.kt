@@ -67,7 +67,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 		"",
 
 		AutoSize("ids")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("ids", "")
+		ReturnParam..GLuint_p.OUT("ids", "")
 	)
 
 	void(
@@ -114,7 +114,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -123,7 +123,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 
 		GLuint.IN("id", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -132,7 +132,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 
 		GLuint.IN("id", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLuint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLuint_p.OUT("params", "")
 	)
 
 	void(
@@ -141,7 +141,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 
 		GLuint.IN("id", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint64_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint64_p.OUT("params", "")
 	)
 
 	void(
@@ -150,6 +150,6 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 
 		GLuint.IN("id", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLuint64_p.OUT("params", "")
+		ReturnParam..Check(1)..GLuint64_p.OUT("params", "")
 	)
 }

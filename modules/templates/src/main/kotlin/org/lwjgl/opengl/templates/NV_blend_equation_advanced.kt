@@ -74,12 +74,12 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGL("NV_ble
 		"LINEARLIGHT_NV"..0x92A7,
 		"PINLIGHT_NV"..0x92A8,
 		"HARDMIX_NV"..0x92A9,
-		
+
 		"HSL_HUE_NV"..0x92AD,
 		"HSL_SATURATION_NV"..0x92AE,
 		"HSL_COLOR_NV"..0x92AF,
 		"HSL_LUMINOSITY_NV"..0x92B0,
-		
+
 		"PLUS_NV"..0x9291,
 		"PLUS_CLAMPED_NV"..0x92B1,
 		"PLUS_CLAMPED_ALPHA_NV"..0x92B2,

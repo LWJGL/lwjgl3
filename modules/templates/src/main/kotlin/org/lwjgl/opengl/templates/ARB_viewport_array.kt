@@ -45,15 +45,15 @@ val ARB_viewport_array = "ARBViewportArray".nativeClassGL("ARB_viewport_array") 
 	)
 
 	GL41 reuse "ViewportArrayv"
-    GL41 reuse "ViewportIndexedf"
-    GL41 reuse "ViewportIndexedfv"
-    GL41 reuse "ScissorArrayv"
-    GL41 reuse "ScissorIndexed"
-    GL41 reuse "ScissorIndexedv"
-    GL41 reuse "DepthRangeArrayv"
-    GL41 reuse "DepthRangeIndexed"
-    GL41 reuse "GetFloati_v"
-    GL41 reuse "GetDoublei_v"
+	GL41 reuse "ViewportIndexedf"
+	GL41 reuse "ViewportIndexedfv"
+	GL41 reuse "ScissorArrayv"
+	GL41 reuse "ScissorIndexed"
+	GL41 reuse "ScissorIndexedv"
+	GL41 reuse "DepthRangeArrayv"
+	GL41 reuse "DepthRangeIndexed"
+	GL41 reuse "GetFloati_v"
+	GL41 reuse "GetDoublei_v"
 
 	/* TODO: enable these
 	EXT_draw_buffers2 reuse "GetIntegerIndexedvEXT"

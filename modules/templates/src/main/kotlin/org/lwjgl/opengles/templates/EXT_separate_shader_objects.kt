@@ -111,7 +111,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
 		"",
 
 		AutoSize("pipelines")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("pipelines", "")
+		ReturnParam..GLuint_p.OUT("pipelines", "")
 	)
 
 	void(
@@ -133,7 +133,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
 
 		GLuint.IN("pipeline", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	GLboolean(

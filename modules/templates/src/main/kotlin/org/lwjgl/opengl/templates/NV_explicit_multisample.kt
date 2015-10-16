@@ -16,10 +16,10 @@ val NV_explicit_multisample = "NVExplicitMultisample".nativeClassGL("NV_explicit
 		readbacks. NV_explicit_multisample adds a set of new capabilities to allow more precise control over the use of multisamples. Specifically, it adds:
 		${ul(
 			"A query in the API to query the location of samples within the pixel",
-		    "An explicit control for the multisample sample mask to augment the control provided by SampleCoverage",
-		    "A new texture target to wrap a renderbuffer and allow a restricted class of accesses to the samples",
-		    "The ability to fetch a specific sample from a multisampled texture from within a shader",
-		    "A program option to enable the new behavior"
+			"An explicit control for the multisample sample mask to augment the control provided by SampleCoverage",
+			"A new texture target to wrap a renderbuffer and allow a restricted class of accesses to the samples",
+			"The ability to fetch a specific sample from a multisampled texture from within a shader",
+			"A program option to enable the new behavior"
 		)}
 
 		Requires ${GL20.core} and ${ARB_multisample.link}.

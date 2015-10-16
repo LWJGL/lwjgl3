@@ -47,8 +47,8 @@ val ARB_shader_subroutine = "ARBShaderSubroutine".nativeClassGL("ARB_shader_subr
 	GL40 reuse "GetSubroutineIndex"
 	GL40 reuse "GetActiveSubroutineUniformiv"
 	GL40 reuse "GetActiveSubroutineUniformName"
-    GL40 reuse "GetActiveSubroutineName"
-    GL40 reuse "UniformSubroutinesuiv"
-    GL40 reuse "GetUniformSubroutineuiv"
-    GL40 reuse "GetProgramStageiv"
+	GL40 reuse "GetActiveSubroutineName"
+	GL40 reuse "UniformSubroutinesuiv"
+	GL40 reuse "GetUniformSubroutineuiv"
+	GL40 reuse "GetProgramStageiv"
 }

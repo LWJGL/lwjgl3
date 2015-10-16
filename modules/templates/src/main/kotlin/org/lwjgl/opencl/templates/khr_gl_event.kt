@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 
 val khr_gl_event = dependsOn(Binding.OPENGL) {
 	"KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
-	documentation =
+		documentation =
 			"""
 		Native bindings to the $extensionName extension.
 

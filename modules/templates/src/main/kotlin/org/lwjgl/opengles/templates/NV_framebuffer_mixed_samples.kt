@@ -32,12 +32,12 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGLES("
 		The key features of this extension are:
 		${ul(
 			"It allows a framebuffer object to be considered complete when its depth or stencil samples are a multiple of the number of color samples.",
-		    """
+			"""
 		    It redefines SAMPLES to be the number of depth/stencil samples (if any); otherwise, it uses the number of color samples. SAMPLE_BUFFERS is one if
 			there are multisample depth/stencil attachments. Multisample rasterization and multisample fragment ops are allowed if SAMPLE_BUFFERS is one.
 		    """,
-		    "It replaces several error checks involving SAMPLE_BUFFERS by error checks directly referencing the number of samples in the relevant attachments.",
-		    """
+			"It replaces several error checks involving SAMPLE_BUFFERS by error checks directly referencing the number of samples in the relevant attachments.",
+			"""
 		    A coverage reduction step is added to Per-Fragment Operations which converts a set of covered raster/depth/stencil samples to a set of covered
 		    color samples. The coverage reduction step also includes an optional coverage modulation step, multiplying color values by a fractional opacity
 		    corresponding to the number of associated raster/depth/stencil samples covered.

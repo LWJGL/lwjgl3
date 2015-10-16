@@ -37,12 +37,12 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
 			For all existing OpenGL queries, provide additional "safe" APIs that limit data written to user pointers to a buffer size in bytes that is an
 			explicit additional parameter of the query.
 			""",
-		    """
+			"""
 		    Provide a mechanism for an OpenGL application to learn about graphics resets that affect the context. When a graphics reset occurs, the OpenGL
 			context becomes unusable and the application must create a new context to continue operation. Detecting a graphics reset happens through an
 			inexpensive query.
 		    """,
-		    """
+			"""
 		    Provide an enable to guarantee that out-of-bounds buffer object accesses by the GPU will have deterministic behavior and preclude application
 			instability or termination due to an incorrect buffer access. Such accesses include vertex buffer fetches of attributes and indices, and indexed
 			reads of uniforms or parameters from buffers.
@@ -102,7 +102,7 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
 		AutoSize("params")..GLsizei.IN("bufSize", ""),
-		returnValue..GLfloat_p.OUT("params", "")
+		ReturnParam..GLfloat_p.OUT("params", "")
 	)
 
 	void(
@@ -112,6 +112,6 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
 		AutoSize("params")..GLsizei.IN("bufSize", ""),
-		returnValue..GLint_p.OUT("params", "")
+		ReturnParam..GLint_p.OUT("params", "")
 	)
 }

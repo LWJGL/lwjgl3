@@ -451,7 +451,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		"",
 
 		AutoSize("ids")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("ids", "")
+		ReturnParam..GLuint_p.OUT("ids", "")
 	)
 
 	void(
@@ -490,7 +490,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -499,7 +499,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLuint.IN("id", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLuint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLuint_p.OUT("params", "")
 	)
 
 	GLboolean(
@@ -515,7 +515,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..void_pp.OUT("params", "")
+		ReturnParam..Check(1)..void_pp.OUT("params", "")
 	)
 
 	void(
@@ -663,7 +663,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		"",
 
 		AutoSize("arrays")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("arrays", "")
+		ReturnParam..GLuint_p.OUT("arrays", "")
 	)
 
 	GLboolean(
@@ -679,7 +679,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		returnValue..Check(1)..GLint_p.OUT("data", "")
+		ReturnParam..Check(1)..GLint_p.OUT("data", "")
 	)
 
 	void(
@@ -759,7 +759,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLuint.IN("index", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -768,7 +768,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLuint.IN("index", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLuint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLuint_p.OUT("params", "")
 	)
 
 	void(
@@ -815,7 +815,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		returnValue..Check(1)..GLuint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLuint_p.OUT("params", "")
 	)
 
 	GLint(
@@ -992,7 +992,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		GLuint.IN("program", ""),
 		GLuint.IN("uniformBlockIndex", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -1084,7 +1084,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		"",
 
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint64_p.OUT("data", "")
+		ReturnParam..Check(1)..GLint64_p.OUT("data", "")
 	)
 
 	void(
@@ -1095,7 +1095,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		GLenum.IN("pname", ""),
 		AutoSize("values")..GLsizei.IN("bufSize", ""),
 		Check(1)..nullable..GLsizei_p.OUT("length", ""),
-		returnValue..GLint_p.OUT("values", "")
+		ReturnParam..GLint_p.OUT("values", "")
 	)
 
 	void(
@@ -1104,7 +1104,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		returnValue..Check(1)..GLint64_p.OUT("data", "")
+		ReturnParam..Check(1)..GLint64_p.OUT("data", "")
 	)
 
 	void(
@@ -1113,7 +1113,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint64_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint64_p.OUT("params", "")
 	)
 
 	void(
@@ -1121,7 +1121,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		"",
 
 		AutoSize("samplers")..GLsizei.IN("count", ""),
-		returnValue..GLuint_p.OUT("samplers", "")
+		ReturnParam..GLuint_p.OUT("samplers", "")
 	)
 
 	void(
@@ -1189,7 +1189,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -1198,7 +1198,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLfloat_p.OUT("params", "")
+		ReturnParam..Check(1)..GLfloat_p.OUT("params", "")
 	)
 
 	void(
@@ -1230,7 +1230,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		"",
 
 		AutoSize("ids")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("ids", "")
+		ReturnParam..GLuint_p.OUT("ids", "")
 	)
 
 	GLboolean(
@@ -1333,6 +1333,6 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		GLenum.IN("internalformat", ""),
 		GLenum.IN("pname", ""),
 		AutoSize("params")..GLsizei.IN("bufSize", ""),
-		returnValue..GLint_p.OUT("params", "")
+		ReturnParam..GLint_p.OUT("params", "")
 	)
 }

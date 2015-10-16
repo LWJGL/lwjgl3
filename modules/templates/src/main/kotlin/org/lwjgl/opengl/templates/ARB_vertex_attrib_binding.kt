@@ -30,13 +30,13 @@ val ARB_vertex_attrib_binding = "ARBVertexAttribBinding".nativeClassGL("ARB_vert
 				"a frequency divisor used by all attributes using that binding point."
 			)}
 			""",
-		    """
+			"""
 		    An array of generic vertex attribute format information records, each of which specifies:
 		    ${ul(
-			    "a reference to one of the new buffer binding points above",
-			    "a component count and format, and a normalization flag for the attribute data, and",
-			    "the offset of the attribute data relative to the base offset of each vertex found at the associated binding point."
-		    )}
+				"a reference to one of the new buffer binding points above",
+				"a component count and format, and a normalization flag for the attribute data, and",
+				"the offset of the attribute data relative to the base offset of each vertex found at the associated binding point."
+			)}
 		    """
 		)}
 		${GL43.promoted}

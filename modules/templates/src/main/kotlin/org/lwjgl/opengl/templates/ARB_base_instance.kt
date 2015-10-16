@@ -27,5 +27,5 @@ val ARB_base_instance = "ARBBaseInstance".nativeClassGL("ARB_base_instance") {
 
 	GL42 reuse "DrawArraysInstancedBaseInstance"
 	GL42 reuse "DrawElementsInstancedBaseInstance"
-    GL42 reuse "DrawElementsInstancedBaseVertexBaseInstance"
+	GL42 reuse "DrawElementsInstancedBaseVertexBaseInstance"
 }

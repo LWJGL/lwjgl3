@@ -144,7 +144,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + " $PROXY_COLOR_TABLE_TARGETS"),
 		GLenum.IN("pname", "the parameter to query", COLOR_TABLE_PARAMS + " $COLOR_TABLE_PROPERTIES"),
-		Check(4)..returnValue..GLint_p.OUT("params", "a buffer in which to place the returned value")
+		Check(4)..ReturnParam..GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	DeprecatedGL..void(
@@ -153,7 +153,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the color table target"),
 		GLenum.IN("pname", "the parameter to query"),
-		Check(4)..returnValue..GLfloat_p.OUT("params", "a buffer in which to place the returned value")
+		Check(4)..ReturnParam..GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	// EXT_color_subtable
@@ -396,7 +396,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the filter target", "#CONVOLUTION_1D #CONVOLUTION_2D #SEPARABLE_2D"),
 		GLenum.IN("pname", "the parameter to query", CONVOLUTION_FILTER_PROPERTIES),
-		returnValue..Check(4)..GLint_p.OUT("params", "a buffer in which to return the parameter value")
+		ReturnParam..Check(4)..GLint_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
 	DeprecatedGL..void(
@@ -405,7 +405,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to query"),
-		returnValue..Check(4)..GLfloat_p.OUT("params", "a buffer in which to return the parameter value")
+		ReturnParam..Check(4)..GLfloat_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
 	// HP_convolution_border_modes
@@ -539,7 +539,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
 		GLenum.IN("pname", "the parameter to query", HISTOGRAM_PROPERTIES),
-		returnValue..Check(1)..GLint_p.OUT("params", "a buffer in which to return the parameter values")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "a buffer in which to return the parameter values")
 	)
 
 	DeprecatedGL..void(
@@ -548,7 +548,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the histogram target"),
 		GLenum.IN("pname", "the parameter to query"),
-		returnValue..Check(1)..GLfloat_p.OUT("params", "a buffer in which to place the returned value")
+		ReturnParam..Check(1)..GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	DeprecatedGL..void(
@@ -593,7 +593,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
-		returnValue..Check(1)..GLint_p.OUT("params", "a buffer in which to place the returned value")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	DeprecatedGL..void(
@@ -602,7 +602,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
-		returnValue..Check(1)..GLfloat_p.OUT("params", "a buffer in which to place the returned value")
+		ReturnParam..Check(1)..GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	// EXT_blend_color

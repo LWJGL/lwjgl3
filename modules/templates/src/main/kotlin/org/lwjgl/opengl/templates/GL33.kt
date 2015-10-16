@@ -85,7 +85,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 		"Generates sampler object names.",
 
 		AutoSize("samplers")..GLsizei.IN("count", "the number of sampler object names to generate"),
-		returnValue..GLuint_p.OUT("samplers", "a buffer in which the generated sampler object names are stored")
+		ReturnParam..GLuint_p.OUT("samplers", "a buffer in which the generated sampler object names are stored")
 	)
 
 	void(
@@ -177,7 +177,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 		GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter", "$SamplerParameters, GL11#TEXTURE_BORDER_COLOR"),
-		Check(1)..returnValue..GLint_p.OUT("params", "the sampler parameters")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "the sampler parameters")
 	)
 
 	void(
@@ -186,7 +186,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 		GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "the sampler parameters")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "the sampler parameters")
 	)
 
 	void(
@@ -195,7 +195,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 		GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-		Check(1)..returnValue..GLint_p.OUT("params", "the sampler parameters")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "the sampler parameters")
 	)
 
 	void(
@@ -204,7 +204,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 		GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-		Check(1)..returnValue..GLuint_p.OUT("params", "the sampler parameters")
+		Check(1)..ReturnParam..GLuint_p.OUT("params", "the sampler parameters")
 	)
 
 	// ARB_texture_rgb10_a2ui
@@ -266,7 +266,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter", "GL15#QUERY_RESULT GL15#QUERY_RESULT_AVAILABLE"),
-		Check(1)..returnValue..GLint64_p.OUT("params", "the requested data")
+		Check(1)..ReturnParam..GLint64_p.OUT("params", "the requested data")
 	)
 
 	void(
@@ -275,7 +275,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter"),
-		Check(1)..returnValue..GLuint64_p.OUT("params", "the requested data")
+		Check(1)..ReturnParam..GLuint64_p.OUT("params", "the requested data")
 	)
 
 	// ARB_instanced_arrays

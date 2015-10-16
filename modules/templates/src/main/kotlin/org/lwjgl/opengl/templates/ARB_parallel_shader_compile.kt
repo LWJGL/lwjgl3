@@ -50,4 +50,5 @@ val ARB_parallel_shader_compile = "ARBParallelShaderCompile".nativeClassGL("ARB_
 			{@code 0xFFFFFFFF} requests an implementation-specific maximum.
 			"""
 		)
-	)}
+	)
+}

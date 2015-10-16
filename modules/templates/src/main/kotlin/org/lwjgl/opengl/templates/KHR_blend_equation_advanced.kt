@@ -19,7 +19,7 @@ val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGL("KHR_
 			<b>KHR_blend_equation_advanced</b>:Provides the new blending equations, but guarantees defined results only if each sample is touched no more than
 			once in any single rendering pass. The command #BlendBarrierKHR() is provided to indicate a boundary between passes.
 			""",
-		    """
+			"""
 		    {@link KHRBlendEquationAdvancedCoherent KHR_blend_equation_advanced_coherent}: Provides the new blending equations, and guarantees that blending is
 		    done coherently and in API primitive order. An enable is provided to allow implementations to opt out of fully coherent blending and instead behave
 		    as though only KHR_blend_equation_advanced were supported.

@@ -18,9 +18,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		"MULTISAMPLE_LINE_WIDTH_RANGE_ARB"..0x9381,
 		"MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB"..0x9382
 	)
-	
+
 	// KHR_blend_equation_advanced
-	
+
 
 	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquation and BlendEquationi.",
@@ -78,7 +78,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 	)
 
 	// KHR_debug
-	
+
 	IntConstant(
 		"Tokens accepted by the {@code target} parameters of Enable, Disable, and  IsEnabled.",
 
@@ -193,11 +193,11 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 			If {@code source}, {@code type}, or {@code severity} is GLES20#DONT_CARE, the messages from all sources, of all types, or of all severities are
 			referenced respectively.
 			""",
-		    """
+			"""
 		    When values other than GLES20#DONT_CARE are specified, all messages whose source, type, or severity match the specified {@code source}, {@code type},
 		    or {@code severity} respectively will be referenced.
 		    """,
-		    """
+			"""
 		    If {@code count} is greater than zero, then {@code ids} is an array of {@code count} message IDs for the specified combination of {@code source} and
 		    {@code type}. In this case, if {@code source} or {@code type} is GLES20#DONT_CARE, or {@code severity} is not GLES20#DONT_CARE, the error
 		    GLES20#INVALID_OPERATION is generated.
@@ -324,7 +324,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		"",
 
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..void_pp.OUT("params", "")
+		ReturnParam..Check(1)..void_pp.OUT("params", "")
 	)
 
 	void(
@@ -410,9 +410,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		Check(1)..nullable..GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
 		Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
-	
+
 	// OES_draw_buffers_indexed
-	
+
 	void(
 		"Enablei",
 		"",
@@ -522,9 +522,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLsizei.IN("instancecount", ""),
 		GLint.IN("basevertex", "")
 	)
-	
+
 	// OES_geometry_shader
-	
+
 	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of CreateShader and CreateShaderProgramv, by the {@code pname} parameter of GetProgramPipelineiv and returned in
@@ -658,9 +658,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLfloat.IN("maxZ", "the maximum z clip space coordinate"),
 		GLfloat.IN("maxW", "the maximum w clip space coordinate")
 	)
-	
+
 	// KHR_robustness
-	
+
 	IntConstant(
 		"Returned by #GetGraphicsResetStatus().",
 
@@ -755,7 +755,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
 		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		returnValue..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		ReturnParam..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 
 	void(
@@ -765,7 +765,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
 		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		returnValue..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		ReturnParam..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 
 	void(
@@ -775,11 +775,11 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
 		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		returnValue..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		ReturnParam..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
-	
+
 	// OES_sample_shading
-	
+
 	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
@@ -811,9 +811,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		"MAX_FRAGMENT_INTERPOLATION_OFFSET"..0x8E5C,
 		"FRAGMENT_INTERPOLATION_OFFSET_BITS"..0x8E5D
 	)
-	
+
 	// OES_tessellation_shader
-	
+
 	IntConstant(
 		"Accepted by the {@code mode} parameter of DrawArrays, DrawElements, and other commands which draw primitives.",
 
@@ -912,9 +912,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLenum.IN("pname", ""),
 		GLint.IN("value", "")
 	)
-	
+
 	// OES_texture_border_clamp
-	
+
 	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of TexParameteriv, TexParameterfv, SamplerParameteriv, SamplerParameterfv, TexParameterIiv,
@@ -961,7 +961,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -970,7 +970,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLuint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLuint_p.OUT("params", "")
 	)
 
 	void(
@@ -997,7 +997,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -1006,7 +1006,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLuint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLuint_p.OUT("params", "")
 	)
 
 	// OES_texture_buffer
@@ -1069,9 +1069,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLintptr.IN("offset", ""),
 		GLsizeiptr.IN("size", "")
 	)
-	
+
 	// KHR_texture_compression_astc_ldr
-	
+
 	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of CompressedTexImage2D, CompressedTexSubImage2D, TexStorage2D, TextureStorage2D, TexStorage3D, and

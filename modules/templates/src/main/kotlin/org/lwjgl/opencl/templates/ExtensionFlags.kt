@@ -489,9 +489,9 @@ val amd_printf = EXT_FLAG.nativeClassCL("amd_printf", AMD) {
 			A 32-bit floating point argument is not converted to a 64-bit double, unless the extension cl_khr_fp64 is supported and enabled. This includes the
 			double variants if cl_khr_fp64 is supported and defined in the corresponding compilation unit.
 			""",
-		    "64-bit integer types can be printed using %ld / %lx / %lu.",
-		    "%lld / %llx / %llu are not supported and reserved for 128-bit integer types (long long).",
-		    """
+			"64-bit integer types can be printed using %ld / %lx / %lu.",
+			"%lld / %llx / %llu are not supported and reserved for 128-bit integer types (long long).",
+			"""
 		    All OpenCL vector types can be explicitly passed and printed using the modifier vn, where n can be 2, 3, 4, 8, or 16. This modifier appears before
 		    the original conversion specifier for the vector’s component type (for example, to print a float4 %v4f). Since vn is a conversion specifier, it is
 		    valid to apply optional flags, such as field width and precision, just as it is when printing the component types. Since a vector is an aggregate

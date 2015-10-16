@@ -25,7 +25,7 @@ val NVX_conditional_render = "NVXConditionalRender".nativeClassGL("NVX_condition
 	void(
 		"BeginConditionalRenderNVX",
 		"",
-		
+
 		GLuint.IN("id", "")
 	)
 

@@ -19,7 +19,7 @@ val INTEL = "INTEL"
 val NV = "NV"
 val NVX = "NVX"
 
-val OVR ="OVR"
+val OVR = "OVR"
 
 val SGI = "SGI"
 val SGIX = "SGIX"
@@ -123,7 +123,7 @@ val ARB_fragment_coord_conventions = EXT_FLAG.nativeClassGL("ARB_fragment_coord_
 		The dominant 2D and 3D rendering APIs make two basic choices of convention when locating fragments in window space. The two choices are:
 		${ol(
 			"Is the origin nearest the lower-left- or upper-left-most pixel of the window?",
-		    "Is the (x,y) location of the pixel nearest the origin at (0,0) or (0.5,0.5)?"
+			"Is the (x,y) location of the pixel nearest the origin at (0,0) or (0.5,0.5)?"
 		)}
 		OpenGL assumes a lower-left origin for window coordinates and assumes pixel centers are located at half-pixel coordinates. This means the XY location
 		(0.5,0.5) corresponds to the lower-left-most pixel in a window.
@@ -528,23 +528,23 @@ val ARB_shading_language_420pack = EXT_FLAG.nativeClassGL("ARB_shading_language_
 		This is a language feature only extension formed from changes made to version 4.20 of GLSL. It includes:
 		${ul(
 			"Add line-continuation using '\', as in C++.",
-		    "Change from ASCII to UTF-8 for the language character set and also allow any characters inside comments.",
-		    "Allow implicit conversions of return values to the declared type of the function.",
-		    "The *const* keyword can be used to declare variables within a function body with initializer expressions that are not constant expressions.",
-		    """
+			"Change from ASCII to UTF-8 for the language character set and also allow any characters inside comments.",
+			"Allow implicit conversions of return values to the declared type of the function.",
+			"The *const* keyword can be used to declare variables within a function body with initializer expressions that are not constant expressions.",
+			"""
 			Qualifiers on variable declarations no longer have to follow a strict order. The layout qualifier can be used multiple times, and multiple parameter
 			qualifiers can be used. However, this is not as straightforward as saying declarations have arbitrary lists of initializers. Typically, one
 			qualifier from each class of qualifiers is allowed, so care is now taken to classify them and say so. Then, of these, order restrictions are removed.
 		    """,
-		    """
+			"""
 		    Add layout qualifier identifier "binding" to bind the location of a uniform block. This requires version 1.4 of GLSL. If this extension is used with
 		    an earlier version than 1.4, this feature is not present.
 		    """,
-		    "Add layout qualifier identifier \"binding\" to bind units to sampler and image variable declarations.",
-		    "Add C-style curly brace initializer lists syntax for initializers. Full initialization of aggregates is required when these are used.",
-		    "Allow \".length()\" to be applied to vectors and matrices, returning the number of components or columns.",
-		    "Allow swizzle operations on scalars.",
-		    "Built-in constants for {@code gl_MinProgramTexelOffset} and {@code gl_MaxProgramTexelOffset}."
+			"Add layout qualifier identifier \"binding\" to bind units to sampler and image variable declarations.",
+			"Add C-style curly brace initializer lists syntax for initializers. Full initialization of aggregates is required when these are used.",
+			"Allow \".length()\" to be applied to vectors and matrices, returning the number of components or columns.",
+			"Allow swizzle operations on scalars.",
+			"Built-in constants for {@code gl_MinProgramTexelOffset} and {@code gl_MaxProgramTexelOffset}."
 		)}
 		Requires GLSL 1.30. Requires GLSL 1.40 for uniform block bindings. ${GL42.promoted}
 		"""
@@ -580,21 +580,21 @@ val ARB_sparse_texture2 = EXT_FLAG.nativeClassGL("ARB_sparse_texture2", postfix 
 			New built-in GLSL texture lookup and image load functions are provided that return information on whether the texels accessed for the texture
 			lookup accessed uncommitted texture memory.
 			""",
-		    """
+			"""
 		    New built-in GLSL texture lookup functions are provided that specify a minimum level of detail to use for lookups where the level of detail is
 			computed automatically. This allows shaders to avoid accessing unpopulated portions of high-resolution levels of detail when it knows that the
 			memory accessed is unpopulated, either from a priori knowledge or from feedback provided by the return value of previously executed "sparse"
 			texture lookup functions.
 		    """,
-		    """
+			"""
 		    Reads of uncommitted texture memory will act as though such memory were filled with zeroes; previously, the values returned by reads were
 		    undefined.
 		    """,
-		    """
+			"""
 		    Standard implementation-independent virtual page sizes for internal formats required to be supported with sparse textures. These standard sizes can
 			be requested by leaving ARBSparseTexture#VIRTUAL_PAGE_SIZE_INDEX_ARB at its initial value (0).
 		    """,
-		    """
+			"""
 		    Support for creating sparse multisample and multisample array textures is added. However, the virtual page sizes for such textures remain fully
 			implementation-dependent.
 		    """
@@ -967,7 +967,7 @@ val AMD_vertex_shader_viewport_index = EXT_FLAG.nativeClassGL("AMD_vertex_shader
 		"""
 }
 
-val ATI_shader_texture_lod = EXT_FLAG.nativeClassGL("ATI_shader_texture_lod", postfix = ATI) { documentation =  "When true, the $registryLink extension is supported." }
+val ATI_shader_texture_lod = EXT_FLAG.nativeClassGL("ATI_shader_texture_lod", postfix = ATI) { documentation = "When true, the $registryLink extension is supported." }
 
 val INTEL_fragment_shader_ordering = EXT_FLAG.nativeClassGL("INTEL_fragment_shader_ordering", postfix = ATI) {
 	documentation =
@@ -1038,8 +1038,8 @@ val NV_fragment_shader_interlock = EXT_FLAG.nativeClassGL("NV_fragment_shader_in
 		following techniques may be required to ensure proper execution ordering:
 		${ul(
 			"""inserting Finish or WaitSync commands to drain the pipeline between different "passes" or "layers";""",
-		    "using only atomic memory operations to write to shader memory (which may be relatively slow and limits how memory may be updated); or",
-		    "injecting spin loops into shaders to prevent multiple shader invocations from touching the same memory concurrently."
+			"using only atomic memory operations to write to shader memory (which may be relatively slow and limits how memory may be updated); or",
+			"injecting spin loops into shaders to prevent multiple shader invocations from touching the same memory concurrently."
 		)}
 		This extension provides new GLSL built-in functions beginInvocationInterlockNV() and endInvocationInterlockNV() that delimit a critical section of
 		fragment shader code. For pairs of shader invocations with "overlapping" coverage in a given pixel, the OpenGL implementation will guarantee that the
@@ -1077,7 +1077,7 @@ val NV_geometry_shader4 = EXT_FLAG.nativeClassGL("NV_geometry_shader4", postfix 
 			Support for QUADS, QUAD_STRIP, and POLYGON primitive types when geometry shaders are enabled.  Such primitives will be tessellated into individual
 			triangles.
 			""",
-		    """
+			"""
 		    Setting the value of GEOMETRY_VERTICES_OUT_EXT will take effect immediately. It is not necessary to link the program object in order for this change
 		    to take effect, as is the case in the EXT version of this extension.
 		    """

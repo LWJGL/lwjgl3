@@ -37,12 +37,12 @@ val KHR_robustness = "KHRRobustness".nativeClassGL("KHR_robustness") {
 			For all existing GL queries, provide additional "safe" APIs that limit data written to user pointers to a buffer size in bytes that is an explicit
 			additional parameter of the query.
 			""",
-		    """
+			"""
 		    Provide a mechanism for a GL application to learn about graphics resets that affect the context. When a graphics reset occurs, the GL context
 		    becomes unusable and the application must create a new context to continue operation. Detecting a graphics reset happens through an inexpensive query.
 		    """,
-		    "Define behavior of OpenGL calls made after a graphics reset.",
-		    """
+			"Define behavior of OpenGL calls made after a graphics reset.",
+			"""
 		    Provide an enable to guarantee that out-of-bounds buffer object accesses by the GPU will have deterministic behavior and preclude application
 			instability or termination due to an incorrect buffer access. Such accesses include vertex buffer fetches of attributes and indices, and indexed
 			reads of uniforms or parameters from buffers.

@@ -96,7 +96,7 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_perfo
 		"",
 
 		AutoSize("monitors")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("monitors", "")
+		ReturnParam..GLuint_p.OUT("monitors", "")
 	)
 
 	void(

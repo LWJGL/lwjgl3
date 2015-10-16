@@ -396,7 +396,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 		GLuint.IN("shader", "the shader object to be queried"),
 		GLenum.IN("pname", "the object parameter", "#SHADER_TYPE #DELETE_STATUS #COMPILE_STATUS #INFO_LOG_LENGTH #SHADER_SOURCE_LENGTH"),
-		Check(1)..returnValue..GLint_p.OUT("params", "the requested object parameter")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "the requested object parameter")
 	)
 
 	void(
@@ -415,7 +415,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 			GL42#ACTIVE_ATOMIC_COUNTER_BUFFERS  GL43#COMPUTE_WORK_GROUP_SIZE
 			"""
 		),
-		Check(1)..returnValue..GLint_p.OUT("params", "the requested object parameter")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "the requested object parameter")
 	)
 
 	void(
@@ -487,7 +487,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "the value of the specified uniform variable")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	void(
@@ -496,7 +496,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		Check(1)..returnValue..GLint_p.OUT("params", "the value of the specified uniform variable")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	void(
@@ -736,7 +736,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 			"the symbolic name of the vertex attribute parameter to be queried",
 			"GL15#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES GL30#VERTEX_ATTRIB_ARRAY_INTEGER GL33#VERTEX_ATTRIB_ARRAY_DIVISOR"
 		),
-		Check(1)..returnValue..GLint_p.OUT("params", "returns the requested data")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "returns the requested data")
 	)
 
 	void(
@@ -764,7 +764,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 		GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
 		GLenum.IN("pname", "the symbolic name of the generic vertex attribute parameter to be returned", "#VERTEX_ATTRIB_ARRAY_POINTER"),
-		Check(1)..returnValue..void_pp.OUT("pointer", "the pointer value")
+		Check(1)..ReturnParam..void_pp.OUT("pointer", "the pointer value")
 	)
 
 	// ARB_fragment_shader

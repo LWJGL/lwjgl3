@@ -18,9 +18,9 @@ val EXT_draw_buffers_indexed = "EXTDrawBuffersIndexed".nativeClassGLES("EXT_draw
 		This extension provides the ability to independently
 		${ul(
 			"enable or disable blending",
-		    "set the blend equations",
-		    "set the blend functions, and",
-		    "set the color write masks per color output."
+			"set the blend equations",
+			"set the blend functions, and",
+			"set the color write masks per color output."
 		)}
 		This extension introduces indexed versions of the enable, blend equation, blend function, and color mask commands, as well as associated indexed
 		queries in order to control and query these states independently on a per-color output basis.

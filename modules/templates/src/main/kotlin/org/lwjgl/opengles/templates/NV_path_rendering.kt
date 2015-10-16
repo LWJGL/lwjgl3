@@ -450,7 +450,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
 		GLuint.IN("firstPathName", ""),
 		GLenum.IN("fontTarget", "", "#STANDARD_FONT_NAME_NV #SYSTEM_FONT_NAME_NV #FILE_NAME_NV"),
-		nullTerminated..const..void_p.IN("fontName", ""),
+		NullTerminated..const..void_p.IN("fontName", ""),
 		GLbitfield.IN("fontStyle", "", "#BOLD_BIT_NV #ITALIC_BIT_NV", LinkMode.BITFIELD),
 		AutoSizeDiv("charcodeTypeToBytes(type)", "charcodes")..GLsizei.IN("numGlyphs", ""),
 		GLenum.IN("type", "", "GLES20#UNSIGNED_BYTE GLES20#UNSIGNED_SHORT GLES20#UNSIGNED_INT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"),
@@ -805,7 +805,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
 		GLuint.IN("path", ""),
 		GLenum.IN("pname", "", "$PathParameters $GetPathParameters"),
-		returnValue..Check(1)..GLint_p.OUT("value", "")
+		ReturnParam..Check(1)..GLint_p.OUT("value", "")
 	)
 
 	void(
@@ -814,7 +814,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
 		GLuint.IN("path", ""),
 		this["GetPathParameterivNV"]["pname"],
-		returnValue..Check(1)..GLfloat_p.OUT("value", "")
+		ReturnParam..Check(1)..GLfloat_p.OUT("value", "")
 	)
 
 	void(

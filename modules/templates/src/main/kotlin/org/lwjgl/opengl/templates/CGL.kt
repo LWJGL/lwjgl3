@@ -561,7 +561,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 			a constant that specifies the internal color format of the pixel buffer. The format controls whether the alpha channel of the pixel buffer is used
 			for texturing operations.
 			""",
-		    "GL11##GL_RGB GL11##GL_RGBA"
+			"GL11##GL_RGB GL11##GL_RGBA"
 		),
 		GLint.IN(
 			"max_level",
@@ -826,8 +826,8 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 		In order of performance, these are the renderers you should consider using when setting up a rendering context to attach to a pixel buffer:
 		${ul(
 			"A hardware renderer.",
-		    "The generic render, but only with an offscreen pixel format and glTexSubImage.",
-		    "The Apple software renderer, which supports pixel buffers in OS X v10.4.8 and later."
+			"The generic render, but only with an offscreen pixel format and glTexSubImage.",
+			"The Apple software renderer, which supports pixel buffers in OS X v10.4.8 and later."
 		)}
 		Deprecated in OS X v10.7.
 		""",

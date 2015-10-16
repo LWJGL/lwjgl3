@@ -660,7 +660,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"Creates a sampler object.",
 
 		cl_context.IN("context", "a valid OpenCL context"),
-		nullable..nullTerminated..const..cl_sampler_properties_p.IN(
+		nullable..NullTerminated..const..cl_sampler_properties_p.IN(
 			"sampler_properties",
 			"""
 			a list of sampler property names and their corresponding values. Each sampler property name is immediately followed by the corresponding desired

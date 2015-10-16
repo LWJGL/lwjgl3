@@ -121,8 +121,8 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		""",
 
 		HDC.IN("hdc", "the device context on which the pixel format is supported"),
-		nullTerminated..nullable..const..int_p.IN("attribIList", "a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
-		nullTerminated..nullable..const..FLOAT_p.IN("attribFList", "a list of attribute {type, value} pairs containing floating point attribute values"),
+		NullTerminated..nullable..const..int_p.IN("attribIList", "a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
+		NullTerminated..nullable..const..FLOAT_p.IN("attribFList", "a list of attribute {type, value} pairs containing floating point attribute values"),
 		AutoSize("formats")..UINT.IN("maxFormats", "the number of attributes being queried"),
 		int_p.IN(
 			"formats",

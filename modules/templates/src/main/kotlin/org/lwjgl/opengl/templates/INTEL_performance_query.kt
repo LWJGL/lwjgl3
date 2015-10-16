@@ -15,12 +15,12 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
 		The purpose of this extension is to expose Intel proprietary hardware performance counters to the OpenGL applications. Performance counters may count:
 		${ul(
 			"number of hardware events such as number of spawned vertex shaders. In this case the results represent the number of events.",
-		    """
+			"""
 		    duration of certain activity, like time took by all fragment shader invocations. In that case the result usually represents the number of clocks in
 			which the particular HW unit was busy. In order to use such counter efficiently, it should be normalized to the range of <0,1> by dividing its
 			value by the number of render clocks.
 		    """,
-		    """
+			"""
 		    used throughput of certain memory types such as texture memory. In that case the result of performance counter usually represents the number of
 		    bytes transferred between GPU and memory.
 		    """
@@ -103,7 +103,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
 		"",
 
 		GLuint.IN("queryId", ""),
-		Check(1)..returnValue..GLuint_p.OUT("queryHandle", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("queryHandle", "")
 	)
 
 	void(
@@ -124,7 +124,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
 		"GetFirstPerfQueryIdINTEL",
 		"",
 
-		Check(1)..returnValue..GLuint_p.OUT("queryId", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("queryId", "")
 	)
 
 	void(
@@ -132,7 +132,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
 		"",
 
 		GLuint.IN("queryId", ""),
-		Check(1)..returnValue..GLuint_p.OUT("nextQueryId", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("nextQueryId", "")
 	)
 
 	void(
@@ -168,7 +168,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
 		"",
 
 		GLcharASCII_p.IN("queryName", ""),
-		Check(1)..returnValue..GLuint_p.OUT("queryId", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("queryId", "")
 	)
 
 	void(

@@ -28,7 +28,7 @@ val ARB_vertex_array_bgra = "ARBVertexArrayBGRA".nativeClassGL("ARB_vertex_array
 		to either:
 		${ol(
 			"Rely on a vertex program or shader to swizzle the color components from the BGRA to conventional RGBA order.",
-		    "Re-order the color data components in the vertex buffer from Direct3D's native BGRA order to OpenGL's native RGBA order."
+			"Re-order the color data components in the vertex buffer from Direct3D's native BGRA order to OpenGL's native RGBA order."
 		)}
 
 		Neither option is entirely satisfactory.

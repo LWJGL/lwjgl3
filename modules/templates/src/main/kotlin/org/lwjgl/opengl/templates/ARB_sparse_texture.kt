@@ -93,9 +93,9 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 		An GL11#INVALID_OPERATION error is generated if {@code zoffset} + {@code depth} is greater than
 		${ul(
 			"the depth of level {@code level} of the texture bound to {@code target}, if {@code target} is GL12#TEXTURE_3D;",
-		    "the number of layers of level {@code level} of the texture bound to {@code target}, if {@code target} is GL30#TEXTURE_2D_ARRAY;",
-		    "six times the number of layers of level {@code level} of the texture bound to {@code target}, if {@code target} is GL40#TEXTURE_CUBE_MAP_ARRAY; or",
-		    "one, for all other targets."
+			"the number of layers of level {@code level} of the texture bound to {@code target}, if {@code target} is GL30#TEXTURE_2D_ARRAY;",
+			"six times the number of layers of level {@code level} of the texture bound to {@code target}, if {@code target} is GL40#TEXTURE_CUBE_MAP_ARRAY; or",
+			"one, for all other targets."
 		)}
 		An GL11#INVALID_VALUE error is generated if {@code xoffset}, {@code yoffset}, or {@code zoffset} is not a multiple of #VIRTUAL_PAGE_SIZE_X_ARB,
 		#VIRTUAL_PAGE_SIZE_Y_ARB, or #VIRTUAL_PAGE_SIZE_Z_ARB, respectively, of the texture bound to {@code target}.
@@ -110,9 +110,9 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 		{@code zoffset} is not equal to
 		${ul(
 			"the depth of level {@code level} of the texture bound to {@code target}, if {@code target} is TEXTURE_3D;",
-		    "the number of layers of level {@code level} of the texture bound to {@code target}, if {@code target} is TEXTURE_2D_ARRAY;",
-		    "six times the number of layers of level {@code level} of the texture bound to {@code target}, if {@code target} is TEXTURE_CUBE_MAP_ARRAY; or",
-		    "one, for all other targets."
+			"the number of layers of level {@code level} of the texture bound to {@code target}, if {@code target} is TEXTURE_2D_ARRAY;",
+			"six times the number of layers of level {@code level} of the texture bound to {@code target}, if {@code target} is TEXTURE_CUBE_MAP_ARRAY; or",
+			"one, for all other targets."
 		)}
 		An GL11#INVALID_OPERATION error is generated if the value of GL42#TEXTURE_IMMUTABLE_FORMAT or #TEXTURE_SPARSE_ARB for the texture bound to
 		{@code target} is GL11#FALSE.

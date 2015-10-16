@@ -28,8 +28,8 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
 		Specifies a pointer to function to be invoked when printf data is available. Upon invocation the arguments are set to the following values.
 		${ul(
 			"{@code buffer} is a pointer to a character array of size {@code len} created by printf.",
-		    "{@code len} is the number of new characters in {@code buffer}.",
-		    "{@code complete} is set to a non zero value if there is no more data in the device's printf buffer.",
+			"{@code len} is the number of new characters in {@code buffer}.",
+			"{@code complete} is set to a non zero value if there is no more data in the device's printf buffer.",
 			"{@code user_data} is the {@code user_data} parameter specified to CL10#CreateContext()."
 		)}
 		If this property is not specified, no callback will be registered and any printf output from a kernel will be discarded.

@@ -131,7 +131,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["target"],
 		src["query"],
 		AutoSize("data")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
-		returnValue..GLdouble_p.OUT("data", "a buffer in which to place the returned data")
+		ReturnParam..GLdouble_p.OUT("data", "a buffer in which to place the returned data")
 	)
 
 	src = GL11["GetMapfv"]
@@ -142,7 +142,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["target"],
 		src["query"],
 		AutoSize("data")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
-		returnValue..GLfloat_p.OUT("data", "a buffer in which to place the returned data")
+		ReturnParam..GLfloat_p.OUT("data", "a buffer in which to place the returned data")
 	)
 
 	src = GL11["GetMapiv"]
@@ -153,7 +153,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["target"],
 		src["query"],
 		AutoSize("data")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
-		returnValue..GLint_p.OUT("data", "a buffer in which to place the returned data")
+		ReturnParam..GLint_p.OUT("data", "a buffer in which to place the returned data")
 	)
 
 	src = GL11["GetPixelMapfv"]
@@ -309,7 +309,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["program"],
 		src["location"],
 		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code params}"),
-		returnValue..GLfloat_p.OUT("params", "a buffer in which to place the returned data")
+		ReturnParam..GLfloat_p.OUT("params", "a buffer in which to place the returned data")
 	)
 
 	src = GL20["GetUniformiv"]
@@ -320,7 +320,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["program"],
 		src["location"],
 		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code params}"),
-		returnValue..GLint_p.OUT("params", "a buffer in which to place the returned data")
+		ReturnParam..GLint_p.OUT("params", "a buffer in which to place the returned data")
 	)
 
 	src = GL30["GetUniformuiv"]
@@ -331,7 +331,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["program"],
 		src["location"],
 		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code params}"),
-		returnValue..GLuint_p.OUT("params", "a buffer in which to place the returned data")
+		ReturnParam..GLuint_p.OUT("params", "a buffer in which to place the returned data")
 	)
 
 	src = GL40["GetUniformdv"]
@@ -342,6 +342,6 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["program"],
 		src["location"],
 		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code params}"),
-		returnValue..GLdouble_p.OUT("params", "a buffer in which to place the returned data")
+		ReturnParam..GLdouble_p.OUT("params", "a buffer in which to place the returned data")
 	)
 }

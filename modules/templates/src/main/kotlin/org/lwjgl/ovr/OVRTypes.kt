@@ -36,7 +36,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	"The logging callback.",
 	uintptr_t.IN("userData", "an arbitrary value specified by the user of ovrInitParams"),
 	int.IN("level", "one of the ovrLogLevel constants"),
-	nullTerminated..const..charUTF8_p.IN("message", "a UTF8-encoded null-terminated string")
+	NullTerminated..const..charUTF8_p.IN("message", "a UTF8-encoded null-terminated string")
 ) {
 	documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
 	additionalCode = """
@@ -291,22 +291,22 @@ val ovrFrameTiming = struct(OVR_PACKAGE, "OVRFrameTiming", structName = "ovrFram
 	documentation = "Frame timing data reported by OVR#ovrHmd_GetFrameTiming()."
 	includeOVRCAPI()
 
-    /// A point in time when the middle of the screen will be displayed. For global shutter,
-    /// this will be the display time. For rolling shutter this is a point at which half the image has
-    /// been displayed. This value can be passed as an absolute time to ovrHmd_GetTrackingState
-    /// to get the best predicted pose for rendering the scene.
-    double.member("DisplayMidpointSeconds")
+	/// A point in time when the middle of the screen will be displayed. For global shutter,
+	/// this will be the display time. For rolling shutter this is a point at which half the image has
+	/// been displayed. This value can be passed as an absolute time to ovrHmd_GetTrackingState
+	/// to get the best predicted pose for rendering the scene.
+	double.member("DisplayMidpointSeconds")
 
-    /// Display interval between the frames. This will generally be 1 / RefreshRate of the HMD;
-    /// however, it may vary slightly during runtime based on video cart scan-out timing.
-    double.member("FrameIntervalSeconds")
+	/// Display interval between the frames. This will generally be 1 / RefreshRate of the HMD;
+	/// however, it may vary slightly during runtime based on video cart scan-out timing.
+	double.member("FrameIntervalSeconds")
 
-    /// Application frame index for which we requested timing.
-    double.member("AppFrameIndex")
+	/// Application frame index for which we requested timing.
+	double.member("AppFrameIndex")
 
-    /// HW display frame index that we expect this application frame will hit; this is the frame that
-    /// will be displayed at DisplayMidpointSeconds. This value is monotonically increasing with each v-sync.
-    double.member("DisplayFrameIndex")
+	/// HW display frame index that we expect this application frame will hit; this is the frame that
+	/// will be displayed at DisplayMidpointSeconds. This value is monotonically increasing with each v-sync.
+	double.member("DisplayFrameIndex")
 }.nativeType
 
 val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", structName = "ovrEyeRenderDesc", mutable = false) {
@@ -344,7 +344,7 @@ val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", structName = 
 		Contains the data necessary to properly calculate position info for various layer types.
 		${ul(
 			"{@code HmdToEyeViewOffset} is the same value pair provided in ##OVREyeRenderDesc.",
-		    "{@code HmdSpaceToWorldScaleInMeters} is used to scale player motion into in-application units."
+			"{@code HmdSpaceToWorldScaleInMeters} is used to scale player motion into in-application units."
 		)}
 		In other words, it is how big an in-application unit is in the player's physical meters. For example, if the application uses inches as its units then
 		{@code HmdSpaceToWorldScaleInMeters} would be 0.0254. Note that if you are scaling the player in size, this must also scale. So if your application
@@ -425,26 +425,26 @@ val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", structName = "ovrIn
 		"""
 	includeOVRCAPI()
 
-	 // System type when the controller state was last updated.
-    double.member("TimeInSeconds")
+	// System type when the controller state was last updated.
+	double.member("TimeInSeconds")
 
-    // Described by ovrControllerType. Indicates which ControllerTypes are present.
-    unsigned_int.member("ConnectedControllerTypes")
+	// Described by ovrControllerType. Indicates which ControllerTypes are present.
+	unsigned_int.member("ConnectedControllerTypes")
 
-    // Values for buttons described by ovrButton.
-    unsigned_int.member("Buttons")
+	// Values for buttons described by ovrButton.
+	unsigned_int.member("Buttons")
 
-    // Touch values for buttons and sensors as described by ovrTouch.
-    unsigned_int.member("Touches")
+	// Touch values for buttons and sensors as described by ovrTouch.
+	unsigned_int.member("Touches")
 
-    // Left and right finger trigger values (ovrHand_Left and ovrHand_Right), in the range 0.0 to 1.0f.
-    float.member("IndexTrigger", size = 2)
+	// Left and right finger trigger values (ovrHand_Left and ovrHand_Right), in the range 0.0 to 1.0f.
+	float.member("IndexTrigger", size = 2)
 
-    // Left and right hand trigger values (ovrHand_Left and ovrHand_Right), in the range 0.0 to 1.0f.
-    float.member("HandTrigger", size = 2)
+	// Left and right hand trigger values (ovrHand_Left and ovrHand_Right), in the range 0.0 to 1.0f.
+	float.member("HandTrigger", size = 2)
 
-    // Horizontal and vertical thumbstick axis values (ovrHand_Left and ovrHand_Right), in the range -1.0f to 1.0f.
-    ovrVector2f.member("Thumbstick", size = 2)
+	// Horizontal and vertical thumbstick axis values (ovrHand_Left and ovrHand_Right), in the range -1.0f to 1.0f.
+	ovrVector2f.member("Thumbstick", size = 2)
 }
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", structName = "ovrLayerHeader") {
@@ -576,7 +576,7 @@ val ovrLayerDirect = struct(OVR_PACKAGE, "OVRLayerDirect", structName = "ovrLaye
 
 // OVR_CAPI_GL.h
 
-val ovrGLTextureData = 	struct(OVR_PACKAGE, "OVRGLTextureData", structName = "ovrGLTextureData") {
+val ovrGLTextureData = struct(OVR_PACKAGE, "OVRGLTextureData", structName = "ovrGLTextureData") {
 	documentation = "OpenGL texture data."
 	includeOVRCAPI_GL()
 

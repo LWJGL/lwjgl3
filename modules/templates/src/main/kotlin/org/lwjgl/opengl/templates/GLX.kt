@@ -103,7 +103,7 @@ val GLX = "GLX".nativeClassGLX("GLX") {
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		nullable..nullTerminated..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
+		nullable..NullTerminated..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
 
 		returnDoc =
 		"""

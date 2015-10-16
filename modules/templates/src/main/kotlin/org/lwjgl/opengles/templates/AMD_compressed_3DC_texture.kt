@@ -18,7 +18,7 @@ val AMD_compressed_3DC_texture = "AMDCompressed3DCTexture".nativeClassGLES("AMD_
 			A compression format for two component textures. When used to store normal vectors, the two components are commonly used with a fragment shader
 			that derives the third component.
 			""",
-		    "A compression format for single component textures. The single component may be used as a luminance or an alpha value."
+			"A compression format for single component textures. The single component may be used as a luminance or an alpha value."
 		)}
 		There are a large number of games that use luminance only and/or alpha only textures. For example, monochrome light maps used in a few popular games
 		are 8-bit luminance textures. This extension describes a compression format that provides a 2:1 compression ratio for 8-bit single channel textures.

@@ -83,7 +83,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"Creates an AL context.",
 
 		const..ALCdevice_p.IN("deviceHandle", "a valid device"),
-		nullable..nullTerminated..const..ALCint_p.IN(
+		nullable..NullTerminated..const..ALCint_p.IN(
 			"attrList",
 			"null or a zero terminated list of integer pairs composed of valid ALC attribute tokens and requested values",
 			ContextAttributes
@@ -231,7 +231,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		nullable..ALCdevice_p.IN("deviceHandle", "the device to query"),
 		ALCenum.IN("token", "the information to query", IntegerQueries),
 		AutoSize("dest")..ALCsizei.IN("size", "the size of the {@code dest} buffer"),
-		returnValue..ALCint_p.OUT("dest", "the destination buffer")
+		ReturnParam..ALCint_p.OUT("dest", "the destination buffer")
 	)
 
 }

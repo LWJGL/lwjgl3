@@ -89,7 +89,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		nullable..nullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
+		nullable..NullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
 		AutoSizeResult..int_p.OUT("nelements", "returns the number of GLXFBConfigs matched")
 	)
 
@@ -118,7 +118,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		DISPLAY,
 		GLXFBConfig.IN("config", "the GLXFBConfig"),
 		Window.IN("win", "the X Window"),
-		nullable..nullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}")
+		nullable..NullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}")
 	)
 
 	GLXPixmap(
@@ -128,7 +128,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		DISPLAY,
 		GLXFBConfig.IN("config", "the GLXFBConfig"),
 		Pixmap.IN("pixmap", "the X Pixmap"),
-		nullable..nullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}")
+		nullable..NullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}")
 	)
 
 	void(
@@ -145,7 +145,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 
 		DISPLAY,
 		GLXFBConfig.IN("config", "the GLXFBConfig"),
-		nullable..nullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}")
+		nullable..NullTerminated..const..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}")
 	)
 
 	void(

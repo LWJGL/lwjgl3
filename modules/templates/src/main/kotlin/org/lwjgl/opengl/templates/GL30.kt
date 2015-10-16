@@ -239,7 +239,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "GL20#CURRENT_VERTEX_ATTRIB"),
-		Check(4)..returnValue..GLint_p.OUT("params", "returns the requested data")
+		Check(4)..ReturnParam..GLint_p.OUT("params", "returns the requested data")
 	)
 
 	void(
@@ -248,7 +248,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "GL20#CURRENT_VERTEX_ATTRIB"),
-		Check(4)..returnValue..GLuint_p.OUT("params", "returns the requested data")
+		Check(4)..ReturnParam..GLuint_p.OUT("params", "returns the requested data")
 	)
 
 	// Uniform functions javadoc
@@ -338,7 +338,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		Check(1)..returnValue..GLuint_p.OUT("params", "the value of the specified uniform variable")
+		Check(1)..ReturnParam..GLuint_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	void(
@@ -637,21 +637,21 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"COLOR_ATTACHMENT14"..0x8CEE,
 		"COLOR_ATTACHMENT15"..0x8CEF,
 		"COLOR_ATTACHMENT16"..0x8CF0,
-        "COLOR_ATTACHMENT17"..0x8CF1,
-        "COLOR_ATTACHMENT18"..0x8CF2,
-        "COLOR_ATTACHMENT19"..0x8CF3,
-        "COLOR_ATTACHMENT20"..0x8CF4,
-        "COLOR_ATTACHMENT21"..0x8CF5,
-        "COLOR_ATTACHMENT22"..0x8CF6,
-        "COLOR_ATTACHMENT23"..0x8CF7,
-        "COLOR_ATTACHMENT24"..0x8CF8,
-        "COLOR_ATTACHMENT25"..0x8CF9,
-        "COLOR_ATTACHMENT26"..0x8CFA,
-        "COLOR_ATTACHMENT27"..0x8CFB,
-        "COLOR_ATTACHMENT28"..0x8CFC,
-        "COLOR_ATTACHMENT29"..0x8CFD,
-        "COLOR_ATTACHMENT30"..0x8CFE,
-        "COLOR_ATTACHMENT31"..0x8CFF,
+		"COLOR_ATTACHMENT17"..0x8CF1,
+		"COLOR_ATTACHMENT18"..0x8CF2,
+		"COLOR_ATTACHMENT19"..0x8CF3,
+		"COLOR_ATTACHMENT20"..0x8CF4,
+		"COLOR_ATTACHMENT21"..0x8CF5,
+		"COLOR_ATTACHMENT22"..0x8CF6,
+		"COLOR_ATTACHMENT23"..0x8CF7,
+		"COLOR_ATTACHMENT24"..0x8CF8,
+		"COLOR_ATTACHMENT25"..0x8CF9,
+		"COLOR_ATTACHMENT26"..0x8CFA,
+		"COLOR_ATTACHMENT27"..0x8CFB,
+		"COLOR_ATTACHMENT28"..0x8CFC,
+		"COLOR_ATTACHMENT29"..0x8CFD,
+		"COLOR_ATTACHMENT30"..0x8CFE,
+		"COLOR_ATTACHMENT31"..0x8CFF,
 		"DEPTH_ATTACHMENT"..0x8D00,
 		"STENCIL_ATTACHMENT"..0x8D20,
 		"DEPTH_STENCIL_ATTACHMENT"..0x821A
@@ -755,7 +755,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Generates renderbuffer object names.",
 
 		AutoSize("renderbuffers")..GLsizei.IN("n", "the number of renderbuffer object names to generate"),
-		returnValue..GLuint_p.OUT("renderbuffers", "a buffer in which the generated renderbuffer object names are stored")
+		ReturnParam..GLuint_p.OUT("renderbuffers", "a buffer in which the generated renderbuffer object names are stored")
 	)
 
 	void(
@@ -789,7 +789,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the target of the query operation", "#RENDERBUFFER"),
 		GLenum.IN("pname", "the parameter whose value to retrieve from the renderbuffer bound to {@code target}", RenderbufferParameters),
-		Check(1)..returnValue..GLint_p.OUT("params", "an array to receive the value of the queried parameter")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "an array to receive the value of the queried parameter")
 	)
 
 	GLboolean(
@@ -820,7 +820,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Generates framebuffer object names.",
 
 		AutoSize("framebuffers")..GLsizei.IN("n", "the number of framebuffer object names to generate"),
-		returnValue..GLuint_p.OUT("framebuffers", "a buffer in which the generated framebuffer object names are stored")
+		ReturnParam..GLuint_p.OUT("framebuffers", "a buffer in which the generated framebuffer object names are stored")
 	)
 
 	GLenum(
@@ -892,7 +892,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("target", "the target of the query operation", FramebufferTargets),
 		GLenum.IN("attachment", "the attachment within {@code target}", FramebufferAttachments),
 		GLenum.IN("pname", "the parameter of {@code attachment} to query", FramebufferParameters),
-		Check(1)..returnValue..GLint_p.OUT("params", "an array to receive the value of the queried parameter")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "an array to receive the value of the queried parameter")
 	)
 
 	void(
@@ -999,7 +999,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the symbolic name of a texture parameter"),
-		Check(1)..returnValue..GLint_p.OUT("params", "returns the texture parameter value")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "returns the texture parameter value")
 	)
 
 	void(
@@ -1008,7 +1008,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the symbolic name of a texture parameter"),
-		Check(1)..returnValue..GLuint_p.OUT("params", "returns the texture parameter value")
+		Check(1)..ReturnParam..GLuint_p.OUT("params", "returns the texture parameter value")
 	)
 
 	// EXT_texture_array
@@ -1062,7 +1062,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		Check(1)..returnValue..GLboolean_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLboolean_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet")..void(
@@ -1071,7 +1071,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		Check(1)..returnValue..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	void(
@@ -1312,7 +1312,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Generates vertex array object names.",
 
 		AutoSize("arrays")..GLsizei.IN("n", "the number of vertex array object names to generate"),
-		returnValue..GLuint_p.OUT("arrays", "a buffer in which the generated vertex array object names are stored")
+		ReturnParam..GLuint_p.OUT("arrays", "a buffer in which the generated vertex array object names are stored")
 	)
 
 	GLboolean(

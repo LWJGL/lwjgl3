@@ -65,18 +65,18 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    "$INVALID_MEM_OBJECT is generated if the {@code buffer} parameter of clEnqueueWaitSignalAMD is not a valid buffer.",
-	        "$INVALID_COMMAND_QUEUE is generated if the {@code command_queue} parameter of clEnqueueWaitSignalAMD is not a valid command queue.",
-	        """
+			"$INVALID_MEM_OBJECT is generated if the {@code buffer} parameter of clEnqueueWaitSignalAMD is not a valid buffer.",
+			"$INVALID_COMMAND_QUEUE is generated if the {@code command_queue} parameter of clEnqueueWaitSignalAMD is not a valid command queue.",
+			"""
 	        $INVALID_MEM_OBJECT is generated if the {@code buffer} parameter of clEnqueueWaitSignalAMD does not represent a buffer allocated with
 	        #MEM_BUS_ADDRESSABLE_AMD.
 	        """,
-		    "$INVALID_VALUE is generated if the signal address used by clEnqueueWaitSignalAMD of {@code bufffer} is invalid (for example 0)."
-	    )}
+			"$INVALID_VALUE is generated if the signal address used by clEnqueueWaitSignalAMD of {@code bufffer} is invalid (for example 0)."
+		)}
 	    """
 	)
 
@@ -96,22 +96,22 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    "$INVALID_MEM_OBJECT is generated if the {@code buffer} parameter of clEnqueueWriteSignalAMD is not a valid buffer.",
-	        "$INVALID_COMMAND_QUEUE is generated if the {@code command_queue} parameter of clEnqueueWriteSignalAMD is not a valid command queue.",
-	        """
+			"$INVALID_MEM_OBJECT is generated if the {@code buffer} parameter of clEnqueueWriteSignalAMD is not a valid buffer.",
+			"$INVALID_COMMAND_QUEUE is generated if the {@code command_queue} parameter of clEnqueueWriteSignalAMD is not a valid command queue.",
+			"""
 	        $INVALID_MEM_OBJECT is generated if the {@code buffer} parameter of clEnqueueWriteSignalAMD does not represent a buffer defined as
 	        #MEM_EXTERNAL_PHYSICAL_AMD.
 	        """,
-	        """
+			"""
 	        $INVALID_BUFFER_SIZE is generated if the {@code offset} parameter of clEnqueueWriteSignalAMD would lead to a write beyond the size of
 	        {@code buffer}.
 	        """,
-	        "$INVALID_VALUE is generated if the signal address used by clEnqueueWriteSignalAMD of {@code bufffer} is invalid (for example 0)."
-	    )}
+			"$INVALID_VALUE is generated if the signal address used by clEnqueueWriteSignalAMD of {@code bufffer} is invalid (for example 0)."
+		)}
 	    """
 	)
 
@@ -133,20 +133,20 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-		    "$INVALID_OPERATION is generated if any of the pointer parameters of clEnqueueMakeBuffersResidentAMD are $NULL (and count is &gt; 0).",
-	        """
+			"$INVALID_OPERATION is generated if any of the pointer parameters of clEnqueueMakeBuffersResidentAMD are $NULL (and count is &gt; 0).",
+			"""
 	        $INVALID_OPERATION is generated if any of the mem_objects passed to clEnqueueMakeBuffersResidentAMD was not a valid cl_mem object created with
 	        #MEM_BUS_ADDRESSABLE_AMD flag.
 	        """,
-	        """
+			"""
 	        CL10#OUT_OF_HOST_MEMORY is generated if any of the mem_objects passed to clEnqueueMakeBuffersResidentAMD could not be made resident so that the buffer
 	        or signal bus addresses will be returned as 0.
 	        """
-	    )}
+		)}
 	    """
 	)
 }

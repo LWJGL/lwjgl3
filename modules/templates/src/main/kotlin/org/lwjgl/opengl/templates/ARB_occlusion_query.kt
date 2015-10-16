@@ -22,7 +22,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 		The earlier ${registryLinkTo("HP", "occlusion_test")} extension defined a similar mechanism, but it had two major shortcomings.
 		${ul(
 			"It returned the result as a simple GL11#TRUE/GL11#FALSE result, when in fact it is often useful to know exactly how many samples were drawn.",
-		    """
+			"""
 			It provided only a simple "stop-and-wait" model for using multiple queries. The application begins an occlusion test and ends it; then, at some
 			later point, it asks for the result, at which point the driver must stop and wait until the result from the previous test is back before the
 			application can even begin the next one. This is a very simple model, but its performance is mediocre when an application wishes to perform many
@@ -41,13 +41,13 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 			Knowing exactly how many pixels an object might cover may help the application decide which level-of-detail model should be used. If only a few
 			pixels are visible, a low-detail model may be acceptable.
 			""",
-		    """
+			"""
 		    "Depth peeling" techniques, such as order-independent transparency, need to know when to stop rendering more layers; it is difficult to determine a
 		    priori how many layers are needed. A boolean result allows applications to stop when more layers will not affect the image at all, but this will
 		    likely result in unacceptable performance. Instead, it makes more sense to stop rendering when the number of pixels in each layer falls below a
 		    given threshold.
 		    """,
-		    """
+			"""
 		    Occlusion queries can replace glReadPixels of the depth buffer to determine whether (for example) a light source is visible for the purposes of a
 		    lens flare effect or a halo to simulate glare. Pixel counts allow you to compute the percentage of the light source that is visible, and the
 		    brightness of these effects can be modulated accordingly.
@@ -82,7 +82,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 		"Generates query object names.",
 
 		AutoSize("ids")..GLsizei.IN("n", "the number of query object names to be generated"),
-		returnValue..GLuint_p.OUT("ids", "a buffer in which the generated query object names are stored")
+		ReturnParam..GLuint_p.OUT("ids", "a buffer in which the generated query object names are stored")
 	)
 
 	void(
@@ -121,7 +121,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
 		GLenum.IN("target", "the query object target", QUERY_TARGETS),
 		GLenum.IN("pname", "the symbolic name of a query object target parameter", QUERY_PARAMETERS),
-		Check(1)..returnValue..GLint_p.OUT("params", "the requested data")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "the requested data")
 	)
 
 	void(
@@ -130,7 +130,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-		Check(1)..returnValue..GLint_p.OUT("params", "the requested data")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "the requested data")
 	)
 
 	void(
@@ -139,7 +139,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-		Check(1)..returnValue..GLuint_p.OUT("params", "the requested data")
+		Check(1)..ReturnParam..GLuint_p.OUT("params", "the requested data")
 	)
 
 }

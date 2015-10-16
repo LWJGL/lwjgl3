@@ -100,7 +100,7 @@ object AutoSizeResult : ParameterModifier() {
 				PrimitiveMapping.POINTER -> {
 				}
 				else                     -> {
-					throw IllegalArgumentException("The autoSizeResult modifier on input parameters can only be applied on integer primitive types.")
+					throw IllegalArgumentException("The AutoSizeResult modifier on input parameters can only be applied on integer primitive types.")
 				}
 			}
 		else if ( param.paramType === ParameterType.OUT )
@@ -109,11 +109,11 @@ object AutoSizeResult : ParameterModifier() {
 				PointerMapping.DATA_POINTER -> {
 				}
 				else                        -> {
-					throw IllegalArgumentException("The autoSizeResult modifier on output parameters can only be applied on integer pointer types.")
+					throw IllegalArgumentException("The AutoSizeResult modifier on output parameters can only be applied on integer pointer types.")
 				}
 			}
 		else
-			throw IllegalArgumentException("The autoSizeResult modifier cannot be used on in/out parameters.")
+			throw IllegalArgumentException("The AutoSizeResult modifier cannot be used on in/out parameters.")
 	}
 }
 
@@ -180,7 +180,7 @@ class Terminated(val value: String) : ParameterModifier() {
 }
 
 /** Marks a buffer parameter as null-terminated. */
-val nullTerminated = Terminated("")
+val NullTerminated = Terminated("")
 
 /** Marks a parameter to be replaced with an expression. */
 class Expression(
@@ -248,11 +248,11 @@ class MultiType(vararg val types: PointerMapping) : ParameterModifier() {
 
 }
 
-/** Marks a char pointer parameter to become the return value of an alternative method. */
+/** Marks a pointer parameter to become the return value of an alternative method. */
 class Return(
-	/** The parameter that returns the actual string size */
-	val lengthParam: String?,
-	/** An expression that defines the maxLength value. If defined an additional alternative method will be generated. */
+	/** The parameter that returns the actual buffer size */
+	val lengthParam: String,
+	/** An expression that defines the maxLength value. If defined, an additional alternative method will be generated. */
 	val maxLengthExpression: String? = null
 ) : ParameterModifier() {
 	companion object : ModifierKey<Return>
@@ -260,18 +260,18 @@ class Return(
 	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
-			throw IllegalArgumentException("The returnValue modifier can only be applied on pointer types.")
+			throw IllegalArgumentException("The Return modifier can only be applied on pointer types.")
 
 		if ( param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The returnValue modifier cannot be applied on opaque pointer types.")
+			throw IllegalArgumentException("The Return modifier cannot be applied on opaque pointer types.")
 
 		if ( param.paramType !== ParameterType.OUT )
-			throw IllegalArgumentException("The returnValue modifier can only be applied on output parameters.")
+			throw IllegalArgumentException("The Return modifier can only be applied on output parameters.")
 	}
 }
 
 /** Used for simple return values. */
-val returnValue = Return("", "")
+val ReturnParam = Return("", null)
 
 /** Marks a buffer parameter to transform to a single element value in an alternative method. */
 class SingleValue(val newName: String) : ParameterModifier() {

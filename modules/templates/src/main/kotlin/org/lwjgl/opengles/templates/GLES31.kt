@@ -241,7 +241,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -251,7 +251,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 		GLuint.IN("program", ""),
 		GLenum.IN("programInterface", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	GLuint(
@@ -347,7 +347,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 		"",
 
 		AutoSize("pipelines")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("pipelines", "")
+		ReturnParam..GLuint_p.OUT("pipelines", "")
 	)
 
 	GLboolean(
@@ -363,7 +363,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
 		GLuint.IN("pipeline", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -750,7 +750,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		returnValue..Check(1)..GLboolean_p.OUT("data", "")
+		ReturnParam..Check(1)..GLboolean_p.OUT("data", "")
 	)
 
 	void(
@@ -785,7 +785,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
 		GLenum.IN("pname", ""),
 		GLuint.IN("index", ""),
-		returnValue..Check(1)..GLfloat_p.OUT("val", "")
+		ReturnParam..Check(1)..GLfloat_p.OUT("val", "")
 	)
 
 	void(
@@ -803,7 +803,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 		GLenum.IN("target", ""),
 		GLint.IN("level", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -813,7 +813,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 		GLenum.IN("target", ""),
 		GLint.IN("level", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLfloat_p.OUT("params", "")
+		ReturnParam..Check(1)..GLfloat_p.OUT("params", "")
 	)
 
 	void(

@@ -63,7 +63,7 @@ val NV_transform_feedback2 = "NVTransformFeedback2".nativeClassGL("NV_transform_
 		"",
 
 		AutoSize("ids")..GLsizei.IN("n", ""),
-		Check(1)..returnValue..GLuint_p.OUT("ids", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("ids", "")
 	)
 
 	GLboolean(

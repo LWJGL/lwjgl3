@@ -137,7 +137,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 		ALuint.IN("buffer", "the buffer to query"),
 		ALenum.IN("param", "the parameter to query"),
-		Check(1)..returnValue..ALint_p.OUT("value", "the parameter value")
+		Check(1)..ReturnParam..ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -155,7 +155,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 		ALuint.IN("buffer", "the buffer to query"),
 		ALenum.IN("param", "the parameter to query"),
-		Check(1)..returnValue..ALfloat_p.OUT("value", "the parameter value")
+		Check(1)..ReturnParam..ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(

@@ -45,7 +45,7 @@ val EXT_framebuffer_multisample = "EXTFramebufferMultisample".nativeClassGL("EXT
 		lead to two problematic situations:
 		${ul(
 			"Two contexts, which shared renderbuffers, might perform competing resolve operations into the same single-sample buffer with ambiguous results.",
-		    "It would have introduced the unfortunate ability to use the single-sample buffer as a texture while MULTISAMPLE is ENABLED."
+			"It would have introduced the unfortunate ability to use the single-sample buffer as a texture while MULTISAMPLE is ENABLED."
 		)}
 		By using the BlitFramebufferEXT from EXT_framebuffer_blit as an explicit resolve to serialize access to the multisampled contents and eliminate the
 		implicit per-sample resolve operation, we avoid both of these problems.

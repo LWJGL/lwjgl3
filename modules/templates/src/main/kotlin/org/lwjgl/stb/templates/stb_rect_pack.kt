@@ -26,7 +26,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 	EnumConstant(
 		"Packing heuristics",
 
-	    "HEURISTIC_Skyline_default".enum,
+		"HEURISTIC_Skyline_default".enum,
 		"HEURISTIC_Skyline_BL_sortHeight" expr "STBRP_HEURISTIC_Skyline_default",
 		"HEURISTIC_Skyline_BF_sortHeight".enum
 	)
@@ -68,7 +68,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 		Note: to guarantee best results, either:
 		${ol(
 			"make sure {@code num_nodes &ge; width}",
-		    "or, call #setup_allow_out_of_mem() with {@code allow_out_of_mem = 1}"
+			"or, call #setup_allow_out_of_mem() with {@code allow_out_of_mem = 1}"
 		)}
 		If you don't do either of the above things, widths will be quantized to multiples of small integers to guarantee the algorithm doesn't run out of
 		temporary storage.

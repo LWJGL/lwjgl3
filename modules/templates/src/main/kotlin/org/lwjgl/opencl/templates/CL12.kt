@@ -349,7 +349,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		""",
 
 		cl_device_id.IN("in_device", "the device to be partitioned"),
-		nullTerminated..const..cl_device_partition_property.IN(
+		NullTerminated..const..cl_device_partition_property.IN(
 			"properties",
 			"""
 			specifies how {@code in_device} is to be partition described by a partition name and its corresponding value. Each partition name is immediately
@@ -467,7 +467,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
+		returnDoc =
 		"""
 		a valid non-zero image object and the $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
 		value with one of the following error values returned in $errcode_ret:

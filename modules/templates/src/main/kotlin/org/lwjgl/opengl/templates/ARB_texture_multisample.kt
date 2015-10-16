@@ -18,7 +18,7 @@ val ARB_texture_multisample = "ARBTextureMultisample".nativeClassGL("ARB_texture
 		This extension also includes the following functionality, first described in ${registryLinkTo("NV", "explicit_multisample")}:
 		${ul(
 			"A query in the API to query the location of samples within the pixel",
-		    "An explicit control for the multisample sample mask to augment the control provided by SampleCoverage"
+			"An explicit control for the multisample sample mask to augment the control provided by SampleCoverage"
 		)}
 
 		${GL32.promoted}

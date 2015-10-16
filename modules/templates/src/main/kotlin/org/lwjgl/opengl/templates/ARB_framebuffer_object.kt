@@ -20,16 +20,16 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		ARB_framebuffer_object is an extension intended to address the following goals:
 		${ul(
 			"Reflect FBO-related functionality found in the OpenGL 3.0 specification.",
-		    """
+			"""
 		    Integrate multiple disjoint extensions into a single ARB extension. These extensions are:
 		    ${ul(
-			    registryLinkTo("EXT", "framebuffer_object"),
-			    registryLinkTo("EXT", "framebuffer_blit"),
-			    registryLinkTo("EXT", "framebuffer_multisample"),
-			    registryLinkTo("EXT", "packed_depth_stencil")
-		    )}
+				registryLinkTo("EXT", "framebuffer_object"),
+				registryLinkTo("EXT", "framebuffer_blit"),
+				registryLinkTo("EXT", "framebuffer_multisample"),
+				registryLinkTo("EXT", "packed_depth_stencil")
+			)}
 		    """,
-		    """
+			"""
 		    Where appropriate, relax some of the constraints expressed by previous FBO-related extensions. In particular the requirement of matching attachment
 		    dimensions and component sizes has been relaxed, to allow implementations the freedom to support more flexible usages where possible.
 		    """
@@ -165,32 +165,32 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		Glossary of Helpful Terms
 		${ul(
 			"<b>logical buffer</b> &ndash; One of the color, depth, or stencil buffers of the framebuffer.",
-		    "framebuffer: The collection of logical buffers and associated state defining where the output of GL rendering is directed.",
-		    """
+			"framebuffer: The collection of logical buffers and associated state defining where the output of GL rendering is directed.",
+			"""
 		    texture: an object which consists of one or more 2D arrays of pixel images and associated state that can be used as a source of data during the texture-mapping process.
 		    """,
-		    """
+			"""
 		    <b>texture image</b> &ndash; one of the 2D arrays of pixels that are part of a texture object. Texture images contain and define the texels of the
 		    texture object.
 		    """,
-		    """
+			"""
 		    <b>renderbuffer</b> &ndash; A new type of storage object which contains a single 2D array of pixels and associated state that can be used as a
 		    destination for pixel data written during the rendering process.
 		    """,
-		    """
+			"""
 		    <b>renderbuffer image</b> &ndash; The 2D array of pixels that is part of a renderbuffer object. A renderbuffer image contains and defines the pixels
 		    of the renderbuffer object.
 		    """,
-		    """
+			"""
 		    <b>framebuffer-attachable image</b> &ndash; A 2D pixel image that can be attached to one of the logical buffer attachment points of a framebuffer
 		    object. Texture images and renderbuffer images are two examples of framebuffer-attachable images.
 		    """,
-		    """
+			"""
 		    <b>attachment point</b> &ndash; The set of state which references a specific framebuffer-attachable image, and allows that framebuffer-attachable
 		    image to be used to store the contents of a logical buffer of a framebuffer object. There is an attachment point state vector for each color, depth,
 		    and stencil buffer of a framebuffer.
 		    """,
-		    """
+			"""
 		    <b>attach</b> &ndash; The act of connecting one object to another object.
 
             An "attach" operation is similar to a "bind" operation in that both represent a reference to the attached or bound object for the purpose of
@@ -202,11 +202,11 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 			Finally, if object "A" is attached to object "B" and object "B" is bound to context "C", then in most respects, we treat "A" as if it is
 			<em>implicitly</em> bound to "C".
 		    """,
-		    """
+			"""
 		    <b>framebuffer attachment completeness</b> &ndash; Similar to texture "mipmap" or "cube" completeness, defines a minimum set of criteria for
 		    framebuffer attachment points.
 		    """,
-		    """
+			"""
 		    <b>framebuffer completeness</b> &ndash; Similar to texture "mipmap cube completeness", defines a composite set of "completeness" requirements and
 		    relationships among the attached framebuffer-attachable images.
 		    """

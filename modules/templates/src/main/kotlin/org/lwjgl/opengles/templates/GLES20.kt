@@ -742,7 +742,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		AutoSize("buffers")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("buffers", "")
+		ReturnParam..GLuint_p.OUT("buffers", "")
 	)
 
 	void(
@@ -757,7 +757,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		AutoSize("framebuffers")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("framebuffers", "")
+		ReturnParam..GLuint_p.OUT("framebuffers", "")
 	)
 
 	void(
@@ -765,7 +765,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		AutoSize("renderbuffers")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("renderbuffers", "")
+		ReturnParam..GLuint_p.OUT("renderbuffers", "")
 	)
 
 	void(
@@ -773,7 +773,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		AutoSize("textures")..GLsizei.IN("n", ""),
-		returnValue..GLuint_p.OUT("textures", "")
+		ReturnParam..GLuint_p.OUT("textures", "")
 	)
 
 	void(
@@ -834,7 +834,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLboolean_p.OUT("data", "")
+		ReturnParam..Check(1)..GLboolean_p.OUT("data", "")
 	)
 
 	void(
@@ -843,7 +843,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	GLenum(
@@ -856,7 +856,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLfloat_p.OUT("data", "")
+		ReturnParam..Check(1)..GLfloat_p.OUT("data", "")
 	)
 
 	void(
@@ -866,7 +866,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		GLenum.IN("target", ""),
 		GLenum.IN("attachment", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -874,7 +874,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("data", "")
+		ReturnParam..Check(1)..GLint_p.OUT("data", "")
 	)
 
 	void(
@@ -883,7 +883,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLuint.IN("program", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -905,7 +905,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -914,7 +914,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLuint.IN("shader", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -963,7 +963,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLfloat_p.OUT("params", "")
+		ReturnParam..Check(1)..GLfloat_p.OUT("params", "")
 	)
 
 	void(
@@ -972,7 +972,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -981,7 +981,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		returnValue..Check(1)..GLfloat_p.OUT("params", "")
+		ReturnParam..Check(1)..GLfloat_p.OUT("params", "")
 	)
 
 	void(
@@ -990,7 +990,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	GLint(
@@ -1025,7 +1025,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLuint.IN("index", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..void_pp.OUT("pointer", "")
+		ReturnParam..Check(1)..void_pp.OUT("pointer", "")
 	)
 
 	void(

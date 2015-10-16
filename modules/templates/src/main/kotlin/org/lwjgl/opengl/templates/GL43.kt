@@ -107,13 +107,13 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
 		nullable..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("data",
-				"""
-		    buffer containing the data to be used as the source of the constant fill value.
-				The elements of data are converted by the GL into the format specified by internalformat,
-				and then used to fill the specified range of the destination buffer.
-				If data is $NULL, then it is ignored and the sub-range of the buffer is filled with zeros.
-				"""
+		)..const..void_p.IN(
+			"data",
+			"""
+		    the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
+		    specified by internalformat, and then used to fill the specified range of the destination buffer. If data is $NULL, then it is ignored and the
+		    sub-range of the buffer is filled with zeros.
+			"""
 		)
 	)
 
@@ -129,13 +129,13 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
 		nullable..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("data",
-				"""
-		    buffer containing the data to be used as the source of the constant fill value.
-				The elements of data are converted by the GL into the format specified by internalformat,
-				and then used to fill the specified range of the destination buffer.
-				If data is $NULL, then it is ignored and the sub-range of the buffer is filled with zeros.
-				"""
+		)..const..void_p.IN(
+			"data",
+			"""
+		    the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
+		    specified by internalformat, and then used to fill the specified range of the destination buffer. If data is $NULL, then it is ignored and the
+		    sub-range of the buffer is filled with zeros.
+			"""
 		)
 	)
 
@@ -377,11 +377,11 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 			If {@code source}, {@code type}, or {@code severity} is GL11#DONT_CARE, the messages from all sources, of all types, or of all severities are
 			referenced respectively.
 			""",
-		    """
+			"""
 		    When values other than GL11#DONT_CARE are specified, all messages whose source, type, or severity match the specified {@code source}, {@code type},
 		    or {@code severity} respectively will be referenced.
 		    """,
-		    """
+			"""
 		    If {@code count} is greater than zero, then {@code ids} is an array of {@code count} message IDs for the specified combination of {@code source} and
 		    {@code type}. In this case, if {@code source} or {@code type} is GL11#DONT_CARE, or {@code severity} is not GL11#DONT_CARE, the error
 		    GL11#INVALID_OPERATION is generated.
@@ -482,15 +482,16 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		string in the array will also be null-terminated. The maximum size of {@code messageLog}, including the space used by all null terminators, is given by
 		{@code bufSize}. If {@code bufSize} is less than zero and {@code messageLog} is not $NULL, an GL11#INVALID_VALUE error will be generated. If a message's
 		string, including its null terminator, can not fully fit within the {@code messageLog} array's remaining space, then that message and any subsequent
-		messages will not be fetched and will remain in the log. The string lengths stored in the array {@code lengths} include the space for the null terminator of each string.
+		messages will not be fetched and will remain in the log. The string lengths stored in the array {@code lengths} include the space for the null
+		terminator of each string.
   
 		Any or all of the arrays {@code sources}, {@code types}, {@code ids}, {@code severities}, {@code lengths} and {@code messageLog} can also be null
 		pointers, which causes the attributes for such arrays to be discarded when messages are fetched, however those messages will still be removed from the
-		log. Thus to simply delete up to {@code count} messages from the message log while ignoring their attributes, the application can call the function with
-		null pointers for all attribute arrays.
+		log. Thus to simply delete up to {@code count} messages from the message log while ignoring their attributes, the application can call the function
+		with null pointers for all attribute arrays.
 
-		If the context was created without the #CONTEXT_FLAG_DEBUG_BIT in the GL30#CONTEXT_FLAGS state, then the GL can opt to never add messages to the message
-		log so GetDebugMessageLog will always return zero.
+		If the context was created without the #CONTEXT_FLAG_DEBUG_BIT in the GL30#CONTEXT_FLAGS state, then the GL can opt to never add messages to the
+		message log so GetDebugMessageLog will always return zero.
 		""",
 
 		GLuint.IN("count", "the number of debug messages to retrieve from the log"),
@@ -632,7 +633,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 		GLenum.IN("target", "target of the operation", "GL30#READ_FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#FRAMEBUFFER"),
 		GLenum.IN("pname", "a token indicating the parameter to be retrieved", FramebufferParameters),
-		Check(1)..returnValue..GLint_p.OUT("params", "a variable to receive the value of the parameter named {@code pname}")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "a variable to receive the value of the parameter named {@code pname}")
 	)
 
 	// ARB_internalformat_query2
@@ -760,7 +761,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN("internalformat", "the internal format about which to retrieve information"),
 		GLenum.IN("pname", "the type of information to query"),
 		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values that may be written to params by the function"),
-		returnValue..GLint64_p.OUT("params", "a variable into which to write the retrieved information")
+		ReturnParam..GLint64_p.OUT("params", "a variable into which to write the retrieved information")
 	)
 
 	// ARB_invalidate_subdata
@@ -975,7 +976,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLuint.IN("program", "the name of a program object whose interface to query"),
 		GLenum.IN("programInterface", "a token identifying the interface within {@code program} to query", ProgramInterfaces),
 		GLenum.IN("pname", "the name of the parameter within {@code programInterface} to query", ProgramInterfaceParameters),
-		Check(1)..returnValue..GLint_p.OUT("params", "a variable to retrieve the value of {@code pname} for the program interface")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "a variable to retrieve the value of {@code pname} for the program interface")
 	)
 
 	GLuint(

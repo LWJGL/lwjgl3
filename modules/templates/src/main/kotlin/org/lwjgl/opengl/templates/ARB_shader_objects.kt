@@ -449,7 +449,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("obj", "the object to query"),
 		GLenum.IN("pname", "the parameter to query", Parameters),
-		Check(1)..returnValue..GLint_p.OUT("params", "a buffer in which to return the parameter value")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
 	void(
@@ -580,7 +580,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("programObj", "the program object to query"),
 		uniformLocation,
-		Check(1)..returnValue..GLfloat_p.OUT("params", "a buffer in which to return the uniform values")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "a buffer in which to return the uniform values")
 	)
 
 	void(
@@ -589,7 +589,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("programObj", "the program object to query"),
 		uniformLocation,
-		Check(1)..returnValue..GLint_p.OUT("params", "a buffer in which to return the uniform values")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "a buffer in which to return the uniform values")
 	)
 
 	void(
@@ -603,7 +603,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		""",
 
 		GLhandleARB.IN("obj", "the shader object to query"),
-		AutoSize("source").. GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code source}"),
+		AutoSize("source")..GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code source}"),
 		Check(1)..nullable..GLsizei_p.OUT(
 			"length",
 			"""

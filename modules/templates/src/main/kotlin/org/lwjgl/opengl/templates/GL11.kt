@@ -1575,7 +1575,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		AutoSize("textures")..GLsizei.IN("n", "the number of textures to create"),
-		returnValue..GLuint_p.OUT("textures", "a scalar or buffer in which to place the returned texture names")
+		ReturnParam..GLuint_p.OUT("textures", "a scalar or buffer in which to place the returned texture names")
 	)
 
 	void(
@@ -1616,7 +1616,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		Check(1)..returnValue..GLboolean_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLboolean_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet")..void(
@@ -1630,7 +1630,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet")..void(
@@ -1644,7 +1644,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		Check(1)..returnValue..GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet")..void(
@@ -1658,7 +1658,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		Check(1)..returnValue..GLdouble_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLdouble_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLenum(
@@ -1684,7 +1684,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			#SPOT_DIRECTION #SPOT_EXPONENT #SPOT_CUTOFF
 			"""
 		),
-		Check(4)..returnValue..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4)..ReturnParam..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	DeprecatedGL..void(
@@ -1693,7 +1693,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("light", "the light for which to return information"),
 		GLenum.IN("pname", "the light parameter to query"),
-		Check(4)..returnValue..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4)..ReturnParam..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 
@@ -1703,7 +1703,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the evaluator target", "$MAP1_TARGETS $MAP2_TARGETS"),
 		GLenum.IN("query", "the information to query", "GL11#ORDER GL11#COEFF GL11#DOMAIN"),
-		Check(4)..returnValue..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4)..ReturnParam..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	DeprecatedGL..void(
@@ -1712,7 +1712,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the evaluator map"),
 		GLenum.IN("query", "the information to query"),
-		Check(4)..returnValue..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4)..ReturnParam..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	DeprecatedGL..void(
@@ -1721,7 +1721,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the evaluator map"),
 		GLenum.IN("query", "the information to query"),
-		Check(4)..returnValue..GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4)..ReturnParam..GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	DeprecatedGL..void(
@@ -1780,7 +1780,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			GL43#DEBUG_CALLBACK_FUNCTION GL43#DEBUG_CALLBACK_USER_PARAM
 			"""
 		),
-		Check(1)..returnValue..void_pp.OUT("params", "a buffer in which to place the returned pointer")
+		Check(1)..ReturnParam..void_pp.OUT("params", "a buffer in which to place the returned pointer")
 	)
 
 	DeprecatedGL..void(
@@ -1811,7 +1811,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			GL13#OPERAND2_RGB GL13#OPERAND0_ALPHA GL13#OPERAND1_ALPHA GL13#OPERAND2_ALPHA GL13#RGB_SCALE #ALPHA_SCALE
 			"""
 		),
-		Check(1)..returnValue..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	void(
@@ -1820,7 +1820,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("env", "the texture environment to query"),
 		GLenum.IN("pname", "the parameter to query"),
-		Check(1)..returnValue..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	DeprecatedGL..void(
@@ -1829,7 +1829,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("coord", "the coord to query", TEX_COORDS),
 		GLenum.IN("pname", "the parameter to query", "#EYE_PLANE #OBJECT_PLANE #TEXTURE_GEN_MODE"),
-		Check(1)..returnValue..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	DeprecatedGL..void(
@@ -1838,7 +1838,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("coord", "the coord to query"),
 		GLenum.IN("pname", "the parameter to query"),
-		Check(4)..returnValue..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4)..ReturnParam..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	DeprecatedGL..void(
@@ -1847,7 +1847,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("coord", "the coord to query"),
 		GLenum.IN("pname", "the parameter to query"),
-		Check(4)..returnValue..GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4)..ReturnParam..GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	void(
@@ -1892,7 +1892,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			GL31#TEXTURE_BUFFER_DATA_STORE_BINDING GL43#TEXTURE_BUFFER_OFFSET GL43#TEXTURE_BUFFER_SIZE
 			"""
 		),
-		Check(1)..returnValue..GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	void(
@@ -1902,7 +1902,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("target", "the texture image target"),
 		GLint.IN("level", "the level-of-detail number"),
 		GLenum.IN("pname", "the parameter to query"),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	void(
@@ -1925,7 +1925,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			GL43#TEXTURE_VIEW_NUM_LEVELS GL43#TEXTURE_VIEW_MIN_LAYER GL43#TEXTURE_VIEW_NUM_LAYERS GL11#TEXTURE_RESIDENT
 			"""
 		),
-		Check(1)..returnValue..GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	void(
@@ -1934,7 +1934,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the parameter to query"),
-		Check(1)..returnValue..GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	void(
@@ -1982,24 +1982,24 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	DeprecatedGL..void(
 		"IndexMask",
-	    """
+		"""
 	    The least significant n bits of mask, where n is the number of bits in a color index buffer, specify a mask. Where a 1 appears in this mask, the
 	    corresponding bit in the color index buffer (or buffers) is written; where a 0 appears, the bit is not written. This mask applies only in color index
 	    mode.
 	    """,
 
-	    GLuint.IN("mask", "the color index mask value")
+		GLuint.IN("mask", "the color index mask value")
 	)
 
 	DeprecatedGL..void(
 		"IndexPointer",
-	    "Specifies the location and organization of a color index array.",
+		"Specifies the location and organization of a color index array.",
 
-	    AutoType("pointer", GL_UNSIGNED_BYTE, GL_SHORT, GL_INT)..GLenum.IN(
-		    "type",
-		    "the data type of the values stored in the array",
-		    "#UNSIGNED_BYTE #SHORT #INT #FLOAT #DOUBLE"
-	     ),
+		AutoType("pointer", GL_UNSIGNED_BYTE, GL_SHORT, GL_INT)..GLenum.IN(
+			"type",
+			"the data type of the values stored in the array",
+			"#UNSIGNED_BYTE #SHORT #INT #FLOAT #DOUBLE"
+		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		ARRAY_BUFFER..const..void_p.IN("pointer", "the color index array data")
 	)

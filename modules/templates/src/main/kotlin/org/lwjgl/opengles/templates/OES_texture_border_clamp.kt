@@ -69,7 +69,7 @@ val OES_texture_border_clamp = "OESTextureBorderClamp".nativeClassGLES("OES_text
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -78,7 +78,7 @@ val OES_texture_border_clamp = "OESTextureBorderClamp".nativeClassGLES("OES_text
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLuint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLuint_p.OUT("params", "")
 	)
 
 	void(
@@ -105,7 +105,7 @@ val OES_texture_border_clamp = "OESTextureBorderClamp".nativeClassGLES("OES_text
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -114,6 +114,6 @@ val OES_texture_border_clamp = "OESTextureBorderClamp".nativeClassGLES("OES_text
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLuint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLuint_p.OUT("params", "")
 	)
 }

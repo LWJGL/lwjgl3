@@ -105,14 +105,14 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 
 		cl_accelerator_intel.IN("accelerator", "a valid accelerator object"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-		    "#INVALID_ACCELERATOR_INTEL if accelerator is a not a valid accelerator object.",
-	        OORE,
-	        OOHME
-	    )}
+			"#INVALID_ACCELERATOR_INTEL if accelerator is a not a valid accelerator object.",
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -146,18 +146,18 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-		    """
+			"""
 		    $INVALID_VALUE if {@code param_name} is not valid or if size in bytes specified by {@code param_value_size} is &lt; size of return type and
 		    {@code param_value} is not $NULL.
 			""",
-		    "#INVALID_ACCELERATOR_INTEL if accelerator is a not a valid accelerator object.",
-	        OORE,
-	        OOHME
-	    )}
+			"#INVALID_ACCELERATOR_INTEL if accelerator is a not a valid accelerator object.",
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 }

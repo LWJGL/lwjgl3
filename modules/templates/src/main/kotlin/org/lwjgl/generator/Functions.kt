@@ -225,10 +225,10 @@ class NativeClassFunction(
 
 			if ( it has AutoSizeResult ) {
 				if ( !returns.nativeType.isPointerData )
-					it.error("Return type is not an array: autoSizeResult")
+					it.error("Return type is not an array: AutoSizeResult")
 
 				if ( returns.nativeType is StructType && !returns.has(StructBuffer) )
-					it.error("Return type must be annotated with StructBuffer: autoSizeResult")
+					it.error("Return type must be annotated with StructBuffer: AutoSizeResult")
 			}
 
 			if ( it has AutoType ) {
@@ -251,7 +251,7 @@ class NativeClassFunction(
 					it.error("More than one return value found.")
 
 				val returnMod = it[Return]
-				if ( returnMod != returnValue ) {
+				if ( returnMod != ReturnParam ) {
 					if ( !hasAutoSizeFor(it) )
 						it.error("An AutoSize for Return parameter does not exist")
 
@@ -340,7 +340,7 @@ class NativeClassFunction(
 						PointerMapping.DATA_POINTER -> "P"
 						else                        -> "1"
 					}
-				checks add "${prefix}checkNT$postfix(${it.name}${it[Terminated] let { if ( it === nullTerminated ) "" else ", ${it.value}" }});"
+				checks add "${prefix}checkNT$postfix(${it.name}${it[Terminated] let { if ( it === NullTerminated ) "" else ", ${it.value}" }});"
 			}
 
 			if ( it has Check ) {
@@ -639,7 +639,7 @@ class NativeClassFunction(
 						} else if ( returns has Address )
 							print(", 1")
 						else
-							throw IllegalStateException("No autoSizeResult parameter could be found.")
+							throw IllegalStateException("No AutoSizeResult parameter could be found.")
 					}
 					println(");")
 				}
@@ -816,7 +816,7 @@ class NativeClassFunction(
 			if ( it has Return && !hasParam { it has PointerArray } ) {
 				val returnMod = it[Return]
 
-				if ( returnMod === returnValue ) {
+				if ( returnMod === ReturnParam ) {
 					// Generate Return alternative
 
 					if ( !hasParam { it has SingleValue || it has PointerArray } ) {
@@ -968,7 +968,7 @@ class NativeClassFunction(
 			generateAlternativeMethod(name, "Array version of:", transforms)
 
 			// Combine PointerArrayTransformSingle with BufferValueReturnTransform
-			getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
+			getParams { it has ReturnParam } forEach { applyReturnValueTransforms(it) }
 
 			// Single value version
 			val names = it.map {
@@ -1003,7 +1003,7 @@ class NativeClassFunction(
 				false
 			} else {
 				// Compine SingleValueTransform with BufferValueReturnTransform
-				getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
+				getParams { it has ReturnParam } forEach { applyReturnValueTransforms(it) }
 
 				// Transform the AutoSize parameter, if there is one
 				getParams(hasAutoSizePredicate(it)).forEach {
@@ -1181,7 +1181,7 @@ class NativeClassFunction(
 								}
 							}.join(" * ")}"
 						} else
-							throw IllegalStateException("No autoSizeResult parameter could be found.")
+							throw IllegalStateException("No AutoSizeResult parameter could be found.")
 					}
 					builder append ")"
 

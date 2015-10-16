@@ -73,6 +73,6 @@ val EXT_multiview_draw_buffers = "EXTMultiviewDrawBuffers".nativeClassGLES("EXT_
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		returnValue..Check(1)..GLint_p.OUT("data", "")
+		ReturnParam..Check(1)..GLint_p.OUT("data", "")
 	)
 }

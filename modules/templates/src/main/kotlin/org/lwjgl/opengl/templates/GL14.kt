@@ -17,7 +17,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		${ul(
 			registryLinkTo("SGIS", "generate_mipmap"),
 			registryLinkTo("NV", "blend_square"),
-		    "${registryLinkTo("ARB", "depth_texture")} and ${registryLinkTo("ARB", "shadow")}",
+			"${registryLinkTo("ARB", "depth_texture")} and ${registryLinkTo("ARB", "shadow")}",
 			registryLinkTo("EXT", "fog_coord"),
 			registryLinkTo("EXT", "multi_draw_arrays"),
 			registryLinkTo("ARB", "point_parameters"),

@@ -19,18 +19,18 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
 		built-in functions including:
 		${ul(
 			"square roots and inverse square roots;",
-		    "fused floating-point multiply-add operations;",
-		    """
+			"fused floating-point multiply-add operations;",
+			"""
 		    splitting a floating-point number into a significand and exponent (frexp), or building a floating-point number from a significand and exponent
 		    (ldexp);
 		    """,
-		    """
+			"""
 		    absolute value, sign tests, various functions to round to an integer value, modulus, minimum, maximum, clamping, blending two values, step
 		    functions, and testing for infinity and NaN values;
 		    """,
-		    "packing and unpacking doubles into a pair of 32-bit unsigned integers;",
-		    "matrix component-wise multiplication, and computation of outer products, transposes, determinants, and inverses; and",
-		    "vector relational functions."
+			"packing and unpacking doubles into a pair of 32-bit unsigned integers;",
+			"matrix component-wise multiplication, and computation of outer products, transposes, determinants, and inverses; and",
+			"vector relational functions."
 		)}
 
 		Double-precision versions of angle, trigonometry, and exponential functions are not supported.
@@ -91,7 +91,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
 	GL40 reuse "GetUniformdv"
 
 	val program = GLuint.IN("program", "the program object to update")
-	
+
 	var src = GL40["Uniform1d"]
 	IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(
 		"ProgramUniform1dEXT",

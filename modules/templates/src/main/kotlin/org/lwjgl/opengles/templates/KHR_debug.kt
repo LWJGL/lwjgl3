@@ -189,11 +189,11 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 			If {@code source}, {@code type}, or {@code severity} is GLES20#DONT_CARE, the messages from all sources, of all types, or of all severities are
 			referenced respectively.
 			""",
-		    """
+			"""
 		    When values other than GLES20#DONT_CARE are specified, all messages whose source, type, or severity match the specified {@code source}, {@code type},
 		    or {@code severity} respectively will be referenced.
 		    """,
-		    """
+			"""
 		    If {@code count} is greater than zero, then {@code ids} is an array of {@code count} message IDs for the specified combination of {@code source} and
 		    {@code type}. In this case, if {@code source} or {@code type} is GLES20#DONT_CARE, or {@code severity} is not GLES20#DONT_CARE, the error
 		    GLES20#INVALID_OPERATION is generated.
@@ -320,7 +320,7 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		"",
 
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..void_pp.OUT("params", "")
+		ReturnParam..Check(1)..void_pp.OUT("params", "")
 	)
 
 	void(

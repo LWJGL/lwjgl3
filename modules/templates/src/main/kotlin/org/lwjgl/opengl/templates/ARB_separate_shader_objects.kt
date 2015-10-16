@@ -86,7 +86,7 @@ val ARB_separate_shader_objects = "ARBSeparateShaderObjects".nativeClassGL("ARB_
 
 		"PROGRAM_PIPELINE_BINDING"..0x825A
 	)
-	
+
 	GL41 reuse "UseProgramStages"
 	GL41 reuse "ActiveShaderProgram"
 	GL41 reuse "CreateShaderProgramv"

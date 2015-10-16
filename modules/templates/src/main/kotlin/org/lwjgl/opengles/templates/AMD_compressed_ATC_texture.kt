@@ -18,8 +18,8 @@ val AMD_compressed_ATC_texture = "AMDCompressedATCTexture".nativeClassGLES("AMD_
 		Three compression formats are introduced:
 		${ul(
 			"A compression format for RGB textures.",
-		    "A compression format for RGBA textures using explicit alpha encoding.",
-		    "A compression format for RGBA textures using interpolated alpha encoding."
+			"A compression format for RGBA textures using explicit alpha encoding.",
+			"A compression format for RGBA textures using interpolated alpha encoding."
 		)}
 		"""
 

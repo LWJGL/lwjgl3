@@ -56,6 +56,6 @@ val OES_mapbuffer = "OESMapbuffer".nativeClassGLES("OES_mapbuffer", postfix = OE
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..void_pp.OUT("params", "")
+		ReturnParam..Check(1)..void_pp.OUT("params", "")
 	)
 }

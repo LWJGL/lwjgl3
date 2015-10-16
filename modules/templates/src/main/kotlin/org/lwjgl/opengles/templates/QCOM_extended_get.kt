@@ -79,7 +79,7 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
 		GLenum.IN("face", ""),
 		GLint.IN("level", ""),
 		GLenum.IN("pname", ""),
-		returnValue..Check(1)..GLint_p.OUT("params", "")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -113,6 +113,6 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
 		"",
 
 		GLenum.IN("target", ""),
-		returnValue..Check(1)..void_pp.OUT("params", "")
+		ReturnParam..Check(1)..void_pp.OUT("params", "")
 	)
 }

@@ -87,7 +87,7 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
 		AutoType("pointer", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-		    "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
+			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		ARRAY_BUFFER..void_p.IN("pointer", "the matrix index data")

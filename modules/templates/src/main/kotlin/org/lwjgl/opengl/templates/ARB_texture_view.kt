@@ -21,9 +21,9 @@ val ARB_texture_view = "ARBTextureView".nativeClassGL("ARB_texture_view") {
 		No new object types are added. Conceptually, a texture object is split into the following parts:
 		${ul(
 			"A data store holding texel data.",
-		    "State describing which portions of the data store to use, and how to interpret the data elements.",
-		    "An embedded sampler object.",
-		    "Various other texture parameters."
+			"State describing which portions of the data store to use, and how to interpret the data elements.",
+			"An embedded sampler object.",
+			"Various other texture parameters."
 		)}
 
 		With this extension, multiple textures can share a data store and have different state describing which portions of the data store to use and how to

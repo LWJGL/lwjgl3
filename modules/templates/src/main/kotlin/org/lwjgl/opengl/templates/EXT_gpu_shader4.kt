@@ -19,57 +19,57 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 			New texture lookup functions are provided that allow shaders to access individual texels using integer coordinates referring to the texel location
 			and level of detail. No filtering is performed. These functions allow applications to use textures as one-, two-, and three-dimensional arrays.
 			""",
-		    "New texture lookup functions are provided that allow shaders to query the dimensions of a specific level-of-detail image of a texture object.",
-		    """
+			"New texture lookup functions are provided that allow shaders to query the dimensions of a specific level-of-detail image of a texture object.",
+			"""
 		    New texture lookup functions variants are provided that allow shaders to pass a constant integer vector used to offset the texel locations used
 			during the lookup to assist in custom texture filtering operations.
 		    """,
-		    """
+			"""
 		    New texture lookup functions are provided that allow shaders to access one- and two-dimensional array textures. The second, or third, coordinate is
 			used to select the layer of the array to access.
 		    """,
-		    """
+			"""
 		    New "Grad" texture lookup functions are provided that allow shaders to explicitely pass in derivative values which are used by the GL to compute the
 			level-of-detail when performing a texture lookup.
 		    """,
-		    "A new texture lookup function is provided to access a buffer texture.",
-		    "The existing absolute LOD texture lookup functions are no longer restricted to the vertex shader only.",
-		    """
+			"A new texture lookup function is provided to access a buffer texture.",
+			"The existing absolute LOD texture lookup functions are no longer restricted to the vertex shader only.",
+			"""
 		    The ability to specify and use cubemap textures with a DEPTH_COMPONENT internal format. This also enables shadow mapping on cubemaps. The 'q'
 			coordinate is used as the reference value for comparisons. A set of new texture lookup functions is provided to lookup into shadow cubemaps.
 		    """,
-		    """
+			"""
 		    The ability to specify if varying variables are interpolated in a non-perspective correct manner, if they are flat shaded or, if multi-sampling, if
 			centroid sampling should be performed.
 		    """,
-		    """
+			"""
 		    Full signed integer and unsigned integer support in the OpenGL Shading Language:
 		    ${ul(
-			    "Integers are defined as 32 bit values using two's complement.",
-		        "Unsigned integers and vectors thereof are added.",
-		        """
+				"Integers are defined as 32 bit values using two's complement.",
+				"Unsigned integers and vectors thereof are added.",
+				"""
 		        New texture lookup functions are provided that return integer values. These functions are to be used in conjunction with new texture formats
 		        whose components are actual integers, rather than integers that encode a floating-point value. To support these lookup functions, new integer
 		        and unsigned-integer sampler types are introduced.
 		        """,
-		        "Integer bitwise operators are now enabled.",
-		        "Several built-in functions and operators now operate on integers or vectors of integers.",
-		        "New vertex attribute functions are added that load integer attribute data and can be referenced in a vertex shader as integer data.",
-		        "New uniform loading commands are added to load unsigned integer data.",
-		        "Varying variables can now be (unsigned) integers. If declared as such, they have to be flat shaded.",
-		        """
+				"Integer bitwise operators are now enabled.",
+				"Several built-in functions and operators now operate on integers or vectors of integers.",
+				"New vertex attribute functions are added that load integer attribute data and can be referenced in a vertex shader as integer data.",
+				"New uniform loading commands are added to load unsigned integer data.",
+				"Varying variables can now be (unsigned) integers. If declared as such, they have to be flat shaded.",
+				"""
 		        Fragment shaders can define their own output variables, and declare them to be of type floating-point, integer or unsigned integer. These
 		        variables are bound to a fragment color index with the new API command BindFragDataLocationEXT(), and directed to buffers using the existing
 		        DrawBuffer or DrawBuffers API commands.
 		        """
-		    )}
+			)}
 		    """,
-		    "Added new built-in functions truncate() and round() to the shading language.",
-		    """
+			"Added new built-in functions truncate() and round() to the shading language.",
+			"""
 		    A new built-in variable accessible from within vertex shaders that holds the index <i> implicitly passed to ArrayElement to specify the vertex.
 		    This is called the vertex ID.
 		    """,
-		    """
+			"""
 		    A new built-in variable accessible from within fragment and geometry shaders that hold the index of the currently processed primitive. This is
 		    called the primitive ID.
 		    """
@@ -195,7 +195,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-		Check(4)..returnValue..GLint_p.OUT("params", "returns the requested data")
+		Check(4)..ReturnParam..GLint_p.OUT("params", "returns the requested data")
 	)
 
 	void(
@@ -204,7 +204,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-		Check(4)..returnValue..GLuint_p.OUT("params", "returns the requested data")
+		Check(4)..ReturnParam..GLuint_p.OUT("params", "returns the requested data")
 	)
 
 	void(
@@ -213,7 +213,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		Check(1)..returnValue..GLuint_p.OUT("params", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("params", "")
 	)
 
 	void(

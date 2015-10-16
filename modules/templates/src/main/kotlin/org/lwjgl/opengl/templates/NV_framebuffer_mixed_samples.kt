@@ -38,7 +38,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		"RASTER_FIXED_SAMPLE_LOCATIONS_EXT"..0x932A,
 		"MULTISAMPLE_RASTERIZATION_ALLOWED_EXT"..0x932B,
 		"EFFECTIVE_RASTER_SAMPLES_EXT"..0x932C,
-		
+
 		// COLOR_SAMPLES_NV is shared with NV_multisample_coverage
 		"COLOR_SAMPLES_NV"..0x8E20,
 		"DEPTH_SAMPLES_NV"..0x932D,

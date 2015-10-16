@@ -101,7 +101,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGLES("INTEL_per
 		"",
 
 		GLuint.IN("queryId", ""),
-		Check(1)..returnValue..GLuint_p.OUT("queryHandle", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("queryHandle", "")
 	)
 
 	void(
@@ -122,7 +122,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGLES("INTEL_per
 		"GetFirstPerfQueryIdINTEL",
 		"",
 
-		Check(1)..returnValue..GLuint_p.OUT("queryId", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("queryId", "")
 	)
 
 	void(
@@ -130,7 +130,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGLES("INTEL_per
 		"",
 
 		GLuint.IN("queryId", ""),
-		Check(1)..returnValue..GLuint_p.OUT("nextQueryId", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("nextQueryId", "")
 	)
 
 	void(
@@ -166,7 +166,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGLES("INTEL_per
 		"",
 
 		GLcharASCII_p.IN("queryName", ""),
-		Check(1)..returnValue..GLuint_p.OUT("queryId", "")
+		Check(1)..ReturnParam..GLuint_p.OUT("queryId", "")
 	)
 
 	void(

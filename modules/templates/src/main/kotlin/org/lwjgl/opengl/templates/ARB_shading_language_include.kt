@@ -38,9 +38,9 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 			{@code path} contains any characters not listed in Section 3.1 "Character Set", or the double quote character, or angled brackets, or any white
 			space characters other than the space character.
 			""",
-		    "{@code path} has consecutive forward slashes ( // ); \"/foo//bar\" is not valid (zero length tokens are not allowed).",
-		    "{@code path} ends with a forward slash ( / )",
-		    "{@code path} contains no characters."
+			"{@code path} has consecutive forward slashes ( // ); \"/foo//bar\" is not valid (zero length tokens are not allowed).",
+			"{@code path} ends with a forward slash ( / )",
+			"{@code path} contains no characters."
 		)}
 		There are no path escape characters, so there is no way to get the forward slash delimiter within a single token.
 
@@ -162,6 +162,6 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		AutoSize("name")..GLint.IN("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
 		const..GLcharASCII_p.IN("name", "the name associated with the string"),
 		GLenum.IN("pname", "the parameter to query", "#NAMED_STRING_LENGTH_ARB #NAMED_STRING_TYPE_ARB"),
-		Check(1)..returnValue..GLint_p.OUT("params", "a buffer in which to place the returned value")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 }

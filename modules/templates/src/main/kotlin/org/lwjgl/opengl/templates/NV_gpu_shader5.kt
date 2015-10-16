@@ -27,16 +27,16 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 			support for a full set of 8-, 16-, 32-, and 64-bit scalar and vector data types, including uniform API, uniform buffer object, and shader input and
 			output support;
 			""",
-		    """
+			"""
 		    the ability to aggregate samplers into arrays, index these arrays with arbitrary expressions, and not require that non-constant indices be uniform
 			across all shader invocations;
 		    """,
-		    "new built-in functions to pack and unpack 64-bit integer types into a two-component 32-bit integer vector;",
-		    "new built-in functions to pack and unpack 32-bit unsigned integer types into a two-component 16-bit floating-point vector;",
-		    "new built-in functions to convert double-precision floating-point values to or from their 64-bit integer bit encodings;",
-		    "new built-in functions to compute the composite of a set of boolean conditions a group of shader threads;",
-		    "vector relational functions supporting comparisons of vectors of 8-, 16-, and 64-bit integer types or 16-bit floating-point types; and",
-		    """
+			"new built-in functions to pack and unpack 64-bit integer types into a two-component 32-bit integer vector;",
+			"new built-in functions to pack and unpack 32-bit unsigned integer types into a two-component 16-bit floating-point vector;",
+			"new built-in functions to convert double-precision floating-point values to or from their 64-bit integer bit encodings;",
+			"new built-in functions to compute the composite of a set of boolean conditions a group of shader threads;",
+			"vector relational functions supporting comparisons of vectors of 8-, 16-, and 64-bit integer types or 16-bit floating-point types; and",
+			"""
 		    extending texel offset support to allow loading texel offsets from regular integer operands computed at run-time, except for lookups with gradients
 			(textureGrad*).
 		    """
@@ -46,8 +46,8 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		pipeline stage. This extension lifts that restriction, and allows patches to proceed further in the pipeline and be used
 		${ul(
 			"as input to a geometry shader, using a new \"patches\" layout qualifier;",
-		    "as input to transform feedback;",
-		    "by fixed-function rasterization stages, in which case the patches are drawn as independent points."
+			"as input to transform feedback;",
+			"by fixed-function rasterization stages, in which case the patches are drawn as independent points."
 		)}
 		Additionally, it allows geometry shaders to read per-patch attributes written by a tessellation control shader using input variables declared with
 		"patch in".
@@ -242,7 +242,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		Check(1)..returnValue..GLint64EXT_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint64EXT_p.OUT("params", "")
 	)
 
 	void(
@@ -251,7 +251,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		Check(1)..returnValue..GLint64EXT_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint64EXT_p.OUT("params", "")
 	)
 
 	void(

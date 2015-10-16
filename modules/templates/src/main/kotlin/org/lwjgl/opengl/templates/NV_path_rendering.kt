@@ -54,7 +54,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 			Each path object contains zero or more subpaths specified by a sequence of line segments, partial elliptical arcs, and (cubic or quadratic) Bezier
 			curve segments. Each path may contain multiple subpaths that can be closed (forming a contour) or open.
 			""",
-		    """
+			"""
 		    Path stenciling is the process of updating the stencil buffer based on a path's coverage transformed into window space.
 
 			Path stenciling can determine either the filled or stroked coverage of a path.
@@ -64,7 +64,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 			Stenciling a stroked path supports all the standard embellishments for path stroking such as end caps, join styles, miter limits, dashing, and dash
 			caps. These stroking properties specified are parameters of path objects.
 		    """,
-		    """
+			"""
 		    Path covering is the process of emitting simple (convex & planar) geometry that (conservatively) "covers" the path's sample coverage in the stencil
 			buffer. During path covering, stencil testing can be configured to discard fragments not within the actual coverage of the path as determined by
 			prior path stenciling.
@@ -477,7 +477,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		GLuint.IN("firstPathName", ""),
 		GLenum.IN("fontTarget", "", "#STANDARD_FONT_NAME_NV #SYSTEM_FONT_NAME_NV #FILE_NAME_NV"),
-		nullTerminated..const..void_p.IN("fontName", ""),
+		NullTerminated..const..void_p.IN("fontName", ""),
 		GLbitfield.IN("fontStyle", "", "#BOLD_BIT_NV #ITALIC_BIT_NV", LinkMode.BITFIELD),
 		AutoSizeDiv("charcodeTypeToBytes(type)", "charcodes")..GLsizei.IN("numGlyphs", ""),
 		GLenum.IN("type", "", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"),
@@ -541,7 +541,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 	IgnoreMissing..void(
 		"WeightPathsNV",
-	    "",
+		"",
 
 		GLuint.IN("resultPath", ""),
 		AutoSize("paths", "weights")..GLsizei.IN("numPaths", ""),
@@ -859,7 +859,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		GLuint.IN("path", ""),
 		GLenum.IN("pname", "", "$PathParameters $GetPathParameters"),
-		returnValue..Check(1)..GLint_p.OUT("value", "")
+		ReturnParam..Check(1)..GLint_p.OUT("value", "")
 	)
 
 	void(
@@ -868,7 +868,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		GLuint.IN("path", ""),
 		this["GetPathParameterivNV"]["pname"],
-		returnValue..Check(1)..GLfloat_p.OUT("value", "")
+		ReturnParam..Check(1)..GLfloat_p.OUT("value", "")
 	)
 
 	void(
@@ -940,7 +940,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		this["PathColorGenNV"]["color"],
 		GLenum.IN("pname", "", "#PATH_GEN_MODE_NV #PATH_GEN_COEFF_NV #PATH_GEN_COLOR_FORMAT_NV"),
-		returnValue..Check(1)..GLint_p.OUT("value", "")
+		ReturnParam..Check(1)..GLint_p.OUT("value", "")
 	)
 
 	IgnoreMissing..void(
@@ -949,7 +949,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		this["PathColorGenNV"]["color"],
 		this["GetPathColorGenivNV"]["pname"],
-		returnValue..Check(1)..GLfloat_p.OUT("value", "")
+		ReturnParam..Check(1)..GLfloat_p.OUT("value", "")
 	)
 
 	IgnoreMissing..void(
@@ -958,7 +958,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		GLenum.IN("texCoordSet", ""),
 		GLenum.IN("pname", "#PATH_GEN_MODE_NV #PATH_GEN_COEFF_NV #PATH_GEN_COMPONENTS_NV"),
-		returnValue..Check(1)..GLint_p.OUT("value", "")
+		ReturnParam..Check(1)..GLint_p.OUT("value", "")
 	)
 
 	IgnoreMissing..void(
@@ -967,7 +967,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		GLenum.IN("texCoordSet", ""),
 		this["GetPathTexGenivNV"]["pname"],
-		returnValue..GLfloat_p.OUT("value", "")
+		ReturnParam..Check(1)..GLfloat_p.OUT("value", "")
 	)
 
 	GLboolean(

@@ -22,8 +22,8 @@ val GLX_EXT_swap_control = "GLXEXTSwapControl".nativeClassGLX("GLX_EXT_swap_cont
 	IntConstant(
 		"The current swap interval and implementation-dependent max swap interval for a particular drawable.",
 
-	    "SWAP_INTERVAL_EXT"..0x20F1,
-        "MAX_SWAP_INTERVAL_EXT"..0x20F2
+		"SWAP_INTERVAL_EXT"..0x20F1,
+		"MAX_SWAP_INTERVAL_EXT"..0x20F2
 	)
 
 	void(

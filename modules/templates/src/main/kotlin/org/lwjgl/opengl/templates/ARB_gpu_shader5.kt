@@ -22,12 +22,12 @@ val ARB_gpu_shader5 = "ARBGPUShader5".nativeClassGL("ARB_gpu_shader5") {
 			support for indexing into arrays of samplers using non-constant indices, as long as the index doesn't diverge if multiple shader invocations are run
 			in lockstep;
 			""",
-		    "extending the uniform block capability of OpenGL 3.1 and 3.2 to allow shaders to index into an array of uniform blocks;",
-		    """
+			"extending the uniform block capability of OpenGL 3.1 and 3.2 to allow shaders to index into an array of uniform blocks;",
+			"""
 		    support for implicitly converting signed integer types to unsigned types, as well as more general implicit conversion and function overloading
 		    infrastructure to support new data types introduced by other extensions;
 		    """,
-		    """
+			"""
 		    a "precise" qualifier allowing computations to be carried out exactly as specified in the shader source to avoid optimization-induced invariance
 		    issues (which might cause cracking in tessellation);
 		    """,
@@ -35,26 +35,26 @@ val ARB_gpu_shader5 = "ARBGPUShader5".nativeClassGL("ARB_gpu_shader5") {
 			new built-in functions supporting:
 			${ul(
 				"fused floating-point multiply-add operations;",
-			    """
+				"""
 			    splitting a floating-point number into a significand and exponent (frexp), or building a floating-point number from a significand and exponent
 			    (ldexp);
 			    """,
-			    """
+				"""
 			    integer bitfield manipulation, including functions to find the position of the most or least significant set bit, count the number of one bits,
 			    and bitfield insertion, extraction, and reversal;
 			    """,
-			    "packing and unpacking vectors of small fixed-point data types into a larger scalar; and",
-			    "convert floating-point values to or from their integer bit encodings;"
+				"packing and unpacking vectors of small fixed-point data types into a larger scalar; and",
+				"convert floating-point values to or from their integer bit encodings;"
 			)}
 			""",
-		    """
+			"""
 		    extending the textureGather() built-in functions provided by ${ARB_texture_gather.link}:
 		    ${ul(
-			    "allowing shaders to select any single component of a multi-component texture to produce the gathered 2x2 footprint;",
-		        "allowing shaders to perform a per-sample depth comparison when gathering the 2x2 footprint using for shadow sampler types;",
-		        "allowing shaders to use arbitrary offsets computed at run-time to select a 2x2 footprint to gather from; and",
-		        "allowing shaders to use separate independent offsets for each of the four texels returned, instead of requiring a fixed 2x2 footprint."
-		    )}
+				"allowing shaders to select any single component of a multi-component texture to produce the gathered 2x2 footprint;",
+				"allowing shaders to perform a per-sample depth comparison when gathering the 2x2 footprint using for shadow sampler types;",
+				"allowing shaders to use arbitrary offsets computed at run-time to select a 2x2 footprint to gather from; and",
+				"allowing shaders to use separate independent offsets for each of the four texels returned, instead of requiring a fixed 2x2 footprint."
+			)}
 		    """
 		)}
 
@@ -64,12 +64,12 @@ val ARB_gpu_shader5 = "ARBGPUShader5".nativeClassGL("ARB_gpu_shader5") {
 			support for instanced geometry shaders, where a geometry shader may be run multiple times for each primitive, including a built-in
 			{@code gl_InvocationID} to identify the invocation number;
 			""",
-		    """
+			"""
 		    support for emitting vertices in a geometry program where each vertex emitted may be directed independently at a specified vertex stream (as
 		    provided by ${registryLinkTo("ARB", "transform_feedback3")}), and where each shader output is associated with a stream;
 		    """,
-		    "support for reading a mask of covered samples in a fragment shader; and",
-		    """
+			"support for reading a mask of covered samples in a fragment shader; and",
+			"""
 		    support for interpolating a fragment shader input at a programmable offset relative to the pixel center, a programmable sample number, or at the
 		    centroid.
 		    """

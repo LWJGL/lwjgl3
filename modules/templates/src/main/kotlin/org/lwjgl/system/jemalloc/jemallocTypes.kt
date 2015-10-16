@@ -13,7 +13,7 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	"Will be called by the JEmalloc##je_malloc_usable_size() method.",
 
 	void_p.IN("cbopaque", "the opaque pointer passed to JEmalloc##je_malloc_usable_size()"),
-	nullTerminated..const..charASCII_p.IN("s", "the message")
+	NullTerminated..const..charASCII_p.IN("s", "the message")
 ) {
 	documentation = "Instances of this interface may be passed to the JEmalloc##je_malloc_usable_size() method."
 	additionalCode = """
@@ -149,7 +149,7 @@ val chunk_merge_t = "chunk_merge_t".callback(
 val chunk_hooks_t = struct_p(JEMALLOC_PACKAGE, "ChunkHooks", structName = "chunk_hooks_t") {
 	documentation = "Chunk management hooks."
 	nativeDirective(
-"""DISABLE_WARNINGS()
+		"""DISABLE_WARNINGS()
 #include "jemalloc.h"
 ENABLE_WARNINGS()"""
 	)

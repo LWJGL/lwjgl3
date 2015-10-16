@@ -21,10 +21,10 @@ val AMD_gpu_shader_int64 = "AMDGPUShaderInt64".nativeClassGL("AMD_gpu_shader_int
 			support for 64-bit scalar and vector integer data types, including uniform API, uniform buffer object, transform feedback, and shader input and
 			output support;
 			""",
-		    "new built-in functions to pack and unpack 64-bit integer types into a two-component 32-bit integer vector;",
-		    "new built-in functions to convert double-precision floating-point values to or from their 64-bit integer bit encodings;",
-		    "vector relational functions supporting comparisons of vectors of 64-bit integer types; and",
-		    "common functions abs, sign, min, max, clamp, and mix supporting arguments of 64-bit integer types."
+			"new built-in functions to pack and unpack 64-bit integer types into a two-component 32-bit integer vector;",
+			"new built-in functions to convert double-precision floating-point values to or from their 64-bit integer bit encodings;",
+			"vector relational functions supporting comparisons of vectors of 64-bit integer types; and",
+			"common functions abs, sign, min, max, clamp, and mix supporting arguments of 64-bit integer types."
 		)}
 		This extension is designed to be a functional superset of the 64-bit integer support introduced by NV_gpu_shader5 and to be source code compatible with
 		that, thus the new procedures, functions, and tokens are identical to those found in that extension.
@@ -102,5 +102,5 @@ val AMD_gpu_shader_int64 = "AMDGPUShaderInt64".nativeClassGL("AMD_gpu_shader_int
 	NV_gpu_shader5 reuse "ProgramUniform1ui64vNV"
 	NV_gpu_shader5 reuse "ProgramUniform2ui64vNV"
 	NV_gpu_shader5 reuse "ProgramUniform3ui64vNV"
-	NV_gpu_shader5 reuse "ProgramUniform4ui64vNV"	
+	NV_gpu_shader5 reuse "ProgramUniform4ui64vNV"
 }

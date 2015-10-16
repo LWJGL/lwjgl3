@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.opengl.BufferType.*
 
 val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", postfix = ARB) {
 	documentation =
@@ -351,7 +350,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 		""",
 
 		AutoSize("programs")..GLsizei.IN("n", "the number of program names to genereate"),
-		returnValue..GLuint_p.OUT("programs", "an array in which to return the generated program names")
+		ReturnParam..GLuint_p.OUT("programs", "an array in which to return the generated program names")
 	)
 
 	val VP_INDEX = GLuint.IN("index", "the environment parameter index")
@@ -443,7 +442,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
 		TARGET,
 		GLenum.IN("pname", "the parameter to query", PARAMS),
-		returnValue..Check(1)..GLint_p.OUT("params", "an array in which to place the parameter value")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "an array in which to place the parameter value")
 	)
 
 	void(
@@ -494,7 +493,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 			#VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB #CURRENT_VERTEX_ATTRIB_ARB
 			"""
 		),
-		returnValue..Check(1)..GLint_p.OUT("params", "an array in which to place the parameter value")
+		ReturnParam..Check(1)..GLint_p.OUT("params", "an array in which to place the parameter value")
 	)
 
 	void(
@@ -503,7 +502,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
 		VA_INDEX,
 		GLenum.IN("pname", "the parameter to query", "#VERTEX_ATTRIB_ARRAY_POINTER_ARB"),
-		returnValue..Check(1)..void_pp.OUT("pointer", "an array in which to place the vertex attribute array pointer")
+		ReturnParam..Check(1)..void_pp.OUT("pointer", "an array in which to place the vertex attribute array pointer")
 	)
 
 	GLboolean(

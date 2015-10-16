@@ -15,12 +15,12 @@ val NV_command_list = "NVCommandList".nativeClassGL("NV_command_list", postfix =
 		This extension adds a few new features designed to provide very low overhead batching and replay of rendering commands and state changes:
 		${ul(
 			"A state object, which stores a pre-validated representation of the state of (almost) the entire pipeline.",
-		    """
+			"""
 		    A more flexible and extensible MultiDrawIndirect (MDI) type of mechanism, using a token-based command stream, allowing to setup binding state and
 		    emit draw calls.
 		    """,
-		    "A set of functions to execute a list of the token-based command streams with state object changes interleaved with the streams.",
-		    "Command lists enabling compilation and reuse of sequences of command streams and state object changes."
+			"A set of functions to execute a list of the token-based command streams with state object changes interleaved with the streams.",
+			"Command lists enabling compilation and reuse of sequences of command streams and state object changes."
 		)}
 
 		Because state objects reflect the state of the entire pipeline, it is expected that they can be pre-validated and executed efficiently. It is also
@@ -178,9 +178,9 @@ typedef struct {
 		"Returns <code>n</code> previously unused state object names in <code>states</code>, and creates a state object in the initial state for each name.",
 
 		AutoSize("states")..GLsizei.IN("n", "the number of state object names to create"),
-		returnValue..GLuint_p.OUT("states", "the buffer in which to write the created state object names")
+		ReturnParam..GLuint_p.OUT("states", "the buffer in which to write the created state object names")
 	)
-	
+
 	void(
 		"DeleteStatesNV",
 		"""
@@ -191,14 +191,14 @@ typedef struct {
 		AutoSize("states")..GLsizei.IN("n", "the number of state object names to delete"),
 		SingleValue("state")..const..GLuint_p.IN("states", "the buffer from which to read the state object names to delete")
 	)
-	
+
 	GLboolean(
 		"IsStateNV",
 		"Returns true if the specified name corresponds to a state object.",
 
 		GLuint.IN("state", "the object name to test")
 	)
-	
+
 	void(
 		"StateCaptureNV",
 		"""
@@ -210,20 +210,20 @@ typedef struct {
 			Vertex attribute enable state, formats, types, relative offsets and strides, but not bound vertex buffers or vertex unified addresses, nor their
 			offsets, nor bound index buffers/addresses.
 			""",
-		    "Primitive state such as primitive restart and patch parameters, provoking vertex.",
-		    "Immediate vertex attribute values as provided by glVertexAttrib* or glVertexAttribI*",
-		    """
+			"Primitive state such as primitive restart and patch parameters, provoking vertex.",
+			"Immediate vertex attribute values as provided by glVertexAttrib* or glVertexAttribI*",
+			"""
 		    All active program binaries except compute (either from the active program pipeline or from UseProgram) with their current subroutine configuration
 		    excluding all default-block uniform values.
 		    """,
-		    "Rasterization, multisample fragment operation, depth, stencil, and blending state.",
-		    "Rasterization state such as line widths, stippling, polygon modes and offsets.",
-		    "Viewport, scissor, and depth range state.",
-		    """
+			"Rasterization, multisample fragment operation, depth, stencil, and blending state.",
+			"Rasterization state such as line widths, stippling, polygon modes and offsets.",
+			"Viewport, scissor, and depth range state.",
+			"""
 		    Framebuffer attachment configuration: attachment state including attachment formats, drawbuffer state, and target/layer information, but not
 		    including actual attachments or sizes of attachments (these are stored separately).
 		    """,
-		    "Framebuffer attachment textures (but not residency state)."
+			"Framebuffer attachment textures (but not residency state)."
 		)}
 		""",
 
@@ -234,7 +234,7 @@ typedef struct {
 			"GL11#POINTS GL11#LINES GL11#TRIANGLES GL11#QUADS GL32#LINES_ADJACENCY GL32#TRIANGLES_ADJACENCY GL40#PATCHES"
 		)
 	)
-	
+
 	GLuint(
 		"GetCommandHeaderNV",
 		"Returns the encoded 32bit header value for a given command; the returned value is implementation specific.",
@@ -248,7 +248,7 @@ typedef struct {
 			"""
 		)
 	)
-	
+
 	GLushort(
 		"GetStageIndexNV",
 		"""
@@ -258,7 +258,7 @@ typedef struct {
 
 		GLenum.IN("shadertype", "the shader stage type")
 	)
-	
+
 	void(
 		"DrawCommandsNV",
 		"""
@@ -272,7 +272,7 @@ typedef struct {
 		const..GLsizei_p.IN("sizes", "the array of command lengths"),
 		AutoSize("indirects", "sizes")..GLuint.IN("count", "the number of commands")
 	)
-	
+
 	void(
 		"DrawCommandsAddressNV",
 		"""
@@ -285,7 +285,7 @@ typedef struct {
 		const..GLsizei_p.IN("sizes", "the array of command lengths"),
 		AutoSize("indirects", "sizes")..GLuint.IN("count", "the number of commands")
 	)
-	
+
 	void(
 		"DrawCommandsStatesNV",
 		"""
@@ -302,7 +302,7 @@ typedef struct {
 		const..GLuint_p.IN("fbos", "the array of framebuffer object names"),
 		AutoSize("indirects", "sizes", "states", "fbos")..GLuint.IN("count", "the number of commands")
 	)
-	
+
 	void(
 		"DrawCommandsStatesAddressNV",
 		"""
@@ -318,13 +318,13 @@ typedef struct {
 		const..GLuint_p.IN("fbos", "the array of framebuffer object names"),
 		AutoSize("indirects", "sizes", "states", "fbos")..GLuint.IN("count", "the number of commands")
 	)
-	
+
 	void(
 		"CreateCommandListsNV",
 		"Returns <code>n</code> previously unused command list names in <code>lists</code>, and creates a command list in the initial state for each name.",
 
 		AutoSize("lists")..GLsizei.IN("n", "the number of command list names to create"),
-		returnValue..GLuint_p.OUT("lists", "the buffer in which to return the created command list names")
+		ReturnParam..GLuint_p.OUT("lists", "the buffer in which to return the created command list names")
 	)
 
 	void(
@@ -337,14 +337,14 @@ typedef struct {
 		AutoSize("lists")..GLsizei.IN("n", "the number of command list names to delete"),
 		SingleValue("list")..const..GLuint_p.IN("lists", "the buffer from which to read the command list names to delete")
 	)
-  
+
 	GLboolean(
 		"IsCommandListNV",
 		"Returns true if the specified name corresponds to a command list.",
 
 		GLuint.IN("list", "the object name to query")
 	)
-  
+
 	void(
 		"ListDrawCommandsStatesClientNV",
 		"""

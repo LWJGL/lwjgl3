@@ -49,15 +49,15 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	GLFW_PACKAGE, void, "GLFWErrorCallback",
 	"Will be called with an error code and a human-readable description when a GLFW error occurs.",
 	int.IN("error", "the error code"),
-	nullTerminated..charUTF8_p.IN("description", "a pointer to a UTF-8 encoded string describing the error")
+	NullTerminated..charUTF8_p.IN("description", "a pointer to a UTF-8 encoded string describing the error")
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetErrorCallback() method."
 	preamble.javaImport(
 		"java.io.PrintStream",
 		"java.lang.reflect.Field",
 		"java.util.Map",
-        "org.lwjgl.LWJGLUtil.TokenFilter",
-	    "static org.lwjgl.glfw.GLFW.*"
+		"org.lwjgl.LWJGLUtil.TokenFilter",
+		"static org.lwjgl.glfw.GLFW.*"
 	)
 	additionalCode = """
 	/**

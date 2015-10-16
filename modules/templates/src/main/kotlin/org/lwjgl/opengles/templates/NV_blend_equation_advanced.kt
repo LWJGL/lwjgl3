@@ -19,7 +19,7 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGLES("NV_b
 			NV_blend_equation_advanced: Provides the new blending equations, but guarantees defined results only if each sample is touched no more than once in
 			any single rendering pass. The command BlendBarrierNV() is provided to indicate a boundary between passes.
 			""",
-		    """
+			"""
 		    NV_blend_equation_advanced_coherent: Provides the new blending equations, and guarantees that blending is done coherently and in API primitive
 			ordering. An enable is provided to allow implementations to opt out of fully coherent blending and instead behave as though only
 			NV_blend_equation_advanced were supported.

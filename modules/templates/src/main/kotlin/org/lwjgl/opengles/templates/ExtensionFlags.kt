@@ -125,18 +125,18 @@ val EXT_gpu_shader5 = EXT_FLAG.nativeClassGLES("EXT_gpu_shader5", postfix = EXT)
 			a "precise" qualifier allowing computations to be carried out exactly as specified in the shader source to avoid optimization-induced invariance
 			issues (which might cause cracking in tessellation);
 			""",
-		    """
+			"""
 		    new built-in functions supporting:
 		    ${ul(
-			    "fused floating-point multiply-add operations;"
-		    )}
+				"fused floating-point multiply-add operations;"
+			)}
 		    """,
-		    """
+			"""
 		    extending the textureGather() built-in functions provided by OpenGL ES Shading Language 3.10:
 		    ${ul(
-			    "allowing shaders to use arbitrary offsets computed at run-time to select a 2x2 footprint to gather from; and",
-		        "allowing shaders to use separate independent offsets for each of the four texels returned, instead of requiring a fixed 2x2 footprint."
-		    )}
+				"allowing shaders to use arbitrary offsets computed at run-time to select a 2x2 footprint to gather from; and",
+				"allowing shaders to use separate independent offsets for each of the four texels returned, instead of requiring a fixed 2x2 footprint."
+			)}
 		    """
 		)}
 
@@ -320,8 +320,8 @@ val NV_fragment_shader_interlock = EXT_FLAG.nativeClassGLES("NV_fragment_shader_
 		once, one or more of the following techniques may be required to ensure proper execution ordering:
 		${ul(
 			"inserting Finish or WaitSync commands to drain the pipeline between different \"passes\" or \"layers\";",
-		    "using only atomic memory operations to write to shader memory (which may be relatively slow and limits how memory may be updated); or",
-		    "injecting spin loops into shaders to prevent multiple shader invocations from touching the same memory concurrently."
+			"using only atomic memory operations to write to shader memory (which may be relatively slow and limits how memory may be updated); or",
+			"injecting spin loops into shaders to prevent multiple shader invocations from touching the same memory concurrently."
 		)}
 		This extension provides new GLSL built-in functions beginInvocationInterlockNV() and endInvocationInterlockNV() that delimit a critical section of
 		fragment shader code. For pairs of shader invocations with "overlapping" coverage in a given pixel, the OpenGL implementation will guarantee that the
@@ -501,7 +501,7 @@ val NV_texture_npot_2D_mipmap = EXT_FLAG.nativeClassGLES("NV_texture_npot_2D_mip
 		With this extension, NPOT textures are specified and applied identically to mipmapped power-of-two 2D textures with the following limitations:
 		${ul(
 			"The texture wrap modes must be CLAMP_TO_EDGE.",
-		    """
+			"""
 		    Coordinates used for texture sampling on an NPOT texture using a mipmapped minification filter must lie within the range [0,1]. Coordinate clamping
 			is not performed by the GL in this case, causing values outside this range to produce undefined results.
 		    """
@@ -597,7 +597,7 @@ val OES_gpu_shader5 = EXT_FLAG.nativeClassGLES("OES_gpu_shader5", postfix = OES)
 		This extension provides a variety of new features for all shader types, including:
 		${ul(
 			"support for indexing into arrays of opaque types (samplers, and atomic counters) using dynamically uniform integer expressions;",
-		    "support for indexing into arrays of images and shader storage blocks using only constant integral expressions;",
+			"support for indexing into arrays of images and shader storage blocks using only constant integral expressions;",
 			"extending the uniform block capability to allow shaders to index into an array of uniform blocks;",
 			"""
 			a "precise" qualifier allowing computations to be carried out exactly as specified in the shader source to avoid optimization-induced invariance
@@ -607,12 +607,12 @@ val OES_gpu_shader5 = EXT_FLAG.nativeClassGLES("OES_gpu_shader5", postfix = OES)
 			new built-in functions supporting:
 			${ul("fused floating-point multiply-add operations;")}
 			""",
-		    """
+			"""
 		    extending the textureGather() built-in functions provided by OpenGL ES Shading Language 3.10:
 		    ${ul(
-			    "allowing shaders to use arbitrary offsets computed at run-time to select a 2x2 footprint to gather from; and",
-		        "allowing shaders to use separate independent offsets for each of the four texels returned, instead of requiring a fixed 2x2 footprint."
-		    )}
+				"allowing shaders to use arbitrary offsets computed at run-time to select a 2x2 footprint to gather from; and",
+				"allowing shaders to use separate independent offsets for each of the four texels returned, instead of requiring a fixed 2x2 footprint."
+			)}
 		    """
 		)}
 		Requires ${GLES31.core}.

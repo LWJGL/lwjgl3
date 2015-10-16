@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 val apple_gl_sharing = dependsOn(Binding.OPENGL) {
 	"APPLEGLSharing".nativeClassCL("APPLE_gl_sharing", APPLE) {
-	documentation = "Native bindings to the $extensionName extension."
+		documentation = "Native bindings to the $extensionName extension."
 
 		IntConstant(
 			"Error code returned by #GetGLContextInfoAPPLE() if an invalid {@code platform_gl_ctx} is provided.",

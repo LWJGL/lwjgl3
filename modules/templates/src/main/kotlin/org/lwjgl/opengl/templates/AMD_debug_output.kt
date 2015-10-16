@@ -78,19 +78,19 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		ways:
 		${ol(
 			"To reference all messages, let {@code category}, {@code severity}, and {@code count} all be zero. The value of {@code ids} is ignored in this case.",
-		    """
+			"""
 		    To reference all messages across all categories with a specific severity level, let {@code category} and {@code count} be zero and let
 		    {@code severity} identify the severity level. The value of {@code ids} is ignored in this case.
 		    """,
-		    """
+			"""
 		    To reference all messages within a single category, let {@code category} identify the referenced category and let {@code severity} and {@code count}
 		    be zero. The value of {@code ids} is ignored in this case.
 		    """,
-		    """
+			"""
 		    To reference all messages within a single category and at a specific severity level, let {@code category} identify the category and {@code severity}
 		    identify the severity level, and let {@code count} be zero. The value of {@code ids} is ignored in this case.
 		    """,
-		    """
+			"""
 		    To reference specific messages by ID within a single category, let {@code category} identify the category, let {@code severity} be zero, let
 		    {@code count} be greater than zero and let {@code ids} identify the IDs of {@code count} messages within the identified category. Operations on
 		    message IDs that are not valid within the category are silently ignored.

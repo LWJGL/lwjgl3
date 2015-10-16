@@ -55,7 +55,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
-		Check(1)..returnValue..GLint64_p.OUT("params", "the requested parameter")
+		Check(1)..ReturnParam..GLint64_p.OUT("params", "the requested parameter")
 	)
 
 	// ARB_draw_elements_base_vertex
@@ -289,7 +289,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 		GLenum.IN("pname", "the sample parameter name", "#SAMPLE_POSITION"),
 		GLuint.IN("index", "the index of the sample whose position to query"),
-		Check(1)..returnValue..GLfloat_p.OUT("val", "an array to receive the position of the sample")
+		Check(1)..ReturnParam..GLfloat_p.OUT("val", "an array to receive the position of the sample")
 	)
 
 	void(
@@ -503,7 +503,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"Returns the 64bit integer value or values of a selected parameter.",
 
 		GLenum.IN("pname", "the parameter value to be returned"),
-		Check(1)..returnValue..GLint64_p.OUT("params", "the value or values of the specified parameter")
+		Check(1)..ReturnParam..GLint64_p.OUT("params", "the value or values of the specified parameter")
 	)
 
 	ReferenceGL("glGet")..void(
@@ -512,7 +512,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 		GLenum.IN("pname", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		Check(1)..returnValue..GLint64_p.OUT("params", "the value or values of the specified parameter")
+		Check(1)..ReturnParam..GLint64_p.OUT("params", "the value or values of the specified parameter")
 	)
 
 	void(
@@ -523,7 +523,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLenum.IN("pname", "the parameter whose value to retrieve from the sync object specified in {@code sync}", SyncProperties),
 		AutoSize("values")..GLsizei.IN("bufSize", "the size of the buffer whose address is given in {@code values}"),
 		Check(1)..nullable..GLsizei_p.OUT("length", "the address of an variable to receive the number of integers placed in {@code values}"),
-		returnValue..GLint_p.OUT("values", "the address of an array to receive the values of the queried parameter")
+		ReturnParam..GLint_p.OUT("values", "the address of an array to receive the values of the queried parameter")
 	)
 
 }

@@ -34,7 +34,7 @@ val OES_required_internalformat = "OESRequiredInternalformat".nativeClassGLES("O
 		This extension addresses the situation in two ways:
 		${ol(
 			"This extension introduces the ability for an application to specify the desired \"sized\" internal formats for texture image allocation.",
-		    "This extension guarantees to maintain at least the specified precision of all available sized internal formats."
+			"This extension guarantees to maintain at least the specified precision of all available sized internal formats."
 		)}
 		An implementation that exports this extension is committing to support all of the legal values for <internalformat> in Tables 3.4, 3.4.x, and 3.4.y,
 		subject to the extension dependencies described herein. That is to say, the implementation is guaranteeing that choosing an <internalformat> argument

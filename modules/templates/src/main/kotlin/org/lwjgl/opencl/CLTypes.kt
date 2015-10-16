@@ -195,7 +195,7 @@ fun config() {
 val cl_create_context_callback = "cl_create_context_callback".callback(
 	OPENCL_PACKAGE, void, "CLCreateContextCallback",
 	"Will be called when a debug message is generated.",
-	nullTerminated..const..cl_charUTF8_p.IN("errinfo", "a pointer to the message string representation"),
+	NullTerminated..const..cl_charUTF8_p.IN("errinfo", "a pointer to the message string representation"),
 	const..void_p.IN(
 		"private_info",
 		"a pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error"
@@ -270,7 +270,7 @@ val cl_event_callback = "cl_event_callback".callback(
 	cl_event.IN("event", "the event"),
 	cl_int.IN(
 		"event_command_exec_status",
-	    """
+		"""
 	    represents the execution status of command for which this callback function is invoked. If the callback is called as the result of the command
 	    associated with event being abnormally terminated, an appropriate error code for the error that caused the termination will be passed to
 	    {@code event_command_exec_status} instead.

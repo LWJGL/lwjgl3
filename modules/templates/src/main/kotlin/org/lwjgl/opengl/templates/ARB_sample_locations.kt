@@ -31,7 +31,7 @@ val ARB_sample_locations = "ARBSampleLocations".nativeClassGL("ARB_sample_locati
 		locations.
 		"""
 
-		IntConstant(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"SAMPLE_LOCATION_SUBPIXEL_BITS_ARB"..0x933D,

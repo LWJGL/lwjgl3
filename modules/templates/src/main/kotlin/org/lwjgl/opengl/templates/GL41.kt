@@ -65,7 +65,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 
 	void(
 		"ReleaseShaderCompiler",
-	    "Releases resources allocated by the shader compiler. This is a hint from the application, and does not prevent later use of the shader compiler."
+		"Releases resources allocated by the shader compiler. This is a hint from the application, and does not prevent later use of the shader compiler."
 	)
 
 	void(
@@ -86,7 +86,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		GLenum.IN("shadertype", "the type of shader whose precision to query", "GL20#VERTEX_SHADER GL20#FRAGMENT_SHADER"),
 		GLenum.IN("precisiontype", "the numeric format whose precision and range to query"),
 		Check(2)..GLint_p.OUT("range", "the address of array of two integers into which encodings of the implementation's numeric range are returned"),
-		Check(1)..returnValue..GLint_p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
+		Check(1)..ReturnParam..GLint_p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
 	)
 
 	ReferenceGL("DepthRange")..void(
@@ -266,7 +266,7 @@ if (shader) {
 		"Reserves program pipeline object names.",
 
 		AutoSize("pipelines")..GLsizei.IN("n", "the number of program pipeline object names to reserve"),
-		returnValue..GLuint_p.OUT("pipelines", "an array of into which the reserved names will be written")
+		ReturnParam..GLuint_p.OUT("pipelines", "an array of into which the reserved names will be written")
 	)
 
 	GLboolean(
@@ -286,7 +286,7 @@ if (shader) {
 			"the name of the parameter to retrieve",
 			"#ACTIVE_PROGRAM GL20#INFO_LOG_LENGTH $SHADER_TYPES"
 		),
-		Check(1)..returnValue..GLint_p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
+		Check(1)..ReturnParam..GLint_p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
 	)
 
 	// ProgramUniform JavaDoc
@@ -1037,7 +1037,7 @@ if (shader) {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		Check(1)..returnValue..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	void(
@@ -1046,6 +1046,6 @@ if (shader) {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		Check(1)..returnValue..GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..ReturnParam..GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 }

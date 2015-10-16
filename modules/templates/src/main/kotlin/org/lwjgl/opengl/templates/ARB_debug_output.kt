@@ -153,9 +153,9 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		ways:
 		${ul(
 			"If {@code source} is not GL11#DONT_CARE, then all messages whose source does not match {@code source} will not be referenced.",
-		    "If {@code type} is not GL11#DONT_CARE, then all messages whose type does not match {@code type} will not be referenced.",
-		    "If {@code severity} is not GL11#DONT_CARE, then all messages whose severity level does not match {@code severity} will not be referenced.",
-		    """
+			"If {@code type} is not GL11#DONT_CARE, then all messages whose type does not match {@code type} will not be referenced.",
+			"If {@code severity} is not GL11#DONT_CARE, then all messages whose severity level does not match {@code severity} will not be referenced.",
+			"""
 		    If {@code count} is greater than zero, then {@code ids} is an array of {@code count} message IDs for the specified combination of {@code source} and
 		    {@code type}. In this case, if {@code source} or {@code type} is GL11#DONT_CARE, or {@code severity} is not GL11#DONT_CARE, the error
 		    GL11#INVALID_OPERATION is generated. If {@code count} is zero, the value if {@code ids} is ignored.

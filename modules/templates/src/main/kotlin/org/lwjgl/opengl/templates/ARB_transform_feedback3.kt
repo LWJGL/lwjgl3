@@ -25,12 +25,12 @@ val ARB_transform_feedback3 = "ARBTransformFeedback3".nativeClassGL("ARB_transfo
 			"EXT"-style GLSL transform feedback (${registryLinkTo("EXT", "transform_feedback")}), where a list of varyings is provided prior to linking a
 			program object and is used whenever that program object is used.
 			""",
-		    """
+			"""
 		    "NV"-style GLSL transform feedback (${registryLinkTo("NV", "transform_feedback2")}), where "locations" of active varyings are queried after linking
 		    and are then passed to a function that sets the active transform feedback varyings for the program object. Unlike the "EXT"-style mode, the set of
 		    varyings to capture can be changed without relinking.
 		    """,
-		    """
+			"""
 		    Transform feedback for fixed-function or assembly vertex/geometry shaders (${registryLinkTo("NV", "transform_feedback2")}), where applications
 		    specify a set of canonical attribute enums/numbers to capture.
             """
@@ -48,7 +48,7 @@ val ARB_transform_feedback3 = "ARBTransformFeedback3".nativeClassGL("ARB_transfo
 
 		Requires ${GL30.core} or ${registryLinkTo("EXT", "transform_feedback")} or ${registryLinkTo("NV", "transform_feedback")}. ${GL40.promoted}
 		"""
-	
+
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 

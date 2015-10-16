@@ -23,8 +23,8 @@ val ARB_uniform_buffer_object = "ARBUniformBufferObject".nativeClassGL("ARB_unif
 		uniform data structures defined for a GL application and in these cases, the application is forced to either:
 		${ol(
 			"restructure their uniform data definitions into arrays or",
-		    "make an excessive number of calls through the GL interface to one of the Uniform* variants.",
-		    marker = 'A'
+			"make an excessive number of calls through the GL interface to one of the Uniform* variants.",
+			marker = 'A'
 		)}
 
 		These solutions have their disadvantages. Solution A imposes considerable development overhead on the application developer. Solution B may impose
@@ -36,8 +36,8 @@ val ARB_uniform_buffer_object = "ARBUniformBufferObject".nativeClassGL("ARB_unif
 		Storing uniform blocks in buffer objects enables several key use cases:
 		${ul(
 			"sharing of uniform data storage between program objects and between program stages",
-		    "rapid swapping of sets of previously defined uniforms by storing sets of uniform data on the GL server",
-		    "rapid updates of uniform data from both the client and the server"
+			"rapid swapping of sets of previously defined uniforms by storing sets of uniform data on the GL server",
+			"rapid updates of uniform data from both the client and the server"
 		)}
 		The data storage for a uniform block can be declared to use one of three layouts in memory: packed, shared, or std140.
 		${ul(
@@ -45,11 +45,11 @@ val ARB_uniform_buffer_object = "ARBUniformBufferObject".nativeClassGL("ARB_unif
 			"packed" uniform blocks have an implementation-dependent data layout for efficiency, and unused uniforms may be eliminated by the compiler to save
 			space.
 			""",
-		    """
+			"""
 		    "shared" uniform blocks, the default layout, have an implementation-dependent data layout for efficiency, but the layout will be uniquely determined
 		    by the structure of the block, allowing data storage to be shared across programs.
 		    """,
-		    "\"std140\" uniform blocks have a standard cross-platform cross-vendor layout (see below). Unused uniforms will not be eliminated."
+			"\"std140\" uniform blocks have a standard cross-platform cross-vendor layout (see below). Unused uniforms will not be eliminated."
 		)}
 		Any uniforms not declared in a named uniform block are said to be part of the "default uniform block".
 

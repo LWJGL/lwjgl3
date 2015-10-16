@@ -38,7 +38,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		disabled when drawing patches, no matter the value of the enables. A value of TRUE indicates that primitive restart behaves normally for patches.
 		""",
 
-	    "PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED"..0x8221
+		"PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED"..0x8221
 	)
 
 	IntConstant(
@@ -208,7 +208,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		)
 	)
 
-   	void(
+	void(
 		"ClearTexImage",
 		"""
 		Is equivalent to calling #ClearTexSubImage() with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},

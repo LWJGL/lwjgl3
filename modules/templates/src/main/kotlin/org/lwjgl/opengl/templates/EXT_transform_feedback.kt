@@ -170,7 +170,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
 		GLenum.IN("param", ""),
 		GLuint.IN("index", ""),
-		Check(1)..returnValue..GLint_p.OUT("values", "")
+		Check(1)..ReturnParam..GLint_p.OUT("values", "")
 	)
 
 	void(
@@ -179,6 +179,6 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
 		GLenum.IN("param", ""),
 		GLuint.IN("index", ""),
-		Check(1)..returnValue..GLboolean_p.OUT("values", "")
+		Check(1)..ReturnParam..GLboolean_p.OUT("values", "")
 	)
 }
