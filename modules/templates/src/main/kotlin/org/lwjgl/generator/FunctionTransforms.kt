@@ -164,7 +164,7 @@ object StringReturnTransform : FunctionTransform<ReturnValue> {
 	}
 }
 
-class BufferValueReturnTransform(
+class PrimitiveValueReturnTransform(
 	val bufferType: String,
 	val paramName: String
 ) : FunctionTransform<ReturnValue>, APIBufferFunctionTransform<ReturnValue> {
@@ -173,12 +173,12 @@ class BufferValueReturnTransform(
 	override fun setupAPIBuffer(func: Function, qtype: ReturnValue, writer: PrintWriter) = writer.println("\t\tint $paramName = $API_BUFFER.${bufferType}Param();")
 }
 
-object BufferValueParameterTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
+object PrimitiveValueTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 }
 
-object BufferValueSizeTransform : FunctionTransform<Parameter> {
+object Expression1Transform : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "1" // Replace with 1
 }
@@ -226,13 +226,13 @@ class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean
 		"$MAP_OLD == null ? memByteBuffer($RESULT, (int)$lengthParam) : memSetupBuffer($MAP_OLD, $RESULT, (int)$lengthParam)"
 }
 
-val BufferReturnLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+val BufferLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\tint ${qtype.name} = $API_BUFFER.intParam();")
 }
 
-val BufferReturnParamTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+val BufferAutoSizeTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = if ( param.nativeType is CharSequenceType )
 		"$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
@@ -252,22 +252,52 @@ val BufferReturnParamTransform: FunctionTransform<Parameter> = object : Function
 	}
 }
 
+val BufferReplaceReturnTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
+	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
+		writer.println("\t\tint ${qtype.name} = $API_BUFFER.pointerParam();")
+	}
+}
+
+class BufferAutoSizeReturnTransform(
+	val outParam: Parameter,
+	val lengthExpression: String,
+	val encoding: String? = null
+) : FunctionTransform<ReturnValue> {
+	override fun transformDeclaration(param: ReturnValue, original: String): String {
+		val elementType: NativeType = (outParam.nativeType as PointerType).elementType!!
+
+		if ( elementType is StructType )
+			return "${elementType.definition.className}.Buffer"
+		else
+			return "${elementType.javaMethodType.simpleName}"
+	}
+	override fun transformCall(param: ReturnValue, original: String): String {
+		val elementType: NativeType = (outParam.nativeType as PointerType).elementType!!
+
+		if ( elementType is StructType )
+			return "\t\treturn ${elementType.definition.className}.createBuffer($API_BUFFER.pointerValue(${outParam.name}), $lengthExpression);"
+		else
+			return "\t\treturn mem${elementType.javaMethodType.simpleName}($API_BUFFER.pointerValue(${outParam.name}), $lengthExpression);"
+	}
+}
+
 class BufferReturnTransform(
 	val outParam: Parameter,
 	val lengthParam: String,
 	val encoding: String? = null
 ) : FunctionTransform<ReturnValue> {
 
-	private val bufferType: String
-		get() = (outParam.nativeType.mapping as PointerMapping).javaMethodType.simpleName
-
-	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null) bufferType else "String"
+	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null) (outParam.nativeType.mapping as PointerMapping).javaMethodType.simpleName else "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
 		return if ( encoding != null )
 			"\t\treturn memDecode$encoding($API_BUFFER.buffer(), $API_BUFFER.intValue($lengthParam), ${outParam.name});"
-		else
+		else if ( outParam.nativeType.mapping !== PointerMapping.DATA_BYTE )
 			"\t\t${outParam.name}.limit($API_BUFFER.intValue($lengthParam));\n" +
-			"\t\treturn ${outParam.name};"
+			"\t\treturn ${outParam.name}.slice();"
+		else
+			"\t\treturn memSlice(${outParam.name}, $API_BUFFER.intValue($lengthParam));"
 	}
 }
 

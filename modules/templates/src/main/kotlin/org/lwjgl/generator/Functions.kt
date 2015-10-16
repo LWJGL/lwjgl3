@@ -243,23 +243,32 @@ class NativeClassFunction(
 			}
 
 			if ( it has Return ) {
-				if ( !returns.isVoid )
-					it.error("A return value can only be specified for functions with void return type.")
-
 				returnCount++
 				if ( 1 < returnCount )
 					it.error("More than one return value found.")
 
 				val returnMod = it[Return]
-				if ( returnMod != ReturnParam ) {
-					if ( !hasAutoSizeFor(it) )
-						it.error("An AutoSize for Return parameter does not exist")
 
-					val lengthParamName = returnMod.lengthParam
-					if ( lengthParamName == null ) {
-						if ( it.nativeType !is CharSequenceType )
-							it.error("Null-terminated Return parameter must be a CharSequenceType")
+				if ( returnMod === ReturnParam ) {
+					if ( !returns.isVoid )
+						it.error("The ReturnParam modifier can only be used in functions with void return type.")
+				} else {
+					if ( returnMod.lengthParam.startsWith(RESULT) ) {
+						if ( !returns.nativeType.mapping.let({ it === PrimitiveMapping.INT || it === PrimitiveMapping.POINTER }) )
+							it.error("The Return modifier was used in a function with an unsupported return type")
+
+						if ( !it.has(Check) )
+							it.error("A Check for ReturnParam parameter does not exist")
+
+						if ( hasAutoSizeFor(it) )
+							it.error("Invalid combination of AutoSize and ReturnParam modifiers in function with non-void return type")
 					} else {
+						if ( !returns.isVoid )
+							it.error("The Return modifier was used in a function with an unsupported return type")
+
+						if ( !hasAutoSizeFor(it) )
+							it.error("An AutoSize for Return parameter does not exist")
+
 						val lengthParam = paramMap[returnMod.lengthParam]
 						if ( lengthParam == null )
 							it.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
@@ -800,15 +809,15 @@ class NativeClassFunction(
 
 		fun applyReturnValueTransforms(param: Parameter) {
 			// Transform void to the proper type
-			transforms[returns] = BufferValueReturnTransform(PointerMapping.primitiveMap[param.nativeType.mapping]!!, param.name)
+			transforms[returns] = PrimitiveValueReturnTransform(PointerMapping.primitiveMap[param.nativeType.mapping]!!, param.name)
 
 			// Transform the AutoSize parameter, if there is one
 			getParams(hasAutoSizePredicate(param)).forEach {
-				transforms[it] = BufferValueSizeTransform
+				transforms[it] = Expression1Transform
 			}
 
 			// Transform the returnValue parameter
-			transforms[param] = BufferValueParameterTransform
+			transforms[param] = PrimitiveValueTransform
 		}
 
 		// Apply any complex transformations.
@@ -816,33 +825,33 @@ class NativeClassFunction(
 			if ( it has Return && !hasParam { it has PointerArray } ) {
 				val returnMod = it[Return]
 
-				if ( returnMod === ReturnParam ) {
-					// Generate Return alternative
-
+				if ( returnMod === ReturnParam && it.nativeType !is CharSequenceType ) {
 					if ( !hasParam { it has SingleValue || it has PointerArray } ) {
 						// Skip, we inject the Return alternative in these transforms
 						applyReturnValueTransforms(it)
 						generateAlternativeMethod(stripPostfix(name, stripType = false), "Single return value version of:", transforms)
 					}
+				} else if ( returnMod.lengthParam.startsWith(RESULT) ) {
+					transforms[returns] = BufferAutoSizeReturnTransform(it, returnMod.lengthParam)
+					transforms[it] = BufferReplaceReturnTransform
+					generateAlternativeMethod(name, "Buffer return version of:", transforms)
 				} else {
-					// Generate String return alternative
-
 					// Remove any transform from the maxLength parameter
 					val maxLengthParam = getParam(hasAutoSizePredicate(it))
 					transforms.remove(maxLengthParam)
 
 					// Hide length parameter and use APIBuffer
 					val lengthParam = returnMod.lengthParam
-					if ( lengthParam != null )
-						transforms[paramMap[lengthParam]!!] = BufferReturnLengthTransform
+					if ( lengthParam.isNotEmpty() )
+						transforms[paramMap[lengthParam]!!] = BufferLengthTransform
 
 					// Hide target parameter and use APIBuffer
-					transforms[it] = BufferReturnParamTransform
+					transforms[it] = BufferAutoSizeTransform
 
 					// Transform void to the buffer type
 					val returnType: String
 					if ( it.nativeType is CharSequenceType ) {
-						transforms[returns] = if ( lengthParam != null )
+						transforms[returns] = if ( lengthParam.isNotEmpty() )
 							BufferReturnTransform(it, lengthParam, it.nativeType.charMapping.charset)
 						else
 							BufferReturnNTTransform(
@@ -852,7 +861,7 @@ class NativeClassFunction(
 							)
 						returnType = "String"
 					} else {
-						transforms[returns] = BufferReturnTransform(it, lengthParam!!)
+						transforms[returns] = BufferReturnTransform(it, lengthParam)
 						returnType = "Buffer"
 					}
 
@@ -1007,7 +1016,7 @@ class NativeClassFunction(
 
 				// Transform the AutoSize parameter, if there is one
 				getParams(hasAutoSizePredicate(it)).forEach {
-					transforms[it] = BufferValueSizeTransform
+					transforms[it] = Expression1Transform
 				}
 
 				val singleValue = it[SingleValue]
@@ -1122,7 +1131,7 @@ class NativeClassFunction(
 
 		generateCodeBeforeNative(code, ApplyTo.ALTERNATIVE)
 
-		val returnLater = code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE)
+		val returnLater = code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE) || transforms[returns] is BufferAutoSizeReturnTransform
 		generateNativeMethodCall(returnLater) {
 			printList(getNativeParams()) {
 				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(this@NativeClassFunction, ALTERNATIVE))
@@ -1192,7 +1201,7 @@ class NativeClassFunction(
 						println(returnExpression)
 				}
 			} else if ( returnLater )
-				println("\t\treturn $RESULT;")
+				println(returns.transformCallOrElse(transforms, "\t\treturn $RESULT;"))
 		}
 
 		println("\t}\n")

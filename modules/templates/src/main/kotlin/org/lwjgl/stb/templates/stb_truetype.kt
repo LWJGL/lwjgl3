@@ -633,7 +633,7 @@ int main(int arg, char **argv)
 
 		const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
 		int.IN("unicode_codepoint", "the unicode codepoint"),
-		Check(1)..stbtt_vertex_pp.OUT("vertices", "returns a pointer to an array of ##STBTTVertex structs")
+		Check(1)..Return(RESULT)..stbtt_vertex_pp.OUT("vertices", "returns a pointer to an array of ##STBTTVertex structs")
 	)
 
 	int(
@@ -642,7 +642,7 @@ int main(int arg, char **argv)
 
 		const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
 		int.IN("glyph_index", "the unicode codepoint"),
-		stbtt_vertex_pp.OUT("vertices", "returns a pointer to an array of ##STBTTVertex structs")
+		Check(1)..Return(RESULT)..stbtt_vertex_pp.OUT("vertices", "returns a pointer to an array of ##STBTTVertex structs")
 	)
 
 	void(

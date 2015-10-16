@@ -210,7 +210,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		const..charASCII_p.IN("filename", "the file name"),
 		Check(1)..int_p.OUT("channels", "returns the number of channels"),
 		Check(1)..int_p.OUT("sample_rate", "returns the sample rate"),
-		Check(1)..short_pp.OUT("output", "returns a pointer to the decoded data"),
+		Return("$RESULT * channels.get(0)")..Check(1)..short_pp.OUT("output", "returns a pointer to the decoded data"),
 
 		returnDoc = "the number of samples decoded, or -1 if the file could not be opened or was not an ogg vorbis file"
 	)
@@ -223,7 +223,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		AutoSize("mem")..int.IN("len", "the {@code data} length, in bytes"),
 		Check(1)..int_p.OUT("channels", "returns the number of channels"),
 		Check(1)..int_p.OUT("sample_rate", "returns the sample rate"),
-		Check(1)..short_pp.OUT("output", "returns a pointer to the decoded data")
+		Return("$RESULT * channels.get(0)")..Check(1)..short_pp.OUT("output", "returns a pointer to the decoded data")
 	)
 
 	stb_vorbis_p(
