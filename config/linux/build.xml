@@ -77,10 +77,10 @@ License terms: http://lwjgl.org/license.php
 
 		<!-- Each binding is compiled separately -->
 
-		<compile if:true="${binding.stb}">
+		<compile if:true="${binding.egl}">
 			<arguments>
-				<arg value="-isystem${src.include.rel}/stb"/>
-				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
+				<arg value="-I${src.include.rel}/egl"/>
+				<fileset dir="." includes="${src.generated.native}/egl/*.c"/>
 			</arguments>
 		</compile>
 
@@ -109,12 +109,13 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</compile>
 
-		<compile if:true="${binding.egl}">
+		<compile if:true="${binding.stb}">
 			<arguments>
-				<arg value="-I${src.include.rel}/egl"/>
-				<fileset dir="." includes="${src.generated.native}/egl/*.c"/>
+				<arg value="-isystem${src.include.rel}/stb"/>
+				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
 			</arguments>
 		</compile>
+
 
 		<!-- LINK -->
 		<uptodate property="link-uptodate" targetfile="${lib}/${LWJGL_LIBRARY}">

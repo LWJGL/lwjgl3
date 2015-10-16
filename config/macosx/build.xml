@@ -95,13 +95,6 @@ License terms: http://lwjgl.org/license.php
 
 		<!-- Each binding is compiled separately -->
 
-		<compile if:true="${binding.stb}">
-			<arguments>
-				<arg value="-isystem${src.include.rel}/stb"/>
-				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
-			</arguments>
-		</compile>
-
 		<compile if:true="${binding.glfw}">
 			<arguments>
 				<arg value="-I${src.include.rel}/glfw"/>
@@ -124,6 +117,13 @@ License terms: http://lwjgl.org/license.php
 				<fileset dir=".">
 					<include name="${src.generated.native}/opengl/cgl/*.c"/>
 				</fileset>
+			</arguments>
+		</compile>
+
+		<compile if:true="${binding.stb}">
+			<arguments>
+				<arg value="-isystem${src.include.rel}/stb"/>
+				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
 			</arguments>
 		</compile>
 

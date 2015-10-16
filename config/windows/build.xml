@@ -59,10 +59,10 @@ License terms: http://lwjgl.org/license.php
 
 		<!-- Each binding is compiled separately to avoid command length limits in Windows cmd -->
 
-		<cl if:true="${binding.stb}">
+		<cl if:true="${binding.egl}">
 			<arguments>
-				<arg value="/I${src.include}\stb"/>
-				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
+				<arg value="/I${src.include}\egl"/>
+				<fileset dir="." includes="${src.generated.native}/egl/*.c"/>
 			</arguments>
 		</cl>
 
@@ -91,17 +91,17 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</cl>
 
-		<cl if:true="${binding.egl}">
-			<arguments>
-				<arg value="/I${src.include}\egl"/>
-				<fileset dir="." includes="${src.generated.native}/egl/*.c"/>
-			</arguments>
-		</cl>
-
 		<cl if:true="${binding.ovr}">
 			<arguments>
 				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
 				<fileset dir="." includes="${src.generated.native}/ovr/*.c"/>
+			</arguments>
+		</cl>
+
+		<cl if:true="${binding.stb}">
+			<arguments>
+				<arg value="/I${src.include}\stb"/>
+				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
 			</arguments>
 		</cl>
 
