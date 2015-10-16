@@ -99,7 +99,14 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		"free",
 		"Causes the allocated memory referenced by {@code ptr} to be made available for future allocations. If {@code ptr} is $NULL, no action occurs.",
 
-		nullable..void_p.IN("ptr", "the allocated memory to free")
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE,
+			PointerMapping.DATA_POINTER
+		)..nullable..void_p.IN("ptr", "the allocated memory to free")
 	)
 
 	// Non-standard API
@@ -156,7 +163,14 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		"dallocx",
 		"Causes the memory referenced by {@code ptr} to be made available for future allocations.",
 
-		void_p.IN("ptr", "the allocated memory to deallocate"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE,
+			PointerMapping.DATA_POINTER
+		)..void_p.IN("ptr", "the allocated memory to deallocate"),
 		flags
 	)
 
@@ -164,8 +178,15 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		"sdallocx",
 		"Sized version of #dallocx(). The primary optimization over {@code dallocx()} is the removal of a metadata read, which often suffers an L1 cache miss.",
 
-		void_p.IN("ptr", "the allocated memory to deallocate"),
-		size_t.IN("size", "the number of bytes in {@code ptr}"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE,
+			PointerMapping.DATA_POINTER
+		)..void_p.IN("ptr", "the allocated memory to deallocate"),
+		AutoSize("ptr")..size_t.IN("size", "the number of bytes in {@code ptr}"),
 		flags
 	)
 

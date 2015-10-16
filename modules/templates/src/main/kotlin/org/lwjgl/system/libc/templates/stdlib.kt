@@ -70,7 +70,14 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		or if {@code free(ptr)} has already been called before, undefined behavior occurs. If ptr is $NULL, no operation is performed.
 		""",
 
-		nullable..void_p.IN("ptr", "the memory space to free")
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE,
+			PointerMapping.DATA_POINTER
+		)..nullable..void_p.IN("ptr", "the memory space to free")
 	)
 
 	void_p(
@@ -88,6 +95,13 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		"aligned_free",
 		"Frees a block of memory that was allocated with #aligned_alloc(). If ptr is $NULL, no operation is performed.",
 
-		nullable..void_p.IN("ptr", "the aligned block of memory to free")
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE,
+			PointerMapping.DATA_POINTER
+		)..nullable..void_p.IN("ptr", "the aligned block of memory to free")
 	)
 }
