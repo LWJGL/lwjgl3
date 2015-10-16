@@ -323,7 +323,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
 	 */
 	public T get(int index) {
-		return newInstance(address0() + checkIndex(container, index, sizeof()));
+		return newInstance(address0() + checkIndex(container, index * sizeof()));
 	}
 
 	/**
@@ -337,7 +337,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 */
 	public SELF get(int index, T value) {
 		int sizeof = sizeof();
-		memCopy(address0() + checkIndex(container, index, sizeof), value.address(), sizeof);
+		memCopy(address0() + checkIndex(container, index * sizeof), value.address(), sizeof);
 		return self();
 	}
 
@@ -356,7 +356,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 */
 	public SELF put(int index, T value) {
 		int sizeof = sizeof();
-		memCopy(value.address(), address0() + checkIndex(container, index, sizeof), sizeof);
+		memCopy(value.address(), address0() + checkIndex(container, index * sizeof), sizeof);
 		return self();
 	}
 
@@ -591,10 +591,10 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 		return curr;
 	}
 
-	private static int checkIndex(ByteBuffer container, int i, int sizeof) {
-		if ( (i < 0) || (container.limit() < i * sizeof) )
+	private static int checkIndex(ByteBuffer container, int index) {
+		if ( (index < 0) || (container.limit() < index) )
 			throw new IndexOutOfBoundsException();
-		return i;
+		return index;
 	}
 
 }

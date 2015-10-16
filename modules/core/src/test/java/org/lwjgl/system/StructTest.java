@@ -123,4 +123,21 @@ public class StructTest {
 		memFree(b);
 	}
 
+	public void testStructBufferIterationAbs() {
+		FFIType.Buffer b = FFIType.callocBuffer(10);
+
+		int i = 0;
+		while ( i < b.capacity() ) {
+			FFIType value = b.get(i);
+
+			assertEquals(value.address(), b.address0() + i * FFIType.SIZEOF);
+			i++;
+		}
+
+		assertEquals(b.remaining(), b.capacity());
+		assertEquals(b.address(), b.address0());
+
+		memFree(b);
+	}
+
 }
