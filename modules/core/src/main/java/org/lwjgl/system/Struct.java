@@ -14,6 +14,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Base class of all struct implementations. */
 public abstract class Struct extends PointerWrapper {
 
+	static {
+		LWJGLUtil.initialize();
+	}
+
 	private final ByteBuffer container;
 
 	protected Struct(long address, ByteBuffer container, int sizeof) {
