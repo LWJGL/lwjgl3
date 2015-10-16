@@ -650,7 +650,7 @@ int main(int arg, char **argv)
 		"Frees the data allocated by #GetCodepointShape() and #GetGlyphShape().",
 
 		const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-		stbtt_vertex_p.OUT("vertices", "the array of ##STBTTVertex structs to free")
+		StructBuffer..stbtt_vertex_p.IN("vertices", "the array of ##STBTTVertex structs to free")
 	)
 
 	// BITMAP RENDERING
