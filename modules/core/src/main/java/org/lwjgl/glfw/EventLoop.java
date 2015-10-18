@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.macosx;
+package org.lwjgl.glfw;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
@@ -10,7 +10,7 @@ import org.lwjgl.LWJGLUtil.Platform;
 import static org.lwjgl.system.macosx.Unistd.*;
 
 /** MacOSX event loop utility class. */
-public final class EventLoop {
+final class EventLoop {
 
 	static {
 		if ( LWJGLUtil.getPlatform() == Platform.MACOSX && !"1".equals(System.getenv().get("JAVA_STARTED_ON_FIRST_THREAD_" + getpid())) )
