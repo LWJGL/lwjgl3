@@ -5,21 +5,22 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.demo.opengl.AbstractGears;
-import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWKeyCallback;
-import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.libffi.Closure;
 
+import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The Gears demo implemented using GLFW. */
 public class Gears extends AbstractGears {
 
-	private GLFWErrorCallback errorfun;
-	private GLFWKeyCallback   keyfun;
+	private GLFWErrorCallback      errorCB;
+	private GLFWKeyCallback        keyCB;
+	private GLFWWindowSizeCallback windowSizeCB;
 
 	private Closure debugProc;
 
@@ -33,7 +34,7 @@ public class Gears extends AbstractGears {
 
 	@Override
 	protected void init() {
-		glfwSetErrorCallback(errorfun = GLFWErrorCallback.createPrint());
+		errorCB = GLFWErrorCallback.createPrint().set();
 		if ( glfwInit() != GLFW_TRUE )
 			throw new IllegalStateException("Unable to initialize glfw");
 
@@ -42,7 +43,7 @@ public class Gears extends AbstractGears {
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
-		keyfun = new GLFWKeyCallback() {
+		keyCB = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
 				if ( action != GLFW_RELEASE )
@@ -70,6 +71,13 @@ public class Gears extends AbstractGears {
 			}
 		};
 
+		windowSizeCB = new GLFWWindowSizeCallback() {
+			@Override
+			public void invoke(long window, int width, int height) {
+				glViewport(0, 0, width, height);
+			}
+		};
+
 		createWindow(false);
 	}
 
@@ -87,6 +95,9 @@ public class Gears extends AbstractGears {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
+		glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, GLFW_DONT_CARE, GLFW_DONT_CARE);
+		glfwSetWindowAspectRatio(window, 1, 1);
+
 		// Destroy old window
 		if ( this.window != NULL ) {
 			glfwSetInputMode(this.window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -95,7 +106,8 @@ public class Gears extends AbstractGears {
 				debugProc.release();
 		}
 
-		glfwSetKeyCallback(window, keyfun);
+		keyCB.set(window);
+		windowSizeCB.set(window);
 
 		if ( fullscreen )
 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -156,11 +168,10 @@ public class Gears extends AbstractGears {
 	protected void destroy() {
 		if ( debugProc != null )
 			debugProc.release();
-		if ( keyfun != null )
-			keyfun.release();
+		glfwReleaseCallbacks(window);
 		glfwTerminate();
-		if ( errorfun != null )
-			errorfun.release();
+		if ( errorCB != null )
+			errorCB.release();
 	}
 
 }

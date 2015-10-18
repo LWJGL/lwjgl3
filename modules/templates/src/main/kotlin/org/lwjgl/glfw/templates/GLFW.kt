@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
 
 val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", binding = GLFWBinding) {
-	javaImport (
-		"org.lwjgl.opengl.GL11"
-	)
-
 	documentation =
 		"""
 		Native bindings to the <a href="http://www.glfw.org/docs/latest/">GLFW</a> library.
@@ -317,8 +313,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 	IntConstant(
 		"""
-		GLFW could not find support for the requested client API on the system. If emitted by functions other than @ref glfwCreateWindow, no supported client
-		API was found.
+		GLFW could not find support for the requested client API on the system. If emitted by functions other than #CreateWindow(), no supported client API was
+		found.
 
 		The installed graphics driver does not support the requested client API, or does not support it via the chosen context creation backend. Below are a
 		few examples:
@@ -1064,6 +1060,50 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		nullable..Check(1)..int_p.OUT("height", "where to store the height, in screen coordinates, of the client area, or $NULL"),
 
 		since = "GLFW 1.0"
+	)
+
+	void(
+		"SetWindowSizeLimits",
+		"""
+		Sets the size limits of the client area of the specified window. If the window is full screen or not resizable, this function does nothing.
+
+		The size limits are applied immediately and may cause the window to be resized. If you set size limits and an aspect ratio that conflict, the results
+		are undefined.
+
+		This function may only be called from the main thread.
+		""",
+
+		GLFWwindow.IN("window", "the window to set limits for"),
+		int.IN("minwidth", "the minimum width, in screen coordinates, of the client area, or #DONT_CARE"),
+		int.IN("minheight", "the minimum height, in screen coordinates, of the client area, or #DONT_CARE"),
+		int.IN("maxwidth", "the maximum width, in screen coordinates, of the client area, or #DONT_CARE"),
+		int.IN("maxheight", "the maximum height, in screen coordinates, of the client area, or #DONT_CARE"),
+
+		since = "GLFW 3.2"
+	)
+
+	void(
+		"SetWindowAspectRatio",
+		"""
+		Sets the required aspect ratio of the client area of the specified window. If the window is full screen or not resizable, this function does nothing.
+
+		The aspect ratio is specified as a numerator and a denominator. For  example, the common 16:9 aspect ratio is specified as 16 and 9, respectively. The
+		denominator may not be zero.
+
+		If the numerator and denominator is set to #DONT_CARE then the window may be resized to any aspect ratio permitted by the window system and any limits
+		set by #SetWindowSizeLimits().
+
+ 		The aspect ratio is applied immediately and may cause the window to be  resized. If you set size limits and an aspect ratio that conflict, the results
+ 		are undefined.
+
+		This function may only be called from the main thread.
+		""",
+
+		GLFWwindow.IN("window", "the window to set limits for"),
+		int.IN("numer", "the numerator of the desired aspect ratio, or #DONT_CARE"),
+		int.IN("denom", "the denominator of the desired aspect ratio, or #DONT_CARE"),
+
+		since = "GLFW 3.2"
 	)
 
 	void(
