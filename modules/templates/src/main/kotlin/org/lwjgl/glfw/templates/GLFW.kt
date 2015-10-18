@@ -863,7 +863,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "GLFW 2.2"
 	)
 
-	GLFWwindow(
+	Code(
+		javaInit = statement("\t\tEventLoop.OffScreen.check();")
+	)..GLFWwindow(
 		"CreateWindow",
 		"""
 		Creates a window and its associated OpenGL or OpenGL ES context. Most of the options controlling how the window and its context should be created are
@@ -1175,7 +1177,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	)
 
 	Code(
-		javaInit = statement("\t\torg.lwjgl.system.macosx.EventLoop.checkFirstThread();")
+		javaInit = statement("\t\tEventLoop.OnScreen.check();")
 	)..void(
 		"ShowWindow",
 		"""
@@ -1395,7 +1397,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	)
 
 	Code(
-		javaInit = statement("\t\torg.lwjgl.system.macosx.EventLoop.checkFirstThread();")
+		javaInit = statement("\t\tEventLoop.OnScreen.check();")
 	)..void(
 		"PollEvents",
 		"""
@@ -1423,7 +1425,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	)
 
 	Code(
-		javaInit = statement("\t\torg.lwjgl.system.macosx.EventLoop.checkFirstThread();")
+		javaInit = statement("\t\tEventLoop.OnScreen.check();")
 	)..void(
 		"WaitEvents",
 		"""
