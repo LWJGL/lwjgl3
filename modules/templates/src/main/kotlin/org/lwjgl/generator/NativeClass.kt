@@ -123,15 +123,20 @@ abstract class APIBinding(
 
 }
 
+/** An APIBinding without an associated capabilities class.  */
+abstract class SimpleBinding(
+	callingConvention: CallingConvention = CallingConvention.STDCALL
+): APIBinding("n/a", "n/a", callingConvention) {
+	override fun getFunctionAddressCall(function: NativeClassFunction) = "checkFunctionAddress(${super.getFunctionAddressCall(function)})"
+	override fun PrintWriter.generateContent() = Unit
+}
+
 /** Creates a simple APIBinding that stores the shared library and function pointers inside the binding class. The shared library is never unloaded. */
 fun simpleBinding(
-	packageName: String,
 	libraryName: String,
 	libraryExpression: String = "\"$libraryName\"",
 	callingConvention: CallingConvention = CallingConvention.STDCALL
-) = object : APIBinding(packageName, "n/a", callingConvention) {
-	override fun getFunctionAddressCall(function: NativeClassFunction) = "checkFunctionAddress(${super.getFunctionAddressCall(function)})"
-
+) = object : SimpleBinding(callingConvention) {
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		val libraryReference = libraryName.toUpperCase()
 
@@ -152,8 +157,6 @@ fun simpleBinding(
 	}
 """)
 	}
-
-	override fun PrintWriter.generateContent() = Unit
 }
 
 // TODO: Remove if KT-457 or KT-1183 are fixed.
