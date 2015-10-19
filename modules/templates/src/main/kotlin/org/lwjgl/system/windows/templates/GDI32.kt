@@ -7,9 +7,8 @@ package org.lwjgl.system.windows.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
-val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding(WINDOWS_PACKAGE, "gdi32")) {
-
-	documentation = "Native bindings to wingdi.h"
+val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32")) {
+	documentation = "Native bindings to gdi32.dll"
 
 	IntConstant(
 		"##PIXELFORMATDESCRIPTOR flags.",
