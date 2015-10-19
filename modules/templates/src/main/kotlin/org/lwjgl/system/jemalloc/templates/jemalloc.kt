@@ -7,7 +7,12 @@ package org.lwjgl.system.jemalloc.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.jemalloc.*
 
-val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", binding = jemallocBinding) {
+val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", binding = simpleBinding(
+	JEMALLOC_PACKAGE,
+	"jemalloc",
+	"""Configuration.LIBRARY_NAME_JEMALLOC.get(Pointer.BITS64 ? "jemalloc" : "jemalloc32")""",
+	CallingConvention.DEFAULT
+)) {
 	nativeDirective(
 		"""DISABLE_WARNINGS()
 #include "jemalloc.h"

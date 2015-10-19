@@ -7,10 +7,7 @@ package org.lwjgl.system.windows.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
-val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
-	nativeImport (
-		"WindowsLWJGL.h"
-	)
+val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding(WINDOWS_PACKAGE, "gdi32")) {
 
 	documentation = "Native bindings to wingdi.h"
 

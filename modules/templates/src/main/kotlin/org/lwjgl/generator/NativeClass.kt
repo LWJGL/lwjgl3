@@ -123,6 +123,39 @@ abstract class APIBinding(
 
 }
 
+/** Creates a simple APIBinding that stores the shared library and function pointers inside the binding class. The shared library is never unloaded. */
+fun simpleBinding(
+	packageName: String,
+	libraryName: String,
+	libraryExpression: String = "\"$libraryName\"",
+	callingConvention: CallingConvention = CallingConvention.STDCALL
+) = object : APIBinding(packageName, "n/a", callingConvention) {
+	override fun getFunctionAddressCall(function: NativeClassFunction) = "checkFunctionAddress(${super.getFunctionAddressCall(function)})"
+
+	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+		val libraryReference = libraryName.toUpperCase()
+
+		println("""	// --- [ Function Addresses ] ---
+
+	private static final DynamicLinkLibrary $libraryReference;
+
+	private static final ${nativeClass.className} instance;
+
+	static {
+		$libraryReference = LWJGLUtil.loadLibraryNative($libraryExpression);
+		instance = new ${nativeClass.className}($libraryReference);
+	}
+
+	/** Returns the {@link ${nativeClass.className}} instance. */
+	public static ${nativeClass.className} getInstance() {
+		return instance;
+	}
+""")
+	}
+
+	override fun PrintWriter.generateContent() = Unit
+}
+
 // TODO: Remove if KT-457 or KT-1183 are fixed.
 private fun APIBinding.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionGetters(nativeClass)
 
