@@ -66,11 +66,11 @@ private fun PointerType.pointerTo(const: Boolean = false): String {
 	val builder = StringBuilder(name)
 	if ( !includesPointer ) {
 		if ( !name.endsWith('*') )
-			builder append ' '
-		builder append '*'
+			builder.append(' ')
+		builder.append('*')
 	}
 	if ( const )
-		builder append " const"
+		builder.append(" const")
 
 	return builder.toString()
 }

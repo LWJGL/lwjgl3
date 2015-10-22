@@ -40,7 +40,7 @@ public final class JNI {
 		signatures.forEach {
 			print("\tpublic static native ${it.returnType.nativeMethodType.simpleName} ${it.signature}(long $FUNCTION_ADDRESS")
 			if ( it.arguments.isNotEmpty() )
-				print(it.arguments.withIndex().map { "${it.value.nativeMethodType.simpleName} param${it.index}" }.join(", ", prefix = ", "))
+				print(it.arguments.withIndex().map { "${it.value.nativeMethodType.simpleName} param${it.index}" }.joinToString(", ", prefix = ", "))
 			println(");")
 		}
 		println("\n}")
@@ -64,7 +64,7 @@ public final class JNI {
 		signatures.forEach {
 			print("JNIEXPORT ${it.returnType.jniFunctionType} JNICALL Java_org_lwjgl_system_JNI_${it.signature}(JNIEnv *__env, jclass clazz, jlong __functionAddress")
 			if ( it.arguments.isNotEmpty() )
-				print(it.arguments.withIndex().map { "${it.value.jniFunctionType} param${it.index}" }.join(", ", prefix = ", "))
+				print(it.arguments.withIndex().map { "${it.value.jniFunctionType} param${it.index}" }.joinToString(", ", prefix = ", "))
 			print(""") {
 	UNUSED_PARAMS(__env, clazz)
 	""")
@@ -74,9 +74,9 @@ public final class JNI {
 					print("(jlong)(intptr_t)")
 			}
 			print("((${it.returnType.nativeType} (${if ( it.callingConvention === CallingConvention.STDCALL ) "APIENTRY " else ""}*) (")
-			print(it.arguments.map { it.nativeType }.join(", "))
+			print(it.arguments.map { it.nativeType }.joinToString(", "))
 			print("))(intptr_t)__functionAddress)(")
-			print(it.arguments.withIndex().map { if ( it.value.isPointerType ) "(void *)(intptr_t)param${it.index}" else "param${it.index}" }.join(", "))
+			print(it.arguments.withIndex().map { if ( it.value.isPointerType ) "(void *)(intptr_t)param${it.index}" else "param${it.index}" }.joinToString(", "))
 			println(""");
 }
 """)
@@ -92,11 +92,13 @@ private class Signature(function: NativeClassFunction) : Comparable<Signature> {
 	val returnType = function.returns.nativeType.mapping
 	val arguments = function.parameters.map { it.nativeType.mapping }
 
-	val signature = "${callingConvention.method}${arguments.map { it.jniSignature }.join("")}${returnType.jniSignature}"
+	val signature = "${callingConvention.method}${arguments.map { it.jniSignature }.joinToString("")}${returnType.jniSignature}"
 
 	override fun equals(other: Any?) = other is Signature && this.signature == other.signature
 
+	override fun hashCode(): Int = signature.hashCode()
+
 	override fun toString() = signature
 
-	override fun compareTo(other: Signature) = this.signature compareTo other.signature
+	override fun compareTo(other: Signature) = this.signature.compareTo(other.signature)
 }

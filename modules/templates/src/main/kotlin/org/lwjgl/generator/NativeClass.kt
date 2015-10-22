@@ -38,7 +38,7 @@ abstract class APIBinding(
 	private val _classes: MutableList<NativeClass> = ArrayList()
 
 	protected fun getClasses(
-		comparator: (NativeClass, NativeClass) -> Int = { o1, o2 -> o1.templateName compareTo o2.templateName }
+		comparator: (NativeClass, NativeClass) -> Int = { o1, o2 -> o1.templateName.compareTo(o2.templateName) }
 	): List<NativeClass> {
 		val classes = ArrayList(_classes)
 		Collections.sort(classes, object : Comparator<NativeClass> { // TODO: Kotlin bug: Can't use SAM conversion on JDK 8
@@ -55,7 +55,7 @@ abstract class APIBinding(
 	}
 
 	fun addCapabilities(clazz: NativeClass) {
-		_classes add clazz
+		_classes.add(clazz)
 	}
 
 	/** If true, different platforms/devices/contexts return different function addresses. */
@@ -182,7 +182,7 @@ class NativeClass(
 
 	private val _functions = LinkedHashMap<String, NativeClassFunction>()
 	val functions: Iterable<NativeClassFunction>
-		get() = _functions.values()
+		get() = _functions.values
 
 	private val customMethods = ArrayList<String>()
 
@@ -278,7 +278,7 @@ class NativeClass(
 			}
 		}
 
-		customMethods forEach {
+		customMethods.forEach {
 			println("\t${it.trim()}\n")
 		}
 
@@ -289,11 +289,11 @@ class NativeClass(
 		println("\n\t/** Function address. */")
 		println("\t@JavadocExclude")
 		print("\tpublic final long")
-		if ( _functions.size() == 1 ) {
-			println(" ${_functions.values().first().addressName};")
+		if ( _functions.size == 1 ) {
+			println(" ${_functions.values.first().addressName};")
 		} else {
 			println()
-			_functions.values().forEachWithMore { func, more ->
+			_functions.values.forEachWithMore { func, more ->
 				if ( more )
 					println(",")
 				print("\t\t${func.addressName}")
@@ -350,11 +350,7 @@ class NativeClass(
 	) {
 		out.print("\n\t\t\t")
 
-
-		val functions = if ( filter == null )
-			_functions.values()
-		else
-			_functions.values().filter(filter)
+		val functions = _functions.values.let { if ( filter == null ) it else it.filter(filter) }
 
 		var lineSize = 12
 		functions.forEachWithMore { func, more ->
@@ -365,10 +361,10 @@ class NativeClass(
 
 			val pointer = printPointer(func)
 
-			lineSize += pointer.length()
+			lineSize += pointer.length
 			if ( 160 <= lineSize ) {
 				out.print("\n\t\t\t")
-				lineSize = 12 + pointer.length()
+				lineSize = 12 + pointer.length
 			}
 
 			out.print(pointer)
@@ -381,7 +377,7 @@ class NativeClass(
 
 	operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<out T>): ConstantBlock<T> {
 		val block = ConstantBlock(this@NativeClass, this, processDocumentation(documentation).toJavaDoc(), *constants)
-		constantBlocks add block
+		constantBlocks.add(block)
 		return block
 	}
 
@@ -418,7 +414,7 @@ class NativeClass(
 	}
 
 	fun customMethod(method: String) {
-		customMethods add method
+		customMethods.add(method)
 	}
 
 	operator fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: $templateName.$functionName")
@@ -459,15 +455,15 @@ class NativeClass(
 		if ( !matcher.find() )
 			return documentation
 
-		val buffer = StringBuilder(documentation.length())
+		val buffer = StringBuilder(documentation.length)
 		var lastEnd = 0
 		do {
 			buffer.append(documentation, lastEnd, matcher.start())
 
 			val element = matcher.group(1)
 
-			if ( referenceClass.prefixConstant.isNotEmpty() && element startsWith referenceClass.prefixConstant ) {
-				if ( element.substring(referenceClass.prefixConstant.length()).let { constant ->
+			if ( referenceClass.prefixConstant.isNotEmpty() && element.startsWith(referenceClass.prefixConstant) ) {
+				if ( element.substring(referenceClass.prefixConstant.length).let { constant ->
 					!this.constantBlocks.any { block -> block.constants.any { it -> it.name == constant } }
 				} )
 					buffer.append(referenceClass.className)
@@ -478,7 +474,7 @@ class NativeClass(
 
 			lastEnd = matcher.end()
 		} while ( matcher.find() )
-		buffer.append(documentation, lastEnd, documentation.length())
+		buffer.append(documentation, lastEnd, documentation.length)
 
 		return buffer.toString()
 	}

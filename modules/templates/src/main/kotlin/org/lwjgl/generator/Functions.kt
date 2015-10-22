@@ -6,9 +6,7 @@ package org.lwjgl.generator
 
 import org.lwjgl.generator.GenerationMode.ALTERNATIVE
 import org.lwjgl.generator.GenerationMode.NORMAL
-import org.lwjgl.generator.ParameterType.IN
-import org.lwjgl.generator.ParameterType.INOUT
-import org.lwjgl.generator.ParameterType.OUT
+import org.lwjgl.generator.ParameterType.*
 import java.io.PrintWriter
 import java.nio.ByteBuffer
 import java.util.*
@@ -42,7 +40,7 @@ internal val FUNCTION_ADDRESS = "__functionAddress"
 internal val API_BUFFER = "__buffer"
 internal val JNIENV = "__env"
 
-internal enum class GenerationMode {
+enum class GenerationMode {
 	NORMAL,
 	ALTERNATIVE
 }
@@ -125,7 +123,7 @@ class NativeClassFunction(
 		var name = functionName
 		var postfix = (if ( has(DependsOn) ) this[DependsOn].postfix else null) ?: nativeClass.postfix
 		if ( name.endsWith(postfix) )
-			name = name.substring(0, name.length() - postfix.length())
+			name = name.substring(0, name.length - postfix.length)
 		else
 			postfix = ""
 
@@ -146,16 +144,16 @@ class NativeClassFunction(
 			}
 
 			if ( typeChar != "" ) {
-				val offset = name.length() - cutCount
-				if ( typeChar equals name.substring(offset - typeChar.length(), offset) )
-					cutCount += typeChar.length()
+				val offset = name.length - cutCount
+				if ( typeChar.equals(name.substring(offset - typeChar.length, offset)) )
+					cutCount += typeChar.length
 
-				if ( name.charAt(name.length() - cutCount - 1) == 'u' )
+				if ( name[name.length - cutCount - 1] == 'u' )
 					cutCount++
 			}
 		}
 
-		return name.substring(0, name.length() - cutCount) + postfix
+		return name.substring(0, name.length - cutCount) + postfix
 	}
 
 	val javaDocLink: String
@@ -164,7 +162,7 @@ class NativeClassFunction(
 	private val methodLink: String get() = "#$simpleName()"
 
 	val hasCustomJNI: Boolean
-		get() = nativeClass.binding == null || (has(Code) && this[Code] let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null })
+		get() = nativeClass.binding == null || (has(Code) && this[Code].let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null })
 
 	private val isSimpleFunction: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
@@ -211,10 +209,10 @@ class NativeClassFunction(
 					else {
 						when {
 							bufferParam.nativeType !is PointerType
-														 -> it.error("Buffer reference must be a pointer type: AutoSize($reference)")
+							                             -> it.error("Buffer reference must be a pointer type: AutoSize($reference)")
 							!bufferParam.isBufferPointer -> it.error("Buffer reference must not be a opaque pointer: AutoSize($reference)")
 							bufferParam.nativeType is StructType && !bufferParam.has(StructBuffer)
-														 -> it.error("Struct reference must be annotated with StructBuffer: AutoSize($reference)")
+							                             -> it.error("Struct reference must be annotated with StructBuffer: AutoSize($reference)")
 						}
 
 						if ( bufferParam.nativeType is CharSequenceType && bufferParam.nativeType.charMapping == CharMapping.UTF16 )
@@ -283,7 +281,7 @@ class NativeClassFunction(
 					it.error("An AutoSize for PointerArray parameter does not exist")
 
 				val lengthsParamName = it[PointerArray].lengthsParam
-				val lengthsParam = paramMap[lengthsParamName]
+				val lengthsParam = paramMap.getRaw(lengthsParamName)
 				if ( lengthsParam != null && !lengthsParam.nativeType.mapping.isPointerSize )
 					it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
 			}
@@ -295,7 +293,7 @@ class NativeClassFunction(
 
 		// Validate function address
 		if ( (has(DependsOn) || has(IgnoreMissing) || (nativeClass.binding?.shouldCheckFunctionAddress(this@NativeClassFunction) ?: false)) && !hasUnsafeMethod )
-			checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
+			checks.add("checkFunctionAddress($FUNCTION_ADDRESS);")
 
 		// We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
 		// So we need to scale the length check by the number of bytes per element.
@@ -310,19 +308,19 @@ class NativeClassFunction(
 			if ( !mapping.isMultiByte )
 				return expression
 
-			val builder = StringBuilder(expression.length() + 8)
+			val builder = StringBuilder(expression.length + 8)
 
 			if ( expression.indexOf(' ') != -1 ) {
-				builder append '('
-				builder append expression
-				builder append ')'
+				builder.append('(')
+				builder.append(expression)
+				builder.append(')')
 			} else
-				builder append expression
+				builder.append(expression)
 
-			builder append ' '
-			builder append shift
-			builder append ' '
-			builder append mapping.byteShift
+			builder.append(' ')
+			builder.append(shift)
+			builder.append(' ')
+			builder.append(mapping.byteShift)
 
 			return builder.toString()
 		}
@@ -331,11 +329,11 @@ class NativeClassFunction(
 			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "if ( ${it.name} != null ) " else ""
 
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType )
-				checks add "checkPointer(${it.name});"
+				checks.add("checkPointer(${it.name});")
 
 			if ( mode === NORMAL && it.nativeType is CharSequenceType && it.paramType === IN ) {
 				if ( it.nativeType.nullTerminated && getReferenceParam(AutoSize, it.name) == null )
-					checks add "${prefix}checkNT${it.nativeType.charMapping.bytes}(${it.name});"
+					checks.add("${prefix}checkNT${it.nativeType.charMapping.bytes}(${it.name});")
 			}
 
 			if ( it.paramType === IN && it has Terminated ) {
@@ -349,7 +347,7 @@ class NativeClassFunction(
 						PointerMapping.DATA_POINTER -> "P"
 						else                        -> "1"
 					}
-				checks add "${prefix}checkNT$postfix(${it.name}${it[Terminated] let { if ( it === NullTerminated ) "" else ", ${it.value}" }});"
+				checks.add("${prefix}checkNT$postfix(${it.name}${it[Terminated].let { if ( it === NullTerminated ) "" else ", ${it.value}" }});")
 			}
 
 			if ( it has Check ) {
@@ -360,11 +358,11 @@ class NativeClassFunction(
 					if ( check.debug ) prefix = "if ( LWJGLUtil.DEBUG )\n\t\t\t\t$prefix"
 
 					if ( it.nativeType.javaMethodType === ByteBuffer::class.java )
-						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});"
+						checks.add("${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});")
 					else if ( mode === NORMAL || it.nativeType is StructType )
-						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});"
+						checks.add("${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});")
 					else
-						checks add "${prefix}checkBuffer(${it.name}, ${check.expression});"
+						checks.add("${prefix}checkBuffer(${it.name}, ${check.expression});")
 				}
 			}
 
@@ -385,7 +383,7 @@ class NativeClassFunction(
 
 					sequenceOf(autoSize.reference, *autoSize.dependent).forEach {
 						prefix = if ( paramMap[it]!! has Nullable ) "if ( $it != null ) " else ""
-						checks add "${prefix}checkBuffer($it, ${if ( mode === NORMAL ) bufferShift(expression, it, "<<", null) else expression});"
+						checks.add("${prefix}checkBuffer($it, ${if ( mode === NORMAL ) bufferShift(expression, it, "<<", null) else expression});")
 					}
 				}
 
@@ -399,15 +397,15 @@ class NativeClassFunction(
 						else
 							"${autoSize.reference}.remaining()"
 
-					autoSize.dependent forEach {
+					autoSize.dependent.forEach {
 						val param = paramMap[it]!!
 						val transform = transforms[param]
 						if ( transform !is SkipCheckFunctionTransform ) {
 							prefix = if ( param has Nullable && transform !is PointerArrayTransform ) "if ( $it != null ) " else ""
-							checks add if ( transform === PointerArrayTransformArray )
+							checks.add(if ( transform === PointerArrayTransformArray )
 								"${prefix}checkArray($it, $expression);"
 							else
-								"${prefix}checkBuffer($it, $expression);"
+								"${prefix}checkBuffer($it, $expression);")
 						}
 					}
 				}
@@ -419,12 +417,12 @@ class NativeClassFunction(
 		if ( checks.isEmpty() )
 			return
 
-		println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size() == 1) "" else " {" }")
+		println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size == 1 ) "" else " {" }")
 		checks.forEach {
 			print("\t\t\t")
 			println(it)
 		}
-		if ( 1 < checks.size() )
+		if ( 1 < checks.size )
 			println("\t\t}")
 	}
 
@@ -504,19 +502,19 @@ class NativeClassFunction(
 		// Basic checks
 		val checks = ArrayList<String>(4)
 		if ( has(DependsOn) || has(IgnoreMissing) || nativeClass.binding.shouldCheckFunctionAddress(this@NativeClassFunction) )
-			checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
-		parameters forEach {
+			checks.add("checkFunctionAddress($FUNCTION_ADDRESS);")
+		parameters.forEach {
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType )
-				checks add "checkPointer(${it.name});"
+				checks.add("checkPointer(${it.name});")
 		}
 
 		if ( checks.isNotEmpty() ) {
-			println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size() == 1) "" else " {" }")
+			println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size == 1) "" else " {" }")
 			checks.forEach {
 				print("\t\t\t")
 				println(it)
 			}
-			if ( 1 < checks.size() )
+			if ( 1 < checks.size )
 				println("\t\t}")
 		}
 
@@ -525,7 +523,7 @@ class NativeClassFunction(
 		if ( !returns.isVoid )
 			print("return ")
 
-		print("${nativeClass.binding.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}(")
+		print("${nativeClass.binding.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.joinToString("")}${returns.nativeType.mapping.jniSignature}(")
 		print("$FUNCTION_ADDRESS")
 		if ( hasNativeParams ) print(", ")
 		printList(getNativeParams()) {
@@ -644,7 +642,7 @@ class NativeClassFunction(
 									else
 										"(int)${it.name}.getLong(${it.name}.position())"
 								}
-							}.join(" * ")}")
+							}.joinToString(" * ")}")
 						} else if ( returns has Address )
 							print(", 1")
 						else
@@ -719,7 +717,7 @@ class NativeClassFunction(
 				if ( hasCustomJNI )
 					"n$name("
 				else
-					"${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}("
+					"${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 			)
 			if ( nativeClass.binding != null ) {
 				print("$FUNCTION_ADDRESS")
@@ -759,7 +757,7 @@ class NativeClassFunction(
 		}
 
 		// Step 1: Apply basic transformations
-		parameters forEach {
+		parameters.forEach {
 			if ( it.paramType === IN ) {
 				if ( it has AutoSize ) {
 					val autoSize = it[AutoSize]
@@ -779,7 +777,7 @@ class NativeClassFunction(
 		}
 
 		// Step 2: Check if we have any basic transformation to apply or if we have a multi-byte-per-element buffer parameter
-		if ( !transforms.isEmpty() || parameters any { it.isBufferPointer && (it.nativeType.mapping as PointerMapping).isMultiByte && !(it.isAutoSizeResultOut && hideAutoSizeResultParam) } )
+		if ( !transforms.isEmpty() || parameters.any { it.isBufferPointer && (it.nativeType.mapping as PointerMapping).isMultiByte && !(it.isAutoSizeResultOut && hideAutoSizeResultParam) } )
 			generateAlternativeMethod(name, "Alternative version of:", transforms)
 
 		// Step 3: Generate more complex alternatives if necessary
@@ -792,7 +790,7 @@ class NativeClassFunction(
 		}
 
 		// Apply any CharSequenceTransforms. These can be combined with any of the other transformations.
-		if ( parameters count {
+		if ( parameters.count {
 			if ( it.paramType === OUT || it.nativeType !is CharSequenceType )
 				false
 			else {
@@ -809,7 +807,7 @@ class NativeClassFunction(
 
 		fun applyReturnValueTransforms(param: Parameter) {
 			// Transform void to the proper type
-			transforms[returns] = PrimitiveValueReturnTransform(PointerMapping.primitiveMap[param.nativeType.mapping]!!, param.name)
+			transforms[returns] = PrimitiveValueReturnTransform(PointerMapping.primitiveMap[param.nativeType.mapping as PointerMapping]!!, param.name)
 
 			// Transform the AutoSize parameter, if there is one
 			getParams(hasAutoSizePredicate(param)).forEach {
@@ -821,7 +819,7 @@ class NativeClassFunction(
 		}
 
 		// Apply any complex transformations.
-		parameters forEach {
+		parameters.forEach {
 			if ( it has Return && !hasParam { it has PointerArray } ) {
 				val returnMod = it[Return]
 
@@ -877,7 +875,7 @@ class NativeClassFunction(
 				// Generate MultiType alternatives
 
 				// Add the AutoSize transformation if we skipped it above
-				getParams { it has AutoSize } forEach {
+				getParams { it has AutoSize }.forEach {
 					val autoSize = it[AutoSize]
 					transforms[it] = AutoSizeTransform(paramMap[autoSize.reference]!!, autoSize.applyTo)
 				}
@@ -888,7 +886,7 @@ class NativeClassFunction(
 
 				for (autoType in multiTypes) {
 					// Transform the AutoSize parameter, if there is one
-					getReferenceParam(AutoSize, it.name) let { autoSizeParam ->
+					getReferenceParam(AutoSize, it.name).let { autoSizeParam ->
 						if ( autoSizeParam != null )
 							transforms[autoSizeParam] = AutoSizeTransform(it, ApplyTo.ALTERNATIVE, autoType.byteShift!!)
 					}
@@ -897,9 +895,9 @@ class NativeClassFunction(
 					generateAlternativeMethod(name, "${autoType.javaMethodType.simpleName} version of:", transforms)
 				}
 
-				getReferenceParam(AutoSize, it.name) let {
+				getReferenceParam(AutoSize, it.name).let {
 					if ( it != null )
-						transforms remove it
+						transforms.remove(it)
 				}
 
 				// Generate a SingleValue alternative for each type
@@ -920,10 +918,10 @@ class NativeClassFunction(
 						}
 					}
 
-					transforms remove autoSizeParam
+					transforms.remove(autoSizeParam)
 				}
 
-				transforms remove it
+				transforms.remove(it)
 			} else if ( it has AutoType ) {
 				// Generate AutoType alternatives
 
@@ -935,17 +933,17 @@ class NativeClassFunction(
 				if ( autoSizeParam != null )
 					transforms[autoSizeParam] = AutoSizeTransform(bufferParam, autoSizeParam[AutoSize].applyTo, applyFactor = false)
 
-				val types = ArrayList<AutoTypeToken>(autoTypes.types.size())
-				autoTypes.types.forEach { types add it }
+				val types = ArrayList<AutoTypeToken>(autoTypes.types.size)
+				autoTypes.types.forEach { types.add(it) }
 
 				for (autoType in types) {
-					transforms[it] = AutoTypeParamTransform("${autoType.className}.${autoType.name()}")
+					transforms[it] = AutoTypeParamTransform("${autoType.className}.${autoType.name}")
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
-					generateAlternativeMethod(name, "${autoType.name()} version of:", transforms)
+					generateAlternativeMethod(name, "${autoType.name} version of:", transforms)
 				}
 
-				transforms remove bufferParam
-				transforms remove it
+				transforms.remove(bufferParam)
+				transforms.remove(it)
 			}
 		}
 
@@ -962,7 +960,7 @@ class NativeClassFunction(
 			it.forEach {
 				val pointerArray = it[PointerArray]
 
-				val lengthsParam = paramMap[pointerArray.lengthsParam]
+				val lengthsParam = paramMap.getRaw(pointerArray.lengthsParam)
 				if ( lengthsParam != null )
 					transforms[lengthsParam] = PointerArrayLengthsTransform(it, true)
 
@@ -977,13 +975,13 @@ class NativeClassFunction(
 			generateAlternativeMethod(name, "Array version of:", transforms)
 
 			// Combine PointerArrayTransformSingle with BufferValueReturnTransform
-			getParams { it has ReturnParam } forEach { applyReturnValueTransforms(it) }
+			getParams { it has ReturnParam }.forEach { applyReturnValueTransforms(it) }
 
 			// Single value version
 			val names = it.map {
 				val pointerArray = it[PointerArray]
 
-				val lengthsParam = paramMap[pointerArray.lengthsParam]
+				val lengthsParam = paramMap.getRaw(pointerArray.lengthsParam)
 				if ( lengthsParam != null )
 					transforms[lengthsParam] = PointerArrayLengthsTransform(it, false)
 
@@ -994,25 +992,25 @@ class NativeClassFunction(
 				transforms[it] = PointerArrayTransformSingle
 
 				pointerArray.singleName
-			}.join(" &amp; ")
+			}.joinToString(" &amp; ")
 			generateAlternativeMethod(name, "Single $names version of:", transforms)
 
 			// Cleanup
 			it.forEach {
 				val countParam = it.getAutoSizeReference()
 				if ( countParam != null )
-					transforms remove countParam
-				transforms remove it
+					transforms.remove(countParam)
+				transforms.remove(it)
 			}
 		}
 
 		// Apply any SingleValue transformations.
-		if ( parameters count {
+		if ( parameters.count {
 			if ( !it.has(SingleValue) || it.has(MultiType) ) {
 				false
 			} else {
 				// Compine SingleValueTransform with BufferValueReturnTransform
-				getParams { it has ReturnParam } forEach { applyReturnValueTransforms(it) }
+				getParams { it has ReturnParam }.forEach { applyReturnValueTransforms(it) }
 
 				// Transform the AutoSize parameter, if there is one
 				getParams(hasAutoSizePredicate(it)).forEach {
@@ -1021,7 +1019,7 @@ class NativeClassFunction(
 
 				val singleValue = it[SingleValue]
 				val pointerType = it.nativeType as PointerType
-				val primitiveType = PointerMapping.primitiveMap[pointerType.mapping]!!
+				val primitiveType = PointerMapping.primitiveMap[pointerType.mapping as PointerMapping]!!
 				transforms[it] = SingleValueTransform(
 					when ( pointerType.elementType ) {
 						null                -> primitiveType
@@ -1164,17 +1162,17 @@ class NativeClassFunction(
 						returns.nativeType.mapping.javaMethodType.simpleName
 
 					val builder = StringBuilder()
-					builder append "mem$bufferType"
+					builder.append("mem$bufferType")
 					if ( isNullTerminated )
-						builder append "NT${(returns.nativeType as CharSequenceType).charMapping.bytes}"
-					builder append "($RESULT"
+						builder.append("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+					builder.append("($RESULT")
 					if ( returns has MapPointer )
-						builder append ", ${returns[MapPointer].sizeExpression}"
+						builder.append(", ${returns[MapPointer].sizeExpression}")
 					else if ( !isNullTerminated ) {
 						if ( hasParam { it has AutoSizeResult } ) {
 							val params = getParams { it has AutoSizeResult }
 							val single = params.count() == 1
-							builder append ", ${params.map {
+							builder.append(", ${params.map {
 								if ( it.paramType === IN )
 									"(int)${it.name}"
 								else if ( it.nativeType.mapping === PointerMapping.DATA_INT ) {
@@ -1188,11 +1186,11 @@ class NativeClassFunction(
 									else
 										"(int)${it.name}.get(${it.name}.position())"
 								}
-							}.join(" * ")}"
+							}.joinToString(" * ")}")
 						} else
 							throw IllegalStateException("No AutoSizeResult parameter could be found.")
 					}
-					builder append ")"
+					builder.append(")")
 
 					val returnExpression = returns.transformCallOrElse(transforms, builder.toString())
 					if ( returnExpression.indexOf('\n') == -1 )
@@ -1234,7 +1232,7 @@ class NativeClassFunction(
 		print("JNIEnv *$JNIENV, jclass clazz")
 		if ( nativeClass.binding != null )
 			print(", jlong $FUNCTION_ADDRESS")
-		getNativeParams() forEach {
+		getNativeParams().forEach {
 			print(", ${it.asJNIFunctionParam}")
 		}
 		if ( returnsStructValue )

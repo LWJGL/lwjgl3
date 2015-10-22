@@ -10,7 +10,7 @@ import org.lwjgl.generator.*
 fun NativeClass.capName(core: String) =
 	if ( templateName.startsWith(prefixTemplate) ) {
 		if ( prefix == core )
-			"Open$core${templateName.substring(core.length())}"
+			"Open$core${templateName.substring(core.length)}"
 		else
 			templateName
 	} else {
@@ -83,10 +83,10 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions && it.prefix == "ALC" }
-		val alignment = classesWithFunctions.map { it.className.length() }.fold(0) { left, right -> Math.max(left, right) }
+		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
 			print("\tfinal ${extension.className}")
-			for ( i in 0..(alignment - extension.className.length() - 1) )
+			for ( i in 0..(alignment - extension.className.length - 1) )
 				print(' ')
 			println(" __${extension.className};")
 		}

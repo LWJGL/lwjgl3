@@ -157,7 +157,7 @@ object StringReturnTransform : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
 		val expression = if ( original.startsWith("memByteBufferNT") )
-			original.substring(17, original.length() - 1);
+			original.substring(17, original.length - 1);
 		else
 			original
 		return "memDecode${(param.nativeType as CharSequenceType).charMapping.charset}($expression)";
@@ -273,6 +273,7 @@ class BufferAutoSizeReturnTransform(
 		else
 			return "${elementType.javaMethodType.simpleName}"
 	}
+
 	override fun transformCall(param: ReturnValue, original: String): String {
 		val elementType: NativeType = (outParam.nativeType as PointerType).elementType!!
 
@@ -295,7 +296,7 @@ class BufferReturnTransform(
 			"\t\treturn memDecode$encoding($API_BUFFER.buffer(), $API_BUFFER.intValue($lengthParam), ${outParam.name});"
 		else if ( outParam.nativeType.mapping !== PointerMapping.DATA_BYTE )
 			"\t\t${outParam.name}.limit($API_BUFFER.intValue($lengthParam));\n" +
-			"\t\treturn ${outParam.name}.slice();"
+				"\t\treturn ${outParam.name}.slice();"
 		else
 			"\t\treturn memSlice(${outParam.name}, $API_BUFFER.intValue($lengthParam));"
 	}
@@ -333,7 +334,7 @@ open class PointerArrayTransform(val paramType: String) : FunctionTransform<Para
 		if ( pointerArray.lengthsParam != null )
 			return
 
-		println((if ( paramType.isNotEmpty() ) param.name else pointerArray.singleName) let {
+		println((if ( paramType.isNotEmpty() ) param.name else pointerArray.singleName).let {
 			if ( pointerArray.elementType is CharSequenceType )
 				"\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam${pointerArray.elementType.charMapping.charset}($it);"
 			else
@@ -377,8 +378,8 @@ class PointerArrayLengthsTransform(
 	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
 		val pointerArray = arrayParam[PointerArray]
 
-		val lengthType = PointerMapping.primitiveMap[param.nativeType.mapping]!![0]
-		println((if ( multi ) arrayParam.name else pointerArray.singleName) let {
+		val lengthType = PointerMapping.primitiveMap[param.nativeType.mapping as PointerMapping]!![0]
+		println((if ( multi ) arrayParam.name else pointerArray.singleName).let {
 			if ( pointerArray.elementType is CharSequenceType )
 				"\t\tint ${arrayParam.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam${pointerArray.elementType.charMapping.charset}$lengthType($it);"
 			else

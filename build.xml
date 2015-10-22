@@ -214,7 +214,7 @@ License terms: http://lwjgl.org/license.php
 
 	<target name="-generate" description="Runs the code Generator" depends="bindings" unless="generated-uptodate">
 		<java
-			classname="org.lwjgl.generator.GeneratorPackage"
+			classname="org.lwjgl.generator.GeneratorKt"
 			fork="true"
 			failonerror="true"
 			taskname="Generator"

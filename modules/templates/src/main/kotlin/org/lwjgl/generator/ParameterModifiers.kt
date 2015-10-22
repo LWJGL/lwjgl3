@@ -93,7 +93,7 @@ class AutoSize(
 
 object AutoSizeResult : ParameterModifier() {
 	override val isSpecial = true
-	override protected fun validate(param: Parameter) {
+	override fun validate(param: Parameter) {
 		if ( param.paramType === ParameterType.IN )
 			when ( param.nativeType.mapping ) {
 				PrimitiveMapping.INT,
@@ -195,7 +195,7 @@ class Expression(
 }
 
 interface AutoTypeToken {
-	fun name(): String
+	val name: String
 	val mapping: PointerMapping
 	val className: String
 }

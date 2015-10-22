@@ -46,7 +46,7 @@ fun info() {
 """
 			)
 
-			open data class ObjectType(
+			open class ObjectType(
 				val source: String,
 				val name: String,
 				val types: EnumSet<InfoQueryType>,
@@ -114,10 +114,14 @@ fun info() {
 				ObjectType("CL10", "Event Profiling", EnumSet.of(LONG), "EventProfiling", "event")
 			)
 			if ( Binding.OPENGL.enabled )
-				objects add ObjectType("CL10GL", "GL Texture", EnumSet.of(INT), "GLTexture", "memobj")
+				objects.add(ObjectType("CL10GL", "GL Texture", EnumSet.of(INT), "GLTexture", "memobj"))
 
 			for ( obj in objects ) {
-				val (source, name, types, info) = obj
+				val source = obj.source
+				val name = obj.name
+				val types = obj.types
+				val info = obj.info
+
 				val QUERY = name.replace(' ', '_').toUpperCase()
 				val link = "{@link $source#clGet${info}Info Get${info}Info}"
 

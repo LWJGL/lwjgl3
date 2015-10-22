@@ -155,10 +155,10 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-		val alignment = classesWithFunctions.map { it.className.length() }.fold(0) { left, right -> Math.max(left, right) }
+		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
 			print("\tfinal ${extension.className}")
-			for ( i in 0..(alignment - extension.className.length() - 1) )
+			for ( i in 0..(alignment - extension.className.length - 1) )
 				print(' ')
 			println(" __${extension.className};")
 		}

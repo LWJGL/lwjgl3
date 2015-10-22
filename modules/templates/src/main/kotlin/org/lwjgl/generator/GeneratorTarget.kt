@@ -4,9 +4,10 @@
  */
 package org.lwjgl.generator
 
+import java.io.File
+import java.io.PrintWriter
 import java.util.*
 import java.util.regex.Pattern
-import java.io.*
 
 
 val HEADER = """/*
@@ -37,22 +38,22 @@ class Preamble {
 
 	fun javaImport(vararg classes: String) {
 		if ( javaImports === EMPTY_IMPORTS )
-			javaImports = ArrayList(classes.size())
+			javaImports = ArrayList(classes.size)
 
 		classes.forEach {
-			javaImports add it
+			javaImports.add(it)
 		}
 	}
 
 	fun nativeImport(vararg files: String) {
 		if ( nativeImports === EMPTY_IMPORTS )
-			nativeImports = ArrayList(files.size())
+			nativeImports = ArrayList(files.size)
 
 		files.forEach {
-			nativeImports add if ( it.startsWith('<') )
+			nativeImports.add(if ( it.startsWith('<') )
 				it
 			else
-				"\"$it\""
+				"\"$it\"")
 		}
 	}
 
@@ -70,7 +71,7 @@ class Preamble {
 		fun List<String>.print() = this.forEach { writer.println("import $it;") }
 
 		val static = javaImports.filter { it.startsWith("static ") }
-		if ( !static.isEmpty() && static.size() < javaImports.size() ) {
+		if ( !static.isEmpty() && static.size < javaImports.size ) {
 			// Separate plain from static imports
 			javaImports.filter { !it.startsWith("static ") }.print()
 			writer.println();
@@ -115,7 +116,7 @@ enum class Access(internal val modifier: String) {
 abstract class GeneratorTarget(
 	val packageName: String,
 	val className: String
-): TemplateElement() {
+) : TemplateElement() {
 
 	companion object {
 		private val LINKS: Pattern = {
@@ -132,7 +133,7 @@ abstract class GeneratorTarget(
 		try {
 			throw RuntimeException()
 		} catch (t: Throwable) {
-			return t.getStackTrace().asSequence()
+			return t.stackTrace.asSequence()
 				.map { it.fileName }
 				.filterNotNull()
 				.filter {
@@ -163,17 +164,17 @@ abstract class GeneratorTarget(
 
 	val preamble = Preamble()
 
-	fun <T: GeneratorTarget> T.javaImport(vararg classes: String): T {
+	fun <T : GeneratorTarget> T.javaImport(vararg classes: String): T {
 		preamble.javaImport(*classes)
 		return this
 	}
 
-	fun <T: GeneratorTarget> T.nativeDirective(expression: String, beforeIncludes: Boolean = false): T {
+	fun <T : GeneratorTarget> T.nativeDirective(expression: String, beforeIncludes: Boolean = false): T {
 		preamble.nativeDirective(expression, beforeIncludes)
 		return this
 	}
 
-	fun <T: GeneratorTarget> T.nativeImport(vararg files: String): T {
+	fun <T : GeneratorTarget> T.nativeImport(vararg files: String): T {
 		preamble.nativeImport(*files)
 		return this
 	}
@@ -187,7 +188,7 @@ abstract class GeneratorTarget(
 		if ( !matcher.find() )
 			return documentation
 
-		val buffer = StringBuilder(documentation.length() * 2)
+		val buffer = StringBuilder(documentation.length * 2)
 
 		var lastEnd = 0
 		do {
@@ -201,17 +202,17 @@ abstract class GeneratorTarget(
 			 */
 			val linkMethod = matcher.group(2)!!
 			if ( linkMethod[0] == '\\' ) {
-				buffer append matcher.group().replace("\\#", "#")
+				buffer.append(matcher.group().replace("\\#", "#"))
 			} else {
 				if ( linkMethod[0] == '@' )
-					buffer append "see "
+					buffer.append("see ")
 
 				val className = matcher.group(1)
 				val classElement = matcher.group(3)!!
 
 				val link = if ( classElement.endsWith(')') ) LinkType.METHOD else LinkType.FIELD
 				val prefix = if ( link === LinkType.FIELD ) prefixConstant else prefixMethod
-				buffer append when ( linkMethod.count { it == '#' } ) {
+				buffer.append(when ( linkMethod.count { it == '#' } ) {
 					1    -> link.create(this.className, prefix, className, classElement, if ( this is NativeClass) this.postfix else "", custom = false)
 					2    ->
 						if ( className == null && link === LinkType.FIELD )
@@ -219,13 +220,13 @@ abstract class GeneratorTarget(
 						else
 							link.create(this.className, prefix, className, classElement, "", custom = true)
 					else -> throw IllegalStateException("Unsupported link type: $link")
-				}
+				})
 			}
 
 			lastEnd = matcher.end()
 		} while ( matcher.find() )
 
-		buffer.append(documentation, lastEnd, documentation.length())
+		buffer.append(documentation, lastEnd, documentation.length)
 
 		return buffer.toString()
 	}
@@ -250,7 +251,7 @@ abstract class GeneratorTarget(
 
 				val name = classElement.substring(0, parentheses)
 
-				val hasParams = parentheses < classElement.length() - 2
+				val hasParams = parentheses < classElement.length - 2
 				return "{@link $source#$prefix$name${if ( hasParams ) classElement.substring(parentheses) else ""}${if ( prefix.isEmpty() || hasParams || custom ) "" else " $name"}}"
 			}
 		};
@@ -264,7 +265,7 @@ abstract class GeneratorTargetNative(
 	packageName: String,
 	className: String,
 	val nativeSubPath: String = ""
-): GeneratorTarget(packageName, className) {
+) : GeneratorTarget(packageName, className) {
 
 	companion object {
 		val DOT_PATTERN = Pattern.compile("[.]")
@@ -274,15 +275,16 @@ abstract class GeneratorTargetNative(
 		get() = "${packageName.replace('.', '_')}_$className"
 
 	val nativeFileNameJNI: String
-	init {
-		val fileName = StringBuilder(packageName.length() + className.length() + 4); // some extra room for escaping
 
-		for ( subpackage in DOT_PATTERN.split(packageName) ) {
-			fileName append subpackage.asJNIName
-			fileName append '_'
+	init {
+		val fileName = StringBuilder(packageName.length + className.length + 4); // some extra room for escaping
+
+		for (subpackage in DOT_PATTERN.split(packageName)) {
+			fileName.append(subpackage.asJNIName)
+			fileName.append('_')
 		}
 
-		fileName append className.asJNIName
+		fileName.append(className.asJNIName)
 
 		nativeFileNameJNI = fileName.toString()
 	}
@@ -296,7 +298,7 @@ abstract class GeneratorTargetNative(
 abstract class CustomClass(
 	packageName: String,
 	className: String
-): GeneratorTarget(packageName, className) {
+) : GeneratorTarget(packageName, className) {
 
 	override fun PrintWriter.generateJava() {
 		print(HEADER)
@@ -321,7 +323,7 @@ fun CustomClass(
 	init: (CustomClass.() -> Unit)? = null,
 	printContent: PrintWriter.() -> Unit
 ): CustomClass {
-	var cc = object: CustomClass(packageName, className) {
+	var cc = object : CustomClass(packageName, className) {
 		override fun PrintWriter.generateContent() = printContent()
 	}
 

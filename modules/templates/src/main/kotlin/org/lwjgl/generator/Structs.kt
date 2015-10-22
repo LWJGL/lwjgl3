@@ -35,7 +35,7 @@ private open class StructMember(
 	else
 		"$parentMember${name.upperCaseFirst}"
 
-	fun method(parentMember: String) = UNDERSCORE.split(_method(parentMember)).map { it.upperCaseFirst }.join("")
+	fun method(parentMember: String) = UNDERSCORE.split(_method(parentMember)).map { it.upperCaseFirst }.joinToString("")
 
 }
 
@@ -117,17 +117,17 @@ class Struct(
 
 	// Plain field
 	fun NativeType.member(nativeName: String, name: String = nativeName) {
-		members add StructMember(this, nativeName, name)
+		members.add(StructMember(this, nativeName, name))
 	}
 
 	// Array field
 	fun NativeType.member(nativeName: String, name: String = nativeName, size: Int) {
-		members add StructMemberArray(this, nativeName, name, size)
+		members.add(StructMemberArray(this, nativeName, name, size))
 	}
 
 	// CharSequence special-case
 	fun CharType.member(nativeName: String, name: String = nativeName, size: Int, nullTerminated: Boolean) {
-		members add StructMemberCharArray(this, nativeName, name, size, nullTerminated)
+		members.add(StructMemberCharArray(this, nativeName, name, size, nullTerminated))
 	}
 
 	private val StructMember.isNestedStruct: Boolean
@@ -231,12 +231,12 @@ class Struct(
 				println()
 				generateSetters(AccessMode.INSTANCE, members)
 
-				if ( members.size() > 1 ) {
+				if ( members.size > 1 ) {
 					val javadoc = "Initializes this struct with the specified values."
 					// Factory constructors
 					if ( generateAlternativeMultiSetter(members) ) {
 						generateMultiSetter(javadoc, members, generateAlternativeMultiSetterParameters, generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER1)
-						if ( members any { it is StructMemberCharArray } )
+						if ( members.any { it is StructMemberCharArray } )
 							generateMultiSetter(javadoc, members, generateAlternativeMultiSetterParameters, generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER2)
 					} else
 						generateMultiSetter(javadoc, members, generateMultiSetterParameters, generateMultiSetterSetters)
@@ -419,7 +419,7 @@ class Struct(
 	}
 
 	private fun getMemberCount(members: List<StructMember>): Int {
-		var count = members.size()
+		var count = members.size
 		for (member in members.asSequence().filter { it.isNestedAnonymousStruct })
 			count += getMemberCount(member.nestedMembers) // recursion
 		return count
@@ -432,7 +432,7 @@ class Struct(
 		offset: Int = 0
 	): Int {
 		var index = offset
-		members forEach {
+		members.forEach {
 			val field = it.offsetField(parentField)
 
 			println("$indentation$field = offsets.get($index);")
@@ -529,7 +529,7 @@ class Struct(
 	}
 
 	private val generateAlternativeMultiSetter: (List<StructMember>) -> Boolean = { members ->
-		members any {
+		members.any {
 			if ( it.isNestedAnonymousStruct )
 				generateAlternativeMultiSetter(it.nestedMembers)
 			else
@@ -605,7 +605,7 @@ class Struct(
 	else if ( parentStruct.className === ANONYMOUS )
 		"${parentField}_${m.offsetField}"
 	else {
-		val classPrefix = if ( parentField equals parentStruct.className ) // See org.lwjgl.system.windows.MSG, field POINT
+		val classPrefix = if ( parentField.equals(parentStruct.className) ) // See org.lwjgl.system.windows.MSG, field POINT
 			"${parentStruct.packageName}.${parentStruct.className}"
 		else
 			parentStruct.className
@@ -615,7 +615,7 @@ class Struct(
 	private fun getNestedStructSizeOf(
 		nestedStruct: Struct,
 		field: String
-	) = if ( field equals nestedStruct.className ) // See org.lwjgl.system.windows.MSG, field POINT
+	) = if ( field.equals(nestedStruct.className) ) // See org.lwjgl.system.windows.MSG, field POINT
 		"${nestedStruct.packageName}.${nestedStruct.className}.SIZEOF"
 	else
 		"${nestedStruct.className}.SIZEOF"
@@ -680,7 +680,7 @@ class Struct(
 					it is StructMemberArray           -> {
 						if ( it.nativeType is PrimitiveType ) {
 							val mapping = it.nativeType.mapping as PrimitiveMapping
-							val bytesPerElement = if ( mapping === PrimitiveMapping.POINTER ) "POINTER_SIZE" else mapping.bytes
+							val bytesPerElement = if ( mapping === PrimitiveMapping.POINTER ) "POINTER_SIZE" else mapping.bytes.toString()
 
 							println("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) {")
 							println("\t\tif ( LWJGLUtil.CHECKS ) {")
@@ -1125,7 +1125,7 @@ class Struct(
 
 	private fun PrintWriter.generateNativeMembers(members: List<StructMember>, offset: Int = 0, prefix: String = ""): Int {
 		var index = offset
-		members forEach {
+		members.forEach {
 			println("\tbuffer[$index] = (jint)offsetof($nativeName, $prefix${it.nativeName});")
 			index++
 

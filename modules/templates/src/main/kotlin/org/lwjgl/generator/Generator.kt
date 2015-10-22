@@ -49,7 +49,7 @@ enum class Binding(val key: String) {
 fun dependsOn(binding: Binding, init: () -> NativeClass): NativeClass? = if ( binding.enabled ) init() else null
 
 fun main(args: Array<String>) {
-	if ( args.size() < 2 )
+	if ( args.size < 2 )
 		throw IllegalArgumentException("The code Generator requires 2 paths as arguments: a) the template source path and b) the generation target path")
 
 	val validateDirectory = { name: String, path: String ->
@@ -112,16 +112,16 @@ class Generator(
 		val customClasses = ArrayList<CustomClass>()
 
 		fun register(struct: Struct): Struct {
-			structs add struct
+			structs.add(struct)
 			return struct
 		}
 
 		fun register(callback: CallbackFunction) {
-			callbacks add callback
+			callbacks.add(callback)
 		}
 
 		fun <T : CustomClass> register(customClass: T): T {
-			customClasses add customClass
+			customClasses.add(customClass)
 			return customClass
 		}
 	}
@@ -139,63 +139,66 @@ class Generator(
 		// returns NativeClass
 		method.returnType === javaClass &&
 		// has no arguments
-		method.parameterTypes.size() == 0
+		method.parameterTypes.size == 0
 
-	private fun runConfiguration(cp: String) {
-		val dot = cp.lastIndexOf('.')
-		val packageClass = "$cp.${Character.toUpperCase(cp[dot + 1])}${cp.substring(dot + 2)}Package"
+	private fun apply(packagePath: String, packageName: String, consume: Sequence<Method>.() -> Unit) {
+		val packageDirectory = File(packagePath)
+		if ( !packageDirectory.isDirectory )
+			return
 
-		try {
-			Class.forName(packageClass)
-				.methods
-				.filter { methodFilter(it, Void.TYPE) }
-				.forEach { it.invoke(null) }
-		} catch (e: ClassNotFoundException) {
-			// ignore
-		}
-	}
+		val classFiles = packageDirectory.listFiles {
+			it.isFile && it.extension.equals("kt")
+		}!!
 
-	private fun discoverTemplates(packageClassPath: String): Set<Method>? {
-		val packageClass: Class<*>
-		try {
-			packageClass = Class.forName(packageClassPath)
-		} catch (e: ClassNotFoundException) {
-			return null
-		}
-
-		val methods = packageClass.methods
-
-		return methods
-			.asSequence()
-			.filterTo(TreeSet<Method>(object : Comparator<Method> {
-				override fun compare(o1: Method, o2: Method): Int = o1.name compareTo o2.name
-			})) {
-				methodFilter(it, NativeClass::class.java)
+		classFiles.forEach {
+			try {
+				Class
+					.forName("$packageName.${it.nameWithoutExtension.upperCaseFirst}Kt")
+					.methods
+					.asSequence()
+					.consume()
+			} catch (e: ClassNotFoundException) {
+				// ignore
 			}
+		}
 	}
 
 	fun generate(packageName: String, binding: Binding? = null) {
-		val packageLastModified = getDirectoryLastModified("$srcPath/${packageName.replace('.', '/')}", false)
+		val packagePath = "$srcPath/${packageName.replace('.', '/')}"
+
+		val packageLastModified = getDirectoryLastModified(packagePath, false)
 		packageLastModifiedMap[packageName] = packageLastModified
 
 		if ( binding?.enabled == false )
 			return
 
 		// Find and run configuration methods
-		runConfiguration(packageName)
+		//runConfiguration(packagePath, packageName)
+		apply(packagePath, packageName) {
+			this
+				.filter { methodFilter(it, Void.TYPE) }
+				.forEach { it.invoke(null) }
+		}
 
 		// Find the template methods
-		val templates = discoverTemplates("$packageName.templates.TemplatesPackage")
-		if ( templates == null || templates.isEmpty() ) {
+		val templates = TreeSet<Method>(object : Comparator<Method> {
+			override fun compare(o1: Method, o2: Method): Int = o1.name.compareTo(o2.name)
+		})
+		apply("$packagePath/templates", "$packageName.templates") {
+			this.filterTo(templates) {
+				methodFilter(it, NativeClass::class.java)
+			}
+		}
+		if ( templates.isEmpty() ) {
 			println("*WARNING* No templates found in $packageName.templates package.")
 			return
 		}
 
 		// Generate the template code
-		for ( template in templates ) {
+		for (template in templates) {
 			val nativeClass = template.invoke(null) as NativeClass? ?: continue
 
-			if ( !(nativeClass.packageName equals packageName) )
+			if ( !(nativeClass.packageName.equals(packageName)) )
 				throw IllegalStateException("NativeClass ${nativeClass.className} has invalid package [${nativeClass.packageName}]. Should be: [$packageName]")
 
 			if ( nativeClass.hasBody )
@@ -271,7 +274,7 @@ class Generator(
 	}
 
 	private fun generateNative(target: GeneratorTargetNative, generate: (File) -> Unit) {
-		var subPackagePath = target.packageName.substring("org.lwjgl.".length()).replace('.', '/')
+		var subPackagePath = target.packageName.substring("org.lwjgl.".length).replace('.', '/')
 		if ( !target.nativeSubPath.isEmpty() )
 			subPackagePath = "$subPackagePath/${target.nativeSubPath}"
 
@@ -293,7 +296,7 @@ private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 		(it.isDirectory && recursive) || (it.isFile && it.name.endsWith(".kt"))
 	}
 
-	if ( classes == null || classes.size() == 0 )
+	if ( classes == null || classes.size == 0 )
 		return 0
 
 	return classes.map {
@@ -355,10 +358,10 @@ private fun <T> generateOutput(
 		val after = baos.toByteArray()
 
 		fun somethingChanged(before: ByteBuffer, after: ByteArray): Boolean {
-			if ( before.remaining() != after.size() )
+			if ( before.remaining() != after.size )
 				return true
 
-			for ( i in 0..before.limit() - 1 ) {
+			for (i in 0..before.limit() - 1) {
 				if ( before.get(i) != after[i] )
 					return true
 			}
@@ -393,15 +396,15 @@ private fun <T> generateOutput(
 
 /** Returns true if the array was empty. */
 inline fun <T> Array<out T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
-	for ( i in 0..this.lastIndex )
+	for (i in 0..this.lastIndex)
 		apply(this[i], 0 < i)
-	return this.size() == 0
+	return this.size == 0
 }
 
 /** Returns true if the collection was empty. */
 fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean {
 	var more = moreOverride
-	for ( item in this ) {
+	for (item in this) {
 		apply(item, more)
 		if ( !more )
 			more = true
@@ -411,7 +414,7 @@ fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, 
 
 /** Returns the string with the first letter uppercase. */
 val String.upperCaseFirst: String
-	get() = if ( this.length() <= 1 )
+	get() = if ( this.length <= 1 )
 		this.toUpperCase()
 	else
 		"${Character.toUpperCase(this[0])}${this.substring(1)}"

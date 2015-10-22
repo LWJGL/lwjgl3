@@ -9,9 +9,9 @@ import java.util.*
 import kotlin.reflect.KClass
 
 // Extension properties for numeric literals.
-inline val Int.b: Byte get() = this.toByte()
-inline val Int.s: Short get() = this.toShort()
-inline val Long.i: Int get() = this.toInt()
+val Int.b: Byte get() = this.toByte()
+val Int.s: Short get() = this.toShort()
+val Long.i: Int get() = this.toInt()
 
 class ConstantType<T : Any>(
 	type: KClass<T>,
@@ -22,14 +22,14 @@ class ConstantType<T : Any>(
 
 val ByteConstant = ConstantType(Byte::class) {
 	val i = it.toInt() and 0xFF
-	"0x%X".format(i) let {
+	"0x%X".format(i).let {
 		if ( i < 0x80 ) it else "(byte)$it"
 	}
 }
 val CharConstant = ConstantType(Char::class) { "'$it'" }
 val ShortConstant = ConstantType(Short::class) {
 	val i = it.toInt() and 0xFFFF
-	"0x%X".format(i) let {
+	"0x%X".format(i).let {
 		if ( i < 0x8000 ) it else "(short)$it"
 	}
 }
@@ -81,6 +81,7 @@ class ConstantBlock<T : Any>(
 			var value = 0
 			for (c in constants) {
 				if ( c is ConstantExpression ) {
+					@Suppress("CAST_NEVER_SUCCEEDS")
 					rootBlock.add(c as ConstantExpression<Int>)
 					continue
 				}
@@ -89,7 +90,7 @@ class ConstantBlock<T : Any>(
 				if ( ev.value != null )
 					value = ev.value
 
-				Constant(c.name, value++) let {
+				Constant(c.name, value++).let {
 					if ( ev.documentation == null )
 						rootBlock.add(it)
 					else
@@ -113,7 +114,7 @@ class ConstantBlock<T : Any>(
 		print("\tpublic static final ${constantType.javaType.simpleName}")
 
 		val indent: String
-		if ( constants.size() == 1 ) {
+		if ( constants.size == 1 ) {
 			indent = " ";
 		} else {
 			print('\n')
@@ -122,7 +123,7 @@ class ConstantBlock<T : Any>(
 
 		// Find maximum constant name length
 		val alignment = constants.map {
-			it.name.length()
+			it.name.length
 		}.fold(0) { left, right ->
 			Math.max(left, right)
 		}
@@ -137,7 +138,7 @@ class ConstantBlock<T : Any>(
 
 	private fun PrintWriter.printConstant(constant: Constant<out T>, indent: String, alignment: Int) {
 		print("$indent${getConstantName(constant.name)}")
-		for (i in 0..(alignment - constant.name.length() - 1))
+		for (i in 0..(alignment - constant.name.length - 1))
 			print(' ')
 
 		print(" = ")
@@ -148,11 +149,11 @@ class ConstantBlock<T : Any>(
 	}
 
 	val javaDocLinks: String get() {
-		val builder = StringBuilder(constants.size() * 32)
+		val builder = StringBuilder(constants.size * 32)
 
 		printJavaDocLink(builder, constants[0])
 		for (i in 1..constants.lastIndex) {
-			builder append " "
+			builder.append(" ")
 			printJavaDocLink(builder, constants[i])
 		}
 
@@ -160,9 +161,9 @@ class ConstantBlock<T : Any>(
 	}
 
 	private fun <T : Any> printJavaDocLink(builder: StringBuilder, constant: Constant<T>) {
-		builder append nativeClass.className
-		builder append '#'
-		builder append constant.name
+		builder.append(nativeClass.className)
+		builder.append('#')
+		builder.append(constant.name)
 	}
 
 }

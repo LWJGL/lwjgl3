@@ -11,7 +11,7 @@ class CallbackFunction(
 	className: String,
 	val returns: NativeType,
 	vararg val signature: Parameter
-): GeneratorTarget(packageName, className) {
+) : GeneratorTarget(packageName, className) {
 
 	var functionDoc: String = ""
 	var additionalCode: String = ""
@@ -23,7 +23,7 @@ class CallbackFunction(
 
 	private val signatureJava: String = signature.asSequence().map {
 		"${it.nativeMethodType} ${it.name}"
-	}.join(", ")
+	}.joinToString(", ")
 
 	val NativeType.ffi: String
 		get() = when ( this ) {
@@ -75,14 +75,14 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 ${access.modifier}abstract class $className extends Closure.${returns.callbackType} {
 
 	private static final FFICIF        CIF  = staticAllocCIF();
-	private static final PointerBuffer ARGS = staticAllocPointer(${signature.size()});
+	private static final PointerBuffer ARGS = staticAllocPointer(${signature.size});
 
 	static {
 		prepareCIF(
 			"$className",
 			CALL_CONVENTION_$callConvention,
 			CIF, ${returns.ffi},
-			ARGS, ${signature.asSequence().map { it.nativeType.ffi }.join()}
+			ARGS, ${signature.asSequence().map { it.nativeType.ffi }.joinToString()}
 		);
 	}
 
@@ -103,7 +103,7 @@ ${access.modifier}abstract class $className extends Closure.${returns.callbackTy
 		print("""invoke(
 ${signature.asSequence().withIndex().map {
 			"\t\t\tmemGet${it.value.nativeType.memType}(memGetAddress(POINTER_SIZE * ${it.index} + args))"
-		}.join(",\n")}
+		}.joinToString(",\n")}
 		);
 	}
 
@@ -133,7 +133,7 @@ ${signature.asSequence().withIndex().map {
 				""")
 		if ( returns.mapping != TypeMapping.VOID )
 			print("return ")
-		print("""sam.invoke(${signature.asSequence().map { it.name }.join(", ")});
+		print("""sam.invoke(${signature.asSequence().map { it.name }.joinToString(", ")});
 			}
 		};
 	}

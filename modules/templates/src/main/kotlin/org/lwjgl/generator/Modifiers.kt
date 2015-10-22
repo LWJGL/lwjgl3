@@ -4,7 +4,7 @@
  */
 package org.lwjgl.generator
 
-import java.util.HashMap
+import java.util.*
 
 enum class ApplyTo {
 	NORMAL,
@@ -22,7 +22,7 @@ abstract class TemplateElement {
 
 	fun setModifiers(vararg modifiers: TemplateModifier) {
 		if ( this.modifiers === EMPTY_MODIFIERS )
-			this.modifiers = HashMap(modifiers.size())
+			this.modifiers = HashMap(modifiers.size)
 
 		modifiers.forEach {
 			val old = this.modifiers.put(it.javaClass, it)
@@ -30,7 +30,7 @@ abstract class TemplateElement {
 				throw IllegalArgumentException("Template modifier ${it.javaClass.simpleName} specified more than once.")
 		}
 
-		modifiers forEach {
+		modifiers.forEach {
 			it.validate(this)
 		}
 	}
@@ -40,19 +40,19 @@ abstract class TemplateElement {
 		modifier.validate(this)
 	}
 
-	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] === modifier
-	fun has(modKey: ModifierKey<*>) = modifiers.containsKey(modKey.javaClass.declaringClass)
+	infix fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] === modifier
+	infix fun has(modKey: ModifierKey<*>) = modifiers.containsKeyRaw(modKey.javaClass.declaringClass)
 	operator fun <T : TemplateModifier> get(modClass: Class<T>) = @Suppress("UNCHECKED_CAST")(modifiers[modClass] as T)
-	operator fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @Suppress("UNCHECKED_CAST")(modifiers[modKey.javaClass.declaringClass] as T)
+	operator fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @Suppress("UNCHECKED_CAST")(modifiers.getRaw(modKey.javaClass.declaringClass) as T)
 
 	/** Returns true if the parameter has a ReferenceModifier with the specified reference. */
 	fun hasRef(modKey: ModifierKey<*>, reference: String): Boolean {
-		val mod = modifiers[modKey.javaClass.declaringClass]
-		return mod != null && (mod as ReferenceModifier).reference equals reference
+		val mod = modifiers.getRaw(modKey.javaClass.declaringClass)
+		return mod != null && (mod as ReferenceModifier).reference.equals(reference)
 	}
 
 	open val isSpecial: Boolean
-		get() = modifiers.values().any { it.isSpecial }
+		get() = modifiers.values.any { it.isSpecial }
 
 	protected fun <T : TemplateElement> T.copyModifiers(other: T): T {
 		if ( other.modifiers != EMPTY_MODIFIERS )
@@ -173,12 +173,12 @@ class ModifierList<M : TemplateModifier, Q : QualifiedType>(
 	val list = arrayListOf(modA, modB)
 
 	operator fun rangeTo(other: QualifiedTypeModifier): ModifierList<M, Q> {
-		list add other
+		list.add(other)
 		return this
 	}
 
 	operator fun rangeTo(other: M): ModifierList<M, Q> {
-		list add other
+		list.add(other)
 		return this
 	}
 

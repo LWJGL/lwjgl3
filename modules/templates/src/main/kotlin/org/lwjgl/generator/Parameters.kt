@@ -42,12 +42,12 @@ abstract class QualifiedType(
 		get() {
 			val builder = StringBuilder()
 			if ( has(const) )
-				builder append "const "
+				builder.append("const ")
 			builder.append(nativeType.name)
 			if ( nativeType is PointerType && !nativeType.includesPointer ) {
 				if ( !nativeType.name.endsWith('*') )
-					builder append ' '
-				builder append '*'
+					builder.append(' ')
+				builder.append('*')
 			}
 
 			return builder.toString()
@@ -111,11 +111,11 @@ class Parameter(
 
 	override fun hashCode() = name.hashCode()
 
-	override fun equals(other: Any?) = other === this || (other is Parameter && other.name equals this.name)
+	override fun equals(other: Any?) = other === this || (other is Parameter && other.name.equals(this.name))
 
 	private fun doc(description: String, links: String, linkMode: LinkMode): String {
 		val trimmed = description.trim()
-		val builder = StringBuilder(trimmed.length() + 16 + links.length()) // Rough estimate to reduce mallocs. TODO: validate
+		val builder = StringBuilder(trimmed.length + 16 + links.length) // Rough estimate to reduce mallocs. TODO: validate
 
 		val effectiveLinkMode: LinkMode
 		if ( trimmed.isEmpty() ) {
@@ -126,16 +126,16 @@ class Parameter(
 			}
 		} else {
 			effectiveLinkMode = linkMode
-			builder append trimmed
+			builder.append(trimmed)
 			if ( linkMode == SINGLE || linkMode == BITFIELD ) {
 				if ( !trimmed.endsWith('.') )
-					builder append '.'
+					builder.append('.')
 			}
 		}
 
-		builder append effectiveLinkMode.print(links.any { Character.isWhitespace(it) })
-		builder append "<br>"
-		builder append LINK_SPLIT.matcher(links.trim()).replaceAll(", ")
+		builder.append(effectiveLinkMode.print(links.any { Character.isWhitespace(it) }))
+		builder.append("<br>")
+		builder.append(LINK_SPLIT.matcher(links.trim()).replaceAll(", "))
 
 		return builder.toString()
 	}

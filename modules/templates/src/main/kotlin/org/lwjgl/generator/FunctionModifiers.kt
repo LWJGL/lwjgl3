@@ -87,15 +87,15 @@ class Code(
 		nativeCall: String? = null,
 		nativeAfterCall: String? = null
 	) = Code(
-		this.javaInit append javaInit,
+		this.javaInit.append(javaInit),
 
-		this.javaBeforeNative append javaBeforeNative,
-		this.javaAfterNative append javaAfterNative,
-		this.javaFinally append javaFinally,
+		this.javaBeforeNative.append(javaBeforeNative),
+		this.javaAfterNative.append(javaAfterNative),
+		this.javaFinally.append(javaFinally),
 
-		this.nativeBeforeCall append nativeBeforeCall,
-		this.nativeCall append nativeCall,
-		this.nativeAfterCall append nativeAfterCall
+		this.nativeBeforeCall.append(nativeBeforeCall),
+		this.nativeCall.append(nativeCall),
+		this.nativeAfterCall.append(nativeAfterCall)
 	)
 }
 
@@ -107,7 +107,7 @@ fun statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statemen
 object Macro : FunctionModifier() {
 	override val isSpecial = false
 
-	protected override fun validate(func: NativeClassFunction) {
+	override fun validate(func: NativeClassFunction) {
 		if ( func.getNativeParams().any() )
 			throw IllegalArgumentException("The macro modifier can only be applied on functions with no arguments.")
 	}
