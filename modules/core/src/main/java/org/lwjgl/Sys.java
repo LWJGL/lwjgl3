@@ -32,7 +32,9 @@ public final class Sys {
 	public static final BuildType BUILD_TYPE = BuildType.BETA;
 
 	static {
-		log("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
+		if ( LWJGLUtil.DEBUG )
+			log("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
+
 		try {
 			loadLibrarySystem(JNI_LIBRARY_NAME);
 		} catch (UnsatisfiedLinkError ule) {
