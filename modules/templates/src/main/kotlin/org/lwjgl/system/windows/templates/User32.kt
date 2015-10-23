@@ -17,7 +17,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI.
 		""",
 
-		HWND.IN("hWnd", "a handle to the window whose DC is to be retrieved. If this value is $NULL, GetDC retrieves the DC for the entire screen.")
+		nullable..HWND.IN("hWnd", "a handle to the window whose DC is to be retrieved. If this value is $NULL, GetDC retrieves the DC for the entire screen.")
 	)
 
 	int(

@@ -193,7 +193,7 @@ val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32"
 
 		HDC.IN("hdc", "the device context whose pixel format the function attempts to set"),
 		int.IN("pixelFormat", "index that identifies the pixel format to set. The various pixel formats supported by a device context are identified by one-based indexes."),
-		const..PIXELFORMATDESCRIPTOR_p.IN(
+		nullable..const..PIXELFORMATDESCRIPTOR_p.IN(
 			"pixelFormatDescriptor",
 			"""
 			a ##PIXELFORMATDESCRIPTOR structure that contains the logical pixel format specification. The system's metafile component uses this structure
