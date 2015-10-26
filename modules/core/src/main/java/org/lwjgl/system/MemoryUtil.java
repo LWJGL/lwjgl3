@@ -13,6 +13,7 @@ import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.Aggregate;
 
 import java.nio.*;
 
+import static java.lang.Math.*;
 import static org.lwjgl.Pointer.*;
 
 /**
@@ -350,6 +351,10 @@ public final class MemoryUtil {
 	 * <p>In case that {@code ptr} is a {@link #NULL} pointer, the function behaves like {@link #memAlloc}, assigning a new block of size bytes and returning a
 	 * pointer to its beginning.</p>
 	 *
+	 * <p>The memory address used is always the address at the start of {@code ptr}, so the current position of {@code ptr} does not need to be set to 0 for
+	 * this function to work. The current position is preserved, even if the memory block is moved to a new location, unless {@code size} is less than the
+	 * current position in which case position will be equal to capacity. The limit is set to the capacity, and the mark is discarded.</p>
+	 *
 	 * @param ptr  a pointer to a memory block previously allocated with {@link #memAlloc}, {@link #memCalloc} or {@link #memRealloc}. Alternatively, this can
 	 *             be a {@link #NULL} pointer, in which case a new block is allocated (as if {@link #memAlloc} was called).
 	 * @param size the new size for the memory block, in bytes.
@@ -359,7 +364,15 @@ public final class MemoryUtil {
 	 * valid, and with its contents unchanged).
 	 */
 	public static ByteBuffer memRealloc(ByteBuffer ptr, int size) {
-		return memByteBuffer(nmemRealloc(memAddress0Safe(ptr), size), size);
+		if ( ptr == null )
+			return memByteBuffer(nmemRealloc(NULL, size), size);
+		else {
+			int position = min(ptr.position(), size);
+			ByteBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size), size);
+			if ( buffer != null )
+				buffer.position(position);
+			return buffer;
+		}
 	}
 
 	/**
@@ -368,7 +381,15 @@ public final class MemoryUtil {
 	 * @param size the number of short values to allocate.
 	 */
 	public static ShortBuffer memRealloc(ShortBuffer ptr, int size) {
-		return memShortBuffer(nmemRealloc(memAddress0Safe(ptr), size << 1), size);
+		if ( ptr == null )
+			return memShortBuffer(nmemRealloc(NULL, size << 1), size);
+		else {
+			int position = min(ptr.position(), size);
+			ShortBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << 1), size);
+			if ( buffer != null )
+				buffer.position(position);
+			return buffer;
+		}
 	}
 
 	/**
@@ -377,7 +398,15 @@ public final class MemoryUtil {
 	 * @param size the number of int values to allocate.
 	 */
 	public static IntBuffer memRealloc(IntBuffer ptr, int size) {
-		return memIntBuffer(nmemRealloc(memAddress0Safe(ptr), size << 2), size);
+		if ( ptr == null )
+			return memIntBuffer(nmemRealloc(NULL, size << 2), size);
+		else {
+			int position = min(ptr.position(), size);
+			IntBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << 2), size);
+			if ( buffer != null )
+				buffer.position(position);
+			return buffer;
+		}
 	}
 
 	/**
@@ -386,7 +415,15 @@ public final class MemoryUtil {
 	 * @param size the number of float values to allocate.
 	 */
 	public static FloatBuffer memRealloc(FloatBuffer ptr, int size) {
-		return memFloatBuffer(nmemRealloc(memAddress0Safe(ptr), size << 2), size);
+		if ( ptr == null )
+			return memFloatBuffer(nmemRealloc(NULL, size << 2), size);
+		else {
+			int position = min(ptr.position(), size);
+			FloatBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << 2), size);
+			if ( buffer != null )
+				buffer.position(position);
+			return buffer;
+		}
 	}
 
 	/**
@@ -395,7 +432,15 @@ public final class MemoryUtil {
 	 * @param size the number of long values to allocate.
 	 */
 	public static LongBuffer memRealloc(LongBuffer ptr, int size) {
-		return memLongBuffer(nmemRealloc(memAddress0Safe(ptr), size << 3), size);
+		if ( ptr == null )
+			return memLongBuffer(nmemRealloc(NULL, size << 3), size);
+		else {
+			int position = min(ptr.position(), size);
+			LongBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << 3), size);
+			if ( buffer != null )
+				buffer.position(position);
+			return buffer;
+		}
 	}
 
 	/**
@@ -404,7 +449,15 @@ public final class MemoryUtil {
 	 * @param size the number of double values to allocate.
 	 */
 	public static DoubleBuffer memRealloc(DoubleBuffer ptr, int size) {
-		return memDoubleBuffer(nmemRealloc(memAddress0Safe(ptr), size << 3), size);
+		if ( ptr == null )
+			return memDoubleBuffer(nmemRealloc(NULL, size << 3), size);
+		else {
+			int position = min(ptr.position(), size);
+			DoubleBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << 3), size);
+			if ( buffer != null )
+				buffer.position(position);
+			return buffer;
+		}
 	}
 
 	/**
@@ -413,7 +466,15 @@ public final class MemoryUtil {
 	 * @param size the number of pointer values to allocate.
 	 */
 	public static PointerBuffer memRealloc(PointerBuffer ptr, int size) {
-		return memPointerBuffer(nmemRealloc(memAddress0Safe(ptr), size << POINTER_SHIFT), size);
+		if ( ptr == null )
+			return memPointerBuffer(nmemRealloc(NULL, size << POINTER_SHIFT), size);
+		else {
+			int position = min(ptr.position(), size);
+			PointerBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << POINTER_SHIFT), size);
+			if ( buffer != null )
+				buffer.position(position);
+			return buffer;
+		}
 	}
 
 	// --- [ memAlignedAlloc ] ---
