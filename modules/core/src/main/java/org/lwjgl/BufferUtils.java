@@ -103,7 +103,7 @@ public final class BufferUtils {
 	 * @return a ByteBuffer
 	 */
 	public static ByteBuffer createByteBuffer(int capacity) {
-		return BUFFER_ALLOCATOR.malloc(capacity).order(ByteOrder.nativeOrder());
+		return BUFFER_ALLOCATOR.malloc(capacity);
 	}
 
 	/**

@@ -64,7 +64,7 @@ public class MemoryUtilTest {
 		buffer.position(8);
 		buffer.limit(8 + 16);
 
-		FloatBuffer floatView = buffer.slice().order(ByteOrder.nativeOrder()).asFloatBuffer();
+		FloatBuffer floatView = memSlice(buffer).asFloatBuffer();
 
 		assertEquals(address + 8, memAddress(floatView));
 	}

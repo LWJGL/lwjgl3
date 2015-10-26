@@ -774,7 +774,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 			}
 			@Override
 			public PointerBuffer create(ByteBuffer source) {
-				return new x32(source.slice().order(source.order()).asIntBuffer());
+				return new x32(memSlice(source).asIntBuffer());
 			}
 
 			@Override
@@ -902,7 +902,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 			}
 			@Override
 			public PointerBuffer create(ByteBuffer source) {
-				return new x64(source.slice().order(source.order()).asLongBuffer());
+				return new x64(memSlice(source).asLongBuffer());
 			}
 
 			@Override
