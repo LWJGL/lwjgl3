@@ -901,9 +901,9 @@ public final class MemoryUtil {
 
 	/**
 	 * This method is an alternative to {@link #memByteBuffer} that allows the reuse of an existing direct ByteBuffer instance. It modifies that instance so
-	 * that it starts at the specified memory address and has the specified capacity. The instance passed to this method should not own native memory, i.e. it
-	 * should not be an instance created using {@link ByteBuffer#allocateDirect}. Using such an instance will cause an exception to be thrown. Other instances
-	 * are allowed and their parent reference will be cleared before this method returns.
+	 * that it starts at the specified memory address and has the specified capacity. The instance passed to this method should not be an instance created
+	 * using {@link ByteBuffer#allocateDirect}. Using such an instance will cause an exception to be thrown. Other instances are allowed and their parent
+	 * reference will be cleared before this method returns.
 	 *
 	 * <p>ByteBuffer instance modification might not be possible. In that case this method behaves exactly like {@link #memByteBuffer}, so the returned
 	 * instance should always replace the input one.</p>
@@ -967,6 +967,14 @@ public final class MemoryUtil {
 			return null;
 
 		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
+	}
+
+	/** PointerBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
+	public static PointerBuffer memSetupBuffer(PointerBuffer buffer, long address, int capacity) {
+		if ( address == NULL )
+			return null;
+
+		return PointerBuffer.setup(buffer, address, capacity);
 	}
 
 	// --- [ Buffer slicing ] ---

@@ -4,6 +4,8 @@
  */
 package org.lwjgl;
 
+import org.lwjgl.system.MemoryUtil;
+
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -17,6 +19,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 		PointerBuffer allocateDirect(int capacity);
 		PointerBuffer create(long address, int capacity);
 		PointerBuffer create(ByteBuffer source);
+		PointerBuffer setup(PointerBuffer buffer, long address, int capacity);
 
 		long get(ByteBuffer source);
 		long get(ByteBuffer source, int index);
@@ -25,7 +28,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 		void put(ByteBuffer source, int index, long p);
 	}
 
-	private static final Factory factory = Pointer.BITS64 ? x64.FACTORY : x32.FACTORY;
+	private static final Factory FACTORY = Pointer.BITS64 ? x64.FACTORYx64 : x32.FACTORYx32;
 
 	// disallow other implementations
 	PointerBuffer() {
@@ -43,7 +46,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws IllegalArgumentException If the <tt>capacity</tt> is a negative integer
 	 */
 	public static PointerBuffer allocateDirect(int capacity) {
-		return factory.allocateDirect(capacity);
+		return FACTORY.allocateDirect(capacity);
 	}
 
 	/**
@@ -53,17 +56,21 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @param capacity the buffer capacity, in number of pointers
 	 */
 	public static PointerBuffer create(long address, int capacity) {
-		return factory.create(address, capacity);
+		return FACTORY.create(address, capacity);
 	}
 
 	/**
-	 * Creates a new PointerBuffer using the specified ByteBuffer as its pointer data source. This is useful for users that do their own memory management over
-	 * a big ByteBuffer, instead of allocating many small ones.
+	 * Creates a new PointerBuffer using the specified ByteBuffer as its pointer data source.
 	 *
 	 * @param source the source buffer
 	 */
 	public static PointerBuffer create(ByteBuffer source) {
-		return factory.create(source);
+		return FACTORY.create(source);
+	}
+
+	/** @see MemoryUtil#memSetupBuffer(PointerBuffer, long, int) */
+	public static PointerBuffer setup(PointerBuffer buffer, long address, int capacity) {
+		return FACTORY.setup(buffer, address, capacity);
 	}
 
 	protected abstract Buffer buffer();
@@ -292,7 +299,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @param source the source ByteBuffer
 	 */
 	public static long get(ByteBuffer source) {
-		return factory.get(source);
+		return FACTORY.get(source);
 	}
 
 	/**
@@ -316,7 +323,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @param p      the pointer value to be written
 	 */
 	public static void put(ByteBuffer target, long p) {
-		factory.put(target, p);
+		FACTORY.put(target, p);
 	}
 
 	/**
@@ -337,7 +344,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @param index  the index at which the pointer will be read
 	 */
 	public static long get(ByteBuffer source, int index) {
-		return factory.get(source, index);
+		return FACTORY.get(source, index);
 	}
 
 	/**
@@ -363,7 +370,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @param p      the pointer value to be written
 	 */
 	public static void put(ByteBuffer target, int index, long p) {
-		factory.put(target, index, p);
+		FACTORY.put(target, index, p);
 	}
 
 	// -- PointerWrapper operations --
@@ -763,7 +770,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 
 	private static class x32 extends PointerBuffer {
 
-		private static final Factory FACTORY = new Factory() {
+		private static final Factory FACTORYx32 = new Factory() {
 			@Override
 			public PointerBuffer allocateDirect(int capacity) {
 				return new x32(BufferUtils.createIntBuffer(capacity));
@@ -775,6 +782,13 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 			@Override
 			public PointerBuffer create(ByteBuffer source) {
 				return new x32(memSlice(source).asIntBuffer());
+			}
+
+			@Override
+			public PointerBuffer setup(PointerBuffer buffer, long address, int capacity) {
+				PointerBuffer.x32 x32 = (PointerBuffer.x32)buffer;
+				IntBuffer source = memSetupBuffer(x32.buffer, address, capacity);
+				return source == x32.buffer ? buffer : new x32(source);
 			}
 
 			@Override
@@ -891,7 +905,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 
 	private static class x64 extends PointerBuffer {
 
-		private static final Factory FACTORY = new Factory() {
+		private static final Factory FACTORYx64 = new Factory() {
 			@Override
 			public PointerBuffer allocateDirect(int capacity) {
 				return new x64(BufferUtils.createLongBuffer(capacity));
@@ -903,6 +917,13 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 			@Override
 			public PointerBuffer create(ByteBuffer source) {
 				return new x64(memSlice(source).asLongBuffer());
+			}
+
+			@Override
+			public PointerBuffer setup(PointerBuffer buffer, long address, int capacity) {
+				PointerBuffer.x64 x64 = (PointerBuffer.x64)buffer;
+				LongBuffer source = memSetupBuffer(x64.buffer, address, capacity);
+				return source == x64.buffer ? buffer : new x64(source);
 			}
 
 			@Override
