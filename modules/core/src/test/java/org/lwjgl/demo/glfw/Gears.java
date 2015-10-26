@@ -160,16 +160,20 @@ public class Gears extends AbstractGears {
 				frames = 0;
 			}
 		}
-
-		glfwDestroyWindow(window);
 	}
 
 	@Override
 	protected void destroy() {
 		if ( debugProc != null )
 			debugProc.release();
-		glfwReleaseCallbacks(window);
+
+		if ( window != NULL ) {
+			glfwReleaseCallbacks(window);
+			glfwDestroyWindow(window);
+		}
+
 		glfwTerminate();
+
 		if ( errorCB != null )
 			errorCB.release();
 	}

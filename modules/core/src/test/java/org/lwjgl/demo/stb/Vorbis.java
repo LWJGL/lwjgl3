@@ -434,12 +434,12 @@ public final class Vorbis {
 		}
 
 		void destroy() {
-			glfwDestroyWindow(window);
-
 			if ( debugProc != null )
 				debugProc.release();
 
 			glfwReleaseCallbacks(window);
+			glfwDestroyWindow(window);
+
 			glfwTerminate();
 			errorCallback.release();
 		}

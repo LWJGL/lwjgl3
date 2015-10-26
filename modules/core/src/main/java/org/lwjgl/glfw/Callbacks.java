@@ -4,11 +4,13 @@
  */
 package org.lwjgl.glfw;
 
+import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.libffi.Closure;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -27,6 +29,9 @@ public final class Callbacks {
 	 * @param window the GLFW window
 	 */
 	public static void glfwReleaseCallbacks(long window) {
+		if ( LWJGLUtil.CHECKS )
+			checkPointer(window);
+
 		GLFW glfw = GLFW.getInstance();
 		long[] callbacks = {
 			invokePPP(glfw.SetWindowPosCallback, window, NULL),
@@ -60,6 +65,9 @@ public final class Callbacks {
 	 * @param framebuffersizefun the framebuffer size callback, may be null
 	 */
 	public static void glfwInvoke(long window, GLFWWindowSizeCallback windowsizefun, GLFWFramebufferSizeCallback framebuffersizefun) {
+		if ( LWJGLUtil.CHECKS )
+			checkPointer(window);
+
 		APIBuffer buffer = apiBuffer();
 
 		if ( framebuffersizefun != null ) {
