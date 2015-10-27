@@ -386,15 +386,15 @@ class NativeClass(
 
 	/** Adds a new enum constant. */
 	val String.enum: Constant<EnumValue> get() = Constant(this, EnumValue())
-	fun String.enum(documentation: String) = Constant(this, EnumValue(processDocumentation(documentation).toJavaDoc()))
-	fun String.enum(value: Int) = Constant(this, EnumValue(value = value))
+	infix fun String.enum(documentation: String) = Constant(this, EnumValue(processDocumentation(documentation).toJavaDoc()))
+	infix fun String.enum(value: Int) = Constant(this, EnumValue(value = value))
 	fun String.enum(documentation: String, value: Int) = Constant(this, EnumValue(processDocumentation(documentation).toJavaDoc(), value))
 
-	fun String.enumExpr(expression: String) = Constant(this, EnumValueExpression(expression = expression))
+	infix fun String.enumExpr(expression: String) = Constant(this, EnumValueExpression(expression = expression))
 	fun String.enumExpr(documentation: String, expression: String) = Constant(this, EnumValueExpression(processDocumentation(documentation).toJavaDoc(), expression))
 
 	/** Adds a new constant whose value is an expression. */
-	fun <T : Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
+	infix fun <T : Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
 
 	operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =
 		ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since, noPrefix = noPrefix)
