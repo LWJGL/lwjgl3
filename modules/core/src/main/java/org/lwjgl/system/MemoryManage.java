@@ -153,7 +153,7 @@ final class MemoryManage {
 							Long.toHexString(address).toUpperCase()
 						);
 						for ( StackTraceElement el : allocation.stackTrace )
-							DEBUG_STREAM.println("\t" + el.toString());
+							DEBUG_STREAM.format("\tat %s\n", el.toString());
 					}
 				}
 			});

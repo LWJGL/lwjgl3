@@ -27,7 +27,7 @@ DISABLE_WARNINGS()
 ENABLE_WARNINGS()
 
 // Cached JNIEnv, using TLS. Will use attachCurrentThreadAsDaemon in foreign threads.
-extern JNIEnv *getEnv(void);
+extern JNIEnv *getEnv(jboolean *);
 extern void saveErrno(void);
 extern jint getErrno(void);
 #ifdef LWJGL_WINDOWS

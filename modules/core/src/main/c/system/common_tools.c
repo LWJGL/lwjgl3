@@ -54,6 +54,7 @@ inline void detachCurrentThread(void) {
 	DWORD envTLS = TLS_OUT_OF_INDEXES;
 
 	typedef struct {
+		jboolean async;
 		JNIEnv* env;
 		jint errnum;
 		jint LastError;
@@ -79,12 +80,19 @@ inline void detachCurrentThread(void) {
 	EnvData* envTLSGet(void) {
 		EnvData* data = (EnvData*)malloc(sizeof(EnvData));
 
+		jboolean async = 0;
 		JNIEnv* env = getThreadEnv();
-    	if ( env == NULL )
-    	    env = attachCurrentThreadAsDaemon();
 
+    	if ( env == NULL ) {
+			async = 1;
+    	    env = attachCurrentThreadAsDaemon();
+		}
+
+		data->async = async;
 		data->env = env;
+
 		TlsSetValue(envTLS, (LPVOID)data);
+
 		return data;
 	}
 
@@ -95,13 +103,6 @@ inline void detachCurrentThread(void) {
 		return data;
 	}
 
-	inline JNIEnv* getEnv(void) {
-		return getEnvData()->env;
-	}
-
-	inline void saveErrno(void) { getEnvData()->errnum = errno; }
-	inline jint getErrno(void) { return getEnvData()->errnum; }
-
 	inline void saveLastError(void) { getEnvData()->LastError = (jint)GetLastError(); }
 	inline jint getLastError(void) { return getEnvData()->LastError; }
 #else
@@ -109,6 +110,7 @@ inline void detachCurrentThread(void) {
 	pthread_key_t envTLS = 0;
 
 	typedef struct {
+		jboolean async;
 		JNIEnv* env;
 		jint errnum;
 	} EnvData;
@@ -134,12 +136,19 @@ inline void detachCurrentThread(void) {
 	EnvData* envTLSGet(void) {
 		EnvData* data = (EnvData*)malloc(sizeof(EnvData));
 
+		jboolean async = 0;
 		JNIEnv* env = getThreadEnv();
-    	if ( env == NULL )
-            env = attachCurrentThreadAsDaemon();
 
+    	if ( env == NULL ) {
+    	    async = 1;
+            env = attachCurrentThreadAsDaemon();
+		}
+
+		data->async = async;
 		data->env = env;
+
     	pthread_setspecific(envTLS, data);
+
     	return data;
 	}
 
@@ -149,14 +158,16 @@ inline void detachCurrentThread(void) {
 			data = envTLSGet();
 		return data;
 	}
-
-	inline JNIEnv* getEnv(void) {
-		return getEnvData()->env;
-	}
-
-	inline void saveErrno(void) { getEnvData()->errnum = errno; }
-	inline jint getErrno(void) { return getEnvData()->errnum; }
 #endif
+
+inline JNIEnv* getEnv(jboolean *async) {
+	EnvData* data = getEnvData();
+	*async = data->async;
+	return data->env;
+}
+
+inline void saveErrno(void) { getEnvData()->errnum = errno; }
+inline jint getErrno(void) { return getEnvData()->errnum; }
 
 EXTERN_C_ENTER
 

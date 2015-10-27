@@ -15,20 +15,50 @@ static jmethodID
 	javaCallbackDouble,
 	javaCallbackPtr;
 
+typedef struct LWJGLCallback {
+	jweak reference;
+	const char* debug;
+} LWJGLCallback;
+
+static void asyncCallbackException(JNIEnv* env) {
+	fprintf(stderr, "[LWJGL] Exception in closure that was invoked asynchronously from a native thread.\n");
+    fflush(stderr);
+
+	(*env)->ExceptionDescribe(env);
+	(*env)->ExceptionClear(env);
+}
+
+static void throwClosureError(JNIEnv* env, const LWJGLCallback *cb, jboolean async) {
+	(*env)->ThrowNew(env, (*env)->FindClass(env, "org/lwjgl/system/libffi/ClosureError"), cb->debug);
+
+	if ( async )
+		asyncCallbackException(env);
+}
+
+inline static jboolean verifyCallback(JNIEnv* env, jobject object, const LWJGLCallback *cb, jboolean async) {
+	if ( (*env)->IsSameObject(env, object, NULL) ) {
+		throwClosureError(env, cb, async);
+		return JNI_FALSE;
+	}
+
+	return JNI_TRUE;
+}
+
 static void ffiClosureVoid(ffi_cif* cif, void* ret, void** args, void* user_data) {
-	JNIEnv* env = getEnv();
+	jboolean async;
+	JNIEnv* env = getEnv(&async);
+
+	const LWJGLCallback *cb = (const LWJGLCallback *)user_data;
 
 	// Dereference the weak global reference
-	jobject object = (*env)->NewLocalRef(env, (jweak)user_data);
+	jobject object = (*env)->NewLocalRef(env, (jweak)cb->reference);
 
 	UNUSED_PARAM(cif)
 	UNUSED_PARAM(ret)
 
-	// Verify
-	if ( (*env)->IsSameObject(env, object, NULL) ) {
-	    (*env)->ThrowNew(env, (*env)->FindClass(env, "org/lwjgl/system/libffi/ClosureError"), NULL);
+	// Verify that the callback has not been garbage collected
+	if ( !verifyCallback(env, object, cb, async) )
 		return;
-	}
 
 	// Invoke the Java callback
 	(*env)->CallVoidMethod(env,
@@ -36,26 +66,34 @@ static void ffiClosureVoid(ffi_cif* cif, void* ret, void** args, void* user_data
 		javaCallbackVoid,
 		args
 	);
+
+	// Check for exception
+	if ( (*env)->ExceptionCheck(env) && async )
+		asyncCallbackException(env);
 }
 
 #define DEFINE_FFI_CLOSURE_FUN(Name, Type, JavaType) \
 	static void ffiClosure##Name(ffi_cif* cif, void* ret, void** args, void* user_data) { \
-		JNIEnv* env = getEnv(); \
- \
-		jobject object = (*env)->NewLocalRef(env, (jweak)user_data); \
- \
+		jboolean async; \
+		JNIEnv* env = getEnv(&async); \
+\
+		const LWJGLCallback *cb = (const LWJGLCallback *)user_data; \
+\
+		jobject object = (*env)->NewLocalRef(env, (jweak)cb->reference); \
+\
 		UNUSED_PARAM(cif) \
- \
-		if ( (*env)->IsSameObject(env, object, NULL) ) { \
-		    (*env)->ThrowNew(env, (*env)->FindClass(env, "org/lwjgl/system/libffi/ClosureError"), NULL); \
+\
+		if ( !verifyCallback(env, object, cb, async) ) \
 			return; \
-		} \
- \
+\
 		*(Type*)ret = (Type)(*env)->Call##JavaType##Method(env, \
 			object, \
 			javaCallback##Name, \
 			args \
 		); \
+\
+		if ( (*env)->ExceptionCheck(env) && async ) \
+			asyncCallbackException(env); \
 	}
 	
 DEFINE_FFI_CLOSURE_FUN(Byte,    jbyte,      Byte)

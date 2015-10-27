@@ -77,9 +77,10 @@ ${access.modifier}abstract class $className extends Closure.${returns.callbackTy
 	private static final FFICIF        CIF  = staticAllocCIF();
 	private static final PointerBuffer ARGS = staticAllocPointer(${signature.size});
 
+	private static final long CLASSPATH = staticAllocText("$packageName.$className");
+
 	static {
 		prepareCIF(
-			"$className",
 			CALL_CONVENTION_$callConvention,
 			CIF, ${returns.ffi},
 			ARGS, ${signature.asSequence().map { it.nativeType.ffi }.joinToString()}
@@ -87,7 +88,7 @@ ${access.modifier}abstract class $className extends Closure.${returns.callbackTy
 	}
 
 	protected $className() {
-		super(CIF);
+		super(CIF, CLASSPATH);
 	}
 
 	/**
