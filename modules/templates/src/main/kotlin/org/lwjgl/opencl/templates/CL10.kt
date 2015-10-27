@@ -602,7 +602,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"GetDeviceIDs",
 		"Obtains the list of devices available on a platform.",
 
-		cl_platform_id.IN("platform", "the platform to query"),
+		nullable..cl_platform_id.IN("platform", "the platform to query"),
 		cl_device_type.IN(
 			"device_type",
 			"""
