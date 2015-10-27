@@ -2,6 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
+#ifdef LWJGL_WINDOWS
+	#define _NO_CRT_STDIO_INLINE
+#endif
 #include "common_tools.h"
 #include "ffi.h"
 
@@ -20,7 +23,13 @@ typedef struct LWJGLCallback {
 	const char* debug;
 } LWJGLCallback;
 
-static void asyncCallbackException(JNIEnv* env) {
+#if LWJGL_WINDOWS
+	#define noinline __declspec(noinline)
+#else
+	#define noinline __attribute__((noinline))
+#endif
+
+noinline static void asyncCallbackException(JNIEnv* env) {
 	fprintf(stderr, "[LWJGL] Exception in closure that was invoked asynchronously from a native thread.\n");
     fflush(stderr);
 
@@ -28,7 +37,7 @@ static void asyncCallbackException(JNIEnv* env) {
 	(*env)->ExceptionClear(env);
 }
 
-static void throwClosureError(JNIEnv* env, const LWJGLCallback *cb, jboolean async) {
+noinline static void throwClosureError(JNIEnv* env, const LWJGLCallback *cb, jboolean async) {
 	(*env)->ThrowNew(env, (*env)->FindClass(env, "org/lwjgl/system/libffi/ClosureError"), cb->debug);
 
 	if ( async )

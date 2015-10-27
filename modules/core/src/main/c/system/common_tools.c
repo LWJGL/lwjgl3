@@ -55,6 +55,7 @@ inline void detachCurrentThread(void) {
 
 	typedef struct {
 		jboolean async;
+		jboolean padding[sizeof(void*) - 1];
 		JNIEnv* env;
 		jint errnum;
 		jint LastError;
@@ -111,6 +112,7 @@ inline void detachCurrentThread(void) {
 
 	typedef struct {
 		jboolean async;
+		jboolean padding[sizeof(void*) - 1];
 		JNIEnv* env;
 		jint errnum;
 	} EnvData;
