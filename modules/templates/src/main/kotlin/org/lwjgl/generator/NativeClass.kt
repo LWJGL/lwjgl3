@@ -87,7 +87,7 @@ abstract class APIBinding(
 			if ( !instanceParameter.equals(FUNCTION_ADDRESS) ) // Skip if we have an explicit FUNCTION_ADDRESS parameter.
 				writer.println("\t\tlong $variable = $instanceParameter;")
 		} else
-			writer.println("\t\tlong $variable = getInstance($instanceParameter).${function.addressName};")
+			writer.println("\t\tlong $variable = getInstance($instanceParameter).${function.simpleName};")
 	}
 
 	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)
@@ -290,13 +290,13 @@ class NativeClass(
 		println("\t@JavadocExclude")
 		print("\tpublic final long")
 		if ( _functions.size == 1 ) {
-			println(" ${_functions.values.first().addressName};")
+			println(" ${_functions.values.first().simpleName};")
 		} else {
 			println()
 			_functions.values.forEachWithMore { func, more ->
 				if ( more )
 					println(",")
-				print("\t\t${func.addressName}")
+				print("\t\t${func.simpleName}")
 			}
 			println(";")
 		}
@@ -311,7 +311,7 @@ class NativeClass(
 		binding.printConstructorParams(this, this@NativeClass)
 		println(") {")
 		functions.forEach {
-			println("\t\t${it.addressName} = ${binding.getFunctionAddressCall(it)};")
+			println("\t\t${it.simpleName} = ${binding.getFunctionAddressCall(it)};")
 		}
 		println("\t}\n")
 	}

@@ -103,12 +103,6 @@ class NativeClassFunction(
 
 	val nativeName: String get() = if ( has(NativeName) ) this[NativeName].name else name
 
-	val addressName: String
-		get() = if ( nativeClass.prefixMethod.isEmpty() )
-			"${simpleName}Address"
-		else
-			simpleName
-
 	val accessModifier: String
 		get() = (if ( has(AccessModifier) ) this[AccessModifier].access else nativeClass.access).modifier
 
