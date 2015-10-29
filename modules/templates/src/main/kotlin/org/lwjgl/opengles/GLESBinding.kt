@@ -23,19 +23,25 @@ private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CA
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }
 		if ( boParams.any() ) {
-			boParams forEach { transforms[it] = BufferOffsetTransform }
+			boParams.forEach { transforms[it] = BufferOffsetTransform }
 			function.generateAlternativeMethod(writer, function.name, "Buffer object offset version of:", transforms)
-			boParams forEach { transforms remove it }
+			boParams.forEach { transforms.remove(it) }
 		}
 	}
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
-		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
-		println("\tpublic static ${nativeClass.className} getInstance() {")
-		println("\t\treturn checkFunctionality(GLES.getCapabilities().__${nativeClass.className});")
-		println("\t}")
+		println("""
+	/** Returns the {@link ${nativeClass.className}} instance of the current context. */
+	public static ${nativeClass.className} getInstance() {
+		return getInstance(GLES.getCapabilities());
+	}
+
+	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $CAPABILITIES_CLASS}. */
+	public static ${nativeClass.className} getInstance($CAPABILITIES_CLASS caps) {
+		return checkFunctionality(caps.__${nativeClass.className});
+	}""")
 
 		println("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider) {")
 		println("\t\tif ( !ext.contains(\"${nativeClass.capName}\") ) return null;")

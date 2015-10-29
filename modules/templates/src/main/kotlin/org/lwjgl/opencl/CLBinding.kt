@@ -24,10 +24,16 @@ private val CLBinding = Generator.register(object: APIBinding(OPENCL_PACKAGE, CA
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
-		println("\t/** Returns the {@link ${nativeClass.className}} instance for the currently loaded ICD. */")
-		println("\tpublic static ${nativeClass.className} getInstance() {")
-		println("\t\treturn checkFunctionality(CL.getICD().__${nativeClass.className});")
-		println("\t}")
+		println("""
+	/** Returns the {@link ${nativeClass.className}} instance of the currently loaded ICD. */
+	public static ${nativeClass.className} getInstance() {
+		return getInstance(CL.getICD());
+	}
+
+	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $CAPABILITIES_CLASS}. */
+	public static ${nativeClass.className} getInstance($CAPABILITIES_CLASS caps) {
+		return checkFunctionality(caps.__${nativeClass.className});
+	}""")
 
 		println("\n\tstatic ${nativeClass.className} create(FunctionProvider provider) {")
 

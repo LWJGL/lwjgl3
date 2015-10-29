@@ -75,7 +75,7 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 			else -> null
 		}?.let {
 			if ( !checks.contains(it) )
-				checks add it
+				checks.add(it)
 		}
 	}
 
@@ -90,12 +90,18 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 			super.getFunctionAddressCall(function);
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
-		println("\t// --- [ Function Addresses ] ---\n")
+		println("\t// --- [ Function Addresses ] ---")
 
-		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
-		println("\tpublic static ${nativeClass.className} getInstance() {")
-		println("\t\treturn checkFunctionality(GL.getCapabilities().__${nativeClass.className});")
-		println("\t}")
+		println("""
+	/** Returns the {@link ${nativeClass.className}} instance of the current context. */
+	public static ${nativeClass.className} getInstance() {
+		return getInstance(GL.getCapabilities());
+	}
+
+	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $CAPABILITIES_CLASS}. */
+	public static ${nativeClass.className} getInstance($CAPABILITIES_CLASS caps) {
+		return checkFunctionality(caps.__${nativeClass.className});
+	}""")
 
 		val functions = nativeClass.functions
 

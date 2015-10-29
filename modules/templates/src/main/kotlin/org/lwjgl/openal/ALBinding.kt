@@ -14,7 +14,7 @@ private val ALBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, C
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
-		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
+		println("\t/** Returns the {@link ${nativeClass.className}} instance of the current context. */")
 		println("\tpublic static ${nativeClass.className} getInstance() {")
 		println("\t\treturn checkFunctionality(AL.getCapabilities().__${nativeClass.className});")
 		println("\t}")

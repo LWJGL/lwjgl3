@@ -37,10 +37,16 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
-		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
-		println("\tpublic static ${nativeClass.className} getInstance() {")
-		println("\t\treturn checkFunctionality(ALC.getCapabilities().__${nativeClass.className});")
-		println("\t}")
+		println("""
+	/** Returns the {@link ${nativeClass.className}} instance of the current context. */
+	public static ${nativeClass.className} getInstance() {
+		return getInstance(ALC.getCapabilities());
+	}
+
+	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $ALC_CAP_CLASS}. */
+	public static ${nativeClass.className} getInstance($ALC_CAP_CLASS caps) {
+		return checkFunctionality(caps.__${nativeClass.className});
+	}""")
 
 		val capName = nativeClass.capName("ALC")
 		val isExtension = !nativeClass.templateName.startsWith("ALC")

@@ -18,10 +18,16 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
-		println("\t/** Returns the {@link ${nativeClass.className}} instance. */")
-		println("\tpublic static ${nativeClass.className} getInstance() {")
-		println("\t\treturn checkFunctionality(EGL.getCapabilities().__${nativeClass.className});")
-		println("\t}\n")
+		println("""
+	/** Returns the {@link ${nativeClass.className}} instance. */
+	public static ${nativeClass.className} getInstance() {
+		return getInstance(EGL.getCapabilities());
+	}
+
+	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $CAPABILITIES_CLASS}. */
+	public static ${nativeClass.className} getInstance($CAPABILITIES_CLASS caps) {
+		return checkFunctionality(caps.__${nativeClass.className});
+	}""")
 	}
 
 	override fun PrintWriter.generateContent() {
