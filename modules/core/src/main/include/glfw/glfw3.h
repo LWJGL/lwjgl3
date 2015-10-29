@@ -37,6 +37,14 @@ DISABLE_WARNINGS()
  * Doxygen documentation
  *************************************************************************/
 
+/*! @file glfw3.h
+ *  @brief The header of the GLFW 3 API.
+ *
+ *  This is the header file of the GLFW 3 API.  It defines all its types and
+ *  declares all its functions.
+ *
+ *  For more information about how to use this file, see @ref build_include.
+ */
 /*! @defgroup context Context handling
  *
  *  This is the reference documentation for context related functions.  For more
@@ -604,6 +612,15 @@ DISABLE_WARNINGS()
  *  the user, as appropriate.
  */
 #define GLFW_FORMAT_UNAVAILABLE     0x00010009
+/*! @brief The specified window does not have an OpenGL or OpenGL ES context.
+ *
+ *  A window that does not have an OpenGL or OpenGL ES context was passed to
+ *  a function that requires it to have one.
+ *
+ *  @par Analysis
+ *  Application programmer error.  Fix the offending call.
+ */
+#define GLFW_NO_WINDOW_CONTEXT      0x0001000A
 /*! @} */
 
 #define GLFW_FOCUSED                0x00020001
@@ -640,7 +657,9 @@ DISABLE_WARNINGS()
 #define GLFW_OPENGL_DEBUG_CONTEXT   0x00022007
 #define GLFW_OPENGL_PROFILE         0x00022008
 #define GLFW_CONTEXT_RELEASE_BEHAVIOR 0x00022009
+#define GLFW_CONTEXT_NO_ERROR       0x0002200A
 
+#define GLFW_NO_API                          0
 #define GLFW_OPENGL_API             0x00030001
 #define GLFW_OPENGL_ES_API          0x00030002
 
@@ -1365,9 +1384,6 @@ GLFWAPI const char* glfwGetMonitorName(GLFWmonitor* monitor);
  *  @return The previously set callback, or `NULL` if no callback was set or the
  *  library had not been [initialized](@ref intro_init).
  *
- *  @bug __X11:__ This callback is not yet called on monitor configuration
- *  changes.
- *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
  *
@@ -1884,13 +1900,12 @@ GLFWAPI void glfwSetWindowSizeLimits(GLFWwindow* window, int minwidth, int minhe
  *  specified window.  If the window is full screen or not resizable, this
  *  function does nothing.
  *
- *  The aspect ratio is specified as a numerator and a denominator.  For
- *  example, the common 16:9 aspect ratio is specified as 16 and 9,
- *  respectively.  The denominator may not be zero.
+ *  The aspect ratio is specified as a numerator and a denominator and both
+ *  values must be greater than zero.  For example, the common 16:9 aspect ratio
+ *  is specified as 16 and 9, respectively.
  *
- *  If the numerator and denominator is set to `GLFW_DONT_CARE` then the window
- *  may be resized to any aspect ratio permitted by the window system and any
- *  limits set by @ref glfwSetWindowSizeLimits.
+ *  If the numerator and denominator is set to `GLFW_DONT_CARE` then the aspect
+ *  ratio limit is disabled.
  *
  *  The aspect ratio is applied immediately and may cause the window to be
  *  resized.

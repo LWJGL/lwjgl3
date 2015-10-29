@@ -36,6 +36,12 @@ EXTERN_C_ENTER
  * Doxygen documentation
  *************************************************************************/
 
+/*! @file glfw3native.h
+ *  @brief The header of the native access functions.
+ *
+ *  This is the header file of the native access functions.  See @ref native for
+ *  more information.
+ */
 /*! @defgroup native Native access
  *
  *  **By using the native access functions you assert that you know what you're
@@ -46,10 +52,15 @@ EXTERN_C_ENTER
  *  window system API macro and exactly one context creation API macro.  Failure
  *  to do this will cause a compile-time error.
  *
+ *  The chosen backends must match those the library was compiled for.  Failure
+ *  to do this will cause a link-time error.
+ *
  *  The available window API macros are:
  *  * `GLFW_EXPOSE_NATIVE_WIN32`
  *  * `GLFW_EXPOSE_NATIVE_COCOA`
  *  * `GLFW_EXPOSE_NATIVE_X11`
+ *  * `GLFW_EXPOSE_NATIVE_WAYLAND`
+ *  * `GLFW_EXPOSE_NATIVE_MIR`
  *
  *  The available context API macros are:
  *  * `GLFW_EXPOSE_NATIVE_WGL`
@@ -86,6 +97,10 @@ DISABLE_WARNINGS()
 #elif defined(GLFW_EXPOSE_NATIVE_X11)
  #include <X11/Xlib.h>
  #include <X11/extensions/Xrandr.h>
+#elif defined(GLFW_EXPOSE_NATIVE_WAYLAND)
+ #include <wayland-client.h>
+#elif defined(GLFW_EXPOSE_NATIVE_MIR)
+ #include <mir_toolkit/mir_client_library.h>
 #else
  #error "No window API selected"
 #endif
@@ -300,6 +315,100 @@ GLFWAPI Window glfwGetX11Window(GLFWwindow* window);
  *  @ingroup native
  */
 GLFWAPI GLXContext glfwGetGLXContext(GLFWwindow* window);
+#endif
+
+#if defined(GLFW_EXPOSE_NATIVE_WAYLAND)
+/*! @brief Returns the `struct wl_display*` used by GLFW.
+ *
+ *  @return The `struct wl_display*` used by GLFW, or `NULL` if an
+ *  [error](@ref error_handling) occurred.
+ *
+ *  @par Thread Safety
+ *  This function may be called from any thread.  Access is not synchronized.
+ *
+ *  @par History
+ *  Added in GLFW 3.2.
+ *
+ *  @ingroup native
+ */
+GLFWAPI struct wl_display* glfwGetWaylandDisplay(void);
+
+/*! @brief Returns the `struct wl_output*` of the specified monitor.
+ *
+ *  @return The `struct wl_output*` of the specified monitor, or `NULL` if an
+ *  [error](@ref error_handling) occurred.
+ *
+ *  @par Thread Safety
+ *  This function may be called from any thread.  Access is not synchronized.
+ *
+ *  @par History
+ *  Added in GLFW 3.2.
+ *
+ *  @ingroup native
+ */
+GLFWAPI struct wl_output* glfwGetWaylandMonitor(GLFWmonitor* monitor);
+
+/*! @brief Returns the main `struct wl_surface*` of the specified window.
+ *
+ *  @return The main `struct wl_surface*` of the specified window, or `NULL` if
+ *  an [error](@ref error_handling) occurred.
+ *
+ *  @par Thread Safety
+ *  This function may be called from any thread.  Access is not synchronized.
+ *
+ *  @par History
+ *  Added in GLFW 3.2.
+ *
+ *  @ingroup native
+ */
+GLFWAPI struct wl_surface* glfwGetWaylandWindow(GLFWwindow* window);
+#endif
+
+#if defined(GLFW_EXPOSE_NATIVE_MIR)
+/*! @brief Returns the `MirConnection*` used by GLFW.
+ *
+ *  @return The `MirConnection*` used by GLFW, or `NULL` if an
+ *  [error](@ref error_handling) occurred.
+ *
+ *  @par Thread Safety
+ *  This function may be called from any thread.  Access is not synchronized.
+ *
+ *  @par History
+ *  Added in GLFW 3.2.
+ *
+ *  @ingroup native
+ */
+GLFWAPI MirConnection* glfwGetMirDisplay(void);
+
+/*! @brief Returns the Mir output ID of the specified monitor.
+ *
+ *  @return The Mir output ID of the specified monitor, or zero if an
+ *  [error](@ref error_handling) occurred.
+ *
+ *  @par Thread Safety
+ *  This function may be called from any thread.  Access is not synchronized.
+ *
+ *  @par History
+ *  Added in GLFW 3.2.
+ *
+ *  @ingroup native
+ */
+GLFWAPI int glfwGetMirMonitor(GLFWmonitor* monitor);
+
+/*! @brief Returns the `MirSurface*` of the specified window.
+ *
+ *  @return The `MirSurface*` of the specified window, or `NULL` if an
+ *  [error](@ref error_handling) occurred.
+ *
+ *  @par Thread Safety
+ *  This function may be called from any thread.  Access is not synchronized.
+ *
+ *  @par History
+ *  Added in GLFW 3.2.
+ *
+ *  @ingroup native
+ */
+GLFWAPI MirSurface* glfwGetMirWindow(GLFWwindow* window);
 #endif
 
 #if defined(GLFW_EXPOSE_NATIVE_EGL)

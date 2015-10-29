@@ -365,6 +365,18 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"FORMAT_UNAVAILABLE"..0x00010009
 	)
 
+	IntConstant(
+		"""
+		The specified window does not have an OpenGL or OpenGL ES context.
+
+		A window that does not have an OpenGL or OpenGL ES context was passed to a function that requires it to have one.
+
+		Application programmer error. Fix the offending call.
+		""",
+
+		"NO_WINDOW_CONTEXT"..0x0001000A
+	)
+
 	val WindowAttributes = IntConstant(
 		"Window attributes.",
 
@@ -451,12 +463,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"OPENGL_FORWARD_COMPAT"..0x00022006,
 		"OPENGL_DEBUG_CONTEXT"..0x00022007,
 		"OPENGL_PROFILE"..0x00022008,
-		"CONTEXT_RELEASE_BEHAVIOR"..0x00022009
+		"CONTEXT_RELEASE_BEHAVIOR"..0x00022009,
+		"CONTEXT_NO_ERROR"..0x0002200A
 	).javaDocLinks
 
 	val ClientAPIValues = IntConstant(
 		"Values for the #CLIENT_API hint.",
 
+		"NO_API"..0,
 		"OPENGL_API"..0x00030001,
 		"OPENGL_ES_API"..0x00030002
 	).javaDocLinks
@@ -695,11 +709,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Sets the monitor configuration callback, or removes the currently set callback. This is called when a monitor is connected to or disconnected from the
 		system.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>X11</b>: This callback is not yet called on monitor configuration changes."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		nullable..GLFWmonitorfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
@@ -1087,11 +1097,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Sets the required aspect ratio of the client area of the specified window. If the window is full screen or not resizable, this function does nothing.
 
-		The aspect ratio is specified as a numerator and a denominator. For  example, the common 16:9 aspect ratio is specified as 16 and 9, respectively. The
-		denominator may not be zero.
+		The aspect ratio is specified as a numerator and a denominator and both values must be greater than zero. For example, the common 16:9 aspect ratio is
+		specified as 16 and 9, respectively.
 
-		If the numerator and denominator is set to #DONT_CARE then the window may be resized to any aspect ratio permitted by the window system and any limits
-		set by #SetWindowSizeLimits().
+		If the numerator and denominator is set to #DONT_CARE then the aspect ratio limit is disabled.
 
  		The aspect ratio is applied immediately and may cause the window to be  resized. If you set size limits and an aspect ratio that conflict, the results
  		are undefined.
@@ -2158,5 +2167,4 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		returnDoc = "the address of the function, or $NULL if an error occured",
 		since = "GLFW 1.0"
 	)
-
 }
