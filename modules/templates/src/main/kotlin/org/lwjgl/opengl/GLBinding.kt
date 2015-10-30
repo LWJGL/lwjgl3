@@ -35,9 +35,9 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }
 		if ( boParams.any() ) {
-			boParams forEach { transforms[it] = BufferOffsetTransform }
+			boParams.forEach { transforms[it] = BufferOffsetTransform }
 			function.generateAlternativeMethod(writer, function.name, "Buffer object offset version of:", transforms)
-			boParams forEach { transforms remove it }
+			boParams.forEach { transforms.remove(it) }
 		}
 	}
 
@@ -120,7 +120,7 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 
 		val printPointer = { func: NativeClassFunction ->
 			if ( func has DependsOn )
-				"${func[DependsOn].reference let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? funcs.${func.simpleName} : -1L"
+				"${func[DependsOn].reference.let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? funcs.${func.simpleName} : -1L"
 			else
 				"funcs.${func.simpleName}"
 		}
@@ -170,7 +170,7 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 		}
 
 		println()
-		classes forEach {
+		classes.forEach {
 			val documentation = it.documentation
 			if ( documentation != null )
 				println((if ( it.hasBody ) "When true, {@link ${it.className}} is supported." else documentation).toJavaDoc())

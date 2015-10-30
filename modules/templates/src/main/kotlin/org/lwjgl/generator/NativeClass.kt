@@ -419,7 +419,7 @@ class NativeClass(
 
 	operator fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: $templateName.$functionName")
 
-	fun NativeClass.reuse(functionName: String): NativeClassFunction {
+	infix fun NativeClass.reuse(functionName: String): NativeClassFunction {
 		val reference = this[functionName]
 
 		val func = NativeClassFunction(
@@ -448,7 +448,7 @@ class NativeClass(
 		).copyModifiers(param)
 	}
 
-	fun Int.x(other: Int) = this * other
+	infix fun Int.x(other: Int) = this * other
 
 	private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String): String {
 		val matcher = JDOC_LINK_PATTERN.matcher(documentation)

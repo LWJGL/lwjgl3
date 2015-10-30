@@ -62,7 +62,7 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 	public final int minorVersion;
 """)
 
-		classes forEach {
+		classes.forEach {
 			val documentation = it.documentation
 			if ( documentation != null )
 				println((if ( it.hasBody ) "When true, {@link ${it.className}} is supported." else documentation).toJavaDoc())

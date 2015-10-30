@@ -86,7 +86,7 @@ private val CLBinding = Generator.register(object: APIBinding(OPENCL_PACKAGE, CA
 	public final int minorVersion;
 """)
 
-		classes forEach {
+		classes.forEach {
 			val documentation = it.documentation
 			if ( documentation != null )
 				println((if ( it.hasBody ) "When true, {@link ${it.className}} is supported." else documentation).toJavaDoc())

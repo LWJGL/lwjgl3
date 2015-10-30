@@ -52,7 +52,7 @@ private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CA
 
 		val printPointer = { func: NativeClassFunction ->
 			if ( func has DependsOn )
-				"${func[DependsOn].reference let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? funcs.${func.simpleName} : -1L"
+				"${func[DependsOn].reference.let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? funcs.${func.simpleName} : -1L"
 			else
 				"funcs.${func.simpleName}"
 		}
@@ -92,7 +92,7 @@ private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CA
 		}
 
 		println()
-		classes forEach {
+		classes.forEach {
 			val documentation = it.documentation
 			if ( documentation != null )
 				println((if ( it.hasBody ) "When true, {@link ${it.className}} is supported." else documentation).toJavaDoc())
