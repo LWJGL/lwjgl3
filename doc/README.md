@@ -45,12 +45,14 @@ Step-by-step:
 
 At this point you're ready to follow the build process explained below.
 
-LWJGL also comes with a preconfigured **IntelliJ IDEA** project. You can use the Community Edition with the Kotlin and Ant plugins and, optionally, the TestNG and Copyright plugins.
+LWJGL comes with a preconfigured **IntelliJ IDEA** project. You can use the Community Edition with the Kotlin and Ant plugins and, optionally, the TestNG and Copyright plugins.
 * File &gt; Open &gt; choose the */config/ide/idea* folder
 * File &gt; Project Structure &gt; Project &gt; choose or create the Project SDK
 * If you haven't used the init-generated and init-wiki targets, either ignore the VCS errors, or go to Settings &gt; Version Control &gt; remove the missing directories from the list of VCS roots.
 
-LWJGL does not yet provide projects for **Eclipse** and **Netbeans**, but they should be straightforward to configure, assuming you follow the project structure explained above. There's also a Kotlin plugin for Eclipse available now, see [Getting Started with Eclipse](http://kotlinlang.org/docs/tutorials/getting-started-eclipse.html).
+LWJGL also comes with an **Eclipse** project. Copy the project files from the [eclipse](https://github.com/LWJGL/lwjgl3/tree/master/config/ide/eclipse) folder into the root directory and open it as an Eclipse file. There's also a Kotlin plugin for Eclipse available now, see [Getting Started with Eclipse](http://kotlinlang.org/docs/tutorials/getting-started-eclipse.html).
+
+LWJGL does not yet provide a project for **Netbeans**, but it should be straightforward to configure, assuming you follow the project structure explained above.
 
 # BUILD PROCESS
 LWJGL uses Ant for the build process, which goes like so:
