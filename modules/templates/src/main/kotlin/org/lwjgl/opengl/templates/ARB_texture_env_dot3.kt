@@ -14,7 +14,7 @@ val ARB_texture_env_dot3 = "ARBTextureEnvDot3".nativeClassGL("ARB_texture_env_do
 
 		Adds new dot product operation to the texture combiner operations.
 
-		Requires ${ARB_multitexture.capLink} and ${ARB_texture_env_combine.link}. ${GL13.promoted}
+		Requires ${ARB_multitexture.link} and ${ARB_texture_env_combine.link}. ${GL13.promoted}
 		"""
 
 	IntConstant(
@@ -23,5 +23,4 @@ val ARB_texture_env_dot3 = "ARBTextureEnvDot3".nativeClassGL("ARB_texture_env_do
 		"DOT3_RGB_ARB"..0x86AE,
 		"DOT3_RGBA_ARB"..0x86AF
 	)
-
 }

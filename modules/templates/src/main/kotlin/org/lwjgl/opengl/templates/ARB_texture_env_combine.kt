@@ -14,7 +14,7 @@ val ARB_texture_env_combine = "ARBTextureEnvCombine".nativeClassGL("ARB_texture_
 
 		New texture environment function COMBINE_ARB allows programmable texture combiner operations.
 
-		Requires ${ARB_multitexture.capLink}. ${GL13.promoted}
+		Requires ${ARB_multitexture.link}. ${GL13.promoted}
 		"""
 
 	IntConstant(
@@ -64,5 +64,4 @@ val ARB_texture_env_combine = "ARBTextureEnvCombine".nativeClassGL("ARB_texture_
 		"PRIMARY_COLOR_ARB"..0x8577,
 		"PREVIOUS_ARB"..0x8578
 	)
-
 }
