@@ -27,11 +27,11 @@ final class MemoryAccess {
 		try {
 			// Depends on sun.nio.ch.DirectBuffer and sun.misc.Unsafe
 			accessor = (MemoryAccessor)Class.forName("org.lwjgl.system.MemoryAccess$MemoryAccessorUnsafe").newInstance();
-		} catch (Exception e0) {
+		} catch (Throwable t0) {
 			try {
 				// Depends on sun.nio.ch.DirectBuffer and sun.reflect.FieldAccessor
 				accessor = new MemoryAccessorReflect();
-			} catch (Exception e1) {
+			} catch (Throwable t1) {
 				LWJGLUtil.log("[MemoryAccessor] Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
 				accessor = new MemoryAccessorJNI();
 			}

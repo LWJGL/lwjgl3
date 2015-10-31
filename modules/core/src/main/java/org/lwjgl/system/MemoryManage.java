@@ -35,9 +35,9 @@ final class MemoryManage {
 				// check if the jemalloc library is available
 				Class.forName("org.lwjgl.system.jemalloc.JEmalloc").getMethod("getInstance").invoke(null);
 				return new JEmallocAllocator();
-			} catch (Exception e) {
+			} catch (Throwable t) {
 				if ( DEBUG )
-					e.printStackTrace(DEBUG_STREAM);
+					t.printStackTrace(DEBUG_STREAM);
 				LWJGLUtil.log("[MemoryAllocator] Failed to load the jemalloc library.");
 				return new StdlibAllocator();
 			}
@@ -46,7 +46,7 @@ final class MemoryManage {
 		} else {
 			try {
 				return (MemoryAllocator)Class.forName(allocator.toString()).newInstance();
-			} catch (Exception e) {
+			} catch (Throwable t) {
 				throw new RuntimeException("Failed to instantiate custom memory allocator: " + allocator);
 			}
 		}
