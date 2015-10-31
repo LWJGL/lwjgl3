@@ -91,7 +91,6 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---")
-
 		println("""
 	/** Returns the {@link ${nativeClass.className}} instance of the current context. */
 	public static ${nativeClass.className} getInstance() {
@@ -232,7 +231,6 @@ fun NativeClass.registryLink(prefix: String, name: String): String = registryLin
 fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =
 	url("http://www.opengl.org/registry/specs/$prefix/$name.txt", extensionName)
 
-val NativeClass.capLink: String get() = "$CAPABILITIES_CLASS##$capName"
 val NativeClass.core: String get() = "{@link ${this.className} OpenGL ${this.className[2]}.${this.className[3]}}"
 val NativeClass.glx: String get() = "{@link ${this.className} GLX ${this.className[3]}.${this.className[4]}}"
 val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."

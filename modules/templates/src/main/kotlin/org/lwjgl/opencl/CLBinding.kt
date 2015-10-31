@@ -22,8 +22,7 @@ private val CAPABILITIES_CLASS = "CLCapabilities"
 private val CLBinding = Generator.register(object: APIBinding(OPENCL_PACKAGE, CAPABILITIES_CLASS) {
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
-		println("\t// --- [ Function Addresses ] ---\n")
-
+		println("\t// --- [ Function Addresses ] ---")
 		println("""
 	/** Returns the {@link ${nativeClass.className}} instance of the currently loaded ICD. */
 	public static ${nativeClass.className} getInstance() {

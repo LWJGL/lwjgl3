@@ -30,8 +30,7 @@ private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CA
 	}
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
-		println("\t// --- [ Function Addresses ] ---\n")
-
+		println("\t// --- [ Function Addresses ] ---")
 		println("""
 	/** Returns the {@link ${nativeClass.className}} instance of the current context. */
 	public static ${nativeClass.className} getInstance() {

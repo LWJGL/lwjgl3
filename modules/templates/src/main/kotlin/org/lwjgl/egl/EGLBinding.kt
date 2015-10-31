@@ -16,8 +16,7 @@ private val CAPABILITIES_CLASS = "EGLCapabilities"
 private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAPABILITIES_CLASS) {
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
-		println("\t// --- [ Function Addresses ] ---\n")
-
+		println("\t// --- [ Function Addresses ] ---")
 		println("""
 	/** Returns the {@link ${nativeClass.className}} instance. */
 	public static ${nativeClass.className} getInstance() {
@@ -27,7 +26,8 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $CAPABILITIES_CLASS}. */
 	public static ${nativeClass.className} getInstance($CAPABILITIES_CLASS caps) {
 		return checkFunctionality(caps.__${nativeClass.className});
-	}""")
+	}
+""")
 	}
 
 	override fun PrintWriter.generateContent() {
