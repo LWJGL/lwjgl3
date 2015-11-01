@@ -230,7 +230,7 @@ class Generator(
 				}
 			}
 		} else
-			nativeClass.nativeImportsWarning()
+			nativeClass.nativeDirectivesWarning()
 	}
 
 	fun <T : GeneratorTarget> generate(typeName: String, targets: List<T>) {

@@ -34,7 +34,7 @@ class Preamble {
 	private var nativeImports: MutableList<String> = EMPTY_IMPORTS
 	private var nativeDirectives: MutableList<NativeDefine> = EMPTY_DIRECTIVES
 
-	val hasNativeImports: Boolean get() = nativeImports.isNotEmpty()
+	val hasNativeDirectives: Boolean get() = nativeImports.isNotEmpty() || nativeDirectives.isNotEmpty()
 
 	fun javaImport(vararg classes: String) {
 		if ( javaImports === EMPTY_IMPORTS )

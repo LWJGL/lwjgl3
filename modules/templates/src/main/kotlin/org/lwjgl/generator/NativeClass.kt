@@ -339,9 +339,9 @@ class NativeClass(
 		println("\nEXTERN_C_EXIT")
 	}
 
-	fun nativeImportsWarning() {
-		if ( preamble.hasNativeImports )
-			println("\tUnnecessary native imports in: $packageName.$templateName")
+	fun nativeDirectivesWarning() {
+		if ( preamble.hasNativeDirectives )
+			println("\tUnnecessary native directives in: $packageName.$templateName")
 	}
 
 	fun printPointers(

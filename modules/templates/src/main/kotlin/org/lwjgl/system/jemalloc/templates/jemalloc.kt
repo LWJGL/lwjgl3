@@ -12,14 +12,6 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 	"""Configuration.LIBRARY_NAME_JEMALLOC.get(Pointer.BITS64 ? "jemalloc" : "jemalloc32")""",
 	CallingConvention.DEFAULT
 )) {
-	nativeDirective(
-		"""DISABLE_WARNINGS()
-#include "jemalloc.h"
-#define APIENTRY
-ENABLE_WARNINGS()
-
-typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
-
 	documentation =
 		"""
 		Native bindings to jemalloc.
