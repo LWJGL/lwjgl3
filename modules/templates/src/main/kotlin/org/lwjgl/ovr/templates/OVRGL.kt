@@ -35,7 +35,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 	    conversions leading to gamma-curve artifacts.
 	    """,
 
-	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#_Create()."),
+	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#Create()."),
 	    GLuint.IN("format", "the texture format"),
 	    int.IN("width", "the requested texture width"),
 	    int.IN("height", "the requested texture height"),
@@ -43,11 +43,11 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 		    "outTextureSet",
 		    """
 		    the created ##OVRSwapTextureSet, which will be valid only upon a successful return value. This texture set must be eventually destroyed via
-		    OVR#_DestroySwapTextureSet() before destroying the HMD with OVR#_Destroy().
+		    OVR#DestroySwapTextureSet() before destroying the HMD with OVR#Destroy().
 		    """
 	    ),
 
-	    returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use OVR#_GetLastErrorInfo() to get more information."
+	    returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use OVR#GetLastErrorInfo() to get more information."
 	)
 
 	ovrResult(
@@ -65,7 +65,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 		banding.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#_Create()."),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#Create()."),
 		GLuint.IN("format", "the texture format"),
 		int.IN("width", "the requested texture width"),
 		int.IN("height", "the requested texture height"),
@@ -73,10 +73,10 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 			"outMirrorTexture",
 			"""
 		    the created {@code ovrSwapTexture}, which will be valid upon a successful return value. This texture must be eventually destroyed via
-		    OVR#_DestroyMirrorTexture() before destroying the HMD with OVR#_Destroy().
+		    OVR#DestroyMirrorTexture() before destroying the HMD with OVR#Destroy().
 		    """
 		),
 
-		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use OVR#_GetLastErrorInfo() to get more information."
+		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use OVR#GetLastErrorInfo() to get more information."
 	)
 }
