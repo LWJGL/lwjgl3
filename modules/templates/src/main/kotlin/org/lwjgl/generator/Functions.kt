@@ -1213,7 +1213,10 @@ class NativeClassFunction(
 
 	fun generateFunctionDefinition(writer: PrintWriter) = writer.generateFunctionDefinitionImpl()
 	private fun PrintWriter.generateFunctionDefinitionImpl() {
-		print("typedef ${returns.toNativeType()} (APIENTRY *${name}PROC) (")
+		print("typedef ${returns.toNativeType()} (")
+		if ( nativeClass.binding?.callingConvention !== CallingConvention.DEFAULT )
+			print("APIENTRY ")
+		print("*${name}PROC) (")
 		val nativeParams = getNativeParams()
 		if ( nativeParams.any() ) {
 			printList(nativeParams) {
