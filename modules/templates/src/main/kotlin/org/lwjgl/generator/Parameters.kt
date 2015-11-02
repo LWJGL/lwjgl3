@@ -38,13 +38,12 @@ abstract class QualifiedType(
 	val jniFunctionType: String
 		get() = nativeType.jniFunctionType
 
-	val toNativeType: String
-		get() {
+	fun toNativeType(pointerMode: Boolean = false): String {
 			val builder = StringBuilder()
 			if ( has(const) )
 				builder.append("const ")
 			builder.append(nativeType.name)
-			if ( nativeType is PointerType && !nativeType.includesPointer ) {
+			if ( nativeType is PointerType && !nativeType.includesPointer && (pointerMode || nativeType !is StructType) ) {
 				if ( !nativeType.name.endsWith('*') )
 					builder.append(' ')
 				builder.append('*')

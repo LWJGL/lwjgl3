@@ -124,6 +124,7 @@ val private = AccessModifier(Access.PUBLIC)
 /** Makes the generated methods package private. */
 val internal = AccessModifier(Access.INTERNAL)
 
+/** Overrides the native function name. This is useful for functions like Windows functions that have both a Unicode (W suffix) and ANSI version (A suffix). */
 class NativeName(val name: String) : FunctionModifier() {
 	companion object : ModifierKey<NativeName>
 

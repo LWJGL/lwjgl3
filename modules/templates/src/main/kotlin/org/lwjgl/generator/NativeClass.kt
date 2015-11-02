@@ -258,6 +258,7 @@ class NativeClass(
 			} else {
 				println("\n\tstatic { LWJGLUtil.initialize(); }")
 
+				// This allows binding classes to be "statically" extended. Not a good practice, but usable with static imports.
 				println("""
 	@JavadocExclude
 	protected $className() {

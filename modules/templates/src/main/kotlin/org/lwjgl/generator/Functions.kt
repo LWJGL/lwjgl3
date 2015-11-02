@@ -156,7 +156,9 @@ class NativeClassFunction(
 	private val methodLink: String get() = "#$simpleName()"
 
 	val hasCustomJNI: Boolean
-		get() = nativeClass.binding == null || (has(Code) && this[Code].let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null })
+		get() = nativeClass.binding == null ||
+		        returns.isStructValue ||
+		        (has(Code) && this[Code].let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null })
 
 	private val isSimpleFunction: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
@@ -514,14 +516,22 @@ class NativeClassFunction(
 
 		// Native method call
 		print("\t\t")
-		if ( !returns.isVoid )
-			print("return ")
+		if ( returns.isStructValue ) {
+			print("n$name(")
+		} else {
+			if ( !returns.isVoid )
+				print("return ")
 
-		print("${nativeClass.binding.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.joinToString("")}${returns.nativeType.mapping.jniSignature}(")
+			print("${nativeClass.binding.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.joinToString("")}${returns.nativeType.mapping.jniSignature}(")
+		}
 		print("$FUNCTION_ADDRESS")
 		if ( hasNativeParams ) print(", ")
 		printList(getNativeParams()) {
 			it.name
+		}
+		if ( returns.isStructValue ) {
+			print(", ")
+			print(RESULT)
 		}
 		println(");")
 
@@ -1203,11 +1213,11 @@ class NativeClassFunction(
 
 	fun generateFunctionDefinition(writer: PrintWriter) = writer.generateFunctionDefinitionImpl()
 	private fun PrintWriter.generateFunctionDefinitionImpl() {
-		print("typedef ${returns.toNativeType} (APIENTRY *${name}PROC) (")
+		print("typedef ${returns.toNativeType()} (APIENTRY *${name}PROC) (")
 		val nativeParams = getNativeParams()
 		if ( nativeParams.any() ) {
 			printList(nativeParams) {
-				it.toNativeType
+				it.toNativeType()
 			}
 		} else
 			print("void")
@@ -1241,7 +1251,7 @@ class NativeClassFunction(
 		// Cast addresses to pointers
 
 		getNativeParams().filter { it.nativeType is PointerType }.forEach {
-			val pointerType = it.toNativeType
+			val pointerType = it.toNativeType(pointerMode = true)
 			print("\t$pointerType")
 			if ( !pointerType.endsWith('*') ) print(' ')
 			println("${it.name} = ($pointerType)(intptr_t)${it.name}$POINTER_POSTFIX;")
