@@ -151,6 +151,11 @@ fun simpleBinding(
 		instance = new ${nativeClass.className}($libraryReference);
 	}
 
+	/** Returns the {@link DynamicLinkLibrary} that provides pointers for the functions in this class. */
+	public static DynamicLinkLibrary getLibrary() {
+		return $libraryReference;
+	}
+
 	/** Returns the {@link ${nativeClass.className}} instance. */
 	public static ${nativeClass.className} getInstance() {
 		return instance;
