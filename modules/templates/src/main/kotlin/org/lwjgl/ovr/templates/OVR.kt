@@ -8,7 +8,18 @@ import org.lwjgl.generator.*
 import org.lwjgl.ovr.*
 
 val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", prefixConstant = "ovr") {
-	includeOVRCAPI()
+	nativeDirective(
+"""#ifdef LWJGL_WINDOWS
+	#define _NO_CRT_STDIO_INLINE
+#endif""", beforeIncludes = true)
+
+	nativeDirective(
+"""DISABLE_WARNINGS()
+#ifdef LWJGL_WINDOWS
+	__pragma(warning(disable : 4711))
+#endif
+#include "OVR_CAPIShim.c"
+ENABLE_WARNINGS()""")
 
 	documentation =
 		"""
@@ -95,7 +106,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		"Hmd_CB"..8,
 		"Hmd_Other"..9,
 		"Hmd_E3_2015"..10,
-	    "Hmd_ES06"..11
+		"Hmd_ES06"..11
 	)
 
 	// ovrHmdCaps enum
@@ -166,20 +177,20 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		"Touch input types.",
 
 		"Touch_A" expr "ovrButton_A",
-	    "Touch_B" expr "ovrButton_B",
-	    "Touch_RThumb" expr "ovrButton_RThumb",
-	    "Touch_RIndexTrigger"..0x00000010,
-	    "Touch_X" expr "ovrButton_X",
-	    "Touch_Y" expr "ovrButton_Y",
-	    "Touch_LThumb" expr "ovrButton_LThumb",
-	    "Touch_LIndexTrigger"..0x00001000,
+		"Touch_B" expr "ovrButton_B",
+		"Touch_RThumb" expr "ovrButton_RThumb",
+		"Touch_RIndexTrigger"..0x00000010,
+		"Touch_X" expr "ovrButton_X",
+		"Touch_Y" expr "ovrButton_Y",
+		"Touch_LThumb" expr "ovrButton_LThumb",
+		"Touch_LIndexTrigger"..0x00001000,
 
-	    // Finger pose state
-	    // Derived internally based on distance, proximity to sensors and filtering.
-	    "Touch_RIndexPointing"..0x00000020,
-	    "Touch_RThumbUp"..0x00000040,
-	    "Touch_LIndexPointing"..0x00002000,
-	    "Touch_LThumbUp"..0x00004000
+		// Finger pose state
+		// Derived internally based on distance, proximity to sensors and filtering.
+		"Touch_RIndexPointing"..0x00000020,
+		"Touch_RThumbUp"..0x00000040,
+		"Touch_LIndexPointing"..0x00002000,
+		"Touch_LThumbUp"..0x00004000
 	)
 
 	IntConstant(
@@ -221,20 +232,20 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 			"an ##OVRInitParams struct that cpecifies custom initialization options. May be $NULL to indicate default options."
 		),
 
-	    returnDoc =
+		returnDoc =
 		"""
 		an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information. Example failed results
 		include:
 		${ul(
 			"OVRErrorCode#Error_Initialize: Generic initialization error.",
-		    "OVRErrorCode#Error_LibLoad: Couldn't load LibOVRRT.",
-		    "OVRErrorCode#Error_LibVersion: LibOVRRT version incompatibility.",
-		    "OVRErrorCode#Error_ServiceConnection: Couldn't connect to the OVR Service.",
-		    "OVRErrorCode#Error_ServiceVersion: OVR Service version incompatibility.",
-		    "OVRErrorCode#Error_IncompatibleOS: The operating system version is incompatible.",
-		    "OVRErrorCode#Error_DisplayInit: Unable to initialize the HMD display.",
-		    "OVRErrorCode#Error_ServerStart:  Unable to start the server. Is it already running?",
-		    "OVRErrorCode#Error_Reinitialization: Attempted to re-initialize with a different version."
+			"OVRErrorCode#Error_LibLoad: Couldn't load LibOVRRT.",
+			"OVRErrorCode#Error_LibVersion: LibOVRRT version incompatibility.",
+			"OVRErrorCode#Error_ServiceConnection: Couldn't connect to the OVR Service.",
+			"OVRErrorCode#Error_ServiceVersion: OVR Service version incompatibility.",
+			"OVRErrorCode#Error_IncompatibleOS: The operating system version is incompatible.",
+			"OVRErrorCode#Error_DisplayInit: Unable to initialize the HMD display.",
+			"OVRErrorCode#Error_ServerStart:  Unable to start the server. Is it already running?",
+			"OVRErrorCode#Error_Reinitialization: Attempted to re-initialize with a different version."
 		)}
 		"""
 	)
@@ -277,7 +288,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		The format of this string is subject to change in future versions and its contents should not be interpreted.
 		""",
 
-	    returnDoc = "a UTF8-encoded null-terminated version string"
+		returnDoc = "a UTF8-encoded null-terminated version string"
 	)
 
 	(const..charUTF8_p)(
@@ -299,21 +310,21 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 
 	ovrHmdDesc(
 		"GetHmdDesc",
-        """
+		"""
         Returns information about the given HMD.
 
         #Initialize() must have first been called in order for this to succeed, otherwise ovrHmdDesc::Type will be reported as #Hmd_None.
         """,
 
-        nullable..ovrHmd.IN(
-	        "hmd",
-	        """
+		nullable..ovrHmd.IN(
+			"hmd",
+			"""
 	        an {@code ovrHmd} previously returned by #Create(), else $NULL in which case this function detects whether an HMD is present and returns its info if
 	        so.
 	        """
-        ),
+		),
 
-	    returnDoc = "an ##OVRHmdDesc. If the {@code hmd} is $NULL and ovrHmdDesc::Type is #Hmd_None then no HMD is present."
+		returnDoc = "an ##OVRHmdDesc. If the {@code hmd} is $NULL and ovrHmdDesc::Type is #Hmd_None then no HMD is present."
 	)
 
 	ovrResult(
@@ -325,17 +336,17 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		in an error return value if the previous {@code Hmd} has not been destroyed.
 	    """,
 
-	    Check(1)..ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
-	    ovrGraphicsLuid_p.OUT(
-		    "luid",
-		    """
+		Check(1)..ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
+		ovrGraphicsLuid_p.OUT(
+			"luid",
+			"""
 		    a system specific graphics adapter identifier that locates which graphics adapter has the HMD attached. This must match the adapter used by the
 		    application or no rendering output will be possible. This is important for stability on multi-adapter systems. An application that simply chooses
 		    the default adapter will not run reliably on multi-adapter systems.
 			"""
-	    ),
+		),
 
-	    returnDoc = "an {@code ovrResult} indicating success or failure. Upon failure the returned {@code pHmd} will be $NULL."
+		returnDoc = "an {@code ovrResult} indicating success or failure. Upon failure the returned {@code pHmd} will be $NULL."
 	)
 
 	void(
@@ -355,7 +366,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 
-	    returnDoc = "a combination of zero or more {@code ovrHmdCaps}"
+		returnDoc = "a combination of zero or more {@code ovrHmdCaps}"
 	)
 
 	void(
@@ -400,7 +411,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 			LinkMode.BITFIELD
 		),
 
-	    returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information."
+		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information."
 	)
 
 	void(
@@ -429,33 +440,33 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		double.IN("absTime", "the absolute future time to predict the return ##OVRTrackingState value. Use 0 to request the most recent tracking state."),
 
-	    returnDoc = "the ##OVRTrackingState that is predicted for the given {@code absTime}"
+		returnDoc = "the ##OVRTrackingState that is predicted for the given {@code absTime}"
 	)
 
 	ovrResult(
 		"GetInputState",
-        """
+		"""
         Returns the most recent input state for controllers, without positional tracking info. Developers can tell whether the same state was returned by
         checking the {@code PacketNumber}.
         """,
 
-	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-	    unsigned_int.IN("controllerTypeMask", "which controllers the input will be returned for"),
-	    ovrInputState_p.IN("inputState", "the input state that will be filled in"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		unsigned_int.IN("controllerTypeMask", "which controllers the input will be returned for"),
+		ovrInputState_p.IN("inputState", "the input state that will be filled in"),
 
-	    returnDoc = "OVRErrorCode#Success if the new state was successfully obtained"
+		returnDoc = "OVRErrorCode#Success if the new state was successfully obtained"
 	)
 
 	ovrResult(
 		"SetControllerVibration",
-        """
+		"""
         Turns on vibration of the given controller.
 
 		To disable vibration, call ovr_SetControllerVibration with an amplitude of 0. Vibration automatically stops after a nominal amount of time, so if you
 		want vibration to be continuous over multiple seconds then you need to call this function periodically.
         """,
 
-	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		unsigned_int.IN("controllerTypeMask", "the controllers to apply the vibration to"),
 		float.IN(
 			"frequency",
@@ -465,7 +476,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 			"""),
 		float.IN("amplitude", "a vibration amplitude in the range of 0.0 to 1.0."),
 
-	    returnDoc = "OVRErrorCode#Success upon success"
+		returnDoc = "OVRErrorCode#Success upon success"
 	)
 
 
@@ -495,10 +506,10 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 
 	void(
 		"DestroySwapTextureSet",
-	    "Destroys an ##OVRSwapTextureSet and frees all the resources associated with it.",
+		"Destroys an ##OVRSwapTextureSet and frees all the resources associated with it.",
 
-	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-	    nullable..ovrSwapTextureSet_p.IN("textureSet", "the ##OVRSwapTextureSet to destroy. If it is $NULL then this function has no effect.")
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		nullable..ovrSwapTextureSet_p.IN("textureSet", "the ##OVRSwapTextureSet to destroy. If it is $NULL then this function has no effect.")
 	)
 
 	void(
@@ -529,7 +540,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 			"""
 		),
 
-	    returnDoc = "the texture width and height size"
+		returnDoc = "the texture width and height size"
 	)
 
 	ovrEyeRenderDesc(
@@ -540,7 +551,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		ovrEyeType.IN("eyeType", "which eye (left or right) for which to perform calculations", EyeType),
 		ovrFovPort.IN("fov", "the ##OVRFovPort to use."),
 
-	    returnDoc = "the computed ##OVREyeRenderDesc for the given {@code eyeType} and field of view"
+		returnDoc = "the computed ##OVREyeRenderDesc for the given {@code eyeType} and field of view"
 	)
 
 	ovrResult(
@@ -552,15 +563,15 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 	    queue and surfaces are available. Distortion might or might not have completed.
 		${ul(
 			"Layers are drawn in the order they are specified in the array, regardless of the layer type.",
-		    """
+			"""
 		    Layers are not remembered between successive calls to ovr_SubmitFrame. A layer must be specified in every call to ovr_SubmitFrame or it won't
 		    be displayed.
 		    """,
-		    """
+			"""
 		    If a {@code layerPtrList} entry that was specified in a previous call to ovr_SubmitFrame is passed as $NULL or is of type #LayerType_Disabled,
 		    that layer is no longer displayed.
 		    """,
-		    """
+			"""
 		    A {@code layerPtrList} entry can be of any layer type and multiple entries of the same layer type are allowed. No {@code layerPtrList} entry may be
 		    duplicated (i.e. the same pointer as an earlier entry).
 		    """
@@ -600,23 +611,23 @@ ovrResult result = ovr_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 			"""
 		),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon one of the possible success values:
 	    ${ul(
 			"OVRErrorCode#Success: rendering completed successfully.",
-	        """
+			"""
 	        OVRErrorCode#Success_NotVisible: rendering completed successfully but was not displayed on the HMD, usually because another application currently
 	        has ownership of the HMD. Applications receiving this result should stop rendering new content, but continue to call ovr_SubmitFrame
 	        periodically until it returns a value other than OVRErrorCode#Success_NotVisible.
 	        """,
-	        """
+			"""
 	        OVRErrorCode#Error_DisplayLost: The session has become invalid (such as due to a device removal) and the shared resources need to be released
 	        (#DestroySwapTextureSet()), the session needs to destroyed (#Destroy()) and recreated (#Create()), and new resources need to be created
 	        ({@code ovr_CreateSwapTextureSetXXX}). The application's existing private graphics resources do not need to be recreated unless the new #Create()
 	        call returns a different {@code GraphicsLuid}.
 	        """
-	    )}
+		)}
 	    """
 	)
 
@@ -646,7 +657,7 @@ ovrResult result = ovr_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 		The time frame of reference for this function is not specified and should not be depended upon.
 		""",
 
-	    returnDoc = "seconds as a floating point value"
+		returnDoc = "seconds as a floating point value"
 	)
 
 	IntConstant(
@@ -662,7 +673,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 
 		"PerfHud_Off"..0,
 		"PerfHud_LatencyTiming"..1,
-	    "PerfHud_RenderTiming"..2,
+		"PerfHud_RenderTiming"..2,
 		"PerfHud_PerfHeadroom"..3,
 		"PerfHud_VersionInfo"..4
 	)
@@ -670,17 +681,17 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 	IntConstant(
 		"Visual properties of the stereo guide.",
 
-	    "DebugHudStereo_Off"..0,  ///< Turns off the Stereo Debug HUD
-		"DebugHudStereo_Quad"..1,  ///< Renders Quad in world for Stereo Debugging
-        "DebugHudStereo_QuadWithCrosshair"..2,  ///< Renders Quad+crosshair in world for Stereo Debugging
-        "DebugHudStereo_CrosshairAtInfinity"..3  ///< Renders screen-space crosshair at infinity for Stereo Debugging
+		"DebugHudStereo_Off"..0, ///< Turns off the Stereo Debug HUD
+		"DebugHudStereo_Quad"..1, ///< Renders Quad in world for Stereo Debugging
+		"DebugHudStereo_QuadWithCrosshair"..2, ///< Renders Quad+crosshair in world for Stereo Debugging
+		"DebugHudStereo_CrosshairAtInfinity"..3  ///< Renders screen-space crosshair at infinity for Stereo Debugging
 	)
 
 	void(
 		"ResetBackOfHeadTracking",
-	    "Should be called when the headset is placed on a new user.",
+		"Should be called when the headset is placed on a new user.",
 
-	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()")
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()")
 	)
 
 	void(
@@ -701,7 +712,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid for only the call"),
 		ovrBool.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
-	    returnDoc = "the property interpreted as a boolean value. Returns {@code defaultVal} if the property doesn't exist."
+		returnDoc = "the property interpreted as a boolean value. Returns {@code defaultVal} if the property doesn't exist."
 	)
 
 	ovrBool(
@@ -716,7 +727,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		ovrBool.IN("value", "the value to write"),
 
-	    returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
+		returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
 	)
 
 	int(
@@ -727,7 +738,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		int.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
-	    returnDoc = "the property interpreted as an integer value. Returns {@code defaultVal} if the property doesn't exist."
+		returnDoc = "the property interpreted as an integer value. Returns {@code defaultVal} if the property doesn't exist."
 	)
 
 	ovrBool(
@@ -742,7 +753,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		int.IN("value", "the value to write"),
 
-	    returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
+		returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
 	)
 
 	float(
@@ -780,7 +791,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		float_p.OUT("values", "an array of float to write to"),
 		AutoSize("values")..unsigned_int.IN("valuesCapacity", "the maximum number of elements to write to the values array"),
 
-	    returnDoc = "the number of elements read, or 0 if property doesn't exist or is empty"
+		returnDoc = "the number of elements read, or 0 if property doesn't exist or is empty"
 	)
 
 	ovrBool(
@@ -807,7 +818,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		nullable..const..charUTF8_p.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
-	    returnDoc =
+		returnDoc =
 		"""
 		the string property if it exists. Otherwise returns {@code defaultVal}, which can be specified as $NULL. The return memory is guaranteed to be valid
 		until next call to ovr_GetString or until the HMD is destroyed, whichever occurs first.
@@ -826,6 +837,6 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		const..charASCII_p.IN("value", "the string property, which only needs to be valid for the duration of the call"),
 
-	    returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
+		returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
 	)
 }
