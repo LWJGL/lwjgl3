@@ -150,6 +150,8 @@ class Generator(
 			it.isFile && it.extension.equals("kt")
 		}!!
 
+		Arrays.sort(classFiles);
+
 		classFiles.forEach {
 			try {
 				Class
