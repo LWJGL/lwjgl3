@@ -16,7 +16,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 	nativeDirective(
 """DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
-	__pragma(warning(disable : 4711))
+	__pragma(warning(disable : 4711 4738))
 #endif
 #include "OVR_CAPIShim.c"
 ENABLE_WARNINGS()""")
