@@ -156,7 +156,7 @@ License terms: http://lwjgl.org/license.php
 		<apply executable="${compiler}" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
 			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/${LWJGL_LIBRARY}'/>
-			<arg line="-framework AppKit"/>
+			<arg line="-framework Foundation"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>

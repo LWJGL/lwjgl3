@@ -6,29 +6,46 @@ package org.lwjgl.glfw;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
+import org.lwjgl.system.DynamicLinkLibrary;
+import org.lwjgl.system.macosx.ObjCRuntime;
 
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.macosx.ObjCRuntime.*;
 import static org.lwjgl.system.macosx.Unistd.*;
 
 /**
  * Contains checks for the event loop issues on OS X.
  *
  * <p>On-screen GLFW windows can only be used in the main thread and only if that thread is the first thread in the process. This requires running the JVM with
- * {@code -XstartOnFirstThread}, which means that other Java window-system APIs (AWT/Swing or JavaFX) cannot be used at the same time.</p>
+ * {@code -XstartOnFirstThread}, which means that other window toolkits (AWT/Swing, JavaFX, etc.) cannot be used at the same time.</p>
  *
- * <p>A Java window-system API can be used if GLFW windows are never shown (created with {@link GLFW#GLFW_VISIBLE} equal to {@link GLFW#GLFW_FALSE}) and only
- * used as contexts for offscreen rendering. This is possible if the window-system is initialized and has taken control of the first thread before a GLFW
- * window is created. We cannot reliably check for this, so a simple warning is printed in debug mode.</p>
+ * <p>Another window toolkit <em>can</em> be used if GLFW windows are never shown (created with {@link GLFW#GLFW_VISIBLE GLFW_VISIBLE} equal to
+ * {@link GLFW#GLFW_FALSE GLFW_FALSE}) and only used as contexts for offscreen rendering. This is possible if the window toolkit has initialized and created
+ * the shared application (NSApp) before a GLFW window is created.</p>
  */
 final class EventLoop {
 
 	static final class OffScreen {
 		static {
-			if ( LWJGLUtil.DEBUG && LWJGLUtil.getPlatform() == Platform.MACOSX ) {
-				if ( !isJavaStartedOnFirstThread() )
-					LWJGLUtil.log(
-						"GLFW can only be used for offscreen rendering. Make sure AWT or JavaFX is initialized before creating a GLFW window. Otherwise, " +
-						"please run the JVM with -XstartOnFirstThread."
-					);
+			if ( LWJGLUtil.getPlatform() == Platform.MACOSX && !isMainThread() ) {
+				// The only way to avoid a crash is if the shared application (NSApp) has been created by something else
+				DynamicLinkLibrary AppKit = LWJGLUtil.loadLibraryNative("/System/Library/Frameworks/AppKit.framework");
+				try {
+					long NSApp = AppKit.getFunctionAddress("NSApp"); // The NSApp global variable is an exported symbol
+					if ( memGetAddress(NSApp) == NULL )
+						throw new IllegalStateException(
+							isJavaStartedOnFirstThread()
+								? "GLFW windows may only be created on the main thread."
+								: "GLFW windows may only be created on the main thread and that thread must be the first thread in the process. Please run " +
+								  "the JVM with -XstartOnFirstThread. For offscreen rendering, make sure another window toolkit (e.g. AWT or JavaFX) is " +
+								  "initialized before GLFW."
+						);
+
+					LWJGLUtil.log("GLFW can only be used for offscreen rendering.");
+				} finally {
+					AppKit.release();
+				}
 			}
 		}
 
@@ -42,10 +59,10 @@ final class EventLoop {
 
 	static final class OnScreen {
 		static {
-			if ( LWJGLUtil.getPlatform() == Platform.MACOSX ) {
-				if ( !isJavaStartedOnFirstThread() )
-					throw new IllegalStateException("Please run the JVM with -XstartOnFirstThread and make sure AWT or JavaFX is not initialized.");
-			}
+			if ( LWJGLUtil.getPlatform() == Platform.MACOSX && !isMainThread() )
+				throw new IllegalStateException(
+					"Please run the JVM with -XstartOnFirstThread and make sure a window toolkit other than GLFW (e.g. AWT or JavaFX) is not initialized."
+				);
 		}
 
 		private OnScreen() {
@@ -57,6 +74,15 @@ final class EventLoop {
 	}
 
 	private EventLoop() {
+	}
+
+	private static boolean isMainThread() {
+		long objc_msgSend = ObjCRuntime.getLibrary().getFunctionAddress("objc_msgSend");
+
+		long NSThread = objc_getClass("NSThread");
+		long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread"));
+
+		return invokePPB(objc_msgSend, currentThread, sel_getUid("isMainThread")) != 0;
 	}
 
 	private static boolean isJavaStartedOnFirstThread() {

@@ -12,7 +12,31 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		nativeImport("<objc/objc-runtime.h>")
 		nativeDirective ("typedef void (*EnumerationMutationHandler)(id);")
 
-		documentation = "Native bindings to Objective-C Runtime."
+		documentation =
+			"""
+			Native bindings to the Objective-C Runtime.
+
+			Due to the nature of the {@code objc_msgSend*} functions, they are not directly exposed in this binding. Advanced users with good understanding of
+			the complexity involved with using these functions, may access them via the #getLibrary() method:
+			${codeBlock("""
+DynamicLinkLibrary objc = ObjCRuntime.getLibrary();
+long objc_msgSend = objc.getFunctionAddress("objc_msgSend");
+
+// example usage
+long NSThread = objc_getClass("NSThread");
+long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread"));""")}
+			The safe way to use objc_msgSend in C code is to cast it to an appropriate function pointer. This is exactly what the
+			{@link org.lwjgl.system.JNI JNI} class does. If a particular function signature is not available, {@link org.lwjgl.system.libffi.LibFFI LibFFI} may
+			be used to invoke it.
+
+			The functions not exposed are:
+			${ul(
+				"objc_msgSend",
+				"objc_msgSend_stret",
+				"objc_msgSendSuper",
+				"objc_msgSendSuper_stret"
+			)}
+			"""
 
 		LongConstant(
 			"Nil value.",
