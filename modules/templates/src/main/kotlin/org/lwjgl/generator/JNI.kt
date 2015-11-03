@@ -5,7 +5,7 @@
 package org.lwjgl.generator
 
 import java.io.PrintWriter
-import java.util.TreeSet
+import java.util.*
 
 /** Deduplicates JNI signatures from bindings and generates the org.lwjgl.system.JNI class. */
 object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
@@ -86,13 +86,19 @@ public final class JNI {
 	}
 }
 
-private class Signature(function: NativeClassFunction) : Comparable<Signature> {
-
-	val callingConvention = function.nativeClass.binding!!.callingConvention
-	val returnType = function.returns.nativeType.mapping
-	val arguments = function.parameters.map { it.nativeType.mapping }
+private class Signature constructor(
+	val callingConvention: CallingConvention,
+	val returnType: TypeMapping,
+	val arguments: List<TypeMapping>
+) : Comparable<Signature> {
 
 	val signature = "${callingConvention.method}${arguments.map { it.jniSignature }.joinToString("")}${returnType.jniSignature}"
+
+	constructor(function: NativeClassFunction) : this(
+		function.nativeClass.binding!!.callingConvention,
+		function.returns.nativeType.mapping,
+		function.parameters.map { it.nativeType.mapping }
+	)
 
 	override fun equals(other: Any?) = other is Signature && this.signature == other.signature
 
