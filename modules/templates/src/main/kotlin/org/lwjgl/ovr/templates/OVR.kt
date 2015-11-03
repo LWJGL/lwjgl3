@@ -10,7 +10,7 @@ import org.lwjgl.ovr.*
 val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", prefixConstant = "ovr") {
 	nativeDirective(
 """#ifdef LWJGL_WINDOWS
-	#define _NO_CRT_STDIO_INLINE
+	__pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 
 	nativeDirective(

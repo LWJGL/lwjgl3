@@ -3,7 +3,7 @@
  * License terms: http://lwjgl.org/license.php
  */
 #ifdef LWJGL_WINDOWS
-	#define _NO_CRT_STDIO_INLINE
+	__pragma(warning(disable : 4710))
 #endif
 #include "common_tools.h"
 #include <stdlib.h>
