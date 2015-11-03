@@ -94,6 +94,7 @@ License terms: http://lwjgl.org/license.php
 		<cl if:true="${binding.ovr}">
 			<arguments>
 				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
+				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Src"/>
 				<fileset dir="." includes="${src.generated.native}/ovr/*.c"/>
 			</arguments>
 		</cl>
@@ -111,9 +112,9 @@ License terms: http://lwjgl.org/license.php
 			<arg value="/Fo${bin.native}\"/>
 
 			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
-			<fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*"/>
+			<fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*.cpp"/>
 
-			<mapper type="regexp" from="(\w+)[.]c(?:pp)?$" to="\1.obj"/>
+			<mapper type="regexp" from="(\w+)\.cpp$" to="\1.obj"/>
 		</apply>
 
 		<!-- LINK -->
