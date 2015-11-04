@@ -7,7 +7,7 @@ package org.lwjgl.system.windows.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
-val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user32")) {
+val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user32", callingConvention = CallingConvention.STDCALL)) {
 	documentation = "Native bindings to user32.dll"
 
 	HDC(

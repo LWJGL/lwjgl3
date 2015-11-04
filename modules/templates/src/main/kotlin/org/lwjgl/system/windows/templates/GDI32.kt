@@ -7,7 +7,7 @@ package org.lwjgl.system.windows.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
-val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32")) {
+val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32", callingConvention = CallingConvention.STDCALL)) {
 	documentation = "Native bindings to gdi32.dll"
 
 	IntConstant(

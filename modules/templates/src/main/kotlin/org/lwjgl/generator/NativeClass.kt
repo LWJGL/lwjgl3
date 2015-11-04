@@ -125,7 +125,7 @@ abstract class APIBinding(
 
 /** An APIBinding without an associated capabilities class.  */
 abstract class SimpleBinding(
-	callingConvention: CallingConvention = CallingConvention.STDCALL
+	callingConvention: CallingConvention
 ): APIBinding("n/a", "n/a", callingConvention) {
 	override fun getFunctionAddressCall(function: NativeClassFunction) = "checkFunctionAddress(${super.getFunctionAddressCall(function)})"
 	override fun PrintWriter.generateContent() = Unit
@@ -135,7 +135,7 @@ abstract class SimpleBinding(
 fun simpleBinding(
 	libraryName: String,
 	libraryExpression: String = "\"$libraryName\"",
-	callingConvention: CallingConvention = CallingConvention.STDCALL
+	callingConvention: CallingConvention = CallingConvention.DEFAULT
 ) = object : SimpleBinding(callingConvention) {
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		val libraryReference = libraryName.toUpperCase()

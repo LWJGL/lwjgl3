@@ -9,8 +9,7 @@ import org.lwjgl.system.jemalloc.*
 
 val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", binding = simpleBinding(
 	"jemalloc",
-	"""Configuration.LIBRARY_NAME_JEMALLOC.get(Pointer.BITS64 ? "jemalloc" : "jemalloc32")""",
-	CallingConvention.DEFAULT
+	"""Configuration.LIBRARY_NAME_JEMALLOC.get(Pointer.BITS64 ? "jemalloc" : "jemalloc32")"""
 )) {
 	documentation =
 		"""
