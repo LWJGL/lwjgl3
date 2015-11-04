@@ -8,21 +8,21 @@ import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
 import org.lwjgl.system.macosx.*
 
-val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "macosx", prefix = "GLFW", binding = GLFWBinding) {
+val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "macosx", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
 	documentation = "Native bindings to the GLFW library's Cocoa native access functions."
 
 	CGDirectDisplayID(
 		"GetCocoaMonitor",
-	    """
+		"""
 	    Returns the ${code("CGDirectDisplayID")} of the specified monitor.
 
 	    Note: This function may be called from any thread. Access is not synchronized.
 	    """,
 
-	    GLFWmonitor.IN("monitor", "the GLFW monitor"),
-	    // TODO: kCGNullDirectDisplay
-	    returnDoc = "The ${code("CGDirectDisplayID")} of the specified monitor, or kCGNullDirectDisplay` if an error occurred.",
-	    since = "GLFW 3.1"
+		GLFWmonitor.IN("monitor", "the GLFW monitor"),
+		// TODO: kCGNullDirectDisplay
+		returnDoc = "The ${code("CGDirectDisplayID")} of the specified monitor, or kCGNullDirectDisplay` if an error occurred.",
+		since = "GLFW 3.1"
 	)
 
 	id(

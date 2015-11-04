@@ -164,6 +164,28 @@ fun simpleBinding(
 	}
 }
 
+/** Creates a simple APIBinding that delegates function pointer loading to this APIBinding. */
+fun APIBinding.delegate(
+	libraryExpression: String
+) = object : SimpleBinding(this.callingConvention) {
+	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+		println("""	// --- [ Function Addresses ] ---
+
+	private static final ${nativeClass.className} instance = new ${nativeClass.className}(getLibrary());
+
+	/** Returns the {@link DynamicLinkLibrary} that provides pointers for the functions in this class. */
+	public static DynamicLinkLibrary getLibrary() {
+		return $libraryExpression;
+	}
+
+	/** Returns the {@link ${nativeClass.className}} instance. */
+	public static ${nativeClass.className} getInstance() {
+		return instance;
+	}
+""")
+	}
+}
+
 // TODO: Remove if KT-457 or KT-1183 are fixed.
 private fun APIBinding.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionGetters(nativeClass)
 

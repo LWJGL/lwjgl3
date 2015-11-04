@@ -8,6 +8,13 @@ import org.lwjgl.generator.*
 
 val GLFW_PACKAGE = "org.lwjgl.glfw"
 
+val GLFW_BINDING = simpleBinding(
+	"glfw",
+	"""Configuration.LIBRARY_NAME_GLFW.get(Pointer.BITS64 ? "glfw" : "glfw32")""",
+	CallingConvention.DEFAULT
+)
+val GLFW_BINDING_DELEGATE = GLFW_BINDING.delegate("GLFW.getLibrary()")
+
 val GLFWmonitor = "GLFWmonitor".p
 val GLFWmonitor_p = GLFWmonitor.p
 

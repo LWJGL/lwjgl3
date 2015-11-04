@@ -7,7 +7,7 @@ package org.lwjgl.glfw.templates
 import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
 
-val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", binding = GLFWBinding) {
+val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", binding = GLFW_BINDING) {
 	documentation =
 		"""
 		Native bindings to the <a href="http://www.glfw.org/docs/latest/">GLFW</a> library.
