@@ -4,7 +4,6 @@
  */
 package org.lwjgl.openal;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.FunctionProvider;
 
@@ -43,7 +42,7 @@ public final class AL {
 
 				long address = invokePP(alGetProcAddress, __buffer.address());
 				if ( address == NULL )
-					LWJGLUtil.log("Failed to locate address for AL function " + functionName);
+					apiLog("Failed to locate address for AL function " + functionName);
 
 				return address;
 			}
@@ -139,7 +138,7 @@ public final class AL {
 		if ( supported )
 			return functions;
 		else {
-			LWJGLUtil.log("[AL] " + extension + " was reported as available but an entry point is missing.");
+			apiLog("[AL] " + extension + " was reported as available but an entry point is missing.");
 			return null;
 		}
 	}

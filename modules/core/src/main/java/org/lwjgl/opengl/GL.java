@@ -107,7 +107,7 @@ public final class GL {
 				if ( address == NULL ) {
 					address = OPENGL.getFunctionAddress(functionName);
 					if ( address == NULL )
-						LWJGLUtil.log("Failed to locate address for GL function " + functionName);
+						apiLog("Failed to locate address for GL function " + functionName);
 				}
 
 				return address;
@@ -256,7 +256,7 @@ public final class GL {
 
 			int errorCode = callI(GetError);
 			if ( errorCode != GL_NO_ERROR )
-				LWJGLUtil.log(
+				apiLog(
 					"A GL context was in an error state before the creation of its capabilities instance. Error: " + GLUtil.getErrorString(errorCode)
 				);
 
@@ -436,7 +436,7 @@ public final class GL {
 		if ( supported )
 			return functions;
 		else {
-			LWJGLUtil.log("[GL] " + extension + " was reported as available but an entry point is missing.");
+			apiLog("[GL] " + extension + " was reported as available but an entry point is missing.");
 			return null;
 		}
 	}

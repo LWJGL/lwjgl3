@@ -9,6 +9,7 @@ import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.macosx.ObjCRuntime;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.ObjCRuntime.*;
@@ -42,7 +43,7 @@ final class EventLoop {
 								  "initialized before GLFW."
 						);
 
-					LWJGLUtil.log("GLFW can only be used for offscreen rendering.");
+					apiLog("GLFW can only be used for offscreen rendering.");
 				} finally {
 					AppKit.release();
 				}

@@ -9,6 +9,7 @@ import org.lwjgl.LWJGLUtil;
 import java.nio.*;
 
 import static java.lang.Character.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -32,7 +33,7 @@ final class MemoryAccess {
 				// Depends on sun.nio.ch.DirectBuffer and sun.reflect.FieldAccessor
 				accessor = new MemoryAccessorReflect();
 			} catch (Throwable t1) {
-				LWJGLUtil.log("[MemoryAccessor] Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
+				apiLog("[MemoryAccessor] Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
 				accessor = new MemoryAccessorJNI();
 			}
 		}

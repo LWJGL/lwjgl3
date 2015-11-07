@@ -69,7 +69,7 @@ public final class ALC {
 				public long getFunctionAddress(CharSequence functionName) {
 					long address = OPENAL.getFunctionAddress(functionName);
 					if ( address == NULL )
-						LWJGLUtil.log("Failed to locate address for ALC function " + functionName);
+						apiLog("Failed to locate address for ALC function " + functionName);
 
 					return address;
 				}
@@ -81,7 +81,7 @@ public final class ALC {
 
 					long address = invokePPP(alcGetProcAddress, handle, __buffer.address());
 					if ( address == NULL )
-						LWJGLUtil.log("Failed to locate address for ALC extension function " + functionName);
+						apiLog("Failed to locate address for ALC extension function " + functionName);
 
 					return address;
 				}
@@ -229,7 +229,7 @@ public final class ALC {
 		if ( supported )
 			return functions;
 		else {
-			LWJGLUtil.log("[ALC] " + extension + " was reported as available but an entry point is missing.");
+			apiLog("[ALC] " + extension + " was reported as available but an entry point is missing.");
 			return null;
 		}
 	}

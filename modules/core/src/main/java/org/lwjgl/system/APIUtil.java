@@ -9,13 +9,17 @@ import org.lwjgl.system.linux.LinuxLibrary;
 import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Utility class useful to API bindings.
- * <p/>
- * Method names in this class are prefixed with {@code api} to avoid ambiguities when used with static imports.
+ * Utility class useful to API bindings. [INTERNAL USE ONLY]
+ *
+ * <p>Method names in this class are prefixed with {@code api} to avoid ambiguities when used with static imports.</p>
  */
 public final class APIUtil {
 
@@ -31,6 +35,18 @@ public final class APIUtil {
 	}
 
 	private APIUtil() {
+	}
+
+	/**
+	 * Prints the specified message to the {@link LWJGLUtil#DEBUG_STREAM} if {@link LWJGLUtil#DEBUG} is true.
+	 *
+	 * @param msg the message to print
+	 */
+	public static void apiLog(CharSequence msg) {
+		if ( LWJGLUtil.DEBUG ) {
+			LWJGLUtil.DEBUG_STREAM.print("[LWJGL] ");
+			LWJGLUtil.DEBUG_STREAM.println(msg);
+		}
 	}
 
 	/** Returns a thread-local {@link APIBuffer} that has been reset. */
@@ -133,6 +149,71 @@ public final class APIUtil {
 
 	public static String apiUnknownToken(String description, int token) {
 		return String.format("%s [0x%X]", description, token);
+	}
+
+	/**
+	 * Returns a map of public static final integer fields in the specified classes, to their String representations. An optional filter can be specified to
+	 * only include specific fields. The target map may be null, in which case a new map is allocated and returned.
+	 *
+	 * <p>This method is useful when debugging to quickly identify values returned from an API.</p>
+	 *
+	 * @param filter       the filter to use (optional)
+	 * @param target       the target map (optional)
+	 * @param tokenClasses the classes to get tokens from
+	 *
+	 * @return the token map
+	 */
+	public static Map<Integer, String> apiClassTokens(TokenFilter filter, Map<Integer, String> target, Class<?>... tokenClasses) {
+		if ( target == null )
+			target = new HashMap<Integer, String>(64);
+
+		int TOKEN_MODIFIERS = Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL;
+
+		for ( Class<?> tokenClass : tokenClasses ) {
+			if ( tokenClass == null )
+				continue;
+
+			for ( Field field : tokenClass.getDeclaredFields() ) {
+				// Get only <public static final int> fields.
+				if ( (field.getModifiers() & TOKEN_MODIFIERS) == TOKEN_MODIFIERS && field.getType() == int.class ) {
+					try {
+						int value = field.getInt(null);
+						if ( filter != null && !filter.accept(field, value) )
+							continue;
+
+						String name = target.get(value);
+						target.put(value, name == null ? field.getName() : name + "|" + field.getName());
+					} catch (IllegalAccessException e) {
+						// Ignore
+					}
+				}
+			}
+		}
+
+		return target;
+	}
+
+	public static Class<?> apiOptionalClass(String className) {
+		try {
+			return Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			return null;
+		}
+	}
+
+	/** Simple interface for Field filtering. */
+	public interface TokenFilter {
+
+		/**
+		 * Should return true if the specified Field passes the filter.
+		 *
+		 * @param field the Field to test
+		 * @param value the integer value of the field
+		 *
+		 * @return true if the Field is accepted
+		 */
+		boolean accept(Field field, int value);
+
 	}
 
 }

@@ -4,9 +4,9 @@
  */
 package org.lwjgl.system.linux;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.DynamicLinkLibrary;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.linux.DynamicLinkLoader.*;
 
@@ -22,7 +22,7 @@ public class LinuxLibrary extends DynamicLinkLibrary.Default {
 		if ( handle == NULL ) // TODO: better error handling
 			throw new RuntimeException("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
 
-		LWJGLUtil.log("Loaded native library: " + name);
+		apiLog("Loaded native library: " + name);
 	}
 
 	@Override

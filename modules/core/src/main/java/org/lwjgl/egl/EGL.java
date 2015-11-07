@@ -221,18 +221,18 @@ public final class EGL {
 		try {
 			for ( Field f : functions.getClass().getFields() ) {
 				if ( !Modifier.isStatic(f.getModifiers()) && f.getLong(functions) == NULL ) {
-					LWJGLUtil.log("Failed to locate address for EGL function egl" + f.getName());
+					apiLog("Failed to locate address for EGL function egl" + f.getName());
 					missingFunction = true;
 					break;
 				}
 			}
 		} catch (IllegalAccessException e) {
-			LWJGLUtil.log("[EGL] Failed to retrieve " + capability + " function pointer fields.");
+			apiLog("[EGL] Failed to retrieve " + capability + " function pointer fields.");
 			return null;
 		}
 
 		if ( missingFunction ) {
-			LWJGLUtil.log("[EGL] " + capability + " was reported as available but an entry point is missing.");
+			apiLog("[EGL] " + capability + " was reported as available but an entry point is missing.");
 			return null;
 		}
 

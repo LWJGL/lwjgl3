@@ -12,6 +12,7 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
 import static org.lwjgl.LWJGLUtil.*;
+import static org.lwjgl.system.APIUtil.*;
 
 /**
  * System class. The static initializers in this class must run before
@@ -33,7 +34,7 @@ public final class Sys {
 
 	static {
 		if ( LWJGLUtil.DEBUG )
-			log("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
+			apiLog("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
 
 		try {
 			loadLibrarySystem(JNI_LIBRARY_NAME);

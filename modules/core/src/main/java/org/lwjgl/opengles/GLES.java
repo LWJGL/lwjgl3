@@ -105,7 +105,7 @@ public final class GLES {
 					if ( address == NULL ) {
 						address = GLES.getFunctionAddress(functionName);
 						if ( address == NULL )
-							LWJGLUtil.log("Failed to locate address for GLES function " + functionName);
+							apiLog("Failed to locate address for GLES function " + functionName);
 					}
 
 					return address;
@@ -197,7 +197,7 @@ public final class GLES {
 
 			int errorCode = invokeI(GetError);
 			if ( errorCode != GL_NO_ERROR )
-				LWJGLUtil.log(
+				apiLog(
 					"A GLES context was in an error state before the creation of its capabilities instance. Error: " + GLESUtil.getErrorString(errorCode)
 				);
 
@@ -275,7 +275,7 @@ public final class GLES {
 		if ( supported )
 			return functions;
 		else {
-			LWJGLUtil.log("[GLES] " + extension + " was reported as available but an entry point is missing.");
+			apiLog("[GLES] " + extension + " was reported as available but an entry point is missing.");
 			return null;
 		}
 	}

@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.LWJGLUtil;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +13,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static org.lwjgl.LWJGLUtil.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jemalloc.JEmalloc.*;
 import static org.lwjgl.system.libc.Stdlib.*;
@@ -38,7 +37,7 @@ final class MemoryManage {
 			} catch (Throwable t) {
 				if ( DEBUG )
 					t.printStackTrace(DEBUG_STREAM);
-				LWJGLUtil.log("[MemoryAllocator] Failed to load the jemalloc library.");
+				apiLog("[MemoryAllocator] Failed to load the jemalloc library.");
 				return new StdlibAllocator();
 			}
 		} else if ( "system".equals(allocator) ) {

@@ -228,7 +228,7 @@ public final class CL {
 			if ( functions != null )
 				return functions;
 
-			LWJGLUtil.log("[CL] " + extension + " was reported as available but an entry point is missing.");
+			apiLog("[CL] " + extension + " was reported as available but an entry point is missing.");
 		}
 		return null;
 	}

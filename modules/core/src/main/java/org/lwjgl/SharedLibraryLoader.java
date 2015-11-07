@@ -12,6 +12,8 @@ import java.util.EnumSet;
 import java.util.UUID;
 import java.util.zip.CRC32;
 
+import static org.lwjgl.system.APIUtil.*;
+
 /**
  * Loads shared libraries from the classpath. The libraries may be packed in JAR files, in which case they will be extracted to a temporary directory and that
  * directory will be prepended to {@link Configuration#LIBRARY_PATH}.
@@ -118,7 +120,7 @@ final class SharedLibraryLoader {
 			try {
 				extractFile(libraries[i].file, extractPath);
 			} catch (Exception e) {
-				LWJGLUtil.log("Failed to extract " + libraries[i].name() + " library");
+				apiLog("Failed to extract " + libraries[i].name() + " library");
 			}
 		}
 
@@ -129,7 +131,7 @@ final class SharedLibraryLoader {
 		else
 			libraryPath = extractPath.getAbsolutePath() + File.pathSeparator + libraryPath;
 
-		LWJGLUtil.log("Extracted shared libraries to: " + libraryPath);
+		apiLog("Extracted shared libraries to: " + libraryPath);
 		System.setProperty(Configuration.LIBRARY_PATH.getProperty(), libraryPath);
 		Configuration.LIBRARY_PATH.set(libraryPath);
 	}

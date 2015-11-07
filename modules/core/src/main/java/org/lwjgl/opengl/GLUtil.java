@@ -86,42 +86,42 @@ public final class GLUtil {
 		GLCapabilities caps = GL.getCapabilities();
 
 		if ( caps.OpenGL43 ) {
-			log("[GL] Using OpenGL 4.3 for error logging.");
+			apiLog("[GL] Using OpenGL 4.3 for error logging.");
 			GLDebugMessageCallback proc = createDEBUGPROC(stream);
 			glDebugMessageCallback(proc, NULL);
 			if ( (glGetInteger(GL_CONTEXT_FLAGS) & GL_CONTEXT_FLAG_DEBUG_BIT) == 0 ) {
-				log("[GL] Warning: A non-debug context may not produce any debug output.");
+				apiLog("[GL] Warning: A non-debug context may not produce any debug output.");
 				glEnable(GL_DEBUG_OUTPUT);
 			}
 			return proc;
 		}
 
 		if ( caps.GL_KHR_debug ) {
-			log("[GL] Using KHR_debug for error logging.");
+			apiLog("[GL] Using KHR_debug for error logging.");
 			GLDebugMessageCallback proc = createDEBUGPROC(stream);
 			KHRDebug.glDebugMessageCallback(proc, NULL);
 			if ( caps.OpenGL30 && (glGetInteger(GL_CONTEXT_FLAGS) & GL_CONTEXT_FLAG_DEBUG_BIT) == 0 ) {
-				log("[GL] Warning: A non-debug context may not produce any debug output.");
+				apiLog("[GL] Warning: A non-debug context may not produce any debug output.");
 				glEnable(GL_DEBUG_OUTPUT);
 			}
 			return proc;
 		}
 
 		if ( caps.GL_ARB_debug_output ) {
-			log("[GL] Using ARB_debug_output for error logging.");
+			apiLog("[GL] Using ARB_debug_output for error logging.");
 			GLDebugMessageARBCallback proc = createDEBUGPROCARB(stream);
 			glDebugMessageCallbackARB(proc, NULL);
 			return proc;
 		}
 
 		if ( caps.GL_AMD_debug_output ) {
-			log("[GL] Using AMD_debug_output for error logging.");
+			apiLog("[GL] Using AMD_debug_output for error logging.");
 			GLDebugMessageAMDCallback proc = createDEBUGPROCAMD(stream);
 			glDebugMessageCallbackAMD(proc, NULL);
 			return proc;
 		}
 
-		log("[GL] No debug output implementation is available.");
+		apiLog("[GL] No debug output implementation is available.");
 		return null;
 	}
 

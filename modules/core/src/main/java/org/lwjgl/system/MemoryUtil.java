@@ -15,6 +15,7 @@ import java.nio.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.Pointer.*;
+import static org.lwjgl.system.APIUtil.*;
 
 /**
  * This class provides functionality for managing native memory.
@@ -61,14 +62,14 @@ public final class MemoryUtil {
 		PAGE_SIZE = ACCESSOR.getPageSize();
 		CACHE_LINE_SIZE = ACCESSOR.getCacheLineSize();
 
-		LWJGLUtil.log("MemoryUtil accessor: " + ACCESSOR.getClass().getSimpleName());
+		apiLog("MemoryUtil accessor: " + ACCESSOR.getClass().getSimpleName());
 
 		ALLOCATOR_IMPL = MemoryManage.getInstance();
 		ALLOCATOR = Configuration.DEBUG_MEMORY_ALLOCATOR.<Boolean>get()
 			? new DebugAllocator(ALLOCATOR_IMPL)
 			: ALLOCATOR_IMPL;
 
-		LWJGLUtil.log("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
+		apiLog("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
 	}
 
 	private MemoryUtil() {

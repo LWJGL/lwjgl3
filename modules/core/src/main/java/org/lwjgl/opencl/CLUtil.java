@@ -4,8 +4,6 @@
  */
 package org.lwjgl.opencl;
 
-import org.lwjgl.LWJGLUtil;
-
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -19,8 +17,8 @@ import static org.lwjgl.system.APIUtil.*;
 public final class CLUtil {
 
 	/** Maps OpenCL error token values to their String representations. */
-	private static final Map<Integer, String> CL_ERROR_TOKENS = LWJGLUtil.getClassTokens(
-		new LWJGLUtil.TokenFilter() {
+	private static final Map<Integer, String> CL_ERROR_TOKENS = apiClassTokens(
+		new TokenFilter() {
 			private final List<String> EXCLUDE = Arrays.asList("CL_DEVICE_TYPE_ALL", "CL_BUILD_NONE", "CL_BUILD_ERROR", "CL_BUILD_IN_PROGRESS");
 
 			@Override
@@ -32,9 +30,9 @@ public final class CLUtil {
 		CL10.class,
 		CL11.class,
 		CL12.class,
-		LWJGLUtil.getOptionalClass("org.lwjgl.opencl.KHRGLSharing"),
+		apiOptionalClass("org.lwjgl.opencl.KHRGLSharing"),
 		KHRICD.class,
-		LWJGLUtil.getOptionalClass("org.lwjgl.opencl.APPLEGLSharing")
+		apiOptionalClass("org.lwjgl.opencl.APPLEGLSharing")
 		/*, EXTDeviceFission.class*/
 	);
 

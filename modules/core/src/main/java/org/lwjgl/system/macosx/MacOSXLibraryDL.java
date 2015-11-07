@@ -4,8 +4,7 @@
  */
 package org.lwjgl.system.macosx;
 
-import org.lwjgl.LWJGLUtil;
-
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.DynamicLinkLoader.*;
 
@@ -21,7 +20,7 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 		if ( handle == NULL )
 			throw new RuntimeException("Failed to dynamically load library: " + name);
 
-		LWJGLUtil.log("Loaded native library: " + name);
+		apiLog("Loaded native library: " + name);
 	}
 
 	@Override

@@ -4,7 +4,6 @@
  */
 package org.lwjgl.system.macosx;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -37,7 +36,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 			if ( bundleRef == NULL )
 				throw new RuntimeException("Failed to dynamically load bundle: " + name);
 
-			LWJGLUtil.log("Loaded native library bundle: " + name);
+			apiLog("Loaded native library bundle: " + name);
 		} finally {
 			if ( url != NULL ) CFRelease(url);
 			if ( fsPath != NULL ) CFRelease(fsPath);
