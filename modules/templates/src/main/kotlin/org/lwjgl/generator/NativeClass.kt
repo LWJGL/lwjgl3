@@ -229,15 +229,25 @@ class NativeClass(
 
 		val hasFunctions = !_functions.isEmpty()
 		if ( hasFunctions ) {
-			println("import org.lwjgl.*;")
-			println("import org.lwjgl.system.*;\n")
-
 			// TODO: This is horrible. Refactor so that we build imports after code generation.
-
 			val hasNIO = functions.any { it.returns.isBufferPointer || it.hasParam { it.isBufferPointer } }
 
-			if ( hasNIO )
+			if ( hasNIO ) {
 				println("import java.nio.*;\n")
+
+				val needsPointerBuffer: QualifiedType.() -> Boolean = {
+					this.nativeType is PointerType &&
+					(
+						this.nativeType.elementType.let { it != null && (it is PointerType || it.mapping == PrimitiveMapping.POINTER) } ||
+						(this.has(Return) && this[Return] !== ReturnParam) ||
+						(this.has(MultiType) && this[MultiType].types.contains(PointerMapping.DATA_POINTER))
+					)
+				}
+				if ( functions.any { it.returns.needsPointerBuffer() || it.hasParam { it.needsPointerBuffer() } } )
+					println("import org.lwjgl.*;")
+			}
+
+			println("import org.lwjgl.system.*;\n")
 
 			if ( hasNIO && functions.any {
 				val func = it
@@ -414,6 +424,7 @@ class NativeClass(
 
 	/** Adds a new enum constant. */
 	val String.enum: Constant<EnumValue> get() = Constant(this, EnumValue())
+
 	infix fun String.enum(documentation: String) = Constant(this, EnumValue(processDocumentation(documentation).toJavaDoc()))
 	infix fun String.enum(value: Int) = Constant(this, EnumValue(value = value))
 	fun String.enum(documentation: String, value: Int) = Constant(this, EnumValue(processDocumentation(documentation).toJavaDoc(), value))
