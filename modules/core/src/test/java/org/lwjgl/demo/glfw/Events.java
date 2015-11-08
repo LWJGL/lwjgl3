@@ -268,6 +268,10 @@ public final class Events {
 			glClear(GL_COLOR_BUFFER_BIT);
 			glfwSwapBuffers(window);
 		}
+
+		Callbacks.glfwReleaseCallbacks(window);
+		glfwSetMonitorCallback(null).release();
+		glfwSetErrorCallback(null).release();
 	}
 
 	private static String getModState(int mods) {

@@ -81,6 +81,8 @@ public class Mandelbrot {
 	private final CLPlatform platform;
 	private final CLDevice   device;
 
+	private final CLContextCallback clContextCB;
+
 	private final long clContext;
 	private final long clColorMap;
 	private final long clQueue;
@@ -221,7 +223,7 @@ public class Mandelbrot {
 				.put(platform)
 				.put(NULL)
 				.flip();
-			clContext = clCreateContext(ctxProps, device.address(), new CLCreateContextCallback() {
+			clContext = clCreateContext(ctxProps, device.address(), clContextCB = new CLContextCallback() {
 				@Override
 				public void invoke(long errinfo, long private_info, long cb, long user_data) {
 					System.err.println("[LWJGL] cl_create_context_callback");
@@ -581,6 +583,7 @@ public class Mandelbrot {
 				return clReleaseContext(object);
 			}
 		});
+		clContextCB.release();
 
 		glDeleteProgram(glProgram);
 		glDeleteShader(fsh);
