@@ -585,6 +585,15 @@ val ovrGLTextureData = struct(OVR_PACKAGE, "OVRGLTextureData", structName = "ovr
 }.nativeType
 
 fun config() {
+	packageInfo(
+		OVR_PACKAGE,
+		"""
+		Contains bindings to LibOVR, the <a href="https://developer.oculus.com/">Oculus SDK</a> library.
+
+		Documentation on how to get started with the Oculus SDK can be found <a href="https://developer.oculus.com/documentation/">here</a>.
+		"""
+	)
+
 	struct(OVR_PACKAGE, "OVRLayerUnion", structName = "ovrLayer_Union") {
 		documentation = "Union that combines ovrLayer types in a way that allows them to be used in a polymorphic way."
 		includeOVRCAPI()

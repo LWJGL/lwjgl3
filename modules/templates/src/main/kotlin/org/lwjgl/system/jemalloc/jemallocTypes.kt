@@ -8,6 +8,19 @@ import org.lwjgl.generator.*
 
 val JEMALLOC_PACKAGE = "org.lwjgl.system.jemalloc"
 
+fun config() {
+	packageInfo(
+		JEMALLOC_PACKAGE,
+		"""
+		Contains bindings to the <a href="http://www.canonware.com/jemalloc/">jemalloc</a> library. jemalloc is a general purpose malloc implementation that
+		emphasizes fragmentation avoidance and scalable concurrency support.
+
+		The jemalloc documentation can be found <a href="http://www.canonware.com/download/jemalloc/jemalloc-latest/doc/jemalloc.html">here</a>. The jemalloc
+		<a href="https://github.com/jemalloc/jemalloc/wiki">wiki</a> also contains useful information.
+		"""
+	)
+}
+
 val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	JEMALLOC_PACKAGE, void, "MallocMessageCallback",
 	"Will be called by the JEmalloc##je_malloc_usable_size() method.",

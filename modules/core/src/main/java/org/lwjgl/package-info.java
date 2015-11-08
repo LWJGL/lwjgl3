@@ -1,28 +1,21 @@
 /*
- * LLLLL            WWW               WWW   JJJJJJJJJJJJJJJJ   GGGGGGGGGGGGGG   LLLLL             3333333333333333
- * LLLLL            WWW               WWW   JJJJJJJJJJJJJJJJ   GGGGGGGGGGGGGG   LLLLL             3333333333333333
- * LLLLL            WWW               WWW         JJJJ         GGGG             LLLLL                        33333
- * LLLLL            WWW               WWW         JJJJ         GGGG             LLLLL                        33333
- * LLLLL            WWW               WWW         JJJJ         GGGG             LLLLL                   3333333333
- * LLLLL             wWW   WWW WWW   WWW          JJJJ         GGGG    GGGGGG   LLLLL                   3333333333
- * LLLLL              WWW  WWW WWW  WWW           JJJJ         GGGG    GGGGGG   LLLLL                        33333
- * LLLLL               WWW WWW WWW WWW            JJJJ         GGGG      GGGG   LLLLL                        33333
- * LLLLLLLLLLLLLLL      WWW  WWW  WWW        JJJJJJJJJ         GGGGGGGGGGGGGG   LLLLLLLLLLLLLLL   3333333333333333
- * LLLLLLLLLLLLLLL      WWW  WWW  WWW        JJJJJJJJJ         GGGGGGGGGGGGGG   LLLLLLLLLLLLLLL   3333333333333333
+ * Copyright LWJGL. All rights reserved.
+ * License terms: http://lwjgl.org/license.php
  */
+
 /**
- * Provides the classes and packages of the LWJGL.
+ * The base LWJGL package. Contains functionality useful across all bindings.
  *
- * <p>
- * The Lightweight Java Game Library (LWJGL) is a solution aimed directly at
- * professional and amateur Java programmers alike to enable commercial quality
- * games to be written in Java. LWJGL provides developers access to high
- * performance crossplatform libraries such as OpenGL (Open Graphics Library),
- * OpenCL (Open Computing Language) and OpenAL (Open Audio Library) allowing for
- * state of the art 3D games and 3D sound. Additionally LWJGL provides access to
- * controllers such as Gamepads, Steering wheel and Joysticks. All in a simple
- * and straight forward API.</p>
+ * <p>LWJGL is a Java library that enables cross-platform access to popular native APIs useful in the development of graphics (OpenGL), audio (OpenAL) and
+ * parallel computing (OpenCL) applications. This access is direct and high-performance, yet also wrapped in a type-safe and user-friendly layer, appropriate
+ * for the Java ecosystem.</p>
  *
- * @see <a href="http://www.lwjgl.org/">lwjgl.org</a>
+ * <p>LWJGL is an enabling technology and provides low-level access. It is not a framework and does not provide higher-level utilities than what the native
+ * libraries expose. As such, novice programmers are encouraged to try one of the frameworks or game engines that make use of LWJGL, before working directly
+ * with the library.</p>
+ *
+ * <p>LWJGL is open source software and freely available at no charge.</p>
+ *
+ * @see <a href="http://www.lwjgl.org/">www.lwjgl.org</a>
  */
 package org.lwjgl;

@@ -8,6 +8,19 @@ import org.lwjgl.generator.*
 
 val GLES_PACKAGE = "org.lwjgl.opengles"
 
+fun config() {
+	packageInfo(
+		GLES_PACKAGE,
+		"""
+		Contains bindings to the <a href="https://www.khronos.org/opengles/">OpenGL ES</a> cross-platform 2D and 3D rendering API on embedded systems.
+
+		The <a href="https://www.khronos.org/registry/gles/">Khronos OpenGL ES registry</a> is a useful online resource that contains the OpenGL ES and OpenGL
+		ES Shading Language specifications, as well as specifications of OpenGL ES extensions. The <a href="https://www.khronos.org/opengles/sdk/docs/">OpenGL
+		ES Reference Pages</a> is another convenient source of documentation.
+		"""
+	)
+}
+
 val GLboolean = IntegerType("GLboolean", PrimitiveMapping.BOOLEAN, unsigned = true)
 val GLbyte = IntegerType("GLbyte", PrimitiveMapping.BYTE)
 val GLubyte = IntegerType("GLubyte", PrimitiveMapping.BYTE, unsigned = true)
@@ -171,7 +184,7 @@ val GLeglImageOES = "GLeglImageOES".opaque_p
 enum class BufferType(
 	type: PointerType,
 	override val className: String = "GLES20"
-): AutoTypeToken {
+) : AutoTypeToken {
 
 	GL_UNSIGNED_BYTE(GLubyte_p),
 	GL_UNSIGNED_SHORT(GLushort_p),

@@ -109,7 +109,7 @@ class Generator(
 	companion object {
 		val structs = ArrayList<Struct>()
 		val callbacks = ArrayList<CallbackFunction>()
-		val customClasses = ArrayList<CustomClass>()
+		val customClasses = ArrayList<GeneratorTarget>()
 
 		fun register(struct: Struct): Struct {
 			structs.add(struct)
@@ -120,7 +120,7 @@ class Generator(
 			callbacks.add(callback)
 		}
 
-		fun <T : CustomClass> register(customClass: T): T {
+		fun <T : GeneratorTarget> register(customClass: T): T {
 			customClasses.add(customClass)
 			return customClass
 		}

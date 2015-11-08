@@ -8,6 +8,17 @@ import org.lwjgl.generator.*
 
 val OPENAL_PACKAGE = "org.lwjgl.openal"
 
+fun config() {
+	packageInfo(
+		OPENAL_PACKAGE,
+		"""
+		Contains bindings to the <a href="http://www.openal.org/">OpenAL</a> cross-platform 3D audio API.
+
+        LWJGL comes with a software OpenAL implementation, <a href="http://www.openal-soft.org/">OpenAL Soft</a>.
+		"""
+	)
+}
+
 // void
 
 val ALvoid = NativeType("ALvoid", TypeMapping.VOID)

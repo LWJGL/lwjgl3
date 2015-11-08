@@ -157,6 +157,16 @@ val cl_bus_address_amd_p = struct_p(OPENCL_PACKAGE, "CLBusAddressAMD", structNam
 }
 
 fun config() {
+	packageInfo(
+		OPENCL_PACKAGE,
+		"""
+		Contains bindings to the <a href="https://www.khronos.org/opencl/">OpenCL</a> cross-platform parallel programming API.
+
+		The <a href="https://www.khronos.org/registry/cl/">Khronos OpenCL registry</a> is a useful online resource that contains the OpenCL specification, as
+		well as the specifications of OpenCL extensions.
+		"""
+	)
+
 	struct(OPENCL_PACKAGE, "CLBufferRegion", structName = "cl_buffer_region") {
 		documentation = "Buffer region struct."
 		nativeImport("OpenCL.h")

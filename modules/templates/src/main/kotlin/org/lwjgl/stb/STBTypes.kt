@@ -8,6 +8,26 @@ import org.lwjgl.generator.*
 
 val STB_PACKAGE = "org.lwjgl.stb"
 
+fun config() {
+	packageInfo(
+		STB_PACKAGE,
+		"""
+		Contains bindings to <a href="https://github.com/nothings/stb">stb</a>, a set of single-file public domain libraries.
+
+		The functionality provided by stb includes:
+		${ul(
+			"Parsing TrueType files, extract glyph metrics and rendering packed font textures.",
+			"Easy rendering of bitmap fonts.",
+			"Reading/writing image files and resizing images (e.g. for gamma-correct MIP map creation).",
+			"Decoding Ogg Vorbis audio files.",
+			"Compressing DXT textures at runtime.",
+			"Packing rectangular textures into texture atlases.",
+			"Computing Perlin noise."
+		)}
+		"""
+	)
+}
+
 fun GeneratorTargetNative.includeSTBAPI(directives: String) = nativeDirective(
 	"""DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS

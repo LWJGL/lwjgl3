@@ -138,11 +138,11 @@ abstract class GeneratorTarget(
 				.filterNotNull()
 				.filter {
 					it.endsWith(".kt")
-						&& !it.startsWith("Generator")
-						&& !it.equals("NativeClass.kt")
-						&& !it.equals("Structs.kt")
-						&& !it.equals("CallbackFunction.kt")
-						&& !(this is NativeClass && it.endsWith("Binding.kt"))
+					&& !it.startsWith("Generator")
+					&& !it.equals("NativeClass.kt")
+					&& !it.equals("Structs.kt")
+					&& !it.equals("CallbackFunction.kt")
+					&& !(this is NativeClass && it.endsWith("Binding.kt"))
 				}.first()
 		}
 	}
@@ -317,7 +317,7 @@ abstract class CustomClass(
 
 }
 
-fun CustomClass(
+fun customClass(
 	packageName: String,
 	className: String,
 	init: (CustomClass.() -> Unit)? = null,
@@ -330,5 +330,23 @@ fun CustomClass(
 	if ( init != null )
 		cc.init()
 
+	Generator.register(cc)
+
 	return cc
+}
+
+fun packageInfo(
+	packageName: String,
+	documentation: String
+) {
+	val pi = object: GeneratorTarget(packageName, "package-info") {
+		override fun PrintWriter.generateJava() {
+			print(HEADER)
+			println()
+			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
+			println("package $packageName;\n")
+		}
+	}
+
+	Generator.register(pi)
 }

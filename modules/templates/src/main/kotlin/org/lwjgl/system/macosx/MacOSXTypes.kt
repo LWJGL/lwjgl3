@@ -8,6 +8,13 @@ import org.lwjgl.generator.*
 
 val MACOSX_PACKAGE = "org.lwjgl.system.macosx"
 
+fun config() {
+	packageInfo(
+		MACOSX_PACKAGE,
+		"Contains bindings to native APIs specific to the Mac OS X operating system."
+	)
+}
+
 val id = "id".opaque_p // Opaque object pointer
 val id_p = id.p
 

@@ -8,6 +8,20 @@ import org.lwjgl.generator.*
 
 val FFI_PACKAGE = "org.lwjgl.system.libffi"
 
+fun config() {
+	packageInfo(
+		FFI_PACKAGE,
+		"""
+		Contains bindings to the <a href="https://sourceware.org/libffi/">libffi</a>, a portable, high level programming interface to various calling
+		conventions. This allows a programmer to call any function specified by a call interface description at run-time.
+
+		libffi is used internally by LWJGL to implement native function callbacks that invoke Java methods. This is done via the
+		{@link org.lwjgl.system.libffi.Closure Closure} class. LWJGL users with native programming experience may also use libffi to invoke native functions
+		for which LWJGL provides no bindings.
+		"""
+	)
+}
+
 val unsigned = IntegerType("unsigned", PrimitiveMapping.INT, unsigned = true)
 
 val ffi_abi = typedef(int, "ffi_abi")

@@ -8,6 +8,13 @@ import org.lwjgl.generator.*
 
 val WINDOWS_PACKAGE = "org.lwjgl.system.windows"
 
+fun config() {
+	packageInfo(
+		WINDOWS_PACKAGE,
+		"Contains bindings to native APIs specific to the Windows operating system."
+	)
+}
+
 val SaveLastError = Code(nativeAfterCall = "\tsaveLastError();")
 
 // UNICODE is defined WindowsLWJGL.h, so all T* types below are UTF16.

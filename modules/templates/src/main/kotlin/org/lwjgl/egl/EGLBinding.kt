@@ -47,9 +47,9 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
 		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
-		for ( extension in classesWithFunctions ) {
+		for (extension in classesWithFunctions) {
 			print("\tfinal ${extension.className}")
-			for ( i in 0..(alignment - extension.className.length - 1) )
+			for (i in 0..(alignment - extension.className.length - 1))
 				print(' ')
 			println(" __${extension.className};")
 		}
@@ -87,7 +87,7 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
 """)
-		for ( capability in classes.asSequence().filter { it.hasNativeFunctions } ) {
+		for (capability in classes.asSequence().filter { it.hasNativeFunctions }) {
 			val className = if ( capability.capName == capability.className )
 				"$EGL_PACKAGE.${capability.className}"
 			else
@@ -97,7 +97,7 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 
 		println()
 
-		for ( capability in classes ) {
+		for (capability in classes) {
 			val capName = capability.capName
 			println(
 				if ( capability.hasNativeFunctions ) {
@@ -122,7 +122,7 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
 """)
-		for ( capability in classes ) {
+		for (capability in classes) {
 			val capName = capability.capName
 			println(
 				if ( capability.hasNativeFunctions )
@@ -154,6 +154,19 @@ fun String.nativeClassEGL(
 	binding = EGLBinding,
 	init = init
 )
+
+fun config() {
+	packageInfo(
+		EGL_PACKAGE,
+		"""
+		Contains bindings to the <a href="https://www.khronos.org/egl">EGL</a> API, an interface between Khronos rendering APIs (such as OpenGL ES or OpenVG)
+		and the underlying native platform window system.
+
+		The <a href="https://www.khronos.org/registry/egl/">Khronos EGL registry</a> is a useful online resource that contains the EGL specification, as well
+		as specifications of EGL extensions.
+		"""
+	)
+}
 
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
 val NativeClass.registryLink: String get() {

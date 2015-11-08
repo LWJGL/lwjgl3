@@ -8,6 +8,19 @@ import org.lwjgl.generator.*
 
 val OPENGL_PACKAGE = "org.lwjgl.opengl"
 
+fun config() {
+	packageInfo(
+		OPENGL_PACKAGE,
+		"""
+		Contains bindings to the <a href="https://www.opengl.org/">OpenGL</a> cross-platform 2D and 3D rendering API.
+
+		The <a href="https://www.opengl.org/registry/">OpenGL registry</a> is a useful online resource that contains the OpenGL and OpenGL Shading Language
+		specifications, as well as specifications of OpenGL extensions. The <a href="https://www.opengl.org/sdk/docs/">OpenGL Reference Pages</a> is another
+		convenient source of documentation.
+		"""
+	)
+}
+
 // numeric
 
 val GLboolean = IntegerType("GLboolean", PrimitiveMapping.BOOLEAN, unsigned = true)
@@ -238,7 +251,7 @@ val GLhalfNV_p = GLhalfNV.p
 enum class BufferType(
 	type: PointerType,
 	override val className: String = "GL11"
-): AutoTypeToken {
+) : AutoTypeToken {
 
 	GL_UNSIGNED_BYTE(GLubyte_p),
 	GL_UNSIGNED_SHORT(GLushort_p),

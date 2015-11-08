@@ -271,6 +271,8 @@ License terms: http://lwjgl.org/license.php
 			<patternset refid="core.main.files"/>
 			<patternset refid="core.generated.files"/>
 
+			<patternset excludes="**/package-info.java"/>
+
 			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 			<compilerarg value="-XDignore.symbol.file=true"/>
 		</lwjgl.javac>
