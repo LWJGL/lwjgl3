@@ -4,7 +4,7 @@
  */
 package org.lwjgl.opengl;
 
-import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.Checks;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
@@ -22,7 +22,7 @@ final class GLChecks {
 	}
 
 	static void ensureBufferObject(int binding, boolean enabled) {
-		if ( LWJGLUtil.DEBUG && (glGetInteger(binding) != 0) ^ enabled )
+		if ( Checks.DEBUG && (glGetInteger(binding) != 0) ^ enabled )
 			throw new OpenGLException(
 				"Cannot use %s when %s buffer object is %s",
 				enabled ? "offsets" : "buffers",

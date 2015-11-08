@@ -4,7 +4,7 @@
  */
 package org.lwjgl.system.windows;
 
-import org.lwjgl.Sys;
+import org.lwjgl.system.Library;
 import org.testng.annotations.Test;
 
 import static org.lwjgl.system.windows.WinBase.*;
@@ -16,7 +16,7 @@ public class WindowsTest {
 
 	public void testLWJGLInstance() {
 		assertEquals(
-			GetModuleHandle(Sys.JNI_LIBRARY_NAME),
+			GetModuleHandle(Library.JNI_LIBRARY_NAME),
 			HINSTANCE
 		);
 	}

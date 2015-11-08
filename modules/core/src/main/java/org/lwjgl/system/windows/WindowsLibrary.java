@@ -4,8 +4,8 @@
  */
 package org.lwjgl.system.windows;
 
-import org.lwjgl.Sys;
 import org.lwjgl.system.DynamicLinkLibrary;
+import org.lwjgl.system.Library;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -16,7 +16,7 @@ import static org.lwjgl.system.windows.WindowsUtil.*;
 public class WindowsLibrary extends DynamicLinkLibrary.Default {
 
 	/** The LWJGL dll handle. */
-	public static final long HINSTANCE = GetModuleHandle(Sys.JNI_LIBRARY_NAME);
+	public static final long HINSTANCE = GetModuleHandle(Library.JNI_LIBRARY_NAME);
 
 	static {
 		if ( HINSTANCE == NULL )

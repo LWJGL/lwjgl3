@@ -4,12 +4,8 @@
  */
 package org.lwjgl.system.libffi;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.LWJGLUtil.Platform;
-import org.lwjgl.Pointer;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.Retainable;
+import org.lwjgl.system.*;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -78,7 +74,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	static {
 		// Setup calling conventions
 		CALL_CONVENTION_DEFAULT = FFI_DEFAULT_ABI;
-		CALL_CONVENTION_SYSTEM = LWJGLUtil.getPlatform() == Platform.WINDOWS && Pointer.BITS32
+		CALL_CONVENTION_SYSTEM = Platform.get() == Platform.WINDOWS && Pointer.BITS32
 			? FFI_STDCALL
 			: FFI_DEFAULT_ABI;
 	}
@@ -136,7 +132,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		memPutAddress(user_data, memNewWeakGlobalRef(this));
 
 		// Second pointer is a string containing debug information
-		if ( LWJGLUtil.DEBUG ) {
+		if ( Checks.DEBUG ) {
 			// In debug mode, we store the current stacktrace (where the closure instance was created)
 			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 			StringBuilder buffer = new StringBuilder(128);
@@ -179,7 +175,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			throw new IllegalStateException("This closure instance has been destroyed.");
 
 		memDeleteWeakGlobalRef(memGetAddress(user_data));
-		if ( LWJGLUtil.DEBUG )
+		if ( Checks.DEBUG )
 			nmemFree(memGetAddress(user_data + POINTER_SIZE));
 
 		nmemFree(user_data);

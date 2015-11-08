@@ -6,7 +6,7 @@ package org.lwjgl.system;
 
 import org.testng.annotations.Test;
 
-import static org.lwjgl.Pointer.*;
+import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.testng.Assert.*;
 

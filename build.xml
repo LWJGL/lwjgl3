@@ -380,8 +380,8 @@ License terms: http://lwjgl.org/license.php
 		</java>
 	</target>
 
-	<target name="-build-version" description="Retrieves the LWJGL version from org.lwjgl.Sys">
-		<java classname="org.lwjgl.Sys" fork="true" failonerror="true" outputproperty="build.version">
+	<target name="-build-version" description="Retrieves the LWJGL version from org.lwjgl.Version">
+		<java classname="org.lwjgl.Version" fork="true" failonerror="true" outputproperty="build.version">
 			<classpath path="${bin.core}"/>
 			<jvmarg value="-Djava.library.path=${lib}"/>
 		</java>

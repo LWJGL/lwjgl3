@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.LWJGLUtil;
-
 /** This interface must be implemented by objects that manage external resources and use reference counting to trigger the release of those resources. */
 public interface Retainable {
 
@@ -30,7 +28,7 @@ public interface Retainable {
 
 		@Override
 		public void retain() {
-			if ( LWJGLUtil.DEBUG && refCount == 0 )
+			if ( Checks.DEBUG && refCount == 0 )
 				throw new IllegalStateException("This object has been released already.");
 
 			refCount++;
@@ -38,7 +36,7 @@ public interface Retainable {
 
 		@Override
 		public void release() {
-			if ( LWJGLUtil.DEBUG && refCount == 0 )
+			if ( Checks.DEBUG && refCount == 0 )
 				throw new IllegalStateException("This object has been released already.");
 
 			if ( --refCount == 0 )

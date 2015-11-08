@@ -4,7 +4,7 @@
  */
 package org.lwjgl.opengles;
 
-import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.Checks;
 
 import static org.lwjgl.opengles.GLES20.*;
 import static org.lwjgl.opengles.GLES30.*;
@@ -17,7 +17,7 @@ final class GLESChecks {
 	}
 
 	static void ensureBufferObject(int binding, boolean enabled) {
-		if ( LWJGLUtil.DEBUG && (glGetInteger(binding) != 0) ^ enabled )
+		if ( Checks.DEBUG && (glGetInteger(binding) != 0) ^ enabled )
 			throw new OpenGLESException(
 				"Cannot use %s when %s buffer object is %s",
 				enabled ? "offsets" : "buffers",

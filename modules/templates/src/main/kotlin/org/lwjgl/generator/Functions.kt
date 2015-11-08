@@ -351,7 +351,7 @@ class NativeClassFunction(
 				if ( transform !is SkipCheckFunctionTransform ) {
 					val check = it[Check]
 
-					if ( check.debug ) prefix = "if ( LWJGLUtil.DEBUG )\n\t\t\t\t$prefix"
+					if ( check.debug ) prefix = "if ( DEBUG )\n\t\t\t\t$prefix"
 
 					if ( it.nativeType.javaMethodType === ByteBuffer::class.java )
 						checks.add("${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});")
@@ -413,7 +413,7 @@ class NativeClassFunction(
 		if ( checks.isEmpty() )
 			return
 
-		println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size == 1 ) "" else " {" }")
+		println("\t\tif ( CHECKS )${if ( checks.size == 1 ) "" else " {" }")
 		checks.forEach {
 			print("\t\t\t")
 			println(it)
@@ -505,7 +505,7 @@ class NativeClassFunction(
 		}
 
 		if ( checks.isNotEmpty() ) {
-			println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size == 1) "" else " {" }")
+			println("\t\tif ( CHECKS )${if ( checks.size == 1) "" else " {" }")
 			checks.forEach {
 				print("\t\t\t")
 				println(it)

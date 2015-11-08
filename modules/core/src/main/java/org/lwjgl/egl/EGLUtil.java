@@ -4,8 +4,6 @@
  */
 package org.lwjgl.egl;
 
-import org.lwjgl.LWJGLUtil;
-
 import java.lang.reflect.Field;
 import java.util.Map;
 
@@ -15,8 +13,8 @@ import static org.lwjgl.system.APIUtil.*;
 
 public final class EGLUtil {
 
-	private static final Map<Integer, String> EGL_ERROR_TOKENS = LWJGLUtil.getClassTokens(
-		new LWJGLUtil.TokenFilter() {
+	private static final Map<Integer, String> EGL_ERROR_TOKENS = apiClassTokens(
+		new TokenFilter() {
 			@Override
 			public boolean accept(Field field, int value) {
 				return field.getName().contains("_BAD_");

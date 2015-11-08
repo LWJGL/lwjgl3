@@ -4,7 +4,8 @@
  */
 package org.lwjgl.system.libffi;
 
-import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.APIUtil;
+import org.lwjgl.system.Checks;
 
 /**
  * This error will be thrown by native code, if a {@link Closure} instance that
@@ -17,9 +18,9 @@ public class ClosureError extends Error {
 	public ClosureError(String debug) {
 		super("Callback failed because the closure instance has been garbage collected.");
 
-		LWJGLUtil.DEBUG_STREAM.format("[LWJGL] ClosureError for closure: %s\n", debug);
-		if ( !LWJGLUtil.DEBUG )
-			LWJGLUtil.DEBUG_STREAM.println("[LWJGL] Enable debug mode to discover where the closure was instantiated.");
+		APIUtil.DEBUG_STREAM.format("[LWJGL] ClosureError for closure: %s\n", debug);
+		if ( !Checks.DEBUG )
+			APIUtil.DEBUG_STREAM.println("[LWJGL] Enable debug mode to discover where the closure was instantiated.");
 	}
 
 }

@@ -4,7 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.libffi.FFIType;
 import org.lwjgl.system.windows.GLYPHMETRICSFLOAT;
 import org.lwjgl.system.windows.POINTFLOAT;
@@ -20,7 +19,7 @@ import static org.testng.Assert.*;
 public class StructTest {
 
 	public void testStructLayout() {
-		switch ( LWJGLUtil.getPlatform() ) {
+		switch ( Platform.get() ) {
 			case WINDOWS: {
 				GLYPHMETRICSFLOAT s = GLYPHMETRICSFLOAT.malloc();
 				s.free();

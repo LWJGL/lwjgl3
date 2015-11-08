@@ -12,7 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static org.lwjgl.LWJGLUtil.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jemalloc.JEmalloc.*;
@@ -35,7 +34,7 @@ final class MemoryManage {
 				Class.forName("org.lwjgl.system.jemalloc.JEmalloc").getMethod("getInstance").invoke(null);
 				return new JEmallocAllocator();
 			} catch (Throwable t) {
-				if ( DEBUG )
+				if ( Checks.DEBUG )
 					t.printStackTrace(DEBUG_STREAM);
 				apiLog("[MemoryAllocator] Failed to load the jemalloc library.");
 				return new StdlibAllocator();

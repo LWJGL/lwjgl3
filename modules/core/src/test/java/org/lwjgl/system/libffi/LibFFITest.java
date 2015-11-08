@@ -4,16 +4,19 @@
  */
 package org.lwjgl.system.libffi;
 
-import org.lwjgl.*;
-import org.lwjgl.LWJGLUtil.Platform;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.DynamicLinkLibrary;
+import org.lwjgl.system.Library;
+import org.lwjgl.system.Platform;
+import org.lwjgl.system.Pointer;
 import org.testng.annotations.Test;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-import static org.lwjgl.Pointer.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 import static org.testng.Assert.*;
 
@@ -86,10 +89,10 @@ public class LibFFITest {
 	}
 
 	private static long getMemPutIntAddress() {
-		DynamicLinkLibrary lib = LWJGLUtil.loadLibraryNative(Sys.JNI_LIBRARY_NAME);
+		DynamicLinkLibrary lib = Library.loadNative(Library.JNI_LIBRARY_NAME);
 
 		long putInt = lib.getFunctionAddress(
-			LWJGLUtil.getPlatform() == Platform.WINDOWS && Pointer.BITS32
+			Platform.get() == Platform.WINDOWS && Pointer.BITS32
 				? "_Java_org_lwjgl_system_MemoryAccess_putInt@20" // __stdcall (Win32)
 				: "Java_org_lwjgl_system_MemoryAccess_putInt"
 		);

@@ -6,6 +6,13 @@
 
 EXTERN_C_ENTER
 
+// memGetPointerSize()I
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_MemoryUtil_memGetPointerSize(JNIEnv *env, jclass clazz)
+{
+	UNUSED_PARAMS(env, clazz);
+	return (jint)sizeof(void *);
+}
+
 // memGlobalRefToObject(J)Ljava/lang/Object;
 JNIEXPORT jobject JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefToObject(JNIEnv *env, jclass clazz,
 	jlong globalRef

@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.LWJGLUtil;
-
 import java.nio.*;
 
 import static java.lang.Character.*;
@@ -344,7 +342,7 @@ final class MemoryAccess {
 		@Override
 		ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
 			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
-			if ( LWJGLUtil.DEBUG && ((sun.nio.ch.DirectBuffer)buffer).cleaner() != null )
+			if ( Checks.DEBUG && ((sun.nio.ch.DirectBuffer)buffer).cleaner() != null )
 				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
 
 			return setup(buffer, address, capacity, PARENT_BYTE);
@@ -519,7 +517,7 @@ final class MemoryAccess {
 		@Override
 		public ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
 			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
-			if ( LWJGLUtil.DEBUG && ((sun.nio.ch.DirectBuffer)buffer).cleaner() != null )
+			if ( Checks.DEBUG && ((sun.nio.ch.DirectBuffer)buffer).cleaner() != null )
 				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
 
 			return setup(buffer, address, capacity, PARENT_BYTE);

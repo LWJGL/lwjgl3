@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.LWJGLUtil;
-
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.system.Checks.*;
@@ -15,7 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public abstract class Struct extends PointerWrapper {
 
 	static {
-		LWJGLUtil.initialize();
+		Library.initialize();
 	}
 
 	private final ByteBuffer container;
@@ -23,7 +21,7 @@ public abstract class Struct extends PointerWrapper {
 	protected Struct(long address, ByteBuffer container, int sizeof) {
 		super(address);
 
-		if ( LWJGLUtil.CHECKS && container != null )
+		if ( Checks.CHECKS && container != null )
 			checkBuffer(container, sizeof);
 
 		this.container = container;

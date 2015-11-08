@@ -4,7 +4,7 @@
  */
 package org.lwjgl.opencl;
 
-import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.Checks;
 import org.lwjgl.system.PointerWrapper;
 
 import java.util.HashSet;
@@ -22,7 +22,7 @@ public class CLDevice extends PointerWrapper {
 	public CLDevice(long cl_device_id, CLPlatform platform) {
 		this(cl_device_id, platform.getCapabilities());
 
-		if ( LWJGLUtil.DEBUG && clGetDeviceInfoPointer(cl_device_id, CL_DEVICE_PLATFORM) != platform.address() )
+		if ( Checks.DEBUG && clGetDeviceInfoPointer(cl_device_id, CL_DEVICE_PLATFORM) != platform.address() )
 			throw new IllegalArgumentException("The specified device does not belong to the specified platform.");
 	}
 

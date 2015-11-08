@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.LWJGLUtil;
-
 import java.nio.ByteBuffer;
 
 import static java.lang.Character.*;
@@ -129,7 +127,7 @@ class MemoryTextUtil {
 			else if ( c < MIN_SURROGATE || MAX_SURROGATE < c )
 				bytes += 2;
 			else {
-				if ( LWJGLUtil.DEBUG )
+				if ( Checks.DEBUG )
 					checkSurrogatePair(value, i, len);
 
 				bytes += 2; // the byte count already includes 2 bytes for the surrogate pair, add 2 more
@@ -173,18 +171,18 @@ class MemoryTextUtil {
 				string[i++] = (char)b0;
 			} else if ( (b0 >> 5) == -2 && (b0 & 0x1E) != 0 ) {
 				int b1 = buffer.get(position++);
-				if ( LWJGLUtil.DEBUG && (b1 & 0xC0) != 0x80 )
+				if ( Checks.DEBUG && (b1 & 0xC0) != 0x80 )
 					throw new RuntimeException("Malformed character sequence");
 
 				string[i++] = (char)(((b0 << 6) ^ b1) ^ (((byte)0xC0 << 6) ^ ((byte)0x80 << 0)));
 			} else if ( (b0 >> 4) == -2 ) {
 				int b1 = buffer.get(position++);
 				int b2 = buffer.get(position++);
-				if ( LWJGLUtil.DEBUG && isMalformed3(b0, b1, b2) )
+				if ( Checks.DEBUG && isMalformed3(b0, b1, b2) )
 					throw new RuntimeException("Malformed character sequence");
 
 				char c = (char)((b0 << 12) ^ (b1 << 6) ^ (b2 ^ (((byte)0xE0 << 12) ^ ((byte)0x80 << 6) ^ ((byte)0x80 << 0))));
-				if ( LWJGLUtil.DEBUG && MIN_SURROGATE <= c && c <= MAX_SURROGATE )
+				if ( Checks.DEBUG && MIN_SURROGATE <= c && c <= MAX_SURROGATE )
 					throw new RuntimeException("Malformed character sequence");
 
 				string[i++] = c;
@@ -193,12 +191,12 @@ class MemoryTextUtil {
 				int b2 = buffer.get(position++);
 				int b3 = buffer.get(position++);
 				int cp = ((b0 << 18) ^ (b1 << 12) ^ (b2 << 6) ^ (b3 ^ ((byte)0xF0 << 18 ^ ((byte)0x80 << 12) ^ ((byte)0x80 << 6) ^ ((byte)0x80 << 0))));
-				if ( LWJGLUtil.DEBUG && (isMalformed4(b1, b2, b3) || !isSupplementaryCodePoint(cp)) )
+				if ( Checks.DEBUG && (isMalformed4(b1, b2, b3) || !isSupplementaryCodePoint(cp)) )
 					throw new RuntimeException("Malformed character sequence");
 
 				string[i++] = (char)((cp >>> 10) + MIN_HIGH_SURROGATE - (MIN_SUPPLEMENTARY_CODE_POINT >>> 10));
 				string[i++] = (char)((cp & 0x3FF) + MIN_LOW_SURROGATE);
-			} else if ( LWJGLUtil.DEBUG )
+			} else if ( Checks.DEBUG )
 				throw new RuntimeException("Malformed character sequence");
 		}
 

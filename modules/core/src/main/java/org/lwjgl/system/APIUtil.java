@@ -4,11 +4,11 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.linux.LinuxLibrary;
 import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
 
+import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
@@ -23,6 +23,12 @@ import java.util.regex.Pattern;
  */
 public final class APIUtil {
 
+	/**
+	 * The {@link PrintStream} used by LWJGL to print debug information and non-fatal errors. Defaults to {@link System#err} which can be changed with
+	 * {@link Configuration#DEBUG_STREAM}.
+	 */
+	public static final PrintStream DEBUG_STREAM = Configuration.createDebugStream();
+
 	private static final ThreadLocal<APIBuffer> API_BUFFERS = new ThreadLocal<APIBuffer>() {
 		@Override
 		protected APIBuffer initialValue() {
@@ -31,21 +37,21 @@ public final class APIUtil {
 	};
 
 	static {
-		LWJGLUtil.initialize();
+		Library.initialize();
 	}
 
 	private APIUtil() {
 	}
 
 	/**
-	 * Prints the specified message to the {@link LWJGLUtil#DEBUG_STREAM} if {@link LWJGLUtil#DEBUG} is true.
+	 * Prints the specified message to the {@link Platform#DEBUG_STREAM} if {@link Platform#DEBUG} is true.
 	 *
 	 * @param msg the message to print
 	 */
 	public static void apiLog(CharSequence msg) {
-		if ( LWJGLUtil.DEBUG ) {
-			LWJGLUtil.DEBUG_STREAM.print("[LWJGL] ");
-			LWJGLUtil.DEBUG_STREAM.println(msg);
+		if ( Checks.DEBUG ) {
+			DEBUG_STREAM.print("[LWJGL] ");
+			DEBUG_STREAM.println(msg);
 		}
 	}
 
@@ -65,7 +71,7 @@ public final class APIUtil {
 	}
 
 	public static DynamicLinkLibrary apiCreateLibrary(String name) {
-		switch ( LWJGLUtil.getPlatform() ) {
+		switch ( Platform.get() ) {
 			case WINDOWS:
 				return new WindowsLibrary(name);
 			case LINUX:

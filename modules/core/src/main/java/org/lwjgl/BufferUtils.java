@@ -4,6 +4,7 @@
  */
 package org.lwjgl;
 
+import org.lwjgl.system.Checks;
 import org.lwjgl.system.Configuration;
 
 import java.nio.*;
@@ -214,7 +215,7 @@ public final class BufferUtils {
 	 * @return the aligned ByteBuffer
 	 */
 	public static ByteBuffer createAlignedByteBuffer(int capacity, int alignment) {
-		if ( LWJGLUtil.DEBUG && !mathIsPoT(alignment) )
+		if ( Checks.DEBUG && !mathIsPoT(alignment) )
 			throw new IllegalArgumentException("The alignment value must be a power-of-two integer.");
 
 		ByteBuffer buffer = ByteBuffer.allocateDirect(capacity + alignment);

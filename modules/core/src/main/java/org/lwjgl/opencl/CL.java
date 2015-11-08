@@ -4,12 +4,7 @@
  */
 package org.lwjgl.opencl;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.LWJGLUtil.Platform;
-import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.Configuration;
-import org.lwjgl.system.DynamicLinkLibrary;
-import org.lwjgl.system.FunctionProviderLocal;
+import org.lwjgl.system.*;
 
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -37,15 +32,15 @@ public final class CL {
 		create(Configuration.LIBRARY_NAME_OPENCL.get("OpenCL"));
 	}
 
-	public static void create(final String libName) {
+	public static void create(String libName) {
 		final DynamicLinkLibrary OPENCL;
 
 		{
 			DynamicLinkLibrary dll;
 			try {
-				dll = LWJGLUtil.loadLibraryNative(libName);
+				dll = Library.loadNative(libName);
 			} catch (Throwable t) {
-				if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
+				if ( Platform.get() == Platform.MACOSX )
 					dll = apiCreateLibrary("/System/Library/Frameworks/OpenCL.framework");
 				else
 					throw new RuntimeException(t);

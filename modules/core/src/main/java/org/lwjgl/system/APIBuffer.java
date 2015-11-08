@@ -10,7 +10,7 @@ import org.lwjgl.PointerBuffer;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-import static org.lwjgl.Pointer.*;
+import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 

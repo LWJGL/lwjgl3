@@ -4,12 +4,7 @@
  */
 package org.lwjgl.openal;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.Pointer;
-import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.Configuration;
-import org.lwjgl.system.DynamicLinkLibrary;
-import org.lwjgl.system.FunctionProviderLocal;
+import org.lwjgl.system.*;
 
 import java.nio.ByteBuffer;
 import java.util.*;
@@ -33,7 +28,7 @@ public final class ALC {
 
 	public static void create() {
 		String libName;
-		switch ( LWJGLUtil.getPlatform() ) {
+		switch ( Platform.get() ) {
 			case WINDOWS:
 				libName = "OpenAL";
 				break;
@@ -51,7 +46,7 @@ public final class ALC {
 	}
 
 	public static void create(String libName) {
-		final DynamicLinkLibrary OPENAL = LWJGLUtil.loadLibraryNative(libName);
+		final DynamicLinkLibrary OPENAL = Library.loadNative(libName);
 
 		try {
 			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {

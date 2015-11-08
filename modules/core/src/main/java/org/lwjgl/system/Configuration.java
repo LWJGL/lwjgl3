@@ -4,7 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.MemoryUtil.MemoryAllocator;
 
 import java.io.ByteArrayOutputStream;
@@ -119,7 +118,7 @@ public enum Configuration {
 	DISABLE_CHECKS("org.lwjgl.util.NoChecks", StateInit.BOOLEAN),
 
 	/**
-	 * Set to true to enable LWJGL's debug mode. Information messages will be printed to the {@link LWJGLUtil#DEBUG_STREAM} and extra runtime checks will
+	 * Set to true to enable LWJGL's debug mode. Information messages will be printed to the {@link APIUtil#DEBUG_STREAM} and extra runtime checks will
 	 * be performed (some potentially expensive, performance-wise).
 	 *
 	 * <p style="font-family: monospace">
@@ -130,7 +129,7 @@ public enum Configuration {
 	DEBUG("org.lwjgl.util.Debug", StateInit.BOOLEAN),
 
 	/**
-	 * Can be set to override the default {@link LWJGLUtil#DEBUG_STREAM}. It must be the name of a class that implements the
+	 * Can be set to override the default {@link APIUtil#DEBUG_STREAM}. It must be the name of a class that implements the
 	 * {@link DebugStreamFactory DebugStreamFactory} interface. The class will be instantiated using reflection and the result of
 	 * {@link DebugStreamFactory#create DebugStreamFactory.create} will become the {@link #DEBUG_STREAM} used by LWJGL.
 	 *
@@ -377,7 +376,7 @@ public enum Configuration {
 		PrintStream create();
 	}
 
-	/** Creates the {@link LWJGLUtil#DEBUG_STREAM}. [INTERNAL USE ONLY]. */
+	/** Creates the {@link APIUtil#DEBUG_STREAM}. [INTERNAL USE ONLY]. */
 	public static PrintStream createDebugStream() {
 		PrintStream debugStream = System.err;
 

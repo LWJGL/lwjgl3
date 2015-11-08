@@ -4,9 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.Pointer;
-
 import java.nio.BufferOverflowException;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
@@ -21,7 +18,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	protected final ByteBuffer container;
 
 	protected StructBuffer(ByteBuffer container, int SIZEOF) {
-		if ( LWJGLUtil.CHECKS )
+		if ( Checks.CHECKS )
 			checkBuffer(container, SIZEOF);
 
 		this.container = container;

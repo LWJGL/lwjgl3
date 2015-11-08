@@ -4,14 +4,14 @@
  */
 package org.lwjgl.opencl;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.APIBuffer;
 
-import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.Pointer.*;
 
 /**
  * Base class for OpenCL object information queries.
@@ -52,7 +52,7 @@ abstract class InfoQuery {
 	int getInt(long object, int param_name) {
 		APIBuffer __buffer = apiBuffer();
 		int errcode = get(object, param_name, 4L, __buffer.address(), NULL);
-		if ( LWJGLUtil.DEBUG )
+		if ( DEBUG )
 			checkCLError(errcode);
 		return __buffer.intValue(0);
 	}
@@ -70,7 +70,7 @@ abstract class InfoQuery {
 	long getLong(long object, int param_name) {
 		APIBuffer __buffer = apiBuffer();
 		int errcode = get(object, param_name, 8L, __buffer.address(), NULL);
-		if ( LWJGLUtil.DEBUG )
+		if ( DEBUG )
 			checkCLError(errcode);
 		return __buffer.longValue(0);
 	}
@@ -88,7 +88,7 @@ abstract class InfoQuery {
 	long getPointer(long object, int param_name) {
 		APIBuffer __buffer = apiBuffer();
 		int errcode = get(object, param_name, POINTER_SIZE, __buffer.address(), NULL);
-		if ( LWJGLUtil.DEBUG )
+		if ( DEBUG )
 			checkCLError(errcode);
 		return __buffer.pointerValue(0);
 	}
@@ -107,7 +107,7 @@ abstract class InfoQuery {
 	int getPointers(long object, int param_name, PointerBuffer target) {
 		APIBuffer __buffer = apiBuffer();
 		int errcode = get(object, param_name, target.remaining() * POINTER_SIZE, memAddress(target), __buffer.address());
-		if ( LWJGLUtil.DEBUG )
+		if ( DEBUG )
 			checkCLError(errcode);
 		return (int)(__buffer.pointerValue(0) >> POINTER_SHIFT);
 	}
@@ -139,7 +139,7 @@ abstract class InfoQuery {
 	String getStringASCII(long object, int param_name, int param_value_size) {
 		APIBuffer __buffer = apiBuffer();
 		int errcode = get(object, param_name, param_value_size, __buffer.address(), NULL);
-		if ( LWJGLUtil.DEBUG )
+		if ( DEBUG )
 			checkCLError(errcode);
 		return __buffer.stringValueASCII(0, param_value_size);
 	}
@@ -171,7 +171,7 @@ abstract class InfoQuery {
 	String getStringUTF8(long object, int param_name, int param_value_size) {
 		APIBuffer __buffer = apiBuffer();
 		int errcode = get(object, param_name, param_value_size, __buffer.address(), NULL);
-		if ( LWJGLUtil.DEBUG )
+		if ( DEBUG )
 			checkCLError(errcode);
 		return __buffer.stringValueUTF8(0, param_value_size);
 	}
@@ -179,7 +179,7 @@ abstract class InfoQuery {
 	private int getString(long object, int param_name, APIBuffer __buffer) {
 		// Get string length
 		int errcode = get(object, param_name, 0, NULL, __buffer.address());
-		if ( LWJGLUtil.DEBUG )
+		if ( DEBUG )
 			checkCLError(errcode);
 
 		int bytes = (int)__buffer.pointerValue(0);
@@ -187,7 +187,7 @@ abstract class InfoQuery {
 
 		// Get string
 		errcode = get(object, param_name, bytes, __buffer.address(), NULL);
-		if ( LWJGLUtil.DEBUG )
+		if ( DEBUG )
 			checkCLError(errcode);
 
 		return bytes - 1; // all OpenCL char[] parameters are null-terminated

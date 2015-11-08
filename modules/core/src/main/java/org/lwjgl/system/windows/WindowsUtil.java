@@ -4,7 +4,7 @@
  */
 package org.lwjgl.system.windows;
 
-import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.Checks;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
@@ -20,7 +20,7 @@ public final class WindowsUtil {
 	}
 
 	public static void windowsCheckResult(int result, String action) {
-		if ( LWJGLUtil.DEBUG && result == 0 )
+		if ( Checks.DEBUG && result == 0 )
 			throw new RuntimeException(action + " failed (error code = " + getLastError() + ")");
 	}
 

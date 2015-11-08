@@ -4,8 +4,7 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.Pointer;
-
+/** A {@link FunctionProvider} implementation that opens a platform-specific shared library and returns functions pointers from it. */
 public interface DynamicLinkLibrary extends FunctionProvider, Pointer {
 
 	/** Returns the library name. */

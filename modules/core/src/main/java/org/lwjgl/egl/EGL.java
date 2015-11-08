@@ -4,11 +4,7 @@
  */
 package org.lwjgl.egl;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.Configuration;
-import org.lwjgl.system.DynamicLinkLibrary;
-import org.lwjgl.system.FunctionProvider;
+import org.lwjgl.system.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -57,7 +53,7 @@ public final class EGL {
 	public static void create() {
 		String libName = Configuration.LIBRARY_NAME_EGL.get();
 		if ( libName == null ) {
-			switch ( LWJGLUtil.getPlatform() ) {
+			switch ( Platform.get() ) {
 				case LINUX:
 					libName = "libEGL.so.1";
 					break;
@@ -79,7 +75,7 @@ public final class EGL {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		final DynamicLinkLibrary EGL = LWJGLUtil.loadLibraryNative(libName);
+		final DynamicLinkLibrary EGL = Library.loadNative(libName);
 
 		try {
 			FunctionProvider functionProvider = new FunctionProvider.Default() {

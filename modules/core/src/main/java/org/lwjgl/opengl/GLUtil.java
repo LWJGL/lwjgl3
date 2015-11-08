@@ -4,12 +4,11 @@
  */
 package org.lwjgl.opengl;
 
-import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.APIUtil;
 import org.lwjgl.system.libffi.Closure;
 
 import java.io.PrintStream;
 
-import static org.lwjgl.LWJGLUtil.*;
 import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.opengl.ARBDebugOutput.*;
 import static org.lwjgl.opengl.ARBImaging.*;
@@ -30,7 +29,7 @@ public final class GLUtil {
 	 *
 	 * @throws OpenGLException if {@link GL11#glGetError GetError} returns anything other than {@link GL11#GL_NO_ERROR NO_ERROR}
 	 */
-	public void checkGLError() throws OpenGLException {
+	public static void checkGLError() throws OpenGLException {
 		int err = glGetError();
 		if ( err != GL_NO_ERROR )
 			throw new OpenGLException(err);
@@ -69,11 +68,11 @@ public final class GLUtil {
 	}
 
 	/**
-	 * Detects the best debug output functionality to use and creates a callback that prints information to {@link LWJGLUtil#DEBUG_STREAM}. The callback
+	 * Detects the best debug output functionality to use and creates a callback that prints information to {@link APIUtil#DEBUG_STREAM}. The callback
 	 * function is returned as a {@link Closure}, that should be {@link Closure#release released} when no longer needed.
 	 */
 	public static Closure setupDebugMessageCallback() {
-		return setupDebugMessageCallback(DEBUG_STREAM);
+		return setupDebugMessageCallback(APIUtil.DEBUG_STREAM);
 	}
 
 	/**

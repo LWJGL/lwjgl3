@@ -4,9 +4,9 @@
  */
 package org.lwjgl.glfw;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.system.DynamicLinkLibrary;
+import org.lwjgl.system.Library;
+import org.lwjgl.system.Platform;
 import org.lwjgl.system.macosx.ObjCRuntime;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -29,9 +29,9 @@ final class EventLoop {
 
 	static final class OffScreen {
 		static {
-			if ( LWJGLUtil.getPlatform() == Platform.MACOSX && !isMainThread() ) {
+			if ( Platform.get() == Platform.MACOSX && !isMainThread() ) {
 				// The only way to avoid a crash is if the shared application (NSApp) has been created by something else
-				DynamicLinkLibrary AppKit = LWJGLUtil.loadLibraryNative("/System/Library/Frameworks/AppKit.framework");
+				DynamicLinkLibrary AppKit = Library.loadNative("/System/Library/Frameworks/AppKit.framework");
 				try {
 					long NSApp = AppKit.getFunctionAddress("NSApp"); // The NSApp global variable is an exported symbol
 					if ( memGetAddress(NSApp) == NULL )
@@ -60,7 +60,7 @@ final class EventLoop {
 
 	static final class OnScreen {
 		static {
-			if ( LWJGLUtil.getPlatform() == Platform.MACOSX && !isMainThread() )
+			if ( Platform.get() == Platform.MACOSX && !isMainThread() )
 				throw new IllegalStateException(
 					"Please run the JVM with -XstartOnFirstThread and make sure a window toolkit other than GLFW (e.g. AWT or JavaFX) is not initialized."
 				);

@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.MemoryAccess.MemoryAccessor;
 import org.lwjgl.system.MemoryManage.DebugAllocator;
@@ -14,7 +13,7 @@ import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.Aggregate;
 import java.nio.*;
 
 import static java.lang.Math.*;
-import static org.lwjgl.Pointer.*;
+import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.APIUtil.*;
 
 /**
@@ -54,7 +53,7 @@ public final class MemoryUtil {
 	public static final int CACHE_LINE_SIZE;
 
 	static {
-		LWJGLUtil.initialize();
+		Library.initialize();
 
 		ACCESSOR = MemoryAccess.getInstance();
 		TEXT_UTIL = ACCESSOR.getTextUtil();
@@ -837,7 +836,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (2 - 1)) != 0L )
+		if ( Checks.DEBUG && (address & (2 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memShortBuffer(address, capacity);
@@ -857,7 +856,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (2 - 1)) != 0L )
+		if ( Checks.DEBUG && (address & (2 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memCharBuffer(address, capacity);
@@ -877,7 +876,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (4 - 1)) != 0L )
+		if ( Checks.DEBUG && (address & (4 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memIntBuffer(address, capacity);
@@ -897,7 +896,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (8 - 1)) != 0L )
+		if ( Checks.DEBUG && (address & (8 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memLongBuffer(address, capacity);
@@ -917,7 +916,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (4 - 1)) != 0L )
+		if ( Checks.DEBUG && (address & (4 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memFloatBuffer(address, capacity);
@@ -937,7 +936,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (8 - 1)) != 0L )
+		if ( Checks.DEBUG && (address & (8 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memDoubleBuffer(address, capacity);
@@ -1110,7 +1109,7 @@ public final class MemoryUtil {
 	 * @param bytes the number of bytes to set
 	 */
 	public static void memSet(long ptr, int value, int bytes) {
-		if ( LWJGLUtil.DEBUG && (ptr == NULL || bytes < 0) )
+		if ( Checks.DEBUG && (ptr == NULL || bytes < 0) )
 			throw new IllegalArgumentException();
 
 		ACCESSOR.memSet(ptr, value, bytes);
@@ -1124,7 +1123,7 @@ public final class MemoryUtil {
 	 * @param bytes the number of bytes to copy
 	 */
 	public static void memCopy(long src, long dst, int bytes) {
-		if ( LWJGLUtil.DEBUG && (src == NULL || dst == NULL || bytes < 0) )
+		if ( Checks.DEBUG && (src == NULL || dst == NULL || bytes < 0) )
 			throw new IllegalArgumentException();
 
 		ACCESSOR.memCopy(src, dst, bytes);
@@ -1191,6 +1190,9 @@ public final class MemoryUtil {
 				JNI UTILITIES API
 		-------------------------------------
 	    ------------------------------------- */
+
+	/** Returns the {@code sizeof(void *)}. */
+	static native int memGetPointerSize();
 
 	/**
 	 * Returns the object that the specified global reference points to.

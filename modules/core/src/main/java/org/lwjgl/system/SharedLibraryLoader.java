@@ -2,9 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl;
-
-import org.lwjgl.system.Configuration;
+package org.lwjgl.system;
 
 import java.io.*;
 import java.lang.reflect.Method;

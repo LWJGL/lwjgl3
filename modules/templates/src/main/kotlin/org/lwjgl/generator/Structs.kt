@@ -261,7 +261,7 @@ class Struct(
 
 	/** {@link ByteBuffer} version of {@link #set}. */
 	public $className set(ByteBuffer struct) {
-		if ( LWJGLUtil.CHECKS )
+		if ( CHECKS )
 			checkBuffer(struct, SIZEOF);
 		return nset(memAddress(struct));
 	}
@@ -683,7 +683,7 @@ class Struct(
 							val bytesPerElement = if ( mapping === PrimitiveMapping.POINTER ) "POINTER_SIZE" else mapping.bytes.toString()
 
 							println("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) {")
-							println("\t\tif ( LWJGLUtil.CHECKS ) {")
+							println("\t\tif ( CHECKS ) {")
 							if ( it is StructMemberCharArray ) {
 								val charMapping = it.nativeType.mapping as CharMapping
 								println("\t\t\tcheckNT${charMapping.bytes}($param);")
@@ -715,7 +715,7 @@ class Struct(
 
 							if ( nestedStructType.includesPointer ) {
 								println("\tpublic static void n$method(long $STRUCT, PointerBuffer $param) {")
-								println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${it.size});")
+								println("\t\tif ( CHECKS ) checkBufferGT($param, ${it.size});")
 								println("\t\tmemCopy(memAddress($param), $STRUCT + $field, $param.remaining() * POINTER_SIZE);")
 								println("\t}")
 								println("\tpublic static void $method(ByteBuffer $STRUCT, PointerBuffer $param) { n$method(memAddress($STRUCT), $param); }")
@@ -726,7 +726,7 @@ class Struct(
 								println("\tpublic static void $method(ByteBuffer $STRUCT, int index, ${nestedStruct.className} $param) { n$method(memAddress($STRUCT), index, $param); }")
 							} else {
 								println("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) {")
-								println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${it.size} * $SIZEOF);")
+								println("\t\tif ( CHECKS ) checkBufferGT($param, ${it.size} * $SIZEOF);")
 								println("\t\tmemCopy(memAddress($param), $STRUCT + $field, $param.remaining());")
 								println("\t}")
 								println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")
@@ -741,7 +741,7 @@ class Struct(
 					it.nativeType is CharSequenceType -> {
 						print("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) { ")
 						if ( it.nativeType.nullTerminated )
-							print("if ( LWJGLUtil.CHECKS && $param != null ) checkNT${it.nativeType.charMapping.bytes}($param); ")
+							print("if ( CHECKS && $param != null ) checkNT${it.nativeType.charMapping.bytes}($param); ")
 						println("n$method($STRUCT, memAddressSafe($param)); }")
 						println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")
 
@@ -917,7 +917,7 @@ class Struct(
 							val bytesPerElement = mapping.bytes
 
 							println("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) {")
-							println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size} * $bytesPerElement);")
+							println("\t\tif ( CHECKS ) checkBufferGT($param, ${array.size} * $bytesPerElement);")
 							println("\t\tmemCopy($STRUCT + $field, memAddress($param), $param.remaining());")
 							println("\t}")
 							println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")
@@ -946,7 +946,7 @@ class Struct(
 
 							if ( nestedStructType.includesPointer ) {
 								println("\tpublic static void n$method(long $STRUCT, PointerBuffer $param) {")
-								println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size});")
+								println("\t\tif ( CHECKS ) checkBufferGT($param, ${array.size});")
 								println("\t\tmemCopy($STRUCT + $field, memAddress($param), $param.remaining() * POINTER_SIZE);")
 								println("\t}")
 								println("\tpublic static void $method(ByteBuffer $STRUCT, PointerBuffer $param) { n$method(memAddress($STRUCT), $param); }")
@@ -957,7 +957,7 @@ class Struct(
 								println("\tpublic static ${nestedStruct.className} $method(ByteBuffer $STRUCT, int index) { return n$method(memAddress($STRUCT), index); }")
 							} else {
 								println("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) {")
-								println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size} * $SIZEOF);")
+								println("\t\tif ( CHECKS ) checkBufferGT($param, ${array.size} * $SIZEOF);")
 								println("\t\tmemCopy($STRUCT + $field, memAddress($param), $param.remaining());")
 								println("\t}")
 								println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")

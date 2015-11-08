@@ -4,8 +4,6 @@
  */
 package org.lwjgl.demo.glfw;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.LWJGLUtil.TokenFilter;
 import org.lwjgl.demo.util.ClosureGC;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
@@ -20,6 +18,7 @@ import java.util.Map;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** GLFW events demo. */
@@ -157,7 +156,7 @@ public final class Events {
 		});
 
 		glfwSetKeyCallback(window, new GLFWKeyCallback() {
-			private final Map<Integer, String> KEY_CODES = LWJGLUtil.getClassTokens(new TokenFilter() {
+			private final Map<Integer, String> KEY_CODES = apiClassTokens(new TokenFilter() {
 				@Override
 				public boolean accept(Field field, int value) {
 					return field.getName().startsWith("GLFW_KEY_");

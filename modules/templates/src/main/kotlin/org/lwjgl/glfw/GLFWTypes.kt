@@ -59,7 +59,8 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 		"java.io.PrintStream",
 		"java.lang.reflect.Field",
 		"java.util.Map",
-		"org.lwjgl.LWJGLUtil.TokenFilter",
+		"org.lwjgl.system.APIUtil",
+		"static org.lwjgl.system.APIUtil.*",
 		"static org.lwjgl.glfw.GLFW.*"
 	)
 	additionalCode = """
@@ -98,12 +99,12 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	}
 
 	/**
-	 * Returns a {@link GLFWErrorCallback} instance that prints the error to the {@link LWJGLUtil#DEBUG_STREAM}.
+	 * Returns a {@link GLFWErrorCallback} instance that prints the error to the {@link APIUtil#DEBUG_STREAM}.
 	 *
 	 * @return the GLFWerrorCallback
 	 */
 	public static GLFWErrorCallback createPrint() {
-		return createPrint(LWJGLUtil.DEBUG_STREAM);
+		return createPrint(DEBUG_STREAM);
 	}
 
 	/**
@@ -115,7 +116,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 */
 	public static GLFWErrorCallback createPrint(final PrintStream stream) {
 		return new GLFWErrorCallback() {
-			private final Map<Integer, String> ERROR_CODES = LWJGLUtil.getClassTokens(new TokenFilter() {
+			private final Map<Integer, String> ERROR_CODES = apiClassTokens(new TokenFilter() {
 				@Override
 				public boolean accept(Field field, int value) {
 					return 0x10000 < value && value < 0x20000;

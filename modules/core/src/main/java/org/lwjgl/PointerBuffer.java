@@ -5,6 +5,7 @@
 package org.lwjgl;
 
 import org.lwjgl.system.MemoryUtil;
+import org.lwjgl.system.Pointer;
 
 import java.nio.*;
 

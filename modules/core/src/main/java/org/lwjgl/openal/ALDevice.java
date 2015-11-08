@@ -4,7 +4,7 @@
  */
 package org.lwjgl.openal;
 
-import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.Checks;
 import org.lwjgl.system.PointerWrapper;
 
 import java.nio.ByteBuffer;
@@ -70,7 +70,7 @@ public class ALDevice extends PointerWrapper {
 	 */
 	public static ALDevice create(String deviceName) {
 		long alcOpenDevice = ALC.getFunctionProvider().getFunctionAddress("alcOpenDevice");
-		if ( LWJGLUtil.CHECKS )
+		if ( Checks.CHECKS )
 			checkFunctionAddress(alcOpenDevice);
 
 		ByteBuffer nameBuffer = deviceName == null ? null : memEncodeUTF8(deviceName, BufferAllocator.MALLOC);

@@ -107,7 +107,7 @@ val String.asJNIName: String
 	else
 		this.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
 
-enum class Access(internal val modifier: String) {
+enum class Access(val modifier: String) {
 	PUBLIC("public "),
 	INTERNAL(""),
 	PRIVATE("private ")

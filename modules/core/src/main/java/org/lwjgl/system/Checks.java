@@ -11,8 +11,8 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import static org.lwjgl.Pointer.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.Pointer.*;
 
 /**
  * A class to check buffer boundaries in general. If there is insufficient space in the buffer when the call is made then a buffer overflow would otherwise
@@ -21,6 +21,29 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Internal class, don't use.</p>
  */
 public final class Checks {
+
+	/**
+	 * Runtime checks flag.
+	 *
+	 * <p>When enabled, LWJGL will perform basic checks during its operation, mainly to avoid crashes in native code. Examples of such checks are:
+	 * context-specific function address validation, buffer capacity checks, null-termination checks, etc. These checks are generally low-overhead and should
+	 * not have a measurable effect on performance, so its recommended to have them enabled both during development and in production releases.</p>
+	 *
+	 * <p>If maximum performance is required, they can be disabled by setting {@link Configuration#DISABLE_CHECKS} to true.</p>
+	 */
+	public static final boolean CHECKS = !Configuration.DISABLE_CHECKS.<Boolean>get();
+
+	/**
+	 * Debug mode flag.
+	 *
+	 * <p>When enabled, LWJGL will perform additional checks during its operation. These checks are less trivial than the ones enabled with
+	 * {@link #CHECKS} and will have a noticeable effect on performance, so they are disabled by default. Examples of such checks are: a GetError call after
+	 * SwapBuffers, buffer object binding state check (GL), buffer capacity checks for texture images (GL & CL), etc. LWJGL will also print additional
+	 * information in stdout, mainly during start-up.</p>
+	 *
+	 * <p>Can be enabled by setting {@link Configuration#DEBUG} to true.</p>
+	 */
+	public static final boolean DEBUG = Configuration.DEBUG.<Boolean>get();
 
 	private Checks() {
 	}

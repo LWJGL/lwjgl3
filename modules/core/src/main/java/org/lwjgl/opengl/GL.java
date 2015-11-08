@@ -4,11 +4,7 @@
  */
 package org.lwjgl.opengl;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.Configuration;
-import org.lwjgl.system.DynamicLinkLibrary;
-import org.lwjgl.system.FunctionProvider;
+import org.lwjgl.system.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -70,7 +66,7 @@ public final class GL {
 	/** Loads the OpenGL native library, using the default library name. */
 	public static void create() {
 		String libName;
-		switch ( LWJGLUtil.getPlatform() ) {
+		switch ( Platform.get() ) {
 			case WINDOWS:
 				libName = "opengl32";
 				break;
@@ -93,7 +89,7 @@ public final class GL {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		final DynamicLinkLibrary OPENGL = LWJGLUtil.loadLibraryNative(libName);
+		final DynamicLinkLibrary OPENGL = Library.loadNative(libName);
 
 		abstract class FunctionProviderGL extends FunctionProvider.Default {
 			abstract long getExtensionAddress(long name);
@@ -121,7 +117,7 @@ public final class GL {
 
 		FunctionProvider functionProvider;
 		try {
-			switch ( LWJGLUtil.getPlatform() ) {
+			switch ( Platform.get() ) {
 				case WINDOWS:
 					functionProvider = new FunctionProviderGL() {
 						private final long wglGetProcAddress = OPENGL.getFunctionAddress("wglGetProcAddress");
@@ -344,7 +340,7 @@ public final class GL {
 				}
 			}
 
-			switch ( LWJGLUtil.getPlatform() ) {
+			switch ( Platform.get() ) {
 				case WINDOWS:
 					supportedExtensions.add("WGL");
 					addWGLExtensions(supportedExtensions);

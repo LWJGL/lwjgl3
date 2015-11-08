@@ -60,7 +60,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"WIN64" enum 1,
 
 		"UNIX64" enum 2,
-		"STDCALL" expr "LWJGLUtil.getPlatform() == LWJGLUtil.Platform.WINDOWS ? 0x2 : 0x5",
+		"STDCALL" expr "Platform.get() == Platform.WINDOWS ? 0x2 : 0x5",
 
 		"THISCALL".enum,
 		"FASTCALL".enum,

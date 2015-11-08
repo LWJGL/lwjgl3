@@ -4,12 +4,8 @@
  */
 package org.lwjgl.opengles;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.egl.EGL;
-import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.Configuration;
-import org.lwjgl.system.DynamicLinkLibrary;
-import org.lwjgl.system.FunctionProvider;
+import org.lwjgl.system.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -70,7 +66,7 @@ public final class GLES {
 	/** Loads the OpenGL ES native library, using the default library name. */
 	public static void create() {
 		String libName;
-		switch ( LWJGLUtil.getPlatform() ) {
+		switch ( Platform.get() ) {
 			case LINUX:
 				libName = "libGLESv2.so.2";
 				break;
@@ -92,7 +88,7 @@ public final class GLES {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		final DynamicLinkLibrary GLES = LWJGLUtil.loadLibraryNative(libName);
+		final DynamicLinkLibrary GLES = Library.loadNative(libName);
 
 		try {
 			FunctionProvider functionProvider = new FunctionProvider.Default() {

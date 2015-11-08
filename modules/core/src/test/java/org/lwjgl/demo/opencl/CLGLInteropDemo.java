@@ -4,8 +4,6 @@
  */
 package org.lwjgl.demo.opencl;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opencl.CL;
 import org.lwjgl.opencl.CLCapabilities;
@@ -13,6 +11,7 @@ import org.lwjgl.opencl.CLDevice;
 import org.lwjgl.opencl.CLPlatform;
 import org.lwjgl.opencl.CLPlatform.Filter;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.system.Platform;
 
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
@@ -93,7 +92,7 @@ public final class CLGLInteropDemo {
 
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		if ( LWJGLUtil.getPlatform() == Platform.MACOSX ) {
+		if ( Platform.get() == Platform.MACOSX ) {
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		} else

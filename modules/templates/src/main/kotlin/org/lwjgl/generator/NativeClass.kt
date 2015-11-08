@@ -147,7 +147,7 @@ fun simpleBinding(
 	private static final ${nativeClass.className} instance;
 
 	static {
-		$libraryReference = LWJGLUtil.loadLibraryNative($libraryExpression);
+		$libraryReference = Library.loadNative($libraryExpression);
 		instance = new ${nativeClass.className}($libraryReference);
 	}
 
@@ -239,27 +239,27 @@ class NativeClass(
 			if ( hasNIO )
 				println("import java.nio.*;\n")
 
+			if ( hasNIO && functions.any {
+				val func = it
+				func.hasParam {
+					it.nativeType is PointerType &&
+					(
+						it has Return ||
+						it has SingleValue ||
+						(it.isAutoSizeResultOut && func.hideAutoSizeResultParam) ||
+						it has PointerArray ||
+						it.nativeType is CharSequenceType
+					)
+				}
+			} )
+				println("import static org.lwjgl.system.APIUtil.*;")
 			println("import static org.lwjgl.system.Checks.*;")
 			if ( binding != null )
 				println("import static org.lwjgl.system.JNI.*;")
 			if ( hasNIO ) {
-				if ( functions.any { it.hasParam { it.nativeType.mapping === PointerMapping.DATA_POINTER } } )
-					println("import static org.lwjgl.Pointer.*;")
 				println("import static org.lwjgl.system.MemoryUtil.*;")
-				if ( functions.any {
-					val func = it
-					func.hasParam {
-						it.nativeType is PointerType &&
-						(
-							it has Return ||
-							it has SingleValue ||
-							(it.isAutoSizeResultOut && func.hideAutoSizeResultParam) ||
-							it has PointerArray ||
-							it.nativeType is CharSequenceType
-						)
-					}
-				} )
-					println("import static org.lwjgl.system.APIUtil.*;")
+				if ( functions.any { it.hasParam { it.nativeType.mapping === PointerMapping.DATA_POINTER } } )
+					println("import static org.lwjgl.system.Pointer.*;")
 			}
 			println()
 		}
@@ -278,12 +278,12 @@ class NativeClass(
 		if ( hasFunctions ) {
 			if ( binding != null ) {
 				if ( functions.any { it.hasCustomJNI } )
-					println("\n\tstatic { LWJGLUtil.initialize(); }")
+					println("\n\tstatic { Library.initialize(); }")
 
 				generateFunctionAddresses(binding)
 				binding.generateFunctionGetters(this, this@NativeClass)
 			} else {
-				println("\n\tstatic { LWJGLUtil.initialize(); }")
+				println("\n\tstatic { Library.initialize(); }")
 
 				// This allows binding classes to be "statically" extended. Not a good practice, but usable with static imports.
 				println("""

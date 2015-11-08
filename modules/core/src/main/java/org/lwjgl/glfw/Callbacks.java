@@ -4,8 +4,8 @@
  */
 package org.lwjgl.glfw;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
+import org.lwjgl.system.Checks;
 import org.lwjgl.system.libffi.Closure;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -29,7 +29,7 @@ public final class Callbacks {
 	 * @param window the GLFW window
 	 */
 	public static void glfwReleaseCallbacks(long window) {
-		if ( LWJGLUtil.CHECKS )
+		if ( Checks.CHECKS )
 			checkPointer(window);
 
 		GLFW glfw = GLFW.getInstance();
@@ -65,7 +65,7 @@ public final class Callbacks {
 	 * @param framebuffersizefun the framebuffer size callback, may be null
 	 */
 	public static void glfwInvoke(long window, GLFWWindowSizeCallback windowsizefun, GLFWFramebufferSizeCallback framebuffersizefun) {
-		if ( LWJGLUtil.CHECKS )
+		if ( Checks.CHECKS )
 			checkPointer(window);
 
 		APIBuffer buffer = apiBuffer();

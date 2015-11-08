@@ -5,7 +5,6 @@
 package org.lwjgl.demo.opencl;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opencl.*;
@@ -13,6 +12,7 @@ import org.lwjgl.opencl.CLPlatform.Filter;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLUtil;
+import org.lwjgl.system.Platform;
 import org.lwjgl.system.libffi.Closure;
 
 import java.io.IOException;
@@ -198,7 +198,7 @@ public class Mandelbrot {
 
 			// Create the context
 			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(7);
-			switch ( LWJGLUtil.getPlatform() ) {
+			switch ( Platform.get() ) {
 				case WINDOWS:
 					ctxProps
 						.put(CL_GL_CONTEXT_KHR)

@@ -4,8 +4,8 @@
  */
 package org.lwjgl.opencl;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
+import org.lwjgl.system.Checks;
 import org.lwjgl.system.PointerWrapper;
 
 import java.util.*;
@@ -54,7 +54,7 @@ public class CLPlatform extends PointerWrapper {
 			APIBuffer __buffer = apiBuffer();
 
 			int errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, __buffer.address());
-			if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
+			if ( Checks.DEBUG && errcode != CL_SUCCESS )
 				throw new OpenCLException("Failed to query number of OpenCL platform devices.");
 
 			int num_devices = __buffer.intValue(0);
@@ -64,7 +64,7 @@ public class CLPlatform extends PointerWrapper {
 			__buffer.bufferParam(num_devices << POINTER_SHIFT);
 
 			errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, num_devices, __buffer.address(), NULL);
-			if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
+			if ( Checks.DEBUG && errcode != CL_SUCCESS )
 				throw new OpenCLException("Failed to query OpenCL platform devices.");
 
 			long[] devices = new long[num_devices];
