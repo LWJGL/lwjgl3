@@ -4,14 +4,14 @@
  */
 package org.lwjgl.system.linux;
 
-import org.lwjgl.system.DynamicLinkLibrary;
+import org.lwjgl.system.SharedLibrary;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.linux.DynamicLinkLoader.*;
 
-/** Implements a {@link DynamicLinkLibrary} on the Linux OS. */
-public class LinuxLibrary extends DynamicLinkLibrary.Default {
+/** Implements a {@link SharedLibrary} on the Linux OS. */
+public class LinuxLibrary extends SharedLibrary.Default {
 
 	private final long handle;
 

@@ -4,7 +4,7 @@
  */
 package org.lwjgl.glfw;
 
-import org.lwjgl.system.DynamicLinkLibrary;
+import org.lwjgl.system.SharedLibrary;
 import org.lwjgl.system.Library;
 import org.lwjgl.system.Platform;
 import org.lwjgl.system.macosx.ObjCRuntime;
@@ -31,7 +31,7 @@ final class EventLoop {
 		static {
 			if ( Platform.get() == Platform.MACOSX && !isMainThread() ) {
 				// The only way to avoid a crash is if the shared application (NSApp) has been created by something else
-				DynamicLinkLibrary AppKit = Library.loadNative("/System/Library/Frameworks/AppKit.framework");
+				SharedLibrary AppKit = Library.loadNative("/System/Library/Frameworks/AppKit.framework");
 				try {
 					long NSApp = AppKit.getFunctionAddress("NSApp"); // The NSApp global variable is an exported symbol
 					if ( memGetAddress(NSApp) == NULL )

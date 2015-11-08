@@ -126,7 +126,7 @@ abstract class APIBinding(
 /** An APIBinding without an associated capabilities class.  */
 abstract class SimpleBinding(
 	callingConvention: CallingConvention
-): APIBinding("n/a", "n/a", callingConvention) {
+) : APIBinding("n/a", "n/a", callingConvention) {
 	override fun getFunctionAddressCall(function: NativeClassFunction) = "checkFunctionAddress(${super.getFunctionAddressCall(function)})"
 	override fun PrintWriter.generateContent() = Unit
 }
@@ -142,7 +142,7 @@ fun simpleBinding(
 
 		println("""	// --- [ Function Addresses ] ---
 
-	private static final DynamicLinkLibrary $libraryReference;
+	private static final SharedLibrary $libraryReference;
 
 	private static final ${nativeClass.className} instance;
 
@@ -151,8 +151,8 @@ fun simpleBinding(
 		instance = new ${nativeClass.className}($libraryReference);
 	}
 
-	/** Returns the {@link DynamicLinkLibrary} that provides pointers for the functions in this class. */
-	public static DynamicLinkLibrary getLibrary() {
+	/** Returns the {@link SharedLibrary} that provides pointers for the functions in this class. */
+	public static SharedLibrary getLibrary() {
 		return $libraryReference;
 	}
 
@@ -173,8 +173,8 @@ fun APIBinding.delegate(
 
 	private static final ${nativeClass.className} instance = new ${nativeClass.className}(getLibrary());
 
-	/** Returns the {@link DynamicLinkLibrary} that provides pointers for the functions in this class. */
-	public static DynamicLinkLibrary getLibrary() {
+	/** Returns the {@link SharedLibrary} that provides pointers for the functions in this class. */
+	public static SharedLibrary getLibrary() {
 		return $libraryExpression;
 	}
 

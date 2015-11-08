@@ -70,7 +70,7 @@ public final class APIUtil {
 		return API_BUFFERS.get().push();
 	}
 
-	public static DynamicLinkLibrary apiCreateLibrary(String name) {
+	public static SharedLibrary apiCreateLibrary(String name) {
 		switch ( Platform.get() ) {
 			case WINDOWS:
 				return new WindowsLibrary(name);

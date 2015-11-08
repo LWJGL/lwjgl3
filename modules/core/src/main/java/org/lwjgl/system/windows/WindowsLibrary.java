@@ -4,16 +4,16 @@
  */
 package org.lwjgl.system.windows;
 
-import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.Library;
+import org.lwjgl.system.SharedLibrary;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WindowsUtil.*;
 
-/** Implements a {@link DynamicLinkLibrary} on the Windows OS. */
-public class WindowsLibrary extends DynamicLinkLibrary.Default {
+/** Implements a {@link SharedLibrary} on the Windows OS. */
+public class WindowsLibrary extends SharedLibrary.Default {
 
 	/** The LWJGL dll handle. */
 	public static final long HINSTANCE = GetModuleHandle(Library.JNI_LIBRARY_NAME);

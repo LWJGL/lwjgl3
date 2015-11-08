@@ -33,10 +33,10 @@ public final class CL {
 	}
 
 	public static void create(String libName) {
-		final DynamicLinkLibrary OPENCL;
+		final SharedLibrary OPENCL;
 
 		{
-			DynamicLinkLibrary dll;
+			SharedLibrary dll;
 			try {
 				dll = Library.loadNative(libName);
 			} catch (Throwable t) {

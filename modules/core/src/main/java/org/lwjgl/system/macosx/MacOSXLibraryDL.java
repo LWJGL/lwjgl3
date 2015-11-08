@@ -4,11 +4,13 @@
  */
 package org.lwjgl.system.macosx;
 
+import org.lwjgl.system.SharedLibrary;
+
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.DynamicLinkLoader.*;
 
-/** Implements a {@link org.lwjgl.system.DynamicLinkLibrary} on the MacOS X using dlopen. */
+/** Implements a {@link SharedLibrary} on the MacOS X using dlopen. */
 public class MacOSXLibraryDL extends MacOSXLibrary {
 
 	private final long handle;

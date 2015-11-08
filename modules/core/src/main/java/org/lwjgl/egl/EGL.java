@@ -75,7 +75,7 @@ public final class EGL {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		final DynamicLinkLibrary EGL = Library.loadNative(libName);
+		final SharedLibrary EGL = Library.loadNative(libName);
 
 		try {
 			FunctionProvider functionProvider = new FunctionProvider.Default() {

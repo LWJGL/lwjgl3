@@ -88,7 +88,7 @@ public final class GLES {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		final DynamicLinkLibrary GLES = Library.loadNative(libName);
+		final SharedLibrary GLES = Library.loadNative(libName);
 
 		try {
 			FunctionProvider functionProvider = new FunctionProvider.Default() {

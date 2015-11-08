@@ -4,7 +4,7 @@
  */
 package org.lwjgl.system.windows;
 
-import org.lwjgl.system.DynamicLinkLibrary;
+import org.lwjgl.system.SharedLibrary;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -13,13 +13,13 @@ import static org.testng.Assert.*;
 public class LibraryTest {
 
 	public void testLifecycle() {
-		DynamicLinkLibrary lib = new WindowsLibrary("opengl32.dll");
+		SharedLibrary lib = new WindowsLibrary("opengl32.dll");
 		assertEquals(lib.getName(), "opengl32.dll");
 		lib.release();
 	}
 
 	public void testGetProcAddress() {
-		DynamicLinkLibrary lib = new WindowsLibrary("opengl32.dll");
+		SharedLibrary lib = new WindowsLibrary("opengl32.dll");
 		assertTrue(lib.getFunctionAddress("wglGetProcAddress") != 0L);
 		lib.release();
 	}

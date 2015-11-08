@@ -89,7 +89,7 @@ public final class GL {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		final DynamicLinkLibrary OPENGL = Library.loadNative(libName);
+		final SharedLibrary OPENGL = Library.loadNative(libName);
 
 		abstract class FunctionProviderGL extends FunctionProvider.Default {
 			abstract long getExtensionAddress(long name);

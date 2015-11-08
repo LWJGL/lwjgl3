@@ -4,10 +4,10 @@
  */
 package org.lwjgl.system.macosx;
 
-import org.lwjgl.system.DynamicLinkLibrary;
+import org.lwjgl.system.SharedLibrary;
 
-/** Implements a {@link org.lwjgl.system.DynamicLinkLibrary} on the MacOS X. */
-public abstract class MacOSXLibrary extends DynamicLinkLibrary.Default {
+/** Implements a {@link SharedLibrary} on the MacOS X. */
+public abstract class MacOSXLibrary extends SharedLibrary.Default {
 
 	protected MacOSXLibrary(String name) {
 		super(name);

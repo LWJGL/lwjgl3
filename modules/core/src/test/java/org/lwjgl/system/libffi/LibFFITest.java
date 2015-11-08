@@ -6,7 +6,7 @@ package org.lwjgl.system.libffi;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.DynamicLinkLibrary;
+import org.lwjgl.system.SharedLibrary;
 import org.lwjgl.system.Library;
 import org.lwjgl.system.Platform;
 import org.lwjgl.system.Pointer;
@@ -27,7 +27,7 @@ public class LibFFITest {
 		// -- Test MemoryUtil.nMemPutInt using libffi
 
 		// Get the function address. Ignore this particular implementation, normally you'd create
-		// a DynamicLinkLibrary instance here and call getFunctionAddress("<function name>").
+		// a SharedLibrary instance here and call getFunctionAddress("<function name>").
 		long memPutInt = getMemPutIntAddress();
 
 		// Prepare the call interface
@@ -89,7 +89,7 @@ public class LibFFITest {
 	}
 
 	private static long getMemPutIntAddress() {
-		DynamicLinkLibrary lib = Library.loadNative(Library.JNI_LIBRARY_NAME);
+		SharedLibrary lib = Library.loadNative(Library.JNI_LIBRARY_NAME);
 
 		long putInt = lib.getFunctionAddress(
 			Platform.get() == Platform.WINDOWS && Pointer.BITS32

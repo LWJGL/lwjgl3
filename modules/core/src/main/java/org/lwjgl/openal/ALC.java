@@ -46,7 +46,7 @@ public final class ALC {
 	}
 
 	public static void create(String libName) {
-		final DynamicLinkLibrary OPENAL = Library.loadNative(libName);
+		final SharedLibrary OPENAL = Library.loadNative(libName);
 
 		try {
 			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
