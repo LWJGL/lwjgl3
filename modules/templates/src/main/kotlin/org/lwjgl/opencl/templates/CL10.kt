@@ -700,7 +700,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"devices",
 			"a list of unique devices returned by #GetDeviceIDs() or sub-devices created by CL12#CreateSubDevices() for a platform"
 		),
-		nullable..cl_create_context_callback.IN(
+		nullable..cl_context_callback.IN(
 			"pfn_notify",
 			"""
 			a callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report
@@ -749,7 +749,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"""
 		),
 		cl_device_type.IN("device_type", "a bit-field that identifies the type of device", DeviceTypes),
-		nullable..cl_create_context_callback.IN("pfn_notify", "a callback function that can be registered by the application"),
+		nullable..cl_context_callback.IN("pfn_notify", "a callback function that can be registered by the application"),
 		nullable..voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 		ERROR_RET
 	)

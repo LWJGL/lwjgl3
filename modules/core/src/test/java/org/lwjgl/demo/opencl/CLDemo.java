@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL11.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.opencl.KHRICD.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.Pointer.*;
 
 public final class CLDemo {
 
@@ -88,10 +88,10 @@ public final class CLDemo {
 				if ( caps.OpenCL11 )
 					printDeviceInfo(device, "CL_DEVICE_OPENCL_C_VERSION", CL_DEVICE_OPENCL_C_VERSION);
 
-				long context = clCreateContext(ctxProps, device.address(), new CLCreateContextCallback() {
+				long context = clCreateContext(ctxProps, device.address(), new CLContextCallback() {
 					@Override
 					public void invoke(long errinfo, long private_info, long cb, long user_data) {
-						System.err.println("[LWJGL] cl_create_context_callback");
+						System.err.println("[LWJGL] cl_context_callback");
 						System.err.println("\tInfo: " + memDecodeUTF8(errinfo));
 					}
 				}, NULL, errcode_ret);

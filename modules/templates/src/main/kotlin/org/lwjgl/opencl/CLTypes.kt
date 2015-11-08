@@ -192,8 +192,8 @@ fun config() {
 }
 
 // callback functions
-val cl_create_context_callback = "cl_create_context_callback".callback(
-	OPENCL_PACKAGE, void, "CLCreateContextCallback",
+val cl_context_callback = "cl_context_callback".callback(
+	OPENCL_PACKAGE, void, "CLContextCallback",
 	"Will be called when a debug message is generated.",
 	NullTerminated..const..cl_charUTF8_p.IN("errinfo", "a pointer to the message string representation"),
 	const..void_p.IN(
@@ -206,20 +206,20 @@ val cl_create_context_callback = "cl_create_context_callback".callback(
 	documentation = "Instances of this interface may be passed to the CL10##clCreateContext() and CL10##clCreateContextFromType() methods."
 	useSystemCallConvention()
 	additionalCode = """
-	/** A functional interface for {@link CLCreateContextCallback}. */
+	/** A functional interface for {@link CLContextCallback}. */
 	public interface SAMString {
 		void invoke(String errinfo, ByteBuffer private_info, long user_data);
 	}
 
 	/**
-	 * Creates a {@link CLCreateContextCallback} that delegates the callback to the specified functional interface.
+	 * Creates a {@link CLContextCallback} that delegates the callback to the specified functional interface.
 	 *
 	 * @param sam the delegation target
 	 *
-	 * @return the {@link CLCreateContextCallback} instance
+	 * @return the {@link CLContextCallback} instance
 	 */
-	public static CLCreateContextCallback createString(final SAMString sam) {
-		return new CLCreateContextCallback() {
+	public static CLContextCallback createString(final SAMString sam) {
+		return new CLContextCallback() {
 			@Override
 			public void invoke(long errinfo, long private_info, long cb, long user_data) {
 				sam.invoke(memDecodeUTF8(errinfo), memByteBuffer(private_info, (int)cb), user_data);
