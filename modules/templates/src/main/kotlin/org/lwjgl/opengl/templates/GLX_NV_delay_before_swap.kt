@@ -28,7 +28,7 @@ val GLX_NV_delay_before_swap = "GLXNVDelayBeforeSwap".nativeClassGLX("GLX_NV_del
 		"DelayBeforeSwapNV",
 		"""
 		Blocks the CPU until {@code seconds} seconds before a synchronized swap would occur on a particular GLX window drawable. It also returns a boolean value
-		equal to Xlib##True when the implementation had to wait for the synchronized swap and Xlib##False otherwise.
+		equal to {@code True} when the implementation had to wait for the synchronized swap and {@code False} otherwise.
 
 		The parameter {@code seconds} accepts positive floating point values not larger than the length in seconds of the swap period on the associated
 		drawable. When buffer swaps are synchronized, the swap period is composed of one or multiple video frame periods. A video frame period is the time

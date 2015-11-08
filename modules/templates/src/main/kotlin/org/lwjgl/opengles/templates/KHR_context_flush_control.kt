@@ -34,7 +34,7 @@ val KHR_context_flush_control = "KHRContextFlushControl".nativeClassGLES("KHR_co
 	)
 
 	IntConstant(
-		"Returned in {@code data} by GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v when {@code pname} is #CONTEXT_RELEASE_BEHAVIOR.",
+		"Returned in {@code data} by GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v when {@code pname} is #CONTEXT_RELEASE_BEHAVIOR_KHR.",
 
 		"CONTEXT_RELEASE_BEHAVIOR_FLUSH_KHR"..0x82FC
 	)

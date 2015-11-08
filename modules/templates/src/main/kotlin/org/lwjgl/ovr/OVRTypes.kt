@@ -258,7 +258,7 @@ val ovrSensorData = struct(OVR_PACKAGE, "OVRSensorData", structName = "ovrSensor
 }.nativeType
 
 val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", structName = "ovrTrackingState", mutable = false) {
-	documentation = "Tracking state at a given absolute time (describes predicted HMD pose etc). Returned by OVR#ovrHmd_GetTrackingState()."
+	documentation = "Tracking state at a given absolute time (describes predicted HMD pose etc). Returned by OVR#ovr_GetTrackingState()."
 	includeOVRCAPI()
 
 	/// Predicted head pose (and derivatives) at the requested absolute time.
@@ -288,12 +288,12 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", structName = "ovr
 val ovrTrackingState_p = ovrTrackingState.p
 
 val ovrFrameTiming = struct(OVR_PACKAGE, "OVRFrameTiming", structName = "ovrFrameTiming", mutable = false) {
-	documentation = "Frame timing data reported by OVR#ovrHmd_GetFrameTiming()."
+	documentation = "Frame timing data reported by OVR#ovr_GetFrameTiming()."
 	includeOVRCAPI()
 
 	/// A point in time when the middle of the screen will be displayed. For global shutter,
 	/// this will be the display time. For rolling shutter this is a point at which half the image has
-	/// been displayed. This value can be passed as an absolute time to ovrHmd_GetTrackingState
+	/// been displayed. This value can be passed as an absolute time to ovr_GetTrackingState
 	/// to get the best predicted pose for rendering the scene.
 	double.member("DisplayMidpointSeconds")
 
@@ -312,7 +312,7 @@ val ovrFrameTiming = struct(OVR_PACKAGE, "OVRFrameTiming", structName = "ovrFram
 val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", structName = "ovrEyeRenderDesc", mutable = false) {
 	documentation =
 		"""
-		Rendering information for each eye. Computed by either OVR#ovrHmd_GetRenderDesc() based on the specified FOV. Note that the rendering viewport is not
+		Rendering information for each eye. Computed by either OVR#ovr_GetRenderDesc() based on the specified FOV. Note that the rendering viewport is not
 		included here as it can be specified separately and modified per frame by passing different viewport values in the layer structure.
 		"""
 	includeOVRCAPI()
@@ -379,25 +379,25 @@ val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", structName = "o
 		"""
 		Describes a set of textures that act as a rendered flip chain.
 
-		An ovrSwapTextureSet per layer is passed to OVR#ovrHmd_SubmitFrame() via one of the ovrLayer types. The {@code TextureCount} refers to the flip chain
+		An ovrSwapTextureSet per layer is passed to OVR#ovr_SubmitFrame() via one of the ovrLayer types. The {@code TextureCount} refers to the flip chain
 		count and not an eye count. See the layer structs and functions for information about how to use ovrSwapTextureSet.
 
-		ovrSwapTextureSets must be created by either the ovrHmd_CreateSwapTextureSetD3D11 or OVRGL#ovrHmd_CreateSwapTextureSetGL() factory function, and must
-		be destroyed by OVR#ovrHmd_DestroySwapTextureSet().
+		ovrSwapTextureSets must be created by either the ovr_CreateSwapTextureSetD3D11 or OVRGL#ovr_CreateSwapTextureSetGL() factory function, and must
+		be destroyed by OVR#ovr_DestroySwapTextureSet().
 		"""
 	includeOVRCAPI()
 
 	ovrTexture_p.member("Textures") ///< Points to an array of ovrTextures.
 	int.member("TextureCount") ///< The number of textures referenced by the Textures array.
 
-	/// CurrentIndex specifies which of the Textures will be used by the ovrHmd_SubmitFrame call.
+	/// CurrentIndex specifies which of the Textures will be used by the ovr_SubmitFrame call.
 	/// This is manually incremented by the application, typically in a round-robin manner.
 	///
 	/// Before selecting a Texture as a rendertarget, the application should increment CurrentIndex by
 	/// 1 and wrap it back to 0 if CurrentIndex == TextureCount, so that it gets a fresh rendertarget,
 	/// one that is not currently being used for display. It can then render to Textures[CurrentIndex].
 	///
-	/// After rendering, the application calls ovrHmd_SubmitFrame using that same CurrentIndex value
+	/// After rendering, the application calls ovr_SubmitFrame using that same CurrentIndex value
 	/// to display the new rendertarget.
 	///
 	/// The application can submit multiple frames with the same ovrSwapTextureSet and CurrentIndex
@@ -409,8 +409,8 @@ val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", structName = "o
 	/// ovrSwapTextureSet will share the same value of CurrentIndex, so they cannot use different
 	/// textures within the ovrSwapTextureSet.
 	///
-	/// Once a particular Textures[CurrentIndex] has been sent to ovrHmd_SubmitFrame, that texture
-	/// should not be rendered to until a subsequent ovrHmd_SubmitFrame is made (either with a
+	/// Once a particular Textures[CurrentIndex] has been sent to ovr_SubmitFrame, that texture
+	/// should not be rendered to until a subsequent ovr_SubmitFrame is made (either with a
 	/// different CurrentIndex value, or with a different ovrSwapTextureSet, or disabling the layer).
 	int.member("CurrentIndex")
 }.nativeType
@@ -461,7 +461,7 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", structName = "ovrLaye
 	documentation =
 		"""
 		Describes a layer that specifies a monoscopic or stereoscopic view. This is the kind of layer that's typically used as layer 0 to
-		OVR#ovrHmd_SubmitFrame(), as it is the kind of layer used to render a 3D stereoscopic view.
+		OVR#ovr_SubmitFrame(), as it is the kind of layer used to render a 3D stereoscopic view.
 		"""
 	includeOVRCAPI()
 

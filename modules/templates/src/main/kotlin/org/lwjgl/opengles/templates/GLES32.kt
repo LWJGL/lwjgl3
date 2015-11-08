@@ -50,7 +50,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		When using advanced blending equations, applications should split their rendering into a collection of blending passes, none of which touch an
 		individual sample in the framebuffer more than once. The results of blending are undefined if the sample being blended has been touched previously in
 		the same pass. Any command that causes the value of a sample to be modified using the framebuffer is considered to touch the sample, including clears,
-		blended or unblended primitives, and GLES20#BlitFramebuffer() copies.
+		blended or unblended primitives, and GLES30#BlitFramebuffer() copies.
 		"""
 	)
 

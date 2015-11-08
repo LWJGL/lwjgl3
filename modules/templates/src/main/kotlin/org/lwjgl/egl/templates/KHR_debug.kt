@@ -51,7 +51,7 @@ val KHR_debug = "KHRDebug".nativeClassEGL("KHR_debug", postfix = KHR) {
 
 	IntConstant(
 		"""
-		Tokens provided by the {@code messageType} parameter of EGLDEBUGPROCKHR or the attributes input to #ControlDebugMessageKHR() or attribute of
+		Tokens provided by the {@code messageType} parameter of EGLDEBUGPROCKHR or the attributes input to #DebugMessageControlKHR() or attribute of
 		#QueryDebugKHR().
 		""",
 

@@ -253,7 +253,7 @@ class Struct(
 	 *
 	 * @param src the source struct
 	 *
-	 * @returns this struct
+	 * @return this struct
 	 */
 	public $className set($className src) {
 		return nset($ADDRESS);

@@ -152,6 +152,8 @@ fun String.nativeClassGLES(
 	init = init
 )
 
+val NativeClass.capLink: String get() = "{@link $CAPABILITIES_CLASS\\#$capName $templateName}"
+
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
 val NativeClass.registryLink: String get() {
 	val matcher = REGISTRY_PATTERN.matcher(templateName)
@@ -160,9 +162,8 @@ val NativeClass.registryLink: String get() {
 	return url("https://www.khronos.org/registry/gles/extensions/${matcher.group(1)}/$templateName.txt", templateName)
 }
 
-fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
-fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =
-	url("https://www.khronos.org/registry/gles/extensions/$prefix/$name.txt", extensionName)
+fun NativeClass.registryLink(prefix: String, name: String): String =
+	url("https://www.khronos.org/registry/gles/extensions/$prefix/$name.txt", templateName)
 
-val NativeClass.core: String get() = "{@link ${this.className} GLES ${this.className[2]}.${this.className[3]}}"
+val NativeClass.core: String get() = "{@link ${this.className} GLES ${this.className[4]}.${this.className[5]}}"
 val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."

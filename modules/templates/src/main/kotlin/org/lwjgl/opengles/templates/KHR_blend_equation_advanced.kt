@@ -27,13 +27,13 @@ val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGLES("KH
 		)}
 		Some implementations may support KHR_blend_equation_advanced without supporting KHR_blend_equation_advanced_coherent.
 
-		In unextended OpenGL, the set of blending equations is limited, and can be expressed very simply. The ARBImaging#MIN and ARBImaging#MAX blend equations
-		simply compute component-wise minimums or maximums of source and destination color components. The ARBImaging#FUNC_ADD, ARBImaging#FUNC_SUBTRACT, and
-		ARBImaging#FUNC_REVERSE_SUBTRACT multiply the source and destination colors by source and destination factors and either add the two products together
+		In unextended OpenGL, the set of blending equations is limited, and can be expressed very simply. The GLES30#MIN and GLES30#MAX blend equations
+		simply compute component-wise minimums or maximums of source and destination color components. The GLES20#FUNC_ADD, GLES20#FUNC_SUBTRACT, and
+		GLES20#FUNC_REVERSE_SUBTRACT multiply the source and destination colors by source and destination factors and either add the two products together
 		or subtract one from the other. This limited set of operations supports many common blending operations but precludes the use of more sophisticated
 		transparency and blending operations commonly available in many dedicated imaging APIs.
 
-		This extension provides a number of new "advanced" blending equations. Unlike traditional blending operations using the ARBImaging#FUNC_ADD equation,
+		This extension provides a number of new "advanced" blending equations. Unlike traditional blending operations using the GLES20#FUNC_ADD equation,
 		these blending equations do not use source and destination factors specified by GLES20#BlendFunc(). Instead, each blend equation specifies a complete
 		equation based on the source and destination colors. These new blend equations are used for both RGB and alpha components; they may not be used to
 		perform separate RGB and alpha blending (via functions like GLES20#BlendEquationSeparate()).
@@ -81,7 +81,7 @@ val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGLES("KH
 		When using advanced blending equations, applications should split their rendering into a collection of blending passes, none of which touch an
 		individual sample in the framebuffer more than once. The results of blending are undefined if the sample being blended has been touched previously in
 		the same pass. Any command that causes the value of a sample to be modified using the framebuffer is considered to touch the sample, including clears,
-		blended or unblended primitives, and GLES20#BlitFramebuffer() copies.
+		blended or unblended primitives, and GLES30#BlitFramebuffer() copies.
 		"""
 	)
 }

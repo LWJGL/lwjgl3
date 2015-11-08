@@ -4,19 +4,17 @@
  */
 package org.lwjgl.ovr.templates
 
-import org.lwjgl.generator.IntConstant
-import org.lwjgl.generator.StringConstant
-import org.lwjgl.generator.nativeClass
-import org.lwjgl.ovr.OVR_PACKAGE
+import org.lwjgl.generator.*
+import org.lwjgl.ovr.*
 
-val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixConstant = "ovr") {
+val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", prefixConstant = "ovr") {
 	documentation = "LibOVR error code declarations."
 
 	IntConstant("This is a general success result.", "Success"..0)
 	IntConstant(
 		"""
-		Returned from a call to OVR#Hmd_SubmitFrame(). The call succeeded, but what the app rendered will not be visible on the HMD. Ideally the app should
-		continue calling OVR#Hmd_SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
+		Returned from a call to OVR#SubmitFrame(). The call succeeded, but what the app rendered will not be visible on the HMD. Ideally the app should
+		continue calling OVR#SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
 		""",
 		"Success_NotVisible"..1000
 	)
@@ -57,15 +55,15 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefix
 	IntConstant("A more than acceptable number of frames are coming back truncated.", "Error_ExcessiveFrameTruncation" expr "-4005")
 	IntConstant("A more than acceptable number of frames have been skipped.", "Error_ExcessiveFrameSkipping" expr "-4006")
 	IntConstant("The tracker is not receiving the sync signal (cable disconnected?)", "Error_SyncDisconnected" expr "-4007")
-    IntConstant("Failed to read memory from the tracker.", "Error_TrackerMemoryReadFailure" expr "-4008")
-    IntConstant("Failed to write memory from the tracker.", "Error_TrackerMemoryWriteFailure" expr "-4009")
-    IntConstant("Timed out waiting for a camera frame.", "Error_TrackerFrameTimeout" expr "-4010")
-    IntConstant("Truncated frame returned from tracker.", "Error_TrackerTruncatedFrame" expr "-4011")
+	IntConstant("Failed to read memory from the tracker.", "Error_TrackerMemoryReadFailure" expr "-4008")
+	IntConstant("Failed to write memory from the tracker.", "Error_TrackerMemoryWriteFailure" expr "-4009")
+	IntConstant("Timed out waiting for a camera frame.", "Error_TrackerFrameTimeout" expr "-4010")
+	IntConstant("Truncated frame returned from tracker.", "Error_TrackerTruncatedFrame" expr "-4011")
 	IntConstant("The HMD Firmware is out of date and is unacceptable.", "Error_HMDFirmwareMismatch" expr "-4100")
 	IntConstant("The Tracker Firmware is out of date and is unacceptable.", "Error_TrackerFirmwareMismatch" expr "-4101")
 	IntConstant("A bootloader HMD is detected by the service.", "Error_BootloaderDeviceDetected" expr "-4102")
-    IntConstant("The tracker calibration is missing or incorrect.", "Error_TrackerCalibrationError" expr "-4103")
-    IntConstant("The controller firmware is out of date and is unacceptable.", "Error_ControllerFirmwareMismatch" expr "-4104")
+	IntConstant("The tracker calibration is missing or incorrect.", "Error_TrackerCalibrationError" expr "-4103")
+	IntConstant("The controller firmware is out of date and is unacceptable.", "Error_ControllerFirmwareMismatch" expr "-4104")
 	// Synchronization Errors
 	IntConstant("Requested async work not yet complete.", "Error_Incomplete" expr "-5000")
 	IntConstant("Requested async work was abandoned and result is incomplete.", "Error_Abandoned" expr "-5001")

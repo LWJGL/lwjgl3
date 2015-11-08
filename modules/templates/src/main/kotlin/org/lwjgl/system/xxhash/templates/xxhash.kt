@@ -62,7 +62,7 @@ ENABLE_WARNINGS()""")
 	XXH32_state_t_p(
 		"32_createState",
 		"""
-		Creates memory for {@link XXH32State}. The state must then be initialized using #32_reset() before first use.
+		Creates memory for ##XXH32State. The state must then be initialized using #32_reset() before first use.
 
 		<b>LWJGL note</b>: This function simply delegates to the system {@code malloc()} function.
 		"""
@@ -71,7 +71,7 @@ ENABLE_WARNINGS()""")
 	XXH_errorcode(
 		"32_freeState",
 		"""
-		Frees the specified {@link XXH32State}.
+		Frees the specified ##XXH32State.
 
 		<b>LWJGL note</b>: This function simply delegates to the system {@code free()} function.
 		""",
@@ -93,9 +93,9 @@ ENABLE_WARNINGS()""")
 
 	XXH_errorcode(
 		"32_reset",
-		"Resets the specified {@link XXH32State}.",
+		"Resets the specified ##XXH32State.",
 
-		XXH32_state_t_p.IN("statePtr", "the {@link XXH32State} to reset"),
+		XXH32_state_t_p.IN("statePtr", "the ##XXH32State to reset"),
 		unsigned_int.IN("seed", "the seed that can be used to alter the hashing result predictably")
 	)
 
@@ -112,7 +112,7 @@ ENABLE_WARNINGS()""")
 		The function returns an error code, with 0 meaning OK, and any other value meaning there is an error.
 		""",
 
-		XXH32_state_t_p.IN("statePtr", "the {@link XXH32State} to use"),
+		XXH32_state_t_p.IN("statePtr", "the ##XXH32State to use"),
 		XXH32["input"],
 		XXH32["length"]
 	)
@@ -120,21 +120,21 @@ ENABLE_WARNINGS()""")
 	unsigned_int(
 		"32_digest",
 		"""
-		Returns the final 32-bits hash of the specified {@link #XXH32State}.
+		Returns the final 32-bits hash of the specified ##XXH32State.
 
 		You can nonetheless continue feeding the hash state with more input, and therefore get some new hashes, by calling again #32_digest().
 
 		When you are done, don't forget to free XXH state space, using #32_freeState().
 		""",
 
-		const..XXH32_state_t_p.IN("statePtr", "the {@link XXH32State} to use")
+		const..XXH32_state_t_p.IN("statePtr", "the ##XXH32State to use")
 	)
 
 	XXH_errorcode(
 		"64_reset",
 		"64-bit version of #32_reset().",
 
-		XXH64_state_t_p.IN("statePtr", "the {@link XXH64State} to reset"),
+		XXH64_state_t_p.IN("statePtr", "the ##XXH64State to reset"),
 		unsigned_long_long.IN("seed", "the seed that can be used to alter the hashing result predictably")
 	)
 
@@ -142,7 +142,7 @@ ENABLE_WARNINGS()""")
 		"64_update",
 		"64-bit version of #32_update().",
 
-		XXH64_state_t_p.IN("statePtr", "the {@link XXH64State} to use"),
+		XXH64_state_t_p.IN("statePtr", "the ##XXH64State to use"),
 		XXH32["input"],
 		XXH32["length"]
 	)
@@ -151,6 +151,6 @@ ENABLE_WARNINGS()""")
 		"64_digest",
 		"64-bit version of #32_digest().",
 
-		const..XXH64_state_t_p.IN("statePtr", "the {@link XXH64State} to use")
+		const..XXH64_state_t_p.IN("statePtr", "the ##XXH64State to use")
 	)
 }

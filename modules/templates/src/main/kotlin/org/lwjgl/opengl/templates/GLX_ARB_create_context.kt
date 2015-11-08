@@ -67,8 +67,8 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
 		Bool.IN(
 			"direct",
 			"""
-			direct rendering is requested if {@code direct} is Xlib##True, and indirect rendering if {@code direct} is Xlib##False. If
-			{@code direct} is Xlib##True, the implementation may nonetheless create an indirect rendering context if any of the following conditions hold:
+			direct rendering is requested if {@code direct} is {@code True}, and indirect rendering if {@code direct} is {@code False}. If
+			{@code direct} is {@code True}, the implementation may nonetheless create an indirect rendering context if any of the following conditions hold:
 			${ul(
 				"The implementation does not support direct rendering.",
 				"{@code display} is not a local X server.",

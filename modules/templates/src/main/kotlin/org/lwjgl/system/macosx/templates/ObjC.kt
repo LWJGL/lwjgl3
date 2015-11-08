@@ -268,7 +268,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 			Obtains the list of registered class definitions.
 
 			The Objective-C runtime library automatically registers all the classes defined in your source code. You can create class definitions at runtime and
-			register them with the #objc_addClass() function.
+			register them with the #objc_allocateClassPair() and #objc_registerClassPair() functions.
 
 			<h3>Special Considerations</h3>
 			You cannot assume that class objects you get from this function are classes that inherit from NSObject, so you cannot safely call any methods on such

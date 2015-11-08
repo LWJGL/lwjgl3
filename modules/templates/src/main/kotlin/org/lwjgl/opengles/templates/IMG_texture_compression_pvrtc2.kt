@@ -18,7 +18,7 @@ val IMG_texture_compression_pvrtc2 = "IMGTextureCompressionPVRTC2".nativeClassGL
 		This extension supports 4 and 2 bit per pixel texture compression formats. Because the compression of PVRTC2 is CPU intensive, it is not appropriate to
 		carry out compression on the target platform. Therefore this extension only supports the loading of compressed texture data.
 
-		Requires ${GLES20.core} and ${OES_texture_npot.link}.
+		Requires ${GLES20.core} and ${OES_texture_npot.capLink}.
 		"""
 
 	IntConstant(

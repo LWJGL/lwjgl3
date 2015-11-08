@@ -156,7 +156,7 @@ val EXT_post_depth_coverage = EXT_FLAG.nativeClassGLES("EXT_post_depth_coverage"
 		To use this feature, early fragment tests must also be enabled in the fragment shader via:
 		${codeBlock("""
 	layout(early_fragment_tests) in;""")}
-		Requires {@link \#GL_OES_sample_variables OES_sample_variables}.
+		Requires {@link #GL_OES_sample_variables OES_sample_variables}.
 		"""
 }
 
@@ -452,7 +452,7 @@ val NV_sample_mask_override_coverage = EXT_FLAG.nativeClassGLES("NV_sample_mask_
 		layout qualifier:
 		${codeBlock("""
 	layout(override_coverage) out int gl_SampleMask[];""")}
-		Requires {@link \#GL_OES_sample_variables OES_sample_variables}.
+		Requires {@link #GL_OES_sample_variables OES_sample_variables}.
 		"""
 }
 
@@ -527,7 +527,7 @@ val NV_viewport_array2 = EXT_FLAG.nativeClassGLES("NV_viewport_array2", postfix 
 		expected to be exported if GL_NV_viewport_array2 is supported. This extension includes the edits for those extensions, recast against the reorganized
 		OpenGL 4.3 specification.
 
-		Requires ${NV_viewport_array.link}, ${EXT_geometry_shader.link} and ${EXT_shader_io_blocks.link}.
+		Requires ${NV_viewport_array.link}, ${EXT_geometry_shader.link} and ${EXT_shader_io_blocks.cap}.
 		"""
 }
 
@@ -688,7 +688,7 @@ val OES_texture_float_linear = EXT_FLAG.nativeClassGLES("OES_texture_float_linea
 		example, checking the ``TF'' column of table 8.13 in the ES 3.1 Specification (``Correspondence of sized internal formats to base internal formats ...
 		and use cases ...'') for the R32F, RG32F, RGB32F, and RGBA32F formats.
 
-		Requires ${OES_texture_float.link}.
+		Requires ${OES_texture_float.cap}.
 		"""
 }
 

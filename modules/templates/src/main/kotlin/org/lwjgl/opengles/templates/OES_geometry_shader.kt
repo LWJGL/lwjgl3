@@ -39,7 +39,7 @@ val OES_geometry_shader = "OESGeometryShader".nativeClassGLES("OES_geometry_shad
 		This extension relies on the OES_shader_io_blocks extension to provide the required functionality for declaring input and output blocks and interfacing
 		between shaders.
 
-		Requires ${GLES31.core} and ${OES_shader_io_blocks.link} or ${EXT_shader_io_blocks.link}.
+		Requires ${GLES31.core} and ${OES_shader_io_blocks.capLink} or ${EXT_shader_io_blocks.capLink}.
 		"""
 
 	IntConstant(

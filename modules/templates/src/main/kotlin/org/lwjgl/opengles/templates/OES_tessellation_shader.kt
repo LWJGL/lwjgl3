@@ -54,7 +54,7 @@ val OES_tessellation_shader = "OESTessellationShader".nativeClassGLES("OES_tesse
 		This extension relies on the OES_gpu_shader5 or EXT_gpu_shader5 extension to provide the 'precise' and 'fma' functionality which are necessary to
 		ensure crack-free tessellation.
 
-		Requires ${GLES31.core}, ${OES_shader_io_blocks.link} or ${EXT_shader_io_blocks.link} and ${OES_gpu_shader5.link} or ${EXT_gpu_shader5.link}.
+		Requires ${GLES31.core}, ${OES_shader_io_blocks.capLink} or ${EXT_shader_io_blocks.capLink} and ${OES_gpu_shader5.capLink} or ${EXT_gpu_shader5.capLink}.
 		"""
 
 	IntConstant(

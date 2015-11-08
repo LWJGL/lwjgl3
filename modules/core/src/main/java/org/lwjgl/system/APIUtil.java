@@ -44,7 +44,7 @@ public final class APIUtil {
 	}
 
 	/**
-	 * Prints the specified message to the {@link Platform#DEBUG_STREAM} if {@link Platform#DEBUG} is true.
+	 * Prints the specified message to the {@link #DEBUG_STREAM} if {@link Checks#DEBUG} is true.
 	 *
 	 * @param msg the message to print
 	 */
