@@ -4,8 +4,8 @@
  */
 package org.lwjgl.opengl
 
-import java.io.PrintWriter
 import org.lwjgl.generator.*
+import java.io.PrintWriter
 import java.util.regex.Pattern
 
 val NativeClass.capName: String
@@ -20,17 +20,14 @@ val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "GLCapabilities"
 
-val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
+val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
 
 	private val GLCorePattern = Pattern.compile("GL[1-9][0-9]")
 
-	private val BufferOffsetTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, SkipCheckFunctionTransform {
+	private val BufferOffsetTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 		override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}Offset"
 		override fun transformCall(param: Parameter, original: String) = "${param.name}Offset"
 	}
-
-	private val Iterable<NativeClassFunction>.hasDeprecated: Boolean
-		get() = this.any { it has DeprecatedGL }
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }
@@ -38,6 +35,27 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 			boParams.forEach { transforms[it] = BufferOffsetTransform }
 			function.generateAlternativeMethod(writer, function.name, "Buffer object offset version of:", transforms)
 			boParams.forEach { transforms.remove(it) }
+		}
+	}
+
+	override fun addParameterChecks(
+		checks: MutableList<String>,
+		mode: GenerationMode,
+		parameter: Parameter,
+		hasTransform: Parameter.(FunctionTransform<Parameter>) -> Boolean
+	) {
+		if ( !parameter.has(BufferObject) )
+			return
+
+		when {
+			mode === GenerationMode.NORMAL
+			     -> "GLChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.nativeType.mapping === PrimitiveMapping.POINTER});"
+			parameter.nativeType.mapping !== PrimitiveMapping.POINTER
+			     -> "GLChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.hasTransform(BufferOffsetTransform)});"
+			else -> null
+		}?.let {
+			if ( !checks.contains(it) )
+				checks.add(it)
 		}
 	}
 
@@ -53,31 +71,15 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 		return false
 	}
 
+	private val Iterable<NativeClassFunction>.hasDeprecated: Boolean
+		get() = this.any { it has DeprecatedGL }
+
 	override fun printConstructorParams(writer: PrintWriter, nativeClass: NativeClass) {
 		if ( nativeClass.functions.hasDeprecated )
 			writer.print(", boolean fc")
 	}
 
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.has(DeprecatedGL)
-
-	override fun addParameterChecks(
-		checks: MutableList<String>,
-		mode: GenerationMode,
-		parameter: Parameter,
-		hasTransform: Parameter.(FunctionTransform<Parameter>) -> Boolean
-	) {
-		if ( !parameter.has(BufferObject) )
-			return
-
-		when {
-			mode === GenerationMode.NORMAL -> "GLChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.nativeType.mapping === PrimitiveMapping.POINTER});"
-			parameter.nativeType.mapping !== PrimitiveMapping.POINTER -> "GLChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.hasTransform(BufferOffsetTransform)});"
-			else -> null
-		}?.let {
-			if ( !checks.contains(it) )
-				checks.add(it)
-		}
-	}
 
 	override fun getFunctionAddressCall(function: NativeClassFunction) =
 		// Do the fc check here, because getFunctionAddress will return an address
@@ -161,9 +163,9 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
 		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
-		for ( extension in classesWithFunctions ) {
+		for (extension in classesWithFunctions) {
 			print("\tfinal ${extension.className}")
-			for ( i in 0..(alignment - extension.className.length - 1) )
+			for (i in 0..(alignment - extension.className.length - 1))
 				print(' ')
 			println(" __${extension.className};")
 		}
@@ -177,7 +179,7 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 		}
 
 		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, boolean fc) {")
-		for ( extension in classes ) {
+		for (extension in classes) {
 			val capName = extension.capName
 			// TODO: Do not call create if the extension is not present. Reduces number of classes loaded (test with static init)
 			if ( extension.hasNativeFunctions ) {

@@ -13,9 +13,9 @@ val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "GLESCapabilities"
 
-private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CAPABILITIES_CLASS) {
+private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, CAPABILITIES_CLASS) {
 
-	private val BufferOffsetTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, SkipCheckFunctionTransform {
+	private val BufferOffsetTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 		override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}Offset"
 		override fun transformCall(param: Parameter, original: String) = "${param.name}Offset"
 	}
@@ -26,6 +26,27 @@ private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CA
 			boParams.forEach { transforms[it] = BufferOffsetTransform }
 			function.generateAlternativeMethod(writer, function.name, "Buffer object offset version of:", transforms)
 			boParams.forEach { transforms.remove(it) }
+		}
+	}
+
+	override fun addParameterChecks(
+		checks: MutableList<String>,
+		mode: GenerationMode,
+		parameter: Parameter,
+		hasTransform: Parameter.(FunctionTransform<Parameter>) -> Boolean
+	) {
+		if ( !parameter.has(BufferObject) )
+			return
+
+		when {
+			mode === GenerationMode.NORMAL
+			     -> "GLESChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.nativeType.mapping === PrimitiveMapping.POINTER});"
+			parameter.nativeType.mapping !== PrimitiveMapping.POINTER
+			     -> "GLESChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.hasTransform(BufferOffsetTransform)});"
+			else -> null
+		}?.let {
+			if ( !checks.contains(it) )
+				checks.add(it)
 		}
 	}
 
@@ -83,9 +104,9 @@ private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CA
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
 		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
-		for ( extension in classesWithFunctions ) {
+		for (extension in classesWithFunctions) {
 			print("\tfinal ${extension.className}")
-			for ( i in 0..(alignment - extension.className.length - 1) )
+			for (i in 0..(alignment - extension.className.length - 1))
 				print(' ')
 			println(" __${extension.className};")
 		}
@@ -99,7 +120,7 @@ private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CA
 		}
 
 		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
-		for ( extension in classes ) {
+		for (extension in classes) {
 			val capName = extension.capName
 			if ( extension.hasNativeFunctions ) {
 				print("\t\t$capName = (__${extension.className} = ${if ( capName == extension.className ) "$GLES_PACKAGE.${extension.className}" else extension.className}.create(ext, provider")
