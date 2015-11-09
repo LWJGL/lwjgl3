@@ -13,11 +13,14 @@ val Int.b: Byte get() = this.toByte()
 val Int.s: Short get() = this.toShort()
 val Long.i: Int get() = this.toInt()
 
-class ConstantType<T : Any>(
-	type: KClass<T>,
+open class ConstantType<T : Any>(
+	val javaType: String,
 	val print: (T) -> String
 ) {
-	val javaType = type.java
+	constructor(
+		type: KClass<T>,
+		print: (T) -> String
+	) : this(type.java.simpleName, print)
 }
 
 val ByteConstant = ConstantType(Byte::class) {
@@ -38,6 +41,10 @@ val LongConstant = ConstantType(Long::class) { "0x%XL".format(it) }
 val FloatConstant = ConstantType(Float::class) { "%sf".format(it) }
 
 val StringConstant = ConstantType(String::class) { "\"$it\"" }
+
+class CustomConstant(javaType: String) : ConstantType<String>(javaType, {
+	throw UnsupportedOperationException("Custom constant types must use expressions only")
+})
 
 open class EnumValue(
 	val documentation: String? = null,
@@ -111,7 +118,7 @@ class ConstantBlock<T : Any>(
 		println();
 		println(documentation)
 
-		print("\tpublic static final ${constantType.javaType.simpleName}")
+		print("\tpublic static final ${constantType.javaType}")
 
 		val indent: String
 		if ( constants.size == 1 ) {
