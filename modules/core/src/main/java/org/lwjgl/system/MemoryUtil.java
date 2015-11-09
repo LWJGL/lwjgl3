@@ -1129,6 +1129,10 @@ public final class MemoryUtil {
 		ACCESSOR.memCopy(src, dst, bytes);
 	}
 
+	public static boolean memGetBoolean(long ptr) {
+		return ACCESSOR.memGetByte(ptr) != 0;
+	}
+
 	public static byte memGetByte(long ptr) {
 		return ACCESSOR.memGetByte(ptr);
 	}

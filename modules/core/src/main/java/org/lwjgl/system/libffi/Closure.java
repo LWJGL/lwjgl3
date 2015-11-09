@@ -26,6 +26,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** Native callback function pointer. */
 	protected static final long
 		NATIVE_CALLBACK_VOID,
+		NATIVE_CALLBACK_BOOLEAN,
 		NATIVE_CALLBACK_BYTE,
 		NATIVE_CALLBACK_SHORT,
 		NATIVE_CALLBACK_INT,
@@ -36,12 +37,14 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 
 	static {
 		// Setup native callbacks
-		PointerBuffer callbacks = memAllocPointer(8);
+		PointerBuffer callbacks = null;
 
 		try {
 			Class<?>[] params = new Class<?>[] { long.class };
-			getNativeCallbacks(new Method[] {
+
+			Method[] methods = new Method[] {
 				Void.class.getDeclaredMethod("callback", params),
+				Boolean.class.getDeclaredMethod("callback", params),
 				Byte.class.getDeclaredMethod("callback", params),
 				Short.class.getDeclaredMethod("callback", params),
 				Int.class.getDeclaredMethod("callback", params),
@@ -49,20 +52,26 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 				Float.class.getDeclaredMethod("callback", params),
 				Double.class.getDeclaredMethod("callback", params),
 				Ptr.class.getDeclaredMethod("callback", params)
-			}, memAddress(callbacks));
+			};
 
-			NATIVE_CALLBACK_VOID = callbacks.get(0);
-			NATIVE_CALLBACK_BYTE = callbacks.get(1);
-			NATIVE_CALLBACK_SHORT = callbacks.get(2);
-			NATIVE_CALLBACK_INT = callbacks.get(3);
-			NATIVE_CALLBACK_LONG = callbacks.get(4);
-			NATIVE_CALLBACK_FLOAT = callbacks.get(5);
-			NATIVE_CALLBACK_DOUBLE = callbacks.get(6);
-			NATIVE_CALLBACK_PTR = callbacks.get(7);
+			callbacks = memAllocPointer(methods.length);
+
+			getNativeCallbacks(methods, memAddress(callbacks));
+
+			NATIVE_CALLBACK_VOID = callbacks.get();
+			NATIVE_CALLBACK_BOOLEAN = callbacks.get();
+			NATIVE_CALLBACK_BYTE = callbacks.get();
+			NATIVE_CALLBACK_SHORT = callbacks.get();
+			NATIVE_CALLBACK_INT = callbacks.get();
+			NATIVE_CALLBACK_LONG = callbacks.get();
+			NATIVE_CALLBACK_FLOAT = callbacks.get();
+			NATIVE_CALLBACK_DOUBLE = callbacks.get();
+			NATIVE_CALLBACK_PTR = callbacks.get();
 		} catch (NoSuchMethodException e) {
 			throw new IllegalStateException("Failed to initialize closure callbacks.", e);
 		} finally {
-			memFree(callbacks);
+			if ( callbacks != null )
+				memFree(callbacks);
 		}
 	}
 
@@ -88,7 +97,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			registry = null;
 		else {
 			try {
-				Class<?> factory = Class.forName(factoryClass);
+				Class<?> factory = Thread.currentThread().getContextClassLoader().loadClass(factoryClass);
 				Method create = factory.getMethod("get");
 				if ( !Modifier.isStatic(create.getModifiers()) || !ClosureRegistry.class.isAssignableFrom(create.getReturnType()) )
 					throw new IllegalArgumentException("Invalid ClosureRegistry specified.");
@@ -259,6 +268,15 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		}
 
 		protected abstract void callback(long args);
+	}
+
+	/** A {@code Closure} that returns a boolean value. */
+	public abstract static class Boolean extends Closure {
+		protected Boolean(FFICIF cif, long classPath) {
+			super(cif, classPath, NATIVE_CALLBACK_BOOLEAN);
+		}
+
+		protected abstract boolean callback(long args);
 	}
 
 	/** A {@code Closure} that returns a byte value. */

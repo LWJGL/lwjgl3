@@ -10,6 +10,7 @@
 
 static jmethodID
 	javaCallbackVoid,
+	javaCallbackBoolean,
 	javaCallbackByte,
 	javaCallbackShort,
 	javaCallbackInt,
@@ -104,7 +105,8 @@ static void ffiClosureVoid(ffi_cif* cif, void* ret, void** args, void* user_data
 		if ( (*env)->ExceptionCheck(env) && async ) \
 			asyncCallbackException(env); \
 	}
-	
+
+DEFINE_FFI_CLOSURE_FUN(Boolean, jboolean,   Boolean)
 DEFINE_FFI_CLOSURE_FUN(Byte,    jbyte,      Byte)
 DEFINE_FFI_CLOSURE_FUN(Short,   jshort,     Short)
 DEFINE_FFI_CLOSURE_FUN(Int,     jint,       Int)
@@ -125,13 +127,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_libffi_Closure_getNativeCallbacks(J
 	UNUSED_PARAMS(env, clazz)
 	
 	SETUP_CALLBACK(0, Void)
-	SETUP_CALLBACK(1, Byte)
-	SETUP_CALLBACK(2, Short)
-	SETUP_CALLBACK(3, Int)
-	SETUP_CALLBACK(4, Long)
-	SETUP_CALLBACK(5, Float)
-	SETUP_CALLBACK(6, Double)
-	SETUP_CALLBACK(7, Ptr)
+	SETUP_CALLBACK(1, Boolean)
+	SETUP_CALLBACK(2, Byte)
+	SETUP_CALLBACK(3, Short)
+	SETUP_CALLBACK(4, Int)
+	SETUP_CALLBACK(5, Long)
+	SETUP_CALLBACK(6, Float)
+	SETUP_CALLBACK(7, Double)
+	SETUP_CALLBACK(8, Ptr)
 }
 
 EXTERN_C_EXIT
