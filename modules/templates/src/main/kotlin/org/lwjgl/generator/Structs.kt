@@ -240,8 +240,9 @@ class Struct(
 							generateMultiSetter(javadoc, members, generateAlternativeMultiSetterParameters, generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER2)
 					} else
 						generateMultiSetter(javadoc, members, generateMultiSetterParameters, generateMultiSetterSetters)
+				}
 
-					print("""
+				print("""
 	/** Unsafe version of {@link #set}. */
 	public $className nset(long struct) {
 		memCopy(struct, $ADDRESS, SIZEOF);
@@ -266,7 +267,6 @@ class Struct(
 		return nset(memAddress(struct));
 	}
 """)
-				}
 			}
 		}
 
@@ -1169,7 +1169,8 @@ fun struct_p(
 ) = struct(packageName, className, nativeSubPath, structName, identifierType, virtual, mutable, init).nativeType.p
 
 /** Anonymous member struct definition. Mostly useful for union of structs. */
-fun Struct.struct(init: Struct.() -> Unit): StructType {
+fun
+	Struct.struct(init: Struct.() -> Unit): StructType {
 	val struct = Struct(ANONYMOUS, ANONYMOUS)
 	struct.init()
 	return StructType(struct)
