@@ -256,7 +256,7 @@ class Struct(
 	 * @return this struct
 	 */
 	public $className set($className src) {
-		return nset($ADDRESS);
+		return nset(src.$ADDRESS);
 	}
 
 	/** {@link ByteBuffer} version of {@link #set}. */
