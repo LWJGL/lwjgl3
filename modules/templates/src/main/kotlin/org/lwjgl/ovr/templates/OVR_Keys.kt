@@ -62,10 +62,15 @@ val OVR_Keys = "OVRKeys".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") 
 		"PERF_HUDE_MODE".."PerfHudMode"
 	)
 
+	StringConstant("Allowed values are defined in enum {@code ovrLayerHudMode}.", "LAYER_HUD_MODE".."LayerHudMode")
+	StringConstant("The layer to show.", "LAYER_HUD_CURRENT_LAYER".."LayerHudCurrentLayer")
+	StringConstant("Hide other layers when the hud is enabled.", "LAYER_HUD_SHOW_ALL_LAYERS".."LayerHudShowAll")
+
 	StringConstant(
 		"",
 
 		"DEBUG_HUD_STEREO_MODE".."DebugHudStereoMode", // allowed values are defined in enum ovrDebugHudStereoMode
+		"DEBUG_HUD_STEREO_GUIDE_INFO_ENABLE".."DebugHudStereoGuideInfoEnable", // bool
 		"DEBUG_HUD_STEREO_GUIDE_SIZE".."DebugHudStereoGuideSize2f", // float[2]
 		"DEBUG_HUD_STEREO_GUIDE_POSITION".."DebugHudStereoGuidePosition3f", // float[3]
 		"DEBUG_HUD_STEREO_GUIDE_YAWPITCHROLL".."DebugHudStereoGuideYawPitchRoll3f", // float[3]

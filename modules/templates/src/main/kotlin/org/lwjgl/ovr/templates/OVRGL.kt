@@ -23,7 +23,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 	    """
 	    Creates a Texture Set suitable for use with OpenGL.
 
-	    Multiple calls to ovr_CreateSwapTextureSetGL for the same {@code ovrHmd} is supported, but applications cannot rely on switching between
+	    Multiple calls to ovr_CreateSwapTextureSetGL for the same {@code ovrHmd} are supported, but applications cannot rely on switching between
 	    {@code ovrSwapTextureSets} at runtime without a performance penalty.
 
 	    The {@code format} provided should be thought of as the format the distortion compositor will use when reading the contents of the texture. To that
@@ -35,7 +35,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 	    conversions leading to gamma-curve artifacts.
 	    """,
 
-	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#Create()."),
+	    ovrSession.IN("session", "an {@code ovrSession} previously returned by OVR#Create()."),
 	    GLuint.IN("format", "the texture format"),
 	    int.IN("width", "the requested texture width"),
 	    int.IN("height", "the requested texture height"),
@@ -65,7 +65,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 		banding.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#Create()."),
+		ovrSession.IN("session", "an {@code ovrSession} previously returned by OVR#Create()."),
 		GLuint.IN("format", "the texture format"),
 		int.IN("width", "the requested texture width"),
 		int.IN("height", "the requested texture height"),

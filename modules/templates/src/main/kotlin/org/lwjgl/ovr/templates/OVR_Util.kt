@@ -18,9 +18,9 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		Use for generating a default projection matrix that is:
 		${ul(
 			"Left-handed.",
-		    "Near depth values stored in the depth buffer are smaller than far depth values.",
-		    "Both near and far are explicitly defined.",
-		    "With a clipping range that is (0 to w)."
+			"Near depth values stored in the depth buffer are smaller than far depth values.",
+			"Both near and far are explicitly defined.",
+			"With a clipping range that is (0 to w)."
 		)}
 		""",
 		"Projection_None"..0x00
@@ -49,6 +49,18 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 	)
 	val ProjectionModifiers = "#Projection_None #Projection_RightHanded #Projection_FarLessThanNear #Projection_FarClipAtInfinity #Projection_ClipRangeOpenGL"
 
+	ovrDetectResult(
+		"_Detect",
+		"""
+		Detects Oculus Runtime and Device Status.
+
+		Checks for Oculus Runtime and Oculus HMD device status without loading the LibOVRRT shared library. This may be called before OVR#_Initialize() to help
+		decide whether or not to initialize LibOVR.
+		""",
+
+		int.IN("timeoutMsec", "a timeout to wait for HMD to be attached or 0 to poll")
+	)
+
 	ovrMatrix4f(
 		"Matrix4f_Projection",
 		"Used to generate projection from {@code ovrEyeDesc::Fov}.",
@@ -63,17 +75,17 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 			LinkMode.BITFIELD
 		),
 
-	    returnDoc = "the calculated projection matrix"
+		returnDoc = "the calculated projection matrix"
 	)
 
 	ovrTimewarpProjectionDesc(
 		"TimewarpProjectionDesc_FromProjection",
-	    "Extracts the required data from the result of #Matrix4f_Projection().",
+		"Extracts the required data from the result of #Matrix4f_Projection().",
 
-	    ovrMatrix4f.IN("projection", "the project matrix from which to extract ##OVRTimewarpProjectionDesc"),
+		ovrMatrix4f.IN("projection", "the project matrix from which to extract ##OVRTimewarpProjectionDesc"),
 		unsigned_int.IN("projectionModFlags", "a combination of the ovrProjectionModifier flags", ProjectionModifiers, LinkMode.BITFIELD),
 
-	    returnDoc = "the extracted ovrTimewarpProjectionDesc"
+		returnDoc = "the extracted ovrTimewarpProjectionDesc"
 	)
 
 	ovrMatrix4f(
@@ -89,21 +101,21 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		float.IN("orthoDistance", "equal to the distance from the camera in meters, such as 0.8m"),
 		float.IN("hmdToEyeViewOffsetX", "the offset of the eye from the center"),
 
-	    returnDoc = "the calculated projection matrix"
+		returnDoc = "the calculated projection matrix"
 	)
 
 	void(
 		"_CalcEyePoses",
-	    "Computes offset eye poses based on {@code headPose} returned by ##OVRTrackingState.",
+		"Computes offset eye poses based on {@code headPose} returned by ##OVRTrackingState.",
 
-	    ovrPosef.IN("headPose", "indicates the HMD position and orientation to use for the calculation"),
-	    Check(2)..StructBuffer..const..ovrVector3f_p.IN(
-		    "hmdToEyeViewOffset",
-		    """
+		ovrPosef.IN("headPose", "indicates the HMD position and orientation to use for the calculation"),
+		Check(2)..StructBuffer..const..ovrVector3f_p.IN(
+			"hmdToEyeViewOffset",
+			"""
 		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
-	    ),
+		),
 		Check(2)..StructBuffer..ovrPosef_p.OUT(
 			"outEyePoses",
 			"""
@@ -115,7 +127,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 
 	void(
 		"_GetEyePoses",
-	    """
+		"""
 	    Returns the predicted head pose in {@code outHmdTrackingState} and offset eye poses in {@code outEyePoses}.
 
 		This is a thread-safe function where caller should increment {@code frameIndex} with every frame and pass that index where applicable to functions
@@ -123,16 +135,23 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		not need to worry about applying {@code hmdToEyeViewOffset} to the returned {@code outEyePoses} variables.
 	    """,
 
-	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#_Create()"),
-	    unsigned_int.IN("frameIndex", "the targeted frame index, or 0 to refer to one frame after the last time OVR#_SubmitFrame() was called"),
-	    Check(2)..StructBuffer..const..ovrVector3f_p.IN(
-		    "hmdToEyeViewOffset",
-		    """
+		ovrSession.IN("session", "an {@code ovrSession} previously returned by OVR#_Create()"),
+		long_long.IN("frameIndex", "the targeted frame index, or 0 to refer to one frame after the last time OVR#_SubmitFrame() was called"),
+		ovrBool.IN(
+			"latencyMarker",
+			"""
+			Specifies that this call is the point in time where the "App-to-Mid-Photon" latency timer starts from. If a given {@code ovrLayer} provides
+			"SensorSampleTimestamp", that will override the value stored here.
+			"""
+		),
+		Check(2)..StructBuffer..const..ovrVector3f_p.IN(
+			"hmdToEyeViewOffset",
+			"""
 		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
-	    ),
-	    Check(2)..StructBuffer..ovrPosef_p.OUT("outEyePoses", "the predicted eye poses"),
-	    nullable..ovrTrackingState_p.OUT("outHmdTrackingState", "the predicted ##OVRTrackingState. May be $NULL, in which case it is ignored.")
+		),
+		Check(2)..StructBuffer..ovrPosef_p.OUT("outEyePoses", "the predicted eye poses"),
+		nullable..ovrTrackingState_p.OUT("outHmdTrackingState", "the predicted ##OVRTrackingState. May be $NULL, in which case it is ignored.")
 	)
 }

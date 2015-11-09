@@ -38,16 +38,14 @@ ENABLE_WARNINGS()""")
 
 		<h3>Application Loop</h3>
 		${ul(
-			"Call #GetFrameTiming() to get the current frame timing information.",
-			"Call #GetTrackingState() and OVRUtil#CalcEyePoses() to obtain the predicted rendering pose for each eye based on timing.",
-			"""
-			Render the scene content into {@code CurrentIndex} of ovrTextureSet for each eye and layer you plan to update this frame. Increment texture set
-			{@code CurrentIndex}.
-			""",
+			"Call #GetPredictedDisplayTime() to get the current frame timing information.",
+			"Call #GetTrackingState() and #CalcEyePoses() to obtain the predicted rendering pose for each eye based on timing.",
+			"Increment {@code ovrTextureSet::CurrentIndex} for each layer you will be rendering to in the next step.",
+			"Render the scene content into {@code ovrTextureSet::CurrentIndex} for each eye and layer you plan to update this frame.",
 			"""
 			Call #SubmitFrame() to render the distorted layers to the back buffer and present them on the HMD. If #SubmitFrame() returns
-			OVRErrorCode#Success_NotVisible, there is no need to render the scene for the next loop iteration. Instead, just call #SubmitFrame() again
-			until it returns OVRErrorCode#Success.
+			OVRErrorCode#Success_NotVisible, there is no need to render the scene for the next loop iteration. Instead, just call #SubmitFrame() again until it
+			returns OVRErrorCode#Success. {@code ovrTextureSet::CurrentIndex} for each layer should refer to the texure you want to display.
 			"""
 		)}
 
@@ -71,13 +69,6 @@ ENABLE_WARNINGS()""")
 		application code.
 		""",
 		"Init_Debug"..0x00000001
-	)
-	IntConstant(
-		"""
-		When {@code ServerOptional} is set, the #Initialize() call not will block waiting for the server to respond. If the server is not reachable, it might
-		still succeed.
-		""",
-		"Init_ServerOptional"..0x00000002
 	)
 	IntConstant(
 		"""
@@ -106,7 +97,8 @@ ENABLE_WARNINGS()""")
 		"Hmd_CB"..8,
 		"Hmd_Other"..9,
 		"Hmd_E3_2015"..10,
-		"Hmd_ES06"..11
+		"Hmd_ES06"..11,
+		"Hmd_ES09"..12
 	)
 
 	// ovrHmdCaps enum
@@ -119,14 +111,7 @@ ENABLE_WARNINGS()""")
 	IntConstant("Supports orientation tracking (IMU).", "TrackingCap_Orientation"..0x0010)
 	IntConstant("Supports yaw drift correction via a magnetometer or other means.", "TrackingCap_MagYawCorrection"..0x0020)
 	IntConstant("Supports positional tracking.", "TrackingCap_Position"..0x0040)
-	IntConstant(
-		"""
-		Overriding the other flags, this causes the application to ignore tracking settings. This is the internal default before #ConfigureTracking() is
-		called.
-		""",
-		"TrackingCap_Idle"..0x0100
-	)
-	val TrackingCaps = "#TrackingCap_Orientation #TrackingCap_MagYawCorrection #TrackingCap_Position #TrackingCap_Idle"
+	val TrackingCaps = "#TrackingCap_Orientation #TrackingCap_MagYawCorrection #TrackingCap_Position"
 
 	val EyeType = IntConstant(
 		"ovrEyeType",
@@ -170,7 +155,9 @@ ENABLE_WARNINGS()""")
 		"Button_Left"..0x00040000,
 		"Button_Right"..0x00080000,
 		"Button_Enter"..0x00100000, // Start on XBox controller.
-		"Button_Back"..0x00200000 // Back on Xbox controller.
+		"Button_Back"..0x00200000, // Back on Xbox controller.
+
+		"Button_Private" expr "0x00400000 | 0x00800000 | 0x01000000"
 	)
 
 	IntConstant(
@@ -196,9 +183,12 @@ ENABLE_WARNINGS()""")
 	IntConstant(
 		"Which controller is connected; multiple can be connected at once.",
 
+		"ControllerType_None"..0x00,
 		"ControllerType_LTouch"..0x01,
 		"ControllerType_RTouch"..0x02,
 		"ControllerType_Touch"..0x03,
+		"ControllerType_XBox"..0x10,
+
 		"ControllerType_All"..0xff
 	)
 
@@ -311,16 +301,16 @@ ENABLE_WARNINGS()""")
 	ovrHmdDesc(
 		"GetHmdDesc",
 		"""
-        Returns information about the given HMD.
+        Returns information about the current HMD.
 
         #Initialize() must have first been called in order for this to succeed, otherwise ovrHmdDesc::Type will be reported as #Hmd_None.
         """,
 
-		nullable..ovrHmd.IN(
-			"hmd",
+		nullable..ovrSession.IN(
+			"session",
 			"""
-	        an {@code ovrHmd} previously returned by #Create(), else $NULL in which case this function detects whether an HMD is present and returns its info if
-	        so.
+	        an {@code ovrSession} previously returned by #Create(), else $NULL in which case this function detects whether an HMD is present and returns its
+	        info if so.
 	        """
 		),
 
@@ -330,13 +320,13 @@ ENABLE_WARNINGS()""")
 	ovrResult(
 		"Create",
 		"""
-	    Creates a handle to an HMD.
+	    Creates a handle to a VR session.
 
-		Upon success the returned {@code ovrHmd} must be eventually freed with #Destroy() when it is no longer needed. A second call to #Create() will result
+		Upon success the returned {@code ovrSession} must be eventually freed with #Destroy() when it is no longer needed. A second call to #Create() will result
 		in an error return value if the previous {@code Hmd} has not been destroyed.
 	    """,
 
-		Check(1)..ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
+		Check(1)..ovrSession_p.OUT("pSession", "a pointer to an {@code ovrSession} which will be written to upon success"),
 		ovrGraphicsLuid_p.OUT(
 			"luid",
 			"""
@@ -349,11 +339,21 @@ ENABLE_WARNINGS()""")
 		returnDoc = "an {@code ovrResult} indicating success or failure. Upon failure the returned {@code pHmd} will be $NULL."
 	)
 
+	val session = ovrSession.IN("session", "an {@code ovrSession} previously returned by #Create()")
+
 	void(
 		"Destroy",
 		"Destroys the HMD.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()")
+		session
+	)
+
+	ovrResult(
+		"GetSessionStatus",
+		"Returns status information for the application.",
+
+		session,
+		ovrSessionStatus_p.OUT("sessionStatus", "an ##OVRSessionStatus that is filled in")
 	)
 
 	unsigned_int(
@@ -364,7 +364,7 @@ ENABLE_WARNINGS()""")
 		Note that this value is different from ##OVRHmdDesc{@code ::AvailableHmdCaps}, which describes what capabilities are available for that HMD.
 	    """,
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 
 		returnDoc = "a combination of zero or more {@code ovrHmdCaps}"
 	)
@@ -375,12 +375,19 @@ ENABLE_WARNINGS()""")
 		Modifies capability bits described by {@code ovrHmdCaps} that can be modified.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		unsigned_int.IN("hmdCaps", "a combination of 0 or more {@code ovrHmdCaps}", HmdCaps, LinkMode.BITFIELD)
 	)
 
 	// ----------------
 	// Tracking
+
+	unsigned_int(
+		"GetTrackingCaps",
+		"Returns the current tracking caps.",
+
+		session
+	)
 
 	ovrResult(
 		"ConfigureTracking",
@@ -388,10 +395,13 @@ ENABLE_WARNINGS()""")
 		Starts sensor sampling, enabling specified capabilities, described by {@code ovrTrackingCaps}.
 
 		Use 0 for both {@code requestedTrackingCaps} and {@code requiredTrackingCaps} to disable tracking. ovr_ConfigureTracking can be called multiple
-		times with the same or different values for a given {@code ovrHmd}.
+		times with the same or different values for a given {@code ovrSession}.
+
+		#Create() automatically enables full tracking supported by the given device. This function is not needed unless the disabling of tracking features is
+		required.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		unsigned_int.IN(
 			"requestedTrackingCaps",
 			"""
@@ -423,7 +433,7 @@ ENABLE_WARNINGS()""")
 		gravity and cannot be redefined. All future tracking will report values relative to this new reference position.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()")
+		session
 	)
 
 	ovrTrackingState(
@@ -435,10 +445,19 @@ ENABLE_WARNINGS()""")
 		have the same value.
 
 		This may also be used for more refined timing of front buffer rendering logic, and so on.
+
+		This may be called by multiple threads.
 	    """,
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		double.IN("absTime", "the absolute future time to predict the return ##OVRTrackingState value. Use 0 to request the most recent tracking state."),
+		ovrBool.IN(
+			"latencyMarker",
+			"""
+			specifies that this call is the point in time where the "App-to-Mid-Photon" latency timer starts from. If a given {@code ovrLayer} provides
+			"SensorSampleTimestamp", that will override the value stored here.
+			"""
+		),
 
 		returnDoc = "the ##OVRTrackingState that is predicted for the given {@code absTime}"
 	)
@@ -450,7 +469,7 @@ ENABLE_WARNINGS()""")
         checking the {@code PacketNumber}.
         """,
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		unsigned_int.IN("controllerTypeMask", "which controllers the input will be returned for"),
 		ovrInputState_p.IN("inputState", "the input state that will be filled in"),
 
@@ -466,7 +485,7 @@ ENABLE_WARNINGS()""")
 		want vibration to be continuous over multiple seconds then you need to call this function periodically.
         """,
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		unsigned_int.IN("controllerTypeMask", "the controllers to apply the vibration to"),
 		float.IN(
 			"frequency",
@@ -484,13 +503,19 @@ ENABLE_WARNINGS()""")
 	// Layers
 
 	IntConstant(
+		"Specifies the maximum number of layers supported by #SubmitFrame().",
+
+		"MaxLayerCount"..32
+	)
+
+	IntConstant(
 		"Describes layer types that can be passed to #SubmitFrame(). Each layer type has an associated struct, such as ##OVRLayerEyeFov.",
 
 		"LayerType_Disabled"..0,
 		"LayerType_EyeFov"..1,
 		"LayerType_EyeFovDepth"..2,
-		"LayerType_QuadInWorld"..3,
-		"LayerType_QuadHeadLocked"..4,
+		"LayerType_Quad"..3,
+		"LayerType_EyeMatrix"..5,
 		"LayerType_Direct"..6
 	)
 
@@ -498,7 +523,8 @@ ENABLE_WARNINGS()""")
 		"Identifies flags used by ##OVRLayerHeader and which are passed to #SubmitFrame().",
 
 		"LayerFlag_HighQuality"..0x01,
-		"LayerFlag_TextureOriginAtBottomLeft"..0x02
+		"LayerFlag_TextureOriginAtBottomLeft"..0x02,
+		"LayerFlag_HeadLocked"..0x04
 	)
 
 	// ----------------
@@ -508,7 +534,7 @@ ENABLE_WARNINGS()""")
 		"DestroySwapTextureSet",
 		"Destroys an ##OVRSwapTextureSet and frees all the resources associated with it.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		nullable..ovrSwapTextureSet_p.IN("textureSet", "the ##OVRSwapTextureSet to destroy. If it is $NULL then this function has no effect.")
 	)
 
@@ -516,7 +542,7 @@ ENABLE_WARNINGS()""")
 		"DestroyMirrorTexture",
 		"Destroys a mirror texture previously created by one of the mirror texture creation functions.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		nullable..ovrTexture_p.IN("mirrorTexture", "the ##OVRTexture to destroy. If it is $NULL then this function has no effect.")
 	)
 
@@ -529,7 +555,7 @@ ENABLE_WARNINGS()""")
 		are at least 8 pixels of padding between them to prevent texture filtering and chromatic aberration causing images to leak between the two eye views.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		ovrEyeType.IN("eye", "which eye (left or right) to calculate for", EyeType),
 		ovrFovPort.IN("fov", "the ##OVRFovPort to use"),
 		float.IN(
@@ -547,7 +573,7 @@ ENABLE_WARNINGS()""")
 		"GetRenderDesc",
 		"Computes the distortion viewport, view adjust, and other rendering parameters for the specified eye.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		ovrEyeType.IN("eyeType", "which eye (left or right) for which to perform calculations", EyeType),
 		ovrFovPort.IN("fov", "the ##OVRFovPort to use."),
 
@@ -586,13 +612,13 @@ ovrLayerHeader* layers[2] = { &layer0.Header, &layer1.Header };
 ovrResult result = ovr_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 	    """,
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		unsigned_int.IN("frameIndex", "the targeted application frame index, or 0 to refer to one frame after the last time #SubmitFrame() was called"),
+		session,
+		long_long.IN("frameIndex", "the targeted application frame index, or 0 to refer to one frame after the last time #SubmitFrame() was called"),
 		nullable..const..ovrViewScaleDesc_p.IN(
 			"viewScaleDesc",
 			"""
-			provides additional information needed only if {@code layerPtrList} contains a #LayerType_QuadInWorld or #LayerType_QuadHeadLocked. If $NULL, a
-			default version is used based on the current configuration and a 1.0 world scale.
+			provides additional information needed only if {@code layerPtrList} contains a #LayerType_Quad. If $NULL, a default version is used based on the
+			current configuration and a 1.0 world scale.
 			"""
 		),
 		const..ovrLayerHeader_p_const_p.IN(
@@ -634,19 +660,24 @@ ovrResult result = ovr_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 	// ----------------
 	// Frame Timing
 
-	ovrFrameTiming(
-		"GetFrameTiming",
+	double(
+		"GetPredictedDisplayTime",
 		"""
-		Gets the ##OVRFrameTiming for the given frame index.
+		Gets the time of the specified frame midpoint.
 
-		The application should increment {@code frameIndex} for each successively targeted frame, and pass that index to any relevent OVR functions that need
-		to apply to the frame identified by that index.
+		Predicts the time at which the given frame will be displayed. The predicted time is the middle of the time period during which the corresponding eye
+		images will be displayed.
+
+		The application should increment frameIndex for each successively targeted frame, and pass that index to any relevent OVR functions that need to apply
+		to the frame identified by that index.
 
 		This function is thread-safe and allows for multiple application threads to target their processing to the same displayed frame.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		unsigned_int.IN("frameIndex", "the frame the caller wishes to target")
+		session,
+		long_long.IN("frameIndex", "the frame the caller wishes to target. A value of zero returns the next frame index."),
+
+		returnDoc = "the absolute frame midpoint time for the given {@code frameIndex}"
 	)
 
 	double(
@@ -678,6 +709,13 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"PerfHud_VersionInfo"..4
 	)
 
+	EnumConstant(
+		"Layer HUD enables the HMD user to see information about a layer.",
+
+		"LayerHud_Off" enum "Turns off the layer HUD",
+		"LayerHud_Info" enum "Shows info about a specific layer"
+	)
+
 	IntConstant(
 		"Visual properties of the stereo guide.",
 
@@ -691,14 +729,14 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"ResetBackOfHeadTracking",
 		"Should be called when the headset is placed on a new user.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()")
+		session
 	)
 
 	void(
 		"ResetMulticameraTracking",
 		"Should be called when a tracking camera is moved.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()")
+		session
 	)
 
 	// ----------------
@@ -708,7 +746,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"GetBool",
 		"Reads a boolean property.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid for only the call"),
 		ovrBool.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
@@ -723,7 +761,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		If the property wasn't previously a boolean property, it is changed to a boolean property.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		ovrBool.IN("value", "the value to write"),
 
@@ -734,7 +772,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"GetInt",
 		"Reads an integer property.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		int.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
@@ -749,7 +787,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		If the property wasn't previously an integer property, it is changed to an integer property.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		int.IN("value", "the value to write"),
 
@@ -760,7 +798,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"GetFloat",
 		"Reads a float property.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
@@ -775,7 +813,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		If the property wasn't previously a float property, it's changed to a float property.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float.IN("value", "the value to write"),
 
@@ -786,7 +824,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"GetFloatArray",
 		"Reads a float array property.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float_p.OUT("values", "an array of float to write to"),
 		AutoSize("values")..unsigned_int.IN("valuesCapacity", "the maximum number of elements to write to the values array"),
@@ -798,7 +836,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"SetFloatArray",
 		"Writes or creates a float array property.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float_p.OUT("values", "an array of float to write from"),
 		AutoSize("values")..unsigned_int.IN("valuesSize", "the number of elements to write"),
@@ -814,7 +852,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		Strings are UTF8-encoded and null-terminated.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		session,
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		nullable..const..charUTF8_p.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
@@ -833,7 +871,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		Strings are UTF8-encoded and null-terminated.
 		""",
 
-		ovrHmd.IN("hmddesc", "an {@code ovrHmd} previously returned by #Create()"),
+		ovrSession.IN("hmddesc", "an {@code ovrSession} previously returned by #Create()"),
 		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		const..charASCII_p.IN("value", "the string property, which only needs to be valid for the duration of the call"),
 

@@ -5,12 +5,10 @@
 package org.lwjgl.demo.ovr;
 
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.ovr.OVRGraphicsLuid;
-import org.lwjgl.ovr.OVRHmdDesc;
-import org.lwjgl.ovr.OVRInitParams;
-import org.lwjgl.ovr.OVRLogCallback;
+import org.lwjgl.ovr.*;
 
 import static org.lwjgl.ovr.OVR.*;
+import static org.lwjgl.ovr.OVRUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public final class HelloLibOVR {
@@ -19,6 +17,12 @@ public final class HelloLibOVR {
 	}
 
 	public static void main(String[] args) {
+		OVRDetectResult detect = OVRDetectResult.calloc();
+		ovr_Detect(0, detect);
+
+		System.out.println("OVRDetectResult.IsOculusHMDConnected = " + detect.getIsOculusHMDConnected());
+		System.out.println("OVRDetectResult.IsOculusServiceRunning = " + detect.getIsOculusServiceRunning());
+
 		OVRLogCallback callback = new OVRLogCallback() {
 			@Override
 			public void invoke(long userData, int level, long message) {

@@ -7,14 +7,16 @@ package org.lwjgl.ovr.templates
 import org.lwjgl.generator.*
 import org.lwjgl.ovr.*
 
-val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", prefixConstant = "ovr") {
+val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "OVR_", prefixConstant = "ovr") {
+	nativeImport("OVR_ErrorCode.h")
+
 	documentation = "LibOVR error code declarations."
 
 	IntConstant("This is a general success result.", "Success"..0)
 	IntConstant(
 		"""
-		Returned from a call to OVR#SubmitFrame(). The call succeeded, but what the app rendered will not be visible on the HMD. Ideally the app should
-		continue calling OVR#SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
+		Returned from a call to OVR##ovr_SubmitFrame(). The call succeeded, but what the app rendered will not be visible on the HMD. Ideally the app should
+		continue calling OVR##ovr_SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
 		""",
 		"Success_NotVisible"..1000
 	)
@@ -69,4 +71,34 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefix
 	IntConstant("Requested async work was abandoned and result is incomplete.", "Error_Abandoned" expr "-5001")
 	// Rendering Errors
 	IntConstant("In the event of a system-wide graphics reset or cable unplug this is returned to the app.", "Error_DisplayLost" expr "-6000")
+
+	val SUCCESS = bool(
+		"SUCCESS",
+		"""
+		Indicates if an {@code ovrResult} indicates success.
+
+		Some functions return additional successful values other than #Success and require usage of this macro to indicate success.
+		""",
+
+		ovrResult.IN("result", "the {@code ovrResult} to check")
+	)
+
+	bool(
+		"UNQUALIFIED_SUCCESS",
+		"""
+		Indicates if an {@code ovrResult} indicates an unqualified success.
+
+		This is useful for indicating that the code intentionally wants to check for {@code result == ovrSuccess} as opposed to #SUCCESS(), which checks for
+		{@code result >= ovrSuccess}.
+		""",
+
+		SUCCESS["result"]
+	)
+
+	bool(
+		"FAILURE",
+		"Indicates if an {@code ovrResult} indicates failure.",
+
+		SUCCESS["result"]
+	)
 }
