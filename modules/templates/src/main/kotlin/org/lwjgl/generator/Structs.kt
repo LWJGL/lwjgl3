@@ -108,6 +108,7 @@ class Struct(
 		)
 
 		private val BUFFER_LEN_PARAM = "byteLen"
+		private val BUFFER_CAPACITY_PARAM = "capacity"
 	}
 
 	val nativeType: StructType get() = StructType(this)
@@ -565,10 +566,11 @@ class Struct(
 					)
 				}
 				it.nativeType.isPointerData -> {
-					if ( it.nativeType is StructType )
-						print("${it.nativeType.definition.className} $param")
+					print("${if ( it.nativeType is StructType )
+						it.nativeType.definition.className
 					else
-						print("ByteBuffer $param")
+						it.nativeType.mapping.javaMethodType.simpleName
+					} $param")
 				}
 				else                        -> {
 					val javaType = it.nativeType.javaMethodType.simpleName
@@ -754,8 +756,9 @@ class Struct(
 							println("\tpublic static void n$method(long $STRUCT, ${it.nativeType.definition.className} $param) { n$method($STRUCT, $param.$ADDRESS); }")
 							println("\tpublic static void $method(ByteBuffer $STRUCT, ${it.nativeType.definition.className} $param) { n$method(memAddress($STRUCT), $param); }")
 						} else {
-							println("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) { n$method($STRUCT, memAddressSafe($param)); }")
-							println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")
+							val bufferType = it.nativeType.mapping.javaMethodType.simpleName
+							println("\tpublic static void n$method(long $STRUCT, $bufferType $param) { n$method($STRUCT, memAddressSafe($param)); }")
+							println("\tpublic static void $method(ByteBuffer $STRUCT, $bufferType $param) { n$method(memAddress($STRUCT), $param); }")
 						}
 					}
 				}
@@ -822,10 +825,11 @@ class Struct(
 							println("${indent}public $returnType $method(int index, ${it.nativeType.definition.className} $param) { n$method($ADDRESS, index, $param); return this; }")
 					}
 				} else if ( it.nativeType.isPointerData )
-					if ( it.nativeType is StructType )
-						println("${indent}public $returnType $method(${it.nativeType.definition.className} $param) { n$method($ADDRESS, $param); return this; }")
+					println("${indent}public $returnType $method(${if ( it.nativeType is StructType )
+						it.nativeType.definition.className
 					else
-						println("${indent}public $returnType $method(ByteBuffer $param) { n$method($ADDRESS, $param); return this; }")
+						it.nativeType.mapping.javaMethodType.simpleName
+					} $param) { n$method($ADDRESS, $param); return this; }")
 			}
 		}
 	}
@@ -990,8 +994,9 @@ class Struct(
 						println("\tpublic static ${it.nativeType.definition.className} $method(ByteBuffer $STRUCT) { return n${method}Struct(memAddress($STRUCT)); }")
 					}
 					it.nativeType.isPointerData       -> {
-						println("\tpublic static ByteBuffer n$method(long $STRUCT, int $BUFFER_LEN_PARAM) { return memByteBuffer(n$method($STRUCT), $BUFFER_LEN_PARAM); }")
-						println("\tpublic static ByteBuffer $method(ByteBuffer $STRUCT, int $BUFFER_LEN_PARAM) { return n$method(memAddress($STRUCT), $BUFFER_LEN_PARAM); }")
+						val bufferType = it.nativeType.mapping.javaMethodType.simpleName
+						println("\tpublic static $bufferType n$method(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return mem$bufferType(n$method($STRUCT), $BUFFER_CAPACITY_PARAM); }")
+						println("\tpublic static $bufferType $method(ByteBuffer $STRUCT, int $BUFFER_CAPACITY_PARAM) { return n$method(memAddress($STRUCT), $BUFFER_CAPACITY_PARAM); }")
 					}
 				}
 			}
@@ -1068,7 +1073,8 @@ class Struct(
 						println("${indent}public ${it.nativeType.definition.className} $method() { return n${method}Struct($ADDRESS); }")
 					}
 					it.nativeType.isPointerData       -> {
-						println("${indent}public ByteBuffer $method(int $BUFFER_LEN_PARAM) { return n$method($ADDRESS, $BUFFER_LEN_PARAM); }")
+						val bufferType = it.nativeType.mapping.javaMethodType.simpleName
+						println("${indent}public $bufferType $method(int $BUFFER_CAPACITY_PARAM) { return n$method($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
 					}
 				}
 			}

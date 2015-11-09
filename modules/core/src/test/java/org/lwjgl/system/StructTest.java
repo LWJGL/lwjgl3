@@ -5,13 +5,12 @@
 package org.lwjgl.system;
 
 import org.lwjgl.system.libffi.FFIType;
-import org.lwjgl.system.windows.GLYPHMETRICSFLOAT;
-import org.lwjgl.system.windows.POINTFLOAT;
 import org.testng.annotations.Test;
 
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 import static org.testng.Assert.*;
 
@@ -19,23 +18,13 @@ import static org.testng.Assert.*;
 public class StructTest {
 
 	public void testStructLayout() {
-		switch ( Platform.get() ) {
-			case WINDOWS: {
-				GLYPHMETRICSFLOAT s = GLYPHMETRICSFLOAT.malloc();
-				s.free();
+		FFIType s = FFIType.malloc();
+		s.free();
 
-				assertEquals(GLYPHMETRICSFLOAT.SIZEOF, 24);
-
-				assertEquals(GLYPHMETRICSFLOAT.BLACKBOXX, 0);
-				assertEquals(GLYPHMETRICSFLOAT.BLOCKBOXY, 4);
-				assertEquals(GLYPHMETRICSFLOAT.GLYPHORIGIN, 8);
-				assertEquals(GLYPHMETRICSFLOAT.GLYPHORIGIN + POINTFLOAT.X, 8);
-				assertEquals(GLYPHMETRICSFLOAT.GLYPHORIGIN + POINTFLOAT.Y, 12);
-				assertEquals(GLYPHMETRICSFLOAT.CELLINCX, 16);
-				assertEquals(GLYPHMETRICSFLOAT.CELLINCY, 20);
-				break;
-			}
-		}
+		assertEquals(FFIType.SIZE, 0);
+		assertEquals(FFIType.ALIGNMENT, POINTER_SIZE);
+		assertEquals(FFIType.TYPE, POINTER_SIZE + 2);
+		assertEquals(FFIType.ELEMENTS, POINTER_SIZE * 2);
 	}
 
 	public void testStructContainer() {
@@ -62,6 +51,18 @@ public class StructTest {
 		assertEquals(s.getElements(0), null);
 
 		s.free();
+	}
+
+	public void testStructCopy() {
+		FFIType src = FFIType.malloc().set(4, 8, FFI_TYPE_INT, null);
+
+		FFIType dst = FFIType.calloc();
+		dst.set(src);
+
+		assertEquals(dst.getSize(), src.getSize());
+		assertEquals(dst.getAlignment(), src.getAlignment());
+		assertEquals(dst.getType(), src.getType());
+		assertEquals(FFIType.ngetElements(dst.address()), FFIType.ngetElements(src.address()));
 	}
 
 	public void testStructBuffer() {
