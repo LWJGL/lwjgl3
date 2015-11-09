@@ -248,7 +248,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		return address;
 	}
 
-	protected static void prepareCIF(int ABI, FFICIF CIF, long rtype, PointerBuffer ARGS, long... atypes) {
+	protected static void prepareCIF(int ABI, FFICIF CIF, FFIType rtype, PointerBuffer ARGS, FFIType... atypes) {
 		for ( int i = 0; i < atypes.length; i++ )
 			ARGS.put(i, atypes[i]);
 

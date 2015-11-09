@@ -29,16 +29,15 @@ val ffi_status = typedef(int, "ffi_abi")
 
 val FFI_FN_TYPE = "FFI_FN_TYPE".opaque_p
 
-val ffi_type_p = "ffi_type".p
-val ffi_type_pp = ffi_type_p.p
-val ffi_type = struct(FFI_PACKAGE, "FFIType", structName = "ffi_type") {
+val ffi_type_p = struct_p(FFI_PACKAGE, "FFIType", structName = "ffi_type") {
 	documentation = "Contains information about a libffi type."
 	nativeImport("ffi.h")
 	size_t.member("size")
 	unsigned_short.member("alignment")
 	unsigned_short.member("type")
-	ffi_type_pp.member("elements") // TODO: self-reference here...
-}.nativeType
+	this.nativeType.p.p.member("elements") // self-reference
+}
+val ffi_type_pp = ffi_type_p.p
 
 val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", structName = "ffi_cif", mutable = false) {
 	documentation = "Contains information about a libffi call interface."

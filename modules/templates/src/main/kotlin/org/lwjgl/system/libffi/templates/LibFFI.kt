@@ -77,7 +77,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"BAD_ABI".enum
 	)
 
-	LongConstant(
+	CustomConstant("FFIType")(
 		"Data types. These are the addresses of libffi's predefined ##FFIType structs.",
 
 		"ffi_type_void" expr "ffi_type_void()",
