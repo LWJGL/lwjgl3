@@ -19,6 +19,21 @@ public final class Library {
 
 	private static final String JAVA_LIBRARY_PATH = "java.library.path";
 
+	private static final LibraryLoader<Boolean> LOADER_SYSTEM = new LibraryLoader<Boolean>() {
+		@Override
+		public Boolean load(File library) {
+			System.load(library.getAbsolutePath());
+			return true;
+		}
+	};
+
+	private static final LibraryLoader<SharedLibrary> LOADER_NATIVE = new LibraryLoader<SharedLibrary>() {
+		@Override
+		public SharedLibrary load(File library) {
+			return apiCreateLibrary(library.getPath());
+		}
+	};
+
 	static {
 		if ( Checks.DEBUG )
 			apiLog("Version " + Version.getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
@@ -132,21 +147,6 @@ public final class Library {
 	private interface LibraryLoader<T> {
 		T load(File library);
 	}
-
-	private static final LibraryLoader<Boolean> LOADER_SYSTEM = new LibraryLoader<Boolean>() {
-		@Override
-		public Boolean load(File library) {
-			System.load(library.getAbsolutePath());
-			return true;
-		}
-	};
-
-	private static final LibraryLoader<SharedLibrary> LOADER_NATIVE = new LibraryLoader<SharedLibrary>() {
-		@Override
-		public SharedLibrary load(File library) {
-			return apiCreateLibrary(library.getPath());
-		}
-	};
 
 	private static <T> T loadLibrary(LibraryLoader<T> loader, String path, String libName, T onFailure) {
 		for ( String root : Pattern.compile(File.pathSeparator).split(path) ) {
