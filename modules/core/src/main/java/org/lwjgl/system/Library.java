@@ -35,8 +35,12 @@ public final class Library {
 	};
 
 	static {
-		if ( Checks.DEBUG )
-			apiLog("Version " + Version.getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
+		if ( Checks.DEBUG ) {
+			apiLog("Version: " + Version.getVersion());
+			apiLog("\t OS: " + System.getProperty("os.name") + " v" + System.getProperty("os.version"));
+			apiLog("\tJRE: " + System.getProperty("java.version") + " " + System.getProperty("os.arch"));
+			apiLog("\tJVM: " + System.getProperty("java.vm.name") + " v" + System.getProperty("java.vm.version") + " by " + System.getProperty("java.vm.vendor"));
+		}
 
 		try {
 			loadSystem(JNI_LIBRARY_NAME);
