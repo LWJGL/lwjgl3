@@ -23,10 +23,36 @@ val PGPU_DEVICE = StructType(
 			"""
 		javaImport("org.lwjgl.system.windows.*")
 		nativeImport("WindowsLWJGL.h", "WGL.h")
-		DWORD.member("cb")
-		TCHAR.member(nativeName = "DeviceName", size = 32)
-		TCHAR.member(nativeName = "DeviceString", size = 128)
-		DWORD.member("Flags")
-		RECT.member(nativeName = "rcVirtualScreen", name = "virtualScreen");
+		DWORD.member(
+			"cb",
+			"""
+			the size of the {@code GPU_DEVICE} structure. Before calling WGLNVGPUAffinity##wglEnumGpuDevicesNV(), set {@code cb} to the size, in bytes, of
+			{@code GPU_DEVICE}.
+			"""
+		)
+		TCHAR.member(
+			"DeviceName",
+			"""
+			a string identifying the display device name. This will be the same string as stored in the {@code DeviceName} field of the {@code DISPLAY_DEVICE}
+			structure, which is filled in by {@code EnumDisplayDevices}.
+			""",
+			size = 32
+		)
+		TCHAR.member(
+			"DeviceString",
+			"""
+			a string describing the GPU for this display device. It is the same string as stored in the {@code DeviceString} field in the
+			{@code DISPLAY_DEVICE} structure that is filled in by {@code EnumDisplayDevices} when it describes a display adapter (and not a monitor).
+			""",
+			size = 128
+		)
+		DWORD.member("Flags", "indicates the state of the display device")
+		RECT.member(
+			"rcVirtualScreen",
+			"""
+			specifies the display device rectangle, in virtual screen coordinates. The value of {@code rcVirtualScreen} is undefined if the device is not part
+			of the desktop, i.e. {@code DISPLAY_DEVICE_ATTACHED_TO_DESKTOP} is not set in the {@code Flags} field.
+			"""
+		);
 	}
 )

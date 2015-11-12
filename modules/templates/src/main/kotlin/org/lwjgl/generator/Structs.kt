@@ -12,8 +12,8 @@ private val STRUCT = "struct"
 // TODO: Add support for javadoc
 private open class StructMember(
 	val nativeType: NativeType,
-	val nativeName: String,
-	val name: String
+	val name: String,
+	val documentation: String
 ) {
 	val offsetField: String
 		get() = name.toUpperCase()
@@ -34,17 +34,17 @@ private open class StructMember(
 
 private open class StructMemberArray(
 	nativeType: NativeType,
-	nativeName: String,
 	name: String,
+	documentation: String,
 	val size: Int
-) : StructMember(nativeType, nativeName, name)
+) : StructMember(nativeType, name, documentation)
 
 private class StructMemberCharArray(
 	nativeType: CharType,
-	nativeName: String,
 	name: String,
+	documentation: String,
 	size: Int
-) : StructMemberArray(nativeType, nativeName, name, size)
+) : StructMemberArray(nativeType, name, documentation, size)
 
 private val ANONYMOUS = "*"
 
@@ -108,18 +108,18 @@ class Struct(
 	private val members = ArrayList<StructMember>()
 
 	// Plain field
-	fun NativeType.member(nativeName: String, name: String = nativeName) {
-		members.add(StructMember(this, nativeName, name))
+	fun NativeType.member(name: String, documentation: String) {
+		members.add(StructMember(this, name, documentation))
 	}
 
 	// Array field
-	fun NativeType.member(nativeName: String, name: String = nativeName, size: Int) {
-		members.add(StructMemberArray(this, nativeName, name, size))
+	fun NativeType.member(name: String, documentation: String, size: Int) {
+		members.add(StructMemberArray(this, name, documentation, size))
 	}
 
 	// CharSequence special-case
-	fun CharType.member(nativeName: String, name: String = nativeName, size: Int) {
-		members.add(StructMemberCharArray(this, nativeName, name, size))
+	fun CharType.member(name: String, documentation: String, size: Int) {
+		members.add(StructMemberCharArray(this, name, documentation, size))
 	}
 
 	private val StructMember.isNestedStruct: Boolean
@@ -130,6 +130,37 @@ class Struct(
 
 	private val StructMember.nestedMembers: ArrayList<StructMember>
 		get() = (nativeType as StructType).definition.members
+
+	private fun PrintWriter.printDocumentation() {
+		val builder = StringBuilder()
+
+		if ( documentation != null ) {
+			builder.append(documentation)
+			if ( members.isNotEmpty() )
+				builder.append("\n\n")
+		}
+
+		if ( members.isNotEmpty() )
+			builder
+				.append(" <h3>${this@Struct.structName} members</h3>\n ")
+				.append(table(
+					tr(
+						th("Member"),
+						th("Type"),
+						th("Description")
+					),
+					*members.map {
+						tr(
+							td(it.name),
+							td(if ( it is StructMemberArray ) "${it.nativeType.name}[${it.size}]" else it.nativeType.name, className = "nw"),
+							td(it.documentation)
+						)
+					}.toTypedArray()
+				))
+
+		if ( builder.length != 0 )
+			println(processDocumentation(builder.toString()).toJavaDoc(indentation = ""))
+	}
 
 	override fun PrintWriter.generateJava() {
 		print(HEADER)
@@ -147,9 +178,7 @@ class Struct(
 		println();
 		preamble.printJava(this)
 
-		val documentation = super.documentation
-		if ( documentation != null )
-			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
+		printDocumentation()
 		println("${access.modifier}class $className extends Struct {")
 
 		print("""

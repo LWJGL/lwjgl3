@@ -160,17 +160,25 @@ val chunk_merge_t = "chunk_merge_t".callback(
 }
 
 val chunk_hooks_t = struct_p(JEMALLOC_PACKAGE, "ChunkHooks", structName = "chunk_hooks_t") {
-	documentation = "Chunk management hooks."
+	documentation =
+	"""
+	Comprises function pointers which are described individually below. jemalloc uses these functions to manage chunk lifetime, which starts off with
+	allocation of mapped committed memory, in the simplest case followed by deallocation. However, there are performance and platform reasons to retain chunks
+	for later reuse. Cleanup attempts cascade from deallocation to decommit to purging, which gives the chunk management functions opportunities to reject the
+	most permanent cleanup operations in favor of less permanent (and often less costly) operations. The chunk splitting and merging operations can also be
+	opted out of, but this is mainly intended to support platforms on which virtual memory mappings provided by the operating system kernel do not
+	automatically coalesce and split, e.g. Windows.
+	"""
 	nativeDirective(
 		"""DISABLE_WARNINGS()
 #include "jemalloc.h"
 ENABLE_WARNINGS()"""
 	)
-	chunk_alloc_t.member("alloc")
-	chunk_dalloc_t.member("dalloc")
-	chunk_commit_t.member("commit")
-	chunk_decommit_t.member("decommit")
-	chunk_purge_t.member("purge")
-	chunk_split_t.member("split")
-	chunk_merge_t.member("merge")
+	chunk_alloc_t.member("alloc", "the chunk allocation hook")
+	chunk_dalloc_t.member("dalloc", "the chunk deallocation hook")
+	chunk_commit_t.member("commit", "the chunk commit hook")
+	chunk_decommit_t.member("decommit", "the chunk decommit hook")
+	chunk_purge_t.member("purge", "the chunk purge hook")
+	chunk_split_t.member("split", "the chunk split hook")
+	chunk_merge_t.member("merge", "the chunk merge hook")
 }

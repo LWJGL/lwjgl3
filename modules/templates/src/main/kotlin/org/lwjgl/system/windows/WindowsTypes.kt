@@ -54,9 +54,10 @@ val PROC = "PROC".opaque_p
 val LPVOID = "LPVOID".opaque_p
 
 val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
+	documentation = "Contains the x and y coordinates of a point."
 	nativeImport ("WindowsLWJGL.h")
-	FLOAT.member("x")
-	FLOAT.member("y")
+	FLOAT.member("x", "specifies the horizontal (x) coordinate of a point")
+	FLOAT.member("y", "specifies the vertical (y) coordinate of a point")
 }.nativeType
 
 val LPGLYPHMETRICSFLOAT = StructType(
@@ -65,62 +66,80 @@ val LPGLYPHMETRICSFLOAT = StructType(
 	definition = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT", mutable = false) {
 		documentation = "Contains information about the placement and orientation of a glyph in a character cell."
 		nativeImport ("WindowsLWJGL.h")
-		FLOAT.member("gmfBlackBoxX", "blackBoxX")
-		FLOAT.member("gmfBlackBoxY", "blockBoxY")
-		POINTFLOAT.member("gmfptGlyphOrigin", "glyphOrigin")
-		FLOAT.member("gmfCellIncX", "cellIncX")
-		FLOAT.member("gmfCellIncY", "cellIncY")
+		FLOAT.member("gmfBlackBoxX", "specifies the width of the smallest rectangle (the glyph's black box) that completely encloses the glyph")
+		FLOAT.member("gmfBlackBoxY", "specifies the height of the smallest rectangle (the glyph's black box) that completely encloses the glyph")
+		POINTFLOAT.member("gmfptGlyphOrigin", "specifies the x and y coordinates of the upper-left corner of the smallest rectangle that completely encloses the glyph")
+		FLOAT.member("gmfCellIncX", "specifies the horizontal distance from the origin of the current character cell to the origin of the next character cell")
+		FLOAT.member("gmfCellIncY", "specifies the vertical distance from the origin of the current character cell to the origin of the next character cell")
 	}
 )
 
 private val POINT_STRUCT = struct(WINDOWS_PACKAGE, "POINT") {
-		documentation = "Defines the x- and y- coordinates of a point."
-		nativeImport ("WindowsLWJGL.h")
-		LONG.member("x")
-		LONG.member("y")
-	}
+	documentation = "Defines the x- and y- coordinates of a point."
+	nativeImport ("WindowsLWJGL.h")
+	LONG.member("x", "the x-coordinate of the point")
+	LONG.member("y", "the y-coordinate of the point")
+}
 val LPPOINT = StructType(name = "LPPOINT", definition = POINT_STRUCT, includesPointer = true)
 
 private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
 	documentation = "Defines the coordinates of the upper-left and lower-right corners of a rectangle."
 	nativeImport ("WindowsLWJGL.h")
-	LONG.member("left")
-	LONG.member("top")
-	LONG.member("right")
-	LONG.member("bottom")
+	LONG.member("left", "the x-coordinate of the upper-left corner of the rectangle")
+	LONG.member("top", "the y-coordinate of the upper-left corner of the rectangle")
+	LONG.member("right", "the x-coordinate of the lower-right corner of the rectangle")
+	LONG.member("bottom", "the y-coordinate of the lower-right corner of the rectangle")
 }
 val RECT = RECT_STRUCT.nativeType
 
-val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTOR") {		
-	documentation = "Describes the pixel format of a drawing surface."		
-	nativeImport ("WindowsLWJGL.h")		
-	WORD.member("nSize", "size")		
-	WORD.member("nVersion", "version")		
-	DWORD.member("dwFlags", "flags")		
-	BYTE.member("iPixelType", "pixelType")		
-	BYTE.member("cColorBits", "colorBits")		
-	BYTE.member("cRedBits", "redBits")		
-	BYTE.member("cRedShift", "redShirt")		
-	BYTE.member("cGreenBits", "greenBits")		
-	BYTE.member("cGreenShift", "greenShift")		
-	BYTE.member("cBlueBits", "blueBits")		
-	BYTE.member("cBlueShift", "blueShift")		
-	BYTE.member("cAlphaBits", "alphaBits")		
-	BYTE.member("cAlphaShift", "alphaShift")		
-	BYTE.member("cAccumBits", "accumBits")		
-	BYTE.member("cAccumRedBits", "accumRedBits")		
-	BYTE.member("cAccumGreenBits", "accumGreenBits")		
-	BYTE.member("cAccumBlueBits", "accumBlueBits")		
-	BYTE.member("cAccumAlphaBits", "accumAlphaBits")		
-	BYTE.member("cDepthBits", "depthBits")		
-	BYTE.member("cStencilBits", "stencilBits")		
-	BYTE.member("cAuxBuffers", "auxBuffers")		
-	BYTE.member("iLayerType", "layerType")		
-	BYTE.member("bReserved", "reserved")		
-	DWORD.member("dwLayerMask", "layerMask")		
-	DWORD.member("dwVisibleMask", "visibleMask")		
-	DWORD.member("dwDamageMask", "damageMask")		
-}		
-val PIXELFORMATDESCRIPTOR = StructType(PIXELFORMATDESCRIPTOR_STRUCT)		
-val LPPIXELFORMATDESCRIPTOR = StructType(name = "LPPIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT, includesPointer = true)		
+val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTOR") {
+	documentation = "Describes the pixel format of a drawing surface."
+	nativeImport ("WindowsLWJGL.h")
+	WORD.member("nSize", "specifies the size of this data structure. This value should be set to PIXELFORMATDESCRIPTOR#SIZEOF.")
+	WORD.member("nVersion", "specifies the version of this data structure. This value should be set to 1")
+	DWORD.member("dwFlags", "a set of bit flags that specify properties of the pixel buffer")
+	BYTE.member("iPixelType", "specifies the type of pixel data")
+	BYTE.member(
+		"cColorBits",
+		"""
+		specifies the number of color bitplanes in each color buffer. For RGBA pixel types, it is the size of the color buffer, excluding the alpha bitplanes.
+		For color-index pixels, it is the size of the color-index buffer.
+		"""
+	)
+	BYTE.member("cRedBits", "specifies the number of red bitplanes in each RGBA color buffer")
+	BYTE.member("cRedShift", "specifies the shift count for red bitplanes in each RGBA color buffer")
+	BYTE.member("cGreenBits", "specifies the number of green bitplanes in each RGBA color buffer")
+	BYTE.member("cGreenShift", "specifies the shift count for green bitplanes in each RGBA color buffer")
+	BYTE.member("cBlueBits", "specifies the number of blue bitplanes in each RGBA color buffer")
+	BYTE.member("cBlueShift", "specifies the shift count for blue bitplanes in each RGBA color buffer")
+	BYTE.member("cAlphaBits", "specifies the number of alpha bitplanes in each RGBA color buffer. Alpha bitplanes are not supported")
+	BYTE.member("cAlphaShift", "specifies the shift count for alpha bitplanes in each RGBA color buffer. Alpha bitplanes are not supported")
+	BYTE.member("cAccumBits", "specifies the total number of bitplanes in the accumulation buffer")
+	BYTE.member("cAccumRedBits", "specifies the number of red bitplanes in the accumulation buffer")
+	BYTE.member("cAccumGreenBits", "specifies the number of green bitplanes in the accumulation buffer")
+	BYTE.member("cAccumBlueBits", "specifies the number of blue bitplanes in the accumulation buffer")
+	BYTE.member("cAccumAlphaBits", "specifies the number of alpha bitplanes in the accumulation buffer")
+	BYTE.member("cDepthBits", "specifies the depth of the depth (z-axis) buffer")
+	BYTE.member("cStencilBits", "specifies the depth of the stencil buffer")
+	BYTE.member("cAuxBuffers", "specifies the number of auxiliary buffers. Auxiliary buffers are not supported")
+	BYTE.member("iLayerType", "Ignored. Earlier implementations of OpenGL used this member, but it is no longer used.")
+	BYTE.member(
+		"bReserved",
+		"""
+		specifies the number of overlay and underlay planes. Bits 0 through 3 specify up to 15 overlay planes and bits 4 through 7 specify up to 15 underlay
+		planes
+		"""
+	)
+	DWORD.member("dwLayerMask", "Ignored. Earlier implementations of OpenGL used this member, but it is no longer used.")
+	DWORD.member(
+		"dwVisibleMask",
+		"""
+		specifies the transparent color or index of an underlay plane. When the pixel type is RGBA, {@code dwVisibleMask} is a transparent RGB color value.
+		When the pixel type is color index, it is a transparent index value.
+		"""
+	)
+	DWORD.member("dwDamageMask", "Ignored. Earlier implementations of OpenGL used this member, but it is no longer used.")
+}
+val PIXELFORMATDESCRIPTOR = StructType(PIXELFORMATDESCRIPTOR_STRUCT)
+val LPPIXELFORMATDESCRIPTOR = StructType(name = "LPPIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT, includesPointer = true)
 val PIXELFORMATDESCRIPTOR_p = PIXELFORMATDESCRIPTOR.p

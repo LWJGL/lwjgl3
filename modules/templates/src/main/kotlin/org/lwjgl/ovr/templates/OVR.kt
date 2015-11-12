@@ -39,7 +39,7 @@ ENABLE_WARNINGS()""")
 		<h3>Application Loop</h3>
 		${ul(
 			"Call #GetPredictedDisplayTime() to get the current frame timing information.",
-			"Call #GetTrackingState() and #CalcEyePoses() to obtain the predicted rendering pose for each eye based on timing.",
+			"Call #GetTrackingState() and OVRUtil#CalcEyePoses() to obtain the predicted rendering pose for each eye based on timing.",
 			"Increment {@code ovrTextureSet::CurrentIndex} for each layer you will be rendering to in the next step.",
 			"Render the scene content into {@code ovrTextureSet::CurrentIndex} for each eye and layer you plan to update this frame.",
 			"""

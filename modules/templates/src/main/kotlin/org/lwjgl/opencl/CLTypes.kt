@@ -125,35 +125,95 @@ val cl_charUTF8_pp = cl_charUTF8_p.p
 // structs
 
 val cl_image_format_p = struct_p(OPENCL_PACKAGE, "CLImageFormat", structName = "cl_image_format") {
-	documentation = "Image format struct."
+	documentation = "The image format descriptor struct."
 	nativeImport("OpenCL.h")
-	cl_channel_order.member("image_channel_order")
-	cl_channel_type.member("image_channel_data_type")
+	cl_channel_order.member(
+		"image_channel_order",
+		"specifies the number of channels and the channel layout i.e. the memory layout in which channels are stored in the image"
+	)
+	cl_channel_type.member(
+		"image_channel_data_type",
+		"""
+		describes the size of the channel data type. The number of bits per element determined by the {@code image_channel_data_type} and
+		{@code image_channel_order} must be a power of two.
+		"""
+	)
 }
 
 val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", structName = "cl_image_desc") {
-	documentation = "Image description struct."
+	documentation = "Describes the type and dimensions of the image or image array."
 	nativeImport("OpenCL.h")
-	cl_mem_object_type.member("image_type")
-	size_t.member("image_width")
-	size_t.member("image_height")
-	size_t.member("image_depth")
-	size_t.member("image_array_size")
-	size_t.member("image_row_pitch")
-	size_t.member("image_slice_pitch")
-	cl_uint.member("num_mip_levels")
-	cl_uint.member("num_samples")
-	//union {
-	cl_mem.member("buffer")
-	//cl_mem.member("mem_object") TODO: Missing from Apple's headers
-	//}
+	cl_mem_object_type.member("image_type", "describes the image type")
+	size_t.member(
+		"image_width",
+		"""
+		the width of the image in pixels. For a 2D image and image array, the image width must be &le; CL10#CL_DEVICE_IMAGE2D_MAX_WIDTH. For a 3D image, the
+		image width must be &le; CL10#CL_DEVICE_IMAGE3D_MAX_WIDTH. For a 1D image buffer, the image width must be &le; CL10#CL_DEVICE_IMAGE_MAX_BUFFER_SIZE.
+		For a 1D image and 1D image array, the image width must be &le; CL10#CL_DEVICE_IMAGE2D_MAX_WIDTH.
+		"""
+	)
+	size_t.member(
+		"image_height",
+		"""
+		the height of the image in pixels. This is only used if the image is a 2D, 3D or 2D image array. For a 2D image or image array, the image height must
+		be &le; CL10#CL_DEVICE_IMAGE2D_MAX_HEIGHT. For a 3D image, the image height must be &le; CL10#CL_DEVICE_IMAGE3D_MAX_HEIGHT.
+		"""
+	)
+	size_t.member(
+		"image_depth",
+		"the depth of the image in pixels. This is only used if the image is a 3D image and must be a value &ge; 1 and &le; CL10#CL_DEVICE_IMAGE3D_MAX_DEPTH."
+	)
+	size_t.member(
+		"image_array_size",
+		"""
+		the number of images in the image array. This is only used if the image is a 1D or 2D image array. The values for {@code image_array_size}, if
+		specified, must be a value &ge; 1 and &le; CL10#CL_DEVICE_IMAGE_MAX_ARRAY_SIZE.
+
+		Note that reading and writing 2D image arrays from a kernel with {@code image_array_size = 1} may be lower performance than 2D images.
+		"""
+	)
+	size_t.member(
+		"image_row_pitch",
+		"""
+		the scan-line pitch in bytes. This must be 0 if {@code host_ptr} is $NULL and can be either 0 or &ge; {@code image_width * size} of element in bytes if
+		{@code host_ptr} is not $NULL. If {@code host_ptr} is not $NULL and {@code image_row_pitch = 0}, {@code image_row_pitch} is calculated as
+		{@code image_width * size} of element in bytes. If {@code image_row_pitch} is not 0, it must be a multiple of the image element size in bytes.
+		"""
+	)
+	size_t.member(
+		"image_slice_pitch",
+		"""
+		the size in bytes of each 2D slice in the 3D image or the size in bytes of each image in a 1D or 2D image array. This must be 0 if {@code host_ptr} is
+		$NULL. If {@code host_ptr} is not $NULL, {@code image_slice_pitch} can be either 0 or &ge; {@code image_row_pitch * image_height} for a 2D image array
+		or 3D image and can be either 0 or &ge; {@code image_row_pitch} for a 1D image array. If {@code host_ptr} is not $NULL and
+		{@code image_slice_pitch = 0}, {@code image_slice_pitch} is calculated as {@code image_row_pitch * image_height} for a 2D image array or 3D image and
+		{@code image_row_pitch} for a 1D image array. If {@code image_slice_pitch} is not 0, it must be a multiple of the {@code image_row_pitch}.
+		"""
+	)
+	cl_uint.member("num_mip_levels", "must be 0")
+	cl_uint.member("num_samples", "must be 0")
+	cl_mem.member(
+		"buffer",
+		"""
+		refers to a valid buffer memory object if {@code image_type} is CL10#CL_MEM_OBJECT_IMAGE1D_BUFFER. Otherwise it must be $NULL. For a 1D image buffer
+		object, the image pixels are taken from the buffer object's data store. When the contents of a buffer object's data store are modified, those changes
+		are reflected in the contents of the 1D image buffer object and vice-versa at corresponding sychronization points. The {@code image_width * size} of
+		element in bytes must be &le; size of buffer object data store.
+		"""
+	)
 }
 
 val cl_bus_address_amd_p = struct_p(OPENCL_PACKAGE, "CLBusAddressAMD", structName = "cl_bus_address_amd") {
-	documentation = "Used in AMDBusAddressableMemory##clEnqueueMakeBuffersResidentAMD()."
+	documentation = "Bus address information used in AMDBusAddressableMemory##clEnqueueMakeBuffersResidentAMD()."
 	nativeImport("OpenCL.h")
-	cl_long.member("surface_bus_address")
-	cl_long.member("marker_bus_address")
+	cl_long.member(
+		"surfbusaddress",
+		"contains the page aligned physical starting address of the backing store preallocated by the application on a remote device"
+	)
+	cl_long.member(
+		"signalbusaddress",
+		"contains the page aligned physical starting address of preallocated signaling surface"
+	)
 }
 
 fun config() {
@@ -170,8 +230,8 @@ fun config() {
 	struct(OPENCL_PACKAGE, "CLBufferRegion", structName = "cl_buffer_region") {
 		documentation = "Buffer region struct."
 		nativeImport("OpenCL.h")
-		size_t.member("origin")
-		size_t.member("size")
+		size_t.member("origin", "the region offset, in bytes")
+		size_t.member("size", "the region size, in bytes")
 	}
 
 	struct(OPENCL_PACKAGE, "CLDeviceTopologyAMD", structName = "cl_device_topology_amd", mutable = false) {
@@ -179,25 +239,32 @@ fun config() {
 			"The struct returned by CL10##clGetDeviceInfo() with {@code param_name} set to AMDDeviceTopology##CL_DEVICE_TOPOLOGY_AMD."
 		nativeImport("OpenCL.h")
 		struct {
-			cl_uint.member("type")
-			cl_uint.member("data", size = 5)
-		}.member("raw")
+			cl_uint.member("type", "")
+			cl_uint.member("data", "", size = 5)
+		}.member("raw", "")
 		struct {
-			cl_uint.member("type")
+			cl_uint.member("type", "")
 			//cl_char.member("unused", size = 17)
-			cl_char.member("bus")
-			cl_char.member("device")
-			cl_char.member("function")
-		}.member("pcie")
+			cl_char.member("bus", "")
+			cl_char.member("device", "")
+			cl_char.member("function", "")
+		}.member("pcie", "")
 	}
 
 	struct(OPENCL_PACKAGE, "CLMotionEstimationDescINTEL", structName = "cl_motion_estimation_desc_intel") {
 		documentation = "Describes the configuration of the motion estimation algorithm."
 		nativeImport("OpenCL.h")
-		cl_uint.member("mb_block_type");
-		cl_uint.member("subpixel_mode");
-		cl_uint.member("sad_adjust_mode");
-		cl_uint.member("search_path_type");
+		cl_uint.member("mb_block_type", "describes the size of the blocks described by the motion estimator")
+		cl_uint.member("subpixel_mode", "defines the search precision (and hence, the precision of the returned motion vectors)")
+		cl_uint.member("sad_adjust_mode", "specifies distortion measure adjustment used for the motion search SAD comparison")
+		cl_uint.member(
+			"search_path_type",
+			"""
+			specifies the search path and search radius when matching blocks in the neighborhood of each pixel block (optionally offset by the predicted motion
+			vector). Currently, all search algorithms match the source block with pixel blocks in the reference area exhaustively within a {@code [Rx, Ry]}
+			radius from the current source pixel block location (optionally offset by the predicted motion vector)
+			"""
+		)
 	}
 }
 

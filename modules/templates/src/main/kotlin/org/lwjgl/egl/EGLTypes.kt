@@ -60,35 +60,35 @@ val EGLAttribKHR_p = EGLAttribKHR.p
 val EGLObjectKHR = "EGLObjectKHR".opaque_p
 val EGLLabelKHR = "EGLLabelKHR".opaque_p
 val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
-		EGL_PACKAGE, void, "EGLDebugMessageKHRCallback",
-		"Will be called when a debug message is generated.",
-		EGLenum.IN("error", "will contain an EGL error code, or EGL10##EGL_SUCCESS, as applicable"),
-		const..charASCII_p.IN("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
-		EGLint.IN("messageType", "will contain one of the debug message types"),
-		EGLLabelKHR.IN(
-			"threadLabel",
-			"""
+	EGL_PACKAGE, void, "EGLDebugMessageKHRCallback",
+	"Will be called when a debug message is generated.",
+	EGLenum.IN("error", "will contain an EGL error code, or EGL10##EGL_SUCCESS, as applicable"),
+	const..charASCII_p.IN("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
+	EGLint.IN("messageType", "will contain one of the debug message types"),
+	EGLLabelKHR.IN(
+		"threadLabel",
+		"""
 			will contain the label attached to the current thread. The {@code threadLabel} will be $NULL if not set by the application. If the message is from
 			an internal thread, the label will be $NULL.
 			"""
-		),
-		EGLLabelKHR.IN(
-			"objectLabel",
-			"""
+	),
+	EGLLabelKHR.IN(
+		"objectLabel",
+		"""
 			will contain the label attached to the primary object of the message; Labels will be $NULL if not set by the application. The primary object should
 			be the object the function operates on, see table 13.2 which provides the recommended mapping between functions and their primary object. This
 			{@code objectLabel} may be $NULL even though the application labeled the object. This is because it is possible an error was raised while executing
 			the command before the primary object was validated, therefore its label can not be included in the callback.
 			"""
-		),
-		nullable..const..charUTF8_p.IN(
-			"message",
-			"""
+	),
+	nullable..const..charUTF8_p.IN(
+		"message",
+		"""
 			 will contain a platform specific debug string message; This string should provide added information to the application developer regarding the
 			 condition that generated the message. The format of a message is implementation-defined, although it should represent a concise description of the
 			 event that caused the message to be generated. Message strings can be $NULL and should not be assumed otherwise.
 			"""
-		)
+	)
 ) {
 	documentation = "Instances of this interface may be passed to the KHRDebug##eglDebugMessageControlKHR() method."
 	useSystemCallConvention()
@@ -235,12 +235,27 @@ val EGLOutputPortEXT_p = EGLOutputPortEXT.p
 
 // HI_clientpixmap
 val EGLClientPixmapHI_p = struct_p(EGL_PACKAGE, "EGLClientPixmapHI", identifierType = StructIdentifierType.STRUCT) {
-	documentation = "Image format struct."
+	documentation =
+		"""
+		Specifies the width, height, stride, format and memory pointer of the pixmap to be used by the function HIClientpixmap#eglCreatePixmapSurfaceHI() to
+		create the {@code PixmapSurface}.
+		"""
 	includeEGLEXT()
-	void_p.member("pData")
-	EGLint.member("iWidth")
-	EGLint.member("iHeight")
-	EGLint.member("iStride")
+	void_p.member(
+		"pData",
+		"""
+		pointer to a memory buffer allocated by the application that will contain the result of the drawing operations. It is up to the application to ensure
+		that the buffer size corresponds to {@code iHeight * iStride * sizeof(pixel)}.
+	""")
+	EGLint.member("iWidth", "width of the buffer in pixels")
+	EGLint.member(
+		"iHeight",
+		"""
+		height of the buffer in pixels. The height of the buffer can be negative; in that case the result of the drawing operations will be vertically swapped.
+		When positive, {@code pData} will point at the bottom-left corner of the image; when negative, to the top-left corner.
+		"""
+	)
+	EGLint.member("iStride", "stride of the buffer, in pixels. It is important to note that each row of the buffer must start on 32-bit boundaries.")
 }
 
 // NV_sync

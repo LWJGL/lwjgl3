@@ -46,8 +46,8 @@ typedef union {
 // amd_bus_addressable_memory
 
 typedef struct {
-	cl_ulong surface_bus_address;
-	cl_ulong marker_bus_address;
+	cl_ulong surfbusaddress;
+	cl_ulong signalbusaddress;
 } cl_bus_address_amd;
 
 // intel_motion_estimation

@@ -75,6 +75,7 @@
         <option name="FIELD_ANNOTATION_WRAP" value="0" />
         <JetCodeStyleSettings>
           <option name="ALIGN_IN_COLUMNS_CASE_BRANCH" value="true" />
+          <option name="NAME_COUNT_TO_USE_STAR_IMPORT" value="3" />
         </JetCodeStyleSettings>
         <SqlCodeStyleSettings>
           <option name="NEW_LINE_BEFORE_FROM" value="false" />

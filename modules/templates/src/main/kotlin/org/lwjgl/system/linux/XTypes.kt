@@ -23,13 +23,13 @@ val Visual_p = struct_p(LINUX_PACKAGE, "Visual") {
 	nativeImport ("LinuxLWJGL.h")
 
 	// ignored: XExtData_p.member("ext_data")
-	VisualID.member("visualid")
-	int.member("class", "clazz")
-	unsigned_long.member("red_mask")
-	unsigned_long.member("green_mask")
-	unsigned_long.member("blue_mask")
-	int.member("bits_per_rgb")
-	int.member("map_entries")
+	VisualID.member("visualid", "")
+	int.member("class", "")
+	unsigned_long.member("red_mask", "")
+	unsigned_long.member("green_mask", "")
+	unsigned_long.member("blue_mask", "")
+	int.member("bits_per_rgb", "")
+	int.member("map_entries", "")
 }
 
 val XVisualInfo_p = struct_p(LINUX_PACKAGE, "XVisualInfo") {
@@ -39,16 +39,16 @@ val XVisualInfo_p = struct_p(LINUX_PACKAGE, "XVisualInfo") {
 		"<X11/Xutil.h>"
 	)
 
-	Visual_p.member("visual")
-	VisualID.member("visualid")
-	int.member("screen")
-	int.member("depth")
-	int.member("class", "clazz")
-	unsigned_long.member("red_mask")
-	unsigned_long.member("green_mask")
-	unsigned_long.member("blue_mask")
-	int.member("colormap_size")
-	int.member("bits_per_rgb")
+	Visual_p.member("visual", "")
+	VisualID.member("visualid", "")
+	int.member("screen", "")
+	int.member("depth", "")
+	int.member("class", "")
+	unsigned_long.member("red_mask", "")
+	unsigned_long.member("green_mask", "")
+	unsigned_long.member("blue_mask", "")
+	int.member("colormap_size", "")
+	int.member("bits_per_rgb", "")
 }
 
 // --------------- Xrandr.h ---------------
