@@ -171,13 +171,15 @@ fun tr(vararg columns: String): String {
 }
 
 fun th(content: String = "", colspan: Int = 1, rowspan: Int = 1) = td(content, colspan, rowspan, "th")
-fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "td"): String {
+fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "td", className: String? = null): String {
 	val builder = StringBuilder()
 	builder.append("<$tag")
 	if ( 1 < colspan )
 		builder.append(" colspan=$colspan")
 	if ( 1 < rowspan )
 		builder.append(" rowspan=$rowspan")
+	if ( className != null )
+		builder.append(" class=\"$className\"")
 	builder.append(">")
 	builder.append(content.trim())
 	builder.append("</$tag>")

@@ -494,6 +494,10 @@ table.lwjgl td, th {
 	border-left: 1px solid black !important;
 }
 
+table.lwjgl td.nw {
+    white-space: nowrap;
+}
+
 table.matrix td {
 	text-align: center !important;
 }
