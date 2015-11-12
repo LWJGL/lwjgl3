@@ -186,8 +186,8 @@ public final class Image {
 
 		glfwSetWindowPos(
 			window,
-			(vidmode.getWidth() - ww) / 2,
-			(vidmode.getHeight() - wh) / 2
+			(vidmode.width() - ww) / 2,
+			(vidmode.height() - wh) / 2
 		);
 
 		// Create context

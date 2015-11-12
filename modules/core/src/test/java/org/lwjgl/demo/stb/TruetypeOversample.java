@@ -239,8 +239,8 @@ public final class TruetypeOversample {
 		for ( int i = 0; i < text.length(); i++ ) {
 			stbtt_GetPackedQuad(chardata, BITMAP_W, BITMAP_H, text.charAt(i), xb, yb, q, font == 0 && integer_align ? 1 : 0);
 			drawBoxTC(
-				q.getX0(), q.getY0(), q.getX1(), q.getY1(),
-				q.getS0(), q.getT0(), q.getS1(), q.getT1()
+				q.x0(), q.y0(), q.x1(), q.y1(),
+				q.s0(), q.t0(), q.s1(), q.t1()
 			);
 		}
 		glEnd();
@@ -350,8 +350,8 @@ public final class TruetypeOversample {
 
 		glfwSetWindowPos(
 			window,
-			(vidmode.getWidth() - ww) / 2,
-			(vidmode.getHeight() - wh) / 2
+			(vidmode.width() - ww) / 2,
+			(vidmode.height() - wh) / 2
 		);
 
 		// Create context

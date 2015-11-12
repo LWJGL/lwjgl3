@@ -20,8 +20,8 @@ public final class HelloLibOVR {
 		OVRDetectResult detect = OVRDetectResult.calloc();
 		ovr_Detect(0, detect);
 
-		System.out.println("OVRDetectResult.IsOculusHMDConnected = " + detect.getIsOculusHMDConnected());
-		System.out.println("OVRDetectResult.IsOculusServiceRunning = " + detect.getIsOculusServiceRunning());
+		System.out.println("OVRDetectResult.IsOculusHMDConnected = " + detect.IsOculusHMDConnected());
+		System.out.println("OVRDetectResult.IsOculusServiceRunning = " + detect.IsOculusServiceRunning());
 
 		OVRLogCallback callback = new OVRLogCallback() {
 			@Override
@@ -31,8 +31,8 @@ public final class HelloLibOVR {
 		};
 
 		OVRInitParams initParams = OVRInitParams.calloc();
-		initParams.setLogCallback(callback.address());
-		initParams.setFlags(ovrInit_Debug);
+		initParams.LogCallback(callback.address());
+		initParams.Flags(ovrInit_Debug);
 
 		System.out.println("ovr_Initialize = " + ovr_Initialize(initParams));
 		initParams.free();
@@ -48,7 +48,7 @@ public final class HelloLibOVR {
 		OVRHmdDesc desc = OVRHmdDesc.malloc();
 		ovr_GetHmdDesc(hmd, desc);
 
-		System.out.println("ovr_GetHmdDesc = " + desc.getManufacturerString() + " " + desc.getProductNameString() + " " + desc.getSerialNumberString());
+		System.out.println("ovr_GetHmdDesc = " + desc.ManufacturerString() + " " + desc.ProductNameString() + " " + desc.SerialNumberString());
 
 		desc.free();
 		luid.free();

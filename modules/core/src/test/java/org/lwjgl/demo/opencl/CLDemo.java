@@ -122,15 +122,15 @@ public final class CLDemo {
 
 				long subbuffer = NULL;
 				if ( caps.OpenCL11 ) {
-					ByteBuffer buffer_region = memAlloc(CLBufferRegion.SIZEOF);
-					CLBufferRegion.setOrigin(buffer_region, 0);
-					CLBufferRegion.setSize(buffer_region, 64);
+					CLBufferRegion buffer_region = CLBufferRegion.malloc();
+					buffer_region.origin(0);
+					buffer_region.size(64);
 
 					try {
-						subbuffer = clCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, buffer_region, errcode_ret);
+						subbuffer = nclCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, buffer_region.address(), memAddress(errcode_ret));
 						checkCLError(errcode_ret);
 					} finally {
-						memFree(buffer_region);
+						buffer_region.free();
 					}
 
 					errcode = clSetMemObjectDestructorCallback(subbuffer, new CLMemObjectDestructorCallback() {

@@ -297,6 +297,11 @@ public final class Checks {
 			throwBufferSizeGTException(buf, size);
 	}
 
+	public static void checkBufferGT(StructBuffer<?, ?> buf, int size) {
+		if ( size < buf.remaining() )
+			throwBufferSizeGTException(buf, size);
+	}
+
 	// Separate calls to help inline checkBuffer.
 
 	private static void throwBufferSizeException(Buffer buf, int size) {
@@ -324,6 +329,10 @@ public final class Checks {
 	}
 
 	private static void throwBufferSizeGTException(PointerBuffer buf, int size) {
+		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at most " + size + ".");
+	}
+
+	private static void throwBufferSizeGTException(StructBuffer<?, ?> buf, int size) {
 		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at most " + size + ".");
 	}
 

@@ -122,8 +122,8 @@ public final class Vorbis {
 			STBVorbisInfo info = STBVorbisInfo.malloc();
 
 			Decoder.getInfo(handle, info);
-			this.channels = info.getChannels();
-			this.sampleRate = info.getSampleRate();
+			this.channels = info.channels();
+			this.sampleRate = info.sample_rate();
 
 			info.free();
 
@@ -145,12 +145,12 @@ public final class Vorbis {
 
 			stb_vorbis_get_info(decoder, info);
 
-			System.out.println("channels = " + info.getChannels());
-			System.out.println("sampleRate = " + info.getSampleRate());
-			System.out.println("maxFrameSize = " + info.getMaxFrameSize());
-			System.out.println("setupMemoryRequired = " + info.getSetupMemoryRequired());
-			System.out.println("setupTempMemoryRequired() = " + info.getSetupTempMemoryRequired());
-			System.out.println("tempMemoryRequired = " + info.getTempMemoryRequired());
+			System.out.println("channels = " + info.channels());
+			System.out.println("sampleRate = " + info.sample_rate());
+			System.out.println("maxFrameSize = " + info.max_frame_size());
+			System.out.println("setupMemoryRequired = " + info.setup_memory_required());
+			System.out.println("setupTempMemoryRequired() = " + info.setup_temp_memory_required());
+			System.out.println("tempMemoryRequired = " + info.temp_memory_required());
 		}
 
 		private static int getFormat(int channels) {
@@ -351,8 +351,8 @@ public final class Vorbis {
 
 			glfwSetWindowPos(
 				window,
-				(vidmode.getWidth() - WIDTH) / 2,
-				(vidmode.getHeight() - HEIGHT) / 2
+				(vidmode.width() - WIDTH) / 2,
+				(vidmode.height() - HEIGHT) / 2
 			);
 
 			// Create context

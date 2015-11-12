@@ -80,7 +80,7 @@ public final class ALCDemo {
 		checkALError();
 
 		//copy to buffer
-		alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.getSampleRate());
+		alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.sample_rate());
 		checkALError();
 
 		info.free();
@@ -131,7 +131,7 @@ public final class ALCDemo {
 
 		stb_vorbis_get_info(decoder, info);
 
-		int channels = info.getChannels();
+		int channels = info.channels();
 
 		int lengthSamples = stb_vorbis_stream_length_in_samples(decoder);
 

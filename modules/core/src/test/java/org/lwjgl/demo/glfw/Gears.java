@@ -89,7 +89,7 @@ public class Gears extends AbstractGears {
 		GLFWVidMode vidmode = glfwGetVideoMode(monitor);
 
 		long window = fullscreen
-			? glfwCreateWindow(vidmode.getWidth(), vidmode.getHeight(), "GLFW Gears Demo", monitor, this.window)
+			? glfwCreateWindow(vidmode.width(), vidmode.height(), "GLFW Gears Demo", monitor, this.window)
 			: glfwCreateWindow(WIDTH, HEIGHT, "GLFW Gears Demo", NULL, this.window);
 
 		if ( window == NULL )
@@ -115,8 +115,8 @@ public class Gears extends AbstractGears {
 			// Center window
 			glfwSetWindowPos(
 				window,
-				(vidmode.getWidth() - WIDTH) / 2,
-				(vidmode.getHeight() - HEIGHT) / 2
+				(vidmode.width() - WIDTH) / 2,
+				(vidmode.height() - HEIGHT) / 2
 			);
 		}
 

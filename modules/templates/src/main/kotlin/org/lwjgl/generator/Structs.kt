@@ -6,7 +6,6 @@ package org.lwjgl.generator
 
 import java.io.PrintWriter
 import java.util.*
-import java.util.regex.Pattern
 
 private val STRUCT = "struct"
 
@@ -16,10 +15,6 @@ private open class StructMember(
 	val nativeName: String,
 	val name: String
 ) {
-	companion object {
-		val UNDERSCORE = Pattern.compile("_")
-	}
-
 	val offsetField: String
 		get() = name.toUpperCase()
 
@@ -30,12 +25,10 @@ private open class StructMember(
 			"${parentField}_$offsetField"
 	}
 
-	private fun _method(parentMember: String) = if ( parentMember.isEmpty() )
-		name
+	fun field(parentMember: String) = if ( parentMember.isEmpty() )
+		if ( name == "class" ) "$name\$" else name // TODO: use a list of Java keywords here
 	else
-		"$parentMember${name.upperCaseFirst}"
-
-	fun method(parentMember: String) = UNDERSCORE.split(_method(parentMember)).map { it.upperCaseFirst }.joinToString("")
+		"${parentMember}_$name"
 
 }
 
@@ -106,7 +99,6 @@ class Struct(
 			"double" to "Double"
 		)
 
-		private val BUFFER_LEN_PARAM = "byteLen"
 		private val BUFFER_CAPACITY_PARAM = "capacity"
 	}
 
@@ -139,9 +131,6 @@ class Struct(
 	private val StructMember.nestedMembers: ArrayList<StructMember>
 		get() = (nativeType as StructType).definition.members
 
-	// Make parameter lowercase if it's all uppercase and conflicts with the offset field
-	private fun String.toParam(field: String) = if ( this != field ) this else this.toLowerCase()
-
 	override fun PrintWriter.generateJava() {
 		print(HEADER)
 		println("package $packageName;\n")
@@ -151,7 +140,8 @@ class Struct(
 		println("import org.lwjgl.*;")
 		println("import org.lwjgl.system.*;\n")
 
-		println("import static org.lwjgl.system.Checks.*;")
+		if ( mutable )
+			println("import static org.lwjgl.system.Checks.*;")
 		println("import static org.lwjgl.system.MemoryUtil.*;")
 
 		println();
@@ -243,7 +233,7 @@ class Struct(
 				}
 
 				print("""
-	/** Unsafe version of {@link #set}. */
+	/** Unsafe version of {@link #set($className) set}. */
 	public $className nset(long struct) {
 		memCopy(struct, $ADDRESS, SIZEOF);
 		return this;
@@ -260,7 +250,7 @@ class Struct(
 		return nset(src.$ADDRESS);
 	}
 
-	/** {@link ByteBuffer} version of {@link #set}. */
+	/** {@link ByteBuffer} version of {@link #set($className) set}. */
 	public $className set(ByteBuffer struct) {
 		if ( CHECKS )
 			checkBuffer(struct, SIZEOF);
@@ -468,7 +458,7 @@ class Struct(
 
 	private val generateMultiSetterParameters: PrintWriter.(List<StructMember>, String, MultiSetterMode, Boolean) -> Unit = { members, parentMember, mode, more ->
 		members.forEachWithMore(more) { it, more ->
-			val method = it.method(parentMember)
+			val method = it.field(parentMember)
 
 			if ( it.isNestedAnonymousStruct ) {
 				generateMultiSetterParameters(it.nestedMembers, method, mode, more)
@@ -480,50 +470,28 @@ class Struct(
 
 			print("\t\t")
 
-			val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
+			val param = it.field(parentMember)
 
 			when {
-				it is StructMemberArray -> {
-					println("long $param,")
-					print("\t\tint ${param}Bytes")
-				}
-				it.nativeType.isPointer -> {
-					print("long $param")
-				}
-				else                    -> {
-					val javaType = it.nativeType.javaMethodType.simpleName
-					print(
-						if ( javaType.equals("byte") || javaType.equals("short") )
-							"int $param"
-						else
-							"$javaType $param"
-					)
-				}
+				it is StructMemberArray -> print("long $param,\n\t\tint ${param}Bytes")
+				it.nativeType.isPointer -> print("long $param")
+				else                    -> print("${it.nativeType.javaMethodType.simpleName} $param")
 			}
 		}
 	}
 
 	private val generateMultiSetterSetters: PrintWriter.(List<StructMember>, String, MultiSetterMode) -> Unit = { members, parentMember, mode ->
 		members.forEach {
-			val setter = it.method(parentMember)
-			val method = "set$setter"
+			val setter = it.field(parentMember)
 
 			if ( it.isNestedAnonymousStruct ) {
 				generateMultiSetterSetters(it.nestedMembers, setter, mode)
 			} else {
-				val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
-
-				when {
-					it is StructMemberArray -> {
-						println("\t\t$method($param, ${param}Bytes);")
-					}
-					it.isNestedStruct       -> {
-						println("\t\t$method($param);")
-					}
-					else                    -> {
-						println("\t\t$method($param);")
-					}
-				}
+				val param = it.field(parentMember)
+				println(if ( it is StructMemberArray )
+					"\t\t$setter($param, ${param}Bytes);"
+				else
+					"\t\t$setter($param);")
 			}
 		}
 	}
@@ -539,7 +507,7 @@ class Struct(
 
 	private val generateAlternativeMultiSetterParameters: PrintWriter.(List<StructMember>, String, MultiSetterMode, Boolean) -> Unit = { members, parentMember, mode, more ->
 		members.forEachWithMore(more) { it, more ->
-			val method = it.method(parentMember)
+			val method = it.field(parentMember)
 
 			if ( it.isNestedAnonymousStruct ) {
 				generateAlternativeMultiSetterParameters(it.nestedMembers, method, mode, more)
@@ -551,49 +519,39 @@ class Struct(
 
 			print("\t\t")
 
-			val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
+			val param = it.field(parentMember)
 
-			when {
-				it is StructMemberArray     -> {
-					print(
-						if ( it is StructMemberCharArray && mode === MultiSetterMode.ALTER2 )
-							"CharSequence $param"
-						else if ( it.nativeType is StructType && it.nativeType.includesPointer )
+			if (it is StructMemberArray) {
+				print(
+					if ( it is StructMemberCharArray ) {
+						when ( mode ) {
+							MultiSetterMode.NORMAL,
+							MultiSetterMode.ALTER1 -> "ByteBuffer $param"
+							MultiSetterMode.ALTER2 -> "CharSequence $param"
+						}
+					} else if ( it.nativeType is StructType ) {
+						if ( it.nativeType.includesPointer )
 							"PointerBuffer $param"
 						else
-							"ByteBuffer $param"
-					)
-				}
-				it.nativeType.isPointerData -> {
-					print("${if ( it.nativeType is StructType )
-						it.nativeType.definition.className
-					else
-						it.nativeType.mapping.javaMethodType.simpleName
-					} $param")
-				}
-				else                        -> {
-					val javaType = it.nativeType.javaMethodType.simpleName
-					print(
-						if ( javaType.equals("byte") || javaType.equals("short") )
-							"int $param"
-						else
-							"$javaType $param"
-					)
-				}
-			}
+							"${it.nativeType.definition.className}.Buffer $param"
+					} else
+						"${(it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName} $param"
+				)
+			} else if ( it.nativeType.isPointerData && it.nativeType is StructType )
+				print("${it.nativeType.definition.className} $param")
+			else
+				print("${it.nativeType.javaMethodType.simpleName} $param")
 		}
 	}
 
 	private val generateAlternativeMultiSetterSetters: PrintWriter.(List<StructMember>, String, MultiSetterMode) -> Unit = { members, parentMember, mode ->
 		members.forEach {
-			val method = it.method(parentMember)
+			val method = it.field(parentMember)
 
-			if ( it.isNestedAnonymousStruct ) {
+			if ( it.isNestedAnonymousStruct )
 				generateAlternativeMultiSetterSetters(it.nestedMembers, method, mode)
-			} else {
-				val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
-				println("\t\tset$method($param);")
-			}
+			else
+				println("\t\t$method(${it.field(parentMember)});")
 		}
 	}
 
@@ -602,24 +560,11 @@ class Struct(
 		parentStruct: Struct?,
 		parentField: String
 	) = if ( parentStruct == null )
-		m.offsetField
+		"$className.${m.offsetField}"
 	else if ( parentStruct.className === ANONYMOUS )
 		"${parentField}_${m.offsetField}"
-	else {
-		val classPrefix = if ( parentField.equals(parentStruct.className) ) // See org.lwjgl.system.windows.MSG, field POINT
-			"${parentStruct.packageName}.${parentStruct.className}"
-		else
-			parentStruct.className
-		"$parentField + $classPrefix.${m.offsetField}"
-	}
-
-	private fun getNestedStructSizeOf(
-		nestedStruct: Struct,
-		field: String
-	) = if ( field.equals(nestedStruct.className) ) // See org.lwjgl.system.windows.MSG, field POINT
-		"${nestedStruct.packageName}.${nestedStruct.className}.SIZEOF"
 	else
-		"${nestedStruct.className}.SIZEOF"
+		throw IllegalStateException()
 
 	private fun PrintWriter.generateStaticSetters(
 		members: List<StructMember>,
@@ -628,137 +573,107 @@ class Struct(
 		parentField: String = ""
 	) {
 		members.forEach {
-			val setter = it.method(parentMember)
-			val method = "set$setter"
+			val setter = it.field(parentMember)
 			val field = getFieldOffset(it, parentStruct, parentField)
-
-			val param = it.name.toParam(field)
 
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
-				if ( !(nestedStruct.className === ANONYMOUS) ) {
-					println("\tpublic static void n$method(long $STRUCT, ${nestedStruct.className} $param) { memCopy($param.$ADDRESS, $STRUCT + $field, ${getNestedStructSizeOf(nestedStruct, field)}); }")
-					println("\t/** Copies the specified {@link ${nestedStruct.className}} struct to the nested {@code $param} struct. */")
-					println("\tpublic static void $method(ByteBuffer $STRUCT, ${nestedStruct.className} $param) { n$method(memAddress($STRUCT), $param); }")
+				val structType = nestedStruct.className
+				if ( structType === ANONYMOUS )
+					generateStaticSetters(it.nestedMembers, nestedStruct, setter, field)
+				else {
+					println("\t/** Unsafe version of {@link #$setter($structType) $setter}. */")
+					println("\tpublic static void n$setter(long $STRUCT, $structType value) { memCopy(value.$ADDRESS, $STRUCT + $field, $structType.SIZEOF); }")
 				}
-				generateStaticSetters(it.nestedMembers, nestedStruct, setter, field)
 			} else {
 				// Setter
 
-				if ( it !is StructMemberArray ) {
-					val javaType = if ( it.nativeType.isPointer )
-						"long"
-					else
-						it.nativeType.javaMethodType.simpleName
-
-					// pointer
-
-					print("\tpublic static void n$method(long $STRUCT, ")
+				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
+					val javaType = it.nativeType.javaMethodType.simpleName
 					val bufferMethod = getBufferMethod(it, javaType)
-					println(
-						if ( javaType.equals("byte") || javaType.equals("short") ) // TODO: revisit cast
-							"int $param) { memPut$bufferMethod($STRUCT + $field, ($javaType)$param); }"
-						else
-							"$javaType $param) { memPut$bufferMethod($STRUCT + $field, $param${if ( javaType == "boolean" ) " ? (byte)1 : (byte)0" else ""}); }"
-					)
 
-					// ByteBuffer
-
-					if ( !it.nativeType.isPointerData ) {
-						print("\tpublic static void $method(ByteBuffer $STRUCT, ")
-						println(
-							if ( javaType.equals("byte") || javaType.equals("short") )
-								"int $param) { n$method(memAddress($STRUCT), $param); }"
-							else
-								"$javaType $param) { n$method(memAddress($STRUCT), $param); }"
-						)
-					}
+					println("\t/** Unsafe version of {@link #$setter($javaType) $setter}. */")
+					println("\tpublic static void n$setter(long $STRUCT, $javaType value) { memPut$bufferMethod($STRUCT + $field, value${if ( javaType == "boolean" ) " ? (byte)1 : (byte)0" else ""}); }")
 				}
 
 				// Alternative setters
 
-				when {
-					it is StructMemberArray           -> {
-						if ( it.nativeType is PrimitiveType ) {
-							val mapping = it.nativeType.mapping as PrimitiveMapping
-							val bytesPerElement = if ( mapping === PrimitiveMapping.POINTER ) "POINTER_SIZE" else mapping.bytes.toString()
-
-							println("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) {")
-							println("\t\tif ( CHECKS ) {")
-							if ( it is StructMemberCharArray ) {
-								val charMapping = it.nativeType.mapping as CharMapping
-								println("\t\t\tcheckNT${charMapping.bytes}($param);")
-							}
-							println("\t\t\tcheckBufferGT($param, ${it.size} * $bytesPerElement);")
-							println("\t\t}")
-							println("\t\tmemCopy(memAddress($param), $STRUCT + $field, $param.remaining());")
+				if ( it is StructMemberArray ) {
+					if ( it.nativeType is StructType ) {
+						val structType = it.nativeType.definition.className
+						if ( it.nativeType.includesPointer ) {
+							println("\t/** Unsafe version of {@link #$setter(PointerBuffer) $setter}. */")
+							println("\tpublic static void n$setter(long $STRUCT, PointerBuffer value) {")
+							println("\t\tif ( CHECKS ) checkBufferGT(value, ${it.size});")
+							println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * POINTER_SIZE);")
 							println("\t}")
-							println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")
-
-							if ( it is StructMemberCharArray ) {
-								println("\tpublic static void n$method(long $STRUCT, CharSequence $param) { memEncode${(it.nativeType.mapping as CharMapping).charset}($param, ${it.nullTerminated}, memByteBuffer($STRUCT + $field, ${it.size})); }")
-								println("\tpublic static void $method(ByteBuffer $STRUCT, CharSequence $param) { memEncode${it.nativeType.mapping.charset}($param, ${it.nullTerminated}, $STRUCT, $field); }") // optimized version, there is a ByteBuffer available
-							} else /*if ( bytesPerElement != 1 )*/ {
-								print("\tpublic static void n$method(long $STRUCT, int index, ${mapping.javaMethodType} $param) { ")
-								print(
-									when ( mapping ) {
-										PrimitiveMapping.POINTER -> "memPutAddress($STRUCT + $field + index * POINTER_SIZE, $param);"
-										else                     -> "memPut${bufferMethodMap[mapping.javaMethodType.simpleName]}($STRUCT + $field + index * $bytesPerElement, $param);"
-									}
-								)
-								println(" }")
-								println("\tpublic static void $method(ByteBuffer $STRUCT, int index, ${mapping.javaMethodType} $param) { n$method(memAddress($STRUCT), index, $param); }")
-							}
+							println("\t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
+							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) { memPutAddress($STRUCT + $field + index * POINTER_SIZE, value.$ADDRESS); }")
 						} else {
-							val nestedStructType = it.nativeType as StructType
-							val nestedStruct = nestedStructType.definition
-							val SIZEOF = getNestedStructSizeOf(nestedStruct, field)
+							println("\t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
+							println("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) {")
+							println("\t\tif ( CHECKS ) checkBufferGT(value, ${it.size});")
+							println("\t\tmemCopy(value.$ADDRESS, $STRUCT + $field, value.remaining() * $structType.SIZEOF);")
+							println("\t}")
+							println("\t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
+							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) { memCopy(value.$ADDRESS, $STRUCT + $field + index * $structType.SIZEOF, $structType.SIZEOF); }")
+						}
+					} else if ( it is StructMemberCharArray ) {
+						val mapping = it.nativeType.mapping as PrimitiveMapping
+						val byteSize = it.size * mapping.bytes
 
-							if ( nestedStructType.includesPointer ) {
-								println("\tpublic static void n$method(long $STRUCT, PointerBuffer $param) {")
-								println("\t\tif ( CHECKS ) checkBufferGT($param, ${it.size});")
-								println("\t\tmemCopy(memAddress($param), $STRUCT + $field, $param.remaining() * POINTER_SIZE);")
-								println("\t}")
-								println("\tpublic static void $method(ByteBuffer $STRUCT, PointerBuffer $param) { n$method(memAddress($STRUCT), $param); }")
+						println("\t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
+						println("\tpublic static void n$setter(long $STRUCT, ByteBuffer value) {")
+						println("\t\tif ( CHECKS ) {")
+						println("\t\t\tcheckNT${mapping.bytes}(value);")
+						println("\t\t\tcheckBufferGT(value, $byteSize);")
+						println("\t\t}")
+						println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining());")
+						println("\t}")
 
-								println("\tpublic static void n$method(long $STRUCT, int index, ${nestedStruct.className} $param) {")
-								println("\t\tmemPutAddress($STRUCT + $field + index * POINTER_SIZE, $param.$ADDRESS);")
-								println("\t}")
-								println("\tpublic static void $method(ByteBuffer $STRUCT, int index, ${nestedStruct.className} $param) { n$method(memAddress($STRUCT), index, $param); }")
-							} else {
-								println("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) {")
-								println("\t\tif ( CHECKS ) checkBufferGT($param, ${it.size} * $SIZEOF);")
-								println("\t\tmemCopy(memAddress($param), $STRUCT + $field, $param.remaining());")
-								println("\t}")
-								println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")
+						println("\t/** Unsafe version of {@link #$setter(CharSequence) $setter}. */")
+						println("\tpublic static void n$setter(long $STRUCT, CharSequence value) { memEncode${(it.nativeType.mapping as CharMapping).charset}(value, true, memByteBuffer($STRUCT + $field, $byteSize)); }")
+					} else {
+						val mapping = it.nativeType.mapping as PrimitiveMapping
+						val bytesPerElement = if ( mapping === PrimitiveMapping.POINTER ) "POINTER_SIZE" else mapping.bytes.toString()
+						val bufferType = mapping.toPointer.javaMethodType.simpleName
 
-								println("\tpublic static void n$method(long $STRUCT, int index, ${nestedStruct.className} $param) {")
-								println("\t\tmemCopy($param.$ADDRESS, $STRUCT + $field + index * ${nestedStruct.className}.SIZEOF, ${nestedStruct.className}.SIZEOF);")
-								println("\t}")
-								println("\tpublic static void $method(ByteBuffer $STRUCT, int index, ${nestedStruct.className} $param) { n$method(memAddress($STRUCT), index, $param); }")
+						println("\t/** Unsafe version of {@link #$setter($bufferType) $setter}. */")
+						println("\tpublic static void n$setter(long $STRUCT, $bufferType value) {")
+						println("\t\tif ( CHECKS ) checkBufferGT(value, ${it.size});")
+						println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * $bytesPerElement);")
+						println("\t}")
+
+						println("\t/** Unsafe version of {@link #$setter(int, ${mapping.javaMethodType}) $setter}. */")
+						print("\tpublic static void n$setter(long $STRUCT, int index, ${mapping.javaMethodType} value) { ")
+						print(
+							when ( mapping ) {
+								PrimitiveMapping.POINTER -> "memPutAddress($STRUCT + $field + index * POINTER_SIZE, value);"
+								else                     -> "memPut${bufferMethodMap[mapping.javaMethodType.simpleName]}($STRUCT + $field + index * $bytesPerElement, value);"
 							}
-						}
+						)
+						println(" }")
 					}
-					it.nativeType is CharSequenceType -> {
-						print("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) { ")
-						if ( it.nativeType.nullTerminated )
-							print("if ( CHECKS && $param != null ) checkNT${it.nativeType.charMapping.bytes}($param); ")
-						println("n$method($STRUCT, memAddressSafe($param)); }")
-						println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")
+				} else if ( it.nativeType is CharSequenceType ) {
+					val mapping = it.nativeType.charMapping
 
-						println("\tpublic static void n$method(long $STRUCT, CharSequence $param) { n$method($STRUCT, memEncode${it.nativeType.charMapping.charset}($param, BufferAllocator.MALLOC)); }")
-						println("\t/** Encodes the specified {@link CharSequence} to a newly allocated buffer and sets its address to the {@code $param} field. The allocated buffer must be explicitly freed. */")
-						println("\tpublic static void $method(ByteBuffer $STRUCT, CharSequence $param) { n$method(memAddress($STRUCT), $param); }")
-					}
-					it.nativeType.isPointerData       -> {
-						if ( it.nativeType is StructType ) {
-							println("\tpublic static void n$method(long $STRUCT, ${it.nativeType.definition.className} $param) { n$method($STRUCT, $param.$ADDRESS); }")
-							println("\tpublic static void $method(ByteBuffer $STRUCT, ${it.nativeType.definition.className} $param) { n$method(memAddress($STRUCT), $param); }")
-						} else {
-							val bufferType = it.nativeType.mapping.javaMethodType.simpleName
-							println("\tpublic static void n$method(long $STRUCT, $bufferType $param) { n$method($STRUCT, memAddressSafe($param)); }")
-							println("\tpublic static void $method(ByteBuffer $STRUCT, $bufferType $param) { n$method(memAddress($STRUCT), $param); }")
-						}
+					println("\t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
+					println("\tpublic static void n$setter(long $STRUCT, ByteBuffer value) { ")
+					println("\t\tif ( CHECKS && value != null ) checkNT${mapping.bytes}(value); ")
+					println("\t\tmemPutAddress($STRUCT + $field, memAddressSafe(value));")
+					println("\t}")
+
+					println("\t/** Unsafe version of {@link #$setter(CharSequence) $setter}. */")
+					println("\tpublic static void n$setter(long $STRUCT, CharSequence value) { n$setter($STRUCT, memEncode${mapping.charset}(value, BufferAllocator.MALLOC)); }")
+				} else if ( it.nativeType.isPointerData ) {
+					if ( it.nativeType is StructType ) {
+						val structType = it.nativeType.definition.className
+						println("\t/** Unsafe version of {@link #$setter($structType) $setter}. */")
+						println("\tpublic static void n$setter(long $STRUCT, $structType value) { memPutAddress($STRUCT + $field, value.$ADDRESS); }")
+					} else {
+						val bufferType = it.nativeType.javaMethodType.simpleName
+						println("\t/** Unsafe version of {@link #$setter($bufferType) $setter}. */")
+						println("\tpublic static void n$setter(long $STRUCT, $bufferType value) { memPutAddress($STRUCT + $field, memAddressSafe(value)); }")
 					}
 				}
 			}
@@ -768,14 +683,11 @@ class Struct(
 	private fun PrintWriter.generateSetters(
 		accessMode: AccessMode,
 		members: List<StructMember>,
-		parentStruct: Struct? = null,
-		parentMember: String = "",
-		parentField: String = ""
+		parentMember: String = ""
 	) {
 		members.forEach {
-			val setter = it.method(parentMember)
-			val method = "set$setter"
-			val field = getFieldOffset(it, parentStruct, parentField)
+			val setter = it.field(parentMember)
+			val field = it.name
 
 			val indent = accessMode.indent;
 			val returnType = if ( accessMode === AccessMode.INSTANCE )
@@ -783,52 +695,67 @@ class Struct(
 			else
 				"$className.Buffer"
 
-			val param = it.name.toParam(field)
-
 			if ( it.isNestedStruct ) {
-				val nestedStruct = (it.nativeType as StructType).definition
-				if ( !(nestedStruct.className === ANONYMOUS) )
-					println("${indent}public $returnType $method(${nestedStruct.className} $param) { n$method($ADDRESS, $param); return this; }")
-				generateSetters(accessMode, it.nestedMembers, nestedStruct, setter, field)
+				val structType = (it.nativeType as StructType).definition.className
+				if ( structType === ANONYMOUS )
+					generateSetters(accessMode, it.nestedMembers, field)
+				else {
+					println("$indent/** Copies the specified {@link $structType} to the {@code $field} field. */")
+					println("${indent}public $returnType $setter($structType value) { n$setter($ADDRESS, value); return this; }")
+				}
 			} else {
 				// Setter
 
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
-					print("${indent}public $returnType $method(")
-
-					val javaType = it.nativeType.javaMethodType.simpleName
-					println(
-						if ( javaType.equals("byte") || javaType.equals("short") )
-							"int $param) { n$method($ADDRESS, $param); return this; }"
-						else
-							"$javaType $param) { n$method($ADDRESS, $param); return this; }"
-					)
+					println("$indent/** Sets the specified value to the {@code $field} field. */")
+					println("${indent}public $returnType $setter(${it.nativeType.javaMethodType.simpleName} value) { n$setter($ADDRESS, value); return this; }")
 				}
 
 				// Alternative setters
 
-				if ( it.nativeType is CharSequenceType ) {
-					println("${indent}public $returnType $method(ByteBuffer $param) { n$method($ADDRESS, $param); return this; }")
-					println("${indent}public $returnType $method(CharSequence $param) { n$method($ADDRESS, $param); return this; }")
-				} else if ( it is StructMemberArray ) {
-					if ( it.nativeType is StructType && it.nativeType.includesPointer ) {
-						println("${indent}public $returnType $method(PointerBuffer $param) { n$method($ADDRESS, $param); return this; }")
-						println("${indent}public $returnType $method(int index, ${it.nativeType.definition.className} $param) { n$method($ADDRESS, index, $param); return this; }")
+				if ( it is StructMemberArray ) {
+					if ( it.nativeType is StructType ) {
+						val structType = it.nativeType.definition.className
+						if ( it.nativeType.includesPointer ) {
+							println("$indent/** Copies the specified {@link PointerBuffer} to the {@code $field} field. */")
+							println("${indent}public $returnType $setter(PointerBuffer value) { n$setter($ADDRESS, value); return this; }")
+							println("$indent/** Copies the address of the specified {@link $structType} at the specified index of the {@code $field} field. */")
+						} else {
+							println("$indent/** Copies the specified {@link $structType.Buffer} to the {@code $field} field. */")
+							println("${indent}public $returnType $setter($structType.Buffer value) { n$setter($ADDRESS, value); return this; }")
+							println("$indent/** Copies the specified {@link $structType} at the specified index of the {@code $field} field. */")
+						}
+						println("${indent}public $returnType $setter(int index, $structType value) { n$setter($ADDRESS, index, value); return this; }")
+					} else if ( it is StructMemberCharArray ) {
+						println("$indent/** Copies the specified encoded string to the {@code $field} field. */")
+						println("${indent}public $returnType $setter(ByteBuffer value) { n$setter($ADDRESS, value); return this; }")
+						println("$indent/** Encodes the specified {@link CharSequence} to the {@code $field} field. */")
+						println("${indent}public $returnType $setter(CharSequence value) { n$setter($ADDRESS, value); return this; }")
 					} else {
-						println("${indent}public $returnType $method(ByteBuffer $param) { n$method($ADDRESS, $param); return this; }")
-						if ( it is StructMemberCharArray )
-							println("${indent}public $returnType $method(CharSequence $param) { n$method($ADDRESS, $param); return this; }")
-						else if ( it.nativeType is PrimitiveType )
-							println("${indent}public $returnType $method(int index, ${it.nativeType.mapping.javaMethodType} $param) { n$method($ADDRESS, index, $param); return this; }")
-						else if ( it.nativeType is StructType )
-							println("${indent}public $returnType $method(int index, ${it.nativeType.definition.className} $param) { n$method($ADDRESS, index, $param); return this; }")
+						val bufferType = (it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName
+						println("$indent/** Copies the specified {@link $bufferType} to the {@code $field} field. */")
+						println("${indent}public $returnType $setter($bufferType value) { n$setter($ADDRESS, value); return this; }")
+						println("$indent/** Sets the specified value at the specified index of the {@code $field} field. */")
+						println("${indent}public $returnType $setter(int index, ${it.nativeType.mapping.javaMethodType} value) { n$setter($ADDRESS, index, value); return this; }")
 					}
-				} else if ( it.nativeType.isPointerData )
-					println("${indent}public $returnType $method(${if ( it.nativeType is StructType )
+				} else if ( it.nativeType is CharSequenceType ) {
+					println("$indent/** Sets the address of the specified encoded string to the {@code $field} field. */")
+					println("${indent}public $returnType $setter(ByteBuffer value) { n$setter($ADDRESS, value); return this; }")
+					println(
+						"""	/**
+	 * Encodes the specified {@link CharSequence} and sets the address of the encoded string to the {@code $field} field.
+	 *
+	 * <p>The encoded string must be explicitly freed with {@link MemoryUtil#memFree memFree}.</p>
+	*/""")
+					println("${indent}public $returnType $setter(CharSequence value) { n$setter($ADDRESS, value); return this; }")
+				} else if ( it.nativeType.isPointerData ) {
+					val pointerType = if ( it.nativeType is StructType )
 						it.nativeType.definition.className
 					else
-						it.nativeType.mapping.javaMethodType.simpleName
-					} $param) { n$method($ADDRESS, $param); return this; }")
+						it.nativeType.javaMethodType.simpleName
+					println("$indent/** Sets the address of the specified {@link $pointerType} to the {@code $field} field. */")
+					println("${indent}public $returnType $setter($pointerType value) { n$setter($ADDRESS, value); return this; }")
+				}
 			}
 		}
 	}
@@ -840,163 +767,98 @@ class Struct(
 		parentField: String = ""
 	) {
 		members.forEach {
-			val getter = it.method(parentMember)
-			val method = "get$getter"
+			val getter = it.field(parentMember)
 			val field = getFieldOffset(it, parentStruct, parentField)
 
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
-				if ( !(nestedStruct.className === ANONYMOUS) ) {
-					println(
-						if ( !this@Struct.mutable && !nestedStruct.mutable )
-							"\tpublic static ${nestedStruct.className} n$method(long $STRUCT) { return new ${nestedStruct.className}($STRUCT + $field); }"
-						else
-							"\tpublic static ${nestedStruct.className} n$method(long $STRUCT) { return ${nestedStruct.className}.malloc().nset($STRUCT + $field); }"
-					)
-					println("\t/** Returns a copy of the {@code ${it.name.toParam(field)}} {@link ${nestedStruct.className}} struct. */")
-					println("\tpublic static ${nestedStruct.className} $method(ByteBuffer $STRUCT) { return n$method(memAddress($STRUCT)); }")
+				val structType = nestedStruct.className
+				if ( structType === ANONYMOUS )
+					generateStaticGetters(it.nestedMembers, nestedStruct, getter, field)
+				else {
+					println("\t/** Unsafe version of {@link #$getter}. */")
+					println("\tpublic static $structType n$getter(long $STRUCT) { return new $structType($STRUCT + $field); }")
 				}
-				generateStaticGetters(it.nestedMembers, nestedStruct, getter, field)
 			} else {
 				// Getter
 
-				if ( it !is StructMemberArray ) {
-					// pointer
+				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
+					println("\t/** Unsafe version of {@link #$getter}. */")
+					if ( it.nativeType is CallbackType ) {
+						val callbackType = it.nativeType.className
 
-					print("\tpublic static ")
+						println("\tpublic static $callbackType n$getter(long $STRUCT) { return org.lwjgl.system.libffi.Closure.create(memGetAddress($STRUCT + $field)); }")
+					} else {
+						val javaType = it.nativeType.javaMethodType.simpleName
+						val bufferMethod = getBufferMethod(it, javaType)
 
-					val javaType = if ( it.nativeType.isPointer )
-						"long"
-					else
-						it.nativeType.javaMethodType.simpleName
-
-					val bufferMethod = getBufferMethod(it, javaType)
-
-					val convertToInt = javaType.equals("byte") || javaType.equals("short");
-					print(
-						if ( convertToInt ) // TODO: revisit
-							"int n$method(long $STRUCT) { return memGet$bufferMethod("
-						else
-							"$javaType n$method(long $STRUCT) { return memGet$bufferMethod("
-					)
-
-					print("$STRUCT + $field)")
-					if ( it.nativeType is IntegerType ) {
-						if ( convertToInt && it.nativeType.unsigned ) {
-							print(" & 0x")
-							for (i in 1..(it.nativeType.mapping as PrimitiveMapping).bytes)
-								print("FF")
-						} else if ( it.nativeType.mapping === PrimitiveMapping.BOOLEAN )
+						print("\tpublic static $javaType n$getter(long $STRUCT) { return memGet$bufferMethod($STRUCT + $field)")
+						if ( it.nativeType.mapping === PrimitiveMapping.BOOLEAN )
 							print(" != 0")
-					}
-					println("; }")
-
-					// ByteBuffer
-
-					if ( !it.nativeType.isPointerData ) {
-						print("\tpublic static ")
-
-						print(
-							if ( convertToInt )
-								"int $method(ByteBuffer $STRUCT) { return n$method("
-							else
-								"$javaType $method(ByteBuffer $STRUCT) { return n$method("
-						)
-
-						println("memAddress($STRUCT)); }")
+						println("; }")
 					}
 				}
 
 				// Alternative getters
 
-				when {
-					it is StructMemberArray           -> {
-						val array: StructMemberArray = it
-						val param = array.name.toParam(field)
-
-						if ( it.nativeType is PrimitiveType ) {
-							// TODO: We support primitive arrays only for now. Fix this if we ever need struct/pointer arrays
-							val mapping = (array.nativeType as PrimitiveType).mapping as PrimitiveMapping
-							val bytesPerElement = mapping.bytes
-
-							println("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) {")
-							println("\t\tif ( CHECKS ) checkBufferGT($param, ${array.size} * $bytesPerElement);")
-							println("\t\tmemCopy($STRUCT + $field, memAddress($param), $param.remaining());")
+				if ( it is StructMemberArray ) {
+					if ( it.nativeType is StructType ) {
+						val nestedStruct = it.nativeType.definition.className
+						if ( it.nativeType.includesPointer ) {
+							println("\t/** Unsafe version of {@link #$getter}. */")
+							println("\tpublic static PointerBuffer n$getter(long $STRUCT) {")
+							println("\t\treturn memPointerBuffer($STRUCT + $field, ${it.size});")
 							println("\t}")
-							println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")
-
-							if ( array is StructMemberCharArray ) {
-								val charMapping = array.nativeType.mapping as CharMapping
-								if ( array.nullTerminated ) {
-									println("\tpublic static String n${method}String(long $STRUCT) { return memDecode${charMapping.charset}($STRUCT + $field); }")
-									println("\tpublic static String ${method}String(ByteBuffer $STRUCT) { return n${method}String(memAddress($STRUCT)); }")
-
-									println("\tpublic static String n${method}String(long $STRUCT, int $BUFFER_LEN_PARAM) { return memDecode${charMapping.charset}(memByteBuffer($STRUCT + $field, $BUFFER_LEN_PARAM)); }")
-									println("\tpublic static String ${method}String(ByteBuffer $STRUCT, int $BUFFER_LEN_PARAM) { return n${method}String(memAddress($STRUCT), $BUFFER_LEN_PARAM); }")
-								} else
-									println("\tpublic static String ${method}String(ByteBuffer $STRUCT) { return memDecode${charMapping.charset}($STRUCT, ${array.size}, $field); }")
-							} else {
-								val javaType = mapping.javaMethodType.simpleName
-								val bufferMethod = getBufferMethod(it, javaType)
-
-								println("\tpublic static $javaType n$method(long $STRUCT, int index) { return memGet$bufferMethod($STRUCT + $field + index * $bytesPerElement); }")
-								println("\tpublic static $javaType $method(ByteBuffer $STRUCT, int index) { return n$method(memAddress($STRUCT), index); }")
-							}
+							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
+							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
+							println("\t\treturn new $nestedStruct(memGetAddress($STRUCT + $field + index * POINTER_SIZE));")
+							println("\t}")
 						} else {
-							val nestedStructType = array.nativeType as StructType
-							val nestedStruct = nestedStructType.definition
-							val SIZEOF = getNestedStructSizeOf(nestedStruct, field)
-
-							if ( nestedStructType.includesPointer ) {
-								println("\tpublic static void n$method(long $STRUCT, PointerBuffer $param) {")
-								println("\t\tif ( CHECKS ) checkBufferGT($param, ${array.size});")
-								println("\t\tmemCopy($STRUCT + $field, memAddress($param), $param.remaining() * POINTER_SIZE);")
-								println("\t}")
-								println("\tpublic static void $method(ByteBuffer $STRUCT, PointerBuffer $param) { n$method(memAddress($STRUCT), $param); }")
-
-								println("\tpublic static ${nestedStruct.className} n$method(long $STRUCT, int index) {")
-								println("\t\treturn new ${nestedStruct.className}($STRUCT + $field + index * POINTER_SIZE);")
-								println("\t}")
-								println("\tpublic static ${nestedStruct.className} $method(ByteBuffer $STRUCT, int index) { return n$method(memAddress($STRUCT), index); }")
-							} else {
-								println("\tpublic static void n$method(long $STRUCT, ByteBuffer $param) {")
-								println("\t\tif ( CHECKS ) checkBufferGT($param, ${array.size} * $SIZEOF);")
-								println("\t\tmemCopy($STRUCT + $field, memAddress($param), $param.remaining());")
-								println("\t}")
-								println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")
-
-								println("\tpublic static ${nestedStruct.className} n$method(long $STRUCT, int index) {")
-								println(
-									if ( !this@Struct.mutable && !nestedStruct.mutable )
-										"\t\treturn new ${nestedStruct.className}($STRUCT + $field + index * $SIZEOF);"
-									else
-										"\t\treturn ${nestedStruct.className}.malloc().nset($STRUCT + $field + index * $SIZEOF);"
-								)
-								println("\t}")
-								println("\tpublic static ${nestedStruct.className} $method(ByteBuffer $STRUCT, int index) { return n$method(memAddress($STRUCT), index); }")
-							}
+							println("\t/** Unsafe version of {@link #$getter}. */")
+							println("\tpublic static $nestedStruct.Buffer n$getter(long $STRUCT) {")
+							println("\t\treturn $nestedStruct.createBuffer($STRUCT + $field, ${it.size});")
+							println("\t}")
+							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
+							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
+							println("\t\treturn new $nestedStruct($STRUCT + $field + index * $nestedStruct.SIZEOF);")
+							println("\t}")
 						}
+					} else if ( it is StructMemberCharArray ) {
+						val mapping = it.nativeType.mapping as CharMapping
+
+						println("\t/** Unsafe version of {@link #$getter}. */")
+						println("\tpublic static ByteBuffer n$getter(long $STRUCT) { return memByteBuffer($STRUCT + $field, ${it.size * mapping.bytes}); }")
+						println("\t/** Unsafe version of {@link #${getter}String}. */")
+						println("\tpublic static String n${getter}String(long $STRUCT) { return memDecode${mapping.charset}($STRUCT + $field); }")
+					} else {
+						val mapping = it.nativeType.mapping as PrimitiveMapping
+						val bufferType = mapping.toPointer.javaMethodType.simpleName
+
+						println("\t/** Unsafe version of {@link #$getter}. */")
+						println("\tpublic static $bufferType n$getter(long $STRUCT) {")
+						println("\t\treturn mem$bufferType($STRUCT + $field, ${it.size});")
+						println("\t}")
+
+						val javaType = mapping.javaMethodType.simpleName
+						val bufferMethod = getBufferMethod(it, javaType)
+
+						println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
+						println("\tpublic static $javaType n$getter(long $STRUCT, int index) { return memGet$bufferMethod($STRUCT + $field + index * ${mapping.bytes}); }")
 					}
-					it.nativeType is CharSequenceType -> {
-						if ( it.nativeType.nullTerminated ) {
-							println("\tpublic static ByteBuffer n${method}Buffer(long $STRUCT) { return memByteBufferNT${it.nativeType.charMapping.bytes}(n$method($STRUCT)); }")
-							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $STRUCT) { return n${method}Buffer(memAddress($STRUCT)); }")
-							println("\tpublic static String n${method}String(long $STRUCT) { return memDecode${it.nativeType.charMapping.charset}(n$method($STRUCT)); }")
-							println("\tpublic static String ${method}String(ByteBuffer $STRUCT) { return n${method}String(memAddress($STRUCT)); }")
-						} else {
-							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $STRUCT, int $BUFFER_LEN_PARAM) { return memByteBuffer($method($STRUCT), $BUFFER_LEN_PARAM); }")
-							println("\tpublic static String ${method}String(ByteBuffer $STRUCT, int $BUFFER_LEN_PARAM) { return memDecode${it.nativeType.charMapping.charset}(memByteBuffer($method($STRUCT), $BUFFER_LEN_PARAM)); }")
-						}
-					}
-					it.nativeType is StructType       -> {
-						println("\tpublic static ${it.nativeType.definition.className} n${method}Struct(long $STRUCT) { return new ${it.nativeType.definition.className}(n$method($STRUCT)); }")
-						println("\tpublic static ${it.nativeType.definition.className} $method(ByteBuffer $STRUCT) { return n${method}Struct(memAddress($STRUCT)); }")
-					}
-					it.nativeType.isPointerData       -> {
-						val bufferType = it.nativeType.mapping.javaMethodType.simpleName
-						println("\tpublic static $bufferType n$method(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return mem$bufferType(n$method($STRUCT), $BUFFER_CAPACITY_PARAM); }")
-						println("\tpublic static $bufferType $method(ByteBuffer $STRUCT, int $BUFFER_CAPACITY_PARAM) { return n$method(memAddress($STRUCT), $BUFFER_CAPACITY_PARAM); }")
-					}
+				} else if ( it.nativeType is CharSequenceType ) {
+					var mapping = it.nativeType.charMapping
+					println("\t/** Unsafe version of {@link #$getter}. */")
+					println("\tpublic static ByteBuffer n$getter(long $STRUCT) { return memByteBufferNT${mapping.bytes}(memGetAddress($STRUCT + $field)); }")
+					println("\t/** Unsafe version of {@link #${getter}String}. */")
+					println("\tpublic static String n${getter}String(long $STRUCT) { return memDecode${mapping.charset}(memGetAddress($STRUCT + $field)); }")
+				} else if ( it.nativeType is StructType ) {
+					val structType = it.nativeType.definition.className
+					println("\t/** Unsafe version of {@link #$getter}. */")
+					println("\tpublic static $structType n${getter}Struct(long $STRUCT) { return new $structType(memGetAddress($STRUCT + $field)); }")
+				} else if ( it.nativeType.isPointerData ) {
+					val bufferType = it.nativeType.javaMethodType.simpleName
+					println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
+					println("\tpublic static $bufferType n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return mem$bufferType(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }")
 				}
 			}
 		}
@@ -1005,76 +867,83 @@ class Struct(
 	private fun PrintWriter.generateGetters(
 		accessMode: AccessMode,
 		members: List<StructMember>,
-		parentStruct: Struct? = null,
-		parentMember: String = "",
-		parentField: String = ""
+		parentMember: String = ""
 	) {
 		members.forEach {
-			val getter = it.method(parentMember)
-			val method = "get$getter"
-			val field = getFieldOffset(it, parentStruct, parentField)
+			val getter = it.field(parentMember)
 
 			val indent = accessMode.indent
 
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
-				if ( !(nestedStruct.className === ANONYMOUS) ) {
-					println("${indent}public ${nestedStruct.className} $method() { return n$method($ADDRESS); }")
+				val structType = nestedStruct.className
+				if ( structType === ANONYMOUS )
+					generateGetters(accessMode, it.nestedMembers, getter)
+				else {
+					println("$indent/** Returns a {@link $structType} view of the {@code $getter} field. */")
+					println("${indent}public $structType $getter() { return n$getter($ADDRESS); }")
 				}
-				generateGetters(accessMode, it.nestedMembers, nestedStruct, getter, field)
 			} else {
 				// Getter
 
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
-					print("${indent}public ")
+					if ( it.nativeType is CallbackType ) {
+						val callbackType = it.nativeType.className
 
-					val javaType = it.nativeType.javaMethodType.simpleName
-
-					val convertToInt = javaType.equals("byte") || javaType.equals("short"); // TODO: revisit
-					println(
-						if ( convertToInt )
-							"int $method() { return n$method($ADDRESS); }"
-						else
-							"$javaType $method() { return n$method($ADDRESS); }"
-					)
+						println("$indent/** Returns the {@code $callbackType} instance at the {@code $getter} field. */")
+						println("${indent}public $callbackType $getter() { return n$getter($ADDRESS); }")
+					} else {
+						println("$indent/** Returns the value of the {@code $getter} field. */")
+						println("${indent}public ${it.nativeType.javaMethodType.simpleName} $getter() { return n$getter($ADDRESS); }")
+					}
 				}
 
 				// Alternative getters
 
-				when {
-					it is StructMemberArray           -> {
-						val param = it.name.toParam(field)
-
-						if ( it.nativeType is StructType && it.nativeType.includesPointer ) {
-							println("${indent}public void $method(PointerBuffer $param) { n$method($ADDRESS, $param); }")
-							println("${indent}public ${it.nativeType.definition.className} $method(int index) { return n$method($ADDRESS, index); }")
+				if ( it is StructMemberArray ) {
+					if ( it.nativeType is StructType ) {
+						val structType = it.nativeType.definition.className
+						if (  it.nativeType.includesPointer ) {
+							println("$indent/** Returns a {@link PointerBuffer} view of the {@code $getter} field. */")
+							println("${indent}public PointerBuffer $getter() { return n$getter($ADDRESS); }")
+							println("$indent/** Returns a {@link $structType} view of the pointer at the specified index of the {@code $getter}. */")
+							println("${indent}public $structType $getter(int index) { return n$getter($ADDRESS, index); }")
 						} else {
-							println("${indent}public void $method(ByteBuffer $param) { n$method($ADDRESS, $param); }")
-							if ( it is StructMemberCharArray ) {
-								println("${indent}public String ${method}String() { return n${method}String($ADDRESS); }")
-								if ( it.nullTerminated )
-									println("${indent}public String ${method}String(int $BUFFER_LEN_PARAM) { return n${method}String($ADDRESS, $BUFFER_LEN_PARAM); }")
-							} else if ( it.nativeType is StructType ) {
-								println("${indent}public ${it.nativeType.definition.className} $method(int index) { return n$method($ADDRESS, index); }")
-							}
+							println("$indent/** Returns a {@link $structType}.Buffer view of the {@code $getter} field. */")
+							println("${indent}public $structType.Buffer $getter() { return n$getter($ADDRESS); }")
+							println("$indent/** Returns a {@link $structType} view of the struct at the specified index of the {@code $getter} field. */")
+							println("${indent}public $structType $getter(int index) { return n$getter($ADDRESS, index); }")
 						}
+					} else if ( it is StructMemberCharArray ) {
+						println("$indent/** Returns a {@link ByteBuffer} view of the {@code $getter} field. */")
+						println("${indent}public ByteBuffer $getter() { return n$getter($ADDRESS); }")
+						println("$indent/** Decodes the null-terminated string stored in the {@code $getter} field. */")
+						println("${indent}public String ${getter}String() { return n${getter}String($ADDRESS); }")
+					} else {
+						val bufferType = (it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName
+						println("$indent/** Returns a {@link $bufferType} view of the {@code $getter} field. */")
+						println("${indent}public $bufferType $getter() { return n$getter($ADDRESS); }")
+						println("$indent/** Returns the value at the specified index of the {@code $getter} field. */")
+						println("${indent}public ${it.nativeType.javaMethodType.simpleName} $getter(int index) { return n$getter($ADDRESS, index); }")
 					}
-					it.nativeType is CharSequenceType -> {
-						if ( it.nativeType.nullTerminated ) {
-							println("${indent}public ByteBuffer ${method}Buffer() { return n${method}Buffer($ADDRESS); }")
-							println("${indent}public String ${method}String() { return n${method}String($ADDRESS); }")
-						} else {
-							println("${indent}public ByteBuffer ${method}Buffer(int $BUFFER_LEN_PARAM) { return n${method}Buffer($ADDRESS, $BUFFER_LEN_PARAM); }")
-							println("${indent}public String ${method}String(int $BUFFER_LEN_PARAM) { return n${method}String($ADDRESS, $BUFFER_LEN_PARAM); }")
-						}
-					}
-					it.nativeType is StructType       -> {
-						println("${indent}public ${it.nativeType.definition.className} $method() { return n${method}Struct($ADDRESS); }")
-					}
-					it.nativeType.isPointerData       -> {
-						val bufferType = it.nativeType.mapping.javaMethodType.simpleName
-						println("${indent}public $bufferType $method(int $BUFFER_CAPACITY_PARAM) { return n$method($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
-					}
+				} else if ( it.nativeType is CharSequenceType ) {
+					println("$indent/** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code $getter} field. */")
+					println("${indent}public ByteBuffer $getter() { return n$getter($ADDRESS); }")
+					println("$indent/** Decodes the null-terminated string pointed to by the {@code $getter} field. */")
+					println("${indent}public String ${getter}String() { return n${getter}String($ADDRESS); }")
+				} else if ( it.nativeType is StructType ) {
+					val structType = it.nativeType.definition.className
+					println("$indent/** Returns a {@link $structType} view of the struct pointed to by the {@code $getter} field. */")
+					println("${indent}public ${it.nativeType.definition.className} $getter() { return n${getter}Struct($ADDRESS); }")
+				} else if ( it.nativeType.isPointerData ) {
+					val bufferType = it.nativeType.javaMethodType.simpleName
+					println(
+						"""$indent/**
+$indent * Returns a {@link $bufferType} view of the data pointed to by the {@code $getter} field.
+$indent *
+$indent * @param $BUFFER_CAPACITY_PARAM the number of elements in the returned {@link $bufferType}
+$indent */""")
+					println("${indent}public $bufferType $getter(int $BUFFER_CAPACITY_PARAM) { return n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
 				}
 			}
 		}
@@ -1112,7 +981,7 @@ class Struct(
 						print(' ')
 					print('*')
 				}
-				println(" ${m.nativeName};")
+				println(" ${m.name};")
 			}
 			println("\t} $structName;\n")
 		}
@@ -1131,14 +1000,14 @@ class Struct(
 	private fun PrintWriter.generateNativeMembers(members: List<StructMember>, offset: Int = 0, prefix: String = ""): Int {
 		var index = offset
 		members.forEach {
-			println("\tbuffer[$index] = (jint)offsetof($nativeName, $prefix${it.nativeName});")
+			println("\tbuffer[$index] = (jint)offsetof($nativeName, $prefix${it.name});")
 			index++
 
 			if ( it.isNestedStruct ) {
 				// Output anonymous inner structs
 				val structType = it.nativeType as StructType
 				if ( structType.name == ANONYMOUS )
-					index = generateNativeMembers(structType.definition.members, index, prefix = "${it.nativeName}.") // recursion
+					index = generateNativeMembers(structType.definition.members, index, prefix = "${it.name}.") // recursion
 			}
 		}
 		return index
@@ -1174,8 +1043,7 @@ fun struct_p(
 ) = struct(packageName, className, nativeSubPath, structName, identifierType, virtual, mutable, init).nativeType.p
 
 /** Anonymous member struct definition. Mostly useful for union of structs. */
-fun
-	Struct.struct(init: Struct.() -> Unit): StructType {
+fun struct(init: Struct.() -> Unit): StructType {
 	val struct = Struct(ANONYMOUS, ANONYMOUS)
 	struct.init()
 	return StructType(struct)

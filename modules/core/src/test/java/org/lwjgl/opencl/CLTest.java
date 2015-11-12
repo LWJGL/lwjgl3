@@ -341,16 +341,16 @@ public class CLTest {
 				checkCLError(errcode_ret);
 				assertNotNull(buffer);
 
-				ByteBuffer bufferRegion = memAlloc(CLBufferRegion.SIZEOF);
-				CLBufferRegion.setOrigin(bufferRegion, 0);
-				CLBufferRegion.setSize(bufferRegion, 64);
+				CLBufferRegion bufferRegion = CLBufferRegion.malloc();
+				bufferRegion.origin(0);
+				bufferRegion.size(64);
 
 				long subbuffer;
 				try {
-					subbuffer = clCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, bufferRegion, errcode_ret);
+					subbuffer = nclCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, bufferRegion.address(), memAddress(errcode_ret));
 					checkCLError(errcode_ret);
 				} finally {
-					memFree(bufferRegion);
+					bufferRegion.free();
 				}
 				assertNotNull(subbuffer);
 

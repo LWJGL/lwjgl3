@@ -96,17 +96,17 @@ public final class Truetype extends FontDemo {
 
 				stbtt_GetBakedQuad(cdata, BITMAP_W, BITMAP_H, c - 32, x, y, q, 1);
 
-				glTexCoord2f(q.getS0(), q.getT0());
-				glVertex2f(q.getX0(), q.getY0());
+				glTexCoord2f(q.s0(), q.t0());
+				glVertex2f(q.x0(), q.y0());
 
-				glTexCoord2f(q.getS1(), q.getT0());
-				glVertex2f(q.getX1(), q.getY0());
+				glTexCoord2f(q.s1(), q.t0());
+				glVertex2f(q.x1(), q.y0());
 
-				glTexCoord2f(q.getS1(), q.getT1());
-				glVertex2f(q.getX1(), q.getY1());
+				glTexCoord2f(q.s1(), q.t1());
+				glVertex2f(q.x1(), q.y1());
 
-				glTexCoord2f(q.getS0(), q.getT1());
-				glVertex2f(q.getX0(), q.getY1());
+				glTexCoord2f(q.s0(), q.t1());
+				glVertex2f(q.x0(), q.y1());
 			}
 			glEnd();
 

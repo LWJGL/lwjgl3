@@ -7,8 +7,6 @@ package org.lwjgl.system;
 import org.lwjgl.system.libffi.FFIType;
 import org.testng.annotations.Test;
 
-import java.nio.ByteBuffer;
-
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
@@ -28,41 +26,42 @@ public class StructTest {
 	}
 
 	public void testStructContainer() {
-		ByteBuffer c = memAlloc(FFIType.SIZEOF);
-		FFIType.setSize(c, 4);
-		FFIType.setAlignment(c, 8);
-		FFIType.setType(c, FFI_TYPE_INT);
-		FFIType.setElements(c, null);
+		long c = nmemAlloc(FFIType.SIZEOF);
 
-		assertEquals(FFIType.getSize(c), 4);
-		assertEquals(FFIType.getAlignment(c), 8);
-		assertEquals(FFIType.getType(c), FFI_TYPE_INT);
-		assertEquals(FFIType.getElements(c, 0), null);
+		FFIType.nsize(c, 4);
+		FFIType.nalignment(c, (short)8);
+		FFIType.ntype(c, FFI_TYPE_INT);
+		FFIType.nelements(c, null);
 
-		memFree(c);
+		assertEquals(FFIType.nsize(c), 4);
+		assertEquals(FFIType.nalignment(c), 8);
+		assertEquals(FFIType.ntype(c), FFI_TYPE_INT);
+		assertEquals(FFIType.nelements(c, 0), null);
+
+		nmemFree(c);
 	}
 
 	public void testStructInstance() {
-		FFIType s = FFIType.malloc().set(4, 8, FFI_TYPE_INT, null);
+		FFIType s = FFIType.malloc().set(4, (short)8, FFI_TYPE_INT, null);
 
-		assertEquals(s.getSize(), 4);
-		assertEquals(s.getAlignment(), 8);
-		assertEquals(s.getType(), FFI_TYPE_INT);
-		assertEquals(s.getElements(0), null);
+		assertEquals(s.size(), 4);
+		assertEquals(s.alignment(), 8);
+		assertEquals(s.type(), FFI_TYPE_INT);
+		assertEquals(s.elements(0), null);
 
 		s.free();
 	}
 
 	public void testStructCopy() {
-		FFIType src = FFIType.malloc().set(4, 8, FFI_TYPE_INT, null);
+		FFIType src = FFIType.malloc().set(4, (short)8, FFI_TYPE_INT, null);
 
 		FFIType dst = FFIType.calloc();
 		dst.set(src);
 
-		assertEquals(dst.getSize(), src.getSize());
-		assertEquals(dst.getAlignment(), src.getAlignment());
-		assertEquals(dst.getType(), src.getType());
-		assertEquals(FFIType.ngetElements(dst.address()), FFIType.ngetElements(src.address()));
+		assertEquals(dst.size(), src.size());
+		assertEquals(dst.alignment(), src.alignment());
+		assertEquals(dst.type(), src.type());
+		assertEquals(FFIType.nelements(dst.address(), 0), FFIType.nelements(src.address(), 0));
 	}
 
 	public void testStructBuffer() {
@@ -78,28 +77,28 @@ public class StructTest {
 
 		// flyweight API
 		b
-			.setSize(4)
-			.setAlignment(8)
-			.setType(FFI_TYPE_INT)
-			.setElements(null);
+			.size(4)
+			.alignment((short)8)
+			.type(FFI_TYPE_INT)
+			.elements(null);
 
 		// buffer changed
-		assertEquals(b.getSize(), 4);
-		assertEquals(b.getAlignment(), 8);
-		assertEquals(b.getType(), FFI_TYPE_INT);
-		assertEquals(b.getElements(0), null);
+		assertEquals(b.size(), 4);
+		assertEquals(b.alignment(), 8);
+		assertEquals(b.type(), FFI_TYPE_INT);
+		assertEquals(b.elements(0), null);
 
 		// view changed
-		assertEquals(view.getSize(), 4);
-		assertEquals(view.getAlignment(), 8);
-		assertEquals(view.getType(), FFI_TYPE_INT);
-		assertEquals(view.getElements(0), null);
+		assertEquals(view.size(), 4);
+		assertEquals(view.alignment(), 8);
+		assertEquals(view.type(), FFI_TYPE_INT);
+		assertEquals(view.elements(0), null);
 
 		// copy not changed
-		assertEquals(copy.getSize(), 0);
-		assertEquals(copy.getAlignment(), 0);
-		assertEquals(copy.getType(), NULL);
-		assertEquals(copy.getElements(0), null);
+		assertEquals(copy.size(), 0);
+		assertEquals(copy.alignment(), 0);
+		assertEquals(copy.type(), NULL);
+		assertEquals(copy.elements(0), null);
 
 		memFree(b);
 	}

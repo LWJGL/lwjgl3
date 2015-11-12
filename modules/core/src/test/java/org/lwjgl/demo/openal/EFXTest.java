@@ -261,7 +261,7 @@ public final class EFXTest {
 		STBVorbisInfo info = STBVorbisInfo.malloc();
 		ByteBuffer pcm = ALCDemo.readVorbis("demo/footsteps.ogg", 32 * 1024, info);
 
-		alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.getSampleRate());
+		alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.sample_rate());
 		info.free();
 		alSourcei(source, AL_BUFFER, buffer);
 		alSourcei(source, AL_LOOPING, AL_TRUE);
