@@ -135,19 +135,15 @@ class CharSequenceType(
 	/** If true, the nativeType typedef includes a pointer. */
 	includesPointer: Boolean = false,
 	/** The CharSequence charset. */
-	val charMapping: CharMapping = CharMapping.ASCII,
-	/** If true, the nativeType typedef includes a pointer. */
-	val nullTerminated: Boolean = true
+	val charMapping: CharMapping = CharMapping.ASCII
 ) : PointerType(name, mapping, includesPointer)
 
 /** Converts CharType to CharSequenceType. */
 fun CharSequenceType(
 	charType: CharType,
 	/** The type we map the native type to. */
-	mapping: PointerMapping = PointerMapping.DATA_BYTE,
-	/** The CharSequence charset. */
-	nullTerminated: Boolean = true
-) = CharSequenceType(charType.name, mapping = mapping, charMapping = (charType.mapping as CharMapping), nullTerminated = nullTerminated)
+	mapping: PointerMapping = PointerMapping.DATA_BYTE
+) = CharSequenceType(charType.name, mapping = mapping, charMapping = (charType.mapping as CharMapping))
 
 // Callbacks
 class CallbackType(

@@ -50,8 +50,7 @@ private class StructMemberCharArray(
 	nativeType: CharType,
 	nativeName: String,
 	name: String,
-	size: Int,
-	val nullTerminated: Boolean
+	size: Int
 ) : StructMemberArray(nativeType, nativeName, name, size)
 
 private val ANONYMOUS = "*"
@@ -127,8 +126,8 @@ class Struct(
 	}
 
 	// CharSequence special-case
-	fun CharType.member(nativeName: String, name: String = nativeName, size: Int, nullTerminated: Boolean) {
-		members.add(StructMemberCharArray(this, nativeName, name, size, nullTerminated))
+	fun CharType.member(nativeName: String, name: String = nativeName, size: Int) {
+		members.add(StructMemberCharArray(this, nativeName, name, size))
 	}
 
 	private val StructMember.isNestedStruct: Boolean

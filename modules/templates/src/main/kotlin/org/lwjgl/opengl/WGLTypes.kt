@@ -24,8 +24,8 @@ val PGPU_DEVICE = StructType(
 		javaImport("org.lwjgl.system.windows.*")
 		nativeImport("WindowsLWJGL.h", "WGL.h")
 		DWORD.member("cb")
-		TCHAR.member(nativeName = "DeviceName", size = 32, nullTerminated = true)
-		TCHAR.member(nativeName = "DeviceString", size = 128, nullTerminated = true)
+		TCHAR.member(nativeName = "DeviceName", size = 32)
+		TCHAR.member(nativeName = "DeviceString", size = 128)
 		DWORD.member("Flags")
 		RECT.member(nativeName = "rcVirtualScreen", name = "virtualScreen");
 	}

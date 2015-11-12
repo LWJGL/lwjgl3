@@ -328,7 +328,7 @@ class NativeClassFunction(
 				checks.add("checkPointer(${it.name});")
 
 			if ( mode === NORMAL && it.nativeType is CharSequenceType && it.paramType === IN ) {
-				if ( it.nativeType.nullTerminated && getReferenceParam(AutoSize, it.name) == null )
+				if ( getReferenceParam(AutoSize, it.name) == null )
 					checks.add("${prefix}checkNT${it.nativeType.charMapping.bytes}(${it.name});")
 			}
 
@@ -613,7 +613,7 @@ class NativeClassFunction(
 						println("return new ${returns.nativeType.definition.className}($RESULT);")
 					}
 				} else {
-					val isNullTerminated = returns.nativeType is CharSequenceType && returns.nativeType.nullTerminated
+					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
 						"ByteBuffer"
 					else
@@ -1159,7 +1159,7 @@ class NativeClassFunction(
 						println("return new ${returns.nativeType.definition.className}($RESULT);")
 					}
 				} else {
-					val isNullTerminated = returns.nativeType is CharSequenceType && returns.nativeType.nullTerminated
+					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
 						"ByteBuffer"
 					else

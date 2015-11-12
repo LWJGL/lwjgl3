@@ -236,11 +236,11 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", structName = "ovrHmdDesc", mu
 	includeOVRCAPI()
 
 	ovrHmdType.member("Type") // This HMD's type.
-	charUTF8.member("ProductName", size = 64, nullTerminated = true) // Name string describing the product: "Oculus Rift DK1", etc.
-	charUTF8.member("Manufacturer", size = 64, nullTerminated = true) // String describing the manufacturer. Usually "Oculus".
+	charUTF8.member("ProductName", size = 64) // Name string describing the product: "Oculus Rift DK1", etc.
+	charUTF8.member("Manufacturer", size = 64) // String describing the manufacturer. Usually "Oculus".
 	short.member("VendorId") // HID Vendor ID of the device.
 	short.member("ProductId") // HID Product ID of the device.
-	charASCII.member("SerialNumber", size = 24, nullTerminated = true) // Sensor (and display) serial number.
+	charASCII.member("SerialNumber", size = 24) // Sensor (and display) serial number.
 	short.member("FirmwareMajor") // Sensor firmware major version number.
 	short.member("FirmwareMinor") // Sensor firmware minor version number.
 

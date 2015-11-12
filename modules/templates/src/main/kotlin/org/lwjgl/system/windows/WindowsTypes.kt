@@ -41,8 +41,7 @@ val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 val LPCTSTR = CharSequenceType(
 	name = "LPCTSTR",
 	includesPointer = true,
-	charMapping = CharMapping.UTF16,
-	nullTerminated = true
+	charMapping = CharMapping.UTF16
 )
 
 val LPCSTR = CharSequenceType("LPCSTR", includesPointer = true)
