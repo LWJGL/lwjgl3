@@ -48,9 +48,8 @@ EXTERN_C_ENTER
  *  doing and how to fix problems caused by using them.  If you don't, you
  *  shouldn't be using them.**
  *
- *  Before the inclusion of @ref glfw3native.h, you must define exactly one
- *  window system API macro and exactly one context creation API macro.  Failure
- *  to do this will cause a compile-time error.
+ *  Before the inclusion of @ref glfw3native.h, you may define exactly one
+ *  window system API macro and zero or more context creation API macros.
  *
  *  The chosen backends must match those the library was compiled for.  Failure
  *  to do this will cause a link-time error.
@@ -101,20 +100,19 @@ DISABLE_WARNINGS()
  #include <wayland-client.h>
 #elif defined(GLFW_EXPOSE_NATIVE_MIR)
  #include <mir_toolkit/mir_client_library.h>
-#else
- #error "No window API selected"
 #endif
 
 #if defined(GLFW_EXPOSE_NATIVE_WGL)
  /* WGL is declared by windows.h */
-#elif defined(GLFW_EXPOSE_NATIVE_NSGL)
+#endif
+#if defined(GLFW_EXPOSE_NATIVE_NSGL)
  /* NSGL is declared by Cocoa.h */
-#elif defined(GLFW_EXPOSE_NATIVE_GLX)
+#endif
+#if defined(GLFW_EXPOSE_NATIVE_GLX)
  #include <GL/glx.h>
-#elif defined(GLFW_EXPOSE_NATIVE_EGL)
+#endif
+#if defined(GLFW_EXPOSE_NATIVE_EGL)
  #include <EGL/egl.h>
-#else
- #error "No context API selected"
 #endif
 
 ENABLE_WARNINGS()
@@ -315,6 +313,21 @@ GLFWAPI Window glfwGetX11Window(GLFWwindow* window);
  *  @ingroup native
  */
 GLFWAPI GLXContext glfwGetGLXContext(GLFWwindow* window);
+
+/*! @brief Returns the `GLXWindow` of the specified window.
+ *
+ *  @return The `GLXWindow` of the specified window, or `None` if an
+ *  [error](@ref error_handling) occurred.
+ *
+ *  @par Thread Safety
+ *  This function may be called from any thread.  Access is not synchronized.
+ *
+ *  @par History
+ *  Added in GLFW 3.2.
+ *
+ *  @ingroup native
+ */
+GLFWAPI GLXWindow glfwGetGLXWindow(GLFWwindow* window);
 #endif
 
 #if defined(GLFW_EXPOSE_NATIVE_WAYLAND)

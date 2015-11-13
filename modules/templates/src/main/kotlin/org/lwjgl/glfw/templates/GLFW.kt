@@ -1571,6 +1571,26 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "GFLW 3.0"
 	)
 
+	(const..charUTF8_p)(
+		"GetKeyName",
+		"""
+		Returns the localized name of the specified printable key.
+
+		If the key is #KEY_UNKNOWN, the scancode is used, otherwise the scancode is ignored.
+
+		The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to #GetKeyName(), or until the
+		library is terminated.
+
+		This function may only be called from the main thread.
+		""",
+
+		int.IN("key", "the key to query, or #KEY_UNKNOWN"),
+		int.IN("scancode", "the scancode of the key to query"),
+
+		returnDoc = "the localized name of the key",
+		since = "GLFW 3.2"
+	)
+
 	int(
 		"GetKey",
 		"""
@@ -1584,6 +1604,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Unicode character callback instead.
 
 		The modifier key bit masks are not key tokens and cannot be used with this function.
+
+		<b>Do not use this function</b> to implement <a href="http://www.glfw.org/docs/latest/input.html\#input_char">text input</a>.
 
 		Notes:
 		${ul(
@@ -2055,6 +2077,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		<a href="https://www.opengl.org/registry/specs/KHR/context_flush_control.txt">GL_KHR_context_flush_control</a>, you can control whether a context
 		performs this flush by setting the #CONTEXT_RELEASE_BEHAVIOR <a href="http://www.glfw.org/docs/latest/window.html\#window_hints_ctx">window hint</a>.
 
+		The specified window must have an OpenGL or OpenGL ES context. Specifying a window without a context will generate a #NO_WINDOW_CONTEXT error.
+
 		This function may be called from any thread.
 		""",
 
@@ -2080,6 +2104,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Swaps the front and back buffers of the specified window. If the swap interval is greater than zero, the GPU driver waits the specified number of screen
 		updates before swapping the buffers.
+
+		The specified window must have an OpenGL or OpenGL ES context. Specifying a window without a context will generate a #NO_WINDOW_CONTEXT error.
 
 		This function may be called from any thread.
 		""",

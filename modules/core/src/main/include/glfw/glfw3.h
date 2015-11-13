@@ -413,6 +413,7 @@ DISABLE_WARNINGS()
 #define GLFW_KEY_RIGHT_ALT          346
 #define GLFW_KEY_RIGHT_SUPER        347
 #define GLFW_KEY_MENU               348
+
 #define GLFW_KEY_LAST               GLFW_KEY_MENU
 
 /*! @} */
@@ -737,6 +738,9 @@ DISABLE_WARNINGS()
  *  Generic function pointer used for returning client API function pointers
  *  without forcing a cast from a regular pointer.
  *
+ *  @sa @ref context_glext
+ *  @sa glfwGetProcAddress
+ *
  *  @ingroup context
  */
 typedef void (*GLFWglproc)(void);
@@ -744,6 +748,8 @@ typedef void (*GLFWglproc)(void);
 /*! @brief Opaque monitor object.
  *
  *  Opaque monitor object.
+ *
+ *  @see @ref monitor_object
  *
  *  @ingroup monitor
  */
@@ -753,6 +759,8 @@ typedef struct GLFWmonitor GLFWmonitor;
  *
  *  Opaque window object.
  *
+ *  @see @ref window_object
+ *
  *  @ingroup window
  */
 typedef struct GLFWwindow GLFWwindow;
@@ -760,6 +768,8 @@ typedef struct GLFWwindow GLFWwindow;
 /*! @brief Opaque cursor object.
  *
  *  Opaque cursor object.
+ *
+ *  @see @ref cursor_object
  *
  *  @ingroup cursor
  */
@@ -772,6 +782,7 @@ typedef struct GLFWcursor GLFWcursor;
  *  @param[in] error An [error code](@ref errors).
  *  @param[in] description A UTF-8 encoded string describing the error.
  *
+ *  @sa @ref error_handling
  *  @sa glfwSetErrorCallback
  *
  *  @ingroup init
@@ -788,6 +799,7 @@ typedef void (* GLFWerrorfun)(int,const char*);
  *  @param[in] ypos The new y-coordinate, in screen coordinates, of the
  *  upper-left corner of the client area of the window.
  *
+ *  @sa @ref window_pos
  *  @sa glfwSetWindowPosCallback
  *
  *  @ingroup window
@@ -802,6 +814,7 @@ typedef void (* GLFWwindowposfun)(GLFWwindow*,int,int);
  *  @param[in] width The new width, in screen coordinates, of the window.
  *  @param[in] height The new height, in screen coordinates, of the window.
  *
+ *  @sa @ref window_size
  *  @sa glfwSetWindowSizeCallback
  *
  *  @ingroup window
@@ -814,6 +827,7 @@ typedef void (* GLFWwindowsizefun)(GLFWwindow*,int,int);
  *
  *  @param[in] window The window that the user attempted to close.
  *
+ *  @sa @ref window_close
  *  @sa glfwSetWindowCloseCallback
  *
  *  @ingroup window
@@ -826,6 +840,7 @@ typedef void (* GLFWwindowclosefun)(GLFWwindow*);
  *
  *  @param[in] window The window whose content needs to be refreshed.
  *
+ *  @sa @ref window_refresh
  *  @sa glfwSetWindowRefreshCallback
  *
  *  @ingroup window
@@ -840,6 +855,7 @@ typedef void (* GLFWwindowrefreshfun)(GLFWwindow*);
  *  @param[in] focused `GLFW_TRUE` if the window was given input focus, or
  *  `GLFW_FALSE` if it lost it.
  *
+ *  @sa @ref window_focus
  *  @sa glfwSetWindowFocusCallback
  *
  *  @ingroup window
@@ -855,6 +871,7 @@ typedef void (* GLFWwindowfocusfun)(GLFWwindow*,int);
  *  @param[in] iconified `GLFW_TRUE` if the window was iconified, or
  *  `GLFW_FALSE` if it was restored.
  *
+ *  @sa @ref window_iconify
  *  @sa glfwSetWindowIconifyCallback
  *
  *  @ingroup window
@@ -870,6 +887,7 @@ typedef void (* GLFWwindowiconifyfun)(GLFWwindow*,int);
  *  @param[in] width The new width, in pixels, of the framebuffer.
  *  @param[in] height The new height, in pixels, of the framebuffer.
  *
+ *  @sa @ref window_fbsize
  *  @sa glfwSetFramebufferSizeCallback
  *
  *  @ingroup window
@@ -887,6 +905,7 @@ typedef void (* GLFWframebuffersizefun)(GLFWwindow*,int,int);
  *  @param[in] mods Bit field describing which [modifier keys](@ref mods) were
  *  held down.
  *
+ *  @sa @ref input_mouse_button
  *  @sa glfwSetMouseButtonCallback
  *
  *  @ingroup input
@@ -901,6 +920,7 @@ typedef void (* GLFWmousebuttonfun)(GLFWwindow*,int,int,int);
  *  @param[in] xpos The new x-coordinate, in screen coordinates, of the cursor.
  *  @param[in] ypos The new y-coordinate, in screen coordinates, of the cursor.
  *
+ *  @sa @ref cursor_pos
  *  @sa glfwSetCursorPosCallback
  *
  *  @ingroup input
@@ -915,6 +935,7 @@ typedef void (* GLFWcursorposfun)(GLFWwindow*,double,double);
  *  @param[in] entered `GLFW_TRUE` if the cursor entered the window's client
  *  area, or `GLFW_FALSE` if it left it.
  *
+ *  @sa @ref cursor_enter
  *  @sa glfwSetCursorEnterCallback
  *
  *  @ingroup input
@@ -929,6 +950,7 @@ typedef void (* GLFWcursorenterfun)(GLFWwindow*,int);
  *  @param[in] xoffset The scroll offset along the x-axis.
  *  @param[in] yoffset The scroll offset along the y-axis.
  *
+ *  @sa @ref scrolling
  *  @sa glfwSetScrollCallback
  *
  *  @ingroup input
@@ -946,6 +968,7 @@ typedef void (* GLFWscrollfun)(GLFWwindow*,double,double);
  *  @param[in] mods Bit field describing which [modifier keys](@ref mods) were
  *  held down.
  *
+ *  @sa @ref input_key
  *  @sa glfwSetKeyCallback
  *
  *  @ingroup input
@@ -959,6 +982,7 @@ typedef void (* GLFWkeyfun)(GLFWwindow*,int,int,int,int);
  *  @param[in] window The window that received the event.
  *  @param[in] codepoint The Unicode code point of the character.
  *
+ *  @sa @ref input_char
  *  @sa glfwSetCharCallback
  *
  *  @ingroup input
@@ -977,6 +1001,7 @@ typedef void (* GLFWcharfun)(GLFWwindow*,unsigned int);
  *  @param[in] mods Bit field describing which [modifier keys](@ref mods) were
  *  held down.
  *
+ *  @sa @ref input_char
  *  @sa glfwSetCharModsCallback
  *
  *  @ingroup input
@@ -991,6 +1016,7 @@ typedef void (* GLFWcharmodsfun)(GLFWwindow*,unsigned int,int);
  *  @param[in] count The number of dropped files.
  *  @param[in] paths The UTF-8 encoded file and/or directory path names.
  *
+ *  @sa @ref path_drop
  *  @sa glfwSetDropCallback
  *
  *  @ingroup input
@@ -1004,6 +1030,7 @@ typedef void (* GLFWdropfun)(GLFWwindow*,int,const char**);
  *  @param[in] monitor The monitor that was connected or disconnected.
  *  @param[in] event One of `GLFW_CONNECTED` or `GLFW_DISCONNECTED`.
  *
+ *  @sa @ref monitor_event
  *  @sa glfwSetMonitorCallback
  *
  *  @ingroup monitor
@@ -1013,6 +1040,9 @@ typedef void (* GLFWmonitorfun)(GLFWmonitor*,int);
 /*! @brief Video mode type.
  *
  *  This describes a single video mode.
+ *
+ *  @sa @ref monitor_modes
+ *  @sa glfwGetVideoMode glfwGetVideoModes
  *
  *  @ingroup monitor
  */
@@ -1042,6 +1072,7 @@ typedef struct GLFWvidmode
  *
  *  This describes the gamma ramp for a monitor.
  *
+ *  @sa @ref monitor_gamma
  *  @sa glfwGetGammaRamp glfwSetGammaRamp
  *
  *  @ingroup monitor
@@ -1063,6 +1094,8 @@ typedef struct GLFWgammaramp
 } GLFWgammaramp;
 
 /*! @brief Image data.
+ *
+ *  @sa @ref cursor_custom
  */
 typedef struct GLFWimage
 {
@@ -2578,6 +2611,33 @@ GLFWAPI int glfwGetInputMode(GLFWwindow* window, int mode);
  */
 GLFWAPI void glfwSetInputMode(GLFWwindow* window, int mode, int value);
 
+/*! @brief Returns the localized name of the specified printable key.
+ *
+ *  This function returns the localized name of the specified printable key.
+ *
+ *  If the key is `GLFW_KEY_UNKNOWN`, the scancode is used, otherwise the
+ *  scancode is ignored.
+ *
+ *  @param[in] key The key to query, or `GLFW_KEY_UNKNOWN`.
+ *  @param[in] scancode The scancode of the key to query.
+ *  @return The localized name of the key.
+ *
+ *  @par Pointer Lifetime
+ *  The returned string is allocated and freed by GLFW.  You should not free it
+ *  yourself.  It is valid until the next call to @ref glfwGetKeyName, or until
+ *  the library is terminated.
+ *
+ *  @par Thread Safety
+ *  This function may only be called from the main thread.
+ *
+ *  @sa @ref input_key_name
+ *
+ *  @since Added in GLFW 3.2.
+ *
+ *  @ingroup input
+ */
+GLFWAPI const char* glfwGetKeyName(int key, int scancode);
+
 /*! @brief Returns the last reported state of a keyboard key for the specified
  *  window.
  *
@@ -2596,6 +2656,8 @@ GLFWAPI void glfwSetInputMode(GLFWwindow* window, int mode, int value);
  *
  *  The [modifier key bit masks](@ref mods) are not key tokens and cannot be
  *  used with this function.
+ *
+ *  __Do not use this function__ to implement [text input](@ref input_char).
  *
  *  @param[in] window The desired window.
  *  @param[in] key The desired [keyboard key](@ref keys).  `GLFW_KEY_UNKNOWN` is
@@ -3290,6 +3352,10 @@ GLFWAPI void glfwSetTime(double time);
  *  whether a context performs this flush by setting the
  *  [GLFW_CONTEXT_RELEASE_BEHAVIOR](@ref window_hints_ctx) window hint.
  *
+ *  The specified window must have an OpenGL or OpenGL ES context.  Specifying
+ *  a window without a context will generate a @ref GLFW_NO_WINDOW_CONTEXT
+ *  error.
+ *
  *  @param[in] window The window whose context to make current, or `NULL` to
  *  detach the current context.
  *
@@ -3330,6 +3396,10 @@ GLFWAPI GLFWwindow* glfwGetCurrentContext(void);
  *  This function swaps the front and back buffers of the specified window.  If
  *  the swap interval is greater than zero, the GPU driver waits the specified
  *  number of screen updates before swapping the buffers.
+ *
+ *  The specified window must have an OpenGL or OpenGL ES context.  Specifying
+ *  a window without a context will generate a @ref GLFW_NO_WINDOW_CONTEXT
+ *  error.
  *
  *  @param[in] window The window whose buffers to swap.
  *
@@ -3432,8 +3502,8 @@ GLFWAPI int glfwExtensionSupported(const char* extension);
  *  without a current context will cause a @ref GLFW_NO_CURRENT_CONTEXT error.
  *
  *  @param[in] procname The ASCII encoded name of the function.
- *  @return The address of the function, or `NULL` if an [error](@ref
- *  error_handling) occurred.
+ *  @return The address of the function, or `NULL` if an
+ *  [error](@ref error_handling) occurred.
  *
  *  @remarks The address of a given function is not guaranteed to be the same
  *  between contexts.
