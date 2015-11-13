@@ -1195,9 +1195,6 @@ public final class MemoryUtil {
 		-------------------------------------
 	    ------------------------------------- */
 
-	/** Returns the {@code sizeof(void *)}. */
-	static native int memGetPointerSize();
-
 	/**
 	 * Returns the object that the specified global reference points to.
 	 *

@@ -109,6 +109,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_MemoryAccess_putAddress(JNIEnv *env
 	*(intptr_t *)(intptr_t)ptr = (intptr_t)value;
 }
 
+// getPointerSize()I
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_MemoryAccess_getPointerSize(JNIEnv *env, jclass clazz)
+{
+	UNUSED_PARAMS(env, clazz);
+	return (jint)sizeof(void *);
+}
+
 // getDirectBufferAddress(Ljava/nio/Buffer;)J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_getDirectBufferAddress(JNIEnv *env, jclass clazz,
 	jobject buffer

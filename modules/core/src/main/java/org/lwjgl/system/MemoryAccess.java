@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 final class MemoryAccess {
 
+	static {
+		Library.initialize();
+	}
+
 	private MemoryAccess() {
 	}
 
@@ -76,6 +80,9 @@ final class MemoryAccess {
 	private static native void putDouble(long ptr, double value);
 
 	private static native void putAddress(long ptr, long value);
+
+	// Returns the {@code sizeof(void *)}.
+	static native int getPointerSize();
 
 	// Returns the buffer memory address
 	static native long getDirectBufferAddress(Buffer buffer);
