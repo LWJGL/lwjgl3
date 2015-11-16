@@ -460,6 +460,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 		FRAMEBUFFER,
 		src["buffer"],
+		src["drawbuffer"],
 		src["depth"],
 		src["stencil"]
 	)
