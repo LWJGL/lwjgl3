@@ -6,10 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.PointerBuffer;
 
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
+import java.nio.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
@@ -182,6 +179,15 @@ public final class Checks {
 		return buf;
 	}
 
+	/** Ensures that the specified LongBuffer is null-terminated. */
+	public static LongBuffer checkNT(LongBuffer buf) {
+		checkBuffer(buf, 1);
+		if ( buf.get(buf.limit() - 1) != 0L )
+			throw new IllegalArgumentException("Missing null termination");
+
+		return buf;
+	}
+
 	/** Ensures that the specified FloatBuffer is null-terminated. */
 	public static FloatBuffer checkNT(FloatBuffer buf) {
 		checkBuffer(buf, 1);
@@ -207,17 +213,6 @@ public final class Checks {
 			throw new IllegalArgumentException("Missing termination");
 
 		return buf;
-	}
-
-	public static void checkNTArray(ByteBuffer buf, int count) {
-		int nullFound = 0;
-		for ( int i = buf.position(); i < buf.limit(); i++ ) {
-			if ( buf.get(i) == 0 )
-				nullFound++;
-		}
-
-		if ( nullFound < count )
-			throw new IllegalArgumentException("Missing null termination");
 	}
 
 	/**
@@ -282,11 +277,6 @@ public final class Checks {
 			throwArraySizeException(array, size);
 	}
 
-	public static void checkArray(long[] array, int size) {
-		if ( array.length < size )
-			throwArraySizeException(array, size);
-	}
-
 	public static void checkBufferGT(Buffer buf, int size) {
 		if ( size < buf.remaining() )
 			throwBufferSizeGTException(buf, size);
@@ -317,10 +307,6 @@ public final class Checks {
 	}
 
 	private static void throwArraySizeException(Object[] array, int size) {
-		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
-	}
-
-	private static void throwArraySizeException(long[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 

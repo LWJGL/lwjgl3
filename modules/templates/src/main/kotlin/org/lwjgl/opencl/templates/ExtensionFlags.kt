@@ -94,6 +94,15 @@ val khr_local_int32_extended_atomics = EXT_FLAG.nativeClassCL("khr_local_int32_e
 		"""
 }
 
+val khr_mipmap_image_writes = EXT_FLAG.nativeClassCL("khr_mipmap_image_writes", KHR) {
+	documentation =
+		"""
+		When true, the $extensionName extension is supported.
+
+		This extension adds built-in functions that can be used to write a mip-mapped image in an OpenCL C program.
+		"""
+}
+
 val khr_select_fprounding_mode = EXT_FLAG.nativeClassCL("khr_select_fprounding_mode", KHR) {
 	documentation =
 		"""

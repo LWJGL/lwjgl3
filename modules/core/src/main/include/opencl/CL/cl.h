@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 - 2013 The Khronos Group Inc.
+ * Copyright (c) 2008 - 2013, 2015 The Khronos Group Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and/or associated documentation files (the
@@ -89,6 +89,7 @@ typedef cl_uint             cl_kernel_arg_address_qualifier;
 typedef cl_uint             cl_kernel_arg_access_qualifier;
 typedef cl_bitfield         cl_kernel_arg_type_qualifier;
 typedef cl_uint             cl_kernel_work_group_info;
+typedef cl_uint             cl_kernel_sub_group_info;
 typedef cl_uint             cl_event_info;
 typedef cl_uint             cl_command_type;
 typedef cl_uint             cl_profiling_info;

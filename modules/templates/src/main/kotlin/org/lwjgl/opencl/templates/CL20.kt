@@ -19,8 +19,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 	IntConstant(
 		"Error Codes",
 
-		"INVALID_PIPE_SIZE"..-69,
-		"INVALID_DEVICE_QUEUE"..-70
+		"INVALID_PIPE_SIZE" expr "-69",
+		"INVALID_DEVICE_QUEUE" expr "-70"
 	)
 
 	IntConstant(
@@ -165,7 +165,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			device type as device type specified when context is created using CL10#CreateContextFromType().
 			"""
 		),
-		const..cl_command_queue_properties_p.IN(
+		nullable..NullTerminated..const..cl_command_queue_properties_p.IN(
 			"properties",
 			"""
 			a list of properties for the command-queue and their corresponding values. Each property name is immediately followed by the corresponding desired
@@ -205,7 +205,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		),
 		cl_uint.IN("pipe_packet_size", "the size in bytes of a pipe packet"),
 		cl_uint.IN("pipe_max_packets", "the pipe capacity by specifying the maximum number of packets the pipe can hold"),
-		const..cl_pipe_properties_p.IN(
+		nullable..NullTerminated..const..cl_pipe_properties_p.IN(
 			"properties",
 			"""
 			a list of properties for the pipe and their corresponding values. Each property name is immediately followed by the corresponding desired value. The

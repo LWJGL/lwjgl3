@@ -95,6 +95,7 @@ val cl_kernel_arg_address_qualifier = typedef(cl_uint, "cl_kernel_arg_address_qu
 val cl_kernel_arg_access_qualifier = typedef(cl_uint, "cl_kernel_arg_access_qualifier")
 val cl_kernel_arg_type_qualifier = typedef(cl_bitfield, "cl_kernel_arg_type_qualifier")
 val cl_kernel_work_group_info = typedef(cl_uint, "cl_kernel_work_group_info")
+val cl_kernel_sub_group_info = typedef(cl_uint, "cl_kernel_sub_group_info")
 val cl_event_info = typedef(cl_uint, "cl_event_info")
 val cl_command_type = typedef(cl_uint, "cl_command_type")
 val cl_profiling_info = typedef(cl_uint, "cl_profiling_info")
@@ -402,6 +403,15 @@ val cl_gl_object_type = IntegerType("cl_gl_object_type", PrimitiveMapping.INT)
 val cl_gl_object_type_p = cl_gl_object_type.p
 
 val cl_gl_texture_info = IntegerType("cl_gl_texture_info", PrimitiveMapping.INT)
+
+// EGL interop
+
+val CLeglImageKHR = "CLeglImageKHR".opaque_p
+val CLeglDisplayKHR = "CLeglDisplayKHR".opaque_p
+val CLeglSyncKHR = "CLeglSyncKHR".opaque_p
+
+val cl_egl_image_properties_khr = typedef(intptr_t, "cl_egl_image_properties_khr")
+val cl_egl_image_properties_khr_p = cl_egl_image_properties_khr.p
 
 // APPLE
 

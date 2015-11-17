@@ -28,11 +28,16 @@ public final class CLUtil {
 		},
 		null,
 		CL10.class,
+		apiOptionalClass("org.lwjgl.opencl.CL10GL"),
 		CL11.class,
 		CL12.class,
+		CL20.class,
+		apiOptionalClass("org.lwjgl.opencl.APPLEGLSharing"),
+		INTELAccelerator.class,
 		apiOptionalClass("org.lwjgl.opencl.KHRGLSharing"),
-		KHRICD.class,
-		apiOptionalClass("org.lwjgl.opencl.APPLEGLSharing")
+		apiOptionalClass("org.lwjgl.opencl.KHREGLEvent"),
+		apiOptionalClass("org.lwjgl.opencl.KHREGLImage"),
+		KHRICD.class
 		/*, EXTDeviceFission.class*/
 	);
 

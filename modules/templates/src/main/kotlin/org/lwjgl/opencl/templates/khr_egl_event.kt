@@ -1,0 +1,43 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: http://lwjgl.org/license.php
+ */
+package org.lwjgl.opencl.templates
+
+import org.lwjgl.generator.*
+import org.lwjgl.opencl.*
+
+val khr_egl_event = dependsOn(Binding.EGL) {
+	"KHREGLEvent".nativeClassCL("khr_egl_event", KHR) {
+		documentation =
+			"""
+			Native bindings to the $extensionLink extension.
+
+			This extension allows creating OpenCL event objects linked to EGL fence sync objects, potentially improving efficiency of sharing images and
+			buffers between the two APIs. The companion {@code EGL_KHR_cl_event} extension provides the complementary functionality of creating an EGL sync
+			object from an OpenCL event object.
+			"""
+
+		IntConstant(
+			"Returned by clCreateEventFromEGLSyncKHR if sync is not a valid EGLSyncKHR handle created with respect to EGLDisplay display.",
+
+			"INVALID_EGL_OBJECT_KHR" expr "-1093"
+		)
+
+		IntConstant(
+			"Returned by CL10#GetEventInfo() when param_name is CL10#EVENT_COMMAND_TYPE.",
+
+			"COMMAND_EGL_FENCE_SYNC_OBJECT_KHR"..0x202F
+		)
+
+		cl_event(
+			"CreateEventFromEGLSyncKHR",
+			"Creates a linked event object.",
+
+			cl_context.IN("context", "a valid OpenCL context"),
+			CLeglSyncKHR.IN("sync", "the name of a sync object of type org.lwjgl.egl.EGL15##EGL_SYNC_FENCE created with respect to {@code EGLDisplay display}."),
+			CLeglDisplayKHR.IN("display", "an {@code EGLDisplay}"),
+			ERROR_RET
+		)
+	}
+}

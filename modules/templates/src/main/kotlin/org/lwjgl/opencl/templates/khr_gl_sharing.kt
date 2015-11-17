@@ -61,7 +61,7 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 		faster on a command queue corresponding to this device than on command queues corresponding to other devices available to an OpenCL context.
 		""",
 
-			Check(5)..const..cl_context_properties_p.IN(
+			NullTerminated..const..cl_context_properties_p.IN(
 				"properties",
 				"""
 			points to an attribute list whose format and valid contents are identical to the {code properties} argument of CL10#CreateContext().
