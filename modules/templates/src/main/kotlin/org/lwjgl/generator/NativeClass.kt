@@ -41,9 +41,7 @@ abstract class APIBinding(
 		comparator: (NativeClass, NativeClass) -> Int = { o1, o2 -> o1.templateName.compareTo(o2.templateName) }
 	): List<NativeClass> {
 		val classes = ArrayList(_classes)
-		Collections.sort(classes, object : Comparator<NativeClass> { // TODO: Kotlin bug: Can't use SAM conversion on JDK 8
-			override fun compare(o1: NativeClass, o2: NativeClass) = comparator(o1, o2)
-		})
+		Collections.sort(classes) { o1, o2 -> comparator(o1, o2) }
 		return classes
 	}
 
