@@ -8,8 +8,8 @@ import java.io.PrintWriter
 import java.util.*
 
 private val STRUCT = "struct"
+private val ANONYMOUS = "*"
 
-// TODO: Add support for javadoc
 private open class StructMember(
 	val nativeType: NativeType,
 	val name: String,
@@ -29,7 +29,6 @@ private open class StructMember(
 		if ( name == "class" ) "$name\$" else name // TODO: use a list of Java keywords here
 	else
 		"${parentMember}_$name"
-
 }
 
 private open class StructMemberArray(
@@ -45,8 +44,6 @@ private class StructMemberCharArray(
 	documentation: String,
 	size: Int
 ) : StructMemberArray(nativeType, name, documentation, size)
-
-private val ANONYMOUS = "*"
 
 enum class StructIdentifierType(val keyword: String) {
 	/**
@@ -142,24 +139,39 @@ class Struct(
 
 		if ( members.isNotEmpty() )
 			builder
-				.append(" <h3>${this@Struct.structName} members</h3>\n ")
-				.append(table(
-					tr(
-						th("Member"),
-						th("Type"),
-						th("Description")
-					),
-					*members.map {
-						tr(
-							td(it.name),
-							td(if ( it is StructMemberArray ) "${it.nativeType.name}[${it.size}]" else it.nativeType.name, className = "nw"),
-							td(it.documentation)
-						)
-					}.toTypedArray()
-				))
+				.append(" <h3>${this@Struct.nativeName} members</h3>\n ")
+				.append(this@Struct.printStructLayout())
 
 		if ( builder.length != 0 )
 			println(processDocumentation(builder.toString()).toJavaDoc(indentation = ""))
+
+		if ( builder.length != 0 )
+			println(processDocumentation(builder.toString()).toJavaDoc(indentation = ""))
+	}
+
+	private fun Struct.printStructLayout(): String {
+		return table(
+			tr(
+				th("Member"),
+				th("Type"),
+				th("Description")
+			),
+			*members.map {
+				tr(
+					td(it.name),
+					if ( it.isNestedAnonymousStruct )
+						td((it.nativeType as StructType).definition.printStructLayout())
+					else {
+						val nativeType = if ( it.isNestedStruct )
+							"{@link ${(it.nativeType as StructType).definition.className} ${it.nativeType.name}}"
+						else
+							it.nativeType.name
+						td(if ( it is StructMemberArray ) "$nativeType[${it.size}]" else nativeType, className = "nw")
+					},
+					td(it.documentation)
+				)
+			}.toTypedArray()
+		)
 	}
 
 	override fun PrintWriter.generateJava() {
