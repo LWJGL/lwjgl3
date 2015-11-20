@@ -289,6 +289,8 @@ abstract class GeneratorTargetNative(
 		nativeFileNameJNI = fileName.toString()
 	}
 
+	open val skipNative: Boolean = false
+
 	abstract fun PrintWriter.generateNative()
 
 }

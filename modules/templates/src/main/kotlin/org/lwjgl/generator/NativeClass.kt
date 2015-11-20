@@ -352,6 +352,8 @@ class NativeClass(
 		println("\t}\n")
 	}
 
+	override val skipNative: Boolean get() = functions.none() { it.hasCustomJNI }
+
 	override fun PrintWriter.generateNative() {
 		print(HEADER)
 		preamble.printNative(this)

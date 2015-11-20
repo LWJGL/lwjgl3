@@ -225,7 +225,7 @@ class Generator(
 			it.generateJava()
 		}
 
-		if ( nativeClass.functions.any() { it.hasCustomJNI } ) {
+		if ( !nativeClass.skipNative ) {
 			generateNative(nativeClass) {
 				generateOutput(nativeClass, it) {
 					it.generateNative()
@@ -251,7 +251,7 @@ class Generator(
 		val outputJava = File("$trgPath/java/$packagePath/${target.className}.java")
 
 		val touchTimestamp: Long?
-		if ( target !== JNI ) {
+		if ( target.packageName != "org.lwjgl.system" ) {
 			touchTimestamp = max(target.getLastModified("$srcPath/$packagePath"), max(packageLastModifiedMap[target.packageName]!!, GENERATOR_LAST_MODIFIED))
 			if ( outputJava.exists() && touchTimestamp < outputJava.lastModified() ) {
 				//println("SKIPPED: ${target.packageName}.${target.className}")
@@ -266,7 +266,7 @@ class Generator(
 			it.generateJava()
 		}
 
-		if ( target is GeneratorTargetNative ) {
+		if ( target is GeneratorTargetNative && !target.skipNative ) {
 			generateNative(target) {
 				generateOutput(target, it) {
 					it.generateNative()
