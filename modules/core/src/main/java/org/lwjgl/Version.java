@@ -21,7 +21,7 @@ public final class Version {
 		VERSION_REVISION = 0;
 
 	/** The development state of the current build. */
-	public static final BuildType BUILD_TYPE = BuildType.BETA;
+	public static final BuildType BUILD_TYPE = BuildType.STABLE;
 
 	private Version() {
 	}
