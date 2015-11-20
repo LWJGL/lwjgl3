@@ -404,7 +404,10 @@ inline fun <T> Array<out T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolea
 }
 
 /** Returns true if the collection was empty. */
-fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean {
+fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean = this.asSequence().forEachWithMore(moreOverride, apply)
+
+/** Returns true if the sequence was empty. */
+fun <T> Sequence<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean {
 	var more = moreOverride
 	for (item in this) {
 		apply(item, more)
