@@ -36,7 +36,7 @@ public final class Version {
 	}
 
 	private static String getVersionImpl() {
-		URL url = Thread.currentThread().getContextClassLoader().getResource("org/lwjgl/Sys.class");
+		URL url = Thread.currentThread().getContextClassLoader().getResource("org/lwjgl/Version.class");
 		if ( url != null ) {
 			String classURL = url.toString();
 			if ( classURL.startsWith("jar:") ) {
