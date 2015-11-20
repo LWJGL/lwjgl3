@@ -1,6 +1,6 @@
 ### 3.0.0 Beta
 
-[DOWNLOAD](http://build.lwjgl.org/release/3.0.0b/lwjgl.zip)
+[DOWNLOAD](http://build.lwjgl.org/release/3.0.0b/lwjgl-3.0.0b.zip)
 
 _Released 2015 Nov 20_
 
