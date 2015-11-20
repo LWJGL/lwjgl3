@@ -11,10 +11,10 @@ import java.util.regex.Pattern;
 
 import static org.lwjgl.system.APIUtil.*;
 
-/** Initializes the LWJGL native library and handles loading additional shared libraries. */
+/** Initializes the LWJGL shared library and handles loading additional shared libraries. */
 public final class Library {
 
-	/** The LWJGL native library name */
+	/** The LWJGL shared library name. */
 	public static final String JNI_LIBRARY_NAME = Configuration.LIBRARY_NAME_LWJGL.get(System.getProperty("os.arch").contains("64") ? "lwjgl" : "lwjgl32");
 
 	private static final String JAVA_LIBRARY_PATH = "java.library.path";
@@ -39,7 +39,9 @@ public final class Library {
 			apiLog("Version: " + Version.getVersion());
 			apiLog("\t OS: " + System.getProperty("os.name") + " v" + System.getProperty("os.version"));
 			apiLog("\tJRE: " + System.getProperty("java.version") + " " + System.getProperty("os.arch"));
-			apiLog("\tJVM: " + System.getProperty("java.vm.name") + " v" + System.getProperty("java.vm.version") + " by " + System.getProperty("java.vm.vendor"));
+			apiLog(
+				"\tJVM: " + System.getProperty("java.vm.name") + " v" + System.getProperty("java.vm.version") + " by " + System.getProperty("java.vm.vendor")
+			);
 		}
 
 		try {
@@ -60,13 +62,13 @@ public final class Library {
 
 	private Library() {}
 
-	/** Ensures that the LWJGL native library has been loaded. */
+	/** Ensures that the LWJGL shared library has been loaded. */
 	public static void initialize() {
 		// intentionally empty to trigger static initializer
 	}
 
 	/**
-	 * Loads a native library using {@link System}.
+	 * Loads a shared library using {@link System}.
 	 *
 	 * <p>If {@code name} is an absolute path or {@link Configuration#LIBRARY_PATH} is set, {@link System#load} will be used. Otherwise,
 	 * {@link System#loadLibrary} will be used.</p>
@@ -106,16 +108,15 @@ public final class Library {
 	}
 
 	/**
-	 * Loads a native library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
+	 * Loads a shared library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
 	 * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
 	 *
-	 * @param name the library name, without an OS specific prefix or file extension (e.g. GL, not libGL.so)
+	 * @param name the library name. OS-specific prefixes and file extensions are optional (e.g. both {@code "GL"} and {@code "libGL.so.1"} are valid on Linux)
 	 *
-	 * @return the native library
+	 * @return the shared library
 	 *
-	 * @throws UnsatisfiedLinkError if the library could not be loaded
+	 * @throws RuntimeException if the library could not be loaded
 	 */
-
 	public static SharedLibrary loadNative(String name) {
 		if ( new File(name).isAbsolute() )
 			return apiCreateLibrary(name);
@@ -145,6 +146,42 @@ public final class Library {
 			} catch (Exception ignored) {
 				throw e;
 			}
+		}
+	}
+
+	/**
+	 * Loads a shared library using {@link #loadNative(String)} with the name specified by {@code name}. If {@code name} is not set,
+	 * {@link #loadNative(String)} will be called with the names specified by {@code defaultNames}. The first successful will be returned.
+	 *
+	 * @param name         a {@link Configuration} that specifies the library name
+	 * @param defaultNames the default library name
+	 *
+	 * @return the shared library
+	 *
+	 * @throws RuntimeException if the library could not be loaded
+	 */
+	public static SharedLibrary loadNative(Configuration name, String... defaultNames) {
+		if ( defaultNames.length == 1 || name.get() != null )
+			return loadNative(name.get(defaultNames[0]));
+		else {
+			if ( defaultNames.length == 0 )
+				throw new RuntimeException("No default names specified.");
+
+			SharedLibrary library = null;
+			try {
+				library = Library.loadNative(defaultNames[0]); // try first
+			} catch (Exception e) {
+				for ( int i = 1; i < defaultNames.length; i++ ) { // try alternatives
+					try {
+						library = Library.loadNative(defaultNames[i]);
+						break;
+					} catch (Exception ignored) {
+					}
+				}
+				if ( library == null )
+					throw new RuntimeException("Failed to load library.", e); // original exception
+			}
+			return library;
 		}
 	}
 

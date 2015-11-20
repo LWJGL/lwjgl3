@@ -65,22 +65,21 @@ public final class GL {
 
 	/** Loads the OpenGL native library, using the default library name. */
 	public static void create() {
-		String libName;
+		SharedLibrary GL;
 		switch ( Platform.get() ) {
-			case WINDOWS:
-				libName = "opengl32";
-				break;
 			case LINUX:
-				libName = "libGL.so.1";
+				GL = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "libGL.so.1", "libGL.so");
 				break;
 			case MACOSX:
-				libName = "/System/Library/Frameworks/OpenGL.framework";
+				GL = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "/System/Library/Frameworks/OpenGL.framework");
+				break;
+			case WINDOWS:
+				GL = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "opengl32");
 				break;
 			default:
 				throw new IllegalStateException();
 		}
-
-		create(Configuration.LIBRARY_NAME_OPENGL.get(libName));
+		create(GL);
 	}
 
 	/**
@@ -89,8 +88,10 @@ public final class GL {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		final SharedLibrary OPENGL = Library.loadNative(libName);
+		create(Library.loadNative(libName));
+	}
 
+	private static void create(final SharedLibrary OPENGL) {
 		abstract class FunctionProviderGL extends FunctionProvider.Default {
 			abstract long getExtensionAddress(long name);
 

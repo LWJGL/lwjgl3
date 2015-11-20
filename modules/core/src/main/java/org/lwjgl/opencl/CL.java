@@ -29,25 +29,26 @@ public final class CL {
 	private CL() {}
 
 	public static void create() {
-		create(Configuration.LIBRARY_NAME_OPENCL.get("OpenCL"));
+		SharedLibrary CL;
+		switch ( Platform.get() ) {
+			case LINUX:
+			case WINDOWS:
+				CL = Library.loadNative(Configuration.LIBRARY_NAME_OPENCL, "OpenCL");
+				break;
+			case MACOSX:
+				CL = Library.loadNative(Configuration.LIBRARY_NAME_OPENCL, "OpenCL", "/System/Library/Frameworks/OpenCL.framework");
+				break;
+			default:
+				throw new IllegalStateException();
+		}
+		create(CL);
 	}
 
 	public static void create(String libName) {
-		final SharedLibrary OPENCL;
+		create(Library.loadNative(libName));
+	}
 
-		{
-			SharedLibrary dll;
-			try {
-				dll = Library.loadNative(libName);
-			} catch (Throwable t) {
-				if ( Platform.get() == Platform.MACOSX )
-					dll = apiCreateLibrary("/System/Library/Frameworks/OpenCL.framework");
-				else
-					throw new RuntimeException(t);
-			}
-			OPENCL = dll;
-		}
-
+	public static void create(final SharedLibrary OPENCL) {
 		try {
 			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
 

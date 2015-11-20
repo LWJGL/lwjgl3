@@ -51,22 +51,21 @@ public final class EGL {
 
 	/** Loads the EGL native library, using the default library name. */
 	public static void create() {
-		String libName = Configuration.LIBRARY_NAME_EGL.get();
-		if ( libName == null ) {
-			switch ( Platform.get() ) {
-				case LINUX:
-					libName = "libEGL.so.1";
-					break;
-				case MACOSX:
-					throw new UnsupportedOperationException("MacOS X does not support EGL");
-				case WINDOWS:
-					libName = "libEGL";
-					break;
-				default:
-					throw new IllegalStateException();
-			}
+		SharedLibrary EGL;
+		switch ( Platform.get() ) {
+			case LINUX:
+				EGL = Library.loadNative(Configuration.LIBRARY_NAME_EGL, "libEGL.so.1");
+				break;
+			case MACOSX:
+				EGL = Library.loadNative(Configuration.LIBRARY_NAME_EGL, "EGL");
+				break;
+			case WINDOWS:
+				EGL = Library.loadNative(Configuration.LIBRARY_NAME_EGL, "libEGL", "EGL");
+				break;
+			default:
+				throw new IllegalStateException();
 		}
-		create(libName);
+		create(EGL);
 	}
 
 	/**
@@ -75,8 +74,10 @@ public final class EGL {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		final SharedLibrary EGL = Library.loadNative(libName);
+		create(Library.loadNative(libName));
+	}
 
+	private static void create(final SharedLibrary EGL) {
 		try {
 			FunctionProvider functionProvider = new FunctionProvider.Default() {
 				private final long eglGetProcAddress = EGL.getFunctionAddress("eglGetProcAddress");

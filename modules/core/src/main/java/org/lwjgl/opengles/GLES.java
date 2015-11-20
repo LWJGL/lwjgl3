@@ -65,21 +65,21 @@ public final class GLES {
 
 	/** Loads the OpenGL ES native library, using the default library name. */
 	public static void create() {
-		String libName;
+		SharedLibrary GLES;
 		switch ( Platform.get() ) {
 			case LINUX:
-				libName = "libGLESv2.so.2";
+				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "libGLESv2.so.2");
 				break;
 			case MACOSX:
-				throw new UnsupportedOperationException("MacOS X does not support OpenGL ES");
+				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "GLESv2");
+				break;
 			case WINDOWS:
-				libName = "libGLESv2";
+				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "libGLESv2", "GLESv2");
 				break;
 			default:
 				throw new IllegalStateException();
 		}
-
-		create(Configuration.LIBRARY_NAME_OPENGLES.get(libName));
+		create(GLES);
 	}
 
 	/**
@@ -88,8 +88,10 @@ public final class GLES {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		final SharedLibrary GLES = Library.loadNative(libName);
+		create(Library.loadNative(libName));
+	}
 
+	private  static void create(final SharedLibrary GLES) {
 		try {
 			FunctionProvider functionProvider = new FunctionProvider.Default() {
 				@Override
