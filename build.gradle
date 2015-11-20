@@ -30,7 +30,6 @@ class Deployment {
 
 Deployment deployment;
 if ( hasProperty("release") ) {
-	buildRepo.isRelease = true
 	deployment = new Deployment(
 		type: BuildType.RELEASE,
 		repo: "https://oss.sonatype.org/service/local/staging/deploy/maven2/",

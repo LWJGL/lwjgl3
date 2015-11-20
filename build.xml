@@ -513,8 +513,13 @@ License terms: http://lwjgl.org/license.php
 
 		<!-- Bundle source -->
 		<zip destfile="${release}/src.zip" level="9">
-			<fileset dir="${src.core}" includes="**"/>
-			<fileset dir="${src.generated.java}" includes="**"/>
+			<fileset dir="${src.core}">
+				<patternset refid="core.main.files"/>
+			</fileset>
+
+			<fileset dir="${src.generated.java}">
+				<patternset refid="core.generated.files"/>
+			</fileset>
 		</zip>
 
 		<echo file="${release}/build.txt" if:set="build.revision">LWJGL ${build.version} build ${build.revision}</echo>
