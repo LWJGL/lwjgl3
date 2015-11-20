@@ -213,7 +213,7 @@ open class PrimitiveMapping(
 		val LONG = PrimitiveMapping("jlong", Long::class, 8, PointerMapping.DATA_LONG)
 
 		// Integer type with enough precision to store a pointer
-		val POINTER = PrimitiveMapping("jlong", Long::class, 8, PointerMapping.DATA_POINTER)
+		val POINTER = PrimitiveMapping("jlong", Long::class, Int.MAX_VALUE /* should not be used */, PointerMapping.DATA_POINTER)
 
 		val FLOAT = PrimitiveMapping("jfloat", Float::class, 4, PointerMapping.DATA_FLOAT)
 		val DOUBLE = PrimitiveMapping("jdouble", Double::class, 8, PointerMapping.DATA_DOUBLE)
