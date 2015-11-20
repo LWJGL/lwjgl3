@@ -33,7 +33,7 @@ val GLFWmonitor_p = GLFWmonitor.p
 
 val GLFWwindow = "GLFWwindow".p
 
-val GLFWvidmode_p = struct_p(GLFW_PACKAGE, "GLFWVidMode", structName = "GLFWvidmode", mutable = false) {
+val GLFWvidmode_p = struct_p(GLFW_PACKAGE, "GLFWVidMode", nativeName = "GLFWvidmode", mutable = false) {
 	documentation = "Describes a single video mode."
 	nativeImport("glfw3.h")
 	int.member("width", "the width, in screen coordinates, of the video mode")
@@ -44,7 +44,7 @@ val GLFWvidmode_p = struct_p(GLFW_PACKAGE, "GLFWVidMode", structName = "GLFWvidm
 	int.member("refreshRate", "the refresh rate, in Hz, of the video mode")
 }
 
-val GLFWgammaramp_p = struct_p(GLFW_PACKAGE, "GLFWGammaRamp", structName = "GLFWgammaramp") {
+val GLFWgammaramp_p = struct_p(GLFW_PACKAGE, "GLFWGammaRamp", nativeName = "GLFWgammaramp") {
 	documentation = "Describes the gamma ramp for a monitor."
 	nativeImport("glfw3.h")
 	unsigned_short_p.member("red", "an array of value describing the response of the red channel")
@@ -55,7 +55,7 @@ val GLFWgammaramp_p = struct_p(GLFW_PACKAGE, "GLFWGammaRamp", structName = "GLFW
 
 val GLFWcursor = "GLFWcursor".p
 
-val GLFWimage_p = struct_p(GLFW_PACKAGE, "GLFWImage", structName = "GLFWimage") {
+val GLFWimage_p = struct_p(GLFW_PACKAGE, "GLFWImage", nativeName = "GLFWimage") {
 	documentation = "Image data."
 	nativeImport("glfw3.h")
 	int.member("width", "the width, in pixels, of this image")

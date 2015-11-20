@@ -36,6 +36,7 @@ val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
 val UINT_p = UINT.p
 val FLOAT_p = FLOAT.p
 
+val CHAR = CharType("CHAR", CharMapping.ASCII)
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 
 val LPCTSTR = CharSequenceType(

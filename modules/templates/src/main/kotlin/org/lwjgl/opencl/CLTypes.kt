@@ -125,7 +125,7 @@ val cl_charUTF8_pp = cl_charUTF8_p.p
 
 // structs
 
-val cl_image_format_p = struct_p(OPENCL_PACKAGE, "CLImageFormat", structName = "cl_image_format") {
+val cl_image_format_p = struct_p(OPENCL_PACKAGE, "CLImageFormat", nativeName = "cl_image_format") {
 	documentation = "The image format descriptor struct."
 	nativeImport("OpenCL.h")
 	cl_channel_order.member(
@@ -141,7 +141,7 @@ val cl_image_format_p = struct_p(OPENCL_PACKAGE, "CLImageFormat", structName = "
 	)
 }
 
-val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", structName = "cl_image_desc") {
+val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_image_desc") {
 	documentation = "Describes the type and dimensions of the image or image array."
 	nativeImport("OpenCL.h")
 	cl_mem_object_type.member("image_type", "describes the image type")
@@ -204,7 +204,7 @@ val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", structName = "cl_i
 	)
 }
 
-val cl_bus_address_amd_p = struct_p(OPENCL_PACKAGE, "CLBusAddressAMD", structName = "cl_bus_address_amd") {
+val cl_bus_address_amd_p = struct_p(OPENCL_PACKAGE, "CLBusAddressAMD", nativeName = "cl_bus_address_amd") {
 	documentation = "Bus address information used in AMDBusAddressableMemory##clEnqueueMakeBuffersResidentAMD()."
 	nativeImport("OpenCL.h")
 	cl_long.member(
@@ -228,31 +228,31 @@ fun config() {
 		"""
 	)
 
-	struct(OPENCL_PACKAGE, "CLBufferRegion", structName = "cl_buffer_region") {
+	struct(OPENCL_PACKAGE, "CLBufferRegion", nativeName = "cl_buffer_region") {
 		documentation = "Buffer region struct."
 		nativeImport("OpenCL.h")
 		size_t.member("origin", "the region offset, in bytes")
 		size_t.member("size", "the region size, in bytes")
 	}
 
-	struct(OPENCL_PACKAGE, "CLDeviceTopologyAMD", structName = "cl_device_topology_amd", mutable = false) {
+	union(OPENCL_PACKAGE, "CLDeviceTopologyAMD", nativeName = "cl_device_topology_amd", mutable = false) {
 		documentation =
 			"The struct returned by CL10##clGetDeviceInfo() with {@code param_name} set to AMDDeviceTopology##CL_DEVICE_TOPOLOGY_AMD."
 		nativeImport("OpenCL.h")
-		struct {
+		struct("raw", "") {
 			cl_uint.member("type", "")
 			cl_uint.member("data", "", size = 5)
-		}.member("raw", "")
-		struct {
+		}
+		struct("pcie", "") {
 			cl_uint.member("type", "")
-			//cl_char.member("unused", size = 17)
+			padding(17)
 			cl_char.member("bus", "")
 			cl_char.member("device", "")
 			cl_char.member("function", "")
-		}.member("pcie", "")
+		}
 	}
 
-	struct(OPENCL_PACKAGE, "CLMotionEstimationDescINTEL", structName = "cl_motion_estimation_desc_intel") {
+	struct(OPENCL_PACKAGE, "CLMotionEstimationDescINTEL", nativeName = "cl_motion_estimation_desc_intel") {
 		documentation = "Describes the configuration of the motion estimation algorithm."
 		nativeImport("OpenCL.h")
 		cl_uint.member("mb_block_type", "describes the size of the blocks described by the motion estimator")

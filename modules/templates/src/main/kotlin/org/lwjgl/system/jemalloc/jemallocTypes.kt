@@ -159,7 +159,7 @@ val chunk_merge_t = "chunk_merge_t".callback(
 	documentation = "Instances of this interface may be set to the ##ChunkHooks struct."
 }
 
-val chunk_hooks_t = struct_p(JEMALLOC_PACKAGE, "ChunkHooks", structName = "chunk_hooks_t") {
+val chunk_hooks_t = struct_p(JEMALLOC_PACKAGE, "ChunkHooks", nativeName = "chunk_hooks_t") {
 	documentation =
 	"""
 	Comprises function pointers which are described individually below. jemalloc uses these functions to manage chunk lifetime, which starts off with

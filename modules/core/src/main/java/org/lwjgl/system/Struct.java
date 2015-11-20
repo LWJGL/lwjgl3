@@ -5,6 +5,8 @@
 package org.lwjgl.system;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -42,6 +44,113 @@ public abstract class Struct extends PointerWrapper {
 	 */
 	public void free() {
 		nmemFree(address());
+	}
+
+	// ---------------- Struct Member Layout ----------------
+
+	protected static class Member {
+		final int size;
+		final int alignment;
+
+		int offset;
+
+		protected Member(int size, int alignment) {
+			this.size = size;
+			this.alignment = alignment;
+		}
+
+		public int getSize() {
+			return size;
+		}
+
+		public int getAlignment() {
+			return alignment;
+		}
+	}
+
+	protected static class Layout extends Member {
+		public final Member[] members;
+
+		public Layout(int size, int alignment, Member[] members) {
+			super(size, alignment);
+			this.members = members;
+		}
+
+		public int offsetof(int member) {
+			return members[member].offset;
+		}
+	}
+
+	protected static Member __padding(int size, boolean condition) {
+		return __member(condition ? size : 0, 1);
+	}
+
+	protected static Member __member(int size) {
+		return __member(size, size);
+	}
+
+	protected static Member __member(int size, int alignment) {
+		return new Member(size, alignment);
+	}
+
+	protected static Member __array(int size, int length) {
+		return __array(size, size, length);
+	}
+	protected static Member __array(int size, int alignment, int length) {
+		return new Member(size * length, alignment);
+	}
+
+	protected static Layout __union(Member... members) {
+		List<Member> union = new ArrayList<Member>(members.length);
+
+		int size = 0;
+		int alignment = 0;
+		for ( int i = 0; i < members.length; i++ ) {
+			size = Math.max(size, members[i].size);
+			alignment = Math.max(alignment, members[i].alignment);
+
+			members[i].offset = 0;
+			union.add(members[i]);
+			if ( members[i] instanceof Layout )
+				addNestedMembers(members[i], union, 0);
+		}
+
+		return new Layout(size, alignment, union.toArray(new Member[union.size()]));
+	}
+
+	protected static Layout __struct(Member... members) {
+		List<Member> out = new ArrayList<Member>(members.length);
+
+		int size = 0;
+		int alignment = 0;
+		for ( int i = 0; i < members.length; i++ ) {
+			Member m = members[i];
+
+			size = (m.offset = align(size, m.alignment)) + m.size;
+			alignment = Math.max(alignment, m.alignment);
+
+			out.add(m);
+			if ( m instanceof Layout )
+				addNestedMembers(m, out, m.offset);
+		}
+
+		// tail padding
+		size = align(size, alignment);
+
+		return new Layout(size, alignment, out.toArray(new Member[out.size()]));
+	}
+
+	private static void addNestedMembers(Member nested, List<Member> members, int offset) {
+		Layout layout = (Layout)nested;
+
+		for ( Member m : layout.members ) {
+			m.offset += offset;
+			members.add(m);
+		}
+	}
+
+	private static int align(int offset, int alignment) {
+		return ((offset - 1) | (alignment - 1)) + 1;
 	}
 
 }

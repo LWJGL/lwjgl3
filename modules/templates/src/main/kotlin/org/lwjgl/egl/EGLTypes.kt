@@ -234,7 +234,7 @@ val EGLOutputPortEXT = "EGLOutputPortEXT".opaque_p
 val EGLOutputPortEXT_p = EGLOutputPortEXT.p
 
 // HI_clientpixmap
-val EGLClientPixmapHI_p = struct_p(EGL_PACKAGE, "EGLClientPixmapHI", identifierType = StructIdentifierType.STRUCT) {
+val EGLClientPixmapHI_p = struct_p(EGL_PACKAGE, "EGLClientPixmapHI", nativeName = "struct EGLClientPixmapHI") {
 	documentation =
 		"""
 		Specifies the width, height, stride, format and memory pointer of the pixmap to be used by the function HIClientpixmap#eglCreatePixmapSurfaceHI() to

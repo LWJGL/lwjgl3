@@ -45,18 +45,7 @@ private class StructMemberCharArray(
 	size: Int
 ) : StructMemberArray(nativeType, name, documentation, size)
 
-enum class StructIdentifierType(val keyword: String) {
-	/**
-	 * typedef struct Foo { ... } Bar
-	 * or
-	 * typedef union Foo { ... } Bar
-	 */
-	ALIAS(""),
-	/** struct Foo { ... } */
-	STRUCT("struct "),
-	/** union Foo { ... } */
-	UNION("union ")
-}
+private class StructMemberPadding(size: Int, val condition: String?) : StructMemberArray(char, ANONYMOUS, "", size)
 
 private enum class MultiSetterMode {
 	NORMAL,
@@ -74,12 +63,14 @@ class Struct(
 	className: String,
 	nativeSubPath: String = "",
 	/** The native struct name. May be different than className. */
-	private val structName: String = className,
-	private val identifierType: StructIdentifierType = StructIdentifierType.ALIAS,
+	val nativeName: String,
+	private val union: Boolean,
 	/** when true, a declaration is missing, we need to output one. */
-	private val virtual: Boolean = false,
+	private val virtual: Boolean,
 	/** when false, setters methods will not be generated. */
-	private val mutable: Boolean = true
+	private val mutable: Boolean,
+	/** when true, the struct layout will be built using native code. */
+	private val nativeLayout: Boolean
 ) : GeneratorTargetNative(packageName, className, nativeSubPath) {
 
 	companion object {
@@ -100,9 +91,11 @@ class Struct(
 	}
 
 	val nativeType: StructType get() = StructType(this)
-	val nativeName: String get() = "${identifierType.keyword}$structName"
 
 	private val members = ArrayList<StructMember>()
+
+	private val visibleMembers: Sequence<StructMember>
+		get() = members.asSequence().filter { it !is StructMemberPadding }
 
 	// Plain field
 	fun NativeType.member(name: String, documentation: String) {
@@ -119,18 +112,37 @@ class Struct(
 		members.add(StructMemberCharArray(this, name, documentation, size))
 	}
 
+	fun padding(size: Int, condition: String? = null) {
+		members.add(StructMemberPadding(size, condition))
+	}
+
+	/** Anonymous member struct definition. */
+	fun struct(name: String, documentation: String, init: Struct.() -> Unit) {
+		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, false, false, true, false)
+		struct.init()
+		StructType(struct).member(name, documentation)
+	}
+
+	/** Anonymous member union definition. */
+	fun union(name: String, documentation: String, init: Struct.() -> Unit) {
+		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, true, false, true, false)
+		struct.init()
+		StructType(struct).member(name, documentation)
+	}
+
 	private val StructMember.isNestedStruct: Boolean
 		get() = nativeType is StructType && !nativeType.includesPointer && this !is StructMemberArray
 
 	private val StructMember.isNestedAnonymousStruct: Boolean
 		get() = isNestedStruct && (nativeType as StructType).name == ANONYMOUS
 
-	private val StructMember.nestedMembers: ArrayList<StructMember>
-		get() = (nativeType as StructType).definition.members
+	private val StructMember.nestedMembers: Sequence<StructMember>
+		get() = (nativeType as StructType).definition.visibleMembers
 
 	private fun PrintWriter.printDocumentation() {
 		val builder = StringBuilder()
 
+		val members = members.filter { it !is StructMemberPadding }
 		if ( documentation != null ) {
 			builder.append(documentation)
 			if ( members.isNotEmpty() )
@@ -141,9 +153,6 @@ class Struct(
 			builder
 				.append(" <h3>${this@Struct.nativeName} members</h3>\n ")
 				.append(this@Struct.printStructLayout())
-
-		if ( builder.length != 0 )
-			println(processDocumentation(builder.toString()).toJavaDoc(indentation = ""))
 
 		if ( builder.length != 0 )
 			println(processDocumentation(builder.toString()).toJavaDoc(indentation = ""))
@@ -175,6 +184,8 @@ class Struct(
 	}
 
 	override fun PrintWriter.generateJava() {
+		val nativeLayout = this@Struct.nativeLayout || members.isEmpty()
+
 		print(HEADER)
 		println("package $packageName;\n")
 
@@ -197,39 +208,65 @@ class Struct(
 	/** The struct size in bytes. */
 	public static final int SIZEOF;
 """)
+		if ( !nativeLayout )
+			print("""
+	@JavadocExclude
+	public static final int __ALIGNMENT;
+""")
 
-		if ( members.isNotEmpty() ) {
+		if ( members.isNotEmpty() && (!nativeLayout || visibleMembers.any()) ) {
+			val memberCount = getMemberCount(members)
+
 			// Member offset fields
 
-			print("""
+			if ( visibleMembers.any() ) {
+				print("""
 	/** The struct member offsets. */
 	public static final int
 """)
-			generateOffsetFields(members)
+				generateOffsetFields(visibleMembers)
+			}
 
 			// Member offset initialization
 
-			print("""
+			if ( nativeLayout ) {
+				print("""
 	static {
-		IntBuffer offsets = memAllocInt(${getMemberCount(members)});
+		IntBuffer offsets = memAllocInt($memberCount);
 
 		SIZEOF = offsets(memAddress(offsets));
 
 """)
-			generateOffsetInit(members)
-			print("""
-		memFree(offsets);
-	}
+				generateOffsetInit(members)
+				println("\n\t\tmemFree(offsets);")
+			} else {
+				print("""
+	static {
+		Layout layout = """)
+				generateLayout(this@Struct)
+				print(""";
+
+		SIZEOF = layout.getSize();
+		__ALIGNMENT = layout.getAlignment();
+
 """)
+				generateOffsetInit(members)
+			}
+
+			print("\t}")
 		} else {
 			print("""
 	static {
 		SIZEOF = offsets();
-	}
-""")
+	}""")
 		}
+
+		if ( nativeLayout )
+			print("""
+
+	private static native int offsets(${if ( visibleMembers.any() ) "long buffer" else ""});""")
+
 		print("""
-	private static native int offsets(${if ( members.isNotEmpty() ) "long buffer" else ""});
 
 	$className(long address, ByteBuffer container) {
 		super(address, container, SIZEOF);
@@ -254,7 +291,8 @@ class Struct(
 	public int sizeof() { return SIZEOF; }
 """)
 
-		if ( members.isNotEmpty() ) {
+		val members = visibleMembers
+		if ( members.any() ) {
 			println()
 			generateGetters(AccessMode.INSTANCE, members)
 
@@ -262,7 +300,7 @@ class Struct(
 				println()
 				generateSetters(AccessMode.INSTANCE, members)
 
-				if ( members.size > 1 ) {
+				if ( members.singleOrNull() == null ) {
 					val javadoc = "Initializes this struct with the specified values."
 					// Factory constructors
 					if ( generateAlternativeMultiSetter(members) ) {
@@ -358,7 +396,7 @@ class Struct(
 	}
 """)
 
-		if ( members.isNotEmpty() ) {
+		if ( members.any() ) {
 			generateStaticGetters(members)
 			println()
 
@@ -411,7 +449,7 @@ class Struct(
 			return SIZEOF;
 		}
 """)
-		if ( members.isNotEmpty() ) {
+		if ( members.any() ) {
 			println()
 			generateGetters(AccessMode.FLYWEIGHT, members)
 
@@ -428,7 +466,7 @@ class Struct(
 	}
 
 	private fun PrintWriter.generateOffsetFields(
-		members: List<StructMember>,
+		members: Sequence<StructMember>,
 		indentation: String = "\t\t",
 		parentField: String = "",
 		more: Boolean = false
@@ -452,7 +490,7 @@ class Struct(
 	private fun getMemberCount(members: List<StructMember>): Int {
 		var count = members.size
 		for (member in members.asSequence().filter { it.isNestedAnonymousStruct })
-			count += getMemberCount(member.nestedMembers) // recursion
+			count += getMemberCount((member.nativeType as StructType).definition.members) // recursion
 		return count
 	}
 
@@ -465,22 +503,73 @@ class Struct(
 		var index = offset
 		members.forEach {
 			val field = it.offsetField(parentField)
+			try {
+				if ( it is StructMemberPadding )
+					return@forEach
 
-			println("$indentation$field = offsets.get($index);")
-			index++
+				if ( it !is StructMemberPadding ) {
+					if ( nativeLayout )
+						println("$indentation$field = offsets.get($index);")
+					else
+						println("$indentation$field = layout.offsetof($index);")
+				}
+			} finally {
+				index++
+			}
 
 			// Output nested fields
 			if ( it.isNestedAnonymousStruct )
-				index = generateOffsetInit(it.nestedMembers, "$indentation\t", field, index) // recursion
+				index = generateOffsetInit((it.nativeType as StructType).definition.members, "$indentation\t", field, index) // recursion
 		}
 		return index
 	}
 
+	private fun PrintWriter.generateLayout(
+		struct: Struct,
+		indentation: String = "\t\t",
+		parentField: String = ""
+	) {
+		println("__${if ( struct.union ) "union" else "struct"}(")
+		struct.members.forEachWithMore { it, more ->
+			val field = it.offsetField(parentField)
+
+			if ( more )
+				println(",")
+			if ( it is StructMemberPadding ) {
+				print("$indentation\t__padding(${it.size}, ${it.condition ?: "true"})")
+			} else if ( it.isNestedAnonymousStruct ) {
+				print("$indentation\t")
+				generateLayout((it.nativeType as StructType).definition, "$indentation\t", field)
+				//print(")")
+			} else {
+				val size: String
+				val alignment: String
+
+				if ( it.nativeType is StructType && !it.nativeType.includesPointer ) {
+					size = "${it.nativeType.definition.className}.SIZEOF"
+					alignment = "${it.nativeType.definition.className}.__ALIGNMENT"
+				} else {
+					size = if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER )
+						"Pointer.POINTER_SIZE"
+					else
+						(it.nativeType.mapping as PrimitiveMapping).bytes.toString()
+					alignment = size
+				}
+
+				if ( it is StructMemberArray )
+					print("$indentation\t__array($size${if ( size != alignment ) ", $alignment" else ""}, ${it.size})")
+				else
+					print("$indentation\t__member($size${if ( size != alignment ) ", $alignment" else ""})")
+			}
+		}
+		print("\n$indentation)")
+	}
+
 	private fun PrintWriter.generateMultiSetter(
 		javaDoc: String,
-		members: List<StructMember>,
-		generateParameters: PrintWriter.(List<StructMember>, String, MultiSetterMode, Boolean) -> Unit,
-		generateSetters: PrintWriter.(List<StructMember>, String, MultiSetterMode) -> Unit,
+		members: Sequence<StructMember>,
+		generateParameters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode, Boolean) -> Unit,
+		generateSetters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode) -> Unit,
 		mode: MultiSetterMode = MultiSetterMode.NORMAL
 	) {
 		print("""
@@ -497,7 +586,7 @@ class Struct(
 """)
 	}
 
-	private val generateMultiSetterParameters: PrintWriter.(List<StructMember>, String, MultiSetterMode, Boolean) -> Unit = { members, parentMember, mode, more ->
+	private val generateMultiSetterParameters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode, Boolean) -> Unit = { members, parentMember, mode, more ->
 		members.forEachWithMore(more) { it, more ->
 			val method = it.field(parentMember)
 
@@ -521,7 +610,7 @@ class Struct(
 		}
 	}
 
-	private val generateMultiSetterSetters: PrintWriter.(List<StructMember>, String, MultiSetterMode) -> Unit = { members, parentMember, mode ->
+	private val generateMultiSetterSetters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode) -> Unit = { members, parentMember, mode ->
 		members.forEach {
 			val setter = it.field(parentMember)
 
@@ -537,7 +626,7 @@ class Struct(
 		}
 	}
 
-	private val generateAlternativeMultiSetter: (List<StructMember>) -> Boolean = { members ->
+	private val generateAlternativeMultiSetter: (Sequence<StructMember>) -> Boolean = { members ->
 		members.any {
 			if ( it.isNestedAnonymousStruct )
 				generateAlternativeMultiSetter(it.nestedMembers)
@@ -546,7 +635,7 @@ class Struct(
 		}
 	}
 
-	private val generateAlternativeMultiSetterParameters: PrintWriter.(List<StructMember>, String, MultiSetterMode, Boolean) -> Unit = { members, parentMember, mode, more ->
+	private val generateAlternativeMultiSetterParameters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode, Boolean) -> Unit = { members, parentMember, mode, more ->
 		members.forEachWithMore(more) { it, more ->
 			val method = it.field(parentMember)
 
@@ -585,7 +674,7 @@ class Struct(
 		}
 	}
 
-	private val generateAlternativeMultiSetterSetters: PrintWriter.(List<StructMember>, String, MultiSetterMode) -> Unit = { members, parentMember, mode ->
+	private val generateAlternativeMultiSetterSetters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode) -> Unit = { members, parentMember, mode ->
 		members.forEach {
 			val method = it.field(parentMember)
 
@@ -608,7 +697,7 @@ class Struct(
 		throw IllegalStateException()
 
 	private fun PrintWriter.generateStaticSetters(
-		members: List<StructMember>,
+		members: Sequence<StructMember>,
 		parentStruct: Struct? = null,
 		parentMember: String = "",
 		parentField: String = ""
@@ -723,7 +812,7 @@ class Struct(
 
 	private fun PrintWriter.generateSetters(
 		accessMode: AccessMode,
-		members: List<StructMember>,
+		members: Sequence<StructMember>,
 		parentMember: String = ""
 	) {
 		members.forEach {
@@ -802,7 +891,7 @@ class Struct(
 	}
 
 	private fun PrintWriter.generateStaticGetters(
-		members: List<StructMember>,
+		members: Sequence<StructMember>,
 		parentStruct: Struct? = null,
 		parentMember: String = "",
 		parentField: String = ""
@@ -907,7 +996,7 @@ class Struct(
 
 	private fun PrintWriter.generateGetters(
 		accessMode: AccessMode,
-		members: List<StructMember>,
+		members: Sequence<StructMember>,
 		parentMember: String = ""
 	) {
 		members.forEach {
@@ -995,6 +1084,8 @@ $indent */""")
 	else
 		bufferMethodMap[javaType] ?: throw UnsupportedOperationException("Unsupported struct member java type: $className.${member.name} ($javaType)")
 
+	override val skipNative: Boolean get() = !nativeLayout && members.isNotEmpty()
+
 	override fun PrintWriter.generateNative() {
 		print(HEADER)
 		println("#include <stddef.h>")
@@ -1003,7 +1094,7 @@ $indent */""")
 		println("\nEXTERN_C_EXIT\n")
 
 		print("JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass clazz")
-		if ( members.isNotEmpty() ) {
+		if ( members.filter { it !is StructMemberPadding }.isNotEmpty() ) {
 			println(", jlong bufferAddress) {")
 			println("\tjint *buffer = (jint *)(intptr_t)bufferAddress;\n")
 		} else {
@@ -1014,7 +1105,7 @@ $indent */""")
 
 		if ( virtual ) {
 			// NOTE: Assumes a plain struct definition (no nested structs, no unions)
-			println("\ttypedef struct $structName {")
+			println("\ttypedef struct $nativeName {")
 			for (m in members) {
 				print("\t\t${m.nativeType.name}")
 				if ( m.nativeType is PointerType && !m.nativeType.includesPointer ) {
@@ -1024,7 +1115,7 @@ $indent */""")
 				}
 				println(" ${m.name};")
 			}
-			println("\t} $structName;\n")
+			println("\t} $nativeName;\n")
 		}
 
 		if ( members.isNotEmpty() ) {
@@ -1048,7 +1139,7 @@ $indent */""")
 				// Output anonymous inner structs
 				val structType = it.nativeType as StructType
 				if ( structType.name == ANONYMOUS )
-					index = generateNativeMembers(structType.definition.members, index, prefix = "${it.name}.") // recursion
+					index = generateNativeMembers(structType.definition.members, index, prefix = "$prefix${it.name}.") // recursion
 			}
 		}
 		return index
@@ -1060,13 +1151,13 @@ fun struct(
 	packageName: String,
 	className: String,
 	nativeSubPath: String = "",
-	structName: String = className,
-	identifierType: StructIdentifierType = StructIdentifierType.ALIAS,
+	nativeName: String = className,
 	virtual: Boolean = false,
 	mutable: Boolean = true,
+	nativeLayout: Boolean = false,
 	init: Struct.() -> Unit
 ): Struct {
-	val struct = Struct(packageName, className, nativeSubPath, structName, identifierType, virtual, mutable)
+	val struct = Struct(packageName, className, nativeSubPath, nativeName, false, virtual, mutable, nativeLayout)
 	struct.init()
 	Generator.register(struct)
 	return struct
@@ -1076,16 +1167,36 @@ fun struct_p(
 	packageName: String,
 	className: String,
 	nativeSubPath: String = "",
-	structName: String = className,
-	identifierType: StructIdentifierType = StructIdentifierType.ALIAS,
+	nativeName: String = className,
 	virtual: Boolean = false,
 	mutable: Boolean = true,
+	nativeLayout: Boolean = false,
 	init: Struct.() -> Unit
-) = struct(packageName, className, nativeSubPath, structName, identifierType, virtual, mutable, init).nativeType.p
+) = struct(packageName, className, nativeSubPath, nativeName, virtual, mutable, nativeLayout, init).nativeType.p
 
-/** Anonymous member struct definition. Mostly useful for union of structs. */
-fun struct(init: Struct.() -> Unit): StructType {
-	val struct = Struct(ANONYMOUS, ANONYMOUS)
+fun union(
+	packageName: String,
+	className: String,
+	nativeSubPath: String = "",
+	nativeName: String = className,
+	virtual: Boolean = false,
+	mutable: Boolean = true,
+	nativeLayout: Boolean = false,
+	init: Struct.() -> Unit
+): Struct {
+	val struct = Struct(packageName, className, nativeSubPath, nativeName, true, virtual, mutable, nativeLayout)
 	struct.init()
-	return StructType(struct)
+	Generator.register(struct)
+	return struct
 }
+
+fun union_p(
+	packageName: String,
+	className: String,
+	nativeSubPath: String = "",
+	nativeName: String = className,
+	virtual: Boolean = false,
+	mutable: Boolean = true,
+	nativeLayout: Boolean = false,
+	init: Struct.() -> Unit
+) = union(packageName, className, nativeSubPath, nativeName, virtual, mutable, nativeLayout, init).nativeType.p

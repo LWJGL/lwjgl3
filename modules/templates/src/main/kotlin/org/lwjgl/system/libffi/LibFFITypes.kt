@@ -23,11 +23,11 @@ fun config() {
 }
 
 val ffi_abi = typedef(int, "ffi_abi")
-val ffi_status = typedef(int, "ffi_abi")
+val ffi_status = typedef(int, "ffi_status")
 
 val FFI_FN_TYPE = "FFI_FN_TYPE".opaque_p
 
-val ffi_type_p = struct_p(FFI_PACKAGE, "FFIType", structName = "ffi_type") {
+val ffi_type_p = struct_p(FFI_PACKAGE, "FFIType", nativeName = "ffi_type") {
 	documentation = "Contains information about a libffi type."
 	nativeImport("ffi.h")
 	size_t.member("size", "set by libffi; you should initialize it to zero.")
@@ -37,7 +37,7 @@ val ffi_type_p = struct_p(FFI_PACKAGE, "FFIType", structName = "ffi_type") {
 }
 val ffi_type_pp = ffi_type_p.p
 
-val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", structName = "ffi_cif", mutable = false) {
+val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", nativeName = "ffi_cif", mutable = false) {
 	documentation = "Contains information about a libffi call interface."
 	nativeImport("ffi.h")
 
@@ -51,7 +51,7 @@ val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", structName = "ffi_cif", mutable 
 
 // Closures
 
-val ffi_closure_p = struct_p(FFI_PACKAGE, "FFIClosure", structName = "ffi_closure", mutable = false) {
+val ffi_closure_p = struct_p(FFI_PACKAGE, "FFIClosure", nativeName = "ffi_closure", mutable = false, nativeLayout = true /* complex "tramboline" padding */) {
 	documentation = "The libffi closure structure."
 	nativeImport("ffi.h")
 
