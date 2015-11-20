@@ -1,0 +1,29 @@
+### 3.0.0 Beta
+
+[DOWNLOAD](http://build.lwjgl.org/release/3.0.0b/lwjgl.zip)
+
+_Released 2015 Nov 20_
+
+This build includes the following changes:
+
+* The API is now considered **stable**. There were several API changes, especially to struct and callback classes.
+* Moved advanced functionality from the base package to the [system](https://github.com/LWJGL/lwjgl3/tree/master/modules/core/src/main/java/org/lwjgl/system) package. Public API in the system package may change between releases.
+* Critical methods have been optimized for better performance and garbage elimination.
+* JNI methods are now [deduplicated](https://github.com/LWJGL/lwjgl3-generated/blob/master/java/org/lwjgl/system/JNI.java) and struct layout is calculated in Java. This means much smaller shared libraries.
+* Introduced the [Configuration](https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/main/java/org/lwjgl/system/Configuration.java) class that can be used to programmatically configure LWJGL.
+* Introduced explicit memory management API, which is also used internally by LWJGL.
+* Introduced a debug allocator that can be enabled for the explicit memory management API. It reports memory leaks with full stack-traces to the leaked allocations.
+* All struct classes now have a corresponding [StructBuffer](https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/main/java/org/lwjgl/system/StructBuffer.java) implementation. Bindings now use Struct and StructBuffer parameters and return values, instead of ByteBuffer, which improves type safety.
+* Struct fields and accessors are now documented.
+* Many other fixes and minor features.
+
+Changes to bindings:
+
+* Removed obsolete OS-specific bindings.
+* Added bindings to many OpenGL extensions that were missing in 3.0.0a.
+* Added bindings to [jemalloc](http://www.canonware.com/jemalloc/).
+* Added bindings to [EGL](https://www.khronos.org/egl).
+* Added bindings to [OpenGL ES](https://www.khronos.org/opengles/).
+* Added bindings to [xxHash](https://github.com/Cyan4973/xxHash).
+* The bindings to [LibOVR](https://developer.oculus.com/) were updated to 0.8.0.0 and are now included in the official build.
+* Several other fixes and updates to existing bindings.
