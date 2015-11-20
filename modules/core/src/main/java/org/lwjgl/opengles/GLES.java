@@ -188,13 +188,13 @@ public final class GLES {
 
 			if ( GetError == NULL || GetString == NULL || GetIntegerv == NULL )
 				throw new IllegalStateException(
-					"Core OpenGL ES functions could not be found. Make sure that a GLES context is current in the current thread."
+					"Core OpenGL ES functions could not be found. Make sure that the OpenGL ES library has been loaded correctly."
 				);
 
 			int errorCode = invokeI(GetError);
 			if ( errorCode != GL_NO_ERROR )
 				apiLog(
-					"A GLES context was in an error state before the creation of its capabilities instance. Error: " + GLESUtil.getErrorString(errorCode)
+					"An OpenGL ES context was in an error state before the creation of its capabilities instance. Error: " + GLESUtil.getErrorString(errorCode)
 				);
 
 			APIBuffer __buffer = apiBuffer();
@@ -211,7 +211,11 @@ public final class GLES {
 				minorVersion = __buffer.intValue(0);
 			} else {
 				// Fallback to the string query.
-				APIVersion version = apiParseVersion(memDecodeUTF8(checkPointer(invokeIP(GetString, GL_VERSION))), "OpenGL ES");
+				long versionString = invokeIP(GetString, GL_VERSION);
+				if ( invokeI(GetError) == GL_NO_ERROR )
+					throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
+
+				APIVersion version = apiParseVersion(memDecodeUTF8(versionString), "OpenGL ES");
 
 				majorVersion = version.major;
 				minorVersion = version.minor;

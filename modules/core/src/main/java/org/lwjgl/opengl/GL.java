@@ -248,12 +248,12 @@ public final class GL {
 			long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
 
 			if ( GetError == NULL || GetString == NULL || GetIntegerv == NULL )
-				throw new IllegalStateException("Core OpenGL functions could not be found. Make sure that a GL context is current in the current thread.");
+				throw new IllegalStateException("Core OpenGL functions could not be found. Make sure that the OpenGL library has been loaded correctly.");
 
 			int errorCode = callI(GetError);
 			if ( errorCode != GL_NO_ERROR )
 				apiLog(
-					"A GL context was in an error state before the creation of its capabilities instance. Error: " + GLUtil.getErrorString(errorCode)
+					"An OpenGL context was in an error state before the creation of its capabilities instance. Error: " + GLUtil.getErrorString(errorCode)
 				);
 
 			APIBuffer __buffer = apiBuffer();
@@ -270,7 +270,11 @@ public final class GL {
 				minorVersion = __buffer.intValue(0);
 			} else {
 				// Fallback to the string query.
-				APIVersion version = apiParseVersion(memDecodeUTF8(checkPointer(callIP(GetString, GL_VERSION))));
+				long versionString = callIP(GetString, GL_VERSION);
+				if ( callI(GetError) != GL_NO_ERROR )
+					throw new IllegalStateException("There is no OpenGL context current in the current thread.");
+
+				APIVersion version = apiParseVersion(memDecodeUTF8(versionString));
 
 				majorVersion = version.major;
 				minorVersion = version.minor;
