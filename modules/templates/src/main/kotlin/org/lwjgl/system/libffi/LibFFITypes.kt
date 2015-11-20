@@ -22,8 +22,6 @@ fun config() {
 	)
 }
 
-val unsigned = IntegerType("unsigned", PrimitiveMapping.INT, unsigned = true)
-
 val ffi_abi = typedef(int, "ffi_abi")
 val ffi_status = typedef(int, "ffi_abi")
 
