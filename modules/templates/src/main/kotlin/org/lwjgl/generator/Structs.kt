@@ -550,7 +550,7 @@ class Struct(
 					alignment = "${it.nativeType.definition.className}.__ALIGNMENT"
 				} else {
 					size = if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER )
-						"Pointer.POINTER_SIZE"
+						"POINTER_SIZE"
 					else
 						(it.nativeType.mapping as PrimitiveMapping).bytes.toString()
 					alignment = size
