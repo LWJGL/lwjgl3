@@ -5,7 +5,7 @@
 package org.lwjgl.opencl;
 
 import org.lwjgl.system.Checks;
-import org.lwjgl.system.PointerWrapper;
+import org.lwjgl.system.Pointer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +15,7 @@ import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.system.APIUtil.*;
 
 /** This class is a wrapper around a cl_device_id pointer. */
-public class CLDevice extends PointerWrapper {
+public class CLDevice extends Pointer.Default {
 
 	private final CLCapabilities capabilities;
 

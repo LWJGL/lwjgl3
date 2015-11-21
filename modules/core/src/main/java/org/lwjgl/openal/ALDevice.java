@@ -5,7 +5,7 @@
 package org.lwjgl.openal;
 
 import org.lwjgl.system.Checks;
-import org.lwjgl.system.PointerWrapper;
+import org.lwjgl.system.Pointer;
 
 import java.nio.ByteBuffer;
 
@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * system resources for audio, including a single hardware output device. The details are left to the implementation, which has to map the available backends to
  * unique device specifiers.
  */
-public class ALDevice extends PointerWrapper {
+public class ALDevice extends Pointer.Default {
 
 	/*
 	 * When calling ALC functions, we want to use the device associated with the current AL context.

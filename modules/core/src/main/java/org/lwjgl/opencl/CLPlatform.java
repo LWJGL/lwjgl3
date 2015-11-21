@@ -6,7 +6,7 @@ package org.lwjgl.opencl;
 
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.Checks;
-import org.lwjgl.system.PointerWrapper;
+import org.lwjgl.system.Pointer;
 
 import java.util.*;
 
@@ -18,7 +18,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_platform_id pointer. */
-public class CLPlatform extends PointerWrapper {
+public class CLPlatform extends Pointer.Default {
 
 	private final CLCapabilities capabilities;
 

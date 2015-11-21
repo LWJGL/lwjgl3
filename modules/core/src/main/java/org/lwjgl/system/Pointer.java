@@ -6,6 +6,8 @@ package org.lwjgl.system;
 
 import org.lwjgl.PointerBuffer;
 
+import static org.lwjgl.system.MemoryUtil.*;
+
 /**
  * Pointer interface.
  *
@@ -36,5 +38,43 @@ public interface Pointer {
 	 * @return the pointer address
 	 */
 	long address();
+
+	/** Default {@link Pointer} implementation. */
+	abstract class Default implements Pointer {
+
+		protected final long address;
+
+		protected Default(long pointer) {
+			if ( Checks.CHECKS && pointer == NULL )
+				throw new NullPointerException();
+
+			this.address = pointer;
+		}
+
+		@Override
+		public final long address() {
+			return address;
+		}
+
+		public boolean equals(Object o) {
+			if ( this == o ) return true;
+			if ( !(o instanceof Pointer) ) return false;
+
+			Pointer that = (Pointer)o;
+
+			return address == that.address();
+
+		}
+
+		public int hashCode() {
+			return (int)(address ^ (address >>> 32));
+		}
+
+		@Override
+		public String toString() {
+			return String.format("%s pointer [0x%X]", getClass().getSimpleName(), address);
+		}
+
+	}
 
 }

@@ -12,7 +12,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Base class of all struct implementations. */
-public abstract class Struct extends PointerWrapper {
+public abstract class Struct extends Pointer.Default {
 
 	static {
 		Library.initialize();

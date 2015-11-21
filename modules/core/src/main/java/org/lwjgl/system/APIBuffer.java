@@ -10,9 +10,9 @@ import org.lwjgl.PointerBuffer;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.Pointer.*;
 
 /**
  * Helper class for alternative API functions. Instead of the user
@@ -206,7 +206,7 @@ public class APIBuffer {
 	}
 
 	/** Ensures space for an additional pointer value, sets the specified value at the allocated offset and returns that offset. */
-	public int pointerParam(PointerWrapper value) {
+	public int pointerParam(Pointer value) {
 		return pointerParam(value.address());
 	}
 

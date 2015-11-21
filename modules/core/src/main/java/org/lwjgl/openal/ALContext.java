@@ -4,7 +4,7 @@
  */
 package org.lwjgl.openal;
 
-import org.lwjgl.system.PointerWrapper;
+import org.lwjgl.system.Pointer;
 
 import java.nio.IntBuffer;
 
@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * one AL Context per process can be current at a time. Applications maintaining multiple AL Contexts, whether threaded or not, have to set the current context
  * accordingly. Applications can have multiple threads that share one more or contexts. In other words, AL and ALC are threadsafe.
  */
-public class ALContext extends PointerWrapper {
+public class ALContext extends Pointer.Default {
 
 	private final ALDevice device;
 
