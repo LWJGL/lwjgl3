@@ -135,7 +135,7 @@ public final class ALC {
 	 * Obtains string values from ALC. This is a custom implementation for those tokens that return a list of strings instead of a single string.
 	 *
 	 * @param deviceHandle the device to query
-	 * @param token        the information to query. One of:<p/>{@link ALC11#ALC_ALL_DEVICES_SPECIFIER}, {@link ALC11#ALC_CAPTURE_DEVICE_SPECIFIER}
+	 * @param token        the information to query. One of:<br>{@link ALC11#ALC_ALL_DEVICES_SPECIFIER}, {@link ALC11#ALC_CAPTURE_DEVICE_SPECIFIER}
 	 */
 	public static List<String> getStringList(long deviceHandle, int token) {
 		long __result = nalcGetString(deviceHandle, token);

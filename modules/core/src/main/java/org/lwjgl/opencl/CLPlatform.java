@@ -40,8 +40,8 @@ public class CLPlatform extends Pointer.Default {
 
 	/**
 	 * Creates a {@link CLCapabilities} instance for the specified OpenCL platform.
-	 * <p/>
-	 * This method call is relatively expensive. The result should be cached and reused.
+	 *
+	 * <p>This method call is relatively expensive. The result should be cached and reused.</p>
 	 *
 	 * @param cl_platform_id the platform to query
 	 *

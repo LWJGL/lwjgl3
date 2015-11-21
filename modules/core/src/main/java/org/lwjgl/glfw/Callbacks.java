@@ -16,8 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Utility class for GLFW callbacks.
- * <p/>
- * This class has been designed to work well with {@code import static}.
+ *
+ * <p>This class has been designed to work well with {@code import static}.</p>
  */
 public final class Callbacks {
 

@@ -40,8 +40,8 @@ abstract class InfoQuery {
 
 	/**
 	 * Returns the integer value for the specified {@code param_name}.
-	 * <p/>
-	 * For integer parameters that may be 32 or 64 bits (e.g. {@code size_t}), {@link #getPointer} should be used instead.
+	 *
+	 * <p>For integer parameters that may be 32 or 64 bits (e.g. {@code size_t}), {@link #getPointer} should be used instead.</p>
 	 *
 	 * @param object     the object to query
 	 * @param param_name the parameter to query
@@ -58,8 +58,8 @@ abstract class InfoQuery {
 
 	/**
 	 * Returns the long value for the specified {@code param_name}.
-	 * <p/>
-	 * For integer parameters that may be 32 or 64 bits (e.g. {@code size_t}), {@link #getPointer} should be used instead.
+	 *
+	 * <p>For integer parameters that may be 32 or 64 bits (e.g. {@code size_t}), {@link #getPointer} should be used instead.</p>
 	 *
 	 * @param object     the object to query
 	 * @param param_name the parameter to query
@@ -76,8 +76,8 @@ abstract class InfoQuery {
 
 	/**
 	 * Returns the pointer value for the specified {@code param_name}.
-	 * <p/>
-	 * This method should also be used for integer parameters that may be 32 or 64 bits (e.g. {@code size_t}).
+	 *
+	 * <p>This method should also be used for integer parameters that may be 32 or 64 bits (e.g. {@code size_t}).</p>
 	 *
 	 * @param object     the object to query
 	 * @param param_name the parameter to query

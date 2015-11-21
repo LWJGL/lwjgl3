@@ -15,8 +15,8 @@ import com.sun.tools.javadoc.Main;
 /**
  * Custom Doclet that adds support for the {@code @JavadocExclude} annotation. Elements annotated with {@code @JavadocExclude} will be ignored during javadoc
  * generation.
- * <p/>
- * Originally written by Chris Nokleberg and released in the public domain.
+ *
+ * <p>Originally written by Chris Nokleberg and released in the public domain.</p>
  *
  * @see <a href="http://www.sixlegs.com/blog/java/exclude-javadoc-tag.html">Chris Nokleberg's Fizzy Weblog</a>
  */

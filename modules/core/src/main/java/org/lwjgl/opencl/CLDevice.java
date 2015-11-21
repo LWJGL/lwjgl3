@@ -43,8 +43,8 @@ public class CLDevice extends Pointer.Default {
 
 	/**
 	 * Creates a {@link CLCapabilities} instance for the specified OpenCL device.
-	 * <p/>
-	 * This method call is relatively expensive. The result should be cached and reused.
+	 *
+	 * <p>This method call is relatively expensive. The result should be cached and reused.</p>
 	 *
 	 * @param cl_device_id the device to query
 	 *

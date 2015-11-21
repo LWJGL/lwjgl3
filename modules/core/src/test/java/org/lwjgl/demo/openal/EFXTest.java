@@ -18,10 +18,6 @@ import static org.lwjgl.openal.EXTEfx.*;
 
 /**
  * Class with a few examples testing and demonstrating the use of the OpenAL extension EXTEfx.
- * <p/>
- * This class is not compatible with the LWJGL debug build (lwjgl-debug.jar), as the debug build
- * throws exceptions instead of alGetError checks. The redundant exception handling code was not
- * added in order to keep these examples simple.
  *
  * @author Ciardhubh <ciardhubh[at]ciardhubh.de>
  * @author Brian Matzon <brian@matzon.dk>

@@ -12,9 +12,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Provides 3 {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}.
- * <p/>
- * Unsafe should be the most efficient implementation, even on non-Oracle VMs. In the absence of Unsafe, performance will depend on how reflection and JNI are
- * implemented. For now we'll go with what we see on the Oracle VM (that is, we'll prefer reflection over JNI).
+ *
+ * <p>Unsafe should be the most efficient implementation, even on non-Oracle VMs. In the absence of Unsafe, performance will depend on how reflection and JNI
+ * are implemented. For now we'll go with what we see on the Oracle VM (that is, we'll prefer reflection over JNI).</p>
  */
 final class MemoryAccess {
 
