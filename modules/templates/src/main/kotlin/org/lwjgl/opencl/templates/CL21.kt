@@ -49,20 +49,20 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		"PROGRAM_IL"..0x1169
 	)
 
-	IntConstant(
+	val GetKernelSubGroupInfoA = IntConstant(
 		"cl_kernel_info",
 
 		"KERNEL_MAX_NUM_SUB_GROUPS"..0x11B9,
 		"KERNEL_COMPILE_NUM_SUB_GROUPS"..0x11BA
-	)
+	).javaDocLinks
 
-	IntConstant(
+	val GetKernelSubGroupInfoB = IntConstant(
 		"cl_kernel_sub_group_info",
 
 		"KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE"..0x2033,
 		"KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE"..0x2034,
 		"KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT"..0x11B8
-	)
+	).javaDocLinks
 
 	cl_int(
 		"SetDefaultDeviceCommandQueue",
@@ -229,8 +229,8 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 			associated with {@code kernel}. If the list of devices associated with kernel is a single device, device can be a $NULL value.
 			"""
 		),
-		cl_kernel_sub_group_info.IN("param_name", "the information to query"),
-		size_t.IN("input_value_size", "the size in bytes of memory pointed to by {@code input_value}"),
+		cl_kernel_sub_group_info.IN("param_name", "the information to query", "$GetKernelSubGroupInfoA $GetKernelSubGroupInfoB"),
+		AutoSize("input_value")..size_t.IN("input_value_size", "the size in bytes of memory pointed to by {@code input_value}"),
 		nullable..const..void_p.IN(
 			"input_value",
 			"a pointer to memory where the appropriate parameterization of the query is passed from. If {@code input_value} is $NULL, it is ignored."
@@ -244,7 +244,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"""
-			$INVALID_DEVICE if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device is $NULL but there is more than
+			$INVALID_DEVICE if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device} is $NULL but there is more than
 			one device associated with {@code kernel}.
 			""",
 			"""

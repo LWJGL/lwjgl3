@@ -14,6 +14,7 @@ import java.util.Map;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.system.APIUtil.*;
 
+/** OpenCL utilities. */
 public final class CLUtil {
 
 	/** Maps OpenCL error token values to their String representations. */

@@ -193,15 +193,15 @@ public final class GL {
 	/**
 	 * Sets the {@link GLCapabilities} of the OpenGL context that is current in the current thread.
 	 *
-	 * <p>This {@code GLCapabilities} instance will be used by any OpenGL ES call in the current thread, until {@code setCapabilities} is called again with
-	 * a different value.</p>
+	 * <p>This {@code GLCapabilities} instance will be used by any OpenGL call in the current thread, until {@code setCapabilities} is called again with a
+	 * different value.</p>
 	 */
 	public static void setCapabilities(GLCapabilities caps) {
 		capsTL.set(caps);
 	}
 
 	/**
-	 * Returns the {@link GLCapabilities} of the OpenGL ES context that is current in the current thread.
+	 * Returns the {@link GLCapabilities} of the OpenGL context that is current in the current thread.
 	 *
 	 * @throws IllegalStateException if {@link #setCapabilities} has never been called in the current thread or was last called with a {@code null} value
 	 */

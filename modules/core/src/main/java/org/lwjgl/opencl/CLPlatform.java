@@ -17,7 +17,12 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** This class is a wrapper around a cl_platform_id pointer. */
+/**
+ * This class represents an OpenCL platform. It wraps a {@code cl_platform_id} pointer and a {@link CLCapabilities} instance that exposes the platform
+ * capabilities.
+ *
+ * <p>This class is not required to use OpenCL, but is provided for easy discovery of OpenCL platforms and corresponding devices.</p>
+ */
 public class CLPlatform extends Pointer.Default {
 
 	private final CLCapabilities capabilities;

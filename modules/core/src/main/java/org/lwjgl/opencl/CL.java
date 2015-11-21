@@ -15,6 +15,19 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+/**
+ * This class loads the OpenCL library (usually via the ICD loader) into the JVM process.
+ *
+ * <p>The {@link CLCapabilities} instance returned by {@link #getICD()} contains function pointers for all functionality present in the ICD. This may include
+ * multiple platforms with very different capabilities. It should only be used if direct access to the ICD function pointers is required, for customization
+ * purposes.</p>
+ *
+ * <p>Platform capabilities can be created with {@link CLPlatform#createCapabilities(long)}. For a more friendly way, call {@link CLPlatform#getPlatforms()},
+ * iterate on the available platforms and call {@link CLPlatform#getCapabilities()}.</p>
+ *
+ * <p>Device capabilities can be created with {@link CLDevice#createCapabilities(long, CLCapabilities)}. For a more friendly way, call
+ * {@link CLPlatform#getDevices(int)}, iterate on the available devices and call {@link CLDevice#getCapabilities()}.</p>
+ */
 public final class CL {
 
 	private static FunctionProviderLocal functionProvider;
@@ -28,6 +41,7 @@ public final class CL {
 
 	private CL() {}
 
+	/** Loads the OpenCL native library, using the default library name. */
 	public static void create() {
 		SharedLibrary CL;
 		switch ( Platform.get() ) {
@@ -44,11 +58,16 @@ public final class CL {
 		create(CL);
 	}
 
+	/**
+	 * Loads the OpenCL native library, using the specified library name.
+	 *
+	 * @param libName the native library name
+	 */
 	public static void create(String libName) {
 		create(Library.loadNative(libName));
 	}
 
-	public static void create(final SharedLibrary OPENCL) {
+	private static void create(final SharedLibrary OPENCL) {
 		try {
 			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
 
@@ -164,6 +183,7 @@ public final class CL {
 			throw new IllegalStateException("OpenCL 1.0 is missing. Make sure that OpenCL is available");
 	}
 
+	/** Unloads the OpenCL native library. */
 	public static void destroy() {
 		if ( functionProvider == null )
 			return;
@@ -173,10 +193,12 @@ public final class CL {
 		icd = null;
 	}
 
+	/** Returns the {@link FunctionProviderLocal} for the OpenCL native library. */
 	public static FunctionProviderLocal getFunctionProvider() {
 		return functionProvider;
 	}
 
+	/** Returns the {@link CLCapabilities} of the ICD. */
 	public static CLCapabilities getICD() { return icd; }
 
 	static void addExtensions(String extensionsString, Set<String> supportedExtensions) {

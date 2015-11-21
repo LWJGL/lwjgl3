@@ -14,7 +14,11 @@ import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.system.APIUtil.*;
 
-/** This class is a wrapper around a cl_device_id pointer. */
+/**
+ * This class represents an OpenCL device. It wraps a {@code cl_device_id} pointer and a {@link CLCapabilities} instance that exposes the device capabilities.
+ *
+ * <p>This class is not required to use OpenCL, but is provided for easy discovery of OpenCL devices available on a {@link CLPlatform}.</p>
+ */
 public class CLDevice extends Pointer.Default {
 
 	private final CLCapabilities capabilities;
