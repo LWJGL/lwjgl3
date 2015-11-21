@@ -1,6 +1,6 @@
 ### 3.0.0 Beta
 
-[DOWNLOAD](http://build.lwjgl.org/release/3.0.0b/lwjgl.zip)
+[DOWNLOAD](http://build.lwjgl.org/release/3.0.0b/lwjgl-3.0.0b.zip)
 
 _Released 2015 Nov 20_
 
@@ -30,7 +30,7 @@ Changes to bindings:
 
 ### 3.0.0 Alpha
 
-[DOWNLOAD](http://build.lwjgl.org/release/3.0.0a/lwjgl.zip) (not recommended)
+[DOWNLOAD](http://build.lwjgl.org/release/3.0.0a/lwjgl-3.0.0a.zip) (not recommended)
 
 _Released 2015 Jul 13_
 
