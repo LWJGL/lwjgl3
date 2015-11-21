@@ -1,0 +1,8 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Copyright LWJGL. All rights reserved.
+${licensePrefix}License terms: http://lwjgl.org/license.php
+<#if licenseLast??>
+${licenseLast}
+</#if>
