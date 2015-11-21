@@ -68,10 +68,8 @@ public final class CL {
 
 					/*
 					We'll use clGetExtensionFunctionAddress, even if it has been deprecated, because clGetExtensionFunctionAddressForPlatform is pointless
-					when the
-					ICD is used. clGetExtensionFunctionAddressForPlatform will be used only if there is just 1 platform available and that platform supports
-					OpenCL
-					1.2 or higher.
+					when the ICD is used. clGetExtensionFunctionAddressForPlatform will be used only if there is just 1 platform available and that platform
+					supports OpenCL 1.2 or higher.
 					*/
 					long platform = NULL;
 					if ( clGetExtensionFunctionAddressForPlatform != NULL ) {
@@ -193,7 +191,7 @@ public final class CL {
 			MAJOR, MINOR, supportedExtensions, "",
 			new int[][] {
 				{ 0, 1, 2 },    // 10, 11, 12
-				{ 0 },          // 20
+				{ 0, 1 },       // 20, 21
 			}
 		);
 
