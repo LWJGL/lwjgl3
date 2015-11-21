@@ -24,7 +24,8 @@ fun info() {
 			"org.lwjgl.PointerBuffer",
 			"static org.lwjgl.opencl.CL10.*",
 			"static org.lwjgl.opencl.CL12.*",
-			"static org.lwjgl.opencl.CL20.*"
+			"static org.lwjgl.opencl.CL20.*",
+			"static org.lwjgl.opencl.CL21.*"
 		)
 		if ( Binding.OPENGL.enabled )
 			javaImport("static org.lwjgl.opencl.CL10GL.*")
@@ -49,13 +50,14 @@ fun info() {
 			val name: String,
 			val types: EnumSet<InfoQueryType>,
 			val info: String = name,
-			val param: String = name.toLowerCase()
+			val param: String = name.toLowerCase(),
+			val hasInput: Boolean = false
 		) {
 			open fun getQueryImpl(field: String, info: String) =
 				"""private static final InfoQuery $field = new InfoQuery() {
 		@Override
 		protected int get(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-			return nclGet${info}Info(pointer, param_name, param_value_size, param_value, param_value_size_ret);
+			return nclGet${info}Info(pointer, param_name${if ( hasInput ) ", 0, 0L" else ""}, param_value_size, param_value, param_value_size_ret);
 		}
 	};"""
 
@@ -69,15 +71,16 @@ fun info() {
 			types: EnumSet<InfoQueryType>,
 			info: String = name,
 			param: String = name.toLowerCase(),
+			hasInput: Boolean = false,
 			val argName: String,
 			val argType: String,
 			val queryType: String
-		) : ObjectType(source, name, types, info, param) {
+		) : ObjectType(source, name, types, info, param, hasInput) {
 			override fun getQueryImpl(field: String, info: String) =
 				"""private static final $queryType $field = new $queryType() {
 		@Override
 		protected int get(long pointer, $argType arg, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-			return nclGet${info}Info(pointer, arg, param_name, param_value_size, param_value, param_value_size_ret);
+			return nclGet${info}Info(pointer, arg, param_name${if ( hasInput ) ", 0, 0L" else ""}, param_value_size, param_value, param_value_size_ret);
 		}
 	};"""
 
@@ -87,14 +90,16 @@ fun info() {
 
 		// Defines the info queries we'll generate and which types will be supported for each one.
 		// This list should be updated whenever a new OpenCL version is released.
+		// TODO: search for "Get\w+Info"
 		val objects = arrayListOf(
+			// OpenCL 1.0
 			ObjectType("CL10", "Platform", EnumSet.of(STRING_ASCII, STRING_UTF8)),
 			ObjectType("CL10", "Device", EnumSet.allOf(InfoQueryType::class.java)),
 			ObjectType("CL10", "Context", EnumSet.of(INT, POINTER)),
 			ObjectType("CL10", "Command Queue", EnumSet.of(INT, POINTER), "CommandQueue", "command_queue"),
-			ObjectType("CL10", "Mem Object", EnumSet.of(BOOLEAN, INT, LONG, POINTER), "MemObject", "memobj"),
 			ObjectType("CL10", "Image", EnumSet.of(INT, POINTER)),
-			ObjectType("CL20", "Pipe", EnumSet.of(INT)),
+			ObjectType("CL10", "Mem Object", EnumSet.of(BOOLEAN, INT, LONG, POINTER), "MemObject", "memobj"),
+			ObjectType("CL10", "Sampler", EnumSet.of(BOOLEAN, INT, POINTER)),
 			ObjectType("CL10", "Program", EnumSet.of(INT, POINTER, STRING_ASCII, STRING_UTF8)),
 			ObjectTypeCustom(
 				"CL10", "Program Build", EnumSet.of(INT, POINTER, STRING_ASCII, STRING_UTF8), "ProgramBuild", "program",
@@ -105,13 +110,23 @@ fun info() {
 				"CL10", "Kernel WorkGroup", EnumSet.of(LONG, POINTER), "KernelWorkGroup", "kernel",
 				argName = "device", argType = "long", queryType = "InfoQueryObject"
 			),
+			ObjectType("CL10", "Event", EnumSet.of(INT, POINTER)),
+			ObjectType("CL10", "Event Profiling", EnumSet.of(LONG), "EventProfiling", "event"),
+
+			// OpenCL 1.2
 			ObjectTypeCustom(
 				"CL12", "Kernel Arg", EnumSet.of(INT, LONG, STRING_ASCII, STRING_UTF8), "KernelArg", "kernel",
 				argName = "arg_indx", argType = "int", queryType = "InfoQueryInt"
 			),
-			ObjectType("CL10", "Sampler", EnumSet.of(BOOLEAN, INT, POINTER)),
-			ObjectType("CL10", "Event", EnumSet.of(INT, POINTER)),
-			ObjectType("CL10", "Event Profiling", EnumSet.of(LONG), "EventProfiling", "event")
+
+			// OpenCL 2.0
+			ObjectType("CL20", "Pipe", EnumSet.of(INT)),
+
+			// OpenCL 2.1
+			ObjectTypeCustom(
+				"CL21", "Kernel SubGroup", EnumSet.of(POINTER), "KernelSubGroup", "kernel",
+				argName = "device", argType = "long", queryType = "InfoQueryObject", hasInput = true
+			)
 		)
 		if ( Binding.OPENGL.enabled )
 			objects.add(ObjectType("CL10GL", "GL Texture", EnumSet.of(INT), "GLTexture", "memobj"))
@@ -167,9 +182,6 @@ fun info() {
 					"""
 	/** Single pointer value version of: $link */
 	public static long clGet${info}InfoPointer(${obj.args}) { return $QUERY.getPointer(${obj.argsPass}); }
-
-	/** PointBuffer version of: $link */
-	public static int clGet${info}InfoPointers(${obj.args}, PointerBuffer target) { return $QUERY.getPointers(${obj.argsPass}, target); }
 """
 				)
 			}

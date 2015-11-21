@@ -4,7 +4,6 @@
  */
 package org.lwjgl.opencl;
 
-import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.APIBuffer;
 
 import static org.lwjgl.opencl.CLUtil.*;
@@ -15,8 +14,8 @@ import static org.lwjgl.system.Pointer.*;
 
 /**
  * Base class for OpenCL object information queries.
- * <p/>
- * All methods require the object being queried (a pointer value) and the integer parameter name.
+ *
+ * <p>All methods require the object being queried (a pointer value) and the integer parameter name.</p>
  *
  * @see Info
  */
@@ -91,25 +90,6 @@ abstract class InfoQuery {
 		if ( DEBUG )
 			checkCLError(errcode);
 		return __buffer.pointerValue(0);
-	}
-
-	/**
-	 * Writes the pointer list for the specified {@code param_name} into {@code target}.
-	 * <p/>
-	 * This method should also be used for integer parameters that may be 32 or 64 bits (e.g. {@code size_t}).
-	 *
-	 * @param object     the object to query
-	 * @param param_name the parameter to query
-	 * @param target     the buffer in which to put the returned pointer list
-	 *
-	 * @return how many pointers were actually returned
-	 */
-	int getPointers(long object, int param_name, PointerBuffer target) {
-		APIBuffer __buffer = apiBuffer();
-		int errcode = get(object, param_name, target.remaining() * POINTER_SIZE, memAddress(target), __buffer.address());
-		if ( DEBUG )
-			checkCLError(errcode);
-		return (int)(__buffer.pointerValue(0) >> POINTER_SHIFT);
 	}
 
 	/**
