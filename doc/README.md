@@ -52,7 +52,7 @@ LWJGL comes with a preconfigured **IntelliJ IDEA** project. You can use the Comm
 
 LWJGL also comes with an **Eclipse** project. Copy the project files from the [eclipse](https://github.com/LWJGL/lwjgl3/tree/master/config/ide/eclipse) folder into the root directory and open it as an Eclipse file. There's also a Kotlin plugin for Eclipse available now, see [Getting Started with Eclipse](http://kotlinlang.org/docs/tutorials/getting-started-eclipse.html).
 
-LWJGL does not yet provide a project for **Netbeans**, but it should be straightforward to configure, assuming you follow the project structure explained above.
+LWJGL does also provide a project for **Netbeans**. You have to copy the *nbproject* folder into the root directory. Afterwards you can open it as NetBeans project.
 
 # BUILD PROCESS
 LWJGL uses Ant for the build process, which goes like so:
