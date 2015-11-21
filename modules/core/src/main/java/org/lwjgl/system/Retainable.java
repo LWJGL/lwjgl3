@@ -9,19 +9,20 @@ public interface Retainable {
 
 	/**
 	 * Increments the reference count. Each call to {@code retain} must be matched with a call to {@link #release}.
-	 * <p/>
-	 * When a {@code Retainable} object is first instantiated the reference count is equal to {@code 1}.
+	 *
+	 * <p>When a {@code Retainable} object is first instantiated the reference count is equal to {@code 1}.</p>
 	 */
 	void retain();
 
 	/**
 	 * Decrements the reference count.
-	 * <p/>
-	 * When the reference count reaches zero, any resources held by the {@code Retainable} object are released. After this happens, calling any other method on
-	 * the object has undefined results.
+	 *
+	 * <p>When the reference count reaches zero, any resources held by the {@code Retainable} object are released. After this happens, calling any other method
+	 * on the object has undefined results.</p>
 	 */
 	void release();
 
+	/** Default {@link Retainable} implementation. */
 	abstract class Default implements Retainable {
 
 		private int refCount = 1;
@@ -43,7 +44,7 @@ public interface Retainable {
 				destroy();
 		}
 
-		/** Destroys any resources held by this Retainable instance. */
+		/** Destroys any resources held by this {@link Retainable} instance. */
 		protected abstract void destroy();
 
 	}

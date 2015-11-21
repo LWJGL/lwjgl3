@@ -17,9 +17,9 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 /**
  * This class makes it possible to dynamically create, at runtime, native functions that call into Java code. Pointers to such functions can then be passed to
  * native APIs as callbacks.
- * <p/>
- * Closures must be referenced strongly in user code, else a {@link ClosureError} will be thrown on the next native callback invocation. Closures also use
- * native resources, while will result in memory leaks if not released after a Closure is no longer required.
+ *
+ * <p>Closures must be referenced strongly in user code, else a {@link ClosureError} will be thrown on the next native callback invocation. Closures also use
+ * native resources, while will result in memory leaks if not released after a Closure is no longer required.</p>
  */
 public abstract class Closure extends Retainable.Default implements Pointer {
 
@@ -116,13 +116,13 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	private final long closure;
 
 	/** The dynamically generated function pointer. */
-	private final long pointer;
+	private final long address;
 
 	Closure(FFICIF cif, long classPath, long nativeCallback) {
 		// Allocate ffi closure
 		APIBuffer __buf = apiStack();
 		this.closure = nffi_closure_alloc(FFIClosure.SIZEOF, __buf.address(__buf.getOffset()));
-		this.pointer = __buf.pointerValue(__buf.getOffset());
+		this.address = __buf.pointerValue(__buf.getOffset());
 		__buf.pop();
 
 		if ( closure == NULL )
@@ -159,7 +159,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			cif.address(),  // ffi_cif*
 			nativeCallback, // (void)(*FFI_CLOSURE_FUN)(ffi_cif* cif, void* ret, void** args, void* user_data)
 			user_data,      // void*
-			pointer         // function*
+			address         // function*
 		);
 		if ( status != FFI_OK ) {
 			destroy();
@@ -175,7 +175,25 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		if ( isDestroyed() )
 			throw new IllegalStateException("This closure instance has been destroyed.");
 
-		return pointer;
+		return address;
+	}
+
+	public boolean equals(Object o) {
+		if ( this == o ) return true;
+		if ( !(o instanceof Closure) ) return false;
+
+		Closure that = (Closure)o;
+
+		return address == that.address();
+	}
+
+	public int hashCode() {
+		return (int)(address ^ (address >>> 32));
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s closure [0x%X]", getClass().getSimpleName(), address);
 	}
 
 	@Override
