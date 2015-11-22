@@ -20,7 +20,6 @@ val DISPLAY = Display_p.IN("display", "the connection to the X server") // This 
 
 val Visual_p = struct_p(LINUX_PACKAGE, "Visual") {
 	documentation = "Visual structure; contains information about colormapping possible."
-	nativeImport ("LinuxLWJGL.h")
 
 	// ignored: XExtData_p.member("ext_data")
 	VisualID.member("visualid", "")
@@ -34,10 +33,6 @@ val Visual_p = struct_p(LINUX_PACKAGE, "Visual") {
 
 val XVisualInfo_p = struct_p(LINUX_PACKAGE, "XVisualInfo") {
 	documentation = "Information used by the visual utility routines to find desired visual type from the many visuals a display may support."
-	nativeImport (
-		"LinuxLWJGL.h",
-		"<X11/Xutil.h>"
-	)
 
 	Visual_p.member("visual", "")
 	VisualID.member("visualid", "")

@@ -185,6 +185,8 @@ class Struct(
 
 	override fun PrintWriter.generateJava() {
 		val nativeLayout = this@Struct.nativeLayout || members.isEmpty()
+		if ( !nativeLayout && preamble.hasNativeDirectives )
+			kotlin.io.println("\tUnnecessary native directives in struct: $packageName.$className")
 
 		print(HEADER)
 		println("package $packageName;\n")

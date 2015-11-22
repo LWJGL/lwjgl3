@@ -83,7 +83,6 @@ val ovrLogCallback = "ovrLogCallback".callback(
 
 val ovrErrorInfo_p = struct_p(OVR_PACKAGE, "OVRErrorInfo", nativeName = "ovrErrorInfo", mutable = false) {
 	documentation = "Provides information about the last error."
-	includeOVRCAPI()
 
 	ovrResult.member("Result", "the result from the last API call that generated an error ovrResult")
 	char.member("ErrorString", "a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions", size = 512)
@@ -91,7 +90,6 @@ val ovrErrorInfo_p = struct_p(OVR_PACKAGE, "OVRErrorInfo", nativeName = "ovrErro
 
 val ovrSessionStatus_p = struct_p(OVR_PACKAGE, "OVRSessionStatus", nativeName = "ovrSessionStatus", mutable = false) {
 	documentation = "Specifies status information for the current session."
-	includeOVRCAPI()
 
 	ovrBool.member("HasVrFocus", "true if the process has VR focus and thus is visible in the HMD")
 	ovrBool.member("HmdPresent", "true if an HMD is present")
@@ -99,7 +97,6 @@ val ovrSessionStatus_p = struct_p(OVR_PACKAGE, "OVRSessionStatus", nativeName = 
 
 val ovrInitParams_p = struct_p(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInitParams") {
 	documentation = "Parameters for OVR#ovr_Initialize()."
-	includeOVRCAPI()
 
 	uint32_t.member("Flags", "combination of ovrInitFlags or 0")
 	uint32_t.member(
@@ -131,7 +128,6 @@ val ovrGraphicsLuid_p = struct_p(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "o
 
 val ovrVector2i = struct(OVR_PACKAGE, "OVRVector2i", nativeName = "ovrVector2i") {
 	documentation = "A 2D vector with integer components."
-	includeOVRCAPI()
 
 	int.member("x", "the vector x component")
 	int.member("y", "the vector y component")
@@ -139,7 +135,6 @@ val ovrVector2i = struct(OVR_PACKAGE, "OVRVector2i", nativeName = "ovrVector2i")
 
 val ovrSizei = struct(OVR_PACKAGE, "OVRSizei", nativeName = "ovrSizei") {
 	documentation = "A 2D size with integer components."
-	includeOVRCAPI()
 
 	int.member("w", "the width")
 	int.member("h", "the height")
@@ -147,7 +142,6 @@ val ovrSizei = struct(OVR_PACKAGE, "OVRSizei", nativeName = "ovrSizei") {
 
 val ovrRecti = struct(OVR_PACKAGE, "OVRRecti", nativeName = "ovrRecti") {
 	documentation = "A 2D rectangle with a position and size. All components are integers."
-	includeOVRCAPI()
 
 	ovrVector2i.member("Pos", "the rectangle position")
 	ovrSizei.member("Size", "the rectangle size")
@@ -155,7 +149,6 @@ val ovrRecti = struct(OVR_PACKAGE, "OVRRecti", nativeName = "ovrRecti") {
 
 val ovrQuatf = struct(OVR_PACKAGE, "OVRQuatf", nativeName = "ovrQuatf") {
 	documentation = "A quaternion rotation."
-	includeOVRCAPI()
 
 	float.member("x", "the vector x component")
 	float.member("y", "the vector y component")
@@ -165,7 +158,6 @@ val ovrQuatf = struct(OVR_PACKAGE, "OVRQuatf", nativeName = "ovrQuatf") {
 
 val ovrVector2f = struct(OVR_PACKAGE, "OVRVector2f", nativeName = "ovrVector2f") {
 	documentation = "A 2D vector with float components."
-	includeOVRCAPI()
 
 	float.member("x", "the vector x component")
 	float.member("y", "the vector y component")
@@ -173,7 +165,6 @@ val ovrVector2f = struct(OVR_PACKAGE, "OVRVector2f", nativeName = "ovrVector2f")
 
 val ovrVector3f = struct(OVR_PACKAGE, "OVRVector3f", nativeName = "ovrVector3f") {
 	documentation = "A 3D vector with float components."
-	includeOVRCAPI()
 
 	float.member("x", "the vector x component")
 	float.member("y", "the vector y component")
@@ -183,14 +174,12 @@ val ovrVector3f_p = ovrVector3f.p
 
 val ovrMatrix4f = struct(OVR_PACKAGE, "OVRMatrix4f", nativeName = "ovrMatrix4f") {
 	documentation = "A 4x4 matrix with float components."
-	includeOVRCAPI()
 
 	float.member("M", "the matrix components", 16)
 }.nativeType
 
 val ovrPosef = struct(OVR_PACKAGE, "OVRPosef", nativeName = "ovrPosef") {
 	documentation = "Position and orientation together."
-	includeOVRCAPI()
 
 	ovrQuatf.member("Orientation", "the pose orientation");
 	ovrVector3f.member("Position", "the pose position");
@@ -205,7 +194,6 @@ val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", nativeName = "ovrPoseSt
 		Body refers to any object for which ovrPoseStatef is providing data.  It can be the HMD, Touch controller, camera or something else. The context
 		depends on the usage of the struct.
 		"""
-	includeOVRCAPI()
 
 	ovrPosef.member("ThePose", "position and orientation")
 	ovrVector3f.member("AngularVelocity", "angular velocity in radians per second")
@@ -221,7 +209,6 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
 		Field Of View (FOV) in tangent of the angle units. As an example, for a standard 90 degree vertical FOV, we would have:
 		${codeBlock("{ UpTan = tan(90 degrees / 2), DownTan = tan(90 degrees / 2) }")}.
 		"""
-	includeOVRCAPI()
 
 	float.member("UpTan", "the tangent of the angle between the viewing vector and the top edge of the field of view")
 	float.member("DownTan", "the tangent of the angle between the viewing vector and the bottom edge of the field of view")
@@ -231,7 +218,6 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
 
 val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false) {
 	documentation = "A complete descriptor of the HMD."
-	includeOVRCAPI()
 
 	ovrHmdType.member("Type", "this HMD's type")
 	padding(4, "Pointer.BITS64")
@@ -264,7 +250,6 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mu
 
 val ovrSensorData = struct(OVR_PACKAGE, "OVRSensorData", nativeName = "ovrSensorData", mutable = false) {
 	documentation = "Specifies a reading we can query from the sensor."
-	includeOVRCAPI()
 
 	ovrVector3f.member("Accelerometer", "acceleration reading in m/s^2")
 	ovrVector3f.member("Gyro", "rotation rate in rad/s")
@@ -275,7 +260,6 @@ val ovrSensorData = struct(OVR_PACKAGE, "OVRSensorData", nativeName = "ovrSensor
 
 val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovrTrackingState", mutable = false) {
 	documentation = "Tracking state at a given absolute time (describes predicted HMD pose etc). Returned by OVR#ovr_GetTrackingState()."
-	includeOVRCAPI()
 
 	ovrPoseStatef.member(
 		"HeadPose",
@@ -329,7 +313,6 @@ val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovr
 		rendering information for each eye. Computed by either OVR#ovr_GetRenderDesc() based on the specified FOV. Note that the rendering viewport is not
 		included here as it can be specified separately and modified per frame by passing different viewport values in the layer structure.
 		"""
-	includeOVRCAPI()
 
 	ovrEyeType.member("Eye", "the eye index this instance corresponds to")
 	ovrFovPort.member("Fov", "the field of view")
@@ -345,7 +328,6 @@ val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc",
 
 		Use the utility function OVRUtil#ovrTimewarpProjectionDesc_FromProjection() to generate this structure from the application's projection matrix.
 		"""
-	includeOVRCAPI()
 
 	float.member("Projection22", "projection matrix element [2][2]")
 	float.member("Projection23", "projection matrix element [2][3]")
@@ -364,7 +346,6 @@ val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = 
 		{@code HmdSpaceToWorldScaleInMeters} would be 0.0254. Note that if you are scaling the player in size, this must also scale. So if your application
 		units are inches, but you're shrinking the player to half their normal size, then {@code HmdSpaceToWorldScaleInMeters} would be {@code 0.0254*2.0}.
 		"""
-	includeOVRCAPI()
 
 	ovrVector3f.member("HmdToEyeViewOffset", "translation of each eye", size = ovrEye_Count)
 	float.member("HmdSpaceToWorldScaleInMeters", "ratio of viewer units to meter units")
@@ -372,7 +353,6 @@ val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = 
 
 val ovrTextureHeader = struct(OVR_PACKAGE, "OVRTextureHeader", nativeName = "ovrTextureHeader") {
 	documentation = "API-independent part of a texture descriptor."
-	includeOVRCAPI()
 
 	ovrRenderAPIType.member("API", "the graphics API in use")
 	ovrSizei.member("TextureSize", "the size of the texture")
@@ -380,7 +360,6 @@ val ovrTextureHeader = struct(OVR_PACKAGE, "OVRTextureHeader", nativeName = "ovr
 
 val ovrTexture = struct(OVR_PACKAGE, "OVRTexture", nativeName = "ovrTexture") {
 	documentation = "Contains platform-specific information about a texture. Aliases to one of ovrD3D11Texture or ##OVRGLTexture."
-	includeOVRCAPI()
 
 	ovrTextureHeader.member("Header", "API-independent header")
 	uintptr_t.member("PlatformData", "specialized in ##OVRGLTextureData, {@code ovrD3D11TextureData} etc", size = 8)
@@ -399,7 +378,6 @@ val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", nativeName = "o
 		ovrSwapTextureSets must be created by either the ovr_CreateSwapTextureSetD3D11 or OVRGL#ovr_CreateSwapTextureSetGL() factory function, and must
 		be destroyed by OVR#ovr_DestroySwapTextureSet().
 		"""
-	includeOVRCAPI()
 
 	ovrTexture_p.member("Textures", "points to an array of ovrTextures")
 	int.member("TextureCount", "the number of textures referenced by the Textures array")
@@ -439,7 +417,6 @@ val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrIn
 		Describes the complete controller input state, including Oculus Touch, and XBox gamepad. If multiple inputs are connected and used at the same time,
 		their inputs are combined.
 		"""
-	includeOVRCAPI()
 
 	double.member("TimeInSeconds", "system type when the controller state was last updated")
 	unsigned_int.member("ConnectedControllerTypes", "described by {@code ovrControllerType}. Indicates which ControllerTypes are present.")
@@ -456,7 +433,6 @@ val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrIn
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLayerHeader") {
 	documentation = "Defines properties shared by all ovrLayer structs, such as ##OVRLayerEyeFov."
-	includeOVRCAPI()
 
 	ovrLayerType.member("Type", "described by {@code ovrLayerType}")
 	unsigned_int.member("Flags", "described by {@code ovrLayerFlags}")
@@ -470,7 +446,6 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 		Describes a layer that specifies a monoscopic or stereoscopic view. This is the kind of layer that's typically used as layer 0 to
 		OVR#ovr_SubmitFrame(), as it is the kind of layer used to render a 3D stereoscopic view.
 		"""
-	includeOVRCAPI()
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeFov.")
 	ovrSwapTextureSet_p.member(
@@ -508,7 +483,6 @@ val ovrLayerEyeFovDepth = struct(OVR_PACKAGE, "OVRLayerEyeFovDepth", nativeName 
 		Describes a layer that specifies a monoscopic or stereoscopic view, with depth textures in addition to color textures. This is typically used to
 		support positional time warp. This struct is the same as ##OVRLayerEyeFov, but with the addition of {@code DepthTexture} and {@code ProjectionDesc}.
 		"""
-	includeOVRCAPI()
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeFovDepth.")
 	ovrSwapTextureSet_p.member(
@@ -562,7 +536,6 @@ val ovrLayerEyeMatrix = struct(OVR_PACKAGE, "OVRLayerEyeMatrix", nativeName = "o
 			"ColorTexture[0] contains a single monoscopic rendering, and Viewport[0] and Viewport[1] both refer to that rendering."
 		)}
 		"""
-	includeOVRCAPI()
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeMatrix")
 	ovrSwapTextureSet_p.member(
@@ -618,7 +591,6 @@ val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQua
 
 		Quad layers are visible from both sides; they are not back-face culled.
 		"""
-	includeOVRCAPI()
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_Quad")
 	ovrSwapTextureSet_p.member("ColorTexture", "contains a single image, never with any stereo view")
@@ -634,7 +606,6 @@ val ovrLayerDirect = struct(OVR_PACKAGE, "OVRLayerDirect", nativeName = "ovrLaye
 		to the HMD. The application can, however implement these kinds of effects itself before submitting the layer. This layer can be used for
 		application-based distortion rendering and can also be used for implementing a debug HUD that's viewed on the mirror texture.
 		"""
-	includeOVRCAPI()
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_Direct")
 	ovrSwapTextureSet_p.member(
@@ -653,7 +624,6 @@ val ovrLayerDirect = struct(OVR_PACKAGE, "OVRLayerDirect", nativeName = "ovrLaye
 
 val ovrGLTextureData = struct(OVR_PACKAGE, "OVRGLTextureData", nativeName = "ovrGLTextureData") {
 	documentation = "OpenGL texture data."
-	includeOVRCAPI_GL()
 
 	ovrTextureHeader.member("Header", "general device settings")
 	GLuint.member("TexId", "the OpenGL name for this texture")
@@ -663,7 +633,6 @@ val ovrGLTextureData = struct(OVR_PACKAGE, "OVRGLTextureData", nativeName = "ovr
 
 val ovrDetectResult = struct(OVR_PACKAGE, "OVRDetectResult", nativeName = "ovrDetectResult", mutable = false) {
 	documentation = "Return values for OVRUtil##ovr_Detect()"
-	includeOVRCAPI()
 
 	ovrBool.member(
 		"IsOculusServiceRunning",
@@ -698,7 +667,6 @@ fun config() {
 
 	union(OVR_PACKAGE, "OVRLayerUnion", nativeName = "ovrLayer_Union") {
 		documentation = "Union that combines {@code ovrLayer} types in a way that allows them to be used in a polymorphic way."
-		includeOVRCAPI()
 
 		ovrLayerHeader.member("Header", "the layer header")
 		ovrLayerEyeFov.member("EyeFov", "")
@@ -711,7 +679,6 @@ fun config() {
 
 	union(OVR_PACKAGE, "OVRGLTexture", nativeName = "ovrGLTexture") {
 		documentation = "Contains OpenGL-specific texture information."
-		includeOVRCAPI_GL()
 
 		ovrTexture.member("Texture", "general device settings")
 		ovrGLTextureData.member("OGL", "OpenGL-specific settings")

@@ -240,7 +240,7 @@ val EGLClientPixmapHI_p = struct_p(EGL_PACKAGE, "EGLClientPixmapHI", nativeName 
 		Specifies the width, height, stride, format and memory pointer of the pixmap to be used by the function HIClientpixmap#eglCreatePixmapSurfaceHI() to
 		create the {@code PixmapSurface}.
 		"""
-	includeEGLEXT()
+
 	void_p.member(
 		"pData",
 		"""

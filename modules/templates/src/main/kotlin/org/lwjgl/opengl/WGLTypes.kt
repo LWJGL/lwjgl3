@@ -22,7 +22,7 @@ val PGPU_DEVICE = StructType(
 			function.
 			"""
 		javaImport("org.lwjgl.system.windows.*")
-		nativeImport("WindowsLWJGL.h", "WGL.h")
+
 		DWORD.member(
 			"cb",
 			"""

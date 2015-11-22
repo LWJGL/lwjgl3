@@ -56,7 +56,7 @@ val LPVOID = "LPVOID".opaque_p
 
 val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 	documentation = "Contains the x and y coordinates of a point."
-	nativeImport ("WindowsLWJGL.h")
+
 	FLOAT.member("x", "specifies the horizontal (x) coordinate of a point")
 	FLOAT.member("y", "specifies the vertical (y) coordinate of a point")
 }.nativeType
@@ -66,7 +66,7 @@ val LPGLYPHMETRICSFLOAT = StructType(
 	includesPointer = true,
 	definition = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT", mutable = false) {
 		documentation = "Contains information about the placement and orientation of a glyph in a character cell."
-		nativeImport ("WindowsLWJGL.h")
+
 		FLOAT.member("gmfBlackBoxX", "specifies the width of the smallest rectangle (the glyph's black box) that completely encloses the glyph")
 		FLOAT.member("gmfBlackBoxY", "specifies the height of the smallest rectangle (the glyph's black box) that completely encloses the glyph")
 		POINTFLOAT.member("gmfptGlyphOrigin", "specifies the x and y coordinates of the upper-left corner of the smallest rectangle that completely encloses the glyph")
@@ -77,7 +77,7 @@ val LPGLYPHMETRICSFLOAT = StructType(
 
 private val POINT_STRUCT = struct(WINDOWS_PACKAGE, "POINT") {
 	documentation = "Defines the x- and y- coordinates of a point."
-	nativeImport ("WindowsLWJGL.h")
+
 	LONG.member("x", "the x-coordinate of the point")
 	LONG.member("y", "the y-coordinate of the point")
 }
@@ -85,7 +85,7 @@ val LPPOINT = StructType(name = "LPPOINT", definition = POINT_STRUCT, includesPo
 
 private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
 	documentation = "Defines the coordinates of the upper-left and lower-right corners of a rectangle."
-	nativeImport ("WindowsLWJGL.h")
+
 	LONG.member("left", "the x-coordinate of the upper-left corner of the rectangle")
 	LONG.member("top", "the y-coordinate of the upper-left corner of the rectangle")
 	LONG.member("right", "the x-coordinate of the lower-right corner of the rectangle")
@@ -95,7 +95,7 @@ val RECT = RECT_STRUCT.nativeType
 
 val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTOR") {
 	documentation = "Describes the pixel format of a drawing surface."
-	nativeImport ("WindowsLWJGL.h")
+
 	WORD.member("nSize", "specifies the size of this data structure. This value should be set to PIXELFORMATDESCRIPTOR#SIZEOF.")
 	WORD.member("nVersion", "specifies the version of this data structure. This value should be set to 1")
 	DWORD.member("dwFlags", "a set of bit flags that specify properties of the pixel buffer")

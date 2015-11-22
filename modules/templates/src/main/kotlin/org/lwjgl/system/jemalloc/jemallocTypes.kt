@@ -169,11 +169,7 @@ val chunk_hooks_t = struct_p(JEMALLOC_PACKAGE, "ChunkHooks", nativeName = "chunk
 	opted out of, but this is mainly intended to support platforms on which virtual memory mappings provided by the operating system kernel do not
 	automatically coalesce and split, e.g. Windows.
 	"""
-	nativeDirective(
-		"""DISABLE_WARNINGS()
-#include "jemalloc.h"
-ENABLE_WARNINGS()"""
-	)
+
 	chunk_alloc_t.member("alloc", "the chunk allocation hook")
 	chunk_dalloc_t.member("dalloc", "the chunk deallocation hook")
 	chunk_commit_t.member("commit", "the chunk commit hook")

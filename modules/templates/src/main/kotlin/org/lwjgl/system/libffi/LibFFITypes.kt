@@ -29,7 +29,7 @@ val FFI_FN_TYPE = "FFI_FN_TYPE".opaque_p
 
 val ffi_type_p = struct_p(FFI_PACKAGE, "FFIType", nativeName = "ffi_type") {
 	documentation = "Contains information about a libffi type."
-	nativeImport("ffi.h")
+
 	size_t.member("size", "set by libffi; you should initialize it to zero.")
 	unsigned_short.member("alignment", "set by libffi; you should initialize it to zero.")
 	unsigned_short.member("type", "for a structure, this should be set to LibFFI#FFI_TYPE_STRUCT.")
@@ -39,7 +39,6 @@ val ffi_type_pp = ffi_type_p.p
 
 val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", nativeName = "ffi_cif", mutable = false) {
 	documentation = "Contains information about a libffi call interface."
-	nativeImport("ffi.h")
 
 	ffi_abi.member("abi", "")
 	unsigned.member("nargs", "")

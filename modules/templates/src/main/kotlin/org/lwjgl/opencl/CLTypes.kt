@@ -127,7 +127,7 @@ val cl_charUTF8_pp = cl_charUTF8_p.p
 
 val cl_image_format_p = struct_p(OPENCL_PACKAGE, "CLImageFormat", nativeName = "cl_image_format") {
 	documentation = "The image format descriptor struct."
-	nativeImport("OpenCL.h")
+
 	cl_channel_order.member(
 		"image_channel_order",
 		"specifies the number of channels and the channel layout i.e. the memory layout in which channels are stored in the image"
@@ -143,7 +143,7 @@ val cl_image_format_p = struct_p(OPENCL_PACKAGE, "CLImageFormat", nativeName = "
 
 val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_image_desc") {
 	documentation = "Describes the type and dimensions of the image or image array."
-	nativeImport("OpenCL.h")
+
 	cl_mem_object_type.member("image_type", "describes the image type")
 	size_t.member(
 		"image_width",
@@ -206,7 +206,7 @@ val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_i
 
 val cl_bus_address_amd_p = struct_p(OPENCL_PACKAGE, "CLBusAddressAMD", nativeName = "cl_bus_address_amd") {
 	documentation = "Bus address information used in AMDBusAddressableMemory##clEnqueueMakeBuffersResidentAMD()."
-	nativeImport("OpenCL.h")
+
 	cl_long.member(
 		"surfbusaddress",
 		"contains the page aligned physical starting address of the backing store preallocated by the application on a remote device"
@@ -230,7 +230,7 @@ fun config() {
 
 	struct(OPENCL_PACKAGE, "CLBufferRegion", nativeName = "cl_buffer_region") {
 		documentation = "Buffer region struct."
-		nativeImport("OpenCL.h")
+
 		size_t.member("origin", "the region offset, in bytes")
 		size_t.member("size", "the region size, in bytes")
 	}
@@ -238,7 +238,7 @@ fun config() {
 	union(OPENCL_PACKAGE, "CLDeviceTopologyAMD", nativeName = "cl_device_topology_amd", mutable = false) {
 		documentation =
 			"The struct returned by CL10##clGetDeviceInfo() with {@code param_name} set to AMDDeviceTopology##CL_DEVICE_TOPOLOGY_AMD."
-		nativeImport("OpenCL.h")
+
 		struct("raw", "") {
 			cl_uint.member("type", "")
 			cl_uint.member("data", "", size = 5)
@@ -254,7 +254,7 @@ fun config() {
 
 	struct(OPENCL_PACKAGE, "CLMotionEstimationDescINTEL", nativeName = "cl_motion_estimation_desc_intel") {
 		documentation = "Describes the configuration of the motion estimation algorithm."
-		nativeImport("OpenCL.h")
+
 		cl_uint.member("mb_block_type", "describes the size of the blocks described by the motion estimator")
 		cl_uint.member("subpixel_mode", "defines the search precision (and hence, the precision of the returned motion vectors)")
 		cl_uint.member("sad_adjust_mode", "specifies distortion measure adjustment used for the motion search SAD comparison")

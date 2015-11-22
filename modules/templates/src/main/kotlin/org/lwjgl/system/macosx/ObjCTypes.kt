@@ -30,7 +30,6 @@ val objc_property_t_p = objc_property_t.p
 // Defines a property attribute
 val objc_property_attribute_t_p = struct_p(MACOSX_PACKAGE, "ObjCPropertyAttribute", nativeName = "objc_property_attribute_t") {
 	documentation = "Defines a property attribute."
-	nativeImport ("<objc/objc-runtime.h>")
 
 	charUTF8_p.member("name", "the name of the attribute")
 	charUTF8_p.member("value", "the value of the attribute (usually empty)")
@@ -39,7 +38,6 @@ val objc_property_attribute_t_p = struct_p(MACOSX_PACKAGE, "ObjCPropertyAttribut
 // Defines a method
 val objc_method_description = struct(MACOSX_PACKAGE, "ObjCMethodDescription", nativeName = "struct objc_method_description", mutable = false) {
 	documentation = "Defines a method."
-	nativeImport ("<objc/objc-runtime.h>")
 
 	SEL.member("name", "the name of the method at runtime")
 	charUTF8_p.member("types", "the types of the method arguments")
