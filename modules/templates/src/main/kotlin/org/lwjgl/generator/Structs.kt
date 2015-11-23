@@ -171,10 +171,15 @@ class Struct(
 					if ( it.isNestedAnonymousStruct )
 						td((it.nativeType as StructType).definition.printStructLayout())
 					else {
-						val nativeType = if ( it.isNestedStruct )
-							"{@link ${(it.nativeType as StructType).definition.className} ${it.nativeType.name}}"
+						val nativeType = if ( it.nativeType is StructType && !it.nativeType.includesPointer )
+							"{@link ${it.nativeType.definition.className} ${it.nativeType.name}}"
 						else
-							it.nativeType.name
+							it.nativeType.let {
+								if ( it is PointerType && !it.includesPointer )
+									"${it.name}${if ( !it.name.endsWith('*') ) " " else ""}*"
+								else
+									it.name
+							}
 						td(if ( it is StructMemberArray ) "$nativeType[${it.size}]" else nativeType, className = "nw")
 					},
 					td(it.documentation)
