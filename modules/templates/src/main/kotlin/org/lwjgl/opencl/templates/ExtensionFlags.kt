@@ -10,11 +10,13 @@ import org.lwjgl.opencl.*
 val KHR = "KHR"
 val EXT = "EXT"
 
+val ALTERA = "ALTERA"
 val AMD = "AMD"
 val APPLE = "APPLE"
 val ARM = "ARM"
 val INTEL = "INTEL"
 val NV = "NV"
+val QCOM = "QCOM"
 
 val khr_3d_image_writes = EXT_FLAG.nativeClassCL("khr_3d_image_writes", KHR) {
 	documentation =

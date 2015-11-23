@@ -420,10 +420,40 @@ val cl_queue_properties_APPLE_p = cl_queue_properties_APPLE.p
 
 // EXT
 
+val cl_report_live_objects_altera_callback = "cl_report_live_objects_altera".callback(
+	OPENCL_PACKAGE, void, "CLReportLiveObjectsAlteraCallback",
+	"Reports a live OpenCL API object.",
+	void_p.IN("user_data", "the {@code user_data} argument specified to ALTERALiveObjectTracking#clReportLiveObjectsAltera()"),
+	void_p.IN("obj_ptr", "a pointer to the live object"),
+	const..charASCII_p.IN(
+		"type_name",
+		"a C string corresponding to the OpenCL API object type. For example, a leaked {@code cl_mem} object will have \"cl_mem\" as its type string."
+	),
+	cl_uint.IN("refcount", "an instantaneous reference count for the object. Consider it to be immediately stale.")
+) {
+	documentation = "Instances of this interface may be passed to the ALTERALiveObjectTracking#ReportLiveObjectsAltera() method."
+	useSystemCallConvention()
+}
+
+val cl_device_partition_property_ext = typedef(cl_bitfield, "cl_device_partition_property_ext")
+val cl_device_partition_property_ext_p = cl_device_partition_property_ext.p
 val cl_mem_migration_flags_ext = typedef(cl_bitfield, "cl_mem_migration_flags_ext")
+
+val cl_image_pitch_info_qcom = typedef(cl_uint, "cl_image_pitch_info_qcom")
+val cl_mem_ext_host_ptr = struct_p(OPENCL_PACKAGE, "CLMemEXTHostPtr", nativeName = "cl_mem_ext_host_ptr") {
+	documentation = "Accepted by the {@code host_ptr} argument of CL10#clCreateBuffer(), CL10#clCreateImage2D() and CL10#clCreateImage3D()."
+
+	cl_uint.member("allocation_type", "type of external memory allocation. Legal values will be defined in layered extensions.")
+	cl_uint.member("host_cache_policy", "host cache policy for this external memory allocation")
+}
 
 // INTEL
 
 val cl_accelerator_intel = "cl_accelerator_intel".opaque_p
 val cl_accelerator_type_intel = typedef(cl_uint, "cl_accelerator_type_intel")
 val cl_accelerator_info_intel = typedef(cl_uint, "cl_accelerator_info_intel")
+
+val cl_va_api_device_source_intel = typedef(cl_uint, "cl_va_api_device_source_intel")
+val cl_va_api_device_set_intel = typedef(cl_uint, "cl_va_api_device_set_intel")
+val VASurfaceID = typedef(unsigned_int, "VASurfaceID")
+val VASurfaceID_p = VASurfaceID.p
