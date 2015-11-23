@@ -187,6 +187,12 @@ public class TemplateFormatter {
 		}
 	}
 
+	private static String strip(String token, String prefix) {
+		return !prefix.isEmpty() && prefix.length() < token.length() && token.substring(0, prefix.length()).equalsIgnoreCase(prefix)
+			? token.substring(prefix.length())
+			: token;
+	}
+
 	// ---[ CONSTANT FORMATTING ]----
 
 	private static final String COMMENT = "(?:/[*].+?[*]/|//[^\n\r]*)?";
@@ -263,12 +269,8 @@ public class TemplateFormatter {
 			while ( constantMatcher.find() ) {
 				if ( 0 < constCount++ ) builder.append(",\n");
 
-				String token = constantMatcher.group(1);
-				if ( token.startsWith(prefix + '_') )
-					token = token.substring(prefix.length() + 1);
-
 				builder.append("\t\t\"");
-				builder.append(token);
+				builder.append(strip(constantMatcher.group(1), prefix + '_'));
 
 				String value = constantMatcher.group(2);
 
@@ -276,8 +278,14 @@ public class TemplateFormatter {
 					String intValue = value.endsWith("L") ? value.substring(0, value.length() - (value.endsWith("UL") ? 2 : 1)) : value;
 
 					validateInteger(intValue);
-					builder.append("\"..");
-					builder.append(intValue);
+					if ( intValue.startsWith("0x") ) {
+						builder.append("\"..");
+						builder.append(intValue);
+					} else {
+						builder.append("\" expr \"");
+						builder.append(intValue);
+						builder.append("\"");
+					}
 				} catch (NumberFormatException e) {
 					builder.append("\" expr \"");
 					builder.append(value.charAt(0) == '(' ? value.substring(1, value.length() - 1) : value);
@@ -333,10 +341,12 @@ public class TemplateFormatter {
 		if ( paramMatcher.group(2) != null )
 			builder.append(paramMatcher.group(2).trim() + "_");
 		// type
-		if ( !paramMatcher.group(3).startsWith(prefix) )
+		String type = paramMatcher.group(3);
+
+		if ( !prefix.isEmpty() && !type.substring(0, prefix.length()).equalsIgnoreCase(prefix) )
 			builder.append(prefix);
-		builder.append(paramMatcher.group(3));
-		if ( "unsigned".equals(paramMatcher.group(3)) || "signed".equals(paramMatcher.group(3)) )
+		builder.append(type);
+		if ( "unsigned".equals(type) || "signed".equals(type) )
 			builder.append("_int");
 	}
 
@@ -370,7 +380,7 @@ public class TemplateFormatter {
 						builder.append(')');
 					builder.append("(\n");
 					builder.append("\t\t\"");
-					builder.append(paramMatcher.group(6));
+					builder.append(strip(paramMatcher.group(6), prefix));
 					builder.append("\",\n");
 					builder.append("\t\t\"\"");
 
