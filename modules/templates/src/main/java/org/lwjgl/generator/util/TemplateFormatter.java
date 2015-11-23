@@ -25,6 +25,7 @@ public class TemplateFormatter {
 	final JRadioButton radioDoc;
 
 	final JTextField prefix;
+	final JCheckBox  prefixTypes;
 
 	private final JTextArea input;
 	private final JTextArea output;
@@ -45,6 +46,7 @@ public class TemplateFormatter {
 		radioDoc = new JRadioButton("Documentation");
 
 		prefix = new JTextField("GL", 4);
+		prefixTypes = new JCheckBox("Prefix types", true);
 
 		ButtonGroup radioGroup = new ButtonGroup();
 
@@ -58,6 +60,7 @@ public class TemplateFormatter {
 		radioPane.add(radioDoc);
 		radioPane.add(new JLabel("Prefix:"));
 		radioPane.add(prefix);
+		radioPane.add(prefixTypes);
 
 		frame.getContentPane().add(radioPane, BorderLayout.NORTH);
 
@@ -137,6 +140,7 @@ public class TemplateFormatter {
 		radioDoc.addActionListener(settingsAction);
 
 		prefix.addActionListener(settingsAction);
+		prefixTypes.addActionListener(settingsAction);
 	}
 
 	private void format() {
@@ -152,12 +156,12 @@ public class TemplateFormatter {
 			if ( !radioDoc.isSelected() ) {
 				outputText = radioConst.isSelected()
 					? formatConstants(inputText, prefix.getText())
-					: formatFunctions(inputText, prefix.getText());
+					: formatFunctions(inputText, prefix.getText(), prefixTypes.isSelected());
 
 				// Try to automatically detect the input type
 				if ( outputText.isEmpty() ) {
 					outputText = radioConst.isSelected()
-						? formatFunctions(inputText, prefix.getText())
+						? formatFunctions(inputText, prefix.getText(), prefixTypes.isSelected())
 						: formatConstants(inputText, prefix.getText());
 
 					// Got it, flip the selection
@@ -350,7 +354,7 @@ public class TemplateFormatter {
 			builder.append("_int");
 	}
 
-	private static String formatFunctions(String input, String prefix) {
+	private static String formatFunctions(String input, String prefix, boolean prefixTypes) {
 		StringBuilder builder = new StringBuilder(input.length());
 
 		Matcher funcMatcher = FUNCTION_PATTERN.matcher(input);
@@ -372,7 +376,7 @@ public class TemplateFormatter {
 					if ( paramMatcher.group(1) != null || paramMatcher.group(4) != null )
 						builder.append("(const..");
 					// type
-					formatType(paramMatcher, builder, prefix);
+					formatType(paramMatcher, builder, prefixTypes ? prefix : "");
 					// pointer
 					if ( paramMatcher.group(5) != null )
 						writerPointer(builder, paramMatcher);
@@ -398,7 +402,7 @@ public class TemplateFormatter {
 					if ( paramMatcher.group(1) != null || paramMatcher.group(4) != null ) // const
 						builder.append("const..");
 					// type
-					formatType(paramMatcher, builder, prefix);
+					formatType(paramMatcher, builder, prefixTypes ? prefix : "");
 					// pointer
 					if ( paramMatcher.group(5) != null ) {
 						writerPointer(builder, paramMatcher);
