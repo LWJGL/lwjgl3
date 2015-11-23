@@ -116,19 +116,18 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"PROGRAM_BUILD_GLOBAL_VARIABLE_TOTAL_SIZE"..0x1185
 	)
 
-
 	IntConstant(
-		"cl_kernel_arg_type_qualifer",
+		"cl_kernel_arg_type_qualifier",
 
 		"KERNEL_ARG_TYPE_PIPE" expr "1 << 3"
 	)
 
-	IntConstant(
+	val cl_kernel_exec_infos = IntConstant(
 		"cl_kernel_exec_info",
 
 		"KERNEL_EXEC_INFO_SVM_PTRS"..0x11B6,
 		"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM"..0x11B7
-	)
+	).javaDocLinks
 
 	IntConstant(
 		"cl_command_type",
@@ -635,7 +634,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		""",
 
 		cl_kernel.IN("kernel", "the kernel object being queried"),
-		cl_kernel_exec_info.IN("param_name", "the information to be passed to {@code kernel}"),
+		cl_kernel_exec_info.IN("param_name", "the information to be passed to {@code kernel}", cl_kernel_exec_infos),
 		AutoSize("param_value")..size_t.IN("param_value_size", "the size in bytes of the memory pointed to by {@code param_value}"),
 		MultiType(PointerMapping.DATA_POINTER, PointerMapping.DATA_INT)..const..void_p.IN("param_value", "a pointer to memory where the appropriate values determined by {@code param_name} are specified"),
 

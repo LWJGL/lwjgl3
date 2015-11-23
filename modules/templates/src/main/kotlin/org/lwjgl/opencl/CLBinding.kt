@@ -4,8 +4,8 @@
  */
 package org.lwjgl.opencl
 
-import java.io.PrintWriter
 import org.lwjgl.generator.*
+import java.io.PrintWriter
 
 private val NativeClass.capName: String
 	get() = if ( templateName.startsWith(prefix) ) {
@@ -19,7 +19,7 @@ private val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "CLCapabilities"
 
-private val CLBinding = Generator.register(object: APIBinding(OPENCL_PACKAGE, CAPABILITIES_CLASS) {
+private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, CAPABILITIES_CLASS) {
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---")
@@ -70,9 +70,9 @@ private val CLBinding = Generator.register(object: APIBinding(OPENCL_PACKAGE, CA
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
 		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
-		for ( extension in classesWithFunctions ) {
+		for (extension in classesWithFunctions) {
 			print("\tfinal ${extension.className}")
-			for ( i in 0..(alignment - extension.className.length - 1) )
+			for (i in 0..(alignment - extension.className.length - 1))
 				print(' ')
 			println(" __${extension.className};")
 		}
@@ -98,7 +98,7 @@ private val CLBinding = Generator.register(object: APIBinding(OPENCL_PACKAGE, CA
 		this.majorVersion = 0;
 		this.minorVersion = 0;
 """)
-		for ( extension in classes ) {
+		for (extension in classes) {
 			val capName = extension.capName
 			if ( extension.hasNativeFunctions ) {
 				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(provider)) != null;")
@@ -113,7 +113,7 @@ private val CLBinding = Generator.register(object: APIBinding(OPENCL_PACKAGE, CA
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
 """)
-		for ( extension in classes ) {
+		for (extension in classes) {
 			val capName = extension.capName
 			if ( extension.hasNativeFunctions ) {
 				println("\t\t$capName = (__${extension.className} = CL.checkExtension(ext, \"$capName\", caps.__${extension.className})) != null;")
@@ -129,7 +129,7 @@ private val CLBinding = Generator.register(object: APIBinding(OPENCL_PACKAGE, CA
 		buf.append("OpenCL ").append(majorVersion).append('.').append(minorVersion);
 		buf.append(" - Extensions: ");
 """)
-		for ( extension in classes ) {
+		for (extension in classes) {
 			if ( extension.templateName.startsWith("CL") )
 				continue
 
@@ -152,7 +152,13 @@ fun String.nativeClassCL(templateName: String, postfix: String = "", init: (Nati
 	nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", binding = CLBinding, init = init)
 
 val NativeClass.extensionLink: String
-	get() = url("http://www.khronos.org/registry/cl/extensions/${templateName.substring(0, templateName.indexOf('_'))}/cl_$templateName.txt", templateName)
+	get() = extensionLink(templateName)
+
+fun NativeClass.extensionLink(
+	txt: String,
+	prefix: String = txt.substring(0, txt.indexOf('_')),
+	name: String = templateName
+) = url("http://www.khronos.org/registry/cl/extensions/$prefix/cl_$txt.txt", name)
 
 val NativeClass.extensionName: String
 	get() = "<strong>$templateName</strong>"

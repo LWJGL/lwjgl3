@@ -520,13 +520,13 @@ val amd_vec3 = EXT_FLAG.nativeClassCL("amd_vec3", AMD) {
 
 val APPLE_fp64_basic_ops = EXT_FLAG.nativeClassCL("APPLE_fp64_basic_ops", APPLE)
 
-val arm_get_core_id = EXT_FLAG.nativeClassCL("arm_get_core_id", ARM) {
+val arm_core_id = EXT_FLAG.nativeClassCL("arm_core_id", ARM) {
 	documentation =
 		"""
-		When true, the $extensionLink extension is supported.
+		When true, the ${extensionLink("arm_get_core_id")} extension is supported.
 
-		This extension provides a built-in function which returns the physical core id (OpenCL Compute Unit) that a work-group is running on. This value is
-		uniform for a work-group.
+		This extension provides a built-in function ({@code uint arm_get_core_id( void )}) which returns the physical core id (OpenCL Compute Unit) that a
+		work-group is running on. This value is uniform for a work-group.
 
 		This value can be used for a core-specific cache or atomic pool where the storage is required to be in global memory and persistent (but not ordered)
 		between work-groups. This does not provide any additional ordering on top of the existing guarantees between workgroups, nor does it provide any

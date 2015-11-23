@@ -93,7 +93,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		""",
 
 		"DEVICE_PARTITION_EQUALLY"..0x1086
-	).javaDocLinks
+	)
 
 	IntConstant(
 		"""
@@ -106,7 +106,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		""",
 
 		"DEVICE_PARTITION_BY_COUNTS"..0x1087
-	).javaDocLinks
+	)
 
 	IntConstant(
 		"""
@@ -128,7 +128,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		""",
 
 		"DEVICE_PARTITION_BY_AFFINITY_DOMAIN"..0x1088
-	).javaDocLinks
+	)
 
 	IntConstant(
 		"cl_device_affinity_domain",
@@ -239,10 +239,10 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"cl_kernel_arg_type_qualifier",
 
-		"CL_KERNEL_ARG_TYPE_NONE"..0,
-		"CL_KERNEL_ARG_TYPE_CONST" expr "1 << 0",
-		"CL_KERNEL_ARG_TYPE_RESTRICT" expr "1 << 1",
-		"CL_KERNEL_ARG_TYPE_VOLATILE" expr "1 << 2"
+		"KERNEL_ARG_TYPE_NONE"..0,
+		"KERNEL_ARG_TYPE_CONST" expr "1 << 0",
+		"KERNEL_ARG_TYPE_RESTRICT" expr "1 << 1",
+		"KERNEL_ARG_TYPE_VOLATILE" expr "1 << 2"
 	)
 
 	IntConstant(

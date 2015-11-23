@@ -194,7 +194,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PLATFORM_NAME"..0x0902,
 		"PLATFORM_VENDOR"..0x0903,
 		"PLATFORM_EXTENSIONS"..0x0904
-	).javaDocLinks
+	).javaDocLinks + " CL21#PLATFORM_HOST_TIMER_RESOLUTION"
 
 	val DeviceTypes = IntConstant(
 		"cl_device_type - bitfield",
@@ -261,7 +261,20 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"DEVICE_PLATFORM"..0x1031
 	).javaDocLinks + """ CL11#DEVICE_PREFERRED_VECTOR_WIDTH_HALF CL11#DEVICE_HOST_UNIFIED_MEMORY CL11#DEVICE_NATIVE_VECTOR_WIDTH_CHAR
 	CL11#DEVICE_NATIVE_VECTOR_WIDTH_SHORT CL11#DEVICE_NATIVE_VECTOR_WIDTH_INT CL11#DEVICE_NATIVE_VECTOR_WIDTH_LONG
-	CL11#DEVICE_NATIVE_VECTOR_WIDTH_FLOAT CL11#DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE CL11#DEVICE_NATIVE_VECTOR_WIDTH_HALF CL11#DEVICE_OPENCL_C_VERSION"""
+	CL11#DEVICE_NATIVE_VECTOR_WIDTH_FLOAT CL11#DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE CL11#DEVICE_NATIVE_VECTOR_WIDTH_HALF CL11#DEVICE_OPENCL_C_VERSION
+
+	CL12#DEVICE_DOUBLE_FP_CONFIG CL12#DEVICE_LINKER_AVAILABLE CL12#DEVICE_BUILT_IN_KERNELS CL12#DEVICE_IMAGE_MAX_BUFFER_SIZE CL12#DEVICE_IMAGE_MAX_ARRAY_SIZE
+	CL12#DEVICE_PARENT_DEVICE CL12#DEVICE_PARTITION_MAX_SUB_DEVICES CL12#DEVICE_PARTITION_PROPERTIES CL12#DEVICE_PARTITION_AFFINITY_DOMAIN
+	CL12#DEVICE_PARTITION_TYPE CL12#DEVICE_REFERENCE_COUNT CL12#DEVICE_PREFERRED_INTEROP_USER_SYNC CL12#DEVICE_PRINTF_BUFFER_SIZE
+
+	CL20#DEVICE_QUEUE_ON_HOST_PROPERTIES CL20#DEVICE_MAX_READ_WRITE_IMAGE_ARGS CL20#DEVICE_MAX_GLOBAL_VARIABLE_SIZE CL20#DEVICE_QUEUE_ON_DEVICE_PROPERTIES
+	CL20#DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE CL20#DEVICE_QUEUE_ON_DEVICE_MAX_SIZE CL20#DEVICE_MAX_ON_DEVICE_QUEUES CL20#DEVICE_MAX_ON_DEVICE_EVENTS
+	CL20#DEVICE_SVM_CAPABILITIES CL20#DEVICE_GLOBAL_VARIABLE_PREFERRED_TOTAL_SIZE CL20#DEVICE_MAX_PIPE_ARGS CL20#DEVICE_PIPE_MAX_ACTIVE_RESERVATIONS
+	CL20#DEVICE_PIPE_MAX_PACKET_SIZE CL20#DEVICE_PREFERRED_PLATFORM_ATOMIC_ALIGNMENT CL20#DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT
+	CL20#DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT
+
+	CL21#DEVICE_IL_VERSION CL21#DEVICE_MAX_NUM_SUB_GROUPS CL21#DEVICE_SUB_GROUP_INDEPENDENT_FORWARD_PROGRESS
+	"""
 
 	IntConstant(
 		"cl_device_fp_config - bitfield",
@@ -301,7 +314,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		"QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE" expr "1 << 0",
 		"QUEUE_PROFILING_ENABLE" expr "1 << 1"
-	).javaDocLinks
+	).javaDocLinks + " CL20#QUEUE_ON_DEVICE CL20#QUEUE_ON_DEVICE_DEFAULT"
 
 	val ContextInfo = IntConstant(
 		"cl_context_info",
@@ -326,7 +339,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"QUEUE_DEVICE"..0x1091,
 		"QUEUE_REFERENCE_COUNT"..0x1092,
 		"QUEUE_PROPERTIES"..0x1093
-	).javaDocLinks + " CL20#QUEUE_SIZE"
+	).javaDocLinks + " CL20#QUEUE_SIZE CL21#QUEUE_DEVICE_DEFAULT"
 
 	val MemFlags = IntConstant(
 		"cl_mem_flags - bitfield",
@@ -374,13 +387,13 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"FLOAT"..0x10DE
 	)
 
-	IntConstant(
+	val cl_mem_object_types = "CL12#MEM_OBJECT_IMAGE1D CL12#MEM_OBJECT_IMAGE1D_BUFFER " + IntConstant(
 		"cl_mem_object_type",
 
 		"MEM_OBJECT_BUFFER"..0x10F0,
 		"MEM_OBJECT_IMAGE2D"..0x10F1,
 		"MEM_OBJECT_IMAGE3D"..0x10F2
-	)
+	).javaDocLinks + " CL12#MEM_OBJECT_IMAGE1D_ARRAY CL12#MEM_OBJECT_IMAGE2D_ARRAY CL20#MEM_OBJECT_PIPE"
 
 	val MemInfo = IntConstant(
 		"cl_mem_info",
@@ -392,7 +405,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"MEM_MAP_COUNT"..0x1104,
 		"MEM_REFERENCE_COUNT"..0x1105,
 		"MEM_CONTEXT"..0x1106
-	).javaDocLinks + " CL11#MEM_ASSOCIATED_MEMOBJECT CL11#MEM_OFFSET"
+	).javaDocLinks + " CL11#MEM_ASSOCIATED_MEMOBJECT CL11#MEM_OFFSET CL20#MEM_USES_SVM_POINTER"
 
 	val ImageInfo = IntConstant(
 		"cl_image_info",
@@ -430,7 +443,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"SAMPLER_NORMALIZED_COORDS"..0x1152,
 		"SAMPLER_ADDRESSING_MODE"..0x1153,
 		"SAMPLER_FILTER_MODE"..0x1154
-	).javaDocLinks
+	).javaDocLinks + " CL20#SAMPLER_MIP_FILTER_MODE CL20#SAMPLER_LOD_MIN CL20#SAMPLER_LOD_MAX"
 
 	val MapFlags = IntConstant(
 		"cl_map_flags - bitfield",
@@ -449,7 +462,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PROGRAM_SOURCE"..0x1164,
 		"PROGRAM_BINARY_SIZES"..0x1165,
 		"PROGRAM_BINARIES"..0x1166
-	).javaDocLinks + " CL12#PROGRAM_NUM_KERNELS CL12#PROGRAM_KERNEL_NAMES"
+	).javaDocLinks + " CL12#PROGRAM_NUM_KERNELS CL12#PROGRAM_KERNEL_NAMES CL21#PROGRAM_IL"
 
 	val ProgramBuildInfo = IntConstant(
 		"cl_program_build_info",
@@ -457,7 +470,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PROGRAM_BUILD_STATUS"..0x1181,
 		"PROGRAM_BUILD_OPTIONS"..0x1182,
 		"PROGRAM_BUILD_LOG"..0x1183
-	).javaDocLinks + " CL12#PROGRAM_BINARY_TYPE"
+	).javaDocLinks + " CL12#PROGRAM_BINARY_TYPE CL20#PROGRAM_BUILD_GLOBAL_VARIABLE_TOTAL_SIZE"
 
 	IntConstant(
 		"cl_build_status",
@@ -533,7 +546,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PROFILING_COMMAND_SUBMIT"..0x1281,
 		"PROFILING_COMMAND_START"..0x1282,
 		"PROFILING_COMMAND_END"..0x1283
-	).javaDocLinks
+	).javaDocLinks + " CL20#PROFILING_COMMAND_COMPLETE"
 
 	// ------------------[ OPENCL Platform Layer ]------------------
 
@@ -581,7 +594,9 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		cl_platform_id.IN("platform", "the platform to query"),
 		cl_platform_info.IN("param_name", "the parameter to query", PlatformInfo),
 		PARAM_VALUE_SIZE,
-		nullable..void_p.OUT("param_value", "the memory location where appropriate values for a given {@code param_name} will be returned"),
+		MultiType(
+			PointerMapping.DATA_LONG
+		)..nullable..void_p.OUT("param_value", "the memory location where appropriate values for a given {@code param_name} will be returned"),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -1393,14 +1408,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		cl_context.IN("context", "a valid OpenCL context on which the image object(s) will be created"),
 		cl_mem_flags.IN("flags", "a bit-field that is used to specify allocation and usage information about the image memory object being created", MemFlags),
-		cl_mem_object_type.IN(
-			"image_type",
-			"the image type",
-			"""
-			CL12#MEM_OBJECT_IMAGE1D CL12#MEM_OBJECT_IMAGE1D_BUFFER #MEM_OBJECT_IMAGE2D #MEM_OBJECT_IMAGE3D CL12#MEM_OBJECT_IMAGE1D_ARRAY
-			CL12#MEM_OBJECT_IMAGE2D_ARRAY
-			"""
-		),
+		cl_mem_object_type.IN("image_type", "the image type", cl_mem_object_types),
 		AutoSize("image_formats")..cl_uint.IN(
 			"num_entries",
 			"the number of entries that can be returned in the memory location given by {@code image_formats}"
