@@ -105,3 +105,4 @@ fun String.nativeClassAL(templateName: String, prefixTemplate: String = "AL", po
 	nativeClass(OPENAL_PACKAGE, templateName, prefix = "AL", prefixTemplate = prefixTemplate, postfix = postfix, binding = ALBinding, init = init)
 
 val NativeClass.specLinkOpenALSoft: String get() = url("http://kcat.strangesoft.net/openal-extensions/$templateName.txt", templateName)
+val NativeClass.extensionName: String get() = "{@code ${prefixTemplate}_$templateName}"

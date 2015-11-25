@@ -19,7 +19,7 @@ val AL_SOFT_deferred_updates = "SOFTDeferredUpdates".nativeClassAL("SOFT_deferre
 		"""
 
 	IntConstant(
-		"Accepted by the {@code paramName} parameter of alGetBoolean, alGetBooleanv (as well as the Integer, Float, and Double variants).",
+		"Accepted by the {@code paramName} parameter of AL10#GetBoolean(), AL10#GetBooleanv() (as well as the Integer, Float, and Double variants).",
 
 		"DEFERRED_UPDATES_SOFT"..0xC002
 	)

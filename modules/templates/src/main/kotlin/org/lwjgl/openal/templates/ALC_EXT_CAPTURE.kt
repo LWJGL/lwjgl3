@@ -7,20 +7,31 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-val AL_EXT_OFFSET = "EXTOffset".nativeClassAL("EXT_OFFSET") {
+val ALC_EXT_CAPTURE = "EXTCapture".nativeClassALC("EXT_CAPTURE") {
 	documentation =
 		"""
 		Native bindings to the $extensionName extension.
 
 		An OpenAL 1.1 implementation will always support the $extensionName extension. This allows an application written to the OpenAL 1.0 specification to
-		access the offset abilities.
+		access the capture abilities.
 		"""
 
 	IntConstant(
-		"$extensionName tokens.",
+		"String queries.",
 
-		"SEC_OFFSET"..0x1024,
-		"SAMPLE_OFFSET"..0x1025,
-		"BYTE_OFFSET"..0x1026
+		"CAPTURE_DEVICE_SPECIFIER"..0x310,
+		"CAPTURE_DEFAULT_DEVICE_SPECIFIER"..0x311
 	)
+
+	IntConstant(
+		"Integer queries.",
+
+		"CAPTURE_SAMPLES"..0x312
+	)
+
+	ALC11 reuse "CaptureOpenDevice"
+	ALC11 reuse "CaptureCloseDevice"
+	ALC11 reuse "CaptureStart"
+	ALC11 reuse "CaptureStop"
+	ALC11 reuse "CaptureSamples"
 }

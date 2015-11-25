@@ -27,15 +27,45 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		"""
 
 	IntConstant(
-		"Can be used to retrieve a high-precision source offset and playback latency.",
+		"""
+		The playback position, expressed in fixed-point samples, along with the playback latency, expressed in nanoseconds (1/1000000000ths of a second). This
+		attribute is read-only.
 
-		"SAMPLE_OFFSET_LATENCY_SOFT"..0x1200,
+		The first value in the returned vector is the sample offset, which is a 32.32 fixed-point value. The whole number is stored in the upper 32 bits and
+		the fractional component is in the lower 32 bits. The value is similar to that returned by AL11#SAMPLE_OFFSET, just with more precision.
+
+		The second value is the latency, in nanoseconds. It represents the length of time it will take for the audio at the current offset to actually reach
+		the speakers or DAC. This value should be considered volatile, as it may change very often during playback (it can depend on a number of factors,
+		including how full the mixing buffer OpenAL may be using is timer jitter, or other changes deeper in the audio pipeline).
+
+		The retrieved offset and latency should be considered atomic, with respect to one another. This means the returned latency was measured exactly when
+		the source was at the returned offset.
+		""",
+
+		"SAMPLE_OFFSET_LATENCY_SOFT"..0x1200
+	)
+
+	IntConstant(
+		"""
+		The playback position, along with the playback latency, both expressed in seconds. This attribute is read-only.
+
+		The first value in the returned vector is the offset in seconds. The value is similar to that returned by AL11#SEC_OFFSET, just with more precision.
+
+		The second value is the latency, in seconds. It represents the length of time it will take for the audio at the current offset to actually reach the
+		speakers or DAC. This value should be considered volatile, as it may change very often during playback (it can depend on a number of factors, including
+		how full the mixing buffer OpenAL may be using is, timer jitter, or other changes deeper in the audio pipeline).
+
+		The retrieved offset and latency should be considered atomic with respect to one another. This means the returned latency was measured exactly when the
+		source was at the returned offset.
+		""",
+
 		"SEC_OFFSET_LATENCY_SOFT"..0x1201
 	)
 
 	ALvoid(
 		"SourcedSOFT",
 		"Sets the double value of a source parameter.",
+
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALdouble.IN("value", "the parameter value")
@@ -44,6 +74,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 	ALvoid(
 		"Source3dSOFT",
 		"Sets the 3 dimensional double values of a source parameter.",
+
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALdouble.IN("value1", "the first value"),
@@ -54,6 +85,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 	ALvoid(
 		"SourcedvSOFT",
 		"pointer version of #SourcedSOFT()",
+
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		const..ALdouble_p.IN("value", "the parameter values")
@@ -62,32 +94,36 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 	ALvoid(
 		"GetSourcedSOFT",
 		"Gets the double value of a source parameter.",
+
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
-		ALdouble_p.IN("value", "the parameter values")
+		ReturnParam..Check(1)..ALdouble_p.OUT("value", "the parameter values")
 	)
 
 	ALvoid(
 		"GetSource3dSOFT",
 		"Gets the 3 dimensional double values of a source parameter.",
+
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
-		ALdouble_p.IN("value1", "the first value"),
-		ALdouble_p.IN("value2", "the second value"),
-		ALdouble_p.IN("value3", "the third value")
+		Check(1)..ALdouble_p.OUT("value1", "the first value"),
+		Check(1)..ALdouble_p.OUT("value2", "the second value"),
+		Check(1)..ALdouble_p.OUT("value3", "the third value")
 	)
 
 	ALvoid(
 		"GetSourcedvSOFT",
-		"Pointer version of #GetSourcedSOFT()",
+		"Array version of #GetSourcedSOFT()",
+
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
-		ALdouble_p.IN("values", "the parameter values")
+		ALdouble_p.OUT("values", "the parameter values")
 	)
 
 	ALvoid(
 		"Sourcei64SOFT",
 		"Sets the 64 bit integer value of a source parameter.",
+
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALint64SOFT.IN("value", "the parameter values")
@@ -96,6 +132,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 	ALvoid(
 		"Source3i64SOFT",
 		"Sets the 3 dimensional 64 bit integer values of a source parameter.",
+
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALint64SOFT.IN("value1", "the first value"),
@@ -105,7 +142,8 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
 	ALvoid(
 		"Sourcei64vSOFT",
-		"Pointer version of #Sourcei64SOFT()",
+		"Array version of #Sourcei64SOFT()",
+
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		const..ALint64SOFT_p.IN("values", "the parameter values")
@@ -114,26 +152,29 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 	ALvoid(
 		"GetSourcei64SOFT",
 		"Gets the 64 bit integer value of a source parameter.",
+
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
-		ALint64SOFT_p.IN("value", "the parameter values")
+		ReturnParam..Check(1)..ALint64SOFT_p.OUT("value", "the parameter values")
 	)
 
 	ALvoid(
 		"GetSource3i64SOFT",
 		"Gets the 3 dimensional 64 bit integer values of a source parameter.",
+
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
-		ALint64SOFT_p.IN("value1", "the first value"),
-		ALint64SOFT_p.IN("value2", "the second value"),
-		ALint64SOFT_p.IN("value3", "the third value")
+		Check(1)..ALint64SOFT_p.OUT("value1", "the first value"),
+		Check(1)..ALint64SOFT_p.OUT("value2", "the second value"),
+		Check(1)..ALint64SOFT_p.OUT("value3", "the third value")
 	)
 
 	ALvoid(
 		"GetSourcei64vSOFT",
-		"Pointer version of #GetSourcei64SOFT()",
+		"Array version of #GetSourcei64SOFT()",
+
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
-		ALint64SOFT_p.IN("values", "the parameter values")
+		ALint64SOFT_p.OUT("values", "the parameter values")
 	)
 }

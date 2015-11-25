@@ -22,7 +22,7 @@ val AL_SOFT_direct_channels = "SOFTDirectChannels".nativeClassAL("SOFT_direct_ch
 		"""
 
 	IntConstant(
-		"Accepted by the {@code paramName} parameter of alSourcei, alSourceiv, alGetSourcei, and alGetSourceiv.",
+		"Accepted by the {@code paramName} parameter of AL10#Sourcei(), AL11#Sourceiv(), AL10#GetSourcei(), and AL10#GetSourceiv().",
 
 		"DIRECT_CHANNELS_SOFT"..0x1033
 	)

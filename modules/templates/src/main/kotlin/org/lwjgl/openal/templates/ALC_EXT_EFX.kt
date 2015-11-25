@@ -8,7 +8,12 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
-	documentation = "bindings to ALC_EXT_EFX extension."
+	documentation =
+		"""
+		Native bindings to the $extensionName extension.
+
+		The Effects Extension is designed to provide a generic, cross-platform framework for adding advanced DSP effects to OpenAL.
+		"""
 
 	IntConstant(
 		"ALC tokens.",

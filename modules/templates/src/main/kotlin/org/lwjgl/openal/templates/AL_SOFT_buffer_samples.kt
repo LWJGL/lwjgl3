@@ -32,7 +32,8 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 
 	val InternalFormatParameters = IntConstant(
 		"""
-		Accepted by the {@code internalformat} parameter of alBufferSamplesSOFT (values are shared with standard OpenAL, AL_EXT_FLOAT32, and AL_EXT_MCFORMATS).
+		Accepted by the {@code internalformat} parameter of #BufferSamplesSOFT() (values are shared with standard OpenAL, ${AL_EXT_FLOAT32.link}, and
+		${AL_EXT_MCFORMATS.link}).
 		""",
 
 		"MONO8_SOFT"..0x1100,
@@ -59,7 +60,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 	).javaDocLinks
 
 	val ChannelsParameter = IntConstant(
-		"Accepted by the {@code channels} parameter of alBufferSamplesSOFT, alBufferSubSamplesSOFT, and alGetBufferSamplesSOFT.",
+		"Accepted by the {@code channels} parameter of #BufferSamplesSOFT(), #BufferSubSamplesSOFT(), and #GetBufferSamplesSOFT().",
 
 		"MONO_SOFT"..0x1500,
 		"STEREO_SOFT"..0x1501,
@@ -71,7 +72,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 	).javaDocLinks
 
 	val TypeParameters = IntConstant(
-		"Accepted by the {@code type} parameter of alBufferSamplesSOFT, alBufferSubSamplesSOFT, and alGetBufferSamplesSOFT.",
+		"Accepted by the {@code type} parameter of #BufferSamplesSOFT(), #BufferSubSamplesSOFT(), and #GetBufferSamplesSOFT().",
 
 		"BYTE_SOFT"..0x1400,
 		"UNSIGNED_BYTE_SOFT"..0x1401,
@@ -86,7 +87,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 	).javaDocLinks
 
 	IntConstant(
-		"Accepted by the {@code paramName} parameter of alGetBufferi and alGetBufferiv.",
+		"Accepted by the {@code paramName} parameter of AL11#GetBufferi() and AL11#GetBufferiv().",
 
 		"INTERNAL_FORMAT_SOFT"..0x2008,
 		"BYTE_LENGTH_SOFT"..0x2009,
@@ -94,13 +95,13 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 	)
 
 	IntConstant(
-		"Accepted by the {@code paramName} parameter of alGetBufferf and alGetBufferfv.",
+		"Accepted by the {@code paramName} parameter of AL10#GetBufferf() and AL11#GetBufferfv().",
 
 		"SEC_LENGTH_SOFT"..0x200B
 	)
 
 	IntConstant(
-		"Accepted by the {@code paramName} parameter of alGetSourceiv and alGetSourcefv (these are the same as in AL_SOFT_buffer_sub_data).",
+		"Accepted by the {@code paramName} parameter of AL10#GetSourceiv() and AL10#GetSourcefv() (these are the same as in ${AL_SOFT_buffer_sub_data.link}).",
 
 		"BYTE_RW_OFFSETS_SOFT"..0x1031,
 		"SAMPLE_RW_OFFSETS_SOFT"..0x1032
@@ -120,8 +121,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		The {@code data} pointer should hold enough data as specified by the {@code channels}, {@code type}, and {@code samples} parameters, and will be copied
 		and converted into the buffer's storage. It may also be $NULL, in which case the stored data will be undefined.
 
-		If {@link SOFTLoopPoints AL_SOFT_loop_points} is supported, a successful call will reset the start and end loop points to 0 and {@code samples}
-		respectively.
+		If ${AL_SOFT_loop_points.link} is supported, a successful call will reset the start and end loop points to 0 and {@code samples} respectively.
 		""",
 		ALuint.IN("buffer", "the buffer ID"),
 		ALuint.IN("samplerate", "the number of sample frames per second the data will play at"),
@@ -134,14 +134,14 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 
 	ALCboolean(
 		"IsBufferFormatSupportedSOFT",
-		"Queries if a storage format is supported by the implementation",
+		"Queries if a storage format is supported by the implementation.",
 
 		ALCenum.IN("format", "the format to query", InternalFormatParameters),
 		returnDoc =
 		"""
-	        false if the specified {@code format} is not a recognized storage format. Otherwise, if it returns true it may be specified as the
-	        {@code internalformat} for #BufferSamplesSOFT().
-	        """
+        false if the specified {@code format} is not a recognized storage format. Otherwise, if it returns true it may be specified as the
+        {@code internalformat} for #BufferSamplesSOFT().
+        """
 	)
 
 	ALCvoid(
@@ -179,6 +179,6 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		ALCsizei.IN("samples", "the number of sample frames to read"),
 		ALenum.IN("channels", "the target channel configuration", ChannelsParameter),
 		ALenum.IN("type", "the target sample type", TypeParameters),
-		ALCvoid_p.OUT("data", "buffer to write to")
+		ALCvoid_p.OUT("data", "thr buffer to write to")
 	)
 }

@@ -8,10 +8,10 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_EXT_DOUBLE = "EXTDouble".nativeClassAL("EXT_DOUBLE") {
-	documentation = "bindings to AL_EXT_DOUBLE extension."
+	documentation = "Native bindings to the $extensionName extension."
 
 	IntConstant(
-		"AL_EXT_DOUBLE tokens.",
+		"Buffer formats.",
 
 		"FORMAT_MONO_DOUBLE_EXT"..0x10012,
 		"FORMAT_STEREO_DOUBLE_EXT"..0x10013

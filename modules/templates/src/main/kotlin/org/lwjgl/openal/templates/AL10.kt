@@ -502,6 +502,15 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 	)
 
 	ALvoid(
+		"GetSourceiv",
+		"Returns the integer values of the specified source parameter.",
+
+		ALuint.IN("source", "the source to query"),
+		ALenum.IN("param", "the parameter to query", SourceAttributes),
+		Check(1)..ALint_p.OUT("values", "the parameter values")
+	)
+
+	ALvoid(
 		"SourceQueueBuffers",
 		"""
 		Queues up one or multiple buffer names to the specified source.
@@ -682,7 +691,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		ALuint.IN("bufferName", "the buffer to modify"),
 		ALenum.IN("format", "the data format", BufferFormats),
 		MultiType(
-			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
 		)..const..ALvoid_p.IN("data", "the sample data"),
 		AutoSize("data")..ALsizei.IN("size", "the data buffer size, in bytes"),
 		ALsizei.IN("frequency", "the data frequency")

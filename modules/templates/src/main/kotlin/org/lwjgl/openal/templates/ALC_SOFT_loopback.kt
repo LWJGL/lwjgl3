@@ -17,7 +17,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"""
 
 	val Types = IntConstant(
-		"Accepted by the {@code type} parameter of alcIsRenderFormatSupportedSOFT.",
+		"Accepted by the {@code type} parameter of #IsRenderFormatSupportedSOFT().",
 
 		"BYTE_SOFT"..0x1400,
 		"UNSIGNED_BYTE_SOFT"..0x1401,
@@ -29,7 +29,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	).javaDocLinks
 
 	val Channels = IntConstant(
-		"Accepted by the {@code channels} parameter of alcIsRenderFormatSupportedSOFT.",
+		"Accepted by the {@code channels} parameter of #IsRenderFormatSupportedSOFT().",
 
 		"MONO_SOFT"..0x1500,
 		"STEREO_SOFT"..0x1501,
@@ -40,7 +40,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	).javaDocLinks
 
 	IntConstant(
-		"Accepted as part of the {@code attrList} parameter of alcCreateContext.",
+		"Accepted as part of the {@code attrList} parameter of ALC10#CreateContext().",
 
 		"FORMAT_CHANNELS_SOFT"..0x1990,
 		"FORMAT_TYPE_SOFT"..0x1991
@@ -65,8 +65,8 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		nullable..const..ALCcharUTF8_p.IN(
 			"deviceName",
 			"""
-			which device or device driver to use for subsequent rendering. This may be $NULL for an implementation-defined default, otherwise it must be a valid
-			name returned by enumeration (and further must be a device capable of loopback rendering).
+			which device or device driver to use for subsequent rendering. This may be $NULL for an implementation-defined default, otherwise it must be a
+			valid name returned by enumeration (and further must be a device capable of loopback rendering).
 			"""
 		)
 	)
@@ -80,7 +80,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		To check if a particular rendering format is available, use this function.
 		""",
 
-		ALCdevice_p.OUT("device", "the loopback device to query"),
+		ALCdevice_p.IN("device", "the loopback device to query"),
 		ALCsizei.IN("frequency", "the sample rate of the rendered audio"),
 		ALCenum.IN("channels", "the channel configuration used for rendering", Channels),
 		ALCenum.IN("type", "sample type of the written audio", Types)
@@ -93,8 +93,10 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		render samples, use this function.
 		""",
 
-		ALCdevice_p.OUT("device", "the loopback device which samples are rendered from, using its contexts and associated buffers and sources"),
-		ALCvoid_p.OUT("buffer", "the buffer to write to"),
+		ALCdevice_p.IN("device", "the loopback device which samples are rendered from, using its contexts and associated buffers and sources"),
+		MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
+		)..ALCvoid_p.OUT("buffer", "the buffer to write to"),
 		ALCsizei.IN("samples", "the number of sample frames to render")
 	)
 }

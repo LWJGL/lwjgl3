@@ -8,10 +8,10 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_EXT_ALAW = "EXTAlaw".nativeClassAL("EXT_ALAW") {
-	documentation = "bindings to AL_EXT_ALAW extension."
+	documentation = "Native bindings to the $extensionName extension."
 
 	IntConstant(
-		"AL_EXT_ALAW tokens.",
+		"Buffer formats.",
 
 		"FORMAT_MONO_ALAW_EXT"..0x10016,
 		"FORMAT_STEREO_ALAW_EXT"..0x10017

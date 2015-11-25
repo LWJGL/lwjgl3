@@ -28,6 +28,6 @@ val ALC_EXT_thread_local_context = "EXTThreadLocalContext".nativeClassALC("EXT_t
 
 	ALCcontext_p(
 		"GetThreadContext",
-		"Retrieve a handle to the thread-specific context of the calling thread. This function will return $NULL if no thread- specific context is set."
+		"Retrieves a handle to the thread-specific context of the calling thread. This function will return $NULL if no thread-specific context is set."
 	)
 }
