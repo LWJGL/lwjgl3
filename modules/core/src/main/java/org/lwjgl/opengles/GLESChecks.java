@@ -73,7 +73,7 @@ final class GLESChecks {
 			case GL_UNSIGNED_INT64_NV:
 				return 3;*/
 			default:
-				throw new IllegalArgumentException(apiUnknownToken("Unsupported OpenGL type", type));
+				throw new IllegalArgumentException(apiUnknownToken("Unsupported OpenGL ES type", type));
 		}
 	}
 

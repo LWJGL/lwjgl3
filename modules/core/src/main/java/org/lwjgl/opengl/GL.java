@@ -272,7 +272,7 @@ public final class GL {
 			} else {
 				// Fallback to the string query.
 				long versionString = callIP(GetString, GL_VERSION);
-				if ( callI(GetError) != GL_NO_ERROR )
+				if ( versionString == NULL || callI(GetError) != GL_NO_ERROR )
 					throw new IllegalStateException("There is no OpenGL context current in the current thread.");
 
 				APIVersion version = apiParseVersion(memDecodeUTF8(versionString));
@@ -319,7 +319,7 @@ public final class GL {
 				callIPV(GetIntegerv, GL_NUM_EXTENSIONS, __buffer.address());
 				int extensionCount = __buffer.intValue(0);
 
-				long GetStringi = checkPointer(checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi")));
+				long GetStringi = checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi"));
 				for ( int i = 0; i < extensionCount; i++ )
 					supportedExtensions.add(memDecodeASCII(callIIP(GetStringi, GL_EXTENSIONS, i)));
 

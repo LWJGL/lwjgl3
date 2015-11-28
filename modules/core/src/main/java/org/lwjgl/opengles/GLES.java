@@ -68,13 +68,13 @@ public final class GLES {
 		SharedLibrary GLES;
 		switch ( Platform.get() ) {
 			case LINUX:
-				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "libGLESv2.so.2");
+				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGLES, "libGLESv2.so.2");
 				break;
 			case MACOSX:
-				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "GLESv2");
+				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGLES, "GLESv2");
 				break;
 			case WINDOWS:
-				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "libGLESv2", "GLESv2");
+				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGLES, "libGLESv2", "GLESv2");
 				break;
 			default:
 				throw new IllegalStateException();
@@ -214,9 +214,10 @@ public final class GLES {
 			} else {
 				// Fallback to the string query.
 				long versionString = invokeIP(GetString, GL_VERSION);
-				if ( invokeI(GetError) == GL_NO_ERROR )
+				if ( versionString == NULL || invokeI(GetError) != GL_NO_ERROR )
 					throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
 
+				System.out.println("versionString = " + versionString);
 				APIVersion version = apiParseVersion(memDecodeUTF8(versionString), "OpenGL ES");
 
 				majorVersion = version.major;
