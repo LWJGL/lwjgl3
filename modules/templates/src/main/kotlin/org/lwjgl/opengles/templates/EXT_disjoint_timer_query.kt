@@ -117,7 +117,7 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
 		ReturnParam..Check(1)..GLint_p.OUT("params", "")
 	)
 
-	void(
+	IgnoreMissing..void(
 		"GetQueryObjectivEXT",
 		"",
 
