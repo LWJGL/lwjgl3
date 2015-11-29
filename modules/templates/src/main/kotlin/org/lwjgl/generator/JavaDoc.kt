@@ -7,7 +7,9 @@ package org.lwjgl.generator
 import java.util.*
 import java.util.regex.Pattern
 
-private val PARAGRAPH_PATTERN = Pattern.compile("\\s*^\\s*$\\s*", Pattern.MULTILINE)
+private val BLOCK_NODE = "(?:h3|table|ul|ol|pre)" // TODO: add more here if necessary
+private val BLOCK_PATTERN = Pattern.compile("\\s*^\\s*$\\s*|\\s*$\\s+(?=<$BLOCK_NODE)|(?<=</$BLOCK_NODE>)\\s+^\\s*", Pattern.MULTILINE)
+private val NON_PARAGRAPH_PATTERN = Pattern.compile("^<$BLOCK_NODE")
 private val CLEANUP_PATTERN = Pattern.compile("^[ \t]++(?![*])", Pattern.MULTILINE)
 private val UNESCAPE_PATTERN = Pattern.compile("\uFFFF")
 
@@ -15,18 +17,18 @@ fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(t
 
 private fun String.cleanup(linePrefix: String = "\t * "): String {
 	val trimmed = trim()
-	val matcher = PARAGRAPH_PATTERN.matcher(trimmed)
+	val matcher = BLOCK_PATTERN.matcher(trimmed)
 
 	val result: String
 	if ( matcher.find() ) {
 		val builder = StringBuilder(trimmed.length)
 
-		fun StringBuilder.appendParagraph(linePrefix: String, text: String, start: Int, end: Int) {
+		fun StringBuilder.appendBlock(linePrefix: String, text: String, start: Int, end: Int) {
 			this.append('\n')
 			this.append(linePrefix)
 			this.append('\n')
 			this.append(linePrefix)
-			val p = !text.startsWith("<h3>", start)
+			val p = !NON_PARAGRAPH_PATTERN.matcher(text.substring(start)).find()
 			if ( p ) this.append("<p>")
 			this.append(text, start, end)
 			if ( p ) this.append("</p>")
@@ -36,10 +38,10 @@ private fun String.cleanup(linePrefix: String = "\t * "): String {
 
 		var lastMatch = matcher.end()
 		while ( matcher.find() ) {
-			builder.appendParagraph(linePrefix, trimmed, lastMatch, matcher.start())
+			builder.appendBlock(linePrefix, trimmed, lastMatch, matcher.start())
 			lastMatch = matcher.end()
 		}
-		builder.appendParagraph(linePrefix, trimmed, lastMatch, trimmed.length)
+		builder.appendBlock(linePrefix, trimmed, lastMatch, trimmed.length)
 
 		result = builder.toString()
 	} else

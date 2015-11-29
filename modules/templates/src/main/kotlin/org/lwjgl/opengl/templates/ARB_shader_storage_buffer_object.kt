@@ -28,7 +28,7 @@ val ARB_shader_storage_buffer_object = "ARBShaderStorageBufferObject".nativeClas
 		ARB_shader_image_load_store, the OpenGL API and shading language do provide some control over memory transactions; those mechanisms also affect reads
 		and writes of shader storage buffers. In the OpenGL API, the GL42#MemoryBarrier() call can be used to ensure that certain memory operations related to
 		commands issued prior the barrier complete before other operations related to commands issued after the barrier. Additionally, the shading language
-		provides the ${codeBlock("memoryBarrier()")} function to control the relative order of memory accesses within individual shader invocations and provides
+		provides the ${code("memoryBarrier()")} function to control the relative order of memory accesses within individual shader invocations and provides
 		various memory qualifiers controlling how the memory corresponding to individual variables is accessed.
 
 		Requires ${GL40.core} and ${GL43.core} or ${ARB_program_interface_query.link}. ${GL43.promoted}
