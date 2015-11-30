@@ -72,13 +72,13 @@ private val ALBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, C
 			println(if ( i == capClasses.lastIndex ) ";" else ",")
 		}
 
-		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
+		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, ALCCapabilities alcCaps) {")
 		for ( extension in classes ) {
 			val hasCap = extension.prefixTemplate == "AL"
 			val capName = extension.capName(extension.prefixTemplate)
 
 			if ( !hasCap ) {
-				println("\t\tif ( ${extension.prefixTemplate}.getCapabilities().$capName )")
+				println("\t\tif ( alcCaps.$capName )")
 				println("\t\t\text.add(\"$capName\");")
 			}
 

@@ -209,7 +209,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		Error conditions are specific to the device, and (like AL) a call to alcGetError resets the error state.
 		""",
 
-		ALCdevice_p.IN("deviceHandle", "the device to query")
+		nullable..ALCdevice_p.IN("deviceHandle", "the device to query")
 	)
 
 	(const..ALCcharUTF8_p)(

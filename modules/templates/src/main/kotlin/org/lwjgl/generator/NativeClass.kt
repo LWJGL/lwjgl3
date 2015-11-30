@@ -57,7 +57,7 @@ abstract class APIBinding(
 	}
 
 	/** If true, different platforms/devices/contexts return different function addresses. */
-	open val isLocal: Boolean = false // GL & CL are global, AL is local
+	open fun isLocal(nativeClass: NativeClass) = false // GL, GLES & EGL are global, CL & AL are local
 
 	/** If false, a capabilities instance is not available in the current thread or process. A parameter must provide the instance. */
 	open val hasCurrentCapabilities: Boolean = true // GL has thread-local capabilities, AL has process-wide capabilities (unless ALC_EXT_thread_local_context is used), CL has the ICD.
@@ -343,7 +343,7 @@ class NativeClass(
 	}
 """)
 		println("\t@JavadocExclude")
-		print("\t${access.modifier}$className(FunctionProvider${if ( binding.isLocal ) "Local" else ""} provider")
+		print("\t${access.modifier}$className(FunctionProvider${if ( binding.isLocal(this@NativeClass) ) "Local" else ""} provider")
 		binding.printConstructorParams(this, this@NativeClass)
 		println(") {")
 		functions.forEach {

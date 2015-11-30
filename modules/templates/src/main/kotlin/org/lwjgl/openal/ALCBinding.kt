@@ -17,19 +17,21 @@ fun NativeClass.capName(core: String) =
 		"${prefixTemplate}_$templateName"
 	}
 
+private val NativeClass.isCore: Boolean get()= templateName.startsWith("ALC")
+
 private val ALC_CAP_CLASS = "ALCCapabilities"
 
 val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_CLASS, callingConvention = CallingConvention.DEFAULT) {
 
-	override val isLocal = true
+	override fun isLocal(nativeClass: NativeClass) = !nativeClass.isCore
 
 	override fun printConstructorParams(writer: PrintWriter, nativeClass: NativeClass) {
-		if ( !nativeClass.templateName.startsWith("ALC") )
+		if ( !nativeClass.isCore )
 			writer.print(", long device")
 	}
 
 	override fun getFunctionAddressCall(function: NativeClassFunction) =
-		if ( function.nativeClass.templateName.startsWith("ALC") )
+		if ( function.nativeClass.isCore )
 			super.getFunctionAddressCall(function);
 		else
 			"provider.getFunctionAddress(device, \"${function.nativeName}\")"
@@ -48,13 +50,12 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 	}""")
 
 		val capName = nativeClass.capName("ALC")
-		val isExtension = !nativeClass.templateName.startsWith("ALC")
 
-		println("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProviderLocal provider${if ( isExtension ) ", long device" else ""}) {")
-		println("\t\tif ( !ext.contains(\"$capName\") ) return null;")
+		println("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProviderLocal provider, long device) {")
+		println("\t\tif ( device != 0L && !ext.contains(\"$capName\") ) return null;")
 
 		print("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider")
-		if ( isExtension ) print(", device")
+		if ( !nativeClass.isCore ) print(", device")
 		println(");")
 
 		print("\n\t\tboolean supported = checkFunctions(")
@@ -66,7 +67,7 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 		})
 		println(");")
 
-		print("\n\t\treturn ALC.checkExtension(\"")
+		print("\n\t\treturn device == 0L && !supported ? null : ALC.checkExtension(\"")
 		print(capName);
 		println("\", funcs, supported);")
 		println("\t}\n")
@@ -78,8 +79,8 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 
 		val classes = super.getClasses { o1, o2 ->
 			// Core functionality first, extensions after
-			val isALC1 = o1.templateName.startsWith("ALC")
-			val isALC2 = o2.templateName.startsWith("ALC")
+			val isALC1 = o1.isCore
+			val isALC2 = o2.isCore
 
 			if ( isALC1 xor isALC2 )
 				(if ( isALC1 ) -1 else 1)
@@ -107,7 +108,7 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 		for ( extension in classes ) {
 			val capName = extension.capName("ALC")
 			if ( extension.hasNativeFunctions && extension.prefix == "ALC" ) {
-				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(ext, provider${if ( extension.templateName.startsWith("ALC") ) "" else ", device"})) != null;")
+				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(ext, provider, device)) != null;")
 			} else
 				println("\t\t$capName = ext.contains(\"$capName\");")
 		}

@@ -5,10 +5,10 @@
 package org.lwjgl.demo.openal;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.openal.ALContext;
 import org.lwjgl.openal.ALDevice;
+import org.lwjgl.openal.ALUtil;
 import org.lwjgl.stb.STBVorbisInfo;
 
 import java.io.IOException;
@@ -32,6 +32,8 @@ public final class ALCDemo {
 
 	public static void main(String[] args) {
 		ALDevice device = ALDevice.create(null);
+		if ( device == null )
+			throw new IllegalStateException("Failed to open the default device.");
 
 		ALCCapabilities caps = device.getCapabilities();
 
@@ -42,9 +44,12 @@ public final class ALCDemo {
 		System.out.println("caps.ALC_EXT_EFX = " + caps.ALC_EXT_EFX);
 
 		if ( caps.OpenALC11 ) {
-			List<String> devices = ALC.getStringList(0L, ALC_ALL_DEVICES_SPECIFIER);
-			for ( int i = 0; i < devices.size(); i++ ) {
-				System.out.println(i + ": " + devices.get(i));
+			List<String> devices = ALUtil.getStringList(NULL, ALC_ALL_DEVICES_SPECIFIER);
+			if ( devices == null )
+				ALUtil.checkALCError(NULL);
+			else {
+				for ( int i = 0; i < devices.size(); i++ )
+					System.out.println(i + ": " + devices.get(i));
 			}
 		}
 
@@ -64,7 +69,7 @@ public final class ALCDemo {
 			testPlayback();
 		} finally {
 			context.destroy();
-			device.destroy();
+			device.close();
 		}
 	}
 

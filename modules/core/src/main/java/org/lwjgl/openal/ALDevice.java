@@ -4,85 +4,68 @@
  */
 package org.lwjgl.openal;
 
-import org.lwjgl.system.Checks;
 import org.lwjgl.system.Pointer;
 
-import java.nio.ByteBuffer;
-
 import static org.lwjgl.openal.ALC10.*;
-import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This class is a wrapper around an ALC Device handle. A Device can be, depending on the implementation, a hardware device, or a daemon/OS service/actual
- * server. This mechanism also permits different drivers (and hardware) to coexist within the same system, as well as allowing several applications to share
- * system resources for audio, including a single hardware output device. The details are left to the implementation, which has to map the available backends to
- * unique device specifiers.
+ * This class represents an open connection to an OpenAL device. It wraps an {@code ALCdevice} pointer and an {@link ALCCapabilities} instance that exposes the
+ * device capabilities.
+ *
+ * <p>Connections to OpenAL devices can be opened with {@link ALC10#alcOpenDevice alcOpenDevice} or
+ * {@link SOFTLoopback#alcLoopbackOpenDeviceSOFT alcLoopbackOpenDeviceSOFT}.</p>
+ *
+ * <p>Calling OpenAL functions requires an OpenAL context for the device, that can be created with the {@link ALContext} class.</p>
+ *
+ * @see AL
+ * @see ALC
  */
 public class ALDevice extends Pointer.Default {
 
-	/*
-	 * When calling ALC functions, we want to use the device associated with the current AL context.
-	 * The problem is that an ALDevice is created before the ALContext, so we need a way to bootstrap
-	 * the current device during init.
-	 */
-	static ALDevice lastDevice; // TODO: Evaluate this hack and explore other possible solutions
-
 	private final ALCCapabilities capabilities;
 
+	/**
+	 * Creates an {@link ALDevice} for the specified OpenAL device handle
+	 *
+	 * @param device a handle to an OpenAL device
+	 */
 	public ALDevice(long device) {
 		super(device);
 
 		this.capabilities = ALC.createCapabilities(device);
-		lastDevice = this;
 	}
 
-	public static ALDevice getLastDevice() {
-		return lastDevice;
-	}
-
+	/** Returns the {@link ALCCapabilities} instance associated with this OpenAL device. */
 	public ALCCapabilities getCapabilities() {
 		return capabilities;
 	}
 
-	public void destroy() {
+	/** Closes the device with {@link ALC10#alcCloseDevice alcCloseDevice}. */
+	public void close() {
 		alcCloseDevice(address());
-		if ( lastDevice == this )
-			lastDevice = null;
 	}
 
 	/**
-	 * Creates the default device.
+	 * Opens the default device.
 	 *
-	 * @return the created device
+	 * @return the created device or null if no sound driver/device has been found
 	 */
 	public static ALDevice create() {
 		return create(null);
 	}
 
 	/**
-	 * Creates a device.
+	 * Opens a device.
 	 *
-	 * @param deviceName the name of the device to open. It may be null, in which case the default device will be used.
+	 * @param deviceSpecifier the name of a certain device or device configuration to open. It may be null, in which case the implementation will provide an
+	 *                        implementation specific default.
 	 *
-	 * @return the created device
+	 * @return the created device or null if no sound driver/device has been found
 	 */
-	public static ALDevice create(String deviceName) {
-		long alcOpenDevice = ALC.getFunctionProvider().getFunctionAddress("alcOpenDevice");
-		if ( Checks.CHECKS )
-			checkFunctionAddress(alcOpenDevice);
-
-		ByteBuffer nameBuffer = deviceName == null ? null : memEncodeUTF8(deviceName, BufferAllocator.MALLOC);
-		try {
-			long device = invokePP(alcOpenDevice, memAddressSafe(nameBuffer));
-			if ( device == NULL )
-				throw new RuntimeException("Failed to open the device.");
-
-			return new ALDevice(device);
-		} finally {
-			memFree(nameBuffer);
-		}
+	public static ALDevice create(String deviceSpecifier) {
+		long device = alcOpenDevice(deviceSpecifier);
+		return device == NULL ? null : new ALDevice(device);
 	}
 
 }

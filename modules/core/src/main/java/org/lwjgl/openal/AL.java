@@ -12,12 +12,38 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 import static org.lwjgl.openal.AL10.*;
-import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+/**
+ * This class must be used before any OpenAL function is called. It has the following responsibilities:
+ * <ul>
+ * <li>Creates instances of {@link ALCapabilities} classes. An {@code ALCapabilities} instance contains flags for functionality that is available in an OpenAL
+ * context. Internally, it also contains function pointers that are only valid in that specific OpenAL context.</li>
+ * <li>Maintains thread-local and global state for {@code ALCapabilities} instances, corresponding to OpenAL contexts that are current in those threads and the
+ * entire process, respectively.</li>
+ * </ul>
+ *
+ * <h3>ALCapabilities creation</h3>
+ * <p>Instances of {@code ALCapabilities} can be created with the {@link #createCapabilities} method. An OpenAL context must be current in the current thread
+ * or process before it is called. Calling this method is expensive, so {@code ALCapabilities} instances are automatically created by and cached in
+ * {@link ALContext} instances.</p>
+ *
+ * <h3>Thread-local state</h3>
+ * <p>Before a function for a given OpenAL context can be called, the corresponding {@code ALContext} instance must be made current in the current thread or
+ * process. The user is also responsible for clearing the current {@code ALCapabilities} instance when the context is destroyed or made current in another
+ * thread.</p>
+ *
+ * <p>Note that OpenAL contexts are made current process-wide by default. Current thread-local contexts are only available if the
+ * {@link EXTThreadLocalContext ALC_EXT_thread_local_context} extension is supported by the OpenAL implementation. <em>OpenAL Soft</em>, the implementation
+ * that LWJGL ships with, supports this extension.</p>
+ *
+ * @see ALContext
+ * @see ALDevice
+ * @see ALC
+ */
 public final class AL {
 
 	private static FunctionProvider functionProvider;
@@ -29,7 +55,6 @@ public final class AL {
 
 	static void init() {
 		functionProvider = new FunctionProvider.Default() {
-
 			// We'll use alGetProcAddress for both core and extension entry points.
 			// To do that, we need to first grab the alGetProcAddress function from
 			// the OpenAL native library.
@@ -62,36 +87,74 @@ public final class AL {
 		functionProvider = null;
 	}
 
-	public static FunctionProvider getFunctionProvider() {
-		return functionProvider;
-	}
-
-	static void setCurrentProcess(ALContext context) {
+	/**
+	 * Sets the specified {@link ALContext} as the current process-wide OpenAL context.
+	 *
+	 * <p>If the current thread had a context current (see {@link #setCurrentThread}), that context is cleared. Any OpenAL functions called in the current
+	 * thread, or any threads that have no context current, will use the specified context.</p>
+	 *
+	 * @param context the {@link ALContext} to make current, or null
+	 */
+	public static void setCurrentProcess(ALContext context) {
 		processContext = context;
 		threadContext.set(null); // See EXT_thread_local_context, second Q.
 	}
 
-	static void setCurrentThread(ALContext context) {
+	/**
+	 * Sets the specified {@link ALContext} as the current OpenAL context in the current thread.
+	 *
+	 * <p>Any OpenAL functions called in the current thread will use the specified context.</p>
+	 *
+	 * @param context the {@link ALContext} to make current, or null
+	 */
+	public static void setCurrentThread(ALContext context) {
 		threadContext.set(context);
 	}
 
+	/**
+	 * Returns the {@link ALContext} that is current in the current thread or process.
+	 *
+	 * If no {@link ALContext} is current in the current thread or process, null is returned.
+	 */
 	public static ALContext getCurrentContext() {
 		ALContext context = threadContext.get();
 		return context != null ? context : processContext;
 	}
 
+	/**
+	 * Returns the {@link ALCapabilities} of the OpenAL context that is current in the current thread or process.
+	 *
+	 * @throws IllegalStateException if no {@link ALContext} is current in the current thread or process
+	 */
 	public static ALCapabilities getCapabilities() {
-		return getCurrentContext().getCapabilities();
+		ALContext current = getCurrentContext();
+		if ( current == null )
+			throw new IllegalStateException("No ALContext has been made current for the current thread or process.");
+
+		return current.getCapabilities();
 	}
 
 	/**
-	 * Bootstrapping code that creates an ALCapabilities instance.
+	 * Creates a new {@link ALCapabilities} instance for the OpenAL context that is current in the current thread or process.
+	 *
+	 * @param alcCaps the {@link ALCCapabilities} of the device associated with the current context
 	 *
 	 * @return the ALCapabilities instance
 	 */
-	public static ALCapabilities createCapabilities(long device) {
-		int majorVersion = alcGetInteger(device, ALC_MAJOR_VERSION);
-		int minorVersion = alcGetInteger(device, ALC_MINOR_VERSION);
+	public static ALCapabilities createCapabilities(ALCCapabilities alcCaps) {
+		long GetString = functionProvider.getFunctionAddress("alGetString");
+		long GetError = functionProvider.getFunctionAddress("alGetError");
+		long IsExtensionPresent = functionProvider.getFunctionAddress("alIsExtensionPresent");
+		if ( GetString == NULL || GetError == NULL || IsExtensionPresent == NULL )
+			throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that the OpenAL library has been loaded correctly.");
+
+		long versionString = invokeIP(GetString, AL_VERSION);
+		if ( versionString == NULL || callI(GetError) != AL_NO_ERROR )
+			throw new IllegalStateException("There is no OpenAL context current in the current thread or process.");
+
+		APIVersion apiVersion = apiParseVersion(memDecodeASCII(versionString));
+		int majorVersion = apiVersion.major;
+		int minorVersion = apiVersion.minor;
 
 		int[][] AL_VERSIONS = {
 			{ 0, 1 }  // OpenAL 1
@@ -106,11 +169,6 @@ public final class AL {
 					supportedExtensions.add("OpenAL" + Integer.toString(major) + Integer.toString(minor));
 			}
 		}
-
-		long GetString = functionProvider.getFunctionAddress("alGetString");
-		long IsExtensionPresent = functionProvider.getFunctionAddress("alIsExtensionPresent");
-		if ( GetString == NULL || IsExtensionPresent == NULL )
-			throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that OpenAL has been loaded.");
 
 		// Parse EXTENSIONS string
 		String extensionsString = memDecodeUTF8(checkPointer(invokeIP(GetString, AL_EXTENSIONS)));
@@ -131,7 +189,7 @@ public final class AL {
 				supportedExtensions.add(extName);
 		}
 
-		return new ALCapabilities(getFunctionProvider(), supportedExtensions);
+		return new ALCapabilities(functionProvider, supportedExtensions, alcCaps);
 	}
 
 	static <T> T checkExtension(String extension, T functions, boolean supported) {
@@ -141,12 +199,6 @@ public final class AL {
 			apiLog("[AL] " + extension + " was reported as available but an entry point is missing.");
 			return null;
 		}
-	}
-
-	public static void destroy(ALContext alContext) {
-		ALDevice device = alContext.getDevice();
-		alContext.destroy();
-		device.destroy();
 	}
 
 }

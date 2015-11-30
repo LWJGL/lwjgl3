@@ -6,8 +6,9 @@ package org.lwjgl.openal;
 
 import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.APIUtil.*;
@@ -15,9 +16,32 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+/**
+ * This class must be used before any OpenAL function is called. It has the following responsibilities:
+ * <ul>
+ * <li>Loads the OpenAL native library into the JVM process.</li>
+ * <li>Creates instances of {@link ALCCapabilities} classes. An {@code ALCCapabilities} instance contains flags for functionality that is available for an
+ * OpenAL device. Internally, it also contains function pointers that are only valid for that specific OpenAL device.</li>
+ * </ul>
+ *
+ * <h3>Library lifecycle</h3>
+ * <p>The OpenAL library is loaded automatically when this class is initialized. Set the {@link Configuration#EXPLICIT_INIT_OPENAL} option to override this
+ * behavior. Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can be overridden
+ * with the {@link Configuration#LIBRARY_NAME_OPENAL} option.</p>
+ *
+ * <h3>ALCCapabilities creation</h3>
+ * <p>Instances of {@code ALCCapabilities} can be created with the {@link #createCapabilities} method. Calling this method is expensive, so
+ * {@code ALCCapabilities} instances are automatically created by and cached in {@link ALDevice} instances.</p>
+ *
+ * @see ALContext
+ * @see ALDevice
+ * @see AL
+ */
 public final class ALC {
 
 	private static FunctionProviderLocal functionProvider;
+
+	private static ALCCapabilities libraryCapabilities;
 
 	static {
 		if ( !Configuration.EXPLICIT_INIT_OPENAL.<Boolean>get() )
@@ -26,17 +50,16 @@ public final class ALC {
 
 	private ALC() {}
 
+	/** Loads the OpenAL native library, using the default library name. */
 	public static void create() {
 		String libName;
 		switch ( Platform.get() ) {
-			case WINDOWS:
-				libName = "OpenAL";
-				break;
 			case LINUX:
-				libName = "openal";
-				break;
 			case MACOSX:
 				libName = "openal";
+				break;
+			case WINDOWS:
+				libName = "OpenAL";
 				break;
 			default:
 				throw new IllegalStateException();
@@ -45,6 +68,11 @@ public final class ALC {
 		create(Configuration.LIBRARY_NAME_OPENAL.get(Pointer.BITS64 ? libName : libName + "32"));
 	}
 
+	/**
+	 * Loads the OpenAL native library, using the specified library name.
+	 *
+	 * @param libName the native library name
+	 */
 	public static void create(String libName) {
 		final SharedLibrary OPENAL = Library.loadNative(libName);
 
@@ -56,7 +84,7 @@ public final class ALC {
 				{
 					if ( alcGetProcAddress == NULL ) {
 						OPENAL.release();
-						throw new RuntimeException("A core ALC function is missing. Make sure that OpenAL has been loaded.");
+						throw new RuntimeException("A core ALC function is missing. Make sure that the OpenAL library has been loaded correctly.");
 					}
 				}
 
@@ -75,7 +103,7 @@ public final class ALC {
 					__buffer.stringParamASCII(functionName, true);
 
 					long address = invokePPP(alcGetProcAddress, handle, __buffer.address());
-					if ( address == NULL )
+					if ( address == NULL && handle != NULL )
 						apiLog("Failed to locate address for ALC extension function " + functionName);
 
 					return address;
@@ -103,74 +131,49 @@ public final class ALC {
 			throw new IllegalStateException("ALC has already been created.");
 
 		ALC.functionProvider = functionProvider;
+
+		libraryCapabilities = new ALCCapabilities(functionProvider, NULL, new HashSet<String>(0));
+
 		AL.init();
 	}
 
+	/** Unloads the OpenAL native library. */
 	public static void destroy() {
 		if ( functionProvider == null )
 			return;
 
 		AL.destroy();
 
+		libraryCapabilities = null;
+
 		functionProvider.release();
 		functionProvider = null;
 	}
 
+	/** Returns the {@link FunctionProviderLocal} for the OpenAL native library. */
 	public static FunctionProviderLocal getFunctionProvider() {
 		return functionProvider;
 	}
 
+	/**
+	 * Returns the {@link ALCCapabilities} of the device of the OpenAL context that is current in the current thread or process
+	 * (see {@link AL#getCurrentContext()}).
+	 *
+	 * <p>If no OpenAL context is available, a special {@link ALCCapabilities} instance will be returned that will contain function pointers loaded directly
+	 * from the OpenAL native library, for no particular device. This allows calling ALC functions (e.g. {@link ALC10#alcOpenDevice alcOpenDevice}) before
+	 * any device has been opened yet.</p>
+	 */
 	public static ALCCapabilities getCapabilities() {
 		ALContext context = AL.getCurrentContext();
-		if ( context != null )
-			return context.getDevice().getCapabilities();
+		ALCCapabilities caps = context != null ? context.getDevice().getCapabilities() : libraryCapabilities;
+		if ( caps == null )
+			throw new IllegalStateException("No ALCCapabilities instance available. Make sure OpenAL has been loaded correctly.");
 
-		return ALDevice.getLastDevice().getCapabilities();
-	}
-
-	// We could remove the method below if we add support for it in the code generator.
-	// But this is the only occurance of this pattern, so not really worth it.
-
-	/**
-	 * Obtains string values from ALC. This is a custom implementation for those tokens that return a list of strings instead of a single string.
-	 *
-	 * @param deviceHandle the device to query
-	 * @param token        the information to query. One of:<br>{@link ALC11#ALC_ALL_DEVICES_SPECIFIER}, {@link ALC11#ALC_CAPTURE_DEVICE_SPECIFIER}
-	 */
-	public static List<String> getStringList(long deviceHandle, int token) {
-		long __result = nalcGetString(deviceHandle, token);
-		if ( __result == NULL )
-			return null;
-
-		ByteBuffer buffer = memByteBuffer(__result, Integer.MAX_VALUE);
-
-		List<String> strings = new ArrayList<String>();
-
-		int offset = 0;
-		while ( true ) {
-			if ( buffer.get() == 0 ) {
-				int limit = buffer.position() - 1;
-				if ( limit == offset ) // Previous char was also a \0 == end of list.
-					break;
-
-				// Prepare for decoding
-				buffer.position(offset); // Start index
-				buffer.limit(limit); // \0 index
-
-				// Decode
-				strings.add(memDecodeUTF8(buffer));
-
-				// Reset
-				buffer.limit(Integer.MAX_VALUE);
-				buffer.position(offset = limit + 1); // index after \0
-			}
-		}
-
-		return strings;
+		return caps;
 	}
 
 	/**
-	 * Bootstrapping code that creates the ALCCapabilities instance.
+	 * Creates a new {@link ALCCapabilities} instance for the specified OpenAL device.
 	 *
 	 * @return the ALCCapabilities instance
 	 */

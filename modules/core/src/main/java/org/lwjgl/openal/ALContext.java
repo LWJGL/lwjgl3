@@ -13,9 +13,14 @@ import static org.lwjgl.openal.EXTThreadLocalContext.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This class is a wrapper around an AL Context handle. Within the scope of AL the ALC is implied - it is not visible as a handle or function parameter. Only
- * one AL Context per process can be current at a time. Applications maintaining multiple AL Contexts, whether threaded or not, have to set the current context
- * accordingly. Applications can have multiple threads that share one more or contexts. In other words, AL and ALC are threadsafe.
+ * This class represents an OpenAL context within an OpenAL device. It wraps an {@link ALDevice} instance, an {@code ALCcontext} pointer and an
+ * {@link ALCapabilities} instance that exposes the context capabilities.
+ *
+ * <p>Calling OpenAL functions requires that an OpenAL context is made current, either process-wide or in the current thread. The methods
+ * {@link #makeCurrent()} and {@link #makeCurrentThread()} can be used for that purpose.</p>
+ *
+ * @see ALDevice
+ * @see AL
  */
 public class ALContext extends Pointer.Default {
 
@@ -23,30 +28,43 @@ public class ALContext extends Pointer.Default {
 
 	private final ALCapabilities capabilities;
 
-	public ALContext(ALDevice device, long handle) {
-		super(handle);
-
-		this.device = device;
-
-		makeCurrent();
-
-		if ( device.address() != alcGetContextsDevice(handle) )
-			throw new IllegalArgumentException("The specified device does not match with the context device.");
-
-		this.capabilities = AL.createCapabilities(device.address());
+	/**
+	 * Creates an {@link ALContext} instance using the specified handles.
+	 *
+	 * @param device  an {@code ALCdevice} pointer
+	 * @param context an {@code ALCcontext} pointer
+	 */
+	public ALContext(long device, long context) {
+		this(new ALDevice(device), context);
 	}
 
+	/**
+	 * Creates an {@link ALContext} instance using the specified device and context handle.
+	 *
+	 * @param device  an {@code ALDevice} instance
+	 * @param context an {@code ALCcontext} pointer
+	 */
+	public ALContext(ALDevice device, long context) {
+		super(context);
+
+		if ( device.address() != alcGetContextsDevice(context) )
+			throw new IllegalArgumentException("The specified device does not match with the context device.");
+
+		this.device = device;
+		this.capabilities = AL.createCapabilities(device.getCapabilities());
+	}
+
+	/** Returns the {@link ALDevice} instance associated with this OpenAL context. */
 	public ALDevice getDevice() {
 		return device;
 	}
 
+	/** Returns the {@link ALCapabilities} instance associated with this OpenAL context. */
 	public ALCapabilities getCapabilities() {
 		return capabilities;
 	}
 
-	/**
-	 * Makes this context the current process-wide OpenAL context.
-	 */
+	/** Makes this context the current process-wide OpenAL context. See {@link AL#setCurrentProcess}. */
 	public void makeCurrent() {
 		if ( !alcMakeContextCurrent(address()) )
 			throw new RuntimeException("Failed to make AL context current in process.");
@@ -55,7 +73,10 @@ public class ALContext extends Pointer.Default {
 	}
 
 	/**
-	 * Makes this context the current thread-local OpenAL context.
+	 * Makes this context the current OpenAL context in the current thread. See {@link AL#setCurrentThread}.
+	 *
+	 * <p>This method should only be used if the OpenAL implementation supports the {@link EXTThreadLocalContext ALC_EXT_thread_local_context} extension.
+	 * <em>OpenAL Soft</em>, the implementation that LWJGL ships with, supports this extension.</p>
 	 */
 	public void makeCurrentThread() {
 		if ( !alcSetThreadContext(address()) )
@@ -64,18 +85,34 @@ public class ALContext extends Pointer.Default {
 		AL.setCurrentThread(this);
 	}
 
+	/** Returns true if OpenAL methods called in the current thread would use this OpenAL context. */
 	public boolean isCurrent() {
 		if ( device.getCapabilities().ALC_EXT_thread_local_context ) {
-			if ( alcGetThreadContext() == address() )
-				return true;
+			long current = alcGetThreadContext();
+			if ( current != NULL )
+				return current == address();
 		}
 
 		return alcGetCurrentContext() == address();
 	}
 
+	/**
+	 * Destroys this OpenAL context by calling {@link ALC10#alcDestroyContext alcDestroyContext}.
+	 *
+	 * <p>If this OpenAL context is current when this method is called, {@link AL#setCurrentThread} and {@link AL#setCurrentProcess} will be called as
+	 * necessary to clear the current context.</p>
+	 *
+	 * <p>The OpenAL device associated with this context is <b>not</b> closed after a call to this method.</p>
+	 */
 	public void destroy() {
-		if ( isCurrent() )
-			alcMakeContextCurrent(NULL);
+		if ( device.getCapabilities().ALC_EXT_thread_local_context ) {
+			long current = alcGetThreadContext();
+			if ( current == address() )
+				AL.setCurrentThread(null);
+		}
+
+		if ( alcGetCurrentContext() == address() )
+			AL.setCurrentProcess(null);
 
 		alcDestroyContext(address());
 	}
@@ -83,14 +120,18 @@ public class ALContext extends Pointer.Default {
 	/**
 	 * Creates an asynchronous ALContext, using the default device and default attributes.
 	 *
+	 * <p>The created OpenAL context will be made the current process-wide context.</p>
+	 *
 	 * @return the new ALContext
 	 */
 	public static ALContext create() {
-		return create(ALDevice.create(null), 0, 0, false);
+		return create(ALDevice.create(), 0, 0, false);
 	}
 
 	/**
 	 * Creates an asynchronous ALContext, using the specified device and default attributes.
+	 *
+	 * <p>The created OpenAL context will be made the current process-wide context.</p>
 	 *
 	 * @return the new ALContext
 	 */
@@ -100,6 +141,8 @@ public class ALContext extends Pointer.Default {
 
 	/**
 	 * Creates an ALContext, using the specified device and attributes.
+	 *
+	 * <p>The created OpenAL context will be made the current process-wide context.</p>
 	 *
 	 * @param device    the device
 	 * @param frequency the frequency for mixing output buffer, in units of Hz. Set to 0 to use the default.
@@ -135,16 +178,35 @@ public class ALContext extends Pointer.Default {
 	}
 
 	/**
-	 * Creates an ALContext, using the specified device and attributes.
+	 * Creates an {@link ALContext}, using the specified device and attributes.
 	 *
-	 * @param device     the device
+	 * <p>The created OpenAL context will be made the current process-wide context.</p>
+	 *
+	 * @param device     an OpenAL device
 	 * @param attributes null or a zero terminated list of integer pairs composed of valid ALC attribute tokens and requested values
 	 *
 	 * @return the new ALContext
 	 */
 	public static ALContext create(ALDevice device, IntBuffer attributes) {
-		long contextHandle = alcCreateContext(device.address(), attributes);
-		return new ALContext(device, contextHandle);
+		long handle = alcCreateContext(device.address(), attributes);
+
+		if ( handle == NULL )
+			ALUtil.checkALCError(NULL);
+
+		if ( !alcMakeContextCurrent(handle) )
+			ALUtil.checkALCError(NULL);
+
+		try {
+			ALContext context = new ALContext(device, handle);
+			AL.setCurrentProcess(context);
+
+			return context;
+		} catch (RuntimeException e) {
+			alcMakeContextCurrent(NULL);
+			alcDestroyContext(handle);
+
+			throw e;
+		}
 	}
 
 }

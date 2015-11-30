@@ -7,6 +7,7 @@ package org.lwjgl.demo.openal;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.*;
 import org.lwjgl.stb.STBVorbisInfo;
+import org.lwjgl.system.MemoryUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -15,6 +16,7 @@ import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.AL11.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.EXTEfx.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Class with a few examples testing and demonstrating the use of the OpenAL extension EXTEfx.
@@ -36,7 +38,7 @@ public final class EFXTest {
 
 		// Query for Effect Extension
 		if ( !ALC.getCapabilities().ALC_EXT_EFX ) {
-			AL.destroy(context);
+			context.destroy();
 			throw new Exception("No EXTEfx supported by driver.");
 		}
 		System.out.println("EXTEfx found.");
@@ -49,7 +51,7 @@ public final class EFXTest {
 	 * OpenAL SDK. Nothing is played in this method.
 	 */
 	private static void silentTests() throws Exception {
-		ALDevice device = ALDevice.create(null);
+		ALDevice device = ALDevice.create();
 
 		// Create context (only necessary if LWJGL context isn't sufficient, done as example)
 		IntBuffer contextAttribList = BufferUtils.createIntBuffer(16);
@@ -60,8 +62,7 @@ public final class EFXTest {
 		contextAttribList.put(ALC10.ALC_SYNC);
 		contextAttribList.put(ALC10.ALC_FALSE);
 
-		// ALC_MAX_AUXILIARY_SENDS won't go above compile-time max. Set to compile-time max if
-		// greater.
+		// ALC_MAX_AUXILIARY_SENDS won't go above compile-time max. Set to compile-time max if greater.
 		contextAttribList.put(ALC_MAX_AUXILIARY_SENDS);
 		contextAttribList.put(2);
 
@@ -173,28 +174,32 @@ public final class EFXTest {
 		if ( error != AL_NO_ERROR ) {
 			throw new Exception("Failed to configure Source Send 0");
 		}
-		System.out.println("Linked aux effect slot to soutce slot 0");
-		// Set Source Send 1 to feed uiEffectSlot[1] with filter filter
-		alSource3i(source, AL_AUXILIARY_SEND_FILTER, auxEffectSlots[1], 1, filter);
-		if ( alGetError() != AL_NO_ERROR ) {
-			// e.g. if only 1 send per source is available
-			throw new Exception("Failed to configure Source Send 1");
+		System.out.println("Linked aux effect slot to source slot 0");
+		if ( auxSends > 1 ) {
+			// Set Source Send 1 to feed uiEffectSlot[1] with filter filter
+			alSource3i(source, AL_AUXILIARY_SEND_FILTER, auxEffectSlots[1], 1, filter);
+			ALUtil.checkALError();
+			if ( alGetError() != AL_NO_ERROR ) {
+				// e.g. if only 1 send per source is available
+				throw new Exception("Failed to configure Source Send 1");
+			}
+			System.out.println("Linked aux effect slot to source slot 1");
 		}
-		System.out.println("Linked aux effect slot to soutce slot 1");
+
 		// Disable Send 0
-		alSource3i(source, AL_AUXILIARY_SEND_FILTER, AL_EFFECTSLOT_NULL, 0,
-		           AL_FILTER_NULL);
+		alSource3i(source, AL_AUXILIARY_SEND_FILTER, AL_EFFECTSLOT_NULL, 0, AL_FILTER_NULL);
 		if ( alGetError() != AL_NO_ERROR ) {
 			throw new Exception("Failed to disable Source Send 0");
 		}
 		System.out.println("Disabled source send 0");
-		// Disable Send 1
-		alSource3i(source, AL_AUXILIARY_SEND_FILTER, AL_EFFECTSLOT_NULL, 1,
-		           AL_FILTER_NULL);
-		if ( alGetError() != AL_NO_ERROR ) {
-			throw new Exception("Failed to disable Source Send 1");
+		if ( auxSends > 1 ) {
+			// Disable Send 1
+			alSource3i(source, AL_AUXILIARY_SEND_FILTER, AL_EFFECTSLOT_NULL, 1, AL_FILTER_NULL);
+			if ( alGetError() != AL_NO_ERROR ) {
+				throw new Exception("Failed to disable Source Send 1");
+			}
+			System.out.println("Disabled source send 1");
 		}
-		System.out.println("Disabled source send 1");
 
 		// Filter 'source', a generated Source
 		alSourcei(source, AL_DIRECT_FILTER, filter);
@@ -214,8 +219,7 @@ public final class EFXTest {
 				{
 					System.out.println("Successfully applied aux send filter");
 					// Remove Filter from Source Auxiliary Send
-					alSource3i(source, AL_AUXILIARY_SEND_FILTER, auxEffectSlots[0], 0,
-					           AL_FILTER_NULL);
+					alSource3i(source, AL_AUXILIARY_SEND_FILTER, auxEffectSlots[0], 0, AL_FILTER_NULL);
 					if ( alGetError() == AL_NO_ERROR ) {
 						System.out.println("Successfully removed filter");
 					}
@@ -236,14 +240,14 @@ public final class EFXTest {
 		}
 
 		// Cleanup
-		IntBuffer auxEffectSlotsBuf = (IntBuffer)BufferUtils.createIntBuffer(
-			auxEffectSlots.length).put(auxEffectSlots).rewind();
+		IntBuffer auxEffectSlotsBuf = (IntBuffer)BufferUtils.createIntBuffer(auxEffectSlots.length).put(auxEffectSlots).rewind();
 		alDeleteAuxiliaryEffectSlots(auxEffectSlotsBuf);
-		IntBuffer effectsBuf = (IntBuffer)BufferUtils.createIntBuffer(
-			effects.length).put(effects).rewind();
+		IntBuffer effectsBuf = (IntBuffer)BufferUtils.createIntBuffer(effects.length).put(effects).rewind();
 		alDeleteEffects(effectsBuf);
 		alDeleteFilters(filter);
-		AL.destroy(newContext);
+
+		newContext.destroy();
+		newContext.getDevice().close();
 	}
 
 	/** Plays a sound with various effects applied to it. */
@@ -272,8 +276,7 @@ public final class EFXTest {
 		alEffecti(reverbEffect, AL_EFFECT_TYPE, AL_EFFECT_REVERB);
 		alEffectf(reverbEffect, AL_REVERB_DECAY_TIME, 5.0f);
 		alAuxiliaryEffectSloti(effectSlot, AL_EFFECTSLOT_EFFECT, reverbEffect);
-		alSource3i(source, AL_AUXILIARY_SEND_FILTER, effectSlot, 0,
-		           AL_FILTER_NULL);
+		alSource3i(source, AL_AUXILIARY_SEND_FILTER, effectSlot, 0, AL_FILTER_NULL);
 
 		System.out.println("Playing sound with reverb ...");
 		alSourcePlay(source);
@@ -299,8 +302,7 @@ public final class EFXTest {
 		//Thread.sleep(7500);
 
 		// Cleanup
-		alSource3i(source, AL_AUXILIARY_SEND_FILTER, AL_EFFECTSLOT_NULL, 0,
-		           AL_FILTER_NULL);
+		alSource3i(source, AL_AUXILIARY_SEND_FILTER, AL_EFFECTSLOT_NULL, 0, AL_FILTER_NULL);
 		alAuxiliaryEffectSloti(effectSlot, AL_EFFECTSLOT_EFFECT, AL_EFFECT_NULL);
 		alDeleteEffects(reverbEffect);
 		alDeleteFilters(filter);
@@ -310,14 +312,14 @@ public final class EFXTest {
 		alEffecti(echoEffect, AL_EFFECT_TYPE, AL_EFFECT_ECHO);
 		//EXTEfx.alEffectf(echoEffect, EXTEfx.AL_ECHO_DELAY, 5.0f);
 		alAuxiliaryEffectSloti(effectSlot, AL_EFFECTSLOT_EFFECT, echoEffect);
-		alSource3i(source, AL_AUXILIARY_SEND_FILTER, effectSlot, 0,
-		           AL_FILTER_NULL);
+		alSource3i(source, AL_AUXILIARY_SEND_FILTER, effectSlot, 0, AL_FILTER_NULL);
 
 		System.out.println("Playing sound with echo effect ...");
 		alSourcePlay(source);
 		Thread.sleep(7500);
 
-		AL.destroy(alContext);
+		alContext.destroy();
+		alContext.getDevice().close();
 	}
 
 	/** Checks OpenAL for every EFX 1.0 effect and filter and prints the result to the console. */
@@ -326,101 +328,34 @@ public final class EFXTest {
 
 		System.out.println();
 		System.out.println("Checking supported effects ...");
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_NULL) ) {
-			System.out.println("AL_EFFECT_NULL is supported.");
-		} else {
-			System.out.println("AL_EFFECT_NULL is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_EAXREVERB) ) {
-			System.out.println("AL_EFFECT_EAXREVERB is supported.");
-		} else {
-			System.out.println("AL_EFFECT_EAXREVERB is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_REVERB) ) {
-			System.out.println("AL_EFFECT_REVERB is supported.");
-		} else {
-			System.out.println("AL_EFFECT_REVERB is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_CHORUS) ) {
-			System.out.println("AL_EFFECT_CHORUS is supported.");
-		} else {
-			System.out.println("AL_EFFECT_CHORUS is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_DISTORTION) ) {
-			System.out.println("AL_EFFECT_DISTORTION is supported.");
-		} else {
-			System.out.println("AL_EFFECT_DISTORTION is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_ECHO) ) {
-			System.out.println("AL_EFFECT_ECHO is supported.");
-		} else {
-			System.out.println("AL_EFFECT_ECHO is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_FLANGER) ) {
-			System.out.println("AL_EFFECT_FLANGER is supported.");
-		} else {
-			System.out.println("AL_EFFECT_FLANGER is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_FREQUENCY_SHIFTER) ) {
-			System.out.println("AL_EFFECT_FREQUENCY_SHIFTER is supported.");
-		} else {
-			System.out.println("AL_EFFECT_FREQUENCY_SHIFTER is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_VOCAL_MORPHER) ) {
-			System.out.println("AL_EFFECT_VOCAL_MORPHER is supported.");
-		} else {
-			System.out.println("AL_EFFECT_VOCAL_MORPHER is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_PITCH_SHIFTER) ) {
-			System.out.println("AL_EFFECT_PITCH_SHIFTER is supported.");
-		} else {
-			System.out.println("AL_EFFECT_PITCH_SHIFTER is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_RING_MODULATOR) ) {
-			System.out.println("AL_EFFECT_RING_MODULATOR is supported.");
-		} else {
-			System.out.println("AL_EFFECT_RING_MODULATOR is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_AUTOWAH) ) {
-			System.out.println("AL_EFFECT_AUTOWAH is supported.");
-		} else {
-			System.out.println("AL_EFFECT_AUTOWAH is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_COMPRESSOR) ) {
-			System.out.println("AL_EFFECT_COMPRESSOR is supported.");
-		} else {
-			System.out.println("AL_EFFECT_COMPRESSOR is NOT supported.");
-		}
-		if ( EFXUtil.isEffectSupported(AL_EFFECT_EQUALIZER) ) {
-			System.out.println("AL_EFFECT_EQUALIZER is supported.");
-		} else {
-			System.out.println("AL_EFFECT_EQUALIZER is NOT supported.");
-		}
+		check("AL_EFFECT_NULL", EFXUtil.isEffectSupported(AL_EFFECT_NULL));
+		check("AL_EFFECT_EAXREVERB", EFXUtil.isEffectSupported(AL_EFFECT_EAXREVERB));
+		check("AL_EFFECT_REVERB", EFXUtil.isEffectSupported(AL_EFFECT_REVERB));
+		check("AL_EFFECT_CHORUS", EFXUtil.isEffectSupported(AL_EFFECT_CHORUS));
+		check("AL_EFFECT_DISTORTION", EFXUtil.isEffectSupported(AL_EFFECT_DISTORTION));
+		check("AL_EFFECT_ECHO", EFXUtil.isEffectSupported(AL_EFFECT_ECHO));
+		check("AL_EFFECT_FLANGER", EFXUtil.isEffectSupported(AL_EFFECT_FLANGER));
+		check("AL_EFFECT_FREQUENCY_SHIFTER", EFXUtil.isEffectSupported(AL_EFFECT_FREQUENCY_SHIFTER));
+		check("AL_EFFECT_VOCAL_MORPHER", EFXUtil.isEffectSupported(AL_EFFECT_VOCAL_MORPHER));
+		check("AL_EFFECT_PITCH_SHIFTER", EFXUtil.isEffectSupported(AL_EFFECT_PITCH_SHIFTER));
+		check("AL_EFFECT_RING_MODULATOR", EFXUtil.isEffectSupported(AL_EFFECT_RING_MODULATOR));
+		check("AL_EFFECT_AUTOWAH", EFXUtil.isEffectSupported(AL_EFFECT_AUTOWAH));
+		check("AL_EFFECT_COMPRESSOR", EFXUtil.isEffectSupported(AL_EFFECT_COMPRESSOR));
+		check("AL_EFFECT_EQUALIZER", EFXUtil.isEffectSupported(AL_EFFECT_EQUALIZER));
 
 		System.out.println();
 		System.out.println("Checking supported filters ...");
-		if ( EFXUtil.isFilterSupported(AL_FILTER_NULL) ) {
-			System.out.println("AL_FILTER_NULL is supported.");
-		} else {
-			System.out.println("AL_FILTER_NULL is NOT supported.");
-		}
-		if ( EFXUtil.isFilterSupported(AL_FILTER_LOWPASS) ) {
-			System.out.println("AL_FILTER_LOWPASS is supported.");
-		} else {
-			System.out.println("AL_FILTER_LOWPASS is NOT supported.");
-		}
-		if ( EFXUtil.isFilterSupported(AL_FILTER_HIGHPASS) ) {
-			System.out.println("AL_FILTER_HIGHPASS is supported.");
-		} else {
-			System.out.println("AL_FILTER_HIGHPASS is NOT supported.");
-		}
-		if ( EFXUtil.isFilterSupported(AL_FILTER_BANDPASS) ) {
-			System.out.println("AL_FILTER_BANDPASS is supported.");
-		} else {
-			System.out.println("AL_FILTER_BANDPASS is NOT supported.");
-		}
+		check("AL_FILTER_NULL", EFXUtil.isFilterSupported(AL_FILTER_NULL));
+		check("AL_FILTER_LOWPASS", EFXUtil.isFilterSupported(AL_FILTER_LOWPASS));
+		check("AL_FILTER_HIGHPASS", EFXUtil.isFilterSupported(AL_FILTER_HIGHPASS));
+		check("AL_FILTER_BANDPASS", EFXUtil.isFilterSupported(AL_FILTER_BANDPASS));
 
-		AL.destroy(alContext);
+		alContext.destroy();
+		alContext.getDevice().close();
+	}
+
+	private static void check(String name, boolean supported) {
+		System.out.println(name + (supported ? " is supported." : " is NOT supported."));
 	}
 
 }
