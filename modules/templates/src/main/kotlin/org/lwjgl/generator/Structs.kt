@@ -8,7 +8,7 @@ import java.io.PrintWriter
 import java.util.*
 
 private val STRUCT = "struct"
-private val ANONYMOUS = "*"
+private val ANONYMOUS = "*" // very easy to introduce bugs, unless this is an invalid character in Java identifiers
 
 private open class StructMember(
 	val nativeType: NativeType,
@@ -116,7 +116,7 @@ class Struct(
 		members.add(StructMemberPadding(size, condition))
 	}
 
-	/** Unnamed nested member struct definition. */
+	/** Anonymous nested member struct definition. */
 	fun struct(init: Struct.() -> Unit) {
 		struct(ANONYMOUS, ANONYMOUS, init)
 	}
@@ -128,7 +128,7 @@ class Struct(
 		StructType(struct).member(name, documentation)
 	}
 
-	/** Unnamed nested member union definition. */
+	/** Anonymous nested member union definition. */
 	fun union(init: Struct.() -> Unit) {
 		union(ANONYMOUS, ANONYMOUS, init)
 	}
@@ -140,10 +140,12 @@ class Struct(
 		StructType(struct).member(name, documentation)
 	}
 
+	/** The nested struct's members are embedded in the parent struct. */
 	private val StructMember.isNestedStruct: Boolean
 		get() = nativeType is StructType && !nativeType.includesPointer && this !is StructMemberArray
 
-	private val StructMember.isNestedAnonymousStruct: Boolean
+	/** The nested struct is not defined elsewhere, it's part of the parent struct's definition */
+	private val StructMember.isNestedStructDefinition: Boolean
 		get() = isNestedStruct && (nativeType as StructType).name == ANONYMOUS
 
 	private val StructMember.nestedMembers: Sequence<StructMember>
@@ -178,7 +180,7 @@ class Struct(
 			*members.map {
 				tr(
 					td(it.name),
-					if ( it.isNestedAnonymousStruct )
+					if ( it.isNestedStructDefinition )
 						td((it.nativeType as StructType).definition.printStructLayout())
 					else {
 						val nativeType = if ( it.nativeType is StructType && !it.nativeType.includesPointer )
@@ -501,7 +503,7 @@ class Struct(
 				print("$indentation$field")
 
 				// Output nested field offsets
-				if ( member.isNestedAnonymousStruct )
+				if ( member.isNestedStructDefinition )
 					generateOffsetFields(member.nestedMembers, "$indentation\t", field, true) // recursion
 			}
 		}
@@ -509,7 +511,7 @@ class Struct(
 
 	private fun getMemberCount(members: List<StructMember>): Int {
 		var count = members.size
-		for (member in members.asSequence().filter { it.isNestedAnonymousStruct })
+		for (member in members.asSequence().filter { it.isNestedStructDefinition })
 			count += getMemberCount((member.nativeType as StructType).definition.members) // recursion
 		return count
 	}
@@ -536,7 +538,7 @@ class Struct(
 				}
 
 				// Output nested fields
-				if ( it.isNestedAnonymousStruct )
+				if ( it.isNestedStructDefinition )
 					index = generateOffsetInit((it.nativeType as StructType).definition.members, "$indentation\t", field, index) // recursion
 			}
 		}
@@ -556,7 +558,7 @@ class Struct(
 				println(",")
 			if ( it is StructMemberPadding ) {
 				print("$indentation\t__padding(${it.size}, ${it.condition ?: "true"})")
-			} else if ( it.isNestedAnonymousStruct ) {
+			} else if ( it.isNestedStructDefinition ) {
 				print("$indentation\t")
 				generateLayout((it.nativeType as StructType).definition, "$indentation\t", field)
 				//print(")")
@@ -609,7 +611,7 @@ class Struct(
 		members.forEachWithMore(more) { it, more ->
 			val method = it.field(parentMember)
 
-			if ( it.isNestedAnonymousStruct ) {
+			if ( it.isNestedStructDefinition ) {
 				generateMultiSetterParameters(it.nestedMembers, method, mode, more)
 				return@forEachWithMore
 			}
@@ -633,7 +635,7 @@ class Struct(
 		members.forEach {
 			val setter = it.field(parentMember)
 
-			if ( it.isNestedAnonymousStruct ) {
+			if ( it.isNestedStructDefinition ) {
 				generateMultiSetterSetters(it.nestedMembers, setter, mode)
 			} else {
 				val param = it.field(parentMember)
@@ -647,7 +649,7 @@ class Struct(
 
 	private val generateAlternativeMultiSetter: (Sequence<StructMember>) -> Boolean = { members ->
 		members.any {
-			if ( it.isNestedAnonymousStruct )
+			if ( it.isNestedStructDefinition )
 				generateAlternativeMultiSetter(it.nestedMembers)
 			else
 				it is StructMemberArray || it.nativeType.isPointerData
@@ -658,7 +660,7 @@ class Struct(
 		members.forEachWithMore(more) { it, more ->
 			val method = it.field(parentMember)
 
-			if ( it.isNestedAnonymousStruct ) {
+			if ( it.isNestedStructDefinition ) {
 				generateAlternativeMultiSetterParameters(it.nestedMembers, method, mode, more)
 				return@forEachWithMore
 			}
@@ -697,7 +699,7 @@ class Struct(
 		members.forEach {
 			val method = it.field(parentMember)
 
-			if ( it.isNestedAnonymousStruct )
+			if ( it.isNestedStructDefinition )
 				generateAlternativeMultiSetterSetters(it.nestedMembers, method, mode)
 			else
 				println("\t\t$method(${it.field(parentMember)});")
@@ -1163,7 +1165,7 @@ $indent */""")
 			index++
 
 			if ( it.isNestedStruct ) {
-				// Output anonymous inner structs
+				// Output nested structs
 				val structType = it.nativeType as StructType
 				if ( structType.name == ANONYMOUS )
 					index = generateNativeMembers(structType.definition.members, index, prefix = "$prefix${it.name}.") // recursion
