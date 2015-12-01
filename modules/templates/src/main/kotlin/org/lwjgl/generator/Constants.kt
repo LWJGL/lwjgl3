@@ -52,7 +52,7 @@ open class EnumValue(
 )
 
 class EnumValueExpression(
-	documentation: String? = null,
+	documentation: String,
 	val expression: String
 ) : EnumValue(documentation, null)
 
@@ -94,10 +94,16 @@ class ConstantBlock<T : Any>(
 				}
 
 				val ev = c.value as EnumValue
-				if ( ev.value != null )
-					value = ev.value
+				(
+					if ( ev is EnumValueExpression ) {
+						ConstantExpression(c.name, ev.expression)
+					} else {
+						if ( ev.value != null )
+							value = ev.value
 
-				Constant(c.name, value++).let {
+						Constant(c.name, value++)
+					}
+				).let {
 					if ( ev.documentation == null )
 						rootBlock.add(it)
 					else

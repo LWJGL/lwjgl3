@@ -429,7 +429,6 @@ class NativeClass(
 	infix fun String.enum(value: Int) = Constant(this, EnumValue(value = value))
 	fun String.enum(documentation: String, value: Int) = Constant(this, EnumValue(processDocumentation(documentation).toJavaDoc(), value))
 
-	infix fun String.enumExpr(expression: String) = Constant(this, EnumValueExpression(expression = expression))
 	fun String.enumExpr(documentation: String, expression: String) = Constant(this, EnumValueExpression(processDocumentation(documentation).toJavaDoc(), expression))
 
 	/** Adds a new constant whose value is an expression. */
