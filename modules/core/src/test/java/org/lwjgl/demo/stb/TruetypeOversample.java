@@ -203,9 +203,9 @@ public final class TruetypeOversample {
 
 		glViewport(0, 0, fbw, fbh);
 		if ( black_on_white )
-			glClearColor(255, 255, 255, 0);
+			glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 		else
-			glClearColor(0, 0, 0, 0);
+			glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glMatrixMode(GL_PROJECTION);
@@ -253,9 +253,9 @@ public final class TruetypeOversample {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		if ( black_on_white )
-			glColor3f(0, 0, 0);
+			glColor3f(0.0f, 0.0f, 0.0f);
 		else
-			glColor3f(1, 1, 1);
+			glColor3f(1.0f, 1.0f, 1.0f);
 
 		print(80, 30, sfont, "Controls:");
 		print(100, 60, sfont, "S: toggle font size");
