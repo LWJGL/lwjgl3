@@ -116,14 +116,24 @@ class Struct(
 		members.add(StructMemberPadding(size, condition))
 	}
 
-	/** Anonymous member struct definition. */
+	/** Unnamed nested member struct definition. */
+	fun struct(init: Struct.() -> Unit) {
+		struct(ANONYMOUS, ANONYMOUS, init)
+	}
+
+	/** Nested member struct definition. */
 	fun struct(name: String, documentation: String, init: Struct.() -> Unit) {
 		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, false, false, true, false)
 		struct.init()
 		StructType(struct).member(name, documentation)
 	}
 
-	/** Anonymous member union definition. */
+	/** Unnamed nested member union definition. */
+	fun union(init: Struct.() -> Unit) {
+		union(ANONYMOUS, ANONYMOUS, init)
+	}
+
+	/** Nested member union definition. */
 	fun union(name: String, documentation: String, init: Struct.() -> Unit) {
 		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, true, false, true, false)
 		struct.init()
@@ -232,6 +242,7 @@ class Struct(
 	public static final int
 """)
 				generateOffsetFields(visibleMembers)
+				println(";")
 			}
 
 			// Member offset initialization
@@ -479,19 +490,21 @@ class Struct(
 		more: Boolean = false
 	) {
 		members.forEachWithMore(more) { member, more ->
-			if ( more )
-				println(",")
+			if ( member.name === ANONYMOUS && member.isNestedStruct ) {
+				generateOffsetFields(member.nestedMembers, indentation, parentField, more) // recursion
+			} else {
+				if ( more )
+					println(",")
 
-			val field = member.offsetField(parentField)
+				val field = member.offsetField(parentField)
 
-			print("$indentation$field")
+				print("$indentation$field")
 
-			// Output nested field offsets
-			if ( member.isNestedAnonymousStruct )
-				generateOffsetFields(member.nestedMembers, "$indentation\t", field, true)
+				// Output nested field offsets
+				if ( member.isNestedAnonymousStruct )
+					generateOffsetFields(member.nestedMembers, "$indentation\t", field, true) // recursion
+			}
 		}
-		if ( parentField.isEmpty() )
-			println(";")
 	}
 
 	private fun getMemberCount(members: List<StructMember>): Int {
@@ -509,24 +522,23 @@ class Struct(
 	): Int {
 		var index = offset
 		members.forEach {
-			val field = it.offsetField(parentField)
-			try {
-				if ( it is StructMemberPadding )
-					return@forEach
+			if ( it.name === ANONYMOUS && it.isNestedStruct ) {
+				index = generateOffsetInit((it.nativeType as StructType).definition.members, indentation, parentField, index + 1) // recursion
+			} else {
+				val field = it.offsetField(parentField)
+				try {
+					if ( it is StructMemberPadding )
+						return@forEach
 
-				if ( it !is StructMemberPadding ) {
-					if ( nativeLayout )
-						println("$indentation$field = offsets.get($index);")
-					else
-						println("$indentation$field = layout.offsetof($index);")
+					println("$indentation$field = ${if ( nativeLayout ) "offsets.get" else "layout.offsetof"}($index);")
+				} finally {
+					index++
 				}
-			} finally {
-				index++
-			}
 
-			// Output nested fields
-			if ( it.isNestedAnonymousStruct )
-				index = generateOffsetInit((it.nativeType as StructType).definition.members, "$indentation\t", field, index) // recursion
+				// Output nested fields
+				if ( it.isNestedAnonymousStruct )
+					index = generateOffsetInit((it.nativeType as StructType).definition.members, "$indentation\t", field, index) // recursion
+			}
 		}
 		return index
 	}
@@ -696,7 +708,7 @@ class Struct(
 		m: StructMember,
 		parentStruct: Struct?,
 		parentField: String
-	) = if ( parentStruct == null )
+	) = if ( parentStruct == null || parentField.isEmpty() )
 		"$className.${m.offsetField}"
 	else if ( parentStruct.className === ANONYMOUS )
 		"${parentField}_${m.offsetField}"
@@ -717,7 +729,11 @@ class Struct(
 				val nestedStruct = (it.nativeType as StructType).definition
 				val structType = nestedStruct.className
 				if ( structType === ANONYMOUS )
-					generateStaticSetters(it.nestedMembers, nestedStruct, setter, field)
+					generateStaticSetters(
+						it.nestedMembers, nestedStruct,
+						if ( it.name === ANONYMOUS ) parentMember else setter,
+						if ( it.name === ANONYMOUS ) parentField else field
+					)
 				else {
 					println("\t/** Unsafe version of {@link #$setter($structType) $setter}. */")
 					println("\tpublic static void n$setter(long $STRUCT, $structType value) { memCopy(value.$ADDRESS, $STRUCT + $field, $structType.SIZEOF); }")
@@ -835,7 +851,7 @@ class Struct(
 			if ( it.isNestedStruct ) {
 				val structType = (it.nativeType as StructType).definition.className
 				if ( structType === ANONYMOUS )
-					generateSetters(accessMode, it.nestedMembers, field)
+					generateSetters(accessMode, it.nestedMembers, if ( field === ANONYMOUS ) parentMember else field)
 				else {
 					println("$indent/** Copies the specified {@link $structType} to the {@code $field} field. */")
 					println("${indent}public $returnType $setter($structType value) { n$setter($ADDRESS, value); return this; }")
@@ -911,7 +927,11 @@ class Struct(
 				val nestedStruct = (it.nativeType as StructType).definition
 				val structType = nestedStruct.className
 				if ( structType === ANONYMOUS )
-					generateStaticGetters(it.nestedMembers, nestedStruct, getter, field)
+					generateStaticGetters(
+						it.nestedMembers, nestedStruct,
+						if ( it.name === ANONYMOUS ) parentMember else getter,
+						if ( it.name === ANONYMOUS ) parentField else field
+					)
 				else {
 					println("\t/** Unsafe version of {@link #$getter}. */")
 					println("\tpublic static $structType n$getter(long $STRUCT) { return new $structType($STRUCT + $field); }")
@@ -1015,7 +1035,7 @@ class Struct(
 				val nestedStruct = (it.nativeType as StructType).definition
 				val structType = nestedStruct.className
 				if ( structType === ANONYMOUS )
-					generateGetters(accessMode, it.nestedMembers, getter)
+					generateGetters(accessMode, it.nestedMembers, if ( it.name === ANONYMOUS ) parentMember else getter)
 				else {
 					println("$indent/** Returns a {@link $structType} view of the {@code $getter} field. */")
 					println("${indent}public $structType $getter() { return n$getter($ADDRESS); }")
