@@ -30,7 +30,7 @@ val PGPU_DEVICE = StructType(
 			{@code GPU_DEVICE}.
 			"""
 		)
-		CHAR.member(
+		CHAR.string(
 			"DeviceName",
 			"""
 			a string identifying the display device name. This will be the same string as stored in the {@code DeviceName} field of the {@code DISPLAY_DEVICE}
@@ -38,7 +38,7 @@ val PGPU_DEVICE = StructType(
 			""",
 			size = 32
 		)
-		CHAR.member(
+		CHAR.string(
 			"DeviceString",
 			"""
 			a string describing the GPU for this display device. It is the same string as stored in the {@code DeviceString} field in the

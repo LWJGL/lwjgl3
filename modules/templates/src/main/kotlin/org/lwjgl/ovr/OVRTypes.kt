@@ -221,11 +221,11 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mu
 
 	ovrHmdType.member("Type", "this HMD's type")
 	padding(4, "Pointer.BITS64")
-	charUTF8.member("ProductName", "name string describing the product: \"Oculus Rift DK1\", etc.", size = 64)
-	charUTF8.member("Manufacturer", "string describing the manufacturer. Usually \"Oculus\".", size = 64)
+	charUTF8.string("ProductName", "name string describing the product: \"Oculus Rift DK1\", etc.", size = 64)
+	charUTF8.string("Manufacturer", "string describing the manufacturer. Usually \"Oculus\".", size = 64)
 	short.member("VendorId", "HID Vendor ID of the device")
 	short.member("ProductId", "HID Product ID of the device")
-	charASCII.member("SerialNumber", "sensor (and display) serial number", size = 24)
+	charASCII.string("SerialNumber", "sensor (and display) serial number", size = 24)
 	short.member("FirmwareMajor", "sensor firmware major version number")
 	short.member("FirmwareMinor", "sensor firmware minor version number")
 
