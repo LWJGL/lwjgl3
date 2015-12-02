@@ -1013,7 +1013,7 @@ class Struct(
 				} else if ( it.nativeType is StructType ) {
 					val structType = it.nativeType.definition.className
 					println("\t/** Unsafe version of {@link #$getter}. */")
-					println("\tpublic static $structType n${getter}Struct(long $STRUCT) { return new $structType(memGetAddress($STRUCT + $field)); }")
+					println("\tpublic static $structType n$getter(long $STRUCT) { return new $structType(memGetAddress($STRUCT + $field)); }")
 				} else if ( it.nativeType.isPointerData ) {
 					val bufferType = it.nativeType.javaMethodType.simpleName
 					println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
@@ -1093,7 +1093,7 @@ class Struct(
 				} else if ( it.nativeType is StructType ) {
 					val structType = it.nativeType.definition.className
 					println("$indent/** Returns a {@link $structType} view of the struct pointed to by the {@code $getter} field. */")
-					println("${indent}public ${it.nativeType.definition.className} $getter() { return n${getter}Struct($ADDRESS); }")
+					println("${indent}public ${it.nativeType.definition.className} $getter() { return n$getter($ADDRESS); }")
 				} else if ( it.nativeType.isPointerData ) {
 					val bufferType = it.nativeType.javaMethodType.simpleName
 					println(
