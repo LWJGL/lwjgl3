@@ -241,7 +241,7 @@ fun config() {
 
 		struct("raw", "") {
 			cl_uint.member("type", "")
-			cl_uint.member("data", "", size = 5)
+			cl_uint.array("data", "", size = 5)
 		}
 		struct("pcie", "") {
 			cl_uint.member("type", "")

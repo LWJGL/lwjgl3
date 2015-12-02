@@ -103,7 +103,7 @@ class Struct(
 	}
 
 	// Array field
-	fun NativeType.member(name: String, documentation: String, size: Int) {
+	fun NativeType.array(name: String, documentation: String, size: Int) {
 		members.add(StructMemberArray(this, name, documentation, size))
 	}
 
