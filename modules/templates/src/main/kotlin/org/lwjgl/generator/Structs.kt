@@ -293,7 +293,7 @@ class Struct(
 	}
 
 	/** Creates a {@link $className} instance at the specified memory address. */
-	public $className(long struct) {
+	${access.modifier}$className(long struct) {
 		this(struct, null);
 	}
 
@@ -303,7 +303,7 @@ class Struct(
 	 *
 	 * <p>The created instance holds a strong reference to the container object.</p>
 	 */
-	public $className(ByteBuffer container) {
+	${access.modifier}$className(ByteBuffer container) {
 		this(memAddress(container), container);
 	}
 
