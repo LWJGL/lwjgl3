@@ -227,7 +227,7 @@ class Struct(
 		println("import org.lwjgl.*;")
 		println("import org.lwjgl.system.*;\n")
 
-		if ( mutable )
+		if ( mutable && members.isNotEmpty() )
 			println("import static org.lwjgl.system.Checks.*;")
 		println("import static org.lwjgl.system.MemoryUtil.*;")
 
