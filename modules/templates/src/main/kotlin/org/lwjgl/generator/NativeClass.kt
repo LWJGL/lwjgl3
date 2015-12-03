@@ -413,8 +413,8 @@ class NativeClass(
 
 	// DSL extensions
 
-	operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<out T>): ConstantBlock<T> {
-		val block = ConstantBlock(this@NativeClass, this, processDocumentation(documentation).toJavaDoc(), *constants)
+	operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<out T>, access: Access = Access.PUBLIC): ConstantBlock<T> {
+		val block = ConstantBlock(this@NativeClass, access, this, processDocumentation(documentation).toJavaDoc(), *constants)
 		constantBlocks.add(block)
 		return block
 	}

@@ -63,6 +63,7 @@ class ConstantExpression<T : Any>(name: String, val expression: String) : Consta
 
 class ConstantBlock<T : Any>(
 	val nativeClass: NativeClass,
+	var access: Access,
 	val constantType: ConstantType<T>,
 	val documentation: String,
 	vararg val constants: Constant<out T>
@@ -107,12 +108,12 @@ class ConstantBlock<T : Any>(
 					if ( ev.documentation == null )
 						rootBlock.add(it)
 					else
-						enumBlocks.add(ConstantBlock(nativeClass, IntConstant, ev.documentation, it))
+						enumBlocks.add(ConstantBlock(nativeClass, access, IntConstant, ev.documentation, it))
 				}
 			}
 
 			if ( rootBlock.isNotEmpty() )
-				ConstantBlock(nativeClass, IntConstant, this@ConstantBlock.documentation, *rootBlock.toTypedArray()).generate(writer)
+				ConstantBlock(nativeClass, access, IntConstant, this@ConstantBlock.documentation, *rootBlock.toTypedArray()).generate(writer)
 
 			for (b in enumBlocks)
 				b.generate(writer)
@@ -124,7 +125,7 @@ class ConstantBlock<T : Any>(
 		println();
 		println(documentation)
 
-		print("\tpublic static final ${constantType.javaType}")
+		print("\t${access.modifier}static final ${constantType.javaType}")
 
 		val indent: String
 		if ( constants.size == 1 ) {
