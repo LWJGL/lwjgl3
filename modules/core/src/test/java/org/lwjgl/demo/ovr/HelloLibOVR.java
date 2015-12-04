@@ -31,7 +31,7 @@ public final class HelloLibOVR {
 		};
 
 		OVRInitParams initParams = OVRInitParams.calloc();
-		initParams.LogCallback(callback.address());
+		initParams.LogCallback(callback);
 		initParams.Flags(ovrInit_Debug);
 
 		System.out.println("ovr_Initialize = " + ovr_Initialize(initParams));

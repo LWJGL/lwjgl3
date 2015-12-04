@@ -637,11 +637,11 @@ class Struct(
 
 			val param = it.field(parentMember)
 
-			when {
-				it is StructMemberArray -> print("long $param,\n\t\tint ${param}Bytes")
-				it.nativeType.isPointer -> print("long $param")
-				else                    -> print("${it.nativeType.javaMethodType.simpleName} $param")
-			}
+			print(if (it.nativeType is CallbackType)
+				"${it.nativeType.className} $param"
+			else
+				"${it.nativeType.javaMethodType.simpleName} $param"
+			)
 		}
 	}
 
@@ -649,15 +649,10 @@ class Struct(
 		members.forEach {
 			val setter = it.field(parentMember)
 
-			if ( it.isNestedStructDefinition ) {
+			if ( it.isNestedStructDefinition )
 				generateMultiSetterSetters(it.nestedMembers, setter, mode)
-			} else {
-				val param = it.field(parentMember)
-				println(if ( it is StructMemberArray )
-					"\t\t$setter($param, ${param}Bytes);"
-				else
-					"\t\t$setter($param);")
-			}
+			else
+				println("\t\t$setter(${it.field(parentMember)});")
 		}
 	}
 
@@ -708,7 +703,9 @@ class Struct(
 					print("$structType.Buffer $param")
 				else
 					print("$structType $param")
-			} else
+			} else if ( it.nativeType is CallbackType )
+				"${it.nativeType.className} $param"
+			else
 				print("${it.nativeType.javaMethodType.simpleName} $param")
 		}
 	}
@@ -762,11 +759,17 @@ class Struct(
 				// Setter
 
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
-					val javaType = it.nativeType.javaMethodType.simpleName
-					val bufferMethod = getBufferMethod(it, javaType)
+					if ( it.nativeType is CallbackType ) {
+						val callbackType = it.nativeType.className
+						println("\t/** Unsafe version of {@link #$setter($callbackType) $setter}. */")
+						println("\tpublic static void n$setter(long $STRUCT, $callbackType value) { memPutAddress($STRUCT+ $field, value.address()); }")
+					} else {
+						val javaType = it.nativeType.javaMethodType.simpleName
+						val bufferMethod = getBufferMethod(it, javaType)
 
-					println("\t/** Unsafe version of {@link #$setter($javaType) $setter}. */")
-					println("\tpublic static void n$setter(long $STRUCT, $javaType value) { memPut$bufferMethod($STRUCT + $field, value${if ( javaType == "boolean" ) " ? (byte)1 : (byte)0" else ""}); }")
+						println("\t/** Unsafe version of {@link #$setter($javaType) $setter}. */")
+						println("\tpublic static void n$setter(long $STRUCT, $javaType value) { memPut$bufferMethod($STRUCT + $field, value${if ( javaType == "boolean" ) " ? (byte)1 : (byte)0" else ""}); }")
+					}
 				}
 
 				// Alternative setters
@@ -885,8 +888,14 @@ class Struct(
 				// Setter
 
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
-					println("$indent/** Sets the specified value to the {@code $field} field. */")
-					println("${indent}public $returnType $setter(${it.nativeType.javaMethodType.simpleName} value) { n$setter($ADDRESS, value); return this; }")
+					if ( it.nativeType is CallbackType ) {
+						val callbackType = it.nativeType.className
+						println("$indent/** Sets the address of the specified {@link $callbackType} to the {@code $field} field. */")
+						println("${indent}public $returnType $setter($callbackType value) { n$setter($ADDRESS, value); return this; }")
+					} else {
+						println("$indent/** Sets the specified value to the {@code $field} field. */")
+						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType.simpleName} value) { n$setter($ADDRESS, value); return this; }")
+					}
 				}
 
 				// Alternative setters
