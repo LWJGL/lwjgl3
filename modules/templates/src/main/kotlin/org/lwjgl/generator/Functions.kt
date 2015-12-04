@@ -606,13 +606,7 @@ class NativeClassFunction(
 			if ( returns.isBufferPointer ) {
 				print("\t\t")
 				if ( returns.nativeType is StructType ) {
-					val structType = returns.nativeType.definition.className
-					if ( returns has StructBuffer ) {
-						val autoSizeParam = getParam { it has AutoSizeResult }
-						println("return $structType.createBuffer($RESULT, $API_BUFFER.intValue(${autoSizeParam.name}));")
-					} else {
-						println("return $structType.create($RESULT);")
-					}
+					println("return ${returns.nativeType.definition.className}.create($RESULT${if ( returns has StructBuffer ) ", $API_BUFFER.intValue(${getParam { it has AutoSizeResult }.name})" else ""});")
 				} else {
 					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
@@ -1153,13 +1147,7 @@ class NativeClassFunction(
 			if ( returns.isBufferPointer ) {
 				print("\t\t")
 				if ( returns.nativeType is StructType ) {
-					val structType = returns.nativeType.definition.className
-					if ( returns has StructBuffer ) {
-						val autoSizeParam = getParam { it has AutoSizeResult }
-						println("return $structType.createBuffer($RESULT, ${autoSizeParam.name}.get(${autoSizeParam.name}.position()));")
-					} else {
-						println("return $structType.create($RESULT);")
-					}
+					println("return ${returns.nativeType.definition.className}.create($RESULT${if ( returns has StructBuffer ) getParam { it has AutoSizeResult }.let { ", ${it.name}.get(${it.name}.position()" } else ""});")
 				} else {
 					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )

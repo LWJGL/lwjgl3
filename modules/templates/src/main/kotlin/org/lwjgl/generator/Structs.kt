@@ -397,7 +397,7 @@ class Struct(
 	 *
 	 * @param capacity the buffer capacity
 	 */
-	public static Buffer mallocBuffer(int capacity) {
+	public static Buffer malloc(int capacity) {
 		return new Buffer(memAlloc(capacity * SIZEOF));
 	}
 
@@ -406,7 +406,7 @@ class Struct(
 	 *
 	 * @param capacity the buffer capacity
 	 */
-	public static Buffer callocBuffer(int capacity) {
+	public static Buffer calloc(int capacity) {
 		return new Buffer(memCalloc(capacity, SIZEOF));
 	}
 
@@ -415,7 +415,7 @@ class Struct(
 	 *
 	 * @param capacity the buffer capacity
 	 */
-	public static Buffer createBuffer(int capacity) {
+	public static Buffer create(int capacity) {
 		return new Buffer(BufferUtils.createByteBuffer(capacity * SIZEOF), SIZEOF);
 	}
 
@@ -425,7 +425,7 @@ class Struct(
 	 * @param address  the memory address
 	 * @param capacity the buffer capacity
 	 */
-	public static Buffer createBuffer(long address, int capacity) {
+	public static Buffer create(long address, int capacity) {
 		return address == NULL ? null : new Buffer(memByteBuffer(address, capacity * SIZEOF), SIZEOF);
 	}
 """)
@@ -1013,7 +1013,7 @@ class Struct(
 						} else {
 							println("\t/** Unsafe version of {@link #$getter}. */")
 							println("\tpublic static $nestedStruct.Buffer n$getter(long $STRUCT) {")
-							println("\t\treturn $nestedStruct.createBuffer($STRUCT + $field, ${it.size});")
+							println("\t\treturn $nestedStruct.create($STRUCT + $field, ${it.size});")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
@@ -1052,7 +1052,7 @@ class Struct(
 					val structType = it.nativeType.definition.className
 					println("\t/** Unsafe version of {@link #$getter}. */")
 					println(if ( it is StructMemberBuffer )
-						"\tpublic static $structType.Buffer n$getter(long $STRUCT, int capacity) { return $structType.createBuffer(memGetAddress($STRUCT + $field), capacity); }"
+						"\tpublic static $structType.Buffer n$getter(long $STRUCT, int capacity) { return $structType.create(memGetAddress($STRUCT + $field), capacity); }"
 					else
 						"\tpublic static $structType n$getter(long $STRUCT) { return $structType.create(memGetAddress($STRUCT + $field)); }"
 					)

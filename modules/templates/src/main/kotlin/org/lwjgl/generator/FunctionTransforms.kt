@@ -265,22 +265,19 @@ class BufferAutoSizeReturnTransform(
 	val lengthExpression: String,
 	val encoding: String? = null
 ) : FunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String): String {
-		val elementType: NativeType = (outParam.nativeType as PointerType).elementType!!
-
-		if ( elementType is StructType )
-			return "${elementType.definition.className}.Buffer"
+	override fun transformDeclaration(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
+		if ( it is StructType )
+			"${it.definition.className}.Buffer"
 		else
-			return "${elementType.javaMethodType.simpleName}"
+			"${it.javaMethodType.simpleName}"
 	}
 
-	override fun transformCall(param: ReturnValue, original: String): String {
-		val elementType: NativeType = (outParam.nativeType as PointerType).elementType!!
-
-		if ( elementType is StructType )
-			return "\t\treturn ${elementType.definition.className}.createBuffer($API_BUFFER.pointerValue(${outParam.name}), $lengthExpression);"
+	override fun transformCall(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
+		"\t\treturn ${if (it is StructType)
+			"${it.definition.className}.create"
 		else
-			return "\t\treturn mem${elementType.javaMethodType.simpleName}($API_BUFFER.pointerValue(${outParam.name}), $lengthExpression);"
+			"mem${it.javaMethodType.simpleName}"
+		}($API_BUFFER.pointerValue(${outParam.name}), $lengthExpression);"
 	}
 }
 
@@ -296,7 +293,7 @@ class BufferReturnTransform(
 			"\t\treturn memDecode$encoding($API_BUFFER.buffer(), $API_BUFFER.intValue($lengthParam), ${outParam.name});"
 		else if ( outParam.nativeType.mapping !== PointerMapping.DATA_BYTE )
 			"\t\t${outParam.name}.limit($API_BUFFER.intValue($lengthParam));\n" +
-				"\t\treturn ${outParam.name}.slice();"
+			"\t\treturn ${outParam.name}.slice();"
 		else
 			"\t\treturn memSlice(${outParam.name}, $API_BUFFER.intValue($lengthParam));"
 	}
@@ -335,10 +332,7 @@ open class PointerArrayTransform(val paramType: String) : FunctionTransform<Para
 			return
 
 		println((if ( paramType.isNotEmpty() ) param.name else pointerArray.singleName).let {
-			if ( pointerArray.elementType is CharSequenceType )
-				"\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam${pointerArray.elementType.charMapping.charset}($it);"
-			else
-				"\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam($it);"
+			"\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam${if ( pointerArray.elementType is CharSequenceType ) pointerArray.elementType.charMapping.charset else ""}($it);"
 		})
 	}
 

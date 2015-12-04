@@ -42,7 +42,7 @@ public final class Truetype extends FontDemo {
 		int BITMAP_H = 512;
 
 		int texID = glGenTextures();
-		STBTTBakedChar.Buffer cdata = STBTTBakedChar.mallocBuffer(96);
+		STBTTBakedChar.Buffer cdata = STBTTBakedChar.malloc(96);
 
 		try {
 			ByteBuffer ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 160 * 1024);

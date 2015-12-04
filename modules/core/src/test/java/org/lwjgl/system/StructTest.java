@@ -65,7 +65,7 @@ public class StructTest {
 	}
 
 	public void testStructBuffer() {
-		FFIType.Buffer b = FFIType.callocBuffer(1);
+		FFIType.Buffer b = FFIType.calloc(1);
 
 		// copy
 		FFIType copy = FFIType.malloc();
@@ -104,7 +104,7 @@ public class StructTest {
 	}
 
 	public void testStructBufferIteration() {
-		FFIType.Buffer b = FFIType.callocBuffer(10);
+		FFIType.Buffer b = FFIType.calloc(10);
 
 		while ( b.hasRemaining() ) {
 			int pos = b.position();
@@ -123,7 +123,7 @@ public class StructTest {
 	}
 
 	public void testStructBufferIterationAbs() {
-		FFIType.Buffer b = FFIType.callocBuffer(10);
+		FFIType.Buffer b = FFIType.calloc(10);
 
 		int i = 0;
 		while ( i < b.capacity() ) {

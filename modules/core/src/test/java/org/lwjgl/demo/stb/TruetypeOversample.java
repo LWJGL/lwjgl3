@@ -161,7 +161,7 @@ public final class TruetypeOversample {
 
 	private void load_fonts() {
 		font_tex = glGenTextures();
-		chardata = STBTTPackedchar.mallocBuffer(6 * 128);
+		chardata = STBTTPackedchar.malloc(6 * 128);
 
 		try {
 			ByteBuffer ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 160 * 1024);
