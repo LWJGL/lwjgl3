@@ -44,11 +44,11 @@ public interface Pointer {
 
 		protected final long address;
 
-		protected Default(long pointer) {
-			if ( Checks.CHECKS && pointer == NULL )
+		protected Default(long address) {
+			if ( Checks.CHECKS && address == NULL )
 				throw new NullPointerException();
 
-			this.address = pointer;
+			this.address = address;
 		}
 
 		@Override
