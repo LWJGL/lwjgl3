@@ -866,6 +866,7 @@ class Struct(
 		members: Sequence<StructMember>,
 		parentMember: String = ""
 	) {
+		val n = if ( accessMode === AccessMode.INSTANCE ) "n" else "$className.n"
 		members.forEach {
 			val setter = it.field(parentMember)
 			val field = it.name
@@ -882,7 +883,7 @@ class Struct(
 					generateSetters(accessMode, it.nestedMembers, if ( field === ANONYMOUS ) parentMember else field)
 				else {
 					println("$indent/** Copies the specified {@link $structType} to the {@code $field} field. */")
-					println("${indent}public $returnType $setter($structType value) { n$setter($ADDRESS, value); return this; }")
+					println("${indent}public $returnType $setter($structType value) { $n$setter($ADDRESS, value); return this; }")
 				}
 			} else {
 				// Setter
@@ -891,10 +892,10 @@ class Struct(
 					if ( it.nativeType is CallbackType ) {
 						val callbackType = it.nativeType.className
 						println("$indent/** Sets the address of the specified {@link $callbackType} to the {@code $field} field. */")
-						println("${indent}public $returnType $setter($callbackType value) { n$setter($ADDRESS, value); return this; }")
+						println("${indent}public $returnType $setter($callbackType value) { $n$setter($ADDRESS, value); return this; }")
 					} else {
 						println("$indent/** Sets the specified value to the {@code $field} field. */")
-						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType.simpleName} value) { n$setter($ADDRESS, value); return this; }")
+						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType.simpleName} value) { $n$setter($ADDRESS, value); return this; }")
 					}
 				}
 
@@ -905,36 +906,36 @@ class Struct(
 						val structType = it.nativeType.definition.className
 						if ( it.nativeType.includesPointer ) {
 							println("$indent/** Copies the specified {@link PointerBuffer} to the {@code $field} field. */")
-							println("${indent}public $returnType $setter(PointerBuffer value) { n$setter($ADDRESS, value); return this; }")
+							println("${indent}public $returnType $setter(PointerBuffer value) { $n$setter($ADDRESS, value); return this; }")
 							println("$indent/** Copies the address of the specified {@link $structType} at the specified index of the {@code $field} field. */")
 						} else {
 							println("$indent/** Copies the specified {@link $structType.Buffer} to the {@code $field} field. */")
-							println("${indent}public $returnType $setter($structType.Buffer value) { n$setter($ADDRESS, value); return this; }")
+							println("${indent}public $returnType $setter($structType.Buffer value) { $n$setter($ADDRESS, value); return this; }")
 							println("$indent/** Copies the specified {@link $structType} at the specified index of the {@code $field} field. */")
 						}
-						println("${indent}public $returnType $setter(int index, $structType value) { n$setter($ADDRESS, index, value); return this; }")
+						println("${indent}public $returnType $setter(int index, $structType value) { $n$setter($ADDRESS, index, value); return this; }")
 					} else if ( it is StructMemberCharArray ) {
 						println("$indent/** Copies the specified encoded string to the {@code $field} field. */")
-						println("${indent}public $returnType $setter(ByteBuffer value) { n$setter($ADDRESS, value); return this; }")
+						println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
 						println("$indent/** Encodes the specified {@link CharSequence} to the {@code $field} field. */")
-						println("${indent}public $returnType $setter(CharSequence value) { n$setter($ADDRESS, value); return this; }")
+						println("${indent}public $returnType $setter(CharSequence value) { $n$setter($ADDRESS, value); return this; }")
 					} else {
 						val bufferType = (it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName
 						println("$indent/** Copies the specified {@link $bufferType} to the {@code $field} field. */")
-						println("${indent}public $returnType $setter($bufferType value) { n$setter($ADDRESS, value); return this; }")
+						println("${indent}public $returnType $setter($bufferType value) { $n$setter($ADDRESS, value); return this; }")
 						println("$indent/** Sets the specified value at the specified index of the {@code $field} field. */")
-						println("${indent}public $returnType $setter(int index, ${it.nativeType.mapping.javaMethodType} value) { n$setter($ADDRESS, index, value); return this; }")
+						println("${indent}public $returnType $setter(int index, ${it.nativeType.mapping.javaMethodType} value) { $n$setter($ADDRESS, index, value); return this; }")
 					}
 				} else if ( it.nativeType is CharSequenceType ) {
 					println("$indent/** Sets the address of the specified encoded string to the {@code $field} field. */")
-					println("${indent}public $returnType $setter(ByteBuffer value) { n$setter($ADDRESS, value); return this; }")
+					println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
 					println(
 						"""	/**
 	 * Encodes the specified {@link CharSequence} and sets the address of the encoded string to the {@code $field} field.
 	 *
 	 * <p>The encoded string must be explicitly freed with {@link MemoryUtil#memFree memFree}.</p>
 	*/""")
-					println("${indent}public $returnType $setter(CharSequence value) { n$setter($ADDRESS, value); return this; }")
+					println("${indent}public $returnType $setter(CharSequence value) { $n$setter($ADDRESS, value); return this; }")
 				} else if ( it.nativeType.isPointerData ) {
 					val pointerType = if ( it.nativeType is StructType )
 						it.nativeType.definition.className
@@ -942,10 +943,10 @@ class Struct(
 						it.nativeType.javaMethodType.simpleName
 					if ( it is StructMemberBuffer ) {
 						println("$indent/** Sets the address of the specified {@link $pointerType.Buffer} to the {@code $field} field. */")
-						println("${indent}public $returnType $setter($pointerType.Buffer value) { n$setter($ADDRESS, value); return this; }")
+						println("${indent}public $returnType $setter($pointerType.Buffer value) { $n$setter($ADDRESS, value); return this; }")
 					} else {
 						println("$indent/** Sets the address of the specified {@link $pointerType} to the {@code $field} field. */")
-						println("${indent}public $returnType $setter($pointerType value) { n$setter($ADDRESS, value); return this; }")
+						println("${indent}public $returnType $setter($pointerType value) { $n$setter($ADDRESS, value); return this; }")
 					}
 				}
 			}
@@ -1069,6 +1070,7 @@ class Struct(
 		members: Sequence<StructMember>,
 		parentMember: String = ""
 	) {
+		val n = if ( accessMode === AccessMode.INSTANCE ) "n" else "$className.n"
 		members.forEach {
 			val getter = it.field(parentMember)
 
@@ -1081,7 +1083,7 @@ class Struct(
 					generateGetters(accessMode, it.nestedMembers, if ( it.name === ANONYMOUS ) parentMember else getter)
 				else {
 					println("$indent/** Returns a {@link $structType} view of the {@code $getter} field. */")
-					println("${indent}public $structType $getter() { return n$getter($ADDRESS); }")
+					println("${indent}public $structType $getter() { return $n$getter($ADDRESS); }")
 				}
 			} else {
 				// Getter
@@ -1091,10 +1093,10 @@ class Struct(
 						val callbackType = it.nativeType.className
 
 						println("$indent/** Returns the {@code $callbackType} instance at the {@code $getter} field. */")
-						println("${indent}public $callbackType $getter() { return n$getter($ADDRESS); }")
+						println("${indent}public $callbackType $getter() { return $n$getter($ADDRESS); }")
 					} else {
 						println("$indent/** Returns the value of the {@code $getter} field. */")
-						println("${indent}public ${it.nativeType.javaMethodType.simpleName} $getter() { return n$getter($ADDRESS); }")
+						println("${indent}public ${it.nativeType.javaMethodType.simpleName} $getter() { return $n$getter($ADDRESS); }")
 					}
 				}
 
@@ -1105,40 +1107,40 @@ class Struct(
 						val structType = it.nativeType.definition.className
 						if (  it.nativeType.includesPointer ) {
 							println("$indent/** Returns a {@link PointerBuffer} view of the {@code $getter} field. */")
-							println("${indent}public PointerBuffer $getter() { return n$getter($ADDRESS); }")
+							println("${indent}public PointerBuffer $getter() { return $n$getter($ADDRESS); }")
 							println("$indent/** Returns a {@link $structType} view of the pointer at the specified index of the {@code $getter}. */")
-							println("${indent}public $structType $getter(int index) { return n$getter($ADDRESS, index); }")
+							println("${indent}public $structType $getter(int index) { return $n$getter($ADDRESS, index); }")
 						} else {
 							println("$indent/** Returns a {@link $structType}.Buffer view of the {@code $getter} field. */")
-							println("${indent}public $structType.Buffer $getter() { return n$getter($ADDRESS); }")
+							println("${indent}public $structType.Buffer $getter() { return $n$getter($ADDRESS); }")
 							println("$indent/** Returns a {@link $structType} view of the struct at the specified index of the {@code $getter} field. */")
-							println("${indent}public $structType $getter(int index) { return n$getter($ADDRESS, index); }")
+							println("${indent}public $structType $getter(int index) { return $n$getter($ADDRESS, index); }")
 						}
 					} else if ( it is StructMemberCharArray ) {
 						println("$indent/** Returns a {@link ByteBuffer} view of the {@code $getter} field. */")
-						println("${indent}public ByteBuffer $getter() { return n$getter($ADDRESS); }")
+						println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")
 						println("$indent/** Decodes the null-terminated string stored in the {@code $getter} field. */")
-						println("${indent}public String ${getter}String() { return n${getter}String($ADDRESS); }")
+						println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
 					} else {
 						val bufferType = (it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName
 						println("$indent/** Returns a {@link $bufferType} view of the {@code $getter} field. */")
-						println("${indent}public $bufferType $getter() { return n$getter($ADDRESS); }")
+						println("${indent}public $bufferType $getter() { return $n$getter($ADDRESS); }")
 						println("$indent/** Returns the value at the specified index of the {@code $getter} field. */")
-						println("${indent}public ${it.nativeType.javaMethodType.simpleName} $getter(int index) { return n$getter($ADDRESS, index); }")
+						println("${indent}public ${it.nativeType.javaMethodType.simpleName} $getter(int index) { return $n$getter($ADDRESS, index); }")
 					}
 				} else if ( it.nativeType is CharSequenceType ) {
 					println("$indent/** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code $getter} field. */")
-					println("${indent}public ByteBuffer $getter() { return n$getter($ADDRESS); }")
+					println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")
 					println("$indent/** Decodes the null-terminated string pointed to by the {@code $getter} field. */")
-					println("${indent}public String ${getter}String() { return n${getter}String($ADDRESS); }")
+					println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
 				} else if ( it.nativeType is StructType ) {
 					val structType = it.nativeType.definition.className
 					if ( it is StructMemberBuffer ) {
 						println("$indent/** Returns a {@link $structType.Buffer} view of the struct array pointed to by the {@code $getter} field. */")
-						println("${indent}public $structType.Buffer $getter(int capacity) { return n$getter($ADDRESS, capacity); }")
+						println("${indent}public $structType.Buffer $getter(int capacity) { return $n$getter($ADDRESS, capacity); }")
 					} else {
 						println("$indent/** Returns a {@link $structType} view of the struct pointed to by the {@code $getter} field. */")
-						println("${indent}public $structType $getter() { return n$getter($ADDRESS); }")
+						println("${indent}public $structType $getter() { return $n$getter($ADDRESS); }")
 					}
 				} else if ( it.nativeType.isPointerData ) {
 					val bufferType = it.nativeType.javaMethodType.simpleName
@@ -1148,7 +1150,7 @@ $indent * Returns a {@link $bufferType} view of the data pointed to by the {@cod
 $indent *
 $indent * @param $BUFFER_CAPACITY_PARAM the number of elements in the returned {@link $bufferType}
 $indent */""")
-					println("${indent}public $bufferType $getter(int $BUFFER_CAPACITY_PARAM) { return n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
+					println("${indent}public $bufferType $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
 				}
 			}
 		}
