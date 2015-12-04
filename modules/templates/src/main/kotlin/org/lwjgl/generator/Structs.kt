@@ -416,7 +416,7 @@ class Struct(
 	 * @param capacity the buffer capacity
 	 */
 	public static Buffer create(int capacity) {
-		return new Buffer(BufferUtils.createByteBuffer(capacity * SIZEOF), SIZEOF);
+		return new Buffer(BufferUtils.createByteBuffer(capacity * SIZEOF), true);
 	}
 
 	/**
@@ -426,7 +426,7 @@ class Struct(
 	 * @param capacity the buffer capacity
 	 */
 	public static Buffer create(long address, int capacity) {
-		return address == NULL ? null : new Buffer(memByteBuffer(address, capacity * SIZEOF), SIZEOF);
+		return address == NULL ? null : new Buffer(memByteBuffer(address, capacity * SIZEOF), true);
 	}
 """)
 
@@ -456,11 +456,11 @@ class Struct(
 		 * <p>The created buffer instance holds a strong reference to the container object.</p>
 		 */
 		public Buffer(ByteBuffer container) {
-			this(container.slice(), SIZEOF);
+			super(container.slice());
 		}
 
-		Buffer(ByteBuffer container, int SIZEOF) {
-			super(container, SIZEOF);
+		Buffer(ByteBuffer container, boolean dummy) {
+			super(container);
 		}
 
 		@Override

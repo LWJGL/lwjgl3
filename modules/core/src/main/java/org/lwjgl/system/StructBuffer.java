@@ -9,7 +9,6 @@ import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This is the base class of struct data container implementations. Its interface mirrors the NIO API for convenience. */
@@ -17,10 +16,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 
 	protected final ByteBuffer container;
 
-	protected StructBuffer(ByteBuffer container, int SIZEOF) {
-		if ( Checks.CHECKS )
-			checkBuffer(container, SIZEOF);
-
+	protected StructBuffer(ByteBuffer container) {
 		this.container = container;
 	}
 
