@@ -85,7 +85,8 @@ public final class Vorbis {
 			alDeleteBuffers(buffers);
 			alDeleteSources(source);
 
-			AL.destroy(al);
+			al.destroy();
+			al.getDevice().close();
 		}
 	}
 
