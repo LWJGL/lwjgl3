@@ -500,7 +500,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize(3 x 3, "value")..GLsizei.IN("count", uniArrayCount),
+		AutoSize(3, "value")..GLsizei.IN("count", uniArrayCount),
 		const..GLint_p.IN("value", uniArrayValue)
 	)
 
@@ -540,7 +540,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize(3 x 3, "value")..GLsizei.IN("count", uniArrayCount),
+		AutoSize(3, "value")..GLsizei.IN("count", uniArrayCount),
 		const..GLuint_p.IN("value", uniArrayValue)
 	)
 
@@ -580,7 +580,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize(3 x 3, "value")..GLsizei.IN("count", uniArrayCount),
+		AutoSize(3, "value")..GLsizei.IN("count", uniArrayCount),
 		const..GLfloat_p.IN("value", uniArrayValue)
 	)
 
@@ -620,7 +620,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize(3 x 3, "value")..GLsizei.IN("count", uniArrayCount),
+		AutoSize(3, "value")..GLsizei.IN("count", uniArrayCount),
 		const..GLdouble_p.IN("value", uniArrayValue)
 	)
 
