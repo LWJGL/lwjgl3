@@ -379,7 +379,7 @@ val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", nativeName = "o
 		be destroyed by OVR#ovr_DestroySwapTextureSet().
 		"""
 
-	ovrTexture_p.member("Textures", "points to an array of ovrTextures")
+	ovrTexture_p.buffer("Textures", "points to an array of ovrTextures")
 	int.member("TextureCount", "the number of textures referenced by the Textures array")
 
 

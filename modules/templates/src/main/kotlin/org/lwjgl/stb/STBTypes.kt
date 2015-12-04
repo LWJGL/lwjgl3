@@ -250,7 +250,7 @@ val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", nativeName = "s
 	int.member("first_unicode_codepoint_in_range", "if non-zero, then the chars are continuous, and this is the first codepoint")
 	int_p.member("array_of_unicode_codepoints", "if non-zero, then this is an array of unicode codepoints")
 	int.member("num_chars", "")
-	stbtt_packedchar_p.member("chardata_for_range", "output")
+	stbtt_packedchar_p.buffer("chardata_for_range", "output")
 	padding(2) // h_oversample & v_oversample
 }
 
