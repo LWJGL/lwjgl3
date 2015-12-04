@@ -407,7 +407,7 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
 		"",
 
 		GLuint.IN("index", ""),
-		AutoSize(4 x 4, "v")..GLsizei.IN("n", ""),
+		AutoSize(4, "v")..GLsizei.IN("n", ""),
 		const..GLhalfNV_p.IN("v", "")
 	)
 }
