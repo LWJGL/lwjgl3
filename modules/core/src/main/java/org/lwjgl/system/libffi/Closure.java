@@ -252,7 +252,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	protected static FFICIF staticAllocCIF() {
-		return new FFICIF(getAllocator().malloc(FFICIF.SIZEOF));
+		return FFICIF.create(getAllocator().malloc(FFICIF.SIZEOF));
 	}
 
 	protected static PointerBuffer staticAllocPointer(int size) {

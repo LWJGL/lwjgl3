@@ -306,11 +306,6 @@ class Struct(
 		super(address, container, SIZEOF);
 	}
 
-	/** Creates a {@link $className} instance at the specified memory address. */
-	${access.modifier}$className(long struct) {
-		this(struct, null);
-	}
-
 	/**
 	 * Creates a {@link $className} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
 	 * visible to the struct instance and vice versa.
@@ -379,17 +374,22 @@ class Struct(
 
 	/** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memAlloc}. The instance must be explicitly freed. */
 	public static $className malloc() {
-		return new $className(nmemAlloc(SIZEOF));
+		return create(nmemAlloc(SIZEOF));
 	}
 
 	/** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memCalloc}. The instance must be explicitly freed. */
 	public static $className calloc() {
-		return new $className(nmemCalloc(1, SIZEOF));
+		return create(nmemCalloc(1, SIZEOF));
 	}
 
 	/** Returns a new {@link $className} instance allocated with {@link BufferUtils}. */
 	public static $className create() {
 		return new $className(BufferUtils.createByteBuffer(SIZEOF));
+	}
+
+	/** Returns a new {@link $className} instance for the specified memory address or {@code null} if the address is {@code NULL}. */
+	public static $className create(long address) {
+		return address == NULL ? null : new $className(address, null);
 	}
 
 	/**
@@ -974,7 +974,7 @@ class Struct(
 					)
 				else {
 					println("\t/** Unsafe version of {@link #$getter}. */")
-					println("\tpublic static $structType n$getter(long $STRUCT) { return new $structType($STRUCT + $field); }")
+					println("\tpublic static $structType n$getter(long $STRUCT) { return $structType.create($STRUCT + $field); }")
 				}
 			} else {
 				// Getter
@@ -1008,7 +1008,7 @@ class Struct(
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
-							println("\t\treturn new $nestedStruct(memGetAddress($STRUCT + $field + index * POINTER_SIZE));")
+							println("\t\treturn $nestedStruct.create(memGetAddress($STRUCT + $field + index * POINTER_SIZE));")
 							println("\t}")
 						} else {
 							println("\t/** Unsafe version of {@link #$getter}. */")
@@ -1017,7 +1017,7 @@ class Struct(
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
-							println("\t\treturn new $nestedStruct($STRUCT + $field + index * $nestedStruct.SIZEOF);")
+							println("\t\treturn $nestedStruct.create($STRUCT + $field + index * $nestedStruct.SIZEOF);")
 							println("\t}")
 						}
 					} else if ( it is StructMemberCharArray ) {
@@ -1054,7 +1054,7 @@ class Struct(
 					println(if ( it is StructMemberBuffer )
 						"\tpublic static $structType.Buffer n$getter(long $STRUCT, int capacity) { return $structType.createBuffer(memGetAddress($STRUCT + $field), capacity); }"
 					else
-						"\tpublic static $structType n$getter(long $STRUCT) { return new $structType(memGetAddress($STRUCT + $field)); }"
+						"\tpublic static $structType n$getter(long $STRUCT) { return $structType.create(memGetAddress($STRUCT + $field)); }"
 					)
 				} else if ( it.nativeType.isPointerData ) {
 					val bufferType = it.nativeType.javaMethodType.simpleName
