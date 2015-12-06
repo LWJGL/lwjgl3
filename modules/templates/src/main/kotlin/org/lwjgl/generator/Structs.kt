@@ -1209,14 +1209,18 @@ $indent */""")
 	private fun PrintWriter.generateNativeMembers(members: List<StructMember>, offset: Int = 0, prefix: String = ""): Int {
 		var index = offset
 		members.forEach {
-			println("\tbuffer[$index] = (jint)offsetof($nativeName, $prefix${it.name});")
-			index++
+			if ( it.name === ANONYMOUS && it.isNestedStruct ) {
+				index = generateNativeMembers((it.nativeType as StructType).definition.members, index + 1, prefix) // recursion
+			} else {
+				println("\tbuffer[$index] = (jint)offsetof($nativeName, $prefix${it.name});")
+				index++
 
-			if ( it.isNestedStruct ) {
-				// Output nested structs
-				val structType = it.nativeType as StructType
-				if ( structType.name == ANONYMOUS )
-					index = generateNativeMembers(structType.definition.members, index, prefix = "$prefix${it.name}.") // recursion
+				if ( it.isNestedStruct ) {
+					// Output nested structs
+					val structType = it.nativeType as StructType
+					if ( structType.name == ANONYMOUS )
+						index = generateNativeMembers(structType.definition.members, index, prefix = "$prefix${it.name}.") // recursion
+				}
 			}
 		}
 		return index
