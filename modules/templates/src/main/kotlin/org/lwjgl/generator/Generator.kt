@@ -183,9 +183,7 @@ class Generator(
 		}
 
 		// Find the template methods
-		val templates = TreeSet<Method>(object : Comparator<Method> {
-			override fun compare(o1: Method, o2: Method): Int = o1.name.compareTo(o2.name)
-		})
+		val templates = TreeSet<Method> { o1, o2 -> o1.name.compareTo(o2.name) }
 		apply("$packagePath/templates", "$packageName.templates") {
 			this.filterTo(templates) {
 				methodFilter(it, NativeClass::class.java)

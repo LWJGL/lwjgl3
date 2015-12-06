@@ -333,11 +333,11 @@ class Struct(
 					val javadoc = "Initializes this struct with the specified values."
 					// Factory constructors
 					if ( generateAlternativeMultiSetter(members) ) {
-						generateMultiSetter(javadoc, members, generateAlternativeMultiSetterParameters, generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER1)
+						generateMultiSetter(javadoc, members, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER1)
 						if ( members.any { it is StructMemberCharArray } )
-							generateMultiSetter(javadoc, members, generateAlternativeMultiSetterParameters, generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER2)
+							generateMultiSetter(javadoc, members, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER2)
 					} else
-						generateMultiSetter(javadoc, members, generateMultiSetterParameters, generateMultiSetterSetters)
+						generateMultiSetter(javadoc, members, Struct::generateMultiSetterParameters, Struct::generateMultiSetterSetters)
 				}
 
 				print("""
@@ -603,121 +603,128 @@ class Struct(
 	private fun PrintWriter.generateMultiSetter(
 		javaDoc: String,
 		members: Sequence<StructMember>,
-		generateParameters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode, Boolean) -> Unit,
-		generateSetters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode) -> Unit,
+		generateParameters: (Struct, PrintWriter, Sequence<StructMember>, String, MultiSetterMode, Boolean) -> Unit,
+		generateSetters: (Struct, PrintWriter, Sequence<StructMember>, String, MultiSetterMode) -> Unit,
 		mode: MultiSetterMode = MultiSetterMode.NORMAL
 	) {
 		print("""
 	/** $javaDoc */
 	public $className set(
 """)
-		generateParameters(members, "", mode, false)
+		generateParameters(this@Struct, this, members, "", mode, false)
 		println("""
 	) {""")
-		generateSetters(members, "", mode)
+		generateSetters(this@Struct, this, members, "", mode)
 		print("""
 		return this;
 	}
 """)
 	}
 
-	private val generateMultiSetterParameters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode, Boolean) -> Unit = { members, parentMember, mode, more ->
-		members.forEachWithMore(more) { it, more ->
-			val method = it.field(parentMember)
+	private fun generateMultiSetterParameters(writer: PrintWriter, members: Sequence<StructMember>, parentMember: String, mode: MultiSetterMode, more: Boolean) {
+		writer.apply {
+			members.forEachWithMore(more) { it, more ->
+				val method = it.field(parentMember)
 
-			if ( it.isNestedStructDefinition ) {
-				generateMultiSetterParameters(it.nestedMembers, method, mode, more)
-				return@forEachWithMore
+				if ( it.isNestedStructDefinition ) {
+					generateMultiSetterParameters(writer, it.nestedMembers, method, mode, more) // recursion
+					return@forEachWithMore
+				}
+
+				if ( more )
+					println(",")
+
+				print("\t\t")
+
+				val param = it.field(parentMember)
+
+				print(if (it.nativeType is CallbackType)
+					"${it.nativeType.className} $param"
+				else
+					"${it.nativeType.javaMethodType.simpleName} $param"
+				)
 			}
-
-			if ( more )
-				println(",")
-
-			print("\t\t")
-
-			val param = it.field(parentMember)
-
-			print(if (it.nativeType is CallbackType)
-				"${it.nativeType.className} $param"
-			else
-				"${it.nativeType.javaMethodType.simpleName} $param"
-			)
 		}
 	}
 
-	private val generateMultiSetterSetters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode) -> Unit = { members, parentMember, mode ->
-		members.forEach {
-			val setter = it.field(parentMember)
+	private fun generateMultiSetterSetters(writer: PrintWriter, members: Sequence<StructMember>, parentMember: String, mode: MultiSetterMode) {
+		writer.apply {
+			members.forEach {
+				val setter = it.field(parentMember)
 
-			if ( it.isNestedStructDefinition )
-				generateMultiSetterSetters(it.nestedMembers, setter, mode)
-			else
-				println("\t\t$setter(${it.field(parentMember)});")
+				if ( it.isNestedStructDefinition )
+					generateMultiSetterSetters(writer, it.nestedMembers, setter, mode) // recursion
+				else
+					println("\t\t$setter(${it.field(parentMember)});")
+			}
 		}
 	}
 
-	private val generateAlternativeMultiSetter: (Sequence<StructMember>) -> Boolean = { members ->
+	private fun generateAlternativeMultiSetter(members: Sequence<StructMember>): Boolean =
 		members.any {
 			if ( it.isNestedStructDefinition )
-				generateAlternativeMultiSetter(it.nestedMembers)
+				generateAlternativeMultiSetter(it.nestedMembers) // recursion
 			else
 				it is StructMemberArray || it.nativeType.isPointerData
 		}
-	}
 
-	private val generateAlternativeMultiSetterParameters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode, Boolean) -> Unit = { members, parentMember, mode, more ->
-		members.forEachWithMore(more) { it, more ->
-			val method = it.field(parentMember)
+	private fun generateAlternativeMultiSetterParameters(writer: PrintWriter, members: Sequence<StructMember>, parentMember: String, mode: MultiSetterMode, more: Boolean) {
+		writer.apply {
+			members.forEachWithMore(more) { it, more ->
+				val method = it.field(parentMember)
 
-			if ( it.isNestedStructDefinition ) {
-				generateAlternativeMultiSetterParameters(it.nestedMembers, method, mode, more)
-				return@forEachWithMore
-			}
+				if ( it.isNestedStructDefinition ) {
+					generateAlternativeMultiSetterParameters(writer, it.nestedMembers, method, mode, more) // recursion
+					return@forEachWithMore
+				}
 
-			if ( more )
-				println(",")
+				if ( more )
+					println(",")
 
-			print("\t\t")
+				print("\t\t")
 
-			val param = it.field(parentMember)
+				val param = it.field(parentMember)
 
-			if (it is StructMemberArray) {
-				print(
-					if ( it is StructMemberCharArray ) {
-						when ( mode ) {
-							MultiSetterMode.NORMAL,
-							MultiSetterMode.ALTER1 -> "ByteBuffer $param"
-							MultiSetterMode.ALTER2 -> "CharSequence $param"
-						}
-					} else if ( it.nativeType is StructType ) {
-						if ( it.nativeType.includesPointer )
-							"PointerBuffer $param"
-						else
-							"${it.nativeType.definition.className}.Buffer $param"
-					} else
-						"${(it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName} $param"
-				)
-			} else if ( it.nativeType.isPointerData && it.nativeType is StructType ) {
-				val structType = it.nativeType.definition.className
-				if ( it is StructMemberBuffer )
-					print("$structType.Buffer $param")
+				if (it is StructMemberArray) {
+					print(
+						if ( it is StructMemberCharArray ) {
+							when ( mode ) {
+								MultiSetterMode.NORMAL,
+								MultiSetterMode.ALTER1 -> "ByteBuffer $param"
+								MultiSetterMode.ALTER2 -> "CharSequence $param"
+							}
+						} else if ( it.nativeType is StructType ) {
+							if ( it.nativeType.includesPointer )
+								"PointerBuffer $param"
+							else
+								"${it.nativeType.definition.className}.Buffer $param"
+						} else
+							"${(it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName} $param"
+					)
+				} else if ( it.nativeType.isPointerData && it.nativeType is StructType ) {
+					val structType = it.nativeType.definition.className
+					if ( it is StructMemberBuffer )
+						print("$structType.Buffer $param")
+					else
+						print("$structType $param")
+				} else if ( it.nativeType is CallbackType )
+					"${it.nativeType.className} $param"
 				else
-					print("$structType $param")
-			} else if ( it.nativeType is CallbackType )
-				"${it.nativeType.className} $param"
-			else
-				print("${it.nativeType.javaMethodType.simpleName} $param")
+					print("${it.nativeType.javaMethodType.simpleName} $param")
+			}
 		}
 	}
 
-	private val generateAlternativeMultiSetterSetters: PrintWriter.(Sequence<StructMember>, String, MultiSetterMode) -> Unit = { members, parentMember, mode ->
-		members.forEach {
-			val method = it.field(parentMember)
+	private fun generateAlternativeMultiSetterSetters(writer: PrintWriter, members: Sequence<StructMember>, parentMember: String, mode: MultiSetterMode) {
+		writer.apply {
+			members.forEach {
+				val method = it.field(parentMember)
 
-			if ( it.isNestedStructDefinition )
-				generateAlternativeMultiSetterSetters(it.nestedMembers, method, mode)
-			else
-				println("\t\t$method(${it.field(parentMember)});")
+				if ( it.isNestedStructDefinition )
+					generateAlternativeMultiSetterSetters(writer, it.nestedMembers, method, mode) // recursion
+				else
+					println("\t\t$method(${it.field(parentMember)});")
+			}
 		}
 	}
 
