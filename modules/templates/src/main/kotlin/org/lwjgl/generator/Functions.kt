@@ -538,11 +538,15 @@ class NativeClassFunction(
 		println("\t}\n")
 	}
 
+	private fun PrintWriter.printDocumentation() {
+		if ( !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, documentation) ?: false) && documentation.isNotEmpty() )
+			println(documentation)
+	}
+
 	private fun PrintWriter.generateJavaMethod() {
 		// Step 0: JavaDoc
 
-		if ( !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, documentation) ?: false) && documentation.isNotEmpty() )
-			println(documentation)
+		printDocumentation()
 
 		// Step 1: Method signature
 
@@ -1048,8 +1052,7 @@ class NativeClassFunction(
 
 		if ( returnTransform === StringReturnTransform ) {
 			// Special-case, we skipped the normal method
-			if ( documentation.isNotEmpty() )
-				println(documentation)
+			printDocumentation()
 		} else
 			generateJavaDocLink(description, this@NativeClassFunction)
 
