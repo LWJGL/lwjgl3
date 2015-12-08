@@ -62,11 +62,11 @@ public final class JNI {
 		preamble.printNative(this)
 
 		signatures.forEach {
-			print("JNIEXPORT ${it.returnType.jniFunctionType} JNICALL Java_org_lwjgl_system_JNI_${it.signature}(JNIEnv *__env, jclass clazz, jlong __functionAddress")
+			print("JNIEXPORT ${it.returnType.jniFunctionType} JNICALL Java_org_lwjgl_system_JNI_${it.signature}(JNIEnv *$JNIENV, jclass clazz, jlong __functionAddress")
 			if ( it.arguments.isNotEmpty() )
 				print(it.arguments.withIndex().map { "${it.value.jniFunctionType} param${it.index}" }.joinToString(", ", prefix = ", "))
 			print(""") {
-	UNUSED_PARAMS(__env, clazz)
+	UNUSED_PARAMS($JNIENV, clazz)
 	""")
 			if ( it.returnType !== TypeMapping.VOID ) {
 				print("return ")

@@ -29,6 +29,7 @@ public class CLPlatform extends Pointer.Default {
 
 	public CLPlatform(long cl_platform_id) {
 		super(cl_platform_id);
+		checkAddress();
 
 		this.capabilities = createCapabilities(cl_platform_id);
 	}

@@ -45,15 +45,17 @@ public interface Pointer {
 		protected final long address;
 
 		protected Default(long address) {
-			if ( Checks.CHECKS && address == NULL )
-				throw new NullPointerException();
-
 			this.address = address;
 		}
 
 		@Override
 		public final long address() {
 			return address;
+		}
+
+		protected void checkAddress() {
+			if ( Checks.CHECKS && address == NULL )
+				throw new NullPointerException();
 		}
 
 		public boolean equals(Object o) {
@@ -63,7 +65,6 @@ public interface Pointer {
 			Pointer that = (Pointer)o;
 
 			return address == that.address();
-
 		}
 
 		public int hashCode() {

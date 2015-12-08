@@ -4,6 +4,7 @@
  */
 package org.lwjgl.openal;
 
+import org.lwjgl.system.Checks;
 import org.lwjgl.system.Pointer;
 
 import static org.lwjgl.openal.ALC10.*;
@@ -32,6 +33,7 @@ public class ALDevice extends Pointer.Default {
 	 */
 	public ALDevice(long device) {
 		super(device);
+		checkAddress();
 
 		this.capabilities = ALC.createCapabilities(device);
 	}

@@ -13,6 +13,7 @@ import java.util.Set;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * This class represents an OpenCL device. It wraps a {@code cl_device_id} pointer and a {@link CLCapabilities} instance that exposes the device capabilities.
@@ -32,6 +33,7 @@ public class CLDevice extends Pointer.Default {
 
 	public CLDevice(long cl_device_id, CLCapabilities platformCapabilities) {
 		super(cl_device_id);
+		checkAddress();
 
 		this.capabilities = createCapabilities(cl_device_id, platformCapabilities);
 	}

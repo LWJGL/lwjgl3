@@ -4,6 +4,7 @@
  */
 package org.lwjgl.openal;
 
+import org.lwjgl.system.Checks;
 import org.lwjgl.system.Pointer;
 
 import java.nio.IntBuffer;
@@ -46,6 +47,7 @@ public class ALContext extends Pointer.Default {
 	 */
 	public ALContext(ALDevice device, long context) {
 		super(context);
+		checkAddress();
 
 		if ( device.address() != alcGetContextsDevice(context) )
 			throw new IllegalArgumentException("The specified device does not match with the context device.");

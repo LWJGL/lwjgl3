@@ -262,7 +262,7 @@ public final class Checks {
 	 * @throws IllegalArgumentException
 	 */
 	public static void checkBuffer(StructBuffer<?, ?> buf, int size) {
-		if ( buf.container.remaining() < size * buf.sizeof() ) {
+		if ( buf.remaining() < size ) {
 			throwBufferSizeException(buf, size);
 		}
 	}

@@ -303,7 +303,7 @@ class Struct(
 		print("""
 
 	$className(long address, ByteBuffer container) {
-		super(address, container, SIZEOF);
+		super(address, container);
 	}
 
 	/**
@@ -313,7 +313,7 @@ class Struct(
 	 * <p>The created instance holds a strong reference to the container object.</p>
 	 */
 	${access.modifier}$className(ByteBuffer container) {
-		this(memAddress(container), container);
+		this(memAddress(container), checkContainer(container, SIZEOF));
 	}
 
 	@Override
@@ -398,7 +398,7 @@ class Struct(
 	 * @param capacity the buffer capacity
 	 */
 	public static Buffer malloc(int capacity) {
-		return new Buffer(memAlloc(capacity * SIZEOF));
+		return create(nmemAlloc(capacity * SIZEOF), capacity);
 	}
 
 	/**
@@ -407,7 +407,7 @@ class Struct(
 	 * @param capacity the buffer capacity
 	 */
 	public static Buffer calloc(int capacity) {
-		return new Buffer(memCalloc(capacity, SIZEOF));
+		return create(nmemCalloc(capacity, SIZEOF), capacity);
 	}
 
 	/**
@@ -416,7 +416,7 @@ class Struct(
 	 * @param capacity the buffer capacity
 	 */
 	public static Buffer create(int capacity) {
-		return new Buffer(BufferUtils.createByteBuffer(capacity * SIZEOF), true);
+		return new Buffer(BufferUtils.createByteBuffer(capacity * SIZEOF));
 	}
 
 	/**
@@ -426,7 +426,7 @@ class Struct(
 	 * @param capacity the buffer capacity
 	 */
 	public static Buffer create(long address, int capacity) {
-		return address == NULL ? null : new Buffer(memByteBuffer(address, capacity * SIZEOF), true);
+		return address == NULL ? null : new Buffer(address, null, -1, 0, capacity, capacity);
 	}
 """)
 
@@ -456,11 +456,11 @@ class Struct(
 		 * <p>The created buffer instance holds a strong reference to the container object.</p>
 		 */
 		public Buffer(ByteBuffer container) {
-			super(container.slice());
+			super(container, container.remaining() / SIZEOF);
 		}
 
-		Buffer(ByteBuffer container, boolean dummy) {
-			super(container);
+		Buffer(long address, ByteBuffer container, int mark, int pos, int lim, int cap) {
+			super(address, container, mark, pos, lim, cap);
 		}
 
 		@Override
@@ -469,8 +469,8 @@ class Struct(
 		}
 
 		@Override
-		protected Buffer newBufferInstance(ByteBuffer buffer) {
-			return new Buffer(buffer);
+		protected Buffer newBufferInstance(long address, ByteBuffer container, int mark, int pos, int lim, int cap) {
+			return new Buffer(address, container, mark, pos, lim, cap);
 		}
 
 		@Override

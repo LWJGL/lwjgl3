@@ -20,12 +20,8 @@ public abstract class Struct extends Pointer.Default {
 
 	private final ByteBuffer container;
 
-	protected Struct(long address, ByteBuffer container, int sizeof) {
+	protected Struct(long address, ByteBuffer container) {
 		super(address);
-
-		if ( Checks.CHECKS && container != null )
-			checkBuffer(container, sizeof);
-
 		this.container = container;
 	}
 
@@ -44,6 +40,13 @@ public abstract class Struct extends Pointer.Default {
 	 */
 	public void free() {
 		nmemFree(address());
+	}
+
+	protected static ByteBuffer checkContainer(ByteBuffer container, int sizeof) {
+		if ( Checks.CHECKS && container != null )
+			checkBuffer(container, sizeof);
+
+		return container;
 	}
 
 	// ---------------- Struct Member Layout ----------------

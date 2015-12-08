@@ -7,24 +7,41 @@ package org.lwjgl.system;
 import java.nio.BufferOverflowException;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import java.nio.InvalidMarkException;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This is the base class of struct data container implementations. Its interface mirrors the NIO API for convenience. */
-public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T, SELF>> implements Comparable<SELF>, Pointer {
+public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T, SELF>> implements Pointer {
+
+	private final long address;
 
 	protected final ByteBuffer container;
 
-	protected StructBuffer(ByteBuffer container) {
+	private int
+		mark,
+		position,
+		limit,
+		capacity;
+
+	protected StructBuffer(ByteBuffer container, int remaining) {
+		this(memAddress(container), container, -1, 0, remaining, remaining);
+	}
+
+	protected StructBuffer(long address, ByteBuffer container, int mark, int position, int limit, int capacity) {
+		this.address = address;
 		this.container = container;
+		this.mark = mark;
+		this.position = position;
+		this.limit = limit;
+		this.capacity = capacity;
 	}
 
 	// --------------------------------------
 
 	protected abstract SELF self();
 
-	protected abstract SELF newBufferInstance(ByteBuffer buffer);
+	protected abstract SELF newBufferInstance(long address, ByteBuffer container, int mark, int position, int limit, int capacity);
 
 	protected abstract T newInstance(long address);
 
@@ -32,13 +49,18 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 
 	/** Returns the buffer's base address. [INTERNAL USE ONLY] */
 	public long address0() {
-		return memAddress0(container);
+		return address;
 	}
 
 	/** Returns the memory address at the current buffer position. */
 	@Override
 	public long address() {
-		return memAddress(container);
+		return address + position * sizeof();
+	}
+
+	/** Returns the memory address at the specified buffer position. */
+	public long address(int position) {
+		return address + position * sizeof();
 	}
 
 	/**
@@ -47,7 +69,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return the capacity of this buffer
 	 */
 	public int capacity() {
-		return container.capacity() / sizeof();
+		return capacity;
 	}
 
 	/**
@@ -56,7 +78,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return the position of this buffer
 	 */
 	public int position() {
-		return container.position() / sizeof();
+		return position;
 	}
 
 	/**
@@ -69,7 +91,10 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws IllegalArgumentException If the preconditions on <tt>newPosition</tt> do not hold
 	 */
 	public SELF position(int newPosition) {
-		container.position(newPosition * sizeof());
+		if ( (newPosition > limit) || (newPosition < 0) )
+			throw new IllegalArgumentException();
+		position = newPosition;
+		if ( mark > position ) mark = -1;
 		return self();
 	}
 
@@ -79,7 +104,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return the limit of this buffer
 	 */
 	public int limit() {
-		return container.limit() / sizeof();
+		return limit;
 	}
 
 	/**
@@ -93,7 +118,11 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws IllegalArgumentException If the preconditions on <tt>newLimit</tt> do not hold
 	 */
 	public SELF limit(int newLimit) {
-		container.limit(newLimit * sizeof());
+		if ( (newLimit > capacity) || (newLimit < 0) )
+			throw new IllegalArgumentException();
+		limit = newLimit;
+		if ( position > limit ) position = limit;
+		if ( mark > limit ) mark = -1;
 		return self();
 	}
 
@@ -103,7 +132,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return This buffer
 	 */
 	public SELF mark() {
-		container.mark();
+		mark = position;
 		return self();
 	}
 
@@ -117,7 +146,10 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.InvalidMarkException If the mark has not been set
 	 */
 	public SELF reset() {
-		container.reset();
+		int m = mark;
+		if ( m < 0 )
+			throw new InvalidMarkException();
+		position = m;
 		return self();
 	}
 
@@ -136,7 +168,9 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return This buffer
 	 */
 	public SELF clear() {
-		container.clear();
+		position = 0;
+		limit = capacity;
+		mark = -1;
 		return self();
 	}
 
@@ -157,7 +191,9 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return This buffer
 	 */
 	public SELF flip() {
-		container.flip();
+		limit = position;
+		position = 0;
+		mark = -1;
 		return self();
 	}
 
@@ -175,7 +211,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return This buffer
 	 */
 	public SELF rewind() {
-		container.rewind();
+		position = 0;
+		mark = -1;
 		return self();
 	}
 
@@ -185,7 +222,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return the number of elements remaining in this buffer
 	 */
 	public int remaining() {
-		return container.remaining() / sizeof();
+		return limit - position;
 	}
 
 	/**
@@ -194,7 +231,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return <tt>true</tt> if, and only if, there is at least one element remaining in this buffer
 	 */
 	public boolean hasRemaining() {
-		return container.hasRemaining();
+		return position < limit;
 	}
 
 	/**
@@ -209,7 +246,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return the new struct buffer
 	 */
 	public SELF slice() {
-		return newBufferInstance(container.slice());
+		return newBufferInstance(address(), container, -1, 0, this.remaining(), this.remaining());
 	}
 
 	/**
@@ -223,32 +260,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @return the new struct buffer
 	 */
 	public SELF duplicate() {
-		return newBufferInstance(container.duplicate());
-	}
-
-	/**
-	 * Creates a new, read-only struct buffer that shares this buffer's content.
-	 *
-	 * <p>The content of the new buffer will be that of this buffer. Changes to this buffer's content will be visible in the new buffer; the new buffer itself,
-	 * however, will be read-only and will not allow the shared content to be modified. The two buffers' position, limit, and mark values will be independent.
-	 *
-	 * <p>The new buffer's capacity, limit and position will be identical to those of this buffer.</p>
-	 *
-	 * <p>If this buffer is itself read-only then this method behaves in exactly the same way as the {@link #duplicate duplicate} method.</p>
-	 *
-	 * @return the new, read-only struct buffer
-	 */
-	public SELF asReadOnlyBuffer() {
-		return newBufferInstance(container.asReadOnlyBuffer());
-	}
-
-	/**
-	 * Tells whether or not this buffer is read-only.
-	 *
-	 * @return <tt>true</tt> if, and only if, this buffer is read-only
-	 */
-	public boolean isReadOnly() {
-		return container.isReadOnly();
+		return newBufferInstance(address, container, mark, position, limit, capacity);
 	}
 
 	/**
@@ -262,14 +274,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
 	 */
 	public T get() {
-		int curr = container.position();
-		int next = curr + sizeof();
-		if ( container.limit() < next )
-			throw new BufferUnderflowException();
-
-		T value = newInstance(address0() + curr);
-		container.position(next);
-		return value;
+		return newInstance(address + nextGetIndex() * sizeof());
 	}
 
 	/**
@@ -280,8 +285,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
 	 */
 	public SELF get(T value) {
-		int sizeof = sizeof();
-		memCopy(address0() + nextGetIndex(container, sizeof), value.address(), sizeof);
+		memCopy(address + nextGetIndex() * sizeof(), value.address(), sizeof());
 		return self();
 	}
 
@@ -298,8 +302,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public SELF put(T value) {
-		int sizeof = sizeof();
-		memCopy(value.address(), address0() + nextPutIndex(container, sizeof), sizeof);
+		memCopy(value.address(), address + nextPutIndex() * sizeof(), sizeof());
 		return self();
 	}
 
@@ -316,7 +319,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
 	 */
 	public T get(int index) {
-		return newInstance(address0() + checkIndex(container, index * sizeof()));
+		return newInstance(address + checkIndex(index) * sizeof());
 	}
 
 	/**
@@ -329,8 +332,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
 	 */
 	public SELF get(int index, T value) {
-		int sizeof = sizeof();
-		memCopy(address0() + checkIndex(container, index * sizeof), value.address(), sizeof);
+		memCopy(address + checkIndex(index) * sizeof(), value.address(), sizeof());
 		return self();
 	}
 
@@ -348,53 +350,11 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public SELF put(int index, T value) {
-		int sizeof = sizeof();
-		memCopy(value.address(), address0() + checkIndex(container, index * sizeof), sizeof);
+		memCopy(value.address(), address + checkIndex(index) * sizeof(), sizeof());
 		return self();
 	}
 
 	// -- Bulk get operations --
-
-	/**
-	 * Relative bulk <i>get</i> method.
-	 *
-	 * <p>This method transfers structs from this buffer into the specified destination array. An invocation of this method of the form <tt>src.get(a)</tt>
-	 * behaves in exactly the same way as the invocation
-	 *
-	 * <pre>src.get(a, 0, a.length / src.sizeof())</pre>
-	 *
-	 * @return This buffer
-	 *
-	 * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> structs remaining in this buffer
-	 */
-	public SELF get(byte[] dst) {
-		return get(dst, 0, dst.length / sizeof());
-	}
-
-	/**
-	 * Relative bulk <i>get</i> method.
-	 *
-	 * <p>This method transfers structs from this buffer into the specified destination array. If there are fewer structs remaining in the buffer than are
-	 * required to satisfy the request, that is, if <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no structs are transferred and a
-	 * {@link java.nio.BufferUnderflowException} is thrown.
-	 *
-	 * <p>Otherwise, this method copies <tt>length</tt> structs from this buffer into the specified array, starting at the current position of this buffer and
-	 * at the specified offset in the array. The position of this buffer is then incremented by <tt>length</tt>.
-	 *
-	 * @param dst    the array into which structs are to be written
-	 * @param offset the offset within the array of the first struct to be written; must be non-negative and no larger than <tt>dst.length</tt>
-	 * @param length the maximum number of structs to be written to the specified array; must be non-negative and no larger than
-	 *               <tt>(dst.length - offset) / src.sizeof()</tt>
-	 *
-	 * @return This buffer
-	 *
-	 * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> structs remaining in this buffer
-	 * @throws IndexOutOfBoundsException         If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
-	 */
-	public SELF get(byte[] dst, int offset, int length) {
-		container.get(dst, offset, length * sizeof());
-		return self();
-	}
 
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
@@ -423,51 +383,15 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public SELF put(SELF src) {
-		container.put(src.container);
-		return self();
-	}
+		if ( src == this )
+			throw new IllegalArgumentException();
+		int n = src.remaining();
+		if ( n > remaining() )
+			throw new BufferOverflowException();
 
-	/**
-	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
-	 *
-	 * <p>This method transfers the entire content of the specified source struct array into this buffer. An invocation of this method of the form
-	 * <tt>dst.put(a)</tt> behaves in exactly the same way as the invocation</p>
-	 *
-	 * <pre>
-	 *     dst.put(a, 0, a.length) </pre>
-	 *
-	 * @return This buffer
-	 *
-	 * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer
-	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
-	 */
-	public SELF put(byte[] src) {
-		return put(src, 0, src.length / sizeof());
-	}
+		memCopy(src.address(), this.address(), n * sizeof());
+		position += n;
 
-	/**
-	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
-	 *
-	 * <p>This method transfers structs into this buffer from the specified source array. If there are more structs to be copied from the array than remain
-	 * in this buffer, that is, if <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no structs are transferred and a
-	 * {@link java.nio.BufferOverflowException} is thrown.
-	 *
-	 * <p>Otherwise, this method copies <tt>length</tt> structs from the specified array into this buffer, starting at the specified offset in the array and
-	 * at the current position of this buffer. The position of this buffer is then incremented by <tt>length</tt>.</p>
-	 *
-	 * @param src    the array from which structs are to be read
-	 * @param offset the offset within the array of the first struct to be read; must be non-negative and no larger than <tt>array.length</tt>
-	 * @param length the number of structs to be read from the specified array; must be non-negative and no larger than
-	 *               <tt>(array.length - offset) / dst.sizeof()</tt>
-	 *
-	 * @return This buffer
-	 *
-	 * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer
-	 * @throws IndexOutOfBoundsException        If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
-	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
-	 */
-	public SELF put(byte[] src, int offset, int length) {
-		container.put(src, offset, length * sizeof());
 		return self();
 	}
 
@@ -488,17 +412,12 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public SELF compact() {
-		container.compact();
-		return self();
-	}
+		memCopy(address(), address, remaining() * sizeof());
+		position(remaining());
+		limit(capacity());
+		mark = -1;
 
-	/**
-	 * Retrieves this buffer's byte order.
-	 *
-	 * @return This buffer's byte order
-	 */
-	public ByteOrder order() {
-		return container.order();
+		return self();
 	}
 
 	/**
@@ -510,82 +429,22 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 		return getClass().getName() + "[pos=" + position() + " lim=" + limit() + " cap=" + capacity() + "]";
 	}
 
-	/**
-	 * Returns the current hash code of this buffer.
-	 *
-	 * <p>The hash code of a struct buffer depends only upon its remaining elements; that is, upon the elements from <tt>position()</tt> up to, and including,
-	 * the element at <tt>limit()</tt>&nbsp;-&nbsp;<tt>1</tt>.</p>
-	 *
-	 * <p>Because buffer hash codes are content-dependent, it is inadvisable to use buffers as keys in hash maps or similar data structures unless it is known
-	 * that their contents will not change.</p>
-	 *
-	 * @return the current hash code of this buffer
-	 */
-	public int hashCode() {
-		return container.hashCode();
-	}
-
-	/**
-	 * Tells whether or not this buffer is equal to another object.
-	 *
-	 * <p>Two struct buffers are equal if, and only if,</p>
-	 *
-	 * <ol>
-	 * <li>They have the same number of remaining elements, and</li>
-	 * <li>The two sequences of remaining elements, considered independently of their starting positions, are pointwise equal.</li>
-	 * </ol>
-	 *
-	 * <p>A struct buffer is not equal to any other type of object.</p>
-	 *
-	 * @param ob the object to which this buffer is to be compared
-	 *
-	 * @return <tt>true</tt> if, and only if, this buffer is equal to the
-	 * given object
-	 */
-	public boolean equals(Object ob) {
-		if ( !(ob instanceof StructBuffer) )
-			return false;
-		StructBuffer<?, ?> that = (StructBuffer<?, ?>)ob;
-		return this.container.equals(that.container);
-	}
-
-	/**
-	 * Compares this buffer to another.
-	 *
-	 * <p>Two struct buffers are compared by comparing their sequences of remaining elements lexicographically, without regard to the starting position of
-	 * each sequence within its corresponding buffer.</p>
-	 *
-	 * <p>A struct buffer is not comparable to any other type of object.</p>
-	 *
-	 * @return A negative integer, zero, or a positive integer as this buffer is less than, equal to, or greater than the specified buffer
-	 */
-	@Override
-	public int compareTo(SELF that) {
-		return this.container.compareTo(that.container);
-	}
-
 	// -----------------------------
 
-	private static int nextGetIndex(ByteBuffer container, int sizeof) {
-		int curr = container.position();
-		int next = curr + sizeof;
-		if ( container.limit() < next )
+	private int nextGetIndex() {
+		if ( position >= limit )
 			throw new BufferUnderflowException();
-		container.position(next);
-		return curr;
+		return position++;
 	}
 
-	private static int nextPutIndex(ByteBuffer container, int sizeof) {
-		int curr = container.position();
-		int next = curr + sizeof;
-		if ( container.limit() < next )
+	private int nextPutIndex() {
+		if ( position >= limit )
 			throw new BufferOverflowException();
-		container.position(next);
-		return curr;
+		return position++;
 	}
 
-	private static int checkIndex(ByteBuffer container, int index) {
-		if ( (index < 0) || (container.limit() < index) )
+	private int checkIndex(int index) {
+		if ( index < 0 || limit < index )
 			throw new IndexOutOfBoundsException();
 		return index;
 	}
