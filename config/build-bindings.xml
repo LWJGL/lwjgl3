@@ -13,6 +13,7 @@ This script is included in /config/build-definitions.xml.
 	<property name="binding.stb" value="true"/>
 
 	<property name="binding.glfw" value="true"/>
+	<property name="binding.nanovg" value="true"/>
 
 	<property name="binding.openal" value="true"/>
 	<property name="binding.opencl" value="true"/>
@@ -36,8 +37,8 @@ This script is included in /config/build-definitions.xml.
 			</and>
 		</condition>
 
-		<local name="glfw_opengl_check"/>
-		<condition property="glfw_opengl_check" value="1">
+		<local name="dependency_problem"/>
+		<condition property="dependency_problem" value="1">
 			<and>
 				<or>
 					<istrue value="${binding.glfw}"/>
@@ -46,7 +47,21 @@ This script is included in /config/build-definitions.xml.
 				<isfalse value="${binding.opengl}"/>
 			</and>
 		</condition>
-		<fail if="glfw_opengl_check" message="The OpenGL bindings are required"/>
+		<fail if="check_dependencies" message="The OpenGL bindings are required."/>
+
+		<condition property="dependency_problem" value="1">
+			<and>
+				<istrue value="${binding.nanovg}"/>
+				<or>
+					<isfalse value="${binding.stb}"/>
+					<and>
+						<isfalse value="${binding.opengl}"/>
+						<isfalse value="${binding.opengles}"/>
+					</and>
+				</or>
+			</and>
+		</condition>
+		<fail if="dependency_problem" message="The stb and OpenGL or OpenGL ES bindings are required."/>
 
 		<local name="bindings.list"/>
 		<script language="javascript">

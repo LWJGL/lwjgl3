@@ -7,6 +7,7 @@
 .gradle
 .DS_Store
 *.bat
+*.jpg
 *.ogg
 *.sh
 *.ttf

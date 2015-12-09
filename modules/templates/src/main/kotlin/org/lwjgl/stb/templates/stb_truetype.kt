@@ -9,8 +9,7 @@ import org.lwjgl.stb.*
 
 val stb_truetype = "STBTruetype".nativeClass(packageName = STB_PACKAGE, prefix = "STBTT", prefixMethod = "stbtt_") {
 	includeSTBAPI(
-		"""#define STB_TRUETYPE_IMPLEMENTATION
-#define STBTT_STATIC
+		"""#define STB_TRUETYPE_IMPLEMENTATION${if ( Binding.NANOVG.enabled ) "" else "\n#define STBTT_STATIC"}
 #define STBTT_assert
 #include "stb_rect_pack.h"
 #include "stb_truetype.h"""")

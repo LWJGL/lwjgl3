@@ -9,19 +9,40 @@ This script is included in /build.xml and depends on /build-definitions.xml
 -->
 <project name="assets" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<target name="-update-assets" description="Updates the demo assets, if necessary">
-		<uptodate property="refresh-assets" targetfile="${config}/build-assets.xml">
-			<srcfiles dir="${test.resources}/demo" includes="touch.txt"/>
+		<uptodate property="assets-uptodate" targetfile="${test.resources}/demo/touch.txt">
+			<srcfiles dir="${config}/" includes="build-*.xml"/>
 		</uptodate>
-		<antcall target="update-assets" if:set="refresh-assets"/>
+		<antcall target="update-assets" unless:set="assets-uptodate"/>
 	</target>
 
 	<target name="update-assets" description="Updates the demo assets">
+		<echo message="Updating..." taskname="Assets"/>
+
 		<update-demo-asset path="footsteps.ogg"/>
 		<update-demo-asset path="phero.ogg"/>
 		<get-quiet name="Asset FiraSans" url="https://github.com/google/fonts/raw/master/ofl/firasans/FiraSans-Regular.ttf" dest="${test.resources}/demo/FiraSans.ttf"/>
+
+		<mkdir dir="${test.resources}/demo/nanovg/images" if:true="${binding.nanovg}"/>
+		<update-nanovg-asset path="entypo.ttf"/>
+		<update-nanovg-asset path="Roboto-Regular.ttf"/>
+		<update-nanovg-asset path="Roboto-Bold.ttf"/>
+		<update-nanovg-asset path="images/image1.jpg"/>
+		<update-nanovg-asset path="images/image2.jpg"/>
+		<update-nanovg-asset path="images/image3.jpg"/>
+		<update-nanovg-asset path="images/image4.jpg"/>
+		<update-nanovg-asset path="images/image5.jpg"/>
+		<update-nanovg-asset path="images/image6.jpg"/>
+		<update-nanovg-asset path="images/image7.jpg"/>
+		<update-nanovg-asset path="images/image8.jpg"/>
+		<update-nanovg-asset path="images/image9.jpg"/>
+		<update-nanovg-asset path="images/image10.jpg"/>
+		<update-nanovg-asset path="images/image11.jpg"/>
+		<update-nanovg-asset path="images/image12.jpg"/>
+
 		<!-- Add more assets here -->
 
 		<touch file="${test.resources}/demo/touch.txt"/>
+		<echo message="DONE" taskname="Assets"/>
 	</target>
 
 	<macrodef name="update-demo-asset">
@@ -31,4 +52,13 @@ This script is included in /build.xml and depends on /build-definitions.xml
 			<get-quiet name="Asset @{path}" url="http://s3.amazonaws.com/build.lwjgl.org/res/demo/@{path}" dest="${test.resources}/demo/@{path}"/>
 		</sequential>
 	</macrodef>
+
+	<macrodef name="update-nanovg-asset">
+		<attribute name="path"/>
+
+		<sequential>
+			<get-quiet name="NanoVG asset @{path}" url="https://github.com/memononen/nanovg/raw/master/example/@{path}" dest="${test.resources}/demo/nanovg/@{path}" if:true="${binding.nanovg}"/>
+		</sequential>
+	</macrodef>
+
 </project>

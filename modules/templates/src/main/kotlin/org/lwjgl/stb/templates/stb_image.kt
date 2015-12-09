@@ -9,8 +9,7 @@ import org.lwjgl.stb.*
 
 val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI_") {
 	includeSTBAPI(
-		"""#define STB_IMAGE_IMPLEMENTATION
-#define STB_IMAGE_STATIC
+		"""#define STB_IMAGE_IMPLEMENTATION${if ( Binding.NANOVG.enabled ) "" else "\n#define STB_IMAGE_STATIC"}
 #define STBI_FAILURE_USERMSG
 #define STBI_ASSERT(x)
 #include "stb_image.h"""")

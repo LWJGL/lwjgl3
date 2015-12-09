@@ -55,7 +55,7 @@ License terms: http://lwjgl.org/license.php
 		<element name="arguments"/>
 		<sequential>
 			<apply dir="${bin.native}" executable="${compiler}" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-				<arg line="-c -std=c99 -O3 -fPIC ${warnings} -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
+				<arg line="-c -std=c11 -O3 -fPIC ${warnings} -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
 
 				<arg value="-I${sdkroot}/System/Library/Frameworks/JavaVM.framework/Versions/A/Headers"/>
 
@@ -101,6 +101,14 @@ License terms: http://lwjgl.org/license.php
 				<fileset dir=".">
 					<include name="${src.generated.native}/glfw/*.c"/>
 				</fileset>
+			</arguments>
+		</compile>
+
+		<compile if:true="${binding.nanovg}">
+			<arguments>
+				<arg value="-I${src.include.rel}/nanovg"/>
+				<arg value="-I${src.include.rel}/stb"/>
+				<fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
 			</arguments>
 		</compile>
 

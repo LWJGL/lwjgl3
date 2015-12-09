@@ -32,6 +32,7 @@ import java.util.*
 enum class Binding(val key: String) {
 	EGL("binding.egl"),
 	GLFW("binding.glfw"),
+	NANOVG("binding.nanovg"),
 	OPENAL("binding.openal"),
 	OPENCL("binding.opencl"),
 	OPENGL("binding.opengl"),
@@ -75,6 +76,7 @@ fun main(args: Array<String>) {
 
 		generate("org.lwjgl.egl", Binding.EGL)
 		generate("org.lwjgl.glfw", Binding.GLFW)
+		generate("org.lwjgl.nanovg", Binding.NANOVG)
 		generate("org.lwjgl.openal", Binding.OPENAL)
 		generate("org.lwjgl.opencl", Binding.OPENCL)
 		generate("org.lwjgl.opengl", Binding.OPENGL)

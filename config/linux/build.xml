@@ -93,6 +93,14 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</compile>
 
+		<compile if:true="${binding.nanovg}">
+			<arguments>
+				<arg value="-I${src.include.rel}/nanovg"/>
+				<arg value="-I${src.include.rel}/stb"/>
+				<fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
+			</arguments>
+		</compile>
+
 		<compile if:true="${binding.opencl}">
 			<arguments>
 				<arg value="-I${src.include.rel}/opencl"/>
