@@ -175,43 +175,66 @@ class Struct(
 				builder.append("\n\n")
 		}
 
-		if ( members.isNotEmpty() )
-			builder
-				.append(" <h3>${this@Struct.nativeName} members</h3>\n ")
-				.append(this@Struct.printStructLayout())
+		if ( members.isNotEmpty() ) {
+			builder.append("<h3>Layout</h3>\n\n");
+			builder.append(codeBlock(printStructLayout()))
+
+			val memberDoc = printMemberDocumentation()
+			if ( memberDoc.isNotEmpty() )
+				builder
+					.append("\n\n<h3>Member documentation</h3>\n\n")
+					.append(table(*memberDoc.toTypedArray()))
+		}
 
 		if ( builder.length != 0 )
 			println(processDocumentation(builder.toString()).toJavaDoc(indentation = ""))
 	}
 
-	private fun Struct.printStructLayout(): String {
-		return table(
-			tr(
-				th("Member"),
-				th("Type"),
-				th("Description")
-			),
-			*members.map {
-				tr(
-					td(it.name),
-					if ( it.isNestedStructDefinition )
-						td((it.nativeType as StructType).definition.printStructLayout())
-					else {
-						val nativeType = if ( it.nativeType is StructType && !it.nativeType.includesPointer )
-							"{@link ${it.nativeType.definition.className} ${it.nativeType.name}}"
+	private val nativeNameQualified: String get() {
+		val type = if ( union ) "union " else "struct "
+		return if ( nativeName.startsWith(type) )
+			nativeName
+		else if ( nativeName === ANONYMOUS )
+			type.substring(0, type.length - 1)
+		else
+			"$type$nativeName"
+	}
+
+	private fun Struct.printStructLayout(indentation: String = ""): String {
+		val memberIndentation = "$indentation    "
+		return """$nativeNameQualified {
+${members.map {
+			if ( it.isNestedStructDefinition )
+				"${(it.nativeType as StructType).definition.printStructLayout(memberIndentation)}${if ( it.name === ANONYMOUS ) "" else " ${it.name}"};"
+			else {
+				val nativeType = if ( it.nativeType is StructType && !it.nativeType.includesPointer )
+					"{@link ${it.nativeType.definition.className} ${it.nativeType.name}}"
+				else
+					it.nativeType.let {
+						if ( it is PointerType && !it.includesPointer )
+							"${it.name}${if ( !it.name.endsWith('*') ) " " else ""}*"
 						else
-							it.nativeType.let {
-								if ( it is PointerType && !it.includesPointer )
-									"${it.name}${if ( !it.name.endsWith('*') ) " " else ""}*"
-								else
-									it.name
-							}
-						td(if ( it is StructMemberArray ) "$nativeType[${it.size}]" else nativeType, className = "nw")
-					},
-					td(it.documentation)
-				)
-			}.toTypedArray()
-		)
+							it.name
+					}
+				"${if ( it is StructMemberArray ) "$nativeType[${it.size}]" else nativeType}${if ( it.name === ANONYMOUS ) "" else " ${it.name}"};"
+			}
+		}.joinToString("\n$memberIndentation", prefix = memberIndentation)}
+$indentation}"""
+	}
+
+	private fun Struct.printMemberDocumentation(prefix: String = "", documentation: MutableList<String> = ArrayList<String>()): List<String> {
+		members.forEach {
+			if ( it.isNestedStructDefinition )
+				(it.nativeType as StructType).definition.printMemberDocumentation(if ( it.name === ANONYMOUS ) prefix else "$prefix${it.name}.", documentation)
+			else {
+				if ( it.documentation.isNotEmpty() )
+					documentation.add(tr(
+						td("$prefix${it.name}"),
+						td(it.documentation)
+					))
+			}
+		}
+		return documentation
 	}
 
 	override fun PrintWriter.generateJava() {
