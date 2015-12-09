@@ -161,12 +161,14 @@ public final class Library {
 	 * @throws RuntimeException if the library could not be loaded
 	 */
 	public static SharedLibrary loadNative(Configuration name, String... defaultNames) {
-		if ( defaultNames.length == 1 || name.get() != null )
-			return loadNative(name.get(defaultNames[0]));
-		else {
+		if ( name.get() != null )
+			return loadNative(name.<String>get());
+		else if ( defaultNames.length <= 1 ) {
 			if ( defaultNames.length == 0 )
 				throw new RuntimeException("No default names specified.");
 
+			return loadNative(defaultNames[0]);
+		} else {
 			SharedLibrary library = null;
 			try {
 				library = Library.loadNative(defaultNames[0]); // try first
