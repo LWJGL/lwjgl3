@@ -26,35 +26,35 @@ ENABLE_WARNINGS()""")
 val NVGcontext_p = "NVGcontext".p
 
 val NVGcolor = struct(NANOVG_PACKAGE, "NVGColor", nativeName = "NVGcolor") {
-	documentation = ""
+	documentation = "A NanoVG color."
 
 	union {
-		float.array("rgba", "", size = 4)
+		float.array("rgba", "an array of 4 color components", size = 4)
 		struct {
-			float.member("r", "")
-			float.member("g", "")
-			float.member("b", "")
-			float.member("a", "")
+			float.member("r", "the color red component")
+			float.member("g", "the color green component")
+			float.member("b", "the color blue component")
+			float.member("a", "the color alpha component")
 		}
 	}
 }.nativeType
 
 val NVGpaint = struct(NANOVG_PACKAGE, "NVGPaint", nativeName = "NVGpaint") {
-	documentation = ""
+	documentation = "A NanoVG paint."
 
-	float.array("xform", "", size = 6)
-	float.array("extent", "", size = 2)
-	float.member("radius", "")
-	float.member("feather", "")
-	NVGcolor.member("innerColor", "")
-	NVGcolor.member("outerColor", "")
-	int.member("image", "")
+	float.array("xform", "the transformation matrix", size = 6)
+	float.array("extent", "the extent", size = 2)
+	float.member("radius", "the radius")
+	float.member("feather", "the feather amount")
+	NVGcolor.member("innerColor", "the inner color")
+	NVGcolor.member("outerColor", "the outer color")
+	int.member("image", "the image handle")
 }.nativeType
 
 val charptr = "char".p // address, not data
 
 val NVGglyphPosition_p = struct_p(NANOVG_PACKAGE, "NVGGlyphPosition", nativeName = "NVGglyphPosition") {
-	documentation = ""
+	documentation = "A glyph position."
 
 	charptr.member("str", "position of the glyph in the input string")
 	float.member("x", "the x-coordinate of the logical glyph position")
@@ -63,7 +63,7 @@ val NVGglyphPosition_p = struct_p(NANOVG_PACKAGE, "NVGGlyphPosition", nativeName
 }
 
 val NVGtextRow_p = struct_p(NANOVG_PACKAGE, "NVGTextRow", nativeName = "NVGtextRow") {
-	documentation = ""
+	documentation = "A text row."
 
 	charptr.member("start", "pointer to the input text where the row starts")
 	charptr.member("end", "pointer to the input text where the row ends (one past the last character")

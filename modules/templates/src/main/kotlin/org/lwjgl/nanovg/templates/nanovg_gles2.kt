@@ -20,11 +20,9 @@ val nanovg_gles2 = dependsOn(Binding.OPENGLES) {
 #include "nanovg_gl.h"
 #include "nanovg_gl_utils.h"""")
 
-		documentation =
-			"""
-			"""
+		documentation = "Implementation of the NanoVG API using OpenGL ES 2.0."
 
-		EnumConstant(
+		val CreateFlags = EnumConstant(
 			"Create flags.",
 
 			"ANTIALIAS".enumExpr("Flag indicating if geometry based anti-aliasing is used (may not be needed when using MSAA).", "1<<0"),
@@ -36,7 +34,7 @@ val nanovg_gles2 = dependsOn(Binding.OPENGLES) {
 				"1<<1"
 			),
 			"DEBUG".enumExpr("Flag indicating that additional debug checks are done.", "1<<2")
-		)
+		).javaDocLinks
 
 		EnumConstant(
 			"These are additional flags on top of NVGimageFlags.",
@@ -44,65 +42,67 @@ val nanovg_gles2 = dependsOn(Binding.OPENGLES) {
 			"IMAGE_NODELETE".enumExpr("Do not delete GL texture handle.", "1<<16")
 		)
 
+		val ctx = NVGcontext_p.IN("ctx", "the NanoVG context")
+
 		int(
 			"lCreateImageFromHandle",
-			"",
+			"Creates a NanoVG image from an OpenGL texture.",
 
-			NVGcontext_p.IN("ctx", ""),
-			GLuint.IN("textureId", ""),
-			int.IN("w", ""),
-			int.IN("h", ""),
-			int.IN("flags", "")
+			ctx,
+			GLuint.IN("textureId", "the OpenGL texture id"),
+			int.IN("w", "the image width"),
+			int.IN("h", "the image height"),
+			int.IN("flags", "the image flags")
 		)
 
 		GLuint(
 			"lImageHandle",
-			"",
+			"Returns the OpenGL texture id associated with a NanoVG image.",
 
-			NVGcontext_p.IN("ctx", ""),
-			int.IN("image", "")
+			ctx,
+			int.IN("image", "the image handle")
 		)
 
 		Code(
 			nativeCall = "\treturn (jlong)(intptr_t)nvgCreateGLES2($JNIENV, flags);"
 		)..NVGcontext_p(
 			"CreateGLES2",
-			"",
+			"Creates a NanoVG context with an OpenGL ES 2.0 rendering back-end.",
 
-			int.IN("flags", "")
+			int.IN("flags", "the context flags", CreateFlags)
 		)
 
 		void(
 			"DeleteGLES2",
-			"",
+			"Deletes a NanoVG context created with #CreateGLES2().",
 
-			NVGcontext_p.IN("ctx", "")
+			ctx
 		)
 
 		void(
 			"luBindFramebuffer",
-			"",
+			"Binds the framebuffer object associated with the specified #NVGLUFramebuffer.",
 
-			NVGcontext_p.IN("ctx", ""),
-			nullable..NVGLUframebuffer_p.IN("fb", "")
+			ctx,
+			nullable..NVGLUframebuffer_p.IN("fb", "the framebuffer to bind")
 		)
 
 		NVGLUframebuffer_p(
 			"luCreateFramebuffer",
-			"",
+			"Creates a framebuffer object to render to.",
 
-			NVGcontext_p.IN("ctx", ""),
-			int.IN("w", ""),
-			int.IN("h", ""),
-			int.IN("imageFlags", "")
+			ctx,
+			int.IN("w", "the framebuffer width"),
+			int.IN("h", "the framebuffer height"),
+			int.IN("imageFlags", "the image flags")
 		)
 
 		void(
 			"luDeleteFramebuffer",
-			"",
+			"Deletes an #NVGLUFramebuffer.",
 
-			NVGcontext_p.IN("ctx", ""),
-			NVGLUframebuffer_p.IN("fb", "")
+			ctx,
+			NVGLUframebuffer_p.IN("fb", "the framebuffer to delete")
 		)
 	}
 }
