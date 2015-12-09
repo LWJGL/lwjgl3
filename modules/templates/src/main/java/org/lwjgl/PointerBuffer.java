@@ -23,8 +23,6 @@ public interface PointerBuffer extends Comparable<PointerBuffer> {
 	boolean hasRemaining();
 	PointerBuffer slice();
 	PointerBuffer duplicate();
-	PointerBuffer asReadOnlyBuffer();
-	boolean isReadOnly();
 	long get();
 	PointerBuffer put(long p);
 	long get(int index);
