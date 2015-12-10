@@ -135,7 +135,7 @@ public final class APIUtil {
 	public static APIVersion apiParseVersion(String version, String prefix) {
 		String pattern = "([0-9]+)[.]([0-9]+)([.]\\S+)?\\s*(.+)?";
 		if ( prefix != null )
-			pattern = prefix + "\\s+" + pattern;
+			pattern = "(?:" + prefix + "\\s+)?" + pattern;
 
 		Matcher matcher = Pattern.compile(pattern).matcher(version);
 		if ( !matcher.matches() )
