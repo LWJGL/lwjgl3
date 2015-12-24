@@ -165,7 +165,7 @@ fun simpleBinding(
 /** Creates a simple APIBinding that delegates function pointer loading to this APIBinding. */
 fun APIBinding.delegate(
 	libraryExpression: String
-) = object : SimpleBinding(this.callingConvention) {
+) = object : SimpleBinding(callingConvention) {
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("""	// --- [ Function Addresses ] ---
 

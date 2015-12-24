@@ -15,39 +15,37 @@ private val UNESCAPE_PATTERN = Pattern.compile("\uFFFF")
 
 fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
 
+private fun StringBuilder.appendBlock(linePrefix: String, text: String, start: Int, end: Int) {
+	append('\n')
+	append(linePrefix)
+	append('\n')
+	append(linePrefix)
+	val p = !NON_PARAGRAPH_PATTERN.matcher(text.substring(start)).find()
+	if ( p ) append("<p>")
+	this.append(text, start, end)
+	if ( p ) append("</p>")
+}
+
 private fun String.cleanup(linePrefix: String = "\t * "): String {
 	val trimmed = trim()
 	val matcher = BLOCK_PATTERN.matcher(trimmed)
 
-	val result: String
-	if ( matcher.find() ) {
-		val builder = StringBuilder(trimmed.length)
+	return if (matcher.find()) {
+		StringBuilder(trimmed.length).run {
+			append(trimmed, 0, matcher.start())
 
-		fun StringBuilder.appendBlock(linePrefix: String, text: String, start: Int, end: Int) {
-			this.append('\n')
-			this.append(linePrefix)
-			this.append('\n')
-			this.append(linePrefix)
-			val p = !NON_PARAGRAPH_PATTERN.matcher(text.substring(start)).find()
-			if ( p ) this.append("<p>")
-			this.append(text, start, end)
-			if ( p ) this.append("</p>")
+			var lastMatch = matcher.end()
+			while ( matcher.find() ) {
+				appendBlock(linePrefix, trimmed, lastMatch, matcher.start())
+				lastMatch = matcher.end()
+			}
+			appendBlock(linePrefix, trimmed, lastMatch, trimmed.length)
+
+			toString()
 		}
-
-		builder.append(trimmed, 0, matcher.start())
-
-		var lastMatch = matcher.end()
-		while ( matcher.find() ) {
-			builder.appendBlock(linePrefix, trimmed, lastMatch, matcher.start())
-			lastMatch = matcher.end()
-		}
-		builder.appendBlock(linePrefix, trimmed, lastMatch, trimmed.length)
-
-		result = builder.toString()
-	} else
-		result = trimmed
-
-	return result
+	} else {
+		trimmed
+	}
 		.replaceAll(CLEANUP_PATTERN, linePrefix)
 		.replaceAll(UNESCAPE_PATTERN, "")
 }
@@ -72,53 +70,53 @@ fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Sequence<Paramete
 	if ( params.isEmpty() && returnDoc.isEmpty() )
 		return documentation.toJavaDoc()
 
-	val builder = StringBuilder("\t/**\n\t * ${documentation.cleanup()}")
+	return StringBuilder("\t/**\n\t * ${documentation.cleanup()}").run {
+		val returnsStructValue = !returnDoc.isEmpty() && returns is StructType && !returns.includesPointer
 
-	val returnsStructValue = !returnDoc.isEmpty() && returns is StructType && !returns.includesPointer
+		if ( !params.isEmpty() ) {
+			// Find maximum param name length
+			var alignment = params.map { it.name.length }.fold(0) { left, right -> Math.max(left, right) }
+			if ( returnsStructValue )
+				alignment = Math.max(alignment, RESULT.length)
 
-	if ( !params.isEmpty() ) {
-		// Find maximum param name length
-		var alignment = params.map { it.name.length }.fold(0) { left, right -> Math.max(left, right) }
-		if ( returnsStructValue )
-			alignment = Math.max(alignment, RESULT.length)
+			val multilineAligment = paramMultilineAligment(alignment)
 
-		val multilineAligment = paramMultilineAligment(alignment)
-
-		builder.append("\n\t *")
-		params.forEach {
-			printParam(builder, it.name, processDocumentation(it.documentation), alignment, multilineAligment)
+			append("\n\t *")
+			params.forEach {
+				printParam(this, it.name, processDocumentation(it.documentation), alignment, multilineAligment)
+			}
+			if ( returnsStructValue )
+				printParam(this, RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
 		}
-		if ( returnsStructValue )
-			printParam(builder, RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
+
+		if ( !returnDoc.isEmpty() && !returnsStructValue ) {
+			append("\n\t *")
+			append("\n\t * @return ")
+			append(processDocumentation(returnDoc).cleanup("\t *         "))
+		}
+
+		if ( !since.isEmpty() ) {
+			append("\n\t *")
+			append("\n\t * @since ")
+			append(since)
+		}
+
+		append("\n\t */")
+
+		toString()
 	}
-
-	if ( !returnDoc.isEmpty() && !returnsStructValue ) {
-		builder.append("\n\t *")
-		builder.append("\n\t * @return ")
-		builder.append(processDocumentation(returnDoc).cleanup("\t *         "))
-	}
-
-	if ( !since.isEmpty() ) {
-		builder.append("\n\t *")
-		builder.append("\n\t * @since ")
-		builder.append(since)
-	}
-
-	builder.append("\n\t */")
-
-	return builder.toString()
 }
 
 // Used for aligning parameter javadoc when it spans multiple lines.
 private fun paramMultilineAligment(alignment: Int): String {
 	val whitespace = " @param ".length + alignment + 1
-	val builder = StringBuilder("\t *".length + whitespace)
+	return StringBuilder("\t *".length + whitespace).run {
+		append("\t *")
+		for (i in 0..whitespace - 1)
+			append(' ')
 
-	builder.append("\t *")
-	for (i in 0..whitespace - 1)
-		builder.append(' ')
-
-	return builder.toString()
+		toString()
+	}
 }
 
 private fun printParam(builder: StringBuilder, name: String, documentation: String, alignment: Int, multilineAligment: String) {
@@ -150,59 +148,55 @@ ${code
 
 fun url(href: String, innerHTML: String) = """<a href="$href">$innerHTML</a>"""
 
-fun table(vararg rows: String, matrix: Boolean = false): String {
-	val builder = StringBuilder(512)
-	builder.append("<table border=1 cellspacing=0 cellpadding=2 class=${if ( matrix ) "\"lwjgl matrix\"" else "lwjgl"}>")
+fun table(vararg rows: String, matrix: Boolean = false) = StringBuilder(512).run {
+	append("<table border=1 cellspacing=0 cellpadding=2 class=${if ( matrix ) "\"lwjgl matrix\"" else "lwjgl"}>")
 	for (row in rows) {
-		builder.append("\n\t")
-		builder.append(row)
+		append("\n\t")
+		append(row)
 	}
-	builder.append("\n\t</table>")
+	append("\n\t</table>")
 
-	return builder.toString()
+	toString()
 }
 
-fun tr(vararg columns: String): String {
-	val builder = StringBuilder()
-	builder.append("<tr>")
+fun tr(vararg columns: String) = StringBuilder().run {
+	append("<tr>")
 	for (column in columns)
-		builder.append(column)
-	builder.append("</tr>")
+		append(column)
+	append("</tr>")
 
-	return builder.toString()
+	toString()
 }
 
 fun th(content: String = "", colspan: Int = 1, rowspan: Int = 1) = td(content, colspan, rowspan, "th")
-fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "td", className: String? = null): String {
-	val builder = StringBuilder()
-	builder.append("<$tag")
+fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "td", className: String? = null) = StringBuilder().run {
+	append("<$tag")
 	if ( 1 < colspan )
-		builder.append(" colspan=$colspan")
+		append(" colspan=$colspan")
 	if ( 1 < rowspan )
-		builder.append(" rowspan=$rowspan")
+		append(" rowspan=$rowspan")
 	if ( className != null )
-		builder.append(" class=\"$className\"")
-	builder.append(">")
-	builder.append(content.trim())
-	builder.append("</$tag>")
+		append(" class=\"$className\"")
+	append(">")
+	append(content.trim())
+	append("</$tag>")
 
-	return builder.toString()
+	toString()
 }
 
-private fun htmlList(tag: String, attributes: String, vararg items: String): String {
-	val builder = StringBuilder(512)
-	builder.append("<$tag")
+private fun htmlList(tag: String, attributes: String, vararg items: String) = StringBuilder(512).run {
+	append("<$tag")
 	if ( attributes.isNotEmpty() )
-		builder.append(" $attributes")
-	builder.append(">\n")
+		append(" $attributes")
+	append(">\n")
 	for (li in items) {
-		builder.append("\t<li>")
-		builder.append(li.trim())
-		builder.append("</li>\n")
+		append("\t<li>")
+		append(li.trim())
+		append("</li>\n")
 	}
-	builder.append("\t</$tag>")
+	append("\t</$tag>")
 
-	return builder.toString()
+	toString()
 }
 
 fun ul(vararg items: String) = htmlList("ul", "", *items)

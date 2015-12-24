@@ -148,7 +148,7 @@ class Generator(
 		if ( !packageDirectory.isDirectory )
 			return
 
-		val classFiles = packageDirectory.listFiles {
+		val classFiles = packageDirectory.listFiles { it ->
 			it.isFile && it.extension.equals("kt")
 		}!!
 
@@ -294,7 +294,7 @@ private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 	if ( !pck.exists() || !pck.isDirectory )
 		return 0
 
-	val classes = pck.listFiles {
+	val classes = pck.listFiles { it ->
 		(it.isDirectory && recursive) || (it.isFile && it.name.endsWith(".kt"))
 	}
 

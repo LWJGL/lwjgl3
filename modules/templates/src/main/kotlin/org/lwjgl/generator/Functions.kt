@@ -277,7 +277,7 @@ class NativeClassFunction(
 					it.error("An AutoSize for PointerArray parameter does not exist")
 
 				val lengthsParamName = it[PointerArray].lengthsParam
-				val lengthsParam = paramMap.getRaw(lengthsParamName)
+				val lengthsParam = paramMap[lengthsParamName]
 				if ( lengthsParam != null && !lengthsParam.nativeType.mapping.isPointerSize )
 					it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
 			}
@@ -963,7 +963,7 @@ class NativeClassFunction(
 			it.forEach {
 				val pointerArray = it[PointerArray]
 
-				val lengthsParam = paramMap.getRaw(pointerArray.lengthsParam)
+				val lengthsParam = paramMap[pointerArray.lengthsParam]
 				if ( lengthsParam != null )
 					transforms[lengthsParam] = PointerArrayLengthsTransform(it, true)
 
@@ -984,7 +984,7 @@ class NativeClassFunction(
 			val names = it.map {
 				val pointerArray = it[PointerArray]
 
-				val lengthsParam = paramMap.getRaw(pointerArray.lengthsParam)
+				val lengthsParam = paramMap[pointerArray.lengthsParam]
 				if ( lengthsParam != null )
 					transforms[lengthsParam] = PointerArrayLengthsTransform(it, false)
 
