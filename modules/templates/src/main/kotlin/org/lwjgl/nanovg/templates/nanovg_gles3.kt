@@ -67,7 +67,12 @@ val nanovg_gles3 = dependsOn(Binding.OPENGLES) {
 			nativeCall = "\treturn (jlong)(intptr_t)nvgCreateGLES3($JNIENV, flags);"
 		)..NVGcontext_p(
 			"CreateGLES3",
-			"Creates a NanoVG context with an OpenGL ES 3.0 rendering back-end.",
+			"""
+			Creates a NanoVG context with an OpenGL ES 3.0 rendering back-end.
+
+			An OpenGL ES 3.0+ context must be current in the current thread when this function is called and the returned NanoVG context may only be used in
+			the thread in which that OpenGL context is current.
+			""",
 
 			int.IN("flags", "the context flags", CreateFlags)
 		)

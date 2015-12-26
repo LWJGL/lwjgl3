@@ -929,7 +929,11 @@ nvgFill(vg);""")}
 
 	int(
 		"CreateFontMem",
-		"Creates image by loading it from the specified memory chunk.",
+		"""
+		Creates font by loading it from the specified memory chunk.
+
+		The memory chunk must remain valid for as long as the font is used by NanoVG.
+		""",
 
 		ctx,
 		const..charASCII_p.IN("name", "the font name"),
