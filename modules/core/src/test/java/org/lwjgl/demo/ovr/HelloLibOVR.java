@@ -23,6 +23,8 @@ public final class HelloLibOVR {
 		System.out.println("OVRDetectResult.IsOculusHMDConnected = " + detect.IsOculusHMDConnected());
 		System.out.println("OVRDetectResult.IsOculusServiceRunning = " + detect.IsOculusServiceRunning());
 
+		detect.free();
+
 		OVRLogCallback callback = new OVRLogCallback() {
 			@Override
 			public void invoke(long userData, int level, long message) {
@@ -55,6 +57,8 @@ public final class HelloLibOVR {
 		memFree(hmd_p);
 
 		ovr_Shutdown();
+
+		callback.release();
 	}
 
 }
