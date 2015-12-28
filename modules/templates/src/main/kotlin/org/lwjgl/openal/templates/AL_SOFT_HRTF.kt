@@ -22,7 +22,7 @@ val ALC_SOFT_HRTF = "SOFTHRTF".nativeClassALC("SOFT_HRTF") {
 
 	IntConstant(
 		"""
-		Accepted as part of the {@code attrList} parameter of ALC10#CreateContext() and #DeviceResetSOFT(), and as the {@code paramName} parameter of
+		Accepted as part of the {@code attrList} parameter of ALC10#CreateContext() and #ResetDeviceSOFT(), and as the {@code paramName} parameter of
 		ALC10#GetIntegerv().
 		""",
 
@@ -30,13 +30,13 @@ val ALC_SOFT_HRTF = "SOFTHRTF".nativeClassALC("SOFT_HRTF") {
 	)
 
 	IntConstant(
-		"Accepted as part of the {@code attrList} parameter of ALC10#CreateContext() and #DeviceResetSOFT().",
+		"Accepted as part of the {@code attrList} parameter of ALC10#CreateContext() and #ResetDeviceSOFT().",
 
 		"HRTF_ID_SOFT"..0x1996
 	)
 
 	IntConstant(
-		"Accepted as part of the {@code attrList} parameter of ALC10#CreateContext() and #DeviceResetSOFT(), for the #HRTF_SOFT attribute.",
+		"Accepted as part of the {@code attrList} parameter of ALC10#CreateContext() and #ResetDeviceSOFT(), for the #HRTF_SOFT attribute.",
 
 		"DONT_CARE_SOFT"..0x0002
 	)
