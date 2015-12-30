@@ -190,17 +190,7 @@ public enum Configuration {
 	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenGL library (<b>org.lwjgl.opengl.explicitInit</b>). */
 	EXPLICIT_INIT_OPENGL("org.lwjgl.opengl.explicitInit", StateInit.BOOLEAN),
 	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenGL ES library (<b>org.lwjgl.opengles.explicitInit</b>). */
-	EXPLICIT_INIT_OPENGLES("org.lwjgl.opengles.explicitInit", StateInit.BOOLEAN),
-
-	/**
-	 * Set to true to use the EGL context API. The {@link #LIBRARY_NAME_GLFW} option must also be set to a GLFW implementation that supports EGL.
-	 *
-	 * <p style="font-family: monospace">
-	 * Property: <b>org.lwjgl.glfw.EGL</b><br>
-	 * &nbsp; &nbsp; Type: boolean<br>
-	 * &nbsp; &nbsp;Usage: Static<br>
-	 */
-	GLFW_EGL("org.lwjgl.glfw.EGL", StateInit.BOOLEAN);
+	EXPLICIT_INIT_OPENGLES("org.lwjgl.opengles.explicitInit", StateInit.BOOLEAN);
 
 	private enum StateInit {
 		STRING {
