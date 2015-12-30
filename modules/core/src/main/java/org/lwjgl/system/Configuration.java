@@ -190,7 +190,18 @@ public enum Configuration {
 	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenGL library (<b>org.lwjgl.opengl.explicitInit</b>). */
 	EXPLICIT_INIT_OPENGL("org.lwjgl.opengl.explicitInit", StateInit.BOOLEAN),
 	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenGL ES library (<b>org.lwjgl.opengles.explicitInit</b>). */
-	EXPLICIT_INIT_OPENGLES("org.lwjgl.opengles.explicitInit", StateInit.BOOLEAN);
+	EXPLICIT_INIT_OPENGLES("org.lwjgl.opengles.explicitInit", StateInit.BOOLEAN),
+
+	/**
+	 * By default, LWJGL will check if certain GLFW functions are called on the first thread of the process and fail if that is not the case. Set this property
+	 * to false to disable this behavior.
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.glfw.checkThread0</b><br>
+	 * &nbsp; &nbsp; Type: boolean<br>
+	 * &nbsp; &nbsp;Usage: Static<br>
+	 */
+	GLFW_CHECK_THREAD0("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
 
 	private enum StateInit {
 		STRING {

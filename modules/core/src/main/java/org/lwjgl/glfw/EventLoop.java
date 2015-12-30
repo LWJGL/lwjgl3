@@ -4,9 +4,10 @@
  */
 package org.lwjgl.glfw;
 
-import org.lwjgl.system.SharedLibrary;
+import org.lwjgl.system.Configuration;
 import org.lwjgl.system.Library;
 import org.lwjgl.system.Platform;
+import org.lwjgl.system.SharedLibrary;
 import org.lwjgl.system.macosx.ObjCRuntime;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -78,6 +79,9 @@ final class EventLoop {
 	}
 
 	private static boolean isMainThread() {
+		if ( !Configuration.GLFW_CHECK_THREAD0.get(true) )
+			return true;
+
 		long objc_msgSend = ObjCRuntime.getLibrary().getFunctionAddress("objc_msgSend");
 
 		long NSThread = objc_getClass("NSThread");
