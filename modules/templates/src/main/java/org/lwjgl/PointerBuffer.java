@@ -50,6 +50,9 @@ public interface PointerBuffer extends Comparable<PointerBuffer> {
 	FloatBuffer getFloatBuffer(int size);
 	DoubleBuffer getDoubleBuffer(int size);
 	PointerBuffer getPointerBuffer(int size);
+	String getStringASCII();
+	String getStringUTF8();
+	String getStringUTF16();
 	ByteBuffer getByteBuffer(int index, int size);
 	ShortBuffer getShortBuffer(int index, int size);
 	IntBuffer getIntBuffer(int index, int size);
@@ -57,6 +60,9 @@ public interface PointerBuffer extends Comparable<PointerBuffer> {
 	FloatBuffer getFloatBuffer(int index, int size);
 	DoubleBuffer getDoubleBuffer(int index, int size);
 	PointerBuffer getPointerBuffer(int index, int size);
+	String getStringASCII(int index);
+	String getStringUTF8(int index);
+	String getStringUTF16(int index);
 	PointerBuffer get(long[] dst, int offset, int length);
 	PointerBuffer get(long[] dst);
 	PointerBuffer put(PointerBuffer src);

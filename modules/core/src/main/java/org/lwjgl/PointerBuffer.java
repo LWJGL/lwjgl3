@@ -534,6 +534,15 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	/** Returns a PointerBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
 	public PointerBuffer getPointerBuffer(int size) { return memPointerBuffer(get(), size); }
 
+	/** Decodes the ASCII string that starts at the address found at the current position. */
+	public String getStringASCII() { return memDecodeASCII(get()); }
+
+	/** Decodes the UTF-8 string that starts at the address found at the current position. */
+	public String getStringUTF8() { return memDecodeUTF8(get()); }
+
+	/** Decodes the UTF-16 string that starts at the address found at the current position. */
+	public String getStringUTF16() { return memDecodeUTF16(get()); }
+
 	// ---
 
 	/** Returns a ByteBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
@@ -556,6 +565,15 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 
 	/** Returns a PointerBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
 	public PointerBuffer getPointerBuffer(int index, int size) { return memPointerBuffer(get(index), size); }
+
+	/** Decodes the ASCII string that starts at the address found at the specified index. */
+	public String getStringASCII(int index) { return memDecodeASCII(get(index)); }
+
+	/** Decodes the UTF-8 string that starts at the address found at the specified index. */
+	public String getStringUTF8(int index) { return memDecodeUTF8(get(index)); }
+
+	/** Decodes the UTF-16 string that starts at the address found at the specified index. */
+	public String getStringUTF16(int index) { return memDecodeUTF16(get(index)); }
 
 	// -- Bulk get operations --
 
