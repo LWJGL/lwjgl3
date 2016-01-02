@@ -144,7 +144,7 @@ License terms: http://lwjgl.org/license.php
 		</lwjgl.javac>
 
 		<!-- Compile Kotlin code -->
-		<echo message="Compiling Kotlin templates. This will take several seconds..." level="info" taskname="Templates"/>
+		<echo message="Compiling Kotlin templates. This will take 1-2 minutes..." level="info" taskname="Templates"/>
 		<java
 			classpath="${kotlinc}/lib/kotlin-preloader.jar"
 			classname="org.jetbrains.kotlin.preloading.Preloader"
