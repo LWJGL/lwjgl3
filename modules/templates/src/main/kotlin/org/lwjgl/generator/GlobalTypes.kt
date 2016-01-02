@@ -56,9 +56,9 @@ val unsigned_int_p = unsigned_int.p
 // strings
 
 val charASCII = CharType("char", CharMapping.ASCII) // for struct members
-val charASCII_p = CharSequenceType(name = "char", charMapping = CharMapping.ASCII)
+val charASCII_p = CharSequenceType(charASCII)
 val charASCII_pp = charASCII_p.p
 
 val charUTF8 = CharType("char", CharMapping.UTF8) // for struct members
-val charUTF8_p = CharSequenceType(name = "char", charMapping = CharMapping.UTF8)
+val charUTF8_p = CharSequenceType(charUTF8)
 val charUTF8_pp = charUTF8_p.p
