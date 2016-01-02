@@ -15,10 +15,11 @@ License terms: http://lwjgl.org/license.php
 	</fileset>
 
 	<macrodef name="cl">
+		<attribute name="flags" default="/Wall /WX"/>
 		<element name="arguments"/>
 		<sequential>
 			<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" relative="true" parallel="true" taskname="Compiler">
-				<arg line="/c /Wall /WX /EHsc /Ox /Gy /GR- /MT /MP /nologo /DLWJGL_WINDOWS /DLWJGL_${build.arch}"/>
+				<arg line="/c @{flags} /EHsc /Ox /Gy /GR- /MT /MP /nologo /DNDEBUG /DLWJGL_WINDOWS /DLWJGL_${build.arch}"/>
 				<arg value="/Fo${bin.native}\"/>
 
 				<arg value="/I${java.home}\..\include"/>
