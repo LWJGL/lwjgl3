@@ -322,7 +322,7 @@ public class TemplateFormatter {
 
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile(
 		TYPE_PATTERN + // return type + function name
-		"\\s*[(]" + // opening parenthesis
+		"\\s*[(]\\s*" + // opening parenthesis
 		"((?:void)?(?:(?:\\s*,)?\\s*" + TYPE_PATTERN + ")*)" + // void or parameter list
 		"\\s*[)]", // closing parenthesis
 		Pattern.MULTILINE
