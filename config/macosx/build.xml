@@ -64,7 +64,7 @@ License terms: http://lwjgl.org/license.php
 
 				<arguments/>
 
-				<regexpmapper from="(\w+)\.c" to="\1.o"/>
+				<regexpmapper from="(\w+)\.(c|m)" to="\1.o"/>
 			</apply>
 		</sequential>
 	</macrodef>

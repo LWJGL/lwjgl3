@@ -101,8 +101,14 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</compile>
 
+		<local name="gtk3"/>
+		<exec outputproperty="gtk3" executable="pkg-config" failonerror="true" taskname="gtk-3.0" if:true="${binding.nfd}">
+			<arg line="--cflags gtk+-3.0"/>
+		</exec>
+
 		<compile if:true="${binding.nfd}">
 			<arguments>
+				<arg line="${gtk3}"/>
 				<arg value="-I${src.include.rel}/nfd"/>
 				<arg value="-I${src.include.rel}/nfd/include"/>
 				<fileset dir="." includes="${src.include}/nfd/nfd_common.c"/>

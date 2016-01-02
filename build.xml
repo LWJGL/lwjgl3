@@ -322,6 +322,15 @@ License terms: http://lwjgl.org/license.php
 			</and>
 		</condition>
 
+		<local name="nfd"/>
+		<condition property="nfd" value="true" else="false">
+			<and>
+				<istrue value="${binding.nfd}"/>
+				<istrue value="${binding.glfw}"/>
+				<istrue value="${binding.opengl}"/>
+			</and>
+		</condition>
+
 		<lwjgl.javac destdir="${bin.tests}" taskname="Tests">
 			<classpath>
 				<pathelement path="${bin.core}"/>
@@ -338,7 +347,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/demo/glfw/**" if:true="${binding.glfw}"/>
 			<include name="org/lwjgl/demo/nanovg/**" if:true="${nanovg}"/>
-			<include name="org/lwjgl/demo/nfd/**" if:true="${binding.nfd}"/>
+			<include name="org/lwjgl/demo/nfd/**" if:true="${nfd}"/>
 
 			<include name="org/lwjgl/demo/openal/**" if:true="${binding.openal}"/>
 			<exclude name="org/lwjgl/demo/openal/ALCDemo.java" unless:true="${openal_stb}"/>
