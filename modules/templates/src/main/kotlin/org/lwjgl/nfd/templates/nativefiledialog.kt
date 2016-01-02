@@ -23,9 +23,9 @@ val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE,
 
 		<h3>Usage</h3>
 		${ul(
-			"<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/demo/nfd/OpenSingle.java\">Single file open dialog</a>",
-			"<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/demo/nfd/OpenMulti.java\">Multiple file open dialog</a>",
-			"<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/demo/nfd/Save.java\">Save dialog</a>"
+			"<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/demo/nfd/HelloNFD.java\\#L104\">Single file open dialog</a>",
+			"<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/demo/nfd/HelloNFD.java\\#L126\">Multiple file open dialog</a>",
+			"<a href=\"https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/demo/nfd/HelloNFD.java\\#L151\">Save dialog</a>"
 		)}
 
 		<h3>File Filter Syntax</h3>
