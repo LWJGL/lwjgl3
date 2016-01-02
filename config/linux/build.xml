@@ -101,6 +101,16 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</compile>
 
+		<compile if:true="${binding.nfd}">
+			<arguments>
+				<arg value="-I${src.include.rel}/nfd"/>
+				<arg value="-I${src.include.rel}/nfd/include"/>
+				<fileset dir="." includes="${src.include}/nfd/nfd_common.c"/>
+				<fileset dir="." includes="${src.include}/nfd/nfd_gtk.c"/>
+				<fileset dir="." includes="${src.generated.native}/nfd/*.c"/>
+			</arguments>
+		</compile>
+
 		<compile if:true="${binding.opencl}">
 			<arguments>
 				<arg value="-I${src.include.rel}/opencl"/>
@@ -185,6 +195,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-lm"/>
 			<arg value="-lrt"/>
 			<arg value="-lpthread"/>
+			<arg value="-lgtk-3" if:true="${binding.nfd}"/>
 
 			<arg line="-Xlinker --version-script -Xlinker ${version.script}"/>
 

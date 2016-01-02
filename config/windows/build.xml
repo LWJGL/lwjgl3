@@ -84,6 +84,23 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</cl>
 
+		<cl if:true="${binding.nfd}">
+			<arguments>
+				<arg value="/I${src.include}\nfd"/>
+				<arg value="/I${src.include}\nfd\include"/>
+				<fileset dir="." includes="${src.generated.native}/nfd/*.c"/>
+			</arguments>
+		</cl>
+
+		<cl flags="" if:true="${binding.nfd}">
+			<arguments>
+				<arg value="/I${src.include}\nfd"/>
+				<arg value="/I${src.include}\nfd\include"/>
+				<fileset dir="." includes="${src.include}/nfd/nfd_common.c"/>
+				<fileset dir="." includes="${src.include}/nfd/nfd_win.cpp"/>
+			</arguments>
+		</cl>
+
 		<cl if:true="${binding.opencl}">
 			<arguments>
 				<arg value="/I${src.include}\opencl"/>

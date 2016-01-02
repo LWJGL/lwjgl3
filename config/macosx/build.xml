@@ -112,6 +112,16 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</compile>
 
+		<compile if:true="${binding.nfd}">
+			<arguments>
+				<arg value="-I${src.include.rel}/nfd"/>
+				<arg value="-I${src.include.rel}/nfd/include"/>
+				<fileset dir="." includes="${src.include}/nfd/nfd_common.c"/>
+				<fileset dir="." includes="${src.include}/nfd/nfd_cocoa.m"/>
+				<fileset dir="." includes="${src.generated.native}/nfd/*.c"/>
+			</arguments>
+		</compile>
+
 		<compile if:true="${binding.opencl}">
 			<arguments>
 				<arg value="-I${src.include.rel}/opencl"/>
@@ -164,7 +174,8 @@ License terms: http://lwjgl.org/license.php
 		<apply executable="${compiler}" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
 			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/${LWJGL_LIBRARY}'/>
-			<arg line="-framework Foundation"/>
+			<arg line="-framework Foundation" unless:true="${binding.nfd}"/>
+			<arg line="-framework AppKit" if:true="${binding.nfd}"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
