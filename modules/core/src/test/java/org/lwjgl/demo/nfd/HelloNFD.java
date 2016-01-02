@@ -10,6 +10,7 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.nfd.NFDPathSet;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.system.Platform;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nfd.NativeFileDialog.*;
@@ -22,6 +23,16 @@ public final class HelloNFD {
 	}
 
 	public static void main(String[] args) {
+		final int mod;
+		final String modDescr;
+		if ( Platform.get() == Platform.MACOSX ) {
+			mod = GLFW_MOD_SUPER;
+			modDescr = "Cmd";
+		} else {
+			mod = GLFW_MOD_CONTROL;
+			modDescr = "Ctrl";
+		}
+
 		GLFWErrorCallback errorfun = GLFWErrorCallback.createPrint();
 		GLFWKeyCallback keyfun = new GLFWKeyCallback() {
 			@Override
@@ -34,7 +45,7 @@ public final class HelloNFD {
 						glfwSetWindowShouldClose(window, GLFW_TRUE);
 						break;
 					case GLFW_KEY_O:
-						if ( (mods & GLFW_MOD_CONTROL) != 0 ) {
+						if ( (mods & mod) != 0 ) {
 							if ( (mods & GLFW_MOD_SHIFT) != 0 )
 								openMulti();
 							else
@@ -42,7 +53,7 @@ public final class HelloNFD {
 						}
 						break;
 					case GLFW_KEY_S:
-						if ( (mods & GLFW_MOD_CONTROL) != 0 )
+						if ( (mods & mod) != 0 )
 							save();
 						break;
 				}
@@ -72,9 +83,9 @@ public final class HelloNFD {
 
 		glfwSwapInterval(1);
 
-		System.out.println("Press Ctrl+O to launch the single file open dialog.");
-		System.out.println("Press Ctrl+Shift+O to launch the multi file open dialog.");
-		System.out.println("Press Ctrl+S to launch the file save dialog.");
+		System.out.println("Press " + modDescr + "+O to launch the single file open dialog.");
+		System.out.println("Press " + modDescr + "+Shift+O to launch the multi file open dialog.");
+		System.out.println("Press " + modDescr + "+S to launch the file save dialog.");
 		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
 			glfwPollEvents();
 
