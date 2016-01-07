@@ -792,7 +792,7 @@ $indentation}"""
 					if ( it.nativeType is CallbackType ) {
 						val callbackType = it.nativeType.className
 						println("\t/** Unsafe version of {@link #$setter($callbackType) $setter}. */")
-						println("\tpublic static void n$setter(long $STRUCT, $callbackType value) { memPutAddress($STRUCT+ $field, value.address()); }")
+						println("\tpublic static void n$setter(long $STRUCT, $callbackType value) { memPutAddress($STRUCT + $field, value.address()); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType.simpleName
 						val bufferMethod = getBufferMethod(it, javaType)
