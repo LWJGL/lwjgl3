@@ -498,10 +498,10 @@ License terms: http://lwjgl.org/license.php
 			<url url="http://build.lwjgl.org/${build.type}/linux/x64/libglfw.so"/>
 			<url url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so"/>
 
-			<url url="http://build.lwjgl.org/${build.type}/linux/x86/liblwjgl.so"/>
+			<!--<url url="http://build.lwjgl.org/${build.type}/linux/x86/liblwjgl.so"/>
 			<url url="http://build.lwjgl.org/${build.type}/linux/x86/libjemalloc.so"/>
 			<url url="http://build.lwjgl.org/${build.type}/linux/x86/libglfw.so"/>
-			<url url="http://build.lwjgl.org/${build.type}/linux/x86/libopenal.so"/>
+			<url url="http://build.lwjgl.org/${build.type}/linux/x86/libopenal.so"/>-->
 
 			<!-- Mac OS X -->
 			<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl.dylib"/>
