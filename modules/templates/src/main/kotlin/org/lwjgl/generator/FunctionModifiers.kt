@@ -17,20 +17,6 @@ object IgnoreMissing : FunctionModifier() {
 	override val isSpecial = false
 }
 
-/** Defines an expression that should be passed to the getInstance() method. */
-class Capabilities(
-	/** The expression to pass to the getInstance() method. */
-	val expression: String,
-	/** If defined, is a statement that will be printed before the getInstance() call. */
-	val statement: String? = null,
-	/** If true, getInstance() will not be called and the expression will be assigned to the FUNCTION_ADDRESS variable directly. */
-	val override: Boolean = false
-) : FunctionModifier() {
-	companion object : ModifierKey<Capabilities>
-
-	override val isSpecial = true
-}
-
 class Code(
 	val javaInit: List<Code.Statement> = Code.NO_STATEMENTS,
 

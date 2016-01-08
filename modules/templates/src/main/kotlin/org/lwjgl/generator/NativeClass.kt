@@ -65,12 +65,7 @@ abstract class APIBinding(
 	open fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
 		val instanceParameter = if ( hasCurrentCapabilities )
 			""
-		else if ( function has Capabilities ) {
-			val caps = function[Capabilities]
-			if ( caps.statement != null )
-				writer.println("\t\t${caps.statement};")
-			caps.expression
-		} else {
+		else {
 			try {
 				// Use the first ObjectType parameters
 				function.getParams() { it.nativeType is ObjectType }.first().name
@@ -81,11 +76,7 @@ abstract class APIBinding(
 
 		val variable = if ( function.returns.has(Address) ) RESULT else FUNCTION_ADDRESS
 
-		if ( function has Capabilities && function[Capabilities].override ) {
-			if ( !instanceParameter.equals(FUNCTION_ADDRESS) ) // Skip if we have an explicit FUNCTION_ADDRESS parameter.
-				writer.println("\t\tlong $variable = $instanceParameter;")
-		} else
-			writer.println("\t\tlong $variable = getInstance($instanceParameter).${function.simpleName};")
+		writer.println("\t\tlong $variable = getInstance($instanceParameter).${function.simpleName};")
 	}
 
 	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)
