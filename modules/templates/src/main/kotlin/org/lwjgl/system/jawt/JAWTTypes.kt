@@ -78,8 +78,6 @@ fun config() {
 	)
 
 	struct(JAWT_PACKAGE, "JAWTX11DrawingSurfaceInfo", nativeName = "JAWT_X11DrawingSurfaceInfo", mutable = false) {
-		javaImport("org.lwjgl.system.windows.User32")
-
 		documentation = "X11-specific declarations for AWT native interface."
 
 		Drawable.member("drawable", "the drawable")

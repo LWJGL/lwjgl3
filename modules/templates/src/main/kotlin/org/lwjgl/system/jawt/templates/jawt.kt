@@ -24,16 +24,11 @@ ENABLE_WARNINGS()
 		C and C++ applications to Java and to target the needs of the community who, at present, wish to do their own native rendering to canvases for
 		performance reasons. Standard extensions such as Java3D also require a means to access the underlying native data structures of AWT.
 
-		There may be future extensions to this API depending on demand.
-
-		A VM does not have to implement this API in order to pass the JCK. It is recommended, however, that this API is implemented on VMs that support
-		standard extensions, such as Java3D.
-
-		Since this is a native API, any program which uses it cannot be considered 100% pure java.
-
         <h3>AWT Native Drawing Surface (JAWT_DrawingSurface)</h3>
 
-		For each platform, there is a native drawing surface structure. This platform-specific structure can be found in jawt_md.h.
+		For each platform, there is a native drawing surface structure. This platform-specific structure can be found in {@code jawt_md.h}. See
+		##JAWTX11DrawingSurfaceInfo for the Linux platform, ##JAWTWin32DrawingSurfaceInfo for the Windows platform and #MACOSX_USE_CALAYER for the OS X
+		platform.
 		"""
 
 	IntConstant(
@@ -42,6 +37,26 @@ ENABLE_WARNINGS()
 		"VERSION_1_3"..0x00010003,
 		"VERSION_1_4"..0x00010004,
 		"VERSION_1_7"..0x00010007
+	)
+
+	IntConstant(
+		"""
+		When calling #GetAWT() with a JAWT version less than 1.7, you must pass this flag or you will not be able to get a valid drawing surface and #GetAWT()
+		will return false. This is to maintain compatibility with applications that used the interface with Java 6 which had multiple rendering models. This
+		flag is not necessary when JAWT version 1.7 or greater is used as this is the only supported rendering mode.
+
+		When the native Cocoa toolkit is in use, the pointer stored in {@code JAWT_DrawingSurfaceInfo->platformInfo} points to a {@code NSObject} that conforms
+		to the {@code JAWT_SurfaceLayers} protocol. Setting the layer property of this object will cause the specified layer to be overlaid on the Component's
+		rectangle. If the window the Component belongs to has a {@code CALayer} attached to it, this layer will be accessible via the {@code windowLayer}
+		property.
+		${codeBlock("""
+&#64;protocol JAWT_SurfaceLayers
+	&#64;property (readwrite, retain) CALayer *layer;
+	&#64;property (readonly) CALayer *windowLayer;
+&#64;end""")}
+		""",
+
+		"MACOSX_USE_CALAYER"..0x00010008
 	)
 
 	IntConstant(
