@@ -32,6 +32,7 @@ import java.util.*
 enum class Binding(val key: String) {
 	EGL("binding.egl"),
 	GLFW("binding.glfw"),
+	JAWT("binding.jawt"),
 	NANOVG("binding.nanovg"),
 	NFD("binding.nfd"),
 	OPENAL("binding.openal"),
@@ -86,6 +87,7 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.ovr", Binding.OVR)
 		generate("org.lwjgl.stb", Binding.STB)
 
+		generate("org.lwjgl.system.jawt", Binding.JAWT)
 		generate("org.lwjgl.system.jemalloc")
 		generate("org.lwjgl.system.libc")
 		generate("org.lwjgl.system.libffi")

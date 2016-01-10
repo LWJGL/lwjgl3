@@ -13,6 +13,7 @@ This script is included in /config/build-definitions.xml.
 	<property name="binding.stb" value="true"/>
 
 	<property name="binding.glfw" value="true"/>
+	<property name="binding.jawt" value="true"/>
 	<property name="binding.nanovg" value="true"/>
 	<property name="binding.nfd" value="true"/>
 
