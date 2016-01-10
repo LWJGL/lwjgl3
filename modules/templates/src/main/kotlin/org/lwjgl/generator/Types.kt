@@ -191,7 +191,7 @@ open class TypeMapping(
 		Long::class.java    -> if ( this === PrimitiveMapping.LONG ) "J" else "P"
 		Short::class.java   -> "S"
 		Void.TYPE           -> "V"
-		else                -> throw IllegalStateException()
+		else                -> "L${this.nativeMethodType.name};"
 	}
 
 }

@@ -279,8 +279,12 @@ class NativeClass(
 				if ( functions.any { it.hasCustomJNI } )
 					println("\n\tstatic { Library.initialize(); }")
 
-				generateFunctionAddresses(binding)
-				binding.generateFunctionGetters(this, this@NativeClass)
+				val bindingFunctions = functions.filter { !it.hasExplicitFunctionAddress }
+
+				if ( bindingFunctions.isNotEmpty() ) {
+					generateFunctionAddresses(binding, bindingFunctions)
+					binding.generateFunctionGetters(this, this@NativeClass)
+				}
 			} else {
 				println("\n\tstatic { Library.initialize(); }")
 
@@ -312,15 +316,15 @@ class NativeClass(
 		print("}")
 	}
 
-	private fun PrintWriter.generateFunctionAddresses(binding: APIBinding) {
+	private fun PrintWriter.generateFunctionAddresses(binding: APIBinding, functions: List<NativeClassFunction>) {
 		println("\n\t/** Function address. */")
 		println("\t@JavadocExclude")
 		print("\tpublic final long")
-		if ( _functions.size == 1 ) {
+		if ( functions.size == 1 ) {
 			println(" ${_functions.values.first().simpleName};")
 		} else {
 			println()
-			_functions.values.forEachWithMore { func, more ->
+			functions.forEachWithMore { func, more ->
 				if ( more )
 					println(",")
 				print("\t\t${func.simpleName}")
@@ -433,7 +437,7 @@ class NativeClass(
 			returns = this,
 			simpleName = name,
 			name = if ( noPrefix ) name else "$prefixMethod$name",
-			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.asSequence(), this.nativeType, returnDoc, since),
+			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.asSequence().filter { it !== JNI_ENV }, this.nativeType, returnDoc, since),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)

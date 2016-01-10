@@ -40,6 +40,11 @@ internal val FUNCTION_ADDRESS = "__functionAddress"
 internal val API_BUFFER = "__buffer"
 internal val JNIENV = "__env"
 
+/** Special parameter that generates an explicit function address parameter. */
+val EXPLICIT_FUNCTION_ADDRESS = voidptr.IN(FUNCTION_ADDRESS, "the function address")
+/** Special parameter that will accept the JNI function's JNIEnv* parameter. Hidden in Java code. */
+val JNI_ENV = JNIEnv_p.IN(JNIENV, "the JNI environment struct")
+
 enum class GenerationMode {
 	NORMAL,
 	ALTERNATIVE
@@ -63,11 +68,14 @@ abstract class Function(
 	protected val hasNativeParams: Boolean = getNativeParams().any()
 
 	fun getParam(paramName: String) = paramMap[paramName] ?: throw IllegalArgumentException("Referenced parameter does not exist: $simpleName.$paramName")
-	fun getParams(predicate: (Parameter) -> Boolean) = parameters.asSequence().filter(predicate)
-	fun getParam(predicate: (Parameter) -> Boolean) = getParams(predicate).single()
-	fun hasParam(predicate: (Parameter) -> Boolean) = getParams(predicate).any()
+	inline fun getParams(crossinline predicate: (Parameter) -> Boolean) = parameters.asSequence().filter {
+		predicate(it)
+	}
+	inline fun getParam(crossinline predicate: (Parameter) -> Boolean) = getParams(predicate).single()
+	inline fun hasParam(crossinline predicate: (Parameter) -> Boolean) = getParams(predicate).any()
 
-	fun getNativeParams() = getParams { !it.has(Virtual) }
+	fun getNativeParams(withExplicitFunctionAddress: Boolean = true, withJNIEnv: Boolean = false) =
+		getParams { (withJNIEnv || it !== JNI_ENV) && (withExplicitFunctionAddress || it !== EXPLICIT_FUNCTION_ADDRESS) && !it.has(Virtual) }
 
 	/** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
 	fun getReferenceParam(modifierObject: ModifierKey<*>, reference: String) = getParams {
@@ -97,7 +105,7 @@ class NativeClassFunction(
 
 	init {
 		validate();
-		if ( nativeClass.binding != null )
+		if ( !hasCustomJNI )
 			JNI.register(this)
 	}
 
@@ -155,16 +163,20 @@ class NativeClassFunction(
 
 	private val methodLink: String get() = "#$simpleName()"
 
+	val hasExplicitFunctionAddress: Boolean
+		get() = parameters.isNotEmpty() && parameters[0] === EXPLICIT_FUNCTION_ADDRESS
+
+	val hasNativeCode: Boolean
+		get() = (has(Code) && this[Code].let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || parameters.contains(JNI_ENV)
+
 	val hasCustomJNI: Boolean
-		get() = nativeClass.binding == null ||
-		        returns.isStructValue ||
-		        (has(Code) && this[Code].let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null })
+		get() = nativeClass.binding == null || returns.isStructValue || hasNativeCode
 
 	private val isSimpleFunction: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
 
 	private val hasUnsafeMethod: Boolean
-		get() = nativeClass.binding != null && (returns.isBufferPointer || hasParam { it.isBufferPointer }) && !returns.has(Address)
+		get() = nativeClass.binding != null && !(hasExplicitFunctionAddress && hasNativeCode) && (returns.isBufferPointer || hasParam { it.isBufferPointer }) && !returns.has(Address)
 
 	private val ReturnValue.isStructValue: Boolean
 		get() = nativeType is StructType && !nativeType.includesPointer
@@ -195,7 +207,10 @@ class NativeClassFunction(
 	/** Validates parameters with modifiers that reference other parameters. */
 	private fun validate() {
 		var returnCount = 0
-		parameters.forEach {
+		parameters.forEachIndexed { i, it ->
+			if ( it === EXPLICIT_FUNCTION_ADDRESS && i != 0 )
+				it.error("The explicit function address parameter must be the first parameter.")
+
 			if ( it has AutoSize ) {
 				val autoSize = it[AutoSize]
 				(sequenceOf(autoSize.reference) + autoSize.dependent.asSequence()).forEach { reference ->
@@ -321,7 +336,7 @@ class NativeClassFunction(
 			return builder.toString()
 		}
 
-		parameters.forEach {
+		getNativeParams().forEach {
 			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "if ( ${it.name} != null ) " else ""
 
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType )
@@ -463,7 +478,7 @@ class NativeClassFunction(
 		print("(")
 
 		val nativeParams = getNativeParams()
-		if ( nativeClass.binding != null ) {
+		if ( nativeClass.binding != null && !hasExplicitFunctionAddress ) {
 			print("long $FUNCTION_ADDRESS")
 			if ( nativeParams.any() ) print(", ")
 		}
@@ -492,14 +507,17 @@ class NativeClassFunction(
 		}
 		println(") {")
 
+		val binding = nativeClass.binding!!
+
 		// Get function address
-		nativeClass.binding!!.generateFunctionAddress(this, this@NativeClassFunction)
+		if ( !hasExplicitFunctionAddress )
+			binding.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Basic checks
 		val checks = ArrayList<String>(4)
-		if ( has(DependsOn) || has(IgnoreMissing) || nativeClass.binding.shouldCheckFunctionAddress(this@NativeClassFunction) )
+		if ( has(DependsOn) || has(IgnoreMissing) || binding.shouldCheckFunctionAddress(this@NativeClassFunction) )
 			checks.add("checkFunctionAddress($FUNCTION_ADDRESS);")
-		parameters.forEach {
+		getNativeParams().forEach {
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType )
 				checks.add("checkPointer(${it.name});")
 		}
@@ -516,16 +534,17 @@ class NativeClassFunction(
 
 		// Native method call
 		print("\t\t")
-		if ( returns.isStructValue ) {
-			print("n$name(")
-		} else {
-			if ( !returns.isVoid )
-				print("return ")
-
-			print("${nativeClass.binding.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.joinToString("")}${returns.nativeType.mapping.jniSignature}(")
+		if ( !returns.isVoid && !returnsStructValue )
+			print("return ")
+		print(if ( hasCustomJNI )
+			"n$name("
+		else
+			"${binding.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.mapping.jniSignature }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
+		)
+		if ( !hasExplicitFunctionAddress ) {
+			print(FUNCTION_ADDRESS)
+			if ( hasNativeParams ) print(", ")
 		}
-		print("$FUNCTION_ADDRESS")
-		if ( hasNativeParams ) print(", ")
 		printList(getNativeParams()) {
 			it.name
 		}
@@ -551,7 +570,7 @@ class NativeClassFunction(
 		// Step 1: Method signature
 
 		print("\t${accessModifier}static $returnsJavaMethodType $name(")
-		printList(parameters.asSequence()) {
+		printList(getNativeParams()) {
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
 			else if ( it.isBufferPointer && it.nativeType !is StructType)
@@ -571,7 +590,7 @@ class NativeClassFunction(
 
 		// Step 2: Get function address
 
-		if ( nativeClass.binding != null && !hasUnsafeMethod )
+		if ( nativeClass.binding != null && !hasUnsafeMethod && !hasExplicitFunctionAddress )
 			nativeClass.binding.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Step 3.a: Generate checks
@@ -722,7 +741,7 @@ class NativeClassFunction(
 				else
 					"${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 			)
-			if ( nativeClass.binding != null ) {
+			if ( nativeClass.binding != null && !hasExplicitFunctionAddress ) {
 				print("$FUNCTION_ADDRESS")
 				if ( hasNativeParams ) print(", ")
 			}
@@ -1210,7 +1229,7 @@ class NativeClassFunction(
 		if ( nativeClass.binding?.callingConvention !== CallingConvention.DEFAULT )
 			print("APIENTRY ")
 		print("*${name}PROC) (")
-		val nativeParams = getNativeParams()
+		val nativeParams = getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)
 		if ( nativeParams.any() ) {
 			printList(nativeParams) {
 				it.toNativeType()
@@ -1232,7 +1251,7 @@ class NativeClassFunction(
 		print("JNIEnv *$JNIENV, jclass clazz")
 		if ( nativeClass.binding != null )
 			print(", jlong $FUNCTION_ADDRESS")
-		getNativeParams().forEach {
+		getNativeParams(withExplicitFunctionAddress = false).forEach {
 			print(", ${it.asJNIFunctionParam}")
 		}
 		if ( returnsStructValue )
@@ -1246,7 +1265,7 @@ class NativeClassFunction(
 
 		// Cast addresses to pointers
 
-		getNativeParams().filter { it.nativeType is PointerType }.forEach {
+		getNativeParams(withExplicitFunctionAddress = false).filter { it.nativeType is PointerType }.forEach {
 			val pointerType = it.toNativeType(pointerMode = true)
 			print("\t$pointerType")
 			if ( !pointerType.endsWith('*') ) print(' ')
@@ -1285,7 +1304,7 @@ class NativeClassFunction(
 				}
 				print("$nativeName")
 				if ( !has(Macro) ) print('(')
-				printList(getNativeParams()) {
+				printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) {
 					// Avoids warning when implicitly casting from jlong to 32-bit pointer.
 					if ( it.nativeType.mapping === PrimitiveMapping.POINTER )
 						"(${it.nativeType.name})${it.name}"
