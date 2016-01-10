@@ -93,11 +93,11 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</compile>
 
-		<cl if:true="${binding.jawt}">
+		<compile if:true="${binding.jawt}">
 			<arguments>
 				<fileset dir="." includes="${src.generated.native}/system/jawt/*.c"/>
 			</arguments>
-		</cl>
+		</compile>
 
 		<compile if:true="${binding.nanovg}">
 			<arguments>
