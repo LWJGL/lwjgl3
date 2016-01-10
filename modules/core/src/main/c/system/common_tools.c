@@ -104,7 +104,10 @@ inline void detachCurrentThread(void) {
 		return data;
 	}
 
-	inline void saveLastError(void) { getEnvData()->LastError = (jint)GetLastError(); }
+	inline void saveLastError(void) {
+		jint err = (jint)GetLastError();
+		getEnvData()->LastError = err;
+	}
 	inline jint getLastError(void) { return getEnvData()->LastError; }
 #else
 	#include <pthread.h>
@@ -168,7 +171,10 @@ inline JNIEnv* getEnv(jboolean *async) {
 	return data->env;
 }
 
-inline void saveErrno(void) { getEnvData()->errnum = errno; }
+inline void saveErrno(void) {
+	jint errnum = (jint)errno;
+	getEnvData()->errnum = errnum;
+}
 inline jint getErrno(void) { return getEnvData()->errnum; }
 
 EXTERN_C_ENTER
