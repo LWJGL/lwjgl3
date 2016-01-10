@@ -7,11 +7,14 @@ package org.lwjgl.system.jawt.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.jawt.*
 
-val jawt = "JAWTFunctions".nativeClass(JAWT_PACKAGE, prefix = "JAWT_", prefixMethod = "JAWT_", binding = JAWT_BINDING) {
+val jawt = "JAWTFunctions".nativeClass(JAWT_PACKAGE, prefix = "JAWT_", prefixMethod = "JAWT_", binding = simpleBinding("jawt", callingConvention = CallingConvention.STDCALL)) {
 	nativeDirective(
 		"""DISABLE_WARNINGS()
 #include "jawt_md.h"
-ENABLE_WARNINGS()""")
+ENABLE_WARNINGS()
+#ifndef APIENTRY
+	#define APIENTRY
+#endif""")
 
 	documentation =
 		"""

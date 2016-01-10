@@ -10,9 +10,6 @@ import org.lwjgl.system.windows.*
 
 val JAWT_PACKAGE = "org.lwjgl.system.jawt"
 
-val JAWT_BINDING = simpleBinding("jawt", callingConvention = CallingConvention.STDCALL)
-val JAWT_BINDING_DELEGATE = JAWT_BINDING.delegate("JAWTFunctions.getLibrary()")
-
 val JAWT_Rectangle = struct(JAWT_PACKAGE, "JAWTRectangle", nativeName = "JAWT_Rectangle") {
 	documentation = "Structure for a native rectangle."
 
