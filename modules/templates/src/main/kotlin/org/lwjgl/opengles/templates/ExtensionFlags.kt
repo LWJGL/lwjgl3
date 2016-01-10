@@ -160,6 +160,43 @@ val EXT_post_depth_coverage = EXT_FLAG.nativeClassGLES("EXT_post_depth_coverage"
 		"""
 }
 
+val EXT_shader_group_vote = EXT_FLAG.nativeClassGLES("EXT_shader_group_vote", postfix = EXT) {
+	documentation =
+		"""
+		This extension provides new built-in functions to compute the composite of a set of boolean conditions across a group of shader invocations. These
+		composite results may be used to execute shaders more efficiently on a single-instruction multiple-data (SIMD) processor. The set of shader invocations
+		across which boolean conditions are evaluated is implementation-dependent, and this extension provides no guarantee over how individual shader
+		invocations are assigned to such sets. In particular, the set of shader invocations has no necessary relationship with the compute shader local work
+		group -- a pair of shader invocations in a single compute shader work group may end up in different sets used by these built-ins.
+
+		Compute shaders operate on an explicitly specified group of threads (a local work group), but many implementations of OpenGL ES 3.0 will even group
+		non-compute shader invocations and execute them in a SIMD fashion. When executing code like
+		${codeBlock("""
+if (condition) {
+	result = do_fast_path();
+} else {
+	result = do_general_path();
+}""")}
+		where {@code condition} diverges between invocations, a SIMD implementation might first call do_fast_path() for the invocations where <condition> is
+		true and leave the other invocations dormant. Once do_fast_path() returns, it might call do_general_path() for invocations where <condition> is false
+		and leave the other invocations dormant. In this case, the shader executes *both* the fast and the general path and might be better off just using the
+		general path for all invocations.
+
+		This extension provides the ability to avoid divergent execution by evaluting a condition across an entire SIMD invocation group using code like:
+		${codeBlock("""
+if (allInvocationsEXT(condition)) {
+	result = do_fast_path();
+} else {
+	result = do_general_path();
+}""")}
+		The built-in function allInvocationsEXT() will return the same value for all invocations in the group, so the group will either execute do_fast_path()
+		or do_general_path(), but never both. For example, shader code might want to evaluate a complex function iteratively by starting with an approximation
+		of the result and then refining the approximation. Some input values may require a small number of iterations to generate an accurate result
+		(do_fast_path) while others require a larger number (do_general_path). In another example, shader code might want to evaluate a complex function
+		(do_general_path) that can be greatly simplified when assuming a specific value for one of its inputs (do_fast_path).
+		"""
+}
+
 val EXT_shader_implicit_conversions = EXT_FLAG.nativeClassGLES("EXT_shader_implicit_conversions", postfix = EXT) {
 	documentation =
 		"""

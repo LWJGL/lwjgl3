@@ -276,7 +276,7 @@ typedef struct {
 	void(
 		"DrawCommandsAddressNV",
 		"""
-		Accepts arrays of buffer addresses as an array of GPU addresses <code>indirects</code>, an array of command lengths in <code>sizes</code>. All arrays
+		Accepts arrays of buffer addresses as an array of GPU addresses <code>indirects</code>, an array of sequence lengths in <code>sizes</code>. All arrays
 		have <code>count</code> entries.
 		""",
 
@@ -351,6 +351,11 @@ typedef struct {
 		A list has multiple segments and each segment enqueues an ordered list of commands. This command enqueues the equivalent of the
 		DrawCommandsStatesClientNV commands into the list indicated by <code>list</code> on the segment indicated by <code>segment</code>.
 
+		A list has multiple segments and each segment enqueues an ordered list of command sequences. This command enqueues the equivalent of the
+		DrawCommandsStatesNV commands into the list indicated by {@code list} on the segment indicated by {@code segment} except that the sequence data is
+		copied from the sequences pointed to by the {@code indirects} pointer. The {@code indirects} pointer should point to a list of size {@code count} of
+		pointers, each of which should point to a command sequence.
+
 		The pre-validated state from {@code states} is saved into the command list, rather than a reference to the state object (i.e. the state objects or fbos
 		could be deleted and the command list would be unaffected). This includes native GPU addresses for all textures indirectly referenced through the fbos
 		passed or state objects' fbos attachments, therefore a recompile of the command list is required if such referenced textures change their allocation
@@ -372,8 +377,8 @@ typedef struct {
 	void(
 		"CommandListSegmentsNV",
 		"""
-		Indicates that {@code list} will have {@code segments} ordered sequences of commands that it enqueues. This must be called before any commands are
-		enqueued. In the initial state, a command list has a single segment.
+		Indicates that {@code list} will have {@code segments} number of segments, each of which is a list of command sequences that it enqueues. This must be
+        called before any commands are enqueued. In the initial state, a command list has a single segment.
 		""",
 
 		GLuint.IN("list", "the command list"),
