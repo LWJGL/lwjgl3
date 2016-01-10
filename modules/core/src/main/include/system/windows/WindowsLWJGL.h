@@ -52,9 +52,9 @@
 	#define NOCOLOR // Screen colors
 	#define NOCTLMGR // Control and Dialog routines
 	#define NODRAWTEXT // DrawText() and DT_*
-	#define NOGDI // All GDI defines and routines
+	//#define NOGDI // All GDI defines and routines
 	#define NOKERNEL // All KERNEL defines and routines
-	#define NOUSER // All USER defines and routines
+	//#define NOUSER // All USER defines and routines
 	#define NONLS // All NLS defines and routines
 	#define NOMB // MB_* and MessageBox()
 	#define NOMEMMGR // GMEM_*, LMEM_*, GHND, LHND, associated routines

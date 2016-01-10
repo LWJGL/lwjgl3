@@ -8,6 +8,10 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
 val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32", callingConvention = CallingConvention.STDCALL)) {
+	nativeImport (
+		"WindowsLWJGL.h"
+	)
+
 	documentation = "Native bindings to gdi32.dll"
 
 	IntConstant(
@@ -48,104 +52,7 @@ val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32"
 		"PFD_UNDERLAY_PLANE"..-1
 	)
 
-	HDC(
-		"CreateCompatibleDC",
-		"Creates a memory device context (DC) compatible with the specified device.",
-
-		nullable..HDC.IN("hdc", "a handle to an existing DC. If this handle is $NULL, the function creates a memory DC compatible with the application's current screen.")
-	)
-
-	BOOL(
-		"DeleteDC",
-		"Deletes the specified device context (DC).",
-
-		HDC.IN("hdc", "a handle to the device context")
-	)
-
-	BOOL(
-		"CancelDC",
-		"Cancels any pending operation on the specified device context (DC).",
-
-		HDC.IN("hdc", "a handle to the DC")
-	)
-
-	int(
-		"SaveDC",
-		"""
-		Saves the current state of the specified device context (DC) by copying data describing selected objects and graphic modes (such as the bitmap, brush,
-		palette, font, pen, region, drawing mode, and mapping mode) to a context stack.
-		""",
-
-		HDC.IN("hdc", "a handle to the DC whose state is to be saved")
-	)
-
-	BOOL(
-		"RestoreDC",
-		"""
-		Restores a device context (DC) to the specified state. The DC is restored by popping state information off a stack created by earlier calls to the
-		#SaveDC() function.
-		""",
-
-		HDC.IN("hdc", "a handle to the DC"),
-		int.IN(
-			"savedDC",
-			"""
-			the saved state to be restored. If this parameter is positive, {@code savedDC} represents a specific instance of the state to be restored. If this
-			parameter is negative, {@code savedDC} represents an instance relative to the current state. For example, -1 restores the most recently saved state.
-			"""
-		)
-	)
-
-	BOOL(
-		"GetDCOrgEx",
-		"""
-		Retrieves the final translation origin for a specified device context (DC). The final translation origin specifies an offset that the system uses to
-		translate device coordinates into client coordinates (for coordinates in an application's window).
-		""",
-
-		HDC.IN("hdc", "a handle to the DC whose final translation origin is to be retrieved"),
-		LPPOINT.OUT("point", "a ##POINT structure that receives the final translation origin, in device coordinates")
-	)
-
-	int(
-		"GetDeviceCaps",
-		"Retrieves device-specific information for the specified device.",
-
-		HDC.IN("hdc", "a handle to the DC"),
-		int.IN("index", "the item to be returned")
-	)
-
-	BOOL(
-		"GetDeviceGammaRamp",
-		"Sets the gamma ramp on direct color display boards having drivers that support downloadable gamma ramps in hardware.",
-
-		HDC.IN("hdc", "the device context of the direct color display board in question"),
-		LPVOID.IN(
-			"lpRamp",
-			"""
-			pointer to a buffer containing the gamma ramp to be set. The gamma ramp is specified in three arrays of 256 WORD elements each, which contain the
-			mapping between RGB values in the frame buffer and digital-analog-converter (DAC ) values. The sequence of the arrays is red, green, blue. The RGB
-			values must be stored in the most significant bits of each WORD to increase DAC independence.
-			"""
-		)
-	)
-
-	BOOL(
-		"SetDeviceGammaRamp",
-		"Gets the gamma ramp on direct color display boards having drivers that support downloadable gamma ramps in hardware.",
-
-		HDC.IN("hdc", "the device context of the direct color display board in question"),
-		LPVOID.IN(
-			"lpRamp",
-			"""
-			points to a buffer where the function can place the current gamma ramp of the color display board. The gamma ramp is specified in three arrays of
-			256 WORD elements each, which contain the mapping between RGB values in the frame buffer and digital-analog-converter (DAC) values. The sequence of
-			the arrays is red, green, blue.
-			"""
-		)
-	)
-
-	int(
+	SaveLastError..int(
 		"ChoosePixelFormat",
 		"Attempts to match an appropriate pixel format supported by a device context to a given pixel format specification.",
 
@@ -153,7 +60,7 @@ val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32"
 		const..PIXELFORMATDESCRIPTOR_p.IN("pixelFormatDescriptor", "a ##PIXELFORMATDESCRIPTOR structure that specifies the requested pixel format")
 	)
 
-	int(
+	SaveLastError..int(
 		"DescribePixelFormat",
 		"""
 		Obtains information about the pixel format identified by pixelFormat of the device associated with dc. The function sets the members of the
@@ -180,14 +87,14 @@ val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32"
 		)
 	)
 
-	int(
+	SaveLastError..int(
 		"GetPixelFormat",
 		"Obtains the index of the currently selected pixel format of the specified device context.",
 
 		HDC.IN("hdc", "the device context of the currently selected pixel format index returned by the function")
 	)
 
-	BOOL(
+	SaveLastError..BOOL(
 		"SetPixelFormat",
 		"Sets the pixel format of the specified device context to the format specified by the pixelFormat index.",
 
@@ -202,7 +109,7 @@ val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32"
 		)
 	)
 
-	BOOL(
+	SaveLastError..BOOL(
 		"SwapBuffers",
 		"Exchanges the front and back buffers if the current pixel format for the window referenced by the specified device context includes a back buffer.",
 

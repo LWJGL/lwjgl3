@@ -11,9 +11,12 @@ val Bool = typedef(int, "Bool")
 val XID = typedef(unsigned_long, "XID")
 val VisualID = typedef(unsigned_long, "VisualID")
 
-val Window = typedef(XID, "Window")
+val Colormap = typedef(XID, "Colormap")
+val Cursor = typedef(XID, "Cursor")
+val Drawable = typedef(XID, "Drawable")
 val Font = typedef(XID, "Font")
 val Pixmap = typedef(XID, "Pixmap")
+val Window = typedef(XID, "Window")
 
 val Display_p = "Display".p // Display is a struct, but should be treated as an opaque type by apps
 val DISPLAY = Display_p.IN("display", "the connection to the X server") // This is here so that GLX extensions can use it
@@ -44,6 +47,26 @@ val XVisualInfo_p = struct_p(LINUX_PACKAGE, "XVisualInfo") {
 	unsigned_long.member("blue_mask", "")
 	int.member("colormap_size", "")
 	int.member("bits_per_rgb", "")
+}
+
+val XSetWindowAttributes_p = struct_p(LINUX_PACKAGE, "XSetWindowAttributes") {
+	documentation = "Data structure for setting window attributes."
+
+	Pixmap.member("background_pixmap", "")
+	unsigned_long.member("background_pixel", "")
+	Pixmap.member("border_pixmap", "")
+	unsigned_long.member("border_pixel", "")
+	int.member("bit_gravity", "")
+	int.member("win_gravity", "")
+	int.member("backing_store", "")
+	unsigned_long.member("backing_planes", "")
+	unsigned_long.member("backing_pixel", "")
+	Bool.member("save_under", "")
+	long.member("event_mask", "")
+	long.member("do_not_propagate_mask", "")
+	Bool.member("override_redirect", "")
+	Colormap.member("colormap", "")
+	Cursor.member("cursor", "")
 }
 
 // --------------- Xrandr.h ---------------

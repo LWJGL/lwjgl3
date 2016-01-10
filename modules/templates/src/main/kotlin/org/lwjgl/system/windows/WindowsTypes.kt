@@ -33,8 +33,17 @@ val DWORD = IntegerType("DWORD", PrimitiveMapping.INT)
 val LONG = IntegerType("LONG", PrimitiveMapping.INT)
 val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
 
+val ATOM = PrimitiveType("ATOM", PrimitiveMapping.SHORT)
+
 val UINT_p = UINT.p
 val FLOAT_p = FLOAT.p
+
+val UINT_PTR = PrimitiveType("UINT_PTR", PrimitiveMapping.POINTER)
+val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.POINTER)
+
+val LRESULT = typedef(LONG_PTR, "LRESULT")
+val WPARAM = typedef(UINT_PTR, "WPARAM")
+val LPARAM = typedef(LONG_PTR, "LPARAM")
 
 val CHAR = CharType("CHAR", CharMapping.ASCII)
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
@@ -46,13 +55,18 @@ val LPCTSTR = CharSequenceType(
 )
 
 val LPCSTR = CharSequenceType("LPCSTR", includesPointer = true)
-val HMODULE = "HMODULE".opaque_p
 val FARPROC = "FARPROC".opaque_p
-val HWND = "HWND".opaque_p
-val HDC = "HDC".opaque_p
-val HGLRC = "HGLRC".opaque_p
 val PROC = "PROC".opaque_p
 val LPVOID = "LPVOID".opaque_p
+
+val HINSTANCE = typedef(HANDLE, "HINSTANCE")
+val HMODULE = typedef(HANDLE, "HMODULE")
+val HWND = typedef(HANDLE, "HWND")
+val HMENU = typedef(HANDLE, "HMENU")
+val HDC = typedef(HANDLE, "HDC")
+val HGLRC = typedef(HANDLE, "HGLRC")
+val HBITMAP = typedef(HANDLE, "HBITMAP")
+val HPALETTE = typedef(HANDLE, "HPALETTE")
 
 val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 	documentation = "Contains the x and y coordinates of a point."
@@ -144,3 +158,36 @@ val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTO
 val PIXELFORMATDESCRIPTOR = StructType(PIXELFORMATDESCRIPTOR_STRUCT)
 val LPPIXELFORMATDESCRIPTOR = StructType(name = "LPPIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT, includesPointer = true)
 val PIXELFORMATDESCRIPTOR_p = PIXELFORMATDESCRIPTOR.p
+
+val WNDPROC = "WNDPROC".callback(
+	WINDOWS_PACKAGE, LRESULT, "WindowProc",
+	"Will be called for each message sent to the window.",
+	HWND.IN("hwnd", "a handle to the window procedure that received the message"),
+	UINT.IN("uMsg", "the message"),
+	WPARAM.IN("wParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
+	LPARAM.IN("lParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter.")
+) {
+	documentation = "An application-defined function that processes messages sent to a window."
+	useSystemCallConvention()
+}
+
+private val HICON = "HICON".opaque_p
+private val HCURSOR = "HCURSOR".opaque_p
+private val HBRUSH = "HBRUSH".opaque_p
+
+val WNDCLASSEX_p = struct_p(WINDOWS_PACKAGE, "WNDCLASSEX") {
+	documentation = "Contains the window class attributes that are registered by the User32#RegisterClassEx() function."
+
+	UINT.member("cbSize", "")
+	UINT.member("style", "")
+	WNDPROC.member("lpfnWndProc", "")
+	int.member("cbClsExtra", "")
+	int.member("cbWndExtra", "")
+	HINSTANCE.member("hInstance", "")
+	HICON.member("hIcon", "")
+	HCURSOR.member("hCursor", "")
+	HBRUSH.member("hbrBackground", "")
+	LPCTSTR.member("lpszMenuName", "")
+	LPCTSTR.member("lpszClassName", "")
+	HICON.member("hIconSm", "")
+}
