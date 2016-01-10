@@ -5,9 +5,9 @@
 package org.lwjgl.opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import org.lwjgl.opengles.*
 
-val EXT_shader_pixel_local_storage2 = "EXTShaderPixelLocalStorage2".nativeClassGL("EXT_shader_pixel_local_storage2", postfix = EXT) {
+val EXT_shader_pixel_local_storage2 = "EXTShaderPixelLocalStorage2".nativeClassGLES("EXT_shader_pixel_local_storage2", postfix = EXT) {
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

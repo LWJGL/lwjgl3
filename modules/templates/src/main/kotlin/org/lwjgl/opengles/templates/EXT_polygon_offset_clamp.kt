@@ -5,9 +5,9 @@
 package org.lwjgl.opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import org.lwjgl.opengles.*
 
-val EXT_polygon_offset_clamp = "EXTPolygonOffsetClamp".nativeClassGL("EXT_polygon_offset_clamp", postfix = EXT) {
+val EXT_polygon_offset_clamp = "EXTPolygonOffsetClamp".nativeClassGLES("EXT_polygon_offset_clamp", postfix = EXT) {
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
