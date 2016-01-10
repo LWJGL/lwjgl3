@@ -16,44 +16,22 @@ import static org.lwjgl.opengl.GL11.*;
  *
  * @author Brian Matzon <brian@matzon.dk>
  */
-public abstract class AbstractGears {
+public class AbstractGears {
 
-	private static final float view_rotx = 20.0f;
-
-	private static final float view_roty = 30.0f;
+	private static final float
+		view_rotx = 20.0f,
+		view_roty = 30.0f;
 
 	private float view_rotz;
 
-	private int gear1;
-
-	private int gear2;
-
-	private int gear3;
+	private int
+		gear1,
+		gear2,
+		gear3;
 
 	private float angle;
 
-	public void execute() {
-		try {
-			init();
-			initGLState();
-
-			loop();
-		} finally {
-			try {
-				destroy();
-			} catch (Throwable t) {
-				t.printStackTrace();
-			}
-		}
-	}
-
-	protected abstract void init();
-
-	protected abstract void loop();
-
-	protected abstract void destroy();
-
-	protected void initGLState() {
+	public void initGLState() {
 		System.err.println("GL_VENDOR: " + glGetString(GL_VENDOR));
 		System.err.println("GL_RENDERER: " + glGetString(GL_RENDERER));
 		System.err.println("GL_VERSION: " + glGetString(GL_VERSION));
@@ -105,7 +83,7 @@ public abstract class AbstractGears {
 		glTranslatef(0.0f, 0.0f, -40.0f);
 	}
 
-	protected void renderLoop() {
+	public void renderLoop() {
 		angle += 2.0f;
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

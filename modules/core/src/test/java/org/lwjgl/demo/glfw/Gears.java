@@ -29,11 +29,25 @@ public class Gears extends AbstractGears {
 	private Boolean toggleMode;
 
 	public static void main(String[] args) {
-		new Gears().execute();
+		new Gears().run();
 	}
 
-	@Override
-	protected void init() {
+	private void run() {
+		try {
+			init();
+			initGLState();
+
+			loop();
+		} finally {
+			try {
+				destroy();
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+		}
+	}
+
+	private void init() {
 		errorCB = GLFWErrorCallback.createPrint().set();
 		if ( glfwInit() != GLFW_TRUE )
 			throw new IllegalStateException("Unable to initialize glfw");
@@ -130,8 +144,7 @@ public class Gears extends AbstractGears {
 		this.window = window;
 	}
 
-	@Override
-	protected void loop() {
+	private void loop() {
 		long lastUpdate = System.currentTimeMillis();
 		int frames = 0;
 
@@ -162,8 +175,7 @@ public class Gears extends AbstractGears {
 		}
 	}
 
-	@Override
-	protected void destroy() {
+	private void destroy() {
 		if ( debugProc != null )
 			debugProc.release();
 
