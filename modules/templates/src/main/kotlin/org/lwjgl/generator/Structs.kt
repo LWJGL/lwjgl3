@@ -354,7 +354,6 @@ $indentation}"""
 
 				if ( members.singleOrNull() == null ) {
 					val javadoc = "Initializes this struct with the specified values."
-					// Factory constructors
 					if ( generateAlternativeMultiSetter(members) ) {
 						generateMultiSetter(javadoc, members, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER1)
 						if ( members.any { it is StructMemberCharArray } )
@@ -660,11 +659,11 @@ $indentation}"""
 				print("\t\t")
 
 				val param = it.field(parentMember)
-
-				print(if (it.nativeType is CallbackType)
-					"${it.nativeType.className} $param"
-				else
-					"${it.nativeType.javaMethodType.simpleName} $param"
+				print(
+					if (it.nativeType is CallbackType)
+						"${it.nativeType.className} $param"
+					else
+						"${it.nativeType.javaMethodType.simpleName} $param"
 				)
 			}
 		}
@@ -707,9 +706,8 @@ $indentation}"""
 				print("\t\t")
 
 				val param = it.field(parentMember)
-
-				if (it is StructMemberArray) {
-					print(
+				print(
+					if (it is StructMemberArray) {
 						if ( it is StructMemberCharArray ) {
 							when ( mode ) {
 								MultiSetterMode.NORMAL,
@@ -723,17 +721,17 @@ $indentation}"""
 								"${it.nativeType.definition.className}.Buffer $param"
 						} else
 							"${(it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName} $param"
-					)
-				} else if ( it.nativeType.isPointerData && it.nativeType is StructType ) {
-					val structType = it.nativeType.definition.className
-					if ( it is StructMemberBuffer )
-						print("$structType.Buffer $param")
-					else
-						print("$structType $param")
-				} else if ( it.nativeType is CallbackType )
-					"${it.nativeType.className} $param"
-				else
-					print("${it.nativeType.javaMethodType.simpleName} $param")
+					} else if ( it.nativeType.isPointerData && it.nativeType is StructType ) {
+						val structType = it.nativeType.definition.className
+						if ( it is StructMemberBuffer )
+							"$structType.Buffer $param"
+						else
+							"$structType $param"
+					} else if ( it.nativeType is CallbackType ) {
+						"${it.nativeType.className} $param"
+					} else
+						"${it.nativeType.javaMethodType.simpleName} $param"
+				)
 			}
 		}
 	}
