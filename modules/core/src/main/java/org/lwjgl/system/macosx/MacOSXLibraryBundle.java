@@ -29,7 +29,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 			if ( fsPath == NULL )
 				throw new NullPointerException();
 
-			url = CFURLCreateWithFileSystemPath(NULL, fsPath, kCFURLPOSIXPathStyle, TRUE);
+			url = CFURLCreateWithFileSystemPath(NULL, fsPath, kCFURLPOSIXPathStyle, true);
 			if ( url == NULL )
 				throw new NullPointerException();
 

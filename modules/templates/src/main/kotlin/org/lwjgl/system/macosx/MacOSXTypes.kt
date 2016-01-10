@@ -18,8 +18,8 @@ fun config() {
 val id = "id".opaque_p // Opaque object pointer
 val id_p = id.p
 
-val Boolean = IntegerType("Boolean", PrimitiveMapping.BYTE, unsigned = true)
-val BOOL = IntegerType("BOOL", PrimitiveMapping.BYTE)
+val Boolean = IntegerType("Boolean", PrimitiveMapping.BOOLEAN, unsigned = true)
+val BOOL = IntegerType("BOOL", PrimitiveMapping.BOOLEAN)
 
 val uint8_tASCII_p = CharSequenceType("uint8_t")
 
