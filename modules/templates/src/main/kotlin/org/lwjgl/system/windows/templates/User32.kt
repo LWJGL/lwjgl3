@@ -1224,4 +1224,266 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		HWND.IN("hWnd", "a handle to the window whose DC is to be released"),
 		HDC.IN("hDC", "a handle to the DC to be released")
 	)
+
+	val SystemMetrics = IntConstant(
+		"#GetSystemMetrics() codes.",
+
+		"SM_CXSCREEN"..0,
+		"SM_CYSCREEN"..1,
+		"SM_CXVSCROLL"..2,
+		"SM_CYHSCROLL"..3,
+		"SM_CYCAPTION"..4,
+		"SM_CXBORDER"..5,
+		"SM_CYBORDER"..6,
+		"SM_CXDLGFRAME"..7,
+		"SM_CYDLGFRAME"..8,
+		"SM_CYVTHUMB"..9,
+		"SM_CXHTHUMB"..10,
+		"SM_CXICON"..11,
+		"SM_CYICON"..12,
+		"SM_CXCURSOR"..13,
+		"SM_CYCURSOR"..14,
+		"SM_CYMENU"..15,
+		"SM_CXFULLSCREEN"..16,
+		"SM_CYFULLSCREEN"..17,
+		"SM_CYKANJIWINDOW"..18,
+		"SM_MOUSEPRESENT"..19,
+		"SM_CYVSCROLL"..20,
+		"SM_CXHSCROLL"..21,
+		"SM_DEBUG"..22,
+		"SM_SWAPBUTTON"..23,
+		"SM_RESERVED1"..24,
+		"SM_RESERVED2"..25,
+		"SM_RESERVED3"..26,
+		"SM_RESERVED4"..27,
+		"SM_CXMIN"..28,
+		"SM_CYMIN"..29,
+		"SM_CXSIZE"..30,
+		"SM_CYSIZE"..31,
+		"SM_CXFRAME"..32,
+		"SM_CYFRAME"..33,
+		"SM_CXMINTRACK"..34,
+		"SM_CYMINTRACK"..35,
+		"SM_CXDOUBLECLK"..36,
+		"SM_CYDOUBLECLK"..37,
+		"SM_CXICONSPACING"..38,
+		"SM_CYICONSPACING"..39,
+		"SM_MENUDROPALIGNMENT"..40,
+		"SM_PENWINDOWS"..41,
+		"SM_DBCSENABLED"..42,
+		"SM_CMOUSEBUTTONS"..43,
+
+		"SM_CXFIXEDFRAME" expr "SM_CXDLGFRAME",
+		"SM_CYFIXEDFRAME" expr "SM_CYDLGFRAME",
+		"SM_CXSIZEFRAME" expr "SM_CXFRAME",
+		"SM_CYSIZEFRAME" expr "SM_CYFRAME",
+
+		"SM_SECURE"..44,
+		"SM_CXEDGE"..45,
+		"SM_CYEDGE"..46,
+		"SM_CXMINSPACING"..47,
+		"SM_CYMINSPACING"..48,
+		"SM_CXSMICON"..49,
+		"SM_CYSMICON"..50,
+		"SM_CYSMCAPTION"..51,
+		"SM_CXSMSIZE"..52,
+		"SM_CYSMSIZE"..53,
+		"SM_CXMENUSIZE"..54,
+		"SM_CYMENUSIZE"..55,
+		"SM_ARRANGE"..56,
+		"SM_CXMINIMIZED"..57,
+		"SM_CYMINIMIZED"..58,
+		"SM_CXMAXTRACK"..59,
+		"SM_CYMAXTRACK"..60,
+		"SM_CXMAXIMIZED"..61,
+		"SM_CYMAXIMIZED"..62,
+		"SM_NETWORK"..63,
+		"SM_CLEANBOOT"..67,
+		"SM_CXDRAG"..68,
+		"SM_CYDRAG"..69,
+		"SM_SHOWSOUNDS"..70,
+		"SM_CXMENUCHECK"..71,
+		"SM_CYMENUCHECK"..72,
+		"SM_SLOWMACHINE"..73,
+		"SM_MIDEASTENABLED"..74,
+
+		"SM_MOUSEWHEELPRESENT"..75,
+		"SM_XVIRTUALSCREEN"..76,
+		"SM_YVIRTUALSCREEN"..77,
+		"SM_CXVIRTUALSCREEN"..78,
+		"SM_CYVIRTUALSCREEN"..79,
+		"SM_CMONITORS"..80,
+		"SM_SAMEDISPLAYFORMAT"..81,
+		"SM_IMMENABLED"..82,
+
+		"SM_REMOTESESSION"..0x1000,
+
+		// _WIN32_WINNT >= 0x0501
+
+		"SM_SHUTTINGDOWN"..0x2000,
+		"SM_REMOTECONTROL"..0x2001,
+		"SM_CARETBLINKINGENABLED"..0x2002,
+
+		"SM_CXFOCUSBORDER"..83,
+		"SM_CYFOCUSBORDER"..84,
+
+		"SM_TABLETPC"..86,
+		"SM_MEDIACENTER"..87,
+		"SM_STARTER"..88,
+		"SM_SERVERR2"..89,
+
+		// _WIN32_WINNT >= 0x0600
+
+		"SM_MOUSEHORIZONTALWHEELPRESENT"..91,
+		"SM_CXPADDEDBORDER"..92,
+
+		// WINVER >= 0x0601
+
+		"SM_DIGITIZER"..94,
+		"SM_MAXIMUMTOUCHES"..95
+	).javaDocLinks
+
+	int(
+		"GetSystemMetrics",
+		"Retrieves the specified system metric or system configuration setting.",
+
+		int.IN("index", "the system metric or configuration setting to be retrieved", SystemMetrics)
+	)
+
+	val TouchFlags = IntConstant(
+		"#RegisterTouchWindow() flags.",
+
+		"TWF_FINETOUCH"..0x00000001,
+		"TWF_WANTPALM"..0x00000002
+	).javaDocLinks
+
+	IntConstant(
+		"Touch input flag values (TOUCHINPUT##dwFlags()).",
+
+		"TOUCHEVENTF_MOVE"..0x0001,
+		"TOUCHEVENTF_DOWN"..0x0002,
+		"TOUCHEVENTF_UP"..0x0004,
+		"TOUCHEVENTF_INRANGE"..0x0008,
+		"TOUCHEVENTF_PRIMARY"..0x0010,
+		"TOUCHEVENTF_NOCOALESCE"..0x0020,
+		"TOUCHEVENTF_PEN"..0x0040,
+		"TOUCHEVENTF_PALM"..0x0080
+	)
+
+	IntConstant(
+		"Touch input mask values (TOUCHINPUT##dwMask()).",
+
+		"TOUCHINPUTMASKF_TIMEFROMSYSTEM"..0x0001,
+		"TOUCHINPUTMASKF_EXTRAINFO"..0x0002,
+		"TOUCHINPUTMASKF_CONTACTAREA"..0x0004
+	)
+
+	IgnoreMissing..BOOL(
+		"RegisterTouchWindow",
+		"""
+		Registers a window as being touch-capable.
+
+		{@code RegisterTouchWindow} must be called on every window that will be used for touch input. This means that if you have an application that has
+		multiple windows within it, {@code RegisterTouchWindow} must be called on every window in that application that uses touch features. Also, an
+		application can call {@code RegisterTouchWindow} any number of times for the same window if it desires to change the modifier flags. A window can be
+		marked as no longer requiring touch input using the #UnregisterTouchWindow() function.
+		""",
+
+		HWND.IN(
+			"hWnd",
+			"""
+			the handle of the window being registered. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified
+			window.
+			"""
+		),
+		ULONG.IN(
+			"ulFlags",
+			"a set of bit flags that specify optional modifications. This field may contain 0 or",
+			TouchFlags, LinkMode.BITFIELD_CNT
+		),
+
+		since = "Windows 7 (desktop apps only)"
+	)
+
+	IgnoreMissing..BOOL(
+		"UnregisterTouchWindow",
+		"Registers a window as no longer being touch-capable.",
+
+		HWND.IN(
+			"hWnd",
+			"the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified window."
+		),
+
+		since = "Windows 7 (desktop apps only)"
+	)
+
+	IgnoreMissing..BOOL(
+		"IsTouchWindow",
+		"Checks whether a specified window is touch-capable and, optionally, retrieves the modifier flags set for the window's touch capability.",
+
+		HWND.IN(
+			"hWnd",
+			"""
+			the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread is not on the same desktop as the specified
+			window.
+			"""
+		),
+		nullable..PULONG.OUT(
+			"pulFlags",
+			"an optional address of the {@code ULONG} variable to receive the modifier flags for the specified window's touch capability."
+		),
+
+		since = "Windows 7 (desktop apps only)"
+	)
+
+	IgnoreMissing..BOOL(
+		"GetTouchInputInfo",
+		"Retrieves detailed information about touch inputs associated with a particular touch input handle.",
+
+		HTOUCHINPUT.IN(
+			"hTouchInput",
+			"""
+			the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
+			not valid. Note that the handle is not valid after it has been used in a successful call to #CloseTouchInputHandle() or after it has been passed to
+			#DefWindowProc(), #PostMessage(), #SendMessage() or one of their variants.
+			"""
+		),
+		AutoSize("pInputs")..UINT.IN(
+			"cInputs",
+			"""
+			The number of structures in the {@code pInputs} array. This should ideally be at least equal to the number of touch points associated with the
+			message as indicated in the message {@code WPARAM}. If {@code cInputs} is less than the number of touch points, the function will still succeed and
+			populate the {@code pInputs} buffer with information about {@code cInputs} touch points.
+			"""
+		),
+		StructBuffer..PTOUCHINPUT.OUT(
+			"pInputs",
+			"a pointer to an array of ##TOUCHINPUT structures to receive information about the touch points associated with the specified touch input handle"
+		),
+		int.IN(
+			"cbSize",
+			"""
+			the size, in bytes, of a single ##TOUCHINPUT structure. If {@code cbSize} is not the size of a single {@code TOUCHINPUT} structure, the function
+			fails with {@code ERROR_INVALID_PARAMETER}.
+			"""
+		),
+
+		since = "Windows 7 (desktop apps only)"
+	)
+
+	IgnoreMissing..BOOL(
+		"CloseTouchInputHandle",
+		"Closes a touch input handle, frees process memory associated with it, and invalidates the handle.",
+
+		HTOUCHINPUT.IN(
+			"hTouchInput",
+			"""
+			the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
+			not valid. Note that the handle is not valid after it has been used in a successful call to #CloseTouchInputHandle() or after it has been passed to
+			#DefWindowProc(), #PostMessage(), #SendMessage() or one of their variants.
+			"""
+		),
+
+		since = "Windows 7 (desktop apps only)"
+	)
 }

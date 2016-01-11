@@ -31,15 +31,18 @@ val SHORT = IntegerType("SHORT", PrimitiveMapping.SHORT)
 val UINT = IntegerType("UINT", PrimitiveMapping.INT, unsigned = true)
 val DWORD = IntegerType("DWORD", PrimitiveMapping.INT)
 val LONG = IntegerType("LONG", PrimitiveMapping.INT)
+val ULONG = IntegerType("ULONG", PrimitiveMapping.INT, unsigned = true)
 val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
 
 val ATOM = PrimitiveType("ATOM", PrimitiveMapping.SHORT)
 
 val UINT_p = UINT.p
 val FLOAT_p = FLOAT.p
+val PULONG = ULONG.p("PULONG")
 
 val UINT_PTR = PrimitiveType("UINT_PTR", PrimitiveMapping.POINTER)
 val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.POINTER)
+val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.POINTER)
 
 val LRESULT = typedef(LONG_PTR, "LRESULT")
 val WPARAM = typedef(UINT_PTR, "WPARAM")
@@ -67,6 +70,10 @@ val HDC = typedef(HANDLE, "HDC")
 val HGLRC = typedef(HANDLE, "HGLRC")
 val HBITMAP = typedef(HANDLE, "HBITMAP")
 val HPALETTE = typedef(HANDLE, "HPALETTE")
+val HICON = typedef(HANDLE, "HICON")
+val HCURSOR = typedef(HANDLE, "HCURSOR")
+val HBRUSH = typedef(HANDLE, "HBRUSH")
+val HTOUCHINPUT = typedef(HANDLE, "HTOUCHINPUT")
 
 val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 	documentation = "Contains the x and y coordinates of a point."
@@ -180,10 +187,6 @@ val WNDPROC = "WNDPROC".callback(
 	useSystemCallConvention()
 }
 
-val HICON = "HICON".opaque_p
-val HCURSOR = "HCURSOR".opaque_p
-private val HBRUSH = "HBRUSH".opaque_p
-
 val WNDCLASSEX_p = struct_p(WINDOWS_PACKAGE, "WNDCLASSEX") {
 	documentation = "Contains the window class attributes that are registered by the User32#RegisterClassEx() function."
 
@@ -200,3 +203,60 @@ val WNDCLASSEX_p = struct_p(WINDOWS_PACKAGE, "WNDCLASSEX") {
 	LPCTSTR.member("lpszClassName", "")
 	HICON.member("hIconSm", "")
 }
+
+val TOUCHINPUT = struct(WINDOWS_PACKAGE, "TOUCHINPUT", mutable = false) {
+	documentation = "Encapsulates data for touch input."
+
+	LONG.member(
+		"x",
+		"the x-coordinate (horizontal point) of the touch input. This member is indicated in hundredths of a pixel of physical screen coordinates."
+	)
+	LONG.member("y", "the y-coordinate (vertical point) of the touch input. This member is indicated in hundredths of a pixel of physical screen coordinates.")
+	HANDLE.member("hSource", "a device handle for the source input device. Each device is given a unique provider at run time by the touch input provider.")
+	DWORD.member(
+		"dwID",
+		"""
+		a touch point identifier that distinguishes a particular touch input. This value stays consistent in a touch contact sequence from the point a contact
+		comes down until it comes back up. An ID may be reused later for subsequent contacts.
+		"""
+	)
+	DWORD.member(
+		"dwFlags",
+		"""
+		a set of bit flags that specify various aspects of touch point press, release, and motion. The bits in this member can be any reasonable combination of
+		the values in the Remarks section.
+		"""
+	)
+	DWORD.member(
+		"dwMask",
+		"""
+		a set of bit flags that specify which of the optional fields in the structure contain valid values. The availability of valid information in the
+		optional fields is device-specific. Applications should use an optional field value only when the corresponding bit is set in {@code dwMask}. This
+		field may contain a combination of the {@code dwMask} flags mentioned in the Remarks section.
+		"""
+	)
+	DWORD.member(
+		"dwTime",
+		"""
+		the time stamp for the event, in milliseconds. The consuming application should note that the system performs no validation on this field; when the
+		User32#TOUCHINPUTMASKF_TIMEFROMSYSTEM flag is not set, the accuracy and sequencing of values in this field are completely dependent on the touch input
+		provider.
+		"""
+	)
+	ULONG_PTR.member("dwExtraInfo", "an additional value associated with the touch event.")
+	DWORD.member(
+		"cxContact",
+		"""
+		the width of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the {@code dwMask} member has
+		the User32#TOUCHEVENTFMASK_CONTACTAREA flag set.
+		"""
+	)
+	DWORD.member(
+		"cyContact",
+		"""
+		the height of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the {@code dwMask} member has
+		the User32#TOUCHEVENTFMASK_CONTACTAREA flag set.
+		"""
+	)
+}.nativeType
+val PTOUCHINPUT = TOUCHINPUT.p("PTOUCHINPUT")
