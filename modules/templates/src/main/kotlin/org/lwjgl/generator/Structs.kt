@@ -789,8 +789,8 @@ $indentation}"""
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
 					if ( it.nativeType is CallbackType ) {
 						val callbackType = it.nativeType.className
-						println("\t/** Unsafe version of {@link #$setter($callbackType) $setter}. */")
-						println("\tpublic static void n$setter(long $STRUCT, $callbackType value) { memPutAddress($STRUCT + $field, value.address()); }")
+						println("\t/** Unsafe version of {@link #$setter(long) $setter}. */")
+						println("\tpublic static void n$setter(long $STRUCT, long value) { memPutAddress($STRUCT + $field, value); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType.simpleName
 						val bufferMethod = getBufferMethod(it, javaType)
@@ -869,6 +869,8 @@ $indentation}"""
 
 					println("\t/** Unsafe version of {@link #$setter(CharSequence) $setter}. */")
 					println("\tpublic static void n$setter(long $STRUCT, CharSequence value) { n$setter($STRUCT, memEncode${mapping.charset}(value, BufferAllocator.MALLOC)); }")
+					println("\t/** Unsafe version of {@link #${setter}Free}. */")
+					println("\tpublic static void n${setter}Free(long $STRUCT) { nmemFree(memGetAddress($STRUCT + $field)); }")
 				} else if ( it.nativeType.isPointerData ) {
 					if ( it.nativeType is StructType ) {
 						val structType = it.nativeType.definition.className
@@ -919,8 +921,10 @@ $indentation}"""
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
 					if ( it.nativeType is CallbackType ) {
 						val callbackType = it.nativeType.className
+						println("$indent/** Sets the specified function address to the {@code $field} field. */")
+						println("${indent}public $returnType $setter(long value) { $n$setter($ADDRESS, value); return this; }")
 						println("$indent/** Sets the address of the specified {@link $callbackType} to the {@code $field} field. */")
-						println("${indent}public $returnType $setter($callbackType value) { $n$setter($ADDRESS, value); return this; }")
+						println("${indent}public $returnType $setter($callbackType value) { return $setter(value.address()); }")
 					} else {
 						println("$indent/** Sets the specified value to the {@code $field} field. */")
 						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType.simpleName} value) { $n$setter($ADDRESS, value); return this; }")
@@ -961,9 +965,11 @@ $indentation}"""
 						"""$indent/**
 $indent * Encodes the specified {@link CharSequence} and sets the address of the encoded string to the {@code $field} field.
 $indent *
-$indent * <p>The encoded string must be explicitly freed with {@link MemoryUtil#memFree memFree}.</p>
+$indent * <p>The encoded string must be explicitly freed with {@link #${setter}Free}.</p>
 $indent */""")
 					println("${indent}public $returnType $setter(CharSequence value) { $n$setter($ADDRESS, value); return this; }")
+					println("$indent/** Frees the string encoded by {@link #$setter(CharSequence)} and stored in the {@code $field} field. */")
+					println("${indent}public $returnType ${setter}Free() { $n${setter}Free($ADDRESS); return this; }")
 				} else if ( it.nativeType.isPointerData ) {
 					val pointerType = if ( it.nativeType is StructType )
 						it.nativeType.definition.className
@@ -1012,7 +1018,9 @@ $indent */""")
 					if ( it.nativeType is CallbackType ) {
 						val callbackType = it.nativeType.className
 
-						println("\tpublic static $callbackType n$getter(long $STRUCT) { return org.lwjgl.system.libffi.Closure.create(memGetAddress($STRUCT + $field)); }")
+						println("\tpublic static long n$getter(long $STRUCT) { return memGetAddress($STRUCT + $field); }")
+						println("\t/** Unsafe version of {@link #${getter}Closure}. */")
+						println("\tpublic static $callbackType n${getter}Closure(long $STRUCT) { return org.lwjgl.system.libffi.Closure.create(n$getter($STRUCT)); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType.simpleName
 						val bufferMethod = getBufferMethod(it, javaType)
@@ -1120,8 +1128,11 @@ $indent */""")
 					if ( it.nativeType is CallbackType ) {
 						val callbackType = it.nativeType.className
 
+						println("$indent/** Returns the function address at the {@code $getter} field. */")
+						println("${indent}public long $getter() { return $n$getter($ADDRESS); }")
+
 						println("$indent/** Returns the {@code $callbackType} instance at the {@code $getter} field. */")
-						println("${indent}public $callbackType $getter() { return $n$getter($ADDRESS); }")
+						println("${indent}public $callbackType ${getter}Closure() { return $n${getter}Closure($ADDRESS); }")
 					} else {
 						println("$indent/** Returns the value of the {@code $getter} field. */")
 						println("${indent}public ${it.nativeType.javaMethodType.simpleName} $getter() { return $n$getter($ADDRESS); }")
