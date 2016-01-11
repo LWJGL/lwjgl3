@@ -20,7 +20,7 @@ org.lwjgl:lwjgl-platform:${version}:natives-linux
 org.lwjgl:lwjgl-platform:${version}:natives-osx
 ```
 
-where `${version}` is a version (e.g. `3.0.0a`) released on Maven Central. **Nightly builds** are also available from the *Sonatype Nexus* [repository](https://oss.sonatype.org/content/repositories/snapshots), with a snapshot build version (e.g. `3.0.0b-SNAPSHOT`).
+where `${version}` is a version (e.g. `3.0.0b`) released on Maven Central. **Nightly builds** are also available from the *Sonatype Nexus* [repository](https://oss.sonatype.org/content/repositories/snapshots), with a snapshot build version (e.g. `3.0.0-SNAPSHOT`).
 
 Example code:
 
