@@ -26,6 +26,7 @@ import static org.lwjgl.system.windows.GDI32.*;
  *
  * <p>This implementation supports Windows only and is no way complete or robust enough for production use.</p>
  */
+@SuppressWarnings("serial")
 public class LWJGLCanvas extends Canvas {
 
 	private final JAWT awt;
