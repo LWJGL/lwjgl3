@@ -116,7 +116,7 @@ abstract class APIBinding(
 abstract class SimpleBinding(
 	callingConvention: CallingConvention
 ) : APIBinding("n/a", "n/a", callingConvention) {
-	override fun getFunctionAddressCall(function: NativeClassFunction) = "checkFunctionAddress(${super.getFunctionAddressCall(function)})"
+	override fun getFunctionAddressCall(function: NativeClassFunction) = super.getFunctionAddressCall(function).let { if ( function.has(IgnoreMissing) ) it else "checkFunctionAddress($it)" }
 	override fun PrintWriter.generateContent() = Unit
 }
 
