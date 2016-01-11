@@ -60,6 +60,12 @@ val PrimitiveType.p: PointerType get() = PointerType(
 	(this.mapping as PrimitiveMapping).toPointer,
 	elementType = this
 )
+fun PrimitiveType.p(name: String) = PointerType(
+	name,
+	(this.mapping as PrimitiveMapping).toPointer,
+	elementType = this,
+	includesPointer = true
+)
 
 /** pointer to pointer. */
 private fun PointerType.pointerTo(const: Boolean = false): String {
@@ -124,7 +130,8 @@ class StructType(
 val StructType.p: PointerType get() = if ( this.includesPointer )
 	PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
 else
-	StructType(name = this.pointerTo(), includesPointer = true, definition = this.definition)
+	StructType(this.definition, this.pointerTo(), includesPointer = true)
+fun StructType.p(name: String) = StructType(this.definition, name, includesPointer = true)
 
 // Strings
 class CharSequenceType(

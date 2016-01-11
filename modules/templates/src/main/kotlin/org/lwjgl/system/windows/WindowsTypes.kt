@@ -24,7 +24,7 @@ val VOID = NativeType("VOID", TypeMapping.VOID)
 val HANDLE = "HANDLE".opaque_p
 val HANDLE_p = HANDLE.p
 
-val BOOL = PrimitiveType("BOOL", PrimitiveMapping.INT) // Not boolean because of WinUser#GetMessage
+val BOOL = PrimitiveType("BOOL", PrimitiveMapping.INT)
 val BYTE = IntegerType("BYTE", PrimitiveMapping.BYTE)
 val WORD = IntegerType("WORD", PrimitiveMapping.SHORT)
 val SHORT = IntegerType("SHORT", PrimitiveMapping.SHORT)
@@ -75,41 +75,36 @@ val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 	FLOAT.member("y", "specifies the vertical (y) coordinate of a point")
 }.nativeType
 
-val LPGLYPHMETRICSFLOAT = StructType(
-	name = "LPGLYPHMETRICSFLOAT",
-	includesPointer = true,
-	definition = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT", mutable = false) {
-		documentation = "Contains information about the placement and orientation of a glyph in a character cell."
+val GLYPHMETRICSFLOAT = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT", mutable = false) {
+	documentation = "Contains information about the placement and orientation of a glyph in a character cell."
 
-		FLOAT.member("gmfBlackBoxX", "specifies the width of the smallest rectangle (the glyph's black box) that completely encloses the glyph")
-		FLOAT.member("gmfBlackBoxY", "specifies the height of the smallest rectangle (the glyph's black box) that completely encloses the glyph")
-		POINTFLOAT.member("gmfptGlyphOrigin", "specifies the x and y coordinates of the upper-left corner of the smallest rectangle that completely encloses the glyph")
-		FLOAT.member("gmfCellIncX", "specifies the horizontal distance from the origin of the current character cell to the origin of the next character cell")
-		FLOAT.member("gmfCellIncY", "specifies the vertical distance from the origin of the current character cell to the origin of the next character cell")
-	}
-)
+	FLOAT.member("gmfBlackBoxX", "specifies the width of the smallest rectangle (the glyph's black box) that completely encloses the glyph")
+	FLOAT.member("gmfBlackBoxY", "specifies the height of the smallest rectangle (the glyph's black box) that completely encloses the glyph")
+	POINTFLOAT.member("gmfptGlyphOrigin", "specifies the x and y coordinates of the upper-left corner of the smallest rectangle that completely encloses the glyph")
+	FLOAT.member("gmfCellIncX", "specifies the horizontal distance from the origin of the current character cell to the origin of the next character cell")
+	FLOAT.member("gmfCellIncY", "specifies the vertical distance from the origin of the current character cell to the origin of the next character cell")
+}.nativeType
+val LPGLYPHMETRICSFLOAT = GLYPHMETRICSFLOAT.p("LPGLYPHMETRICSFLOAT")
 
-private val POINT_STRUCT = struct(WINDOWS_PACKAGE, "POINT") {
+val POINT = struct(WINDOWS_PACKAGE, "POINT") {
 	documentation = "Defines the x- and y- coordinates of a point."
 
 	LONG.member("x", "the x-coordinate of the point")
 	LONG.member("y", "the y-coordinate of the point")
-}
-val POINT = POINT_STRUCT.nativeType
-val LPPOINT = StructType(name = "LPPOINT", definition = POINT_STRUCT, includesPointer = true)
+}.nativeType
+val LPPOINT = POINT.p("LPPOINT")
 
-private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
+val RECT = struct(WINDOWS_PACKAGE, "RECT") {
 	documentation = "Defines the coordinates of the upper-left and lower-right corners of a rectangle."
 
 	LONG.member("left", "the x-coordinate of the upper-left corner of the rectangle")
 	LONG.member("top", "the y-coordinate of the upper-left corner of the rectangle")
 	LONG.member("right", "the x-coordinate of the lower-right corner of the rectangle")
 	LONG.member("bottom", "the y-coordinate of the lower-right corner of the rectangle")
-}
-val RECT = RECT_STRUCT.nativeType
-val LPRECT = StructType(name = "LPRECT", definition = RECT_STRUCT, includesPointer = true)
+}.nativeType
+val LPRECT = RECT.p("LPRECT")
 
-private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
+val MSG = struct(WINDOWS_PACKAGE, "MSG") {
 	documentation = "Contains message information from a thread's message queue."
 
 	HWND.member("hwnd", "a handle to the window whose window procedure receives the message. This member is $NULL when the message is a thread message.");
@@ -118,12 +113,11 @@ private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
 	LPARAM.member("lParam", "additional information about the message. The exact meaning depends on the value of the message member.")
 	DWORD.member("time", "the time at which the message was posted")
 	POINT.member("pt", "the cursor position, in screen coordinates, when the message was posted.")
-}
-val MSG = MSG_STRUCT.nativeType
-val LPMSG = StructType(name = "LPMSG", definition = MSG_STRUCT, includesPointer = true)
+}.nativeType
+val LPMSG = MSG.p("LPMSG")
 val MSG_p = MSG.p
 
-val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTOR") {
+val PIXELFORMATDESCRIPTOR = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTOR") {
 	documentation = "Describes the pixel format of a drawing surface."
 
 	WORD.member("nSize", "specifies the size of this data structure. This value should be set to PIXELFORMATDESCRIPTOR#SIZEOF.")
@@ -170,9 +164,8 @@ val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTO
 		"""
 	)
 	DWORD.member("dwDamageMask", "Ignored. Earlier implementations of OpenGL used this member, but it is no longer used.")
-}
-val PIXELFORMATDESCRIPTOR = StructType(PIXELFORMATDESCRIPTOR_STRUCT)
-val LPPIXELFORMATDESCRIPTOR = StructType(name = "LPPIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT, includesPointer = true)
+}.nativeType
+val LPPIXELFORMATDESCRIPTOR = PIXELFORMATDESCRIPTOR.p("LPPIXELFORMATDESCRIPTOR")
 val PIXELFORMATDESCRIPTOR_p = PIXELFORMATDESCRIPTOR.p
 
 val WNDPROC = "WNDPROC".callback(
