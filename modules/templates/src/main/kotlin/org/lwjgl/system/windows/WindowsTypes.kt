@@ -111,7 +111,7 @@ val LPRECT = StructType(name = "LPRECT", definition = RECT_STRUCT, includesPoint
 
 private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
 	documentation = "Contains message information from a thread's message queue."
-	nativeImport ("WindowsLWJGL.h")
+
 	HWND.member("hwnd", "a handle to the window whose window procedure receives the message. This member is $NULL when the message is a thread message.");
 	UINT.member("message", "the message identifier. Applications can only use the low word; the high word is reserved by the system.")
 	WPARAM.member("wParam", "additional information about the message. The exact meaning depends on the value of the message member.")
@@ -187,8 +187,8 @@ val WNDPROC = "WNDPROC".callback(
 	useSystemCallConvention()
 }
 
-private val HICON = "HICON".opaque_p
-private val HCURSOR = "HCURSOR".opaque_p
+val HICON = "HICON".opaque_p
+val HCURSOR = "HCURSOR".opaque_p
 private val HBRUSH = "HBRUSH".opaque_p
 
 val WNDCLASSEX_p = struct_p(WINDOWS_PACKAGE, "WNDCLASSEX") {

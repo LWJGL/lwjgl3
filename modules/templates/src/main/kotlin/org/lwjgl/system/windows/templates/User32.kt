@@ -558,6 +558,42 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"SWP_ASYNCWINDOWPOS"..0x4000
 	).javaDocLinks
 
+	val StandardIcons = IntConstant(
+		"Standard Icon IDs. Use with #LoadIcon().",
+
+		"IDI_APPLICATION"..32512,
+		"IDI_HAND"..32513,
+		"IDI_QUESTION"..32514,
+		"IDI_EXCLAMATION"..32515,
+		"IDI_ASTERISK"..32516,
+		"IDI_WINLOGO"..32517,
+		"IDI_SHIELD"..32518, // WINVER >= 0x0600
+		"IDI_WARNING" expr "IDI_EXCLAMATION",
+		"IDI_ERROR" expr "IDI_HAND",
+		"IDI_INFORMATION" expr "IDI_ASTERISK"
+	).javaDocLinks
+
+	val StandardCursors = IntConstant(
+		"Standard Cursor IDs. Use with #LoadCursor().",
+
+		"IDC_ARROW"..32512,
+		"IDC_IBEAM"..32513,
+		"IDC_WAIT"..32514,
+		"IDC_CROSS"..32515,
+		"IDC_UPARROW"..32516,
+		"IDC_SIZE"..32640,
+		"IDC_ICON"..32641,
+		"IDC_SIZENWSE"..32642,
+		"IDC_SIZENESW"..32643,
+		"IDC_SIZEWE"..32644,
+		"IDC_SIZENS"..32645,
+		"IDC_SIZEALL"..32646,
+		"IDC_NO"..32648,
+		"IDC_HAND"..32649,
+		"IDC_APPSTARTING"..32650,
+		"IDC_HELP"..32651
+	).javaDocLinks
+
 	val ClassLongOffsets = IntConstant(
 		"Class field offsets for #GetClassLongPtr().",
 
@@ -1144,6 +1180,28 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			""",
 			ClassLongOffsets, LinkMode.SINGLE_CNT
 		)
+	)
+
+	NativeName("LoadIconW")..HICON(
+		"LoadIcon",
+		"Loads the specified icon resource from the executable (.exe) file associated with an application instance.",
+
+		nullable..HINSTANCE.IN(
+			"instance",
+			"""
+			a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be $NULL when a standard icon is
+			being loaded.
+			"""
+		),
+		LPCTSTR.IN("iconName", "the name of the icon resource to be loaded or", StandardIcons, LinkMode.SINGLE_CNT)
+	)
+
+	NativeName("LoadCursorW")..HCURSOR(
+		"LoadCursor",
+		"Loads the specified cursor resource from the executable (.EXE) file associated with an application instance.",
+
+		nullable..HINSTANCE.IN("instance", "a handle to an instance of the module whose executable file contains the cursor to be loaded."),
+		LPCTSTR.IN("cursorName", "the name of the cursor resource to be loaded or", StandardCursors, LinkMode.SINGLE_CNT)
 	)
 
 	HDC(
