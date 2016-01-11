@@ -95,6 +95,7 @@ private val POINT_STRUCT = struct(WINDOWS_PACKAGE, "POINT") {
 	LONG.member("x", "the x-coordinate of the point")
 	LONG.member("y", "the y-coordinate of the point")
 }
+val POINT = POINT_STRUCT.nativeType
 val LPPOINT = StructType(name = "LPPOINT", definition = POINT_STRUCT, includesPointer = true)
 
 private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
@@ -106,6 +107,21 @@ private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
 	LONG.member("bottom", "the y-coordinate of the lower-right corner of the rectangle")
 }
 val RECT = RECT_STRUCT.nativeType
+val LPRECT = StructType(name = "LPRECT", definition = RECT_STRUCT, includesPointer = true)
+
+private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
+	documentation = "Contains message information from a thread's message queue."
+	nativeImport ("WindowsLWJGL.h")
+	HWND.member("hwnd", "a handle to the window whose window procedure receives the message. This member is $NULL when the message is a thread message.");
+	UINT.member("message", "the message identifier. Applications can only use the low word; the high word is reserved by the system.")
+	WPARAM.member("wParam", "additional information about the message. The exact meaning depends on the value of the message member.")
+	LPARAM.member("lParam", "additional information about the message. The exact meaning depends on the value of the message member.")
+	DWORD.member("time", "the time at which the message was posted")
+	POINT.member("pt", "the cursor position, in screen coordinates, when the message was posted.")
+}
+val MSG = MSG_STRUCT.nativeType
+val LPMSG = StructType(name = "LPMSG", definition = MSG_STRUCT, includesPointer = true)
+val MSG_p = MSG.p
 
 val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTOR") {
 	documentation = "Describes the pixel format of a drawing surface."
