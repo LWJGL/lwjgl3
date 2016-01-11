@@ -958,11 +958,11 @@ $indentation}"""
 					println("$indent/** Sets the address of the specified encoded string to the {@code $field} field. */")
 					println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
 					println(
-						"""	/**
-	 * Encodes the specified {@link CharSequence} and sets the address of the encoded string to the {@code $field} field.
-	 *
-	 * <p>The encoded string must be explicitly freed with {@link MemoryUtil#memFree memFree}.</p>
-	*/""")
+						"""$indent/**
+$indent * Encodes the specified {@link CharSequence} and sets the address of the encoded string to the {@code $field} field.
+$indent *
+$indent * <p>The encoded string must be explicitly freed with {@link MemoryUtil#memFree memFree}.</p>
+$indent */""")
 					println("${indent}public $returnType $setter(CharSequence value) { $n$setter($ADDRESS, value); return this; }")
 				} else if ( it.nativeType.isPointerData ) {
 					val pointerType = if ( it.nativeType is StructType )
