@@ -527,6 +527,15 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"HWND_NOTOPMOST"..-2L
 	).javaDocLinks
 
+	LongConstant(
+		"""
+		Virtual window handle used by #PostMessage() that matches all top-level windows in the system, including disabled or invisible unowned windows,
+		overlapped windows, and pop-up windows.
+		""",
+
+		"HWND_BROADCAST"..0xFFFFL
+	)
+
 	val SizePosFlags = IntConstant(
 		"Window sizing and positiong flags used by the #SetWindowPos() flags argument.",
 
@@ -805,7 +814,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"Creates an overlapped, pop-up, or child window with an extended window style; otherwise, this function is identical to the CreateWindow function.",
 
 		DWORD.IN("dwExStyle", "the extended window style of the window being created"),
-		LPCTSTR.IN("lpClassName", "a null-terminated string or a class atom created by a previous call to the #RegisterClassEx() function."),
+		LPCTSTR.IN("lpClassName", "a null-terminated string or a class atom created by a previous call to the #RegisterClassEx(WNDCLASSEX) function."),
 		LPCTSTR.IN(
 			"lpWindowName",
 			"the window name. If the window style specifies a title bar, the window title pointed to by {@code lpWindowName} is displayed in the title bar."
@@ -833,8 +842,8 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 	SaveLastError..BOOL(
 		"DestroyWindow",
 		"""
-		Destroys the specified window. The function sends WM_DESTROY and WM_NCDESTROY messages to the window to deactivate it and remove the keyboard focus from
-		it. The function also destroys the window's menu, flushes the thread message queue, destroys timers, removes clipboard ownership, and breaks the
+		Destroys the specified window. The function sends #WM_DESTROY and #WM_NCDESTROY messages to the window to deactivate it and remove the keyboard focus
+		from it. The function also destroys the window's menu, flushes the thread message queue, destroys timers, removes clipboard ownership, and breaks the
 		clipboard viewer chain (if the window is at the top of the viewer chain).
 
 		If the specified window is a parent or owner window, DestroyWindow automatically destroys the associated child or owned windows when it destroys the
@@ -904,7 +913,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		UINT.IN("uFlags", "the window sizing and positioning flags", SizePosFlags, LinkMode.BITFIELD)
 	)
 
-	BOOL(
+	NativeName("SetWindowTextW")..BOOL(
 		"SetWindowText",
 		"""
 		Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed.
@@ -915,7 +924,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		LPCTSTR.IN("lpString", "the new title or control text")
 	)
 
-	val GetMessage = BOOL(
+	val GetMessage = NativeName("GetMessageW")..BOOL(
 		"GetMessage",
 		"""
 		Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for
@@ -940,7 +949,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		UINT.IN("wMsgFilterMax", "the integer value of the highest message value to be retrieved")
 	)
 
-	BOOL(
+	NativeName("PeekMessageW")..BOOL(
 		"PeekMessage",
 		"Dispatches incoming sent messages, checks the thread message queue for a posted message, and retrieves the message (if any exist).",
 
@@ -975,11 +984,36 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"""
 	)
 
-	LRESULT(
+	NativeName("DispatchMessageW")..LRESULT(
 		"DispatchMessage",
 		"Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the #GetMessage() function.",
 
 		const..MSG_p.IN("lpmsg", "a pointer to a structure that contains the message.")
+	)
+
+	NativeName("PostMessageW")..BOOL(
+		"PostMessage",
+		"""
+		Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread
+		to process the message.
+		""",
+
+		nullable..HWND.IN(
+			"hWnd",
+			"""
+			a handle to the window whose window procedure is to receive the message. The following values have special meanings:
+			${ul(
+				"""
+				#HWND_BROADCAST - The message is posted to all top-level windows in the system, including disabled or invisible unowned windows, overlapped
+				windows, and pop-up windows. The message is not posted to child windows.
+				""",
+				"$NULL - The function behaves like a call to PostThreadMessage with the dwThreadId parameter set to the identifier of the current thread."
+			)}
+			"""
+		),
+		UINT.IN("Msg", "the message to be posted"),
+		WPARAM.IN("wParam", "additional message-specific information"),
+		LPARAM.IN("lParam", "additional message-specific information")
 	)
 
 	BOOL(
@@ -1035,7 +1069,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		)
 	)
 
-	LONG_PTR(
+	NativeName("SetWindowLongPtrW")..LONG_PTR(
 		"SetWindowLongPtr",
 		"Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
 
@@ -1053,7 +1087,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		returnDoc = "the previous value at the given {@code index}"
 	)
 
-	LONG_PTR(
+	NativeName("GetWindowLongPtrW")..LONG_PTR(
 		"GetWindowLongPtr",
 		"Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.",
 
@@ -1068,7 +1102,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		)
 	)
 
-	LONG_PTR(
+	NativeName("SetClassLongPtrW")..LONG_PTR(
 		"SetClassLongPtr",
 		"""
 		Replaces the specified value at the specified offset in the extra class memory or the ##WNDCLASSEX structure for the class to which the specified
@@ -1095,7 +1129,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"""
 	)
 
-	LONG_PTR(
+	NativeName("GetClassLongPtrW")..LONG_PTR(
 		"GetClassLongPtr",
 		"Retrieves the specified value from the ##WNDCLASSEX structure associated with the specified window.",
 
