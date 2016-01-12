@@ -1758,7 +1758,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"ChangeDisplaySettingsEx",
 		"Changes the settings of the specified display device to the specified graphics mode.",
 
-		LPCTSTR.IN(
+		nullable..LPCTSTR.IN(
 			"lpszDeviceName",
 			"""
 			a pointer to a null-terminated string that specifies the display device whose graphics mode will change. Only display device names as returned by
