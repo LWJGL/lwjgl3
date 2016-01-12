@@ -147,7 +147,10 @@ class CharSequenceTransform(
 		"$API_BUFFER.address(${param.name}Encoded)"
 
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
-		writer.println("\t\tint ${qtype.name}Encoded = $API_BUFFER.stringParam${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}, $nullTerminated);")
+		writer.print("\t\tint ${qtype.name}Encoded = ")
+		if ( qtype has nullable )
+			writer.print("${qtype.name} == null ? 0 : ")
+		writer.println("$API_BUFFER.stringParam${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}, $nullTerminated);")
 		if ( !nullTerminated )
 			writer.println("\t\tint ${qtype.name}EncodedLen = $API_BUFFER.getOffset() - ${qtype.name}Encoded;")
 	}
