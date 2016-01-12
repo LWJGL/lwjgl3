@@ -24,7 +24,7 @@ val GPU_DEVICE = struct(OPENGL_PACKAGE, "GPU_DEVICE", "wgl", mutable = false) {
 		{@code GPU_DEVICE}.
 		"""
 	)
-	CHAR.string(
+	CHAR.array(
 		"DeviceName",
 		"""
 		a string identifying the display device name. This will be the same string as stored in the {@code DeviceName} field of the {@code DISPLAY_DEVICE}
@@ -32,7 +32,7 @@ val GPU_DEVICE = struct(OPENGL_PACKAGE, "GPU_DEVICE", "wgl", mutable = false) {
 		""",
 		size = 32
 	)
-	CHAR.string(
+	CHAR.array(
 		"DeviceString",
 		"""
 		a string describing the GPU for this display device. It is the same string as stored in the {@code DeviceString} field in the {@code DISPLAY_DEVICE}

@@ -122,7 +122,7 @@ class Struct(
 	}
 
 	// CharSequence special-case
-	fun CharType.string(name: String, documentation: String, size: Int) {
+	fun CharType.array(name: String, documentation: String, size: Int) {
 		members.add(StructMemberCharArray(this, name, documentation, size))
 	}
 

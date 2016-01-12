@@ -85,7 +85,7 @@ val ovrErrorInfo_p = struct_p(OVR_PACKAGE, "OVRErrorInfo", nativeName = "ovrErro
 	documentation = "Provides information about the last error."
 
 	ovrResult.member("Result", "the result from the last API call that generated an error ovrResult")
-	char.array("ErrorString", "a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions", size = 512)
+	charUTF8.array("ErrorString", "a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions", size = 512)
 }
 
 val ovrSessionStatus_p = struct_p(OVR_PACKAGE, "OVRSessionStatus", nativeName = "ovrSessionStatus", mutable = false) {
@@ -221,11 +221,11 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mu
 
 	ovrHmdType.member("Type", "this HMD's type")
 	padding(4, "Pointer.BITS64")
-	charUTF8.string("ProductName", "name string describing the product: \"Oculus Rift DK1\", etc.", size = 64)
-	charUTF8.string("Manufacturer", "string describing the manufacturer. Usually \"Oculus\".", size = 64)
+	charUTF8.array("ProductName", "name string describing the product: \"Oculus Rift DK1\", etc.", size = 64)
+	charUTF8.array("Manufacturer", "string describing the manufacturer. Usually \"Oculus\".", size = 64)
 	short.member("VendorId", "HID Vendor ID of the device")
 	short.member("ProductId", "HID Product ID of the device")
-	charASCII.string("SerialNumber", "sensor (and display) serial number", size = 24)
+	charASCII.array("SerialNumber", "sensor (and display) serial number", size = 24)
 	short.member("FirmwareMajor", "sensor firmware major version number")
 	short.member("FirmwareMinor", "sensor firmware minor version number")
 
