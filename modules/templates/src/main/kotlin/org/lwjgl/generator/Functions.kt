@@ -1227,14 +1227,14 @@ class NativeClassFunction(
 
 	fun generateFunctionDefinition(writer: PrintWriter) = writer.generateFunctionDefinitionImpl()
 	private fun PrintWriter.generateFunctionDefinitionImpl() {
-		print("typedef ${returns.toNativeType()} (")
+		print("typedef ${returns.toNativeType(nativeClass.binding)} (")
 		if ( nativeClass.binding?.callingConvention !== CallingConvention.DEFAULT )
 			print("APIENTRY ")
 		print("*${name}PROC) (")
 		val nativeParams = getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)
 		if ( nativeParams.any() ) {
 			printList(nativeParams) {
-				it.toNativeType()
+				it.toNativeType(nativeClass.binding)
 			}
 		} else
 			print("void")
@@ -1268,10 +1268,10 @@ class NativeClassFunction(
 		// Cast addresses to pointers
 
 		getNativeParams(withExplicitFunctionAddress = false).filter { it.nativeType is PointerType }.forEach {
-			val pointerType = it.toNativeType(pointerMode = true)
+			val pointerType = it.toNativeType(nativeClass.binding, pointerMode = true)
 			print("\t$pointerType")
 			if ( !pointerType.endsWith('*') ) print(' ')
-			println("${it.name} = ($pointerType)(intptr_t)${it.name}$POINTER_POSTFIX;")
+			println("${it.name} = ($pointerType)${if ( nativeClass.binding == null ) "(intptr_t)" else ""}${it.name}$POINTER_POSTFIX;")
 		}
 
 		// Custom code
@@ -1299,17 +1299,17 @@ class NativeClassFunction(
 				} else if ( !returns.isVoid ) {
 					print(if ( code?.nativeAfterCall != null ) "$RESULT =" else "return")
 					print(" ($returnsJniFunctionType)")
-					if ( returns.nativeType is PointerType )
+					if ( returns.nativeType is PointerType && nativeClass.binding == null )
 						print("(intptr_t)")
 					if ( returns.has(Address) )
 						print('&')
 				}
-				print("$nativeName")
+				print("$name")
 				if ( !has(Macro) ) print('(')
 				printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) {
 					// Avoids warning when implicitly casting from jlong to 32-bit pointer.
 					if ( it.nativeType.mapping === PrimitiveMapping.POINTER )
-						"(${it.nativeType.name})${it.name}"
+						"(${if ( nativeClass.binding != null ) "intptr_t" else it.nativeType.name})${it.name}"
 					else if ( it.nativeType is StructType && !it.nativeType.includesPointer )
 						"*${it.name}"
 					else

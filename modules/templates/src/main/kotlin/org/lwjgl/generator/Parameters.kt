@@ -4,10 +4,7 @@
  */
 package org.lwjgl.generator
 
-import org.lwjgl.generator.LinkMode.BITFIELD
-import org.lwjgl.generator.LinkMode.BITFIELD_CNT
-import org.lwjgl.generator.LinkMode.SINGLE
-import org.lwjgl.generator.LinkMode.SINGLE_CNT
+import org.lwjgl.generator.LinkMode.*
 import org.lwjgl.generator.ParameterType.IN
 import org.lwjgl.generator.ParameterType.OUT
 import java.util.regex.Pattern
@@ -38,19 +35,31 @@ abstract class QualifiedType(
 	val jniFunctionType: String
 		get() = nativeType.jniFunctionType
 
-	fun toNativeType(pointerMode: Boolean = false): String {
-			val builder = StringBuilder()
-			if ( has(const) )
-				builder.append("const ")
+	fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false): String {
+		val builder = StringBuilder()
+
+		if ( has(const) )
+			builder.append("const ")
+
+		if ( binding == null || this === JNI_ENV || (nativeType is StructType && !nativeType.includesPointer) ) {
 			builder.append(nativeType.name)
 			if ( nativeType is PointerType && !nativeType.includesPointer && (pointerMode || nativeType !is StructType) ) {
 				if ( !nativeType.name.endsWith('*') )
 					builder.append(' ')
 				builder.append('*')
 			}
-
-			return builder.toString()
+		} else {
+			// map everything to plain types, this avoids having to specify the native types explicitly or via #includes
+			builder.append(
+				if ( this.nativeType.let { it.mapping === PrimitiveMapping.POINTER || it is PointerType } )
+					"intptr_t"
+				else
+					jniFunctionType
+			)
 		}
+
+		return builder.toString()
+	}
 
 }
 

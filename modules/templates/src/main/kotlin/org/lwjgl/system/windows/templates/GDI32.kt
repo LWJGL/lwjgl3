@@ -8,9 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
 val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32", callingConvention = CallingConvention.STDCALL)) {
-	nativeImport (
-		"WindowsLWJGL.h"
-	)
+	nativeDirective("#define APIENTRY __stdcall")
 
 	documentation = "Native bindings to gdi32.dll"
 
