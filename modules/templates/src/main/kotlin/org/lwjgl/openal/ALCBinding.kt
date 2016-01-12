@@ -34,7 +34,7 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 		if ( function.nativeClass.isCore )
 			super.getFunctionAddressCall(function);
 		else
-			"provider.getFunctionAddress(device, \"${function.nativeName}\")"
+			"provider.getFunctionAddress(device, ${function.nativeName})"
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---")

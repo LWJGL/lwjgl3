@@ -1105,7 +1105,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		)
 	)
 
-	NativeName("SetWindowLongPtrW")..LONG_PTR(
+	NativeName("Pointer.BITS64 ? \"SetWindowLongPtrW\" : \"SetWindowLongW\"")..LONG_PTR(
 		"SetWindowLongPtr",
 		"Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
 
@@ -1123,7 +1123,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		returnDoc = "the previous value at the given {@code index}"
 	)
 
-	NativeName("GetWindowLongPtrW")..LONG_PTR(
+	NativeName("Pointer.BITS64 ? \"GetWindowLongPtrW\" : \"GetWindowLongW\"")..LONG_PTR(
 		"GetWindowLongPtr",
 		"Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.",
 
@@ -1138,7 +1138,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		)
 	)
 
-	NativeName("SetClassLongPtrW")..LONG_PTR(
+	NativeName("Pointer.BITS64 ? \"SetClassLongPtrW\" : \"SetClassLongW\"")..LONG_PTR(
 		"SetClassLongPtr",
 		"""
 		Replaces the specified value at the specified offset in the extra class memory or the ##WNDCLASSEX structure for the class to which the specified
@@ -1165,7 +1165,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"""
 	)
 
-	NativeName("GetClassLongPtrW")..LONG_PTR(
+	NativeName("Pointer.BITS64 ? \"GetClassLongPtrW\" : \"GetClassLongW\"")..LONG_PTR(
 		"GetClassLongPtr",
 		"Retrieves the specified value from the ##WNDCLASSEX structure associated with the specified window.",
 

@@ -109,7 +109,7 @@ class NativeClassFunction(
 			JNI.register(this)
 	}
 
-	val nativeName: String get() = if ( has(NativeName) ) this[NativeName].name else name
+	val nativeName: String get() = if ( has(NativeName) ) this[NativeName].name else "\"$name\""
 
 	val functionAddress: String get() = simpleName.let { if ( nativeClass.prefixMethod.isEmpty() ) "__$it" else it }
 

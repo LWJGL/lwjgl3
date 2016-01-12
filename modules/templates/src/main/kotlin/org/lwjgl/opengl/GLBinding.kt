@@ -87,7 +87,7 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		// we prefer to throw an exception instead of letting GL raise an error and it's
 		// also the only way to support the pseudo-fc mode.
 		if ( function has DeprecatedGL )
-			"GL.getFunctionAddress(provider, \"${function.nativeName}\", fc)"
+			"GL.getFunctionAddress(provider, ${function.nativeName}, fc)"
 		else
 			super.getFunctionAddressCall(function);
 

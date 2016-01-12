@@ -68,7 +68,7 @@ ENABLE_WARNINGS()
 		"LOCK_SURFACE_CHANGED"..0x00000008
 	)
 
-	jboolean(
+	NativeName("Pointer.BITS64 || Platform.get() != Platform.WINDOWS ? \"JAWT_GetAWT\" : \"_JAWT_GetAWT@8\"")..jboolean(
 		"GetAWT",
 		"Returns the AWT native structure.",
 
