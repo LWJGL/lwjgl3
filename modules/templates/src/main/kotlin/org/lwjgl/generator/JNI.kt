@@ -47,7 +47,7 @@ public final class JNI {
 	}
 
 	private val TypeMapping.isPointerType: Boolean get() = this === PrimitiveMapping.POINTER || this is PointerMapping
-	private val TypeMapping.nativeType: String get() = if ( this.isPointerType ) "void *" else this.jniFunctionType
+	private val TypeMapping.nativeType: String get() = if ( this.isPointerType ) "intptr_t" else this.jniFunctionType
 
 	override fun PrintWriter.generateNative() {
 		nativeDirective("""
@@ -71,12 +71,12 @@ public final class JNI {
 			if ( it.returnType !== TypeMapping.VOID ) {
 				print("return ")
 				if ( it.returnType.isPointerType )
-					print("(jlong)(intptr_t)")
+					print("(jlong)")
 			}
 			print("((${it.returnType.nativeType} (${if ( it.callingConvention === CallingConvention.STDCALL ) "APIENTRY " else ""}*) (")
 			print(it.arguments.map { it.nativeType }.joinToString(", "))
 			print("))(intptr_t)__functionAddress)(")
-			print(it.arguments.withIndex().map { if ( it.value.isPointerType ) "(void *)(intptr_t)param${it.index}" else "param${it.index}" }.joinToString(", "))
+			print(it.arguments.withIndex().map { if ( it.value.isPointerType ) "(intptr_t)param${it.index}" else "param${it.index}" }.joinToString(", "))
 			println(""");
 }
 """)
