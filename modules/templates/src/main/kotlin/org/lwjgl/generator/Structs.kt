@@ -165,6 +165,16 @@ class Struct(
 	private val StructMember.nestedMembers: Sequence<StructMember>
 		get() = (nativeType as StructType).definition.visibleMembers
 
+	private val containsUnion: Boolean get() =
+		union || members.any {
+			it.isNestedStruct && (it.nativeType as StructType).let {
+				if ( it.name == ANONYMOUS )
+					it.definition.containsUnion
+				else
+					it.definition.union
+			}
+		}
+
 	private fun PrintWriter.printDocumentation() {
 		val builder = StringBuilder()
 
@@ -352,7 +362,7 @@ $indentation}"""
 				println()
 				generateSetters(AccessMode.INSTANCE, members)
 
-				if ( members.singleOrNull() == null ) {
+				if ( members.singleOrNull() == null && !containsUnion ) {
 					val javadoc = "Initializes this struct with the specified values."
 					if ( generateAlternativeMultiSetter(members) ) {
 						generateMultiSetter(javadoc, members, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER1)
