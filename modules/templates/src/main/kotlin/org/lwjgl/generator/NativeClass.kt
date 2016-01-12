@@ -76,7 +76,7 @@ abstract class APIBinding(
 
 		val variable = if ( function.returns.has(Address) ) RESULT else FUNCTION_ADDRESS
 
-		writer.println("\t\tlong $variable = getInstance($instanceParameter).${function.simpleName};")
+		writer.println("\t\tlong $variable = getInstance($instanceParameter).${function.functionAddress};")
 	}
 
 	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)
@@ -327,7 +327,7 @@ class NativeClass(
 			functions.forEachWithMore { func, more ->
 				if ( more )
 					println(",")
-				print("\t\t${func.simpleName}")
+				print("\t\t${func.functionAddress}")
 			}
 			println(";")
 		}
@@ -342,7 +342,7 @@ class NativeClass(
 		binding.printConstructorParams(this, this@NativeClass)
 		println(") {")
 		functions.forEach {
-			println("\t\t${it.simpleName} = ${binding.getFunctionAddressCall(it)};")
+			println("\t\t${it.functionAddress} = ${binding.getFunctionAddressCall(it)};")
 		}
 		println("\t}\n")
 	}
@@ -378,7 +378,7 @@ class NativeClass(
 
 	fun printPointers(
 		out: PrintWriter,
-		printPointer: (func: NativeClassFunction) -> String = { "funcs.${it.simpleName}" },
+		printPointer: (func: NativeClassFunction) -> String = { "funcs.${it.functionAddress}" },
 		filter: ((NativeClassFunction) -> Boolean)? = null
 	) {
 		out.print("\n\t\t\t")
