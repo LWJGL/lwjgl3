@@ -204,7 +204,7 @@ val WNDCLASSEX_p = struct_p(WINDOWS_PACKAGE, "WNDCLASSEX") {
 	HICON.member("hIconSm", "")
 }
 
-val WINDOWPLACEMENT_p = struct_p(WINDOWS_PACKAGE, "WINDOWPLACEMENT", mutable = false) {
+val WINDOWPLACEMENT_p = struct_p(WINDOWS_PACKAGE, "WINDOWPLACEMENT") {
 	documentation = "Contains information about the placement of a window on the screen."
 
 	UINT.member(
@@ -293,7 +293,7 @@ val MONITORINFOEX = struct(WINDOWS_PACKAGE, "MONITORINFOEX", mutable = false) {
 		Set this member to #SIZEOF before calling the User32#GetMonitorInfo() function. Doing so lets the function determine the type of structure you are
 		passing to it.
 		"""
-	)
+	).mutable = true
 	RECT.member(
 		"rcMonitor",
 		"""
@@ -324,7 +324,7 @@ val POINTL = struct(WINDOWS_PACKAGE, "POINTL") {
 
 val PRINTER_ONLY = "for printer devices only"
 
-val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE") {
+val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 	documentation = "Contains information about the initialization and environment of a printer or a display device."
 
 	TCHAR.array(
@@ -339,22 +339,24 @@ val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE") {
 		"dmSpecVersion",
 		"""
 		the version number of the initialization data specification on which the structure is based. To ensure the correct version is used for any operating
-		system, use {@code DM_SPECVERSION}.
+		system, use GDI32#DM_SPECVERSION.
 		"""
-	)
+	).mutable = true
 	WORD.member("dmDriverVersion", "the driver version number assigned by the driver developer")
 	WORD.member(
 		"dmSize",
-		"specifies the size, in bytes, of the {@code DEVMODE} structure, not including any private driver-specific data that might follow the structure's" +
-		"public members. Set this member to #SIZEOF to indicate the version of the {@code DEVMODE} structure being used."
-	)
+		"""
+		specifies the size, in bytes, of the {@code DEVMODE} structure, not including any private driver-specific data that might follow the structure's
+		public members. Set this member to #SIZEOF to indicate the version of the {@code DEVMODE} structure being used.
+		"""
+	).mutable = true
 	WORD.member(
 		"dmDriverExtra",
 		"""
 		contains the number of bytes of private driver-data that follow this structure. If a device driver does not use device-specific information, set this
 		member to zero.
 		"""
-	)
+	).mutable = true
 	DWORD.member(
 		"dmFields",
 		"""
@@ -377,8 +379,8 @@ val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE") {
 			POINTL.member(
 				"dmPosition",
 				"""
-				or display devices only, a ##POINTL structure that indicates the positional coordinates of the display device in reference to the desktop area.
-				The primary display device is always located at coordinates (0,0).
+				for display devices only, a ##POINTL structure that indicates the positional coordinates of the display device in reference to the desktop
+				area. The primary display device is always located at coordinates (0,0).
 				"""
 			)
 			DWORD.member(
@@ -446,7 +448,7 @@ val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE") {
 	DWORD.member("dmPanningHeight", "this member must be zero")
 }
 
-val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE") {
+val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE", mutable = false) {
 	documentation =
 		"""
 		Receives information about the display device specified by the {@code iDevNum} parameter of the User32#EnumDisplayDevices() function.
@@ -456,7 +458,10 @@ val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE") {
 		about the monitor(s) for that device.
 		"""
 
-	DWORD.member("cb", "size, in bytes, of the {@code DISPLAY_DEVICE} structure. This must be initialized prior to calling User32#EnumDisplayDevices().")
+	DWORD.member(
+		"cb",
+		"size, in bytes, of the {@code DISPLAY_DEVICE} structure. This must be initialized prior to calling User32#EnumDisplayDevices()."
+	).mutable = true
 	TCHAR.array("DeviceName", "an array of characters identifying the device name. This is either the adapter device or the monitor device.", size = 32)
 	TCHAR.array(
 		"DeviceString",

@@ -10,7 +10,7 @@ import java.util.*
 private val STRUCT = "struct"
 private val ANONYMOUS = "*" // very easy to introduce bugs, unless this is an invalid character in Java identifiers
 
-private open class StructMember(
+open class StructMember(
 	val nativeType: NativeType,
 	val name: String,
 	val documentation: String
@@ -29,6 +29,8 @@ private open class StructMember(
 		if ( name == "class" ) "$name\$" else name // TODO: use a list of Java keywords here
 	else
 		"${parentMember}_$name"
+
+	var mutable = false
 }
 
 private class StructMemberBuffer(
@@ -103,55 +105,59 @@ class Struct(
 	private val visibleMembers: Sequence<StructMember>
 		get() = members.asSequence().filter { it !is StructMemberPadding }
 
-	// Plain field
-	fun NativeType.member(name: String, documentation: String) {
-		members.add(StructMember(this, name, documentation))
+	private val mutableMembers: Sequence<StructMember>
+		get() = visibleMembers.let {
+			if ( mutable ) it else it.filter { it -> it.mutable }
+		}
+
+	private val hasMutableMembers: Boolean get() = members.isNotEmpty() && (mutable || mutableMembers.any())
+
+	private fun add(member: StructMember): StructMember {
+		members.add(member)
+		return member
 	}
 
+	// Plain field
+	fun NativeType.member(name: String, documentation: String) = add(StructMember(this, name, documentation))
+
 	// Points to an array of structs, not a single struct
-	fun PointerType.buffer(name: String, documentation: String) {
+	fun PointerType.buffer(name: String, documentation: String): StructMember {
 		if ( this !is StructType )
 			throw IllegalArgumentException()
 
-		members.add(StructMemberBuffer(this, name, documentation))
+		return add(StructMemberBuffer(this, name, documentation))
 	}
 
 	// Array field
-	fun NativeType.array(name: String, documentation: String, size: Int) {
-		members.add(StructMemberArray(this, name, documentation, size))
-	}
+	fun NativeType.array(name: String, documentation: String, size: Int) = add(StructMemberArray(this, name, documentation, size))
 
 	// CharSequence special-case
-	fun CharType.array(name: String, documentation: String, size: Int) {
-		members.add(StructMemberCharArray(this, name, documentation, size))
-	}
+	fun CharType.array(name: String, documentation: String, size: Int) = add(StructMemberCharArray(this, name, documentation, size))
 
-	fun padding(size: Int, condition: String? = null) {
-		members.add(StructMemberPadding(size, condition))
-	}
+	fun padding(size: Int, condition: String? = null) = add(StructMemberPadding(size, condition))
 
 	/** Anonymous nested member struct definition. */
-	fun struct(init: Struct.() -> Unit) {
-		struct(ANONYMOUS, ANONYMOUS, init)
+	fun struct(init: Struct.() -> Unit): StructMember {
+		return struct(ANONYMOUS, ANONYMOUS, init)
 	}
 
 	/** Nested member struct definition. */
-	fun struct(name: String, documentation: String, init: Struct.() -> Unit) {
+	fun struct(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
 		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, false, false, true, false)
 		struct.init()
-		StructType(struct).member(name, documentation)
+		return StructType(struct).member(name, documentation)
 	}
 
 	/** Anonymous nested member union definition. */
-	fun union(init: Struct.() -> Unit) {
-		union(ANONYMOUS, ANONYMOUS, init)
+	fun union(init: Struct.() -> Unit): StructMember {
+		return union(ANONYMOUS, ANONYMOUS, init)
 	}
 
 	/** Nested member union definition. */
-	fun union(name: String, documentation: String, init: Struct.() -> Unit) {
+	fun union(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
 		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, true, false, true, false)
 		struct.init()
-		StructType(struct).member(name, documentation)
+		return StructType(struct).member(name, documentation)
 	}
 
 	/** The nested struct's members are embedded in the parent struct. */
@@ -260,7 +266,7 @@ $indentation}"""
 		println("import org.lwjgl.*;")
 		println("import org.lwjgl.system.*;\n")
 
-		if ( mutable && members.isNotEmpty() )
+		if ( hasMutableMembers )
 			println("import static org.lwjgl.system.Checks.*;")
 		println("import static org.lwjgl.system.MemoryUtil.*;")
 
@@ -358,18 +364,19 @@ $indentation}"""
 			println()
 			generateGetters(AccessMode.INSTANCE, members)
 
-			if ( mutable ) {
+			if ( hasMutableMembers ) {
+				val mutableMembers = this@Struct.mutableMembers
 				println()
-				generateSetters(AccessMode.INSTANCE, members)
+				generateSetters(AccessMode.INSTANCE, mutableMembers)
 
-				if ( members.singleOrNull() == null && !containsUnion ) {
+				if ( mutableMembers.singleOrNull() == null && !containsUnion ) {
 					val javadoc = "Initializes this struct with the specified values."
-					if ( generateAlternativeMultiSetter(members) ) {
-						generateMultiSetter(javadoc, members, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER1)
-						if ( members.any { it is StructMemberCharArray } )
-							generateMultiSetter(javadoc, members, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER2)
+					if ( generateAlternativeMultiSetter(mutableMembers) ) {
+						generateMultiSetter(javadoc, mutableMembers, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER1)
+						if ( mutableMembers.any { it is StructMemberCharArray } )
+							generateMultiSetter(javadoc, mutableMembers, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER2)
 					} else
-						generateMultiSetter(javadoc, members, Struct::generateMultiSetterParameters, Struct::generateMultiSetterSetters)
+						generateMultiSetter(javadoc, mutableMembers, Struct::generateMultiSetterParameters, Struct::generateMultiSetterSetters)
 				}
 
 				print("""
@@ -466,8 +473,8 @@ $indentation}"""
 			generateStaticGetters(members)
 			println()
 
-			if ( mutable ) {
-				generateStaticSetters(members)
+			if ( hasMutableMembers ) {
+				generateStaticSetters(mutableMembers)
 				println()
 			}
 		}
@@ -519,9 +526,9 @@ $indentation}"""
 			println()
 			generateGetters(AccessMode.FLYWEIGHT, members)
 
-			if ( mutable ) {
+			if ( hasMutableMembers ) {
 				println()
-				generateSetters(AccessMode.FLYWEIGHT, members)
+				generateSetters(AccessMode.FLYWEIGHT, mutableMembers)
 			}
 		}
 
@@ -798,7 +805,6 @@ $indentation}"""
 
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
 					if ( it.nativeType is CallbackType ) {
-						val callbackType = it.nativeType.className
 						println("\t/** Unsafe version of {@link #$setter(long) $setter}. */")
 						println("\tpublic static void n$setter(long $STRUCT, long value) { memPutAddress($STRUCT + $field, value); }")
 					} else {
