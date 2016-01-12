@@ -10,7 +10,7 @@ import org.lwjgl.system.windows.*
 val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user32", callingConvention = CallingConvention.STDCALL)) {
 	nativeDirective("#define APIENTRY __stdcall")
 
-	documentation = "Native bindings to user32.dll"
+	documentation = "Native bindings to WinUser.h and user32.dll."
 
 	IntConstant(
 		"Window Styles",
@@ -927,7 +927,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		HWND.IN("hWnd", "handle to the window to be updated")
 	)
 
-	BOOL(
+	SaveLastError..BOOL(
 		"SetWindowPos",
 		"""
 		Changes the size, position, and Z order of a child, pop-up, or top-level window. These windows are ordered according to their appearance on the screen.
@@ -947,7 +947,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		UINT.IN("uFlags", "the window sizing and positioning flags", SizePosFlags, LinkMode.BITFIELD)
 	)
 
-	NativeName("SetWindowTextW")..BOOL(
+	NativeName("SetWindowTextW")..SaveLastError..BOOL(
 		"SetWindowText",
 		"""
 		Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed.
@@ -958,7 +958,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		LPCTSTR.IN("lpString", "the new title or control text")
 	)
 
-	val GetMessage = NativeName("GetMessageW")..BOOL(
+	val GetMessage = NativeName("GetMessageW")..SaveLastError..BOOL(
 		"GetMessage",
 		"""
 		Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for
@@ -1010,7 +1010,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		)
 	)
 
-	BOOL(
+	SaveLastError..BOOL(
 		"WaitMessage",
 		"""
 		Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not
@@ -1025,7 +1025,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		const..MSG_p.IN("lpmsg", "a pointer to a structure that contains the message.")
 	)
 
-	NativeName("PostMessageW")..BOOL(
+	NativeName("PostMessageW")..SaveLastError..BOOL(
 		"PostMessage",
 		"""
 		Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread
@@ -1050,7 +1050,30 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		LPARAM.IN("lParam", "additional message-specific information")
 	)
 
-	BOOL(
+	NativeName("SendMessageW")..SaveLastError..BOOL(
+		"SendMessage",
+		"""
+		Sends the specified message to a window or windows. The {@code SendMessage} function calls the window procedure for the specified window and does not
+		return until the window procedure has processed the message.
+		""",
+
+		HWND.IN(
+			"hWnd",
+			"""
+			a handle to the window whose window procedure will receive the message. If this parameter is #HWND_BROADCAST, the message is sent to all top-level
+			windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to
+			child windows.
+
+			Message sending is subject to UIPI. The thread of a process can send messages only to message queues of threads in processes of lesser or equal
+			integrity level.
+			"""
+		),
+		UINT.IN("Msg", "the message to be sent"),
+		WPARAM.IN("wParam", "additional message-specific information"),
+		LPARAM.IN("lParam", "additional message-specific information")
+	)
+
+	SaveLastError..BOOL(
 		"AdjustWindowRectEx",
 		"""
 		Calculates the required size of the window rectangle, based on the desired size of the client rectangle. The window rectangle can then be passed to the
@@ -1070,7 +1093,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		DWORD.IN("dwExStyle", "the extended window style of the window whose required size is to be calculated")
 	)
 
-	BOOL(
+	SaveLastError..BOOL(
 		"GetWindowRect",
 		"""
 		Retrieves the dimensions of the bounding rectangle of the specified window. The dimensions are given in screen coordinates that are relative to the
@@ -1081,7 +1104,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		LPRECT.OUT("lpRect", "a pointer to a ##RECT structure that receives the screen coordinates of the upper-left and lower-right corners of the window")
 	)
 
-	BOOL(
+	SaveLastError..BOOL(
 		"MoveWindow",
 		"""
 		Changes the position and dimensions of the specified window. For a top-level window, the position and dimensions are relative to the upper-left corner
@@ -1103,7 +1126,78 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		)
 	)
 
-	NativeName("Pointer.BITS64 ? \"SetWindowLongPtrW\" : \"SetWindowLongW\"")..LONG_PTR(
+	IntConstant(
+		"##WINDOWPLACEMENT flags.",
+
+		"WPF_SETMINPOSITION"..0x0001,
+		"WPF_RESTORETOMAXIMIZED"..0x0002,
+		"WPF_ASYNCWINDOWPLACEMENT"..0x0004
+	)
+
+	SaveLastError..BOOL(
+		"GetWindowPlacement",
+		"Retrieves the show state and the restored, minimized, and maximized positions of the specified window.",
+
+		HWND.IN("hWnd", "a handle to the window"),
+		WINDOWPLACEMENT_p.INOUT(
+			"lpwndpl",
+			"""
+			a pointer to the ##WINDOWPLACEMENT structure that receives the show state and position information.
+
+			Before calling {@code GetWindowPlacement}, set the length member to WINDOWPLACEMENT#SIZEOF. {@code GetWindowPlacement} fails if
+			{@code lpwndpl->length} is not set correctly.
+			"""
+		)
+	)
+
+	SaveLastError..BOOL(
+		"SetWindowPlacement",
+		"Sets the show state and the restored, minimized, and maximized positions of the specified window.",
+
+		HWND.IN("hWnd", "a handle to the window"),
+		const..WINDOWPLACEMENT_p.IN(
+			"lpwndpl",
+			"""
+			a pointer to the ##WINDOWPLACEMENT structure that specifies the new show state and window positions.
+
+			Before calling {@code SetWindowPlacement}, set the {@code length} member of the {@code WINDOWPLACEMENT} structure to WINDOWPLACEMENT#SIZEOF.
+			{@code SetWindowPlacement} fails if the length member is not set correctly.
+			"""
+		)
+	)
+
+	BOOL(
+		"IsWindowVisible",
+		"Determines the visibility state of the specified window.",
+
+		HWND.IN("hWnd", "a handle to the window to be tested")
+	)
+
+	BOOL(
+		"IsIconic",
+		"Determines whether the specified window is minimized (iconic).",
+
+		HWND.IN("hWnd", "a handle to the window to be tested")
+	)
+
+	BOOL(
+		"IsZoomed",
+		"Determines whether a window is maximized.",
+
+		HWND.IN("hWnd", "a handle to the window to be tested")
+	)
+
+	BOOL(
+		"BringWindowToTop",
+		"""
+		Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the
+		top-level parent window associated with the child window is activated.
+		""",
+
+		HWND.IN("hWnd", "a handle to the window to bring to the top of the Z order")
+	)
+
+	NativeName("Pointer.BITS64 ? \"SetWindowLongPtrW\" : \"SetWindowLongW\"")..SaveLastError..LONG_PTR(
 		"SetWindowLongPtr",
 		"Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
 
@@ -1121,7 +1215,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		returnDoc = "the previous value at the given {@code index}"
 	)
 
-	NativeName("Pointer.BITS64 ? \"GetWindowLongPtrW\" : \"GetWindowLongW\"")..LONG_PTR(
+	NativeName("Pointer.BITS64 ? \"GetWindowLongPtrW\" : \"GetWindowLongW\"")..SaveLastError..LONG_PTR(
 		"GetWindowLongPtr",
 		"Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.",
 
@@ -1136,7 +1230,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		)
 	)
 
-	NativeName("Pointer.BITS64 ? \"SetClassLongPtrW\" : \"SetClassLongW\"")..LONG_PTR(
+	NativeName("Pointer.BITS64 ? \"SetClassLongPtrW\" : \"SetClassLongW\"")..SaveLastError..LONG_PTR(
 		"SetClassLongPtr",
 		"""
 		Replaces the specified value at the specified offset in the extra class memory or the ##WNDCLASSEX structure for the class to which the specified
@@ -1163,7 +1257,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"""
 	)
 
-	NativeName("Pointer.BITS64 ? \"GetClassLongPtrW\" : \"GetClassLongW\"")..LONG_PTR(
+	NativeName("Pointer.BITS64 ? \"GetClassLongPtrW\" : \"GetClassLongW\"")..SaveLastError..LONG_PTR(
 		"GetClassLongPtr",
 		"Retrieves the specified value from the ##WNDCLASSEX structure associated with the specified window.",
 
@@ -1180,7 +1274,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		)
 	)
 
-	NativeName("LoadIconW")..HICON(
+	NativeName("LoadIconW")..SaveLastError..HICON(
 		"LoadIcon",
 		"Loads the specified icon resource from the executable (.exe) file associated with an application instance.",
 
@@ -1194,7 +1288,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		LPCTSTR.IN("iconName", "the name of the icon resource to be loaded or", StandardIcons, LinkMode.SINGLE_CNT)
 	)
 
-	NativeName("LoadCursorW")..HCURSOR(
+	NativeName("LoadCursorW")..SaveLastError..HCURSOR(
 		"LoadCursor",
 		"Loads the specified cursor resource from the executable (.EXE) file associated with an application instance.",
 
@@ -1376,7 +1470,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"TOUCHINPUTMASKF_CONTACTAREA"..0x0004
 	)
 
-	IgnoreMissing..BOOL(
+	IgnoreMissing..SaveLastError..BOOL(
 		"RegisterTouchWindow",
 		"""
 		Registers a window as being touch-capable.
@@ -1403,7 +1497,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		since = "Windows 7 (desktop apps only)"
 	)
 
-	IgnoreMissing..BOOL(
+	IgnoreMissing..SaveLastError..BOOL(
 		"UnregisterTouchWindow",
 		"Registers a window as no longer being touch-capable.",
 
@@ -1434,7 +1528,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		since = "Windows 7 (desktop apps only)"
 	)
 
-	IgnoreMissing..BOOL(
+	IgnoreMissing..SaveLastError..BOOL(
 		"GetTouchInputInfo",
 		"Retrieves detailed information about touch inputs associated with a particular touch input handle.",
 
@@ -1469,7 +1563,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		since = "Windows 7 (desktop apps only)"
 	)
 
-	IgnoreMissing..BOOL(
+	IgnoreMissing..SaveLastError..BOOL(
 		"CloseTouchInputHandle",
 		"Closes a touch input handle, frees process memory associated with it, and invalidates the handle.",
 
@@ -1483,5 +1577,217 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		),
 
 		since = "Windows 7 (desktop apps only)"
+	)
+
+	val MonitorFromWindowFlags = IntConstant(
+		"#MonitorFromWindow() flags.",
+
+		"MONITOR_DEFAULTTONULL"..0x00000000,
+		"MONITOR_DEFAULTTOPRIMARY"..0x00000001,
+		"MONITOR_DEFAULTTONEAREST"..0x00000002
+	).javaDocLinks
+
+	HMONITOR(
+		"MonitorFromWindow",
+		"Retrieves a handle to the display monitor that has the largest area of intersection with the bounding rectangle of a specified window.",
+
+		HWND.IN("hWnd", "a handle to the window of interest"),
+		DWORD.IN("dwFlags", "determines the function's return value if the window does not intersect any display monitor", MonitorFromWindowFlags)
+	)
+
+	IntConstant(
+		"##MONITORINFOEX flags.",
+
+		"MONITORINFOF_PRIMARY"..0x00000001
+	)
+
+	NativeName("GetMonitorInfoW")..BOOL(
+		"GetMonitorInfo",
+		"Retrieves information about a display monitor.",
+
+        HMONITOR.IN("hMonitor", "a handle to the display monitor of interest"),
+        LPMONITORINFOEX.OUT(
+	        "lpmi",
+	        """
+	        a pointer to a ##MONITORINFOEX structure that receives information about the specified display monitor.
+
+			You must set the {@code cbSize} member of the structure to MONITORINFOEX#SIZEOF before calling the {@code GetMonitorInfo} function. Doing so lets
+			the function determine the type of structure you are passing to it.
+	        """
+        )
+	)
+
+	IntConstant(
+		"Flag for #EnumDisplayDevices().",
+
+		"EDD_GET_DEVICE_INTERFACE_NAME"..0x00000001
+	)
+
+	val EnumDisplaySettingsMode = IntConstant(
+		"#EnumDisplaySettingsEx() mode.",
+
+		"ENUM_CURRENT_SETTINGS" expr "-1",
+		"ENUM_REGISTRY_SETTINGS" expr "-2"
+	).javaDocLinks
+
+	val EnumDisplaySettingsFlags = IntConstant(
+		"Flags for #EnumDisplaySettingsEx().",
+
+		"EDS_RAWMODE"..0x00000002,
+		"EDS_ROTATEDMODE"..0x00000004
+	).javaDocLinks
+	
+	val ChangeDisplaySettingsFlags = IntConstant(
+		"Flags for #ChangeDisplaySettingsEx().",
+
+		"CDS_UPDATEREGISTRY"..0x00000001,
+		"CDS_TEST"..0x00000002,
+		"CDS_FULLSCREEN"..0x00000004,
+		"CDS_GLOBAL"..0x00000008,
+		"CDS_SET_PRIMARY"..0x00000010,
+		"CDS_VIDEOPARAMETERS"..0x00000020,
+
+		"CDS_ENABLE_UNSAFE_MODES"..0x00000100, // WINVER >= 0x0600
+		"CDS_DISABLE_UNSAFE_MODES"..0x00000200, // WINVER >= 0x0600
+
+		"CDS_RESET"..0x40000000,
+		"CDS_RESET_EX"..0x20000000,
+		"CDS_NORESET"..0x10000000
+	).javaDocLinks
+
+	val ChangeDisplaySettingsResults = IntConstant(
+		"Return values for #ChangeDisplaySettingsEx().",
+		
+		"DISP_CHANGE_SUCCESSFUL"..0,
+		"DISP_CHANGE_RESTART"..1,
+		"DISP_CHANGE_FAILED"..-1,
+		"DISP_CHANGE_BADMODE"..-2,
+		"DISP_CHANGE_NOTUPDATED"..-3,
+		"DISP_CHANGE_BADFLAGS"..-4,
+		"DISP_CHANGE_BADPARAM"..-5,
+
+		"DISP_CHANGE_BADDUALVIEW"..-6 // _WIN32_WINNT >= 0x0501
+	).javaDocLinks
+
+	NativeName("EnumDisplayDevicesW")..BOOL(
+		"EnumDisplayDevices",
+		"Obtains information about the display devices in the current session.",
+
+		nullable..LPCTSTR.IN(
+			"lpDevice",
+			"the device name. If $NULL, function returns information for the display adapter(s) on the machine, based on {@code devNum}."
+		),
+		DWORD.IN(
+			"iDevNum",
+			"""
+			an index value that specifies the display device of interest.
+
+			The operating system identifies each display device in the current session with an index value. The index values are consecutive integers, starting
+			at 0. If the current session has three display devices, for example, they are specified by the index values 0, 1, and 2.
+			"""
+		),
+		PDISPLAY_DEVICE.OUT(
+			"lpDisplayDevice",
+			"""
+			a pointer to a ##DISPLAY_DEVICE structure that receives information about the display device specified by {@code iDevNum}.
+
+			Before calling {@code EnumDisplayDevices}, you must initialize the {@code cb} member of {@code DISPLAY_DEVICE} to the size, in bytes, of
+			{@code DISPLAY_DEVICE}.
+			"""
+		),
+		DWORD.IN(
+			"dwFlags",
+			"""
+			set this flag to #EDD_GET_DEVICE_INTERFACE_NAME to retrieve the device interface name for {@code GUID_DEVINTERFACE_MONITOR}, which is registered by
+			the operating system on a per monitor basis. The value is placed in the {@code DeviceID} member of the ##DISPLAY_DEVICE structure returned in
+			{@code lpDisplayDevice}. The resulting device interface name can be used with SetupAPI functions and serves as a link between GDI monitor devices
+			and SetupAPI monitor devices.
+			"""
+		)
+	)
+
+	NativeName("EnumDisplaySettingsExW")..BOOL(
+		"EnumDisplaySettingsEx",
+		"""
+		Retrieves information about one of the graphics modes for a display device. To retrieve information for all the graphics modes for a display device,
+		make a series of calls to this function.
+		""",
+
+		nullable..LPCTSTR.IN(
+			"lpszDeviceName",
+			"""
+			a pointer to a null-terminated string that specifies the display device about which graphics mode the function will obtain information.
+
+			This parameter is either $NULL or a DISPLAY_DEVICE#DeviceName() returned from #EnumDisplayDevices(). A $NULL value specifies the current display
+			device on the computer that the calling thread is running on.
+			"""
+		),
+		DWORD.IN(
+			"iModeNum",
+			"""
+			indicates the type of information to be retrieved.
+
+			Graphics mode indexes start at zero. To obtain information for all of a display device's graphics modes, make a series of calls to
+			{@code EnumDisplaySettingsEx}, as follows: Set {@code iModeNum} to zero for the first call, and increment {@code iModeNum} by one for each
+			subsequent call. Continue calling the function until the return value is zero.
+
+			When you call {@code EnumDisplaySettingsEx} with {@code iModeNum} set to zero, the operating system initializes and caches information about the
+			display device. When you call {@code EnumDisplaySettingsEx} with {@code iModeNum} set to a nonzero value, the function returns the information that
+			was cached the last time the function was called with {@code iModeNum} set to zero.
+
+			This value can be a graphics mode index or
+			""",
+			EnumDisplaySettingsMode,
+			LinkMode.SINGLE_CNT
+		),
+		DEVMODE_p.OUT(
+			"lpDevMode",
+			"""
+			a pointer to a ##DEVMODE structure into which the function stores information about the specified graphics mode. Before calling
+			{@code EnumDisplaySettingsEx}, set the {@code dmSize} member to DEVMODE##SIZEOF, and set the {@code dmDriverExtra} member to indicate the size, in
+			bytes, of the additional space available to receive private driver data.
+
+			The {@code EnumDisplaySettingsEx} function will populate the {@code dmFields} member of the {@code lpDevMode} and one or more other members of the
+			{@code DEVMODE} structure. To determine which members were set by the call to {@code EnumDisplaySettingsEx}, inspect the {@code dmFields} bitmask.
+			"""
+		),
+		DWORD.IN("dwFlags", "this parameter can be", EnumDisplaySettingsFlags, LinkMode.SINGLE_CNT)
+	)
+
+	NativeName("ChangeDisplaySettingsExW")..LONG(
+		"ChangeDisplaySettingsEx",
+		"Changes the settings of the specified display device to the specified graphics mode.",
+
+		LPCTSTR.IN(
+			"lpszDeviceName",
+			"""
+			a pointer to a null-terminated string that specifies the display device whose graphics mode will change. Only display device names as returned by
+			#EnumDisplayDevices() are valid.
+
+			The {@code lpszDeviceName} parameter can be $NULL. A $NULL value specifies the default display device. The default device can be determined by
+			calling {@code EnumDisplayDevices} and checking for the GDI32#DISPLAY_DEVICE_PRIMARY_DEVICE flag.
+			"""
+		),
+		nullable..DEVMODE_p.IN(
+			"lpDevMode",
+			"""
+			a pointer to a ##DEVMODE structure that describes the new graphics mode. If {@code lpDevMode} is $NULL, all the values currently in the registry
+			will be used for the display setting. Passing $NULL for the {@code lpDevMode} parameter and 0 for the {@code dwFlags} parameter is the easiest way
+			to return to the default mode after a dynamic mode change.
+
+			The {@code dmSize} member must be initialized to the size, in bytes, of the {@code DEVMODE} structure. The {@code dmDriverExtra} member must be
+			initialized to indicate the number of bytes of private driver data following the {@code DEVMODE} structure.
+			"""
+		),
+		nullable..HWND.IN("hwnd", "reserved; must be $NULL"),
+		DWORD.IN("dwflags", "indicates how the graphics mode should be changed", ChangeDisplaySettingsFlags),
+		nullable..LPVOID.IN(
+			"lParam",
+			"""
+			if {@code flags} is #CDS_VIDEOPARAMETERS, {@code lParam} is a pointer to a {@code VIDEOPARAMETERS} structure. Otherwise {@code lParam} must be $NULL.
+			"""
+		),
+
+		returnDoc = "one of the following values: $ChangeDisplaySettingsResults"
 	)
 }

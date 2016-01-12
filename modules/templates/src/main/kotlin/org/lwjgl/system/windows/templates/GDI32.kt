@@ -10,10 +10,100 @@ import org.lwjgl.system.windows.*
 val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32", callingConvention = CallingConvention.STDCALL)) {
 	nativeDirective("#define APIENTRY __stdcall")
 
-	documentation = "Native bindings to gdi32.dll"
+	documentation = "Native bindings to wingdi.h and gdi32.dll."
+
+	IntConstant(
+		"Display device state flags.",
+
+		"DISPLAY_DEVICE_ATTACHED_TO_DESKTOP"..0x00000001,
+		"DISPLAY_DEVICE_MULTI_DRIVER"..0x00000002,
+		"DISPLAY_DEVICE_PRIMARY_DEVICE"..0x00000004,
+		"DISPLAY_DEVICE_MIRRORING_DRIVER"..0x00000008,
+		"DISPLAY_DEVICE_VGA_COMPATIBLE"..0x00000010,
+		"DISPLAY_DEVICE_REMOVABLE"..0x00000020,
+		"DISPLAY_DEVICE_MODESPRUNED"..0x08000000,
+		"DISPLAY_DEVICE_REMOTE"..0x04000000,
+		"DISPLAY_DEVICE_DISCONNECT"..0x02000000,
+		"DISPLAY_DEVICE_TS_COMPATIBLE"..0x00200000,
+		"DISPLAY_DEVICE_UNSAFE_MODES_ON"..0x00080000
+	)
+
+	IntConstant(
+		"Child display device state flags.",
+
+		"DISPLAY_DEVICE_ACTIVE"..0x00000001,
+		"DISPLAY_DEVICE_ATTACHED"..0x00000002
+	)
+
+	IntConstant(
+		"##DEVMODE specification version.",
+
+		"DM_SPECVERSION"..0x0401
+	)
+
+	IntConstant(
+		"##DEVMODE field selection bits.",
+
+		"DM_ORIENTATION"..0x00000001,
+		"DM_PAPERSIZE"..0x00000002,
+		"DM_PAPERLENGTH"..0x00000004,
+		"DM_PAPERWIDTH"..0x00000008,
+		"DM_SCALE"..0x00000010,
+		"DM_POSITION"..0x00000020,
+		"DM_NUP"..0x00000040,
+		"DM_DISPLAYORIENTATION"..0x00000080,
+		"DM_COPIES"..0x00000100,
+		"DM_DEFAULTSOURCE"..0x00000200,
+		"DM_PRINTQUALITY"..0x00000400,
+		"DM_COLOR"..0x00000800,
+		"DM_DUPLEX"..0x00001000,
+		"DM_YRESOLUTION"..0x00002000,
+		"DM_TTOPTION"..0x00004000,
+		"DM_COLLATE"..0x00008000,
+		"DM_FORMNAME"..0x00010000,
+		"DM_LOGPIXELS"..0x00020000,
+		"DM_BITSPERPEL"..0x00040000,
+		"DM_PELSWIDTH"..0x00080000,
+		"DM_PELSHEIGHT"..0x00100000,
+		"DM_DISPLAYFLAGS"..0x00200000,
+		"DM_DISPLAYFREQUENCY"..0x00400000,
+		"DM_ICMMETHOD"..0x00800000,
+		"DM_ICMINTENT"..0x01000000,
+		"DM_MEDIATYPE"..0x02000000,
+		"DM_DITHERTYPE"..0x04000000,
+		"DM_PANNINGWIDTH"..0x08000000,
+		"DM_PANNINGHEIGHT"..0x10000000,
+		"DM_DISPLAYFIXEDOUTPUT"..0x20000000
+	)
+
+	IntConstant(
+		"##DEVMODE {@code dmDisplayOrientation} specifications.",
+
+		"DMDO_DEFAULT"..0,
+		"DMDO_90"..1,
+		"DMDO_180"..2,
+		"DMDO_270"..3
+
+	)
+
+	IntConstant(
+		"##DEVMODE {@code dmDisplayFixedOutput} specifications.",
+
+		"DMDFO_DEFAULT"..0,
+		"DMDFO_STRETCH"..1,
+		"DMDFO_CENTER"..2
+	)
+
+	IntConstant(
+		"##DEVMODE {@code dmDisplayFlags} flags.",
+
+		"DM_INTERLACED"..0x00000002,
+		"DMDISPLAYFLAGS_TEXTMODE"..0x00000004
+	)
 
 	IntConstant(
 		"##PIXELFORMATDESCRIPTOR flags.",
+
 		"PFD_DOUBLEBUFFER"..0x00000001,
 		"PFD_STEREO"..0x00000002,
 		"PFD_DRAW_TO_WINDOW"..0x00000004,
@@ -39,12 +129,14 @@ val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32"
 
 	IntConstant(
 		"##PIXELFORMATDESCRIPTOR pixel types.",
+
 		"PFD_TYPE_RGBA"..0,
 		"PFD_TYPE_COLORINDEX"..1
 	)
 
 	IntConstant(
 		"##PIXELFORMATDESCRIPTOR layer types.",
+
 		"PFD_MAIN_PLANE"..0,
 		"PFD_OVERLAY_PLANE"..1,
 		"PFD_UNDERLAY_PLANE"..-1

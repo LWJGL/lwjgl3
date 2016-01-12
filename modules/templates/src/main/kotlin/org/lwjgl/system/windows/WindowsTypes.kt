@@ -74,6 +74,7 @@ val HICON = typedef(HANDLE, "HICON")
 val HCURSOR = typedef(HANDLE, "HCURSOR")
 val HBRUSH = typedef(HANDLE, "HBRUSH")
 val HTOUCHINPUT = typedef(HANDLE, "HTOUCHINPUT")
+val HMONITOR = typedef(HANDLE, "HMONITOR")
 
 val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 	documentation = "Contains the x and y coordinates of a point."
@@ -99,7 +100,6 @@ val POINT = struct(WINDOWS_PACKAGE, "POINT") {
 	LONG.member("x", "the x-coordinate of the point")
 	LONG.member("y", "the y-coordinate of the point")
 }.nativeType
-val LPPOINT = POINT.p("LPPOINT")
 
 val RECT = struct(WINDOWS_PACKAGE, "RECT") {
 	documentation = "Defines the coordinates of the upper-left and lower-right corners of a rectangle."
@@ -204,6 +204,27 @@ val WNDCLASSEX_p = struct_p(WINDOWS_PACKAGE, "WNDCLASSEX") {
 	HICON.member("hIconSm", "")
 }
 
+val WINDOWPLACEMENT_p = struct_p(WINDOWS_PACKAGE, "WINDOWPLACEMENT", mutable = false) {
+	documentation = "Contains information about the placement of a window on the screen."
+
+	UINT.member(
+		"length",
+		"""
+		the length of the structure, in bytes. Before calling the User32#GetWindowPlacement() or User32#SetWindowPlacement() functions, set this member to
+		#SIZEOF.
+		"""
+	)
+	UINT.member(
+		"flags",
+		"the flags that control the position of the minimized window and the method by which the window is restored. This member can be one or more of the" +
+		"following values:<br>User32#WPF_SETMINPOSITION User32#WPF_RESTORETOMAXIMIZED User32#WPF_ASYNCWINDOWPLACEMENT"
+	)
+	UINT.member("showCmd", "the current show state of the window")
+	POINT.member("ptMinPosition", "the coordinates of the window's upper-left corner when the window is minimized")
+	POINT.member("ptMaxPosition", "the coordinates of the window's upper-left corner when the window is maximized")
+	RECT.member("rcNormalPosition", "the window's coordinates when the window is in the restored position")
+}
+
 val TOUCHINPUT = struct(WINDOWS_PACKAGE, "TOUCHINPUT", mutable = false) {
 	documentation = "Encapsulates data for touch input."
 
@@ -248,15 +269,202 @@ val TOUCHINPUT = struct(WINDOWS_PACKAGE, "TOUCHINPUT", mutable = false) {
 		"cxContact",
 		"""
 		the width of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the {@code dwMask} member has
-		the User32#TOUCHEVENTFMASK_CONTACTAREA flag set.
+		the User32#TOUCHINPUTMASKF_CONTACTAREA flag set.
 		"""
 	)
 	DWORD.member(
 		"cyContact",
 		"""
 		the height of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the {@code dwMask} member has
-		the User32#TOUCHEVENTFMASK_CONTACTAREA flag set.
+		the User32#TOUCHINPUTMASKF_CONTACTAREA flag set.
 		"""
 	)
 }.nativeType
 val PTOUCHINPUT = TOUCHINPUT.p("PTOUCHINPUT")
+
+val MONITORINFOEX = struct(WINDOWS_PACKAGE, "MONITORINFOEX", mutable = false) {
+	documentation = "Contains information about a display monitor."
+
+	DWORD.member(
+		"cbSize",
+		"""
+		the size, in bytes, of the structure.
+
+		Set this member to #SIZEOF before calling the User32#GetMonitorInfo() function. Doing so lets the function determine the type of structure you are
+		passing to it.
+		"""
+	)
+	RECT.member(
+		"rcMonitor",
+		"""
+		a ##RECT structure that specifies the display monitor rectangle, expressed in virtual-screen coordinates. Note that if the monitor is not the primary
+		display monitor, some of the rectangle's coordinates may be negative values.
+		"""
+	)
+	RECT.member(
+		"rcWork",
+		"""
+		a ##RECT structure that specifies the work area rectangle of the display monitor that can be used by applications, expressed in virtual-screen
+		coordinates. Windows uses this rectangle to maximize an application on the monitor. The rest of the area in {@code rcMonitor} contains system windows
+		such as the task bar and side bars. Note that if the monitor is not the primary display monitor, some of the rectangle's coordinates may be negative
+		values.
+		"""
+	)
+	DWORD.member("dwFlags", "the attributes of the display monitor. May be:<br>User32#MONITORINFOF_PRIMARY")
+	TCHAR.array("szDevice", "a string that specifies the device name of the monitor being used", 32)
+}.nativeType
+val LPMONITORINFOEX = MONITORINFOEX.p("LPMONITORINFOEX")
+
+val POINTL = struct(WINDOWS_PACKAGE, "POINTL") {
+	documentation = "Contains the coordinates of a point."
+
+	LONG.member("x", "the horizontal (x) coordinate of the point")
+	LONG.member("y", "the vertical (y) coordinate of the point.")
+}.nativeType
+
+val PRINTER_ONLY = "for printer devices only"
+
+val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE") {
+	documentation = "Contains information about the initialization and environment of a printer or a display device."
+
+	TCHAR.array(
+		"dmDeviceName",
+		"""
+		A zero-terminated character array that specifies the "friendly" name of the printer or display; for example, "PCL/HP LaserJet" in the case of PCL/HP
+		LaserJet. This string is unique among device drivers. Note that this name may be truncated to fit in the {@code dmDeviceName} array.
+		""",
+		32
+	)
+	WORD.member(
+		"dmSpecVersion",
+		"""
+		the version number of the initialization data specification on which the structure is based. To ensure the correct version is used for any operating
+		system, use {@code DM_SPECVERSION}.
+		"""
+	)
+	WORD.member("dmDriverVersion", "the driver version number assigned by the driver developer")
+	WORD.member(
+		"dmSize",
+		"specifies the size, in bytes, of the {@code DEVMODE} structure, not including any private driver-specific data that might follow the structure's" +
+		"public members. Set this member to #SIZEOF to indicate the version of the {@code DEVMODE} structure being used."
+	)
+	WORD.member(
+		"dmDriverExtra",
+		"""
+		contains the number of bytes of private driver-data that follow this structure. If a device driver does not use device-specific information, set this
+		member to zero.
+		"""
+	)
+	DWORD.member(
+		"dmFields",
+		"""
+		specifies whether certain members of the {@code DEVMODE} structure have been initialized. If a member is initialized, its corresponding bit is set
+		otherwise the bit is clear. A driver supports only those {@code DEVMODE} members that are appropriate for the printer or display technology.
+		"""
+	)
+	union {
+		struct {
+			short.member("dmOrientation", PRINTER_ONLY)
+			short.member("dmPaperSize", PRINTER_ONLY)
+			short.member("dmPaperLength", PRINTER_ONLY)
+			short.member("dmPaperWidth", PRINTER_ONLY)
+			short.member("dmScale", PRINTER_ONLY)
+			short.member("dmCopies", PRINTER_ONLY)
+			short.member("dmDefaultSource", PRINTER_ONLY)
+			short.member("dmPrintQuality", PRINTER_ONLY)
+		}
+		struct {
+			POINTL.member(
+				"dmPosition",
+				"""
+				or display devices only, a ##POINTL structure that indicates the positional coordinates of the display device in reference to the desktop area.
+				The primary display device is always located at coordinates (0,0).
+				"""
+			)
+			DWORD.member(
+				"dmDisplayOrientation",
+				"""
+				for display devices only, the orientation at which images should be presented. If GDI32#DM_DISPLAYORIENTATION is not set, this member must be
+				zero. If GDI32#DM_DISPLAYORIENTATION is set, this member must be one of the following values:<br>GDI32#DMDO_DEFAULT, GDI32#DMDO_90, GDI32#DMDO_180, GDI32#DMDO_270
+
+				To determine whether the display orientation is portrait or landscape orientation, check the ratio of {@code dmPelsWidth} to
+				{@code dmPelsHeight}.
+				"""
+			)
+			DWORD.member(
+				"dmDisplayFixedOutput",
+				"""
+				for fixed-resolution display devices only, how the display presents a low-resolution mode on a higher-resolution display. For example, if a
+				display device's resolution is fixed at 1024 x 768 pixels but its mode is set to 640 x 480 pixels, the device can either display a 640 x 480
+				image somewhere in the interior of the 1024 x 768 screen space or stretch the 640 x 480 image to fill the larger screen space. If
+				GDI32#DM_DISPLAYFIXEDOUTPUT is not set, this member must be zero. If GDI32#DM_DISPLAYFIXEDOUTPUT is set, this member must be one of the
+				following values:<br>GDI32#DMDFO_DEFAULT, GDI32#DMDFO_CENTER, GDI32#DMDFO_STRETCH
+				""")
+		}
+	}
+	short.member("dmColor", PRINTER_ONLY)
+	short.member("dmDuplex", PRINTER_ONLY)
+	short.member("dmYResolution", PRINTER_ONLY)
+	short.member("dmTTOption", PRINTER_ONLY)
+	short.member("dmCollate", PRINTER_ONLY)
+	TCHAR.array("dmFormName", PRINTER_ONLY, 32)
+
+	WORD.member("dmLogPixels", "the number of pixels per logical inch")
+	DWORD.member(
+		"dmBitsPerPel",
+		"""
+		specifies the color resolution, in bits per pixel, of the display device (for example: 4 bits for 16 colors, 8 bits for 256 colors, or 16 bits for
+		65,536 colors)
+		"""
+	)
+	DWORD.member("dmPelsWidth", "specifies the width, in pixels, of the visible device surface")
+	DWORD.member("dmPelsHeight", "specifies the height, in pixels, of the visible device surface")
+	union {
+		DWORD.member("dmDisplayFlags", "specifies the device's display mode, one or more of:<br>GDI32#DM_INTERLACED, GDI32#DMDISPLAYFLAGS_TEXTMODE")
+		DWORD.member("dmNup", PRINTER_ONLY)
+	}
+	DWORD.member(
+		"dmDisplayFrequency",
+		"""
+		specifies the frequency, in hertz (cycles per second), of the display device in a particular mode. This value is also known as the display device's
+		vertical refresh rate.
+
+		When you call the User32#EnumDisplaySettingsEx() function, the {@code dmDisplayFrequency} member may return with the value 0 or 1. These values
+		represent the display hardware's default refresh rate. This default rate is typically set by switches on a display card or computer motherboard, or by
+		a configuration program that does not use display functions such as {@code ChangeDisplaySettingsEx}.
+		"""
+	)
+	DWORD.member("dmICMMethod", PRINTER_ONLY)
+	DWORD.member("dmICMIntent", PRINTER_ONLY)
+	DWORD.member("dmMediaType", PRINTER_ONLY)
+	DWORD.member("dmDitherType", PRINTER_ONLY)
+
+	DWORD.member("dmReserved1", "not used; must be zero")
+	DWORD.member("dmReserved2", "not used; must be zero")
+
+	DWORD.member("dmPanningWidth", "this member must be zero")
+	DWORD.member("dmPanningHeight", "this member must be zero")
+}
+
+val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE") {
+	documentation =
+		"""
+		Receives information about the display device specified by the {@code iDevNum} parameter of the User32#EnumDisplayDevices() function.
+
+		The four string members are set based on the parameters passed to {@code EnumDisplayDevices}. If the {@code lpDevice} param is $NULL, then
+		{@code DISPLAY_DEVICE} is filled in with information about the display adapter(s). If it is a valid device name, then it is filled in with information
+		about the monitor(s) for that device.
+		"""
+
+	DWORD.member("cb", "size, in bytes, of the {@code DISPLAY_DEVICE} structure. This must be initialized prior to calling User32#EnumDisplayDevices().")
+	TCHAR.array("DeviceName", "an array of characters identifying the device name. This is either the adapter device or the monitor device.", size = 32)
+	TCHAR.array(
+		"DeviceString",
+		"an array of characters containing the device context string. This is either a description of the display adapter or of the display monitor.",
+		size = 128
+	)
+	DWORD.member("StateFlags", "device state flags")
+	TCHAR.array("DeviceID", "not used", size = 128)
+	TCHAR.array("DeviceKey", "reserved", size = 128)
+}.nativeType
+val PDISPLAY_DEVICE = DISPLAY_DEVICE.p("PDISPLAY_DEVICE")
