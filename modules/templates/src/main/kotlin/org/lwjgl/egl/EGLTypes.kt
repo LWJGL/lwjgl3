@@ -8,12 +8,6 @@ import org.lwjgl.generator.*
 
 val EGL_PACKAGE = "org.lwjgl.egl"
 
-fun GeneratorTargetNative.includeEGLEXT() = nativeDirective(
-	"""DISABLE_WARNINGS()
-#include "EGL/egl.h"
-#include "EGL/eglext.h"
-ENABLE_WARNINGS()""")
-
 val noneTerminated = Terminated("EGL10.EGL_NONE") // EGL_NONE is not zero
 
 // khrplatform.h

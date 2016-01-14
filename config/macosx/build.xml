@@ -95,15 +95,6 @@ License terms: http://lwjgl.org/license.php
 
 		<!-- Each binding is compiled separately -->
 
-		<compile if:true="${binding.glfw}">
-			<arguments>
-				<arg value="-I${src.include.rel}/glfw"/>
-				<fileset dir=".">
-					<include name="${src.generated.native}/glfw/*.c"/>
-				</fileset>
-			</arguments>
-		</compile>
-
 		<compile if:true="${binding.jawt}">
 			<arguments>
 				<fileset dir="." includes="${src.generated.native}/system/jawt/*.c"/>
@@ -125,22 +116,6 @@ License terms: http://lwjgl.org/license.php
 				<fileset dir="." includes="${src.include}/nfd/nfd_common.c"/>
 				<fileset dir="." includes="${src.include}/nfd/nfd_cocoa.m"/>
 				<fileset dir="." includes="${src.generated.native}/nfd/*.c"/>
-			</arguments>
-		</compile>
-
-		<compile if:true="${binding.opencl}">
-			<arguments>
-				<arg value="-I${src.include.rel}/opencl"/>
-				<fileset dir="." includes="${src.generated.native}/opencl/*.c" excludes="**/*CL20.c"/>
-			</arguments>
-		</compile>
-
-		<compile if:true="${binding.opengl}">
-			<arguments>
-				<arg value="-Wno-deprecated-declarations"/>
-				<fileset dir=".">
-					<include name="${src.generated.native}/opengl/cgl/*.c"/>
-				</fileset>
 			</arguments>
 		</compile>
 

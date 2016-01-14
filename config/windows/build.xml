@@ -60,22 +60,6 @@ License terms: http://lwjgl.org/license.php
 
 		<!-- Each binding is compiled separately to avoid command length limits in Windows cmd -->
 
-		<cl if:true="${binding.egl}">
-			<arguments>
-				<arg value="/I${src.include}\egl"/>
-				<fileset dir="." includes="${src.generated.native}/egl/*.c"/>
-			</arguments>
-		</cl>
-
-		<cl if:true="${binding.glfw}">
-			<arguments>
-				<arg value="/I${src.include}\glfw"/>
-				<fileset dir=".">
-					<include name="${src.generated.native}/glfw/*.c"/>
-				</fileset>
-			</arguments>
-		</cl>
-
 		<cl if:true="${binding.jawt}">
 			<arguments>
 				<fileset dir="." includes="${src.generated.native}/system/jawt/*.c"/>
@@ -107,22 +91,6 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</cl>
 
-		<cl if:true="${binding.opencl}">
-			<arguments>
-				<arg value="/I${src.include}\opencl"/>
-				<fileset dir="." includes="${src.generated.native}/opencl/*.c"/>
-			</arguments>
-		</cl>
-
-		<cl if:true="${binding.opengl}">
-			<arguments>
-				<arg value="/I${src.include}\opengl\wgl"/>
-				<fileset dir=".">
-					<include name="${src.generated.native}/opengl/wgl/*.c"/>
-				</fileset>
-			</arguments>
-		</cl>
-
 		<cl if:true="${binding.ovr}">
 			<arguments>
 				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
@@ -130,6 +98,16 @@ License terms: http://lwjgl.org/license.php
 				<fileset dir="." includes="${src.generated.native}/ovr/*.c"/>
 			</arguments>
 		</cl>
+		<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler" if:true="${binding.ovr}">
+			<arg line="/c /EHsc /Ox /Gy /GR- /MT /MP /nologo"/>
+			<arg value="/Fo${bin.native}\"/>
+
+			<!-- Compile the LibOVR CAPI shim -->
+			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
+			<fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*.cpp"/>
+
+			<mapper type="regexp" from="(\w+)\.cpp$" to="\1.obj"/>
+		</apply>
 
 		<cl if:true="${binding.stb}">
 			<arguments>
@@ -137,17 +115,6 @@ License terms: http://lwjgl.org/license.php
 				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
 			</arguments>
 		</cl>
-
-		<!-- Compile the LibOVR CAPI shim -->
-		<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler" if:true="${binding.ovr}">
-			<arg line="/c /EHsc /Ox /Gy /GR- /MT /MP /nologo"/>
-			<arg value="/Fo${bin.native}\"/>
-
-			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
-			<fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*.cpp"/>
-
-			<mapper type="regexp" from="(\w+)\.cpp$" to="\1.obj"/>
-		</apply>
 
 		<!-- LINK -->
 		<uptodate property="link-uptodate" targetfile="${lib}/${LWJGL_LIBRARY}">
