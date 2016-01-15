@@ -126,7 +126,7 @@ val stbir_datatype = typedef(int, "stbir_datatype")
 
 // stb_image_write.h
 
-val stbi_write_func = "stbi_write_func_p".callback(
+val stbi_write_func = "stbi_write_func *".callback(
 	STB_PACKAGE, void, "STBIWriteCallback",
 	"The {@code stbi_write_func} callback.",
 	void_p.IN("context", "the context passed to the write function"),

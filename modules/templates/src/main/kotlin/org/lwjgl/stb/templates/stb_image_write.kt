@@ -11,13 +11,16 @@ val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, pre
 	nativeDirective(
 """#ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4710))
-#endif
-#define STBIW_ASSERT(x)""", beforeIncludes = true)
+#endif""", beforeIncludes = true)
 
 	includeSTBAPI(
 		"""#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
-#define stbi_write_func_p stbi_write_func *""")
+#define STB_IMAGE_WRITE_STATIC
+#define STBIW_ASSERT(x)
+#define STBIW_MALLOC(sz)    lwjgl_malloc(sz)
+#define STBIW_REALLOC(p,sz) lwjgl_realloc(p,sz)
+#define STBIW_FREE(p)       lwjgl_free(p)
+#include "stb_image_write.h"""")
 
 	documentation =
 		"""

@@ -12,6 +12,9 @@ val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI
 		"""#define STB_IMAGE_IMPLEMENTATION${if ( Binding.NANOVG.enabled ) "" else "\n#define STB_IMAGE_STATIC"}
 #define STBI_FAILURE_USERMSG
 #define STBI_ASSERT(x)
+#define STBI_MALLOC(sz)    lwjgl_malloc(sz)
+#define STBI_REALLOC(p,sz) lwjgl_realloc(p,sz)
+#define STBI_FREE(p)       lwjgl_free(p)
 #include "stb_image.h"""")
 
 	documentation =

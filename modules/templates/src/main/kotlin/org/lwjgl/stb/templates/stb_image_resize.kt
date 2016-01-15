@@ -12,6 +12,8 @@ val stb_image_resize = "STBImageResize".nativeClass(packageName = STB_PACKAGE, p
 		"""#define STB_IMAGE_RESIZE_IMPLEMENTATION
 #define STB_IMAGE_RESIZE_STATIC
 #define STBIR_ASSERT(x)
+#define STBIR_MALLOC(size,c) lwjgl_malloc(size)
+#define STBIR_FREE(ptr,c)    lwjgl_free(ptr)
 #include "stb_image_resize.h"""")
 
 	documentation =

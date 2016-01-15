@@ -43,6 +43,22 @@ final class MemoryAccess {
 		return accessor;
 	}
 
+	// Pointers to the explicit memory management functions used internally by LWJGL bindings
+
+	static native long malloc();
+
+	static native long calloc();
+
+	static native long realloc();
+
+	static native long free();
+
+	static native long aligned_alloc();
+
+	static native long aligned_free();
+
+	// -----------
+
 	// The standard C memset function
 	private static native void memset(long ptr, int value, long bytes);
 

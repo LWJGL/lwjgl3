@@ -13,8 +13,8 @@ import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.Aggregate;
 import java.nio.*;
 
 import static java.lang.Math.*;
-import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Pointer.*;
 
 /**
  * This class provides functionality for managing native memory.
@@ -68,6 +68,16 @@ public final class MemoryUtil {
 			? new DebugAllocator(ALLOCATOR_IMPL)
 			: ALLOCATOR_IMPL;
 
+		ALLOCATOR.config(
+			MemoryAccess.malloc(),
+			MemoryAccess.calloc(),
+			MemoryAccess.realloc(),
+			MemoryAccess.free(),
+
+			MemoryAccess.aligned_alloc(),
+			MemoryAccess.aligned_free()
+		);
+
 		apiLog("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
 	}
 
@@ -82,6 +92,26 @@ public final class MemoryUtil {
 
 	/** The interface implemented by the memory allocator used by the explicit memory management API ({@link #memAlloc}, {@link #memFree}, etc). */
 	public interface MemoryAllocator {
+
+		/**
+		 * The memory allocator may override the default explicit memory management functions used internally by LWJGL bindings.
+		 *
+		 * @param malloc        a pointer to the malloc function
+		 * @param calloc        a pointer to the calloc function
+		 * @param realloc       a pointer to the realloc function
+		 * @param free          a pointer to the free function
+		 * @param aligned_alloc a pointer to the aligned_alloc function
+		 * @param aligned_free  a pointer to the aligned_free function
+		 */
+		void config(
+			long malloc,
+			long calloc,
+			long realloc,
+			long free,
+
+			long aligned_alloc,
+			long aligned_free
+		);
 
 		/** Called by {@link MemoryUtil#memAlloc}. */
 		long malloc(long size);

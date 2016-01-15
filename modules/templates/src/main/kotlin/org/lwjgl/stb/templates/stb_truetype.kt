@@ -11,6 +11,8 @@ val stb_truetype = "STBTruetype".nativeClass(packageName = STB_PACKAGE, prefix =
 	includeSTBAPI(
 		"""#define STB_TRUETYPE_IMPLEMENTATION${if ( Binding.NANOVG.enabled ) "" else "\n#define STBTT_STATIC"}
 #define STBTT_assert
+#define STBTT_malloc(x,u)  ((void)(u),lwjgl_malloc(x))
+#define STBTT_free(x,u)    ((void)(u),lwjgl_free(x))
 #include "stb_rect_pack.h"
 #include "stb_truetype.h"""")
 

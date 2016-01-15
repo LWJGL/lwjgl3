@@ -9,6 +9,48 @@ ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 
+// malloc()J
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_malloc(JNIEnv *env, jclass clazz)
+{
+	UNUSED_PARAMS(env, clazz)
+	return (jlong)(intptr_t)&lwjgl_malloc;
+}
+
+// calloc()J
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_calloc(JNIEnv *env, jclass clazz)
+{
+	UNUSED_PARAMS(env, clazz)
+	return (jlong)(intptr_t)&lwjgl_calloc;
+}
+
+// realloc()J
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_realloc(JNIEnv *env, jclass clazz)
+{
+	UNUSED_PARAMS(env, clazz)
+	return (jlong)(intptr_t)&lwjgl_realloc;
+}
+
+// free()J
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_free(JNIEnv *env, jclass clazz)
+{
+	UNUSED_PARAMS(env, clazz)
+	return (jlong)(intptr_t)&lwjgl_free;
+}
+
+// aligned_alloc()J
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_aligned_1alloc(JNIEnv *env, jclass clazz)
+{
+	UNUSED_PARAMS(env, clazz)
+	return (jlong)(intptr_t)&lwjgl_aligned_alloc;
+}
+
+// aligned_free()J
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_aligned_1free(JNIEnv *env, jclass clazz)
+{
+	UNUSED_PARAMS(env, clazz)
+	return (jlong)(intptr_t)&lwjgl_aligned_free;
+}
+
 // memset(JIJ)V
 JNIEXPORT void JNICALL Java_org_lwjgl_system_MemoryAccess_memset(JNIEnv *env, jclass clazz,
 	jlong address, jint value, jlong bytes

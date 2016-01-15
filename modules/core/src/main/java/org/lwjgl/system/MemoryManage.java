@@ -4,6 +4,8 @@
  */
 package org.lwjgl.system;
 
+import org.lwjgl.system.jemalloc.JEmalloc;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +56,11 @@ final class MemoryManage {
 	private static class StdlibAllocator implements MemoryAllocator {
 
 		@Override
+		public void config(long malloc, long calloc, long realloc, long free, long aligned_alloc, long aligned_free) {
+			// stdlib functions are the default
+		}
+
+		@Override
 		public long malloc(long size) {
 			return nmalloc(size);
 		}
@@ -87,6 +94,19 @@ final class MemoryManage {
 
 	/** jemalloc memory allocator. */
 	private static class JEmallocAllocator implements MemoryAllocator {
+
+		@Override
+		public void config(long malloc, long calloc, long realloc, long free, long aligned_alloc, long aligned_free) {
+			JEmalloc jemalloc = JEmalloc.getInstance();
+
+			memPutAddress(malloc, jemalloc.malloc);
+			memPutAddress(calloc, jemalloc.calloc);
+			memPutAddress(realloc, jemalloc.realloc);
+			memPutAddress(free, jemalloc.free);
+
+			memPutAddress(aligned_alloc, jemalloc.aligned_alloc);
+			memPutAddress(aligned_free, jemalloc.free);
+		}
 
 		@Override
 		public long malloc(long size) {
@@ -190,6 +210,11 @@ final class MemoryManage {
 		public void aligned_free(long ptr) {
 			allocator.aligned_free(ptr);
 			untrack(ptr);
+		}
+
+		@Override
+		public void config(long malloc, long calloc, long realloc, long free, long aligned_alloc, long aligned_free) {
+			allocator.config(malloc, calloc, realloc, free, aligned_alloc, aligned_free);
 		}
 
 		private static long track(long address, long size) {
