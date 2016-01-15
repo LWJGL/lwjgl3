@@ -27,7 +27,7 @@ freePROC lwjgl_free = free;
 		return NULL;
 	}
 	aligned_allocPROC lwjgl_aligned_alloc = aligned_alloc;
-	aligned_freePROC lwjgl_aligned_free = free
+	aligned_freePROC lwjgl_aligned_free = free;
 #endif
 
 inline JNIEnv *getThreadEnv(void) {
