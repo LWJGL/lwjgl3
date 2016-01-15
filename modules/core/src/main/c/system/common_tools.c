@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-static JavaVM *jvm;
+JavaVM *jvm;
 
 mallocPROC lwjgl_malloc = malloc;
 callocPROC lwjgl_calloc = calloc;
