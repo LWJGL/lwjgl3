@@ -4,6 +4,8 @@
  */
 package org.lwjgl.system;
 
+import org.lwjgl.PointerBuffer;
+import org.lwjgl.system.libffi.FFICIF;
 import org.lwjgl.system.linux.LinuxLibrary;
 import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
@@ -15,6 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.Pointer.*;
 
 /**
  * Utility class useful to API bindings. [INTERNAL USE ONLY]
@@ -205,6 +210,21 @@ public final class APIUtil {
 		} catch (ClassNotFoundException e) {
 			return null;
 		}
+	}
+
+	public static FFICIF apiClosureCIF() {
+		return FFICIF.create(getAllocator().malloc(FFICIF.SIZEOF));
+	}
+
+	public static PointerBuffer apiClosureArgs(int size) {
+		return memPointerBuffer(getAllocator().malloc(size * POINTER_SIZE), size);
+	}
+
+	public static long apiClosureText(String text) {
+		int size = memEncodedLengthUTF8(text) + 1;
+		long address = getAllocator().malloc(size);
+		memEncodeUTF8(text, true, memByteBuffer(address, size));
+		return address;
 	}
 
 	/** Simple interface for Field filtering. */

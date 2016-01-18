@@ -258,21 +258,6 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			clojure.release();
 	}
 
-	protected static FFICIF staticAllocCIF() {
-		return FFICIF.create(getAllocator().malloc(FFICIF.SIZEOF));
-	}
-
-	protected static PointerBuffer staticAllocPointer(int size) {
-		return memPointerBuffer(getAllocator().malloc(size * POINTER_SIZE), size);
-	}
-
-	protected static long staticAllocText(String text) {
-		int size = memEncodedLengthUTF8(text) + 1;
-		long address = getAllocator().malloc(size);
-		memEncodeUTF8(text, true, memByteBuffer(address, size));
-		return address;
-	}
-
 	protected static void prepareCIF(int ABI, FFICIF CIF, FFIType rtype, PointerBuffer ARGS, FFIType... atypes) {
 		for ( int i = 0; i < atypes.length; i++ )
 			ARGS.put(i, atypes[i]);

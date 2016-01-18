@@ -77,7 +77,6 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 		"java.lang.reflect.Field",
 		"java.util.Map",
 		"org.lwjgl.system.APIUtil",
-		"static org.lwjgl.system.APIUtil.*",
 		"static org.lwjgl.glfw.GLFW.*"
 	)
 	additionalCode = """

@@ -52,6 +52,7 @@ class CallbackFunction(
 import org.lwjgl.*;
 import org.lwjgl.system.libffi.*;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
@@ -64,10 +65,10 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 		print("""
 ${access.modifier}abstract class $className extends Closure.${returns.mapping.jniSignature} {
 
-	private static final FFICIF        CIF  = staticAllocCIF();
-	private static final PointerBuffer ARGS = staticAllocPointer(${signature.size});
+	private static final FFICIF        CIF  = apiClosureCIF();
+	private static final PointerBuffer ARGS = apiClosureArgs(${signature.size});
 
-	private static final long CLASSPATH = staticAllocText("$packageName.$className");
+	private static final long CLASSPATH = apiClosureText("$packageName.$className");
 
 	static {
 		prepareCIF(
