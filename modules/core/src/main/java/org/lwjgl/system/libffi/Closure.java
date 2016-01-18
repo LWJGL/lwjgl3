@@ -118,6 +118,13 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** The dynamically generated function pointer. */
 	private final long address;
 
+	/**
+	 * Creates a new {@code Closure} instance.
+	 *
+	 * @param cif            a prepared {@link FFICIF} structure
+	 * @param classPath      an optional UTF-8 encoded string that will be used for debugging
+	 * @param nativeCallback the native callback function address
+	 */
 	Closure(FFICIF cif, long classPath, long nativeCallback) {
 		// Allocate ffi closure
 		APIBuffer __buf = apiStack();
@@ -149,7 +156,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 				buffer.append("\n    at ");
 				buffer.append(stackTrace[i].toString());
 			}
-			memPutAddress(user_data + POINTER_SIZE, memAddress(memEncodeASCII(buffer.toString(), true, BufferAllocator.MALLOC)));
+			memPutAddress(user_data + POINTER_SIZE, memAddress(memEncodeUTF8(buffer.toString(), true, BufferAllocator.MALLOC)));
 		} else
 			memPutAddress(user_data + POINTER_SIZE, classPath); // just the closure class
 
@@ -260,9 +267,9 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	protected static long staticAllocText(String text) {
-		int size = text.length() + 1;
+		int size = memEncodedLengthUTF8(text) + 1;
 		long address = getAllocator().malloc(size);
-		memEncodeASCII(text, true, memByteBuffer(address, size));
+		memEncodeUTF8(text, true, memByteBuffer(address, size));
 		return address;
 	}
 
