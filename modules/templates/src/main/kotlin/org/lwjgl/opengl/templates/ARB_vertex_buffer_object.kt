@@ -187,7 +187,12 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLintptrARB.IN("offset", "the offset into the buffer object's data store where data replacement will begin, measured in bytes"),
 		AutoSize("data")..GLsizeiptrARB.IN("size", "the size in bytes of the data store region being replaced"),
-		const..void_p.IN("data", "a pointer to the new data that will be copied into the data store")
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		)..const..void_p.IN("data", "a pointer to the new data that will be copied into the data store")
 	)
 
 	void(
