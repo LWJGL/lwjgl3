@@ -37,16 +37,6 @@ class CallbackFunction(
 			else             -> if ( mapping === TypeMapping.VOID) "ffi_type_void" else throw IllegalArgumentException("Unsupported callback native type: $this")
 		}
 
-	val NativeType.callbackType: String
-		get() = when ( this ) {
-			is PointerType   -> "Ptr"
-			is PrimitiveType -> when ( mapping ) {
-				PrimitiveMapping.POINTER -> "Ptr"
-				else                     -> mapping.javaMethodType.simpleName.upperCaseFirst
-			}
-			else             -> if ( mapping === TypeMapping.VOID) "Void" else throw IllegalArgumentException("Unsupported callback return type: $this")
-		}
-
 	val NativeType.memType: String
 		get() = if ( this is PointerType || mapping === PrimitiveMapping.POINTER)
 			"Address"
@@ -72,7 +62,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 		if ( documentation != null )
 			print(processDocumentation(documentation).toJavaDoc(indentation = ""))
 		print("""
-${access.modifier}abstract class $className extends Closure.${returns.callbackType} {
+${access.modifier}abstract class $className extends Closure.${returns.mapping.jniSignature} {
 
 	private static final FFICIF        CIF  = staticAllocCIF();
 	private static final PointerBuffer ARGS = staticAllocPointer(${signature.size});

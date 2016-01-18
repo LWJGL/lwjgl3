@@ -9,15 +9,15 @@
 #include "ffi.h"
 
 static jmethodID
-	javaCallbackVoid,
-	javaCallbackBoolean,
-	javaCallbackByte,
-	javaCallbackShort,
-	javaCallbackInt,
-	javaCallbackLong,
-	javaCallbackFloat,
-	javaCallbackDouble,
-	javaCallbackPtr;
+	javaCallbackV,
+	javaCallbackZ,
+	javaCallbackB,
+	javaCallbackS,
+	javaCallbackI,
+	javaCallbackJ,
+	javaCallbackF,
+	javaCallbackD,
+	javaCallbackP;
 
 typedef struct LWJGLCallback {
 	jweak reference;
@@ -54,7 +54,7 @@ inline static jboolean verifyCallback(JNIEnv* env, jobject object, const LWJGLCa
 	return JNI_TRUE;
 }
 
-static void ffiClosureVoid(ffi_cif* cif, void* ret, void** args, void* user_data) {
+static void ffiClosureV(ffi_cif* cif, void* ret, void** args, void* user_data) {
 	jboolean async;
 	JNIEnv* env = getEnv(&async);
 
@@ -73,7 +73,7 @@ static void ffiClosureVoid(ffi_cif* cif, void* ret, void** args, void* user_data
 	// Invoke the Java callback
 	(*env)->CallVoidMethod(env,
 		object,
-		javaCallbackVoid,
+		javaCallbackV,
 		args
 	);
 
@@ -106,14 +106,14 @@ static void ffiClosureVoid(ffi_cif* cif, void* ret, void** args, void* user_data
 			asyncCallbackException(env); \
 	}
 
-DEFINE_FFI_CLOSURE_FUN(Boolean, jboolean,   Boolean)
-DEFINE_FFI_CLOSURE_FUN(Byte,    jbyte,      Byte)
-DEFINE_FFI_CLOSURE_FUN(Short,   jshort,     Short)
-DEFINE_FFI_CLOSURE_FUN(Int,     jint,       Int)
-DEFINE_FFI_CLOSURE_FUN(Long,    jlong,      Long)
-DEFINE_FFI_CLOSURE_FUN(Float,   jfloat,     Float)
-DEFINE_FFI_CLOSURE_FUN(Double,  jdouble,    Double)
-DEFINE_FFI_CLOSURE_FUN(Ptr,     intptr_t,   Long)
+DEFINE_FFI_CLOSURE_FUN(Z, jboolean, Boolean)
+DEFINE_FFI_CLOSURE_FUN(B, jbyte,    Byte)
+DEFINE_FFI_CLOSURE_FUN(S, jshort,   Short)
+DEFINE_FFI_CLOSURE_FUN(I, jint,     Int)
+DEFINE_FFI_CLOSURE_FUN(J, jlong,    Long)
+DEFINE_FFI_CLOSURE_FUN(F, jfloat,   Float)
+DEFINE_FFI_CLOSURE_FUN(D, jdouble,  Double)
+DEFINE_FFI_CLOSURE_FUN(P, intptr_t, Long)
 
 EXTERN_C_ENTER
 
@@ -126,15 +126,15 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_libffi_Closure_getNativeCallbacks(J
 
 	UNUSED_PARAMS(env, clazz)
 	
-	SETUP_CALLBACK(0, Void)
-	SETUP_CALLBACK(1, Boolean)
-	SETUP_CALLBACK(2, Byte)
-	SETUP_CALLBACK(3, Short)
-	SETUP_CALLBACK(4, Int)
-	SETUP_CALLBACK(5, Long)
-	SETUP_CALLBACK(6, Float)
-	SETUP_CALLBACK(7, Double)
-	SETUP_CALLBACK(8, Ptr)
+	SETUP_CALLBACK(0, V)
+	SETUP_CALLBACK(1, Z)
+	SETUP_CALLBACK(2, B)
+	SETUP_CALLBACK(3, S)
+	SETUP_CALLBACK(4, I)
+	SETUP_CALLBACK(5, J)
+	SETUP_CALLBACK(6, F)
+	SETUP_CALLBACK(7, D)
+	SETUP_CALLBACK(8, P)
 }
 
 EXTERN_C_EXIT

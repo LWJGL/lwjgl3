@@ -43,15 +43,15 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			Class<?>[] params = new Class<?>[] { long.class };
 
 			Method[] methods = new Method[] {
-				Void.class.getDeclaredMethod("callback", params),
-				Boolean.class.getDeclaredMethod("callback", params),
-				Byte.class.getDeclaredMethod("callback", params),
-				Short.class.getDeclaredMethod("callback", params),
-				Int.class.getDeclaredMethod("callback", params),
-				Long.class.getDeclaredMethod("callback", params),
-				Float.class.getDeclaredMethod("callback", params),
-				Double.class.getDeclaredMethod("callback", params),
-				Ptr.class.getDeclaredMethod("callback", params)
+				V.class.getDeclaredMethod("callback", params),
+				Z.class.getDeclaredMethod("callback", params),
+				B.class.getDeclaredMethod("callback", params),
+				S.class.getDeclaredMethod("callback", params),
+				I.class.getDeclaredMethod("callback", params),
+				J.class.getDeclaredMethod("callback", params),
+				F.class.getDeclaredMethod("callback", params),
+				D.class.getDeclaredMethod("callback", params),
+				P.class.getDeclaredMethod("callback", params)
 			};
 
 			callbacks = memAllocPointer(methods.length);
@@ -287,8 +287,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	// Closures types
 
 	/** A {@code Closure} with no return value. */
-	public abstract static class Void extends Closure {
-		protected Void(FFICIF cif, long classPath) {
+	public abstract static class V extends Closure {
+		protected V(FFICIF cif, long classPath) {
 			super(cif, classPath, NATIVE_CALLBACK_VOID);
 		}
 
@@ -296,8 +296,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	/** A {@code Closure} that returns a boolean value. */
-	public abstract static class Boolean extends Closure {
-		protected Boolean(FFICIF cif, long classPath) {
+	public abstract static class Z extends Closure {
+		protected Z(FFICIF cif, long classPath) {
 			super(cif, classPath, NATIVE_CALLBACK_BOOLEAN);
 		}
 
@@ -305,8 +305,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	/** A {@code Closure} that returns a byte value. */
-	public abstract static class Byte extends Closure {
-		protected Byte(FFICIF cif, long classPath) {
+	public abstract static class B extends Closure {
+		protected B(FFICIF cif, long classPath) {
 			super(cif, classPath, NATIVE_CALLBACK_BYTE);
 		}
 
@@ -314,8 +314,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	/** A {@code Closure} that returns a short value. */
-	public abstract static class Short extends Closure {
-		protected Short(FFICIF cif, long classPath) {
+	public abstract static class S extends Closure {
+		protected S(FFICIF cif, long classPath) {
 			super(cif, classPath, NATIVE_CALLBACK_SHORT);
 		}
 
@@ -323,8 +323,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	/** A {@code Closure} that returns an int value. */
-	public abstract static class Int extends Closure {
-		protected Int(FFICIF cif, long classPath) {
+	public abstract static class I extends Closure {
+		protected I(FFICIF cif, long classPath) {
 			super(cif, classPath, NATIVE_CALLBACK_INT);
 		}
 
@@ -332,8 +332,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	/** A {@code Closure} that returns a long value. */
-	public abstract static class Long extends Closure {
-		protected Long(FFICIF cif, long classPath) {
+	public abstract static class J extends Closure {
+		protected J(FFICIF cif, long classPath) {
 			super(cif, classPath, NATIVE_CALLBACK_LONG);
 		}
 
@@ -341,8 +341,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	/** A {@code Closure} that returns a float value. */
-	public abstract static class Float extends Closure {
-		protected Float(FFICIF cif, long classPath) {
+	public abstract static class F extends Closure {
+		protected F(FFICIF cif, long classPath) {
 			super(cif, classPath, NATIVE_CALLBACK_FLOAT);
 		}
 
@@ -350,8 +350,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	/** A {@code Closure} that returns a double value. */
-	public abstract static class Double extends Closure {
-		protected Double(FFICIF cif, long classPath) {
+	public abstract static class D extends Closure {
+		protected D(FFICIF cif, long classPath) {
 			super(cif, classPath, NATIVE_CALLBACK_DOUBLE);
 		}
 
@@ -359,8 +359,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	/** A {@code Closure} that returns a pointer value. */
-	public abstract static class Ptr extends Closure {
-		protected Ptr(FFICIF cif, long classPath) {
+	public abstract static class P extends Closure {
+		protected P(FFICIF cif, long classPath) {
 			super(cif, classPath, NATIVE_CALLBACK_PTR);
 		}
 

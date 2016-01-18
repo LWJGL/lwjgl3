@@ -33,11 +33,11 @@ public final class Events {
 			"org.lwjgl.demo.util.ClosureGC"
 		);
 
-		glfwSetErrorCallback(GLFWErrorCallback.createPrint(System.out));
+		glfwSetErrorCallback(GLFWErrorCallback.createPrint(System.err));
 
-		System.out.println("---- [ Error callback test ] ----");
+		System.err.println("---- [ Error callback test ] ----");
 		glfwDefaultWindowHints();
-		System.out.println("---- [ Error callback done ] ----");
+		System.err.println("---- [ Error callback done ] ----");
 
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");
@@ -267,10 +267,6 @@ public final class Events {
 			glClear(GL_COLOR_BUFFER_BIT);
 			glfwSwapBuffers(window);
 		}
-
-		Callbacks.glfwReleaseCallbacks(window);
-		glfwSetMonitorCallback(null).release();
-		glfwSetErrorCallback(null).release();
 	}
 
 	private static String getModState(int mods) {
