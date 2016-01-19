@@ -118,11 +118,11 @@ public abstract class Struct extends Pointer.Default {
 				addNestedMembers(members[i], union, 0);
 		}
 
-		return new Layout(size, alignment, union.toArray(new Member[union.size()]));
+		return new Layout(size, alignment, union.toArray(new Member[0]));
 	}
 
 	protected static Layout __struct(Member... members) {
-		List<Member> out = new ArrayList<Member>(members.length);
+		List<Member> struct = new ArrayList<Member>(members.length);
 
 		int size = 0;
 		int alignment = 0;
@@ -132,15 +132,15 @@ public abstract class Struct extends Pointer.Default {
 			size = (m.offset = align(size, m.alignment)) + m.size;
 			alignment = Math.max(alignment, m.alignment);
 
-			out.add(m);
+			struct.add(m);
 			if ( m instanceof Layout )
-				addNestedMembers(m, out, m.offset);
+				addNestedMembers(m, struct, m.offset);
 		}
 
 		// tail padding
 		size = align(size, alignment);
 
-		return new Layout(size, alignment, out.toArray(new Member[out.size()]));
+		return new Layout(size, alignment, struct.toArray(new Member[0]));
 	}
 
 	private static void addNestedMembers(Member nested, List<Member> members, int offset) {
