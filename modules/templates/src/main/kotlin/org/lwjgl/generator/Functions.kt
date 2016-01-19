@@ -788,7 +788,7 @@ class NativeClassFunction(
 					if ( !(param has optional) )
 						transforms[it] = AutoSizeTransform(param, autoSize.applyTo)
 				} else if ( it has optional ) {
-					transforms[it] = ExpressionTransform("0L")
+					transforms[it] = ExpressionTransform("NULL")
 				} else if ( it has Expression ) {
 					// We do this here in case another transform applies too.
 					// We overwrite the value with the expression but use the type of the other transform.

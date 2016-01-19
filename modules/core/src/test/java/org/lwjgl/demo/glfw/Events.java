@@ -57,7 +57,7 @@ public final class Events {
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
 		long window = glfwCreateWindow(640, 480, "GLFW Event Demo", NULL, NULL);
-		if ( window == 0L )
+		if ( window == NULL )
 			throw new IllegalStateException("Failed to create GLFW window.");
 
 		System.out.println("Window opened.");

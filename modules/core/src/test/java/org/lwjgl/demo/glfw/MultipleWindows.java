@@ -48,7 +48,7 @@ public final class MultipleWindows {
 			final int windowIndex = i + 1;
 
 			long handle = glfwCreateWindow(300, 200, "GLFW Demo - " + windowIndex, NULL, NULL);
-			if ( handle == 0L )
+			if ( handle == NULL )
 				throw new IllegalStateException("Failed to create GLFW window");
 
 			Window window = new Window(handle);

@@ -21,7 +21,7 @@ enum class InfoQueryType {
 fun info() {
 	customClass(OPENCL_PACKAGE, "Info", {
 		javaImport(
-			"org.lwjgl.PointerBuffer",
+			"static org.lwjgl.system.MemoryUtil.*",
 			"static org.lwjgl.opencl.CL10.*",
 			"static org.lwjgl.opencl.CL12.*",
 			"static org.lwjgl.opencl.CL20.*",
@@ -57,7 +57,7 @@ fun info() {
 				"""private static final InfoQuery $field = new InfoQuery() {
 		@Override
 		protected int get(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-			return nclGet${info}Info(pointer, param_name${if ( hasInput ) ", 0, 0L" else ""}, param_value_size, param_value, param_value_size_ret);
+			return nclGet${info}Info(pointer, param_name${if ( hasInput ) ", 0, NULL" else ""}, param_value_size, param_value, param_value_size_ret);
 		}
 	};"""
 
@@ -80,7 +80,7 @@ fun info() {
 				"""private static final $queryType $field = new $queryType() {
 		@Override
 		protected int get(long pointer, $argType arg, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-			return nclGet${info}Info(pointer, arg, param_name${if ( hasInput ) ", 0, 0L" else ""}, param_value_size, param_value, param_value_size_ret);
+			return nclGet${info}Info(pointer, arg, param_name${if ( hasInput ) ", 0, NULL" else ""}, param_value_size, param_value, param_value_size_ret);
 		}
 	};"""
 

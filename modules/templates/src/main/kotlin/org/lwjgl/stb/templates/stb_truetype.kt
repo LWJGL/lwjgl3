@@ -294,7 +294,7 @@ int main(int arg, char **argv)
 			"padding",
 			"the amount of padding to leave between each character (normally you want '1' for bitmaps you'll use as textures with bilinear filtering)"
 		),
-		Expression("0L")..nullable..void_p.IN("alloc_context", "a pointer to an allocation context"),
+		Expression("NULL")..nullable..void_p.IN("alloc_context", "a pointer to an allocation context"),
 
 		returnDoc = "1 on success, 0 on failure"
 	)

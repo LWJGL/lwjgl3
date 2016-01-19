@@ -182,7 +182,7 @@ public final class Checks {
 	/** Ensures that the specified LongBuffer is null-terminated. */
 	public static LongBuffer checkNT(LongBuffer buf) {
 		checkBuffer(buf, 1);
-		if ( buf.get(buf.limit() - 1) != 0L )
+		if ( buf.get(buf.limit() - 1) != NULL )
 			throw new IllegalArgumentException("Missing null termination");
 
 		return buf;

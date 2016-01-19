@@ -147,7 +147,7 @@ public final class CLDemo {
 					ClosureGC.get().push();
 
 					System.out.println("\t\t-TRYING TO EXEC NATIVE KERNEL-");
-					long queue = clCreateCommandQueue(context, device.address(), 0L, errcode_ret);
+					long queue = clCreateCommandQueue(context, device.address(), NULL, errcode_ret);
 
 					PointerBuffer ev = BufferUtils.createPointerBuffer(1);
 

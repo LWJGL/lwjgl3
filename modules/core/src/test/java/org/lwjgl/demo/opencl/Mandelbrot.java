@@ -241,7 +241,7 @@ public class Mandelbrot {
 			checkCLError(errcode_ret);
 
 			// create command queue and upload color map buffer
-			clQueue = clCreateCommandQueue(clContext, device.address(), 0L, errcode_ret);
+			clQueue = clCreateCommandQueue(clContext, device.address(), NULL, errcode_ret);
 			checkCLError(errcode_ret);
 
 			// load program(s)
