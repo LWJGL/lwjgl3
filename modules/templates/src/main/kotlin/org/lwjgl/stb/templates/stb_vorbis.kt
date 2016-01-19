@@ -129,18 +129,18 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 
 	// PUSHDATA API
 
-	stb_vorbis_p(
+	val open_pushdata = stb_vorbis_p(
 		"open_pushdata",
 		"""
 		Creates a vorbis decoder by passing in the initial data block containing the ogg&vorbis headers (you don't need to do parse them, just provide the
 		first N bytes of the file -- you're told if it's not enough, see below)
 		""",
 
-		unsigned_char_p.OUT("datablock", "the data block containing the ogg vorbis headers"),
+		const..unsigned_char_p.IN("datablock", "the data block containing the ogg vorbis headers"),
 		AutoSize("datablock")..int.IN("datablock_length_in_bytes", "the length of {@code datablock}, in bytes"),
 		int_p.OUT("datablock_memory_consumed_in_bytes", "returns the amount of data parsed/consumed, in bytes"),
 		int_p.OUT("error", "returns the error code"),
-		nullable..stb_vorbis_alloc_p.IN("alloc_buffer", "an ##STBVorbisAlloc struct"),
+		nullable..const..stb_vorbis_alloc_p.IN("alloc_buffer", "an ##STBVorbisAlloc struct"),
 
 		returnDoc =
 		"""
@@ -165,8 +165,8 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		""",
 
 		DECODER,
-		unsigned_char_p.IN("datablock", ""),
-		AutoSize("datablock")..int.IN("datablock_length_in_bytes", ""),
+		const..unsigned_char_p.IN("datablock", "the data block containing the audio sample data"),
+		AutoSize("datablock")..int.IN("datablock_length_in_bytes", "the length of {@code datablock}, in bytes"),
 		Check(1)..int_p.OUT("channels", "place to write number of {@code float *} buffers"),
 		Check(1)..float_ppp.OUT("output", "place to write float ** array of float * buffers"),
 		Check(1)..int_p.OUT("samples", "place to write number of output samples"),
@@ -232,7 +232,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		const..unsigned_char_p.IN("mem", "the data to decode"),
 		AutoSize("mem")..int.IN("len", "the {@code data} length, in bytes"),
 		Check(1)..int_p.OUT("error", "returns an error code"),
-		nullable..stb_vorbis_alloc_p.IN("alloc_buffer", "an ##STBVorbisAlloc struct"),
+		open_pushdata["alloc_buffer"],
 
 		returnDoc = "the ogg vorbis decoder. On failure, returns $NULL and sets {@code *error}."
 	)
@@ -243,7 +243,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 
 		const..charASCII_p.IN("filename", "the file name"),
 		Check(1)..int_p.OUT("error", "returns an error code"),
-		nullable..stb_vorbis_alloc_p.IN("alloc_buffer", "an ##STBVorbisAlloc struct"),
+		open_pushdata["alloc_buffer"],
 
 		returnDoc = "the ogg vorbis decoder. On failure, returns $NULL and sets {@code *error}."
 	)
@@ -318,9 +318,12 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 	int(
 		"get_frame_short",
 		"""
-		Decodes the next frame and return the number of samples per channel. The data is coerced to the number of channels you request according to the channel
-		coercion rules (see below). You must pass in the size of your buffer(s) so that stb_vorbis will not overwrite the end of the buffer. The maximum buffer
-		size needed can be gotten from #get_info(); however, the Vorbis I specification implies an absolute maximum of 4096 samples per channel.
+		Decodes the next frame and returns the number of <b>samples</b> per channel. Note that for interleaved data, you pass in the number of shorts (the size
+		of your array), but the return value is the number of samples per channel, not the total number of samples.
+
+		The data is coerced to the number of channels you request according to the channel coercion rules (see below). You must pass in the size of your
+		buffer(s) so that stb_vorbis will not overwrite the end of the buffer. The maximum buffer size needed can be gotten from #get_info(); however, the
+		Vorbis I specification implies an absolute maximum of 4096 samples per channel.
 
 		<h3>Channel coercion rules</h3>
 
