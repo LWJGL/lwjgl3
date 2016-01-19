@@ -112,10 +112,13 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"Prepares an ##FFICIF structure for use with #call().",
 
 		ffi_cif_p.IN("cif", "the ##FFICIF structure to prepare"),
-		ffi_abi.IN("abi", "the calling convention to use", ABI),
-		AutoSize("atypes")..unsigned_int.IN("nargs", "the number of arguments"),
-		ffi_type_p.IN("rtype", "points to an ##FFIType that describes the data type, size and alignment of the return value"),
-		nullable..ffi_type_pp.IN("atypes", "an array of {@code nargs} pointers to ##FFIType structs that describe the data type, size and alignment of each argument"),
+		ffi_abi.IN("abi", "the ABI to use; normally #DEFAULT_ABI is what you want", ABI),
+		AutoSize("atypes")..unsigned_int.IN("nargs", "the number of arguments that this function accepts"),
+		ffi_type_p.IN("rtype", "a pointer to an ##FFIType structure that describes the data type, size and alignment of the return value"),
+		nullable..ffi_type_pp.IN(
+			"atypes",
+			"an array of {@code nargs} pointers to ##FFIType structures that describe the data type, size and alignment of each argument"
+		),
 
 		returnDoc =
 		"""
@@ -126,14 +129,23 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 	ffi_status(
 		"prep_cif_var",
-		"Prepares an ##FFICIF structure for use with #call() for variadic functions.",
+		"""
+		Prepares an ##FFICIF structure for use with #call() for variadic functions.
+
+		Note that, different cif's must be prepped for calls to the same function when different numbers of arguments are passed.
+
+		Also note that a call to {@code ffi_prep_cif_var} with {@code nfixedargs == ntotalargs} is NOT equivalent to a call to #prep_cif().
+		""",
 
 		ffi_cif_p.IN("cif", "the ##FFICIF structure to prepare"),
 		ffi_abi.IN("abi", "the calling convention to use", ABI),
-		unsigned_int.IN("nfixedargs", "the number of fixed (non-variadic) arguments"),
-		AutoSize("atypes")..unsigned_int.IN("ntotalargs", "the total number of arguments"),
-		ffi_type_p.IN("rtype", "points to an ##FFIType that describes the data type, size and alignment of the return value"),
-		ffi_type_pp.IN("atypes", "an array of {@code ntotalargs} pointers to ##FFIType structs that describe the data type, size and alignment of each argument"),
+		unsigned_int.IN("nfixedargs", "the number of fixed arguments, prior to any variadic arguments. It must be greater than zero."),
+		AutoSize("atypes")..unsigned_int.IN("ntotalargs", "the total number of arguments, including variadic and fixed arguments"),
+		ffi_type_p.IN("rtype", "a pointer to an ##FFIType structure that describes the data type, size and alignment of the return value"),
+		ffi_type_pp.IN(
+			"atypes",
+			"an array of {@code ntotalargs} pointers to ##FFIType structures that describe the data type, size and alignment of each argument"
+		),
 
 		returnDoc =
 		"""
