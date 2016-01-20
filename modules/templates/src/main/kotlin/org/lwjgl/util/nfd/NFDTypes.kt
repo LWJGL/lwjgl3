@@ -2,11 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.nfd
+package org.lwjgl.util.nfd
 
 import org.lwjgl.generator.*
 
-val NFD_PACKAGE = "org.lwjgl.nfd"
+val NFD_PACKAGE = "org.lwjgl.util.nfd"
 
 fun config() {
 	packageInfo(

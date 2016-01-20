@@ -111,11 +111,11 @@ License terms: http://lwjgl.org/license.php
 
 		<compile if:true="${binding.nfd}">
 			<arguments>
-				<arg value="-I${src.include.rel}/nfd"/>
-				<arg value="-I${src.include.rel}/nfd/include"/>
-				<fileset dir="." includes="${src.include}/nfd/nfd_common.c"/>
-				<fileset dir="." includes="${src.include}/nfd/nfd_cocoa.m"/>
-				<fileset dir="." includes="${src.generated.native}/nfd/*.c"/>
+				<arg value="-I${src.include.rel}/util/nfd"/>
+				<arg value="-I${src.include.rel}/util/nfd/include"/>
+				<fileset dir="." includes="${src.include}/util/nfd/nfd_common.c"/>
+				<fileset dir="." includes="${src.include}/util/nfd/nfd_cocoa.m"/>
+				<fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
 			</arguments>
 		</compile>
 

@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.nfd.templates
+package org.lwjgl.util.nfd.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.nfd.*
+import org.lwjgl.util.nfd.*
 
 val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE, prefix = "NFD_", prefixMethod = "NFD_") {
 	nativeDirective(

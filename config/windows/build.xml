@@ -58,8 +58,6 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</cl>
 
-		<!-- Each binding is compiled separately to avoid command length limits in Windows cmd -->
-
 		<cl if:true="${binding.jawt}">
 			<arguments>
 				<fileset dir="." includes="${src.generated.native}/system/jawt/*.c"/>
@@ -76,18 +74,18 @@ License terms: http://lwjgl.org/license.php
 
 		<cl if:true="${binding.nfd}">
 			<arguments>
-				<arg value="/I${src.include}\nfd"/>
-				<arg value="/I${src.include}\nfd\include"/>
-				<fileset dir="." includes="${src.generated.native}/nfd/*.c"/>
+				<arg value="/I${src.include}\util\nfd"/>
+				<arg value="/I${src.include}\util\nfd\include"/>
+				<fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
 			</arguments>
 		</cl>
 
 		<cl flags="" if:true="${binding.nfd}">
 			<arguments>
-				<arg value="/I${src.include}\nfd"/>
-				<arg value="/I${src.include}\nfd\include"/>
-				<fileset dir="." includes="${src.include}/nfd/nfd_common.c"/>
-				<fileset dir="." includes="${src.include}/nfd/nfd_win.cpp"/>
+				<arg value="/I${src.include}\util\nfd"/>
+				<arg value="/I${src.include}\util\nfd\include"/>
+				<fileset dir="." includes="${src.include}/util/nfd/nfd_common.c"/>
+				<fileset dir="." includes="${src.include}/util/nfd/nfd_win.cpp"/>
 			</arguments>
 		</cl>
 

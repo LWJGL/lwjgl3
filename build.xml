@@ -168,9 +168,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" unless:true="${binding.egl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/glfw" if:true="${binding.glfw}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/nanovg" if:true="${binding.nanovg}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/nfd" if:true="${binding.nfd}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/openal" if:true="${binding.openal}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/opencl" if:true="${binding.opencl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" unless:true="${binding.opencl}"/>
@@ -179,6 +177,8 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/opengles" if:true="${binding.opengles}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
 			<!--
 			<arg value="-Xno-call-assertions"/>
 			<arg value="-Xno-param-assertions"/>
@@ -244,9 +244,7 @@ License terms: http://lwjgl.org/license.php
 
 			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
-			<include name="org/lwjgl/system/jawt/**" if:true="${binding.jawt}"/>
 			<include name="org/lwjgl/nanovg/**" if:true="${binding.nanovg}"/>
-			<include name="org/lwjgl/nfd/**" if:true="${binding.nfd}"/>
 			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
 			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
@@ -258,15 +256,15 @@ License terms: http://lwjgl.org/license.php
 
 			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
-			<include name="org/lwjgl/system/jawt/**" if:true="${binding.jawt}"/>
 			<include name="org/lwjgl/nanovg/**" if:true="${binding.nanovg}"/>
-			<include name="org/lwjgl/nfd/**" if:true="${binding.nfd}"/>
 			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
 			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
 			<include name="org/lwjgl/opengles/**" if:true="${binding.opengles}"/>
 			<include name="org/lwjgl/ovr/**" if:true="${binding.ovr}"/>
 			<include name="org/lwjgl/stb/**" if:true="${binding.stb}"/>
+			<include name="org/lwjgl/system/jawt/**" if:true="${binding.jawt}"/>
+			<include name="org/lwjgl/util/nfd/**" if:true="${binding.nfd}"/>
 		</patternset>
 	</target>
 

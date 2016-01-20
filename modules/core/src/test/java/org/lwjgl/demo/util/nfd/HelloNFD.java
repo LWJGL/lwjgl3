@@ -2,20 +2,20 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.demo.nfd;
+package org.lwjgl.demo.util.nfd;
 
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
-import org.lwjgl.nfd.NFDPathSet;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.Platform;
+import org.lwjgl.util.nfd.NFDPathSet;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.nfd.NativeFileDialog.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.util.nfd.NativeFileDialog.*;
 
 public final class HelloNFD {
 
@@ -24,7 +24,7 @@ public final class HelloNFD {
 
 	public static void main(String[] args) {
 		final int mod;
-		final String modDescr;
+		String modDescr;
 		if ( Platform.get() == Platform.MACOSX ) {
 			mod = GLFW_MOD_SUPER;
 			modDescr = "Cmd";
