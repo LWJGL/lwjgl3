@@ -217,8 +217,8 @@ val GLFWwindowsizefun = "GLFWwindowsizefun".callback(
 	GLFW_PACKAGE, void, "GLFWWindowSizeCallback",
 	"Will be called when the specified window is resized.",
 	GLFWwindow.IN("window", "the window that was resized"),
-	int.IN("width", "the new width, in pixels, of the window"),
-	int.IN("height", "the new height, in pixels, of the window")
+	int.IN("width", "the new width, in screen coordinates, of the window"),
+	int.IN("height", "the new height, in screen coordinates, of the window")
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowSizeCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
