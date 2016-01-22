@@ -47,11 +47,20 @@ void print_string(float x, float y, char *text, float r, float g, float b)
 
 	int(
 		"easy_font_width",
-		"Takes a string without newlines and returns the horizontal size.",
+		"Takes a string and returns the horizontal size.",
 
 		charASCII_p.IN("text", "an ASCII string"),
 
 		returnDoc = "the horizontal size, in pixels"
+	)
+
+	int(
+		"easy_font_height",
+		"Takes a string and returns the vertical size (which can vary if {@code text} has newlines).",
+
+		charASCII_p.IN("text", "an ASCII string"),
+
+		returnDoc = "the vertical size, in pixels"
 	)
 
 	int(
