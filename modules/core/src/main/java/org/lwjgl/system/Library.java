@@ -58,6 +58,9 @@ public final class Library {
 				throw ule;
 			}
 		}
+
+		// Ensures MemoryAllocator.config has run before any binding is used.
+		MemoryUtil.getAllocator();
 	}
 
 	private Library() {}
