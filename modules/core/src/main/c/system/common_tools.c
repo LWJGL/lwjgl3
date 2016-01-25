@@ -20,12 +20,14 @@ freePROC lwjgl_free = free;
 	aligned_allocPROC lwjgl_aligned_alloc = _aligned_malloc;
 	aligned_freePROC lwjgl_aligned_free = _aligned_free;
 #else
+	#ifndef __USE_ISOC11
 	static void* aligned_alloc(size_t alignment, size_t size) {
 		void *p;
 		if ( !posix_memalign(&p, alignment, size) )
 			return p;
 		return NULL;
 	}
+	#endif
 	aligned_allocPROC lwjgl_aligned_alloc = aligned_alloc;
 	aligned_freePROC lwjgl_aligned_free = free;
 #endif
