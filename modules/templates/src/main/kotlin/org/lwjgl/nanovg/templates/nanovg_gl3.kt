@@ -86,7 +86,7 @@ val nanovg_gl3 = dependsOn(Binding.OPENGL) {
 
 		void(
 			"luBindFramebuffer",
-			"Binds the framebuffer object associated with the specified #NVGLUFramebuffer.",
+			"Binds the framebuffer object associated with the specified ##NVGLUFramebuffer.",
 
 			ctx,
 			nullable..NVGLUframebuffer_p.IN("fb", "the framebuffer to bind")
@@ -104,7 +104,7 @@ val nanovg_gl3 = dependsOn(Binding.OPENGL) {
 
 		void(
 			"luDeleteFramebuffer",
-			"Deletes an #NVGLUFramebuffer.",
+			"Deletes an ##NVGLUFramebuffer.",
 
 			ctx,
 			NVGLUframebuffer_p.IN("fb", "the framebuffer to delete")

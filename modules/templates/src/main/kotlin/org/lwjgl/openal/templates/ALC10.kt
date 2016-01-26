@@ -217,7 +217,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"""
 		Obtains string value(s) from ALC.
 
-		<b>LWJGL note</b>: Use ALC##getStringList() for those tokens that return multiple values.
+		<b>LWJGL note</b>: Use ALUtil##getStringList() for those tokens that return multiple values.
 		""",
 
 		nullable..ALCdevice_p.IN("deviceHandle", "the device to query"),

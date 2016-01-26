@@ -110,7 +110,7 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 
 	IntConstant(
 		"""
-		Event names. Used in "type" field in ##XEvent structures. Not to be confused with event masks above. They start from 2 because 0 and 1 are reserved in
+		Event names. Used in "type" field in {@code XEvent} structures. Not to be confused with event masks above. They start from 2 because 0 and 1 are reserved in
 		the protocol for errors and replies.
 		""",
 
@@ -284,14 +284,14 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 	)
 
 	IntConstant(
-		"For Xlib#XCreateColormap().",
+		"For #XCreateColormap().",
 
 		"AllocNone"..0,
 		"AllocAll"..1
 	)
 
 	IntConstant(
-		"Used in Xlib#XSetInputFocus(), Xlib#XGetInputFocus().",
+		"Used in XSetInputFocus(), XGetInputFocus().",
 
 		"RevertToNone" expr "None",
 		"RevertToPointerRoot" expr "PointerRoot",
@@ -299,7 +299,7 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 	)
 
 	IntConstant(
-		"Window classes used by Xlib#XCreateWindow().",
+		"Window classes used by #XCreateWindow().",
 
 		"InputOutput"..1,
 		"InputOnly"..2
@@ -515,7 +515,7 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 		Deletes the association between the {@code colormap} resource ID and the {@code colormap} and frees the {@code colormap} storage. However, this function
 		has no effect on the default colormap for a screen. If the specified {@code colormap} is an installed map for a screen, it is uninstalled. If the
 		specified {@code colormap} is defined as the {@code colormap} for a window, {@code XFreeColormap()} changes the colormap associated with the window to
-		X#GrabSuccess() and generates a {@code ColormapNotify} event. X does not define the colors displayed for a window with a colormap of X#GrabSuccess.
+		#None and generates a {@code ColormapNotify} event. X does not define the colors displayed for a window with a colormap of #None.
 		""",
 
 		DISPLAY,
@@ -544,9 +544,9 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 		unsigned_int.IN("width", "the window width"),
 		unsigned_int.IN("height", "the window height"),
 		unsigned_int.IN("border_width", "the border width"),
-		int.IN("depth", "the window's depth. A depth of X#GrabSuccess() means the depth is taken from the parent."),
-		unsigned_int.IN("windowClass", "the created window's class", "X#InputOutput X#InputOnly X#CopyFromParent"),
-		Visual_p.IN("visual", "the visual type. A visual of X#GrabSuccess() means the visual type is taken from the parent."),
+		int.IN("depth", "the window's depth. A depth of #CopyFromParent means the depth is taken from the parent."),
+		unsigned_int.IN("windowClass", "the created window's class", "#InputOutput #InputOnly #CopyFromParent"),
+		Visual_p.IN("visual", "the visual type. A visual of #CopyFromParent means the visual type is taken from the parent."),
 		unsigned_long.IN(
 			"valuemask",
 			"""

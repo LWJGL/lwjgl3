@@ -33,7 +33,7 @@ val EXT_polygon_offset_clamp = "EXTPolygonOffsetClamp".nativeClassGLES("EXT_poly
 		{@code factor} scales the maximum depth slope of the polygon, and {@code units} scales an implementation-dependent constant that relates to the usable
 		resolution of the depth buffer. The resulting values are summed to produce the polygon offset value, which may then be clamped to a minimum or maximum
 		value specified by {@code clamp}. The values {@code factor}, {@code units}, and {@code clamp} may each be positive, negative, or zero. Calling the
-		command GL11#PolygonOffset() is equivalent to calling the command PolygonOffsetClampEXT with {@code clamp} equal to zero."
+		command GLES20#PolygonOffset() is equivalent to calling the command PolygonOffsetClampEXT with {@code clamp} equal to zero."
 		""",
 
 		GLfloat.IN("factor", "scales the maximum depth slope of the polygon"),
