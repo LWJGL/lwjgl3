@@ -449,6 +449,7 @@ License terms: http://lwjgl.org/license.php
 			doclet="org.lwjgl.system.ExcludeDoclet"
 			docletpath="${bin.templates}"
 		    maxmemory="1G"
+		    failonerror="true"
 		>
 			<doctitle><![CDATA[<h1>Lightweight Java Game Library</h1>]]></doctitle>
 			<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="http://lwjgl.org/license.php">License terms</a>.</i>]]></bottom>
