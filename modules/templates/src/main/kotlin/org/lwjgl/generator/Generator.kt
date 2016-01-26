@@ -207,8 +207,12 @@ class Generator(
 			if ( !(nativeClass.packageName.equals(packageName)) )
 				throw IllegalStateException("NativeClass ${nativeClass.className} has invalid package [${nativeClass.packageName}]. Should be: [$packageName]")
 
-			if ( nativeClass.hasBody )
+			if ( nativeClass.hasBody ) {
+				if ( nativeClass.binding != null )
+					nativeClass.functions.filter { !it.hasCustomJNI }.forEach { JNI.register(it) }
+
 				generate(nativeClass, max(packageLastModified, GENERATOR_LAST_MODIFIED))
+			}
 		}
 	}
 
