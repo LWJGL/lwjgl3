@@ -1274,6 +1274,41 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		)
 	)
 
+	IntConstant(
+		"Actions for #SetLayeredWindowAttributes().",
+
+		"LWA_COLORKEY"..0x00000001,
+		"LWA_ALPHA"..0x00000002
+	)
+
+	SaveLastError..BOOL(
+		"SetLayeredWindowAttributes",
+		"",
+
+		HWND.IN(
+			"hwnd",
+			"""
+			a handle to the layered window. A layered window is created by specifying #WS_EX_LAYERED when creating the window with the #CreateWindowEx()
+			function or by setting #WS_EX_LAYERED via #SetWindowLongPtr() after the window has been created.
+			"""
+		),
+		COLORREF.IN(
+			"crKey",
+			"""
+			the transparency color key (0x00bbggrr) to be used when composing the layered window. All pixels painted by the window in this color will be
+			transparent.
+			"""
+		),
+		BYTE.IN(
+			"bAlpha",
+			"""
+			the alpha value used to describe the opacity of the layered window. When {@code bAlpha} is 0, the window is completely transparent. When
+			{@code bAlpha} is 255, the window is opaque.
+			"""
+		),
+		DWORD.IN("dwFlags", "an action to be taken", "#LWA_COLORKEY #LWA_ALPHA", LinkMode.BITFIELD)
+	)
+
 	NativeName("LoadIconW")..SaveLastError..HICON(
 		"LoadIcon",
 		"Loads the specified icon resource from the executable (.exe) file associated with an application instance.",

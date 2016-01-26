@@ -76,6 +76,8 @@ val HBRUSH = typedef(HANDLE, "HBRUSH")
 val HTOUCHINPUT = typedef(HANDLE, "HTOUCHINPUT")
 val HMONITOR = typedef(HANDLE, "HMONITOR")
 
+val COLORREF = typedef(DWORD, "COLORREF")
+
 val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 	documentation = "Contains the x and y coordinates of a point."
 
