@@ -105,8 +105,6 @@ class NativeClassFunction(
 
 	init {
 		validate();
-		if ( !hasCustomJNI )
-			JNI.register(this)
 	}
 
 	val nativeName: String get() = if ( has(NativeName) ) this[NativeName].name else "\"$name\""

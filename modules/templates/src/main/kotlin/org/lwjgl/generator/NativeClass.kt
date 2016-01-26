@@ -253,8 +253,10 @@ class NativeClass(
 			} )
 				println("import static org.lwjgl.system.APIUtil.*;")
 			println("import static org.lwjgl.system.Checks.*;")
-			if ( binding != null )
+			if ( binding != null ) {
+				functions.filter { !it.hasCustomJNI }.forEach { JNI.register(it) }
 				println("import static org.lwjgl.system.JNI.*;")
+			}
 			if ( hasNIO ) {
 				println("import static org.lwjgl.system.MemoryUtil.*;")
 				if ( functions.any { it.hasParam { it.nativeType.mapping === PointerMapping.DATA_POINTER } } )
