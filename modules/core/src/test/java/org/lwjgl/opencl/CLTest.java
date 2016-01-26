@@ -44,13 +44,7 @@ public class CLTest {
 		}
 	};
 
-	private static final CLContextCallback CONTEXT_CALLBACK = new CLContextCallback() {
-		@Override
-		public void invoke(long errinfo, long private_info, long cb, long user_data) {
-			System.err.println("[LWJGL] cl_context_callback");
-			System.err.println("\tInfo: " + memDecodeUTF8(errinfo));
-		}
-	};
+	private static CLContextCallback CONTEXT_CALLBACK;
 
 	@BeforeClass
 	private void createCL() {
@@ -89,6 +83,14 @@ public class CLTest {
 
 	private static void contextTest(Filter<CLPlatform> platformFilter, ContextTest test) {
 		try {
+			CONTEXT_CALLBACK = new CLContextCallback() {
+				@Override
+				public void invoke(long errinfo, long private_info, long cb, long user_data) {
+					System.err.println("[LWJGL] cl_context_callback");
+					System.err.println("\tInfo: " + memDecodeUTF8(errinfo));
+				}
+			};
+
 			CL.create();
 			List<CLPlatform> platforms = CLPlatform.getPlatforms(platformFilter);
 			if ( platforms.isEmpty() ) {
@@ -106,6 +108,8 @@ public class CLTest {
 			}
 		} finally {
 			CL.destroy();
+
+			CONTEXT_CALLBACK.release();
 		}
 	}
 

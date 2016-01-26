@@ -62,6 +62,9 @@ public class StructTest {
 		assertEquals(dst.alignment(), src.alignment());
 		assertEquals(dst.type(), src.type());
 		assertEquals(FFIType.nelements(dst.address(), 0), FFIType.nelements(src.address(), 0));
+
+		dst.free();
+		src.free();
 	}
 
 	public void testStructBuffer() {
@@ -100,6 +103,7 @@ public class StructTest {
 		assertEquals(copy.type(), NULL);
 		assertEquals(copy.elements(0), null);
 
+		copy.free();
 		memFree(b);
 	}
 
