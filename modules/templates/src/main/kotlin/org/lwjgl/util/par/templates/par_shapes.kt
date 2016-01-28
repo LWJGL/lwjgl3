@@ -18,17 +18,10 @@ val par_shapes = "ParShapes".nativeClass(packageName = PAR_PACKAGE, prefix = "pa
 
 	nativeDirective(
 		"""#define PAR_SHAPES_IMPLEMENTATION
-#define PAR_HELPERS 1
-#define PAR_PI (3.14159265359)
-#define PAR_MIN(a, b) (a > b ? b : a)
-#define PAR_MAX(a, b) (a > b ? a : b)
-#define PAR_CLAMP(v, lo, hi) PAR_MAX(lo, PAR_MIN(hi, v))
 #define PAR_MALLOC(T, N) ((T*) lwjgl_malloc(N * sizeof(T)))
 #define PAR_CALLOC(T, N) ((T*) lwjgl_calloc(N, sizeof(T)))
 #define PAR_REALLOC(T, BUF, N) ((T*) lwjgl_realloc(BUF, sizeof(T) * N))
 #define PAR_FREE(BUF) lwjgl_free(BUF)
-#define PAR_SWAP(T, A, B) { T tmp = B; B = A; A = tmp; }
-#define PAR_SQR(a) (a * a)
 DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4242 4244 4305 4711 4738))
