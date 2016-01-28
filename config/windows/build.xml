@@ -107,6 +107,13 @@ License terms: http://lwjgl.org/license.php
 			<mapper type="regexp" from="(\w+)\.cpp$" to="\1.obj"/>
 		</apply>
 
+		<cl if:true="${binding.par}">
+			<arguments>
+				<arg value="/I${src.include}\util\par"/>
+				<fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
+			</arguments>
+		</cl>
+
 		<cl if:true="${binding.stb}">
 			<arguments>
 				<arg value="/I${src.include}\stb"/>

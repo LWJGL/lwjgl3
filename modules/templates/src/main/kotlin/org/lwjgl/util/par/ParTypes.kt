@@ -1,0 +1,30 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: http://lwjgl.org/license.php
+ */
+package org.lwjgl.util.par
+
+import org.lwjgl.generator.*
+
+val PAR_PACKAGE = "org.lwjgl.util.par"
+
+fun config() {
+	packageInfo(
+		PAR_PACKAGE,
+		"""
+		Contains bindings to the <a href="https://github.com/prideout/par">par</a> library.
+		"""
+	)
+}
+
+val par_shapes_mesh = struct(PAR_PACKAGE, "ParShapesMesh", nativeName = "par_shapes_mesh", mutable = false) {
+	documentation = "The {@code par_shapes.h} mesh structure."
+
+	float_p.member("points", "a flat list of 3-tuples (X Y Z X Y Z...) for the vertex positions")
+    int.member("npoints", "the number of points")
+    uint16_t_p.member("triangles", "flat list of 3-tuples (I J K I J K...)")
+    int.member("ntriangles", "the number of triangles")
+    float_p.member("normals", "an optional list of 3-tuples (X Y Z X Y Z...) for the vertex normals")
+    float_p.member("tcoords", "an optional list of 2-tuples (U V U V U V...) for the vertex texture coordinates")
+}.nativeType
+val par_shapes_mesh_p = par_shapes_mesh.p

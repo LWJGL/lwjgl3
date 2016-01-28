@@ -179,6 +179,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
 			<!--
 			<arg value="-Xno-call-assertions"/>
 			<arg value="-Xno-param-assertions"/>
@@ -265,6 +266,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/stb/**" if:true="${binding.stb}"/>
 			<include name="org/lwjgl/system/jawt/**" if:true="${binding.jawt}"/>
 			<include name="org/lwjgl/util/nfd/**" if:true="${binding.nfd}"/>
+			<include name="org/lwjgl/util/par/**" if:true="${binding.par}"/>
 		</patternset>
 	</target>
 
@@ -363,9 +365,12 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
 			<include name="org/lwjgl/demo/stb/**" if:true="${stb_glfw}"/>
 
+			<include name="org/lwjgl/demo/util/par/**" if:true="${par}"/>
+
 			<!-- Tests -->
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
 			<include name="org/lwjgl/system/**"/>
+			<include name="org/lwjgl/util/**"/>
 		</lwjgl.javac>
 	</target>
 

@@ -39,8 +39,8 @@ enum class Binding(val key: String) {
 	OPENCL("binding.opencl"),
 	OPENGL("binding.opengl"),
 	OPENGLES("binding.opengles"),
-
 	OVR("binding.ovr"),
+	PAR("binding.par"),
 	STB("binding.stb"),
 
 	MACOSX_OBJC("binding.macosx.objc");
@@ -86,6 +86,7 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.ovr", Binding.OVR)
 		generate("org.lwjgl.stb", Binding.STB)
 		generate("org.lwjgl.util.nfd", Binding.NFD)
+		generate("org.lwjgl.util.par", Binding.PAR)
 
 		generate("org.lwjgl.system.jawt", Binding.JAWT)
 		generate("org.lwjgl.system.jemalloc")

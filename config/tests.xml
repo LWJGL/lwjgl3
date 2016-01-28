@@ -9,6 +9,7 @@
 			<package name="org.lwjgl.system"/>
 			<package name="org.lwjgl.system.libffi"/>
 			<package name="org.lwjgl.system.simd"/>
+			<package name="org.lwjgl.util.par"/>
 		</packages>
 	</test>
 </suite>

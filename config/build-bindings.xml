@@ -10,19 +10,17 @@ This script is included in /config/build-definitions.xml.
 
 	<!-- // ========== BINDING FLAGS ======== // -->
 
-	<property name="binding.stb" value="true"/>
-
+	<property name="binding.egl" value="true"/>
 	<property name="binding.glfw" value="true"/>
 	<property name="binding.jawt" value="true"/>
 	<property name="binding.nanovg" value="true"/>
 	<property name="binding.nfd" value="true"/>
-
 	<property name="binding.openal" value="true"/>
 	<property name="binding.opencl" value="true"/>
 	<property name="binding.opengl" value="true"/>
 	<property name="binding.opengles" value="true"/>
-
-	<property name="binding.egl" value="true"/>
+	<property name="binding.par" value="true"/>
+	<property name="binding.stb" value="true"/>
 
 	<!-- Set the path to the Oculus SDK to enable. -->
 	<property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
