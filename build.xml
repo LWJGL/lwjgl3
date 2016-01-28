@@ -343,15 +343,9 @@ License terms: http://lwjgl.org/license.php
 			<src path="${src.tests}/"/>
 
 			<!-- Demos -->
-			<include name="org/lwjgl/demo/util/**"/>
-			<include name="org/lwjgl/demo/windows/**" if:set="platform.windows"/>
-			<include name="org/lwjgl/demo/xxhash/**"/>
-
 			<include name="org/lwjgl/demo/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/demo/glfw/**" if:true="${binding.glfw}"/>
-			<include name="org/lwjgl/demo/jawt/**" if:true="${binding.jawt}"/>
 			<include name="org/lwjgl/demo/nanovg/**" if:true="${nanovg}"/>
-			<include name="org/lwjgl/demo/nfd/**" if:true="${nfd}"/>
 
 			<include name="org/lwjgl/demo/openal/**" if:true="${binding.openal}"/>
 			<exclude name="org/lwjgl/demo/openal/ALCDemo.java" unless:true="${openal_stb}"/>
@@ -365,7 +359,12 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
 			<include name="org/lwjgl/demo/stb/**" if:true="${stb_glfw}"/>
 
-			<include name="org/lwjgl/demo/util/par/**" if:true="${par}"/>
+			<include name="org/lwjgl/demo/system/jawt/**" if:true="${binding.jawt}"/>
+			<include name="org/lwjgl/demo/system/xxhash/**"/>
+
+			<include name="org/lwjgl/demo/util/*.java"/>
+			<include name="org/lwjgl/demo/util/nfd/**" if:true="${nfd}"/>
+			<include name="org/lwjgl/demo/util/par/**" if:true="${binding.par}"/>
 
 			<!-- Tests -->
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>

@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.demo.jawt;
+package org.lwjgl.demo.system.jawt;
 
 import org.lwjgl.system.Platform;
 

@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.demo.xxhash;
+package org.lwjgl.demo.system.xxhash;
 
 import org.lwjgl.system.xxhash.XXH64State;
 

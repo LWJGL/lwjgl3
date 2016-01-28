@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.demo.jawt;
+package org.lwjgl.demo.system.jawt;
 
 import org.lwjgl.demo.opengl.AbstractGears;
-import org.lwjgl.system.jawt.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.WGL;
+import org.lwjgl.system.jawt.*;
 import org.lwjgl.system.windows.PIXELFORMATDESCRIPTOR;
 import org.lwjgl.system.windows.WinBase;
 
