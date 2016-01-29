@@ -208,9 +208,12 @@ public final class Image {
 		int texID = glGenTextures();
 
 		glBindTexture(GL_TEXTURE_2D, texID);
-		if ( comp == 3 )
+
+		if ( comp == 3 ) {
+			if ( (w & 3) != 0 )
+				glPixelStorei(GL_UNPACK_ALIGNMENT, 2 - (w & 1));
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-		else {
+		} else {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 
 			glEnable(GL_BLEND);
