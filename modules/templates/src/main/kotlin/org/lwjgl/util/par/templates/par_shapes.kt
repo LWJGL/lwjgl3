@@ -309,7 +309,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
 
 		const..par_shapes_mesh_p.IN("mesh", "the mesh to weld"),
 		float.IN("epsilon", "the maximum distance to consider when welding vertices"),
-		nullable..uint16_t_p.OUT(
+		nullable..PAR_SHAPES_T_p.OUT(
 			"mapping",
 			"null, or a pointer to {@code npoints} 16-bit integers, which gets filled with the mapping from old vertex indices to new indices"
 		)

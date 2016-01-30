@@ -381,6 +381,14 @@ public final class ParShapesDemo {
 			print(0, i * 10, "(" + (i + 1) + ") " + meshes[i], color, buffer);
 		}
 
+		if ( mesh != null ) {
+			setColor(color, 255, 255, 255, 255);
+			print(0, meshes.length * 10 + 20, "Triangle count: " + mesh.ntriangles(), color, buffer);
+			if ( 0xFFFF < mesh.npoints() ) // GL_UNSIGNED_SHORT
+				setColor(color, 255, 0, 0, 255);
+			print(0, meshes.length * 10 + 10, "Vertex count: " + mesh.npoints(), color, buffer);
+		}
+
 		String[] controls = {
 			"(E) Export to .obj",
 			"(W) Wireframe:",
