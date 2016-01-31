@@ -243,8 +243,8 @@ val stbtt_packedchar_p = struct_p(STB_PACKAGE, "STBTTPackedchar", nativeName = "
 	float.member("yoff2", "")
 }
 
-val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", nativeName = "stbtt_pack_range", mutable = false) {
-	documentation = "A range of packed character data, returned by STBTruetype#stbtt_PackFontRanges()"
+val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", nativeName = "stbtt_pack_range") {
+	documentation = "A range of packed character data, used by STBTruetype#stbtt_PackFontRanges()"
 
 	float.member("font_size", "")
 	int.member("first_unicode_codepoint_in_range", "if non-zero, then the chars are continuous, and this is the first codepoint")

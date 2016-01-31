@@ -357,7 +357,7 @@ int main(int arg, char **argv)
 		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
 		unsigned_char_p.IN("fontdata", "the font data"),
 		int.IN("font_index", "the font index (use 0 if you don't know what that is"),
-		StructBuffer..stbtt_pack_range_p.OUT("ranges", "an array of ##STBTTPackRange structs"),
+		StructBuffer..stbtt_pack_range_p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
 		AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
 
 		returnDoc = "1 on success, 0 on failure"
@@ -432,7 +432,7 @@ int main(int arg, char **argv)
 
 		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
 		stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-		StructBuffer..stbtt_pack_range_p.IN("ranges", "an array of ##STBTTPackRange structs"),
+		StructBuffer..stbtt_pack_range_p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
 		AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
 		stbrp_rect_p.OUT("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges.")
 	)
