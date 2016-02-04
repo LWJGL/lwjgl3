@@ -208,7 +208,7 @@ class NativeClass(
 	val hasNativeFunctions: Boolean
 		get() = _functions.isNotEmpty()
 
-	public val link: String get() = "{@link ${this.className} ${this.templateName}}"
+	val link: String get() = "{@link ${this.className} ${this.templateName}}"
 
 	override fun processDocumentation(documentation: String): String = processDocumentation(documentation, prefixConstant, prefixMethod)
 

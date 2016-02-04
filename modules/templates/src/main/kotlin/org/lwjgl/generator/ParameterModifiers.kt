@@ -127,7 +127,7 @@ class Check(
 	companion object : ModifierKey<Check>
 
 	override val isSpecial = true
-	override protected fun validate(param: Parameter) {
+	override fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The Check modifier can only be applied on pointer types ${param.name}")
 
@@ -154,7 +154,7 @@ class Nullable internal constructor(val optional: Boolean) : ParameterModifier()
 	companion object : ModifierKey<Nullable>
 
 	override val isSpecial = optional
-	override protected fun validate(param: Parameter) {
+	override fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The nullable modifier can only be applied on pointer types.")
 	}
@@ -170,7 +170,7 @@ class Terminated(val value: String) : ParameterModifier() {
 	companion object : ModifierKey<Terminated>
 
 	override val isSpecial = true
-	override protected fun validate(param: Parameter) {
+	override fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The NullTerminated modifier can only be applied on pointer types.")
 
@@ -238,7 +238,7 @@ class MultiType(vararg val types: PointerMapping) : ParameterModifier() {
 	}
 
 	override val isSpecial = true
-	override protected fun validate(param: Parameter) {
+	override fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The MultiType modifier can only be applied on pointer types.")
 
@@ -258,7 +258,7 @@ class Return(
 	companion object : ModifierKey<Return>
 
 	override val isSpecial = true
-	override protected fun validate(param: Parameter) {
+	override fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The Return modifier can only be applied on pointer types.")
 
@@ -278,7 +278,7 @@ class SingleValue(val newName: String) : ParameterModifier() {
 	companion object : ModifierKey<SingleValue>
 
 	override val isSpecial = true
-	override protected fun validate(param: Parameter) {
+	override fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on pointer types.")
 
@@ -302,7 +302,7 @@ class PointerArray(
 	companion object : ModifierKey<PointerArray>
 
 	override val isSpecial = true
-	override protected fun validate(param: Parameter) {
+	override fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer types.")
 
@@ -324,7 +324,7 @@ class MapPointer(
 	companion object : ModifierKey<MapPointer>
 
 	override val isSpecial = true
-	override protected fun validate(returns: ReturnValue) {
+	override fun validate(returns: ReturnValue) {
 		if ( returns.nativeType !is PointerType )
 			throw IllegalArgumentException("The MapPointer modifier can only be applied on pointer types.")
 
@@ -340,7 +340,7 @@ class Construct(
 	companion object : ModifierKey<Construct>
 
 	override val isSpecial = true
-	override protected fun validate(returns: ReturnValue) {
+	override fun validate(returns: ReturnValue) {
 		if ( returns.nativeType !is ObjectType )
 			throw IllegalArgumentException("The Construct modifier can only be applied on object types.")
 	}

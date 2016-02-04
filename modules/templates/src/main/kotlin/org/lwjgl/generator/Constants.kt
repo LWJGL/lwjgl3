@@ -113,7 +113,7 @@ class ConstantBlock<T : Any>(
 			}
 
 			if ( rootBlock.isNotEmpty() )
-				ConstantBlock(nativeClass, access, IntConstant, this@ConstantBlock.documentation, *rootBlock.toTypedArray()).generate(writer)
+				ConstantBlock(nativeClass, access, IntConstant, this@ConstantBlock.documentation, *rootBlock.toArray(emptyArray())).generate(writer)
 
 			for (b in enumBlocks)
 				b.generate(writer)
