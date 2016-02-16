@@ -27,5 +27,5 @@ val nfdpathset_t_p = struct_p(NFD_PACKAGE, "NFDPathSet", nativeName = "nfdpathse
 	documentation = "An opaque data structure to be used with NativeFileDialog##NFD_OpenDialogMultiple()."
 }
 
-val nfdresult_t = typedef(int, "nfdresult_t")
+val nfdresult_t = "nfdresult_t".enumType
 

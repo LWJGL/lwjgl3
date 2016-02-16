@@ -29,10 +29,10 @@ val ovrResult = IntegerType("ovrResult", PrimitiveMapping.INT)
 val ovrSession = "ovrSession".opaque_p
 val ovrSession_p = ovrSession.p
 
-val ovrHmdType = typedef(int, "ovrHmdType")
-val ovrEyeType = typedef(int, "ovrEyeType")
-val ovrRenderAPIType = typedef(int, "ovrRenderAPIType")
-val ovrLayerType = typedef(int, "ovrLayerType")
+val ovrHmdType = "ovrHmdType".enumType
+val ovrEyeType = "ovrEyeType".enumType
+val ovrRenderAPIType = "ovrRenderAPIType".enumType
+val ovrLayerType = "ovrLayerType".enumType
 
 val ovrEye_Count = 2
 

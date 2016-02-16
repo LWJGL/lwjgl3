@@ -22,8 +22,8 @@ fun config() {
 	)
 }
 
-val ffi_abi = typedef(int, "ffi_abi")
-val ffi_status = typedef(int, "ffi_status")
+val ffi_abi = "ffi_abi".enumType
+val ffi_status = "ffi_status".enumType
 
 val FFI_FN_TYPE = "FFI_FN_TYPE".opaque_p
 

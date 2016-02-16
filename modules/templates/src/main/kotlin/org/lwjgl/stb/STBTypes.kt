@@ -119,10 +119,10 @@ val stbi_io_callbacks_p = struct_p(STB_PACKAGE, "STBIIOCallbacks", nativeName = 
 val stbir_uint16 = typedef(unsigned_short, "stbir_uint16")
 val stbir_uint16_p = stbir_uint16.p
 
-val stbir_edge = typedef(int, "stbir_edge")
-val stbir_filter = typedef(int, "stbir_filter")
-val stbir_colorspace = typedef(int, "stbir_colorspace")
-val stbir_datatype = typedef(int, "stbir_datatype")
+val stbir_edge = "stbir_edge".enumType
+val stbir_filter = "stbir_filter".enumType
+val stbir_colorspace = "stbir_colorspace".enumType
+val stbir_datatype = "stbir_datatype".enumType
 
 // stb_image_write.h
 

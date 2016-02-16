@@ -32,4 +32,4 @@ val XXH64_state_t_p = struct_p(XXHASH_PACKAGE, "XXH64State", nativeName = "XXH64
 	documentation = "State used by the advanced 64-bit {@link XXHash} functions."
 }
 
-val XXH_errorcode = typedef(int, "XXH_errorcode")
+val XXH_errorcode = "XXH_errorcode".enumType

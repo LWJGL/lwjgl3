@@ -18,11 +18,11 @@ val CGLPBufferObj_p = CGLPBufferObj.p
 
 val CGLShareGroupObj = "CGLShareGroupObj".opaque_p
 
-val CGLError = EnumType("CGLError")
-val CGLPixelFormatAttribute = EnumType("CGLPixelFormatAttribute")
-val CGLContextEnable = EnumType("CGLContextEnable")
-val CGLRendererProperty = EnumType("CGLRendererProperty")
-val CGLContextParameter = EnumType("CGLContextParameter")
-val CGLGlobalOption = EnumType("CGLGlobalOption")
+val CGLError = "CGLError".enumType
+val CGLPixelFormatAttribute = "CGLPixelFormatAttribute".enumType
+val CGLContextEnable = "CGLContextEnable".enumType
+val CGLRendererProperty = "CGLRendererProperty".enumType
+val CGLContextParameter = "CGLContextParameter".enumType
+val CGLGlobalOption = "CGLGlobalOption".enumType
 
 val CGLPixelFormatAttribute_p = CGLPixelFormatAttribute.p

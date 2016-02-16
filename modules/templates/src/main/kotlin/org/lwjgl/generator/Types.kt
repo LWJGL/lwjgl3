@@ -37,8 +37,8 @@ open class PrimitiveType(name: String, mapping: PrimitiveMapping) : NativeType(n
 
 // Specialization for integers.
 open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false) : PrimitiveType(name, mapping)
+val String.enumType: IntegerType get() = IntegerType(this, PrimitiveMapping.INT)
 
-open class EnumType(name: String) : IntegerType(name, PrimitiveMapping.INT, unsigned = true)
 // Specialization for string characters.
 class CharType(name: String, mapping: CharMapping) : PrimitiveType(name, mapping)
 
