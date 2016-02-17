@@ -70,6 +70,7 @@ class AutoSize(
 			ParameterType.IN    -> if ( when ( param.nativeType.mapping ) {
 				PrimitiveMapping.SHORT,
 				PrimitiveMapping.INT,
+				PrimitiveMapping.LONG,
 				PrimitiveMapping.POINTER -> false
 				else                     -> true
 			} )
