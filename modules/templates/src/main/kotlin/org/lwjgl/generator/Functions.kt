@@ -166,7 +166,7 @@ class NativeClassFunction(
 	val hasExplicitFunctionAddress: Boolean
 		get() = parameters.isNotEmpty() && parameters[0] === EXPLICIT_FUNCTION_ADDRESS
 
-	val hasNativeCode: Boolean
+	private val hasNativeCode: Boolean
 		get() = (has(Code) && this[Code].let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || parameters.contains(JNI_ENV)
 
 	val hasCustomJNI: Boolean
@@ -181,17 +181,22 @@ class NativeClassFunction(
 	private val ReturnValue.isStructValue: Boolean
 		get() = nativeType is StructType && !nativeType.includesPointer
 
-	internal val returnsStructValue: Boolean
-		get() = returns.isStructValue && !hasParam { it has AutoSizeResult }
-
 	private val returnsJavaMethodType: String
-		get() = if ( returnsStructValue ) "void" else returns.javaMethodType
+		get() = if ( returns.nativeType is StructType ) {
+			if ( !returns.nativeType.includesPointer )
+				"void"
+			else if ( hasParam { it has AutoSizeResult } )
+				"${returns.javaMethodType}.Buffer"
+			else
+				returns.javaMethodType
+		} else
+			returns.javaMethodType
 
 	private val returnsNativeMethodType: String
-		get() = if ( returnsStructValue ) "void" else returns.nativeMethodType
+		get() = if ( returns.isStructValue ) "void" else returns.nativeMethodType
 
 	private val returnsJniFunctionType: String
-		get() = if ( returnsStructValue ) "void" else returns.jniFunctionType
+		get() = if ( returns.isStructValue ) "void" else returns.jniFunctionType
 
 	private fun hasAutoSizePredicate(reference: Parameter): (Parameter) -> Boolean = { it has AutoSize && it[AutoSize].hasReference(reference.name) }
 
@@ -203,6 +208,12 @@ class NativeClassFunction(
 	private fun Parameter.error(msg: String) {
 		throw IllegalArgumentException("$msg [${nativeClass.className}.${this@NativeClassFunction.name}, parameter: ${this.name}]")
 	}
+
+	private val Parameter.asJavaMethodParam: String
+		get() = if ( nativeType is StructType && (this has Check || getReferenceParam(AutoSize, name) != null) )
+			"$javaMethodType.Buffer $name"
+		else
+			"$javaMethodType $name"
 
 	/** Validates parameters with modifiers that reference other parameters. */
 	private fun validate() {
@@ -222,8 +233,6 @@ class NativeClassFunction(
 							bufferParam.nativeType !is PointerType
 							                             -> it.error("Buffer reference must be a pointer type: AutoSize($reference)")
 							!bufferParam.isBufferPointer -> it.error("Buffer reference must not be a opaque pointer: AutoSize($reference)")
-							bufferParam.nativeType is StructType && !bufferParam.has(StructBuffer)
-							                             -> it.error("Struct reference must be annotated with StructBuffer: AutoSize($reference)")
 						}
 
 						if ( bufferParam.nativeType is CharSequenceType && bufferParam.nativeType.charMapping == CharMapping.UTF16 )
@@ -235,9 +244,6 @@ class NativeClassFunction(
 			if ( it has AutoSizeResult ) {
 				if ( !returns.nativeType.isPointerData )
 					it.error("Return type is not an array: AutoSizeResult")
-
-				if ( returns.nativeType is StructType && !returns.has(StructBuffer) )
-					it.error("Return type must be annotated with StructBuffer: AutoSizeResult")
 			}
 
 			if ( it has AutoType ) {
@@ -485,7 +491,7 @@ class NativeClassFunction(
 		printList(nativeParams) {
 			it.asNativeMethodParam
 		}
-		if ( returnsStructValue ) {
+		if ( returns.isStructValue ) {
 			if ( nativeClass.binding != null || nativeParams.any() ) print(", ")
 			print("long $RESULT")
 		}
@@ -501,7 +507,7 @@ class NativeClassFunction(
 			it.asNativeMethodParam
 		}
 
-		if ( returnsStructValue ) {
+		if ( returns.isStructValue ) {
 			if ( this@NativeClassFunction.hasNativeParams ) print(", ")
 			print("long $RESULT")
 		}
@@ -534,7 +540,7 @@ class NativeClassFunction(
 
 		// Native method call
 		print("\t\t")
-		if ( !returns.isVoid && !returnsStructValue )
+		if ( !returns.isVoid && !returns.isStructValue )
 			print("return ")
 		print(if ( hasCustomJNI )
 			"n$name("
@@ -579,7 +585,7 @@ class NativeClassFunction(
 				it.asJavaMethodParam
 		}
 
-		if ( returnsStructValue ) {
+		if ( returns.isStructValue ) {
 			if ( !parameters.isEmpty() ) print(", ")
 			print("${(returns.nativeType as StructType).definition.className} $RESULT")
 		}
@@ -616,7 +622,7 @@ class NativeClassFunction(
 					it.asNativeMethodCallParam(this@NativeClassFunction, NORMAL)
 				}
 
-				if ( returnsStructValue ) {
+				if ( returns.isStructValue ) {
 					if ( hasNativeParams ) print(", ")
 					print("$RESULT.$ADDRESS")
 				}
@@ -625,11 +631,11 @@ class NativeClassFunction(
 
 		generateCodeAfterNative(code, ApplyTo.NORMAL)
 
-		if ( !(returns.isVoid || returnsStructValue) ) {
+		if ( !(returns.isVoid || returns.isStructValue) ) {
 			if ( returns.isBufferPointer ) {
 				print("\t\t")
 				if ( returns.nativeType is StructType ) {
-					println("return ${returns.nativeType.definition.className}.create($RESULT${if ( returns has StructBuffer ) ", $API_BUFFER.intValue(${getParam { it has AutoSizeResult }.name})" else ""});")
+					println("return ${returns.nativeType.definition.className}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", $API_BUFFER.intValue(${it.name})" else "" }});")
 				} else {
 					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
@@ -720,7 +726,7 @@ class NativeClassFunction(
 		val returnType = if ( hasConstructor ) (returns.nativeType as ObjectType).className else returnsNativeMethodType
 
 		print("\t\t")
-		if ( !(returns.isVoid || returnsStructValue) ) {
+		if ( !(returns.isVoid || returns.isStructValue) ) {
 			if ( returnLater || returns.isBufferPointer ) {
 				print("$returnType $RESULT = ")
 				if ( hasConstructor )
@@ -1161,7 +1167,7 @@ class NativeClassFunction(
 
 		// Return
 
-		if ( returns.isVoid || returnsStructValue ) {
+		if ( returns.isVoid || returns.isStructValue ) {
 			val result = returns.transformCallOrElse(transforms, "")
 			if ( !result.isEmpty() )
 				println(result)
@@ -1169,7 +1175,7 @@ class NativeClassFunction(
 			if ( returns.isBufferPointer ) {
 				print("\t\t")
 				if ( returns.nativeType is StructType ) {
-					println("return ${returns.nativeType.definition.className}.create($RESULT${if ( returns has StructBuffer ) getParam { it has AutoSizeResult }.let { ", ${it.name}.get(${it.name}.position()" } else ""});")
+					println("return ${returns.nativeType.definition.className}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", ${it.name}.get(${it.name}.position()" else "" }});")
 				} else {
 					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
@@ -1254,7 +1260,7 @@ class NativeClassFunction(
 		getNativeParams(withExplicitFunctionAddress = false).forEach {
 			print(", ${it.asJNIFunctionParam}")
 		}
-		if ( returnsStructValue )
+		if ( returns.isStructValue )
 			print(", jlong $RESULT")
 		println(") {")
 
@@ -1292,7 +1298,7 @@ class NativeClassFunction(
 				println(it)
 			else {
 				print('\t')
-				if ( returnsStructValue ) {
+				if ( returns.isStructValue ) {
 					print("*((${returns.nativeType.name}*)(intptr_t)$RESULT) = ")
 				} else if ( !returns.isVoid ) {
 					print(if ( code?.nativeAfterCall != null ) "$RESULT =" else "return")

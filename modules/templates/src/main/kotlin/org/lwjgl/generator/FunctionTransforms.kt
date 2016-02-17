@@ -133,7 +133,7 @@ class ExpressionLocalTransform(
 ) : ExpressionTransform(expression, keepParam), CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformCall(param: Parameter, original: String) = original
 	override fun generate(qtype: Parameter, code: Code) = code.append(
-		javaInit = statement("\t\t${qtype.asJavaMethodParam} = $expression;", ApplyTo.ALTERNATIVE)
+		javaInit = statement("\t\t${qtype.javaMethodType} ${qtype.name} = $expression;", ApplyTo.ALTERNATIVE)
 	)
 }
 

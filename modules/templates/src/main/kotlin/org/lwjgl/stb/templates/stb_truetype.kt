@@ -245,7 +245,7 @@ int main(int arg, char **argv)
 		int.IN("ph", "the bitmap height, in pixels"),
 		int.IN("first_char", "the first character to bake"),
 		AutoSize("chardata")..int.IN("num_chars", "the number of characters to bake, starting at {@code first_char}"),
-		StructBuffer..stbtt_bakedchar_p.OUT("chardata", "an array of ##STBTTBakedChar structs, it's {@code num_chars} long"),
+		stbtt_bakedchar_p.OUT("chardata", "an array of ##STBTTBakedChar structs, it's {@code num_chars} long"),
 
 		returnDoc =
 		"""
@@ -263,7 +263,7 @@ int main(int arg, char **argv)
 		"BASELINE" above.
 		""",
 
-		Check("char_index + 1")..StructBuffer..stbtt_bakedchar_p.IN("chardata", "an array of ##STBTTBakedChar structs"),
+		Check("char_index + 1")..stbtt_bakedchar_p.IN("chardata", "an array of ##STBTTBakedChar structs"),
 		int.IN("pw", "the bitmap width, in pixels"),
 		int.IN("ph", "the bitmap height, in pixels"),
 		int.IN("char_index", "the character index in the {@code chardata} array"),
@@ -342,7 +342,7 @@ int main(int arg, char **argv)
 		),
 		int.IN("first_unicode_char_in_range", "the first unicode code point in the range"),
 		AutoSize("chardata_for_range")..int.IN("num_chars_in_range", "the number of unicode code points in the range"),
-		StructBuffer..stbtt_packedchar_p.OUT("chardata_for_range", "an array of ##STBTTPackedchar structs"),
+		stbtt_packedchar_p.OUT("chardata_for_range", "an array of ##STBTTPackedchar structs"),
 
 		returnDoc = "1 on success, 0 on failure"
 	)
@@ -357,7 +357,7 @@ int main(int arg, char **argv)
 		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
 		unsigned_char_p.IN("fontdata", "the font data"),
 		int.IN("font_index", "the font index (use 0 if you don't know what that is"),
-		StructBuffer..stbtt_pack_range_p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
+		stbtt_pack_range_p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
 		AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
 
 		returnDoc = "1 on success, 0 on failure"
@@ -391,7 +391,7 @@ int main(int arg, char **argv)
 		"BASELINE" above.
 		""",
 
-		Check("char_index + 1")..StructBuffer..stbtt_packedchar_p.IN("chardata", "an array of ##STBTTPackedchar structs"),
+		Check("char_index + 1")..stbtt_packedchar_p.IN("chardata", "an array of ##STBTTPackedchar structs"),
 		int.IN("pw", "the bitmap width, in pixels"),
 		int.IN("ph", "the bitmap height, in pixels"),
 		int.IN("char_index", "the character index in the {@code chardata} array"),
@@ -412,7 +412,7 @@ int main(int arg, char **argv)
 
 		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
 		stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-		StructBuffer..stbtt_pack_range_p.IN("ranges", "an array of ##STBTTPackRange structs"),
+		stbtt_pack_range_p.IN("ranges", "an array of ##STBTTPackRange structs"),
 		AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
 		stbrp_rect_p.IN("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges.")
 	)
@@ -422,7 +422,7 @@ int main(int arg, char **argv)
 		"See #PackFontRangesGatherRects().",
 
 		stbtt_pack_context_p.OUT("spc", "an ##STBTTPackContext struct"),
-		StructBuffer..stbrp_rect_p.INOUT("rects", "an array of ##STBRPRect structs"),
+		stbrp_rect_p.INOUT("rects", "an array of ##STBRPRect structs"),
 		AutoSize("rects")..int.IN("num_rects", "the number of structs in {@code rects}")
 	)
 
@@ -432,7 +432,7 @@ int main(int arg, char **argv)
 
 		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
 		stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-		StructBuffer..stbtt_pack_range_p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
+		stbtt_pack_range_p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
 		AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
 		stbrp_rect_p.OUT("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges.")
 	)
@@ -651,7 +651,7 @@ int main(int arg, char **argv)
 		"Frees the data allocated by #GetCodepointShape() and #GetGlyphShape().",
 
 		const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-		StructBuffer..stbtt_vertex_p.IN("vertices", "the array of ##STBTTVertex structs to free")
+		Check(1)..stbtt_vertex_p.IN("vertices", "the array of ##STBTTVertex structs to free")
 	)
 
 	// BITMAP RENDERING

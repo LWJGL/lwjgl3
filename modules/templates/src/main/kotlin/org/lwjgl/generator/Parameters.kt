@@ -23,7 +23,7 @@ abstract class QualifiedType(
 	val javaMethodType: String
 		get() = when {
 			nativeType is ObjectType -> nativeType.className
-			nativeType is StructType -> if ( has(StructBuffer) ) "${nativeType.definition.className}.Buffer" else nativeType.definition.className
+			nativeType is StructType -> nativeType.definition.className
 			nativeType.mapping === PointerMapping.DATA
 			                         -> "ByteBuffer"
 			else                     -> nativeType.javaMethodType.simpleName
@@ -156,9 +156,6 @@ class Parameter(
 	/** Returns true if this is an output parameter with the AutoSizeResult modifier. */
 	val isAutoSizeResultOut: Boolean
 		get() = paramType === OUT && has(AutoSizeResult)
-
-	val asJavaMethodParam: String
-		get() = "$javaMethodType $name"
 
 	val asNativeMethodParam: String
 		get() = "$nativeMethodType $name"

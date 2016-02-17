@@ -718,7 +718,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "GLFW 3.0"
 	)
 
-	(StructBuffer..(const..GLFWvidmode_p))(
+	(const..GLFWvidmode_p)(
 		"GetVideoModes",
 		"""
 		Returns an array of all video modes supported by the specified monitor. The returned array is sorted in ascending order, first by color bit depth (the

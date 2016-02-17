@@ -63,7 +63,7 @@ class AutoSize(
 
 	override val isSpecial = true
 
-	fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
+	override fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
 	override fun validate(param: Parameter) {
 		when ( param.paramType ) {
@@ -133,22 +133,10 @@ class Check(
 
 		if ( param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The Check modifier cannot be applied on opaque pointer types ${param.name}")
-
-		if ( param.nativeType is StructType && !param.has(StructBuffer) )
-			throw IllegalArgumentException("The Check modifier cannot be applied on single struct parameters: ${param.name}")
 	}
 }
 
 fun Check(value: Int) = Check(Integer.toString(value))
-
-object StructBuffer : QualifiedTypeModifier() {
-	override val isSpecial: Boolean = true
-
-	override fun validate(qtype: QualifiedType) {
-		if ( qtype.nativeType !is StructType || !qtype.nativeType.includesPointer )
-			throw IllegalArgumentException("The StructBuffer modifier can only be applied on struct pointer types.")
-	}
-}
 
 class Nullable internal constructor(val optional: Boolean) : ParameterModifier() {
 	companion object : ModifierKey<Nullable>

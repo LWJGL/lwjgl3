@@ -109,14 +109,14 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		"Computes offset eye poses based on {@code headPose} returned by ##OVRTrackingState.",
 
 		ovrPosef.IN("headPose", "indicates the HMD position and orientation to use for the calculation"),
-		Check(2)..StructBuffer..const..ovrVector3f_p.IN(
+		Check(2)..const..ovrVector3f_p.IN(
 			"hmdToEyeViewOffset",
 			"""
 		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
 		),
-		Check(2)..StructBuffer..ovrPosef_p.OUT(
+		Check(2)..ovrPosef_p.OUT(
 			"outEyePoses",
 			"""
 			if {@code outEyePoses} are used for rendering, they should be passed to OVR#_SubmitFrame() in ##OVRLayerEyeFov{@code ::RenderPose} or
@@ -144,14 +144,14 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 			"SensorSampleTimestamp", that will override the value stored here.
 			"""
 		),
-		Check(2)..StructBuffer..const..ovrVector3f_p.IN(
+		Check(2)..const..ovrVector3f_p.IN(
 			"hmdToEyeViewOffset",
 			"""
 		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
 		),
-		Check(2)..StructBuffer..ovrPosef_p.OUT("outEyePoses", "the predicted eye poses"),
+		Check(2)..ovrPosef_p.OUT("outEyePoses", "the predicted eye poses"),
 		nullable..ovrTrackingState_p.OUT("outHmdTrackingState", "the predicted ##OVRTrackingState. May be $NULL, in which case it is ignored.")
 	)
 }

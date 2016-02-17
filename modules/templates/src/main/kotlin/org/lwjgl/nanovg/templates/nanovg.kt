@@ -1089,7 +1089,7 @@ nvgFill(vg);""")}
 		float.IN("y", "the text Y axis coordinate"),
 		const..charUTF8_p.IN("string", "the text string to measure"),
 		nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or $NULL"),
-		StructBuffer..NVGglyphPosition_p.OUT("positions", "returns the glyph x positions"),
+		NVGglyphPosition_p.OUT("positions", "returns the glyph x positions"),
 		AutoSize("positions")..int.IN("maxPositions", "the maximum number of glyph positions to return")
 	)
 
@@ -1120,7 +1120,7 @@ nvgFill(vg);""")}
 		const..charUTF8_p.IN("string", "the text string to measure"),
 		nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or $NULL"),
 		float.IN("breakRowWidth", "the maximum row width"),
-		StructBuffer..NVGtextRow_p.OUT("rows", "returns the text rows"),
+		NVGtextRow_p.OUT("rows", "returns the text rows"),
 		AutoSize("rows")..int.IN("maxRows", "the maximum number of text rows to return")
 	)
 }

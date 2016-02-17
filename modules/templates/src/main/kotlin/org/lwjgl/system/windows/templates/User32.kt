@@ -1583,7 +1583,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			populate the {@code pInputs} buffer with information about {@code cInputs} touch points.
 			"""
 		),
-		StructBuffer..PTOUCHINPUT.OUT(
+		PTOUCHINPUT.OUT(
 			"pInputs",
 			"a pointer to an array of ##TOUCHINPUT structures to receive information about the touch points associated with the specified touch input handle"
 		),

@@ -239,7 +239,7 @@ val WGL = "WGL".nativeClassWGL("WGL") {
 			""",
 			"#FONT_LINES #FONT_POLYGONS"
 		),
-		nullable..StructBuffer..LPGLYPHMETRICSFLOAT.OUT(
+		nullable..LPGLYPHMETRICSFLOAT.OUT(
 			"glyphMetrics",
 			"""
 			an array of {@code count} ##GLYPHMETRICSFLOAT structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is $NULL, no

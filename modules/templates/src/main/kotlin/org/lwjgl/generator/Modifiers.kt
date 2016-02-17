@@ -48,7 +48,7 @@ abstract class TemplateElement {
 	/** Returns true if the parameter has a ReferenceModifier with the specified reference. */
 	fun hasRef(modKey: ModifierKey<*>, reference: String): Boolean {
 		val mod = modifiers[modKey.javaClass.declaringClass]
-		return mod != null && (mod as ReferenceModifier).reference.equals(reference)
+		return mod != null && (mod as ReferenceModifier).hasReference(reference)
 	}
 
 	open val isSpecial: Boolean
@@ -127,6 +127,8 @@ abstract class ReturnValueModifier : TemplateModifier {
 /** A TemplateModifier with a reference to another TemplateElement. */
 interface ReferenceModifier : TemplateModifier {
 	val reference: String
+
+	open fun hasReference(reference: String) = this.reference == reference
 }
 
 // DSL extensions (Per TemplateModifier sub-class to avoid IAEs. Too verbose but may catch more errors at compile time)
