@@ -62,11 +62,11 @@ val GLsizeiptr_p = GLsizeiptr.p
 
 val GLcharASCII_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.ASCII)
 val GLcharASCII_pp = GLcharASCII_p.p
-val GLcharASCII_p_const_p = GLcharASCII_p.const_p
+val GLcharASCII_p_const_p = GLcharASCII_p.p_const_p
 
 val GLcharUTF8_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
 val GLcharUTF8_pp = GLcharUTF8_p.p
-val GLcharUTF8_p_const_p = GLcharUTF8_p.const_p
+val GLcharUTF8_p_const_p = GLcharUTF8_p.p_const_p
 
 val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
 

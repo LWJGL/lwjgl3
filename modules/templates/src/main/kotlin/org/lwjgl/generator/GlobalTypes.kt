@@ -9,7 +9,7 @@ val voidptr = "void".p
 val voidptr_p = voidptr.p
 val void_p = PointerType("void", PointerMapping.DATA)
 val void_pp = void_p.p
-val void_p_const_p = void_p.const_p
+val void_p_const_p = void_p.p_const_p
 
 val bool = PrimitiveType("bool", PrimitiveMapping.BOOLEAN)
 val char = IntegerType("char", PrimitiveMapping.BYTE)

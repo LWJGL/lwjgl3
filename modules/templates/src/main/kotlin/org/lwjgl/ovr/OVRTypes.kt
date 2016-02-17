@@ -438,7 +438,7 @@ val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLaye
 	unsigned_int.member("Flags", "described by {@code ovrLayerFlags}")
 }.nativeType
 val ovrLayerHeader_p = ovrLayerHeader.p
-val ovrLayerHeader_p_const_p = ovrLayerHeader_p.const_p
+val ovrLayerHeader_p_const_p = ovrLayerHeader_p.p_const_p
 
 val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLayerEyeFov") {
 	documentation =

@@ -55,11 +55,8 @@ open class PointerType(
 ) : NativeType(name, mapping)
 
 /** Converts primitive to array */
-val PrimitiveType.p: PointerType get() = PointerType(
-	this.name,
-	(this.mapping as PrimitiveMapping).toPointer,
-	elementType = this
-)
+val PrimitiveType.p: PointerType get() = PointerType(this.name, (this.mapping as PrimitiveMapping).toPointer, elementType = this)
+val PrimitiveType.const_p: PointerType get() = PointerType("const ${this.name}", (this.mapping as PrimitiveMapping).toPointer, elementType = this)
 fun PrimitiveType.p(name: String) = PointerType(
 	name,
 	(this.mapping as PrimitiveMapping).toPointer,
@@ -68,21 +65,20 @@ fun PrimitiveType.p(name: String) = PointerType(
 )
 
 /** pointer to pointer. */
-private fun PointerType.pointerTo(const: Boolean = false): String {
+private fun PointerType.pointerTo(): String {
 	val builder = StringBuilder(name)
 	if ( !includesPointer ) {
 		if ( !name.endsWith('*') )
 			builder.append(' ')
 		builder.append('*')
 	}
-	if ( const )
-		builder.append(" const")
 
 	return builder.toString()
 }
 
 val PointerType.p: PointerType get() = PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
-val PointerType.const_p: PointerType get() = PointerType(this.pointerTo(const = true), PointerMapping.DATA_POINTER, elementType = this)
+val PointerType.const_p: PointerType get() = PointerType("const ${this.pointerTo()}", PointerMapping.DATA_POINTER, elementType = this)
+val PointerType.p_const_p: PointerType get() = PointerType("${this.pointerTo()} const", PointerMapping.DATA_POINTER, elementType = this)
 
 val String.p: PointerType get() = PointerType(this, includesPointer = false)
 val String.opaque_p: PointerType get() = PointerType(this, includesPointer = true)
@@ -131,6 +127,10 @@ val StructType.p: PointerType get() = if ( this.includesPointer )
 	PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
 else
 	StructType(this.definition, this.pointerTo(), includesPointer = true)
+val StructType.const_p: PointerType get() = if ( this.includesPointer )
+	PointerType("const ${this.pointerTo()}", PointerMapping.DATA_POINTER, elementType = this)
+else
+	StructType(this.definition, "const ${this.pointerTo()}", includesPointer = true)
 fun StructType.p(name: String) = StructType(this.definition, name, includesPointer = true)
 
 // Strings
@@ -151,6 +151,9 @@ fun CharSequenceType(
 	/** The type we map the native type to. */
 	mapping: PointerMapping = PointerMapping.DATA_BYTE
 ) = CharSequenceType(charType.name, mapping = mapping, charMapping = (charType.mapping as CharMapping))
+
+val CharType.p: CharSequenceType get() = CharSequenceType(this)
+val CharType.const_p: PointerType get() = CharSequenceType(CharType("const ${this.name}", mapping = this.mapping as CharMapping))
 
 // Callbacks
 class CallbackType(
