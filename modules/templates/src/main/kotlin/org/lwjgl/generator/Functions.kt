@@ -1047,18 +1047,22 @@ class NativeClassFunction(
 
 				val singleValue = it[SingleValue]
 				val pointerType = it.nativeType as PointerType
-				val primitiveType = PointerMapping.primitiveMap[pointerType.mapping as PointerMapping]!!
-				transforms[it] = SingleValueTransform(
-					when ( pointerType.elementType ) {
-						null                -> primitiveType
-						is CharSequenceType -> "CharSequence"
-						is ObjectType       -> pointerType.elementType.className
-						is PointerType      -> "long"
-						else                -> pointerType.elementType.javaMethodType.simpleName
-					},
-					primitiveType,
-					singleValue.newName
-				)
+				if ( pointerType.elementType is StructType ) {
+					transforms[it] = SingleValueStructTransform(singleValue.newName)
+				} else {
+					val primitiveType = PointerMapping.primitiveMap[pointerType.mapping as PointerMapping]!!
+					transforms[it] = SingleValueTransform(
+						when ( pointerType.elementType ) {
+							is CharSequenceType -> "CharSequence"
+							is ObjectType       -> pointerType.elementType.className
+							is StructType       -> it.javaMethodType
+							is PointerType      -> "long"
+							else                -> pointerType.elementType!!.javaMethodType.simpleName
+						},
+						primitiveType,
+						singleValue.newName
+					)
+				}
 
 				true
 			}

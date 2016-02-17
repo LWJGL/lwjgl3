@@ -119,18 +119,19 @@ class StructType(
 	/** The type we map the native type to. */
 	mapping: PointerMapping = PointerMapping.DATA_BYTE,
 	/** If true, the nativeType typedef includes a pointer. If false, the argument will be passed-by-value. */
-	includesPointer: Boolean = false
-) : PointerType(name, mapping, includesPointer)
+	includesPointer: Boolean = false,
+    elementType: NativeType? = null
+) : PointerType(name, mapping, includesPointer, elementType)
 
 /** Converts a struct value to a pointer to a struct value. */
 val StructType.p: PointerType get() = if ( this.includesPointer )
 	PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
 else
-	StructType(this.definition, this.pointerTo(), includesPointer = true)
+	StructType(this.definition, this.pointerTo(), includesPointer = true, elementType = this)
 val StructType.const_p: PointerType get() = if ( this.includesPointer )
 	PointerType("const ${this.pointerTo()}", PointerMapping.DATA_POINTER, elementType = this)
 else
-	StructType(this.definition, "const ${this.pointerTo()}", includesPointer = true)
+	StructType(this.definition, "const ${this.pointerTo()}", includesPointer = true, elementType = this)
 fun StructType.p(name: String) = StructType(this.definition, name, includesPointer = true)
 
 // Strings

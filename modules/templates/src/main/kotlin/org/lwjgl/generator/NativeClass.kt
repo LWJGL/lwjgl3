@@ -227,7 +227,7 @@ class NativeClass(
 				val needsPointerBuffer: QualifiedType.() -> Boolean = {
 					this.nativeType is PointerType &&
 					(
-						this.nativeType.elementType.let { it != null && (it is PointerType || it.mapping == PrimitiveMapping.POINTER) } ||
+						this.nativeType.elementType.let { it != null && (it !is StructType || it.includesPointer) && (it is PointerType || it.mapping == PrimitiveMapping.POINTER) } ||
 						(this.has(Return) && this[Return] !== ReturnParam) ||
 						(this.has(MultiType) && this[MultiType].types.contains(PointerMapping.DATA_POINTER))
 					)

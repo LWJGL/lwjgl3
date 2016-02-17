@@ -201,6 +201,12 @@ class SingleValueTransform(
 			writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param($newName);")
 	}
 }
+class SingleValueStructTransform(
+	val newName: String
+) : FunctionTransform<Parameter> {
+	override fun transformDeclaration(param: Parameter, original: String) = "${(param.nativeType as StructType).definition.className} $newName" // Replace with element type + new name
+	override fun transformCall(param: Parameter, original: String): String = "$newName.address()"
+}
 
 class VectorValueTransform(
 	val paramType: String,
