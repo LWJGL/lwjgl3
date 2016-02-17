@@ -396,10 +396,15 @@ val GLFWmousebuttonfun = "GLFWmousebuttonfun".callback(
 
 val GLFWcursorposfun = "GLFWcursorposfun".callback(
 	GLFW_PACKAGE, void, "GLFWCursorPosCallback",
-	"Will be called when the cursor is moved.",
+	"""
+	Will be called when the cursor is moved.
+
+	The callback function receives the cursor position, measured in screen coordinates but relative to the top-left corner of the window client area. On
+	platforms that provide it, the full sub-pixel cursor position is passed on.
+	""",
 	GLFWwindow.IN("window", "the window that received the event"),
-	double.IN("xpos", "the new x-coordinate, in screen coordinates of the cursor"),
-	double.IN("ypos", "the new y-coordinate, in screen coordinates of the cursor")
+	double.IN("xpos", "the new cursor x-coordinate, relative to the left edge of the client area"),
+	double.IN("ypos", "the new cursor y-coordinate, relative to the top edge of the client area")
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCursorPosCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
@@ -586,5 +591,7 @@ val GLFWdropfun = "GLFWdropfun".callback(
 }
 
 // OpenGL
-
 val GLFWglproc = "GLFWglproc".p
+
+// Vulkan
+val GLFWvkproc = "GLFWvkproc".p

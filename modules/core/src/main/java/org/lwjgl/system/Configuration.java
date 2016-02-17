@@ -69,6 +69,8 @@ public enum Configuration {
 	LIBRARY_NAME_OPENGL("org.lwjgl.opengl.libname", StateInit.STRING),
 	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the OpenGL ES library (<b>org.lwjgl.opengles.libname</b>). */
 	LIBRARY_NAME_OPENGLES("org.lwjgl.opengles.libname", StateInit.STRING),
+	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the Vulkan library (<b>org.lwjgl.vulkan.libname</b>). */
+	LIBRARY_NAME_VULKAN("org.lwjgl.vulkan.libname", StateInit.STRING),
 
 	/**
 	 * Sets the alignment of buffers allocated by {@link org.lwjgl.BufferUtils BufferUtils}. By default, buffer allocations will be unaligned (whatever

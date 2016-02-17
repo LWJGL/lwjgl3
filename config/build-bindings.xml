@@ -21,6 +21,7 @@ This script is included in /config/build-definitions.xml.
 	<property name="binding.opengles" value="true"/>
 	<property name="binding.par" value="true"/>
 	<property name="binding.stb" value="true"/>
+	<property name="binding.vulkan" value="true"/>
 
 	<!-- Set the path to the Oculus SDK to enable. -->
 	<property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
@@ -41,7 +42,7 @@ This script is included in /config/build-definitions.xml.
 		<condition property="dependency_problem" value="1">
 			<and>
 				<or>
-					<istrue value="${binding.glfw}"/>
+					<!--<istrue value="${binding.glfw}"/>-->
 					<istrue value="${binding.ovr}"/>
 				</or>
 				<isfalse value="${binding.opengl}"/>

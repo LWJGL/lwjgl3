@@ -180,6 +180,9 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan" if:true="${binding.vulkan}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan/VKypes.kt" unless:true="${binding.vulkan}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan/ExtensionTypes.kt" unless:true="${binding.vulkan}"/>
 			<!--
 			<arg value="-Xno-call-assertions"/>
 			<arg value="-Xno-param-assertions"/>
@@ -267,6 +270,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/system/jawt/**" if:true="${binding.jawt}"/>
 			<include name="org/lwjgl/util/nfd/**" if:true="${binding.nfd}"/>
 			<include name="org/lwjgl/util/par/**" if:true="${binding.par}"/>
+			<include name="org/lwjgl/vulkan/**" if:true="${binding.vulkan}"/>
 		</patternset>
 	</target>
 
@@ -365,6 +369,8 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/util/*.java"/>
 			<include name="org/lwjgl/demo/util/nfd/**" if:true="${nfd}"/>
 			<include name="org/lwjgl/demo/util/par/**" if:true="${binding.par}"/>
+
+			<include name="org/lwjgl/demo/vulkan/**" if:true="${binding.vulkan}"/>
 
 			<!-- Tests -->
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>

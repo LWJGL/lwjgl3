@@ -43,6 +43,8 @@ val float_pp = float_p.p
 val double_p = double.p
 val size_t_p = size_t.p
 
+val uint32_t_p = uint32_t.p
+
 val char_pp = char_p.p
 
 val unsigned_char = IntegerType("unsigned char", PrimitiveMapping.BYTE, unsigned = true)

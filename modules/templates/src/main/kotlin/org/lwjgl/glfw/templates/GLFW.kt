@@ -313,15 +313,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 	IntConstant(
 		"""
-		GLFW could not find support for the requested client API on the system. If emitted by functions other than #CreateWindow(), no supported client API was
-		found.
+		GLFW could not find support for the requested API on the system.
 
-		The installed graphics driver does not support the requested client API, or does not support it via the chosen context creation backend. Below are a
-		few examples:
+		The installed graphics driver does not support the requested API, or does not support it via the chosen context creation backend. Below are a few
+		examples:
 
 		Some pre-installed Windows graphics drivers do not support OpenGL. AMD only supports OpenGL ES via EGL, while Nvidia and Intel only support it via a
 		WGL or GLX extension. OS X does not provide OpenGL ES at all. The Mesa EGL, OpenGL and OpenGL ES libraries do not interface with the Nvidia binary
-		driver.
+		driver. Older graphics drivers do not support Vulkan.
 		""",
 
 		"API_UNAVAILABLE"..0x00010006
@@ -511,7 +510,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
+			"This function must only be called from the main thread.",
 			"""
 			<b>Mac OS X</b>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the application's
 			bundle, if present.
@@ -520,7 +519,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		returnDoc = "#TRUE if successful, or #FALSE if an error occured.",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -535,12 +534,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Notes:
 		${ul(
 			"This function may be called before #Init().",
-			"This function may only be called from the main thread.",
-			"This function may not be called from a callback.",
+			"This function must only be called from the main thread.",
+			"This function must not be called from a callback.",
 			"No window's context may be current on another thread when this function is called."
 		)}
 		""",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -561,17 +560,17 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		nullable..Check(1)..int_p.OUT("major", "where to store the major version number, or $NULL"),
 		nullable..Check(1)..int_p.OUT("minor", "where to store the minor version number, or $NULL"),
 		nullable..Check(1)..int_p.OUT("rev", "where to store the revision number, or $NULL"),
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
-	(const..charUTF8_p)(
+	(const..charASCII_p)(
 		"GetVersionString",
 		"""
 		Returns the compile-time generated version string of the GLFW library binary. It describes the version, platform, compiler and any platform-specific
-		compile-time options.
+		compile-time options. It should not be confused with the OpenGL or OpenGL ES version string, queried with {@code glGetString}.
 
-		<b>Do not use the version string</b> to parse the GLFW library version. The #GetVersion() function already provides the version of the
-		running library binary.
+		<b>Do not use the version string</b> to parse the GLFW library version. The #GetVersion() function already provides the version of the library binary
+		in numerical format.
 
 		Notes:
 		${ul(
@@ -581,8 +580,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"The returned string is static and compile-time generated."
 		)}
 		""",
-		returnDoc = "the GLFW version string",
-		since = "GLFW 3.0"
+		returnDoc = "the ASCII encoded GLFW version string",
+		since = "version 3.0"
 	)
 
 	GLFWerrorfun(
@@ -601,14 +600,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Notes:
 		${ul(
 			"This function may be called before #Init().",
-			"This function may only be called from the main thread."
+			"This function must only be called from the main thread."
 		)}
 		""",
 
 		nullable..GLFWerrorfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	GLFWmonitor_p(
@@ -620,13 +619,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is guaranteed to be valid only until the monitor configuration
 		changes or the library is terminated.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		AutoSizeResult..int_p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
 
 		returnDoc = "an array of monitor handlers, or $NULL if no monitors were found or if an error occured",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	GLFWmonitor(
@@ -634,13 +633,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the primary monitor. This is usually the monitor where elements like the task bar or global menu bar are located.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 
 		The primary monitor is always first in the array returned by #GetMonitors().
 		""",
 
 		returnDoc = "the primary monitor, or $NULL if no monitors were found or if an error occured",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -650,13 +649,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Any or all of the position arguments may be $NULL. If an error occurs, all non-$NULL position arguments will be set to zero.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 		nullable..Check(1)..int_p.OUT("xpos", "where to store the monitor x-coordinate, or $NULL"),
 		nullable..Check(1)..int_p.OUT("ypos", "where to store the monitor y-coordinate, or $NULL"),
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -672,7 +671,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
+			"This function must only be called from the main thread.",
 			"""
 			<b>Windows</b>: The OS calculates the returned physical size from the current resolution and system DPI instead of querying the monitor EDID data.
 		    """
@@ -682,7 +681,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 		nullable..Check(1)..int_p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or $NULL"),
 		nullable..Check(1)..int_p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or $NULL"),
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	(const..charUTF8_p)(
@@ -694,13 +693,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified monitor is disconnected or the
 		library is terminated.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 
 		returnDoc = "the UTF-8 encoded name of the monitor, or $NULL if an error occured",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	GLFWmonitorfun(
@@ -709,13 +708,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Sets the monitor configuration callback, or removes the currently set callback. This is called when a monitor is connected to or disconnected from the
 		system.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		nullable..GLFWmonitorfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set or the library had not been initialized",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	(const..GLFWvidmode_p)(
@@ -727,14 +726,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified monitor is disconnected, this
 		function is called again for that monitor or the library is terminated.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 		AutoSizeResult..int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
 
 		returnDoc = "an array of video modes, or $NULL if an error occured",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	(const..GLFWvidmode_p)(
@@ -746,13 +745,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified monitor is disconnected or the
 		library is terminated.
 
-  		This function may only be called from the main thread.
+  		This function must only be called from the main thread.
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 
 		returnDoc = "the current mode of the monitor, or $NULL if an error occurred",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -761,12 +760,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Generates a 256-element gamma ramp from the specified exponent and then calls #SetGammaRamp() with it. The value must be a finite number greater than
 		zero.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor whose gamma ramp to set"),
 		float.IN("gamma", "the desired exponent"),
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	(const..GLFWgammaramp_p)(
@@ -777,13 +776,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The returned structure and its arrays are allocated and freed by GLFW. You should not free them yourself. They are valid until the specified monitor is
 		disconnected, this function is called again for that monitor or the library is terminated.
 
-  		This function may only be called from the main thread.
+  		This function must only be called from the main thread.
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 
 		returnDoc = "the current gamma ramp, or $NULL if an error occurred",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -794,7 +793,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
+			"This function must only be called from the main thread.",
 			"Gamma ramp sizes other than 256 are not supported by all hardware",
 			"<b>Windows</b>: The gamma ramp size must be 256.",
 			"The specified gamma ramp is copied before this function returns."
@@ -803,7 +802,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWmonitor.IN("monitor", "the monitor whose gamma ramp to set"),
 		const..GLFWgammaramp_p.IN("ramp", "the gamma ramp to use"),
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -811,9 +810,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Resets all window hints to their default values. See #WindowHint() for details.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -821,6 +820,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Sets hints for the next call to #CreateWindow(). The hints, once set, retain their values until changed by a call to glfwWindowHint or
 		#DefaultWindowHints(), or until the library is terminated.
+
+		This function does not check whether the specified hint values are valid. If you set hints to invalid values this will instead be reported by the next
+		call to #CreateWindow().
 
 		<h3>Supported and default values</h3>
 		${table(
@@ -861,12 +863,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues))
 		)}
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
-		int.IN("target", "the window hint to set", "#RESIZABLE #VISIBLE #DECORATED $ClientAPIHints $PixelFormatHints"),
-		int.IN("hint", "the new value of the window hint"),
-		since = "GLFW 2.2"
+		int.IN("hint", "the window hint to set", "#RESIZABLE #VISIBLE #DECORATED $ClientAPIHints $PixelFormatHints"),
+		int.IN("value", "the new value of the window hint"),
+		since = "version 2.2"
 	)
 
 	Code(
@@ -907,8 +909,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
         Notes:
 		${ul(
-			"This function may only be called from the main thread.",
-			"This function may not be called from a callback.",
+			"This function must only be called from the main thread.",
+			"This function must not be called from a callback.",
 			"<b>Windows</b>: Window creation will fail if the Microsoft GDI software OpenGL implementation is the only one available.",
 			"""
 		    <b>Windows</b>: If the executable has an icon resource named {@code GLFW_ICON}, it will be set as the icon for the window. If no such icon
@@ -949,7 +951,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		nullable..GLFWwindow.IN("share", " the window whose context to share resources with, or $NULL to not share resources"),
 
 		returnDoc = "the handle of the created window, or $NULL if an error occurred",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -961,14 +963,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
-			"This function may not be called from a callback.",
+			"This function must only be called from the main thread.",
+			"This function must not be called from a callback.",
 			"The context of the specified window must not be current on any other thread when this function is called."
 		)}
 		""",
 
 		GLFWwindow.IN("window", "the window to destroy"),
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	int(
@@ -982,7 +984,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWwindow.IN("window", "the window to query"),
 
 		returnDoc = "the value of the close flag",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -997,7 +999,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWwindow.IN("window", "the window whose flag to change"),
 		int.IN("value", "the new value"),
 
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -1005,7 +1007,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Sets the window title, encoded as UTF-8, of the specified window.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 
 		<b>OS X</b>: The window title will not be updated until the next time you process events.
 		""",
@@ -1013,7 +1015,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWwindow.IN("window", "the window whose title to change"),
 		const..charUTF8_p.IN("title", "the UTF-8 encoded window title"),
 
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -1023,14 +1025,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Any or all of the position arguments may be $NULL. If an error occurs, all non-$NULL position arguments will be set to zero.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to query"),
 		nullable..Check(1)..int_p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or $NULL"),
 		nullable..Check(1)..int_p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or $NULL"),
 
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -1044,14 +1046,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		The window manager may put limits on what positions are allowed. GLFW cannot and should not override these limits.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to query"),
 		int.IN("xpos", "the x-coordinate of the upper-left corner of the client area"),
 		int.IN("ypos", "the y-coordinate of the upper-left corner of the client area"),
 
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -1062,14 +1064,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Any or all of the size arguments may be $NULL. If an error occurs, all non-$NULL size arguments will be set to zero.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose size to retrieve"),
 		nullable..Check(1)..int_p.OUT("width", "where to store the width, in screen coordinates, of the client area, or $NULL"),
 		nullable..Check(1)..int_p.OUT("height", "where to store the height, in screen coordinates, of the client area, or $NULL"),
 
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -1080,7 +1082,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The size limits are applied immediately and may cause the window to be resized. If you set size limits and an aspect ratio that conflict, the results
 		are undefined.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to set limits for"),
@@ -1089,7 +1091,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("maxwidth", "the maximum width, in screen coordinates, of the client area, or #DONT_CARE"),
 		int.IN("maxheight", "the maximum height, in screen coordinates, of the client area, or #DONT_CARE"),
 
-		since = "GLFW 3.2"
+		since = "version 3.2"
 	)
 
 	void(
@@ -1105,14 +1107,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
  		The aspect ratio is applied immediately and may cause the window to be  resized. If you set size limits and an aspect ratio that conflict, the results
  		are undefined.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to set limits for"),
 		int.IN("numer", "the numerator of the desired aspect ratio, or #DONT_CARE"),
 		int.IN("denom", "the denominator of the desired aspect ratio, or #DONT_CARE"),
 
-		since = "GLFW 3.2"
+		since = "version 3.2"
 	)
 
 	void(
@@ -1125,14 +1127,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		The window manager may put limits on what sizes are allowed. GLFW cannot and should not override these limits.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to resize"),
 		int.IN("width", "the desired width of the specified window"),
 		int.IN("height", "the desired height of the specified window"),
 
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -1143,14 +1145,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Any or all of the size arguments may be $NULL. If an error occurs, all non-$NULL size arguments will be set to zero.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose framebuffer to query"),
 		nullable..Check(1)..int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or $NULL"),
 		nullable..Check(1)..int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or $NULL"),
 
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -1165,7 +1167,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Any or all of the size arguments may be $NULL. If an error occurs, all non-$NULL size arguments will be set to zero.
 
-	    This function may only be called from the main thread.
+	    This function must only be called from the main thread.
 	    """,
 
 		GLFWwindow.IN("window", "the window whose frame size to query"),
@@ -1174,7 +1176,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Check(1)..nullable..int_p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or $NULL"),
 		Check(1)..nullable..int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or $NULL"),
 
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	/*void(
@@ -1187,7 +1189,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		If the icon does not exactly fit the operating systems requirements for the icon size the icon will be automatically resized.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to set the icons for"),
@@ -1202,12 +1204,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		If the specified window is a full screen window, the original monitor resolution is restored until the window is restored.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to iconify"),
 
-		since = "GLFW 2.1"
+		since = "version 2.1"
 	)
 
 	void(
@@ -1217,12 +1219,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		If the specified window is a full screen window, the resolution chosen for the window is restored on the selected monitor.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to restore"),
 
-		since = "GLFW 2.1"
+		since = "version 2.1"
 	)
 
 	Code(
@@ -1232,12 +1234,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Makes the specified window visible if it was previously hidden. If the window is already visible or is in full screen mode, this function does nothing.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to make visible"),
 
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -1245,12 +1247,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Hides the specified window, if it was previously visible. If the window is already hidden or is in full screen mode, this function does nothing.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to hide"),
 
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	GLFWmonitor(
@@ -1258,13 +1260,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the handle of the monitor that the specified window is in full screen on.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to query"),
 
 		returnDoc = "the monitor, or $NULL if the window is in windowed mode or an error occurred",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	int(
@@ -1272,7 +1274,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the value of an attribute of the specified window or its OpenGL or OpenGL ES context.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 
 		Framebuffer related hints are not window attributes.
 
@@ -1284,7 +1286,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("attrib", "the <a href=\"http://www.glfw.org/docs/latest/window.html\\#window_attribs\">window attribute</a> whose value to return", WindowAttributes),
 
 		returnDoc = "the value of the attribute, or zero if an error occured",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -1298,7 +1300,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWwindow.IN("window", "the window whose pointer to set"),
 		nullable..voidptr.IN("pointer", "the new value"),
 
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	voidptr(
@@ -1311,7 +1313,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window whose pointer to return"),
 
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	val CallbackReturnDoc =
@@ -1328,14 +1330,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Sets the position callback of the specified window, which is called when the window is moved. The callback is provided with the screen position of the
 		upper-left corner of the client area of the window.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
  		""",
 
 		CALLBACK_WINDOW,
 		nullable..GLFWwindowposfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	GLFWwindowsizefun(
@@ -1344,14 +1346,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Sets the size callback of the specified window, which is called when the window is resized. The callback is provided with the size, in screen
 		coordinates, of the client area of the window.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		CALLBACK_WINDOW,
 		nullable..GLFWwindowsizefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	GLFWwindowclosefun(
@@ -1366,7 +1368,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
+			"This function must only be called from the main thread.",
 			"<b>Mac OS X:</b> Selecting Quit from the application menu will trigger the close callback for all windows."
 		)}
 		""",
@@ -1375,7 +1377,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		nullable..GLFWwindowclosefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-		since = "GLFW 2.5"
+		since = "version 2.5"
 	)
 
 	GLFWwindowrefreshfun(
@@ -1387,14 +1389,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		On compositing window systems such as Aero, Compiz or Aqua, where the window contents are saved off-screen, this callback may be called only very
 		infrequently or never at all.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		CALLBACK_WINDOW,
 		nullable..GLFWwindowrefreshfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-		since = "GLFW 2.5"
+		since = "version 2.5"
 	)
 
 	GLFWwindowfocusfun(
@@ -1405,14 +1407,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
   		After the focus callback is called for a window that lost input focus, synthetic key and mouse button release events will be generated for all such
   		that had been pressed. For more information, see #SetKeyCallback() and #SetMouseButtonCallback().
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		CALLBACK_WINDOW,
 		nullable..GLFWwindowfocusfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	GLFWwindowiconifyfun(
@@ -1420,14 +1422,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Sets the iconification callback of the specified window, which is called when the window is iconified or restored.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		CALLBACK_WINDOW,
 		nullable..GLFWwindowiconifyfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	GLFWframebuffersizefun(
@@ -1435,14 +1437,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Sets the framebuffer resize callback of the specified window, which is called when the framebuffer of the specified window is resized.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		CALLBACK_WINDOW,
 		nullable..GLFWframebuffersizefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	Code(
@@ -1466,11 +1468,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
-			"This function may not be called from a callback."
+			"This function must only be called from the main thread.",
+			"This function must not be called from a callback."
 		)}
 		""",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	Code(
@@ -1500,12 +1502,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
-			"This function may not be called from a callback.",
+			"This function must only be called from the main thread.",
+			"This function must not be called from a callback.",
 			"On some platforms, certain callbacks may be called outside of a call to one of the event processing functions."
 		)}
 		""",
-		since = "GLFW 2.5"
+		since = "version 2.5"
 	)
 
 	void(
@@ -1519,7 +1521,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function may be called from any thread.
 	    """,
 
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	int(
@@ -1527,14 +1529,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the value of an input option for the specified window.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to query"),
 		int.IN("mode", "the input mode whose value to return", "#CURSOR #STICKY_KEYS #STICKY_MOUSE_BUTTONS"),
 
 		returnDoc = "the input mode value",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -1561,7 +1563,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		time it is called even if the mouse button had been released before the call. This is useful when you are only interested in whether mouse buttons have
 		been pressed but not when or in which order.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose input mode to set"),
@@ -1581,14 +1583,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to #GetKeyName(), or until the
 		library is terminated.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		int.IN("key", "the key to query, or #KEY_UNKNOWN"),
 		int.IN("scancode", "the scancode of the key to query"),
 
 		returnDoc = "the localized name of the key",
-		since = "GLFW 3.2"
+		since = "version 3.2"
 	)
 
 	int(
@@ -1609,7 +1611,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
+			"This function must only be called from the main thread.",
 			"#KEY_UNKNOWN is not a valid key for this function."
 		)}
 		""",
@@ -1618,7 +1620,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("key", "the desired keyboard key"),
 
 		returnDoc = "one of #PRESS or #RELEASE",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	int(
@@ -1630,14 +1632,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		If the #STICKY_MOUSE_BUTTONS input mode is enabled, this function returns #PRESS the first time you call it for a mouse button that has been pressed,
 		even if that mouse button has already been released.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the desired window"),
 		int.IN("button", "the desired mouse button"),
 
 		returnDoc = "one of #PRESS or #RELEASE",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -1653,14 +1655,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Any or all of the position arguments may be $NULL. If an error occurs, all non-$NULL position arguments will be set to zero.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the desired window"),
 		nullable..Check(1)..double_p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or $NULL"),
 		nullable..Check(1)..double_p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or $NULL."),
 
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -1676,7 +1678,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
+			"This function must only be called from the main thread.",
 			"""
 		    <b>X11:</b> Due to the asynchronous nature of X11, it may take a moment for the window focus event to arrive. This means you may not be able to set
 		    the cursor position directly after window creation.
@@ -1688,7 +1690,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		double.IN("xpos", "the desired x-coordinate, relative to the left edge of the client area"),
 		double.IN("ypos", "the desired y-coordinate, relative to the top edge of the client area"),
 
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	GLFWcursor(
@@ -1705,8 +1707,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 	    Notes:
 	    ${ul(
-			"This function may only be called from the main thread.",
-			"This function may not be called from a callback.",
+			"This function must only be called from the main thread.",
+			"This function must not be called from a callback.",
 			"The specified image data is copied before this function returns."
 		)}
 	    """,
@@ -1716,7 +1718,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("yhot", "the desired y-coordinate, in pixels, of the cursor hotspot"),
 
 		returnDoc = "the handle of the created cursor, or $NULL if an error occurred",
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	GLFWcursor(
@@ -1726,8 +1728,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 	    Notes:
 	    ${ul(
-			"This function may only be called from the main thread.",
-			"This function may not be called from a callback.",
+			"This function must only be called from the main thread.",
+			"This function must not be called from a callback.",
 			"The specified image data is copied before this function returns."
 		)}
 	    """,
@@ -1735,7 +1737,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("shape", "one of the standard shapes", CursorShapes),
 
 		returnDoc = "a new cursor ready to use or $NULL if an error occurred",
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	void(
@@ -1745,14 +1747,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
-			"This function may not be called from a callback."
+			"This function must only be called from the main thread.",
+			"This function must not be called from a callback."
 		)}
 	    """,
 
 		GLFWcursor.IN("cursor", "the cursor object to destroy"),
 
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	void(
@@ -1763,13 +1765,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		On some platforms, the set cursor may not be visible unless the window also has input focus.
 
-  	    This function may only be called from the main thread.
+  	    This function must only be called from the main thread.
 	    """,
 
 		GLFWwindow.IN("window", "the window to set the system cursor for"),
 		nullable..GLFWcursor.IN("cursor", "the cursor to set, or $NULL to switch back to the default arrow cursor"),
 
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	GLFWkeyfun(
@@ -1789,14 +1791,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Sometimes GLFW needs to generate synthetic key events, in which case the scancode may be zero.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable..GLFWkeyfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	GLFWcharfun(
@@ -1811,14 +1813,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The character callback behaves as system text input normally does and will not be called if modifier keys are held down that would prevent normal text
 		input on that platform, for example a Super (Command) key on OS X or Alt key on Windows. There is #SetCharModsCallback() that receives these events.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable..GLFWcharfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-		since = "GLFW 2.4"
+		since = "version 2.4"
 	)
 
 	GLFWcharmodsfun(
@@ -1832,14 +1834,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Characters do not map 1:1 to physical keys, as a key may produce zero, one or more characters. If you want to know whether a specific physical key was
 		pressed or released, see #SetKeyCallback() instead.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable..GLFWcharmodsfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	GLFWmousebuttonfun(
@@ -1851,14 +1853,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		user-generated events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the window focus
 		callback has been called.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable..GLFWmousebuttonfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	GLFWcursorposfun(
@@ -1867,14 +1869,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Sets the cursor position callback of the specified window, which is called when the cursor is moved. The callback is provided with the position, in
 		screen coordinates, relative to the upper-left corner of the client area of the window.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable..GLFWcursorposfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	GLFWcursorenterfun(
@@ -1882,14 +1884,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Sets the cursor boundary crossing callback of the specified window, which is called when the cursor enters or leaves the client area of the window.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable..GLFWcursorenterfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	GLFWscrollfun(
@@ -1899,14 +1901,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		The scroll callback receives all scrolling input, like that from a mouse wheel or a touchpad scrolling area.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable..GLFWscrollfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-		since = "GLFW 2.1"
+		since = "version 2.1"
 	)
 
 	GLFWdropfun(
@@ -1917,14 +1919,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	    Because the path array and its strings may have been generated specifically for that event, they are not guaranteed to be valid after the callback has
 	    returned. If you wish to use them after the callback returns, you need to make a deep copy.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 	    """,
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable..GLFWdropfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	int(
@@ -1932,13 +1934,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns whether the specified joystick is present.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		int.IN("joy", "joystick to query"),
 
 		returnDoc = "#TRUE if the joystick is present, or #FALSE otherwise",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	(const..float_p)(
@@ -1946,17 +1948,20 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the values of all axes of the specified joystick. Each element in the array is a value between -1.0 and 1.0.
 
+		Querying a joystick slot with no device present is not an error, but will cause this function to return $NULL. Call #JoystickPresent() to check device
+		presence.
+
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
 		function is called again for that joystick or the library is terminated.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		int.IN("joy", "the joystick to query"),
 		AutoSizeResult..int_p.OUT("count", "where to store the number of axis values in the returned array. This is set to zero if an error occurred."),
 
 		returnDoc = "an array of axis values, or $NULL if the joystick is not present",
-		since = "GLFW 2.2"
+		since = "version 2.2"
 	)
 
 	(const..unsigned_char_p)(
@@ -1964,17 +1969,20 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the state of all buttons of the specified joystick. Each element in the array is either #PRESS or #RELEASE.
 
+		Querying a joystick slot with no device present is not an error, but will cause this function to return $NULL. Call #JoystickPresent() to check device
+		presence.
+
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
 		function is called again for that joystick or the library is terminated.
 
-  		This function may only be called from the main thread.
+  		This function must only be called from the main thread.
 		""",
 
 		int.IN("joy", "the joystick to query"),
 		AutoSizeResult..int_p.OUT("count", "where to store the number of button states in the returned array. This is set to zero if an error occurred."),
 
 		returnDoc = "an array of button states, or $NULL if the joystick is not present",
-		since = "GLFW 2.2"
+		since = "version 2.2"
 	)
 
 	(const..charUTF8_p)(
@@ -1982,16 +1990,19 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the name, encoded as UTF-8, of the specified joystick.
 
+		Querying a joystick slot with no device present is not an error, but will cause this function to return $NULL. Call #JoystickPresent() to check device
+		presence.
+
 		The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
 		function is called again for that joystick or the library is terminated.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		int.IN("joy", "the joystick to query"),
 
 		returnDoc = "the UTF-8 encoded name of the joystick, or $NULL if the joystick is not present",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -2001,13 +2012,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		The specified string is copied before this function returns.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window that will own the clipboard contents"),
 		const..charUTF8_p.IN("string", "a UTF-8 encoded string"),
 
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	(const..charUTF8_p)(
@@ -2021,7 +2032,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"This function may only be called from the main thread.",
+			"This function must only be called from the main thread.",
 			"The returned string is allocated and freed by GLFW.  You should not free it yourself.",
 			"The returned string is valid only until the next call to #GetClipboardString() or #SetClipboardString()."
 		)}
@@ -2030,7 +2041,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWwindow.IN("window", "the window that will request the clipboard contents"),
 
 		returnDoc = "the contents of the clipboard as a UTF-8 encoded string, or $NULL if an error occurred",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	double(
@@ -2045,7 +2056,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		returnDoc = "the current value, in seconds, or zero if an error occurred",
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -2057,12 +2068,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The upper limit of the timer is calculated as ${code("floor((2<sup>64</sup> - 1) / 10<sup>9</sup>)")} and is due to implementations storing nanoseconds
 		in 64 bits. The limit may be increased in the future.
 
-		This function may only be called from the main thread.
+		This function must only be called from the main thread.
 		""",
 
 		double.IN("time", "the new value, in seconds"),
 
-		since = "GLFW 2.2"
+		since = "version 2.2"
 	)
 
 	// [ OpenGL ]
@@ -2084,7 +2095,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		nullable..GLFWwindow.IN("window", "the window whose context to make current, or $NULL to detach the current context"),
 
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	GLFWwindow(
@@ -2096,7 +2107,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		returnDoc = "the window whose context is current, or $NULL if no window's context is current",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	void(
@@ -2107,12 +2118,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		The specified window must have an OpenGL or OpenGL ES context. Specifying a window without a context will generate a #NO_WINDOW_CONTEXT error.
 
+		<b>EGL</b>: The context of the specified window must be current on the calling thread.
+
 		This function may be called from any thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose buffers to swap"),
 
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	void(
@@ -2144,7 +2157,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		int.IN("interval", "the minimum number of screen updates to wait for until the buffers are swapped by #SwapBuffers()"),
 
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	int(
@@ -2165,7 +2178,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		returnDoc = "#TRUE if the extension is available, or #FALSE otherwise",
 
-		since = "GLFW 1.0"
+		since = "version 1.0"
 	)
 
 	GLFWglproc(
@@ -2191,6 +2204,55 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		const..charASCII_p.IN("procname", "the ASCII encoded name of the function"),
 
 		returnDoc = "the address of the function, or $NULL if an error occured",
-		since = "GLFW 1.0"
+		since = "version 1.0"
+	)
+
+	// [ Vulkan ]
+
+	int(
+		"VulkanSupported",
+		"""
+		Returns whether the Vulkan loader has been found. This check is performed by #Init().
+		
+		The availability of a Vulkan loader does not by itself guarantee that window surface creation or even device creation is possible. Call
+		#GetRequiredInstanceExtensions() to check whether the extensions necessary for Vulkan surface creation are available and
+		#GetPhysicalDevicePresentationSupport() to check whether a queue family of a physical device supports image presentation.
+
+		Possible errors include #NOT_INITIALIZED.
+
+		This function may be called from any thread.
+		""",
+
+		returnDoc = "#TRUE if Vulkan is available, or #FALSE otherwise",
+		since = "version 3.2"
+	)
+
+	(const..charASCII_pp)(
+		"GetRequiredInstanceExtensions",
+		"""
+		Returns an array of names of Vulkan instance extensions required by GLFW for creating Vulkan surfaces for GLFW windows. If successful, the list will
+		always contain {@code VK_KHR_surface}, so if you don't require any additional extensions you can pass this list directly to the
+		{@code VkInstanceCreateInfo} struct.
+
+		If Vulkan is not available on the machine, this function returns $NULL and generates a #API_UNAVAILABLE error. Call #VulkanSupported() to check whether
+		Vulkan is available.
+
+		If Vulkan is available but no set of extensions allowing window surface creation was found, this function returns $NULL. You may still use Vulkan for
+		off-screen rendering and compute work.
+
+		Additional extensions may be required by future versions of GLFW. You should check if any extensions you wish to enable are already in the returned
+		array, as it is an error to specify an extension more than once in the {@code VkInstanceCreateInfo} struct.
+
+		The returned array is allocated and freed by GLFW. You should not free it yourself. It is guaranteed to be valid only until the library is terminated.
+
+		This function may be called from any thread.
+
+		Possible errors include #NOT_INITIALIZED and #API_UNAVAILABLE.
+		""",
+
+		AutoSizeResult..int_p.OUT("count", "where to store the number of extensions in the returned array. This is set to zero if an error occurred."),
+
+		returnDoc = "an array of ASCII encoded extension names, or $NULL if an error occurred",
+		since = "version 3.2"
 	)
 }
