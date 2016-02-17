@@ -199,6 +199,14 @@ public class TemplateFormatter {
 
 	// ---[ CONSTANT FORMATTING ]----
 
+	private static String formatConstants(String input, String prefix) {
+		String constants = formatConstantsGL(input, prefix);
+		if ( constants.isEmpty() )
+			constants = formatConstantsEnum(input, prefix);
+
+		return constants;
+	}
+
 	private static final String COMMENT = "(?:/[*].+?[*]/|//[^\n\r]*)?";
 
 	private static final String DESCRIPTION    = "(?:(?:/[*]+\\s*(.+?)\\s*[*]+/)|(?:([^:]+):))";
@@ -219,7 +227,7 @@ public class TemplateFormatter {
 		Pattern.DOTALL
 	);
 
-	private static String formatConstants(String input, String prefix) {
+	private static String formatConstantsGL(String input, String prefix) {
 		StringBuilder builder = new StringBuilder(input.length());
 
 		Matcher blockMatcher = BLOCK_PATTERN.matcher(input);
@@ -302,10 +310,77 @@ public class TemplateFormatter {
 		return builder.toString();
 	}
 
-	private static void validateInteger(String intValue) {
+	private static final Pattern ENUM_PATTERN       = Pattern.compile("typedef\\s+enum\\s+(\\w+)\\s*\\{([^}]+)}\\s*\\w+;");
+	private static final Pattern ENUM_VALUE_PATTERN = Pattern.compile(
+		"\\s*(\\w+)\\s*=\\s*(" + CONSTANT_VALUE + ")\\s*,?"
+	);
+
+	private static String formatConstantsEnum(String input, String prefix) {
+		StringBuilder builder = new StringBuilder(input.length());
+
+		Matcher enumMatcher = ENUM_PATTERN.matcher(input);
+		int blockCount = 0;
+		while ( enumMatcher.find() ) {
+			if ( 0 < blockCount++ ) builder.append('\n');
+
+			builder
+				.append("\tEnumConstant(\n")
+				.append("\t\t\"")
+				.append(enumMatcher.group(1))
+				.append("\",\n\n");
+
+			Matcher constantMatcher = ENUM_VALUE_PATTERN.matcher(enumMatcher.group(2));
+			int constCount = 0;
+			String lastValue = null;
+			while ( constantMatcher.find() ) {
+				if ( 0 < constCount++ ) builder.append(",\n");
+
+				builder
+					.append("\t\t\"")
+					.append(strip(constantMatcher.group(1), prefix + '_'))
+					.append("\".enum");
+
+				String value = constantMatcher.group(2);
+
+				try {
+					String intValue = value.endsWith("L") ? value.substring(0, value.length() - (value.endsWith("UL") ? 2 : 1)) : value;
+
+					int i = validateInteger(intValue).intValue();
+					if ( lastValue != null && (Long.decode(lastValue).intValue() + 1) == i ) {
+						builder.append("(\"\"");
+					} else {
+						if ( intValue.startsWith("0x") ) {
+							builder
+								.append("(\"\", ")
+								.append(intValue);
+						} else {
+							builder
+								.append("Expr(\"\", \"")
+								.append(intValue)
+								.append("\"");
+						}
+					}
+					lastValue = intValue;
+				} catch (NumberFormatException e) {
+					builder
+						.append("Expr(\"\", \"")
+						.append(value.charAt(0) == '(' ? value.substring(1, value.length() - 1) : value)
+						.append("\"");
+				}
+				builder.append(")");
+			}
+			builder.append("\n\t)\n");
+		}
+
+		return builder.toString();
+	}
+
+	private static Long validateInteger(String intValue) {
 		Long l = Long.decode(intValue);
 		if ( (1L << 32) - 1 < l )
 			throw new NumberFormatException("long value");
+
+		return l;
 	}
 
 	// ---[ FUNCTION FORMATTING ]----
