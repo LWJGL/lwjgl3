@@ -12,7 +12,7 @@ import org.lwjgl.system.windows.HWND
 
 // EXT_debug_report
 
-val VkDebugReportCallbackEXT = "VkDebugReportCallbackEXT".opaque_p
+val VkDebugReportCallbackEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDebugReportCallbackEXT")
 
 val VkDebugReportObjectTypeEXT = "VkDebugReportObjectTypeEXT".enumType
 val VkDebugReportFlagsEXT = typedef(VkFlags, "VkDebugReportFlagsEXT")
@@ -46,7 +46,7 @@ val VkDebugReportCallbackCreateInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugRepo
 
 // KHR_surface (must be above KHR_display)
 
-val VkSurfaceKHR = "VkSurfaceKHR".opaque_p
+val VkSurfaceKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSurfaceKHR")
 val VkSurfaceKHR_p = VkSurfaceKHR.p
 
 val VkColorSpaceKHR = "VkColorSpaceKHR".enumType
@@ -79,8 +79,8 @@ val VkSurfaceFormatKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutabl
 
 // KHR_display
 
-val VkDisplayKHR = "VkDisplayKHR".opaque_p
-val VkDisplayModeKHR = "VkDisplayModeKHR".opaque_p
+val VkDisplayKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDisplayKHR")
+val VkDisplayModeKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDisplayModeKHR")
 
 val VkDisplayPlaneAlphaFlagBitsKHR = "VkDisplayPlaneAlphaFlagBitsKHR".enumType
 val VkDisplayModeCreateFlagsKHR = typedef(VkFlags, "VkDisplayModeCreateFlagsKHR")
@@ -172,7 +172,7 @@ val VkDisplayPresentInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPresentInfoKH
 
 // KHR_swapchain
 
-val VkSwapchainKHR = "VkSwapchainKHR".opaque_p
+val VkSwapchainKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSwapchainKHR")
 
 val VkSwapchainCreateFlagsKHR = typedef(VkFlags, "VkSwapchainCreateFlagsKHR")
 val VkCompositeAlphaFlagBitsKHR = "VkCompositeAlphaFlagBitsKHR".enumType
