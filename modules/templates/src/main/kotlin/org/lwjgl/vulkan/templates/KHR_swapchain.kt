@@ -64,7 +64,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 		"Destroys a swapchain object.",
 
 		VkDevice.IN("device", "the {@code VkDevice} associated with the swapchain"),
-		nullable..VkSwapchainKHR.IN("swapchain", "the swapchain to destroy"),
+		VkSwapchainKHR.IN("swapchain", "the swapchain to destroy"),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "the allocator used for host memory allocated for the swapchain object")
 	)
 

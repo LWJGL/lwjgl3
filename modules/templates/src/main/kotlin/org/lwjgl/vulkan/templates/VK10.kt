@@ -1303,7 +1303,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		VkQueue.IN("queue", ""),
 		AutoSize("pSubmits")..uint32_t.IN("submitCount", ""),
 		SingleValue("pSubmit")..const..VkSubmitInfo_p.IN("pSubmits", ""),
-		nullable..VkFence.IN("fence", "")
+		VkFence.IN("fence", "")
 	)
 
 	VkResult(
@@ -1455,7 +1455,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		VkQueue.IN("queue", ""),
 		AutoSize("pBindInfo")..uint32_t.IN("bindInfoCount", ""),
 		SingleValue("pBindInfo")..const..VkBindSparseInfo_p.IN("pBindInfo", ""),
-		nullable..VkFence.IN("fence", "")
+		VkFence.IN("fence", "")
 	)
 
 	VkResult(
@@ -1539,7 +1539,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys an event object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkEvent.IN("event", ""),
+		VkEvent.IN("event", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1582,7 +1582,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a query pool object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkQueryPool.IN("queryPool", ""),
+		VkQueryPool.IN("queryPool", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1615,7 +1615,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a buffer object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkBuffer.IN("buffer", ""),
+		VkBuffer.IN("buffer", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1634,7 +1634,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a buffer view object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkBufferView.IN("bufferView", ""),
+		VkBufferView.IN("bufferView", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1653,7 +1653,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys an image object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkImage.IN("image", ""),
+		VkImage.IN("image", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1682,7 +1682,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys an image view object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkImageView.IN("imageView", ""),
+		VkImageView.IN("imageView", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1701,7 +1701,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a shader module module.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkShaderModule.IN("shaderModule", ""),
+		VkShaderModule.IN("shaderModule", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1720,7 +1720,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a pipeline cache object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkPipelineCache.IN("pipelineCache", ""),
+		VkPipelineCache.IN("pipelineCache", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1773,7 +1773,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a pipeline object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkPipeline.IN("pipeline", ""),
+		VkPipeline.IN("pipeline", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1792,7 +1792,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a pipeline layout object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkPipelineLayout.IN("pipelineLayout", ""),
+		VkPipelineLayout.IN("pipelineLayout", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1811,7 +1811,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a sampler object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkSampler.IN("sampler", ""),
+		VkSampler.IN("sampler", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1830,7 +1830,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a descriptor set layout object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkDescriptorSetLayout.IN("descriptorSetLayout", ""),
+		VkDescriptorSetLayout.IN("descriptorSetLayout", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1849,7 +1849,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a descriptor pool object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkDescriptorPool.IN("descriptorPool", ""),
+		VkDescriptorPool.IN("descriptorPool", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1907,7 +1907,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a framebuffer object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkFramebuffer.IN("framebuffer", ""),
+		VkFramebuffer.IN("framebuffer", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1926,7 +1926,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a render pass object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkRenderPass.IN("renderPass", ""),
+		VkRenderPass.IN("renderPass", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
@@ -1954,7 +1954,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Destroys a command pool object.",
 
 		VkDevice.IN("device", ""),
-		nullable..VkCommandPool.IN("commandPool", ""),
+		VkCommandPool.IN("commandPool", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 

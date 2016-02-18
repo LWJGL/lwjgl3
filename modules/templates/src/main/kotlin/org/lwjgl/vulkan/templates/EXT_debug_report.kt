@@ -101,7 +101,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		"",
 
 		VkInstance.IN("instance", ""),
-		nullable..VkDebugReportCallbackEXT.IN("callback", ""),
+		VkDebugReportCallbackEXT.IN("callback", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
