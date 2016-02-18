@@ -2207,52 +2207,5 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 1.0"
 	)
 
-	// [ Vulkan ]
 
-	int(
-		"VulkanSupported",
-		"""
-		Returns whether the Vulkan loader has been found. This check is performed by #Init().
-		
-		The availability of a Vulkan loader does not by itself guarantee that window surface creation or even device creation is possible. Call
-		#GetRequiredInstanceExtensions() to check whether the extensions necessary for Vulkan surface creation are available and
-		#GetPhysicalDevicePresentationSupport() to check whether a queue family of a physical device supports image presentation.
-
-		Possible errors include #NOT_INITIALIZED.
-
-		This function may be called from any thread.
-		""",
-
-		returnDoc = "#TRUE if Vulkan is available, or #FALSE otherwise",
-		since = "version 3.2"
-	)
-
-	(const..charASCII_pp)(
-		"GetRequiredInstanceExtensions",
-		"""
-		Returns an array of names of Vulkan instance extensions required by GLFW for creating Vulkan surfaces for GLFW windows. If successful, the list will
-		always contain {@code VK_KHR_surface}, so if you don't require any additional extensions you can pass this list directly to the
-		{@code VkInstanceCreateInfo} struct.
-
-		If Vulkan is not available on the machine, this function returns $NULL and generates a #API_UNAVAILABLE error. Call #VulkanSupported() to check whether
-		Vulkan is available.
-
-		If Vulkan is available but no set of extensions allowing window surface creation was found, this function returns $NULL. You may still use Vulkan for
-		off-screen rendering and compute work.
-
-		Additional extensions may be required by future versions of GLFW. You should check if any extensions you wish to enable are already in the returned
-		array, as it is an error to specify an extension more than once in the {@code VkInstanceCreateInfo} struct.
-
-		The returned array is allocated and freed by GLFW. You should not free it yourself. It is guaranteed to be valid only until the library is terminated.
-
-		This function may be called from any thread.
-
-		Possible errors include #NOT_INITIALIZED and #API_UNAVAILABLE.
-		""",
-
-		AutoSizeResult..int_p.OUT("count", "where to store the number of extensions in the returned array. This is set to zero if an error occurred."),
-
-		returnDoc = "an array of ASCII encoded extension names, or $NULL if an error occurred",
-		since = "version 3.2"
-	)
 }
