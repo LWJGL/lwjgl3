@@ -541,7 +541,7 @@ val VkDeviceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
 	const_void_p.member("pNext", "")
 	VkDeviceCreateFlags.member("flags", "")
 	uint32_t.member("queueCreateInfoCount", "")
-	const_VkDeviceQueueCreateInfo_p.member("pQueueCreateInfos", "")
+	const_VkDeviceQueueCreateInfo_p.buffer("pQueueCreateInfos", "")
 	uint32_t.member("enabledLayerCount", "")
 	const_charUTF8_const_p.member("ppEnabledLayerNames", "")
 	uint32_t.member("enabledExtensionCount", "")
@@ -642,7 +642,7 @@ val VkSparseBufferMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseBufferMemoryB
 	
     VkBuffer.member("buffer", "")
     uint32_t.member("bindCount", "")
-    VkSparseMemoryBind.const_p.member("pBinds", "")
+    VkSparseMemoryBind.const_p.buffer("pBinds", "")
 }.nativeType
 
 val VkSparseImageOpaqueMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageOpaqueMemoryBindInfo") {
@@ -650,7 +650,7 @@ val VkSparseImageOpaqueMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageOpa
 	
 	VkImage.member("image", "")
 	uint32_t.member("bindCount", "")
-	VkSparseMemoryBind.const_p.member("pBinds", "")
+	VkSparseMemoryBind.const_p.buffer("pBinds", "")
 }.nativeType
 
 val VkSparseImageMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBindInfo") {
@@ -658,7 +658,7 @@ val VkSparseImageMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBin
 	
 	VkImage.member("image", "")
 	uint32_t.member("bindCount", "")
-	VkSparseMemoryBind.const_p.member("pBinds", "")
+	VkSparseMemoryBind.const_p.buffer("pBinds", "")
 }.nativeType
 
 val VkBindSparseInfo_p = struct_p(VULKAN_PACKAGE, "VkBindSparseInfo") {
@@ -669,11 +669,11 @@ val VkBindSparseInfo_p = struct_p(VULKAN_PACKAGE, "VkBindSparseInfo") {
     uint32_t.member("waitSemaphoreCount", "")
 	VkSemaphore.const_p.member("pWaitSemaphores", "")
     uint32_t.member("bufferBindCount", "")
-	VkSparseBufferMemoryBindInfo.const_p.member("pBufferBinds", "")
+	VkSparseBufferMemoryBindInfo.const_p.buffer("pBufferBinds", "")
     uint32_t.member("imageOpaqueBindCount", "")
-	VkSparseImageOpaqueMemoryBindInfo.const_p.member("pImageOpaqueBinds", "")
+	VkSparseImageOpaqueMemoryBindInfo.const_p.buffer("pImageOpaqueBinds", "")
     uint32_t.member("imageBindCount", "")
-	VkSparseImageMemoryBindInfo.const_p.member("pImageBinds", "")
+	VkSparseImageMemoryBindInfo.const_p.buffer("pImageBinds", "")
     uint32_t.member("signalSemaphoreCount", "")
 	VkSemaphore.const_p.member("pSignalSemaphores", "")
 }
@@ -841,7 +841,7 @@ val VkSpecializationInfo = struct(VULKAN_PACKAGE, "VkSpecializationInfo") {
 	documentation = ""
 	
 	uint32_t.member("mapEntryCount", "")
-	VkSpecializationMapEntry.const_p.member("pMapEntries", "")
+	VkSpecializationMapEntry.const_p.buffer("pMapEntries", "")
 	size_t.member("dataSize", "")
 	const_void_p.member("pData", "")
 }.nativeType
@@ -882,9 +882,9 @@ val VkPipelineVertexInputStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineVer
     const_void_p.member("pNext", "")
     VkPipelineVertexInputStateCreateFlags.member("flags", "")
     uint32_t.member("vertexBindingDescriptionCount", "")
-    VkVertexInputBindingDescription.const_p.member("pVertexBindingDescriptions", "")
+    VkVertexInputBindingDescription.const_p.buffer("pVertexBindingDescriptions", "")
     uint32_t.member("vertexAttributeDescriptionCount", "")
-    VkVertexInputAttributeDescription.const_p.member("pVertexAttributeDescriptions", "")
+    VkVertexInputAttributeDescription.const_p.buffer("pVertexAttributeDescriptions", "")
 }.nativeType
 
 val VkPipelineInputAssemblyStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineInputAssemblyStateCreateInfo") {
@@ -945,9 +945,9 @@ val VkPipelineViewportStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineViewpo
     const_void_p.member("pNext", "")
     VkPipelineViewportStateCreateFlags.member("flags", "")
     uint32_t.member("viewportCount", "")
-    VkViewport.const_p.member("pViewports", "")
+    VkViewport.const_p.buffer("pViewports", "")
     uint32_t.member("scissorCount", "")
-    VkRect2D.const_p.member("pScissors", "")
+    VkRect2D.const_p.buffer("pScissors", "")
 }.nativeType
 
 val VkPipelineRasterizationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineRasterizationStateCreateInfo") {
@@ -1033,7 +1033,7 @@ val VkPipelineColorBlendStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineColo
 	VkBool32.member("logicOpEnable", "")
 	VkLogicOp.member("logicOp", "")
 	uint32_t.member("attachmentCount", "")
-	VkPipelineColorBlendAttachmentState.const_p.member("pAttachments", "")
+	VkPipelineColorBlendAttachmentState.const_p.buffer("pAttachments", "")
 	float.array("blendConstants", "", size = 4)
 }.nativeType
 
@@ -1054,7 +1054,7 @@ val VkGraphicsPipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkGraphicsPipelin
 	const_void_p.member("pNext", "")
 	VkPipelineCreateFlags.member("flags", "")
 	uint32_t.member("stageCount", "")
-	VkPipelineShaderStageCreateInfo.const_p.member("pStages", "")
+	VkPipelineShaderStageCreateInfo.const_p.buffer("pStages", "")
 	VkPipelineVertexInputStateCreateInfo.const_p.member("pVertexInputState", "")
 	VkPipelineInputAssemblyStateCreateInfo.const_p.member("pInputAssemblyState", "")
 	VkPipelineTessellationStateCreateInfo.const_p.member("pTessellationState", "")
@@ -1100,7 +1100,7 @@ val VkPipelineLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkPipelineLayoutCre
     uint32_t.member("setLayoutCount", "")
     VkDescriptorSetLayout.const_p.member("pSetLayouts", "")
     uint32_t.member("pushConstantRangeCount", "")
-    VkPushConstantRange.const_p.member("pPushConstantRanges", "")
+    VkPushConstantRange.const_p.buffer("pPushConstantRanges", "")
 }
 
 val VkSamplerCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
@@ -1143,7 +1143,7 @@ val VkDescriptorSetLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSe
 	const_void_p.member("pNext", "")
 	VkDescriptorSetLayoutCreateFlags.member("flags", "")
 	uint32_t.member("bindingCount", "")
-	VkDescriptorSetLayoutBinding.const_p.member("pBindings", "")
+	VkDescriptorSetLayoutBinding.const_p.buffer("pBindings", "")
 }
 
 val VkDescriptorPoolSize = struct(VULKAN_PACKAGE, "VkDescriptorPoolSize") {
@@ -1161,7 +1161,7 @@ val VkDescriptorPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorPoolCre
 	VkDescriptorPoolCreateFlags.member("flags", "")
 	uint32_t.member("maxSets", "")
 	uint32_t.member("poolSizeCount", "")
-	VkDescriptorPoolSize.const_p.member("pPoolSizes", "")
+	VkDescriptorPoolSize.const_p.buffer("pPoolSizes", "")
 }
 
 val VkDescriptorSetAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSetAllocateInfo") {
@@ -1260,10 +1260,10 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
 	VkSubpassDescriptionFlags.member("flags", "")
 	VkPipelineBindPoint.member("pipelineBindPoint", "")
 	uint32_t.member("inputAttachmentCount", "")
-	VkAttachmentReference.const_p.member("pInputAttachments", "")
+	VkAttachmentReference.const_p.buffer("pInputAttachments", "")
 	uint32_t.member("colorAttachmentCount", "")
-	VkAttachmentReference.const_p.member("pColorAttachments", "")
-	VkAttachmentReference.const_p.member("pResolveAttachments", "")
+	VkAttachmentReference.const_p.buffer("pColorAttachments", "")
+	VkAttachmentReference.const_p.buffer("pResolveAttachments", "")
 	VkAttachmentReference.const_p.member("pDepthStencilAttachment", "")
 	uint32_t.member("preserveAttachmentCount", "")
 	uint32_t.const_p.member("pPreserveAttachments", "")
@@ -1288,11 +1288,11 @@ val VkRenderPassCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassCreateInfo"
 	const_void_p.member("pNext", "")
 	VkRenderPassCreateFlags.member("flags", "")
 	uint32_t.member("attachmentCount", "")
-	VkAttachmentDescription.const_p.member("pAttachments", "")
+	VkAttachmentDescription.const_p.buffer("pAttachments", "")
 	uint32_t.member("subpassCount", "")
-	VkSubpassDescription.const_p.member("pSubpasses", "")
+	VkSubpassDescription.const_p.buffer("pSubpasses", "")
 	uint32_t.member("dependencyCount", "")
-	VkSubpassDependency.const_p.member("pDependencies", "")
+	VkSubpassDependency.const_p.buffer("pDependencies", "")
 }
 
 val VkCommandPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandPoolCreateInfo") {
@@ -1488,5 +1488,5 @@ val VkRenderPassBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassBeginInfo") 
 	VkFramebuffer.member("framebuffer", "")
 	VkRect2D.member("renderArea", "")
 	uint32_t.member("clearValueCount", "")
-	VkClearValue.const_p.member("pClearValues", "")
+	VkClearValue.const_p.buffer("pClearValues", "")
 }
