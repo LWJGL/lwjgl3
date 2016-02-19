@@ -270,11 +270,6 @@ public final class MemoryUtil {
 		nmemFree(memAddress0Safe(ptr));
 	}
 
-	/** StructBuffer version of {@link #memFree}. */
-	public static void memFree(StructBuffer<?, ?> ptr) {
-		nmemFree(memAddress0Safe(ptr));
-	}
-
 	// --- [ memCalloc ] ---
 
 	/** Unsafe version of {@link #memCalloc}. */

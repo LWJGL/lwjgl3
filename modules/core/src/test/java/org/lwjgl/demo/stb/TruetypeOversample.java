@@ -393,7 +393,7 @@ public final class TruetypeOversample {
 	}
 
 	private void destroy() {
-		memFree(chardata);
+		chardata.free();
 
 		if ( debugProc != null )
 			debugProc.release();

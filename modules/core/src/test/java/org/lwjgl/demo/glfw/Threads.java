@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * GLFW demo that showcases rendering to multiple windows from multiple threads. Ported from the GLFW
- * <a href="https://github.com/elmindreda/glfw/blob/master/tests/threads.c">threads</a> test.
+ * <a href="https://github.com/glfw/glfw/blob/master/tests/threads.c">threads</a> test.
  *
  * @author Brian Matzon <brian@matzon.dk>
  */

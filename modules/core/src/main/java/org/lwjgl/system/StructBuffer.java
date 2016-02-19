@@ -64,6 +64,15 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	}
 
 	/**
+	 * Frees the struct buffer allocation.
+	 *
+	 * <p>This method should not be used if the memory backing this struct buffer is not owned by the struct buffer.</p>
+	 */
+	public void free() {
+		nmemFree(address0());
+	}
+
+	/**
 	 * Returns this buffer's capacity.
 	 *
 	 * @return the capacity of this buffer

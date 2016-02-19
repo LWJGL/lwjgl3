@@ -104,7 +104,7 @@ public class StructTest {
 		assertEquals(copy.elements(0), null);
 
 		copy.free();
-		memFree(b);
+		b.free();
 	}
 
 	public void testStructBufferIteration() {
@@ -123,7 +123,7 @@ public class StructTest {
 		b.flip();
 		assertEquals(b.address(), b.address0());
 
-		memFree(b);
+		b.free();
 	}
 
 	public void testStructBufferIterationAbs() {
@@ -140,7 +140,7 @@ public class StructTest {
 		assertEquals(b.remaining(), b.capacity());
 		assertEquals(b.address(), b.address0());
 
-		memFree(b);
+		b.free();
 	}
 
 }

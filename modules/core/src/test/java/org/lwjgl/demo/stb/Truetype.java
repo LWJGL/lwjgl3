@@ -116,7 +116,7 @@ public final class Truetype extends FontDemo {
 		}
 
 		q.free();
-		memFree(cdata);
+		cdata.free();
 
 		glfwDestroyWindow(getWindow());
 	}
