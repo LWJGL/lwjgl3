@@ -115,7 +115,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		uint64_t.IN("object", ""),
 		size_t.IN("location", ""),
 		int32_t.IN("messageCode", ""),
-		const..char_p.IN("pLayerPrefix", ""),
-		const..char_p.IN("pMessage", "")
+		const..charUTF8_p.IN("pLayerPrefix", ""),
+		const..charUTF8_p.IN("pMessage", "")
 	)
 }

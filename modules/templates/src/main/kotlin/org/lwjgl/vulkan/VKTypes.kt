@@ -553,7 +553,7 @@ val VK_MAX_EXTENSION_NAME_SIZE = 256
 val VkExtensionProperties_p = struct_p(VULKAN_PACKAGE, "VkExtensionProperties", mutable = false) {
 	documentation = ""
 
-	charASCII.array("extensionName", "", size = VK_MAX_EXTENSION_NAME_SIZE)
+	charUTF8.array("extensionName", "", size = VK_MAX_EXTENSION_NAME_SIZE)
 	uint32_t.member("specVersion", "")
 }
 
@@ -561,7 +561,7 @@ val VK_MAX_DESCRIPTION_SIZE = 256
 val VkLayerProperties_p = struct_p(VULKAN_PACKAGE, "VkLayerProperties", mutable = false) {
 	documentation = ""
 
-	charASCII.array("layerName", "", size = VK_MAX_EXTENSION_NAME_SIZE)
+	charUTF8.array("layerName", "", size = VK_MAX_EXTENSION_NAME_SIZE)
 	uint32_t.member("specVersion", "")
 	uint32_t.member("implementationVersion", "")
 	charUTF8.array("description", "", size = VK_MAX_DESCRIPTION_SIZE)

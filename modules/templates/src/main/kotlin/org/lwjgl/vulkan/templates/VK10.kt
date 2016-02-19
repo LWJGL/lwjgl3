@@ -1239,7 +1239,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"EnumerateInstanceExtensionProperties",
 		"Returns up to requested number of global extension properties.",
 
-		nullable..const..charASCII_p.IN(
+		nullable..const..charUTF8_p.IN(
 			"pLayerName",
 			"pointer to optional layer name. If not null, will only return extension properties for the requested layer."
 		),
@@ -1255,7 +1255,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"Returns properties of available physical device extensions.",
 
 		VkPhysicalDevice.IN("physicalDevice", "the physical device to query"),
-		nullable..const..char_p.IN("pLayerName", "optional layer name to query"),
+		nullable..const..charUTF8_p.IN("pLayerName", "optional layer name to query"),
 		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
 			"pPropertyCount",
 			"count indicating number of {@code VkExtensionProperties} pointed to by {@code pProperties}"

@@ -26,7 +26,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 	uint64_t.IN("object", ""),
 	size_t.IN("location", ""),
 	int32_t.IN("messageCode", ""),
-	const..charASCII_p.IN("pLayerPrefix", ""),
+	const..charUTF8_p.IN("pLayerPrefix", ""),
 	const..charUTF8_p.IN("pMessage", ""),
 	void_p.IN("pUserData", "")
 ) {
