@@ -828,7 +828,7 @@ $indentation}"""
 							println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * POINTER_SIZE);")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
-							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) { memPutAddress($STRUCT + $field + index * POINTER_SIZE, value.$ADDRESS); }")
+							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) { memPutAddress($STRUCT + $field + index * POINTER_SIZE, addressSafe(value)); }")
 						} else {
 							println("\t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) {")
@@ -892,10 +892,10 @@ $indentation}"""
 						val structType = it.nativeType.definition.className
 						if ( it is StructMemberBuffer ) {
 							println("\t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
-							println("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) { memPutAddress($STRUCT + $field, value.$ADDRESS); }")
+							println("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) { memPutAddress($STRUCT + $field, addressSafe(value)); }")
 						} else {
 							println("\t/** Unsafe version of {@link #$setter($structType) $setter}. */")
-							println("\tpublic static void n$setter(long $STRUCT, $structType value) { memPutAddress($STRUCT + $field, value.$ADDRESS); }")
+							println("\tpublic static void n$setter(long $STRUCT, $structType value) { memPutAddress($STRUCT + $field, addressSafe(value)); }")
 						}
 					} else {
 						val bufferType = it.nativeType.javaMethodType.simpleName
@@ -940,7 +940,7 @@ $indentation}"""
 						println("$indent/** Sets the specified function address to the {@code $field} field. */")
 						println("${indent}public $returnType $setter(long value) { $n$setter($ADDRESS, value); return this; }")
 						println("$indent/** Sets the address of the specified {@link $callbackType} to the {@code $field} field. */")
-						println("${indent}public $returnType $setter($callbackType value) { return $setter(value.address()); }")
+						println("${indent}public $returnType $setter($callbackType value) { return $setter(addressSafe(value)); }")
 					} else {
 						println("$indent/** Sets the specified value to the {@code $field} field. */")
 						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType.simpleName} value) { $n$setter($ADDRESS, value); return this; }")
