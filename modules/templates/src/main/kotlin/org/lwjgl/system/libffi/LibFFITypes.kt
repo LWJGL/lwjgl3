@@ -41,7 +41,7 @@ val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", nativeName = "ffi_cif", mutable 
 	documentation = "Contains information about a libffi call interface."
 
 	ffi_abi.member("abi", "")
-	unsigned.member("nargs", "")
+	AutoSize("arg_types")..unsigned.member("nargs", "")
 	ffi_type_pp.member("arg_types", "")
 	ffi_type_p.member("rtype", "")
 	unsigned.member("bytes", "")

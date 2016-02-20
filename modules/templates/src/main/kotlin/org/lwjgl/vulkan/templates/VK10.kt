@@ -1302,7 +1302,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		VkQueue.IN("queue", ""),
 		AutoSize("pSubmits")..uint32_t.IN("submitCount", ""),
-		SingleValue("pSubmit")..const..VkSubmitInfo_p.IN("pSubmits", ""),
+		SingleValue("pSubmit")..nullable..const..VkSubmitInfo_p.IN("pSubmits", ""),
 		VkFence.IN("fence", "")
 	)
 

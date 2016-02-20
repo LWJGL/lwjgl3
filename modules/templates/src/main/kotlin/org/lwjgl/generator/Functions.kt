@@ -78,9 +78,9 @@ abstract class Function(
 		getParams { (withJNIEnv || it !== JNI_ENV) && (withExplicitFunctionAddress || it !== EXPLICIT_FUNCTION_ADDRESS) && !it.has(Virtual) }
 
 	/** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
-	fun getReferenceParam(modifierObject: ModifierKey<*>, reference: String) = getParams {
+	fun getReferenceParam(modifierObject: ModifierKey<*>, reference: String) = parameters.asSequence().firstOrNull {
 		it.hasRef(modifierObject, reference)
-	}.firstOrNull() // Assumes at most 1 parameter will be found that references the specified parameter
+	} // Assumes at most 1 parameter will be found that references the specified parameter
 
 }
 

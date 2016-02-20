@@ -50,7 +50,7 @@ val GLFWgammaramp_p = struct_p(GLFW_PACKAGE, "GLFWGammaRamp", nativeName = "GLFW
 	unsigned_short_p.member("red", "an array of value describing the response of the red channel")
 	unsigned_short_p.member("green", "an array of value describing the response of the green channel")
 	unsigned_short_p.member("blue", "an array of value describing the response of the blue channel")
-	unsigned_int.member("size", "the number of elements in each array")
+	AutoSize("red", "green", "blue")..unsigned_int.member("size", "the number of elements in each array")
 }
 
 val GLFWcursor = "GLFWcursor".p

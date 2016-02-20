@@ -282,7 +282,7 @@ val stb_vorbis_alloc_p = struct_p(STB_PACKAGE, "STBVorbisAlloc", nativeName = "s
 	documentation = "A buffer to use for allocations by ##STBVorbis"
 
 	char_p.member("alloc_buffer", "")
-	int.member("alloc_buffer_length_in_bytes", "")
+	AutoSize("alloc_buffer")..int.member("alloc_buffer_length_in_bytes", "")
 }
 
 val stb_vorbis_info = struct(STB_PACKAGE, "STBVorbisInfo", nativeName = "stb_vorbis_info", mutable = false) {

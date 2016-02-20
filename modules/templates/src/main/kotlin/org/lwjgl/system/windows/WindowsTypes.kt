@@ -192,18 +192,39 @@ val WNDPROC = "WNDPROC".callback(
 val WNDCLASSEX_p = struct_p(WINDOWS_PACKAGE, "WNDCLASSEX") {
 	documentation = "Contains the window class attributes that are registered by the User32#RegisterClassEx() function."
 
-	UINT.member("cbSize", "")
-	UINT.member("style", "")
-	WNDPROC.member("lpfnWndProc", "")
-	int.member("cbClsExtra", "")
-	int.member("cbWndExtra", "")
-	HINSTANCE.member("hInstance", "")
-	HICON.member("hIcon", "")
-	HCURSOR.member("hCursor", "")
-	HBRUSH.member("hbrBackground", "")
-	LPCTSTR.member("lpszMenuName", "")
-	LPCTSTR.member("lpszClassName", "")
-	HICON.member("hIconSm", "")
+	UINT.member("cbSize", "the size, in bytes, of this structure")
+	UINT.member("style", "the class style(s)")
+	WNDPROC.member("lpfnWndProc", "a pointer to the window procedure")
+	int.member("cbClsExtra", "the number of extra bytes to allocate following the window-class structure. The system initializes the bytes to zero.")
+	int.member("cbWndExtra", "the number of extra bytes to allocate following the window instance. The system initializes the bytes to zero.")
+	HINSTANCE.member("hInstance", "a handle to the instance that contains the window procedure for the class")
+	HICON.member(
+		"hIcon",
+		"a handle to the class icon. This member must be a handle to an icon resource. If this member is $NULL, the system provides a default icon."
+	)
+	HCURSOR.member(
+		"hCursor",
+		"""
+		a handle to the class cursor. This member must be a handle to a cursor resource. If this member is $NULL, an application must explicitly set the cursor
+		shape whenever the mouse moves into the application's window.
+		"""
+	)
+	HBRUSH.member(
+		"hbrBackground",
+		"a handle to the class background brush. This member can be a handle to the brush to be used for painting the background, or it can be a color value."
+	)
+	LPCTSTR.member(
+		"lpszMenuName",
+		"pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file"
+	)
+	LPCTSTR.member("lpszClassName", "a pointer to a null-terminated string or is an atom")
+	HICON.member(
+		"hIconSm",
+		"""
+		a handle to a small icon that is associated with the window class. If this member is $NULL, the system searches the icon resource specified by the
+		{@code hIcon} member for an icon of the appropriate size to use as the small icon.
+		"""
+	)
 }
 
 val WINDOWPLACEMENT_p = struct_p(WINDOWS_PACKAGE, "WINDOWPLACEMENT") {

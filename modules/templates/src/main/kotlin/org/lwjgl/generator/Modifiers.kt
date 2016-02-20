@@ -124,6 +124,19 @@ abstract class ReturnValueModifier : TemplateModifier {
 	}
 }
 
+/** A modifier that can be applied on struct members. */
+abstract class StructMemberModifier : TemplateModifier {
+	override fun validate(element: TemplateElement) {
+		if ( element is StructMember )
+			validate(element)
+		else
+			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on struct members.")
+	}
+
+	protected open fun validate(member: StructMember) {
+	}
+}
+
 /** A TemplateModifier with a reference to another TemplateElement. */
 interface ReferenceModifier : TemplateModifier {
 	val reference: String
@@ -165,6 +178,11 @@ operator fun ReturnValueModifier.rangeTo(retValue: ReturnValue): ReturnValue {
 operator fun <T : QualifiedType> QualifiedTypeModifier.rangeTo(qtype: T): T {
 	qtype.setModifiers(this)
 	return qtype
+}
+
+operator fun StructMemberModifier.rangeTo(member: StructMember): StructMember {
+	member.setModifiers(this)
+	return member
 }
 
 // Used with multiple Parameter/ReturnValue/QualifiedType modifiers

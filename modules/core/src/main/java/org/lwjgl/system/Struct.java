@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.system.libffi.Closure;
-
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
