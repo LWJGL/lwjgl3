@@ -2113,10 +2113,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	void(
 		"SwapBuffers",
 		"""
-		Swaps the front and back buffers of the specified window. If the swap interval is greater than zero, the GPU driver waits the specified number of screen
-		updates before swapping the buffers.
+		Swaps the front and back buffers of the specified window when rendering with OpenGL or OpenGL ES. If the swap interval is greater than zero, the GPU
+		driver waits the specified number of screen updates before swapping the buffers.
 
 		The specified window must have an OpenGL or OpenGL ES context. Specifying a window without a context will generate a #NO_WINDOW_CONTEXT error.
+
+		This function does not apply to Vulkan. If you are rendering with Vulkan, {@code vkQueuePresentKHR} instead.
 
 		<b>EGL</b>: The context of the specified window must be current on the calling thread.
 
@@ -2131,8 +2133,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	void(
 		"SwapInterval",
 		"""
-		Sets the swap interval for the current context, i.e. the number of screen updates to wait from the time #SwapBuffers() was called before swapping the
-		buffers and returning. This is sometimes called <i>vertical synchronization</i>, <i>vertical retrace synchronization</i> or just <i>vsync</i>.
+		Sets the swap interval for the current OpenGL or OpenGL ES context, i.e. the number of screen updates to wait from the time #SwapBuffers() was called
+		before swapping the buffers and returning. This is sometimes called <i>vertical synchronization</i>, <i>vertical retrace synchronization</i> or just
+		<i>vsync</i>.
 
 		Contexts that support either of the <a href="https://www.opengl.org/registry/specs/EXT/wgl_swap_control_tear.txt">WGL_EXT_swap_control_tear</a> and
 		<a href="https://www.opengl.org/registry/specs/EXT/glx_swap_control_tear.txt">GLX_EXT_swap_control_tear</a> extensions also accept negative swap
@@ -2140,6 +2143,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		#ExtensionSupported(). For more information about swap tearing, see the extension specifications.
 
 		A context must be current on the calling thread. Calling this function without a current context will cause a #NO_CURRENT_CONTEXT error.
+
+		This function does not apply to Vulkan. If you are rendering with Vulkan, see the present mode of your swapchain instead.
 
 		Notes:
 		${ul(
@@ -2164,12 +2169,15 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"ExtensionSupported",
 		"""
 		Returns whether the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">API extension</a> is supported by the current
-		OpenGL or OpenGL ES context. It searches both for OpenGL and OpenGL ES extension and platform-specific context creation API extensions.
+		OpenGL or OpenGL ES context. It searches both for client API extension and context creation API extensions.
 
 		A context must be current on the calling thread. Calling this function without a current context will cause a #NO_CURRENT_CONTEXT error.
 
 		As this functions retrieves and searches one or more extension strings each call, it is recommended that you cache its results if it is going to be used
 		frequently. The extension strings will not change during the lifetime of a context, so there is no danger in doing this.
+
+		This function does not apply to Vulkan. If you are using Vulkan, see GLFWVulkan#GetRequiredInstanceExtensions(),
+		{@code vkEnumerateInstanceExtensionProperties} and {@code vkEnumerateDeviceExtensionProperties} instead.
 
 		This function may be called from any thread.
 		""",
@@ -2184,10 +2192,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	GLFWglproc(
 		"GetProcAddress",
 		"""
-		Returns the address of the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">core or extension function</a>, if it is
-		supported by the current context.
+		Returns the address of the specified OpenGL or OpenGL ES <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">core or extension
+		function</a>, if it is supported by the current context.
 
 		A context must be current on the calling thread.  Calling this function without a current context will cause a #NO_CURRENT_CONTEXT error.
+
+		This function does not apply to Vulkan. If you are rendering with Vulkan, GLFWVulkan#GetInstanceProcAddress(), {@code vkGetInstanceProcAddr} and
+		{@code vkGetDeviceProcAddr} instead.
 
 		Notes:
 		${ul(
