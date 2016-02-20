@@ -46,6 +46,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"API_VERSION".expr("((($major) << 22) | (($minor) << 12) | ($patch))")
 	)
 
+	IntConstant("The Vulkan major version number.", "VERSION_MAJOR" expr "$major")
+	IntConstant("The Vulkan minor version number.", "VERSION_MINOR" expr "$minor")
+	IntConstant("The Vulkan patch version number.", "VERSION_PATCH" expr "$patch")
+
 	LongConstant(
 		"""
 		The reserved handle {@code VK_NULL_HANDLE} can be passed in place of valid object handles when explicitly called out in the specification. Any command
