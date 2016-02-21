@@ -13,7 +13,7 @@ public class VkCommandBuffer extends DispatchableHandle {
 	 * @param handle the native {@code VkCommandBuffer} handle
 	 * @param device the device on which the command buffer was created
 	 */
-	VkCommandBuffer(long handle, VkDevice device) {
+	public VkCommandBuffer(long handle, VkDevice device) {
 		super(handle, device.getCapabilities());
 	}
 
