@@ -1124,7 +1124,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"STENCIL_FRONT_AND_BACK".enum("", 0x3)
 	)
 
-	VkResult(
+	GlobalCommand..VkResult(
 		"CreateInstance",
 		"Creates a new Vulkan instance.",
 
@@ -1235,11 +1235,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"DestroyDevice",
 		"Destroys a logical device.",
 
-		nullable..VkDevice.IN("device", ""),
+		VkDevice.IN("device", ""),
 		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
 	)
 
-	VkResult(
+	GlobalCommand..VkResult(
 		"EnumerateInstanceExtensionProperties",
 		"Returns up to requested number of global extension properties.",
 
@@ -1267,7 +1267,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		nullable..VkExtensionProperties_p.OUT("pProperties", "pointer to an array of {@code VkExtensionProperties}")
 	)
 
-	VkResult(
+	GlobalCommand..VkResult(
 		"EnumerateInstanceLayerProperties",
 		"Returns up to requested number of global layer properties.",
 

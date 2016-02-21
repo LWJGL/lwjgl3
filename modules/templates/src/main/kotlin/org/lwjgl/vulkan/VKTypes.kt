@@ -27,7 +27,7 @@ val VkSampleMask = typedef(uint32_t, "VkSampleMask")
 
 val PFN_vkVoidFunction = "PFN_vkVoidFunction".opaque_p
 
-fun VK_DEFINE_HANDLE(name: String) = name.opaque_p
+fun VK_DEFINE_HANDLE(name: String) = ObjectType(name)
 fun VK_DEFINE_NON_DISPATCHABLE_HANDLE(name: String) = typedef(uint64_t, name)
 
 val VkInstance = VK_DEFINE_HANDLE("VkInstance")

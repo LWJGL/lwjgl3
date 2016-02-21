@@ -175,7 +175,7 @@ class NativeClassFunction(
 	private val isSimpleFunction: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
 
-	private val hasUnsafeMethod: Boolean
+	val hasUnsafeMethod: Boolean
 		get() = nativeClass.binding != null && !(hasExplicitFunctionAddress && hasNativeCode) && (returns.isBufferPointer || hasParam { it.isBufferPointer }) && !returns.has(Address)
 
 	private val ReturnValue.isStructValue: Boolean
@@ -214,6 +214,9 @@ class NativeClassFunction(
 			"$javaMethodType.Buffer $name"
 		else
 			"$javaMethodType $name"
+
+	private val Parameter.isFunctionProvider: Boolean
+		get() = nativeType is ObjectType && nativeClass.binding != null && !nativeClass.binding.hasCurrentCapabilities
 
 	/** Validates parameters with modifiers that reference other parameters. */
 	private fun validate() {
@@ -504,7 +507,10 @@ class NativeClassFunction(
 		println("\t@JavadocExclude")
 		print("\t${accessModifier}static $returnsNativeMethodType n$name(")
 		printList(getNativeParams()) {
-			it.asNativeMethodParam
+			if ( it.isFunctionProvider )
+				it.asJavaMethodParam
+			else
+				it.asNativeMethodParam
 		}
 
 		if ( returns.isStructValue ) {
@@ -552,7 +558,10 @@ class NativeClassFunction(
 			if ( hasNativeParams ) print(", ")
 		}
 		printList(getNativeParams()) {
-			it.name
+			if ( it.isFunctionProvider )
+				"${it.name}.$ADDRESS"
+			else
+				it.name
 		}
 		if ( returns.isStructValue ) {
 			print(", ")

@@ -163,7 +163,13 @@ class Parameter(
 	fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
 	// Object parameter
 		nativeType is StructType || nativeType is ObjectType
-		                         -> if ( has(nullable) ) "$name == null ? NULL : $name.$ADDRESS" else "$name.$ADDRESS"
+		                         ->
+			if ( has(nullable) )
+				"$name == null ? NULL : $name.$ADDRESS"
+			else if ( nativeType is ObjectType && func.hasUnsafeMethod && !func.nativeClass.binding!!.hasCurrentCapabilities )
+				name
+			else
+				"$name.$ADDRESS"
 
 	// Data pointer
 		nativeType.isPointerData -> {

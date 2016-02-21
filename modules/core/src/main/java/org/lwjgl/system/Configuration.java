@@ -193,6 +193,8 @@ public enum Configuration {
 	EXPLICIT_INIT_OPENGL("org.lwjgl.opengl.explicitInit", StateInit.BOOLEAN),
 	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenGL ES library (<b>org.lwjgl.opengles.explicitInit</b>). */
 	EXPLICIT_INIT_OPENGLES("org.lwjgl.opengles.explicitInit", StateInit.BOOLEAN),
+	/** Similar to {@link #EXPLICIT_INIT_EGL} for the Vulkan library (<b>org.lwjgl.vulkan.explicitInit</b>). */
+	EXPLICIT_INIT_VULKAN("org.lwjgl.vulkan.explicitInit", StateInit.BOOLEAN),
 
 	/**
 	 * By default, LWJGL will check if certain GLFW functions are called on the first thread of the process and fail if that is not the case. Set this property
