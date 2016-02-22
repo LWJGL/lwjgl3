@@ -667,7 +667,8 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 			throw new BufferOverflowException();
 
 		memCopy(memAddress(src), memAddress(this), n << POINTER_SHIFT);
-		position += n;
+		this.position(position + n);
+		src.position(src.position + n);
 		return this;
 	}
 
