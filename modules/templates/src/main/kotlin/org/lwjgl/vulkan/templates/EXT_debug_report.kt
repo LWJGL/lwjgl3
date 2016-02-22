@@ -86,6 +86,12 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		"DEBUG_REPORT_DEBUG_BIT_EXT".enum("", 0x00000010)
 	)
 
+	IntConstant(
+		"VkResult",
+
+		"ERROR_VALIDATION_FAILED_EXT" expr "-1000011001"
+	)
+
 	VkResult(
 		"CreateDebugReportCallbackEXT",
 		"",
