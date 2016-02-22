@@ -1668,7 +1668,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		VkDevice.IN("device", ""),
 		VkImage.IN("image", ""),
 		const..VkImageSubresource_p.IN("pSubresource", ""),
-		Check(1)..VkSubresourceLayout_p.OUT("pLayout", "")
+		VkSubresourceLayout_p.OUT("pLayout", "")
 	)
 
 	VkResult(
