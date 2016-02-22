@@ -98,7 +98,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPipelineCacheHeaderVersion",
 
-		"PIPELINE_CACHE_HEADER_VERSION_ONE".enum("", 1),
+		"PIPELINE_CACHE_HEADER_VERSION_ONE".enumExpr("", "1"),
 		"PIPELINE_CACHE_HEADER_VERSION_BEGIN_RANGE".enumExpr("","VK_PIPELINE_CACHE_HEADER_VERSION_ONE"),
 		"PIPELINE_CACHE_HEADER_VERSION_END_RANGE".enumExpr("","VK_PIPELINE_CACHE_HEADER_VERSION_ONE"),
 		"PIPELINE_CACHE_HEADER_VERSION_RANGE_SIZE".enumExpr("", "VK_PIPELINE_CACHE_HEADER_VERSION_ONE - VK_PIPELINE_CACHE_HEADER_VERSION_ONE + 1"),
@@ -134,7 +134,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkStructureType",
 
-		"STRUCTURE_TYPE_APPLICATION_INFO".enum("", 0),
+		"STRUCTURE_TYPE_APPLICATION_INFO".enumExpr("", "0"),
 		"STRUCTURE_TYPE_INSTANCE_CREATE_INFO".enum(""),
 		"STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO".enum(""),
 		"STRUCTURE_TYPE_DEVICE_CREATE_INFO".enum(""),
@@ -192,7 +192,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSystemAllocationScope",
 
-		"SYSTEM_ALLOCATION_SCOPE_COMMAND".enum("", 0),
+		"SYSTEM_ALLOCATION_SCOPE_COMMAND".enumExpr("", "0"),
 		"SYSTEM_ALLOCATION_SCOPE_OBJECT".enum(""),
 		"SYSTEM_ALLOCATION_SCOPE_CACHE".enum(""),
 		"SYSTEM_ALLOCATION_SCOPE_DEVICE".enum(""),
@@ -206,7 +206,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkInternalAllocationType",
 
-		"INTERNAL_ALLOCATION_TYPE_EXECUTABLE".enum("", 0),
+		"INTERNAL_ALLOCATION_TYPE_EXECUTABLE".enumExpr("", "0"),
 		"INTERNAL_ALLOCATION_TYPE_BEGIN_RANGE".enumExpr("", "VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE"),
 		"INTERNAL_ALLOCATION_TYPE_END_RANGE".enumExpr("", "VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE"),
 		"INTERNAL_ALLOCATION_TYPE_RANGE_SIZE".enumExpr("", "VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE - VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE + 1"),
@@ -216,7 +216,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkFormat",
 
-		"FORMAT_UNDEFINED".enum("", 0),
+		"FORMAT_UNDEFINED".enumExpr("", "0"),
 		"FORMAT_R4G4_UNORM_PACK8".enum(""),
 		"FORMAT_R4G4B4A4_UNORM_PACK16".enum(""),
 		"FORMAT_B4G4R4A4_UNORM_PACK16".enum(""),
@@ -410,7 +410,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkImageType",
 
-		"IMAGE_TYPE_1D".enum("", 0),
+		"IMAGE_TYPE_1D".enumExpr("", "0"),
 		"IMAGE_TYPE_2D".enum(""),
 		"IMAGE_TYPE_3D".enum(""),
 		"IMAGE_TYPE_BEGIN_RANGE".enumExpr("", "VK_IMAGE_TYPE_1D"),
@@ -422,7 +422,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkImageTiling",
 
-		"IMAGE_TILING_OPTIMAL".enum("", 0),
+		"IMAGE_TILING_OPTIMAL".enumExpr("", "0"),
 		"IMAGE_TILING_LINEAR".enum(""),
 		"IMAGE_TILING_BEGIN_RANGE".enumExpr("", "VK_IMAGE_TILING_OPTIMAL"),
 		"IMAGE_TILING_END_RANGE".enumExpr("", "VK_IMAGE_TILING_LINEAR"),
@@ -433,7 +433,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPhysicalDeviceType",
 
-		"PHYSICAL_DEVICE_TYPE_OTHER".enum("", 0),
+		"PHYSICAL_DEVICE_TYPE_OTHER".enumExpr("", "0"),
 		"PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU".enum(""),
 		"PHYSICAL_DEVICE_TYPE_DISCRETE_GPU".enum(""),
 		"PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU".enum(""),
@@ -447,7 +447,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkQueryType",
 
-		"QUERY_TYPE_OCCLUSION".enum("", 0),
+		"QUERY_TYPE_OCCLUSION".enumExpr("", "0"),
 		"QUERY_TYPE_PIPELINE_STATISTICS".enum(""),
 		"QUERY_TYPE_TIMESTAMP".enum(""),
 		"QUERY_TYPE_BEGIN_RANGE".enumExpr("", "VK_QUERY_TYPE_OCCLUSION"),
@@ -459,7 +459,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSharingMode",
 
-		"SHARING_MODE_EXCLUSIVE".enum("", 0),
+		"SHARING_MODE_EXCLUSIVE".enumExpr("", "0"),
 		"SHARING_MODE_CONCURRENT".enum(""),
 		"SHARING_MODE_BEGIN_RANGE".enumExpr("", "VK_SHARING_MODE_EXCLUSIVE"),
 		"SHARING_MODE_END_RANGE".enumExpr("", "VK_SHARING_MODE_CONCURRENT"),
@@ -470,7 +470,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkImageLayout",
 
-		"IMAGE_LAYOUT_UNDEFINED".enum("", 0),
+		"IMAGE_LAYOUT_UNDEFINED".enumExpr("", "0"),
 		"IMAGE_LAYOUT_GENERAL".enum(""),
 		"IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL".enum(""),
 		"IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL".enum(""),
@@ -488,7 +488,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkImageViewType",
 
-		"IMAGE_VIEW_TYPE_1D".enum("", 0),
+		"IMAGE_VIEW_TYPE_1D".enumExpr("", "0"),
 		"IMAGE_VIEW_TYPE_2D".enum(""),
 		"IMAGE_VIEW_TYPE_3D".enum(""),
 		"IMAGE_VIEW_TYPE_CUBE".enum(""),
@@ -504,7 +504,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkComponentSwizzle",
 
-		"COMPONENT_SWIZZLE_IDENTITY".enum("", 0),
+		"COMPONENT_SWIZZLE_IDENTITY".enumExpr("", "0"),
 		"COMPONENT_SWIZZLE_ZERO".enum(""),
 		"COMPONENT_SWIZZLE_ONE".enum(""),
 		"COMPONENT_SWIZZLE_R".enum(""),
@@ -520,7 +520,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkVertexInputRate",
 
-		"VERTEX_INPUT_RATE_VERTEX".enum("", 0),
+		"VERTEX_INPUT_RATE_VERTEX".enumExpr("", "0"),
 		"VERTEX_INPUT_RATE_INSTANCE".enum(""),
 		"VERTEX_INPUT_RATE_BEGIN_RANGE".enumExpr("", "VK_VERTEX_INPUT_RATE_VERTEX"),
 		"VERTEX_INPUT_RATE_END_RANGE".enumExpr("", "VK_VERTEX_INPUT_RATE_INSTANCE"),
@@ -531,7 +531,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPrimitiveTopology",
 
-		"PRIMITIVE_TOPOLOGY_POINT_LIST".enum("", 0),
+		"PRIMITIVE_TOPOLOGY_POINT_LIST".enumExpr("", "0"),
 		"PRIMITIVE_TOPOLOGY_LINE_LIST".enum(""),
 		"PRIMITIVE_TOPOLOGY_LINE_STRIP".enum(""),
 		"PRIMITIVE_TOPOLOGY_TRIANGLE_LIST".enum(""),
@@ -551,7 +551,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPolygonMode",
 
-		"POLYGON_MODE_FILL".enum("", 0),
+		"POLYGON_MODE_FILL".enumExpr("", "0"),
 		"POLYGON_MODE_LINE".enum(""),
 		"POLYGON_MODE_POINT".enum(""),
 		"POLYGON_MODE_BEGIN_RANGE".enumExpr("", "VK_POLYGON_MODE_FILL"),
@@ -563,7 +563,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkFrontFace",
 
-		"FRONT_FACE_COUNTER_CLOCKWISE".enum("", 0),
+		"FRONT_FACE_COUNTER_CLOCKWISE".enumExpr("", "0"),
 		"FRONT_FACE_CLOCKWISE".enum(""),
 		"FRONT_FACE_BEGIN_RANGE".enumExpr("", "VK_FRONT_FACE_COUNTER_CLOCKWISE"),
 		"FRONT_FACE_END_RANGE".enumExpr("", "VK_FRONT_FACE_CLOCKWISE"),
@@ -574,7 +574,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkCompareOp",
 
-		"COMPARE_OP_NEVER".enum("", 0),
+		"COMPARE_OP_NEVER".enumExpr("", "0"),
 		"COMPARE_OP_LESS".enum(""),
 		"COMPARE_OP_EQUAL".enum(""),
 		"COMPARE_OP_LESS_OR_EQUAL".enum(""),
@@ -591,7 +591,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkStencilOp",
 
-		"STENCIL_OP_KEEP".enum("", 0),
+		"STENCIL_OP_KEEP".enumExpr("", "0"),
 		"STENCIL_OP_ZERO".enum(""),
 		"STENCIL_OP_REPLACE".enum(""),
 		"STENCIL_OP_INCREMENT_AND_CLAMP".enum(""),
@@ -608,7 +608,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkLogicOp",
 
-		"LOGIC_OP_CLEAR".enum("", 0),
+		"LOGIC_OP_CLEAR".enumExpr("", "0"),
 		"LOGIC_OP_AND".enum(""),
 		"LOGIC_OP_AND_REVERSE".enum(""),
 		"LOGIC_OP_COPY".enum(""),
@@ -633,7 +633,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkBlendFactor",
 
-		"BLEND_FACTOR_ZERO".enum("", 0),
+		"BLEND_FACTOR_ZERO".enumExpr("", "0"),
 		"BLEND_FACTOR_ONE".enum(""),
 		"BLEND_FACTOR_SRC_COLOR".enum(""),
 		"BLEND_FACTOR_ONE_MINUS_SRC_COLOR".enum(""),
@@ -661,7 +661,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkBlendOp",
 
-		"BLEND_OP_ADD".enum("", 0),
+		"BLEND_OP_ADD".enumExpr("", "0"),
 		"BLEND_OP_SUBTRACT".enum(""),
 		"BLEND_OP_REVERSE_SUBTRACT".enum(""),
 		"BLEND_OP_MIN".enum(""),
@@ -675,7 +675,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkDynamicState",
 
-		"DYNAMIC_STATE_VIEWPORT".enum("", 0),
+		"DYNAMIC_STATE_VIEWPORT".enumExpr("", "0"),
 		"DYNAMIC_STATE_SCISSOR".enum(""),
 		"DYNAMIC_STATE_LINE_WIDTH".enum(""),
 		"DYNAMIC_STATE_DEPTH_BIAS".enum(""),
@@ -693,7 +693,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkFilter",
 
-		"FILTER_NEAREST".enum("", 0),
+		"FILTER_NEAREST".enumExpr("", "0"),
 		"FILTER_LINEAR".enum(""),
 		"FILTER_BEGIN_RANGE".enumExpr("", "VK_FILTER_NEAREST"),
 		"FILTER_END_RANGE".enumExpr("", "VK_FILTER_LINEAR"),
@@ -704,7 +704,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSamplerMipmapMode",
 
-		"SAMPLER_MIPMAP_MODE_NEAREST".enum("", 0),
+		"SAMPLER_MIPMAP_MODE_NEAREST".enumExpr("", "0"),
 		"SAMPLER_MIPMAP_MODE_LINEAR".enum(""),
 		"SAMPLER_MIPMAP_MODE_BEGIN_RANGE".enumExpr("", "VK_SAMPLER_MIPMAP_MODE_NEAREST"),
 		"SAMPLER_MIPMAP_MODE_END_RANGE".enumExpr("", "VK_SAMPLER_MIPMAP_MODE_LINEAR"),
@@ -715,7 +715,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSamplerAddressMode",
 
-		"SAMPLER_ADDRESS_MODE_REPEAT".enum("", 0),
+		"SAMPLER_ADDRESS_MODE_REPEAT".enumExpr("", "0"),
 		"SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT".enum(""),
 		"SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE".enum(""),
 		"SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".enum(""),
@@ -729,7 +729,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkBorderColor",
 
-		"BORDER_COLOR_FLOAT_TRANSPARENT_BLACK".enum("", 0),
+		"BORDER_COLOR_FLOAT_TRANSPARENT_BLACK".enumExpr("", "0"),
 		"BORDER_COLOR_INT_TRANSPARENT_BLACK".enum(""),
 		"BORDER_COLOR_FLOAT_OPAQUE_BLACK".enum(""),
 		"BORDER_COLOR_INT_OPAQUE_BLACK".enum(""),
@@ -744,7 +744,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkDescriptorType",
 
-		"DESCRIPTOR_TYPE_SAMPLER".enum("", 0),
+		"DESCRIPTOR_TYPE_SAMPLER".enumExpr("", "0"),
 		"DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER".enum(""),
 		"DESCRIPTOR_TYPE_SAMPLED_IMAGE".enum(""),
 		"DESCRIPTOR_TYPE_STORAGE_IMAGE".enum(""),
@@ -764,7 +764,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkAttachmentLoadOp",
 
-		"ATTACHMENT_LOAD_OP_LOAD".enum("", 0),
+		"ATTACHMENT_LOAD_OP_LOAD".enumExpr("", "0"),
 		"ATTACHMENT_LOAD_OP_CLEAR".enum(""),
 		"ATTACHMENT_LOAD_OP_DONT_CARE".enum(""),
 		"ATTACHMENT_LOAD_OP_BEGIN_RANGE".enumExpr("", "VK_ATTACHMENT_LOAD_OP_LOAD"),
@@ -776,7 +776,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkAttachmentStoreOp",
 
-		"ATTACHMENT_STORE_OP_STORE".enum("", 0),
+		"ATTACHMENT_STORE_OP_STORE".enumExpr("", "0"),
 		"ATTACHMENT_STORE_OP_DONT_CARE".enum(""),
 		"ATTACHMENT_STORE_OP_BEGIN_RANGE".enumExpr("", "VK_ATTACHMENT_STORE_OP_STORE"),
 		"ATTACHMENT_STORE_OP_END_RANGE".enumExpr("", "VK_ATTACHMENT_STORE_OP_DONT_CARE"),
@@ -787,7 +787,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPipelineBindPoint",
 
-		"PIPELINE_BIND_POINT_GRAPHICS".enum("", 0),
+		"PIPELINE_BIND_POINT_GRAPHICS".enumExpr("", "0"),
 		"PIPELINE_BIND_POINT_COMPUTE".enum(""),
 		"PIPELINE_BIND_POINT_BEGIN_RANGE".enumExpr("", "VK_PIPELINE_BIND_POINT_GRAPHICS"),
 		"PIPELINE_BIND_POINT_END_RANGE".enumExpr("", "VK_PIPELINE_BIND_POINT_COMPUTE"),
@@ -798,7 +798,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkCommandBufferLevel",
 
-		"COMMAND_BUFFER_LEVEL_PRIMARY".enum("", 0),
+		"COMMAND_BUFFER_LEVEL_PRIMARY".enumExpr("", "0"),
 		"COMMAND_BUFFER_LEVEL_SECONDARY".enum(""),
 		"COMMAND_BUFFER_LEVEL_BEGIN_RANGE".enumExpr("", "VK_COMMAND_BUFFER_LEVEL_PRIMARY"),
 		"COMMAND_BUFFER_LEVEL_END_RANGE".enumExpr("", "VK_COMMAND_BUFFER_LEVEL_SECONDARY"),
@@ -809,7 +809,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkIndexType",
 
-		"INDEX_TYPE_UINT16".enum("", 0),
+		"INDEX_TYPE_UINT16".enumExpr("", "0"),
 		"INDEX_TYPE_UINT32".enum(""),
 		"INDEX_TYPE_BEGIN_RANGE".enumExpr("", "VK_INDEX_TYPE_UINT16"),
 		"INDEX_TYPE_END_RANGE".enumExpr("", "VK_INDEX_TYPE_UINT32"),
@@ -820,7 +820,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSubpassContents",
 
-		"SUBPASS_CONTENTS_INLINE".enum("", 0),
+		"SUBPASS_CONTENTS_INLINE".enumExpr("", "0"),
 		"SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS".enum(""),
 		"SUBPASS_CONTENTS_BEGIN_RANGE".enumExpr("", "VK_SUBPASS_CONTENTS_INLINE"),
 		"SUBPASS_CONTENTS_END_RANGE".enumExpr("", "VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS"),
@@ -1028,7 +1028,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkCullModeFlagBits",
 
-		"CULL_MODE_NONE".enum("", 0),
+		"CULL_MODE_NONE".enumExpr("", "0"),
 		"CULL_MODE_FRONT_BIT".enum("", 0x00000001),
 		"CULL_MODE_BACK_BIT".enum("", 0x00000002),
 		"CULL_MODE_FRONT_AND_BACK".enum("", 0x3)

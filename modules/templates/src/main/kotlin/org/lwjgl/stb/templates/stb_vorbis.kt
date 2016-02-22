@@ -62,18 +62,18 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		"file_open_failure".enum, // fopen() failed
 		"seek_without_length".enum, // can't seek in unknown-length file
 
-		"unexpected_eof" enum 10, // file is truncated?
+		"unexpected_eof".enumExpr("", "10"), // file is truncated?
 		"seek_invalid".enum, // seek past EOF
 
 		// decoding errors (corrupt/invalid stream) -- you probably
 		// don't care about the exact details of these
 
 		// vorbis errors:
-		"invalid_setup" enum 20,
+		"invalid_setup".enumExpr("", "20"),
 		"invalid_stream".enum,
 
 		// ogg errors:
-		"missing_capture_pattern" enum 30,
+		"missing_capture_pattern".enumExpr("", "30"),
 		"invalid_stream_structure_version".enum,
 		"continued_packet_flag_invalid".enum,
 		"incorrect_stream_serial_number".enum,

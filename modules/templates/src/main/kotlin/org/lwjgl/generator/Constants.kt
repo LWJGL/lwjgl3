@@ -52,7 +52,7 @@ open class EnumValue(
 )
 
 class EnumValueExpression(
-	documentation: String,
+	documentation: String?,
 	val expression: String
 ) : EnumValue(documentation, null)
 
@@ -87,6 +87,7 @@ class ConstantBlock<T : Any>(
 			val enumBlocks = ArrayList<ConstantBlock<Int>>()
 
 			var value = 0
+			var formatType = 1 // 0: hex, 1: decimal
 			for (c in constants) {
 				if ( c is ConstantExpression ) {
 					@Suppress("CAST_NEVER_SUCCEEDS")
@@ -96,13 +97,32 @@ class ConstantBlock<T : Any>(
 
 				val ev = c.value as EnumValue
 				(
-					if ( ev is EnumValueExpression ) {
-						ConstantExpression(c.name, ev.expression)
-					} else {
-						if ( ev.value != null )
-							value = ev.value
-
-						Constant(c.name, value++)
+					when {
+						ev is EnumValueExpression -> {
+							try {
+								value = Integer.parseInt(ev.expression) + 1 // decimal
+								formatType = 1 // next values will be decimal
+							} catch(e: NumberFormatException) {
+								try {
+									value = Integer.parseInt(ev.expression, 16) + 1 // hex
+								} catch(e: Exception) {
+									// ignore
+								}
+								formatType = 0 // next values will be hex
+							}
+							ConstantExpression(c.name, ev.expression)
+						}
+						ev.value != null          -> {
+							value = ev.value + 1
+							formatType = 0
+							Constant(c.name, ev.value)
+						}
+						else                      -> {
+							if ( formatType == 1 )
+								ConstantExpression(c.name, Integer.toString(value++))
+							else
+								Constant(c.name, value++)
+						}
 					}
 				).let {
 					if ( ev.documentation == null )

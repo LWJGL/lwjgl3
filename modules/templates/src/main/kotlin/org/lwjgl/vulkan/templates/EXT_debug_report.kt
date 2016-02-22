@@ -38,7 +38,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 	EnumConstant(
 		"VkDebugReportObjectTypeEXT",
 
-		"DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT".enum("", 0),
+		"DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT".enumExpr("", "0"),
 		"DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT".enum(""),
 		"DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT".enum(""),
 		"DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT".enum(""),
@@ -72,7 +72,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 	EnumConstant(
 		"VkDebugReportErrorEXT",
 
-		"DEBUG_REPORT_ERROR_NONE_EXT".enum("", 0),
+		"DEBUG_REPORT_ERROR_NONE_EXT".enumExpr("", "0"),
 		"DEBUG_REPORT_ERROR_CALLBACK_REF_EXT".enum("")
 	)
 
