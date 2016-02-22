@@ -262,7 +262,7 @@ val VkAllocationCallbacks_p = struct_p(VULKAN_PACKAGE, "VkAllocationCallbacks") 
 	PFN_vkInternalFreeNotification.member("pfnInternalFree", "")
 }
 
-val VkPhysicalDeviceFeatures = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures", mutable = false) {
+val VkPhysicalDeviceFeatures = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures") {
 	documentation = ""
 
 	VkBool32.member("robustBufferAccess", "")
