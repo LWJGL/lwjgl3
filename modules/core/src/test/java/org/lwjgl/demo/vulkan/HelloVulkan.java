@@ -17,6 +17,7 @@ import static org.lwjgl.vulkan.EXTDebugReport.*;
 import static org.lwjgl.vulkan.KHRSurface.*;
 import static org.lwjgl.vulkan.KHRSwapchain.*;
 import static org.lwjgl.vulkan.VK10.*;
+import static org.lwjgl.vulkan.VKUtil.*;
 
 /*
  * Copyright (c) 2015-2016 The Khronos Group Inc.
@@ -450,7 +451,7 @@ public final class HelloVulkan {
 			.applicationVersion(0)
 			.pEngineName(APP_SHORT_NAME)
 			.engineVersion(0)
-			.apiVersion(VK_API_VERSION);
+			.apiVersion(VK_MAKE_VERSION(1, 0, 2));
 
 		VkInstanceCreateInfo inst_info = VkInstanceCreateInfo.malloc()
 			.sType(VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
