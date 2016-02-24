@@ -253,6 +253,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
 			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
 			<include name="org/lwjgl/opengles/**" if:true="${binding.opengles}"/>
+			<include name="org/lwjgl/vulkan/**" if:true="${binding.vulkan}"/>
 		</patternset>
 
 		<patternset id="core.generated.files">
