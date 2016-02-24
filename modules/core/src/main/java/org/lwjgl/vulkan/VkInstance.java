@@ -10,6 +10,8 @@ import org.lwjgl.system.FunctionProvider;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.vulkan.VK10.*;
+import static org.lwjgl.vulkan.VKUtil.*;
 
 /** Wraps a Vulkan instance handle. */
 public class VkInstance extends DispatchableHandle {
@@ -25,7 +27,15 @@ public class VkInstance extends DispatchableHandle {
 	}
 
 	private static VKCapabilities getInstanceCapabilities(final long handle, VkInstanceCreateInfo ci) {
-		int apiVersion = ci.pApplicationInfo().apiVersion();
+		VkApplicationInfo appInfo = ci.pApplicationInfo();
+		int apiVersion;
+		if ( appInfo != null )
+			apiVersion = appInfo.apiVersion();
+		else {
+			// TODO: Do a better job here when new Vulkan versions are released
+			apiVersion = VK_MAKE_VERSION(1, 0, 0);
+		}
+
 		return new VKCapabilities(apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()), new FunctionProvider.Default() {
 			private final long GetInstanceProcAddr = VK.getFunctionProvider().getFunctionAddress("vkGetInstanceProcAddr");
 
