@@ -1891,9 +1891,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		VkDevice.IN("device", ""),
 		AutoSize("pDescriptorWrites")..uint32_t.IN("descriptorWriteCount", ""),
-		const..VkWriteDescriptorSet_p.IN("pDescriptorWrites", ""),
+		nullable..const..VkWriteDescriptorSet_p.IN("pDescriptorWrites", ""),
 		AutoSize("pDescriptorCopies")..uint32_t.IN("descriptorCopyCount", ""),
-		const..VkCopyDescriptorSet_p.IN("pDescriptorCopies", "")
+		nullable..const..VkCopyDescriptorSet_p.IN("pDescriptorCopies", "")
 	)
 
 	VkResult(
@@ -2107,7 +2107,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		AutoSize("pDescriptorSets")..uint32_t.IN("descriptorSetCount", ""),
 		const..VkDescriptorSet.p.IN("pDescriptorSets", ""),
 		AutoSize("pDynamicOffsets")..uint32_t.IN("dynamicOffsetCount", ""),
-		const..uint32_t_p.IN("pDynamicOffsets", "")
+		nullable..const..uint32_t_p.IN("pDynamicOffsets", "")
 	)
 
 	void(
