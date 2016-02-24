@@ -462,18 +462,21 @@ public final class HelloVulkan {
 			.enabledExtensionCount(enabled_extension_count)
 			.ppEnabledExtensionNames(extension_names);
 
-		err = vkCreateInstance(inst_info, allocator, pp);
-		inst_info.free();
-		app.free();
-		memFree(instance_validation_layers);
-		if ( err == VK_ERROR_INCOMPATIBLE_DRIVER )
-			throw new IllegalStateException("Cannot find a compatible Vulkan installable client driver (ICD).");
-		else if ( err == VK_ERROR_EXTENSION_NOT_PRESENT )
-			throw new IllegalStateException("Cannot find a specified extension library. Make sure your layers path is set appropriately.");
-		else if ( err != 0 )
-			throw new IllegalStateException("vkCreateInstance failed. Do you have a compatible Vulkan installable client driver (ICD) installed?");
+		try {
+			err = vkCreateInstance(inst_info, allocator, pp);
+			if ( err == VK_ERROR_INCOMPATIBLE_DRIVER )
+				throw new IllegalStateException("Cannot find a compatible Vulkan installable client driver (ICD).");
+			else if ( err == VK_ERROR_EXTENSION_NOT_PRESENT )
+				throw new IllegalStateException("Cannot find a specified extension library. Make sure your layers path is set appropriately.");
+			else if ( err != 0 )
+				throw new IllegalStateException("vkCreateInstance failed. Do you have a compatible Vulkan installable client driver (ICD) installed?");
 
-		inst = new VkInstance(pp.get(0));
+			inst = new VkInstance(pp.get(0), inst_info);
+		} finally {
+			inst_info.free();
+			app.free();
+			memFree(instance_validation_layers);
+		}
 
 		/* Make initial call to query gpu_count, then second call for gpu info */
 		err = vkEnumeratePhysicalDevices(inst, ip, null);
@@ -637,14 +640,16 @@ public final class HelloVulkan {
 			.ppEnabledExtensionNames(extension_names)
 			.pEnabledFeatures(null);
 
-		int err = vkCreateDevice(gpu, device, null, pp);
-		check(err);
+		try {
+			int err = vkCreateDevice(gpu, device, null, pp);
+			check(err);
 
-		memFree(queue.pQueuePriorities());
-		queue.free();
-		device.free();
-
-		this.device = new VkDevice(pp.get(0), gpu);
+			this.device = new VkDevice(pp.get(0), gpu, device);
+		} finally {
+			memFree(queue.pQueuePriorities());
+			queue.free();
+			device.free();
+		}
 	}
 
 	private void demo_init_vk_swapchain() {

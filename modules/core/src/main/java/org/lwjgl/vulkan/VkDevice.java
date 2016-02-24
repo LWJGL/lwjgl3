@@ -10,41 +10,54 @@ import org.lwjgl.system.FunctionProvider;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.vulkan.VkInstance.*;
 
 /** Wraps a Vulkan device dispatchable handle. */
 public class VkDevice extends DispatchableHandle {
 
 	/**
-	 * Creates a {@code VkDevice} using the specified native handle and physical device.
+	 * Creates a {@link VkDevice} instance for the specified native handle.
 	 *
 	 * @param handle         the native {@code VkDevice} handle
-	 * @param physicalDevice the physical device on which the device was created
+	 * @param physicalDevice the physical device used to create the {@code VkDevice}
+	 * @param ci             the {@link VkDeviceCreateInfo} structure used to create the {@code VkDevice}
 	 */
-	public VkDevice(long handle, VkPhysicalDevice physicalDevice) {
-		super(handle, getDeviceCapabilities(handle, physicalDevice));
+	public VkDevice(long handle, VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci) {
+		super(handle, getDeviceCapabilities(handle, physicalDevice, ci));
 	}
 
-	private static VKCapabilities getDeviceCapabilities(final long handle, final VkPhysicalDevice physicalDevice) {
-		return new VKCapabilities(new FunctionProvider.Default() {
-			@Override
-			public long getFunctionAddress(CharSequence functionName) {
-				APIBuffer __buffer = apiBuffer();
-				__buffer.stringParamASCII(functionName, true);
+	private static VKCapabilities getDeviceCapabilities(final long handle, final VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci) {
+		int apiVersion = physicalDevice.getCapabilities().apiVersion;
+		return new VKCapabilities(
+			apiVersion,
+			VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()),
+			new FunctionProvider.Default() {
+				@Override
+				public long getFunctionAddress(CharSequence functionName) {
+					APIBuffer __buffer = apiBuffer();
+					__buffer.stringParamASCII(functionName, true);
 
-				long address = callPPP(physicalDevice.getCapabilities().__VK10.GetDeviceProcAddr, handle, __buffer.address());
-				if ( address == NULL ) {
-					address = callPPP(physicalDevice.getCapabilities().__VK10.GetInstanceProcAddr, physicalDevice.getInstance().address(), __buffer.address());
-					if ( address == NULL )
-						address = VK.getFunctionProvider().getFunctionAddress(functionName);
+					VK10 vk = physicalDevice.getCapabilities().__VK10;
+					long address = GetDeviceProcAddr(vk.GetDeviceProcAddr, handle, __buffer.address());
+					if ( address == NULL ) {
+						address = GetInstanceProcAddr(vk.GetInstanceProcAddr, physicalDevice.getInstance().address(), __buffer.address
+							());
+						if ( address == NULL )
+							address = VK.getFunctionProvider().getFunctionAddress(functionName);
+					}
+
+					return address;
 				}
 
-				return address;
+				@Override
+				protected void destroy() {
+				}
 			}
+		);
+	}
 
-			@Override
-			protected void destroy() {
-			}
-		});
+	static long GetDeviceProcAddr(long __functionAddress, long handle, long functionName) {
+		return callPPP(__functionAddress, handle, functionName);
 	}
 
 }

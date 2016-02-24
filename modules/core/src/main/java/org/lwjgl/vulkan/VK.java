@@ -4,8 +4,13 @@
  */
 package org.lwjgl.vulkan;
 
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -17,7 +22,7 @@ public final class VK {
 
 	private static FunctionProvider functionProvider;
 
-	private static VKCapabilities icd;
+	private static VKCapabilities globalCommands;
 
 	static {
 		if ( !Configuration.EXPLICIT_INIT_VULKAN.<Boolean>get() )
@@ -26,7 +31,11 @@ public final class VK {
 
 	private VK() {}
 
-	/** Loads the Vulkan native library, using the default library name. */
+	/**
+	 * Loads the Vulkan shared library, using the default library name.
+	 *
+	 * @see #create(String)
+	 */
 	public static void create() {
 		SharedLibrary VK;
 		switch ( Platform.get() ) {
@@ -37,7 +46,7 @@ public final class VK {
 				VK = Library.loadNative(Configuration.LIBRARY_NAME_VULKAN, "vulkan-1");
 				break;
 			case MACOSX:
-				VK = Library.loadNative(Configuration.LIBRARY_NAME_VULKAN);
+				VK = Library.loadNative(Configuration.LIBRARY_NAME_VULKAN); // there may be Vulkan-over-Metal emulation libraries on OS X
 				break;
 			default:
 				throw new IllegalStateException();
@@ -46,9 +55,14 @@ public final class VK {
 	}
 
 	/**
-	 * Loads the Vulkan native library, using the specified library name.
+	 * Loads the Vulkan shared library, using the specified library name.
 	 *
-	 * @param libName the native library name
+	 * <p>The {@link FunctionProvider} instance created by this method can only be used to retrieve global commands and commands exposed statically by the
+	 * Vulkan shared library.</p>
+	 *
+	 * @param libName the shared library name
+	 *
+	 * @see #create(FunctionProvider)
 	 */
 	public static void create(String libName) {
 		create(Library.loadNative(libName));
@@ -101,27 +115,62 @@ public final class VK {
 
 		VK.functionProvider = functionProvider;
 
-		icd = new VKCapabilities(functionProvider);
-		if ( icd.__VK10 == null )
-			throw new IllegalStateException("Vulkan 1.0 is missing. Make sure that Vulkan is available");
+		globalCommands = new VKCapabilities(functionProvider);
+		if ( globalCommands.__VK10 == null )
+			throw new IllegalStateException("Vulkan 1.0 is missing. Make sure that Vulkan is available.");
 	}
 
-	/** Unloads the Vulkan native library. */
+	/** Unloads the Vulkan shared library. */
 	public static void destroy() {
 		if ( functionProvider == null )
 			return;
 
 		functionProvider.release();
 		functionProvider = null;
-		icd = null;
+		globalCommands = null;
 	}
 
-	/** Returns the {@link FunctionProvider} for the Vulkan native library. */
+	/** Returns the {@link FunctionProvider} for the Vulkan shared library. */
 	public static FunctionProvider getFunctionProvider() {
 		return functionProvider;
 	}
 
-	/** Returns the {@link VKCapabilities} of the ICD. */
-	public static VKCapabilities getICD() { return icd; }
+	/** Returns the {@link VKCapabilities} instance for global commands. */
+	static VKCapabilities getGlobalCommands() { return globalCommands; }
+
+	static Set<String> getEnabledExtensionSet(int apiVersion, PointerBuffer extensionNames) {
+		Set<String> enabledExtensions = new HashSet<String>(16);
+
+		int majorVersion = VKUtil.getMajorVersion(apiVersion);
+		int minorVersion = VKUtil.getMinorVersion(apiVersion);
+
+		int[] VK_VERSIONS = {
+			0, // Vulkan 1.0
+		};
+
+		int maxMajor = min(majorVersion, VK_VERSIONS.length);
+		for ( int M = 1; M <= maxMajor; M++ ) {
+			int maxMinor = VK_VERSIONS[M - 1];
+			if ( M == majorVersion )
+				maxMinor = min(minorVersion, maxMinor);
+			for ( int m = 0; m <= maxMinor; m++ )
+				enabledExtensions.add(String.format("Vulkan%d%d", M, m));
+		}
+
+		if ( extensionNames != null ) {
+			for ( int i = extensionNames.position(); i < extensionNames.limit(); i++ )
+				enabledExtensions.add(extensionNames.getStringUTF8(i));
+		}
+
+		return enabledExtensions;
+	}
+
+	static <T> T checkExtension(String extension, T functions) {
+		if ( functions != null )
+			return functions;
+
+		apiLog("[VK] " + extension + " was reported as available but an entry point is missing.");
+		return null;
+	}
 
 }

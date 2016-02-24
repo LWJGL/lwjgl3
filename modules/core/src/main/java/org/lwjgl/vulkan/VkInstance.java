@@ -15,16 +15,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class VkInstance extends DispatchableHandle {
 
 	/**
-	 * Creates a {@code VkInstance} using the specified native handle.
+	 * Creates a {@link VkInstance} instance for the specified native handle.
 	 *
 	 * @param handle the native {@code VkInstance} handle
+	 * @param ci     the {@link VkInstanceCreateInfo} structured used to create the {@code VkInstance}.
 	 */
-	public VkInstance(long handle) {
-		super(handle, getInstanceCapabilities(handle));
+	public VkInstance(long handle, VkInstanceCreateInfo ci) {
+		super(handle, getInstanceCapabilities(handle, ci));
 	}
 
-	private static VKCapabilities getInstanceCapabilities(final long handle) {
-		return new VKCapabilities(new FunctionProvider.Default() {
+	private static VKCapabilities getInstanceCapabilities(final long handle, VkInstanceCreateInfo ci) {
+		int apiVersion = ci.pApplicationInfo().apiVersion();
+		return new VKCapabilities(apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()), new FunctionProvider.Default() {
 			private final long GetInstanceProcAddr = VK.getFunctionProvider().getFunctionAddress("vkGetInstanceProcAddr");
 
 			{
@@ -37,7 +39,7 @@ public class VkInstance extends DispatchableHandle {
 				APIBuffer __buffer = apiBuffer();
 				__buffer.stringParamASCII(functionName, true);
 
-				long address = callPPP(GetInstanceProcAddr, handle, __buffer.address());
+				long address = GetInstanceProcAddr(GetInstanceProcAddr, handle, __buffer.address());
 				if ( address == NULL )
 					address = VK.getFunctionProvider().getFunctionAddress(functionName);
 
@@ -48,6 +50,14 @@ public class VkInstance extends DispatchableHandle {
 			protected void destroy() {
 			}
 		});
+	}
+
+	static long GetInstanceProcAddr(long __functionAddress, long handle, long functionName) {
+		long address = callPPP(__functionAddress, handle, functionName);
+		if ( address == NULL )
+			address = callPPP(__functionAddress, NULL, functionName);
+
+		return address;
 	}
 
 }

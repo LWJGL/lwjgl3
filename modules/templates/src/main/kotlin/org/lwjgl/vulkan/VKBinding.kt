@@ -36,19 +36,28 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		return checkFunctionality(caps.__${nativeClass.className});
 	}""")
 
-		println("\n\tstatic ${nativeClass.className} create(FunctionProvider provider) {")
+		print("""
+	static ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider) {
+		if ( !ext.contains("${nativeClass.capName}") )
+			return null;
 
-		println("\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
+		return VK.checkExtension("${nativeClass.capName}", create(provider));
+	}
 
-		print("\n\t\tboolean supported = checkFunctions(")
+	static ${nativeClass.className} create(FunctionProvider provider) {
+		${nativeClass.className} funcs = new ${nativeClass.className}(provider);
+
+		boolean supported = checkFunctions(""")
 		nativeClass.printPointers(this)
-		println(");")
+		println(""");
 
-		println("\n\t\treturn supported ? funcs : null;")
-		println("\t}\n")
+		return supported ? funcs : null;
+	}
+""")
 	}
 
 	override fun PrintWriter.generateContent() {
+		println("/** Defines the capabilities of a Vulkan {@code VkInstance} or {@code VkDevice}. */")
 		println("public class $CAPABILITIES_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 ->
@@ -71,7 +80,10 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 			println(" __${extension.className};")
 		}
 
-		println()
+		println("""
+	/** The Vulkan API version number. */
+	public final int apiVersion;
+""")
 
 		classes.forEach {
 			val documentation = it.documentation
@@ -81,7 +93,9 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		}
 
 		println("""
-	$CAPABILITIES_CLASS(FunctionProvider provider) {""")
+	$CAPABILITIES_CLASS(FunctionProvider provider) {
+		this.apiVersion = 0;
+""")
 		for (extension in classes) {
 			val capName = extension.capName
 			if ( extension.hasNativeFunctions ) {
@@ -90,14 +104,27 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 				println("\t\t$capName = false;")
 		}
 		println("\t}")
-		print("}")
+
+		println("""
+	$CAPABILITIES_CLASS(int apiVersion, Set<String> ext, FunctionProvider provider) {
+		this.apiVersion = apiVersion;
+""")
+		for (extension in classes) {
+			val capName = extension.capName
+			if ( extension.hasNativeFunctions ) {
+				println("\t\t$capName = (__${extension.className} = ${if ( capName == extension.className ) "$VULKAN_PACKAGE.${extension.className}" else extension.className}.create(ext, provider)) != null;")
+			} else
+				println("\t\t$capName = ext.contains(\"${extension.capName}\");")
+		}
+		println("\t}")
+		print("\n}")
 	}
 
 })
 
 // DSL Extensions
 
-val GlobalCommand = Capabilities("VK.getICD()")
+val GlobalCommand = Capabilities("VK.getGlobalCommands()")
 
 fun String.nativeClassVK(
 	templateName: String,
