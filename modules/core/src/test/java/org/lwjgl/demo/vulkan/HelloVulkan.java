@@ -209,36 +209,12 @@ public final class HelloVulkan {
 		0x38, 0x00, 0x01, 0x00
 	};
 
-	private static final VkAllocationFunction MY_ALLOC = new VkAllocationFunction() {
-		@Override
-		public long invoke(long pUserData, long size, long alignment, int allocationScope) {
-			return nmemAlignedAlloc(alignment, size);
-		}
-	};
-
-	private static final VkFreeFunction MY_FREE = new VkFreeFunction() {
-		@Override
-		public void invoke(long pUserData, long pMemory) {
-			nmemAlignedFree(pMemory);
-		}
-	};
-
-	private static final VkReallocationFunction MY_REALLOC = new VkReallocationFunction() {
-		@Override
-		public long invoke(long pUserData, long pOriginal, long size, long alignment, int allocationScope) {
-			nmemAlignedFree(pOriginal);
-			return nmemAlignedAlloc(alignment, size);
-		}
-	};
-
 	// buffers for handle output-params
 	private final IntBuffer     ip = memAllocInt(1);
 	private final LongBuffer    lp = memAllocLong(1);
 	private final PointerBuffer pp = memAllocPointer(1);
 
 	private GLFWErrorCallback errorCB;
-
-	VkAllocationCallbacks allocator = VkAllocationCallbacks.calloc();
 
 	boolean validate = true;
 
@@ -309,11 +285,6 @@ public final class HelloVulkan {
 	LongBuffer framebuffers;
 
 	private HelloVulkan() {
-		allocator
-			.pfnAllocation(MY_ALLOC)
-			.pfnFree(MY_FREE)
-			.pfnReallocation(MY_REALLOC);
-
 		for ( int i = 0; i < textures.length; i++ ) {
 			textures[i] = new TextureObject();
 		}
@@ -464,7 +435,7 @@ public final class HelloVulkan {
 			.ppEnabledExtensionNames(extension_names);
 
 		try {
-			err = vkCreateInstance(inst_info, allocator, pp);
+			err = vkCreateInstance(inst_info, null, pp);
 			if ( err == VK_ERROR_INCOMPATIBLE_DRIVER )
 				throw new IllegalStateException("Cannot find a compatible Vulkan installable client driver (ICD).");
 			else if ( err == VK_ERROR_EXTENSION_NOT_PRESENT )
@@ -2054,7 +2025,7 @@ public final class HelloVulkan {
 			vkDestroyDebugReportCallbackEXT(inst, msg_callback, null);
 			dbgFunc.release();
 		}
-		vkDestroyInstance(inst, allocator);
+		vkDestroyInstance(inst, null);
 
 		gpu_props.free();
 		queue_props.free();
@@ -2067,11 +2038,6 @@ public final class HelloVulkan {
 		demo_refresh_callback.release();
 		demo_key_callback.release();
 		errorCB.release();
-
-		MY_FREE.release();
-		MY_REALLOC.release();
-		MY_ALLOC.release();
-		allocator.free();
 
 		for ( int i = 0; i < device_validation_layers.remaining(); i++ )
 			nmemFree(device_validation_layers.get(i));
