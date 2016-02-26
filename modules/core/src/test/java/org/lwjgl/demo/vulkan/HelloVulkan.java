@@ -504,7 +504,7 @@ public final class HelloVulkan {
 
 		if ( validate ) {
 			VkDebugReportCallbackCreateInfoEXT dbgCreateInfo = VkDebugReportCallbackCreateInfoEXT.malloc()
-				.sType(VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT)
+				.sType(VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT)
 				.pNext(NULL)
 				.flags(VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT)
 				.pfnCallback(dbgFunc)
