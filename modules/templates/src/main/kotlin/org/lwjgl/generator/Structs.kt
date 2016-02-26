@@ -536,13 +536,24 @@ $indentation}"""
 
 				if ( validations.any() ) {
 					println(
-						"""	/**
+"""	/**
 	 * Validates pointer members that should not be $NULL.
 	 *
 	 * @param $STRUCT the struct to validate
 	 */
 	public static void validate(long $STRUCT) {
 ${validations.joinToString("\n")}
+	}
+
+	/**
+	 * Calls {@link #validate(long)} for each struct contained in the specified struct array.
+	 *
+	 * @param array the struct array to validate
+	 * @param count the number of structs in {@code array}
+	 */
+	public static void validate(long array, int count) {
+		for ( int i = 0; i < count; i++ )
+			validate(array + i * SIZEOF);
 	}
 """)
 				}

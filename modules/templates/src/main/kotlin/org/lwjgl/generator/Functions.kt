@@ -532,9 +532,12 @@ class NativeClassFunction(
 		getNativeParams().forEach {
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType )
 				checks.add("checkPointer(${it.name});")
-			if ( it.nativeType is StructType && it.nativeType.definition.validations.any() && !(it has Check || getReferenceParam(AutoSize, it.name) != null)) {
+			if ( it.nativeType is StructType && it.nativeType.definition.validations.any() ) {
 				checks.add(
-					"${it.nativeType.definition.className}.validate(${it.name});".let { validation ->
+					"${it.nativeType.definition.className}.validate(${it.name}${sequenceOf(
+						if ( it.has(Check) ) it[Check].expression else null,
+						getReferenceParam(AutoSize, it.name).let { it?.name }
+					).firstOrNull { it != null }.let { if ( it == null ) "" else ", $it"}});".let { validation ->
 					if ( it has nullable )
 						"if ( ${it.name} != NULL ) $validation"
 					else
