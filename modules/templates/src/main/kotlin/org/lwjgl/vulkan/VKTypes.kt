@@ -1397,7 +1397,7 @@ val VkCommandBufferBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferBeginI
 	VkStructureType.member("sType", "")
 	pNext()
 	VkCommandBufferUsageFlags.member("flags", "")
-	VkCommandBufferInheritanceInfo.const_p.member("pInheritanceInfo", "")
+	nullable..VkCommandBufferInheritanceInfo.const_p.member("pInheritanceInfo", "")
 }
 
 val VkBufferCopy_p = struct_p(VULKAN_PACKAGE, "VkBufferCopy") {
