@@ -1424,6 +1424,7 @@ public final class HelloVulkan {
 
 		VkSubpassDescription.Buffer subpass = VkSubpassDescription.calloc(1)
 			.pipelineBindPoint(VK_PIPELINE_BIND_POINT_GRAPHICS)
+			.colorAttachmentCount(1)
 			.pColorAttachments(color_reference)
 			.pDepthStencilAttachment(depth_reference);
 
@@ -1847,6 +1848,7 @@ public final class HelloVulkan {
 		VkSubmitInfo.Buffer submit_info = VkSubmitInfo.malloc(1)
 			.sType(VK_STRUCTURE_TYPE_SUBMIT_INFO)
 			.pNext(NULL)
+			.waitSemaphoreCount(1)
 			.pWaitSemaphores(lp.put(0, presentCompleteSemaphore))
 			.pWaitDstStageMask(ip.put(0, pipe_stage_flags))
 			.pCommandBuffers(pp.put(0, draw_cmd))
@@ -1859,6 +1861,7 @@ public final class HelloVulkan {
 		VkPresentInfoKHR present = VkPresentInfoKHR.calloc()
 			.sType(VK_STRUCTURE_TYPE_PRESENT_INFO_KHR)
 			.pNext(NULL)
+			.swapchainCount(1)
 			.pSwapchains(lp.put(0, swapchain))
 			.pImageIndices(ip.put(0, current_buffer));
 

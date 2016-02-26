@@ -30,35 +30,13 @@ class AutoSizeMember(
 		} )
 			throw IllegalArgumentException("Members with the AutoSizeMember modifier must be integer primitive types.")
 	}
-
-	private fun String.remaining(member: String) = "$this != null ? $this.remaining() : ${if ( keepSetter ) member else "0"}"
-
-	fun getExpression(member: String): String {
-		if ( dependent.isEmpty() )
-			return reference.remaining(member)
-
-		val builder = StringBuilder()
-		(sequenceOf(reference) + dependent.asSequence()).toList().let { refs ->
-			refs.asSequence().forEachIndexed { i, ref ->
-				builder
-					.append("$ref != null ? $ref.remaining() : ")
-					.append(if ( i == refs.lastIndex ) { if ( keepSetter ) member else "0" } else "(")
-			}
-			for ( i in 2..refs.size )
-				builder.append(")")
-		}
-
-		return builder.toString()
-	}
-
-
 }
 fun Struct.AutoSize(
 	reference: String,
 	vararg dependent: String,
 	factor: AutoSizeFactor? = null,
     exclusive: Boolean = false,
-	keepSetter: Boolean = false
+	keepSetter: Boolean = dependent.isNotEmpty() && !exclusive
 ) = AutoSizeMember(reference, *dependent, factor = factor, exclusive = exclusive, keepSetter = keepSetter)
 
 object NullableMember : StructMemberModifier() {

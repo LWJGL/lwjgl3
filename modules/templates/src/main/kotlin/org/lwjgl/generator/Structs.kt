@@ -774,8 +774,6 @@ ${validations.joinToString("\n")}
 
 				if ( it.isNestedStructDefinition )
 					generateMultiSetterSetters(writer, it.nestedMembers, field, mode) // recursion
-				else if ( it has AutoSizeMember )
-					println("\t\t$field(${it[AutoSizeMember].getExpression(it.name)});")
 				else
 					println("\t\t$field($field);")
 			}
@@ -843,8 +841,6 @@ ${validations.joinToString("\n")}
 
 				if ( it.isNestedStructDefinition )
 					generateAlternativeMultiSetterSetters(writer, it.nestedMembers, field, mode) // recursion
-				else if ( it has AutoSizeMember )
-					println("\t\t$field(${it[AutoSizeMember].getExpression(it.name)});")
 				else
 					println("\t\t$field($field);")
 			}
@@ -868,7 +864,8 @@ ${validations.joinToString("\n")}
 	private val StructMember.autoSize: String get() = "n$name($STRUCT)".let { if ( nativeType.mapping != PrimitiveMapping.INT ) "(int)$it" else it }
 
 	private fun PrintWriter.setRemaining(m: StructMember) {
-		val capacity = getReferenceMember(AutoSizeMember, m.name)
+		// do not do this if the AutoSize parameter auto-sizes multiple members
+		val capacity = members.firstOrNull { it has AutoSizeMember && it[AutoSizeMember].let { it.exclusive || (it.dependent.isEmpty() && it.reference == m.name) } }
 		if ( capacity != null )
 			print(if ( m has nullable ) {
 				val autoSize = capacity[AutoSizeMember]
