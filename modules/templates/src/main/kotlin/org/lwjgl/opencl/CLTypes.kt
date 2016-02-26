@@ -193,7 +193,7 @@ val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_i
 	)
 	cl_uint.member("num_mip_levels", "must be 0")
 	cl_uint.member("num_samples", "must be 0")
-	cl_mem.member(
+	nullable..cl_mem.member(
 		"buffer",
 		"""
 		refers to a valid buffer memory object if {@code image_type} is CL10#CL_MEM_OBJECT_IMAGE1D_BUFFER. Otherwise it must be $NULL. For a 1D image buffer

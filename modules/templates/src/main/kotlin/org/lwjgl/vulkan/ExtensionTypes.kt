@@ -38,10 +38,10 @@ val VkDebugReportCallbackCreateInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugRepo
 	documentation = ""
 
     VkStructureType.member("sType", "")
-    const_void_p.member("pNext", "")
+    pNext()
     VkDebugReportFlagsEXT.member("flags", "")
     PFN_vkDebugReportCallbackEXT.member("pfnCallback", "")
-    voidptr.member("pUserData", "")
+    nullable..voidptr.member("pUserData", "")
 }
 
 // KHR_surface (must be above KHR_display)
@@ -117,7 +117,7 @@ val VkDisplayModeCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModeCreate
 	documentation = ""
 	
 	VkStructureType.member("sType", "")
-	const_void_p.member("pNext", "")
+	pNext()
 	VkDisplayModeCreateFlagsKHR.member("flags", "")
 	VkDisplayModeParametersKHR.member("parameters", "")
 }
@@ -147,7 +147,7 @@ val VkDisplaySurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplaySurface
 	documentation = ""
 
 	VkStructureType.member("sType", "")
-	const_void_p.member("pNext", "")
+	pNext()
 	VkDisplaySurfaceCreateFlagsKHR.member("flags", "")
 	VkDisplayModeKHR.member("displayMode", "")
 	uint32_t.member("planeIndex", "")
@@ -164,7 +164,7 @@ val VkDisplayPresentInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPresentInfoKH
 	documentation = ""
 	
 	VkStructureType.member("sType", "")
-	const_void_p.member("pNext", "")
+	pNext()
 	VkRect2D.member("srcRect", "")
 	VkRect2D.member("dstRect", "")
 	VkBool32.member("persistent", "")
@@ -181,7 +181,7 @@ val VkSwapchainCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkSwapchainCreateInfo
 	documentation = ""
 
     VkStructureType.member("sType", "")
-    const_void_p.member("pNext", "")
+	pNext()
     VkSwapchainCreateFlagsKHR.member("flags", "")
     VkSurfaceKHR.member("surface", "")
     uint32_t.member("minImageCount", "")
@@ -192,7 +192,7 @@ val VkSwapchainCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkSwapchainCreateInfo
     VkImageUsageFlags.member("imageUsage", "")
     VkSharingMode.member("imageSharingMode", "")
     AutoSize("pQueueFamilyIndices")..uint32_t.member("queueFamilyIndexCount", "")
-    uint32_t.const_p.member("pQueueFamilyIndices", "")
+	nullable..uint32_t.const_p.member("pQueueFamilyIndices", "")
     VkSurfaceTransformFlagBitsKHR.member("preTransform", "")
     VkCompositeAlphaFlagBitsKHR.member("compositeAlpha", "")
     VkPresentModeKHR.member("presentMode", "")
@@ -204,13 +204,13 @@ val VkPresentInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 	documentation = ""
 
     VkStructureType.member("sType", "")
-    const_void_p.member("pNext", "")
+	pNext()
     AutoSize("pWaitSemaphores")..uint32_t.member("waitSemaphoreCount", "")
-    VkSemaphore.const_p.member("pWaitSemaphores", "")
+	nullable..VkSemaphore.const_p.member("pWaitSemaphores", "")
     AutoSize("pSwapchains", "pImageIndices", "pResults")..uint32_t.member("swapchainCount", "")
     VkSwapchainKHR.const_p.member("pSwapchains", "")
     uint32_t.const_p.member("pImageIndices", "")
-    VkResult.p.member("pResults", "")
+	nullable..VkResult.p.member("pResults", "")
 }
 
 // KHR_win32_surface
@@ -221,7 +221,7 @@ val VkWin32SurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkWin32SurfaceCrea
 	documentation = ""
 
 	VkStructureType.member("sType", "")
-	const_void_p.member("pNext", "")
+	pNext()
 	VkWin32SurfaceCreateFlagsKHR.member("flags", "")
 	HINSTANCE.member("hinstance", "")
 	HWND.member("hwnd", "")
@@ -235,7 +235,7 @@ val VkXlibSurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkXlibSurfaceCreate
 	documentation = ""
 
 	VkStructureType.member("sType", "")
-	const_void_p.member("pNext", "")
+	pNext()
 	VkXlibSurfaceCreateFlagsKHR.member("flags", "")
 	Display_p.member("dpy", "")
 	Window.member("window", "")

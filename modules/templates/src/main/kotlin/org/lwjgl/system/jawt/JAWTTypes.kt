@@ -64,11 +64,11 @@ val JAWT_p = struct_p(JAWT_PACKAGE, "JAWT") {
 	documentation = "Structure for containing native AWT functions."
 
 	jint.member("version", "Version of this structure. This must always be set before calling JAWT_GetAWT()")
-	voidptr.member("GetDrawingSurface", "")
-	voidptr.member("FreeDrawingSurface", "")
-	voidptr.member("Lock", "")
-	voidptr.member("Unlock", "")
-	voidptr.member("GetComponent", "")
+	nullable..voidptr.member("GetDrawingSurface", "")
+	nullable..voidptr.member("FreeDrawingSurface", "")
+	nullable..voidptr.member("Lock", "")
+	nullable..voidptr.member("Unlock", "")
+	nullable..voidptr.member("GetComponent", "")
 }
 
 fun config() {

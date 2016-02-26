@@ -8,7 +8,11 @@ class AutoSizeMember(
 	override val reference: String,
 	vararg val dependent: String,
 	/** If not null, the expression will be appended to the parameter. */
-	val factor: AutoSizeFactor?
+	val factor: AutoSizeFactor?,
+	/** If true, only one of the references is valid, the rest will be null. */
+    val exclusive: Boolean,
+	/** If true, the instance setter for modified member will not be removed. */
+    val keepSetter: Boolean
 ) : StructMemberModifier(), ReferenceModifier {
 	companion object : ModifierKey<AutoSizeMember>
 
@@ -27,18 +31,18 @@ class AutoSizeMember(
 			throw IllegalArgumentException("Members with the AutoSizeMember modifier must be integer primitive types.")
 	}
 
-	private val String.remaining: String get() =  "$this != null ? $this.remaining() : 0"
+	private fun String.remaining(member: String) = "$this != null ? $this.remaining() : ${if ( keepSetter ) member else "0"}"
 
-	fun getExpression(): String {
+	fun getExpression(member: String): String {
 		if ( dependent.isEmpty() )
-			return reference.remaining
+			return reference.remaining(member)
 
 		val builder = StringBuilder()
 		(sequenceOf(reference) + dependent.asSequence()).toList().let { refs ->
 			refs.asSequence().forEachIndexed { i, ref ->
 				builder
 					.append("$ref != null ? $ref.remaining() : ")
-					.append(if ( i == refs.lastIndex ) "0" else "(")
+					.append(if ( i == refs.lastIndex ) { if ( keepSetter ) member else "0" } else "(")
 			}
 			for ( i in 2..refs.size )
 				builder.append(")")
@@ -52,5 +56,17 @@ class AutoSizeMember(
 fun Struct.AutoSize(
 	reference: String,
 	vararg dependent: String,
-	factor: AutoSizeFactor? = null
-) = AutoSizeMember(reference, *dependent, factor = factor)
+	factor: AutoSizeFactor? = null,
+    exclusive: Boolean = false,
+	keepSetter: Boolean = false
+) = AutoSizeMember(reference, *dependent, factor = factor, exclusive = exclusive, keepSetter = keepSetter)
+
+object NullableMember : StructMemberModifier() {
+	override val isSpecial = true
+	override fun validate(member: StructMember) {
+		if ( member.nativeType !is PointerType )
+			throw IllegalArgumentException("The nullable modifier can only be applied on pointer types.")
+	}
+}
+/** Marks a pointer member as nullable. */
+val Struct.nullable: NullableMember get() = NullableMember

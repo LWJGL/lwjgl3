@@ -246,10 +246,10 @@ val stbtt_packedchar_p = struct_p(STB_PACKAGE, "STBTTPackedchar", nativeName = "
 val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", nativeName = "stbtt_pack_range") {
 	documentation = "A range of packed character data, used by STBTruetype#stbtt_PackFontRanges()"
 
-	float.member("font_size", "")
+	float.member("font_size", "the font size")
 	int.member("first_unicode_codepoint_in_range", "if non-zero, then the chars are continuous, and this is the first codepoint")
-	int_p.member("array_of_unicode_codepoints", "if non-zero, then this is an array of unicode codepoints")
-	int.member("num_chars", "")
+	nullable..int_p.member("array_of_unicode_codepoints", "if non-zero, then this is an array of unicode codepoints")
+	AutoSize("array_of_unicode_codepoints", "chardata_for_range")..int.member("num_chars", "the number of codepoints in the range")
 	stbtt_packedchar_p.buffer("chardata_for_range", "output")
 	padding(2) // h_oversample & v_oversample
 }

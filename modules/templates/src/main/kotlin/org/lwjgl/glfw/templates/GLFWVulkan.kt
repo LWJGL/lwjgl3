@@ -57,7 +57,10 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 			Possible errors include GLFW#NOT_INITIALIZED and GLFW#API_UNAVAILABLE.
 			""",
 
-			AutoSizeResult..int_p.OUT("count", "where to store the number of extensions in the returned array. This is set to zero if an error occurred."),
+			AutoSizeResult..unsigned_int_p.OUT(
+				"count",
+				"where to store the number of extensions in the returned array. This is set to zero if an error occurred."
+			),
 
 			returnDoc = "an array of ASCII encoded extension names, or $NULL if an error occurred",
 			since = "version 3.2"

@@ -103,7 +103,7 @@ val ovrInitParams_p = struct_p(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrIn
 		"RequestedMinorVersion",
 		"request a specific minimum minor version of the LibOVR runtime. Flags must include ovrInit_RequestVersion or this will be ignored."
 	)
-	ovrLogCallback.member(
+	nullable..ovrLogCallback.member(
 		"LogCallback",
 		"""
 		log callback function, which may be called at any time asynchronously from multiple threads until OVR#ovr_Shutdown() completes. Pass $NULL for no log
@@ -448,7 +448,7 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 		"""
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeFov.")
-	ovrSwapTextureSet_p.array(
+	nullable..ovrSwapTextureSet_p.array(
 		"ColorTexture",
 		"{@code ovrSwapTextureSets} for the left and right eye respectively. The second one of which can be $NULL.",
 		size = ovrEye_Count
@@ -485,7 +485,7 @@ val ovrLayerEyeFovDepth = struct(OVR_PACKAGE, "OVRLayerEyeFovDepth", nativeName 
 		"""
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeFovDepth.")
-	ovrSwapTextureSet_p.array(
+	nullable..ovrSwapTextureSet_p.array(
 		"ColorTexture",
 		"{@code ovrSwapTextureSets} for the left and right eye respectively. The second one of which can be $NULL.",
 		size = ovrEye_Count
@@ -512,7 +512,7 @@ val ovrLayerEyeFovDepth = struct(OVR_PACKAGE, "OVRLayerEyeFovDepth", nativeName 
 		tracking latency.
 		"""
 	)
-	ovrSwapTextureSet_p.array("DepthTexture", "depth texture for positional timewarp. Must map 1:1 to the {@code ColorTexture}.", size = ovrEye_Count)
+	nullable..ovrSwapTextureSet_p.array("DepthTexture", "depth texture for positional timewarp. Must map 1:1 to the {@code ColorTexture}.", size = ovrEye_Count)
 	ovrTimewarpProjectionDesc.member("ProjectionDesc", "specifies how to convert {@code DepthTexture} information into meters")
 }.nativeType
 
@@ -538,7 +538,7 @@ val ovrLayerEyeMatrix = struct(OVR_PACKAGE, "OVRLayerEyeMatrix", nativeName = "o
 		"""
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeMatrix")
-	ovrSwapTextureSet_p.array(
+	nullable..ovrSwapTextureSet_p.array(
 		"ColorTexture",
 		"{@code ovrSwapTextureSets} for the left and right eye respectively. The second one of which can be $NULL",
 		size = ovrEye_Count
@@ -608,7 +608,7 @@ val ovrLayerDirect = struct(OVR_PACKAGE, "OVRLayerDirect", nativeName = "ovrLaye
 		"""
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_Direct")
-	ovrSwapTextureSet_p.array(
+	nullable..ovrSwapTextureSet_p.array(
 		"ColorTexture",
 		"{@code ovrSwapTextureSets} for the left and right eye respectively. The second one of which can be $NULL.",
 		size = ovrEye_Count

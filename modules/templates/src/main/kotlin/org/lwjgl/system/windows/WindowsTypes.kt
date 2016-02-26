@@ -116,7 +116,10 @@ val LPRECT = RECT.p("LPRECT")
 val MSG = struct(WINDOWS_PACKAGE, "MSG") {
 	documentation = "Contains message information from a thread's message queue."
 
-	HWND.member("hwnd", "a handle to the window whose window procedure receives the message. This member is $NULL when the message is a thread message.");
+	nullable..HWND.member(
+		"hwnd",
+		"a handle to the window whose window procedure receives the message. This member is $NULL when the message is a thread message."
+	);
 	UINT.member("message", "the message identifier. Applications can only use the low word; the high word is reserved by the system.")
 	WPARAM.member("wParam", "additional information about the message. The exact meaning depends on the value of the message member.")
 	LPARAM.member("lParam", "additional information about the message. The exact meaning depends on the value of the message member.")
@@ -198,27 +201,33 @@ val WNDCLASSEX_p = struct_p(WINDOWS_PACKAGE, "WNDCLASSEX") {
 	int.member("cbClsExtra", "the number of extra bytes to allocate following the window-class structure. The system initializes the bytes to zero.")
 	int.member("cbWndExtra", "the number of extra bytes to allocate following the window instance. The system initializes the bytes to zero.")
 	HINSTANCE.member("hInstance", "a handle to the instance that contains the window procedure for the class")
-	HICON.member(
+	nullable..HICON.member(
 		"hIcon",
 		"a handle to the class icon. This member must be a handle to an icon resource. If this member is $NULL, the system provides a default icon."
 	)
-	HCURSOR.member(
+	nullable..HCURSOR.member(
 		"hCursor",
 		"""
 		a handle to the class cursor. This member must be a handle to a cursor resource. If this member is $NULL, an application must explicitly set the cursor
 		shape whenever the mouse moves into the application's window.
 		"""
 	)
-	HBRUSH.member(
+	nullable..HBRUSH.member(
 		"hbrBackground",
-		"a handle to the class background brush. This member can be a handle to the brush to be used for painting the background, or it can be a color value."
+		"""
+		a handle to the class background brush. This member can be a handle to the brush to be used for painting the background, or it can be a color value.
+		When this member is $NULL, an application must paint its own background whenever it is requested to paint in its client area.
+		"""
 	)
-	LPCTSTR.member(
+	nullable..LPCTSTR.member(
 		"lpszMenuName",
-		"pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file"
+		"""
+		pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file.  If this
+		member is $NULL, windows belonging to this class have no default menu.
+		"""
 	)
 	LPCTSTR.member("lpszClassName", "a pointer to a null-terminated string or is an atom")
-	HICON.member(
+	nullable..HICON.member(
 		"hIconSm",
 		"""
 		a handle to a small icon that is associated with the window class. If this member is $NULL, the system searches the icon resource specified by the

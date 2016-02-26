@@ -24,7 +24,7 @@ val DISPLAY = Display_p.IN("display", "the connection to the X server") // This 
 val Visual_p = struct_p(LINUX_PACKAGE, "Visual") {
 	documentation = "Visual structure; contains information about colormapping possible."
 
-	// ignored: XExtData_p.member("ext_data")
+	nullable..voidptr.member("ext_data", "")
 	VisualID.member("visualid", "")
 	int.member("class", "")
 	unsigned_long.member("red_mask", "")

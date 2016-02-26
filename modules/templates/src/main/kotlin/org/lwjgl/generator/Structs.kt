@@ -181,6 +181,38 @@ class Struct(
 		}
 	}
 
+	val validations: Sequence<String> by lazy {
+		mutableMembers.mapNotNull { m ->
+			if ( m has AutoSizeMember )
+				m[AutoSizeMember].let { autoSize ->
+					// get auto-sized members that are nullable
+					val autoSizedMembers = (sequenceOf(autoSize.reference) + autoSize.dependent.asSequence())
+					autoSizedMembers.mapNotNull { ref ->
+						mutableMembers.firstOrNull { it.name == ref && it has nullable }
+					}.let {
+						val count = it.count()
+						if ( it.any() && count == autoSizedMembers.count() )
+							if ( autoSize.exclusive )
+							// if m != 0, make sure one of the auto-sized members is not null
+								"\t\tif (\n\t\t\tn${m.name}($STRUCT) != 0 &&${
+								it.map { ref -> "\n\t\t\tmemGetAddress($STRUCT + $className.${ref.offsetField}) == NULL" }.joinToString(" &&")
+								}\n\t\t) {\n\t\t\tthrow new NullPointerException(\"At least one of ${it.map { ref -> ref.name }.joinToString()} must not be null\");\n\t\t}"
+							else
+							// if m != 0, make sure auto-sized members are not null
+								"\t\tif ( n${m.name}($STRUCT) != 0 )${if ( count == 1 ) "" else " {"}\n${it.map { ref ->
+									"\t\t\tcheckPointer(memGetAddress($STRUCT + $className.${ref.offsetField}));"
+								}.joinToString("\n")}${if ( count == 1 ) "" else "\n\t\t}"}"
+						else
+							null
+					}
+				}
+			else if ( m.nativeType is PointerType && !m.has(nullable) && !(m.nativeType is StructType && !m.nativeType.includesPointer) )
+				"\t\tcheckPointer(memGetAddress($STRUCT + $className.${m.offsetField}));"
+			else
+				null
+		}
+	}
+
 	/** Returns a member that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
 	private fun getReferenceMember(modifierObject: ModifierKey<*>, reference: String) = members.firstOrNull {
 		it.hasRef(modifierObject, reference)
@@ -397,7 +429,7 @@ $indentation}"""
 			generateGetters(AccessMode.INSTANCE, members)
 
 			if ( hasMutableMembers ) {
-				val mutableMembers = this@Struct.mutableMembers
+				val mutableMembers = this@Struct.mutableMembers.filter { !it.has(AutoSizeMember) || it[AutoSizeMember].keepSetter }
 				println()
 				generateSetters(AccessMode.INSTANCE, mutableMembers)
 
@@ -501,6 +533,19 @@ $indentation}"""
 			if ( hasMutableMembers ) {
 				generateStaticSetters(mutableMembers)
 				println()
+
+				if ( validations.any() ) {
+					println(
+						"""	/**
+	 * Validates pointer members that should not be $NULL.
+	 *
+	 * @param $STRUCT the struct to validate
+	 */
+	public static void validate(long $STRUCT) {
+${validations.joinToString("\n")}
+	}
+""")
+				}
 			}
 		}
 
@@ -553,7 +598,7 @@ $indentation}"""
 
 			if ( hasMutableMembers ) {
 				println()
-				generateSetters(AccessMode.FLYWEIGHT, mutableMembers)
+				generateSetters(AccessMode.FLYWEIGHT, mutableMembers.filter { !it.has(AutoSizeMember) || it[AutoSizeMember].keepSetter })
 			}
 		}
 
@@ -675,7 +720,7 @@ $indentation}"""
 	/** $javaDoc */
 	public $className set(
 """)
-		generateParameters(this@Struct, this, members.filter { !it.has(AutoSizeMember) }, "", mode, false)
+		generateParameters(this@Struct, this, members, "", mode, false)
 		println("""
 	) {""")
 		generateSetters(this@Struct, this, members, "", mode)
@@ -719,7 +764,7 @@ $indentation}"""
 				if ( it.isNestedStructDefinition )
 					generateMultiSetterSetters(writer, it.nestedMembers, field, mode) // recursion
 				else if ( it has AutoSizeMember )
-					println("\t\t$field(${it[AutoSizeMember].getExpression()});")
+					println("\t\t$field(${it[AutoSizeMember].getExpression(it.name)});")
 				else
 					println("\t\t$field($field);")
 			}
@@ -788,7 +833,7 @@ $indentation}"""
 				if ( it.isNestedStructDefinition )
 					generateAlternativeMultiSetterSetters(writer, it.nestedMembers, field, mode) // recursion
 				else if ( it has AutoSizeMember )
-					println("\t\t$field(${it[AutoSizeMember].getExpression()});")
+					println("\t\t$field(${it[AutoSizeMember].getExpression(it.name)});")
 				else
 					println("\t\t$field($field);")
 			}
@@ -805,6 +850,27 @@ $indentation}"""
 		"${parentField}_${m.offsetField}"
 	else
 		throw IllegalStateException()
+
+	private val StructMember.pointerValue: String get() = if ( has(nullable) ) "value" else "checkPointer(value)"
+	private val StructMember.addressValue: String get() = if ( has(nullable) ) "addressSafe(value)" else "value.address()"
+	private val StructMember.memAddressValue: String get() = if ( has(nullable) ) "memAddressSafe(value)" else "memAddress(value)"
+	private val StructMember.autoSize: String get() = "n$name($STRUCT)".let { if ( nativeType.mapping != PrimitiveMapping.INT ) "(int)$it" else it }
+
+	private fun PrintWriter.setRemaining(m: StructMember) {
+		val capacity = getReferenceMember(AutoSizeMember, m.name)
+		if ( capacity != null )
+			print(if ( m has nullable ) {
+				val autoSize = capacity[AutoSizeMember]
+				if ( (sequenceOf(autoSize.reference) + autoSize.dependent.asSequence()).any { ref -> mutableMembers.any { it.name == ref && !it.has(nullable) } } )
+					""
+				else if ( autoSize.exclusive )
+					" if ( value != null ) n${capacity.name}($STRUCT, value.remaining());"
+				else
+					" n${capacity.name}($STRUCT, value == null ? 0 : value.remaining());"
+			} else
+				" n${capacity.name}($STRUCT, value.remaining());"
+			)
+	}
 
 	private fun PrintWriter.generateStaticSetters(
 		members: Sequence<StructMember>,
@@ -835,13 +901,25 @@ $indentation}"""
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
 					if ( it.nativeType is CallbackType ) {
 						println("\t/** Unsafe version of {@link #$setter(long) $setter}. */")
-						println("\tpublic static void n$setter(long $STRUCT, long value) { memPutAddress($STRUCT + $field, value); }")
+						println("\tpublic static void n$setter(long $STRUCT, long value) { memPutAddress($STRUCT + $field, ${it.pointerValue}); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType.simpleName
 						val bufferMethod = getBufferMethod(it, javaType)
 
-						println("\t/** Unsafe version of {@link #$setter($javaType) $setter}. */")
-						println("\tpublic static void n$setter(long $STRUCT, $javaType value) { memPut$bufferMethod($STRUCT + $field, value${if ( javaType == "boolean" ) " ? (byte)1 : (byte)0" else ""}); }")
+						println(
+							if ( it has AutoSizeMember )
+								"\t/** Sets the specified value to the {@code ${it.name}} field of the specified {@code struct}. */"
+							else
+								"\t/** Unsafe version of {@link #$setter($javaType) $setter}. */"
+						)
+						print("\tpublic static void n$setter(long $STRUCT, $javaType value) { memPut$bufferMethod($STRUCT + $field, ")
+						if ( javaType == "boolean" )
+							print("value ? (byte)1 : (byte)0")
+						else if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
+							print(it.pointerValue)
+						else
+							print("value")
+						println("); }")
 					}
 				}
 
@@ -857,7 +935,7 @@ $indentation}"""
 							println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * POINTER_SIZE);")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
-							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) { memPutAddress($STRUCT + $field + index * POINTER_SIZE, addressSafe(value)); }")
+							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) { memPutAddress($STRUCT + $field + index * POINTER_SIZE, ${it.addressValue}); }")
 						} else {
 							println("\t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) {")
@@ -909,7 +987,7 @@ $indentation}"""
 					println("\t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
 					println("\tpublic static void n$setter(long $STRUCT, ByteBuffer value) { ")
 					println("\t\tif ( CHECKS && value != null ) checkNT${mapping.bytes}(value); ")
-					println("\t\tmemPutAddress($STRUCT + $field, memAddressSafe(value));")
+					println("\t\tmemPutAddress($STRUCT + $field, ${it.memAddressValue});")
 					println("\t}")
 
 					println("\t/** Unsafe version of {@link #$setter(CharSequence) $setter}. */")
@@ -921,15 +999,19 @@ $indentation}"""
 						val structType = it.nativeType.definition.className
 						if ( it is StructMemberBuffer ) {
 							println("\t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
-							println("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) { memPutAddress($STRUCT + $field, addressSafe(value)); }")
+							print("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) { memPutAddress($STRUCT + $field, ${it.addressValue});")
+							setRemaining(it)
+							println(" }")
 						} else {
 							println("\t/** Unsafe version of {@link #$setter($structType) $setter}. */")
-							println("\tpublic static void n$setter(long $STRUCT, $structType value) { memPutAddress($STRUCT + $field, addressSafe(value)); }")
+							println("\tpublic static void n$setter(long $STRUCT, $structType value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
 						}
 					} else {
 						val bufferType = it.nativeType.javaMethodType.simpleName
 						println("\t/** Unsafe version of {@link #$setter($bufferType) $setter}. */")
-						println("\tpublic static void n$setter(long $STRUCT, $bufferType value) { memPutAddress($STRUCT + $field, memAddressSafe(value)); }")
+						print("\tpublic static void n$setter(long $STRUCT, $bufferType value) { memPutAddress($STRUCT + $field, ${it.memAddressValue});")
+						setRemaining(it)
+						println(" }")
 					}
 				}
 			}
@@ -1083,20 +1165,22 @@ $indent */""")
 					if ( it.nativeType is StructType ) {
 						val nestedStruct = it.nativeType.definition.className
 						if ( it.nativeType.includesPointer ) {
+							val capacity = getReferenceMember(AutoSizeMember, it.name)
+
 							println("\t/** Unsafe version of {@link #$getter}. */")
 							println("\tpublic static PointerBuffer n$getter(long $STRUCT) {")
-							println("\t\treturn memPointerBuffer($STRUCT + $field, ${it.size});")
+							println("\t\treturn memPointerBuffer($STRUCT + $field, ${if ( capacity == null ) Integer.toString(it.size) else capacity.autoSize});")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
 							println("\t\treturn $nestedStruct.create(memGetAddress($STRUCT + $field + index * POINTER_SIZE));")
 							println("\t}")
 						} else {
-							val autoSize = getReferenceMember(AutoSizeMember, it.name)
+							val capacity = getReferenceMember(AutoSizeMember, it.name)
 
 							println("\t/** Unsafe version of {@link #$getter}. */")
 							println("\tpublic static $nestedStruct.Buffer n$getter(long $STRUCT) {")
-							println("\t\treturn $nestedStruct.create($STRUCT + $field, ${if ( autoSize == null ) Integer.toString(it.size) else "n${autoSize.name}($STRUCT)"});")
+							println("\t\treturn $nestedStruct.create($STRUCT + $field, ${if ( capacity == null ) Integer.toString(it.size) else capacity.autoSize});")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
@@ -1135,24 +1219,24 @@ $indent */""")
 					val structType = it.nativeType.definition.className
 					println("\t/** Unsafe version of {@link #$getter}. */")
 					println(if ( it is StructMemberBuffer ) {
-						val autoSize = getReferenceMember(AutoSizeMember, it.name)
-						if ( autoSize == null )
+						val capacity = getReferenceMember(AutoSizeMember, it.name)
+						if ( capacity == null )
 							"\tpublic static $structType.Buffer n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return $structType.create(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }"
 						else
-							"\tpublic static $structType.Buffer n$getter(long $STRUCT) { return $structType.create(memGetAddress($STRUCT + $field), n${autoSize.name}($STRUCT)); }"
+							"\tpublic static $structType.Buffer n$getter(long $STRUCT) { return $structType.create(memGetAddress($STRUCT + $field), ${capacity.autoSize}); }"
 					} else
 						"\tpublic static $structType n$getter(long $STRUCT) { return $structType.create(memGetAddress($STRUCT + $field)); }"
 					)
 				} else if ( it.nativeType.isPointerData ) {
 					val bufferType = it.nativeType.javaMethodType.simpleName
-					val autoSize = getReferenceMember(AutoSizeMember, it.name)
+					val capacity = getReferenceMember(AutoSizeMember, it.name)
 
-					if ( autoSize == null ) {
+					if ( capacity == null ) {
 						println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 						println("\tpublic static $bufferType n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return mem$bufferType(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }")
 					} else {
 						println("\t/** Unsafe version of {@link #$getter() $getter}. */")
-						println("\tpublic static $bufferType n$getter(long $STRUCT) { return mem$bufferType(memGetAddress($STRUCT + $field), n${autoSize.name}($STRUCT)); }")
+						println("\tpublic static $bufferType n$getter(long $STRUCT) { return mem$bufferType(memGetAddress($STRUCT + $field), ${capacity.autoSize}); }")
 					}
 
 				}

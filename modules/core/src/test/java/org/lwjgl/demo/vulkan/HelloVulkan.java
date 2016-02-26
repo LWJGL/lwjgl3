@@ -218,11 +218,7 @@ public final class HelloVulkan {
 
 	boolean validate = true;
 
-	int device_validation_layer_count;
 	PointerBuffer device_validation_layers = memAllocPointer(10);
-
-	int enabled_layer_count;
-	int enabled_extension_count;
 
 	PointerBuffer extension_names = memAllocPointer(64);
 
@@ -367,7 +363,6 @@ public final class HelloVulkan {
 		instance_validation_layers.put(device_validation_layers);
 		instance_validation_layers.flip();
 		device_validation_layers.flip();
-		device_validation_layer_count = device_validation_layers.remaining();
 
 		boolean validation_found = false;
 		int err = vkEnumerateInstanceLayerProperties(ip, null);
@@ -378,10 +373,9 @@ public final class HelloVulkan {
 			err = vkEnumerateInstanceLayerProperties(ip, instance_layers);
 			check(err);
 
-			if ( validate ) {
+			if ( validate )
 				validation_found = demo_check_layers(instance_validation_layers, instance_layers);
-				enabled_layer_count = instance_validation_layers.remaining();
-			}
+
 			instance_layers.free();
 		}
 
@@ -393,7 +387,7 @@ public final class HelloVulkan {
 			throw new IllegalStateException("glfwGetRequiredInstanceExtensions failed to find the platform surface extensions.");
 
 		for ( int i = 0; i < required_extensions.capacity(); i++ ) {
-			extension_names.put(enabled_extension_count++, required_extensions.get(i));
+			extension_names.put(required_extensions.get(i));
 		}
 
 		err = vkEnumerateInstanceExtensionProperties((String)null, ip, null);
@@ -408,7 +402,7 @@ public final class HelloVulkan {
 				instance_extensions.position(i);
 				if ( VK_EXT_DEBUG_REPORT_EXTENSION_NAME.equals(instance_extensions.extensionNameString()) ) {
 					if ( validate ) {
-						extension_names.put(enabled_extension_count++, EXT_debug_report);
+						extension_names.put(EXT_debug_report);
 					}
 				}
 			}
@@ -424,15 +418,15 @@ public final class HelloVulkan {
 			.engineVersion(0)
 			.apiVersion(VK_MAKE_VERSION(1, 0, 2));
 
+		extension_names.flip();
 		VkInstanceCreateInfo inst_info = VkInstanceCreateInfo.malloc()
 			.sType(VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
 			.pNext(NULL)
 			.flags(0)
 			.pApplicationInfo(app)
-			.enabledLayerCount(enabled_layer_count)
 			.ppEnabledLayerNames(instance_validation_layers)
-			.enabledExtensionCount(enabled_extension_count)
 			.ppEnabledExtensionNames(extension_names);
+		extension_names.clear();
 
 		try {
 			err = vkCreateInstance(inst_info, null, pp);
@@ -468,7 +462,6 @@ public final class HelloVulkan {
 
 		/* Look for validation layers */
 		validation_found = false;
-		enabled_layer_count = 0;
 		err = vkEnumerateDeviceLayerProperties(gpu, ip, null);
 		check(err);
 
@@ -477,10 +470,8 @@ public final class HelloVulkan {
 			err = vkEnumerateDeviceLayerProperties(gpu, ip, device_layers);
 			check(err);
 
-			if ( validate ) {
+			if ( validate )
 				validation_found = demo_check_layers(device_validation_layers, device_layers);
-				enabled_layer_count = device_validation_layer_count;
-			}
 
 			device_layers.free();
 		}
@@ -490,7 +481,6 @@ public final class HelloVulkan {
 
 		/* Look for device extensions */
 		boolean swapchainExtFound = false;
-		enabled_extension_count = 0;
 		err = vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, null);
 		check(err);
 
@@ -503,7 +493,7 @@ public final class HelloVulkan {
 				device_extensions.position(i);
 				if ( VK_KHR_SWAPCHAIN_EXTENSION_NAME.equals(device_extensions.extensionNameString()) ) {
 					swapchainExtFound = true;
-					extension_names.put(enabled_extension_count++, KHR_swapchain);
+					extension_names.put(KHR_swapchain);
 				}
 			}
 			device_extensions.free();
@@ -597,18 +587,15 @@ public final class HelloVulkan {
 			.pNext(NULL)
 			.flags(0)
 			.queueFamilyIndex(graphics_queue_node_index)
-			.queueCount(1)
 			.pQueuePriorities(memAllocFloat(1).put(0, 0.0f));
 
+		extension_names.flip();
 		VkDeviceCreateInfo device = VkDeviceCreateInfo.malloc()
 			.sType(VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO)
 			.pNext(NULL)
 			.flags(0)
-			.queueCreateInfoCount(1)
 			.pQueueCreateInfos(queue)
-			.enabledLayerCount(enabled_layer_count)
 			.ppEnabledLayerNames(validate ? device_validation_layers : null)
-			.enabledExtensionCount(enabled_extension_count)
 			.ppEnabledExtensionNames(extension_names)
 			.pEnabledFeatures(null);
 
@@ -1139,7 +1126,6 @@ public final class HelloVulkan {
 
 		VkSubmitInfo submit_info = VkSubmitInfo.calloc()
 			.sType(VK_STRUCTURE_TYPE_SUBMIT_INFO)
-			.commandBufferCount(1)
 			.pCommandBuffers(pp.put(0, setup_cmd));
 
 		err = vkQueueSubmit(queue, submit_info, VK_NULL_HANDLE);
@@ -1350,9 +1336,7 @@ public final class HelloVulkan {
 		vertices.vi
 			.sType(VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO)
 			.pNext(NULL)
-			.vertexBindingDescriptionCount(1)
 			.pVertexBindingDescriptions(vertices.vi_bindings)
-			.vertexAttributeDescriptionCount(2)
 			.pVertexAttributeDescriptions(vertices.vi_attrs);
 
 		vertices.vi_bindings.get(0)
@@ -1384,7 +1368,6 @@ public final class HelloVulkan {
 			.sType(VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO)
 			.pNext(NULL)
 			.flags(0)
-			.bindingCount(1)
 			.pBindings(layout_binding);
 
 		LongBuffer layouts = memAllocLong(1);
@@ -1398,7 +1381,6 @@ public final class HelloVulkan {
 		VkPipelineLayoutCreateInfo pPipelineLayoutCreateInfo = VkPipelineLayoutCreateInfo.calloc()
 			.sType(VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO)
 			.pNext(NULL)
-			.setLayoutCount(1)
 			.pSetLayouts(layouts);
 
 		err = vkCreatePipelineLayout(device, pPipelineLayoutCreateInfo, null, lp);
@@ -1442,15 +1424,12 @@ public final class HelloVulkan {
 
 		VkSubpassDescription.Buffer subpass = VkSubpassDescription.calloc(1)
 			.pipelineBindPoint(VK_PIPELINE_BIND_POINT_GRAPHICS)
-			.colorAttachmentCount(1)
 			.pColorAttachments(color_reference)
 			.pDepthStencilAttachment(depth_reference);
 
 		VkRenderPassCreateInfo rp_info = VkRenderPassCreateInfo.calloc()
 			.sType(VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO)
-			.attachmentCount(2)
 			.pAttachments(attachments)
-			.subpassCount(1)
 			.pSubpasses(subpass);
 
 		int err = vkCreateRenderPass(device, rp_info, null, lp);
@@ -1472,8 +1451,7 @@ public final class HelloVulkan {
 			.sType(VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO)
 			.pNext(NULL)
 			.flags(0)
-			.codeSize(code.length)
-			.pCode(pCode.asIntBuffer());
+			.pCode(pCode);
 
 		int err = vkCreateShaderModule(device, moduleCreateInfo, null, lp);
 		check(err);
@@ -1519,7 +1497,6 @@ public final class HelloVulkan {
 
 		pipeline
 			.sType(VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO)
-			.stageCount(2)
 			.pStages(shaderStages)
 			.pVertexInputState(vertices.vi)
 			.pInputAssemblyState(
@@ -1549,7 +1526,6 @@ public final class HelloVulkan {
 			.pColorBlendState(
 				VkPipelineColorBlendStateCreateInfo.calloc()
 					.sType(VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO)
-					.attachmentCount(1)
 					.pAttachments(
 						VkPipelineColorBlendAttachmentState.calloc(1)
 							.colorWriteMask(0xf)
@@ -1558,7 +1534,6 @@ public final class HelloVulkan {
 			.pDynamicState(
 				VkPipelineDynamicStateCreateInfo.calloc()
 					.sType(VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO)
-					.dynamicStateCount(2)
 					.pDynamicStates(
 						memCallocInt(VK_DYNAMIC_STATE_RANGE_SIZE)
 							.put(0, VK_DYNAMIC_STATE_VIEWPORT)
@@ -1607,7 +1582,6 @@ public final class HelloVulkan {
 			.sType(VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO)
 			.pNext(NULL)
 			.maxSets(1)
-			.poolSizeCount(1)
 			.pPoolSizes(type_count);
 
 		int err = vkCreateDescriptorPool(device, descriptor_pool, null, lp);
@@ -1623,7 +1597,6 @@ public final class HelloVulkan {
 			.sType(VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO)
 			.pNext(NULL)
 			.descriptorPool(desc_pool)
-			.descriptorSetCount(1)
 			.pSetLayouts(layouts);
 
 		int err = vkAllocateDescriptorSets(device, alloc_info, lp);
@@ -1644,7 +1617,6 @@ public final class HelloVulkan {
 		VkWriteDescriptorSet.Buffer write = VkWriteDescriptorSet.calloc(1)
 			.sType(VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET)
 			.dstSet(desc_set)
-			.descriptorCount(DEMO_TEXTURE_COUNT)
 			.descriptorType(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)
 			.pImageInfo(tex_descs);
 
@@ -1661,7 +1633,6 @@ public final class HelloVulkan {
 			.sType(VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO)
 			.pNext(NULL)
 			.renderPass(render_pass)
-			.attachmentCount(2)
 			.pAttachments(attachments)
 			.width(width)
 			.height(height)
@@ -1757,7 +1728,6 @@ public final class HelloVulkan {
 			.pNext(NULL)
 			.renderPass(render_pass)
 			.framebuffer(framebuffers.get(current_buffer))
-			.clearValueCount(2)
 			.pClearValues(clear_values);
 		rp_begin.renderArea().offset()
 			.x(0)
@@ -1877,12 +1847,9 @@ public final class HelloVulkan {
 		VkSubmitInfo.Buffer submit_info = VkSubmitInfo.malloc(1)
 			.sType(VK_STRUCTURE_TYPE_SUBMIT_INFO)
 			.pNext(NULL)
-			.waitSemaphoreCount(1)
 			.pWaitSemaphores(lp.put(0, presentCompleteSemaphore))
 			.pWaitDstStageMask(ip.put(0, pipe_stage_flags))
-			.commandBufferCount(1)
 			.pCommandBuffers(pp.put(0, draw_cmd))
-			.signalSemaphoreCount(0)
 			.pSignalSemaphores(null);
 
 		err = vkQueueSubmit(queue, 1, submit_info, VK_NULL_HANDLE);
@@ -1892,7 +1859,6 @@ public final class HelloVulkan {
 		VkPresentInfoKHR present = VkPresentInfoKHR.calloc()
 			.sType(VK_STRUCTURE_TYPE_PRESENT_INFO_KHR)
 			.pNext(NULL)
-			.swapchainCount(1)
 			.pSwapchains(lp.put(0, swapchain))
 			.pImageIndices(ip.put(0, current_buffer));
 
