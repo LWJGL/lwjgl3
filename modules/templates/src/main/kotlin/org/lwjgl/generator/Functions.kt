@@ -331,25 +331,27 @@ class NativeClassFunction(
 			val builder = StringBuilder(expression.length + 8)
 
 			if ( expression.indexOf(' ') != -1 ) {
-				builder.append('(')
-				builder.append(expression)
-				builder.append(')')
+				builder
+					.append('(')
+					.append(expression)
+					.append(')')
 			} else
 				builder.append(expression)
 
-			builder.append(' ')
-			builder.append(shift)
-			builder.append(' ')
-			builder.append(mapping.byteShift)
-
-			return builder.toString()
+			return builder
+				.append(' ')
+				.append(shift)
+				.append(' ')
+				.append(mapping.byteShift)
+				.toString()
 		}
 
+		// First pass
 		getNativeParams().forEach {
-			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "if ( ${it.name} != null ) " else ""
-
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType )
 				checks.add("checkPointer(${it.name});")
+
+			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "if ( ${it.name} != null ) " else ""
 
 			if ( it.nativeType is CharSequenceType && it.paramType === IN && transforms?.get(it) == null ) {
 				if ( getReferenceParam(AutoSize, it.name) == null )
@@ -430,7 +432,43 @@ class NativeClassFunction(
 					}
 				}
 			}
+		}
 
+		// Second pass
+		getNativeParams().forEach {
+			// Do this after the AutoSize check
+			if ( it.nativeType is StructType && it.nativeType.definition.validations.any() && !hasUnsafeMethod )
+				checks.add(
+					"${it.nativeType.definition.className}.validate(${it.name}.address()${sequenceOf(
+						if ( it.has(Check) ) it[Check].expression else null,
+						getReferenceParam(AutoSize, it.name).let { autoSize ->
+							if ( autoSize == null )
+								null
+							else
+								transforms?.get(autoSize).let { transform ->
+									if ( transform == null )
+										autoSize.name
+									else
+										@Suppress("UNCHECKED_CAST")(transform as FunctionTransform<Parameter>).transformCall(autoSize, autoSize.name)
+								}.let {
+									if ( autoSize.nativeType.mapping === PrimitiveMapping.INT )
+										it
+									else
+										"(int)$it"
+								}
+						}
+					).firstOrNull { it != null }.let { if ( it == null ) "" else ", $it" }});".let { validation ->
+						if ( it has nullable )
+							"if ( ${it.name} != null ) $validation"
+						else
+							validation
+					}
+				)
+		}
+
+		// Third pass
+		getNativeParams().forEach {
+			// Special checks last
 			nativeClass.binding?.addParameterChecks(checks, mode, it) { transforms?.get(this) === it }
 		}
 
@@ -532,18 +570,28 @@ class NativeClassFunction(
 		getNativeParams().forEach {
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType )
 				checks.add("checkPointer(${it.name});")
-			if ( it.nativeType is StructType && it.nativeType.definition.validations.any() ) {
+			else if ( it.nativeType is StructType && it.nativeType.definition.validations.any() )
 				checks.add(
 					"${it.nativeType.definition.className}.validate(${it.name}${sequenceOf(
 						if ( it.has(Check) ) it[Check].expression else null,
-						getReferenceParam(AutoSize, it.name).let { it?.name }
-					).firstOrNull { it != null }.let { if ( it == null ) "" else ", $it"}});".let { validation ->
-					if ( it has nullable )
-						"if ( ${it.name} != NULL ) $validation"
-					else
-						validation
-				})
-			}
+						getReferenceParam(AutoSize, it.name).let { autoSize ->
+							if ( autoSize == null )
+								null
+							else
+								autoSize.name.let {
+									if ( autoSize.nativeType.mapping === PrimitiveMapping.INT )
+										it
+									else
+										"(int)$it"
+								}
+						}
+					).firstOrNull { it != null }.let { if ( it == null ) "" else ", $it" }});".let { validation ->
+						if ( it has nullable )
+							"if ( ${it.name} != NULL ) $validation"
+						else
+							validation
+					}
+				)
 		}
 
 		if ( checks.isNotEmpty() ) {

@@ -45,7 +45,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 
 		VkPhysicalDevice.IN("physicalDevice", "a valid physical device"),
 		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT("pPropertyCount", "the number of entries in the array pointed to by {@code pProperties}"),
-		nullable..VkDisplayPropertiesKHR_p.OUT("pProperties", "a pointer to an array of {@code pPropertyCount} ##kDisplayPropertiesKHR structures")
+		nullable..VkDisplayPropertiesKHR_p.OUT("pProperties", "a pointer to an array of {@code pPropertyCount} ##VkDisplayPropertiesKHR structures")
 	)
 
 	VkResult(
