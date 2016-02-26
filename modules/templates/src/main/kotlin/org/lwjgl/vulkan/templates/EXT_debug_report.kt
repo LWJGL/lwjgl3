@@ -20,7 +20,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 	IntConstant(
 		"The extension specification version.",
 
-		"EXT_DEBUG_REPORT_SPEC_VERSION"..1
+		"EXT_DEBUG_REPORT_SPEC_VERSION"..2
 	)
 
 	StringConstant(
@@ -32,7 +32,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 	IntConstant(
 		"VkStructureType",
 
-		"STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT" expr "1000011000"
+		"STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT" expr "1000011000"
 	)
 
 	EnumConstant(

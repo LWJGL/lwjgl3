@@ -15,7 +15,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 	val major = 1
 	val minor = 0
-	val patch = 3
+	val patch = 4
 
 	IntConstant(
 		"""
@@ -721,8 +721,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".enum(""),
 		"SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE".enum(""),
 		"SAMPLER_ADDRESS_MODE_BEGIN_RANGE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_REPEAT"),
-		"SAMPLER_ADDRESS_MODE_END_RANGE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE"),
-		"SAMPLER_ADDRESS_MODE_RANGE_SIZE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE - VK_SAMPLER_ADDRESS_MODE_REPEAT + 1"),
+		"SAMPLER_ADDRESS_MODE_END_RANGE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER"),
+		"SAMPLER_ADDRESS_MODE_RANGE_SIZE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER - VK_SAMPLER_ADDRESS_MODE_REPEAT + 1"),
 		"SAMPLER_ADDRESS_MODE_MAX_ENUM".enum("", 0x7FFFFFFF)
 	)
 
@@ -1126,19 +1126,51 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 	GlobalCommand..VkResult(
 		"CreateInstance",
-		"Creates a new Vulkan instance.",
+		"""
+		Creates a new Vulkan instance.
 
-		const..VkInstanceCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
-		Check(1)..VkInstance.p.OUT("pInstance", "")
+		There is no global state in Vulkan and all per-application state is stored in a {@code VkInstance} object. Creating a {@code VkInstance} object
+		initializes the Vulkan library and allows the application to pass information about itself to the implementation.
+
+		{@code vkCreateInstance} creates the instance, then enables and initializes global layers and extensions requested by the application. If an extension
+		is provided by a layer, both the layer and extension $must be specified at {@code vkCreateInstance} time.
+
+		<h3>Valid Usage</h3>
+		${ul(
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkInstanceCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pInstance} $must be a pointer to a {@code VkInstance} handle"
+		)}
+		""",
+
+		const..VkInstanceCreateInfo_p.IN("pCreateInfo", "points to an instance of ##VkInstanceCreateInfo controlling creation of the instance"),
+		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "controls host memory allocation"),
+		Check(1)..VkInstance.p.OUT("pInstance", "a pointer to a {@code VkInstance} handle in which the resulting instance is returned")
 	)
 
 	void(
 		"DestroyInstance",
-		"Destroys an instance of Vulkan.",
+		"""
+		Destroys an instance of Vulkan.
 
-		VkInstance.IN("instance", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		After destruction of the instance, all devices (logical and physical) and any objects created by those devices become invalid and should not be
+		accessed. However, objects allocated directly or indirectly through the instance are not destroyed automatically and so may be leaked. Applications
+		should destroy all objects created through instance before destroying the instance itself.
+
+		<h3>Valid Usage</h3>
+		${ul(
+			"If {@code instance} is not $NULL, {@code instance} $must be a valid {@code VkInstance} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"All child objects created using {@code instance} $must have been destroyed prior to destroying {@code instance}",
+			"If ##VkAllocationCallbacks were provided when instance was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when instance was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		Host access to {@code instance} $must be externally synchronized
+		""",
+
+		VkInstance.IN("instance", "the handle of the instance to destroy"),
+		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "controls host memory allocation")
 	)
 
 	VkResult(

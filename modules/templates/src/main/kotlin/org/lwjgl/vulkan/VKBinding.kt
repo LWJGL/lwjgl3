@@ -144,5 +144,10 @@ fun String.nativeClassVK(
 	init = init
 )
 
-val EXT = "EXT"
-val KHR = "KHR"
+val must = "<b>must</b>"
+val must_not = "<b>must not</b>"
+val should = "<b>should</b>"
+val should_not = "<b>should not</b>"
+val may = "<b>may</b>"
+val can = "<b>can</b>"
+val cannot = "<b>cannot</b>"
