@@ -351,7 +351,7 @@ class NativeClassFunction(
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType )
 				checks.add("checkPointer(${it.name});")
 
-			if ( mode === NORMAL && it.nativeType is CharSequenceType && it.paramType === IN ) {
+			if ( it.nativeType is CharSequenceType && it.paramType === IN && transforms?.get(it) == null ) {
 				if ( getReferenceParam(AutoSize, it.name) == null )
 					checks.add("${prefix}checkNT${it.nativeType.charMapping.bytes}(${it.name});")
 			}
