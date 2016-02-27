@@ -92,7 +92,7 @@ public final class GL {
 	}
 
 	private static void create(final SharedLibrary OPENGL) {
-		abstract class FunctionProviderGL extends FunctionProvider.Default {
+		abstract class FunctionProviderGL implements FunctionProvider {
 			abstract long getExtensionAddress(long name);
 
 			@Override
@@ -111,8 +111,8 @@ public final class GL {
 			}
 
 			@Override
-			protected void destroy() {
-				OPENGL.release();
+			public void free() {
+				OPENGL.free();
 			}
 		}
 
@@ -159,7 +159,7 @@ public final class GL {
 			}
 			create(functionProvider);
 		} catch (RuntimeException e) {
-			OPENGL.release();
+			OPENGL.free();
 			throw e;
 		}
 	}
@@ -181,7 +181,7 @@ public final class GL {
 		if ( functionProvider == null )
 			return;
 
-		functionProvider.release();
+		functionProvider.free();
 		functionProvider = null;
 	}
 

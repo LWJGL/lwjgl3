@@ -13,31 +13,23 @@ import static org.lwjgl.system.linux.DynamicLinkLoader.*;
 /** Implements a {@link SharedLibrary} on the Linux OS. */
 public class LinuxLibrary extends SharedLibrary.Default {
 
-	private final long handle;
-
 	public LinuxLibrary(String name) {
-		super(name);
+		super(dlopen(name, RTLD_LAZY | RTLD_GLOBAL), name);
 
-		handle = dlopen(name, RTLD_LAZY | RTLD_GLOBAL);
-		if ( handle == NULL ) // TODO: better error handling
+		if ( address() == NULL )
 			throw new RuntimeException("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
 
 		apiLog("Loaded native library: " + name);
 	}
 
 	@Override
-	public long address() {
-		return handle;
-	}
-
-	@Override
 	public long getFunctionAddress(CharSequence name) {
-		return dlsym(handle, name);
+		return dlsym(address(), name);
 	}
 
 	@Override
-	protected void destroy() {
-		dlclose(handle);
+	public void free() {
+		dlclose(address());
 	}
 
 }

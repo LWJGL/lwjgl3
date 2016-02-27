@@ -74,7 +74,7 @@ public class ClosureGC implements ClosureRegistry {
 		void gc() {
 			List<Closure> level = stack.get(depth);
 			for ( Closure closure : level )
-				closure.release();
+				closure.free();
 			level.clear();
 		}
 

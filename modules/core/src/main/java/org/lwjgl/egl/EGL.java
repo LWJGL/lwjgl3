@@ -79,7 +79,7 @@ public final class EGL {
 
 	private static void create(final SharedLibrary EGL) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider.Default() {
+			FunctionProvider functionProvider = new FunctionProvider() {
 				private final long eglGetProcAddress = EGL.getFunctionAddress("eglGetProcAddress");
 
 				@Override
@@ -95,13 +95,13 @@ public final class EGL {
 				}
 
 				@Override
-				protected void destroy() {
-					EGL.release();
+				public void free() {
+					EGL.free();
 				}
 			};
 			create(functionProvider);
 		} catch (RuntimeException e) {
-			EGL.release();
+			EGL.free();
 			throw e;
 		}
 	}
@@ -127,7 +127,7 @@ public final class EGL {
 
 		caps = null;
 
-		functionProvider.release();
+		functionProvider.free();
 		functionProvider = null;
 	}
 

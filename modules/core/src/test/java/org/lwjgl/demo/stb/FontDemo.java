@@ -236,13 +236,13 @@ abstract class FontDemo {
 
 	private void destroy() {
 		if ( debugProc != null )
-			debugProc.release();
-		scrollfun.release();
-		keyfun.release();
-		framebufferSizefun.release();
-		windowSizefun.release();
+			debugProc.free();
+		scrollfun.free();
+		keyfun.free();
+		framebufferSizefun.free();
+		windowSizefun.free();
 		glfwTerminate();
-		errorfun.release();
+		errorfun.free();
 	}
 
 }

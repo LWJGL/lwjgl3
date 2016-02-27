@@ -54,7 +54,7 @@ public final class AL {
 	private AL() {}
 
 	static void init() {
-		functionProvider = new FunctionProvider.Default() {
+		functionProvider = new FunctionProvider() {
 			// We'll use alGetProcAddress for both core and extension entry points.
 			// To do that, we need to first grab the alGetProcAddress function from
 			// the OpenAL native library.
@@ -73,7 +73,7 @@ public final class AL {
 			}
 
 			@Override
-			protected void destroy() {}
+			public void free() {}
 		};
 	}
 
@@ -83,7 +83,7 @@ public final class AL {
 
 		setCurrentProcess(null);
 
-		functionProvider.release();
+		functionProvider.free();
 		functionProvider = null;
 	}
 

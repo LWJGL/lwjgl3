@@ -58,7 +58,7 @@ public final class HelloLibOVR {
 
 		ovr_Shutdown();
 
-		callback.release();
+		callback.free();
 	}
 
 }

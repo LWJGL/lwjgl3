@@ -109,7 +109,7 @@ public class CLTest {
 		} finally {
 			CL.destroy();
 
-			CONTEXT_CALLBACK.release();
+			CONTEXT_CALLBACK.free();
 		}
 	}
 
@@ -224,13 +224,13 @@ public class CLTest {
 
 				try {
 					latch.await();
-					kernel.release();
+					kernel.free();
 				} catch (InterruptedException exc) {
 					exc.printStackTrace();
 				}
 
 				checkCLError(clReleaseEvent(e));
-				eventCallback.release();
+				eventCallback.free();
 				checkCLError(clReleaseCommandQueue(queue));
 				checkCLError(clReleaseContext(context));
 			}
@@ -278,7 +278,7 @@ public class CLTest {
 				} catch (InterruptedException exc) {
 					exc.printStackTrace();
 				} finally {
-					memDestructorCallback.release();
+					memDestructorCallback.free();
 				}
 
 				checkCLError(clReleaseContext(context));
@@ -325,7 +325,7 @@ public class CLTest {
 				}
 
 				checkCLError(clReleaseEvent(e));
-				eventCallback.release();
+				eventCallback.free();
 				checkCLError(clReleaseContext(context));
 			}
 		});

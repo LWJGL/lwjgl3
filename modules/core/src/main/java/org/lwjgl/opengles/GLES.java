@@ -91,9 +91,9 @@ public final class GLES {
 		create(Library.loadNative(libName));
 	}
 
-	private  static void create(final SharedLibrary GLES) {
+	private static void create(final SharedLibrary GLES) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider.Default() {
+			FunctionProvider functionProvider = new FunctionProvider() {
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
 					APIBuffer __buffer = apiBuffer();
@@ -110,13 +110,13 @@ public final class GLES {
 				}
 
 				@Override
-				protected void destroy() {
-					GLES.release();
+				public void free() {
+					GLES.free();
 				}
 			};
 			create(functionProvider);
 		} catch (RuntimeException e) {
-			GLES.release();
+			GLES.free();
 			throw e;
 		}
 	}
@@ -137,7 +137,7 @@ public final class GLES {
 		if ( functionProvider == null )
 			return;
 
-		functionProvider.release();
+		functionProvider.free();
 		functionProvider = null;
 	}
 

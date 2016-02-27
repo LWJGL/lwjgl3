@@ -46,7 +46,7 @@ final class EventLoop {
 
 					apiLog("GLFW can only be used for offscreen rendering.");
 				} finally {
-					AppKit.release();
+					AppKit.free();
 				}
 			}
 		}

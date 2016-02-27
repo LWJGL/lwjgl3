@@ -583,7 +583,7 @@ public class Mandelbrot {
 				return clReleaseContext(object);
 			}
 		});
-		clContextCB.release();
+		clContextCB.free();
 
 		glDeleteProgram(glProgram);
 		glDeleteShader(fsh);
@@ -592,7 +592,7 @@ public class Mandelbrot {
 		glDeleteVertexArrays(vao);
 
 		if ( debugProc != null )
-			debugProc.release();
+			debugProc.free();
 	}
 
 	private void display() {
@@ -762,7 +762,7 @@ public class Mandelbrot {
 			throw new RuntimeException(e);
 		}
 
-		buildCallback.release();
+		buildCallback.free();
 		rebuild = false;
 
 		// init kernel with constants

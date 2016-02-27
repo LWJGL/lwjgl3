@@ -255,8 +255,8 @@ public final class ExampleFBO extends Demo {
 
 		glfwTerminate();
 
-		key.release();
-		errorcb.release();
+		key.free();
+		errorcb.free();
 	}
 
 }

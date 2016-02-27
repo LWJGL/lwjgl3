@@ -71,12 +71,12 @@ public final class VK {
 
 	private static void create(final SharedLibrary VULKAN) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider.Default() {
+			FunctionProvider functionProvider = new FunctionProvider() {
 				private final long GetInstanceProcAddr = VULKAN.getFunctionAddress("vkGetInstanceProcAddr");
 
 				{
 					if ( GetInstanceProcAddr == NULL ) {
-						VULKAN.release();
+						VULKAN.free();
 						throw new IllegalStateException("A core Vulkan function is missing. Make sure that Vulkan is available.");
 					}
 				}
@@ -94,13 +94,13 @@ public final class VK {
 				}
 
 				@Override
-				protected void destroy() {
-					VULKAN.release();
+				public void free() {
+					VULKAN.free();
 				}
 			};
 			create(functionProvider);
 		} catch (RuntimeException e) {
-			VULKAN.release();
+			VULKAN.free();
 			throw e;
 		}
 	}
@@ -126,7 +126,7 @@ public final class VK {
 		if ( functionProvider == null )
 			return;
 
-		functionProvider.release();
+		functionProvider.free();
 		functionProvider = null;
 		globalCommands = null;
 	}

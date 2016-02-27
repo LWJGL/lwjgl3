@@ -97,8 +97,8 @@ public final class HelloNFD {
 
 		glfwTerminate();
 
-		keyfun.release();
-		errorfun.release();
+		keyfun.free();
+		errorfun.free();
 	}
 
 	private static void openSingle() {

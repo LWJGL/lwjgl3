@@ -23,31 +23,23 @@ public class WindowsLibrary extends SharedLibrary.Default {
 			throw new RuntimeException("Failed to retrieve LWJGL module handle.");
 	}
 
-	private final long handle;
-
 	public WindowsLibrary(String name) {
-		super(name);
+		super(LoadLibrary(name), name);
 
-		handle = LoadLibrary(name);
-		if ( handle == NULL )
+		if ( address() == NULL )
 			windowsThrowException("Failed to load library: " + name);
 
 		apiLog("Loaded native library: " + name);
 	}
 
 	@Override
-	public long address() {
-		return handle;
-	}
-
-	@Override
 	public long getFunctionAddress(CharSequence name) {
-		return GetProcAddress(handle, name);
+		return GetProcAddress(address(), name);
 	}
 
 	@Override
-	protected void destroy() {
-		if ( FreeLibrary(handle) == FALSE )
+	public void free() {
+		if ( FreeLibrary(address()) == FALSE )
 			windowsThrowException("Failed to unload library: " + getName());
 	}
 

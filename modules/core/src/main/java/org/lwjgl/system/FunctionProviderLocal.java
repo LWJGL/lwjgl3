@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system;
 
-import static org.lwjgl.system.MemoryUtil.*;
-
 /** A platform/device/context specific provider of native function addresses. */
 public interface FunctionProviderLocal extends FunctionProvider {
 
@@ -20,27 +18,5 @@ public interface FunctionProviderLocal extends FunctionProvider {
 	 * @return the function address or 0L if the function is not supported
 	 */
 	long getFunctionAddress(long handle, CharSequence functionName);
-
-	abstract class Default extends Retainable.Default implements FunctionProviderLocal {
-	}
-
-	/** A {@code FunctionProviderLocal} implementation that always returns {@code NULL}. */
-	FunctionProviderLocal DUMMY = new Default() {
-
-		@Override
-		public long getFunctionAddress(CharSequence functionName) {
-			return NULL;
-		}
-
-		@Override
-		public long getFunctionAddress(long handle, CharSequence functionName) {
-			return NULL;
-		}
-
-		@Override
-		protected void destroy() {
-		}
-
-	};
 
 }

@@ -32,7 +32,7 @@ public final class MultipleWindows {
 			demo();
 		} finally {
 			glfwTerminate();
-			errorfun.release();
+			errorfun.free();
 		}
 	}
 

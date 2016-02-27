@@ -31,7 +31,7 @@ public class VkDevice extends DispatchableHandle {
 		return new VKCapabilities(
 			apiVersion,
 			VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()),
-			new FunctionProvider.Default() {
+			new FunctionProvider() {
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
 					APIBuffer __buffer = apiBuffer();
@@ -50,7 +50,7 @@ public class VkDevice extends DispatchableHandle {
 				}
 
 				@Override
-				protected void destroy() {
+				public void free() {
 				}
 			}
 		);

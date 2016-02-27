@@ -10,11 +10,12 @@ public interface SharedLibrary extends FunctionProvider, Pointer {
 	/** Returns the library name. */
 	String getName();
 
-	abstract class Default extends Retainable.Default implements SharedLibrary {
+	abstract class Default extends Pointer.Default implements SharedLibrary {
 
 		private final String name;
 
-		protected Default(String name) {
+		protected Default(long address, String name) {
+			super(address);
 			this.name = name;
 		}
 

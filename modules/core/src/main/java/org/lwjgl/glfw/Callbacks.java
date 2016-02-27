@@ -24,11 +24,11 @@ public final class Callbacks {
 	private Callbacks() {}
 
 	/**
-	 * Resets all callbacks for the specified GLFW window to {@code NULL} and {@link Closure#release releases} all previously set callbacks.
+	 * Resets all callbacks for the specified GLFW window to {@code NULL} and {@link Closure#free frees} all previously set callbacks.
 	 *
 	 * @param window the GLFW window
 	 */
-	public static void glfwReleaseCallbacks(long window) {
+	public static void glfwFreeCallbacks(long window) {
 		if ( Checks.CHECKS )
 			checkPointer(window);
 
@@ -53,7 +53,7 @@ public final class Callbacks {
 
 		for ( long callback : callbacks ) {
 			if ( callback != NULL )
-				Closure.release(callback);
+				Closure.free(callback);
 		}
 	}
 

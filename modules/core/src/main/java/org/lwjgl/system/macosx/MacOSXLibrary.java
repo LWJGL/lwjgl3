@@ -9,8 +9,8 @@ import org.lwjgl.system.SharedLibrary;
 /** Implements a {@link SharedLibrary} on the MacOS X. */
 public abstract class MacOSXLibrary extends SharedLibrary.Default {
 
-	protected MacOSXLibrary(String name) {
-		super(name);
+	protected MacOSXLibrary(long address, String name) {
+		super(address, name);
 	}
 
 	public static MacOSXLibrary create(String name) {

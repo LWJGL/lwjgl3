@@ -21,7 +21,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <p>Closures must be referenced strongly in user code, else a {@link ClosureError} will be thrown on the next native callback invocation. Closures also use
  * native resources, while will result in memory leaks if not released after a Closure is no longer required.</p>
  */
-public abstract class Closure extends Retainable.Default implements Pointer {
+public abstract class Closure extends Pointer.Default {
 
 	/** Native callback function pointer. */
 	protected static final long
@@ -115,9 +115,6 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** Pointer to libFFI's closure structure. */
 	private final long closure;
 
-	/** The dynamically generated function pointer. */
-	private final long address;
-
 	/**
 	 * Creates a new {@code Closure} instance.
 	 *
@@ -125,15 +122,9 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	 * @param classPath      an optional UTF-8 encoded string that will be used for debugging
 	 * @param nativeCallback the native callback function address
 	 */
-	Closure(FFICIF cif, long classPath, long nativeCallback) {
-		// Allocate ffi closure
-		APIBuffer __buf = apiStack();
-		this.closure = nffi_closure_alloc(FFIClosure.SIZEOF, __buf.address(__buf.getOffset()));
-		this.address = __buf.pointerValue(__buf.getOffset());
-		__buf.pop();
-
-		if ( closure == NULL )
-			throw new OutOfMemoryError("Failed to allocate libffi closure.");
+	Closure(ClosureAddress init, FFICIF cif, long classPath, long nativeCallback) {
+		super(init.executable);
+		this.closure = init.writable;
 
 		// Struct containing two pointers
 		user_data = nmemAlloc(POINTER_SIZE * 2);
@@ -169,7 +160,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			address         // function*
 		);
 		if ( status != FFI_OK ) {
-			destroy();
+			free();
 			throw new IllegalStateException(String.format("Failed to prepare libffi closure. Status: 0x%X", status));
 		}
 
@@ -179,8 +170,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 
 	@Override
 	public long address() {
-		if ( isDestroyed() )
-			throw new IllegalStateException("This closure instance has been destroyed.");
+		if ( !isValid() )
+			throw new IllegalStateException("This closure instance has been freed.");
 
 		return address;
 	}
@@ -203,10 +194,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		return String.format("%s closure [0x%X]", getClass().getSimpleName(), address);
 	}
 
-	@Override
-	protected void destroy() {
-		if ( isDestroyed() )
-			throw new IllegalStateException("This closure instance has been destroyed.");
+	public void free() {
+		address(); // already freed check
 
 		memDeleteWeakGlobalRef(memGetAddress(user_data));
 		if ( Checks.DEBUG )
@@ -218,13 +207,9 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		nffi_closure_free(closure);
 	}
 
-	/**
-	 * Returns true if this Closure has been destroyed.
-	 *
-	 * @return the if the Closure is destroyed
-	 */
-	public boolean isDestroyed() {
-		return user_data == NULL;
+	/** Returns true if this Closure has not been destroyed. */
+	public boolean isValid() {
+		return user_data != NULL;
 	}
 
 	/**
@@ -248,14 +233,14 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	}
 
 	/**
-	 * If the specified function pointer is not null, releases the Clojure associated with it.
+	 * If the specified function pointer is not null, frees the Clojure associated with it.
 	 *
 	 * @param functionPointer the function pointer
 	 */
-	public static void release(long functionPointer) {
+	public static void free(long functionPointer) {
 		Closure clojure = create(functionPointer);
 		if ( clojure != null )
-			clojure.release();
+			clojure.free();
 	}
 
 	protected static void prepareCIF(int ABI, FFICIF CIF, FFIType rtype, PointerBuffer ARGS, FFIType... atypes) {
@@ -269,12 +254,35 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 
 	private static native long getNativeCallbacks(Method[] methods, long callbacks);
 
+	// Constructor helper
+
+	private static class ClosureAddress {
+		private final long writable;
+		private final long executable;
+
+		ClosureAddress(long writable, long executable) {
+			this.writable = writable;
+			this.executable = executable;
+		}
+	}
+
+	private static ClosureAddress allocate() {
+		APIBuffer __buf = apiStack();
+		int executable = __buf.pointerParam();
+
+		long writable = nffi_closure_alloc(FFIClosure.SIZEOF, __buf.address(executable));
+		if ( writable == NULL )
+			throw new OutOfMemoryError("Failed to allocate libffi closure.");
+
+		return new ClosureAddress(writable, __buf.pointerValue(executable));
+	}
+
 	// Closures types
 
 	/** A {@code Closure} with no return value. */
 	public abstract static class V extends Closure {
 		protected V(FFICIF cif, long classPath) {
-			super(cif, classPath, NATIVE_CALLBACK_VOID);
+			super(allocate(), cif, classPath, NATIVE_CALLBACK_VOID);
 		}
 
 		protected abstract void callback(long args);
@@ -283,7 +291,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** A {@code Closure} that returns a boolean value. */
 	public abstract static class Z extends Closure {
 		protected Z(FFICIF cif, long classPath) {
-			super(cif, classPath, NATIVE_CALLBACK_BOOLEAN);
+			super(allocate(), cif, classPath, NATIVE_CALLBACK_BOOLEAN);
 		}
 
 		protected abstract boolean callback(long args);
@@ -292,7 +300,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** A {@code Closure} that returns a byte value. */
 	public abstract static class B extends Closure {
 		protected B(FFICIF cif, long classPath) {
-			super(cif, classPath, NATIVE_CALLBACK_BYTE);
+			super(allocate(), cif, classPath, NATIVE_CALLBACK_BYTE);
 		}
 
 		protected abstract byte callback(long args);
@@ -301,7 +309,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** A {@code Closure} that returns a short value. */
 	public abstract static class S extends Closure {
 		protected S(FFICIF cif, long classPath) {
-			super(cif, classPath, NATIVE_CALLBACK_SHORT);
+			super(allocate(), cif, classPath, NATIVE_CALLBACK_SHORT);
 		}
 
 		protected abstract short callback(long args);
@@ -310,7 +318,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** A {@code Closure} that returns an int value. */
 	public abstract static class I extends Closure {
 		protected I(FFICIF cif, long classPath) {
-			super(cif, classPath, NATIVE_CALLBACK_INT);
+			super(allocate(), cif, classPath, NATIVE_CALLBACK_INT);
 		}
 
 		protected abstract int callback(long args);
@@ -319,7 +327,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** A {@code Closure} that returns a long value. */
 	public abstract static class J extends Closure {
 		protected J(FFICIF cif, long classPath) {
-			super(cif, classPath, NATIVE_CALLBACK_LONG);
+			super(allocate(), cif, classPath, NATIVE_CALLBACK_LONG);
 		}
 
 		protected abstract long callback(long args);
@@ -328,7 +336,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** A {@code Closure} that returns a float value. */
 	public abstract static class F extends Closure {
 		protected F(FFICIF cif, long classPath) {
-			super(cif, classPath, NATIVE_CALLBACK_FLOAT);
+			super(allocate(), cif, classPath, NATIVE_CALLBACK_FLOAT);
 		}
 
 		protected abstract float callback(long args);
@@ -337,7 +345,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** A {@code Closure} that returns a double value. */
 	public abstract static class D extends Closure {
 		protected D(FFICIF cif, long classPath) {
-			super(cif, classPath, NATIVE_CALLBACK_DOUBLE);
+			super(allocate(), cif, classPath, NATIVE_CALLBACK_DOUBLE);
 		}
 
 		protected abstract double callback(long args);
@@ -346,7 +354,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	/** A {@code Closure} that returns a pointer value. */
 	public abstract static class P extends Closure {
 		protected P(FFICIF cif, long classPath) {
-			super(cif, classPath, NATIVE_CALLBACK_PTR);
+			super(allocate(), cif, classPath, NATIVE_CALLBACK_PTR);
 		}
 
 		protected abstract long callback(long args);

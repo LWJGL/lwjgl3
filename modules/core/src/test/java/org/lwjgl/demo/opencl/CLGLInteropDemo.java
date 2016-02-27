@@ -209,7 +209,7 @@ public final class CLGLInteropDemo {
 
 		CL.destroy();
 		glfwTerminate();
-		errorfun.release();
+		errorfun.free();
 
 		System.out.println("GAME OVER!");
 	}
@@ -289,7 +289,7 @@ public final class CLGLInteropDemo {
 		}
 
 		void destroy() {
-			Callbacks.glfwReleaseCallbacks(handle);
+			Callbacks.glfwFreeCallbacks(handle);
 			glfwDestroyWindow(handle);
 		}
 

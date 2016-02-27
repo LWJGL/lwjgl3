@@ -16,13 +16,13 @@ public class LibraryTest {
 	public void testLifecycle() {
 		SharedLibrary lib = new WindowsLibrary("opengl32.dll");
 		assertEquals(lib.getName(), "opengl32.dll");
-		lib.release();
+		lib.free();
 	}
 
 	public void testGetProcAddress() {
 		SharedLibrary lib = new WindowsLibrary("opengl32.dll");
 		assertTrue(lib.getFunctionAddress("wglGetProcAddress") != NULL);
-		lib.release();
+		lib.free();
 	}
 
 }

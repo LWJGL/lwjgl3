@@ -49,7 +49,7 @@ public interface Pointer {
 		}
 
 		@Override
-		public final long address() {
+		public long address() {
 			return address;
 		}
 

@@ -85,11 +85,11 @@ public final class Threads {
 
 		for ( int i = 0; i < threads.length; i++ ) {
 			glfwDestroyWindow(threads[i].window);
-			threads[i].keyfun.release();
+			threads[i].keyfun.free();
 		}
 
 		glfwTerminate();
-		errorfun.release();
+		errorfun.free();
 	}
 
 	private static class GLFWThread extends Thread {

@@ -14,13 +14,14 @@ import static org.lwjgl.system.macosx.CoreFoundation.*;
 /** Implements a {@link SharedLibrary} on the MacOS X using CFBundleCreate. */
 public class MacOSXLibraryBundle extends MacOSXLibrary {
 
-	private final long bundleRef;
-
 	public MacOSXLibraryBundle(String name) {
-		super(name);
+		super(createBundle(name), name);
+	}
 
+	private static long createBundle(String name) {
 		long fsPath = NULL, url = NULL;
 
+		long bundleRef;
 		try {
 			APIBuffer __buffer = apiBuffer();
 			__buffer.stringParamUTF8(name, true);
@@ -42,10 +43,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 			if ( url != NULL ) CFRelease(url);
 			if ( fsPath != NULL ) CFRelease(fsPath);
 		}
-	}
 
-	@Override
-	public long address() {
 		return bundleRef;
 	}
 
@@ -59,15 +57,15 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 			throw new NullPointerException();
 
 		try {
-			return CFBundleGetFunctionPointerForName(bundleRef, nameRef);
+			return CFBundleGetFunctionPointerForName(address(), nameRef);
 		} finally {
 			CFRelease(nameRef);
 		}
 	}
 
 	@Override
-	protected void destroy() {
-		CFRelease(bundleRef);
+	public void free() {
+		CFRelease(address());
 	}
 
 }

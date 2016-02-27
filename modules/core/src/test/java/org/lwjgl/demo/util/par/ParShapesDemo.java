@@ -473,12 +473,12 @@ public final class ParShapesDemo {
 
 		glfwTerminate();
 
-		debugCB.release();
+		debugCB.free();
 
-		framebufferSizeCB.release();
-		windowSizeCB.release();
-		keyCB.release();
-		errorCB.release();
+		framebufferSizeCB.free();
+		windowSizeCB.free();
+		keyCB.free();
+		errorCB.free();
 	}
 
 	private void run() {

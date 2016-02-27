@@ -188,8 +188,8 @@ public final class ExampleGL3 extends Demo {
 
 		glfwTerminate();
 
-		key.release();
-		errorcb.release();
+		key.free();
+		errorcb.free();
 	}
 
 }

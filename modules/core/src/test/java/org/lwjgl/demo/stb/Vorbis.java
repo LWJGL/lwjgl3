@@ -6,7 +6,6 @@ package org.lwjgl.demo.stb;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
-import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALContext;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
@@ -436,13 +435,13 @@ public final class Vorbis {
 
 		void destroy() {
 			if ( debugProc != null )
-				debugProc.release();
+				debugProc.free();
 
-			glfwReleaseCallbacks(window);
+			glfwFreeCallbacks(window);
 			glfwDestroyWindow(window);
 
 			glfwTerminate();
-			errorCallback.release();
+			errorCallback.free();
 		}
 
 	}

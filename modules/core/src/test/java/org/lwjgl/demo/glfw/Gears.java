@@ -117,7 +117,7 @@ public class Gears extends AbstractGears {
 			glfwSetInputMode(this.window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			glfwDestroyWindow(this.window);
 			if ( debugProc != null )
-				debugProc.release();
+				debugProc.free();
 		}
 
 		keyCB.set(window);
@@ -177,17 +177,17 @@ public class Gears extends AbstractGears {
 
 	private void destroy() {
 		if ( debugProc != null )
-			debugProc.release();
+			debugProc.free();
 
 		if ( window != NULL ) {
-			glfwReleaseCallbacks(window);
+			glfwFreeCallbacks(window);
 			glfwDestroyWindow(window);
 		}
 
 		glfwTerminate();
 
 		if ( errorCB != null )
-			errorCB.release();
+			errorCB.free();
 	}
 
 }

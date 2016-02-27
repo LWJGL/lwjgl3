@@ -69,7 +69,7 @@ public final class CL {
 
 	private static void create(final SharedLibrary OPENCL) {
 		try {
-			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
+			FunctionProviderLocal functionProvider = new FunctionProviderLocal() {
 
 				private final long clGetExtensionFunctionAddress;
 				private final long clGetExtensionFunctionAddressForPlatform;
@@ -81,7 +81,7 @@ public final class CL {
 					clGetExtensionFunctionAddress = OPENCL.getFunctionAddress("clGetExtensionFunctionAddress");
 					clGetExtensionFunctionAddressForPlatform = OPENCL.getFunctionAddress("clGetExtensionFunctionAddressForPlatform");
 					if ( clGetExtensionFunctionAddress == NULL && clGetExtensionFunctionAddressForPlatform == NULL ) {
-						OPENCL.release();
+						OPENCL.free();
 						throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 					}
 
@@ -156,13 +156,13 @@ public final class CL {
 				}
 
 				@Override
-				protected void destroy() {
-					OPENCL.release();
+				public void free() {
+					OPENCL.free();
 				}
 			};
 			create(functionProvider);
 		} catch (RuntimeException e) {
-			OPENCL.release();
+			OPENCL.free();
 			throw e;
 		}
 	}
@@ -188,7 +188,7 @@ public final class CL {
 		if ( functionProvider == null )
 			return;
 
-		functionProvider.release();
+		functionProvider.free();
 		functionProvider = null;
 		icd = null;
 	}

@@ -148,8 +148,8 @@ public final class ExampleGL2 extends Demo {
 
 		glfwTerminate();
 
-		key.release();
-		errorcb.release();
+		key.free();
+		errorcb.free();
 	}
 
 }

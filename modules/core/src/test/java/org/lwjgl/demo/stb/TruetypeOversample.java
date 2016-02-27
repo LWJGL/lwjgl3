@@ -396,12 +396,12 @@ public final class TruetypeOversample {
 		chardata.free();
 
 		if ( debugProc != null )
-			debugProc.release();
-		keyfun.release();
-		framebufferSizefun.release();
-		windowSizefun.release();
+			debugProc.free();
+		keyfun.free();
+		framebufferSizefun.free();
+		windowSizefun.free();
 		glfwTerminate();
-		errorfun.release();
+		errorfun.free();
 
 		memFree(yb);
 		memFree(xb);

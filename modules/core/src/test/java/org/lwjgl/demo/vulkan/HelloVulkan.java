@@ -1992,7 +1992,7 @@ public final class HelloVulkan {
 		vkDestroySurfaceKHR(inst, surface, null);
 		if ( msg_callback != NULL ) {
 			vkDestroyDebugReportCallbackEXT(inst, msg_callback, null);
-			dbgFunc.release();
+			dbgFunc.free();
 		}
 		vkDestroyInstance(inst, null);
 
@@ -2003,10 +2003,10 @@ public final class HelloVulkan {
 		glfwDestroyWindow(window);
 		glfwTerminate();
 
-		demo_resize_callback.release();
-		demo_refresh_callback.release();
-		demo_key_callback.release();
-		errorCB.release();
+		demo_resize_callback.free();
+		demo_refresh_callback.free();
+		demo_key_callback.free();
+		errorCB.free();
 
 		for ( int i = 0; i < device_validation_layers.remaining(); i++ )
 			nmemFree(device_validation_layers.get(i));

@@ -77,13 +77,13 @@ public final class ALC {
 		final SharedLibrary OPENAL = Library.loadNative(libName);
 
 		try {
-			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
+			FunctionProviderLocal functionProvider = new FunctionProviderLocal() {
 
 				private final long alcGetProcAddress = getFunctionAddress("alcGetProcAddress");
 
 				{
 					if ( alcGetProcAddress == NULL ) {
-						OPENAL.release();
+						OPENAL.free();
 						throw new RuntimeException("A core ALC function is missing. Make sure that the OpenAL library has been loaded correctly.");
 					}
 				}
@@ -110,13 +110,13 @@ public final class ALC {
 				}
 
 				@Override
-				protected void destroy() {
-					OPENAL.release();
+				public void free() {
+					OPENAL.free();
 				}
 			};
 			create(functionProvider);
 		} catch (RuntimeException e) {
-			OPENAL.release();
+			OPENAL.free();
 			throw e;
 		}
 	}
@@ -146,7 +146,7 @@ public final class ALC {
 
 		libraryCapabilities = null;
 
-		functionProvider.release();
+		functionProvider.free();
 		functionProvider = null;
 	}
 
