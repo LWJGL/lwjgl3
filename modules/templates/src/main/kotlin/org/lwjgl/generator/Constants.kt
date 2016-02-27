@@ -132,11 +132,20 @@ class ConstantBlock<T : Any>(
 				}
 			}
 
-			if ( rootBlock.isNotEmpty() )
-				ConstantBlock(nativeClass, access, IntConstant, this@ConstantBlock.documentation, *rootBlock.toArray(emptyArray())).generate(writer)
+			fun rootBlockBefore() =
+				enumBlocks.isEmpty() || rootBlock[0].value ?: Integer.MAX_VALUE < enumBlocks[0].constants[0].value ?: Integer.MAX_VALUE
+
+			fun PrintWriter.generateRootBlock(rootBlock: ArrayList<Constant<Int>>) =
+				ConstantBlock(nativeClass, access, IntConstant, this@ConstantBlock.documentation, *rootBlock.toArray(emptyArray())).generate(this)
+
+			if ( rootBlock.isNotEmpty() && rootBlockBefore())
+				writer.generateRootBlock(rootBlock)
 
 			for (b in enumBlocks)
 				b.generate(writer)
+
+			if ( rootBlock.isNotEmpty() && !rootBlockBefore())
+				writer.generateRootBlock(rootBlock)
 		} else
 			writer.generateBlock()
 	}
