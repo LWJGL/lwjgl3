@@ -163,7 +163,6 @@ License terms: http://lwjgl.org/license.php
 			<arg line="-d ${bin.templates}"/>
 
 			<arg value="${src.templates.kotlin}/org/lwjgl/generator"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system"/>
 
 			<arg value="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" unless:true="${binding.egl}"/>
@@ -177,12 +176,22 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/opengles" if:true="${binding.opengles}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan" if:true="${binding.vulkan}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan/VKypes.kt" unless:true="${binding.vulkan}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan/ExtensionTypes.kt" unless:true="${binding.vulkan}"/>
+
+			<arg value="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/system/jemalloc"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/system/libc"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/system/libffi"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/system/linux"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/system/macosx"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/system/windows"/>
+
+			<arg value="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/util/simd"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/util/xxhash"/>
 			<!--
 			<arg value="-Xno-call-assertions"/>
 			<arg value="-Xno-param-assertions"/>

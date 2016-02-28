@@ -12,7 +12,7 @@ val nanovg_gl2 = dependsOn(Binding.OPENGL) {
 	"NanoVGGL2".nativeClass(packageName = NANOVG_PACKAGE, prefix = "NVG") {
 		nativeDirective(
 			"""#ifdef LWJGL_WINDOWS
-	__pragma(warning(disable : 4244 4710 4711))
+	__pragma(warning(disable : 4710 4711))
 #endif""", beforeIncludes = true)
 
 		includeNanoVGAPI("""#define NANOVG_GL2_IMPLEMENTATION

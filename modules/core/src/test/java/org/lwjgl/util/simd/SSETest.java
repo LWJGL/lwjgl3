@@ -2,13 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.simd;
+package org.lwjgl.util.simd;
 
 import org.testng.annotations.Test;
 
 import static java.lang.Math.*;
-import static org.lwjgl.system.simd.SSE.*;
-import static org.lwjgl.system.simd.SSE3.*;
+import static org.lwjgl.util.simd.SSE.*;
+import static org.lwjgl.util.simd.SSE3.*;
 import static org.testng.Assert.*;
 
 @Test

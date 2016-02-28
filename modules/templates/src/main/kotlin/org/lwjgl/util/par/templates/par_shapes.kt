@@ -24,7 +24,7 @@ val par_shapes = "ParShapes".nativeClass(packageName = PAR_PACKAGE, prefix = "pa
 #define PAR_FREE(BUF) lwjgl_free(BUF)
 DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
-	__pragma(warning(disable : 4242 4244 4305 4711 4738))
+	__pragma(warning(disable : 4711 4738))
 #endif
 #include "par_shapes.h"
 ENABLE_WARNINGS()""")
@@ -53,7 +53,7 @@ par_shapes_free_mesh(m);""")}
 
 	void(
 		"free_mesh",
-		"Frees the specified ##ParShapeMesh structure.",
+		"Frees the specified ##ParShapesMesh structure.",
 
 		par_shapes_mesh_p.IN("mesh", "the mesh to free")
 	)
@@ -123,7 +123,7 @@ par_shapes_free_mesh(m);""")}
 
 	par_shapes_mesh_p(
 		"create_plane",
-		"Creates a planem mesh.",
+		"Creates a plane mesh.",
 
 		shapes_create_ss["slices"],
 		shapes_create_ss["stacks"]
@@ -192,7 +192,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
 		"create_lsystem",
 		"""
 		Creates trees or vegetation by executing a recursive turtle graphics program. The program is a list of command-argument pairs. See the
-		<a href="https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/util/par/ParTest.java#L263">unit test</a> for an example.
+		<a href="https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/test/java/org/lwjgl/util/par/ParTest.java\#L263">unit test</a> for an example.
 		Texture coordinates and normals are not generated.
 		""",
 

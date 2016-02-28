@@ -4,7 +4,7 @@
  */
 
 #define DISABLE_WARNINGS() \
-	__pragma(warning(push, 3))
+	__pragma(warning(push, 0))
 
 #define ENABLE_WARNINGS() \
 	__pragma(warning(pop))

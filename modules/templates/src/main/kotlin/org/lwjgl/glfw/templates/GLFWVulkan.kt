@@ -38,7 +38,7 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 			"""
 			Returns an array of names of Vulkan instance extensions required by GLFW for creating Vulkan surfaces for GLFW windows. If successful, the list
 			will always contain {@code VK_KHR_surface}, so if you don't require any additional extensions you can pass this list directly to the
-			##org.lwjgl.vulkan.VkInstanceCreateInfo struct.
+			##VkInstanceCreateInfo struct.
 
 			If Vulkan is not available on the machine, this function returns $NULL and generates a GLFW#API_UNAVAILABLE error. Call #VulkanSupported() to check
 			whether Vulkan is available.

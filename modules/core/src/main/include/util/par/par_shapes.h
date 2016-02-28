@@ -1696,9 +1696,9 @@ par_shapes_mesh* par_shapes_weld(par_shapes_mesh const* mesh, float epsilon,
     float maxcell = gridsize - 1;
     par_shapes_compute_aabb(clone, aabb);
     float scale[3] = {
-        maxcell / (aabb[3] - aabb[0]),
-        maxcell / (aabb[4] - aabb[1]),
-        maxcell / (aabb[5] - aabb[2]),
+        aabb[3] == aabb[0] ? 1.0 : maxcell / (aabb[3] - aabb[0]),
+        aabb[4] == aabb[1] ? 1.0 : maxcell / (aabb[4] - aabb[1]),
+        aabb[5] == aabb[2] ? 1.0 : maxcell / (aabb[5] - aabb[2]),
     };
     par_shapes_translate(clone, -aabb[0], -aabb[1], -aabb[2]);
     par_shapes_scale(clone, scale[0], scale[1], scale[2]);

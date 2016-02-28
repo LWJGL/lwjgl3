@@ -23,7 +23,7 @@
  * <li>{@link org.lwjgl.system.MemoryUtil MemoryUtil}, used for off-heap data access and memory allocation/deallocation.</li>
  * <li>{@link org.lwjgl.system.FunctionProvider FunctionProvider}, {@link org.lwjgl.system.Library Library} and
  * {@link org.lwjgl.system.SharedLibrary SharedLibrary}, used for loading shared libraries and accessing function pointers.</li>
- * <li>{@link org.lwjgl.system.Pointer Pointer} and {@link org.lwjgl.system.Retainable Retainable}, used as off-heap resource abstractions.</li>
+ * <li>{@link org.lwjgl.system.Pointer Pointer}, used as off-heap resource abstractions.</li>
  * <li>{@link org.lwjgl.system.Configuration Configuration}, used for programmatic configuration at runtime.</li>
  * </ul>
  */
