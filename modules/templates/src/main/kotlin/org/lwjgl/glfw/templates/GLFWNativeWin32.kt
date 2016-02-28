@@ -21,7 +21,7 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(packageName = GLFW_PACKAGE, 
 
 	    GLFWmonitor.IN("monitor", "the GLFW monitor"),
 	    returnDoc = "The UTF-8 encoded adapter device name (for example `\\\\.\\DISPLAY1`) of the specified monitor, or $NULL if an error occurred.",
-	    since = "GLFW 3.1"
+	    since = "version 3.1"
 	)
 
 	(const..charUTF8_p)(
@@ -34,7 +34,7 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(packageName = GLFW_PACKAGE, 
 
 	    GLFWmonitor.IN("monitor", "the GLFW monitor"),
 		returnDoc = "The UTF-8 encoded display device name (for example `\\\\.\\DISPLAY1\\Monitor0`) of the specified monitor, or $NULL if an error occurred.",
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	HWND(
@@ -47,6 +47,6 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(packageName = GLFW_PACKAGE, 
 
 		GLFWwindow.IN("window", "the GLFW window"),
 		returnDoc = "The ${code("HWND")} of the specified window, or $NULL if an error occurred.",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 }

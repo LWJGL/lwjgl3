@@ -376,17 +376,67 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"NO_WINDOW_CONTEXT"..0x0001000A
 	)
 
-	val WindowAttributes = IntConstant(
+	val WindowAttributes = EnumConstant(
 		"Window attributes.",
 
-		"FOCUSED"..0x00020001,
-		"ICONIFIED"..0x00020002,
-		"RESIZABLE"..0x00020003,
-		"VISIBLE"..0x00020004,
-		"DECORATED"..0x00020005,
-		"AUTO_ICONIFY"..0x00020006,
-		"FLOATING"..0x00020007
-	).javaDocLinks
+		"FOCUSED".enum(
+			"""
+			#WindowHint(): Specifies whether the windowed mode window will be given input focus when created. This hint is ignored for full screen and
+			initially hidden windows.
+
+			#GetWindowAttrib(): Indicates whether the specified window has input focus.
+			""",
+			0x00020001
+		),
+		"ICONIFIED".enum("#GetWindowAttrib(): Indicates whether the specified window is iconified, whether by the user or with #IconifyWindow().", 0x00020002),
+		"RESIZABLE".enum(
+			"""
+			#WindowHint(): Specifies whether the windowed mode window will be resizable <i>by the user</i>. The window will still be resizable using the
+			#SetWindowSize() function. This hint is ignored for full screen windows.
+
+			#GetWindowAttrib(): Indicates whether the specified window is resizable <i>by the user</i>.
+			""",
+			0x00020003),
+		"VISIBLE".enum(
+			"""
+			#WindowHint(): Specifies whether the windowed mode window will be initially visible. This hint is ignored for full screen windows. Windows created
+			hidden are completely invisible to the user until shown. This can be useful if you need to set up your window further before showing it, for
+			example moving it to a specific location.
+
+			#GetWindowAttrib(): Indicates whether the specified window is visible. Window visibility can be controlled with #ShowWindow() and #HideWindow().
+			""",
+			0x00020004),
+		"DECORATED".enum(
+			"""
+			#WindowHint(): Specifies whether the windowed mode window will have window decorations such as a border, a close widget, etc. An undecorated window
+			may still allow the user to generate close events on some platforms. This hint is ignored for full screen windows.
+
+			#GetWindowAttrib(): Indicates whether the specified window has decorations such as a border, a close widget, etc.
+			""",
+			0x00020005),
+		"AUTO_ICONIFY".enum(
+			"""
+			#WindowHint(): Specifies whether the full screen window will automatically iconify and restore the previous video mode on input focus loss. This
+			hint is ignored for windowed mode windows.
+			""",
+			0x00020006),
+		"FLOATING".enum(
+			"""
+			#WindowHint(): Specifies whether the windowed mode window will be floating above other regular windows, also called topmost or always-on-top. This
+			is intended primarily for debugging purposes and cannot be used to implement proper full screen windows. This hint is ignored for full screen
+			windows.
+
+			#GetWindowAttrib(): Indicates whether the specified window is floating, also called topmost or always-on-top.
+			""",
+			0x00020007),
+		"MAXIMIZED".enum(
+			"""
+			#WindowHint(): Specifies whether the windowed mode window will be maximized when created. This hint is ignored for full screen windows.
+
+			#GetWindowAttrib(): Indicates whether the specified window is maximized, whether by the user or #MaximizeWindow().
+			""",
+			0x00020008)
+	).javaDocLinks.replace("GLFW#AUTO_ICONIFY ", "")
 
 	IntConstant(
 		"Input options.",
@@ -828,11 +878,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		${table(
 			tr(th("Name"), th("Default value"), th("Supported values")),
 
+			tr(td("#FOCUSED"), td("#TRUE"), td("#TRUE or #FALSE")),
 			tr(td("#RESIZABLE"), td("#TRUE"), td("#TRUE or #FALSE")),
 			tr(td("#VISIBLE"), td("#TRUE"), td("#TRUE or #FALSE")),
 			tr(td("#DECORATED"), td("#TRUE"), td("#TRUE or #FALSE")),
 			tr(td("#AUTO_ICONIFY"), td("#TRUE"), td("#TRUE or #FALSE")),
 			tr(td("#FLOATING"), td("#TRUE"), td("#TRUE or #FALSE")),
+			tr(td("#MAXIMIZED"), td("#FALSE"), td("#TRUE or #FALSE")),
 
 			tr(td("#RED_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
 			tr(td("#GREEN_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
@@ -1215,7 +1267,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	void(
 		"RestoreWindow",
 		"""
-		Restores the specified window if it was previously iconified (minimized). If the window is already restored, this function does nothing.
+		Restores the specified window if it was previously iconified (minimized) or maximized. If the window is already restored, this function does nothing.
 
 		If the specified window is a full screen window, the resolution chosen for the window is restored on the selected monitor.
 
@@ -1225,6 +1277,21 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWwindow.IN("window", "the window to restore"),
 
 		since = "version 2.1"
+	)
+
+	void(
+		"MaximizeWindow",
+		"""
+		Maximizes the specified window if it was previously not maximized. If the window is already maximized, this function does nothing.
+
+		If the specified window is a full screen window, this function does nothing.
+
+		This function may only be called from the main thread.
+		""",
+
+		GLFWwindow.IN("window", "the window to maximize"),
+
+		since = "version 3.2"
 	)
 
 	Code(
@@ -1255,6 +1322,24 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.0"
 	)
 
+	void(
+		"FocusWindow",
+		"""
+		Brings the specified window to front and sets input focus. The window should already be visible and not iconified.
+
+		By default, both windowed and full screen mode windows are focused when initially created. Set the #FOCUSED hint to disable this behavior.
+
+		<b>Do not use this function</b> to steal focus from other applications unless you are certain that is what the user wants. Focus stealing can be
+		extremely disruptive.
+
+		This function must only be called from the main thread.
+		""",
+
+		GLFWwindow.IN("window", "the window to give input focus"),
+
+		since = "version 3.2"
+	)
+
 	GLFWmonitor(
 		"GetWindowMonitor",
 		"""
@@ -1283,7 +1368,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window to query"),
-		int.IN("attrib", "the <a href=\"http://www.glfw.org/docs/latest/window.html\\#window_attribs\">window attribute</a> whose value to return", WindowAttributes),
+		int.IN(
+			"attrib",
+			"the <a href=\"http://www.glfw.org/docs/latest/window.html\\#window_attribs\">window attribute</a> whose value to return",
+			WindowAttributes
+		),
 
 		returnDoc = "the value of the attribute, or zero if an error occured",
 		since = "version 3.0"
@@ -1543,7 +1632,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"SetInputMode",
 		"""
 		Sets an input option for the specified window.
-		
+
 		If {@code mode} is #CURSOR, the value must be one of the following cursor modes:
 		${ul(
 			"#CURSOR_NORMAL makes the cursor visible and behaving normally.",
@@ -1576,10 +1665,35 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	(const..charUTF8_p)(
 		"GetKeyName",
 		"""
-		Returns the localized name of the specified printable key.
+		Returns the localized name of the specified printable key. This is intended for displaying key bindings to the user.
 
-		If the key is #KEY_UNKNOWN, the scancode is used, otherwise the scancode is ignored.
+		If the key is #KEY_UNKNOWN, the scancode is used instead, otherwise the scancode is ignored. If a non-printable key or (if the key is #KEY_UNKNOWN) a
+		scancode that maps to a non-printable key is specified, this function returns $NULL.
 
+		The printable keys are:
+		${ul(
+			"#KEY_APOSTROPHE",
+			"#KEY_COMMA",
+			"#KEY_MINUS",
+			"#KEY_PERIOD",
+			"#KEY_SLASH",
+			"#KEY_SEMICOLON",
+			"#KEY_EQUAL",
+			"#KEY_LEFT_BRACKET",
+			"#KEY_RIGHT_BRACKET",
+			"#KEY_BACKSLASH",
+			"#KEY_WORLD_1",
+			"#KEY_WORLD_2",
+			"#KEY_0 to #KEY_9",
+			"#KEY_A to #KEY_Z",
+			"#KEY_KP_0 to #KEY_KP_9",
+			"#KEY_KP_DECIMAL",
+			"#KEY_KP_DIVIDE",
+			"#KEY_KP_MULTIPLY",
+			"#KEY_KP_SUBTRACT",
+			"#KEY_KP_ADD",
+			"#KEY_KP_EQUAL"
+		)}
 		The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to #GetKeyName(), or until the
 		library is terminated.
 
@@ -1589,7 +1703,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("key", "the key to query, or #KEY_UNKNOWN"),
 		int.IN("scancode", "the scancode of the key to query"),
 
-		returnDoc = "the localized name of the key",
+		returnDoc = "the localized name of the key, or $NULL",
 		since = "version 3.2"
 	)
 
@@ -2217,6 +2331,4 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		returnDoc = "the address of the function, or $NULL if an error occured",
 		since = "version 1.0"
 	)
-
-
 }

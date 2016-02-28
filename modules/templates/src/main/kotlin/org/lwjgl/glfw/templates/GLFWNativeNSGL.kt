@@ -21,6 +21,6 @@ val GLFWNativeNSGL = "GLFWNativeNSGL".nativeClass(packageName = GLFW_PACKAGE, na
 
 		GLFWwindow.IN("window", "the GLFW window"),
 		returnDoc = "The ${code("NSOpenGLContext")} of the specified window, or nil if an error occurred.",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 }

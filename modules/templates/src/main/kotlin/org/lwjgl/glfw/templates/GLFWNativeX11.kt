@@ -19,7 +19,7 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nati
 		Note: This function may be called from any thread. Access is not synchronized.
 		""",
 		returnDoc = "The ${code("Display")} used by GLFW, or $NULL if an error occurred.",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 
 	RRCrtc(
@@ -32,7 +32,7 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nati
 
 		GLFWmonitor.IN("monitor", "the GLFW monitor"),
 		returnDoc = "The ${code("RRCrtc")} of the specified monitor, or {@code None} if an error occurred.",
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	RROutput(
@@ -45,7 +45,7 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nati
 
 		GLFWmonitor.IN("monitor", "the GLFW monitor"),
 		returnDoc = "The ${code("RROutput")} of the specified monitor, or {@code None} if an error occurred.",
-		since = "GLFW 3.1"
+		since = "version 3.1"
 	)
 
 	Window(
@@ -58,6 +58,6 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nati
 
 		GLFWwindow.IN("window", "a GLFW window"),
 		returnDoc = " The ${code("Window")} of the specified window, or {@code None} if an error occurred.",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 }

@@ -21,6 +21,6 @@ val GLFWNativeWGL = "GLFWNativeWGL".nativeClass(packageName = GLFW_PACKAGE, nati
 
 		GLFWwindow.IN("window", "the GLFW window"),
 		returnDoc = "The ${code("HGLRC")} of the specified window, or $NULL if an error occurred.",
-		since = "GLFW 3.0"
+		since = "version 3.0"
 	)
 }
