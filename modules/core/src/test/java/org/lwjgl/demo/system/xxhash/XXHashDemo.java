@@ -4,8 +4,6 @@
  */
 package org.lwjgl.demo.system.xxhash;
 
-import org.lwjgl.system.xxhash.XXH64State;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -48,7 +46,7 @@ public final class XXHashDemo {
 				ReadableByteChannel rbc = Channels.newChannel(stream);
 
 				// init
-				XXH64State state = XXH64State.malloc();
+				long state = XXH64_createState();
 				XXH64_reset(state, SEED);
 				try {
 					while ( true ) {
@@ -65,7 +63,7 @@ public final class XXHashDemo {
 					hash64 = XXH64_digest(state);
 					System.out.format("streaming 64-bit hash: 0x%X (%s)\n", hash64, resource);
 				} finally {
-					state.free();
+					XXH64_freeState(state);
 					rbc.close();
 				}
 			} finally {
