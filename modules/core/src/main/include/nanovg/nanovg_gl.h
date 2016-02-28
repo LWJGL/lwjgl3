@@ -54,48 +54,6 @@ enum NVGcreateFlags {
 // Creates NanoVG contexts for different OpenGL (ES) versions.
 // Flags should be combination of the create flags above.
 
-typedef unsigned int GLuint; // LWJGL
-
-#if defined NANOVG_GL2
-
-static NVGcontext* nvgCreateGL2(JNIEnv* env, int flags);
-static void nvgDeleteGL2(NVGcontext* ctx);
-
-static int nvglCreateImageFromHandleGL2(NVGcontext* ctx, GLuint textureId, int w, int h, int flags);
-static GLuint nvglImageFromHandleGL2(NVGcontext* ctx, int image);
-
-#endif
-
-#if defined NANOVG_GL3
-
-static NVGcontext* nvgCreateGL3(JNIEnv* env, int flags);
-static void nvgDeleteGL3(NVGcontext* ctx);
-
-static int nvglCreateImageFromHandleGL3(NVGcontext* ctx, GLuint textureId, int w, int h, int flags);
-static GLuint nvglImageHandleGL3(NVGcontext* ctx, int image);
-
-#endif
-
-#if defined NANOVG_GLES2
-
-static NVGcontext* nvgCreateGLES2(JNIEnv* env, int flags);
-static void nvgDeleteGLES2(NVGcontext* ctx);
-
-static int nvglCreateImageFromHandleGLES2(NVGcontext* ctx, GLuint textureId, int w, int h, int flags);
-static GLuint nvglImageHandleGLES2(NVGcontext* ctx, int image);
-
-#endif
-
-#if defined NANOVG_GLES3
-
-static NVGcontext* nvgCreateGLES3(JNIEnv* env, int flags);
-static void nvgDeleteGLES3(NVGcontext* ctx);
-
-static int nvglCreateImageFromHandleGLES3(NVGcontext* ctx, GLuint textureId, int w, int h, int flags);
-static GLuint nvglImageHandleGLES3(NVGcontext* ctx, int image);
-
-#endif
-
 // These are additional flags on top of NVGimageFlags.
 enum NVGimageFlagsGL {
 	NVG_IMAGE_NODELETE			= 1<<16,	// Do not delete GL texture handle.
@@ -123,6 +81,7 @@ typedef unsigned char GLboolean;
 typedef char GLchar;
 typedef int GLsizei;
 typedef int GLint;
+typedef unsigned int GLuint;
 typedef unsigned int GLenum;
 typedef float GLfloat;
 
