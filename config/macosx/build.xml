@@ -119,6 +119,13 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</compile>
 
+		<compile if:true="${binding.par}">
+			<arguments>
+				<arg value="-I${src.include.rel}/util/par"/>
+				<fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
+			</arguments>
+		</compile>
+
 		<compile if:true="${binding.stb}">
 			<arguments>
 				<arg value="-isystem${src.include.rel}/stb"/>
