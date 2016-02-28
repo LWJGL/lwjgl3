@@ -27,6 +27,10 @@
 #ifndef PAR_SHAPES_H
 #define PAR_SHAPES_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -160,24 +164,25 @@ void par_shapes_compute_normals(par_shapes_mesh* m);
 #define PAR_MAX(a, b) (a > b ? a : b)
 #define PAR_CLAMP(v, lo, hi) PAR_MAX(lo, PAR_MIN(hi, v))
 #define PAR_SWAP(T, A, B) { T tmp = B; B = A; A = tmp; }
-#define PAR_SQR(a) (a * a)
+#define PAR_SQR(a) ((a) * (a))
 #endif
 
 #ifndef PAR_MALLOC
 #define PAR_MALLOC(T, N) ((T*) malloc(N * sizeof(T)))
 #define PAR_CALLOC(T, N) ((T*) calloc(N * sizeof(T), 1))
-#define PAR_REALLOC(T, BUF, N) ((T*) realloc(BUF, sizeof(T) * N))
+#define PAR_REALLOC(T, BUF, N) ((T*) realloc(BUF, sizeof(T) * (N)))
 #define PAR_FREE(BUF) free(BUF)
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 // -----------------------------------------------------------------------------
 // END PUBLIC API
 // -----------------------------------------------------------------------------
 
-#endif // PAR_SHAPES_H
-
 #ifdef PAR_SHAPES_IMPLEMENTATION
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
@@ -333,6 +338,8 @@ par_shapes_mesh* par_shapes_create_torus(int slices, int stacks, float radius)
     if (slices < 3 || stacks < 3) {
         return 0;
     }
+    assert(radius <= 1.0 && "Use smaller radius to avoid self-intersection.");
+    assert(radius >= 0.1 && "Use larger radius to avoid self-intersection.");
     void* userdata = (void*) &radius;
     return par_shapes_create_parametric(par_shapes__torus, slices,
         stacks, userdata);
@@ -363,8 +370,11 @@ par_shapes_mesh* par_shapes_create_trefoil_knot(int slices, int stacks,
     if (slices < 3 || stacks < 3) {
         return 0;
     }
-    return par_shapes_create_parametric(
-        par_shapes__trefoil, slices, stacks, 0);
+    assert(radius <= 3.0 && "Use smaller radius to avoid self-intersection.");
+    assert(radius >= 0.5 && "Use larger radius to avoid self-intersection.");
+    void* userdata = (void*) &radius;
+    return par_shapes_create_parametric(par_shapes__trefoil, slices,
+        stacks, userdata);
 }
 
 par_shapes_mesh* par_shapes_create_plane(int slices, int stacks)
@@ -569,10 +579,11 @@ static void par_shapes__torus(float const* uv, float* xyz, void* userdata)
 
 static void par_shapes__trefoil(float const* uv, float* xyz, void* userdata)
 {
+    float minor = *((float*) userdata);
     const float a = 0.5f;
     const float b = 0.3f;
     const float c = 0.5f;
-    const float d = 0.1f;
+    const float d = minor * 0.1f;
     const float u = (1 - uv[0]) * 4 * PAR_PI;
     const float v = uv[1] * 2 * PAR_PI;
     const float r = a + b * cos(1.5f * u);
@@ -1648,7 +1659,6 @@ static void par_shapes__weld_points(par_shapes_mesh* mesh, int gridsize,
             *dst++ = src[2];
             *cmap++ = ci++;
         } else {
-            assert(weldmap[p] < p);
             *cmap++ = condensed_map[weldmap[p]];
         }
     }
@@ -2017,3 +2027,4 @@ void par_shapes_remove_degenerate(par_shapes_mesh* mesh, float mintriarea)
 }
 
 #endif // PAR_SHAPES_IMPLEMENTATION
+#endif // PAR_SHAPES_H

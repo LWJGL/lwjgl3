@@ -358,7 +358,7 @@ public final class ParShapesDemo {
 
 	private void updateHUD(boolean error) {
 		ByteBuffer color = memAlloc(4);
-		ByteBuffer buffer = memAlloc(1024 * 50);
+		ByteBuffer buffer = memAlloc(1024 * 60);
 
 		setColor(color, 255, 255, 255, 0);
 		String[] meshes = {
