@@ -45,7 +45,7 @@ val nanovg_gl2 = dependsOn(Binding.OPENGL) {
 		val ctx = NVGcontext_p.IN("ctx", "the NanoVG context")
 
 		int(
-			"lCreateImageFromHandle",
+			"lCreateImageFromHandleGL2",
 			"Creates a NanoVG image from an OpenGL texture.",
 
 			ctx,
@@ -56,7 +56,7 @@ val nanovg_gl2 = dependsOn(Binding.OPENGL) {
 		)
 
 		GLuint(
-			"lImageHandle",
+			"lImageHandleGL2",
 			"Returns the OpenGL texture id associated with a NanoVG image.",
 
 			ctx,
@@ -84,14 +84,6 @@ val nanovg_gl2 = dependsOn(Binding.OPENGL) {
 			ctx
 		)
 
-		void(
-			"luBindFramebuffer",
-			"Binds the framebuffer object associated with the specified ##NVGLUFramebuffer.",
-
-			ctx,
-			nullable..NVGLUframebuffer_p.IN("fb", "the framebuffer to bind")
-		)
-
 		NVGLUframebuffer_p(
 			"luCreateFramebuffer",
 			"Creates a framebuffer object to render to.",
@@ -100,6 +92,14 @@ val nanovg_gl2 = dependsOn(Binding.OPENGL) {
 			int.IN("w", "the framebuffer width"),
 			int.IN("h", "the framebuffer height"),
 			int.IN("imageFlags", "the image flags")
+		)
+
+		void(
+			"luBindFramebuffer",
+			"Binds the framebuffer object associated with the specified ##NVGLUFramebuffer.",
+
+			ctx,
+			nullable..NVGLUframebuffer_p.IN("fb", "the framebuffer to bind")
 		)
 
 		void(

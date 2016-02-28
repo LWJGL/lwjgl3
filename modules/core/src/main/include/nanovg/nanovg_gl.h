@@ -54,10 +54,15 @@ enum NVGcreateFlags {
 // Creates NanoVG contexts for different OpenGL (ES) versions.
 // Flags should be combination of the create flags above.
 
+typedef unsigned int GLuint; // LWJGL
+
 #if defined NANOVG_GL2
 
 static NVGcontext* nvgCreateGL2(JNIEnv* env, int flags);
 static void nvgDeleteGL2(NVGcontext* ctx);
+
+static int nvglCreateImageFromHandleGL2(NVGcontext* ctx, GLuint textureId, int w, int h, int flags);
+static GLuint nvglImageFromHandleGL2(NVGcontext* ctx, int image);
 
 #endif
 
@@ -66,12 +71,18 @@ static void nvgDeleteGL2(NVGcontext* ctx);
 static NVGcontext* nvgCreateGL3(JNIEnv* env, int flags);
 static void nvgDeleteGL3(NVGcontext* ctx);
 
+static int nvglCreateImageFromHandleGL3(NVGcontext* ctx, GLuint textureId, int w, int h, int flags);
+static GLuint nvglImageHandleGL3(NVGcontext* ctx, int image);
+
 #endif
 
 #if defined NANOVG_GLES2
 
 static NVGcontext* nvgCreateGLES2(JNIEnv* env, int flags);
 static void nvgDeleteGLES2(NVGcontext* ctx);
+
+static int nvglCreateImageFromHandleGLES2(NVGcontext* ctx, GLuint textureId, int w, int h, int flags);
+static GLuint nvglImageHandleGLES2(NVGcontext* ctx, int image);
 
 #endif
 
@@ -80,22 +91,15 @@ static void nvgDeleteGLES2(NVGcontext* ctx);
 static NVGcontext* nvgCreateGLES3(JNIEnv* env, int flags);
 static void nvgDeleteGLES3(NVGcontext* ctx);
 
+static int nvglCreateImageFromHandleGLES3(NVGcontext* ctx, GLuint textureId, int w, int h, int flags);
+static GLuint nvglImageHandleGLES3(NVGcontext* ctx, int image);
+
 #endif
 
 // These are additional flags on top of NVGimageFlags.
 enum NVGimageFlagsGL {
 	NVG_IMAGE_NODELETE			= 1<<16,	// Do not delete GL texture handle.
 };
-
-// ---------- LWJGL --------------
-
-typedef unsigned int GLuint;
-
-// ---------- LWJGL --------------
-
-static int nvglCreateImageFromHandle(NVGcontext* ctx, GLuint textureId, int w, int h, int flags);
-static GLuint nvglImageHandle(NVGcontext* ctx, int image);
-
 
 #ifdef __cplusplus
 }
@@ -899,7 +903,7 @@ static int glnvg__renderCreate(void* uptr)
 #if NANOVG_GL_USE_UNIFORMBUFFER
 	// Create UBOs
 	gl->UniformBlockBinding(gl->shader.prog, gl->shader.loc[GLNVG_LOC_FRAG], GLNVG_FRAG_BINDING);
-	gl->GenBuffers(1, &gl->fragBuf); 
+	gl->GenBuffers(1, &gl->fragBuf);
 	gl->GetIntegerv(GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT, &align);
 #endif
 	gl->fragSize = sizeof(GLNVGfragUniforms) + align - sizeof(GLNVGfragUniforms) % align;
@@ -1746,7 +1750,15 @@ static void nvgDeleteGLES3(NVGcontext* ctx)
 	nvgDeleteInternal(ctx);
 }
 
-static int nvglCreateImageFromHandle(NVGcontext* ctx, GLuint textureId, int w, int h, int imageFlags)
+#if defined NANOVG_GL2
+static int nvglCreateImageFromHandleGL2(NVGcontext* ctx, GLuint textureId, int w, int h, int imageFlags)
+#elif defined NANOVG_GL3
+static int nvglCreateImageFromHandleGL3(NVGcontext* ctx, GLuint textureId, int w, int h, int imageFlags)
+#elif defined NANOVG_GLES2
+static int nvglCreateImageFromHandleGLES2(NVGcontext* ctx, GLuint textureId, int w, int h, int imageFlags)
+#elif defined NANOVG_GLES3
+static int nvglCreateImageFromHandleGLES3(NVGcontext* ctx, GLuint textureId, int w, int h, int imageFlags)
+#endif
 {
 	GLNVGcontext* gl = (GLNVGcontext*)nvgInternalParams(ctx)->userPtr;
 	GLNVGtexture* tex = glnvg__allocTexture(gl);
@@ -1762,7 +1774,15 @@ static int nvglCreateImageFromHandle(NVGcontext* ctx, GLuint textureId, int w, i
 	return tex->id;
 }
 
-static GLuint nvglImageHandle(NVGcontext* ctx, int image)
+#if defined NANOVG_GL2
+static GLuint nvglImageHandleGL2(NVGcontext* ctx, int image)
+#elif defined NANOVG_GL3
+static GLuint nvglImageHandleGL3(NVGcontext* ctx, int image)
+#elif defined NANOVG_GLES2
+static GLuint nvglImageHandleGLES2(NVGcontext* ctx, int image)
+#elif defined NANOVG_GLES3
+static GLuint nvglImageHandleGLES3(NVGcontext* ctx, int image)
+#endif
 {
 	GLNVGcontext* gl = (GLNVGcontext*)nvgInternalParams(ctx)->userPtr;
 	GLNVGtexture* tex = glnvg__findTexture(gl, image);

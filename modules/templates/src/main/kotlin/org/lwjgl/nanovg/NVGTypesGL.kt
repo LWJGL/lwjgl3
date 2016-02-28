@@ -7,7 +7,7 @@ package org.lwjgl.nanovg
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-val NVGLUframebuffer_p = struct_p(NANOVG_PACKAGE, "NVGLUFramebuffer", nativeName = "NVGLUframebuffer") {
+val NVGLUframebuffer_p = struct_p(NANOVG_PACKAGE, "NVGLUFramebuffer", nativeName = "NVGLUframebuffer", mutable = false) {
 	documentation = "A framebuffer object."
 
 	GLuint.member("fbo", "the OpenGL framebuffer object handle")
