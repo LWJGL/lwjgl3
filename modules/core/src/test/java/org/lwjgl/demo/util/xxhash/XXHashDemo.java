@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.demo.system.xxhash;
+package org.lwjgl.demo.util.xxhash;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +12,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.Random;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.xxhash.XXHash.*;
+import static org.lwjgl.util.xxhash.XXHash.*;
 import static org.testng.Assert.*;
 
 public final class XXHashDemo {

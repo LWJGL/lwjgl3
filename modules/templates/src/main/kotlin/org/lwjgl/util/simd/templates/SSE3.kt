@@ -2,11 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.simd.templates
+package org.lwjgl.util.simd.templates
 
 import org.lwjgl.generator.*
 
-val SSE3 = "SSE3".nativeClass("org.lwjgl.system.simd", prefix = "_MM", prefixMethod = "_MM_") {
+val SSE3 = "SSE3".nativeClass("org.lwjgl.util.simd", prefix = "_MM", prefixMethod = "_MM_") {
 	nativeImport(
 		"simd/intrinsics.h"
 	)

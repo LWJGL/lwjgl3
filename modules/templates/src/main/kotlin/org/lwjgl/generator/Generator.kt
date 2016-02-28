@@ -86,8 +86,6 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.opengles", Binding.OPENGLES)
 		generate("org.lwjgl.ovr", Binding.OVR)
 		generate("org.lwjgl.stb", Binding.STB)
-		generate("org.lwjgl.util.nfd", Binding.NFD)
-		generate("org.lwjgl.util.par", Binding.PAR)
 		generate("org.lwjgl.vulkan", Binding.VULKAN)
 
 		generate("org.lwjgl.system.jawt", Binding.JAWT)
@@ -96,9 +94,12 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.system.libffi")
 		generate("org.lwjgl.system.linux")
 		generate("org.lwjgl.system.macosx")
-		generate("org.lwjgl.system.simd")
 		generate("org.lwjgl.system.windows")
-		generate("org.lwjgl.system.xxhash")
+
+		generate("org.lwjgl.util.nfd", Binding.NFD)
+		generate("org.lwjgl.util.par", Binding.PAR)
+		generate("org.lwjgl.util.simd")
+		generate("org.lwjgl.util.xxhash")
 
 		// Generate utility classes. These are auto-registered during the process above.
 		generate("struct", Generator.structs)

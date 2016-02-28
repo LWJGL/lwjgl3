@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.xxhash.templates
+package org.lwjgl.util.xxhash.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.xxhash.*
+import org.lwjgl.util.xxhash.*
 
 val xxhash = "XXHash".nativeClass(XXHASH_PACKAGE, prefix = "XXH", prefixMethod = "XXH") {
 	nativeDirective(
