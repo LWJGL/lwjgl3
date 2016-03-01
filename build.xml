@@ -474,7 +474,7 @@ License terms: http://lwjgl.org/license.php
 			useexternalfile="true"
 			nohelp="true"
 			notree="true"
-			stylesheetfile="${config}/javadoc.css"
+			public="true"
 			doclet="org.lwjgl.system.ExcludeDoclet"
 			docletpath="${bin.templates}"
 		    maxmemory="1G"
@@ -496,8 +496,12 @@ License terms: http://lwjgl.org/license.php
 				<patternset refid="core.generated.files"/>
 			</fileset>
 
-			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
-			<arg value="-XDignore.symbol.file=true"/>
+			<arg value="-sourcetab 4"/>
+			<arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
+
+			<arg value="-Xdoclint" if:set="jdk8"/>
+			<arg value="-html5" if:set="jdk9"/>
+			<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
 		</javadoc>
 	</target>
 

@@ -118,6 +118,17 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 	<property name="platform" value="solaris" if:set="platform.solaris"/>
 	<property name="platform" value="macosx" if:set="platform.macosx"/>
 
+	<!-- JDK version -->
+	<condition property="jdk9">
+		<matches string="${java.version}" pattern="^(9|\d\d+)[.-]"/>
+	</condition>
+	<condition property="jdk8">
+		<or>
+			<isset property="jdk9"/>
+			<matches string="${java.version}" pattern="^1[.]8"/>
+		</or>
+	</condition>
+
 	<!-- Different location per platform/architecture. This is intentional. -->
 	<property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>
 

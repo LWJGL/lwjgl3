@@ -346,7 +346,6 @@ $indentation}"""
 """)
 		if ( !nativeLayout )
 			print("""
-	@JavadocExclude
 	public static final int __ALIGNMENT;
 """)
 
@@ -468,12 +467,12 @@ $indentation}"""
 		println("""
 	// -----------------------------------
 
-	/** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memAlloc}. The instance must be explicitly freed. */
+	/** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
 	public static $className malloc() {
 		return create(nmemAlloc(SIZEOF));
 	}
 
-	/** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memCalloc}. The instance must be explicitly freed. */
+	/** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
 	public static $className calloc() {
 		return create(nmemCalloc(1, SIZEOF));
 	}
@@ -489,7 +488,7 @@ $indentation}"""
 	}
 
 	/**
-	 * Returns a new {@link $className.Buffer} instance allocated with {@link MemoryUtil#memAlloc}. The instance must be explicitly freed.
+	 * Returns a new {@link $className.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
 	 *
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
@@ -498,7 +497,7 @@ $indentation}"""
 	}
 
 	/**
-	 * Returns a new {@link $className.Buffer} instance allocated with {@link MemoryUtil#memCalloc}. The instance must be explicitly freed.
+	 * Returns a new {@link $className.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
 	 *
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */

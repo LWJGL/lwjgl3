@@ -131,25 +131,22 @@ private fun printParam(builder: StringBuilder, name: String, documentation: Stri
 
 // DSL extensions
 
-/** Useful for simple expression with embedded markup. */
-fun code(code: String) = """<code style="font-family: monospace">$code</code>"""
+/** Useful for simple expressions. */
+fun code(code: String) = """<code>$code</code>"""
 
-private val TRIM_PATTERN = Pattern.compile("""^\s*\n|\n\s*$""") // first and/or last empty lines...
-private val ESCAPE_PATTERN = Pattern.compile("^[ \t\n]", Pattern.MULTILINE) // leading space/tab in line, empty line
-private val CODE_BLOCK_CLEANUP_PATTERN = Pattern.compile("^", Pattern.MULTILINE) // to the start of all lines...
+private val CODE_BLOCK_TRIM_PATTERN = Pattern.compile("""^\s*\n|\n\s*$""") // first and/or last empty lines...
+private val CODE_BLOCK_ESCAPE_PATTERN = Pattern.compile("^[ \t\n]", Pattern.MULTILINE) // leading space/tab in line, empty line
 
-/** Useful for raw code blocks without markup. */
-fun codeBlock(code: String) = """<pre><code style="font-family: monospace">
-${code
-	.replaceAll(TRIM_PATTERN, "") // ...trim (not lines with content)
-	.replaceAll(ESCAPE_PATTERN, "\uFFFF$0") // ...escape
-	.replaceAll(CODE_BLOCK_CLEANUP_PATTERN, "\t") // ...add a \t so that the JavaDoc layout code above picks up new lines.
+/** Useful for pre-formatted code blocks. */
+fun codeBlock(code: String) = """<pre><code>${code
+	.replaceAll(CODE_BLOCK_TRIM_PATTERN, "") // ...trim
+	.replaceAll(CODE_BLOCK_ESCAPE_PATTERN, "\uFFFF$0") // ...escape
 }</code></pre>"""
 
 fun url(href: String, innerHTML: String) = """<a href="$href">$innerHTML</a>"""
 
 fun table(vararg rows: String, matrix: Boolean = false) = StringBuilder(512).run {
-	append("<table border=1 cellspacing=0 cellpadding=2 class=${if ( matrix ) "\"lwjgl matrix\"" else "lwjgl"}>")
+	append("<table class=${if ( matrix ) "\"lwjgl matrix\"" else "lwjgl"}>")
 	for (row in rows) {
 		append("\n\t")
 		append(row)

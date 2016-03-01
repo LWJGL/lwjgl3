@@ -299,7 +299,6 @@ class NativeClass(
 
 				// This allows binding classes to be "statically" extended. Not a good practice, but usable with static imports.
 				println("""
-	@JavadocExclude
 	protected $className() {
 		throw new UnsupportedOperationException();
 	}
@@ -327,7 +326,6 @@ class NativeClass(
 
 	private fun PrintWriter.generateFunctionAddresses(binding: APIBinding, functions: List<NativeClassFunction>) {
 		println("\n\t/** Function address. */")
-		println("\t@JavadocExclude")
 		print("\tpublic final long")
 		if ( functions.size == 1 ) {
 			println(" ${_functions.values.first().simpleName};")
@@ -341,12 +339,10 @@ class NativeClass(
 			println(";")
 		}
 		println("""
-	@JavadocExclude
 	protected $className() {
 		throw new UnsupportedOperationException();
 	}
 """)
-		println("\t@JavadocExclude")
 		print("\t${access.modifier}$className(FunctionProvider${if ( binding.isLocal(this@NativeClass) ) "Local" else ""} provider")
 		binding.printConstructorParams(this, this@NativeClass)
 		println(") {")

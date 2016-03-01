@@ -517,7 +517,6 @@ class NativeClassFunction(
 				println(documentation)
 		} else {
 			generateJavaDocLink("JNI method for", this@NativeClassFunction)
-			println("\t@JavadocExclude")
 		}
 		print("\t${accessModifier}static native $returnsNativeMethodType ")
 		if ( !nativeOnly ) print('n')
@@ -542,7 +541,6 @@ class NativeClassFunction(
 
 	private fun PrintWriter.generateUnsafeMethod() {
 		generateJavaDocLink("Unsafe version of", this@NativeClassFunction)
-		println("\t@JavadocExclude")
 		print("\t${accessModifier}static $returnsNativeMethodType n$name(")
 		printList(getNativeParams()) {
 			if ( it.isFunctionProvider )

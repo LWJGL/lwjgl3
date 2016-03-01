@@ -17,6 +17,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	val minor = 0
 	val patch = 4
 
+	IntConstant("The Vulkan major version number.", "VERSION_MAJOR" expr "$major")
+	IntConstant("The Vulkan minor version number.", "VERSION_MINOR" expr "$minor")
+	IntConstant("The Vulkan patch version number.", "VERSION_PATCH" expr "$patch")
+
 	IntConstant(
 		"""
 		The Vulkan version number is used in several places in the API. In each such use, the API major version number, minor version number, and patch version
@@ -43,12 +47,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		compatibility. Differences in this version will typically require significant modification to an application in order for it to function.
 		""",
 
-		"API_VERSION".expr("((($major) << 22) | (($minor) << 12) | ($patch))")
+		"API_VERSION".expr("(VK_VERSION_MAJOR << 22) | (VK_VERSION_MINOR << 12) | VK_VERSION_PATCH")
 	)
-
-	IntConstant("The Vulkan major version number.", "VERSION_MAJOR" expr "$major")
-	IntConstant("The Vulkan minor version number.", "VERSION_MINOR" expr "$minor")
-	IntConstant("The Vulkan patch version number.", "VERSION_PATCH" expr "$patch")
 
 	LongConstant(
 		"""
@@ -99,8 +99,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"VkPipelineCacheHeaderVersion",
 
 		"PIPELINE_CACHE_HEADER_VERSION_ONE".enumExpr("", "1"),
-		"PIPELINE_CACHE_HEADER_VERSION_BEGIN_RANGE".enumExpr("","VK_PIPELINE_CACHE_HEADER_VERSION_ONE"),
-		"PIPELINE_CACHE_HEADER_VERSION_END_RANGE".enumExpr("","VK_PIPELINE_CACHE_HEADER_VERSION_ONE"),
+		"PIPELINE_CACHE_HEADER_VERSION_BEGIN_RANGE".enumExpr("", "VK_PIPELINE_CACHE_HEADER_VERSION_ONE"),
+		"PIPELINE_CACHE_HEADER_VERSION_END_RANGE".enumExpr("", "VK_PIPELINE_CACHE_HEADER_VERSION_ONE"),
 		"PIPELINE_CACHE_HEADER_VERSION_RANGE_SIZE".enumExpr("", "VK_PIPELINE_CACHE_HEADER_VERSION_ONE - VK_PIPELINE_CACHE_HEADER_VERSION_ONE + 1"),
 		"PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM" enum 0x7FFFFFFF
 	)
@@ -192,11 +192,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSystemAllocationScope",
 
-		"SYSTEM_ALLOCATION_SCOPE_COMMAND".enumExpr("", "0"),
-		"SYSTEM_ALLOCATION_SCOPE_OBJECT".enum(""),
-		"SYSTEM_ALLOCATION_SCOPE_CACHE".enum(""),
-		"SYSTEM_ALLOCATION_SCOPE_DEVICE".enum(""),
-		"SYSTEM_ALLOCATION_SCOPE_INSTANCE".enum(""),
+		"SYSTEM_ALLOCATION_SCOPE_COMMAND".enumExpr("The allocation is scoped to the lifetime of the Vulkan command.", "0"),
+		"SYSTEM_ALLOCATION_SCOPE_OBJECT".enum("The allocation is scoped to the lifetime of the Vulkan object that is being created or used."),
+		"SYSTEM_ALLOCATION_SCOPE_CACHE".enum("The allocation is scoped to the lifetime of a {@code VkPipelineCache} object."),
+		"SYSTEM_ALLOCATION_SCOPE_DEVICE".enum("The allocation is scoped to the lifetime of the Vulkan device."),
+		"SYSTEM_ALLOCATION_SCOPE_INSTANCE".enum("The allocation is scoped to the lifetime of the Vulkan instance."),
 		"SYSTEM_ALLOCATION_SCOPE_BEGIN_RANGE".enumExpr("", "VK_SYSTEM_ALLOCATION_SCOPE_COMMAND"),
 		"SYSTEM_ALLOCATION_SCOPE_END_RANGE".enumExpr("", "VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE"),
 		"SYSTEM_ALLOCATION_SCOPE_RANGE_SIZE".enumExpr("", "VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE - VK_SYSTEM_ALLOCATION_SCOPE_COMMAND + 1"),
@@ -206,7 +206,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkInternalAllocationType",
 
-		"INTERNAL_ALLOCATION_TYPE_EXECUTABLE".enumExpr("", "0"),
+		"INTERNAL_ALLOCATION_TYPE_EXECUTABLE".enumExpr("The allocation is intended for execution by the host.", "0"),
 		"INTERNAL_ALLOCATION_TYPE_BEGIN_RANGE".enumExpr("", "VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE"),
 		"INTERNAL_ALLOCATION_TYPE_END_RANGE".enumExpr("", "VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE"),
 		"INTERNAL_ALLOCATION_TYPE_RANGE_SIZE".enumExpr("", "VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE - VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE + 1"),
@@ -216,191 +216,191 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkFormat",
 
-		"FORMAT_UNDEFINED".enumExpr("", "0"),
-		"FORMAT_R4G4_UNORM_PACK8".enum(""),
-		"FORMAT_R4G4B4A4_UNORM_PACK16".enum(""),
-		"FORMAT_B4G4R4A4_UNORM_PACK16".enum(""),
-		"FORMAT_R5G6B5_UNORM_PACK16".enum(""),
-		"FORMAT_B5G6R5_UNORM_PACK16".enum(""),
-		"FORMAT_R5G5B5A1_UNORM_PACK16".enum(""),
-		"FORMAT_B5G5R5A1_UNORM_PACK16".enum(""),
-		"FORMAT_A1R5G5B5_UNORM_PACK16".enum(""),
-		"FORMAT_R8_UNORM".enum(""),
-		"FORMAT_R8_SNORM".enum(""),
-		"FORMAT_R8_USCALED".enum(""),
-		"FORMAT_R8_SSCALED".enum(""),
-		"FORMAT_R8_UINT".enum(""),
-		"FORMAT_R8_SINT".enum(""),
-		"FORMAT_R8_SRGB".enum(""),
-		"FORMAT_R8G8_UNORM".enum(""),
-		"FORMAT_R8G8_SNORM".enum(""),
-		"FORMAT_R8G8_USCALED".enum(""),
-		"FORMAT_R8G8_SSCALED".enum(""),
-		"FORMAT_R8G8_UINT".enum(""),
-		"FORMAT_R8G8_SINT".enum(""),
-		"FORMAT_R8G8_SRGB".enum(""),
-		"FORMAT_R8G8B8_UNORM".enum(""),
-		"FORMAT_R8G8B8_SNORM".enum(""),
-		"FORMAT_R8G8B8_USCALED".enum(""),
-		"FORMAT_R8G8B8_SSCALED".enum(""),
-		"FORMAT_R8G8B8_UINT".enum(""),
-		"FORMAT_R8G8B8_SINT".enum(""),
-		"FORMAT_R8G8B8_SRGB".enum(""),
-		"FORMAT_B8G8R8_UNORM".enum(""),
-		"FORMAT_B8G8R8_SNORM".enum(""),
-		"FORMAT_B8G8R8_USCALED".enum(""),
-		"FORMAT_B8G8R8_SSCALED".enum(""),
-		"FORMAT_B8G8R8_UINT".enum(""),
-		"FORMAT_B8G8R8_SINT".enum(""),
-		"FORMAT_B8G8R8_SRGB".enum(""),
-		"FORMAT_R8G8B8A8_UNORM".enum(""),
-		"FORMAT_R8G8B8A8_SNORM".enum(""),
-		"FORMAT_R8G8B8A8_USCALED".enum(""),
-		"FORMAT_R8G8B8A8_SSCALED".enum(""),
-		"FORMAT_R8G8B8A8_UINT".enum(""),
-		"FORMAT_R8G8B8A8_SINT".enum(""),
-		"FORMAT_R8G8B8A8_SRGB".enum(""),
-		"FORMAT_B8G8R8A8_UNORM".enum(""),
-		"FORMAT_B8G8R8A8_SNORM".enum(""),
-		"FORMAT_B8G8R8A8_USCALED".enum(""),
-		"FORMAT_B8G8R8A8_SSCALED".enum(""),
-		"FORMAT_B8G8R8A8_UINT".enum(""),
-		"FORMAT_B8G8R8A8_SINT".enum(""),
-		"FORMAT_B8G8R8A8_SRGB".enum(""),
-		"FORMAT_A8B8G8R8_UNORM_PACK32".enum(""),
-		"FORMAT_A8B8G8R8_SNORM_PACK32".enum(""),
-		"FORMAT_A8B8G8R8_USCALED_PACK32".enum(""),
-		"FORMAT_A8B8G8R8_SSCALED_PACK32".enum(""),
-		"FORMAT_A8B8G8R8_UINT_PACK32".enum(""),
-		"FORMAT_A8B8G8R8_SINT_PACK32".enum(""),
-		"FORMAT_A8B8G8R8_SRGB_PACK32".enum(""),
-		"FORMAT_A2R10G10B10_UNORM_PACK32".enum(""),
-		"FORMAT_A2R10G10B10_SNORM_PACK32".enum(""),
-		"FORMAT_A2R10G10B10_USCALED_PACK32".enum(""),
-		"FORMAT_A2R10G10B10_SSCALED_PACK32".enum(""),
-		"FORMAT_A2R10G10B10_UINT_PACK32".enum(""),
-		"FORMAT_A2R10G10B10_SINT_PACK32".enum(""),
-		"FORMAT_A2B10G10R10_UNORM_PACK32".enum(""),
-		"FORMAT_A2B10G10R10_SNORM_PACK32".enum(""),
-		"FORMAT_A2B10G10R10_USCALED_PACK32".enum(""),
-		"FORMAT_A2B10G10R10_SSCALED_PACK32".enum(""),
-		"FORMAT_A2B10G10R10_UINT_PACK32".enum(""),
-		"FORMAT_A2B10G10R10_SINT_PACK32".enum(""),
-		"FORMAT_R16_UNORM".enum(""),
-		"FORMAT_R16_SNORM".enum(""),
-		"FORMAT_R16_USCALED".enum(""),
-		"FORMAT_R16_SSCALED".enum(""),
-		"FORMAT_R16_UINT".enum(""),
-		"FORMAT_R16_SINT".enum(""),
-		"FORMAT_R16_SFLOAT".enum(""),
-		"FORMAT_R16G16_UNORM".enum(""),
-		"FORMAT_R16G16_SNORM".enum(""),
-		"FORMAT_R16G16_USCALED".enum(""),
-		"FORMAT_R16G16_SSCALED".enum(""),
-		"FORMAT_R16G16_UINT".enum(""),
-		"FORMAT_R16G16_SINT".enum(""),
-		"FORMAT_R16G16_SFLOAT".enum(""),
-		"FORMAT_R16G16B16_UNORM".enum(""),
-		"FORMAT_R16G16B16_SNORM".enum(""),
-		"FORMAT_R16G16B16_USCALED".enum(""),
-		"FORMAT_R16G16B16_SSCALED".enum(""),
-		"FORMAT_R16G16B16_UINT".enum(""),
-		"FORMAT_R16G16B16_SINT".enum(""),
-		"FORMAT_R16G16B16_SFLOAT".enum(""),
-		"FORMAT_R16G16B16A16_UNORM".enum(""),
-		"FORMAT_R16G16B16A16_SNORM".enum(""),
-		"FORMAT_R16G16B16A16_USCALED".enum(""),
-		"FORMAT_R16G16B16A16_SSCALED".enum(""),
-		"FORMAT_R16G16B16A16_UINT".enum(""),
-		"FORMAT_R16G16B16A16_SINT".enum(""),
-		"FORMAT_R16G16B16A16_SFLOAT".enum(""),
-		"FORMAT_R32_UINT".enum(""),
-		"FORMAT_R32_SINT".enum(""),
-		"FORMAT_R32_SFLOAT".enum(""),
-		"FORMAT_R32G32_UINT".enum(""),
-		"FORMAT_R32G32_SINT".enum(""),
-		"FORMAT_R32G32_SFLOAT".enum(""),
-		"FORMAT_R32G32B32_UINT".enum(""),
-		"FORMAT_R32G32B32_SINT".enum(""),
-		"FORMAT_R32G32B32_SFLOAT".enum(""),
-		"FORMAT_R32G32B32A32_UINT".enum(""),
-		"FORMAT_R32G32B32A32_SINT".enum(""),
-		"FORMAT_R32G32B32A32_SFLOAT".enum(""),
-		"FORMAT_R64_UINT".enum(""),
-		"FORMAT_R64_SINT".enum(""),
-		"FORMAT_R64_SFLOAT".enum(""),
-		"FORMAT_R64G64_UINT".enum(""),
-		"FORMAT_R64G64_SINT".enum(""),
-		"FORMAT_R64G64_SFLOAT".enum(""),
-		"FORMAT_R64G64B64_UINT".enum(""),
-		"FORMAT_R64G64B64_SINT".enum(""),
-		"FORMAT_R64G64B64_SFLOAT".enum(""),
-		"FORMAT_R64G64B64A64_UINT".enum(""),
-		"FORMAT_R64G64B64A64_SINT".enum(""),
-		"FORMAT_R64G64B64A64_SFLOAT".enum(""),
-		"FORMAT_B10G11R11_UFLOAT_PACK32".enum(""),
-		"FORMAT_E5B9G9R9_UFLOAT_PACK32".enum(""),
-		"FORMAT_D16_UNORM".enum(""),
-		"FORMAT_X8_D24_UNORM_PACK32".enum(""),
-		"FORMAT_D32_SFLOAT".enum(""),
-		"FORMAT_S8_UINT".enum(""),
-		"FORMAT_D16_UNORM_S8_UINT".enum(""),
-		"FORMAT_D24_UNORM_S8_UINT".enum(""),
-		"FORMAT_D32_SFLOAT_S8_UINT".enum(""),
-		"FORMAT_BC1_RGB_UNORM_BLOCK".enum(""),
-		"FORMAT_BC1_RGB_SRGB_BLOCK".enum(""),
-		"FORMAT_BC1_RGBA_UNORM_BLOCK".enum(""),
-		"FORMAT_BC1_RGBA_SRGB_BLOCK".enum(""),
-		"FORMAT_BC2_UNORM_BLOCK".enum(""),
-		"FORMAT_BC2_SRGB_BLOCK".enum(""),
-		"FORMAT_BC3_UNORM_BLOCK".enum(""),
-		"FORMAT_BC3_SRGB_BLOCK".enum(""),
-		"FORMAT_BC4_UNORM_BLOCK".enum(""),
-		"FORMAT_BC4_SNORM_BLOCK".enum(""),
-		"FORMAT_BC5_UNORM_BLOCK".enum(""),
-		"FORMAT_BC5_SNORM_BLOCK".enum(""),
-		"FORMAT_BC6H_UFLOAT_BLOCK".enum(""),
-		"FORMAT_BC6H_SFLOAT_BLOCK".enum(""),
-		"FORMAT_BC7_UNORM_BLOCK".enum(""),
-		"FORMAT_BC7_SRGB_BLOCK".enum(""),
-		"FORMAT_ETC2_R8G8B8_UNORM_BLOCK".enum(""),
-		"FORMAT_ETC2_R8G8B8_SRGB_BLOCK".enum(""),
-		"FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK".enum(""),
-		"FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK".enum(""),
-		"FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK".enum(""),
-		"FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK".enum(""),
-		"FORMAT_EAC_R11_UNORM_BLOCK".enum(""),
-		"FORMAT_EAC_R11_SNORM_BLOCK".enum(""),
-		"FORMAT_EAC_R11G11_UNORM_BLOCK".enum(""),
-		"FORMAT_EAC_R11G11_SNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_4x4_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_4x4_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_5x4_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_5x4_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_5x5_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_5x5_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_6x5_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_6x5_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_6x6_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_6x6_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_8x5_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_8x5_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_8x6_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_8x6_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_8x8_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_8x8_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_10x5_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_10x5_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_10x6_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_10x6_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_10x8_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_10x8_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_10x10_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_10x10_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_12x10_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_12x10_SRGB_BLOCK".enum(""),
-		"FORMAT_ASTC_12x12_UNORM_BLOCK".enum(""),
-		"FORMAT_ASTC_12x12_SRGB_BLOCK".enum(""),
+		"FORMAT_UNDEFINED".enumExpr("The format is not specified.", "0"),
+		"FORMAT_R4G4_UNORM_PACK8".enum("A two-component, 8-bit packed unsigned normalized format that has a 4-bit R component in bits 4..7, and a 4-bit G component in bits 0..3."),
+		"FORMAT_R4G4B4A4_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 4-bit R component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit B component in bits 4..7, and a 4-bit A component in bits 0..3."),
+		"FORMAT_B4G4R4A4_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 4-bit B component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit R component in bits 4..7, and a 4-bit A component in bits 0..3."),
+		"FORMAT_R5G6B5_UNORM_PACK16".enum("A three-component, 16-bit packed unsigned normalized format that has a 5-bit R component in bits 11..15, a 6-bit G component in bits 5..10, and a 5-bit B component in bits 0..4."),
+		"FORMAT_B5G6R5_UNORM_PACK16".enum("A three-component, 16-bit packed unsigned normalized format that has a 5-bit B component in bits 11..15, a 6-bit G component in bits 5..10, and a 5-bit R component in bits 0..4."),
+		"FORMAT_R5G5B5A1_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 5-bit R component in bits 11..15, a 5-bit G component in bits 6..10, a 5-bit B component in bits 1..5, and a 1-bit A component in bit 0."),
+		"FORMAT_B5G5R5A1_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 5-bit B component in bits 11..15, a 5-bit G component in bits 6..10, a 5-bit R component in bits 1..5, and a 1-bit A component in bit 0."),
+		"FORMAT_A1R5G5B5_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 1-bit A component in bit 15, a 5-bit R component in bits 10..14, a 5-bit G component in bits 5..9, and a 5-bit B component in bits 0..4."),
+		"FORMAT_R8_UNORM".enum("A one-component, 8-bit unsigned normalized format that has a single 8-bit R component."),
+		"FORMAT_R8_SNORM".enum("A one-component, 8-bit signed normalized format that has a single 8-bit R component."),
+		"FORMAT_R8_USCALED".enum("A one-component, 8-bit unsigned scaled integer format that has a single 8-bit R component."),
+		"FORMAT_R8_SSCALED".enum("A one-component, 8-bit signed scaled integer format that has a single 8-bit R component."),
+		"FORMAT_R8_UINT".enum("A one-component, 8-bit unsigned integer format that has a single 8-bit R component."),
+		"FORMAT_R8_SINT".enum("A one-component, 8-bit signed integer format that has a single 8-bit R component."),
+		"FORMAT_R8_SRGB".enum("A one-component, 8-bit unsigned normalized format that has a single 8-bit R component stored with sRGB nonlinear encoding."),
+		"FORMAT_R8G8_UNORM".enum("A two-component, 16-bit unsigned normalized format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
+		"FORMAT_R8G8_SNORM".enum("A two-component, 16-bit signed normalized format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
+		"FORMAT_R8G8_USCALED".enum("A two-component, 16-bit unsigned scaled integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
+		"FORMAT_R8G8_SSCALED".enum("A two-component, 16-bit signed scaled integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
+		"FORMAT_R8G8_UINT".enum("A two-component, 16-bit unsigned integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
+		"FORMAT_R8G8_SINT".enum("A two-component, 16-bit signed integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
+		"FORMAT_R8G8_SRGB".enum("A two-component, 16-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, and an 8-bit G component stored with sRGB nonlinear encoding in byte 1."),
+		"FORMAT_R8G8B8_UNORM".enum("A three-component, 24-bit unsigned normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
+		"FORMAT_R8G8B8_SNORM".enum("A three-component, 24-bit signed normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
+		"FORMAT_R8G8B8_USCALED".enum("A three-component, 24-bit unsigned scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
+		"FORMAT_R8G8B8_SSCALED".enum("A three-component, 24-bit signed scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
+		"FORMAT_R8G8B8_UINT".enum("A three-component, 24-bit unsigned integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
+		"FORMAT_R8G8B8_SINT".enum("A three-component, 24-bit signed integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
+		"FORMAT_R8G8B8_SRGB".enum("A three-component, 24-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, and an 8-bit B component stored with sRGB nonlinear encoding in byte 2."),
+		"FORMAT_B8G8R8_UNORM".enum("A three-component, 24-bit unsigned normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
+		"FORMAT_B8G8R8_SNORM".enum("A three-component, 24-bit signed normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
+		"FORMAT_B8G8R8_USCALED".enum("A three-component, 24-bit unsigned scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
+		"FORMAT_B8G8R8_SSCALED".enum("A three-component, 24-bit signed scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
+		"FORMAT_B8G8R8_UINT".enum("A three-component, 24-bit unsigned integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
+		"FORMAT_B8G8R8_SINT".enum("A three-component, 24-bit signed integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
+		"FORMAT_B8G8R8_SRGB".enum("A three-component, 24-bit unsigned normalized format that has an 8-bit B component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, and an 8-bit R component stored with sRGB nonlinear encoding in byte 2."),
+		"FORMAT_R8G8B8A8_UNORM".enum("A four-component, 32-bit unsigned normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_R8G8B8A8_SNORM".enum("A four-component, 32-bit signed normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_R8G8B8A8_USCALED".enum("A four-component, 32-bit unsigned scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_R8G8B8A8_SSCALED".enum("A four-component, 32-bit signed scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_R8G8B8A8_UINT".enum("A four-component, 32-bit unsigned integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_R8G8B8A8_SINT".enum("A four-component, 32-bit signed integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_R8G8B8A8_SRGB".enum("A four-component, 32-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, an 8-bit B component stored with sRGB nonlinear encoding in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_B8G8R8A8_UNORM".enum("A four-component, 32-bit unsigned normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_B8G8R8A8_SNORM".enum("A four-component, 32-bit signed normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_B8G8R8A8_USCALED".enum("A four-component, 32-bit unsigned scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_B8G8R8A8_SSCALED".enum("A four-component, 32-bit signed scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_B8G8R8A8_UINT".enum("A four-component, 32-bit unsigned integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_B8G8R8A8_SINT".enum("A four-component, 32-bit signed integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_B8G8R8A8_SRGB".enum("A four-component, 32-bit unsigned normalized format that has an 8-bit B component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, an 8-bit R component stored with sRGB nonlinear encoding in byte 2, and an 8-bit A component in byte 3."),
+		"FORMAT_A8B8G8R8_UNORM_PACK32".enum("A four-component, 32-bit packed unsigned normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
+		"FORMAT_A8B8G8R8_SNORM_PACK32".enum("A four-component, 32-bit packed signed normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
+		"FORMAT_A8B8G8R8_USCALED_PACK32".enum("A four-component, 32-bit packed unsigned scaled integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
+		"FORMAT_A8B8G8R8_SSCALED_PACK32".enum("A four-component, 32-bit packed signed scaled integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
+		"FORMAT_A8B8G8R8_UINT_PACK32".enum("A four-component, 32-bit packed unsigned integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
+		"FORMAT_A8B8G8R8_SINT_PACK32".enum("A four-component, 32-bit packed signed integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
+		"FORMAT_A8B8G8R8_SRGB_PACK32".enum("A four-component, 32-bit packed unsigned normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component stored with sRGB nonlinear encoding in bits 16..23, an 8-bit G component stored with sRGB nonlinear encoding in bits 8..15, and an 8-bit R component stored with sRGB nonlinear encoding in bits 0..7."),
+		"FORMAT_A2R10G10B10_UNORM_PACK32".enum("A four-component, 32-bit packed unsigned normalized format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
+		"FORMAT_A2R10G10B10_SNORM_PACK32".enum("A four-component, 32-bit packed signed normalized format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
+		"FORMAT_A2R10G10B10_USCALED_PACK32".enum("A four-component, 32-bit packed unsigned scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
+		"FORMAT_A2R10G10B10_SSCALED_PACK32".enum("A four-component, 32-bit packed signed scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
+		"FORMAT_A2R10G10B10_UINT_PACK32".enum("A four-component, 32-bit packed unsigned integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
+		"FORMAT_A2R10G10B10_SINT_PACK32".enum("A four-component, 32-bit packed signed integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
+		"FORMAT_A2B10G10R10_UNORM_PACK32".enum("A four-component, 32-bit packed unsigned normalized format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
+		"FORMAT_A2B10G10R10_SNORM_PACK32".enum("A four-component, 32-bit packed signed normalized format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
+		"FORMAT_A2B10G10R10_USCALED_PACK32".enum("A four-component, 32-bit packed unsigned scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
+		"FORMAT_A2B10G10R10_SSCALED_PACK32".enum("A four-component, 32-bit packed signed scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
+		"FORMAT_A2B10G10R10_UINT_PACK32".enum("A four-component, 32-bit packed unsigned integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
+		"FORMAT_A2B10G10R10_SINT_PACK32".enum("A four-component, 32-bit packed signed integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
+		"FORMAT_R16_UNORM".enum("A one-component, 16-bit unsigned normalized format that has a single 16-bit R component."),
+		"FORMAT_R16_SNORM".enum("A one-component, 16-bit signed normalized format that has a single 16-bit R component."),
+		"FORMAT_R16_USCALED".enum("A one-component, 16-bit unsigned scaled integer format that has a single 16-bit R component."),
+		"FORMAT_R16_SSCALED".enum("A one-component, 16-bit signed scaled integer format that has a single 16-bit R component."),
+		"FORMAT_R16_UINT".enum("A one-component, 16-bit unsigned integer format that has a single 16-bit R component."),
+		"FORMAT_R16_SINT".enum("A one-component, 16-bit signed integer format that has a single 16-bit R component."),
+		"FORMAT_R16_SFLOAT".enum("A one-component, 16-bit signed floating-point format that has a single 16-bit R component."),
+		"FORMAT_R16G16_UNORM".enum("A two-component, 32-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
+		"FORMAT_R16G16_SNORM".enum("A two-component, 32-bit signed normalized format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
+		"FORMAT_R16G16_USCALED".enum("A two-component, 32-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
+		"FORMAT_R16G16_SSCALED".enum("A two-component, 32-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
+		"FORMAT_R16G16_UINT".enum("A two-component, 32-bit unsigned integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
+		"FORMAT_R16G16_SINT".enum("A two-component, 32-bit signed integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
+		"FORMAT_R16G16_SFLOAT".enum("A two-component, 32-bit signed floating-point format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
+		"FORMAT_R16G16B16_UNORM".enum("A three-component, 48-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
+		"FORMAT_R16G16B16_SNORM".enum("A three-component, 48-bit signed normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
+		"FORMAT_R16G16B16_USCALED".enum("A three-component, 48-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
+		"FORMAT_R16G16B16_SSCALED".enum("A three-component, 48-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
+		"FORMAT_R16G16B16_UINT".enum("A three-component, 48-bit unsigned integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
+		"FORMAT_R16G16B16_SINT".enum("A three-component, 48-bit signed integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
+		"FORMAT_R16G16B16_SFLOAT".enum("A three-component, 48-bit signed floating-point format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
+		"FORMAT_R16G16B16A16_UNORM".enum("A four-component, 64-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
+		"FORMAT_R16G16B16A16_SNORM".enum("A four-component, 64-bit signed normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
+		"FORMAT_R16G16B16A16_USCALED".enum("A four-component, 64-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
+		"FORMAT_R16G16B16A16_SSCALED".enum("A four-component, 64-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
+		"FORMAT_R16G16B16A16_UINT".enum("A four-component, 64-bit unsigned integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
+		"FORMAT_R16G16B16A16_SINT".enum("A four-component, 64-bit signed integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
+		"FORMAT_R16G16B16A16_SFLOAT".enum("A four-component, 64-bit signed floating-point format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
+		"FORMAT_R32_UINT".enum("A one-component, 32-bit unsigned integer format that has a single 32-bit R component."),
+		"FORMAT_R32_SINT".enum("A one-component, 32-bit signed integer format that has a single 32-bit R component."),
+		"FORMAT_R32_SFLOAT".enum("A one-component, 32-bit signed floating-point format that has a single 32-bit R component."),
+		"FORMAT_R32G32_UINT".enum("A two-component, 64-bit unsigned integer format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7."),
+		"FORMAT_R32G32_SINT".enum("A two-component, 64-bit signed integer format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7."),
+		"FORMAT_R32G32_SFLOAT".enum("A two-component, 64-bit signed floating-point format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7."),
+		"FORMAT_R32G32B32_UINT".enum("A three-component, 96-bit unsigned integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11."),
+		"FORMAT_R32G32B32_SINT".enum("A three-component, 96-bit signed integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11."),
+		"FORMAT_R32G32B32_SFLOAT".enum("A three-component, 96-bit signed floating-point format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11."),
+		"FORMAT_R32G32B32A32_UINT".enum("A four-component, 128-bit unsigned integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15."),
+		"FORMAT_R32G32B32A32_SINT".enum("A four-component, 128-bit signed integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15."),
+		"FORMAT_R32G32B32A32_SFLOAT".enum("A four-component, 128-bit signed floating-point format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15."),
+		"FORMAT_R64_UINT".enum("A one-component, 64-bit unsigned integer format that has a single 64-bit R component."),
+		"FORMAT_R64_SINT".enum("A one-component, 64-bit signed integer format that has a single 64-bit R component."),
+		"FORMAT_R64_SFLOAT".enum("A one-component, 64-bit signed floating-point format that has a single 64-bit R component."),
+		"FORMAT_R64G64_UINT".enum("A two-component, 128-bit unsigned integer format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15."),
+		"FORMAT_R64G64_SINT".enum("A two-component, 128-bit signed integer format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15."),
+		"FORMAT_R64G64_SFLOAT".enum("A two-component, 128-bit signed floating-point format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15."),
+		"FORMAT_R64G64B64_UINT".enum("A three-component, 192-bit unsigned integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23."),
+		"FORMAT_R64G64B64_SINT".enum("A three-component, 192-bit signed integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23."),
+		"FORMAT_R64G64B64_SFLOAT".enum("A three-component, 192-bit signed floating-point format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23."),
+		"FORMAT_R64G64B64A64_UINT".enum("A four-component, 256-bit unsigned integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31."),
+		"FORMAT_R64G64B64A64_SINT".enum("A four-component, 256-bit signed integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31."),
+		"FORMAT_R64G64B64A64_SFLOAT".enum("A four-component, 256-bit signed floating-point format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31."),
+		"FORMAT_B10G11R11_UFLOAT_PACK32".enum("A three-component, 32-bit packed unsigned floating-point format that has a 10-bit B component in bits 22..31, an 11-bit G component in bits 11..21, an 11-bit R component in bits 0..10."),
+		"FORMAT_E5B9G9R9_UFLOAT_PACK32".enum("A three-component, 32-bit packed unsigned floating-point format that has a 5-bit shared exponent in bits 27..31, a 9-bit B component mantissa in bits 18..26, a 9-bit G component mantissa in bits 9..17, and a 9-bit R component mantissa in bits 0..8."),
+		"FORMAT_D16_UNORM".enum("A one-component, 16-bit unsigned normalized format that has a single 16-bit depth component."),
+		"FORMAT_X8_D24_UNORM_PACK32".enum("A two-component, 32-bit format that has 24 unsigned normalized bits in the depth component and, optionally:, 8 bits that are unused."),
+		"FORMAT_D32_SFLOAT".enum("A one-component, 32-bit signed floating-point format that has 32-bits in the depth component."),
+		"FORMAT_S8_UINT".enum("A one-component, 8-bit unsigned integer format that has 8-bits in the stencil component."),
+		"FORMAT_D16_UNORM_S8_UINT".enum("A two-component, 24-bit format that has 16 unsigned normalized bits in the depth component and 8 unsigned integer bits in the stencil component."),
+		"FORMAT_D24_UNORM_S8_UINT".enum("A two-component, 32-bit packed format that has 8 unsigned integer bits in the stencil component, and 24 unsigned normalized bits in the depth component."),
+		"FORMAT_D32_SFLOAT_S8_UINT".enum("A two-component format that has 32 signed float bits in the depth component and 8 unsigned integer bits in the stencil component. There are optionally: 24-bits that are unused."),
+		"FORMAT_BC1_RGB_UNORM_BLOCK".enum("A three-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data. This format has no alpha and is considered opaque."),
+		"FORMAT_BC1_RGB_SRGB_BLOCK".enum("A three-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding. This format has no alpha and is considered opaque."),
+		"FORMAT_BC1_RGBA_UNORM_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data, and provides 1 bit of alpha."),
+		"FORMAT_BC1_RGBA_SRGB_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding, and provides 1 bit of alpha."),
+		"FORMAT_BC2_UNORM_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of unsigned normalized alpha image data followed by 64-bits of encoded unsigned normalized RGB image data."),
+		"FORMAT_BC2_SRGB_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of unsigned normalized alpha image data followed by 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding."),
+		"FORMAT_BC3_UNORM_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of encoded alpha image data followed by 64-bits of encoded RGB image data. Both blocks are decoded as unsigned normalized values."),
+		"FORMAT_BC3_SRGB_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of encoded alpha image data followed by 64-bits of encoded RGB image data with sRGB nonlinear encoding. Both blocks are decoded as unsigned normalized values."),
+		"FORMAT_BC4_UNORM_BLOCK".enum("A one-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized red image data."),
+		"FORMAT_BC4_SNORM_BLOCK".enum("A one-component, block compressed format where each 4x4 block consists of 64-bits of encoded signed normalized red image data."),
+		"FORMAT_BC5_UNORM_BLOCK".enum("A two-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized red image data followed by 64-bits of encoded unsigned normalized green image data."),
+		"FORMAT_BC5_SNORM_BLOCK".enum("A two-component, block compressed format where each 4x4 block consists of 64-bits of encoded signed normalized red image data followed by 64-bits of encoded signed normalized green image data."),
+		"FORMAT_BC6H_UFLOAT_BLOCK".enum("A three-component, block compressed format where each 4x4 block consists of 128-bits of encoded unsigned floating-point RGB image data."),
+		"FORMAT_BC6H_SFLOAT_BLOCK".enum("A three-component, block compressed format where each 4x4 block consists of 128-bits of encoded signed floating-point RGB image data."),
+		"FORMAT_BC7_UNORM_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 128-bits of encoded unsigned normalized RGBA image data."),
+		"FORMAT_BC7_SRGB_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 128-bits of encoded unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ETC2_R8G8B8_UNORM_BLOCK".enum("A three-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data."),
+		"FORMAT_ETC2_R8G8B8_SRGB_BLOCK".enum("A three-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding."),
+		"FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK".enum("A four-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data, and provides 1 bit of alpha."),
+		"FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK".enum("A four-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding, and provides 1 bit of alpha."),
+		"FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK".enum("A four-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data, and 64-bits of encoded unsigned normalized alpha image data."),
+		"FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK".enum("A four-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding, and 64-bits of encoded unsigned normalized alpha image data."),
+		"FORMAT_EAC_R11_UNORM_BLOCK".enum("A one-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized red image data."),
+		"FORMAT_EAC_R11_SNORM_BLOCK".enum("A one-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded signed normalized red image data."),
+		"FORMAT_EAC_R11G11_UNORM_BLOCK".enum("A two-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized red image data followed by 64-bits of encoded unsigned normalized green image data."),
+		"FORMAT_EAC_R11G11_SNORM_BLOCK".enum("A two-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded signed normalized red image data followed by 64-bits of encoded signed normalized green image data."),
+		"FORMAT_ASTC_4x4_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 4x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_4x4_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 4x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_5x4_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 5x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_5x4_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 5x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_5x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 5x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_5x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 5x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_6x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 6x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_6x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 6x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_6x6_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 6x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_6x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 6x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_8x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 8x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_8x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_8x6_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 8x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_8x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_8x8_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 8x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_8x8_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_10x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_10x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_10x6_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_10x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_10x8_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_10x8_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_10x10_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_10x10_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_12x10_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 12x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_12x10_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_12x12_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 12x12 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
+		"FORMAT_ASTC_12x12_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x12 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
 		"FORMAT_BEGIN_RANGE".enumExpr("", "VK_FORMAT_UNDEFINED"),
 		"FORMAT_END_RANGE".enumExpr("", "VK_FORMAT_ASTC_12x12_SRGB_BLOCK"),
 		"FORMAT_RANGE_SIZE".enumExpr("", "VK_FORMAT_ASTC_12x12_SRGB_BLOCK - VK_FORMAT_UNDEFINED + 1"),
@@ -410,9 +410,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkImageType",
 
-		"IMAGE_TYPE_1D".enumExpr("", "0"),
-		"IMAGE_TYPE_2D".enum(""),
-		"IMAGE_TYPE_3D".enum(""),
+		"IMAGE_TYPE_1D".enumExpr("One-dimensional image", "0"),
+		"IMAGE_TYPE_2D".enum("Two-dimensional image"),
+		"IMAGE_TYPE_3D".enum("Three-dimensional image"),
 		"IMAGE_TYPE_BEGIN_RANGE".enumExpr("", "VK_IMAGE_TYPE_1D"),
 		"IMAGE_TYPE_END_RANGE".enumExpr("", "VK_IMAGE_TYPE_3D"),
 		"IMAGE_TYPE_RANGE_SIZE".enumExpr("", "VK_IMAGE_TYPE_3D - VK_IMAGE_TYPE_1D + 1"),
@@ -422,8 +422,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkImageTiling",
 
-		"IMAGE_TILING_OPTIMAL".enumExpr("", "0"),
-		"IMAGE_TILING_LINEAR".enum(""),
+		"IMAGE_TILING_OPTIMAL".enumExpr("Specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access).", "0"),
+		"IMAGE_TILING_LINEAR".enum("Specifies linear tiling (texels are laid out in memory in row-major order, possibly with some padding on each row)."),
 		"IMAGE_TILING_BEGIN_RANGE".enumExpr("", "VK_IMAGE_TILING_OPTIMAL"),
 		"IMAGE_TILING_END_RANGE".enumExpr("", "VK_IMAGE_TILING_LINEAR"),
 		"IMAGE_TILING_RANGE_SIZE".enumExpr("", "VK_IMAGE_TILING_LINEAR - VK_IMAGE_TILING_OPTIMAL + 1"),
@@ -433,11 +433,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPhysicalDeviceType",
 
-		"PHYSICAL_DEVICE_TYPE_OTHER".enumExpr("", "0"),
-		"PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU".enum(""),
-		"PHYSICAL_DEVICE_TYPE_DISCRETE_GPU".enum(""),
-		"PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU".enum(""),
-		"PHYSICAL_DEVICE_TYPE_CPU".enum(""),
+		"PHYSICAL_DEVICE_TYPE_OTHER".enumExpr("The device does not match any other available types.", "0"),
+		"PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU".enum("The device is typically one embedded in or tightly coupled with the host."),
+		"PHYSICAL_DEVICE_TYPE_DISCRETE_GPU".enum("The device is typically a separate processor connected to the host via an interlink."),
+		"PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU".enum("The device is typically a virtual node in a virtualization environment."),
+		"PHYSICAL_DEVICE_TYPE_CPU".enum("The device is typically running on the same processors as the host."),
 		"PHYSICAL_DEVICE_TYPE_BEGIN_RANGE".enumExpr("", "VK_PHYSICAL_DEVICE_TYPE_OTHER"),
 		"PHYSICAL_DEVICE_TYPE_END_RANGE".enumExpr("", "VK_PHYSICAL_DEVICE_TYPE_CPU"),
 		"PHYSICAL_DEVICE_TYPE_RANGE_SIZE".enumExpr("", "VK_PHYSICAL_DEVICE_TYPE_CPU - VK_PHYSICAL_DEVICE_TYPE_OTHER + 1"),
@@ -447,9 +447,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkQueryType",
 
-		"QUERY_TYPE_OCCLUSION".enumExpr("", "0"),
-		"QUERY_TYPE_PIPELINE_STATISTICS".enum(""),
-		"QUERY_TYPE_TIMESTAMP".enum(""),
+		"QUERY_TYPE_OCCLUSION".enumExpr("Occlusion query.", "0"),
+		"QUERY_TYPE_PIPELINE_STATISTICS".enum("Pipeline statistics query"),
+		"QUERY_TYPE_TIMESTAMP".enum("Timestamp query."),
 		"QUERY_TYPE_BEGIN_RANGE".enumExpr("", "VK_QUERY_TYPE_OCCLUSION"),
 		"QUERY_TYPE_END_RANGE".enumExpr("", "VK_QUERY_TYPE_TIMESTAMP"),
 		"QUERY_TYPE_RANGE_SIZE".enumExpr("", "VK_QUERY_TYPE_TIMESTAMP - VK_QUERY_TYPE_OCCLUSION + 1"),
@@ -459,8 +459,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSharingMode",
 
-		"SHARING_MODE_EXCLUSIVE".enumExpr("", "0"),
-		"SHARING_MODE_CONCURRENT".enum(""),
+		"SHARING_MODE_EXCLUSIVE".enumExpr("Specifies that access to any range or subresource of the object will be exclusive to a single queue family at a time.", "0"),
+		"SHARING_MODE_CONCURRENT".enum("Specifies that concurrent access to any range or subresource of the object from multiple queue families is supported."),
 		"SHARING_MODE_BEGIN_RANGE".enumExpr("", "VK_SHARING_MODE_EXCLUSIVE"),
 		"SHARING_MODE_END_RANGE".enumExpr("", "VK_SHARING_MODE_CONCURRENT"),
 		"SHARING_MODE_RANGE_SIZE".enumExpr("", "VK_SHARING_MODE_CONCURRENT - VK_SHARING_MODE_EXCLUSIVE + 1"),
@@ -470,15 +470,56 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkImageLayout",
 
-		"IMAGE_LAYOUT_UNDEFINED".enumExpr("", "0"),
-		"IMAGE_LAYOUT_GENERAL".enum(""),
-		"IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL".enum(""),
-		"IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL".enum(""),
-		"IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL".enum(""),
-		"IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL".enum(""),
-		"IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL".enum(""),
-		"IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL".enum(""),
-		"IMAGE_LAYOUT_PREINITIALIZED".enum(""),
+		"IMAGE_LAYOUT_UNDEFINED".enumExpr(
+			"""
+			Supports no device access. This layout must only be used as an {@code initialLayout} or as the {@code oldLayout} in an image transition. When
+			transitioning out of this layout, the contents of the memory are not guaranteed to be preserved.
+			""", "0"),
+		"IMAGE_LAYOUT_GENERAL".enum("Supports all types of device access."),
+		"IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL".enum(
+			"""
+			$must only be used as a color or resolve attachment in a {@code VkFramebuffer}. This layout is valid only for subresources of images created with
+			the #IMAGE_USAGE_COLOR_ATTACHMENT_BIT usage bit enabled.
+			"""),
+		"IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL".enum(
+			"""
+			$must only be used as a depth/stencil attachment in a {@code VkFramebuffer}. This layout is valid only for subresources of images created with the
+			#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.
+			"""),
+		"IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL".enum(
+			"""
+			$must only be used as a read-only depth/stencil attachment in a {@code VkFramebuffer} and/or as a read-only image in a shader (which can be read as
+			a sampled image, combined image/sampler and/or input attachment). This layout is valid only for subresources of images created with both the
+			#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.
+			"""
+		),
+		"IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL".enum(
+			"""
+			$must only be used as a read-only image in a shader (which can be read as a sampled image, combined image/sampler and/or input attachment). This
+			layout is valid only for subresources of images created with the #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled.
+			"""
+		),
+		"IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL".enum(
+			"""
+			$must only be used as a source image of a transfer command (see the definition of #PIPELINE_STAGE_TRANSFER_BIT). This layout is valid only for
+			subresources of images created with the #IMAGE_USAGE_TRANSFER_SRC_BIT usage bit enabled.
+			"""
+		),
+		"IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL".enum(
+			"""
+			$must only be used as a destination image of a transfer command. This layout is valid only for subresources of images created with the
+			#IMAGE_USAGE_TRANSFER_DST_BIT usage bit enabled.
+			"""
+		),
+		"IMAGE_LAYOUT_PREINITIALIZED".enum(
+			"""
+			Supports no device access. This layout must only be used as an {@code initialLayout} or as the {@code oldLayout} in an image transition. When
+			transitioning out of this layout, the contents of the memory are preserved. This layout is intended to be used as the initial layout for an image
+			whose contents are written by the host, and hence the data can be written to memory immediately, without first executing a layout transition.
+			Currently, #IMAGE_LAYOUT_PREINITIALIZED is only useful with #IMAGE_TILING_LINEAR images because there is not a standard layout defined for
+			#IMAGE_TILING_OPTIMAL images.
+			"""
+		),
 		"IMAGE_LAYOUT_BEGIN_RANGE".enumExpr("", "VK_IMAGE_LAYOUT_UNDEFINED"),
 		"IMAGE_LAYOUT_END_RANGE".enumExpr("", "VK_IMAGE_LAYOUT_PREINITIALIZED"),
 		"IMAGE_LAYOUT_RANGE_SIZE".enumExpr("", "VK_IMAGE_LAYOUT_PREINITIALIZED - VK_IMAGE_LAYOUT_UNDEFINED + 1"),
@@ -488,13 +529,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkImageViewType",
 
-		"IMAGE_VIEW_TYPE_1D".enumExpr("", "0"),
-		"IMAGE_VIEW_TYPE_2D".enum(""),
-		"IMAGE_VIEW_TYPE_3D".enum(""),
-		"IMAGE_VIEW_TYPE_CUBE".enum(""),
-		"IMAGE_VIEW_TYPE_1D_ARRAY".enum(""),
-		"IMAGE_VIEW_TYPE_2D_ARRAY".enum(""),
-		"IMAGE_VIEW_TYPE_CUBE_ARRAY".enum(""),
+		"IMAGE_VIEW_TYPE_1D".enumExpr("One-dimensional image view.", "0"),
+		"IMAGE_VIEW_TYPE_2D".enum("Two-dimensional image view."),
+		"IMAGE_VIEW_TYPE_3D".enum("Three-dimensional image view."),
+		"IMAGE_VIEW_TYPE_CUBE".enum("Cube map image view."),
+		"IMAGE_VIEW_TYPE_1D_ARRAY".enum("One-dimensional array image view."),
+		"IMAGE_VIEW_TYPE_2D_ARRAY".enum("Two-dimensional array image view."),
+		"IMAGE_VIEW_TYPE_CUBE_ARRAY".enum("Cube map array image view."),
 		"IMAGE_VIEW_TYPE_BEGIN_RANGE".enumExpr("", "VK_IMAGE_VIEW_TYPE_1D"),
 		"IMAGE_VIEW_TYPE_END_RANGE".enumExpr("", "VK_IMAGE_VIEW_TYPE_CUBE_ARRAY"),
 		"IMAGE_VIEW_TYPE_RANGE_SIZE".enumExpr("", "VK_IMAGE_VIEW_TYPE_CUBE_ARRAY - VK_IMAGE_VIEW_TYPE_1D + 1"),
@@ -504,13 +545,17 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkComponentSwizzle",
 
-		"COMPONENT_SWIZZLE_IDENTITY".enumExpr("", "0"),
-		"COMPONENT_SWIZZLE_ZERO".enum(""),
-		"COMPONENT_SWIZZLE_ONE".enum(""),
-		"COMPONENT_SWIZZLE_R".enum(""),
-		"COMPONENT_SWIZZLE_G".enum(""),
-		"COMPONENT_SWIZZLE_B".enum(""),
-		"COMPONENT_SWIZZLE_A".enum(""),
+		"COMPONENT_SWIZZLE_IDENTITY".enumExpr("The component is set to the identity swizzle.", "0"),
+		"COMPONENT_SWIZZLE_ZERO".enum("The component is set to zero."),
+		"COMPONENT_SWIZZLE_ONE".enum(
+			"""
+			The component is set to either 1 or 1.0 depending on whether the type of the image view format is integer or floating-point respectively, as
+			determined by the <b>Format Definition</b> section for each {@code VkFormat}.
+			"""),
+		"COMPONENT_SWIZZLE_R".enum("The component is set to the value of the R component of the image."),
+		"COMPONENT_SWIZZLE_G".enum("The component is set to the value of the G component of the image."),
+		"COMPONENT_SWIZZLE_B".enum("The component is set to the value of the B component of the image."),
+		"COMPONENT_SWIZZLE_A".enum("The component is set to the value of the A component of the image."),
 		"COMPONENT_SWIZZLE_BEGIN_RANGE".enumExpr("", "VK_COMPONENT_SWIZZLE_IDENTITY"),
 		"COMPONENT_SWIZZLE_END_RANGE".enumExpr("", "VK_COMPONENT_SWIZZLE_A"),
 		"COMPONENT_SWIZZLE_RANGE_SIZE".enumExpr("", "VK_COMPONENT_SWIZZLE_A - VK_COMPONENT_SWIZZLE_IDENTITY + 1"),
@@ -520,8 +565,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkVertexInputRate",
 
-		"VERTEX_INPUT_RATE_VERTEX".enumExpr("", "0"),
-		"VERTEX_INPUT_RATE_INSTANCE".enum(""),
+		"VERTEX_INPUT_RATE_VERTEX".enumExpr("Indicates that vertex attribute addressing is a function of the vertex index.", "0"),
+		"VERTEX_INPUT_RATE_INSTANCE".enum("Indicates that vertex attribute addressing is a function of the instance index."),
 		"VERTEX_INPUT_RATE_BEGIN_RANGE".enumExpr("", "VK_VERTEX_INPUT_RATE_VERTEX"),
 		"VERTEX_INPUT_RATE_END_RANGE".enumExpr("", "VK_VERTEX_INPUT_RATE_INSTANCE"),
 		"VERTEX_INPUT_RATE_RANGE_SIZE".enumExpr("", "VK_VERTEX_INPUT_RATE_INSTANCE - VK_VERTEX_INPUT_RATE_VERTEX + 1"),
@@ -531,17 +576,114 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPrimitiveTopology",
 
-		"PRIMITIVE_TOPOLOGY_POINT_LIST".enumExpr("", "0"),
-		"PRIMITIVE_TOPOLOGY_LINE_LIST".enum(""),
-		"PRIMITIVE_TOPOLOGY_LINE_STRIP".enum(""),
-		"PRIMITIVE_TOPOLOGY_TRIANGLE_LIST".enum(""),
-		"PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP".enum(""),
-		"PRIMITIVE_TOPOLOGY_TRIANGLE_FAN".enum(""),
-		"PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY".enum(""),
-		"PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY".enum(""),
-		"PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY".enum(""),
-		"PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY".enum(""),
-		"PRIMITIVE_TOPOLOGY_PATCH_LIST".enum(""),
+		"PRIMITIVE_TOPOLOGY_POINT_LIST".enumExpr("A series of individual points. Each vertex defines a separate point.", "0"),
+		"PRIMITIVE_TOPOLOGY_LINE_LIST".enum(
+			"""
+			Individual line segments, each defined by a pair of vertices. The first two vertices define the first segment, with subsequent pairs of vertices
+			each defining one more segment. If the number of vertices is odd, then the last vertex is ignored.
+			"""),
+		"PRIMITIVE_TOPOLOGY_LINE_STRIP".enum(
+			"""
+			A series of one or more connected line segments. In this case, the first vertex specifies the first segment’s start point while the second vertex
+			specifies the first segment’s endpoint and the second segment’s start point. In general, the i<sup>th</sup> vertex (for i &gt; 0) specifies the
+			beginning of the i<sup>th</sup> segment and the end of the {@code i−1}<sup>st</sup>. The last vertex specifies the end of the last segment. If only
+			one vertex is specified, then no primitive is generated.
+			"""
+		),
+		"PRIMITIVE_TOPOLOGY_TRIANGLE_LIST".enum(
+			"""
+			Separate triangles. In this case, vertices {@code 3i}, {@code 3i + 1}, and {@code 3i + 2} (in that order) determine a triangle for each
+			{@code i = 0,1,…,n − 1}, where there are {@code 3n + k} vertices drawn. {@code k} is either 0, 1, or 2; if {@code k} is not zero, the final
+			{@code k} vertices are ignored.
+			"""
+		),
+		"PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP".enum(
+			"""
+			A triangle strip is a series of triangles connected along shared edges. In this case, the first three vertices define the first triangle, and their
+			order is significant. Each subsequent vertex defines a new triangle using that point along with the last two vertices from the previous triangle.
+			If fewer than three vertices are specified, no primitive is produced. The order of vertices in successive triangles changes, so that all triangle
+			faces have the same orientation.
+			"""
+		),
+		"PRIMITIVE_TOPOLOGY_TRIANGLE_FAN".enum(
+			"""
+			A triangle fan. It is similar to a triangle strip, but changes the vertex replaced from the previous triangle, so that all triangles in the fan
+			share a common vertex.
+			"""
+		),
+		"PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY".enum(
+			"""
+			Lines with adjacency are independent line segments where each endpoint has a corresponding adjacent vertex that is accessible in a geometry shader.
+			If a geometry shader is not active, the adjacent vertices are ignored.
+
+			A line segment is drawn from the {@code 4i + 1}<sup>st</sup> vertex to the {@code 4i + 2}<sup>nd</sup> vertex for each {@code i = 0,1,…,n − 1},
+			where there are {@code 4n + k} vertices. {@code k} is either 0, 1, 2, or 3; if {@code k} is not zero, the final {@code k} vertices are ignored. For
+			line segment {@code i}, the {@code 4i}<sup>th</sup> and {@code 4i + 3}<sup>rd</sup> vertices are considered adjacent to the
+			{@code 4i + 1}<sup>st</sup> and {@code 4i + 2}<sup>nd</sup> vertices, respectively.
+			"""
+		),
+		"PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY".enum(
+			"""
+			Line strips with adjacency are similar to line strips, except that each line segment has a pair of adjacent vertices that are accessible in a
+			geometry shader. If a geometry shader is not active, the adjacent vertices are ignored.
+
+			A line segment is drawn from the {@code i + 1}<sup>st</sup> vertex to the {@code i + 2}<sup>nd</sup> vertex for each {@code i = 0,1,…,n − 1}, where
+			there are {@code n + 3} vertices. If there are fewer than four vertices, all vertices are ignored. For line segment {@code i}, the
+			{@code i}<sup>th</sup> and {@code i + 3}<sup>rd</sup> vertex are considered adjacent to the {@code i + 1}<sup>st</sup> and
+			{@code i + 2}<sup>nd</sup> vertices, respectively.
+			"""
+		),
+		"PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY".enum(
+			"""
+			Triangles with adjacency are similar to separate triangles except that each triangle edge has an adjacent vertex that is accessible in a geometry
+			shader. If a geometry shader is not active, the adjacent vertices are ignored.
+
+			The {@code 6i}<sup>th</sup>, {@code 6i + 2}<sup>nd</sup>, and {@code 6i + 4}<sup>th</sup> vertices (in that order) determine a triangle for each
+			{@code i = 0,1,…,n − 1}, where there are {@code 6n + k} vertices. {@code k} is either 0, 1, 2, 3, 4, or 5; if {@code k} is non-zero, the final
+			{@code k} vertices are ignored. For triangle {@code i}, the {@code 6i + 1}<sup>st</sup>, {@code 6i + 3}<sup>rd</sup>, and
+			{@code 6i + 5}<sup>th</sup> vertices are considered adjacent to edges from the {@code 6i}<sup>th</sup> to the {@code 6i + 2}<sup>nd</sup>, from the
+			{@code 6i + 2}<sup>nd</sup> to the {@code 6i + 4}<sup>th</sup>, and from the {@code 6i + 4}<sup>th</sup> to the {@code 6i}<sup>th</sup> vertices,
+			respectively.
+			"""
+		),
+		"PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY".enum(
+			"""
+			Triangle strips with adjacency are similar to triangle strips except that each triangle edge has an adjacent vertex that is accessible in a
+			geometry shader. If a geometry shader is not active, the adjacent vertices are ignored.
+
+			In triangle strips with adjacency, {@code n} triangles are drawn where there are {@code 2(n + 2) + k} vertices. {@code k} is either 0 or 1; if
+			{@code k} is 1, the final vertex is ignored. If there are fewer than 6 vertices, the entire primitive is ignored. The table below describes the
+			vertices and order used to draw each triangle, and which vertices are considered adjacent to each edge of the triangle:
+			${table(
+				tr(
+					th(),
+					th("Primitive Vertices", colspan = 3),
+					th("Adjacent Vertices", colspan = 3)
+				),
+				tr(td("Primitive"), td("1<sup>st</sup>"), td("2<sup>nd</sup>"), td("3<sup>rd</sup>"), td("1/2"), td("2/3"), td("3/1")),
+				tr(td("only ( {@code i = 0} , {@code n = 1} )"), td("0"), td("2"), td("4"), td("1"), td("5"), td("3")),
+				tr(td("first ( {@code i = 0} )"), td("0"), td("2"), td("4"), td("1"), td("6"), td("3")),
+				tr(td("middle ( {@code i} odd)"), td("2i+2"), td("2i"), td("2i+4"), td("2i−2"), td("2i+3"), td("2i+6")),
+				tr(td("middle ( {@code i} even)"), td("2i"), td("2i+2"), td("2i+4"), td("2i−2"), td("2i+6"), td("2i+3")),
+				tr(td("last ( {@code i = n − 1} , {@code i} odd)"), td("2i+2"), td("2i"), td("2i+4"), td("2i−2"), td("2i+3"), td("2i+5")),
+				tr(td("last ( {@code i = n − 1} , {@code i} even)"), td("2i"), td("2i+2"), td("2i+4"), td("2i−2"), td("2i+5"), td("2i+3"))
+			)}
+			"""
+		),
+		"PRIMITIVE_TOPOLOGY_PATCH_LIST".enum(
+			"""
+			Separate patches. A patch is an ordered collection of vertices used for primitive tessellation. The vertices comprising a patch have no implied
+			geometric ordering, and are used by tessellation shaders and the fixed-function tessellator to generate new point, line, or triangle primitives.
+
+			Each patch in the series has a fixed number of vertices, specified by the {@code patchControlPoints} member of the
+			##VkPipelineTessellationStateCreateInfo structure passed to #CreateGraphicsPipelines(). Once assembled and vertex shaded, these patches are
+			provided as input to the tessellation control shader stage.
+
+			If the number of vertices in a patch is given by {@code v}, the {@code vi}<sup>th</sup> through {@code vi + v − 1}<sup>st</sup> vertices (in that
+			order) determine a patch for each {@code i = 0,1,…n − 1}, where there are {@code vn + k} vertices. {@code k} is in the range {@code [0,v − 1]} ; if
+			{@code k} is not zero, the final {@code k} vertices are ignored.
+			"""
+		),
 		"PRIMITIVE_TOPOLOGY_BEGIN_RANGE".enumExpr("", "VK_PRIMITIVE_TOPOLOGY_POINT_LIST"),
 		"PRIMITIVE_TOPOLOGY_END_RANGE".enumExpr("", "VK_PRIMITIVE_TOPOLOGY_PATCH_LIST"),
 		"PRIMITIVE_TOPOLOGY_RANGE_SIZE".enumExpr("", "VK_PRIMITIVE_TOPOLOGY_PATCH_LIST - VK_PRIMITIVE_TOPOLOGY_POINT_LIST + 1"),
@@ -551,9 +693,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPolygonMode",
 
-		"POLYGON_MODE_FILL".enumExpr("", "0"),
-		"POLYGON_MODE_LINE".enum(""),
-		"POLYGON_MODE_POINT".enum(""),
+		"POLYGON_MODE_FILL".enumExpr("Causes polygons to render using the polygon rasterization rules.", "0"),
+		"POLYGON_MODE_LINE".enum("Causes polygon edges to be drawn as line segments."),
+		"POLYGON_MODE_POINT".enum("The vertices of polygons are treated, for rasterization purposes, as if they had been drawn as points."),
 		"POLYGON_MODE_BEGIN_RANGE".enumExpr("", "VK_POLYGON_MODE_FILL"),
 		"POLYGON_MODE_END_RANGE".enumExpr("", "VK_POLYGON_MODE_POINT"),
 		"POLYGON_MODE_RANGE_SIZE".enumExpr("", "VK_POLYGON_MODE_POINT - VK_POLYGON_MODE_FILL + 1"),
@@ -563,8 +705,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkFrontFace",
 
-		"FRONT_FACE_COUNTER_CLOCKWISE".enumExpr("", "0"),
-		"FRONT_FACE_CLOCKWISE".enum(""),
+		"FRONT_FACE_COUNTER_CLOCKWISE".enumExpr("A triangle with positive area is considered front-facing.", "0"),
+		"FRONT_FACE_CLOCKWISE".enum("A triangle with negative area is considered front-facing."),
 		"FRONT_FACE_BEGIN_RANGE".enumExpr("", "VK_FRONT_FACE_COUNTER_CLOCKWISE"),
 		"FRONT_FACE_END_RANGE".enumExpr("", "VK_FRONT_FACE_CLOCKWISE"),
 		"FRONT_FACE_RANGE_SIZE".enumExpr("", "VK_FRONT_FACE_CLOCKWISE - VK_FRONT_FACE_COUNTER_CLOCKWISE + 1"),
@@ -574,14 +716,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkCompareOp",
 
-		"COMPARE_OP_NEVER".enumExpr("", "0"),
-		"COMPARE_OP_LESS".enum(""),
-		"COMPARE_OP_EQUAL".enum(""),
-		"COMPARE_OP_LESS_OR_EQUAL".enum(""),
-		"COMPARE_OP_GREATER".enum(""),
-		"COMPARE_OP_NOT_EQUAL".enum(""),
-		"COMPARE_OP_GREATER_OR_EQUAL".enum(""),
-		"COMPARE_OP_ALWAYS".enum(""),
+		"COMPARE_OP_NEVER".enumExpr("The test never passes.", "0"),
+		"COMPARE_OP_LESS".enum("The test passes when <b>R</b> &lt; <b>S</b>."),
+		"COMPARE_OP_EQUAL".enum("The test passes when R = S}"),
+		"COMPARE_OP_LESS_OR_EQUAL".enum("The test passes when <b>R</b> &le; <b>S</b>."),
+		"COMPARE_OP_GREATER".enum("The test passes when <b>R</b> &gt; <b>S</b>."),
+		"COMPARE_OP_NOT_EQUAL".enum("The test passes when <b>R</b> &ne; <b>S</b>."),
+		"COMPARE_OP_GREATER_OR_EQUAL".enum("The test passes when <b>R</b> &ge; <b>S</b>."),
+		"COMPARE_OP_ALWAYS".enum("The test always passes."),
 		"COMPARE_OP_BEGIN_RANGE".enumExpr("", "VK_COMPARE_OP_NEVER"),
 		"COMPARE_OP_END_RANGE".enumExpr("", "VK_COMPARE_OP_ALWAYS"),
 		"COMPARE_OP_RANGE_SIZE".enumExpr("", "VK_COMPARE_OP_ALWAYS - VK_COMPARE_OP_NEVER + 1"),
@@ -591,14 +733,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkStencilOp",
 
-		"STENCIL_OP_KEEP".enumExpr("", "0"),
-		"STENCIL_OP_ZERO".enum(""),
-		"STENCIL_OP_REPLACE".enum(""),
-		"STENCIL_OP_INCREMENT_AND_CLAMP".enum(""),
-		"STENCIL_OP_DECREMENT_AND_CLAMP".enum(""),
-		"STENCIL_OP_INVERT".enum(""),
-		"STENCIL_OP_INCREMENT_AND_WRAP".enum(""),
-		"STENCIL_OP_DECREMENT_AND_WRAP".enum(""),
+		"STENCIL_OP_KEEP".enumExpr("Keeps the current value.", "0"),
+		"STENCIL_OP_ZERO".enum("Sets the value to 0."),
+		"STENCIL_OP_REPLACE".enum("Sets the value to {@code reference}."),
+		"STENCIL_OP_INCREMENT_AND_CLAMP".enum("Increments the current value and clamps to the maximum representable unsigned value."),
+		"STENCIL_OP_DECREMENT_AND_CLAMP".enum("Decrements the current value and clamps to 0."),
+		"STENCIL_OP_INVERT".enum("Bitwise-inverts the current value."),
+		"STENCIL_OP_INCREMENT_AND_WRAP".enum("Increments the current value and wraps to 0 when the maximum value would have been exceeded."),
+		"STENCIL_OP_DECREMENT_AND_WRAP".enum("Decrements the current value and wraps to the maximum possible value when the value would go below 0."),
 		"STENCIL_OP_BEGIN_RANGE".enumExpr("", "VK_STENCIL_OP_KEEP"),
 		"STENCIL_OP_END_RANGE".enumExpr("", "VK_STENCIL_OP_DECREMENT_AND_WRAP"),
 		"STENCIL_OP_RANGE_SIZE".enumExpr("", "VK_STENCIL_OP_DECREMENT_AND_WRAP - VK_STENCIL_OP_KEEP + 1"),
@@ -608,22 +750,22 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkLogicOp",
 
-		"LOGIC_OP_CLEAR".enumExpr("", "0"),
-		"LOGIC_OP_AND".enum(""),
-		"LOGIC_OP_AND_REVERSE".enum(""),
-		"LOGIC_OP_COPY".enum(""),
-		"LOGIC_OP_AND_INVERTED".enum(""),
-		"LOGIC_OP_NO_OP".enum(""),
-		"LOGIC_OP_XOR".enum(""),
-		"LOGIC_OP_OR".enum(""),
-		"LOGIC_OP_NOR".enum(""),
-		"LOGIC_OP_EQUIVALENT".enum(""),
-		"LOGIC_OP_INVERT".enum(""),
-		"LOGIC_OP_OR_REVERSE".enum(""),
-		"LOGIC_OP_COPY_INVERTED".enum(""),
-		"LOGIC_OP_OR_INVERTED".enum(""),
-		"LOGIC_OP_NAND".enum(""),
-		"LOGIC_OP_SET".enum(""),
+		"LOGIC_OP_CLEAR".enumExpr("{@code 0}", "0"),
+		"LOGIC_OP_AND".enum("{@code s∧d}"),
+		"LOGIC_OP_AND_REVERSE".enum("{@code s∧¬d}"),
+		"LOGIC_OP_COPY".enum("{@code s}"),
+		"LOGIC_OP_AND_INVERTED".enum("{@code ¬s∧d}"),
+		"LOGIC_OP_NO_OP".enum("{@code d}"),
+		"LOGIC_OP_XOR".enum("{@code s⊕d}"),
+		"LOGIC_OP_OR".enum("{@code s∨d}"),
+		"LOGIC_OP_NOR".enum("{@code ¬(s∨d)}"),
+		"LOGIC_OP_EQUIVALENT".enum("{@code ¬(s⊕d)}"),
+		"LOGIC_OP_INVERT".enum("{@code ¬d}"),
+		"LOGIC_OP_OR_REVERSE".enum("{@code s∨¬d}"),
+		"LOGIC_OP_COPY_INVERTED".enum("{@code ¬s}"),
+		"LOGIC_OP_OR_INVERTED".enum("{@code ¬s∨d}"),
+		"LOGIC_OP_NAND".enum("{@code ¬(s∧d)}"),
+		"LOGIC_OP_SET".enum("{@code all 1s}"),
 		"LOGIC_OP_BEGIN_RANGE".enumExpr("", "VK_LOGIC_OP_CLEAR"),
 		"LOGIC_OP_END_RANGE".enumExpr("", "VK_LOGIC_OP_SET"),
 		"LOGIC_OP_RANGE_SIZE".enumExpr("", "VK_LOGIC_OP_SET - VK_LOGIC_OP_CLEAR + 1"),
@@ -633,25 +775,25 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkBlendFactor",
 
-		"BLEND_FACTOR_ZERO".enumExpr("", "0"),
-		"BLEND_FACTOR_ONE".enum(""),
-		"BLEND_FACTOR_SRC_COLOR".enum(""),
-		"BLEND_FACTOR_ONE_MINUS_SRC_COLOR".enum(""),
-		"BLEND_FACTOR_DST_COLOR".enum(""),
-		"BLEND_FACTOR_ONE_MINUS_DST_COLOR".enum(""),
-		"BLEND_FACTOR_SRC_ALPHA".enum(""),
-		"BLEND_FACTOR_ONE_MINUS_SRC_ALPHA".enum(""),
-		"BLEND_FACTOR_DST_ALPHA".enum(""),
-		"BLEND_FACTOR_ONE_MINUS_DST_ALPHA".enum(""),
-		"BLEND_FACTOR_CONSTANT_COLOR".enum(""),
-		"BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR".enum(""),
-		"BLEND_FACTOR_CONSTANT_ALPHA".enum(""),
-		"BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA".enum(""),
-		"BLEND_FACTOR_SRC_ALPHA_SATURATE".enum(""),
-		"BLEND_FACTOR_SRC1_COLOR".enum(""),
-		"BLEND_FACTOR_ONE_MINUS_SRC1_COLOR".enum(""),
-		"BLEND_FACTOR_SRC1_ALPHA".enum(""),
-		"BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA".enum(""),
+		"BLEND_FACTOR_ZERO".enum(code("(0, 0, 0, 0)")),
+		"BLEND_FACTOR_ONE".enum(code("(1, 1, 1, 1)")),
+		"BLEND_FACTOR_SRC_COLOR".enum(code("(R<sub>s0</sub>, G<sub>s0</sub>, B<sub>s0</sub>, A<sub>s0</sub>)")),
+		"BLEND_FACTOR_ONE_MINUS_SRC_COLOR".enum(code("(1 − R<sub>s0</sub>, 1 − G<sub>s0</sub>, 1 − B<sub>s0</sub>, 1 − A<sub>s0</sub>)")),
+		"BLEND_FACTOR_DST_COLOR".enum(code("(R<sub>d</sub>, G<sub>d</sub>, B<sub>d</sub>, A<sub>d</sub>)")),
+		"BLEND_FACTOR_ONE_MINUS_DST_COLOR".enum(code("(1 − R<sub>d</sub>, 1 − G<sub>d</sub>, 1 − B<sub>d</sub>, 1 − A<sub>d</sub>)")),
+		"BLEND_FACTOR_SRC_ALPHA".enum(code("(A<sub>s0</sub>, A<sub>s0</sub>, A<sub>s0</sub>, A<sub>s0</sub>)")),
+		"BLEND_FACTOR_ONE_MINUS_SRC_ALPHA".enum(code("(1 − A<sub>s0</sub>, 1 − A<sub>s0</sub>, 1 − A<sub>s0</sub>, 1 − A<sub>s0</sub>)")),
+		"BLEND_FACTOR_DST_ALPHA".enum(code("(A<sub>d</sub>, A<sub>d</sub>, A<sub>d</sub>, A<sub>d</sub>)")),
+		"BLEND_FACTOR_ONE_MINUS_DST_ALPHA".enum(code("(1 − A<sub>d</sub>, 1 − A<sub>d</sub>, 1 − A<sub>d</sub>, 1 − A<sub>d</sub>)")),
+		"BLEND_FACTOR_CONSTANT_COLOR".enum(code("(R<sub>c</sub>, G<sub>c</sub>, B<sub>c</sub>, A<sub>c</sub>)")),
+		"BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR".enum(code("(1 − R<sub>c</sub>, 1 − G<sub>c</sub>, 1 − B<sub>c</sub>, 1 − A<sub>c</sub>)")),
+		"BLEND_FACTOR_CONSTANT_ALPHA".enum(code("(A<sub>c</sub>, A<sub>c</sub>, A<sub>c</sub>, A<sub>c</sub>)")),
+		"BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA".enum(code("(1 − A<sub>c</sub>, 1 − A<sub>c</sub>, 1 − A<sub>c</sub>, 1 − A<sub>c</sub>)")),
+		"BLEND_FACTOR_SRC_ALPHA_SATURATE".enum(code("(f, f, f, 1) ; f = min(A<sub>s0</sub>, 1 − A<sub>d</sub>)")),
+		"BLEND_FACTOR_SRC1_COLOR".enum(code("(R<sub>s1</sub>, G<sub>s1</sub>, B<sub>s1</sub>, A<sub>s1</sub>)")),
+		"BLEND_FACTOR_ONE_MINUS_SRC1_COLOR".enum(code("(1 − R<sub>s1</sub>, 1 − G<sub>s1</sub>, 1 − B<sub>s1</sub>, 1 − A<sub>s1</sub>)")),
+		"BLEND_FACTOR_SRC1_ALPHA".enum(code("(A<sub>s1</sub>, A<sub>s1</sub>, A<sub>s1</sub>, A<sub>s1</sub>)")),
+		"BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA".enum(code("(1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>)")),
 		"BLEND_FACTOR_BEGIN_RANGE".enumExpr("", "VK_BLEND_FACTOR_ZERO"),
 		"BLEND_FACTOR_END_RANGE".enumExpr("", "VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA"),
 		"BLEND_FACTOR_RANGE_SIZE".enumExpr("", "VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA - VK_BLEND_FACTOR_ZERO + 1"),
@@ -661,11 +803,32 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkBlendOp",
 
-		"BLEND_OP_ADD".enumExpr("", "0"),
-		"BLEND_OP_SUBTRACT".enum(""),
-		"BLEND_OP_REVERSE_SUBTRACT".enum(""),
-		"BLEND_OP_MIN".enum(""),
-		"BLEND_OP_MAX".enum(""),
+		"BLEND_OP_ADD".enumExpr(codeBlock(
+"""R = R<sub>s0</sub> × S<sub>r</sub> + R<sub>d</sub> × D<sub>r</sub>
+G = G<sub>s0</sub> × S<sub>g</sub> + G<sub>d</sub> × D<sub>g</sub>
+B = B<sub>s0</sub> × S<sub>b</sub> + B<sub>d</sub> × D<sub>b</sub>
+A = A<sub>s0</sub> × S<sub>a</sub> + A<sub>d</sub> × D<sub>a</sub>"""),
+			"0"),
+		"BLEND_OP_SUBTRACT".enum(codeBlock(
+			"""R = R<sub>s0</sub> × S<sub>r</sub> − R<sub>d</sub> × D<sub>r</sub>
+G = G<sub>s0</sub> × S<sub>g</sub> − G<sub>d</sub> × D<sub>g</sub>
+B = B<sub>s0</sub> × S<sub>b</sub> − B<sub>d</sub> × D<sub>b</sub>
+A = A<sub>s0</sub> × S<sub>a</sub> − A<sub>d</sub> × D<sub>a</sub>""")),
+		"BLEND_OP_REVERSE_SUBTRACT".enum(codeBlock(
+"""R = R<sub>d</sub> × D<sub>r</sub> − R<sub>s0</sub> × S<sub>r</sub>
+G = G<sub>d</sub> × D<sub>g</sub> − G<sub>s0</sub> × S<sub>g</sub>
+B = B<sub>d</sub> × D<sub>b</sub> − B<sub>s0</sub> × S<sub>b</sub>
+A = A<sub>d</sub> × D<sub>a</sub> − A<sub>s0</sub> × S<sub>a</sub>""")),
+		"BLEND_OP_MIN".enum(codeBlock(
+"""R = min(R<sub>s0</sub>, R<sub>d</sub>)
+G = min(G<sub>s0</sub>, G<sub>d</sub>)
+B = min(B<sub>s0</sub>, B<sub>d</sub>)
+A = min(A<sub>s0</sub>, A<sub>d</sub>)""")),
+		"BLEND_OP_MAX".enum(codeBlock(
+"""R = max(R<sub>s0</sub>, R<sub>d</sub>)
+G = max(G<sub>s0</sub>, G<sub>d</sub>)
+B = max(B<sub>s0</sub>, B<sub>d</sub>)
+A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 		"BLEND_OP_BEGIN_RANGE".enumExpr("", "VK_BLEND_OP_ADD"),
 		"BLEND_OP_END_RANGE".enumExpr("", "VK_BLEND_OP_MAX"),
 		"BLEND_OP_RANGE_SIZE".enumExpr("", "VK_BLEND_OP_MAX - VK_BLEND_OP_ADD + 1"),
