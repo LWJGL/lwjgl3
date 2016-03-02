@@ -502,6 +502,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-html5" if:set="jdk9"/>
 			<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
 		</javadoc>
+		<get-quiet name="favicon" url="http://s3.amazonaws.com/cdn.lwjgl.org/favicon.ico" dest="${bin.html.javadoc}"/>
 	</target>
 
 	<target name="release" description="Creates the LWJGL binary redistributable" depends="compile,javadoc,-build-version">
