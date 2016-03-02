@@ -496,7 +496,6 @@ License terms: http://lwjgl.org/license.php
 				<patternset refid="core.generated.files"/>
 			</fileset>
 
-			<arg value="-sourcetab 4"/>
 			<arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 
 			<arg value="-Xdoclint" if:set="jdk8"/>

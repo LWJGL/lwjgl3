@@ -136,11 +136,13 @@ fun code(code: String) = """<code>$code</code>"""
 
 private val CODE_BLOCK_TRIM_PATTERN = Pattern.compile("""^\s*\n|\n\s*$""") // first and/or last empty lines...
 private val CODE_BLOCK_ESCAPE_PATTERN = Pattern.compile("^[ \t\n]", Pattern.MULTILINE) // leading space/tab in line, empty line
+private val CODE_BLOCK_TAB_PATTERN = Pattern.compile("\t") // tabs
 
 /** Useful for pre-formatted code blocks. */
 fun codeBlock(code: String) = """<pre><code>${code
 	.replaceAll(CODE_BLOCK_TRIM_PATTERN, "") // ...trim
 	.replaceAll(CODE_BLOCK_ESCAPE_PATTERN, "\uFFFF$0") // ...escape
+	.replaceAll(CODE_BLOCK_TAB_PATTERN, "    ") // ...replace with 4 spaces for consistent formatting.
 }</code></pre>"""
 
 fun url(href: String, innerHTML: String) = """<a href="$href">$innerHTML</a>"""
