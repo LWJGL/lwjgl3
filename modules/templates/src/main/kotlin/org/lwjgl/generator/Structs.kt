@@ -43,7 +43,10 @@ private open class StructMemberArray(
 	nativeType: NativeType,
 	name: String,
 	documentation: String,
-	val size: Int
+	/** Number of elements in the array. */
+	val size: Int,
+	/** Number of pointer elements that must not be null. */
+	val validSize: Int
 ) : StructMember(nativeType, name, documentation)
 
 private class StructMemberCharArray(
@@ -51,9 +54,9 @@ private class StructMemberCharArray(
 	name: String,
 	documentation: String,
 	size: Int
-) : StructMemberArray(nativeType, name, documentation, size)
+) : StructMemberArray(nativeType, name, documentation, size, size)
 
-private class StructMemberPadding(size: Int, val condition: String?) : StructMemberArray(char, ANONYMOUS, "", size)
+private class StructMemberPadding(size: Int, val condition: String?) : StructMemberArray(char, ANONYMOUS, "", size, size)
 
 private enum class MultiSetterMode {
 	NORMAL,
@@ -129,7 +132,8 @@ class Struct(
 	}
 
 	// Array field
-	fun NativeType.array(name: String, documentation: String, size: Int) = add(StructMemberArray(this, name, documentation, size))
+	fun NativeType.array(name: String, documentation: String, size: Int, validSize: Int = size)
+		= add(StructMemberArray(this, name, documentation, size, validSize))
 
 	// CharSequence special-case
 	fun CharType.array(name: String, documentation: String, size: Int) = add(StructMemberCharArray(this, name, documentation, size))
@@ -182,35 +186,92 @@ class Struct(
 	}
 
 	val validations: Sequence<String> by lazy {
-		mutableMembers.mapNotNull { m ->
-			if ( m has AutoSizeMember )
-				m[AutoSizeMember].let { autoSize ->
-					// get auto-sized members that are nullable
-					val autoSizedMembers = (sequenceOf(autoSize.reference) + autoSize.dependent.asSequence())
-					autoSizedMembers.mapNotNull { ref ->
-						mutableMembers.firstOrNull { it.name == ref && it has nullable }
-					}.let {
-						val count = it.count()
-						if ( it.any() && count == autoSizedMembers.count() )
-							if ( autoSize.exclusive )
-							// if m != 0, make sure one of the auto-sized members is not null
-								"\t\tif (\n\t\t\tn${m.name}($STRUCT) != 0 &&${
-								it.map { ref -> "\n\t\t\tmemGetAddress($STRUCT + $className.${ref.offsetField}) == NULL" }.joinToString(" &&")
-								}\n\t\t) {\n\t\t\tthrow new NullPointerException(\"At least one of ${it.map { ref -> ref.name }.joinToString()} must not be null\");\n\t\t}"
-							else
-							// if m != 0, make sure auto-sized members are not null
-								"\t\tif ( n${m.name}($STRUCT) != 0 )${if ( count == 1 ) "" else " {"}\n${it.map { ref ->
-									"\t\t\tcheckPointer(memGetAddress($STRUCT + $className.${ref.offsetField}));"
-								}.joinToString("\n")}${if ( count == 1 ) "" else "\n\t\t}"}"
-						else
-							null
-					}
+		if ( union )
+			return@lazy emptySequence<String>()
+
+		val validations = ArrayList<String>()
+
+		fun MutableList<String>.addPointer(m: StructMember) = this.add("\t\tlong ${m.name} = memGetAddress($STRUCT + $className.${m.offsetField});")
+		fun MutableList<String>.addCount(m: StructMember) = this.add("\t\t${m.nativeType.javaMethodType} ${m.name} = n${m.name}($STRUCT);")
+
+		fun validate(m: StructMember, indent: String, hasPointer: Boolean = false): String {
+			return if ( m.nativeType is StructType && m.nativeType.definition.validations.any() ) {
+				if ( m is StructMemberArray ) {
+					"""${if ( hasPointer ) "" else "${indent}long ${m.name} = $STRUCT + $className.${m.offsetField};\n"}${indent}for ( int i = 0; i < ${m.size}; i++ ) {
+${ if ( m.validSize == m.size ) "$indent   checkPointer(memGetAddress(${m.name}));" else
+						"""$indent   if ( i < ${m.validSize} )
+$indent       checkPointer(memGetAddress(${m.name}));
+$indent   else if ( memGetAddress(${m.name}) == NULL )
+$indent       break;"""}
+$indent   ${m.nativeType.definition.className}.validate(${m.name});
+$indent   ${m.name} += POINTER_SIZE;
+$indent}"""
+				} else {
+					"${if ( hasPointer ) "" else
+						"${indent}long ${m.name} = memGetAddress($STRUCT + $className.${m.offsetField});\n" +
+						"${indent}checkPointer(${m.name});\n"
+					}$indent${m.nativeType.definition.className}.validate(${m.name}${getReferenceMember(AutoSizeMember, m.name).let { if ( it != null ) ", ${it.name}" else "" }});"
 				}
-			else if ( m.nativeType is PointerType && !m.has(nullable) && !(m.nativeType is StructType && !m.nativeType.includesPointer) )
-				"\t\tcheckPointer(memGetAddress($STRUCT + $className.${m.offsetField}));"
-			else
-				null
+			} else
+				"${indent}checkPointer(memGetAddress($STRUCT + $className.${m.offsetField}));"
 		}
+
+		fun validationBlock(condition: String, validations: String): String = validations.contains('\n').let { needBraces ->
+			"\t\tif ( $condition )${if ( needBraces ) " {" else ""}\n$validations${if ( needBraces ) "\n\t\t}" else ""}"
+		}
+
+		mutableMembers.forEach { m ->
+			if ( m has AutoSizeMember ) {
+				m[AutoSizeMember].let { autoSize ->
+					val refs = autoSize.members(mutableMembers)
+
+					if ( autoSize.atLeastOne ) {
+						// TODO: There will be redundancy here when one of the refs is a validateable struct array. But we don't have a case for it yet.
+						validations.addCount(m)
+
+						// if m != 0, make sure one of the auto-sized members is not null
+						validations.add(
+							"\t\tif (${if ( autoSize.optional ) "\n\t\t\t${m.name} != 0 &&" else "\n\t\t\t${m.name} == 0 || ("}${
+							refs.map { "\n\t\t\tmemGetAddress($STRUCT + $className.${it.offsetField}) == NULL" }.joinToString(" &&")
+							}\n\t\t${if ( autoSize.optional ) "" else ")"}) {\n\t\t\tthrow new NullPointerException(\"At least one of ${refs.map { it.name }.joinToString()} must not be null\");\n\t\t}"
+						)
+					} else if ( autoSize.optional ) {
+						val refValidations = refs.filter { !it.has(nullable) }.map { ref ->
+							validate(ref, "\t\t\t")
+						}.joinToString("\n")
+
+						if ( refValidations.isEmpty() )
+							return@let
+
+						// if m != 0, make sure auto-sized members are not null
+						validations.add(
+							validationBlock("${if ( refValidations.contains(", ${m.name})") ) {
+								validations.addCount(m)
+								m.name
+							} else "n${m.name}($STRUCT)"} != 0", refValidations)
+						)
+					} else if ( refs.any { it.nativeType is StructType && it.nativeType.definition.validations.any() } )
+						validations.addCount(m)
+				}
+			} else if ( m.nativeType is PointerType && getReferenceMember(AutoSizeMember, m.name)?.get(AutoSizeMember).let { it == null || !it.optional } ) {
+				if ( m.nativeType is StructType && m.nativeType.definition.validations.any() ) {
+					validations.add(
+						if ( m.nativeType.includesPointer ) {
+							if ( m.has(nullable) ) {
+								validations.addPointer(m)
+								validationBlock("${m.name} != NULL", validate(m, "\t\t\t", hasPointer = true))
+							} else
+								validate(m, "\t\t")
+						} else
+							"\t\t${m.nativeType.definition.className}.validate($STRUCT + $className.${m.offsetField});"
+					)
+				} else if ( !m.has(nullable) && !(m.nativeType is StructType && !m.nativeType.includesPointer) ) {
+					validations.add(validate(m, "\t\t"))
+				}
+			}
+		}
+
+		validations.asSequence()
 	}
 
 	/** Returns a member that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
@@ -298,7 +359,7 @@ $indentation}"""
 		members.filter { it has AutoSizeMember }.forEach {
 			val autoSize = it[AutoSizeMember]
 
-			(sequenceOf(autoSize.reference) + autoSize.dependent.asSequence()).forEach { reference ->
+			autoSize.references.forEachIndexed { i, reference ->
 				val bufferParam = members.firstOrNull { it.name == reference }
 				if ( bufferParam == null )
 					it.error("Reference does not exist: AutoSize($reference)")
@@ -309,6 +370,8 @@ $indentation}"""
 						!bufferParam.nativeType.isPointerData -> it.error("Reference must not be a opaque pointer: AutoSize($reference)")
 						bufferParam.nativeType is StructType && !(bufferParam is StructMemberBuffer || bufferParam is StructMemberArray)
 						                                      -> it.error("Reference must be a struct buffer: AutoSize($reference)")
+						autoSize.atLeastOne && !bufferParam.has(nullable)
+						                                      -> it.error("The \"atLeastOne\" option requires references to be nullable: AutoSize($reference)")
 					}
 				}
 			}
@@ -428,7 +491,7 @@ $indentation}"""
 			generateGetters(AccessMode.INSTANCE, members)
 
 			if ( hasMutableMembers ) {
-				val mutableMembers = this@Struct.mutableMembers.filter { !it.has(AutoSizeMember) || it[AutoSizeMember].keepSetter }
+				val mutableMembers = mutableMembers.filter { !it.has(AutoSizeMember) || it[AutoSizeMember].keepSetter(mutableMembers) }
 				println()
 				generateSetters(AccessMode.INSTANCE, mutableMembers)
 
@@ -535,7 +598,7 @@ $indentation}"""
 
 				if ( validations.any() ) {
 					println(
-"""	/**
+						"""	/**
 	 * Validates pointer members that should not be $NULL.
 	 *
 	 * @param $STRUCT the struct to validate
@@ -608,7 +671,7 @@ ${validations.joinToString("\n")}
 
 			if ( hasMutableMembers ) {
 				println()
-				generateSetters(AccessMode.FLYWEIGHT, mutableMembers.filter { !it.has(AutoSizeMember) || it[AutoSizeMember].keepSetter })
+				generateSetters(AccessMode.FLYWEIGHT, mutableMembers.filter { !it.has(AutoSizeMember) || it[AutoSizeMember].keepSetter(mutableMembers) })
 			}
 		}
 
@@ -858,25 +921,28 @@ ${validations.joinToString("\n")}
 		throw IllegalStateException()
 
 	private val StructMember.pointerValue: String get() = if ( has(nullable) ) "value" else "checkPointer(value)"
-	private val StructMember.addressValue: String get() = if ( has(nullable) ) "addressSafe(value)" else "value.address()"
-	private val StructMember.memAddressValue: String get() = if ( has(nullable) ) "memAddressSafe(value)" else "memAddress(value)"
+	private val StructMember.isNullable: Boolean
+		get() = has(nullable) ||
+		        getReferenceMember(AutoSizeMember, name)?.get(AutoSizeMember)?.optional ?: false ||
+		        (this is StructMemberArray && this.validSize < this.size)
+	private val StructMember.addressValue: String get() = if ( isNullable ) "addressSafe(value)" else "value.address()"
+	private val StructMember.memAddressValue: String get() = if ( isNullable ) "memAddressSafe(value)" else "memAddress(value)"
 	private val StructMember.autoSize: String get() = "n$name($STRUCT)".let { if ( nativeType.mapping != PrimitiveMapping.INT ) "(int)$it" else it }
 
 	private fun PrintWriter.setRemaining(m: StructMember) {
 		// do not do this if the AutoSize parameter auto-sizes multiple members
-		val capacity = members.firstOrNull { it has AutoSizeMember && it[AutoSizeMember].let { it.exclusive || (it.dependent.isEmpty() && it.reference == m.name) } }
-		if ( capacity != null )
-			print(if ( m has nullable ) {
-				val autoSize = capacity[AutoSizeMember]
-				if ( (sequenceOf(autoSize.reference) + autoSize.dependent.asSequence()).any { ref -> mutableMembers.any { it.name == ref && !it.has(nullable) } } )
-					""
-				else if ( autoSize.exclusive )
+		val capacity = members.firstOrNull { it has AutoSizeMember && it[AutoSizeMember].let { it.atLeastOne || (it.dependent.isEmpty() && it.reference == m.name) } }
+		if ( capacity != null ) {
+			val autoSize = capacity[AutoSizeMember]
+			print(if ( m has nullable || autoSize.optional ) {
+				if ( autoSize.atLeastOne )
 					" if ( value != null ) n${capacity.name}($STRUCT, value.remaining());"
 				else
 					" n${capacity.name}($STRUCT, value == null ? 0 : value.remaining());"
 			} else
 				" n${capacity.name}($STRUCT, value.remaining());"
 			)
+		}
 	}
 
 	private fun PrintWriter.generateStaticSetters(

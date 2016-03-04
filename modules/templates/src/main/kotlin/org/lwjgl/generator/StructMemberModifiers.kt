@@ -4,19 +4,36 @@
  */
 package org.lwjgl.generator
 
+/*
+	required AutoSize + non-null reference: ref must not be null and size must not be 0.
+	optional AutoSize + non-null reference: ref may be null, if size is 0.
+
+	required AutoSize + nullable reference: ref may be null, even if size is not 0. Size must not be 0. (this is not validated, we assume the API does)
+	optional AutoSize + nullable reference: ref may be null, even if size is not 0. Size may be 0.
+
+	required atLeastOne AutoSize + nullable references: one of the references must not be null and size must not be 0.
+	optional atLeastOne AutoSize + nullable references: one of the references must not be null if size is not 0.
+ */
 class AutoSizeMember(
 	override val reference: String,
 	vararg val dependent: String,
 	/** If not null, the expression will be appended to the parameter. */
 	val factor: AutoSizeFactor?,
-	/** If true, only one of the references is valid, the rest will be null. */
-    val exclusive: Boolean,
-	/** If true, the instance setter for modified member will not be removed. */
-    val keepSetter: Boolean
+
+	/** If true, the auto-size value may be zero and referenced members can be null. */
+	val optional: Boolean,
+	/** If true, at least one of the nullable referenced members must not be null. */
+	val atLeastOne: Boolean
 ) : StructMemberModifier(), ReferenceModifier {
 	companion object : ModifierKey<AutoSizeMember>
 
 	override val isSpecial = true
+
+	val references: Sequence<String> = sequenceOf(reference) + dependent.asSequence()
+
+	fun members(members: Sequence<StructMember>) = references.map { ref -> members.first { it.name == ref } }
+
+	fun keepSetter(members: Sequence<StructMember>) = (dependent.isNotEmpty() || members(members).any { it has NullableMember }) && !atLeastOne
 
 	override fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
@@ -35,9 +52,14 @@ fun Struct.AutoSize(
 	reference: String,
 	vararg dependent: String,
 	factor: AutoSizeFactor? = null,
-    exclusive: Boolean = false,
-	keepSetter: Boolean = dependent.isNotEmpty() && !exclusive
-) = AutoSizeMember(reference, *dependent, factor = factor, exclusive = exclusive, keepSetter = keepSetter)
+	optional: Boolean = false,
+	atLeastOne: Boolean = false
+) = AutoSizeMember(
+	reference, *dependent,
+	factor = factor,
+	optional = optional,
+	atLeastOne = atLeastOne
+)
 
 object NullableMember : StructMemberModifier() {
 	override val isSpecial = true
