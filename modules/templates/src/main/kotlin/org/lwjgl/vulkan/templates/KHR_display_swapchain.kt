@@ -14,7 +14,7 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
 	IntConstant(
 		"The extension specification version.",
 
-		"KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION"..9
+		"KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION" expr "9"
 	)
 
 	StringConstant(

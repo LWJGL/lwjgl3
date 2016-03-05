@@ -21,7 +21,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 	IntConstant(
 		"The extension specification version.",
 
-		"KHR_SURFACE_SPEC_VERSION"..25
+		"KHR_SURFACE_SPEC_VERSION" expr "25"
 	)
 
 	StringConstant(

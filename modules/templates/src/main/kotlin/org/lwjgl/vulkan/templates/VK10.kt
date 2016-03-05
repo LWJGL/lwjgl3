@@ -15,7 +15,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 	val major = 1
 	val minor = 0
-	val patch = 4
+	val patch = 5
 
 	IntConstant("The Vulkan major version number.", "VERSION_MAJOR" expr "$major")
 	IntConstant("The Vulkan minor version number.", "VERSION_MINOR" expr "$minor")
@@ -838,15 +838,67 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 	EnumConstant(
 		"VkDynamicState",
 
-		"DYNAMIC_STATE_VIEWPORT".enumExpr("", "0"),
-		"DYNAMIC_STATE_SCISSOR".enum(""),
-		"DYNAMIC_STATE_LINE_WIDTH".enum(""),
-		"DYNAMIC_STATE_DEPTH_BIAS".enum(""),
-		"DYNAMIC_STATE_BLEND_CONSTANTS".enum(""),
-		"DYNAMIC_STATE_DEPTH_BOUNDS".enum(""),
-		"DYNAMIC_STATE_STENCIL_COMPARE_MASK".enum(""),
-		"DYNAMIC_STATE_STENCIL_WRITE_MASK".enum(""),
-		"DYNAMIC_STATE_STENCIL_REFERENCE".enum(""),
+		"DYNAMIC_STATE_VIEWPORT".enumExpr(
+			"""
+			Indicates that the {@code pViewports} state in ##VkPipelineViewportStateCreateInfo will be ignored and must be set dynamically with
+			#CmdSetViewport() before any draw commands. The number of viewports used by a pipeline is still specified by the {@code viewportCount} member of
+			{@code VkPipelineViewportStateCreateInfo}.
+			""", "0"),
+		"DYNAMIC_STATE_SCISSOR".enum(
+			"""
+			Indicates that the {@code pScissors} state in ##VkPipelineViewportStateCreateInfo will be ignored and must be set dynamically with #CmdSetScissor()
+			before any draw commands. The number of scissor rectangles used by a pipeline is still specified by the {@code scissorCount} member of
+			{@code VkPipelineViewportStateCreateInfo}.
+			"""
+		),
+		"DYNAMIC_STATE_LINE_WIDTH".enum(
+			"""
+			Indicates that the {@code lineWidth} state in ##VkPipelineRasterizationStateCreateInfo will be ignored and must be set dynamically with
+			#CmdSetLineWidth() before any draw commands that generate line primitives for the rasterizer.
+			"""
+		),
+		"DYNAMIC_STATE_DEPTH_BIAS".enum(
+			"""
+			Indicates that the {@code depthBiasConstantFactor}, {@code depthBiasClamp} and {@code depthBiasSlopeFactor} states in
+			##VkPipelineRasterizationStateCreateInfo will be ignored and must be set dynamically with #CmdSetDepthBias() before any draws are performed with
+			{@code depthBiasEnable} in {@code VkPipelineRasterizationStateCreateInfo} set to #TRUE.
+			"""
+		),
+		"DYNAMIC_STATE_BLEND_CONSTANTS".enum(
+			"""
+			Indicates that the {@code blendConstants} state in ##VkPipelineColorBlendStateCreateInfo will be ignored and must be set dynamically with
+			#CmdSetBlendConstants() before any draws are performed with a pipeline state with {@code VkPipelineColorBlendAttachmentState} member
+			{@code blendEnable} set to #TRUE and any of the blend functions using a constant blend color.
+			"""
+		),
+		"DYNAMIC_STATE_DEPTH_BOUNDS".enum(
+			"""
+			Indicates that the {@code minDepthBounds} and {@code maxDepthBounds} states of ##VkPipelineDepthStencilStateCreateInfo will be ignored and must be
+			set dynamically with #CmdSetDepthBounds() before any draws are performed with a pipeline state with {@code VkPipelineDepthStencilStateCreateInfo}
+			member {@code depthBoundsTestEnable} set to #TRUE.
+			"""
+		),
+		"DYNAMIC_STATE_STENCIL_COMPARE_MASK".enum(
+			"""
+			Indicates that the {@code compareMask} state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and must be set
+			dynamically with #CmdSetStencilCompareMask() before any draws are performed with a pipeline state with
+			{@code VkPipelineDepthStencilStateCreateInfo} member {@code stencilTestEnable} set to #TRUE.
+			"""
+		),
+		"DYNAMIC_STATE_STENCIL_WRITE_MASK".enum(
+			"""
+			Indicates that the {@code writeMask} state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and must be set
+			dynamically with #CmdSetStencilWriteMask() before any draws are performed with a pipeline state with {@code VkPipelineDepthStencilStateCreateInfo}
+			member {@code stencilTestEnable} set to #TRUE.
+			"""
+		),
+		"DYNAMIC_STATE_STENCIL_REFERENCE".enum(
+			"""
+			Indicates that the reference state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and must be set dynamically
+			with #CmdSetStencilReference() before any draws are performed with a pipeline state with {@code VkPipelineDepthStencilStateCreateInfo} member
+			{@code stencilTestEnable} set to #TRUE.
+			"""
+		),
 		"DYNAMIC_STATE_BEGIN_RANGE".enumExpr("", "VK_DYNAMIC_STATE_VIEWPORT"),
 		"DYNAMIC_STATE_END_RANGE".enumExpr("", "VK_DYNAMIC_STATE_STENCIL_REFERENCE"),
 		"DYNAMIC_STATE_RANGE_SIZE".enumExpr("", "VK_DYNAMIC_STATE_STENCIL_REFERENCE - VK_DYNAMIC_STATE_VIEWPORT + 1"),
@@ -1184,7 +1236,7 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 		"SHADER_STAGE_GEOMETRY_BIT".enum("", 0x00000008),
 		"SHADER_STAGE_FRAGMENT_BIT".enum("", 0x00000010),
 		"SHADER_STAGE_COMPUTE_BIT".enum("", 0x00000020),
-		"SHADER_STAGE_ALL_GRAPHICS".enum("", 0x1F),
+		"SHADER_STAGE_ALL_GRAPHICS".enum("", 0x0000001F),
 		"SHADER_STAGE_ALL".enum("", 0x7FFFFFFF)
 	)
 
@@ -1194,7 +1246,7 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 		"CULL_MODE_NONE".enumExpr("", "0"),
 		"CULL_MODE_FRONT_BIT".enum("", 0x00000001),
 		"CULL_MODE_BACK_BIT".enum("", 0x00000002),
-		"CULL_MODE_FRONT_AND_BACK".enum("", 0x3)
+		"CULL_MODE_FRONT_AND_BACK".enum("", 0x00000003)
 	)
 
 	EnumConstant(
@@ -1284,7 +1336,7 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 
 		"STENCIL_FACE_FRONT_BIT".enum("", 0x00000001),
 		"STENCIL_FACE_BACK_BIT".enum("", 0x00000002),
-		"STENCIL_FRONT_AND_BACK".enum("", 0x3)
+		"STENCIL_FRONT_AND_BACK".enum("", 0x00000003)
 	)
 
 	GlobalCommand..VkResult(

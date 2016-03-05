@@ -17,7 +17,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 	IntConstant(
 		"The extension specification version.",
 
-		"KHR_SWAPCHAIN_SPEC_VERSION"..67
+		"KHR_SWAPCHAIN_SPEC_VERSION" expr "67"
 	)
 
 	StringConstant(
