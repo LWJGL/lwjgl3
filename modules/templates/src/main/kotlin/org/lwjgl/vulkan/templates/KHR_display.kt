@@ -33,10 +33,22 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 	EnumConstant(
 		"VkDisplayPlaneAlphaFlagBitsKHR",
 
-		"DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR".enum("", 0x00000001),
-		"DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR".enum("", 0x00000002),
-		"DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR".enum("", 0x00000004),
-		"DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR".enum("", 0x00000008)
+		"DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR".enum("The source image will be treated as opaque.", 0x00000001),
+		"DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR".enum("A global alpha value must be specified that will be applied to all pixels in the source image.", 0x00000002),
+		"DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR".enum(
+			"""
+			The alpha value will be determined by the alpha channel of the source image’s pixels. If the source format contains no alpha values, no blending
+			will be applied. The source alpha values are not premultiplied into the source image’s other color channels.
+			""",
+			0x00000004
+		),
+		"DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR".enum(
+			"""
+			This is equivalent to #DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR except the source alpha values are assumed to be premultiplied into the source image’s
+			other color channels.
+			""",
+			0x00000008
+		)
 	)
 
 	VkResult(

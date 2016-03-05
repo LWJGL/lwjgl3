@@ -30,17 +30,20 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 		"KHR_SURFACE_EXTENSION_NAME".."VK_KHR_surface"
 	)
 
-	IntConstant(
+	EnumConstant(
 		"VkResult",
 
-		"ERROR_SURFACE_LOST_KHR".expr("-1000000000"),
-		"ERROR_NATIVE_WINDOW_IN_USE_KHR".expr("-1000000001")
+		"ERROR_SURFACE_LOST_KHR".enumExpr("A surface is no longer available.", "-1000000000"),
+		"ERROR_NATIVE_WINDOW_IN_USE_KHR".enumExpr(
+			"The requested window is already connected to a VkSurfaceKHR, or to some other non-Vulkan API.",
+			"-1000000001"
+		)
 	)
 
 	EnumConstant(
 		"VkColorSpaceKHR",
 
-		"COLORSPACE_SRGB_NONLINEAR_KHR".enumExpr("", "0"),
+		"COLORSPACE_SRGB_NONLINEAR_KHR".enumExpr("The presentation engine supports the sRGB colorspace.", "0"),
 		"COLORSPACE_BEGIN_RANGE".enumExpr("", "VK_COLORSPACE_SRGB_NONLINEAR_KHR"),
 		"COLORSPACE_END_RANGE".enumExpr("", "VK_COLORSPACE_SRGB_NONLINEAR_KHR"),
 		"COLORSPACE_RANGE_SIZE".enumExpr("", "(VK_COLORSPACE_SRGB_NONLINEAR_KHR - VK_COLORSPACE_SRGB_NONLINEAR_KHR + 1)"),
@@ -50,9 +53,29 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 	EnumConstant(
 		"VkPresentModeKHR",
 
-		"PRESENT_MODE_IMMEDIATE_KHR".enumExpr("", "0"),
-		"PRESENT_MODE_MAILBOX_KHR".enum(""),
-		"PRESENT_MODE_FIFO_KHR".enum(""),
+		"PRESENT_MODE_IMMEDIATE_KHR".enumExpr(
+			"""
+			The presentation engine does not wait for a vertical blanking period to update the current image, meaning this mode $may result in visible tearing.
+			No internal queuing of presentation requests is needed, as the requests are applied immediately.
+			""",
+			"0"),
+		"PRESENT_MODE_MAILBOX_KHR".enum(
+			"""
+			The presentation engine waits for the next vertical blanking period to update the current image. Tearing $cannot be observed. An internal
+			single-entry queue is used to hold pending presentation requests. If the queue is full when a new presentation request is received, the new request
+			replaces the existing entry, and any images associated with the prior entry become available for re-use by the application. One request is removed
+			from the queue and processed during each vertical blanking period in which the queue is non-empty.
+			"""
+		),
+		"PRESENT_MODE_FIFO_KHR".enum(
+			"""
+			The presentation engine waits for the next vertical blanking period to update the current image. Tearing $cannot be observed. An internal queue
+			containing {@code (numSwapchainImages - 1)} entries, where {@code numSwapchainImages} is the number of presentable images in the swapchain, is used
+			to hold pending presentation requests. New requests are appended to the end of the queue, and one request is removed from the beginning of the
+			queue and processed during each vertical blanking period in which the queue is non-empty. This is the only value of {@code presentMode} that is
+			required to be supported.
+			"""
+		),
 		"PRESENT_MODE_FIFO_RELAXED_KHR".enum(""),
 		"PRESENT_MODE_BEGIN_RANGE".enumExpr("", "VK_PRESENT_MODE_IMMEDIATE_KHR"),
 		"PRESENT_MODE_END_RANGE".enumExpr("", "VK_PRESENT_MODE_FIFO_RELAXED_KHR"),
@@ -63,24 +86,62 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 	EnumConstant(
 		"VkSurfaceTransformFlagBitsKHR",
 
-		"SURFACE_TRANSFORM_IDENTITY_BIT_KHR".enum("", 0x00000001),
-		"SURFACE_TRANSFORM_ROTATE_90_BIT_KHR".enum("", 0x00000002),
-		"SURFACE_TRANSFORM_ROTATE_180_BIT_KHR".enum("", 0x00000004),
-		"SURFACE_TRANSFORM_ROTATE_270_BIT_KHR".enum("", 0x00000008),
-		"SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR".enum("", 0x00000010),
-		"SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR".enum("", 0x00000020),
-		"SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR".enum("", 0x00000040),
-		"SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR".enum("", 0x00000080),
-		"SURFACE_TRANSFORM_INHERIT_BIT_KHR".enum("", 0x00000100)
+		"SURFACE_TRANSFORM_IDENTITY_BIT_KHR".enum("The image content is presented without being transformed.", 0x00000001),
+		"SURFACE_TRANSFORM_ROTATE_90_BIT_KHR".enum("The image content is rotated 90 degrees clockwise.", 0x00000002),
+		"SURFACE_TRANSFORM_ROTATE_180_BIT_KHR".enum("The image content is rotated 180 degrees clockwise.", 0x00000004),
+		"SURFACE_TRANSFORM_ROTATE_270_BIT_KHR".enum("The image content is rotated 270 degrees clockwise.", 0x00000008),
+		"SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR".enum("The image content is mirrored horizontally.", 0x00000010),
+		"SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR".enum(
+			"The image content is mirrored horizontally, then rotated 90 degrees clockwise.",
+			0x00000020
+		),
+		"SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR".enum(
+			"The image content is mirrored horizontally, then rotated 180 degrees clockwise.",
+			0x00000040
+		),
+		"SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR".enum(
+			"The image content is mirrored horizontally, then rotated 270 degrees clockwise.",
+			0x00000080
+		),
+		"SURFACE_TRANSFORM_INHERIT_BIT_KHR".enum(
+			"The presentation transform is not specified, and is instead determined by platform-specific considerations and mechanisms outside Vulkan.",
+			0x00000100
+		)
 	)
 
 	EnumConstant(
 		"VkCompositeAlphaFlagBitsKHR",
 
-		"COMPOSITE_ALPHA_OPAQUE_BIT_KHR".enum("", 0x00000001),
-		"COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR".enum("", 0x00000002),
-		"COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR".enum("", 0x00000004),
-		"COMPOSITE_ALPHA_INHERIT_BIT_KHR".enum("", 0x00000008)
+		"COMPOSITE_ALPHA_OPAQUE_BIT_KHR".enum(
+			"""
+			The alpha channel, if it exists, of the images is ignored in the compositing process. Instead, the image is treated as if it has a constant alpha
+			of 1.0.
+			""",
+			0x00000001
+		),
+		"COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR".enum(
+			"""
+			The alpha channel, if it exists, of the images is respected in the compositing process. The non-alpha channels of the image are expected to already
+			be multiplied by the alpha channel by the application.
+			""",
+			0x00000002
+		),
+		"COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR".enum(
+			"""
+			The alpha channel, if it exists, of the images is respected in the compositing process. The non-alpha channels of the image are not expected to
+			already be multiplied by the alpha channel by the application; instead, the compositor will multiply the non-alpha channels of the image by the
+			alpha channel during compositing.
+			""",
+			0x00000004
+		),
+		"COMPOSITE_ALPHA_INHERIT_BIT_KHR".enum(
+			"""
+			The way in which the presentation engine treats the alpha channel in the images is unknown to the Vulkan API. Instead, the application is
+			responsible for setting the composite alpha blending mode using native window system commands. If the application does not set the blending mode
+			using native window system commands, then a platform-specific default will be used.
+			""",
+			0x00000008
+		)
 	)
 
 	void(

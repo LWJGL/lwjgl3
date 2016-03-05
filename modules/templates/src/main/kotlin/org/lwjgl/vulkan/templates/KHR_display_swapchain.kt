@@ -29,10 +29,13 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
 		"STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR" expr "1000003000"
 	)
 
-	IntConstant(
+	EnumConstant(
 		"VkResult",
 
-		"ERROR_INCOMPATIBLE_DISPLAY_KHR" expr "-1000003001"
+		"ERROR_INCOMPATIBLE_DISPLAY_KHR".enumExpr(
+			"The display used by a swapchain does not use the same presentable image layout, or is incompatible in a way that prevents sharing an image.",
+			"-1000003001"
+		)
 	)
 
 	VkResult(

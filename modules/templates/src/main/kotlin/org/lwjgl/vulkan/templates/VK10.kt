@@ -105,30 +105,34 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM" enum 0x7FFFFFFF
 	)
 
-	IntConstant(
+	EnumConstant(
 		"VkResult",
 
-		"SUCCESS" expr "0",
-		"NOT_READY" expr "1",
-		"TIMEOUT" expr "2",
-		"EVENT_SET" expr "3",
-		"EVENT_RESET" expr "4",
-		"INCOMPLETE" expr "5",
-		"ERROR_OUT_OF_HOST_MEMORY" expr "-1",
-		"ERROR_OUT_OF_DEVICE_MEMORY" expr "-2",
-		"ERROR_INITIALIZATION_FAILED" expr "-3",
-		"ERROR_DEVICE_LOST" expr "-4",
-		"ERROR_MEMORY_MAP_FAILED" expr "-5",
-		"ERROR_LAYER_NOT_PRESENT" expr "-6",
-		"ERROR_EXTENSION_NOT_PRESENT" expr "-7",
-		"ERROR_FEATURE_NOT_PRESENT" expr "-8",
-		"ERROR_INCOMPATIBLE_DRIVER" expr "-9",
-		"ERROR_TOO_MANY_OBJECTS" expr "-10",
-		"ERROR_FORMAT_NOT_SUPPORTED" expr "-11",
-		"RESULT_BEGIN_RANGE" expr "VK_ERROR_FORMAT_NOT_SUPPORTED",
-		"RESULT_END_RANGE" expr "VK_INCOMPLETE",
-		"RESULT_RANGE_SIZE" expr "VK_INCOMPLETE - VK_ERROR_FORMAT_NOT_SUPPORTED + 1",
-		"RESULT_MAX_ENUM"..0x7FFFFFFF
+		"SUCCESS".enumExpr("Command successfully completed.", "0"),
+		"NOT_READY".enumExpr("A fence or query has not yet completed.", "1"),
+		"TIMEOUT".enumExpr("A wait operation has not completed in the specified time.", "2"),
+		"EVENT_SET".enumExpr("An event is signaled.", "3"),
+		"EVENT_RESET".enumExpr("An event is unsignaled.", "4"),
+		"INCOMPLETE".enumExpr("A return array was too small for the result.", "5"),
+
+		"ERROR_OUT_OF_HOST_MEMORY".enumExpr("A host memory allocation has failed.", "-1"),
+		"ERROR_OUT_OF_DEVICE_MEMORY".enumExpr("A device memory allocation has failed.", "-2"),
+		"ERROR_INITIALIZATION_FAILED".enumExpr("Initialization of an object could not be completed for implementation-specific reasons.", "-3"),
+		"ERROR_DEVICE_LOST".enumExpr("The logical or physical device has been lost.", "-4"),
+		"ERROR_MEMORY_MAP_FAILED".enumExpr("Mapping of a memory object has failed.", "-5"),
+		"ERROR_LAYER_NOT_PRESENT".enumExpr("A requested layer is not present or could not be loaded.", "-6"),
+		"ERROR_EXTENSION_NOT_PRESENT".enumExpr("A requested extension is not supported.", "-7"),
+		"ERROR_FEATURE_NOT_PRESENT".enumExpr("A requested feature is not supported.", "-8"),
+		"ERROR_INCOMPATIBLE_DRIVER".enumExpr(
+			"The requested version of Vulkan is not supported by the driver or is otherwise incompatible for implementation-specific reasons.",
+			"-9"
+		),
+		"ERROR_TOO_MANY_OBJECTS".enumExpr("Too many objects of the type have already been created.", "-10"),
+		"ERROR_FORMAT_NOT_SUPPORTED".enumExpr("A requested format is not supported on this device.", "-11"),
+		"RESULT_BEGIN_RANGE".enumExpr("", "VK_ERROR_FORMAT_NOT_SUPPORTED"),
+		"RESULT_END_RANGE".enumExpr("", "VK_INCOMPLETE"),
+		"RESULT_RANGE_SIZE".enumExpr("", "VK_INCOMPLETE - VK_ERROR_FORMAT_NOT_SUPPORTED + 1"),
+		"RESULT_MAX_ENUM".enum("", 0x7FFFFFFF)
 	)
 
 	EnumConstant(
@@ -908,19 +912,83 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 	EnumConstant(
 		"VkFilter",
 
-		"FILTER_NEAREST".enumExpr("", "0"),
-		"FILTER_LINEAR".enum(""),
+		"FILTER_NEAREST".enumExpr(
+			"""
+			Nearest filtering.
+
+			Computes the integer texel coordinates that the unnormalized coordinates lie within:
+			${codeBlock("""
+i = floor(u)
+j = floor(v)
+k = floor(w)""")}
+			""",
+			"0"),
+		"FILTER_LINEAR".enum(
+			"""
+			Linear filtering.
+
+			Computes a set of neighboring coordinates which bound the unnormalized coordinates. The integer texel coordinates are combinations of
+			${code("i<sub>0</sub>")} or ${code("i<sub>1</sub>")}, ${code("j<sub>0</sub>")} or ${code("j<sub>1</sub>")}, ${code("k<sub>0</sub>")} or
+			${code("k<sub>1</sub>")}, as well as weights {@code α}, {@code β}, and {@code γ}.
+			${codeBlock("""
+i<sub>0</sub> = floor(u - 0.5)      i<sub>1</sub> = i<sub>0</sub> + 1
+j<sub>0</sub> = floor(v - 0.5)      j<sub>1</sub> = j<sub>0</sub> + 1
+k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
+
+α = frac(u - 0.5)
+β = frac(v - 0.5)
+γ = frac(w - 0.5)""")}
+			"""
+		),
 		"FILTER_BEGIN_RANGE".enumExpr("", "VK_FILTER_NEAREST"),
 		"FILTER_END_RANGE".enumExpr("", "VK_FILTER_LINEAR"),
 		"FILTER_RANGE_SIZE".enumExpr("", "VK_FILTER_LINEAR - VK_FILTER_NEAREST + 1"),
 		"FILTER_MAX_ENUM".enum("", 0x7FFFFFFF)
 	)
 
+	val baseLevel = "level<sub>base</sub>"
+
 	EnumConstant(
 		"VkSamplerMipmapMode",
 
-		"SAMPLER_MIPMAP_MODE_NEAREST".enumExpr("", "0"),
-		"SAMPLER_MIPMAP_MODE_LINEAR".enum(""),
+		"SAMPLER_MIPMAP_MODE_NEAREST".enumExpr(
+			"""
+			Texels are read from the image level {@code d}, where:
+
+			<table>
+			${tr(td(code("d = $baseLevel")), td(code("when λ &le; 0.5")))}
+			${tr(td(code("d = nearest(λ)")), td(code("when λ &gt; 0.5 && $baseLevel + λ &le; q + 0.5")))}
+			${tr(td(code("d = q")), td(code("when λ &gt; 0.5 && $baseLevel + λ &gt; q + 0.5")))}
+			</table>
+
+			and:
+
+			<table>
+			${tr(td(code("nearest(λ) = ceil($baseLevel + λ + 0.5) - 1,")), td("preferred"))}
+			${tr(td(code("nearest(λ) = floor($baseLevel + λ + 0.5),")), td("alternative"))}
+			</table>
+
+			and where {@code q} is the {@code levelCount} from the {@code subresourceRange} of the image view.
+			""", "0"),
+		"SAMPLER_MIPMAP_MODE_LINEAR".enum(
+			"""
+			Texels are read from image levels ${code("d<sub>hi</sub>")} and ${code("d<sub>lo</sub>")}, where:
+
+			<table>
+			${tr(td(code("d<sub>hi</sub> = q")), td(code("when $baseLevel + λ &ge; q")))}
+			${tr(td(code("d<sub>hi</sub> = floor($baseLevel + λ)")), td("otherwise"))}
+			</table>
+
+			and:
+
+			<table>
+			${tr(td(code("d<sub>lo</sub> = q")), td(code("when $baseLevel + λ &ge; q")))}
+			${tr(td(code("d<sub>lo</sub> = d<sub>hi</sub> + 1")), td("otherwise"))}
+			</table>
+
+			${code("δ = frac(λ)")} is the fractional value used for linear filtering between levels:
+			"""
+		),
 		"SAMPLER_MIPMAP_MODE_BEGIN_RANGE".enumExpr("", "VK_SAMPLER_MIPMAP_MODE_NEAREST"),
 		"SAMPLER_MIPMAP_MODE_END_RANGE".enumExpr("", "VK_SAMPLER_MIPMAP_MODE_LINEAR"),
 		"SAMPLER_MIPMAP_MODE_RANGE_SIZE".enumExpr("", "VK_SAMPLER_MIPMAP_MODE_LINEAR - VK_SAMPLER_MIPMAP_MODE_NEAREST + 1"),
@@ -930,11 +998,10 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 	EnumConstant(
 		"VkSamplerAddressMode",
 
-		"SAMPLER_ADDRESS_MODE_REPEAT".enumExpr("", "0"),
-		"SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT".enum(""),
-		"SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE".enum(""),
-		"SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".enum(""),
-		"SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE".enum(""),
+		"SAMPLER_ADDRESS_MODE_REPEAT".enumExpr("Indicates that the repeat wrap mode will be used.", "0"),
+		"SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT".enum("Indicates that the mirrored repeat wrap mode will be used."),
+		"SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE".enum("Indicates that the clamp to edge wrap mode will be used."),
+		"SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".enum("Indicates that the clamp to border wrap mode will be used."),
 		"SAMPLER_ADDRESS_MODE_BEGIN_RANGE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_REPEAT"),
 		"SAMPLER_ADDRESS_MODE_END_RANGE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER"),
 		"SAMPLER_ADDRESS_MODE_RANGE_SIZE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER - VK_SAMPLER_ADDRESS_MODE_REPEAT + 1"),
@@ -944,12 +1011,12 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 	EnumConstant(
 		"VkBorderColor",
 
-		"BORDER_COLOR_FLOAT_TRANSPARENT_BLACK".enumExpr("", "0"),
-		"BORDER_COLOR_INT_TRANSPARENT_BLACK".enum(""),
-		"BORDER_COLOR_FLOAT_OPAQUE_BLACK".enum(""),
-		"BORDER_COLOR_INT_OPAQUE_BLACK".enum(""),
-		"BORDER_COLOR_FLOAT_OPAQUE_WHITE".enum(""),
-		"BORDER_COLOR_INT_OPAQUE_WHITE".enum(""),
+		"BORDER_COLOR_FLOAT_TRANSPARENT_BLACK".enumExpr(code("(0.0, 0.0, 0.0, 0.0)"), "0"),
+		"BORDER_COLOR_INT_TRANSPARENT_BLACK".enum(code("(0, 0, 0, 0)")),
+		"BORDER_COLOR_FLOAT_OPAQUE_BLACK".enum(code("(0.0, 0.0, 0.0, 1.0)")),
+		"BORDER_COLOR_INT_OPAQUE_BLACK".enum(code("(0, 0, 0, 1)")),
+		"BORDER_COLOR_FLOAT_OPAQUE_WHITE".enum(code("(1.0, 1.0, 1.0, 1.0)")),
+		"BORDER_COLOR_INT_OPAQUE_WHITE".enum(code("(1, 1, 1, 1)")),
 		"BORDER_COLOR_BEGIN_RANGE".enumExpr("", "VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK"),
 		"BORDER_COLOR_END_RANGE".enumExpr("", "VK_BORDER_COLOR_INT_OPAQUE_WHITE"),
 		"BORDER_COLOR_RANGE_SIZE".enumExpr("", "VK_BORDER_COLOR_INT_OPAQUE_WHITE - VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK + 1"),
@@ -979,9 +1046,13 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 	EnumConstant(
 		"VkAttachmentLoadOp",
 
-		"ATTACHMENT_LOAD_OP_LOAD".enumExpr("", "0"),
-		"ATTACHMENT_LOAD_OP_CLEAR".enum(""),
-		"ATTACHMENT_LOAD_OP_DONT_CARE".enum(""),
+		"ATTACHMENT_LOAD_OP_LOAD".enumExpr("Means the contents within the render area will be preserved.", "0"),
+		"ATTACHMENT_LOAD_OP_CLEAR".enum(
+			"Means the contents within the render area will be cleared to a uniform value, which is specified when a render pass instance is begun."
+		),
+		"ATTACHMENT_LOAD_OP_DONT_CARE".enum(
+			"Means the contents within the area need not be preserved; the contents of the attachment will be undefined inside the render area."
+		),
 		"ATTACHMENT_LOAD_OP_BEGIN_RANGE".enumExpr("", "VK_ATTACHMENT_LOAD_OP_LOAD"),
 		"ATTACHMENT_LOAD_OP_END_RANGE".enumExpr("", "VK_ATTACHMENT_LOAD_OP_DONT_CARE"),
 		"ATTACHMENT_LOAD_OP_RANGE_SIZE".enumExpr("", "VK_ATTACHMENT_LOAD_OP_DONT_CARE - VK_ATTACHMENT_LOAD_OP_LOAD + 1"),
@@ -991,8 +1062,19 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 	EnumConstant(
 		"VkAttachmentStoreOp",
 
-		"ATTACHMENT_STORE_OP_STORE".enumExpr("", "0"),
-		"ATTACHMENT_STORE_OP_DONT_CARE".enum(""),
+		"ATTACHMENT_STORE_OP_STORE".enumExpr(
+			"""
+			Means the contents within the render area are written to memory and will be available for reading after the render pass instance completes once the
+			writes have been synchronized with #ACCESS_COLOR_ATTACHMENT_WRITE_BIT (for color attachments) or #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT (for
+			depth/stencil attachments).
+			""", "0"
+		),
+		"ATTACHMENT_STORE_OP_DONT_CARE".enum(
+			"""
+			Means the contents within the render area are not needed after rendering, and may be discarded; the contents of the attachment will be undefined
+			inside the render area.
+			"""
+		),
 		"ATTACHMENT_STORE_OP_BEGIN_RANGE".enumExpr("", "VK_ATTACHMENT_STORE_OP_STORE"),
 		"ATTACHMENT_STORE_OP_END_RANGE".enumExpr("", "VK_ATTACHMENT_STORE_OP_DONT_CARE"),
 		"ATTACHMENT_STORE_OP_RANGE_SIZE".enumExpr("", "VK_ATTACHMENT_STORE_OP_DONT_CARE - VK_ATTACHMENT_STORE_OP_STORE + 1"),
@@ -1035,8 +1117,17 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 	EnumConstant(
 		"VkSubpassContents",
 
-		"SUBPASS_CONTENTS_INLINE".enumExpr("", "0"),
-		"SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS".enum(""),
+		"SUBPASS_CONTENTS_INLINE".enumExpr(
+			"""
+			The contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers must not be executed within the
+			subpass.
+			""", "0"),
+		"SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS".enum(
+			"""
+			The contents are recorded in secondary command buffers that will be called from the primary command buffer, and #CmdExecuteCommands() is the only
+			valid command on the command buffer until #CmdNextSubpass() or #CmdEndRenderPass().
+			"""
+		),
 		"SUBPASS_CONTENTS_BEGIN_RANGE".enumExpr("", "VK_SUBPASS_CONTENTS_INLINE"),
 		"SUBPASS_CONTENTS_END_RANGE".enumExpr("", "VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS"),
 		"SUBPASS_CONTENTS_RANGE_SIZE".enumExpr("", "VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS - VK_SUBPASS_CONTENTS_INLINE + 1"),
@@ -1046,101 +1137,289 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 	EnumConstant(
 		"VkFormatFeatureFlagBits",
 
-		"FORMAT_FEATURE_SAMPLED_IMAGE_BIT".enum("", 0x00000001),
-		"FORMAT_FEATURE_STORAGE_IMAGE_BIT".enum("", 0x00000002),
-		"FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT".enum("", 0x00000004),
-		"FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT".enum("", 0x00000008),
-		"FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT".enum("", 0x00000010),
-		"FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT".enum("", 0x00000020),
-		"FORMAT_FEATURE_VERTEX_BUFFER_BIT".enum("", 0x00000040),
-		"FORMAT_FEATURE_COLOR_ATTACHMENT_BIT".enum("", 0x00000080),
-		"FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT".enum("", 0x00000100),
-		"FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT".enum("", 0x00000200),
-		"FORMAT_FEATURE_BLIT_SRC_BIT".enum("", 0x00000400),
-		"FORMAT_FEATURE_BLIT_DST_BIT".enum("", 0x00000800),
-		"FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT".enum("", 0x00001000)
+		"FORMAT_FEATURE_SAMPLED_IMAGE_BIT".enum("{@code VkImageView} $can be sampled from.", 0x00000001),
+		"FORMAT_FEATURE_STORAGE_IMAGE_BIT".enum("{@code VkImageView} $can be used as storage image.", 0x00000002),
+		"FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT".enum("{@code VkImageView} $can be used as storage image that supports atomic operations.", 0x00000004),
+		"FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT".enum(
+			"Format $can be used to create a {@code VkBufferView} that $can be bound to a #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER descriptor.",
+			0x00000008
+		),
+		"FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT".enum(
+			"Format $can be used to create a {@code VkBufferView} that $can be bound to a #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER descriptor.",
+			0x00000010
+		),
+		"FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT".enum(
+			"Atomic operations are supported on #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER with this format.",
+			0x00000020
+		),
+		"FORMAT_FEATURE_VERTEX_BUFFER_BIT".enum(
+			"Format $can be used as a vertex attribute format (##VkVertexInputAttributeDescription{@code .format}).",
+			0x00000040
+		),
+		"FORMAT_FEATURE_COLOR_ATTACHMENT_BIT".enum("{@code VkImageView} $can be used as a framebuffer color attachment and as an input attachment.", 0x00000080),
+		"FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT".enum(
+			"{@code VkImageView} $can be used as a framebuffer color attachment that supports blending and as an input attachment.",
+			0x00000100
+		),
+		"FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT".enum(
+			"{@code VkImageView} 4can be used as a framebuffer depth/stencil attachment and as an input attachment.",
+			0x00000200
+		),
+		"FORMAT_FEATURE_BLIT_SRC_BIT".enum("{@code VkImage} $can be used as {@code srcImage} for the #CmdBlitImage() command.", 0x00000400),
+		"FORMAT_FEATURE_BLIT_DST_BIT".enum("{@code VkImage} $can be used as {@code dstImage} for the #CmdBlitImage() command.", 0x00000800),
+		"FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT".enum(
+			"""
+			{@code VkImage} $can be used with a sampler that has either of {@code magFilter} or {@code minFilter} set to #FILTER_LINEAR, or {@code mipmapMode}
+			set to #SAMPLER_MIPMAP_MODE_LINEAR. This bit $must only be exposed for formats that also support the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT.
+
+			If the format being queried is a depth/stencil format, this bit only indicates that the depth aspect (not the stencil aspect) supports linear
+			filtering, and that linear filtering of the depth aspect is supported whether depth compare is enabled in the sampler or not. If this bit is not
+			present, linear filtering with depth compare disabled is unsupported and linear filtering with depth compare enabled is supported, but $may compute
+			the filtered value in an implementation-dependent manner which differs from the normal rules of linear filtering. The resulting value $must be in
+			the range {@code [0,1]} and should be proportional to, or a weighted average of, the number of comparison passes or failures.
+			""",
+			0x00001000
+		)
 	)
 
 	EnumConstant(
 		"VkImageUsageFlagBits",
 
-		"IMAGE_USAGE_TRANSFER_SRC_BIT".enum("", 0x00000001),
-		"IMAGE_USAGE_TRANSFER_DST_BIT".enum("", 0x00000002),
-		"IMAGE_USAGE_SAMPLED_BIT".enum("", 0x00000004),
-		"IMAGE_USAGE_STORAGE_BIT".enum("", 0x00000008),
-		"IMAGE_USAGE_COLOR_ATTACHMENT_BIT".enum("", 0x00000010),
-		"IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT".enum("", 0x00000020),
-		"IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT".enum("", 0x00000040),
-		"IMAGE_USAGE_INPUT_ATTACHMENT_BIT".enum("", 0x00000080)
+		"IMAGE_USAGE_TRANSFER_SRC_BIT".enum("Indicates that the image $can be used as the source of a transfer command.", 0x00000001),
+		"IMAGE_USAGE_TRANSFER_DST_BIT".enum("Indicates that the image $can be used as the destination of a transfer command.", 0x00000002),
+		"IMAGE_USAGE_SAMPLED_BIT".enum(
+			"""
+			Indicates that the image $can be used to create a {@code VkImageView} suitable for occupying a {@code VkDescriptorSet} slot either of type
+			#DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and be sampled by a shader.
+			""",
+			0x00000004
+		),
+		"IMAGE_USAGE_STORAGE_BIT".enum(
+			"""
+			Indicates that the image $can be used to create a {@code VkImageView} suitable for occupying a {@code VkDescriptorSet} slot of type
+			#DESCRIPTOR_TYPE_STORAGE_IMAGE.
+			""",
+			0x00000008
+		),
+		"IMAGE_USAGE_COLOR_ATTACHMENT_BIT".enum(
+			"Indicates that the image $can be used to create a {@code VkImageView} suitable for use as a color or resolve attachment in a {@code VkFramebuffer}.",
+			0x00000010
+		),
+		"IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT".enum(
+			"Indicates that the image $can be used to create a {@code VkImageView} suitable for use as a depth/stencil attachment in a {@code VkFramebuffer}.",
+			0x00000020
+		),
+		"IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT".enum(
+			"""
+			Indicates that the memory bound to this image will have been allocated with the #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT. If this is set, then bits
+			other than #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and #IMAGE_USAGE_INPUT_ATTACHMENT_BIT $must_not be set.
+			""",
+			0x00000040
+		),
+		"IMAGE_USAGE_INPUT_ATTACHMENT_BIT".enum(
+			"""
+			Indicates that the image $can be used to create a {@code VkImageView} suitable for occupying {@code VkDescriptorSet} slot of type
+			#DESCRIPTOR_TYPE_INPUT_ATTACHMENT; be read from a shader as an input attachment; and be used as an input attachment in a framebuffer.
+			""",
+			0x00000080
+		)
 	)
 
 	EnumConstant(
 		"VkImageCreateFlagBits",
 
-		"IMAGE_CREATE_SPARSE_BINDING_BIT".enum("", 0x00000001),
-		"IMAGE_CREATE_SPARSE_RESIDENCY_BIT".enum("", 0x00000002),
-		"IMAGE_CREATE_SPARSE_ALIASED_BIT".enum("", 0x00000004),
-		"IMAGE_CREATE_MUTABLE_FORMAT_BIT".enum("", 0x00000008),
-		"IMAGE_CREATE_CUBE_COMPATIBLE_BIT".enum("", 0x00000010)
+		"IMAGE_CREATE_SPARSE_BINDING_BIT".enum("Indicates that the image will be backed using sparse memory binding.", 0x00000001),
+		"IMAGE_CREATE_SPARSE_RESIDENCY_BIT".enum("Indicates that the image $can be partially backed using sparse memory binding.", 0x00000002),
+		"IMAGE_CREATE_SPARSE_ALIASED_BIT".enum(
+			"""
+			Indicates that the image will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another image (or
+			another portion of the same image). Sparse images created with this flag must also be created with the #IMAGE_CREATE_SPARSE_RESIDENCY_BIT.
+			""",
+			0x00000004
+		),
+		"IMAGE_CREATE_MUTABLE_FORMAT_BIT".enum(
+			"Indicates that the image $can be used to create a {@code VkImageView} with a different format from the image.",
+			0x00000008
+		),
+		"IMAGE_CREATE_CUBE_COMPATIBLE_BIT".enum(
+			"Indicates that the image $can be used to create a {@code VkImageView} of type #IMAGE_VIEW_TYPE_CUBE or #IMAGE_VIEW_TYPE_CUBE_ARRAY.",
+			0x00000010
+		)
 	)
 
 	EnumConstant(
 		"VkSampleCountFlagBits",
 
-		"SAMPLE_COUNT_1_BIT".enum("", 0x00000001),
-		"SAMPLE_COUNT_2_BIT".enum("", 0x00000002),
-		"SAMPLE_COUNT_4_BIT".enum("", 0x00000004),
-		"SAMPLE_COUNT_8_BIT".enum("", 0x00000008),
-		"SAMPLE_COUNT_16_BIT".enum("", 0x00000010),
-		"SAMPLE_COUNT_32_BIT".enum("", 0x00000020),
-		"SAMPLE_COUNT_64_BIT".enum("", 0x00000040)
+		"SAMPLE_COUNT_1_BIT".enum(
+			"""
+			1 sample per pixel. Standard sample locations:
+			${codeBlock("(0.5, 0.5)")}
+			""",
+			0x00000001
+		),
+		"SAMPLE_COUNT_2_BIT".enum(
+			"""
+			2 samples per pixel. Standard sample locations:
+			${codeBlock("""
+(0.25, 0.25)
+(0.75, 0.75)""")}
+			""",
+			0x00000002
+		),
+		"SAMPLE_COUNT_4_BIT".enum(
+			"""
+			4 samples per pixel. Standard sample locations:
+			${codeBlock("""
+(0.375, 0.125)
+(0.875, 0.375)
+(0.125, 0.625)
+(0.625, 0.875)""")}
+			""",
+			0x00000004
+		),
+		"SAMPLE_COUNT_8_BIT".enum(
+			"""
+			8 samples per pixel. Standard sample locations:
+			${codeBlock("""
+(0.5625, 0.3125)
+(0.4375, 0.6875)
+(0.8125, 0.5625)
+(0.3125, 0.1875)
+(0.1875, 0.8125)
+(0.0625, 0.4375)
+(0.6875, 0.9375)
+(0.9375, 0.0625)""")}
+			""",
+			0x00000008
+		),
+		"SAMPLE_COUNT_16_BIT".enum(
+			"""
+			16 samples per pixel. Standard sample locations:
+			${codeBlock("""
+(0.5625, 0.5625)
+(0.4375, 0.3125)
+(0.3125, 0.625)
+(0.75, 0.4375)
+(0.1875, 0.375)
+(0.625, 0.8125)
+(0.8125, 0.6875)
+(0.6875, 0.1875)
+(0.375, 0.875)
+(0.5, 0.0625)
+(0.25, 0.125)
+(0.125, 0.75)
+(0.0, 0.5)
+(0.9375, 0.25)
+(0.875, 0.9375)
+(0.0625, 0.0)""")}
+			""",
+			0x00000010
+		),
+		"SAMPLE_COUNT_32_BIT".enum("32 samples per pixel.", 0x00000020),
+		"SAMPLE_COUNT_64_BIT".enum("64 samples per pixel.", 0x00000040)
 	)
 
 	EnumConstant(
 		"VkQueueFlagBits",
 
-		"QUEUE_GRAPHICS_BIT".enum("", 0x00000001),
-		"QUEUE_COMPUTE_BIT".enum("", 0x00000002),
-		"QUEUE_TRANSFER_BIT".enum("", 0x00000004),
-		"QUEUE_SPARSE_BINDING_BIT".enum("", 0x00000008)
+		"QUEUE_GRAPHICS_BIT".enum("If set, then the queues in this queue family support graphics operations.", 0x00000001),
+		"QUEUE_COMPUTE_BIT".enum("If set, then the queues in this queue family support compute operations.", 0x00000002),
+		"QUEUE_TRANSFER_BIT".enum("If set, then the queues in this queue family support transfer operations.", 0x00000004),
+		"QUEUE_SPARSE_BINDING_BIT".enum(
+			"""
+			If set, then the queues in this queue family support sparse memory management operations. If any of the sparse resource features are enabled, then
+			at least one queue family must support this bit.
+			""",
+			0x00000008
+		)
 	)
 
 	EnumConstant(
 		"VkMemoryPropertyFlagBits",
 
-		"MEMORY_PROPERTY_DEVICE_LOCAL_BIT".enum("", 0x00000001),
-		"MEMORY_PROPERTY_HOST_VISIBLE_BIT".enum("", 0x00000002),
-		"MEMORY_PROPERTY_HOST_COHERENT_BIT".enum("", 0x00000004),
-		"MEMORY_PROPERTY_HOST_CACHED_BIT".enum("", 0x00000008),
-		"MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT".enum("", 0x00000010)
+		"MEMORY_PROPERTY_DEVICE_LOCAL_BIT".enum(
+			"""
+			If set, memory allocated with this type is the most efficient for device access. This property will only be set for memory types belonging to heaps
+			with the #MEMORY_HEAP_DEVICE_LOCAL_BIT set.
+			""", 0x00000001),
+		"MEMORY_PROPERTY_HOST_VISIBLE_BIT".enum(
+			"If set, memory allocated with this type can be mapped using #MapMemory() so that it can be accessed on the host.",
+			0x00000002
+		),
+		"MEMORY_PROPERTY_HOST_COHERENT_BIT".enum(
+			"""
+			If set, host cache management commands #FlushMappedMemoryRanges() and #InvalidateMappedMemoryRanges() are not needed to make host writes visible to
+			the device or device writes visible to the host, respectively.
+			""",
+			0x00000004
+		),
+		"MEMORY_PROPERTY_HOST_CACHED_BIT".enum(
+			"""
+			If set, memory allocated with this type is cached on the host. Host memory accesses to uncached memory are slower than to cached memory, however
+			uncached memory is always host coherent.
+			""",
+			0x00000008
+		),
+		"MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT".enum(
+			"""
+			If set, the memory type only allows device access to the memory. Memory types must not have both #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT and
+			#MEMORY_PROPERTY_HOST_VISIBLE_BIT set. Additionally, the object's backing memory may be provided by the implementation lazily.
+			""",
+			0x00000010
+		)
 	)
 
 	EnumConstant(
 		"VkMemoryHeapFlagBits",
 
-		"MEMORY_HEAP_DEVICE_LOCAL_BIT".enum("", 0x00000001)
+		"MEMORY_HEAP_DEVICE_LOCAL_BIT".enum(
+			"""
+			Means the heap corresponds to device local memory. Device local memory may have different performance characteristics than host local memory, and
+			may support different memory property flags.
+			""",
+			0x00000001
+		)
 	)
 
 	EnumConstant(
 		"VkPipelineStageFlagBits",
 
-		"PIPELINE_STAGE_TOP_OF_PIPE_BIT".enum("", 0x00000001),
-		"PIPELINE_STAGE_DRAW_INDIRECT_BIT".enum("", 0x00000002),
-		"PIPELINE_STAGE_VERTEX_INPUT_BIT".enum("", 0x00000004),
-		"PIPELINE_STAGE_VERTEX_SHADER_BIT".enum("", 0x00000008),
-		"PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT".enum("", 0x00000010),
-		"PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT".enum("", 0x00000020),
-		"PIPELINE_STAGE_GEOMETRY_SHADER_BIT".enum("", 0x00000040),
-		"PIPELINE_STAGE_FRAGMENT_SHADER_BIT".enum("", 0x00000080),
-		"PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT".enum("", 0x00000100),
-		"PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT".enum("", 0x00000200),
-		"PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT".enum("", 0x00000400),
-		"PIPELINE_STAGE_COMPUTE_SHADER_BIT".enum("", 0x00000800),
-		"PIPELINE_STAGE_TRANSFER_BIT".enum("", 0x00001000),
-		"PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT".enum("", 0x00002000),
-		"PIPELINE_STAGE_HOST_BIT".enum("", 0x00004000),
-		"PIPELINE_STAGE_ALL_GRAPHICS_BIT".enum("", 0x00008000),
-		"PIPELINE_STAGE_ALL_COMMANDS_BIT".enum("", 0x00010000)
+		"PIPELINE_STAGE_TOP_OF_PIPE_BIT".enum("Stage of the pipeline where commands are initially received by the queue.", 0x00000001),
+		"PIPELINE_STAGE_DRAW_INDIRECT_BIT".enum("Stage of the pipeline where Draw/DispatchIndirect data structures are consumed.", 0x00000002),
+		"PIPELINE_STAGE_VERTEX_INPUT_BIT".enum("Stage of the pipeline where vertex and index buffers are consumed.", 0x00000004),
+		"PIPELINE_STAGE_VERTEX_SHADER_BIT".enum("Vertex shader stage.", 0x00000008),
+		"PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT".enum("Tessellation control shader stage.", 0x00000010),
+		"PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT".enum("Tessellation evaluation shader stage.", 0x00000020),
+		"PIPELINE_STAGE_GEOMETRY_SHADER_BIT".enum("Geometry shader stage.", 0x00000040),
+		"PIPELINE_STAGE_FRAGMENT_SHADER_BIT".enum("Fragment shader stage.", 0x00000080),
+		"PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT".enum(
+			"Stage of the pipeline where early fragment tests (depth and stencil tests before fragment shading) are performed.",
+			0x00000100
+		),
+		"PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT".enum(
+			"Stage of the pipeline where late fragment tests (depth and stencil tests after fragment shading) are performed.",
+			0x00000200
+		),
+		"PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT".enum(
+			"""
+			Stage of the pipeline after blending where the final color values are output from the pipeline. This stage also includes resolve operations that
+			occur at the end of a subpass. Note that this does not necessarily indicate that the values have been committed to memory.
+			""",
+			0x00000400
+		),
+		"PIPELINE_STAGE_COMPUTE_SHADER_BIT".enum("Execution of a compute shader.", 0x00000800),
+		"PIPELINE_STAGE_TRANSFER_BIT".enum(
+			"""
+			Execution of copy commands. This includes the operations resulting from all transfer commands. The set of transfer commands comprises
+			#CmdCopyBuffer(), #CmdCopyImage(), #CmdBlitImage(), #CmdCopyBufferToImage(), #CmdCopyImageToBuffer(), #CmdUpdateBuffer(), #CmdFillBuffer(),
+			#CmdClearColorImage(), #CmdClearDepthStencilImage(), #CmdResolveImage(), and #CmdCopyQueryPoolResults().
+			""",
+			0x00001000
+		),
+		"PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT".enum("Final stage in the pipeline where commands complete execution.", 0x00002000),
+		"PIPELINE_STAGE_HOST_BIT".enum("A pseudo-stage indicating execution on the host of reads/writes of device memory.", 0x00004000),
+		"PIPELINE_STAGE_ALL_GRAPHICS_BIT".enum("Execution of all graphics pipeline stages.", 0x00008000),
+		"PIPELINE_STAGE_ALL_COMMANDS_BIT".enum("Execution of all stages supported on the queue.", 0x00010000)
 	)
 
 	EnumConstant(
@@ -1155,76 +1434,219 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 	EnumConstant(
 		"VkSparseImageFormatFlagBits",
 
-		"SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT".enum("", 0x00000001),
-		"SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT".enum("", 0x00000002),
-		"SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT".enum("", 0x00000004)
+		"SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT".enum("If set, the image uses a single mip tail region for all array layers.", 0x00000001),
+		"SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT".enum(
+			"If set, the first mip level that is not an exact multiple of the sparse image block size begins the mip tail region.",
+			0x00000002
+		),
+		"SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT".enum(
+			"""
+			If set, the image uses a non-standard sparse block size, and the imageGranularity values do not match the standard block size for the given pixel
+			format.
+			""",
+			0x00000004
+		)
 	)
 
 	EnumConstant(
 		"VkSparseMemoryBindFlagBits",
 
-		"SPARSE_MEMORY_BIND_METADATA_BIT".enum("", 0x00000001)
+		"SPARSE_MEMORY_BIND_METADATA_BIT".enum("Is used to indicate that the memory being bound is only for the metadata aspect.", 0x00000001)
 	)
 
 	EnumConstant(
 		"VkFenceCreateFlagBits",
 
-		"FENCE_CREATE_SIGNALED_BIT".enum("", 0x00000001)
+		"FENCE_CREATE_SIGNALED_BIT".enum(
+			"If set, then the fence object is created in the signaled state. Otherwise it is created in the unsignaled state.",
+			0x00000001
+		)
 	)
 
 	EnumConstant(
 		"VkQueryPipelineStatisticFlagBits",
 
-		"QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT".enum("", 0x00000001),
-		"QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT".enum("", 0x00000002),
-		"QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT".enum("", 0x00000004),
-		"QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT".enum("", 0x00000008),
-		"QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT".enum("", 0x00000010),
-		"QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT".enum("", 0x00000020),
-		"QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT".enum("", 0x00000040),
-		"QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT".enum("", 0x00000080),
-		"QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT".enum("", 0x00000100),
-		"QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT".enum("", 0x00000200),
-		"QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT".enum("", 0x00000400)
+		"QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT".enum(
+			"""
+			If set, queries managed by the pool will count the number of vertices processed by the input assembly stage. Vertices corresponding to incomplete
+			primitives may contribute to the count.
+			""",
+			0x00000001
+		),
+		"QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT".enum(
+			"""
+			If set, queries managed by the pool will count the number of primitives processed by the input assembly stage. If primitive restart is enabled,
+			restarting the primitive topology has no effect on the count. Incomplete primitives may be counted.
+			""",
+			0x00000002
+		),
+		"QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT".enum(
+			"""
+			If set, queries managed by the pool will count the number of vertex shader invocations. This counter’s value is incremented each time a vertex
+			shader is invoked.
+			""",
+			0x00000004
+		),
+		"QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT".enum(
+			"""
+			If set, queries managed by the pool will count the number of geometry shader invocations. This counter’s value is incremented each time a geometry
+			shader is invoked. In the case of instanced geometry shaders, the geometry shader invocations count is incremented for each separate instanced
+			invocation.
+			""",
+			0x00000008
+		),
+		"QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT".enum(
+			"""
+			If set, queries managed by the pool will count the number of primitives generated by geometry shader invocations. The counter’s value is
+			incremented each time the geometry shader emits a primitive. Restarting primitive topology using the SPIR-V instructions {@code OpEndPrimitive} or
+			{@code OpEndStreamPrimitive} has no effect on the geometry shader output primitives count.
+			""",
+			0x00000010
+		),
+		"QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT".enum(
+			"""
+			If set, queries managed by the pool will count the number of primitives processed by the Primitive Clipping stage of the pipeline. The counter’s
+			value is incremented each time a primitive reaches the primitive clipping stage.
+			""",
+			0x00000020
+		),
+		"QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT".enum(
+			"""
+			IF set, queries managed by the pool will count the number of primitives output by the Primitive Clipping stage of the pipeline. The counter’s value
+			is incremented each time a primitive passes the primitive clipping stage. The actual number of primitives output by the primitive clipping stage
+			for a particular input primitive is implementation-dependent but must satisfy the following conditions:
+			${ul(
+				"If at least one vertex of the input primitive lies inside the clipping volume, the counter is incremented by one or more.",
+				"Otherwise, the counter is incremented by zero or more."
+			)}
+			""",
+			0x00000040
+		),
+		"QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT".enum(
+			"""
+			IF set, queries managed by the pool will count the number of fragment shader invocations. The counter’s value is incremented each time the fragment
+			shader is invoked.
+			""",
+			0x00000080
+		),
+		"QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT".enum(
+			"""
+			If set, queries managed by the pool will count the number of patches processed by the tessellation control shader. The counter’s value is
+			incremented once for each patch for which a tessellation control shader is invoked.
+			""",
+			0x00000100
+		),
+		"QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT".enum(
+			"""
+			If set, queries managed by the pool will count the number of invocations of the tessellation evaluation shader. The counter’s value is incremented
+			each time the tessellation evaluation shader is invoked.
+			""",
+			0x00000200
+		),
+		"QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT".enum(
+			"""
+			If set, queries managed by the pool will count the number of compute shader invocations. The counter’s value is incremented every time the compute
+			shader is invoked. Implementations may skip the execution of certain compute shader invocations or execute additional compute shader invocations
+			for implementation-dependent reasons as long as the results of rendering otherwise remain unchanged.
+			""",
+			0x00000400
+		)
 	)
 
 	EnumConstant(
 		"VkQueryResultFlagBits",
 
-		"QUERY_RESULT_64_BIT".enum("", 0x00000001),
-		"QUERY_RESULT_WAIT_BIT".enum("", 0x00000002),
-		"QUERY_RESULT_WITH_AVAILABILITY_BIT".enum("", 0x00000004),
-		"QUERY_RESULT_PARTIAL_BIT".enum("", 0x00000008)
+		"QUERY_RESULT_64_BIT".enum(
+			"""
+			Indicates the results will be written as an array of 64-bit unsigned integer values. If this bit is not set, the results will be written as an
+			array of 32-bit unsigned integer values.
+			""",
+			0x00000001
+		),
+		"QUERY_RESULT_WAIT_BIT".enum("Indicates that Vulkan will wait for each query’s status to become available before retrieving its results.", 0x00000002),
+		"QUERY_RESULT_WITH_AVAILABILITY_BIT".enum("Indicates that the availability status accompanies the results.", 0x00000004),
+		"QUERY_RESULT_PARTIAL_BIT".enum("Indicates that returning partial results is acceptable.", 0x00000008)
 	)
 
 	EnumConstant(
 		"VkBufferCreateFlagBits",
 
-		"BUFFER_CREATE_SPARSE_BINDING_BIT".enum("", 0x00000001),
-		"BUFFER_CREATE_SPARSE_RESIDENCY_BIT".enum("", 0x00000002),
-		"BUFFER_CREATE_SPARSE_ALIASED_BIT".enum("", 0x00000004)
+		"BUFFER_CREATE_SPARSE_BINDING_BIT".enum("Indicates that the buffer will be backed using sparse memory binding.", 0x00000001),
+		"BUFFER_CREATE_SPARSE_RESIDENCY_BIT".enum("Indicates that the buffer $can be partially backed using sparse memory binding.", 0x00000002),
+		"BUFFER_CREATE_SPARSE_ALIASED_BIT".enum(
+			"""
+			Iindicates that the buffer will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another buffer
+			(or another portion of the same buffer).
+			""",
+			0x00000004
+		)
 	)
 
 	EnumConstant(
 		"VkBufferUsageFlagBits",
 
-		"BUFFER_USAGE_TRANSFER_SRC_BIT".enum("", 0x00000001),
-		"BUFFER_USAGE_TRANSFER_DST_BIT".enum("", 0x00000002),
-		"BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT".enum("", 0x00000004),
-		"BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT".enum("", 0x00000008),
-		"BUFFER_USAGE_UNIFORM_BUFFER_BIT".enum("", 0x00000010),
-		"BUFFER_USAGE_STORAGE_BUFFER_BIT".enum("", 0x00000020),
-		"BUFFER_USAGE_INDEX_BUFFER_BIT".enum("", 0x00000040),
-		"BUFFER_USAGE_VERTEX_BUFFER_BIT".enum("", 0x00000080),
-		"BUFFER_USAGE_INDIRECT_BUFFER_BIT".enum("", 0x00000100)
+		"BUFFER_USAGE_TRANSFER_SRC_BIT".enum("Indicates that the buffer $can be used as the source of a transfer command.", 0x00000001),
+		"BUFFER_USAGE_TRANSFER_DST_BIT".enum("Indicates that the buffer $can be used as the destination of a transfer command.", 0x00000002),
+		"BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT".enum(
+			"""
+			Indicates that the buffer $can be used to create a {@code VkBufferView} suitable for occupying a {@code VkDescriptorSet} slot of type
+			#DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER.
+			""",
+			0x00000004
+		),
+		"BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT".enum(
+			"""
+			Indicates that the buffer $can be used to create a {@code VkBufferView} suitable for occupying a {@code VkDescriptorSet} slot of type
+			#DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER.
+			""",
+			0x00000008
+		),
+		"BUFFER_USAGE_UNIFORM_BUFFER_BIT".enum(
+			"""
+			Indicates that the buffer $can be used in a ##VkDescriptorBufferInfo suitable for occupying a {@code VkDescriptorSet} slot either of type
+			#DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC.
+			""",
+			0x00000010
+		),
+		"BUFFER_USAGE_STORAGE_BUFFER_BIT".enum(
+			"""
+			Indicates that the buffer $can be used in a ##VkDescriptorBufferInfo suitable for occupying a {@code VkDescriptorSet} slot either of type
+			#DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC.
+			""",
+			0x00000020
+		),
+		"BUFFER_USAGE_INDEX_BUFFER_BIT".enum(
+			"Indicates that the buffer is suitable for passing as the {@code buffer} parameter to #CmdBindIndexBuffer().",
+			0x00000040
+		),
+		"BUFFER_USAGE_VERTEX_BUFFER_BIT".enum(
+			"Indicates that the buffer is suitable for passing as an element of the {@code pBuffers} array to #CmdBindVertexBuffers().",
+			0x00000080
+		),
+		"BUFFER_USAGE_INDIRECT_BUFFER_BIT".enum(
+			"""
+			Indicates that the buffer is suitable for passing as the {@code buffer} parameter to #CmdDrawIndirect(), #CmdDrawIndexedIndirect(), or
+			#CmdDispatchIndirect().
+			""",
+			0x00000100
+		)
 	)
 
 	EnumConstant(
 		"VkPipelineCreateFlagBits",
 
-		"PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT".enum("", 0x00000001),
-		"PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT".enum("", 0x00000002),
-		"PIPELINE_CREATE_DERIVATIVE_BIT".enum("", 0x00000004)
+		"PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT".enum(
+			"Specifies that the created pipeline will not be optimized. Using this flag $may reduce the time taken to create the pipeline.",
+			0x00000001
+		),
+		"PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT".enum(
+			"""
+			Specifies that the pipeline to be created is allowed to be the parent of a pipeline that will be created in a subsequent call to
+			#CreateGraphicsPipelines().
+			""",
+			0x00000002
+		),
+		"PIPELINE_CREATE_DERIVATIVE_BIT".enum("Specifies that the pipeline to be created will be a child of a previously created parent pipeline.", 0x00000004)
 	)
 
 	EnumConstant(
@@ -1243,100 +1665,230 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 	EnumConstant(
 		"VkCullModeFlagBits",
 
-		"CULL_MODE_NONE".enumExpr("", "0"),
-		"CULL_MODE_FRONT_BIT".enum("", 0x00000001),
-		"CULL_MODE_BACK_BIT".enum("", 0x00000002),
-		"CULL_MODE_FRONT_AND_BACK".enum("", 0x00000003)
+		"CULL_MODE_NONE".enumExpr("If set, no triangles are discarded.", "0"),
+		"CULL_MODE_FRONT_BIT".enum("If set, front-facing triangles are discarded.", 0x00000001),
+		"CULL_MODE_BACK_BIT".enum("If set, back-facing triangles are discarded.", 0x00000002),
+		"CULL_MODE_FRONT_AND_BACK".enum("If set, all triangles are discarded.", 0x00000003)
 	)
 
 	EnumConstant(
 		"VkColorComponentFlagBits",
 
-		"COLOR_COMPONENT_R_BIT".enum("", 0x00000001),
-		"COLOR_COMPONENT_G_BIT".enum("", 0x00000002),
-		"COLOR_COMPONENT_B_BIT".enum("", 0x00000004),
-		"COLOR_COMPONENT_A_BIT".enum("", 0x00000008)
+		"COLOR_COMPONENT_R_BIT".enum(
+			"If set, then the {@code R} value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified.",
+			0x00000001
+		),
+		"COLOR_COMPONENT_G_BIT".enum(
+			"If set, then the {@code G} value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified.",
+			0x00000002
+		),
+		"COLOR_COMPONENT_B_BIT".enum(
+			"If set, then the {@code B} value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified.",
+			0x00000004
+		),
+		"COLOR_COMPONENT_A_BIT".enum(
+			"If set, then the {@code A} value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified.",
+			0x00000008
+		)
 	)
 
 	EnumConstant(
 		"VkDescriptorPoolCreateFlagBits",
 
-		"DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT".enum("", 0x00000001)
+		"DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT".enum(
+			"""
+			If set, then descriptor sets can return their individual allocations to the pool, i.e. all of #AllocateDescriptorSets(), #FreeDescriptorSets(), and
+			#ResetDescriptorPool() are allowed. Otherwise, descriptor sets allocated from the pool must not be individually freed back to the pool, i.e. only
+			#AllocateDescriptorSets() and #ResetDescriptorPool() are allowed.
+			""",
+			0x00000001
+		)
 	)
 
 	EnumConstant(
 		"VkAttachmentDescriptionFlagBits",
 
-		"ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT".enum("", 0x00000001)
+		"ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT".enum(
+			"""
+			If set, then the attachment is treated as if it shares physical memory with another attachment in the same render pass. This information limits the
+			ability of the implementation to reorder certain operations (like layout transitions and the {@code loadOp}) such that it is not improperly
+			reordered against other uses of the same physical memory via a different attachment. This is described in more detail below.
+
+			If a render pass uses multiple attachments that alias the same device memory, those attachments $must each include the
+			{@code ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit in their attachment description flags. Attachments aliasing the same memory occurs in multiple
+			ways:
+			${ul(
+				"Multiple attachments being assigned the same image view as part of framebuffer creation.",
+				"Attachments using distinct image views that correspond to the same subresource of an image.",
+				"Attachments using views of distinct image subresources which are bound to overlapping memory."
+			)}
+			Render passes $must include subpass dependencies (either directly or via a subpass dependency chain) between any two subpasses that operate on the
+			same attachment or aliasing attachments and those subpass dependencies $must include execution and memory dependencies separating uses of the
+			aliases, if at least one of those subpasses writes to one of the aliases. Those dependencies $must_not include the #DEPENDENCY_BY_REGION_BIT if the
+			aliases are views of distinct image subresources which overlap in memory.
+
+			Multiple attachments that alias the same memory $must_not be used in a single subpass. A given attachment index $must_not be used multiple times in
+			a single subpass, with one exception: two subpass attachments $can use the same attachment index if at least one use is as an input attachment and
+			neither use is as a resolve or preserve attachment. In other words, the same view $can be used simultaneously as an input and color or
+			depth/stencil attachment, but $must_not be used as multiple color or depth/stencil attachments nor as resolve or preserve attachments.
+
+			If a set of attachments alias each other, then all except the first to be used in the render pass must use an initialLayout of
+			#IMAGE_LAYOUT_UNDEFINED, since the earlier uses of the other aliases make their contents undefined. Once an alias has been used and a different
+			alias has been used after it, the first alias $must_not be used in any later subpasses. However, an application can assign the same image view to
+			multiple aliasing attachment indices, which allows that image view to be used multiple times even if other aliases are used in between. Once an
+			attachment needs the {@code ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit, there should be no additional cost of introducing additional aliases, and
+			using these additional aliases may allow more efficient clearing of the attachments on multiple uses via #ATTACHMENT_LOAD_OP_CLEAR.
+
+			<h3>Note</h3>
+
+			The exact set of attachment indices that alias with each other is not known until a framebuffer is created using the render pass, so the above
+			conditions cannot be validated at render pass creation time.
+			""",
+			0x00000001
+		)
 	)
 
 	EnumConstant(
 		"VkAccessFlagBits",
 
-		"ACCESS_INDIRECT_COMMAND_READ_BIT".enum("", 0x00000001),
-		"ACCESS_INDEX_READ_BIT".enum("", 0x00000002),
-		"ACCESS_VERTEX_ATTRIBUTE_READ_BIT".enum("", 0x00000004),
-		"ACCESS_UNIFORM_READ_BIT".enum("", 0x00000008),
-		"ACCESS_INPUT_ATTACHMENT_READ_BIT".enum("", 0x00000010),
-		"ACCESS_SHADER_READ_BIT".enum("", 0x00000020),
-		"ACCESS_SHADER_WRITE_BIT".enum("", 0x00000040),
-		"ACCESS_COLOR_ATTACHMENT_READ_BIT".enum("", 0x00000080),
-		"ACCESS_COLOR_ATTACHMENT_WRITE_BIT".enum("", 0x00000100),
-		"ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT".enum("", 0x00000200),
-		"ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT".enum("", 0x00000400),
-		"ACCESS_TRANSFER_READ_BIT".enum("", 0x00000800),
-		"ACCESS_TRANSFER_WRITE_BIT".enum("", 0x00001000),
-		"ACCESS_HOST_READ_BIT".enum("", 0x00002000),
-		"ACCESS_HOST_WRITE_BIT".enum("", 0x00004000),
-		"ACCESS_MEMORY_READ_BIT".enum("", 0x00008000),
-		"ACCESS_MEMORY_WRITE_BIT".enum("", 0x00010000)
+		"ACCESS_INDIRECT_COMMAND_READ_BIT".enum(
+			"Indicates that the access is an indirect command structure read as part of an indirect drawing command.",
+			0x00000001
+		),
+		"ACCESS_INDEX_READ_BIT".enum("Indicates that the access is an index buffer read.", 0x00000002),
+		"ACCESS_VERTEX_ATTRIBUTE_READ_BIT".enum("Indicates that the access is a read via the vertex input bindings.", 0x00000004),
+		"ACCESS_UNIFORM_READ_BIT".enum("Indicates that the access is a read via a uniform buffer or dynamic uniform buffer descriptor.", 0x00000008),
+		"ACCESS_INPUT_ATTACHMENT_READ_BIT".enum("Indicates that the access is a read via an input attachment descriptor.", 0x00000010),
+		"ACCESS_SHADER_READ_BIT".enum("Indicates that the access is a read from a shader via any other descriptor type.", 0x00000020),
+		"ACCESS_SHADER_WRITE_BIT".enum(
+			"Indicates that the access is a write or atomic from a shader via the same descriptor types as in #ACCESS_SHADER_READ_BIT.",
+			0x00000040
+		),
+		"ACCESS_COLOR_ATTACHMENT_READ_BIT".enum("Indicates that the access is a read via a color attachment.", 0x00000080),
+		"ACCESS_COLOR_ATTACHMENT_WRITE_BIT".enum("Indicates that the access is a write via a color or resolve attachment.", 0x00000100),
+		"ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT".enum("Indicates that the access is a read via a depth/stencil attachment.", 0x00000200),
+		"ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT".enum("Indicates that the access is a write via a depth/stencil attachment.", 0x00000400),
+		"ACCESS_TRANSFER_READ_BIT".enum(
+			"""
+			Indicates that the access is a read from a transfer (copy, blit, resolve, etc.) operation. For the complete set of transfer operations, see
+			#PIPELINE_STAGE_TRANSFER_BIT.
+			""",
+			0x00000800
+		),
+		"ACCESS_TRANSFER_WRITE_BIT".enum(
+			"""
+			Indicates that the access is a write from a transfer (copy, blit, resolve, etc.) operation. For the complete set of transfer operations, see
+			#PIPELINE_STAGE_TRANSFER_BIT.
+			""",
+			0x00001000
+		),
+		"ACCESS_HOST_READ_BIT".enum("Indicates that the access is a read via the host.", 0x00002000),
+		"ACCESS_HOST_WRITE_BIT".enum("Indicates that the access is a write via the host.", 0x00004000),
+		"ACCESS_MEMORY_READ_BIT".enum(
+			"""
+			Indicates that the access is a read via a non-specific unit attached to the memory. This unit may be external to the Vulkan device or otherwise not
+			part of the core Vulkan pipeline. When included in {@code dstAccessMask}, all writes using access types in {@code srcAccessMask} performed by
+			pipeline stages in {@code srcStageMask} must be visible in memory.
+			""",
+			0x00008000
+		),
+		"ACCESS_MEMORY_WRITE_BIT".enum(
+			"""
+			Indicates that the access is a write via a non-specific unit attached to the memory. This unit may be external to the Vulkan device or otherwise
+			not part of the core Vulkan pipeline. When included in {@code srcAccessMask}, all access types in {@code dstAccessMask} from pipeline stages in
+			{@code dstStageMask} will observe the side effects of commands that executed before the barrier. When included in {@code dstAccessMask} all writes
+			using access types in {@code srcAccessMask} performed by pipeline stages in {@code srcStageMask} must be visible in memory.
+			""",
+			0x00010000
+		)
 	)
 
 	EnumConstant(
 		"VkDependencyFlagBits",
 
-		"DEPENDENCY_BY_REGION_BIT".enum("", 0x00000001)
+		"DEPENDENCY_BY_REGION_BIT".enum("If set, then the dependency is by-region.", 0x00000001)
 	)
 
 	EnumConstant(
 		"VkCommandPoolCreateFlagBits",
 
-		"COMMAND_POOL_CREATE_TRANSIENT_BIT".enum("", 0x00000001),
-		"COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT".enum("", 0x00000002)
+		"COMMAND_POOL_CREATE_TRANSIENT_BIT".enum(
+			"""
+			Indicates that command buffers allocated from the pool will be short-lived, meaning that they will be reset or freed in a relatively short
+			timeframe. This flag may be used by the implementation to control memory allocation behavior within the pool.
+			""",
+			0x00000001
+		),
+		"COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT".enum(
+			"""
+			Controls whether command buffers allocated from the pool $can be individually reset. If this flag is set, individual command buffers allocated from
+			the pool $can be reset either explicitly, by calling #ResetCommandBuffer(), or implicitly, by calling #BeginCommandBuffer() on an executable
+			command buffer. If this flag is not set, then #ResetCommandBuffer() and #BeginCommandBuffer() (on an executable command buffer) must not be called
+			on the command buffers allocated from the pool, and they can only be reset in bulk by calling #ResetCommandPool().
+			""",
+			0x00000002
+		)
 	)
 
 	EnumConstant(
 		"VkCommandPoolResetFlagBits",
 
-		"COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT".enum("", 0x00000001)
+		"COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT".enum(
+			"If set, resetting a command pool recycles all of the resources from the command pool back to the system.",
+			0x00000001
+		)
 	)
 
 	EnumConstant(
 		"VkCommandBufferUsageFlagBits",
 
-		"COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT".enum("", 0x00000001),
-		"COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT".enum("", 0x00000002),
-		"COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT".enum("", 0x00000004)
+		"COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT".enum(
+			"""
+			Indicates that each recording of the command buffer will only be submitted once, and the command buffer will be reset and recorded again between
+			each submission.
+			""",
+			0x00000001
+		),
+		"COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT".enum(
+			"""
+			Indicates that a secondary command buffer is considered to be entirely inside a render pass. If this is a primary command buffer, then this bit is
+			ignored.
+			""",
+			0x00000002
+		),
+		"COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT".enum(
+			"Allows the command buffer to be resubmitted to a queue or recorded into a primary command buffer while it is pending execution.",
+			0x00000004
+		)
 	)
 
 	EnumConstant(
 		"VkQueryControlFlagBits",
 
-		"QUERY_CONTROL_PRECISE_BIT".enum("", 0x00000001)
+		"QUERY_CONTROL_PRECISE_BIT".enum("If set, an implementation $must return a result that matches the actual number of samples passed.", 0x00000001)
 	)
 
 	EnumConstant(
 		"VkCommandBufferResetFlagBits",
 
-		"COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT".enum("", 0x00000001)
+		"COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT".enum(
+			"""
+			If set, then most or all memory resources currently owned by the command buffer should be returned to the parent command pool. If this flag is not
+			set, then the command buffer may hold onto memory resources and reuse them when recording commands.
+			""",
+			0x00000001
+		)
 	)
 
 	EnumConstant(
 		"VkStencilFaceFlagBits",
 
-		"STENCIL_FACE_FRONT_BIT".enum("", 0x00000001),
-		"STENCIL_FACE_BACK_BIT".enum("", 0x00000002),
-		"STENCIL_FRONT_AND_BACK".enum("", 0x00000003)
+		"STENCIL_FACE_FRONT_BIT".enum("Indicates that only the front set of stencil state is updated.", 0x00000001),
+		"STENCIL_FACE_BACK_BIT".enum("Indicates that only the back set of stencil state is updated.", 0x00000002),
+		"STENCIL_FRONT_AND_BACK".enum(
+			"Is the combination of #STENCIL_FACE_FRONT_BIT and #STENCIL_FACE_BACK_BIT and indicates that both sets of stencil state are updated.",
+			0x00000003
+		)
 	)
 
 	GlobalCommand..VkResult(
@@ -2305,6 +2857,14 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 		float.IN("depthBiasConstantFactor", ""),
 		float.IN("depthBiasClamp", ""),
 		float.IN("depthBiasSlopeFactor", "")
+	)
+
+	void(
+		"CmdSetBlendConstants",
+		"Sets the values of blend constants.",
+
+		VkCommandBuffer.IN("commandBuffer", ""),
+		Check(4)..const..float_p.IN("blendConstants", "")
 	)
 
 	void(

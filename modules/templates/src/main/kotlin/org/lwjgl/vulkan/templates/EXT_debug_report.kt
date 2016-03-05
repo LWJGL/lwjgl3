@@ -13,8 +13,16 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		Due to the nature of the Vulkan interface, there is very little error information available to the developer/application. By enabling optional
 		validation layers and using the Debug Report extension a developer has much more detailed feedback on the application's use of Vulkan.
 
-		This extension adds two entrypoints (vkCreateDebugReportCallbackEXT, vkDestroyDebugReportCallbackEXT) and an extension structure that together define a
-		way for layers and the implementation to call back to the application for events of interest to the application.
+		This extension adds two entrypoints (#CreateDebugReportCallbackEXT(), #DestroyDebugReportCallbackEXT()) and an extension structure that together define
+		a way for layers and the implementation to call back to the application for events of interest to the application.
+
+		Using the {@code VK_EXT_debug_report} extension allows an application to register multiple callbacks with the validation layers. Some callbacks may log
+		the information to a file, others may cause a debug break point or other application defined behavior. An application can register callbacks even when
+		no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
+
+		To capture issues found while creating an instance an application can link a ##VkDebugReportCallbackCreateInfoEXT structure to the {@code pNext}
+		element of the ##VkInstanceCreateInfo structure given to VK10#CreateInstance(). This callback is only valid for the duration of the
+		{@code vkCreateInstance} call. Use #CreateDebugReportCallbackEXT() to create persistent callback objects.
 		"""
 
 	IntConstant(
@@ -79,11 +87,29 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 	EnumConstant(
 		"VkDebugReportFlagBitsEXT",
 
-		"DEBUG_REPORT_INFORMATION_BIT_EXT".enum("", 0x00000001),
-		"DEBUG_REPORT_WARNING_BIT_EXT".enum("", 0x00000002),
-		"DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT".enum("", 0x00000004),
-		"DEBUG_REPORT_ERROR_BIT_EXT".enum("", 0x00000008),
-		"DEBUG_REPORT_DEBUG_BIT_EXT".enum("", 0x00000010)
+		"DEBUG_REPORT_INFORMATION_BIT_EXT".enum(
+			"Indicates an informational message such as resource details that may be handy when debugging an application.",
+			0x00000001
+		),
+		"DEBUG_REPORT_WARNING_BIT_EXT".enum(
+			"""
+			Indicates an unexpected use.
+
+			E.g. Not destroying objects prior to destroying the containing object or potential inconsistencies between descriptor set layout and the layout in
+			the corresponding shader, etc.
+			""",
+			0x00000002
+		),
+		"DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT".enum(
+			"""
+			Indicates a potentially non-optimal use of Vulkan.
+
+            E.g. using {@code vkCmdClearImage} when a RenderPass {@code load_op} would have worked.
+			""",
+			0x00000004
+		),
+		"DEBUG_REPORT_ERROR_BIT_EXT".enum("Indicates an error that may cause undefined results, including an application crash.", 0x00000008),
+		"DEBUG_REPORT_DEBUG_BIT_EXT".enum("Indicates diagnostic information from the loader and layers.", 0x00000010)
 	)
 
 	IntConstant(
