@@ -449,6 +449,7 @@ License terms: http://lwjgl.org/license.php
 	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate">
 		<uptodate targetfile="${bin.html.javadoc}/index.html" property="javadoc-uptodate">
 			<srcfiles dir="${src.core}" includes="**"/>
+			<srcfiles dir="${src.templates}/java" includes="org/lwjgl/system/**"/>
 			<srcfiles dir="${src.generated.java}" includes="**"/>
 		</uptodate>
 		<antcall target="-javadoc"/>
@@ -503,6 +504,12 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
 		</javadoc>
 		<get-quiet name="favicon" url="http://s3.amazonaws.com/cdn.lwjgl.org/favicon.ico" dest="${bin.html.javadoc}"/>
+
+		<java classname="org.lwjgl.system.JavadocPostProcess" fork="true" failonerror="true">
+			<classpath path="${bin.templates}"/>
+
+			<arg value="${bin.html.javadoc}/org/lwjgl"/>
+		</java>
 	</target>
 
 	<target name="release" description="Creates the LWJGL binary redistributable" depends="compile,javadoc,-build-version">
