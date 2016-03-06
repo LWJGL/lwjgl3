@@ -428,6 +428,18 @@ public final class HelloVulkan {
 			.ppEnabledExtensionNames(extension_names);
 		extension_names.clear();
 
+		VkDebugReportCallbackCreateInfoEXT dbgCreateInfo = null;
+		if ( validate ) {
+			dbgCreateInfo = VkDebugReportCallbackCreateInfoEXT.malloc()
+				.sType(VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT)
+				.pNext(NULL)
+				.flags(VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT)
+				.pfnCallback(dbgFunc)
+				.pUserData(NULL);
+
+			inst_info.pNext(dbgCreateInfo.address());
+		}
+
 		try {
 			err = vkCreateInstance(inst_info, null, pp);
 			if ( err == VK_ERROR_INCOMPATIBLE_DRIVER )
@@ -503,13 +515,6 @@ public final class HelloVulkan {
 			throw new IllegalStateException("vkEnumerateDeviceExtensionProperties failed to find the " + VK_KHR_SWAPCHAIN_EXTENSION_NAME + " extension.");
 
 		if ( validate ) {
-			VkDebugReportCallbackCreateInfoEXT dbgCreateInfo = VkDebugReportCallbackCreateInfoEXT.malloc()
-				.sType(VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT)
-				.pNext(NULL)
-				.flags(VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT)
-				.pfnCallback(dbgFunc)
-				.pUserData(NULL);
-
 			err = vkCreateDebugReportCallbackEXT(inst, dbgCreateInfo, null, lp);
 			dbgCreateInfo.free();
 			switch ( err ) {
