@@ -253,65 +253,99 @@ val VkInstanceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkInstanceCreateInfo") {
 
 val PFN_vkAllocationFunction = "PFN_vkAllocationFunction".callback(
 	VULKAN_PACKAGE, void_p, "VkAllocationFunction",
-	"",
+	"Will be called by the Vulkan implementation to allocate memory.",
 
-	voidptr.IN("pUserData", ""),
-	size_t.IN("size", ""),
-	size_t.IN("alignment", ""),
-	VkSystemAllocationScope.IN("allocationScope", "")
+	voidptr.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code .pUserData} in the allocator specified by the application"),
+	size_t.IN("size", "the size in bytes of the requested allocation"),
+	size_t.IN("alignment", "the requested alignment of the allocation in bytes and $must be a power of two"),
+	VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the scope of the lifetime of the allocation"),
+
+	returnDoc =
+	"""
+	$must either return $NULL (in case of allocation failure or if size is zero) or a valid pointer to a memory allocation containing at least size bytes, and
+	with the pointer value being a multiple of alignment.
+	"""
 ) {
-	documentation = ""
+	documentation = "Instances of this interface may be set to the {@code pfnAllocation} member of the ##VkAllocationCallbacks struct."
 	useSystemCallConvention()
 }
 
 val PFN_vkReallocationFunction = "PFN_vkReallocationFunction".callback(
 	VULKAN_PACKAGE, void_p, "VkReallocationFunction",
-	"",
+	"Will be called by the Vulkan implementation to reallocate memory.",
 
-	voidptr.IN("pUserData", ""),
-	voidptr.IN("pOriginal", ""),
-	size_t.IN("size", ""),
-	size_t.IN("alignment", ""),
-	VkSystemAllocationScope.IN("allocationScope", "")
+	voidptr.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code .pUserData} in the allocator specified by the application"),
+	voidptr.IN("pOriginal", "$must be either $NULL or a pointer previously returned by {@code pfnReallocation} or {@code pfnAllocation} of the same allocator"),
+	size_t.IN("size", "the size in bytes of the requested allocation"),
+	size_t.IN("alignment", "the requested alignment of the allocation in bytes and $must be a power of two"),
+	VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the scope of the lifetime of the allocation")
 ) {
-	documentation = ""
+	documentation =
+		"""
+		Instances of this interface may be set to the {@code pfnReallocation} member of the ##VkAllocationCallbacks struct.
+
+		The function must alter the size of the allocation {@code pOriginal}, either by shrinking or growing it, to accommodate the new size.
+
+		If {@code pOriginal} is $NULL, then {@code pfnReallocation} $must behave similarly to ##VkAllocationFunction. If size is zero, then
+		{@code pfnReallocation} must behave similarly to ##VkFreeFunction. The contents of the original allocation from bytes zero to
+		{@code min(original size, new size) − 1} $must be preserved in the new allocation. If the new allocation is larger than the old allocation, then the
+		contents of the additional space are undefined. If {@code pOriginal} is non-$NULL, alignment $must be equal to the originally requested alignment. If
+		satisfying these requirements involves creating a new allocation, then the old allocation $must be freed. If this function fails, it $must return $NULL
+		and not free the old allocation.
+		"""
 	useSystemCallConvention()
 }
 
 val PFN_vkFreeFunction = "PFN_vkFreeFunction".callback(
 	VULKAN_PACKAGE, void, "VkFreeFunction",
-	"",
+	"Will be called by the Vulkan implementation to free memory.",
 
-	voidptr.IN("pUserData", ""),
-	voidptr.IN("pMemory", "")
+	voidptr.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code .pUserData} in the allocator specified by the application"),
+	voidptr.IN("pMemory", "the allocation to be freed")
 ) {
-	documentation = ""
+	documentation =
+		"""
+		Instances of this interface may be set to the {@code pfnFree} member of the ##VkAllocationCallbacks struct.
+
+		{@code pMemory may} be $NULL, which the callback $must handle safely. If {@code pMemory} is non-$NULL, it must be a pointer previously allocated by
+		{@code pfnAllocation} or {@code pfnReallocation} and must be freed by the function.
+		"""
 	useSystemCallConvention()
 }
 
 val PFN_vkInternalAllocationNotification = "PFN_vkInternalAllocationNotification".callback(
 	VULKAN_PACKAGE, void, "VkInternalAllocationNotification",
-	"",
+	"Will be called by the Vulkan implementation when an internal allocation occurs.",
 
-	voidptr.IN("pUserData", ""),
-	size_t.IN("size", ""),
-	VkInternalAllocationType.IN("allocationType", ""),
-	VkSystemAllocationScope.IN("allocationScope", "")
+	voidptr.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code .pUserData} in the allocator specified by the application"),
+	size_t.IN("size", "the requested size of an allocation"),
+	VkInternalAllocationType.IN("allocationType", "the requested type of an allocation"),
+	VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the scope of the lifetime of the allocation")
 ) {
-	documentation = ""
+	documentation =
+		"""
+		Instances of this interface may be set to the {@code pfnInternalAllocation} member of the ##VkAllocationCallbacks struct.
+
+		This is a purely informational callback.
+		"""
 	useSystemCallConvention()
 }
 
 val PFN_vkInternalFreeNotification = "PFN_vkInternalFreeNotification".callback(
 	VULKAN_PACKAGE, void, "VkInternalFreeNotification",
-	"",
+	"Will be called by the Vulkan implementation when an internal deallocation occurs.",
 
-	voidptr.IN("pUserData", ""),
-	size_t.IN("size", ""),
-	VkInternalAllocationType.IN("allocationType", ""),
-	VkSystemAllocationScope.IN("allocationScope", "")
+	voidptr.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code .pUserData} in the allocator specified by the application"),
+	size_t.IN("size", "the requested size of an allocation"),
+	VkInternalAllocationType.IN("allocationType", "the requested type of an allocation"),
+	VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the scope of the lifetime of the allocation")
 ) {
-	documentation = ""
+	documentation =
+		"""
+		Instances of this interface may be set to the {@code pfnInternalFree} member of the ##VkAllocationCallbacks struct.
+
+		This is a purely informational callback.
+		"""
 	useSystemCallConvention()
 }
 
