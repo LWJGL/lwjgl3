@@ -85,7 +85,7 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 		of the tail via the view will affect the entire tail of the parent, even for parts of the tail that are not referenced by the view. Furthermore,
 		modifications to tail commitment may affect views referencing other parts of the tail.
 
-		<h3>Errors</h3>
+		<h5>Errors</h5>
 
 		An GL11#INVALID_OPERATION error is generated if {@code xoffset} + {@code width} or {@code yoffset} + {@code height} is greater than the width or height,
 		respectively, of level {@code level} of the texture bound to {@code target}.

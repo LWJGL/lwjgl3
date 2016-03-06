@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
@@ -50,7 +50,7 @@ private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, C
 		println("""/**
  * Defines the capabilities of an OpenCL platform or device.
  *
- * <p>The instance returned by {@link CLPlatform#createCapabilities} )} exposes the functionality present on either the platform or any of its devices. This is
+ * <p>The instance returned by {@link CLPlatform#createCapabilities} exposes the functionality present on either the platform or any of its devices. This is
  * unlike the {@link CL10#CL_PLATFORM_EXTENSIONS} string, which returns only platform functionality, supported across all platform devices.</p>
  *
  * <p>The instance returned by {@link CLDevice#createCapabilities} exposes only the functionality available on that particular device.</p>

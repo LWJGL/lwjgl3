@@ -34,13 +34,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		scope of changes.
 
 		A difference in patch version numbers indicates that some usually small aspect of the specification or header has been modified, typically to fix a
-		bug, and may have an impact on the behavior of existing functionality. Differences in this version number should not affect either full compatibility
+		bug, and may have an impact on the behavior of existing functionality. Differences in this version number $should_not affect either full compatibility
 		or backwards compatibility between two versions, or add additional interfaces to the API.
 
 		A difference in minor version numbers indicates that some amount of new functionality has been added. This will usually include new interfaces in the
 		header, and may also include behavior changes and bug fixes. Functionality may be deprecated in a minor revision, but will not be removed. When a new
 		minor version is introduced, the patch version is reset to 0, and each minor revision maintains its own set of patch versions. Differences in this
-		version should not affect backwards compatibility, but will affect full compatibility.
+		version $should_not affect backwards compatibility, but will affect full compatibility.
 
 		A difference in major version numbers indicates a large set of changes to the API, potentially including new functionality and header interfaces,
 		behavioral changes, removal of deprecated features, modification or outright replacement of any feature, and is thus very likely to break any and all
@@ -52,8 +52,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 	LongConstant(
 		"""
-		The reserved handle {@code VK_NULL_HANDLE} can be passed in place of valid object handles when explicitly called out in the specification. Any command
-		that creates an object successfully must not return {@code VK_NULL_HANDLE}. It is valid to pass {@code VK_NULL_HANDLE} to any {@code vkDestroy*} or
+		The reserved handle {@code VK_NULL_HANDLE} $can be passed in place of valid object handles when explicitly called out in the specification. Any command
+		that creates an object successfully $must_not return {@code VK_NULL_HANDLE}. It is valid to pass {@code VK_NULL_HANDLE} to any {@code vkDestroy*} or
 		{@code vkFree*} command, which will silently ignore these values.
 		""",
 
@@ -476,7 +476,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		"IMAGE_LAYOUT_UNDEFINED".enumExpr(
 			"""
-			Supports no device access. This layout must only be used as an {@code initialLayout} or as the {@code oldLayout} in an image transition. When
+			Supports no device access. This layout $must only be used as an {@code initialLayout} or as the {@code oldLayout} in an image transition. When
 			transitioning out of this layout, the contents of the memory are not guaranteed to be preserved.
 			""", "0"),
 		"IMAGE_LAYOUT_GENERAL".enum("Supports all types of device access."),
@@ -492,14 +492,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			"""),
 		"IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL".enum(
 			"""
-			$must only be used as a read-only depth/stencil attachment in a {@code VkFramebuffer} and/or as a read-only image in a shader (which can be read as
+			$must only be used as a read-only depth/stencil attachment in a {@code VkFramebuffer} and/or as a read-only image in a shader (which $can be read as
 			a sampled image, combined image/sampler and/or input attachment). This layout is valid only for subresources of images created with both the
 			#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.
 			"""
 		),
 		"IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL".enum(
 			"""
-			$must only be used as a read-only image in a shader (which can be read as a sampled image, combined image/sampler and/or input attachment). This
+			$must only be used as a read-only image in a shader (which $can be read as a sampled image, combined image/sampler and/or input attachment). This
 			layout is valid only for subresources of images created with the #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled.
 			"""
 		),
@@ -517,9 +517,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		),
 		"IMAGE_LAYOUT_PREINITIALIZED".enum(
 			"""
-			Supports no device access. This layout must only be used as an {@code initialLayout} or as the {@code oldLayout} in an image transition. When
+			Supports no device access. This layout $must only be used as an {@code initialLayout} or as the {@code oldLayout} in an image transition. When
 			transitioning out of this layout, the contents of the memory are preserved. This layout is intended to be used as the initial layout for an image
-			whose contents are written by the host, and hence the data can be written to memory immediately, without first executing a layout transition.
+			whose contents are written by the host, and hence the data $can be written to memory immediately, without first executing a layout transition.
 			Currently, #IMAGE_LAYOUT_PREINITIALIZED is only useful with #IMAGE_TILING_LINEAR images because there is not a standard layout defined for
 			#IMAGE_TILING_OPTIMAL images.
 			"""
@@ -844,61 +844,61 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 
 		"DYNAMIC_STATE_VIEWPORT".enumExpr(
 			"""
-			Indicates that the {@code pViewports} state in ##VkPipelineViewportStateCreateInfo will be ignored and must be set dynamically with
+			Indicates that the {@code pViewports} state in ##VkPipelineViewportStateCreateInfo will be ignored and $must be set dynamically with
 			#CmdSetViewport() before any draw commands. The number of viewports used by a pipeline is still specified by the {@code viewportCount} member of
 			{@code VkPipelineViewportStateCreateInfo}.
 			""", "0"),
 		"DYNAMIC_STATE_SCISSOR".enum(
 			"""
-			Indicates that the {@code pScissors} state in ##VkPipelineViewportStateCreateInfo will be ignored and must be set dynamically with #CmdSetScissor()
-			before any draw commands. The number of scissor rectangles used by a pipeline is still specified by the {@code scissorCount} member of
-			{@code VkPipelineViewportStateCreateInfo}.
+			Indicates that the {@code pScissors} state in ##VkPipelineViewportStateCreateInfo will be ignored and $must be set dynamically with
+			#CmdSetScissor() before any draw commands. The number of scissor rectangles used by a pipeline is still specified by the {@code scissorCount}
+			member of {@code VkPipelineViewportStateCreateInfo}.
 			"""
 		),
 		"DYNAMIC_STATE_LINE_WIDTH".enum(
 			"""
-			Indicates that the {@code lineWidth} state in ##VkPipelineRasterizationStateCreateInfo will be ignored and must be set dynamically with
+			Indicates that the {@code lineWidth} state in ##VkPipelineRasterizationStateCreateInfo will be ignored and $must be set dynamically with
 			#CmdSetLineWidth() before any draw commands that generate line primitives for the rasterizer.
 			"""
 		),
 		"DYNAMIC_STATE_DEPTH_BIAS".enum(
 			"""
 			Indicates that the {@code depthBiasConstantFactor}, {@code depthBiasClamp} and {@code depthBiasSlopeFactor} states in
-			##VkPipelineRasterizationStateCreateInfo will be ignored and must be set dynamically with #CmdSetDepthBias() before any draws are performed with
+			##VkPipelineRasterizationStateCreateInfo will be ignored and $must be set dynamically with #CmdSetDepthBias() before any draws are performed with
 			{@code depthBiasEnable} in {@code VkPipelineRasterizationStateCreateInfo} set to #TRUE.
 			"""
 		),
 		"DYNAMIC_STATE_BLEND_CONSTANTS".enum(
 			"""
-			Indicates that the {@code blendConstants} state in ##VkPipelineColorBlendStateCreateInfo will be ignored and must be set dynamically with
+			Indicates that the {@code blendConstants} state in ##VkPipelineColorBlendStateCreateInfo will be ignored and $must be set dynamically with
 			#CmdSetBlendConstants() before any draws are performed with a pipeline state with {@code VkPipelineColorBlendAttachmentState} member
 			{@code blendEnable} set to #TRUE and any of the blend functions using a constant blend color.
 			"""
 		),
 		"DYNAMIC_STATE_DEPTH_BOUNDS".enum(
 			"""
-			Indicates that the {@code minDepthBounds} and {@code maxDepthBounds} states of ##VkPipelineDepthStencilStateCreateInfo will be ignored and must be
+			Indicates that the {@code minDepthBounds} and {@code maxDepthBounds} states of ##VkPipelineDepthStencilStateCreateInfo will be ignored and $must be
 			set dynamically with #CmdSetDepthBounds() before any draws are performed with a pipeline state with {@code VkPipelineDepthStencilStateCreateInfo}
 			member {@code depthBoundsTestEnable} set to #TRUE.
 			"""
 		),
 		"DYNAMIC_STATE_STENCIL_COMPARE_MASK".enum(
 			"""
-			Indicates that the {@code compareMask} state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and must be set
+			Indicates that the {@code compareMask} state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and $must be set
 			dynamically with #CmdSetStencilCompareMask() before any draws are performed with a pipeline state with
 			{@code VkPipelineDepthStencilStateCreateInfo} member {@code stencilTestEnable} set to #TRUE.
 			"""
 		),
 		"DYNAMIC_STATE_STENCIL_WRITE_MASK".enum(
 			"""
-			Indicates that the {@code writeMask} state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and must be set
+			Indicates that the {@code writeMask} state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and $must be set
 			dynamically with #CmdSetStencilWriteMask() before any draws are performed with a pipeline state with {@code VkPipelineDepthStencilStateCreateInfo}
 			member {@code stencilTestEnable} set to #TRUE.
 			"""
 		),
 		"DYNAMIC_STATE_STENCIL_REFERENCE".enum(
 			"""
-			Indicates that the reference state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and must be set dynamically
+			Indicates that the reference state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and $must be set dynamically
 			with #CmdSetStencilReference() before any draws are performed with a pipeline state with {@code VkPipelineDepthStencilStateCreateInfo} member
 			{@code stencilTestEnable} set to #TRUE.
 			"""
@@ -1071,7 +1071,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		),
 		"ATTACHMENT_STORE_OP_DONT_CARE".enum(
 			"""
-			Means the contents within the render area are not needed after rendering, and may be discarded; the contents of the attachment will be undefined
+			Means the contents within the render area are not needed after rendering, and $may be discarded; the contents of the attachment will be undefined
 			inside the render area.
 			"""
 		),
@@ -1119,7 +1119,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		"SUBPASS_CONTENTS_INLINE".enumExpr(
 			"""
-			The contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers must not be executed within the
+			The contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers $must_not be executed within the
 			subpass.
 			""", "0"),
 		"SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS".enum(
@@ -1162,7 +1162,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			0x00000100
 		),
 		"FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT".enum(
-			"{@code VkImageView} 4can be used as a framebuffer depth/stencil attachment and as an input attachment.",
+			"{@code VkImageView} $can be used as a framebuffer depth/stencil attachment and as an input attachment.",
 			0x00000200
 		),
 		"FORMAT_FEATURE_BLIT_SRC_BIT".enum("{@code VkImage} $can be used as {@code srcImage} for the #CmdBlitImage() command.", 0x00000400),
@@ -1176,7 +1176,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			filtering, and that linear filtering of the depth aspect is supported whether depth compare is enabled in the sampler or not. If this bit is not
 			present, linear filtering with depth compare disabled is unsupported and linear filtering with depth compare enabled is supported, but $may compute
 			the filtered value in an implementation-dependent manner which differs from the normal rules of linear filtering. The resulting value $must be in
-			the range {@code [0,1]} and should be proportional to, or a weighted average of, the number of comparison passes or failures.
+			the range {@code [0,1]} and $should be proportional to, or a weighted average of, the number of comparison passes or failures.
 			""",
 			0x00001000
 		)
@@ -1233,7 +1233,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"IMAGE_CREATE_SPARSE_ALIASED_BIT".enum(
 			"""
 			Indicates that the image will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another image (or
-			another portion of the same image). Sparse images created with this flag must also be created with the #IMAGE_CREATE_SPARSE_RESIDENCY_BIT.
+			another portion of the same image). Sparse images created with this flag $must also be created with the #IMAGE_CREATE_SPARSE_RESIDENCY_BIT.
 			""",
 			0x00000004
 		),
@@ -1328,7 +1328,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"QUEUE_SPARSE_BINDING_BIT".enum(
 			"""
 			If set, then the queues in this queue family support sparse memory management operations. If any of the sparse resource features are enabled, then
-			at least one queue family must support this bit.
+			at least one queue family $must support this bit.
 			""",
 			0x00000008
 		)
@@ -1343,7 +1343,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			with the #MEMORY_HEAP_DEVICE_LOCAL_BIT set.
 			""", 0x00000001),
 		"MEMORY_PROPERTY_HOST_VISIBLE_BIT".enum(
-			"If set, memory allocated with this type can be mapped using #MapMemory() so that it can be accessed on the host.",
+			"If set, memory allocated with this type $can be mapped using #MapMemory() so that it $can be accessed on the host.",
 			0x00000002
 		),
 		"MEMORY_PROPERTY_HOST_COHERENT_BIT".enum(
@@ -1362,8 +1362,8 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		),
 		"MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT".enum(
 			"""
-			If set, the memory type only allows device access to the memory. Memory types must not have both #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT and
-			#MEMORY_PROPERTY_HOST_VISIBLE_BIT set. Additionally, the object's backing memory may be provided by the implementation lazily.
+			If set, the memory type only allows device access to the memory. Memory types $must not have both #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT and
+			#MEMORY_PROPERTY_HOST_VISIBLE_BIT set. Additionally, the object's backing memory $may be provided by the implementation lazily.
 			""",
 			0x00000010
 		)
@@ -1374,8 +1374,8 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		"MEMORY_HEAP_DEVICE_LOCAL_BIT".enum(
 			"""
-			Means the heap corresponds to device local memory. Device local memory may have different performance characteristics than host local memory, and
-			may support different memory property flags.
+			Means the heap corresponds to device local memory. Device local memory $may have different performance characteristics than host local memory, and
+			$may support different memory property flags.
 			""",
 			0x00000001
 		)
@@ -1469,14 +1469,14 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT".enum(
 			"""
 			If set, queries managed by the pool will count the number of vertices processed by the input assembly stage. Vertices corresponding to incomplete
-			primitives may contribute to the count.
+			primitives $may contribute to the count.
 			""",
 			0x00000001
 		),
 		"QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT".enum(
 			"""
 			If set, queries managed by the pool will count the number of primitives processed by the input assembly stage. If primitive restart is enabled,
-			restarting the primitive topology has no effect on the count. Incomplete primitives may be counted.
+			restarting the primitive topology has no effect on the count. Incomplete primitives $may be counted.
 			""",
 			0x00000002
 		),
@@ -1514,7 +1514,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			"""
 			IF set, queries managed by the pool will count the number of primitives output by the Primitive Clipping stage of the pipeline. The counter’s value
 			is incremented each time a primitive passes the primitive clipping stage. The actual number of primitives output by the primitive clipping stage
-			for a particular input primitive is implementation-dependent but must satisfy the following conditions:
+			for a particular input primitive is implementation-dependent but $must satisfy the following conditions:
 			${ul(
 				"If at least one vertex of the input primitive lies inside the clipping volume, the counter is incremented by one or more.",
 				"Otherwise, the counter is incremented by zero or more."
@@ -1546,7 +1546,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT".enum(
 			"""
 			If set, queries managed by the pool will count the number of compute shader invocations. The counter’s value is incremented every time the compute
-			shader is invoked. Implementations may skip the execution of certain compute shader invocations or execute additional compute shader invocations
+			shader is invoked. Implementations $may skip the execution of certain compute shader invocations or execute additional compute shader invocations
 			for implementation-dependent reasons as long as the results of rendering otherwise remain unchanged.
 			""",
 			0x00000400
@@ -1697,8 +1697,8 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		"DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT".enum(
 			"""
-			If set, then descriptor sets can return their individual allocations to the pool, i.e. all of #AllocateDescriptorSets(), #FreeDescriptorSets(), and
-			#ResetDescriptorPool() are allowed. Otherwise, descriptor sets allocated from the pool must not be individually freed back to the pool, i.e. only
+			If set, then descriptor sets $can return their individual allocations to the pool, i.e. all of #AllocateDescriptorSets(), #FreeDescriptorSets(), and
+			#ResetDescriptorPool() are allowed. Otherwise, descriptor sets allocated from the pool $must not be individually freed back to the pool, i.e. only
 			#AllocateDescriptorSets() and #ResetDescriptorPool() are allowed.
 			""",
 			0x00000001
@@ -1732,17 +1732,17 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			neither use is as a resolve or preserve attachment. In other words, the same view $can be used simultaneously as an input and color or
 			depth/stencil attachment, but $must_not be used as multiple color or depth/stencil attachments nor as resolve or preserve attachments.
 
-			If a set of attachments alias each other, then all except the first to be used in the render pass must use an initialLayout of
+			If a set of attachments alias each other, then all except the first to be used in the render pass $must use an initialLayout of
 			#IMAGE_LAYOUT_UNDEFINED, since the earlier uses of the other aliases make their contents undefined. Once an alias has been used and a different
-			alias has been used after it, the first alias $must_not be used in any later subpasses. However, an application can assign the same image view to
+			alias has been used after it, the first alias $must_not be used in any later subpasses. However, an application $can assign the same image view to
 			multiple aliasing attachment indices, which allows that image view to be used multiple times even if other aliases are used in between. Once an
-			attachment needs the {@code ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit, there should be no additional cost of introducing additional aliases, and
-			using these additional aliases may allow more efficient clearing of the attachments on multiple uses via #ATTACHMENT_LOAD_OP_CLEAR.
+			attachment needs the {@code ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit, there $should be no additional cost of introducing additional aliases, and
+			using these additional aliases $may allow more efficient clearing of the attachments on multiple uses via #ATTACHMENT_LOAD_OP_CLEAR.
 
-			<h3>Note</h3>
+			<h5>Note</h5>
 
 			The exact set of attachment indices that alias with each other is not known until a framebuffer is created using the render pass, so the above
-			conditions cannot be validated at render pass creation time.
+			conditions $cannot be validated at render pass creation time.
 			""",
 			0x00000001
 		)
@@ -1786,18 +1786,18 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"ACCESS_HOST_WRITE_BIT".enum("Indicates that the access is a write via the host.", 0x00004000),
 		"ACCESS_MEMORY_READ_BIT".enum(
 			"""
-			Indicates that the access is a read via a non-specific unit attached to the memory. This unit may be external to the Vulkan device or otherwise not
+			Indicates that the access is a read via a non-specific unit attached to the memory. This unit $may be external to the Vulkan device or otherwise not
 			part of the core Vulkan pipeline. When included in {@code dstAccessMask}, all writes using access types in {@code srcAccessMask} performed by
-			pipeline stages in {@code srcStageMask} must be visible in memory.
+			pipeline stages in {@code srcStageMask} $must be visible in memory.
 			""",
 			0x00008000
 		),
 		"ACCESS_MEMORY_WRITE_BIT".enum(
 			"""
-			Indicates that the access is a write via a non-specific unit attached to the memory. This unit may be external to the Vulkan device or otherwise
+			Indicates that the access is a write via a non-specific unit attached to the memory. This unit $may be external to the Vulkan device or otherwise
 			not part of the core Vulkan pipeline. When included in {@code srcAccessMask}, all access types in {@code dstAccessMask} from pipeline stages in
 			{@code dstStageMask} will observe the side effects of commands that executed before the barrier. When included in {@code dstAccessMask} all writes
-			using access types in {@code srcAccessMask} performed by pipeline stages in {@code srcStageMask} must be visible in memory.
+			using access types in {@code srcAccessMask} performed by pipeline stages in {@code srcStageMask} $must be visible in memory.
 			""",
 			0x00010000
 		)
@@ -1815,7 +1815,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"COMMAND_POOL_CREATE_TRANSIENT_BIT".enum(
 			"""
 			Indicates that command buffers allocated from the pool will be short-lived, meaning that they will be reset or freed in a relatively short
-			timeframe. This flag may be used by the implementation to control memory allocation behavior within the pool.
+			timeframe. This flag $may be used by the implementation to control memory allocation behavior within the pool.
 			""",
 			0x00000001
 		),
@@ -1823,8 +1823,8 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			"""
 			Controls whether command buffers allocated from the pool $can be individually reset. If this flag is set, individual command buffers allocated from
 			the pool $can be reset either explicitly, by calling #ResetCommandBuffer(), or implicitly, by calling #BeginCommandBuffer() on an executable
-			command buffer. If this flag is not set, then #ResetCommandBuffer() and #BeginCommandBuffer() (on an executable command buffer) must not be called
-			on the command buffers allocated from the pool, and they can only be reset in bulk by calling #ResetCommandPool().
+			command buffer. If this flag is not set, then #ResetCommandBuffer() and #BeginCommandBuffer() (on an executable command buffer) $must not be called
+			on the command buffers allocated from the pool, and they $can only be reset in bulk by calling #ResetCommandPool().
 			""",
 			0x00000002
 		)
@@ -1873,8 +1873,8 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		"COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT".enum(
 			"""
-			If set, then most or all memory resources currently owned by the command buffer should be returned to the parent command pool. If this flag is not
-			set, then the command buffer may hold onto memory resources and reuse them when recording commands.
+			If set, then most or all memory resources currently owned by the command buffer $should be returned to the parent command pool. If this flag is not
+			set, then the command buffer $may hold onto memory resources and reuse them when recording commands.
 			""",
 			0x00000001
 		)
@@ -1902,7 +1902,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		{@code vkCreateInstance} creates the instance, then enables and initializes global layers and extensions requested by the application. If an extension
 		is provided by a layer, both the layer and extension $must be specified at {@code vkCreateInstance} time.
 
-		<h3>Valid Usage</h3>
+		<h5>Valid Usage</h5>
 		${ul(
 			"{@code pCreateInfo} $must be a pointer to a valid ##VkInstanceCreateInfo structure",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
@@ -1920,11 +1920,11 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"""
 		Destroys an instance of Vulkan.
 
-		After destruction of the instance, all devices (logical and physical) and any objects created by those devices become invalid and should not be
-		accessed. However, objects allocated directly or indirectly through the instance are not destroyed automatically and so may be leaked. Applications
-		should destroy all objects created through instance before destroying the instance itself.
+		After destruction of the instance, all devices (logical and physical) and any objects created by those devices become invalid and $should_not be
+		accessed. However, objects allocated directly or indirectly through the instance are not destroyed automatically and so $may be leaked. Applications
+		$should destroy all objects created through instance before destroying the instance itself.
 
-		<h3>Valid Usage</h3>
+		<h5>Valid Usage</h5>
 		${ul(
 			"If {@code instance} is not $NULL, {@code instance} $must be a valid {@code VkInstance} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
@@ -1933,7 +1933,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			"If no ##VkAllocationCallbacks were provided when instance was created, {@code pAllocator} $must be $NULL"
 		)}
 
-		Host access to {@code instance} $must be externally synchronized
+		Host access to {@code instance} $must be externally synchronized.
 		""",
 
 		VkInstance.IN("instance", "the handle of the instance to destroy"),
@@ -1942,49 +1942,130 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 	VkResult(
 		"EnumeratePhysicalDevices",
-		"Enumerates the physical devices accessible to a Vulkan instance.",
+		"""
+		Retrieves a list of physical device objects representing the physical devices installed in the system.
 
-		VkInstance.IN("instance", ""),
-		AutoSize("pPhysicalDevices")..Check(1)..uint32_t_p.INOUT("pPhysicalDeviceCount", ""),
-		nullable..VkPhysicalDevice.p.OUT("pPhysicalDevices", "")
+		If {@code pPhysicalDevices} is $NULL, then the number of physical devices available is returned in {@code pPhysicalDeviceCount}. Otherwise,
+		{@code pPhysicalDeviceCount} $must point to a variable set by the user to the number of elements in the {@code pPhysicalDevices} array, and on return
+		the variable is overwritten with the number of structures actually written to {@code pPhysicalDevices}. If the value of {@code pPhysicalDeviceCount} is
+		less than the number of physical devices available, at most {@code pPhysicalDeviceCount} structures will be written. If {@code pPhysicalDeviceCount} is
+		smaller than the number of physical devices available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available
+		physical devices were returned.
+
+		Once enumerated, general properties of the physical devices are queried by calling #GetPhysicalDeviceProperties().
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"instance $must be a valid {@code VkInstance} handle",
+			"{@code pPhysicalDeviceCount} $must be a pointer to a {@code uint32_t} value",
+			"""
+			If the value referenced by {@code pPhysicalDeviceCount} is not 0, and {@code pPhysicalDevices is} not $NULL, {@code pPhysicalDevices} $must be a
+			pointer to an array of {@code pPhysicalDeviceCount} {@code VkPhysicalDevice} handles.
+			"""
+		)}
+		""",
+
+		VkInstance.IN("instance", "a handle to a Vulkan instance previously created with #CreateInstance()"),
+		AutoSize("pPhysicalDevices")..Check(1)..uint32_t_p.INOUT(
+			"pPhysicalDeviceCount",
+			"a pointer to an integer related to the number of physical devices available or queried"
+		),
+		nullable..VkPhysicalDevice.p.OUT("pPhysicalDevices", "either $NULL or a pointer to an array of {@code VkPhysicalDevice} structures")
 	)
 
 	void(
 		"GetPhysicalDeviceFeatures",
-		"Reports capabilities of a physical device.",
+		"""
+		Reports capabilities of a physical device.
 
-		VkPhysicalDevice.IN("physicalDevice", ""),
-		VkPhysicalDeviceFeatures_p.OUT("pFeatures", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
+			"{@code pProperties} $must be a pointer to a ##VkPhysicalDeviceProperties structure"
+		)}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried"),
+		VkPhysicalDeviceFeatures_p.OUT(
+			"pFeatures",
+			"points to an instance of the ##VkPhysicalDeviceProperties structure, that will be filled with returned information"
+		)
 	)
 
 	void(
 		"GetPhysicalDeviceFormatProperties",
-		"Lists physical device’s format capabilities.",
+		"""
+		Lists physical device’s format capabilities.
 
-		VkPhysicalDevice.IN("physicalDevice", ""),
-		VkFormat.IN("format", ""),
-		VkFormatProperties_p.OUT("pFormatProperties", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
+			"{@code format} $must be a valid {@code VkFormat} value",
+			"{@code pFormatProperties} $must be a pointer to a ##VkFormatProperties structure"
+		)}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the format properties"),
+		VkFormat.IN("format", "the format whose properties are queried"),
+		VkFormatProperties_p.OUT(
+			"pFormatProperties",
+			"a pointer to a ##VkFormatProperties structure in which physical device properties for format are returned"
+		)
 	)
 
 	VkResult(
 		"GetPhysicalDeviceImageFormatProperties",
-		"Lists physical device's image format capabilities.",
+		"""
+		Lists physical device's image format capabilities.
 
-		VkPhysicalDevice.IN("physicalDevice", ""),
-		VkFormat.IN("format", ""),
-		VkImageType.IN("type", ""),
-		VkImageTiling.IN("tiling", ""),
-		VkImageUsageFlags.IN("usage", ""),
-		VkImageCreateFlags.IN("flags", ""),
-		VkImageFormatProperties_p.OUT("pImageFormatProperties", "")
+		In addition to the minimum capabilities, implementations $may support additional capabilities for certain types of images. For example, larger
+		dimensions or additional sample counts for certain image types, or additional capabilities for linear tiling format images.
+
+		The {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} parameters correspond to parameters that would be consumed by
+		#CreateImage().
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
+			"{@code format} $must be a valid {@code VkFormat} value",
+			"{@code type} $must be a valid {@code VkImageType} value",
+			"{@code tiling} $must be a valid {@code VkImageTiling} value",
+			"{@code usage} $must be a valid combination of {@code VkImageUsageFlagBits} values",
+			"{@code usage} $must not be 0",
+			"{@code flags} $must be a valid combination of {@code VkImageCreateFlagBits} values",
+			"{@code pImageFormatProperties} $must be a pointer to a ##VkImageFormatProperties structure"
+		)}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the image capabilities"),
+		VkFormat.IN("format", "the image format, corresponding to {@code VkImageCreateInfo.format}"),
+		VkImageType.IN("type", "the image type, corresponding to {@code VkImageCreateInfo.imageType}"),
+		VkImageTiling.IN("tiling", " the image tiling, corresponding to {@code VkImageCreateInfo.tiling}"),
+		VkImageUsageFlags.IN("usage", "the intended usage of the image, corresponding to {@code VkImageCreateInfo.usage}"),
+		VkImageCreateFlags.IN("flags", "a bitfield describing additional parameters of the image, corresponding to {@code VkImageCreateInfo.flags}"),
+		VkImageFormatProperties_p.OUT(
+			"pImageFormatProperties",
+			"points to an instance of the ##VkImageFormatProperties structure in which capabilities are returned"
+		)
 	)
 
 	void(
 		"GetPhysicalDeviceProperties",
-		"Returns properties of a physical device.",
+		"""
+		Returns properties of a physical device.
 
-		VkPhysicalDevice.IN("physicalDevice", ""),
-		VkPhysicalDeviceProperties_p.OUT("pProperties", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} must be a valid {@code VkPhysicalDevice} handle",
+			"{@code pProperties} must be a pointer to a ##VkPhysicalDeviceProperties structure"
+		)}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried"),
+		VkPhysicalDeviceProperties_p.OUT(
+			"pProperties",
+			"points to an instance of the ##VkPhysicalDeviceProperties structure, that will be filled with returned information"
+		)
 	)
 
 	void(

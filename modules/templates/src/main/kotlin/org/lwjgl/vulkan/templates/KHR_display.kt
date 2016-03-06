@@ -112,7 +112,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 
 	VkResult(
 		"CreateDisplayPlaneSurfaceKHR",
-		"Creates a ##VkSurfaceKHR structure representing a display plane and mode.",
+		"Creates a {@code VkSurfaceKHR} structure representing a display plane and mode.",
 
 		VkInstance.IN("instance", "the {@code VkInstance} to associate the surface"),
 		const..VkDisplaySurfaceCreateInfoKHR_p.IN(

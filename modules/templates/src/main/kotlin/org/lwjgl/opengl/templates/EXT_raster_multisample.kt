@@ -63,7 +63,8 @@ val EXT_raster_multisample = "EXTRasterMultisample".nativeClassGL("EXT_raster_mu
 			"the depth, stencil, or depth bounds test is enabled",
 			"a multisample draw framebuffer is bound (GL13#SAMPLE_BUFFERS is one)"
 		)}
-		<h3>Errors</h3>
+
+		<h5>Errors</h5>
 
 		An $INVALID_VALUE error is generated if {@code samples} is greater than the value of #MAX_RASTER_SAMPLES_EXT (the implementation-dependent maximum
 		number of samples).

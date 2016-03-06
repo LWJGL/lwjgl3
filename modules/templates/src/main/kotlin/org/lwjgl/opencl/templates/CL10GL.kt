@@ -24,38 +24,42 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 
 		documentation =
 			"""
-		The OpenCL 1.0 OpenGL interoperability functionality.
+			The OpenCL 1.0 OpenGL interoperability functionality.
 
-		OpenCL memory objects may be created from OpenGL objects if and only if the OpenCL context has been created from an OpenGL share group object or
-		context. OpenGL share groups and contexts are created using platform specific APIs such as EGL, CGL, WGL, and GLX. On MacOS X, an OpenCL context may be
-		created from an OpenGL share group object using the OpenCL platform extension <strong>cl_apple_gl_sharing</strong>. On other platforms including
-		Microsoft Windows, Linux/Unix and others, an OpenCL context may be created from an OpenGL context using the Khronos platform extension
-		<strong>cl_khr_gl_sharing</strong>.
+			OpenCL memory objects may be created from OpenGL objects if and only if the OpenCL context has been created from an OpenGL share group object or
+			context. OpenGL share groups and contexts are created using platform specific APIs such as EGL, CGL, WGL, and GLX. On MacOS X, an OpenCL context
+			may be created from an OpenGL share group object using the OpenCL platform extension <strong>cl_apple_gl_sharing</strong>. On other platforms
+			including Microsoft Windows, Linux/Unix and others, an OpenCL context may be created from an OpenGL context using the Khronos platform extension
+			<strong>cl_khr_gl_sharing</strong>.
 
-		Any supported OpenGL object defined within the GL share group object, or the share group associated with the GL context from which the CL context is
-		created, may be shared, with the exception of the default OpenGL objects (i.e. objects named zero), which may not be shared.
-		<h3>Lifetime of Shared Objects</h3>
-		An OpenCL memory object created from an OpenGL object (hereinafter refered to as a “shared CL/GL object”) remains valid as long as the corresponding GL
-		object has not been deleted. If the GL object is deleted through the GL API (e.g. GL15##glDeleteBuffers(), GL11##glDeleteTextures(), or
-		GL30##glDeleteRenderbuffers()), subsequent use of the CL buffer or image object will result in undefined behavior, including but not limited to
-		possible CL errors and data corruption, but may not result in program termination.
+			Any supported OpenGL object defined within the GL share group object, or the share group associated with the GL context from which the CL context
+			is created, may be shared, with the exception of the default OpenGL objects (i.e. objects named zero), which may not be shared.
 
-		The CL context and corresponding command-queues are dependent on the existence of the GL share group object, or the share group associated with the GL
-		context from which the CL context is created. If the GL share group object or all GL contexts in the share group are destroyed, any use of the CL
-		context or command-queue(s) will result in undefined behavior, which may include program termination. Applications should destroy the CL
-		command-queue(s) and CL context before destroying the corresponding GL share group or contexts.
-		<h3>Synchronizing OpenCL and OpenGL Access to Shared Objects</h3>
-		The application is responsible for maintaining the proper order of operations if the CL and GL contexts are in separate threads.
+			<h3>Lifetime of Shared Objects</h3>
 
-		If a GL context is bound to a thread other than the one in which #EnqueueReleaseGLObjects() is called, changes to any of the objects in
-		{@code mem_objects} may not be visible to that context without additional steps being taken by the application. For an OpenGL 3.1 (or later) context,
-		the requirements are described in Appendix D ("Shared Objects and Multiple Contexts") of the OpenGL 3.1 Specification. For prior versions of OpenGL, the
-		requirements are implementation dependent.
+			An OpenCL memory object created from an OpenGL object (hereinafter refered to as a “shared CL/GL object”) remains valid as long as the
+			corresponding GL object has not been deleted. If the GL object is deleted through the GL API (e.g. GL15##glDeleteBuffers(),
+			GL11##glDeleteTextures(), or GL30##glDeleteRenderbuffers()), subsequent use of the CL buffer or image object will result in undefined behavior,
+			including but not limited to possible CL errors and data corruption, but may not result in program termination.
 
-		Attempting to access the data store of an OpenGL object after it has been acquired by OpenCL and before it has been released will result in undefined
-		behavior. Similarly, attempting to access a shared CL/GL object from OpenCL before it has been acquired by the OpenCL command queue, or after it has
-		been released, will result in undefined behavior.
-		"""
+			The CL context and corresponding command-queues are dependent on the existence of the GL share group object, or the share group associated with the
+			GL context from which the CL context is created. If the GL share group object or all GL contexts in the share group are destroyed, any use of the
+			CL context or command-queue(s) will result in undefined behavior, which may include program termination. Applications should destroy the CL
+			command-queue(s) and CL context before destroying the corresponding GL share group or contexts.
+
+			<h3>Synchronizing OpenCL and OpenGL Access to Shared Objects</h3>
+
+			The application is responsible for maintaining the proper order of operations if the CL and GL contexts are in separate threads.
+
+			If a GL context is bound to a thread other than the one in which #EnqueueReleaseGLObjects() is called, changes to any of the objects in
+			{@code mem_objects} may not be visible to that context without additional steps being taken by the application. For an OpenGL 3.1 (or later)
+			context, the requirements are described in Appendix D ("Shared Objects and Multiple Contexts") of the OpenGL 3.1 Specification. For prior versions
+			of OpenGL, the requirements are implementation dependent.
+
+			Attempting to access the data store of an OpenGL object after it has been acquired by OpenCL and before it has been released will result in
+			undefined behavior. Similarly, attempting to access a shared CL/GL object from OpenCL before it has been acquired by the OpenCL command queue, or
+			after it has been released, will result in undefined behavior.
+			"""
 
 		IntConstant(
 			"Error Codes",

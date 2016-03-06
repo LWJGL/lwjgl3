@@ -874,7 +874,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function does not check whether the specified hint values are valid. If you set hints to invalid values this will instead be reported by the next
 		call to #CreateWindow().
 
-		<h3>Supported and default values</h3>
+		<h5>Supported and default values</h5>
 		${table(
 			tr(th("Name"), th("Default value"), th("Supported values")),
 

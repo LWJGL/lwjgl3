@@ -7,7 +7,7 @@ package org.lwjgl.generator
 import java.util.*
 import java.util.regex.Pattern
 
-private val BLOCK_NODE = "(?:h3|table|ul|ol|pre)" // TODO: add more here if necessary
+private val BLOCK_NODE = "(?:h[1-6]|table|ul|ol|pre)" // TODO: add more here if necessary
 private val BLOCK_PATTERN = Pattern.compile("\\s*^\\s*$\\s*|\\s*$\\s+(?=<$BLOCK_NODE)|(?<=</$BLOCK_NODE>)\\s+^\\s*", Pattern.MULTILINE)
 private val NON_PARAGRAPH_PATTERN = Pattern.compile("^<$BLOCK_NODE")
 private val CLEANUP_PATTERN = Pattern.compile("^[ \t]++(?![*])", Pattern.MULTILINE)

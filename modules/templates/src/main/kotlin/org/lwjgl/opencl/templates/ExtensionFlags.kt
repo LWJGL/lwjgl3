@@ -425,7 +425,7 @@ val amd_predefined_macros = EXT_FLAG.nativeClassCL("amd_predefined_macros", AMD)
 		The following macros are predefined when compiling OpenCL™ C kernels. These macros are defined automatically based on the device for which the code is
 		being compiled.
 		
-		<h3>GPU devices</h3>
+		<h5>GPU devices</h5>
 		${ul(
 			"__Barts__",
 			"__BeaverCreek__",
@@ -464,7 +464,7 @@ val amd_predefined_macros = EXT_FLAG.nativeClassCL("amd_predefined_macros", AMD)
 			"__GPU__"
 		)}
 
-		<h3>CPU devices<h3>
+		<h5>CPU devices</h5>
 		${ul(
 			"__CPU__",
 			"__X86__",
@@ -579,15 +579,18 @@ val nv_pragma_unroll = EXT_FLAG.nativeClassCL("nv_pragma_unroll", NV) {
 		"""
 		When true, the $extensionLink extension is supported.
 
-		<h3>Overview</h3>
+		<h5>Overview</h5>
+
 		This extension extends the OpenCL C language with a hint that allows loops to be unrolled. This pragma must be used for a loop and can be used to
 		specify full unrolling or partial unrolling by a certain amount. This is a hint and the compiler may ignore this pragma for any reason.
 
-		<h3>Goals</h3>
+		<h5>Goals</h5>
+
 		The principal goal of the pragma unroll is to improve the performance of loops via unrolling. Typically this enables other optimizations or improves
 		instruction level parallelism of a thread.
 
-		<h3>Details</h3>
+		<h5>Details</h5>
+
 		A user may specify that a loop in the source program be unrolled. This is done via a pragma. The syntax of this pragma is as follows
 
 		${code("#pragma unroll [unroll-factor]")}

@@ -269,7 +269,8 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 			The Objective-C runtime library automatically registers all the classes defined in your source code. You can create class definitions at runtime and
 			register them with the #objc_allocateClassPair() and #objc_registerClassPair() functions.
 
-			<h3>Special Considerations</h3>
+			<h5>Special Considerations</h5>
+
 			You cannot assume that class objects you get from this function are classes that inherit from NSObject, so you cannot safely call any methods on such
 			classes without detecting that the method is implemented first.
 			""",
@@ -597,7 +598,8 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 			"""
 			Adds a new method to a class with a given name and implementation.
 
-			<h3>Discussion</h3>
+			<h5>Discussion</h5>
+
 			class_addMethod will add an override of a superclass's implementation, but will not replace an existing implementation in this class. To change an
 			existing implementation, use #method_setImplementation().
 
@@ -635,7 +637,8 @@ void myMethodIMP(id self, SEL _cmd)
 			"""
 			Replaces the implementation of a method for a given class.
 
-			<h3>Discussion</h3>
+			<h5>Discussion</h5>
+
 			This function behaves in two different ways:
 			${ul(
 				"""
@@ -781,7 +784,8 @@ void myMethodIMP(id self, SEL _cmd)
 
 			This method does nothing if obj is #nil.
 
-			<h3>Important</h3>
+			<h5>Important</h5>
+
 			The garbage collector does not call this function. As a result, if you edit this function, you should also edit finalize. That said, Core Foundation
 			and other clients do call this function under garbage collection.
 			""",
@@ -1051,7 +1055,8 @@ void myMethodIMP(id self, SEL _cmd)
 			"""
 			Returns a Boolean value that indicates whether one protocol conforms to another protocol.
 
-			<h3>Discussion</h3>
+			<h5>Discussion</h5>
+
 			One protocol can incorporate other protocols using the same syntax that classes use to adopt a protocol:
 
 			${code("""@protocol ProtocolName < protocol list >""")}

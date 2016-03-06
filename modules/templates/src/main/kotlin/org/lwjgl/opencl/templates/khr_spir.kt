@@ -16,6 +16,7 @@ val khr_spir = "KHRSPIR".nativeClassCL("khr_spir", KHR) {
 		neutral non-source representation for OpenCL C programs.
 
 		<h3>Compiler Options</h3>
+
 		The compile option {@code -x spir} must be specified to indicate that the binary is in SPIR format, and the compile option {@code -spir-std} must be
 		used to specify the version of the SPIR specification that describes the format and meaning of the binary. For example, if the binary is as described
 		in SPIR version 1.2, then {@code -spir-std=1.2} must be specified. Failing to specify these compile options may result in implementation defined
