@@ -10,6 +10,8 @@ import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.nio.ByteBuffer
 import java.util.*
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.Executors
 
 /*
 	A template will be generated in the following cases:
@@ -29,22 +31,24 @@ import java.util.*
 	- Target source (C)     -> modules/core/src/generated/c/opengl/org_lwjgl_opengl_ARBImaging.c
 */
 
-enum class Binding(val key: String) {
-	EGL("binding.egl"),
-	GLFW("binding.glfw"),
-	JAWT("binding.jawt"),
-	NANOVG("binding.nanovg"),
-	NFD("binding.nfd"),
-	OPENAL("binding.openal"),
-	OPENCL("binding.opencl"),
-	OPENGL("binding.opengl"),
-	OPENGLES("binding.opengles"),
-	OVR("binding.ovr"),
-	PAR("binding.par"),
-	STB("binding.stb"),
-	VULKAN("binding.vulkan"),
+private val DUMMY_PACKAGE = "*"
 
-	MACOSX_OBJC("binding.macosx.objc");
+enum class Binding(val key: String, val packageName: String) {
+	EGL("binding.egl", "org.lwjgl.egl"),
+	GLFW("binding.glfw", "org.lwjgl.glfw"),
+	JAWT("binding.jawt", "org.lwjgl.system.jawt"),
+	NANOVG("binding.nanovg", "org.lwjgl.nanovg"),
+	NFD("binding.nfd", "org.lwjgl.util.nfd"),
+	OPENAL("binding.openal", "org.lwjgl.openal"),
+	OPENCL("binding.opencl", "org.lwjgl.opencl"),
+	OPENGL("binding.opengl", "org.lwjgl.opengl"),
+	OPENGLES("binding.opengles", "org.lwjgl.opengles"),
+	OVR("binding.ovr", "org.lwjgl.ovr"),
+	PAR("binding.par", "org.lwjgl.util.par"),
+	STB("binding.stb", "org.lwjgl.stb"),
+	VULKAN("binding.vulkan", "org.lwjgl.vulkan"),
+
+	MACOSX_OBJC("binding.macosx.objc", DUMMY_PACKAGE);
 
 	val enabled: Boolean
 		get() = System.getProperty(key, "false").toBoolean()
@@ -77,36 +81,55 @@ fun main(args: Array<String>) {
 		// all top-level functions/properties in that package. Example:
 		// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
 
-		generate("org.lwjgl.egl", Binding.EGL)
-		generate("org.lwjgl.glfw", Binding.GLFW)
-		generate("org.lwjgl.nanovg", Binding.NANOVG)
-		generate("org.lwjgl.openal", Binding.OPENAL)
-		generate("org.lwjgl.opencl", Binding.OPENCL)
-		generate("org.lwjgl.opengl", Binding.OPENGL)
-		generate("org.lwjgl.opengles", Binding.OPENGLES)
-		generate("org.lwjgl.ovr", Binding.OVR)
-		generate("org.lwjgl.stb", Binding.STB)
-		generate("org.lwjgl.vulkan", Binding.VULKAN)
+		val pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())
 
-		generate("org.lwjgl.system.jawt", Binding.JAWT)
-		generate("org.lwjgl.system.jemalloc")
-		generate("org.lwjgl.system.libc")
-		generate("org.lwjgl.system.libffi")
-		generate("org.lwjgl.system.linux")
-		generate("org.lwjgl.system.macosx")
-		generate("org.lwjgl.system.windows")
+		// Generate bindings
 
-		generate("org.lwjgl.util.nfd", Binding.NFD)
-		generate("org.lwjgl.util.par", Binding.PAR)
-		generate("org.lwjgl.util.simd")
-		generate("org.lwjgl.util.xxhash")
+		val bindingsSystem = arrayOf(
+			"org.lwjgl.system.jemalloc",
+			"org.lwjgl.system.libc",
+			"org.lwjgl.system.libffi",
+			"org.lwjgl.system.linux",
+			"org.lwjgl.system.macosx",
+			"org.lwjgl.system.windows",
+
+			"org.lwjgl.util.simd",
+			"org.lwjgl.util.xxhash"
+		)
+		val bindingsModular = Binding.values().asSequence().filter { it.packageName !== DUMMY_PACKAGE }
+
+		CountDownLatch(bindingsSystem.size + bindingsModular.count()).let { latch ->
+			fun generate(packageName: String, binding: Binding? = null) {
+				pool.submit {
+					this@Generator.generate(packageName, binding)
+					latch.countDown()
+				}
+			}
+
+			bindingsSystem.forEach { generate(it) }
+			bindingsModular.forEach { generate(it.packageName, it) }
+
+			latch.await()
+		}
 
 		// Generate utility classes. These are auto-registered during the process above.
-		generate("struct", Generator.structs)
-		generate("callback", Generator.callbacks)
-		generate("custom class", Generator.customClasses)
 
-		generate(JNI)
+		CountDownLatch(4).let { latch ->
+			fun submit(work: () -> Unit) {
+				pool.submit(work)
+				latch.countDown()
+			}
+
+			submit { generate("struct", Generator.structs) }
+			submit { generate("callback", Generator.callbacks) }
+			submit { generate("custom class", Generator.customClasses) }
+
+			submit { generate(JNI) }
+
+			latch.await()
+		}
+
+		pool.shutdown()
 	}
 }
 
