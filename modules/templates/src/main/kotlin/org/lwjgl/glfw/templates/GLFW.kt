@@ -1592,11 +1592,48 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Notes:
 		${ul(
 			"This function must only be called from the main thread.",
-			"This function must not be called from a callback.",
-			"On some platforms, certain callbacks may be called outside of a call to one of the event processing functions."
+			"This function must not be called from a callback."
 		)}
 		""",
 		since = "version 2.5"
+	)
+
+	Code(
+		javaInit = statement("\t\tEventLoop.OnScreen.check();")
+	)..void(
+		"WaitEventsTimeout",
+		"""
+		Waits with timeout until events are queued and processes them.
+
+		This function puts the calling thread to sleep until at least one event is available in the event queue, or until the specified timeout is reached. If
+		one or more events are available, it behaves exactly like #PollEvents(), i.e. the events in the queue are processed and the function then returns
+		immediately. Processing events will cause the window and input callbacks associated with those events to be called.
+
+		The timeout value must be a positive finite number.
+
+		Since not all events are associated with callbacks, this function may return without a callback having been called even if you are monitoring all
+		callbacks.
+
+		On some platforms, a window move, resize or menu operation will cause event processing to block. This is due to how event processing is designed on
+		those platforms. You can use the window refresh callback to redraw the contents of your window when necessary during such operations.
+
+		On some platforms, certain callbacks may be called outside of a call to one of the event processing functions.
+
+		If no windows exist, this function returns immediately. For synchronization of threads in applications that do not create windows, use your threading
+		library of choice.
+
+		Event processing is not required for joystick input to work.
+
+		Notes:
+		${ul(
+			"This function must only be called from the main thread.",
+			"This function must not be called from a callback."
+		)}
+		""",
+
+		double.IN("timeout", "the maximum amount of time, in seconds, to wait"),
+
+		since = "version 3.2"
 	)
 
 	void(
@@ -2166,7 +2203,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The resolution of the timer is system dependent, but is usually on the order of a few micro- or nanoseconds. It uses the highest-resolution monotonic
 		time source on each supported platform.
 
-		This function may be called from any thread. Access is not synchronized.
+		This function may be called from any thread. Reading of the internal timer offset is not atomic.
 		""",
 
 		returnDoc = "the current value, in seconds, or zero if an error occurred",
@@ -2182,12 +2219,38 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The upper limit of the timer is calculated as ${code("floor((2<sup>64</sup> - 1) / 10<sup>9</sup>)")} and is due to implementations storing nanoseconds
 		in 64 bits. The limit may be increased in the future.
 
-		This function must only be called from the main thread.
+		This function may be called from any thread. Writing of the internal timer offset is not atomic.
 		""",
 
 		double.IN("time", "the new value, in seconds"),
 
 		since = "version 2.2"
+	)
+
+	GLFWuint64(
+		"GetTimerValue",
+		"""
+		Returns the current value of the raw timer.
+
+		This function returns the current value of the raw timer, measured in {@code 1 / frequency} seconds. To get the frequency, call #GetTimerFrequency().
+
+		This function may be called from any thread.
+		""",
+
+		returnDoc = "the value of the timer, or zero if an error occurred",
+		since = "version 3.2"
+	)
+
+	GLFWuint64(
+		"GetTimerFrequency",
+		"""
+		Returns the frequency, in Hz, of the raw timer.
+
+		This function may be called from any thread.
+		""",
+
+		returnDoc = "the frequency of the timer, in Hz, or zero if an error occurred",
+		since = "version 3.2"
 	)
 
 	// [ OpenGL ]
