@@ -52,8 +52,6 @@ class MemoryTextUtil {
 		char c;
 
 		// ASCII fast path
-		target.put(offset + len, (byte)0);
-
 		while ( i < len && (c = text.charAt(i)) < 0x80 ) {
 			target.put(p++, (byte)c);
 			i++;
