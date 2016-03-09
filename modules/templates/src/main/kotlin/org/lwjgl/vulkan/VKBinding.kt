@@ -151,3 +151,18 @@ val should_not = "<b>should not</b>"
 val may = "<b>may</b>"
 val can = "<b>can</b>"
 val cannot = "<b>cannot</b>"
+
+val ConstantBlock<EnumValue>.enumLinks: String
+	get() = javaDocLinks.let {
+		it.indexOf("_BEGIN_RANGE ").let { index ->
+			if ( index == -1 )
+				it
+			else
+				it.substring(0, it.lastIndexOf(' ', index))
+		}
+	}
+
+fun note(javadoc: String, title: String = "Note") =
+	""" <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>$title</h5>
+	$javadoc
+	</div>"""

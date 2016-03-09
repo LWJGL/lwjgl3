@@ -411,7 +411,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"FORMAT_MAX_ENUM".enum("", 0x7FFFFFFF)
 	)
 
-	EnumConstant(
+	val VkImageTypes = EnumConstant(
 		"VkImageType",
 
 		"IMAGE_TYPE_1D".enumExpr("One-dimensional image", "0"),
@@ -421,9 +421,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"IMAGE_TYPE_END_RANGE".enumExpr("", "VK_IMAGE_TYPE_3D"),
 		"IMAGE_TYPE_RANGE_SIZE".enumExpr("", "VK_IMAGE_TYPE_3D - VK_IMAGE_TYPE_1D + 1"),
 		"IMAGE_TYPE_MAX_ENUM".enum("", 0x7FFFFFFF)
-	)
+	).enumLinks
 
-	EnumConstant(
+	val VkImageTilings = EnumConstant(
 		"VkImageTiling",
 
 		"IMAGE_TILING_OPTIMAL".enumExpr("Specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access).", "0"),
@@ -432,7 +432,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"IMAGE_TILING_END_RANGE".enumExpr("", "VK_IMAGE_TILING_LINEAR"),
 		"IMAGE_TILING_RANGE_SIZE".enumExpr("", "VK_IMAGE_TILING_LINEAR - VK_IMAGE_TILING_OPTIMAL + 1"),
 		"IMAGE_TILING_MAX_ENUM".enum("", 0x7FFFFFFF)
-	)
+	).enumLinks
 
 	EnumConstant(
 		"VkPhysicalDeviceType",
@@ -808,7 +808,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"VkBlendOp",
 
 		"BLEND_OP_ADD".enumExpr(codeBlock(
-"""R = R<sub>s0</sub> × S<sub>r</sub> + R<sub>d</sub> × D<sub>r</sub>
+			"""R = R<sub>s0</sub> × S<sub>r</sub> + R<sub>d</sub> × D<sub>r</sub>
 G = G<sub>s0</sub> × S<sub>g</sub> + G<sub>d</sub> × D<sub>g</sub>
 B = B<sub>s0</sub> × S<sub>b</sub> + B<sub>d</sub> × D<sub>b</sub>
 A = A<sub>s0</sub> × S<sub>a</sub> + A<sub>d</sub> × D<sub>a</sub>"""),
@@ -819,17 +819,17 @@ G = G<sub>s0</sub> × S<sub>g</sub> − G<sub>d</sub> × D<sub>g</sub>
 B = B<sub>s0</sub> × S<sub>b</sub> − B<sub>d</sub> × D<sub>b</sub>
 A = A<sub>s0</sub> × S<sub>a</sub> − A<sub>d</sub> × D<sub>a</sub>""")),
 		"BLEND_OP_REVERSE_SUBTRACT".enum(codeBlock(
-"""R = R<sub>d</sub> × D<sub>r</sub> − R<sub>s0</sub> × S<sub>r</sub>
+			"""R = R<sub>d</sub> × D<sub>r</sub> − R<sub>s0</sub> × S<sub>r</sub>
 G = G<sub>d</sub> × D<sub>g</sub> − G<sub>s0</sub> × S<sub>g</sub>
 B = B<sub>d</sub> × D<sub>b</sub> − B<sub>s0</sub> × S<sub>b</sub>
 A = A<sub>d</sub> × D<sub>a</sub> − A<sub>s0</sub> × S<sub>a</sub>""")),
 		"BLEND_OP_MIN".enum(codeBlock(
-"""R = min(R<sub>s0</sub>, R<sub>d</sub>)
+			"""R = min(R<sub>s0</sub>, R<sub>d</sub>)
 G = min(G<sub>s0</sub>, G<sub>d</sub>)
 B = min(B<sub>s0</sub>, B<sub>d</sub>)
 A = min(A<sub>s0</sub>, A<sub>d</sub>)""")),
 		"BLEND_OP_MAX".enum(codeBlock(
-"""R = max(R<sub>s0</sub>, R<sub>d</sub>)
+			"""R = max(R<sub>s0</sub>, R<sub>d</sub>)
 G = max(G<sub>s0</sub>, G<sub>d</sub>)
 B = max(B<sub>s0</sub>, B<sub>d</sub>)
 A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
@@ -1182,7 +1182,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		)
 	)
 
-	EnumConstant(
+	val VkImageUsageFlagBits = EnumConstant(
 		"VkImageUsageFlagBits",
 
 		"IMAGE_USAGE_TRANSFER_SRC_BIT".enum("Indicates that the image $can be used as the source of a transfer command.", 0x00000001),
@@ -1223,9 +1223,9 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			""",
 			0x00000080
 		)
-	)
+	).javaDocLinks
 
-	EnumConstant(
+	val VkImageCreateFlagBits = EnumConstant(
 		"VkImageCreateFlagBits",
 
 		"IMAGE_CREATE_SPARSE_BINDING_BIT".enum("Indicates that the image will be backed using sparse memory binding.", 0x00000001),
@@ -1245,9 +1245,9 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			"Indicates that the image $can be used to create a {@code VkImageView} of type #IMAGE_VIEW_TYPE_CUBE or #IMAGE_VIEW_TYPE_CUBE_ARRAY.",
 			0x00000010
 		)
-	)
+	).javaDocLinks
 
-	EnumConstant(
+	val VkSampleCountFlagBitLinks = EnumConstant(
 		"VkSampleCountFlagBits",
 
 		"SAMPLE_COUNT_1_BIT".enum(
@@ -1317,7 +1317,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		),
 		"SAMPLE_COUNT_32_BIT".enum("32 samples per pixel.", 0x00000020),
 		"SAMPLE_COUNT_64_BIT".enum("64 samples per pixel.", 0x00000040)
-	)
+	).javaDocLinks
 
 	EnumConstant(
 		"VkQueueFlagBits",
@@ -1553,7 +1553,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		)
 	)
 
-	EnumConstant(
+	val VkQueryResultFlagBits = EnumConstant(
 		"VkQueryResultFlagBits",
 
 		"QUERY_RESULT_64_BIT".enum(
@@ -1566,7 +1566,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"QUERY_RESULT_WAIT_BIT".enum("Indicates that Vulkan will wait for each query’s status to become available before retrieving its results.", 0x00000002),
 		"QUERY_RESULT_WITH_AVAILABILITY_BIT".enum("Indicates that the availability status accompanies the results.", 0x00000004),
 		"QUERY_RESULT_PARTIAL_BIT".enum("Indicates that returning partial results is acceptable.", 0x00000008)
-	)
+	).javaDocLinks
 
 	EnumConstant(
 		"VkBufferCreateFlagBits",
@@ -1739,10 +1739,12 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			attachment needs the {@code ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit, there $should be no additional cost of introducing additional aliases, and
 			using these additional aliases $may allow more efficient clearing of the attachments on multiple uses via #ATTACHMENT_LOAD_OP_CLEAR.
 
-			<h5>Note</h5>
-
-			The exact set of attachment indices that alias with each other is not known until a framebuffer is created using the render pass, so the above
-			conditions $cannot be validated at render pass creation time.
+			${note(
+				"""
+				The exact set of attachment indices that alias with each other is not known until a framebuffer is created using the render pass, so the above
+				conditions $cannot be validated at render pass creation time.
+				"""
+			)}
 			""",
 			0x00000001
 		)
@@ -1891,7 +1893,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		)
 	)
 
-	GlobalCommand..VkResult(
+	val CreateInstance = GlobalCommand..VkResult(
 		"CreateInstance",
 		"""
 		Creates a new Vulkan instance.
@@ -1937,7 +1939,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		""",
 
 		VkInstance.IN("instance", "the handle of the instance to destroy"),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "controls host memory allocation")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2039,10 +2041,18 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the image capabilities"),
 		VkFormat.IN("format", "the image format, corresponding to {@code VkImageCreateInfo.format}"),
-		VkImageType.IN("type", "the image type, corresponding to {@code VkImageCreateInfo.imageType}"),
-		VkImageTiling.IN("tiling", " the image tiling, corresponding to {@code VkImageCreateInfo.tiling}"),
-		VkImageUsageFlags.IN("usage", "the intended usage of the image, corresponding to {@code VkImageCreateInfo.usage}"),
-		VkImageCreateFlags.IN("flags", "a bitfield describing additional parameters of the image, corresponding to {@code VkImageCreateInfo.flags}"),
+		VkImageType.IN("type", "the image type, corresponding to {@code VkImageCreateInfo.imageType}", VkImageTypes),
+		VkImageTiling.IN("tiling", " the image tiling, corresponding to {@code VkImageCreateInfo.tiling}", VkImageTilings),
+		VkImageUsageFlags.IN(
+			"usage",
+			"the intended usage of the image, corresponding to {@code VkImageCreateInfo.usage}",
+			VkImageUsageFlagBits, LinkMode.BITFIELD
+		),
+		VkImageCreateFlags.IN(
+			"flags",
+			"a bitfield describing additional parameters of the image, corresponding to {@code VkImageCreateInfo.flags}",
+			VkImageCreateFlagBits, LinkMode.BITFIELD
+		),
 		VkImageFormatProperties_p.OUT(
 			"pImageFormatProperties",
 			"points to an instance of the ##VkImageFormatProperties structure in which capabilities are returned"
@@ -2070,418 +2080,1595 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 	void(
 		"GetPhysicalDeviceQueueFamilyProperties",
-		"Reports properties of the queues of the specified physical device.",
+		"""
+		Reports properties of the queues of the specified physical device.
 
-		VkPhysicalDevice.IN("physicalDevice", ""),
-		AutoSize("pQueueFamilyProperties")..Check(1)..uint32_t_p.INOUT("pQueueFamilyPropertyCount", ""),
-		nullable..VkQueueFamilyProperties_p.OUT("pQueueFamilyProperties", "")
+		If {@code pQueueFamilyProperties} is $NULL, then the number of queue families available is returned in {@code pQueueFamilyPropertyCount}. Otherwise,
+		{@code pQueueFamilyPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pQueueFamilyProperties} array, and
+		on return the variable is overwritten with the number of structures actually written to {@code pQueueFamilyProperties}. If the value of
+		{@code pQueueFamilyPropertyCount} is less than the number of queue families available, at most {@code pQueueFamilyPropertyCount} structures will be
+		written.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
+			"{@code pQueueFamilyPropertyCount} $must be a pointer to a {@code uint32_t} value",
+			"""
+			If the value referenced by {@code pQueueFamilyPropertyCount} is not 0, and {@code pQueueFamilyProperties} is not $NULL,
+			{@code pQueueFamilyProperties} $must be a pointer to an array of {@code pQueueFamilyPropertyCount} ##VkQueueFamilyProperties structures"""
+		)}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried"),
+		AutoSize("pQueueFamilyProperties")..Check(1)..uint32_t_p.INOUT(
+			"pQueueFamilyPropertyCount",
+			"a pointer to an integer related to the number of queue families available or queried"
+		),
+		nullable..VkQueueFamilyProperties_p.OUT("pQueueFamilyProperties", "either $NULL or a pointer to an array of ##VkQueueFamilyProperties structures")
 	)
 
 	void(
 		"GetPhysicalDeviceMemoryProperties",
-		"Reports memory information for the specified physical device.",
+		"""
+		Reports memory information for the specified physical device.
 
-		VkPhysicalDevice.IN("physicalDevice", ""),
-		VkPhysicalDeviceMemoryProperties_p.OUT("pMemoryProperties", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
+			"{@code pMemoryProperties} $must be a pointer to a ##VkPhysicalDeviceMemoryProperties structure"
+		)}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the handle to the device to query"),
+		VkPhysicalDeviceMemoryProperties_p.OUT(
+			"pMemoryProperties",
+			"points to an instance of ##VkPhysicalDeviceMemoryProperties structure in which the properties are returned"
+		)
 	)
 
 	PFN_vkVoidFunction(
 		"GetInstanceProcAddr",
-		"Returns a function pointer for a command.",
+		"""
+		Returns a function pointer for a command.
 
-		VkInstance.IN("instance", ""),
-		const..charASCII_p.IN("pName", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"If {@code instance} is not $NULL, instance $must be a valid {@code VkInstance} handle",
+			"{@code pName} $must be a null-terminated string",
+			"""
+			If {@code instance} is $NULL, {@code pName} $must be one of:
+			${ul(
+				"vkEnumerateInstanceExtensionProperties",
+				"vkEnumerateInstanceLayerProperties",
+				"vkCreateInstance"
+			)}
+			""",
+			"""
+			If {@code instance} is not $NULL, {@code pName} $must be the name of a core command or a command from an enabled extension, other than:
+			${ul(
+				"vkEnumerateInstanceExtensionProperties",
+				"vkEnumerateInstanceLayerProperties",
+				"vkCreateInstance"
+			)}
+			"""
+		)}
+
+		${note(
+			"""
+			LWJGL requires a non-$NULL {@code instance} argument when calling this method. If $NULL must be used, do the following:
+			${codeBlock("""
+long GetInstanceProcAddr = VK.getFunctionProvider().getFunctionAddress("vkGetInstanceProcAddr");
+long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
+			""",
+			title = "LWJGL Note"
+		)}
+		""",
+
+		VkInstance.IN("instance", " the instance that the function pointer will be compatible with"),
+		const..charASCII_p.IN("pName", "the name of the command to obtain")
 	)
 
 	PFN_vkVoidFunction(
 		"GetDeviceProcAddr",
-		"Returns a function pointer for a command.",
+		"""
+		Returns a device-specific function pointer for a command.
 
-		VkDevice.IN("device", ""),
-		const..charASCII_p.IN("pName", "")
+		In order to support systems with multiple Vulkan implementations comprising heterogeneous collections of hardware and software, the function pointers
+		returned by #GetInstanceProcAddr() $may point to dispatch code, which calls a different real implementation for different {@code VkDevice} objects (and
+		objects created from them). The overhead of this internal dispatch $can be avoided by obtaining device-specific function pointers for any commands that
+		use a device or device-child object as their dispatchable object.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pName} $must be a null-terminated string",
+			"""
+			{@code pName} $must be the name of a supported command that has a first parameter of type {@code VkDevice}, {@code VkQueue} or
+			{@code VkCommandBuffer}, either in the core API or an enabled extension
+			"""
+		)}
+
+		${note(
+			"""
+			The function pointers used by LWJGL for commands that have a first parameter of type ##VkDevice, ##VkQueue or ##VkCommandBuffer, have been acquired
+			using this command.
+			""",
+			title = "LWJGL Note"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that provides the function pointer"),
+		const..charASCII_p.IN(
+			"pName",
+			"""
+			the name of any Vulkan command whose first parameter is one of
+			${ul(
+				"##VkDevice",
+				"##VkQueue",
+				"##VkCommandBuffer"
+			)}
+			If {@code pName} is not the name of one of these Vulkan commands, and is not the name of an extension command belonging to an extension enabled for
+			device, then {@code vkGetDeviceProcAddr} will return $NULL.
+			"""
+		)
 	)
 
 	VkResult(
 		"CreateDevice",
-		"Creates a new device instance.",
+		"""
+		Creates a new logical device instance.
 
-		VkPhysicalDevice.IN("physicalDevice", ""),
-		const..VkDeviceCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
-		Check(1)..VkDevice.p.OUT("pDevice", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkDeviceCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pDevice} $must be a pointer to a {@code VkDevice} handle"
+		)}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "$must be one of the device handles returned from a call to #EnumeratePhysicalDevices()"),
+		const..VkDeviceCreateInfo_p.IN("pCreateInfo", "a pointer to a ##VkDeviceCreateInfo structure containing information about how to create the device"),
+		CreateInstance["pAllocator"],
+		Check(1)..VkDevice.p.OUT("pDevice", "points to a handle in which the created {@code VkDevice} is returned")
 	)
 
 	void(
 		"DestroyDevice",
-		"Destroys a logical device.",
+		"""
+		Destroys a logical device.
 
-		VkDevice.IN("device", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		To ensure that no work is active on the device, #DeviceWaitIdle() $can be used to gate the destruction of the device. Prior to destroying a device, an
+		application is responsible for destroying/freeing any Vulkan objects that were created using that device as the first parameter of the corresponding
+		{@code vkCreate*} or {@code vkAllocate*} command.
+
+		${note(
+			"""
+			The lifetime of each of these objects is bound by the lifetime of the {@code VkDevice} object. Therefore, to avoid resource leaks, it is critical
+			that an application explicitly free all of these resources prior to calling {@code vkDestroyDevice}.
+			"""
+		)}
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"If {@code device} is not $NULL, {@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"All child objects created on device $must have been destroyed prior to destroying device",
+			"If {@code VkAllocationCallbacks} were provided when device was created, a compatible set of callbacks $must be provided here",
+			"If no {@code VkAllocationCallbacks} were provided when device was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		Host access to {@code device} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device to destroy"),
+		CreateInstance["pAllocator"]
 	)
 
 	GlobalCommand..VkResult(
 		"EnumerateInstanceExtensionProperties",
-		"Returns up to requested number of global extension properties.",
+		"""
+		Queries the available instance extensions.
 
-		nullable..const..charUTF8_p.IN(
-			"pLayerName",
-			"pointer to optional layer name. If not null, will only return extension properties for the requested layer."
-		),
+		Extensions $may define new Vulkan commands, structures, and enumerants. For compilation purposes, the interfaces defined by registered extensions,
+		including new structures and enumerants as well as function pointer types for new commands, are defined in the Khronos-supplied vulkan.h together with
+		the core API. However, commands defined by extensions may not be available for static linking - in which case function pointers to these commands
+		should be queried at runtime. Extensions $may be provided by layers as well as by a Vulkan implementation.
+
+		If {@code pProperties} is $NULL, then the number of extensions properties available is returned in {@code pPropertyCount}. Otherwise,
+		{@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable
+		is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of
+		extension properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of
+		extensions available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"If {@code pLayerName} is not $NULL, {@code pLayerName} $must be a null-terminated string",
+			"{@code pPropertyCount} $must be a pointer to a {@code uint32_t} value",
+			"""
+			If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not $NULL, {@code pProperties} $must be a pointer to an
+			array of {@code pPropertyCount} ##VkExtensionProperties structures
+			""",
+			"If {@code pLayerName} is not $NULL, it $must be the name of an instance layer returned by #EnumerateInstanceLayerProperties()"
+		)}
+
+		Any instance extensions provided by the Vulkan implementation or by implicitly enabled layers, but not by explicitly enabled layers, are returned when
+		{@code pLayerName} parameter is $NULL. When {@code pLayerName} is the name of a layer, the instance extensions provided by that layer are returned.
+
+		To enable an instance extension, the name of the extension should be added to the {@code ppEnabledExtensionNames} member of ##VkInstanceCreateInfo when
+		creating a {@code VkInstance}.
+		""",
+
+		nullable..const..charUTF8_p.IN("pLayerName", "either $NULL or the name of a instance layer to retrieve extensions from"),
 		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
 			"pPropertyCount",
-			"pointer to count indicating space available on input and structures returned on output"
+			"a pointer to an integer related to the number of extension properties available or queried"
 		),
-		nullable..VkExtensionProperties_p.OUT("pProperties", "pointer to a data structure to receive the results")
+		nullable..VkExtensionProperties_p.OUT("pProperties", "either $NULL or a pointer to an array of ##VkExtensionProperties structures")
 	)
 
 	VkResult(
 		"EnumerateDeviceExtensionProperties",
-		"Returns properties of available physical device extensions.",
+		"""
+		Queries the extensions available to a given physical device.
 
-		VkPhysicalDevice.IN("physicalDevice", "the physical device to query"),
-		nullable..const..charUTF8_p.IN("pLayerName", "optional layer name to query"),
+		If {@code pProperties} is $NULL, then the number of extensions properties available is returned in {@code pPropertyCount}. Otherwise,
+		{@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable
+		is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of
+		extension properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of
+		extensions available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
+			"If {@code pLayerName} is not $NULL, {@code pLayerName} $must be a null-terminated string",
+			"{@code pPropertyCount} $must be a pointer to a {@code uint32_t} value",
+			"""
+			If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not $NULL, {@code pProperties} $must be a pointer to an
+			array of {@code pPropertyCount} ##VkExtensionProperties structures
+			""",
+			"If {@code pLayerName} is not $NULL, it $must be the name of a device layer returned by #EnumerateDeviceLayerProperties()"
+		)}
+
+		Any device extensions provided by the Vulkan implementation or by implicitly enabled layers, but not by explicitly enabled layers, are returned when
+		{@code pLayerName} parameter is $NULL. When {@code pLayerName} is the name of a layer, the device extensions provided by that layer are returned.
+
+		To enable a device layer, the name of the layer should be added to the {@code ppEnabledExtensionNames} member of ##VkDeviceCreateInfo when creating a
+		{@code VkDevice}.
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be queried"),
+		nullable..const..charUTF8_p.IN("pLayerName", "either $NULL or the name of a device layer to retrieve extensions from"),
 		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
 			"pPropertyCount",
-			"count indicating number of {@code VkExtensionProperties} pointed to by {@code pProperties}"
+			"a pointer to an integer related to the number of extension properties available or queried"
 		),
-		nullable..VkExtensionProperties_p.OUT("pProperties", "pointer to an array of {@code VkExtensionProperties}")
+		nullable..VkExtensionProperties_p.OUT("pProperties", "either $NULL or a pointer to an array of ##VkExtensionProperties structures")
 	)
 
 	GlobalCommand..VkResult(
 		"EnumerateInstanceLayerProperties",
-		"Returns up to requested number of global layer properties.",
+		"""
+		Queries the available instance layers.
+
+		If {@code pProperties} is $NULL, then the number of layer properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount}
+		$must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with
+		the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of layer properties
+		available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of layers available,
+		#INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available layer properties were returned.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code pPropertyCount} $must be a pointer to a {@code uint32_t} value",
+			"""
+			If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not $NULL, {@code pProperties} $must be a pointer to an
+			array of {@code pPropertyCount} ##VkLayerProperties structures
+			"""
+		)}
+
+		To enable a instance layer, the name of the layer should be added to the {@code ppEnabledLayerNames} member of ##VkInstanceCreateInfo when creating a
+		{@code VkInstance}.
+
+		When a layer is enabled, it inserts itself into the call chain for Vulkan commands the layer is interested in. A common use of layers is to validate
+		application behavior during development. For example, the implementation will not check that Vulkan enums used by the application fall within allowed
+		ranges. Instead, a validation layer would do those checks and flag issues. This avoids a performance penalty during production use of the application
+		because those layers would not be enabled in production.
+		""",
 
 		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
 			"pPropertyCount",
-			"pointer to count indicating space available on input and structures returned on output"
+			"a pointer to an integer related to the number of layer properties available or queried"
 		),
-		nullable..VkLayerProperties_p.OUT("pProperties", "pointer to a array to receive the results")
+		nullable..VkLayerProperties_p.OUT("pProperties", "either $NULL or a pointer to an array of ##VkLayerProperties structures")
 	)
 
 	VkResult(
 		"EnumerateDeviceLayerProperties",
-		"Returns properties of available physical device layers.",
+		"""
+		Queries the available device layers.
 
-		VkPhysicalDevice.IN("physicalDevice", "the physical device to query"),
+		If {@code pProperties} is $NULL, then the number of layer properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount}
+		$must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with
+		the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of layer properties
+		available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of layers available,
+		#INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available layer properties were returned.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} must be a valid ##VkPhysicalDevice handle",
+			"{@code pPropertyCount} must be a pointer to a {@code uint32_t} value",
+			"If {@code pProperties} is not $NULL, {@code pProperties} must be a pointer to an array of {@code pPropertyCount} ##VkLayerProperties structures",
+			"If {@code pProperties} is not $NULL, the value referenced by {@code pPropertyCount} must be greater than 0"
+		)}
+
+		To enable a device layer, the name of the layer should be added to the {@code ppEnabledLayerNames} member of ##VkDeviceCreateInfo when creating a
+		{@code VkDevice}.
+
+		Loader implementations may provide mechanisms outside the Vulkan API for enabling specific layers. Layers enabled through such a mechanism are
+		implicitly enabled, while layers enabled by including the layer name in the {@code ppEnabledLayerNames} member of ##VkDeviceCreateInfo are explicitly
+		enabled. Except where otherwise specified, implicitly enabled and explicitly enabled layers differ only in the way they are enabled. Explicitly
+		enabling a layer that is implicitly enabled has no additional effect.
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be queried"),
 		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
 			"pPropertyCount",
-			"count indicating number of {@code VkLayerProperties} pointed to by {@code pProperties}"
+			"a pointer to an integer related to the number of layer properties available or queried"
 		),
-		nullable..VkLayerProperties_p.OUT("pProperties", "pointer to an array of {@code VkLayerProperties}")
+		nullable..VkLayerProperties_p.OUT("pProperties", "either $NULL or a pointer to an array of VkLayerProperties structures")
 	)
 
 	void(
 		"GetDeviceQueue",
-		"Gets a queue handle from a device.",
+		"""
+		Retrieves a handle to a {@code VkQueue} object.
 
-		VkDevice.IN("device", ""),
-		uint32_t.IN("queueFamilyIndex", ""),
-		uint32_t.IN("queueIndex", ""),
-		Check(1)..VkQueue.p.OUT("pQueue", "")
+		The queue family index is used in multiple places in Vulkan in order to tie operations to a specific family of queues.
+
+		When retrieving a handle to the queue via {@code vkGetDeviceQueue}, the queue family index is used to select which queue family to retrieve the
+		{@code VkQueue} handle from.
+
+		When creating a {@code VkCommandPool} object (see Command Pools), a queue family index is specified in the ##VkCommandPoolCreateInfo structure. Command
+		buffers from this pool can only be submitted on queues corresponding to this queue family.
+
+		When creating {@code VkImage} and {@code VkBuffer} resources, a set of queue families is included in the ##VkImageCreateInfo and ##VkBufferCreateInfo
+		structures to specify the queue families that can access the resource.
+
+		When inserting a ##VkBufferMemoryBarrier or ##VkImageMemoryBarrier a source and destination queue family index is specified to allow the ownership of a
+		buffer or image to be transferred from one queue family to another.
+
+		Each queue is assigned a priority, as set in the ##VkDeviceQueueCreateInfo structures when creating the device. The priority of each queue is a
+		normalized floating point value between 0.0 and 1.0, which is then translated to a discrete priority level by the implementation. Higher values
+		indicate a higher priority, with 0.0 being the lowest priority and 1.0 being the highest.
+
+		Within the same device, queues with higher priority $may be allotted more processing time than queues with lower priority. The implementation makes no
+		guarantees with regards to ordering or scheduling among queues with the same priority, other than the constraints defined by explicit scheduling
+		primitives. The implementation make no guarantees with regards to queues across different devices.
+
+		An implementation $may allow a higher-priority queue to starve a lower-priority queue on the same {@code VkDevice} until the higher-priority queue has
+		no further commands to execute. The relationship of queue priorities $must_not cause queues on one {@code VkDevice} to starve queues on another
+		{@code VkDevice}.
+
+		No specific guarantees are made about higher priority queues receiving more processing time or better quality of service than lower priority queues.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pQueue} $must be a pointer to a {@code VkQueue} handle",
+			"{@code queueFamilyIndex} $must be one of the queue family indices specified when device was created, via the ##VkDeviceQueueCreateInfo structure",
+			"""
+			{@code queueIndex} $must be less than the number of queues created for the specified queue family index when device was created, via the
+			{@code queueCount} member of the {@code VkDeviceQueueCreateInfo} structure
+			"""
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the queue"),
+		uint32_t.IN("queueFamilyIndex", "the index of the queue family to which the queue belongs"),
+		uint32_t.IN("queueIndex", "the index within this queue family of the queue to retrieve"),
+		Check(1)..VkQueue.p.OUT("pQueue", "a pointer to a {@code VkQueue} object that will be filled with the handle for the requested queue")
 	)
 
 	VkResult(
 		"QueueSubmit",
-		"Submits a sequence of semaphores or command buffers to a queue.",
+		"""
+		Submits a sequence of semaphores or command buffers to a queue.
 
-		VkQueue.IN("queue", ""),
-		AutoSize("pSubmits")..uint32_t.IN("submitCount", ""),
-		SingleValue("pSubmit")..nullable..const..VkSubmitInfo_p.IN("pSubmits", ""),
-		VkFence.IN("fence", "")
+		Each call to {@code vkQueueSubmit} submits zero or more batches of work to the queue for execution. {@code submitCount} is used to specify the number
+		of batches to submit. Each batch includes zero or more semaphores to wait upon, and a corresponding set of stages that will wait for the semaphore to
+		be signalled before executing any work, followed by a number of command buffers that will be executed, and finally, zero or more semaphores that will
+		be signaled after command buffer execution completes. Each batch is represented as an instance of the ##VkSubmitInfo structure stored in an array, the
+		address of which is passed in {@code pSubmitInfo}.
+
+		${note(
+			"""
+			The exact definition of a submission is platform-specific, but is considered a relatively expensive operation. In general, applications should
+			attempt to batch work together into as few calls to {@code vkQueueSubmit} as possible.
+			"""
+		)}
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code queue} $must be a valid {@code VkQueue} handle",
+			"If {@code submitCount} is not 0, {@code pSubmits} $must be a pointer to an array of {@code submitCount} valid ##VkSubmitInfo structures",
+			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
+			"Each of {@code queue} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"{@code fence} $must be unsignalled",
+			"{@code fence} $must_not be associated with any other queue command that has not yet completed execution on that queue"
+		)}
+
+		<h5>Host Synchronization</h5>
+		${ul(
+			"Host access to {@code queue} $must be externally synchronized",
+			"Host access to {@code pSubmits[].pWaitSemaphores[]} $must be externally synchronized",
+			"Host access to {@code pSubmits[].pSignalSemaphores[]} $must be externally synchronized",
+			"Host access to {@code fence} $must be externally synchronized"
+		)}
+		""",
+
+		VkQueue.IN("queue", "the handle of the queue that the command buffers will be submitted to"),
+		AutoSize("pSubmits")..uint32_t.IN("submitCount", "the number of elements in the {@code pSubmits} array"),
+		SingleValue("pSubmit")..nullable..const..VkSubmitInfo_p.IN(
+			"pSubmits",
+			"""
+			a pointer to an array of ##VkSubmitInfo structures which describe the work to submit. All work described by {@code pSubmits} $must be submitted to
+			the queue before the command returns.
+			"""
+		),
+		VkFence.IN(
+			"fence",
+			"""
+			an optional handle to a fence. If {@code fence} is not #NULL_HANDLE, the fence is signaled when execution of all
+			{@code VkSubmitInfo::pCommandBuffers} members of {@code pSubmits} is completed. If {@code submitCount} is zero but fence is not #NULL_HANDLE, the
+			fence will still be submitted to the queue and will become signaled when all work previously submitted to the queue has completed.
+			"""
+		)
 	)
 
 	VkResult(
 		"QueueWaitIdle",
-		"Waits for a queue to become idle.",
+		"""
+		Waits on the completion of all work within a single queue.
 
-		VkQueue.IN("queue", "")
+		{@code vkQueueWaitIdle} will block until all command buffers and sparse binding operations in the queue have completed.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code queue} $must be a valid {@code VkQueue} handle"
+		)}
+		""",
+
+		VkQueue.IN("queue", "the queue on which to wait")
 	)
 
 	VkResult(
 		"DeviceWaitIdle",
-		"Waits for a device to become idle.",
+		"""
+		Waits for a device to become idle.
 
-		VkDevice.IN("device", "")
+		A device is active while any of its queues have work to process. Once all device queues are idle, the device is idle.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to all {@code VkQueue} objects created from device $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device to idle")
 	)
 
 	VkResult(
 		"AllocateMemory",
-		"Alocates GPU memory.",
+		"""
+		Allocates device memory.
 
-		VkDevice.IN("device", ""),
-		const..VkMemoryAllocateInfo_p.IN("pAllocateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
-		Check(1)..VkDeviceMemory.p.OUT("pMemory", "")
+		Allocations returned by {@code vkAllocateMemory} are guaranteed to meet any alignment requirement by the implementation. For example, if an
+		implementation requires 128 byte alignment for images and 64 byte alignment for buffers, the device memory returned through this mechanism would be
+		128-byte aligned. This ensures that applications can correctly suballocate objects of different types (with potentially different alignment
+		requirements) in the same memory object.
+
+		When memory is allocated, its contents are undefined.
+
+		There is an implementation-dependent maximum number of memory allocations which can be simultaneously created on a device. This is specified by the
+		{@code maxMemoryAllocationCount} member of the ##VkPhysicalDeviceLimits structure. If {@code maxMemoryAllocationCount} is exceeded,
+		{@code vkAllocateMemory} will return #ERROR_TOO_MANY_OBJECTS.
+
+		${note(
+			"""
+			Some platforms may have a limit on the maximum size of a single allocation. For example, certain systems may fail to create allocations with a size
+			greater than or equal to 4GB. Such a limit is implementation-dependent, and if such a failure occurs then the error #ERROR_OUT_OF_DEVICE_MEMORY
+			should be returned.
+			"""
+		)}
+
+		<h3>Valid Usage</h3>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pAllocateInfo} $must be a pointer to a valid ##VkMemoryAllocateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pMemory} $must be a pointer to a {@code VkDeviceMemory} handle",
+			"The number of currently valid memory objects, allocated from device, $must be less than ##VkPhysicalDeviceLimits{@code ::maxMemoryAllocationCount}"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the memory"),
+		const..VkMemoryAllocateInfo_p.IN(
+			"pAllocateInfo",
+			"""
+			a pointer to a structure of type ##VkMemoryAllocateInfo, which contains parameters of the allocation. A successful returned allocation must use the
+			requested parameters — no substitution is permitted by the implementation.
+			"""
+		),
+		CreateInstance["pAllocator"],
+		Check(1)..VkDeviceMemory.p.OUT("pMemory", "a pointer to a {@code VkDeviceMemory} structure in which information about the allocated memory is returned")
 	)
 
 	void(
 		"FreeMemory",
-		"Frees GPU memory.",
+		"""
+		Frees a memory object.
 
-		VkDevice.IN("device", ""),
-		VkDeviceMemory.IN("memory", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		Before freeing a memory object, an application $must ensure the memory object is no longer in use by the device — for example by command buffers queued
+		for execution. The memory $can remain bound to images or buffers at the time the memory object is freed, but any further use of them (on host or
+		device) for anything other than destroying those objects will result in undefined behavior. If there are still any bound images or buffers, the memory
+		$may not be immediately released by the implementation, but $must be released by the time all bound images and buffers have been destroyed. Once memory
+		is released, it is returned to the heap from which it was allocated.
+
+		If a memory object is mapped at the time it is freed, it is implicitly unmapped.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code memory} is not #NULL_HANDLE, {@code memory} $must be a valid {@code VkDeviceMemory} handle",
+			"If {@code pAllocator is} not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code memory} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code memory} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code memory} (via images or buffers) $must have completed execution"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to memory $must be externally synchronized
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the memory"),
+		VkDeviceMemory.IN("memory", "the {@code VkDeviceMemory} object to be freed"),
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"MapMemory",
-		"Maps a memory object into application address space.",
+		"""
+		Retrieves a host virtual address pointer to a region of a mappable memory object.
 
-		VkDevice.IN("device", ""),
-		VkDeviceMemory.IN("memory", ""),
-		VkDeviceSize.IN("offset", ""),
-		VkDeviceSize.IN("size", ""),
-		VkMemoryMapFlags.IN("flags", ""),
-		Check(1)..void_pp.OUT("ppData", "")
+		Memory objects created with #AllocateMemory() are not directly host accessible. Memory objects created with the memory property
+		#MEMORY_PROPERTY_HOST_VISIBLE_BIT are considered mappable. Memory objects must be mappable in order to be successfully mapped on the host.
+
+		It is an application error to call {@code vkMapMemory} on a memory object that is already mapped.
+
+		{@code vkMapMemory} does not check whether the device memory is currently in use before returning the host-accessible pointer. The application $must
+		guarantee that any previously submitted command that writes to this range has completed before the host reads from or writes to that range, and that
+		any previously submitted command that reads from that range has completed before the host writes to that region. If the device memory was allocated
+		without the #MEMORY_PROPERTY_HOST_COHERENT_BIT set, these guarantees $must be made for an extended range: the application $must round down the start of
+		the range to the nearest multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}, and round the end of the range up to the nearest multiple
+		of {@code VkPhysicalDeviceLimits::nonCoherentAtomSize}.
+
+		While a range of device memory is mapped for host access, the application is responsible for synchronizing both device and host access to that memory
+		range.
+
+		Host-visible memory types that advertise the #MEMORY_PROPERTY_HOST_COHERENT_BIT property still require memory barriers between host and device in order
+		to be coherent, but do not require additional cache management operations (#FlushMappedMemoryRanges() or #InvalidateMappedMemoryRanges()) to achieve
+		coherency. For host writes to be seen by subsequent command buffer operations, a pipeline barrier from a source of #ACCESS_HOST_WRITE_BIT and
+		#PIPELINE_STAGE_HOST_BIT to a destination of the relevant device pipeline stages and access types $must be performed. Note that such a barrier is
+		performed implicitly upon each command buffer submission, so an explicit barrier is only rarely needed (e.g. if a command buffer waits upon an event
+		signaled by the host, where the host wrote some data after submission). For device writes to be seen by subsequent host reads, a pipeline barrier is
+		required to make the writes visible.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
+			"{@code flags} $must be 0",
+			"{@code ppData} $must be a pointer to a pointer",
+			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code memory} $must_not currently be mapped",
+			"{@code offset} $must be less than the size of memory",
+			"{@code size} $must be greater than 0",
+			"If {@code size} is not equal to #WHOLE_SIZE, {@code size} $must be less than or equal to the size of the memory minus offset",
+			"{@code memory} $must have been created with a memory type that reports #MEMORY_PROPERTY_HOST_VISIBLE_BIT"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code memory} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the memory"),
+		VkDeviceMemory.IN("memory", "the {@code VkDeviceMemory} object to be mapped"),
+		VkDeviceSize.IN("offset", "a zero-based byte offset from the beginning of the memory object"),
+		VkDeviceSize.IN("size", "he size of the memory range to map, or #WHOLE_SIZE to map from offset to the end of the allocation"),
+		VkMemoryMapFlags.IN("flags", "reserved for future use, and $must be zero"),
+		Check(1)..void_pp.OUT(
+			"ppData",
+			"""
+			points to a pointer in which is returned a host-accessible pointer to the beginning of the mapped range. This pointer minus offset must be aligned
+			to at least ##VkPhysicalDeviceLimits{@code ::minMemoryMapAlignment}.
+			"""
+		)
 	)
 
 	void(
 		"UnmapMemory",
-		"Unmaps a previously mapped memory object.",
+		"""
+		Unmaps a previously mapped memory object.
 
-		VkDevice.IN("device", ""),
-		VkDeviceMemory.IN("memory", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
+			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code memory} $must currently be mapped"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to memory $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the memory"),
+		VkDeviceMemory.IN("memory", "the memory object to be unmapped")
 	)
 
 	VkResult(
 		"FlushMappedMemoryRanges",
-		"Flushes mapped memory ranges.",
+		"""
+		Flushes mapped memory ranges.
 
-		VkDevice.IN("device", ""),
-		AutoSize("pMemoryRanges")..uint32_t.IN("memoryRangeCount", ""),
-		SingleValue("pMemoryRange")..const..VkMappedMemoryRange_p.IN("pMemoryRanges", "")
+		{@code vkFlushMappedMemoryRanges} $must be called after the host writes to non-coherent memory have completed and before command buffers that will read
+		or write any of those memory locations are submitted to a queue.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pMemoryRanges} $must be a pointer to an array of {@code memoryRangeCount} valid ##VkMappedMemoryRange structures",
+			"The value of {@code memoryRangeCount} $must be greater than 0"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the memory ranges"),
+		AutoSize("pMemoryRanges")..uint32_t.IN("memoryRangeCount", "the length of the {@code pMemoryRanges} array"),
+		SingleValue("pMemoryRange")..const..VkMappedMemoryRange_p.IN(
+			"pMemoryRanges",
+			"a pointer to an array of ##VkMappedMemoryRange structures describing the memory ranges to flush"
+		)
 	)
 
 	VkResult(
 		"InvalidateMappedMemoryRanges",
-		"Invalidates ranges of mapped memory objects.",
+		"""
+		Invalidates ranges of mapped memory objects.
 
-		VkDevice.IN("device", ""),
-		AutoSize("pMemoryRanges")..uint32_t.IN("memoryRangeCount", ""),
-		SingleValue("pMemoryRange")..const..VkMappedMemoryRange_p.IN("pMemoryRanges", "")
+		{@code vkInvalidateMappedMemoryRanges} $must be called after command buffers that execute and flush (via memory barriers) the device writes have
+		completed, and before the host will read or write any of those locations.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pMemoryRanges} $must be a pointer to an array of {@code memoryRangeCount} valid ##VkMappedMemoryRange structures",
+			"The value of {@code memoryRangeCount} $must be greater than 0"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the memory ranges"),
+		AutoSize("pMemoryRanges")..uint32_t.IN("memoryRangeCount", "the length of the {@code pMemoryRanges} array"),
+		SingleValue("pMemoryRange")..const..VkMappedMemoryRange_p.IN(
+			"pMemoryRanges",
+			"a pointer to an array of ##VkMappedMemoryRange structures describing the memory ranges to invalidate"
+		)
 	)
 
 	void(
 		"GetDeviceMemoryCommitment",
-		"Queries the current commitment for a {@code VkDeviceMemory}.",
+		"""
+		Determines the amount of lazily-allocated memory that is currently committed for a memory object.
 
-		VkDevice.IN("device", ""),
-		VkDeviceMemory.IN("memory", ""),
-		Check(1)..VkDeviceSize_p.OUT("pCommittedMemoryInBytes", "")
+		If the memory object is allocated from a heap with the #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT bit set, that object’s backing memory may be provided by
+		the implementation lazily. The actual committed size of the memory may initially be as small as zero (or as large as the requested size), and
+		monotonically increases as additional memory is needed.
+
+		A memory type with this flag set is only allowed to be bound to a {@code VkImage} whose usage flags include #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT.
+
+		${note(
+			"""
+			Using lazily allocated memory objects for framebuffer attachments that are not needed once a render pass instance has completed may allow some
+			implementations to never allocate memory for such attachments.
+			"""
+		)}
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
+			"{@code pCommittedMemoryInBytes} $must be a pointer to a {@code VkDeviceSize} value",
+			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code memory} $must have been created with a memory type that reports #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT"
+		)}
+
+		The implementation $may update the commitment at any time, and the value returned by this query $may be out of date.
+
+		The implementation guarantees to allocate any committed memory from the {@code heapIndex} indicated by the memory type that the memory object was
+		created with.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the memory"),
+		VkDeviceMemory.IN("memory", "the memory object being queried"),
+		Check(1)..VkDeviceSize_p.OUT(
+			"pCommittedMemoryInBytes",
+			"a pointer to a {@code VkDeviceSize} value in which the number of bytes currently committed is returned, on success"
+		)
 	)
 
 	VkResult(
 		"BindBufferMemory",
-		"Binds device memory to a buffer object.",
+		"""
+		Attaches memory to a buffer object.
 
-		VkDevice.IN("device", ""),
-		VkBuffer.IN("buffer", ""),
-		VkDeviceMemory.IN("memory", ""),
-		VkDeviceSize.IN("memoryOffset", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code buffer} $must be a valid {@code VkBuffer} handle",
+			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
+			"{@code buffer} $must have been created, allocated or retrieved from {@code device}",
+			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device}, {@code buffer} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code buffer} $must_not already be backed by a memory object",
+			"{@code buffer} $must_not have been created with any sparse memory binding flags",
+			"{@code memoryOffset} $must be less than the size of memory",
+			"""
+			If {@code buffer} was created with the #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT, {@code memoryOffset} $must
+			be a multiple of the value of ##VkPhysicalDeviceLimits{@code ::minTexelBufferOffsetAlignment}
+			""",
+			"""
+			If {@code buffer} was created with the #BUFFER_USAGE_UNIFORM_BUFFER_BIT, {@code memoryOffset} $must be a multiple of the value of
+			##VkPhysicalDeviceLimits{@code ::minUniformBufferOffsetAlignment}
+			""",
+			"""
+			If {@code buffer} was created with the #BUFFER_USAGE_STORAGE_BUFFER_BIT, {@code memoryOffset} $must be a multiple of the value of
+			##VkPhysicalDeviceLimits{@code ::minStorageBufferOffsetAlignment}
+			""",
+			"""
+			{@code memory} $must have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements
+			structure returned from a call to #GetBufferMemoryRequirements() with {@code buffer}
+			""",
+			"The size of {@code buffer} $must be less than or equal to the size of {@code memory} minus {@code memoryOffset}",
+			"""
+			{@code memoryOffset} $must be an integer multiple of the alignment member of the ##VkMemoryRequirements structure returned from a call to
+			#GetBufferMemoryRequirements() with {@code buffer}
+			"""
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code buffer} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the buffer and memory"),
+		VkBuffer.IN("buffer", "the buffer"),
+		VkDeviceMemory.IN("memory", "a {@code VkDeviceMemory} object describing the device memory to attach"),
+		VkDeviceSize.IN(
+			"memoryOffset",
+			"""
+			the start offset of the region of {@code memory} which is to be bound to the buffer. The number of bytes returned in the
+			##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified buffer.
+			"""
+		)
 	)
 
 	VkResult(
 		"BindImageMemory",
-		"Binds device memory to an image object.",
+		"""
+		Attaches memory to an image object.
 
-		VkDevice.IN("device", ""),
-		VkImage.IN("image", ""),
-		VkDeviceMemory.IN("memory", ""),
-		VkDeviceSize.IN("memoryOffset", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code image} $must be a valid {@code VkImage} handle",
+			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
+			"{@code image} $must have been created, allocated or retrieved from {@code device}",
+			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device}, {@code image} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code image} $must_not already be backed by a memory object",
+			"{@code image} $must_not have been created with any sparse memory binding flags",
+			"{@code memoryOffset} $must be less than the size of memory",
+			"""
+			{@code memory} $must have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements
+			structure returned from a call to #GetImageMemoryRequirements() with {@code image}
+			""",
+			"""
+			{@code memoryOffset} $must be an integer multiple of the alignment member of the ##VkMemoryRequirements structure returned from a call to
+			#GetImageMemoryRequirements() with {@code image}
+			""",
+			"""
+			The {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements() with {@code image} $must be
+			less than or equal to the size of {@code memory} minus {@code memoryOffset}
+			"""
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code image} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the image and memory"),
+		VkImage.IN("image", "the image"),
+		VkDeviceMemory.IN("memory", "a {@code VkDeviceMemory} object describing the device memory to attach"),
+		VkDeviceSize.IN(
+			"memoryOffset",
+			"""
+			the start offset of the region of {@code memory} which is to be bound to the image. The number of bytes returned in the
+			##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified image.
+			"""
+		)
 	)
 
 	void(
 		"GetBufferMemoryRequirements",
-		"Returns the memory requirements for specified Vulkan object.",
+		"""
+		Determines the memory requirements for a non-sparse buffer resource.
 
-		VkDevice.IN("device", ""),
-		VkBuffer.IN("buffer", ""),
-		VkMemoryRequirements_p.OUT("pMemoryRequirements", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code buffer} $must be a valid {@code VkBuffer} handle",
+			"{@code pMemoryRequirements} $must be a pointer to a ##VkMemoryRequirements structure",
+			"{@code buffer} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code buffer} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the buffer"),
+		VkBuffer.IN("buffer", "the buffer to query"),
+		VkMemoryRequirements_p.OUT(
+			"pMemoryRequirements",
+			"points to an instance of the ##VkMemoryRequirements structure in which the memory requirements of the buffer object are returned")
 	)
 
 	void(
 		"GetImageMemoryRequirements",
-		"Returns the memory requirements for specified Vulkan object.",
+		"""
+		Determines the memory requirements for a non-sparse image resource.
 
-		VkDevice.IN("device", ""),
-		VkImage.IN("image", ""),
-		VkMemoryRequirements_p.OUT("pMemoryRequirements", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code image} $must be a valid {@code VkImage} handle",
+			"{@code pMemoryRequirements} $must be a pointer to a ##VkMemoryRequirements structure",
+			"{@code image} must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code image} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the image"),
+		VkImage.IN("image", "the image to query"),
+		VkMemoryRequirements_p.OUT(
+			"pMemoryRequirements",
+			"points to an instance of the ##VkMemoryRequirements structure in which the memory requirements of the image object are returned"
+		)
 	)
 
 	void(
 		"GetImageSparseMemoryRequirements",
-		"Queries the memory requirements for a sparse image.",
+		"""
+		Query sparse memory requirements for an image.
 
-		VkDevice.IN("device", ""),
-		VkImage.IN("image", ""),
-		AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t_p.INOUT("pSparseMemoryRequirementCount", ""),
-		nullable..VkSparseImageMemoryRequirements_p.OUT("pSparseMemoryRequirements", "")
+		If {@code pSparseMemoryRequirements} is $NULL, then the number of sparse memory requirements available is returned in
+		{@code pSparseMemoryRequirementCount}. Otherwise, {@code pSparseMemoryRequirementCount} $must point to a variable set by the user to the number of
+		elements in the {@code pSparseMemoryRequirements} array, and on return the variable is overwritten with the number of structures actually written to
+		{@code pSparseMemoryRequirements}. If the value of {@code pSparseMemoryRequirementCount} is less than the number of sparse memory requirements
+		available, at most {@code pSparseMemoryRequirementCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS to indicate
+		that not all the available values were returned.
+
+		If the image was not created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT then {@code pSparseMemoryRequirementCount} will be set to zero and
+		{@code pSparseMemoryRequirements} will not be written to.
+
+		${note(
+			"""
+			It is legal for an implementation to report a larger value in ##VkMemoryRequirements{@code ::size} than would be obtained by adding together memory
+			sizes for all ##VkSparseImageMemoryRequirements returned by {@code vkGetImageSparseMemoryRequirements}. This may occur when the hardware requires
+			unused padding in the address range describing the resource.
+			"""
+		)}
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code image} $must be a valid {@code VkImage} handle",
+			"{@code pSparseMemoryRequirementCount} $must be a pointer to a {@code uint32_t} value",
+			"""
+			If the value referenced by {@code pSparseMemoryRequirementCount} is not 0, and {@code pSparseMemoryRequirements} is not $NULL,
+			{@code pSparseMemoryRequirements} $must be a pointer to an array of {@code pSparseMemoryRequirementCount} ##VkSparseImageMemoryRequirements
+			structures
+			""",
+			"{@code image} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code image} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code image} $must have been created with the #IMAGE_CREATE_SPARSE_RESIDENCY_BIT flag"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the image"),
+		VkImage.IN("image", "the {@code VkImage} object to get the memory requirements for"),
+		AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t_p.INOUT(
+			"pSparseMemoryRequirementCount",
+			"a pointer to an integer related to the number of sparse memory requirements available or queried"
+		),
+		nullable..VkSparseImageMemoryRequirements_p.OUT(
+			"pSparseMemoryRequirements",
+			"either $NULL or a pointer to an array of ##VkSparseImageMemoryRequirements structures"
+		)
 	)
 
 	void(
 		"GetPhysicalDeviceSparseImageFormatProperties",
-		"Retrieves properties of an image format applied to sparse images.",
+		"""
+		Retrieves properties of an image format applied to sparse images.
 
-		VkPhysicalDevice.IN("physicalDevice", ""),
-		VkFormat.IN("format", ""),
-		VkImageType.IN("type", ""),
-		VkSampleCountFlagBits.IN("samples", ""),
-		VkImageUsageFlags.IN("usage", ""),
-		VkImageTiling.IN("tiling", ""),
-		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT("pPropertyCount", ""),
-		nullable..VkSparseImageFormatProperties_p.OUT("pProperties", "")
+		Given that certain aspects of sparse image support, including the sparse image block size, may be implementation-dependent,
+		{@code vkGetPhysicalDeviceSparseImageFormatProperties} can be used to query for sparse image format properties prior to resource creation. This command
+		is used to check whether a given set of sparse image parameters is supported and what the sparse block shape will be.
+
+		{@code vkGetPhysicalDeviceSparseImageFormatProperties} returns an array of ##VkSparseImageFormatProperties. Each element will describe properties for
+		one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved
+		depth/stencil images there is only one element describing the combined aspects.
+
+		If {@code pProperties} is $NULL, then the number of sparse format properties available is returned in {@code pPropertyCount}. Otherwise,
+		{@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable
+		is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of
+		sparse format properties available, at most {@code pPropertyCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS to
+		indicate that not all the available values were returned.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
+			"{@code format} $must be a valid {@code VkFormat} value",
+			"{@code type} $must be a valid {@code VkImageType} value",
+			"{@code samples} $must be a valid {@code VkSampleCountFlagBits} value",
+			"{@code usage} $must be a valid combination of {@code VkImageUsageFlagBits} values",
+			"{@code usage} $must_not be 0",
+			"{@code tiling} $must be a valid {@code VkImageTiling} value",
+			"{@code pPropertyCount} $must be a pointer to a {@code uint32_t} value",
+			"""
+			If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not $NULL, pProperties $must be a pointer to an array of
+			{@code pPropertyCount} ##VkSparseImageFormatProperties structures
+			""",
+			"""
+			If format is an integer format, samples $must be one of the bit flag values specified in the value of
+			##VkPhysicalDeviceLimits{@code ::sampledImageIntegerSampleCounts}
+			""",
+			"""
+			If format is a non-integer color format, samples $must be one of the bit flag values specified in the value of
+			{@code VkPhysicalDeviceLimits::sampledImageColorSampleCounts}
+			""",
+			"""
+			If format is a depth format, samples $must be one of the bit flag values specified in the value of
+			{@code VkPhysicalDeviceLimits::sampledImageDepthSampleCounts}
+			""",
+			"""
+			If format is a stencil format, samples $must be one of the bit flag values specified in the value of
+			{@code VkPhysicalDeviceLimits::sampledImageStencilSampleCounts}
+			""",
+			"""
+			If usage includes #IMAGE_USAGE_STORAGE_BIT, samples $must be one of the bit flag values specified in the value of
+			{@code VkPhysicalDeviceLimits::storageImageSampleCounts}
+			"""
+		)}
+
+		If #IMAGE_CREATE_SPARSE_RESIDENCY_BIT is not supported for the given arguments, {@code pPropertyCount} will be set to zero upon return, and no data
+		will be written to {@code pProperties}.
+
+		Multiple aspects are returned for depth/stencil images that are implemented as separate planes by the implementation. The depth and stencil data planes
+		each have unique ##VkSparseImageFormatProperties data.
+
+		Depth/stencil images with depth and stencil data interleaved into a single plane will return a single ##VkSparseImageFormatProperties structure with
+		the {@code aspectMask} set to ${code("#IMAGE_ASPECT_DEPTH_BIT | #IMAGE_ASPECT_STENCIL_BIT")}.
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the sparse image capabilities"),
+		VkFormat.IN("format", "the image format"),
+		VkImageType.IN("type", "the dimensionality of image", VkImageTypes),
+		VkSampleCountFlagBits.IN("samples", "the number of samples per pixel as defined in {@code VkSampleCountFlagBits}", VkSampleCountFlagBitLinks),
+		VkImageUsageFlags.IN("usage", "a bitfield describing the intended usage of the image", VkImageUsageFlagBits, LinkMode.BITFIELD),
+		VkImageTiling.IN("tiling", "the tiling arrangement of the data elements in memory", VkImageTilings),
+		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
+			"pPropertyCount",
+			"a pointer to an integer related to the number of sparse format properties available or queried"
+		),
+		nullable..VkSparseImageFormatProperties_p.OUT("pProperties", "either $NULL or a pointer to an array of ##VkSparseImageFormatProperties structures")
 	)
 
 	VkResult(
 		"QueueBindSparse",
-		"Binds device memory to a sparse resource object.",
+		"""
+		Submits sparse binding operations to a queue for execution.
 
-		VkQueue.IN("queue", ""),
-		AutoSize("pBindInfo")..uint32_t.IN("bindInfoCount", ""),
-		SingleValue("pBindInfo")..const..VkBindSparseInfo_p.IN("pBindInfo", ""),
-		VkFence.IN("fence", "")
+		Each batch of sparse binding operations is represented by a list of ##VkSparseBufferMemoryBindInfo, ##VkSparseImageOpaqueMemoryBindInfo, and
+		##VkSparseImageMemoryBindInfo structures (encapsulated in a ##VkBindSparseInfo structure), each preceded by a list of semaphores upon which to wait
+		before beginning execution of the operations, and followed by a second list of semaphores to signal upon completion of the operations.
+
+		When all sparse binding operations in {@code pBindInfo} have completed execution, the status of fence is set to signaled, providing certain implicit
+		ordering guarantees.
+
+		Within a batch, a given range of a resource $must_not be bound more than once. Across batches, if a range is to be bound to one allocation and offset
+		and then to another allocation and offset, then the application $must guarantee (usually using semaphores) that the binding operations are executed in
+		the correct order, as well as to order binding operations against the execution of command buffer submissions.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code queue} $must be a valid {@code VkQueue} handle",
+			"If {@code bindInfoCount} is not 0, {@code pBindInfo} $must be a pointer to an array of {@code bindInfoCount} valid ##VkBindSparseInfo structures",
+			"If {@code fence} is not #NULL_HANDLE, fence $must be a valid {@code VkFence} handle",
+			"The {@code queue} $must support sparse binding operations",
+			"Each of {@code queue} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"{@code fence} $must be unsignalled",
+			"{@code fence} $must_not be associated with any other queue command that has not yet completed execution on that queue"
+		)}
+
+		<h5>Host Synchronization</h5>
+		${ul(
+			"Host access to {@code queue} $must be externally synchronized",
+			"Host access to {@code pBindInfo[].pWaitSemaphores[]} $must be externally synchronized",
+			"Host access to {@code pBindInfo[].pSignalSemaphores[]} $must be externally synchronized",
+			"Host access to {@code pBindInfo[].pBufferBinds[].buffer} $must be externally synchronized",
+			"Host access to {@code pBindInfo[].pImageOpaqueBinds[].image} $must be externally synchronized",
+			"Host access to {@code pBindInfo[].pImageBinds[].image} $must be externally synchronized",
+			"Host access to {@code fence} $must be externally synchronized"
+		)}
+		""",
+
+		VkQueue.IN("queue", "the queue to submit the sparse binding operation to"),
+		AutoSize("pBindInfo")..uint32_t.IN("bindInfoCount", "the size of the array pointed to by {@code pBindInfo}"),
+		SingleValue("pBindInfo")..const..VkBindSparseInfo_p.IN(
+			"pBindInfo",
+			"an array of ##VkBindSparseInfo structures each specifying the parameters of a sparse binding operation batch"
+		),
+		VkFence.IN("fence", "if not #NULL_HANDLE, is a fence to be signaled once the sparse binding operation completes")
 	)
 
 	VkResult(
 		"CreateFence",
-		"Creates a new fence object.",
+		"""
+		Creates a new fence object.
 
-		VkDevice.IN("device", ""),
-		const..VkFenceCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
-		Check(1)..VkFence.p.OUT("pFence", "")
+		Fences can be used by the host to determine completion of execution of submissions to queues performed with #QueueSubmit() and #QueueBindSparse().
+
+		A fence’s status is always either signaled or unsignaled. The host can poll the status of a single fence, or wait for any or all of a group of fences
+		to become signaled.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkFenceCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pFence} $must be a pointer to a {@code VkFence} handle"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the fence"),
+		const..VkFenceCreateInfo_p.IN("pCreateInfo", "points to a ##VkFenceCreateInfo structure specifying the state of the fence object"),
+		CreateInstance["pAllocator"],
+		Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned")
 	)
 
 	void(
 		"DestroyFence",
-		"Destroys a fence object.",
+		"""
+		Destroys a fence object.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code fence} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"{@code fence} $must_not be associated with any queue command that has not yet completed execution on that queue",
+			"If ##VkAllocationCallbacks were provided when {@code fence} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code fence} was created, {@code pAllocator} $must be $NULL"
+		)}
+		<h5>Host Synchronization</h5>
+		
+		Host access to {@code fence} $must be externally synchronized.
+		""",
 
-		VkDevice.IN("device", ""),
-		VkFence.IN("fence", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		VkDevice.IN("device", "the logical device that destroys the fence"),
+		VkFence.IN("fence", "the handle of the fence to destroy"),
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"ResetFences",
-		"Resets one or more fence objects.",
+		"""
+		Resets the status of one or more fences to the unsignaled state.
 
-		VkDevice.IN("device", ""),
-		AutoSize("pFences")..uint32_t.IN("fenceCount", ""),
-		SingleValue("pFence")..const..VkFence.p.IN("pFences", "")
+		If a fence is already in the unsignaled state, then resetting it has no effect.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pFences} $must be a pointer to an array of {@code fenceCount} valid {@code VkFence} handles",
+			"The value of {@code fenceCount} $must be greater than 0",
+			"Each element of {@code pFences} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and the elements of {@code pFences} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"Any given element of {@code pFences} $must not currently be associated with any queue command that has not yet completed execution on that queue"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to each member of {@code pFences} $must be externally synchronized
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the fences"),
+		AutoSize("pFences")..uint32_t.IN("fenceCount", "the number of fences to reset"),
+		SingleValue("pFence")..const..VkFence.p.IN("pFences", "a pointer to an array of {@code fenceCount} fence handles to reset")
 	)
 
 	VkResult(
 		"GetFenceStatus",
-		"Returns the status of a fence.",
+		"""
+		Queries the status of a fence from the host.
 
-		VkDevice.IN("device", ""),
-		VkFence.IN("fence", "")
+		Upon success, {@code vkGetFenceStatus} returns the status of the fence, which is one of:
+		${ul(
+			"#SUCCESS indicates that the fence is signaled.",
+			"#NOT_READY indicates that the fence is unsignaled."
+		)}
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code fence} $must be a valid {@code VkFence} handle",
+			"{@code fence} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code fence} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the fence"),
+		VkFence.IN("fence", "the handle of the fence to query")
 	)
 
 	VkResult(
 		"WaitForFences",
-		"Waits for one or more fences to become signaled.",
+		"""
+		Causes the host to wait until any one or all of a group of fences is signaled.
+		
+		If the condition is satisfied when {@code vkWaitForFences} is called, then {@code vkWaitForFences} returns immediately. If the condition is not
+		satisfied at the time {@code vkWaitForFences} is called, then {@code vkWaitForFences} will block and wait up to timeout nanoseconds for the condition
+		to become satisfied.
 
-		VkDevice.IN("device", ""),
-		AutoSize("pFences")..uint32_t.IN("fenceCount", ""),
-		SingleValue("pFence")..const..VkFence.p.IN("pFences", ""),
-		VkBool32.IN("waitAll", ""),
-		uint64_t.IN("timeout", "")
+		If the value of {@code timeout} is zero, then {@code vkWaitForFences} does not wait, but simply returns the current state of the fences. #TIMEOUT will
+		be returned in this case if the condition is not satisfied, even though no actual wait was performed.
+
+		If the specified {@code timeout} period expires before the condition is satisfied, {@code vkWaitForFences} returns #TIMEOUT. If the condition is
+		satisfied before timeout nanoseconds has expired, {@code vkWaitForFences} returns #SUCCESS.
+
+		Fences become signaled when the device completes executing the work that was submitted to a queue accompanied by the fence. But this alone is not
+		sufficient for the host to be guaranteed to see the results of device writes to memory. To provide that guarantee, the application $must insert a
+		memory barrier between the device writes and the end of the submission that will signal the fence, with {@code dstAccessMask} having the
+		#ACCESS_HOST_READ_BIT bit set, with {@code dstStageMask} having the #PIPELINE_STAGE_HOST_BIT bit set, and with the appropriate {@code srcStageMask} and
+		{@code srcAccessMask} members set to guarantee completion of the writes. If the memory was allocated without the #MEMORY_PROPERTY_HOST_COHERENT_BIT
+		set, then #InvalidateMappedMemoryRanges() $must be called after the fence is signaled in order to ensure the writes are visible to the host.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pFences} $must be a pointer to an array of {@code fenceCount} valid {@code VkFence} handles",
+			"The value of {@code fenceCount} $must be greater than 0",
+			"Each element of {@code pFences} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and the elements of {@code pFences} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the fences"),
+		AutoSize("pFences")..uint32_t.IN("fenceCount", "the number of fences to wait on"),
+		SingleValue("pFence")..const..VkFence.p.IN("pFences", "a pointer to an array of {@code fenceCount} fence handles"),
+		VkBool32.IN(
+			"waitAll",
+			"""
+			the condition that must be satisfied to successfully unblock the wait. If {@code waitAll} is #TRUE, then the condition is that all fences in
+			{@code pFences} are signaled. Otherwise, the condition is that at least one fence in {@code pFences} is signaled.
+			"""
+		),
+		uint64_t.IN(
+			"timeout",
+			"""
+			the timeout period in units of nanoseconds. The value of {@code timeout} is adjusted to the closest value allowed by the implementation-dependent
+			timeout accuracy, which may be substantially longer than one nanosecond, and may be longer than the requested period.
+			"""
+		)
 	)
 
 	VkResult(
 		"CreateSemaphore",
-		"Creates a new queue semaphore object.",
+		"""
+		Creates a new queue semaphore object.
 
-		VkDevice.IN("device", ""),
-		const..VkSemaphoreCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
-		Check(1)..VkSemaphore.p.OUT("pSemaphore", "")
+		Semaphores are used to coordinate operations between queues and between queue submissions within a single queue. An application might associate
+		semaphores with resources or groups of resources to marshal ownership of shared data. A semaphore’s status is always either <em>signaled</em> or
+		<em>unsignaled</em>. Semaphores are signaled by queues and $can also be waited on in the same or different queues until they are signaled.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkSemaphoreCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pSemaphore} $must be a pointer to a {@code VkSemaphore} handle"
+		)}
+
+		To signal a semaphore from a queue, include it in an element of the array of ##VkSubmitInfo structures passed through the {@code pSubmitInfo} parameter
+		to a call to #QueueSubmit(), or in an element of the array of ##VkBindSparseInfo structures passed through the {@code pBindInfo} parameter to a call to
+		#QueueBindSparse().
+
+		Semaphores included in the {@code pSignalSemaphores} array of one of the elements of a queue submission are signaled once queue execution reaches the
+		signal operation, and all previous work in the queue completes. Any operations waiting on that semaphore in other queues will be released once it is
+		signaled.
+
+		Similarly, to wait on a semaphore from a queue, include it in the {@code pWaitSemaphores} array of one of the elements of a batch in a queue
+		submission. When queue execution reaches the wait operation, will stall execution of subsequently submitted operations until the semaphore reaches the
+		signaled state due to a signaling operation. Once the semaphore is signaled, the subsequent operations will be permitted to execute and the status of
+		the semaphore will be reset to the unsignaled state.
+
+		In the case of {@code VkSubmitInfo}, command buffers wait at specific pipeline stages, rather than delaying the entire command buffer’s execution, with the
+		pipeline stages determined by the value of the corresponding element of the {@code pWaitDstStageMask} member of {@code VkSubmitInfo}. Execution of work
+		by those stages in subsequent commands is stalled until the corresponding semaphore reaches the signaled state. Subsequent sparse binding operations
+		wait for the semaphore to become signaled, regardless of the values of {@code pWaitDstStageMask}.
+
+		${note(
+			"""
+			A common scenario for using {@code pWaitDstStageMask} with values other than #PIPELINE_STAGE_ALL_COMMANDS_BIT is when synchronizing a window system
+			presentation operation against subsequent command buffers which render the next frame. In this case, an image that was being presented $must_not be
+			overwritten until the presentation operation completes, but other pipeline stages $can execute without waiting. A mask of
+			#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT prevents subsequent color attachment writes from executing until the semaphore signals. Some
+			implementations $may be able to execute transfer operations and/or vertex processing work before the semaphore is signaled.
+
+			If an image layout transition needs to be performed on a swapchain image before it is used in a framebuffer, that can be performed as the first
+			operation submitted to the queue after acquiring the image, and $should_not prevent other work from overlapping with the presentation operation.
+			For example, a ##VkImageMemoryBarrier could use:
+			${ul(
+				code("srcStageMask = #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT"),
+				code("srcAccessMask = #ACCESS_MEMORY_READ_BIT"),
+				code("dstStageMask = #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT"),
+				code("dstAccessMask = #ACCESS_COLOR_ATTACHMENT_READ_BIT | #ACCESS_COLOR_ATTACHMENT_WRITE_BIT."),
+				code("oldLayout = KHRSwapchain#IMAGE_LAYOUT_PRESENT_SRC_KHR"),
+				code("newLayout = #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL")
+			)}
+
+			Alternately, {@code oldLayout} can be #IMAGE_LAYOUT_UNDEFINED, if the image’s contents need not be preserved.
+
+			This barrier accomplishes a dependency chain between previous presentation operations and subsequent color attachment output operations, with the
+			layout transition performed in between, and does not introduce a dependency between previous work and any vertex processing stages. More precisely,
+			the semaphore signals after the presentation operation completes, then the semaphore wait stalls the #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT
+			stage, then there is a dependency from that same stage to itself with the layout transition performed in between.
+			"""
+		)}
+
+		When a queue signals or waits upon a semaphore, certain implicit ordering guarantees are provided.
+
+		Semaphore operations $may not make the side effects of commands visible to the host.
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the semaphore"),
+		const..VkSemaphoreCreateInfo_p.IN("pCreateInfo", "points to a ##VkSemaphoreCreateInfo structure specifying the state of the semaphore object"),
+		CreateInstance["pAllocator"],
+		Check(1)..VkSemaphore.p.OUT(
+			"pSemaphore",
+			"points to a handle in which the resulting semaphore object is returned. The semaphore is created in the unsignaled state."
+		)
 	)
 
 	void(
 		"DestroySemaphore",
-		"Destroys a semaphore object.",
+		"""
+		Destroys a semaphore object.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} $must be a valid {@code VkSemaphore} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code semaphore} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code semaphore} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"{@code semaphore} $must_not be associated with any queue command that has not yet completed execution on that queue",
+			"If ##VkAllocationCallbacks were provided when semaphore was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when semaphore was created, {@code pAllocator} $must be $NULL"
+		)}
+		
+		<h5>Host Synchronization</h5>
 
-		VkDevice.IN("device", ""),
-		VkSemaphore.IN("semaphore", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		Host access to {@code semaphore} $must be externally synchronized
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the semaphore"),
+		VkSemaphore.IN("semaphore", "the handle of the semaphore to destroy"),
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"CreateEvent",
-		"Creates a new event object.",
+		"""
+		Creates a new event object.
+		
+		Events represent a fine-grained synchronization primitive that can be used to gauge progress through a sequence of commands executed on a queue by
+		Vulkan. An event is initially in the unsignaled state. It $can be signaled by a device, using commands inserted into the command buffer, or by the
+		host. It $can also be reset to the unsignaled state by a device or the host. The host can query the state of an event. A device $can wait for one or
+		more events to become signaled.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkEventCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pEvent} $must be a pointer to a {@code VkEvent} handle"
+		)}
+		""",
 
-		VkDevice.IN("device", ""),
-		const..VkEventCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
-		Check(1)..VkEvent.p.OUT("pEvent", "")
+		VkDevice.IN("device", "the logical device that creates the event"),
+		const..VkEventCreateInfo_p.IN(
+			"pCreateInfo",
+			"a pointer to an instance of the ##VkEventCreateInfo structure which contains information about how the event is to be created"
+		),
+		CreateInstance["pAllocator"],
+		Check(1)..VkEvent.p.OUT("pEvent", "points to a handle in which the resulting event object is returned")
 	)
 
 	void(
 		"DestroyEvent",
-		"Destroys an event object.",
+		"""
+		Destroys an event object.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code event} is not #NULL_HANDLE, event $must be a valid VkEvent handle",
+			"If pAllocator is not NULL, pAllocator $must be a pointer to a valid VkAllocationCallbacks structure",
+			"If event is a valid handle, it $must have been created, allocated or retrieved from device",
+			"Each of device and event that are valid handles $must have been created, allocated or retrieved from the same VkPhysicalDevice",
+			"All submitted commands that refer to event $must have completed execution",
+			"If VkAllocationCallbacks were provided when event was created, a compatible set of callbacks $must be provided here",
+			"If no VkAllocationCallbacks were provided when event was created, pAllocator $must be NULL"
+		)}
 
-		VkDevice.IN("device", ""),
-		VkEvent.IN("event", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code event} $must be externally synchronized
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the event"),
+		VkEvent.IN("event", "the handle of the event to destroy"),
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"GetEventStatus",
-		"Retrieves the status of an event object.",
+		"""
+		Queries the state of an event from the host.
 
-		VkDevice.IN("device", ""),
-		VkEvent.IN("event", "")
+		Upon success, {@code vkGetEventStatus} returns the state of the event object with the following return codes:
+		${ul(
+			"#EVENT_SET - The event specified by event is signaled.",
+			"#EVENT_RESET - The event specified by event is unsignaled."
+		)}
+
+		The state of an event $can be updated by the host. The state of the event is immediately changed, and subsequent calls to {@code vkGetEventStatus} will
+		return the new state. If an event is already in the requested state, then updating it to the same state has no effect.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code event} $must be a valid {@code VkEvent} handle",
+			"{@code event} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code event} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the event"),
+		VkEvent.IN("event", "the handle of the event to query")
 	)
 
 	VkResult(
 		"SetEvent",
-		"Sets an event to signaled state.",
+		"""
+		Sets the state of an event to signaled from the host.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code event} $must be a valid {@code VkEvent} handle",
+			"{@code event} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code event} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+		)}
+		
+		<h5>Host Synchronization</h5>
 
-		VkDevice.IN("device", ""),
-		VkEvent.IN("event", "")
+		Host access to {@code event} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the event"),
+		VkEvent.IN("event", "the event to set")
 	)
 
 	VkResult(
 		"ResetEvent",
-		"Resets an event to non-signaled state.",
+		"""
+		Sets the state of an event to unsignaled from the host.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code event} $must be a valid {@code VkEvent} handle",
+			"{@code event} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code event} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+		)}
 
-		VkDevice.IN("device", ""),
-		VkEvent.IN("event", "")
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code event} $must be externally synchronized
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the event"),
+		VkEvent.IN("event", "the event to reset")
 	)
 
 	VkResult(
 		"CreateQueryPool",
-		"Creates a new query pool object.",
+		"""
+		Creates a new query pool object.
+		
+		Queries are managed using query pool objects. Each query pool is a collection of a specific number of queries of a particular type.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkQueryPoolCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pQueryPool} $must be a pointer to a {@code VkQueryPool} handle"
+		)}
+		""",
 
-		VkDevice.IN("device", ""),
-		const..VkQueryPoolCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
-		Check(1)..VkQueryPool.p.OUT("pQueryPool", "")
+		VkDevice.IN("device", "the logical device that creates the query pool"),
+		const..VkQueryPoolCreateInfo_p.IN(
+			"pCreateInfo",
+			"pointer to an instance of the ##VkQueryPoolCreateInfo structure containing the number and type of queries to be managed by the pool"
+		),
+		CreateInstance["pAllocator"],
+		Check(1)..VkQueryPool.p.OUT("pQueryPool", "a pointer to a {@code VkQueryPool} handle in which the resulting query pool object is returned")
 	)
 
 	void(
 		"DestroyQueryPool",
-		"Destroys a query pool object.",
+		"""
+		Destroys a query pool object.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code queryPool} is not #NULL_HANDLE, {@code queryPool} $must be a valid {@code VkQueryPool} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code queryPool} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code queryPool} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code queryPool} $must have completed execution",
+			"If ##VkAllocationCallbacks were provided when {@code queryPool} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code queryPool} was created, {@code pAllocator} $must be $NULL"
+		)}
 
-		VkDevice.IN("device", ""),
-		VkQueryPool.IN("queryPool", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code queryPool} $must be externally synchronized
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the query pool"),
+		VkQueryPool.IN("queryPool", "the query pool to destroy"),
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"GetQueryPoolResults",
-		"Copies results of queries in a query pool to a host memory region.",
+		"""
+		Retrieves status and results for a set of queries.
 
-		VkDevice.IN("device", ""),
-		VkQueryPool.IN("queryPool", ""),
-		uint32_t.IN("firstQuery", ""),
-		uint32_t.IN("queryCount", ""),
-		AutoSize("pData")..size_t.IN("dataSize", ""),
-		void_p.OUT("pData", ""),
-		VkDeviceSize.IN("stride", ""),
-		VkQueryResultFlags.IN("flags", "")
+		If no bits are set in {@code flags}, and all requested queries are in the available state, results are written as an array of 32-bit unsigned integer
+		values. The behavior when not all queries are available, is described below.
+
+		If #QUERY_RESULT_64_BIT is not set and the result overflows a 32-bit value, the value $may either wrap or saturate. Similarly, if #QUERY_RESULT_64_BIT
+		is set and the result overflows a 64-bit value, the value $may either wrap or saturate.
+
+		If #QUERY_RESULT_WAIT_BIT is set, Vulkan will wait for each query to be in the available state before retrieving the numerical results for that query.
+		In this case, {@code vkGetQueryPoolResults} is guaranteed to succeed and return #SUCCESS if the queries become available in a finite time (i.e. if they
+		have been issued and not reset). If queries will never finish (e.g. due to being reset but not issued), then {@code vkGetQueryPoolResults} $may not
+		return in finite time.
+
+		If #QUERY_RESULT_WAIT_BIT and #QUERY_RESULT_PARTIAL_BIT are both not set then no result values are written to {@code pData} for queries that are in the
+		unavailable state at the time of the call, and {@code vkGetQueryPoolResults} returns #NOT_READY. However, availability state is still written to
+		{@code pData} for those queries if #QUERY_RESULT_WITH_AVAILABILITY_BIT is set.
+
+		${note(
+			"""
+			Applications $must take care to ensure that use of the #QUERY_RESULT_WAIT_BIT bit has the desired effect.
+
+			For example, if a query has been used previously and a command buffer records the commands #CmdResetQueryPool(), #CmdBeginQuery(), and
+			#CmdEndQuery() for that query, then the query will remain in the available state until the {@code vkCmdResetQueryPool} command executes on a queue.
+			Applications can use fences or events to ensure that an query has already been reset before checking for its results or availability status.
+			Otherwise, a stale value could be returned from a previous use of the query.
+
+			The above also applies when #QUERY_RESULT_WAIT_BIT is used in combination with #QUERY_RESULT_WITH_AVAILABILITY_BIT. In this case, the returned
+			availability status $may reflect the result of a previous use of the query unless the {@code vkCmdResetQueryPool} command has been executed since
+			the last use of the query.
+			"""
+		)}
+
+		${note("Applications $can double-buffer query pool usage, with a pool per frame, and reset queries at the end of the frame in which they are read.")}
+
+		If #QUERY_RESULT_PARTIAL_BIT is set, #QUERY_RESULT_WAIT_BIT is not set, and the query’s status is unavailable, an intermediate result value between
+		zero and the final result value is written to {@code pData} for that query.
+
+		#QUERY_RESULT_PARTIAL_BIT $must_not be used if the pool’s {@code queryType} is #QUERY_TYPE_TIMESTAMP.
+
+		If #QUERY_RESULT_WITH_AVAILABILITY_BIT is set, the final integer value written for each query is non-zero if the query’s status was available or zero
+		if the status was unavailable. When #QUERY_RESULT_WITH_AVAILABILITY_BIT is used, implementations $must guarantee that if they return a non-zero
+		availability value then the numerical results $must be valid, assuming the results are not reset by a subsequent command.
+
+		${note("Satisfying this guarantee $may require careful ordering by the application, e.g. to read the availability status before reading the results.")}
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code queryPool} $must be a valid {@code VkQueryPool} handle",
+			"{@code pData} $must be a pointer to an array of {@code dataSize} bytes",
+			"{@code flags} $must be a valid combination of {@code VkQueryResultFlagBits} values",
+			"The value of {@code dataSize} $must be greater than 0",
+			"{@code queryPool} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code queryPool} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code firstQuery} $must be less than the number of queries in {@code queryPool}",
+			"If #QUERY_RESULT_64_BIT is not set in flags then {@code pData} and {@code stride} $must be multiples of 4",
+			"If #QUERY_RESULT_64_BIT is set in flags then {@code pData} and {@code stride} $must be multiples of 8",
+			"The sum of {@code firstQuery} and {@code queryCount} $must be less than or equal to the number of queries in {@code queryPool}",
+			"{@code dataSize} $must be large enough to contain the result of each query",
+			"If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} $must not contain #QUERY_RESULT_PARTIAL_BIT"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the query pool"),
+		VkQueryPool.IN("queryPool", "the query pool managing the queries containing the desired results"),
+		uint32_t.IN("firstQuery", "the initial query index"),
+		uint32_t.IN("queryCount", "the number of queries. {@code firstQuery} and {@code queryCount} together define a range of queries"),
+		AutoSize("pData")..size_t.IN("dataSize", "the size in bytes of the buffer pointed to by {@code pData}"),
+		MultiType(
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG
+		)..void_p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written"),
+		VkDeviceSize.IN("stride", "the stride in bytes between results for individual queries within {@code pData}."),
+		VkQueryResultFlags.IN(
+			"flags",
+			"a bitmask of {@code VkQueryResultFlagBits} specifying how and when results are returned",
+			VkQueryResultFlagBits, LinkMode.BITFIELD
+		)
 	)
 
 	VkResult(
@@ -2490,7 +3677,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkBufferCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkBuffer.p.OUT("pBuffer", "")
 	)
 
@@ -2500,7 +3687,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkBuffer.IN("buffer", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2509,7 +3696,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkBufferViewCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkBufferView.p.OUT("pView", "")
 	)
 
@@ -2519,7 +3706,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkBufferView.IN("bufferView", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2528,7 +3715,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkImageCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkImage.p.OUT("pImage", "")
 	)
 
@@ -2538,7 +3725,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkImage.IN("image", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	void(
@@ -2557,7 +3744,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkImageViewCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkImageView.p.OUT("pView", "")
 	)
 
@@ -2567,7 +3754,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkImageView.IN("imageView", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2576,7 +3763,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkShaderModuleCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkShaderModule.p.OUT("pShaderModule", "")
 	)
 
@@ -2586,7 +3773,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkShaderModule.IN("shaderModule", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2595,7 +3782,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkPipelineCacheCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkPipelineCache.p.OUT("pPipelineCache", "")
 	)
 
@@ -2605,7 +3792,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkPipelineCache.IN("pipelineCache", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2636,7 +3823,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		VkPipelineCache.IN("pipelineCache", ""),
 		AutoSize("pCreateInfos", "pPipelines")..uint32_t.IN("createInfoCount", ""),
 		const..VkGraphicsPipelineCreateInfo_p.IN("pCreateInfos", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		VkPipeline.p.OUT("pPipelines", "")
 	)
 
@@ -2648,7 +3835,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		VkPipelineCache.IN("pipelineCache", ""),
 		uint32_t.IN("createInfoCount", ""),
 		const..VkComputePipelineCreateInfo_p.IN("pCreateInfos", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkPipeline.p.OUT("pPipelines", "")
 	)
 
@@ -2658,7 +3845,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkPipeline.IN("pipeline", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2667,7 +3854,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkPipelineLayoutCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkPipelineLayout.p.OUT("pPipelineLayout", "")
 	)
 
@@ -2677,7 +3864,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkPipelineLayout.IN("pipelineLayout", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2686,7 +3873,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkSamplerCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkSampler.p.OUT("pSampler", "")
 	)
 
@@ -2696,7 +3883,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkSampler.IN("sampler", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2705,7 +3892,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkDescriptorSetLayoutCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkDescriptorSetLayout.p.OUT("pSetLayout", "")
 	)
 
@@ -2715,7 +3902,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkDescriptorSetLayout.IN("descriptorSetLayout", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2724,7 +3911,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkDescriptorPoolCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkDescriptorPool.p.OUT("pDescriptorPool", "")
 	)
 
@@ -2734,7 +3921,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkDescriptorPool.IN("descriptorPool", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2782,7 +3969,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkFramebufferCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkFramebuffer.p.OUT("pFramebuffer", "")
 	)
 
@@ -2792,7 +3979,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkFramebuffer.IN("framebuffer", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -2801,7 +3988,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkRenderPassCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkRenderPass.p.OUT("pRenderPass", "")
 	)
 
@@ -2811,7 +3998,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkRenderPass.IN("renderPass", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	void(
@@ -2829,7 +4016,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		const..VkCommandPoolCreateInfo_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
+		CreateInstance["pAllocator"],
 		Check(1)..VkCommandPool.p.OUT("pCommandPool", "")
 	)
 
@@ -2839,7 +4026,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		VkDevice.IN("device", ""),
 		VkCommandPool.IN("commandPool", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
@@ -3328,7 +4515,13 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		VkShaderStageFlags.IN("stageFlags", ""),
 		uint32_t.IN("offset", ""),
 		AutoSize("pValues")..uint32_t.IN("size", ""),
-		const..void_p.IN("pValues", "")
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		)..const..void_p.IN("pValues", "")
 	)
 
 	void(
