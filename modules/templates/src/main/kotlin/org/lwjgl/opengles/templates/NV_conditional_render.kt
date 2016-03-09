@@ -20,8 +20,8 @@ val NV_conditional_render = "NVConditionalRender".nativeClassGLES("NV_conditiona
 		on the results of an occlusion query. If the specified occlusion query returns a non-zero value, rendering commands between these calls are executed.
 		If the occlusion query returns a value of zero, all rendering commands between the calls are discarded.
 
-		If the occlusion query results are not available when BeginConditionalRenderNV is executed, the <mode> parameter specifies whether the GL should wait
-		for the query to complete or should simply render the subsequent geometry unconditionally.
+		If the occlusion query results are not available when BeginConditionalRenderNV is executed, the {@code mode} parameter specifies whether the GL should
+		wait for the query to complete or should simply render the subsequent geometry unconditionally.
 
 		Additionally, the extension provides a set of "by region" modes, allowing for implementations that divide rendering work by screen regions to perform
 		the conditional query test on a region-by-region basis without checking the query results from other regions. Such a mode is useful for cases like

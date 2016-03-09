@@ -175,7 +175,7 @@ typedef struct {
 
 	void(
 		"CreateStatesNV",
-		"Returns <code>n</code> previously unused state object names in <code>states</code>, and creates a state object in the initial state for each name.",
+		"Returns {@code n} previously unused state object names in {@code states}, and creates a state object in the initial state for each name.",
 
 		AutoSize("states")..GLsizei.IN("n", "the number of state object names to create"),
 		ReturnParam..GLuint_p.OUT("states", "the buffer in which to write the created state object names")
@@ -184,8 +184,8 @@ typedef struct {
 	void(
 		"DeleteStatesNV",
 		"""
-		Deletes <code>n</code> names of state objects given by <code>states</code>. Once a state object is deleted it has no contents and its name is again
-		unused. Unused names in <code>states</code> are silently ignored, as is the value zero.
+		Deletes {@code n} names of state objects given by {@code states}. Once a state object is deleted it has no contents and its name is again unused.
+		Unused names in {@code states} are silently ignored, as is the value zero.
 		""",
 
 		AutoSize("states")..GLsizei.IN("n", "the number of state object names to delete"),
@@ -202,7 +202,7 @@ typedef struct {
 	void(
 		"StateCaptureNV",
 		"""
-		Captures the current state of the rendering pipeline into the object indicated by <code>state</code>.
+		Captures the current state of the rendering pipeline into the object indicated by {@code state}.
 
 		The captured rendering state includes:
 		${ul(
@@ -253,7 +253,7 @@ typedef struct {
 		"GetStageIndexNV",
 		"""
 		Returns the 16bit value for a specific shader stage; the returned value is implementation specific. The value is to be used with the stage field within
-		<code>UniformAddressCommandNV</code> tokens.
+		{@code UniformAddressCommandNV} tokens.
 		""",
 
 		GLenum.IN("shadertype", "the shader stage type")
@@ -262,8 +262,8 @@ typedef struct {
 	void(
 		"DrawCommandsNV",
 		"""
-		Accepts arrays of buffer addresses as an array of offsets <code>indirects</code> into a buffer named by <code>buffer</code>, an array of command
-		lengths in <code>sizes</code>. All arrays have <code>count</code> entries.
+		Accepts arrays of buffer addresses as an array of offsets {@code indirects} into a buffer named by {@code buffer}, an array of command lengths in
+		{@code sizes}. All arrays have {@code count} entries.
 		""",
 
 		GLenum.IN("primitiveMode", "the primitive mode"),
@@ -276,8 +276,8 @@ typedef struct {
 	void(
 		"DrawCommandsAddressNV",
 		"""
-		Accepts arrays of buffer addresses as an array of GPU addresses <code>indirects</code>, an array of sequence lengths in <code>sizes</code>. All arrays
-		have <code>count</code> entries.
+		Accepts arrays of buffer addresses as an array of GPU addresses {@code indirects}, an array of sequence lengths in {@code sizes}. All arrays have
+		{@code count} entries.
 		""",
 
 		GLenum.IN("primitiveMode", "the primitive mode"),
@@ -289,10 +289,10 @@ typedef struct {
 	void(
 		"DrawCommandsStatesNV",
 		"""
-		Accepts arrays of buffer addresses as an array of offsets <code>indirects</code> into a buffer named by <code>buffer</code>, an array of command
-		lengths in <code>sizes</code>, and an array of state object names in <code>states</code>, of which all names must be non-zero. Frame buffer object
-		names are stored in <code>fbos</code> and can be either zero or non-zero. All arrays have <code>count</code> entries. The residency of textures used as
-		attachment inside the state object's captured fbo or the passed fbo must managed explicitly.
+		Accepts arrays of buffer addresses as an array of offsets {@code indirects} into a buffer named by {@code buffer}, an array of command lengths in
+		{@code sizes}, and an array of state object names in {@code states}, of which all names must be non-zero. Frame buffer object names are stored in
+		{@code fbos} and can be either zero or non-zero. All arrays have {@code count} entries. The residency of textures used as attachment inside the state
+		object's captured fbo or the passed fbo must managed explicitly.
 		""",
 
 		GLuint.IN("buffer", "the buffer object name"),
@@ -306,10 +306,10 @@ typedef struct {
 	void(
 		"DrawCommandsStatesAddressNV",
 		"""
-		Accepts arrays of buffer addresses as an array of GPU addresses <code>indirects</code>, an array of command lengths in <code>sizes</code>, and an array
-		of state object names in <code>states</code>, of which all names must be non-zero. Frame buffer object names are stored in <code>fbos</code> and can be
-		either zero or non-zero. All arrays have <code>count</code> entries. The residency of textures used as attachment inside the state object's captured
-		fbo or the passed fbo must managed explicitly.
+		Accepts arrays of buffer addresses as an array of GPU addresses {@code indirects}, an array of command lengths in {@code sizes}, and an array of state
+		object names in {@code states}, of which all names must be non-zero. Frame buffer object names are stored in {@code fbos} and can be either zero or
+		non-zero. All arrays have {@code count} entries. The residency of textures used as attachment inside the state object's captured fbo or the passed fbo
+		must managed explicitly.
 		""",
 
 		const..GLuint64_p.IN("indirects", "the array of GPU addresses"),
@@ -321,7 +321,7 @@ typedef struct {
 
 	void(
 		"CreateCommandListsNV",
-		"Returns <code>n</code> previously unused command list names in <code>lists</code>, and creates a command list in the initial state for each name.",
+		"Returns {@code n} previously unused command list names in {@code lists}, and creates a command list in the initial state for each name.",
 
 		AutoSize("lists")..GLsizei.IN("n", "the number of command list names to create"),
 		ReturnParam..GLuint_p.OUT("lists", "the buffer in which to return the created command list names")
@@ -330,8 +330,8 @@ typedef struct {
 	void(
 		"DeleteCommandListsNV",
 		"""
-		Deletes <code>n</code> command lists stored in <code>lists</code>. Once a command list is deleted it has no contents and its name is again unused.
-		Unused names in <code>lists</code> are silently ignored, as is the value zero.
+		Deletes {@code n} command lists stored in {@code lists}. Once a command list is deleted it has no contents and its name is again unused. Unused names
+		in {@code lists} are silently ignored, as is the value zero.
 		""",
 
 		AutoSize("lists")..GLsizei.IN("n", "the number of command list names to delete"),
@@ -349,7 +349,7 @@ typedef struct {
 		"ListDrawCommandsStatesClientNV",
 		"""
 		A list has multiple segments and each segment enqueues an ordered list of commands. This command enqueues the equivalent of the
-		DrawCommandsStatesClientNV commands into the list indicated by <code>list</code> on the segment indicated by <code>segment</code>.
+		DrawCommandsStatesClientNV commands into the list indicated by {@code list} on the segment indicated by {@code segment}.
 
 		A list has multiple segments and each segment enqueues an ordered list of command sequences. This command enqueues the equivalent of the
 		DrawCommandsStatesNV commands into the list indicated by {@code list} on the segment indicated by {@code segment} except that the sequence data is
@@ -388,8 +388,8 @@ typedef struct {
 	void(
 		"CompileCommandListNV",
 		"""
-		Makes the list indicated by <code>list</code> switch from allowing collection of commands to allowing its execution. At this time, the implementation
-		may generate optimized commands to transition between states as efficiently as possible.
+		Makes the list indicated by {@code list} switch from allowing collection of commands to allowing its execution. At this time, the implementation may
+		generate optimized commands to transition between states as efficiently as possible.
 		""",
 
 		GLuint.IN("list", "the command list to compile")
@@ -398,7 +398,7 @@ typedef struct {
 	void(
 		"CallCommandListNV",
 		"""
-		Executes the command list indicated by <code>list</code>, which operates as if the DrawCommandsStates* commands were replayed in the order they were
+		Executes the command list indicated by {@code list}, which operates as if the DrawCommandsStates* commands were replayed in the order they were
 		enqueued on each segment, starting from segment zero and proceeding to the maximum segment. All buffer or texture resources' residency must be managed
 		explicitly, including texture attachments of the effective fbos during list enqueuing.
 		""",

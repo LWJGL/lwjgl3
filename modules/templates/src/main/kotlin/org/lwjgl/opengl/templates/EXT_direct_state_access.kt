@@ -51,7 +51,9 @@ val EXT_direct_state_access = "EXTDirectStateAccess".nativeClassGL("EXT_direct_s
 			"The current bound buffer for each supported buffer target.",
 			"The current GLSL program.",
 			"The current framebuffer object."
-		)}  The new selector-free update commands can be compiled into display lists.
+		)}
+
+		The new selector-free update commands can be compiled into display lists.
 
 		The OpenGL API has latched state for vertex array buffer objects and pixel store state. When an application issues a GL command to unpack or pack pixels
 		(for example, glTexImage2D or glReadPixels respectively), the current unpack and pack pixel store state determines how the pixels are unpacked

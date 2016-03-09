@@ -177,10 +177,10 @@ if (condition) {
 } else {
 	result = do_general_path();
 }""")}
-		where {@code condition} diverges between invocations, a SIMD implementation might first call do_fast_path() for the invocations where <condition> is
-		true and leave the other invocations dormant. Once do_fast_path() returns, it might call do_general_path() for invocations where <condition> is false
-		and leave the other invocations dormant. In this case, the shader executes *both* the fast and the general path and might be better off just using the
-		general path for all invocations.
+		where {@code condition} diverges between invocations, a SIMD implementation might first call do_fast_path() for the invocations where {@code condition}
+		is true and leave the other invocations dormant. Once do_fast_path() returns, it might call do_general_path() for invocations where {@code condition}
+		is false and leave the other invocations dormant. In this case, the shader executes *both* the fast and the general path and might be better off just
+		using the general path for all invocations.
 
 		This extension provides the ability to avoid divergent execution by evaluting a condition across an entire SIMD invocation group using code like:
 		${codeBlock("""
@@ -604,7 +604,7 @@ val OES_element_index_uint = EXT_FLAG.nativeClassGLES("OES_element_index_uint", 
 		"""
 		When true, the $registryLink extension is supported.
 
-		OpenGL ES 1.0 supports DrawElements with <type> value of UNSIGNED_BYTE and UNSIGNED_SHORT. This extension adds support for UNSIGNED_INT <type> values.
+		OpenGL ES 1.0 supports DrawElements with {@code type} value of UNSIGNED_BYTE and UNSIGNED_SHORT. This extension adds support for UNSIGNED_INT <type> values.
 		"""
 }
 

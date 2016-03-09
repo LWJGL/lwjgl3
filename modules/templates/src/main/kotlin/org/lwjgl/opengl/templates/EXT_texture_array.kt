@@ -18,10 +18,10 @@ val EXT_texture_array = "EXTTextureArray".nativeClassGL("EXT_texture_array", pos
 
 		An array texture is accessed as a single unit in a programmable shader, using a single coordinate vector. A single layer is selected, and that layer is
 		then accessed as though it were a one- or two-dimensional texture. The layer used is specified using the "t" or "r" texture coordinate for 1D and 2D
-		array textures, respectively. The layer coordinate is provided as an unnormalized floating-point value in the range [0,<n>-1], where <n> is the number
-		of layers in the array texture. Texture lookups do not filter between layers, though such filtering can be achieved using programmable shaders. When
-		mipmapping is used, each level of an array texture has the same number of layers as the base level; the number of layers is not reduced as the image
-		size decreases.
+		array textures, respectively. The layer coordinate is provided as an unnormalized floating-point value in the range {@code [0,<n>-1]}, where
+		{@code <n>} is the number of layers in the array texture. Texture lookups do not filter between layers, though such filtering can be achieved using
+		programmable shaders. When mipmapping is used, each level of an array texture has the same number of layers as the base level; the number of layers is
+		not reduced as the image size decreases.
 
 		Array textures can be rendered to by binding them to a framebuffer object (EXT_framebuffer_object). A single layer of an array texture can be bound
 		using normal framebuffer object mechanisms, or an entire array texture can be bound and rendered to using the layered rendering mechanisms provided by

@@ -18,7 +18,7 @@ val ANGLE_instanced_arrays = "ANGLEInstancedArrays".nativeClassGLES("ANGLE_insta
 		the amount of duplicate data to a minimum.
 
 		This extension introduces an array "divisor" for generic vertex array attributes, which when non-zero specifies that the attribute is "instanced." An
-		instanced attribute does not advance per-vertex as usual, but rather after every &lt;divisor&gt; conceptual draw calls.
+		instanced attribute does not advance per-vertex as usual, but rather after every {@code <divisor>} conceptual draw calls.
 
 		(Attributes which aren't instanced are repeated in their entirety for every conceptual draw call.)
 

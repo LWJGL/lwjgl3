@@ -21,8 +21,8 @@ val IMG_read_format = "IMGReadFormat".nativeClassGLES("IMG_read_format", postfix
     ------                      ----
     BGRA_IMG                    UNSIGNED_BYTE
     BGRA_IMG                    UNSIGNED_SHORT_4_4_4_4_REV_IMG""")}
-		E.g. Calling GetIntegerv with a <pname> parameter of IMPLEMENTATION_COLOR_READ_FORMAT_OES can now return BGRA, with the corresponding call to
-		GetIntegerv using a <pname> parameter of IMPLEMENTATION_COLOR_READ_TYPE_OES returning UNSIGNED_BYTE;
+		E.g. Calling GetIntegerv with a {@code pname} parameter of IMPLEMENTATION_COLOR_READ_FORMAT_OES can now return BGRA, with the corresponding call to
+		GetIntegerv using a {@code pname} parameter of IMPLEMENTATION_COLOR_READ_TYPE_OES returning UNSIGNED_BYTE;
 		"""
 
 	IntConstant(

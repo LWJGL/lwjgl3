@@ -22,8 +22,8 @@ val EXT_read_format_bgra = "EXTReadFormatBGRA".nativeClassGLES("EXT_read_format_
     BGRA_EXT                    UNSIGNED_BYTE
     BGRA_EXT                    UNSIGNED_SHORT_4_4_4_4_REV_EXT
     BGRA_EXT                    UNSIGNED_SHORT_1_5_5_5_REV_EXT""")}
-		E.g. Calling GetIntegerv with a <pname> parameter of IMPLEMENTATION_COLOR_READ_FORMAT_OES can now return BGRA_EXT, with the corresponding call to
-		GetIntegerv using a <pname> parameter of IMPLEMENTATION_COLOR_READ_TYPE_OES returning UNSIGNED_BYTE;
+		E.g. Calling GetIntegerv with a {@code pname} parameter of IMPLEMENTATION_COLOR_READ_FORMAT_OES can now return BGRA_EXT, with the corresponding call to
+		GetIntegerv using a {@code pname} parameter of IMPLEMENTATION_COLOR_READ_TYPE_OES returning UNSIGNED_BYTE;
 		"""
 
 	IntConstant(

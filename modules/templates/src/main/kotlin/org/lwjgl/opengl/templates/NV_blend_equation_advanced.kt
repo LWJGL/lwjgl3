@@ -32,7 +32,7 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGL("NV_ble
 
 	IntConstant(
 		"""
-		Accepted by the {@code value} parameter of BlendParameteriNV when <pname> is BLEND_OVERLAP_NV.
+		Accepted by the {@code value} parameter of BlendParameteriNV when {@code pname} is BLEND_OVERLAP_NV.
 		""",
 
 		"UNCORRELATED_NV"..0x8521,

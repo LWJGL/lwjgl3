@@ -176,7 +176,6 @@ val VkApplicationInfo = struct(VULKAN_PACKAGE, "VkApplicationInfo") {
 			"If {@code pEngineName} is not $NULL, {@code pEngineName} $must be a null-terminated string",
 			"{@code apiVersion} $must be zero, or otherwise it $must be a version that the implementation supports, or supports an effective substitute for"
 		)}
-
 		"""
 
 	VkStructureType.member("sType", "should be set to VK10#VK_STRUCTURE_TYPE_APPLICATION_INFO")

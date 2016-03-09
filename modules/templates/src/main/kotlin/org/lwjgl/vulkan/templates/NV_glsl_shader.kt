@@ -17,7 +17,7 @@ val NV_glsl_shader = "NVGLSLShader".nativeClassVK("NV_glsl_shader", postfix = NV
 
 		${codeBlock("""
 char const vss[] =
-	"#version 450 core\n"
+	"\#version 450 core\n"
 	"layout(location = 0) in vec2 aVertex;\n"
 	"layout(location = 1) in vec4 aColor;\n"
 	"out vec4 vColor;\n"

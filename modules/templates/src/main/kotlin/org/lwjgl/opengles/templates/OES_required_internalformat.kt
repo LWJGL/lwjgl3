@@ -19,27 +19,27 @@ val OES_required_internalformat = "OESRequiredInternalformat".nativeClassGLES("O
 		While this allows flexibility for implementations, it does mean that an application does not have a reliable means to request the implementation
 		maintain a specific precision or to find out what precision the implementation will maintain for a given texture or renderbuffer image.
 
-		For reference, "Desktop" OpenGL uses the <internalformat> argument to glTexImage*, glCopyTexImage* and glRenderbufferStorageEXT as a hint, defining the
-		particular base format and precision that the application wants the implementation to maintain when storing the image data. Further, the application
-		can choose an <internalformat> with a different base internal format than the source format specified by <format>. The implementation is not required
-		to exactly match the precision specified by <internalformat> when choosing an internal storage precision, but it is required to match the base internal
-		format of <internalformat>.
+		For reference, "Desktop" OpenGL uses the {@code internalformat} argument to glTexImage*, glCopyTexImage* and glRenderbufferStorageEXT as a hint,
+		defining the particular base format and precision that the application wants the implementation to maintain when storing the image data. Further, the
+		application can choose an {@code internalformat} with a different base internal format than the source format specified by <format>. The implementation
+		is not required to exactly match the precision specified by {@code internalformat} when choosing an internal storage precision, but it is required to
+		match the base internal format of {@code internalformat}.
 
-		In addition, ES 1.1 does not allow an implementation to fail a request to glTexImage2D for any of the legal <format> and <type> combinations listed in
-		Table 3.4, even if the implementation does not natively support data stored in that external <format> and <type>. However, there are no additional
-		requirements placed on the implementation. The ES implementation is free to store the texture data with lower precision than originally specified, for
-		instance. Further, since ES removes the ability to query the texture object to find out what internal format it chose, there is no way for the
-		application to find out that this has happened.
+		In addition, ES 1.1 does not allow an implementation to fail a request to glTexImage2D for any of the legal {@code format} and {@code type}, even if
+		the implementation does not natively support data stored in that external {@code format} and {@code type}. However, there are no additional requirements
+		placed on the implementation. The ES implementation is free to store the texture data with lower precision than originally specified, for instance.
+		Further, since ES removes the ability to query the texture object to find out what internal format it chose, there is no way for the application to
+		find out that this has happened.
 
 		This extension addresses the situation in two ways:
 		${ol(
 			"This extension introduces the ability for an application to specify the desired \"sized\" internal formats for texture image allocation.",
 			"This extension guarantees to maintain at least the specified precision of all available sized internal formats."
 		)}
-		An implementation that exports this extension is committing to support all of the legal values for <internalformat> in Tables 3.4, 3.4.x, and 3.4.y,
-		subject to the extension dependencies described herein. That is to say, the implementation is guaranteeing that choosing an <internalformat> argument
-		with a value from these tables will not cause an image allocation request to fail. Furthermore, it is guaranteeing that for any sized internal format,
-		the renderbuffer or texture data will be stored with at least the precision prescribed by the sized internal format.
+		An implementation that exports this extension is committing to support all of the legal values for {@code internalformat}, subject to the extension
+		dependencies described herein. That is to say, the implementation is guaranteeing that choosing an {@code internalformat} argument with a value from
+		these tables will not cause an image allocation request to fail. Furthermore, it is guaranteeing that for any sized internal format, the renderbuffer
+		or texture data will be stored with at least the precision prescribed by the sized internal format.
 		"""
 
 	IntConstant(
