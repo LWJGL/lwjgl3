@@ -7,47 +7,125 @@ package org.lwjgl.generator
 import java.util.*
 import java.util.regex.Pattern
 
-private val BLOCK_NODE = "(?:h[1-6]|table|ul|ol|pre)" // TODO: add more here if necessary
-private val BLOCK_PATTERN = Pattern.compile("\\s*^\\s*$\\s*|\\s*$\\s+(?=<$BLOCK_NODE)|(?<=</$BLOCK_NODE>)\\s+^\\s*", Pattern.MULTILINE)
-private val NON_PARAGRAPH_PATTERN = Pattern.compile("^<$BLOCK_NODE")
+fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
+
+private val REDUNDANT_WHITESPACE = Pattern.compile("^[ \\t]+$", Pattern.MULTILINE)
+private val BLOCK_NODE = "(?:div|h[1-6]|li|ol|pre|table|td|tr|ul)" // TODO: add more here if necessary
+private val FRAGMENT = Pattern.compile("(</?$BLOCK_NODE[^>]*>|\\A)((?:[\\s\\S])*?)(?=</?$BLOCK_NODE|\\z)")
+private val PARAGRAPH_PATTERN = Pattern.compile("\\n\\n(?:\\n?[ \\t]*[\\S][^\\n]*)+", Pattern.MULTILINE)
 private val CLEANUP_PATTERN = Pattern.compile("^[ \t]++(?![*])", Pattern.MULTILINE)
 private val UNESCAPE_PATTERN = Pattern.compile("\uFFFF")
 
-fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
+/*
+Here we perform the following transformation:
 
-private fun StringBuilder.appendBlock(linePrefix: String, text: String, start: Int, end: Int) {
-	append('\n')
-	append(linePrefix)
-	append('\n')
-	append(linePrefix)
-	val p = !NON_PARAGRAPH_PATTERN.matcher(text.substring(start)).find()
-	if ( p ) append("<p>")
-	this.append(text, start, end)
-	if ( p ) append("</p>")
+<block>                 <block>
+text                    text
+
+text            =>      <p>text</p>
+
+text                    <p>text</p>
+
+	<div>                   <div>
+	text                    text
+
+	text                    <p>text</p>
+	</div>                  </div>
+
+text                    <p>text</p>
+</block>                </block>
+
+The first text sub-block is not wrapped in <p> because:
+	a) It is not strictly necessary, renders fine in browsers and IDEs.
+	b) It improves readability of the source javadoc.
+
+For the purposes of this transformation, the javadoc root is an implicit block.
+ */
+private fun String.cleanup(linePrefix: String = "\t * "): String {
+	val dom = trim().replaceAll(REDUNDANT_WHITESPACE, "")
+
+	return CLEANUP_PATTERN.matcher(
+		StringBuilder(dom.length).layoutDOM(dom, linePrefix)
+	)
+		.replaceAll(linePrefix)
+		.replaceAll(UNESCAPE_PATTERN, "")
 }
 
-private fun String.cleanup(linePrefix: String = "\t * "): String {
-	val trimmed = trim()
-	val matcher = BLOCK_PATTERN.matcher(trimmed)
+private fun StringBuilder.layoutDOM(dom: String, linePrefix: String): StringBuilder {
+	val matcher = FRAGMENT.matcher(dom)
 
-	return if (matcher.find()) {
-		StringBuilder(trimmed.length).run {
-			append(trimmed, 0, matcher.start())
-
-			var lastMatch = matcher.end()
-			while ( matcher.find() ) {
-				appendBlock(linePrefix, trimmed, lastMatch, matcher.start())
-				lastMatch = matcher.end()
+	while ( matcher.find() ) {
+		val tag = matcher.group(1)
+		if ( tag.isNotEmpty() ) {
+			if ( startNewLine(dom, matcher.start()) ) {
+				if ( !tag.startsWith("</") && tag != "<tr>" && tag != "<li>" ) {
+					append('\n')
+					append(linePrefix)
+				}
+				append('\n')
+				append(linePrefix)
 			}
-			appendBlock(linePrefix, trimmed, lastMatch, trimmed.length)
-
-			toString()
+			append(tag)
 		}
-	} else {
-		trimmed
+
+		val text = matcher.group(2).trim()
+		if ( text.isNotEmpty() )
+			layoutText(text, linePrefix, forceParagraph = tag.isNotEmpty() && tag.startsWith("</"))
 	}
-		.replaceAll(CLEANUP_PATTERN, linePrefix)
-		.replaceAll(UNESCAPE_PATTERN, "")
+
+	return this
+}
+
+private fun startNewLine(dom: String, index: Int): Boolean {
+	if ( index == 0 )
+		return false
+
+	for ( i in (index - 1) downTo 0) {
+		if ( dom[i] == '\n' )
+			return true
+
+		if ( !dom[i].isWhitespace() )
+			break
+	}
+
+	return false
+}
+
+private fun StringBuilder.layoutText(text: String, linePrefix: String, forceParagraph: Boolean = false) {
+	val matcher = PARAGRAPH_PATTERN.matcher(text)
+
+	if ( matcher.find() ) {
+		if ( matcher.start() > 0 )
+			appendParagraphFirst(linePrefix, text, matcher.start(), forceParagraph)
+
+		var lastMatch: Int
+		do {
+			appendParagraph(linePrefix, text, matcher.start(), matcher.end())
+			lastMatch = matcher.end()
+		}  while ( matcher.find() )
+
+		if ( lastMatch < text.length )
+			appendParagraph(linePrefix, text, lastMatch, text.length)
+	} else
+		appendParagraphFirst(linePrefix, text, text.length, forceParagraph)
+}
+
+private fun StringBuilder.appendParagraphFirst(linePrefix: String, text: String, end: Int, forceParagraph: Boolean = false) {
+	if ( forceParagraph )
+		appendParagraph(linePrefix, text, 0, end)
+	else
+		append(text, 0, end)
+}
+
+private fun StringBuilder.appendParagraph(linePrefix: String, text: String, start: Int, end: Int) {
+	append('\n')
+	append(linePrefix)
+	append('\n')
+	append(linePrefix)
+
+	append("<p>")
+	append(text.substring(start, end).trim())
+	append("</p>")
 }
 
 fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
@@ -187,13 +265,13 @@ private fun htmlList(tag: String, attributes: String, vararg items: String) = St
 	append("<$tag")
 	if ( attributes.isNotEmpty() )
 		append(" $attributes")
-	append(">\n")
+	append(">")
 	for (li in items) {
-		append("\t<li>")
+		append("\n\t<li>")
 		append(li.trim())
-		append("</li>\n")
+		append("</li>")
 	}
-	append("\t</$tag>")
+	append("\n\t</$tag>")
 
 	toString()
 }
