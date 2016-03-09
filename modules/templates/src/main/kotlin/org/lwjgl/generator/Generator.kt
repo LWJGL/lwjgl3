@@ -101,7 +101,11 @@ fun main(args: Array<String>) {
 		CountDownLatch(bindingsSystem.size + bindingsModular.count()).let { latch ->
 			fun generate(packageName: String, binding: Binding? = null) {
 				pool.submit {
-					this@Generator.generate(packageName, binding)
+					try {
+						this@Generator.generate(packageName, binding)
+					} catch(e: Exception) {
+						e.printStackTrace()
+					}
 					latch.countDown()
 				}
 			}
@@ -116,7 +120,11 @@ fun main(args: Array<String>) {
 
 		CountDownLatch(4).let { latch ->
 			fun submit(work: () -> Unit) {
-				pool.submit(work)
+				try {
+					pool.submit(work)
+				} catch(e: Exception) {
+					e.printStackTrace()
+				}
 				latch.countDown()
 			}
 
