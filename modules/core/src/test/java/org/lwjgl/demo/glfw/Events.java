@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GL;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.Map;
@@ -18,6 +17,7 @@ import java.util.Map;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -62,9 +62,14 @@ public final class Events {
 
 		System.out.println("Window opened.");
 
-		try {
-			Class<?> STBImage = Class.forName("org.lwjgl.stb.STBImage"); // Skip if the stb bindings are not available
+		IntBuffer w = memAllocInt(1);
+		IntBuffer h = memAllocInt(1);
+		IntBuffer comp = memAllocInt(1);
 
+		long cursor;
+
+		// Cursor
+		{
 			ByteBuffer png;
 			try {
 				png = ioResourceToByteBuffer("demo/cursor.png", 1024);
@@ -72,32 +77,55 @@ public final class Events {
 				throw new RuntimeException(e);
 			}
 
-			IntBuffer w = memAllocInt(1);
-			IntBuffer h = memAllocInt(1);
-			IntBuffer comp = memAllocInt(1);
+			ByteBuffer pixels = stbi_load_from_memory(png, w, h, comp, 0);
 
+			GLFWImage img = GLFWImage.malloc().set(w.get(0), h.get(0), pixels);
+
+			cursor = glfwCreateCursor(img, 0, 8);
+			glfwSetCursor(window, cursor);
+
+			img.free();
+			stbi_image_free(pixels);
+		}
+
+		// Icons
+		{
+			ByteBuffer icon16;
+			ByteBuffer icon32;
 			try {
-				Method stbi_load_from_memory = STBImage.getMethod(
-					"stbi_load_from_memory",
-					ByteBuffer.class, IntBuffer.class, IntBuffer.class, IntBuffer.class, int.class
-				);
-				ByteBuffer pixels = (ByteBuffer)stbi_load_from_memory.invoke(null, png, w, h, comp, 0);
-
-				GLFWImage img = GLFWImage.malloc().set(w.get(0), h.get(0), pixels);
-				long cursor = glfwCreateCursor(img, 0, 8);
-				img.free();
-
-				glfwSetCursor(window, cursor);
+				icon16 = ioResourceToByteBuffer("lwjgl16.png", 2048);
+				icon32 = ioResourceToByteBuffer("lwjgl32.png", 4096);
 			} catch (Exception e) {
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 
-			memFree(comp);
-			memFree(h);
-			memFree(w);
-		} catch (ClassNotFoundException e) {
-			// ignore
+			GLFWImage.Buffer icons = GLFWImage.malloc(2);
+
+			ByteBuffer pixels16 = stbi_load_from_memory(icon16, w, h, comp, 4);
+			icons
+				.position(0)
+				.width(w.get(0))
+				.height(h.get(0))
+				.pixels(pixels16);
+
+			ByteBuffer pixels32 = stbi_load_from_memory(icon32, w, h, comp, 4);
+			icons
+				.position(1)
+				.width(w.get(0))
+				.height(h.get(0))
+				.pixels(pixels32);
+
+			icons.position(0);
+			glfwSetWindowIcon(window, icons);
+
+			stbi_image_free(pixels32);
+			stbi_image_free(pixels16);
+			icons.free();
 		}
+
+		memFree(comp);
+		memFree(h);
+		memFree(w);
 
 		glfwSetMonitorCallback(new GLFWMonitorCallback() {
 			@Override
@@ -267,6 +295,9 @@ public final class Events {
 			glClear(GL_COLOR_BUFFER_BIT);
 			glfwSwapBuffers(window);
 		}
+
+		glfwDestroyCursor(cursor);
+		glfwDestroyWindow(window);
 	}
 
 	private static String getModState(int mods) {

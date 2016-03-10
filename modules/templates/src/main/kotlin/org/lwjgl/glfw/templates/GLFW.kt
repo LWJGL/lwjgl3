@@ -1231,23 +1231,32 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.1"
 	)
 
-	/*void(
-		"SetWindowIcons",
+	void(
+		"SetWindowIcon",
 		"""
-		Sets the icons to be used by the specified window.
+		Sets the icon for the specified window.
 
-		From all the given icons GLFW will automatically pick the most appropriate size for the different locations in which the application icon can occur.
-		For example on Windows, if a larger and a smaller icon are given the larger icon will be used for the Alt+Tab screen and the smaller for the taskbar.
+		This function sets the icon of the specified window. If passed an array of candidate images, those of or closest to the sizes desired by the system are
+		selected. If no images are specified, the window reverts to its default icon.
 
-		If the icon does not exactly fit the operating systems requirements for the icon size the icon will be automatically resized.
+		The desired image sizes varies depending on platform and system settings. The selected images will be rescaled as needed. Good sizes include 16x16,
+		32x32 and 48x48.
+
+		The specified image data is copied before this function returns.
+
+		<b>OS X</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's icon. For more
+		information on bundles, see the <a href="https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming
+		Guide</a> in the Mac Developer Library.
 
 		This function must only be called from the main thread.
 		""",
 
-		GLFWwindow.IN("window", "the window to set the icons for"),
-	    GLFWimage_p.IN("icons", "an array of ##GLFWimage structs"),
-	    AutoSize("icons")..int.IN("count", "the number of icons in the array")
-	)*/
+		GLFWwindow.IN("window", "the window whose icon to set"),
+		AutoSize("images")..int.IN("count", "the number of images in the specified array, or zero to revert to the default window icon"),
+	    nullable..const..GLFWimage_p.IN("images", "the images to create the icon from. This is ignored if count is zero."),
+
+		since = "version 3.2"
+	)
 
 	void(
 		"IconifyWindow",
