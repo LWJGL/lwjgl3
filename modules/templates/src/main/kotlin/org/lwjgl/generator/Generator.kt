@@ -10,6 +10,7 @@ import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.nio.ByteBuffer
 import java.util.*
+import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 
@@ -148,9 +149,9 @@ class Generator(
 ) {
 
 	companion object {
-		val structs = ArrayList<Struct>()
-		val callbacks = ArrayList<CallbackFunction>()
-		val customClasses = ArrayList<GeneratorTarget>()
+		val structs = ConcurrentLinkedQueue<Struct>()
+		val callbacks = ConcurrentLinkedQueue<CallbackFunction>()
+		val customClasses = ConcurrentLinkedQueue<GeneratorTarget>()
 
 		fun register(struct: Struct): Struct {
 			structs.add(struct)
@@ -278,7 +279,7 @@ class Generator(
 			nativeClass.nativeDirectivesWarning()
 	}
 
-	fun <T : GeneratorTarget> generate(typeName: String, targets: List<T>) {
+	fun <T : GeneratorTarget> generate(typeName: String, targets: Iterable<T>) {
 		targets.forEach {
 			try {
 				generate(it)

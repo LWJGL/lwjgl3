@@ -5,14 +5,14 @@
 package org.lwjgl.generator
 
 import java.io.PrintWriter
-import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 
 /** Deduplicates JNI signatures from bindings and generates the org.lwjgl.system.JNI class. */
 object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
 
-	private val signatures = TreeSet<Signature>()
+	private val signatures = ConcurrentHashMap<Signature, Unit>()
 
-	fun register(function: NativeClassFunction) = signatures.add(Signature(function))
+	fun register(function: NativeClassFunction) = signatures.put(Signature(function), Unit)
 
 	override fun PrintWriter.generateJava() {
 		print(HEADER)
@@ -37,7 +37,7 @@ public final class JNI {
 	private JNI() {}
 
 """)
-		signatures.forEach {
+		signatures.keys.forEach {
 			print("\tpublic static native ${it.returnType.nativeMethodType.simpleName} ${it.signature}(long $FUNCTION_ADDRESS")
 			if ( it.arguments.isNotEmpty() )
 				print(it.arguments.withIndex().map { "${it.value.nativeMethodType.simpleName} param${it.index}" }.joinToString(", ", prefix = ", "))
@@ -61,7 +61,7 @@ public final class JNI {
 		print(HEADER)
 		preamble.printNative(this)
 
-		signatures.forEach {
+		signatures.keys.forEach {
 			print("JNIEXPORT ${it.returnType.jniFunctionType} JNICALL Java_org_lwjgl_system_JNI_${it.signature}(JNIEnv *$JNIENV, jclass clazz, jlong __functionAddress")
 			if ( it.arguments.isNotEmpty() )
 				print(it.arguments.withIndex().map { "${it.value.jniFunctionType} param${it.index}" }.joinToString(", ", prefix = ", "))
