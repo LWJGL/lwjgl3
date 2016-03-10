@@ -12,6 +12,8 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
 
 	private val signatures = ConcurrentHashMap<Signature, Unit>()
 
+	private val sortedSignatures by lazy { signatures.keys.sorted() }
+
 	fun register(function: NativeClassFunction) = signatures.put(Signature(function), Unit)
 
 	override fun PrintWriter.generateJava() {
@@ -37,7 +39,7 @@ public final class JNI {
 	private JNI() {}
 
 """)
-		signatures.keys.forEach {
+		sortedSignatures.forEach {
 			print("\tpublic static native ${it.returnType.nativeMethodType.simpleName} ${it.signature}(long $FUNCTION_ADDRESS")
 			if ( it.arguments.isNotEmpty() )
 				print(it.arguments.withIndex().map { "${it.value.nativeMethodType.simpleName} param${it.index}" }.joinToString(", ", prefix = ", "))
@@ -61,7 +63,7 @@ public final class JNI {
 		print(HEADER)
 		preamble.printNative(this)
 
-		signatures.keys.forEach {
+		sortedSignatures.forEach {
 			print("JNIEXPORT ${it.returnType.jniFunctionType} JNICALL Java_org_lwjgl_system_JNI_${it.signature}(JNIEnv *$JNIENV, jclass clazz, jlong __functionAddress")
 			if ( it.arguments.isNotEmpty() )
 				print(it.arguments.withIndex().map { "${it.value.jniFunctionType} param${it.index}" }.joinToString(", ", prefix = ", "))
