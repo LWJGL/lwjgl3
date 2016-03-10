@@ -145,9 +145,9 @@ fun String.nativeClassVK(
 )
 
 val must = "<b>must</b>"
-val must_not = "<b>must not</b>"
+val mustnot = "<b>must not</b>"
 val should = "<b>should</b>"
-val should_not = "<b>should not</b>"
+val shouldnot = "<b>should not</b>"
 val may = "<b>may</b>"
 val can = "<b>can</b>"
 val cannot = "<b>cannot</b>"

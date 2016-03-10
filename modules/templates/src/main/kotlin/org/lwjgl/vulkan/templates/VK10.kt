@@ -34,13 +34,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		scope of changes.
 
 		A difference in patch version numbers indicates that some usually small aspect of the specification or header has been modified, typically to fix a
-		bug, and may have an impact on the behavior of existing functionality. Differences in this version number $should_not affect either full compatibility
+		bug, and may have an impact on the behavior of existing functionality. Differences in this version number $shouldnot affect either full compatibility
 		or backwards compatibility between two versions, or add additional interfaces to the API.
 
 		A difference in minor version numbers indicates that some amount of new functionality has been added. This will usually include new interfaces in the
 		header, and may also include behavior changes and bug fixes. Functionality may be deprecated in a minor revision, but will not be removed. When a new
 		minor version is introduced, the patch version is reset to 0, and each minor revision maintains its own set of patch versions. Differences in this
-		version $should_not affect backwards compatibility, but will affect full compatibility.
+		version $shouldnot affect backwards compatibility, but will affect full compatibility.
 
 		A difference in major version numbers indicates a large set of changes to the API, potentially including new functionality and header interfaces,
 		behavioral changes, removal of deprecated features, modification or outright replacement of any feature, and is thus very likely to break any and all
@@ -53,7 +53,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	LongConstant(
 		"""
 		The reserved handle {@code VK_NULL_HANDLE} $can be passed in place of valid object handles when explicitly called out in the specification. Any command
-		that creates an object successfully $must_not return {@code VK_NULL_HANDLE}. It is valid to pass {@code VK_NULL_HANDLE} to any {@code vkDestroy*} or
+		that creates an object successfully $mustnot return {@code VK_NULL_HANDLE}. It is valid to pass {@code VK_NULL_HANDLE} to any {@code vkDestroy*} or
 		{@code vkFree*} command, which will silently ignore these values.
 		""",
 
@@ -1081,7 +1081,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"ATTACHMENT_STORE_OP_MAX_ENUM".enum("", 0x7FFFFFFF)
 	)
 
-	EnumConstant(
+	val VkPipelineBindPoints = EnumConstant(
 		"VkPipelineBindPoint",
 
 		"PIPELINE_BIND_POINT_GRAPHICS".enumExpr("", "0"),
@@ -1090,7 +1090,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"PIPELINE_BIND_POINT_END_RANGE".enumExpr("", "VK_PIPELINE_BIND_POINT_COMPUTE"),
 		"PIPELINE_BIND_POINT_RANGE_SIZE".enumExpr("", "VK_PIPELINE_BIND_POINT_COMPUTE - VK_PIPELINE_BIND_POINT_GRAPHICS + 1"),
 		"PIPELINE_BIND_POINT_MAX_ENUM".enum("", 0x7FFFFFFF)
-	)
+	).enumLinks
 
 	EnumConstant(
 		"VkCommandBufferLevel",
@@ -1103,7 +1103,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"COMMAND_BUFFER_LEVEL_MAX_ENUM".enum("", 0x7FFFFFFF)
 	)
 
-	EnumConstant(
+	val VkIndexTypes = EnumConstant(
 		"VkIndexType",
 
 		"INDEX_TYPE_UINT16".enumExpr("", "0"),
@@ -1112,14 +1112,14 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"INDEX_TYPE_END_RANGE".enumExpr("", "VK_INDEX_TYPE_UINT32"),
 		"INDEX_TYPE_RANGE_SIZE".enumExpr("", "VK_INDEX_TYPE_UINT32 - VK_INDEX_TYPE_UINT16 + 1"),
 		"INDEX_TYPE_MAX_ENUM".enum("", 0x7FFFFFFF)
-	)
+	).enumLinks
 
 	EnumConstant(
 		"VkSubpassContents",
 
 		"SUBPASS_CONTENTS_INLINE".enumExpr(
 			"""
-			The contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers $must_not be executed within the
+			The contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers $mustnot be executed within the
 			subpass.
 			""", "0"),
 		"SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS".enum(
@@ -1212,7 +1212,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT".enum(
 			"""
 			Indicates that the memory bound to this image will have been allocated with the #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT. If this is set, then bits
-			other than #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and #IMAGE_USAGE_INPUT_ATTACHMENT_BIT $must_not be set.
+			other than #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and #IMAGE_USAGE_INPUT_ATTACHMENT_BIT $mustnot be set.
 			""",
 			0x00000040
 		),
@@ -1724,17 +1724,17 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			)}
 			Render passes $must include subpass dependencies (either directly or via a subpass dependency chain) between any two subpasses that operate on the
 			same attachment or aliasing attachments and those subpass dependencies $must include execution and memory dependencies separating uses of the
-			aliases, if at least one of those subpasses writes to one of the aliases. Those dependencies $must_not include the #DEPENDENCY_BY_REGION_BIT if the
+			aliases, if at least one of those subpasses writes to one of the aliases. Those dependencies $mustnot include the #DEPENDENCY_BY_REGION_BIT if the
 			aliases are views of distinct image subresources which overlap in memory.
 
-			Multiple attachments that alias the same memory $must_not be used in a single subpass. A given attachment index $must_not be used multiple times in
+			Multiple attachments that alias the same memory $mustnot be used in a single subpass. A given attachment index $mustnot be used multiple times in
 			a single subpass, with one exception: two subpass attachments $can use the same attachment index if at least one use is as an input attachment and
 			neither use is as a resolve or preserve attachment. In other words, the same view $can be used simultaneously as an input and color or
-			depth/stencil attachment, but $must_not be used as multiple color or depth/stencil attachments nor as resolve or preserve attachments.
+			depth/stencil attachment, but $mustnot be used as multiple color or depth/stencil attachments nor as resolve or preserve attachments.
 
 			If a set of attachments alias each other, then all except the first to be used in the render pass $must use an initialLayout of
 			#IMAGE_LAYOUT_UNDEFINED, since the earlier uses of the other aliases make their contents undefined. Once an alias has been used and a different
-			alias has been used after it, the first alias $must_not be used in any later subpasses. However, an application $can assign the same image view to
+			alias has been used after it, the first alias $mustnot be used in any later subpasses. However, an application $can assign the same image view to
 			multiple aliasing attachment indices, which allows that image view to be used multiple times even if other aliases are used in between. Once an
 			attachment needs the {@code ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit, there $should be no additional cost of introducing additional aliases, and
 			using these additional aliases $may allow more efficient clearing of the attachments on multiple uses via #ATTACHMENT_LOAD_OP_CLEAR.
@@ -1832,14 +1832,14 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		)
 	)
 
-	EnumConstant(
+	val VkCommandPoolResetFlagBits = EnumConstant(
 		"VkCommandPoolResetFlagBits",
 
 		"COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT".enum(
 			"If set, resetting a command pool recycles all of the resources from the command pool back to the system.",
 			0x00000001
 		)
-	)
+	).javaDocLinks
 
 	EnumConstant(
 		"VkCommandBufferUsageFlagBits",
@@ -1870,7 +1870,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"QUERY_CONTROL_PRECISE_BIT".enum("If set, an implementation $must return a result that matches the actual number of samples passed.", 0x00000001)
 	)
 
-	EnumConstant(
+	val VkCommandBufferResetFlagBits = EnumConstant(
 		"VkCommandBufferResetFlagBits",
 
 		"COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT".enum(
@@ -1880,9 +1880,9 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			""",
 			0x00000001
 		)
-	)
+	).javaDocLinks
 
-	EnumConstant(
+	val VkStencilFaceFlagBits = EnumConstant(
 		"VkStencilFaceFlagBits",
 
 		"STENCIL_FACE_FRONT_BIT".enum("Indicates that only the front set of stencil state is updated.", 0x00000001),
@@ -1891,7 +1891,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			"Is the combination of #STENCIL_FACE_FRONT_BIT and #STENCIL_FACE_BACK_BIT and indicates that both sets of stencil state are updated.",
 			0x00000003
 		)
-	)
+	).javaDocLinks
 
 	val CreateInstance = GlobalCommand..VkResult(
 		"CreateInstance",
@@ -1922,7 +1922,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"""
 		Destroys an instance of Vulkan.
 
-		After destruction of the instance, all devices (logical and physical) and any objects created by those devices become invalid and $should_not be
+		After destruction of the instance, all devices (logical and physical) and any objects created by those devices become invalid and $shouldnot be
 		accessed. However, objects allocated directly or indirectly through the instance are not destroyed automatically and so $may be leaked. Applications
 		$should destroy all objects created through instance before destroying the instance itself.
 
@@ -1941,6 +1941,8 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		VkInstance.IN("instance", "the handle of the instance to destroy"),
 		CreateInstance["pAllocator"]
 	)
+
+	separateMethod {
 
 	VkResult(
 		"EnumeratePhysicalDevices",
@@ -2446,7 +2448,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		primitives. The implementation make no guarantees with regards to queues across different devices.
 
 		An implementation $may allow a higher-priority queue to starve a lower-priority queue on the same {@code VkDevice} until the higher-priority queue has
-		no further commands to execute. The relationship of queue priorities $must_not cause queues on one {@code VkDevice} to starve queues on another
+		no further commands to execute. The relationship of queue priorities $mustnot cause queues on one {@code VkDevice} to starve queues on another
 		{@code VkDevice}.
 
 		No specific guarantees are made about higher priority queues receiving more processing time or better quality of service than lower priority queues.
@@ -2494,7 +2496,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
 			"Each of {@code queue} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
 			"{@code fence} $must be unsignalled",
-			"{@code fence} $must_not be associated with any other queue command that has not yet completed execution on that queue"
+			"{@code fence} $mustnot be associated with any other queue command that has not yet completed execution on that queue"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -2635,7 +2637,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		<h5>Host Synchronization</h5>
 
-		Host access to memory $must be externally synchronized
+		Host access to memory $must be externally synchronized.
 		""",
 
 		VkDevice.IN("device", "the logical device that owns the memory"),
@@ -2679,7 +2681,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 			"{@code ppData} $must be a pointer to a pointer",
 			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
 			"Each of {@code device} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
-			"{@code memory} $must_not currently be mapped",
+			"{@code memory} $mustnot currently be mapped",
 			"{@code offset} $must be less than the size of memory",
 			"{@code size} $must be greater than 0",
 			"If {@code size} is not equal to #WHOLE_SIZE, {@code size} $must be less than or equal to the size of the memory minus offset",
@@ -2831,8 +2833,8 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 			"{@code buffer} $must have been created, allocated or retrieved from {@code device}",
 			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
 			"Each of {@code device}, {@code buffer} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
-			"{@code buffer} $must_not already be backed by a memory object",
-			"{@code buffer} $must_not have been created with any sparse memory binding flags",
+			"{@code buffer} $mustnot already be backed by a memory object",
+			"{@code buffer} $mustnot have been created with any sparse memory binding flags",
 			"{@code memoryOffset} $must be less than the size of memory",
 			"""
 			If {@code buffer} was created with the #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT, {@code memoryOffset} $must
@@ -2887,8 +2889,8 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 			"{@code image} $must have been created, allocated or retrieved from {@code device}",
 			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
 			"Each of {@code device}, {@code image} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
-			"{@code image} $must_not already be backed by a memory object",
-			"{@code image} $must_not have been created with any sparse memory binding flags",
+			"{@code image} $mustnot already be backed by a memory object",
+			"{@code image} $mustnot have been created with any sparse memory binding flags",
 			"{@code memoryOffset} $must be less than the size of memory",
 			"""
 			{@code memory} $must have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements
@@ -3043,7 +3045,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 			"{@code type} $must be a valid {@code VkImageType} value",
 			"{@code samples} $must be a valid {@code VkSampleCountFlagBits} value",
 			"{@code usage} $must be a valid combination of {@code VkImageUsageFlagBits} values",
-			"{@code usage} $must_not be 0",
+			"{@code usage} $mustnot be 0",
 			"{@code tiling} $must be a valid {@code VkImageTiling} value",
 			"{@code pPropertyCount} $must be a pointer to a {@code uint32_t} value",
 			"""
@@ -3107,7 +3109,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		When all sparse binding operations in {@code pBindInfo} have completed execution, the status of fence is set to signaled, providing certain implicit
 		ordering guarantees.
 
-		Within a batch, a given range of a resource $must_not be bound more than once. Across batches, if a range is to be bound to one allocation and offset
+		Within a batch, a given range of a resource $mustnot be bound more than once. Across batches, if a range is to be bound to one allocation and offset
 		and then to another allocation and offset, then the application $must guarantee (usually using semaphores) that the binding operations are executed in
 		the correct order, as well as to order binding operations against the execution of command buffer submissions.
 
@@ -3119,7 +3121,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 			"The {@code queue} $must support sparse binding operations",
 			"Each of {@code queue} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
 			"{@code fence} $must be unsignalled",
-			"{@code fence} $must_not be associated with any other queue command that has not yet completed execution on that queue"
+			"{@code fence} $mustnot be associated with any other queue command that has not yet completed execution on that queue"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -3183,7 +3185,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 			Each of {@code device} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same
 			{@code VkPhysicalDevice}
 			""",
-			"{@code fence} $must_not be associated with any queue command that has not yet completed execution on that queue",
+			"{@code fence} $mustnot be associated with any queue command that has not yet completed execution on that queue",
 			"If ##VkAllocationCallbacks were provided when {@code fence} was created, a compatible set of callbacks $must be provided here",
 			"If no ##VkAllocationCallbacks were provided when {@code fence} was created, {@code pAllocator} $must be $NULL"
 		)}
@@ -3216,7 +3218,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		<h5>Host Synchronization</h5>
 
-		Host access to each member of {@code pFences} $must be externally synchronized
+		Host access to each member of {@code pFences} $must be externally synchronized.
 		""",
 
 		VkDevice.IN("device", "the logical device that owns the fences"),
@@ -3337,13 +3339,13 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		${note(
 			"""
 			A common scenario for using {@code pWaitDstStageMask} with values other than #PIPELINE_STAGE_ALL_COMMANDS_BIT is when synchronizing a window system
-			presentation operation against subsequent command buffers which render the next frame. In this case, an image that was being presented $must_not be
+			presentation operation against subsequent command buffers which render the next frame. In this case, an image that was being presented $mustnot be
 			overwritten until the presentation operation completes, but other pipeline stages $can execute without waiting. A mask of
 			#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT prevents subsequent color attachment writes from executing until the semaphore signals. Some
 			implementations $may be able to execute transfer operations and/or vertex processing work before the semaphore is signaled.
 
 			If an image layout transition needs to be performed on a swapchain image before it is used in a framebuffer, that can be performed as the first
-			operation submitted to the queue after acquiring the image, and $should_not prevent other work from overlapping with the presentation operation.
+			operation submitted to the queue after acquiring the image, and $shouldnot prevent other work from overlapping with the presentation operation.
 			For example, a ##VkImageMemoryBarrier could use:
 			${ul(
 				code("srcStageMask = #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT"),
@@ -3392,14 +3394,14 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 			Each of {@code device} and {@code semaphore} that are valid handles $must have been created, allocated or retrieved from the same
 			{@code VkPhysicalDevice}
 			""",
-			"{@code semaphore} $must_not be associated with any queue command that has not yet completed execution on that queue",
+			"{@code semaphore} $mustnot be associated with any queue command that has not yet completed execution on that queue",
 			"If ##VkAllocationCallbacks were provided when semaphore was created, a compatible set of callbacks $must be provided here",
 			"If no ##VkAllocationCallbacks were provided when semaphore was created, {@code pAllocator} $must be $NULL"
 		)}
 		
 		<h5>Host Synchronization</h5>
 
-		Host access to {@code semaphore} $must be externally synchronized
+		Host access to {@code semaphore} $must be externally synchronized.
 		""",
 
 		VkDevice.IN("device", "the logical device that destroys the semaphore"),
@@ -3454,7 +3456,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		<h5>Host Synchronization</h5>
 
-		Host access to {@code event} $must be externally synchronized
+		Host access to {@code event} $must be externally synchronized.
 		""",
 
 		VkDevice.IN("device", "the logical device that destroys the event"),
@@ -3526,12 +3528,15 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		<h5>Host Synchronization</h5>
 
-		Host access to {@code event} $must be externally synchronized
+		Host access to {@code event} $must be externally synchronized.
 		""",
 
 		VkDevice.IN("device", "the logical device that owns the event"),
 		VkEvent.IN("event", "the event to reset")
 	)
+
+	}
+	separateMethod {
 
 	VkResult(
 		"CreateQueryPool",
@@ -3580,7 +3585,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		<h5>Host Synchronization</h5>
 
-		Host access to {@code queryPool} $must be externally synchronized
+		Host access to {@code queryPool} $must be externally synchronized.
 		""",
 
 		VkDevice.IN("device", "the logical device that destroys the query pool"),
@@ -3628,7 +3633,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		If #QUERY_RESULT_PARTIAL_BIT is set, #QUERY_RESULT_WAIT_BIT is not set, and the query’s status is unavailable, an intermediate result value between
 		zero and the final result value is written to {@code pData} for that query.
 
-		#QUERY_RESULT_PARTIAL_BIT $must_not be used if the pool’s {@code queryType} is #QUERY_TYPE_TIMESTAMP.
+		#QUERY_RESULT_PARTIAL_BIT $mustnot be used if the pool’s {@code queryType} is #QUERY_TYPE_TIMESTAMP.
 
 		If #QUERY_RESULT_WITH_AVAILABILITY_BIT is set, the final integer value written for each query is non-zero if the query’s status was available or zero
 		if the status was unavailable. When #QUERY_RESULT_WITH_AVAILABILITY_BIT is used, implementations $must guarantee that if they return a non-zero
@@ -3673,122 +3678,384 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 	VkResult(
 		"CreateBuffer",
-		"Creates a new buffer object.",
+		"""
+		Creates a new buffer object.
+		
+		Buffers represent linear arrays of data which are used for various purposes by binding them to the graphics pipeline via descriptor sets or via certain
+		commands, or by directly specifying them as parameters to certain commands.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkBufferCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pBuffer} $must be a pointer to a {@code VkBuffer} handle",
+			"""
+			If the flags member of {@code pCreateInfo} includes #BUFFER_CREATE_SPARSE_BINDING_BIT or #BUFFER_CREATE_SPARSE_RESIDENCY_BIT, creating this
+			{@code VkBuffer} $mustnot cause the total required sparse memory for all currently valid sparse resources on the device to exceed
+			##VkPhysicalDeviceLimits{@code ::sparseAddressSpaceSize}
+			"""
+		)}
+		""",
 
-		VkDevice.IN("device", ""),
-		const..VkBufferCreateInfo_p.IN("pCreateInfo", ""),
+		VkDevice.IN("device", "the logical device that creates the buffer object"),
+		const..VkBufferCreateInfo_p.IN(
+			"pCreateInfo",
+			"a pointer to an instance of the ##VkBufferCreateInfo structure containing parameters affecting creation of the buffer"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkBuffer.p.OUT("pBuffer", "")
+		Check(1)..VkBuffer.p.OUT("pBuffer", "points to a {@code VkBuffer} handle in which the resulting buffer object is returned")
 	)
 
 	void(
 		"DestroyBuffer",
-		"Destroys a buffer object.",
+		"""
+		Destroys a buffer object.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code buffer} is not #NULL_HANDLE, {@code buffer} $must be a valid {@code VkBuffer} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code buffer} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code buffer} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code buffer}, either directly or via a {@code VkBufferView}, $must have completed execution",
+			"If ##VkAllocationCallbacks were provided when buffer was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when buffer was created, {@code pAllocator} $must be $NULL"
+		)}
 
-		VkDevice.IN("device", ""),
-		VkBuffer.IN("buffer", ""),
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code buffer} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the buffer"),
+		VkBuffer.IN("buffer", "the buffer to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"CreateBufferView",
-		"Creates a new buffer view object.",
+		"""
+		Creates a new buffer view object.
+		
+		A buffer view represents a contiguous range of a buffer and a specific format to be used to interpret the data. Buffer views are used to enable shaders
+		to access buffer contents interpreted as formatted data. In order to create a valid buffer view, the buffer must have been created with at least one of
+		the following usage flags:
+		${ul(
+			"#BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT",
+			"#BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT"
+		)}
 
-		VkDevice.IN("device", ""),
-		const..VkBufferViewCreateInfo_p.IN("pCreateInfo", ""),
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkBufferViewCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pView} $must be a pointer to a {@code VkBufferView} handle"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the buffer view"),
+		const..VkBufferViewCreateInfo_p.IN(
+			"pCreateInfo",
+			"a pointer to an instance of the ##VkBufferViewCreateInfo structure containing parameters to be used to create the buffer"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkBufferView.p.OUT("pView", "")
+		Check(1)..VkBufferView.p.OUT("pView", "points to a {@code VkBufferView} handle in which the resulting buffer view object is returned")
 	)
 
 	void(
 		"DestroyBufferView",
-		"Destroys a buffer view object.",
+		"""
+		Destroys a buffer view object.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code bufferView} is not #NULL_HANDLE, {@code bufferView} $must be a valid {@code VkBufferView} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code bufferView} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code bufferView} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code bufferView} $must have completed execution",
+			"If ##VkAllocationCallbacks were provided when {@code bufferView} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code bufferView} was created, {@code pAllocator} $must be $NULL"
+		)}
 
-		VkDevice.IN("device", ""),
-		VkBufferView.IN("bufferView", ""),
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code bufferView} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the buffer view"),
+		VkBufferView.IN("bufferView", "the buffer view to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"CreateImage",
-		"Creates a new image object.",
+		"""
+		Creates a new image object.
 
-		VkDevice.IN("device", ""),
-		const..VkImageCreateInfo_p.IN("pCreateInfo", ""),
+		Images represent multidimensional - up to 3 - arrays of data which can be used for various purposes (e.g. attachments, textures), by binding them to
+		the graphics pipeline via descriptor sets, or by directly specifying them as parameters to certain commands.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkImageCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pImage} $must be a pointer to a {@code VkImage} handle",
+			"""
+			If the flags member of {@code pCreateInfo} includes #IMAGE_CREATE_SPARSE_BINDING_BIT or #IMAGE_CREATE_SPARSE_RESIDENCY_BIT, creating this
+			{@code VkImage} $mustnot cause the total required sparse memory for all currently valid sparse resources on the device to exceed
+			##VkPhysicalDeviceLimits{@code ::sparseAddressSpaceSize}
+			"""
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the image"),
+		const..VkImageCreateInfo_p.IN(
+			"pCreateInfo",
+			"a pointer to an instance of the ##VkImageCreateInfo structure containing parameters to be used to create the image"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkImage.p.OUT("pImage", "")
+		Check(1)..VkImage.p.OUT("pImage", "points to a ##VkImage handle in which the resulting image object is returned")
 	)
 
 	void(
 		"DestroyImage",
-		"Destroys an image object.",
+		"""
+		Destroys an image object.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code image} is not #NULL_HANDLE, {@code image} $must be a valid {@code VkImage} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code image} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code image} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code imag}e, either directly or via a {@code VkImageView}, $must have completed execution",
+			"If ##VkAllocationCallbacks were provided when image was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when image was created, {@code pAllocator} $must be $NULL"
+		)}
 
-		VkDevice.IN("device", ""),
-		VkImage.IN("image", ""),
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code image} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the image"),
+		VkImage.IN("image", "the image to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	void(
 		"GetImageSubresourceLayout",
-		"Retrieves information about an image subresource.",
+		"""
+		Queries the layout of a subresource (mipLevel/arrayLayer) of an image created with linear tiling.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code image} $must be a valid {@code VkImage} handle",
+			"{@code pSubresource} $must be a pointer to a valid {@code VkImageSubresource} structure",
+			"{@code pLayout} $must be a pointer to a {@code VkSubresourceLayout} structure",
+			"{@code image} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code image} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code image} $must have been created with {@code tiling} equal to #IMAGE_TILING_LINEAR",
+			"The {@code aspectMask} member of {@code pSubresource} $must only have a single bit set"
+		)}
+		""",
 
-		VkDevice.IN("device", ""),
-		VkImage.IN("image", ""),
-		const..VkImageSubresource_p.IN("pSubresource", ""),
-		VkSubresourceLayout_p.OUT("pLayout", "")
+		VkDevice.IN("device", "the logical device that owns the image"),
+		VkImage.IN("image", "the image whose layout is being queried"),
+		const..VkImageSubresource_p.IN("pSubresource", "a pointer to a ##VkImageSubresource structure selecting a specific image for the subresource"),
+		VkSubresourceLayout_p.OUT("pLayout", "points to a ##VkSubresourceLayout structure in which the layout is returned")
 	)
 
 	VkResult(
 		"CreateImageView",
-		"Creates an image view from an existing image.",
+		"""
+		Creates an image view from an existing image.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkImageViewCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pView} $must be a pointer to a {@code VkImageView} handle"
+		)}
+		""",
 
-		VkDevice.IN("device", ""),
-		const..VkImageViewCreateInfo_p.IN("pCreateInfo", ""),
+		VkDevice.IN("device", "the logical device that creates the image view"),
+		const..VkImageViewCreateInfo_p.IN(
+			"pCreateInfo", 
+			"a pointer to an instance of the ##VkImageViewCreateInfo structure containing parameters to be used to create the image view"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkImageView.p.OUT("pView", "")
+		Check(1)..VkImageView.p.OUT("pView", "points to a {@code VkImageView} handle in which the resulting image view object is returned")
 	)
 
 	void(
 		"DestroyImageView",
-		"Destroys an image view object.",
+		"""
+		Destroys an image view object.
 
-		VkDevice.IN("device", ""),
-		VkImageView.IN("imageView", ""),
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code imageView} is not #NULL_HANDLE, {@code imageView} $must be a valid {@code VkImageView} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code imageView} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code imageView} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code imageView} $must have completed execution",
+			"If ##VkAllocationCallbacks were provided when {@code imageView} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code imageView} was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code imageView} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the image view"),
+		VkImageView.IN("imageView", "the image view to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"CreateShaderModule",
-		"Creates a new shader module object.",
+		"""
+		Creates a new shader module object.
+		
+		Shader modules contain shader code and one or more entry points. Shaders are selected from a shader module by specifying an entry point as part of
+		pipeline creation. The stages of a pipeline can use shaders that come from different modules. The shader code defining a shader module must be in the
+		SPIR-V format.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkShaderModuleCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pShaderModule} $must be a pointer to a {@code VkShaderModule} handle"
+		)}
+		""",
 
-		VkDevice.IN("device", ""),
-		const..VkShaderModuleCreateInfo_p.IN("pCreateInfo", ""),
+		VkDevice.IN("device", "the logical device that creates the shader module"),
+		const..VkShaderModuleCreateInfo_p.IN("pCreateInfo", "a pointer to an instance of the ##VkShaderModuleCreateInfo structure"),
 		CreateInstance["pAllocator"],
-		Check(1)..VkShaderModule.p.OUT("pShaderModule", "")
+		Check(1)..VkShaderModule.p.OUT("pShaderModule", "points to a {@code VkShaderModule} handle in which the resulting render pass object is returned")
 	)
 
 	void(
 		"DestroyShaderModule",
-		"Destroys a shader module module.",
+		"""
+		Destroys a shader module object.
+		
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code shaderModule} is not #NULL_HANDLE, {@code shaderModule} $must be a valid {@code VkShaderModule} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator }$must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code shaderModule} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code shaderModule} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"If ##VkAllocationCallbacks were provided when {@code shaderModule} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code shaderModule} was created, {@code pAllocator} $must be $NULL"
+		)}
 
-		VkDevice.IN("device", ""),
-		VkShaderModule.IN("shaderModule", ""),
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code shaderModule} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the shader module"),
+		VkShaderModule.IN("shaderModule", "the handle of the shader module to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"CreatePipelineCache",
-		"Creates a new pipeline cache.",
+		"""
+		Creates a new pipeline cache object.
 
-		VkDevice.IN("device", ""),
-		const..VkPipelineCacheCreateInfo_p.IN("pCreateInfo", ""),
+		Pipeline cache objects allow the result of pipeline construction to be reused between pipelines and between runs of an application. Reuse between
+		pipelines is achieved by passing the same pipeline cache object when creating multiple related pipelines. Reuse across runs of an application is
+		achieved by retrieving pipeline cache contents in one run of an application, saving the contents, and using them to preinitialize a pipeline cache on a
+		subsequent run. The contents and size of the pipeline cache objects are managed by the implementation. Applications can control the amount of data
+		retrieved from a pipeline cache object.
+
+		Once created, a pipeline cache can be passed to the #CreateGraphicsPipelines() and #CreateComputePipelines() commands. If the pipeline cache passed
+		into these commands is not #NULL_HANDLE, the implementation will query it for possible reuse opportunities and update it with new content. The use of
+		the pipeline cache object in these commands is internally synchronized, and the same pipeline cache object can be used in multiple threads
+		simultaneously.
+
+		${note(
+			"""
+			Implementations should make every effort to limit any critical sections to the actual accesses to the cache, which is expected to be significantly
+			shorter than the duration of the {@code vkCreateGraphicsPipelines} and {@code vkCreateComputePipelines} commands.
+			"""
+		)}
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkPipelineCacheCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pPipelineCache} $must be a pointer to a {@code VkPipelineCache} handle"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the pipeline cache object"),
+		const..VkPipelineCacheCreateInfo_p.IN(
+			"pCreateInfo",
+			"a pointer to a ##VkPipelineCacheCreateInfo structure that contains the initial parameters for the pipeline cache object"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkPipelineCache.p.OUT("pPipelineCache", "")
+		Check(1)..VkPipelineCache.p.OUT(
+			"pPipelineCache",
+			"a pointer to a {@code VkPipelineCache} handle in which the resulting pipeline cache object is returned"
+		)
 	)
 
 	void(
 		"DestroyPipelineCache",
-		"Destroys a pipeline cache object.",
+		"""
+		Destroys a pipeline cache object.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code pipelineCache} is not #NULL_HANDLE, {@code pipelineCache} $must be a valid {@code VkPipelineCache} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code pipelineCache} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code pipelineCache} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"If ##VkAllocationCallbacks were provided when {@code pipelineCache} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code pipelineCache} was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code pipelineCache} $must be externally synchronized.
+		""",
 
 		VkDevice.IN("device", ""),
 		VkPipelineCache.IN("pipelineCache", ""),
@@ -3797,413 +4064,1690 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 	VkResult(
 		"GetPipelineCacheData",
-		"Gets the data store from a pipeline cache.",
+		"""
+		Retrieves data from a pipeline cache object.
 
-		VkDevice.IN("device", ""),
-		VkPipelineCache.IN("pipelineCache", ""),
-		AutoSize("pData")..Check(1)..size_t_p.INOUT("pDataSize", ""),
-		nullable..void_p.OUT("pData", "")
+		If {@code pData} is $NULL, then the maximum size of the data that can be retrieved from the pipeline cache, in bytes, is returned in {@code pDataSize}.
+		Otherwise, {@code pDataSize} must point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return
+		the variable is overwritten with the amount of data actually written to {@code pData}.
+
+		If the value of {@code dataSize} is less than the maximum size that can be retrieved by the pipeline cache, at most {@code pDataSize} bytes will be
+		written to {@code pData}, and {@code vkGetPipelineCacheData} will return #INCOMPLETE. Any data written to {@code pData} is valid and can be provided as
+		the {@code pInitialData} member of the ##VkPipelineCacheCreateInfo structure passed to #CreatePipelineCache().
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pipelineCache} $must be a valid {@code VkPipelineCache} handle",
+			"{@code pDataSize} $must be a pointer to a {@code size_t} value",
+			"""
+			If the value referenced by {@code pDataSize} is not 0, and {@code pData} is not $NULL, {@code pData} $must be a pointer to an array of
+			{@code pDataSize} bytes
+			""",
+			"{@code pipelineCache} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code pipelineCache} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+		)}
+
+		Applications can store the data retrieved from the pipeline cache, and use these data, possibly in a future run of the application, to populate new
+		pipeline cache objects. The results of pipeline compiles, however, may depend on the vendor ID, device ID, driver version, and other details of the
+		device. To enable applications to detect when previously retrieved data is incompatible with the device, the initial bytes written to {@code pData}
+		must be a header consisting of the following members:
+		${table(
+			tr(th("Offset"), th("Size"), th("Meaning")),
+			tr(td("0"), td("4"), td("length in bytes of the entire pipeline cache header written as a stream of bytes, with the least significant byte first")),
+			tr(td("4"), td("4"), td("a {@code VkPipelineCacheHeaderVersion} value written as a stream of bytes, with the least significant byte first")),
+			tr(td("8"), td("4"), td("a vendor ID equal to ##VkPhysicalDeviceProperties{@code ::vendorID} written as a stream of bytes, with the least significant byte first")),
+			tr(td("12"), td("4"), td("a device ID equal to {@code VkPhysicalDeviceProperties::deviceID} written as a stream of bytes, with the least significant byte first")),
+			tr(td("16"), td("#UUID_SIZE"), td("a pipeline cache ID equal to {@code VkPhysicalDeviceProperties::pipelineCacheUUID}"))
+		)}
+
+		The first four bytes encode the length of the entire pipeline header, in bytes. This value includes all fields in the header including the pipeline
+		cache version field and the size of the length field.
+
+		The next four bytes encode the pipeline cache version. This field is interpreted as an {@code VkPipelineCacheHeaderVersion} value, and must have one of
+		the following values:
+		${codeBlock("""
+typedef enum VkPipelineCacheHeaderVersion {
+	VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1,
+} VkPipelineCacheHeaderVersion;
+		""")}
+		A consumer of the pipeline cache should use the cache version to interpret the remainder of the cache header.
+
+		If the value of {@code dataSize} is less than what is necessary to store this header, nothing will be written to {@code pData} and zero will be written
+		to {@code dataSize}.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the pipeline cache"),
+		VkPipelineCache.IN("pipelineCache", "the pipeline cache to retrieve data from"),
+		AutoSize("pData")..Check(1)..size_t_p.INOUT("pDataSize", "a pointer to a value related to the amount of data in the pipeline cache"),
+		nullable..void_p.OUT("pData", "either $NULL or a pointer to a buffer")
 	)
 
 	VkResult(
 		"MergePipelineCaches",
-		"Combines the data stores of pipeline caches.",
+		"""
+		Merges pipeline cache objects.
 
-		VkDevice.IN("device", ""),
-		VkPipelineCache.IN("dstCache", ""),
-		AutoSize("pSrcCaches")..uint32_t.IN("srcCacheCount", ""),
-		const..VkPipelineCache.p.IN("pSrcCaches", "")
+		${note(
+			"""
+			The details of the merge operation are implementation dependent, but implementations should merge the contents of the specified pipelines and prune
+			duplicate entries.
+			"""
+		)}
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code dstCache} $must be a valid {@code VkPipelineCache} handle",
+			"{@code pSrcCaches} $must be a pointer to an array of {@code srcCacheCount} valid {@code VkPipelineCache} handles",
+			"The value of {@code srcCacheCount} $must be greater than 0",
+			"{@code dstCache} $must have been created, allocated or retrieved from {@code device}",
+			"Each element of {@code pSrcCaches} $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device}, {@code dstCache} and the elements of {@code pSrcCaches} $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"{@code dstCache} $mustnot appear in the list of source caches"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code dstCache} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the pipeline cache objects"),
+		VkPipelineCache.IN("dstCache", "the handle of the pipeline cache to merge results into"),
+		AutoSize("pSrcCaches")..uint32_t.IN("srcCacheCount", "the length of the {@code pSrcCaches} array"),
+		const..VkPipelineCache.p.IN(
+			"pSrcCaches",
+			"""
+			an array of pipeline cache handles, which will be merged into {@code dstCache}. The previous contents of {@code dstCache} are included after the
+			merge.
+			"""
+		)
 	)
 
 	VkResult(
 		"CreateGraphicsPipelines",
-		"Creates graphics pipelines.",
+		"""
+		Creates graphics pipelines.
 
-		VkDevice.IN("device", ""),
-		VkPipelineCache.IN("pipelineCache", ""),
-		AutoSize("pCreateInfos", "pPipelines")..uint32_t.IN("createInfoCount", ""),
-		const..VkGraphicsPipelineCreateInfo_p.IN("pCreateInfos", ""),
+		Graphics pipelines consist of multiple shader stages, multiple fixed-function pipeline stages, and a pipeline layout.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code pipelineCache} is not #NULL_HANDLE, {@code pipelineCache} $must be a valid {@code VkPipelineCache} handle",
+			"{@code pCreateInfos} $must be a pointer to an array of {@code createInfoCount} valid ##VkGraphicsPipelineCreateInfo structures",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pPipelines} $must be a pointer to an array of {@code createInfoCount} {@code VkPipeline} handles",
+			"The value of {@code createInfoCount} $must be greater than 0",
+			"If {@code pipelineCache} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code pipelineCache} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"""
+			If the value of the {@code flags} member of any given element of {@code pCreateInfos} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and the
+			{@code basePipelineIndex} member of that same element is not -1, the value of {@code basePipelineIndex} $must be less than the index into
+			{@code pCreateInfos} that corresponds to that element
+			"""
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the graphics pipelines"),
+		VkPipelineCache.IN(
+			"pipelineCache",
+			"""
+			either #NULL_HANDLE, indicating that pipeline caching is disabled; or the handle of a valid pipeline cache object, in which case use of that cache
+			is enabled for the duration of the command
+			"""
+		),
+		AutoSize("pCreateInfos", "pPipelines")..uint32_t.IN("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays."),
+		const..VkGraphicsPipelineCreateInfo_p.IN("pCreateInfos", "an array of ##VkGraphicsPipelineCreateInfo structures"),
 		CreateInstance["pAllocator"],
-		VkPipeline.p.OUT("pPipelines", "")
+		VkPipeline.p.OUT("pPipelines", "a pointer to an array in which the resulting graphics pipeline objects are returned")
 	)
 
 	VkResult(
 		"CreateComputePipelines",
-		"Creates a new compute pipeline object.",
+		"""
+		Creates a new compute pipeline object.
 
-		VkDevice.IN("device", ""),
-		VkPipelineCache.IN("pipelineCache", ""),
-		uint32_t.IN("createInfoCount", ""),
-		const..VkComputePipelineCreateInfo_p.IN("pCreateInfos", ""),
+		Compute pipelines consist of a single static compute shader stage and the pipeline layout.
+
+		The compute pipeline encapsulates a compute shader and is created by calling {@code vkCreateComputePipelines} with {@code module} and {@code pName}
+		selecting an entry point from a shader module, where that entry point defines a valid compute shader, in the ##VkPipelineShaderStageCreateInfo
+		structure contained within the ##VkComputePipelineCreateInfo structure.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code pipelineCache} is not #NULL_HANDLE, {@code pipelineCache} $must be a valid {@code VkPipelineCache} handle",
+			"{@code pCreateInfos} $must be a pointer to an array of {@code createInfoCount} valid ##VkComputePipelineCreateInfo structures",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pPipelines} $must be a pointer to an array of {@code createInfoCount} {@code VkPipeline} handles",
+			"The value of {@code createInfoCount} $must be greater than 0",
+			"If {@code pipelineCache} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code pipelineCache} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"""
+			If the value of the {@code flags} member of any given element of {@code pCreateInfos} contains the #VK_PIPELINE_CREATE_DERIVATIVE_BIT flag, and the
+			{@code basePipelineIndex} member of that same element is not -1, the value of {@code basePipelineIndex} $must be less than the index into
+			{@code pCreateInfos} that corresponds to that element
+			"""
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the compute pipelines"),
+		VkPipelineCache.IN(
+			"pipelineCache",
+			"""
+			either #NULL_HANDLE, indicating that pipeline caching is disabled; or the handle of a valid pipeline cache object, in which case use of that cache
+			is enabled for the duration of the command
+			"""
+		),
+		AutoSize("pCreateInfos", "pPipelines")..uint32_t.IN("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays"),
+		const..VkComputePipelineCreateInfo_p.IN("pCreateInfos", "an array of ##VkComputePipelineCreateInfo structures"),
 		CreateInstance["pAllocator"],
-		Check(1)..VkPipeline.p.OUT("pPipelines", "")
+		VkPipeline.p.OUT("pPipelines", "a pointer to an array in which the resulting compute pipeline objects are returned")
 	)
 
 	void(
 		"DestroyPipeline",
-		"Destroys a pipeline object.",
+		"""
+		Destroys a graphics or compute pipeline object.
 
-		VkDevice.IN("device", ""),
-		VkPipeline.IN("pipeline", ""),
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code pipeline} is not #NULL_HANDLE, {@code pipeline} $must be a valid {@code VkPipeline} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code pipeline} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code pipeline} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code pipeline} $must have completed execution",
+			"If ##VkAllocationCallbacks were provided when {@code pipeline} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code pipeline} was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code pipeline} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the pipeline"),
+		VkPipeline.IN("pipeline", "the handle of the pipeline to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"CreatePipelineLayout",
-		"Creates a new pipeline layout object.",
+		"""
+		Creates a new pipeline layout object.
 
-		VkDevice.IN("device", ""),
-		const..VkPipelineLayoutCreateInfo_p.IN("pCreateInfo", ""),
+		Access to descriptor sets from a pipeline is accomplished through a pipeline layout. Zero or more descriptor set layouts and zero or more push constant
+		ranges are combined to form a pipeline layout object which describes the complete set of resources that $can be accessed by a pipeline. The pipeline
+		layout represents a sequence of descriptor sets with each having a specific layout. This sequence of layouts is used to determine the interface between
+		shader stages and shader resources. Each pipeline is created using a pipeline layout.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkPipelineLayoutCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pPipelineLayout} $must be a pointer to a {@code VkPipelineLayout} handle"
+		)}
+
+		Once created, pipeline layouts are used as part of pipeline creation, as part of binding descriptor sets, and as part of setting push constants.
+		Pipeline creation accepts a pipeline layout as input, and the layout $may be used to map (set, binding, arrayElement) tuples to hardware resources or
+		memory locations within a descriptor set. The assignment of hardware resources depends only on the bindings defined in the descriptor sets that
+		comprise the pipeline layout, and not on any shader source.
+
+		All resource variables statically used in all shaders in a pipeline $must be declared with a (set, binding, arrayElement) that exists in the
+		corresponding descriptor set layout and is of an appropriate descriptor type and includes the set of shader stages it is used by in {@code stageFlags}.
+		The pipeline layout can include entries that are not used by a particular pipeline, or that are dead-code eliminated from any of the shaders. The
+		pipeline layout allows the application to provide a consistent set of bindings across multiple pipeline compiles, which enables those pipelines to be
+		compiled in a way that the implementation may cheaply switch pipelines without reprogramming the bindings.
+
+		Similarly, the push constant block declared in each shader (if present) $must only place variables at offsets that are each included in a push constant
+		range with {@code stageFlags} including the bit corresponding to the shader stage that uses it. The pipeline layout $can include ranges or portions of
+		ranges that are not used by a particular pipeline, or for which the variables have been dead-code eliminated from any of the shaders.
+
+		There is a limit on the total number of resources of each type that can be included in bindings in all descriptor set layouts in a pipeline layout as
+		shown in the table below. The “Total Resources Available” column gives the limit on the number of each type of resource that can be included in
+		bindings in all descriptor sets in the pipeline layout. Some resource types count against multiple limits. Additionally, there are limits on the total
+		number of each type of resource that can be used in any pipeline stage.
+		${table(
+			tr(th("Total Resources Available"), th("Resource Types")),
+
+			tr(td("maxDescriptorSetSamplers", rowspan = 2), td("sampler")),
+			tr(td("combined image sampler")),
+
+			tr(td("maxDescriptorSetSampledImages", rowspan = 3), td("sampled image")),
+			tr(td("combined image sampler")),
+			tr(td("uniform texel buffer")),
+
+			tr(td("maxDescriptorSetStorageImages", rowspan = 2), td("storage image")),
+			tr(td("storage texel buffer")),
+
+			tr(td("maxDescriptorSetUniformBuffers", rowspan = 2), td("uniform buffer")),
+			tr(td("uniform buffer dynamic")),
+
+			tr(td("maxDescriptorSetUniformBuffersDynamic"), td("uniform buffer dynamic")),
+
+			tr(td("maxDescriptorSetStorageBuffers", rowspan = 2), td("storage buffer")),
+			tr(td("storage buffer dynamic")),
+
+			tr(td("maxDescriptorSetStorageBuffersDynamic"), td("storage buffer dynamic")),
+
+			tr(td("maxDescriptorSetInputAttachments"), td("input attachment"))
+		)}
+
+		<h5>Pipeline Layout Compatibility</h5>
+
+		Two pipeline layouts are defined to be “compatible for push constants” if they were created with identical push constant ranges. Two pipeline layouts
+		are defined to be “compatible for set N” if they were created with matching (the same, or identically defined) descriptor set layouts for sets zero
+		through N, and if they were created with identical push constant ranges.
+
+		When binding a descriptor set  to set number N, if the previously bound descriptor sets for sets zero through N-1 were all bound using compatible
+		pipeline layouts, then performing this binding does not disturb any of the lower numbered sets. If, additionally, the previous bound descriptor set for
+		set N was bound using a pipeline layout compatible for set N, then the bindings in sets numbered greater than N are also not disturbed.
+
+		Similarly, when binding a pipeline, the pipeline $can correctly access any previously bound descriptor sets which were bound with compatible pipeline
+		layouts, as long as all lower numbered sets were also bound with compatible layouts.
+
+		Layout compatibility means that descriptor sets $can be bound to a command buffer for use by any pipeline created with a compatible pipeline layout,
+		and without having bound a particular pipeline first. It also means that descriptor sets can remain valid across a pipeline change, and the same
+		resources will be accessible to the newly bound pipeline.
+
+		${note(
+			"""
+			A consequence of layout compatibility is that when the implementation compiles a pipeline layout and assigns hardware units to resources, the
+			mechanism to assign hardware units for set N $should only be a function of sets [0..N].
+			""",
+			"Implementor’s Note"
+		)}
+
+		${note(
+			"""
+			Place the least frequently changing descriptor sets near the start of the pipeline layout, and place the descriptor sets representing the most
+			frequently changing resources near the end. When pipelines are switched, only the descriptor set bindings that have been invalidated will need to
+			be updated and the remainder of the descriptor set bindings will remain in place.
+			"""
+		)}
+
+		The maximum number of descriptor sets that $can be bound to a pipeline layout is queried from physical device properties (see
+		##VkPhysicalDeviceLimits{@code ::maxBoundDescriptorSets}).
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the pipeline layout"),
+		const..VkPipelineLayoutCreateInfo_p.IN(
+			"pCreateInfo",
+			"a pointer to an instance of the ##VkPipelineLayoutCreateInfo structure specifying the state of the pipeline layout object"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkPipelineLayout.p.OUT("pPipelineLayout", "")
+		Check(1)..VkPipelineLayout.p.OUT(
+			"pPipelineLayout",
+			"points to a {@code VkPipelineLayout} handle in which the resulting pipeline layout object is returned"
+		)
 	)
 
 	void(
 		"DestroyPipelineLayout",
-		"Destroys a pipeline layout object.",
+		"""
+		Destroys a pipeline layout object.
 
-		VkDevice.IN("device", ""),
-		VkPipelineLayout.IN("pipelineLayout", ""),
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code pipelineLayout} is not #NULL_HANDLE, {@code pipelineLayout} $must be a valid {@code VkPipelineLayout} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code pipelineLayout} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code pipelineLayout} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"If ##VkAllocationCallbacks were provided when {@code pipelineLayout} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code pipelineLayout} was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code pipelineLayout} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the pipeline layout"),
+		VkPipelineLayout.IN("pipelineLayout", "the pipeline layout to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"CreateSampler",
-		"Creates a new sampler object.",
+		"""
+		Creates a new sampler object.
 
-		VkDevice.IN("device", ""),
-		const..VkSamplerCreateInfo_p.IN("pCreateInfo", ""),
+		{@code VkSampler} objects encapsulate the state of an image sampler which is used by the implementation to read image data and apply filtering and
+		other transformations for the shader.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkSamplerCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pSampler} $must be a pointer to a {@code VkSampler} handle"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the sampler"),
+		const..VkSamplerCreateInfo_p.IN(
+			"pCreateInfo",
+			"a pointer to an instance of the ##VkSamplerCreateInfo structure specifying the state of the sampler object"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkSampler.p.OUT("pSampler", "")
+		Check(1)..VkSampler.p.OUT("pSampler", "points to a {@code VkSampler} handle in which the resulting sampler object is returned")
 	)
 
 	void(
 		"DestroySampler",
-		"Destroys a sampler object.",
+		"""
+		Destroys a sampler object.
 
-		VkDevice.IN("device", ""),
-		VkSampler.IN("sampler", ""),
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code sampler} is not #NULL_HANDLE, {@code sampler} $must be a valid {@code VkSampler} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code sampler} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code sampler} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code sampler} $must have completed execution",
+			"If ##VkAllocationCallbacks were provided when {@code sampler} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code sampler} was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code sampler} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the sampler"),
+		VkSampler.IN("sampler", "the sampler to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"CreateDescriptorSetLayout",
-		"Creates a new descriptor set layout.",
+		"""
+		Creates a new descriptor set layout object.
 
-		VkDevice.IN("device", ""),
-		const..VkDescriptorSetLayoutCreateInfo_p.IN("pCreateInfo", ""),
+		A descriptor set layout object is defined by an array of zero or more descriptor bindings. Each individual descriptor binding is specified by a
+		descriptor type, a count (array size) of the number of descriptors in the binding, a set of shader stages that can access the binding, and (if using
+		immutable samplers) an array of sampler descriptors.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkDescriptorSetLayoutCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pSetLayout} $must be a pointer to a {@code VkDescriptorSetLayout} handle"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the descriptor set layout"),
+		const..VkDescriptorSetLayoutCreateInfo_p.IN(
+			"pCreateInfo",
+			"a pointer to an instance of the ##VkDescriptorSetLayoutCreateInfo structure specifying the state of the descriptor set layout object"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkDescriptorSetLayout.p.OUT("pSetLayout", "")
+		Check(1)..VkDescriptorSetLayout.p.OUT(
+			"pSetLayout",
+			"points to a {@code VkDescriptorSetLayout} handle in which the resulting descriptor set layout object is returned"
+		)
 	)
 
 	void(
 		"DestroyDescriptorSetLayout",
-		"Destroys a descriptor set layout object.",
+		"""
+		Destroys a descriptor set layout object.
 
-		VkDevice.IN("device", ""),
-		VkDescriptorSetLayout.IN("descriptorSetLayout", ""),
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code descriptorSetLayout} is not #NULL_HANDLE, {@code descriptorSetLayout} $must be a valid {@code VkDescriptorSetLayout} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code descriptorSetLayout} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code descriptorSetLayout} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"If ##VkAllocationCallbacks were provided when {@code descriptorSetLayout} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code descriptorSetLayout} was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code descriptorSetLayout} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the descriptor set layout"),
+		VkDescriptorSetLayout.IN("descriptorSetLayout", "the descriptor set layout to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"CreateDescriptorPool",
-		"Creates a descriptor pool object.",
+		"""
+		Creates a descriptor pool object.
 
-		VkDevice.IN("device", ""),
-		const..VkDescriptorPoolCreateInfo_p.IN("pCreateInfo", ""),
+		Descriptor sets are allocated from descriptor pool objects. A descriptor pool maintains a pool of descriptors, from which sets are allocated.
+		Descriptor pools are externally synchronized, meaning that the application must not allocate and/or free descriptor sets from the same pool in multiple
+		threads simultaneously.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkDescriptorPoolCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pDescriptorPool} $must be a pointer to a {@code VkDescriptorPool} handle"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the descriptor pool"),
+		const..VkDescriptorPoolCreateInfo_p.IN(
+			"pCreateInfo",
+			"a pointer to an instance of the ##VkDescriptorPoolCreateInfo structure specifying the state of the descriptor pool object"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkDescriptorPool.p.OUT("pDescriptorPool", "")
+		Check(1)..VkDescriptorPool.p.OUT("pDescriptorPool", "points to a {@code VkDescriptorPool} handle in which the resulting descriptor pool object is returned")
 	)
 
 	void(
 		"DestroyDescriptorPool",
-		"Destroys a descriptor pool object.",
+		"""
+		Destroys a descriptor pool object.
 
-		VkDevice.IN("device", ""),
-		VkDescriptorPool.IN("descriptorPool", ""),
+		When a pool is destroyed, all descriptor sets allocated from the pool are implicitly freed and become invalid. Descriptor sets allocated from a given
+		pool do not need to be freed before destroying that descriptor pool.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code descriptorPool} is not #NULL_HANDLE, {@code descriptorPool} $must be a valid {@code VkDescriptorPool} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code descriptorPool} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code descriptorPool} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code descriptorPool} (via any allocated descriptor sets) $must have completed execution",
+			"If ##VkAllocationCallbacks were provided when {@code descriptorPool} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code descriptorPool} was created, {@code pAllocator} $must be $NULL"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the descriptor pool"),
+		VkDescriptorPool.IN("descriptorPool", "the descriptor pool to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"ResetDescriptorPool",
-		"Resets a descriptor pool object.",
+		"""
+		Resets a descriptor pool object.
 
-		VkDevice.IN("device", ""),
-		VkDescriptorPool.IN("descriptorPool", ""),
-		VkDescriptorPoolResetFlags.IN("flags", "")
+		Rather than freeing individual descriptor sets, all descriptor sets allocated from a given pool can be returned to the pool by calling this function.
+
+		Resetting a descriptor pool recycles all of the resources from all of the descriptor sets allocated from the descriptor pool back to the descriptor
+		pool, and the descriptor sets are implicitly freed.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code descriptorPool} $must be a valid {@code VkDescriptorPool} handle",
+			"{@code flags} $must be 0",
+			"{@code descriptorPool} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code descriptorPool} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"All uses of {@code descriptorPool} (via any allocated descriptor sets) $must have completed execution"
+		)}
+
+		<h5>Host Synchronization</h5>
+		${ul(
+			"Host access to {@code descriptorPool} must be externally synchronized",
+			"Host access to any {@code VkDescriptorSet} objects allocated from {@code descriptorPool} must be externally synchronized"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the descriptor pool"),
+		VkDescriptorPool.IN("descriptorPool", "the descriptor pool to be reset"),
+		VkDescriptorPoolResetFlags.IN("flags", "is currently unused and must be zero")
 	)
 
 	VkResult(
 		"AllocateDescriptorSets",
-		"",
+		"""
+		Allocates descriptor sets from a descriptor pool.
 
-		VkDevice.IN("device", ""),
-		const..VkDescriptorSetAllocateInfo_p.IN("pAllocateInfo", ""),
-		Check(1)..VkDescriptorSet.p.OUT("pDescriptorSets", "")
+		When a descriptor set is allocated, the initial state is largely uninitialized and all descriptors are undefined. However, the descriptor set can be
+		bound in a command buffer without causing errors or exceptions. All entries that are statically used by a pipeline in a drawing or dispatching command
+		$must have been populated before the descriptor set is bound for use by that command. Entries that are not statically used by a pipeline $can have
+		uninitialized descriptors or descriptors of resources that have been destroyed, and executing a draw or dispatch with such a descriptor set bound does
+		not cause undefined behavior. This means applications need not populate unused entries with dummy descriptors.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pAllocateInfo} $must be a pointer to a valid ##VkDescriptorSetAllocateInfo structure",
+			"{@code pDescriptorSets} $must be a pointer to an array of {@code pAllocateInfo->descriptorSetCount} {@code VkDescriptorSet} handles"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code pAllocateInfo->descriptorPool} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the descriptor pool"),
+		const..VkDescriptorSetAllocateInfo_p.IN(
+			"pAllocateInfo",
+			"a pointer to an instance of the ##VkDescriptorSetAllocateInfo structure describing parameters of the allocation"
+		),
+		Check("pAllocateInfo.descriptorSetCount()")..VkDescriptorSet.p.OUT(
+			"pDescriptorSets",
+			"""
+			a pointer to an array of {@code VkDescriptorSet} handles in which the resulting descriptor set objects are returned. The array must be at least the
+			length specified by the {@code descriptorSetCount} member of {@code pAllocateInfo}.
+			"""
+		)
 	)
 
 	VkResult(
 		"FreeDescriptorSets",
-		"Frees one or more descriptor sets.",
+		"""
+		Frees one or more descriptor sets.
 
-		VkDevice.IN("device", ""),
-		VkDescriptorPool.IN("descriptorPool", ""),
-		AutoSize("pDescriptorSets")..uint32_t.IN("descriptorSetCount", ""),
-		SingleValue("pDescriptorSet")..const..VkDescriptorSet.p.IN("pDescriptorSets", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code descriptorPool} $must be a valid {@code VkDescriptorPool} handle",
+			"The value of {@code descriptorSetCount} $must be greater than 0",
+			"{@code descriptorPool} $must have been created, allocated or retrieved from {@code device}",
+			"Each element of {@code pDescriptorSets} that is a valid handle $must have been created, allocated or retrieved from {@code descriptorPool}",
+			"""
+			Each of {@code device}, {@code descriptorPool} and the elements of {@code pDescriptorSets} that are valid handles $must have been created,
+			allocated or retrieved from the same {@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to any element of {@code pDesciptorSets} $must have completed execution",
+			"""
+			{@code pDescriptorSets} $must be a pointer to an array of {@code descriptorSetCount} {@code VkDescriptorSet} handles, each element of which $must
+			either be a valid handle or #NULL_HANDLE
+			""",
+			"{@code descriptorPool} $must have been created with the #DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT flag"
+		)}
+
+		<h5>Host Synchronization</h5>
+		${ul(
+			"Host access to {@code descriptorPool} must be externally synchronized",
+			"Host access to each member of {@code pDescriptorSets} must be externally synchronized"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the descriptor pool"),
+		VkDescriptorPool.IN("descriptorPool", "the descriptor pool from which the descriptor sets were allocated"),
+		AutoSize("pDescriptorSets")..uint32_t.IN("descriptorSetCount", "the number of elements in the {@code pDescriptorSets} array"),
+		SingleValue("pDescriptorSet")..const..VkDescriptorSet.p.IN(
+			"pDescriptorSets",
+			"""
+			an array of handles to {@code VkDescriptorSet} objects. All elements of {@code pDescriptorSets} must have been allocated from
+			{@code descriptorPool}.
+			"""
+		)
 	)
 
 	void(
 		"UpdateDescriptorSets",
-		"Updates the contents of a descriptor set object.",
+		"""
+		Updates the contents of a descriptor set object.
 
-		VkDevice.IN("device", ""),
-		AutoSize("pDescriptorWrites")..uint32_t.IN("descriptorWriteCount", ""),
-		nullable..const..VkWriteDescriptorSet_p.IN("pDescriptorWrites", ""),
-		AutoSize("pDescriptorCopies")..uint32_t.IN("descriptorCopyCount", ""),
-		nullable..const..VkCopyDescriptorSet_p.IN("pDescriptorCopies", "")
+		Once allocated, descriptor sets can be updated with a combination of write and copy operations.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"""
+			If {@code descriptorWriteCount} is not 0, {@code pDescriptorWrites} $must be a pointer to an array of {@code descriptorWriteCount} valid
+			##VkWriteDescriptorSet structures
+			""",
+			"""
+			If {@code descriptorCopyCount} is not 0, {@code pDescriptorCopies} $must be a pointer to an array of {@code descriptorCopyCount} valid
+			##VkCopyDescriptorSet structures
+			"""
+		)}
+
+		<h5>Host Synchronization</h5>
+		${ul(
+			"Host access to {@code pDescriptorWrites[].dstSet} must be externally synchronized",
+			"Host access to {@code pDescriptorCopies[].dstSet} must be externally synchronized"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that updates the descriptor sets"),
+		AutoSize("pDescriptorWrites")..uint32_t.IN("descriptorWriteCount", "the number of elements in the {@code pDescriptorWrites} array"),
+		nullable..const..VkWriteDescriptorSet_p.IN(
+			"pDescriptorWrites",
+			"a pointer to an array of ##VkWriteDescriptorSet structures describing the descriptor sets to write to"
+		),
+		AutoSize("pDescriptorCopies")..uint32_t.IN("descriptorCopyCount", "the number of elements in the {@code pDescriptorCopies} array"),
+		nullable..const..VkCopyDescriptorSet_p.IN(
+			"pDescriptorCopies",
+			"a pointer to an array of ##VkCopyDescriptorSet structures describing the descriptor sets to copy between"
+		)
 	)
 
 	VkResult(
 		"CreateFramebuffer",
-		"Create a new framebuffer object.",
+		"""
+		Creates a new framebuffer object.
 
-		VkDevice.IN("device", ""),
-		const..VkFramebufferCreateInfo_p.IN("pCreateInfo", ""),
+		Render passes operate in conjunction with framebuffers, which represent a collection of specific memory attachments that a render pass instance uses.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkFramebufferCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pFramebuffer} $must be a pointer to a {@code VkFramebuffer} handle"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the framebuffer"),
+		const..VkFramebufferCreateInfo_p.IN(
+			"pCreateInfo",
+			"points to a ##VkFramebufferCreateInfo structure which describes additional information about framebuffer creation"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkFramebuffer.p.OUT("pFramebuffer", "")
+		Check(1)..VkFramebuffer.p.OUT("pFramebuffer", "points to a {@code VkFramebuffer} handle in which the resulting framebuffer object is returned")
 	)
 
 	void(
 		"DestroyFramebuffer",
-		"Destroys a framebuffer object.",
+		"""
+		Destroys a framebuffer object.
 
-		VkDevice.IN("device", ""),
-		VkFramebuffer.IN("framebuffer", ""),
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code framebuffer} is not #NULL_HANDLE, {@code framebuffer} $must be a valid {@code VkFramebuffer} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code framebuffer} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code framebuffer} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code framebuffer} $must have completed execution",
+			"If ##VkAllocationCallbacks were provided when {@code framebuffer} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code framebuffer} was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code framebuffer} $must be externally synchronized
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the framebuffer"),
+		VkFramebuffer.IN("framebuffer", "the handle of the framebuffer to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"CreateRenderPass",
-		"Creates a new render pass object.",
+		"""
+		Creates a new render pass object.
 
-		VkDevice.IN("device", ""),
-		const..VkRenderPassCreateInfo_p.IN("pCreateInfo", ""),
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkRenderPassCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pRenderPass} $must be a pointer to a {@code VkRenderPass} handle"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the render pass"),
+		const..VkRenderPassCreateInfo_p.IN(
+			"pCreateInfo",
+			"a pointer to an instance of the ##VkRenderPassCreateInfo structure that describes the parameters of the render pass"
+		),
 		CreateInstance["pAllocator"],
-		Check(1)..VkRenderPass.p.OUT("pRenderPass", "")
+		Check(1)..VkRenderPass.p.OUT("pRenderPass", "points to a {@code VkRenderPass} handle in which the resulting render pass object is returned")
 	)
 
 	void(
 		"DestroyRenderPass",
-		"Destroys a render pass object.",
+		"""
+		Destroys a render pass object.
 
-		VkDevice.IN("device", ""),
-		VkRenderPass.IN("renderPass", ""),
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code renderPass} is not #NULL_HANDLE, {@code renderPass} $must be a valid {@code VkRenderPass} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code renderPass} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code renderPass} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code kPhysicalDevice}
+			""",
+			"All submitted commands that refer to {@code renderPass} $must have completed execution",
+			"If ##VkAllocationCallbacks were provided when {@code renderPass} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code renderPass} was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code renderPass} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the render pass"),
+		VkRenderPass.IN("renderPass", "the handle of the render pass to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	void(
 		"GetRenderAreaGranularity",
-		"Returns the granularity for optimal render area.",
+		"""
+		Queries the granularity for optimal render area.
 
-		VkDevice.IN("device", ""),
-		VkRenderPass.IN("renderPass", ""),
-		VkExtent2D.p.OUT("pGranularity", "")
+		The conditions leading to an optimal {@code renderArea} are:
+		${ul(
+			"the {@code offset.x} member in {@code renderArea} is a multiple of the width member of the returned ##VkExtent2D (the horizontal granularity).",
+			"the {@code offset.y} member in {@code renderArea} is a multiple of the height of the returned ##VkExtent2D (the vertical granularity).",
+			"""
+			either the {@code offset.width} member in {@code renderArea} is a multiple of the horizontal granularity or {@code offset.x+offset.width} is equal
+			to the width of the framebuffer in the ##VkRenderPassBeginInfo.
+			""",
+			"""
+			either the {@code offset.height} member in {@code renderArea} is a multiple of the vertical granularity or {@code offset.y+offset.height} is equal
+			to the height of the framebuffer in the ##VkRenderPassBeginInfo.
+			"""
+		)}
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code renderPass} $must be a valid {@code VkRenderPass} handle",
+			"{@code pGranularity} $must be a pointer to a ##VkExtent2D structure",
+			"{@code renderPass} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code renderPass} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the render pass"),
+		VkRenderPass.IN("renderPass", "a handle to a render pass"),
+		VkExtent2D.p.OUT("pGranularity", "points to a ##VkExtent2D structure in which the granularity is returned")
 	)
+
+	}
+	separateMethod {
 
 	VkResult(
 		"CreateCommandPool",
-		"Creates a new command pool object.",
+		"""
+		Creates a new command pool object.
 
-		VkDevice.IN("device", ""),
-		const..VkCommandPoolCreateInfo_p.IN("pCreateInfo", ""),
+		Command pools are opaque objects that command buffer memory is allocated from, and which allow the implementation to amortize the cost of resource
+		creation across multiple command buffers. Command pools are application-synchronized, meaning that a command pool must not be used concurrently in
+		multiple threads. That includes use via recording commands on any command buffers allocated from the pool, as well as operations that allocate, free,
+		and reset command buffers or the pool itself.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pCreateInfo} $must be a pointer to a valid ##VkCommandPoolCreateInfo structure",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"{@code pCommandPool} $must be a pointer to a {@code VkCommandPool} handle"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that creates the command pool"),
+		const..VkCommandPoolCreateInfo_p.IN("pCreateInfo", "contains information used to create the command pool"),
 		CreateInstance["pAllocator"],
-		Check(1)..VkCommandPool.p.OUT("pCommandPool", "")
+		Check(1)..VkCommandPool.p.OUT("pCommandPool", "points to an {@code VkCommandPool} handle in which the created pool is returned")
 	)
 
 	void(
 		"DestroyCommandPool",
-		"Destroys a command pool object.",
+		"""
+		Destroys a command pool object.
 
-		VkDevice.IN("device", ""),
-		VkCommandPool.IN("commandPool", ""),
+		When a pool is destroyed, all command buffers allocated from the pool are implicitly freed and become invalid. Command buffers allocated from a given
+		pool do not need to be freed before destroying that command pool.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"If {@code commandPool} is not #NULL_HANDLE, {@code commandPool} $must be a valid {@code VkCommandPool} handle",
+			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
+			"If {@code commandPool} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
+			"""
+			Each of {@code device} and {@code commandPool} that are valid handles $must have been created, allocated or retrieved from the same
+			{@code VkPhysicalDevice}
+			""",
+			"All ##VkCommandBuffer objects allocated from {@code commandPool} $mustnot be pending execution",
+			"If ##VkAllocationCallbacks were provided when {@code commandPool} was created, a compatible set of callbacks $must be provided here",
+			"If no ##VkAllocationCallbacks were provided when {@code commandPool} was created, {@code pAllocator} $must be $NULL"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandPool} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that destroys the command pool"),
+		VkCommandPool.IN("commandPool", "the handle of the command pool to destroy"),
 		CreateInstance["pAllocator"]
 	)
 
 	VkResult(
 		"ResetCommandPool",
-		"Resets a command pool.",
+		"""
+		Resets a command pool.
 
-		VkDevice.IN("device", ""),
-		VkCommandPool.IN("commandPool", ""),
-		VkCommandPoolResetFlags.IN("flags", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code commandPool} $must be a valid {@code VkCommandPool} handle",
+			"{@code flags} $must be a valid combination of {@code VkCommandPoolResetFlagBits} values",
+			"{@code commandPool} $must have been created, allocated or retrieved from {@code device}",
+			"Each of {@code device} and {@code commandPool} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"All ##VkCommandBuffer objects allocated from {@code commandPool} $mustnot currently be pending execution"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandPool} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the command pool"),
+		VkCommandPool.IN("commandPool", "the command pool to reset"),
+		VkCommandPoolResetFlags.IN("flags", "contains additional flags controlling the behavior of the reset", VkCommandPoolResetFlagBits, LinkMode.BITFIELD)
 	)
 
 	VkResult(
 		"AllocateCommandBuffers",
-		"",
+		"""
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pAllocateInfo} $must be a pointer to a valid ##VkCommandBufferAllocateInfo structure",
+			"{@code pCommandBuffers} $must be a pointer to an array of {@code pAllocateInfo->commandBufferCount} {@code VkCommandBuffer} handles"
+		)}
 
-		VkDevice.IN("device", ""),
-		const..VkCommandBufferAllocateInfo_p.IN("pAllocateInfo", ""),
-		Check(1)..VkCommandBuffer.p.OUT("pCommandBuffers", "")
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code pAllocateInfo->commandPool} $must be externally synchronized.
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the command pool"),
+		const..VkCommandBufferAllocateInfo_p.IN(
+			"pAllocateInfo",
+			"an instance of the ##VkCommandBufferAllocateInfo structure which defines additional information about creating the pool"
+		),
+		Check("pAllocateInfo.commandBufferCount()")..VkCommandBuffer.p.OUT(
+			"pCommandBuffers",
+			"points to an array in which the allocated command buffers are returned. Each allocated command buffer begins in the initial state."
+		)
 	)
 
 	void(
 		"FreeCommandBuffers",
-		"Frees command buffers.",
+		"""
+		Frees command buffers.
 
-		VkDevice.IN("device", ""),
-		VkCommandPool.IN("commandPool", ""),
-		AutoSize("pCommandBuffers")..uint32_t.IN("commandBufferCount", ""),
-		SingleValue("pCommandBuffer")..const..VkCommandBuffer.p.IN("pCommandBuffers", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code commandPool} $must be a valid {@code VkCommandPool} handle",
+			"The value of {@code commandBufferCount} $must be greater than 0",
+			"{@code commandPool} $must have been created, allocated or retrieved from {@code device}",
+			"Each element of {@code pCommandBuffers} that is a valid handle $must have been created, allocated or retrieved from {@code commandPool}",
+			"""
+			Each of {@code device}, {@code commandPool} and the elements of {@code pCommandBuffers} that are valid handles $must have been created, allocated
+			or retrieved from the same {@code VkPhysicalDevice}
+			""",
+			"All elements of {@code pCommandBuffers} $mustnot be pending execution",
+			"""
+			{@code pCommandBuffers} $must be a pointer to an array of {@code commandBufferCount} {@code VkCommandBuffer} handles, each element of which $must
+			either be a valid handle or #NULL_HANDLE
+			"""
+		)}
+
+		<h5>Host Synchronization</h5>
+		${ul(
+			"Host access to {@code commandPool} $must be externally synchronized",
+			"Host access to each member of {@code pCommandBuffers} $must be externally synchronized"
+		)}
+		""",
+
+		VkDevice.IN("device", "the logical device that owns the command pool"),
+		VkCommandPool.IN("commandPool", "the handle of the command pool that the command buffers were allocated from"),
+		AutoSize("pCommandBuffers")..uint32_t.IN("commandBufferCount", "the length of the {@code pCommandBuffers} array"),
+		SingleValue("pCommandBuffer")..const..VkCommandBuffer.p.IN("pCommandBuffers", "an array of handles of command buffers to free")
 	)
 
 	VkResult(
 		"BeginCommandBuffer",
-		"Starts recording a command buffer.",
+		"""
+		Starts recording a command buffer.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		const..VkCommandBufferBeginInfo_p.IN("pBeginInfo", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code pBeginInfo} $must be a pointer to a valid ##VkCommandBufferBeginInfo structure",
+			"{@code commandBuffer} $mustnot be in the recording state",
+			"""
+			If {@code commandBuffer} was allocated from a {@code VkCommandPool} which did not have the #COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT flag set,
+			{@code commandBuffer} $must be in the initial state
+			""",
+			"""
+			If {@code commandBuffer} is a secondary command buffer, the {@code pInheritanceInfo} member of {@code pBeginInfo} $must be a valid
+			##VkCommandBufferInheritanceInfo structure
+			""",
+			"""
+			If {@code commandBuffer} is a secondary command buffer and either the {@code occlusionQueryEnable} member of the {@code pInheritanceInfo} member of
+			{@code pBeginInfo} is #FALSE, or the precise occlusion queries feature is not enabled, the {@code queryFlags} member of the
+			{@code pInheritanceInfo} member {@code pBeginInfo} $mustnot contain #QUERY_CONTROL_PRECISE_BIT
+			"""
+		)}
+
+		A primary command buffer is considered to be pending execution from the time it is submitted via #QueueSubmit() until that submission completes.
+
+		A secondary command buffer is considered to be pending execution from the time its execution is recorded into a primary buffer (via
+		#CmdExecuteCommands()) until the final time that primary buffer’s submission to a queue completes. If, after the primary buffer completes, the
+		secondary command buffer is recorded to execute on a different primary buffer, the first primary buffer $mustnot be resubmitted until after it is reset
+		with #ResetCommandBuffer().
+
+		If #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT is not set on a secondary command buffer, that command buffer must not be used more than once in a given
+		primary command buffer. Furthermore, if a secondary command buffer without #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT set is recorded to execute in a
+		primary command buffer with #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT set, the primary command buffer must not be pending execution more than once at
+		a time.
+
+		${note(
+			"""
+			On some implementations, not using the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT bit enables command buffers to be patched in-place if needed,
+			rather than creating a copy of the command buffer.
+			"""
+		)}
+
+		If a command buffer is in the executable state and the command buffer was allocated from a command pool with the
+		#COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT flag set, then {@code vkBeginCommandBuffer} implicitly resets the command buffer, behaving as if
+		#ResetCommandBuffer() had been called with #COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT not set. It then puts the command buffer in the recording state.
+
+		Once recording starts, an application records a sequence of commands ({@code vkCmd*}) to set state in the command buffer, draw, dispatch, and other
+		commands.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the handle of the command buffer which is to be put in the recording state"),
+		const..VkCommandBufferBeginInfo_p.IN(
+			"pBeginInfo",
+			"an instance of the ##VkCommandBufferBeginInfo structure, which defines additional information about how the command buffer begins recording"
+		)
 	)
 
 	VkResult(
 		"EndCommandBuffer",
-		"Finishes recording a command buffer.",
+		"""
+		Completes recording a command buffer.
 
-		VkCommandBuffer.IN("commandBuffer", "")
+		If there was an error during recording, the application will be notified by an unsuccessful return code returned by {@code vkEndCommandBuffer}. If the
+		application wishes to further use the command buffer, the command buffer must be reset.
+
+		When a command buffer is in the executable state, it can be submitted to a queue for execution.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code commandBuffer} $must be in the recording state",
+			"#EndCommandBuffer() $mustnot be called inside a render pass instance",
+			"All queries made active during the recording of {@code commandBuffer} $must have been made inactive"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN(
+			"commandBuffer",
+			"the command buffer to complete recording. The command buffer must have been in the recording state, and is moved to the executable state."
+		)
 	)
 
 	VkResult(
 		"ResetCommandBuffer",
-		"Resets a command buffer.",
+		"""
+		Resets a command buffer.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		VkCommandBufferResetFlags.IN("flags", "")
+		If {@code flags} includes #COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT, then most or all memory resources currently owned by the command buffer should
+		be returned to the parent command pool. If this flag is not set, then the command buffer may hold onto memory resources and reuse them when recording
+		commands.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code flags} $must be a valid combination of {@code VkCommandBufferResetFlagBits} values",
+			"{@code commandBuffer} $mustnot currently be pending execution",
+			"{@code commandBuffer} $must have been allocated from a pool that was created with the #COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer to reset. The command buffer can be in any state, and is put in the initial state."),
+		VkCommandBufferResetFlags.IN("flags", "is of type {@code VkCommandBufferResetFlags}", VkCommandBufferResetFlagBits, LinkMode.BITFIELD)
 	)
 
 	void(
 		"CmdBindPipeline",
-		"Binds a pipeline object to a command buffer.",
+		"""
+		Binds a pipeline object to a command buffer.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		VkPipelineBindPoint.IN("pipelineBindPoint", ""),
-		VkPipeline.IN("pipeline", "")
+		Once bound, a pipeline binding affects subsequent graphics or compute commands in the command buffer until a different pipeline is bound to the bind
+		point. The pipeline bound to #PIPELINE_BIND_POINT_COMPUTE controls the behavior of #CmdDispatch() and #CmdDispatchIndirect(). The pipeline bound to
+		#PIPELINE_BIND_POINT_GRAPHICS controls the behavior of #CmdDraw(), #CmdDrawIndexed(), #CmdDrawIndirect(), and #CmdDrawIndexedIndirect(). No other
+		commands are affected by the pipeline state.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code pipelineBindPoint} $must be a valid {@code VkPipelineBindPoint} value",
+			"{@code pipeline} $must be a valid {@code VkPipeline} handle",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"Each of {@code commandBuffer} and {@code pipeline} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"""
+			If the value of {@code pipelineBindPoint} is #PIPELINE_BIND_POINT_COMPUTE, the ##VkCommandPool that {@code commandBuffer} was allocated from $must
+			support compute operations
+			""",
+			"""
+			If the value of {@code pipelineBindPoint} is #PIPELINE_BIND_POINT_GRAPHICS, the ##VkCommandPool that {@code commandBuffer} was allocated from $must
+			support graphics operations
+			""",
+			"If the value of {@code pipelineBindPoint} is #PIPELINE_BIND_POINT_COMPUTE, {@code pipeline} $must be a compute pipeline",
+			"If the value of {@code pipelineBindPoint} is #PIPELINE_BIND_POINT_GRAPHICS, {@code pipeline} $must be a graphics pipeline",
+			"""
+			If the variable multisample rate feature is not supported, {@code pipeline} is a graphics pipeline, the current subpass has no attachments, and
+			this is not the first call to this function with a graphics pipeline after transitioning to the current subpass, then the sample count specified by
+			this pipeline $must match that set in the previous pipeline
+			"""
+		)}
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer that the pipeline will be bound to"),
+		VkPipelineBindPoint.IN(
+			"pipelineBindPoint",
+			"the bind point. There are separate bind points for each of graphics and compute, so binding one does not disturb the other.",
+			VkPipelineBindPoints
+		),
+		VkPipeline.IN("pipeline", "the pipeline to be bound")
 	)
 
 	void(
 		"CmdSetViewport",
-		"Sets the viewport on a command buffer.",
+		"""
+		Sets the viewport on a command buffer.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		uint32_t.IN("firstViewport", ""),
-		AutoSize("pViewports")..uint32_t.IN("viewportCount", ""),
-		const..VkViewport.p.IN("pViewports", "")
+		If the bound pipeline state object was not created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled, viewport transformation parameters are
+		specified using the {@code pViewports} member of ##VkPipelineViewportStateCreateInfo in the pipeline state object. If the pipeline state object was
+		created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled, the viewport transformation parameters are dynamically set and changed with this
+		command.
+
+		The viewport parameters taken from element {@code i} of {@code pViewports} replace the current state for the viewport index
+		{@code firstViewport + i}, for {@code i} in {@code [0,viewportCount)}.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code pViewports} $must be a pointer to an array of {@code viewportCount} valid ##VkViewport structures",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The value of {@code viewportCount} $must be greater than 0",
+			"{@code firstViewport} $must be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}",
+			"The sum of {@code firstViewport} and {@code viewportCount} $must be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
+		uint32_t.IN("firstViewport", "the index of the first viewport whose parameters are updated by the command"),
+		AutoSize("pViewports")..uint32_t.IN("viewportCount", "the number of viewports whose parameters are updated by the command"),
+		const..VkViewport.p.IN("pViewports", "a pointer to an array of {@code VkViewport} structures specifying viewport parameters")
 	)
 
 	void(
 		"CmdSetScissor",
-		"Set the dynamic scissor rectangles on a command buffer.",
+		"""
+		Sets the dynamic scissor rectangles on a command buffer.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		uint32_t.IN("firstScissor", ""),
-		AutoSize("pScissors")..uint32_t.IN("scissorCount", ""),
-		const..VkRect2D.p.IN("pScissors", "")
+		The scissor test determines if a fragment’s framebuffer coordinates ${code("(x<sub>f</sub>,y<sub>f</sub>)")} lie within the scissor rectangle
+		corresponding to the viewport index used by the primitive that generated the fragment. If the pipeline state object is created without
+		#DYNAMIC_STATE_SCISSOR enabled then the scissor rectangles are set by the ##VkPipelineViewportStateCreateInfo state of the pipeline state object.
+		Otherwise, use this command to dynamically set the scissor rectangles.
+
+		The scissor rectangles taken from element {@code i} of {@code pScissors} replace the current state for the scissor index {@code firstScissor + i}, for
+		{@code i} in {@code [0,scissorCount)}.
+
+		Each scissor rectangle is described by a ##VkRect2D structure, with the {@code offset.x} and {@code offset.y} values determining the upper left corner
+		of the scissor rectangle, and the {@code extent.width} and {@code extent.height} values determining the size in pixels.
+
+		If ${code("offset.x &le; x<sub>f</sub> &lt; offset.x + extent.width")}  and ${code("offset.y &le; y<sub>f</sub> &lt; offset.y + extent.height")} for
+		the selected scissor rectangle, then the scissor test passes. Otherwise, the test fails and the fragment is discarded. For points, lines, and polygons,
+		the scissor rectangle for a primitive is selected in the same manner as the viewport. The scissor rectangles only apply to drawing commands, not to
+		other commands like clears or copies.
+
+		It is legal for {@code offset.x + extent.width} or {@code offset.y + extent.height} to exceed the dimensions of the framebuffer - the scissor test
+		still applies as defined above. Rasterization does not produce fragments outside of the framebuffer, so such fragments never have the scissor test
+		performed on them.
+
+		The scissor test is always performed. Applications can effectively disable the scissor test by specifying a scissor rectangle that encompasses the
+		entire framebuffer.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code pScissors} $must be a pointer to an array of {@code scissorCount} ##VkRect2D structures",
+			"{@code commandBuffer} $must be in the recording state",
+			"The ##VkCommandPool that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The value of {@code scissorCount} $must be greater than 0",
+			"{@code firstScissor} $must be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}",
+			"The sum of {@code firstScissor} and {@code scissorCount} $must be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive",
+			"The {@code x} and {@code y} members of {@code offset} $must be greater than or equal to 0",
+			"Evaluation of ({@code offset.x + extent.width}) $mustnot cause a signed integer addition overflow",
+			"Evaluation of ({@code offset.y + extent.height}) $mustnot cause a signed integer addition overflow"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
+		uint32_t.IN("firstScissor", "the index of the first scissor whose state is updated by the command"),
+		AutoSize("pScissors")..uint32_t.IN("scissorCount", "the number of scissors whose rectangles are updated by the command"),
+		const..VkRect2D.p.IN("pScissors", "a pointer to an array of ##VkRect2D structures defining scissor rectangles")
 	)
 
 	void(
 		"CmdSetLineWidth",
-		"Set the dynamic line width state.",
+		"""
+		Sets the dynamic line width state.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		float.IN("lineWidth", "")
+		A line is drawn by generating a set of fragments overlapping a rectangle centered on the line segment. Each line segment has an associated width that
+		controls the width of that rectangle.
+
+		The line width is set by the {@code lineWidth} property of ##VkPipelineRasterizationStateCreateInfo in the currently active pipeline if the pipeline
+		was not created with #DYNAMIC_STATE_LINE_WIDTH enabled. Otherwise, the line width is set by calling {@code vkCmdSetLineWidth}.
+
+		Not all line widths need be supported for line segment rasterization, but width 1.0 antialiased segments must be provided. The range and gradations are
+		obtained from the {@code lineWidthRange} and {@code lineWidthGranularity} members of ##VkPhysicalDeviceLimits. If, for instance, the size range is from
+		0.1 to 2.0 and the gradation size is 0.1, then the size 0.1, 0.2, …, 1.9, 2.0 are supported. Additional line widths may also be supported. There is no
+		requirement that these widths be equally spaced. If an unsupported width is requested, the nearest supported width is used instead.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"If the wide lines feature is not enabled, the value of {@code lineWidth} $must be 1.0"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
+		float.IN("lineWidth", "the width of rasterized line segments")
 	)
 
 	void(
 		"CmdSetDepthBias",
-		"Sets the depth bias dynamic state.",
+		"""
+		Sets the depth bias dynamic state.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		float.IN("depthBiasConstantFactor", ""),
-		float.IN("depthBiasClamp", ""),
-		float.IN("depthBiasSlopeFactor", "")
+		The depth values of all fragments generated by the rasterization of a polygon can be offset by a single value that is computed for that polygon. This
+		behavior is controlled by the {@code depthBiasEnable}, {@code depthBiasConstantFactor}, {@code depthBiasClamp}, and {@code depthBiasSlopeFactor}
+		members of ##VkPipelineRasterizationStateCreateInfo, or by the corresponding parameters to the {@code vkCmdSetDepthBias} command if depth bias state is
+		dynamic.
+
+		If {@code depthBiasEnable} is #FALSE, no depth bias is applied and the fragment’s depth values are unchanged.
+
+		{@code depthBiasSlopeFactor} scales the maximum depth slope of the polygon, and {@code depthBiasConstantFactor} scales an implementation-dependent
+		constant that relates to the usable resolution of the depth buffer. The resulting values are summed to produce the depth bias value which is then
+		clamped to a minimum or maximum value specified by {@code depthBiasClamp}. {@code depthBiasSlopeFactor}, {@code depthBiasConstantFactor}, and
+		{@code depthBiasClamp} $can each be positive, negative, or zero.
+
+		The maximum depth slope mm of a triangle is
+		${codeBlock(
+			"""
+			m = sqrt((&part;z<sub>f</sub> / &part;x<sub>f</sub>)<sup>2</sup> + (&part;z<sub>f</sub> / &part;y<sub>f</sub>)<sup>2</sup>)
+			"""
+		)}
+
+		where ${code("(x<sub>f</sub>,y<sub>f</sub>,z<sub>f</sub>)")} is a point on the triangle. {@code m} may be approximated as
+		${codeBlock(
+			"""
+			m = max(abs(&part;z<sub>f</sub> / &part;x<sub>f</sub>), abs(&part;z<sub>f</sub> / &part;y<sub>f</sub>))
+			"""
+		)}
+
+		The minimum resolvable difference {@code r} is an implementation-dependent parameter that depends on the depth buffer representation. It is the
+		smallest difference in framebuffer coordinate {@code z} values that is guaranteed to remain distinct throughout polygon rasterization and in the depth
+		buffer. All pairs of fragments generated by the rasterization of two polygons with otherwise identical vertices, but ${code("z<sub>f</sub>")} values
+		that differ by {@code r}, will have distinct depth values.
+
+		For fixed-point depth buffer representations, {@code r} is constant throughout the range of the entire depth buffer. For floating-point depth buffers,
+		there is no single minimum resolvable difference. In this case, the minimum resolvable difference for a given polygon is dependent on the maximum
+		exponent, {@code e}, in the range of {@code z} values spanned by the primitive. If {@code n} is the number of bits in the floating-point mantissa, the
+		minimum resolvable difference, {@code r}, for the given primitive is defined as
+		${codeBlock(
+			"""
+			r = 2<sup>e-n</sup>
+			"""
+		)}
+
+		If no depth buffer is present, {@code r} is undefined.
+
+		The bias value {@code o} for a polygon is
+		<table>
+		${tr(td(code("o ="), rowspan = 3), td(code("m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor")), td(code("when depthBiasClamp = 0 or NaN")))}
+		${tr(td(code("min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)")), td(code("when depthBiasClamp &gt; 0")))}
+		${tr(td(code("max(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)")), td(code("when depthBiasClamp &lt; 0")))}
+		</table>
+
+		{@code m} is computed as described above. If the depth buffer uses a fixed-point representation, {@code m} is a function of depth values in the range
+		{@code [0,1]}, and {@code o} is applied to depth values in the same range.
+
+		For fixed-point depth buffers, fragment depth values are always limited to the range {@code [0,1]} by clamping after depth bias addition is performed.
+		Fragment depth values are clamped even when the depth buffer uses a floating-point representation.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code commandBuffer} $must be in the recording state",
+			"The ##VkCommandPool that {@code commandBuffer} was allocated from $must support graphics operations",
+			"If the depth bias clamping feature is not enabled, the value of {@code depthBiasClamp} $must be 0.0"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
+		float.IN("depthBiasConstantFactor", "a scalar factor controlling the constant depth value added to each fragment"),
+		float.IN("depthBiasClamp", "the maximum (or minimum) depth bias of a fragment"),
+		float.IN("depthBiasSlopeFactor", "a scalar factor applied to a fragment’s slope in depth bias calculations")
 	)
 
 	void(
 		"CmdSetBlendConstants",
-		"Sets the values of blend constants.",
+		"""
+		Sets the values of blend constants.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		Check(4)..const..float_p.IN("blendConstants", "")
+		If the pipeline state object is created without the #DYNAMIC_STATE_BLEND_CONSTANTS dynamic state enabled then the “blend constant”
+		{@code (Rc,Gc,Bc,Ac)} is specified via the {@code blendConstants} member of ##VkPipelineColorBlendStateCreateInfo. Otherwise the blend constant is
+		dynamically set and changed by calling this command,
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
+		Check(4)..const..float_p.IN(
+			"blendConstants",
+			"an array of four values specifying the R, G, B, and A components of the blend constant color used in blending, depending on the blend factor"
+		)
 	)
 
 	void(
 		"CmdSetDepthBounds",
-		"Sets the depth bounds test values for a command buffer.",
+		"""
+		Sets the depth bounds test values for a command buffer.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		float.IN("minDepthBounds", ""),
-		float.IN("maxDepthBounds", "")
+		The depth bounds test conditionally disables coverage of a sample based on the outcome of a comparison between the value zaza in the depth attachment
+		at location ${code("(x<sub>f</sub>,y<sub>f</sub>)")} (for the appropriate sample) and a range of values. The test is enabled or disabled by the
+		{@code depthBoundsTestEnable} member of ##VkPipelineDepthStencilStateCreateInfo. If the pipeline state object is created without the
+		#DYNAMIC_STATE_DEPTH_BOUNDS dynamic state enabled then the range of values used in the depth bounds test are defined by the {@code minDepthBounds} and
+		{@code maxDepthBounds} members of the ##VkPipelineDepthStencilStateCreateInfo structure. Otherwise, to dynamically set the depth bounds range values
+		call this command.
+
+		If ${code("minDepthBounds &le; za &le; maxDepthBounds")}, then the depth bounds test passes. Otherwise, the test fails and the sample’s coverage bit is
+		cleared in the fragment. If there is no depth framebuffer attachment or if the depth bounds test is disabled, it is as if the depth bounds test always
+		passes.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The value of {@code minDepthBounds} $must be between 0.0 and 1.0, inclusive",
+			"The value of {@code maxDepthBounds} $must be between 0.0 and 1.0, inclusive"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
+		float.IN("minDepthBounds", "the lower bound of the range of depth values used in the depth bounds test"),
+		float.IN("maxDepthBounds", "the upper bound of the range")
 	)
 
 	void(
 		"CmdSetStencilCompareMask",
-		"Sets the stencil compare mask dynamic state.",
+		"""
+		Sets the stencil compare mask dynamic state.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		VkStencilFaceFlags.IN("faceMask", ""),
-		uint32_t.IN("compareMask", "")
+		If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_COMPARE_MASK dynamic state enabled, then to dynamically set the stencil compare
+		mask call this command.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code faceMask} $must be a valid combination of {@code VkStencilFaceFlagBits} values",
+			"{@code faceMask} $mustnot be 0",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
+		VkStencilFaceFlags.IN(
+			"faceMask",
+			"a bitmask specifying the set of stencil state for which to update the compare mask",
+			VkStencilFaceFlagBits, LinkMode.BITFIELD
+		),
+		uint32_t.IN("compareMask", "the new value to use as the stencil compare mask")
 	)
 
 	void(
 		"CmdSetStencilWriteMask",
-		"Sets the stencil write mask dynamic state.",
+		"""
+		Sets the stencil write mask dynamic state.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		VkStencilFaceFlags.IN("faceMask", ""),
-		uint32_t.IN("writeMask", "")
+		If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_WRITE_MASK dynamic state enabled, then to dynamically set the stencil write
+		mask call this command.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code faceMask} $must be a valid combination of {@code VkStencilFaceFlagBits} values",
+			"{@code faceMask} $mustnot be 0",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
+		VkStencilFaceFlags.IN(
+			"faceMask",
+			"a bitmask of {@code VkStencilFaceFlagBits} specifying the set of stencil state for which to update the write mask",
+			VkStencilFaceFlagBits, LinkMode.BITFIELD
+		),
+		uint32_t.IN("writeMask", "the new value to use as the stencil write mask")
 	)
 
 	void(
 		"CmdSetStencilReference",
-		"Sets the stencil reference dynamic state.",
+		"""
+		Sets the stencil reference dynamic state.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		VkStencilFaceFlags.IN("faceMask", ""),
-		uint32_t.IN("reference", "")
+		If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_REFERENCE dynamic state enabled, then to dynamically set the stencil reference
+		value call this command.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code faceMask} $must be a valid combination of {@code VkStencilFaceFlagBits} values",
+			"{@code faceMask} $mustnot be 0",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
+		VkStencilFaceFlags.IN(
+			"faceMask",
+			"a bitmask of {@code VkStencilFaceFlagBits} specifying the set of stencil state for which to update the reference value",
+			VkStencilFaceFlagBits, LinkMode.BITFIELD
+		),
+		uint32_t.IN("reference", "the new value to use as the stencil reference value")
 	)
 
 	void(
 		"CmdBindDescriptorSets",
-		"Binds descriptor sets to a command buffer.",
+		"""
+		Binds descriptor sets to a command buffer.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		VkPipelineBindPoint.IN("pipelineBindPoint", ""),
-		VkPipelineLayout.IN("layout", ""),
-		uint32_t.IN("firstSet", ""),
-		AutoSize("pDescriptorSets")..uint32_t.IN("descriptorSetCount", ""),
-		const..VkDescriptorSet.p.IN("pDescriptorSets", ""),
-		AutoSize("pDynamicOffsets")..uint32_t.IN("dynamicOffsetCount", ""),
-		nullable..const..uint32_t_p.IN("pDynamicOffsets", "")
+		If any of the sets being bound include dynamic uniform or storage buffers, then {@code pDynamicOffsets} includes one element for each array element in
+		each dynamic descriptor type binding in each set.
+
+		{@code vkCmdBindDescriptorSets} causes the sets numbered {@code [firstSet.. firstSet+descriptorSetCount-1]} to use the bindings stored in
+		{@code pDescriptorSets[0..descriptorSetCount-1]} for subsequent rendering commands (either compute or graphics, according to the
+		{@code pipelineBindPoint}). Any bindings that were previously applied via these sets are no longer valid.
+
+		Once bound, a descriptor set affects rendering of subsequent graphics or compute commands in the command buffer until a different set is bound to the
+		same set number, or else until the set is disturbed.
+
+		A compatible descriptor set must be bound for all set numbers that any shaders in a pipeline access, at the time that a draw or dispatch command is
+		recorded to execute using that pipeline. However, if none of the shaders in a pipeline statically use any bindings with a particular set number, then
+		no descriptor set need be bound for that set number, even if the pipeline layout includes a non-trivial descriptor set layout for that set number.
+
+		If any of the sets being bound include dynamic uniform or storage buffers, then {@code pDynamicOffsets} includes one element for each array element in
+		each dynamic descriptor type binding in each set. Values are taken from {@code pDynamicOffsets} in an order such that all entries for set N come before
+		set N+1; within a set, entries are ordered by the binding numbers in the decriptor set layouts; and within a binding array, elements are in order.
+		{@code dynamicOffsetCount} $must equal the total number of dynamic descriptors in the sets being bound.
+
+		The effective offset used for dynamic uniform and storage buffer bindings is the sum of the relative offset taken from {@code pDynamicOffsets}, and the
+		base address of the buffer plus base offset in the descriptor set. The length of the dynamic uniform and storage buffer bindings is the buffer range as
+		specified in the descriptor set.
+
+		Each of the {@code pDescriptorSets} $must be compatible with the pipeline layout specified by {@code layout}. The layout used to program the bindings
+		must also be compatible with the pipeline used in subsequent graphics or compute commands.
+
+		The descriptor set contents bound by a call to {@code vkCmdBindDescriptorSets} $may be consumed during host execution of the command, or during shader
+		execution of the resulting draws, or any time in between. Thus, the contents $mustnot be altered (overwritten by an update command, or freed) between
+		when the command is recorded and when the command completes executing on the queue. The contents of {@code pDynamicOffsets} are consumed immediately
+		during execution of {@code vkCmdBindDescriptorSets}. Once all pending uses have completed, it is legal to update and reuse a descriptor set.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code pipelineBindPoint} $must be a valid {@code VkPipelineBindPoint} value",
+			"{@code layout} $must be a valid {@code VkPipelineLayout} handle",
+			"{@code pDescriptorSets} $must be a pointer to an array of {@code descriptorSetCount} valid {@code VkDescriptorSet} handles",
+			"""
+			If {@code dynamicOffsetCount} is not 0, {@code pDynamicOffsets} $must be a pointer to an array of {@code dynamicOffsetCount} {@code uint32_t}
+			values
+			""",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The value of {@code descriptorSetCount} $must be greater than 0",
+			"""
+			Each of {@code commandBuffer}, {@code layout} and the elements of {@code pDescriptorSets} $must have been created, allocated or retrieved from the
+			same {@code VkDevice}
+			""",
+			"""
+			Any given element of {@code pDescriptorSets} $must have been created with a {@code VkDescriptorSetLayout} that matches the
+			{@code VkDescriptorSetLayout} at set {@code n} in {@code layout}, where {@code n} is the sum of the index into {@code pDescriptorSets} and
+			{@code firstSet}
+			""",
+			"{@code dynamicOffsetCount} $must be equal to the total number of dynamic descriptors in {@code pDescriptorSets}",
+			"{@code pipelineBindPoint} $must be supported by the {@code commandBuffer}'s parent {@code VkCommandPool}'s queue family",
+			"Any given element of {@code pDynamicOffsets} $must satisfy the required alignment for the corresponding descriptor binding's descriptor type"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer that the descriptor sets will be bound to"),
+		VkPipelineBindPoint.IN(
+			"pipelineBindPoint",
+			"""
+			a {@code VkPipelineBindPoint} indicating whether the descriptors will be used by graphics pipelines or compute pipelines. There is a separate set
+			of bind points for each of graphics and compute, so binding one does not disturb the other.
+			""",
+			VkPipelineBindPoints
+		),
+		VkPipelineLayout.IN("layout", "a {@code VkPipelineLayout} object used to program the bindings"),
+		uint32_t.IN("firstSet", "the set number of the first descriptor set to be bound"),
+		AutoSize("pDescriptorSets")..uint32_t.IN("descriptorSetCount", "the number of elements in the {@code pDescriptorSets} array"),
+		const..VkDescriptorSet.p.IN(
+			"pDescriptorSets",
+			"a pointer to an array of {@code VkDescriptorSet} structures describing the descriptor sets to write to"
+		),
+		AutoSize("pDynamicOffsets")..uint32_t.IN("dynamicOffsetCount", "the number of dynamic offsets in the {@code pDynamicOffsets} array"),
+		nullable..const..uint32_t_p.IN("pDynamicOffsets", "a pointer to an array of {@code uint32_t} values specifying dynamic offsets")
 	)
 
 	void(
 		"CmdBindIndexBuffer",
-		"Binds an index buffer to a command buffer.",
+		"""
+		Binds an index buffer to a command buffer.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		VkBuffer.IN("buffer", ""),
-		VkDeviceSize.IN("offset", ""),
-		VkIndexType.IN("indexType", "")
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code buffer} $must be a valid {@code VkBuffer} handle",
+			"{@code indexType} $must be a valid {@code VkIndexType} value",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"Each of {@code commandBuffer} and {@code buffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"The value of {@code offset} $must be less than the size of {@code buffer}",
+			"""
+			The sum of {@code offset}, and the address of the range of {@code VkDeviceMemory} object that's backing {@code buffer}, $must be a multiple of the
+			type indicated by {@code indexType}
+			""",
+			"{@code buffer} $must have been created with the #BUFFER_USAGE_INDEX_BUFFER_BIT flag"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
+		VkBuffer.IN("buffer", "the buffer being bound"),
+		VkDeviceSize.IN("offset", "the starting offset in bytes within {@code buffer} used in index buffer address calculations"),
+		VkIndexType.IN("indexType", "selects whether indices are treated as 16 bits or 32 bits", VkIndexTypes)
 	)
 
 	void(
 		"CmdBindVertexBuffers",
-		"Binds vertex buffers to a command buffer.",
+		"""
+		Binds vertex buffers to a command buffer.
 
-		VkCommandBuffer.IN("commandBuffer", ""),
-		uint32_t.IN("firstBinding", ""),
-		AutoSize("pBuffers", "pOffsets")..uint32_t.IN("bindingCount", ""),
-		const..VkBuffer.p.IN("pBuffers", ""),
-		const..VkDeviceSize_p.IN("pOffsets", "")
+		The values taken from elements {@code i} of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding
+		{@code firstBinding + i}, for {@code i} in {@code [0,bindingCount)}. The vertex input binding is updated to start at the offset indicated by
+		{@code pOffsets[i]} from the start of the buffer {@code pBuffers[i]}. All vertex input attributes that use each of these bindings will use these
+		updated addresses in their address calculations for subsequent draw commands.
+
+		The address of each attribute for each {@code vertexIndex} and {@code instanceIndex} is calculated as follows:
+		${ul(
+			"""
+			Let {@code attribDesc} be the member of ##VkPipelineVertexInputStateCreateInfo{@code ::pVertexAttributeDescriptions} with
+			##VkVertexInputAttributeDescription{@code ::location} equal to the vertex input attribute number.
+			""",
+			"""
+			Let {@code bindingDesc} be the member of {@code VkPipelineVertexInputStateCreateInfo::pVertexBindingDescriptions} with
+			{@code VkVertexInputAttributeDescription::binding} equal to {@code attribDesc.binding}.
+			""",
+			"""
+			Let {@code vertexIndex} be the index of the vertex within the draw (a value between {@code firstVertex} and {@code firstVertex+vertexCount} for
+			#CmdDraw(), or a value taken from the index buffer for #CmdDrawIndexed()), and let {@code instanceIndex} be the instance number of the draw (a
+			value between {@code firstInstance} and {@code firstInstance+instanceCount}).
+			"""
+		)}
+
+		${codeBlock("""
+bufferBindingAddress = buffer[binding].baseAddress + offset[binding];
+
+if (bindingDesc.inputRate == VK_VERTEX_INPUT_RATE_VERTEX)
+    vertexOffset = vertexIndex * bindingDesc.stride;
+else
+    vertexOffset = instanceIndex * bindingDesc.stride;
+
+attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
+
+		For each attribute, raw data is extracted starting at {@code attribAddress} and is converted from the {@code VkVertexInputAttributeDescription}’s
+		format to either to floating-point, unsigned integer, or signed integer based on the base type of the format; the base type of the format $must match
+		the base type of the input variable in the shader. If format is a packed format, {@code attribAddress} must be a multiple of the size in bytes of the
+		whole attribute data type. Otherwise, {@code attribAddress} must be a multiple of the size in bytes of the component type indicated by format. If the
+		format does not include G, B, or A components, then those are filled with (0,0,1) as needed (using either 1.0f or integer 1 based on the format) for
+		attributes that are not 64-bit data types. The number of components in the vertex shader input variable need not exactly match the number of components
+		in the format. If the vertex shader has fewer components, the extra components are discarded.
+
+		<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code pBuffers} $must be a pointer to an array of {@code bindingCount} valid {@code VkBuffer} handles",
+			"{@code pOffsets} $must be a pointer to an array of {@code bindingCount} {@code VkDeviceSize} values",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The value of {@code bindingCount} $must be greater than 0",
+			"Each of {@code commandBuffer} and the elements of {@code pBuffers} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"{@code firstBinding} $must be less than ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}",
+			"The sum of {@code firstBinding} and {@code bindingCount} $must be less than or equal to {@code VkPhysicalDeviceLimits::maxVertexInputBindings}",
+			"All elements of {@code pOffsets} $must be less than the size of the corresponding element in {@code pBuffers}",
+			"All elements of {@code pBuffers} $must have been created with the #BUFFER_USAGE_VERTEX_BUFFER_BIT flag"
+		)}
+
+		<h5>Host Synchronization</h5>
+
+		Host access to {@code commandBuffer} $must be externally synchronized.
+		""",
+
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
+		uint32_t.IN("firstBinding", "the index of the first vertex input binding whose state is updated by the command"),
+		AutoSize("pBuffers", "pOffsets")..uint32_t.IN("bindingCount", "the number of vertex input bindings whose state is updated by the command"),
+		const..VkBuffer.p.IN("pBuffers", "a pointer to an array of buffer handles"),
+		const..VkDeviceSize_p.IN("pOffsets", "a pointer to an array of buffer offsets")
 	)
 
 	void(
@@ -4556,4 +6100,11 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		AutoSize("pCommandBuffers")..uint32_t.IN("commandBufferCount", ""),
 		SingleValue("pCommandBuffer")..const..VkCommandBuffer.p.IN("pCommandBuffers", "")
 	)
+
+	}
+}
+
+// Getting "method too big" compilation errors without this
+private fun NativeClass.separateMethod(init: NativeClass.() -> Unit) {
+	this.init()
 }
