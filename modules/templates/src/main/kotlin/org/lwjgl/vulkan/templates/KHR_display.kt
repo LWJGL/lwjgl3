@@ -53,35 +53,85 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 
 	VkResult(
 		"GetPhysicalDeviceDisplayPropertiesKHR",
-		"Queries information about the available displays.",
+		"""
+		Queries information about the available displays.
 
-		VkPhysicalDevice.IN("physicalDevice", "a valid physical device"),
-		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT("pPropertyCount", "the number of entries in the array pointed to by {@code pProperties}"),
-		nullable..VkDisplayPropertiesKHR_p.OUT("pProperties", "a pointer to an array of {@code pPropertyCount} ##VkDisplayPropertiesKHR structures")
+		If {@code pProperties} is $NULL, then the number of display devices available for {@code physicalDevice} is returned in {@code pPropertyCount}.
+		Otherwise, {@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return
+		the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than
+		the number of display devices for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written.
+
+		${ValidityProtos.vkGetPhysicalDeviceDisplayPropertiesKHR}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "a physical device"),
+		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
+			"pPropertyCount",
+			"a pointer to an integer related to the number of display devices available or queried"
+		),
+		nullable..VkDisplayPropertiesKHR_p.OUT("pProperties", "either $NULL or a pointer to an array of ##VkDisplayPropertiesKHR structures")
 	)
 
 	VkResult(
 		"GetPhysicalDeviceDisplayPlanePropertiesKHR",
-		"Queries the plane properties.",
+		"""
+		Queries the plane properties.
+
+		Images are presented to individual planes on a display. Devices $must support at least one plane on each display. Planes $can be stacked and blended to
+		composite multiple images on one display. Devices $may support only a fixed stacking order and fixed mapping between planes and displays, or they $may
+		allow arbitrary application specified stacking orders and mappings between planes and displays.
+
+		If {@code pProperties} is $NULL, then the number of display planes available for {@code physicalDevice} is returned in {@code pPropertyCount}.
+		Otherwise, {@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return
+		the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than
+		the number of display planes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written.
+
+		${ValidityProtos.vkGetPhysicalDeviceDisplayPlanePropertiesKHR}
+		""",
 
 		VkPhysicalDevice.IN("physicalDevice", "a valid physical device"),
-		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT("pPropertyCount", "the number of entries in the array pointed to by {@code pProperties}"),
-		nullable..VkDisplayPlanePropertiesKHR_p.OUT("pProperties", "a pointer to an array of {@code pPropertyCount} ##VkDisplayPlanePropertiesKHR structures.")
+		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
+			"pPropertyCount",
+			"a pointer to an integer related to the number of display planes available or queried"
+		),
+		nullable..VkDisplayPlanePropertiesKHR_p.OUT("pProperties", "either $NULL or a pointer to an array of ##VkDisplayPlanePropertiesKHR structures")
 	)
 
 	VkResult(
 		"GetDisplayPlaneSupportedDisplaysKHR",
-		"Gets list of displays a plane supports.",
+		"""
+		Determines which displays a plane is usable with.
 
-		VkPhysicalDevice.IN("physicalDevice", "a valid physical device"),
-		uint32_t.IN("planeIndex", "the plane which the application wishes to use"),
-		AutoSize("pDisplays")..Check(1)..uint32_t_p.INOUT("pDisplayCount", "the number of entries in the array pointed to by {@code pDisplays}"),
-		nullable..VkDisplayKHR.p.OUT("pDisplays", "a pointer to an array of {@code pDisplayCount} {@code VkDisplayKHR} handles.")
+		If {@code pDisplays} is $NULL, then the number of displays usable with the specified {@code planeIndex} for {@code physicalDevice} is returned in
+		{@code pDisplayCount}. Otherwise, {@code pDisplayCount} $must point to a variable set by the user to the number of elements in the {@code pDisplays}
+		array, and on return the variable is overwritten with the number of structures actually written to {@code pDisplays}. If the value of
+		{@code pDisplayCount} is less than the number of display planes for {@code physicalDevice}, at most {@code pDisplayCount} structures will be written.
+
+		${ValidityProtos.vkGetDisplayPlaneSupportedDisplaysKHR}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "a physical device"),
+		uint32_t.IN("planeIndex", "the plane which the application wishes to use, and must be in the range {@code [0, physicaldeviceplanecount − 1]"),
+		AutoSize("pDisplays")..Check(1)..uint32_t_p.INOUT(
+			"pDisplayCount",
+			"a pointer to an integer related to the number of display planes available or queried"
+		),
+		nullable..VkDisplayKHR.p.OUT("pDisplays", "either $NULL or a pointer to an array of {@code VkDisplayKHR} structures")
 	)
 
 	VkResult(
 		"GetDisplayModePropertiesKHR",
-		"Gets the set of mode properties supported by the display.",
+		"""
+		Gets the set of mode properties supported by the display.
+
+		If {@code pProperties} is $NULL, then the number of display modes available on the specified display for {@code physicalDevice} is returned in
+		{@code pPropertyCount}. Otherwise, {@code pPropertyCount} $must point to a variable set by the user to the number of elements in the
+		{@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the
+		value of {@code pPropertyCount} is less than the number of display modes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be
+		written.
+
+		${ValidityProtos.vkGetDisplayModePropertiesKHR}
+		""",
 
 		VkPhysicalDevice.IN("physicalDevice", "the physical device associated with the display"),
 		VkDisplayKHR.IN("display", "a display present on the physical device"),
@@ -91,35 +141,56 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 
 	VkResult(
 		"CreateDisplayModeKHR",
-		"Creates a display mode.",
+		"""
+		Creates a display mode.
 
-		VkPhysicalDevice.IN("physicalDevice", "the physical device associated with display"),
+		${ValidityProtos.vkCreateDisplayModeKHR}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device associated with {@code display}"),
 		VkDisplayKHR.IN("display", "the display to create an additional mode"),
 		const..VkDisplayModeCreateInfoKHR_p.IN("pCreateInfo", "a ##VkDisplayModeCreateInfoKHR structure describing the new mode to create"),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "the allocator used for host memory allocated for the mode object"),
+		pAllocator,
 		Check(1)..VkDisplayModeKHR.p.OUT("pMode", "returns the handle of the mode created")
 	)
 
 	VkResult(
 		"GetDisplayPlaneCapabilitiesKHR",
-		"Gets the capabilities of a mode and plane combination.",
+		"""
+		Gets the capabilities of a mode and plane combination.
 
-		VkPhysicalDevice.IN("physicalDevice", "the physical device associated with the display"),
-		VkDisplayModeKHR.IN("mode", "the display mode the application intends to program when using the specified plane"),
-		uint32_t.IN("planeIndex", "the plane which the application intends to use with the display"),
+		Applications that wish to present directly to a display must select which layer, or "plane" of the display they wish to target, and a mode to use with
+		the display. Each display supports at least one plane. The capabilities of a given mode and plane combination are determined by calling this command.
+
+		${ValidityProtos.vkGetDisplayPlaneCapabilitiesKHR}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device associated with the {@code display}"),
+		VkDisplayModeKHR.IN(
+			"mode",
+			"the display mode the application intends to program when using the specified plane.  Note this parameter also implicitly specifies a display."
+		),
+		uint32_t.IN(
+			"planeIndex",
+			"the plane which the application intends to use with the display, and is less than the number of display planes supported by the device"
+		),
 		VkDisplayPlaneCapabilitiesKHR_p.OUT("pCapabilities", "a pointer to a ##VkDisplayPlaneCapabilitiesKHR struct")
 	)
 
 	VkResult(
 		"CreateDisplayPlaneSurfaceKHR",
-		"Creates a {@code VkSurfaceKHR} structure representing a display plane and mode.",
+		"""
+		Creates a {@code VkSurfaceKHR} structure representing a display plane and mode.
 
-		VkInstance.IN("instance", "the {@code VkInstance} to associate the surface"),
+		${ValidityProtos.vkCreateDisplayPlaneSurfaceKHR}
+		""",
+
+		VkInstance.IN("instance", "the instance corresponding to the physical device the targeted display is on"),
 		const..VkDisplaySurfaceCreateInfoKHR_p.IN(
 			"pCreateInfo",
 			"a pointer to an instance of the ##VkDisplaySurfaceCreateInfoKHR structure containing the parameters affecting the creation of the surface object"
 		),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "the allocator used for host memory allocated for the surface object"),
-		Check(1)..VkSurfaceKHR_p.OUT("pSurface", "the resulting surface object handle is returned in {@code pSurface}")
+		pAllocator,
+		Check(1)..VkSurfaceKHR_p.OUT("pSurface", "points to a {@code VkSurfaceKHR} handle in which the created surface is returned")
 	)
 }

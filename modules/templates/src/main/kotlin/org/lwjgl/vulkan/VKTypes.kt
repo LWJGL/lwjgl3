@@ -358,6 +358,7 @@ val VkAllocationCallbacks_p = struct_p(VULKAN_PACKAGE, "VkAllocationCallbacks") 
 	nullable..PFN_vkInternalAllocationNotification.member("pfnInternalAllocation", "")
 	nullable..PFN_vkInternalFreeNotification.member("pfnInternalFree", "")
 }
+val pAllocator = nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "controls host memory allocation")
 
 val VkPhysicalDeviceFeatures = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures") {
 	documentation = ""

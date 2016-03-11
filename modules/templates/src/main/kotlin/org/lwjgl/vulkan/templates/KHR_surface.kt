@@ -146,49 +146,96 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 
 	void(
 		"DestroySurfaceKHR",
-		"Destroys a {@code VkSurfaceKHR} object.",
+		"""
+		Destroys a {@code VkSurfaceKHR} object.
+
+		Several WSI functions return #ERROR_SURFACE_LOST_KHR if the surface becomes no longer available. After such an error, the surface (and any child
+		swapchain, if one exists) $should be destroyed, as there is no way to restore them to a not-lost state. Applications $may attempt to create a new
+		{@code VkSurfaceKHR} using the same native platform window object, but whether such re-creation will succeed is platform-dependent and $may depend on
+		the reason the surface became unavailable. A lost surface does not otherwise cause devices to be lost.
+
+		Destroying a {@code VkSurfaceKHR} merely severs the connection between Vulkan and the native surface, and doesn’t imply destroying the native surface,
+		closing a window, or similar behavior.
+
+		${ValidityProtos.vkDestroySurfaceKHR}
+		""",
 
 		VkInstance.IN("instance", "the instance used to create the surface"),
-		VkSurfaceKHR.IN("surface", "the handle of the surface to destroy"),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "the allocator used for host memory allocated for the surface object")
+		VkSurfaceKHR.IN("surface", "the surface to destroy"),
+		pAllocator
 	)
 
 	VkResult(
 		"GetPhysicalDeviceSurfaceSupportKHR",
-		"Queries if presentation is supported.",
+		"""
+		Determines whether a queue family of a physical device supports presentation to a given surface.
 
-		VkPhysicalDevice.IN("physicalDevice", "a valid physical device"),
-		uint32_t.IN("queueFamilyIndex", "a queue family"),
-		VkSurfaceKHR.IN("surface", "the surface to query"),
-		Check(1)..VkBool32_p.OUT("pSupported", "indicates is presentation is supported")
+		${ValidityProtos.vkGetPhysicalDeviceSurfaceSupportKHR}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device"),
+		uint32_t.IN("queueFamilyIndex", "the queue family"),
+		VkSurfaceKHR.IN("surface", " the surface"),
+		Check(1)..VkBool32_p.OUT("pSupported", "a pointer to a {@code VkBool32}, which is set to VK10#TRUE to indicate support, and VK10#FALSE otherwise")
 	)
 
 	VkResult(
 		"GetPhysicalDeviceSurfaceCapabilitiesKHR",
-		"Gets surface capabilities.",
+		"""
+		Queries the basic capabilities of a surface, needed in order to create a swapchain.
 
-		VkPhysicalDevice.IN("physicalDevice", "a valid physical device"),
-		VkSurfaceKHR.IN("surface", "the surface to query"),
-		VkSurfaceCapabilitiesKHR_p.OUT("pSurfaceCapabilities", "a pointer to an instance of ##VkSurfaceCapabilitiesKHR that will be filled")
+		${ValidityProtos.vkGetPhysicalDeviceSurfaceCapabilitiesKHR}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be associated with the swapchain to be created"),
+		VkSurfaceKHR.IN("surface", "the surface that will be associated with the swapchain"),
+		VkSurfaceCapabilitiesKHR_p.OUT(
+			"pSurfaceCapabilities",
+			"a pointer to an instance of the ##VkSurfaceCapabilitiesKHR structure that will be filled with information"
+		)
 	)
 
 	VkResult(
 		"GetPhysicalDeviceSurfaceFormatsKHR",
-		"Gets color formats supported by surface.",
+		"""
+		Queries the supported swapchain format-colorspace pairs for a surface.
 
-		VkPhysicalDevice.IN("physicalDevice", "a valid physical device"),
-		VkSurfaceKHR.IN("surface", "the surface to query"),
-		AutoSize("pSurfaceFormats")..uint32_t_p.INOUT("pSurfaceFormatCount", "the number of elements in the array pointed by {@code pSurfaceFormats}"),
-		nullable..VkSurfaceFormatKHR_p.OUT("pSurfaceFormats", "a pointer to an array of ##VkSurfaceFormatKHR")
+		If {@code pSurfaceFormats} is $NULL, then the number of format pairs supported for the given surface is returned in {@code pSurfaceFormatCount}.
+		Otherwise, {@code pSurfaceFormatCount} $must point to a variable set by the user to the number of elements in the {@code pSurfaceFormats} array, and on
+		return the variable is overwritten with the number of structures actually written to {@code pSurfaceFormats}. If the value of
+		{@code pSurfaceFormatCount} is less than the number of queue families supported, at most {@code pSurfaceFormatCount} structures will be written.
+
+		${ValidityProtos.vkGetPhysicalDeviceSurfaceFormatsKHR}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be associated with the swapchain to be created"),
+		VkSurfaceKHR.IN("surface", "the surface that will be associated with the swapchain"),
+		AutoSize("pSurfaceFormats")..uint32_t_p.INOUT(
+			"pSurfaceFormatCount",
+			"a pointer to an integer related to the number of format pairs available or queried"
+		),
+		nullable..VkSurfaceFormatKHR_p.OUT("pSurfaceFormats", "either $NULL or a pointer to an array of ##VkSurfaceFormatKHR structures")
 	)
 
 	VkResult(
 		"GetPhysicalDeviceSurfacePresentModesKHR",
-		"Gets supported presentation modes.",
+		"""
+		Queries the supported presentation modes for a surface.
 
-		VkPhysicalDevice.IN("physicalDevice", "a valid physical device"),
-		VkSurfaceKHR.IN("surface", "the surface to query"),
-		AutoSize("pPresentModes")..uint32_t_p.INOUT("pPresentModeCount", "the number of elements in the array pointed by {@code pPresentModes}"),
-		nullable..VkPresentModeKHR_p.OUT("pPresentModes", "a pointer to an array of {@code VkPresentModeKHR}")
+		If {@code pPresentModes} is $NULL, then the number of presentation modes supported for the given surface is returned in {@code pPresentModeCount}.
+		Otherwise, {@code pPresentModeCount} $must point to a variable set by the user to the number of elements in the {@code pPresentModes} array, and on
+		return the variable is overwritten with the number of structures actually written to {@code pPresentModes}. If the value of {@code pPresentModeCount}
+		is less than the number of presentation modes supported, at most {@code pPresentModeCount} structures will be written.
+
+		${ValidityProtos.vkGetPhysicalDeviceSurfacePresentModesKHR}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be associated with the swapchain to be created"),
+		VkSurfaceKHR.IN("surface", "the surface that will be associated with the swapchain"),
+		AutoSize("pPresentModes")..uint32_t_p.INOUT(
+			"pPresentModeCount",
+			"a pointer to an integer related to the number of format pairs available or queried"
+		),
+		nullable..VkPresentModeKHR_p.OUT("pPresentModes", "either $NULL or a pointer to an array of {@code VkPresentModeKHR} values")
 	)
 }

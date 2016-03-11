@@ -43,7 +43,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		"STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT" expr "1000011000"
 	)
 
-	EnumConstant(
+	val VkDebugReportObjectTypesEXT = EnumConstant(
 		"VkDebugReportObjectTypeEXT",
 
 		"DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT".enumExpr("", "0"),
@@ -75,7 +75,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		"DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT".enum(""),
 		"DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT".enum(""),
 		"DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT".enum("")
-	)
+	).javaDocLinks
 
 	EnumConstant(
 		"VkDebugReportErrorEXT",
@@ -84,7 +84,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		"DEBUG_REPORT_ERROR_CALLBACK_REF_EXT".enum("")
 	)
 
-	EnumConstant(
+	val VkDebugReportFlagBitsEXT = EnumConstant(
 		"VkDebugReportFlagBitsEXT",
 
 		"DEBUG_REPORT_INFORMATION_BIT_EXT".enum(
@@ -110,7 +110,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		),
 		"DEBUG_REPORT_ERROR_BIT_EXT".enum("Indicates an error that may cause undefined results, including an application crash.", 0x00000008),
 		"DEBUG_REPORT_DEBUG_BIT_EXT".enum("Indicates diagnostic information from the loader and layers.", 0x00000010)
-	)
+	).javaDocLinks
 
 	IntConstant(
 		"VkResult",
@@ -120,34 +120,68 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 
 	VkResult(
 		"CreateDebugReportCallbackEXT",
-		"",
+		"""
+		Registers a callback.
 
-		VkInstance.IN("instance", ""),
-		const..VkDebugReportCallbackCreateInfoEXT_p.IN("pCreateInfo", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", ""),
-		Check(1)..VkDebugReportCallbackEXT.p.OUT("pCallback", "")
+		For each {@code VkDebugReportCallbackEXT} that is created the flags determine when that function is called.
+
+		A callback will be made for issues that match any bit set in its flags. The callback will come directly from the component that detected the event,
+		unless some other layer intercepts the calls for its own purposes (filter them in different way, log to system error log, etc.)
+
+		An application may receive multiple callbacks if multiple {@code VkDebugReportCallbackEXT} objects were created. A callback will always be executed in
+		the same thread as the originating Vulkan call. A callback may be called from multiple threads simultaneously (if the application is making Vulkan
+		calls from multiple threads).
+
+		${ValidityProtos.vkCreateDebugReportCallbackEXT}
+		""",
+
+		VkInstance.IN("instance", "the instance the callback will be logged on"),
+		const..VkDebugReportCallbackCreateInfoEXT_p.IN(
+			"pCreateInfo",
+			"points to a ##VkDebugReportCallbackCreateInfoEXT structure which defines the conditions under which this callback will be called"
+		),
+		pAllocator,
+		Check(1)..VkDebugReportCallbackEXT.p.OUT("pCallback", "a pointer to record the sname:VkDebugReportCallbackEXT object created")
 	)
 
 	void(
 		"DestroyDebugReportCallbackEXT",
-		"",
+		"""
+		Destroys a {@code VkDebugReportCallbackEXT}.
 
-		VkInstance.IN("instance", ""),
-		VkDebugReportCallbackEXT.IN("callback", ""),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "")
+		${ValidityProtos.vkDestroyDebugReportCallbackEXT}
+		""",
+
+		VkInstance.IN("instance", "the instance where the callback was created"),
+		VkDebugReportCallbackEXT.IN("callback", "the {@code VkDebugReportCallbackEXT} object to destroy"),
+		pAllocator
 	)
 
 	void(
 		"DebugReportMessageEXT",
-		"",
+		"""
+		Injects a custom message into the debug stream.
 
-		VkInstance.IN("instance", ""),
-		VkDebugReportFlagsEXT.IN("flags", ""),
-		VkDebugReportObjectTypeEXT.IN("objectType", ""),
-		uint64_t.IN("object", ""),
-		size_t.IN("location", ""),
-		int32_t.IN("messageCode", ""),
-		const..charUTF8_p.IN("pLayerPrefix", ""),
-		const..charUTF8_p.IN("pMessage", "")
+		${ValidityProtos.vkDebugReportMessageEXT}
+
+		The call will propagate through the layers and cause a callback to the application. The parameters are passed on to the callback in addition to the
+		{@code pUserData} value that was defined at the time the callback was registered.
+		""",
+
+		VkInstance.IN("instance", "the instance the callback will be logged on"),
+		VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} that triggered this callback", VkDebugReportFlagBitsEXT),
+		VkDebugReportObjectTypeEXT.IN(
+			"objectType",
+			"the type of object being used / created at the time the event was triggered",
+			VkDebugReportObjectTypesEXT
+		),
+		uint64_t.IN(
+			"object",
+			"the object where the issue was detected. {@code object} may be VK10#NULL_HANDLE if there is no object associated with the event."
+		),
+		size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the \"location\" of the trigger. This is an optional value."),
+		int32_t.IN("messageCode", " a layer defined value indicating what test triggered this callback"),
+		const..charUTF8_p.IN("pLayerPrefix", "abbreviation of the component making the callback"),
+		const..charUTF8_p.IN("pMessage", "a null terminated string detailing the trigger conditions")
 	)
 }

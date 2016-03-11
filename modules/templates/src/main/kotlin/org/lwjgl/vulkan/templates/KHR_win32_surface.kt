@@ -34,22 +34,35 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", pos
 
 	VkResult(
 		"CreateWin32SurfaceKHR",
-		"Creates a {@code VkSurfaceKHR} object for a Win32 window.",
+		"""
+		Creates a {@code VkSurfaceKHR} object for a Win32 window.
 
-		VkInstance.IN("instance", "the {@code VkInstance} to associate the surface"),
+		${ValidityProtos.vkCreateWin32SurfaceKHR}
+
+		With Win32, {@code minImageExtent}, {@code maxImageExtent}, and {@code currentExtent} are the window size. Therefore, a swapchain’s {@code imageExtent}
+		$must match the window’s size.
+		""",
+
+		VkInstance.IN("instance", "the instance to associate the surface with"),
 		const..VkWin32SurfaceCreateInfoKHR_p.IN(
 			"pCreateInfo",
-			"a pointer to an instance of the ##VkWin32SurfaceCreateInfoKHR structure containing the parameters affecting the creation of the surface object"
+			"a pointer to an instance of the ##VkWin32SurfaceCreateInfoKHR structure containing parameters affecting the creation of the surface object"
 		),
-		nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "the allocator used for host memory allocated for the surface object"),
-		Check(1)..VkSurfaceKHR_p.OUT("pSurface", "the resulting surface object handle is returned in {@code pSurface}")
+		pAllocator,
+		Check(1)..VkSurfaceKHR_p.OUT("pSurface", "points to a {@code VkSurfaceKHR} handle in which the created surface object is returned")
 	)
 
 	VkBool32(
 		"GetPhysicalDeviceWin32PresentationSupportKHR",
-		"Queries physical device for presentation to Windows desktop.",
+		"""
+		Determines whether a queue family of a physical device supports presentation to the Microsoft Windows desktop.
 
-		VkPhysicalDevice.IN("physicalDevice", "a physical device handle"),
-		uint32_t.IN("queueFamilyIndex", "index to a queue family")
+		This platform-specific function $can be called prior to creating a surface.
+
+		${ValidityProtos.vkGetPhysicalDeviceWin32PresentationSupportKHR}
+		""",
+
+		VkPhysicalDevice.IN("physicalDevice", "the physical device"),
+		uint32_t.IN("queueFamilyIndex", "the queue family index")
 	)
 }
