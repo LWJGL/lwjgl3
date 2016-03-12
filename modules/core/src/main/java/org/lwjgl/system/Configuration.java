@@ -73,23 +73,6 @@ public enum Configuration {
 	LIBRARY_NAME_VULKAN("org.lwjgl.vulkan.libname", StateInit.STRING),
 
 	/**
-	 * Sets the alignment of buffers allocated by {@link org.lwjgl.BufferUtils BufferUtils}. By default, buffer allocations will be unaligned (whatever
-	 * {@link ByteBuffer#allocateDirect} returns). Supported values:
-	 *
-	 * <ul>
-	 * <li><em>cache-line</em> Cache-line alignment (usually 64 bytes)</li>
-	 * <li><em>default</em> Default alignment. The JDK uses 8 byte alignment for all direct {@link ByteBuffer}s.</li>
-	 * <li><em>&lt;number&gt;</em> Custom alignment. Must be a power-of-two integer, greater than 8.</li>
-	 * </ul>
-	 *
-	 * <p style="font-family: monospace">
-	 * Property: <b>org.lwjgl.util.BufferAlign</b><br>
-	 * &nbsp; &nbsp; Type: String<br>
-	 * &nbsp; &nbsp;Usage: Static<br>
-	 */
-	MEMORY_DEFAULT_ALIGNMENT("org.lwjgl.util.BufferAlign", StateInit.STRING),
-
-	/**
 	 * Sets the allocator used for the {@link MemoryUtil} explicit memory management API
 	 * ({@link MemoryUtil#memAlloc memAlloc}/{@link MemoryUtil#memFree memFree}/etc). Supported values:
 	 *

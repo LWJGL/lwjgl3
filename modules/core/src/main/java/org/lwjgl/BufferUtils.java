@@ -4,24 +4,22 @@
  */
 package org.lwjgl;
 
-import org.lwjgl.system.Checks;
-import org.lwjgl.system.Configuration;
-
 import java.nio.*;
 
-import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * <p>This class makes it easy and safe to work with direct buffers. It is the recommended way to allocate memory to use with LWJGL.</p>
  *
  * <h3>Direct buffers</h3>
+ *
  * <p>LWJGL requires that all NIO buffers passed to it are direct buffers. Direct buffers essentially wrap an address that points to off-heap memory, i.e. a
  * native pointer. This is the only way LWJGL can safely pass data from Java code to native code, and vice-versa, without a performance penalty. It does not
  * support on-heap Java arrays (or plain NIO buffers, which wrap them) because arrays may be moved around in memory by the JVM's garbage collector while native
  * code is accessing them. In addition, Java arrays have an unspecified layout, i.e. they are not necessarily contiguous in memory.</p>
  *
  * <h3>Usage</h3>
+ *
  * <p>When a direct buffer is passed as an argument to an LWJGL method, no data is copied. Instead, the current buffer position is added to the buffer's memory
  * address and the resulting value is passed to native code. The native code interprets that value as a pointer and reads or copies from it as necessary. LWJGL
  * will often also use the current buffer limit (via {@link Buffer#remaining()}) to automatically pass length/maxlength arguments. This means that, just like
@@ -29,72 +27,39 @@ import static org.lwjgl.system.MemoryUtil.*;
  * other APIs, LWJGL never modifies the current position, it will be the same value before and after the call.</p>
  *
  * <h3>Arrays of pointers</h3>
+ *
  * <p>In addition to the standard NIO buffer classes, LWJGL provides a {@link PointerBuffer} class for storing pointer data in an architecture independent way.
  * It is used in bindings for pointer-to-pointers arguments, usually to provide arrays of data (input parameter) or to store returned pointer values (output
  * parameter).</p>
  *
- * <h3>Memory alignment</h3>
- * <p>This class also supports automatically aligned buffer allocations. It can be configured using the {@link Configuration#MEMORY_DEFAULT_ALIGNMENT}. Note
- * that the JVM guarantees a minimum alignment size of 8 bytes, which is the default.</p>
- *
  * <h3>Memory management</h3>
- * <p>Using NIO buffers for off-heap memory has some drawbacks:
+ *
+ * <p>Using NIO buffers for off-heap memory has some drawbacks:</p>
  * <ul>
  * <li>Memory blocks bigger than {@link Integer#MAX_VALUE} bytes cannot be allocated.</li>
  * <li>Memory blocks are zeroed-out on allocation, for safety. This has (sometimes unwanted) performance implications.</li>
  * <li>There is no way to free a buffer explicitly (without JVM specific reflection). Buffer objects are subject to GC and it usually takes two GC cycles to
  * free the off-heap memory after the buffer object becomes unreachable.</li>
  * </ul>
- * An alternative API for allocating off-heap memory can be found in the {@link org.lwjgl.system.MemoryUtil} class. This has none of the above drawbacks, but
- * requires allocated memory to be explictly freed when not used anymore.</p>
+ *
+ * <p>An alternative API for allocating off-heap memory can be found in the {@link org.lwjgl.system.MemoryUtil} class. This has none of the above drawbacks,
+ * but requires allocated memory to be explictly freed when not used anymore.</p>
+ *
+ * <h3>Memory alignment</h3>
+ *
+ * <p>Allocations done via this class have a guaranteed alignment of 8 bytes. If higher alignment values are required, use the explicit memory management API
+ * or pad the requested memory with extra bytes and align manually.</p>
+ *
+ * <h3>Structs and arrays of structs</h3>
+ *
+ * <p>Java does not support struct value types, so LWJGL requires struct values that are backed by off-heap memory. Each struct type defined in a binding
+ * has a corresponding class in LWJGL that can be used to access its members. Each struct class also has a {@code Buffer} inner class that can be used to
+ * access (packed) arrays of struct values. Both struct and struct buffer classes may be backed by direct {@link ByteBuffer}s allocated from this class, but it
+ * is highly recommended to use explicit memory management for performance.</p>
  */
 public final class BufferUtils {
 
-	private interface BufferAllocator {
-		ByteBuffer malloc(int capacity);
-	}
-
-	private static final BufferAllocator BUFFER_ALLOCATOR = getDefaultAllocator();
-
 	private BufferUtils() {}
-
-	private static BufferAllocator getDefaultAllocator() {
-		String alignment = Configuration.MEMORY_DEFAULT_ALIGNMENT.get("default");
-
-		if ( "cache-line".equals(alignment) )
-			return new BufferAllocator() {
-				@Override
-				public ByteBuffer malloc(int capacity) {
-					return createAlignedByteBufferCacheLine(capacity);
-				}
-			};
-
-		if ( "default".equals(alignment) )
-			return new BufferAllocator() {
-				@Override
-				public ByteBuffer malloc(int capacity) {
-					return createUnalignedByteBuffer(capacity);
-				}
-			};
-
-		try {
-			final int bytes = Integer.parseInt(alignment);
-			if ( mathIsPoT(bytes) && 8 < bytes )
-				return new BufferAllocator() {
-					@Override
-					public ByteBuffer malloc(int capacity) {
-						return createAlignedByteBuffer(capacity, bytes);
-					}
-				};
-		} catch (NumberFormatException e) {
-			// ignore
-		}
-
-		throw new IllegalArgumentException(String.format(
-			"Invalid %s value: \"%s\". It must be one of [cache-line, default, a power-of-two integer > 8].",
-			Configuration.MEMORY_DEFAULT_ALIGNMENT.getProperty(), alignment
-		));
-	}
 
 	/**
 	 * Allocates a direct native-ordered bytebuffer with the specified capacity.
@@ -104,7 +69,7 @@ public final class BufferUtils {
 	 * @return a ByteBuffer
 	 */
 	public static ByteBuffer createByteBuffer(int capacity) {
-		return BUFFER_ALLOCATOR.malloc(capacity);
+		return ByteBuffer.allocateDirect(capacity).order(ByteOrder.nativeOrder());
 	}
 
 	/**
@@ -189,67 +154,6 @@ public final class BufferUtils {
 	 */
 	public static PointerBuffer createPointerBuffer(int capacity) {
 		return PointerBuffer.allocateDirect(capacity);
-	}
-
-	// Unaligned mallocs
-
-	/**
-	 * Allocates a direct ByteBuffer in native order with the specified capacity.
-	 *
-	 * @param capacity the ByteBuffer capacity
-	 *
-	 * @return the new ByteBuffer
-	 */
-	public static ByteBuffer createUnalignedByteBuffer(int capacity) {
-		return ByteBuffer.allocateDirect(capacity).order(ByteOrder.nativeOrder());
-	}
-
-	// Aligned mallocs
-
-	/**
-	 * Allocates a direct ByteBuffer in native order with the specified capacity and memory alignment.
-	 *
-	 * @param capacity  the ByteBuffer capacity
-	 * @param alignment the desired memory alignment, in bytes. Must be a power-of-two.
-	 *
-	 * @return the aligned ByteBuffer
-	 */
-	public static ByteBuffer createAlignedByteBuffer(int capacity, int alignment) {
-		if ( Checks.DEBUG && !mathIsPoT(alignment) )
-			throw new IllegalArgumentException("The alignment value must be a power-of-two integer.");
-
-		ByteBuffer buffer = ByteBuffer.allocateDirect(capacity + alignment);
-
-		// Align
-		buffer.position(alignment - (int)(memAddress(buffer) & (alignment - 1)));
-		// Prepare to slice
-		buffer.limit(buffer.position() + capacity);
-
-		return buffer.slice().order(ByteOrder.nativeOrder());
-	}
-
-	/**
-	 * Allocates a direct ByteBuffer in native order with the specified capacity. The returned ByteBuffer
-	 * will be page-aligned.
-	 *
-	 * @param capacity the ByteBuffer capacity
-	 *
-	 * @return the page-aligned ByteBuffer
-	 */
-	public static ByteBuffer createAlignedByteBufferPage(int capacity) {
-		return createAlignedByteBuffer(capacity, PAGE_SIZE);
-	}
-
-	/**
-	 * Allocates a direct ByteBuffer in native order with the specified capacity. The returned ByteBuffer
-	 * will be cache-line-aligned.
-	 *
-	 * @param capacity the ByteBuffer capacity
-	 *
-	 * @return the cache-line-aligned ByteBuffer
-	 */
-	public static ByteBuffer createAlignedByteBufferCacheLine(int capacity) {
-		return createAlignedByteBuffer(capacity, CACHE_LINE_SIZE);
 	}
 
 	// memsets
