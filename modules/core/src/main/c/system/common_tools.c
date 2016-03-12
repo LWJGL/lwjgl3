@@ -84,8 +84,18 @@ inline void detachCurrentThread(void) {
 
 	BOOL WINAPI DllMain(HINSTANCE hDLL, DWORD fdwReason, LPVOID lpvReserved) {
 		UNUSED_PARAMS(hDLL, lpvReserved)
-		if ( fdwReason == DLL_THREAD_DETACH && getThreadEnv() != NULL )
-			detachCurrentThread();
+
+		if ( fdwReason == DLL_THREAD_DETACH ) {
+			EnvData* data = (EnvData*)TlsGetValue(envTLS);
+            if ( data != NULL ) {
+                TlsSetValue(envTLS, NULL);
+                free(data);
+            }
+
+			if ( getThreadEnv() != NULL )
+				detachCurrentThread();
+		}
+
 		return TRUE;
 	}
 
@@ -142,7 +152,8 @@ inline void detachCurrentThread(void) {
 	} EnvData;
 
 	static void autoDetach(void* value) {
-		UNUSED_PARAM(value)
+		pthread_setspecific(tlsKey, NULL);
+		free(value);
 		if ( getThreadEnv() != NULL )
             detachCurrentThread();
 	}
