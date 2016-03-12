@@ -8,7 +8,6 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.*;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -88,27 +87,6 @@ public abstract class Closure extends Pointer.Default {
 			: FFI_DEFAULT_ABI;
 	}
 
-	/** Optional class to which all allocated Closures will be registered. */
-	private static final ClosureRegistry registry;
-
-	static {
-		String factoryClass = System.getProperty("org.lwjgl.system.libffi.ClosureRegistry");
-		if ( factoryClass == null )
-			registry = null;
-		else {
-			try {
-				Class<?> factory = Thread.currentThread().getContextClassLoader().loadClass(factoryClass);
-				Method create = factory.getMethod("get");
-				if ( !Modifier.isStatic(create.getModifiers()) || !ClosureRegistry.class.isAssignableFrom(create.getReturnType()) )
-					throw new IllegalArgumentException("Invalid ClosureRegistry specified.");
-
-				registry = (ClosureRegistry)create.invoke(null);
-			} catch (Exception e) {
-				throw new IllegalStateException("Failed to initialize the Closure registry.", e);
-			}
-		}
-	}
-
 	/** The user data structure. */
 	private long user_data;
 
@@ -163,9 +141,6 @@ public abstract class Closure extends Pointer.Default {
 			free();
 			throw new IllegalStateException(String.format("Failed to prepare libffi closure. Status: 0x%X", status));
 		}
-
-		if ( registry != null )
-			registry.register(this);
 	}
 
 	@Override

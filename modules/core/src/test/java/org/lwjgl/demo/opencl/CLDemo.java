@@ -6,7 +6,6 @@ package org.lwjgl.demo.opencl;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.demo.util.ClosureGC;
 import org.lwjgl.opencl.*;
 import org.lwjgl.system.FunctionProviderLocal;
 
@@ -30,11 +29,6 @@ public final class CLDemo {
 	}
 
 	public static void main(String[] args) {
-		System.setProperty(
-			"org.lwjgl.system.libffi.ClosureRegistry",
-			"org.lwjgl.demo.util.ClosureGC"
-		);
-
 		List<CLPlatform> platforms = CLPlatform.getPlatforms();
 		if ( platforms.isEmpty() )
 			throw new RuntimeException("No OpenCL platforms found.");
@@ -88,7 +82,8 @@ public final class CLDemo {
 				if ( caps.OpenCL11 )
 					printDeviceInfo(device, "CL_DEVICE_OPENCL_C_VERSION", CL_DEVICE_OPENCL_C_VERSION);
 
-				long context = clCreateContext(ctxProps, device.address(), new CLContextCallback() {
+				CLContextCallback contextCB;
+				long context = clCreateContext(ctxProps, device.address(), contextCB = new CLContextCallback() {
 					@Override
 					public void invoke(long errinfo, long private_info, long cb, long user_data) {
 						System.err.println("[LWJGL] cl_context_callback");
@@ -100,52 +95,65 @@ public final class CLDemo {
 				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
 				checkCLError(errcode_ret);
 
+				CLMemObjectDestructorCallback bufferCB1 = null;
+				CLMemObjectDestructorCallback bufferCB2 = null;
+
+				long subbuffer = NULL;
+				CLMemObjectDestructorCallback subbufferCB = null;
+
 				int errcode;
 
+				final CountDownLatch destructorLatch;
+
 				if ( caps.OpenCL11 ) {
-					errcode = clSetMemObjectDestructorCallback(buffer, new CLMemObjectDestructorCallback() {
+					destructorLatch = new CountDownLatch(3);
+
+					errcode = clSetMemObjectDestructorCallback(buffer, bufferCB1 = new CLMemObjectDestructorCallback() {
 						@Override
 						public void invoke(long memobj, long user_data) {
 							System.out.println("\t\tBuffer destructed (1): " + memobj);
+							destructorLatch.countDown();
 						}
 					}, NULL);
 					checkCLError(errcode);
 
-					errcode = clSetMemObjectDestructorCallback(buffer, new CLMemObjectDestructorCallback() {
+					errcode = clSetMemObjectDestructorCallback(buffer, bufferCB2 = new CLMemObjectDestructorCallback() {
 						@Override
 						public void invoke(long memobj, long user_data) {
 							System.out.println("\t\tBuffer destructed (2): " + memobj);
+							destructorLatch.countDown();
 						}
 					}, NULL);
 					checkCLError(errcode);
-				}
 
-				long subbuffer = NULL;
-				if ( caps.OpenCL11 ) {
 					CLBufferRegion buffer_region = CLBufferRegion.malloc();
 					buffer_region.origin(0);
 					buffer_region.size(64);
 
 					try {
-						subbuffer = nclCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, buffer_region.address(), memAddress(errcode_ret));
+						subbuffer = nclCreateSubBuffer(buffer,
+						                               CL_MEM_READ_ONLY,
+						                               CL_BUFFER_CREATE_TYPE_REGION,
+						                               buffer_region.address(),
+						                               memAddress(errcode_ret));
 						checkCLError(errcode_ret);
 					} finally {
 						buffer_region.free();
 					}
 
-					errcode = clSetMemObjectDestructorCallback(subbuffer, new CLMemObjectDestructorCallback() {
+					errcode = clSetMemObjectDestructorCallback(subbuffer, subbufferCB = new CLMemObjectDestructorCallback() {
 						@Override
 						public void invoke(long memobj, long user_data) {
 							System.out.println("\t\tSub Buffer destructed: " + memobj);
+							destructorLatch.countDown();
 						}
 					}, NULL);
 					checkCLError(errcode);
-				}
+				} else
+					destructorLatch = null;
 
 				long exec_caps = clGetDeviceInfoLong(cl_device_id, CL_DEVICE_EXECUTION_CAPABILITIES);
 				if ( (exec_caps & CL_EXEC_NATIVE_KERNEL) == CL_EXEC_NATIVE_KERNEL ) {
-					ClosureGC.get().push();
-
 					System.out.println("\t\t-TRYING TO EXEC NATIVE KERNEL-");
 					long queue = clCreateCommandQueue(context, device.address(), NULL, errcode_ret);
 
@@ -154,7 +162,8 @@ public final class CLDemo {
 					ByteBuffer kernelArgs = BufferUtils.createByteBuffer(4);
 					kernelArgs.putInt(0, 1337);
 
-					errcode = clEnqueueNativeKernel(queue, new CLNativeKernel() {
+					CLNativeKernel kernel;
+					errcode = clEnqueueNativeKernel(queue, kernel = new CLNativeKernel() {
 						@Override
 						public void invoke(long args) {
 							System.out.println("\t\tKERNEL EXEC argument: " + memByteBuffer(args, 4).getInt(0) + ", should be 1337");
@@ -165,7 +174,9 @@ public final class CLDemo {
 					long e = ev.get(0);
 
 					final CountDownLatch latch = new CountDownLatch(1);
-					errcode = clSetEventCallback(e, CL_COMPLETE, new CLEventCallback() {
+
+					CLEventCallback eventCB;
+					errcode = clSetEventCallback(e, CL_COMPLETE, eventCB = new CLEventCallback() {
 						@Override
 						public void invoke(long event, int event_command_exec_status, long user_data) {
 							System.out.println("\t\tEvent callback status: " + getEventStatusName(event_command_exec_status));
@@ -181,13 +192,15 @@ public final class CLDemo {
 					} catch (InterruptedException exc) {
 						exc.printStackTrace();
 					}
+					eventCB.free();
 
 					errcode = clReleaseEvent(e);
 					checkCLError(errcode);
+					kernel.free();
 
 					kernelArgs = BufferUtils.createByteBuffer(POINTER_SIZE * 2);
 
-					CLNativeKernel kernel = new CLNativeKernel() {
+					kernel = new CLNativeKernel() {
 						@Override
 						public void invoke(long args) {
 						}
@@ -204,8 +217,7 @@ public final class CLDemo {
 
 					errcode = clReleaseCommandQueue(queue);
 					checkCLError(errcode);
-
-					ClosureGC.get().pop();
+					kernel.free();
 				}
 
 				System.out.println();
@@ -218,10 +230,25 @@ public final class CLDemo {
 				errcode = clReleaseMemObject(buffer);
 				checkCLError(errcode);
 
+				if ( destructorLatch != null ) {
+					// mem object destructor callbacks are called asynchronously on Nvidia
+
+					try {
+						destructorLatch.await();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+					subbufferCB.free();
+
+					bufferCB2.free();
+					bufferCB1.free();
+				}
+
 				errcode = clReleaseContext(context);
 				checkCLError(errcode);
 
-				ClosureGC.get().gc();
+				contextCB.free();
 			}
 		}
 	}
