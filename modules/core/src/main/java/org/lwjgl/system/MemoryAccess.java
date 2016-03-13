@@ -29,7 +29,7 @@ final class MemoryAccess {
 		MemoryAccessor accessor;
 		try {
 			// Depends on sun.nio.ch.DirectBuffer and sun.misc.Unsafe
-			accessor = (MemoryAccessor)Class.forName("org.lwjgl.system.MemoryAccess$MemoryAccessorUnsafe").newInstance();
+			accessor = new MemoryAccessorUnsafe();
 		} catch (Throwable t0) {
 			try {
 				// Depends on sun.nio.ch.DirectBuffer and sun.reflect.FieldAccessor
@@ -694,7 +694,7 @@ final class MemoryAccess {
 				private int encodeASCII(CharSequence text, boolean nullTerminated, long target) {
 					int p = 0, len = text.length();
 
-					for (; p < len; p++ )
+					for ( ; p < len; p++ )
 						memPutByte(target + p, (byte)text.charAt(p));
 
 					if ( nullTerminated )
@@ -770,36 +770,6 @@ final class MemoryAccess {
 			};
 		}
 
-		private static sun.misc.Unsafe getUnsafeInstance() {
-			java.lang.reflect.Field[] fields = sun.misc.Unsafe.class.getDeclaredFields();
-
-			/*
-			Different runtimes use different names for the Unsafe singleton,
-			so we cannot use .getDeclaredField and we scan instead. For example:
-
-			Oracle: theUnsafe
-			PERC : m_unsafe_instance
-			Android: THE_ONE
-			*/
-			for ( java.lang.reflect.Field field : fields ) {
-				if ( !field.getType().equals(sun.misc.Unsafe.class) )
-					continue;
-
-				int modifiers = field.getModifiers();
-				if ( !(java.lang.reflect.Modifier.isStatic(modifiers) && java.lang.reflect.Modifier.isFinal(modifiers)) )
-					continue;
-
-				field.setAccessible(true);
-				try {
-					return (sun.misc.Unsafe)field.get(null);
-				} catch (IllegalAccessException e) {
-					// ignore
-				}
-				break;
-			}
-
-			throw new UnsupportedOperationException();
-		}
 	}
 
 	static java.lang.reflect.Field getDeclaredField(Class<?> root, String fieldName) throws NoSuchFieldException {
@@ -856,6 +826,37 @@ final class MemoryAccess {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	static sun.misc.Unsafe getUnsafeInstance() {
+		java.lang.reflect.Field[] fields = sun.misc.Unsafe.class.getDeclaredFields();
+
+			/*
+			Different runtimes use different names for the Unsafe singleton,
+			so we cannot use .getDeclaredField and we scan instead. For example:
+
+			Oracle: theUnsafe
+			PERC : m_unsafe_instance
+			Android: THE_ONE
+			*/
+		for ( java.lang.reflect.Field field : fields ) {
+			if ( !field.getType().equals(sun.misc.Unsafe.class) )
+				continue;
+
+			int modifiers = field.getModifiers();
+			if ( !(java.lang.reflect.Modifier.isStatic(modifiers) && java.lang.reflect.Modifier.isFinal(modifiers)) )
+				continue;
+
+			field.setAccessible(true);
+			try {
+				return (sun.misc.Unsafe)field.get(null);
+			} catch (IllegalAccessException e) {
+				// ignore
+			}
+			break;
+		}
+
+		throw new UnsupportedOperationException();
 	}
 
 }

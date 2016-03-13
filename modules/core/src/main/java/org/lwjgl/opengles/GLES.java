@@ -18,6 +18,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.ThreadLocalUtil.*;
 
 /**
  * This class must be used before any OpenGL ES function is called. It has the following responsibilities:
@@ -47,8 +48,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Note that the {@link #createCapabilities} method implicitly calls {@link #setCapabilities} with the newly created instance.</p>
  */
 public final class GLES {
-
-	private static final ThreadLocal<GLESCapabilities> capsTL = new ThreadLocal<GLESCapabilities>();
 
 	private static final APIVersion MAX_VERSION;
 
@@ -153,7 +152,7 @@ public final class GLES {
 	 * a different value.</p>
 	 */
 	public static void setCapabilities(GLESCapabilities caps) {
-		capsTL.set(caps);
+		tlsGet().glesCaps = caps;
 	}
 
 	/**
@@ -162,7 +161,7 @@ public final class GLES {
 	 * @throws IllegalStateException if {@link #setCapabilities} has never been called in the current thread or was last called with a {@code null} value
 	 */
 	public static GLESCapabilities getCapabilities() {
-		GLESCapabilities caps = capsTL.get();
+		GLESCapabilities caps = tlsGet().glesCaps;
 		if ( caps == null )
 			throw new IllegalStateException("No GLESCapabilities instance has been set for the current thread.");
 

@@ -396,6 +396,7 @@ $indentation}"""
 		if ( hasMutableMembers )
 			println("import static org.lwjgl.system.Checks.*;")
 		println("import static org.lwjgl.system.MemoryUtil.*;")
+		println("import static org.lwjgl.system.MemoryStack.*;")
 
 		println();
 		preamble.printJava(this)
@@ -406,9 +407,7 @@ $indentation}"""
 		print("""
 	/** The struct size in bytes. */
 	public static final int SIZEOF;
-""")
-		if ( !nativeLayout )
-			print("""
+
 	public static final int __ALIGNMENT;
 """)
 
@@ -431,12 +430,13 @@ $indentation}"""
 			if ( nativeLayout ) {
 				print("""
 	static {
-		IntBuffer offsets = memAllocInt($memberCount);
+		IntBuffer offsets = memAllocInt(${memberCount + 1});
 
 		SIZEOF = offsets(memAddress(offsets));
 
 """)
 				generateOffsetInit(members)
+				println("\n\t\t__ALIGNMENT = offsets.get($memberCount);")
 				println("\n\t\tmemFree(offsets);")
 			} else {
 				print("""
@@ -456,14 +456,16 @@ $indentation}"""
 		} else {
 			print("""
 	static {
-		SIZEOF = offsets();
+		IntBuffer offsets = memAllocInt(1);
+		SIZEOF = offsets(memAddress(offsets));
+		__ALIGNMENT = offsets.get(0);
 	}""")
 		}
 
 		if ( nativeLayout )
 			print("""
 
-	private static native int offsets(${if ( visibleMembers.any() ) "long buffer" else ""});""")
+	private static native int offsets(long buffer);""")
 
 		print("""
 
@@ -556,7 +558,7 @@ $indentation}"""
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
 	public static Buffer malloc(int $BUFFER_CAPACITY_PARAM) {
-		return create(nmemAlloc(capacity * SIZEOF), capacity);
+		return create(nmemAlloc($BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
 	}
 
 	/**
@@ -565,7 +567,7 @@ $indentation}"""
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
 	public static Buffer calloc(int $BUFFER_CAPACITY_PARAM) {
-		return create(nmemCalloc(capacity, SIZEOF), capacity);
+		return create(nmemCalloc($BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
 	}
 
 	/**
@@ -574,7 +576,7 @@ $indentation}"""
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
 	public static Buffer create(int $BUFFER_CAPACITY_PARAM) {
-		return new Buffer(BufferUtils.createByteBuffer(capacity * SIZEOF));
+		return new Buffer(BufferUtils.createByteBuffer($BUFFER_CAPACITY_PARAM * SIZEOF));
 	}
 
 	/**
@@ -586,6 +588,76 @@ $indentation}"""
 	public static Buffer create(long address, int $BUFFER_CAPACITY_PARAM) {
 		return address == NULL ? null : new Buffer(address, null, -1, 0, $BUFFER_CAPACITY_PARAM, $BUFFER_CAPACITY_PARAM);
 	}
+
+	// -----------------------------------
+
+	/**
+	 * Returns a new {@link $className} instance allocated on the specified {@link MemoryStack}.
+	 *
+	 * @param stack the stack from which to allocate
+	 */
+	public static $className malloc(MemoryStack stack) {
+		return create(stack.nmalloc(__ALIGNMENT, SIZEOF));
+	}
+
+	/**
+	 * Returns a new {@link $className} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+	 *
+	 * @param stack the stack from which to allocate
+	 */
+	public static $className calloc(MemoryStack stack) {
+		return create(stack.ncalloc(__ALIGNMENT, 1, SIZEOF));
+	}
+
+	/** Returns a new {@link $className} instance allocated on the thread-local {@link MemoryStack}. */
+	public static $className mallocStack() {
+		return malloc(stackGet());
+	}
+
+	/** Returns a new {@link $className} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+	public static $className callocStack() {
+		return calloc(stackGet());
+	}
+
+	/**
+	 * Returns a new {@link $className.Buffer} instance allocated on the specified {@link MemoryStack}.
+	 *
+	 * @param stack the stack from which to allocate
+	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
+	 */
+	public static Buffer malloc(MemoryStack stack, int $BUFFER_CAPACITY_PARAM) {
+		return create(stack.nmalloc(__ALIGNMENT, $BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
+	}
+
+	/**
+	 * Returns a new {@link $className.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+	 *
+	 * @param stack the stack from which to allocate
+	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
+	 */
+	public static Buffer calloc(MemoryStack stack, int $BUFFER_CAPACITY_PARAM) {
+		return create(stack.ncalloc(__ALIGNMENT, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
+	}
+
+	/**
+	 * Returns a new {@link $className.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+	 *
+	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
+	 */
+	public static Buffer mallocStack(int $BUFFER_CAPACITY_PARAM) {
+		return malloc(stackGet(), $BUFFER_CAPACITY_PARAM);
+	}
+
+	/**
+	 * Returns a new {@link $className.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+	 *
+	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
+	 */
+	public static Buffer callocStack(int $BUFFER_CAPACITY_PARAM) {
+		return calloc(stackGet(), $BUFFER_CAPACITY_PARAM);
+	}
+
+	// -----------------------------------
 """)
 
 		if ( members.any() ) {
@@ -1436,20 +1508,25 @@ $indent */""")
 
 	override fun PrintWriter.generateNative() {
 		print(HEADER)
-		println("#include <stddef.h>")
+
+		nativeImport("<stddef.h>")
+		nativeDirective(
+			"""#ifdef LWJGL_WINDOWS
+	#define alignof __alignof
+#else
+	#include <stdalign.h>
+#endif""")
+
 		preamble.printNative(this)
 
-		println("\nEXTERN_C_EXIT\n")
+		println("""
+EXTERN_C_EXIT
 
-		print("JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass clazz")
-		if ( members.filter { it !is StructMemberPadding }.isNotEmpty() ) {
-			println(", jlong bufferAddress) {")
-			println("\tjint *buffer = (jint *)(intptr_t)bufferAddress;\n")
-		} else {
-			println(") {")
-		}
+JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress) {
+	jint *buffer = (jint *)(intptr_t)bufferAddress;
 
-		println("\tUNUSED_PARAMS($JNIENV, clazz)\n")
+	UNUSED_PARAMS($JNIENV, clazz)
+""")
 
 		if ( virtual ) {
 			// NOTE: Assumes a plain struct definition (no nested structs, no unions)
@@ -1466,15 +1543,18 @@ $indent */""")
 			println("\t} $nativeName;\n")
 		}
 
+		var index = 0
 		if ( members.isNotEmpty() ) {
-			generateNativeMembers(members)
+			index = generateNativeMembers(members)
 			println()
 		}
+		println(
+"""	buffer[$index] = alignof($nativeName);
 
-		println("\treturn sizeof($nativeName);")
-		println("}")
+	return sizeof($nativeName);
+}
 
-		println("\nEXTERN_C_EXIT")
+EXTERN_C_EXIT""")
 	}
 
 	private fun PrintWriter.generateNativeMembers(members: List<StructMember>, offset: Int = 0, prefix: String = ""): Int {

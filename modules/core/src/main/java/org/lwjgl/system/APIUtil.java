@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
+import static org.lwjgl.system.ThreadLocalUtil.*;
 
 /**
  * Utility class useful to API bindings. [INTERNAL USE ONLY]
@@ -33,13 +34,6 @@ public final class APIUtil {
 	 * {@link Configuration#DEBUG_STREAM}.
 	 */
 	public static final PrintStream DEBUG_STREAM = Configuration.createDebugStream();
-
-	private static final ThreadLocal<APIBuffer> API_BUFFERS = new ThreadLocal<APIBuffer>() {
-		@Override
-		protected APIBuffer initialValue() {
-			return new APIBuffer();
-		}
-	};
 
 	static {
 		Library.initialize();
@@ -62,7 +56,7 @@ public final class APIUtil {
 
 	/** Returns a thread-local {@link APIBuffer} that has been reset. */
 	public static APIBuffer apiBuffer() {
-		return API_BUFFERS.get().reset();
+		return tlsGet().__buffer.reset();
 	}
 
 	/**
@@ -72,7 +66,7 @@ public final class APIUtil {
 	 * @see APIBuffer#pop
 	 */
 	public static APIBuffer apiStack() {
-		return API_BUFFERS.get().push();
+		return tlsGet().__buffer.push();
 	}
 
 	public static SharedLibrary apiCreateLibrary(String name) {

@@ -18,6 +18,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.ThreadLocalUtil.*;
 
 /**
  * This class must be used before any OpenGL function is called. It has the following responsibilities:
@@ -47,8 +48,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Note that the {@link #createCapabilities} method implicitly calls {@link #setCapabilities} with the newly created instance.</p>
  */
 public final class GL {
-
-	private static final ThreadLocal<GLCapabilities> capsTL = new ThreadLocal<GLCapabilities>();
 
 	private static final APIVersion MAX_VERSION;
 
@@ -197,7 +196,7 @@ public final class GL {
 	 * different value.</p>
 	 */
 	public static void setCapabilities(GLCapabilities caps) {
-		capsTL.set(caps);
+		tlsGet().glCaps = caps;
 	}
 
 	/**
@@ -206,7 +205,7 @@ public final class GL {
 	 * @throws IllegalStateException if {@link #setCapabilities} has never been called in the current thread or was last called with a {@code null} value
 	 */
 	public static GLCapabilities getCapabilities() {
-		GLCapabilities caps = capsTL.get();
+		GLCapabilities caps = tlsGet().glCaps;
 		if ( caps == null )
 			throw new IllegalStateException("No GLCapabilities instance has been set for the current thread.");
 

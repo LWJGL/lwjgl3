@@ -99,7 +99,7 @@ public final class VKUtil {
 			case VK_ERROR_VALIDATION_FAILED_EXT:
 				return "A validation layer found an error.";
 			default:
-				return apiUnknownToken(result);
+				return String.format("%s [%d]", "Unknown", result);
 		}
 	}
 

@@ -16,6 +16,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.ThreadLocalUtil.*;
 
 /**
  * This class must be used before any OpenAL function is called. It has the following responsibilities:
@@ -49,7 +50,6 @@ public final class AL {
 	private static FunctionProvider functionProvider;
 
 	private static ALContext processContext;
-	private static final ThreadLocal<ALContext> threadContext = new ThreadLocal<ALContext>();
 
 	private AL() {}
 
@@ -97,7 +97,7 @@ public final class AL {
 	 */
 	public static void setCurrentProcess(ALContext context) {
 		processContext = context;
-		threadContext.set(null); // See EXT_thread_local_context, second Q.
+		tlsGet().alContext = null; // See EXT_thread_local_context, second Q.
 	}
 
 	/**
@@ -108,7 +108,7 @@ public final class AL {
 	 * @param context the {@link ALContext} to make current, or null
 	 */
 	public static void setCurrentThread(ALContext context) {
-		threadContext.set(context);
+		tlsGet().alContext = context;
 	}
 
 	/**
@@ -117,7 +117,7 @@ public final class AL {
 	 * If no {@link ALContext} is current in the current thread or process, null is returned.
 	 */
 	public static ALContext getCurrentContext() {
-		ALContext context = threadContext.get();
+		ALContext context = tlsGet().alContext;
 		return context != null ? context : processContext;
 	}
 
