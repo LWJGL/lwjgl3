@@ -152,7 +152,7 @@ inline void detachCurrentThread(void) {
 	} EnvData;
 
 	static void autoDetach(void* value) {
-		pthread_setspecific(tlsKey, NULL);
+		pthread_setspecific(envTLS, NULL);
 		free(value);
 		if ( getThreadEnv() != NULL )
             detachCurrentThread();
