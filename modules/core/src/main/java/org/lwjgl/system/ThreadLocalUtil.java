@@ -17,18 +17,18 @@ import java.lang.reflect.Field;
  */
 public final class ThreadLocalUtil {
 
-	private static final Provider provider = getInstance();
+	private static final ThreadLocal<TLS> TLS = getInstance();
 
 	private ThreadLocalUtil() {
 	}
 
 	public static TLS tlsGet() {
-		return provider.get();
+		return TLS.get();
 	}
 
 	public static class TLS implements Runnable {
 
-		private final Runnable target;
+		private Runnable target;
 
 		public final APIBuffer __buffer;
 
@@ -39,9 +39,7 @@ public final class ThreadLocalUtil {
 
 		public ALContext alContext;
 
-		public TLS(Runnable target) {
-			this.target = target;
-
+		public TLS() {
 			__buffer = new APIBuffer();
 			stack = new MemoryStack();
 		}
@@ -54,54 +52,29 @@ public final class ThreadLocalUtil {
 
 	}
 
-	private interface Provider {
+	@SuppressWarnings("unchecked")
+	static ThreadLocal<TLS> getInstance() {
+		String provider = Configuration.THREAD_LOCAL_SPACE.get("FastThreadLocal");
 
-		TLS get();
-
-	}
-
-	static Provider getInstance() {
-		try {
-			return new FastTLProvider();
-			//return new UnsafeProvider();
-		} catch (Throwable t) {
+		if ( "FastThreadLocal".equals(provider) ) {
+			return new FastThreadLocal<TLS>() {
+				@Override
+				protected TLS initialValue() {
+					return new TLS();
+				}
+			};
+		} else if ( "unsafe".equals(provider) ) {
+			return new UnsafeProvider();
+		} else if ( "ThreadLocal".equals(provider) ) {
+			return new ThreadLocal<ThreadLocalUtil.TLS>() {
+				@Override
+				protected TLS initialValue() {
+					return new TLS();
+				}
+			};
+		} else {
+			throw new RuntimeException("Invalid " + Configuration.THREAD_LOCAL_SPACE.getProperty() + "specified.");
 		}
-
-		return new DefaultProvider();
-	}
-
-	/** Default implementation using {@link ThreadLocal}. */
-	private static class DefaultProvider implements Provider {
-
-		private static final ThreadLocal<TLS> TL = new ThreadLocal<TLS>() {
-			@Override
-			protected TLS initialValue() {
-				return new TLS(null);
-			}
-		};
-
-		@Override
-		public TLS get() {
-			return TL.get();
-		}
-
-	}
-
-	/** Implementation using {@link FastThreadLocal}. */
-	public static class FastTLProvider implements Provider {
-
-		private static final FastThreadLocal<TLS> TL = new FastThreadLocal<TLS>() {
-			@Override
-			public TLS initialValue() {
-				return new TLS(null);
-			}
-		};
-
-		@Override
-		public TLS get() {
-			return TL.get();
-		}
-
 	}
 
 	/**
@@ -111,7 +84,7 @@ public final class ThreadLocalUtil {
 	 *
 	 * <p>This implementation trades the {@code ThreadLocalMap} lookup with a plain field derefence, eliminating considerable overhead.</p>
 	 */
-	private static class UnsafeProvider implements Provider {
+	private static class UnsafeProvider extends ThreadLocal<TLS> {
 
 		private static final sun.misc.Unsafe UNSAFE = MemoryAccess.getUnsafeInstance();
 
@@ -124,32 +97,49 @@ public final class ThreadLocalUtil {
 					throw new IllegalStateException();
 
 				TARGET = UNSAFE.objectFieldOffset(field);
-
-				init();
 			} catch (NoSuchFieldException e) {
 				throw new RuntimeException(e);
 			}
 		}
 
-		private static TLS init() {
-			Thread t = Thread.currentThread();
-
-			TLS tls = new TLS((Runnable)UNSAFE.getObject(t, TARGET));
-
-			UNSAFE.putObject(t, TARGET, tls);
-
-			return tls;
+		@Override
+		protected TLS initialValue() {
+			return new TLS();
 		}
 
 		@Override
 		public TLS get() {
 			Object target = UNSAFE.getObject(Thread.currentThread(), TARGET);
-			if ( target instanceof TLS )
+			if ( TLS.class.isInstance(target) )
 				return (TLS)target;
 
-			return init();
+			return setInitialValue();
 		}
 
+		private TLS setInitialValue() {
+			TLS tls = initialValue();
+			set(tls);
+			return tls;
+		}
+
+		@Override
+		public void set(TLS value) {
+			Thread t = Thread.currentThread();
+
+			value.target = (Runnable)UNSAFE.getObject(t, TARGET);
+			UNSAFE.putObject(t, TARGET, value);
+		}
+
+		@Override
+		public void remove() {
+			Thread t = Thread.currentThread();
+
+			Object target = UNSAFE.getObject(t, TARGET);
+			if ( TLS.class.isInstance(target) ) {
+				TLS tls = (TLS)target;
+				UNSAFE.putObject(t, TARGET, tls.target);
+			}
+		}
 	}
 
 }

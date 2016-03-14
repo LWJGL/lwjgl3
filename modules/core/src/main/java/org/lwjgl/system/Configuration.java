@@ -6,10 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.system.MemoryUtil.MemoryAllocator;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -77,9 +74,9 @@ public enum Configuration {
 	 * ({@link MemoryUtil#memAlloc memAlloc}/{@link MemoryUtil#memFree memFree}/etc). Supported values:
 	 *
 	 * <ul>
-	 * <li><em>jemalloc</em> The allocator provided by the jemalloc library</li>
-	 * <li><em>system</em> The default system memory allocator</li>
-	 * <li><em>&lt;classpath&gt;</em> A class that implements the {@link MemoryAllocator} interface. It will be instantiated using reflection.</li>
+	 * <li><em>jemalloc</em> - The allocator provided by the jemalloc library</li>
+	 * <li><em>system</em> - The default system memory allocator</li>
+	 * <li><em>&lt;classpath&gt;</em> - A class that implements the {@link MemoryAllocator} interface. It will be instantiated using reflection.</li>
 	 * </ul>
 	 *
 	 * <p>When set programmatically, it can also be a {@link MemoryAllocator} instance.</p>
@@ -90,6 +87,23 @@ public enum Configuration {
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
 	MEMORY_ALLOCATOR("org.lwjgl.system.allocator", StateInit.STRING),
+
+	/**
+	 * Sets the implementation used internally by LWJGL for thread-local data. Supported values:
+	 *
+	 * <ul>
+	 * <li><em>FastThreadLocal</em> - Uses {@link FastThreadLocal}. This is the default. It is the best performance option, but may be problematic in programs
+	 * that create and destroy many (hundreds of thousands or more) threads in their life-time.</li>
+	 * <li><em>unsafe</em> - A thread-local implementation that uses {@code Unsafe} to store per-thread data directly in {@link Thread} instances.</li>
+	 * <li><em>ThreadLocal</em> - Uses {@link ThreadLocal}.</li>
+	 * </ul>
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.system.tls</b><br>
+	 * &nbsp; &nbsp; Type: String<br>
+	 * &nbsp; &nbsp;Usage: Static<br>
+	 */
+	THREAD_LOCAL_SPACE("org.lwjgl.system.tls", StateInit.STRING),
 
 	/**
 	 * Set to true to disable LWJGL's basic checks. These are trivial checks that LWJGL performs to avoid JVM crashes, very useful during development.

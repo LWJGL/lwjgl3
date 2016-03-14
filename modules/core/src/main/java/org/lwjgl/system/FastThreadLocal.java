@@ -21,9 +21,8 @@ import java.util.Arrays;
  * @param <T> the thread-local value type
  *
  * @author Riven
- * @see java.lang.ThreadLocal
  */
-public class FastThreadLocal<T> {
+public class FastThreadLocal<T> extends ThreadLocal<T> {
 
 	@SuppressWarnings("unchecked")
 	private T[] threadIDMap = (T[])new Object[1];
@@ -33,21 +32,13 @@ public class FastThreadLocal<T> {
 	}
 
 	/**
-	 * Returns the current thread's "initial value" for this thread-local variable.
-	 *
-	 * @see ThreadLocal#initialValue()
-	 */
-	public T initialValue() {
-		return null;
-	}
-
-	/**
 	 * Sets the current thread's copy of this thread-local variable to the specified value.
 	 *
 	 * @param value the value to be stored in the current thread's copy of this thread-local.
 	 *
 	 * @see ThreadLocal#set(T)
 	 */
+	@Override
 	public void set(T value) {
 		int id = (int)Thread.currentThread().getId();
 
@@ -65,6 +56,7 @@ public class FastThreadLocal<T> {
 	 *
 	 * @see ThreadLocal#get()
 	 */
+	@Override
 	public final T get() {
 		int id = (int)Thread.currentThread().getId();
 
@@ -85,6 +77,7 @@ public class FastThreadLocal<T> {
 	 *
 	 * @see ThreadLocal#remove()
 	 */
+	@Override
 	public void remove() {
 		set(null);
 	}
