@@ -76,10 +76,11 @@ License terms: http://lwjgl.org/license.php
 			defaultvalue="n"
 			addproperty="reset.input"
 		/>
-		<condition property="do.reset">
-			<equals arg1="y" arg2="${reset.input}"/>
-		</condition>
-		<fail unless="do.reset">Cancelled</fail>
+		<fail message="Cancelled.">
+			<condition>
+				<not><equals arg1="y" arg2="${reset.input}"/></not>
+			</condition>
+		</fail>
 
 		<antcall target="clean"/>
 
@@ -199,7 +200,7 @@ License terms: http://lwjgl.org/license.php
 		</java>
 	</target>
 
-	<target name="formatter" description="Runs the template formatter tool" depends="init"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
+	<target name="formatter" description="Runs the template formatter tool" depends="init">
 		<lwjgl.javac destdir="${bin.templates}" taskname="Compile formatter">
 			<src path="${src.templates}/java"/>
 			<include name="org/lwjgl/generator/util/**"/>
@@ -426,13 +427,29 @@ License terms: http://lwjgl.org/license.php
 	<target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native, -init-runtime, -update-assets">
 		<fail message="Please use -Dclass=&lt;class&gt; to specify the demo main class to run." unless="class"/>
 
-		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="true" taskname="Demo">
+		<local name="spawn"/>
+		<condition property="spawn" value="true" else="false">
+			<isset property="jitwatch"/>
+		</condition>
+
+		<local name="failonerror"/>
+		<condition property="failonerror" value="false" else="true">
+			<istrue value="${spawn}"/>
+		</condition>
+
+		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="${failonerror}" spawn="${spawn}" taskname="Demo">
 			<classpath>
 				<pathelement path="${lib}/testng.jar"/>
 			</classpath>
 
 			<jvmarg value="-Djava.library.path=${lib}"/>
 			<jvmarg value="-XstartOnFirstThread" if:set="platform.macosx"/>
+			<!--<jvmarg value="-Xcheck:jni"/>-->
+
+			<jvmarg line="-XX:+UnlockDiagnosticVMOptions -XX:+TraceClassLoading -XX:+LogCompilation" if:set="jitwatch"/>
+			<jvmarg line="-XX:+PrintAssembly -XX:PrintAssemblyOptions=intel -XX:-TieredCompilation -XX:-UseCompressedOops" if:set="jitwatch"/>
+			<jvmarg line="-XX:LogFile=${jitwatch}" if:set="jitwatch"/>
+
 			<jvmarg line="${jvmargs}" if:set="jvmargs"/>
 
 			<arg line="${args}" if:set="args"/>
