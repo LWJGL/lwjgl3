@@ -89,6 +89,19 @@ public enum Configuration {
 	MEMORY_ALLOCATOR("org.lwjgl.system.allocator", StateInit.STRING),
 
 	/**
+	 * Sets the stack size, in kilobytes, that will be used in the default {@link MemoryStack} constructor. This value is also used for the LWJGL-managed,
+	 * thread-local, {@link MemoryStack} instances.
+	 *
+	 * <p>If this option is not set, it defaults to 32.</p>
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.system.stackSize</b><br>
+	 * &nbsp; &nbsp; Type: int<br>
+	 * &nbsp; &nbsp;Usage: Static<br>
+	 */
+	STACK_SIZE("org.lwjgl.system.stackSize", StateInit.INT),
+
+	/**
 	 * Sets the implementation used internally by LWJGL for thread-local data. Supported values:
 	 *
 	 * <ul>
@@ -205,17 +218,23 @@ public enum Configuration {
 	GLFW_CHECK_THREAD0("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
 
 	private enum StateInit {
+		BOOLEAN {
+			@Override
+			Object getState(String property) {
+				return Boolean.getBoolean(property);
+			}
+		},
+		INT {
+			@Override
+			Object getState(String property) {
+				return Integer.getInteger(property);
+			}
+		},
 		STRING {
 			@Override
 			Object getState(String property) {
 				return System.getProperty(property);
 
-			}
-		},
-		BOOLEAN {
-			@Override
-			Object getState(String property) {
-				return Boolean.getBoolean(property);
 			}
 		};
 
