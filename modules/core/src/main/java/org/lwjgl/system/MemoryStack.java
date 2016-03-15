@@ -161,7 +161,7 @@ public class MemoryStack {
 			throw new IllegalArgumentException("Alignment must be a power-of-two value.");
 	}
 
-	private static void checkOffset(int offset) {
+	private static void checkPointer(int offset) {
 		if ( offset < 0 )
 			throw new OutOfMemoryError("Out of stack space.");
 	}
@@ -190,19 +190,19 @@ public class MemoryStack {
 		if ( frameIndex == 0 )
 			throw new IllegalStateException("A frame has not been pushed to the stack yet.");
 
-		int newOffset = pointer - size;
+		int newPointer = pointer - size;
 
 		if ( CHECKS ) {
 			checkAlignment(alignment);
-			checkOffset(newOffset);
+			checkPointer(newPointer);
 		}
 
-		// Align the new offset to the specified alignment
-		newOffset &= ~(alignment - 1);
+		// Align pointer to the specified alignment
+		newPointer &= ~(alignment - 1);
 
-		pointer = newOffset;
+		pointer = newPointer;
 
-		return this.address + newOffset;
+		return this.address + newPointer;
 	}
 
 	/**
