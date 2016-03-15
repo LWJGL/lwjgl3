@@ -91,7 +91,7 @@ public abstract class Closure extends Pointer.Default {
 	private long user_data;
 
 	/** Pointer to libFFI's closure structure. */
-	private final long closure;
+	private long closure;
 
 	/**
 	 * Creates a new {@code Closure} instance.
@@ -135,7 +135,7 @@ public abstract class Closure extends Pointer.Default {
 			cif.address(),  // ffi_cif*
 			nativeCallback, // (void)(*FFI_CLOSURE_FUN)(ffi_cif* cif, void* ret, void** args, void* user_data)
 			user_data,      // void*
-			address         // function*
+			address()       // function*
 		);
 		if ( status != FFI_OK ) {
 			free();
@@ -148,7 +148,7 @@ public abstract class Closure extends Pointer.Default {
 		if ( !isValid() )
 			throw new IllegalStateException("This closure instance has been freed.");
 
-		return address;
+		return super.address();
 	}
 
 	public boolean equals(Object o) {
@@ -157,16 +157,17 @@ public abstract class Closure extends Pointer.Default {
 
 		Closure that = (Closure)o;
 
-		return address == that.address();
+		return address() == that.address();
 	}
 
 	public int hashCode() {
-		return (int)(address ^ (address >>> 32));
+		long a = address();
+		return (int)(a ^ (a >>> 32));
 	}
 
 	@Override
 	public String toString() {
-		return String.format("%s closure [0x%X]", getClass().getSimpleName(), address);
+		return String.format("%s closure [0x%X]", getClass().getSimpleName(), address());
 	}
 
 	public void free() {
@@ -180,6 +181,7 @@ public abstract class Closure extends Pointer.Default {
 		user_data = NULL;
 
 		nffi_closure_free(closure);
+		closure = NULL;
 	}
 
 	/** Returns true if this Closure has not been destroyed. */

@@ -42,7 +42,8 @@ public interface Pointer {
 	/** Default {@link Pointer} implementation. */
 	abstract class Default implements Pointer {
 
-		protected final long address;
+		// Removed final due to JDK-8139758. TODO: Restore if the fix is backported to JDK 8.
+		private long address;
 
 		protected Default(long address) {
 			this.address = address;

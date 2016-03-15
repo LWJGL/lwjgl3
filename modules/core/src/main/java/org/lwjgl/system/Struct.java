@@ -18,7 +18,7 @@ public abstract class Struct extends Pointer.Default {
 		Library.initialize();
 	}
 
-	private final ByteBuffer container;
+	private ByteBuffer container;
 
 	protected Struct(long address, ByteBuffer container) {
 		super(address);

@@ -14,9 +14,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** This is the base class of struct data container implementations. Its interface mirrors the NIO API for convenience. */
 public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T, SELF>> implements Pointer {
 
-	private final long address;
+	private long address;
 
-	protected final ByteBuffer container;
+	private ByteBuffer container;
 
 	private int
 		mark,
@@ -42,6 +42,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	protected abstract SELF self();
 
 	protected abstract SELF newBufferInstance(long address, ByteBuffer container, int mark, int position, int limit, int capacity);
+
+	protected ByteBuffer getContainer() { return container; }
 
 	protected abstract T newInstance(long address);
 
