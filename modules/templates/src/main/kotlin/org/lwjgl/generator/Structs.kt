@@ -408,7 +408,7 @@ $indentation}"""
 	/** The struct size in bytes. */
 	public static final int SIZEOF;
 
-	public static final int __ALIGNMENT;
+	public static final int ALIGNOF;
 """)
 
 		if ( members.isNotEmpty() && (!nativeLayout || visibleMembers.any()) ) {
@@ -436,7 +436,7 @@ $indentation}"""
 
 """)
 				generateOffsetInit(members)
-				println("\n\t\t__ALIGNMENT = offsets.get($memberCount);")
+				println("\n\t\tALIGNOF = offsets.get($memberCount);")
 				println("\n\t\tmemFree(offsets);")
 			} else {
 				print("""
@@ -446,7 +446,7 @@ $indentation}"""
 				print(""";
 
 		SIZEOF = layout.getSize();
-		__ALIGNMENT = layout.getAlignment();
+		ALIGNOF = layout.getAlignment();
 
 """)
 				generateOffsetInit(members)
@@ -458,7 +458,7 @@ $indentation}"""
 	static {
 		IntBuffer offsets = memAllocInt(1);
 		SIZEOF = offsets(memAddress(offsets));
-		__ALIGNMENT = offsets.get(0);
+		ALIGNOF = offsets.get(0);
 	}""")
 		}
 
@@ -597,7 +597,7 @@ $indentation}"""
 	 * @param stack the stack from which to allocate
 	 */
 	public static $className malloc(MemoryStack stack) {
-		return create(stack.nmalloc(__ALIGNMENT, SIZEOF));
+		return create(stack.nmalloc(ALIGNOF, SIZEOF));
 	}
 
 	/**
@@ -606,7 +606,7 @@ $indentation}"""
 	 * @param stack the stack from which to allocate
 	 */
 	public static $className calloc(MemoryStack stack) {
-		return create(stack.ncalloc(__ALIGNMENT, 1, SIZEOF));
+		return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
 	}
 
 	/** Returns a new {@link $className} instance allocated on the thread-local {@link MemoryStack}. */
@@ -626,7 +626,7 @@ $indentation}"""
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
 	public static Buffer malloc(MemoryStack stack, int $BUFFER_CAPACITY_PARAM) {
-		return create(stack.nmalloc(__ALIGNMENT, $BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
+		return create(stack.nmalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
 	}
 
 	/**
@@ -636,7 +636,7 @@ $indentation}"""
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
 	public static Buffer calloc(MemoryStack stack, int $BUFFER_CAPACITY_PARAM) {
-		return create(stack.ncalloc(__ALIGNMENT, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
+		return create(stack.ncalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
 	}
 
 	/**
@@ -836,7 +836,7 @@ ${validations.joinToString("\n")}
 
 				if ( it.nativeType is StructType && !it.nativeType.includesPointer ) {
 					size = "${it.nativeType.definition.className}.SIZEOF"
-					alignment = "${it.nativeType.definition.className}.__ALIGNMENT"
+					alignment = "${it.nativeType.definition.className}.ALIGNOF"
 				} else {
 					size = if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER )
 						"POINTER_SIZE"
