@@ -4,7 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 
 import java.nio.ByteBuffer;
@@ -32,7 +31,7 @@ public class APIBuffer {
 	private int[] stack = new int[4];
 
 	public APIBuffer() {
-		buffer = BufferUtils.createByteBuffer(DEFAULT_CAPACITY);
+		buffer = memAlloc(DEFAULT_CAPACITY);
 		address = memAddress(buffer);
 	}
 
@@ -98,13 +97,8 @@ public class APIBuffer {
 		if ( capacity <= buffer.capacity() )
 			return;
 
-		ByteBuffer resized = BufferUtils.createByteBuffer(mathRoundPoT(capacity));
-
-		resized.put(buffer);
-		resized.clear();
-
-		buffer = resized;
-		address = memAddress(resized);
+		buffer = memRealloc(buffer, mathRoundPoT(capacity));
+		address = memAddress(buffer);
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------------

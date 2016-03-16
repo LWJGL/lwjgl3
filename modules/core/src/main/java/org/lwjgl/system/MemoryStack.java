@@ -4,7 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 
 import java.nio.*;
@@ -30,8 +29,6 @@ public class MemoryStack {
 			throw new IllegalStateException("Invalid stack size.");
 	}
 
-	private final ByteBuffer buffer;
-
 	private final long address;
 
 	private final int size;
@@ -52,8 +49,7 @@ public class MemoryStack {
 	 * @param size the maximum number of bytes that may be allocated on the stack
 	 */
 	public MemoryStack(int size) {
-		this.buffer = BufferUtils.createByteBuffer(size);
-		this.address = memAddress(buffer);
+		this.address = nmemAlloc(size);
 
 		this.size = size;
 		this.pointer = size;
