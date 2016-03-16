@@ -104,8 +104,8 @@ fun main(args: Array<String>) {
 				pool.submit {
 					try {
 						this@Generator.generate(packageName, binding)
-					} catch(e: Exception) {
-						e.printStackTrace()
+					} catch(t: Throwable) {
+						t.printStackTrace()
 					}
 					latch.countDown()
 				}
@@ -123,8 +123,8 @@ fun main(args: Array<String>) {
 			fun submit(work: () -> Unit) {
 				try {
 					pool.submit(work)
-				} catch(e: Exception) {
-					e.printStackTrace()
+				} catch(t: Throwable) {
+					t.printStackTrace()
 				}
 				latch.countDown()
 			}
