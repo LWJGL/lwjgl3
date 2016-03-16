@@ -14,6 +14,7 @@ import java.nio.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.Pointer.*;
 
 /**
@@ -129,27 +130,53 @@ public final class MemoryUtil {
 
 	}
 
-	/** This enum can be passed to APIs that support configurable memory allocators. */
-	public enum BufferAllocator {
-		/** Allocate memory using {@link BufferUtils}, i.e. {@link ByteBuffer#allocateDirect}. */
-		NIO {
+	/** Implementations of this class can be passed to APIs that support configurable memory allocators. */
+	public abstract static class BufferAllocator {
+
+		/** Allocates memory using {@link BufferUtils}, i.e. {@link ByteBuffer#allocateDirect}. */
+		public static final BufferAllocator NIO = new BufferAllocator() {
 			@Override
 			public ByteBuffer allocate(int size) {
 				return BufferUtils.createByteBuffer(size);
 			}
-		},
+		};
+
 		/**
-		 * Allocate memory using {@link MemoryUtil#memAlloc}. {@link ByteBuffer} instances allocated using this allocator must be explicitly freed using
-		 * {@link MemoryUtil#memFree}.
+		 * Allocates memory using {@link MemoryUtil#memAlloc}.
+		 *
+		 * <p>{@link ByteBuffer} instances allocated using this allocator must be explicitly freed using {@link MemoryUtil#memFree}.</p>
 		 */
-		MALLOC {
+		public static final BufferAllocator MALLOC = new BufferAllocator() {
 			@Override
 			public ByteBuffer allocate(int size) {
 				return MemoryUtil.memAlloc(size);
 			}
 		};
 
+		/**
+		 * Allocates memory using {@link MemoryStack#malloc}.
+		 *
+		 * <p>The thread-local stack is used. Before this allocator is used, at least one frame must be pushed to the stack.</p>
+		 */
+		public static final BufferAllocator STACK = new BufferAllocator() {
+			@Override
+			public ByteBuffer allocate(int size) {
+				return stackGet().malloc(size);
+			}
+		};
+
+		protected BufferAllocator() {
+		}
+
+		/**
+		 * Allocates a {@link ByteBuffer} with capacity equal to {@code size}.
+		 *
+		 * @param size the buffer capacity
+		 *
+		 * @return the allocated {@link ByteBuffer}
+		 */
 		public abstract ByteBuffer allocate(int size);
+
 	}
 
 	/**
