@@ -4,15 +4,21 @@
  */
 package org.lwjgl.opencl;
 
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.*;
 
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
 import static java.lang.Math.*;
 import static org.lwjgl.opencl.CL10.*;
+import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -22,11 +28,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * multiple platforms with very different capabilities. It should only be used if direct access to the ICD function pointers is required, for customization
  * purposes.</p>
  *
- * <p>Platform capabilities can be created with {@link CLPlatform#createCapabilities(long)}. For a more friendly way, call {@link CLPlatform#getPlatforms()},
- * iterate on the available platforms and call {@link CLPlatform#getCapabilities()}.</p>
+ * <p>Platform capabilities can be created with {@link #createPlatformCapabilities}. Calling this method is expensive, so {@link CLCapabilities} instances
+ * should be cached in user code.</p>
  *
- * <p>Device capabilities can be created with {@link CLDevice#createCapabilities(long, CLCapabilities)}. For a more friendly way, call
- * {@link CLPlatform#getDevices(int)}, iterate on the available devices and call {@link CLDevice#getCapabilities()}.</p>
+ * <p>Device capabilities can be created with {@link #createDeviceCapabilities}. Calling this method is expensive, so {@link CLCapabilities} instances should
+ * be cached in user code.</p>
  */
 public final class CL {
 
@@ -96,63 +102,81 @@ public final class CL {
 						if ( clGetPlatformIDs == NULL )
 							throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 
-						APIBuffer __buffer = apiBuffer();
-						callIPPI(clGetPlatformIDs, 0, NULL, __buffer.address());
+						MemoryStack stack = stackPush();
 
-						int platforms = __buffer.intValue(0);
+						try {
+							IntBuffer pi = stack.ints(0);
+							callIPPI(clGetPlatformIDs, 0, NULL, memAddress(pi));
 
-						if ( platforms == 1 ) {
-							callIPPI(clGetPlatformIDs, 1, __buffer.address(), NULL);
-							long cl_platform_id = __buffer.pointerValue(0);
-							if ( supportsOpenCL12(__buffer, cl_platform_id) )
-								platform = cl_platform_id;
-						} else if ( clGetExtensionFunctionAddress == NULL )
-							throw new IllegalStateException();
+							int platforms = pi.get(0);
+
+							if ( platforms == 1 ) {
+								PointerBuffer pp = stack.pointers(0);
+
+								callIPPI(clGetPlatformIDs, 1, memAddress(pp), NULL);
+								long cl_platform_id = pp.get(0);
+								if ( supportsOpenCL12(stack, cl_platform_id) )
+									platform = cl_platform_id;
+							} else if ( clGetExtensionFunctionAddress == NULL )
+								throw new IllegalStateException();
+						} finally {
+							stack.pop();
+						}
 					}
 					this.platform = platform;
 				}
 
-				private boolean supportsOpenCL12(APIBuffer __buffer, long platform) {
+				private boolean supportsOpenCL12(MemoryStack stack, long platform) {
 					long clGetPlatformInfo = OPENCL.getFunctionAddress("clGetPlatformInfo");
 					if ( clGetPlatformInfo == NULL )
 						return false;
 
-					int errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, 0, NULL, __buffer.address());
+					PointerBuffer pp = stack.mallocPointer(1);
+
+					int errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, 0, NULL, memAddress(pp));
 					if ( errcode != CL_SUCCESS )
 						return false;
 
-					long bytes = __buffer.pointerValue(0);
-					__buffer.bufferParam((int)bytes);
+					int bytes = (int)pp.get(0);
 
-					errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, bytes, __buffer.address(), NULL);
+					ByteBuffer version = stack.malloc(bytes);
+
+					errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, bytes, memAddress(version), NULL);
 					if ( errcode != CL_SUCCESS )
 						return false;
 
-					APIVersion version = apiParseVersion(__buffer.stringValueASCII(0, (int)bytes - 1), "OpenCL");
-					return 1 < version.major || 2 <= version.minor;
+					APIVersion apiVersion = apiParseVersion(memDecodeASCII(version, bytes - 1), "OpenCL");
+					return 1 < apiVersion.major || 2 <= apiVersion.minor;
 				}
 
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
-					APIBuffer __buffer = apiBuffer();
-					__buffer.stringParamASCII(functionName, true);
+					MemoryStack stack = stackPush();
+					try {
+						long nameEncoded = memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK));
 
-					long address = platform == NULL
-						? callPP(clGetExtensionFunctionAddress, __buffer.address())
-						: callPPP(clGetExtensionFunctionAddressForPlatform, platform, __buffer.address());
+						long address = platform == NULL
+							? callPP(clGetExtensionFunctionAddress, nameEncoded)
+							: callPPP(clGetExtensionFunctionAddressForPlatform, platform, nameEncoded);
 
-					if ( address == NULL )
-						address = OPENCL.getFunctionAddress(functionName);
+						if ( address == NULL )
+							address = OPENCL.getFunctionAddress(functionName);
 
-					return address;
+						return address;
+					} finally {
+						stack.pop();
+					}
 				}
 
 				@Override
 				public long getFunctionAddress(long handle, CharSequence functionName) {
-					APIBuffer __buffer = apiBuffer();
-					__buffer.stringParamASCII(functionName, true);
-
-					return callPPP(clGetExtensionFunctionAddressForPlatform, handle, __buffer.address());
+					MemoryStack stack = stackPush();
+					try {
+						return callPPP(clGetExtensionFunctionAddressForPlatform, handle, memAddress(memEncodeASCII(functionName, true, BufferAllocator
+							.STACK)));
+					} finally {
+						stack.pop();
+					}
 				}
 
 				@Override
@@ -200,6 +224,88 @@ public final class CL {
 
 	/** Returns the {@link CLCapabilities} of the ICD. */
 	public static CLCapabilities getICD() { return icd; }
+
+	/**
+	 * Creates a {@link CLCapabilities} instance for the specified OpenCL platform.
+	 *
+	 * <p>This method call is relatively expensive. The result should be cached and reused.</p>
+	 *
+	 * @param cl_platform_id the platform to query
+	 *
+	 * @return the {@link CLCapabilities instance}
+	 */
+	public static CLCapabilities createPlatformCapabilities(long cl_platform_id) {
+		Set<String> supportedExtensions = new HashSet<String>(32);
+
+		// Parse PLATFORM_EXTENSIONS string
+		CL.addExtensions(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_EXTENSIONS), supportedExtensions);
+
+		// Enumerate devices
+		{
+			int num_devices;
+			long[] devices;
+
+			MemoryStack stack = stackPush();
+			try {
+				IntBuffer pi = stack.mallocInt(1);
+
+				int errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, memAddress(pi));
+				if ( Checks.DEBUG && errcode != CL_SUCCESS )
+					throw new OpenCLException("Failed to query number of OpenCL platform devices.");
+
+				num_devices = pi.get(0);
+				if ( num_devices == 0 )
+					return null;
+
+				PointerBuffer pp = stack.mallocPointer(num_devices);
+
+				errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, num_devices, memAddress(pp), NULL);
+				if ( Checks.DEBUG && errcode != CL_SUCCESS )
+					throw new OpenCLException("Failed to query OpenCL platform devices.");
+
+				devices = new long[num_devices];
+				for ( int i = 0; i < num_devices; i++ )
+					devices[i] = pp.get(i);
+			} finally {
+				stack.pop();
+			}
+
+			// Add device extensions to the set
+			for ( int i = 0; i < num_devices; i++ ) {
+				String extensionsString = getDeviceInfoStringASCII(devices[i], CL_DEVICE_EXTENSIONS);
+				CL.addExtensions(extensionsString, supportedExtensions);
+			}
+		}
+
+		// Parse PLATFORM_VERSION string
+		APIVersion version = apiParseVersion(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION), "OpenCL");
+		CL.addCLVersions(version.major, version.minor, supportedExtensions);
+
+		return new CLCapabilities(version.major, version.minor, supportedExtensions, CL.getICD());
+	}
+
+	/**
+	 * Creates a {@link CLCapabilities} instance for the specified OpenCL device.
+	 *
+	 * <p>This method call is relatively expensive. The result should be cached and reused.</p>
+	 *
+	 * @param cl_device_id the device to query
+	 *
+	 * @return the {@link CLCapabilities instance}
+	 */
+	public static CLCapabilities createDeviceCapabilities(long cl_device_id, CLCapabilities platformCapabilities) {
+		Set<String> supportedExtensions = new HashSet<String>(32);
+
+		// Parse DEVICE_EXTENSIONS string
+		String extensionsString = getDeviceInfoStringASCII(cl_device_id, CL_DEVICE_EXTENSIONS);
+		CL.addExtensions(extensionsString, supportedExtensions);
+
+		// Parse DEVICE_VERSION string
+		APIVersion version = apiParseVersion(getDeviceInfoStringASCII(cl_device_id, CL_DEVICE_VERSION), "OpenCL");
+		CL.addCLVersions(version.major, version.minor, supportedExtensions);
+
+		return new CLCapabilities(version.major, version.minor, supportedExtensions, platformCapabilities);
+	}
 
 	static void addExtensions(String extensionsString, Set<String> supportedExtensions) {
 		StringTokenizer tokenizer = new StringTokenizer(extensionsString);

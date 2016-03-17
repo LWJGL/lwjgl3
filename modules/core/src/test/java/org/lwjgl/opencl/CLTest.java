@@ -6,43 +6,28 @@ package org.lwjgl.opencl;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.opencl.CLPlatform.Filter;
+import org.lwjgl.system.MemoryStack;
 import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL11.*;
 import static org.lwjgl.opencl.CLUtil.*;
-import static org.lwjgl.opencl.Info.*;
+import static org.lwjgl.opencl.InfoUtil.*;
+import static org.lwjgl.opencl.InfoUtil.getMemObjectInfoPointer;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 import static org.testng.Assert.*;
 
 @Test
 public class CLTest {
-
-	private static final Filter<CLPlatform> CL11_FILTER = new Filter<CLPlatform>() {
-		@Override
-		public boolean accept(CLPlatform platform) {
-			return platform.getCapabilities().OpenCL11;
-
-		}
-	};
-
-	private static final Filter<CLPlatform> CL12_FILTER = new Filter<CLPlatform>() {
-		@Override
-		public boolean accept(CLPlatform platform) {
-			return platform.getCapabilities().OpenCL12;
-
-		}
-	};
 
 	private static CLContextCallback CONTEXT_CALLBACK;
 
@@ -60,12 +45,24 @@ public class CLTest {
 	public void testLifecycle() {
 		try {
 			CL.create();
-			List<CLPlatform> platforms = CLPlatform.getPlatforms();
-			assertFalse(platforms.isEmpty());
 
-			for ( CLPlatform platform : platforms ) {
-				List<CLDevice> devices = platform.getDevices(CL_DEVICE_TYPE_ALL);
-				assertFalse(devices.isEmpty());
+			MemoryStack stack = stackPush();
+			try {
+				IntBuffer pi = stack.mallocInt(1);
+				checkCLError(clGetPlatformIDs(null, pi));
+				assertNotEquals(pi.get(0), 0);
+
+				PointerBuffer platforms = stack.mallocPointer(pi.get(0));
+				checkCLError(clGetPlatformIDs(platforms, null));
+
+				for ( int i = 0; i < platforms.capacity(); i++ ) {
+					long platform = platforms.get(0);
+
+					checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, null, pi));
+					assertNotEquals(pi.get(0), 0);
+				}
+			} finally {
+				stack.pop();
 			}
 		} finally {
 			CL.destroy();
@@ -73,15 +70,10 @@ public class CLTest {
 	}
 
 	private interface ContextTest {
-
-		void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device);
+		void test(long platform, PointerBuffer ctxProps, long device);
 	}
 
 	private static void contextTest(ContextTest test) {
-		contextTest(null, test);
-	}
-
-	private static void contextTest(Filter<CLPlatform> platformFilter, ContextTest test) {
 		try {
 			CONTEXT_CALLBACK = new CLContextCallback() {
 				@Override
@@ -92,19 +84,35 @@ public class CLTest {
 			};
 
 			CL.create();
-			List<CLPlatform> platforms = CLPlatform.getPlatforms(platformFilter);
-			if ( platforms.isEmpty() ) {
-				assert platformFilter != null;
-				throw new SkipException("Skipped because the platform filter did not match with any cl_platform.");
-			} else {
-				for ( CLPlatform platform : platforms ) {
-					PointerBuffer ctxProps = BufferUtils.createPointerBuffer(3);
-					ctxProps.put(CL_CONTEXT_PLATFORM).put(platform).put(0).flip();
 
-					List<CLDevice> devices = platform.getDevices(CL_DEVICE_TYPE_ALL);
-					for ( CLDevice device : devices )
-						test.test(platform, ctxProps, device);
+			MemoryStack stack = stackPush();
+			try {
+				IntBuffer pi = stack.mallocInt(1);
+				checkCLError(clGetPlatformIDs(null, pi));
+
+				PointerBuffer platforms = stack.mallocPointer(pi.get(0));
+				checkCLError(clGetPlatformIDs(platforms, null));
+
+				for ( int i = 0; i < platforms.capacity(); i++ ) {
+					long platform = platforms.get(0);
+
+					checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, null, pi));
+
+					PointerBuffer devices = stack.mallocPointer(pi.get(0));
+					checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, devices, null));
+
+					PointerBuffer ctxProps = stack.mallocPointer(3);
+					ctxProps
+						.put(0, CL_CONTEXT_PLATFORM)
+						.put(1, platform)
+						.put(2, 0);
+
+					for ( int j = 0; j < devices.capacity(); j++ ) {
+						test.test(platform, ctxProps, devices.get(j));
+					}
 				}
+			} finally {
+				stack.pop();
 			}
 		} finally {
 			CL.destroy();
@@ -116,14 +124,14 @@ public class CLTest {
 	public void testContext() {
 		contextTest(new ContextTest() {
 			@Override
-			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
+			public void test(long platform, PointerBuffer ctxProps, long device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.address(), CONTEXT_CALLBACK, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device, CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
-				long queue = clCreateCommandQueue(context, device.address(), 0, errcode_ret);
+				long queue = clCreateCommandQueue(context, device, 0, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(queue);
 
@@ -141,23 +149,23 @@ public class CLTest {
 	public void testNativeKernel() {
 		contextTest(new ContextTest() {
 			@Override
-			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
-				if ( (clGetDeviceInfoLong(device.address(), CL_DEVICE_EXECUTION_CAPABILITIES) & CL_EXEC_NATIVE_KERNEL) == 0 )
+			public void test(long platform, PointerBuffer ctxProps, long device) {
+				if ( (getDeviceInfoLong(device, CL_DEVICE_EXECUTION_CAPABILITIES) & CL_EXEC_NATIVE_KERNEL) == 0 )
 					return;
 
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.address(), CONTEXT_CALLBACK, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device, CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 
-				long queue = clCreateCommandQueue(context, device.address(), 0, errcode_ret);
+				long queue = clCreateCommandQueue(context, device, 0, errcode_ret);
 				checkCLError(errcode_ret);
 
 				// Create a buffer
 				final long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
 				checkCLError(errcode_ret);
 
-				final int BUFFER_SIZE = (int)clGetMemObjectInfoPointer(buffer, CL_MEM_SIZE);
+				final int BUFFER_SIZE = (int)getMemObjectInfoPointer(buffer, CL_MEM_SIZE);
 				assertEquals(BUFFER_SIZE, 128);
 
 				// Fill with non-random data
@@ -238,12 +246,12 @@ public class CLTest {
 	}
 
 	public void testMemObjectDestructor() {
-		contextTest(CL11_FILTER, new ContextTest() {
+		contextTest(new ContextTest() {
 			@Override
-			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
+			public void test(long platform, PointerBuffer ctxProps, long device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.address(), CONTEXT_CALLBACK, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device, CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 
 				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
@@ -261,13 +269,13 @@ public class CLTest {
 						}
 					}, NULL)
 				);
-				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
+				assertEquals(getMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
 
 				checkCLError(clRetainMemObject(buffer));
-				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 2);
+				assertEquals(getMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 2);
 
 				checkCLError(clReleaseMemObject(buffer));
-				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
+				assertEquals(getMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
 				assertEquals(eventLatch.getCount(), 1L);
 
 				checkCLError(clReleaseMemObject(buffer));
@@ -287,12 +295,12 @@ public class CLTest {
 	}
 
 	public void testEventCallback() {
-		contextTest(CL11_FILTER, new ContextTest() {
+		contextTest(new ContextTest() {
 			@Override
-			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
+			public void test(long platform, PointerBuffer ctxProps, long device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.address(), CONTEXT_CALLBACK, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device, CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
@@ -332,12 +340,12 @@ public class CLTest {
 	}
 
 	public void testSubBuffer() {
-		contextTest(CL11_FILTER, new ContextTest() {
+		contextTest(new ContextTest() {
 			@Override
-			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
+			public void test(long platform, PointerBuffer ctxProps, long device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.address(), CONTEXT_CALLBACK, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device, CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 

@@ -115,10 +115,6 @@ val PARAM_VALUE_SIZE_RET = Check(1)..nullable..size_t_p.OUT(
 )
 
 val CL10 = "CL10".nativeClassCL("CL10") {
-	javaImport (
-		"static org.lwjgl.opencl.Info.*"
-	)
-
 	documentation = "The core OpenCL 1.0 functionality."
 
 	IntConstant(
@@ -1954,7 +1950,22 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	(MapPointer("(int)clGetMemObjectInfoPointer(image, CL_MEM_SIZE)")..void_p)(
+	customMethod("""
+	private static long getMemObjectInfoPointer(long cl_mem, int param_name) {
+		MemoryStack stack = stackPush();
+		try {
+			PointerBuffer pp = stack.pointers(0);
+			int errcode = clGetMemObjectInfo(cl_mem, param_name, pp, null);
+			if ( DEBUG )
+				CLUtil.checkCLError(errcode);
+			return pp.get(0);
+		} finally {
+			stack.pop();
+		}
+	}
+	""")
+
+	(MapPointer("(int)getMemObjectInfoPointer(image, CL_MEM_SIZE)")..void_p)(
 		"EnqueueMapImage",
 		"""
 		Enqueues a command to map a region in the image object given by {@code image} into the host address space and returns a pointer to this mapped region.

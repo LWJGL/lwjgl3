@@ -8,18 +8,19 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.opencl.*;
 import org.lwjgl.system.FunctionProviderLocal;
+import org.lwjgl.system.MemoryStack;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL11.*;
 import static org.lwjgl.opencl.CLUtil.*;
-import static org.lwjgl.opencl.Info.*;
+import static org.lwjgl.opencl.InfoUtil.*;
 import static org.lwjgl.opencl.KHRICD.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 
@@ -29,17 +30,37 @@ public final class CLDemo {
 	}
 
 	public static void main(String[] args) {
-		List<CLPlatform> platforms = CLPlatform.getPlatforms();
-		if ( platforms.isEmpty() )
+		MemoryStack stack = stackPush();
+		try {
+			demo(stack);
+		} finally {
+			stack.pop();
+		}
+
+	}
+	private static void demo(MemoryStack stack) {
+		IntBuffer pi = stack.mallocInt(1);
+		checkCLError(clGetPlatformIDs(null, pi));
+		if ( pi.get(0) == 0 )
 			throw new RuntimeException("No OpenCL platforms found.");
 
-		IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
+		PointerBuffer platforms = stack.mallocPointer(pi.get(0));
+		checkCLError(clGetPlatformIDs(platforms, null));
 
-		for ( CLPlatform platform : platforms ) {
+		PointerBuffer ctxProps = stack.mallocPointer(3);
+		ctxProps
+			.put(0, CL_CONTEXT_PLATFORM)
+			.put(2, 0);
+
+		IntBuffer errcode_ret = stack.callocInt(1);
+		for ( int p = 0; p < platforms.capacity(); p++ ) {
+			long platform = platforms.get(p);
+			ctxProps.put(1, platform);
+
 			System.out.println("\n-------------------------");
-			System.out.printf("NEW PLATFORM: [0x%X]\n", platform.address());
+			System.out.printf("NEW PLATFORM: [0x%X]\n", platform);
 
-			CLCapabilities platformCaps = platform.getCapabilities();
+			CLCapabilities platformCaps = CL.createPlatformCapabilities(platform);
 
 			printPlatformInfo(platform, "CL_PLATFORM_PROFILE", CL_PLATFORM_PROFILE);
 			printPlatformInfo(platform, "CL_PLATFORM_VERSION", CL_PLATFORM_VERSION);
@@ -50,28 +71,29 @@ public final class CLDemo {
 				printPlatformInfo(platform, "CL_PLATFORM_ICD_SUFFIX_KHR", CL_PLATFORM_ICD_SUFFIX_KHR);
 			System.out.println("");
 
-			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(3);
-			ctxProps.put(CL_CONTEXT_PLATFORM).put(platform).put(0).flip();
+			checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, null, pi));
 
-			List<CLDevice> devices = platform.getDevices(CL_DEVICE_TYPE_ALL);
-			for ( CLDevice device : devices ) {
-				long cl_device_id = device.address();
-				CLCapabilities caps = device.getCapabilities();
+			PointerBuffer devices = stack.mallocPointer(pi.get(0));
+			checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, devices, null));
 
-				System.out.printf("\n\t** NEW DEVICE: [0x%X]\n", cl_device_id);
+			for ( int d = 0; d < devices.capacity(); d++ ) {
+				long device = devices.get(d);
+				CLCapabilities caps = CL.createDeviceCapabilities(device, platformCaps);
+
+				System.out.printf("\n\t** NEW DEVICE: [0x%X]\n", device);
 				System.out.print("\t");
 				System.out.println(caps);
 
-				System.out.println("\tCL_DEVICE_TYPE = " + clGetDeviceInfoLong(cl_device_id, CL_DEVICE_TYPE));
-				System.out.println("\tCL_DEVICE_VENDOR_ID = " + clGetDeviceInfoInt(cl_device_id, CL_DEVICE_VENDOR_ID));
-				System.out.println("\tCL_DEVICE_MAX_COMPUTE_UNITS = " + clGetDeviceInfoInt(cl_device_id, CL_DEVICE_MAX_COMPUTE_UNITS));
+				System.out.println("\tCL_DEVICE_TYPE = " + getDeviceInfoLong(device, CL_DEVICE_TYPE));
+				System.out.println("\tCL_DEVICE_VENDOR_ID = " + getDeviceInfoInt(device, CL_DEVICE_VENDOR_ID));
+				System.out.println("\tCL_DEVICE_MAX_COMPUTE_UNITS = " + getDeviceInfoInt(device, CL_DEVICE_MAX_COMPUTE_UNITS));
 				System.out
-					.println("\tCL_DEVICE_MAX_WORK_ITEM_DIMENSIONS = " + clGetDeviceInfoInt(cl_device_id, CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS));
-				System.out.println("\tCL_DEVICE_MAX_WORK_GROUP_SIZE = " + clGetDeviceInfoPointer(cl_device_id, CL_DEVICE_MAX_WORK_GROUP_SIZE));
-				System.out.println("\tCL_DEVICE_MAX_CLOCK_FREQUENCY = " + clGetDeviceInfoInt(cl_device_id, CL_DEVICE_MAX_CLOCK_FREQUENCY));
-				System.out.println("\tCL_DEVICE_ADDRESS_BITS = " + clGetDeviceInfoInt(cl_device_id, CL_DEVICE_ADDRESS_BITS));
-				System.out.println("\tCL_DEVICE_AVAILABLE = " + clGetDeviceInfoBoolean(cl_device_id, CL_DEVICE_AVAILABLE));
-				System.out.println("\tCL_DEVICE_COMPILER_AVAILABLE = " + clGetDeviceInfoBoolean(cl_device_id, CL_DEVICE_COMPILER_AVAILABLE));
+					.println("\tCL_DEVICE_MAX_WORK_ITEM_DIMENSIONS = " + getDeviceInfoInt(device, CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS));
+				System.out.println("\tCL_DEVICE_MAX_WORK_GROUP_SIZE = " + getDeviceInfoPointer(device, CL_DEVICE_MAX_WORK_GROUP_SIZE));
+				System.out.println("\tCL_DEVICE_MAX_CLOCK_FREQUENCY = " + getDeviceInfoInt(device, CL_DEVICE_MAX_CLOCK_FREQUENCY));
+				System.out.println("\tCL_DEVICE_ADDRESS_BITS = " + getDeviceInfoInt(device, CL_DEVICE_ADDRESS_BITS));
+				System.out.println("\tCL_DEVICE_AVAILABLE = " + (getDeviceInfoInt(device, CL_DEVICE_AVAILABLE) != 0));
+				System.out.println("\tCL_DEVICE_COMPILER_AVAILABLE = " + (getDeviceInfoInt(device, CL_DEVICE_COMPILER_AVAILABLE) != 0));
 
 				printDeviceInfo(device, "CL_DEVICE_NAME", CL_DEVICE_NAME);
 				printDeviceInfo(device, "CL_DEVICE_VENDOR", CL_DEVICE_VENDOR);
@@ -83,7 +105,7 @@ public final class CLDemo {
 					printDeviceInfo(device, "CL_DEVICE_OPENCL_C_VERSION", CL_DEVICE_OPENCL_C_VERSION);
 
 				CLContextCallback contextCB;
-				long context = clCreateContext(ctxProps, device.address(), contextCB = new CLContextCallback() {
+				long context = clCreateContext(ctxProps, device, contextCB = new CLContextCallback() {
 					@Override
 					public void invoke(long errinfo, long private_info, long cb, long user_data) {
 						System.err.println("[LWJGL] cl_context_callback");
@@ -152,10 +174,10 @@ public final class CLDemo {
 				} else
 					destructorLatch = null;
 
-				long exec_caps = clGetDeviceInfoLong(cl_device_id, CL_DEVICE_EXECUTION_CAPABILITIES);
+				long exec_caps = getDeviceInfoLong(device, CL_DEVICE_EXECUTION_CAPABILITIES);
 				if ( (exec_caps & CL_EXEC_NATIVE_KERNEL) == CL_EXEC_NATIVE_KERNEL ) {
 					System.out.println("\t\t-TRYING TO EXEC NATIVE KERNEL-");
-					long queue = clCreateCommandQueue(context, device.address(), NULL, errcode_ret);
+					long queue = clCreateCommandQueue(context, device, NULL, errcode_ret);
 
 					PointerBuffer ev = BufferUtils.createPointerBuffer(1);
 
@@ -257,12 +279,12 @@ public final class CLDemo {
 		System.out.println(name + ": " + provider.getFunctionAddress(platform, name));
 	}
 
-	private static void printPlatformInfo(CLPlatform platform, String param_name, int param) {
-		System.out.println("\t" + param_name + " = " + clGetPlatformInfoStringUTF8(platform.address(), param));
+	private static void printPlatformInfo(long platform, String param_name, int param) {
+		System.out.println("\t" + param_name + " = " + getPlatformInfoStringUTF8(platform, param));
 	}
 
-	private static void printDeviceInfo(CLDevice device, String param_name, int param) {
-		System.out.println("\t" + param_name + " = " + clGetDeviceInfoStringUTF8(device.address(), param));
+	private static void printDeviceInfo(long device, String param_name, int param) {
+		System.out.println("\t" + param_name + " = " + getDeviceInfoStringUTF8(device, param));
 	}
 
 	private static String getEventStatusName(int status) {

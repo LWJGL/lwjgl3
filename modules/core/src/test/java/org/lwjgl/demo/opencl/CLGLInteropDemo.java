@@ -4,24 +4,25 @@
  */
 package org.lwjgl.demo.opencl;
 
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opencl.CL;
 import org.lwjgl.opencl.CLCapabilities;
-import org.lwjgl.opencl.CLDevice;
-import org.lwjgl.opencl.CLPlatform;
-import org.lwjgl.opencl.CLPlatform.Filter;
-import org.lwjgl.opengl.GL;
+import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.Platform;
 
+import java.nio.IntBuffer;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opencl.CL10.*;
-import static org.lwjgl.opencl.Info.*;
+import static org.lwjgl.opencl.CLUtil.*;
+import static org.lwjgl.opencl.InfoUtil.*;
+import static org.lwjgl.opencl.InfoUtil.getPlatformInfoStringASCII;
 import static org.lwjgl.opencl.KHRICD.*;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /*
@@ -102,45 +103,60 @@ public final class CLGLInteropDemo {
 		if ( debugGL )
 			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
-		List<CLPlatform> platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
-			@Override
-			public boolean accept(CLPlatform platform) {
-				CLCapabilities caps = platform.getCapabilities();
-				return caps.cl_khr_gl_sharing || caps.cl_APPLE_gl_sharing;
+		List<Long> platforms;
+
+		MemoryStack stack = stackPush();
+		try {
+			IntBuffer pi = stack.mallocInt(1);
+			checkCLError(clGetPlatformIDs(null, pi));
+			if ( pi.get(0) == 0 )
+				throw new IllegalStateException("No OpenCL platforms found.");
+
+			PointerBuffer platformIDs = stack.mallocPointer(pi.get(0));
+			checkCLError(clGetPlatformIDs(platformIDs, null));
+
+			platforms = new ArrayList<Long>(platformIDs.capacity());
+
+			for ( int i = 0; i < platformIDs.capacity(); i++ ) {
+				long platform = platformIDs.get(i);
+				CLCapabilities caps = CL.createPlatformCapabilities(platform);
+				if ( caps.cl_khr_gl_sharing || caps.cl_APPLE_gl_sharing )
+					platforms.add(platform);
 			}
-		});
+		} finally {
+			stack.pop();
+		}
 
 		if ( platforms.isEmpty() )
 			throw new IllegalStateException("No OpenCL platform found that supports OpenGL context sharing.");
 
-		Collections.sort(platforms, new Comparator<CLPlatform>() {
+		Collections.sort(platforms, new Comparator<Long>() {
 			@Override
-			public int compare(CLPlatform p1, CLPlatform p2) {
+			public int compare(Long p1, Long p2) {
 				// Prefer platforms that support GPU devices
-				boolean gpu1 = !p1.getDevices(CL_DEVICE_TYPE_GPU).isEmpty();
-				boolean gpu2 = !p2.getDevices(CL_DEVICE_TYPE_GPU).isEmpty();
+				boolean gpu1 = !getDevices(p1, CL_DEVICE_TYPE_GPU).isEmpty();
+				boolean gpu2 = !getDevices(p2, CL_DEVICE_TYPE_GPU).isEmpty();
 				int cmp = gpu1 == gpu2 ? 0 : (gpu1 ? -1 : 1);
 				if ( cmp != 0 )
 					return cmp;
 
-				return clGetPlatformInfoStringUTF8(p1.address(), CL_PLATFORM_VENDOR).compareTo(
-					clGetPlatformInfoStringUTF8(p1.address(), CL_PLATFORM_VENDOR)
-				);
+				return getPlatformInfoStringUTF8(p1, CL_PLATFORM_VENDOR).compareTo(getPlatformInfoStringUTF8(p2, CL_PLATFORM_VENDOR));
 			}
 		});
 
-		final CLPlatform platform = platforms.get(0);
+		final long platform = platforms.get(0);
+		final CLCapabilities platformCaps = CL.createPlatformCapabilities(platform);
 
 		String platformID;
-		if ( platform.getCapabilities().cl_khr_icd )
-			platformID = clGetPlatformInfoStringASCII(platform.address(), CL_PLATFORM_ICD_SUFFIX_KHR); // less spammy
+		if ( platformCaps.cl_khr_icd )
+			platformID = getPlatformInfoStringASCII(platform, CL_PLATFORM_ICD_SUFFIX_KHR); // less spammy
 		else
-			platformID = clGetPlatformInfoStringUTF8(platform.address(), CL_PLATFORM_VENDOR);
+			platformID = getPlatformInfoStringUTF8(platform, CL_PLATFORM_VENDOR);
 
 		boolean hasCPU = false;
 		boolean hasGPU = false;
-		for ( CLDevice device : platform.getDevices(CL_DEVICE_TYPE_ALL) ) {
-			long type = clGetDeviceInfoLong(device.address(), CL_DEVICE_TYPE);
+		for ( Long device : getDevices(platform, CL_DEVICE_TYPE_ALL) ) {
+			long type = getDeviceInfoLong(device, CL_DEVICE_TYPE);
 			if ( type == CL_DEVICE_TYPE_CPU )
 				hasCPU = true;
 			else if ( type == CL_DEVICE_TYPE_GPU )
@@ -166,7 +182,7 @@ public final class CLGLInteropDemo {
 				public void run() {
 					Mandelbrot demo = null;
 					try {
-						demo = new Mandelbrot(platform, window, deviceType, debugGL, maxIterations);
+						demo = new Mandelbrot(platform, platformCaps, window, deviceType, debugGL, maxIterations);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -253,17 +269,31 @@ public final class CLGLInteropDemo {
 		}
 	}
 
-	private static String getOpenGLVendor() {
-		long window = glfwCreateWindow(100, 100, "dummy", NULL, NULL);
+	private static List<Long> getDevices(long platform, int deviceType) {
+		MemoryStack stack = stackPush();
 
+		List<Long> devices;
 		try {
-			glfwMakeContextCurrent(window);
-			GL.createCapabilities();
+			IntBuffer pi = stack.mallocInt(1);
+			int errcode = clGetDeviceIDs(platform, deviceType, null, pi);
+			if ( errcode == CL_DEVICE_NOT_FOUND )
+				devices = Collections.emptyList();
+			else {
+				checkCLError(errcode);
 
-			return glGetString(GL_VENDOR);
+				PointerBuffer deviceIDs = stack.mallocPointer(pi.get(0));
+				checkCLError(clGetDeviceIDs(platform, deviceType, deviceIDs, null));
+
+				devices = new ArrayList<Long>(deviceIDs.capacity());
+
+				for ( int i = 0; i < deviceIDs.capacity(); i++ )
+					devices.add(deviceIDs.get(i));
+			}
 		} finally {
-			glfwDestroyWindow(window);
+			stack.pop();
 		}
+
+		return devices;
 	}
 
 	static class GLFWWindow {

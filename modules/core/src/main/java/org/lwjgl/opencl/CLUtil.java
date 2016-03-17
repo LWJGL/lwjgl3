@@ -4,6 +4,9 @@
  */
 package org.lwjgl.opencl;
 
+import org.lwjgl.PointerBuffer;
+import org.lwjgl.system.MemoryStack;
+
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -13,6 +16,8 @@ import java.util.Map;
 
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** OpenCL utilities. */
 public final class CLUtil {
@@ -95,6 +100,38 @@ public final class CLUtil {
 			errname = apiUnknownToken(errcode);
 
 		return errname;
+	}
+
+	static String getPlatformInfoStringASCII(long cl_platform_id, int param_name) {
+		MemoryStack stack = stackPush();
+		try {
+			PointerBuffer pp = stack.mallocPointer(1);
+			checkCLError(clGetPlatformInfo(cl_platform_id, param_name, (ByteBuffer)null, pp));
+			int bytes = (int)pp.get(0);
+
+			ByteBuffer buffer = stack.malloc(bytes);
+			checkCLError(clGetPlatformInfo(cl_platform_id, param_name, buffer, null));
+
+			return memDecodeASCII(buffer, bytes - 1);
+		} finally {
+			stack.pop();
+		}
+	}
+
+	static String getDeviceInfoStringASCII(long cl_device_id, int param_name) {
+		MemoryStack stack = stackPush();
+		try {
+			PointerBuffer pp = stack.mallocPointer(1);
+			checkCLError(clGetDeviceInfo(cl_device_id, param_name, (ByteBuffer)null, pp));
+			int bytes = (int)pp.get(0);
+
+			ByteBuffer buffer = stack.malloc(bytes);
+			checkCLError(clGetDeviceInfo(cl_device_id, param_name, buffer, null));
+
+			return memDecodeASCII(buffer, bytes - 1);
+		} finally {
+			stack.pop();
+		}
 	}
 
 }

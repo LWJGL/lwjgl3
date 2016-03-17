@@ -8,10 +8,10 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opencl.*;
-import org.lwjgl.opencl.CLPlatform.Filter;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLUtil;
+import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.Platform;
 import org.lwjgl.system.libffi.Closure;
 
@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
@@ -33,7 +32,7 @@ import static org.lwjgl.glfw.GLFWNativeX11.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
 import static org.lwjgl.opencl.CLUtil.*;
-import static org.lwjgl.opencl.Info.*;
+import static org.lwjgl.opencl.InfoUtil.*;
 import static org.lwjgl.opencl.KHRGLSharing.*;
 import static org.lwjgl.opengl.ARBCLEvent.*;
 import static org.lwjgl.opengl.CGL.*;
@@ -79,8 +78,10 @@ public class Mandelbrot {
 
 	private final IntBuffer errcode_ret;
 
-	private final CLPlatform platform;
-	private final CLDevice   device;
+	private final long platform;
+	private final long device;
+
+	private final CLCapabilities deviceCaps;
 
 	private final CLContextCallback clContextCB;
 
@@ -153,7 +154,7 @@ public class Mandelbrot {
 
 	Closure debugProc;
 
-	public Mandelbrot(CLPlatform platform, GLFWWindow window, int deviceType, boolean debugGL, int maxIterations) {
+	public Mandelbrot(long platform, CLCapabilities platformCaps, GLFWWindow window, int deviceType, boolean debugGL, int maxIterations) {
 		this.platform = platform;
 
 		this.window = window;
@@ -182,20 +183,17 @@ public class Mandelbrot {
 
 		try {
 			// Find devices with GL sharing support
-			Filter<CLDevice> glSharingFilter = new Filter<CLDevice>() {
-				@Override
-				public boolean accept(CLDevice device) {
-					CLCapabilities caps = device.getCapabilities();
-					return caps.cl_khr_gl_sharing || caps.cl_APPLE_gl_sharing;
-				}
-			};
-			List<CLDevice> devices = platform.getDevices(deviceType, glSharingFilter);
-			if ( devices == null ) {
-				devices = platform.getDevices(CL_DEVICE_TYPE_CPU, glSharingFilter);
-				if ( devices == null )
-					throw new RuntimeException("No OpenCL devices found with KHR_gl_sharing support.");
+			{
+				long device = getDevice(platform, platformCaps, deviceType);
+				if ( device == NULL )
+					device = getDevice(platform, platformCaps, CL_DEVICE_TYPE_CPU);
+
+				if ( device == NULL )
+					throw new RuntimeException("No OpenCL devices found with OpenGL sharing support.");
+
+				this.device = device;
+				this.deviceCaps = CL.createDeviceCapabilities(device, platformCaps);
 			}
-			this.device = devices.get(0);
 
 			// Create the context
 			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(7);
@@ -224,11 +222,10 @@ public class Mandelbrot {
 				.put(platform)
 				.put(NULL)
 				.flip();
-			clContext = clCreateContext(ctxProps, device.address(), clContextCB = new CLContextCallback() {
+			clContext = clCreateContext(ctxProps, device, clContextCB = new CLContextCallback() {
 				@Override
 				public void invoke(long errinfo, long private_info, long cb, long user_data) {
-					System.err.println("[LWJGL] cl_context_callback");
-					System.err.println("\tInfo: " + memDecodeUTF8(errinfo));
+					log(String.format("cl_context_callback\n\tInfo: %s", memDecodeUTF8(errinfo)));
 				}
 			}, NULL, errcode_ret);
 			checkCLError(errcode_ret);
@@ -242,7 +239,7 @@ public class Mandelbrot {
 			checkCLError(errcode_ret);
 
 			// create command queue and upload color map buffer
-			clQueue = clCreateCommandQueue(clContext, device.address(), NULL, errcode_ret);
+			clQueue = clCreateCommandQueue(clContext, device, NULL, errcode_ret);
 			checkCLError(errcode_ret);
 
 			// load program(s)
@@ -267,7 +264,7 @@ public class Mandelbrot {
 			);
 
 			// Detect CLtoGL synchronization method
-			syncCLtoGL = !device.getCapabilities().cl_khr_gl_event;
+			syncCLtoGL = !deviceCaps.cl_khr_gl_event;
 			log(syncCLtoGL
 				    ? "CL to GL sync: Using glFinish"
 				    : "CL to GL sync: Using implicit sync (cl_khr_gl_event)"
@@ -306,7 +303,7 @@ public class Mandelbrot {
 			glCompileShader(vsh);
 			String log = glGetShaderInfoLog(vsh, glGetShaderi(vsh, GL_INFO_LOG_LENGTH));
 			if ( !log.isEmpty() )
-				System.err.println("VERTEX SHADER LOG: " + log);
+				log(String.format("VERTEX SHADER LOG: %s", log));
 
 			fsh = glCreateShader(GL_FRAGMENT_SHADER);
 			glShaderSource(fsh, "#version 150\n" +
@@ -323,7 +320,7 @@ public class Mandelbrot {
 			glCompileShader(fsh);
 			log = glGetShaderInfoLog(fsh, glGetShaderi(fsh, GL_INFO_LOG_LENGTH));
 			if ( !log.isEmpty() )
-				System.err.println("FRAGMENT SHADER LOG: " + log);
+				log(String.format("FRAGMENT SHADER LOG: %s", log));
 
 			glProgram = glCreateProgram();
 			glAttachShader(glProgram, vsh);
@@ -331,7 +328,7 @@ public class Mandelbrot {
 			glLinkProgram(glProgram);
 			log = glGetProgramInfoLog(glProgram, glGetProgrami(glProgram, GL_INFO_LOG_LENGTH));
 			if ( !log.isEmpty() )
-				System.err.println("PROGRAM LOG: " + log);
+				log(String.format("PROGRAM LOG: %s", log));
 
 			int posIN = glGetAttribLocation(glProgram, "posIN");
 			int texIN = glGetAttribLocation(glProgram, "texIN");
@@ -491,6 +488,32 @@ public class Mandelbrot {
 		});
 	}
 
+	private static long getDevice(long platform, CLCapabilities platformCaps, int deviceType) {
+		MemoryStack stack = stackPush();
+
+		try {
+			IntBuffer pi = stack.mallocInt(1);
+			checkCLError(clGetDeviceIDs(platform, deviceType, null, pi));
+
+			PointerBuffer devices = stack.mallocPointer(pi.get(0));
+			checkCLError(clGetDeviceIDs(platform, deviceType, devices, null));
+
+			for ( int i = 0; i < devices.capacity(); i++ ) {
+				long device = devices.get(i);
+
+				CLCapabilities caps = CL.createDeviceCapabilities(device, platformCaps);
+				if ( !(caps.cl_khr_gl_sharing || caps.cl_APPLE_gl_sharing) )
+					continue;
+
+				return device;
+			}
+		} finally {
+			stack.pop();
+		}
+
+		return NULL;
+	}
+
 	private void log(String msg) {
 		System.err.format("[%s] %s\n", window.ID, msg);
 	}
@@ -520,7 +543,7 @@ public class Mandelbrot {
 				startTime = System.currentTimeMillis() + 5000;
 				log(String.format(
 					"%s: %d frames in 5 seconds = %.2f",
-					clGetPlatformInfoStringUTF8(platform.address(), CL_PLATFORM_VENDOR),
+					getPlatformInfoStringUTF8(platform, CL_PLATFORM_VENDOR),
 					fps,
 					fps / (timeUsed / 1000f)
 				));
@@ -639,7 +662,7 @@ public class Mandelbrot {
 
 		clSetKernelArg1i(clKernel, 0, ww);
 		clSetKernelArg1i(clKernel, 1, wh);
-		if ( !is64bit || !isDoubleFPAvailable(device) ) {
+		if ( !is64bit || !isDoubleFPAvailable(deviceCaps) ) {
 			clSetKernelArg1f(clKernel, 2, (float)minX);
 			clSetKernelArg1f(clKernel, 3, (float)minY);
 
@@ -700,8 +723,7 @@ public class Mandelbrot {
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	}
 
-	private static boolean isDoubleFPAvailable(CLDevice device) {
-		CLCapabilities caps = device.getCapabilities();
+	private static boolean isDoubleFPAvailable(CLCapabilities caps) {
 		return caps.cl_khr_fp64 || caps.cl_amd_fp64;
 	}
 
@@ -724,31 +746,29 @@ public class Mandelbrot {
 
 		// disable 64bit floating point math if not available
 		StringBuilder options = new StringBuilder("-D USE_TEXTURE");
-		CLCapabilities caps = device.getCapabilities();
-		if ( doublePrecision && isDoubleFPAvailable(device) ) {
+		if ( doublePrecision && isDoubleFPAvailable(deviceCaps) ) {
 			//cl_khr_fp64
 			options.append(" -D DOUBLE_FP");
 
 			// AMD's verson of double precision floating point math
-			if ( !caps.cl_khr_fp64 && caps.cl_amd_fp64 )
+			if ( !deviceCaps.cl_khr_fp64 && deviceCaps.cl_amd_fp64 )
 				options.append(" -D AMD_FP");
 		}
 
 		log("OpenCL COMPILER OPTIONS: " + options);
 
-		final long cl_device_id = device.address();
-		final CLProgramCallback buildCallback;
-		int errcode = clBuildProgram(clProgram, cl_device_id, options, buildCallback = new CLProgramCallback() {
+		CLProgramCallback buildCallback;
+		int errcode = clBuildProgram(clProgram, device, options, buildCallback = new CLProgramCallback() {
 			@Override
 			public void invoke(long program, long user_data) {
-				System.err.printf(
-					"The cl_program [0x%X] was built %s\n",
+				log(String.format(
+					"The cl_program [0x%X] was built %s",
 					program,
-					clGetProgramBuildInfoInt(program, cl_device_id, CL_PROGRAM_BUILD_STATUS) == CL_SUCCESS ? "successfully" : "unsuccessfully"
-				);
-				String log = clGetProgramBuildInfoStringASCII(program, cl_device_id, CL_PROGRAM_BUILD_LOG);
+					getProgramBuildInfoInt(program, device, CL_PROGRAM_BUILD_STATUS) == CL_SUCCESS ? "successfully" : "unsuccessfully"
+				));
+				String log = getProgramBuildInfoStringASCII(program, device, CL_PROGRAM_BUILD_LOG);
 				if ( !log.isEmpty() )
-					System.err.printf("BUILD LOG:\n----\n%s\n-----\n", log);
+					log(String.format("BUILD LOG:\n----\n%s\n-----", log));
 
 				latch.countDown();
 			}
