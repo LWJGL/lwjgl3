@@ -2425,7 +2425,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			ICE,
 			"$INVALID_VALUE if {@code device_list} is $NULL or {@code num_devices} is zero.",
 			"$INVALID_DEVICE if OpenCL devices listed in {@code device_list} are not in the list of devices associated with {@code context}.",
-			"$INVALID_VALUE if {@code lengths} or {@code binaries} are NULL or if any entry in {@code lengths[i]} is zero or {@code binaries[i]} is $NULL.",
+			"$INVALID_VALUE if {@code lengths} or {@code binaries} are $NULL or if any entry in {@code lengths[i]} is zero or {@code binaries[i]} is $NULL.",
 			"$INVALID_BINARY if an invalid program binary was encountered for any device. {@code binary_status} will return specific status for each device.",
 			OORE,
 			OOHME
@@ -2508,7 +2508,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			that the callback function is thread-safe.
 			"""
 		),
-		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
+		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""

@@ -128,7 +128,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"Creates an immutable string from a C string.",
 
 		ALLOCATOR,
-		const..char_p.IN("cStr", "the NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
+		const..char_p.IN("cStr", "the $NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
 		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.")
 	)
 
@@ -137,7 +137,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"Creates a CFString object from an external C string buffer that might serve as the backing store for the object.",
 
 		ALLOCATOR,
-		const..char_p.IN("cStr", "the NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
+		const..char_p.IN("cStr", "the $NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
 		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding."),
 		nullable..CFAllocatorRef.IN(
 			"contentsDeallocator",

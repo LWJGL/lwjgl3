@@ -597,7 +597,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
+		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""
@@ -694,17 +694,17 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			If {@code pfn_notify} is $NULL, {@code clLinkProgram} does not return until the linker has completed.
 			"""
 		),
-		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
+		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""
 		a valid non-zero program object, if the linking operation can begin. The linking operation can begin if the context, list of devices, input programs and
 		linker options specified are all valid and appropriate host and device resources needed to perform the link are available.
 
-		If {@code pfn_notify} is NULL, the $errcode_ret will be set to $SUCCESS if the link operation was successful and #LINK_PROGRAM_FAILURE if
+		If {@code pfn_notify} is $NULL, the $errcode_ret will be set to $SUCCESS if the link operation was successful and #LINK_PROGRAM_FAILURE if
 		there is a failure to link the compiled binaries and/or libraries.
 
-		If {@code pfn_notify} is not NULL, {@code clLinkProgram} does not have to wait until the linker to complete and can return $SUCCESS in $errcode_ret
+		If {@code pfn_notify} is not $NULL, {@code clLinkProgram} does not have to wait until the linker to complete and can return $SUCCESS in $errcode_ret
 		if the linking operation can begin. The {@code pfn_notify} callback function will return a $SUCCESS or #LINK_PROGRAM_FAILURE if the
 		linking operation was successful or not.
 

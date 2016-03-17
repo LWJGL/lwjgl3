@@ -607,8 +607,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Check(1)..nullable..GLsizei_p.OUT(
 			"length",
 			"""
-			a buffer in which to return the actual number of characters written by the GL into {@code source}, excluding the null termination. If {@code length} is NULL
-			then the GL ignores this parameter.
+			a buffer in which to return the actual number of characters written by the GL into {@code source}, excluding the null termination. If
+			{@code length} is $NULL then the GL ignores this parameter.
 			"""
 		),
 		Return(

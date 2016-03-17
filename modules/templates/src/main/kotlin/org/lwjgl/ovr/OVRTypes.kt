@@ -536,7 +536,7 @@ val ovrLayerEyeMatrix = struct(OVR_PACKAGE, "OVRLayerEyeMatrix", nativeName = "o
 			ColorTexture[0] and ColorTexture[1], respectively.
 			""",
 			"""
-			ColorTexture[0] contains both the left and right renderings, ColorTexture[1] is NULL, and Viewport[0] and Viewport[1] refer to sub-rects with
+			ColorTexture[0] contains both the left and right renderings, ColorTexture[1] is $NULL, and Viewport[0] and Viewport[1] refer to sub-rects with
 			ColorTexture[0].
 			""",
 			"ColorTexture[0] contains a single monoscopic rendering, and Viewport[0] and Viewport[1] both refer to that rendering."

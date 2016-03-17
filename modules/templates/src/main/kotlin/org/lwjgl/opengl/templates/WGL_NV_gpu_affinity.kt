@@ -71,10 +71,10 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		affinity mask. An affinity-DC can be created directly, using the new function {@code wglCreateAffinityDCNV} and also indirectly by calling
 		WGLARBPbuffer#CreatePbufferARB() followed by WGLARBPbuffer#GetPbufferDCARB().
 
-		If successful, the function returns an affinity-DC handle. If it fails, NULL will be returned.
+		If successful, the function returns an affinity-DC handle. If it fails, $NULL will be returned.
 		""",
 
-		NullTerminated..const..HGPUNV_p.IN("gpuList", "a NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
+		NullTerminated..const..HGPUNV_p.IN("gpuList", "a $NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
 	)
 
 	BOOL(

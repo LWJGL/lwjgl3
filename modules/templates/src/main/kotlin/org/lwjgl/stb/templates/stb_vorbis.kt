@@ -159,7 +159,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		Note that on resynch, stb_vorbis will rarely consume all of the buffer, instead only {@code datablock_length_in_bytes-3} or less. This is because it
 		wants to avoid missing parts of a page header if they cross a datablock boundary, without writing state-machiney code to record a partial detection.
 
-		The number of channels returned are stored in *channels (which can be NULL -- it is always the same as the number of channels reported by #get_info()).
+		The number of channels returned are stored in *channels (which can be $NULL -- it is always the same as the number of channels reported by #get_info()).
 		{@code *output} will contain an array of {@code float*} buffers, one per channel. In other words, {@code (*output)[0][0]} contains the first sample
 		from the first channel, and {@code (*output)[1][0]} contains the first sample from the second channel.
 		""",

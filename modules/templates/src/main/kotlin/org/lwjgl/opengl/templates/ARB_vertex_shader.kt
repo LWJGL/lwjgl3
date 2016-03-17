@@ -237,7 +237,10 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 		AutoSize("name")..GLsizei.IN("maxLength", "the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}"),
 		Check(1)..nullable..GLsizei_p.OUT(
 			"length",
-			"the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than NULL is passed"
+			"""
+			the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than
+			$NULL is passed
+			"""
 		),
 		Check(1)..GLint_p.OUT("size", "the size of the attribute variable"),
 		Check(1)..GLenum_p.OUT("type", "the data type of the attribute variable"),

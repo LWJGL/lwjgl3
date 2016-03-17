@@ -59,8 +59,8 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"""
 		Allows the application to connect to a device.
 
-		If the function returns NULL, then no sound driver/device has been found. The argument is a null terminated string that requests a certain device or
-		device configuration. If NULL is specified, the implementation will provide an implementation specific default.
+		If the function returns $NULL, then no sound driver/device has been found. The argument is a null terminated string that requests a certain device or
+		device configuration. If $NULL is specified, the implementation will provide an implementation specific default.
 		""",
 
 		nullable..const..ALCcharUTF8_p.IN("deviceSpecifier", "the requested device or device configuration")
@@ -95,7 +95,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"""
 		Makes a context current with respect to OpenAL operation.
 
-		The context parameter can be NULL or a valid context pointer. Using NULL results in no context being current, which is useful when shutting OpenAL down.
+		The context parameter can be $NULL or a valid context pointer. Using $NULL results in no context being current, which is useful when shutting OpenAL down.
 		The operation will apply to the device that the context was created for.
 
 		For each OS process (usually this means for each application), only one context can be current at any given time. All AL commands apply to the current
@@ -136,7 +136,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"""
 		Destroys a context.
 
-		The correct way to destroy a context is to first release it using alcMakeCurrent with a NULL context. Applications should not attempt to destroy a
+		The correct way to destroy a context is to first release it using alcMakeCurrent with a $NULL context. Applications should not attempt to destroy a
 		current context – doing so will not work and will result in an ALC_INVALID_OPERATION error. All sources within a context will automatically be deleted
 		during context destruction.
 		""",
@@ -146,7 +146,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 
 	ALCcontext_p(
 		"GetCurrentContext",
-		"Queries for, and obtains a handle to, the current context for the application. If there is no current context, NULL is returned."
+		"Queries for, and obtains a handle to, the current context for the application. If there is no current context, $NULL is returned."
 	)
 
 	ALCdevice_p(
@@ -161,7 +161,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"""
 		Verifies that a given extension is available for the current context and the device it is associated with.
 
-		Invalid and unsupported string tokens return ALC_FALSE. A NULL deviceHandle is acceptable. {@code extName} is not case sensitive – the implementation
+		Invalid and unsupported string tokens return ALC_FALSE. A $NULL deviceHandle is acceptable. {@code extName} is not case sensitive – the implementation
 		will convert the name to all upper-case internally (and will express extension names in upper-case).
 		""",
 
@@ -177,8 +177,8 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		The application is expected to verify the applicability of an extension or core function entry point before requesting it by name, by use of
 		#IsExtensionPresent().
 
-		Entry points can be device specific, but are not context specific. Using a NULL device handle does not guarantee that the entry point is returned, even
-		if available for one of the available devices.
+		Entry points can be device specific, but are not context specific. Using a $NULL device handle does not guarantee that the entry point is returned,
+		even if available for one of the available devices.
 		""",
 
 		nullable..const..ALCdevice_p.IN("deviceHandle", "the device to query"),
@@ -190,7 +190,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"""
 		Returns extension enum values.
 
-		Enumeration/token values are device independent, but tokens defined for extensions might not be present for a given device. Using a NULL handle is
+		Enumeration/token values are device independent, but tokens defined for extensions might not be present for a given device. Using a $NULL handle is
 		legal, but only the tokens defined by the AL core are guaranteed. Availability of extension tokens depends on the ALC extension.
 		""",
 
