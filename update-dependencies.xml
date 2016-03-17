@@ -12,7 +12,7 @@ Downloads LWJGL's library dependencies.
 	<!-- *********************************** -->
 	<property name="testng" value="6.8.21"/>
 	<property name="jcommander" value="1.48"/>
-	<property name="kotlinc-build" value="1.0.0"/>
+	<property name="kotlinc-build" value="1.0.1"/>
 	<!-- *********************************** -->
 
 	<target name="-dependencies-uptodate">
@@ -56,7 +56,7 @@ Downloads LWJGL's library dependencies.
 		<property name="kotlinc-archive" value="kotlin-compiler-${kotlinc-build}.zip"/>
 
 		<!-- Download new build -->
-		<get taskname="kotlinc" src="https://github.com/JetBrains/kotlin/releases/download/build-${kotlinc-build}/${kotlinc-archive}" dest="${lib}" verbose="true"/>
+		<get taskname="kotlinc" src="https://github.com/JetBrains/kotlin/releases/download/${kotlinc-build}/${kotlinc-archive}" dest="${lib}" verbose="true"/>
 
 		<!-- Delete current build -->
 		<delete dir="${kotlinc}" taskname="kotlinc"/>
