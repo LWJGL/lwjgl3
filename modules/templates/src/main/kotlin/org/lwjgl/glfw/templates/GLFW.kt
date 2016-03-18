@@ -1387,7 +1387,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose monitor, size or video mode to set"),
-		GLFWmonitor.IN("monitor", "the desired monitor, or $NULL to set windowed mode"),
+		nullable..GLFWmonitor.IN("monitor", "the desired monitor, or $NULL to set windowed mode"),
 		int.IN("xpos", "the desired x-coordinate of the upper-left corner of the client area"),
 		int.IN("ypos", "the desired y-coordinate of the upper-left corner of the client area"),
 		int.IN("width", "the desired with, in screen coordinates, of the client area or video mode"),

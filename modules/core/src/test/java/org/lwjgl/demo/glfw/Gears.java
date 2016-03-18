@@ -8,11 +8,15 @@ import org.lwjgl.demo.opengl.AbstractGears;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
+import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.libffi.Closure;
+
+import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** The Gears demo implemented using GLFW. */
@@ -25,8 +29,6 @@ public class Gears extends AbstractGears {
 	private Closure debugProc;
 
 	private long window;
-
-	private Boolean toggleMode;
 
 	public static void main(String[] args) {
 		new Gears().run();
@@ -57,7 +59,32 @@ public class Gears extends AbstractGears {
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
-		keyCB = new GLFWKeyCallback() {
+		int WIDTH = 300;
+		int HEIGHT = 300;
+
+		long window = glfwCreateWindow(WIDTH, HEIGHT, "GLFW Gears Demo", NULL, NULL);
+		if ( window == NULL )
+			throw new RuntimeException("Failed to create the GLFW window");
+
+		glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, GLFW_DONT_CARE, GLFW_DONT_CARE);
+		glfwSetWindowAspectRatio(window, 1, 1);
+
+		final long monitor = glfwGetPrimaryMonitor();
+		final GLFWVidMode vidmode = glfwGetVideoMode(monitor);
+
+		// Center window
+		glfwSetWindowPos(
+			window,
+			(vidmode.width() - WIDTH) / 2,
+			(vidmode.height() - HEIGHT) / 2
+		);
+
+		glfwSetKeyCallback(window, keyCB = new GLFWKeyCallback() {
+			private int xpos;
+			private int ypos;
+			private int width;
+			private int height;
+
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
 				if ( action != GLFW_RELEASE )
@@ -68,12 +95,28 @@ public class Gears extends AbstractGears {
 						glfwSetWindowShouldClose(window, GLFW_TRUE);
 						break;
 					case GLFW_KEY_F:
-						if ( glfwGetWindowMonitor(window) == NULL )
-							toggleMode = true;
+						if ( glfwGetWindowMonitor(window) == NULL ) {
+							MemoryStack s = stackPush();
+							try {
+								IntBuffer a = s.ints(0);
+								IntBuffer b = s.ints(0);
+								glfwGetWindowPos(window, a, b);
+								xpos = a.get(0);
+								ypos = b.get(0);
+
+								glfwGetWindowSize(window, a, b);
+								width = a.get(0);
+								height = b.get(0);
+							} finally {
+								s.pop();
+							}
+							glfwSetWindowMonitor(window, monitor, 0, 0, vidmode.width(), vidmode.height(), vidmode.refreshRate());
+							glfwSwapInterval(1);
+						}
 						break;
 					case GLFW_KEY_W:
 						if ( glfwGetWindowMonitor(window) != NULL )
-							toggleMode = false;
+							glfwSetWindowMonitor(window, NULL, xpos, ypos, width, height, 0);
 						break;
 					case GLFW_KEY_G:
 						glfwSetInputMode(window, GLFW_CURSOR, glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL
@@ -83,56 +126,14 @@ public class Gears extends AbstractGears {
 						break;
 				}
 			}
-		};
+		});
 
-		windowSizeCB = new GLFWWindowSizeCallback() {
+		glfwSetWindowSizeCallback(window, windowSizeCB = new GLFWWindowSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
 				glViewport(0, 0, width, height);
 			}
-		};
-
-		createWindow(false);
-	}
-
-	private void createWindow(boolean fullscreen) {
-		int WIDTH = 300;
-		int HEIGHT = 300;
-
-		long monitor = glfwGetPrimaryMonitor();
-		GLFWVidMode vidmode = glfwGetVideoMode(monitor);
-
-		long window = fullscreen
-			? glfwCreateWindow(vidmode.width(), vidmode.height(), "GLFW Gears Demo", monitor, this.window)
-			: glfwCreateWindow(WIDTH, HEIGHT, "GLFW Gears Demo", NULL, this.window);
-
-		if ( window == NULL )
-			throw new RuntimeException("Failed to create the GLFW window");
-
-		glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, GLFW_DONT_CARE, GLFW_DONT_CARE);
-		glfwSetWindowAspectRatio(window, 1, 1);
-
-		// Destroy old window
-		if ( this.window != NULL ) {
-			glfwSetInputMode(this.window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-			glfwDestroyWindow(this.window);
-			if ( debugProc != null )
-				debugProc.free();
-		}
-
-		keyCB.set(window);
-		windowSizeCB.set(window);
-
-		if ( fullscreen )
-			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		else {
-			// Center window
-			glfwSetWindowPos(
-				window,
-				(vidmode.width() - WIDTH) / 2,
-				(vidmode.height() - HEIGHT) / 2
-			);
-		}
+		});
 
 		glfwMakeContextCurrent(window);
 		GL.createCapabilities();
@@ -150,13 +151,6 @@ public class Gears extends AbstractGears {
 
 		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
 			glfwPollEvents();
-
-			if ( toggleMode != null ) {
-				// Toggle between windowed and fullscreen modes
-				createWindow(toggleMode);
-				initGLState();
-				toggleMode = null;
-			}
 
 			renderLoop();
 
