@@ -60,29 +60,6 @@ public class MemoryStack {
 		this.frames = new int[16];
 	}
 
-	/** Returns the stack of the current thread. */
-	public static MemoryStack stackGet() {
-		return tlsGet().stack;
-	}
-
-	/**
-	 * Calls {@link #push} on the stack of the current thread.
-	 *
-	 * @return the stack of the current thread.
-	 */
-	public static MemoryStack stackPush() {
-		return tlsGet().stack.push();
-	}
-
-	/**
-	 * Calls {@link #pop} on the stack of the current thread.
-	 *
-	 * @return the stack of the current thread.
-	 */
-	public static MemoryStack stackPop() {
-		return tlsGet().stack.pop();
-	}
-
 	/**
 	 * Stores the current stack pointer and pushes a new frame to the stack.
 	 *
@@ -415,5 +392,176 @@ public class MemoryStack {
 			buffer.put(i, values[i]);
 		return buffer;
 	}
+
+	// -----------------------------------------------------
+	// -----------------------------------------------------
+	// -----------------------------------------------------
+
+	/** Returns the stack of the current thread. */
+	public static MemoryStack stackGet() {
+		return tlsGet().stack;
+	}
+
+	/**
+	 * Calls {@link #push} on the stack of the current thread.
+	 *
+	 * @return the stack of the current thread.
+	 */
+	public static MemoryStack stackPush() {
+		return tlsGet().stack.push();
+	}
+
+	/**
+	 * Calls {@link #pop} on the stack of the current thread.
+	 *
+	 * @return the stack of the current thread.
+	 */
+	public static MemoryStack stackPop() {
+		return tlsGet().stack.pop();
+	}
+
+	/** Thread-local version of {@link #nmalloc(int)}. */
+	public static long nstackMalloc(int size) { return stackGet().nmalloc(size); }
+	/** Thread-local version of {@link #nmalloc(int, int)}. */
+	public static long nstackMalloc(int alignment, int size) { return stackGet().nmalloc(alignment, size); }
+	/** Thread-local version of {@link #ncalloc}. */
+	public static long nstackCalloc(int alignment, int num, int size) { return stackGet().ncalloc(alignment, num, size); }
+
+	// -------------------------------------------------
+
+	/** Thread-local version of {@link #malloc}. */
+	public static ByteBuffer stackMalloc(int size) { return stackGet().malloc(size); }
+	/** Thread-local version of {@link #calloc}. */
+	public static ByteBuffer stackCalloc(int size) { return stackGet().calloc(size); }
+
+	/** Thread-local version of {@link #bytes(byte)}. */
+	public static ByteBuffer stackBytes(byte x) { return stackGet().bytes(x); }
+	/** Thread-local version of {@link #bytes(byte, byte)}. */
+	public static ByteBuffer stackBytes(byte x, byte y) { return stackGet().bytes(x, y); }
+	/** Thread-local version of {@link #bytes(byte, byte, byte)}. */
+	public static ByteBuffer stackBytes(byte x, byte y, byte z) { return stackGet().bytes(x, y, z); }
+	/** Thread-local version of {@link #bytes(byte, byte, byte, byte)}. */
+	public static ByteBuffer stackBytes(byte x, byte y, byte z, byte w) { return stackGet().bytes(x, y, z, w); }
+	/** Thread-local version of {@link #bytes(byte...)}. */
+	public static ByteBuffer stackBytes(byte... values) { return stackGet().bytes(values); }
+
+	// -------------------------------------------------
+
+	/** Thread-local version of {@link #mallocShort}. */
+	public static ShortBuffer stackMallocShort(int size) { return stackGet().mallocShort(size); }
+	/** Thread-local version of {@link #callocShort}. */
+	public static ShortBuffer stackCallocShort(int size) { return stackGet().callocShort(size); }
+
+	/** Thread-local version of {@link #shorts(short)}. */
+	public static ShortBuffer stackShorts(short x) { return stackGet().shorts(x); }
+	/** Thread-local version of {@link #shorts(short, short)}. */
+	public static ShortBuffer stackShorts(short x, short y) { return stackGet().shorts(x, y); }
+	/** Thread-local version of {@link #shorts(short, short, short)}. */
+	public static ShortBuffer stackShorts(short x, short y, short z) { return stackGet().shorts(x, y, z); }
+	/** Thread-local version of {@link #shorts(short, short, short, short)}. */
+	public static ShortBuffer stackShorts(short x, short y, short z, short w) { return stackGet().shorts(x, y, z, w); }
+	/** Thread-local version of {@link #shorts(short...)}. */
+	public static ShortBuffer stackShorts(short... values) { return stackGet().shorts(values); }
+
+	// -------------------------------------------------
+
+	/** Thread-local version of {@link #mallocInt}. */
+	public static IntBuffer stackMallocInt(int size) { return stackGet().mallocInt(size); }
+	/** Thread-local version of {@link #callocInt}. */
+	public static IntBuffer stackCallocInt(int size) { return stackGet().callocInt(size); }
+
+	/** Thread-local version of {@link #ints(int)}. */
+	public static IntBuffer stackInts(int x) { return stackGet().ints(x); }
+	/** Thread-local version of {@link #ints(int, int)}. */
+	public static IntBuffer stackInts(int x, int y) { return stackGet().ints(x, y); }
+	/** Thread-local version of {@link #ints(int, int, int)}. */
+	public static IntBuffer stackInts(int x, int y, int z) { return stackGet().ints(x, y, z); }
+	/** Thread-local version of {@link #ints(int, int, int, int)}. */
+	public static IntBuffer stackInts(int x, int y, int z, int w) { return stackGet().ints(x, y, z, w); }
+	/** Thread-local version of {@link #ints(int...)}. */
+	public static IntBuffer stackInts(int... values) { return stackGet().ints(values); }
+
+	// -------------------------------------------------
+
+	/** Thread-local version of {@link #mallocLong}. */
+	public static LongBuffer stackMallocLong(int size) { return stackGet().mallocLong(size); }
+	/** Thread-local version of {@link #callocLong}. */
+	public static LongBuffer stackCallocLong(int size) { return stackGet().callocLong(size); }
+
+	/** Thread-local version of {@link #longs(long)}. */
+	public static LongBuffer stackLongs(long x) { return stackGet().longs(x); }
+	/** Thread-local version of {@link #longs(long, long)}. */
+	public static LongBuffer stackLongs(long x, long y) { return stackGet().longs(x, y); }
+	/** Thread-local version of {@link #longs(long, long, long)}. */
+	public static LongBuffer stackLongs(long x, long y, long z) { return stackGet().longs(x, y, z); }
+	/** Thread-local version of {@link #longs(long, long, long, long)}. */
+	public static LongBuffer stackLongs(long x, long y, long z, long w) { return stackGet().longs(x, y, z, w); }
+	/** Thread-local version of {@link #longs(long...)}. */
+	public static LongBuffer stackLongs(long... values) { return stackGet().longs(values); }
+
+	// -------------------------------------------------
+
+	/** Thread-local version of {@link #mallocFloat}. */
+	public static FloatBuffer stackMallocFloat(int size) { return stackGet().mallocFloat(size); }
+	/** Thread-local version of {@link #callocFloat}. */
+	public static FloatBuffer stackCallocFloat(int size) { return stackGet().callocFloat(size); }
+
+	/** Thread-local version of {@link #floats(float)}. */
+	public static FloatBuffer stackFloats(float x) { return stackGet().floats(x); }
+	/** Thread-local version of {@link #floats(float, float)}. */
+	public static FloatBuffer stackFloats(float x, float y) { return stackGet().floats(x, y); }
+	/** Thread-local version of {@link #floats(float, float, float)}. */
+	public static FloatBuffer stackFloats(float x, float y, float z) { return stackGet().floats(x, y, z); }
+	/** Thread-local version of {@link #floats(float, float, float, float)}. */
+	public static FloatBuffer stackFloats(float x, float y, float z, float w) { return stackGet().floats(x, y, z, w); }
+	/** Thread-local version of {@link #floats(float...)}. */
+	public static FloatBuffer stackFloats(float... values) { return stackGet().floats(values); }
+
+	// -------------------------------------------------
+
+	/** Thread-local version of {@link #mallocDouble}. */
+	public static DoubleBuffer stackMallocDouble(int size) { return stackGet().mallocDouble(size); }
+	/** Thread-local version of {@link #callocDouble}. */
+	public static DoubleBuffer stackCallocDouble(int size) { return stackGet().callocDouble(size); }
+
+	/** Thread-local version of {@link #doubles(double)}. */
+	public static DoubleBuffer stackDoubles(double x) { return stackGet().doubles(x); }
+	/** Thread-local version of {@link #doubles(double, double)}. */
+	public static DoubleBuffer stackDoubles(double x, double y) { return stackGet().doubles(x, y); }
+	/** Thread-local version of {@link #doubles(double, double, double)}. */
+	public static DoubleBuffer stackDoubles(double x, double y, double z) { return stackGet().doubles(x, y, z); }
+	/** Thread-local version of {@link #doubles(double, double, double, double)}. */
+	public static DoubleBuffer stackDoubles(double x, double y, double z, double w) { return stackGet().doubles(x, y, z, w); }
+	/** Thread-local version of {@link #doubles(double...)}. */
+	public static DoubleBuffer stackDoubles(double... values) { return stackGet().doubles(values); }
+
+	// -------------------------------------------------
+
+	/** Thread-local version of {@link #mallocPointer}. */
+	public static PointerBuffer stackMallocPointer(int size) { return stackGet().mallocPointer(size); }
+	/** Thread-local version of {@link #callocPointer}. */
+	public static PointerBuffer stackCallocPointer(int size) { return stackGet().callocPointer(size); }
+
+	/** Thread-local version of {@link #pointers(long)}. */
+	public static PointerBuffer stackPointers(long x) { return stackGet().pointers(x); }
+	/** Thread-local version of {@link #pointers(long, long)}. */
+	public static PointerBuffer stackPointers(long x, long y) { return stackGet().pointers(x, y); }
+	/** Thread-local version of {@link #pointers(long, long, long)}. */
+	public static PointerBuffer stackPointers(long x, long y, long z) { return stackGet().pointers(x, y, z); }
+	/** Thread-local version of {@link #pointers(long, long, long, long)}. */
+	public static PointerBuffer stackPointers(long x, long y, long z, long w) { return stackGet().pointers(x, y, z, w); }
+	/** Thread-local version of {@link #pointers(long...)}. */
+	public static PointerBuffer stackPointers(long... values) { return stackGet().pointers(values); }
+
+	/** Thread-local version of {@link #pointers(Pointer)}. */
+	public static PointerBuffer stackPointers(Pointer x) { return stackGet().pointers(x); }
+	/** Thread-local version of {@link #pointers(Pointer, Pointer)}. */
+	public static PointerBuffer stackPointers(Pointer x, Pointer y) { return stackGet().pointers(x, y); }
+	/** Thread-local version of {@link #pointers(Pointer, Pointer, Pointer)}. */
+	public static PointerBuffer stackPointers(Pointer x, Pointer y, Pointer z) { return stackGet().pointers(x, y, z); }
+	/** Thread-local version of {@link #pointers(Pointer, Pointer, Pointer, Pointer)}. */
+	public static PointerBuffer stackPointers(Pointer x, Pointer y, Pointer z, Pointer w) { return stackGet().pointers(x, y, z, w); }
+	/** Thread-local version of {@link #pointers(Pointer...)}. */
+	public static PointerBuffer stackPointers(Pointer... values) { return stackGet().pointers(values); }
 
 }
