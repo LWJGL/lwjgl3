@@ -5,11 +5,10 @@
 
 package org.lwjgl.demo.opengl;
 
-import org.lwjgl.BufferUtils;
-
-import java.nio.FloatBuffer;
+import org.lwjgl.system.MemoryStack;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * This is the OpenGL "standard" Gears demo, originally by Brian Paul
@@ -36,18 +35,10 @@ public class AbstractGears {
 		System.err.println("GL_RENDERER: " + glGetString(GL_RENDERER));
 		System.err.println("GL_VERSION: " + glGetString(GL_VERSION));
 
+		MemoryStack s = stackPush();
+
 		// setup ogl
-		FloatBuffer pos = BufferUtils.createFloatBuffer(4).put(new float[] { 5.0f, 5.0f, 10.0f, 0.0f });
-		FloatBuffer red = BufferUtils.createFloatBuffer(4).put(new float[] { 0.8f, 0.1f, 0.0f, 1.0f });
-		FloatBuffer green = BufferUtils.createFloatBuffer(4).put(new float[] { 0.0f, 0.8f, 0.2f, 1.0f });
-		FloatBuffer blue = BufferUtils.createFloatBuffer(4).put(new float[] { 0.2f, 0.2f, 1.0f, 1.0f });
-
-		pos.flip();
-		red.flip();
-		green.flip();
-		blue.flip();
-
-		glLightfv(GL_LIGHT0, GL_POSITION, pos);
+		glLightfv(GL_LIGHT0, GL_POSITION, s.floats(5.0f, 5.0f, 10.0f, 0.0f));
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
@@ -56,21 +47,23 @@ public class AbstractGears {
 		/* make the gears */
 		gear1 = glGenLists(1);
 		glNewList(gear1, GL_COMPILE);
-		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s.floats(0.8f, 0.1f, 0.0f, 1.0f));
 		gear(1.0f, 4.0f, 1.0f, 20, 0.7f);
 		glEndList();
 
 		gear2 = glGenLists(1);
 		glNewList(gear2, GL_COMPILE);
-		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, green);
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s.floats(0.0f, 0.8f, 0.2f, 1.0f));
 		gear(0.5f, 2.0f, 2.0f, 10, 0.7f);
 		glEndList();
 
 		gear3 = glGenLists(1);
 		glNewList(gear3, GL_COMPILE);
-		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s.floats(0.2f, 0.2f, 1.0f, 1.0f));
 		gear(1.3f, 2.0f, 0.5f, 10, 0.7f);
 		glEndList();
+
+		s.pop();
 
 		glEnable(GL_NORMALIZE);
 

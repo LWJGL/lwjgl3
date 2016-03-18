@@ -222,6 +222,8 @@ public class MemoryStack {
 		return address;
 	}
 
+	// -------------------------------------------------
+
 	/**
 	 * Allocates a {@link ByteBuffer} on the stack.
 	 *
@@ -233,34 +235,186 @@ public class MemoryStack {
 	/** Calloc version of {@link #malloc(int)}. */
 	public ByteBuffer calloc(int size) { return memByteBuffer(ncalloc(1, size, 1), size); }
 
+	/** Single value version of {@link #malloc}. */
+	public ByteBuffer bytes(byte x) {
+		return malloc(1).put(0, x);
+	}
+
+	/** Two value version of {@link #malloc}. */
+	public ByteBuffer bytes(byte x, byte y) {
+		return malloc(2).put(0, x).put(1, y);
+	}
+
+	/** Three value version of {@link #malloc}. */
+	public ByteBuffer bytes(byte x, byte y, byte z) {
+		return malloc(3).put(0, x).put(1, y).put(2, z);
+	}
+
+	/** Four value version of {@link #malloc}. */
+	public ByteBuffer bytes(byte x, byte y, byte z, byte w) {
+		return malloc(4).put(0, x).put(1, y).put(2, z).put(3, w);
+	}
+
+	/** Vararg version of {@link #malloc}. */
+	public ByteBuffer bytes(byte... values) {
+		ByteBuffer buffer = malloc(values.length).put(values);
+		buffer.flip();
+		return buffer;
+	}
+
+	// -------------------------------------------------
+
 	/** Short version of {@link #malloc(int)}. */
 	public ShortBuffer mallocShort(int size) { return memShortBuffer(nmalloc(2, size << 1), size); }
 	/** Short version of {@link #calloc(int)}. */
 	public ShortBuffer callocShort(int size) { return memShortBuffer(ncalloc(2, size, 2), size); }
+
+	/** Single value version of {@link #mallocShort}. */
+	public ShortBuffer shorts(short x) { return mallocShort(1).put(0, x); }
+	/** Two value version of {@link #mallocShort}. */
+	public ShortBuffer shorts(short x, short y) { return mallocShort(2).put(0, x).put(1, y); }
+	/** Three value version of {@link #mallocShort}. */
+	public ShortBuffer shorts(short x, short y, short z) { return mallocShort(3).put(0, x).put(1, y).put(2, z); }
+	/** Four value version of {@link #mallocShort}. */
+	public ShortBuffer shorts(short x, short y, short z, short w) { return mallocShort(4).put(0, x).put(1, y).put(2, z).put(3, w); }
+
+	/** Vararg version of {@link #mallocShort}. */
+	public ShortBuffer shorts(short... values) {
+		ShortBuffer buffer = mallocShort(values.length).put(values);
+		buffer.flip();
+		return buffer;
+	}
+
+	// -------------------------------------------------
 
 	/** Int version of {@link #malloc(int)}. */
 	public IntBuffer mallocInt(int size) { return memIntBuffer(nmalloc(4, size << 2), size); }
 	/** Int version of {@link #calloc(int)}. */
 	public IntBuffer callocInt(int size) { return memIntBuffer(ncalloc(4, size, 4), size); }
 
+	/** Single value version of {@link #mallocInt}. */
+	public IntBuffer ints(int x) { return mallocInt(1).put(0, x); }
+	/** Two value version of {@link #mallocInt}. */
+	public IntBuffer ints(int x, int y) { return mallocInt(2).put(0, x).put(1, y); }
+	/** Three value version of {@link #mallocInt}. */
+	public IntBuffer ints(int x, int y, int z) { return mallocInt(3).put(0, x).put(1, y).put(2, z); }
+	/** Four value version of {@link #mallocInt}. */
+	public IntBuffer ints(int x, int y, int z, int w) { return mallocInt(4).put(0, x).put(1, y).put(2, z).put(3, w); }
+
+	/** Vararg version of {@link #mallocInt}. */
+	public IntBuffer ints(int... values) {
+		IntBuffer buffer = mallocInt(values.length).put(values);
+		buffer.flip();
+		return buffer;
+	}
+
+	// -------------------------------------------------
+
 	/** Long version of {@link #malloc(int)}. */
 	public LongBuffer mallocLong(int size) { return memLongBuffer(nmalloc(8, size << 3), size); }
 	/** Long version of {@link #calloc(int)}. */
 	public LongBuffer callocLong(int size) { return memLongBuffer(ncalloc(8, size, 8), size); }
+
+	/** Single value version of {@link #mallocLong}. */
+	public LongBuffer longs(long x) { return mallocLong(1).put(0, x); }
+	/** Two value version of {@link #mallocLong}. */
+	public LongBuffer longs(long x, long y) { return mallocLong(2).put(0, x).put(1, y); }
+	/** Three value version of {@link #mallocLong}. */
+	public LongBuffer longs(long x, long y, long z) { return mallocLong(3).put(0, x).put(1, y).put(2, z); }
+	/** Four value version of {@link #mallocLong}. */
+	public LongBuffer longs(long x, long y, long z, long w) { return mallocLong(4).put(0, x).put(1, y).put(2, z).put(3, w); }
+
+	/** Vararg version of {@link #mallocLong}. */
+	public LongBuffer longs(long... more) {
+		LongBuffer buffer = mallocLong(more.length).put(more);
+		buffer.flip();
+		return buffer;
+	}
+
+	// -------------------------------------------------
 
 	/** Float version of {@link #malloc(int)}. */
 	public FloatBuffer mallocFloat(int size) { return memFloatBuffer(nmalloc(4, size << 2), size); }
 	/** Float version of {@link #calloc(int)}. */
 	public FloatBuffer callocFloat(int size) { return memFloatBuffer(ncalloc(4, size, 4), size); }
 
+	/** Single value version of {@link #mallocFloat}. */
+	public FloatBuffer floats(float x) { return mallocFloat(1).put(0, x); }
+	/** Two value version of {@link #mallocFloat}. */
+	public FloatBuffer floats(float x, float y) { return mallocFloat(2).put(0, x).put(1, y); }
+	/** Three value version of {@link #mallocFloat}. */
+	public FloatBuffer floats(float x, float y, float z) { return mallocFloat(3).put(0, x).put(1, y).put(2, z); }
+	/** Four value version of {@link #mallocFloat}. */
+	public FloatBuffer floats(float x, float y, float z, float w) { return mallocFloat(4).put(0, x).put(1, y).put(2, z).put(3, w); }
+
+	/** Vararg version of {@link #mallocFloat}. */
+	public FloatBuffer floats(float... values) {
+		FloatBuffer buffer = mallocFloat(values.length).put(values);
+		buffer.flip();
+		return buffer;
+	}
+
+	// -------------------------------------------------
+
 	/** Double version of {@link #malloc(int)}. */
 	public DoubleBuffer mallocDouble(int size) { return memDoubleBuffer(nmalloc(8, size << 3), size); }
 	/** Double version of {@link #calloc(int)}. */
 	public DoubleBuffer callocDouble(int size) { return memDoubleBuffer(ncalloc(8, size, 8), size); }
 
+	/** Single value version of {@link #mallocDouble}. */
+	public DoubleBuffer doubles(double x) { return mallocDouble(1).put(0, x); }
+	/** Two value version of {@link #mallocDouble}. */
+	public DoubleBuffer doubles(double x, double y) { return mallocDouble(2).put(0, x).put(1, y); }
+	/** Three value version of {@link #mallocDouble}. */
+	public DoubleBuffer doubles(double x, double y, double z) { return mallocDouble(3).put(0, x).put(1, y).put(2, z); }
+	/** Four value version of {@link #mallocDouble}. */
+	public DoubleBuffer doubles(double x, double y, double z, double w) { return mallocDouble(4).put(0, x).put(1, y).put(2, z).put(3, w); }
+
+	/** Vararg version of {@link #mallocDouble}. */
+	public DoubleBuffer doubles(double... values) {
+		DoubleBuffer buffer = mallocDouble(values.length).put(values);
+		buffer.flip();
+		return buffer;
+	}
+
+	// -------------------------------------------------
+
 	/** Pointer version of {@link #malloc(int)}. */
 	public PointerBuffer mallocPointer(int size) { return memPointerBuffer(nmalloc(POINTER_SIZE, size << POINTER_SHIFT), size); }
 	/** Pointer version of {@link #calloc(int)}. */
 	public PointerBuffer callocPointer(int size) { return memPointerBuffer(ncalloc(POINTER_SIZE, size, POINTER_SHIFT), size); }
+
+	/** Single value version of {@link #mallocPointer}. */
+	public PointerBuffer pointers(long x) { return mallocPointer(1).put(0, x); }
+	/** Two value version of {@link #mallocPointer}. */
+	public PointerBuffer pointers(long x, long y) { return mallocPointer(2).put(0, x).put(1, y); }
+	/** Three value version of {@link #mallocPointer}. */
+	public PointerBuffer pointers(long x, long y, long z) { return mallocPointer(3).put(0, x).put(1, y).put(2, z); }
+	/** Four value version of {@link #mallocPointer}. */
+	public PointerBuffer pointers(long x, long y, long z, long w) { return mallocPointer(4).put(0, x).put(1, y).put(2, z).put(3, w); }
+
+	/** Vararg version of {@link #mallocPointer}. */
+	public PointerBuffer pointers(long... values) {
+		PointerBuffer buffer = mallocPointer(values.length).put(values);
+		buffer.flip();
+		return buffer;
+	}
+
+	/** Single value version of {@link #mallocPointer}. */
+	public PointerBuffer pointers(Pointer x) { return mallocPointer(1).put(0, x); }
+	/** Two value version of {@link #mallocPointer}. */
+	public PointerBuffer pointers(Pointer x, Pointer y) { return mallocPointer(2).put(0, x).put(1, y); }
+	/** Three value version of {@link #mallocPointer}. */
+	public PointerBuffer pointers(Pointer x, Pointer y, Pointer z) { return mallocPointer(3).put(0, x).put(1, y).put(2, z); }
+	/** Four value version of {@link #mallocPointer}. */
+	public PointerBuffer pointers(Pointer x, Pointer y, Pointer z, Pointer w) { return mallocPointer(4).put(0, x).put(1, y).put(2, z).put(3, w); }
+
+	/** Vararg version of {@link #mallocPointer}. */
+	public PointerBuffer pointers(Pointer... values) {
+		PointerBuffer buffer = mallocPointer(values.length);
+		for ( int i = 0; i < values.length; i++ )
+			buffer.put(i, values[i]);
+		return buffer;
+	}
 
 }

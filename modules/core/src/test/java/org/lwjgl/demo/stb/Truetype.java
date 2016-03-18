@@ -7,6 +7,7 @@ package org.lwjgl.demo.stb;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.stb.STBTTAlignedQuad;
 import org.lwjgl.stb.STBTTBakedChar;
+import org.lwjgl.system.MemoryStack;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -16,7 +17,7 @@ import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBTruetype.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /** STB Truetype demo. */
 public final class Truetype extends FontDemo {
@@ -65,10 +66,6 @@ public final class Truetype extends FontDemo {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		FloatBuffer x = BufferUtils.createFloatBuffer(1);
-		FloatBuffer y = BufferUtils.createFloatBuffer(1);
-		STBTTAlignedQuad q = STBTTAlignedQuad.malloc();
-
 		while ( glfwWindowShouldClose(getWindow()) == GLFW_FALSE ) {
 			glfwPollEvents();
 
@@ -82,43 +79,52 @@ public final class Truetype extends FontDemo {
 			// Scroll
 			glTranslatef(4.0f, getFontHeight() * 0.5f + 4.0f - getLineOffset() * getFontHeight(), 0f);
 
-			x.put(0, 0.0f);
-			y.put(0, 0.0f);
-			glBegin(GL_QUADS);
-			for ( int i = 0; i < text.length(); i++ ) {
-				char c = text.charAt(i);
-				if ( c == '\n' ) {
-					y.put(0, y.get(0) + getFontHeight());
-					x.put(0, 0.0f);
-					continue;
-				} else if ( c < 32 || 128 <= c )
-					continue;
-
-				stbtt_GetBakedQuad(cdata, BITMAP_W, BITMAP_H, c - 32, x, y, q, 1);
-
-				glTexCoord2f(q.s0(), q.t0());
-				glVertex2f(q.x0(), q.y0());
-
-				glTexCoord2f(q.s1(), q.t0());
-				glVertex2f(q.x1(), q.y0());
-
-				glTexCoord2f(q.s1(), q.t1());
-				glVertex2f(q.x1(), q.y1());
-
-				glTexCoord2f(q.s0(), q.t1());
-				glVertex2f(q.x0(), q.y1());
-			}
-			glEnd();
+			renderText(cdata, BITMAP_W, BITMAP_H);
 
 			glPopMatrix();
 
 			glfwSwapBuffers(getWindow());
 		}
 
-		q.free();
 		cdata.free();
 
 		glfwDestroyWindow(getWindow());
+	}
+
+	private void renderText(STBTTBakedChar.Buffer cdata, int BITMAP_W, int BITMAP_H) {
+		MemoryStack stack = stackPush();
+
+		FloatBuffer x = stack.floats(0.0f);
+		FloatBuffer y = stack.floats(0.0f);
+
+		STBTTAlignedQuad q = STBTTAlignedQuad.malloc(stack);
+
+		glBegin(GL_QUADS);
+		for ( int i = 0; i < text.length(); i++ ) {
+			char c = text.charAt(i);
+			if ( c == '\n' ) {
+				y.put(0, y.get(0) + getFontHeight());
+				x.put(0, 0.0f);
+				continue;
+			} else if ( c < 32 || 128 <= c )
+				continue;
+			stbtt_GetBakedQuad(cdata, BITMAP_W, BITMAP_H, c - 32, x, y, q, 1);
+
+			glTexCoord2f(q.s0(), q.t0());
+			glVertex2f(q.x0(), q.y0());
+
+			glTexCoord2f(q.s1(), q.t0());
+			glVertex2f(q.x1(), q.y0());
+
+			glTexCoord2f(q.s1(), q.t1());
+			glVertex2f(q.x1(), q.y1());
+
+			glTexCoord2f(q.s0(), q.t1());
+			glVertex2f(q.x0(), q.y1());
+		}
+		glEnd();
+
+		stack.pop();
 	}
 
 }

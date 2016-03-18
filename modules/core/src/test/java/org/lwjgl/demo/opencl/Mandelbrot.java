@@ -43,6 +43,7 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.opengl.WGL.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class Mandelbrot {
@@ -278,14 +279,13 @@ public class Mandelbrot {
 			vbo = glGenBuffers();
 			glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-			FloatBuffer quad = BufferUtils.createFloatBuffer(4 * 4).put(new float[] {
+			glBufferData(GL_ARRAY_BUFFER, stackPush().floats(
 				0.0f, 0.0f, 0.0f, 0.0f,
 				1.0f, 0.0f, 1.0f, 0.0f,
 				0.0f, 1.0f, 0.0f, 1.0f,
 				1.0f, 1.0f, 1.0f, 1.0f
-			});
-			quad.flip();
-			glBufferData(GL_ARRAY_BUFFER, quad, GL_STATIC_DRAW);
+			), GL_STATIC_DRAW);
+			stackPop();
 
 			vsh = glCreateShader(GL_VERTEX_SHADER);
 			glShaderSource(vsh, "#version 150\n" +
