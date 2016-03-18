@@ -15,7 +15,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 	val major = 1
 	val minor = 0
-	val patch = 5
+	val patch = 6
 
 	IntConstant("The Vulkan major version number.", "VERSION_MAJOR" expr "$major")
 	IntConstant("The Vulkan minor version number.", "VERSION_MINOR" expr "$minor")

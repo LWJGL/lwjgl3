@@ -6,6 +6,7 @@ package org.lwjgl.vulkan
 
 import org.lwjgl.generator.*
 import java.io.PrintWriter
+import java.util.regex.Pattern
 
 private val NativeClass.capName: String
 	get() = if ( templateName.startsWith(prefix) ) {
@@ -22,6 +23,21 @@ private val CAPABILITIES_CLASS = "VKCapabilities"
 val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILITIES_CLASS) {
 
 	override val hasCurrentCapabilities: Boolean get() = false
+
+	private val VKCorePattern = Pattern.compile("VK[1-9][0-9]")
+	override fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String): Boolean {
+		if ( VKCorePattern.matcher(function.nativeClass.className).matches() ) {
+			writer.print("\t/**\n\t * <p>${url("https://www.khronos.org/registry/vulkan/specs/1.0/man/html/${function.name}.html", "Khronos Reference Page")}</p>\n\t * \n")
+			if ( documentation.indexOf('\n') == -1 ) {
+				writer.println(documentation.substring("\t/** ".length, documentation.length - 3))
+				writer.println("\t */")
+			} else
+				writer.println(documentation.substring("\t/**\n".length))
+
+			return true
+		}
+		return false
+	}
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---")

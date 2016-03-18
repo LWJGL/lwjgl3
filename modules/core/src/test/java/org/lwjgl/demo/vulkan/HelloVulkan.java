@@ -218,7 +218,7 @@ public final class HelloVulkan {
 
 	private GLFWErrorCallback errorCB;
 
-	boolean validate = false;
+	boolean validate = true;
 
 	PointerBuffer device_validation_layers = memAllocPointer(10);
 
@@ -359,8 +359,7 @@ public final class HelloVulkan {
 				.put(memEncodeASCII("VK_LAYER_LUNARG_param_checker", BufferAllocator.MALLOC))
 				.put(memEncodeASCII("VK_LAYER_LUNARG_swapchain", BufferAllocator.MALLOC))
 				.put(memEncodeASCII("VK_LAYER_LUNARG_threading", BufferAllocator.MALLOC))
-				.put(memEncodeASCII("VK_LAYER_GOOGLE_unique_objects", BufferAllocator.MALLOC))
-				.flip();
+				.put(memEncodeASCII("VK_LAYER_GOOGLE_unique_objects", BufferAllocator.MALLOC));
 		}
 		device_validation_layers.flip();
 
@@ -2004,10 +2003,9 @@ public final class HelloVulkan {
 
 		vkDestroyDevice(device, null);
 		vkDestroySurfaceKHR(inst, surface, null);
-		if ( msg_callback != NULL ) {
+		if ( msg_callback != NULL )
 			vkDestroyDebugReportCallbackEXT(inst, msg_callback, null);
-			dbgFunc.free();
-		}
+		dbgFunc.free();
 		vkDestroyInstance(inst, null);
 
 		gpu_props.free();
