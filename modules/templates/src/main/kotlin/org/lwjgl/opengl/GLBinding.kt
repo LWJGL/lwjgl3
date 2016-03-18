@@ -178,7 +178,11 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 			println("\tpublic final boolean ${it.capName};")
 		}
 
+		println("\n\t/** When true, deprecated functions are not available. */")
+		println("\tpublic final boolean forwardCompatible;")
+
 		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, boolean fc) {")
+		println("\t\tforwardCompatible = fc;\n")
 		for (extension in classes) {
 			val capName = extension.capName
 			// TODO: Do not call create if the extension is not present. Reduces number of classes loaded (test with static init)
