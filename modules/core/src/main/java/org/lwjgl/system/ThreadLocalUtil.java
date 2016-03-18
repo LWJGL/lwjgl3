@@ -30,8 +30,6 @@ public final class ThreadLocalUtil {
 
 		private Runnable target;
 
-		public final APIBuffer __buffer;
-
 		public final MemoryStack stack;
 
 		public GLCapabilities   glCaps;
@@ -40,7 +38,6 @@ public final class ThreadLocalUtil {
 		public ALCapabilities alCaps;
 
 		public TLS() {
-			__buffer = new APIBuffer();
 			stack = new MemoryStack();
 		}
 

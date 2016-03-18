@@ -13,6 +13,7 @@ import java.util.Set;
 import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.VKUtil.*;
 
@@ -83,14 +84,16 @@ public final class VK {
 
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
-					APIBuffer __buffer = apiBuffer();
-					__buffer.stringParamASCII(functionName, true);
+					MemoryStack stack = stackPush();
+					try {
+						long address = callPPP(GetInstanceProcAddr, NULL, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
+						if ( address == NULL )
+							address = VULKAN.getFunctionAddress(functionName);
 
-					long address = callPPP(GetInstanceProcAddr, NULL, __buffer.address());
-					if ( address == NULL )
-						address = VULKAN.getFunctionAddress(functionName);
-
-					return address;
+						return address;
+					} finally {
+						stack.pop();
+					}
 				}
 
 				@Override

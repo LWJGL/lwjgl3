@@ -12,9 +12,9 @@ interface CodeFunctionTransform<T : QualifiedType> {
 	fun generate(qtype: T, code: Code): Code
 }
 
-/** A function transform that makes use of the APIBuffer. */
-interface APIBufferFunctionTransform<T : QualifiedType> {
-	fun setupAPIBuffer(func: Function, qtype: T, writer: PrintWriter)
+/** A function transform that makes use of the stack. */
+interface StackFunctionTransform<T : QualifiedType> {
+	fun setupStack(func: Function, qtype: T, writer: PrintWriter)
 }
 
 /** Marker trait to indicate that buffer checks should be skipped. */
@@ -139,20 +139,20 @@ class ExpressionLocalTransform(
 
 class CharSequenceTransform(
 	val nullTerminated: Boolean
-) : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter> {
+) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "CharSequence ${param.name}"
 	override fun transformCall(param: Parameter, original: String) = if ( param has nullable )
-		"$API_BUFFER.addressSafe(${param.name}, ${param.name}Encoded)"
+		"memAddressSafe(${param.name}Encoded)"
 	else
-		"$API_BUFFER.address(${param.name}Encoded)"
+		"memAddress(${param.name}Encoded)"
 
-	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
-		writer.print("\t\tint ${qtype.name}Encoded = ")
+	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
+		writer.print("\t\t\tByteBuffer ${qtype.name}Encoded = ")
 		if ( qtype has nullable )
-			writer.print("${qtype.name} == null ? 0 : ")
-		writer.println("$API_BUFFER.stringParam${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}, $nullTerminated);")
+			writer.print("${qtype.name} == null ? null : ")
+		writer.println("memEncode${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}, $nullTerminated, BufferAllocator.STACK);")
 		if ( !nullTerminated )
-			writer.println("\t\tint ${qtype.name}EncodedLen = $API_BUFFER.getOffset() - ${qtype.name}Encoded;")
+			writer.println("\t\t\tint ${qtype.name}EncodedLen = ${qtype.name}Encoded.capacity();")
 	}
 }
 
@@ -168,17 +168,17 @@ object StringReturnTransform : FunctionTransform<ReturnValue> {
 }
 
 class PrimitiveValueReturnTransform(
-	val bufferType: String,
+	val bufferType: PointerMapping,
 	val paramName: String
-) : FunctionTransform<ReturnValue>, APIBufferFunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String) = if ( bufferType == "pointer" ) "long" else bufferType // Replace void with the buffer value type
-	override fun transformCall(param: ReturnValue, original: String) = "\t\treturn $API_BUFFER.${bufferType}Value($paramName);" // Replace with value from APIBuffer
-	override fun setupAPIBuffer(func: Function, qtype: ReturnValue, writer: PrintWriter) = writer.println("\t\tint $paramName = $API_BUFFER.${bufferType}Param();")
+) : FunctionTransform<ReturnValue>, StackFunctionTransform<ReturnValue> {
+	override fun transformDeclaration(param: ReturnValue, original: String) = bufferType.primitive.let { if ( it == "pointer" ) "long" else it } // Replace void with the buffer value type
+	override fun transformCall(param: ReturnValue, original: String) = "\t\treturn $paramName.get(0);" // Replace with value from the stack
+	override fun setupStack(func: Function, qtype: ReturnValue, writer: PrintWriter) = writer.println("\t\t\t${bufferType.box}Buffer $paramName = stack.calloc${bufferType.mallocType}(1);")
 }
 
 object PrimitiveValueTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
 }
 
 object Expression1Transform : FunctionTransform<Parameter> {
@@ -190,16 +190,10 @@ class SingleValueTransform(
 	val paramType: String,
 	val elementType: String,
 	val newName: String
-) : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = "$paramType $newName" // Replace with element type + new name
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
-		if ( "CharSequence" == paramType ) {
-			writer.println("\t\tByteBuffer ${newName}Buffer = memEncodeASCII($newName);") // TODO: Support other than ASCCI
-			writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param(memAddress(${newName}Buffer));")
-		} else
-			writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param($newName);")
-	}
+	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
+	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\t\t${qtype.javaMethodType} ${qtype.name} = stack.${elementType}s($newName);")
 }
 class SingleValueStructTransform(
 	val newName: String
@@ -209,17 +203,21 @@ class SingleValueStructTransform(
 }
 
 class VectorValueTransform(
-	val paramType: String,
+	val paramType: PointerMapping,
 	val elementType: String,
 	val newName: String,
 	val size: Int
-) : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String) = (0..size - 1).map { "$paramType $newName$it" }.reduce { a, b -> "$a, $b" } // Replace with vector elements
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
-		writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param(${newName}0);")
+//if ( primitiveType == "pointer" ) "long" else primitiveType, primitiveType
+) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+	override fun transformDeclaration(param: Parameter, original: String) = paramType.primitive.let { if ( it == "pointer" ) "long" else it }.let { paramType ->
+		(0..size - 1).map { "$paramType $newName$it" }.reduce { a, b -> "$a, $b" }
+	} // Replace with vector elements
+	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
+	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
+		writer.print("\t\t\t${paramType.box}Buffer ${qtype.name} = stack.${elementType}s(${newName}0")
 		for (i in 1..(size - 1))
-			writer.println("\t\t$API_BUFFER.${elementType}Param($newName$i);")
+			writer.print(", $newName$i")
+		writer.println(");")
 	}
 }
 
@@ -235,25 +233,21 @@ class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean
 		"$MAP_OLD == null ? memByteBuffer($RESULT, (int)$lengthParam) : memSetupBuffer($MAP_OLD, $RESULT, (int)$lengthParam)"
 }
 
-val BufferLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+val BufferLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\tint ${qtype.name} = $API_BUFFER.intParam();")
+	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
+	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\t\tIntBuffer ${qtype.name} = stack.ints(0);")
 }
 
-val BufferAutoSizeTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+val BufferAutoSizeTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = if ( param.nativeType is CharSequenceType )
-		"$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
-	else
-		"memAddress(${param.name})" // Replace with address of allocated buffer
-
-	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
+	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with address of allocated buffer
+	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
 		if ( qtype.nativeType is CharSequenceType ) {
-			writer.print("\t\tint ${qtype.name} = $API_BUFFER.bufferParam(")
+			writer.print("\t\t\tByteBuffer ${qtype.name} = stack.malloc(")
 		} else {
 			val bufferType = qtype.nativeType.mapping.javaMethodType.simpleName
-			writer.print("\t\t$bufferType ${qtype.name} = BufferUtils.create$bufferType(")
+			writer.print("\t\t\t$bufferType ${qtype.name} = BufferUtils.create$bufferType(")
 		}
 
 		val autoSizeParam = func.getParam { it has AutoSize && it[AutoSize].hasReference(qtype.name) }
@@ -261,11 +255,11 @@ val BufferAutoSizeTransform: FunctionTransform<Parameter> = object : FunctionTra
 	}
 }
 
-val BufferReplaceReturnTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+val BufferReplaceReturnTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
-		writer.println("\t\tint ${qtype.name} = $API_BUFFER.pointerParam();")
+	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stuck buffer
+	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
+		writer.println("\t\t\tPointerBuffer ${qtype.name} = stack.pointers(NULL);")
 	}
 }
 
@@ -286,7 +280,7 @@ class BufferAutoSizeReturnTransform(
 			"${it.definition.className}.create"
 		else
 			"mem${it.javaMethodType.simpleName}"
-		}($API_BUFFER.pointerValue(${outParam.name}), $lengthExpression);"
+		}(${outParam.name}.get(0), $lengthExpression);"
 	}
 }
 
@@ -299,12 +293,12 @@ class BufferReturnTransform(
 	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null) (outParam.nativeType.mapping as PointerMapping).javaMethodType.simpleName else "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
 		return if ( encoding != null )
-			"\t\treturn memDecode$encoding($API_BUFFER.buffer(), $API_BUFFER.intValue($lengthParam), ${outParam.name});"
+			"\t\treturn memDecode$encoding(${outParam.name}, $lengthParam.get(0));"
 		else if ( outParam.nativeType.mapping !== PointerMapping.DATA_BYTE )
-			"\t\t${outParam.name}.limit($API_BUFFER.intValue($lengthParam));\n" +
+			"\t\t${outParam.name}.limit($lengthParam.get(0));\n" +
 			"\t\treturn ${outParam.name}.slice();"
 		else
-			"\t\treturn memSlice(${outParam.name}, $API_BUFFER.intValue($lengthParam));"
+			"\t\treturn memSlice(${outParam.name}, $lengthParam.get(0));"
 	}
 }
 
@@ -315,10 +309,10 @@ class BufferReturnNTTransform(
 ) : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
 	override fun transformCall(param: ReturnValue, original: String): String =
-		"\t\treturn memDecode$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}($API_BUFFER.address(${outParam.name}), $maxLengthParam));"
+		"\t\treturn memDecode$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}(memAddress(${outParam.name}), $maxLengthParam));"
 }
 
-open class PointerArrayTransform(val paramType: String) : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {
+open class PointerArrayTransform(val paramType: String) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? {
 		val name = if ( paramType.isEmpty() ) param[PointerArray].singleName else param.name
 		val paramClass = param[PointerArray].elementType.let {
@@ -332,16 +326,16 @@ open class PointerArrayTransform(val paramType: String) : FunctionTransform<Para
 		return "$paramClass$paramType $name"
 	}
 
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name}$POINTER_POSTFIX)" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupAPIBufferImpl(qtype)
+	override fun transformCall(param: Parameter, original: String) = "${param.name}$POINTER_POSTFIX" // Replace with stuck buffer
+	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupStackImpl(qtype)
 
-	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
+	private fun PrintWriter.setupStackImpl(param: Parameter) {
 		val pointerArray = param[PointerArray]
 		if ( pointerArray.lengthsParam != null )
 			return
 
 		println((if ( paramType.isNotEmpty() ) param.name else pointerArray.singleName).let {
-			"\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam${if ( pointerArray.elementType is CharSequenceType ) pointerArray.elementType.charMapping.charset else ""}($it);"
+			"\t\t\tlong ${param.name}$POINTER_POSTFIX = org.lwjgl.system.APIUtil.apiArray${if ( pointerArray.elementType is CharSequenceType ) pointerArray.elementType.charMapping.charset else ""}(stack, $it);"
 		})
 	}
 
@@ -350,8 +344,8 @@ open class PointerArrayTransform(val paramType: String) : FunctionTransform<Para
 		val elementType = pointerArray.elementType
 
 		if ( elementType is CharSequenceType ) {
-			return code.append(javaFinally = statement(
-				"\t\t\t$API_BUFFER.pointerArrayFree(${qtype.name}$POINTER_POSTFIX, ${if ( paramType.isEmpty() ) "1" else "${qtype.name}.length"});",
+			return code.append(javaAfterNative = statement(
+				"\t\torg.lwjgl.system.APIUtil.apiArrayFree(${qtype.name}$POINTER_POSTFIX, ${if ( paramType.isEmpty() ) "1" else "${qtype.name}.length"});",
 				ApplyTo.ALTERNATIVE
 			))
 		}
@@ -368,25 +362,25 @@ val PointerArrayTransformVararg = PointerArrayTransform("...")
 class PointerArrayLengthsTransform(
 	val arrayParam: Parameter,
 	val multi: Boolean
-) : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = // Replace with APIBuffer address + length(s) offset
+	override fun transformCall(param: Parameter, original: String) = // Replace with stack address - length(s) offset
 		if ( multi )
-			"$API_BUFFER.address(${arrayParam.name}$POINTER_POSTFIX + (${arrayParam.name}.length << POINTER_SHIFT))"
+			"${arrayParam.name}$POINTER_POSTFIX - (${arrayParam.name}.length << ${if ( param.nativeType.mapping == PointerMapping.DATA_INT ) "2" else "POINTER_SHIFT"})"
 		else
-			"$API_BUFFER.address(${arrayParam.name}$POINTER_POSTFIX + POINTER_SIZE)"
+			"${arrayParam.name}$POINTER_POSTFIX - ${if ( param.nativeType.mapping == PointerMapping.DATA_INT ) "4" else "POINTER_SIZE"}"
 
-	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupAPIBufferImpl(qtype)
+	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupStackImpl(qtype)
 
-	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
+	private fun PrintWriter.setupStackImpl(param: Parameter) {
 		val pointerArray = arrayParam[PointerArray]
 
-		val lengthType = PointerMapping.primitiveMap[param.nativeType.mapping as PointerMapping]!![0]
+		val lengthType = (param.nativeType.mapping as PointerMapping).primitive[0]
 		println((if ( multi ) arrayParam.name else pointerArray.singleName).let {
 			if ( pointerArray.elementType is CharSequenceType )
-				"\t\tint ${arrayParam.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam${pointerArray.elementType.charMapping.charset}$lengthType($it);"
+				"\t\t\tlong ${arrayParam.name}$POINTER_POSTFIX = org.lwjgl.system.APIUtil.apiArray${pointerArray.elementType.charMapping.charset}$lengthType(stack, $it);"
 			else
-				"\t\tint ${arrayParam.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam$lengthType($it);"
+				"\t\t\tlong ${arrayParam.name}$POINTER_POSTFIX = org.lwjgl.system.APIUtil.apiArray$lengthType(stack, $it);"
 		})
 	}
 }

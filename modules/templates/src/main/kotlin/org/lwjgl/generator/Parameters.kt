@@ -173,9 +173,7 @@ class Parameter(
 
 	// Data pointer
 		nativeType.isPointerData -> {
-			if ( isAutoSizeResultOut && func.hideAutoSizeResultParam )
-				"$API_BUFFER.address($name)"
-			else if ( has(nullable) || (has(optional) && mode === GenerationMode.NORMAL) )
+			if ( !isAutoSizeResultOut && (has(nullable) || (has(optional) && mode === GenerationMode.NORMAL)) )
 				"memAddressSafe($name)"
 			else
 				"memAddress($name)"

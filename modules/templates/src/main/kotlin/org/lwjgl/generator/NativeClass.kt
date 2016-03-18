@@ -260,7 +260,7 @@ class NativeClass(
 					)
 				}
 			} )
-				println("import static org.lwjgl.system.APIUtil.*;")
+				println("import static org.lwjgl.system.MemoryStack.*;")
 			println("import static org.lwjgl.system.Checks.*;")
 			if ( binding != null )
 				println("import static org.lwjgl.system.JNI.*;")

@@ -4,14 +4,16 @@
  */
 package org.lwjgl.glfw;
 
-import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.Checks;
+import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.libffi.Closure;
 
+import java.nio.IntBuffer;
+
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.Checks.checkPointer;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -68,16 +70,23 @@ public final class Callbacks {
 		if ( Checks.CHECKS )
 			checkPointer(window);
 
-		APIBuffer buffer = apiBuffer();
+		MemoryStack stack = stackPush();
 
-		if ( framebuffersizefun != null ) {
-			nglfwGetFramebufferSize(window, buffer.address() + 0, buffer.address() + 4);
-			framebuffersizefun.invoke(window, buffer.intValue(0), buffer.intValue(4));
-		}
+		try {
+			IntBuffer x = stack.mallocInt(1);
+			IntBuffer y = stack.mallocInt(1);
 
-		if ( windowsizefun != null ) {
-			nglfwGetWindowSize(window, buffer.address() + 0, buffer.address() + 4);
-			windowsizefun.invoke(window, buffer.intValue(0), buffer.intValue(4));
+			if ( framebuffersizefun != null ) {
+				glfwGetFramebufferSize(window, x, y);
+				framebuffersizefun.invoke(window, x.get(0), y.get(0));
+			}
+
+			if ( windowsizefun != null ) {
+				glfwGetWindowSize(window, x, y);
+				windowsizefun.invoke(window, x.get(0), y.get(0));
+			}
+		} finally {
+			stack.pop();
 		}
 	}
 

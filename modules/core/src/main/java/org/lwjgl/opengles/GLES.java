@@ -7,6 +7,7 @@ package org.lwjgl.opengles;
 import org.lwjgl.egl.EGL;
 import org.lwjgl.system.*;
 
+import java.nio.IntBuffer;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -16,7 +17,9 @@ import static org.lwjgl.opengles.GLES20.*;
 import static org.lwjgl.opengles.GLES30.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.Checks.checkPointer;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.ThreadLocalUtil.*;
 
@@ -95,9 +98,6 @@ public final class GLES {
 			FunctionProvider functionProvider = new FunctionProvider() {
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
-					APIBuffer __buffer = apiBuffer();
-					__buffer.stringParamASCII(functionName, true);
-
 					long address = EGL.getFunctionProvider().getFunctionAddress(functionName);
 					if ( address == NULL ) {
 						address = GLES.getFunctionAddress(functionName);
@@ -198,28 +198,32 @@ public final class GLES {
 					"An OpenGL ES context was in an error state before the creation of its capabilities instance. Error: " + GLESUtil.getErrorString(errorCode)
 				);
 
-			APIBuffer __buffer = apiBuffer();
-
 			int majorVersion;
 			int minorVersion;
 
-			// Try the 3.0+ version query first
-			__buffer.intParam(0, 0, 0);
-			invokeIPV(GetIntegerv, GL_MAJOR_VERSION, __buffer.address());
-			if ( invokeI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = __buffer.intValue(0)) ) {
-				// We're on an 3.0+ context.
-				invokeIPV(GetIntegerv, GL_MINOR_VERSION, __buffer.address());
-				minorVersion = __buffer.intValue(0);
-			} else {
-				// Fallback to the string query.
-				long versionString = invokeIP(GetString, GL_VERSION);
-				if ( versionString == NULL || invokeI(GetError) != GL_NO_ERROR )
-					throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
+			MemoryStack stack = stackPush();
+			try {
+				IntBuffer pi = stack.ints(0);
 
-				APIVersion version = apiParseVersion(memDecodeUTF8(versionString), "OpenGL ES");
+				// Try the 3.0+ version query first
+				invokeIPV(GetIntegerv, GL_MAJOR_VERSION, memAddress(pi));
+				if ( invokeI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = pi.get(0)) ) {
+					// We're on an 3.0+ context.
+					invokeIPV(GetIntegerv, GL_MINOR_VERSION, memAddress(pi));
+					minorVersion = pi.get(0);
+				} else {
+					// Fallback to the string query.
+					long versionString = invokeIP(GetString, GL_VERSION);
+					if ( versionString == NULL || invokeI(GetError) != GL_NO_ERROR )
+						throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
 
-				majorVersion = version.major;
-				minorVersion = version.minor;
+					APIVersion version = apiParseVersion(memDecodeUTF8(versionString), "OpenGL ES");
+
+					majorVersion = version.major;
+					minorVersion = version.minor;
+				}
+			} finally {
+				stack.pop();
 			}
 
 			if ( majorVersion < 2 )
@@ -256,8 +260,17 @@ public final class GLES {
 					supportedExtensions.add(tokenizer.nextToken());
 			} else {
 				// Use indexed EXTENSIONS
-				invokeIPV(GetIntegerv, GL_NUM_EXTENSIONS, __buffer.address());
-				int extensionCount = __buffer.intValue(0);
+				int extensionCount;
+
+				stack.push();
+				try {
+					IntBuffer pi = stack.ints(0);
+
+					invokeIPV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
+					extensionCount = pi.get(0);
+				} finally {
+					stack.pop();
+				}
 
 				long GetStringi = checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi"));
 				for ( int i = 0; i < extensionCount; i++ )

@@ -4,11 +4,11 @@
  */
 package org.lwjgl.vulkan;
 
-import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.FunctionProvider;
+import org.lwjgl.system.MemoryStack;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.VKUtil.*;
 
@@ -45,14 +45,16 @@ public class VkInstance extends DispatchableHandle {
 
 			@Override
 			public long getFunctionAddress(CharSequence functionName) {
-				APIBuffer __buffer = apiBuffer();
-				__buffer.stringParamASCII(functionName, true);
+				MemoryStack stack = stackPush();
+				try {
+					long address = GetInstanceProcAddr(GetInstanceProcAddr, handle, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
+					if ( address == NULL )
+						address = VK.getFunctionProvider().getFunctionAddress(functionName);
 
-				long address = GetInstanceProcAddr(GetInstanceProcAddr, handle, __buffer.address());
-				if ( address == NULL )
-					address = VK.getFunctionProvider().getFunctionAddress(functionName);
-
-				return address;
+					return address;
+				} finally {
+					stack.pop();
+				}
 			}
 
 			@Override

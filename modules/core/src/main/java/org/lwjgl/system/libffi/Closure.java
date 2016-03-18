@@ -9,7 +9,7 @@ import org.lwjgl.system.*;
 
 import java.lang.reflect.Method;
 
-import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
@@ -244,14 +244,18 @@ public abstract class Closure extends Pointer.Default {
 	}
 
 	private static ClosureAddress allocate() {
-		APIBuffer __buf = apiStack();
-		int executable = __buf.pointerParam();
+		MemoryStack stack = stackPush();
+		try {
+			PointerBuffer pp = stack.mallocPointer(1);
 
-		long writable = nffi_closure_alloc(FFIClosure.SIZEOF, __buf.address(executable));
-		if ( writable == NULL )
-			throw new OutOfMemoryError("Failed to allocate libffi closure.");
+			long writable = nffi_closure_alloc(FFIClosure.SIZEOF, memAddress(pp));
+			if ( writable == NULL )
+				throw new OutOfMemoryError("Failed to allocate libffi closure.");
 
-		return new ClosureAddress(writable, __buf.pointerValue(executable));
+			return new ClosureAddress(writable, pp.get(0));
+		} finally {
+			stack.pop();
+		}
 	}
 
 	// Closures types

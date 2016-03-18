@@ -412,14 +412,14 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	// -- PointerWrapper operations --
 
 	/** Puts the pointer value of the specified {@link Pointer} at the current position and then increments the position. */
-	public PointerBuffer put(Pointer wrapper) {
-		put(wrapper.address());
+	public PointerBuffer put(Pointer pointer) {
+		put(pointer.address());
 		return this;
 	}
 
 	/** Puts the pointer value of the specified {@link Pointer} at the specified index. */
-	public PointerBuffer put(int index, Pointer wrapper) {
-		put(index, wrapper.address());
+	public PointerBuffer put(int index, Pointer pointer) {
+		put(index, pointer.address());
 		return this;
 	}
 

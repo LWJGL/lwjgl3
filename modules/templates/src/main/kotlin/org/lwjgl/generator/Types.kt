@@ -270,21 +270,17 @@ open class PointerMapping(
 		val DATA_LONG = PointerMapping(LongBuffer::class, 3)
 		val DATA_FLOAT = PointerMapping(FloatBuffer::class, 2)
 		val DATA_DOUBLE = PointerMapping(DoubleBuffer::class, 3)
-
-		val primitiveMap = hashMapOf(
-			DATA_POINTER to "pointer",
-
-			DATA_BOOLEAN to "boolean",
-			DATA_BYTE to "byte",
-			DATA_SHORT to "short",
-			DATA_INT to "int",
-			DATA_LONG to "long",
-			DATA_FLOAT to "float",
-			DATA_DOUBLE to "double"
-		)
 	}
 
 	val isMultiByte = byteShift != null && byteShift != "0"
+
+	val box = javaMethodType.java.simpleName.substringBefore("Buffer")
+	val primitive = box.toLowerCase()
+
+	val mallocType: String get() = when ( box ) {
+		"Byte" -> ""
+		else -> box
+	}
 
 }
 

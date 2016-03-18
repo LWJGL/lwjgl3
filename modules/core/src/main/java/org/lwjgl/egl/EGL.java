@@ -8,6 +8,7 @@ import org.lwjgl.system.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.nio.ByteBuffer;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -16,6 +17,7 @@ import static java.lang.Math.*;
 import static org.lwjgl.egl.EGL10.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -84,14 +86,16 @@ public final class EGL {
 
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
-					APIBuffer __buffer = apiBuffer();
-					__buffer.stringParamASCII(functionName, true);
+					stackPush();
+					try {
+						long address = invokePP(eglGetProcAddress, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
+						if ( address == NULL )
+							address = EGL.getFunctionAddress(functionName);
 
-					long address = invokePP(eglGetProcAddress, __buffer.address());
-					if ( address == NULL )
-						address = EGL.getFunctionAddress(functionName);
-
-					return address;
+						return address;
+					} finally {
+						stackPop();
+					}
 				}
 
 				@Override

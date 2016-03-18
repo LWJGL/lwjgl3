@@ -6,6 +6,7 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
+import java.nio.IntBuffer;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -16,7 +17,9 @@ import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.Checks.checkPointer;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.ThreadLocalUtil.*;
 
@@ -96,17 +99,19 @@ public final class GL {
 
 			@Override
 			public long getFunctionAddress(CharSequence functionName) {
-				APIBuffer __buffer = apiBuffer();
-				__buffer.stringParamASCII(functionName, true);
+				stackPush();
+				try {
+					long address = getExtensionAddress(memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
+					if ( address == NULL ) {
+						address = OPENGL.getFunctionAddress(functionName);
+						if ( address == NULL )
+							apiLog("Failed to locate address for GL function " + functionName);
+					}
 
-				long address = getExtensionAddress(__buffer.address());
-				if ( address == NULL ) {
-					address = OPENGL.getFunctionAddress(functionName);
-					if ( address == NULL )
-						apiLog("Failed to locate address for GL function " + functionName);
+					return address;
+				} finally {
+					stackPop();
 				}
-
-				return address;
 			}
 
 			@Override
@@ -256,28 +261,32 @@ public final class GL {
 					"An OpenGL context was in an error state before the creation of its capabilities instance. Error: " + GLUtil.getErrorString(errorCode)
 				);
 
-			APIBuffer __buffer = apiBuffer();
-
 			int majorVersion;
 			int minorVersion;
 
-			// Try the 3.0+ version query first
-			__buffer.intParam(0, 0, 0);
-			callIPV(GetIntegerv, GL_MAJOR_VERSION, __buffer.address());
-			if ( callI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = __buffer.intValue(0)) ) {
-				// We're on an 3.0+ context.
-				callIPV(GetIntegerv, GL_MINOR_VERSION, __buffer.address());
-				minorVersion = __buffer.intValue(0);
-			} else {
-				// Fallback to the string query.
-				long versionString = callIP(GetString, GL_VERSION);
-				if ( versionString == NULL || callI(GetError) != GL_NO_ERROR )
-					throw new IllegalStateException("There is no OpenGL context current in the current thread.");
+			MemoryStack stack = stackPush();
+			try {
+				IntBuffer version = stack.ints(0);
 
-				APIVersion version = apiParseVersion(memDecodeUTF8(versionString));
+				// Try the 3.0+ version query first
+				callIPV(GetIntegerv, GL_MAJOR_VERSION, memAddress(version));
+				if ( callI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = version.get(0)) ) {
+					// We're on an 3.0+ context.
+					callIPV(GetIntegerv, GL_MINOR_VERSION, memAddress(version));
+					minorVersion = version.get(0);
+				} else {
+					// Fallback to the string query.
+					long versionString = callIP(GetString, GL_VERSION);
+					if ( versionString == NULL || callI(GetError) != GL_NO_ERROR )
+						throw new IllegalStateException("There is no OpenGL context current in the current thread.");
 
-				majorVersion = version.major;
-				minorVersion = version.minor;
+					APIVersion apiVersion = apiParseVersion(memDecodeUTF8(versionString));
+
+					majorVersion = apiVersion.major;
+					minorVersion = apiVersion.minor;
+				}
+			} finally {
+				stackPop();
 			}
 
 			if ( majorVersion < 1 || (majorVersion == 1 && minorVersion < 1) )
@@ -315,32 +324,39 @@ public final class GL {
 					supportedExtensions.add(tokenizer.nextToken());
 			} else {
 				// Use indexed EXTENSIONS
-				callIPV(GetIntegerv, GL_NUM_EXTENSIONS, __buffer.address());
-				int extensionCount = __buffer.intValue(0);
+				stack.push();
+				try {
+					IntBuffer pi = stack.ints(0);
 
-				long GetStringi = checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi"));
-				for ( int i = 0; i < extensionCount; i++ )
-					supportedExtensions.add(memDecodeASCII(callIIP(GetStringi, GL_EXTENSIONS, i)));
+					callIPV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
+					int extensionCount = pi.get(0);
 
-				// In real drivers, we may encounter the following weird scenarios:
-				// - 3.1 context without GL_ARB_compatibility but with deprecated functionality exposed and working.
-				// - Core or forward-compatible context with GL_ARB_compatibility exposed, but not working when used.
-				// We ignore these and go by the spec.
+					long GetStringi = checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi"));
+					for ( int i = 0; i < extensionCount; i++ )
+						supportedExtensions.add(memDecodeASCII(callIIP(GetStringi, GL_EXTENSIONS, i)));
 
-				// Force forwardCompatible to true if the context is a forward-compatible context.
-				callIPV(GetIntegerv, GL_CONTEXT_FLAGS, __buffer.address());
-				if ( (__buffer.intValue(0) & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT) != 0 )
-					forwardCompatible = true;
-				else {
-					// Force forwardCompatible to true if the context is a core profile context.
-					if ( (3 < majorVersion || 1 <= minorVersion) ) { // OpenGL 3.1+
-						if ( 3 < majorVersion || 2 <= minorVersion ) { // OpenGL 3.2+
-							callIPV(GetIntegerv, GL_CONTEXT_PROFILE_MASK, __buffer.address());
-							if ( (__buffer.intValue(0) & GL_CONTEXT_CORE_PROFILE_BIT) != 0 )
-								forwardCompatible = true;
-						} else
-							forwardCompatible = !supportedExtensions.contains("GL_ARB_compatibility");
+					// In real drivers, we may encounter the following weird scenarios:
+					// - 3.1 context without GL_ARB_compatibility but with deprecated functionality exposed and working.
+					// - Core or forward-compatible context with GL_ARB_compatibility exposed, but not working when used.
+					// We ignore these and go by the spec.
+
+					// Force forwardCompatible to true if the context is a forward-compatible context.
+					callIPV(GetIntegerv, GL_CONTEXT_FLAGS, memAddress(pi));
+					if ( (pi.get(0) & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT) != 0 )
+						forwardCompatible = true;
+					else {
+						// Force forwardCompatible to true if the context is a core profile context.
+						if ( (3 < majorVersion || 1 <= minorVersion) ) { // OpenGL 3.1+
+							if ( 3 < majorVersion || 2 <= minorVersion ) { // OpenGL 3.2+
+								callIPV(GetIntegerv, GL_CONTEXT_PROFILE_MASK, memAddress(pi));
+								if ( (pi.get(0) & GL_CONTEXT_CORE_PROFILE_BIT) != 0 )
+									forwardCompatible = true;
+							} else
+								forwardCompatible = !supportedExtensions.contains("GL_ARB_compatibility");
+						}
 					}
+				} finally {
+					stack.pop();
 				}
 			}
 
@@ -395,16 +411,24 @@ public final class GL {
 
 		long display = callP(glXGetCurrentDisplay);
 
-		APIBuffer __buffer = apiBuffer();
+		int majorVersion;
+		int minorVersion;
 
-		long glXQueryVersion = functionProvider.getFunctionAddress("glXQueryVersion");
-		if ( callPPPI(glXQueryVersion, display, __buffer.address(), __buffer.address(4)) == 0 )
-			throw new OpenGLException("GLX is not available."); // TODO: can't happen, right?
+		MemoryStack stack = stackPush();
+		try {
+			IntBuffer version = stack.ints(0, 0);
 
-		int majorVersion = __buffer.intValue(0);
-		int minorVersion = __buffer.intValue(4);
-		if ( majorVersion != 1 )
-			throw new OpenGLException("Invalid GLX major version: " + majorVersion);
+			long glXQueryVersion = functionProvider.getFunctionAddress("glXQueryVersion");
+			if ( callPPPI(glXQueryVersion, display, memAddress(version), memAddress(version) + 4) == 0 )
+				throw new OpenGLException("GLX is not available."); // TODO: can't happen, right?
+
+			majorVersion = version.get(0);
+			minorVersion = version.get(1);
+			if ( majorVersion != 1 )
+				throw new OpenGLException("Invalid GLX major version: " + majorVersion);
+		} finally {
+			stack.pop();
+		}
 
 		int[][] GLX_VERSIONS = {
 			{ 1, 2, 3, 4 }

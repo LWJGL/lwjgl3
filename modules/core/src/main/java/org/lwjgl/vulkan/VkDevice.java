@@ -4,11 +4,11 @@
  */
 package org.lwjgl.vulkan;
 
-import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.FunctionProvider;
+import org.lwjgl.system.MemoryStack;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.VkInstance.*;
 
@@ -34,19 +34,22 @@ public class VkDevice extends DispatchableHandle {
 			new FunctionProvider() {
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
-					APIBuffer __buffer = apiBuffer();
-					__buffer.stringParamASCII(functionName, true);
+					MemoryStack stack = stackPush();
+					try {
+						long nameEncoded = memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK));
 
-					VK10 vk = physicalDevice.getCapabilities().__VK10;
-					long address = GetDeviceProcAddr(vk.GetDeviceProcAddr, handle, __buffer.address());
-					if ( address == NULL ) {
-						address = GetInstanceProcAddr(vk.GetInstanceProcAddr, physicalDevice.getInstance().address(), __buffer.address
-							());
-						if ( address == NULL )
-							address = VK.getFunctionProvider().getFunctionAddress(functionName);
+						VK10 vk = physicalDevice.getCapabilities().__VK10;
+						long address = GetDeviceProcAddr(vk.GetDeviceProcAddr, handle, nameEncoded);
+						if ( address == NULL ) {
+							address = GetInstanceProcAddr(vk.GetInstanceProcAddr, physicalDevice.getInstance().address(), nameEncoded);
+							if ( address == NULL )
+								address = VK.getFunctionProvider().getFunctionAddress(functionName);
+						}
+
+						return address;
+					} finally {
+						stack.pop();
 					}
-
-					return address;
 				}
 
 				@Override

@@ -37,7 +37,6 @@ internal val MAP_OLD = "old_buffer"
 internal val MAP_LENGTH = "length"
 internal val FUNCTION_ADDRESS = "__functionAddress"
 
-internal val API_BUFFER = "__buffer"
 internal val JNIENV = "__env"
 
 /** Special parameter that generates an explicit function address parameter. */
@@ -71,6 +70,7 @@ abstract class Function(
 	inline fun getParams(crossinline predicate: (Parameter) -> Boolean) = parameters.asSequence().filter {
 		predicate(it)
 	}
+
 	inline fun getParam(crossinline predicate: (Parameter) -> Boolean) = getParams(predicate).single()
 	inline fun hasParam(crossinline predicate: (Parameter) -> Boolean) = getParams(predicate).any()
 
@@ -659,7 +659,7 @@ class NativeClassFunction(
 
 		println(") {")
 
-		val code = if ( this@NativeClassFunction.has(Code) ) this@NativeClassFunction[Code] else Code.NO_CODE
+		val code = if ( has(Code) ) get(Code) else Code.NO_CODE
 
 		// Step 2: Get function address
 
@@ -670,21 +670,27 @@ class NativeClassFunction(
 		printCode(code.javaInit, ApplyTo.NORMAL)
 		generateChecks(NORMAL);
 
-		// Step 3.b: Prepare APIBuffer parameters.
+		// Step 3.b: Prepare stack parameters
 
-		if ( hideAutoSizeResultParam ) {
-			println("\t\tAPIBuffer $API_BUFFER = apiBuffer();")
+		val hasStack = hideAutoSizeResultParam
+		if ( hasStack ) {
+			println("\t\tMemoryStack stack = stackPush();")
 
 			val autoSizeParam = getParam { it has AutoSizeResult }
-			val autoSizeType = if ( autoSizeParam.nativeType.mapping === PointerMapping.DATA_INT ) "int" else "long"
-			println("\t\tint ${autoSizeParam.name} = $API_BUFFER.${autoSizeType}Param();")
+			val autoSizeType = (autoSizeParam.nativeType.mapping as PointerMapping).mallocType
+			println("\t\t${autoSizeType}Buffer ${autoSizeParam.name} = stack.calloc$autoSizeType(1);")
 		}
 
+		val hasFinally = hasStack || code.hasStatements(code.javaFinally, ApplyTo.NORMAL)
+
 		// Step 4: Call the native method
-		generateCodeBeforeNative(code, ApplyTo.NORMAL)
+		generateCodeBeforeNative(code, ApplyTo.NORMAL, hasFinally)
 
 		if ( hasCustomJNI || !returns.has(Address) ) {
-			generateNativeMethodCall(code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL)) {
+			generateNativeMethodCall(
+				code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL),
+				hasStack || code.hasStatements(code.javaFinally, ApplyTo.NORMAL)
+			) {
 				printList(getNativeParams()) {
 					it.asNativeMethodCallParam(this@NativeClassFunction, NORMAL)
 				}
@@ -696,13 +702,15 @@ class NativeClassFunction(
 			}
 		}
 
-		generateCodeAfterNative(code, ApplyTo.NORMAL)
+		generateCodeAfterNative(code, ApplyTo.NORMAL, hasFinally)
 
 		if ( !(returns.isVoid || returns.isStructValue) ) {
 			if ( returns.isBufferPointer ) {
+				if ( hasFinally )
+					print("\t")
 				print("\t\t")
 				if ( returns.nativeType is StructType ) {
-					println("return ${returns.nativeType.definition.className}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", $API_BUFFER.intValue(${it.name})" else "" }});")
+					println("return ${returns.nativeType.definition.className}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", ${it.name}.get(0)" else "" }});")
 				} else {
 					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
@@ -728,12 +736,12 @@ class NativeClassFunction(
 										"(int)${it.name}"
 								} else if ( it.nativeType.mapping === PointerMapping.DATA_INT ) {
 									if ( single )
-										"$API_BUFFER.intValue(${it.name})"
+										"${it.name}.get(0)"
 									else
 										"${it.name}.getInt(${it.name}.position())"
 								} else {
 									if ( single )
-										"(int)$API_BUFFER.longValue(${it.name})"
+										"(int)${it.name}.get(0)"
 									else
 										"(int)${it.name}.getLong(${it.name}.position())"
 								}
@@ -745,53 +753,62 @@ class NativeClassFunction(
 					}
 					println(");")
 				}
-			} else if ( code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL) )
+			} else if ( code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL) ) {
+				if ( hasFinally )
+					print("\t")
 				println("\t\treturn $RESULT;")
+			}
 		}
+
+		generateCodeFinally(code, ApplyTo.NORMAL, hasStack)
 
 		println("\t}\n")
 	}
 
-	private fun PrintWriter.printCode(statements: List<Code.Statement>, applyTo: ApplyTo) {
+	private fun PrintWriter.printCode(statements: List<Code.Statement>, applyTo: ApplyTo, indent: String = "") {
 		if ( statements.isEmpty() )
 			return
 
 		statements.filter { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }.forEach {
+			print(indent)
 			println(it.code)
 		}
 	}
 
-	private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: ApplyTo) {
-		printCode(code.javaBeforeNative, applyTo)
+	private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: ApplyTo, hasFinally: Boolean) {
+		printCode(code.javaBeforeNative, applyTo, if ( hasFinally ) "\t" else "")
 
-		if ( code.hasStatements(code.javaFinally, applyTo) ) {
+		if ( hasFinally )
 			println("\t\ttry {")
-			print('\t')
-		}
 	}
 
-	private fun PrintWriter.generateCodeAfterNative(code: Code, applyTo: ApplyTo) {
-		val finally = code.getStatements(code.javaFinally, applyTo)
-		if ( finally.isNotEmpty() )
-			print('\t')
-		printCode(code.javaAfterNative, applyTo)
+	private fun PrintWriter.generateCodeAfterNative(code: Code, applyTo: ApplyTo, hasFinally: Boolean) {
+		printCode(code.javaAfterNative, applyTo, if ( hasFinally ) "\t" else "")
+	}
 
-		if ( finally.isNotEmpty() ) {
-			println("\t} finally {")
+	private fun PrintWriter.generateCodeFinally(code: Code, applyTo: ApplyTo, hasStack: Boolean) {
+		val finally = code.getStatements(code.javaFinally, applyTo)
+		if ( hasStack || finally.isNotEmpty() ) {
+			println("\t\t} finally {")
 			finally.forEach {
 				println(it.code)
 			}
+			if ( hasStack )
+				println("\t\t\tstack.pop();")
 			println("\t\t}")
 		}
 	}
 
 	private fun PrintWriter.generateNativeMethodCall(
 		returnLater: Boolean,
+		hasFinally: Boolean,
 		printParams: PrintWriter.() -> Unit
 	) {
 		val hasConstructor = returns.nativeType is ObjectType
 		val returnType = if ( hasConstructor ) (returns.nativeType as ObjectType).className else returnsNativeMethodType
 
+		if ( hasFinally )
+			print("\t")
 		print("\t\t")
 		if ( !(returns.isVoid || returns.isStructValue) ) {
 			if ( returnLater || returns.isBufferPointer ) {
@@ -902,7 +919,7 @@ class NativeClassFunction(
 
 		fun applyReturnValueTransforms(param: Parameter) {
 			// Transform void to the proper type
-			transforms[returns] = PrimitiveValueReturnTransform(PointerMapping.primitiveMap[param.nativeType.mapping as PointerMapping]!!, param.name)
+			transforms[returns] = PrimitiveValueReturnTransform(param.nativeType.mapping as PointerMapping, param.name)
 
 			// Transform the AutoSize parameter, if there is one
 			getParams(hasAutoSizePredicate(param)).forEach {
@@ -933,12 +950,12 @@ class NativeClassFunction(
 					val maxLengthParam = getParam(hasAutoSizePredicate(it))
 					transforms.remove(maxLengthParam)
 
-					// Hide length parameter and use APIBuffer
+					// Hide length parameter and use the stack
 					val lengthParam = returnMod.lengthParam
 					if ( lengthParam.isNotEmpty() )
 						transforms[paramMap[lengthParam]!!] = BufferLengthTransform
 
-					// Hide target parameter and use APIBuffer
+					// Hide target parameter and use the stack
 					transforms[it] = BufferAutoSizeTransform
 
 					// Transform void to the buffer type
@@ -1007,8 +1024,8 @@ class NativeClassFunction(
 							// Transform the AutoSize parameter
 							transforms[autoSizeParam] = ExpressionTransform("(1 << ${autoType.byteShift}) * $i")
 
-							val primitiveType = PointerMapping.primitiveMap[autoType]!!
-							transforms[it] = VectorValueTransform(if ( primitiveType == "pointer" ) "long" else primitiveType, primitiveType, singleValue.newName, i)
+							val primitiveType = autoType.primitive
+							transforms[it] = VectorValueTransform(autoType, primitiveType, singleValue.newName, i)
 							generateAlternativeMethod("$name$i${primitiveType[0]}", "${if ( i == 1 ) "Single $primitiveType" else "$primitiveType$i" } value version of:", transforms)
 						}
 					}
@@ -1117,7 +1134,7 @@ class NativeClassFunction(
 				if ( pointerType.elementType is StructType ) {
 					transforms[it] = SingleValueStructTransform(singleValue.newName)
 				} else {
-					val primitiveType = PointerMapping.primitiveMap[pointerType.mapping as PointerMapping]!!
+					val primitiveType = (pointerType.mapping as PointerMapping).primitive
 					transforms[it] = SingleValueTransform(
 						when ( pointerType.elementType ) {
 							is CharSequenceType -> "CharSequence"
@@ -1198,52 +1215,57 @@ class NativeClassFunction(
 		printCode(code.javaInit, ApplyTo.ALTERNATIVE)
 		generateChecks(ALTERNATIVE, transforms);
 
-		// Prepare APIBuffer parameters
+		// Prepare stack parameters
 
-		var apiBufferSet = hideAutoSizeResultParam
-		if ( apiBufferSet ) {
-			println("\t\tAPIBuffer $API_BUFFER = apiBuffer();")
+		val stackTransforms = transforms.asSequence().filter { it.value is StackFunctionTransform<*> }
+		val hideAutoSizeResultParam = this@NativeClassFunction.hideAutoSizeResultParam
+		val hasStack = hideAutoSizeResultParam || stackTransforms.any()
 
-			val autoSizeParam = getParam { it has AutoSizeResult }
-			val autoSizeType = if ( autoSizeParam.nativeType.mapping === PointerMapping.DATA_INT ) "int" else "long"
-			println("\t\tint ${autoSizeParam.name} = $API_BUFFER.${autoSizeType}Param();")
-		}
-		for ((qtype, transform) in transforms) {
-			if ( transform is APIBufferFunctionTransform<*> ) {
-				if ( !apiBufferSet ) {
-					println("\t\tAPIBuffer $API_BUFFER = apiBuffer();")
-					apiBufferSet = true
-				}
+		if ( hasStack )
+			println("\t\tMemoryStack stack = stackPush();")
 
-				@Suppress("UNCHECKED_CAST")
-				when ( qtype ) {
-					is Parameter   -> (transform as APIBufferFunctionTransform<Parameter>).setupAPIBuffer(this@NativeClassFunction, qtype, this)
-					is ReturnValue -> (transform as APIBufferFunctionTransform<ReturnValue>).setupAPIBuffer(this@NativeClassFunction, qtype, this)
-				}
-			}
-		}
+		val hasFinally = hasStack || code.hasStatements(code.javaFinally, ApplyTo.ALTERNATIVE)
 
 		// Call the native method
 
-		generateCodeBeforeNative(code, ApplyTo.ALTERNATIVE)
+		generateCodeBeforeNative(code, ApplyTo.ALTERNATIVE, hasFinally)
+
+		if ( hideAutoSizeResultParam ) {
+			val autoSizeParam = getParam { it has AutoSizeResult }
+			val autoSizeType = (autoSizeParam.nativeType.mapping as PointerMapping).mallocType
+			println("\t\t${autoSizeType}Buffer ${autoSizeParam.name} = stack.calloc$autoSizeType(1);")
+		}
+
+		for ((qtype, transform) in stackTransforms) {
+			@Suppress("UNCHECKED_CAST")
+			when ( qtype ) {
+				is Parameter   -> (transform as StackFunctionTransform<Parameter>).setupStack(this@NativeClassFunction, qtype, this)
+				is ReturnValue -> (transform as StackFunctionTransform<ReturnValue>).setupStack(this@NativeClassFunction, qtype, this)
+			}
+		}
 
 		val returnLater = code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE) || transforms[returns] is BufferAutoSizeReturnTransform
-		generateNativeMethodCall(returnLater) {
+		generateNativeMethodCall(returnLater, hasFinally) {
 			printList(getNativeParams()) {
 				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(this@NativeClassFunction, ALTERNATIVE))
 			}
 		}
 
-		generateCodeAfterNative(code, ApplyTo.ALTERNATIVE)
+		generateCodeAfterNative(code, ApplyTo.ALTERNATIVE, hasFinally)
 
 		// Return
 
 		if ( returns.isVoid || returns.isStructValue ) {
 			val result = returns.transformCallOrElse(transforms, "")
-			if ( !result.isEmpty() )
+			if ( !result.isEmpty() ) {
+				if ( hasFinally )
+					print("\t")
 				println(result)
+			}
 		} else {
 			if ( returns.isBufferPointer ) {
+				if ( hasFinally )
+					print("\t")
 				print("\t\t")
 				if ( returns.nativeType is StructType ) {
 					println("return ${returns.nativeType.definition.className}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", ${it.name}.get(${it.name}.position()" else "" }});")
@@ -1270,12 +1292,12 @@ class NativeClassFunction(
 									"(int)${it.name}"
 								else if ( it.nativeType.mapping === PointerMapping.DATA_INT ) {
 									if ( single )
-										"$API_BUFFER.intValue(${it.name})"
+										"${it.name}.get(0)"
 									else
 										"${it.name}.get(${it.name}.position())"
 								} else {
 									if ( single )
-										"(int)$API_BUFFER.longValue(${it.name})"
+										"(int)${it.name}.get(0)"
 									else
 										"(int)${it.name}.get(${it.name}.position())"
 								}
@@ -1291,9 +1313,14 @@ class NativeClassFunction(
 					else // Multiple statements, assumes the transformation includes the return statement.
 						println(returnExpression)
 				}
-			} else if ( returnLater )
+			} else if ( returnLater ) {
+				if ( hasFinally )
+					print("\t")
 				println(returns.transformCallOrElse(transforms, "\t\treturn $RESULT;"))
+			}
 		}
+
+		generateCodeFinally(code, ApplyTo.ALTERNATIVE, hasStack)
 
 		println("\t}\n")
 	}
