@@ -105,9 +105,8 @@ public enum Configuration {
 	 * Sets the implementation used internally by LWJGL for thread-local data. Supported values:
 	 *
 	 * <ul>
-	 * <li><em>FastThreadLocal</em> - Uses {@link FastThreadLocal}. This is the default. It is the best performance option, but may be problematic in programs
-	 * that create and destroy many (hundreds of thousands or more) threads in their life-time.</li>
-	 * <li><em>unsafe</em> - A thread-local implementation that uses {@code Unsafe} to store per-thread data directly in {@link Thread} instances.</li>
+	 * <li><em>unsafe</em> - A thread-local implementation that uses {@code Unsafe} to store per-thread data directly in {@link Thread} instances. This is the
+	 * default.</li>
 	 * <li><em>ThreadLocal</em> - Uses {@link ThreadLocal}.</li>
 	 * </ul>
 	 *

@@ -54,16 +54,9 @@ public final class ThreadLocalUtil {
 
 	@SuppressWarnings("unchecked")
 	static ThreadLocal<TLS> getInstance() {
-		String provider = Configuration.THREAD_LOCAL_SPACE.get("FastThreadLocal");
+		String provider = Configuration.THREAD_LOCAL_SPACE.get("unsafe");
 
-		if ( "FastThreadLocal".equals(provider) ) {
-			return new FastThreadLocal<TLS>() {
-				@Override
-				protected TLS initialValue() {
-					return new TLS();
-				}
-			};
-		} else if ( "unsafe".equals(provider) ) {
+		if ( "unsafe".equals(provider) ) {
 			return new UnsafeProvider();
 		} else if ( "ThreadLocal".equals(provider) ) {
 			return new ThreadLocal<ThreadLocalUtil.TLS>() {
@@ -110,10 +103,7 @@ public final class ThreadLocalUtil {
 		@Override
 		public TLS get() {
 			Object target = UNSAFE.getObject(Thread.currentThread(), TARGET);
-			if ( TLS.class.isInstance(target) )
-				return (TLS)target;
-
-			return setInitialValue();
+			return TLS.class.isInstance(target) ? (TLS)target : setInitialValue();
 		}
 
 		private TLS setInitialValue() {
