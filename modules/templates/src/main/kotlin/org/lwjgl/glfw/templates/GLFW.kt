@@ -938,20 +938,20 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		size of the window, especially for full screen windows. To query the actual attributes of the created window, framebuffer and context, use queries like
 		#GetWindowAttrib() and #GetWindowSize() and #GetFramebufferSize().
 
-		To create a full screen window, you need to specify the monitor the window will cover. If no monitor is specified, windowed mode will be used. Unless
-		you have a way for the user to choose a specific monitor, it is recommended that you pick the primary monitor. For more information on how to query
-		connected monitors, see <a href="http://www.glfw.org/docs/latest/monitor.html\#monitor_monitors">monitors</a>.
+		To create a full screen window, you need to specify the monitor the window will cover. If no monitor is specified, the window will be windowed mode.
+		Unless you have a way for the user to choose a specific monitor, it is recommended that you pick the primary monitor. For more information on how to
+		query connected monitors, see <a href="http://www.glfw.org/docs/latest/monitor.html\#monitor_monitors">monitors</a>.
 
-		For full screen windows, the specified size becomes the resolution of the window's desired video mode. As long as a full screen window has input focus,
-		the supported video mode most closely matching the desired video mode is set for the specified monitor. For more information about full screen windows,
-		including the creation of so called <i>windowed full screen</i> or <i>borderless full screen windows</i>, see
+		For full screen windows, the specified size becomes the resolution of the window's <i>desired video mode</i>. As long as a full screen window is not
+		iconified, the supported video mode most closely matching the desired video mode is set for the specified monitor. For more information about full
+		screen windows, including the creation of so called <i>windowed full screen</i> or <i>borderless full screen</i> windows, see
 		<a href="http://www.glfw.org/docs/latest/window.html\#window_windowed_full_screen">full screen</a>.
 
 		By default, newly created windows use the placement recommended by the window system. To create the window at a specific position, make it initially
 		invisible using the #VISIBLE window hint, set its <a href="http://www.glfw.org/docs/latest/window.html\#window_pos">position</a> and then
 		<a href="http://www.glfw.org/docs/latest/window.html\#window_hide">show</a> it.
 
-		If a full screen window has input focus, the screensaver is prohibited from starting.
+		As long as at least one full screen window is not iconified, the screensaver is prohibited from starting.
 
 		Window systems put limits on window sizes. Very large or very small window dimensions may be overridden by the window system on creation. Check the
 		actual <a href="http://www.glfw.org/docs/latest/window.html\#window_size">size</a> after creation.
@@ -999,7 +999,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("width", "the desired width, in screen coordinates, of the window"),
 		int.IN("height", "the desired height, in screen coordinates, of the window"),
 		const..charUTF8_p.IN("title", "initial, UTF-8 encoded window title"),
-		nullable..GLFWmonitor.IN("monitor", "the monitor to use for fullscreen mode, or $NULL to use windowed mode"),
+		nullable..GLFWmonitor.IN("monitor", "the monitor to use for fullscreen mode, or $NULL for windowed mode"),
 		nullable..GLFWwindow.IN("share", " the window whose context to share resources with, or $NULL to not share resources"),
 
 		returnDoc = "the handle of the created window, or $NULL if an error occurred",
@@ -1071,6 +1071,33 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	)
 
 	void(
+		"SetWindowIcon",
+		"""
+		Sets the icon for the specified window.
+
+		This function sets the icon of the specified window. If passed an array of candidate images, those of or closest to the sizes desired by the system are
+		selected. If no images are specified, the window reverts to its default icon.
+
+		The desired image sizes varies depending on platform and system settings. The selected images will be rescaled as needed. Good sizes include 16x16,
+		32x32 and 48x48.
+
+		The specified image data is copied before this function returns.
+
+		<b>OS X</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's icon. For more
+		information on bundles, see the <a href="https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming
+		Guide</a> in the Mac Developer Library.
+
+		This function must only be called from the main thread.
+		""",
+
+		GLFWwindow.IN("window", "the window whose icon to set"),
+		AutoSize("images")..int.IN("count", "the number of images in the specified array, or zero to revert to the default window icon"),
+	    nullable..const..GLFWimage_p.IN("images", "the images to create the icon from. This is ignored if count is zero."),
+
+		since = "version 3.2"
+	)
+
+	void(
 		"GetWindowPos",
 		"""
 		Retrieves the position, in screen coordinates, of the upper-left corner of the client area of the specified window.
@@ -1129,10 +1156,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	void(
 		"SetWindowSizeLimits",
 		"""
-		Sets the size limits of the client area of the specified window. If the window is full screen or not resizable, this function does nothing.
+		Sets the size limits of the client area of the specified window. If the window is full screen, the size limits only take effect if once it is made
+		windowed. If the window is not resizable, this function does nothing.
 
-		The size limits are applied immediately and may cause the window to be resized. If you set size limits and an aspect ratio that conflict, the results
-		are undefined.
+		The size limits are applied immediately to a windowed mode window and may cause it to be resized.
 
 		This function must only be called from the main thread.
 		""",
@@ -1149,15 +1176,15 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	void(
 		"SetWindowAspectRatio",
 		"""
-		Sets the required aspect ratio of the client area of the specified window. If the window is full screen or not resizable, this function does nothing.
+		Sets the required aspect ratio of the client area of the specified window. If the window is full screen, the aspect ratio only takes effect once it is
+		made windowed. If the window is not resizable, this function does nothing.
 
 		The aspect ratio is specified as a numerator and a denominator and both values must be greater than zero. For example, the common 16:9 aspect ratio is
 		specified as 16 and 9, respectively.
 
 		If the numerator and denominator is set to #DONT_CARE then the aspect ratio limit is disabled.
 
- 		The aspect ratio is applied immediately and may cause the window to be  resized. If you set size limits and an aspect ratio that conflict, the results
- 		are undefined.
+		The aspect ratio is applied immediately to a windowed mode window and may cause it to be resized.
 
 		This function must only be called from the main thread.
 		""",
@@ -1174,8 +1201,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Sets the size, in pixels, of the client area of the specified window.
 
-		For full screen windows, this function selects and switches to the resolution closest to the specified size, without affecting the window's context. As
-		the context is unaffected, the bit depths of the framebuffer remain unchanged.
+		For full screen windows, this function updates the resolution of its desired video mode and switches to the video mode closest to it, without affecting
+		the window's context. As the context is unaffected, the bit depths of the framebuffer remain unchanged.
+
+		If you wish to update the refresh rate of the desired video mode in addition to its resolution, see #SetWindowMonitor().
 
 		The window manager may put limits on what sizes are allowed. GLFW cannot and should not override these limits.
 
@@ -1183,8 +1212,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window to resize"),
-		int.IN("width", "the desired width of the specified window"),
-		int.IN("height", "the desired height of the specified window"),
+		int.IN("width", "the desired width, in screen coordinates, of the window client area"),
+		int.IN("height", "the desired height, in screen coordinates, of the window client area"),
 
 		since = "version 1.0"
 	)
@@ -1229,33 +1258,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Check(1)..nullable..int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or $NULL"),
 
 		since = "version 3.1"
-	)
-
-	void(
-		"SetWindowIcon",
-		"""
-		Sets the icon for the specified window.
-
-		This function sets the icon of the specified window. If passed an array of candidate images, those of or closest to the sizes desired by the system are
-		selected. If no images are specified, the window reverts to its default icon.
-
-		The desired image sizes varies depending on platform and system settings. The selected images will be rescaled as needed. Good sizes include 16x16,
-		32x32 and 48x48.
-
-		The specified image data is copied before this function returns.
-
-		<b>OS X</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's icon. For more
-		information on bundles, see the <a href="https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming
-		Guide</a> in the Mac Developer Library.
-
-		This function must only be called from the main thread.
-		""",
-
-		GLFWwindow.IN("window", "the window whose icon to set"),
-		AutoSize("images")..int.IN("count", "the number of images in the specified array, or zero to revert to the default window icon"),
-	    nullable..const..GLFWimage_p.IN("images", "the images to create the icon from. This is ignored if count is zero."),
-
-		since = "version 3.2"
 	)
 
 	void(
@@ -1361,6 +1363,38 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		returnDoc = "the monitor, or $NULL if the window is in windowed mode or an error occurred",
 		since = "version 3.0"
+	)
+
+	void(
+		"SetWindowMonitor",
+		"""
+		Sets the mode, monitor, video mode and placement of a window.
+
+        This function sets the monitor that the window uses for full screen mode or, if the monitor is $NULL, makes it windowed mode.
+
+		When setting a monitor, this function updates the width, height and refresh rate of the desired video mode and switches to the video mode closest to
+		it. The window position is ignored when setting a monitor.
+
+		When the monitor is $NULL, the position, width and height are used to place the window client area. The refresh rate is ignored when no monitor is
+		specified.
+
+		If you only wish to update the resolution of a full screen window or the size of a windowed mode window, see #SetWindowSize().
+
+		When a window transitions from full screen to windowed mode, this function restores any previous window settings such as whether it is decorated,
+		floating, resizable, has size or aspect ratio limits, etc.
+
+		This function must only be called from the main thread.
+		""",
+
+		GLFWwindow.IN("window", "the window whose monitor, size or video mode to set"),
+		GLFWmonitor.IN("monitor", "the desired monitor, or $NULL to set windowed mode"),
+		int.IN("xpos", "the desired x-coordinate of the upper-left corner of the client area"),
+		int.IN("ypos", "the desired y-coordinate of the upper-left corner of the client area"),
+		int.IN("width", "the desired with, in screen coordinates, of the client area or video mode"),
+		int.IN("height", "the desired height, in screen coordinates, of the client area or video mode"),
+		int.IN("refreshRate", "the desired refresh rate, in Hz, of the video mode"),
+
+		since = "version 3.2"
 	)
 
 	int(
