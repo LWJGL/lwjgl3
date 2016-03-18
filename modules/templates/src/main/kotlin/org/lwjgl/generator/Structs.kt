@@ -625,7 +625,7 @@ $indentation}"""
 	 * @param stack the stack from which to allocate
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
-	public static Buffer malloc(MemoryStack stack, int $BUFFER_CAPACITY_PARAM) {
+	public static Buffer malloc(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
 		return create(stack.nmalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
 	}
 
@@ -635,7 +635,7 @@ $indentation}"""
 	 * @param stack the stack from which to allocate
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
-	public static Buffer calloc(MemoryStack stack, int $BUFFER_CAPACITY_PARAM) {
+	public static Buffer calloc(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
 		return create(stack.ncalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
 	}
 
@@ -645,7 +645,7 @@ $indentation}"""
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
 	public static Buffer mallocStack(int $BUFFER_CAPACITY_PARAM) {
-		return malloc(stackGet(), $BUFFER_CAPACITY_PARAM);
+		return malloc($BUFFER_CAPACITY_PARAM, stackGet());
 	}
 
 	/**
@@ -654,7 +654,7 @@ $indentation}"""
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
 	public static Buffer callocStack(int $BUFFER_CAPACITY_PARAM) {
-		return calloc(stackGet(), $BUFFER_CAPACITY_PARAM);
+		return calloc($BUFFER_CAPACITY_PARAM, stackGet());
 	}
 
 	// -----------------------------------
