@@ -41,7 +41,7 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 		println("""
 	/** Returns the {@link ${nativeClass.className}} instance of the current context. */
 	public static ${nativeClass.className} getInstance() {
-		return getInstance(ALC.getCapabilities());
+		return getInstance(ALC.getICD());
 	}
 
 	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $ALC_CAP_CLASS}. */

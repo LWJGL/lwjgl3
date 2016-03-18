@@ -5,7 +5,6 @@
 package org.lwjgl.demo.openal;
 
 import org.lwjgl.openal.AL10;
-import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.OpenALException;
 
 import static org.lwjgl.openal.AL10.*;
@@ -27,17 +26,6 @@ public final class EFXUtil {
 
 	/** Utility class, hidden contructor. */
 	private EFXUtil() {
-	}
-
-	/**
-	 * Checks if OpenAL implementation is loaded and supports AL_EXT_EFX.
-	 *
-	 * @return True if AL_EXT_EFX is supported, false if not.
-	 *
-	 * @throws org.lwjgl.openal.OpenALException If OpenAL has not been created yet.
-	 */
-	public static boolean isEfxSupported() {
-		return ALC.getCapabilities().ALC_EXT_EFX;
 	}
 
 	/**
@@ -125,79 +113,77 @@ public final class EFXUtil {
 		}
 
 		boolean supported = false;
-		if ( isEfxSupported() ) {
 
-			// Try to create object in order to check AL's response.
+		// Try to create object in order to check AL's response.
+		alGetError();
+		int genError;
+		int testObject = 0;
+		try {
+			switch ( objectType ) { // Create object based on type
+				case EFFECT:
+					testObject = alGenEffects();
+					break;
+				case FILTER:
+					testObject = alGenFilters();
+					break;
+				default:
+					throw new IllegalArgumentException("Invalid objectType: " + objectType);
+			}
+			genError = alGetError();
+		} catch (OpenALException debugBuildException) {
+			// Hack because OpenALException hides the original error code (short of parsing the
+			// error message String which would break if it gets changed).
+			if ( debugBuildException.getMessage().contains("AL_OUT_OF_MEMORY") ) {
+				genError = AL_OUT_OF_MEMORY;
+			} else {
+				genError = AL_INVALID_OPERATION;
+			}
+		}
+
+		if ( genError == AL_NO_ERROR ) {
+			// Successfully created, now try to set type.
 			alGetError();
-			int genError;
-			int testObject = 0;
+			int setError;
 			try {
-				switch ( objectType ) { // Create object based on type
+				switch ( objectType ) { // Set based on object type
 					case EFFECT:
-						testObject = alGenEffects();
+						alEffecti(testObject, AL_EFFECT_TYPE, typeValue);
 						break;
 					case FILTER:
-						testObject = alGenFilters();
+						alFilteri(testObject, AL_FILTER_TYPE, typeValue);
 						break;
 					default:
 						throw new IllegalArgumentException("Invalid objectType: " + objectType);
 				}
-				genError = alGetError();
+				setError = alGetError();
 			} catch (OpenALException debugBuildException) {
-				// Hack because OpenALException hides the original error code (short of parsing the
-				// error message String which would break if it gets changed).
-				if ( debugBuildException.getMessage().contains("AL_OUT_OF_MEMORY") ) {
-					genError = AL_OUT_OF_MEMORY;
-				} else {
-					genError = AL_INVALID_OPERATION;
-				}
+				// Hack because OpenALException hides the original error code (short of parsing
+				// the error message String which would break when it gets changed).
+				setError = AL_INVALID_VALUE;
 			}
 
-			if ( genError == AL_NO_ERROR ) {
-				// Successfully created, now try to set type.
-				alGetError();
-				int setError;
-				try {
-					switch ( objectType ) { // Set based on object type
-						case EFFECT:
-							alEffecti(testObject, AL_EFFECT_TYPE, typeValue);
-							break;
-						case FILTER:
-							alFilteri(testObject, AL_FILTER_TYPE, typeValue);
-							break;
-						default:
-							throw new IllegalArgumentException("Invalid objectType: " + objectType);
-					}
-					setError = alGetError();
-				} catch (OpenALException debugBuildException) {
-					// Hack because OpenALException hides the original error code (short of parsing
-					// the error message String which would break when it gets changed).
-					setError = AL_INVALID_VALUE;
-				}
-
-				if ( setError == AL_NO_ERROR ) {
-					supported = true;
-				}
-
-				// Cleanup
-				try {
-					switch ( objectType ) { // Set based on object type
-						case EFFECT:
-							alDeleteEffects(testObject);
-							break;
-						case FILTER:
-							alDeleteFilters(testObject);
-							break;
-						default:
-							throw new IllegalArgumentException("Invalid objectType: " + objectType);
-					}
-				} catch (OpenALException debugBuildException) {
-					// Don't care about cleanup errors.
-				}
-
-			} else if ( genError == AL_OUT_OF_MEMORY ) {
-				throw new OpenALException(AL10.alGetString(genError));
+			if ( setError == AL_NO_ERROR ) {
+				supported = true;
 			}
+
+			// Cleanup
+			try {
+				switch ( objectType ) { // Set based on object type
+					case EFFECT:
+						alDeleteEffects(testObject);
+						break;
+					case FILTER:
+						alDeleteFilters(testObject);
+						break;
+					default:
+						throw new IllegalArgumentException("Invalid objectType: " + objectType);
+				}
+			} catch (OpenALException debugBuildException) {
+				// Don't care about cleanup errors.
+			}
+
+		} else if ( genError == AL_OUT_OF_MEMORY ) {
+			throw new OpenALException(AL10.alGetString(genError));
 		}
 
 		return supported;

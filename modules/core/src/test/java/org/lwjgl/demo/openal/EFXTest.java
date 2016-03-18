@@ -7,7 +7,6 @@ package org.lwjgl.demo.openal;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.*;
 import org.lwjgl.stb.STBVorbisInfo;
-import org.lwjgl.system.MemoryUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -32,35 +31,25 @@ public final class EFXTest {
 		efxUtilTest();
 	}
 
-	/** Loads OpenAL and makes sure EXTEfx is supported. */
-	private static ALContext setupEfx() throws Exception {
-		ALContext context = ALContext.create();
-
-		// Query for Effect Extension
-		if ( !ALC.getCapabilities().ALC_EXT_EFX ) {
-			context.destroy();
-			throw new Exception("No EXTEfx supported by driver.");
-		}
-		System.out.println("EXTEfx found.");
-
-		return context;
-	}
-
 	/**
 	 * Runs a series of API calls similar to the tutorials in the Effects Extension Guide of the
 	 * OpenAL SDK. Nothing is played in this method.
 	 */
 	private static void silentTests() throws Exception {
-		ALDevice device = ALDevice.create();
+		long device = alcOpenDevice((ByteBuffer)null);
+		if ( device == NULL )
+			throw new IllegalStateException("Failed to open the default device.");
+
+		ALCCapabilities deviceCaps = ALC.createCapabilities(device);
 
 		// Create context (only necessary if LWJGL context isn't sufficient, done as example)
 		IntBuffer contextAttribList = BufferUtils.createIntBuffer(16);
 
-		contextAttribList.put(ALC10.ALC_REFRESH);
+		contextAttribList.put(ALC_REFRESH);
 		contextAttribList.put(60);
 
-		contextAttribList.put(ALC10.ALC_SYNC);
-		contextAttribList.put(ALC10.ALC_FALSE);
+		contextAttribList.put(ALC_SYNC);
+		contextAttribList.put(ALC_FALSE);
 
 		// ALC_MAX_AUXILIARY_SENDS won't go above compile-time max. Set to compile-time max if greater.
 		contextAttribList.put(ALC_MAX_AUXILIARY_SENDS);
@@ -69,23 +58,23 @@ public final class EFXTest {
 		contextAttribList.put(0);
 		contextAttribList.flip();
 
-		long contextHandle = alcCreateContext(device.address(), contextAttribList);
-		ALContext newContext = new ALContext(device, contextHandle);
+		long newContext = alcCreateContext(device, contextAttribList);
 
-		boolean makeCurrentFailed = !alcMakeContextCurrent(newContext.address());
+		boolean makeCurrentFailed = !alcMakeContextCurrent(newContext);
 		if ( makeCurrentFailed ) {
 			throw new Exception("Failed to make context current.");
 		}
+		AL.createCapabilities(deviceCaps);
 
 		// Query EFX ALC values
 		System.out.println("AL_VERSION: " + alGetString(AL_VERSION));
-		int efxMajor = ALC10.alcGetInteger(device.address(), ALC_EFX_MAJOR_VERSION);
+		int efxMajor = alcGetInteger(device, ALC_EFX_MAJOR_VERSION);
 		System.out.println("ALC_EFX_MAJOR_VERSION: " + efxMajor);
 
-		int efxMinor = ALC10.alcGetInteger(device.address(), ALC_EFX_MINOR_VERSION);
+		int efxMinor = alcGetInteger(device, ALC_EFX_MINOR_VERSION);
 		System.out.println("ALC_EFX_MINOR_VERSION: " + efxMinor);
 
-		int auxSends = ALC10.alcGetInteger(device.address(), ALC_MAX_AUXILIARY_SENDS);
+		int auxSends = alcGetInteger(device, ALC_MAX_AUXILIARY_SENDS);
 		System.out.println("ALC_MAX_AUXILIARY_SENDS: " + auxSends);
 
 		// Try to create 4 Auxiliary Effect Slots
@@ -246,13 +235,27 @@ public final class EFXTest {
 		alDeleteEffects(effectsBuf);
 		alDeleteFilters(filter);
 
-		newContext.destroy();
-		newContext.getDevice().close();
+		alcDestroyContext(newContext);
+		alcCloseDevice(device);
 	}
 
 	/** Plays a sound with various effects applied to it. */
 	private static void playbackTest() throws Exception {
-		ALContext alContext = setupEfx();
+		long device = alcOpenDevice((ByteBuffer)null);
+		if ( device == NULL )
+			throw new IllegalStateException("Failed to open the default device.");
+
+		ALCCapabilities deviceCaps = ALC.createCapabilities(device);
+		// Query for Effect Extension
+		if ( !deviceCaps.ALC_EXT_EFX ) {
+			alcCloseDevice(device);
+			throw new Exception("No EXTEfx supported by driver.");
+		}
+		System.out.println("EXTEfx found.");
+
+		long alContext = alcCreateContext(device, (ByteBuffer)null);
+		alcMakeContextCurrent(alContext);
+		AL.createCapabilities(deviceCaps);
 
 		// Create a source and buffer audio data
 		int source = alGenSources();
@@ -318,13 +321,27 @@ public final class EFXTest {
 		alSourcePlay(source);
 		Thread.sleep(7500);
 
-		alContext.destroy();
-		alContext.getDevice().close();
+		alcDestroyContext(alContext);
+		alcCloseDevice(device);
 	}
 
 	/** Checks OpenAL for every EFX 1.0 effect and filter and prints the result to the console. */
 	private static void efxUtilTest() throws Exception {
-		ALContext alContext = setupEfx();
+		long device = alcOpenDevice((ByteBuffer)null);
+		if ( device == NULL )
+			throw new IllegalStateException("Failed to open the default device.");
+
+		ALCCapabilities deviceCaps = ALC.createCapabilities(device);
+		// Query for Effect Extension
+		if ( !deviceCaps.ALC_EXT_EFX ) {
+			alcCloseDevice(device);
+			throw new Exception("No EXTEfx supported by driver.");
+		}
+		System.out.println("EXTEfx found.");
+
+		long alContext = alcCreateContext(device, (ByteBuffer)null);
+		alcMakeContextCurrent(alContext);
+		AL.createCapabilities(deviceCaps);
 
 		System.out.println();
 		System.out.println("Checking supported effects ...");
@@ -350,8 +367,8 @@ public final class EFXTest {
 		check("AL_FILTER_HIGHPASS", EFXUtil.isFilterSupported(AL_FILTER_HIGHPASS));
 		check("AL_FILTER_BANDPASS", EFXUtil.isFilterSupported(AL_FILTER_BANDPASS));
 
-		alContext.destroy();
-		alContext.getDevice().close();
+		alcDestroyContext(alContext);
+		alcCloseDevice(device);
 	}
 
 	private static void check(String name, boolean supported) {

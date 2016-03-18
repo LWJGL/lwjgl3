@@ -4,7 +4,7 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.openal.ALContext;
+import org.lwjgl.openal.ALCapabilities;
 import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengles.GLESCapabilities;
 
@@ -37,7 +37,7 @@ public final class ThreadLocalUtil {
 		public GLCapabilities   glCaps;
 		public GLESCapabilities glesCaps;
 
-		public ALContext alContext;
+		public ALCapabilities alCaps;
 
 		public TLS() {
 			__buffer = new APIBuffer();

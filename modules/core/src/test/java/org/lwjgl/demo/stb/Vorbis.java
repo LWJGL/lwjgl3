@@ -6,7 +6,9 @@ package org.lwjgl.demo.stb;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
-import org.lwjgl.openal.ALContext;
+import org.lwjgl.openal.AL;
+import org.lwjgl.openal.ALC;
+import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.stb.STBVorbisInfo;
@@ -21,6 +23,7 @@ import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.openal.AL10.*;
+import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBEasyFont.*;
 import static org.lwjgl.stb.STBVorbis.*;
@@ -44,7 +47,18 @@ public final class Vorbis {
 		} else
 			filePath = args[0];
 
-		ALContext al = ALContext.create();
+		long device = alcOpenDevice((ByteBuffer)null);
+		if ( device == NULL )
+			throw new IllegalStateException("Failed to open the default device.");
+
+		ALCCapabilities deviceCaps = ALC.createCapabilities(device);
+
+		long context = alcCreateContext(device, (ByteBuffer)null);
+		if ( device == NULL )
+			throw new IllegalStateException("Failed to create an OpenAL context.");
+
+		alcMakeContextCurrent(context);
+		AL.createCapabilities(deviceCaps);
 
 		int source = alGenSources();
 
@@ -84,8 +98,8 @@ public final class Vorbis {
 			alDeleteBuffers(buffers);
 			alDeleteSources(source);
 
-			al.destroy();
-			al.getDevice().close();
+			alcDestroyContext(context);
+			alcCloseDevice(device);
 		}
 	}
 

@@ -6,14 +6,14 @@ package org.lwjgl.openal;
 
 import org.lwjgl.system.*;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.nio.IntBuffer;
+import java.util.*;
 
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.Checks.checkPointer;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -31,17 +31,15 @@ import static org.lwjgl.system.MemoryUtil.*;
  *
  * <h3>ALCCapabilities creation</h3>
  * <p>Instances of {@code ALCCapabilities} can be created with the {@link #createCapabilities} method. Calling this method is expensive, so
- * {@code ALCCapabilities} instances are automatically created by and cached in {@link ALDevice} instances.</p>
+ * {@code ALCCapabilities} instances should be cached in user code.</p>
  *
- * @see ALContext
- * @see ALDevice
  * @see AL
  */
 public final class ALC {
 
 	private static FunctionProviderLocal functionProvider;
 
-	private static ALCCapabilities libraryCapabilities;
+	private static ALCCapabilities icd;
 
 	static {
 		if ( !Configuration.EXPLICIT_INIT_OPENAL.<Boolean>get() )
@@ -99,14 +97,16 @@ public final class ALC {
 
 				@Override
 				public long getFunctionAddress(long handle, CharSequence functionName) {
-					APIBuffer __buffer = apiBuffer();
-					__buffer.stringParamASCII(functionName, true);
+					stackPush();
+					try {
+						long address = invokePPP(alcGetProcAddress, handle, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
+						if ( address == NULL && handle != NULL )
+							apiLog("Failed to locate address for ALC extension function " + functionName);
 
-					long address = invokePPP(alcGetProcAddress, handle, __buffer.address());
-					if ( address == NULL && handle != NULL )
-						apiLog("Failed to locate address for ALC extension function " + functionName);
-
-					return address;
+						return address;
+					} finally {
+						stackPop();
+					}
 				}
 
 				@Override
@@ -132,7 +132,7 @@ public final class ALC {
 
 		ALC.functionProvider = functionProvider;
 
-		libraryCapabilities = new ALCCapabilities(functionProvider, NULL, new HashSet<String>(0));
+		icd = new ALCCapabilities(functionProvider, NULL, Collections.<String>emptySet());
 
 		AL.init();
 	}
@@ -144,7 +144,7 @@ public final class ALC {
 
 		AL.destroy();
 
-		libraryCapabilities = null;
+		icd = null;
 
 		functionProvider.free();
 		functionProvider = null;
@@ -155,29 +155,17 @@ public final class ALC {
 		return functionProvider;
 	}
 
-	/**
-	 * Returns the {@link ALCCapabilities} of the device of the OpenAL context that is current in the current thread or process
-	 * (see {@link AL#getCurrentContext()}).
-	 *
-	 * <p>If no OpenAL context is available, a special {@link ALCCapabilities} instance will be returned that will contain function pointers loaded directly
-	 * from the OpenAL native library, for no particular device. This allows calling ALC functions (e.g. {@link ALC10#alcOpenDevice alcOpenDevice}) before
-	 * any device has been opened yet.</p>
-	 */
-	public static ALCCapabilities getCapabilities() {
-		ALContext context = AL.getCurrentContext();
-		ALCCapabilities caps = context != null ? context.getDevice().getCapabilities() : libraryCapabilities;
-		if ( caps == null )
-			throw new IllegalStateException("No ALCCapabilities instance available. Make sure OpenAL has been loaded correctly.");
-
-		return caps;
+	/** Returns the {@link ALCCapabilities} of the OpenAL implementation. */
+	static ALCCapabilities getICD() {
+		return icd;
 	}
 
 	/**
 	 * Creates a new {@link ALCCapabilities} instance for the specified OpenAL device.
 	 *
-	 * @return the ALCCapabilities instance
+	 * @return the {@code ALCCapabilities} instance
 	 */
-	static ALCCapabilities createCapabilities(long device) {
+	public static ALCCapabilities createCapabilities(long device) {
 		// We don't have an ALCCapabilities instance when this method is called
 		// so we have to use the native bindings directly.
 		long GetIntegerv = functionProvider.getFunctionAddress("alcGetIntegerv");
@@ -187,13 +175,21 @@ public final class ALC {
 		if ( GetIntegerv == NULL || GetString == NULL || IsExtensionPresent == NULL )
 			throw new IllegalStateException("Core ALC functions could not be found. Make sure that OpenAL has been loaded.");
 
-		APIBuffer __buffer = apiBuffer();
+		int majorVersion;
+		int minorVersion;
 
-		invokePIIPV(GetIntegerv, device, ALC_MAJOR_VERSION, 1, __buffer.address());
-		invokePIIPV(GetIntegerv, device, ALC_MINOR_VERSION, 1, __buffer.address(4));
+		MemoryStack stack = stackPush();
+		try {
+			IntBuffer version = stack.mallocInt(1);
 
-		int majorVersion = __buffer.intValue(0);
-		int minorVersion = __buffer.intValue(4);
+			invokePIIPV(GetIntegerv, device, ALC_MAJOR_VERSION, 1, memAddress(version));
+			majorVersion = version.get(0);
+
+			invokePIIPV(GetIntegerv, device, ALC_MINOR_VERSION, 1, memAddress(version));
+			minorVersion = version.get(0);
+		} finally {
+			stack.pop();
+		}
 
 		int[][] ALC_VERSIONS = {
 			{ 0, 1 },  // ALC 1
@@ -215,9 +211,13 @@ public final class ALC {
 		StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 		while ( tokenizer.hasMoreTokens() ) {
 			String extName = tokenizer.nextToken();
-			__buffer.reset().stringParamASCII(extName, true);
-			if ( invokePPZ(IsExtensionPresent, device, __buffer.address()) )
-				supportedExtensions.add(extName);
+			stack.push();
+			try {
+				if ( invokePPZ(IsExtensionPresent, device, memAddress(memEncodeASCII(extName, true, BufferAllocator.STACK))) )
+					supportedExtensions.add(extName);
+			} finally {
+				stack.pop();
+			}
 		}
 
 		return new ALCCapabilities(getFunctionProvider(), device, supportedExtensions);
