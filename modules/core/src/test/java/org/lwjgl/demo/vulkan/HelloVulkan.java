@@ -1619,7 +1619,7 @@ public final class HelloVulkan {
 
 		stack.push();
 
-		VkDescriptorImageInfo.Buffer tex_descs = VkDescriptorImageInfo.calloc(stack, DEMO_TEXTURE_COUNT);
+		VkDescriptorImageInfo.Buffer tex_descs = VkDescriptorImageInfo.calloc(DEMO_TEXTURE_COUNT, stack);
 
 		for ( int i = 0; i < DEMO_TEXTURE_COUNT; i++ ) {
 			tex_descs.get(i)
@@ -1628,7 +1628,7 @@ public final class HelloVulkan {
 				.imageLayout(VK_IMAGE_LAYOUT_GENERAL);
 		}
 
-		VkWriteDescriptorSet.Buffer write = VkWriteDescriptorSet.calloc(stack, 1)
+		VkWriteDescriptorSet.Buffer write = VkWriteDescriptorSet.calloc(1, stack)
 			.sType(VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET)
 			.dstSet(desc_set)
 			.descriptorType(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)
