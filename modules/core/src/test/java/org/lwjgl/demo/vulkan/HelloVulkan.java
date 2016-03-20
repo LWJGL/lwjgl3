@@ -1606,7 +1606,7 @@ public final class HelloVulkan {
 		MemoryStack stack = stackPush();
 
 		LongBuffer layouts = stack.mallocLong(1).put(0, desc_layout);
-		VkDescriptorSetAllocateInfo alloc_info = VkDescriptorSetAllocateInfo.malloc(stack)
+		VkDescriptorSetAllocateInfo alloc_info = VkDescriptorSetAllocateInfo.mallocStack(stack)
 			.sType(VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO)
 			.pNext(NULL)
 			.descriptorPool(desc_pool)
@@ -1619,7 +1619,7 @@ public final class HelloVulkan {
 
 		stack.push();
 
-		VkDescriptorImageInfo.Buffer tex_descs = VkDescriptorImageInfo.calloc(DEMO_TEXTURE_COUNT, stack);
+		VkDescriptorImageInfo.Buffer tex_descs = VkDescriptorImageInfo.callocStack(DEMO_TEXTURE_COUNT, stack);
 
 		for ( int i = 0; i < DEMO_TEXTURE_COUNT; i++ ) {
 			tex_descs.get(i)
@@ -1628,7 +1628,7 @@ public final class HelloVulkan {
 				.imageLayout(VK_IMAGE_LAYOUT_GENERAL);
 		}
 
-		VkWriteDescriptorSet.Buffer write = VkWriteDescriptorSet.calloc(1, stack)
+		VkWriteDescriptorSet.Buffer write = VkWriteDescriptorSet.callocStack(1, stack)
 			.sType(VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET)
 			.dstSet(desc_set)
 			.descriptorType(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)

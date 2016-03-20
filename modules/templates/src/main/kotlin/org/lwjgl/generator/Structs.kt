@@ -591,12 +591,22 @@ $indentation}"""
 
 	// -----------------------------------
 
+	/** Returns a new {@link $className} instance allocated on the thread-local {@link MemoryStack}. */
+	public static $className mallocStack() {
+		return mallocStack(stackGet());
+	}
+
+	/** Returns a new {@link $className} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+	public static $className callocStack() {
+		return callocStack(stackGet());
+	}
+
 	/**
 	 * Returns a new {@link $className} instance allocated on the specified {@link MemoryStack}.
 	 *
 	 * @param stack the stack from which to allocate
 	 */
-	public static $className malloc(MemoryStack stack) {
+	public static $className mallocStack(MemoryStack stack) {
 		return create(stack.nmalloc(ALIGNOF, SIZEOF));
 	}
 
@@ -605,18 +615,26 @@ $indentation}"""
 	 *
 	 * @param stack the stack from which to allocate
 	 */
-	public static $className calloc(MemoryStack stack) {
+	public static $className callocStack(MemoryStack stack) {
 		return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
 	}
 
-	/** Returns a new {@link $className} instance allocated on the thread-local {@link MemoryStack}. */
-	public static $className mallocStack() {
-		return malloc(stackGet());
+	/**
+	 * Returns a new {@link $className.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+	 *
+	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
+	 */
+	public static Buffer mallocStack(int $BUFFER_CAPACITY_PARAM) {
+		return mallocStack($BUFFER_CAPACITY_PARAM, stackGet());
 	}
 
-	/** Returns a new {@link $className} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-	public static $className callocStack() {
-		return calloc(stackGet());
+	/**
+	 * Returns a new {@link $className.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+	 *
+	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
+	 */
+	public static Buffer callocStack(int $BUFFER_CAPACITY_PARAM) {
+		return callocStack($BUFFER_CAPACITY_PARAM, stackGet());
 	}
 
 	/**
@@ -625,7 +643,7 @@ $indentation}"""
 	 * @param stack the stack from which to allocate
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
-	public static Buffer malloc(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
+	public static Buffer mallocStack(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
 		return create(stack.nmalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
 	}
 
@@ -635,26 +653,8 @@ $indentation}"""
 	 * @param stack the stack from which to allocate
 	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
 	 */
-	public static Buffer calloc(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
+	public static Buffer callocStack(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
 		return create(stack.ncalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
-	}
-
-	/**
-	 * Returns a new {@link $className.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-	 *
-	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
-	 */
-	public static Buffer mallocStack(int $BUFFER_CAPACITY_PARAM) {
-		return malloc($BUFFER_CAPACITY_PARAM, stackGet());
-	}
-
-	/**
-	 * Returns a new {@link $className.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-	 *
-	 * @param $BUFFER_CAPACITY_PARAM the buffer capacity
-	 */
-	public static Buffer callocStack(int $BUFFER_CAPACITY_PARAM) {
-		return calloc($BUFFER_CAPACITY_PARAM, stackGet());
 	}
 
 	// -----------------------------------
