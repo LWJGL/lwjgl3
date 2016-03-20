@@ -10,6 +10,7 @@ import org.lwjgl.generator.ParameterType.*
 import java.io.PrintWriter
 import java.nio.ByteBuffer
 import java.util.*
+import java.util.regex.Pattern
 
 /*
 	****
@@ -43,6 +44,8 @@ internal val JNIENV = "__env"
 val EXPLICIT_FUNCTION_ADDRESS = voidptr.IN(FUNCTION_ADDRESS, "the function address")
 /** Special parameter that will accept the JNI function's JNIEnv* parameter. Hidden in Java code. */
 val JNI_ENV = JNIEnv_p.IN(JNIENV, "the JNI environment struct")
+
+private val TRY_FINALLY_ALIGN = Pattern.compile("^(\\s+)", Pattern.MULTILINE)
 
 enum class GenerationMode {
 	NORMAL,
@@ -776,7 +779,7 @@ class NativeClassFunction(
 	}
 
 	private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: ApplyTo, hasFinally: Boolean) {
-		printCode(code.javaBeforeNative, applyTo, if ( hasFinally ) "\t" else "")
+		printCode(code.javaBeforeNative, applyTo, "")
 
 		if ( hasFinally )
 			println("\t\ttry {")
@@ -956,7 +959,7 @@ class NativeClassFunction(
 						transforms[paramMap[lengthParam]!!] = BufferLengthTransform
 
 					// Hide target parameter and use the stack
-					transforms[it] = BufferAutoSizeTransform
+					transforms[it] = BufferAutoSizeTransform(maxLengthParam)
 
 					// Transform void to the buffer type
 					val returnType: String
@@ -1258,9 +1261,7 @@ class NativeClassFunction(
 		if ( returns.isVoid || returns.isStructValue ) {
 			val result = returns.transformCallOrElse(transforms, "")
 			if ( !result.isEmpty() ) {
-				if ( hasFinally )
-					print("\t")
-				println(result)
+				println(if ( hasFinally ) result.replaceAll(TRY_FINALLY_ALIGN, "\t$1") else result)
 			}
 		} else {
 			if ( returns.isBufferPointer ) {

@@ -207,7 +207,6 @@ class VectorValueTransform(
 	val elementType: String,
 	val newName: String,
 	val size: Int
-//if ( primitiveType == "pointer" ) "long" else primitiveType, primitiveType
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = paramType.primitive.let { if ( it == "pointer" ) "long" else it }.let { paramType ->
 		(0..size - 1).map { "$paramType $newName$it" }.reduce { a, b -> "$a, $b" }
@@ -239,19 +238,22 @@ val BufferLengthTransform: FunctionTransform<Parameter> = object : FunctionTrans
 	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\t\tIntBuffer ${qtype.name} = stack.ints(0);")
 }
 
-val BufferAutoSizeTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+class BufferAutoSizeTransform(
+	val autoSizeParam: Parameter
+) : FunctionTransform<Parameter>, CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with address of allocated buffer
-	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
-		if ( qtype.nativeType is CharSequenceType ) {
-			writer.print("\t\t\tByteBuffer ${qtype.name} = stack.malloc(")
-		} else {
+	override fun generate(qtype: Parameter, code: Code): Code {
+		val len = "${if ( 4 < (autoSizeParam.nativeType.mapping as PrimitiveMapping).bytes ) "(int)" else ""}${autoSizeParam.name}"
+		return if ( qtype.nativeType is CharSequenceType )
+			code.append(
+				javaBeforeNative = statement("\t\tByteBuffer ${qtype.name} = memAlloc($len);", ApplyTo.ALTERNATIVE),
+				javaFinally = statement("\t\t\tmemFree(${qtype.name});")
+			)
+		else {
 			val bufferType = qtype.nativeType.mapping.javaMethodType.simpleName
-			writer.print("\t\t\t$bufferType ${qtype.name} = BufferUtils.create$bufferType(")
+			code.append(javaBeforeNative = statement("\t\t$bufferType ${qtype.name} = BufferUtils.create$bufferType($len);", ApplyTo.ALTERNATIVE))
 		}
-
-		val autoSizeParam = func.getParam { it has AutoSize && it[AutoSize].hasReference(qtype.name) }
-		writer.println("${if ( 4 < (autoSizeParam.nativeType.mapping as PrimitiveMapping).bytes) "(int)" else ""}${autoSizeParam.name});")
 	}
 }
 
