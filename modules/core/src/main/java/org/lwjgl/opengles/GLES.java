@@ -7,10 +7,9 @@ package org.lwjgl.opengles;
 import org.lwjgl.egl.EGL;
 import org.lwjgl.system.*;
 
+import java.lang.reflect.Field;
 import java.nio.IntBuffer;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.opengles.GLES20.*;
@@ -55,6 +54,8 @@ public final class GLES {
 	private static final APIVersion MAX_VERSION;
 
 	private static FunctionProvider functionProvider;
+
+	private static CapabilitiesState capsProvider = new GlobalCapabilitiesState();
 
 	static {
 		MAX_VERSION = Configuration.getAPIVersion(Configuration.MAXVERSION_OPENGLES);
@@ -152,7 +153,7 @@ public final class GLES {
 	 * a different value.</p>
 	 */
 	public static void setCapabilities(GLESCapabilities caps) {
-		tlsGet().glesCaps = caps;
+		capsProvider.set(caps);
 	}
 
 	/**
@@ -161,7 +162,7 @@ public final class GLES {
 	 * @throws IllegalStateException if {@link #setCapabilities} has never been called in the current thread or was last called with a {@code null} value
 	 */
 	public static GLESCapabilities getCapabilities() {
-		GLESCapabilities caps = tlsGet().glesCaps;
+		GLESCapabilities caps = capsProvider.get();
 		if ( caps == null )
 			throw new IllegalStateException("No GLESCapabilities instance has been set for the current thread.");
 
@@ -292,6 +293,83 @@ public final class GLES {
 			apiLog("[GLES] " + extension + " was reported as available but an entry point is missing.");
 			return null;
 		}
+	}
+
+	/** Manages the thread-local {@link GLESCapabilities} state. */
+	private interface CapabilitiesState {
+		void set(GLESCapabilities caps);
+		GLESCapabilities get();
+	}
+
+	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalUtil.TLS}. */
+	private static class TLCapabilitiesState implements CapabilitiesState {
+		@Override
+		public void set(GLESCapabilities caps) { tlsGet().glesCaps = caps; }
+
+		@Override
+		public GLESCapabilities get() { return tlsGet().glesCaps; }
+	}
+
+	/**
+	 * This is the initial {@link CapabilitiesState}. As long as we do not encounter a {@link GLESCapabilities} instance that is different than the first
+	 * instance passed to {@link #setCapabilities} (very unlikely to happen in most programs), we continue using it. This implementation skips the thread-local
+	 * lookup and therefore provides a much more efficient {@link #getCapabilities} (but a much slower {@link #setCapabilities}).
+	 *
+	 * <p>A {@link TLCapabilitiesState} instance is maintained internally. If the above rare condition is triggered, {@link #capsProvider} is switched to that
+	 * instance and {@link GlobalCapabilitiesState} is never used again.</p>
+	 */
+	private static class GlobalCapabilitiesState implements CapabilitiesState {
+
+		// The static final here helps performance if we switch.
+		private static final TLCapabilitiesState tlProvider = new TLCapabilitiesState();
+
+		// We need this to able to reset caps to null. This is useful during init; the first OpenGL created is usually a dummy context with different
+		// capabilities to what we're actually going to use.
+		private final WeakHashMap<Thread, GLESCapabilities> tlMap = new WeakHashMap<Thread, GLESCapabilities>(16);
+
+		private final List<Field> flags;
+		private final List<Field> funcs;
+
+		private GLESCapabilities caps;
+
+		GlobalCapabilitiesState() {
+			Field[] fields = GLESCapabilities.class.getDeclaredFields();
+
+			this.flags = new ArrayList<Field>(256);
+			this.funcs = new ArrayList<Field>(128);
+
+			for ( Field f : fields )
+				(f.getType() == Boolean.TYPE ? flags : funcs).add(f);
+		}
+
+		@Override
+		public synchronized void set(GLESCapabilities caps) {
+			tlProvider.set(caps);
+
+			if ( caps == null ) {
+				tlMap.remove(Thread.currentThread());
+				if ( tlMap.isEmpty() )
+					this.caps = null;
+			} else {
+				if ( tlMap.isEmpty() ) // poll the reference queue, in case a thread didn't call GLES.setCapabilities(null) before exiting
+					this.caps = null;
+
+				tlMap.put(Thread.currentThread(), caps);
+
+				if ( this.caps == null )
+					this.caps = caps;
+				else if ( !apiCompareCapabilities(flags, funcs, this.caps, caps) ) {
+					apiLog("An OpenGL ES context with different functionality detected. Switching to thread-local GLCapabilities.");
+					capsProvider = tlProvider;
+				}
+			}
+		}
+
+		@Override
+		public GLESCapabilities get() {
+			return caps;
+		}
+
 	}
 
 }

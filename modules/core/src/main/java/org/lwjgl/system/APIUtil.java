@@ -207,6 +207,44 @@ public final class APIUtil {
 		return address;
 	}
 
+	public static boolean apiCompareCapabilities(Iterable<Field> flags, Iterable<Field> funcs, Object a, Object b) {
+		try {
+			for ( Field f : flags ) {
+				if ( f.getBoolean(a) != f.getBoolean(b) )
+					return false;
+			}
+
+			for ( Field f : funcs ) {
+				Object extA = f.get(a);
+				Object extB = f.get(b);
+
+				if ( (extA == null) ^ (extB == null) )
+					return false;
+
+				if ( extA == null )
+					continue;
+
+				if ( !compareFunctions(extA.getClass(), extA, extB) )
+					return false;
+			}
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	private static boolean compareFunctions(Class<?> ext, Object a, Object b) throws IllegalAccessException {
+		for ( Field func : ext.getClass().getFields() ) {
+			if ( Modifier.isStatic(func.getModifiers()) || func.getType() != Long.TYPE )
+				continue;
+
+			if ( func.getLong(a) != func.getLong(b) )
+				return false;
+		}
+		return true;
+	}
+
 	// ----------------------------------------
 
 	/** Ensures space for an additional pointer buffer, sets the specified memory addresses and returns the address offset. */
@@ -269,7 +307,7 @@ public final class APIUtil {
 	 * ASCII encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
 	 * respectively. The lengths are 4-bytes integers and the memory address buffer starts immediately after the lengths buffer.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
 	 *
 	 * @return the offset to the lengths buffer
 	 */
@@ -391,7 +429,7 @@ public final class APIUtil {
 	 * UTF16 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
 	 * respectively. The lengths are 4-bytes integers and the memory address buffer starts immediately after the lengths buffer.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
 	 *
 	 * @return the offset to the lengths buffer
 	 */
@@ -414,7 +452,7 @@ public final class APIUtil {
 	 * UTF16 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
 	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
 	 *
 	 * @return the offset to the lengths buffer
 	 */

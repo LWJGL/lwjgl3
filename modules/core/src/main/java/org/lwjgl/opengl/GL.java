@@ -6,10 +6,9 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
+import java.lang.reflect.Field;
 import java.nio.IntBuffer;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -55,6 +54,8 @@ public final class GL {
 	private static final APIVersion MAX_VERSION;
 
 	private static FunctionProvider functionProvider;
+
+	private static CapabilitiesState capsProvider = new GlobalCapabilitiesState();
 
 	static {
 		MAX_VERSION = Configuration.getAPIVersion(Configuration.MAXVERSION_OPENGL);
@@ -201,7 +202,7 @@ public final class GL {
 	 * different value.</p>
 	 */
 	public static void setCapabilities(GLCapabilities caps) {
-		tlsGet().glCaps = caps;
+		capsProvider.set(caps);
 	}
 
 	/**
@@ -210,7 +211,7 @@ public final class GL {
 	 * @throws IllegalStateException if {@link #setCapabilities} has never been called in the current thread or was last called with a {@code null} value
 	 */
 	public static GLCapabilities getCapabilities() {
-		GLCapabilities caps = tlsGet().glCaps;
+		GLCapabilities caps = capsProvider.get();
 		if ( caps == null )
 			throw new IllegalStateException("No GLCapabilities instance has been set for the current thread.");
 
@@ -463,6 +464,83 @@ public final class GL {
 			apiLog("[GL] " + extension + " was reported as available but an entry point is missing.");
 			return null;
 		}
+	}
+
+	/** Manages the thread-local {@link GLCapabilities} state. */
+	private interface CapabilitiesState {
+		void set(GLCapabilities caps);
+		GLCapabilities get();
+	}
+
+	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalUtil.TLS}. */
+	private static class TLCapabilitiesState implements CapabilitiesState {
+		@Override
+		public void set(GLCapabilities caps) { tlsGet().glCaps = caps; }
+
+		@Override
+		public GLCapabilities get() { return tlsGet().glCaps; }
+	}
+
+	/**
+	 * This is the initial {@link CapabilitiesState}. As long as we do not encounter a {@link GLCapabilities} instance that is different than the first
+	 * instance passed to {@link #setCapabilities} (very unlikely to happen in most programs), we continue using it. This implementation skips the thread-local
+	 * lookup and therefore provides a much more efficient {@link #getCapabilities} (but a much slower {@link #setCapabilities}).
+	 *
+	 * <p>A {@link TLCapabilitiesState} instance is maintained internally. If the above rare condition is triggered, {@link #capsProvider} is switched to that
+	 * instance and {@link GlobalCapabilitiesState} is never used again.</p>
+	 */
+	private static class GlobalCapabilitiesState implements CapabilitiesState {
+
+		// The static final here helps performance if we switch.
+		private static final TLCapabilitiesState tlProvider = new TLCapabilitiesState();
+
+		// We need this to able to reset caps to null. This is useful during init; the first OpenGL created is usually a dummy context with different
+		// capabilities to what we're actually going to use.
+		private final WeakHashMap<Thread, GLCapabilities> tlMap = new WeakHashMap<Thread, GLCapabilities>(16);
+
+		private final List<Field> flags;
+		private final List<Field> funcs;
+
+		private GLCapabilities caps;
+
+		GlobalCapabilitiesState() {
+			Field[] fields = GLCapabilities.class.getDeclaredFields();
+
+			this.flags = new ArrayList<Field>(512);
+			this.funcs = new ArrayList<Field>(256);
+
+			for ( Field f : fields )
+				(f.getType() == Boolean.TYPE ? flags : funcs).add(f);
+		}
+
+		@Override
+		public synchronized void set(GLCapabilities caps) {
+			tlProvider.set(caps);
+
+			if ( caps == null ) {
+				tlMap.remove(Thread.currentThread());
+				if ( tlMap.isEmpty() )
+					this.caps = null;
+			} else {
+				if ( tlMap.isEmpty() ) // poll the reference queue, in case a thread didn't call GL.setCapabilities(null) before exiting
+					this.caps = null;
+
+				tlMap.put(Thread.currentThread(), caps);
+
+				if ( this.caps == null )
+					this.caps = caps;
+				else if ( !apiCompareCapabilities(flags, funcs, this.caps, caps) ) {
+					apiLog("An OpenGL context with different functionality detected. Switching to thread-local GLCapabilities.");
+					capsProvider = tlProvider;
+				}
+			}
+		}
+
+		@Override
+		public GLCapabilities get() {
+			return caps;
+		}
+
 	}
 
 }

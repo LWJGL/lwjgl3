@@ -53,7 +53,7 @@ public final class Checks {
 	 * @return the function provider instance
 	 */
 	public static <T> T checkFunctionality(T functionProvider) {
-		if ( functionProvider == null )
+		if ( CHECKS && functionProvider == null )
 			throw new IllegalStateException("This functionality is not available.");
 
 		return functionProvider;

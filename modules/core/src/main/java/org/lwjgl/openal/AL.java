@@ -6,10 +6,10 @@ package org.lwjgl.openal;
 
 import org.lwjgl.system.FunctionProvider;
 import org.lwjgl.system.MemoryStack;
+import org.lwjgl.system.ThreadLocalUtil;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.lang.reflect.Field;
+import java.util.*;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.EXTThreadLocalContext.*;
@@ -49,6 +49,8 @@ public final class AL {
 	private static FunctionProvider functionProvider;
 
 	private static ALCapabilities processCaps;
+
+	private static CapabilitiesState capsProvider = new GlobalCapabilitiesState();
 
 	private AL() {}
 
@@ -98,7 +100,7 @@ public final class AL {
 	 */
 	public static void setCurrentProcess(ALCapabilities caps) {
 		processCaps = caps;
-		tlsGet().alCaps = null; // See EXT_thread_local_context, second Q.
+		capsProvider.set(null); // See EXT_thread_local_context, second Q.
 	}
 
 	/**
@@ -109,7 +111,7 @@ public final class AL {
 	 * @param caps the {@link ALCapabilities} to make current, or null
 	 */
 	public static void setCurrentThread(ALCapabilities caps) {
-		tlsGet().alCaps = caps;
+		capsProvider.set(caps);
 	}
 
 	/**
@@ -118,7 +120,7 @@ public final class AL {
 	 * If no OpenAL context is current in the current thread or process, null is returned.
 	 */
 	public static ALCapabilities getCurrentCapabilities() {
-		ALCapabilities caps = tlsGet().alCaps;
+		ALCapabilities caps = capsProvider.get();
 		return caps != null ? caps : processCaps;
 	}
 
@@ -213,6 +215,84 @@ public final class AL {
 			apiLog("[AL] " + extension + " was reported as available but an entry point is missing.");
 			return null;
 		}
+	}
+
+	/** Manages the thread-local {@link ALCapabilities} state. */
+	private interface CapabilitiesState {
+		void set(ALCapabilities caps);
+		ALCapabilities get();
+	}
+
+	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalUtil.TLS}. */
+	private static class TLCapabilitiesState implements CapabilitiesState {
+		@Override
+		public void set(ALCapabilities caps) { tlsGet().alCaps = caps; }
+
+		@Override
+		public ALCapabilities get() { return tlsGet().alCaps; }
+	}
+
+	/**
+	 * This is the initial {@link CapabilitiesState}. As long as we do not encounter a {@link ALCapabilities} instance that is different than the first
+	 * instance passed to {@link #setCurrentThread} (very unlikely to happen in most programs), we continue using it. This implementation skips the
+	 * thread-local
+	 * lookup and therefore provides a much more efficient {@link #getCapabilities} (but a much slower {@link #setCurrentThread}).
+	 *
+	 * <p>A {@link TLCapabilitiesState} instance is maintained internally. If the above rare condition is triggered, {@link #capsProvider} is switched to that
+	 * instance and {@link GlobalCapabilitiesState} is never used again.</p>
+	 */
+	private static class GlobalCapabilitiesState implements CapabilitiesState {
+
+		// The static final here helps performance if we switch.
+		private static final TLCapabilitiesState tlProvider = new TLCapabilitiesState();
+
+		// We need this to able to reset caps to null. This is useful during init; the first OpenGL created is usually a dummy context with different
+		// capabilities to what we're actually going to use.
+		private final WeakHashMap<Thread, ALCapabilities> tlMap = new WeakHashMap<Thread, ALCapabilities>(16);
+
+		private final List<Field> flags;
+		private final List<Field> funcs;
+
+		private ALCapabilities caps;
+
+		GlobalCapabilitiesState() {
+			Field[] fields = ALCapabilities.class.getDeclaredFields();
+
+			this.flags = new ArrayList<Field>(64);
+			this.funcs = new ArrayList<Field>(16);
+
+			for ( Field f : fields )
+				(f.getType() == Boolean.TYPE ? flags : funcs).add(f);
+		}
+
+		@Override
+		public synchronized void set(ALCapabilities caps) {
+			tlProvider.set(caps);
+
+			if ( caps == null ) {
+				tlMap.remove(Thread.currentThread());
+				if ( tlMap.isEmpty() )
+					this.caps = null;
+			} else {
+				if ( tlMap.isEmpty() ) // poll the reference queue, in case a thread didn't call AL.setCurrentThread(null) before exiting
+					this.caps = null;
+
+				tlMap.put(Thread.currentThread(), caps);
+
+				if ( this.caps == null )
+					this.caps = caps;
+				else if ( !apiCompareCapabilities(flags, funcs, this.caps, caps) ) {
+					apiLog("An OpenAL context with different functionality detected. Switching to thread-local ALCapabilities.");
+					capsProvider = tlProvider;
+				}
+			}
+		}
+
+		@Override
+		public ALCapabilities get() {
+			return caps;
+		}
+
 	}
 
 }

@@ -37,11 +37,7 @@ public final class Truetype extends FontDemo {
 		new Truetype(filePath).run("STB Truetype Demo");
 	}
 
-	@Override
-	protected void loop() {
-		int BITMAP_W = 512;
-		int BITMAP_H = 512;
-
+	private STBTTBakedChar.Buffer init(int BITMAP_W, int BITMAP_H) {
 		int texID = glGenTextures();
 		STBTTBakedChar.Buffer cdata = STBTTBakedChar.malloc(96);
 
@@ -65,6 +61,16 @@ public final class Truetype extends FontDemo {
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		return cdata;
+	}
+
+	@Override
+	protected void loop() {
+		int BITMAP_W = 512;
+		int BITMAP_H = 512;
+
+		STBTTBakedChar.Buffer cdata = init(BITMAP_W, BITMAP_H);
 
 		while ( glfwWindowShouldClose(getWindow()) == GLFW_FALSE ) {
 			glfwPollEvents();

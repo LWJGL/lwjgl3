@@ -8,7 +8,6 @@ import org.lwjgl.system.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.nio.ByteBuffer;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
