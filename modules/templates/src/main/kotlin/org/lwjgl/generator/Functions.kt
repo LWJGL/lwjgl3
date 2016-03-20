@@ -677,7 +677,7 @@ class NativeClassFunction(
 
 		val hasStack = hideAutoSizeResultParam
 		if ( hasStack ) {
-			println("\t\tMemoryStack stack = stackPush();")
+			println("\t\tMemoryStack stack = stackGet(); int stackPointer = stack.getPointer();")
 
 			val autoSizeParam = getParam { it has AutoSizeResult }
 			val autoSizeType = (autoSizeParam.nativeType.mapping as PointerMapping).mallocType
@@ -797,7 +797,7 @@ class NativeClassFunction(
 				println(it.code)
 			}
 			if ( hasStack )
-				println("\t\t\tstack.pop();")
+				println("\t\t\tstack.setPointer(stackPointer);")
 			println("\t\t}")
 		}
 	}
@@ -1225,7 +1225,7 @@ class NativeClassFunction(
 		val hasStack = hideAutoSizeResultParam || stackTransforms.any()
 
 		if ( hasStack )
-			println("\t\tMemoryStack stack = stackPush();")
+			println("\t\tMemoryStack stack = stackGet(); int stackPointer = stack.getPointer();")
 
 		val hasFinally = hasStack || code.hasStatements(code.javaFinally, ApplyTo.ALTERNATIVE)
 
