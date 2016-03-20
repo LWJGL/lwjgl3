@@ -173,9 +173,6 @@ public class MemoryStack {
 	 * @return the memory address on the stack for the requested allocation
 	 */
 	public long nmalloc(int alignment, int size) {
-		if ( frameIndex == 0 )
-			throw new IllegalStateException("A frame has not been pushed to the stack yet.");
-
 		int newPointer = pointer - size;
 
 		if ( CHECKS ) {
