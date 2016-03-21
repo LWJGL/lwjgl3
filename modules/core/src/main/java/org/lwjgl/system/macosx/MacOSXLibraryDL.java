@@ -26,7 +26,7 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 	}
 
 	private static long loadLibrary(String name) {
-		ByteBuffer nameEncoded = memEncodeUTF16(name, SYSTEM_ALLOCATOR);
+		ByteBuffer nameEncoded = memEncodeASCII(name, SYSTEM_ALLOCATOR);
 		try {
 			return dlopen(nameEncoded, RTLD_LAZY | RTLD_GLOBAL);
 		} finally {
