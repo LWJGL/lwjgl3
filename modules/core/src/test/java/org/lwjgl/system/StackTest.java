@@ -12,11 +12,6 @@ import static org.testng.Assert.*;
 @Test
 public class StackTest {
 
-	@Test(expectedExceptions = IllegalStateException.class)
-	public void testMallocWithoutPush() {
-		stackGet().malloc(1);
-	}
-
 	public void testPushPop() {
 		MemoryStack stack = stackGet();
 
