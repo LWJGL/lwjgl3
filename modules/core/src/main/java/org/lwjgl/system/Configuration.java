@@ -20,17 +20,16 @@ import static org.lwjgl.system.APIUtil.*;
  * <p>Care must be taken when setting <em>static</em> options. Such options are only read once or cached in {@code static final} fields. They must be
  * configured through this class before touching any other LWJGL class.</p>
  */
-public enum Configuration {
+public class Configuration<T> {
 
 	/**
 	 * Takes priority over {@code java.library.path}. It may contain one or more directory paths, separated by {@link File#pathSeparator}.
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.librarypath</b><br>
-	 * &nbsp; &nbsp; Type: String<br>
 	 * &nbsp; &nbsp;Usage: Dynamic<br>
 	 */
-	LIBRARY_PATH("org.lwjgl.librarypath", StateInit.STRING),
+	public static final Configuration<String> LIBRARY_PATH = new Configuration<String>("org.lwjgl.librarypath", StateInit.STRING);
 
 	/**
 	 * Changes the temporary directory name created by LWJGL when extracting shared libraries from JAR files. If this option is not set, it defaults to
@@ -38,36 +37,39 @@ public enum Configuration {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.SharedLibraryTempDirectory</b><br>
-	 * &nbsp; &nbsp; Type: String<br>
 	 * &nbsp; &nbsp;Usage: Dynamic<br>
 	 */
-	SHARED_LIBRARY_TEMP_DIRECTORY("org.lwjgl.SharedLibraryTempDirectory", StateInit.STRING),
+	public static final Configuration<String> SHARED_LIBRARY_TEMP_DIRECTORY = new Configuration<String>(
+		"org.lwjgl.SharedLibraryTempDirectory",
+		StateInit.STRING
+	);
 
 	/**
 	 * Can be used to override the LWJGL library name. It can be an absolute path.
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.libname</b><br>
-	 * &nbsp; &nbsp; Type: String<br>
 	 * &nbsp; &nbsp;Usage: Dynamic<br>
 	 */
-	LIBRARY_NAME_LWJGL("org.lwjgl.libname", StateInit.STRING),
+	public static final Configuration<String> LIBRARY_NAME_LWJGL    = new Configuration<String>("org.lwjgl.libname", StateInit.STRING);
+	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the hwloc library (<b>org.lwjgl.system.hwloc.libname</b>). */
+	public static final Configuration<String> LIBRARY_NAME_HWLOC    = new Configuration<String>("org.lwjgl.system.hwloc.libname", StateInit.STRING);
 	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the jemalloc library (<b>org.lwjgl.system.jemalloc.libname</b>). */
-	LIBRARY_NAME_JEMALLOC("org.lwjgl.system.jemalloc.libname", StateInit.STRING),
+	public static final Configuration<String> LIBRARY_NAME_JEMALLOC = new Configuration<String>("org.lwjgl.system.jemalloc.libname", StateInit.STRING);
 	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the GLFW library (<b>org.lwjgl.glfw.libname</b>). */
-	LIBRARY_NAME_GLFW("org.lwjgl.glfw.libname", StateInit.STRING),
+	public static final Configuration<String> LIBRARY_NAME_GLFW     = new Configuration<String>("org.lwjgl.glfw.libname", StateInit.STRING);
 	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the EGL library (<b>org.lwjgl.egl.libname</b>). */
-	LIBRARY_NAME_EGL("org.lwjgl.egl.libname", StateInit.STRING),
+	public static final Configuration<String> LIBRARY_NAME_EGL      = new Configuration<String>("org.lwjgl.egl.libname", StateInit.STRING);
 	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the OpenAL library (<b>org.lwjgl.openal.libname</b>). */
-	LIBRARY_NAME_OPENAL("org.lwjgl.openal.libname", StateInit.STRING),
+	public static final Configuration<String> LIBRARY_NAME_OPENAL   = new Configuration<String>("org.lwjgl.openal.libname", StateInit.STRING);
 	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the OpenCL library (<b>org.lwjgl.opencl.libname</b>). */
-	LIBRARY_NAME_OPENCL("org.lwjgl.opencl.libname", StateInit.STRING),
+	public static final Configuration<String> LIBRARY_NAME_OPENCL   = new Configuration<String>("org.lwjgl.opencl.libname", StateInit.STRING);
 	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the OpenGL library (<b>org.lwjgl.opengl.libname</b>). */
-	LIBRARY_NAME_OPENGL("org.lwjgl.opengl.libname", StateInit.STRING),
+	public static final Configuration<String> LIBRARY_NAME_OPENGL   = new Configuration<String>("org.lwjgl.opengl.libname", StateInit.STRING);
 	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the OpenGL ES library (<b>org.lwjgl.opengles.libname</b>). */
-	LIBRARY_NAME_OPENGLES("org.lwjgl.opengles.libname", StateInit.STRING),
+	public static final Configuration<String> LIBRARY_NAME_OPENGLES = new Configuration<String>("org.lwjgl.opengles.libname", StateInit.STRING);
 	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the Vulkan library (<b>org.lwjgl.vulkan.libname</b>). */
-	LIBRARY_NAME_VULKAN("org.lwjgl.vulkan.libname", StateInit.STRING),
+	public static final Configuration<String> LIBRARY_NAME_VULKAN   = new Configuration<String>("org.lwjgl.vulkan.libname", StateInit.STRING);
 
 	/**
 	 * Sets the allocator used for the {@link MemoryUtil} explicit memory management API
@@ -86,7 +88,7 @@ public enum Configuration {
 	 * &nbsp; &nbsp; Type: String or a {@link MemoryAllocator} instance<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	MEMORY_ALLOCATOR("org.lwjgl.system.allocator", StateInit.STRING),
+	public static final Configuration<Object> MEMORY_ALLOCATOR = new Configuration<Object>("org.lwjgl.system.allocator", StateInit.STRING);
 
 	/**
 	 * Sets the stack size, in kilobytes, that will be used in the default {@link MemoryStack} constructor. This value is also used for the LWJGL-managed,
@@ -96,10 +98,9 @@ public enum Configuration {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.system.stackSize</b><br>
-	 * &nbsp; &nbsp; Type: int<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	STACK_SIZE("org.lwjgl.system.stackSize", StateInit.INT),
+	public static final Configuration<Integer> STACK_SIZE = new Configuration<Integer>("org.lwjgl.system.stackSize", StateInit.INT);
 
 	/**
 	 * Sets the implementation used internally by LWJGL for thread-local data. Supported values:
@@ -112,10 +113,9 @@ public enum Configuration {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.system.tls</b><br>
-	 * &nbsp; &nbsp; Type: String<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	THREAD_LOCAL_SPACE("org.lwjgl.system.tls", StateInit.STRING),
+	public static final Configuration<String> THREAD_LOCAL_SPACE = new Configuration<String>("org.lwjgl.system.tls", StateInit.STRING);
 
 	/**
 	 * Set to true to disable LWJGL's basic checks. These are trivial checks that LWJGL performs to avoid JVM crashes, very useful during development.
@@ -123,10 +123,9 @@ public enum Configuration {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.NoChecks</b><br>
-	 * &nbsp; &nbsp; Type: boolean<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	DISABLE_CHECKS("org.lwjgl.util.NoChecks", StateInit.BOOLEAN),
+	public static final Configuration<Boolean> DISABLE_CHECKS = new Configuration<Boolean>("org.lwjgl.util.NoChecks", StateInit.BOOLEAN);
 
 	/**
 	 * Set to true to enable LWJGL's debug mode. Information messages will be printed to the {@link APIUtil#DEBUG_STREAM} and extra runtime checks will
@@ -134,10 +133,9 @@ public enum Configuration {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.Debug</b><br>
-	 * &nbsp; &nbsp; Type: boolean<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	DEBUG("org.lwjgl.util.Debug", StateInit.BOOLEAN),
+	public static final Configuration<Boolean> DEBUG = new Configuration<Boolean>("org.lwjgl.util.Debug", StateInit.BOOLEAN);
 
 	/**
 	 * Can be set to override the default {@link APIUtil#DEBUG_STREAM}. It must be the name of a class that implements the
@@ -152,7 +150,7 @@ public enum Configuration {
 	 * &nbsp; &nbsp; Type: String or a {@link PrintStream} instance<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	DEBUG_STREAM("org.lwjgl.util.DebugStream", StateInit.STRING),
+	public static final Configuration<Object> DEBUG_STREAM = new Configuration<Object>("org.lwjgl.util.DebugStream", StateInit.STRING);
 
 	/**
 	 * Set to true to enable LWJGL's debug mode for the {@link MemoryUtil} explicit memory management API
@@ -165,10 +163,9 @@ public enum Configuration {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.DebugAllocator</b><br>
-	 * &nbsp; &nbsp; Type: boolean<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	DEBUG_MEMORY_ALLOCATOR("org.lwjgl.util.DebugAllocator", StateInit.BOOLEAN),
+	public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR = new Configuration<Boolean>("org.lwjgl.util.DebugAllocator", StateInit.BOOLEAN);
 
 	/**
 	 * Can be used to limit the maximum available OpenGL version. This can be useful to ensure that an application has not accidentally used features only
@@ -181,29 +178,28 @@ public enum Configuration {
 	 * &nbsp; &nbsp; Type: String (M.n) or an {@link APIUtil.APIVersion} instance<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	MAXVERSION_OPENGL("org.lwjgl.opengl.maxVersion", StateInit.STRING),
+	public static final Configuration<Object> MAXVERSION_OPENGL   = new Configuration<Object>("org.lwjgl.opengl.maxVersion", StateInit.STRING);
 	/** Similar to {@link #MAXVERSION_OPENGL} for the OpenGL ES library (<b>org.lwjgl.opengles.maxVersion</b>). */
-	MAXVERSION_OPENGLES("org.lwjgl.opengles.maxVersion", StateInit.STRING),
+	public static final Configuration<Object> MAXVERSION_OPENGLES = new Configuration<Object>("org.lwjgl.opengles.maxVersion", StateInit.STRING);
 
 	/**
 	 * By default, LWJGL will automatically initialize the EGL library, when it is first accessed. Set this property to disable this behavior.
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.egl.explicitInit</b><br>
-	 * &nbsp; &nbsp; Type: boolean<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	EXPLICIT_INIT_EGL("org.lwjgl.egl.explicitInit", StateInit.BOOLEAN),
+	public static final Configuration<Boolean> EXPLICIT_INIT_EGL      = new Configuration<Boolean>("org.lwjgl.egl.explicitInit", StateInit.BOOLEAN);
 	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenAL library (<b>org.lwjgl.openal.explicitInit</b>). */
-	EXPLICIT_INIT_OPENAL("org.lwjgl.openal.explicitInit", StateInit.BOOLEAN),
+	public static final Configuration<Boolean> EXPLICIT_INIT_OPENAL   = new Configuration<Boolean>("org.lwjgl.openal.explicitInit", StateInit.BOOLEAN);
 	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenCL library (<b>org.lwjgl.opencl.explicitInit</b>). */
-	EXPLICIT_INIT_OPENCL("org.lwjgl.opencl.explicitInit", StateInit.BOOLEAN),
+	public static final Configuration<Boolean> EXPLICIT_INIT_OPENCL   = new Configuration<Boolean>("org.lwjgl.opencl.explicitInit", StateInit.BOOLEAN);
 	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenGL library (<b>org.lwjgl.opengl.explicitInit</b>). */
-	EXPLICIT_INIT_OPENGL("org.lwjgl.opengl.explicitInit", StateInit.BOOLEAN),
+	public static final Configuration<Boolean> EXPLICIT_INIT_OPENGL   = new Configuration<Boolean>("org.lwjgl.opengl.explicitInit", StateInit.BOOLEAN);
 	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenGL ES library (<b>org.lwjgl.opengles.explicitInit</b>). */
-	EXPLICIT_INIT_OPENGLES("org.lwjgl.opengles.explicitInit", StateInit.BOOLEAN),
+	public static final Configuration<Boolean> EXPLICIT_INIT_OPENGLES = new Configuration<Boolean>("org.lwjgl.opengles.explicitInit", StateInit.BOOLEAN);
 	/** Similar to {@link #EXPLICIT_INIT_EGL} for the Vulkan library (<b>org.lwjgl.vulkan.explicitInit</b>). */
-	EXPLICIT_INIT_VULKAN("org.lwjgl.vulkan.explicitInit", StateInit.BOOLEAN),
+	public static final Configuration<Boolean> EXPLICIT_INIT_VULKAN   = new Configuration<Boolean>("org.lwjgl.vulkan.explicitInit", StateInit.BOOLEAN);
 
 	/**
 	 * By default, LWJGL will check if certain GLFW functions are called on the first thread of the process and fail if that is not the case. Set this property
@@ -211,40 +207,41 @@ public enum Configuration {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.glfw.checkThread0</b><br>
-	 * &nbsp; &nbsp; Type: boolean<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	GLFW_CHECK_THREAD0("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
+	public static final Configuration<Boolean> GLFW_CHECK_THREAD0 = new Configuration<Boolean>("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
 
-	private enum StateInit {
-		BOOLEAN {
+	private abstract static class StateInit<T> {
+		static final StateInit<Boolean> BOOLEAN = new StateInit<Boolean>() {
 			@Override
-			Object getState(String property) {
+			Boolean getState(String property) {
 				return Boolean.getBoolean(property);
 			}
-		},
-		INT {
+		};
+
+		static final StateInit<Integer> INT = new StateInit<Integer>() {
 			@Override
-			Object getState(String property) {
+			Integer getState(String property) {
 				return Integer.getInteger(property);
 			}
-		},
-		STRING {
+		};
+
+		static final StateInit<String> STRING = new StateInit<String>() {
 			@Override
-			Object getState(String property) {
+			String getState(String property) {
 				return System.getProperty(property);
 
 			}
 		};
 
-		abstract Object getState(String property);
+		abstract T getState(String property);
 	}
 
 	private final String property;
 
-	private Object state;
+	private T state;
 
-	Configuration(String property, StateInit init) {
+	Configuration(String property, StateInit<? extends T> init) {
 		this.property = property;
 		this.state = init.getState(property);
 	}
@@ -258,29 +255,24 @@ public enum Configuration {
 	 *
 	 * @param value the value to set
 	 */
-	public void set(Object value) {
+	public void set(T value) {
 		this.state = value;
 	}
 
-	/**
-	 * Returns the option value.
-	 *
-	 * @param <T> the value type
-	 */
+	/** Returns the option value. */
 	@SuppressWarnings("unchecked")
-	public <T> T get() {
-		return (T)state;
+	public T get() {
+		return state;
 	}
 
 	/**
 	 * Returns the value of the specified option.
 	 *
 	 * @param defaultValue the default value
-	 * @param <T>          the value type
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T get(T defaultValue) {
-		T state = (T)this.state;
+	public T get(T defaultValue) {
+		T state = this.state;
 		if ( state == null )
 			state = defaultValue;
 
@@ -292,7 +284,7 @@ public enum Configuration {
 	 *
 	 * @param option the option to query
 	 */
-	public static APIVersion getAPIVersion(Configuration option) {
+	public static APIVersion getAPIVersion(Configuration<?> option) {
 		APIVersion version;
 
 		Object state = option.get();
