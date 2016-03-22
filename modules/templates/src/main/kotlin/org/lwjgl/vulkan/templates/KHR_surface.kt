@@ -76,7 +76,16 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 			required to be supported.
 			"""
 		),
-		"PRESENT_MODE_FIFO_RELAXED_KHR".enum(""),
+		"PRESENT_MODE_FIFO_RELAXED_KHR".enum(
+			"""
+			The presentation engine waits for the next vertical blanking period to update the current image. If a vertical blanking period has already passed
+			since the last update of the current image then the presentation engine does not wait for another vertical blanking period for the update, meaning
+			this mode $may result in visible tearing in this case. An internal queue containing {@code numSwapchainImages − 1} entries, where
+			{@code numSwapchainImages} is the number of presentable images in the swapchain, is used to hold pending presentation requests. New requests are
+			appended to the end of the queue, and one request is removed from the beginning of the queue and processed during or after each vertical blanking
+			period in which the queue is non-empty.
+			"""
+		),
 		"PRESENT_MODE_BEGIN_RANGE".enumExpr("", "VK_PRESENT_MODE_IMMEDIATE_KHR"),
 		"PRESENT_MODE_END_RANGE".enumExpr("", "VK_PRESENT_MODE_FIFO_RELAXED_KHR"),
 		"PRESENT_MODE_RANGE_SIZE".enumExpr("", "(VK_PRESENT_MODE_FIFO_RELAXED_KHR - VK_PRESENT_MODE_IMMEDIATE_KHR + 1)"),
