@@ -104,7 +104,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	// -----------------------------------------------
 	// CFString.h
 
-	IntConstant(
+	val Encodings = IntConstant(
 		"Platform-independent built-in encodings; always available on all platforms.",
 
 		"kCFStringEncodingMacRoman"..0,
@@ -121,7 +121,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"kCFStringEncodingUTF32"..0x0c000100,
 		"kCFStringEncodingUTF32BE"..0x18000100,
 		"kCFStringEncodingUTF32LE"..0x1c000100
-	)
+	).javaDocLinks
 
 	CFStringRef(
 		"CFStringCreateWithCString",
@@ -129,7 +129,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 
 		ALLOCATOR,
 		const..char_p.IN("cStr", "the $NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
-		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.")
+		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.", Encodings)
 	)
 
 	CFStringRef(
@@ -138,7 +138,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 
 		ALLOCATOR,
 		const..char_p.IN("cStr", "the $NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
-		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding."),
+		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.", Encodings),
 		nullable..CFAllocatorRef.IN(
 			"contentsDeallocator",
 			"""
@@ -152,13 +152,13 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	// -----------------------------------------------
 	// CFURL.h
 
-	IntConstant(
+	val PathStyles = IntConstant(
 		"URL path styles.",
 
 		"kCFURLPOSIXPathStyle"..0,
 		"kCFURLHFSPathStyle"..1,
 		"kCFURLWindowsPathStyle"..2
-	)
+	).javaDocLinks
 
 	CFURLRef(
 		"CFURLCreateWithFileSystemPath",
@@ -172,7 +172,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 			current working directory (evaluated when this function is being invoked).
 			"""
 		),
-		CFURLPathStyle.IN("pathStyle", "the operating system path style used in {@code filePath}"),
+		CFURLPathStyle.IN("pathStyle", "the operating system path style used in {@code filePath}", PathStyles),
 		Boolean.IN(
 			"isDirectory",
 			"""

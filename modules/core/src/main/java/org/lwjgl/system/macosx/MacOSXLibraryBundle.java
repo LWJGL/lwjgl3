@@ -20,29 +20,29 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 		super(createBundle(name), name);
 	}
 
-	private static long createBundle(String name) {
-		long fsPath = CString2CFString(name), url = NULL;
-
+	private static long createBundle(String path) {
+		long filePath = CString2CFString(memEncodeUTF8(path, SYSTEM_ALLOCATOR), kCFStringEncodingUTF8);
+		long url = NULL;
 		try {
-			url = CFURLCreateWithFileSystemPath(NULL, fsPath, kCFURLPOSIXPathStyle, true);
+			url = CFURLCreateWithFileSystemPath(NULL, filePath, kCFURLPOSIXPathStyle, true);
 			if ( url == NULL )
 				throw new NullPointerException();
 
 			long bundleRef = CFBundleCreate(NULL, url);
 			if ( bundleRef == NULL )
-				throw new RuntimeException("Failed to dynamically load bundle: " + name);
+				throw new RuntimeException("Failed to dynamically load bundle: " + path);
 
-			apiLog("Loaded native library bundle: " + name);
+			apiLog("Loaded native library bundle: " + path);
 			return bundleRef;
 		} finally {
 			if ( url != NULL ) CFRelease(url);
-			if ( fsPath != NULL ) CFRelease(fsPath);
+			CFRelease(filePath);
 		}
 	}
 
 	@Override
 	public long getFunctionAddress(CharSequence functionName) {
-		long nameRef = CString2CFString(functionName);
+		long nameRef = CString2CFString(memEncodeASCII(functionName, SYSTEM_ALLOCATOR), kCFStringEncodingASCII);
 		try {
 			return CFBundleGetFunctionPointerForName(address(), nameRef);
 		} finally {
@@ -50,18 +50,12 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 		}
 	}
 
-	private static long CString2CFString(CharSequence name) {
-		ByteBuffer nameEncoded = memEncodeUTF8(name, SYSTEM_ALLOCATOR);
+	private static long CString2CFString(ByteBuffer name, int encoding) {
+		long string = CFStringCreateWithCStringNoCopy(NULL, name, encoding, kCFAllocatorMalloc());
+		if ( string == NULL )
+			throw new NullPointerException();
 
-		try {
-			long string = CFStringCreateWithCStringNoCopy(NULL, nameEncoded, kCFStringEncodingUTF8, kCFAllocatorNull());
-			if ( string == NULL )
-				throw new NullPointerException();
-
-			return string;
-		} finally {
-			Stdlib.free(nameEncoded);
-		}
+		return string;
 	}
 
 	@Override
