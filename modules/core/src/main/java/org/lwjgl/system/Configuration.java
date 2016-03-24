@@ -191,6 +191,9 @@ public class Configuration<T> {
 	/** Similar to {@link #LIBRARY_NAME} for the OpenAL library (<b>org.lwjgl.openal.libname</b>). */
 	public static final Configuration<String> OPENAL_LIBRARY_NAME = new Configuration<String>("org.lwjgl.openal.libname", StateInit.STRING);
 
+	/** Similar to {@link #OPENGL_CAPABILITIES_STATE} for the OpenAL library (<b>org.lwjgl.openal.capabilities</b>). */
+	public static final Configuration<String> OPENAL_CAPABILITIES_STATE = new Configuration<String>("org.lwjgl.openal.capabilities", StateInit.STRING);
+
 	// -- OPENCL
 
 	/** Similar to {@link #EGL_EXPLICIT_INIT} for the OpenCL library (<b>org.lwjgl.opencl.explicitInit</b>). */
@@ -220,6 +223,29 @@ public class Configuration<T> {
 	 */
 	public static final Configuration<Object> OPENGL_MAXVERSION = new Configuration<Object>("org.lwjgl.opengl.maxVersion", StateInit.STRING);
 
+	/**
+	 * Specifies the mechanism by which {@code GLCapabilities} instances are stored and retrieved.
+	 *
+	 * <p>LWJGL supports multiple OpenGL contexts and each context may have different capabilities or even different function pointers. This is
+	 * normally implemented using a {@link ThreadLocal}, which stores the current {@code GLCapabilities} for each thread. Due to the JVM's current inability to
+	 * ideally optimize code that uses JNI methods, this results in a thread-local lookup for each OpenGL method call. To mitigate the performance impact, this
+	 * option can be set to use an alternative implementation. Supported values:</p>
+	 *
+	 * <ul>
+	 * <li><em>ThreadLocal</em> - Uses the thread-local implementation specified by {@link #THREAD_LOCAL_SPACE}. This is the default.</li>
+	 * <li><em>static</em> - If it is known that an application will only create one context, or that any contexts created will use the same device and same
+	 * context creation flags, this option removes all overhead from OpenGL function pointer lookups.
+	 *
+	 * <p>When this option is set to true, the {@code GLCapabilities} instance set before the first OpenGL function is called, will be used for all subsequent
+	 * OpenGL function calls. Once set, it cannot be changed and any calls to {@code GL.setCapabilities} will be ignored.</p></li>
+	 * </ul>
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.opengl.capabilities</b><br>
+	 * &nbsp; &nbsp;Usage: Static<br>
+	 */
+	public static final Configuration<String> OPENGL_CAPABILITIES_STATE = new Configuration<String>("org.lwjgl.opengl.capabilities", StateInit.STRING);
+
 	// -- OPENGL ES
 
 	/** Similar to {@link #EGL_EXPLICIT_INIT} for the OpenGL ES library (<b>org.lwjgl.opengles.explicitInit</b>). */
@@ -230,6 +256,9 @@ public class Configuration<T> {
 
 	/** Similar to {@link #OPENGL_MAXVERSION} for the OpenGL ES library (<b>org.lwjgl.opengles.maxVersion</b>). */
 	public static final Configuration<Object> OPENGLES_MAXVERSION = new Configuration<Object>("org.lwjgl.opengles.maxVersion", StateInit.STRING);
+
+	/** Similar to {@link #OPENGL_CAPABILITIES_STATE} for the OpenGL ES library (<b>org.lwjgl.opengles.capabilities</b>). */
+	public static final Configuration<String> OPENGLES_CAPABILITIES_STATE = new Configuration<String>("org.lwjgl.opengles.capabilities", StateInit.STRING);
 
 	// -- VULKAN
 
