@@ -25,9 +25,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul>
  *
  * <h3>Library lifecycle</h3>
- * <p>The OpenAL library is loaded automatically when this class is initialized. Set the {@link Configuration#EXPLICIT_INIT_OPENAL} option to override this
+ * <p>The OpenAL library is loaded automatically when this class is initialized. Set the {@link Configuration#OPENAL_EXPLICIT_INIT} option to override this
  * behavior. Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can be overridden
- * with the {@link Configuration#LIBRARY_NAME_OPENAL} option.</p>
+ * with the {@link Configuration#OPENAL_LIBRARY_NAME} option.</p>
  *
  * <h3>ALCCapabilities creation</h3>
  * <p>Instances of {@code ALCCapabilities} can be created with the {@link #createCapabilities} method. Calling this method is expensive, so
@@ -42,7 +42,7 @@ public final class ALC {
 	private static ALCCapabilities icd;
 
 	static {
-		if ( !Configuration.EXPLICIT_INIT_OPENAL.<Boolean>get() )
+		if ( !Configuration.OPENAL_EXPLICIT_INIT.<Boolean>get() )
 			create();
 	}
 
@@ -63,7 +63,7 @@ public final class ALC {
 				throw new IllegalStateException();
 		}
 
-		create(Configuration.LIBRARY_NAME_OPENAL.get(Pointer.BITS64 ? libName : libName + "32"));
+		create(Configuration.OPENAL_LIBRARY_NAME.get(Pointer.BITS64 ? libName : libName + "32"));
 	}
 
 	/**

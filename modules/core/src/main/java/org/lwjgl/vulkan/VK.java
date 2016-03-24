@@ -27,7 +27,7 @@ public final class VK {
 	private static VKCapabilities globalCommands;
 
 	static {
-		if ( !Configuration.EXPLICIT_INIT_VULKAN.<Boolean>get() )
+		if ( !Configuration.VULKAN_EXPLICIT_INIT.<Boolean>get() )
 			create();
 	}
 
@@ -42,13 +42,13 @@ public final class VK {
 		SharedLibrary VK;
 		switch ( Platform.get() ) {
 			case LINUX:
-				VK = Library.loadNative(Configuration.LIBRARY_NAME_VULKAN, "libvulkan.so.1");
+				VK = Library.loadNative(Configuration.VULKAN_LIBRARY_NAME, "libvulkan.so.1");
 				break;
 			case WINDOWS:
-				VK = Library.loadNative(Configuration.LIBRARY_NAME_VULKAN, "vulkan-1");
+				VK = Library.loadNative(Configuration.VULKAN_LIBRARY_NAME, "vulkan-1");
 				break;
 			case MACOSX:
-				VK = Library.loadNative(Configuration.LIBRARY_NAME_VULKAN); // there may be Vulkan-over-Metal emulation libraries on OS X
+				VK = Library.loadNative(Configuration.VULKAN_LIBRARY_NAME); // there may be Vulkan-over-Metal emulation libraries on OS X
 				break;
 			default:
 				throw new IllegalStateException();

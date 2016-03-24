@@ -32,10 +32,10 @@ import static org.lwjgl.system.ThreadLocalUtil.*;
  * </ul>
  *
  * <h3>Library lifecycle</h3>
- * <p>The OpenGL ES library is loaded automatically when this class is initialized. Set the {@link Configuration#EXPLICIT_INIT_OPENGLES} option to override
+ * <p>The OpenGL ES library is loaded automatically when this class is initialized. Set the {@link Configuration#OPENGLES_EXPLICIT_INIT} option to override
  * this behavior. Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can
- * be overridden with the {@link Configuration#LIBRARY_NAME_OPENGLES} option. The maximum OpenGL ES version loaded can be set with the
- * {@link Configuration#MAXVERSION_OPENGLES} option. This can be useful to ensure that no functionality above a specific version is used during development.</p>
+ * be overridden with the {@link Configuration#OPENGLES_LIBRARY_NAME} option. The maximum OpenGL ES version loaded can be set with the
+ * {@link Configuration#OPENGLES_MAXVERSION} option. This can be useful to ensure that no functionality above a specific version is used during development.</p>
  *
  * <h3>GLESCapabilities creation</h3>
  * <p>Instances of {@code GLESCapabilities} can be created with the {@link #createCapabilities} method. An OpenGL ES context must be current in the current
@@ -58,9 +58,9 @@ public final class GLES {
 	private static CapabilitiesState capsProvider = new GlobalCapabilitiesState();
 
 	static {
-		MAX_VERSION = Configuration.getAPIVersion(Configuration.MAXVERSION_OPENGLES);
+		MAX_VERSION = Configuration.getAPIVersion(Configuration.OPENGLES_MAXVERSION);
 
-		if ( !Configuration.EXPLICIT_INIT_OPENGLES.<Boolean>get() )
+		if ( !Configuration.OPENGLES_EXPLICIT_INIT.<Boolean>get() )
 			create();
 	}
 
@@ -71,13 +71,13 @@ public final class GLES {
 		SharedLibrary GLES;
 		switch ( Platform.get() ) {
 			case LINUX:
-				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGLES, "libGLESv2.so.2");
+				GLES = Library.loadNative(Configuration.OPENGLES_LIBRARY_NAME, "libGLESv2.so.2");
 				break;
 			case MACOSX:
-				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGLES, "GLESv2");
+				GLES = Library.loadNative(Configuration.OPENGLES_LIBRARY_NAME, "GLESv2");
 				break;
 			case WINDOWS:
-				GLES = Library.loadNative(Configuration.LIBRARY_NAME_OPENGLES, "libGLESv2", "GLESv2");
+				GLES = Library.loadNative(Configuration.OPENGLES_LIBRARY_NAME, "libGLESv2", "GLESv2");
 				break;
 			default:
 				throw new IllegalStateException();

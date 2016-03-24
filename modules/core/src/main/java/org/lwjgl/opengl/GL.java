@@ -32,9 +32,9 @@ import static org.lwjgl.system.ThreadLocalUtil.*;
  * </ul>
  *
  * <h3>Library lifecycle</h3>
- * <p>The OpenGL library is loaded automatically when this class is initialized. Set the {@link Configuration#EXPLICIT_INIT_OPENGL} option to override this
+ * <p>The OpenGL library is loaded automatically when this class is initialized. Set the {@link Configuration#OPENGL_EXPLICIT_INIT} option to override this
  * behavior. Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can be overridden
- * with the {@link Configuration#LIBRARY_NAME_OPENGL} option. The maximum OpenGL version loaded can be set with the {@link Configuration#MAXVERSION_OPENGL}
+ * with the {@link Configuration#OPENGL_LIBRARY_NAME} option. The maximum OpenGL version loaded can be set with the {@link Configuration#OPENGL_MAXVERSION}
  * option. This can be useful to ensure that no functionality above a specific version is used during development.</p>
  *
  * <h3>GLCapabilities creation</h3>
@@ -58,9 +58,9 @@ public final class GL {
 	private static CapabilitiesState capsProvider = new GlobalCapabilitiesState();
 
 	static {
-		MAX_VERSION = Configuration.getAPIVersion(Configuration.MAXVERSION_OPENGL);
+		MAX_VERSION = Configuration.getAPIVersion(Configuration.OPENGL_MAXVERSION);
 
-		if ( !Configuration.EXPLICIT_INIT_OPENGL.<Boolean>get() )
+		if ( !Configuration.OPENGL_EXPLICIT_INIT.<Boolean>get() )
 			create();
 	}
 
@@ -71,13 +71,13 @@ public final class GL {
 		SharedLibrary GL;
 		switch ( Platform.get() ) {
 			case LINUX:
-				GL = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "libGL.so.1", "libGL.so");
+				GL = Library.loadNative(Configuration.OPENGL_LIBRARY_NAME, "libGL.so.1", "libGL.so");
 				break;
 			case MACOSX:
-				GL = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "/System/Library/Frameworks/OpenGL.framework");
+				GL = Library.loadNative(Configuration.OPENGL_LIBRARY_NAME, "/System/Library/Frameworks/OpenGL.framework");
 				break;
 			case WINDOWS:
-				GL = Library.loadNative(Configuration.LIBRARY_NAME_OPENGL, "opengl32");
+				GL = Library.loadNative(Configuration.OPENGL_LIBRARY_NAME, "opengl32");
 				break;
 			default:
 				throw new IllegalStateException();

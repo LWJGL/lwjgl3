@@ -41,7 +41,7 @@ public final class CL {
 	private static CLCapabilities icd;
 
 	static {
-		if ( !Configuration.EXPLICIT_INIT_OPENCL.<Boolean>get() )
+		if ( !Configuration.OPENCL_EXPLICIT_INIT.<Boolean>get() )
 			create();
 	}
 
@@ -53,10 +53,10 @@ public final class CL {
 		switch ( Platform.get() ) {
 			case LINUX:
 			case WINDOWS:
-				CL = Library.loadNative(Configuration.LIBRARY_NAME_OPENCL, "OpenCL");
+				CL = Library.loadNative(Configuration.OPENCL_LIBRARY_NAME, "OpenCL");
 				break;
 			case MACOSX:
-				CL = Library.loadNative(Configuration.LIBRARY_NAME_OPENCL, "OpenCL", "/System/Library/Frameworks/OpenCL.framework");
+				CL = Library.loadNative(Configuration.OPENCL_LIBRARY_NAME, "OpenCL", "/System/Library/Frameworks/OpenCL.framework");
 				break;
 			default:
 				throw new IllegalStateException();

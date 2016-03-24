@@ -27,9 +27,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  * EGLDisplay or the EGL client library. Internally, it also contains function pointers that are only valid in that specific EGLDisplay or client library.</li>
  *
  * <h3>Library lifecycle</h3>
- * <p>The EGL library is loaded automatically when this class is initialized. Set the {@link Configuration#EXPLICIT_INIT_EGL} option to override this behavior.
+ * <p>The EGL library is loaded automatically when this class is initialized. Set the {@link Configuration#EGL_EXPLICIT_INIT} option to override this behavior.
  * Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can be overridden with the
- * {@link Configuration#LIBRARY_NAME_EGL} option.</p>
+ * {@link Configuration#EGL_LIBRARY_NAME} option.</p>
  *
  * <h3>EGLCapabilities creation</h3>
  * <p>Instances of {@code EGLCapabilities} for an EGLDisplay can be created with the {@link #createDisplayCapabilities} method. Calling this method is
@@ -44,7 +44,7 @@ public final class EGL {
 	private static EGLCapabilities caps;
 
 	static {
-		if ( !Configuration.EXPLICIT_INIT_EGL.<Boolean>get() )
+		if ( !Configuration.EGL_EXPLICIT_INIT.<Boolean>get() )
 			create();
 	}
 
@@ -55,13 +55,13 @@ public final class EGL {
 		SharedLibrary EGL;
 		switch ( Platform.get() ) {
 			case LINUX:
-				EGL = Library.loadNative(Configuration.LIBRARY_NAME_EGL, "libEGL.so.1");
+				EGL = Library.loadNative(Configuration.EGL_LIBRARY_NAME, "libEGL.so.1");
 				break;
 			case MACOSX:
-				EGL = Library.loadNative(Configuration.LIBRARY_NAME_EGL, "EGL");
+				EGL = Library.loadNative(Configuration.EGL_LIBRARY_NAME, "EGL");
 				break;
 			case WINDOWS:
-				EGL = Library.loadNative(Configuration.LIBRARY_NAME_EGL, "libEGL", "EGL");
+				EGL = Library.loadNative(Configuration.EGL_LIBRARY_NAME, "libEGL", "EGL");
 				break;
 			default:
 				throw new IllegalStateException();

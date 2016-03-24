@@ -51,25 +51,7 @@ public class Configuration<T> {
 	 * Property: <b>org.lwjgl.libname</b><br>
 	 * &nbsp; &nbsp;Usage: Dynamic<br>
 	 */
-	public static final Configuration<String> LIBRARY_NAME_LWJGL    = new Configuration<String>("org.lwjgl.libname", StateInit.STRING);
-	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the hwloc library (<b>org.lwjgl.system.hwloc.libname</b>). */
-	public static final Configuration<String> LIBRARY_NAME_HWLOC    = new Configuration<String>("org.lwjgl.system.hwloc.libname", StateInit.STRING);
-	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the jemalloc library (<b>org.lwjgl.system.jemalloc.libname</b>). */
-	public static final Configuration<String> LIBRARY_NAME_JEMALLOC = new Configuration<String>("org.lwjgl.system.jemalloc.libname", StateInit.STRING);
-	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the GLFW library (<b>org.lwjgl.glfw.libname</b>). */
-	public static final Configuration<String> LIBRARY_NAME_GLFW     = new Configuration<String>("org.lwjgl.glfw.libname", StateInit.STRING);
-	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the EGL library (<b>org.lwjgl.egl.libname</b>). */
-	public static final Configuration<String> LIBRARY_NAME_EGL      = new Configuration<String>("org.lwjgl.egl.libname", StateInit.STRING);
-	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the OpenAL library (<b>org.lwjgl.openal.libname</b>). */
-	public static final Configuration<String> LIBRARY_NAME_OPENAL   = new Configuration<String>("org.lwjgl.openal.libname", StateInit.STRING);
-	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the OpenCL library (<b>org.lwjgl.opencl.libname</b>). */
-	public static final Configuration<String> LIBRARY_NAME_OPENCL   = new Configuration<String>("org.lwjgl.opencl.libname", StateInit.STRING);
-	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the OpenGL library (<b>org.lwjgl.opengl.libname</b>). */
-	public static final Configuration<String> LIBRARY_NAME_OPENGL   = new Configuration<String>("org.lwjgl.opengl.libname", StateInit.STRING);
-	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the OpenGL ES library (<b>org.lwjgl.opengles.libname</b>). */
-	public static final Configuration<String> LIBRARY_NAME_OPENGLES = new Configuration<String>("org.lwjgl.opengles.libname", StateInit.STRING);
-	/** Similar to {@link #LIBRARY_NAME_LWJGL} for the Vulkan library (<b>org.lwjgl.vulkan.libname</b>). */
-	public static final Configuration<String> LIBRARY_NAME_VULKAN   = new Configuration<String>("org.lwjgl.vulkan.libname", StateInit.STRING);
+	public static final Configuration<String> LIBRARY_NAME = new Configuration<String>("org.lwjgl.libname", StateInit.STRING);
 
 	/**
 	 * Sets the allocator used for the {@link MemoryUtil} explicit memory management API
@@ -167,6 +149,64 @@ public class Configuration<T> {
 	 */
 	public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR = new Configuration<Boolean>("org.lwjgl.util.DebugAllocator", StateInit.BOOLEAN);
 
+	// -- EGL
+
+	/**
+	 * By default, LWJGL will automatically initialize the EGL library, when it is first accessed. Set this property to disable this behavior.
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.egl.explicitInit</b><br>
+	 * &nbsp; &nbsp;Usage: Static<br>
+	 */
+	public static final Configuration<Boolean> EGL_EXPLICIT_INIT = new Configuration<Boolean>("org.lwjgl.egl.explicitInit", StateInit.BOOLEAN);
+
+	/** Similar to {@link #LIBRARY_NAME} for the EGL library (<b>org.lwjgl.egl.libname</b>). */
+	public static final Configuration<String> EGL_LIBRARY_NAME = new Configuration<String>("org.lwjgl.egl.libname", StateInit.STRING);
+
+	// -- GLFW
+
+	/** Similar to {@link #LIBRARY_NAME} for the GLFW library (<b>org.lwjgl.glfw.libname</b>). */
+	public static final Configuration<String> GLFW_LIBRARY_NAME = new Configuration<String>("org.lwjgl.glfw.libname", StateInit.STRING);
+
+	/**
+	 * By default, LWJGL will check if certain GLFW functions are called on the first thread of the process and fail if that is not the case. Set this property
+	 * to false to disable this behavior.
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.glfw.checkThread0</b><br>
+	 * &nbsp; &nbsp;Usage: Static<br>
+	 */
+	public static final Configuration<Boolean> GLFW_CHECK_THREAD0 = new Configuration<Boolean>("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
+
+	// -- JEMALLOC
+
+	/** Similar to {@link #LIBRARY_NAME} for the jemalloc library (<b>org.lwjgl.system.jemalloc.libname</b>). */
+	public static final Configuration<String> JEMALLOC_LIBRARY_NAME = new Configuration<String>("org.lwjgl.system.jemalloc.libname", StateInit.STRING);
+
+	// -- OPENAL
+
+	/** Similar to {@link #EGL_EXPLICIT_INIT} for the OpenAL library (<b>org.lwjgl.openal.explicitInit</b>). */
+	public static final Configuration<Boolean> OPENAL_EXPLICIT_INIT = new Configuration<Boolean>("org.lwjgl.openal.explicitInit", StateInit.BOOLEAN);
+
+	/** Similar to {@link #LIBRARY_NAME} for the OpenAL library (<b>org.lwjgl.openal.libname</b>). */
+	public static final Configuration<String> OPENAL_LIBRARY_NAME = new Configuration<String>("org.lwjgl.openal.libname", StateInit.STRING);
+
+	// -- OPENCL
+
+	/** Similar to {@link #EGL_EXPLICIT_INIT} for the OpenCL library (<b>org.lwjgl.opencl.explicitInit</b>). */
+	public static final Configuration<Boolean> OPENCL_EXPLICIT_INIT = new Configuration<Boolean>("org.lwjgl.opencl.explicitInit", StateInit.BOOLEAN);
+
+	/** Similar to {@link #LIBRARY_NAME} for the OpenCL library (<b>org.lwjgl.opencl.libname</b>). */
+	public static final Configuration<String> OPENCL_LIBRARY_NAME = new Configuration<String>("org.lwjgl.opencl.libname", StateInit.STRING);
+
+	// -- OPENGL
+
+	/** Similar to {@link #EGL_EXPLICIT_INIT} for the OpenGL library (<b>org.lwjgl.opengl.explicitInit</b>). */
+	public static final Configuration<Boolean> OPENGL_EXPLICIT_INIT = new Configuration<Boolean>("org.lwjgl.opengl.explicitInit", StateInit.BOOLEAN);
+
+	/** Similar to {@link #LIBRARY_NAME} for the OpenGL library (<b>org.lwjgl.opengl.libname</b>). */
+	public static final Configuration<String> OPENGL_LIBRARY_NAME = new Configuration<String>("org.lwjgl.opengl.libname", StateInit.STRING);
+
 	/**
 	 * Can be used to limit the maximum available OpenGL version. This can be useful to ensure that an application has not accidentally used features only
 	 * available in a higher OpenGL version.
@@ -178,38 +218,26 @@ public class Configuration<T> {
 	 * &nbsp; &nbsp; Type: String (M.n) or an {@link APIUtil.APIVersion} instance<br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
-	public static final Configuration<Object> MAXVERSION_OPENGL   = new Configuration<Object>("org.lwjgl.opengl.maxVersion", StateInit.STRING);
-	/** Similar to {@link #MAXVERSION_OPENGL} for the OpenGL ES library (<b>org.lwjgl.opengles.maxVersion</b>). */
-	public static final Configuration<Object> MAXVERSION_OPENGLES = new Configuration<Object>("org.lwjgl.opengles.maxVersion", StateInit.STRING);
+	public static final Configuration<Object> OPENGL_MAXVERSION = new Configuration<Object>("org.lwjgl.opengl.maxVersion", StateInit.STRING);
 
-	/**
-	 * By default, LWJGL will automatically initialize the EGL library, when it is first accessed. Set this property to disable this behavior.
-	 *
-	 * <p style="font-family: monospace">
-	 * Property: <b>org.lwjgl.egl.explicitInit</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
-	 */
-	public static final Configuration<Boolean> EXPLICIT_INIT_EGL      = new Configuration<Boolean>("org.lwjgl.egl.explicitInit", StateInit.BOOLEAN);
-	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenAL library (<b>org.lwjgl.openal.explicitInit</b>). */
-	public static final Configuration<Boolean> EXPLICIT_INIT_OPENAL   = new Configuration<Boolean>("org.lwjgl.openal.explicitInit", StateInit.BOOLEAN);
-	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenCL library (<b>org.lwjgl.opencl.explicitInit</b>). */
-	public static final Configuration<Boolean> EXPLICIT_INIT_OPENCL   = new Configuration<Boolean>("org.lwjgl.opencl.explicitInit", StateInit.BOOLEAN);
-	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenGL library (<b>org.lwjgl.opengl.explicitInit</b>). */
-	public static final Configuration<Boolean> EXPLICIT_INIT_OPENGL   = new Configuration<Boolean>("org.lwjgl.opengl.explicitInit", StateInit.BOOLEAN);
-	/** Similar to {@link #EXPLICIT_INIT_EGL} for the OpenGL ES library (<b>org.lwjgl.opengles.explicitInit</b>). */
-	public static final Configuration<Boolean> EXPLICIT_INIT_OPENGLES = new Configuration<Boolean>("org.lwjgl.opengles.explicitInit", StateInit.BOOLEAN);
-	/** Similar to {@link #EXPLICIT_INIT_EGL} for the Vulkan library (<b>org.lwjgl.vulkan.explicitInit</b>). */
-	public static final Configuration<Boolean> EXPLICIT_INIT_VULKAN   = new Configuration<Boolean>("org.lwjgl.vulkan.explicitInit", StateInit.BOOLEAN);
+	// -- OPENGL ES
 
-	/**
-	 * By default, LWJGL will check if certain GLFW functions are called on the first thread of the process and fail if that is not the case. Set this property
-	 * to false to disable this behavior.
-	 *
-	 * <p style="font-family: monospace">
-	 * Property: <b>org.lwjgl.glfw.checkThread0</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
-	 */
-	public static final Configuration<Boolean> GLFW_CHECK_THREAD0 = new Configuration<Boolean>("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
+	/** Similar to {@link #EGL_EXPLICIT_INIT} for the OpenGL ES library (<b>org.lwjgl.opengles.explicitInit</b>). */
+	public static final Configuration<Boolean> OPENGLES_EXPLICIT_INIT = new Configuration<Boolean>("org.lwjgl.opengles.explicitInit", StateInit.BOOLEAN);
+
+	/** Similar to {@link #LIBRARY_NAME} for the OpenGL ES library (<b>org.lwjgl.opengles.libname</b>). */
+	public static final Configuration<String> OPENGLES_LIBRARY_NAME = new Configuration<String>("org.lwjgl.opengles.libname", StateInit.STRING);
+
+	/** Similar to {@link #OPENGL_MAXVERSION} for the OpenGL ES library (<b>org.lwjgl.opengles.maxVersion</b>). */
+	public static final Configuration<Object> OPENGLES_MAXVERSION = new Configuration<Object>("org.lwjgl.opengles.maxVersion", StateInit.STRING);
+
+	// -- VULKAN
+
+	/** Similar to {@link #EGL_EXPLICIT_INIT} for the Vulkan library (<b>org.lwjgl.vulkan.explicitInit</b>). */
+	public static final Configuration<Boolean> VULKAN_EXPLICIT_INIT = new Configuration<Boolean>("org.lwjgl.vulkan.explicitInit", StateInit.BOOLEAN);
+
+	/** Similar to {@link #LIBRARY_NAME} for the Vulkan library (<b>org.lwjgl.vulkan.libname</b>). */
+	public static final Configuration<String> VULKAN_LIBRARY_NAME = new Configuration<String>("org.lwjgl.vulkan.libname", StateInit.STRING);
 
 	private abstract static class StateInit<T> {
 		static final StateInit<Boolean> BOOLEAN = new StateInit<Boolean>() {
