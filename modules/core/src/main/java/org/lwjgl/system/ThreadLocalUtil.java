@@ -10,6 +10,8 @@ import org.lwjgl.opengles.GLESCapabilities;
 
 import java.lang.reflect.Field;
 
+import static org.lwjgl.system.APIUtil.*;
+
 /**
  * This class provides storage for all LWJGL objects that must be thread-local. [INTERNAL USE ONLY]
  *
@@ -17,7 +19,7 @@ import java.lang.reflect.Field;
  */
 public final class ThreadLocalUtil {
 
-	private static final ThreadLocal<TLS> TLS = getInstance();
+	private static final State TLS = getInstance();
 
 	private ThreadLocalUtil() {
 	}
@@ -49,22 +51,49 @@ public final class ThreadLocalUtil {
 
 	}
 
-	@SuppressWarnings("unchecked")
-	static ThreadLocal<TLS> getInstance() {
-		String provider = Configuration.THREAD_LOCAL_SPACE.get("unsafe");
+	private interface State {
+		void set(TLS value);
+		TLS get();
+	}
 
-		if ( "unsafe".equals(provider) ) {
-			return new UnsafeProvider();
-		} else if ( "ThreadLocal".equals(provider) ) {
-			return new ThreadLocal<ThreadLocalUtil.TLS>() {
-				@Override
-				protected TLS initialValue() {
-					return new TLS();
-				}
-			};
+	@SuppressWarnings("unchecked")
+	private static State getInstance() {
+		String tls = Configuration.THREAD_LOCAL_SPACE.get("unsafe");
+
+		if ( "unsafe".equals(tls) ) {
+			try {
+				return new UnsafeState();
+			} catch (Throwable t) {
+				apiLog("[TLS] Failed to initialize unsafe implementation.");
+				return new TLState();
+			}
+		} else if ( "ThreadLocal".equals(tls) ) {
+			return new TLState();
 		} else {
-			throw new RuntimeException("Invalid " + Configuration.THREAD_LOCAL_SPACE.getProperty() + "specified.");
+			throw new IllegalStateException("Invalid " + Configuration.THREAD_LOCAL_SPACE.getProperty() + " specified.");
 		}
+	}
+
+	/** {@link ThreadLocal} implementation. */
+	private static class TLState implements State {
+
+		private static final ThreadLocal<TLS> STATE = new ThreadLocal<ThreadLocalUtil.TLS>() {
+			@Override
+			protected TLS initialValue() {
+				return new TLS();
+			}
+		};
+
+		@Override
+		public void set(TLS value) {
+			STATE.set(value);
+		}
+
+		@Override
+		public TLS get() {
+			return STATE.get();
+		}
+
 	}
 
 	/**
@@ -74,7 +103,7 @@ public final class ThreadLocalUtil {
 	 *
 	 * <p>This implementation trades the {@code ThreadLocalMap} lookup with a plain field derefence, eliminating considerable overhead.</p>
 	 */
-	private static class UnsafeProvider extends ThreadLocal<TLS> {
+	private static class UnsafeState implements State {
 
 		private static final sun.misc.Unsafe UNSAFE = MemoryAccess.getUnsafeInstance();
 
@@ -93,18 +122,13 @@ public final class ThreadLocalUtil {
 		}
 
 		@Override
-		protected TLS initialValue() {
-			return new TLS();
-		}
-
-		@Override
 		public TLS get() {
 			Object target = UNSAFE.getObject(Thread.currentThread(), TARGET);
 			return TLS.class.isInstance(target) ? (TLS)target : setInitialValue();
 		}
 
 		private TLS setInitialValue() {
-			TLS tls = initialValue();
+			TLS tls = new TLS();
 			set(tls);
 			return tls;
 		}
@@ -117,16 +141,6 @@ public final class ThreadLocalUtil {
 			UNSAFE.putObject(t, TARGET, value);
 		}
 
-		@Override
-		public void remove() {
-			Thread t = Thread.currentThread();
-
-			Object target = UNSAFE.getObject(t, TARGET);
-			if ( TLS.class.isInstance(target) ) {
-				TLS tls = (TLS)target;
-				UNSAFE.putObject(t, TARGET, tls.target);
-			}
-		}
 	}
 
 }
