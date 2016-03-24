@@ -166,7 +166,7 @@ class Parameter(
 		                         ->
 			if ( has(nullable) )
 				"$name == null ? NULL : $name.$ADDRESS"
-			else if ( nativeType is ObjectType && func.hasUnsafeMethod && !func.nativeClass.binding!!.hasCurrentCapabilities )
+			else if ( nativeType is ObjectType && func.hasUnsafeMethod && func.nativeClass.binding!!.hasParameterCapabilities )
 				name
 			else
 				"$name.$ADDRESS"

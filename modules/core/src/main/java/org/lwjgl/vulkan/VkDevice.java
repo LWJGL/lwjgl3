@@ -29,8 +29,6 @@ public class VkDevice extends DispatchableHandle {
 	private static VKCapabilities getDeviceCapabilities(final long handle, final VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci) {
 		int apiVersion = physicalDevice.getCapabilities().apiVersion;
 		return new VKCapabilities(
-			apiVersion,
-			VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()),
 			new FunctionProvider() {
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
@@ -38,10 +36,10 @@ public class VkDevice extends DispatchableHandle {
 					try {
 						long nameEncoded = memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK));
 
-						VK10 vk = physicalDevice.getCapabilities().__VK10;
-						long address = GetDeviceProcAddr(vk.GetDeviceProcAddr, handle, nameEncoded);
+						VKCapabilities caps = physicalDevice.getCapabilities();
+						long address = GetDeviceProcAddr(caps.vkGetDeviceProcAddr, handle, nameEncoded);
 						if ( address == NULL ) {
-							address = GetInstanceProcAddr(vk.GetInstanceProcAddr, physicalDevice.getInstance().address(), nameEncoded);
+							address = GetInstanceProcAddr(caps.vkGetInstanceProcAddr, physicalDevice.getInstance().address(), nameEncoded);
 							if ( address == NULL )
 								address = VK.getFunctionProvider().getFunctionAddress(functionName);
 						}
@@ -55,8 +53,7 @@ public class VkDevice extends DispatchableHandle {
 				@Override
 				public void free() {
 				}
-			}
-		);
+			}, apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()));
 	}
 
 	static long GetDeviceProcAddr(long __functionAddress, long handle, long functionName) {

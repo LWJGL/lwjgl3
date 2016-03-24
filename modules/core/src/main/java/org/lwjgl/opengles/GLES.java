@@ -100,11 +100,8 @@ public final class GLES {
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
 					long address = EGL.getFunctionProvider().getFunctionAddress(functionName);
-					if ( address == NULL ) {
+					if ( address == NULL )
 						address = GLES.getFunctionAddress(functionName);
-						if ( address == NULL )
-							apiLog("Failed to locate address for GLES function " + functionName);
-					}
 
 					return address;
 				}
@@ -286,13 +283,12 @@ public final class GLES {
 		return caps;
 	}
 
-	static <T> T checkExtension(String extension, T functions, boolean supported) {
+	static boolean checkExtension(String extension, boolean supported) {
 		if ( supported )
-			return functions;
-		else {
-			apiLog("[GLES] " + extension + " was reported as available but an entry point is missing.");
-			return null;
-		}
+			return true;
+
+		apiLog("[GLES] " + extension + " was reported as available but an entry point is missing.");
+		return false;
 	}
 
 	/** Manages the thread-local {@link GLESCapabilities} state. */

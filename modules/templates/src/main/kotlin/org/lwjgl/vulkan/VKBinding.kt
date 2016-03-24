@@ -6,6 +6,7 @@ package org.lwjgl.vulkan
 
 import org.lwjgl.generator.*
 import java.io.PrintWriter
+import java.util.*
 import java.util.regex.Pattern
 
 private val NativeClass.capName: String
@@ -22,7 +23,8 @@ private val CAPABILITIES_CLASS = "VKCapabilities"
 
 val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILITIES_CLASS) {
 
-	override val hasCurrentCapabilities: Boolean get() = false
+	override val hasCapabilities: Boolean get() = true
+	override val hasParameterCapabilities: Boolean = true
 
 	private val VKCorePattern = Pattern.compile("VK[1-9][0-9]")
 	override fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String): Boolean {
@@ -39,37 +41,22 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		return false
 	}
 
+	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "VK10"
+
+	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+		writer.print("\t\tlong $FUNCTION_ADDRESS = ")
+		writer.println(if ( function has Capabilities )
+			"${function[Capabilities].expression}.${function.name};"
+		else
+			"${function.getParams() { it.nativeType is ObjectType }.first().name}.getCapabilities().${function.name};")
+	}
+
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
-		println("\t// --- [ Function Addresses ] ---")
-		println("""
-	/** Returns the {@link ${nativeClass.className}} instance from the specified dispatchable handle. */
-	public static ${nativeClass.className} getInstance(DispatchableHandle handle) {
-		return getInstance(handle.getCapabilities());
-	}
-
-	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $CAPABILITIES_CLASS}. */
-	public static ${nativeClass.className} getInstance($CAPABILITIES_CLASS caps) {
-		return checkFunctionality(caps.__${nativeClass.className});
-	}""")
-
-		print("""
-	static ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider) {
-		if ( !ext.contains("${nativeClass.capName}") )
-			return null;
-
-		return VK.checkExtension("${nativeClass.capName}", create(provider));
-	}
-
-	static ${nativeClass.className} create(FunctionProvider provider) {
-		${nativeClass.className} funcs = new ${nativeClass.className}(provider);
-
-		boolean supported = checkFunctions(""")
-		nativeClass.printPointers(this)
-		println(""");
-
-		return supported ? funcs : null;
-	}
-""")
+		println("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
+		print("\t\treturn checkFunctions(")
+		nativeClass.printPointers(this, { "caps.${it.name}" })
+		println(");")
+		println("\t}\n")
 	}
 
 	override fun PrintWriter.generateContent() {
@@ -88,13 +75,14 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
-		for (extension in classesWithFunctions) {
-			print("\tfinal ${extension.className}")
-			for (i in 0..(alignment - extension.className.length - 1))
-				print(' ')
-			println(" __${extension.className};")
-		}
+
+		val addresses = classesWithFunctions
+			.map { it.functions }
+			.flatten()
+			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
+
+		println("\tpublic final long")
+		println(addresses.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
 
 		println("""
 	/** The Vulkan API version number. */
@@ -109,28 +97,18 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		}
 
 		println("""
-	$CAPABILITIES_CLASS(FunctionProvider provider) {
-		this.apiVersion = 0;
-""")
-		for (extension in classes) {
-			val capName = extension.capName
-			if ( extension.hasNativeFunctions ) {
-				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(provider)) != null;")
-			} else
-				println("\t\t$capName = false;")
-		}
-		println("\t}")
-
-		println("""
-	$CAPABILITIES_CLASS(int apiVersion, Set<String> ext, FunctionProvider provider) {
+	$CAPABILITIES_CLASS(FunctionProvider provider, int apiVersion, Set<String> ext) {
 		this.apiVersion = apiVersion;
 """)
+
+		println(addresses.map { "${it.name} = provider.getFunctionAddress(${it.nativeName});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
+
 		for (extension in classes) {
 			val capName = extension.capName
-			if ( extension.hasNativeFunctions ) {
-				println("\t\t$capName = (__${extension.className} = ${if ( capName == extension.className ) "$VULKAN_PACKAGE.${extension.className}" else extension.className}.create(ext, provider)) != null;")
-			} else
-				println("\t\t$capName = ext.contains(\"${extension.capName}\");")
+			print("\t\t$capName = ext.contains(\"${extension.capName}\")")
+			if ( extension.hasNativeFunctions )
+				print(" && VK.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$VULKAN_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+			println(";")
 		}
 		println("\t}")
 		print("\n}")

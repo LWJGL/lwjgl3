@@ -7,7 +7,6 @@ package org.lwjgl.demo.system.jawt;
 import org.lwjgl.demo.opengl.AbstractGears;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
-import org.lwjgl.opengl.WGL;
 import org.lwjgl.system.jawt.*;
 import org.lwjgl.system.windows.PIXELFORMATDESCRIPTOR;
 import org.lwjgl.system.windows.WinBase;
@@ -33,8 +32,6 @@ public class LWJGLCanvas extends Canvas {
 
 	private final AbstractGears gears;
 
-	private final WGL wgl;
-
 	private long hglrc;
 
 	private GLCapabilities caps;
@@ -46,7 +43,6 @@ public class LWJGLCanvas extends Canvas {
 			throw new RuntimeException("GetAWT failed");
 
 		gears = new AbstractGears();
-		wgl = new WGL(GL.getFunctionProvider());
 	}
 
 	@Override
@@ -80,7 +76,7 @@ public class LWJGLCanvas extends Canvas {
 							createContext(dsi_win);
 							gears.initGLState();
 						} else {
-							if ( callPPI(wgl.MakeCurrent, hdc, hglrc) == 0 )
+							if ( callPPI(caps.wglMakeCurrent, hdc, hglrc) == 0 )
 								throw new IllegalStateException("wglMakeCurrent() failed");
 
 							GL.setCapabilities(caps);
@@ -138,12 +134,12 @@ public class LWJGLCanvas extends Canvas {
 					throw new IllegalStateException("SetPixelFormat() failed: " + WinBase.getLastError());
 			}
 
-			hglrc = callPP(wgl.CreateContext, hdc);
+			hglrc = callPP(caps.wglCreateContext, hdc);
 
 			if ( hglrc == NULL )
 				throw new IllegalStateException("wglCreateContext() failed");
 
-			if ( callPPI(wgl.MakeCurrent, hdc, hglrc) == 0 )
+			if ( callPPI(caps.wglMakeCurrent, hdc, hglrc) == 0 )
 				throw new IllegalStateException("wglMakeCurrent() failed");
 
 			caps = GL.createCapabilities();
@@ -156,7 +152,7 @@ public class LWJGLCanvas extends Canvas {
 		awt.free();
 
 		if ( hglrc != NULL )
-			callPI(wgl.DeleteContext, hglrc);
+			callPI(caps.wglDeleteContext, hglrc);
 	}
 
 }

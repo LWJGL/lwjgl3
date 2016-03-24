@@ -45,6 +45,10 @@ abstract class APIBinding(
 		return classes
 	}
 
+	fun addClass(clazz: NativeClass) {
+		_classes.add(clazz)
+	}
+
 	override fun getLastModified(root: String): Long {
 		return max(
 			super.getLastModified(root),
@@ -52,18 +56,14 @@ abstract class APIBinding(
 		)
 	}
 
-	fun addCapabilities(clazz: NativeClass) {
-		_classes.add(clazz)
-	}
+	/** If true, function pointers for this binding are retrieved from custom "capabilities" instances. */
+	open val hasCapabilities: Boolean = false
 
-	/** If true, different platforms/devices/contexts return different function addresses. */
-	open fun isLocal(nativeClass: NativeClass) = false // GL, GLES & EGL are global, CL & AL are local
-
-	/** If false, a capabilities instance is not available in the current thread or process. A parameter must provide the instance. */
-	open val hasCurrentCapabilities: Boolean = true // GL has thread-local capabilities, AL has process-wide capabilities (unless ALC_EXT_thread_local_context is used), CL has the ICD.
+	/** If true, "capabilities" instance are retrieved from function parameters. */
+	open val hasParameterCapabilities: Boolean = false
 
 	open fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
-		val instanceParameter = if ( hasCurrentCapabilities )
+		val instanceParameter = if ( !hasCapabilities )
 			""
 		else if ( function has Capabilities ) {
 			val caps = function[Capabilities]
@@ -109,7 +109,7 @@ abstract class APIBinding(
 	open fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String) = false
 
 	/** Can be overriden to implement a custom condition for checking the function address. */
-	open fun shouldCheckFunctionAddress(function: NativeClassFunction) = !hasCurrentCapabilities
+	open fun shouldCheckFunctionAddress(function: NativeClassFunction) = hasCapabilities
 
 	/** Can be overriden to add custom parameter checks. */
 	open fun addParameterChecks(
@@ -325,31 +325,35 @@ class NativeClass(
 	}
 
 	private fun PrintWriter.generateFunctionAddresses(binding: APIBinding, functions: List<NativeClassFunction>) {
-		println("\n\t/** Function address. */")
-		print("\tpublic final long")
-		if ( functions.size == 1 ) {
-			println(" ${_functions.values.first().simpleName};")
-		} else {
-			println()
-			functions.forEachWithMore { func, more ->
-				if ( more )
-					println(",")
-				print("\t\t${func.functionAddress}")
+		if ( !binding.hasCapabilities ) {
+			println("\n\t/** Function address. */")
+			print("\tpublic final long")
+			if ( functions.size == 1 ) {
+				println(" ${_functions.values.first().simpleName};")
+			} else {
+				println()
+				functions.forEachWithMore { func, more ->
+					if ( more )
+						println(",")
+					print("\t\t${func.functionAddress}")
+				}
+				println(";")
 			}
-			println(";")
 		}
 		println("""
 	protected $className() {
 		throw new UnsupportedOperationException();
 	}
 """)
-		print("\t${access.modifier}$className(FunctionProvider${if ( binding.isLocal(this@NativeClass) ) "Local" else ""} provider")
-		binding.printConstructorParams(this, this@NativeClass)
-		println(") {")
-		functions.forEach {
-			println("\t\t${it.functionAddress} = ${binding.getFunctionAddressCall(it)};")
+		if ( !binding.hasCapabilities ) {
+			print("\t${access.modifier}$className(FunctionProvider provider")
+			binding.printConstructorParams(this, this@NativeClass)
+			println(") {")
+			functions.forEach {
+				println("\t\t${it.functionAddress} = ${binding.getFunctionAddressCall(it)};")
+			}
+			println("\t}\n")
 		}
-		println("\t}\n")
 	}
 
 	override val skipNative: Boolean get() = functions.none() { it.hasCustomJNI }
@@ -383,7 +387,7 @@ class NativeClass(
 
 	fun printPointers(
 		out: PrintWriter,
-		printPointer: (func: NativeClassFunction) -> String = { "funcs.${it.functionAddress}" },
+		printPointer: (func: NativeClassFunction) -> String = { it.functionAddress },
 		filter: ((NativeClassFunction) -> Boolean)? = null
 	) {
 		out.print("\n\t\t\t")
@@ -540,7 +544,7 @@ fun String.nativeClass(
 	if ( init != null )
 		ext.init()
 
-	binding?.addCapabilities(ext)
+	binding?.addClass(ext)
 
 	return ext
 }

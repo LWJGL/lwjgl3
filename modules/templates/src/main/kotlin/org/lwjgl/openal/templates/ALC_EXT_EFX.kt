@@ -1026,5 +1026,5 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		Check(1)..ALfloat_p.OUT("values", "the parameter values")
 	)
 
-	ALCBinding.addCapabilities(this)
+	ALCBinding.addClass(this)
 }

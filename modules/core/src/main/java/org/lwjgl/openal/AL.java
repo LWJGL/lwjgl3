@@ -65,11 +65,7 @@ public final class AL {
 			public long getFunctionAddress(CharSequence functionName) {
 				stackPush();
 				try {
-					long address = invokePP(alGetProcAddress, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-					if ( address == NULL )
-						apiLog("Failed to locate address for AL function " + functionName);
-
-					return address;
+					return invokePP(alGetProcAddress, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
 				} finally {
 					stackPop();
 				}
@@ -199,7 +195,10 @@ public final class AL {
 				}
 			}
 
-			return caps = new ALCapabilities(functionProvider, supportedExtensions, alcCaps);
+			if ( alcCaps.ALC_EXT_EFX )
+				supportedExtensions.add("ALC_EXT_EFX");
+
+			return caps = new ALCapabilities(functionProvider, supportedExtensions);
 		} finally {
 			if ( alcCaps.ALC_EXT_thread_local_context && alcGetThreadContext() != NULL )
 				setCurrentThread(caps);
@@ -208,13 +207,12 @@ public final class AL {
 		}
 	}
 
-	static <T> T checkExtension(String extension, T functions, boolean supported) {
+	static boolean checkExtension(String extension, boolean supported) {
 		if ( supported )
-			return functions;
-		else {
-			apiLog("[AL] " + extension + " was reported as available but an entry point is missing.");
-			return null;
-		}
+			return true;
+
+		apiLog("[AL] " + extension + " was reported as available but an entry point is missing.");
+		return false;
 	}
 
 	/** Manages the thread-local {@link ALCapabilities} state. */

@@ -9,9 +9,7 @@ import org.lwjgl.system.*;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.opencl.CL10.*;
@@ -172,8 +170,11 @@ public final class CL {
 				public long getFunctionAddress(long handle, CharSequence functionName) {
 					MemoryStack stack = stackPush();
 					try {
-						return callPPP(clGetExtensionFunctionAddressForPlatform, handle, memAddress(memEncodeASCII(functionName, true, BufferAllocator
-							.STACK)));
+						return callPPP(
+							clGetExtensionFunctionAddressForPlatform,
+							handle,
+							memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK))
+						);
 					} finally {
 						stack.pop();
 					}
@@ -202,9 +203,7 @@ public final class CL {
 
 		CL.functionProvider = functionProvider;
 
-		icd = new CLCapabilities(functionProvider);
-		if ( icd.__CL10 == null )
-			throw new IllegalStateException("OpenCL 1.0 is missing. Make sure that OpenCL is available");
+		icd = new CLCapabilities(functionProvider, Collections.<String>emptySet());
 	}
 
 	/** Unloads the OpenCL native library. */
@@ -234,7 +233,7 @@ public final class CL {
 	 *
 	 * @return the {@link CLCapabilities instance}
 	 */
-	public static CLCapabilities createPlatformCapabilities(long cl_platform_id) {
+	public static CLCapabilities createPlatformCapabilities(final long cl_platform_id) {
 		Set<String> supportedExtensions = new HashSet<String>(32);
 
 		// Parse PLATFORM_EXTENSIONS string
@@ -281,7 +280,15 @@ public final class CL {
 		APIVersion version = apiParseVersion(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION), "OpenCL");
 		CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
-		return new CLCapabilities(version.major, version.minor, supportedExtensions, CL.getICD());
+		return new CLCapabilities(new FunctionProvider() {
+			@Override
+			public long getFunctionAddress(CharSequence functionName) {
+				return getFunctionProvider().getFunctionAddress(cl_platform_id, functionName);
+			}
+			@Override
+			public void free() {
+			}
+		}, supportedExtensions);
 	}
 
 	/**
@@ -304,7 +311,7 @@ public final class CL {
 		APIVersion version = apiParseVersion(getDeviceInfoStringASCII(cl_device_id, CL_DEVICE_VERSION), "OpenCL");
 		CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
-		return new CLCapabilities(version.major, version.minor, supportedExtensions, platformCapabilities);
+		return new CLCapabilities(platformCapabilities, supportedExtensions);
 	}
 
 	static void addExtensions(String extensionsString, Set<String> supportedExtensions) {
@@ -345,14 +352,12 @@ public final class CL {
 		}
 	}
 
-	static <T> T checkExtension(Set<String> ext, String extension, T functions) {
-		if ( ext.contains(extension) ) {
-			if ( functions != null )
-				return functions;
+	static boolean checkExtension(String extension, boolean supported) {
+		if ( supported )
+			return true;
 
-			apiLog("[CL] " + extension + " was reported as available but an entry point is missing.");
-		}
-		return null;
+		apiLog("[CL] " + extension + " was reported as available but an entry point is missing.");
+		return false;
 	}
 
 }

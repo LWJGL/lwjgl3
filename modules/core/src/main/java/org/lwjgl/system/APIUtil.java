@@ -215,32 +215,12 @@ public final class APIUtil {
 			}
 
 			for ( Field f : funcs ) {
-				Object extA = f.get(a);
-				Object extB = f.get(b);
-
-				if ( (extA == null) ^ (extB == null) )
-					return false;
-
-				if ( extA == null )
-					continue;
-
-				if ( !compareFunctions(extA.getClass(), extA, extB) )
+				if ( f.getLong(a) != f.getLong(b) )
 					return false;
 			}
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 			return false;
-		}
-		return true;
-	}
-
-	private static boolean compareFunctions(Class<?> ext, Object a, Object b) throws IllegalAccessException {
-		for ( Field func : ext.getClass().getFields() ) {
-			if ( Modifier.isStatic(func.getModifiers()) || func.getType() != Long.TYPE )
-				continue;
-
-			if ( func.getLong(a) != func.getLong(b) )
-				return false;
 		}
 		return true;
 	}

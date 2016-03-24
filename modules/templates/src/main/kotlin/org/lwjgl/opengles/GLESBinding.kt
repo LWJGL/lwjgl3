@@ -6,6 +6,7 @@ package org.lwjgl.opengles
 
 import org.lwjgl.generator.*
 import java.io.PrintWriter
+import java.util.*
 import java.util.regex.Pattern
 
 val NativeClass.capName: String
@@ -15,10 +16,16 @@ private val CAPABILITIES_CLASS = "GLESCapabilities"
 
 private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, CAPABILITIES_CLASS) {
 
+	init {
+		javaImport("static org.lwjgl.system.MemoryUtil.*")
+	}
+
 	private val BufferOffsetTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 		override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}Offset"
 		override fun transformCall(param: Parameter, original: String) = "${param.name}Offset"
 	}
+
+	override val hasCapabilities: Boolean get() = true
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }
@@ -50,40 +57,27 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 		}
 	}
 
-	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
-		println("\t// --- [ Function Addresses ] ---")
-		println("""
-	/** Returns the {@link ${nativeClass.className}} instance of the current context. */
-	public static ${nativeClass.className} getInstance() {
-		return getInstance(GLES.getCapabilities());
+	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "GLES20"
+
+	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+		writer.println("\t\tlong $FUNCTION_ADDRESS = GLES.getCapabilities().${function.name};")
 	}
 
-	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $CAPABILITIES_CLASS}. */
-	public static ${nativeClass.className} getInstance($CAPABILITIES_CLASS caps) {
-		return checkFunctionality(caps.__${nativeClass.className});
-	}""")
-
-		println("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider) {")
-		println("\t\tif ( !ext.contains(\"${nativeClass.capName}\") ) return null;")
-
-		print("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
-
-		print("\n\t\tboolean supported = ")
+	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+		print("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps")
+		if ( nativeClass.functions.any { it has DependsOn } ) print(", java.util.Set<String> ext")
+		println(") {")
 
 		val printPointer = { func: NativeClassFunction ->
 			if ( func has DependsOn )
-				"${func[DependsOn].reference.let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? funcs.${func.simpleName} : -1L"
+				"${func[DependsOn].reference.let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
 			else
-				"funcs.${func.simpleName}"
+				"caps.${func.name}"
 		}
 
-		print("checkFunctions(")
-		nativeClass.printPointers(this, printPointer) { !(it has IgnoreMissing) }
+		print("\t\treturn checkFunctions(")
+		nativeClass.printPointers(this, printPointer) { !it.has(IgnoreMissing) }
 		println(");")
-
-		print("\n\t\treturn GLES.checkExtension(\"")
-		print(nativeClass.capName);
-		println("\", funcs, supported);")
 		println("\t}\n")
 	}
 
@@ -103,15 +97,15 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
-		for (extension in classesWithFunctions) {
-			print("\tfinal ${extension.className}")
-			for (i in 0..(alignment - extension.className.length - 1))
-				print(' ')
-			println(" __${extension.className};")
-		}
 
-		println()
+		val addresses = classesWithFunctions
+			.map { it.functions }
+			.flatten()
+			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
+
+		println("\tpublic final long")
+		println(addresses.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
+
 		classes.forEach {
 			val documentation = it.documentation
 			if ( documentation != null )
@@ -120,13 +114,17 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 		}
 
 		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
+
+		println(addresses.map { "${it.name} = provider.getFunctionAddress(${it.nativeName});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
+
 		for (extension in classes) {
 			val capName = extension.capName
 			if ( extension.hasNativeFunctions ) {
-				print("\t\t$capName = (__${extension.className} = ${if ( capName == extension.className ) "$GLES_PACKAGE.${extension.className}" else extension.className}.create(ext, provider")
-				println(")) != null;")
+				print("\t\t$capName = ext.contains(\"$capName\") && GLES.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$GLES_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
+				if ( extension.functions.any { it has DependsOn } ) print(", ext")
+				println("));")
 			} else
-				println("\t\t$capName = ext.contains(\"${extension.capName}\");")
+				println("\t\t$capName = ext.contains(\"$capName\");")
 		}
 		println("\t}")
 		print("}")

@@ -6,6 +6,7 @@ package org.lwjgl.opencl
 
 import org.lwjgl.generator.*
 import java.io.PrintWriter
+import java.util.*
 
 private val NativeClass.capName: String
 	get() = if ( templateName.startsWith(prefix) ) {
@@ -21,28 +22,19 @@ private val CAPABILITIES_CLASS = "CLCapabilities"
 
 private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, CAPABILITIES_CLASS) {
 
-	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
-		println("\t// --- [ Function Addresses ] ---")
-		println("""
-	/** Returns the {@link ${nativeClass.className}} instance of the currently loaded ICD. */
-	public static ${nativeClass.className} getInstance() {
-		return getInstance(CL.getICD());
+	override val hasCapabilities: Boolean get() = true
+
+	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "CL10"
+
+	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+		writer.println("\t\tlong $FUNCTION_ADDRESS = CL.getICD().${function.name};")
 	}
 
-	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $CAPABILITIES_CLASS}. */
-	public static ${nativeClass.className} getInstance($CAPABILITIES_CLASS caps) {
-		return checkFunctionality(caps.__${nativeClass.className});
-	}""")
-
-		println("\n\tstatic ${nativeClass.className} create(FunctionProvider provider) {")
-
-		println("\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
-
-		print("\n\t\tboolean supported = checkFunctions(")
-		nativeClass.printPointers(this)
+	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+		println("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
+		print("\t\treturn checkFunctions(")
+		nativeClass.printPointers(this, { "caps.${it.name}" })
 		println(");")
-
-		println("\n\t\treturn supported ? funcs : null;")
 		println("\t}\n")
 	}
 
@@ -69,21 +61,14 @@ private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, C
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
-		for (extension in classesWithFunctions) {
-			print("\tfinal ${extension.className}")
-			for (i in 0..(alignment - extension.className.length - 1))
-				print(' ')
-			println(" __${extension.className};")
-		}
 
-		println("""
-	/** The OpenCL major version. */
-	public final int majorVersion;
+		val addresses = classesWithFunctions
+			.map { it.functions }
+			.flatten()
+			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
 
-	/** The OpenCL minor version. */
-	public final int minorVersion;
-""")
+		println("\tpublic final long")
+		println(addresses.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
 
 		classes.forEach {
 			val documentation = it.documentation
@@ -92,56 +77,27 @@ private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, C
 			println("\tpublic final boolean ${it.capName};")
 		}
 
-		// ICD constructor
-		println("""
-	$CAPABILITIES_CLASS(FunctionProvider provider) {
-		this.majorVersion = 0;
-		this.minorVersion = 0;
-""")
+		// ICD/Platform constructor
+		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
+		println(addresses.map { "provider.getFunctionAddress(${it.nativeName})" }.joinToString(",\n\t\t\t", prefix = "\t\tthis(ext,\n\t\t\t", postfix = "\n\t\t);\n\t}"))
+
+		// Device constructor
+		println("\n\t$CAPABILITIES_CLASS(CLCapabilities caps, Set<String> ext) {")
+		println(addresses.map { "caps.${it.name}" }.joinToString(",\n\t\t\t", prefix = "\t\tthis(ext,\n\t\t\t", postfix = "\n\t\t);\n\t}"))
+
+		// Common constructor
+		println("\n\tprivate $CAPABILITIES_CLASS(Set<String> ext, long... functions) {")
+		println(addresses.mapIndexed { i, function -> "${function.name} = functions[$i];" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
 		for (extension in classes) {
 			val capName = extension.capName
-			if ( extension.hasNativeFunctions ) {
-				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(provider)) != null;")
-			} else
-				println("\t\t$capName = false;")
+			print("\t\t$capName = ext.contains(\"$capName\")")
+			if ( extension.hasNativeFunctions )
+				print(" && CL.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$OPENCL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+			println(";")
 		}
 		println("\t}")
 
-		// Platform/Device constructor
-		println("""
-	$CAPABILITIES_CLASS(int majorVersion, int minorVersion, Set<String> ext, $CAPABILITIES_CLASS caps) {
-		this.majorVersion = majorVersion;
-		this.minorVersion = minorVersion;
-""")
-		for (extension in classes) {
-			val capName = extension.capName
-			if ( extension.hasNativeFunctions ) {
-				println("\t\t$capName = (__${extension.className} = CL.checkExtension(ext, \"$capName\", caps.__${extension.className})) != null;")
-			} else
-				println("\t\t$capName = ext.contains(\"$capName\");")
-		}
-		println("\t}")
-
-		println("""
-	public String toString() {
-		StringBuilder buf = new StringBuilder(512);
-
-		buf.append("OpenCL ").append(majorVersion).append('.').append(minorVersion);
-		buf.append(" - Extensions: ");
-""")
-		for (extension in classes) {
-			if ( extension.templateName.startsWith("CL") )
-				continue
-
-			val capName = extension.capName
-			println("\t\tif ( $capName ) buf.append(\"$capName \");")
-		}
-		println("""
-		return buf.toString();
-	}
-""")
-
-		print("}")
+		print("\n}")
 	}
 
 })

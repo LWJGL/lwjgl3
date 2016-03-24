@@ -23,7 +23,6 @@ fun config() {
 
 val ALvoid = NativeType("ALvoid", TypeMapping.VOID)
 val ALvoid_p = PointerType("ALvoid", PointerMapping.DATA)
-val ALvoid_pp = ALvoid_p.p
 
 // numeric
 

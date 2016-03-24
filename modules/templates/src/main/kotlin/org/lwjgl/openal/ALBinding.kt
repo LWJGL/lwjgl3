@@ -6,38 +6,25 @@ package org.lwjgl.openal
 
 import java.io.PrintWriter
 import org.lwjgl.generator.*
+import java.util.*
 
 private val CAPABILITIES_CLASS = "ALCapabilities"
 
 private val ALBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, CAPABILITIES_CLASS, callingConvention = CallingConvention.DEFAULT) {
 
+	override val hasCapabilities: Boolean get() = true
+
+	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "AL10"
+
+	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+		writer.println("\t\tlong $FUNCTION_ADDRESS = AL.getCapabilities().${function.name};")
+	}
+
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
-		println("\t// --- [ Function Addresses ] ---\n")
-
-		println("\t/** Returns the {@link ${nativeClass.className}} instance of the current context. */")
-		println("\tpublic static ${nativeClass.className} getInstance() {")
-		println("\t\treturn checkFunctionality(AL.getCapabilities().__${nativeClass.className});")
-		println("\t}")
-
-		val capName = nativeClass.capName("AL")
-
-		println("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider) {")
-		println("\t\tif ( !ext.contains(\"$capName\") ) return null;")
-
-		println("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
-
-		print("\n\t\tboolean supported = checkFunctions(")
-		nativeClass.printPointers(this, printPointer = {
-			if ( it has DependsOn )
-				"ext.contains(\"${it[DependsOn].reference}\") ? funcs.${it.simpleName} : -1L"
-			else
-				"funcs.${it.simpleName}"
-		})
+		println("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
+		print("\t\treturn checkFunctions(")
+		nativeClass.printPointers(this, { "caps.${it.name}" })
 		println(");")
-
-		print("\n\t\treturn AL.checkExtension(\"")
-		print(capName);
-		println("\", funcs, supported);")
 		println("\t}\n")
 	}
 
@@ -56,42 +43,32 @@ private val ALBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, C
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
-		for ( extension in classesWithFunctions ) {
-			print("\tfinal ${extension.className}")
-			for ( i in 0..(alignment - extension.className.length - 1) )
-				print(' ')
-			println(" __${extension.className};")
+
+		val addresses = classesWithFunctions
+			.map { it.functions }
+			.flatten()
+			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
+
+		println("\tpublic final long")
+		println(addresses.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
+
+		classes.forEach {
+			val documentation = it.documentation
+			if ( documentation != null )
+				println((if ( it.hasBody ) "When true, {@link ${it.className}} is supported." else documentation).toJavaDoc())
+			println("\tpublic final boolean ${it.capName("AL")};")
 		}
 
-		println("\n\t/** Indicates whether an OpenAL functionality is available or not. */")
-		println("\tpublic final boolean")
-		val capClasses = classes.filter { it.prefixTemplate == "AL" }
-		for ( i in capClasses.indices ) {
-			print("\t\t${capClasses[i].capName("AL")}")
-			println(if ( i == capClasses.lastIndex ) ";" else ",")
-		}
+		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
 
-		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, ALCCapabilities alcCaps) {")
-		for ( extension in classes ) {
-			val hasCap = extension.prefixTemplate == "AL"
-			val capName = extension.capName(extension.prefixTemplate)
+		println(addresses.map { "${it.name} = provider.getFunctionAddress(${it.nativeName});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
 
-			if ( !hasCap ) {
-				println("\t\tif ( alcCaps.$capName )")
-				println("\t\t\text.add(\"$capName\");")
-			}
-
-			if ( extension.hasNativeFunctions ) {
-				print("\t\t")
-				if ( hasCap )
-					print("$capName = (")
-				print("__${extension.className} = ${extension.className}.create(ext, provider)")
-				if ( hasCap )
-					print(") != null")
-				println(";")
-			} else if ( hasCap )
-				println("\t\t$capName = ext.contains(\"$capName\");")
+		for (extension in classes) {
+			val capName = extension.capName("AL")
+			print("\t\t$capName = ext.contains(\"$capName\")")
+			if ( extension.hasNativeFunctions )
+				print(" && AL.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$OPENAL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+			println(";")
 		}
 		println("\t}")
 		print("}")

@@ -219,7 +219,7 @@ class NativeClassFunction(
 			"$javaMethodType $name"
 
 	private val Parameter.isFunctionProvider: Boolean
-		get() = nativeType is ObjectType && nativeClass.binding != null && !nativeClass.binding.hasCurrentCapabilities
+		get() = nativeType is ObjectType && nativeClass.binding != null && nativeClass.binding.hasParameterCapabilities
 
 	/** Validates parameters with modifiers that reference other parameters. */
 	private fun validate() {

@@ -6,8 +6,6 @@ package org.lwjgl.egl;
 
 import org.lwjgl.system.*;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -83,6 +81,13 @@ public final class EGL {
 			FunctionProvider functionProvider = new FunctionProvider() {
 				private final long eglGetProcAddress = EGL.getFunctionAddress("eglGetProcAddress");
 
+				{
+					if ( eglGetProcAddress == NULL ) {
+						EGL.free();
+						throw new EGLException("A core EGL function is missing. Make sure that EGL is available.");
+					}
+				}
+
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
 					stackPush();
@@ -151,23 +156,20 @@ public final class EGL {
 
 	private static EGLCapabilities createClientCapabilities() {
 		long QueryString = functionProvider.getFunctionAddress("eglQueryString");
-		long versionString = invokePIP(QueryString, EGL_NO_DISPLAY, EGL_VERSION);
+		long versionString = invokePIP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS);
 
 		Set<String> ext = new HashSet<String>(32);
 
-		APIVersion version;
-		if ( versionString == NULL ) {
-			version = new APIVersion(0, 0, null, null);
+		if ( versionString == NULL )
+			invokeI(functionProvider.getFunctionAddress("eglGetError")); // clear error
+		else {
+			APIVersion version = apiParseVersion(memDecodeASCII(versionString), "EGL");
 
-			long GetError = functionProvider.getFunctionAddress("eglGetError");
-			invokeI(GetError); // clear error
-		} else {
-			version = apiParseVersion(memDecodeASCII(versionString), "EGL");
-
+			addEGLVersions(version.major, version.minor, ext);
 			addExtensions(memDecodeASCII(invokePIP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS)), ext);
 		}
 
-		return new EGLCapabilities(version.major, version.minor, ext, functionProvider);
+		return new EGLCapabilities(functionProvider, ext);
 	}
 
 	/**
@@ -189,7 +191,7 @@ public final class EGL {
 		// Parse display EGL_EXTENSIONS string
 		addExtensions(eglQueryString(dpy, EGL_EXTENSIONS), supportedExtensions);
 
-		return new EGLCapabilities(majorVersion, minorVersion, supportedExtensions, functionProvider);
+		return new EGLCapabilities(functionProvider, supportedExtensions);
 	}
 
 	private static void addEGLVersions(int MAJOR, int MINOR, Set<String> supportedExtensions) {
@@ -213,30 +215,12 @@ public final class EGL {
 			supportedExtensions.add(tokenizer.nextToken());
 	}
 
-	static <T> T checkCapability(java.util.Set<String> ext, String capability, T functions) {
-		if ( !ext.contains(capability) )
-			return null;
+	static boolean checkExtension(String extension, boolean supported) {
+		if ( supported )
+			return true;
 
-		boolean missingFunction = false;
-		try {
-			for ( Field f : functions.getClass().getFields() ) {
-				if ( !Modifier.isStatic(f.getModifiers()) && f.getLong(functions) == NULL ) {
-					apiLog("Failed to locate address for EGL function egl" + f.getName());
-					missingFunction = true;
-					break;
-				}
-			}
-		} catch (IllegalAccessException e) {
-			apiLog("[EGL] Failed to retrieve " + capability + " function pointer fields.");
-			return null;
-		}
-
-		if ( missingFunction ) {
-			apiLog("[EGL] " + capability + " was reported as available but an entry point is missing.");
-			return null;
-		}
-
-		return functions;
+		apiLog("[EGL] " + extension + " was reported as available but an entry point is missing.");
+		return false;
 	}
 
 }

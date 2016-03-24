@@ -7,6 +7,7 @@ package org.lwjgl.vulkan;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -119,8 +120,10 @@ public final class VK {
 
 		VK.functionProvider = functionProvider;
 
-		globalCommands = new VKCapabilities(functionProvider);
-		if ( globalCommands.__VK10 == null )
+		globalCommands = new VKCapabilities(functionProvider, 0, Collections.<String>emptySet());
+		if ( globalCommands.vkCreateInstance == NULL ||
+			globalCommands.vkEnumerateInstanceExtensionProperties == NULL ||
+			globalCommands.vkEnumerateInstanceLayerProperties == NULL )
 			throw new IllegalStateException("Vulkan 1.0 is missing. Make sure that Vulkan is available.");
 	}
 

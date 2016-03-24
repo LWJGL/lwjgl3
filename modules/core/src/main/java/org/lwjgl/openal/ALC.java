@@ -88,22 +88,14 @@ public final class ALC {
 
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
-					long address = OPENAL.getFunctionAddress(functionName);
-					if ( address == NULL )
-						apiLog("Failed to locate address for ALC function " + functionName);
-
-					return address;
+					return OPENAL.getFunctionAddress(functionName);
 				}
 
 				@Override
 				public long getFunctionAddress(long handle, CharSequence functionName) {
 					stackPush();
 					try {
-						long address = invokePPP(alcGetProcAddress, handle, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-						if ( address == NULL && handle != NULL )
-							apiLog("Failed to locate address for ALC extension function " + functionName);
-
-						return address;
+						return invokePPP(alcGetProcAddress, handle, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
 					} finally {
 						stackPop();
 					}
@@ -223,13 +215,12 @@ public final class ALC {
 		return new ALCCapabilities(getFunctionProvider(), device, supportedExtensions);
 	}
 
-	static <T> T checkExtension(String extension, T functions, boolean supported) {
+	static boolean checkExtension(String extension, boolean supported) {
 		if ( supported )
-			return functions;
-		else {
-			apiLog("[ALC] " + extension + " was reported as available but an entry point is missing.");
-			return null;
-		}
+			return true;
+
+		apiLog("[ALC] " + extension + " was reported as available but an entry point is missing.");
+		return false;
 	}
 
 }

@@ -103,11 +103,8 @@ public final class GL {
 				stackPush();
 				try {
 					long address = getExtensionAddress(memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-					if ( address == NULL ) {
+					if ( address == NULL )
 						address = OPENGL.getFunctionAddress(functionName);
-						if ( address == NULL )
-							apiLog("Failed to locate address for GL function " + functionName);
-					}
 
 					return address;
 				} finally {
@@ -457,13 +454,12 @@ public final class GL {
 		return fc ? NULL : provider.getFunctionAddress(functionName);
 	}
 
-	static <T> T checkExtension(String extension, T functions, boolean supported) {
+	static boolean checkExtension(String extension, boolean supported) {
 		if ( supported )
-			return functions;
-		else {
-			apiLog("[GL] " + extension + " was reported as available but an entry point is missing.");
-			return null;
-		}
+			return true;
+
+		apiLog("[GL] " + extension + " was reported as available but an entry point is missing.");
+		return false;
 	}
 
 	/** Manages the thread-local {@link GLCapabilities} state. */

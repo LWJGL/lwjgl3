@@ -35,7 +35,7 @@ public class VkInstance extends DispatchableHandle {
 			apiVersion = VK_MAKE_VERSION(1, 0, 0);
 		}
 
-		return new VKCapabilities(apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()), new FunctionProvider() {
+		return new VKCapabilities(new FunctionProvider() {
 			private final long GetInstanceProcAddr = VK.getFunctionProvider().getFunctionAddress("vkGetInstanceProcAddr");
 
 			{
@@ -60,7 +60,7 @@ public class VkInstance extends DispatchableHandle {
 			@Override
 			public void free() {
 			}
-		});
+		}, apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()));
 	}
 
 	static long GetInstanceProcAddr(long __functionAddress, long handle, long functionName) {

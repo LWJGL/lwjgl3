@@ -6,6 +6,7 @@ package org.lwjgl.opengl
 
 import org.lwjgl.generator.*
 import java.io.PrintWriter
+import java.util.*
 import java.util.regex.Pattern
 
 val NativeClass.capName: String
@@ -22,12 +23,18 @@ private val CAPABILITIES_CLASS = "GLCapabilities"
 
 val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
 
+	init {
+		javaImport("static org.lwjgl.system.MemoryUtil.*")
+	}
+
 	private val GLCorePattern = Pattern.compile("GL[1-9][0-9]")
 
 	private val BufferOffsetTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 		override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}Offset"
 		override fun transformCall(param: Parameter, original: String) = "${param.name}Offset"
 	}
+
+	override val hasCapabilities: Boolean get() = true
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }
@@ -79,51 +86,26 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 			writer.print(", boolean fc")
 	}
 
-	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.has(DeprecatedGL)
+	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "GL11" || function has DeprecatedGL
 
-	override fun getFunctionAddressCall(function: NativeClassFunction) =
-		// Do the fc check here, because getFunctionAddress will return an address
-		// even if the current context is forward compatible. We don't want that because
-		// we prefer to throw an exception instead of letting GL raise an error and it's
-		// also the only way to support the pseudo-fc mode.
-		if ( function has DeprecatedGL )
-			"GL.getFunctionAddress(provider, ${function.nativeName}, fc)"
-		else
-			super.getFunctionAddressCall(function);
-
-	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
-		println("\t// --- [ Function Addresses ] ---")
-		println("""
-	/** Returns the {@link ${nativeClass.className}} instance of the current context. */
-	public static ${nativeClass.className} getInstance() {
-		return getInstance(GL.getCapabilities());
+	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+		writer.println("\t\tlong $FUNCTION_ADDRESS = GL.getCapabilities().${function.name};")
 	}
 
-	/** Returns the {@link ${nativeClass.className}} instance of the specified {@link $CAPABILITIES_CLASS}. */
-	public static ${nativeClass.className} getInstance($CAPABILITIES_CLASS caps) {
-		return checkFunctionality(caps.__${nativeClass.className});
-	}""")
+	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+		val hasDeprecated = nativeClass.functions.hasDeprecated
 
-		val functions = nativeClass.functions
-
-		val hasDeprecated = functions.hasDeprecated
-
-		print("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider")
+		print("\tstatic boolean isAvailable(GLCapabilities caps")
+		if ( nativeClass.functions.any { it has DependsOn } ) print(", java.util.Set<String> ext")
 		if ( hasDeprecated ) print(", boolean fc")
 		println(") {")
-		println("\t\tif ( !ext.contains(\"${nativeClass.capName}\") ) return null;")
-
-		print("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider")
-		if ( hasDeprecated ) print(", fc")
-		println(");")
-
-		print("\n\t\tboolean supported = ")
+		print("\t\treturn ")
 
 		val printPointer = { func: NativeClassFunction ->
 			if ( func has DependsOn )
-				"${func[DependsOn].reference.let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? funcs.${func.simpleName} : -1L"
+				"${func[DependsOn].reference.let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
 			else
-				"funcs.${func.simpleName}"
+				"caps.${func.name}"
 		}
 
 		if ( hasDeprecated ) {
@@ -137,12 +119,7 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 			nativeClass.printPointers(this, printPointer) { !(it has DeprecatedGL || it has IgnoreMissing) }
 		else
 			nativeClass.printPointers(this, printPointer) { !(it has IgnoreMissing) }
-
 		println(");")
-
-		print("\n\t\treturn GL.checkExtension(\"")
-		print(nativeClass.capName);
-		println("\", funcs, supported);")
 		println("\t}\n")
 	}
 
@@ -162,15 +139,16 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-		val alignment = classesWithFunctions.map { it.className.length }.fold(0) { left, right -> Math.max(left, right) }
-		for (extension in classesWithFunctions) {
-			print("\tfinal ${extension.className}")
-			for (i in 0..(alignment - extension.className.length - 1))
-				print(' ')
-			println(" __${extension.className};")
-		}
 
-		println()
+		val functions = classesWithFunctions
+			.map { it.functions }
+			.flatten()
+			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
+
+		println("\tpublic final long")
+		println(functions.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n")
+		)
+
 		classes.forEach {
 			val documentation = it.documentation
 			if ( documentation != null )
@@ -183,15 +161,26 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 
 		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, boolean fc) {")
 		println("\t\tforwardCompatible = fc;\n")
+
+		println(functions
+			.map {
+				if ( it has DeprecatedGL )
+					"${it.name} = GL.getFunctionAddress(provider, ${it.nativeName}, fc);"
+				else
+					"${it.name} = provider.getFunctionAddress(${it.nativeName});"
+			}
+			.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n")
+		)
+
 		for (extension in classes) {
 			val capName = extension.capName
-			// TODO: Do not call create if the extension is not present. Reduces number of classes loaded (test with static init)
 			if ( extension.hasNativeFunctions ) {
-				print("\t\t$capName = (__${extension.className} = ${if ( capName == extension.className ) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.create(ext, provider")
+				print("\t\t$capName = ext.contains(\"$capName\") && GL.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
+				if ( extension.functions.any { it has DependsOn } ) print(", ext")
 				if ( extension.functions.hasDeprecated ) print(", fc")
-				println(")) != null;")
+				println("));")
 			} else
-				println("\t\t$capName = ext.contains(\"${extension.capName}\");")
+				println("\t\t$capName = ext.contains(\"$capName\");")
 		}
 		println("\t}")
 		print("}")
