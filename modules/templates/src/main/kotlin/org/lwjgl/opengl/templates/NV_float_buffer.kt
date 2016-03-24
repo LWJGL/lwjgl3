@@ -81,7 +81,7 @@ val WGL_NV_float_buffer = "WGLNVFloatBuffer".nativeClassWGL("WGL_NV_float_buffer
 	)
 }
 
-val GLX_NV_float_buffer = "GLXNVFloatBuffer".nativeClassWGL("GLX_NV_float_buffer", postfix = NV) {
+val GLX_NV_float_buffer = "GLXNVFloatBuffer".nativeClassGLX("GLX_NV_float_buffer", postfix = NV) {
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

@@ -159,18 +159,37 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		println("\n\t/** When true, deprecated functions are not available. */")
 		println("\tpublic final boolean forwardCompatible;")
 
-		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, boolean fc) {")
-		println("\t\tforwardCompatible = fc;\n")
+		println("""
+	$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, boolean fc) {
+		forwardCompatible = fc;
 
-		println(functions
-			.map {
-				if ( it has DeprecatedGL )
-					"${it.name} = GL.getFunctionAddress(provider, ${it.nativeName}, fc);"
-				else
-					"${it.name} = provider.getFunctionAddress(${it.nativeName});"
+		boolean MACOSX = Platform.get() == Platform.MACOSX;
+		boolean LINUX = Platform.get() == Platform.LINUX;
+		boolean WINDOWS = Platform.get() == Platform.WINDOWS;
+""")
+
+		functions.groupBy {
+			it.nativeClass.prefixMethod
+		}.map {
+			val lookup: (NativeClassFunction) -> String = when ( it.key ) {
+				"gl"  -> { it ->
+					if ( it has DeprecatedGL )
+						"GL.getFunctionAddress(provider, ${it.nativeName}, fc)"
+					else
+						"provider.getFunctionAddress(${it.nativeName})"
+				}
+				"CGL" -> { it -> "getFunctionAddress(MACOSX, provider, ${it.nativeName})" }
+				"glX" -> { it -> "getFunctionAddress(LINUX, provider, ${it.nativeName})" }
+				"wgl" -> { it -> "getFunctionAddress(WINDOWS, provider, ${it.nativeName})" }
+				else  -> throw IllegalStateException("Unrecognized function prefix: ${it.key}")
 			}
-			.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n")
-		)
+
+			it.value
+				.map { "${it.name} = ${lookup(it)};" }
+				.joinToString(prefix = "\t\t", separator = "\n\t\t", postfix = "\n")
+		}.forEach {
+			println(it)
+		}
 
 		for (extension in classes) {
 			val capName = extension.capName
@@ -183,7 +202,11 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 				println("\t\t$capName = ext.contains(\"$capName\");")
 		}
 		println("\t}")
-		print("}")
+		println("""
+	private static long getFunctionAddress(boolean condition, FunctionProvider provider, String functionName) {
+		return condition ? provider.getFunctionAddress(functionName) : NULL;
+	}""")
+		print("\n}")
 	}
 
 })

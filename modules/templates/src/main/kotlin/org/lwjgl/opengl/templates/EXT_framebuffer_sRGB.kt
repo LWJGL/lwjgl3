@@ -47,7 +47,7 @@ val EXT_framebuffer_sRGB = "EXTFramebufferSRGB".nativeClassGL("EXT_framebuffer_s
 	)
 }
 
-val GLX_EXT_framebuffer_sRGB = "GLXEXTFramebufferSRGB".nativeClassWGL("GLX_EXT_framebuffer_sRGB", EXT) {
+val GLX_EXT_framebuffer_sRGB = "GLXEXTFramebufferSRGB".nativeClassGLX("GLX_EXT_framebuffer_sRGB", EXT) {
 	documentation =
 		"""
 		Native bindings to the ${registryLink("EXT", "framebuffer_sRGB")} extension.
