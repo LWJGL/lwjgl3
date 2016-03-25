@@ -7,6 +7,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.*;
 
@@ -104,24 +105,19 @@ public final class GL {
 	}
 
 	private static void create(final SharedLibrary OPENGL) {
-		abstract class FunctionProviderGL implements FunctionProvider {
+		abstract class FunctionProviderGL extends FunctionProvider.Default {
 			abstract long getExtensionAddress(long name);
 
 			@Override
-			public long getFunctionAddress(CharSequence functionName) {
-				stackPush();
-				try {
-					long address = getExtensionAddress(memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-					if ( address == NULL ) {
-						address = OPENGL.getFunctionAddress(functionName);
-						if ( address == NULL && DEBUG_FUNCTIONS )
-							apiLog("Failed to locate address for GL function " + functionName);
-					}
-
-					return address;
-				} finally {
-					stackPop();
+			public long getFunctionAddress(ByteBuffer functionName) {
+				long address = getExtensionAddress(memAddress(functionName));
+				if ( address == NULL ) {
+					address = OPENGL.getFunctionAddress(functionName);
+					if ( address == NULL && DEBUG_FUNCTIONS )
+						apiLog("Failed to locate address for GL function " + functionName);
 				}
+
+				return address;
 			}
 
 			@Override

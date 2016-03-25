@@ -35,13 +35,8 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 	}
 
 	@Override
-	public long getFunctionAddress(CharSequence name) {
-		ByteBuffer nameEncoded = memEncodeASCII(name, SYSTEM_ALLOCATOR);
-		try {
-			return dlsym(address(), nameEncoded);
-		} finally {
-			Stdlib.free(nameEncoded);
-		}
+	public long getFunctionAddress(ByteBuffer functionName) {
+		return dlsym(address(), functionName);
 	}
 
 	@Override

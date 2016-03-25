@@ -51,13 +51,8 @@ public class WindowsLibrary extends SharedLibrary.Default {
 	}
 
 	@Override
-	public long getFunctionAddress(CharSequence name) {
-		ByteBuffer nameEncoded = memEncodeASCII(name, SYSTEM_ALLOCATOR);
-		try {
-			return GetProcAddress(address(), nameEncoded);
-		} finally {
-			Stdlib.free(nameEncoded);
-		}
+	public long getFunctionAddress(ByteBuffer functionName) {
+		return GetProcAddress(address(), functionName);
 	}
 
 	@Override

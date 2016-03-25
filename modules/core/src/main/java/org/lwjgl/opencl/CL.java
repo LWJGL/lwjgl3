@@ -73,7 +73,7 @@ public final class CL {
 
 	private static void create(final SharedLibrary OPENCL) {
 		try {
-			FunctionProviderLocal functionProvider = new FunctionProviderLocal() {
+			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
 
 				private final long clGetExtensionFunctionAddress;
 				private final long clGetExtensionFunctionAddressForPlatform;
@@ -148,36 +148,27 @@ public final class CL {
 				}
 
 				@Override
-				public long getFunctionAddress(CharSequence functionName) {
-					MemoryStack stack = stackPush();
-					try {
-						long nameEncoded = memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK));
+				public long getFunctionAddress(ByteBuffer functionName) {
+					long nameEncoded = memAddress(functionName);
 
-						long address = platform == NULL
-							? callPP(clGetExtensionFunctionAddress, nameEncoded)
-							: callPPP(clGetExtensionFunctionAddressForPlatform, platform, nameEncoded);
+					long address = platform == NULL
+						? callPP(clGetExtensionFunctionAddress, nameEncoded)
+						: callPPP(clGetExtensionFunctionAddressForPlatform, platform, nameEncoded);
 
-						if ( address == NULL ) {
-							address = OPENCL.getFunctionAddress(functionName);
-							if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-								apiLog("Failed to locate address for CL function " + functionName);
-						}
-
-						return address;
-					} finally {
-						stack.pop();
+					if ( address == NULL ) {
+						address = OPENCL.getFunctionAddress(functionName);
+						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+							apiLog("Failed to locate address for CL function " + functionName);
 					}
+
+					return address;
 				}
 
 				@Override
-				public long getFunctionAddress(long handle, CharSequence functionName) {
+				public long getFunctionAddress(long handle, ByteBuffer functionName) {
 					MemoryStack stack = stackPush();
 					try {
-						long address = callPPP(
-							clGetExtensionFunctionAddressForPlatform,
-							handle,
-							memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK))
-						);
+						long address = callPPP(clGetExtensionFunctionAddressForPlatform, handle, memAddress(functionName));
 						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
 							apiLog("Failed to locate address for CL function " + functionName);
 						return address;
@@ -286,9 +277,9 @@ public final class CL {
 		APIVersion version = apiParseVersion(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION), "OpenCL");
 		CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
-		return new CLCapabilities(new FunctionProvider() {
+		return new CLCapabilities(new FunctionProvider.Default() {
 			@Override
-			public long getFunctionAddress(CharSequence functionName) {
+			public long getFunctionAddress(ByteBuffer functionName) {
 				return getFunctionProvider().getFunctionAddress(cl_platform_id, functionName);
 			}
 			@Override

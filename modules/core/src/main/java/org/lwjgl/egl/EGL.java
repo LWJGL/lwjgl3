@@ -6,6 +6,7 @@ package org.lwjgl.egl;
 
 import org.lwjgl.system.*;
 
+import java.nio.ByteBuffer;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -14,7 +15,6 @@ import static java.lang.Math.*;
 import static org.lwjgl.egl.EGL10.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -78,7 +78,7 @@ public final class EGL {
 
 	private static void create(final SharedLibrary EGL) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider() {
+			FunctionProvider functionProvider = new FunctionProvider.Default() {
 				private final long eglGetProcAddress = EGL.getFunctionAddress("eglGetProcAddress");
 
 				{
@@ -89,20 +89,15 @@ public final class EGL {
 				}
 
 				@Override
-				public long getFunctionAddress(CharSequence functionName) {
-					stackPush();
-					try {
-						long address = invokePP(eglGetProcAddress, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-						if ( address == NULL ) {
-							address = EGL.getFunctionAddress(functionName);
-							if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-								apiLog("Failed to locate address for EGL function " + functionName);
-						}
-
-						return address;
-					} finally {
-						stackPop();
+				public long getFunctionAddress(ByteBuffer functionName) {
+					long address = invokePP(eglGetProcAddress, memAddress(functionName));
+					if ( address == NULL ) {
+						address = EGL.getFunctionAddress(functionName);
+						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+							apiLog("Failed to locate address for EGL function " + functionName);
 					}
+
+					return address;
 				}
 
 				@Override

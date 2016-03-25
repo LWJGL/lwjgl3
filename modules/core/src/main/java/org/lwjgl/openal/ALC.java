@@ -6,6 +6,7 @@ package org.lwjgl.openal;
 
 import org.lwjgl.system.*;
 
+import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.*;
 
@@ -75,7 +76,7 @@ public final class ALC {
 		final SharedLibrary OPENAL = Library.loadNative(libName);
 
 		try {
-			FunctionProviderLocal functionProvider = new FunctionProviderLocal() {
+			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
 
 				private final long alcGetProcAddress = getFunctionAddress("alcGetProcAddress");
 
@@ -87,7 +88,7 @@ public final class ALC {
 				}
 
 				@Override
-				public long getFunctionAddress(CharSequence functionName) {
+				public long getFunctionAddress(ByteBuffer functionName) {
 					long address = OPENAL.getFunctionAddress(functionName);
 					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
 						apiLog("Failed to locate address for ALC core function " + functionName);
@@ -95,16 +96,11 @@ public final class ALC {
 				}
 
 				@Override
-				public long getFunctionAddress(long handle, CharSequence functionName) {
-					stackPush();
-					try {
-						long address = invokePPP(alcGetProcAddress, handle, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-							apiLog("Failed to locate address for ALC extension function " + functionName);
-						return address;
-					} finally {
-						stackPop();
-					}
+				public long getFunctionAddress(long handle, ByteBuffer functionName) {
+					long address = invokePPP(alcGetProcAddress, handle, memAddress(functionName));
+					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+						apiLog("Failed to locate address for ALC extension function " + functionName);
+					return address;
 				}
 
 				@Override

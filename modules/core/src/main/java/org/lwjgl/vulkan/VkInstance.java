@@ -4,11 +4,13 @@
  */
 package org.lwjgl.vulkan;
 
+import org.lwjgl.system.Checks;
 import org.lwjgl.system.FunctionProvider;
-import org.lwjgl.system.MemoryStack;
 
+import java.nio.ByteBuffer;
+
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.VKUtil.*;
 
@@ -35,7 +37,7 @@ public class VkInstance extends DispatchableHandle {
 			apiVersion = VK_MAKE_VERSION(1, 0, 0);
 		}
 
-		return new VKCapabilities(new FunctionProvider() {
+		return new VKCapabilities(new FunctionProvider.Default() {
 			private final long GetInstanceProcAddr = VK.getFunctionProvider().getFunctionAddress("vkGetInstanceProcAddr");
 
 			{
@@ -44,17 +46,15 @@ public class VkInstance extends DispatchableHandle {
 			}
 
 			@Override
-			public long getFunctionAddress(CharSequence functionName) {
-				MemoryStack stack = stackPush();
-				try {
-					long address = GetInstanceProcAddr(GetInstanceProcAddr, handle, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-					if ( address == NULL )
-						address = VK.getFunctionProvider().getFunctionAddress(functionName);
-
-					return address;
-				} finally {
-					stack.pop();
+			public long getFunctionAddress(ByteBuffer functionName) {
+				long address = GetInstanceProcAddr(GetInstanceProcAddr, handle, memAddress(functionName));
+				if ( address == NULL ) {
+					address = VK.getFunctionProvider().getFunctionAddress(functionName);
+					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+						apiLog("Failed to locate address for VK instance function " + functionName);
 				}
+
+				return address;
 			}
 
 			@Override

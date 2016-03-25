@@ -4,10 +4,12 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.system.MemoryUtil.BufferAllocator;
+import org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.system.libc.Stdlib;
 
 import java.nio.ByteBuffer;
+
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** A {@link FunctionProvider} implementation that opens a platform-specific shared library and returns functions pointers from it. */
 public interface SharedLibrary extends FunctionProvider, Pointer {
@@ -38,6 +40,16 @@ public interface SharedLibrary extends FunctionProvider, Pointer {
 		@Override
 		public String getName() {
 			return name;
+		}
+
+		@Override
+		public long getFunctionAddress(CharSequence functionName) {
+			ByteBuffer encoded = memEncodeASCII(functionName, SYSTEM_ALLOCATOR);
+			try {
+				return getFunctionAddress(encoded);
+			} finally {
+				Stdlib.free(encoded);
+			}
 		}
 
 	}

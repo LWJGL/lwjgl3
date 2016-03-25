@@ -41,8 +41,8 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 	}
 
 	@Override
-	public long getFunctionAddress(CharSequence functionName) {
-		long nameRef = CString2CFString(memEncodeASCII(functionName, SYSTEM_ALLOCATOR), kCFStringEncodingASCII);
+	public long getFunctionAddress(ByteBuffer functionName) {
+		long nameRef = CString2CFString(functionName, kCFStringEncodingASCII);
 		try {
 			return CFBundleGetFunctionPointerForName(address(), nameRef);
 		} finally {

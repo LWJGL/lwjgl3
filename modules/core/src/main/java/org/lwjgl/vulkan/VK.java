@@ -7,6 +7,7 @@ package org.lwjgl.vulkan;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.*;
 
+import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,6 @@ import java.util.Set;
 import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.VKUtil.*;
 
@@ -73,7 +73,7 @@ public final class VK {
 
 	private static void create(final SharedLibrary VULKAN) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider() {
+			FunctionProvider functionProvider = new FunctionProvider.Default() {
 				private final long GetInstanceProcAddr = VULKAN.getFunctionAddress("vkGetInstanceProcAddr");
 
 				{
@@ -84,20 +84,15 @@ public final class VK {
 				}
 
 				@Override
-				public long getFunctionAddress(CharSequence functionName) {
-					MemoryStack stack = stackPush();
-					try {
-						long address = callPPP(GetInstanceProcAddr, NULL, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-						if ( address == NULL ) {
-							address = VULKAN.getFunctionAddress(functionName);
-							if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-								apiLog("Failed to locate address for VK function " + functionName);
-						}
-
-						return address;
-					} finally {
-						stack.pop();
+				public long getFunctionAddress(ByteBuffer functionName) {
+					long address = callPPP(GetInstanceProcAddr, NULL, memAddress(functionName));
+					if ( address == NULL ) {
+						address = VULKAN.getFunctionAddress(functionName);
+						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+							apiLog("Failed to locate address for VK function " + functionName);
 					}
+
+					return address;
 				}
 
 				@Override

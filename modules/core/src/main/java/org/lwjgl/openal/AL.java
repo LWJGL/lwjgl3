@@ -7,6 +7,7 @@ package org.lwjgl.openal;
 import org.lwjgl.system.*;
 
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
 import java.util.*;
 
 import static org.lwjgl.openal.AL10.*;
@@ -64,23 +65,18 @@ public final class AL {
 	private AL() {}
 
 	static void init() {
-		functionProvider = new FunctionProvider() {
+		functionProvider = new FunctionProvider.Default() {
 			// We'll use alGetProcAddress for both core and extension entry points.
 			// To do that, we need to first grab the alGetProcAddress function from
 			// the OpenAL native library.
 			private final long alGetProcAddress = ALC.getFunctionProvider().getFunctionAddress("alGetProcAddress");
 
 			@Override
-			public long getFunctionAddress(CharSequence functionName) {
-				stackPush();
-				try {
-					long address = invokePP(alGetProcAddress, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-						apiLog("Failed to locate address for AL function " + functionName);
-					return address;
-				} finally {
-					stackPop();
-				}
+			public long getFunctionAddress(ByteBuffer functionName) {
+				long address = invokePP(alGetProcAddress, memAddress(functionName));
+				if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+					apiLog("Failed to locate address for AL function " + functionName);
+				return address;
 			}
 
 			@Override

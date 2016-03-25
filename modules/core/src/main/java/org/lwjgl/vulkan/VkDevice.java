@@ -4,11 +4,13 @@
  */
 package org.lwjgl.vulkan;
 
+import org.lwjgl.system.Checks;
 import org.lwjgl.system.FunctionProvider;
-import org.lwjgl.system.MemoryStack;
 
+import java.nio.ByteBuffer;
+
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.VkInstance.*;
 
@@ -29,25 +31,21 @@ public class VkDevice extends DispatchableHandle {
 	private static VKCapabilities getDeviceCapabilities(final long handle, final VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci) {
 		int apiVersion = physicalDevice.getCapabilities().apiVersion;
 		return new VKCapabilities(
-			new FunctionProvider() {
+			new FunctionProvider.Default() {
 				@Override
-				public long getFunctionAddress(CharSequence functionName) {
-					MemoryStack stack = stackPush();
-					try {
-						long nameEncoded = memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK));
-
-						VKCapabilities caps = physicalDevice.getCapabilities();
-						long address = GetDeviceProcAddr(caps.vkGetDeviceProcAddr, handle, nameEncoded);
+				public long getFunctionAddress(ByteBuffer functionName) {
+					VKCapabilities caps = physicalDevice.getCapabilities();
+					long address = GetDeviceProcAddr(caps.vkGetDeviceProcAddr, handle, memAddress(functionName));
+					if ( address == NULL ) {
+						address = GetInstanceProcAddr(caps.vkGetInstanceProcAddr, physicalDevice.getInstance().address(), memAddress(functionName));
 						if ( address == NULL ) {
-							address = GetInstanceProcAddr(caps.vkGetInstanceProcAddr, physicalDevice.getInstance().address(), nameEncoded);
-							if ( address == NULL )
-								address = VK.getFunctionProvider().getFunctionAddress(functionName);
+							address = VK.getFunctionProvider().getFunctionAddress(functionName);
+							if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+								apiLog("Failed to locate address for VK device function " + functionName);
 						}
-
-						return address;
-					} finally {
-						stack.pop();
 					}
+
+					return address;
 				}
 
 				@Override
