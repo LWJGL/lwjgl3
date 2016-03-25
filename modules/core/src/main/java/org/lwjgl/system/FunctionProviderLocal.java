@@ -31,9 +31,7 @@ public interface FunctionProviderLocal extends FunctionProvider {
 		public long getFunctionAddress(long handle, CharSequence functionName) {
 			MemoryStack stack = stackPush();
 			try {
-				ByteBuffer encoded = stack.malloc(functionName.length() + 1);
-				memEncodeASCII(functionName, true, encoded);
-				return getFunctionAddress(handle, encoded);
+				return getFunctionAddress(handle, memEncodeASCII(functionName, true, stack));
 			} finally {
 				stack.pop();
 			}

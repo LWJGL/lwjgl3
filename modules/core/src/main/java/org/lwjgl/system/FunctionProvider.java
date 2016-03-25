@@ -33,9 +33,7 @@ public interface FunctionProvider {
 		public long getFunctionAddress(CharSequence functionName) {
 			MemoryStack stack = stackPush();
 			try {
-				ByteBuffer encoded = stack.malloc(functionName.length() + 1);
-				memEncodeASCII(functionName, true, encoded);
-				return getFunctionAddress(encoded);
+				return getFunctionAddress(memEncodeASCII(functionName, true, stack));
 			} finally {
 				stack.pop();
 			}
