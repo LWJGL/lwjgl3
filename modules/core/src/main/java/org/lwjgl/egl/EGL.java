@@ -156,7 +156,7 @@ public final class EGL {
 
 	private static EGLCapabilities createClientCapabilities() {
 		long QueryString = functionProvider.getFunctionAddress("eglQueryString");
-		long versionString = invokePIP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS);
+		long versionString = invokePIP(QueryString, EGL_NO_DISPLAY, EGL_VERSION);
 
 		Set<String> ext = new HashSet<String>(32);
 
