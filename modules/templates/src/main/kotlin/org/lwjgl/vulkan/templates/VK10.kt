@@ -3227,7 +3227,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 			"a pointer to an instance of the ##VkImageCreateInfo structure containing parameters to be used to create the image"
 		),
 		pAllocator,
-		Check(1)..VkImage.p.OUT("pImage", "points to a ##VkImage handle in which the resulting image object is returned")
+		Check(1)..VkImage.p.OUT("pImage", "points to a {@code VkImage} handle in which the resulting image object is returned")
 	)
 
 	void(
@@ -5016,7 +5016,7 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 		),
 		VkDependencyFlags.IN(
 			"dependencyFlags",
-			"a bitmask of {@code VkDependencyFlagBits}. The execution dependency is by-region if the mask includes ##VK_DEPENDENCY_BY_REGION_BIT.",
+			"a bitmask of {@code VkDependencyFlagBits}. The execution dependency is by-region if the mask includes #DEPENDENCY_BY_REGION_BIT.",
 			VkDependencyFlagBits, LinkMode.BITFIELD
 		),
 		AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", "the length of the {@code pMemoryBarriers} array"),

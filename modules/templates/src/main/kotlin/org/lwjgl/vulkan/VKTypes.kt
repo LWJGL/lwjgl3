@@ -1588,3 +1588,32 @@ val VkRenderPassBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassBeginInfo") 
 	AutoSize("pClearValues", optional = true)..uint32_t.member("clearValueCount", "")
 	VkClearValue.const_p.buffer("pClearValues", "")
 }
+
+// Indirect commands (not used in the API, for reference only)
+
+val VkDispatchIndirectCommand = struct(VULKAN_PACKAGE, "VkDispatchIndirectCommand", mutable = false) {
+	documentation = ""
+
+	uint32_t.member("x", "")
+    uint32_t.member("y", "")
+    uint32_t.member("z", "")
+}.nativeType
+
+val VkDrawIndexedIndirectCommand = struct(VULKAN_PACKAGE, "VkDrawIndexedIndirectCommand", mutable = false) {
+	documentation = ""
+
+    uint32_t.member("indexCount", "")
+    uint32_t.member("instanceCount", "")
+    uint32_t.member("firstIndex", "")
+    int32_t.member("vertexOffset", "")
+    uint32_t.member("firstInstance", "")
+}.nativeType
+
+val VkDrawIndirectCommand = struct(VULKAN_PACKAGE, "VkDrawIndirectCommand", mutable = false) {
+	documentation = ""
+
+	uint32_t.member("vertexCount", "")
+    uint32_t.member("instanceCount", "")
+    uint32_t.member("firstVertex", "")
+    uint32_t.member("firstInstance", "")
+}.nativeType
