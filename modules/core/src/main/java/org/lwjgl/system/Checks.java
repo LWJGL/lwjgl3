@@ -59,20 +59,6 @@ public final class Checks {
 	}
 
 	/**
-	 * Checks if the specified function provider instance is {@code null}.
-	 *
-	 * @param functionProvider the functionality to check
-	 *
-	 * @return the function provider instance
-	 */
-	public static <T> T checkFunctionality(T functionProvider) {
-		if ( CHECKS && functionProvider == null )
-			throw new IllegalStateException("This functionality is not available.");
-
-		return functionProvider;
-	}
-
-	/**
 	 * Checks if any of the specified functions pointers is {@code NULL}.
 	 *
 	 * @param functions the function pointers to check
