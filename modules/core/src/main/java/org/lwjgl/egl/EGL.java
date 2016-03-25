@@ -93,8 +93,11 @@ public final class EGL {
 					stackPush();
 					try {
 						long address = invokePP(eglGetProcAddress, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-						if ( address == NULL )
+						if ( address == NULL ) {
 							address = EGL.getFunctionAddress(functionName);
+							if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+								apiLog("Failed to locate address for EGL function " + functionName);
+						}
 
 						return address;
 					} finally {

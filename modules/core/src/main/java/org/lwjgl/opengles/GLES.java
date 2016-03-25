@@ -109,8 +109,11 @@ public final class GLES {
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
 					long address = EGL.getFunctionProvider().getFunctionAddress(functionName);
-					if ( address == NULL )
+					if ( address == NULL ) {
 						address = GLES.getFunctionAddress(functionName);
+						if ( address == NULL && DEBUG_FUNCTIONS )
+							apiLog("Failed to locate address for GLES function " + functionName);
+					}
 
 					return address;
 				}
@@ -279,7 +282,7 @@ public final class GLES {
 					stack.pop();
 				}
 
-				long GetStringi = checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi"));
+				long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
 				for ( int i = 0; i < extensionCount; i++ )
 					supportedExtensions.add(memDecodeASCII(checkPointer(callIIP(GetStringi, GL_EXTENSIONS, i))));
 			}

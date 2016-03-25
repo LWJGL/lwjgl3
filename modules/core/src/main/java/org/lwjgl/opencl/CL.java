@@ -157,8 +157,11 @@ public final class CL {
 							? callPP(clGetExtensionFunctionAddress, nameEncoded)
 							: callPPP(clGetExtensionFunctionAddressForPlatform, platform, nameEncoded);
 
-						if ( address == NULL )
+						if ( address == NULL ) {
 							address = OPENCL.getFunctionAddress(functionName);
+							if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+								apiLog("Failed to locate address for CL function " + functionName);
+						}
 
 						return address;
 					} finally {
@@ -170,11 +173,14 @@ public final class CL {
 				public long getFunctionAddress(long handle, CharSequence functionName) {
 					MemoryStack stack = stackPush();
 					try {
-						return callPPP(
+						long address = callPPP(
 							clGetExtensionFunctionAddressForPlatform,
 							handle,
 							memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK))
 						);
+						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+							apiLog("Failed to locate address for CL function " + functionName);
+						return address;
 					} finally {
 						stack.pop();
 					}

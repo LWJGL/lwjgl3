@@ -88,8 +88,11 @@ public final class VK {
 					MemoryStack stack = stackPush();
 					try {
 						long address = callPPP(GetInstanceProcAddr, NULL, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-						if ( address == NULL )
+						if ( address == NULL ) {
 							address = VULKAN.getFunctionAddress(functionName);
+							if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+								apiLog("Failed to locate address for VK function " + functionName);
+						}
 
 						return address;
 					} finally {

@@ -149,6 +149,19 @@ public class Configuration<T> {
 	 */
 	public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR = new Configuration<Boolean>("org.lwjgl.util.DebugAllocator", StateInit.BOOLEAN);
 
+	/**
+	 * When enabled, capabilities classes will print an error message when they fail to retrieve a function pointer.
+	 *
+	 * <p>Function pointers in such classes are retrieved unconditionally, so this option may generate a lot of output and many false negatives.</p>
+	 *
+	 * <p>This option requires {@link #DEBUG} to be enabled.</p>
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.util.DebugFunctions</b><br>
+	 * &nbsp; &nbsp;Usage: Static<br>
+	 */
+	public static final Configuration<Boolean> DEBUG_FUNCTIONS = new Configuration<Boolean>("org.lwjgl.util.DebugFunctions", StateInit.BOOLEAN);
+
 	// -- EGL
 
 	/**

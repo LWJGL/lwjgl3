@@ -33,14 +33,27 @@ public final class Checks {
 	/**
 	 * Debug mode flag.
 	 *
-	 * <p>When enabled, LWJGL will perform additional checks during its operation. These checks are less trivial than the ones enabled with
-	 * {@link #CHECKS} and will have a noticeable effect on performance, so they are disabled by default. Examples of such checks are: a GetError call after
-	 * SwapBuffers, buffer object binding state check (GL), buffer capacity checks for texture images (GL & CL), etc. LWJGL will also print additional
-	 * information in stdout, mainly during start-up.</p>
+	 * <p>When enabled, LWJGL will perform additional checks during its operation. These checks are more expensive than the ones enabled with {@link #CHECKS}
+	 * and will have a noticeable effect on performance, so they are disabled by default. Examples of such checks are: buffer object binding state check (GL),
+	 * buffer capacity checks for texture images (GL & CL), etc. LWJGL will also print additional information, mainly during start-up.</p>
 	 *
 	 * <p>Can be enabled by setting {@link Configuration#DEBUG} to true.</p>
 	 */
 	public static final boolean DEBUG = Configuration.DEBUG.<Boolean>get();
+
+	/**
+	 * Debug functions flag.
+	 *
+	 * <p>When enabled, capabilities classes will print an error message when they fail to retrieve a function pointer.</p>
+	 *
+	 * <p>Can be enabled by setting {@link Configuration#DEBUG_FUNCTIONS} to true.</p>
+	 */
+	public static final boolean DEBUG_FUNCTIONS = Configuration.DEBUG_FUNCTIONS.<Boolean>get();
+
+	static {
+		if ( DEBUG_FUNCTIONS && !DEBUG )
+			APIUtil.DEBUG_STREAM.println("[LWJGL] The DEBUG_FUNCTIONS option requires DEBUG to produce output.");
+	}
 
 	private Checks() {
 	}

@@ -88,14 +88,20 @@ public final class ALC {
 
 				@Override
 				public long getFunctionAddress(CharSequence functionName) {
-					return OPENAL.getFunctionAddress(functionName);
+					long address = OPENAL.getFunctionAddress(functionName);
+					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+						apiLog("Failed to locate address for ALC core function " + functionName);
+					return address;
 				}
 
 				@Override
 				public long getFunctionAddress(long handle, CharSequence functionName) {
 					stackPush();
 					try {
-						return invokePPP(alcGetProcAddress, handle, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
+						long address = invokePPP(alcGetProcAddress, handle, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
+						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+							apiLog("Failed to locate address for ALC extension function " + functionName);
+						return address;
 					} finally {
 						stackPop();
 					}

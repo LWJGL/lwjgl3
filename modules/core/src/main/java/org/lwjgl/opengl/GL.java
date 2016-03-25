@@ -112,8 +112,11 @@ public final class GL {
 				stackPush();
 				try {
 					long address = getExtensionAddress(memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
-					if ( address == NULL )
+					if ( address == NULL ) {
 						address = OPENGL.getFunctionAddress(functionName);
+						if ( address == NULL && DEBUG_FUNCTIONS )
+							apiLog("Failed to locate address for GL function " + functionName);
+					}
 
 					return address;
 				} finally {
@@ -338,7 +341,7 @@ public final class GL {
 					callIPV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
 					int extensionCount = pi.get(0);
 
-					long GetStringi = checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi"));
+					long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
 					for ( int i = 0; i < extensionCount; i++ )
 						supportedExtensions.add(memDecodeASCII(callIIP(GetStringi, GL_EXTENSIONS, i)));
 

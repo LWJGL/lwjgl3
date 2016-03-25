@@ -74,7 +74,10 @@ public final class AL {
 			public long getFunctionAddress(CharSequence functionName) {
 				stackPush();
 				try {
-					return invokePP(alGetProcAddress, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
+					long address = invokePP(alGetProcAddress, memAddress(memEncodeASCII(functionName, true, BufferAllocator.STACK)));
+					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+						apiLog("Failed to locate address for AL function " + functionName);
+					return address;
 				} finally {
 					stackPop();
 				}
