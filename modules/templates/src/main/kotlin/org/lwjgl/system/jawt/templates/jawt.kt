@@ -7,7 +7,7 @@ package org.lwjgl.system.jawt.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.jawt.*
 
-private val JAWT_BINDING = simpleBinding("LIB_JAWT", libraryExpression = "\"jawt\"", callingConvention = CallingConvention.STDCALL)
+private val JAWT_BINDING = simpleBinding("jawt", callingConvention = CallingConvention.STDCALL)
 val jawt = "JAWTFunctions".nativeClass(JAWT_PACKAGE, prefix = "JAWT_", prefixMethod = "JAWT_", binding = JAWT_BINDING) {
 	nativeDirective(
 		"""DISABLE_WARNINGS()

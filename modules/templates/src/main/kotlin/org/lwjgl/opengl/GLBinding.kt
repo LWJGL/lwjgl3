@@ -81,18 +81,13 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 	private val Iterable<NativeClassFunction>.hasDeprecated: Boolean
 		get() = this.any { it has DeprecatedGL }
 
-	override fun printConstructorParams(writer: PrintWriter, nativeClass: NativeClass) {
-		if ( nativeClass.functions.hasDeprecated )
-			writer.print(", boolean fc")
-	}
-
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "GL11" || function has DeprecatedGL
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
 		writer.println("\t\tlong $FUNCTION_ADDRESS = GL.getCapabilities().${function.name};")
 	}
 
-	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		val hasDeprecated = nativeClass.functions.hasDeprecated
 
 		print("\tstatic boolean isAvailable(GLCapabilities caps")

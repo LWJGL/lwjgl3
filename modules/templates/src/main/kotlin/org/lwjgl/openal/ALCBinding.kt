@@ -26,19 +26,13 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 
 	override val hasCapabilities: Boolean get() = true
 
-	override fun getFunctionAddressCall(function: NativeClassFunction) =
-		if ( function.nativeClass.isCore )
-			super.getFunctionAddressCall(function);
-		else
-			"provider.getFunctionAddress(device, ${function.nativeName})"
-
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "ALC10"
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
 		writer.println("\t\tlong $FUNCTION_ADDRESS = ALC.getICD().${function.name};")
 	}
 
-	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		println("\tstatic boolean isAvailable($ALC_CAP_CLASS caps) {")
 		print("\t\treturn checkFunctions(")
 		nativeClass.printPointers(this, { "caps.${it.name}" })
@@ -80,7 +74,7 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 
 		println("\n\t$ALC_CAP_CLASS(FunctionProviderLocal provider, long device, Set<String> ext) {")
 
-		println(addresses.map { "${it.name} = provider.getFunctionAddress(device, ${it.nativeName});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
+		println(addresses.map { "${it.name} = provider.getFunctionAddress(${if ( it.nativeClass.isCore ) "" else "device, "}${it.nativeName});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
 
 		for (extension in classes) {
 			val capName = extension.capName("ALC")

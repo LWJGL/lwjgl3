@@ -97,15 +97,13 @@ final class MemoryManage {
 
 		@Override
 		public void config(long malloc, long calloc, long realloc, long free, long aligned_alloc, long aligned_free) {
-			JEmalloc jemalloc = JEmalloc.getInstance();
+			memPutAddress(malloc, JEmalloc.Functions.malloc);
+			memPutAddress(calloc, JEmalloc.Functions.calloc);
+			memPutAddress(realloc, JEmalloc.Functions.realloc);
+			memPutAddress(free, JEmalloc.Functions.free);
 
-			memPutAddress(malloc, jemalloc.malloc);
-			memPutAddress(calloc, jemalloc.calloc);
-			memPutAddress(realloc, jemalloc.realloc);
-			memPutAddress(free, jemalloc.free);
-
-			memPutAddress(aligned_alloc, jemalloc.aligned_alloc);
-			memPutAddress(aligned_free, jemalloc.free);
+			memPutAddress(aligned_alloc, JEmalloc.Functions.aligned_alloc);
+			memPutAddress(aligned_free, JEmalloc.Functions.free);
 		}
 
 		@Override
@@ -226,7 +224,7 @@ final class MemoryManage {
 
 				StackTraceElement[] stackTrace = t.getStackTrace();
 				int depth = Math.min(stackTrace.length, 4);
-				for (; depth < stackTrace.length; depth++ ) {
+				for ( ; depth < stackTrace.length; depth++ ) {
 					if ( !"org.lwjgl.system.MemoryUtil".equals(stackTrace[depth].getClassName()) )
 						break;
 				}

@@ -62,41 +62,11 @@ abstract class APIBinding(
 	/** If true, "capabilities" instance are retrieved from function parameters. */
 	open val hasParameterCapabilities: Boolean = false
 
-	open fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
-		val instanceParameter = if ( !hasCapabilities )
-			""
-		else if ( function has Capabilities ) {
-			val caps = function[Capabilities]
-			if ( caps.statement != null )
-				writer.println("\t\t${caps.statement};")
-			caps.expression
-		} else {
-			try {
-				// Use the first ObjectType parameters
-				function.getParams() { it.nativeType is ObjectType }.first().name
-			} catch (e: Exception) {
-				throw IllegalStateException("Neither a Capabilities modifier nor an object parameter were found on function ${function.name}")
-			}
-		}
+	abstract fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction)
 
-		val variable = if ( function.returns.has(Address) ) RESULT else FUNCTION_ADDRESS
-
-		if ( function has Capabilities && function[Capabilities].override ) {
-			if ( !instanceParameter.equals(FUNCTION_ADDRESS) ) // Skip if we have an explicit FUNCTION_ADDRESS parameter.
-				writer.println("\t\tlong $variable = $instanceParameter;")
-		} else
-			writer.println("\t\tlong $variable = getInstance($instanceParameter).${function.functionAddress};")
-	}
-
-	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)
+	abstract fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass)
 
 	// OVERRIDES
-
-	/** Can be overriden to generate additional parameters for the NativeClass constructor. */
-	open fun printConstructorParams(writer: PrintWriter, nativeClass: NativeClass) = Unit
-
-	/** Can be overriden to implement custom function address retrieval. */
-	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(${function.nativeName})"
 
 	/** Can be overriden to generate binding-specific alternative methods. */
 	open fun generateAlternativeMethods(
@@ -123,10 +93,35 @@ abstract class APIBinding(
 
 /** An APIBinding without an associated capabilities class.  */
 abstract class SimpleBinding(
+	val libraryExpression: String,
 	callingConvention: CallingConvention
 ) : APIBinding("n/a", "n/a", callingConvention) {
-	override fun getFunctionAddressCall(function: NativeClassFunction) = super.getFunctionAddressCall(function).let { if ( function.has(IgnoreMissing) ) it else "checkFunctionAddress($it)" }
 	override fun PrintWriter.generateContent() = Unit
+	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+		writer.println("\t\tlong ${if ( function.returns.has(Address) ) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
+	}
+
+	protected fun PrintWriter.generateFunctionsClass(nativeClass: NativeClass) {
+		val bindingFunctions = nativeClass.functions.filter { !it.hasExplicitFunctionAddress }
+		if ( bindingFunctions.isEmpty() )
+			return
+
+		println("""
+	public static final class Functions {
+
+		private Functions() {}
+
+		/** Function address. */
+		public static final long
+			${
+		bindingFunctions
+			.map { "${it.simpleName} = apiGetFunctionAddress($libraryExpression, ${it.nativeName})" }
+			.joinToString(separator = ",\n\t\t\t", postfix = ";")
+		}
+
+	}
+""")
+	}
 }
 
 /** Creates a simple APIBinding that stores the shared library and function pointers inside the binding class. The shared library is never unloaded. */
@@ -134,29 +129,20 @@ fun simpleBinding(
 	libraryName: String,
 	libraryExpression: String = "\"$libraryName\"",
 	callingConvention: CallingConvention = CallingConvention.DEFAULT
-) = object : SimpleBinding(callingConvention) {
-	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+) = object : SimpleBinding(libraryName.toUpperCase(), callingConvention) {
+	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+		writer.println("\t\tlong ${if ( function.returns.has(Address) ) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
+	}
+
+	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		val libraryReference = libraryName.toUpperCase()
 
-		println("""	// --- [ Function Addresses ] ---
-
-	private static final SharedLibrary $libraryReference;
-
-	private static final ${nativeClass.className} instance;
-
-	static {
-		$libraryReference = Library.loadNative($libraryExpression);
-		instance = new ${nativeClass.className}($libraryReference);
-	}
-
-	/** Returns the {@link SharedLibrary} that provides pointers for the functions in this class. */
+		println("\tprivate static final SharedLibrary $libraryReference = Library.loadNative($libraryExpression);\n");
+		print("\t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
+		generateFunctionsClass(nativeClass)
+		println("""	/** Returns the $libraryName {@link SharedLibrary}. */
 	public static SharedLibrary getLibrary() {
 		return $libraryReference;
-	}
-
-	/** Returns the {@link ${nativeClass.className}} instance. */
-	public static ${nativeClass.className} getInstance() {
-		return instance;
 	}
 """)
 	}
@@ -165,27 +151,15 @@ fun simpleBinding(
 /** Creates a simple APIBinding that delegates function pointer loading to this APIBinding. */
 fun APIBinding.delegate(
 	libraryExpression: String
-) = object : SimpleBinding(callingConvention) {
-	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
-		println("""	// --- [ Function Addresses ] ---
-
-	private static final ${nativeClass.className} instance = new ${nativeClass.className}(getLibrary());
-
-	/** Returns the {@link SharedLibrary} that provides pointers for the functions in this class. */
-	public static SharedLibrary getLibrary() {
-		return $libraryExpression;
-	}
-
-	/** Returns the {@link ${nativeClass.className}} instance. */
-	public static ${nativeClass.className} getInstance() {
-		return instance;
-	}
-""")
+) = object : SimpleBinding(libraryExpression, callingConvention) {
+	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
+		print("\t/** Contains the function pointers loaded from {@code $libraryExpression}. */")
+		generateFunctionsClass(nativeClass)
 	}
 }
 
 // TODO: Remove if KT-457 or KT-1183 are fixed.
-private fun APIBinding.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionGetters(nativeClass)
+private fun APIBinding.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionSetup(nativeClass)
 
 class NativeClass(
 	packageName: String,
@@ -247,6 +221,11 @@ class NativeClass(
 
 			println("import org.lwjgl.system.*;\n")
 
+			if ( binding is SimpleBinding )
+				println("import static org.lwjgl.system.APIUtil.*;")
+			println("import static org.lwjgl.system.Checks.*;")
+			if ( binding != null )
+				println("import static org.lwjgl.system.JNI.*;")
 			if ( hasNIO && functions.any {
 				val func = it
 				func.hasParam {
@@ -261,9 +240,6 @@ class NativeClass(
 				}
 			} )
 				println("import static org.lwjgl.system.MemoryStack.*;")
-			println("import static org.lwjgl.system.Checks.*;")
-			if ( binding != null )
-				println("import static org.lwjgl.system.JNI.*;")
 			if ( hasNIO ) {
 				println("import static org.lwjgl.system.MemoryUtil.*;")
 				if ( functions.any { it.hasParam { it.nativeType.mapping === PointerMapping.DATA_POINTER } } )
@@ -288,10 +264,12 @@ class NativeClass(
 				if ( functions.any { it.hasCustomJNI } )
 					println("\n\tstatic { Library.initialize(); }")
 
-				val bindingFunctions = functions.filter { !it.hasExplicitFunctionAddress }
-
-				if ( bindingFunctions.isNotEmpty() ) {
-					generateFunctionAddresses(binding, bindingFunctions)
+				if ( functions.any { !it.hasExplicitFunctionAddress } ) {
+					println("""
+	protected $className() {
+		throw new UnsupportedOperationException();
+	}
+""")
 					binding.generateFunctionGetters(this, this@NativeClass)
 				}
 			} else {
@@ -322,38 +300,6 @@ class NativeClass(
 		}
 
 		print("}")
-	}
-
-	private fun PrintWriter.generateFunctionAddresses(binding: APIBinding, functions: List<NativeClassFunction>) {
-		if ( !binding.hasCapabilities ) {
-			println("\n\t/** Function address. */")
-			print("\tpublic final long")
-			if ( functions.size == 1 ) {
-				println(" ${_functions.values.first().simpleName};")
-			} else {
-				println()
-				functions.forEachWithMore { func, more ->
-					if ( more )
-						println(",")
-					print("\t\t${func.functionAddress}")
-				}
-				println(";")
-			}
-		}
-		println("""
-	protected $className() {
-		throw new UnsupportedOperationException();
-	}
-""")
-		if ( !binding.hasCapabilities ) {
-			print("\t${access.modifier}$className(FunctionProvider provider")
-			binding.printConstructorParams(this, this@NativeClass)
-			println(") {")
-			functions.forEach {
-				println("\t\t${it.functionAddress} = ${binding.getFunctionAddressCall(it)};")
-			}
-			println("\t}\n")
-		}
 	}
 
 	override val skipNative: Boolean get() = functions.none() { it.hasCustomJNI }
@@ -387,7 +333,7 @@ class NativeClass(
 
 	fun printPointers(
 		out: PrintWriter,
-		printPointer: (func: NativeClassFunction) -> String = { it.functionAddress },
+		printPointer: (func: NativeClassFunction) -> String = { it.name },
 		filter: ((NativeClassFunction) -> Boolean)? = null
 	) {
 		out.print("\n\t\t\t")

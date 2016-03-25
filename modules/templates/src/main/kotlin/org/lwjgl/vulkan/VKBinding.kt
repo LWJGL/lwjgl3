@@ -51,7 +51,7 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 			"${function.getParams() { it.nativeType is ObjectType }.first().name}.getCapabilities().${function.name};")
 	}
 
-	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		println("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
 		print("\t\treturn checkFunctions(")
 		nativeClass.printPointers(this, { "caps.${it.name}" })

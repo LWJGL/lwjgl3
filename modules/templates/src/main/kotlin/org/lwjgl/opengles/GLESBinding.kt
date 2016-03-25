@@ -63,7 +63,7 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 		writer.println("\t\tlong $FUNCTION_ADDRESS = GLES.getCapabilities().${function.name};")
 	}
 
-	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		print("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps")
 		if ( nativeClass.functions.any { it has DependsOn } ) print(", java.util.Set<String> ext")
 		println(") {")

@@ -30,7 +30,7 @@ private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, C
 		writer.println("\t\tlong $FUNCTION_ADDRESS = CL.getICD().${function.name};")
 	}
 
-	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
+	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		println("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
 		print("\t\treturn checkFunctions(")
 		nativeClass.printPointers(this, { "caps.${it.name}" })

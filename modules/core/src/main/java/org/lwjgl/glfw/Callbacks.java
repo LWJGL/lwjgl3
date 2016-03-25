@@ -34,23 +34,22 @@ public final class Callbacks {
 		if ( Checks.CHECKS )
 			checkPointer(window);
 
-		GLFW glfw = GLFW.getInstance();
 		long[] callbacks = {
-			invokePPP(glfw.SetWindowPosCallback, window, NULL),
-			invokePPP(glfw.SetWindowSizeCallback, window, NULL),
-			invokePPP(glfw.SetWindowCloseCallback, window, NULL),
-			invokePPP(glfw.SetWindowRefreshCallback, window, NULL),
-			invokePPP(glfw.SetWindowFocusCallback, window, NULL),
-			invokePPP(glfw.SetWindowIconifyCallback, window, NULL),
-			invokePPP(glfw.SetFramebufferSizeCallback, window, NULL),
-			invokePPP(glfw.SetKeyCallback, window, NULL),
-			invokePPP(glfw.SetCharCallback, window, NULL),
-			invokePPP(glfw.SetCharModsCallback, window, NULL),
-			invokePPP(glfw.SetMouseButtonCallback, window, NULL),
-			invokePPP(glfw.SetCursorPosCallback, window, NULL),
-			invokePPP(glfw.SetCursorEnterCallback, window, NULL),
-			invokePPP(glfw.SetScrollCallback, window, NULL),
-			invokePPP(glfw.SetDropCallback, window, NULL)
+			invokePPP(GLFW.Functions.SetWindowPosCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetWindowSizeCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetWindowCloseCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetWindowRefreshCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetWindowFocusCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetWindowIconifyCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetFramebufferSizeCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetKeyCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetCharCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetCharModsCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetMouseButtonCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetCursorPosCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetCursorEnterCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetScrollCallback, window, NULL),
+			invokePPP(GLFW.Functions.SetDropCallback, window, NULL)
 		};
 
 		for ( long callback : callbacks ) {

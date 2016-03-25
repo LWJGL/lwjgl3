@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 
@@ -49,7 +50,7 @@ public final class APIUtil {
 	 * @param msg the message to print
 	 */
 	public static void apiLog(CharSequence msg) {
-		if ( Checks.DEBUG ) {
+		if ( DEBUG ) {
 			DEBUG_STREAM.print("[LWJGL] ");
 			DEBUG_STREAM.println(msg);
 		}
@@ -66,6 +67,10 @@ public final class APIUtil {
 			default:
 				throw new IllegalStateException();
 		}
+	}
+
+	public static long apiGetFunctionAddress(FunctionProvider provider, String functionName) {
+		return checkFunctionAddress(provider.getFunctionAddress(functionName));
 	}
 
 	/** A data class for API versioning information. */
