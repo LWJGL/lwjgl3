@@ -149,7 +149,7 @@ val VkDisplayModeCreateFlagsKHR = typedef(VkFlags, "VkDisplayModeCreateFlagsKHR"
 val VkDisplayPlaneAlphaFlagsKHR = typedef(VkFlags, "VkDisplayPlaneAlphaFlagsKHR")
 val VkDisplaySurfaceCreateFlagsKHR = typedef(VkFlags, "VkDisplaySurfaceCreateFlagsKHR")
 
-val VkDisplayPropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPropertiesKHR") {
+val VkDisplayPropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPropertiesKHR", mutable = false) {
 	documentation = ""
 	
 	VkDisplayKHR.member("display", "")
@@ -168,7 +168,7 @@ val VkDisplayModeParametersKHR = struct(VULKAN_PACKAGE, "VkDisplayModeParameters
 	uint32_t.member("refreshRate", "")
 }.nativeType
 
-val VkDisplayModePropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModePropertiesKHR") {
+val VkDisplayModePropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModePropertiesKHR", mutable = false) {
 	documentation = ""
 	
 	VkDisplayModeKHR.member("displayMode", "")
@@ -184,7 +184,7 @@ val VkDisplayModeCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModeCreate
 	VkDisplayModeParametersKHR.member("parameters", "")
 }
 
-val VkDisplayPlaneCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlaneCapabilitiesKHR") {
+val VkDisplayPlaneCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlaneCapabilitiesKHR", mutable = false) {
 	documentation = ""
 	
 	VkDisplayPlaneAlphaFlagsKHR.member("supportedAlpha", "")
@@ -198,7 +198,7 @@ val VkDisplayPlaneCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlaneCa
 	VkExtent2D.member("maxDstExtent", "")
 }
 
-val VkDisplayPlanePropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlanePropertiesKHR") {
+val VkDisplayPlanePropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlanePropertiesKHR", mutable = false) {
 	documentation = ""
 	
 	VkDisplayKHR.member("currentDisplay", "")
