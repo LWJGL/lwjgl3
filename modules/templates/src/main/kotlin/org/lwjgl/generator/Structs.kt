@@ -430,14 +430,18 @@ $indentation}"""
 			if ( nativeLayout ) {
 				print("""
 	static {
-		IntBuffer offsets = memAllocInt(${memberCount + 1});
-
-		SIZEOF = offsets(memAddress(offsets));
+		MemoryStack stack = stackPush();
+		try {
+			IntBuffer offsets = stack.mallocInt(${memberCount + 1});
+			SIZEOF = offsets(memAddress(offsets));
 
 """)
-				generateOffsetInit(members)
-				println("\n\t\tALIGNOF = offsets.get($memberCount);")
-				println("\n\t\tmemFree(offsets);")
+				generateOffsetInit(members, indentation = "\t\t\t")
+				println("""
+			ALIGNOF = offsets.get($memberCount);
+		} finally {
+			stack.pop();
+		}""")
 			} else {
 				print("""
 	static {
@@ -456,9 +460,14 @@ $indentation}"""
 		} else {
 			print("""
 	static {
-		IntBuffer offsets = memAllocInt(1);
-		SIZEOF = offsets(memAddress(offsets));
-		ALIGNOF = offsets.get(0);
+		MemoryStack stack = stackPush();
+		try {
+			IntBuffer offsets = stack.mallocInt(1);
+			SIZEOF = offsets(memAddress(offsets));
+			ALIGNOF = offsets.get(0);
+		} finally {
+			stack.pop();
+		}
 	}""")
 		}
 
