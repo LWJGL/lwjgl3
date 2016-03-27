@@ -1071,7 +1071,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		const..GLenum_p.IN("props", ""),
 		AutoSize("params")..GLsizei.IN("bufSize", ""),
 		Check(1)..nullable..GLsizei_p.OUT("length", ""),
-		Return("length")..GLfloat_p.OUT("params", "")
+		GLfloat_p.OUT("params", "")
 	)
 
 	customMethod("""

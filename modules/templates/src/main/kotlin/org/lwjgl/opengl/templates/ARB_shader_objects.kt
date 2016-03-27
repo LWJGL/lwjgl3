@@ -498,10 +498,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 			"count",
 			"a buffer in which to return the actual number of object handles written by the GL into {@code obj}. If $NULL then the GL ignores this parameter."
 		),
-		Return(
-			"count",
-			"glGetObjectParameteriARB(containerObj, GL_OBJECT_ATTACHED_OBJECTS_ARB)"
-		)..GLhandleARB_p.OUT("obj", "a buffer in which to return the attached object handles")
+		GLhandleARB_p.OUT("obj", "a buffer in which to return the attached object handles")
 	)
 
 	GLint(

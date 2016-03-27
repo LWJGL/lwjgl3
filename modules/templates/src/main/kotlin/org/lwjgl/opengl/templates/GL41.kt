@@ -133,7 +133,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		AutoSize("binary")..GLsizei.IN("bufSize", "the size of the buffer whose address is given by {@code binary}"),
 		Check(1)..nullable..GLsizei_p.OUT("length", "the address of a variable to receive the number of bytes written into {@code binary}"),
 		Check(1)..GLenum_p.OUT("binaryFormat", "a variable to receive a token indicating the format of the binary data returned by the GL"),
-		Return("length", "GL20.glGetProgrami(program, GL_PROGRAM_BINARY_LENGTH)")..void_p.OUT(
+		void_p.OUT(
 			"binary",
 			"an array into which the GL will return {@code program}'s binary representation"
 		)

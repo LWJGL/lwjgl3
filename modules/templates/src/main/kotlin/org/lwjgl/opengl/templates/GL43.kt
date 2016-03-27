@@ -1014,7 +1014,7 @@ for ( i = 0; i < primcount; i++ ) {
 		const..GLenum_p.IN("props", "an array that will receive the active resource properties"),
 		AutoSize("params")..GLsizei.IN("bufSize", "the size of the integer array whose address is given by {@code params}"),
 		Check(1)..nullable..GLsizei_p.OUT("length", "a variable which will receive the number of values returned"),
-		Return("length")..GLint_p.OUT("params", "an array that will receive the property values")
+		GLint_p.OUT("params", "an array that will receive the property values")
 	)
 
 	GLint(

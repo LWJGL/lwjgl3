@@ -49,10 +49,7 @@ val OES_get_program_binary = "OESGetProgramBinary".nativeClassGLES("OES_get_prog
 		AutoSize("binary")..GLsizei.IN("bufSize", ""),
 		nullable..Check(1)..GLsizei_p.OUT("length", ""),
 		Check(1)..GLenum_p.OUT("binaryFormat", ""),
-		Return(
-			"length",
-			"GLES20.glGetProgrami(program, GL_PROGRAM_BINARY_LENGTH_OES)"
-		)..void_p.OUT("binary", "")
+		void_p.OUT("binary", "")
 	)
 
 	void(

@@ -451,10 +451,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		GLuint.IN("program", "the program object to be queried"),
 		AutoSize("shaders")..GLsizei.IN("maxCount", "the size of the array for storing the returned object names"),
 		Check(1)..nullable..GLsizei_p.IN("count", "the number of names actually returned in {@code shaders}"),
-		Return(
-			"count",
-			"glGetProgrami(program, GL_ATTACHED_SHADERS)"
-		)..GLuint_p.OUT("shaders", "an array that is used to return the names of attached shader objects")
+		GLuint_p.OUT("shaders", "an array that is used to return the names of attached shader objects")
 	)
 
 	GLint(

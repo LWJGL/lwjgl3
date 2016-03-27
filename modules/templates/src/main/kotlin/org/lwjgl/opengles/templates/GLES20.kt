@@ -815,10 +815,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		GLuint.IN("program", ""),
 		AutoSize("shaders")..GLsizei.IN("maxCount", ""),
 		Check(1)..nullable..GLsizei_p.OUT("count", ""),
-		Return(
-			"count",
-			"glGetProgrami(program, GL_ATTACHED_SHADERS)"
-		)..GLuint_p.OUT("shaders", "")
+		GLuint_p.OUT("shaders", "")
 	)
 
 	GLint(

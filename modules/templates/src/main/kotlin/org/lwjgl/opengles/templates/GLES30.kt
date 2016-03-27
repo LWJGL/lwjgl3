@@ -1258,7 +1258,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		AutoSize("binary")..GLsizei.IN("bufSize", ""),
 		Check(1)..nullable..GLsizei_p.OUT("length", ""),
 		Check(1)..GLenum_p.OUT("binaryFormat", ""),
-		Return("length", "GLES20.glGetProgrami(program, GL_PROGRAM_BINARY_LENGTH)")..void_p.OUT("binary", "")
+		void_p.OUT("binary", "")
 	)
 
 	void(

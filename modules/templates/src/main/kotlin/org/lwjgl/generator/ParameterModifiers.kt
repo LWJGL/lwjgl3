@@ -256,6 +256,9 @@ class Return(
 
 		if ( param.paramType !== ParameterType.OUT )
 			throw IllegalArgumentException("The Return modifier can only be applied on output parameters.")
+
+		if ( this !== ReturnParam && param.nativeType !is CharSequenceType && !lengthParam.startsWith(RESULT) )
+			throw IllegalArgumentException("The Return modifier can only be applied on CharSequence parameters.")
 	}
 }
 

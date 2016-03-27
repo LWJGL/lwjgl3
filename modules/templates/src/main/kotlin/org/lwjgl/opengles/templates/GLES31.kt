@@ -289,7 +289,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 		const..GLenum_p.IN("props", ""),
 		AutoSize("params")..GLsizei.IN("bufSize", ""),
 		Check(1)..nullable..GLsizei_p.OUT("length", ""),
-		Return("length")..GLint_p.OUT("params", "")
+		GLint_p.OUT("params", "")
 	)
 
 	GLint(
