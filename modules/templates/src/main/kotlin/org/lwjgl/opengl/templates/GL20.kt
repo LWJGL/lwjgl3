@@ -427,7 +427,8 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		Check(1)..nullable..GLsizei_p.OUT("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
 		Return(
 			"length",
-			"glGetShaderi(shader, GL_INFO_LOG_LENGTH)"
+			"glGetShaderi(shader, GL_INFO_LOG_LENGTH)",
+			heapAllocate = true
 		)..GLcharUTF8_p.OUT("infoLog", "an array of characters that is used to return the information log")
 	)
 
@@ -440,7 +441,8 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		Check(1)..nullable..GLsizei_p.OUT("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
 		Return(
 			"length",
-			"glGetProgrami(program, GL_INFO_LOG_LENGTH)"
+			"glGetProgrami(program, GL_INFO_LOG_LENGTH)",
+			heapAllocate = true
 		)..GLcharUTF8_p.OUT("infoLog", "an array of characters that is used to return the information log")
 	)
 
@@ -503,7 +505,11 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		GLuint.IN("shader", "the shader object to be queried"),
 		AutoSize("source")..GLsizei.IN("maxLength", "the size of the character buffer for storing the returned source code string"),
 		Check(1)..nullable..GLsizei_p.IN("length", "the length of the string returned in source (excluding the null terminator)"),
-		Return("length", "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)")..GLcharUTF8_p.OUT("source", "an array of characters that is used to return the source code string")
+		Return(
+			"length",
+			"glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)",
+			heapAllocate = true
+		)..GLcharUTF8_p.OUT("source", "an array of characters that is used to return the source code string")
 	)
 
 	// ARB_vertex_shader

@@ -946,7 +946,7 @@ class NativeClassFunction(
 					transforms[returns] = BufferAutoSizeReturnTransform(it, returnMod.lengthParam)
 					transforms[it] = BufferReplaceReturnTransform
 					generateAlternativeMethod(name, "Buffer return version of:", transforms)
-				} else {
+				} else if ( it.nativeType is CharSequenceType ) {
 					// Remove any transform from the maxLength parameter
 					val maxLengthParam = getParam(hasAutoSizePredicate(it))
 					transforms.remove(maxLengthParam)
@@ -956,34 +956,32 @@ class NativeClassFunction(
 					if ( lengthParam.isNotEmpty() )
 						transforms[paramMap[lengthParam]!!] = BufferLengthTransform
 
-					// Hide target parameter and use the stack
-					transforms[it] = BufferAutoSizeTransform(maxLengthParam)
+					// Hide target parameter and decode internally
+					val bufferAutoSizeTransform: FunctionTransform<Parameter> = if ( returnMod.heapAllocate )
+						StringAutoSizeTransform(maxLengthParam)
+					else
+						StringAutoSizeStackTransform(maxLengthParam)
+					transforms[it] = bufferAutoSizeTransform
 
 					// Transform void to the buffer type
-					val returnType: String
-					if ( it.nativeType is CharSequenceType ) {
-						transforms[returns] = if ( lengthParam.isNotEmpty() )
-							BufferReturnTransform(it, lengthParam, it.nativeType.charMapping.charset)
-						else
-							BufferReturnNTTransform(
-								it,
-								if ( 4 < (maxLengthParam.nativeType.mapping as PrimitiveMapping).bytes ) "(int)${maxLengthParam.name}" else maxLengthParam.name,
-								it.nativeType.charMapping.charset
-							)
-						returnType = "String"
-					} else {
-						transforms[returns] = BufferReturnTransform(it, lengthParam)
-						returnType = "Buffer"
-					}
+					transforms[returns] = if ( lengthParam.isNotEmpty() )
+						BufferReturnTransform(it, lengthParam, it.nativeType.charMapping.charset)
+					else
+						BufferReturnNTTransform(
+							it,
+							if ( 4 < (maxLengthParam.nativeType.mapping as PrimitiveMapping).bytes ) "(int)${maxLengthParam.name}" else maxLengthParam.name,
+							it.nativeType.charMapping.charset
+						)
 
-					generateAlternativeMethod(name, "$returnType return version of:", transforms)
+					generateAlternativeMethod(name, "String return version of:", transforms)
 
 					if ( returnMod.maxLengthExpression != null ) {
 						// Transform maxLength parameter and generate an additional alternative
 						transforms[maxLengthParam] = ExpressionLocalTransform(returnMod.maxLengthExpression)
-						generateAlternativeMethod(name, "$returnType return (w/ implicit max length) version of:", transforms)
+						generateAlternativeMethod(name, "String return (w/ implicit max length) version of:", transforms)
 					}
-				}
+				} else
+					throw IllegalStateException()
 			} else if ( it has MultiType ) {
 				// Generate MultiType alternatives
 

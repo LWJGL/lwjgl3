@@ -241,8 +241,10 @@ class MultiType(vararg val types: PointerMapping) : ParameterModifier() {
 class Return(
 	/** The parameter that returns the actual buffer size */
 	val lengthParam: String,
-	/** An expression that defines the maxLength value. If defined, an additional alternative method will be generated. */
-	val maxLengthExpression: String? = null
+	/** An expression that defines the maximum length value. If defined, an additional alternative method will be generated. */
+	val maxLengthExpression: String? = null,
+	/** When true, any temporary buffers will be allocated on the heap. */
+    val heapAllocate: Boolean = false
 ) : ParameterModifier() {
 	companion object : ModifierKey<Return>
 
@@ -259,6 +261,9 @@ class Return(
 
 		if ( this !== ReturnParam && param.nativeType !is CharSequenceType && !lengthParam.startsWith(RESULT) )
 			throw IllegalArgumentException("The Return modifier can only be applied on CharSequence parameters.")
+
+		if ( heapAllocate && param.nativeType !is CharSequenceType )
+			throw IllegalArgumentException("The heapAllocate option can only be enabled with CharSequence parameters.")
 	}
 }
 

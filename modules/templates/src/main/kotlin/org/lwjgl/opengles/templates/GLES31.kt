@@ -727,7 +727,8 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 		Check(1)..nullable..GLsizei_p.OUT("length", ""),
 		Return(
 			"length",
-			"glGetProgramPipelinei(pipeline, GLES20.GL_INFO_LOG_LENGTH)"
+			"glGetProgramPipelinei(pipeline, GLES20.GL_INFO_LOG_LENGTH)",
+			heapAllocate = true
 		)..GLcharUTF8_p.OUT("infoLog", "")
 	)
 

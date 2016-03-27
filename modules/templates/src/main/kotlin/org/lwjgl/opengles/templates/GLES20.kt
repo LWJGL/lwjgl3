@@ -892,7 +892,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		Check(1)..nullable..GLsizei_p.OUT("length", ""),
 		Return(
 			"length",
-			"glGetProgrami(program, GL_INFO_LOG_LENGTH)"
+			"glGetProgrami(program, GL_INFO_LOG_LENGTH)",
+			heapAllocate = true
 		)..GLcharUTF8_p.OUT("infoLog", "")
 	)
 
@@ -923,7 +924,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		Check(1)..nullable..GLsizei_p.OUT("length", ""),
 		Return(
 			"length",
-			"glGetShaderi(shader, GL_INFO_LOG_LENGTH)"
+			"glGetShaderi(shader, GL_INFO_LOG_LENGTH)",
+			heapAllocate = true
 		)..GLcharUTF8_p.OUT("infoLog", "")
 	)
 
@@ -944,7 +946,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		GLuint.IN("shader", ""),
 		AutoSize("source")..GLsizei.IN("bufSize", ""),
 		Check(1)..nullable..GLsizei_p.OUT("length", ""),
-		Return("length", "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)")..GLcharUTF8_p.OUT("source", "")
+		Return("length", "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)", heapAllocate = true)..GLcharUTF8_p.OUT("source", "")
 	)
 
 	GLubyteString(

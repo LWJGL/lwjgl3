@@ -480,7 +480,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		),
 		Return(
 			"length",
-			"glGetObjectParameteriARB(obj, GL_OBJECT_INFO_LOG_LENGTH_ARB)"
+			"glGetObjectParameteriARB(obj, GL_OBJECT_INFO_LOG_LENGTH_ARB)",
+			heapAllocate = true
 		)..GLcharARB_p.OUT("infoLog", "a buffer in which to return the info log")
 	)
 
@@ -610,7 +611,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		),
 		Return(
 			"length",
-			"glGetObjectParameteriARB(obj, GL_OBJECT_SHADER_SOURCE_LENGTH_ARB)"
+			"glGetObjectParameteriARB(obj, GL_OBJECT_SHADER_SOURCE_LENGTH_ARB)",
+			heapAllocate = true
 		)..GLcharARB_p.OUT("source", "a buffer in which to return the shader object source")
 	)
 }

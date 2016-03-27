@@ -123,7 +123,8 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
 		Check(1)..nullable..GLsizei_p.OUT("length", ""),
 		Return(
 			"length",
-			"glGetProgramPipelineiEXT(pipeline, GLES20.GL_INFO_LOG_LENGTH)"
+			"glGetProgramPipelineiEXT(pipeline, GLES20.GL_INFO_LOG_LENGTH)",
+			heapAllocate = true
 		)..GLcharUTF8_p.OUT("infoLog", "")
 	)
 

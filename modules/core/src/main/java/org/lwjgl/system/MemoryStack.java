@@ -175,10 +175,10 @@ public class MemoryStack {
 	public long nmalloc(int alignment, int size) {
 		int newPointer = pointer - size;
 
-		if ( CHECKS ) {
+		if ( DEBUG )
 			checkAlignment(alignment);
+		if ( CHECKS )
 			checkPointer(newPointer);
-		}
 
 		// Align pointer to the specified alignment
 		newPointer &= ~(alignment - 1);
