@@ -51,7 +51,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 	}
 
 	private static long CString2CFString(ByteBuffer name, int encoding) {
-		long string = CFStringCreateWithCStringNoCopy(NULL, name, encoding, kCFAllocatorMalloc());
+		long string = CFStringCreateWithCStringNoCopy(NULL, name, encoding, kCFAllocatorNull());
 		if ( string == NULL )
 			throw new NullPointerException();
 
