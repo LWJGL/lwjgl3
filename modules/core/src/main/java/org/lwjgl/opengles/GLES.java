@@ -70,7 +70,7 @@ public final class GLES {
 		else
 			throw new IllegalStateException("Invalid " + Configuration.OPENGLES_CAPABILITIES_STATE.getProperty() + " specified.");
 
-		if ( !Configuration.OPENGLES_EXPLICIT_INIT.<Boolean>get() )
+		if ( !Configuration.OPENGLES_EXPLICIT_INIT.get() )
 			create();
 	}
 

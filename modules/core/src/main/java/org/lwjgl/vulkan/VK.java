@@ -28,7 +28,7 @@ public final class VK {
 	private static VKCapabilities globalCommands;
 
 	static {
-		if ( !Configuration.VULKAN_EXPLICIT_INIT.<Boolean>get() )
+		if ( !Configuration.VULKAN_EXPLICIT_INIT.get() )
 			create();
 	}
 

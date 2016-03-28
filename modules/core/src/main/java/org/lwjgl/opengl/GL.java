@@ -70,7 +70,7 @@ public final class GL {
 		else
 			throw new IllegalStateException("Invalid " + Configuration.OPENGL_CAPABILITIES_STATE.getProperty() + " specified.");
 
-		if ( !Configuration.OPENGL_EXPLICIT_INIT.<Boolean>get() )
+		if ( !Configuration.OPENGL_EXPLICIT_INIT.get() )
 			create();
 	}
 

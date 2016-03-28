@@ -5,7 +5,6 @@
 package org.lwjgl.system.macosx;
 
 import org.lwjgl.system.SharedLibrary;
-import org.lwjgl.system.libc.Stdlib;
 
 import java.nio.ByteBuffer;
 

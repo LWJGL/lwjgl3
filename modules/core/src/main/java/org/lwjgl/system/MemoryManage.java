@@ -26,7 +26,7 @@ final class MemoryManage {
 	}
 
 	static MemoryAllocator getInstance() {
-		Object allocator = Configuration.MEMORY_ALLOCATOR.<Object>get("jemalloc");
+		Object allocator = Configuration.MEMORY_ALLOCATOR.get("jemalloc");
 		if ( allocator instanceof MemoryAllocator )
 			return (MemoryAllocator)allocator;
 
