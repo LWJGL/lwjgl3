@@ -15,7 +15,6 @@ import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.WGL.*;
-import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jawt.JAWTFunctions.*;
 import static org.lwjgl.system.windows.GDI32.*;
@@ -76,7 +75,7 @@ public class LWJGLCanvas extends Canvas {
 							createContext(dsi_win);
 							gears.initGLState();
 						} else {
-							if ( callPPI(caps.wglMakeCurrent, hdc, hglrc) == 0 )
+							if ( wglMakeCurrent(hdc, hglrc) == 0 )
 								throw new IllegalStateException("wglMakeCurrent() failed");
 
 							GL.setCapabilities(caps);
@@ -134,12 +133,12 @@ public class LWJGLCanvas extends Canvas {
 					throw new IllegalStateException("SetPixelFormat() failed: " + WinBase.getLastError());
 			}
 
-			hglrc = callPP(caps.wglCreateContext, hdc);
+			hglrc = wglCreateContext(hdc);
 
 			if ( hglrc == NULL )
 				throw new IllegalStateException("wglCreateContext() failed");
 
-			if ( callPPI(caps.wglMakeCurrent, hdc, hglrc) == 0 )
+			if ( wglMakeCurrent(hdc, hglrc) == 0 )
 				throw new IllegalStateException("wglMakeCurrent() failed");
 
 			caps = GL.createCapabilities();
@@ -152,7 +151,7 @@ public class LWJGLCanvas extends Canvas {
 		awt.free();
 
 		if ( hglrc != NULL )
-			callPI(caps.wglDeleteContext, hglrc);
+			wglDeleteContext(hglrc);
 	}
 
 }

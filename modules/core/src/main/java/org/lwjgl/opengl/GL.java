@@ -141,18 +141,19 @@ public final class GL {
 					break;
 				case LINUX:
 					functionProvider = new FunctionProviderGL() {
-						private final long glXGetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddress");
-						private final long glXGetProcAddressARB = OPENGL.getFunctionAddress("glXGetProcAddressARB");
+						private final long glXGetProcAddress;
+
+						{
+							long GetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddress");
+							if ( GetProcAddress == NULL )
+								GetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddressARB");
+
+							glXGetProcAddress = GetProcAddress;
+						}
 
 						@Override
 						long getExtensionAddress(long name) {
-							if ( glXGetProcAddress != NULL )
-								return callPP(glXGetProcAddress, name);
-
-							if ( glXGetProcAddressARB != NULL )
-								return callPP(glXGetProcAddressARB, name);
-
-							return NULL;
+							return glXGetProcAddress == NULL ? NULL : callPP(glXGetProcAddress, name);
 						}
 					};
 					break;

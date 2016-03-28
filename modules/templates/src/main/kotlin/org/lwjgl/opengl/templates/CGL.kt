@@ -8,7 +8,13 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.macosx.*
 
-val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL", prefixConstant = "kCGL", binding = GLBinding) {
+val CGL = "CGL".nativeClass(
+	OPENGL_PACKAGE,
+	prefix = "CGL",
+	prefixConstant = "kCGL",
+	prefixMethod = "CGL",
+	binding = GLBinding.delegate("GL.getFunctionProvider()")
+) {
 	documentation = "Native bindings to CGL."
 
 	// -----------------------------------------------

@@ -210,7 +210,6 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 
 fun String.nativeClassGL(
 	templateName: String,
-	nativeSubPath: String = "",
 	prefix: String = "GL",
 	prefixMethod: String = prefix.toLowerCase(),
 	postfix: String = "",
@@ -218,7 +217,6 @@ fun String.nativeClassGL(
 ) = nativeClass(
 	OPENGL_PACKAGE,
 	templateName,
-	nativeSubPath = nativeSubPath,
 	prefix = prefix,
 	prefixMethod = prefixMethod,
 	postfix = postfix,
@@ -227,10 +225,10 @@ fun String.nativeClassGL(
 )
 
 fun String.nativeClassWGL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-	nativeClassGL(templateName, "wgl", "WGL", postfix = postfix, init = init)
+	nativeClassGL(templateName, "WGL", postfix = postfix, init = init)
 
 fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-	nativeClassGL(templateName, "glx", "GLX", "glX", postfix, init)
+	nativeClassGL(templateName, "GLX", "glX", postfix, init)
 
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
 val NativeClass.registryLink: String get() {

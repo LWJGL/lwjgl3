@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-val GLX = "GLX".nativeClassGLX("GLX") {
+val GLX = "GLX".nativeClass(OPENGL_PACKAGE, prefix = "GLX", prefixMethod = "glX", binding = GLBinding.delegate("GL.getFunctionProvider()")) {
 	javaImport(
 		"org.lwjgl.system.linux.*"
 	)

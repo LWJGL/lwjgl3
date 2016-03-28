@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-val WGL = "WGL".nativeClassWGL("WGL") {
+val WGL = "WGL".nativeClass(OPENGL_PACKAGE, prefix = "WGL", binding = GLBinding.delegate("GL.getFunctionProvider()")) {
 	javaImport(
 		"org.lwjgl.system.windows.*"
 	)
