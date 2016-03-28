@@ -166,15 +166,8 @@ public final class CL {
 
 				@Override
 				public long getFunctionAddress(long handle, ByteBuffer functionName) {
-					MemoryStack stack = stackPush();
-					try {
-						long address = callPPP(clGetExtensionFunctionAddressForPlatform, handle, memAddress(functionName));
-						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-							apiLog("Failed to locate address for CL function " + functionName);
-						return address;
-					} finally {
-						stack.pop();
-					}
+					long address = callPPP(clGetExtensionFunctionAddressForPlatform, handle, memAddress(functionName));
+					return address != NULL ? address : getFunctionAddress(functionName);
 				}
 
 				@Override

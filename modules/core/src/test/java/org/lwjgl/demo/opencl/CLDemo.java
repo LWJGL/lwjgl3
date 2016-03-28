@@ -81,8 +81,6 @@ public final class CLDemo {
 				CLCapabilities caps = CL.createDeviceCapabilities(device, platformCaps);
 
 				System.out.printf("\n\t** NEW DEVICE: [0x%X]\n", device);
-				System.out.print("\t");
-				System.out.println(caps);
 
 				System.out.println("\tCL_DEVICE_TYPE = " + getDeviceInfoLong(device, CL_DEVICE_TYPE));
 				System.out.println("\tCL_DEVICE_VENDOR_ID = " + getDeviceInfoInt(device, CL_DEVICE_VENDOR_ID));
