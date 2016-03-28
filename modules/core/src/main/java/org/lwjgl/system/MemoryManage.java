@@ -33,7 +33,7 @@ final class MemoryManage {
 		if ( "jemalloc".equals(allocator) ) {
 			try {
 				// check if the jemalloc library is available
-				Class.forName("org.lwjgl.system.jemalloc.JEmalloc").getMethod("getInstance").invoke(null);
+				Class.forName("org.lwjgl.system.jemalloc.JEmalloc").getMethod("getLibrary").invoke(null);
 				return new JEmallocAllocator();
 			} catch (Throwable t) {
 				if ( Checks.DEBUG )
