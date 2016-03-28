@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
@@ -498,7 +498,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"SAMPLES"..0x0002100D,
 		"SRGB_CAPABLE"..0x0002100E,
 		"REFRESH_RATE"..0x0002100F,
-		"DOUBLE_BUFFER"..0x00021010
+		"DOUBLEBUFFER"..0x00021010
 	).javaDocLinks
 
 	val ClientAPIHints = IntConstant(
