@@ -158,7 +158,7 @@ public final class CL {
 					if ( address == NULL ) {
 						address = OPENCL.getFunctionAddress(functionName);
 						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-							apiLog("Failed to locate address for CL function " + functionName);
+							apiLog("Failed to locate address for CL function " + memDecodeASCII(functionName));
 					}
 
 					return address;

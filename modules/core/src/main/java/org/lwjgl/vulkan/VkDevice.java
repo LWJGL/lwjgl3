@@ -41,7 +41,7 @@ public class VkDevice extends DispatchableHandle {
 						if ( address == NULL ) {
 							address = VK.getFunctionProvider().getFunctionAddress(functionName);
 							if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-								apiLog("Failed to locate address for VK device function " + functionName);
+								apiLog("Failed to locate address for VK device function " + memDecodeASCII(functionName));
 						}
 					}
 

@@ -75,7 +75,7 @@ public final class AL {
 			public long getFunctionAddress(ByteBuffer functionName) {
 				long address = invokePP(alGetProcAddress, memAddress(functionName));
 				if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-					apiLog("Failed to locate address for AL function " + functionName);
+					apiLog("Failed to locate address for AL function " + memDecodeASCII(functionName));
 				return address;
 			}
 

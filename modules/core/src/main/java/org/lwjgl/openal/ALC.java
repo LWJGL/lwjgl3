@@ -91,7 +91,7 @@ public final class ALC {
 				public long getFunctionAddress(ByteBuffer functionName) {
 					long address = OPENAL.getFunctionAddress(functionName);
 					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-						apiLog("Failed to locate address for ALC core function " + functionName);
+						apiLog("Failed to locate address for ALC core function " + memDecodeASCII(functionName));
 					return address;
 				}
 
@@ -99,7 +99,7 @@ public final class ALC {
 				public long getFunctionAddress(long handle, ByteBuffer functionName) {
 					long address = invokePPP(alcGetProcAddress, handle, memAddress(functionName));
 					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-						apiLog("Failed to locate address for ALC extension function " + functionName);
+						apiLog("Failed to locate address for ALC extension function " + memDecodeASCII(functionName));
 					return address;
 				}
 

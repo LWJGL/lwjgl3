@@ -114,7 +114,7 @@ public final class GL {
 				if ( address == NULL ) {
 					address = OPENGL.getFunctionAddress(functionName);
 					if ( address == NULL && DEBUG_FUNCTIONS )
-						apiLog("Failed to locate address for GL function " + functionName);
+						apiLog("Failed to locate address for GL function " + memDecodeASCII(functionName));
 				}
 
 				return address;
