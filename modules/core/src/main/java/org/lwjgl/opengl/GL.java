@@ -438,7 +438,7 @@ public final class GL {
 				.style(CS_HREDRAW | CS_VREDRAW)
 				.lpfnWndProc(User32.Functions.DefWindowProc)
 				.hInstance(WindowsLibrary.HINSTANCE)
-				.lpszClassName(memEncodeUTF16("WGL", stack));
+				.lpszClassName(stack.UTF16("WGL"));
 
 			short classAtom = RegisterClassEx(wc);
 			if ( classAtom == 0 )

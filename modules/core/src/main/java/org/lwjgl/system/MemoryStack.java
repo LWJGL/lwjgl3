@@ -400,6 +400,80 @@ public class MemoryStack {
 		return buffer;
 	}
 
+	// -------------------------------------------------
+
+	/**
+	 * Encodes the specified text on the stack using ASCII encoding and returns a ByteBuffer that points to the encoded text, including a null-terminator.
+	 *
+	 * @param text the text to encode. If {@code text} is null, null is returned.
+	 */
+	public ByteBuffer ASCII(CharSequence text) {
+		return ASCII(text, true);
+	}
+
+	/**
+	 * Encodes the specified text on the stack using ASCII encoding and returns a ByteBuffer that points to the encoded text.
+	 *
+	 * @param text           the text to encode. If {@code text} is null, null is returned.
+	 * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
+	 */
+	public ByteBuffer ASCII(CharSequence text, boolean nullTerminated) {
+		if ( text == null )
+			return null;
+
+		ByteBuffer encoded = malloc(text.length() + (nullTerminated ? 1 : 0));
+		memEncodeASCII(text, nullTerminated, encoded);
+		return encoded;
+	}
+
+	/**
+	 * Encodes the specified text on the stack using UTF8 encoding and returns a ByteBuffer that points to the encoded text, including a null-terminator.
+	 *
+	 * @param text the text to encode. If {@code text} is null, null is returned.
+	 */
+	public ByteBuffer UTF8(CharSequence text) {
+		return UTF8(text, true);
+	}
+
+	/**
+	 * Encodes the specified text on the stack using UTF8 encoding and returns a ByteBuffer that points to the encoded text.
+	 *
+	 * @param text           the text to encode. If {@code text} is null, null is returned.
+	 * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
+	 */
+	public ByteBuffer UTF8(CharSequence text, boolean nullTerminated) {
+		if ( text == null )
+			return null;
+
+		ByteBuffer encoded = malloc(memEncodedLengthUTF8(text) + (nullTerminated ? 1 : 0));
+		memEncodeUTF8(text, nullTerminated, encoded);
+		return encoded;
+	}
+
+	/**
+	 * Encodes the specified text on the stack using UTF16 encoding and returns a ByteBuffer that points to the encoded text, including a null-terminator.
+	 *
+	 * @param text the text to encode. If {@code text} is null, null is returned.
+	 */
+	public ByteBuffer UTF16(CharSequence text) {
+		return UTF16(text, true);
+	}
+
+	/**
+	 * Encodes the specified text on the stack using UTF16 encoding and returns a ByteBuffer that points to the encoded text.
+	 *
+	 * @param text           the text to encode. If {@code text} is null, null is returned.
+	 * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
+	 */
+	public ByteBuffer UTF16(CharSequence text, boolean nullTerminated) {
+		if ( text == null )
+			return null;
+
+		ByteBuffer encoded = malloc((text.length() + (nullTerminated ? 1 : 0)) << 1);
+		memEncodeUTF16(text, nullTerminated, encoded);
+		return encoded;
+	}
+
 	// -----------------------------------------------------
 	// -----------------------------------------------------
 	// -----------------------------------------------------
@@ -570,5 +644,25 @@ public class MemoryStack {
 	public static PointerBuffer stackPointers(Pointer x, Pointer y, Pointer z, Pointer w) { return stackGet().pointers(x, y, z, w); }
 	/** Thread-local version of {@link #pointers(Pointer...)}. */
 	public static PointerBuffer stackPointers(Pointer... values) { return stackGet().pointers(values); }
+
+	// -------------------------------------------------
+
+	/** Thread-local version of {@link #ASCII(CharSequence)}. */
+	public static ByteBuffer stackASCII(CharSequence text) { return stackGet().ASCII(text); }
+
+	/** Thread-local version of {@link #ASCII(CharSequence, boolean)}. */
+	public static ByteBuffer stackASCII(CharSequence text, boolean nullTerminated) { return stackGet().ASCII(text, nullTerminated); }
+
+	/** Thread-local version of {@link #UTF8(CharSequence)}. */
+	public static ByteBuffer stackUTF8(CharSequence text) { return stackGet().UTF8(text); }
+
+	/** Thread-local version of {@link #UTF8(CharSequence, boolean)}. */
+	public static ByteBuffer stackUTF8(CharSequence text, boolean nullTerminated) { return stackGet().UTF8(text, nullTerminated); }
+
+	/** Thread-local version of {@link #UTF16(CharSequence)}. */
+	public static ByteBuffer stackUTF16(CharSequence text) { return stackGet().UTF16(text); }
+
+	/** Thread-local version of {@link #UTF16(CharSequence, boolean)}. */
+	public static ByteBuffer stackUTF16(CharSequence text, boolean nullTerminated) { return stackGet().UTF16(text, nullTerminated); }
 
 }

@@ -150,7 +150,10 @@ class CharSequenceTransform(
 		writer.print("\t\t\tByteBuffer ${qtype.name}Encoded = ")
 		if ( qtype has nullable )
 			writer.print("${qtype.name} == null ? null : ")
-		writer.println("memEncode${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}, $nullTerminated, stack);")
+		writer.print("stack.${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}")
+		if ( !nullTerminated )
+			writer.print(", false")
+		writer.println(");")
 		if ( !nullTerminated )
 			writer.println("\t\t\tint ${qtype.name}EncodedLen = ${qtype.name}Encoded.capacity();")
 	}

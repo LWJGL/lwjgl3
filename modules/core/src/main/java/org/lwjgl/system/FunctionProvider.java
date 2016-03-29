@@ -7,7 +7,6 @@ package org.lwjgl.system;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /** A provider of native function addresses. */
 public interface FunctionProvider {
@@ -33,7 +32,7 @@ public interface FunctionProvider {
 		public long getFunctionAddress(CharSequence functionName) {
 			MemoryStack stack = stackPush();
 			try {
-				return getFunctionAddress(memEncodeASCII(functionName, true, stack));
+				return getFunctionAddress(stack.ASCII(functionName, true));
 			} finally {
 				stack.pop();
 			}

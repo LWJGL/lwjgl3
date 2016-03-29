@@ -196,7 +196,7 @@ public final class AL {
 				String extName = tokenizer.nextToken();
 				stack.push();
 				try {
-					if ( invokePZ(IsExtensionPresent, memAddress(memEncodeASCII(extName, true, stack))) )
+					if ( invokePZ(IsExtensionPresent, memAddress(stack.ASCII(extName, true))) )
 						supportedExtensions.add(extName);
 				} finally {
 					stack.pop();

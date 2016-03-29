@@ -207,7 +207,7 @@ public final class ALC {
 			String extName = tokenizer.nextToken();
 			stack.push();
 			try {
-				if ( invokePPZ(IsExtensionPresent, device, memAddress(memEncodeASCII(extName, true, stack))) )
+				if ( invokePPZ(IsExtensionPresent, device, memAddress(stack.ASCII(extName, true))) )
 					supportedExtensions.add(extName);
 			} finally {
 				stack.pop();

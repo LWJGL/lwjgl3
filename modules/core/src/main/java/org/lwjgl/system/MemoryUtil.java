@@ -1319,18 +1319,6 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Same as {@link #memEncodeASCII(CharSequence)}, with a stack to use for allocating the returned buffer.
-	 *
-	 * @param text  the text to encode
-	 * @param stack the {@link MemoryStack} to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeASCII(CharSequence text, MemoryStack stack) {
-		return memEncodeASCII(text, true, stack);
-	}
-
-	/**
 	 * Returns a ByteBuffer containing the specified text ASCII encoded and optionally null-terminated. If text is null, null is returned.
 	 *
 	 * @param text           the text to encode
@@ -1356,24 +1344,6 @@ public final class MemoryUtil {
 			return null;
 
 		ByteBuffer target = allocator.allocate(text.length() + (nullTerminated ? 1 : 0));
-		memEncodeASCII(text, nullTerminated, target);
-		return target;
-	}
-
-	/**
-	 * Same as {@link #memEncodeASCII(CharSequence, boolean)}, with a stack to use for allocating the returned buffer.
-	 *
-	 * @param text           the text to encode
-	 * @param nullTerminated if true, the text will be terminated with a '\0'.
-	 * @param stack          the {@link MemoryStack} to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeASCII(CharSequence text, boolean nullTerminated, MemoryStack stack) {
-		if ( text == null )
-			return null;
-
-		ByteBuffer target = stack.malloc(text.length() + (nullTerminated ? 1 : 0));
 		memEncodeASCII(text, nullTerminated, target);
 		return target;
 	}
@@ -1431,18 +1401,6 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Same as {@link #memEncodeUTF8(CharSequence)}, with a stack to use for allocating the returned buffer.
-	 *
-	 * @param text  the text to encode
-	 * @param stack the {@link MemoryStack} to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeUTF8(CharSequence text, MemoryStack stack) {
-		return memEncodeUTF8(text, true, stack);
-	}
-
-	/**
 	 * Returns a ByteBuffer containing the specified text UTF-8 encoded and optionally null-terminated. If text is null, null is returned.
 	 *
 	 * @param text           the text to encode
@@ -1468,24 +1426,6 @@ public final class MemoryUtil {
 			return null;
 
 		ByteBuffer target = allocator.allocate(memEncodedLengthUTF8(text) + (nullTerminated ? 1 : 0));
-		memEncodeUTF8(text, nullTerminated, target);
-		return target;
-	}
-
-	/**
-	 * Same as {@link #memEncodeUTF8(CharSequence, boolean)}, with a stack to use for allocating the returned buffer.
-	 *
-	 * @param text           the text to encode
-	 * @param nullTerminated if true, the text will be terminated with a '\0'.
-	 * @param stack          the {@link MemoryStack} to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeUTF8(CharSequence text, boolean nullTerminated, MemoryStack stack) {
-		if ( text == null )
-			return null;
-
-		ByteBuffer target = stack.malloc(memEncodedLengthUTF8(text) + (nullTerminated ? 1 : 0));
 		memEncodeUTF8(text, nullTerminated, target);
 		return target;
 	}
@@ -1556,18 +1496,6 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Same as {@link #memEncodeUTF16(CharSequence)}, with a stack to use for allocating the returned buffer.
-	 *
-	 * @param text  the text to encode
-	 * @param stack the {@link MemoryStack} to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeUTF16(CharSequence text, MemoryStack stack) {
-		return memEncodeUTF16(text, true, stack);
-	}
-
-	/**
 	 * Returns a ByteBuffer containing the specified text UTF-16 encoded and optionally null-terminated. If text is null, null is returned.
 	 *
 	 * @param text           the text to encode
@@ -1593,24 +1521,6 @@ public final class MemoryUtil {
 			return null;
 
 		ByteBuffer target = allocator.allocate((text.length() + (nullTerminated ? 1 : 0)) << 1);
-		memEncodeUTF16(text, nullTerminated, target);
-		return target;
-	}
-
-	/**
-	 * Same as {@link #memEncodeUTF16(CharSequence, boolean)}, with a stack to use for allocating the returned buffer.
-	 *
-	 * @param text           the text to encode
-	 * @param nullTerminated if true, the text will be terminated with a '\0'.
-	 * @param stack          the {@link MemoryStack} to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeUTF16(CharSequence text, boolean nullTerminated, MemoryStack stack) {
-		if ( text == null )
-			return null;
-
-		ByteBuffer target = stack.malloc((text.length() + (nullTerminated ? 1 : 0)) << 1);
 		memEncodeUTF16(text, nullTerminated, target);
 		return target;
 	}
