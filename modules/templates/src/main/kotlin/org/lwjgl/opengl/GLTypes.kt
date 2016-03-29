@@ -238,6 +238,8 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	}
 	"""
 }
+// NV_draw_vulkan_image
+val VULKANPROCNV = "VULKANPROCNV".opaque_p
 // NV_gpu_shader5
 val GLint64EXT = IntegerType("GLint64EXT", PrimitiveMapping.LONG)
 val GLint64EXT_p = GLint64EXT.p

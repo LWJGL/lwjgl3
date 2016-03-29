@@ -1025,6 +1025,7 @@ val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGL("KHR_texture
 }
 
 val NV_blend_square = EXT_FLAG.nativeClassGL("NV_blend_square", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
+val NV_ES3_1_compatibility = EXT_FLAG.nativeClassGL("NV_ES3_1_compatibility", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
 val NV_fragment_program4 = EXT_FLAG.nativeClassGL("NV_fragment_program4", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
 val NV_fragment_program_option = EXT_FLAG.nativeClassGL("NV_fragment_program_option", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
 val NV_fragment_shader_interlock = EXT_FLAG.nativeClassGL("NV_fragment_shader_interlock", postfix = NV) {
