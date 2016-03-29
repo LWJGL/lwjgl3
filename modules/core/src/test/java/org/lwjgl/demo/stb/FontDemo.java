@@ -56,7 +56,7 @@ abstract class FontDemo {
 
 		try {
 			ByteBuffer source = ioResourceToByteBuffer(filePath, 4 * 1024);
-			t = memDecodeUTF8(source).replaceAll("\t", "    "); // Replace tabs
+			t = memUTF8(source).replaceAll("\t", "    "); // Replace tabs
 
 			lc = 0;
 			Matcher m = Pattern.compile("^.*$", Pattern.MULTILINE).matcher(t);

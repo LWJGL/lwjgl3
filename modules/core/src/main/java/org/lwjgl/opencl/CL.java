@@ -143,7 +143,7 @@ public final class CL {
 					if ( errcode != CL_SUCCESS )
 						return false;
 
-					APIVersion apiVersion = apiParseVersion(memDecodeASCII(version, bytes - 1), "OpenCL");
+					APIVersion apiVersion = apiParseVersion(memASCII(version, bytes - 1), "OpenCL");
 					return 1 < apiVersion.major || 2 <= apiVersion.minor;
 				}
 
@@ -158,7 +158,7 @@ public final class CL {
 					if ( address == NULL ) {
 						address = OPENCL.getFunctionAddress(functionName);
 						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-							apiLog("Failed to locate address for CL function " + memDecodeASCII(functionName));
+							apiLog("Failed to locate address for CL function " + memASCII(functionName));
 					}
 
 					return address;

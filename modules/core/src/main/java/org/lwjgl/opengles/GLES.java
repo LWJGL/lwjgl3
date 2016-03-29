@@ -228,7 +228,7 @@ public final class GLES {
 					if ( versionString == NULL || invokeI(GetError) != GL_NO_ERROR )
 						throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
 
-					APIVersion version = apiParseVersion(memDecodeUTF8(versionString), "OpenGL ES");
+					APIVersion version = apiParseVersion(memUTF8(versionString), "OpenGL ES");
 
 					majorVersion = version.major;
 					minorVersion = version.minor;
@@ -264,7 +264,7 @@ public final class GLES {
 
 			if ( majorVersion < 3 ) {
 				// Parse EXTENSIONS string
-				String extensionsString = memDecodeASCII(checkPointer(invokeIP(GetString, GL_EXTENSIONS)));
+				String extensionsString = memASCII(checkPointer(invokeIP(GetString, GL_EXTENSIONS)));
 
 				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 				while ( tokenizer.hasMoreTokens() )
@@ -285,7 +285,7 @@ public final class GLES {
 
 				long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
 				for ( int i = 0; i < extensionCount; i++ )
-					supportedExtensions.add(memDecodeASCII(checkPointer(callIIP(GetStringi, GL_EXTENSIONS, i))));
+					supportedExtensions.add(memASCII(checkPointer(callIIP(GetStringi, GL_EXTENSIONS, i))));
 			}
 
 			caps = new GLESCapabilities(getFunctionProvider(), supportedExtensions);

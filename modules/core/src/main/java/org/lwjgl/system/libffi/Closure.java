@@ -125,7 +125,7 @@ public abstract class Closure extends Pointer.Default {
 				buffer.append("\n    at ");
 				buffer.append(stackTrace[i].toString());
 			}
-			memPutAddress(user_data + POINTER_SIZE, memAddress(memEncodeUTF8(buffer.toString(), true, BufferAllocator.MALLOC)));
+			memPutAddress(user_data + POINTER_SIZE, memAddress(memUTF8(buffer.toString())));
 		} else
 			memPutAddress(user_data + POINTER_SIZE, classPath); // just the closure class
 

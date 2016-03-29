@@ -421,8 +421,8 @@ public class MemoryStack {
 		if ( text == null )
 			return null;
 
-		ByteBuffer encoded = malloc(text.length() + (nullTerminated ? 1 : 0));
-		memEncodeASCII(text, nullTerminated, encoded);
+		ByteBuffer encoded = malloc(memLengthASCII(text, nullTerminated));
+		memASCII(text, nullTerminated, encoded);
 		return encoded;
 	}
 
@@ -445,8 +445,8 @@ public class MemoryStack {
 		if ( text == null )
 			return null;
 
-		ByteBuffer encoded = malloc(memEncodedLengthUTF8(text) + (nullTerminated ? 1 : 0));
-		memEncodeUTF8(text, nullTerminated, encoded);
+		ByteBuffer encoded = malloc(memLengthUTF8(text, nullTerminated));
+		memUTF8(text, nullTerminated, encoded);
 		return encoded;
 	}
 
@@ -469,8 +469,8 @@ public class MemoryStack {
 		if ( text == null )
 			return null;
 
-		ByteBuffer encoded = malloc((text.length() + (nullTerminated ? 1 : 0)) << 1);
-		memEncodeUTF16(text, nullTerminated, encoded);
+		ByteBuffer encoded = malloc(memLengthUTF16(text, nullTerminated));
+		memUTF16(text, nullTerminated, encoded);
 		return encoded;
 	}
 

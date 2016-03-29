@@ -32,7 +32,7 @@ public final class InfoUtil {
 			ByteBuffer buffer = stack.malloc(bytes);
 			checkCLError(clGetPlatformInfo(cl_platform_id, param_name, buffer, null));
 
-			return memDecodeASCII(buffer, bytes - 1);
+			return memASCII(buffer, bytes - 1);
 		} finally {
 			stack.pop();
 		}
@@ -48,7 +48,7 @@ public final class InfoUtil {
 			ByteBuffer buffer = stack.malloc(bytes);
 			checkCLError(clGetPlatformInfo(cl_platform_id, param_name, buffer, null));
 
-			return memDecodeUTF8(buffer, bytes - 1);
+			return memUTF8(buffer, bytes - 1);
 		} finally {
 			stack.pop();
 		}
@@ -97,7 +97,7 @@ public final class InfoUtil {
 			ByteBuffer buffer = stack.malloc(bytes);
 			checkCLError(clGetDeviceInfo(cl_device_id, param_name, buffer, null));
 
-			return memDecodeUTF8(buffer, bytes - 1);
+			return memUTF8(buffer, bytes - 1);
 		} finally {
 			stack.pop();
 		}
@@ -146,7 +146,7 @@ public final class InfoUtil {
 			ByteBuffer buffer = stack.malloc(bytes);
 			checkCLError(clGetProgramBuildInfo(cl_program_id, cl_device_id, param_name, buffer, null));
 
-			return memDecodeASCII(buffer, bytes - 1);
+			return memASCII(buffer, bytes - 1);
 		} finally {
 			stack.pop();
 		}

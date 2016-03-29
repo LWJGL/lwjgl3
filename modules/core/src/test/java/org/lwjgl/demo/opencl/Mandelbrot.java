@@ -225,7 +225,7 @@ public class Mandelbrot {
 			clContext = clCreateContext(ctxProps, device, clContextCB = new CLContextCallback() {
 				@Override
 				public void invoke(long errinfo, long private_info, long cb, long user_data) {
-					log(String.format("cl_context_callback\n\tInfo: %s", memDecodeUTF8(errinfo)));
+					log(String.format("cl_context_callback\n\tInfo: %s", memUTF8(errinfo)));
 				}
 			}, NULL, errcode_ret);
 			checkCLError(errcode_ret);

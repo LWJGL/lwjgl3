@@ -4,7 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.system.libc.Stdlib;
 
 import java.nio.ByteBuffer;
@@ -19,16 +18,10 @@ public interface SharedLibrary extends FunctionProvider, Pointer {
 
 	abstract class Default extends Pointer.Default implements SharedLibrary {
 
-		/**
-		 * We use this allocator in {@link SharedLibrary} implementations to break a cyclic dependency with the default {@link MemoryUtil} allocator during
+		/*
+		 * We use Stdlib allocations in {@link SharedLibrary} implementations to break a cyclic dependency with the default {@link MemoryUtil} allocator during
 		 * LWJGL initialization.
 		 */
-		protected static final BufferAllocator SYSTEM_ALLOCATOR = new BufferAllocator() {
-			@Override
-			public ByteBuffer allocate(int size) {
-				return Stdlib.malloc(size);
-			}
-		};
 
 		private final String name;
 
@@ -44,12 +37,30 @@ public interface SharedLibrary extends FunctionProvider, Pointer {
 
 		@Override
 		public long getFunctionAddress(CharSequence functionName) {
-			ByteBuffer encoded = memEncodeASCII(functionName, SYSTEM_ALLOCATOR);
+			ByteBuffer encoded = encodeASCII(functionName);
 			try {
 				return getFunctionAddress(encoded);
 			} finally {
 				Stdlib.free(encoded);
 			}
+		}
+
+		protected static ByteBuffer encodeASCII(CharSequence text) {
+			ByteBuffer encoded = Stdlib.malloc(memLengthASCII(text, true));
+			memASCII(text, true, encoded);
+			return encoded;
+		}
+
+		protected static ByteBuffer encodeUTF8(CharSequence text) {
+			ByteBuffer encoded = Stdlib.malloc(memLengthUTF8(text, true));
+			memUTF8(text, true, encoded);
+			return encoded;
+		}
+
+		protected static ByteBuffer encodeUTF16(CharSequence text) {
+			ByteBuffer encoded = Stdlib.malloc(memLengthUTF16(text, true));
+			memUTF16(text, true, encoded);
+			return encoded;
 		}
 
 	}

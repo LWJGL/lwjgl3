@@ -59,11 +59,11 @@ public final class HelloVulkan {
 	private static final int DEMO_TEXTURE_COUNT    = 1;
 	private static final int VERTEX_BUFFER_BIND_ID = 0;
 
-	private static final ByteBuffer APP_SHORT_NAME = memEncodeUTF8("vulkan");
-	private static final ByteBuffer APP_LONG_NAME  = memEncodeUTF8("The Vulkan Triangle Demo Program");
+	private static final ByteBuffer APP_SHORT_NAME = memUTF8("vulkan");
+	private static final ByteBuffer APP_LONG_NAME  = memUTF8("The Vulkan Triangle Demo Program");
 
-	private static final ByteBuffer KHR_swapchain    = memEncodeASCII(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
-	private static final ByteBuffer EXT_debug_report = memEncodeASCII(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
+	private static final ByteBuffer KHR_swapchain    = memASCII(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
+	private static final ByteBuffer EXT_debug_report = memASCII(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
 
 	private static final byte[] fragShaderCode = {
 		0x03, 0x02, 0x23, 0x07, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x08, 0x00,
@@ -292,9 +292,9 @@ public final class HelloVulkan {
 		@Override
 		public int invoke(int flags, int objectType, long object, long location, int messageCode, long pLayerPrefix, long pMessage, long pUserData) {
 			if ( (flags & VK_DEBUG_REPORT_ERROR_BIT_EXT) != 0 ) {
-				System.err.format("ERROR: [%s] Code %d : %s\n", pLayerPrefix, messageCode, memDecodeASCII(pMessage));
+				System.err.format("ERROR: [%s] Code %d : %s\n", pLayerPrefix, messageCode, memASCII(pMessage));
 			} else if ( (flags & VK_DEBUG_REPORT_WARNING_BIT_EXT) != 0 ) {
-				System.err.format("WARNING: [%s] Code %d : %s\n", pLayerPrefix, messageCode, memDecodeASCII(pMessage));
+				System.err.format("WARNING: [%s] Code %d : %s\n", pLayerPrefix, messageCode, memASCII(pMessage));
 			}
 
 			/*
@@ -349,17 +349,17 @@ public final class HelloVulkan {
 	private void demo_init_vk() {
 		if ( validate ) {
 			device_validation_layers
-				//.put(memEncodeASCII("VK_LAYER_LUNARG_standard_validation", BufferAllocator.MALLOC))
-				//.put(memEncodeASCII("VK_LAYER_LUNARG_api_dump", BufferAllocator.MALLOC))
-				.put(memEncodeASCII("VK_LAYER_LUNARG_device_limits", BufferAllocator.MALLOC))
-				.put(memEncodeASCII("VK_LAYER_LUNARG_draw_state", BufferAllocator.MALLOC))
-				.put(memEncodeASCII("VK_LAYER_LUNARG_image", BufferAllocator.MALLOC))
-				.put(memEncodeASCII("VK_LAYER_LUNARG_mem_tracker", BufferAllocator.MALLOC))
-				.put(memEncodeASCII("VK_LAYER_LUNARG_object_tracker", BufferAllocator.MALLOC))
-				.put(memEncodeASCII("VK_LAYER_LUNARG_param_checker", BufferAllocator.MALLOC))
-				.put(memEncodeASCII("VK_LAYER_LUNARG_swapchain", BufferAllocator.MALLOC))
-				.put(memEncodeASCII("VK_LAYER_LUNARG_threading", BufferAllocator.MALLOC))
-				.put(memEncodeASCII("VK_LAYER_GOOGLE_unique_objects", BufferAllocator.MALLOC));
+				//.put(memASCII("VK_LAYER_LUNARG_standard_validation"))
+				//.put(memASCII("VK_LAYER_LUNARG_api_dump"))
+				.put(memASCII("VK_LAYER_LUNARG_device_limits"))
+				.put(memASCII("VK_LAYER_LUNARG_draw_state"))
+				.put(memASCII("VK_LAYER_LUNARG_image"))
+				.put(memASCII("VK_LAYER_LUNARG_mem_tracker"))
+				.put(memASCII("VK_LAYER_LUNARG_object_tracker"))
+				.put(memASCII("VK_LAYER_LUNARG_param_checker"))
+				.put(memASCII("VK_LAYER_LUNARG_swapchain"))
+				.put(memASCII("VK_LAYER_LUNARG_threading"))
+				.put(memASCII("VK_LAYER_GOOGLE_unique_objects"));
 		}
 		device_validation_layers.flip();
 
@@ -1478,7 +1478,7 @@ public final class HelloVulkan {
 		// Two stages: vs and fs
 		long vert_shader_module;
 		long frag_shader_module;
-		ByteBuffer main = memEncodeUTF8("main", BufferAllocator.MALLOC);
+		ByteBuffer main = memUTF8("main");
 
 		VkPipelineShaderStageCreateInfo.Buffer shaderStages = VkPipelineShaderStageCreateInfo.calloc(2);
 		shaderStages.get(0)
@@ -2029,6 +2029,12 @@ public final class HelloVulkan {
 		memFree(pp);
 		memFree(lp);
 		memFree(ip);
+
+		memFree(EXT_debug_report);
+		memFree(KHR_swapchain);
+
+		memFree(APP_LONG_NAME);
+		memFree(APP_SHORT_NAME);
 	}
 
 	private void run() {

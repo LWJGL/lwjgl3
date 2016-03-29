@@ -55,7 +55,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	 * @return the message as a String
 	 */
 	public static String getMessage(long message) {
-		return memDecodeUTF8(message);
+		return memUTF8(message);
 	}
 
 	/** A functional interface for {@link OVRLogCallback}. */

@@ -69,7 +69,7 @@ public final class GLUtil {
 
 	/**
 	 * Detects the best debug output functionality to use and creates a callback that prints information to {@link APIUtil#DEBUG_STREAM}. The callback
-	 * function is returned as a {@link Closure}, that should be {@link Closure#release released} when no longer needed.
+	 * function is returned as a {@link Closure}, that should be {@link Closure#free freed} when no longer needed.
 	 */
 	public static Closure setupDebugMessageCallback() {
 		return setupDebugMessageCallback(APIUtil.DEBUG_STREAM);
@@ -77,7 +77,7 @@ public final class GLUtil {
 
 	/**
 	 * Detects the best debug output functionality to use and creates a callback that prints information to the specified {@link PrintStream}. The callback
-	 * function is returned as a {@link Closure}, that should be {@link Closure#release released} when no longer needed.
+	 * function is returned as a {@link Closure}, that should be {@link Closure#free freed} when no longer needed.
 	 *
 	 * @param stream the output {@link PrintStream}
 	 */
@@ -137,7 +137,7 @@ public final class GLUtil {
 				printDetail(stream, "Source", getSource(source));
 				printDetail(stream, "Type", getType(type));
 				printDetail(stream, "Severity", getSeverity(severity));
-				printDetail(stream, "Message", memDecodeUTF8(memByteBuffer(message, length)));
+				printDetail(stream, "Message", getMessage(length, message));
 			}
 
 			private String getSource(int source) {
@@ -206,7 +206,7 @@ public final class GLUtil {
 				printDetail(stream, "Source", getSource(source));
 				printDetail(stream, "Type", getType(type));
 				printDetail(stream, "Severity", getSeverity(severity));
-				printDetail(stream, "Message", memDecodeUTF8(memByteBuffer(message, length)));
+				printDetail(stream, "Message", getMessage(length, message));
 			}
 
 			private String getSource(int source) {
@@ -270,7 +270,7 @@ public final class GLUtil {
 				printDetail(stream, "ID", String.format("0x%X", id));
 				printDetail(stream, "Category", getCategory(category));
 				printDetail(stream, "Severity", getSeverity(severity));
-				printDetail(stream, "Message", memDecodeUTF8(memByteBuffer(message, length)));
+				printDetail(stream, "Message", getMessage(length, message));
 			}
 
 			private String getCategory(int category) {

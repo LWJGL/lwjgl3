@@ -535,13 +535,13 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	public PointerBuffer getPointerBuffer(int size) { return memPointerBuffer(get(), size); }
 
 	/** Decodes the ASCII string that starts at the address found at the current position. */
-	public String getStringASCII() { return memDecodeASCII(get()); }
+	public String getStringASCII() { return memASCII(get()); }
 
 	/** Decodes the UTF-8 string that starts at the address found at the current position. */
-	public String getStringUTF8() { return memDecodeUTF8(get()); }
+	public String getStringUTF8() { return memUTF8(get()); }
 
 	/** Decodes the UTF-16 string that starts at the address found at the current position. */
-	public String getStringUTF16() { return memDecodeUTF16(get()); }
+	public String getStringUTF16() { return memUTF16(get()); }
 
 	// ---
 
@@ -567,13 +567,13 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	public PointerBuffer getPointerBuffer(int index, int size) { return memPointerBuffer(get(index), size); }
 
 	/** Decodes the ASCII string that starts at the address found at the specified index. */
-	public String getStringASCII(int index) { return memDecodeASCII(get(index)); }
+	public String getStringASCII(int index) { return memASCII(get(index)); }
 
 	/** Decodes the UTF-8 string that starts at the address found at the specified index. */
-	public String getStringUTF8(int index) { return memDecodeUTF8(get(index)); }
+	public String getStringUTF8(int index) { return memUTF8(get(index)); }
 
 	/** Decodes the UTF-16 string that starts at the address found at the specified index. */
-	public String getStringUTF16(int index) { return memDecodeUTF16(get(index)); }
+	public String getStringUTF16(int index) { return memUTF16(get(index)); }
 
 	// -- Bulk get operations --
 

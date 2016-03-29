@@ -107,7 +107,7 @@ public final class CLDemo {
 					@Override
 					public void invoke(long errinfo, long private_info, long cb, long user_data) {
 						System.err.println("[LWJGL] cl_context_callback");
-						System.err.println("\tInfo: " + memDecodeUTF8(errinfo));
+						System.err.println("\tInfo: " + memUTF8(errinfo));
 					}
 				}, NULL, errcode_ret);
 				checkCLError(errcode_ret);

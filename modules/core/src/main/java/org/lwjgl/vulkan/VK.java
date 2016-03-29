@@ -89,7 +89,7 @@ public final class VK {
 					if ( address == NULL ) {
 						address = VULKAN.getFunctionAddress(functionName);
 						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-							apiLog("Failed to locate address for VK function " + memDecodeASCII(functionName));
+							apiLog("Failed to locate address for VK function " + memASCII(functionName));
 					}
 
 					return address;

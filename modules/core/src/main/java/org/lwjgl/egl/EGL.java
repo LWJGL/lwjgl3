@@ -94,7 +94,7 @@ public final class EGL {
 					if ( address == NULL ) {
 						address = EGL.getFunctionAddress(functionName);
 						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-							apiLog("Failed to locate address for EGL function " + memDecodeASCII(functionName));
+							apiLog("Failed to locate address for EGL function " + memASCII(functionName));
 					}
 
 					return address;
@@ -161,10 +161,10 @@ public final class EGL {
 		if ( versionString == NULL )
 			invokeI(functionProvider.getFunctionAddress("eglGetError")); // clear error
 		else {
-			APIVersion version = apiParseVersion(memDecodeASCII(versionString), "EGL");
+			APIVersion version = apiParseVersion(memASCII(versionString), "EGL");
 
 			addEGLVersions(version.major, version.minor, ext);
-			addExtensions(memDecodeASCII(invokePIP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS)), ext);
+			addExtensions(memASCII(invokePIP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS)), ext);
 		}
 
 		return new EGLCapabilities(functionProvider, ext);

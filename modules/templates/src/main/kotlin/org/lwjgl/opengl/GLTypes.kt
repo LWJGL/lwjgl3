@@ -101,7 +101,7 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 	 * @return the message as a String
 	 */
 	public static String getMessage(int length, long message) {
-		return memDecodeUTF8(memByteBuffer(message, length));
+		return memUTF8(memByteBuffer(message, length));
 	}
 
 	/** A functional interface for {@link GLDebugMessageAMDCallback}. */
@@ -153,7 +153,7 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 	 * @return the message as a String
 	 */
 	public static String getMessage(int length, long message) {
-		return memDecodeUTF8(memByteBuffer(message, length));
+		return memUTF8(memByteBuffer(message, length));
 	}
 
 	/** A functional interface for {@link GLDebugMessageARBCallback}. */
@@ -213,7 +213,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	 * @return the message as a String
 	 */
 	public static String getMessage(int length, long message) {
-		return memDecodeUTF8(memByteBuffer(message, length));
+		return memUTF8(memByteBuffer(message, length));
 	}
 
 	/** A functional interface for {@link GLDebugMessageCallback}. */

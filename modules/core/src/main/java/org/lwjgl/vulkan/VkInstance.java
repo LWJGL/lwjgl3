@@ -51,7 +51,7 @@ public class VkInstance extends DispatchableHandle {
 				if ( address == NULL ) {
 					address = VK.getFunctionProvider().getFunctionAddress(functionName);
 					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-						apiLog("Failed to locate address for VK instance function " + memDecodeASCII(functionName));
+						apiLog("Failed to locate address for VK instance function " + memASCII(functionName));
 				}
 
 				return address;

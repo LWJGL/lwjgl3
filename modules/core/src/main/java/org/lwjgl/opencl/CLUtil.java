@@ -112,7 +112,7 @@ public final class CLUtil {
 			ByteBuffer buffer = stack.malloc(bytes);
 			checkCLError(clGetPlatformInfo(cl_platform_id, param_name, buffer, null));
 
-			return memDecodeASCII(buffer, bytes - 1);
+			return memASCII(buffer, bytes - 1);
 		} finally {
 			stack.pop();
 		}
@@ -128,7 +128,7 @@ public final class CLUtil {
 			ByteBuffer buffer = stack.malloc(bytes);
 			checkCLError(clGetDeviceInfo(cl_device_id, param_name, buffer, null));
 
-			return memDecodeASCII(buffer, bytes - 1);
+			return memASCII(buffer, bytes - 1);
 		} finally {
 			stack.pop();
 		}

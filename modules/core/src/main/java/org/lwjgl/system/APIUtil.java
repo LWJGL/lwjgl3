@@ -206,9 +206,9 @@ public final class APIUtil {
 	}
 
 	public static long apiClosureText(String text) {
-		int size = memEncodedLengthUTF8(text) + 1;
+		int size = memLengthUTF8(text, true);
 		long address = getAllocator().malloc(size);
-		memEncodeUTF8(text, true, memByteBuffer(address, size));
+		memUTF8(text, true, memByteBuffer(address, size));
 		return address;
 	}
 
@@ -283,7 +283,7 @@ public final class APIUtil {
 		PointerBuffer pointers = stack.mallocPointer(strings.length);
 
 		for ( CharSequence s : strings )
-			pointers.put(memEncodeASCII(s, true, BufferAllocator.MALLOC));
+			pointers.put(memASCII(s));
 
 		return memAddress0(pointers);
 	}
@@ -302,7 +302,7 @@ public final class APIUtil {
 		IntBuffer lengths = stack.mallocInt(strings.length);
 
 		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memEncodeASCII(s, false, BufferAllocator.MALLOC);
+			ByteBuffer buffer = memASCII(s, false);
 
 			pointers.put(buffer);
 			lengths.put(buffer.capacity());
@@ -315,7 +315,7 @@ public final class APIUtil {
 	 * ASCII encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
 	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree(int, int)}.</p>
 	 *
 	 * @return the offset to the lengths buffer
 	 */
@@ -324,7 +324,7 @@ public final class APIUtil {
 		PointerBuffer lengths = stack.mallocPointer(strings.length);
 
 		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memEncodeASCII(s, false, BufferAllocator.MALLOC);
+			ByteBuffer buffer = memASCII(s, false);
 
 			pointers.put(buffer);
 			lengths.put(buffer.capacity());
@@ -336,7 +336,7 @@ public final class APIUtil {
 	/**
 	 * UTF8 encodes the specified strings with a null-terminator and ensures space for a buffer filled with the memory addresses of the encoded strings.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree(int, int)}.</p>
 	 *
 	 * @return the offset to the memory address buffer
 	 */
@@ -344,7 +344,7 @@ public final class APIUtil {
 		PointerBuffer pointers = stack.mallocPointer(strings.length);
 
 		for ( CharSequence s : strings )
-			pointers.put(memEncodeUTF8(s, true, BufferAllocator.MALLOC));
+			pointers.put(memUTF8(s));
 
 		return memAddress0(pointers);
 	}
@@ -353,7 +353,7 @@ public final class APIUtil {
 	 * UTF8 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
 	 * respectively. The lengths are 4-bytes integers and the memory address buffer starts immediately after the lengths buffer.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree(int, int)}.</p>
 	 *
 	 * @return the offset to the lengths buffer
 	 */
@@ -363,7 +363,7 @@ public final class APIUtil {
 		IntBuffer lengths = stack.mallocInt(strings.length);
 
 		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memEncodeUTF8(s, false, BufferAllocator.MALLOC);
+			ByteBuffer buffer = memUTF8(s, false);
 
 			pointers.put(buffer);
 			lengths.put(buffer.capacity());
@@ -376,7 +376,7 @@ public final class APIUtil {
 	 * UTF8 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
 	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree(int, int)}.</p>
 	 *
 	 * @return the offset to the lengths buffer
 	 */
@@ -385,7 +385,7 @@ public final class APIUtil {
 		PointerBuffer lengths = stack.mallocPointer(strings.length);
 
 		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memEncodeUTF8(s, false, BufferAllocator.MALLOC);
+			ByteBuffer buffer = memUTF8(s, false);
 
 			pointers.put(buffer);
 			lengths.put(buffer.capacity());
@@ -397,7 +397,7 @@ public final class APIUtil {
 	/**
 	 * UTF16 encodes the specified strings with a null-terminator and ensures space for a buffer filled with the memory addresses of the encoded strings.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree(int, int)}.</p>
 	 *
 	 * @return the offset to the memory address buffer
 	 */
@@ -405,7 +405,7 @@ public final class APIUtil {
 		PointerBuffer pointers = stack.mallocPointer(strings.length);
 
 		for ( CharSequence s : strings )
-			pointers.put(memEncodeUTF16(s, true, BufferAllocator.MALLOC));
+			pointers.put(memUTF16(s));
 
 		return memAddress0(pointers);
 	}
@@ -424,7 +424,7 @@ public final class APIUtil {
 		IntBuffer lengths = stack.mallocInt(strings.length);
 
 		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memEncodeUTF16(s, false, BufferAllocator.MALLOC);
+			ByteBuffer buffer = memUTF16(s, false);
 
 			pointers.put(buffer);
 			lengths.put(buffer.capacity());
@@ -446,7 +446,7 @@ public final class APIUtil {
 		PointerBuffer lengths = stack.mallocPointer(strings.length);
 
 		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memEncodeUTF16(s, false, BufferAllocator.MALLOC);
+			ByteBuffer buffer = memUTF16(s, false);
 
 			pointers.put(buffer);
 			lengths.put(buffer.capacity());

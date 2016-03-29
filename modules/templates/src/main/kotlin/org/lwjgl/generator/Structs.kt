@@ -1113,7 +1113,7 @@ ${validations.joinToString("\n")}
 						println("\t}")
 
 						println("\t/** Unsafe version of {@link #$setter(CharSequence) $setter}. */")
-						println("\tpublic static void n$setter(long $STRUCT, CharSequence value) { memEncode${(it.nativeType.mapping as CharMapping).charset}(value, true, memByteBuffer($STRUCT + $field, $byteSize)); }")
+						println("\tpublic static void n$setter(long $STRUCT, CharSequence value) { mem${(it.nativeType.mapping as CharMapping).charset}(value, true, memByteBuffer($STRUCT + $field, $byteSize)); }")
 					} else {
 						val mapping = it.nativeType.mapping as PrimitiveMapping
 						val bytesPerElement = if ( mapping === PrimitiveMapping.POINTER ) "POINTER_SIZE" else mapping.bytes.toString()
@@ -1145,7 +1145,7 @@ ${validations.joinToString("\n")}
 					println("\t}")
 
 					println("\t/** Unsafe version of {@link #$setter(CharSequence) $setter}. */")
-					println("\tpublic static void n$setter(long $STRUCT, CharSequence value) { n$setter($STRUCT, memEncode${mapping.charset}(value, BufferAllocator.MALLOC)); }")
+					println("\tpublic static void n$setter(long $STRUCT, CharSequence value) { n$setter($STRUCT, mem${mapping.charset}(value)); }")
 					println("\t/** Unsafe version of {@link #${setter}Free}. */")
 					println("\tpublic static void n${setter}Free(long $STRUCT) { nmemFree(memGetAddress($STRUCT + $field)); }")
 				} else if ( it.nativeType.isPointerData ) {
@@ -1347,7 +1347,7 @@ $indent */""")
 						println("\t/** Unsafe version of {@link #$getter}. */")
 						println("\tpublic static ByteBuffer n$getter(long $STRUCT) { return memByteBuffer($STRUCT + $field, ${it.size * mapping.bytes}); }")
 						println("\t/** Unsafe version of {@link #${getter}String}. */")
-						println("\tpublic static String n${getter}String(long $STRUCT) { return memDecode${mapping.charset}($STRUCT + $field); }")
+						println("\tpublic static String n${getter}String(long $STRUCT) { return mem${mapping.charset}($STRUCT + $field); }")
 					} else {
 						val mapping = it.nativeType.mapping as PrimitiveMapping
 						val bufferType = mapping.toPointer.javaMethodType.simpleName
@@ -1368,7 +1368,7 @@ $indent */""")
 					println("\t/** Unsafe version of {@link #$getter}. */")
 					println("\tpublic static ByteBuffer n$getter(long $STRUCT) { return memByteBufferNT${mapping.bytes}(memGetAddress($STRUCT + $field)); }")
 					println("\t/** Unsafe version of {@link #${getter}String}. */")
-					println("\tpublic static String n${getter}String(long $STRUCT) { return memDecode${mapping.charset}(memGetAddress($STRUCT + $field)); }")
+					println("\tpublic static String n${getter}String(long $STRUCT) { return mem${mapping.charset}(memGetAddress($STRUCT + $field)); }")
 				} else if ( it.nativeType is StructType ) {
 					val structType = it.nativeType.definition.className
 					println("\t/** Unsafe version of {@link #$getter}. */")

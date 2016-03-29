@@ -25,11 +25,9 @@ package org.lwjgl.demo.nanovg;
  */
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.nanovg.NVGColor;
-import org.lwjgl.nanovg.NVGGlyphPosition;
-import org.lwjgl.nanovg.NVGPaint;
-import org.lwjgl.nanovg.NVGTextRow;
+import org.lwjgl.nanovg.*;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.system.MemoryStack;
 
 import java.io.IOException;
 import java.nio.*;
@@ -42,6 +40,7 @@ import static org.lwjgl.opengl.ARBTimerQuery.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.stb.STBImageWrite.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -71,7 +70,7 @@ class Demo {
 
 	private static final NVGTextRow.Buffer       rows      = NVGTextRow.create(3);
 	private static final NVGGlyphPosition.Buffer glyphs    = NVGGlyphPosition.create(100);
-	private static final ByteBuffer              paragraph = memEncodeUTF8(
+	private static final ByteBuffer              paragraph = memUTF8(
 		"This is longer chunk of text.\n  \n  Would have used lorem ipsum but she    was busy jumping over the lazy dog with the fox and all the men who " +
 			"came" +
 			" " +
@@ -81,13 +80,13 @@ class Demo {
 	private static final FloatBuffer lineh  = BufferUtils.createFloatBuffer(1);
 	private static final FloatBuffer bounds = BufferUtils.createFloatBuffer(4);
 
-	private static final ByteBuffer hoverText = memEncodeASCII("Hover your mouse over the text to see calculated caret position.");
+	private static final ByteBuffer hoverText = memASCII("Hover your mouse over the text to see calculated caret position.");
 
 	static class DemoData {
 
-		final ByteBuffer entypo = loadResource("demo/nanovg/entypo.ttf", 40 * 1024);
+		final ByteBuffer entypo        = loadResource("demo/nanovg/entypo.ttf", 40 * 1024);
 		final ByteBuffer RobotoRegular = loadResource("demo/nanovg/Roboto-Regular.ttf", 150 * 1024);
-		final ByteBuffer RobotoBold = loadResource("demo/nanovg/Roboto-Bold.ttf", 150 * 1024);
+		final ByteBuffer RobotoBold    = loadResource("demo/nanovg/Roboto-Bold.ttf", 150 * 1024);
 
 		int fontNormal,
 			fontBold,
@@ -121,7 +120,7 @@ class Demo {
 	}
 
 	private static ByteBuffer cpToUTF8(int cp) {
-		return memEncodeUTF8(new String(Character.toChars(cp)), true);
+		return memUTF8(new String(Character.toChars(cp)), true);
 	}
 
 	static NVGColor rgba(int r, int g, int b, int a, NVGColor color) {
@@ -173,17 +172,20 @@ class Demo {
 		nvgFontFace(vg, "sans-bold");
 		nvgTextAlign(vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
 
-		ByteBuffer titleText = memEncodeASCII(title, BufferAllocator.MALLOC);
+		MemoryStack stack = stackPush();
+		try {
+			ByteBuffer titleText = stack.ASCII(title);
 
-		nvgFontBlur(vg, 2);
-		nvgFillColor(vg, rgba(0, 0, 0, 128, colorA));
-		nvgText(vg, x + w / 2, y + 16 + 1, titleText, NULL);
+			nvgFontBlur(vg, 2);
+			nvgFillColor(vg, rgba(0, 0, 0, 128, colorA));
+			nvgText(vg, x + w / 2, y + 16 + 1, titleText, NULL);
 
-		nvgFontBlur(vg, 0);
-		nvgFillColor(vg, rgba(220, 220, 220, 160, colorA));
-		nvgText(vg, x + w / 2, y + 16, titleText, NULL);
-
-		memFree(titleText);
+			nvgFontBlur(vg, 0);
+			nvgFillColor(vg, rgba(220, 220, 220, 160, colorA));
+			nvgText(vg, x + w / 2, y + 16, titleText, NULL);
+		} finally {
+			stack.pop();
+		}
 
 		nvgRestore(vg);
 	}
@@ -354,35 +356,38 @@ class Demo {
 		nvgStrokeColor(vg, rgba(0, 0, 0, 48, colorA));
 		nvgStroke(vg);
 
-		ByteBuffer textEncoded = memEncodeASCII(text, BufferAllocator.MALLOC);
+		MemoryStack stack = stackPush();
+		try {
+			ByteBuffer textEncoded = stack.ASCII(text);
 
-		nvgFontSize(vg, 20.0f);
-		nvgFontFace(vg, "sans-bold");
-		tw = nvgTextBounds(vg, 0, 0, textEncoded, NULL, (ByteBuffer)null);
-		if ( preicon != null ) {
-			nvgFontSize(vg, h * 1.3f);
-			nvgFontFace(vg, "icons");
-			iw = nvgTextBounds(vg, 0, 0, preicon, NULL, (ByteBuffer)null);
-			iw += h * 0.15f;
-		}
+			nvgFontSize(vg, 20.0f);
+			nvgFontFace(vg, "sans-bold");
+			tw = nvgTextBounds(vg, 0, 0, textEncoded, NULL, (ByteBuffer)null);
+			if ( preicon != null ) {
+				nvgFontSize(vg, h * 1.3f);
+				nvgFontFace(vg, "icons");
+				iw = nvgTextBounds(vg, 0, 0, preicon, NULL, (ByteBuffer)null);
+				iw += h * 0.15f;
+			}
 
-		if ( preicon != null ) {
-			nvgFontSize(vg, h * 1.3f);
-			nvgFontFace(vg, "icons");
-			nvgFillColor(vg, rgba(255, 255, 255, 96, colorA));
+			if ( preicon != null ) {
+				nvgFontSize(vg, h * 1.3f);
+				nvgFontFace(vg, "icons");
+				nvgFillColor(vg, rgba(255, 255, 255, 96, colorA));
+				nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
+				nvgText(vg, x + w * 0.5f - tw * 0.5f - iw * 0.75f, y + h * 0.5f, preicon, NULL);
+			}
+
+			nvgFontSize(vg, 20.0f);
+			nvgFontFace(vg, "sans-bold");
 			nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-			nvgText(vg, x + w * 0.5f - tw * 0.5f - iw * 0.75f, y + h * 0.5f, preicon, NULL);
+			nvgFillColor(vg, rgba(0, 0, 0, 160, colorA));
+			nvgText(vg, x + w * 0.5f - tw * 0.5f + iw * 0.25f, y + h * 0.5f - 1, textEncoded, NULL);
+			nvgFillColor(vg, rgba(255, 255, 255, 160, colorA));
+			nvgText(vg, x + w * 0.5f - tw * 0.5f + iw * 0.25f, y + h * 0.5f, textEncoded, NULL);
+		} finally {
+			stack.pop();
 		}
-
-		nvgFontSize(vg, 20.0f);
-		nvgFontFace(vg, "sans-bold");
-		nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-		nvgFillColor(vg, rgba(0, 0, 0, 160, colorA));
-		nvgText(vg, x + w * 0.5f - tw * 0.5f + iw * 0.25f, y + h * 0.5f - 1, textEncoded, NULL);
-		nvgFillColor(vg, rgba(255, 255, 255, 160, colorA));
-		nvgText(vg, x + w * 0.5f - tw * 0.5f + iw * 0.25f, y + h * 0.5f, textEncoded, NULL);
-
-		memFree(textEncoded);
 	}
 
 	private static void drawSlider(long vg, float pos, float x, float y, float w, float h) {
@@ -598,7 +603,6 @@ class Demo {
 		float ix, iy, iw, ih;
 		float thumb = 60.0f;
 		float arry = 30.5f;
-		IntBuffer imgw = memAllocInt(1), imgh = memAllocInt(1);
 		float stackh = (nimages / 2) * (thumb + 10) + 10;
 		int i;
 		float u = (1 + (float)cos(t * 0.5f)) * 0.5f;
@@ -632,50 +636,59 @@ class Demo {
 
 		dv = 1.0f / (float)(nimages - 1);
 
-		for ( i = 0; i < nimages; i++ ) {
-			float tx, ty, v, a;
-			tx = x + 10;
-			ty = y + 10;
-			tx += (i % 2) * (thumb + 10);
-			ty += (i / 2) * (thumb + 10);
-			nvgImageSize(vg, images[i], imgw, imgh);
-			if ( imgw.get(0) < imgh.get(0) ) {
-				iw = thumb;
-				ih = iw * (float)imgh.get(0) / (float)imgw.get(0);
-				ix = 0;
-				iy = -(ih - thumb) * 0.5f;
-			} else {
-				ih = thumb;
-				iw = ih * (float)imgw.get(0) / (float)imgh.get(0);
-				ix = -(iw - thumb) * 0.5f;
-				iy = 0;
+		MemoryStack stack = stackPush();
+		try {
+			IntBuffer
+				imgw = stack.mallocInt(1),
+				imgh = stack.mallocInt(1);
+
+			for ( i = 0; i < nimages; i++ ) {
+				float tx, ty, v, a;
+				tx = x + 10;
+				ty = y + 10;
+				tx += (i % 2) * (thumb + 10);
+				ty += (i / 2) * (thumb + 10);
+				nvgImageSize(vg, images[i], imgw, imgh);
+				if ( imgw.get(0) < imgh.get(0) ) {
+					iw = thumb;
+					ih = iw * (float)imgh.get(0) / (float)imgw.get(0);
+					ix = 0;
+					iy = -(ih - thumb) * 0.5f;
+				} else {
+					ih = thumb;
+					iw = ih * (float)imgw.get(0) / (float)imgh.get(0);
+					ix = -(iw - thumb) * 0.5f;
+					iy = 0;
+				}
+
+				v = i * dv;
+				a = clampf((u2 - v) / dv, 0, 1);
+
+				if ( a < 1.0f )
+					drawSpinner(vg, tx + thumb / 2, ty + thumb / 2, thumb * 0.25f, t);
+
+				nvgImagePattern(vg, tx + ix, ty + iy, iw, ih, 0.0f / 180.0f * NVG_PI, images[i], a, imgPaint);
+				nvgBeginPath(vg);
+				nvgRoundedRect(vg, tx, ty, thumb, thumb, 5);
+				nvgFillPaint(vg, imgPaint);
+				nvgFill(vg);
+
+				nvgBoxGradient(vg, tx - 1, ty, thumb + 2, thumb + 2, 5, 3, rgba(0, 0, 0, 128, colorA), rgba(0, 0, 0, 0, colorB), shadowPaint);
+				nvgBeginPath(vg);
+				nvgRect(vg, tx - 5, ty - 5, thumb + 10, thumb + 10);
+				nvgRoundedRect(vg, tx, ty, thumb, thumb, 6);
+				nvgPathWinding(vg, NVG_HOLE);
+				nvgFillPaint(vg, shadowPaint);
+				nvgFill(vg);
+
+				nvgBeginPath(vg);
+				nvgRoundedRect(vg, tx + 0.5f, ty + 0.5f, thumb - 1, thumb - 1, 4 - 0.5f);
+				nvgStrokeWidth(vg, 1.0f);
+				nvgStrokeColor(vg, rgba(255, 255, 255, 192, colorA));
+				nvgStroke(vg);
 			}
-
-			v = i * dv;
-			a = clampf((u2 - v) / dv, 0, 1);
-
-			if ( a < 1.0f )
-				drawSpinner(vg, tx + thumb / 2, ty + thumb / 2, thumb * 0.25f, t);
-
-			nvgImagePattern(vg, tx + ix, ty + iy, iw, ih, 0.0f / 180.0f * NVG_PI, images[i], a, imgPaint);
-			nvgBeginPath(vg);
-			nvgRoundedRect(vg, tx, ty, thumb, thumb, 5);
-			nvgFillPaint(vg, imgPaint);
-			nvgFill(vg);
-
-			nvgBoxGradient(vg, tx - 1, ty, thumb + 2, thumb + 2, 5, 3, rgba(0, 0, 0, 128, colorA), rgba(0, 0, 0, 0, colorB), shadowPaint);
-			nvgBeginPath(vg);
-			nvgRect(vg, tx - 5, ty - 5, thumb + 10, thumb + 10);
-			nvgRoundedRect(vg, tx, ty, thumb, thumb, 6);
-			nvgPathWinding(vg, NVG_HOLE);
-			nvgFillPaint(vg, shadowPaint);
-			nvgFill(vg);
-
-			nvgBeginPath(vg);
-			nvgRoundedRect(vg, tx + 0.5f, ty + 0.5f, thumb - 1, thumb - 1, 4 - 0.5f);
-			nvgStrokeWidth(vg, 1.0f);
-			nvgStrokeColor(vg, rgba(255, 255, 255, 192, colorA));
-			nvgStroke(vg);
+		} finally {
+			stack.pop();
 		}
 		nvgRestore(vg);
 
@@ -718,9 +731,6 @@ class Demo {
 		nvgFill(vg);
 
 		nvgRestore(vg);
-
-		memFree(imgh);
-		memFree(imgw);
 	}
 
 	private static void drawColorwheel(long vg, float x, float y, float w, float h, float t) {
@@ -1367,29 +1377,31 @@ class Demo {
 
 		glEndQuery(GL_TIME_ELAPSED);
 
-		IntBuffer available = memAllocInt(1);
-		available.put(0, 1);
-		while ( available.get(0) != 0 && timer.ret <= timer.cur ) {
-			// check for results if there are any
-			glGetQueryObjectiv(timer.queries.get(timer.ret % GPU_QUERY_COUNT), GL_QUERY_RESULT_AVAILABLE, available);
-			if ( available.get(0) != 0 ) {
-				LongBuffer timeElapsed = memAllocLong(1);
-				glGetQueryObjectui64v(timer.queries.get(timer.ret % GPU_QUERY_COUNT), GL_QUERY_RESULT, timeElapsed);
-				timer.ret++;
-				if ( n < maxTimes ) {
-					times.put(n, (float)((double)timeElapsed.get(0) * 1e-9));
-					n++;
+		MemoryStack stack = stackPush();
+		try {
+			IntBuffer available = stack.ints(1);
+			while ( available.get(0) != 0 && timer.ret <= timer.cur ) {
+				// check for results if there are any
+				glGetQueryObjectiv(timer.queries.get(timer.ret % GPU_QUERY_COUNT), GL_QUERY_RESULT_AVAILABLE, available);
+				if ( available.get(0) != 0 ) {
+					LongBuffer timeElapsed = stack.mallocLong(1);
+					glGetQueryObjectui64v(timer.queries.get(timer.ret % GPU_QUERY_COUNT), GL_QUERY_RESULT, timeElapsed);
+					timer.ret++;
+					if ( n < maxTimes ) {
+						times.put(n, (float)((double)timeElapsed.get(0) * 1e-9));
+						n++;
+					}
 				}
-				memFree(timeElapsed);
 			}
+		} finally {
+			stack.pop();
 		}
-		memFree(available);
 		return n;
 	}
 
 	static void initGraph(PerfGraph fps, int style, String name) {
 		fps.style = style;
-		fps.name = memEncodeUTF8(name);
+		fps.name = memUTF8(name);
 		Arrays.fill(fps.values, 0);
 		fps.head = 0;
 	}

@@ -4,7 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.MemoryAccess.MemoryAccessor;
 import org.lwjgl.system.MemoryManage.DebugAllocator;
@@ -14,7 +13,6 @@ import java.nio.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.Pointer.*;
 
 /**
@@ -127,55 +125,6 @@ public final class MemoryUtil {
 		long aligned_alloc(long alignment, long size);
 		/** Called by {@link MemoryUtil#memAlignedFree}. */
 		void aligned_free(long ptr);
-
-	}
-
-	/** Implementations of this class can be passed to APIs that support configurable memory allocators. */
-	public abstract static class BufferAllocator {
-
-		/** Allocates memory using {@link BufferUtils}, i.e. {@link ByteBuffer#allocateDirect}. */
-		public static final BufferAllocator NIO = new BufferAllocator() {
-			@Override
-			public ByteBuffer allocate(int size) {
-				return BufferUtils.createByteBuffer(size);
-			}
-		};
-
-		/**
-		 * Allocates memory using {@link MemoryUtil#memAlloc}.
-		 *
-		 * <p>{@link ByteBuffer} instances allocated using this allocator must be explicitly freed using {@link MemoryUtil#memFree}.</p>
-		 */
-		public static final BufferAllocator MALLOC = new BufferAllocator() {
-			@Override
-			public ByteBuffer allocate(int size) {
-				return MemoryUtil.memAlloc(size);
-			}
-		};
-
-		/**
-		 * Allocates memory using {@link MemoryStack#malloc}.
-		 *
-		 * <p>The thread-local stack is used. Before this allocator is used, at least one frame must be pushed to the stack.</p>
-		 */
-		public static final BufferAllocator STACK = new BufferAllocator() {
-			@Override
-			public ByteBuffer allocate(int size) {
-				return stackGet().malloc(size);
-			}
-		};
-
-		protected BufferAllocator() {
-		}
-
-		/**
-		 * Allocates a {@link ByteBuffer} with capacity equal to {@code size}.
-		 *
-		 * @param size the buffer capacity
-		 *
-		 * @return the allocated {@link ByteBuffer}
-		 */
-		public abstract ByteBuffer allocate(int size);
 
 	}
 
@@ -842,6 +791,25 @@ public final class MemoryUtil {
 	}
 
 	/**
+	 * Calculates the byte count of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is assumed to be a
+	 * single {@code \0} character.
+	 *
+	 * @param buffer the {@link ByteBuffer} that contains the string
+	 * @param from   the index at which to start the search
+	 *
+	 * @return the string length, <strong>in bytes</strong>
+	 */
+	private static int memStrLen1(ByteBuffer buffer, int from) {
+		int to = from;
+		while ( to < buffer.limit() ) {
+			if ( buffer.get(to) == 0 )
+				break;
+			to++;
+		}
+		return to - from;
+	}
+
+	/**
 	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
 	 * address. Two \0 characters will terminate the string. The returned buffer will NOT include the \0 bytes.
 	 *
@@ -872,6 +840,25 @@ public final class MemoryUtil {
 		ByteBuffer string = ACCESSOR.memByteBuffer(address, maxLength);
 
 		return memSetupBuffer(string, address, memStrLen2(string, 0) << 1);
+	}
+
+	/**
+	 * Calculates the number of UTF16 code units of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is
+	 * assumed to be 2 consecutive {@code \0} characters.
+	 *
+	 * @param buffer the {@link ByteBuffer} that contains the string
+	 * @param from   the index at which to start the search
+	 *
+	 * @return the string length, <strong>in UTF16 code units</strong>
+	 */
+	private static int memStrLen2(ByteBuffer buffer, int from) {
+		int to = from;
+		while ( to < buffer.limit() ) {
+			if ( buffer.get(to) == 0 && to < buffer.limit() - 1 && buffer.get(to + 1) == 0 )
+				break;
+			to += 2;
+		}
+		return (to - from) >> 1;
 	}
 
 	/**
@@ -1302,20 +1289,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text or null
 	 */
-	public static ByteBuffer memEncodeASCII(CharSequence text) {
-		return memEncodeASCII(text, BufferAllocator.NIO);
-	}
-
-	/**
-	 * Same as {@link #memEncodeASCII(CharSequence)}, with an explicit allocator to use for allocating the returned buffer.
-	 *
-	 * @param text      the text to encode
-	 * @param allocator the allocator to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeASCII(CharSequence text, BufferAllocator allocator) {
-		return memEncodeASCII(text, true, allocator);
+	public static ByteBuffer memASCII(CharSequence text) {
+		return memASCII(text, true);
 	}
 
 	/**
@@ -1326,25 +1301,12 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text or null
 	 */
-	public static ByteBuffer memEncodeASCII(CharSequence text, boolean nullTerminated) {
-		return memEncodeASCII(text, nullTerminated, BufferAllocator.NIO);
-	}
-
-	/**
-	 * Same as {@link #memEncodeASCII(CharSequence, boolean)}, with an explicit allocator to use for allocating the returned buffer.
-	 *
-	 * @param text           the text to encode
-	 * @param nullTerminated if true, the text will be terminated with a '\0'.
-	 * @param allocator      the allocator to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeASCII(CharSequence text, boolean nullTerminated, BufferAllocator allocator) {
+	public static ByteBuffer memASCII(CharSequence text, boolean nullTerminated) {
 		if ( text == null )
 			return null;
 
-		ByteBuffer target = allocator.allocate(text.length() + (nullTerminated ? 1 : 0));
-		memEncodeASCII(text, nullTerminated, target);
+		ByteBuffer target = memAlloc(memLengthASCII(text, nullTerminated));
+		memASCII(text, nullTerminated, target);
 		return target;
 	}
 
@@ -1358,8 +1320,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text or null
 	 */
-	public static int memEncodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target) {
-		return memEncodeASCII(text, nullTerminated, target, target.position());
+	public static int memASCII(CharSequence text, boolean nullTerminated, ByteBuffer target) {
+		return memASCII(text, nullTerminated, target, target.position());
 	}
 
 	/**
@@ -1373,8 +1335,20 @@ public final class MemoryUtil {
 	 *
 	 * @return the number of bytes of the encoded string
 	 */
-	public static int memEncodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+	public static int memASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
 		return TEXT_UTIL.encodeASCII(text, nullTerminated, target, offset);
+	}
+
+	/**
+	 * Returns the number of bytes required to encode the specified text in the ASCII encoding.
+	 *
+	 * @param value          the text to encode
+	 * @param nullTerminated if true, add the number of bytes required for null-termination
+	 *
+	 * @return the number of bytes
+	 */
+	public static int memLengthASCII(CharSequence value, boolean nullTerminated) {
+		return value.length() + (nullTerminated ? 1 : 0);
 	}
 
 	/**
@@ -1384,20 +1358,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text or null
 	 */
-	public static ByteBuffer memEncodeUTF8(CharSequence text) {
-		return memEncodeUTF8(text, BufferAllocator.NIO);
-	}
-
-	/**
-	 * Same as {@link #memEncodeUTF8(CharSequence)}, with an explicit allocator to use for allocating the returned buffer.
-	 *
-	 * @param text      the text to encode
-	 * @param allocator the allocator to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeUTF8(CharSequence text, BufferAllocator allocator) {
-		return memEncodeUTF8(text, true, allocator);
+	public static ByteBuffer memUTF8(CharSequence text) {
+		return memUTF8(text, true);
 	}
 
 	/**
@@ -1408,25 +1370,12 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text or null
 	 */
-	public static ByteBuffer memEncodeUTF8(CharSequence text, boolean nullTerminated) {
-		return memEncodeUTF8(text, nullTerminated, BufferAllocator.NIO);
-	}
-
-	/**
-	 * Same as {@link #memEncodeUTF8(CharSequence, boolean)}, with an explicit allocator to use for allocating the returned buffer.
-	 *
-	 * @param text           the text to encode
-	 * @param nullTerminated if true, the text will be terminated with a '\0'.
-	 * @param allocator      the allocator to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeUTF8(CharSequence text, boolean nullTerminated, BufferAllocator allocator) {
+	public static ByteBuffer memUTF8(CharSequence text, boolean nullTerminated) {
 		if ( text == null )
 			return null;
 
-		ByteBuffer target = allocator.allocate(memEncodedLengthUTF8(text) + (nullTerminated ? 1 : 0));
-		memEncodeUTF8(text, nullTerminated, target);
+		ByteBuffer target = memAlloc(memLengthUTF8(text, nullTerminated));
+		memUTF8(text, nullTerminated, target);
 		return target;
 	}
 
@@ -1441,8 +1390,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the number of bytes of the encoded string
 	 */
-	public static int memEncodeUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target) {
-		return memEncodeUTF8(text, nullTerminated, target, target.position());
+	public static int memUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target) {
+		return memUTF8(text, nullTerminated, target, target.position());
 	}
 
 	/**
@@ -1457,19 +1406,20 @@ public final class MemoryUtil {
 	 *
 	 * @return the number of bytes of the encoded string
 	 */
-	public static int memEncodeUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+	public static int memUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
 		return TEXT_UTIL.encodeUTF8(text, nullTerminated, target, offset);
 	}
 
 	/**
 	 * Returns the number of bytes required to encode the specified text in the UTF-8 encoding.
 	 *
-	 * @param value the text to encode
+	 * @param value          the text to encode
+	 * @param nullTerminated if true, add the number of bytes required for null-termination
 	 *
-	 * @return the number of bytes in UTF-8
+	 * @return the number of bytes
 	 */
-	public static int memEncodedLengthUTF8(CharSequence value) {
-		return MemoryTextUtil.encodeUTF8Length(value);
+	public static int memLengthUTF8(CharSequence value, boolean nullTerminated) {
+		return MemoryTextUtil.encodeUTF8Length(value) + (nullTerminated ? 1 : 0);
 	}
 
 	/**
@@ -1479,20 +1429,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text
 	 */
-	public static ByteBuffer memEncodeUTF16(CharSequence text) {
-		return memEncodeUTF16(text, BufferAllocator.NIO);
-	}
-
-	/**
-	 * Same as {@link #memEncodeUTF16(CharSequence)}, with an explicit allocator to use for allocating the returned buffer.
-	 *
-	 * @param text      the text to encode
-	 * @param allocator the allocator to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeUTF16(CharSequence text, BufferAllocator allocator) {
-		return memEncodeUTF16(text, true, allocator);
+	public static ByteBuffer memUTF16(CharSequence text) {
+		return memUTF16(text, true);
 	}
 
 	/**
@@ -1503,25 +1441,12 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text
 	 */
-	public static ByteBuffer memEncodeUTF16(CharSequence text, boolean nullTerminated) {
-		return memEncodeUTF16(text, nullTerminated, BufferAllocator.NIO);
-	}
-
-	/**
-	 * Same as {@link #memEncodeUTF16(CharSequence, boolean)}, with an explicit allocator to use for allocating the returned buffer.
-	 *
-	 * @param text           the text to encode
-	 * @param nullTerminated if true, the text will be terminated with a '\0'.
-	 * @param allocator      the allocator to use
-	 *
-	 * @return the encoded text or null
-	 */
-	public static ByteBuffer memEncodeUTF16(CharSequence text, boolean nullTerminated, BufferAllocator allocator) {
+	public static ByteBuffer memUTF16(CharSequence text, boolean nullTerminated) {
 		if ( text == null )
 			return null;
 
-		ByteBuffer target = allocator.allocate((text.length() + (nullTerminated ? 1 : 0)) << 1);
-		memEncodeUTF16(text, nullTerminated, target);
+		ByteBuffer target = memAlloc(memLengthUTF16(text, nullTerminated));
+		memUTF16(text, nullTerminated, target);
 		return target;
 	}
 
@@ -1536,8 +1461,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the number of bytes of the encoded string
 	 */
-	public static int memEncodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target) {
-		return memEncodeUTF16(text, nullTerminated, target, target.position());
+	public static int memUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target) {
+		return memUTF16(text, nullTerminated, target, target.position());
 	}
 
 	/**
@@ -1552,70 +1477,20 @@ public final class MemoryUtil {
 	 *
 	 * @return the number of bytes of the encoded string
 	 */
-	public static int memEncodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+	public static int memUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
 		return TEXT_UTIL.encodeUTF16(text, nullTerminated, target, offset);
 	}
 
 	/**
-	 * Calculates the byte count of the null-terminated string in {@code buffer} that starts at the current {@code buffer} position. The null-terminator is
-	 * assumed to be a single {@code \0} character.
+	 * Returns the number of bytes required to encode the specified text in the UTF-16 encoding.
 	 *
-	 * @param buffer the {@link ByteBuffer} that contains the string
+	 * @param value          the text to encode
+	 * @param nullTerminated if true, add the number of bytes required for null-termination
 	 *
-	 * @return the string length, <strong>in bytes</strong>
+	 * @return the number of bytes
 	 */
-	public static int memStrLen1(ByteBuffer buffer) {
-		return memStrLen1(buffer, buffer.position());
-	}
-
-	/**
-	 * Calculates the byte count of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is assumed to be a
-	 * single {@code \0} character.
-	 *
-	 * @param buffer the {@link ByteBuffer} that contains the string
-	 * @param from   the index at which to start the search
-	 *
-	 * @return the string length, <strong>in bytes</strong>
-	 */
-	public static int memStrLen1(ByteBuffer buffer, int from) {
-		int to = from;
-		while ( to < buffer.limit() ) {
-			if ( buffer.get(to) == 0 )
-				break;
-			to++;
-		}
-		return to - from;
-	}
-
-	/**
-	 * Calculates the number of UTF16 code units of the null-terminated string in {@code buffer} that starts at the current {@code buffer} position. The
-	 * null-terminator is assumed to be 2 consecutive {@code \0} characters.
-	 *
-	 * @param buffer the {@link ByteBuffer} that contains the string
-	 *
-	 * @return the string length, <strong>in UTF16 code units</strong>
-	 */
-	public static int memStrLen2(ByteBuffer buffer) {
-		return memStrLen2(buffer, buffer.position());
-	}
-
-	/**
-	 * Calculates the number of UTF16 code units of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is
-	 * assumed to be 2 consecutive {@code \0} characters.
-	 *
-	 * @param buffer the {@link ByteBuffer} that contains the string
-	 * @param from   the index at which to start the search
-	 *
-	 * @return the string length, <strong>in UTF16 code units</strong>
-	 */
-	public static int memStrLen2(ByteBuffer buffer, int from) {
-		int to = from;
-		while ( to < buffer.limit() ) {
-			if ( buffer.get(to) == 0 && to < buffer.limit() - 1 && buffer.get(to + 1) == 0 )
-				break;
-			to += 2;
-		}
-		return (to - from) >> 1;
+	public static int memLengthUTF16(CharSequence value, boolean nullTerminated) {
+		return (value.length() + (nullTerminated ? 1 : 0)) << 1;
 	}
 
 	/**
@@ -1625,8 +1500,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the decode {@link String} or null if the specified {@code address} is null
 	 */
-	public static String memDecodeASCII(long address) {
-		return address == NULL ? null : memDecodeASCII(memByteBufferNT1(address));
+	public static String memASCII(long address) {
+		return address == NULL ? null : memASCII(memByteBufferNT1(address));
 	}
 
 	/**
@@ -1638,11 +1513,11 @@ public final class MemoryUtil {
 	 *
 	 * @return the decoded {@link String} or null if the specified {@code buffer} is null
 	 */
-	public static String memDecodeASCII(ByteBuffer buffer) {
+	public static String memASCII(ByteBuffer buffer) {
 		if ( buffer == null )
 			return null;
 
-		return memDecodeASCII(buffer, buffer.remaining());
+		return memASCII(buffer, buffer.remaining());
 	}
 
 	/**
@@ -1655,8 +1530,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the decoded {@link String}
 	 */
-	public static String memDecodeASCII(ByteBuffer buffer, int length) {
-		return memDecodeASCII(buffer, length, buffer.position());
+	public static String memASCII(ByteBuffer buffer, int length) {
+		return memASCII(buffer, length, buffer.position());
 	}
 
 	/**
@@ -1670,7 +1545,7 @@ public final class MemoryUtil {
 	 *
 	 * @return the decoded {@link String}
 	 */
-	public static String memDecodeASCII(ByteBuffer buffer, int length, int offset) {
+	public static String memASCII(ByteBuffer buffer, int length, int offset) {
 		return MemoryTextUtil.decodeASCII(buffer, length, offset);
 	}
 
@@ -1681,8 +1556,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the decode {@link String} or null if the specified {@code address} is null
 	 */
-	public static String memDecodeUTF8(long address) {
-		return address == NULL ? null : memDecodeUTF8(memByteBufferNT1(address));
+	public static String memUTF8(long address) {
+		return address == NULL ? null : memUTF8(memByteBufferNT1(address));
 	}
 
 	/**
@@ -1694,8 +1569,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the decoded {@link String} or null if the specified {@code buffer} is null
 	 */
-	public static String memDecodeUTF8(ByteBuffer buffer) {
-		return memDecodeUTF8(buffer, buffer.remaining());
+	public static String memUTF8(ByteBuffer buffer) {
+		return memUTF8(buffer, buffer.remaining());
 	}
 
 	/**
@@ -1708,8 +1583,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the decoded {@link String}
 	 */
-	public static String memDecodeUTF8(ByteBuffer buffer, int length) {
-		return memDecodeUTF8(buffer, length, buffer.position());
+	public static String memUTF8(ByteBuffer buffer, int length) {
+		return memUTF8(buffer, length, buffer.position());
 	}
 
 	/**
@@ -1723,7 +1598,7 @@ public final class MemoryUtil {
 	 *
 	 * @return the decoded {@link String}
 	 */
-	public static String memDecodeUTF8(ByteBuffer buffer, int length, int offset) {
+	public static String memUTF8(ByteBuffer buffer, int length, int offset) {
 		return MemoryTextUtil.decodeUTF8(buffer, length, offset);
 	}
 
@@ -1734,8 +1609,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the decode {@link String} or null if the specified {@code address} is null
 	 */
-	public static String memDecodeUTF16(long address) {
-		return address == NULL ? null : memDecodeUTF16(memByteBufferNT2(address));
+	public static String memUTF16(long address) {
+		return address == NULL ? null : memUTF16(memByteBufferNT2(address));
 	}
 
 	/**
@@ -1747,11 +1622,11 @@ public final class MemoryUtil {
 	 *
 	 * @return the decoded {@link String} or null if the specified {@code } is null
 	 */
-	public static String memDecodeUTF16(ByteBuffer buffer) {
+	public static String memUTF16(ByteBuffer buffer) {
 		if ( buffer == null )
 			return null;
 
-		return memDecodeUTF16(buffer, buffer.remaining() >> 1);
+		return memUTF16(buffer, buffer.remaining() >> 1);
 	}
 
 	/**
@@ -1764,8 +1639,8 @@ public final class MemoryUtil {
 	 *
 	 * @return the decoded {@link String}
 	 */
-	public static String memDecodeUTF16(ByteBuffer buffer, int length) {
-		return memDecodeUTF16(buffer, length, buffer.position());
+	public static String memUTF16(ByteBuffer buffer, int length) {
+		return memUTF16(buffer, length, buffer.position());
 	}
 
 	/**
@@ -1779,7 +1654,7 @@ public final class MemoryUtil {
 	 *
 	 * @return the decoded {@link String}
 	 */
-	public static String memDecodeUTF16(ByteBuffer buffer, int length, int offset) {
+	public static String memUTF16(ByteBuffer buffer, int length, int offset) {
 		return MemoryTextUtil.decodeUTF16(buffer, length, offset);
 	}
 

@@ -92,7 +92,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 * @return the description as a String
 	 */
 	public static String getDescription(long description) {
-		return memDecodeUTF8(description);
+		return memUTF8(description);
 	}
 
 	/** A functional interface for {@link GLFWErrorCallback}. */
@@ -143,7 +143,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 
 			@Override
 			public void invoke(int error, long description) {
-				String msg = memDecodeUTF8(description);
+				String msg = memUTF8(description);
 
 				stream.printf("[LWJGL] %s error\n", ERROR_CODES.get(error));
 				stream.println("\tDescription : " + msg);
@@ -166,7 +166,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 		return new GLFWErrorCallback() {
 			@Override
 			public void invoke(int error, long description) {
-				throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, memDecodeUTF8(description)));
+				throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, memUTF8(description)));
 			}
 		};
 	}
@@ -541,7 +541,7 @@ val GLFWdropfun = "GLFWdropfun".callback(
 		String[] strings = new String[count];
 
 		for ( int i = 0; i < count; i++ )
-			strings[i] = memDecodeUTF8(memGetAddress(names + POINTER_SIZE * i));
+			strings[i] = memUTF8(memGetAddress(names + POINTER_SIZE * i));
 
 		return strings;
 	}
@@ -581,7 +581,7 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	 */
 	public static void apply(int count, long names, ConsumerString consumer) {
 		for ( int i = 0; i < count; i++ )
-			consumer.accept(i, memDecodeUTF8(memGetAddress(names + POINTER_SIZE * i)));
+			consumer.accept(i, memUTF8(memGetAddress(names + POINTER_SIZE * i)));
 	}
 
 	/** See {@link GLFW#glfwSetDropCallback SetDropCallback}. */

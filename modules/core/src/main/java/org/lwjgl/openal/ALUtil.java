@@ -69,7 +69,7 @@ public final class ALUtil {
 				buffer.limit(limit); // \0 index
 
 				// Decode
-				strings.add(memDecodeUTF8(buffer));
+				strings.add(memUTF8(buffer));
 
 				// Reset
 				buffer.limit(Integer.MAX_VALUE);

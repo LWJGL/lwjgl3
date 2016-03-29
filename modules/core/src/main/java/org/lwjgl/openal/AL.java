@@ -75,7 +75,7 @@ public final class AL {
 			public long getFunctionAddress(ByteBuffer functionName) {
 				long address = invokePP(alGetProcAddress, memAddress(functionName));
 				if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-					apiLog("Failed to locate address for AL function " + memDecodeASCII(functionName));
+					apiLog("Failed to locate address for AL function " + memASCII(functionName));
 				return address;
 			}
 
@@ -162,7 +162,7 @@ public final class AL {
 			if ( versionString == NULL || callI(GetError) != AL_NO_ERROR )
 				throw new IllegalStateException("There is no OpenAL context current in the current thread or process.");
 
-			APIVersion apiVersion = apiParseVersion(memDecodeASCII(versionString));
+			APIVersion apiVersion = apiParseVersion(memASCII(versionString));
 			int majorVersion = apiVersion.major;
 			int minorVersion = apiVersion.minor;
 
@@ -181,7 +181,7 @@ public final class AL {
 			}
 
 			// Parse EXTENSIONS string
-			String extensionsString = memDecodeUTF8(checkPointer(invokeIP(GetString, AL_EXTENSIONS)));
+			String extensionsString = memUTF8(checkPointer(invokeIP(GetString, AL_EXTENSIONS)));
 
 		/*
 		OpenALSoft: AL_EXT_ALAW AL_EXT_DOUBLE AL_EXT_EXPONENT_DISTANCE AL_EXT_FLOAT32 AL_EXT_IMA4 AL_EXT_LINEAR_DISTANCE AL_EXT_MCFORMATS AL_EXT_MULAW

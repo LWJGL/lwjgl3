@@ -166,7 +166,7 @@ object StringReturnTransform : FunctionTransform<ReturnValue> {
 			original.substring(17, original.length - 1);
 		else
 			original
-		return "memDecode${(param.nativeType as CharSequenceType).charMapping.charset}($expression)";
+		return "mem${(param.nativeType as CharSequenceType).charMapping.charset}($expression)";
 	}
 }
 
@@ -300,7 +300,7 @@ class BufferReturnTransform(
 	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null) (outParam.nativeType.mapping as PointerMapping).javaMethodType.simpleName else "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
 		return if ( encoding != null )
-			"\t\treturn memDecode$encoding(${outParam.name}, $lengthParam.get(0));"
+			"\t\treturn mem$encoding(${outParam.name}, $lengthParam.get(0));"
 		else if ( outParam.nativeType.mapping !== PointerMapping.DATA_BYTE )
 			"\t\t${outParam.name}.limit($lengthParam.get(0));\n" +
 			"\t\treturn ${outParam.name}.slice();"
@@ -316,7 +316,7 @@ class BufferReturnNTTransform(
 ) : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
 	override fun transformCall(param: ReturnValue, original: String): String =
-		"\t\treturn memDecode$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}(memAddress(${outParam.name}), $maxLengthParam));"
+		"\t\treturn mem$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}(memAddress(${outParam.name}), $maxLengthParam));"
 }
 
 open class PointerArrayTransform(val paramType: String) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {

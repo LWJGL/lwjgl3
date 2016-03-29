@@ -22,7 +22,7 @@ public class WindowsLibrary extends SharedLibrary.Default {
 	public static final long HINSTANCE;
 
 	static {
-		ByteBuffer nameEncoded = memEncodeUTF16(Library.JNI_LIBRARY_NAME, SYSTEM_ALLOCATOR);
+		ByteBuffer nameEncoded = encodeUTF16(Library.JNI_LIBRARY_NAME);
 		try {
 			HINSTANCE = GetModuleHandle(nameEncoded);
 			if ( HINSTANCE == NULL )
@@ -42,7 +42,7 @@ public class WindowsLibrary extends SharedLibrary.Default {
 	}
 
 	private static long loadLibrary(String name) {
-		ByteBuffer nameEncoded = memEncodeUTF16(name, SYSTEM_ALLOCATOR);
+		ByteBuffer nameEncoded = encodeUTF16(name);
 		try {
 			return LoadLibrary(nameEncoded);
 		} finally {

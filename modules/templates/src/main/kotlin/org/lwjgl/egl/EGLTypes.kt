@@ -97,7 +97,7 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 	 * @return the command as a String
 	 */
 	public static String getCommand(long command) {
-		return memDecodeASCII(command);
+		return memASCII(command);
 	}
 
 	/**
@@ -110,7 +110,7 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 	 * @return the message as a String
 	 */
 	public static String getMessage(long message) {
-		return memDecodeUTF8(message);
+		return memUTF8(message);
 	}
 
 	/** A functional interface for {@link EGLDebugMessageKHRCallback}. */

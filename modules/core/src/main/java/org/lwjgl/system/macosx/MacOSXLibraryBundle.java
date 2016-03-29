@@ -20,7 +20,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 	}
 
 	private static long createBundle(String path) {
-		long filePath = CString2CFString(memEncodeUTF8(path, SYSTEM_ALLOCATOR), kCFStringEncodingUTF8);
+		long filePath = CString2CFString(encodeUTF8(path), kCFStringEncodingUTF8, kCFAllocatorMalloc());
 		long url = NULL;
 		try {
 			url = CFURLCreateWithFileSystemPath(NULL, filePath, kCFURLPOSIXPathStyle, true);
@@ -41,7 +41,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 
 	@Override
 	public long getFunctionAddress(ByteBuffer functionName) {
-		long nameRef = CString2CFString(functionName, kCFStringEncodingASCII);
+		long nameRef = CString2CFString(functionName, kCFStringEncodingASCII, kCFAllocatorNull());
 		try {
 			return CFBundleGetFunctionPointerForName(address(), nameRef);
 		} finally {
@@ -49,8 +49,8 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 		}
 	}
 
-	private static long CString2CFString(ByteBuffer name, int encoding) {
-		long string = CFStringCreateWithCStringNoCopy(NULL, name, encoding, kCFAllocatorNull());
+	private static long CString2CFString(ByteBuffer name, int encoding, long allocator) {
+		long string = CFStringCreateWithCStringNoCopy(NULL, name, encoding, allocator);
 		if ( string == NULL )
 			throw new NullPointerException();
 

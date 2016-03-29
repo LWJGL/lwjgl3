@@ -79,7 +79,7 @@ public class CLTest {
 				@Override
 				public void invoke(long errinfo, long private_info, long cb, long user_data) {
 					System.err.println("[LWJGL] cl_context_callback");
-					System.err.println("\tInfo: " + memDecodeUTF8(errinfo));
+					System.err.println("\tInfo: " + memUTF8(errinfo));
 				}
 			};
 

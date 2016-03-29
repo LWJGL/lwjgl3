@@ -20,7 +20,7 @@ class MemoryTextUtil {
 	protected MemoryTextUtil() {
 	}
 
-	/** @see MemoryUtil#memEncodeASCII(CharSequence, boolean, ByteBuffer, int) */
+	/** @see MemoryUtil#memASCII(CharSequence, boolean, ByteBuffer, int) */
 	int encodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
 		int p = offset;
 
@@ -33,7 +33,7 @@ class MemoryTextUtil {
 		return p - offset;
 	}
 
-	/** @see MemoryUtil#memDecodeASCII(ByteBuffer, int, int)  */
+	/** @see MemoryUtil#memASCII(ByteBuffer, int, int)  */
 	static String decodeASCII(ByteBuffer buffer, int length, int offset) {
 		char[] chars = new char[length];
 
@@ -45,7 +45,7 @@ class MemoryTextUtil {
 
 	// ---------------------------------------------------------------------------------------------------------------------
 
-	/** @see MemoryUtil#memEncodeUTF8(CharSequence, boolean, ByteBuffer, int) */
+	/** @see MemoryUtil#memUTF8(CharSequence, boolean, ByteBuffer, int) */
 	int encodeUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
 		int i = 0, len = text.length(), p = offset;
 
@@ -146,7 +146,7 @@ class MemoryTextUtil {
 			throw new RuntimeException(String.format("Malformed surrogate pair: 0x%X - 0x%X", hi, lo));
 	}
 
-	/** @see MemoryUtil#memDecodeUTF8(ByteBuffer, int, int)  */
+	/** @see MemoryUtil#memUTF8(ByteBuffer, int, int)  */
 	static String decodeUTF8(ByteBuffer buffer, int length, int offset) {
 		char[] string = new char[length];
 
@@ -211,7 +211,7 @@ class MemoryTextUtil {
 
 	// ---------------------------------------------------------------------------------------------------------------------
 
-	/** @see MemoryUtil#memEncodeUTF16(CharSequence, boolean, ByteBuffer, int) */
+	/** @see MemoryUtil#memUTF16(CharSequence, boolean, ByteBuffer, int) */
 	int encodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
 		int p = offset;
 		for ( int i = 0; i < text.length(); i++, p += 2 )
@@ -225,7 +225,7 @@ class MemoryTextUtil {
 		return p - offset;
 	}
 
-	/** @see MemoryUtil#memDecodeUTF16(ByteBuffer, int, int)  */
+	/** @see MemoryUtil#memUTF16(ByteBuffer, int, int)  */
 	static String decodeUTF16(ByteBuffer buffer, int length, int offset) {
 		char[] chars = new char[length];
 

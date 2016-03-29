@@ -126,7 +126,7 @@ public final class GL {
 				if ( address == NULL ) {
 					address = OPENGL.getFunctionAddress(functionName);
 					if ( address == NULL && DEBUG_FUNCTIONS )
-						apiLog("Failed to locate address for GL function " + memDecodeASCII(functionName));
+						apiLog("Failed to locate address for GL function " + memASCII(functionName));
 				}
 
 				return address;
@@ -343,7 +343,7 @@ public final class GL {
 					if ( versionString == NULL || callI(GetError) != GL_NO_ERROR )
 						throw new IllegalStateException("There is no OpenGL context current in the current thread.");
 
-					APIVersion apiVersion = apiParseVersion(memDecodeUTF8(versionString));
+					APIVersion apiVersion = apiParseVersion(memUTF8(versionString));
 
 					majorVersion = apiVersion.major;
 					minorVersion = apiVersion.minor;
@@ -380,7 +380,7 @@ public final class GL {
 
 			if ( majorVersion < 3 ) {
 				// Parse EXTENSIONS string
-				String extensionsString = memDecodeASCII(checkPointer(callIP(GetString, GL_EXTENSIONS)));
+				String extensionsString = memASCII(checkPointer(callIP(GetString, GL_EXTENSIONS)));
 
 				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 				while ( tokenizer.hasMoreTokens() )
@@ -396,7 +396,7 @@ public final class GL {
 
 					long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
 					for ( int i = 0; i < extensionCount; i++ )
-						supportedExtensions.add(memDecodeASCII(callIIP(GetStringi, GL_EXTENSIONS, i)));
+						supportedExtensions.add(memASCII(callIIP(GetStringi, GL_EXTENSIONS, i)));
 
 					// In real drivers, we may encounter the following weird scenarios:
 					// - 3.1 context without GL_ARB_compatibility but with deprecated functionality exposed and working.
@@ -524,11 +524,11 @@ public final class GL {
 
 		long wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringARB");
 		if ( wglGetExtensionsString != NULL )
-			extensionsString = memDecodeASCII(callPP(wglGetExtensionsString, hdc));
+			extensionsString = memASCII(callPP(wglGetExtensionsString, hdc));
 		else {
 			wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringEXT");
 			if ( wglGetExtensionsString != NULL )
-				extensionsString = memDecodeASCII(callP(wglGetExtensionsString));
+				extensionsString = memASCII(callP(wglGetExtensionsString));
 		}
 
 		Set<String> supportedExtensions = new HashSet<String>(32);
@@ -606,7 +606,7 @@ public final class GL {
 				extensionsString = callPIP(glXQueryExtensionsString, display, screen);
 			}
 
-			StringTokenizer tokenizer = new StringTokenizer(memDecodeASCII(extensionsString));
+			StringTokenizer tokenizer = new StringTokenizer(memASCII(extensionsString));
 			while ( tokenizer.hasMoreTokens() )
 				supportedExtensions.add(tokenizer.nextToken());
 		}

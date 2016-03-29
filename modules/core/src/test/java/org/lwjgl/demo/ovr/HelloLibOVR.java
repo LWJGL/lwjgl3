@@ -28,7 +28,7 @@ public final class HelloLibOVR {
 		OVRLogCallback callback = new OVRLogCallback() {
 			@Override
 			public void invoke(long userData, int level, long message) {
-				System.out.println("LibOVR [" + level + "] " + memDecodeASCII(message));
+				System.out.println("LibOVR [" + level + "] " + memASCII(message));
 			}
 		};
 
