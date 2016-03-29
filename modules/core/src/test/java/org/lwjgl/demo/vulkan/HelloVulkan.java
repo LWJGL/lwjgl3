@@ -289,9 +289,9 @@ public final class HelloVulkan {
 		@Override
 		public int invoke(int flags, int objectType, long object, long location, int messageCode, long pLayerPrefix, long pMessage, long pUserData) {
 			if ( (flags & VK_DEBUG_REPORT_ERROR_BIT_EXT) != 0 ) {
-				System.err.format("ERROR: [%s] Code %d : %s\n", pLayerPrefix, messageCode, memASCII(pMessage));
+				System.err.format("ERROR: [%s] Code %d : %s\n", pLayerPrefix, messageCode, getString(pMessage));
 			} else if ( (flags & VK_DEBUG_REPORT_WARNING_BIT_EXT) != 0 ) {
-				System.err.format("WARNING: [%s] Code %d : %s\n", pLayerPrefix, messageCode, memASCII(pMessage));
+				System.err.format("WARNING: [%s] Code %d : %s\n", pLayerPrefix, messageCode, getString(pMessage));
 			}
 
 			/*

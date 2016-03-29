@@ -43,11 +43,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 	EnumConstant(
 		"VkColorSpaceKHR",
 
-		"COLORSPACE_SRGB_NONLINEAR_KHR".enumExpr("The presentation engine supports the sRGB colorspace.", "0"),
-		"COLORSPACE_BEGIN_RANGE".enumExpr("", "VK_COLORSPACE_SRGB_NONLINEAR_KHR"),
-		"COLORSPACE_END_RANGE".enumExpr("", "VK_COLORSPACE_SRGB_NONLINEAR_KHR"),
-		"COLORSPACE_RANGE_SIZE".enumExpr("", "(VK_COLORSPACE_SRGB_NONLINEAR_KHR - VK_COLORSPACE_SRGB_NONLINEAR_KHR + 1)"),
-		"COLORSPACE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"COLORSPACE_SRGB_NONLINEAR_KHR".enumExpr("The presentation engine supports the sRGB colorspace.", "0")
 	)
 
 	EnumConstant(
@@ -85,11 +81,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 			appended to the end of the queue, and one request is removed from the beginning of the queue and processed during or after each vertical blanking
 			period in which the queue is non-empty.
 			"""
-		),
-		"PRESENT_MODE_BEGIN_RANGE".enumExpr("", "VK_PRESENT_MODE_IMMEDIATE_KHR"),
-		"PRESENT_MODE_END_RANGE".enumExpr("", "VK_PRESENT_MODE_FIFO_RELAXED_KHR"),
-		"PRESENT_MODE_RANGE_SIZE".enumExpr("", "(VK_PRESENT_MODE_FIFO_RELAXED_KHR - VK_PRESENT_MODE_IMMEDIATE_KHR + 1)"),
-		"PRESENT_MODE_MAX_ENUM".enum(0x7FFFFFFF)
+		)
 	)
 
 	EnumConstant(

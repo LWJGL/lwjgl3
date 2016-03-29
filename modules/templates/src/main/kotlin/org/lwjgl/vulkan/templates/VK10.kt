@@ -67,10 +67,15 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	)
 
 	IntConstant(
-		"",
+		"Boolean constants.",
 
 		"TRUE" expr "1",
-		"FALSE" expr "0",
+		"FALSE" expr "0"
+		)
+
+	IntConstant(
+		"Struct member limits.",
+
 		"MAX_PHYSICAL_DEVICE_NAME_SIZE" expr "256",
 		"UUID_SIZE" expr "16",
 		"MAX_MEMORY_TYPES" expr "32",
@@ -80,7 +85,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	)
 
 	IntConstant(
-		"",
+		"Special values.",
 
 		"REMAINING_MIP_LEVELS" expr "(~0)",
 		"REMAINING_ARRAY_LAYERS" expr "(~0)",
@@ -90,7 +95,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	)
 
 	LongConstant(
-		"",
+		"Special size value.",
 
 		"WHOLE_SIZE" expr "(~0L)"
 	)
@@ -98,11 +103,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPipelineCacheHeaderVersion",
 
-		"PIPELINE_CACHE_HEADER_VERSION_ONE".enumExpr("", "1"),
-		"PIPELINE_CACHE_HEADER_VERSION_BEGIN_RANGE".enumExpr("", "VK_PIPELINE_CACHE_HEADER_VERSION_ONE"),
-		"PIPELINE_CACHE_HEADER_VERSION_END_RANGE".enumExpr("", "VK_PIPELINE_CACHE_HEADER_VERSION_ONE"),
-		"PIPELINE_CACHE_HEADER_VERSION_RANGE_SIZE".enumExpr("", "VK_PIPELINE_CACHE_HEADER_VERSION_ONE - VK_PIPELINE_CACHE_HEADER_VERSION_ONE + 1"),
-		"PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM" enum 0x7FFFFFFF
+		"PIPELINE_CACHE_HEADER_VERSION_ONE".enumExpr("", "1")
 	)
 
 	EnumConstant(
@@ -128,11 +129,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			"-9"
 		),
 		"ERROR_TOO_MANY_OBJECTS".enumExpr("Too many objects of the type have already been created.", "-10"),
-		"ERROR_FORMAT_NOT_SUPPORTED".enumExpr("A requested format is not supported on this device.", "-11"),
-		"RESULT_BEGIN_RANGE".enumExpr("", "VK_ERROR_FORMAT_NOT_SUPPORTED"),
-		"RESULT_END_RANGE".enumExpr("", "VK_INCOMPLETE"),
-		"RESULT_RANGE_SIZE".enumExpr("", "VK_INCOMPLETE - VK_ERROR_FORMAT_NOT_SUPPORTED + 1"),
-		"RESULT_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"ERROR_FORMAT_NOT_SUPPORTED".enumExpr("A requested format is not supported on this device.", "-11")
 	)
 
 	EnumConstant(
@@ -186,11 +183,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER".enum(""),
 		"STRUCTURE_TYPE_MEMORY_BARRIER".enum(""),
 		"STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_BEGIN_RANGE".enumExpr("", "VK_STRUCTURE_TYPE_APPLICATION_INFO"),
-		"STRUCTURE_TYPE_END_RANGE".enumExpr("", "VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO"),
-		"STRUCTURE_TYPE_RANGE_SIZE".enumExpr("", "VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO - VK_STRUCTURE_TYPE_APPLICATION_INFO + 1"),
-		"STRUCTURE_TYPE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO".enum("")
 	)
 
 	EnumConstant(
@@ -200,21 +193,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"SYSTEM_ALLOCATION_SCOPE_OBJECT".enum("The allocation is scoped to the lifetime of the Vulkan object that is being created or used."),
 		"SYSTEM_ALLOCATION_SCOPE_CACHE".enum("The allocation is scoped to the lifetime of a {@code VkPipelineCache} object."),
 		"SYSTEM_ALLOCATION_SCOPE_DEVICE".enum("The allocation is scoped to the lifetime of the Vulkan device."),
-		"SYSTEM_ALLOCATION_SCOPE_INSTANCE".enum("The allocation is scoped to the lifetime of the Vulkan instance."),
-		"SYSTEM_ALLOCATION_SCOPE_BEGIN_RANGE".enumExpr("", "VK_SYSTEM_ALLOCATION_SCOPE_COMMAND"),
-		"SYSTEM_ALLOCATION_SCOPE_END_RANGE".enumExpr("", "VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE"),
-		"SYSTEM_ALLOCATION_SCOPE_RANGE_SIZE".enumExpr("", "VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE - VK_SYSTEM_ALLOCATION_SCOPE_COMMAND + 1"),
-		"SYSTEM_ALLOCATION_SCOPE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"SYSTEM_ALLOCATION_SCOPE_INSTANCE".enum("The allocation is scoped to the lifetime of the Vulkan instance.")
 	)
 
 	EnumConstant(
 		"VkInternalAllocationType",
 
-		"INTERNAL_ALLOCATION_TYPE_EXECUTABLE".enumExpr("The allocation is intended for execution by the host.", "0"),
-		"INTERNAL_ALLOCATION_TYPE_BEGIN_RANGE".enumExpr("", "VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE"),
-		"INTERNAL_ALLOCATION_TYPE_END_RANGE".enumExpr("", "VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE"),
-		"INTERNAL_ALLOCATION_TYPE_RANGE_SIZE".enumExpr("", "VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE - VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE + 1"),
-		"INTERNAL_ALLOCATION_TYPE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"INTERNAL_ALLOCATION_TYPE_EXECUTABLE".enumExpr("The allocation is intended for execution by the host.", "0")
 	)
 
 	EnumConstant(
@@ -404,11 +389,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"FORMAT_ASTC_12x10_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 12x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
 		"FORMAT_ASTC_12x10_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
 		"FORMAT_ASTC_12x12_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 12x12 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_12x12_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x12 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
-		"FORMAT_BEGIN_RANGE".enumExpr("", "VK_FORMAT_UNDEFINED"),
-		"FORMAT_END_RANGE".enumExpr("", "VK_FORMAT_ASTC_12x12_SRGB_BLOCK"),
-		"FORMAT_RANGE_SIZE".enumExpr("", "VK_FORMAT_ASTC_12x12_SRGB_BLOCK - VK_FORMAT_UNDEFINED + 1"),
-		"FORMAT_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"FORMAT_ASTC_12x12_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x12 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding.")
 	)
 
 	val VkImageTypes = EnumConstant(
@@ -416,22 +397,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		"IMAGE_TYPE_1D".enumExpr("One-dimensional image", "0"),
 		"IMAGE_TYPE_2D".enum("Two-dimensional image"),
-		"IMAGE_TYPE_3D".enum("Three-dimensional image"),
-		"IMAGE_TYPE_BEGIN_RANGE".enumExpr("", "VK_IMAGE_TYPE_1D"),
-		"IMAGE_TYPE_END_RANGE".enumExpr("", "VK_IMAGE_TYPE_3D"),
-		"IMAGE_TYPE_RANGE_SIZE".enumExpr("", "VK_IMAGE_TYPE_3D - VK_IMAGE_TYPE_1D + 1"),
-		"IMAGE_TYPE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"IMAGE_TYPE_3D".enum("Three-dimensional image")
 	).enumLinks
 
 	val VkImageTilings = EnumConstant(
 		"VkImageTiling",
 
 		"IMAGE_TILING_OPTIMAL".enumExpr("Specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access).", "0"),
-		"IMAGE_TILING_LINEAR".enum("Specifies linear tiling (texels are laid out in memory in row-major order, possibly with some padding on each row)."),
-		"IMAGE_TILING_BEGIN_RANGE".enumExpr("", "VK_IMAGE_TILING_OPTIMAL"),
-		"IMAGE_TILING_END_RANGE".enumExpr("", "VK_IMAGE_TILING_LINEAR"),
-		"IMAGE_TILING_RANGE_SIZE".enumExpr("", "VK_IMAGE_TILING_LINEAR - VK_IMAGE_TILING_OPTIMAL + 1"),
-		"IMAGE_TILING_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"IMAGE_TILING_LINEAR".enum("Specifies linear tiling (texels are laid out in memory in row-major order, possibly with some padding on each row).")
 	).enumLinks
 
 	EnumConstant(
@@ -441,11 +414,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU".enum("The device is typically one embedded in or tightly coupled with the host."),
 		"PHYSICAL_DEVICE_TYPE_DISCRETE_GPU".enum("The device is typically a separate processor connected to the host via an interlink."),
 		"PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU".enum("The device is typically a virtual node in a virtualization environment."),
-		"PHYSICAL_DEVICE_TYPE_CPU".enum("The device is typically running on the same processors as the host."),
-		"PHYSICAL_DEVICE_TYPE_BEGIN_RANGE".enumExpr("", "VK_PHYSICAL_DEVICE_TYPE_OTHER"),
-		"PHYSICAL_DEVICE_TYPE_END_RANGE".enumExpr("", "VK_PHYSICAL_DEVICE_TYPE_CPU"),
-		"PHYSICAL_DEVICE_TYPE_RANGE_SIZE".enumExpr("", "VK_PHYSICAL_DEVICE_TYPE_CPU - VK_PHYSICAL_DEVICE_TYPE_OTHER + 1"),
-		"PHYSICAL_DEVICE_TYPE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"PHYSICAL_DEVICE_TYPE_CPU".enum("The device is typically running on the same processors as the host.")
 	)
 
 	EnumConstant(
@@ -453,22 +422,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		"QUERY_TYPE_OCCLUSION".enumExpr("Occlusion query.", "0"),
 		"QUERY_TYPE_PIPELINE_STATISTICS".enum("Pipeline statistics query"),
-		"QUERY_TYPE_TIMESTAMP".enum("Timestamp query."),
-		"QUERY_TYPE_BEGIN_RANGE".enumExpr("", "VK_QUERY_TYPE_OCCLUSION"),
-		"QUERY_TYPE_END_RANGE".enumExpr("", "VK_QUERY_TYPE_TIMESTAMP"),
-		"QUERY_TYPE_RANGE_SIZE".enumExpr("", "VK_QUERY_TYPE_TIMESTAMP - VK_QUERY_TYPE_OCCLUSION + 1"),
-		"QUERY_TYPE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"QUERY_TYPE_TIMESTAMP".enum("Timestamp query.")
 	)
 
 	EnumConstant(
 		"VkSharingMode",
 
 		"SHARING_MODE_EXCLUSIVE".enumExpr("Specifies that access to any range or subresource of the object will be exclusive to a single queue family at a time.", "0"),
-		"SHARING_MODE_CONCURRENT".enum("Specifies that concurrent access to any range or subresource of the object from multiple queue families is supported."),
-		"SHARING_MODE_BEGIN_RANGE".enumExpr("", "VK_SHARING_MODE_EXCLUSIVE"),
-		"SHARING_MODE_END_RANGE".enumExpr("", "VK_SHARING_MODE_CONCURRENT"),
-		"SHARING_MODE_RANGE_SIZE".enumExpr("", "VK_SHARING_MODE_CONCURRENT - VK_SHARING_MODE_EXCLUSIVE + 1"),
-		"SHARING_MODE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"SHARING_MODE_CONCURRENT".enum("Specifies that concurrent access to any range or subresource of the object from multiple queue families is supported.")
 	)
 
 	EnumConstant(
@@ -523,11 +484,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			Currently, #IMAGE_LAYOUT_PREINITIALIZED is only useful with #IMAGE_TILING_LINEAR images because there is not a standard layout defined for
 			#IMAGE_TILING_OPTIMAL images.
 			"""
-		),
-		"IMAGE_LAYOUT_BEGIN_RANGE".enumExpr("", "VK_IMAGE_LAYOUT_UNDEFINED"),
-		"IMAGE_LAYOUT_END_RANGE".enumExpr("", "VK_IMAGE_LAYOUT_PREINITIALIZED"),
-		"IMAGE_LAYOUT_RANGE_SIZE".enumExpr("", "VK_IMAGE_LAYOUT_PREINITIALIZED - VK_IMAGE_LAYOUT_UNDEFINED + 1"),
-		"IMAGE_LAYOUT_MAX_ENUM".enum("", 0x7FFFFFFF)
+		)
 	)
 
 	EnumConstant(
@@ -539,11 +496,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"IMAGE_VIEW_TYPE_CUBE".enum("Cube map image view."),
 		"IMAGE_VIEW_TYPE_1D_ARRAY".enum("One-dimensional array image view."),
 		"IMAGE_VIEW_TYPE_2D_ARRAY".enum("Two-dimensional array image view."),
-		"IMAGE_VIEW_TYPE_CUBE_ARRAY".enum("Cube map array image view."),
-		"IMAGE_VIEW_TYPE_BEGIN_RANGE".enumExpr("", "VK_IMAGE_VIEW_TYPE_1D"),
-		"IMAGE_VIEW_TYPE_END_RANGE".enumExpr("", "VK_IMAGE_VIEW_TYPE_CUBE_ARRAY"),
-		"IMAGE_VIEW_TYPE_RANGE_SIZE".enumExpr("", "VK_IMAGE_VIEW_TYPE_CUBE_ARRAY - VK_IMAGE_VIEW_TYPE_1D + 1"),
-		"IMAGE_VIEW_TYPE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"IMAGE_VIEW_TYPE_CUBE_ARRAY".enum("Cube map array image view.")
 	)
 
 	EnumConstant(
@@ -559,22 +512,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"COMPONENT_SWIZZLE_R".enum("The component is set to the value of the R component of the image."),
 		"COMPONENT_SWIZZLE_G".enum("The component is set to the value of the G component of the image."),
 		"COMPONENT_SWIZZLE_B".enum("The component is set to the value of the B component of the image."),
-		"COMPONENT_SWIZZLE_A".enum("The component is set to the value of the A component of the image."),
-		"COMPONENT_SWIZZLE_BEGIN_RANGE".enumExpr("", "VK_COMPONENT_SWIZZLE_IDENTITY"),
-		"COMPONENT_SWIZZLE_END_RANGE".enumExpr("", "VK_COMPONENT_SWIZZLE_A"),
-		"COMPONENT_SWIZZLE_RANGE_SIZE".enumExpr("", "VK_COMPONENT_SWIZZLE_A - VK_COMPONENT_SWIZZLE_IDENTITY + 1"),
-		"COMPONENT_SWIZZLE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"COMPONENT_SWIZZLE_A".enum("The component is set to the value of the A component of the image.")
 	)
 
 	EnumConstant(
 		"VkVertexInputRate",
 
 		"VERTEX_INPUT_RATE_VERTEX".enumExpr("Indicates that vertex attribute addressing is a function of the vertex index.", "0"),
-		"VERTEX_INPUT_RATE_INSTANCE".enum("Indicates that vertex attribute addressing is a function of the instance index."),
-		"VERTEX_INPUT_RATE_BEGIN_RANGE".enumExpr("", "VK_VERTEX_INPUT_RATE_VERTEX"),
-		"VERTEX_INPUT_RATE_END_RANGE".enumExpr("", "VK_VERTEX_INPUT_RATE_INSTANCE"),
-		"VERTEX_INPUT_RATE_RANGE_SIZE".enumExpr("", "VK_VERTEX_INPUT_RATE_INSTANCE - VK_VERTEX_INPUT_RATE_VERTEX + 1"),
-		"VERTEX_INPUT_RATE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"VERTEX_INPUT_RATE_INSTANCE".enum("Indicates that vertex attribute addressing is a function of the instance index.")
 	)
 
 	EnumConstant(
@@ -687,11 +632,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			order) determine a patch for each {@code i = 0,1,…n − 1}, where there are {@code vn + k} vertices. {@code k} is in the range {@code [0,v − 1]} ; if
 			{@code k} is not zero, the final {@code k} vertices are ignored.
 			"""
-		),
-		"PRIMITIVE_TOPOLOGY_BEGIN_RANGE".enumExpr("", "VK_PRIMITIVE_TOPOLOGY_POINT_LIST"),
-		"PRIMITIVE_TOPOLOGY_END_RANGE".enumExpr("", "VK_PRIMITIVE_TOPOLOGY_PATCH_LIST"),
-		"PRIMITIVE_TOPOLOGY_RANGE_SIZE".enumExpr("", "VK_PRIMITIVE_TOPOLOGY_PATCH_LIST - VK_PRIMITIVE_TOPOLOGY_POINT_LIST + 1"),
-		"PRIMITIVE_TOPOLOGY_MAX_ENUM".enum("", 0x7FFFFFFF)
+		)
 	)
 
 	EnumConstant(
@@ -699,22 +640,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		"POLYGON_MODE_FILL".enumExpr("Causes polygons to render using the polygon rasterization rules.", "0"),
 		"POLYGON_MODE_LINE".enum("Causes polygon edges to be drawn as line segments."),
-		"POLYGON_MODE_POINT".enum("The vertices of polygons are treated, for rasterization purposes, as if they had been drawn as points."),
-		"POLYGON_MODE_BEGIN_RANGE".enumExpr("", "VK_POLYGON_MODE_FILL"),
-		"POLYGON_MODE_END_RANGE".enumExpr("", "VK_POLYGON_MODE_POINT"),
-		"POLYGON_MODE_RANGE_SIZE".enumExpr("", "VK_POLYGON_MODE_POINT - VK_POLYGON_MODE_FILL + 1"),
-		"POLYGON_MODE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"POLYGON_MODE_POINT".enum("The vertices of polygons are treated, for rasterization purposes, as if they had been drawn as points.")
 	)
 
 	EnumConstant(
 		"VkFrontFace",
 
 		"FRONT_FACE_COUNTER_CLOCKWISE".enumExpr("A triangle with positive area is considered front-facing.", "0"),
-		"FRONT_FACE_CLOCKWISE".enum("A triangle with negative area is considered front-facing."),
-		"FRONT_FACE_BEGIN_RANGE".enumExpr("", "VK_FRONT_FACE_COUNTER_CLOCKWISE"),
-		"FRONT_FACE_END_RANGE".enumExpr("", "VK_FRONT_FACE_CLOCKWISE"),
-		"FRONT_FACE_RANGE_SIZE".enumExpr("", "VK_FRONT_FACE_CLOCKWISE - VK_FRONT_FACE_COUNTER_CLOCKWISE + 1"),
-		"FRONT_FACE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"FRONT_FACE_CLOCKWISE".enum("A triangle with negative area is considered front-facing.")
 	)
 
 	EnumConstant(
@@ -727,11 +660,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"COMPARE_OP_GREATER".enum("The test passes when <b>R</b> &gt; <b>S</b>."),
 		"COMPARE_OP_NOT_EQUAL".enum("The test passes when <b>R</b> &ne; <b>S</b>."),
 		"COMPARE_OP_GREATER_OR_EQUAL".enum("The test passes when <b>R</b> &ge; <b>S</b>."),
-		"COMPARE_OP_ALWAYS".enum("The test always passes."),
-		"COMPARE_OP_BEGIN_RANGE".enumExpr("", "VK_COMPARE_OP_NEVER"),
-		"COMPARE_OP_END_RANGE".enumExpr("", "VK_COMPARE_OP_ALWAYS"),
-		"COMPARE_OP_RANGE_SIZE".enumExpr("", "VK_COMPARE_OP_ALWAYS - VK_COMPARE_OP_NEVER + 1"),
-		"COMPARE_OP_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"COMPARE_OP_ALWAYS".enum("The test always passes.")
 	)
 
 	EnumConstant(
@@ -744,11 +673,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"STENCIL_OP_DECREMENT_AND_CLAMP".enum("Decrements the current value and clamps to 0."),
 		"STENCIL_OP_INVERT".enum("Bitwise-inverts the current value."),
 		"STENCIL_OP_INCREMENT_AND_WRAP".enum("Increments the current value and wraps to 0 when the maximum value would have been exceeded."),
-		"STENCIL_OP_DECREMENT_AND_WRAP".enum("Decrements the current value and wraps to the maximum possible value when the value would go below 0."),
-		"STENCIL_OP_BEGIN_RANGE".enumExpr("", "VK_STENCIL_OP_KEEP"),
-		"STENCIL_OP_END_RANGE".enumExpr("", "VK_STENCIL_OP_DECREMENT_AND_WRAP"),
-		"STENCIL_OP_RANGE_SIZE".enumExpr("", "VK_STENCIL_OP_DECREMENT_AND_WRAP - VK_STENCIL_OP_KEEP + 1"),
-		"STENCIL_OP_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"STENCIL_OP_DECREMENT_AND_WRAP".enum("Decrements the current value and wraps to the maximum possible value when the value would go below 0.")
 	)
 
 	EnumConstant(
@@ -769,11 +694,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"LOGIC_OP_COPY_INVERTED".enum("{@code ¬s}"),
 		"LOGIC_OP_OR_INVERTED".enum("{@code ¬s∨d}"),
 		"LOGIC_OP_NAND".enum("{@code ¬(s∧d)}"),
-		"LOGIC_OP_SET".enum("{@code all 1s}"),
-		"LOGIC_OP_BEGIN_RANGE".enumExpr("", "VK_LOGIC_OP_CLEAR"),
-		"LOGIC_OP_END_RANGE".enumExpr("", "VK_LOGIC_OP_SET"),
-		"LOGIC_OP_RANGE_SIZE".enumExpr("", "VK_LOGIC_OP_SET - VK_LOGIC_OP_CLEAR + 1"),
-		"LOGIC_OP_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"LOGIC_OP_SET".enum("{@code all 1s}")
 	)
 
 	EnumConstant(
@@ -797,11 +718,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"BLEND_FACTOR_SRC1_COLOR".enum(code("(R<sub>s1</sub>, G<sub>s1</sub>, B<sub>s1</sub>, A<sub>s1</sub>)")),
 		"BLEND_FACTOR_ONE_MINUS_SRC1_COLOR".enum(code("(1 − R<sub>s1</sub>, 1 − G<sub>s1</sub>, 1 − B<sub>s1</sub>, 1 − A<sub>s1</sub>)")),
 		"BLEND_FACTOR_SRC1_ALPHA".enum(code("(A<sub>s1</sub>, A<sub>s1</sub>, A<sub>s1</sub>, A<sub>s1</sub>)")),
-		"BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA".enum(code("(1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>)")),
-		"BLEND_FACTOR_BEGIN_RANGE".enumExpr("", "VK_BLEND_FACTOR_ZERO"),
-		"BLEND_FACTOR_END_RANGE".enumExpr("", "VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA"),
-		"BLEND_FACTOR_RANGE_SIZE".enumExpr("", "VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA - VK_BLEND_FACTOR_ZERO + 1"),
-		"BLEND_FACTOR_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA".enum(code("(1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>)"))
 	)
 
 	EnumConstant(
@@ -832,11 +749,7 @@ A = min(A<sub>s0</sub>, A<sub>d</sub>)""")),
 			"""R = max(R<sub>s0</sub>, R<sub>d</sub>)
 G = max(G<sub>s0</sub>, G<sub>d</sub>)
 B = max(B<sub>s0</sub>, B<sub>d</sub>)
-A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
-		"BLEND_OP_BEGIN_RANGE".enumExpr("", "VK_BLEND_OP_ADD"),
-		"BLEND_OP_END_RANGE".enumExpr("", "VK_BLEND_OP_MAX"),
-		"BLEND_OP_RANGE_SIZE".enumExpr("", "VK_BLEND_OP_MAX - VK_BLEND_OP_ADD + 1"),
-		"BLEND_OP_MAX_ENUM".enum("", 0x7FFFFFFF)
+A = max(A<sub>s0</sub>, A<sub>d</sub>)"""))
 	)
 
 	EnumConstant(
@@ -902,11 +815,7 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)""")),
 			with #CmdSetStencilReference() before any draws are performed with a pipeline state with {@code VkPipelineDepthStencilStateCreateInfo} member
 			{@code stencilTestEnable} set to #TRUE.
 			"""
-		),
-		"DYNAMIC_STATE_BEGIN_RANGE".enumExpr("", "VK_DYNAMIC_STATE_VIEWPORT"),
-		"DYNAMIC_STATE_END_RANGE".enumExpr("", "VK_DYNAMIC_STATE_STENCIL_REFERENCE"),
-		"DYNAMIC_STATE_RANGE_SIZE".enumExpr("", "VK_DYNAMIC_STATE_STENCIL_REFERENCE - VK_DYNAMIC_STATE_VIEWPORT + 1"),
-		"DYNAMIC_STATE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		)
 	)
 
 	EnumConstant(
@@ -939,11 +848,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 β = frac(v - 0.5)
 γ = frac(w - 0.5)""")}
 			"""
-		),
-		"FILTER_BEGIN_RANGE".enumExpr("", "VK_FILTER_NEAREST"),
-		"FILTER_END_RANGE".enumExpr("", "VK_FILTER_LINEAR"),
-		"FILTER_RANGE_SIZE".enumExpr("", "VK_FILTER_LINEAR - VK_FILTER_NEAREST + 1"),
-		"FILTER_MAX_ENUM".enum("", 0x7FFFFFFF)
+		)
 	)
 
 	val baseLevel = "level<sub>base</sub>"
@@ -988,11 +893,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 			${code("δ = frac(λ)")} is the fractional value used for linear filtering between levels:
 			"""
-		),
-		"SAMPLER_MIPMAP_MODE_BEGIN_RANGE".enumExpr("", "VK_SAMPLER_MIPMAP_MODE_NEAREST"),
-		"SAMPLER_MIPMAP_MODE_END_RANGE".enumExpr("", "VK_SAMPLER_MIPMAP_MODE_LINEAR"),
-		"SAMPLER_MIPMAP_MODE_RANGE_SIZE".enumExpr("", "VK_SAMPLER_MIPMAP_MODE_LINEAR - VK_SAMPLER_MIPMAP_MODE_NEAREST + 1"),
-		"SAMPLER_MIPMAP_MODE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		)
 	)
 
 	EnumConstant(
@@ -1001,11 +902,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"SAMPLER_ADDRESS_MODE_REPEAT".enumExpr("Indicates that the repeat wrap mode will be used.", "0"),
 		"SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT".enum("Indicates that the mirrored repeat wrap mode will be used."),
 		"SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE".enum("Indicates that the clamp to edge wrap mode will be used."),
-		"SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".enum("Indicates that the clamp to border wrap mode will be used."),
-		"SAMPLER_ADDRESS_MODE_BEGIN_RANGE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_REPEAT"),
-		"SAMPLER_ADDRESS_MODE_END_RANGE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER"),
-		"SAMPLER_ADDRESS_MODE_RANGE_SIZE".enumExpr("", "VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER - VK_SAMPLER_ADDRESS_MODE_REPEAT + 1"),
-		"SAMPLER_ADDRESS_MODE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".enum("Indicates that the clamp to border wrap mode will be used.")
 	)
 
 	EnumConstant(
@@ -1016,11 +913,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"BORDER_COLOR_FLOAT_OPAQUE_BLACK".enum(code("(0.0, 0.0, 0.0, 1.0)")),
 		"BORDER_COLOR_INT_OPAQUE_BLACK".enum(code("(0, 0, 0, 1)")),
 		"BORDER_COLOR_FLOAT_OPAQUE_WHITE".enum(code("(1.0, 1.0, 1.0, 1.0)")),
-		"BORDER_COLOR_INT_OPAQUE_WHITE".enum(code("(1, 1, 1, 1)")),
-		"BORDER_COLOR_BEGIN_RANGE".enumExpr("", "VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK"),
-		"BORDER_COLOR_END_RANGE".enumExpr("", "VK_BORDER_COLOR_INT_OPAQUE_WHITE"),
-		"BORDER_COLOR_RANGE_SIZE".enumExpr("", "VK_BORDER_COLOR_INT_OPAQUE_WHITE - VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK + 1"),
-		"BORDER_COLOR_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"BORDER_COLOR_INT_OPAQUE_WHITE".enum(code("(1, 1, 1, 1)"))
 	)
 
 	EnumConstant(
@@ -1036,11 +929,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"DESCRIPTOR_TYPE_STORAGE_BUFFER".enum(""),
 		"DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC".enum(""),
 		"DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC".enum(""),
-		"DESCRIPTOR_TYPE_INPUT_ATTACHMENT".enum(""),
-		"DESCRIPTOR_TYPE_BEGIN_RANGE".enumExpr("", "VK_DESCRIPTOR_TYPE_SAMPLER"),
-		"DESCRIPTOR_TYPE_END_RANGE".enumExpr("", "VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT"),
-		"DESCRIPTOR_TYPE_RANGE_SIZE".enumExpr("", "VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT - VK_DESCRIPTOR_TYPE_SAMPLER + 1"),
-		"DESCRIPTOR_TYPE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"DESCRIPTOR_TYPE_INPUT_ATTACHMENT".enum("")
 	)
 
 	EnumConstant(
@@ -1052,11 +941,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		),
 		"ATTACHMENT_LOAD_OP_DONT_CARE".enum(
 			"Means the contents within the area need not be preserved; the contents of the attachment will be undefined inside the render area."
-		),
-		"ATTACHMENT_LOAD_OP_BEGIN_RANGE".enumExpr("", "VK_ATTACHMENT_LOAD_OP_LOAD"),
-		"ATTACHMENT_LOAD_OP_END_RANGE".enumExpr("", "VK_ATTACHMENT_LOAD_OP_DONT_CARE"),
-		"ATTACHMENT_LOAD_OP_RANGE_SIZE".enumExpr("", "VK_ATTACHMENT_LOAD_OP_DONT_CARE - VK_ATTACHMENT_LOAD_OP_LOAD + 1"),
-		"ATTACHMENT_LOAD_OP_MAX_ENUM".enum("", 0x7FFFFFFF)
+		)
 	)
 
 	EnumConstant(
@@ -1074,44 +959,28 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			Means the contents within the render area are not needed after rendering, and $may be discarded; the contents of the attachment will be undefined
 			inside the render area.
 			"""
-		),
-		"ATTACHMENT_STORE_OP_BEGIN_RANGE".enumExpr("", "VK_ATTACHMENT_STORE_OP_STORE"),
-		"ATTACHMENT_STORE_OP_END_RANGE".enumExpr("", "VK_ATTACHMENT_STORE_OP_DONT_CARE"),
-		"ATTACHMENT_STORE_OP_RANGE_SIZE".enumExpr("", "VK_ATTACHMENT_STORE_OP_DONT_CARE - VK_ATTACHMENT_STORE_OP_STORE + 1"),
-		"ATTACHMENT_STORE_OP_MAX_ENUM".enum("", 0x7FFFFFFF)
+		)
 	)
 
 	val VkPipelineBindPoints = EnumConstant(
 		"VkPipelineBindPoint",
 
 		"PIPELINE_BIND_POINT_GRAPHICS".enumExpr("", "0"),
-		"PIPELINE_BIND_POINT_COMPUTE".enum(""),
-		"PIPELINE_BIND_POINT_BEGIN_RANGE".enumExpr("", "VK_PIPELINE_BIND_POINT_GRAPHICS"),
-		"PIPELINE_BIND_POINT_END_RANGE".enumExpr("", "VK_PIPELINE_BIND_POINT_COMPUTE"),
-		"PIPELINE_BIND_POINT_RANGE_SIZE".enumExpr("", "VK_PIPELINE_BIND_POINT_COMPUTE - VK_PIPELINE_BIND_POINT_GRAPHICS + 1"),
-		"PIPELINE_BIND_POINT_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"PIPELINE_BIND_POINT_COMPUTE".enum("")
 	).enumLinks
 
 	EnumConstant(
 		"VkCommandBufferLevel",
 
 		"COMMAND_BUFFER_LEVEL_PRIMARY".enumExpr("", "0"),
-		"COMMAND_BUFFER_LEVEL_SECONDARY".enum(""),
-		"COMMAND_BUFFER_LEVEL_BEGIN_RANGE".enumExpr("", "VK_COMMAND_BUFFER_LEVEL_PRIMARY"),
-		"COMMAND_BUFFER_LEVEL_END_RANGE".enumExpr("", "VK_COMMAND_BUFFER_LEVEL_SECONDARY"),
-		"COMMAND_BUFFER_LEVEL_RANGE_SIZE".enumExpr("", "VK_COMMAND_BUFFER_LEVEL_SECONDARY - VK_COMMAND_BUFFER_LEVEL_PRIMARY + 1"),
-		"COMMAND_BUFFER_LEVEL_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"COMMAND_BUFFER_LEVEL_SECONDARY".enum("")
 	)
 
 	val VkIndexTypes = EnumConstant(
 		"VkIndexType",
 
 		"INDEX_TYPE_UINT16".enumExpr("", "0"),
-		"INDEX_TYPE_UINT32".enum(""),
-		"INDEX_TYPE_BEGIN_RANGE".enumExpr("", "VK_INDEX_TYPE_UINT16"),
-		"INDEX_TYPE_END_RANGE".enumExpr("", "VK_INDEX_TYPE_UINT32"),
-		"INDEX_TYPE_RANGE_SIZE".enumExpr("", "VK_INDEX_TYPE_UINT32 - VK_INDEX_TYPE_UINT16 + 1"),
-		"INDEX_TYPE_MAX_ENUM".enum("", 0x7FFFFFFF)
+		"INDEX_TYPE_UINT32".enum("")
 	).enumLinks
 
 	val VkSubpassContentValues = EnumConstant(
@@ -1127,11 +996,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			The contents are recorded in secondary command buffers that will be called from the primary command buffer, and #CmdExecuteCommands() is the only
 			valid command on the command buffer until #CmdNextSubpass() or #CmdEndRenderPass().
 			"""
-		),
-		"SUBPASS_CONTENTS_BEGIN_RANGE".enumExpr("", "VK_SUBPASS_CONTENTS_INLINE"),
-		"SUBPASS_CONTENTS_END_RANGE".enumExpr("", "VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS"),
-		"SUBPASS_CONTENTS_RANGE_SIZE".enumExpr("", "VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS - VK_SUBPASS_CONTENTS_INLINE + 1"),
-		"SUBPASS_CONTENTS_MAX_ENUM".enum("", 0x7FFFFFFF)
+		)
 	).enumLinks
 
 	EnumConstant(
