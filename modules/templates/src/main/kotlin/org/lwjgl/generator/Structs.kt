@@ -60,8 +60,7 @@ private class StructMemberPadding(size: Int, val condition: String?) : StructMem
 
 private enum class MultiSetterMode {
 	NORMAL,
-	ALTER1,
-	ALTER2
+	ALTER
 }
 
 private enum class AccessMode(val indent: String) {
@@ -508,11 +507,9 @@ $indentation}"""
 
 				if ( mutableMembers.singleOrNull() == null && !containsUnion ) {
 					val javadoc = "Initializes this struct with the specified values."
-					if ( generateAlternativeMultiSetter(mutableMembers) ) {
-						generateMultiSetter(javadoc, mutableMembers, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER1)
-						if ( mutableMembers.any { it is StructMemberCharArray } )
-							generateMultiSetter(javadoc, mutableMembers, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER2)
-					} else
+					if ( generateAlternativeMultiSetter(mutableMembers) )
+						generateMultiSetter(javadoc, mutableMembers, Struct::generateAlternativeMultiSetterParameters, Struct::generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER)
+					else
 						generateMultiSetter(javadoc, mutableMembers, Struct::generateMultiSetterParameters, Struct::generateMultiSetterSetters)
 				}
 
@@ -952,8 +949,7 @@ ${validations.joinToString("\n")}
 						if ( it is StructMemberCharArray ) {
 							when ( mode ) {
 								MultiSetterMode.NORMAL,
-								MultiSetterMode.ALTER1 -> "ByteBuffer $param"
-								MultiSetterMode.ALTER2 -> "CharSequence $param"
+								MultiSetterMode.ALTER -> "ByteBuffer $param"
 							}
 						} else if ( it.nativeType is StructType ) {
 							if ( it.nativeType.includesPointer )
@@ -1111,9 +1107,6 @@ ${validations.joinToString("\n")}
 						println("\t\t}")
 						println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining());")
 						println("\t}")
-
-						println("\t/** Unsafe version of {@link #$setter(CharSequence) $setter}. */")
-						println("\tpublic static void n$setter(long $STRUCT, CharSequence value) { mem${(it.nativeType.mapping as CharMapping).charset}(value, true, memByteBuffer($STRUCT + $field, $byteSize)); }")
 					} else {
 						val mapping = it.nativeType.mapping as PrimitiveMapping
 						val bytesPerElement = if ( mapping === PrimitiveMapping.POINTER ) "POINTER_SIZE" else mapping.bytes.toString()
@@ -1143,11 +1136,6 @@ ${validations.joinToString("\n")}
 					println("\t\tif ( CHECKS && value != null ) checkNT${mapping.bytes}(value); ")
 					println("\t\tmemPutAddress($STRUCT + $field, ${it.memAddressValue});")
 					println("\t}")
-
-					println("\t/** Unsafe version of {@link #$setter(CharSequence) $setter}. */")
-					println("\tpublic static void n$setter(long $STRUCT, CharSequence value) { n$setter($STRUCT, mem${mapping.charset}(value)); }")
-					println("\t/** Unsafe version of {@link #${setter}Free}. */")
-					println("\tpublic static void n${setter}Free(long $STRUCT) { nmemFree(memGetAddress($STRUCT + $field)); }")
 				} else if ( it.nativeType.isPointerData ) {
 					if ( it.nativeType is StructType ) {
 						val structType = it.nativeType.definition.className
@@ -1230,8 +1218,6 @@ ${validations.joinToString("\n")}
 					} else if ( it is StructMemberCharArray ) {
 						println("$indent/** Copies the specified encoded string to the {@code $field} field. */")
 						println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
-						println("$indent/** Encodes the specified {@link CharSequence} to the {@code $field} field. */")
-						println("${indent}public $returnType $setter(CharSequence value) { $n$setter($ADDRESS, value); return this; }")
 					} else {
 						val bufferType = (it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName
 						println("$indent/** Copies the specified {@link $bufferType} to the {@code $field} field. */")
@@ -1242,15 +1228,6 @@ ${validations.joinToString("\n")}
 				} else if ( it.nativeType is CharSequenceType ) {
 					println("$indent/** Sets the address of the specified encoded string to the {@code $field} field. */")
 					println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
-					println(
-						"""$indent/**
-$indent * Encodes the specified {@link CharSequence} and sets the address of the encoded string to the {@code $field} field.
-$indent *
-$indent * <p>The encoded string must be explicitly freed with {@link #${setter}Free}.</p>
-$indent */""")
-					println("${indent}public $returnType $setter(CharSequence value) { $n$setter($ADDRESS, value); return this; }")
-					println("$indent/** Frees the string encoded by {@link #$setter(CharSequence)} and stored in the {@code $field} field. */")
-					println("${indent}public $returnType ${setter}Free() { $n${setter}Free($ADDRESS); return this; }")
 				} else if ( it.nativeType.isPointerData ) {
 					val pointerType = if ( it.nativeType is StructType )
 						it.nativeType.definition.className
