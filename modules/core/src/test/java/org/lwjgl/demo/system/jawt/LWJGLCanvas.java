@@ -113,11 +113,11 @@ public class LWJGLCanvas extends Canvas {
 		pfd.nSize((byte)PIXELFORMATDESCRIPTOR.SIZEOF);
 		pfd.nVersion((short)1);
 		pfd.dwFlags(PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER);
-		pfd.iPixelType((byte)PFD_TYPE_RGBA);
+		pfd.iPixelType(PFD_TYPE_RGBA);
 		pfd.cColorBits((byte)32);
 		pfd.cAlphaBits((byte)8);
 		pfd.cDepthBits((byte)24);
-		pfd.iLayerType((byte)PFD_MAIN_PLANE);
+		pfd.iLayerType(PFD_MAIN_PLANE);
 
 		try {
 			int pixelFormat = GetPixelFormat(hdc);

@@ -23,21 +23,21 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		${ul(
 			"Only color buffers of a pbuffer can be bound as a texture. It is not possible to use the color buffer of a window as a texture.",
 			"""
-		The texture internal format is determined when the color buffer is associated with the texture, guaranteeing that the color buffer format is equivalent
-		to the texture internal format.
-		""",
+			The texture internal format is determined when the color buffer is associated with the texture, guaranteeing that the color buffer format is
+			equivalent to the texture internal format.
+			""",
 			"""
-		When a color buffer of a pbuffer is being used as a texture, the pbuffer can not be used for rendering; this makes it easier for implementations to
-		avoid a copy of the image since the semantics of the pointer swap are clear.
-		""",
+			When a color buffer of a pbuffer is being used as a texture, the pbuffer can not be used for rendering; this makes it easier for implementations to
+			avoid a copy of the image since the semantics of the pointer swap are clear.
+			""",
 			"""
-		The application must release the color buffer from the texture before it can render to the pbuffer again. When the color buffer is bound as a texture,
-		draw and read operations on the pbuffer are undefined.
-		""",
+			The application must release the color buffer from the texture before it can render to the pbuffer again. When the color buffer is bound as a
+			texture, draw and read operations on the pbuffer are undefined.
+			""",
 			"""
-		A mipmap attribute can be set, in which case memory will be allocated up front for mipmaps. The application can render the mipmap images or, if
-		${registryLinkTo("SGIS", "generate_mipmap")} is supported, they can be automatically generated when the color buffer is bound as a texture.
-		""",
+			A mipmap attribute can be set, in which case memory will be allocated up front for mipmaps. The application can render the mipmap images or, if
+			${registryLinkTo("SGIS", "generate_mipmap")} is supported, they can be automatically generated when the color buffer is bound as a texture.
+			""",
 			"A texture target is associated with the pbuffer, so that cubemap images can be rendered into a single color buffer."
 		)}
 		Requires ${WGL_ARB_extensions_string.link}, ${WGL_ARB_pixel_format.link}, ${WGL_ARB_pbuffer.link}.

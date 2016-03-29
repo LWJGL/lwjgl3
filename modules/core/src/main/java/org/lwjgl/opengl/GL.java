@@ -197,21 +197,6 @@ public final class GL {
 			throw new IllegalStateException("OpenGL has already been created.");
 
 		GL.functionProvider = functionProvider;
-
-		switch ( Platform.get() ) {
-			case LINUX:
-				long display = nXOpenDisplay(NULL);
-				try {
-					capabilitiesGLXClient = createCapabilitiesGLX(display, -1);
-					capabilitiesGLX = createCapabilitiesGLX(display);
-				} finally {
-					XCloseDisplay(display);
-				}
-				break;
-			case WINDOWS:
-				capabilitiesWGL = createCapabilitiesWGLDummy();
-				break;
-		}
 	}
 
 	/** Unloads the OpenGL native library. */
@@ -260,11 +245,17 @@ public final class GL {
 	 * <p>This method may only be used on Windows.</p>
 	 */
 	public static WGLCapabilities getCapabilitiesWGL() {
+		if ( capabilitiesWGL == null )
+			capabilitiesWGL = createCapabilitiesWGLDummy();
+
 		return capabilitiesWGL;
 	}
 
 	/** Returns the GLX client capabilities. */
 	static GLXCapabilities getCapabilitiesGLXClient() {
+		if ( capabilitiesGLXClient == null )
+			capabilitiesGLXClient = initCapabilitiesGLX(true);
+
 		return capabilitiesGLXClient;
 	}
 
@@ -274,7 +265,19 @@ public final class GL {
 	 * <p>This method may only be used on Linux.</p>
 	 */
 	public static GLXCapabilities getCapabilitiesGLX() {
+		if ( capabilitiesGLX == null )
+			capabilitiesGLX = initCapabilitiesGLX(false);
+
 		return capabilitiesGLX;
+	}
+
+	private static GLXCapabilities initCapabilitiesGLX(boolean client) {
+		long display = nXOpenDisplay(NULL);
+		try {
+			return createCapabilitiesGLX(display, client ? -1 : XDefaultScreen(display));
+		} finally {
+			XCloseDisplay(display);
+		}
 	}
 
 	/**
@@ -428,8 +431,13 @@ public final class GL {
 
 	/** Creates a dummy context and retrieves the WGL capabilities. */
 	private static WGLCapabilities createCapabilitiesWGLDummy() {
+		long hdc = wglGetCurrentDC(); // just use the current context if one exists
+		if ( hdc != NULL )
+			return createCapabilitiesWGL(hdc);
+
 		MemoryStack stack = stackPush();
 
+		short classAtom = 0;
 		long hwnd = NULL;
 		long hglrc = NULL;
 		try {
@@ -440,7 +448,7 @@ public final class GL {
 				.hInstance(WindowsLibrary.HINSTANCE)
 				.lpszClassName(stack.UTF16("WGL"));
 
-			short classAtom = RegisterClassEx(wc);
+			classAtom = RegisterClassEx(wc);
 			if ( classAtom == 0 )
 				throw new IllegalStateException("Failed to register WGL window class");
 
@@ -451,7 +459,7 @@ public final class GL {
 				NULL, NULL, NULL, NULL
 			));
 
-			long hdc = checkPointer(GetDC(hwnd));
+			hdc = checkPointer(GetDC(hwnd));
 
 			PIXELFORMATDESCRIPTOR pfd = PIXELFORMATDESCRIPTOR.callocStack(stack)
 				.nSize((short)PIXELFORMATDESCRIPTOR.SIZEOF)
@@ -486,7 +494,8 @@ public final class GL {
 			if ( hwnd != NULL )
 				DestroyWindow(hwnd);
 
-			UnregisterClass("WGL", WindowsLibrary.HINSTANCE);
+			if ( classAtom != 0 )
+				nUnregisterClass(classAtom & 0xFFFF, WindowsLibrary.HINSTANCE);
 
 			stack.pop();
 		}
