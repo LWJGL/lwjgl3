@@ -127,19 +127,19 @@ val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32"
 		"PFD_STEREO_DONTCARE"..0x80000000.i
 	)
 
-	IntConstant(
+	ByteConstant(
 		"##PIXELFORMATDESCRIPTOR pixel types.",
 
-		"PFD_TYPE_RGBA"..0,
-		"PFD_TYPE_COLORINDEX"..1
+		"PFD_TYPE_RGBA" expr "0",
+		"PFD_TYPE_COLORINDEX" expr "1"
 	)
 
-	IntConstant(
+	ByteConstant(
 		"##PIXELFORMATDESCRIPTOR layer types.",
 
-		"PFD_MAIN_PLANE"..0,
-		"PFD_OVERLAY_PLANE"..1,
-		"PFD_UNDERLAY_PLANE"..-1
+		"PFD_MAIN_PLANE" expr "0",
+		"PFD_OVERLAY_PLANE" expr "1",
+		"PFD_UNDERLAY_PLANE" expr "(byte)-1"
 	)
 
 	SaveLastError..int(

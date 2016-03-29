@@ -24,7 +24,10 @@ private val CAPABILITIES_CLASS = "GLCapabilities"
 val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
 
 	init {
-		javaImport("static org.lwjgl.system.MemoryUtil.*")
+		javaImport(
+			"static org.lwjgl.system.APIUtil.*",
+			"static org.lwjgl.system.MemoryUtil.*"
+		)
 	}
 
 	private val GLCorePattern = Pattern.compile("GL[1-9][0-9]")
@@ -90,7 +93,7 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		val hasDeprecated = nativeClass.functions.hasDeprecated
 
-		print("\tstatic boolean isAvailable(GLCapabilities caps")
+		print("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps")
 		if ( nativeClass.functions.any { it has DependsOn } ) print(", java.util.Set<String> ext")
 		if ( hasDeprecated ) print(", boolean fc")
 		println(") {")
@@ -157,39 +160,19 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		println("""
 	$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, boolean fc) {
 		forwardCompatible = fc;
-
-		boolean MACOSX = Platform.get() == Platform.MACOSX;
-		boolean LINUX = Platform.get() == Platform.LINUX;
-		boolean WINDOWS = Platform.get() == Platform.WINDOWS;
 """)
 
-		functions.groupBy {
-			it.nativeClass.prefixMethod
-		}.map {
-			val lookup: (NativeClassFunction) -> String = when ( it.key ) {
-				"gl"  -> { it ->
-					if ( it has DeprecatedGL )
-						"GL.getFunctionAddress(provider, ${it.nativeName}, fc)"
-					else
-						"provider.getFunctionAddress(${it.nativeName})"
-				}
-				"CGL" -> { it -> "getFunctionAddress(MACOSX, provider, ${it.nativeName})" }
-				"glX" -> { it -> "getFunctionAddress(LINUX, provider, ${it.nativeName})" }
-				"wgl" -> { it -> "getFunctionAddress(WINDOWS, provider, ${it.nativeName})" }
-				else  -> throw IllegalStateException("Unrecognized function prefix: ${it.key}")
-			}
-
-			it.value
-				.map { "${it.name} = ${lookup(it)};" }
-				.joinToString(prefix = "\t\t", separator = "\n\t\t", postfix = "\n")
-		}.forEach {
-			println(it)
-		}
+		println(functions.map {
+			if ( it has DeprecatedGL )
+				"${it.name} = getFunctionAddress(fc, provider, ${it.nativeName});"
+			else
+				"${it.name} = provider.getFunctionAddress(${it.nativeName});"
+		}.joinToString(prefix = "\t\t", separator = "\n\t\t", postfix = "\n"))
 
 		for (extension in classes) {
 			val capName = extension.capName
 			if ( extension.hasNativeFunctions ) {
-				print("\t\t$capName = ext.contains(\"$capName\") && GL.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
+				print("\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if ( capName == extension.className ) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
 				if ( extension.functions.any { it has DependsOn } ) print(", ext")
 				if ( extension.functions.hasDeprecated ) print(", fc")
 				println("));")
@@ -198,8 +181,16 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		}
 		println("\t}")
 		println("""
-	private static long getFunctionAddress(boolean condition, FunctionProvider provider, String functionName) {
-		return condition ? provider.getFunctionAddress(functionName) : NULL;
+	private static long getFunctionAddress(boolean fc, FunctionProvider provider, String functionName) {
+		return fc ? NULL : provider.getFunctionAddress(functionName);
+	}
+
+	private static boolean checkExtension(String extension, boolean supported) {
+		if ( supported )
+			return true;
+
+		apiLog("[GL] " + extension + " was reported as available but an entry point is missing.");
+		return false;
 	}""")
 		print("\n}")
 	}
@@ -223,12 +214,6 @@ fun String.nativeClassGL(
 	binding = GLBinding,
 	init = init
 )
-
-fun String.nativeClassWGL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-	nativeClassGL(templateName, "WGL", postfix = postfix, init = init)
-
-fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-	nativeClassGL(templateName, "GLX", "glX", postfix, init)
 
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
 val NativeClass.registryLink: String get() {

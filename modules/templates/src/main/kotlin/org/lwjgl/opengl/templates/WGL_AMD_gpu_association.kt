@@ -126,7 +126,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 
 	HGLRC("GetCurrentAssociatedContextAMD", "Returns the current associated context in the current thread.")
 
-	DependsOn("GL_EXT_framebuffer_blit")..VOID(
+	IgnoreMissing..VOID(
 		"BlitContextFramebufferAMD",
 		"""
 		Blits data from one context to another. This facilitates high performance data communication between multiple contexts.

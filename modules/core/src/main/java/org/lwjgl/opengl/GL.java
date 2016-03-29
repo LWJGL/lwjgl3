@@ -5,6 +5,7 @@
 package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.windows.*;
 
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
@@ -15,6 +16,9 @@ import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
+import static org.lwjgl.opengl.GLX.*;
+import static org.lwjgl.opengl.GLX11.*;
+import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.Checks.checkPointer;
@@ -22,6 +26,9 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.ThreadLocalUtil.*;
+import static org.lwjgl.system.linux.X11.*;
+import static org.lwjgl.system.windows.GDI32.*;
+import static org.lwjgl.system.windows.User32.*;
 
 /**
  * This class must be used before any OpenGL function is called. It has the following responsibilities:
@@ -58,6 +65,11 @@ public final class GL {
 
 	/** See {@link Configuration#OPENGL_CAPABILITIES_STATE}. */
 	private static final CapabilitiesState capabilitiesState;
+
+	private static WGLCapabilities capabilitiesWGL;
+
+	private static GLXCapabilities capabilitiesGLXClient;
+	private static GLXCapabilities capabilitiesGLX;
 
 	static {
 		MAX_VERSION = Configuration.getAPIVersion(Configuration.OPENGL_MAXVERSION);
@@ -185,12 +197,30 @@ public final class GL {
 			throw new IllegalStateException("OpenGL has already been created.");
 
 		GL.functionProvider = functionProvider;
+
+		switch ( Platform.get() ) {
+			case LINUX:
+				long display = nXOpenDisplay(NULL);
+				try {
+					capabilitiesGLXClient = createCapabilitiesGLX(display, -1);
+					capabilitiesGLX = createCapabilitiesGLX(display);
+				} finally {
+					XCloseDisplay(display);
+				}
+				break;
+			case WINDOWS:
+				capabilitiesWGL = createCapabilitiesWGLDummy();
+				break;
+		}
 	}
 
 	/** Unloads the OpenGL native library. */
 	public static void destroy() {
 		if ( functionProvider == null )
 			return;
+
+		capabilitiesWGL = null;
+		capabilitiesGLX = null;
 
 		functionProvider.free();
 		functionProvider = null;
@@ -222,6 +252,29 @@ public final class GL {
 			throw new IllegalStateException("No GLCapabilities instance has been set for the current thread.");
 
 		return caps;
+	}
+
+	/**
+	 * Returns the WGL capabilities.
+	 *
+	 * <p>This method may only be used on Windows.</p>
+	 */
+	public static WGLCapabilities getCapabilitiesWGL() {
+		return capabilitiesWGL;
+	}
+
+	/** Returns the GLX client capabilities. */
+	static GLXCapabilities getCapabilitiesGLXClient() {
+		return capabilitiesGLXClient;
+	}
+
+	/**
+	 * Returns the GLX capabilities.
+	 *
+	 * <p>This method may only be used on Linux.</p>
+	 */
+	public static GLXCapabilities getCapabilitiesGLX() {
+		return capabilitiesGLX;
 	}
 
 	/**
@@ -367,75 +420,159 @@ public final class GL {
 				}
 			}
 
-			switch ( Platform.get() ) {
-				case WINDOWS:
-					supportedExtensions.add("WGL");
-					addWGLExtensions(supportedExtensions);
-					break;
-				case LINUX:
-					supportedExtensions.add("GLX");
-					addGLXExtensions(supportedExtensions);
-					break;
-				case MACOSX:
-					supportedExtensions.add("CGL");
-					break;
-				default:
-					throw new UnsupportedOperationException();
-			}
-
 			return caps = new GLCapabilities(getFunctionProvider(), supportedExtensions, forwardCompatible);
 		} finally {
 			setCapabilities(caps);
 		}
 	}
 
-	private static void addWGLExtensions(Set<String> supportedExtensions) {
-		String wglExtensions;
+	/** Creates a dummy context and retrieves the WGL capabilities. */
+	private static WGLCapabilities createCapabilitiesWGLDummy() {
+		MemoryStack stack = stackPush();
 
-		long wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringARB");
-		if ( wglGetExtensionsString != NULL ) {
-			long dc = callP(functionProvider.getFunctionAddress("wglGetCurrentDC"));
-			if ( dc == NULL )
-				throw new IllegalStateException("Failed to retrieve the device context of the current thread.");
-			wglExtensions = memDecodeASCII(callPP(wglGetExtensionsString, dc));
-		} else {
-			wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringEXT");
-			if ( wglGetExtensionsString == NULL )
-				return;
+		long hwnd = NULL;
+		long hglrc = NULL;
+		try {
+			WNDCLASSEX wc = WNDCLASSEX.callocStack(stack)
+				.cbSize(WNDCLASSEX.SIZEOF)
+				.style(CS_HREDRAW | CS_VREDRAW)
+				.lpfnWndProc(User32.Functions.DefWindowProc)
+				.hInstance(WindowsLibrary.HINSTANCE)
+				.lpszClassName(memEncodeUTF16("WGL", stack));
 
-			wglExtensions = memDecodeASCII(callP(wglGetExtensionsString));
+			short classAtom = RegisterClassEx(wc);
+			if ( classAtom == 0 )
+				throw new IllegalStateException("Failed to register WGL window class");
+
+			hwnd = checkPointer(nCreateWindowEx(
+				0, classAtom & 0xFFFF, NULL,
+				WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
+				0, 0, 1, 1,
+				NULL, NULL, NULL, NULL
+			));
+
+			long hdc = checkPointer(GetDC(hwnd));
+
+			PIXELFORMATDESCRIPTOR pfd = PIXELFORMATDESCRIPTOR.callocStack(stack)
+				.nSize((short)PIXELFORMATDESCRIPTOR.SIZEOF)
+				.nVersion((short)1)
+				.dwFlags(PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER)
+				.iPixelType(PFD_TYPE_RGBA)
+				.cColorBits((byte)32)
+				.cRedBits((byte)8)
+				.cGreenBits((byte)8)
+				.cBlueBits((byte)8)
+				.cAlphaBits((byte)8)
+				.cDepthBits((byte)24)
+				.iLayerType(PFD_MAIN_PLANE);
+
+			int pixelFormat = ChoosePixelFormat(hdc, pfd);
+			if ( pixelFormat == 0 )
+				throw new IllegalStateException("Failed to choose a pixel format");
+
+			if ( SetPixelFormat(hdc, pixelFormat, pfd) == 0 )
+				throw new IllegalStateException("Failed to set the pixel format. Error code: " + WinBase.getLastError());
+
+			hglrc = checkPointer(wglCreateContext(hdc));
+			wglMakeCurrent(hdc, hglrc);
+
+			return createCapabilitiesWGL(hdc);
+		} finally {
+			if ( hglrc != NULL ) {
+				wglMakeCurrent(NULL, NULL);
+				wglDeleteContext(hglrc);
+			}
+
+			if ( hwnd != NULL )
+				DestroyWindow(hwnd);
+
+			UnregisterClass("WGL", WindowsLibrary.HINSTANCE);
+
+			stack.pop();
 		}
-
-		StringTokenizer tokenizer = new StringTokenizer(wglExtensions);
-		while ( tokenizer.hasMoreTokens() )
-			supportedExtensions.add(tokenizer.nextToken());
 	}
 
-	private static void addGLXExtensions(Set<String> supportedExtensions) {
-		long glXGetCurrentDisplay = GL.getFunctionProvider().getFunctionAddress("glXGetCurrentDisplay");
-		if ( glXGetCurrentDisplay == NULL )
-			throw new OpenGLException("Failed to retrieve glXGetCurrentDisplay function address.");
+	/**
+	 * Creates a {@link WGLCapabilities} instance for the context that is current in the current thread.
+	 *
+	 * <p>This method may only be used on Windows.</p>
+	 */
+	public static WGLCapabilities createCapabilitiesWGL() {
+		long hdc = wglGetCurrentDC();
+		if ( hdc == NULL )
+			throw new IllegalStateException("Failed to retrieve the device context of the current OpenGL context");
 
-		long display = callP(glXGetCurrentDisplay);
+		return createCapabilitiesWGL(hdc);
+	}
 
+	/**
+	 * Creates a {@link WGLCapabilities} instance for the specified device context.
+	 *
+	 * @param hdc the device context handle ({@code HDC})
+	 */
+	private static WGLCapabilities createCapabilitiesWGL(long hdc) {
+		String extensionsString = null;
+
+		long wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringARB");
+		if ( wglGetExtensionsString != NULL )
+			extensionsString = memDecodeASCII(callPP(wglGetExtensionsString, hdc));
+		else {
+			wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringEXT");
+			if ( wglGetExtensionsString != NULL )
+				extensionsString = memDecodeASCII(callP(wglGetExtensionsString));
+		}
+
+		Set<String> supportedExtensions = new HashSet<String>(32);
+
+		if ( extensionsString != null ) {
+			StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+			while ( tokenizer.hasMoreTokens() )
+				supportedExtensions.add(tokenizer.nextToken());
+		}
+
+		return new WGLCapabilities(functionProvider, supportedExtensions);
+	}
+
+	/**
+	 * Creates a {@link GLXCapabilities} instance for the default screen of the specified X connection.
+	 *
+	 * <p>This method may only be used on Linux.</p>
+	 *
+	 * @param display the X connection handle ({@code DISPLAY})
+	 */
+	public static GLXCapabilities createCapabilitiesGLX(long display) {
+		return createCapabilitiesGLX(display, XDefaultScreen(display));
+	}
+
+	/**
+	 * Creates a {@link GLXCapabilities} instance for the specified screen of the specified X connection.
+	 *
+	 * <p>This method may only be used on Linux.</p>
+	 *
+	 * @param display the X connection handle ({@code DISPLAY})
+	 * @param screen  the screen index
+	 */
+	public static GLXCapabilities createCapabilitiesGLX(long display, int screen) {
 		int majorVersion;
 		int minorVersion;
 
 		MemoryStack stack = stackPush();
 		try {
-			IntBuffer version = stack.ints(0, 0);
+			IntBuffer piMajor = stack.ints(0);
+			IntBuffer piMinor = stack.ints(0);
 
-			long glXQueryVersion = functionProvider.getFunctionAddress("glXQueryVersion");
-			if ( callPPPI(glXQueryVersion, display, memAddress(version), memAddress(version) + 4) == 0 )
-				throw new OpenGLException("GLX is not available."); // TODO: can't happen, right?
+			if ( glXQueryVersion(display, piMajor, piMinor) == 0 )
+				throw new IllegalStateException("Failed to query GLX version");
 
-			majorVersion = version.get(0);
-			minorVersion = version.get(1);
+			majorVersion = piMajor.get(0);
+			minorVersion = piMinor.get(1);
 			if ( majorVersion != 1 )
 				throw new OpenGLException("Invalid GLX major version: " + majorVersion);
 		} finally {
 			stack.pop();
 		}
+
+		Set<String> supportedExtensions = new HashSet<String>(32);
 
 		int[][] GLX_VERSIONS = {
 			{ 1, 2, 3, 4 }
@@ -449,26 +586,23 @@ public final class GL {
 			}
 		}
 
-		long glXQueryExtensionsString = functionProvider.getFunctionAddress("glXQueryExtensionsString");
-		if ( glXQueryExtensionsString == NULL )
-			return;
+		if ( 1 <= minorVersion ) {
+			long extensionsString;
 
-		String glxExtensions = memDecodeASCII(callPIP(glXQueryExtensionsString, display, 0));
-		StringTokenizer tokenizer = new StringTokenizer(glxExtensions);
-		while ( tokenizer.hasMoreTokens() )
-			supportedExtensions.add(tokenizer.nextToken());
-	}
+			if ( screen == -1 ) {
+				long glXGetClientString = functionProvider.getFunctionAddress("glXGetClientString");
+				extensionsString = callPIP(glXGetClientString, display, GLX_EXTENSIONS);
+			} else {
+				long glXQueryExtensionsString = functionProvider.getFunctionAddress("glXQueryExtensionsString");
+				extensionsString = callPIP(glXQueryExtensionsString, display, screen);
+			}
 
-	static long getFunctionAddress(FunctionProvider provider, String functionName, boolean fc) {
-		return fc ? NULL : provider.getFunctionAddress(functionName);
-	}
+			StringTokenizer tokenizer = new StringTokenizer(memDecodeASCII(extensionsString));
+			while ( tokenizer.hasMoreTokens() )
+				supportedExtensions.add(tokenizer.nextToken());
+		}
 
-	static boolean checkExtension(String extension, boolean supported) {
-		if ( supported )
-			return true;
-
-		apiLog("[GL] " + extension + " was reported as available but an entry point is missing.");
-		return false;
+		return new GLXCapabilities(functionProvider, supportedExtensions);
 	}
 
 	/** Manages the thread-local {@link GLCapabilities} state. */

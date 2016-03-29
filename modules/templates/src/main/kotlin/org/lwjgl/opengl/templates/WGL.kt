@@ -138,7 +138,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, prefix = "WGL", binding = GLBinding.
 
 		nullable..HDC.IN("hdc", "handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}."),
 		nullable..HGLRC.IN(
-			"context",
+			"hglrc",
 			"""
 			handle to an OpenGL rendering context that the function sets as the calling thread's rendering context. If {@code context} is $NULL, the function
 			makes the calling thread's current rendering context no longer current, and releases the device context that is used by the rendering context. In
@@ -151,12 +151,12 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, prefix = "WGL", binding = GLBinding.
 		"ShareLists",
 		"Enables multiple OpenGL rendering contexts to share a single display-list space.",
 
-		HGLRC.IN("context1", "the OpenGL rendering context with which to share display lists."),
+		HGLRC.IN("hglrc1", "the OpenGL rendering context with which to share display lists."),
 		HGLRC.IN(
-			"context2",
+			"hglrc2",
 			"""
-			the OpenGL rendering context to share display lists with {@code context1}. The {@code context2} parameter should not contain any existing display
-			lists when {@code wglShareLists} is called.
+			the OpenGL rendering context to share display lists with {@code hglrc1}. The {@code hglrc2} parameter should not contain any existing display lists
+			when {@code wglShareLists} is called.
 			"""
 		)
 	)

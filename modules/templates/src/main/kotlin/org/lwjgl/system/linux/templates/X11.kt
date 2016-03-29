@@ -481,6 +481,19 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 		)
 	)
 
+	void(
+		"XCloseDisplay",
+		"""
+		Closes the connection to the X server for the display specified in the {@code Display} structure and destroys all windows, resource IDs (Window, Font,
+		Pixmap, Colormap, Cursor, and GContext), or other resources that the client has created on this display, unless the close-down mode of the resource has
+		been changed (see {@code XSetCloseDownMode()}). Therefore, these windows, resource IDs, and other resources should never be referenced again or an error will
+		be generated. Before exiting, you should call {@code XCloseDisplay()} explicitly so that any pending errors are reported as {@code XCloseDisplay()}
+		performs a final {@code XSync()} operation.
+		""",
+
+		DISPLAY
+	)
+
 	int(
 		"XDefaultScreen",
 		"Returns a pointer to the default screen.",

@@ -848,8 +848,11 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"Creates an overlapped, pop-up, or child window with an extended window style; otherwise, this function is identical to the CreateWindow function.",
 
 		DWORD.IN("dwExStyle", "the extended window style of the window being created"),
-		LPCTSTR.IN("lpClassName", "a null-terminated string or a class atom created by a previous call to the #RegisterClassEx(WNDCLASSEX) function."),
-		LPCTSTR.IN(
+		nullable..LPCTSTR.IN(
+			"lpClassName",
+			"a null-terminated string or a class atom created by a previous call to the #RegisterClassEx(WNDCLASSEX) function."
+		),
+		nullable..LPCTSTR.IN(
 			"lpWindowName",
 			"the window name. If the window style specifies a title bar, the window title pointed to by {@code lpWindowName} is displayed in the title bar."
 		),
