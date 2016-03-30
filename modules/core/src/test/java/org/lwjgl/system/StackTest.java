@@ -87,7 +87,7 @@ public class StackTest {
 
 	@Test(expectedExceptions = StackOverflowError.class)
 	public void testSOE() {
-		MemoryStack stack = new MemoryStack();
+		MemoryStack stack = MemoryStack.create();
 
 		// Test growing of the stack frame array,
 		// the Java stack should overflow before we have any issues
