@@ -20,6 +20,9 @@ import static org.lwjgl.vulkan.VKUtil.*;
 
 /**
  * This class loads the Vulkan library into the JVM process.
+ *
+ * @see Configuration#VULKAN_LIBRARY_NAME
+ * @see Configuration#VULKAN_EXPLICIT_INIT
  */
 public final class VK {
 

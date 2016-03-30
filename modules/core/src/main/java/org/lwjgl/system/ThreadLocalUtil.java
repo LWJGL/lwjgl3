@@ -16,6 +16,8 @@ import static org.lwjgl.system.APIUtil.*;
  * This class provides storage for all LWJGL objects that must be thread-local. [INTERNAL USE ONLY]
  *
  * <p>The default implementation uses a simple {@link ThreadLocal}. Alternative implementations may have better performance.</p>
+ *
+ * @see Configuration#THREAD_LOCAL_SPACE
  */
 public final class ThreadLocalUtil {
 

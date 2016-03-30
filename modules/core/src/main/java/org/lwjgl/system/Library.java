@@ -11,7 +11,12 @@ import java.util.regex.Pattern;
 
 import static org.lwjgl.system.APIUtil.*;
 
-/** Initializes the LWJGL shared library and handles loading additional shared libraries. */
+/**
+ * Initializes the LWJGL shared library and handles loading additional shared libraries.
+ *
+ * @see Configuration#LIBRARY_NAME
+ * @see Configuration#LIBRARY_PATH
+ */
 public final class Library {
 
 	/** The LWJGL shared library name. */

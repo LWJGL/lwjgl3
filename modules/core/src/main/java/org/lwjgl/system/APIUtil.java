@@ -28,6 +28,8 @@ import static org.lwjgl.system.Pointer.*;
  * Utility class useful to API bindings. [INTERNAL USE ONLY]
  *
  * <p>Method names in this class are prefixed with {@code api} to avoid ambiguities when used with static imports.</p>
+ *
+ * @see Configuration#DEBUG_STREAM
  */
 public final class APIUtil {
 
@@ -97,6 +99,16 @@ public final class APIUtil {
 			this.implementation = implementation;
 		}
 
+		@Override
+		public String toString() {
+			StringBuilder sb = new StringBuilder(16);
+			sb.append(major).append('.').append(minor);
+			if ( revision != null )
+				sb.append('.').append(revision);
+			if ( implementation != null )
+				sb.append(" (").append(implementation).append(')');
+			return sb.toString();
+		}
 	}
 
 	/**

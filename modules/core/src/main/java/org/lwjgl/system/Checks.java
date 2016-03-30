@@ -16,6 +16,10 @@ import static org.lwjgl.system.Pointer.*;
  * occur and cause unexpected behaviour, a crash, or worse, a security risk.
  *
  * <p>Internal class, don't use.</p>
+ *
+ * @see Configuration#DISABLE_CHECKS
+ * @see Configuration#DEBUG
+ * @see Configuration#DEBUG_FUNCTIONS
  */
 public final class Checks {
 

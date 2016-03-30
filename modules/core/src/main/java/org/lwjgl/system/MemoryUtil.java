@@ -33,6 +33,9 @@ import static org.lwjgl.system.Pointer.*;
  * </ul>
  *
  * <p>Methods in bindings that accept/return {@code CharSequence}/{@code String} also support {@code ByteBuffer}, so custom codecs can be used if necessary.</p>
+ *
+ * @see Configuration#MEMORY_ALLOCATOR
+ * @see Configuration#DEBUG_MEMORY_ALLOCATOR
  */
 public final class MemoryUtil {
 
