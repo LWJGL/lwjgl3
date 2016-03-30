@@ -205,7 +205,15 @@ public class MemoryStack {
 	 * cases or in auto-generated code.</p>
 	 */
 	public void setPointer(int pointer) {
+		if ( CHECKS )
+			checkPointer(pointer);
+
 		this.pointer = pointer;
+	}
+
+	private void checkPointer(int pointer) {
+		if ( pointer < 0 || size < pointer )
+			throw new IndexOutOfBoundsException("Invalid stack pointer");
 	}
 
 	private static void checkAlignment(int alignment) {
@@ -213,8 +221,8 @@ public class MemoryStack {
 			throw new IllegalArgumentException("Alignment must be a power-of-two value.");
 	}
 
-	private static void checkPointer(int offset) {
-		if ( offset < 0 )
+	private static void checkPush(int pointer) {
+		if ( pointer < 0 )
 			throw new OutOfMemoryError("Out of stack space.");
 	}
 
@@ -244,7 +252,7 @@ public class MemoryStack {
 		if ( DEBUG )
 			checkAlignment(alignment);
 		if ( CHECKS )
-			checkPointer(newPointer);
+			checkPush(newPointer);
 
 		// Align pointer to the specified alignment
 		newPointer &= ~(alignment - 1);
