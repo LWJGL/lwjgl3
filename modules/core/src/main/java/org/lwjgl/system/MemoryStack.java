@@ -10,6 +10,7 @@ import org.lwjgl.PointerBuffer;
 import java.nio.*;
 import java.util.Arrays;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -20,10 +21,16 @@ import static org.lwjgl.system.ThreadLocalUtil.*;
  * An off-heap memory stack.
  *
  * <p>This class should be used in a thread-local manner for stack allocations.</p>
+ *
+ * @see Configuration#STACK_SIZE
+ * @see Configuration#DEBUG_STACK
  */
 public class MemoryStack {
 
-	private static final int DEFAULT_STACK_SIZE = Configuration.STACK_SIZE.get(32) * 1024;
+	private static final int DEFAULT_STACK_SIZE   = Configuration.STACK_SIZE.get(32) * 1024;
+	private static final int DEFAULT_STACK_FRAMES = 8;
+
+	private static final boolean DEBUG_STACK = Configuration.DEBUG_STACK.get();
 
 	static {
 		if ( DEFAULT_STACK_SIZE < 0 )
@@ -37,12 +44,27 @@ public class MemoryStack {
 
 	private int pointer;
 
-	private int[] frames;
-	private int   frameIndex;
+	private   int[] frames;
+	protected int   frameIndex;
+
+	/**
+	 * Creates a new {@link MemoryStack} with the specified size.
+	 *
+	 * @param size the maximum number of bytes that may be allocated on the stack
+	 */
+	protected MemoryStack(int size) {
+		this.buffer = BufferUtils.createByteBuffer(size);
+		this.address = memAddress(buffer);
+
+		this.size = size;
+		this.pointer = size;
+
+		this.frames = new int[DEFAULT_STACK_FRAMES];
+	}
 
 	/** Creates a new {@link MemoryStack} with the default size. */
-	public MemoryStack() {
-		this(DEFAULT_STACK_SIZE);
+	public static MemoryStack create() {
+		return create(DEFAULT_STACK_SIZE);
 	}
 
 	/**
@@ -50,14 +72,10 @@ public class MemoryStack {
 	 *
 	 * @param size the maximum number of bytes that may be allocated on the stack
 	 */
-	public MemoryStack(int size) {
-		this.buffer = BufferUtils.createByteBuffer(size);
-		this.address = memAddress(buffer);
-
-		this.size = size;
-		this.pointer = size;
-
-		this.frames = new int[8];
+	public static MemoryStack create(int size) {
+		return DEBUG_STACK
+			? new DebugMemoryStack(size)
+			: new MemoryStack(size);
 	}
 
 	/**
@@ -91,6 +109,54 @@ public class MemoryStack {
 	public MemoryStack pop() {
 		pointer = frames[--frameIndex];
 		return this;
+	}
+
+	/** Stores the method that pushed a frame and checks if it is the same method when the frame is popped. */
+	private static class DebugMemoryStack extends MemoryStack {
+
+		private StackTraceElement[] debugFrames;
+
+		DebugMemoryStack(int size) {
+			super(size);
+			debugFrames = new StackTraceElement[DEFAULT_STACK_FRAMES];
+		}
+
+		@Override
+		public MemoryStack push() {
+			if ( frameIndex == debugFrames.length )
+				debugFrames = Arrays.copyOf(debugFrames, debugFrames.length * 2);
+
+			debugFrames[frameIndex] = getMethod();
+
+			return super.push();
+		}
+
+		@Override
+		public MemoryStack pop() {
+			StackTraceElement popped = getMethod();
+
+			StackTraceElement pushed = debugFrames[frameIndex - 1];
+			debugFrames[frameIndex - 1] = null;
+
+			if ( !popped.getClassName().equals(pushed.getClassName()) || !popped.getMethodName().equals(pushed.getMethodName()) )
+				DEBUG_STREAM.format(
+					"[LWJGL] Asymmetric pop detected:\n\tPUSHED: %s\n\tPOPPED: %s\n\tTHREAD: %s\n",
+					pushed.toString(),
+					popped.toString(),
+					Thread.currentThread()
+				);
+
+			return super.pop();
+		}
+
+		private static StackTraceElement getMethod() {
+			StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
+			for ( int i = 1; i < stacktrace.length; i++ ) {
+				if ( !stacktrace[i].getClassName().startsWith(MemoryStack.class.getName()) )
+					return stacktrace[i];
+			}
+			throw new IllegalStateException();
+		}
 	}
 
 	/**

@@ -139,15 +139,27 @@ public class Configuration<T> {
 	 * ({@link MemoryUtil#memAlloc memAlloc}/{@link MemoryUtil#memFree memFree}/etc). All memory allocations through that API will be tracked and leaks
 	 * will be reported on JVM exit. The {@code memReport} methods can also be used.
 	 *
-	 * <p>The debug allocator generates stack traces on every allocation, which may negatively impact performance. If this becomes a serious issue, the
-	 * JVM options {@code -XX:-StackTraceInThrowable} and {@code -XX:MaxJavaStackTraceDepth=d} (where {@code d >= 6}) can be used to reduce the
-	 * overhead.</p>
+	 * <p>When this option is enabled, a stacktrace is generated on every allocation, which may negatively impact performance. If this becomes a serious issue,
+	 * the JVM option {@code -XX:MaxJavaStackTraceDepth=d} (where {@code d >= 6}) can be used to reduce the overhead.</p>
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.DebugAllocator</b><br>
 	 * &nbsp; &nbsp;Usage: Static<br>
 	 */
 	public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR = new Configuration<Boolean>("org.lwjgl.util.DebugAllocator", StateInit.BOOLEAN);
+
+	/**
+	 * Set to true to enable LWJGL's debug mode for the {@link MemoryStack}. When using the stack, each frame should be popped in the same method that pushed
+	 * it. If this symmetry is broken, this mode will report it immediately.
+	 *
+	 * <p>When this option is enabled, a stacktrace is generated on every push or pop to the stack, which may negatively impact performance. If this becomes a
+	 * serious issue, the JVM option {@code -XX:MaxJavaStackTraceDepth=d} (where {@code d >= 5}) can be used to reduce the overhead.</p>
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.util.DebugStack</b><br>
+	 * &nbsp; &nbsp;Usage: Static<br>
+	 */
+	public static final Configuration<Boolean> DEBUG_STACK = new Configuration<Boolean>("org.lwjgl.util.DebugStack", StateInit.BOOLEAN);
 
 	/**
 	 * When enabled, capabilities classes will print an error message when they fail to retrieve a function pointer.

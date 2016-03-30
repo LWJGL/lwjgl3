@@ -40,7 +40,7 @@ public final class ThreadLocalUtil {
 		public ALCapabilities alCaps;
 
 		public TLS() {
-			stack = new MemoryStack();
+			stack = MemoryStack.create();
 		}
 
 		@Override
