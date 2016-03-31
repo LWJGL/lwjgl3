@@ -309,13 +309,13 @@ public final class GLES {
 		GLESCapabilities get();
 	}
 
-	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalUtil.TLS}. */
+	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalState}. */
 	private static class TLCapabilitiesState implements CapabilitiesState {
 		@Override
-		public void set(GLESCapabilities caps) { tlsGet().glesCaps = caps; }
+		public void set(GLESCapabilities caps) { tlsGet().capsGLES = caps; }
 
 		@Override
-		public GLESCapabilities get() { return tlsGet().glesCaps; }
+		public GLESCapabilities get() { return tlsGet().capsGLES; }
 	}
 
 	/** Optional, write-once {@link CapabilitiesState}. */

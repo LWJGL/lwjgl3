@@ -619,13 +619,13 @@ public final class GL {
 		GLCapabilities get();
 	}
 
-	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalUtil.TLS}. */
+	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalState}. */
 	private static class TLCapabilitiesState implements CapabilitiesState {
 		@Override
-		public void set(GLCapabilities caps) { tlsGet().glCaps = caps; }
+		public void set(GLCapabilities caps) { tlsGet().capsGL = caps; }
 
 		@Override
-		public GLCapabilities get() { return tlsGet().glCaps; }
+		public GLCapabilities get() { return tlsGet().capsGL; }
 	}
 
 	/** Optional, write-once {@link CapabilitiesState}. */

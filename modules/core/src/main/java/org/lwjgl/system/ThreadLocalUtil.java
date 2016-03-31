@@ -4,10 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.openal.ALCapabilities;
-import org.lwjgl.opengl.GLCapabilities;
-import org.lwjgl.opengles.GLESCapabilities;
-
 import java.lang.reflect.Field;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -26,36 +22,13 @@ public final class ThreadLocalUtil {
 	private ThreadLocalUtil() {
 	}
 
-	public static TLS tlsGet() {
+	public static ThreadLocalState tlsGet() {
 		return TLS.get();
 	}
 
-	public static class TLS implements Runnable {
-
-		private Runnable target;
-
-		public final MemoryStack stack;
-
-		public GLCapabilities   glCaps;
-		public GLESCapabilities glesCaps;
-
-		public ALCapabilities alCaps;
-
-		public TLS() {
-			stack = MemoryStack.create();
-		}
-
-		@Override
-		public void run() {
-			if ( target != null )
-				target.run();
-		}
-
-	}
-
 	private interface State {
-		void set(TLS value);
-		TLS get();
+		void set(ThreadLocalState value);
+		ThreadLocalState get();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -79,20 +52,20 @@ public final class ThreadLocalUtil {
 	/** {@link ThreadLocal} implementation. */
 	private static class TLState implements State {
 
-		private static final ThreadLocal<TLS> STATE = new ThreadLocal<ThreadLocalUtil.TLS>() {
+		private static final ThreadLocal<ThreadLocalState> STATE = new ThreadLocal<ThreadLocalState>() {
 			@Override
-			protected TLS initialValue() {
-				return new TLS();
+			protected ThreadLocalState initialValue() {
+				return new ThreadLocalState();
 			}
 		};
 
 		@Override
-		public void set(TLS value) {
+		public void set(ThreadLocalState value) {
 			STATE.set(value);
 		}
 
 		@Override
-		public TLS get() {
+		public ThreadLocalState get() {
 			return STATE.get();
 		}
 
@@ -101,7 +74,7 @@ public final class ThreadLocalUtil {
 	/**
 	 * Unsafe implemenation.
 	 *
-	 * <p>Replaces {@link Thread}'s target runnable with an instance of {@link TLS}. The new runnable delegates to the original runnable.</p>
+	 * <p>Replaces {@link Thread}'s target runnable with an instance of {@link ThreadLocalState}. The new runnable delegates to the original runnable.</p>
 	 *
 	 * <p>This implementation trades the {@code ThreadLocalMap} lookup with a plain field derefence, eliminating considerable overhead.</p>
 	 */
@@ -124,19 +97,19 @@ public final class ThreadLocalUtil {
 		}
 
 		@Override
-		public TLS get() {
+		public ThreadLocalState get() {
 			Object target = UNSAFE.getObject(Thread.currentThread(), TARGET);
-			return TLS.class.isInstance(target) ? (TLS)target : setInitialValue();
+			return ThreadLocalState.class.isInstance(target) ? (ThreadLocalState)target : setInitialValue();
 		}
 
-		private TLS setInitialValue() {
-			TLS tls = new TLS();
+		private ThreadLocalState setInitialValue() {
+			ThreadLocalState tls = new ThreadLocalState();
 			set(tls);
 			return tls;
 		}
 
 		@Override
-		public void set(TLS value) {
+		public void set(ThreadLocalState value) {
 			Thread t = Thread.currentThread();
 
 			value.target = (Runnable)UNSAFE.getObject(t, TARGET);

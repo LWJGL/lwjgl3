@@ -42,10 +42,6 @@ val NV_copy_image = "NVCopyImage".nativeClassGL("NV_copy_image", postfix = NV) {
 }
 
 val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV) {
-	javaImport(
-		"org.lwjgl.system.linux.*"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "copy_image")} extension.

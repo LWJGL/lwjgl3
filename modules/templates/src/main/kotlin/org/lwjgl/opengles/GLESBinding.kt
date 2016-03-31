@@ -17,6 +17,11 @@ private val CAPABILITIES_CLASS = "GLESCapabilities"
 private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, CAPABILITIES_CLASS) {
 
 	init {
+		Generator.registerTLS(
+			"org.lwjgl.opengles.*",
+			"public GLESCapabilities capsGLES;"
+		)
+
 		javaImport("static org.lwjgl.system.MemoryUtil.*")
 	}
 

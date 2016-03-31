@@ -12,6 +12,13 @@ private val CAPABILITIES_CLASS = "ALCapabilities"
 
 private val ALBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, CAPABILITIES_CLASS, callingConvention = CallingConvention.DEFAULT) {
 
+	init {
+		Generator.registerTLS(
+			"org.lwjgl.openal.*",
+			"public ALCapabilities capsAL;"
+		)
+	}
+
 	override val hasCapabilities: Boolean get() = true
 
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "AL10"

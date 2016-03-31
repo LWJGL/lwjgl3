@@ -13,7 +13,7 @@ import java.util.*;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.EXTThreadLocalContext.*;
 import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.Checks.checkPointer;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -229,13 +229,13 @@ public final class AL {
 		ALCapabilities get();
 	}
 
-	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalUtil.TLS}. */
+	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalState}. */
 	private static class TLCapabilitiesState implements CapabilitiesState {
 		@Override
-		public void set(ALCapabilities caps) { tlsGet().alCaps = caps; }
+		public void set(ALCapabilities caps) { tlsGet().capsAL = caps; }
 
 		@Override
-		public ALCapabilities get() { return tlsGet().alCaps; }
+		public ALCapabilities get() { return tlsGet().capsAL; }
 	}
 
 	/** Optional, write-once {@link CapabilitiesState}. */

@@ -24,6 +24,11 @@ private val CAPABILITIES_CLASS = "GLCapabilities"
 val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
 
 	init {
+		Generator.registerTLS(
+			"org.lwjgl.opengl.*",
+			"public GLCapabilities capsGL;"
+		)
+
 		javaImport(
 			"static org.lwjgl.system.APIUtil.*",
 			"static org.lwjgl.system.MemoryUtil.*"

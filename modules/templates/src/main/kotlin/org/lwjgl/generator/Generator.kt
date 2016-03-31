@@ -119,6 +119,8 @@ fun main(args: Array<String>) {
 
 		// Generate utility classes. These are auto-registered during the process above.
 
+		Generator.register(org.lwjgl.system.ThreadLocalState)
+
 		CountDownLatch(4).let { latch ->
 			fun submit(work: () -> Unit) {
 				try {
@@ -153,18 +155,30 @@ class Generator(
 		val callbacks = ConcurrentLinkedQueue<CallbackFunction>()
 		val customClasses = ConcurrentLinkedQueue<GeneratorTarget>()
 
+		val tlsImport = ConcurrentLinkedQueue<String>()
+		val tlsState = ConcurrentLinkedQueue<String>()
+
+		/** Registers a struct definition. */
 		fun register(struct: Struct): Struct {
 			structs.add(struct)
 			return struct
 		}
 
+		/** Registers a callback function. */
 		fun register(callback: CallbackFunction) {
 			callbacks.add(callback)
 		}
 
+		/** Registers a custom class. */
 		fun <T : GeneratorTarget> register(customClass: T): T {
 			customClasses.add(customClass)
 			return customClass
+		}
+
+		/** Registers state that will be added to `org.lwjgl.system.ThreadLocalState`. */
+		fun registerTLS(import: String, state: String) {
+			tlsImport.add(import)
+			tlsState.add(state)
 		}
 	}
 
