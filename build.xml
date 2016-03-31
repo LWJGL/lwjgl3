@@ -164,6 +164,7 @@ License terms: http://lwjgl.org/license.php
 			<arg line="-d ${bin.templates}"/>
 
 			<arg value="${src.templates.kotlin}/org/lwjgl/generator"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/system"/>
 
 			<arg value="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" unless:true="${binding.egl}"/>
@@ -416,6 +417,7 @@ License terms: http://lwjgl.org/license.php
 			<!--<jvmarg value="-Xcheck:jni"/>--> <!-- SIMD fails with this (see -XX:+RestoreMXCSROnJNICall) -->
 			<jvmarg value="-ea"/>
 			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
+			<jvmarg value="-Dorg.lwjgl.util.DebugAllocator=true"/>
 			<jvmarg value="-Djava.library.path=${lib}"/>
 			<jvmarg value="-XstartOnFirstThread" if:set="platform.macosx"/>
 			<jvmarg line="${jvmargs}" if:set="jvmargs"/>
