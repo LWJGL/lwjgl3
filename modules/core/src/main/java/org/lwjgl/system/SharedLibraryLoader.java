@@ -95,14 +95,6 @@ final class SharedLibraryLoader {
 		if ( AOT || !loadedLibraries.isEmpty() )
 			return;
 
-		// Don't extract natives if using JWS
-		try {
-			Method method = Class.forName("javax.jnlp.ServiceManager").getDeclaredMethod("lookup", String.class);
-			method.invoke(null, "javax.jnlp.PersistenceService");
-			return;
-		} catch (Throwable ignored) {
-		}
-
 		Library[] libraries = Library.values();
 
 		File extractPath;
