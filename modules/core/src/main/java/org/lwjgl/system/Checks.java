@@ -32,7 +32,7 @@ public final class Checks {
 	 *
 	 * <p>If maximum performance is required, they can be disabled by setting {@link Configuration#DISABLE_CHECKS} to true.</p>
 	 */
-	public static final boolean CHECKS = !Configuration.DISABLE_CHECKS.get();
+	public static final boolean CHECKS = !Configuration.DISABLE_CHECKS.get(false);
 
 	/**
 	 * Debug mode flag.
@@ -43,7 +43,7 @@ public final class Checks {
 	 *
 	 * <p>Can be enabled by setting {@link Configuration#DEBUG} to true.</p>
 	 */
-	public static final boolean DEBUG = Configuration.DEBUG.get();
+	public static final boolean DEBUG = Configuration.DEBUG.get(false);
 
 	/**
 	 * Debug functions flag.
@@ -52,7 +52,7 @@ public final class Checks {
 	 *
 	 * <p>Can be enabled by setting {@link Configuration#DEBUG_FUNCTIONS} to true.</p>
 	 */
-	public static final boolean DEBUG_FUNCTIONS = Configuration.DEBUG_FUNCTIONS.get();
+	public static final boolean DEBUG_FUNCTIONS = Configuration.DEBUG_FUNCTIONS.get(false);
 
 	static {
 		if ( DEBUG_FUNCTIONS && !DEBUG )

@@ -43,7 +43,7 @@ public final class ALC {
 	private static ALCCapabilities icd;
 
 	static {
-		if ( !Configuration.OPENAL_EXPLICIT_INIT.get() )
+		if ( !Configuration.OPENAL_EXPLICIT_INIT.get(false) )
 			create();
 	}
 

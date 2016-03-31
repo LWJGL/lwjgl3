@@ -17,7 +17,6 @@ import static org.lwjgl.opengles.GLES20.*;
 import static org.lwjgl.opengles.GLES30.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.Checks.checkPointer;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -60,7 +59,7 @@ public final class GLES {
 	private static final CapabilitiesState capabilitiesState;
 
 	static {
-		MAX_VERSION = Configuration.getAPIVersion(Configuration.OPENGLES_MAXVERSION);
+		MAX_VERSION = apiParseVersion(Configuration.OPENGLES_MAXVERSION);
 
 		String capsStateType = Configuration.OPENGLES_CAPABILITIES_STATE.get("ThreadLocal");
 		if ( "static".equals(capsStateType) )
@@ -70,7 +69,7 @@ public final class GLES {
 		else
 			throw new IllegalStateException("Invalid " + Configuration.OPENGLES_CAPABILITIES_STATE.getProperty() + " specified.");
 
-		if ( !Configuration.OPENGLES_EXPLICIT_INIT.get() )
+		if ( !Configuration.OPENGLES_EXPLICIT_INIT.get(false) )
 			create();
 	}
 

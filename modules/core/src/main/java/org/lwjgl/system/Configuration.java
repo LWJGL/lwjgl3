@@ -297,7 +297,8 @@ public class Configuration<T> {
 		static final StateInit<Boolean> BOOLEAN = new StateInit<Boolean>() {
 			@Override
 			Boolean getState(String property) {
-				return Boolean.getBoolean(property);
+				String value = System.getProperty(property);
+				return value == null ? null : Boolean.parseBoolean(value);
 			}
 		};
 
@@ -341,14 +342,20 @@ public class Configuration<T> {
 		this.state = value;
 	}
 
-	/** Returns the option value. */
+	/**
+	 * Returns the option value.
+	 *
+	 * <p>If the option value has not been set, null will be returned.</p>
+	 */
 	@SuppressWarnings("unchecked")
 	public T get() {
 		return state;
 	}
 
 	/**
-	 * Returns the value of the specified option.
+	 * Returns the option value.
+	 *
+	 * <p>If the option value has not been set, the specified default value will be returned.</p>
 	 *
 	 * @param defaultValue the default value
 	 */
@@ -359,25 +366,6 @@ public class Configuration<T> {
 			state = defaultValue;
 
 		return state;
-	}
-
-	/**
-	 * Returns the {@link APIVersion} value of the specified option.
-	 *
-	 * @param option the option to query
-	 */
-	public static APIVersion getAPIVersion(Configuration<?> option) {
-		APIVersion version;
-
-		Object state = option.get();
-		if ( state instanceof String )
-			version = apiParseVersion((String)state, null);
-		else if ( state instanceof APIVersion )
-			version = (APIVersion)state;
-		else
-			version = null;
-
-		return version;
 	}
 
 	/**
@@ -468,26 +456,6 @@ public class Configuration<T> {
 	public interface DebugStreamFactory {
 		/** Returns a {@link PrintStream} instance. */
 		PrintStream create();
-	}
-
-	/** Creates the {@link APIUtil#DEBUG_STREAM}. [INTERNAL USE ONLY]. */
-	public static PrintStream createDebugStream() {
-		PrintStream debugStream = System.err;
-
-		Object state = Configuration.DEBUG_STREAM.get();
-		if ( state instanceof String ) {
-			try {
-				Configuration.DebugStreamFactory factory = (Configuration.DebugStreamFactory)Class.forName((String)state).newInstance();
-				debugStream = factory.create();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if ( state instanceof Configuration.DebugStreamFactory ) {
-			debugStream = ((Configuration.DebugStreamFactory)state).create();
-		} else if ( state instanceof PrintStream )
-			debugStream = (PrintStream)state;
-
-		return debugStream;
 	}
 
 }

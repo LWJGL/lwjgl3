@@ -39,7 +39,7 @@ public final class CL {
 	private static CLCapabilities icd;
 
 	static {
-		if ( !Configuration.OPENCL_EXPLICIT_INIT.get() )
+		if ( !Configuration.OPENCL_EXPLICIT_INIT.get(false) )
 			create();
 	}
 

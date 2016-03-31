@@ -37,9 +37,26 @@ public final class APIUtil {
 	 * The {@link PrintStream} used by LWJGL to print debug information and non-fatal errors. Defaults to {@link System#err} which can be changed with
 	 * {@link Configuration#DEBUG_STREAM}.
 	 */
-	public static final PrintStream DEBUG_STREAM = Configuration.createDebugStream();
+	public static final PrintStream DEBUG_STREAM;
 
 	static {
+		PrintStream debugStream = System.err;
+
+		Object state = Configuration.DEBUG_STREAM.get();
+		if ( state instanceof String ) {
+			try {
+				Configuration.DebugStreamFactory factory = (Configuration.DebugStreamFactory)Class.forName((String)state).newInstance();
+				debugStream = factory.create();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if ( state instanceof Configuration.DebugStreamFactory ) {
+			debugStream = ((Configuration.DebugStreamFactory)state).create();
+		} else if ( state instanceof PrintStream )
+			debugStream = (PrintStream)state;
+
+		DEBUG_STREAM = debugStream;
+
 		Library.initialize();
 	}
 
@@ -109,6 +126,25 @@ public final class APIUtil {
 				sb.append(" (").append(implementation).append(')');
 			return sb.toString();
 		}
+	}
+
+	/**
+	 * Returns the {@link APIVersion} value of the specified option.
+	 *
+	 * @param option the option to query
+	 */
+	public static APIVersion apiParseVersion(Configuration<?> option) {
+			APIVersion version;
+
+		Object state = option.get();
+		if ( state instanceof String )
+			version = apiParseVersion((String)state, null);
+		else if ( state instanceof APIVersion )
+			version = (APIVersion)state;
+		else
+			version = null;
+
+		return version;
 	}
 
 	/**

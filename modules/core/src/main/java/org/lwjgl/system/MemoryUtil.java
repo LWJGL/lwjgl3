@@ -66,7 +66,7 @@ public final class MemoryUtil {
 		apiLog("MemoryUtil accessor: " + ACCESSOR.getClass().getSimpleName());
 
 		ALLOCATOR_IMPL = MemoryManage.getInstance();
-		ALLOCATOR = Configuration.DEBUG_MEMORY_ALLOCATOR.get()
+		ALLOCATOR = Configuration.DEBUG_MEMORY_ALLOCATOR.get(false)
 			? new DebugAllocator(ALLOCATOR_IMPL)
 			: ALLOCATOR_IMPL;
 

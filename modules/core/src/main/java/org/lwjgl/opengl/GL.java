@@ -21,7 +21,6 @@ import static org.lwjgl.opengl.GLX11.*;
 import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.Checks.checkPointer;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -72,7 +71,7 @@ public final class GL {
 	private static GLXCapabilities capabilitiesGLX;
 
 	static {
-		MAX_VERSION = Configuration.getAPIVersion(Configuration.OPENGL_MAXVERSION);
+		MAX_VERSION = apiParseVersion(Configuration.OPENGL_MAXVERSION);
 
 		String capsStateType = Configuration.OPENGL_CAPABILITIES_STATE.get("ThreadLocal");
 		if ( "static".equals(capsStateType) )
@@ -82,7 +81,7 @@ public final class GL {
 		else
 			throw new IllegalStateException("Invalid " + Configuration.OPENGL_CAPABILITIES_STATE.getProperty() + " specified.");
 
-		if ( !Configuration.OPENGL_EXPLICIT_INIT.get() )
+		if ( !Configuration.OPENGL_EXPLICIT_INIT.get(false) )
 			create();
 	}
 

@@ -42,7 +42,7 @@ public final class EGL {
 	private static EGLCapabilities caps;
 
 	static {
-		if ( !Configuration.EGL_EXPLICIT_INIT.get() )
+		if ( !Configuration.EGL_EXPLICIT_INIT.get(false) )
 			create();
 	}
 

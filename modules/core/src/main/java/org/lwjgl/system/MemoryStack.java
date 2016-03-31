@@ -30,7 +30,7 @@ public class MemoryStack {
 	private static final int DEFAULT_STACK_SIZE   = Configuration.STACK_SIZE.get(32) * 1024;
 	private static final int DEFAULT_STACK_FRAMES = 8;
 
-	private static final boolean DEBUG_STACK = Configuration.DEBUG_STACK.get();
+	private static final boolean DEBUG_STACK = Configuration.DEBUG_STACK.get(false);
 
 	static {
 		if ( DEFAULT_STACK_SIZE < 0 )
