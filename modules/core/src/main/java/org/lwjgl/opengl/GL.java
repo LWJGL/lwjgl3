@@ -28,6 +28,7 @@ import static org.lwjgl.system.ThreadLocalUtil.*;
 import static org.lwjgl.system.linux.X11.*;
 import static org.lwjgl.system.windows.GDI32.*;
 import static org.lwjgl.system.windows.User32.*;
+import static org.lwjgl.system.windows.WindowsUtil.*;
 
 /**
  * This class must be used before any OpenGL function is called. It has the following responsibilities:
@@ -463,22 +464,17 @@ public final class GL {
 			PIXELFORMATDESCRIPTOR pfd = PIXELFORMATDESCRIPTOR.callocStack(stack)
 				.nSize((short)PIXELFORMATDESCRIPTOR.SIZEOF)
 				.nVersion((short)1)
-				.dwFlags(PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER)
-				.iPixelType(PFD_TYPE_RGBA)
-				.cColorBits((byte)32)
-				.cRedBits((byte)8)
-				.cGreenBits((byte)8)
-				.cBlueBits((byte)8)
-				.cAlphaBits((byte)8)
-				.cDepthBits((byte)24)
-				.iLayerType(PFD_MAIN_PLANE);
+				.dwFlags(PFD_SUPPORT_OPENGL); // we don't care about anything else
 
 			int pixelFormat = ChoosePixelFormat(hdc, pfd);
 			if ( pixelFormat == 0 )
-				throw new IllegalStateException("Failed to choose a pixel format");
+				windowsThrowException("Failed to choose an OpenGL-compatible pixel format");
+
+			if ( DescribePixelFormat(hdc, pixelFormat, pfd) == 0 )
+				windowsThrowException("Failed to obtain pixel format information");
 
 			if ( SetPixelFormat(hdc, pixelFormat, pfd) == 0 )
-				throw new IllegalStateException("Failed to set the pixel format. Error code: " + WinBase.getLastError());
+				windowsThrowException("Failed to set the pixel format");
 
 			hglrc = checkPointer(wglCreateContext(hdc));
 			wglMakeCurrent(hdc, hglrc);
