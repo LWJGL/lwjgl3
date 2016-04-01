@@ -183,16 +183,6 @@ class Parameter(
 		else                     -> name
 	}
 
-	val asJNIFunctionParam: String
-		get() {
-			val name = if ( nativeType.mapping is PointerMapping )
-				"$name$POINTER_POSTFIX"
-			else
-				name
-
-			return "$jniFunctionType $name"
-		}
-
 }
 
 // DSL extensions

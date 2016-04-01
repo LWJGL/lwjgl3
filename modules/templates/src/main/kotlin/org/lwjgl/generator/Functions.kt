@@ -1340,24 +1340,32 @@ class NativeClassFunction(
 		println(");")
 	}
 
-	fun generateFunction(writer: PrintWriter) = writer.generateFunctionImpl()
-	private fun PrintWriter.generateFunctionImpl() {
+	fun generateFunction(writer: PrintWriter) {
+		writer.generateFunctionImpl(critical = false)
+		/*
+		DISABLED: Critical JNI methods have no measurable benefit for primitive-only methods.
+		if ( !parameters.contains(JNI_ENV) )
+			writer.generateFunctionImpl(critical = true)
+		*/
+	}
+	private fun PrintWriter.generateFunctionImpl(critical: Boolean) {
+		val params = ArrayList<String>(4 + parameters.size)
+		if ( !critical )
+			params.add("JNIEnv *$JNIENV, jclass clazz")
+		if ( nativeClass.binding != null )
+			params.add("jlong $FUNCTION_ADDRESS")
+		getNativeParams(withExplicitFunctionAddress = false).map {
+			"${it.nativeType.jniFunctionType} ${it.name}${if ( it.nativeType is PointerType ) POINTER_POSTFIX else ""}"
+		}.toCollection(params)
+		if ( returns.isStructValue )
+			params.add("jlong $RESULT")
+
 		// Function signature
 
-		print("JNIEXPORT $returnsJniFunctionType JNICALL Java_${nativeClass.nativeFileNameJNI}_")
+		print("JNIEXPORT $returnsJniFunctionType JNICALL Java${if ( critical ) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_")
 		if ( !isSimpleFunction )
 			print('n')
-		print(name.asJNIName)
-		print("(")
-		print("JNIEnv *$JNIENV, jclass clazz")
-		if ( nativeClass.binding != null )
-			print(", jlong $FUNCTION_ADDRESS")
-		getNativeParams(withExplicitFunctionAddress = false).forEach {
-			print(", ${it.asJNIFunctionParam}")
-		}
-		if ( returns.isStructValue )
-			print(", jlong $RESULT")
-		println(") {")
+		println("${name.asJNIName}(${if ( params.isEmpty() ) "void" else params.joinToString(", ")}) {")
 
 		// Cast function address to pointer
 
@@ -1384,7 +1392,8 @@ class NativeClassFunction(
 
 		// Unused parameter macro
 
-		println("\tUNUSED_PARAMS($JNIENV, clazz)")
+		if ( !critical )
+			println("\tUNUSED_PARAMS($JNIENV, clazz)")
 
 		// Call native function
 

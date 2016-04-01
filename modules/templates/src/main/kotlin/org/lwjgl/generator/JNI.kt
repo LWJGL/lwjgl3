@@ -63,13 +63,31 @@ public final class JNI {
 		print(HEADER)
 		preamble.printNative(this)
 
+		// DISABLED JavaCritical: no measurable benefit for primitive-only methods.
+		println("""#define _p_ ,
+#define ARITY0(type, signature, expression) \
+JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *__env, jclass clazz, jlong __functionAddress) { \
+	UNUSED_PARAMS(__env, clazz) \
+	expression; \
+}
+//JNIEXPORT type JNICALL JavaCritical_org_lwjgl_system_JNI_##signature(jlong __functionAddress) { \
+//	expression; \
+//}
+
+#define ARITYn(type, signature, params, expression) \
+JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *__env, jclass clazz, jlong __functionAddress, params) { \
+	UNUSED_PARAMS(__env, clazz) \
+	expression; \
+}
+//JNIEXPORT type JNICALL JavaCritical_org_lwjgl_system_JNI_##signature(jlong __functionAddress, params) { \
+//	expression; \
+//}
+""")
 		sortedSignatures.forEach {
-			print("JNIEXPORT ${it.returnType.jniFunctionType} JNICALL Java_org_lwjgl_system_JNI_${it.signature}(JNIEnv *$JNIENV, jclass clazz, jlong __functionAddress")
+			print("ARITY${if ( it.arguments.isEmpty() ) "0" else "n"}(${it.returnType.jniFunctionType}, ${it.signature}")
 			if ( it.arguments.isNotEmpty() )
-				print(it.arguments.withIndex().map { "${it.value.jniFunctionType} param${it.index}" }.joinToString(", ", prefix = ", "))
-			print(""") {
-	UNUSED_PARAMS($JNIENV, clazz)
-	""")
+				print(it.arguments.withIndex().map { "${it.value.jniFunctionType} param${it.index}" }.joinToString(" _p_ ", prefix = ", "))
+			print(", ")
 			if ( it.returnType !== TypeMapping.VOID ) {
 				print("return ")
 				if ( it.returnType.isPointerType )
@@ -79,9 +97,7 @@ public final class JNI {
 			print(it.arguments.map { it.nativeType }.joinToString(", "))
 			print("))(intptr_t)__functionAddress)(")
 			print(it.arguments.withIndex().map { if ( it.value.isPointerType ) "(intptr_t)param${it.index}" else "param${it.index}" }.joinToString(", "))
-			println(""");
-}
-""")
+			println("))")
 		}
 
 		println("\nEXTERN_C_EXIT")
