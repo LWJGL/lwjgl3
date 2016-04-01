@@ -106,6 +106,8 @@ abstract class SimpleBinding(
 		if ( bindingFunctions.isEmpty() )
 			return
 
+		val alignment = bindingFunctions.map { it.simpleName.length }.max()!!
+
 		println("""
 	public static final class Functions {
 
@@ -115,7 +117,7 @@ abstract class SimpleBinding(
 		public static final long
 			${
 		bindingFunctions
-			.map { "${it.simpleName} = apiGetFunctionAddress($libraryExpression, ${it.nativeName})" }
+			.map { "${it.simpleName}${" ".repeat(alignment - it.simpleName.length)} = apiGetFunctionAddress($libraryExpression, ${it.nativeName})" }
 			.joinToString(separator = ",\n\t\t\t", postfix = ";")
 		}
 
