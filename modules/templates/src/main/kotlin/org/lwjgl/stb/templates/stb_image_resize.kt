@@ -8,6 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
 val stb_image_resize = "STBImageResize".nativeClass(packageName = STB_PACKAGE, prefix = "STBIR", prefixMethod = "stbir_") {
+	initializeAllocator()
 	includeSTBAPI(
 		"""#define STB_IMAGE_RESIZE_IMPLEMENTATION
 #define STB_IMAGE_RESIZE_STATIC

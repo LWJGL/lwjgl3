@@ -23,13 +23,13 @@ val GLXBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILI
 	}
 
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-		println("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
+		println("\n\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
 		print("\t\treturn ")
 
 		print("checkFunctions(")
 		nativeClass.printPointers(this, { "caps.${it.name}" }) { !(it has IgnoreMissing) }
 		println(");")
-		println("\t}\n")
+		println("\t}")
 	}
 
 	override fun PrintWriter.generateContent() {

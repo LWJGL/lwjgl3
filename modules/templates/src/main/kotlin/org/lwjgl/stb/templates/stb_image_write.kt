@@ -13,6 +13,7 @@ val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, pre
 	__pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 
+	initializeAllocator()
 	includeSTBAPI(
 		"""#define STB_IMAGE_WRITE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_STATIC

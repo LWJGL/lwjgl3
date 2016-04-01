@@ -121,8 +121,7 @@ abstract class SimpleBinding(
 			.joinToString(separator = ",\n\t\t\t", postfix = ";")
 		}
 
-	}
-""")
+	}""")
 	}
 }
 
@@ -139,14 +138,14 @@ fun simpleBinding(
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		val libraryReference = libraryName.toUpperCase()
 
-		println("\tprivate static final SharedLibrary $libraryReference = Library.loadNative($libraryExpression);\n");
+		println("\n\tprivate static final SharedLibrary $libraryReference = Library.loadNative($libraryExpression);\n");
 		print("\t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
 		generateFunctionsClass(nativeClass)
-		println("""	/** Returns the $libraryName {@link SharedLibrary}. */
+		println("""
+	/** Returns the $libraryName {@link SharedLibrary}. */
 	public static SharedLibrary getLibrary() {
 		return $libraryReference;
-	}
-""")
+	}""")
 	}
 }
 
@@ -155,7 +154,7 @@ fun APIBinding.delegate(
 	libraryExpression: String
 ) = object : SimpleBinding(libraryExpression, callingConvention) {
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-		print("\t/** Contains the function pointers loaded from {@code $libraryExpression}. */")
+		print("\n\t/** Contains the function pointers loaded from {@code $libraryExpression}. */")
 		generateFunctionsClass(nativeClass)
 	}
 }
@@ -266,30 +265,32 @@ class NativeClass(
 				if ( functions.any { it.hasCustomJNI } )
 					println("\n\tstatic { Library.initialize(); }")
 
+				printCustomMethods(static = true)
+
 				if ( functions.any { !it.hasExplicitFunctionAddress } ) {
 					println("""
 	protected $className() {
 		throw new UnsupportedOperationException();
-	}
-""")
+	}""")
 					binding.generateFunctionGetters(this, this@NativeClass)
 				}
 			} else {
 				println("\n\tstatic { Library.initialize(); }")
 
+				printCustomMethods(static = true)
+
 				// This allows binding classes to be "statically" extended. Not a good practice, but usable with static imports.
 				println("""
 	protected $className() {
 		throw new UnsupportedOperationException();
-	}
-""")
+	}""")
 			}
 		} else {
-			println("\n\tprivate $className() {}\n")
+			println("\n\tprivate $className() {}")
 		}
 
 		functions.forEach {
-			println("\t// --- [ ${it.name} ] ---\n")
+			println("\n\t// --- [ ${it.name} ] ---")
 			try {
 				it.generateMethods(this)
 			} catch (e: Exception) {
@@ -297,11 +298,9 @@ class NativeClass(
 			}
 		}
 
-		customMethods.forEach {
-			println("\t${it.trim()}\n")
-		}
+		printCustomMethods(static = false)
 
-		print("}")
+		print("\n}")
 	}
 
 	override val skipNative: Boolean get() = functions.none() { it.hasCustomJNI }
@@ -408,6 +407,16 @@ class NativeClass(
 
 	fun customMethod(method: String) {
 		customMethods.add(method)
+	}
+
+	fun initializeAllocator() {
+		customMethod("static { MemoryUtil.getAllocator(); }")
+	}
+
+	private fun PrintWriter.printCustomMethods(static: Boolean) {
+		customMethods.filter { it.startsWith("static {") == static }.forEach {
+			println("\n\t${it.trim()}")
+		}
 	}
 
 	operator fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: $templateName.$functionName")

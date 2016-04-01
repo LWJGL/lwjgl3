@@ -56,8 +56,6 @@ public final class APIUtil {
 			debugStream = (PrintStream)state;
 
 		DEBUG_STREAM = debugStream;
-
-		Library.initialize();
 	}
 
 	private APIUtil() {
@@ -134,7 +132,7 @@ public final class APIUtil {
 	 * @param option the option to query
 	 */
 	public static APIVersion apiParseVersion(Configuration<?> option) {
-			APIVersion version;
+		APIVersion version;
 
 		Object state = option.get();
 		if ( state instanceof String )
@@ -363,7 +361,7 @@ public final class APIUtil {
 	 * ASCII encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
 	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
 	 *
 	 * @return the offset to the lengths buffer
 	 */
@@ -384,7 +382,7 @@ public final class APIUtil {
 	/**
 	 * UTF8 encodes the specified strings with a null-terminator and ensures space for a buffer filled with the memory addresses of the encoded strings.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
 	 *
 	 * @return the offset to the memory address buffer
 	 */
@@ -401,7 +399,7 @@ public final class APIUtil {
 	 * UTF8 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
 	 * respectively. The lengths are 4-bytes integers and the memory address buffer starts immediately after the lengths buffer.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
 	 *
 	 * @return the offset to the lengths buffer
 	 */
@@ -424,7 +422,7 @@ public final class APIUtil {
 	 * UTF8 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
 	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
 	 *
 	 * @return the offset to the lengths buffer
 	 */
@@ -445,7 +443,7 @@ public final class APIUtil {
 	/**
 	 * UTF16 encodes the specified strings with a null-terminator and ensures space for a buffer filled with the memory addresses of the encoded strings.
 	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree(int, int)}.</p>
+	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
 	 *
 	 * @return the offset to the memory address buffer
 	 */

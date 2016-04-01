@@ -8,6 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
 val stb_truetype = "STBTruetype".nativeClass(packageName = STB_PACKAGE, prefix = "STBTT", prefixMethod = "stbtt_") {
+	initializeAllocator()
 	includeSTBAPI(
 		"""#define STB_TRUETYPE_IMPLEMENTATION${if ( Binding.NANOVG.enabled ) "" else "\n#define STBTT_STATIC"}
 #define STBTT_assert

@@ -25,11 +25,11 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 	}
 
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-		println("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
+		println("\n\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
 		print("\t\treturn checkFunctions(")
 		nativeClass.printPointers(this, { "caps.${it.name}" })
 		println(");")
-		println("\t}\n")
+		println("\t}")
 	}
 
 	override fun PrintWriter.generateContent() {

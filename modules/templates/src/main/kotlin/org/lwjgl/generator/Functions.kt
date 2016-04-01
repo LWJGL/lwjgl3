@@ -489,18 +489,24 @@ class NativeClassFunction(
 	fun generateMethods(writer: PrintWriter) {
 		val simpleFunction = isSimpleFunction
 
-		if ( hasCustomJNI )
+		if ( hasCustomJNI ) {
+			writer.println()
 			writer.generateNativeMethod(simpleFunction)
+		}
 
 		if ( !simpleFunction ) {
-			if ( hasUnsafeMethod )
+			if ( hasUnsafeMethod ) {
+				writer.println()
 				writer.generateUnsafeMethod()
+			}
 
 			// This the only special case where we don't generate a "normal" Java method. If we did,
 			// we'd need to add a postfix to either this or the alternative method, since we're
 			// changing the return type. It looks ugly and LWJGL didn't do it pre-3.0 either.
-			if ( returns.nativeType !is CharSequenceType )
+			if ( returns.nativeType !is CharSequenceType ) {
+				writer.println()
 				writer.generateJavaMethod()
+			}
 
 			writer.generateAlternativeMethods()
 		}
@@ -537,7 +543,7 @@ class NativeClassFunction(
 			print("long $RESULT")
 		}
 
-		println(");\n")
+		println(");")
 	}
 
 	private fun PrintWriter.generateUnsafeMethod() {
@@ -628,7 +634,7 @@ class NativeClassFunction(
 		}
 		println(");")
 
-		println("\t}\n")
+		println("\t}")
 	}
 
 	private fun PrintWriter.printDocumentation() {
@@ -763,7 +769,7 @@ class NativeClassFunction(
 
 		generateCodeFinally(code, ApplyTo.NORMAL, hasStack)
 
-		println("\t}\n")
+		println("\t}")
 	}
 
 	private fun PrintWriter.printCode(statements: List<Code.Statement>, applyTo: ApplyTo, indent: String = "") {
@@ -1158,6 +1164,8 @@ class NativeClassFunction(
 		description: String,
 		transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>
 	) {
+		println()
+
 		val returnTransform = transforms[returns]
 
 		// JavaDoc
@@ -1319,7 +1327,7 @@ class NativeClassFunction(
 
 		generateCodeFinally(code, ApplyTo.ALTERNATIVE, hasStack)
 
-		println("\t}\n")
+		println("\t}")
 	}
 
 	// --[ JNI FUNCTIONS ]--

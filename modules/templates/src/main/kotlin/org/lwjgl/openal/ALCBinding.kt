@@ -33,11 +33,11 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 	}
 
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-		println("\tstatic boolean isAvailable($ALC_CAP_CLASS caps) {")
+		println("\n\tstatic boolean isAvailable($ALC_CAP_CLASS caps) {")
 		print("\t\treturn checkFunctions(")
 		nativeClass.printPointers(this, { "caps.${it.name}" })
 		println(");")
-		println("\t}\n")
+		println("\t}")
 	}
 
 	override fun PrintWriter.generateContent() {

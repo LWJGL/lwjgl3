@@ -98,7 +98,7 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		val hasDeprecated = nativeClass.functions.hasDeprecated
 
-		print("\tstatic boolean isAvailable($CAPABILITIES_CLASS caps")
+		print("\n\tstatic boolean isAvailable($CAPABILITIES_CLASS caps")
 		if ( nativeClass.functions.any { it has DependsOn } ) print(", java.util.Set<String> ext")
 		if ( hasDeprecated ) print(", boolean fc")
 		println(") {")
@@ -123,7 +123,7 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		else
 			nativeClass.printPointers(this, printPointer) { !(it has IgnoreMissing) }
 		println(");")
-		println("\t}\n")
+		println("\t}")
 	}
 
 	override fun PrintWriter.generateContent() {
