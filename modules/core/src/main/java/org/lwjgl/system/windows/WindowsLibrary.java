@@ -5,12 +5,13 @@
 package org.lwjgl.system.windows;
 
 import org.lwjgl.system.Library;
+import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.SharedLibrary;
-import org.lwjgl.system.libc.Stdlib;
 
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WindowsUtil.*;
@@ -22,13 +23,13 @@ public class WindowsLibrary extends SharedLibrary.Default {
 	public static final long HINSTANCE;
 
 	static {
-		ByteBuffer nameEncoded = encodeUTF16(Library.JNI_LIBRARY_NAME);
+		MemoryStack stack = stackPush();
 		try {
-			HINSTANCE = GetModuleHandle(nameEncoded);
+			HINSTANCE = GetModuleHandle(stack.UTF16(Library.JNI_LIBRARY_NAME));
 			if ( HINSTANCE == NULL )
 				throw new RuntimeException("Failed to retrieve LWJGL module handle.");
 		} finally {
-			Stdlib.free(nameEncoded);
+			stack.pop();
 		}
 	}
 
@@ -42,11 +43,11 @@ public class WindowsLibrary extends SharedLibrary.Default {
 	}
 
 	private static long loadLibrary(String name) {
-		ByteBuffer nameEncoded = encodeUTF16(name);
+		MemoryStack stack = stackPush();
 		try {
-			return LoadLibrary(nameEncoded);
+			return LoadLibrary(stack.UTF16(name));
 		} finally {
-			Stdlib.free(nameEncoded);
+			stack.pop();
 		}
 	}
 

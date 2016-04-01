@@ -32,7 +32,7 @@ public interface FunctionProvider {
 		public long getFunctionAddress(CharSequence functionName) {
 			MemoryStack stack = stackPush();
 			try {
-				return getFunctionAddress(stack.ASCII(functionName, true));
+				return getFunctionAddress(stack.ASCII(functionName));
 			} finally {
 				stack.pop();
 			}

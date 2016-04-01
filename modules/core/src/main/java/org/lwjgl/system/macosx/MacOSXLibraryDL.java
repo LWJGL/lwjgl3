@@ -4,12 +4,13 @@
  */
 package org.lwjgl.system.macosx;
 
+import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.SharedLibrary;
-import org.lwjgl.system.libc.Stdlib;
 
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.DynamicLinkLoader.*;
 
@@ -26,11 +27,11 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 	}
 
 	private static long loadLibrary(String name) {
-		ByteBuffer nameEncoded = encodeASCII(name);
+		MemoryStack stack = stackPush();
 		try {
-			return dlopen(nameEncoded, RTLD_LAZY | RTLD_GLOBAL);
+			return dlopen(stack.ASCII(name), RTLD_LAZY | RTLD_GLOBAL);
 		} finally {
-			Stdlib.free(nameEncoded);
+			stack.pop();
 		}
 	}
 

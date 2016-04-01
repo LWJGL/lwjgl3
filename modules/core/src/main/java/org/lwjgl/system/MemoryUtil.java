@@ -13,6 +13,7 @@ import java.nio.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.LazyInit.*;
 import static org.lwjgl.system.Pointer.*;
 
 /**
@@ -42,11 +43,8 @@ public final class MemoryUtil {
 	/** Alias for the null pointer address. */
 	public static final long NULL = 0L;
 
-	static final MemoryAccessor ACCESSOR;
-	static final MemoryTextUtil TEXT_UTIL;
-
-	private static final MemoryAllocator ALLOCATOR_IMPL;
-	private static final MemoryAllocator ALLOCATOR;
+	private static final MemoryAccessor ACCESSOR;
+	private static final MemoryTextUtil TEXT_UTIL;
 
 	/** The memory page size, in bytes. This value is always a power-of-two. */
 	public static final int PAGE_SIZE;
@@ -64,23 +62,34 @@ public final class MemoryUtil {
 		CACHE_LINE_SIZE = ACCESSOR.getCacheLineSize();
 
 		apiLog("MemoryUtil accessor: " + ACCESSOR.getClass().getSimpleName());
+	}
 
-		ALLOCATOR_IMPL = MemoryManage.getInstance();
-		ALLOCATOR = Configuration.DEBUG_MEMORY_ALLOCATOR.get(false)
-			? new DebugAllocator(ALLOCATOR_IMPL)
-			: ALLOCATOR_IMPL;
+	static final class LazyInit {
 
-		ALLOCATOR.config(
-			MemoryAccess.malloc(),
-			MemoryAccess.calloc(),
-			MemoryAccess.realloc(),
-			MemoryAccess.free(),
+		private LazyInit() {
+		}
 
-			MemoryAccess.aligned_alloc(),
-			MemoryAccess.aligned_free()
-		);
+		static final MemoryAllocator ALLOCATOR_IMPL;
+		static final MemoryAllocator ALLOCATOR;
 
-		apiLog("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
+		static {
+			ALLOCATOR_IMPL = MemoryManage.getInstance();
+			ALLOCATOR = Configuration.DEBUG_MEMORY_ALLOCATOR.get(false)
+				? new DebugAllocator(ALLOCATOR_IMPL)
+				: ALLOCATOR_IMPL;
+
+			ALLOCATOR.config(
+				MemoryAccess.malloc(),
+				MemoryAccess.calloc(),
+				MemoryAccess.realloc(),
+				MemoryAccess.free(),
+
+				MemoryAccess.aligned_alloc(),
+				MemoryAccess.aligned_free()
+			);
+
+			apiLog("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
+		}
 	}
 
 	private MemoryUtil() {
