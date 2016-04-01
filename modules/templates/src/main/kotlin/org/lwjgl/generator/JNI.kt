@@ -63,26 +63,29 @@ public final class JNI {
 		print(HEADER)
 		preamble.printNative(this)
 
-		// DISABLED JavaCritical: no measurable benefit for primitive-only methods.
 		println("""#define _p_ ,
 #define ARITY0(type, signature, expression) \
 JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *__env, jclass clazz, jlong __functionAddress) { \
 	UNUSED_PARAMS(__env, clazz) \
 	expression; \
 }
-//JNIEXPORT type JNICALL JavaCritical_org_lwjgl_system_JNI_##signature(jlong __functionAddress) { \
-//	expression; \
-//}
 
 #define ARITYn(type, signature, params, expression) \
 JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *__env, jclass clazz, jlong __functionAddress, params) { \
 	UNUSED_PARAMS(__env, clazz) \
 	expression; \
 }
-//JNIEXPORT type JNICALL JavaCritical_org_lwjgl_system_JNI_##signature(jlong __functionAddress, params) { \
-//	expression; \
-//}
 """)
+		/* DISABLED JavaCritical: no measurable benefit for primitive-only methods.
+		// ARITY0
+		JNIEXPORT type JNICALL JavaCritical_org_lwjgl_system_JNI_##signature(jlong __functionAddress) { \
+			expression; \
+		}
+		// ARITYn
+		JNIEXPORT type JNICALL JavaCritical_org_lwjgl_system_JNI_##signature(jlong __functionAddress, params) { \
+			expression; \
+		}
+		*/
 		sortedSignatures.forEach {
 			print("ARITY${if ( it.arguments.isEmpty() ) "0" else "n"}(${it.returnType.jniFunctionType}, ${it.signature}")
 			if ( it.arguments.isNotEmpty() )
