@@ -63,9 +63,7 @@ val nanovg_gles2 = dependsOn(Binding.OPENGLES) {
 			int.IN("image", "the image handle")
 		)
 
-		Code(
-			nativeCall = "\treturn (jlong)(intptr_t)nvgCreateGLES2($JNIENV, flags);"
-		)..NVGcontext_p(
+		NVGcontext_p(
 			"CreateGLES2",
 			"""
 			Creates a NanoVG context with an OpenGL ES 2.0 rendering back-end.
@@ -74,6 +72,7 @@ val nanovg_gles2 = dependsOn(Binding.OPENGLES) {
 			the thread in which that OpenGL context is current.
 			""",
 
+			JNI_ENV,
 			int.IN("flags", "the context flags", CreateFlags)
 		)
 
