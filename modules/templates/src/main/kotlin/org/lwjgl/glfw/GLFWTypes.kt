@@ -28,8 +28,6 @@ fun config() {
 val GLFW_BINDING = simpleBinding("glfw", """Configuration.GLFW_LIBRARY_NAME.get(Pointer.BITS64 ? "glfw" : "glfw32")""")
 val GLFW_BINDING_DELEGATE = GLFW_BINDING.delegate("GLFW.getLibrary()")
 
-val GLFWuint64 = typedef(uint64_t, "GLFWuint64")
-
 val GLFWmonitor = "GLFWmonitor".p
 val GLFWmonitor_p = GLFWmonitor.p
 
@@ -191,6 +189,41 @@ val GLFWmonitorfun = "GLFWmonitorfun".callback(
 	/** See {@link GLFW#glfwSetMonitorCallback SetMonitorCallback}. */
 	public GLFWMonitorCallback set() {
 		glfwSetMonitorCallback(this);
+		return this;
+	}
+	"""
+}
+
+/*
+/*! @brief The function signature for joystick configuration callbacks.
+ *
+ *  This is the function signature for joystick configuration callback
+ *  functions.
+ *
+ *  @param[in] joy The joystick that was connected or disconnected.
+ *  @param[in] event One of `GLFW_CONNECTED` or `GLFW_DISCONNECTED`.
+ *
+ *  @sa @ref joystick_event
+ *  @sa glfwSetJoystickCallback
+ *
+ *  @since Added in version 3.2.
+ *
+ *  @ingroup input
+ */
+typedef void (* GLFWjoystickfun)(int,int);
+ */
+val GLFWjoystickfun = "GLFWjoystickfun".callback(
+	GLFW_PACKAGE, void, "GLFWJoystickCallback",
+	"Will be called when a joystick is connected to or disconnected from the system.",
+	int.IN("joy", "the joystick that was connected or disconnected"),
+	int.IN("event", "one of GLFW##GLFW_CONNECTED or GLFW##GLFW_DISCONNECTED")
+) {
+	documentation = "Instances of this interface may be passed to the GLFW##glfwSetJoystickCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetJoystickCallback SetJoystickCallback}. */
+	public GLFWJoystickCallback set() {
+		glfwSetJoystickCallback(this);
 		return this;
 	}
 	"""

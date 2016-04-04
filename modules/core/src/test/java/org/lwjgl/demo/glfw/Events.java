@@ -26,7 +26,14 @@ public final class Events {
 	private static final GLFWMonitorCallback monitorCB = new GLFWMonitorCallback() {
 		@Override
 		public void invoke(long monitor, int event) {
-			printEvent("Monitor", "[0x%X] %s", monitor, event == GLFW_CONNECTED ? "connected" : "disconnected");
+			printEvent("Monitor", "%s", monitor, event == GLFW_CONNECTED ? "connected" : "disconnected");
+		}
+	};
+
+	private static final GLFWJoystickCallback joystickCB = new GLFWJoystickCallback() {
+		@Override
+		public void invoke(int joy, int event) {
+			printEvent("Joystick", "%s %s", joy, glfwGetJoystickName(joy), event == GLFW_CONNECTED ? "connected" : "disconnected");
 		}
 	};
 
@@ -273,6 +280,7 @@ public final class Events {
 		memFree(w);
 
 		glfwSetMonitorCallback(monitorCB);
+		glfwSetJoystickCallback(joystickCB);
 
 		glfwSetWindowPosCallback(window, windowPosCB);
 		glfwSetWindowSizeCallback(window, windowSizeCB);
@@ -307,6 +315,7 @@ public final class Events {
 		}
 
 		Callbacks.glfwFreeCallbacks(window);
+		joystickCB.free();
 		monitorCB.free();
 
 		glfwDestroyCursor(cursor);

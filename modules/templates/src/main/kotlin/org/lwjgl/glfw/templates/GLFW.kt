@@ -2200,6 +2200,22 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.0"
 	)
 
+	GLFWjoystickfun(
+		"SetJoystickCallback",
+		"""
+		Sets the joystick configuration callback, or removes the currently set callback.
+
+		This is called when a joystick is connected to or disconnected from the system.
+
+		This function must only be called from the main thread.
+		""",
+
+		GLFWjoystickfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
+
+		returnDoc = "the previously set callback, or $NULL if no callback was set or the library had not been initialized",
+		since = "version 3.2"
+	)
+
 	void(
 		"SetClipboardString",
 		"""
@@ -2271,7 +2287,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 2.2"
 	)
 
-	GLFWuint64(
+	uint64_t(
 		"GetTimerValue",
 		"""
 		Returns the current value of the raw timer.
@@ -2285,7 +2301,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.2"
 	)
 
-	GLFWuint64(
+	uint64_t(
 		"GetTimerFrequency",
 		"""
 		Returns the frequency, in Hz, of the raw timer.
