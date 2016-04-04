@@ -17,7 +17,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		"""
 		Use for generating a default projection matrix that is:
 		${ul(
-			"Left-handed.",
+			"Right-handed.",
 			"Near depth values stored in the depth buffer are smaller than far depth values.",
 			"Both near and far are explicitly defined.",
 			"With a clipping range that is (0 to w)."
@@ -25,7 +25,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		""",
 		"Projection_None"..0x00
 	)
-	IntConstant("Enable if using right-handed transformations in your application.", "Projection_RightHanded"..0x01)
+	IntConstant("Enable if using left-handed transformations in your application.", "Projection_LeftHanded"..0x01)
 	IntConstant(
 		"""
 		After the projection transform is applied, far values stored in the depth buffer will be less than closer depth values. NOTE: Enable only if the
@@ -58,7 +58,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		decide whether or not to initialize LibOVR.
 		""",
 
-		int.IN("timeoutMsec", "a timeout to wait for HMD to be attached or 0 to poll")
+		int.IN("timeoutMilliseconds", "a timeout to wait for HMD to be attached or 0 to poll")
 	)
 
 	ovrMatrix4f(
@@ -99,7 +99,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		ovrMatrix4f.IN("projection", "the perspective matrix that the orthographic matrix is derived from"),
 		ovrVector2f.IN("orthoScale", "equal to {@code 1.0f / pixelsPerTanAngleAtCenter}"),
 		float.IN("orthoDistance", "equal to the distance from the camera in meters, such as 0.8m"),
-		float.IN("hmdToEyeViewOffsetX", "the offset of the eye from the center"),
+		float.IN("HmdToEyeOffsetX", "the offset of the eye from the center"),
 
 		returnDoc = "the calculated projection matrix"
 	)
@@ -110,7 +110,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 
 		ovrPosef.IN("headPose", "indicates the HMD position and orientation to use for the calculation"),
 		Check(2)..const..ovrVector3f_p.IN(
-			"hmdToEyeViewOffset",
+			"HmdToEyeOffset",
 			"""
 		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
@@ -132,7 +132,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 
 		This is a thread-safe function where caller should increment {@code frameIndex} with every frame and pass that index where applicable to functions
 		called on the rendering thread. Assuming {@code outEyePoses} are used for rendering, it should be passed as a part of ##OVRLayerEyeFov. The caller does
-		not need to worry about applying {@code hmdToEyeViewOffset} to the returned {@code outEyePoses} variables.
+		not need to worry about applying {@code HmdToEyeOffset} to the returned {@code outEyePoses} variables.
 	    """,
 
 		ovrSession.IN("session", "an {@code ovrSession} previously returned by OVR#_Create()"),
@@ -145,13 +145,27 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 			"""
 		),
 		Check(2)..const..ovrVector3f_p.IN(
-			"hmdToEyeViewOffset",
+			"HmdToEyeOffset",
 			"""
-		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
+		    can be ##OVREyeRenderDesc{@code .HmdToEyeOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
 		),
 		Check(2)..ovrPosef_p.OUT("outEyePoses", "the predicted eye poses"),
-		nullable..ovrTrackingState_p.OUT("outHmdTrackingState", "the predicted ##OVRTrackingState. May be $NULL, in which case it is ignored.")
+		nullable..double_p.OUT("outSensorSampleTime", "the time when this function was called. May be NULL, in which case it is ignored.")
+	)
+
+	void(
+		"Posef_FlipHandedness",
+		"""
+		Tracking poses provided by the SDK come in a right-handed coordinate system. If an application is passing in #Projection_LeftHanded into
+		#Matrix4f_Projection(), then it should also use this function to flip the HMD tracking poses to be left-handed.
+
+		While this utility function is intended to convert a left-handed OVRPosef into a right-handed coordinate system, it will also work for converting
+		right-handed to left-handed since the flip operation is the same for both cases.
+		""",
+
+		const..ovrPosef_p.IN("inPose", "a pose that is right-handed"),
+		ovrPosef_p.OUT("outPose", "the pose that is requested to be left-handed (can be the same pointer to {@code inPose})")
 	)
 }

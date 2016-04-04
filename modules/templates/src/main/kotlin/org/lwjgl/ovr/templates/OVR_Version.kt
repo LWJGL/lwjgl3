@@ -5,36 +5,42 @@
 package org.lwjgl.ovr.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.ovr.OVR_PACKAGE
+import org.lwjgl.ovr.*
 
 val OVR_Version = "OVRVersion".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") {
 	documentation = "LibOVR version identification."
 
 	IntConstant(
+		"Master version numbers.",
+
+		"PRODUCT_VERSION".expr("1"),
+		"MAJOR_VERSION".expr("1"),
+		"MINOR_VERSION".expr("3"),
+		"PATCH_VERSION".expr("0"),
+		"BUILD_NUMBER".expr("0")
+	)
+
+	IntConstant(
+		"The {@code ((product * 100) + major)} version of the service that the DLL is compatible with.",
+
+		"DLL_COMPATIBLE_VERSION".expr("101")
+	)
+
+	IntConstant(
 		"",
 
-		"PRODUCT_VERSION"..0,
-		"MAJOR_VERSION"..8,
-		"MINOR_VERSION"..0,
-		"PATCH_VERSION"..0,
-		"BUILD_NUMBER"..0
+		"OVR_FEATURE_VERSION".expr("0")
 	)
 
 	StringConstant(
-		"\"Product.Major.Minor.Patch.Build\"",
+		"\"Major.Minor.Patch.Build\"",
 
-		"VERSION_STRING" expr "Integer.toString(OVR_PRODUCT_VERSION) + '.' + OVR_MAJOR_VERSION + '.' + OVR_MINOR_VERSION + '.' + OVR_PATCH_VERSION"
+		"VERSION_STRING" expr "Integer.toString(OVR_MAJOR_VERSION) + '.' + OVR_MINOR_VERSION + '.' + OVR_PATCH_VERSION"
 	)
 
 	StringConstant(
-		"The product version for the Oculus Display Driver.",
+		"\"Major.Minor.Patch.Build\"",
 
-		"DISPLAY_DRIVER_PRODUCT_VERSION".."1.2.8.0"
-	)
-
-	StringConstant(
-		"The product version for the Oculus Position Tracker Driver.",
-
-		"POSITIONAL_TRACKER_DRIVER_PRODUCT_VERSION".."1.0.14.0"
+		"DETAILED_VERSION_STRING" expr "Integer.toString(OVR_MAJOR_VERSION) + '.' + OVR_MINOR_VERSION + '.' + OVR_PATCH_VERSION + '.' + OVR_BUILD_NUMBER"
 	)
 }

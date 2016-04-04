@@ -5,7 +5,6 @@
 package org.lwjgl.ovr
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.GLuint
 
 // We include the OVR headers from the Oculus SDK directly, so handle warnings on use-site
 fun GeneratorTargetNative.includeOVRCAPI() = nativeDirective(
@@ -31,7 +30,6 @@ val ovrSession_p = ovrSession.p
 
 val ovrHmdType = "ovrHmdType".enumType
 val ovrEyeType = "ovrEyeType".enumType
-val ovrRenderAPIType = "ovrRenderAPIType".enumType
 val ovrLayerType = "ovrLayerType".enumType
 
 val ovrEye_Count = 2
@@ -40,7 +38,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	OVR_PACKAGE, void, "OVRLogCallback",
 	"The logging callback.",
 	uintptr_t.IN("userData", "an arbitrary value specified by the user of ovrInitParams"),
-	int.IN("level", "one of the ovrLogLevel constants"),
+	int.IN("level", "one of the {@code ovrLogLevel} constants"),
 	NullTerminated..const..charUTF8_p.IN("message", "a UTF8-encoded null-terminated string")
 ) {
 	documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
@@ -84,46 +82,55 @@ val ovrLogCallback = "ovrLogCallback".callback(
 val ovrErrorInfo_p = struct_p(OVR_PACKAGE, "OVRErrorInfo", nativeName = "ovrErrorInfo", mutable = false) {
 	documentation = "Provides information about the last error."
 
-	ovrResult.member("Result", "the result from the last API call that generated an error ovrResult")
-	charUTF8.array("ErrorString", "a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions", size = 512)
+	ovrResult.member("Result", "the result from the last API call that generated an error {@code ovrResult}")
+	charUTF8.array(
+		"ErrorString",
+		"a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions",
+		size = 512
+	)
 }
 
 val ovrSessionStatus_p = struct_p(OVR_PACKAGE, "OVRSessionStatus", nativeName = "ovrSessionStatus", mutable = false) {
 	documentation = "Specifies status information for the current session."
 
-	ovrBool.member("HasVrFocus", "true if the process has VR focus and thus is visible in the HMD")
-	ovrBool.member("HmdPresent", "true if an HMD is present")
+	ovrBool.member("IsVisible", "True if the process has VR focus and thus is visible in the HMD.")
+	ovrBool.member("HmdPresent", "True if an HMD is present.")
+	ovrBool.member("HmdMounted", "True if the HMD is on the user's head.")
+	ovrBool.member("DisplayLost", "True if the session is in a display-lost state. See OVR#ovr_SubmitFrame().")
+	ovrBool.member("ShouldQuit", "True if the application should initiate shutdown.    ")
+	ovrBool.member("ShouldRecenter", "True if UX has requested re-centering. Must call OVR#ovr_ClearShouldRecenterFlag() or OVR#ovr_RecenterTrackingOrigin().")
 }
 
 val ovrInitParams_p = struct_p(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInitParams") {
 	documentation = "Parameters for OVR#ovr_Initialize()."
 
-	uint32_t.member("Flags", "combination of ovrInitFlags or 0")
+	uint32_t.member("Flags", "flags from {@code ovrInitFlags} to override default behavior. Use 0 for the defaults.")
 	uint32_t.member(
 		"RequestedMinorVersion",
-		"request a specific minimum minor version of the LibOVR runtime. Flags must include ovrInit_RequestVersion or this will be ignored."
+		"""
+		requests a specific minimum minor version of the LibOVR runtime. Flags must include OVR#ovrInit_RequestVersion or this will be ignored and
+		OVRVersion#OVR_MINOR_VERSION will be used.
+		"""
 	)
 	nullable..ovrLogCallback.member(
 		"LogCallback",
 		"""
-		log callback function, which may be called at any time asynchronously from multiple threads until OVR#ovr_Shutdown() completes. Pass $NULL for no log
-		callback.
+		user-supplied log callback function, which may be called at any time asynchronously from multiple threads until OVR#ovr_Shutdown() completes. Use $NULL
+		to specify no log callback.
 		"""
 	)
 	uintptr_t.member(
 		"UserData",
 		"""
-		user-supplied data which is passed as-is to LogCallback. Typically this is used to store an application-specific pointer which is read in the callback
-		function.
+		user-supplied data which is passed as-is to {@code LogCallback}. Typically this is used to store an application-specific pointer which is read in the
+		callback function.
 		"""
 	)
-	uint32_t.member("ConnectionTimeoutMS", "number of milliseconds to wait for a connection to the server. Pass 0 for the default timeout")
-	padding(4)
-}
-
-val ovrGraphicsLuid_p = struct_p(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "ovrGraphicsLuid", mutable = false) {
-	documentation = "A system specific graphics adapter identifier."
-	includeOVRCAPI()
+	uint32_t.member(
+		"ConnectionTimeoutMS",
+		"relative number of milliseconds to wait for a connection to the server before failing. Use 0 for the default timeout."
+	)
+	padding(4, condition = "Pointer.BITS64")
 }
 
 val ovrVector2i = struct(OVR_PACKAGE, "OVRVector2i", nativeName = "ovrVector2i") {
@@ -191,7 +198,7 @@ val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", nativeName = "ovrPoseSt
 		"""
 		A full pose (rigid body) configuration with first and second derivatives.
 
-		Body refers to any object for which ovrPoseStatef is providing data.  It can be the HMD, Touch controller, camera or something else. The context
+		Body refers to any object for which ovrPoseStatef is providing data.  It can be the HMD, Touch controller, sensor or something else. The context
 		depends on the usage of the struct.
 		"""
 
@@ -200,7 +207,7 @@ val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", nativeName = "ovrPoseSt
 	ovrVector3f.member("LinearVelocity", "velocity in meters per second")
 	ovrVector3f.member("AngularAcceleration", "angular acceleration in radians per second per second")
 	ovrVector3f.member("LinearAcceleration", "acceleration in meters per second per second")
-	double.member("TimeInSeconds", "absolute time of this state sample")
+	double.member("TimeInSeconds", "absolute time that this pose refers to. See OVR#ovr_GetTimeInSeconds()")
 }.nativeType
 
 val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
@@ -216,6 +223,19 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
 	float.member("RightTan", "the tangent of the angle between the viewing vector and the right edge of the field of view")
 }.nativeType
 
+val ovrTrackingOrigin = "ovrTrackingOrigin".enumType
+
+val ovrGraphicsLuid_p = struct_p(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "ovrGraphicsLuid", mutable = false) {
+	documentation =
+		"""
+		Identifies a graphics device in a platform-specific way.
+
+		For Windows this is a LUID type.
+		"""
+
+	char.array("Reserved", "public definition reserves space for graphics API-specific implementation.", size = 8)
+}
+
 val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false) {
 	documentation = "A complete descriptor of the HMD."
 
@@ -225,15 +245,9 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mu
 	charUTF8.array("Manufacturer", "string describing the manufacturer. Usually \"Oculus\".", size = 64)
 	short.member("VendorId", "HID Vendor ID of the device")
 	short.member("ProductId", "HID Product ID of the device")
-	charASCII.array("SerialNumber", "sensor (and display) serial number", size = 24)
-	short.member("FirmwareMajor", "sensor firmware major version number")
-	short.member("FirmwareMinor", "sensor firmware minor version number")
-
-	// External tracking camera frustum dimensions (if present).
-	float.member("CameraFrustumHFovInRadians", "horizontal field-of-view")
-	float.member("CameraFrustumVFovInRadians", "vertical field-of-view")
-	float.member("CameraFrustumNearZInMeters", "near clip distance")
-	float.member("CameraFrustumFarZInMeters", "far clip distance")
+	charASCII.array("SerialNumber", "HMD serial number", size = 24)
+	short.member("FirmwareMajor", "HMD firmware major version number")
+	short.member("FirmwareMinor", "HMD firmware minor version number")
 
 	unsigned_int.member("AvailableHmdCaps", "capability bits described by {@code ovrHmdCaps} which the HMD currently supports")
 	unsigned_int.member("DefaultHmdCaps", "capability bits described by {@code ovrHmdCaps} which are default for the current {@code Hmd}")
@@ -248,14 +262,28 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mu
 	padding(4, "Pointer.BITS64")
 }.nativeType
 
-val ovrSensorData = struct(OVR_PACKAGE, "OVRSensorData", nativeName = "ovrSensorData", mutable = false) {
-	documentation = "Specifies a reading we can query from the sensor."
+val ovrTrackerDesc = struct(OVR_PACKAGE, "OVRTrackerDesc", nativeName = "ovrTrackerDesc") {
+	documentation = "Specifies the description of a single sensor."
+	
+    float.member("FrustumHFovInRadians", "sensor frustum horizontal field-of-view (if present).")
+    float.member("FrustumVFovInRadians", "sensor frustum vertical field-of-view (if present).")
+    float.member("FrustumNearZInMeters", "sensor frustum near Z (if present).")
+    float.member("FrustumFarZInMeters", "sensor frustum far Z (if present).")
+}.nativeType
 
-	ovrVector3f.member("Accelerometer", "acceleration reading in m/s^2")
-	ovrVector3f.member("Gyro", "rotation rate in rad/s")
-	ovrVector3f.member("Magnetometer", "magnetic field in Gauss")
-	float.member("Temperature", "temperature of the sensor in degrees Celsius")
-	float.member("TimeInSeconds", "time when the reported IMU reading took place, in seconds")
+val ovrTrackerPose = struct(OVR_PACKAGE, "OVRTrackerPose", nativeName = "ovrTrackerPose") {
+	documentation = "Specifies the pose for a single sensor."
+	
+    unsigned_int.member("TrackerFlags", "{@code ovrTrackerFlags}.")
+    ovrPosef.member("Pose", "the sensor's pose. This pose includes sensor tilt (roll and pitch). For a leveled coordinate system use {@code LeveledPose}.")
+    ovrPosef.member(
+	    "LeveledPose",
+	    """t
+	    the sensor's leveled pose, aligned with gravity. This value includes position and yaw of the sensor, but not roll and pitch. It can be used as a
+	    reference point to render real-world objects in the correct location.
+	    """
+    )
+	padding(4)
 }.nativeType
 
 val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovrTrackingState", mutable = false) {
@@ -269,21 +297,7 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovr
 		"""
 	)
 
-	ovrPosef.member(
-		"CameraPose",
-		"""
-		Current pose of the external camera (if present). This pose includes camera tilt (roll and pitch). For a leveled coordinate system use
-		{@code LeveledCameraPose}.
-		"""
-	)
-
-	ovrPosef.member(
-		"LeveledCameraPose",
-		"""
-		Camera frame aligned with gravity. This value includes position and yaw of the camera, but not roll and pitch. It can be used as a reference point to
-		render real-world objects in the correct location.
-		"""
-	)
+	unsigned_int.member("StatusFlags", "{@code HeadPose} tracking status described by {@code ovrStatusBits}.")
 
 	ovrPoseStatef.array(
 		"HandPoses",
@@ -294,18 +308,24 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovr
 		size = 2
 	)
 
-	ovrSensorData.member("RawSensorData", "the most recent sensor data received from the HMD")
-	unsigned_int.member("StatusFlags", "tracking status described by {@code ovrStatusBits}")
-
 	unsigned_int.array(
 		"HandStatusFlags",
-		"hand status flags described by {@code ovrStatusBits}. Only OVR#ovrStatus_OrientationTracked and OVR#ovrStatus_PositionTracked are reported.",
+		"{@code HandPoses} status flags described by {@code ovrStatusBits}. Only OVR#ovrStatus_OrientationTracked and OVR#ovrStatus_PositionTracked are reported.",
 		size = 2
 	)
 
-	uint32_t.member("LastCameraFrameCounter", "tag the vision processing results to a certain frame counter number")
+
+	ovrPosef.member(
+		"CalibratedOrigin",
+		"""
+		the pose of the origin captured during calibration.
+
+		Like all other poses here, this is expressed in the space set by OVR#ovr_RecenterTrackingOrigin(), and so will change every time that is called. This
+		pose can be used to calculate where the calibrated origin lands in the new recentered space. If an application never calls
+		#ovr_RecenterTrackingOrigin(), expect this value to be the identity pose and as such will point respective origin based on {@code ovrTrackingOrigin}
+		requested when calling OVR#ovr_GetTrackingState().
+		""")
 }.nativeType
-val ovrTrackingState_p = ovrTrackingState.p
 
 val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovrEyeRenderDesc", mutable = false) {
 	documentation =
@@ -318,7 +338,7 @@ val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovr
 	ovrFovPort.member("Fov", "the field of view")
 	ovrRecti.member("DistortedViewport", "distortion viewport")
 	ovrVector2f.member("PixelsPerTanAngleAtCenter", "wow many display pixels will fit in tan(angle) = 1")
-	ovrVector3f.member("HmdToEyeViewOffset", "translation to be applied to view matrix for each eye offset")
+	ovrVector3f.member("HmdToEyeOffset", "translation of each eye, in meters.")
 }.nativeType
 
 val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc", nativeName = "ovrTimewarpProjectionDesc") {
@@ -339,7 +359,7 @@ val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = 
 		"""
 		Contains the data necessary to properly calculate position info for various layer types.
 		${ul(
-			"{@code HmdToEyeViewOffset} is the same value pair provided in ##OVREyeRenderDesc.",
+			"{@code HmdToEyeOffset} is the same value pair provided in ##OVREyeRenderDesc.",
 			"{@code HmdSpaceToWorldScaleInMeters} is used to scale player motion into in-application units."
 		)}
 		In other words, it is how big an in-application unit is in the player's physical meters. For example, if the application uses inches as its units then
@@ -347,69 +367,45 @@ val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = 
 		units are inches, but you're shrinking the player to half their normal size, then {@code HmdSpaceToWorldScaleInMeters} would be {@code 0.0254*2.0}.
 		"""
 
-	ovrVector3f.array("HmdToEyeViewOffset", "translation of each eye", size = ovrEye_Count)
+	ovrVector3f.array("HmdToEyeOffset", "translation of each eye", size = ovrEye_Count)
 	float.member("HmdSpaceToWorldScaleInMeters", "ratio of viewer units to meter units")
 }
 
-val ovrTextureHeader = struct(OVR_PACKAGE, "OVRTextureHeader", nativeName = "ovrTextureHeader") {
-	documentation = "API-independent part of a texture descriptor."
+val ovrTextureType = "ovrTextureType".enumType
+val ovrTextureFormat = "ovrTextureFormat".enumType
 
-	ovrRenderAPIType.member("API", "the graphics API in use")
-	ovrSizei.member("TextureSize", "the size of the texture")
-}.nativeType
+val ovrTextureSwapChainDesc_p = struct_p(OVR_PACKAGE, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
+	documentation = "Description used to create a texture swap chain."
 
-val ovrTexture = struct(OVR_PACKAGE, "OVRTexture", nativeName = "ovrTexture") {
-	documentation = "Contains platform-specific information about a texture. Aliases to one of ovrD3D11Texture or ##OVRGLTexture."
+	ovrTextureType.member("Type", "")
+	ovrTextureFormat.member("Format", "")
+	int.member("ArraySize", "only supported with OVR#ovrTexture_2D. Not supported on PC at this time.")
+	int.member("Width", "")
+	int.member("Height", "")
+	int.member("MipLevels", "")
+	int.member("SampleCount", "current only supported on depth textures")
+	ovrBool.member("StaticImage", "not buffered in a chain. For images that don't change")
+	unsigned_int.member("MiscFlags", "{@code ovrTextureMiscFlags}")
+	unsigned_int.member("BindFlags", "{@code ovrTextureBindFlags}. Not used for GL.")
+}
 
-	ovrTextureHeader.member("Header", "API-independent header")
-	uintptr_t.array("PlatformData", "specialized in ##OVRGLTextureData, {@code ovrD3D11TextureData} etc", size = 8)
-}.nativeType
-val ovrTexture_p = ovrTexture.p
-val ovrTexture_pp = ovrTexture_p.p
+val ovrMirrorTextureDesc_p = struct_p(OVR_PACKAGE, "OVRMirrorTextureDesc", nativeName = "ovrMirrorTextureDesc") {
+	documentation = "Description used to create a mirror texture."
 
-val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", nativeName = "ovrSwapTextureSet") {
-	documentation =
-		"""
-		Describes a set of textures that act as a rendered flip chain.
+	ovrTextureFormat.member("Format", "")
+	int.member("Width", "")
+	int.member("Height", "")
+	unsigned_int.member("MiscFlags", "{@code ovrTextureMiscFlags}")
+}
 
-		An ovrSwapTextureSet per layer is passed to OVR#ovr_SubmitFrame() via one of the ovrLayer types. The {@code TextureCount} refers to the flip chain
-		count and not an eye count. See the layer structs and functions for information about how to use ovrSwapTextureSet.
+val ovrTextureSwapChain = "ovrTextureSwapChain".opaque_p
+val ovrTextureSwapChain_p = ovrTextureSwapChain.p
 
-		ovrSwapTextureSets must be created by either the ovr_CreateSwapTextureSetD3D11 or OVRGL#ovr_CreateSwapTextureSetGL() factory function, and must
-		be destroyed by OVR#ovr_DestroySwapTextureSet().
-		"""
+val ovrMirrorTexture = "ovrMirrorTexture".opaque_p
+val ovrMirrorTexture_p = ovrMirrorTexture.p
 
-	ovrTexture_p.buffer("Textures", "points to an array of ovrTextures")
-	AutoSize("Textures")..int.member("TextureCount", "the number of textures referenced by the Textures array")
-
-
-	int.member(
-		"CurrentIndex",
-		"""
-		CurrentIndex specifies which of the Textures will be used by the OVR#ovr_SubmitFrame() call. This is manually incremented by the application, typically
-		in a round-robin manner.
-
-		Before selecting a {@code Texture} as a rendertarget, the application should increment {@code CurrentIndex} by 1 and wrap it back to 0 if
-		{@code CurrentIndex == TextureCount}, so that it gets a fresh rendertarget,	one that is not currently being used for display. It can then render to
-		{@code Textures[CurrentIndex]}.
-
-		After rendering, the application calls OVR#ovr_SubmitFrame() using that same {@code CurrentIndex} value	to display the new rendertarget.
-
-		The application can submit multiple frames with the same {@code ovrSwapTextureSet} and {@code CurrentIndex} value if the rendertarget does not need to
-		be updated, for example when displaying an	information display whose text has not changed since the previous frame.
-
-		Multiple layers can use the same {@code ovrSwapTextureSet} at the same time - there is no need to create a unique {@code ovrSwapTextureSet} for each
-		layer. However, all the layers using a particular {@code ovrSwapTextureSet} will share the same value of {@code CurrentIndex}, so they cannot use
-		different textures within the {@code ovrSwapTextureSet}.
-
-		Once a particular {@code Textures[CurrentIndex]} has been sent to OVR#ovr_SubmitFrame(), that texture should not be rendered to until a subsequent
-		OVR#ovr_SubmitFrame() is made (either with a different {@code CurrentIndex} value, or with a different {@code ovrSwapTextureSet}, or disabling the
-		layer).
-		"""
-	)
-}.nativeType
-val ovrSwapTextureSet_p = ovrSwapTextureSet.p
-val ovrSwapTextureSet_pp = ovrSwapTextureSet_p.p
+val ovrHand_Count = 2
+val ovrControllerType = "ovrControllerType".enumType
 
 val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInputState") {
 	documentation =
@@ -422,17 +418,32 @@ val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrIn
 	unsigned_int.member("ConnectedControllerTypes", "described by {@code ovrControllerType}. Indicates which ControllerTypes are present.")
 	unsigned_int.member("Buttons", "values for buttons described by {@code ovrButton}")
 	unsigned_int.member("Touches", "touch values for buttons and sensors as described by {@code ovrTouch}.")
-	float.array("IndexTrigger", "left and right finger trigger values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range 0.0 to 1.0f.", size = 2)
-	float.array("HandTrigger", "left and right hand trigger values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range 0.0 to 1.0f.", size = 2)
+	float.array(
+		"IndexTrigger",
+		"left and right finger trigger values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range 0.0 to 1.0f.",
+		size = ovrHand_Count
+	)
+	float.array(
+		"HandTrigger",
+		"left and right hand trigger values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range 0.0 to 1.0f.",
+		size = ovrHand_Count
+	)
 	ovrVector2f.array(
 		"Thumbstick",
 		"horizontal and vertical thumbstick axis values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range -1.0f to 1.0f.",
-		size = 2
+		size = ovrHand_Count
 	)
+	ovrControllerType.member("ControllerType", "The type of the controller this state is for.")
 }
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLayerHeader") {
-	documentation = "Defines properties shared by all ovrLayer structs, such as ##OVRLayerEyeFov."
+	documentation =
+		"""
+		Defines properties shared by all ovrLayer structs, such as ##OVRLayerEyeFov.
+
+		{@code ovrLayerHeader} is used as a base member in these larger structs. This struct cannot be used by itself except for the case that {@code Type} is
+		OVR#ovrLayerType_Disabled.
+		"""
 
 	ovrLayerType.member("Type", "described by {@code ovrLayerType}")
 	unsigned_int.member("Flags", "described by {@code ovrLayerFlags}")
@@ -448,9 +459,9 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 		"""
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeFov.")
-	ovrSwapTextureSet_p.array(
+	ovrTextureSwapChain.array(
 		"ColorTexture",
-		"{@code ovrSwapTextureSets} for the left and right eye respectively. The second one of which can be $NULL.",
+		"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be $NULL.",
 		size = ovrEye_Count,
 		validSize = 1
 	)
@@ -478,114 +489,6 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 	)
 }.nativeType
 
-val ovrLayerEyeFovDepth = struct(OVR_PACKAGE, "OVRLayerEyeFovDepth", nativeName = "ovrLayerEyeFovDepth") {
-	documentation =
-		"""
-		Describes a layer that specifies a monoscopic or stereoscopic view, with depth textures in addition to color textures. This is typically used to
-		support positional time warp. This struct is the same as ##OVRLayerEyeFov, but with the addition of {@code DepthTexture} and {@code ProjectionDesc}.
-		"""
-
-	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeFovDepth.")
-	ovrSwapTextureSet_p.array(
-		"ColorTexture",
-		"{@code ovrSwapTextureSets} for the left and right eye respectively. The second one of which can be $NULL.",
-		size = ovrEye_Count,
-		validSize = 1
-	)
-	ovrRecti.array(
-		"Viewport",
-		"specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
-		size = ovrEye_Count
-	)
-	ovrFovPort.array("Fov", "the viewport field of view", size = ovrEye_Count)
-	ovrPosef.array(
-		"RenderPose",
-		"""
-		specifies the position and orientation of each eye view, with the position specified in meters. RenderPose will typically be the value returned from
-		OVRUtil#ovr_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
-		""",
-		size = ovrEye_Count
-	)
-	double.member(
-		"SensorSampleTime",
-		"""
-		specifies the timestamp when the source {@code ovrPosef} (used in calculating RenderPose) was sampled from the SDK. Typically retrieved by calling
-		OVR#ovr_GetTimeInSeconds() around the instant the application calls OVR#ovr_GetTrackingState(). The main purpose for this is to accurately track app
-		tracking latency.
-		"""
-	)
-	ovrSwapTextureSet_p.array(
-		"DepthTexture", "depth texture for positional timewarp. Must map 1:1 to the {@code ColorTexture}.",
-		size = ovrEye_Count,
-		validSize = 1
-	)
-	ovrTimewarpProjectionDesc.member("ProjectionDesc", "specifies how to convert {@code DepthTexture} information into meters")
-}.nativeType
-
-val ovrLayerEyeMatrix = struct(OVR_PACKAGE, "OVRLayerEyeMatrix", nativeName = "ovrLayerEyeMatrix") {
-	documentation =
-		"""
-		Describes a layer that specifies a monoscopic or stereoscopic view. This uses a direct 3x4 matrix to map from view space to the UV coordinates. It is
-		essentially the same thing as ##OVRLayerEyeFov but using a much lower level. This is mainly to provide compatibility with specific apps. Unless the
-		application really requires this flexibility, it is usually better to use ##OVRLayerEyeFov.
-
-		Three options exist with respect to mono/stereo texture usage:
-		${ul(
-			"""
-			ColorTexture[0] and ColorTexture[1] contain the left and right stereo renderings, respectively. Viewport[0] and Viewport[1] refer to
-			ColorTexture[0] and ColorTexture[1], respectively.
-			""",
-			"""
-			ColorTexture[0] contains both the left and right renderings, ColorTexture[1] is $NULL, and Viewport[0] and Viewport[1] refer to sub-rects with
-			ColorTexture[0].
-			""",
-			"ColorTexture[0] contains a single monoscopic rendering, and Viewport[0] and Viewport[1] both refer to that rendering."
-		)}
-		"""
-
-	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeMatrix")
-	ovrSwapTextureSet_p.array(
-		"ColorTexture",
-		"{@code ovrSwapTextureSets} for the left and right eye respectively. The second one of which can be $NULL",
-		size = ovrEye_Count,
-		validSize = 1
-	)
-	ovrRecti.array(
-		"Viewport",
-		"specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
-		size = ovrEye_Count
-	)
-	ovrPosef.array(
-		"RenderPose",
-		"""
-		specifies the position and orientation of each eye view, with the position specified in meters. RenderPose will typically be the value returned from
-		OVRUtil#ovr_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
-		""",
-		size = ovrEye_Count
-	)
-	ovrMatrix4f.array(
-		"Matrix",
-		"""
-		specifies the mapping from a view-space vector to a UV coordinate on the textures given above.
-		${codeBlock("""
-P = (x,y,z,1)*Matrix
-TexU  = P.x/P.z
-TexV  = P.y/P.z"""
-		)}
-		""",
-		size = ovrEye_Count
-	)
-	double.member(
-		"SensorSampleTime",
-		"""
-		specifies the timestamp when the source ##OVRPosef (used in calculating RenderPose) was sampled from the SDK. Typically retrieved by calling
-		OVR#ovr_GetTimeInSeconds() around the instant the application calls OVR#ovr_GetTrackingState(). The main purpose for this is to accurately track app
-		tracking latency.
-		"""
-	)
-
-}.nativeType
-
 val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQuad") {
 	documentation =
 		"""
@@ -600,41 +503,19 @@ val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQua
 		"""
 
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_Quad")
-	ovrSwapTextureSet_p.member("ColorTexture", "contains a single image, never with any stereo view")
+	ovrTextureSwapChain.member("ColorTexture", "contains a single image, never with any stereo view")
 	ovrRecti.member("Viewport", "specifies the ColorTexture sub-rect UV coordinates")
-	ovrPosef.member("QuadPoseCenter", "position and orientation of the center of the quad. Position is specified in meters.")
+	ovrPosef.member(
+		"QuadPoseCenter",
+		"""
+		specifies the orientation and position of the center point of a Quad layer type.
+
+		The supplied direction is the vector perpendicular to the quad. The position is in real-world meters (not the application's virtual world, the physical
+		world the user is in) and is relative to the "zero" position set by OVR#ovr_RecenterTrackingOrigin() unless the OVR#ovrLayerFlag_HeadLocked flag is
+		used.
+		"""
+	)
 	ovrVector2f.member("QuadSize", "width and height (respectively) of the quad in meters")
-}.nativeType
-
-val ovrLayerDirect = struct(OVR_PACKAGE, "OVRLayerDirect", nativeName = "ovrLayerDirect") {
-	documentation =
-		"""
-		Describes a layer which is copied to the HMD as-is. Neither distortion, time warp, nor vignetting is applied to {@code ColorTexture} before it's copied
-		to the HMD. The application can, however implement these kinds of effects itself before submitting the layer. This layer can be used for
-		application-based distortion rendering and can also be used for implementing a debug HUD that's viewed on the mirror texture.
-		"""
-
-	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_Direct")
-	ovrSwapTextureSet_p.array(
-		"ColorTexture",
-		"{@code ovrSwapTextureSets} for the left and right eye respectively. The second one of which can be $NULL.",
-		size = ovrEye_Count,
-		validSize = 1
-	)
-	ovrRecti.array(
-		"Viewport",
-		"specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
-		size = ovrEye_Count
-	)
-}.nativeType
-
-// OVR_CAPI_GL.h
-
-val ovrGLTextureData = struct(OVR_PACKAGE, "OVRGLTextureData", nativeName = "ovrGLTextureData") {
-	documentation = "OpenGL texture data."
-
-	ovrTextureHeader.member("Header", "general device settings")
-	GLuint.member("TexId", "the OpenGL name for this texture")
 }.nativeType
 
 // OVR_CAPI_Util.h
@@ -673,22 +554,74 @@ fun config() {
 		"""
 	)
 
+	struct(OVR_PACKAGE, "OVRLayerEyeMatrix", nativeName = "ovrLayerEyeMatrix") {
+		documentation =
+			"""
+			Describes a layer that specifies a monoscopic or stereoscopic view. This uses a direct 3x4 matrix to map from view space to the UV coordinates. It
+			is essentially the same thing as ##OVRLayerEyeFov but using a much lower level. This is mainly to provide compatibility with specific apps. Unless
+			the application really requires this flexibility, it is usually better to use ##OVRLayerEyeFov.
+
+			Three options exist with respect to mono/stereo texture usage:
+			${ul(
+				"""
+				ColorTexture[0] and ColorTexture[1] contain the left and right stereo renderings, respectively. Viewport[0] and Viewport[1] refer to
+				ColorTexture[0] and ColorTexture[1], respectively.
+				""",
+				"""
+				ColorTexture[0] contains both the left and right renderings, ColorTexture[1] is $NULL, and Viewport[0] and Viewport[1] refer to sub-rects with
+				ColorTexture[0].
+				""",
+				"ColorTexture[0] contains a single monoscopic rendering, and Viewport[0] and Viewport[1] both refer to that rendering."
+			)}
+			"""
+
+		ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeMatrix")
+		ovrTextureSwapChain.array(
+			"ColorTexture",
+			"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be $NULL",
+			size = ovrEye_Count,
+			validSize = 1
+		)
+		ovrRecti.array(
+			"Viewport",
+			"specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
+			size = ovrEye_Count
+		)
+		ovrPosef.array(
+			"RenderPose",
+			"""
+			specifies the position and orientation of each eye view, with the position specified in meters. RenderPose will typically be the value returned
+			from OVRUtil#ovr_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
+			""",
+			size = ovrEye_Count
+		)
+		ovrMatrix4f.array(
+			"Matrix",
+			"""
+			specifies the mapping from a view-space vector to a UV coordinate on the textures given above.
+			${codeBlock("""
+P = (x,y,z,1)*Matrix
+TexU  = P.x/P.z
+TexV  = P.y/P.z""")}
+			""",
+			size = ovrEye_Count
+		)
+		double.member(
+			"SensorSampleTime",
+			"""
+			specifies the timestamp when the source ##OVRPosef (used in calculating RenderPose) was sampled from the SDK. Typically retrieved by calling
+			OVR#ovr_GetTimeInSeconds() around the instant the application calls OVR#ovr_GetTrackingState(). The main purpose for this is to accurately track
+			app tracking latency.
+			"""
+		)
+
+	}.nativeType
+
 	union(OVR_PACKAGE, "OVRLayerUnion", nativeName = "ovrLayer_Union") {
 		documentation = "Union that combines {@code ovrLayer} types in a way that allows them to be used in a polymorphic way."
 
 		ovrLayerHeader.member("Header", "the layer header")
 		ovrLayerEyeFov.member("EyeFov", "")
-		ovrLayerEyeFovDepth.member("EyeFovDepth", "")
 		ovrLayerQuad.member("Quad", "")
-		ovrLayerDirect.member("Direct", "")
-	}
-
-	// OVR_CAPI_GL.h
-
-	union(OVR_PACKAGE, "OVRGLTexture", nativeName = "ovrGLTexture") {
-		documentation = "Contains OpenGL-specific texture information."
-
-		ovrTexture.member("Texture", "general device settings")
-		ovrGLTextureData.member("OGL", "OpenGL-specific settings")
 	}
 }
