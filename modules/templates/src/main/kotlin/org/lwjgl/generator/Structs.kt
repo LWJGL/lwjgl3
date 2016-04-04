@@ -47,7 +47,13 @@ private open class StructMemberArray(
 	val size: Int,
 	/** Number of pointer elements that must not be null. */
 	val validSize: Int
-) : StructMember(nativeType, name, documentation)
+) : StructMember(nativeType, name, documentation) {
+
+	val primitiveMapping: PrimitiveMapping get() = nativeType.let {
+		if ( it is PointerType ) PrimitiveMapping.POINTER else it.mapping as PrimitiveMapping
+	}
+
+}
 
 private class StructMemberCharArray(
 	nativeType: CharType,
@@ -957,7 +963,7 @@ ${validations.joinToString("\n")}
 							else
 								"${it.nativeType.definition.className}.Buffer $param"
 						} else
-							"${(it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName} $param"
+							"${it.primitiveMapping.toPointer.javaMethodType.simpleName} $param"
 					} else if ( it.nativeType.isPointerData && it.nativeType is StructType ) {
 						val structType = it.nativeType.definition.className
 						if ( it is StructMemberBuffer )
@@ -1108,7 +1114,7 @@ ${validations.joinToString("\n")}
 						println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining());")
 						println("\t}")
 					} else {
-						val mapping = it.nativeType.mapping as PrimitiveMapping
+						val mapping = it.primitiveMapping
 						val bytesPerElement = if ( mapping === PrimitiveMapping.POINTER ) "POINTER_SIZE" else mapping.bytes.toString()
 						val bufferType = mapping.toPointer.javaMethodType.simpleName
 
@@ -1219,7 +1225,7 @@ ${validations.joinToString("\n")}
 						println("$indent/** Copies the specified encoded string to the {@code $field} field. */")
 						println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
 					} else {
-						val bufferType = (it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName
+						val bufferType = it.primitiveMapping.toPointer.javaMethodType.simpleName
 						println("$indent/** Copies the specified {@link $bufferType} to the {@code $field} field. */")
 						println("${indent}public $returnType $setter($bufferType value) { $n$setter($ADDRESS, value); return this; }")
 						println("$indent/** Sets the specified value at the specified index of the {@code $field} field. */")
@@ -1326,7 +1332,7 @@ ${validations.joinToString("\n")}
 						println("\t/** Unsafe version of {@link #${getter}String}. */")
 						println("\tpublic static String n${getter}String(long $STRUCT) { return mem${mapping.charset}($STRUCT + $field); }")
 					} else {
-						val mapping = it.nativeType.mapping as PrimitiveMapping
+						val mapping = it.primitiveMapping
 						val bufferType = mapping.toPointer.javaMethodType.simpleName
 
 						println("\t/** Unsafe version of {@link #$getter}. */")
@@ -1435,7 +1441,7 @@ ${validations.joinToString("\n")}
 						println("$indent/** Decodes the null-terminated string stored in the {@code $getter} field. */")
 						println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
 					} else {
-						val bufferType = (it.nativeType.mapping as PrimitiveMapping).toPointer.javaMethodType.simpleName
+						val bufferType = it.primitiveMapping.toPointer.javaMethodType.simpleName
 						println("$indent/** Returns a {@link $bufferType} view of the {@code $getter} field. */")
 						println("${indent}public $bufferType $getter() { return $n$getter($ADDRESS); }")
 						println("$indent/** Returns the value at the specified index of the {@code $getter} field. */")
