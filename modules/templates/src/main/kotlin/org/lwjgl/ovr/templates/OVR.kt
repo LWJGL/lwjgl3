@@ -326,7 +326,7 @@ ENABLE_WARNINGS()""")
 		"Initialize",
 		"""
 		Initialize LibOVR for application usage. This includes finding and loading the LibOVRRT shared library. No LibOVR API functions, other than
-		#GetLastErrorInfo(), can be called unless #Initialize succeeds. A successful call to {@code ovr_Initialize} must be eventually followed by a call to
+		#GetLastErrorInfo(), can be called unless #Initialize() succeeds. A successful call to {@code ovr_Initialize} must be eventually followed by a call to
 		#Shutdown(). {@code ovr_Initialize} calls are idempotent. Calling {@code ovr_Initialize} twice does not require two matching calls to
 		{@code ovr_Shutdown}. If already initialized, the return value is OVRErrorCode#Success.
 
@@ -520,7 +520,7 @@ ENABLE_WARNINGS()""")
 		""",
 
 		session,
-		ovrTrackingOrigin.IN("origin", "an {@code ovrTrackingOrigin} to be used for all #OVRPosef")
+		ovrTrackingOrigin.IN("origin", "an {@code ovrTrackingOrigin} to be used for all ##OVRPosef")
 	)
 
 	ovrTrackingOrigin(
@@ -667,8 +667,9 @@ ENABLE_WARNINGS()""")
 		"LayerFlag_HighQuality".enum(
 			"""
 			Enables 4x anisotropic sampling during the composition of the layer. The benefits are mostly visible at the periphery for high-frequency &amp;
-			high-contrast visuals. For best results consider combining this flag with an ##OVRTextureSwapChain that has mipmaps and instead of using arbitrary
-			sized textures, prefer texture sizes that are powers-of-two. Actual rendered viewport and doesn't necessarily have to fill the whole texture.
+			high-contrast visuals. For best results consider combining this flag with an {@code ovrTextureSwapChain} that has mipmaps and instead of using
+			arbitrary sized textures, prefer texture sizes that are powers-of-two. Actual rendered viewport and doesn't necessarily have to fill the whole
+			texture.
 			""",
 			0x01
 		),
@@ -676,8 +677,8 @@ ENABLE_WARNINGS()""")
 		"LayerFlag_HeadLocked".enum(
 			"""
 			Mark this surface as "headlocked", which means it is specified relative to the HMD and moves with it, rather than being specified relative to
-			sensor/torso space and remaining still while the head moves. What used to be #LayerType_QuadHeadLocked is now #LayerType_Quad plus this flag.
-			However the flag can be applied to any layer type to achieve a similar effect.
+			sensor/torso space and remaining still while the head moves. What used to be {@code ovrLayerType_QuadHeadLocked} is now #LayerType_Quad plus this
+			flag. However the flag can be applied to any layer type to achieve a similar effect.
 			""",
 			0x04
 		)
@@ -688,35 +689,35 @@ ENABLE_WARNINGS()""")
 
 	ovrResult(
 		"GetTextureSwapChainLength",
-		"Gets the number of buffers in an ##OVRTextureSwapChain.",
+		"Gets the number of buffers in an {@code ovrTextureSwapChain}.",
 
 		session,
-		ovrTextureSwapChain.IN("chain", "the ##OVRTextureSwapChain for which the length should be retrieved"),
+		ovrTextureSwapChain.IN("chain", "the {@code ovrTextureSwapChain} for which the length should be retrieved"),
 		Check(1)..int_p.OUT("out_Length", "returns the number of buffers in the specified chain")
 	)
 
 	ovrResult(
 		"GetTextureSwapChainCurrentIndex",
-		"Gets the current index in an ##OVRTextureSwapChain.",
+		"Gets the current index in an {@code ovrTextureSwapChain}.",
 
 		session,
-		ovrTextureSwapChain.IN("chain", "the ##OVRTextureSwapChain for which the index should be retrieved"),
+		ovrTextureSwapChain.IN("chain", "the {@code ovrTextureSwapChain} for which the index should be retrieved"),
 		Check(1)..int_p.OUT("out_Index", "returns the current (free) index in specified chain")
 	)
 
 	ovrResult(
 		"GetTextureSwapChainDesc",
-		"Gets the description of the buffers in an ##OVRTextureSwapChain.",
+		"Gets the description of the buffers in an {@code ovrTextureSwapChain}.",
 
 		session,
-		ovrTextureSwapChain.IN("chain", "the ##OVRTextureSwapChain for which the description should be retrieved"),
+		ovrTextureSwapChain.IN("chain", "the {@code ovrTextureSwapChain} for which the description should be retrieved"),
 		ovrTextureSwapChainDesc_p.OUT("out_Desc", "returns the description of the specified chain")
 	)
 
 	ovrResult(
 		"CommitTextureSwapChain",
 		"""
-		Commits any pending changes to an ##OVRTextureSwapChain, and advances its current index.
+		Commits any pending changes to an {@code ovrTextureSwapChain}, and advances its current index.
 
 		When Commit is called, the texture at the current index is considered ready for use by the runtime, and further writes to it should be avoided. The
 		swap chain's current index is advanced, providing there's room in the chain. The next time the SDK dereferences this texture swap chain, it will
@@ -724,15 +725,15 @@ ENABLE_WARNINGS()""")
 		""",
 
 		session,
-		ovrTextureSwapChain.IN("chain", "the ##OVRTextureSwapChain to commit")
+		ovrTextureSwapChain.IN("chain", "the {@code ovrTextureSwapChain} to commit")
 	)
 
 	void(
 		"DestroyTextureSwapChain",
-		"Destroys an ##OVRTextureSwapChain and frees all the resources associated with it.",
+		"Destroys an {@code ovrTextureSwapChain} and frees all the resources associated with it.",
 
 		session,
-		nullable..ovrTextureSwapChain.IN("chain", "the ##OVRTextureSwapChain to destroy. If it is $NULL then this function has no effect.")
+		nullable..ovrTextureSwapChain.IN("chain", "the {@code ovrTextureSwapChain} to destroy. If it is $NULL then this function has no effect.")
 	)
 
 	void(
@@ -740,7 +741,7 @@ ENABLE_WARNINGS()""")
 		"Destroys a mirror texture previously created by one of the mirror texture creation functions.",
 
 		session,
-		nullable..ovrMirrorTexture.IN("mirrorTexture", "the ##OVRTexture to destroy. If it is $NULL then this function has no effect.")
+		nullable..ovrMirrorTexture.IN("mirrorTexture", "the {@code ovrTexture} to destroy. If it is $NULL then this function has no effect.")
 	)
 
 	ovrSizei(
@@ -846,13 +847,13 @@ ovrResult result = ovr_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 	        """,
 			"""
 	        OVRErrorCode#Error_DisplayLost: The session has become invalid (such as due to a device removal) and the shared resources need to be released
-	        (#DestroySwapTextureSet()), the session needs to destroyed (#Destroy()) and recreated (#Create()), and new resources need to be created
-	        ({@code ovr_CreateSwapTextureSetXXX}). The application's existing private graphics resources do not need to be recreated unless the new #Create()
-	        call returns a different {@code GraphicsLuid}.
+	        (#DestroyTextureSwapChain()), the session needs to destroyed (#Destroy()) and recreated (#Create()), and new resources need to be created
+	        ({@code ovr_CreateTextureSwapChainXXX}). The application's existing private graphics resources do not need to be recreated unless the new
+	        {@code ovr_Create} call returns a different {@code GraphicsLuid}.
 	        """,
 			"""
-			OVRErrorCode#Error_TextureSwapChainInvalid: The ##OVRTextureSwapChain is in an incomplete or inconsistent state. Ensure #CommitTextureSwapChain()
-			was called at least once first.
+			OVRErrorCode#Error_TextureSwapChainInvalid: The {@code ovrTextureSwapChain} is in an incomplete or inconsistent state. Ensure
+			#CommitTextureSwapChain() was called at least once first.
 			"""
 		)}
 	    """
