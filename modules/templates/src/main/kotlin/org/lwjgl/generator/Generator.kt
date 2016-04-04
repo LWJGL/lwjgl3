@@ -13,6 +13,7 @@ import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
+import java.util.concurrent.atomic.AtomicInteger
 
 /*
 	A template will be generated in the following cases:
@@ -99,48 +100,62 @@ fun main(args: Array<String>) {
 		)
 		val bindingsModular = Binding.values().asSequence().filter { it.packageName !== DUMMY_PACKAGE }
 
-		CountDownLatch(bindingsSystem.size + bindingsModular.count()).let { latch ->
-			fun generate(packageName: String, binding: Binding? = null) {
-				pool.submit {
-					try {
-						this@Generator.generate(packageName, binding)
-					} catch(t: Throwable) {
-						t.printStackTrace()
+		try {
+			val errors = AtomicInteger()
+
+			CountDownLatch(bindingsSystem.size + bindingsModular.count()).let { latch ->
+				fun generate(packageName: String, binding: Binding? = null) {
+					pool.submit {
+						try {
+							this@Generator.generate(packageName, binding)
+						} catch(t: Throwable) {
+							errors.incrementAndGet()
+							t.printStackTrace()
+						}
+						latch.countDown()
 					}
-					latch.countDown()
 				}
+
+				bindingsSystem.forEach { generate(it) }
+				bindingsModular.forEach { generate(it.packageName, it) }
+
+				latch.await()
 			}
 
-			bindingsSystem.forEach { generate(it) }
-			bindingsModular.forEach { generate(it.packageName, it) }
+			if ( errors.get() != 0 )
+				throw RuntimeException("Generation failed")
 
-			latch.await()
-		}
+			// Generate utility classes. These are auto-registered during the process above.
 
-		// Generate utility classes. These are auto-registered during the process above.
+			Generator.register(org.lwjgl.system.ThreadLocalState)
 
-		Generator.register(org.lwjgl.system.ThreadLocalState)
-
-		CountDownLatch(4).let { latch ->
-			fun submit(work: () -> Unit) {
-				try {
-					pool.submit(work)
-				} catch(t: Throwable) {
-					t.printStackTrace()
+			CountDownLatch(4).let { latch ->
+				fun submit(work: () -> Unit) {
+					pool.submit {
+						try {
+							work()
+						} catch(t: Throwable) {
+							errors.incrementAndGet()
+							t.printStackTrace()
+						}
+						latch.countDown()
+					}
 				}
-				latch.countDown()
+
+				submit { generate("struct", Generator.structs) }
+				submit { generate("callback", Generator.callbacks) }
+				submit { generate("custom class", Generator.customClasses) }
+
+				submit { generate(JNI) }
+
+				latch.await()
 			}
 
-			submit { generate("struct", Generator.structs) }
-			submit { generate("callback", Generator.callbacks) }
-			submit { generate("custom class", Generator.customClasses) }
-
-			submit { generate(JNI) }
-
-			latch.await()
+			if ( errors.get() != 0 )
+				throw RuntimeException("Generation failed")
+		} finally {
+			pool.shutdown()
 		}
-
-		pool.shutdown()
 	}
 }
 
