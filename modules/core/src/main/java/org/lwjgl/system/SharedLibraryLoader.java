@@ -6,7 +6,6 @@ package org.lwjgl.system;
 
 import java.io.*;
 import java.lang.reflect.Method;
-import java.util.EnumSet;
 import java.util.UUID;
 import java.util.zip.CRC32;
 
@@ -23,66 +22,7 @@ import static org.lwjgl.system.APIUtil.*;
  */
 final class SharedLibraryLoader {
 
-	private static final boolean LINUX;
-	private static final boolean MACOSX;
-	private static final boolean WINDOWS;
-
-	private static final boolean AOT; // iOS?
-
-	private static final boolean ARM;
-	private static final boolean x64;
-
-	private static final String ABI;
-
-	static {
-		// OS flags
-		String osName = System.getProperty("os.name");
-		String osArch = System.getProperty("os.arch");
-
-		LINUX = osName.contains("Linux");
-		MACOSX = osName.contains("Mac");
-		WINDOWS = osName.contains("Windows");
-
-		String runtime = System.getProperty("java.runtime.name");
-		AOT = !(runtime != null && runtime.contains("Android Runtime")) && !LINUX && !MACOSX && !WINDOWS;
-
-		ARM = osArch.startsWith("arm");
-		x64 = osArch.contains("64");
-
-		String archABI = System.getProperty("sun.arch.abi"); // JDK 8 only
-		ABI = archABI != null ? archABI : "";
-	}
-
-	/** A library bundled with LWJGL. */
-	enum Library {
-		LWJGL("lwjgl"),
-		JEMALLOC("jemalloc"),
-		GLFW("glfw"),
-		OPENAL(WINDOWS ? "OpenAL" : "openal");
-
-		final String file;
-
-		Library(String file) {
-			String libname = file;
-			if ( LINUX && ARM )
-				libname += "arm" + ABI;
-			if ( !x64 )
-				libname += "32";
-
-			this.file = System.mapLibraryName(libname);
-		}
-
-		/**
-		 * Returns the library file for the current platform.
-		 *
-		 * @return the library file
-		 */
-		public String getFile() {
-			return file;
-		}
-	}
-
-	private static final EnumSet<Library> loadedLibraries = EnumSet.noneOf(Library.class);
+	private static File extractPath;
 
 	private SharedLibraryLoader() {
 	}
@@ -92,26 +32,11 @@ final class SharedLibraryLoader {
 	 * {@link Configuration#LIBRARY_PATH} option.
 	 */
 	static void load() {
-		if ( AOT || !loadedLibraries.isEmpty() )
-			return;
-
-		Library[] libraries = Library.values();
-
-		File extractPath;
 		try {
 			// Extract the lwjgl shared library and get the library path
-			extractPath = extractFile(libraries[0].file, null).getParentFile();
+			extractPath = extractFile(Platform.get().mapLibraryName(Library.JNI_LIBRARY_NAME), null).getParentFile();
 		} catch (Exception e) {
-			throw new RuntimeException("Unable to extract LWJGL natives", e);
-		}
-
-		// Extract the other shared libraries in the same path
-		for ( int i = 1; i < libraries.length; i++ ) {
-			try {
-				extractFile(libraries[i].file, extractPath);
-			} catch (Exception e) {
-				apiLog("Failed to extract " + libraries[i].name() + " library");
-			}
+			throw new RuntimeException("Unable to extract the LWJGL shared library", e);
 		}
 
 		// Prepend the path in which the libraries were extracted to org.lwjgl.librarypath
@@ -121,9 +46,18 @@ final class SharedLibraryLoader {
 		else
 			libraryPath = extractPath.getAbsolutePath() + File.pathSeparator + libraryPath;
 
-		apiLog("Extracted shared libraries to: " + libraryPath);
+		apiLog("Shared library extract path: " + libraryPath);
 		System.setProperty(Configuration.LIBRARY_PATH.getProperty(), libraryPath);
 		Configuration.LIBRARY_PATH.set(libraryPath);
+	}
+
+	/** Extracts the specified shared library from the classpath to a temporary directory. */
+	static void load(String library) {
+		try {
+			extractFile(Platform.get().mapLibraryName(library), extractPath);
+		} catch (Exception e) {
+			apiLog("Failed to extract " + library + " library");
+		}
 	}
 
 	/**

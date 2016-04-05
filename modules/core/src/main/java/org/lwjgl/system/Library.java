@@ -50,13 +50,13 @@ public final class Library {
 		}
 
 		try {
-			loadSystem(JNI_LIBRARY_NAME);
+			loadSystemRelative(JNI_LIBRARY_NAME);
 		} catch (UnsatisfiedLinkError ule) {
 			try {
-				// Failed, attempt to extract the natives from the classpath
+				// Failed, attempt to extract from the classpath
 				SharedLibraryLoader.load();
 				// and try again
-				loadSystem(JNI_LIBRARY_NAME);
+				loadSystemRelative(JNI_LIBRARY_NAME);
 			} catch (Throwable t) {
 				if ( Checks.DEBUG )
 					t.printStackTrace(DEBUG_STREAM);
@@ -90,6 +90,24 @@ public final class Library {
 			return;
 		}
 
+		try {
+			loadSystemRelative(name);
+		} catch (UnsatisfiedLinkError e) {
+			try {
+				// Failed, attempt to extract from the classpath
+				SharedLibraryLoader.load(name);
+				// and try again
+				loadSystemRelative(name);
+			} catch (Throwable t) {
+				if ( Checks.DEBUG )
+					t.printStackTrace(DEBUG_STREAM);
+				throw e;
+			}
+
+		}
+	}
+
+	private static void loadSystemRelative(String name) {
 		// Try org.lwjgl.librarypath first
 		String override = Configuration.LIBRARY_PATH.get();
 		if ( override != null && loadLibrary(LOADER_SYSTEM, override, Platform.get().mapLibraryName(name), false) ) {
@@ -101,13 +119,13 @@ public final class Library {
 		try {
 			System.loadLibrary(name);
 			apiLog("Loaded library from " + JAVA_LIBRARY_PATH + ": " + name);
-		} catch (UnsatisfiedLinkError t) {
+		} catch (UnsatisfiedLinkError e) {
 			try {
 				// Then the current working directory
 				System.load(new File("./" + Platform.get().mapLibraryName(name)).getAbsolutePath());
 				apiLog("Loaded library from the working directory: " + name);
 			} catch (UnsatisfiedLinkError ignored) {
-				throw t;
+				throw e;
 			}
 		}
 	}
@@ -126,6 +144,23 @@ public final class Library {
 		if ( new File(name).isAbsolute() )
 			return apiCreateLibrary(name);
 
+		try {
+			return loadNativeRelative(name);
+		} catch (RuntimeException e) {
+			try {
+				// Failed, attempt to extract from the classpath
+				SharedLibraryLoader.load(name);
+				// and try again
+				return loadNativeRelative(name);
+			} catch (Throwable t) {
+				if ( Checks.DEBUG )
+					t.printStackTrace(DEBUG_STREAM);
+				throw e;
+			}
+		}
+	}
+
+	private static SharedLibrary loadNativeRelative(String name) {
 		String libName = Platform.get().mapLibraryName(name);
 
 		// Try org.lwjgl.librarypath first

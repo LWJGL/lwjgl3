@@ -20,11 +20,11 @@ public enum Platform {
 		}
 	},
 	MACOSX("Mac OS X") {
-		private final Pattern SO = Pattern.compile("lib\\w+[.]dylib");
+		private final Pattern DYLIB = Pattern.compile("lib\\w+[.]dylib");
 
 		@Override
 		String mapLibraryName(String name) {
-			if ( SO.matcher(name).matches() )
+			if ( DYLIB.matcher(name).matches() )
 				return name;
 
 			// Work around for System.mapLibraryName on OS X + JDK 6, which maps to .jnilib instead of .dylib
