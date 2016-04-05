@@ -206,22 +206,22 @@ ENABLE_WARNINGS()""")
 	EnumConstant(
 		"The format of a texture. ({@code ovrTextureFormat})",
 
-		"FORMAT_UNKNOWN".enum(""),
-		"FORMAT_B5G6R5_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
-		"FORMAT_B5G5R5A1_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
-		"FORMAT_B4G4R4A4_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
-		"FORMAT_R8G8B8A8_UNORM".enum(""),
-		"FORMAT_R8G8B8A8_UNORM_SRGB".enum(""),
-		"FORMAT_B8G8R8A8_UNORM".enum(""),
-		"FORMAT_B8G8R8A8_UNORM_SRGB".enum("Not supported for OpenGL applications."),
-		"FORMAT_B8G8R8X8_UNORM".enum("Not supported for OpenGL applications."),
-		"FORMAT_B8G8R8X8_UNORM_SRGB".enum("Not supported for OpenGL applications."),
-		"FORMAT_R16G16B16A16_FLOAT".enum(""),
-		"FORMAT_D16_UNORM".enum(""),
-		"FORMAT_D24_UNORM_S8_UINT".enum(""),
-		"FORMAT_D32_FLOAT".enum(""),
-		"FORMAT_D32_FLOAT_S8X24_UINT".enum("")
-	)
+		"OVR_FORMAT_UNKNOWN".enum(""),
+		"OVR_FORMAT_B5G6R5_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
+		"OVR_FORMAT_B5G5R5A1_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
+		"OVR_FORMAT_B4G4R4A4_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
+		"OVR_FORMAT_R8G8B8A8_UNORM".enum(""),
+		"OVR_FORMAT_R8G8B8A8_UNORM_SRGB".enum(""),
+		"OVR_FORMAT_B8G8R8A8_UNORM".enum(""),
+		"OVR_FORMAT_B8G8R8A8_UNORM_SRGB".enum("Not supported for OpenGL applications."),
+		"OVR_FORMAT_B8G8R8X8_UNORM".enum("Not supported for OpenGL applications."),
+		"OVR_FORMAT_B8G8R8X8_UNORM_SRGB".enum("Not supported for OpenGL applications."),
+		"OVR_FORMAT_R16G16B16A16_FLOAT".enum(""),
+		"OVR_FORMAT_D16_UNORM".enum(""),
+		"OVR_FORMAT_D24_UNORM_S8_UINT".enum(""),
+		"OVR_FORMAT_D32_FLOAT".enum(""),
+		"OVR_FORMAT_D32_FLOAT_S8X24_UINT".enum("")
+	).noPrefix()
 
 	EnumConstant(
 		"Misc flags overriding particular behaviors of a texture swap chain. ({@code ovrTextureFlags})",
