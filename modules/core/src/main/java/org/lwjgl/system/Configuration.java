@@ -12,8 +12,6 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 
-import static org.lwjgl.system.APIUtil.*;
-
 /**
  * This class can be used to programmatically set the LWJGL runtime configuration. It is an alternative to using system properties.
  *
@@ -33,14 +31,41 @@ public class Configuration<T> {
 
 	/**
 	 * Changes the temporary directory name created by LWJGL when extracting shared libraries from JAR files. If this option is not set, it defaults to
-	 * {@code lwjgl&lt;user name&gt;}.
+	 * <code>lwjgl&lt;user name&gt;</code>.
 	 *
 	 * <p style="font-family: monospace">
-	 * Property: <b>org.lwjgl.SharedLibraryTempDirectory</b><br>
+	 * Property: <b>org.lwjgl.system.SharedLibraryExtractDirectory</b><br>
 	 * &nbsp; &nbsp;Usage: Dynamic<br>
 	 */
-	public static final Configuration<String> SHARED_LIBRARY_TEMP_DIRECTORY = new Configuration<String>(
-		"org.lwjgl.SharedLibraryTempDirectory",
+	public static final Configuration<String> SHARED_LIBRARY_EXTRACT_DIRECTORY = new Configuration<String>(
+		"org.lwjgl.system.SharedLibraryExtractDirectory",
+		StateInit.STRING
+	);
+
+	/**
+	 * Changes the path where LWJGL extracts shared libraries from JAR files. If this option is not set, LWJGL will try the following paths and the first
+	 * successful will be used:
+	 *
+	 * <ul>
+	 * <li>{@code System.getProperty("java.io.tmpdir")}/extractDir/crc/</li>
+	 * <li>{@code System.getProperty("user.home")}/.extractDir/crc/</li>
+	 * <li>.extractDir/crc/</li>
+	 * <li>{@code File.createTempFile(crc)}</li>
+	 * </ul>
+	 *
+	 * where:
+	 *
+	 * <pre><code>
+	 * extractDir = Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY
+	 * crc = CRC of the lwjgl shared library
+	 * </code></pre>
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.system.SharedLibraryExtractPath</b><br>
+	 * &nbsp; &nbsp;Usage: Dynamic<br>
+	 */
+	public static final Configuration<String> SHARED_LIBRARY_EXTRACT_PATH = new Configuration<String>(
+		"org.lwjgl.system.SharedLibraryExtractPath",
 		StateInit.STRING
 	);
 

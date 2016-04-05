@@ -16,10 +16,10 @@ import static org.lwjgl.system.APIUtil.*;
  * Loads shared libraries from the classpath. The libraries may be packed in JAR files, in which case they will be extracted to a temporary directory and that
  * directory will be prepended to {@link Configuration#LIBRARY_PATH}.
  *
- * The temporary directory name defaults to {@code lwjgl&lt;user name&gt;}. To change it, set the {@link Configuration#SHARED_LIBRARY_TEMP_DIRECTORY} option.
- *
  * @author Mario Zechner (https://github.com/badlogic)
  * @author Nathan Sweet (https://github.com/NathanSweet)
+ * @see Configuration#SHARED_LIBRARY_EXTRACT_DIRECTORY
+ * @see Configuration#SHARED_LIBRARY_EXTRACT_PATH
  */
 final class SharedLibraryLoader {
 
@@ -159,15 +159,16 @@ final class SharedLibraryLoader {
 		if ( libraryPath.isDirectory() )
 			return new File(libraryPath, fileName);
 
-		// The first time libraryPath will be a relative path (the lwjgl shared library CRC)
+		if ( Configuration.SHARED_LIBRARY_EXTRACT_PATH.get() != null )
+			return new File(Configuration.SHARED_LIBRARY_EXTRACT_PATH.get(), fileName);
 
 		// Temp directory with username in path
-		String tempDirectory = Configuration.SHARED_LIBRARY_TEMP_DIRECTORY.get("lwjgl" + System.getProperty("user.name"));
+		String tempDirectory = Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl" + System.getProperty("user.name"));
 		File file = new File(System.getProperty("java.io.tmpdir") + "/" + tempDirectory + "/" + libraryPath, fileName);
 		if ( canWrite(file) ) return file;
 
 		// User home
-		tempDirectory = Configuration.SHARED_LIBRARY_TEMP_DIRECTORY.get("lwjgl");
+		tempDirectory = Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl");
 		file = new File(System.getProperty("user.home") + "/." + tempDirectory + "/" + libraryPath, fileName);
 		if ( canWrite(file) ) return file;
 
