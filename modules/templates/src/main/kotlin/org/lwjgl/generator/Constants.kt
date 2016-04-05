@@ -128,7 +128,10 @@ class ConstantBlock<T : Any>(
 					if ( ev.documentation == null )
 						rootBlock.add(it)
 					else
-						enumBlocks.add(ConstantBlock(nativeClass, access, IntConstant, ev.documentation, it))
+						ConstantBlock(nativeClass, access, IntConstant, ev.documentation, it).let {
+							it.noPrefix = noPrefix
+							enumBlocks.add(it)
+						}
 				}
 			}
 
@@ -136,7 +139,10 @@ class ConstantBlock<T : Any>(
 				enumBlocks.isEmpty() || rootBlock[0].value ?: Integer.MAX_VALUE < enumBlocks[0].constants[0].value ?: Integer.MAX_VALUE
 
 			fun PrintWriter.generateRootBlock(rootBlock: ArrayList<Constant<Int>>) =
-				ConstantBlock(nativeClass, access, IntConstant, this@ConstantBlock.documentation, *rootBlock.toArray(emptyArray())).generate(this)
+				ConstantBlock(nativeClass, access, IntConstant, this@ConstantBlock.documentation, *rootBlock.toArray(emptyArray())).let {
+					it.noPrefix = noPrefix
+					it.generate(this)
+				}
 
 			if ( rootBlock.isNotEmpty() && rootBlockBefore())
 				writer.generateRootBlock(rootBlock)
