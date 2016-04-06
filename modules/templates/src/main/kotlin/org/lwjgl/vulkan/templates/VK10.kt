@@ -13,14 +13,6 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		The core Vulkan 1.0 functionality.
 		"""
 
-	val major = 1
-	val minor = 0
-	val patch = 6
-
-	IntConstant("The Vulkan major version number.", "VERSION_MAJOR" expr "$major")
-	IntConstant("The Vulkan minor version number.", "VERSION_MINOR" expr "$minor")
-	IntConstant("The Vulkan patch version number.", "VERSION_PATCH" expr "$patch")
-
 	IntConstant(
 		"""
 		The Vulkan version number is used in several places in the API. In each such use, the API major version number, minor version number, and patch version
@@ -47,7 +39,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		compatibility. Differences in this version will typically require significant modification to an application in order for it to function.
 		""",
 
-		"API_VERSION".expr("(VK_VERSION_MAJOR << 22) | (VK_VERSION_MINOR << 12) | VK_VERSION_PATCH")
+		"API_VERSION_1_0".expr("VKUtil.VK_MAKE_VERSION(1, 0, 0)")
 	)
 
 	LongConstant(
@@ -189,7 +181,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSystemAllocationScope",
 
-		"SYSTEM_ALLOCATION_SCOPE_COMMAND".enumExpr("The allocation is scoped to the lifetime of the Vulkan command.", "0"),
+		"SYSTEM_ALLOCATION_SCOPE_COMMAND".enumExpr("The allocation is scoped to the duration of the Vulkan command.", "0"),
 		"SYSTEM_ALLOCATION_SCOPE_OBJECT".enum("The allocation is scoped to the lifetime of the Vulkan object that is being created or used."),
 		"SYSTEM_ALLOCATION_SCOPE_CACHE".enum("The allocation is scoped to the lifetime of a {@code VkPipelineCache} object."),
 		"SYSTEM_ALLOCATION_SCOPE_DEVICE".enum("The allocation is scoped to the lifetime of the Vulkan device."),
@@ -351,7 +343,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"FORMAT_BC6H_UFLOAT_BLOCK".enum("A three-component, block compressed format where each 4x4 block consists of 128-bits of encoded unsigned floating-point RGB image data."),
 		"FORMAT_BC6H_SFLOAT_BLOCK".enum("A three-component, block compressed format where each 4x4 block consists of 128-bits of encoded signed floating-point RGB image data."),
 		"FORMAT_BC7_UNORM_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 128-bits of encoded unsigned normalized RGBA image data."),
-		"FORMAT_BC7_SRGB_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 128-bits of encoded unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_BC7_SRGB_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 128-bits of encoded unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ETC2_R8G8B8_UNORM_BLOCK".enum("A three-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data."),
 		"FORMAT_ETC2_R8G8B8_SRGB_BLOCK".enum("A three-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding."),
 		"FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK".enum("A four-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data, and provides 1 bit of alpha."),
@@ -363,33 +355,33 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"FORMAT_EAC_R11G11_UNORM_BLOCK".enum("A two-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized red image data followed by 64-bits of encoded unsigned normalized green image data."),
 		"FORMAT_EAC_R11G11_SNORM_BLOCK".enum("A two-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded signed normalized red image data followed by 64-bits of encoded signed normalized green image data."),
 		"FORMAT_ASTC_4x4_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 4x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_4x4_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 4x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_4x4_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 4x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_5x4_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 5x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_5x4_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 5x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_5x4_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 5x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_5x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 5x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_5x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 5x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_5x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 5x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_6x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 6x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_6x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 6x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_6x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 6x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_6x6_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 6x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_6x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 6x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_6x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 6x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_8x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 8x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_8x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_8x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_8x6_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 8x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_8x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_8x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_8x8_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 8x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_8x8_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_8x8_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_10x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_10x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_10x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_10x6_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_10x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_10x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_10x8_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_10x8_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_10x8_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_10x10_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_10x10_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_10x10_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_12x10_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 12x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_12x10_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding."),
+		"FORMAT_ASTC_12x10_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
 		"FORMAT_ASTC_12x12_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 12x12 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_12x12_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x12 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding.")
+		"FORMAT_ASTC_12x12_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x12 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components.")
 	)
 
 	val VkImageTypes = EnumConstant(
@@ -1800,10 +1792,10 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		If {@code pPhysicalDevices} is $NULL, then the number of physical devices available is returned in {@code pPhysicalDeviceCount}. Otherwise,
 		{@code pPhysicalDeviceCount} $must point to a variable set by the user to the number of elements in the {@code pPhysicalDevices} array, and on return
-		the variable is overwritten with the number of structures actually written to {@code pPhysicalDevices}. If the value of {@code pPhysicalDeviceCount} is
-		less than the number of physical devices available, at most {@code pPhysicalDeviceCount} structures will be written. If {@code pPhysicalDeviceCount} is
-		smaller than the number of physical devices available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available
-		physical devices were returned.
+		the variable is overwritten with the number of structures actually written to {@code pPhysicalDevices}. If {@code pPhysicalDeviceCount} is less than
+		the number of physical devices available, at most {@code pPhysicalDeviceCount} structures will be written. If {@code pPhysicalDeviceCount} is smaller
+		than the number of physical devices available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available physical
+		devices were returned.
 
 		Once enumerated, general properties of the physical devices are queried by calling #GetPhysicalDeviceProperties().
 
@@ -2049,14 +2041,17 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		${ValidityProtos.vkEnumerateInstanceExtensionProperties}
 
-		Any instance extensions provided by the Vulkan implementation or by implicitly enabled layers, but not by explicitly enabled layers, are returned when
-		{@code pLayerName} parameter is $NULL. When {@code pLayerName} is the name of a layer, the instance extensions provided by that layer are returned.
+		When {@code pLayerName} parameter is $NULL, only extensions provided by the Vulkan implementation or by implicitly enabled layers are returned. When
+		{@code pLayerName} is the name of a layer, the instance extensions provided by that layer are returned.
 
 		To enable an instance extension, the name of the extension $should be added to the {@code ppEnabledExtensionNames} member of ##VkInstanceCreateInfo when
 		creating a {@code VkInstance}.
 		""",
 
-		nullable..const..charUTF8_p.IN("pLayerName", "either $NULL or the name of a instance layer to retrieve extensions from"),
+		nullable..const..charUTF8_p.IN(
+			"pLayerName",
+			"either $NULL or a pointer to a null-terminated UTF-8 string naming the instance layer to retrieve extensions from"
+		),
 		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
 			"pPropertyCount",
 			"a pointer to an integer related to the number of extension properties available or queried"
@@ -2071,21 +2066,24 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		If {@code pProperties} is $NULL, then the number of extensions properties available is returned in {@code pPropertyCount}. Otherwise,
 		{@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable
-		is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of
-		extension properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of
-		extensions available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
+		is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of extension
+		properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of extensions
+		available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
 
 		${ValidityProtos.vkEnumerateDeviceExtensionProperties}
 
-		Any device extensions provided by the Vulkan implementation or by implicitly enabled layers, but not by explicitly enabled layers, are returned when
-		{@code pLayerName} parameter is $NULL. When {@code pLayerName} is the name of a layer, the device extensions provided by that layer are returned.
+		When {@code pLayerName} parameter is $NULL, only extensions provided by the Vulkan implementation or by implicitly enabled layers are returned. When
+		{@code pLayerName} is the name of a layer, the device extensions provided by that layer are returned.
 
 		To enable a device layer, the name of the layer $should be added to the {@code ppEnabledExtensionNames} member of ##VkDeviceCreateInfo when creating a
 		{@code VkDevice}.
 		""",
 
 		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be queried"),
-		nullable..const..charUTF8_p.IN("pLayerName", "either $NULL or the name of a device layer to retrieve extensions from"),
+		nullable..const..charUTF8_p.IN(
+			"pLayerName",
+			"either $NULL or a pointer to a null-terminated UTF-8 string naming the device layer to retrieve extensions from"
+		),
 		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
 			"pPropertyCount",
 			"a pointer to an integer related to the number of extension properties available or queried"
@@ -2100,9 +2098,9 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		If {@code pProperties} is $NULL, then the number of layer properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount}
 		$must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with
-		the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of layer properties
-		available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of layers available,
-		#INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available layer properties were returned.
+		the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of layer properties available, at
+		most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of layers available, #INCOMPLETE will be
+		returned instead of #SUCCESS, to indicate that not all the available layer properties were returned.
 
 		${ValidityProtos.vkEnumerateInstanceLayerProperties}
 
@@ -2291,12 +2289,12 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		const..VkMemoryAllocateInfo_p.IN(
 			"pAllocateInfo",
 			"""
-			a pointer to a structure of type ##VkMemoryAllocateInfo, which contains parameters of the allocation. A successful returned allocation $must use the
-			requested parameters — no substitution is permitted by the implementation.
+			a pointer to an instance of the ##VkMemoryAllocateInfo structure describing parameters of the allocation. A successful returned allocation $must
+			use the requested parameters -- no substitution is permitted by the implementation.
 			"""
 		),
 		pAllocator,
-		Check(1)..VkDeviceMemory.p.OUT("pMemory", "a pointer to a {@code VkDeviceMemory} structure in which information about the allocated memory is returned")
+		Check(1)..VkDeviceMemory.p.OUT("pMemory", "a pointer to a {@code VkDeviceMemory} handle in which information about the allocated memory is returned")
 	)
 
 	void(
@@ -2529,8 +2527,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		{@code pSparseMemoryRequirementCount}. Otherwise, {@code pSparseMemoryRequirementCount} $must point to a variable set by the user to the number of
 		elements in the {@code pSparseMemoryRequirements} array, and on return the variable is overwritten with the number of structures actually written to
 		{@code pSparseMemoryRequirements}. If the value of {@code pSparseMemoryRequirementCount} is less than the number of sparse memory requirements
-		available, at most {@code pSparseMemoryRequirementCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS to indicate
-		that not all the available values were returned.
+		available, at most {@code pSparseMemoryRequirementCount} structures will be written.
 
 		If the image was not created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT then {@code pSparseMemoryRequirementCount} will be set to zero and
 		{@code pSparseMemoryRequirements} will not be written to.
@@ -2573,9 +2570,8 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		If {@code pProperties} is $NULL, then the number of sparse format properties available is returned in {@code pPropertyCount}. Otherwise,
 		{@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable
-		is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of
-		sparse format properties available, at most {@code pPropertyCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS to
-		indicate that not all the available values were returned.
+		is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of sparse
+		format properties available, at most {@code pPropertyCount} structures will be written.
 
 		${ValidityProtos.vkGetPhysicalDeviceSparseImageFormatProperties}
 
@@ -2704,8 +2700,8 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		satisfied at the time {@code vkWaitForFences} is called, then {@code vkWaitForFences} will block and wait up to timeout nanoseconds for the condition
 		to become satisfied.
 
-		If the value of {@code timeout} is zero, then {@code vkWaitForFences} does not wait, but simply returns the current state of the fences. #TIMEOUT will
-		be returned in this case if the condition is not satisfied, even though no actual wait was performed.
+		If {@code timeout} is zero, then {@code vkWaitForFences} does not wait, but simply returns the current state of the fences. #TIMEOUT will be returned
+		in this case if the condition is not satisfied, even though no actual wait was performed.
 
 		If the specified {@code timeout} period expires before the condition is satisfied, {@code vkWaitForFences} returns #TIMEOUT. If the condition is
 		satisfied before timeout nanoseconds has expired, {@code vkWaitForFences} returns #SUCCESS.
@@ -2733,7 +2729,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		uint64_t.IN(
 			"timeout",
 			"""
-			the timeout period in units of nanoseconds. The value of {@code timeout} is adjusted to the closest value allowed by the implementation-dependent
+			the timeout period in units of nanoseconds. {@code timeout} is adjusted to the closest value allowed by the implementation-dependent
 			timeout accuracy, which $may be substantially longer than one nanosecond, and $may be longer than the requested period.
 			"""
 		)
@@ -3243,9 +3239,9 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		Otherwise, {@code pDataSize} $must point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return
 		the variable is overwritten with the amount of data actually written to {@code pData}.
 
-		If the value of {@code dataSize} is less than the maximum size that $can be retrieved by the pipeline cache, at most {@code pDataSize} bytes will be
-		written to {@code pData}, and {@code vkGetPipelineCacheData} will return #INCOMPLETE. Any data written to {@code pData} is valid and $can be provided as
-		the {@code pInitialData} member of the ##VkPipelineCacheCreateInfo structure passed to #CreatePipelineCache().
+		If {@code dataSize} is less than the maximum size that $can be retrieved by the pipeline cache, at most {@code pDataSize} bytes will be written to
+		{@code pData}, and {@code vkGetPipelineCacheData} will return #INCOMPLETE. Any data written to {@code pData} is valid and $can be provided as the
+		{@code pInitialData} member of the ##VkPipelineCacheCreateInfo structure passed to #CreatePipelineCache().
 
 		${ValidityProtos.vkGetPipelineCacheData}
 
@@ -3274,8 +3270,8 @@ typedef enum VkPipelineCacheHeaderVersion {
 		""")}
 		A consumer of the pipeline cache $should use the cache version to interpret the remainder of the cache header.
 
-		If the value of {@code dataSize} is less than what is necessary to store this header, nothing will be written to {@code pData} and zero will be written
-		to {@code dataSize}.
+		If {@code dataSize} is less than what is necessary to store this header, nothing will be written to {@code pData} and zero will be written to
+		{@code dataSize}.
 		""",
 
 		VkDevice.IN("device", "the logical device that owns the pipeline cache"),
@@ -4438,13 +4434,15 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 		and when executed by a queue, will produce work which executes according to the currently bound compute pipeline. A compute pipeline $must be bound to
 		a command buffer before any dispatch commands are recorded in that command buffer.
 
+		When the command is executed, a global workgroup consisting of ${code("x &times; y &times; z")} local workgroups is assembled.
+
 		${ValidityProtos.vkCmdDispatch}
 		""",
 
 		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		uint32_t.IN("x", "the number of workgroups to dispatch in the X dimension"),
-		uint32_t.IN("y", "the number of workgroups to dispatch in the Y dimension"),
-		uint32_t.IN("z", "the number of workgroups to dispatch in the Z dimension")
+		uint32_t.IN("x", "the number of local workgroups to dispatch in the X dimension"),
+		uint32_t.IN("y", "the number of local workgroups to dispatch in the Y dimension"),
+		uint32_t.IN("z", "the number of local workgroups to dispatch in the Z dimension")
 	)
 
 	void(

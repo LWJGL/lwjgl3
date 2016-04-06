@@ -122,34 +122,33 @@ val VkBufferImageCopy =
 			"{@code bufferRowLength} $must be 0, or greater than or equal to the {@code width} member of {@code imageExtent}",
 			"{@code bufferImageHeight} $must be 0, or greater than or equal to the {@code height} member of {@code imageExtent}",
 			"""
-			{@code imageOffset}.x and ({@code imageExtent}.width + {@code imageOffset}.x) $must both be greater than or equal to 0 and less than or equal to
+			{@code imageOffset.x} and ({@code imageExtent.width} + {@code imageOffset.x}) $must both be greater than or equal to 0 and less than or equal to
 			the image subresource width
 			""",
 			"""
-			{@code imageOffset}.y and (imageExtent.height + {@code imageOffset}.y) $must both be greater than or equal to 0 and less than or equal to the image
+			{@code imageOffset.y} and (imageExtent.height + {@code imageOffset.y}) $must both be greater than or equal to 0 and less than or equal to the image
 			subresource height
 			""",
 			"""
-			{@code imageOffset}.z and (imageExtent.depth + {@code imageOffset}.z) $must both be greater than or equal to 0 and less than or equal to the image
+			{@code imageOffset.z} and (imageExtent.depth + {@code imageOffset.z}) $must both be greater than or equal to 0 and less than or equal to the image
 			subresource depth
 			""",
 			"If the calling command's {@code VkImage} parameter is a compressed format image:",
+			"{@code bufferRowLength} $must be a multiple of the compressed texel block width",
+			"{@code bufferImageHeight} $must be a multiple of the compressed texel block height",
+			"all members of {@code imageOffset} $must be a multiple of the corresponding dimensions of the compressed texel block",
+			"{@code bufferOffset} $must be a multiple of the compressed texel block size in bytes",
 			"""
-			{@code bufferRowLength}, {@code bufferImageHeight} and all members of {@code imageOffset} $must be a multiple of the block size in the relevant
-			dimensions
-			""",
-			"{@code bufferOffset} $must be a multiple of the block size in bytes",
-			"""
-			{@code imageExtent}.width $must be a multiple of the block width or ({@code imageExtent}.width + {@code imageOffset}.x) $must equal the image
-			subresource width
-			""",
-			"""
-			{@code imageExtent}.height $must be a multiple of the block height or ({@code imageExtent}.height + {@code imageOffset}.y) $must equal the image
-			subresource height
+			{@code imageExtent.width} $must be a multiple of the compressed texel block width or ({@code imageExtent.width} + {@code imageOffset.x}) $must
+			equal the image subresource width
 			""",
 			"""
-			{@code imageExtent}.depth $must be a multiple of the block depth or ({@code imageExtent}.depth + {@code imageOffset}.z) $must equal the image
-			subresource depth
+			{@code imageExtent.height} $must be a multiple of the compressed texel block height or ({@code imageExtent.height} + {@code imageOffset.y}) $must
+			equal the image subresource height
+			""",
+			"""
+			{@code imageExtent.depth} $must be a multiple of the compressed texel block depth or ({@code imageExtent.depth} + {@code imageOffset.z}) $must
+			equal the image subresource depth
 			""",
 			"""
 			{@code bufferOffset}, {@code bufferRowLength}, {@code bufferImageHeight} and all members of {@code imageOffset} and {@code imageExtent} $must
@@ -449,12 +448,12 @@ val VkDeviceCreateInfo =
 			"{@code flags} $must be 0",
 			"{@code pQueueCreateInfos} $must be a pointer to an array of {@code queueCreateInfoCount} valid ##VkDeviceQueueCreateInfo structures",
 			"""
-			If {@code enabledLayerCount} is not 0, and {@code ppEnabledLayerNames} is not $NULL, {@code ppEnabledLayerNames} $must be a pointer to an array of
-			{@code enabledLayerCount} null-terminated strings
+			If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} $must be a pointer to an array of {@code enabledLayerCount} null-terminated
+			strings
 			""",
 			"""
-			If {@code enabledExtensionCount} is not 0, and {@code ppEnabledExtensionNames} is not $NULL, {@code ppEnabledExtensionNames} $must be a pointer to
-			an array of {@code enabledExtensionCount} null-terminated strings
+			If {@code enabledExtensionCount} is not 0, {@code ppEnabledExtensionNames} $must be a pointer to an array of {@code enabledExtensionCount}
+			null-terminated strings
 			""",
 			"If {@code pEnabledFeatures} is not $NULL, {@code pEnabledFeatures} $must be a pointer to a valid ##VkPhysicalDeviceFeatures structure",
 			"{@code queueCreateInfoCount} $must be greater than 0",
@@ -874,56 +873,56 @@ val VkImageCopy =
 			"The {@code aspectMask} member of {@code srcSubresource} $must specify aspects present in the calling command's {@code srcImage}",
 			"The {@code aspectMask} member of {@code dstSubresource} $must specify aspects present in the calling command's {@code dstImage}",
 			"""
-			{@code srcOffset}.x and ({@code extent}.width + {@code srcOffset}.x) $must both be greater than or equal to 0 and less than or equal to the source
+			{@code srcOffset.x} and ({@code extent.width} + {@code srcOffset.x}) $must both be greater than or equal to 0 and less than or equal to the source
 			image subresource width
 			""",
 			"""
-			{@code srcOffset}.y and ({@code extent}.height + {@code srcOffset}.y) $must both be greater than or equal to 0 and less than or equal to the source
+			{@code srcOffset.y} and ({@code extent.height} + {@code srcOffset.y}) $must both be greater than or equal to 0 and less than or equal to the source
 			image subresource height
 			""",
 			"""
-			{@code srcOffset}.z and ({@code extent}.depth + {@code srcOffset}.z) $must both be greater than or equal to 0 and less than or equal to the source
+			{@code srcOffset.z} and ({@code extent.depth} + {@code srcOffset.z}) $must both be greater than or equal to 0 and less than or equal to the source
 			image subresource depth
 			""",
 			"""
-			{@code dstOffset}.x and ({@code extent}.width + {@code dstOffset}.x) $must both be greater than or equal to 0 and less than or equal to the
+			{@code dstOffset.x} and ({@code extent.width} + {@code dstOffset.x}) $must both be greater than or equal to 0 and less than or equal to the
 			destination image subresource width
 			""",
 			"""
-			{@code dstOffset}.y and ({@code extent}.height + {@code dstOffset}.y) $must both be greater than or equal to 0 and less than or equal to the
+			{@code dstOffset.y} and ({@code extent.height} + {@code dstOffset.y}) $must both be greater than or equal to 0 and less than or equal to the
 			destination image subresource height
 			""",
 			"""
-			{@code dstOffset}.z and ({@code extent}.depth + {@code dstOffset}.z) $must both be greater than or equal to 0 and less than or equal to the
+			{@code dstOffset.z} and ({@code extent.depth} + {@code dstOffset.z}) $must both be greater than or equal to 0 and less than or equal to the
 			destination image subresource depth
 			""",
 			"If the calling command's {@code srcImage} is a compressed format image:",
-			"all members of {@code srcOffset} $must be a multiple of the block size in the relevant dimensions",
+			"all members of {@code srcOffset} $must be a multiple of the corresponding dimensions of the compressed texel block",
 			"""
-			{@code extent}.width $must be a multiple of the block width or ({@code extent}.width + {@code srcOffset}.x) $must equal the source image
-			subresource width
+			{@code extent.width} $must be a multiple of the compressed texel block width or ({@code extent.width} + {@code srcOffset.x}) $must equal the source
+			image subresource width
 			""",
 			"""
-			{@code extent}.height $must be a multiple of the block height or ({@code extent}.height + {@code srcOffset}.y) $must equal the source image
-			subresource height
+			{@code extent.height} $must be a multiple of the compressed texel block height or ({@code extent.height} + {@code srcOffset.y}) $must equal the
+			source image subresource height
 			""",
 			"""
-			{@code extent}.depth $must be a multiple of the block depth or ({@code extent}.depth + {@code srcOffset}.z) $must equal the source image
-			subresource depth
+			{@code extent.depth} $must be a multiple of the compressed texel block depth or ({@code extent.depth} + {@code srcOffset.z}) $must equal the source
+			image subresource depth
 			""",
 			"If the calling command's {@code dstImage} is a compressed format image:",
-			"all members of {@code dstOffset} $must be a multiple of the block size in the relevant dimensions",
+			"all members of {@code dstOffset} $must be a multiple of the corresponding dimensions of the compressed texel block",
 			"""
-			{@code extent}.width $must be a multiple of the block width or ({@code extent}.width + {@code dstOffset}.x) $must equal the destination image
-			subresource width
+			{@code extent.width} $must be a multiple of the compressed texel block width or ({@code extent.width} + {@code dstOffset.x}) $must equal the
+			destination image subresource width
 			""",
 			"""
-			{@code extent}.height $must be a multiple of the block height or ({@code extent}.height + {@code dstOffset}.y) $must equal the destination image
-			subresource height
+			{@code extent.height} $must be a multiple of the compressed texel block height or ({@code extent.height} + {@code dstOffset.y}) $must equal the
+			destination image subresource height
 			""",
 			"""
-			{@code extent}.depth $must be a multiple of the block depth or ({@code extent}.depth + {@code dstOffset}.z) $must equal the destination image
-			subresource depth
+			{@code extent.depth} $must be a multiple of the compressed texel block depth or ({@code extent.depth} + {@code dstOffset.z}) $must equal the
+			destination image subresource depth
 			""",
 			"""
 			{@code srcOffset}, {@code dstOffset}, and {@code extent} $must respect the image transfer granularity requirements of the queue family that it will
@@ -955,37 +954,39 @@ val VkImageCreateInfo =
 			"{@code mipLevels} $must be greater than 0",
 			"{@code arrayLayers} $must be greater than 0",
 			"""
-			If {@code imageType} is #IMAGE_TYPE_1D, {@code extent}.width $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension1D},
+			If {@code imageType} is #IMAGE_TYPE_1D, {@code extent.width} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension1D},
 			or ##VkImageFormatProperties{@code ::maxExtent}.width (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type},
 			{@code tiling}, {@code usage} and {@code flags} equal to those in this structure) - whichever is higher
 			""",
 			"""
-			If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} does not contain #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent}.width and
-			{@code extent}.height $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension2D}, or
+			If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} does not contain #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and
+			{@code extent.height} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension2D}, or
 			##VkImageFormatProperties{@code ::maxExtent}.width/height (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format},
 			{@code type}, {@code tiling}, {@code usage} and {@code flags} equal to those in this structure) - whichever is higher
 			""",
 			"""
-			If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent}.width and {@code extent}.height
+			If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and {@code extent.height}
 			$must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimensionCube}, or
 			##VkImageFormatProperties{@code ::maxExtent}.width/height (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format},
 			{@code type}, {@code tiling}, {@code usage} and {@code flags} equal to those in this structure) - whichever is higher
 			""",
 			"""
-			If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent}.width and {@code extent}.height
+			If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and {@code extent.height}
 			$must be equal
 			""",
 			"""
-			If {@code imageType} is #IMAGE_TYPE_3D, {@code extent}.width, {@code extent}.height and {@code extent}.depth $must be less than or equal to
+			If {@code imageType} is #IMAGE_TYPE_3D, {@code extent.width}, {@code extent.height} and {@code extent.depth} $must be less than or equal to
 			##VkPhysicalDeviceLimits{@code ::maxImageDimension3D}, or ##VkImageFormatProperties{@code ::maxExtent}.width/height/depth (as returned by
 			#GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage} and {@code flags} equal to those in this
 			structure) - whichever is higher
 			""",
+			"If {@code imageType} is #IMAGE_TYPE_1D, both {@code extent.height} and {@code extent.depth} $must be 1",
+			"If {@code imageType} is #IMAGE_TYPE_2D, {@code extent.depth} $must be 1",
 			"""
 			{@code mipLevels} $must be less than or equal to ${code("floor(log<sub>2</sub>(max(extent.width, extent.height, extent.depth))) + 1")}
 			""",
 			"""
-			If any of {@code extent}.width, {@code extent}.height or {@code extent}.depth are greater than the equivalently named members of
+			If any of {@code extent.width}, {@code extent.height} or {@code extent.depth} are greater than the equivalently named members of
 			##VkPhysicalDeviceLimits{@code ::maxImageDimension3D}, {@code mipLevels} $must be less than or equal to
 			##VkImageFormatProperties{@code ::maxMipLevels} (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type},
 			{@code tiling}, {@code usage} and {@code flags} equal to those in this structure)
@@ -997,16 +998,16 @@ val VkImageCreateInfo =
 			""",
 			"""
 			{@code samples} $must be a bit value that is set in ##VkPhysicalDeviceLimits{@code ::sampleCounts} returned by flink:vkGetPhysicalDeviceProperties,
-			or ##VkImageFormatProperties{@code ::maxExtent}.sampleCounts returned by #GetPhysicalDeviceImageFormatProperties() with {@code format},
-			{@code type}, {@code tiling}, {@code usage} and {@code flags} equal to those in this structure
+			or ##VkImageFormatProperties{@code ::sampleCounts} returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type},
+			{@code tiling}, {@code usage} and {@code flags} equal to those in this structure
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT or
-			#IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent}.width $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferWidth}
+			#IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent.width} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferWidth}
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT or
-			#IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent}.height $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferHeight}
+			#IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent.height} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferHeight}
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, {@code samples} $must be a bit value that is set in
@@ -1220,8 +1221,8 @@ val VkImageSubresourceLayers =
 			"{@code aspectMask} $mustnot contain #IMAGE_ASPECT_METADATA_BIT",
 			"{@code mipLevel} $must be less than the {@code mipLevels} specified in {@code VkImageCreateInfo} when the image was created",
 			"""
-			{@code baseArrayLayer + layerCount} $must be less than or equal to the {@code arrayLayers} specified in {@code VkImageCreateInfo} when the image
-			was created
+			{@code baseArrayLayer + layerCount} $must be less than or equal to the {@code arrayLayers} specified in {@code VkImageCreateInfo} when
+			the image was created
 			"""
 		)}"""
 
@@ -1891,20 +1892,27 @@ val VkSparseImageMemoryBind =
 			""",
 			"{@code memory} and {@code memoryOffset} $must match the memory requirements of the calling command's {@code image}",
 			"{@code subresource} $must be a valid subresource for {@code image}",
-			"{@code offset}.x $must be a multiple of the block width (##VkSparseImageFormatProperties{@code ::imageGranularity}.width) of the image",
 			"""
-			{@code extent}.width $must either be a multiple of the block width of the image, or else {@code extent}.width + {@code offset}.x $must equal the
-			width of the image subresource
+			{@code offset.x} $must be a multiple of the sparse image block width (##VkSparseImageFormatProperties{@code ::imageGranularity}.width) of the image
 			""",
-			"{@code offset}.y $must be a multiple of the block height (##VkSparseImageFormatProperties{@code ::imageGranularity}.height) of the image",
 			"""
-			{@code extent}.height $must either be a multiple of the block height of the image, or else {@code extent}.height + {@code offset}.y $must equal the
-			height of the image subresource
+			{@code extent.width} $must either be a multiple of the sparse image block width of the image, or else {@code extent.width} + {@code offset.x} $must
+			equal the width of the image subresource
 			""",
-			"{@code offset}.z $must be a multiple of the block depth (##VkSparseImageFormatProperties{@code ::imageGranularity}.depth) of the image",
 			"""
-			{@code extent}.depth $must either be a multiple of the block depth of the image, or else {@code extent}.depth + {@code offset}.z $must equal the
-			depth of the image subresource
+			{@code offset.y} $must be a multiple of the sparse image block height (##VkSparseImageFormatProperties{@code ::imageGranularity}.height) of the
+			image
+			""",
+			"""
+			{@code extent.height} $must either be a multiple of the sparse image block height of the image, or else {@code extent.height} + {@code offset.y}
+			$must equal the height of the image subresource
+			""",
+			"""
+			{@code offset.z} $must be a multiple of the sparse image block depth (##VkSparseImageFormatProperties{@code ::imageGranularity}.depth) of the image
+			""",
+			"""
+			{@code extent.depth} $must either be a multiple of the sparse image block depth of the image, or else {@code extent.depth} + {@code offset.z} $must
+			equal the depth of the image subresource
 			"""
 		)}"""
 

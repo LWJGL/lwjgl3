@@ -5,5 +5,6 @@
 package org.lwjgl.vulkan.templates
 
 val EXT = "EXT"
+val IMG = "IMG"
 val KHR = "KHR"
 val NV = "NV"

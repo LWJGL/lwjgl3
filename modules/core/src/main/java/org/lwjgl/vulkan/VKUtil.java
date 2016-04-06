@@ -4,7 +4,6 @@
  */
 package org.lwjgl.vulkan;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.vulkan.EXTDebugReport.*;
 import static org.lwjgl.vulkan.KHRDisplaySwapchain.*;
 import static org.lwjgl.vulkan.KHRSurface.*;

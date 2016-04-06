@@ -147,7 +147,9 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 		If {@code pSwapchainImages} is $NULL, then the number of presentable images for swapchain is returned in {@code pSwapchainImageCount}. Otherwise,
 		{@code pSwapchainImageCount} $must point to a variable set by the user to the number of elements in the {@code pSwapchainImages} array, and on return
 		the variable is overwritten with the number of structures actually written to {@code pSwapchainImages}. If the value of {@code pSwapchainImageCount} is
-		less than the number of presentable images for swapchain, at most {@code pSwapchainImageCount} structures will be written.
+		less than the number of presentable images for {@code swapchain}, at most {@code pSwapchainImageCount} structures will be written. If
+		{@code pSwapchainImageCount} is smaller than the number of presentable images for {@code swapchain}, VK10#INCOMPLETE will be returned instead of
+		VK10#SUCCESS to indicate that not all the available values were returned.
 
 		${ValidityProtos.vkGetSwapchainImagesKHR}
 
@@ -180,6 +182,10 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 		"AcquireNextImageKHR",
 		"""
 		Retrieves the index of the next available presentable image.
+
+		When successful, {@code vkAcquireNextImageKHR} retrieves the index of a presentable image that the application will be able to use. The presentation
+		engine may still own the image, as the presentation engine may be in the process of releasing the image when {@code vkAcquireNextImageKHR} returns. The
+		application will own the image when {@code semaphore} and/or {@code fence} is signaled by the presentation engine. Additional details follow.
 
 		If {@code timeout} is 0, {@code vkAcquireNextImageKHR} will not block, but will either succeed or return an error. If {@code timeout} is
 		{@code UINT64_MAX}, the function will not return until the presentation engine will be able to release ownership of the image within finite time. For
@@ -227,6 +233,9 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 		If {@code fence} is not equal to VK10#NULL_HANDLE, the fence $must be unsignaled and not have any uncompleted signal operations pending. It will become
 		signaled when the presentation engine has released ownership of the image. Applications $can use this to meter their frame generation work to match the
 		presentation rate.
+
+		{@code semaphore} and {@code fence} $must not both be equal to VK10#NULL_HANDLE. An application $must wait until either the {@code semaphore} or
+		{@code fence} is signaled before using the presentable image.
 
 		{@code semaphore} and {@code fence} $may already be signaled when {@code vkAcquireNextImageKHR} returns, if the image is being acquired for the first
 		time, or if the presentation engine has already released its ownership.

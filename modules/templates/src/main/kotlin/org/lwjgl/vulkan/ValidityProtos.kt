@@ -82,6 +82,7 @@ val vkBeginCommandBuffer =
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code pBeginInfo} $must be a pointer to a valid ##VkCommandBufferBeginInfo structure",
 			"{@code commandBuffer} $mustnot be in the recording state",
+			"{@code commandBuffer} $mustnot currently be pending execution",
 			"""
 			If {@code commandBuffer} was allocated from a {@code VkCommandPool} which did not have the #COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT flag set,
 			{@code commandBuffer} $must be in the initial state.
@@ -244,13 +245,13 @@ val vkCmdBeginRenderPass =
 			"""
 			If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the
 			##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin}
-			is #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL then the corresponding attachment image of the framebuffer specified in the {@code framebuffer} member of
+			is #IMAGE_LAYOUT_TRANSFER_SRC_BIT then the corresponding attachment image of the framebuffer specified in the {@code framebuffer} member of
 			{@code pRenderPassBegin} $must have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT set
 			""",
 			"""
 			If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the
 			##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin}
-			is #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL then the corresponding attachment image of the framebuffer specified in the {@code framebuffer} member of
+			is #IMAGE_LAYOUT_TRANSFER_DST_BIT then the corresponding attachment image of the framebuffer specified in the {@code framebuffer} member of
 			{@code pRenderPassBegin} $must have been created with #IMAGE_USAGE_TRANSFER_DST_BIT set
 			"""
 		)}
@@ -279,9 +280,9 @@ val vkCmdBindDescriptorSets =
 			same {@code VkDevice}
 			""",
 			"""
-			Any given element of {@code pDescriptorSets} $must have been created with a {@code VkDescriptorSetLayout} that matches the
-			{@code VkDescriptorSetLayout} at set {@code n} in {@code layout}, where {@code n} is the sum of the index into {@code pDescriptorSets} and
-			{@code firstSet}
+			Any given element of {@code pDescriptorSets} $must have been created with a {@code VkDescriptorSetLayout} that matches (is the same as, or defined
+			identically to) the {@code VkDescriptorSetLayout} at set {@code n} in {@code layout}, where {@code n} is the sum of {@code firstSet} and the index
+			into {@code pDescriptorSets}
 			""",
 			"{@code dynamicOffsetCount} $must be equal to the total number of dynamic descriptors in {@code pDescriptorSets}",
 			"{@code pipelineBindPoint} $must be supported by the {@code commandBuffer}'s parent {@code VkCommandPool}'s queue family",
@@ -688,6 +689,7 @@ val vkCmdCopyQueryPoolResults =
 			"If #QUERY_RESULT_64_BIT is not set in {@code flags} then {@code dstOffset} and {@code stride} must be multiples of 4",
 			"If #QUERY_RESULT_64_BIT is set in {@code flags} then {@code dstOffset} and {@code stride} must be multiples of 8",
 			"{@code dstBuffer} $must have enough storage, from {@code dstOffset}, to contain the result of each query, as described here",
+			"{@code dstBuffer} $must have been created with {@code VK_BUFFER_USAGE_TRANSFER_DST_BIT} usage flag",
 			"If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} $mustnot contain #QUERY_RESULT_PARTIAL_BIT"
 		)}
 
@@ -1528,8 +1530,8 @@ val vkCmdSetScissor =
 			"{@code firstScissor} $must be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}",
 			"The sum of {@code firstScissor} and {@code scissorCount} $must be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive",
 			"The {@code x} and {@code y} members of {@code offset} $must be greater than or equal to 0",
-			"Evaluation of ({@code offset}.x + {@code extent}.width) $mustnot cause a signed integer addition overflow",
-			"Evaluation of ({@code offset}.y + {@code extent}.height) $mustnot cause a signed integer addition overflow"
+			"Evaluation of ({@code offset.x} + {@code extent.width}) $mustnot cause a signed integer addition overflow",
+			"Evaluation of ({@code offset.y} + {@code extent.height}) $mustnot cause a signed integer addition overflow"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -1991,8 +1993,8 @@ val vkCreateSwapchainKHR =
 
 		<h5>Host Synchronization</h5>
 		${ul(
-			"Host access to {@code pCreateInfo}.surface $must be externally synchronized",
-			"Host access to {@code pCreateInfo}.oldSwapchain $must be externally synchronized"
+			"Host access to {@code pCreateInfo.surface} $must be externally synchronized",
+			"Host access to {@code pCreateInfo.oldSwapchain} $must be externally synchronized"
 		)}"""
 
 val vkCreateWaylandSurfaceKHR =
@@ -2794,8 +2796,7 @@ val vkGetImageSparseMemoryRequirements =
 			structures
 			""",
 			"{@code image} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code image} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
-			"{@code image} $must have been created with the #IMAGE_CREATE_SPARSE_RESIDENCY_BIT flag"
+			"Each of {@code device} and {@code image} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
 		)}"""
 
 val vkGetImageSubresourceLayout =
@@ -3182,8 +3183,8 @@ val vkQueuePresentKHR =
 		<h5>Host Synchronization</h5>
 		${ul(
 			"Host access to {@code queue} $must be externally synchronized",
-			"Host access to {@code pPresentInfo}.pWaitSemaphores[] $must be externally synchronized",
-			"Host access to {@code pPresentInfo}.pSwapchains[] $must be externally synchronized"
+			"Host access to {@code pPresentInfo.pWaitSemaphores}[] $must be externally synchronized",
+			"Host access to {@code pPresentInfo.pSwapchains}[] $must be externally synchronized"
 		)}"""
 
 val vkQueueSubmit =
