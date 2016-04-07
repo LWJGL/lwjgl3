@@ -347,12 +347,11 @@ public final class HelloVulkan {
 			device_validation_layers
 				//.put(memASCII("VK_LAYER_LUNARG_standard_validation"))
 				//.put(memASCII("VK_LAYER_LUNARG_api_dump"))
+				.put(memASCII("VK_LAYER_LUNARG_core_validation"))
 				.put(memASCII("VK_LAYER_LUNARG_device_limits"))
-				.put(memASCII("VK_LAYER_LUNARG_draw_state"))
 				.put(memASCII("VK_LAYER_LUNARG_image"))
-				.put(memASCII("VK_LAYER_LUNARG_mem_tracker"))
 				.put(memASCII("VK_LAYER_LUNARG_object_tracker"))
-				.put(memASCII("VK_LAYER_LUNARG_param_checker"))
+				.put(memASCII("VK_LAYER_LUNARG_parameter_validation"))
 				.put(memASCII("VK_LAYER_LUNARG_swapchain"))
 				.put(memASCII("VK_LAYER_GOOGLE_threading"))
 				.put(memASCII("VK_LAYER_GOOGLE_unique_objects"));
