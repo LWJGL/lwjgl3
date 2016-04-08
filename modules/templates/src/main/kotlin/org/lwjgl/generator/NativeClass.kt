@@ -365,7 +365,7 @@ class NativeClass(
 	// DSL extensions
 
 	operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<out T>, access: Access = Access.PUBLIC): ConstantBlock<T> {
-		val block = ConstantBlock(this@NativeClass, access, this, processDocumentation(documentation).toJavaDoc(), *constants)
+		val block = ConstantBlock(this@NativeClass, access, this, { processDocumentation(documentation).toJavaDoc() }, *constants)
 		constantBlocks.add(block)
 		return block
 	}
@@ -377,13 +377,13 @@ class NativeClass(
 	val String.enum: Constant<EnumValue> get() = Constant(this, EnumValue())
 
 	infix fun String.enum(documentation: String) =
-		Constant(this, EnumValue(if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc()))
+		Constant(this, EnumValue({ if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc() }))
 	infix fun String.enum(value: Int) = Constant(this, EnumValue(value = value))
 	fun String.enum(documentation: String, value: Int) =
-		Constant(this, EnumValue(if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc(), value))
+		Constant(this, EnumValue({ if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc() }, value))
 
 	fun String.enumExpr(documentation: String, expression: String) =
-		Constant(this, EnumValueExpression(if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc(), expression))
+		Constant(this, EnumValueExpression({ if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc() }, expression))
 
 	/** Adds a new constant whose value is an expression. */
 	infix fun <T : Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
@@ -396,7 +396,7 @@ class NativeClass(
 			returns = this,
 			simpleName = name,
 			name = if ( noPrefix ) name else "$prefixMethod$name",
-			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.asSequence().filter { it !== JNI_ENV }, this.nativeType, returnDoc, since),
+			documentation = { this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.asSequence().filter { it !== JNI_ENV }, this.nativeType, returnDoc, since) },
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)
@@ -428,7 +428,7 @@ class NativeClass(
 			returns = reference.returns,
 			simpleName = reference.simpleName,
 			name = reference.name,
-			documentation = this@NativeClass.convertDocumentation(this, reference.name, reference.documentation),
+			documentation = { this@NativeClass.convertDocumentation(this, reference.name, reference.documentation()) },
 			nativeClass = this@NativeClass,
 			parameters = *reference.parameters
 		).copyModifiers(reference)

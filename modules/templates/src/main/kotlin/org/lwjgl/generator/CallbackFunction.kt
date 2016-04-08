@@ -13,7 +13,7 @@ class CallbackFunction(
 	vararg val signature: Parameter
 ) : GeneratorTarget(packageName, className) {
 
-	var functionDoc: String = ""
+	var functionDoc: (CallbackFunction) -> String = { "" }
 	var additionalCode: String = ""
 
 	private var callConvention = "DEFAULT"
@@ -100,7 +100,7 @@ ${signature.asSequence().withIndex().map {
 	}
 
 """)
-		print(functionDoc)
+		print(functionDoc(this@CallbackFunction))
 		print("""
 	public abstract ${returns.nativeMethodType.simpleName} invoke($signatureJava);
 
@@ -150,7 +150,7 @@ fun String.callback(
 	val callback = CallbackFunction(packageName, className, returns, *signature)
 	if ( init != null )
 		callback.init()
-	callback.functionDoc = callback.toJavaDoc(functionDoc, signature.asSequence(), returns, returnDoc, since)
+	callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, since) }
 	Generator.register(callback)
 	return CallbackType(callback, this)
 }

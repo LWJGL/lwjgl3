@@ -56,7 +56,7 @@ abstract class Function(
 	val returns: ReturnValue,
 	val simpleName: String,
 	val name: String = simpleName,
-	val documentation: String,
+	val documentation: () -> String,
 	vararg val parameters: Parameter
 ) : TemplateElement() {
 
@@ -101,7 +101,7 @@ class NativeClassFunction(
 	returns: ReturnValue,
 	simpleName: String,
 	name: String,
-	documentation: String,
+	documentation: () -> String,
 	val nativeClass: NativeClass,
 	vararg parameters: Parameter
 ) : Function(returns, simpleName, name, documentation, *parameters) {
@@ -520,8 +520,9 @@ class NativeClassFunction(
 
 	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean) {
 		if ( nativeOnly ) {
-			if ( documentation.isNotEmpty() )
-				println(documentation)
+			val doc = documentation()
+			if ( doc.isNotEmpty() )
+				println(doc)
 		} else {
 			generateJavaDocLink("JNI method for", this@NativeClassFunction)
 		}
@@ -638,8 +639,9 @@ class NativeClassFunction(
 	}
 
 	private fun PrintWriter.printDocumentation() {
-		if ( !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, documentation) ?: false) && documentation.isNotEmpty() )
-			println(documentation)
+		val doc = documentation()
+		if ( !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false) && doc.isNotEmpty() )
+			println(doc)
 	}
 
 	private fun PrintWriter.generateJavaMethod() {

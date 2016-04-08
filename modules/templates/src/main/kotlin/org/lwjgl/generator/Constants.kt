@@ -47,12 +47,12 @@ class CustomConstant(javaType: String) : ConstantType<String>(javaType, {
 })
 
 open class EnumValue(
-	val documentation: String? = null,
+	val documentation: (() -> String?) = { null },
 	val value: Int? = null
 )
 
 class EnumValueExpression(
-	documentation: String?,
+	documentation: () -> String?,
 	val expression: String
 ) : EnumValue(documentation, null)
 
@@ -65,7 +65,7 @@ class ConstantBlock<T : Any>(
 	val nativeClass: NativeClass,
 	var access: Access,
 	val constantType: ConstantType<T>,
-	val documentation: String,
+	val documentation: () -> String?,
 	vararg val constants: Constant<out T>
 ) {
 
@@ -125,10 +125,11 @@ class ConstantBlock<T : Any>(
 						}
 					}
 				).let {
-					if ( ev.documentation == null )
+					val doc = ev.documentation()
+					if ( doc == null )
 						rootBlock.add(it)
 					else
-						ConstantBlock(nativeClass, access, IntConstant, ev.documentation, it).let {
+						ConstantBlock(nativeClass, access, IntConstant, { doc }, it).let {
 							it.noPrefix = noPrefix
 							enumBlocks.add(it)
 						}
@@ -158,7 +159,9 @@ class ConstantBlock<T : Any>(
 
 	private fun PrintWriter.generateBlock() {
 		println();
-		println(documentation)
+		val doc = documentation()
+		if ( doc != null )
+			println(doc)
 
 		print("\t${access.modifier}static final ${constantType.javaType}")
 
