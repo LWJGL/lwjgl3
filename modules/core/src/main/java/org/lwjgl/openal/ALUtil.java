@@ -64,16 +64,8 @@ public final class ALUtil {
 				if ( limit == offset ) // Previous char was also a \0 == end of list.
 					break;
 
-				// Prepare for decoding
-				buffer.position(offset); // Start index
-				buffer.limit(limit); // \0 index
-
-				// Decode
-				strings.add(memUTF8(buffer));
-
-				// Reset
-				buffer.limit(Integer.MAX_VALUE);
-				buffer.position(offset = limit + 1); // index after \0
+				strings.add(memUTF8(buffer, limit - offset, offset));
+				offset = buffer.position();
 			}
 		}
 
