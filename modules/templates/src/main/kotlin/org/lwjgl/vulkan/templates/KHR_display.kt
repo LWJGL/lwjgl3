@@ -60,7 +60,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 		Otherwise, {@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return
 		the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than
 		the number of display devices for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is
-		smaller than the number of display devices available for {@code physicalDevice}, VK10#INCOMPLETE will be returned instead of VK10#SUCCESS to indicate
+		smaller than the number of display devices available for {@code physicalDevice}, #INCOMPLETE will be returned instead of #SUCCESS to indicate
 		that not all the available values were returned.
 
 		${ValidityProtos.vkGetPhysicalDeviceDisplayPropertiesKHR}
@@ -109,7 +109,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 		array, and on return the variable is overwritten with the number of structures actually written to {@code pDisplays}. If the value of
 		{@code pDisplayCount} is less than the number of display planes for {@code physicalDevice}, at most {@code pDisplayCount} structures will be written.
 		If {@code pDisplayCount} is smaller than the number of displays usable with the specified {@code planeIndex} for {@code physicalDevice},
-		VK10#INCOMPLETE will be returned instead of VK10#SUCCESS to indicate that not all the available values were returned.
+		#INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
 
 		${ValidityProtos.vkGetDisplayPlaneSupportedDisplaysKHR}
 		""",
@@ -133,7 +133,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 		{@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the
 		value of {@code pPropertyCount} is less than the number of display modes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be
 		written. If {@code pPropertyCount} is smaller than the number of display modes available on the specified {@code display} for {@code physicalDevice},
-		VK10#INCOMPLETE will be returned instead of VK10#SUCCESS to indicate that not all the available values were returned.
+		#INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
 
 		${ValidityProtos.vkGetDisplayModePropertiesKHR}
 		""",

@@ -177,7 +177,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 		VkPhysicalDevice.IN("physicalDevice", "the physical device"),
 		uint32_t.IN("queueFamilyIndex", "the queue family"),
 		VkSurfaceKHR.IN("surface", " the surface"),
-		Check(1)..VkBool32_p.OUT("pSupported", "a pointer to a {@code VkBool32}, which is set to VK10#TRUE to indicate support, and VK10#FALSE otherwise")
+		Check(1)..VkBool32_p.OUT("pSupported", "a pointer to a {@code VkBool32}, which is set to #TRUE to indicate support, and #FALSE otherwise")
 	)
 
 	VkResult(
@@ -205,8 +205,8 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 		Otherwise, {@code pSurfaceFormatCount} $must point to a variable set by the user to the number of elements in the {@code pSurfaceFormats} array, and on
 		return the variable is overwritten with the number of structures actually written to {@code pSurfaceFormats}. If the value of
 		{@code pSurfaceFormatCount} is less than the number of queue families supported, at most {@code pSurfaceFormatCount} structures will be written. If
-		{@code pSurfaceFormatCount} is smaller than the number of format pairs supported for the given {@code surface}, VK10#INCOMPLETE will be returned
-		instead of VK10#SUCCESS to indicate that not all the available values were returned.
+		{@code pSurfaceFormatCount} is smaller than the number of format pairs supported for the given {@code surface}, #INCOMPLETE will be returned
+		instead of #SUCCESS to indicate that not all the available values were returned.
 
 		${ValidityProtos.vkGetPhysicalDeviceSurfaceFormatsKHR}
 		""",
@@ -229,7 +229,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 		Otherwise, {@code pPresentModeCount} $must point to a variable set by the user to the number of elements in the {@code pPresentModes} array, and on
 		return the variable is overwritten with the number of structures actually written to {@code pPresentModes}. If the value of {@code pPresentModeCount}
 		is less than the number of presentation modes supported, at most {@code pPresentModeCount} structures will be written. If {@code pPresentModeCount} is
-		smaller than the number of presentation modes supported for the given {@code surfac}e, VK10#INCOMPLETE will be returned instead of VK10#SUCCESS to
+		smaller than the number of presentation modes supported for the given {@code surfac}e, #INCOMPLETE will be returned instead of #SUCCESS to
 		indicate that not all the available values were returned.
 
 		${ValidityProtos.vkGetPhysicalDeviceSurfacePresentModesKHR}

@@ -2780,7 +2780,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 				code("srcAccessMask = #ACCESS_MEMORY_READ_BIT"),
 				code("dstStageMask = #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT"),
 				code("dstAccessMask = #ACCESS_COLOR_ATTACHMENT_READ_BIT | #ACCESS_COLOR_ATTACHMENT_WRITE_BIT."),
-				code("oldLayout = KHRSwapchain#IMAGE_LAYOUT_PRESENT_SRC_KHR"),
+				code("oldLayout = #IMAGE_LAYOUT_PRESENT_SRC_KHR"),
 				code("newLayout = #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL")
 			)}
 

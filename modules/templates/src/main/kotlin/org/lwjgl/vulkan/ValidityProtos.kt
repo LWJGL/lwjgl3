@@ -14,8 +14,8 @@ val vkAcquireNextImageKHR =
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code swapchain} $must be a valid {@code VkSwapchainKHR} handle",
-			"If {@code semaphore} is not VK10#NULL_HANDLE, {@code semaphore} $must be a valid {@code VkSemaphore} handle",
-			"If {@code fence} is not VK10#NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
+			"If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} $must be a valid {@code VkSemaphore} handle",
+			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
 			"{@code pImageIndex} $must be a pointer to a {@code uint32_t} value",
 			"If {@code semaphore} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
 			"If {@code fence} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
@@ -23,9 +23,9 @@ val vkAcquireNextImageKHR =
 			Each of {@code swapchain}, {@code device}, {@code semaphore} and {@code fence} that are valid handles $must have been created, allocated or
 			retrieved from the same {@code VkInstance}
 			""",
-			"If {@code semaphore} is not VK10#NULL_HANDLE it $must be unsignalled",
+			"If {@code semaphore} is not #NULL_HANDLE it $must be unsignalled",
 			"""
-			If {@code fence} is not VK10#NULL_HANDLE it $must be unsignalled and $mustnot be associated with any other queue command that has not yet completed
+			If {@code fence} is not #NULL_HANDLE it $must be unsignalled and $mustnot be associated with any other queue command that has not yet completed
 			execution on that queue
 			"""
 		)}
@@ -528,16 +528,14 @@ val vkCmdCopyBuffer =
 			Each of {@code commandBuffer}, {@code srcBuffer} and {@code dstBuffer} $must have been created, allocated or retrieved from the same
 			{@code VkDevice}
 			""",
-			"The {@code copySize} member of a given element of {@code pRegions} $must be greater than 0",
+			"The {@code size} member of a given element of {@code pRegions} $must be greater than 0",
 			"The {@code srcOffset} member of a given element of {@code pRegions} $must be less than the size of {@code srcBuffer}",
 			"The {@code dstOffset} member of a given element of {@code pRegions} $must be less than the size of {@code dstBuffer}",
 			"""
-			The {@code copySize} member of a given element of {@code pRegions} $must be less than or equal to the size of {@code srcBuffer} minus
-			{@code srcOffset}
+			The {@code size} member of a given element of {@code pRegions} $must be less than or equal to the size of {@code srcBuffer} minus {@code srcOffset}
 			""",
 			"""
-			The {@code copySize} member of a given element of {@code pRegions} $must be less than or equal to the size of {@code dstBuffer} minus
-			{@code dstOffset}
+			The {@code size} member of a given element of {@code pRegions} $must be less than or equal to the size of {@code dstBuffer} minus {@code dstOffset}
 			""",
 			"""
 			The union of the source regions, and the union of the destination regions, specified by the elements of {@code pRegions}, $mustnot overlap in
@@ -1231,7 +1229,7 @@ val vkCmdExecuteCommands =
 			""",
 			"""
 			If {@code commandBuffer} has a #QUERY_TYPE_PIPELINE_STATISTICS query active, then each element of {@code pCommandBuffers} $must have been recorded
-			with ##VkCommandBufferBeginInfo{@code ::pipelineStatistics} having all bits set that are set in the {@code VkQueryPool} the query uses
+			with ##VkCommandBufferInheritanceInfo{@code ::pipelineStatistics} having all bits set that are set in the {@code VkQueryPool} the query uses
 			""",
 			"Any given element of {@code pCommandBuffers} $mustnot begin any query types that are active in {@code commandBuffer}"
 		)}
@@ -2476,7 +2474,7 @@ val vkDestroySurfaceKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
-			"If {@code surface} is not VK10#NULL_HANDLE, {@code surface} $must be a valid {@code VkSurfaceKHR} handle",
+			"If {@code surface} is not #NULL_HANDLE, {@code surface} $must be a valid {@code VkSurfaceKHR} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"If {@code surface} is a valid handle, it $must have been created, allocated or retrieved from {@code instance}",
 			"All {@code VkSwapchainKHR} objects created for {@code surface} $must have been destroyed prior to destroying {@code surface}",
@@ -2493,13 +2491,13 @@ val vkDestroySwapchainKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
-			"If {@code swapchain} is not VK10#NULL_HANDLE, {@code swapchain} $must be a valid {@code VkSwapchainKHR} handle",
+			"If {@code swapchain} is not #NULL_HANDLE, {@code swapchain} $must be a valid {@code VkSwapchainKHR} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"""
 			Each of {@code swapchain} and {@code device} that are valid handles $must have been created, allocated or retrieved from the same
 			{@code VkInstance}
 			""",
-			"All uses of presentable images acquired from {@code swapchain} and owned by the application $must have completed execution",
+			"All uses of presentable images acquired from {@code swapchain} $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code swapchain} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code swapchain} was created, {@code pAllocator} $must be $NULL"
 		)}
@@ -2544,7 +2542,7 @@ val vkEnumerateDeviceExtensionProperties =
 			If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not $NULL, {@code pProperties} $must be a pointer to an
 			array of {@code pPropertyCount} ##VkExtensionProperties structures
 			""",
-			"If {@code pLayerName} is not $NULL, it $must be the name of a device layer returned by flink:vkEnumerateDeviceLayerProperties"
+			"If {@code pLayerName} is not $NULL, it $must be the name of a device layer returned by #EnumerateDeviceLayerProperties()"
 		)}"""
 
 val vkEnumerateDeviceLayerProperties =
@@ -2567,7 +2565,7 @@ val vkEnumerateInstanceExtensionProperties =
 			If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not $NULL, {@code pProperties} $must be a pointer to an
 			array of {@code pPropertyCount} ##VkExtensionProperties structures
 			""",
-			"If {@code pLayerName} is not $NULL, it $must be the name of an instance layer returned by flink:vkEnumerateInstanceLayerProperties"
+			"If {@code pLayerName} is not $NULL, it $must be the name of an instance layer returned by #EnumerateInstanceLayerProperties()"
 		)}"""
 
 val vkEnumerateInstanceLayerProperties =
@@ -2993,7 +2991,7 @@ val vkGetPhysicalDeviceSurfaceSupportKHR =
 			"{@code pSupported} $must be a pointer to a {@code VkBool32} value",
 			"Each of {@code physicalDevice} and {@code surface} $must have been created, allocated or retrieved from the same {@code VkInstance}",
 			"""
-			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by VK10#GetPhysicalDeviceQueueFamilyProperties() for the given
+			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by #GetPhysicalDeviceQueueFamilyProperties() for the given
 			{@code physicalDevice}
 			"""
 		)}"""
@@ -3004,7 +3002,7 @@ val vkGetPhysicalDeviceWaylandPresentationSupportKHR =
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
 			"{@code display} $must be a pointer to a {@code wl_display} value",
 			"""
-			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by VK10#GetPhysicalDeviceQueueFamilyProperties() for the given
+			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by #GetPhysicalDeviceQueueFamilyProperties() for the given
 			{@code physicalDevice}
 			"""
 		)}"""
@@ -3014,8 +3012,8 @@ val vkGetPhysicalDeviceWin32PresentationSupportKHR =
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
 			"""
-			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by VK10#GetPhysicalDeviceQueueFamilyProperties() for the
-			given {@code physicalDevice}
+			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by #GetPhysicalDeviceQueueFamilyProperties() for the given
+			{@code physicalDevice}
 			"""
 		)}"""
 
@@ -3025,8 +3023,8 @@ val vkGetPhysicalDeviceXcbPresentationSupportKHR =
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
 			"{@code connection} $must be a pointer to a {@code xcb_connection_t} value",
 			"""
-			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by VK10#GetPhysicalDeviceQueueFamilyProperties() for the
-			given {@code physicalDevice}
+			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by #GetPhysicalDeviceQueueFamilyProperties() for the given
+			{@code physicalDevice}
 			"""
 		)}"""
 
@@ -3036,8 +3034,8 @@ val vkGetPhysicalDeviceXlibPresentationSupportKHR =
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
 			"{@code dpy} $must be a pointer to a {@code Display} value",
 			"""
-			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by VK10#GetPhysicalDeviceQueueFamilyProperties() for the
-			given {@code physicalDevice}
+			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by #GetPhysicalDeviceQueueFamilyProperties() for the given
+			{@code physicalDevice}
 			"""
 		)}"""
 
@@ -3176,7 +3174,7 @@ val vkQueuePresentKHR =
 			"{@code pPresentInfo} $must be a pointer to a valid ##VkPresentInfoKHR structure",
 			"""
 			Any given element of {@code pSwapchains} member of {@code pPresentInfo} $must be a swapchain that is created for a surface for which presentation
-			is supported from {@code queue} as determined using a call to KHRSurface#GetPhysicalDeviceSurfaceSupportKHR()
+			is supported from {@code queue} as determined using a call to #GetPhysicalDeviceSurfaceSupportKHR()
 			"""
 		)}
 

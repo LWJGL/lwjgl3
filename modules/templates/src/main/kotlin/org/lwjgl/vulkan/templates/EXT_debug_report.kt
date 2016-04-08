@@ -21,7 +21,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
 
 		To capture issues found while creating an instance an application can link a ##VkDebugReportCallbackCreateInfoEXT structure to the {@code pNext}
-		element of the ##VkInstanceCreateInfo structure given to VK10#CreateInstance(). This callback is only valid for the duration of the
+		element of the ##VkInstanceCreateInfo structure given to #CreateInstance(). This callback is only valid for the duration of the
 		{@code vkCreateInstance} call. Use #CreateDebugReportCallbackEXT() to create persistent callback objects.
 		"""
 
@@ -177,7 +177,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		),
 		uint64_t.IN(
 			"object",
-			"the object where the issue was detected. {@code object} may be VK10#NULL_HANDLE if there is no object associated with the event."
+			"the object where the issue was detected. {@code object} may be #NULL_HANDLE if there is no object associated with the event."
 		),
 		size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the \"location\" of the trigger. This is an optional value."),
 		int32_t.IN("messageCode", " a layer defined value indicating what test triggered this callback"),

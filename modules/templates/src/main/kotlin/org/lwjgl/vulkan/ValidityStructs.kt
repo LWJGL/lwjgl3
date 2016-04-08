@@ -15,7 +15,7 @@ val VkAllocationCallbacks =
 			"{@code pfnAllocation} $must be a pointer to a valid user-defined PFN_vkAllocationFunction",
 			"{@code pfnReallocation} $must be a pointer to a valid user-defined PFN_vkReallocationFunction",
 			"{@code pfnFree} $must be a pointer to a valid user-defined PFN_vkFreeFunction",
-			"If either of {@code pfnInternalAllocatione} or {@code pfnInternalFree} is not $NULL, both $must be valid callbacks"
+			"If either of {@code pfnInternalAllocation} or {@code pfnInternalFree} is not $NULL, both $must be valid callbacks"
 		)}"""
 
 val VkAndroidSurfaceCreateInfoKHR =
@@ -997,8 +997,8 @@ val VkImageCreateInfo =
 			{@code tiling}, {@code usage} and {@code flags} equal to those in this structure) - whichever is higher
 			""",
 			"""
-			{@code samples} $must be a bit value that is set in ##VkPhysicalDeviceLimits{@code ::sampleCounts} returned by flink:vkGetPhysicalDeviceProperties,
-			or ##VkImageFormatProperties{@code ::sampleCounts} returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type},
+			{@code samples} $must be a bit value that is set in ##VkPhysicalDeviceLimits{@code ::sampleCounts} returned by #GetPhysicalDeviceProperties(), or
+			##VkImageFormatProperties{@code ::sampleCounts} returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type},
 			{@code tiling}, {@code usage} and {@code flags} equal to those in this structure
 			""",
 			"""
@@ -1409,7 +1409,7 @@ val VkPhysicalDeviceFeatures =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"""
-			If any member of this structure is #FALSE, as returned by flink:vkGetPhysicalDeviceFeatures, then it $must be #FALSE when passed as part of the
+			If any member of this structure is #FALSE, as returned by #GetPhysicalDeviceFeatures(), then it $must be #FALSE when passed as part of the
 			##VkDeviceCreateInfo struct when creating a device
 			"""
 		)}"""
@@ -1719,7 +1719,7 @@ val VkPresentInfoKHR =
 			""",
 			"""
 			Any given element of {@code pImageIndices} $must be the index of a presentable image acquired from the swapchain specified by the corresponding
-			element of the {@code pSwapchains} array that is owned by the application
+			element of the {@code pSwapchains} array
 			""",
 			"""
 			Any given element of {@code VkSemaphore} in {@code pWaitSemaphores} $must refer to a prior signal of that {@code VkSemaphore} that won't be
