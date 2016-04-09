@@ -7,7 +7,7 @@ package org.lwjgl.ovr.templates
 import org.lwjgl.generator.*
 import org.lwjgl.ovr.*
 
-val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "OVR_", prefixConstant = "ovr") {
+val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_", prefixConstant = "ovr") {
 	nativeImport("OVR_ErrorCode.h")
 
 	documentation = "LibOVR error code declarations."
@@ -18,8 +18,8 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefix
 		"Success".enumExpr("This is a general success result.", "0"),
 		"Success_NotVisible".enumExpr(
 			"""
-			Returned from a call to OVR##ovr_SubmitFrame(). The call succeeded, but what the app rendered will not be visible on the HMD. Ideally the app
-			should continue calling OVR##ovr_SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
+			Returned from a call to #SubmitFrame(). The call succeeded, but what the app rendered will not be visible on the HMD. Ideally the app should
+			continue calling #SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
 			""",
 			"1000"
 		),
@@ -112,8 +112,8 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefix
 
 		/* Rendering errors */
 		"Error_DisplayLost".enumExpr("In the event of a system-wide graphics reset or cable unplug this is returned to the app.", "-6000"),
-		"Error_TextureSwapChainFull".enumExpr("OVR#CommitTextureSwapChain() was called too many times on a texture swapchain without calling submit to use the chain.", "-6001"),
-		"Error_TextureSwapChainInvalid".enumExpr("The ##OVRTextureSwapChain is in an incomplete or inconsistent state. Ensure OVR#CommitTextureSwapChain() was called at least once first.", "-6002"),
+		"Error_TextureSwapChainFull".enumExpr("#CommitTextureSwapChain() was called too many times on a texture swapchain without calling submit to use the chain.", "-6001"),
+		"Error_TextureSwapChainInvalid".enumExpr("The {@code ovrTextureSwapChain} is in an incomplete or inconsistent state. Ensure #CommitTextureSwapChain() was called at least once first.", "-6002"),
 
 		/* Fatal errors */
 		"Error_RuntimeException".enumExpr("A runtime exception occurred. The application is required to shutdown LibOVR and re-initialize it before this error state will be cleared.", "-7000"),

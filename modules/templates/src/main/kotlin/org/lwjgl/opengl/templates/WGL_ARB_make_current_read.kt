@@ -41,17 +41,16 @@ val WGL_ARB_make_current_read = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_
 		OpenGL operations:
 		${ol(
 			"""
-			Any pixel data that are sourced based on the value of GL11##GL_READ_BUFFER. Note, that accumulation operations use the value of
-			{@code READ_BUFFER}, but are not allowed when a different device context is used for reads.  In this case, the accumulation operation will generate
-			GL11##GL_INVALID_OPERATION.
+			Any pixel data that are sourced based on the value of #READ_BUFFER. Note, that accumulation operations use the value of {@code READ_BUFFER}, but
+			are not allowed when a different device context is used for reads.  In this case, the accumulation operation will generate #INVALID_OPERATION.
 			""",
 			"""
-			Any depth values that are retrieved by GL11##glReadPixels(), GL11##glCopyPixels(), or any OpenGL extension that sources
-			depth images from the frame buffer in the manner of ReadPixels and CopyPixels.
+			Any depth values that are retrieved by #ReadPixels(), #CopyPixels(), or any OpenGL extension that sources depth images from the frame buffer in the
+			manner of {@code ReadPixels} and {@code CopyPixels}.
 			""",
 			"""
-			Any stencil values that are retrieved by ReadPixels, CopyPixels, or any OpenGL extension that sources stencil images from the framebuffer in the
-			manner of ReadPixels and CopyPixels.
+			Any stencil values that are retrieved by {@code ReadPixels}, {@code CopyPixels}, or any OpenGL extension that sources stencil images from the
+			framebuffer in the manner of {@code ReadPixels} and {@code CopyPixels}.
 			"""
 		)}
 		These frame buffer values are taken from the surface associated with the device context specified by {@code readDC}.

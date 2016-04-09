@@ -10,9 +10,7 @@ import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.nio.ByteBuffer
 import java.util.*
-import java.util.concurrent.ConcurrentLinkedQueue
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.Executors
+import java.util.concurrent.*
 import java.util.concurrent.atomic.AtomicInteger
 
 /*
@@ -166,6 +164,11 @@ class Generator(
 ) {
 
 	companion object {
+		// package -> #name -> class#prefix_name
+		val tokens = ConcurrentHashMap<String, MutableMap<String, String>>()
+		// package -> #name() -> class#prefix_name()
+		val functions = ConcurrentHashMap<String, MutableMap<String, String>>()
+
 		val structs = ConcurrentLinkedQueue<Struct>()
 		val callbacks = ConcurrentLinkedQueue<CallbackFunction>()
 		val customClasses = ConcurrentLinkedQueue<GeneratorTarget>()
@@ -245,6 +248,9 @@ class Generator(
 		if ( binding?.enabled == false )
 			return
 
+		tokens.put(packageName, HashMap())
+		functions.put(packageName, HashMap())
+
 		// Find and run configuration methods
 		//runConfiguration(packagePath, packageName)
 		apply(packagePath, packageName) {
@@ -265,7 +271,8 @@ class Generator(
 			return
 		}
 
-		// Generate the template code
+		// Get classes with bodies
+		val classes = ArrayList<NativeClass>()
 		for (template in templates) {
 			val nativeClass = template.invoke(null) as NativeClass? ?: continue
 
@@ -273,11 +280,22 @@ class Generator(
 				throw IllegalStateException("NativeClass ${nativeClass.className} has invalid package [${nativeClass.packageName}]. Should be: [$packageName]")
 
 			if ( nativeClass.hasBody ) {
-				if ( nativeClass.binding != null )
-					nativeClass.functions.filter { !it.hasCustomJNI }.forEach { JNI.register(it) }
+				classes.add(nativeClass)
 
-				generate(nativeClass, max(packageLastModified, GENERATOR_LAST_MODIFIED))
+				// Register tokens/functions for javadoc link references
+				nativeClass.registerLinks(
+					tokens[nativeClass.packageName]!!,
+					functions[nativeClass.packageName]!!
+				)
 			}
+		}
+
+		// Generate the template code
+		classes.forEach {
+			if ( it.binding != null )
+				it.functions.filter { !it.hasCustomJNI }.forEach { JNI.register(it) }
+
+			generate(it, max(packageLastModified, GENERATOR_LAST_MODIFIED))
 		}
 	}
 

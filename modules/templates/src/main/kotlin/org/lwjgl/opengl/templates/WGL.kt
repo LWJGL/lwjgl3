@@ -93,8 +93,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, prefix = "WGL", binding = GLBinding.
 			"mask",
 			"""
 			which groups of the {@code src} rendering state are to be copied to {@code dst}. It contains the bitwise-OR of the same symbolic names that are
-			passed to the org.lwjgl.opengl.GL11##glPushAttrib() function. You can use org.lwjgl.opengl.GL11##GL_ALL_ATTRIB_BITS to copy all the
-			rendering state information.
+			passed to the #PushAttrib() function. You can use #ALL_ATTRIB_BITS to copy all the rendering state information.
 			"""
 		)
 	)

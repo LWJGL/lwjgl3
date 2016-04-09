@@ -23,12 +23,12 @@ fun config() {
 
 val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	JEMALLOC_PACKAGE, void, "MallocMessageCallback",
-	"Will be called by the JEmalloc##je_malloc_usable_size() method.",
+	"Will be called by the #malloc_usable_size() method.",
 
-	void_p.IN("cbopaque", "the opaque pointer passed to JEmalloc##je_malloc_usable_size()"),
+	void_p.IN("cbopaque", "the opaque pointer passed to #malloc_usable_size()"),
 	NullTerminated..const..charASCII_p.IN("s", "the message")
 ) {
-	documentation = "Instances of this interface may be passed to the JEmalloc##je_malloc_usable_size() method."
+	documentation = "Instances of this interface may be passed to the #malloc_usable_size() method."
 	additionalCode = """
 	/**
 	 * Converts the specified {@link MallocMessageCallback} arguments to a String.

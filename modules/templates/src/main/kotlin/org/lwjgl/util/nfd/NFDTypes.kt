@@ -24,7 +24,7 @@ val nfdchar_t_pp = nfdchar_t_p.p
 
 val nfdpathset_t_p = struct_p(NFD_PACKAGE, "NFDPathSet", nativeName = "nfdpathset_t", mutable = false, nativeLayout = true) {
 	nativeImport("nfd.h")
-	documentation = "An opaque data structure to be used with NativeFileDialog##NFD_OpenDialogMultiple()."
+	documentation = "An opaque data structure to be used with #OpenDialogMultiple()."
 }
 
 val nfdresult_t = "nfdresult_t".enumType

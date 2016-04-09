@@ -54,7 +54,7 @@ val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV)
 	void(
 		"CopyImageSubDataNV",
 		"""
-		Behaves identically to the core function NVCopyImage##glCopyImageSubDataNV(), except that the {@code srcCtx} and {@code dstCtx} parameters specify
+		Behaves identically to the core function #CopyImageSubDataNV(), except that the {@code srcCtx} and {@code dstCtx} parameters specify
 		the contexts in which to look up the source and destination objects, respectively. A value of $NULL for either context indicates that the value which is
 		returned by GLX#GetCurrentContext() should be used instead. Both contexts must share the same address space.
 		""",
@@ -93,7 +93,7 @@ val WGL_NV_copy_image = "WGLNVCopyImage".nativeClassWGL("WGL_NV_copy_image", NV)
 	BOOL(
 		"CopyImageSubDataNV",
 		"""
-		Behaves identically to the core function NVCopyImage##glCopyImageSubDataNV(), except that the {@code srcRC} and {@code dstRC} parameters specify
+		Behaves identically to the core function #CopyImageSubDataNV(), except that the {@code srcRC} and {@code dstRC} parameters specify
 		the contexts in which to look up the source and destination objects, respectively. A value of zero indicates that the currently bound context should be
 		used instead.
 		""",

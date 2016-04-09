@@ -14,14 +14,13 @@ val HGPUNV = "HGPUNV".opaque_p
 val HGPUNV_p = HGPUNV.p
 val GPU_DEVICE = struct(OPENGL_PACKAGE, "GPU_DEVICE", "wgl", mutable = false) {
 	documentation =
-		"Receives information about the display device specified by the {@code deviceIndex} parameter of the WGLNVGPUAffinity##wglEnumGpuDevicesNV() function."
+		"Receives information about the display device specified by the {@code deviceIndex} parameter of the #EnumGpuDevicesNV() function."
 	javaImport("org.lwjgl.system.windows.*")
 
 	DWORD.member(
 		"cb",
 		"""
-		the size of the {@code GPU_DEVICE} structure. Before calling WGLNVGPUAffinity##wglEnumGpuDevicesNV(), set {@code cb} to the size, in bytes, of
-		{@code GPU_DEVICE}.
+		the size of the {@code GPU_DEVICE} structure. Before calling #EnumGpuDevicesNV(), set {@code cb} to the size, in bytes, of {@code GPU_DEVICE}.
 		"""
 	)
 	CHAR.array(

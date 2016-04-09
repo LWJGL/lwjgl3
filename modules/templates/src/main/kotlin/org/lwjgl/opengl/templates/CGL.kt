@@ -476,8 +476,8 @@ val CGL = "CGL".nativeClass(
 			"mask",
 			"""
 			a mask that specifies the state variables to copy. Pass a bit field that contains the bitwise OR of the state variable names that you want to copy.
-			Use the symbolic mask constants that are passed to the OpenGL function GL11##glPushAttrib(). To copy as many state variables
-			as possible, supply the constant GL11##GL_ALL_ATTRIB_BITS.
+			Use the symbolic mask constants that are passed to the OpenGL function #PushAttrib(). To copy as many state variables
+			as possible, supply the constant #ALL_ATTRIB_BITS.
 			"""
 		)
 	)
@@ -559,7 +559,7 @@ val CGL = "CGL".nativeClass(
 		GLsizei.IN("height", "the height, in pixels, of the pixel buffer"),
 		GLenum.IN(
 			"target",
-			"a constant that specifies the type of the pixel buffer target texture", "GL11##GL_TEXTURE_2D GL13##GL_TEXTURE_CUBE_MAP GL31##GL_TEXTURE_RECTANGLE"
+			"a constant that specifies the type of the pixel buffer target texture", "#TEXTURE_2D #TEXTURE_CUBE_MAP #TEXTURE_RECTANGLE"
 		),
 		GLenum.IN(
 			"internalFormat",
@@ -567,7 +567,7 @@ val CGL = "CGL".nativeClass(
 			a constant that specifies the internal color format of the pixel buffer. The format controls whether the alpha channel of the pixel buffer is used
 			for texturing operations.
 			""",
-			"GL11##GL_RGB GL11##GL_RGBA"
+			"#RGB GL11##GL_RGBA"
 		),
 		GLint.IN(
 			"max_level",
@@ -840,7 +840,7 @@ val CGL = "CGL".nativeClass(
 
 		CGLContextObj.IN("ctx", "the rendering context to attach the pixel buffer to"),
 		CGLPBufferObj.IN("pbuffer", "a pixel buffer object"),
-		GLenum.IN("face", "the cube map face to draw if the pixel buffer texture target type is GL13##GL_TEXTURE_CUBE_MAP; otherwise pass 0."),
+		GLenum.IN("face", "the cube map face to draw if the pixel buffer texture target type is #TEXTURE_CUBE_MAP; otherwise pass 0."),
 		GLint.IN(
 			"level",
 			"""
@@ -870,7 +870,7 @@ val CGL = "CGL".nativeClass(
 		Check(1)..GLenum_p.OUT(
 			"face",
 			"""
-			on return, points to the cube map face that is set if the pixel buffer texture target type is GL13##GL_TEXTURE_CUBE_MAP; otherwise 0 for all other
+			on return, points to the cube map face that is set if the pixel buffer texture target type is #TEXTURE_CUBE_MAP; otherwise 0 for all other
 			texture target types.
 			"""
 		),
@@ -895,7 +895,7 @@ val CGL = "CGL".nativeClass(
 		the receiver is not a double-buffered context, this call does nothing.
 
 		If you set the swap interval attribute (#CPSwapInterval) appropriately, the copy takes place during the vertical retrace of the display,
-		rather than immediately after CGLFlushDrawable is called. An implicit GL11##glFlush() operation is performed by CGLFlushDrawable
+		rather than immediately after CGLFlushDrawable is called. An implicit #Flush() operation is performed by CGLFlushDrawable
 		before it returns. For optimal performance, an application should not call glFlush immediately before calling CGLFlushDrawable. Subsequent OpenGL
 		commands can be issued immediately after calling CGLFlushDrawable, but are not executed until the buffer copy is completed.
 		""",

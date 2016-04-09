@@ -1347,7 +1347,7 @@ ${validations.joinToString("\n")}
 						println("\tpublic static $javaType n$getter(long $STRUCT, int index) { return memGet$bufferMethod($STRUCT + $field + index * ${mapping.bytes}); }")
 					}
 				} else if ( it.nativeType is CharSequenceType ) {
-					var mapping = it.nativeType.charMapping
+					val mapping = it.nativeType.charMapping
 					println("\t/** Unsafe version of {@link #$getter}. */")
 					println("\tpublic static ByteBuffer n$getter(long $STRUCT) { return memByteBufferNT${mapping.bytes}(memGetAddress($STRUCT + $field)); }")
 					println("\t/** Unsafe version of {@link #${getter}String}. */")

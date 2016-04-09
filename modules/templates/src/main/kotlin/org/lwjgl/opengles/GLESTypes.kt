@@ -85,9 +85,9 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	GLenum.IN("severity", "the message severity"),
 	AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	const..void_p.IN("userParam", "the user-specified value that was passed when calling GLES32##glDebugMessageCallback()")
+	const..void_p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallback()")
 ) {
-	documentation = "Instances of this interface may be passed to the GLES32##glDebugMessageCallback() method."
+	documentation = "Instances of this interface may be passed to the #DebugMessageCallback() method."
 	useSystemCallConvention()
 	additionalCode = """
 	/**
@@ -137,9 +137,9 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
 	GLenum.IN("severity", "the message severity"),
 	AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	const..void_p.IN("userParam", "the user-specified value that was passed when calling KHRDebug##glDebugMessageCallbackKHR()")
+	const..void_p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackKHR()")
 ) {
-	documentation = "Instances of this interface may be passed to the KHRDebug##glDebugMessageCallbackKHR() method."
+	documentation = "Instances of this interface may be passed to the #DebugMessageCallbackKHR() method."
 	useSystemCallConvention()
 	additionalCode = """
 	/**

@@ -230,9 +230,9 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 		<b>LWJGL note</b>: This method comes in 3 flavors:
 		${ol(
-			"GL15##glMapBuffer(int, int) - Calls #GetBufferParameteri() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
-			"GL15##glMapBuffer(int, int, ByteBuffer) - Calls #GetBufferParameteri() to retrieve the buffer size and the {@code old_buffer} parameter is reused if not null.",
-			"GL15##glMapBuffer(int, int, long, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if not null. This is the most efficient method."
+			"#MapBuffer(int, int) - Calls #GetBufferParameteri() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
+			"#MapBuffer(int, int, ByteBuffer) - Calls #GetBufferParameteri() to retrieve the buffer size and the {@code old_buffer} parameter is reused if not null.",
+			"#MapBuffer(int, int, long, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if not null. This is the most efficient method."
 		)}
 		""",
 

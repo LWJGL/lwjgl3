@@ -217,9 +217,9 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 
 		<b>LWJGL note</b>: This method comes in 3 flavors:
 		${ol(
-			"ARBVertexBufferObject##glMapBufferARB(int, int) - Calls #GetBufferParameteriARB() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
-			"ARBVertexBufferObject##glMapBufferARB(int, int, ByteBuffer) - Calls #GetBufferParameteriARB() to retrieve the buffer size and the {@code old_buffer} parameter is reused if not null.",
-			"ARBVertexBufferObject##glMapBufferARB(int, int, long, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if not null. This is the most efficient method."
+			"#MapBufferARB(int, int) - Calls #GetBufferParameteriARB() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
+			"#MapBufferARB(int, int, ByteBuffer) - Calls #GetBufferParameteriARB() to retrieve the buffer size and the {@code old_buffer} parameter is reused if not null.",
+			"#MapBufferARB(int, int, long, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if not null. This is the most efficient method."
 		)}
 		""",
 

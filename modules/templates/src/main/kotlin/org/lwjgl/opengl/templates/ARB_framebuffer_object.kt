@@ -152,8 +152,8 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		GL11#CopyPixels() of #DEPTH_STENCIL data copies a rectangle from both the depth and stencil buffers. Like glDrawPixels, it applies both the stencil and
 		depth masks but skips the remainder of the OpenGL fragment pipeline.
 
-		glTex[Sub]Image[1,2,3]D of #DEPTH_STENCIL data loads depth and stencil data into a depth_stencil texture. GL11##GetTexImage() of #DEPTH_STENCIL data can
-		be used to retrieve depth and stencil data from a depth/stencil texture.
+		glTex[Sub]Image[1,2,3]D of #DEPTH_STENCIL data loads depth and stencil data into a depth_stencil texture. #GetTexImage() of #DEPTH_STENCIL data can be
+		used to retrieve depth and stencil data from a depth/stencil texture.
 
 		In addition, a new base internal format, #DEPTH_STENCIL, can be used by both texture images and renderbuffer storage. When an image with a
 		#DEPTH_STENCIL internal format is attached to both the depth and stencil attachment points of a framebuffer object, then it becomes both the depth and

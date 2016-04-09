@@ -27,18 +27,17 @@ val GLX14 = "GLX14".nativeClassGLX("GLX14") {
 		implementation.
 
 		A non-$NULL return value for {@code glXGetProcAddress} does not guarantee that an extension function is actually supported at runtime. The client must
-		also query GL11##glGetString()(GL11##GL_EXTENSIONS) or GLX11#QueryExtensionsString() to determine if an extension is supported
-		by a particular context.
+		also query #GetString()(GL11##GL_EXTENSIONS) or GLX11#QueryExtensionsString() to determine if an extension is supported by a particular context.
 
-		GL function pointers returned by {@code glXGetProcAddress} are independent of the currently bound context and may be used by any context which
-		supports the extension.
+		GL function pointers returned by {@code glXGetProcAddress} are independent of the currently bound context and may be used by any context which supports
+		the extension.
 
 		{@code glXGetProcAddress} may be queried for all of the following functions:
 		${ul(
 			"All GL and GLX extension functions supported by the implementation (whether those extensions are supported by the current context or not).",
 			"""
 			All core (non-extension) functions in GL and GLX from version 1.0 up to and including the versions of those specifications supported by the
-			implementation, as determined by GL11##glGetString()(GL11##GL_VERSION) and GLX#QueryVersion() queries.
+			implementation, as determined by #GetString()(GL11##GL_VERSION) and GLX#QueryVersion() queries.
 			"""
 		)}
 		""",

@@ -181,7 +181,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, prefix = "GLX", prefixMethod = "glX"
 		Prevents X requests from executing until any outstanding OpenGL rendering is done.
 
 		OpenGL calls made prior to {@code glXWaitGL} are guaranteed to be executed before X rendering calls made after {@code glXWaitGL}. While the same result
-		can be achieved using GL11##glFinish(), {@code glXWaitGL} does not require a round trip to the server, and is therefore more efficient in cases
+		can be achieved using #Finish(), {@code glXWaitGL} does not require a round trip to the server, and is therefore more efficient in cases
 		where the client and server are on separate machines.
 		"""
 	)

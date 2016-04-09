@@ -107,7 +107,7 @@ val stbi_io_callbacks_eof = "stbi_io_callbacks.eof".callback(
 }
 
 val stbi_io_callbacks_p = struct_p(STB_PACKAGE, "STBIIOCallbacks", nativeName = "stbi_io_callbacks") {
-	documentation = "Image IO callbacks, used by STBImage##stbi_load_from_callbacks()."
+	documentation = "Image IO callbacks, used by #load_from_callbacks()."
 
 	stbi_io_callbacks_read.member("read", "fill {@code data} with {@code size} bytes. Return number of bytes actually read.")
 	stbi_io_callbacks_skip.member("skip", "skip the next {@code n} bytes, or {@code unget} the last -n bytes if negative")

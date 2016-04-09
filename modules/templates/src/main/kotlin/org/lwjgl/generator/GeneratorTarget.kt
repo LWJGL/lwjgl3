@@ -183,6 +183,9 @@ abstract class GeneratorTarget(
 
 	open fun processDocumentation(documentation: String): String = processDocumentation(documentation, "", "")
 
+	open fun hasField(field: String): Boolean = false
+	open fun hasMethod(method: String): Boolean = false
+
 	protected fun processDocumentation(documentation: String, prefixConstant: String, prefixMethod: String): String {
 		val matcher = LINKS.matcher(documentation)
 		if ( !matcher.find() )
@@ -207,19 +210,42 @@ abstract class GeneratorTarget(
 				if ( linkMethod[0] == '@' )
 					buffer.append("see ")
 
-				val className = matcher.group(1)
+				var className = matcher.group(1)
 				val classElement = matcher.group(3)!!
 
-				val link = if ( classElement.endsWith(')') ) LinkType.METHOD else LinkType.FIELD
-				val prefix = if ( link === LinkType.FIELD ) prefixConstant else prefixMethod
-				buffer.append(when ( linkMethod.count { it == '#' } ) {
-					1    -> link.create(this.className, prefix, className, classElement, if ( this is NativeClass) this.postfix else "", custom = false)
+				val linkType = if ( classElement.endsWith(')') ) LinkType.METHOD else LinkType.FIELD
+				var prefix = if ( linkType === LinkType.FIELD ) prefixConstant else prefixMethod
+
+				buffer.append(when (linkMethod.count { it == '#' }) {
+					1    -> {
+						className.let {
+							if ( it != null )
+								return@let
+
+							val qualifiedLink = if (linkType === LinkType.FIELD) {
+								if (hasField(classElement)) return@let else Generator.tokens[packageName]!![classElement]
+							} else if ( classElement[classElement.length - 2] != '(' ) {
+								return@let
+							} else {
+								val methodName = classElement.substring(0, classElement.length - 2)
+								if (hasMethod(methodName)) return@let else Generator.functions[packageName]!![methodName]
+							}
+
+							if (qualifiedLink != null) {
+								val hashIndex = qualifiedLink.indexOf('#')
+								className = qualifiedLink.substring(0, hashIndex)
+								prefix = qualifiedLink.substring(hashIndex + 1, qualifiedLink.length - classElement.length)
+							}/* else
+								println("Failed to resolve link: ${matcher.group()}")*/
+						}
+						linkType.create(this.className, prefix, className, classElement, if (this is NativeClass) this.postfix else "", custom = false)
+					}
 					2    ->
-						if ( className == null && link === LinkType.FIELD )
+						if (className == null && linkType === LinkType.FIELD)
 							"{@link $classElement}"
 						else
-							link.create(this.className, prefix, className, classElement, "", custom = true)
-					else -> throw IllegalStateException("Unsupported link type: $link")
+							linkType.create(this.className, prefix, className, classElement, "", custom = true)
+					else -> throw IllegalStateException("Unsupported link type: $linkType")
 				})
 			}
 
@@ -237,7 +263,7 @@ abstract class GeneratorTarget(
 				val source = if ( className == null || className == sourceName ) "" else className
 				val prefix = if ( custom ) "" else sourcePrefix
 
-				return "{@link $source#$prefix$classElement${if ( prefix.isEmpty() ) "" else " $classElement"}}"
+				return "{@link $source#$prefix$classElement${if ( custom || prefix.isEmpty() ) "" else " $classElement"}}"
 			}
 		},
 		METHOD {
@@ -253,8 +279,9 @@ abstract class GeneratorTarget(
 
 				val hasParams = parentheses < classElement.length - 2
 				return "{@link $source#$prefix$name${if ( hasParams ) classElement.substring(parentheses) else ""}${when {
-					hasParams || custom || prefix.isEmpty() -> ""
-					else                                    -> " $name"
+					hasParams || custom || prefix.isEmpty()
+					     -> ""
+					else -> " $name"
 				}}}"
 			}
 		};
@@ -320,24 +347,6 @@ abstract class CustomClass(
 
 	protected abstract fun PrintWriter.generateContent(): Unit
 
-}
-
-fun customClass(
-	packageName: String,
-	className: String,
-	init: (CustomClass.() -> Unit)? = null,
-	printContent: PrintWriter.() -> Unit
-): CustomClass {
-	var cc = object : CustomClass(packageName, className) {
-		override fun PrintWriter.generateContent() = printContent()
-	}
-
-	if ( init != null )
-		cc.init()
-
-	Generator.register(cc)
-
-	return cc
 }
 
 fun packageInfo(

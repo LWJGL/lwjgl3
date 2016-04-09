@@ -196,6 +196,24 @@ class NativeClass(
 
 	override fun processDocumentation(documentation: String): String = processDocumentation(documentation, prefixConstant, prefixMethod)
 
+	override fun hasField(field: String): Boolean = constantBlocks.any { it.constants.any { it.name == field } }
+	override fun hasMethod(method: String): Boolean = functions.any { it.simpleName == method }
+
+	fun registerLinks(
+		tokens: MutableMap<String, String>,
+	    functions: MutableMap<String, String>
+	) {
+		constantBlocks.forEach {
+			it.constants.forEach {
+				tokens[it.name] = "$className#$prefixConstant${it.name}"
+			}
+		}
+
+		this.functions.forEach {
+			functions["${it.simpleName}"] = "$className#${it.name}()"
+		}
+	}
+
 	override fun PrintWriter.generateJava() {
 		print(HEADER)
 		println("package $packageName;\n")

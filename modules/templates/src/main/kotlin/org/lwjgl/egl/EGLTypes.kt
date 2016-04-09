@@ -56,7 +56,7 @@ val EGLLabelKHR = "EGLLabelKHR".opaque_p
 val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 	EGL_PACKAGE, void, "EGLDebugMessageKHRCallback",
 	"Will be called when a debug message is generated.",
-	EGLenum.IN("error", "will contain an EGL error code, or EGL10##EGL_SUCCESS, as applicable"),
+	EGLenum.IN("error", "will contain an EGL error code, or #SUCCESS, as applicable"),
 	const..charASCII_p.IN("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
 	EGLint.IN("messageType", "will contain one of the debug message types"),
 	EGLLabelKHR.IN(
@@ -84,7 +84,7 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 		"""
 	)
 ) {
-	documentation = "Instances of this interface may be passed to the KHRDebug##eglDebugMessageControlKHR() method."
+	documentation = "Instances of this interface may be passed to the #DebugMessageControlKHR() method."
 	useSystemCallConvention()
 	additionalCode = """
 	/**
@@ -161,7 +161,7 @@ val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
 	const..void_p.IN("value", ""),
 	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
-	documentation = "Instances of this interface may be passed to the ANDROIDBlobCache##eglSetBlobCacheFuncsANDROID() method."
+	documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
 	additionalCode = """
 	/** A functional interface for {@link EGLSetBlobFuncANDROID}. */
 	public interface SAMBuffer {
@@ -192,7 +192,7 @@ val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
 	void_p.IN("value", ""),
 	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
-	documentation = "Instances of this interface may be passed to the ANDROIDBlobCache##eglSetBlobCacheFuncsANDROID() method."
+	documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
 	additionalCode = """
 	/** A functional interface for {@link EGLGetBlobFuncANDROID}. */
 	public interface SAMBuffer {
@@ -231,7 +231,7 @@ val EGLOutputPortEXT_p = EGLOutputPortEXT.p
 val EGLClientPixmapHI_p = struct_p(EGL_PACKAGE, "EGLClientPixmapHI", nativeName = "struct EGLClientPixmapHI") {
 	documentation =
 		"""
-		Specifies the width, height, stride, format and memory pointer of the pixmap to be used by the function HIClientpixmap#eglCreatePixmapSurfaceHI() to
+		Specifies the width, height, stride, format and memory pointer of the pixmap to be used by the function #CreatePixmapSurfaceHI() to
 		create the {@code PixmapSurface}.
 		"""
 

@@ -69,7 +69,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		GLenum.IN(
 			"dataType",
 			"the data type to be returned",
-			"GL11##GL_UNSIGNED_INT GL11##GL_INT GL11##GL_FLOAT GL11##GL_UNSIGNED_BYTE"
+			"#UNSIGNED_INT #INT #FLOAT #UNSIGNED_BYTE"
 		),
 		AutoSizeShr("GLChecks.typeToByteShift(dataType)", "data")..UINT.IN("size", "the size of the {@code data} buffer"),
 		MultiType(
@@ -144,8 +144,8 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		GLbitfield.IN(
 			"mask",
 			"the bitwise OR of a number of values indicating which buffers are to be copied",
-			"GL11##GL_COLOR_BUFFER_BIT GL11##GL_DEPTH_BUFFER_BIT GL11##GL_STENCIL_BUFFER_BIT", LinkMode.BITFIELD
+			"#COLOR_BUFFER_BIT GL11##GL_DEPTH_BUFFER_BIT GL11##GL_STENCIL_BUFFER_BIT", LinkMode.BITFIELD
 		),
-		GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "GL11##GL_LINEAR GL11##GL_NEAREST")
+		GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "#LINEAR #NEAREST")
 	)
 }

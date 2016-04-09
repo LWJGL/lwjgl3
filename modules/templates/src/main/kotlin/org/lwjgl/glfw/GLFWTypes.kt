@@ -71,7 +71,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	int.IN("error", "the error code"),
 	NullTerminated..charUTF8_p.IN("description", "a pointer to a UTF-8 encoded string describing the error")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetErrorCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetErrorCallback() method."
 	preamble.javaImport(
 		"java.io.PrintStream",
 		"java.lang.reflect.Field",
@@ -181,9 +181,9 @@ val GLFWmonitorfun = "GLFWmonitorfun".callback(
 	GLFW_PACKAGE, void, "GLFWMonitorCallback",
 	"Will be called when a monitor is connected to or disconnected from the system.",
 	GLFWmonitor.IN("monitor", "the monitor that was connected or disconnected"),
-	int.IN("event", "one of GLFW##GLFW_CONNECTED or GLFW##GLFW_DISCONNECTED")
+	int.IN("event", "one of #CONNECTED or #DISCONNECTED")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetMonitorCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetMonitorCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetMonitorCallback SetMonitorCallback}. */
@@ -216,9 +216,9 @@ val GLFWjoystickfun = "GLFWjoystickfun".callback(
 	GLFW_PACKAGE, void, "GLFWJoystickCallback",
 	"Will be called when a joystick is connected to or disconnected from the system.",
 	int.IN("joy", "the joystick that was connected or disconnected"),
-	int.IN("event", "one of GLFW##GLFW_CONNECTED or GLFW##GLFW_DISCONNECTED")
+	int.IN("event", "one of #CONNECTED or #DISCONNECTED")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetJoystickCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetJoystickCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetJoystickCallback SetJoystickCallback}. */
@@ -236,7 +236,7 @@ val GLFWwindowposfun = "GLFWwindowposfun".callback(
 	int.IN("xpos", "the new x-coordinate, in pixels, of the upper-left corner of the client area of the window"),
 	int.IN("ypos", "the new y-coordinate, in pixels, of the upper-left corner of the client area of the window")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowPosCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetWindowPosCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowPosCallback SetWindowPosCallback}. */
@@ -255,7 +255,7 @@ val GLFWwindowsizefun = "GLFWwindowsizefun".callback(
 	int.IN("width", "the new width, in screen coordinates, of the window"),
 	int.IN("height", "the new height, in screen coordinates, of the window")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowSizeCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetWindowSizeCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowSizeCallback SetWindowSizeCallback}. */
@@ -271,7 +271,7 @@ val GLFWwindowclosefun = "GLFWwindowclosefun".callback(
 	"Will be called when the user attempts to close the specified window, for example by clicking the close widget in the title bar.",
 	GLFWwindow.IN("window", "the window that the user attempted to close")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowCloseCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetWindowCloseCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowCloseCallback SetWindowCloseCallback}. */
@@ -290,7 +290,7 @@ val GLFWwindowrefreshfun = "GLFWwindowrefreshfun".callback(
 	""",
 	GLFWwindow.IN("window", "the window whose content needs to be refreshed")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowRefreshCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetWindowRefreshCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowRefreshCallback SetWindowRefreshCallback}. */
@@ -308,7 +308,7 @@ val GLFWwindowfocusfun = "GLFWwindowfocusfun".callback(
 	int.IN("focused", "GL11##GL_TRUE if the window was focused, or GL11##GL_FALSE if it was defocused")
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowFocusCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetWindowFocusCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowFocusCallback SetWindowFocusCallback}. */
@@ -326,7 +326,7 @@ val GLFWwindowiconifyfun = "GLFWwindowiconifyfun".callback(
 	int.IN("iconified", "GL11#GL_TRUE if the window was iconified, or GL11#GL_FALSE if it was restored")
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowIconifyCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetWindowIconifyCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowIconifyCallback SetWindowIconifyCallback}. */
@@ -344,7 +344,7 @@ val GLFWframebuffersizefun = "GLFWframebuffersizefun".callback(
 	int.IN("width", "the new width, in pixels, of the framebuffer"),
 	int.IN("height", "the new height, in pixels, of the framebuffer")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetFramebufferSizeCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetFramebufferSizeCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetFramebufferSizeCallback SetFramebufferSizeCallback}. */
@@ -361,10 +361,10 @@ val GLFWkeyfun = "GLFWkeyfun".callback(
 	GLFWwindow.IN("window", "the window that received the event"),
 	int.IN("key", "the keyboard key that was pressed or released"),
 	int.IN("scancode", "the system-specific scancode of the key"),
-	int.IN("action", "the key action", "GLFW##GLFW_PRESS GLFW##GLFW_RELEASE GLFW##GLFW_REPEAT"),
+	int.IN("action", "the key action", "#PRESS #RELEASE #REPEAT"),
 	int.IN("mods", "bitfield describing which modifiers keys were held down")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetKeyCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetKeyCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetKeyCallback SetKeyCallback}. */
@@ -381,7 +381,7 @@ val GLFWcharfun = "GLFWcharfun".callback(
 	GLFWwindow.IN("window", "the window that received the event"),
 	unsigned_int.IN("codepoint", "the Unicode code point of the character")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCharCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetCharCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCharCallback SetCharCallback}. */
@@ -399,7 +399,7 @@ val GLFWcharmodsfun = "GLFWcharmodsfun".callback(
 	unsigned_int.IN("codepoint", "the Unicode code point of the character"),
 	int.IN("mods", "bitfield describing which modifier keys were held down")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCharModsCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetCharModsCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCharModsCallback SetCharModsCallback}. */
@@ -415,10 +415,10 @@ val GLFWmousebuttonfun = "GLFWmousebuttonfun".callback(
 	"Will be called when a mouse button is pressed or released.",
 	GLFWwindow.IN("window", "the window that received the event"),
 	int.IN("button", "the mouse button that was pressed or released"),
-	int.IN("action", "the button action", "GLFW##GLFW_PRESS GLFW##GLFW_RELEASE GLFW##GLFW_REPEAT"),
+	int.IN("action", "the button action", "#PRESS #RELEASE #REPEAT"),
 	int.IN("mods", "bitfield describing which modifiers keys were held down")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetMouseButtonCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetMouseButtonCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetMouseButtonCallback SetMouseButtonCallback}. */
@@ -441,7 +441,7 @@ val GLFWcursorposfun = "GLFWcursorposfun".callback(
 	double.IN("xpos", "the new cursor x-coordinate, relative to the left edge of the client area"),
 	double.IN("ypos", "the new cursor y-coordinate, relative to the top edge of the client area")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCursorPosCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetCursorPosCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCursorPosCallback SetCursorPosCallback}. */
@@ -459,7 +459,7 @@ val GLFWcursorenterfun = "GLFWcursorenterfun".callback(
 	int.IN("entered", "GL11##GL_TRUE if the cursor entered the window's client area, or GL11##GL_FALSE if it left it")
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCursorEnterCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetCursorEnterCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCursorEnterCallback SetCursorEnterCallback}. */
@@ -477,7 +477,7 @@ val GLFWscrollfun = "GLFWscrollfun".callback(
 	double.IN("xoffset", "the scroll offset along the x-axis"),
 	double.IN("yoffset", "the scroll offset along the y-axis")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetScrollCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetScrollCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetScrollCallback SetScrollCallback}. */
@@ -495,7 +495,7 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	AutoSize("names")..int.IN("count", "the number of dropped files"),
 	const..char_pp.IN("names", "pointer to the array of UTF-8 encoded path names of the dropped files")
 ) {
-	documentation = "Instances of this interface may be passed to the GLFW##glfwSetDropCallback() method."
+	documentation = "Instances of this interface may be passed to the #SetDropCallback() method."
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** A functional interface for {@link GLFWDropCallback}. */

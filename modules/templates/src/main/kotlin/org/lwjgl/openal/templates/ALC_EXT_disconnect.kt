@@ -34,12 +34,12 @@ val ALC_EXT_disconnect = "EXTDisconnect".nativeClassALC("EXT_disconnect") {
 		When a device is disconnected, the implementation will, in most respects, keep processing as normal. For example, even though there is no longer any
 		output when a USB audio device is removed, setting and querying state on the Listener should keep functioning as expected.
 
-		All sources in the AL10##AL_PLAYING state will immediately progress to AL10##AL_STOPPED upon disconnect of their containing device. Any source started
-		after the disconnect will immediately progress to AL10##AL_STOPPED. As in any stopped source, this also means that queued buffers all go to
-		AL10##AL_PROCESSED as well. Sources that are in the AL10##AL_PAUSED or AL10##AL_INITIAL state do not change on disconnect, but will follow this
-		behaviour if the application later tries to promote them to the AL10##AL_PLAYING state.
+		All sources in the #PLAYING state will immediately progress to #STOPPED upon disconnect of their containing device. Any source started after the
+		disconnect will immediately progress to #STOPPED. As in any stopped source, this also means that queued buffers all go to #PROCESSED as well. Sources
+		that are in the #PAUSED or #INITIAL state do not change on disconnect, but will follow this behaviour if the application later tries to promote them to
+		the #PLAYING state.
 
-		Zombie devices may not have new contexts created on them; ALC10#CreateContext() will fail, returning a $NULL pointer, if the specified device has been
+		Zombie devices may not have new contexts created on them; #CreateContext() will fail, returning a $NULL pointer, if the specified device has been
 		disconnected.
 
 		The application may determine if a device has been disconnected by using the #CONNECTED token with ALC10#GetIntegerv(). When a device has been
