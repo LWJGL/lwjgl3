@@ -160,3 +160,8 @@ fun note(javadoc: String, title: String = "Note") =
 	""" <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>$title</h5>
 	$javadoc
 	</div>"""
+
+fun man(page: String, version: String = "1.0", link: String = "Khronos Reference Page") =
+	"<a href=\"https://www.khronos.org/registry/vulkan/specs/$version/man/html/$page.html\">$link</a>"
+fun spec(anchor: String, version: String = "1.0-wsi_extensions", link: String = "Vulkan Specification") =
+	"<a href=\"https://www.khronos.org/registry/vulkan/specs/$version/xhtml/vkspec.html\\#$anchor\">$link</a>"

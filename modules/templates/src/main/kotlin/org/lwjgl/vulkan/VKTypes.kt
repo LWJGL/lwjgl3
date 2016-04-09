@@ -161,24 +161,21 @@ val const_charUTF8_p = charUTF8.const_p
 val const_charUTF8_const_p = const_charUTF8_p.p_const_p
 // ----
 
+internal fun Struct.sType() = VkStructureType.member("sType", "the type of this structure")
 internal fun Struct.pNext() = nullable.."const void".p.member("pNext", "reserved for use by extensions")
 
 val VkApplicationInfo = struct(VULKAN_PACKAGE, "VkApplicationInfo") {
 	documentation =
 		"""
+		${man("VkApplicationInfo")}<br>
+		${spec("VkApplicationInfo")}
+
 		Contains information about the application.
 
-		<h3>Valid Usage</h3>
-		${ul(
-			"{@code sType} $must be VK10#VK_STRUCTURE_TYPE_APPLICATION_INFO",
-			"{@code pNext} $must be $NULL",
-			"If {@code pApplicationName} is not $NULL, {@code pApplicationName} $must be a null-terminated string",
-			"If {@code pEngineName} is not $NULL, {@code pEngineName} $must be a null-terminated string",
-			"{@code apiVersion} $must be zero, or otherwise it $must be a version that the implementation supports, or supports an effective substitute for"
-		)}
+		${ValidityStructs.VkApplicationInfo}
 		"""
 
-	VkStructureType.member("sType", "should be set to VK10#VK_STRUCTURE_TYPE_APPLICATION_INFO")
+	sType()
 	pNext()
 	nullable..const_charUTF8_p.member("pApplicationName", "a pointer to a $NULL-terminated UTF-8 string containing the name of the application")
 	uint32_t.member(
@@ -203,38 +200,15 @@ val const_VkApplicationInfo_p = VkApplicationInfo.const_p
 val VkInstanceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkInstanceCreateInfo") {
 	documentation =
 		"""
+		${man("VkInstanceCreateInfo")}<br>
+		${spec("VkInstanceCreateInfo")}
+
 		Contains information about how a {@code VkInstance} should be created.
 
-		<h3>Valid Usage</h3>
-		${ul(
-			"{@code sType} $must be VK10#VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO",
-			"{@code pNext} $must be $NULL",
-			"{@code flags} $must be 0",
-			"If {@code pApplicationInfo} is not $NULL, {@code pApplicationInfo} $must be a pointer to a valid ##VkApplicationInfo structure",
-			"""
-			If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} $must be a pointer to an array of {@code enabledLayerCount} null-terminated
-			strings
-			""",
-			"""
-			If {@code enabledExtensionCount} is not 0, {@code ppEnabledExtensionNames} $must be a pointer to an array of {@code enabledExtensionCount}
-			null-terminated strings
-			""",
-			"""
-			Any given element of {@code ppEnabledLayerNames} $must be the name of a layer present on the system, exactly matching a string returned in the
-			##VkLayerProperties structure by VK10#vkEnumerateInstanceLayerProperties()
-			""",
-			"""
-			Any given element of {@code ppEnabledExtensionNames} $must be the name of an extension present on the system, exactly matching a string returned in
-			the ##VkExtensionProperties structure by VK10#vkEnumerateInstanceExtensionProperties()
-			""",
-			"""
-			If an extension listed in {@code ppEnabledExtensionNames} is provided as part of a layer, then both the layer and extension $must be enabled to
-			enable that extension
-			"""
-		)}
+		${ValidityStructs.VkInstanceCreateInfo}
 		"""
 
-	VkStructureType.member("sType", "the type of this structure")
+	sType()
 	pNext()
 	VkInstanceCreateFlags.member("flags", "reserved for future use")
 	nullable..const_VkApplicationInfo_p.member("pApplicationInfo", "a pointer to an instance of ##VkApplicationInfo")
@@ -349,615 +323,1375 @@ val PFN_vkInternalFreeNotification = "PFN_vkInternalFreeNotification".callback(
 }
 
 val VkAllocationCallbacks_p = struct_p(VULKAN_PACKAGE, "VkAllocationCallbacks") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkAllocationCallbacks")}<br>
+		${spec("memory-allocation")}
 
-	nullable..voidptr.member("pUserData", "")
-	PFN_vkAllocationFunction.member("pfnAllocation", "")
-	PFN_vkReallocationFunction.member("pfnReallocation", "")
-	PFN_vkFreeFunction.member("pfnFree", "")
-	nullable..PFN_vkInternalAllocationNotification.member("pfnInternalAllocation", "")
-	nullable..PFN_vkInternalFreeNotification.member("pfnInternalFree", "")
+		Contains pointers to callback functions that are used to create, reallocate and free host memory allocations on behalf of a Vulkan implementation.
+
+		${ValidityStructs.VkAllocationCallbacks}
+		"""
+
+	nullable..voidptr.member(
+		"pUserData",
+		"""
+		a value to be interpreted by the implementation of the callbacks. When any of the callbacks in {@code VkAllocationCallbacks} are called, the Vulkan
+		implementation will pass this value as the first parameter to the callback. This value $can vary each time an allocator is passed into a command, even
+		when the same object takes an allocator in multiple commands.
+		"""
+	)
+	PFN_vkAllocationFunction.member("pfnAllocation", "a pointer to an application-defined memory allocation function of type {@code PFN_vkAllocationFunction}")
+	PFN_vkReallocationFunction.member(
+		"pfnReallocation",
+		"a pointer to an application-defined memory reallocation function of type {@code PFN_vkReallocationFunction}"
+	)
+	PFN_vkFreeFunction.member("pfnFree", "a pointer to an application-defined memory free function of type {@code PFN_vkFreeFunction}")
+	nullable..PFN_vkInternalAllocationNotification.member(
+		"pfnInternalAllocation",
+		"""
+		a pointer to an application-defined function that is called by the implementation when the implementation makes internal allocations, and it is of type
+		{@code PFN_vkInternalAllocationNotification}
+		"""
+	)
+	nullable..PFN_vkInternalFreeNotification.member(
+		"pfnInternalFree",
+		"""
+		a pointer to an application-defined function that is called by the implementation when the implementation frees internal allocations, and it is of type
+		{@code PFN_vkInternalFreeNotification}
+		"""
+	)
 }
 val pAllocator = nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "controls host memory allocation")
 
 val VkPhysicalDeviceFeatures = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPhysicalDeviceFeatures")}<br>
+		${spec("VkPhysicalDeviceFeatures")}
 
-	VkBool32.member("robustBufferAccess", "")
-	VkBool32.member("fullDrawIndexUint32", "")
-	VkBool32.member("imageCubeArray", "")
-	VkBool32.member("independentBlend", "")
-	VkBool32.member("geometryShader", "")
-	VkBool32.member("tessellationShader", "")
-	VkBool32.member("sampleRateShading", "")
-	VkBool32.member("dualSrcBlend", "")
-	VkBool32.member("logicOp", "")
-	VkBool32.member("multiDrawIndirect", "")
-	VkBool32.member("drawIndirectFirstInstance", "")
-	VkBool32.member("depthClamp", "")
-	VkBool32.member("depthBiasClamp", "")
-	VkBool32.member("fillModeNonSolid", "")
-	VkBool32.member("depthBounds", "")
-	VkBool32.member("wideLines", "")
-	VkBool32.member("largePoints", "")
-	VkBool32.member("alphaToOne", "")
-	VkBool32.member("multiViewport", "")
-	VkBool32.member("samplerAnisotropy", "")
-	VkBool32.member("textureCompressionETC2", "")
-	VkBool32.member("textureCompressionASTC_LDR", "")
-	VkBool32.member("textureCompressionBC", "")
-	VkBool32.member("occlusionQueryPrecise", "")
-	VkBool32.member("pipelineStatisticsQuery", "")
-	VkBool32.member("vertexPipelineStoresAndAtomics", "")
-	VkBool32.member("fragmentStoresAndAtomics", "")
-	VkBool32.member("shaderTessellationAndGeometryPointSize", "")
-	VkBool32.member("shaderImageGatherExtended", "")
-	VkBool32.member("shaderStorageImageExtendedFormats", "")
-	VkBool32.member("shaderStorageImageMultisample", "")
-	VkBool32.member("shaderStorageImageReadWithoutFormat", "")
-	VkBool32.member("shaderStorageImageWriteWithoutFormat", "")
-	VkBool32.member("shaderUniformBufferArrayDynamicIndexing", "")
-	VkBool32.member("shaderSampledImageArrayDynamicIndexing", "")
-	VkBool32.member("shaderStorageBufferArrayDynamicIndexing", "")
-	VkBool32.member("shaderStorageImageArrayDynamicIndexing", "")
-	VkBool32.member("shaderClipDistance", "")
-	VkBool32.member("shaderCullDistance", "")
-	VkBool32.member("shaderFloat64", "")
-	VkBool32.member("shaderInt64", "")
-	VkBool32.member("shaderInt16", "")
-	VkBool32.member("shaderResourceResidency", "")
-	VkBool32.member("shaderResourceMinLod", "")
-	VkBool32.member("sparseBinding", "")
-	VkBool32.member("sparseResidencyBuffer", "")
-	VkBool32.member("sparseResidencyImage2D", "")
-	VkBool32.member("sparseResidencyImage3D", "")
-	VkBool32.member("sparseResidency2Samples", "")
-	VkBool32.member("sparseResidency4Samples", "")
-	VkBool32.member("sparseResidency8Samples", "")
-	VkBool32.member("sparseResidency16Samples", "")
-	VkBool32.member("sparseResidencyAliased", "")
-	VkBool32.member("variableMultisampleRate", "")
-	VkBool32.member("inheritedQueries", "")
+		Contains a feature flag for each of the fine-grained features that may be supported by an implementation.
+
+		${ValidityStructs.VkPhysicalDeviceFeatures}
+		"""
+
+	VkBool32.member("robustBufferAccess", "indicates that out of bounds accesses to buffers via shader operations are well-defined")
+	VkBool32.member(
+		"fullDrawIndexUint32",
+		"indicates the full 32-bit range of indices is supported for indexed draw calls when using a VkIndexType of #INDEX_TYPE_UINT32"
+	)
+	VkBool32.member(
+		"imageCubeArray",
+		"""
+		indicates whether image views with a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_CUBE_ARRAY $can be created, and that the corresponding
+		<b>SampledCubeArray</b> and <b>ImageCubeArray</b> SPIR-V capabilities $can be used in shader code
+		"""
+	)
+	VkBool32.member("independentBlend", "indicates whether the ##VkPipelineColorBlendAttachmentState settings are controlled independently per-attachment")
+	VkBool32.member("geometryShader", "indicates whether geometry shaders are supported")
+	VkBool32.member("tessellationShader", "indicates whether tessellation control and evaluation shaders are supported")
+	VkBool32.member("sampleRateShading", "indicates whether per-sample shading and multisample interpolation are supported")
+	VkBool32.member("dualSrcBlend", "indicates whether blend operations which take two sources are supported")
+	VkBool32.member("logicOp", "indicates whether logic operations are supported")
+	VkBool32.member("multiDrawIndirect", "indicates whether multiple draw indirect is supported")
+	VkBool32.member("drawIndirectFirstInstance", "indicates whether indirect draw calls support the {@code firstInstance} parameter")
+	VkBool32.member("depthClamp", "indicates whether depth clamping is supported")
+	VkBool32.member("depthBiasClamp", "indicates whether depth bias clamping is supported")
+	VkBool32.member("fillModeNonSolid", "indicates whether point and wireframe fill modes are supported")
+	VkBool32.member("depthBounds", "indicates whether depth bounds tests are supported")
+	VkBool32.member("wideLines", "indicates whether lines with width other than 1.0 are supported")
+	VkBool32.member("largePoints", "indicates whether points with size greater than 1.0 are supported")
+	VkBool32.member(
+		"alphaToOne",
+		"""
+		indicates whether the implementation is able to replace the alpha value of the color fragment output from the fragment shader with the maximum
+		representable alpha value for fixed-point colors or 1.0 for floating-point colors
+		"""
+	)
+	VkBool32.member("multiViewport", "indicates whether more than one viewport is supported")
+	VkBool32.member("samplerAnisotropy", "indicates whether anisotropic filtering is supported")
+	VkBool32.member("textureCompressionETC2", "indicates whether the ETC2 and EAC compressed texture formats are supported")
+	VkBool32.member("textureCompressionASTC_LDR", "indicates whether the ASTC LDR compressed texture formats are supported")
+	VkBool32.member("textureCompressionBC", "indicates whether the BC compressed texture formats are supported")
+	VkBool32.member("occlusionQueryPrecise", "indicates whether occlusion queries returning actual sample counts are supported")
+	VkBool32.member("pipelineStatisticsQuery", "indicates whether the pipeline statistics queries are supported")
+	VkBool32.member(
+		"vertexPipelineStoresAndAtomics",
+		"indicates whether storage buffers and images support stores and atomic operations in the vertex, tessellation, and geometry shader stages"
+	)
+	VkBool32.member(
+		"fragmentStoresAndAtomics",
+		"indicates whether storage buffers and images support stores and atomic operations in the fragment shader stage"
+	)
+	VkBool32.member(
+		"shaderTessellationAndGeometryPointSize",
+		"""
+		indicates whether the {@code PointSize} built-in decoration is available in the tessellation control, tessellation evaluation, and geometry shader
+		stages
+		"""
+	)
+	VkBool32.member("shaderImageGatherExtended", "indicates whether the extended set of image gather instructions are available in shader code")
+	VkBool32.member("shaderStorageImageExtendedFormats", "indicates whether the extended storage image formats are available in shader code")
+	VkBool32.member("shaderStorageImageMultisample", "indicates whether multisampled storage images are supported")
+	VkBool32.member(
+		"shaderStorageImageReadWithoutFormat",
+		"indicates whether storage images require a format qualifier to be specified when reading from storage images"
+	)
+	VkBool32.member(
+		"shaderStorageImageWriteWithoutFormat",
+		"indicates whether storage images require a format qualifier to be specified when writing to storage images"
+	)
+	VkBool32.member(
+		"shaderUniformBufferArrayDynamicIndexing",
+		"indicates whether arrays of uniform buffers $can be indexed by dynamically uniform integer expressions in shader code"
+	)
+	VkBool32.member(
+		"shaderSampledImageArrayDynamicIndexing",
+		"indicates whether arrays of samplers or sampled images $can be indexed by dynamically uniform integer expressions in shader code"
+	)
+	VkBool32.member(
+		"shaderStorageBufferArrayDynamicIndexing",
+		"indicates whether arrays of storage buffers $can be indexed by dynamically uniform integer expressions in shader code"
+	)
+	VkBool32.member(
+		"shaderStorageImageArrayDynamicIndexing",
+		"indicates whether arrays of storage images $can be indexed by dynamically uniform integer expressions in shader code"
+	)
+	VkBool32.member("shaderClipDistance", "indicates whether clip distances are supported in shader code")
+	VkBool32.member("shaderCullDistance", "indicates whether cull distances are supported in shader code")
+	VkBool32.member("shaderFloat64", "indicates whether 64-bit floats (doubles) are supported in shader code")
+	VkBool32.member("shaderInt64", "indicates whether 64-bit integers (signed and unsigned) are supported in shader code")
+	VkBool32.member("shaderInt16", "indicates whether 16-bit integers (signed and unsigned) are supported in shader code")
+	VkBool32.member("shaderResourceResidency", "indicates whether image operations that return resource residency information are supported in shader code")
+	VkBool32.member(
+		"shaderResourceMinLod",
+		"indicates whether image operations that specify the minimum resource level-of-detail (LOD) are supported in shader code"
+	)
+	VkBool32.member("sparseBinding", "indicates whether resource memory $can be managed at opaque sparse block level instead of at the object level")
+	VkBool32.member("sparseResidencyBuffer", "indicates whether the device $can access partially resident buffers")
+	VkBool32.member("sparseResidencyImage2D", "indicates whether the device $can access partially resident 2D images with 1 sample per pixel")
+	VkBool32.member("sparseResidencyImage3D", "indicates whether the device $can access partially resident 3D images")
+	VkBool32.member("sparseResidency2Samples", "indicates whether the physical device $can access partially resident 2D images with 2 samples per pixel")
+	VkBool32.member("sparseResidency4Samples", "indicates whether the physical device $can access partially resident 2D images with 4 samples per pixel")
+	VkBool32.member("sparseResidency8Samples", "indicates whether the physical device $can access partially resident 2D images with 8 samples per pixel")
+	VkBool32.member("sparseResidency16Samples", "indicates whether the physical device $can access partially resident 2D images with 16 samples per pixel")
+	VkBool32.member("sparseResidencyAliased", "indicates whether the physical device $can correctly access data aliased into multiple locations")
+	VkBool32.member(
+		"variableMultisampleRate",
+		"""
+		indicates whether all pipelines that will be bound to a command buffer during a subpass with no attachments must have the same value for
+		##VkPipelineMultisampleStateCreateInfo{@code ::rasterizationSamples}
+		"""
+	)
+	VkBool32.member("inheritedQueries", "indicates whether a secondary command buffer may be executed while a query is active")
 }.nativeType
 
 val VkPhysicalDeviceFeatures_p = VkPhysicalDeviceFeatures.p
 val const_VkPhysicalDeviceFeatures_p = VkPhysicalDeviceFeatures.const_p
 
 val VkFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkFormatProperties", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkFormatProperties")}<br>
+		${spec("VkFormatProperties")}
 
-	VkFormatFeatureFlags.member("linearTilingFeatures", "")
-	VkFormatFeatureFlags.member("optimalTilingFeatures", "")
-	VkFormatFeatureFlags.member("bufferFeatures", "")
+		Contains physical device properties for a {@code VkFormat}.
+		"""
+
+	VkFormatFeatureFlags.member("linearTilingFeatures", "what features are supported by #IMAGE_TILING_LINEAR images")
+	VkFormatFeatureFlags.member("optimalTilingFeatures", "what features are supported by #IMAGE_TILING_OPTIMAL images")
+	VkFormatFeatureFlags.member("bufferFeatures", "what features are supported by buffers")
 }
 
 val VkExtent3D = struct(VULKAN_PACKAGE, "VkExtent3D") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkExtent3D")}<br>
+		${spec("VkExtent3D")}
 
-	uint32_t.member("width", "")
-	uint32_t.member("height", "")
-	uint32_t.member("depth", "")
+		Describes the size of a rectangular region of pixels within a three-dimensional image or framebuffer.
+		"""
+
+	uint32_t.member("width", "the region width")
+	uint32_t.member("height", "the region height")
+	uint32_t.member("depth", "the region depth")
 }.nativeType
 
 val VkImageFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkImageFormatProperties", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkImageFormatProperties")}<br>
+		${spec("VkImageFormatProperties")}
 
-	VkExtent3D.member("maxExtent", "")
-	uint32_t.member("maxMipLevels", "")
-	uint32_t.member("maxArrayLayers", "")
-	VkSampleCountFlags.member("sampleCounts", "")
-	VkDeviceSize.member("maxResourceSize", "")
+		Contains additional capabilities for certain types of images.
+		"""
+
+	VkExtent3D.member("maxExtent", "the maximum image dimensions")
+	uint32_t.member("maxMipLevels", "the maximum number of mipmap levels")
+	uint32_t.member("maxArrayLayers", "the maximum number of array layers")
+	VkSampleCountFlags.member("sampleCounts", "a bitmask of {@code VkSampleCountFlagBits} specifying all the supported sample counts for this image")
+	VkDeviceSize.member("maxResourceSize", "the maximum total image size in bytes, inclusive of all subresources")
 }
 
 val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPhysicalDeviceLimits")}<br>
+		${spec("VkPhysicalDeviceLimits")}
 
-	uint32_t.member("maxImageDimension1D", "")
-	uint32_t.member("maxImageDimension2D", "")
-	uint32_t.member("maxImageDimension3D", "")
-	uint32_t.member("maxImageDimensionCube", "")
-	uint32_t.member("maxImageArrayLayers", "")
-	uint32_t.member("maxTexelBufferElements", "")
-	uint32_t.member("maxUniformBufferRange", "")
-	uint32_t.member("maxStorageBufferRange", "")
-	uint32_t.member("maxPushConstantsSize", "")
-	uint32_t.member("maxMemoryAllocationCount", "")
-	uint32_t.member("maxSamplerAllocationCount", "")
-	VkDeviceSize.member("bufferImageGranularity", "")
-	VkDeviceSize.member("sparseAddressSpaceSize", "")
-	uint32_t.member("maxBoundDescriptorSets", "")
-	uint32_t.member("maxPerStageDescriptorSamplers", "")
-	uint32_t.member("maxPerStageDescriptorUniformBuffers", "")
-	uint32_t.member("maxPerStageDescriptorStorageBuffers", "")
-	uint32_t.member("maxPerStageDescriptorSampledImages", "")
-	uint32_t.member("maxPerStageDescriptorStorageImages", "")
-	uint32_t.member("maxPerStageDescriptorInputAttachments", "")
-	uint32_t.member("maxPerStageResources", "")
-	uint32_t.member("maxDescriptorSetSamplers", "")
-	uint32_t.member("maxDescriptorSetUniformBuffers", "")
-	uint32_t.member("maxDescriptorSetUniformBuffersDynamic", "")
-	uint32_t.member("maxDescriptorSetStorageBuffers", "")
-	uint32_t.member("maxDescriptorSetStorageBuffersDynamic", "")
-	uint32_t.member("maxDescriptorSetSampledImages", "")
-	uint32_t.member("maxDescriptorSetStorageImages", "")
-	uint32_t.member("maxDescriptorSetInputAttachments", "")
-	uint32_t.member("maxVertexInputAttributes", "")
-	uint32_t.member("maxVertexInputBindings", "")
-	uint32_t.member("maxVertexInputAttributeOffset", "")
-	uint32_t.member("maxVertexInputBindingStride", "")
-	uint32_t.member("maxVertexOutputComponents", "")
-	uint32_t.member("maxTessellationGenerationLevel", "")
-	uint32_t.member("maxTessellationPatchSize", "")
-	uint32_t.member("maxTessellationControlPerVertexInputComponents", "")
-	uint32_t.member("maxTessellationControlPerVertexOutputComponents", "")
-	uint32_t.member("maxTessellationControlPerPatchOutputComponents", "")
-	uint32_t.member("maxTessellationControlTotalOutputComponents", "")
-	uint32_t.member("maxTessellationEvaluationInputComponents", "")
-	uint32_t.member("maxTessellationEvaluationOutputComponents", "")
-	uint32_t.member("maxGeometryShaderInvocations", "")
-	uint32_t.member("maxGeometryInputComponents", "")
-	uint32_t.member("maxGeometryOutputComponents", "")
-	uint32_t.member("maxGeometryOutputVertices", "")
-	uint32_t.member("maxGeometryTotalOutputComponents", "")
-	uint32_t.member("maxFragmentInputComponents", "")
-	uint32_t.member("maxFragmentOutputAttachments", "")
-	uint32_t.member("maxFragmentDualSrcAttachments", "")
-	uint32_t.member("maxFragmentCombinedOutputResources", "")
-	uint32_t.member("maxComputeSharedMemorySize", "")
-	uint32_t.array("maxComputeWorkGroupCount", "", size = 3)
-	uint32_t.member("maxComputeWorkGroupInvocations", "")
-	uint32_t.array("maxComputeWorkGroupSize", "", size = 3)
-	uint32_t.member("subPixelPrecisionBits", "")
-	uint32_t.member("subTexelPrecisionBits", "")
-	uint32_t.member("mipmapPrecisionBits", "")
-	uint32_t.member("maxDrawIndexedIndexValue", "")
-	uint32_t.member("maxDrawIndirectCount", "")
-	float.member("maxSamplerLodBias", "")
-	float.member("maxSamplerAnisotropy", "")
-	uint32_t.member("maxViewports", "")
-	uint32_t.array("maxViewportDimensions", "", size = 2)
-	float.array("viewportBoundsRange", "", size = 2)
-	uint32_t.member("viewportSubPixelBits", "")
-	size_t.member("minMemoryMapAlignment", "")
-	VkDeviceSize.member("minTexelBufferOffsetAlignment", "")
-	VkDeviceSize.member("minUniformBufferOffsetAlignment", "")
-	VkDeviceSize.member("minStorageBufferOffsetAlignment", "")
-	int32_t.member("minTexelOffset", "")
-	uint32_t.member("maxTexelOffset", "")
-	int32_t.member("minTexelGatherOffset", "")
-	uint32_t.member("maxTexelGatherOffset", "")
-	float.member("minInterpolationOffset", "")
-	float.member("maxInterpolationOffset", "")
-	uint32_t.member("subPixelInterpolationOffsetBits", "")
-	uint32_t.member("maxFramebufferWidth", "")
-	uint32_t.member("maxFramebufferHeight", "")
-	uint32_t.member("maxFramebufferLayers", "")
-	VkSampleCountFlags.member("framebufferColorSampleCounts", "")
-	VkSampleCountFlags.member("framebufferDepthSampleCounts", "")
-	VkSampleCountFlags.member("framebufferStencilSampleCounts", "")
-	VkSampleCountFlags.member("framebufferNoAttachmentsSampleCounts", "")
-	uint32_t.member("maxColorAttachments", "")
-	VkSampleCountFlags.member("sampledImageColorSampleCounts", "")
-	VkSampleCountFlags.member("sampledImageIntegerSampleCounts", "")
-	VkSampleCountFlags.member("sampledImageDepthSampleCounts", "")
-	VkSampleCountFlags.member("sampledImageStencilSampleCounts", "")
-	VkSampleCountFlags.member("storageImageSampleCounts", "")
-	uint32_t.member("maxSampleMaskWords", "")
-	VkBool32.member("timestampComputeAndGraphics", "")
-	float.member("timestampPeriod", "")
-	uint32_t.member("maxClipDistances", "")
-	uint32_t.member("maxCullDistances", "")
-	uint32_t.member("maxCombinedClipAndCullDistances", "")
-	uint32_t.member("discreteQueuePriorities", "")
-	float.array("pointSizeRange", "", size = 2)
-	float.array("lineWidthRange", "", size = 2)
-	float.member("pointSizeGranularity", "")
-	float.member("lineWidthGranularity", "")
-	VkBool32.member("strictLines", "")
-	VkBool32.member("standardSampleLocations", "")
-	VkDeviceSize.member("optimalBufferCopyOffsetAlignment", "")
-	VkDeviceSize.member("optimalBufferCopyRowPitchAlignment", "")
-	VkDeviceSize.member("nonCoherentAtomSize", "")
+		Contains properties of a physical device.
+		"""
+
+	uint32_t.member("maxImageDimension1D", "the maximum dimension ({@code width}) of an image created with an {@code imageType} of #IMAGE_TYPE_1D")
+	uint32_t.member(
+		"maxImageDimension2D",
+		"""
+		the maximum dimension ({@code width} or {@code height}) of an image created with an {@code imageType} of #IMAGE_TYPE_2D and without
+		#IMAGE_CREATE_CUBE_COMPATIBLE_BIT set in flags
+		"""
+	)
+	uint32_t.member(
+		"maxImageDimension3D",
+		"the maximum dimension ({@code width}, {@code height}, or {@code depth}) of an image created with an {@code imageType} of #IMAGE_TYPE_3D"
+	)
+	uint32_t.member(
+		"maxImageDimensionCube",
+		"""
+		the maximum dimension ({@code width} or {@code height}) of an image created with an {@code imageType} of #IMAGE_TYPE_2D and with
+		#IMAGE_CREATE_CUBE_COMPATIBLE_BIT set in flags
+		"""
+	)
+	uint32_t.member("maxImageArrayLayers", "the maximum number of layers ({@code arrayLayers}) for an image")
+	uint32_t.member(
+		"maxTexelBufferElements",
+		"""
+		the maximum number of addressable texels for a buffer view created on a buffer which was created with the #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or
+		#BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT set in the usage member of the ##VkBufferCreateInfo structure
+		"""
+	)
+	uint32_t.member(
+		"maxUniformBufferRange",
+		"""
+		the maximum value that $can be specified in the range member of any ##VkDescriptorBufferInfo structures passed to a call to #UpdateDescriptorSets() for
+		descriptors of type #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC
+		"""
+	)
+	uint32_t.member(
+		"maxStorageBufferRange",
+		"""
+		the maximum value that $can be specified in the range member of any ##VkDescriptorBufferInfo structures passed to a call to #UpdateDescriptorSets() for
+		descriptors of type #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC
+		"""
+	)
+	uint32_t.member("maxPushConstantsSize", "the maximum size, in bytes, of the pool of push constant memory")
+	uint32_t.member(
+		"maxMemoryAllocationCount",
+		"the maximum number of device memory allocations, as created by #AllocateMemory(), which $can simultaneously exist"
+	)
+	uint32_t.member(
+		"maxSamplerAllocationCount",
+		"the maximum number of sampler objects, as created by #CreateSampler(), which $can simultaneously exist on a device"
+	)
+	VkDeviceSize.member(
+		"bufferImageGranularity",
+		"""
+		the granularity, in bytes, at which buffer or linear image resources, and optimal image resources $can be bound to adjacent offsets in the same
+		{@code VkDeviceMemory} object without aliasing
+		"""
+	)
+	VkDeviceSize.member("sparseAddressSpaceSize", "the total amount of address space available, in bytes, for sparse memory resources")
+	uint32_t.member("maxBoundDescriptorSets", "the maximum number of descriptor sets that $can be simultaneously used by a pipeline")
+	uint32_t.member("maxPerStageDescriptorSamplers", "the maximum number of samplers that $can be accessible to a single shader stage in a pipeline layout")
+	uint32_t.member(
+		"maxPerStageDescriptorUniformBuffers",
+		"the maximum number of uniform buffers that $can be accessible to a single shader stage in a pipeline layout"
+	)
+	uint32_t.member(
+		"maxPerStageDescriptorStorageBuffers",
+		"the maximum number of storage buffers that $can be accessible to a single shader stage in a pipeline layout"
+	)
+	uint32_t.member(
+		"maxPerStageDescriptorSampledImages",
+		"the maximum number of sampled images that $can be accessible to a single shader stage in a pipeline layout"
+	)
+	uint32_t.member(
+		"maxPerStageDescriptorStorageImages",
+		"the maximum number of storage images that $can be accessible to a single shader stage in a pipeline layout"
+	)
+	uint32_t.member(
+		"maxPerStageDescriptorInputAttachments",
+		"the maximum number of input attachments that $can be accessible to a single shader stage in a pipeline layout"
+	)
+	uint32_t.member("maxPerStageResources", "the maximum number of resources that $can be accessible to a single shader stage in a pipeline layout")
+	uint32_t.member(
+		"maxDescriptorSetSamplers",
+		"""
+		the maximum number of samplers that $can be included in descriptor bindings in a pipeline layout across all pipeline shader stages and descriptor set
+		numbers
+		"""
+	)
+	uint32_t.member(
+		"maxDescriptorSetUniformBuffers",
+		"""
+		the maximum number of uniform buffers that $can be included in descriptor bindings in a pipeline layout across all pipeline shader stages and descriptor
+		set numbers
+		"""
+	)
+	uint32_t.member(
+		"maxDescriptorSetUniformBuffersDynamic",
+		"""
+		the maximum number of dynamic uniform buffers that $can be included in descriptor bindings in a pipeline layout across all pipeline shader stages and
+		descriptor set numbers
+		"""
+	)
+	uint32_t.member(
+		"maxDescriptorSetStorageBuffers",
+		"""
+		the maximum number of storage buffers that $can be included in descriptor bindings in a pipeline layout across all pipeline shader stages and descriptor
+		set numbers
+		"""
+	)
+	uint32_t.member(
+		"maxDescriptorSetStorageBuffersDynamic",
+		"""
+		the maximum number of dynamic storage buffers that $can be included in descriptor bindings in a pipeline layout across all pipeline shader stages and
+		descriptor set numbers
+		"""
+	)
+	uint32_t.member(
+		"maxDescriptorSetSampledImages",
+		"""
+		the maximum number of sampled images that $can be included in descriptor bindings in a pipeline layout across all pipeline shader stages and descriptor
+		set numbers
+		"""
+	)
+	uint32_t.member(
+		"maxDescriptorSetStorageImages",
+		"""
+		the maximum number of storage images that $can be included in descriptor bindings in a pipeline layout across all pipeline shader stages and descriptor
+		set numbers
+		"""
+	)
+	uint32_t.member(
+		"maxDescriptorSetInputAttachments",
+		"""
+		the maximum number of input attachments that $can be included in descriptor bindings in a pipeline layout across all pipeline shader stages and
+		descriptor set numbers
+		"""
+	)
+	uint32_t.member("maxVertexInputAttributes", "the maximum number of vertex input attributes that $can be specified for a graphics pipeline")
+	uint32_t.member(
+		"maxVertexInputBindings",
+		"the maximum number of vertex buffers that $can be specified for providing vertex attributes to a graphics pipeline"
+	)
+	uint32_t.member("maxVertexInputAttributeOffset", "the maximum vertex input attribute offset that $can be added to the vertex input binding stride")
+	uint32_t.member("maxVertexInputBindingStride", "the maximum vertex input binding stride that $can be specified in a vertex input binding")
+	uint32_t.member("maxVertexOutputComponents", "the maximum number of components of output variables which $can be output by a vertex shader")
+	uint32_t.member(
+		"maxTessellationGenerationLevel",
+		"the maximum tessellation generation level supported by the fixed-function tessellation primitive generator"
+	)
+	uint32_t.member(
+		"maxTessellationPatchSize",
+		"the maximum patch size, in vertices, of patches that $can be processed by the tessellation control shader and tessellation primitive generator"
+	)
+	uint32_t.member(
+		"maxTessellationControlPerVertexInputComponents",
+		"the maximum number of components of input variables which $can be provided as per-vertex inputs to the tessellation control shader stage"
+	)
+	uint32_t.member(
+		"maxTessellationControlPerVertexOutputComponents",
+		"the maximum number of components of per-vertex output variables which $can be output from the tessellation control shader stage"
+	)
+	uint32_t.member(
+		"maxTessellationControlPerPatchOutputComponents",
+		"the maximum number of components of per-patch output variables which $can be output from the tessellation control shader stage"
+	)
+	uint32_t.member(
+		"maxTessellationControlTotalOutputComponents",
+		"the maximum total number of components of per-vertex and per-patch output variables which $can be output from the tessellation control shader stage"
+	)
+	uint32_t.member(
+		"maxTessellationEvaluationInputComponents",
+		"the maximum number of components of input variables which $can be provided as per-vertex inputs to the tessellation evaluation shader stage"
+	)
+	uint32_t.member(
+		"maxTessellationEvaluationOutputComponents",
+		"the maximum number of components of per-vertex output variables which $can be output from the tessellation evaluation shader stage"
+	)
+	uint32_t.member("maxGeometryShaderInvocations", "the maximum invocation count supported for instanced geometry shaders")
+	uint32_t.member(
+		"maxGeometryInputComponents",
+		"the maximum number of components of input variables which $can be provided as inputs to the geometry shader stage"
+	)
+	uint32_t.member("maxGeometryOutputComponents", "the maximum number of components of output variables which $can be output from the geometry shader stage")
+	uint32_t.member("maxGeometryOutputVertices", "the maximum number of vertices which $can be emitted by any geometry shader")
+	uint32_t.member(
+		"maxGeometryTotalOutputComponents",
+		"the maximum total number of components of output, across all emitted vertices, which $can be output from the geometry shader stage")
+	uint32_t.member(
+		"maxFragmentInputComponents",
+		"the maximum number of components of input variables which $can be provided as inputs to the fragment shader stage"
+	)
+	uint32_t.member(
+		"maxFragmentOutputAttachments",
+		"the maximum number of output attachments which $can be written to by the fragment shader stage"
+	)
+	uint32_t.member(
+		"maxFragmentDualSrcAttachments",
+		"""
+		the maximum number of output attachments which $can be written to by the fragment shader stage when blending is enabled and one of the dual source
+		blend modes is in use
+		"""
+	)
+	uint32_t.member(
+		"maxFragmentCombinedOutputResources",
+		"the total number of storage buffers, storage images, and output buffers which $can be used in the fragment shader stage"
+	)
+	uint32_t.member(
+		"maxComputeSharedMemorySize",
+		"""
+		the maximum total storage size, in bytes, of all variables declared with the <b>WorkgroupLocal</b> storage class in shader modules (or with the shared
+		storage qualifier in GLSL) in the compute shader stage
+		"""
+	)
+	uint32_t.array("maxComputeWorkGroupCount", "the maximum number of local workgroups that $can be dispatched by a single dispatch command", size = 3)
+	uint32_t.member("maxComputeWorkGroupInvocations", "the maximum total number of compute shader invocations in a single local workgrou")
+	uint32_t.array("maxComputeWorkGroupSize", "the maximum size of a local compute workgroup, per dimension", size = 3)
+	uint32_t.member("subPixelPrecisionBits", "the number of bits of subpixel precision in framebuffer coordinates x<sub>f</sub> and y<sub>f</sub>")
+	uint32_t.member(
+		"subTexelPrecisionBits",
+		"the number of bits of precision in the division along an axis of an image used for minification and magnification filters"
+	)
+	uint32_t.member(
+		"mipmapPrecisionBits",
+		"""
+		the number of bits of division that the LOD calculation for mipmap fetching get snapped to when determining the contribution from each miplevel to the
+		mip filtered results
+		"""
+	)
+	uint32_t.member("maxDrawIndexedIndexValue", "the maximum index value that $can be used for indexed draw calls when using 32-bit indices")
+	uint32_t.member("maxDrawIndirectCount", "the maximum draw count that is supported for indirect draw calls")
+	float.member("maxSamplerLodBias", "the maximum absolute sampler level of detail bias")
+	float.member("maxSamplerAnisotropy", "the maximum degree of sampler anisotropy")
+	uint32_t.member("maxViewports", "the maximum number of active viewports")
+	uint32_t.array("maxViewportDimensions", "the maximum viewport dimensions in the X (width) and Y (height) dimensions, respectively", size = 2)
+	float.array("viewportBoundsRange", " the {@code [minimum,maximum]} range that the corners of a viewport must be contained in", size = 2)
+	uint32_t.member("viewportSubPixelBits", "the number of bits of subpixel precision for viewport bounds")
+	size_t.member("minMemoryMapAlignment", "the minimum required alignment, in bytes, of host visible memory allocations within the host address space")
+	VkDeviceSize.member(
+		"minTexelBufferOffsetAlignment",
+		"the minimum required alignment, in bytes, for the {@code offset} member of the ##VkBufferViewCreateInfo structure for texel buffers"
+	)
+	VkDeviceSize.member(
+		"minUniformBufferOffsetAlignment",
+		"the minimum required alignment, in bytes, for the {@code offset} member of the ##VkDescriptorBufferInfo structure for uniform buffers"
+	)
+	VkDeviceSize.member(
+		"minStorageBufferOffsetAlignment",
+		"the minimum required alignment, in bytes, for the {@code offset} member of the ##VkDescriptorBufferInfo structure for storage buffers"
+	)
+	int32_t.member(
+		"minTexelOffset",
+		"the minimum offset value for the {@code ConstOffset} image operand of any of the {@code OpImageSample*} or {@code OpImageFetch*} image instructions"
+	)
+	uint32_t.member(
+		"maxTexelOffset",
+		"the maximum offset value for the {@code ConstOffset} image operand of any of the {@code OpImageSample*} or {@code OpImageFetch*} image instructions"
+	)
+	int32_t.member(
+		"minTexelGatherOffset",
+		"the minimum offset value for the {@code Offset} or {@code ConstOffsets} image operands of any of the {@code OpImage*Gather} image instructions"
+	)
+	uint32_t.member(
+		"maxTexelGatherOffset",
+		"the maximum offset value for the {@code Offset} or {@code ConstOffsets} image operands of any of the {@code OpImage*Gather} image instructions"
+	)
+	float.member(
+		"minInterpolationOffset",
+		"the minimum negative offset value for the {@code offset} operand of the {@code InterpolateAtOffset} extended instruction"
+	)
+	float.member(
+		"maxInterpolationOffset",
+		"the maximum positive offset value for the {@code offset} operand of the {@code InterpolateAtOffset} extended instruction"
+	)
+	uint32_t.member(
+		"subPixelInterpolationOffsetBits",
+		"""
+		the number of subpixel fractional bits that the {@code x} and {@code y} offsets to the {@code InterpolateAtOffset} extended instruction $may be rounded
+		to as fixed-point values
+		"""
+	)
+	uint32_t.member("maxFramebufferWidth", "the maximum width for a framebuffer")
+	uint32_t.member("maxFramebufferHeight", "the maximum height for a framebuffer")
+	uint32_t.member("maxFramebufferLayers", "the maximum layer count for a layered framebuffer")
+	VkSampleCountFlags.member(
+		"framebufferColorSampleCounts",
+		"a bitmask of {@code VkSampleCountFlagBits} bits indicating the supported color sample counts for a framebuffer color attachment"
+	)
+	VkSampleCountFlags.member(
+		"framebufferDepthSampleCounts",
+		"""
+		a bitmask of {@code VkSampleCountFlagBits} bits indicating the supported depth sample counts for a framebuffer depth/stencil attachment, when the
+		format includes a depth component
+		"""
+	)
+	VkSampleCountFlags.member(
+		"framebufferStencilSampleCounts",
+		"""
+		a bitmask of {@code VkSampleCountFlagBits} bits indicating the supported stencil sample counts for a framebuffer depth/stencil attachment, when the
+		format includes a stencil component
+		"""
+	)
+	VkSampleCountFlags.member(
+		"framebufferNoAttachmentsSampleCounts",
+		"a bitmask of {@code VkSampleCountFlagBits} bits indicating the supported sample counts for a framebuffer with no attachments"
+	)
+	uint32_t.member("maxColorAttachments", "the maximum number of color attachments that $can be used by a subpass in a render pass")
+	VkSampleCountFlags.member(
+		"sampledImageColorSampleCounts",
+		"a bitmask of {@code VkSampleCountFlagBits} bits indicating the sample counts supported for all images with a non-integer color format"
+	)
+	VkSampleCountFlags.member(
+		"sampledImageIntegerSampleCounts",
+		"a bitmask of {@code VkSampleCountFlagBits} bits indicating the sample counts supported for all images with a integer color format"
+	)
+	VkSampleCountFlags.member(
+		"sampledImageDepthSampleCounts",
+		"a bitmask of {@code VkSampleCountFlagBits} bits indicating the sample counts supported for all images with a depth format"
+	)
+	VkSampleCountFlags.member(
+		"sampledImageStencilSampleCounts",
+		"a bitmask of {@code VkSampleCountFlagBits} bits indicating the sample supported for all images with a stencil format"
+	)
+	VkSampleCountFlags.member(
+		"storageImageSampleCounts",
+		"a bitmask of {@code VkSampleCountFlagBits} bits indicating the sample counts supported for all images used for storage operations"
+	)
+	uint32_t.member("maxSampleMaskWords", "the maximum number of array elements of a variable decorated with the {@code SampleMask} built-in decoration")
+	VkBool32.member("timestampComputeAndGraphics", "indicates support for timestamps on all graphics and compute queues")
+	float.member("timestampPeriod", "the number of nanoseconds required for a timestamp query to be incremented by 1")
+	uint32_t.member("maxClipDistances", "the maximum number of clip distances that $can be used in a single shader stage")
+	uint32_t.member("maxCullDistances", "the maximum number of cull distances that $can be used in a single shader stage")
+	uint32_t.member("maxCombinedClipAndCullDistances", "the maximum combined number of clip and cull distances that $can be used in a single shader stage")
+	uint32_t.member(
+		"discreteQueuePriorities",
+		"""
+		the number of discrete priorities that $can be assigned to a queue based on the value of each member of
+		##VkDeviceQueueCreateInfo{@code ::pQueuePriorities}
+		"""
+	)
+	float.array("pointSizeRange", "the range {@code [minimum,maximum]} of supported sizes for points", size = 2)
+	float.array("lineWidthRange", " the range {@code [minimum,maximum]} of supported widths for lines", size = 2)
+	float.member("pointSizeGranularity", "the granularity of supported point sizes")
+	float.member("lineWidthGranularity", "the granularity of supported line widths")
+	VkBool32.member("strictLines", "indicates whether lines are rasterized according to the preferred method of rasterization")
+	VkBool32.member("standardSampleLocations", "indicates whether rasterization uses the standard sample locations")
+	VkDeviceSize.member(
+		"optimalBufferCopyOffsetAlignment",
+		"the optimal buffer offset alignment in bytes for #CmdCopyBufferToImage() and #CmdCopyImageToBuffer()"
+	)
+	VkDeviceSize.member(
+		"optimalBufferCopyRowPitchAlignment",
+		"the optimal buffer row pitch alignment in bytes for #CmdCopyBufferToImage() and #CmdCopyImageToBuffer()"
+	)
+	VkDeviceSize.member("nonCoherentAtomSize", "the size and alignment in bytes that bounds concurrent access to host-mapped device memory")
 }.nativeType
 
 val VkPhysicalDeviceSparseProperties = struct(VULKAN_PACKAGE, "VkPhysicalDeviceSparseProperties", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPhysicalDeviceSparseProperties")}<br>
+		${spec("VkPhysicalDeviceSparseProperties")}
 
-	VkBool32.member("residencyStandard2DBlockShape", "")
-	VkBool32.member("residencyStandard2DMultisampleBlockShape", "")
-	VkBool32.member("residencyStandard3DBlockShape", "")
-	VkBool32.member("residencyAlignedMipSize", "")
-	VkBool32.member("residencyNonResidentStrict", "")
+		Some features of the implementation are not possible to disable, and are reported to allow applications to alter their sparse resource usage
+		accordingly.
+		"""
+
+	VkBool32.member(
+		"residencyStandard2DBlockShape",
+		"#TRUE if the physical device will access all single-sample 2D sparse resources using the standard sparse image block shapes"
+	)
+	VkBool32.member(
+		"residencyStandard2DMultisampleBlockShape",
+		"#TRUE if the physical device will access all multisample 2D sparse resources using the standard sparse image block shapes"
+	)
+	VkBool32.member(
+		"residencyStandard3DBlockShape",
+		"#TRUE if the physical device will access all 3D sparse resources using the standard sparse image block shapes"
+	)
+	VkBool32.member(
+		"residencyAlignedMipSize",
+		"""
+		TRUE if images with mip level dimensions that are not integer multiples of the corresponding dimensions of the sparse image block may be placed in the
+		mip tail
+		"""
+	)
+	VkBool32.member("residencyNonResidentStrict", "whether the physical device $can consistently access non-resident regions of a resource")
 }.nativeType
 
 val VK_MAX_PHYSICAL_DEVICE_NAME_SIZE = 256
 val VK_UUID_SIZE = 16
 val VkPhysicalDeviceProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceProperties", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPhysicalDeviceProperties")}<br>
+		${spec("VkPhysicalDeviceProperties")}
 
-	uint32_t.member("apiVersion", "")
-	uint32_t.member("driverVersion", "")
-	uint32_t.member("vendorID", "")
-	uint32_t.member("deviceID", "")
-	VkPhysicalDeviceType.member("deviceType", "")
-	charUTF8.array("deviceName", "", size = VK_MAX_PHYSICAL_DEVICE_NAME_SIZE)
-	uint8_t.array("pipelineCacheUUID", "", size = VK_UUID_SIZE)
-	VkPhysicalDeviceLimits.member("limits", "")
-	VkPhysicalDeviceSparseProperties.member("sparseProperties", "")
+		Contains general properties of a physical device.
+		"""
+
+	uint32_t.member("apiVersion", "the version of Vulkan supported by the device")
+	uint32_t.member("driverVersion", "the vendor-specified version of the driver")
+	uint32_t.member("vendorID", "a unique identifier for the vendor of the physical device")
+	uint32_t.member("deviceID", "a unique identifier for the physical device among devices available from the vendor")
+	VkPhysicalDeviceType.member("deviceType", "a {@code VkPhysicalDeviceType} specifying the type of device")
+	charUTF8.array("deviceName", "a null-terminated UTF-8 string containing the name of the device", size = VK_MAX_PHYSICAL_DEVICE_NAME_SIZE)
+	uint8_t.array(
+		"pipelineCacheUUID",
+		"an array of size {@code VK_UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the device",
+		size = VK_UUID_SIZE
+	)
+	VkPhysicalDeviceLimits.member("limits", "the ##VkPhysicalDeviceLimits structure which specifies device-specific limits of the physical device")
+	VkPhysicalDeviceSparseProperties.member(
+		"sparseProperties",
+		"the ##VkPhysicalDeviceSparseProperties structure which specifies various sparse related properties of the physical device"
+	)
 }
 
 val VkQueueFamilyProperties_p = struct_p(VULKAN_PACKAGE, "VkQueueFamilyProperties", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkQueueFamilyProperties")}<br>
+		${spec("VkQueueFamilyProperties")}
 
-	VkQueueFlags.member("queueFlags", "")
-	uint32_t.member("queueCount", "")
-	uint32_t.member("timestampValidBits", "")
-	VkExtent3D.member("minImageTransferGranularity", "")
+		Contains properties of a queue family.
+		"""
+
+	VkQueueFlags.member("queueFlags", "contains flags indicating the capabilities of the queues in this queue family")
+	uint32_t.member("queueCount", "the unsigned integer count of queues in this queue family")
+	uint32_t.member("timestampValidBits", "the unsigned integer count of meaningful bits in the timestamps written via #CmdWriteTimestamp()")
+	VkExtent3D.member("minImageTransferGranularity", "the minimum granularity supported for image transfer operations on the queues in this queue family")
 }
 
 val VkMemoryType = struct(VULKAN_PACKAGE, "VkMemoryType", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkMemoryType")}<br>
+		${spec("VkMemoryType")}
 
-	VkMemoryPropertyFlags.member("propertyFlags", "")
-	uint32_t.member("heapIndex", "")
+		Contains information about a memory type.
+		"""
+
+	VkMemoryPropertyFlags.member("propertyFlags", "a bitmask of {@code VkMemoryPropertyFlagBits} properties for this memory type")
+	uint32_t.member(
+		"heapIndex",
+		"""
+		describes which memory heap this memory type corresponds to, and $must be less than {@code memoryHeapCount} from the ##VkPhysicalDeviceMemoryProperties
+		structure
+		"""
+	)
 }.nativeType
 
 val VkMemoryHeap = struct(VULKAN_PACKAGE, "VkMemoryHeap", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkMemoryHeap")}<br>
+		${spec("VkMemoryHeap")}
 
-	VkDeviceSize.member("size", "")
-	VkMemoryHeapFlags.member("flags", "")
+		Contains information about a memory heap.
+		"""
+
+	VkDeviceSize.member("size", "the total memory size in bytes in the heap")
+	VkMemoryHeapFlags.member("flags", "a bitmask of {@code VkMemoryHeapFlagBits} attribute flags for the heap")
 }.nativeType
 
 val VK_MAX_MEMORY_TYPES = 32
 val VK_MAX_MEMORY_HEAPS = 16
 val VkPhysicalDeviceMemoryProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceMemoryProperties", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPhysicalDeviceMemoryProperties")}<br>
+		${spec("VkPhysicalDeviceMemoryProperties")}
 
-	AutoSize("memoryTypes")..uint32_t.member("memoryTypeCount", "")
-	VkMemoryType.array("memoryTypes", "", size = VK_MAX_MEMORY_TYPES)
-	AutoSize("memoryHeaps")..uint32_t.member("memoryHeapCount", "")
-	VkMemoryHeap.array("memoryHeaps", "", size = VK_MAX_MEMORY_HEAPS)
+		Describes the memory heaps and memory types available to a physical device.
+		"""
+
+	AutoSize("memoryTypes")..uint32_t.member("memoryTypeCount", "the number of memory types available across all memory heaps")
+	VkMemoryType.array("memoryTypes", "the memory type descriptions", size = VK_MAX_MEMORY_TYPES)
+	AutoSize("memoryHeaps")..uint32_t.member("memoryHeapCount", "the number of memory heaps")
+	VkMemoryHeap.array("memoryHeaps", "the memory heap descriptions", size = VK_MAX_MEMORY_HEAPS)
 }
 
 val VkDeviceQueueCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceQueueCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDeviceQueueCreateInfo")}<br>
+		${spec("VkDeviceQueueCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how to create a device queue.
+
+		${ValidityStructs.VkDeviceQueueCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkDeviceQueueCreateFlags.member("flags", "")
-	uint32_t.member("queueFamilyIndex", "")
-	AutoSize("pQueuePriorities")..uint32_t.member("queueCount", "")
-	float.const_p.member("pQueuePriorities", "")
+	VkDeviceQueueCreateFlags.member("flags", "reserved for future use")
+	uint32_t.member("queueFamilyIndex", "an unsigned integer indicating the index of the queue family to create on this device")
+	AutoSize("pQueuePriorities")..uint32_t.member(
+		"queueCount",
+		"an unsigned integer specifying the number of queues to create in the queue family indicated by {@code queueFamilyIndex}"
+	)
+	float.const_p.member(
+		"pQueuePriorities",
+		"an array of {@code queueCount} normalized floating point values, specifying priorities of work that will be submitted to each created queue"
+	)
 }.nativeType
 val const_VkDeviceQueueCreateInfo_p = VkDeviceQueueCreateInfo.const_p
 
 val VkDeviceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDeviceCreateInfo")}<br>
+		${spec("VkDeviceCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how to create a device.
+
+		${ValidityStructs.VkDeviceCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkDeviceCreateFlags.member("flags", "")
-	AutoSize("pQueueCreateInfos")..uint32_t.member("queueCreateInfoCount", "")
-	const_VkDeviceQueueCreateInfo_p.buffer("pQueueCreateInfos", "")
-	AutoSize("ppEnabledLayerNames", optional = true)..uint32_t.member("enabledLayerCount", "")
-	const_charUTF8_const_p.member("ppEnabledLayerNames", "")
-	AutoSize("ppEnabledExtensionNames", optional = true)..uint32_t.member("enabledExtensionCount", "")
-	const_charUTF8_const_p.member("ppEnabledExtensionNames", "")
-	nullable..const_VkPhysicalDeviceFeatures_p.member("pEnabledFeatures", "")
+	VkDeviceCreateFlags.member("flags", "reserved for future use")
+	AutoSize("pQueueCreateInfos")..uint32_t.member("queueCreateInfoCount", "the unsigned integer size of the {@code pQueueCreateInfos} array")
+	const_VkDeviceQueueCreateInfo_p.buffer(
+		"pQueueCreateInfos",
+		"a pointer to an array of ##VkDeviceQueueCreateInfo structures describing the queues that are requested to be created along with the logical device"
+	)
+	AutoSize("ppEnabledLayerNames", optional = true)..uint32_t.member("enabledLayerCount", "the number of device layers to enable")
+	const_charUTF8_const_p.member(
+		"ppEnabledLayerNames",
+		"a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings containing the names of layers to enable for the created device")
+	AutoSize("ppEnabledExtensionNames", optional = true)..uint32_t.member("enabledExtensionCount", "the number of device extensions to enable")
+	const_charUTF8_const_p.member(
+		"ppEnabledExtensionNames",
+		"""
+		a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings containing the names of extensions to enable for the created
+		device
+		"""
+	)
+	nullable..const_VkPhysicalDeviceFeatures_p.member(
+		"pEnabledFeatures",
+		"$NULL or a pointer to a ##VkPhysicalDeviceFeatures structure that contains boolean indicators of all the features to be enabled"
+	)
 }
 
 val VK_MAX_EXTENSION_NAME_SIZE = 256
 val VkExtensionProperties_p = struct_p(VULKAN_PACKAGE, "VkExtensionProperties", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkExtensionProperties")}<br>
+		${spec("VkExtensionProperties")}
 
-	charUTF8.array("extensionName", "", size = VK_MAX_EXTENSION_NAME_SIZE)
-	uint32_t.member("specVersion", "")
+		Contains information about a physical device extension.
+		"""
+
+	charUTF8.array("extensionName", "a null-terminated string specifying the name of the extension", size = VK_MAX_EXTENSION_NAME_SIZE)
+	uint32_t.member("specVersion", "the version of this extension")
 }
 
 val VK_MAX_DESCRIPTION_SIZE = 256
 val VkLayerProperties_p = struct_p(VULKAN_PACKAGE, "VkLayerProperties", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkLayerProperties")}<br>
+		${spec("VkLayerProperties")}
 
-	charUTF8.array("layerName", "", size = VK_MAX_EXTENSION_NAME_SIZE)
-	uint32_t.member("specVersion", "")
-	uint32_t.member("implementationVersion", "")
-	charUTF8.array("description", "", size = VK_MAX_DESCRIPTION_SIZE)
+		Contains information about an instance layer.
+		"""
+
+	charUTF8.array("layerName", "a null-terminated UTF-8 string specifying the name of the layer", size = VK_MAX_EXTENSION_NAME_SIZE)
+	uint32_t.member("specVersion", "the Vulkan version the layer was written to")
+	uint32_t.member("implementationVersion", "the version of this layer")
+	charUTF8.array(
+		"description",
+		"a null-terminated UTF-8 string providing additional details that can be used by the application to identify the layer",
+		size = VK_MAX_DESCRIPTION_SIZE
+	)
 }
 
 val VkSubmitInfo_p = struct_p(VULKAN_PACKAGE, "VkSubmitInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSubmitInfo")}<br>
+		${spec("VkSubmitInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about a batch of work.
+
+		${ValidityStructs.VkSubmitInfo}
+		"""
+
+	sType()
 	pNext()
-	AutoSize("pWaitSemaphores", "pWaitDstStageMask", optional = true)..uint32_t.member("waitSemaphoreCount", "")
-	VkSemaphore.const_p.member("pWaitSemaphores", "")
-	VkPipelineStageFlags.const_p.member("pWaitDstStageMask", "")
-	AutoSize("pCommandBuffers")..uint32_t.member("commandBufferCount", "")
-	VkCommandBuffer.const_p.member("pCommandBuffers", "")
-	AutoSize("pSignalSemaphores", optional = true)..uint32_t.member("signalSemaphoreCount", "")
-	VkSemaphore.const_p.member("pSignalSemaphores", "")
+	AutoSize("pWaitSemaphores", "pWaitDstStageMask", optional = true)..uint32_t.member(
+		"waitSemaphoreCount",
+		"the number of semaphores upon which to wait before executing the command buffers for the batch"
+	)
+	VkSemaphore.const_p.member("pWaitSemaphores", "a pointer to an array of semaphores upon which to wait before executing the command buffers in the batch")
+	VkPipelineStageFlags.const_p.member("pWaitDstStageMask", "a pointer to an array of pipeline stages at which each corresponding semaphore wait will occur")
+	AutoSize("pCommandBuffers")..uint32_t.member("commandBufferCount", "contains the number of command buffers to execute in the batch")
+	VkCommandBuffer.const_p.member("pCommandBuffers", "a pointer to an array of command buffers to execute in the batch")
+	AutoSize("pSignalSemaphores", optional = true)..uint32_t.member(
+		"signalSemaphoreCount",
+		"the number of semaphores to be signaled once the commands specified in {@code pCommandBuffers} have completed execution"
+	)
+	VkSemaphore.const_p.member(
+		"pSignalSemaphores",
+		"a pointer to an array of semaphores which will be signaled when the command buffers for this batch have completed execution"
+	)
 }
 
 val VkMemoryAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkMemoryAllocateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkMemoryAllocateInfo")}<br>
+		${spec("VkMemoryAllocateInfo")}
 
-	VkStructureType.member("sType", "")
+		Describes parameters of a memory allocation.
+
+		${ValidityStructs.VkMemoryAllocateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkDeviceSize.member("allocationSize", "")
-	uint32_t.member("memoryTypeIndex", "")
+	VkDeviceSize.member("allocationSize", "the size of the allocation in bytes")
+	uint32_t.member(
+		"memoryTypeIndex",
+		"the memory type index, which selects the properties of the memory to be allocated, as well as the heap the memory will come from"
+	)
 }
 
 val VkMappedMemoryRange_p = struct_p(VULKAN_PACKAGE, "VkMappedMemoryRange") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkMappedMemoryRange")}<br>
+		${spec("VkMappedMemoryRange")}
 
-	VkStructureType.member("sType", "")
+		Describes a memory range.
+
+		${ValidityStructs.VkMappedMemoryRange}
+		"""
+
+	sType()
 	pNext()
-	VkDeviceMemory.member("memory", "")
-	VkDeviceSize.member("offset", "")
-	VkDeviceSize.member("size", "")
+	VkDeviceMemory.member("memory", "the memory object to which this range belongs")
+	VkDeviceSize.member("offset", "the zero-based byte offset from the beginning of the memory object")
+	VkDeviceSize.member("size", "either the size of range, or #WHOLE_SIZE to affect the range from offset to the end of the current mapping of the allocation")
 }
 
 val VkMemoryRequirements_p = struct_p(VULKAN_PACKAGE, "VkMemoryRequirements", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkMemoryRequirements")}<br>
+		${spec("VkMemoryRequirements")}
 
-	VkDeviceSize.member("size", "")
-	VkDeviceSize.member("alignment", "")
-	uint32_t.member("memoryTypeBits", "")
+		Contains information about the memory requirements of an object.
+		"""
+
+	VkDeviceSize.member("size", "the size, in bytes, of the memory allocation required for the resource")
+	VkDeviceSize.member("alignment", "the alignment, in bytes, of the offset within the allocation required for the resource")
+	uint32_t.member("memoryTypeBits", "a bitfield and contains one bit set for every supported memory type for the resource")
 }
 
 val VkSparseImageFormatProperties = struct(VULKAN_PACKAGE, "VkSparseImageFormatProperties", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSparseImageFormatProperties")}<br>
+		${spec("VkSparseImageFormatProperties")}
 
-	VkImageAspectFlags.member("aspectMask", "")
-	VkExtent3D.member("imageGranularity", "")
-	VkSparseImageFormatFlags.member("flags", "")
+		Describes properties for a set of image aspects that are bound simultaneously in an image.
+		"""
+
+	VkImageAspectFlags.member("aspectMask", "a {@code VkImageAspectFlags} specifying which aspects of the image the properties apply to")
+	VkExtent3D.member("imageGranularity", "the width, height, and depth of the sparse image block in texels or compressed texel blocks")
+	VkSparseImageFormatFlags.member("flags", "a {@code VkSparseImageFormatFlagBits} bitmask specifying additional information about the sparse resource")
 }.nativeType
 val VkSparseImageFormatProperties_p = VkSparseImageFormatProperties.p
 
 val VkSparseImageMemoryRequirements_p = struct_p(VULKAN_PACKAGE, "VkSparseImageMemoryRequirements", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSparseImageMemoryRequirements")}<br>
+		${spec("VkSparseImageMemoryRequirements")}
 
-	VkSparseImageFormatProperties.member("formatProperties", "")
-	uint32_t.member("imageMipTailFirstLod", "")
-	VkDeviceSize.member("imageMipTailSize", "")
-	VkDeviceSize.member("imageMipTailOffset", "")
-	VkDeviceSize.member("imageMipTailStride", "")
+		Describes the sparse memory requirements for a group of aspects of an image.
+		"""
+
+	VkSparseImageFormatProperties.member("formatProperties", "the format properties")
+	uint32_t.member("imageMipTailFirstLod", "the first mip level at which subresources are included in the mip tail region")
+	VkDeviceSize.member("imageMipTailSize", "the memory size (in bytes) of the mip tail region")
+	VkDeviceSize.member("imageMipTailOffset", "he opaque memory offset used with ##VkSparseImageOpaqueMemoryBindInfo to bind the mip tail region(s)")
+	VkDeviceSize.member(
+		"imageMipTailStride",
+		"""
+		the offset stride between each array-layer’s mip tail, if {@code formatProperties.flags} does not contain #SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT
+		(otherwise the value is undefined)
+		"""
+	)
 }
 
 val VkSparseMemoryBind = struct(VULKAN_PACKAGE, "VkSparseMemoryBind") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSparseMemoryBind")}<br>
+		${spec("VkSparseMemoryBind")}
 
-	VkDeviceSize.member("resourceOffset", "")
-	VkDeviceSize.member("size", "")
-	VkDeviceMemory.member("memory", "")
-	VkDeviceSize.member("memoryOffset", "")
-	VkSparseMemoryBindFlags.member("flags", "")
+		Describes a sparse memory binding.
+
+		${ValidityStructs.VkSparseMemoryBind}
+		"""
+
+	VkDeviceSize.member("resourceOffset", "the offset into the resource")
+	VkDeviceSize.member("size", "the size of the memory region to be bound")
+	VkDeviceMemory.member("memory", "the {@code VkDeviceMemory} object that the range of the resource is bound to")
+	VkDeviceSize.member("memoryOffset", "the offset into the {@code VkDeviceMemory} object to bind the resource range to")
+	VkSparseMemoryBindFlags.member("flags", "are sparse memory binding flags")
 }.nativeType
 
 val VkSparseBufferMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseBufferMemoryBindInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSparseBufferMemoryBindInfo")}<br>
+		${spec("VkSparseBufferMemoryBindInfo")}
 
-	VkBuffer.member("buffer", "")
-	AutoSize("pBinds")..uint32_t.member("bindCount", "")
-	VkSparseMemoryBind.const_p.buffer("pBinds", "")
+		Describes a memory binding to a {@code VkBuffer} object.
+
+		${ValidityStructs.VkSparseBufferMemoryBindInfo}
+		"""
+
+	VkBuffer.member("buffer", "the {@code VkBuffer} object to be bound")
+	AutoSize("pBinds")..uint32_t.member("bindCount", "the number of {@code VkSparseMemoryBind} structures in the {@code pBinds} array")
+	VkSparseMemoryBind.const_p.buffer("pBinds", "a pointer to array of ##VkSparseMemoryBind structures")
 }.nativeType
 
 val VkSparseImageOpaqueMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageOpaqueMemoryBindInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSparseImageOpaqueMemoryBindInfo")}<br>
+		${spec("VkSparseImageOpaqueMemoryBindInfo")}
 
-	VkImage.member("image", "")
-	AutoSize("pBinds")..uint32_t.member("bindCount", "")
-	VkSparseMemoryBind.const_p.buffer("pBinds", "")
+		Describes a memory binding to an opaque region of a {@code VkImage} object.
+
+		${ValidityStructs.VkSparseImageOpaqueMemoryBindInfo}
+		"""
+
+	VkImage.member("image", "the {@code VkImage} object to be bound")
+	AutoSize("pBinds")..uint32_t.member("bindCount", "the number of {@code VkSparseMemoryBind} structures in the {@code pBinds} array")
+	VkSparseMemoryBind.const_p.buffer("pBinds", " a pointer to array of ##VkSparseMemoryBind structures")
 }.nativeType
 
 val VkSparseImageMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBindInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSparseImageMemoryBindInfo")}<br>
+		${spec("VkSparseImageMemoryBindInfo")}
 
-	VkImage.member("image", "")
-	AutoSize("pBinds")..uint32_t.member("bindCount", "")
-	VkSparseMemoryBind.const_p.buffer("pBinds", "")
+		Describes a memory binding to a sparse image block of a {@code VkImage} object.
+
+		${ValidityStructs.VkSparseImageMemoryBindInfo}
+		"""
+
+	VkImage.member("image", "the {@code VkImage} object to be bound")
+	AutoSize("pBinds")..uint32_t.member("bindCount", "the number of {@code VkSparseImageMemoryBind} structures in {@code pBinds} array")
+	VkSparseMemoryBind.const_p.buffer("pBinds", "a pointer to array of ##VkSparseImageMemoryBind structures")
 }.nativeType
 
 val VkBindSparseInfo_p = struct_p(VULKAN_PACKAGE, "VkBindSparseInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkBindSparseInfo")}<br>
+		${spec("VkBindSparseInfo")}
 
-	VkStructureType.member("sType", "")
+		Describes a set of sparse binding operations.
+
+		${ValidityStructs.VkBindSparseInfo}
+		"""
+
+	sType()
 	pNext()
-	AutoSize("pWaitSemaphores", optional = true)..uint32_t.member("waitSemaphoreCount", "")
-	VkSemaphore.const_p.member("pWaitSemaphores", "")
-	AutoSize("pBufferBinds", optional = true)..uint32_t.member("bufferBindCount", "")
-	VkSparseBufferMemoryBindInfo.const_p.buffer("pBufferBinds", "")
-	AutoSize("pImageOpaqueBinds", optional = true)..uint32_t.member("imageOpaqueBindCount", "")
-	VkSparseImageOpaqueMemoryBindInfo.const_p.buffer("pImageOpaqueBinds", "")
-	AutoSize("pImageBinds", optional = true)..uint32_t.member("imageBindCount", "")
-	VkSparseImageMemoryBindInfo.const_p.buffer("pImageBinds", "")
-	AutoSize("pSignalSemaphores", optional = true)..uint32_t.member("signalSemaphoreCount", "")
-	VkSemaphore.const_p.member("pSignalSemaphores", "")
+	AutoSize("pWaitSemaphores", optional = true)..uint32_t.member(
+		"waitSemaphoreCount",
+		"the number of semaphores upon which to wait before executing the sparse binding operations for the batch"
+	)
+	VkSemaphore.const_p.member(
+		"pWaitSemaphores",
+		"a pointer to an array of semaphores upon which to wait before executing the sparse binding operations in the batch"
+	)
+	AutoSize("pBufferBinds", optional = true)..uint32_t.member("bufferBindCount", "the number of sparse buffer bindings to perform")
+	VkSparseBufferMemoryBindInfo.const_p.buffer(
+		"pBufferBinds",
+		"an array of ##VkSparseBufferMemoryBindInfo structures, indicating sparse buffer bindings to perform"
+	)
+	AutoSize("pImageOpaqueBinds", optional = true)..uint32_t.member("imageOpaqueBindCount", "the number of opaque sparse image bindings to perform")
+	VkSparseImageOpaqueMemoryBindInfo.const_p.buffer(
+		"pImageOpaqueBinds",
+		"an array of ##VkSparseImageOpaqueMemoryBindInfo structures, indicating opaque sparse image bindings to perform"
+	)
+	AutoSize("pImageBinds", optional = true)..uint32_t.member("imageBindCount", "the number of sparse image bindings to perform")
+	VkSparseImageMemoryBindInfo.const_p.buffer(
+		"pImageBinds",
+		"an array of ##VkSparseImageMemoryBindInfo structures, indicating sparse image bindings to perform"
+	)
+	AutoSize("pSignalSemaphores", optional = true)..uint32_t.member(
+		"signalSemaphoreCount",
+		"the number of semaphores to be signaled once the sparse binding operations specified by the structure have completed execution"
+	)
+	VkSemaphore.const_p.member(
+		"pSignalSemaphores",
+		"a pointer to an array of semaphores which will be signaled when the sparse binding operations for this batch have completed execution"
+	)
 }
 
 val VkFenceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkFenceCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkFenceCreateInfo")}<br>
+		${spec("VkFenceCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how a fence object should be created.
+
+		${ValidityStructs.VkFenceCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkFenceCreateFlags.member("flags", "")
+	VkFenceCreateFlags.member("flags", "contains {@code VkFenceCreateFlags} flags defining the initial state and behavior of the fence")
 }
 
 val VkSemaphoreCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkSemaphoreCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSemaphoreCreateInfo")}<br>
+		${spec("VkSemaphoreCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how a semaphore object should be created.
+
+		${ValidityStructs.VkSemaphoreCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkSemaphoreCreateFlags.member("flags", "")
+	VkSemaphoreCreateFlags.member("flags", "reserved for future use")
 }
 
 val VkEventCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkEventCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkEventCreateInfo")}<br>
+		${spec("VkEventCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how an event object should be created.
+
+		${ValidityStructs.VkEventCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkEventCreateFlags.member("flags", "")
+	VkEventCreateFlags.member("flags", "reserved for future use")
 }
 
 val VkQueryPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkQueryPoolCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkQueryPoolCreateInfo")}<br>
+		${spec("VkQueryPoolCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how a query pool object should be created.
+
+		${ValidityStructs.VkQueryPoolCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkQueryPoolCreateFlags.member("flags", "")
-	VkQueryType.member("queryType", "")
-	uint32_t.member("queryCount", "")
-	VkQueryPipelineStatisticFlags.member("pipelineStatistics", "")
+	VkQueryPoolCreateFlags.member("flags", "reserved for future use")
+	VkQueryType.member("queryType", "the {@code VkQueryType} type of queries managed by the pool")
+	uint32_t.member("queryCount", "the number of queries managed by the pool")
+	VkQueryPipelineStatisticFlags.member("pipelineStatistics", "a bitmask indicating which counters will be returned in queries on the new pool")
 }
 
 val VkBufferCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkBufferCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkBufferCreateInfo")}<br>
+		${spec("VkBufferCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how a buffer should be created.
+
+		${ValidityStructs.VkBufferCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkBufferCreateFlags.member("flags", "")
-	VkDeviceSize.member("size", "")
-	VkBufferUsageFlags.member("usage", "")
-	VkSharingMode.member("sharingMode", "")
-	AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member("queueFamilyIndexCount", "")
-	uint32_t.const_p.member("pQueueFamilyIndices", "")
+	VkBufferCreateFlags.member("flags", "a {@code VkBufferCreateFlagBits} bitfield describing additional parameters of the buffer")
+	VkDeviceSize.member("size", "the size in bytes of the buffer to be created")
+	VkBufferUsageFlags.member("usage", "a {@code VkBufferUsageFlagBits} bitfield describing the allowed usages of the buffer")
+	VkSharingMode.member("sharingMode", "the sharing mode of the buffer when it will be accessed by multiple queue families")
+	AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member(
+		"queueFamilyIndexCount",
+		"the number of entries in the {@code pQueueFamilyIndices} array"
+	)
+	uint32_t.const_p.member(
+		"pQueueFamilyIndices",
+		"a list of queue families that will access this buffer (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT)"
+	)
 }
 
 val VkBufferViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkBufferViewCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkBufferViewCreateInfo")}<br>
+		${spec("VkBufferViewCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how a buffer view should be created.
+
+		${ValidityStructs.VkBufferViewCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkBufferViewCreateFlags.member("flags", "")
-	VkBuffer.member("buffer", "")
-	VkFormat.member("format", "")
-	VkDeviceSize.member("offset", "")
-	VkDeviceSize.member("range", "")
+	VkBufferViewCreateFlags.member("flags", "reserved for future use")
+	VkBuffer.member("buffer", "a {@code VkBuffer} on which the view will be created")
+	VkFormat.member("format", "a {@code VkFormat} describing the format of the data elements in the buffer")
+	VkDeviceSize.member("offset", "an offset in bytes from the base address of the buffer")
+	VkDeviceSize.member("range", "a size in bytes of the buffer view")
 }
 
 val VkImageCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkImageCreateInfo")}<br>
+		${spec("VkImageCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how an image should be created.
+
+		${ValidityStructs.VkImageCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkImageCreateFlags.member("flags", "")
-	VkImageType.member("imageType", "")
-	VkFormat.member("format", "")
-	VkExtent3D.member("extent", "")
-	uint32_t.member("mipLevels", "")
-	uint32_t.member("arrayLayers", "")
-	VkSampleCountFlagBits.member("samples", "")
-	VkImageTiling.member("tiling", "")
-	VkImageUsageFlags.member("usage", "")
-	VkSharingMode.member("sharingMode", "")
-	AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member("queueFamilyIndexCount", "")
-	uint32_t.const_p.member("pQueueFamilyIndices", "")
-	VkImageLayout.member("initialLayout", "")
+	VkImageCreateFlags.member("flags", "a {@code VkImageCreateFlagBits} bitfield describing additional parameters of the image")
+	VkImageType.member("imageType", "the basic dimensionality of the image")
+	VkFormat.member("format", "a {@code VkFormat} describing the format and type of the data elements that will be contained in the image")
+	VkExtent3D.member("extent", "a ##VkExtent3D describing the number of data elements in each dimension of the base level")
+	uint32_t.member("mipLevels", "the number of levels of detail available for minified sampling of the image")
+	uint32_t.member("arrayLayers", "the number of layers in the image")
+	VkSampleCountFlagBits.member("samples", "the number of sub-data element samples in the image as defined in {@code VkSampleCountFlagBits}")
+	VkImageTiling.member("tiling", "the tiling arrangement of the data elements in memory")
+	VkImageUsageFlags.member("usage", "a bitfield describing the intended usage of the image")
+	VkSharingMode.member("sharingMode", "the sharing mode of the image when it will be accessed by multiple queue families")
+	AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member(
+		"queueFamilyIndexCount",
+		"the number of entries in the {@code pQueueFamilyIndices} array"
+	)
+	uint32_t.const_p.member(
+		"pQueueFamilyIndices",
+		"a list of queue families that will access this image (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT)"
+	)
+	VkImageLayout.member("initialLayout", "selects the initial {@code VkImageLayout} state of all subresources of the image")
 }
 
 val VkImageSubresource_p = struct_p(VULKAN_PACKAGE, "VkImageSubresource") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkImageSubresource")}<br>
+		${spec("VkImageSubresource")}
 
-	VkImageAspectFlags.member("aspectMask", "")
-	uint32_t.member("mipLevel", "")
-	uint32_t.member("arrayLayer", "")
+		Selects a specific image of a subresource (mipLevel/arrayLayer) of an image created with linear tiling.
+
+		${ValidityStructs.VkImageSubresource}
+		"""
+
+	VkImageAspectFlags.member("aspectMask", "a {@code VkImageAspectFlags} selecting the image aspect")
+	uint32_t.member("mipLevel", "selects the mipmap level")
+	uint32_t.member("arrayLayer", "selects the array layer")
 }
 
 val VkSubresourceLayout_p = struct_p(VULKAN_PACKAGE, "VkSubresourceLayout", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSubresourceLayout")}<br>
+		${spec("VkSubresourceLayout")}
 
-	VkDeviceSize.member("offset", "")
-	VkDeviceSize.member("size", "")
-	VkDeviceSize.member("rowPitch", "")
-	VkDeviceSize.member("arrayPitch", "")
-	VkDeviceSize.member("depthPitch", "")
+		Contains information about the layout of a subresource (mipLevel/arrayLayer) of an image created with linear tiling.
+		"""
+
+	VkDeviceSize.member("offset", "the byte offset from the start of the image where the subresource begins")
+	VkDeviceSize.member("size", "the size in bytes of the subresource")
+	VkDeviceSize.member("rowPitch", "the number of bytes between each row of texels in an image")
+	VkDeviceSize.member("arrayPitch", "the number of bytes between each array layer of an image")
+	VkDeviceSize.member("depthPitch", "the number of bytes between each slice of 3D image")
 }
 
 val VkComponentMapping = struct(VULKAN_PACKAGE, "VkComponentMapping") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkComponentMapping")}<br>
+		${spec("VkComponentMapping")}
 
-	VkComponentSwizzle.member("r", "")
-	VkComponentSwizzle.member("g", "")
-	VkComponentSwizzle.member("b", "")
-	VkComponentSwizzle.member("a", "")
+		Describes a remapping from components of the image to components of the vector returned by shader image instructions.
+
+		${ValidityStructs.VkComponentMapping}
+		"""
+
+	VkComponentSwizzle.member("r", "the value placed in the r component of the output vector")
+	VkComponentSwizzle.member("g", "the value placed in the g component of the output vector")
+	VkComponentSwizzle.member("b", "the value placed in the b component of the output vector")
+	VkComponentSwizzle.member("a", "the value placed in the a component of the output vector")
 }.nativeType
 
 val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkImageSubresourceRange")}<br>
+		${spec("VkImageSubresourceRange")}
 
-	VkImageAspectFlags.member("aspectMask", "")
-	uint32_t.member("baseMipLevel", "")
-	uint32_t.member("levelCount", "")
-	uint32_t.member("baseArrayLayer", "")
-	uint32_t.member("layerCount", "")
+		Describes a range of mipmap levels, array layers, and aspects.
+
+		${ValidityStructs.VkImageSubresourceRange}
+		"""
+
+	VkImageAspectFlags.member("aspectMask", "a bitmask indicating which aspect(s) of the image are included in the view")
+	uint32_t.member("baseMipLevel", "the first mipmap level accessible to the view")
+	uint32_t.member("levelCount", "the number of mipmap levels (starting from {@code baseMipLevel}) accessible to the view")
+	uint32_t.member("baseArrayLayer", "the first array layer accessible to the view")
+	uint32_t.member("layerCount", "the number of array layers (starting from {@code baseArrayLayer}) accessible to the view")
 }.nativeType
 val VkImageSubresourceRange_p = VkImageSubresourceRange.p
 
 val VkImageViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkImageViewCreateInfo")}<br>
+		${spec("VkImageViewCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkImageViewCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkImageViewCreateFlags.member("flags", "")
-	VkImage.member("image", "")
-	VkImageViewType.member("viewType", "")
-	VkFormat.member("format", "")
-	VkComponentMapping.member("components", "")
-	VkImageSubresourceRange.member("subresourceRange", "")
+	VkImageViewCreateFlags.member("flags", "reserved for future use")
+	VkImage.member("image", "a {@code VkImage} on which the view will be created")
+	VkImageViewType.member("viewType", "the type of the image view")
+	VkFormat.member("format", "a {@code VkFormat} describing the format and type used to interpret data elements in the image")
+	VkComponentMapping.member(
+		"components",
+		"a remapping of color components (or of depth or stencil components after they have been converted into color components)"
+	)
+	VkImageSubresourceRange.member("subresourceRange", "selects the set of mipmap levels and array layers to be accessible to the view")
 }
 
 val VkShaderModuleCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkShaderModuleCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkShaderModuleCreateInfo")}<br>
+		${spec("VkShaderModuleCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how a shader module should be created.
+
+		${ValidityStructs.VkShaderModuleCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkShaderModuleCreateFlags.member("flags", "")
-	AutoSize("pCode")..size_t.member("codeSize", "")
-	PointerType("const uint32_t", PointerMapping.DATA_BYTE).member("pCode", "")
+	VkShaderModuleCreateFlags.member("flags", "reserved for future use")
+	AutoSize("pCode")..size_t.member("codeSize", "the size, in bytes, of the code pointed to by {@code pCode}")
+	PointerType("const uint32_t", PointerMapping.DATA_BYTE).member("pCode", "points to code that is used to create the shader module")
 }
 
 val VkPipelineCacheCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkPipelineCacheCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineCacheCreateInfo")}<br>
+		${spec("VkPipelineCacheCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how a pipeline cache object should be created.
+
+		${ValidityStructs.VkPipelineCacheCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkPipelineCacheCreateFlags.member("flags", "")
-	AutoSize("pInitialData", optional = true)..size_t.member("initialDataSize", "")
-	const_void_p.member("pInitialData", "")
+	VkPipelineCacheCreateFlags.member("flags", "reserved for future use")
+	AutoSize("pInitialData", optional = true)..size_t.member("initialDataSize", "the number of bytes in {@code pInitialData}")
+	const_void_p.member("pInitialData", "a pointer to previously retrieved pipeline cache data")
 }
 
 val VkSpecializationMapEntry = struct(VULKAN_PACKAGE, "VkSpecializationMapEntry") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSpecializationMapEntry")}<br>
+		${spec("VkSpecializationMapEntry")}
 
-	uint32_t.member("constantID", "")
-	uint32_t.member("offset", "")
-	size_t.member("size", "")
+		Contains information about a specialization constant.
+		"""
+
+	uint32_t.member("constantID", "ID of the specialization constant in SPIR-V")
+	uint32_t.member("offset", "byte offset of the specialization constant value within the supplied data buffer")
+	size_t.member("size", "byte size of the specialization constant value within the supplied data buffer")
 }.nativeType
 
 val VkSpecializationInfo = struct(VULKAN_PACKAGE, "VkSpecializationInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSpecializationInfo")}<br>
+		${spec("VkSpecializationInfo")}
 
-	AutoSize("pMapEntries", optional = true)..uint32_t.member("mapEntryCount", "")
-	VkSpecializationMapEntry.const_p.buffer("pMapEntries", "")
-	AutoSize("pData", optional = true)..size_t.member("dataSize", "")
-	const_void_p.member("pData", "")
+		Contains information about specialization constants.
+
+		Specialization constants are a mechanism whereby constants in a SPIR-V module can have their constant value specified at the time the
+		{@code VkPipeline} is created. This allows a SPIR-V module to have constants that can be modified while executing an application that uses the Vulkan
+		API.
+
+		${ValidityStructs.VkSpecializationInfo}
+		"""
+
+	AutoSize("pMapEntries", optional = true)..uint32_t.member("mapEntryCount", "the number of entries in the {@code pMapEntries} array")
+	VkSpecializationMapEntry.const_p.buffer(
+		"pMapEntries",
+		"a pointer to an array of ##VkSpecializationMapEntry which maps constant IDs to offsets in {@code pData}"
+	)
+	AutoSize("pData", optional = true)..size_t.member("dataSize", "the byte size of the {@code pData} buffer")
+	const_void_p.member("pData", "contains the actual constant values to specialize with")
 }.nativeType
 
 val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderStageCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineShaderStageCreateInfo")}<br>
+		${spec("VkPipelineShaderStageCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		Contains information about how a shader stage should be created.
+
+		${ValidityStructs.VkPipelineShaderStageCreateInfo}
+		"""
+
+	sType()
 	pNext()
-	VkPipelineShaderStageCreateFlags.member("flags", "")
-	VkShaderStageFlagBits.member("stage", "")
-	VkShaderModule.member("module", "")
-	const_charUTF8_p.member("pName", "")
-	nullable..VkSpecializationInfo.const_p.member("pSpecializationInfo", "")
+	VkPipelineShaderStageCreateFlags.member("flags", "reserved for future use")
+	VkShaderStageFlagBits.member("stage", "a {@code VkShaderStageFlagBits} naming the pipeline stage")
+	VkShaderModule.member("module", "a {@code VkShaderModule} object that contains the shader for this stage")
+	const_charUTF8_p.member("pName", "a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage")
+	nullable..VkSpecializationInfo.const_p.member("pSpecializationInfo", "a pointer to ##VkSpecializationInfo, can be $NULL")
 }.nativeType
 
 val VkVertexInputBindingDescription = struct(VULKAN_PACKAGE, "VkVertexInputBindingDescription") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkVertexInputBindingDescription")}<br>
+		${spec("VkVertexInputBindingDescription")}
+
+		${ValidityStructs.VkVertexInputBindingDescription}
+		"""
 
 	uint32_t.member("binding", "")
 	uint32_t.member("stride", "")
@@ -965,7 +1699,13 @@ val VkVertexInputBindingDescription = struct(VULKAN_PACKAGE, "VkVertexInputBindi
 }.nativeType
 
 val VkVertexInputAttributeDescription = struct(VULKAN_PACKAGE, "VkVertexInputAttributeDescription") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkVertexInputAttributeDescription")}<br>
+		${spec("VkVertexInputAttributeDescription")}
+
+		${ValidityStructs.VkVertexInputAttributeDescription}
+		"""
 
 	uint32_t.member("location", "")
 	uint32_t.member("binding", "")
@@ -974,9 +1714,15 @@ val VkVertexInputAttributeDescription = struct(VULKAN_PACKAGE, "VkVertexInputAtt
 }.nativeType
 
 val VkPipelineVertexInputStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineVertexInputStateCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineVertexInputStateCreateInfo")}<br>
+		${spec("VkPipelineVertexInputStateCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkPipelineVertexInputStateCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineVertexInputStateCreateFlags.member("flags", "")
 	AutoSize("pVertexBindingDescriptions", optional = true)..uint32_t.member("vertexBindingDescriptionCount", "")
@@ -986,9 +1732,15 @@ val VkPipelineVertexInputStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineVer
 }.nativeType
 
 val VkPipelineInputAssemblyStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineInputAssemblyStateCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineInputAssemblyStateCreateInfo")}<br>
+		${spec("VkPipelineInputAssemblyStateCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkPipelineInputAssemblyStateCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineInputAssemblyStateCreateFlags.member("flags", "")
 	VkPrimitiveTopology.member("topology", "")
@@ -996,16 +1748,28 @@ val VkPipelineInputAssemblyStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineI
 }.nativeType
 
 val VkPipelineTessellationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineTessellationStateCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineTessellationStateCreateInfo")}<br>
+		${spec("VkPipelineTessellationStateCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkPipelineTessellationStateCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineTessellationStateCreateFlags.member("flags", "")
 	uint32_t.member("patchControlPoints", "")
 }.nativeType
 
 val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkViewport")}<br>
+		${spec("VkViewport")}
+
+		${ValidityStructs.VkViewport}
+		"""
 
 	float.member("x", "")
 	float.member("y", "")
@@ -1016,30 +1780,48 @@ val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
 }.nativeType
 
 val VkOffset2D = struct(VULKAN_PACKAGE, "VkOffset2D") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkOffset2D")}<br>
+		${spec("VkOffset2D")}
+		"""
 
 	int32_t.member("x", "")
 	int32_t.member("y", "")
 }.nativeType
 
 val VkExtent2D = struct(VULKAN_PACKAGE, "VkExtent2D") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkExtent2D")}<br>
+		${spec("VkExtent2D")}
+		"""
 
 	uint32_t.member("width", "")
 	uint32_t.member("height", "")
 }.nativeType
 
 val VkRect2D = struct(VULKAN_PACKAGE, "VkRect2D") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkRect2D")}<br>
+		${spec("VkRect2D")}
+		"""
 
 	VkOffset2D.member("offset", "")
 	VkExtent2D.member("extent", "")
 }.nativeType
 
 val VkPipelineViewportStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineViewportStateCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineViewportStateCreateInfo")}<br>
+		${spec("VkPipelineViewportStateCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkPipelineViewportStateCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineViewportStateCreateFlags.member("flags", "")
 	AutoSize("pViewports")..uint32_t.member("viewportCount", "")
@@ -1049,9 +1831,15 @@ val VkPipelineViewportStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineViewpo
 }.nativeType
 
 val VkPipelineRasterizationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineRasterizationStateCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineRasterizationStateCreateInfo")}<br>
+		${spec("VkPipelineRasterizationStateCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkPipelineRasterizationStateCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineRasterizationStateCreateFlags.member("flags", "")
 	VkBool32.member("depthClampEnable", "")
@@ -1067,9 +1855,15 @@ val VkPipelineRasterizationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineR
 }.nativeType
 
 val VkPipelineMultisampleStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineMultisampleStateCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineMultisampleStateCreateInfo")}<br>
+		${spec("VkPipelineMultisampleStateCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkPipelineMultisampleStateCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineMultisampleStateCreateFlags.member("flags", "")
 	VkSampleCountFlagBits.member("rasterizationSamples", "")
@@ -1081,7 +1875,13 @@ val VkPipelineMultisampleStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineMul
 }.nativeType
 
 val VkStencilOpState = struct(VULKAN_PACKAGE, "VkStencilOpState") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkStencilOpState")}<br>
+		${spec("VkStencilOpState")}
+
+		${ValidityStructs.VkStencilOpState}
+		"""
 
 	VkStencilOp.member("failOp", "")
 	VkStencilOp.member("passOp", "")
@@ -1093,9 +1893,15 @@ val VkStencilOpState = struct(VULKAN_PACKAGE, "VkStencilOpState") {
 }.nativeType
 
 val VkPipelineDepthStencilStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDepthStencilStateCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineDepthStencilStateCreateInfo")}<br>
+		${spec("VkPipelineDepthStencilStateCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkPipelineDepthStencilStateCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineDepthStencilStateCreateFlags.member("flags", "")
 	VkBool32.member("depthTestEnable", "")
@@ -1110,7 +1916,13 @@ val VkPipelineDepthStencilStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDe
 }.nativeType
 
 val VkPipelineColorBlendAttachmentState = struct(VULKAN_PACKAGE, "VkPipelineColorBlendAttachmentState") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineColorBlendAttachmentState")}<br>
+		${spec("VkPipelineColorBlendAttachmentState")}
+
+		${ValidityStructs.VkPipelineColorBlendAttachmentState}
+		"""
 
 	VkBool32.member("blendEnable", "")
 	VkBlendFactor.member("srcColorBlendFactor", "")
@@ -1123,9 +1935,15 @@ val VkPipelineColorBlendAttachmentState = struct(VULKAN_PACKAGE, "VkPipelineColo
 }.nativeType
 
 val VkPipelineColorBlendStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineColorBlendStateCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineColorBlendStateCreateInfo")}<br>
+		${spec("VkPipelineColorBlendStateCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkPipelineColorBlendStateCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineColorBlendStateCreateFlags.member("flags", "")
 	VkBool32.member("logicOpEnable", "")
@@ -1136,9 +1954,15 @@ val VkPipelineColorBlendStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineColo
 }.nativeType
 
 val VkPipelineDynamicStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDynamicStateCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineDynamicStateCreateInfo")}<br>
+		${spec("VkPipelineDynamicStateCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkPipelineDynamicStateCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineDynamicStateCreateFlags.member("flags", "")
 	AutoSize("pDynamicStates")..uint32_t.member("dynamicStateCount", "")
@@ -1146,9 +1970,15 @@ val VkPipelineDynamicStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDynamic
 }.nativeType
 
 val VkGraphicsPipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkGraphicsPipelineCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkGraphicsPipelineCreateInfo")}<br>
+		${spec("VkGraphicsPipelineCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkGraphicsPipelineCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineCreateFlags.member("flags", "")
 	AutoSize("pStages")..uint32_t.member("stageCount", "")
@@ -1170,9 +2000,15 @@ val VkGraphicsPipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkGraphicsPipelin
 }
 
 val VkComputePipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkComputePipelineCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkComputePipelineCreateInfo")}<br>
+		${spec("VkComputePipelineCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkComputePipelineCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineCreateFlags.member("flags", "")
 	VkPipelineShaderStageCreateInfo.member("stage", "")
@@ -1182,7 +2018,13 @@ val VkComputePipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkComputePipelineC
 }
 
 val VkPushConstantRange = struct(VULKAN_PACKAGE, "VkPushConstantRange") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPushConstantRange")}<br>
+		${spec("VkPushConstantRange")}
+
+		${ValidityStructs.VkPushConstantRange}
+		"""
 
 	VkShaderStageFlags.member("stageFlags", "")
 	uint32_t.member("offset", "")
@@ -1190,9 +2032,15 @@ val VkPushConstantRange = struct(VULKAN_PACKAGE, "VkPushConstantRange") {
 }.nativeType
 
 val VkPipelineLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkPipelineLayoutCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkPipelineLayoutCreateInfo")}<br>
+		${spec("VkPipelineLayoutCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkPipelineLayoutCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkPipelineLayoutCreateFlags.member("flags", "")
 	AutoSize("pSetLayouts", optional = true)..uint32_t.member("setLayoutCount", "")
@@ -1202,9 +2050,15 @@ val VkPipelineLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkPipelineLayoutCre
 }
 
 val VkSamplerCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSamplerCreateInfo")}<br>
+		${spec("VkSamplerCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkSamplerCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkSamplerCreateFlags.member("flags", "")
 	VkFilter.member("magFilter", "")
@@ -1225,7 +2079,13 @@ val VkSamplerCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
 }
 
 val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayoutBinding") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDescriptorSetLayoutBinding")}<br>
+		${spec("VkDescriptorSetLayoutBinding")}
+
+		${ValidityStructs.VkDescriptorSetLayoutBinding}
+		"""
 
 	uint32_t.member("binding", "")
 	VkDescriptorType.member("descriptorType", "")
@@ -1235,9 +2095,15 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
 }.nativeType
 
 val VkDescriptorSetLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSetLayoutCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDescriptorSetLayoutCreateInfo")}<br>
+		${spec("VkDescriptorSetLayoutCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkDescriptorSetLayoutCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkDescriptorSetLayoutCreateFlags.member("flags", "")
 	AutoSize("pBindings", optional = true)..uint32_t.member("bindingCount", "")
@@ -1245,16 +2111,28 @@ val VkDescriptorSetLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSe
 }
 
 val VkDescriptorPoolSize = struct(VULKAN_PACKAGE, "VkDescriptorPoolSize") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDescriptorPoolSize")}<br>
+		${spec("VkDescriptorPoolSize")}
+
+		${ValidityStructs.VkDescriptorPoolSize}
+		"""
 
 	VkDescriptorType.member("type", "")
 	uint32_t.member("descriptorCount", "")
 }.nativeType
 
 val VkDescriptorPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorPoolCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDescriptorPoolCreateInfo")}<br>
+		${spec("VkDescriptorPoolCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkDescriptorPoolCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkDescriptorPoolCreateFlags.member("flags", "")
 	uint32_t.member("maxSets", "")
@@ -1263,9 +2141,15 @@ val VkDescriptorPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorPoolCre
 }
 
 val VkDescriptorSetAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSetAllocateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDescriptorSetAllocateInfo")}<br>
+		${spec("VkDescriptorSetAllocateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkDescriptorSetAllocateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkDescriptorPool.member("descriptorPool", "")
 	AutoSize("pSetLayouts")..uint32_t.member("descriptorSetCount", "")
@@ -1273,7 +2157,13 @@ val VkDescriptorSetAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSetAll
 }
 
 val VkDescriptorImageInfo = struct(VULKAN_PACKAGE, "VkDescriptorImageInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDescriptorImageInfo")}<br>
+		${spec("VkDescriptorImageInfo")}
+
+		${ValidityStructs.VkDescriptorImageInfo}
+		"""
 
 	VkSampler.member("sampler", "")
 	VkImageView.member("imageView", "")
@@ -1281,7 +2171,13 @@ val VkDescriptorImageInfo = struct(VULKAN_PACKAGE, "VkDescriptorImageInfo") {
 }.nativeType
 
 val VkDescriptorBufferInfo = struct(VULKAN_PACKAGE, "VkDescriptorBufferInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDescriptorBufferInfo")}<br>
+		${spec("VkDescriptorBufferInfo")}
+
+		${ValidityStructs.VkDescriptorBufferInfo}
+		"""
 
 	VkBuffer.member("buffer", "")
 	VkDeviceSize.member("offset", "")
@@ -1289,9 +2185,15 @@ val VkDescriptorBufferInfo = struct(VULKAN_PACKAGE, "VkDescriptorBufferInfo") {
 }.nativeType
 
 val VkWriteDescriptorSet_p = struct_p(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkWriteDescriptorSet")}<br>
+		${spec("VkWriteDescriptorSet")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkWriteDescriptorSet}
+		"""
+
+	sType()
 	pNext()
 	VkDescriptorSet.member("dstSet", "")
 	uint32_t.member("dstBinding", "")
@@ -1304,9 +2206,15 @@ val VkWriteDescriptorSet_p = struct_p(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
 }
 
 val VkCopyDescriptorSet_p = struct_p(VULKAN_PACKAGE, "VkCopyDescriptorSet") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkCopyDescriptorSet")}<br>
+		${spec("VkCopyDescriptorSet")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkCopyDescriptorSet}
+		"""
+
+	sType()
 	pNext()
 	VkDescriptorSet.member("srcSet", "")
 	uint32_t.member("srcBinding", "")
@@ -1318,9 +2226,15 @@ val VkCopyDescriptorSet_p = struct_p(VULKAN_PACKAGE, "VkCopyDescriptorSet") {
 }
 
 val VkFramebufferCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkFramebufferCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkFramebufferCreateInfo")}<br>
+		${spec("VkFramebufferCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkFramebufferCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkFramebufferCreateFlags.member("flags", "")
 	VkRenderPass.member("renderPass", "")
@@ -1332,7 +2246,13 @@ val VkFramebufferCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkFramebufferCreateInf
 }
 
 val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkAttachmentDescription")}<br>
+		${spec("VkAttachmentDescription")}
+
+		${ValidityStructs.VkAttachmentDescription}
+		"""
 
 	VkAttachmentDescriptionFlags.member("flags", "")
 	VkFormat.member("format", "")
@@ -1346,14 +2266,26 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
 }.nativeType
 
 val VkAttachmentReference = struct(VULKAN_PACKAGE, "VkAttachmentReference") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkAttachmentReference")}<br>
+		${spec("VkAttachmentReference")}
+
+		${ValidityStructs.VkAttachmentReference}
+		"""
 
 	uint32_t.member("attachment", "")
 	VkImageLayout.member("layout", "")
 }.nativeType
 
 val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSubpassDescription")}<br>
+		${spec("VkSubpassDescription")}
+
+		${ValidityStructs.VkSubpassDescription}
+		"""
 
 	VkSubpassDescriptionFlags.member("flags", "")
 	VkPipelineBindPoint.member("pipelineBindPoint", "")
@@ -1368,7 +2300,13 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
 }.nativeType
 
 val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkSubpassDependency")}<br>
+		${spec("VkSubpassDependency")}
+
+		${ValidityStructs.VkSubpassDependency}
+		"""
 
 	uint32_t.member("srcSubpass", "")
 	uint32_t.member("dstSubpass", "")
@@ -1380,9 +2318,15 @@ val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
 }.nativeType
 
 val VkRenderPassCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkRenderPassCreateInfo")}<br>
+		${spec("VkRenderPassCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkRenderPassCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkRenderPassCreateFlags.member("flags", "")
 	AutoSize("pAttachments", optional = true)..uint32_t.member("attachmentCount", "")
@@ -1394,18 +2338,30 @@ val VkRenderPassCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassCreateInfo"
 }
 
 val VkCommandPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandPoolCreateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkCommandPoolCreateInfo")}<br>
+		${spec("VkCommandPoolCreateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkCommandPoolCreateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkCommandPoolCreateFlags.member("flags", "")
 	uint32_t.member("queueFamilyIndex", "")
 }
 
 val VkCommandBufferAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferAllocateInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkCommandBufferAllocateInfo")}<br>
+		${spec("VkCommandBufferAllocateInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkCommandBufferAllocateInfo}
+		"""
+
+	sType()
 	pNext()
 	VkCommandPool.member("commandPool", "")
 	VkCommandBufferLevel.member("level", "")
@@ -1413,9 +2369,15 @@ val VkCommandBufferAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferAll
 }
 
 val VkCommandBufferInheritanceInfo = struct(VULKAN_PACKAGE, "VkCommandBufferInheritanceInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkCommandBufferInheritanceInfo")}<br>
+		${spec("VkCommandBufferInheritanceInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkCommandBufferInheritanceInfo}
+		"""
+
+	sType()
 	pNext()
 	VkRenderPass.member("renderPass", "")
 	uint32_t.member("subpass", "")
@@ -1426,16 +2388,26 @@ val VkCommandBufferInheritanceInfo = struct(VULKAN_PACKAGE, "VkCommandBufferInhe
 }.nativeType
 
 val VkCommandBufferBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferBeginInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkCommandBufferBeginInfo")}<br>
+		${spec("VkCommandBufferBeginInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkCommandBufferBeginInfo}
+		"""
+
+	sType()
 	pNext()
 	VkCommandBufferUsageFlags.member("flags", "")
 	nullable..VkCommandBufferInheritanceInfo.const_p.member("pInheritanceInfo", "")
 }
 
 val VkBufferCopy_p = struct_p(VULKAN_PACKAGE, "VkBufferCopy") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkBufferCopy")}<br>
+		${spec("VkBufferCopy")}
+		"""
 
 	VkDeviceSize.member("srcOffset", "")
 	VkDeviceSize.member("dstOffset", "")
@@ -1443,7 +2415,13 @@ val VkBufferCopy_p = struct_p(VULKAN_PACKAGE, "VkBufferCopy") {
 }
 
 val VkImageSubresourceLayers = struct(VULKAN_PACKAGE, "VkImageSubresourceLayers") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkImageSubresourceLayers")}<br>
+		${spec("VkImageSubresourceLayers")}
+
+		${ValidityStructs.VkImageSubresourceLayers}
+		"""
 
 	VkImageAspectFlags.member("aspectMask", "")
 	uint32_t.member("mipLevel", "")
@@ -1452,7 +2430,11 @@ val VkImageSubresourceLayers = struct(VULKAN_PACKAGE, "VkImageSubresourceLayers"
 }.nativeType
 
 val VkOffset3D = struct(VULKAN_PACKAGE, "VkOffset3D") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkOffset3D")}<br>
+		${spec("VkOffset3D")}
+		"""
 
 	int32_t.member("x", "")
 	int32_t.member("y", "")
@@ -1460,7 +2442,13 @@ val VkOffset3D = struct(VULKAN_PACKAGE, "VkOffset3D") {
 }.nativeType
 
 val VkImageCopy_p = struct_p(VULKAN_PACKAGE, "VkImageCopy") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkImageCopy")}<br>
+		${spec("VkImageCopy")}
+
+		${ValidityStructs.VkImageCopy}
+		"""
 
 	VkImageSubresourceLayers.member("srcSubresource", "")
 	VkOffset3D.member("srcOffset", "")
@@ -1470,7 +2458,13 @@ val VkImageCopy_p = struct_p(VULKAN_PACKAGE, "VkImageCopy") {
 }
 
 val VkImageBlit_p = struct_p(VULKAN_PACKAGE, "VkImageBlit") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkImageBlit")}<br>
+		${spec("VkImageBlit")}
+
+		${ValidityStructs.VkImageBlit}
+		"""
 
 	VkImageSubresourceLayers.member("srcSubresource", "")
 	VkOffset3D.array("srcOffsets", "", size = 2)
@@ -1479,7 +2473,13 @@ val VkImageBlit_p = struct_p(VULKAN_PACKAGE, "VkImageBlit") {
 }
 
 val VkBufferImageCopy_p = struct_p(VULKAN_PACKAGE, "VkBufferImageCopy") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkBufferImageCopy")}<br>
+		${spec("VkBufferImageCopy")}
+
+		${ValidityStructs.VkBufferImageCopy}
+		"""
 
 	VkDeviceSize.member("bufferOffset", "")
 	uint32_t.member("bufferRowLength", "")
@@ -1499,7 +2499,11 @@ val VkClearColorValue = union(VULKAN_PACKAGE, "VkClearColorValue") {
 val VkClearColorValue_p = VkClearColorValue.p
 
 val VkClearDepthStencilValue = struct(VULKAN_PACKAGE, "VkClearDepthStencilValue") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkClearDepthStencilValue")}<br>
+		${spec("VkClearDepthStencilValue")}
+		"""
 
 	float.member("depth", "")
 	uint32_t.member("stencil", "")
@@ -1514,7 +2518,13 @@ val VkClearValue = union(VULKAN_PACKAGE, "VkClearValue") {
 }.nativeType
 
 val VkClearAttachment_p = struct_p(VULKAN_PACKAGE, "VkClearAttachment") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkClearAttachment")}<br>
+		${spec("VkClearAttachment")}
+
+		${ValidityStructs.VkClearAttachment}
+		"""
 
 	VkImageAspectFlags.member("aspectMask", "")
 	uint32_t.member("colorAttachment", "")
@@ -1522,7 +2532,11 @@ val VkClearAttachment_p = struct_p(VULKAN_PACKAGE, "VkClearAttachment") {
 }
 
 val VkClearRect_p = struct_p(VULKAN_PACKAGE, "VkClearRect") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkClearRect")}<br>
+		${spec("VkClearRect")}
+		"""
 
 	VkRect2D.member("rect", "")
 	uint32_t.member("baseArrayLayer", "")
@@ -1530,7 +2544,13 @@ val VkClearRect_p = struct_p(VULKAN_PACKAGE, "VkClearRect") {
 }
 
 val VkImageResolve_p = struct_p(VULKAN_PACKAGE, "VkImageResolve") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkImageResolve")}<br>
+		${spec("VkImageResolve")}
+
+		${ValidityStructs.VkImageResolve}
+		"""
 
 	VkImageSubresourceLayers.member("srcSubresource", "")
 	VkOffset3D.member("srcOffset", "")
@@ -1540,18 +2560,30 @@ val VkImageResolve_p = struct_p(VULKAN_PACKAGE, "VkImageResolve") {
 }
 
 val VkMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkMemoryBarrier") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkMemoryBarrier")}<br>
+		${spec("VkMemoryBarrier")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkMemoryBarrier}
+		"""
+
+	sType()
 	pNext()
 	VkAccessFlags.member("srcAccessMask", "")
 	VkAccessFlags.member("dstAccessMask", "")
 }
 
 val VkBufferMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkBufferMemoryBarrier") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkBufferMemoryBarrier")}<br>
+		${spec("VkBufferMemoryBarrier")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkBufferMemoryBarrier}
+		"""
+
+	sType()
 	pNext()
 	VkAccessFlags.member("srcAccessMask", "")
 	VkAccessFlags.member("dstAccessMask", "")
@@ -1563,9 +2595,15 @@ val VkBufferMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkBufferMemoryBarrier") 
 }
 
 val VkImageMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkImageMemoryBarrier")}<br>
+		${spec("VkImageMemoryBarrier")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkImageMemoryBarrier}
+		"""
+
+	sType()
 	pNext()
 	VkAccessFlags.member("srcAccessMask", "")
 	VkAccessFlags.member("dstAccessMask", "")
@@ -1578,9 +2616,15 @@ val VkImageMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 }
 
 val VkRenderPassBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassBeginInfo") {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkRenderPassBeginInfo")}<br>
+		${spec("VkRenderPassBeginInfo")}
 
-	VkStructureType.member("sType", "")
+		${ValidityStructs.VkRenderPassBeginInfo}
+		"""
+
+	sType()
 	pNext()
 	VkRenderPass.member("renderPass", "")
 	VkFramebuffer.member("framebuffer", "")
@@ -1592,7 +2636,13 @@ val VkRenderPassBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassBeginInfo") 
 // Indirect commands (not used in the API, for reference only)
 
 val VkDispatchIndirectCommand = struct(VULKAN_PACKAGE, "VkDispatchIndirectCommand", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDispatchIndirectCommand")}<br>
+		${spec("VkDispatchIndirectCommand")}
+
+		${ValidityStructs.VkDispatchIndirectCommand}
+		"""
 
 	uint32_t.member("x", "")
     uint32_t.member("y", "")
@@ -1600,7 +2650,13 @@ val VkDispatchIndirectCommand = struct(VULKAN_PACKAGE, "VkDispatchIndirectComman
 }.nativeType
 
 val VkDrawIndexedIndirectCommand = struct(VULKAN_PACKAGE, "VkDrawIndexedIndirectCommand", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDrawIndexedIndirectCommand")}<br>
+		${spec("VkDrawIndexedIndirectCommand")}
+
+		${ValidityStructs.VkDrawIndexedIndirectCommand}
+		"""
 
     uint32_t.member("indexCount", "")
     uint32_t.member("instanceCount", "")
@@ -1610,7 +2666,13 @@ val VkDrawIndexedIndirectCommand = struct(VULKAN_PACKAGE, "VkDrawIndexedIndirect
 }.nativeType
 
 val VkDrawIndirectCommand = struct(VULKAN_PACKAGE, "VkDrawIndirectCommand", mutable = false) {
-	documentation = ""
+	documentation =
+		"""
+		${man("VkDrawIndirectCommand")}<br>
+		${spec("VkDrawIndirectCommand")}
+
+		${ValidityStructs.VkDrawIndirectCommand}
+		"""
 
 	uint32_t.member("vertexCount", "")
     uint32_t.member("instanceCount", "")
