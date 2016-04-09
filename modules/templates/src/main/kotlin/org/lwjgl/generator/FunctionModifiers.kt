@@ -132,3 +132,8 @@ class NativeName(name: String) : FunctionModifier() {
 
 	override val isSpecial = false
 }
+
+/** Marks reused functions */
+object Reuse : FunctionModifier() {
+	override val isSpecial = false
+}

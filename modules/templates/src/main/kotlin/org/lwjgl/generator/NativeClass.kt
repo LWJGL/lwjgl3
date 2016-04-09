@@ -201,16 +201,22 @@ class NativeClass(
 
 	fun registerLinks(
 		tokens: MutableMap<String, String>,
-	    functions: MutableMap<String, String>
+		duplicateTokens: MutableSet<String>,
+	    functions: MutableMap<String, String>,
+	    duplicateFunctions: MutableSet<String>
 	) {
-		constantBlocks.forEach {
-			it.constants.forEach {
-				tokens[it.name] = "$className#$prefixConstant${it.name}"
+		if (!this.functions.any { it.has(Reuse) }) {
+			constantBlocks.forEach {
+				it.constants.forEach {
+					if (tokens.put(it.name, "$className#$prefixConstant${it.name}") != null)
+						duplicateTokens.add(it.name)
+				}
 			}
 		}
 
-		this.functions.forEach {
-			functions["${it.simpleName}"] = "$className#${it.name}()"
+		this.functions.asSequence().filter { !it.has(Reuse) }.forEach {
+			if ( functions.put(it.simpleName, "$className#${it.name}()") != null )
+				duplicateFunctions.add(it.simpleName)
 		}
 	}
 
@@ -442,7 +448,7 @@ class NativeClass(
 	infix fun NativeClass.reuse(functionName: String): NativeClassFunction {
 		val reference = this[functionName]
 
-		val func = NativeClassFunction(
+		val func = Reuse..NativeClassFunction(
 			returns = reference.returns,
 			simpleName = reference.simpleName,
 			name = reference.name,

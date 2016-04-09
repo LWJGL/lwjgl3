@@ -248,9 +248,6 @@ class Generator(
 		if ( binding?.enabled == false )
 			return
 
-		tokens.put(packageName, HashMap())
-		functions.put(packageName, HashMap())
-
 		// Find and run configuration methods
 		//runConfiguration(packagePath, packageName)
 		apply(packagePath, packageName) {
@@ -271,7 +268,13 @@ class Generator(
 			return
 		}
 
-		// Get classes with bodies
+		// Get classes with bodies and register tokens/functions
+		val packageTokens = HashMap<String, String>()
+		val packageFunctions = HashMap<String, String>()
+
+		val duplicateTokens = HashSet<String>()
+		val duplicateFunctions = HashSet<String>()
+
 		val classes = ArrayList<NativeClass>()
 		for (template in templates) {
 			val nativeClass = template.invoke(null) as NativeClass? ?: continue
@@ -284,11 +287,19 @@ class Generator(
 
 				// Register tokens/functions for javadoc link references
 				nativeClass.registerLinks(
-					tokens[nativeClass.packageName]!!,
-					functions[nativeClass.packageName]!!
+					packageTokens,
+					duplicateTokens,
+					packageFunctions,
+					duplicateFunctions
 				)
 			}
 		}
+
+		packageTokens.keys.removeAll(duplicateTokens)
+		packageFunctions.keys.removeAll(duplicateFunctions)
+
+		tokens.put(packageName, packageTokens)
+		functions.put(packageName, packageFunctions)
 
 		// Generate the template code
 		classes.forEach {
