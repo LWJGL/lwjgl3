@@ -14,7 +14,7 @@ object ThreadLocalState : GeneratorTarget("org.lwjgl.system", CLASS) {
 		print(HEADER)
 		println("package $packageName;\n")
 
-		Generator.tlsImport.forEach {
+		Generator.tlsImport.toSortedSet().forEach {
 			javaImport(it)
 		}
 
@@ -28,7 +28,7 @@ public final class $CLASS implements Runnable {
 	public final MemoryStack stack;
 """)
 
-		Generator.tlsState.forEach {
+		Generator.tlsState.toSortedSet().forEach {
 			println("\t$it")
 		}
 
