@@ -299,7 +299,7 @@ $indent}"""
 			if ( memberDoc.isNotEmpty() )
 				builder
 					.append("<h3>Member documentation</h3>\n\n")
-					.append(table(*memberDoc.toTypedArray()))
+					.append(ul(*memberDoc.toTypedArray()))
 					.append("\n\n")
 
 			builder.append("<h3>Layout</h3>\n\n");
@@ -346,13 +346,8 @@ $indentation}"""
 		members.forEach {
 			if ( it.isNestedStructDefinition )
 				(it.nativeType as StructType).definition.printMemberDocumentation(if ( it.name === ANONYMOUS ) prefix else "$prefix${it.name}.", documentation)
-			else {
-				if ( it.documentation.isNotEmpty() )
-					documentation.add(tr(
-						td("$prefix${it.name}"),
-						td(it.documentation)
-					))
-			}
+			else if ( it.documentation.isNotEmpty() )
+				documentation.add("{@code $prefix${it.name}} &ndash; ${it.documentation}")
 		}
 		return documentation
 	}
