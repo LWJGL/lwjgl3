@@ -4,10 +4,8 @@
  */
 package org.lwjgl.generator
 
-import org.lwjgl.generator.LinkMode.*
 import org.lwjgl.generator.ParameterType.IN
 import org.lwjgl.generator.ParameterType.OUT
-import java.util.regex.Pattern
 
 /** Super class of Parameter and ReturnValue with common helper properties. */
 abstract class QualifiedType(
@@ -82,26 +80,6 @@ enum class ParameterType {
 	INOUT
 }
 
-enum class LinkMode {
-	SINGLE {
-		override fun print(multi: Boolean): String = if ( multi ) " One of:" else " Must be:"
-	},
-
-	SINGLE_CNT {
-		override fun print(multi: Boolean): String = if ( multi ) " one of:" else " must be:"
-	},
-
-	BITFIELD {
-		override fun print(multi: Boolean): String = " One or more of:"
-	},
-
-	BITFIELD_CNT {
-		override fun print(multi: Boolean): String = " one or more of:"
-	};
-
-	abstract fun print(multi: Boolean): String
-}
-
 class Parameter(
 	nativeType: NativeType,
 	val name: String,
@@ -111,42 +89,11 @@ class Parameter(
 	linkMode: LinkMode
 ) : QualifiedType(nativeType) {
 
-	companion object {
-		val LINK_SPLIT = Pattern.compile("\\s+")
-	}
-
-	val documentation = if ( links.isEmpty() ) documentation else doc(documentation, links, linkMode)
+	val documentation = if ( links.isEmpty() ) documentation else linkMode.appendLinks(documentation, links)
 
 	override fun hashCode() = name.hashCode()
 
 	override fun equals(other: Any?) = other === this || (other is Parameter && other.name.equals(this.name))
-
-	private fun doc(description: String, links: String, linkMode: LinkMode): String {
-		val trimmed = description.trim()
-		val builder = StringBuilder(trimmed.length + 16 + links.length) // Rough estimate to reduce mallocs. TODO: validate
-
-		val effectiveLinkMode: LinkMode
-		if ( trimmed.isEmpty() ) {
-			effectiveLinkMode = when ( linkMode ) {
-				SINGLE   -> SINGLE_CNT
-				BITFIELD -> BITFIELD_CNT
-				else     -> linkMode
-			}
-		} else {
-			effectiveLinkMode = linkMode
-			builder.append(trimmed)
-			if ( linkMode == SINGLE || linkMode == BITFIELD ) {
-				if ( !trimmed.endsWith('.') )
-					builder.append('.')
-			}
-		}
-
-		builder.append(effectiveLinkMode.print(links.any { Character.isWhitespace(it) }))
-		builder.append("<br>")
-		builder.append(LINK_SPLIT.matcher(links.trim()).replaceAll(", "))
-
-		return builder.toString()
-	}
 
 	// --- [ Helper functions & properties ] ----
 

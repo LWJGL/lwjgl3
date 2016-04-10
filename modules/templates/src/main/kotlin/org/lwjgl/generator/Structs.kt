@@ -31,6 +31,14 @@ open class StructMember(
 		"${parentMember}_$name"
 
 	var mutable = false
+
+	var links: String = ""
+	var linkMode: LinkMode = LinkMode.SINGLE
+
+	fun links(links: String, linkMode: LinkMode = LinkMode.SINGLE) {
+		this.links = links
+		this.linkMode = linkMode
+	}
 }
 
 private class StructMemberBuffer(
@@ -345,9 +353,22 @@ $indentation}"""
 	private fun Struct.printMemberDocumentation(prefix: String = "", documentation: MutableList<String> = ArrayList<String>()): List<String> {
 		members.forEach {
 			if ( it.isNestedStructDefinition )
-				(it.nativeType as StructType).definition.printMemberDocumentation(if ( it.name === ANONYMOUS ) prefix else "$prefix${it.name}.", documentation)
-			else if ( it.documentation.isNotEmpty() )
-				documentation.add("{@code $prefix${it.name}} &ndash; ${it.documentation}")
+				(it.nativeType as StructType).definition.printMemberDocumentation(if (it.name === ANONYMOUS) prefix else "$prefix${it.name}.", documentation)
+			else if ( it.documentation.isNotEmpty() ) {
+				val doc = if ( it.links.isEmpty() )
+					it.documentation
+				else if ( it.links.any { it == '#' } )
+					it.linkMode.appendLinks(it.documentation, it.links)
+				else {
+					val regex = it.links.toRegex()
+					val tokens = Generator.tokens[packageName]!!.keys.filter { regex.matches(it) }
+					if ( tokens.isEmpty() )
+						throw IllegalStateException("Failed to match any tokens with regex: ${it.links}")
+
+					it.linkMode.appendLinks(it.documentation, tokens.sorted().joinToString(" #", prefix = "#"))
+				}
+				documentation.add("{@code $prefix${it.name}} &ndash; $doc")
+			}
 		}
 		return documentation
 	}

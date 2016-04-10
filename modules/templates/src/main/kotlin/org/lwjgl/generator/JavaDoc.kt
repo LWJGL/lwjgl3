@@ -207,6 +207,54 @@ private fun printParam(builder: StringBuilder, name: String, documentation: Stri
 	builder.append(documentation.cleanup(multilineAligment))
 }
 
+enum class LinkMode {
+	SINGLE {
+		override fun print(multi: Boolean): String = if (multi) " One of:" else " Must be:"
+	},
+	SINGLE_CNT {
+		override fun print(multi: Boolean): String = if (multi) " one of:" else " must be:"
+	},
+	BITFIELD {
+		override fun print(multi: Boolean): String = " One or more of:"
+	},
+	BITFIELD_CNT {
+		override fun print(multi: Boolean): String = " one or more of:"
+	};
+
+	companion object {
+		private val WHITESPACE = Pattern.compile("\\s+")
+	}
+
+	protected abstract fun print(multi: Boolean): String
+
+	fun appendLinks(documentation: String, links: String): String {
+		val trimmed = documentation.trim()
+		val builder = StringBuilder(trimmed.length + 16 + links.length) // Rough estimate to reduce mallocs. TODO: validate
+
+		val effectiveLinkMode: LinkMode
+		if ( trimmed.isEmpty() ) {
+			effectiveLinkMode = when (this) {
+				SINGLE   -> SINGLE_CNT
+				BITFIELD -> BITFIELD_CNT
+				else     -> this
+			}
+		} else {
+			effectiveLinkMode = this
+			builder.append(trimmed)
+			if (this == SINGLE || this == BITFIELD) {
+				if (!trimmed.endsWith('.'))
+					builder.append('.')
+			}
+		}
+
+		builder.append(effectiveLinkMode.print(links.any { Character.isWhitespace(it) }))
+		builder.append("<br>")
+		builder.append(WHITESPACE.matcher(links.trim()).replaceAll(", "))
+
+		return builder.toString()
+	}
+}
+
 // DSL extensions
 
 /** Useful for simple expressions. */
