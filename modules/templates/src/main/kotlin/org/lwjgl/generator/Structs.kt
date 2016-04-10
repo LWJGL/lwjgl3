@@ -295,14 +295,15 @@ $indent}"""
 		}
 
 		if ( members.isNotEmpty() ) {
-			builder.append("<h3>Layout</h3>\n\n");
-			builder.append(codeBlock(printStructLayout()))
-
 			val memberDoc = printMemberDocumentation()
 			if ( memberDoc.isNotEmpty() )
 				builder
-					.append("\n\n<h3>Member documentation</h3>\n\n")
+					.append("<h3>Member documentation</h3>\n\n")
 					.append(table(*memberDoc.toTypedArray()))
+					.append("\n\n")
+
+			builder.append("<h3>Layout</h3>\n\n");
+			builder.append(codeBlock(printStructLayout()))
 		}
 
 		if ( builder.length != 0 )
