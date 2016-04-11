@@ -161,15 +161,6 @@ val const_charUTF8_p = charUTF8.const_p
 val const_charUTF8_const_p = const_charUTF8_p.p_const_p
 // ----
 
-private val STRUCTURE_TYPE_REGEX = "([a-z])([A-Z])".toRegex()
-internal fun Struct.sType(struct: Struct) = VkStructureType.member("sType", "the type of this structure. Must be: #STRUCTURE_TYPE_${struct
-	.className
-	.substring(2)
-	.replace(STRUCTURE_TYPE_REGEX, "$1_$2")
-	.toUpperCase()
-}")
-internal fun Struct.pNext() = nullable.."const void".p.member("pNext", "reserved for use by extensions")
-
 val VkApplicationInfo = struct(VULKAN_PACKAGE, "VkApplicationInfo") {
 	documentation =
 		"""
