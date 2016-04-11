@@ -28,6 +28,7 @@ fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, depr
 
 	print("\t/**\n\t * <p>$injectedJavaDoc</p>\n\t * \n")
 	if ( documentation.indexOf('\n') == -1 ) {
+		print("\t * ")
 		println(documentation.substring("\t/** ".length, documentation.length - 3))
 		println("\t */")
 	} else {

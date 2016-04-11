@@ -31,6 +31,7 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		if ( VKCorePattern.matcher(function.nativeClass.className).matches() ) {
 			writer.print("\t/**\n\t * <p>${url("https://www.khronos.org/registry/vulkan/specs/1.0/man/html/${function.name}.html", "Khronos Reference Page")}</p>\n\t * \n")
 			if ( documentation.indexOf('\n') == -1 ) {
+				writer.print("\t * ")
 				writer.println(documentation.substring("\t/** ".length, documentation.length - 3))
 				writer.println("\t */")
 			} else
@@ -165,3 +166,12 @@ fun man(page: String, version: String = "1.0", link: String = "Khronos Reference
 	"<a href=\"https://www.khronos.org/registry/vulkan/specs/$version/man/html/$page.html\">$link</a>"
 fun spec(anchor: String, version: String = "1.0-wsi_extensions", link: String = "Vulkan Specification") =
 	"<a href=\"https://www.khronos.org/registry/vulkan/specs/$version/xhtml/vkspec.html\\#$anchor\">$link</a>"
+
+private val STRUCTURE_TYPE_REGEX = "([a-z])([A-Z])".toRegex()
+internal fun Struct.sType(struct: Struct) = VkStructureType.member("sType", "the type of this structure. Must be: #STRUCTURE_TYPE_${struct
+	.className
+	.substring(2)
+	.replace(STRUCTURE_TYPE_REGEX, "$1_$2")
+	.toUpperCase()
+}")
+internal fun Struct.pNext() = nullable.."const void".p.member("pNext", "reserved for use by extensions")
