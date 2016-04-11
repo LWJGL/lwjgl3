@@ -171,18 +171,25 @@ public final class TruetypeOversample {
 			STBTTPackContext pc = STBTTPackContext.malloc();
 			stbtt_PackBegin(pc, bitmap, BITMAP_W, BITMAP_H, 0, 1, null);
 			for ( int i = 0; i < 2; i++ ) {
-				chardata.position((i * 3 + 0) * 128 + 32);
+				int p = (i * 3 + 0) * 128 + 32;
+				chardata.limit(p + 95);
+				chardata.position(p);
 				stbtt_PackSetOversampling(pc, 1, 1);
-				stbtt_PackFontRange(pc, ttf, 0, scale[i], 32, 95, chardata);
+				stbtt_PackFontRange(pc, ttf, 0, scale[i], 32, chardata);
 
-				chardata.position((i * 3 + 1) * 128 + 32);
+				p = (i * 3 + 1) * 128 + 32;
+				chardata.limit(p + 95);
+				chardata.position(p);
 				stbtt_PackSetOversampling(pc, 2, 2);
-				stbtt_PackFontRange(pc, ttf, 0, scale[i], 32, 95, chardata);
+				stbtt_PackFontRange(pc, ttf, 0, scale[i], 32, chardata);
 
-				chardata.position((i * 3 + 2) * 128 + 32);
+				p = (i * 3 + 2) * 128 + 32;
+				chardata.limit(p + 95);
+				chardata.position(p);
 				stbtt_PackSetOversampling(pc, 3, 1);
-				stbtt_PackFontRange(pc, ttf, 0, scale[i], 32, 95, chardata);
+				stbtt_PackFontRange(pc, ttf, 0, scale[i], 32, chardata);
 			}
+			chardata.clear();
 			stbtt_PackEnd(pc);
 			pc.free();
 

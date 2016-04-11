@@ -10,7 +10,7 @@ class BufferObject(val binding: String): ParameterModifier() {
 	companion object: ModifierKey<BufferObject>
 
 	override val isSpecial = true
-	override protected fun validate(param: Parameter) {
+	override fun validate(param: Parameter) {
 		if ( !param.nativeType.isPointer || param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The BufferObject modifier can only be applied on data pointer types or long primitives.")
 

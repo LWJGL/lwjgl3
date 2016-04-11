@@ -68,7 +68,7 @@ val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color
 	void("SecondaryColor3usEXT", "Unsigned short version of #SecondaryColor3bEXT()", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue))
 	void("SecondaryColor3uiEXT", "Unsigned int version of #SecondaryColor3bEXT()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))
 
-	void("SecondaryColor3bvEXT", "Byte pointer version of #SecondaryColor3bEXT().", Check(3)..const..GLbyte_p.IN("v", colorBuffer))
+	void("SecondaryColor3bvEXT", "Pointer version of #SecondaryColor3bEXT().", Check(3)..const..GLbyte_p.IN("v", colorBuffer))
 	void("SecondaryColor3svEXT", "Pointer version of #SecondaryColor3sEXT().", Check(3)..const..GLshort_p.IN("v", colorBuffer))
 	void("SecondaryColor3ivEXT", "Pointer version of #SecondaryColor3iEXT().", Check(3)..const..GLint_p.IN("v", colorBuffer))
 	void("SecondaryColor3fvEXT", "Pointer version of #SecondaryColor3fEXT().", Check(3)..const..GLfloat_p.IN("v", colorBuffer))

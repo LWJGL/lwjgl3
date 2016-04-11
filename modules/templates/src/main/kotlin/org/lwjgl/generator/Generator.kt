@@ -389,7 +389,7 @@ class Generator(
 
 // File management
 
-private val packageLastModifiedMap: MutableMap<String, Long> = HashMap()
+private val packageLastModifiedMap: MutableMap<String, Long> = ConcurrentHashMap()
 
 fun getDirectoryLastModified(path: String, recursive: Boolean = false) = getDirectoryLastModified(File(path), recursive)
 private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {

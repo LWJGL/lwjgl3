@@ -11,6 +11,7 @@ import org.lwjgl.stb.STBVorbisInfo;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 import java.util.List;
 
 import static org.lwjgl.demo.util.IOUtil.*;
@@ -54,7 +55,7 @@ public final class ALCDemo {
 		assertTrue(defaultDeviceSpecifier != null);
 		System.out.println("Default device: " + defaultDeviceSpecifier);
 
-		long context = alcCreateContext(device, (ByteBuffer)null);
+		long context = alcCreateContext(device, null);
 		alcMakeContextCurrent(context);
 		AL.createCapabilities(deviceCaps);
 
@@ -74,7 +75,7 @@ public final class ALCDemo {
 
 	private static void testPlayback() {
 		STBVorbisInfo info = STBVorbisInfo.malloc();
-		ByteBuffer pcm = readVorbis("demo/footsteps.ogg", 32 * 1024, info);
+		ShortBuffer pcm = readVorbis("demo/footsteps.ogg", 32 * 1024, info);
 
 		// generate buffers and sources
 		int buffer = alGenBuffers();
@@ -120,7 +121,7 @@ public final class ALCDemo {
 		checkALError();
 	}
 
-	static ByteBuffer readVorbis(String resource, int bufferSize, STBVorbisInfo info) {
+	static ShortBuffer readVorbis(String resource, int bufferSize, STBVorbisInfo info) {
 		ByteBuffer vorbis;
 		try {
 			vorbis = ioResourceToByteBuffer(resource, bufferSize);
@@ -139,9 +140,9 @@ public final class ALCDemo {
 
 		int lengthSamples = stb_vorbis_stream_length_in_samples(decoder);
 
-		ByteBuffer pcm = BufferUtils.createByteBuffer(lengthSamples * 2);
+		ShortBuffer pcm = BufferUtils.createShortBuffer(lengthSamples);
 
-		stb_vorbis_get_samples_short_interleaved(decoder, channels, pcm, lengthSamples);
+		stb_vorbis_get_samples_short_interleaved(decoder, channels, pcm);
 		stb_vorbis_close(decoder);
 
 		return pcm;

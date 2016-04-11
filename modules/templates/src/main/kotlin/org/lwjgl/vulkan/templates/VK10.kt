@@ -647,7 +647,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		"COMPARE_OP_NEVER".enumExpr("The test never passes.", "0"),
 		"COMPARE_OP_LESS".enum("The test passes when <b>R</b> &lt; <b>S</b>."),
-		"COMPARE_OP_EQUAL".enum("The test passes when R = S}"),
+		"COMPARE_OP_EQUAL".enum("The test passes when R = S"),
 		"COMPARE_OP_LESS_OR_EQUAL".enum("The test passes when <b>R</b> &le; <b>S</b>."),
 		"COMPARE_OP_GREATER".enum("The test passes when <b>R</b> &gt; <b>S</b>."),
 		"COMPARE_OP_NOT_EQUAL".enum("The test passes when <b>R</b> &ne; <b>S</b>."),

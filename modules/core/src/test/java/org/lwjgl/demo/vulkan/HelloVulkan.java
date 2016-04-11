@@ -777,7 +777,7 @@ public final class HelloVulkan {
 			int src_stages = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
 			int dest_stages = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
 
-			vkCmdPipelineBarrier(setup_cmd, src_stages, dest_stages, 0, 0, null, 0, null, 1, image_memory_barrier);
+			vkCmdPipelineBarrier(setup_cmd, src_stages, dest_stages, 0, null, null, image_memory_barrier);
 		} finally {
 			stack.pop();
 		}
@@ -1211,7 +1211,8 @@ public final class HelloVulkan {
 					vkCmdCopyImage(
 						setup_cmd, staging_texture.image,
 						VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, textures[i].image,
-						VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, copy_region);
+						VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, copy_region
+					);
 
 					demo_set_image_layout(textures[i].image,
 					                      VK_IMAGE_ASPECT_COLOR_BIT,
@@ -1849,7 +1850,7 @@ public final class HelloVulkan {
 			// FIXME/TODO: DEAL WITH VK_IMAGE_LAYOUT_PRESENT_SRC_KHR
 			demo_draw_build_cmd();
 			int pipe_stage_flags = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
-			VkSubmitInfo.Buffer submit_info = VkSubmitInfo.mallocStack(1, stack)
+			VkSubmitInfo submit_info = VkSubmitInfo.mallocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_SUBMIT_INFO)
 				.pNext(NULL)
 				.waitSemaphoreCount(1)
@@ -1858,7 +1859,7 @@ public final class HelloVulkan {
 				.pCommandBuffers(pp.put(0, draw_cmd))
 				.pSignalSemaphores(null);
 
-			err = vkQueueSubmit(queue, 1, submit_info, VK_NULL_HANDLE);
+			err = vkQueueSubmit(queue, submit_info, VK_NULL_HANDLE);
 			check(err);
 
 			VkPresentInfoKHR present = VkPresentInfoKHR.callocStack(stack)

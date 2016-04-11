@@ -4,7 +4,6 @@
  */
 package org.lwjgl.generator
 
-import java.util.*
 import java.util.regex.Pattern
 
 fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
@@ -138,20 +137,17 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 }
 
 /** Specialized conversion for methods. */
-fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
-	if ( documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && paramsIn.none() { it.documentation.isNotEmpty() } )
+fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
+	if ( documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && params.none() { it.documentation.isNotEmpty() } )
 		return ""
 
-	// TODO: This is shit, optimize
-	val hideAutoSizeResult = returns !is StructType && paramsIn.filter { it.isAutoSizeResultOut }.count() == 1
-	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !(it.isAutoSizeResultOut && hideAutoSizeResult) }
-	if ( params.isEmpty() && returnDoc.isEmpty() )
+	if ( params.none() && returnDoc.isEmpty() )
 		return documentation.toJavaDoc()
 
 	return StringBuilder("\t/**\n\t * ${documentation.cleanup()}").run {
 		val returnsStructValue = !returnDoc.isEmpty() && returns is StructType && !returns.includesPointer
 
-		if ( !params.isEmpty() ) {
+		if ( params.any() ) {
 			// Find maximum param name length
 			var alignment = params.map { it.name.length }.fold(0) { left, right -> Math.max(left, right) }
 			if ( returnsStructValue )

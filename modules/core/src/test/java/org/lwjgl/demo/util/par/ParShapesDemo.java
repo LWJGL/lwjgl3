@@ -171,7 +171,7 @@ public final class ParShapesDemo {
 		GL.createCapabilities();
 		debugCB = GLUtil.setupDebugMessageCallback();
 		if ( debugCB != null && GL.getCapabilities().OpenGL43 )
-			glDebugMessageControl(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_OTHER, GL_DEBUG_SEVERITY_NOTIFICATION, 0, null, false);
+			glDebugMessageControl(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_OTHER, GL_DEBUG_SEVERITY_NOTIFICATION, null, false);
 
 		keyCB.set(window);
 		framebufferSizeCB.set(window);

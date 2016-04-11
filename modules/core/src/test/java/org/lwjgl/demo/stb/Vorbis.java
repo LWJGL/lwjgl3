@@ -17,6 +17,7 @@ import org.lwjgl.system.libffi.Closure;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 
 import static java.lang.Math.*;
 import static org.lwjgl.demo.util.IOUtil.*;
@@ -53,7 +54,7 @@ public final class Vorbis {
 
 		ALCCapabilities deviceCaps = ALC.createCapabilities(device);
 
-		long context = alcCreateContext(device, (ByteBuffer)null);
+		long context = alcCreateContext(device, null);
 		if ( device == NULL )
 			throw new IllegalStateException("Failed to create an OpenAL context.");
 
@@ -117,7 +118,7 @@ public final class Vorbis {
 		final int   lengthSamples;
 		final float lengthSeconds;
 
-		final ByteBuffer pcm;
+		final ShortBuffer pcm;
 
 		int samplesLeft;
 
@@ -146,7 +147,7 @@ public final class Vorbis {
 			this.lengthSamples = stb_vorbis_stream_length_in_samples(handle);
 			this.lengthSeconds = stb_vorbis_stream_length_in_seconds(handle);
 
-			this.pcm = BufferUtils.createByteBuffer(BUFFER_SIZE * 2);
+			this.pcm = BufferUtils.createShortBuffer(BUFFER_SIZE);
 
 			samplesLeft = lengthSamples;
 		}
@@ -182,8 +183,8 @@ public final class Vorbis {
 			int samples = 0;
 
 			while ( samples < BUFFER_SIZE ) {
-				pcm.position(samples * 2);
-				int samplesPerChannel = stb_vorbis_get_samples_short_interleaved(handle, channels, pcm, BUFFER_SIZE - samples);
+				pcm.position(samples);
+				int samplesPerChannel = stb_vorbis_get_samples_short_interleaved(handle, channels, pcm);
 				if ( samplesPerChannel == 0 )
 					break;
 
@@ -194,7 +195,7 @@ public final class Vorbis {
 				return false;
 
 			pcm.position(0);
-			alBufferData(buffer, format, pcm, samples * 2, sampleRate);
+			alBufferData(buffer, format, pcm, sampleRate);
 			samplesLeft -= samples / channels;
 
 			return true;

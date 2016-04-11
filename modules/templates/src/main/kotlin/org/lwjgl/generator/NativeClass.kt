@@ -420,7 +420,15 @@ class NativeClass(
 			returns = this,
 			simpleName = name,
 			name = if ( noPrefix ) name else "$prefixMethod$name",
-			documentation = { this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.asSequence().filter { it !== JNI_ENV }, this.nativeType, returnDoc, since) },
+			documentation = { parameterFilter ->
+				this@NativeClass.toJavaDoc(
+					processDocumentation(documentation),
+					parameters.asSequence().filter { it !== JNI_ENV && parameterFilter(it) },
+					this.nativeType,
+					returnDoc,
+					since
+				)
+			},
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)
@@ -452,7 +460,7 @@ class NativeClass(
 			returns = reference.returns,
 			simpleName = reference.simpleName,
 			name = reference.name,
-			documentation = { this@NativeClass.convertDocumentation(this, reference.name, reference.documentation()) },
+			documentation = { this@NativeClass.convertDocumentation(this, reference.name, reference.documentation(it)) },
 			nativeClass = this@NativeClass,
 			parameters = *reference.parameters
 		).copyModifiers(reference)

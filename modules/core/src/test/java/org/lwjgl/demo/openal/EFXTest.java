@@ -10,6 +10,7 @@ import org.lwjgl.stb.STBVorbisInfo;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.AL11.*;
@@ -253,7 +254,7 @@ public final class EFXTest {
 		}
 		System.out.println("EXTEfx found.");
 
-		long alContext = alcCreateContext(device, (ByteBuffer)null);
+		long alContext = alcCreateContext(device, null);
 		alcMakeContextCurrent(alContext);
 		AL.createCapabilities(deviceCaps);
 
@@ -262,7 +263,7 @@ public final class EFXTest {
 		int buffer = alGenBuffers();
 
 		STBVorbisInfo info = STBVorbisInfo.malloc();
-		ByteBuffer pcm = ALCDemo.readVorbis("demo/footsteps.ogg", 32 * 1024, info);
+		ShortBuffer pcm = ALCDemo.readVorbis("demo/footsteps.ogg", 32 * 1024, info);
 
 		alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.sample_rate());
 		info.free();
@@ -339,7 +340,7 @@ public final class EFXTest {
 		}
 		System.out.println("EXTEfx found.");
 
-		long alContext = alcCreateContext(device, (ByteBuffer)null);
+		long alContext = alcCreateContext(device, null);
 		alcMakeContextCurrent(alContext);
 		AL.createCapabilities(deviceCaps);
 

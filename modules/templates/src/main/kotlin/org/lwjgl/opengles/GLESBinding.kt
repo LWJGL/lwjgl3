@@ -14,6 +14,11 @@ val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "GLESCapabilities"
 
+private object BufferOffsetTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
+	override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}"
+	override fun transformCall(param: Parameter, original: String) = "${param.name}"
+}
+
 private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, CAPABILITIES_CLASS) {
 
 	init {
@@ -25,18 +30,13 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 		javaImport("static org.lwjgl.system.MemoryUtil.*")
 	}
 
-	private val BufferOffsetTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
-		override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}Offset"
-		override fun transformCall(param: Parameter, original: String) = "${param.name}Offset"
-	}
-
 	override val hasCapabilities: Boolean get() = true
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }
 		if ( boParams.any() ) {
 			boParams.forEach { transforms[it] = BufferOffsetTransform }
-			function.generateAlternativeMethod(writer, function.name, "Buffer object offset version of:", transforms)
+			function.generateAlternativeMethod(writer, function.name, transforms)
 			boParams.forEach { transforms.remove(it) }
 		}
 	}

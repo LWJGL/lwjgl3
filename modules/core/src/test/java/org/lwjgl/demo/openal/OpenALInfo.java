@@ -35,7 +35,7 @@ public class OpenALInfo {
 
 		ALCCapabilities deviceCaps = ALC.createCapabilities(device);
 
-		long alContext = alcCreateContext(device, (ByteBuffer)null);
+		long alContext = alcCreateContext(device, null);
 		ALUtil.checkALCError(device);
 
 		alcMakeContextCurrent(alContext);

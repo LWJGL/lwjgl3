@@ -362,11 +362,11 @@ class Demo {
 
 			nvgFontSize(vg, 20.0f);
 			nvgFontFace(vg, "sans-bold");
-			tw = nvgTextBounds(vg, 0, 0, textEncoded, NULL, (ByteBuffer)null);
+			tw = nvgTextBounds(vg, 0, 0, textEncoded, NULL, null);
 			if ( preicon != null ) {
 				nvgFontSize(vg, h * 1.3f);
 				nvgFontFace(vg, "icons");
-				iw = nvgTextBounds(vg, 0, 0, preicon, NULL, (ByteBuffer)null);
+				iw = nvgTextBounds(vg, 0, 0, preicon, NULL, null);
 				iw += h * 0.15f;
 			}
 
