@@ -1105,23 +1105,8 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Returns a slice of the specified buffer, starting at the buffer's current position and ending at {@code buffer.position() + capacity}. The returned
-	 * buffer will have the same {@link ByteOrder} as the source buffer.
-	 *
-	 * <p>The position and limit of the source buffer are preserved after a call to this method.</p>
-	 *
-	 * @param buffer   the buffer to slice
-	 * @param capacity the slice length, it must be &le; {@code buffer.capacity() - buffer.position()}
-	 *
-	 * @return the sliced buffer
-	 */
-	public static ByteBuffer memSlice(ByteBuffer buffer, int capacity) {
-		return memSlice(buffer, 0, capacity);
-	}
-
-	/**
-	 * Returns a slice of the specified buffer, starting at {@code buffer.position() + offset} and ending at {@code buffer.position() + offset + capacity}. The
-	 * returned buffer will have the same {@link ByteOrder} as the original buffer.
+	 * Returns a slice of the specified buffer between {@code (buffer.position() + offset)} and {@code (buffer.position() + offset + capacity)}. The returned
+	 * buffer will have the same {@link ByteOrder} as the original buffer.
 	 *
 	 * <p>The position and limit of the original buffer are preserved after a call to this method.</p>
 	 *
@@ -1140,6 +1125,162 @@ public final class MemoryUtil {
 			buffer.limit(position + offset + capacity);
 
 			return memSlice(buffer);
+		} finally {
+			buffer.position(position);
+			buffer.limit(limit);
+		}
+	}
+
+	/**
+	 * Returns a slice of the specified buffer between {@code (buffer.position() + offset)} and {@code (buffer.position() + offset + capacity)}.
+	 *
+	 * <p>The position and limit of the original buffer are preserved after a call to this method.</p>
+	 *
+	 * @param buffer   the buffer to slice
+	 * @param offset   the slice offset, it must be &le; {@code buffer.remaining()}
+	 * @param capacity the slice length, it must be &le; {@code buffer.capacity() - (buffer.position() + offset)}
+	 *
+	 * @return the sliced buffer
+	 */
+	public static ShortBuffer memSlice(ShortBuffer buffer, int offset, int capacity) {
+		int position = buffer.position();
+		int limit = buffer.limit();
+
+		try {
+			buffer.position(position + offset);
+			buffer.limit(position + offset + capacity);
+
+			return buffer.slice();
+		} finally {
+			buffer.position(position);
+			buffer.limit(limit);
+		}
+	}
+
+	/**
+	 * Returns a slice of the specified buffer between {@code (buffer.position() + offset)} and {@code (buffer.position() + offset + capacity)}.
+	 *
+	 * <p>The position and limit of the original buffer are preserved after a call to this method.</p>
+	 *
+	 * @param buffer   the buffer to slice
+	 * @param offset   the slice offset, it must be &le; {@code buffer.remaining()}
+	 * @param capacity the slice length, it must be &le; {@code buffer.capacity() - (buffer.position() + offset)}
+	 *
+	 * @return the sliced buffer
+	 */
+	public static IntBuffer memSlice(IntBuffer buffer, int offset, int capacity) {
+		int position = buffer.position();
+		int limit = buffer.limit();
+
+		try {
+			buffer.position(position + offset);
+			buffer.limit(position + offset + capacity);
+
+			return buffer.slice();
+		} finally {
+			buffer.position(position);
+			buffer.limit(limit);
+		}
+	}
+
+	/**
+	 * Returns a slice of the specified buffer between {@code (buffer.position() + offset)} and {@code (buffer.position() + offset + capacity)}.
+	 *
+	 * <p>The position and limit of the original buffer are preserved after a call to this method.</p>
+	 *
+	 * @param buffer   the buffer to slice
+	 * @param offset   the slice offset, it must be &le; {@code buffer.remaining()}
+	 * @param capacity the slice length, it must be &le; {@code buffer.capacity() - (buffer.position() + offset)}
+	 *
+	 * @return the sliced buffer
+	 */
+	public static LongBuffer memSlice(LongBuffer buffer, int offset, int capacity) {
+		int position = buffer.position();
+		int limit = buffer.limit();
+
+		try {
+			buffer.position(position + offset);
+			buffer.limit(position + offset + capacity);
+
+			return buffer.slice();
+		} finally {
+			buffer.position(position);
+			buffer.limit(limit);
+		}
+	}
+
+	/**
+	 * Returns a slice of the specified buffer between {@code (buffer.position() + offset)} and {@code (buffer.position() + offset + capacity)}.
+	 *
+	 * <p>The position and limit of the original buffer are preserved after a call to this method.</p>
+	 *
+	 * @param buffer   the buffer to slice
+	 * @param offset   the slice offset, it must be &le; {@code buffer.remaining()}
+	 * @param capacity the slice length, it must be &le; {@code buffer.capacity() - (buffer.position() + offset)}
+	 *
+	 * @return the sliced buffer
+	 */
+	public static FloatBuffer memSlice(FloatBuffer buffer, int offset, int capacity) {
+		int position = buffer.position();
+		int limit = buffer.limit();
+
+		try {
+			buffer.position(position + offset);
+			buffer.limit(position + offset + capacity);
+
+			return buffer.slice();
+		} finally {
+			buffer.position(position);
+			buffer.limit(limit);
+		}
+	}
+
+	/**
+	 * Returns a slice of the specified buffer between {@code (buffer.position() + offset)} and {@code (buffer.position() + offset + capacity)}.
+	 *
+	 * <p>The position and limit of the original buffer are preserved after a call to this method.</p>
+	 *
+	 * @param buffer   the buffer to slice
+	 * @param offset   the slice offset, it must be &le; {@code buffer.remaining()}
+	 * @param capacity the slice length, it must be &le; {@code buffer.capacity() - (buffer.position() + offset)}
+	 *
+	 * @return the sliced buffer
+	 */
+	public static DoubleBuffer memSlice(DoubleBuffer buffer, int offset, int capacity) {
+		int position = buffer.position();
+		int limit = buffer.limit();
+
+		try {
+			buffer.position(position + offset);
+			buffer.limit(position + offset + capacity);
+
+			return buffer.slice();
+		} finally {
+			buffer.position(position);
+			buffer.limit(limit);
+		}
+	}
+
+	/**
+	 * Returns a slice of the specified buffer between {@code (buffer.position() + offset)} and {@code (buffer.position() + offset + capacity)}.
+	 *
+	 * <p>The position and limit of the original buffer are preserved after a call to this method.</p>
+	 *
+	 * @param buffer   the buffer to slice
+	 * @param offset   the slice offset, it must be &le; {@code buffer.remaining()}
+	 * @param capacity the slice length, it must be &le; {@code buffer.capacity() - (buffer.position() + offset)}
+	 *
+	 * @return the sliced buffer
+	 */
+	public static PointerBuffer memSlice(PointerBuffer buffer, int offset, int capacity) {
+		int position = buffer.position();
+		int limit = buffer.limit();
+
+		try {
+			buffer.position(position + offset);
+			buffer.limit(position + offset + capacity);
+
+			return buffer.slice();
 		} finally {
 			buffer.position(position);
 			buffer.limit(limit);

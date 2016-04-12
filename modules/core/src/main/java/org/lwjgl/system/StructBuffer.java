@@ -4,10 +4,7 @@
  */
 package org.lwjgl.system;
 
-import java.nio.BufferOverflowException;
-import java.nio.BufferUnderflowException;
-import java.nio.ByteBuffer;
-import java.nio.InvalidMarkException;
+import java.nio.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -258,6 +255,26 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 */
 	public SELF slice() {
 		return newBufferInstance(address(), container, -1, 0, this.remaining(), this.remaining());
+	}
+
+	/**
+	 * Returns a slice of this buffer between {@code (buffer.position() + offset)} and {@code (buffer.position() + offset + capacity)}.
+	 *
+	 * <p>The position and limit of this buffer are preserved after a call to this method.</p>
+	 *
+	 * @param offset   the slice offset, it must be &le; {@code this.remaining()}
+	 * @param capacity the slice length, it must be &le; {@code this.capacity() - (this.position() + offset)}
+	 *
+	 * @return the sliced buffer
+	 */
+	public SELF slice(int offset, int capacity) {
+		if ( offset < 0 || limit < position + offset )
+			throw new IllegalArgumentException();
+
+		if ( capacity < 0 || this.capacity < position + offset + capacity )
+			throw new IllegalArgumentException();
+
+		return newBufferInstance(address() + offset * sizeof(), container, -1, 0, capacity, capacity);
 	}
 
 	/**
