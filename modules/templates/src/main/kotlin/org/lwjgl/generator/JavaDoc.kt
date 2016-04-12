@@ -4,6 +4,7 @@
  */
 package org.lwjgl.generator
 
+import java.lang.Math.*
 import java.util.regex.Pattern
 
 fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
@@ -244,8 +245,24 @@ enum class LinkMode {
 		}
 
 		builder.append(effectiveLinkMode.print(links.any { Character.isWhitespace(it) }))
-		builder.append("<br>")
-		builder.append(WHITESPACE.matcher(links.trim()).replaceAll(", "))
+		builder.append("<br><table><tr>")
+
+		val theLinks = WHITESPACE.split(links.trim()).asSequence()
+		val columns = theLinks
+			.map { it.length - it.indexOf('#') - 1 }
+			.average()
+			.let { max(1, 80 / round(it).toInt()) }
+
+		theLinks.forEachIndexed { i, link ->
+			if (i > 0 && i % columns == 0)
+				builder.append("</tr><tr>")
+
+			builder
+				.append("<td>")
+				.append(link)
+				.append("</td>")
+		}
+		builder.append("</tr></table>")
 
 		return builder.toString()
 	}
