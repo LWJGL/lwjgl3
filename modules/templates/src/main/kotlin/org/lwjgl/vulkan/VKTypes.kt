@@ -495,7 +495,7 @@ val VkFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkFormatProperties", mutabl
 		Contains physical device properties for a {@code VkFormat}.
 		"""
 
-	VkFormatFeatureFlags.member("linearTilingFeatures", "what features are supported by #IMAGE_TILING_LINEAR images")
+	VkFormatFeatureFlags.member("linearTilingFeatures", "what features are supported by #IMAGE_TILING_LINEAR images").flagLinks("FORMAT_FEATURE")
 	VkFormatFeatureFlags.member("optimalTilingFeatures", "what features are supported by #IMAGE_TILING_OPTIMAL images")
 	VkFormatFeatureFlags.member("bufferFeatures", "what features are supported by buffers")
 }
@@ -527,6 +527,7 @@ val VkImageFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkImageFormatPropertie
 	uint32_t.member("maxMipLevels", "the maximum number of mipmap levels")
 	uint32_t.member("maxArrayLayers", "the maximum number of array layers")
 	VkSampleCountFlags.member("sampleCounts", "a bitmask of {@code VkSampleCountFlagBits} specifying all the supported sample counts for this image")
+		.flagLinks("SAMPLE_COUNT")
 	VkDeviceSize.member("maxResourceSize", "the maximum total image size in bytes, inclusive of all subresources")
 }
 
@@ -825,7 +826,7 @@ val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mu
 	VkSampleCountFlags.member(
 		"framebufferColorSampleCounts",
 		"a bitmask of {@code VkSampleCountFlagBits} bits indicating the supported color sample counts for a framebuffer color attachment"
-	)
+	).flagLinks("SAMPLE_COUNT")
 	VkSampleCountFlags.member(
 		"framebufferDepthSampleCounts",
 		"""
@@ -942,7 +943,7 @@ val VkPhysicalDeviceProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDevicePro
 	uint32_t.member("driverVersion", "the vendor-specified version of the driver")
 	uint32_t.member("vendorID", "a unique identifier for the vendor of the physical device")
 	uint32_t.member("deviceID", "a unique identifier for the physical device among devices available from the vendor")
-	VkPhysicalDeviceType.member("deviceType", "a {@code VkPhysicalDeviceType} specifying the type of device")
+	VkPhysicalDeviceType.member("deviceType", "a {@code VkPhysicalDeviceType} specifying the type of device").links("PHYSICAL_DEVICE_TYPE_\\w+")
 	charUTF8.array("deviceName", "a null-terminated UTF-8 string containing the name of the device", size = VK_MAX_PHYSICAL_DEVICE_NAME_SIZE)
 	uint8_t.array(
 		"pipelineCacheUUID",
@@ -965,7 +966,7 @@ val VkQueueFamilyProperties_p = struct_p(VULKAN_PACKAGE, "VkQueueFamilyPropertie
 		Contains properties of a queue family.
 		"""
 
-	VkQueueFlags.member("queueFlags", "contains flags indicating the capabilities of the queues in this queue family")
+	VkQueueFlags.member("queueFlags", "contains flags indicating the capabilities of the queues in this queue family").flagLinks("QUEUE")
 	uint32_t.member("queueCount", "the unsigned integer count of queues in this queue family")
 	uint32_t.member("timestampValidBits", "the unsigned integer count of meaningful bits in the timestamps written via #CmdWriteTimestamp()")
 	VkExtent3D.member("minImageTransferGranularity", "the minimum granularity supported for image transfer operations on the queues in this queue family")
@@ -981,6 +982,7 @@ val VkMemoryType = struct(VULKAN_PACKAGE, "VkMemoryType", mutable = false) {
 		"""
 
 	VkMemoryPropertyFlags.member("propertyFlags", "a bitmask of {@code VkMemoryPropertyFlagBits} properties for this memory type")
+		.flagLinks("MEMORY_PROPERTY")
 	uint32_t.member(
 		"heapIndex",
 		"""
@@ -1000,7 +1002,7 @@ val VkMemoryHeap = struct(VULKAN_PACKAGE, "VkMemoryHeap", mutable = false) {
 		"""
 
 	VkDeviceSize.member("size", "the total memory size in bytes in the heap")
-	VkMemoryHeapFlags.member("flags", "a bitmask of {@code VkMemoryHeapFlagBits} attribute flags for the heap")
+	VkMemoryHeapFlags.member("flags", "a bitmask of {@code VkMemoryHeapFlagBits} attribute flags for the heap").flagLinks("MEMORY_HEAP")
 }.nativeType
 
 val VK_MAX_MEMORY_TYPES = 32
@@ -1212,6 +1214,7 @@ val VkSparseImageFormatProperties = struct(VULKAN_PACKAGE, "VkSparseImageFormatP
 	VkImageAspectFlags.member("aspectMask", "a {@code VkImageAspectFlags} specifying which aspects of the image the properties apply to")
 	VkExtent3D.member("imageGranularity", "the width, height, and depth of the sparse image block in texels or compressed texel blocks")
 	VkSparseImageFormatFlags.member("flags", "a {@code VkSparseImageFormatFlagBits} bitmask specifying additional information about the sparse resource")
+		.flagLinks("SPARSE_IMAGE_FORMAT")
 }.nativeType
 val VkSparseImageFormatProperties_p = VkSparseImageFormatProperties.p
 
@@ -1252,7 +1255,7 @@ val VkSparseMemoryBind = struct(VULKAN_PACKAGE, "VkSparseMemoryBind") {
 	VkDeviceSize.member("size", "the size of the memory region to be bound")
 	VkDeviceMemory.member("memory", "the {@code VkDeviceMemory} object that the range of the resource is bound to")
 	VkDeviceSize.member("memoryOffset", "the offset into the {@code VkDeviceMemory} object to bind the resource range to")
-	VkSparseMemoryBindFlags.member("flags", "are sparse memory binding flags")
+	VkSparseMemoryBindFlags.member("flags", "are sparse memory binding flags").flagLinks("SPARSE_MEMORY_BIND")
 }.nativeType
 
 val VkSparseBufferMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseBufferMemoryBindInfo") {
@@ -1363,6 +1366,7 @@ val VkFenceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkFenceCreateInfo") {
 	sType(this)
 	pNext()
 	VkFenceCreateFlags.member("flags", "contains {@code VkFenceCreateFlags} flags defining the initial state and behavior of the fence")
+		.flagLinks("FENCE_CREATE")
 }
 
 val VkSemaphoreCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkSemaphoreCreateInfo") {
@@ -1414,6 +1418,7 @@ val VkQueryPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkQueryPoolCreateInfo") 
 	VkQueryType.member("queryType", "the {@code VkQueryType} type of queries managed by the pool")
 	uint32_t.member("queryCount", "the number of queries managed by the pool")
 	VkQueryPipelineStatisticFlags.member("pipelineStatistics", "a bitmask indicating which counters will be returned in queries on the new pool")
+		.flagLinks("QUERY_PIPELINE_STATISTIC")
 }
 
 val VkBufferCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkBufferCreateInfo") {
@@ -1430,9 +1435,11 @@ val VkBufferCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkBufferCreateInfo") {
 	sType(this)
 	pNext()
 	VkBufferCreateFlags.member("flags", "a {@code VkBufferCreateFlagBits} bitfield describing additional parameters of the buffer")
+		.flagLinks("BUFFER_CREATE_SPARSE")
 	VkDeviceSize.member("size", "the size in bytes of the buffer to be created")
 	VkBufferUsageFlags.member("usage", "a {@code VkBufferUsageFlagBits} bitfield describing the allowed usages of the buffer")
-	VkSharingMode.member("sharingMode", "the sharing mode of the buffer when it will be accessed by multiple queue families")
+		.flagLinks("BUFFER_USAGE")
+	VkSharingMode.member("sharingMode", "the sharing mode of the buffer when it will be accessed by multiple queue families").links("SHARING_MODE_\\w+")
 	AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member(
 		"queueFamilyIndexCount",
 		"the number of entries in the {@code pQueueFamilyIndices} array"
@@ -1458,7 +1465,7 @@ val VkBufferViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkBufferViewCreateInfo"
 	pNext()
 	VkBufferViewCreateFlags.member("flags", "reserved for future use")
 	VkBuffer.member("buffer", "a {@code VkBuffer} on which the view will be created")
-	VkFormat.member("format", "a {@code VkFormat} describing the format of the data elements in the buffer")
+	VkFormat.member("format", "a {@code VkFormat} describing the format of the data elements in the buffer").links("FORMAT_\\w+")
 	VkDeviceSize.member("offset", "an offset in bytes from the base address of the buffer")
 	VkDeviceSize.member("range", "a size in bytes of the buffer view")
 }
@@ -1476,16 +1483,18 @@ val VkImageCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageCreateInfo") {
 
 	sType(this)
 	pNext()
-	VkImageCreateFlags.member("flags", "a {@code VkImageCreateFlagBits} bitfield describing additional parameters of the image")
-	VkImageType.member("imageType", "the basic dimensionality of the image")
+	VkImageCreateFlags.member("flags", "a {@code VkImageCreateFlagBits} bitfield describing additional parameters of the image").flagLinks("IMAGE_CREATE")
+	VkImageType.member("imageType", "the basic dimensionality of the image").links("IMAGE_TYPE_\\w+")
 	VkFormat.member("format", "a {@code VkFormat} describing the format and type of the data elements that will be contained in the image")
+		.links("FORMAT_\\w+")
 	VkExtent3D.member("extent", "a ##VkExtent3D describing the number of data elements in each dimension of the base level")
 	uint32_t.member("mipLevels", "the number of levels of detail available for minified sampling of the image")
 	uint32_t.member("arrayLayers", "the number of layers in the image")
 	VkSampleCountFlagBits.member("samples", "the number of sub-data element samples in the image as defined in {@code VkSampleCountFlagBits}")
-	VkImageTiling.member("tiling", "the tiling arrangement of the data elements in memory")
-	VkImageUsageFlags.member("usage", "a bitfield describing the intended usage of the image")
-	VkSharingMode.member("sharingMode", "the sharing mode of the image when it will be accessed by multiple queue families")
+		.flagLinks("SAMPLE_COUNT")
+	VkImageTiling.member("tiling", "the tiling arrangement of the data elements in memory").links("IMAGE_TILING_\\w+")
+	VkImageUsageFlags.member("usage", "a bitfield describing the intended usage of the image").flagLinks("IMAGE_USAGE")
+	VkSharingMode.member("sharingMode", "the sharing mode of the image when it will be accessed by multiple queue families").links("SHARING_MODE_\\w+")
 	AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member(
 		"queueFamilyIndexCount",
 		"the number of entries in the {@code pQueueFamilyIndices} array"
@@ -1494,7 +1503,7 @@ val VkImageCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageCreateInfo") {
 		"pQueueFamilyIndices",
 		"a list of queue families that will access this image (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT)"
 	)
-	VkImageLayout.member("initialLayout", "selects the initial {@code VkImageLayout} state of all subresources of the image")
+	VkImageLayout.member("initialLayout", "selects the initial {@code VkImageLayout} state of all subresources of the image").links("IMAGE_LAYOUT_\\w+")
 }
 
 val VkImageSubresource_p = struct_p(VULKAN_PACKAGE, "VkImageSubresource") {
@@ -1508,7 +1517,7 @@ val VkImageSubresource_p = struct_p(VULKAN_PACKAGE, "VkImageSubresource") {
 		${ValidityStructs.VkImageSubresource}
 		"""
 
-	VkImageAspectFlags.member("aspectMask", "a {@code VkImageAspectFlags} selecting the image aspect")
+	VkImageAspectFlags.member("aspectMask", "a {@code VkImageAspectFlags} selecting the image aspect").flagLinks("IMAGE_ASPECT")
 	uint32_t.member("mipLevel", "selects the mipmap level")
 	uint32_t.member("arrayLayer", "selects the array layer")
 }
@@ -1540,7 +1549,7 @@ val VkComponentMapping = struct(VULKAN_PACKAGE, "VkComponentMapping") {
 		${ValidityStructs.VkComponentMapping}
 		"""
 
-	VkComponentSwizzle.member("r", "the value placed in the r component of the output vector")
+	VkComponentSwizzle.member("r", "the value placed in the r component of the output vector").links("COMPONENT_SWIZZLE_\\w+")
 	VkComponentSwizzle.member("g", "the value placed in the g component of the output vector")
 	VkComponentSwizzle.member("b", "the value placed in the b component of the output vector")
 	VkComponentSwizzle.member("a", "the value placed in the a component of the output vector")
@@ -1557,7 +1566,7 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 		${ValidityStructs.VkImageSubresourceRange}
 		"""
 
-	VkImageAspectFlags.member("aspectMask", "a bitmask indicating which aspect(s) of the image are included in the view")
+	VkImageAspectFlags.member("aspectMask", "a bitmask indicating which aspect(s) of the image are included in the view").flagLinks("IMAGE_ASPECT")
 	uint32_t.member("baseMipLevel", "the first mipmap level accessible to the view")
 	uint32_t.member("levelCount", "the number of mipmap levels (starting from {@code baseMipLevel}) accessible to the view")
 	uint32_t.member("baseArrayLayer", "the first array layer accessible to the view")
@@ -1578,8 +1587,8 @@ val VkImageViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageViewCreateInfo") 
 	pNext()
 	VkImageViewCreateFlags.member("flags", "reserved for future use")
 	VkImage.member("image", "a {@code VkImage} on which the view will be created")
-	VkImageViewType.member("viewType", "the type of the image view")
-	VkFormat.member("format", "a {@code VkFormat} describing the format and type used to interpret data elements in the image")
+	VkImageViewType.member("viewType", "the type of the image view").links("IMAGE_VIEW_TYPE_\\w+")
+	VkFormat.member("format", "a {@code VkFormat} describing the format and type used to interpret data elements in the image").links("FORMAT_\\w+")
 	VkComponentMapping.member(
 		"components",
 		"a remapping of color components (or of depth or stencil components after they have been converted into color components)"
@@ -1675,7 +1684,7 @@ val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderSt
 	sType(this)
 	pNext()
 	VkPipelineShaderStageCreateFlags.member("flags", "reserved for future use")
-	VkShaderStageFlagBits.member("stage", "a {@code VkShaderStageFlagBits} naming the pipeline stage")
+	VkShaderStageFlagBits.member("stage", "a {@code VkShaderStageFlagBits} naming the pipeline stage").flagLinks("SHADER_STAGE")
 	VkShaderModule.member("module", "a {@code VkShaderModule} object that contains the shader for this stage")
 	const_charUTF8_p.member("pName", "a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage")
 	nullable..VkSpecializationInfo.const_p.member("pSpecializationInfo", "a pointer to ##VkSpecializationInfo, can be $NULL")
@@ -1697,7 +1706,7 @@ val VkVertexInputBindingDescription = struct(VULKAN_PACKAGE, "VkVertexInputBindi
 	VkVertexInputRate.member(
 		"inputRate",
 		"a {@code VkVertexInputRate} value that specifies whether vertex attribute addressing is a function of the vertex index or of the instance index"
-	)
+	).links("VERTEX_INPUT_RATE_\\w+")
 }.nativeType
 
 val VkVertexInputAttributeDescription = struct(VULKAN_PACKAGE, "VkVertexInputAttributeDescription") {
@@ -1713,7 +1722,7 @@ val VkVertexInputAttributeDescription = struct(VULKAN_PACKAGE, "VkVertexInputAtt
 
 	uint32_t.member("location", "the shader binding location number for this attribute")
 	uint32_t.member("binding", "the binding number which this attribute takes its data from")
-	VkFormat.member("format", "the size and type of the vertex attribute data")
+	VkFormat.member("format", "the size and type of the vertex attribute data").links("FORMAT_\\w+")
 	uint32_t.member("offset", "a byte offset of this attribute relative to the start of an element in the vertex input binding")
 }.nativeType
 
@@ -1757,7 +1766,7 @@ val VkPipelineInputAssemblyStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineI
 	sType(this)
 	pNext()
 	VkPipelineInputAssemblyStateCreateFlags.member("flags", "reserved for future use")
-	VkPrimitiveTopology.member("topology", "a {@code VkPrimitiveTopology} defining the primitive topology")
+	VkPrimitiveTopology.member("topology", "a {@code VkPrimitiveTopology} defining the primitive topology").links("PRIMITIVE_TOPOLOGY_\\w+")
 	VkBool32.member("primitiveRestartEnable", "controls whether a special vertex index value is treated as restarting the assembly of primitives")
 }.nativeType
 
@@ -1881,9 +1890,9 @@ val VkPipelineRasterizationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineR
 	VkPipelineRasterizationStateCreateFlags.member("flags", "reserved for future use")
 	VkBool32.member("depthClampEnable", "controls whether to clamp the fragment’s depth values instead of clipping primitives to the z planes of the frustum")
 	VkBool32.member("rasterizerDiscardEnable", "controls whether primitives are discarded immediately before the rasterization stage")
-	VkPolygonMode.member("polygonMode", "the triangle rendering mode")
-	VkCullModeFlags.member("cullMode", "the triangle facing direction used for primitive culling")
-	VkFrontFace.member("frontFace", "the front-facing triangle orientation to be used for culling")
+	VkPolygonMode.member("polygonMode", "the triangle rendering mode").links("POLYGON_MODE_\\w+")
+	VkCullModeFlags.member("cullMode", "the triangle facing direction used for primitive culling").links("CULL_MODE_\\w+")
+	VkFrontFace.member("frontFace", "the front-facing triangle orientation to be used for culling").links("FRONT_FACE_\\w+")
 	VkBool32.member("depthBiasEnable", "controls whether to bias fragment depth values")
 	float.member("depthBiasConstantFactor", "a scalar factor controlling the constant depth value added to each fragment")
 	float.member("depthBiasClamp", "the maximum (or minimum) depth bias of a fragment")
@@ -1906,6 +1915,7 @@ val VkPipelineMultisampleStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineMul
 	pNext()
 	VkPipelineMultisampleStateCreateFlags.member("flags", "reserved for future use")
 	VkSampleCountFlagBits.member("rasterizationSamples", "a {@code VkSampleCountFlagBits} specifying the number of samples per pixel used in rasterization")
+		.links("SAMPLE_COUNT_\\w+")
 	VkBool32.member("sampleShadingEnable", "specifies that fragment shading executes per-sample if #TRUE, or per-fragment if #FALSE")
 	float.member("minSampleShading", "the minimum fraction of sample shading")
 	nullable..VkSampleMask.const_p.member(
@@ -1930,10 +1940,10 @@ val VkStencilOpState = struct(VULKAN_PACKAGE, "VkStencilOpState") {
 		${ValidityStructs.VkStencilOpState}
 		"""
 
-	VkStencilOp.member("failOp", "the action performed on samples that fail the stencil test")
+	VkStencilOp.member("failOp", "the action performed on samples that fail the stencil test").links("STENCIL_OP_\\w+")
 	VkStencilOp.member("passOp", "the action performed on samples that pass both the depth and stencil tests")
 	VkStencilOp.member("depthFailOp", "the action performed on samples that pass the stencil test and fail the depth test")
-	VkCompareOp.member("compareOp", "the comparison operator used in the stencil test")
+	VkCompareOp.member("compareOp", "the comparison operator used in the stencil test").links("COMPARE_OP_\\w+")
 	uint32_t.member("compareMask", "selects the bits of the unsigned integer stencil values participating in the stencil test")
 	uint32_t.member("writeMask", "selects the bits of the unsigned integer stencil values updated by the stencil test in the stencil framebuffer attachment")
 	uint32_t.member("reference", "an integer reference value that is used in the unsigned stencil comparison")
@@ -1955,7 +1965,7 @@ val VkPipelineDepthStencilStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDe
 	VkPipelineDepthStencilStateCreateFlags.member("flags", "reserved for future use")
 	VkBool32.member("depthTestEnable", "controls whether depth testing is enabled")
 	VkBool32.member("depthWriteEnable", "controls whether depth writes are enabled")
-	VkCompareOp.member("depthCompareOp", "the comparison operator used in the depth test")
+	VkCompareOp.member("depthCompareOp", "the comparison operator used in the depth test").links("COMPARE_OP_\\w+")
 	VkBool32.member("depthBoundsTestEnable", "controls whether depth bounds testing is enabled")
 	VkBool32.member("stencilTestEnable", "controls whether stencil testing is enabled")
 	VkStencilOpState.member("front", "control the parameters of the stencil test for front facing primitives")
@@ -1977,15 +1987,18 @@ val VkPipelineColorBlendAttachmentState = struct(VULKAN_PACKAGE, "VkPipelineColo
 
 	VkBool32.member("blendEnable", "controls whether blending is enabled for the corresponding color attachment")
 	VkBlendFactor.member("srcColorBlendFactor", "selects which blend factor is used to determine the source factors S<sub>r</sub>,S<sub>g</sub>,S<sub>b</sub>")
+		.links("BLEND_FACTOR_\\w+")
 	VkBlendFactor.member(
 		"dstColorBlendFactor",
 		"selects which blend factor is used to determine the destination factors D<sub>r</sub>,D<sub>g</sub>,D<sub>b</sub>"
 	)
 	VkBlendOp.member("colorBlendOp", "selects which blend operation is used to calculate the RGB values to write to the color attachment")
+		.links("BLEND_OP_\\w+")
 	VkBlendFactor.member("srcAlphaBlendFactor", "selects which blend factor is used to determine the source factor S<sub>a</sub>")
 	VkBlendFactor.member("dstAlphaBlendFactor", "selects which blend factor is used to determine the destination factor D<sub>a</sub>")
 	VkBlendOp.member("alphaBlendOp", "selects which blend operation is use to calculate the alpha values to write to the color attachment")
 	VkColorComponentFlags.member("colorWriteMask", "a bitmask selecting which of the R, G, B, and/or A components are enabled for writing")
+		.flagLinks("COLOR_COMPONENT")
 }.nativeType
 
 val VkPipelineColorBlendStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineColorBlendStateCreateInfo") {
@@ -2003,7 +2016,7 @@ val VkPipelineColorBlendStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineColo
 	pNext()
 	VkPipelineColorBlendStateCreateFlags.member("flags", "reserved for future use")
 	VkBool32.member("logicOpEnable", "controls whether to apply logical operations")
-	VkLogicOp.member("logicOp", "selects which logical operation to apply")
+	VkLogicOp.member("logicOp", "selects which logical operation to apply").links("LOGIC_OP_\\w+")
 	AutoSize("pAttachments", optional = true)..uint32_t.member(
 		"attachmentCount",
 		"the number of ##VkPipelineColorBlendAttachmentState elements in {@code pAttachments}"
@@ -2055,6 +2068,7 @@ val VkGraphicsPipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkGraphicsPipelin
 	sType(this)
 	pNext()
 	VkPipelineCreateFlags.member("flags", "a bitfield of {@code VkPipelineCreateFlagBits} controlling how the pipeline will be generated")
+		.flagLinks("PIPELINE_CREATE")
 	AutoSize("pStages")..uint32_t.member("stageCount", "the number of entries in the {@code pStages} array")
 	VkPipelineShaderStageCreateInfo.const_p.buffer(
 		"pStages",
@@ -2138,6 +2152,7 @@ val VkComputePipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkComputePipelineC
 	sType(this)
 	pNext()
 	VkPipelineCreateFlags.member("flags", "provides options for pipeline creation, and is of type {@code VkPipelineCreateFlagBits}")
+		.flagLinks("PIPELINE_CREATE")
 	VkPipelineShaderStageCreateInfo.member("stage", "a ##VkPipelineShaderStageCreateInfo describing the compute shader")
 	VkPipelineLayout.member("layout", "the description of binding locations used by both the pipeline and descriptor sets used with the pipeline")
 	VkPipeline.member("basePipelineHandle", "a pipeline to derive from")
@@ -2156,6 +2171,7 @@ val VkPushConstantRange = struct(VULKAN_PACKAGE, "VkPushConstantRange") {
 		"""
 
 	VkShaderStageFlags.member("stageFlags", "a set of stage flags describing the shader stages that will access a range of push constants")
+		.links("SHADER_STAGE_\\w+")
 	uint32_t.member("offset", "the start offset, in bytes, consumed by the range")
 	uint32_t.member("size", "the size, in bytes, consumed by the range")
 }.nativeType
@@ -2202,18 +2218,18 @@ val VkSamplerCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
 	VkSamplerCreateFlags.member("flags", "reserved for future use")
 	VkFilter.member("magFilter", "the magnification filter to apply to lookups")
 	VkFilter.member("minFilter", "the minification filter to apply to lookups")
-	VkSamplerMipmapMode.member("mipmapMode", "the mipmap filter to apply to lookups")
-	VkSamplerAddressMode.member("addressModeU", "the addressing mode for outside [0..1] range for U coordinate")
+	VkSamplerMipmapMode.member("mipmapMode", "the mipmap filter to apply to lookups").links("SAMPLER_MIPMAP_MODE_\\w+")
+	VkSamplerAddressMode.member("addressModeU", "the addressing mode for outside [0..1] range for U coordinate").links("SAMPLER_ADDRESS_MODE_\\w+")
 	VkSamplerAddressMode.member("addressModeV", "the addressing mode for outside [0..1] range for V coordinate")
 	VkSamplerAddressMode.member("addressModeW", "the addressing mode for outside [0..1] range for W coordinate")
 	float.member("mipLodBias", "the bias to be added to mipmap LOD calculation and bias provided by image sampling functions in SPIR-V")
 	VkBool32.member("anisotropyEnable", "is #TRUE to enable anisotropic filtering, or #FALSE otherwise")
 	float.member("maxAnisotropy", "the anisotropy value clamp")
 	VkBool32.member("compareEnable", "is #TRUE to enable comparison against a reference value during lookups, or #FALSE otherwise")
-	VkCompareOp.member("compareOp", "the comparison function to apply to fetched data before filtering")
+	VkCompareOp.member("compareOp", "the comparison function to apply to fetched data before filtering").links("COMPARE_OP_\\w+")
 	float.member("minLod", "the minimum value to which the computed level-of-detail value will be clamped")
 	float.member("maxLod", "the maximum value to which the computed level-of-detail value will be clamped")
-	VkBorderColor.member("borderColor", "the predefined border color to use")
+	VkBorderColor.member("borderColor", "the predefined border color to use").links("BORDER_COLOR_\\w+")
 	VkBool32.member("unnormalizedCoordinates", "controls whether to use unnormalized or normalized texel coordinates to address texels of the image")
 }
 
@@ -2230,6 +2246,7 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
 
 	uint32_t.member("binding", "the binding number of this entry and corresponds to a resource of the same binding number in the shader stages")
 	VkDescriptorType.member("descriptorType", "a {@code VkDescriptorType} specifying which type of resource descriptors are used for this binding")
+		.links("DESCRIPTOR_TYPE_\\w+")
 	uint32_t.member(
 		"descriptorCount",
 		"""
@@ -2240,7 +2257,7 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
 	VkShaderStageFlags.member(
 		"stageFlags",
 		"a bitfield of {@code VkShaderStageFlagBits} specifying which pipeline shader stages can access a resource for this binding"
-	)
+	).flagLinks("SHADER_STAGE")
 	nullable..VkSampler.const_p.member(
 		"pImmutableSamplers",
 		"""
@@ -2283,7 +2300,7 @@ val VkDescriptorPoolSize = struct(VULKAN_PACKAGE, "VkDescriptorPoolSize") {
 		${ValidityStructs.VkDescriptorPoolSize}
 		"""
 
-	VkDescriptorType.member("type", "the type of descriptor")
+	VkDescriptorType.member("type", "the type of descriptor").links("DESCRIPTOR_TYPE_\\w+")
 	uint32_t.member("descriptorCount", "the number of descriptors of that type to allocate")
 }.nativeType
 
@@ -2362,7 +2379,7 @@ val VkDescriptorImageInfo = struct(VULKAN_PACKAGE, "VkDescriptorImageInfo") {
 		the layout that the image will be in at the time this descriptor is accessed. {@code imageLayout} is used in descriptor updates for types
 		#DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and #DESCRIPTOR_TYPE_INPUT_ATTACHMENT.
 		"""
-	)
+	).links("IMAGE_LAYOUT_\\w+")
 }.nativeType
 
 val VkDescriptorBufferInfo = struct(VULKAN_PACKAGE, "VkDescriptorBufferInfo") {
@@ -2412,7 +2429,7 @@ val VkWriteDescriptorSet_p = struct_p(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
 		##VkDescriptorSetLayoutBinding for {@code dstSet} at {@code dstBinding}. The type of the descriptor also controls which array the descriptors are taken
 		from.
 		"""
-	)
+	).links("DESCRIPTOR_TYPE_\\w+")
 	nullable..VkDescriptorImageInfo.const_p.buffer("pImageInfo", "points to an array of ##VkDescriptorImageInfo structures or is ignored")
 	nullable..VkDescriptorBufferInfo.const_p.buffer("pBufferInfo", "points to an array of ##VkDescriptorBufferInfo structures or is ignored")
 	nullable..VkBufferView.const_p.member("pTexelBufferView", "points to an array of {@code VkBufferView} handles or is ignored")
@@ -2483,16 +2500,17 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
 		"""
 
 	VkAttachmentDescriptionFlags.member("flags", "a bitfield of {@code VkAttachmentDescriptionFlagBits} describing additional properties of the attachment")
-	VkFormat.member("format", "a {@code VkFormat} value specifying the format of the image that will be used for the attachment")
-	VkSampleCountFlagBits.member("samples", "the number of samples of the image as defined in {@code VkSampleCountFlagBits}")
+		.flagLinks("ATTACHMENT_DESCRIPTION")
+	VkFormat.member("format", "a {@code VkFormat} value specifying the format of the image that will be used for the attachment").links("FORMAT_\\w+")
+	VkSampleCountFlagBits.member("samples", "the number of samples of the image as defined in {@code VkSampleCountFlagBits}").links("SAMPLE_COUNT_\\w+")
 	VkAttachmentLoadOp.member(
 		"loadOp",
 		"specifies how the contents of color and depth components of the attachment are treated at the beginning of the subpass where it is first used"
-	)
+	).links("ATTACHMENT_LOAD_OP_\\w+")
 	VkAttachmentStoreOp.member(
 		"storeOp",
 		"specifies how the contents of color and depth components of the attachment are treated at the end of the subpass where it is last used"
-	)
+	).links("ATTACHMENT_STORE_OP_\\w+")
 	VkAttachmentLoadOp.member(
 		"stencilLoadOp",
 		"""
@@ -2508,7 +2526,14 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
 		"""
 	)
 	VkImageLayout.member("initialLayout", "the layout the attachment image subresource will be in when a render pass instance begins")
-	VkImageLayout.member("finalLayout", "a bitfield of {@code VkAttachmentDescriptionFlagBits} describing additional properties of the attachment")
+		.links("IMAGE_LAYOUT_\\w+")
+	VkImageLayout.member(
+		"finalLayout",
+		"""
+		the layout the attachment image subresource will be transitioned to when a render pass instance ends. During a render pass instance, an attachment can
+		use a different layout in each subpass, if desired.
+		"""
+	)
 }.nativeType
 
 val VkAttachmentReference = struct(VULKAN_PACKAGE, "VkAttachmentReference") {
@@ -2535,7 +2560,7 @@ val VkAttachmentReference = struct(VULKAN_PACKAGE, "VkAttachmentReference") {
 		a {@code VkImageLayout} value specifying the layout the attachment uses during the subpass. The implementation will automatically perform layout
 		transitions as needed between subpasses to make each subpass use the requested layouts.
 		"""
-	)
+	).links("IMAGE_LAYOUT_\\w+")
 }.nativeType
 
 val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
@@ -2553,7 +2578,7 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
 	VkPipelineBindPoint.member(
 		"pipelineBindPoint",
 		"a {@code VkPipelineBindPoint} value specifying whether this is a compute or graphics subpass. Currently, only graphics subpasses are supported."
-	)
+	).links("PIPELINE_BIND_POINT_\\w+")
 	AutoSize("pInputAttachments", optional = true)..uint32_t.member("inputAttachmentCount", "the number of input attachments")
 	VkAttachmentReference.const_p.buffer(
 		"pInputAttachments",
@@ -2604,11 +2629,11 @@ val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
 
 	uint32_t.member("srcSubpass", "the subpass index of the producer subpass")
 	uint32_t.member("dstSubpass", "the subpass index of the consumer subpass")
-	VkPipelineStageFlags.member("srcStageMask", "a combination of {@code VkPipelineStageFlagBits} values")
+	VkPipelineStageFlags.member("srcStageMask", "a combination of {@code VkPipelineStageFlagBits} values").flagLinks("PIPELINE_STAGE")
 	VkPipelineStageFlags.member("dstStageMask", "a combination of {@code VkPipelineStageFlagBits} values")
-	VkAccessFlags.member("srcAccessMask", "a combination of {@code VkAccessFlagBits} values")
+	VkAccessFlags.member("srcAccessMask", "a combination of {@code VkAccessFlagBits} values").flagLinks("ACCESS")
 	VkAccessFlags.member("dstAccessMask", "a combination of {@code VkAccessFlagBits} values")
-	VkDependencyFlags.member("dependencyFlags", "a combination of {@code VkDependencyFlagBits} values")
+	VkDependencyFlags.member("dependencyFlags", "a combination of {@code VkDependencyFlagBits} values").flagLinks("DEPENDENCY")
 }.nativeType
 
 val VkRenderPassCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
@@ -2668,6 +2693,7 @@ val VkCommandPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandPoolCreateInf
 	sType(this)
 	pNext()
 	VkCommandPoolCreateFlags.member("flags", "a combination of bitfield flags indicating usage behavior for the pool and command buffers allocated from it")
+		.flagLinks("COMMAND_POOL_CREATE")
 	uint32_t.member("queueFamilyIndex", "designates a queue family")
 }
 
@@ -2685,7 +2711,7 @@ val VkCommandBufferAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferAll
 	sType(this)
 	pNext()
 	VkCommandPool.member("commandPool", "the name of the command pool that the command buffers allocate their memory from")
-	VkCommandBufferLevel.member("level", "determines whether the command buffers are primary or secondary command buffers")
+	VkCommandBufferLevel.member("level", "determines whether the command buffers are primary or secondary command buffers").links("COMMAND_BUFFER_LEVEL_\\w+")
 	uint32_t.member("commandBufferCount", "the number of command buffers to allocate from the pool")
 }
 
@@ -2730,14 +2756,14 @@ val VkCommandBufferInheritanceInfo = struct(VULKAN_PACKAGE, "VkCommandBufferInhe
 	VkQueryControlFlags.member(
 		"queryFlags",
 		"indicates the query flags that can be used by an active occlusion query in the primary command buffer when this secondary command buffer is executed"
-	)
+	).flagLinks("QUERY_CONTROL")
 	VkQueryPipelineStatisticFlags.member(
 		"pipelineStatistics",
 		"""
 		indicates the set of pipeline statistics that can be counted by an active query in the primary command buffer when this secondary command buffer is
 		executed
 		"""
-	)
+	).flagLinks("QUERY_PIPELINE_STATISTIC")
 }.nativeType
 
 val VkCommandBufferBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferBeginInfo") {
@@ -2754,6 +2780,7 @@ val VkCommandBufferBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferBeginI
 	sType(this)
 	pNext()
 	VkCommandBufferUsageFlags.member("flags", "a combination of bitfield flags indicating usage behavior for the command buffer")
+		.flagLinks("COMMAND_BUFFER_USAGE")
 	nullable..VkCommandBufferInheritanceInfo.const_p.member(
 		"pInheritanceInfo",
 		"""
@@ -2789,6 +2816,7 @@ val VkImageSubresourceLayers = struct(VULKAN_PACKAGE, "VkImageSubresourceLayers"
 		"""
 
 	VkImageAspectFlags.member("aspectMask", "a combination of {@code VkImageAspectFlagBits}, selecting the color, depth and/or stencil aspects")
+		.flagLinks("IMAGE_ASPECT")
 	uint32_t.member("mipLevel", "the mipmap level")
 	uint32_t.member("baseArrayLayer", "the starting layer")
 	uint32_t.member("layerCount", "the number of layers")
@@ -2937,6 +2965,7 @@ val VkClearAttachment_p = struct_p(VULKAN_PACKAGE, "VkClearAttachment") {
 		"""
 
 	VkImageAspectFlags.member("aspectMask", "a mask selecting the color, depth and/or stencil aspects of the attachment to be cleared")
+		.flagLinks("IMAGE_ASPECT")
 	uint32_t.member(
 		"colorAttachment",
 		"""
@@ -3001,7 +3030,7 @@ val VkMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkMemoryBarrier") {
 	VkAccessFlags.member(
 		"srcAccessMask",
 		"a mask of the classes of memory accesses performed by the first set of commands that will participate in the dependency"
-	)
+	).flagLinks("ACCESS")
 	VkAccessFlags.member(
 		"dstAccessMask",
 		"a mask of the classes of memory accesses performed by the second set of commands that will participate in the dependency"
@@ -3026,7 +3055,7 @@ val VkBufferMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkBufferMemoryBarrier") 
 	VkAccessFlags.member(
 		"srcAccessMask",
 		"a mask of the classes of memory accesses performed by the first set of commands that will participate in the dependency"
-	)
+	).flagLinks("ACCESS")
 	VkAccessFlags.member(
 		"dstAccessMask",
 		"a mask of the classes of memory accesses performed by the second set of commands that will participate in the dependency"
@@ -3068,12 +3097,12 @@ val VkImageMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 	VkAccessFlags.member(
 		"srcAccessMask",
 		"a mask of the classes of memory accesses performed by the first set of commands that will participate in the dependency"
-	)
+	).flagLinks("ACCESS")
 	VkAccessFlags.member(
 		"dstAccessMask",
 		"a mask of the classes of memory accesses performed by the second set of commands that will participate in the dependency"
 	)
-	VkImageLayout.member("oldLayout", "describes the current layout of the image subresource(s)")
+	VkImageLayout.member("oldLayout", "describes the current layout of the image subresource(s)").links("IMAGE_LAYOUT_\\w+")
 	VkImageLayout.member("newLayout", "describes the new layout of the image subresource(s)")
 	uint32_t.member(
 		"srcQueueFamilyIndex",

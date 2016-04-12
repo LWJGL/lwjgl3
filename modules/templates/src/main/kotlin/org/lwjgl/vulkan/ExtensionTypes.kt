@@ -31,7 +31,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 	),
 	uint64_t.IN(
 		"object",
-		"gives the object where the issue was detected. {@code object} may be VK10#VK_NULL_HANDLE if there is no object associated with the event."
+		"gives the object where the issue was detected. {@code object} may be #NULL_HANDLE if there is no object associated with the event."
 	),
 	size_t.IN(
 		"location",
@@ -44,7 +44,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 
 	returnDoc =
 	"""
-	a {@code VkBool32} that indicates to the calling layer if the Vulkan call should be aborted or not. Applications should always return VK10#VK_FALSE so that
+	a {@code VkBool32} that indicates to the calling layer if the Vulkan call should be aborted or not. Applications should always return #FALSE so that
 	they see the same behavior with and without validation layers enabled.
 	"""
 ) {
@@ -108,7 +108,7 @@ val VkDebugReportCallbackCreateInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugRepo
 
     sType(this)
     pNext()
-    VkDebugReportFlagsEXT.member("flags", "indicate which event(s) will cause this callback to be called")
+    VkDebugReportFlagsEXT.member("flags", "indicate which event(s) will cause this callback to be called").flagLinks("DEBUG_REPORT")
     PFN_vkDebugReportCallbackEXT.member("pfnCallback", "the application callback function to call")
     nullable..voidptr.member("pUserData", "user data to be passed to the callback")
 }
@@ -158,14 +158,14 @@ val VkSurfaceCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceCapabilities
 	VkSurfaceTransformFlagsKHR.member(
 		"supportedTransforms",
 		"a bitfield of {@code VkSurfaceTransformFlagBitsKHR}, describing the presentation transforms supported for the surface on the specified device"
-	)
+	).flagLinks("SURFACE_TRANSFORM")
 	VkSurfaceTransformFlagBitsKHR.member(
 		"currentTransform",
 		"""
 		a bitfield of {@code VkSurfaceTransformFlagBitsKHR}, describing the surface’s current transform relative to the presentation engine’s natural
 		orientation
 		"""
-	)
+	).links("SURFACE_TRANSFORM_\\w+_BIT_KHR")
 	VkCompositeAlphaFlagsKHR.member(
 		"supportedCompositeAlpha",
 		"""
@@ -173,14 +173,14 @@ val VkSurfaceCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceCapabilities
 		specified device. Opaque composition can be achieved in any alpha compositing mode by either using a swapchain image format that has no alpha
 		component, or by ensuring that all pixels in the swapchain images have an alpha value of 1.0.
 		"""
-	)
+	).flagLinks("COMPOSITE_ALPHA")
 	VkImageUsageFlags.member(
 		"supportedUsageFlags",
 		"""
 		a bitfield of {@code VkImageUsageFlagBits} representing the ways the application can use the presentable images of a swapchain created for the surface
 		on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT must be included in the set but implementations may support additional usages.
 		"""
-	)
+	).flagLinks("IMAGE_USAGE")
 }
 
 val VkSurfaceFormatKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutable = false) {
@@ -194,8 +194,8 @@ val VkSurfaceFormatKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutabl
 		${ValidityStructs.VkSurfaceFormatKHR}
 		"""
 
-	VkFormat.member("format", "a {@code VkFormat} that is compatible with the specified surface")
-	VkColorSpaceKHR.member("colorSpace", "a presentation {@code VkColorSpaceKHR} that is compatible with the surface")
+	VkFormat.member("format", "a {@code VkFormat} that is compatible with the surface").links("FORMAT_\\w+")
+	VkColorSpaceKHR.member("colorSpace", "a presentation {@code VkColorSpaceKHR} that is compatible with the surface").links("COLORSPACE_\\w+_KHR")
 }
 
 // KHR_display
@@ -229,7 +229,7 @@ val VkDisplayPropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPropertiesKHR"
 	)
 	VkExtent2D.member("physicalDimensions", "the physical width and height of the visible portion of the display, in millimeters")
 	VkExtent2D.member("physicalResolution", "the physical, native, or preferred resolution of the display")
-	VkSurfaceTransformFlagsKHR.member("supportedTransforms", "which transforms are supported by this display")
+	VkSurfaceTransformFlagsKHR.member("supportedTransforms", "which transforms are supported by this display").flagLinks("SURFACE_TRANSFORM")
 	VkBool32.member(
 		"planeReorderPossible",
 		"""
@@ -311,7 +311,7 @@ val VkDisplayPlaneCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlaneCa
 		${ValidityStructs.VkDisplayPlaneCapabilitiesKHR}
 		"""
 	
-	VkDisplayPlaneAlphaFlagsKHR.member("supportedAlpha", "a bitmask describing the supported alpha blending modes")
+	VkDisplayPlaneAlphaFlagsKHR.member("supportedAlpha", "a bitmask describing the supported alpha blending modes").flagLinks("DISPLAY_PLANE_ALPHA")
 	VkOffset2D.member("minSrcPosition", "the minimum source rect offset supported by this plane using the specified mode")
 	VkOffset2D.member("maxSrcPosition", "the maximum source rect offset supported by this plane using the specified mode")
 	VkExtent2D.member("minSrcExtent", "the minimum source rect size supported by this plane using the specified mode")
@@ -358,8 +358,9 @@ val VkDisplaySurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplaySurface
 	uint32_t.member("planeIndex", "the plane on which this surface appears")
 	uint32_t.member("planeStackIndex", "the z-order of the plane")
 	VkSurfaceTransformFlagBitsKHR.member("transform", "the transform to apply to the images as part of the scannout operation")
+		.links("SURFACE_TRANSFORM_\\w+_BIT_KHR")
 	float.member("globalAlpha", "the global alpha value. This value is ignored if {@code alphaMode} is not #DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR.")
-	VkDisplayPlaneAlphaFlagBitsKHR.member("alphaMode", "the type of alpha blending to use")
+	VkDisplayPlaneAlphaFlagBitsKHR.member("alphaMode", "the type of alpha blending to use").links("DISPLAY_PLANE_ALPHA_\\w+_BIT_KHR")
 	VkExtent2D.member("imageExtent", "the size of the presentable images to use with the surface")
 }
 
@@ -434,8 +435,8 @@ val VkSwapchainCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkSwapchainCreateInfo
 	    the minimum number of presentable images that the application needs. The platform will either create the swapchain with at least that many images, or
 	    will fail to create the swapchain.
 	    """)
-    VkFormat.member("imageFormat", "a {@code VkFormat} that is valid for swapchains on the specified surface")
-    VkColorSpaceKHR.member("imageColorSpace", "a {@code VkColorSpaceKHR} that is valid for swapchains on the specified surface")
+    VkFormat.member("imageFormat", "a {@code VkFormat} that is valid for swapchains on the specified surface").links("FORMAT_\\w+")
+    VkColorSpaceKHR.member("imageColorSpace", "a {@code VkColorSpaceKHR} that is valid for swapchains on the specified surface").links("COLORSPACE_\\w+_KHR")
     VkExtent2D.member(
 	    "imageExtent",
 	    """
@@ -447,8 +448,8 @@ val VkSwapchainCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkSwapchainCreateInfo
     VkImageUsageFlags.member(
 	    "imageUsage",
 	    "a bitfield of {@code VkImageUsageFlagBits}, indicating how the application will use the swapchain’s presentable images"
-    )
-    VkSharingMode.member("imageSharingMode", "the sharing mode used for the images of the swapchain")
+    ).flagLinks("IMAGE_USAGE")
+    VkSharingMode.member("imageSharingMode", "the sharing mode used for the images of the swapchain").links("SHARING_MODE_\\w+")
     AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member(
 	    "queueFamilyIndexCount",
 	    "the number of queue families having access to the images of the swapchain in case {@code imageSharingMode} is #SHARING_MODE_CONCURRENT")
@@ -462,21 +463,21 @@ val VkSwapchainCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkSwapchainCreateInfo
 		the image content prior to presentation. If it does not match the {@code currentTransform} value returned by
 		#GetPhysicalDeviceSurfaceCapabilitiesKHR(), the presentation engine will transform the image content as part of the presentation operation.
 	    """
-    )
+    ).links("SURFACE_TRANSFORM_\\w+_BIT_KHR")
     VkCompositeAlphaFlagBitsKHR.member(
 	    "compositeAlpha",
 	    """
 	    a bitfield of {@code VkCompositeAlphaFlagBitsKHR}, indicating the alpha compositing mode to use when this surface is composited together with other
 	    surfaces on certain window systems
 	    """
-    )
+    ).links("COMPOSITE_ALPHA_\\w+_BIT_KHR")
     VkPresentModeKHR.member(
 	    "presentMode",
 	    """
 	    the presentation mode the swapchain will use. A swapchain’s present mode determines how incoming present requests will be processed and queued
 	    internally.
 	    """
-    )
+    ).links("PRESENT_MODE_\\w+_KHR")
     VkBool32.member(
 	    "clipped",
 	    """
