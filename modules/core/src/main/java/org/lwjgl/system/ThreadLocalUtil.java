@@ -19,6 +19,10 @@ public final class ThreadLocalUtil {
 
 	private static final State TLS = getInstance();
 
+	static {
+		apiLog("ThreadLocalUtil state: " + TLS.getClass().getSimpleName());
+	}
+
 	private ThreadLocalUtil() {
 	}
 
