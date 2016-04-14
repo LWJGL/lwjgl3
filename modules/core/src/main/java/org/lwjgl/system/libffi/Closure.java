@@ -87,9 +87,6 @@ public abstract class Closure extends Pointer.Default {
 			: FFI_DEFAULT_ABI;
 	}
 
-	/** The user data structure. */
-	private long user_data;
-
 	/** Pointer to libFFI's closure structure. */
 	private long closure;
 
@@ -105,7 +102,7 @@ public abstract class Closure extends Pointer.Default {
 		this.closure = init.writable;
 
 		// Struct containing two pointers
-		user_data = nmemAlloc(POINTER_SIZE * 2);
+		long user_data = nmemAlloc(POINTER_SIZE * 2);
 
 		// First pointer is a weak reference to this closure instance.
 		// ----
@@ -173,12 +170,13 @@ public abstract class Closure extends Pointer.Default {
 	public void free() {
 		address(); // already freed check
 
+		long user_data = FFIClosure.nuser_data(closure);
+
 		memDeleteWeakGlobalRef(memGetAddress(user_data));
 		if ( Checks.DEBUG )
 			nmemFree(memGetAddress(user_data + POINTER_SIZE));
 
 		nmemFree(user_data);
-		user_data = NULL;
 
 		nffi_closure_free(closure);
 		closure = NULL;
@@ -186,7 +184,7 @@ public abstract class Closure extends Pointer.Default {
 
 	/** Returns true if this Closure has not been destroyed. */
 	public boolean isValid() {
-		return user_data != NULL;
+		return closure != NULL;
 	}
 
 	/**

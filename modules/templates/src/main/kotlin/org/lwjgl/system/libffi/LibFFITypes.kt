@@ -32,20 +32,17 @@ val ffi_type_p = struct_p(FFI_PACKAGE, "FFIType", nativeName = "ffi_type") {
 
 	size_t.member("size", "set by libffi; you should initialize it to zero.")
 	unsigned_short.member("alignment", "set by libffi; you should initialize it to zero.")
-	unsigned_short.member("type", "for a structure, this should be set to LibFFI#FFI_TYPE_STRUCT.")
-	nullable..this.nativeType.p.p.member("elements", "a null-terminated array of pointers to {@code ffi_type} objects. There is one element per field of the struct.") // self-reference
+	unsigned_short.member("type", "for a structure, this should be set to #TYPE_STRUCT.")
+	nullable..this.nativeType.p.p.member(
+		"elements",
+		"a null-terminated array of pointers to {@code ffi_type} objects. There is one element per field of the struct."
+	)
 }
 val ffi_type_pp = ffi_type_p.p
 
-val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", nativeName = "ffi_cif", mutable = false) {
+val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", nativeName = "ffi_cif", mutable = false, nativeLayout = true /* FFI_EXTRA_CIF_FIELDS */) {
 	documentation = "Contains information about a libffi call interface."
-
-	ffi_abi.member("abi", "")
-	AutoSize("arg_types")..unsigned.member("nargs", "")
-	ffi_type_pp.member("arg_types", "")
-	ffi_type_p.member("rtype", "")
-	unsigned.member("bytes", "")
-	unsigned.member("flags", "")
+	nativeImport("ffi.h")
 }
 
 // Closures
@@ -54,8 +51,8 @@ val ffi_closure_p = struct_p(FFI_PACKAGE, "FFIClosure", nativeName = "ffi_closur
 	documentation = "The libffi closure structure."
 	nativeImport("ffi.h")
 
-	ffi_cif_p.member("cif", "")
-	voidptr.member("fun", "")
-	voidptr.member("user_data", "")
+	ffi_cif_p.member("cif", "a pointer to an {@code ffi_cif} structure")
+	voidptr.member("fun", "a pointer to a function")
+	voidptr.member("user_data", "a pointer to user-specified data")
 }
 val FFI_CLOSURE_FUN = "FFI_CLOSURE_FUN".opaque_p
