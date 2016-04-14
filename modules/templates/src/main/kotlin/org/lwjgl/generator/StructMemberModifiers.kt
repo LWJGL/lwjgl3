@@ -8,8 +8,10 @@ package org.lwjgl.generator
 	required AutoSize + non-null reference: ref must not be null and size must not be 0.
 	optional AutoSize + non-null reference: ref may be null, if size is 0.
 
-	required AutoSize + nullable reference: ref may be null, even if size is not 0. Size must not be 0. (this is not validated, we assume the API does)
+	required AutoSize + nullable reference: ref may be null, even if size is not 0. Size may be 0.
+		- setting ref to null, does NOT change the size
 	optional AutoSize + nullable reference: ref may be null, even if size is not 0. Size may be 0.
+		- setting ref to null, sets the size to 0
 
 	required atLeastOne AutoSize + nullable references: one of the references must not be null and size must not be 0.
 	optional atLeastOne AutoSize + nullable references: one of the references must not be null if size is not 0.

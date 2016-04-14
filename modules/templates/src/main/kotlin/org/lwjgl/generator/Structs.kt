@@ -1037,6 +1037,8 @@ ${validations.joinToString("\n")}
 			print(if ( m has nullable || autoSize.optional ) {
 				if ( autoSize.atLeastOne )
 					" if ( value != null ) n${capacity.name}($STRUCT, value.remaining());"
+				else if ( m has nullable && !autoSize.optional )
+					" if ( value != null ) n${capacity.name}($STRUCT, value.remaining());"
 				else
 					" n${capacity.name}($STRUCT, value == null ? 0 : value.remaining());"
 			} else
