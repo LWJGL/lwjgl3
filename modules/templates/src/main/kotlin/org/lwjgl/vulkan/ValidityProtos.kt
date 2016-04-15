@@ -400,8 +400,8 @@ val vkCmdBlitImage =
 			""",
 			"{@code srcImage} $must have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag",
 			"""
-			{@code srcImageLayout} $must specify the layout of the subresources of {@code srcImage} specified in {@code pRegions} at the time this command is
-			executed on a {@code VkDevice}
+			{@code srcImageLayout} $must specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this
+			command is executed on a {@code VkDevice}
 			""",
 			"{@code srcImageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
 			"""
@@ -411,8 +411,8 @@ val vkCmdBlitImage =
 			""",
 			"{@code dstImage} $must have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag",
 			"""
-			{@code dstImageLayout} $must specify the layout of the subresources of {@code dstImage} specified in {@code pRegions} at the time this command is
-			executed on a {@code VkDevice}
+			{@code dstImageLayout} $must specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this
+			command is executed on a {@code VkDevice}
 			""",
 			"{@code dstImageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
 			"The sample count of {@code srcImage} and {@code dstImage} $must both be equal to #SAMPLE_COUNT_1_BIT",
@@ -474,11 +474,11 @@ val vkCmdClearColorImage =
 			"Each of {@code commandBuffer} and {@code image} $must have been created, allocated or retrieved from the same {@code VkDevice}",
 			"{@code image} $must have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag",
 			"""
-			{@code imageLayout} $must specify the layout of the subresource ranges of {@code image} specified in {@code pRanges} at the time this command is
-			executed on a {@code VkDevice}
+			{@code imageLayout} $must specify the layout of the image subresource ranges of {@code image} specified in {@code pRanges} at the time this command
+			is executed on a {@code VkDevice}
 			""",
 			"{@code imageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
-			"The image range of any given element of {@code pRanges} $must be a subresource range that is contained within {@code image}"
+			"The image range of any given element of {@code pRanges} $must be a image subresource range that is contained within {@code image}"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -501,11 +501,11 @@ val vkCmdClearDepthStencilImage =
 			"Each of {@code commandBuffer} and {@code image} $must have been created, allocated or retrieved from the same {@code VkDevice}",
 			"{@code image} $must have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag",
 			"""
-			{@code imageLayout} $must specify the layout of the subresource ranges of {@code image} specified in {@code pRanges} at the time this command is
-			executed on a {@code VkDevice}
+			{@code imageLayout} $must specify the layout of the image subresource ranges of {@code image} specified in {@code pRanges} at the time this command
+			is executed on a {@code VkDevice}
 			""",
 			"{@code imageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
-			"The image range of any given element of {@code pRanges} $must be a subresource range that is contained within {@code image}"
+			"The image range of any given element of {@code pRanges} $must be a image subresource range that is contained within {@code image}"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -576,8 +576,8 @@ val vkCmdCopyBufferToImage =
 			"{@code dstImage} $must have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag",
 			"{@code dstImage} $must have a sample count equal to #SAMPLE_COUNT_1_BIT",
 			"""
-			{@code dstImageLayout} $must specify the layout of the subresources of {@code dstImage} specified in {@code pRegions} at the time this command is
-			executed on a {@code VkDevice}
+			{@code dstImageLayout} $must specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this
+			command is executed on a {@code VkDevice}
 			""",
 			"{@code dstImageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL"
 		)}
@@ -611,14 +611,14 @@ val vkCmdCopyImage =
 			""",
 			"{@code srcImage} $must have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag",
 			"""
-			{@code srcImageLayout} $must specify the layout of the subresources of {@code srcImage} specified in {@code pRegions} at the time this command is
-			executed on a {@code VkDevice}
+			{@code srcImageLayout} $must specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this
+			command is executed on a {@code VkDevice}
 			""",
 			"{@code srcImageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
 			"{@code dstImage} $must have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag",
 			"""
-			{@code dstImageLayout} $must specify the layout of the subresources of {@code dstImage} specified in {@code pRegions} at the time this command is
-			executed on a {@code VkDevice}
+			{@code dstImageLayout} $must specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this
+			command is executed on a {@code VkDevice}
 			""",
 			"{@code dstImageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
 			"The {@code VkFormat} of each of {@code srcImage} and {@code dstImage} $must be compatible, as defined below",
@@ -655,8 +655,8 @@ val vkCmdCopyImageToBuffer =
 			"{@code srcImage} $must have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag",
 			"{@code srcImage} $must have a sample count equal to #SAMPLE_COUNT_1_BIT",
 			"""
-			{@code srcImageLayout} $must specify the layout of the subresources of {@code srcImage} specified in {@code pRegions} at the time this command is
-			executed on a {@code VkDevice}
+			{@code srcImageLayout} $must specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this
+			command is executed on a {@code VkDevice}
 			""",
 			"{@code srcImageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
 			"{@code dstBuffer} $must have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag"
@@ -1412,13 +1412,13 @@ val vkCmdResolveImage =
 			"{@code srcImage} $must have a sample count equal to any valid sample count value other than #SAMPLE_COUNT_1_BIT",
 			"{@code dstImage} $must have a sample count equal to #SAMPLE_COUNT_1_BIT",
 			"""
-			{@code srcImageLayout} $must specify the layout of the subresources of {@code srcImage} specified in {@code pRegions} at the time this command is
-			executed on a {@code VkDevice}
+			{@code srcImageLayout} $must specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this
+			command is executed on a {@code VkDevice}
 			""",
 			"{@code srcImageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
 			"""
-			{@code dstImageLayout} $must specify the layout of the subresources of {@code dstImage} specified in {@code pRegions} at the time this command is
-			executed on a {@code VkDevice}
+			{@code dstImageLayout} $must specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this
+			command is executed on a {@code VkDevice}
 			""",
 			"{@code dstImageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
 			"""
@@ -1708,8 +1708,8 @@ val vkCreateBuffer =
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"{@code pBuffer} $must be a pointer to a {@code VkBuffer} handle",
 			"""
-			If the {@code flags} member of {@code pCreateInfo} includes #BUFFER_CREATE_SPARSE_BINDING_BIT or #BUFFER_CREATE_SPARSE_RESIDENCY_BIT, creating this
-			{@code VkBuffer} $mustnot cause the total required sparse memory for all currently valid sparse resources on the device to exceed
+			If the {@code flags} member of {@code pCreateInfo} includes #BUFFER_CREATE_SPARSE_BINDING_BIT, creating this {@code VkBuffer} $mustnot cause the
+			total required sparse memory for all currently valid sparse resources on the device to exceed
 			##VkPhysicalDeviceLimits{@code ::sparseAddressSpaceSize}
 			"""
 		)}"""
@@ -1869,8 +1869,8 @@ val vkCreateImage =
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"{@code pImage} $must be a pointer to a {@code VkImage} handle",
 			"""
-			If the {@code flags} member of {@code pCreateInfo} includes #IMAGE_CREATE_SPARSE_BINDING_BIT or #IMAGE_CREATE_SPARSE_RESIDENCY_BIT, creating this
-			{@code VkImage} $mustnot cause the total required sparse memory for all currently valid sparse resources on the device to exceed
+			If the {@code flags} member of {@code pCreateInfo} includes #IMAGE_CREATE_SPARSE_BINDING_BIT, creating this {@code VkImage} $mustnot cause the
+			total required sparse memory for all currently valid sparse resources on the device to exceed
 			##VkPhysicalDeviceLimits{@code ::sparseAddressSpaceSize}
 			"""
 		)}"""

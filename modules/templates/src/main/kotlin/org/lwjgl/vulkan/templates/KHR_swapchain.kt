@@ -204,7 +204,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 		If a swapchain has enough presentable images, applications $can acquire multiple images without an intervening #QueuePresentKHR(). Applications $can
 		present images in a different order than the order in which they were acquired.
 
-		If {@code timeout} is 0, {@code vkAcquireNextImageKHR} will not block, but will either succeed or return #TIMEOUT. If {@code timeout} is
+		If {@code timeout} is 0, {@code vkAcquireNextImageKHR} will not block, but will either succeed or return #NOT_READY. If {@code timeout} is
 		{@code UINT64_MAX}, the function will not return until an image is acquired from the presentation engine. Other values for {@code timeout} will cause
 		the function to return when an image becomes available, or when the specified number of nanoseconds have passed (in which case it will return
 		#TIMEOUT). An error can also cause {@code vkAcquireNextImageKHR} to return early.

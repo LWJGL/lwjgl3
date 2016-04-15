@@ -420,8 +420,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSharingMode",
 
-		"SHARING_MODE_EXCLUSIVE".enumExpr("Specifies that access to any range or subresource of the object will be exclusive to a single queue family at a time.", "0"),
-		"SHARING_MODE_CONCURRENT".enum("Specifies that concurrent access to any range or subresource of the object from multiple queue families is supported.")
+		"SHARING_MODE_EXCLUSIVE".enumExpr(
+			"Specifies that access to any range or image subresource of the object will be exclusive to a single queue family at a time.",
+			"0"
+		),
+		"SHARING_MODE_CONCURRENT".enum(
+			"Specifies that concurrent access to any range or image subresource of the object from multiple queue families is supported."
+		)
 	)
 
 	EnumConstant(
@@ -435,36 +440,36 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"IMAGE_LAYOUT_GENERAL".enum("Supports all types of device access."),
 		"IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL".enum(
 			"""
-			$must only be used as a color or resolve attachment in a {@code VkFramebuffer}. This layout is valid only for subresources of images created with
-			the #IMAGE_USAGE_COLOR_ATTACHMENT_BIT usage bit enabled.
+			$must only be used as a color or resolve attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created
+			with the #IMAGE_USAGE_COLOR_ATTACHMENT_BIT usage bit enabled.
 			"""),
 		"IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL".enum(
 			"""
-			$must only be used as a depth/stencil attachment in a {@code VkFramebuffer}. This layout is valid only for subresources of images created with the
-			#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.
+			$must only be used as a depth/stencil attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created
+			with the #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.
 			"""),
 		"IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL".enum(
 			"""
 			$must only be used as a read-only depth/stencil attachment in a {@code VkFramebuffer} and/or as a read-only image in a shader (which $can be read as
-			a sampled image, combined image/sampler and/or input attachment). This layout is valid only for subresources of images created with both the
+			a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with both the
 			#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.
 			"""
 		),
 		"IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL".enum(
 			"""
 			$must only be used as a read-only image in a shader (which $can be read as a sampled image, combined image/sampler and/or input attachment). This
-			layout is valid only for subresources of images created with the #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled.
+			layout is valid only for image subresources of images created with the #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled.
 			"""
 		),
 		"IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL".enum(
 			"""
 			$must only be used as a source image of a transfer command (see the definition of #PIPELINE_STAGE_TRANSFER_BIT). This layout is valid only for
-			subresources of images created with the #IMAGE_USAGE_TRANSFER_SRC_BIT usage bit enabled.
+			image subresources of images created with the #IMAGE_USAGE_TRANSFER_SRC_BIT usage bit enabled.
 			"""
 		),
 		"IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL".enum(
 			"""
-			$must only be used as a destination image of a transfer command. This layout is valid only for subresources of images created with the
+			$must only be used as a destination image of a transfer command. This layout is valid only for image subresources of images created with the
 			#IMAGE_USAGE_TRANSFER_DST_BIT usage bit enabled.
 			"""
 		),
@@ -1086,11 +1091,17 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"VkImageCreateFlagBits",
 
 		"IMAGE_CREATE_SPARSE_BINDING_BIT".enum("Indicates that the image will be backed using sparse memory binding.", 0x00000001),
-		"IMAGE_CREATE_SPARSE_RESIDENCY_BIT".enum("Indicates that the image $can be partially backed using sparse memory binding.", 0x00000002),
+		"IMAGE_CREATE_SPARSE_RESIDENCY_BIT".enum(
+			"""
+			Indicates that the image $can be partially backed using sparse memory binding. Images created with this flag $must also be created with the
+			#IMAGE_CREATE_SPARSE_BINDING_BIT flag.
+			""",
+			0x00000002
+		),
 		"IMAGE_CREATE_SPARSE_ALIASED_BIT".enum(
 			"""
 			Indicates that the image will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another image (or
-			another portion of the same image). Sparse images created with this flag $must also be created with the #IMAGE_CREATE_SPARSE_RESIDENCY_BIT.
+			another portion of the same image). Images created with this flag $must also be created with the #IMAGE_CREATE_SPARSE_BINDING_BIT flag.
 			""",
 			0x00000004
 		),
@@ -1429,11 +1440,17 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"VkBufferCreateFlagBits",
 
 		"BUFFER_CREATE_SPARSE_BINDING_BIT".enum("Indicates that the buffer will be backed using sparse memory binding.", 0x00000001),
-		"BUFFER_CREATE_SPARSE_RESIDENCY_BIT".enum("Indicates that the buffer $can be partially backed using sparse memory binding.", 0x00000002),
+		"BUFFER_CREATE_SPARSE_RESIDENCY_BIT".enum(
+			"""
+			Indicates that the buffer $can be partially backed using sparse memory binding. Buffers created with this flag $must also be created with the
+			#BUFFER_CREATE_SPARSE_BINDING_BIT flag.
+			""",
+			0x00000002
+		),
 		"BUFFER_CREATE_SPARSE_ALIASED_BIT".enum(
 			"""
 			Iindicates that the buffer will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another buffer
-			(or another portion of the same buffer).
+			(or another portion of the same buffer). Buffers created with this flag $must also be created with the #BUFFER_CREATE_SPARSE_BINDING_BIT flag.
 			""",
 			0x00000004
 		)
@@ -1576,7 +1593,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			ways:
 			${ul(
 				"Multiple attachments being assigned the same image view as part of framebuffer creation.",
-				"Attachments using distinct image views that correspond to the same subresource of an image.",
+				"Attachments using distinct image views that correspond to the same image subresource of an image.",
 				"Attachments using views of distinct image subresources which are bound to overlapping memory."
 			)}
 			Render passes $must include subpass dependencies (either directly or via a subpass dependency chain) between any two subpasses that operate on the
@@ -3107,14 +3124,14 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 	void(
 		"GetImageSubresourceLayout",
 		"""
-		Queries the layout of a subresource (mipLevel/arrayLayer) of an image created with linear tiling.
+		Queries the layout of an image subresource (mipLevel/arrayLayer) of an image created with linear tiling.
 		
 		${ValidityProtos.vkGetImageSubresourceLayout}
 		""",
 
 		VkDevice.IN("device", "the logical device that owns the image"),
 		VkImage.IN("image", "the image whose layout is being queried"),
-		const..VkImageSubresource_p.IN("pSubresource", "a pointer to a ##VkImageSubresource structure selecting a specific image for the subresource"),
+		const..VkImageSubresource_p.IN("pSubresource", "a pointer to a ##VkImageSubresource structure selecting a specific image for the image subresource"),
 		VkSubresourceLayout_p.OUT("pLayout", "points to a ##VkSubresourceLayout structure in which the layout is returned")
 	)
 
@@ -4510,13 +4527,13 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 		Copying to or from block-compressed images is typically done in multiples of the block. For this reason the {@code extent} $must be a multiple of the
 		block dimension. There is one exception to this rule which is required to handle compressed images created with dimensions that are not a multiple of
 		the block dimensions. If the {@code srcImage is} compressed and if {@code extent.width} is not a multiple of the block width then
-		{@code (extent.width + srcOffset.x)} $must equal the subresource width, if {@code extent.height} is not a multiple of the block height then
-		{@code (extent.height + srcOffset.y)} $must equal the subresource height and if {@code extent.depth} is not a multiple of the block depth then
-		{@code (extent.depth + srcOffset.z)} $must equal the subresource depth. Similarily if the {@code dstImage} is compressed and if {@code extent.width} is
-		not a multiple of the block width then {@code (extent.width + dstOffset.x)} $must equal the subresource width, if {@code extent.height} is not a
-		multiple of the block height then {@code (extent.height + dstOffset.y)} $must equal the subresource height and if {@code extent.depth} is not a
-		multiple of the block depth then {@code (extent.depth + dstOffset.z)} $must equal the subresource depth. This allows the last block of the image in
-		each non-multiple dimension to be included as a source or target of the copy.
+		{@code (extent.width + srcOffset.x)} $must equal the image subresource width, if {@code extent.height} is not a multiple of the block height then
+		{@code (extent.height + srcOffset.y)} $must equal the image subresource height and if {@code extent.depth} is not a multiple of the block depth then
+		{@code (extent.depth + srcOffset.z)} $must equal the image subresource depth. Similarily if the {@code dstImage} is compressed and if
+		{@code extent.width} is not a multiple of the block width then {@code (extent.width + dstOffset.x)} $must equal the image subresource width, if
+		{@code extent.height} is not a multiple of the block height then {@code (extent.height + dstOffset.y)} $must equal the image subresource height and if
+		{@code extent.depth} is not a multiple of the block depth then {@code (extent.depth + dstOffset.z)} $must equal the image subresource depth. This
+		allows the last block of the image in each non-multiple dimension to be included as a source or target of the copy.
 
 		{@code vkCmdCopyImage} $can be used to copy image data between multisample images, but both images $must have the same number of samples.
 
@@ -4654,12 +4671,12 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 			"pColor",
 			"a pointer to a ##VkClearColorValue structure that contains the values the image subresource ranges will be cleared to"
 		),
-		AutoSize("pRanges")..uint32_t.IN("rangeCount", "the number of subresource range structures in {@code pRanges}"),
+		AutoSize("pRanges")..uint32_t.IN("rangeCount", "the number of image subresource range structures in {@code pRanges}"),
 		SingleValue("pRange")..const..VkImageSubresourceRange_p.IN(
 			"pRanges",
 			"""
 			points to an array of ##VkImageSubresourceRange structures that describe a range of mipmap levels, array layers, and aspects to be cleared. The
-			{@code aspectMask} of all subresource ranges $must only include #IMAGE_ASPECT_COLOR_BIT.
+			{@code aspectMask} of all image subresource ranges $must only include #IMAGE_ASPECT_COLOR_BIT.
 			"""
 		)
 	)
@@ -4683,12 +4700,12 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 			"pDepthStencil",
 			"a pointer to a ##VkClearDepthStencilValue structure that contains the values the depth and stencil image subresource ranges will be cleared to"
 		),
-		AutoSize("pRanges")..uint32_t.IN("rangeCount", "the number of subresource range structures in {@code pRanges}"),
+		AutoSize("pRanges")..uint32_t.IN("rangeCount", "the number of image subresource range structures in {@code pRanges}"),
 		SingleValue("pRange")..const..VkImageSubresourceRange_p.IN(
 			"pRanges",
 			"""
 			points to an array of ##VkImageSubresourceRange structures that describe a range of mipmap levels, array layers, and aspects to be cleared. The
-			{@code aspectMask} of each subresource range in {@code pRanges} $can include #IMAGE_ASPECT_DEPTH_BIT if the image format has a depth component, and
+			{@code aspectMask} of each image subresource range in {@code pRanges} $can include #IMAGE_ASPECT_DEPTH_BIT if the image format has a depth component, and
 			#IMAGE_ASPECT_STENCIL_BIT if the image format has a stencil component. {@code pDepthStencil} is a pointer to a ##VkClearDepthStencilValue structure
 			that contains the values the image subresource ranges will be cleared to.
 			"""

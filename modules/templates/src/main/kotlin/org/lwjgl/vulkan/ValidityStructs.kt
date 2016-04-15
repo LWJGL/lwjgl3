@@ -108,8 +108,8 @@ val VkBufferCreateInfo =
 			"If the sparse buffer residency feature is not enabled, {@code flags} $mustnot contain #BUFFER_CREATE_SPARSE_RESIDENCY_BIT",
 			"If the sparse aliased residency feature is not enabled, {@code flags} $mustnot contain #BUFFER_CREATE_SPARSE_ALIASED_BIT",
 			"""
-			If {@code flags} contains #BUFFER_CREATE_SPARSE_ALIASED_BIT, it $must also contain at least one of #BUFFER_CREATE_SPARSE_BINDING_BIT or
-			#BUFFER_CREATE_SPARSE_RESIDENCY_BIT
+			If {@code flags} contains #BUFFER_CREATE_SPARSE_RESIDENCY_BIT or #BUFFER_CREATE_SPARSE_ALIASED_BIT, it $must also contain
+			#BUFFER_CREATE_SPARSE_BINDING_BIT
 			"""
 		)}"""
 
@@ -1127,8 +1127,8 @@ val VkImageCreateInfo =
 			{@code usage} $mustnot contain #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
 			""",
 			"""
-			If {@code flags} contains #IMAGE_CREATE_SPARSE_ALIASED_BIT, it $must also contain at least one of #IMAGE_CREATE_SPARSE_BINDING_BIT or
-			#IMAGE_CREATE_SPARSE_RESIDENCY_BIT
+			If {@code flags} contains #IMAGE_CREATE_SPARSE_RESIDENCY_BIT or #IMAGE_CREATE_SPARSE_ALIASED_BIT, it $must also contain
+			#IMAGE_CREATE_SPARSE_BINDING_BIT
 			"""
 		)}"""
 
@@ -1159,7 +1159,7 @@ val VkImageMemoryBarrier =
 			If {@code image} was created with a sharing mode of #SHARING_MODE_EXCLUSIVE, and {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} are
 			valid queue families, at least one of them $must be the same as the family of the queue that will execute this barrier
 			""",
-			"{@code subresourceRange} $must be a valid subresource range for the image",
+			"{@code subresourceRange} $must be a valid image subresource range for the image",
 			"""
 			If {@code image} has a depth/stencil format with both depth and stencil components, then {@code aspectMask} member of {@code subresourceRange}
 			$must include both #IMAGE_ASPECT_DEPTH_BIT and #IMAGE_ASPECT_STENCIL_BIT
@@ -1317,7 +1317,7 @@ val VkImageViewCreateInfo =
 			$must be supported for depth/stencil attachments, as specified by the #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT flag in
 			##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()
 			""",
-			"{@code subresourceRange} $must be a valid subresource range for {@code image}",
+			"{@code subresourceRange} $must be a valid image subresource range for {@code image}",
 			"""
 			If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, {@code format} $must be compatible with the {@code format} used to
 			create {@code image}, as defined in Format Compatibility Classes
@@ -1891,7 +1891,7 @@ val VkSparseImageMemoryBind =
 			{@code memory} being bound $mustnot overlap with those bound ranges
 			""",
 			"{@code memory} and {@code memoryOffset} $must match the memory requirements of the calling command's {@code image}",
-			"{@code subresource} $must be a valid subresource for {@code image}",
+			"{@code subresource} $must be a valid image subresource for {@code image}",
 			"""
 			{@code offset.x} $must be a multiple of the sparse image block width (##VkSparseImageFormatProperties{@code ::imageGranularity}.width) of the image
 			""",

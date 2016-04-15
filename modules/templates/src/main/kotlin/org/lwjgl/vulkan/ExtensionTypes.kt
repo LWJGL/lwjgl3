@@ -570,6 +570,8 @@ val VkWin32SurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkWin32SurfaceCrea
 		${spec("VkWin32SurfaceCreateFlagsKHR")}
 
 		Contains information about how a surface for a Win32 window should be created.
+
+		${ValidityStructs.VkWin32SurfaceCreateInfoKHR}
 		"""
 
 	sType(this)
@@ -590,6 +592,8 @@ val VkXlibSurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkXlibSurfaceCreate
 		${spec("VkXlibSurfaceCreateFlagsKHR")}
 
 		Contains information about how a surface for a X11 window should be created.
+
+		${ValidityStructs.VkXlibSurfaceCreateInfoKHR}
 		"""
 
 	sType(this)

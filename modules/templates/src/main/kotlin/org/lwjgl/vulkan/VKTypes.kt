@@ -528,7 +528,7 @@ val VkImageFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkImageFormatPropertie
 	uint32_t.member("maxArrayLayers", "the maximum number of array layers")
 	VkSampleCountFlags.member("sampleCounts", "a bitmask of {@code VkSampleCountFlagBits} specifying all the supported sample counts for this image")
 		.flagLinks("SAMPLE_COUNT")
-	VkDeviceSize.member("maxResourceSize", "the maximum total image size in bytes, inclusive of all subresources")
+	VkDeviceSize.member("maxResourceSize", "the maximum total image size in bytes, inclusive of all image subresources")
 }
 
 val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mutable = false) {
@@ -1228,7 +1228,7 @@ val VkSparseImageMemoryRequirements_p = struct_p(VULKAN_PACKAGE, "VkSparseImageM
 		"""
 
 	VkSparseImageFormatProperties.member("formatProperties", "the format properties")
-	uint32_t.member("imageMipTailFirstLod", "the first mip level at which subresources are included in the mip tail region")
+	uint32_t.member("imageMipTailFirstLod", "the first mip level at which image subresources are included in the mip tail region")
 	VkDeviceSize.member("imageMipTailSize", "the memory size (in bytes) of the mip tail region")
 	VkDeviceSize.member("imageMipTailOffset", "he opaque memory offset used with ##VkSparseImageOpaqueMemoryBindInfo to bind the mip tail region(s)")
 	VkDeviceSize.member(
@@ -1290,6 +1290,69 @@ val VkSparseImageOpaqueMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageOpa
 	VkSparseMemoryBind.const_p.buffer("pBinds", " a pointer to array of ##VkSparseMemoryBind structures")
 }.nativeType
 
+val VkImageSubresource = struct(VULKAN_PACKAGE, "VkImageSubresource") {
+	documentation =
+		"""
+		${man("VkImageSubresource")}<br>
+		${spec("VkImageSubresource")}
+
+		Selects a specific image of an image subresource (mipLevel/arrayLayer) of an image created with linear tiling.
+
+		${ValidityStructs.VkImageSubresource}
+		"""
+
+	VkImageAspectFlags.member("aspectMask", "a {@code VkImageAspectFlags} selecting the image aspect").flagLinks("IMAGE_ASPECT")
+	uint32_t.member("mipLevel", "selects the mipmap level")
+	uint32_t.member("arrayLayer", "selects the array layer")
+}.nativeType
+val VkImageSubresource_p = VkImageSubresource.p
+
+val VkOffset3D = struct(VULKAN_PACKAGE, "VkOffset3D") {
+	documentation =
+		"""
+		${man("VkOffset3D")}<br>
+		${spec("VkOffset3D")}
+
+		Describes a 3D offset.
+		"""
+
+	int32_t.member("x", "the x offset")
+	int32_t.member("y", "the y offset")
+	int32_t.member("z", "the z offset")
+}.nativeType
+
+val VkSparseImageMemoryBind = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBind") {
+    documentation =
+		"""
+		${man("VkSparseImageMemoryBind")}<br>
+		${spec("VkSparseImageMemoryBind")}
+
+		Describes a memory binding to a sparse image block of a {@code VkImage} object.
+
+		${ValidityStructs.VkSparseImageMemoryBind}
+		"""
+
+	VkImageSubresource.member("subresource", "the {@code aspectMask} and region of interest in the image")
+    VkOffset3D.member("offset", "the coordinates of the first texel within the image subresource to bind")
+    VkExtent3D.member(
+	    "extent",
+	    """
+	    the size in texels of the region within the image subresource to bind. The extent must be a multiple of the sparse image block dimensions, except when
+	    binding sparse image blocks along the edge of a image subresource it can instead be such that any coordinate of offset+extentoffset+extent equals the
+	    corresponding dimensions of the image subresource.
+	    """
+    )
+    VkDeviceMemory.member(
+	    "memory",
+	    """
+	    the {@code VkDeviceMemory} object that the sparse image blocks of the image are bound to. If memory is #NULL_HANDLE, the sparse image blocks are
+	    unbound.
+	    """
+    )
+    VkDeviceSize.member("memoryOffset", "an offset into {@code VkDeviceMemory} object. If {@code memory} is #NULL_HANDLE, this value is ignored.")
+    VkSparseMemoryBindFlags.member("flags", "sparse memory binding flags").flagLinks("SPARSE_MEMORY_BIND")
+}.nativeType
+
 val VkSparseImageMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBindInfo") {
 	documentation =
 		"""
@@ -1303,7 +1366,7 @@ val VkSparseImageMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBin
 
 	VkImage.member("image", "the {@code VkImage} object to be bound")
 	AutoSize("pBinds")..uint32_t.member("bindCount", "the number of {@code VkSparseImageMemoryBind} structures in {@code pBinds} array")
-	VkSparseMemoryBind.const_p.buffer("pBinds", "a pointer to array of ##VkSparseImageMemoryBind structures")
+	VkSparseImageMemoryBind.const_p.buffer("pBinds", "a pointer to array of ##VkSparseImageMemoryBind structures")
 }.nativeType
 
 val VkBindSparseInfo_p = struct_p(VULKAN_PACKAGE, "VkBindSparseInfo") {
@@ -1503,23 +1566,7 @@ val VkImageCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageCreateInfo") {
 		"pQueueFamilyIndices",
 		"a list of queue families that will access this image (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT)"
 	)
-	VkImageLayout.member("initialLayout", "selects the initial {@code VkImageLayout} state of all subresources of the image").links("IMAGE_LAYOUT_\\w+")
-}
-
-val VkImageSubresource_p = struct_p(VULKAN_PACKAGE, "VkImageSubresource") {
-	documentation =
-		"""
-		${man("VkImageSubresource")}<br>
-		${spec("VkImageSubresource")}
-
-		Selects a specific image of a subresource (mipLevel/arrayLayer) of an image created with linear tiling.
-
-		${ValidityStructs.VkImageSubresource}
-		"""
-
-	VkImageAspectFlags.member("aspectMask", "a {@code VkImageAspectFlags} selecting the image aspect").flagLinks("IMAGE_ASPECT")
-	uint32_t.member("mipLevel", "selects the mipmap level")
-	uint32_t.member("arrayLayer", "selects the array layer")
+	VkImageLayout.member("initialLayout", "selects the initial {@code VkImageLayout} state of all image subresources of the image").links("IMAGE_LAYOUT_\\w+")
 }
 
 val VkSubresourceLayout_p = struct_p(VULKAN_PACKAGE, "VkSubresourceLayout", mutable = false) {
@@ -1528,11 +1575,11 @@ val VkSubresourceLayout_p = struct_p(VULKAN_PACKAGE, "VkSubresourceLayout", muta
 		${man("VkSubresourceLayout")}<br>
 		${spec("VkSubresourceLayout")}
 
-		Contains information about the layout of a subresource (mipLevel/arrayLayer) of an image created with linear tiling.
+		Contains information about the layout of an image subresource (mipLevel/arrayLayer) of an image created with linear tiling.
 		"""
 
-	VkDeviceSize.member("offset", "the byte offset from the start of the image where the subresource begins")
-	VkDeviceSize.member("size", "the size in bytes of the subresource")
+	VkDeviceSize.member("offset", "the byte offset from the start of the image where the image subresource begins")
+	VkDeviceSize.member("size", "the size in bytes of the image subresource")
 	VkDeviceSize.member("rowPitch", "the number of bytes between each row of texels in an image")
 	VkDeviceSize.member("arrayPitch", "the number of bytes between each array layer of an image")
 	VkDeviceSize.member("depthPitch", "the number of bytes between each slice of 3D image")
@@ -2810,7 +2857,7 @@ val VkImageSubresourceLayers = struct(VULKAN_PACKAGE, "VkImageSubresourceLayers"
 		${man("VkImageSubresourceLayers")}<br>
 		${spec("VkImageSubresourceLayers")}
 
-		Specifies a subresource of an image.
+		Specifies an image subresource of an image.
 
 		${ValidityStructs.VkImageSubresourceLayers}
 		"""
@@ -2820,20 +2867,6 @@ val VkImageSubresourceLayers = struct(VULKAN_PACKAGE, "VkImageSubresourceLayers"
 	uint32_t.member("mipLevel", "the mipmap level")
 	uint32_t.member("baseArrayLayer", "the starting layer")
 	uint32_t.member("layerCount", "the number of layers")
-}.nativeType
-
-val VkOffset3D = struct(VULKAN_PACKAGE, "VkOffset3D") {
-	documentation =
-		"""
-		${man("VkOffset3D")}<br>
-		${spec("VkOffset3D")}
-
-		Describes a 3D offset.
-		"""
-
-	int32_t.member("x", "the x offset")
-	int32_t.member("y", "the y offset")
-	int32_t.member("z", "the z offset")
 }.nativeType
 
 val VkImageCopy_p = struct_p(VULKAN_PACKAGE, "VkImageCopy") {
@@ -2849,12 +2882,12 @@ val VkImageCopy_p = struct_p(VULKAN_PACKAGE, "VkImageCopy") {
 
 	VkImageSubresourceLayers.member(
 		"srcSubresource",
-		"a ##VkImageSubresourceLayers structure specifying the subresource of the image used for the source image data"
+		"a ##VkImageSubresourceLayers structure specifying the image subresource of the image used for the source image data"
 	)
 	VkOffset3D.member("srcOffset", "selects the initial x, y, and z offsets in texels of the sub-regions of the source image data")
 	VkImageSubresourceLayers.member(
 		"dstSubresource",
-		"an ##VkImageSubresourceLayers structure specifying the subresource of the image used for the destination image data"
+		"an ##VkImageSubresourceLayers structure specifying the image subresource of the image used for the destination image data"
 	)
 	VkOffset3D.member("dstOffset", "selects the initial x, y, and z offsets in texels of the sub-regions of the destination image data")
 	VkExtent3D.member("extent", "the size in texels of the source image to copy in width, height and depth")
@@ -2893,7 +2926,7 @@ val VkBufferImageCopy_p = struct_p(VULKAN_PACKAGE, "VkBufferImageCopy") {
 	uint32_t.member("bufferImageHeight", "the buffer image height")
 	VkImageSubresourceLayers.member(
 		"imageSubresource",
-		"a ##VkImageSubresourceLayers used to specify the specific subresources of the image used for the source or destination image data"
+		"a ##VkImageSubresourceLayers used to specify the specific image subresources of the image used for the source or destination image data"
 	)
 	VkOffset3D.member("imageOffset", "selects the initial x, y, z offsets in texels of the sub-region of the source or destination image data")
 	VkExtent3D.member("imageExtent", "the size in texels of the image to copy in width, height and depth")
@@ -3003,12 +3036,12 @@ val VkImageResolve_p = struct_p(VULKAN_PACKAGE, "VkImageResolve") {
 
 	VkImageSubresourceLayers.member(
 		"srcSubresource",
-		"a ##VkImageSubresourceLayers structure specifying the subresource of the image used for the source image data"
+		"a ##VkImageSubresourceLayers structure specifying the image subresource of the image used for the source image data"
 	)
 	VkOffset3D.member("srcOffset", "selects the initial x, y, and z offsets in texels of the sub-region of the source image data")
 	VkImageSubresourceLayers.member(
 		"dstSubresource",
-		"a ##VkImageSubresourceLayers structure specifying the subresource of the image used for the destination image data")
+		"a ##VkImageSubresourceLayers structure specifying the image subresource of the image used for the destination image data")
 	VkOffset3D.member("dstOffset", "selects the initial x, y, and z offsets in texels of the sub-region of the destination image data")
 	VkExtent3D.member("extent", "the size in texels of the source image to resolve in width, height and depth")
 }
@@ -3085,8 +3118,8 @@ val VkImageMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 		${man("VkImageMemoryBarrier")}<br>
 		${spec("VkImageMemoryBarrier")}
 
-		Specifies an image memory barrier. This type of barrier only applies to memory accesses involving a specific subresource range of the specified image
-		object. That is, a memory dependency formed from a image memory barrier is scoped to the specified subresources of the image. It is also used to
+		Specifies an image memory barrier. This type of barrier only applies to memory accesses involving a specific image subresource range of the specified
+		image object. That is, a memory dependency formed from a image memory barrier is scoped to the specified subresources of the image. It is also used to
 		perform a layout transition for an image subresource range, or to transfer ownership of an image subresource range from one queue family to another.
 
 		${ValidityStructs.VkImageMemoryBarrier}
@@ -3121,7 +3154,7 @@ val VkImageMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 	VkImage.member("image", "a handle to the image whose backing memory is affected by the barrier")
 	VkImageSubresourceRange.member(
 		"subresourceRange",
-		"describes an area of the backing memory for image, as well as the set of subresources whose image layouts are modified"
+		"describes an area of the backing memory for image, as well as the set of image subresources whose image layouts are modified"
 	)
 }
 
