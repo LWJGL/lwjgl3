@@ -1528,7 +1528,7 @@ val VkBufferViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkBufferViewCreateInfo"
 	pNext()
 	VkBufferViewCreateFlags.member("flags", "reserved for future use")
 	VkBuffer.member("buffer", "a {@code VkBuffer} on which the view will be created")
-	VkFormat.member("format", "a {@code VkFormat} describing the format of the data elements in the buffer").links("FORMAT_\\w+")
+	VkFormat.member("format", "a {@code VkFormat} describing the format of the data elements in the buffer")
 	VkDeviceSize.member("offset", "an offset in bytes from the base address of the buffer")
 	VkDeviceSize.member("range", "a size in bytes of the buffer view")
 }
@@ -1549,7 +1549,6 @@ val VkImageCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageCreateInfo") {
 	VkImageCreateFlags.member("flags", "a {@code VkImageCreateFlagBits} bitfield describing additional parameters of the image").flagLinks("IMAGE_CREATE")
 	VkImageType.member("imageType", "the basic dimensionality of the image").links("IMAGE_TYPE_\\w+")
 	VkFormat.member("format", "a {@code VkFormat} describing the format and type of the data elements that will be contained in the image")
-		.links("FORMAT_\\w+")
 	VkExtent3D.member("extent", "a ##VkExtent3D describing the number of data elements in each dimension of the base level")
 	uint32_t.member("mipLevels", "the number of levels of detail available for minified sampling of the image")
 	uint32_t.member("arrayLayers", "the number of layers in the image")
@@ -1635,7 +1634,7 @@ val VkImageViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageViewCreateInfo") 
 	VkImageViewCreateFlags.member("flags", "reserved for future use")
 	VkImage.member("image", "a {@code VkImage} on which the view will be created")
 	VkImageViewType.member("viewType", "the type of the image view").links("IMAGE_VIEW_TYPE_\\w+")
-	VkFormat.member("format", "a {@code VkFormat} describing the format and type used to interpret data elements in the image").links("FORMAT_\\w+")
+	VkFormat.member("format", "a {@code VkFormat} describing the format and type used to interpret data elements in the image")
 	VkComponentMapping.member(
 		"components",
 		"a remapping of color components (or of depth or stencil components after they have been converted into color components)"
@@ -1769,7 +1768,7 @@ val VkVertexInputAttributeDescription = struct(VULKAN_PACKAGE, "VkVertexInputAtt
 
 	uint32_t.member("location", "the shader binding location number for this attribute")
 	uint32_t.member("binding", "the binding number which this attribute takes its data from")
-	VkFormat.member("format", "the size and type of the vertex attribute data").links("FORMAT_\\w+")
+	VkFormat.member("format", "the size and type of the vertex attribute data")
 	uint32_t.member("offset", "a byte offset of this attribute relative to the start of an element in the vertex input binding")
 }.nativeType
 
@@ -2548,7 +2547,7 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
 
 	VkAttachmentDescriptionFlags.member("flags", "a bitfield of {@code VkAttachmentDescriptionFlagBits} describing additional properties of the attachment")
 		.flagLinks("ATTACHMENT_DESCRIPTION")
-	VkFormat.member("format", "a {@code VkFormat} value specifying the format of the image that will be used for the attachment").links("FORMAT_\\w+")
+	VkFormat.member("format", "a {@code VkFormat} value specifying the format of the image that will be used for the attachment")
 	VkSampleCountFlagBits.member("samples", "the number of samples of the image as defined in {@code VkSampleCountFlagBits}").links("SAMPLE_COUNT_\\w+")
 	VkAttachmentLoadOp.member(
 		"loadOp",

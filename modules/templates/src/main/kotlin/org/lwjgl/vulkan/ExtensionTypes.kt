@@ -194,7 +194,7 @@ val VkSurfaceFormatKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutabl
 		${ValidityStructs.VkSurfaceFormatKHR}
 		"""
 
-	VkFormat.member("format", "a {@code VkFormat} that is compatible with the surface").links("FORMAT_\\w+")
+	VkFormat.member("format", "a {@code VkFormat} that is compatible with the surface")
 	VkColorSpaceKHR.member("colorSpace", "a presentation {@code VkColorSpaceKHR} that is compatible with the surface").links("COLORSPACE_\\w+_KHR")
 }
 
@@ -435,7 +435,7 @@ val VkSwapchainCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkSwapchainCreateInfo
 	    the minimum number of presentable images that the application needs. The platform will either create the swapchain with at least that many images, or
 	    will fail to create the swapchain.
 	    """)
-    VkFormat.member("imageFormat", "a {@code VkFormat} that is valid for swapchains on the specified surface").links("FORMAT_\\w+")
+    VkFormat.member("imageFormat", "a {@code VkFormat} that is valid for swapchains on the specified surface")
     VkColorSpaceKHR.member("imageColorSpace", "a {@code VkColorSpaceKHR} that is valid for swapchains on the specified surface").links("COLORSPACE_\\w+_KHR")
     VkExtent2D.member(
 	    "imageExtent",
