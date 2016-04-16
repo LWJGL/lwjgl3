@@ -15,6 +15,7 @@ License terms: http://lwjgl.org/license.php
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
 	<fileset id="link-libraries" dir="${lib}/linux/${build.arch}/">
+		<include name="dyn*.a"/>
 		<include name="libffi.a"/>
 	</fileset>
 
@@ -48,6 +49,7 @@ License terms: http://lwjgl.org/license.php
 		<!-- COMPILE -->
 		<compile>
 			<arguments>
+				<arg value="-I${src.include.rel}/system/dyncall"/>
 				<arg value="-I${src.include.rel}/system/jemalloc"/>
 				<arg value="-I${src.include.rel}/system/libffi"/>
 				<arg value="-I${src.include.rel}/util"/>
@@ -56,6 +58,7 @@ License terms: http://lwjgl.org/license.php
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
+					<include name="${src.generated.native}/system/dyncall/*.c"/>
 					<include name="${src.generated.native}/system/jemalloc/*.c"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/libffi/*.c"/>
@@ -136,30 +139,19 @@ License terms: http://lwjgl.org/license.php
 		<antcall target="-link"/>
 	</target>
 
-	<target name="-update-dependencies-x86">
-		<mkdir dir="${lib}/linux"/>
-		<mkdir dir="${lib}/linux/x86"/>
-
-		<update-dependency name="libffi (x86)" artifact="x86/libffi.a"/>
-
-		<update-dependency name="jemalloc (x86)" artifact="x86/libjemalloc.so" dest="${lib}/libjemalloc32.so"/>
-		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw.so" dest="${lib}/libglfw32.so" if:true="${binding.glfw}"/>
-		<update-dependency name="OpenAL32 (x86)" artifact="x86/libopenal.so" dest="${lib}/libopenal32.so" if:true="${binding.openal}"/>
-	</target>
-
-	<target name="-update-dependencies-x64">
+	<target name="-update-dependencies" unless="${build.offline}">
 		<mkdir dir="${lib}/linux"/>
 		<mkdir dir="${lib}/linux/x64"/>
 
-		<update-dependency name="libffi (x64)" artifact="x64/libffi.a"/>
+		<update-dependency name="dyncall" artifact="x64/dyncall_s.a"/>
+		<update-dependency name="dyncallback" artifact="x64/dyncallback_s.a"/>
+		<update-dependency name="dynload" artifact="x64/dynload_s.a"/>
 
-		<update-dependency name="jemalloc (x64)" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.openal}"/>
-		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
-	</target>
+		<update-dependency name="libffi" artifact="x64/libffi.a"/>
 
-	<target name="-update-dependencies" unless="${build.offline}">
-		<antcall target="-update-dependencies-${build.arch}"/>
+		<update-dependency name="jemalloc" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.openal}"/>
+		<update-dependency name="glfw3" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
+		<update-dependency name="OpenAL32" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
 	</target>
 
 	<target name="-link" depends="-update-dependencies">

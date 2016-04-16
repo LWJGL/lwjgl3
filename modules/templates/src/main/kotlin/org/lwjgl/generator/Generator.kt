@@ -86,6 +86,7 @@ fun main(args: Array<String>) {
 		// Generate bindings
 
 		val bindingsSystem = arrayOf(
+			"org.lwjgl.system.dyncall",
 			"org.lwjgl.system.jemalloc",
 			"org.lwjgl.system.libc",
 			"org.lwjgl.system.libffi",

@@ -11,6 +11,7 @@ License terms: http://lwjgl.org/license.php
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.obj"/>
 	<fileset id="link-libraries" dir="${lib}/windows/${build.arch}/">
+		<include name="dyn*.lib"/>
 		<include name="libffi.lib"/>
 	</fileset>
 
@@ -39,6 +40,7 @@ License terms: http://lwjgl.org/license.php
 		<!-- COMPILE -->
 		<cl>
 			<arguments>
+				<arg value="/I${src.include}\system\dyncall"/>
 				<arg value="/I${src.include}\system\jemalloc"/>
 				<arg value="/I${src.include}\system\jemalloc\msvc_compat"/>
 				<arg value="/I${src.include}\system\libffi"/>
@@ -48,6 +50,7 @@ License terms: http://lwjgl.org/license.php
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
+					<include name="${src.generated.native}/system/dyncall/*.c"/>
 					<include name="${src.generated.native}/system/jemalloc/*.c"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/libffi/*.c"/>
@@ -139,6 +142,10 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x86"/>
 
+		<update-dependency name="dyncall (x86)" artifact="x86/dyncall_s.lib"/>
+		<update-dependency name="dyncallback (x86)" artifact="x86/dyncallback_s.lib"/>
+		<update-dependency name="dynload (x86)" artifact="x86/dynload_s.lib"/>
+
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.lib"/>
 
 		<update-dependency name="jemalloc (x86)" artifact="x86/jemalloc.dll" dest="${lib}/jemalloc32.dll"/>
@@ -149,6 +156,10 @@ License terms: http://lwjgl.org/license.php
 	<target name="-update-dependencies-x64">
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x64"/>
+
+		<update-dependency name="dyncall (x64)" artifact="x64/dyncall_s.lib"/>
+		<update-dependency name="dyncallback (x64)" artifact="x64/dyncallback_s.lib"/>
+		<update-dependency name="dynload (x64)" artifact="x64/dynload_s.lib"/>
 
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.lib"/>
 

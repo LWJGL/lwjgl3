@@ -182,6 +182,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan/VKypes.kt" unless:true="${binding.vulkan}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan/ExtensionTypes.kt" unless:true="${binding.vulkan}"/>
 
+			<arg value="${src.templates.kotlin}/org/lwjgl/system/dyncall"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/jemalloc"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/libc"/>
@@ -280,6 +281,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/vulkan/**" if:true="${binding.vulkan}"/>
 
 			<include name="org/lwjgl/system/JNI.*"/>
+			<include name="org/lwjgl/system/dyncall/**"/>
 			<include name="org/lwjgl/system/jemalloc/**"/>
 			<include name="org/lwjgl/system/libc/**"/>
 			<include name="org/lwjgl/system/libffi/**"/>

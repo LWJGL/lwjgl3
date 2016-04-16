@@ -43,6 +43,7 @@ License terms: http://lwjgl.org/license.php
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
 	<fileset id="link-libraries" dir="${lib}/macosx/${build.arch}/">
+		<include name="dyn*.a"/>
 		<include name="libffi.a"/>
 	</fileset>
 
@@ -75,6 +76,7 @@ License terms: http://lwjgl.org/license.php
 		<!-- COMPILE -->
 		<compile>
 			<arguments>
+				<arg value="-I${src.include.rel}/system/dyncall"/>
 				<arg value="-I${src.include.rel}/system/jemalloc"/>
 				<arg value="-I${src.include.rel}/system/libffi"/>
 				<arg value="-I${src.include.rel}/util"/>
@@ -83,6 +85,7 @@ License terms: http://lwjgl.org/license.php
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
+					<include name="${src.generated.native}/system/dyncall/*.c"/>
 					<include name="${src.generated.native}/system/jemalloc/*.c"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/libffi/*.c"/>
@@ -150,6 +153,10 @@ License terms: http://lwjgl.org/license.php
 	<target name="-update-dependencies" unless="${build.offline}">
 		<mkdir dir="${lib}/macosx"/>
 		<mkdir dir="${lib}/macosx/x64"/>
+
+		<update-dependency name="dyncall" artifact="x64/dyncall_s.a"/>
+		<update-dependency name="dyncallback" artifact="x64/dyncallback_s.a"/>
+		<update-dependency name="dynload" artifact="x64/dynload_s.a"/>
 
 		<update-dependency name="libffi" artifact="x64/libffi.a"/>
 
