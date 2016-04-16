@@ -163,6 +163,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-m64" if:true="${build.arch.x64}"/>
 			<arg value="-m32" unless:true="${build.arch.x64}"/>
 
+			<arg line="-z noexecstack"/>
 			<arg line="-fPIC -pthread -o ${lib}/${LWJGL_LIBRARY}"/>
 
 			<arg line="-L/usr/X11R6/lib${arch.postfix} -L/usr/X11/lib${arch.postfix}"/>
