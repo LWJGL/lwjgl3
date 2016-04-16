@@ -27,11 +27,7 @@ public enum Platform {
 			if ( DYLIB.matcher(name).matches() )
 				return name;
 
-			// Work around for System.mapLibraryName on OS X + JDK 6, which maps to .jnilib instead of .dylib
-			String libName = System.mapLibraryName(name);
-			return libName.endsWith(".jnilib")
-				? libName.substring(0, libName.length() - ".jnilib".length()) + ".dylib"
-				: libName;
+			return System.mapLibraryName(name);
 		}
 	},
 	WINDOWS("Windows") {

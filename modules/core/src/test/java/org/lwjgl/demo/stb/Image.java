@@ -80,18 +80,15 @@ public final class Image {
 
 		errorfun = GLFWErrorCallback.createPrint();
 
-		windowSizefun = new GLFWWindowSizeCallback() {
-			@Override
-			public void invoke(long window, int width, int height) {
-				Image.this.ww = width;
-				Image.this.wh = height;
+		windowSizefun = GLFWWindowSizeCallback.create((windowHandle, width, height) -> {
+			this.ww = width;
+			this.wh = height;
 
-				glMatrixMode(GL_PROJECTION);
-				glLoadIdentity();
-				glOrtho(0.0, ww, wh, 0.0, -1.0, 1.0);
-				glMatrixMode(GL_MODELVIEW);
-			}
-		};
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			glOrtho(0.0, ww, wh, 0.0, -1.0, 1.0);
+			glMatrixMode(GL_MODELVIEW);
+		});
 
 		framebufferSizefun = new GLFWFramebufferSizeCallback() {
 			@Override

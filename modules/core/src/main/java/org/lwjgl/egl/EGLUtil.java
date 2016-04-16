@@ -4,7 +4,6 @@
  */
 package org.lwjgl.egl;
 
-import java.lang.reflect.Field;
 import java.util.Map;
 
 import static org.lwjgl.egl.EGL10.*;
@@ -14,13 +13,7 @@ import static org.lwjgl.system.APIUtil.*;
 public final class EGLUtil {
 
 	private static final Map<Integer, String> EGL_ERROR_TOKENS = apiClassTokens(
-		new TokenFilter() {
-			@Override
-			public boolean accept(Field field, int value) {
-				return field.getName().contains("_BAD_");
-			}
-		},
-		null,
+		(field, value) -> field.getName().contains("_BAD_"), null,
 		EGL10.class,
 		EGL11.class,
 		EXTDeviceQuery.class,
@@ -70,7 +63,7 @@ public final class EGLUtil {
 				return "An EGLNativeWindowType argument does not refer to a valid native window.";
 			case EGL_CONTEXT_LOST:
 				return "A power management event has occurred. The application must destroy all contexts and reinitialise client API state and objects to " +
-				       "continue rendering.";
+					"continue rendering.";
 			case EXTDeviceQuery.EGL_BAD_DEVICE_EXT:
 				return "An EGLDeviceEXT argument does not refer to a valid EGLDeviceEXT.";
 			case EXTOutputBase.EGL_BAD_OUTPUT_LAYER_EXT:

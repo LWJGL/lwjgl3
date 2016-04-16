@@ -123,7 +123,7 @@ public final class CLDemo {
 
 				int errcode;
 
-				final CountDownLatch destructorLatch;
+				CountDownLatch destructorLatch;
 
 				if ( caps.OpenCL11 ) {
 					destructorLatch = new CountDownLatch(3);
@@ -193,7 +193,7 @@ public final class CLDemo {
 
 					long e = ev.get(0);
 
-					final CountDownLatch latch = new CountDownLatch(1);
+					CountDownLatch latch = new CountDownLatch(1);
 
 					CLEventCallback eventCB;
 					errcode = clSetEventCallback(e, CL_COMPLETE, eventCB = new CLEventCallback() {

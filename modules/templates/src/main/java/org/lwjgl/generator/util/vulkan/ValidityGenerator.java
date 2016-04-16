@@ -43,17 +43,12 @@ public final class ValidityGenerator {
 		process(docs, "Structs", "Vk");
 	}
 
-	private static void process(File inputRoot, String type, final String prefix) {
+	private static void process(File inputRoot, String type, String prefix) {
 		File inputPath = new File(inputRoot, type.toLowerCase());
 		if ( !inputPath.isDirectory() )
 			throw new IllegalStateException("Input path contains unrecognized files.");
 
-		File[] inputFiles = inputPath.listFiles(new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				return pathname.isFile() && pathname.getName().startsWith(prefix) && pathname.getName().endsWith(".txt");
-			}
-		});
+		File[] inputFiles = inputPath.listFiles(pathname -> pathname.isFile() && pathname.getName().startsWith(prefix) && pathname.getName().endsWith(".txt"));
 
 		if ( inputFiles.length == 0 )
 			throw new IllegalStateException("No input files found.");

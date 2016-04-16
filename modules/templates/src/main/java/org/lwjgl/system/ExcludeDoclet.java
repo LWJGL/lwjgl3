@@ -85,7 +85,7 @@ public final class ExcludeDoclet {
 				return obj;
 
 			Object[] entries = (Object[])obj;
-			List<Object> processed = new ArrayList<Object>(entries.length);
+			List<Object> processed = new ArrayList<>(entries.length);
 
 			outer:
 			for ( Object entry : entries ) {

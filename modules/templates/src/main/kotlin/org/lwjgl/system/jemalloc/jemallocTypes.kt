@@ -55,7 +55,7 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	 *
 	 * @return the {@link MallocMessageCallback} instance
 	 */
-	public static MallocMessageCallback createString(final SAMString sam) {
+	public static MallocMessageCallback createString(SAMString sam) {
 		return new MallocMessageCallback() {
 			@Override
 			public void invoke(long cbopaque, long s) {

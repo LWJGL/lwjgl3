@@ -74,7 +74,6 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	documentation = "Instances of this interface may be passed to the #SetErrorCallback() method."
 	preamble.javaImport(
 		"java.io.PrintStream",
-		"java.lang.reflect.Field",
 		"java.util.Map",
 		"org.lwjgl.system.APIUtil",
 		"static org.lwjgl.glfw.GLFW.*"
@@ -105,7 +104,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 *
 	 * @return the {@link GLFWErrorCallback} instance
 	 */
-	public static GLFWErrorCallback createString(final SAMString sam) {
+	public static GLFWErrorCallback createString(SAMString sam) {
 		return new GLFWErrorCallback() {
 			@Override
 			public void invoke(int error, long description) {
@@ -130,18 +129,13 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 *
 	 * @return the GLFWerrorCallback
 	 */
-	public static GLFWErrorCallback createPrint(final PrintStream stream) {
+	public static GLFWErrorCallback createPrint(PrintStream stream) {
 		return new GLFWErrorCallback() {
-			private final Map<Integer, String> ERROR_CODES = apiClassTokens(new TokenFilter() {
-				@Override
-				public boolean accept(Field field, int value) {
-					return 0x10000 < value && value < 0x20000;
-				}
-			}, null, GLFW.class);
+			private Map<Integer, String> ERROR_CODES = apiClassTokens((field, value) -> 0x10000 < value && value < 0x20000, null, GLFW.class);
 
 			@Override
 			public void invoke(int error, long description) {
-				String msg = memUTF8(description);
+				String msg = getDescription(description);
 
 				stream.printf("[LWJGL] %s error\n", ERROR_CODES.get(error));
 				stream.println("\tDescription : " + msg);
@@ -164,7 +158,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 		return new GLFWErrorCallback() {
 			@Override
 			public void invoke(int error, long description) {
-				throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, memUTF8(description)));
+				throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, getDescription(description)));
 			}
 		};
 	}
@@ -496,7 +490,7 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	const..char_pp.IN("names", "pointer to the array of UTF-8 encoded path names of the dropped files")
 ) {
 	documentation = "Instances of this interface may be passed to the #SetDropCallback() method."
-	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	preamble.javaImport("java.nio.*", "static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** A functional interface for {@link GLFWDropCallback}. */
 	public interface SAMBuffer {
@@ -510,7 +504,7 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	 *
 	 * @return the {@link GLFWDropCallback} instance
 	 */
-	public static GLFWDropCallback createBuffer(final SAMBuffer sam) {
+	public static GLFWDropCallback createBuffer(SAMBuffer sam) {
 		return new GLFWDropCallback() {
 			@Override
 			public void invoke(long window, int count, long names) {
@@ -531,7 +525,7 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	 *
 	 * @return the {@link GLFWDropCallback} instance
 	 */
-	public static GLFWDropCallback createString(final SAMString sam) {
+	public static GLFWDropCallback createString(SAMString sam) {
 		return new GLFWDropCallback() {
 			@Override
 			public void invoke(long window, int count, long names) {

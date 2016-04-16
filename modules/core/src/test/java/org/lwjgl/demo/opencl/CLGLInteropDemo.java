@@ -68,7 +68,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public final class CLGLInteropDemo {
 
-	private static final Set<String> params = new HashSet<String>(8);
+	private static final Set<String> params = new HashSet<>(8);
 
 	// max per pixel iterations to compute the fractal
 	private static int maxIterations = 500;
@@ -99,7 +99,7 @@ public final class CLGLInteropDemo {
 		} else
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
-		final boolean debugGL = params.contains("debugGL");
+		boolean debugGL = params.contains("debugGL");
 		if ( debugGL )
 			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
@@ -115,7 +115,7 @@ public final class CLGLInteropDemo {
 			PointerBuffer platformIDs = stack.mallocPointer(pi.get(0));
 			checkCLError(clGetPlatformIDs(platformIDs, null));
 
-			platforms = new ArrayList<Long>(platformIDs.capacity());
+			platforms = new ArrayList<>(platformIDs.capacity());
 
 			for ( int i = 0; i < platformIDs.capacity(); i++ ) {
 				long platform = platformIDs.get(i);
@@ -130,22 +130,19 @@ public final class CLGLInteropDemo {
 		if ( platforms.isEmpty() )
 			throw new IllegalStateException("No OpenCL platform found that supports OpenGL context sharing.");
 
-		Collections.sort(platforms, new Comparator<Long>() {
-			@Override
-			public int compare(Long p1, Long p2) {
-				// Prefer platforms that support GPU devices
-				boolean gpu1 = !getDevices(p1, CL_DEVICE_TYPE_GPU).isEmpty();
-				boolean gpu2 = !getDevices(p2, CL_DEVICE_TYPE_GPU).isEmpty();
-				int cmp = gpu1 == gpu2 ? 0 : (gpu1 ? -1 : 1);
-				if ( cmp != 0 )
-					return cmp;
+		Collections.sort(platforms, (p1, p2) -> {
+			// Prefer platforms that support GPU devices
+			boolean gpu1 = !getDevices(p1, CL_DEVICE_TYPE_GPU).isEmpty();
+			boolean gpu2 = !getDevices(p2, CL_DEVICE_TYPE_GPU).isEmpty();
+			int cmp = gpu1 == gpu2 ? 0 : (gpu1 ? -1 : 1);
+			if ( cmp != 0 )
+				return cmp;
 
-				return getPlatformInfoStringUTF8(p1, CL_PLATFORM_VENDOR).compareTo(getPlatformInfoStringUTF8(p2, CL_PLATFORM_VENDOR));
-			}
+			return getPlatformInfoStringUTF8(p1, CL_PLATFORM_VENDOR).compareTo(getPlatformInfoStringUTF8(p2, CL_PLATFORM_VENDOR));
 		});
 
-		final long platform = platforms.get(0);
-		final CLCapabilities platformCaps = CL.createPlatformCapabilities(platform);
+		long platform = platforms.get(0);
+		CLCapabilities platformCaps = CL.createPlatformCapabilities(platform);
 
 		String platformID;
 		if ( platformCaps.cl_khr_icd )
@@ -166,14 +163,14 @@ public final class CLGLInteropDemo {
 		Thread[] threads = new Thread[hasCPU && hasGPU ? 2 : 1];
 		GLFWWindow[] windows = new GLFWWindow[threads.length];
 
-		final CountDownLatch latch = new CountDownLatch(windows.length);
-		final CyclicBarrier barrier = new CyclicBarrier(windows.length + 1);
+		CountDownLatch latch = new CountDownLatch(windows.length);
+		CyclicBarrier barrier = new CyclicBarrier(windows.length + 1);
 
 		for ( int i = 0; i < threads.length; i++ ) {
-			final int deviceType = i == 1 || !hasGPU ? CL_DEVICE_TYPE_CPU : CL_DEVICE_TYPE_GPU;
+			int deviceType = i == 1 || !hasGPU ? CL_DEVICE_TYPE_CPU : CL_DEVICE_TYPE_GPU;
 
 			String ID = platformID + " - " + (deviceType == CL_DEVICE_TYPE_CPU ? "CPU" : "GPU");
-			final GLFWWindow window = new GLFWWindow(glfwCreateWindow(initWidth, initHeight, ID, NULL, NULL), ID, new CountDownLatch(1));
+			GLFWWindow window = new GLFWWindow(glfwCreateWindow(initWidth, initHeight, ID, NULL, NULL), ID, new CountDownLatch(1));
 			glfwSetWindowPos(window.handle, 200 + initWidth * i + 32 * i, 200);
 
 			windows[i] = window;
@@ -284,7 +281,7 @@ public final class CLGLInteropDemo {
 				PointerBuffer deviceIDs = stack.mallocPointer(pi.get(0));
 				checkCLError(clGetDeviceIDs(platform, deviceType, deviceIDs, null));
 
-				devices = new ArrayList<Long>(deviceIDs.capacity());
+				devices = new ArrayList<>(deviceIDs.capacity());
 
 				for ( int i = 0; i < deviceIDs.capacity(); i++ )
 					devices.add(deviceIDs.get(i));

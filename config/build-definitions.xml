@@ -69,8 +69,10 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 	<property name="bin.templates" location="${bin}/Templates" relative="true"/>
 	<property name="bin.core" location="${bin}/Core" relative="true"/>
 	<property name="bin.tests" location="${bin}/Tests" relative="true"/>
-	<property name="bin.html.tests" location="${bin}/HTML/tests" relative="true"/>
-	<property name="bin.html.javadoc" location="${bin}/HTML/javadoc" relative="true"/>
+
+	<property name="bin.html" location="${bin}/HTML" relative="true"/>
+	<property name="bin.html.tests" location="${bin.html}/tests" relative="true"/>
+	<property name="bin.html.javadoc" location="${bin.html}/javadoc" relative="true"/>
 
 	<property name="test.resources" location="${module.core}/src/test/resources" relative="true"/>
 
@@ -132,22 +134,9 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 	<!-- Different location per platform/architecture. This is intentional. -->
 	<property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>
 
-	<available property="jdk.apple" file="${env.JAVA6_HOME}/bundle/Classes/classes.jar" if:set="env.JAVA6_HOME"/>
 	<presetdef name="lwjgl.javac">
-		<javac sourcepath="" debug="yes" encoding="UTF-8" source="1.6" target="1.6">
-			<!-- JAVA6_HOME will be used for the bootclasspath. This will cause compilation to fail if a Java 7+ API is used by mistake. -->
-			<bootclasspath if:set="env.JAVA6_HOME">
-				<!-- OpenJDK -->
-				<fileset dir="${env.JAVA6_HOME}/jre/lib" unless:set="jdk.apple">
-					<include name="*.jar"/>
-				</fileset>
-				<!-- Apple JDK -->
-				<fileset dir="${env.JAVA6_HOME}/bundle/Classes" if:set="jdk.apple">
-					<include name="*.jar"/>
-				</fileset>
-			</bootclasspath>
+		<javac sourcepath="" debug="yes" encoding="UTF-8" source="1.8" target="1.8">
 			<compilerarg value="-Xlint:all"/>
-			<compilerarg value="-Xlint:-options" unless:set="env.JAVA6_HOME"/>
 		</javac>
 	</presetdef>
 

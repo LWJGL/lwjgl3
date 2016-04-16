@@ -8,7 +8,6 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.Map;
@@ -23,162 +22,100 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** GLFW events demo. */
 public final class Events {
 
-	private static final GLFWMonitorCallback monitorCB = new GLFWMonitorCallback() {
-		@Override
-		public void invoke(long monitor, int event) {
-			printEvent("Monitor", "%s", monitor, event == GLFW_CONNECTED ? "connected" : "disconnected");
-		}
-	};
+	private static final GLFWMonitorCallback monitorCB = GLFWMonitorCallback.create((monitor, event) -> printEvent(
+		"Monitor", "%s", monitor, event == GLFW_CONNECTED ? "connected" : "disconnected"
+	));
 
-	private static final GLFWJoystickCallback joystickCB = new GLFWJoystickCallback() {
-		@Override
-		public void invoke(int joy, int event) {
-			printEvent("Joystick", "%s %s", joy, glfwGetJoystickName(joy), event == GLFW_CONNECTED ? "connected" : "disconnected");
-		}
-	};
+	private static final GLFWJoystickCallback joystickCB = GLFWJoystickCallback.create((joy, event) -> printEvent(
+		"Joystick", "%s %s", joy, glfwGetJoystickName(joy), event == GLFW_CONNECTED ? "connected" : "disconnected"
+	));
 
-	private static final GLFWWindowPosCallback     windowPosCB     = new GLFWWindowPosCallback() {
-		@Override
-		public void invoke(long window, int xpos, int ypos) {
-			printEvent("moved to %d, %d", window, xpos, ypos);
-		}
-	};
-	private static final GLFWWindowSizeCallback    windowSizeCB    = new GLFWWindowSizeCallback() {
-		@Override
-		public void invoke(long window, int width, int height) {
-			printEvent("resized to %d x %d", window, width, height);
-		}
-	};
-	private static final GLFWWindowCloseCallback   windowCloseCB   = new GLFWWindowCloseCallback() {
-		@Override
-		public void invoke(long window) {
-			printEvent("closed", window);
-		}
-	};
-	private static final GLFWWindowRefreshCallback windowRefreshCB = new GLFWWindowRefreshCallback() {
-		@Override
-		public void invoke(long window) {
-			printEvent("refreshed", window);
-		}
-	};
-	private static final GLFWWindowFocusCallback   windowFocusCB   = new GLFWWindowFocusCallback() {
-		@Override
-		public void invoke(long window, int focused) {
-			printEvent(focused == 0 ? "lost focus" : "gained focus", window);
-		}
-	};
-	private static final GLFWWindowIconifyCallback windowIconifyCB = new GLFWWindowIconifyCallback() {
-		@Override
-		public void invoke(long window, int iconified) {
-			printEvent(iconified == 0 ? "restored" : "iconified", window);
-		}
-	};
+	private static final GLFWWindowPosCallback     windowPosCB     = GLFWWindowPosCallback.create((window, xpos, ypos) -> printEvent(
+		"moved to %d, %d", window, xpos, ypos
+	));
+	private static final GLFWWindowSizeCallback    windowSizeCB    = GLFWWindowSizeCallback.create((window, width, height) -> printEvent(
+		"resized to %d x %d", window, width, height
+	));
+	private static final GLFWWindowCloseCallback   windowCloseCB   = GLFWWindowCloseCallback.create(window -> printEvent(
+		"closed", window
+	));
+	private static final GLFWWindowRefreshCallback windowRefreshCB = GLFWWindowRefreshCallback.create(window -> printEvent(
+		"refreshed", window
+	));
+	private static final GLFWWindowFocusCallback   windowFocusCB   = GLFWWindowFocusCallback.create((window, focused) -> printEvent(
+		focused == 0 ? "lost focus" : "gained focus", window
+	));
+	private static final GLFWWindowIconifyCallback windowIconifyCB = GLFWWindowIconifyCallback.create((window, iconified) -> printEvent(
+		iconified == 0 ? "restored" : "iconified", window
+	));
 
-	private static final GLFWFramebufferSizeCallback framebufferSizeCB = new GLFWFramebufferSizeCallback() {
-		@Override
-		public void invoke(long window, int width, int height) {
-			printEvent("framebuffer resized to %d x %d", window, width, height);
+	private static final GLFWFramebufferSizeCallback framebufferSizeCB = GLFWFramebufferSizeCallback.create((window, width, height) -> printEvent(
+		"framebuffer resized to %d x %d", window, width, height
+	));
+
+	private static final Map<Integer, String> KEY_CODES = apiClassTokens((field, value) -> field.getName().startsWith("GLFW_KEY_"), null, GLFW.class);
+	private static final GLFWKeyCallback      keyCB     = GLFWKeyCallback.create((window, key, scancode, action, mods) -> {
+		String state;
+		switch ( action ) {
+			case GLFW_RELEASE:
+				state = "released";
+				break;
+			case GLFW_PRESS:
+				state = "pressed";
+				break;
+			case GLFW_REPEAT:
+				state = "repeated";
+				break;
+			default:
+				throw new IllegalArgumentException(String.format("Unsupported key action: 0x%X", action));
 		}
-	};
 
-	private static final GLFWKeyCallback keyCB = new GLFWKeyCallback() {
-		private final Map<Integer, String> KEY_CODES = apiClassTokens(new TokenFilter() {
-			@Override
-			public boolean accept(Field field, int value) {
-				return field.getName().startsWith("GLFW_KEY_");
-			}
-		}, null, GLFW.class);
+		printEvent("key %s[%s - %d] was %s", window, getModState(mods), KEY_CODES.get(key), scancode, state);
 
-		@Override
-		public void invoke(long window, int key, int scancode, int action, int mods) {
-			String state;
-			switch ( action ) {
-				case GLFW_RELEASE:
-					state = "released";
-					break;
-				case GLFW_PRESS:
-					state = "pressed";
-					break;
-				case GLFW_REPEAT:
-					state = "repeated";
-					break;
-				default:
-					throw new IllegalArgumentException(String.format("Unsupported key action: 0x%X", action));
-			}
+		if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+			glfwSetWindowShouldClose(window, 1);
+	});
 
-			printEvent("key %s[%s - %d] was %s", window, getModState(mods), KEY_CODES.get(key), scancode, state);
+	private static final GLFWCharCallback charCB = GLFWCharCallback.create((window, codepoint) -> printEvent(
+		"char %s", window, Character.toString((char)codepoint)
+	));
 
-			if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-				glfwSetWindowShouldClose(window, 1);
+	private static final GLFWCharModsCallback charModsCB = GLFWCharModsCallback.create((window, codepoint, mods) -> printEvent(
+		"char mods %s%s", window, getModState(mods), Character.toString((char)codepoint)
+	));
+
+	private static final GLFWMouseButtonCallback mouseButtonCB = GLFWMouseButtonCallback.create((window, button, action, mods) -> {
+		String state;
+		switch ( action ) {
+			case GLFW_RELEASE:
+				state = "released";
+				break;
+			case GLFW_PRESS:
+				state = "pressed";
+				break;
+			default:
+				throw new IllegalArgumentException(String.format("Unsupported mouse button action: 0x%X", action));
 		}
-	};
+		printEvent("mouse button %s[0x%X] was %s", window, getModState(mods), button, state);
+	});
 
-	private static final GLFWCharCallback charCB = new GLFWCharCallback() {
-		@Override
-		public void invoke(long window, int codepoint) {
-			printEvent("char %s", window, Character.toString((char)codepoint));
-		}
-	};
+	private static final GLFWCursorPosCallback cursorPosCB = GLFWCursorPosCallback.create((window, xpos, ypos) -> printEvent(
+		"cursor moved to %f, %f", window, xpos, ypos
+	));
 
-	private static final GLFWCharModsCallback charModsCB = new GLFWCharModsCallback() {
-		@Override
-		public void invoke(long window, int codepoint, int mods) {
-			printEvent("char mods %s%s", window, getModState(mods), Character.toString((char)codepoint));
-		}
-	};
+	private static final GLFWCursorEnterCallback cursorEnterCB = GLFWCursorEnterCallback.create((window, entered) -> printEvent(
+		"cursor %s", window, entered == 0 ? "left" : "entered"
+	));
 
-	private static final GLFWMouseButtonCallback mouseButtonCB = new GLFWMouseButtonCallback() {
-		@Override
-		public void invoke(long window, int button, int action, int mods) {
-			String state;
-			switch ( action ) {
-				case GLFW_RELEASE:
-					state = "released";
-					break;
-				case GLFW_PRESS:
-					state = "pressed";
-					break;
-				default:
-					throw new IllegalArgumentException(String.format("Unsupported mouse button action: 0x%X", action));
-			}
-			printEvent("mouse button %s[0x%X] was %s", window, getModState(mods), button, state);
-		}
-	};
+	private static final GLFWScrollCallback scrollCB = GLFWScrollCallback.create((window, xoffset, yoffset) -> printEvent(
+		"scroll by %f, %f", window, xoffset, yoffset
+	));
 
-	private static final GLFWCursorPosCallback cursorPosCB = new GLFWCursorPosCallback() {
-		@Override
-		public void invoke(long window, double xpos, double ypos) {
-			printEvent("cursor moved to %f, %f", window, xpos, ypos);
-		}
-	};
+	private static final GLFWDropCallback dropCB = GLFWDropCallback.create((window, count, names) -> {
+		printEvent("drop %d file%s", window, count, count == 1 ? "" : "s");
 
-	private static final GLFWCursorEnterCallback cursorEnterCB = new GLFWCursorEnterCallback() {
-		@Override
-		public void invoke(long window, int entered) {
-			printEvent("cursor %s", window, entered == 0 ? "left" : "entered");
-		}
-	};
-
-	private static final GLFWScrollCallback scrollCB = new GLFWScrollCallback() {
-		@Override
-		public void invoke(long window, double xoffset, double yoffset) {
-			printEvent("scroll by %f, %f", window, xoffset, yoffset);
-		}
-	};
-
-	private static final GLFWDropCallback dropCB = new GLFWDropCallback() {
-		@Override
-		public void invoke(long window, int count, long names) {
-			printEvent("drop %d file%s", window, count, count == 1 ? "" : "s");
-
-			GLFWDropCallback.apply(count, names, new ConsumerString() {
-				@Override
-				public void accept(int index, String name) {
-					System.out.format("\t%d: %s%n", index + 1, name);
-				}
-			});
-		}
-	};
+		GLFWDropCallback.apply(count, names, (int index, String name) -> System.out.format("\t%d: %s%n", index + 1, name));
+	});
 
 	private Events() {
 	}

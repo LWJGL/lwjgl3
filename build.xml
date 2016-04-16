@@ -479,14 +479,14 @@ License terms: http://lwjgl.org/license.php
 			<src path="${src.templates}/java"/>
 			<include name="org/lwjgl/system/**"/>
 			<classpath>
-				<pathelement location="${env.JAVA_HOME}/lib/tools.jar" unless:set="jdk.apple"/>
+				<pathelement location="${env.JAVA_HOME}/lib/tools.jar"/>
 			</classpath>
 		</lwjgl.javac>
 
 		<delete dir="${bin.html.javadoc}"/>
 		<javadoc
 			destdir="${bin.html.javadoc}"
-			source="1.6"
+			source="1.8"
 			windowtitle="LWJGL ${build.version}"
 			encoding="UTF-8"
 			docencoding="UTF-8"

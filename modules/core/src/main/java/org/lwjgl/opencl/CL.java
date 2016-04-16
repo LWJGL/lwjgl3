@@ -71,9 +71,9 @@ public final class CL {
 		create(Library.loadNative(libName));
 	}
 
-	private static void create(final SharedLibrary OPENCL) {
+	private static void create(SharedLibrary OPENCL) {
 		try {
-			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
+			FunctionProviderLocal functionProvider = new FunctionProviderLocal() {
 
 				private final long clGetExtensionFunctionAddress;
 				private final long clGetExtensionFunctionAddressForPlatform;
@@ -193,7 +193,7 @@ public final class CL {
 
 		CL.functionProvider = functionProvider;
 
-		icd = new CLCapabilities(functionProvider, Collections.<String>emptySet());
+		icd = new CLCapabilities(functionProvider, Collections.emptySet());
 	}
 
 	/** Unloads the OpenCL native library. */
@@ -223,8 +223,8 @@ public final class CL {
 	 *
 	 * @return the {@link CLCapabilities instance}
 	 */
-	public static CLCapabilities createPlatformCapabilities(final long cl_platform_id) {
-		Set<String> supportedExtensions = new HashSet<String>(32);
+	public static CLCapabilities createPlatformCapabilities(long cl_platform_id) {
+		Set<String> supportedExtensions = new HashSet<>(32);
 
 		// Parse PLATFORM_EXTENSIONS string
 		CL.addExtensions(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_EXTENSIONS), supportedExtensions);
@@ -270,7 +270,7 @@ public final class CL {
 		APIVersion version = apiParseVersion(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION), "OpenCL");
 		CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
-		return new CLCapabilities(new FunctionProvider.Default() {
+		return new CLCapabilities(new FunctionProvider() {
 			@Override
 			public long getFunctionAddress(ByteBuffer functionName) {
 				return getFunctionProvider().getFunctionAddress(cl_platform_id, functionName);
@@ -291,7 +291,7 @@ public final class CL {
 	 * @return the {@link CLCapabilities instance}
 	 */
 	public static CLCapabilities createDeviceCapabilities(long cl_device_id, CLCapabilities platformCapabilities) {
-		Set<String> supportedExtensions = new HashSet<String>(32);
+		Set<String> supportedExtensions = new HashSet<>(32);
 
 		// Parse DEVICE_EXTENSIONS string
 		String extensionsString = getDeviceInfoStringASCII(cl_device_id, CL_DEVICE_EXTENSIONS);

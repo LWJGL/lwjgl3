@@ -68,7 +68,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	 *
 	 * @return the {@link OVRLogCallback} instance
 	 */
-	public static OVRLogCallback createString(final SAMString sam) {
+	public static OVRLogCallback createString(SAMString sam) {
 		return new OVRLogCallback() {
 			@Override
 			public void invoke(long userData, int level, long message) {

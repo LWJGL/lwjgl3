@@ -85,7 +85,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 	 *
 	 * @return the {@link VkDebugReportCallbackEXT} instance
 	 */
-	public static VkDebugReportCallbackEXT createString(final SAMString sam) {
+	public static VkDebugReportCallbackEXT createString(SAMString sam) {
 		return new VkDebugReportCallbackEXT() {
 			@Override
 			public int invoke(int flags, int objectType, long object, long location, int messageCode, long pLayerPrefix, long pMessage, long pUserData) {

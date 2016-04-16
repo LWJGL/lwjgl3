@@ -282,6 +282,7 @@ val cl_context_callback = "cl_context_callback".callback(
 	void_p.IN("user_data", "the user-specified value that was passed when calling #CreateContext() or #CreateContextFromType()")
 ) {
 	documentation = "Instances of this interface may be passed to the #CreateContext() and #CreateContextFromType() methods."
+	preamble.javaImport("java.nio.*")
 	useSystemCallConvention()
 	additionalCode = """
 	/** A functional interface for {@link CLContextCallback}. */
@@ -296,7 +297,7 @@ val cl_context_callback = "cl_context_callback".callback(
 	 *
 	 * @return the {@link CLContextCallback} instance
 	 */
-	public static CLContextCallback createString(final SAMString sam) {
+	public static CLContextCallback createString(SAMString sam) {
 		return new CLContextCallback() {
 			@Override
 			public void invoke(long errinfo, long private_info, long cb, long user_data) {
@@ -383,7 +384,7 @@ val cl_svmfree_callback = "cl_svmfree_callback".callback(
 	 *
 	 * @return the {@link CLSVMFreeCallback} instance
 	 */
-	public static CLSVMFreeCallback createBuffer(final SAMBuffer sam) {
+	public static CLSVMFreeCallback createBuffer(SAMBuffer sam) {
 		return new CLSVMFreeCallback() {
 			@Override
 			public void invoke(long queue, int num_svm_pointers, long svm_pointers, long user_data) {

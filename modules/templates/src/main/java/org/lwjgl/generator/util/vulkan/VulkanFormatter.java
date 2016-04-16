@@ -5,8 +5,6 @@
 package org.lwjgl.generator.util.vulkan;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -96,13 +94,6 @@ public class VulkanFormatter {
 				format();
 			}
 		});
-
-		ActionListener settingsAction = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				format();
-			}
-		};
 	}
 
 	private void format() {
@@ -184,7 +175,7 @@ public class VulkanFormatter {
 
 		boolean matches = m.find();
 		while ( matches ) {
-			if ( m.start() != 0)
+			if ( m.start() != 0 )
 				builder.append(',');
 
 			String line = m.group(1);

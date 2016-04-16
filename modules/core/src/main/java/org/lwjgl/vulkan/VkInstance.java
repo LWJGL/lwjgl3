@@ -27,7 +27,7 @@ public class VkInstance extends DispatchableHandle {
 		super(handle, getInstanceCapabilities(handle, ci));
 	}
 
-	private static VKCapabilities getInstanceCapabilities(final long handle, VkInstanceCreateInfo ci) {
+	private static VKCapabilities getInstanceCapabilities(long handle, VkInstanceCreateInfo ci) {
 		VkApplicationInfo appInfo = ci.pApplicationInfo();
 		int apiVersion;
 		if ( appInfo != null )
@@ -37,7 +37,7 @@ public class VkInstance extends DispatchableHandle {
 			apiVersion = VK_MAKE_VERSION(1, 0, 0);
 		}
 
-		return new VKCapabilities(new FunctionProvider.Default() {
+		return new VKCapabilities(new FunctionProvider() {
 			private final long GetInstanceProcAddr = VK.getFunctionProvider().getFunctionAddress("vkGetInstanceProcAddr");
 
 			{

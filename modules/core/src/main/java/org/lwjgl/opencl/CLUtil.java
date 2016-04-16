@@ -7,7 +7,6 @@ package org.lwjgl.opencl;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.MemoryStack;
 
-import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.Arrays;
@@ -23,31 +22,29 @@ import static org.lwjgl.system.MemoryUtil.*;
 public final class CLUtil {
 
 	/** Maps OpenCL error token values to their String representations. */
-	private static final Map<Integer, String> CL_ERROR_TOKENS = apiClassTokens(
-		new TokenFilter() {
-			private final List<String> EXCLUDE = Arrays.asList("CL_DEVICE_TYPE_ALL", "CL_BUILD_NONE", "CL_BUILD_ERROR", "CL_BUILD_IN_PROGRESS");
+	private static final Map<Integer, String> CL_ERROR_TOKENS;
 
-			@Override
-			public boolean accept(Field field, int value) {
-				return value < 0 && !EXCLUDE.contains(field.getName()); // OpenCL errors have negative values.
-			}
-		},
-		null,
-		CL10.class,
-		apiOptionalClass("org.lwjgl.opencl.CL10GL"),
-		CL11.class,
-		CL12.class,
-		CL20.class,
-		apiOptionalClass("org.lwjgl.opencl.APPLEGLSharing"),
-		EXTDeviceFission.class,
-		INTELAccelerator.class,
-		INTELVAAPIMediaSharing.class,
-		apiOptionalClass("org.lwjgl.opencl.KHRGLSharing"),
-		apiOptionalClass("org.lwjgl.opencl.KHREGLEvent"),
-		apiOptionalClass("org.lwjgl.opencl.KHREGLImage"),
-		KHRICD.class
-		/*, EXTDeviceFission.class*/
-	);
+	static {
+		List<String> EXCLUDE = Arrays.asList("CL_DEVICE_TYPE_ALL", "CL_BUILD_NONE", "CL_BUILD_ERROR", "CL_BUILD_IN_PROGRESS");
+
+		CL_ERROR_TOKENS = apiClassTokens(
+			(field, value) -> value < 0 && !EXCLUDE.contains(field.getName()), // OpenCL errors have negative values.
+			null,
+			CL10.class,
+			apiOptionalClass("org.lwjgl.opencl.CL10GL"),
+			CL11.class,
+			CL12.class,
+			CL20.class,
+			apiOptionalClass("org.lwjgl.opencl.APPLEGLSharing"),
+			EXTDeviceFission.class,
+			INTELAccelerator.class,
+			INTELVAAPIMediaSharing.class,
+			apiOptionalClass("org.lwjgl.opencl.KHRGLSharing"),
+			apiOptionalClass("org.lwjgl.opencl.KHREGLEvent"),
+			apiOptionalClass("org.lwjgl.opencl.KHREGLImage"),
+			KHRICD.class
+		);
+	}
 
 	private CLUtil() {}
 

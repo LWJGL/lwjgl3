@@ -65,7 +65,7 @@ public final class AL {
 	private AL() {}
 
 	static void init() {
-		functionProvider = new FunctionProvider.Default() {
+		functionProvider = new FunctionProvider() {
 			// We'll use alGetProcAddress for both core and extension entry points.
 			// To do that, we need to first grab the alGetProcAddress function from
 			// the OpenAL native library.
@@ -170,7 +170,7 @@ public final class AL {
 				{ 0, 1 }  // OpenAL 1
 			};
 
-			Set<String> supportedExtensions = new HashSet<String>(32);
+			Set<String> supportedExtensions = new HashSet<>(32);
 
 			for ( int major = 1; major <= AL_VERSIONS.length; major++ ) {
 				int[] minors = AL_VERSIONS[major - 1];
@@ -248,8 +248,8 @@ public final class AL {
 			if ( Checks.DEBUG ) {
 				Field[] fields = ALCapabilities.class.getFields();
 
-				flags = new ArrayList<Field>(64);
-				funcs = new ArrayList<Field>(16);
+				flags = new ArrayList<>(64);
+				funcs = new ArrayList<>(16);
 
 				for ( Field f : fields )
 					(f.getType() == Boolean.TYPE ? flags : funcs).add(f);

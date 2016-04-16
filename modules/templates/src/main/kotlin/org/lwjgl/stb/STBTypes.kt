@@ -50,6 +50,7 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 	returnDoc = "the number of bytes actually read"
 ) {
 	documentation = "Instances of this interface may be set to the {@code read} field of the ##STBIIOCallbacks struct."
+	preamble.javaImport("java.nio.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link STBIReadCallback} arguments to a ByteBuffer.
@@ -77,7 +78,7 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 	 *
 	 * @return the {@link STBIReadCallback} instance
 	 */
-	public static STBIReadCallback createBuffer(final SAMBuffer sam) {
+	public static STBIReadCallback createBuffer(SAMBuffer sam) {
 		return new STBIReadCallback() {
 			@Override
 			public int invoke(long user, long data, int size) {
@@ -134,6 +135,7 @@ val stbi_write_func = "stbi_write_func *".callback(
 	AutoSize("data")..int.IN("size", "the number of bytes in {@code data}")
 ) {
 	documentation = "Instances of this interface may be used with the ##STBImageWrite {@code write_type_to_func} functions."
+	preamble.javaImport("java.nio.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link STBIWriteCallback} arguments to a ByteBuffer.
@@ -161,7 +163,7 @@ val stbi_write_func = "stbi_write_func *".callback(
 	 *
 	 * @return the {@link STBIWriteCallback} instance
 	 */
-	public static STBIWriteCallback createBuffer(final SAMBuffer sam) {
+	public static STBIWriteCallback createBuffer(SAMBuffer sam) {
 		return new STBIWriteCallback() {
 			@Override
 			public void invoke(long context, long data, int size) {

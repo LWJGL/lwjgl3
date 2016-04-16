@@ -39,35 +39,27 @@ public final class XXHashDemo {
 		System.out.format("test %d-bit hash = 0x%X\n", 64, hash64);
 
 		// streaming hash with advanced functions
-		try {
-			String resource = "lwjgl32.png";
-			InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
-			try {
-				ReadableByteChannel rbc = Channels.newChannel(stream);
+		String resource = "lwjgl32.png";
+		try (InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource)) {
+			// init
+			long state = XXH64_createState();
+			XXH64_reset(state, SEED);
+			try (ReadableByteChannel rbc = Channels.newChannel(stream)) {
+				while ( true ) {
+					buffer.clear();
+					int bytes = rbc.read(buffer);
+					if ( bytes == -1 )
+						break;
 
-				// init
-				long state = XXH64_createState();
-				XXH64_reset(state, SEED);
-				try {
-					while ( true ) {
-						buffer.clear();
-						int bytes = rbc.read(buffer);
-						if ( bytes == -1 )
-							break;
-
-						// stream update
-						buffer.flip();
-						XXH64_update(state, buffer);
-					}
-					// digest
-					hash64 = XXH64_digest(state);
-					System.out.format("streaming 64-bit hash: 0x%X (%s)\n", hash64, resource);
-				} finally {
-					XXH64_freeState(state);
-					rbc.close();
+					// stream update
+					buffer.flip();
+					XXH64_update(state, buffer);
 				}
+				// digest
+				hash64 = XXH64_digest(state);
+				System.out.format("streaming 64-bit hash: 0x%X (%s)\n", hash64, resource);
 			} finally {
-				stream.close();
+				XXH64_freeState(state);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

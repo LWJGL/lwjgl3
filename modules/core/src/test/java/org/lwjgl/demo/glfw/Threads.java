@@ -49,13 +49,10 @@ public final class Threads {
 				throw new IllegalStateException("Failed to create GLFW window.");
 
 			GLFWKeyCallback keyfun;
-			glfwSetKeyCallback(window, keyfun = new GLFWKeyCallback() {
-				@Override
-				public void invoke(long window, int key, int scancode, int action, int mods) {
-					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-						glfwSetWindowShouldClose(window, GLFW_TRUE);
-				}
-			});
+			glfwSetKeyCallback(window, keyfun = GLFWKeyCallback.create((window1, key, scancode, action, mods) -> {
+				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+					glfwSetWindowShouldClose(window1, GLFW_TRUE);
+			}));
 			glfwSetWindowPos(window, 200 + 250 * i, 200);
 			glfwShowWindow(window);
 

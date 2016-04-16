@@ -12,7 +12,14 @@ import static org.lwjgl.system.MemoryStack.*;
 public interface FunctionProvider {
 
 	/** {@link CharSequence} version of {@link #getFunctionAddress(ByteBuffer)}. */
-	long getFunctionAddress(CharSequence functionName);
+	default long getFunctionAddress(CharSequence functionName) {
+		MemoryStack stack = stackPush();
+		try {
+			return getFunctionAddress(stack.ASCII(functionName));
+		} finally {
+			stack.pop();
+		}
+	}
 
 	/**
 	 * Returns the function address of the specified function. If the function is not supported, returns 0L.
@@ -25,19 +32,5 @@ public interface FunctionProvider {
 
 	/** Releases any resource held by this {@link FunctionProvider}. */
 	void free();
-
-	abstract class Default implements FunctionProvider {
-
-		@Override
-		public long getFunctionAddress(CharSequence functionName) {
-			MemoryStack stack = stackPush();
-			try {
-				return getFunctionAddress(stack.ASCII(functionName));
-			} finally {
-				stack.pop();
-			}
-		}
-
-	}
 
 }

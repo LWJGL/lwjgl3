@@ -108,7 +108,7 @@ public abstract class Struct extends Pointer.Default {
 	}
 
 	protected static Layout __union(Member... members) {
-		List<Member> union = new ArrayList<Member>(members.length);
+		List<Member> union = new ArrayList<>(members.length);
 
 		int size = 0;
 		int alignment = 0;
@@ -126,7 +126,7 @@ public abstract class Struct extends Pointer.Default {
 	}
 
 	protected static Layout __struct(Member... members) {
-		List<Member> struct = new ArrayList<Member>(members.length);
+		List<Member> struct = new ArrayList<>(members.length);
 
 		int size = 0;
 		int alignment = 0;

@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import java.io.*;
-import java.lang.reflect.Method;
 import java.util.UUID;
 import java.util.zip.CRC32;
 
@@ -21,6 +20,8 @@ import static org.lwjgl.system.APIUtil.*;
  * @see Configuration#SHARED_LIBRARY_EXTRACT_PATH
  */
 final class SharedLibraryLoader {
+
+	private static final int BUFFER_SIZE = 8192;
 
 	private static File extractPath;
 
@@ -69,7 +70,10 @@ final class SharedLibraryLoader {
 	 * @return The extracted file.
 	 */
 	private static File extractFile(String libraryFile, File libraryPath) throws IOException {
-		String libraryCRC = crc(readResource(libraryFile));
+		String libraryCRC;
+		try ( InputStream input = readResource(libraryFile) ) {
+			libraryCRC = crc(input);
+		}
 
 		File extractedFile = getExtractedFile(
 			libraryPath == null ? new File(libraryCRC) : libraryPath,
@@ -135,25 +139,23 @@ final class SharedLibraryLoader {
 	private static void extractFile(String libraryFile, String libraryCRC, File extractedFile) throws IOException {
 		String extractedCrc = null;
 		if ( extractedFile.exists() )
-			try {
-				extractedCrc = crc(new FileInputStream(extractedFile));
-			} catch (FileNotFoundException ignored) {
+			try ( InputStream input = new FileInputStream(extractedFile) ) {
+				extractedCrc = crc(input);
 			}
 
 		// If file doesn't exist or the CRC doesn't match, extract it to the temp dir.
 		if ( extractedCrc == null || !extractedCrc.equals(libraryCRC) ) {
-			InputStream input = readResource(libraryFile);
 			extractedFile.getParentFile().mkdirs();
 
-			FileOutputStream output = new FileOutputStream(extractedFile);
-			byte[] buffer = new byte[4096];
-			while ( true ) {
-				int length = input.read(buffer);
-				if ( length == -1 ) break;
-				output.write(buffer, 0, length);
+			try (
+				InputStream input = readResource(libraryFile);
+				FileOutputStream output = new FileOutputStream(extractedFile)
+			) {
+				byte[] buffer = new byte[BUFFER_SIZE];
+				int n;
+				while ( (n = input.read(buffer)) > 0 )
+					output.write(buffer, 0, n);
 			}
-			input.close();
-			output.close();
 		}
 	}
 
@@ -179,21 +181,14 @@ final class SharedLibraryLoader {
 	 *
 	 * @return the CRC as a hex String
 	 */
-	private static String crc(InputStream input) {
+	private static String crc(InputStream input) throws IOException {
 		CRC32 crc = new CRC32();
-		byte[] buffer = new byte[4096];
-		try {
-			while ( true ) {
-				int length = input.read(buffer);
-				if ( length == -1 ) break;
-				crc.update(buffer, 0, length);
-			}
-		} catch (Exception e) {
-			try {
-				input.close();
-			} catch (IOException ignored) {
-			}
-		}
+
+		byte[] buffer = new byte[BUFFER_SIZE];
+		int n;
+
+		while ( (n = input.read(buffer)) > 0 )
+			crc.update(buffer, 0, n);
 
 		return Long.toHexString(crc.getValue());
 	}
@@ -242,14 +237,12 @@ final class SharedLibraryLoader {
 	 */
 	private static boolean canExecute(File file) {
 		try {
-			Method canExecute = File.class.getMethod("canExecute");
-			if ( (Boolean)canExecute.invoke(file) )
+			if ( file.canExecute() )
 				return true;
 
-			Method setExecutable = File.class.getMethod("setExecutable", boolean.class, boolean.class);
-			setExecutable.invoke(file, true, false);
+			file.setExecutable(true, false);
 
-			return (Boolean)canExecute.invoke(file);
+			return file.canExecute();
 		} catch (Exception ignored) {
 		}
 

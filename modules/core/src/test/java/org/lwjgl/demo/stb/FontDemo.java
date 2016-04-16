@@ -74,77 +74,63 @@ abstract class FontDemo {
 
 		errorfun = GLFWErrorCallback.createPrint();
 
-		windowSizefun = new GLFWWindowSizeCallback() {
-			@Override
-			public void invoke(long window, int width, int height) {
-				FontDemo.this.ww = width;
-				FontDemo.this.wh = height;
+		windowSizefun = GLFWWindowSizeCallback.create((windowHandle, width, height) -> {
+			FontDemo.this.ww = width;
+			FontDemo.this.wh = height;
 
-				glMatrixMode(GL_PROJECTION);
-				glLoadIdentity();
-				glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
-				glMatrixMode(GL_MODELVIEW);
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
+			glMatrixMode(GL_MODELVIEW);
 
-				setLineOffset(lineOffset);
+			setLineOffset(lineOffset);
+		});
+
+		framebufferSizefun = GLFWFramebufferSizeCallback.create((windowHandle, width, height) -> glViewport(0, 0, width, height));
+
+		keyfun = GLFWKeyCallback.create((windowHandle, key, scancode, action, mods) -> {
+			ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
+			if ( action == GLFW_RELEASE )
+				return;
+
+			switch ( key ) {
+				case GLFW_KEY_ESCAPE:
+					glfwSetWindowShouldClose(windowHandle, GLFW_TRUE);
+					break;
+				case GLFW_KEY_PAGE_UP:
+					setLineOffset(lineOffset - wh / FontDemo.this.lineHeight);
+					break;
+				case GLFW_KEY_PAGE_DOWN:
+					setLineOffset(lineOffset + wh / FontDemo.this.lineHeight);
+					break;
+				case GLFW_KEY_HOME:
+					setLineOffset(0);
+					break;
+				case GLFW_KEY_END:
+					setLineOffset(lineCount - wh / FontDemo.this.lineHeight);
+					break;
+				case GLFW_KEY_KP_ADD:
+				case GLFW_KEY_EQUAL:
+					setScale(scale + 1);
+					break;
+				case GLFW_KEY_KP_SUBTRACT:
+				case GLFW_KEY_MINUS:
+					setScale(scale - 1);
+					break;
+				case GLFW_KEY_0:
+				case GLFW_KEY_KP_0:
+					if ( ctrlDown )
+						setScale(0);
+					break;
 			}
-		};
+		});
 
-		framebufferSizefun = new GLFWFramebufferSizeCallback() {
-			@Override
-			public void invoke(long window, int width, int height) {
-				glViewport(0, 0, width, height);
-			}
-		};
-
-		keyfun = new GLFWKeyCallback() {
-			@Override
-			public void invoke(long window, int key, int scancode, int action, int mods) {
-				ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
-				if ( action == GLFW_RELEASE )
-					return;
-
-				switch ( key ) {
-					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GLFW_TRUE);
-						break;
-					case GLFW_KEY_PAGE_UP:
-						setLineOffset(lineOffset - wh / FontDemo.this.lineHeight);
-						break;
-					case GLFW_KEY_PAGE_DOWN:
-						setLineOffset(lineOffset + wh / FontDemo.this.lineHeight);
-						break;
-					case GLFW_KEY_HOME:
-						setLineOffset(0);
-						break;
-					case GLFW_KEY_END:
-						setLineOffset(lineCount - wh / FontDemo.this.lineHeight);
-						break;
-					case GLFW_KEY_KP_ADD:
-					case GLFW_KEY_EQUAL:
-						setScale(scale + 1);
-						break;
-					case GLFW_KEY_KP_SUBTRACT:
-					case GLFW_KEY_MINUS:
-						setScale(scale - 1);
-						break;
-					case GLFW_KEY_0:
-					case GLFW_KEY_KP_0:
-						if ( ctrlDown )
-							setScale(0);
-						break;
-				}
-			}
-		};
-
-		scrollfun = new GLFWScrollCallback() {
-			@Override
-			public void invoke(long window, double xoffset, double yoffset) {
-				if ( ctrlDown )
-					setScale(scale + (int)yoffset);
-				else
-					setLineOffset(lineOffset - (int)yoffset * 3);
-			}
-		};
+		scrollfun = GLFWScrollCallback.create((windowHandle, xoffset, yoffset) -> {
+			if ( ctrlDown )
+				setScale(scale + (int)yoffset);
+			else
+				setLineOffset(lineOffset - (int)yoffset * 3);
+		});
 	}
 
 	public String getText() {

@@ -290,7 +290,7 @@ public final class Vorbis {
 
 		private boolean buttonPressed;
 
-		Renderer(final Decoder decoder, String title) {
+		Renderer(Decoder decoder, String title) {
 			errorCallback = GLFWErrorCallback.createPrint().set();
 			if ( glfwInit() != GLFW_TRUE )
 				throw new IllegalStateException("Unable to initialize GLFW");

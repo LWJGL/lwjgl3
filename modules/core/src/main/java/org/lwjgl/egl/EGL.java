@@ -76,9 +76,9 @@ public final class EGL {
 		create(Library.loadNative(libName));
 	}
 
-	private static void create(final SharedLibrary EGL) {
+	private static void create(SharedLibrary EGL) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider.Default() {
+			FunctionProvider functionProvider = new FunctionProvider() {
 				private final long eglGetProcAddress = EGL.getFunctionAddress("eglGetProcAddress");
 
 				{
@@ -156,7 +156,7 @@ public final class EGL {
 		long QueryString = functionProvider.getFunctionAddress("eglQueryString");
 		long versionString = invokePIP(QueryString, EGL_NO_DISPLAY, EGL_VERSION);
 
-		Set<String> ext = new HashSet<String>(32);
+		Set<String> ext = new HashSet<>(32);
 
 		if ( versionString == NULL )
 			invokeI(functionProvider.getFunctionAddress("eglGetError")); // clear error
@@ -182,7 +182,7 @@ public final class EGL {
 	 * @return the {@link EGLCapabilities instance}
 	 */
 	public static EGLCapabilities createDisplayCapabilities(long dpy, int majorVersion, int minorVersion) {
-		Set<String> supportedExtensions = new HashSet<String>(32);
+		Set<String> supportedExtensions = new HashSet<>(32);
 
 		// Add EGL versions
 		addEGLVersions(majorVersion, minorVersion, supportedExtensions);

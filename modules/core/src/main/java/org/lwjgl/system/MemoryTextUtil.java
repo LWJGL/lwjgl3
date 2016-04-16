@@ -11,8 +11,8 @@ import static java.lang.Character.*;
 /**
  * This class serves two purposes:
  * <ul>
- *     <li>Keep the {@link MemoryUtil} class free of implementation details.</li>
- *     <li>Enable elimination of {@link ByteBuffer} allocations (via escape analysis) with the Unsafe implementation.</li>
+ * <li>Keep the {@link MemoryUtil} class free of implementation details.</li>
+ * <li>Enable elimination of {@link ByteBuffer} allocations (via escape analysis) with the Unsafe implementation.</li>
  * </ul>
  */
 class MemoryTextUtil {
@@ -33,7 +33,7 @@ class MemoryTextUtil {
 		return p - offset;
 	}
 
-	/** @see MemoryUtil#memASCII(ByteBuffer, int, int)  */
+	/** @see MemoryUtil#memASCII(ByteBuffer, int, int) */
 	static String decodeASCII(ByteBuffer buffer, int length, int offset) {
 		char[] chars = new char[length];
 
@@ -87,7 +87,7 @@ class MemoryTextUtil {
 		return p - offset;
 	}
 
-	/** @see MemoryUtil#memEncodedLengthUTF8(CharSequence) */
+	/** @see MemoryUtil#memLengthUTF8 */
 	static int encodeUTF8Length(CharSequence value) {
 		int i, len = value.length(), bytes = len; // start with 1:1
 
@@ -98,7 +98,7 @@ class MemoryTextUtil {
 		}
 
 		// 1 or 2 bytes fast path
-		for (; i < len; i++ ) {
+		for ( ; i < len; i++ ) {
 			char c = value.charAt(i);
 
 			// fallback to slow path
@@ -146,7 +146,7 @@ class MemoryTextUtil {
 			throw new RuntimeException(String.format("Malformed surrogate pair: 0x%X - 0x%X", hi, lo));
 	}
 
-	/** @see MemoryUtil#memUTF8(ByteBuffer, int, int)  */
+	/** @see MemoryUtil#memUTF8(ByteBuffer, int, int) */
 	static String decodeUTF8(ByteBuffer buffer, int length, int offset) {
 		char[] string = new char[length];
 
@@ -225,7 +225,7 @@ class MemoryTextUtil {
 		return p - offset;
 	}
 
-	/** @see MemoryUtil#memUTF16(ByteBuffer, int, int)  */
+	/** @see MemoryUtil#memUTF16(ByteBuffer, int, int) */
 	static String decodeUTF16(ByteBuffer buffer, int length, int offset) {
 		char[] chars = new char[length];
 

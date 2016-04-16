@@ -50,6 +50,9 @@ public final class ExampleGL2 extends Demo {
 	private static boolean premult;
 
 	public static void main(String[] args) {
+		GLFWErrorCallback errorcb;
+		glfwSetErrorCallback(errorcb = GLFWErrorCallback.createThrow());
+
 		if ( glfwInit() == GLFW_FALSE )
 			throw new RuntimeException("Failed to init GLFW.");
 
@@ -57,9 +60,6 @@ public final class ExampleGL2 extends Demo {
 		PerfGraph fps = new PerfGraph();
 
 		initGraph(fps, GRAPH_RENDER_FPS, "Frame Time");
-
-		GLFWErrorCallback errorcb;
-		glfwSetErrorCallback(errorcb = GLFWErrorCallback.createThrow());
 
 		boolean DEMO_MSAA = args.length != 0 && "msaa".equalsIgnoreCase(args[0]);
 		if ( DEMO_MSAA )
@@ -73,19 +73,16 @@ public final class ExampleGL2 extends Demo {
 		}
 
 		GLFWKeyCallback key;
-		glfwSetKeyCallback(window, key = new GLFWKeyCallback() {
-			@Override
-			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if ( key == GLFW_KEY_ESCAPE && action == GLFW_PRESS )
-					glfwSetWindowShouldClose(window, GLFW_TRUE);
-				if ( key == GLFW_KEY_SPACE && action == GLFW_PRESS )
-					blowup = !blowup;
-				if ( key == GLFW_KEY_S && action == GLFW_PRESS )
-					screenshot = true;
-				if ( key == GLFW_KEY_P && action == GLFW_PRESS )
-					premult = !premult;
-			}
-		});
+		glfwSetKeyCallback(window, key = GLFWKeyCallback.create((windowHandle, keyCode, scancode, action, mods) -> {
+			if ( keyCode == GLFW_KEY_ESCAPE && action == GLFW_PRESS )
+				glfwSetWindowShouldClose(windowHandle, GLFW_TRUE);
+			if ( keyCode == GLFW_KEY_SPACE && action == GLFW_PRESS )
+				blowup = !blowup;
+			if ( keyCode == GLFW_KEY_S && action == GLFW_PRESS )
+				screenshot = true;
+			if ( keyCode == GLFW_KEY_P && action == GLFW_PRESS )
+				premult = !premult;
+		}));
 
 		glfwMakeContextCurrent(window);
 		GL.createCapabilities();

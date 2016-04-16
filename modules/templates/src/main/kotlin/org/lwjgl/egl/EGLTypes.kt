@@ -125,7 +125,7 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 	 *
 	 * @return the {@link EGLDebugMessageKHRCallback} instance
 	 */
-	public static EGLDebugMessageKHRCallback createString(final SAMString sam) {
+	public static EGLDebugMessageKHRCallback createString(SAMString sam) {
 		return new EGLDebugMessageKHRCallback() {
 			@Override
 			public void invoke(int error, long command, int messageType, long threadLabel, long objectLabel, long message) {
@@ -162,6 +162,7 @@ val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
 	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
 	documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
+	preamble.javaImport("java.nio.*")
 	additionalCode = """
 	/** A functional interface for {@link EGLSetBlobFuncANDROID}. */
 	public interface SAMBuffer {
@@ -175,7 +176,7 @@ val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
 	 *
 	 * @return the {@link EGLSetBlobFuncANDROID} instance
 	 */
-	public static EGLSetBlobFuncANDROID createBuffer(final SAMBuffer sam) {
+	public static EGLSetBlobFuncANDROID createBuffer(SAMBuffer sam) {
 		return new EGLSetBlobFuncANDROID() {
 			@Override
 			public void invoke(long key, long keySize, long value, long valueSize) {
@@ -193,6 +194,7 @@ val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
 	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
 	documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
+	preamble.javaImport("java.nio.*")
 	additionalCode = """
 	/** A functional interface for {@link EGLGetBlobFuncANDROID}. */
 	public interface SAMBuffer {
@@ -206,7 +208,7 @@ val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
 	 *
 	 * @return the {@link EGLGetBlobFuncANDROID} instance
 	 */
-	public static EGLGetBlobFuncANDROID createBuffer(final SAMBuffer sam) {
+	public static EGLGetBlobFuncANDROID createBuffer(SAMBuffer sam) {
 		return new EGLGetBlobFuncANDROID() {
 			@Override
 			public long invoke(long key, long keySize, long value, long valueSize) {

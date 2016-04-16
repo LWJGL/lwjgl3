@@ -5,7 +5,6 @@
 package org.lwjgl.generator.util;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -128,12 +127,7 @@ public class TemplateFormatter {
 			}
 		});
 
-		ActionListener settingsAction = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				format();
-			}
-		};
+		ActionListener settingsAction = e -> format();
 
 		radioConst.addActionListener(settingsAction);
 		radioFunc.addActionListener(settingsAction);
@@ -387,31 +381,31 @@ public class TemplateFormatter {
 
 	private static final Pattern TYPE_PATTERN = Pattern.compile(
 		"(?:const\\s+)?" + // const
-		"(?:(?:un)signed\\s+)?" + // (un)signed
-		"[0-9a-zA-Z_]++" + // type
-		"(?:\\s+const)?(?:\\s*[*]+\\s*|\\s+)" + // pointer. This is a little funny because we can have whitespace on either side of *
-		"(?:/[*]\\s*)?" + // name may be wrapped in comments /*
-		"[0-9a-zA-Z_]+" + // function or parameter name
-		"(?:\\s*[*]/)?"
+			"(?:(?:un)signed\\s+)?" + // (un)signed
+			"[0-9a-zA-Z_]++" + // type
+			"(?:\\s+const)?(?:\\s*[*]+\\s*|\\s+)" + // pointer. This is a little funny because we can have whitespace on either side of *
+			"(?:/[*]\\s*)?" + // name may be wrapped in comments /*
+			"[0-9a-zA-Z_]+" + // function or parameter name
+			"(?:\\s*[*]/)?"
 	);
 
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile(
 		TYPE_PATTERN + // return type + function name
-		"\\s*[(]\\s*" + // opening parenthesis
-		"((?:void)?(?:(?:\\s*,)?\\s*" + TYPE_PATTERN + ")*)" + // void or parameter list
-		"\\s*[)]", // closing parenthesis
+			"\\s*[(]\\s*" + // opening parenthesis
+			"((?:void)?(?:(?:\\s*,)?\\s*" + TYPE_PATTERN + ")*)" + // void or parameter list
+			"\\s*[)]", // closing parenthesis
 		Pattern.MULTILINE
 	);
 
 	// Same as TYPE_PATTERN, with capturing groups and without the whitespace stuff (we've already verified correct syntax)
 	private static final Pattern PARAM_PATTERN = Pattern.compile(
 		"(const\\s+)?" +
-		"((?:un)?signed\\s+)?" +
-		"([0-9a-zA-Z_]++)" +
-		"(\\s+const)?\\s*([*]+)?\\s*" +
-		"(?:/[*]\\s*)?" +
-		"([0-9a-zA-Z_]+)" +
-		"(?:\\s*[*]/)?",
+			"((?:un)?signed\\s+)?" +
+			"([0-9a-zA-Z_]++)" +
+			"(\\s+const)?\\s*([*]+)?\\s*" +
+			"(?:/[*]\\s*)?" +
+			"([0-9a-zA-Z_]+)" +
+			"(?:\\s*[*]/)?",
 		Pattern.MULTILINE
 	);
 

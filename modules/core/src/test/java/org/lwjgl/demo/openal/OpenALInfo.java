@@ -6,11 +6,8 @@ package org.lwjgl.demo.openal;
 
 import org.lwjgl.openal.*;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
@@ -44,7 +41,7 @@ public class OpenALInfo {
 		printALCInfo(device, deviceCaps);
 		printALInfo();
 		if ( deviceCaps.ALC_EXT_EFX )
-			printEFXInfo(device, alContext);
+			printEFXInfo(device);
 
 		alcDestroyContext(alContext);
 		alcCloseDevice(device);
@@ -103,7 +100,7 @@ public class OpenALInfo {
 		ALUtil.checkALError();
 	}
 
-	private static void printEFXInfo(long device, long alContext) {
+	private static void printEFXInfo(long device) {
 		int efxMajor = alcGetInteger(device, ALC_EFX_MAJOR_VERSION);
 		int efxMinor = alcGetInteger(device, ALC_EFX_MINOR_VERSION);
 		if ( alcGetError(device) == ALC_NO_ERROR ) {
@@ -116,19 +113,17 @@ public class OpenALInfo {
 		}
 
 		System.out.println("Supported filters: ");
-		HashMap<String, Integer> filters = new HashMap<String, Integer>();
+		HashMap<String, Integer> filters = new HashMap<>();
 		filters.put("Low-pass", AL_FILTER_LOWPASS);
 		filters.put("High-pass", AL_FILTER_HIGHPASS);
 		filters.put("Band-pass", AL_FILTER_BANDPASS);
 
-		Set<Entry<String, Integer>> entries = filters.entrySet();
-		for ( Entry<String, Integer> entry : entries ) {
-			if ( EFXUtil.isFilterSupported(entry.getValue()) )
-				System.out.println("    " + entry.getKey());
-		}
+		filters.entrySet().stream()
+			.filter(entry -> EFXUtil.isFilterSupported(entry.getValue()))
+			.forEach(entry -> System.out.println("    " + entry.getKey()));
 
 		System.out.println("Supported effects: ");
-		HashMap<String, Integer> effects = new HashMap<String, Integer>();
+		HashMap<String, Integer> effects = new HashMap<>();
 		effects.put("EAX Reverb", AL_EFFECT_EAXREVERB);
 		effects.put("Reverb", AL_EFFECT_REVERB);
 		effects.put("Chorus", AL_EFFECT_CHORUS);
@@ -143,11 +138,9 @@ public class OpenALInfo {
 		effects.put("Compressor", AL_EFFECT_COMPRESSOR);
 		effects.put("Equalizer", AL_EFFECT_EQUALIZER);
 
-		entries = effects.entrySet();
-		for ( Entry<String, Integer> entry : entries ) {
-			if ( EFXUtil.isEffectSupported(entry.getValue()) )
-				System.out.println("    " + entry.getKey());
-		}
+		effects.entrySet().stream()
+			.filter(e -> EFXUtil.isEffectSupported(e.getValue()))
+			.forEach(e -> System.out.println("    " + e.getKey()));
 	}
 
 	private static void printDevices(int which, String kind) {

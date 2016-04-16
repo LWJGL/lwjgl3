@@ -81,7 +81,7 @@ fun main(args: Array<String>) {
 		// all top-level functions/properties in that package. Example:
 		// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
 
-		val pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())
+		val pool = ForkJoinPool.commonPool()
 
 		// Generate bindings
 

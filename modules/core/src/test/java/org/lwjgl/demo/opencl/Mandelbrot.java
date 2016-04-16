@@ -65,7 +65,7 @@ public class Mandelbrot {
 	}
 
 	/** The event callbacks run on the main thread. We use this queue to apply any changes in the rendering thread. */
-	private final Queue<Runnable> events = new ConcurrentLinkedQueue<Runnable>();
+	private final Queue<Runnable> events = new ConcurrentLinkedQueue<>();
 
 	private final GLFWWindow window;
 
@@ -222,12 +222,9 @@ public class Mandelbrot {
 				.put(platform)
 				.put(NULL)
 				.flip();
-			clContext = clCreateContext(ctxProps, device, clContextCB = new CLContextCallback() {
-				@Override
-				public void invoke(long errinfo, long private_info, long cb, long user_data) {
-					log(String.format("cl_context_callback\n\tInfo: %s", memUTF8(errinfo)));
-				}
-			}, NULL, errcode_ret);
+			clContext = clCreateContext(ctxProps, device, clContextCB = CLContextCallback.create(
+				(errinfo, private_info, cb, user_data) -> log(String.format("cl_context_callback\n\tInfo: %s", memUTF8(errinfo)))
+			), NULL, errcode_ret);
 			checkCLError(errcode_ret);
 
 			// create command queues for every GPU, setup colormap and init kernels
@@ -286,20 +283,20 @@ public class Mandelbrot {
 
 			vsh = glCreateShader(GL_VERTEX_SHADER);
 			glShaderSource(vsh, "#version 150\n" +
-			                    "\n" +
-			                    "uniform mat4 projection;\n" +
-			                    "\n" +
-			                    "uniform vec2 size;\n" +
-			                    "\n" +
-			                    "in vec2 posIN;\n" +
-			                    "in vec2 texIN;\n" +
-			                    "\n" +
-			                    "out vec2 texCoord;\n" +
-			                    "\n" +
-			                    "void main(void) {\n" +
-			                    "\tgl_Position = projection * vec4(posIN * size, 0.0, 1.0);\n" +
-			                    "\ttexCoord = texIN;\n" +
-			                    "}");
+				"\n" +
+				"uniform mat4 projection;\n" +
+				"\n" +
+				"uniform vec2 size;\n" +
+				"\n" +
+				"in vec2 posIN;\n" +
+				"in vec2 texIN;\n" +
+				"\n" +
+				"out vec2 texCoord;\n" +
+				"\n" +
+				"void main(void) {\n" +
+				"\tgl_Position = projection * vec4(posIN * size, 0.0, 1.0);\n" +
+				"\ttexCoord = texIN;\n" +
+				"}");
 			glCompileShader(vsh);
 			String log = glGetShaderInfoLog(vsh, glGetShaderi(vsh, GL_INFO_LOG_LENGTH));
 			if ( !log.isEmpty() )
@@ -307,16 +304,16 @@ public class Mandelbrot {
 
 			fsh = glCreateShader(GL_FRAGMENT_SHADER);
 			glShaderSource(fsh, "#version 150\n" +
-			                    "\n" +
-			                    "uniform isampler2D mandelbrot;\n" +
-			                    "\n" +
-			                    "in vec2 texCoord;\n" +
-			                    "\n" +
-			                    "out vec4 fragColor;\n" +
-			                    "\n" +
-			                    "void main(void) {\n" +
-			                    "\tfragColor = texture(mandelbrot, texCoord) / 255.0;\n" +
-			                    "}");
+				"\n" +
+				"uniform isampler2D mandelbrot;\n" +
+				"\n" +
+				"in vec2 texCoord;\n" +
+				"\n" +
+				"out vec4 fragColor;\n" +
+				"\n" +
+				"void main(void) {\n" +
+				"\tfragColor = texture(mandelbrot, texCoord) / 255.0;\n" +
+				"}");
 			glCompileShader(fsh);
 			log = glGetShaderInfoLog(fsh, glGetShaderi(fsh, GL_INFO_LOG_LENGTH));
 			if ( !log.isEmpty() )
@@ -358,134 +355,104 @@ public class Mandelbrot {
 
 		setKernelConstants();
 
-		glfwSetWindowSizeCallback(window.handle, window.windowsizefun = new GLFWWindowSizeCallback() {
-			@Override
-			public void invoke(long window, final int width, final int height) {
-				if ( width == 0 || height == 0 )
+		glfwSetWindowSizeCallback(window.handle, window.windowsizefun = GLFWWindowSizeCallback.create((windowHandle, width, height) -> {
+			if ( width == 0 || height == 0 )
+				return;
+
+			events.add(() -> {
+				this.ww = width;
+				this.wh = height;
+
+				shouldInitBuffers = true;
+			});
+		}));
+
+		glfwSetFramebufferSizeCallback(window.handle, window.framebuffersizefun = GLFWFramebufferSizeCallback.create((windowHandle, width, height) -> {
+			if ( width == 0 || height == 0 )
+				return;
+
+			events.add(() -> {
+				this.fbw = width;
+				this.fbh = height;
+
+				shouldInitBuffers = true;
+			});
+		}));
+
+		glfwSetKeyCallback(window.handle, window.keyfun = GLFWKeyCallback.create((windowHandle, key, scancode, action, mods) -> {
+			switch ( key ) {
+				case GLFW_KEY_LEFT_CONTROL:
+				case GLFW_KEY_RIGHT_CONTROL:
+					ctrlDown = action == GLFW_PRESS;
 					return;
-
-				events.add(new Runnable() {
-					@Override
-					public void run() {
-						Mandelbrot.this.ww = width;
-						Mandelbrot.this.wh = height;
-
-						shouldInitBuffers = true;
-					}
-				});
 			}
-		});
 
-		glfwSetFramebufferSizeCallback(window.handle, window.framebuffersizefun = new GLFWFramebufferSizeCallback() {
-			@Override
-			public void invoke(long window, final int width, final int height) {
-				if ( width == 0 || height == 0 )
-					return;
+			if ( action != GLFW_PRESS )
+				return;
 
-				events.add(new Runnable() {
-					@Override
-					public void run() {
-						Mandelbrot.this.fbw = width;
-						Mandelbrot.this.fbh = height;
-
-						shouldInitBuffers = true;
-					}
-				});
+			switch ( key ) {
+				case GLFW_KEY_ESCAPE:
+					glfwSetWindowShouldClose(windowHandle, GLFW_TRUE);
+					break;
+				case GLFW_KEY_D:
+					events.offer(() -> {
+						doublePrecision = !doublePrecision;
+						log("DOUBLE PRECISION IS NOW: " + (doublePrecision ? "ON" : "OFF"));
+						rebuild = true;
+					});
+					break;
+				case GLFW_KEY_HOME:
+					events.offer(() -> {
+						offsetX = -0.5;
+						offsetY = 0.0;
+						zoom = 1.0;
+					});
+					break;
 			}
-		});
+		}));
 
-		glfwSetKeyCallback(window.handle, window.keyfun = new GLFWKeyCallback() {
-			@Override
-			public void invoke(long window, int key, int scancode, int action, int mods) {
-				switch ( key ) {
-					case GLFW_KEY_LEFT_CONTROL:
-					case GLFW_KEY_RIGHT_CONTROL:
-						ctrlDown = action == GLFW_PRESS;
-						return;
-				}
+		glfwSetMouseButtonCallback(window.handle, window.mousebuttonfun = GLFWMouseButtonCallback.create((windowHandle, button, action, mods) -> {
+			if ( button != GLFW_MOUSE_BUTTON_LEFT )
+				return;
 
-				if ( action != GLFW_PRESS )
-					return;
+			dragging = action == GLFW_PRESS;
 
-				switch ( key ) {
-					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GLFW_TRUE);
-						break;
-					case GLFW_KEY_D:
-						events.offer(new Runnable() {
-							@Override
-							public void run() {
-								doublePrecision = !doublePrecision;
-								log("DOUBLE PRECISION IS NOW: " + (doublePrecision ? "ON" : "OFF"));
-								rebuild = true;
-							}
-						});
-						break;
-					case GLFW_KEY_HOME:
-						events.offer(new Runnable() {
-							@Override
-							public void run() {
-								offsetX = -0.5;
-								offsetY = 0.0;
-								zoom = 1.0;
-							}
-						});
-						break;
-				}
+			if ( dragging ) {
+				dragging = true;
+
+				dragX = mouseX;
+				dragY = mouseY;
+
+				dragOffsetX = offsetX;
+				dragOffsetY = offsetY;
 			}
-		});
+		}));
 
-		glfwSetMouseButtonCallback(window.handle, window.mousebuttonfun = new GLFWMouseButtonCallback() {
-			@Override
-			public void invoke(long window, int button, int action, int mods) {
-				if ( button != GLFW_MOUSE_BUTTON_LEFT )
-					return;
+		glfwSetCursorPosCallback(window.handle, window.cursorposfun = GLFWCursorPosCallback.create((windowHandle, xpos, ypos) -> {
+			mouseX = xpos;
+			mouseY = wh - ypos;
 
-				dragging = action == GLFW_PRESS;
-
-				if ( dragging ) {
-					dragging = true;
-
-					dragX = mouseX;
-					dragY = mouseY;
-
-					dragOffsetX = offsetX;
-					dragOffsetY = offsetY;
-				}
+			if ( dragging ) {
+				offsetX = dragOffsetX + transformX(dragX - mouseX);
+				offsetY = dragOffsetY + transformY(dragY - mouseY);
 			}
-		});
+		}));
 
-		glfwSetCursorPosCallback(window.handle, window.cursorposfun = new GLFWCursorPosCallback() {
-			@Override
-			public void invoke(long window, double xpos, double ypos) {
-				mouseX = xpos;
-				mouseY = wh - ypos;
+		glfwSetScrollCallback(window.handle, window.scrollfun = GLFWScrollCallback.create((windowHandle, xoffset, yoffset) -> {
+			if ( yoffset == 0 )
+				return;
 
-				if ( dragging ) {
-					offsetX = dragOffsetX + transformX(dragX - mouseX);
-					offsetY = dragOffsetY + transformY(dragY - mouseY);
-				}
-			}
-		});
+			double scrollX = mouseX - ww * 0.5;
+			double scrollY = mouseY - wh * 0.5;
 
-		glfwSetScrollCallback(window.handle, window.scrollfun = new GLFWScrollCallback() {
-			@Override
-			public void invoke(long window, double xoffset, double yoffset) {
-				if ( yoffset == 0 )
-					return;
+			double zoomX = transformX(scrollX);
+			double zoomY = transformY(scrollY);
 
-				double scrollX = mouseX - ww * 0.5;
-				double scrollY = mouseY - wh * 0.5;
+			zoom *= (1.0 - yoffset * (ctrlDown ? 0.25 : 0.05));
 
-				double zoomX = transformX(scrollX);
-				double zoomY = transformY(scrollY);
-
-				zoom *= (1.0 - yoffset * (ctrlDown ? 0.25 : 0.05));
-
-				offsetX += zoomX - transformX(scrollX);
-				offsetY += zoomY - transformY(scrollY);
-			}
-		});
+			offsetX += zoomX - transformX(scrollX);
+			offsetY += zoomY - transformY(scrollY);
+		}));
 	}
 
 	private static long getDevice(long platform, CLCapabilities platformCaps, int deviceType) {
@@ -556,56 +523,27 @@ public class Mandelbrot {
 		window.signal.countDown();
 	}
 
-	private interface CLCleaner {
-		int release(long object);
+	private interface CLReleaseFunction {
+		int invoke(long object);
 	}
 
-	private static void release(long object, CLCleaner cleaner) {
+	private static void release(long object, CLReleaseFunction release) {
 		if ( object == NULL )
 			return;
 
-		int errcode = cleaner.release(object);
+		int errcode = release.invoke(object);
 		checkCLError(errcode);
 	}
 
 	private void cleanup() {
-		CLCleaner memObjCleaner = new CLCleaner() {
-			@Override
-			public int release(long object) {
-				return clReleaseMemObject(object);
-			}
-		};
+		release(clTexture, CL10::clReleaseMemObject);
+		release(clColorMap, CL10::clReleaseMemObject);
 
-		release(clTexture, memObjCleaner);
-		release(clColorMap, memObjCleaner);
+		release(clKernel, CL10::clReleaseKernel);
+		release(clProgram, CL10::clReleaseProgram);
+		release(clQueue, CL10::clReleaseCommandQueue);
+		release(clContext, CL10::clReleaseContext);
 
-		release(clKernel, new CLCleaner() {
-			@Override
-			public int release(long object) {
-				return clReleaseKernel(object);
-			}
-		});
-
-		release(clProgram, new CLCleaner() {
-			@Override
-			public int release(long object) {
-				return clReleaseProgram(object);
-			}
-		});
-
-		release(clQueue, new CLCleaner() {
-			@Override
-			public int release(long object) {
-				return clReleaseCommandQueue(object);
-			}
-		});
-
-		release(clContext, new CLCleaner() {
-			@Override
-			public int release(long object) {
-				return clReleaseContext(object);
-			}
-		});
 		clContextCB.free();
 
 		glDeleteProgram(glProgram);
@@ -758,21 +696,18 @@ public class Mandelbrot {
 		log("OpenCL COMPILER OPTIONS: " + options);
 
 		CLProgramCallback buildCallback;
-		int errcode = clBuildProgram(clProgram, device, options, buildCallback = new CLProgramCallback() {
-			@Override
-			public void invoke(long program, long user_data) {
-				log(String.format(
-					"The cl_program [0x%X] was built %s",
-					program,
-					getProgramBuildInfoInt(program, device, CL_PROGRAM_BUILD_STATUS) == CL_SUCCESS ? "successfully" : "unsuccessfully"
-				));
-				String log = getProgramBuildInfoStringASCII(program, device, CL_PROGRAM_BUILD_LOG);
-				if ( !log.isEmpty() )
-					log(String.format("BUILD LOG:\n----\n%s\n-----", log));
+		int errcode = clBuildProgram(clProgram, device, options, buildCallback = CLProgramCallback.create((program, user_data) -> {
+			log(String.format(
+				"The cl_program [0x%X] was built %s",
+				program,
+				getProgramBuildInfoInt(program, device, CL_PROGRAM_BUILD_STATUS) == CL_SUCCESS ? "successfully" : "unsuccessfully"
+			));
+			String log = getProgramBuildInfoStringASCII(program, device, CL_PROGRAM_BUILD_LOG);
+			if ( !log.isEmpty() )
+				log(String.format("BUILD LOG:\n----\n%s\n-----", log));
 
-				latch.countDown();
-			}
-		}, NULL);
+			latch.countDown();
+		}), NULL);
 		checkCLError(errcode);
 
 		// Make sure the program has been built before proceeding

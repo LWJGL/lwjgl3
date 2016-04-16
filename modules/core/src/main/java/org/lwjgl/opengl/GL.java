@@ -116,8 +116,8 @@ public final class GL {
 		create(Library.loadNative(libName));
 	}
 
-	private static void create(final SharedLibrary OPENGL) {
-		abstract class FunctionProviderGL extends FunctionProvider.Default {
+	private static void create(SharedLibrary OPENGL) {
+		abstract class FunctionProviderGL implements FunctionProvider {
 			abstract long getExtensionAddress(long name);
 
 			@Override
@@ -362,7 +362,7 @@ public final class GL {
 				5, // OpenGL 4.0 to 4.5
 			};
 
-			Set<String> supportedExtensions = new HashSet<String>(512);
+			Set<String> supportedExtensions = new HashSet<>(512);
 
 			int maxMajor = min(majorVersion, GL_VERSIONS.length);
 			if ( MAX_VERSION != null )
@@ -526,7 +526,7 @@ public final class GL {
 				extensionsString = memASCII(callP(wglGetExtensionsString));
 		}
 
-		Set<String> supportedExtensions = new HashSet<String>(32);
+		Set<String> supportedExtensions = new HashSet<>(32);
 
 		if ( extensionsString != null ) {
 			StringTokenizer tokenizer = new StringTokenizer(extensionsString);
@@ -576,7 +576,7 @@ public final class GL {
 			stack.pop();
 		}
 
-		Set<String> supportedExtensions = new HashSet<String>(32);
+		Set<String> supportedExtensions = new HashSet<>(32);
 
 		int[][] GLX_VERSIONS = {
 			{ 1, 2, 3, 4 }
@@ -634,8 +634,8 @@ public final class GL {
 			if ( Checks.DEBUG ) {
 				Field[] fields = GLCapabilities.class.getFields();
 
-				flags = new ArrayList<Field>(512);
-				funcs = new ArrayList<Field>(256);
+				flags = new ArrayList<>(512);
+				funcs = new ArrayList<>(256);
 
 				for ( Field f : fields )
 					(f.getType() == Boolean.TYPE ? flags : funcs).add(f);

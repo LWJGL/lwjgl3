@@ -7,10 +7,10 @@ package org.lwjgl.opengles;
 import static org.lwjgl.opengles.GLES20.*;
 import static org.lwjgl.system.APIUtil.*;
 
+/** OpenGL ES utilities. */
 public final class GLESUtil {
 
 	private GLESUtil() {
-
 	}
 
 	/**

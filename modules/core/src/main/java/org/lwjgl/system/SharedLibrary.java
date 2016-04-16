@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system;
 
-import static org.lwjgl.system.MemoryStack.*;
-
 /** A {@link FunctionProvider} implementation that opens a platform-specific shared library and returns functions pointers from it. */
 public interface SharedLibrary extends FunctionProvider, Pointer {
 
@@ -24,16 +22,6 @@ public interface SharedLibrary extends FunctionProvider, Pointer {
 		@Override
 		public String getName() {
 			return name;
-		}
-
-		@Override
-		public long getFunctionAddress(CharSequence functionName) {
-			MemoryStack stack = stackPush();
-			try {
-				return getFunctionAddress(stack.ASCII(functionName));
-			} finally {
-				stack.pop();
-			}
 		}
 
 	}

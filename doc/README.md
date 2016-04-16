@@ -31,8 +31,7 @@ Library Dependencies: Kotlin runtime
 
 # INSTALLATION
 Requirements:
-* JDK 6 or newer  
-    See *JAVA6_HOME* below for more info.
+* JDK 8 or newer  
 * Ant 1.9.3 or newer
 
 Step-by-step:
@@ -86,8 +85,6 @@ The config folder contains the LWJGL configuration.
 	- a config/tests_<platform>.xml per platform
 
 The ANT build can be configured with the following environment variables:
-* JAVA6_HOME (optional, recommended)  
-	Should point to a JDK 6. This is used to configure the javac *bootclasspath* to ensure that the source code is compatible with Java 6. This is only useful if you plan to make changes to the LWJGL source code.
 * LWJGL_BUILD_TYPE (optional)  
 	This is used as the source of binary dependencies. Valid values:
    - *nightly*  

@@ -69,8 +69,8 @@ public class Gears extends AbstractGears {
 		glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, GLFW_DONT_CARE, GLFW_DONT_CARE);
 		glfwSetWindowAspectRatio(window, 1, 1);
 
-		final long monitor = glfwGetPrimaryMonitor();
-		final GLFWVidMode vidmode = glfwGetVideoMode(monitor);
+		long monitor = glfwGetPrimaryMonitor();
+		GLFWVidMode vidmode = glfwGetVideoMode(monitor);
 
 		// Center window
 		glfwSetWindowPos(
@@ -128,12 +128,7 @@ public class Gears extends AbstractGears {
 			}
 		});
 
-		glfwSetWindowSizeCallback(window, windowSizeCB = new GLFWWindowSizeCallback() {
-			@Override
-			public void invoke(long window, int width, int height) {
-				glViewport(0, 0, width, height);
-			}
-		});
+		glfwSetWindowSizeCallback(window, windowSizeCB = GLFWWindowSizeCallback.create((windowHandle, width, height) -> glViewport(0, 0, width, height)));
 
 		glfwMakeContextCurrent(window);
 		GL.createCapabilities();

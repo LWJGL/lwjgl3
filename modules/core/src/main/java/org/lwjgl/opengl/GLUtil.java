@@ -128,7 +128,7 @@ public final class GLUtil {
 		stream.printf("\t%s: %s\n", type, message);
 	}
 
-	private static GLDebugMessageCallback createDEBUGPROC(final PrintStream stream) {
+	private static GLDebugMessageCallback createDEBUGPROC(PrintStream stream) {
 		return new GLDebugMessageCallback() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
@@ -197,7 +197,7 @@ public final class GLUtil {
 		};
 	}
 
-	private static GLDebugMessageARBCallback createDEBUGPROCARB(final PrintStream stream) {
+	private static GLDebugMessageARBCallback createDEBUGPROCARB(PrintStream stream) {
 		return new GLDebugMessageARBCallback() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
@@ -262,7 +262,7 @@ public final class GLUtil {
 		};
 	}
 
-	private static GLDebugMessageAMDCallback createDEBUGPROCAMD(final PrintStream stream) {
+	private static GLDebugMessageAMDCallback createDEBUGPROCAMD(PrintStream stream) {
 		return new GLDebugMessageAMDCallback() {
 			@Override
 			public void invoke(int id, int category, int severity, int length, long message, long userParam) {

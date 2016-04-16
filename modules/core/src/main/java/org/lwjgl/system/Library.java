@@ -24,20 +24,12 @@ public final class Library {
 
 	private static final String JAVA_LIBRARY_PATH = "java.library.path";
 
-	private static final LibraryLoader<Boolean> LOADER_SYSTEM = new LibraryLoader<Boolean>() {
-		@Override
-		public Boolean load(File library) {
-			System.load(library.getAbsolutePath());
-			return true;
-		}
+	private static final LibraryLoader<Boolean> LOADER_SYSTEM = library -> {
+		System.load(library.getAbsolutePath());
+		return true;
 	};
 
-	private static final LibraryLoader<SharedLibrary> LOADER_NATIVE = new LibraryLoader<SharedLibrary>() {
-		@Override
-		public SharedLibrary load(File library) {
-			return apiCreateLibrary(library.getPath());
-		}
-	};
+	private static final LibraryLoader<SharedLibrary> LOADER_NATIVE = library -> apiCreateLibrary(library.getPath());
 
 	static {
 		if ( Checks.DEBUG ) {

@@ -6,8 +6,6 @@ package org.lwjgl.system;
 
 import org.lwjgl.PointerBuffer;
 
-import static org.lwjgl.system.MemoryUtil.*;
-
 /**
  * Pointer interface.
  *
@@ -52,11 +50,6 @@ public interface Pointer {
 		@Override
 		public long address() {
 			return address;
-		}
-
-		protected void checkAddress() {
-			if ( Checks.CHECKS && address == NULL )
-				throw new NullPointerException();
 		}
 
 		public boolean equals(Object o) {

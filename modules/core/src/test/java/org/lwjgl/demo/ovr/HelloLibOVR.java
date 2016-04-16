@@ -25,12 +25,7 @@ public final class HelloLibOVR {
 
 		detect.free();
 
-		OVRLogCallback callback = new OVRLogCallback() {
-			@Override
-			public void invoke(long userData, int level, long message) {
-				System.out.println("LibOVR [" + level + "] " + memASCII(message));
-			}
-		};
+		OVRLogCallback callback = OVRLogCallback.create((userData, level, message) -> System.out.println("LibOVR [" + level + "] " + memASCII(message)));
 
 		OVRInitParams initParams = OVRInitParams.calloc();
 		initParams.LogCallback(callback);

@@ -55,7 +55,7 @@ public final class ALUtil {
 
 		ByteBuffer buffer = memByteBuffer(__result, Integer.MAX_VALUE);
 
-		List<String> strings = new ArrayList<String>();
+		List<String> strings = new ArrayList<>();
 
 		int offset = 0;
 		while ( true ) {

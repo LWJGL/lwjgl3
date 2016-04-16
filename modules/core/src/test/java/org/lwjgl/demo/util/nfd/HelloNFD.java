@@ -23,7 +23,7 @@ public final class HelloNFD {
 	}
 
 	public static void main(String[] args) {
-		final int mod;
+		int mod;
 		String modDescr;
 		if ( Platform.get() == Platform.MACOSX ) {
 			mod = GLFW_MOD_SUPER;

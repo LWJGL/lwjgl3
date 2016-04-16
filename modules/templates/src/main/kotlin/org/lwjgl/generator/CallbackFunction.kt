@@ -47,9 +47,7 @@ class CallbackFunction(
 		print(HEADER)
 		println("package $packageName;\n")
 
-		print("""import java.nio.*;
-
-import org.lwjgl.*;
+		print("""import org.lwjgl.*;
 import org.lwjgl.system.libffi.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -118,7 +116,7 @@ ${signature.asSequence().withIndex().map {
 	 *
 	 * @return the {@link $className} instance
 	 */
-	public static $className create(final SAM sam) {
+	public static $className create(SAM sam) {
 		return new $className() {
 			@Override
 			public ${returns.nativeMethodType.simpleName} invoke($signatureJava) {
@@ -130,8 +128,11 @@ ${signature.asSequence().withIndex().map {
 		};
 	}
 """)
-		if ( additionalCode.isNotEmpty() )
-			print(additionalCode)
+		if ( additionalCode.isNotEmpty() ) {
+			print("\n\t")
+			print(additionalCode.trim())
+			println()
+		}
 
 		print("\n}")
 	}

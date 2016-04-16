@@ -103,9 +103,9 @@ public final class GLES {
 		create(Library.loadNative(libName));
 	}
 
-	private static void create(final SharedLibrary GLES) {
+	private static void create(SharedLibrary GLES) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider.Default() {
+			FunctionProvider functionProvider = new FunctionProvider() {
 				@Override
 				public long getFunctionAddress(ByteBuffer functionName) {
 					long address = EGL.getFunctionProvider().getFunctionAddress(functionName);
@@ -245,7 +245,7 @@ public final class GLES {
 				2 // OpenGL ES 3.0 to 3.2
 			};
 
-			Set<String> supportedExtensions = new HashSet<String>(128);
+			Set<String> supportedExtensions = new HashSet<>(128);
 
 			int maxMajor = min(majorVersion, GL_VERSIONS.length);
 			if ( MAX_VERSION != null )
@@ -328,8 +328,8 @@ public final class GLES {
 			if ( Checks.DEBUG ) {
 				Field[] fields = GLESCapabilities.class.getFields();
 
-				flags = new ArrayList<Field>(256);
-				funcs = new ArrayList<Field>(128);
+				flags = new ArrayList<>(256);
+				funcs = new ArrayList<>(128);
 
 				for ( Field f : fields )
 					(f.getType() == Boolean.TYPE ? flags : funcs).add(f);

@@ -28,10 +28,10 @@ public class VkDevice extends DispatchableHandle {
 		super(handle, getDeviceCapabilities(handle, physicalDevice, ci));
 	}
 
-	private static VKCapabilities getDeviceCapabilities(final long handle, final VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci) {
+	private static VKCapabilities getDeviceCapabilities(long handle, VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci) {
 		int apiVersion = physicalDevice.getCapabilities().apiVersion;
 		return new VKCapabilities(
-			new FunctionProvider.Default() {
+			new FunctionProvider() {
 				@Override
 				public long getFunctionAddress(ByteBuffer functionName) {
 					VKCapabilities caps = physicalDevice.getCapabilities();

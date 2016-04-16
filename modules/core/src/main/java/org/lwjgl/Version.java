@@ -40,15 +40,10 @@ public final class Version {
 		if ( url != null ) {
 			String classURL = url.toString();
 			if ( classURL.startsWith("jar:") ) {
-				try {
-					InputStream stream = new URL(classURL.substring(0, classURL.lastIndexOf("!") + 1) + '/' + JarFile.MANIFEST_NAME).openStream();
-					try {
-						return new Manifest(stream)
-							.getAttributes("org/lwjgl/")
-							.getValue("Implementation-Version");
-					} finally {
-						stream.close();
-					}
+				try ( InputStream stream = new URL(classURL.substring(0, classURL.lastIndexOf("!") + 1) + '/' + JarFile.MANIFEST_NAME).openStream() ) {
+					return new Manifest(stream)
+						.getAttributes("org/lwjgl/")
+						.getValue("Implementation-Version");
 				} catch (Exception e) {
 					e.printStackTrace(APIUtil.DEBUG_STREAM);
 				}

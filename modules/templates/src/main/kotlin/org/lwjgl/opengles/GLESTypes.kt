@@ -116,7 +116,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	 *
 	 * @return the {@link GLDebugMessageCallback} instance
 	 */
-	public static GLDebugMessageCallback createString(final SAMString sam) {
+	public static GLDebugMessageCallback createString(SAMString sam) {
 		return new GLDebugMessageCallback() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
@@ -168,7 +168,7 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
 	 *
 	 * @return the {@link GLDebugMessageKHRCallback} instance
 	 */
-	public static GLDebugMessageKHRCallback createString(final SAMString sam) {
+	public static GLDebugMessageKHRCallback createString(SAMString sam) {
 		return new GLDebugMessageKHRCallback() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {

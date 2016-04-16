@@ -17,6 +17,7 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiPredicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -205,9 +206,9 @@ public final class APIUtil {
 	 *
 	 * @return the token map
 	 */
-	public static Map<Integer, String> apiClassTokens(TokenFilter filter, Map<Integer, String> target, Class<?>... tokenClasses) {
+	public static Map<Integer, String> apiClassTokens(BiPredicate<Field, Integer> filter, Map<Integer, String> target, Class<?>... tokenClasses) {
 		if ( target == null )
-			target = new HashMap<Integer, String>(64);
+			target = new HashMap<>(64);
 
 		int TOKEN_MODIFIERS = Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL;
 
@@ -219,8 +220,8 @@ public final class APIUtil {
 				// Get only <public static final int> fields.
 				if ( (field.getModifiers() & TOKEN_MODIFIERS) == TOKEN_MODIFIERS && field.getType() == int.class ) {
 					try {
-						int value = field.getInt(null);
-						if ( filter != null && !filter.accept(field, value) )
+						Integer value = field.getInt(null);
+						if ( filter != null && !filter.test(field, value) )
 							continue;
 
 						String name = target.get(value);
@@ -502,20 +503,5 @@ public final class APIUtil {
 	}
 
 	// ----------------------------------------
-
-	/** Simple interface for Field filtering. */
-	public interface TokenFilter {
-
-		/**
-		 * Should return true if the specified Field passes the filter.
-		 *
-		 * @param field the Field to test
-		 * @param value the integer value of the field
-		 *
-		 * @return true if the Field is accepted
-		 */
-		boolean accept(Field field, int value);
-
-	}
 
 }

@@ -116,7 +116,7 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 	 *
 	 * @return the {@link GLDebugMessageAMDCallback} instance
 	 */
-	public static GLDebugMessageAMDCallback createString(final SAMString sam) {
+	public static GLDebugMessageAMDCallback createString(SAMString sam) {
 		return new GLDebugMessageAMDCallback() {
 			@Override
 			public void invoke(int id, int category, int severity, int length, long message, long userParam) {
@@ -168,7 +168,7 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 	 *
 	 * @return the {@link GLDebugMessageARBCallback} instance
 	 */
-	public static GLDebugMessageARBCallback createString(final SAMString sam) {
+	public static GLDebugMessageARBCallback createString(SAMString sam) {
 		return new GLDebugMessageARBCallback() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
@@ -228,7 +228,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	 *
 	 * @return the {@link GLDebugMessageCallback} instance
 	 */
-	public static GLDebugMessageCallback createString(final SAMString sam) {
+	public static GLDebugMessageCallback createString(SAMString sam) {
 		return new GLDebugMessageCallback() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {

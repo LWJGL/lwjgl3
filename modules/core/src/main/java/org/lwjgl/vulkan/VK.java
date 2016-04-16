@@ -74,9 +74,9 @@ public final class VK {
 		create(Library.loadNative(libName));
 	}
 
-	private static void create(final SharedLibrary VULKAN) {
+	private static void create(SharedLibrary VULKAN) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider.Default() {
+			FunctionProvider functionProvider = new FunctionProvider() {
 				private final long GetInstanceProcAddr = VULKAN.getFunctionAddress("vkGetInstanceProcAddr");
 
 				{
@@ -121,7 +121,7 @@ public final class VK {
 
 		VK.functionProvider = functionProvider;
 
-		globalCommands = new VKCapabilities(functionProvider, 0, Collections.<String>emptySet());
+		globalCommands = new VKCapabilities(functionProvider, 0, Collections.emptySet());
 		if ( globalCommands.vkCreateInstance == NULL ||
 			globalCommands.vkEnumerateInstanceExtensionProperties == NULL ||
 			globalCommands.vkEnumerateInstanceLayerProperties == NULL )
@@ -147,7 +147,7 @@ public final class VK {
 	static VKCapabilities getGlobalCommands() { return globalCommands; }
 
 	static Set<String> getEnabledExtensionSet(int apiVersion, PointerBuffer extensionNames) {
-		Set<String> enabledExtensions = new HashSet<String>(16);
+		Set<String> enabledExtensions = new HashSet<>(16);
 
 		int majorVersion = VK_VERSION_MAJOR(apiVersion);
 		int minorVersion = VK_VERSION_MINOR(apiVersion);

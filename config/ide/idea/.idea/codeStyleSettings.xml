@@ -19,6 +19,7 @@
         </option>
         <option name="LINE_SEPARATOR" value="&#10;" />
         <option name="INSERT_INNER_CLASS_IMPORTS" value="true" />
+        <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="4" />
         <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="0" />
         <option name="IMPORT_LAYOUT_TABLE">
           <value>
@@ -75,26 +76,8 @@
         <option name="FIELD_ANNOTATION_WRAP" value="0" />
         <JetCodeStyleSettings>
           <option name="ALIGN_IN_COLUMNS_CASE_BRANCH" value="true" />
-          <option name="NAME_COUNT_TO_USE_STAR_IMPORT" value="3" />
+          <option name="NAME_COUNT_TO_USE_STAR_IMPORT" value="4" />
         </JetCodeStyleSettings>
-        <SqlCodeStyleSettings>
-          <option name="NEW_LINE_BEFORE_FROM" value="false" />
-          <option name="NEW_LINE_BEFORE_JOIN" value="false" />
-          <option name="NEW_LINE_BEFORE_WHERE" value="false" />
-          <option name="NEW_LINE_BEFORE_GROUP_BY" value="false" />
-          <option name="NEW_LINE_BEFORE_ORDER_BY" value="false" />
-          <option name="NEW_LINE_BEFORE_HAVING" value="false" />
-          <option name="NEW_LINE_BEFORE_OTHER_CLAUSES" value="false" />
-          <option name="WRAP_INSIDE_SELECT" value="0" />
-          <option name="WRAP_INSIDE_JOIN_EXPRESSION" value="0" />
-          <option name="WRAP_INSIDE_GROUP_BY" value="0" />
-          <option name="WRAP_INSIDE_ORDER_BY" value="0" />
-          <option name="WRAP_INSIDE_BINARY_EXPRESSION" value="0" />
-          <option name="WRAP_INSIDE_ARGUMENT_DEFINITION" value="0" />
-          <option name="WRAP_INSIDE_CALL_EXPRESSION" value="0" />
-          <option name="NEW_LINE_AFTER_SELECT" value="false" />
-          <option name="NEW_LINE_AFTER_SELECT_ITEM" value="false" />
-        </SqlCodeStyleSettings>
         <XML>
           <option name="XML_ATTRIBUTE_WRAP" value="0" />
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
@@ -161,7 +144,6 @@
           <option name="BLANK_LINES_AROUND_METHOD" value="0" />
           <option name="BLANK_LINES_AROUND_METHOD_IN_INTERFACE" value="0" />
           <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
-          <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
           <option name="ALIGN_MULTILINE_ASSIGNMENT" value="true" />
           <option name="ALIGN_MULTILINE_THROWS_LIST" value="true" />
           <option name="ALIGN_MULTILINE_EXTENDS_LIST" value="true" />
@@ -171,6 +153,7 @@
           <option name="SPACE_WITHIN_IF_PARENTHESES" value="true" />
           <option name="SPACE_WITHIN_WHILE_PARENTHESES" value="true" />
           <option name="SPACE_WITHIN_FOR_PARENTHESES" value="true" />
+          <option name="SPACE_WITHIN_TRY_PARENTHESES" value="true" />
           <option name="SPACE_WITHIN_SWITCH_PARENTHESES" value="true" />
           <option name="SPACE_WITHIN_SYNCHRONIZED_PARENTHESES" value="true" />
           <option name="SPACE_WITHIN_ARRAY_INITIALIZER_BRACES" value="true" />
@@ -186,6 +169,7 @@
           <option name="TERNARY_OPERATION_SIGNS_ON_NEXT_LINE" value="true" />
           <option name="KEEP_SIMPLE_BLOCKS_IN_ONE_LINE" value="true" />
           <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
+          <option name="KEEP_MULTIPLE_EXPRESSIONS_IN_ONE_LINE" value="true" />
           <option name="ARRAY_INITIALIZER_WRAP" value="5" />
           <option name="ARRAY_INITIALIZER_LBRACE_ON_NEXT_LINE" value="true" />
           <option name="ARRAY_INITIALIZER_RBRACE_ON_NEXT_LINE" value="true" />
@@ -193,6 +177,7 @@
           <option name="WRAP_LONG_LINES" value="true" />
           <option name="FIELD_ANNOTATION_WRAP" value="0" />
           <option name="PARENT_SETTINGS_INSTALLED" value="true" />
+          <option name="WRAP_ON_TYPING" value="0" />
           <indentOptions>
             <option name="CONTINUATION_INDENT_SIZE" value="4" />
             <option name="USE_TAB_CHARACTER" value="true" />

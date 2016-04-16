@@ -12,7 +12,7 @@ import java.util.*;
 
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.Checks.checkPointer;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -73,10 +73,10 @@ public final class ALC {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		final SharedLibrary OPENAL = Library.loadNative(libName);
+		SharedLibrary OPENAL = Library.loadNative(libName);
 
 		try {
-			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
+			FunctionProviderLocal functionProvider = new FunctionProviderLocal() {
 
 				private final long alcGetProcAddress = getFunctionAddress("alcGetProcAddress");
 
@@ -126,7 +126,7 @@ public final class ALC {
 
 		ALC.functionProvider = functionProvider;
 
-		icd = new ALCCapabilities(functionProvider, NULL, Collections.<String>emptySet());
+		icd = new ALCCapabilities(functionProvider, NULL, Collections.emptySet());
 
 		AL.init();
 	}
@@ -189,7 +189,7 @@ public final class ALC {
 			{ 0, 1 },  // ALC 1
 		};
 
-		Set<String> supportedExtensions = new HashSet<String>(16);
+		Set<String> supportedExtensions = new HashSet<>(16);
 
 		for ( int major = 1; major <= ALC_VERSIONS.length; major++ ) {
 			int[] minors = ALC_VERSIONS[major - 1];

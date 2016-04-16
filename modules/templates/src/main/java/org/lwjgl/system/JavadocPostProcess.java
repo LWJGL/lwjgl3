@@ -75,7 +75,7 @@ public final class JavadocPostProcess {
 
 		Matcher m = p.matcher(html);
 
-		List<Match> matches = new ArrayList<Match>(64);
+		List<Match> matches = new ArrayList<>(64);
 		Match lastMatch = null;
 
 		boolean foundSame = false;

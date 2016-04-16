@@ -4,10 +4,7 @@
  */
 package org.lwjgl.glfw;
 
-import org.lwjgl.system.Configuration;
-import org.lwjgl.system.Library;
-import org.lwjgl.system.Platform;
-import org.lwjgl.system.SharedLibrary;
+import org.lwjgl.system.*;
 import org.lwjgl.system.macosx.ObjCRuntime;
 
 import static org.lwjgl.system.APIUtil.*;

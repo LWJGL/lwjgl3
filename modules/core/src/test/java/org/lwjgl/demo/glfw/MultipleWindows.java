@@ -42,10 +42,10 @@ public final class MultipleWindows {
 
 		Window[] windows = new Window[4];
 
-		final AtomicInteger latch = new AtomicInteger(windows.length);
+		AtomicInteger latch = new AtomicInteger(windows.length);
 
 		for ( int i = 0; i < windows.length; i++ ) {
-			final int windowIndex = i + 1;
+			int windowIndex = i + 1;
 
 			long handle = glfwCreateWindow(300, 200, "GLFW Demo - " + windowIndex, NULL, NULL);
 			if ( handle == NULL )
@@ -61,13 +61,10 @@ public final class MultipleWindows {
 				}
 			});
 
-			glfwSetKeyCallback(handle, window.keyfun = new GLFWKeyCallback() {
-				@Override
-				public void invoke(long window, int key, int scancode, int action, int mods) {
-					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-						latch.set(0);
-				}
-			});
+			glfwSetKeyCallback(handle, window.keyfun = GLFWKeyCallback.create((windowHandle, key, scancode, action, mods) -> {
+				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+					latch.set(0);
+			}));
 
 			glfwMakeContextCurrent(handle);
 			window.capabilities = GL.createCapabilities();
