@@ -7,7 +7,7 @@
 			<package name="org.lwjgl.openal"/>
 			<package name="org.lwjgl.opencl"/>
 			<package name="org.lwjgl.system"/>
-			<package name="org.lwjgl.system.libffi"/>
+			<package name="org.lwjgl.system.dyncall"/>
 			<package name="org.lwjgl.util.par"/>
 			<package name="org.lwjgl.util.simd"/>
 		</packages>

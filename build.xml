@@ -186,7 +186,6 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/jemalloc"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/libc"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system/libffi"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/linux"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/macosx"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system/windows"/>
@@ -284,7 +283,6 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/system/dyncall/**"/>
 			<include name="org/lwjgl/system/jemalloc/**"/>
 			<include name="org/lwjgl/system/libc/**"/>
-			<include name="org/lwjgl/system/libffi/**"/>
 			<include name="org/lwjgl/system/linux/**"/>
 			<include name="org/lwjgl/system/macosx/**"/>
 			<include name="org/lwjgl/system/windows/**"/>

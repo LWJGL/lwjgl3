@@ -16,7 +16,6 @@ License terms: http://lwjgl.org/license.php
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
 	<fileset id="link-libraries" dir="${lib}/linux/${build.arch}/">
 		<include name="dyn*.a"/>
-		<include name="libffi.a"/>
 	</fileset>
 
 	<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
@@ -51,8 +50,7 @@ License terms: http://lwjgl.org/license.php
 			<arguments>
 				<arg value="-I${src.include.rel}/system/dyncall"/>
 				<arg value="-I${src.include.rel}/system/jemalloc"/>
-				<arg value="-I${src.include.rel}/system/libffi"/>
-				<arg value="-I${src.include.rel}/util"/>
++				<arg value="-I${src.include.rel}/util"/>
 				<arg value="-I${src.include.rel}/util/xxhash"/>
 				<arg value="-I${src.native.rel}/util/xxhash"/> <!-- xxhash.c is included in the binding -->
 				<fileset dir=".">
@@ -61,7 +59,6 @@ License terms: http://lwjgl.org/license.php
 					<include name="${src.generated.native}/system/dyncall/*.c"/>
 					<include name="${src.generated.native}/system/jemalloc/*.c"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
-					<include name="${src.generated.native}/system/libffi/*.c"/>
 					<include name="${src.generated.native}/system/linux/*.c"/>
 					<include name="${src.generated.native}/util/simd/*.c"/>
 					<exclude name="${src.generated.native}/util/simd/*SSE3.c"/>
@@ -146,8 +143,6 @@ License terms: http://lwjgl.org/license.php
 		<update-dependency name="dyncall" artifact="x64/dyncall_s.a"/>
 		<update-dependency name="dyncallback" artifact="x64/dyncallback_s.a"/>
 		<update-dependency name="dynload" artifact="x64/dynload_s.a"/>
-
-		<update-dependency name="libffi" artifact="x64/libffi.a"/>
 
 		<update-dependency name="jemalloc" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.openal}"/>
 		<update-dependency name="glfw3" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
