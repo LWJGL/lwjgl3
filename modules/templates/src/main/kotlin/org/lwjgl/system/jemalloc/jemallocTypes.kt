@@ -29,6 +29,7 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	NullTerminated..const..charASCII_p.IN("s", "the message")
 ) {
 	documentation = "Instances of this interface may be passed to the #malloc_usable_size() method."
+	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link MallocMessageCallback} arguments to a String.

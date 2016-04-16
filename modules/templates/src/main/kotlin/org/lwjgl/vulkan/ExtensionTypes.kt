@@ -59,6 +59,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 		threads).
 		"""
 	useSystemCallConvention()
+	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link VkDebugReportCallbackEXT} argument to a String.

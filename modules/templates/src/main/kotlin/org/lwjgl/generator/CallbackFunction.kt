@@ -25,21 +25,28 @@ class CallbackFunction(
 		"${it.nativeMethodType} ${it.name}"
 	}.joinToString(", ")
 
-	val NativeType.ffi: String
+	val NativeType.dyncall: Char
 		get() = when ( this ) {
-			is PointerType   -> "ffi_type_pointer"
-			is PrimitiveType -> when ( mapping ) {
-				PrimitiveMapping.POINTER -> "ffi_type_pointer"
-				PrimitiveMapping.FLOAT   -> "ffi_type_float"
-				PrimitiveMapping.DOUBLE  -> "ffi_type_double"
-				else                     -> "ffi_type_${if ( this !is IntegerType || this.unsigned ) "u" else "s" }int${(mapping as PrimitiveMapping).bytes * 8}"
+			is PointerType   -> 'p'
+			is PrimitiveType -> when (mapping) {
+				PrimitiveMapping.BOOLEAN -> 'B'
+				PrimitiveMapping.BYTE    -> 'c'
+				PrimitiveMapping.SHORT   -> 's'
+				PrimitiveMapping.INT     -> 'i'
+				PrimitiveMapping.LONG    -> 'l'
+				PrimitiveMapping.POINTER -> 'p'
+				PrimitiveMapping.FLOAT   -> 'f'
+				PrimitiveMapping.DOUBLE  -> 'd'
+				else                     -> throw IllegalArgumentException("Unsupported callback native type: $this")
 			}
-			else             -> if ( mapping === TypeMapping.VOID) "ffi_type_void" else throw IllegalArgumentException("Unsupported callback native type: $this")
+			else             -> if (mapping === TypeMapping.VOID) 'v' else throw IllegalArgumentException("Unsupported callback native type: $this")
 		}
 
-	val NativeType.memType: String
-		get() = if ( this is PointerType || mapping === PrimitiveMapping.POINTER)
-			"Address"
+	val NativeType.argType: String
+		get() = if ( this is PointerType || mapping === PrimitiveMapping.POINTER )
+			"Pointer"
+		else if (mapping == PrimitiveMapping.BOOLEAN)
+			"Bool"
 		else
 			(mapping as PrimitiveMapping).javaMethodType.simpleName.upperCaseFirst
 
@@ -47,13 +54,10 @@ class CallbackFunction(
 		print(HEADER)
 		println("package $packageName;\n")
 
-		print("""import org.lwjgl.*;
-import org.lwjgl.system.*;
-import org.lwjgl.system.libffi.*;
+		print("""import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.libffi.LibFFI.*;
+import static org.lwjgl.system.dyncall.DynCallback.*;
 
 """)
 		preamble.printJava(this)
@@ -64,21 +68,10 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 		print("""
 ${access.modifier}abstract class $className extends Callback.${returns.mapping.jniSignature} {
 
-	private static final FFICIF        CIF  = apiCallbackCIF();
-	private static final PointerBuffer ARGS = apiCallbackArgs(${signature.size});
-
 	private static final long CLASSPATH = apiCallbackText("$packageName.$className");
 
-	static {
-		prepareCIF(
-			CALL_CONVENTION_$callConvention,
-			CIF, ${returns.ffi},
-			ARGS, ${signature.asSequence().map { it.nativeType.ffi }.joinToString()}
-		);
-	}
-
 	protected $className() {
-		super(CIF, CLASSPATH);
+		super(CALL_CONVENTION_$callConvention + "(${signature.asSequence().map { it.nativeType.dyncall }.joinToString("")})${returns.dyncall}", CLASSPATH);
 	}
 
 	/**
@@ -93,7 +86,7 @@ ${access.modifier}abstract class $className extends Callback.${returns.mapping.j
 			print("return ")
 		print("""invoke(
 ${signature.asSequence().withIndex().map {
-			"\t\t\tmemGet${it.value.nativeType.memType}(memGetAddress(POINTER_SIZE * ${it.index} + args))"
+			"\t\t\tdcbArg${it.value.nativeType.argType}(args)${if ( it.value.nativeType.mapping == PrimitiveMapping.BOOLEAN ) " != 0" else ""}"
 		}.joinToString(",\n")}
 		);
 	}

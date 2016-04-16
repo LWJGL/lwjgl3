@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.libffi.FFICIF;
 import org.lwjgl.system.linux.LinuxLibrary;
 import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
@@ -242,14 +241,6 @@ public final class APIUtil {
 		} catch (ClassNotFoundException e) {
 			return null;
 		}
-	}
-
-	public static FFICIF apiCallbackCIF() {
-		return FFICIF.create(getAllocator().malloc(FFICIF.SIZEOF));
-	}
-
-	public static PointerBuffer apiCallbackArgs(int size) {
-		return memPointerBuffer(getAllocator().malloc(size * POINTER_SIZE), size);
 	}
 
 	public static long apiCallbackText(String text) {

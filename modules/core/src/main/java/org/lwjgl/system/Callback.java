@@ -5,15 +5,11 @@
 package org.lwjgl.system;
 
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.libffi.FFICIF;
-import org.lwjgl.system.libffi.FFIClosure;
-import org.lwjgl.system.libffi.FFIType;
 
 import java.lang.reflect.Method;
 
-import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.libffi.LibFFI.*;
+import static org.lwjgl.system.dyncall.DynCallback.*;
 
 /**
  * This class makes it possible to dynamically create, at runtime, native functions that call into Java code. Pointers to such functions can then be passed to
@@ -22,7 +18,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <p>Callbacks must be referenced strongly in user code, else a {@link CallbackError} will be thrown on the next native callback invocation. Callbacks also
  * use native resources, while will result in memory leaks if not released after a Callback is no longer required.</p>
  */
-public abstract class Callback extends Pointer.Default {
+public abstract class Callback implements Pointer {
 
 	/** Native callback function pointer. */
 	protected static final long
@@ -77,32 +73,29 @@ public abstract class Callback extends Pointer.Default {
 	}
 
 	/** The default calling convention. */
-	protected static final int CALL_CONVENTION_DEFAULT;
+	protected static final String CALL_CONVENTION_DEFAULT;
 	/** The system calling convention. This may differ from the default on certain OS/arch combinations. */
-	protected static final int CALL_CONVENTION_SYSTEM;
+	protected static final String CALL_CONVENTION_SYSTEM;
 
 	static {
 		// Setup calling conventions
-		CALL_CONVENTION_DEFAULT = FFI_DEFAULT_ABI;
+		CALL_CONVENTION_DEFAULT = "";
 		CALL_CONVENTION_SYSTEM = Platform.get() == Platform.WINDOWS && Pointer.BITS32
-			? FFI_STDCALL
-			: FFI_DEFAULT_ABI;
+			? "_s"
+			: "";
 	}
 
-	/** Pointer to libFFI's closure structure. */
-	private long closure;
+	/** Pointer to a DCCallback object. */
+	private long handle;
 
 	/**
 	 * Creates a new {@code Callback} instance.
 	 *
-	 * @param cif            a prepared {@link FFICIF} structure
+	 * @param signature      the function signature
 	 * @param classPath      an optional UTF-8 encoded string that will be used for debugging
 	 * @param nativeCallback the native callback function address
 	 */
-	Callback(ClosureAddress init, FFICIF cif, long classPath, long nativeCallback) {
-		super(init.executable);
-		this.closure = init.writable;
-
+	Callback(String signature, long classPath, long nativeCallback) {
 		// Struct containing two pointers
 		long user_data = nmemAlloc(POINTER_SIZE * 2);
 
@@ -128,18 +121,9 @@ public abstract class Callback extends Pointer.Default {
 		} else
 			memPutAddress(user_data + POINTER_SIZE, classPath); // just the closure class
 
-		// Prepare ffi closure
-		int status = nffi_prep_closure_loc(
-			closure,        // ffi_closure*
-			cif.address(),  // ffi_cif*
-			nativeCallback, // (void)(*FFI_CLOSURE_FUN)(ffi_cif* cif, void* ret, void** args, void* user_data)
-			user_data,      // void*
-			address()       // function*
-		);
-		if ( status != FFI_OK ) {
-			free();
-			throw new IllegalStateException(String.format("Failed to prepare libffi closure. Status: 0x%X", status));
-		}
+		handle = dcbNewCallback(signature, nativeCallback, user_data);
+		if ( handle == NULL )
+			throw new IllegalStateException("Failed to create the DCCallback object");
 	}
 
 	@Override
@@ -147,7 +131,7 @@ public abstract class Callback extends Pointer.Default {
 		if ( !isValid() )
 			throw new IllegalStateException("This callback instance has been freed.");
 
-		return super.address();
+		return handle;
 	}
 
 	public boolean equals(Object o) {
@@ -172,7 +156,7 @@ public abstract class Callback extends Pointer.Default {
 	public void free() {
 		address(); // already freed check
 
-		long user_data = FFIClosure.nuser_data(closure);
+		long user_data = dcbGetUserData(handle);
 
 		memDeleteWeakGlobalRef(memGetAddress(user_data));
 		if ( Checks.DEBUG )
@@ -180,13 +164,13 @@ public abstract class Callback extends Pointer.Default {
 
 		nmemFree(user_data);
 
-		nffi_closure_free(closure);
-		closure = NULL;
+		dcbFreeCallback(handle);
+		handle = NULL;
 	}
 
 	/** Returns true if this Callback has not been destroyed. */
 	public boolean isValid() {
-		return closure != NULL;
+		return handle != NULL;
 	}
 
 	/**
@@ -201,12 +185,7 @@ public abstract class Callback extends Pointer.Default {
 		if ( functionPointer == NULL )
 			return null;
 
-		/*
-			This implementation assumes that ffi_closure and executable both point to the same address.
-	        This is valid for x86 architectures on Windows, Linux and OS X. It is not valid on ARM and
-	        other architectures/OSes. TODO: Fix on other architectures
-		 */
-		return memGlobalRefToObject(memGetAddress(memGetAddress(functionPointer + FFIClosure.USER_DATA)));
+		return memGlobalRefToObject(memGetAddress(dcbGetUserData(functionPointer)));
 	}
 
 	/**
@@ -220,50 +199,14 @@ public abstract class Callback extends Pointer.Default {
 			clojure.free();
 	}
 
-	protected static void prepareCIF(int ABI, FFICIF CIF, FFIType rtype, PointerBuffer ARGS, FFIType... atypes) {
-		for ( int i = 0; i < atypes.length; i++ )
-			ARGS.put(i, atypes[i]);
-
-		int status = ffi_prep_cif(CIF, ABI, rtype, ARGS);
-		if ( status != FFI_OK )
-			throw new IllegalStateException(String.format("Failed to prepare callback interface. Status: 0x%X", status));
-	}
-
 	private static native long getNativeCallbacks(Method[] methods, long callbacks);
-
-	// Constructor helper
-
-	private static class ClosureAddress {
-		private final long writable;
-		private final long executable;
-
-		ClosureAddress(long writable, long executable) {
-			this.writable = writable;
-			this.executable = executable;
-		}
-	}
-
-	private static ClosureAddress allocate() {
-		MemoryStack stack = stackPush();
-		try {
-			PointerBuffer pp = stack.mallocPointer(1);
-
-			long writable = nffi_closure_alloc(FFIClosure.SIZEOF, memAddress(pp));
-			if ( writable == NULL )
-				throw new OutOfMemoryError("Failed to allocate libffi closure.");
-
-			return new ClosureAddress(writable, pp.get(0));
-		} finally {
-			stack.pop();
-		}
-	}
 
 	// Callback types
 
 	/** A {@code Callback} with no return value. */
 	public abstract static class V extends Callback {
-		protected V(FFICIF cif, long classPath) {
-			super(allocate(), cif, classPath, NATIVE_CALLBACK_VOID);
+		protected V(String signature, long classPath) {
+			super(signature, classPath, NATIVE_CALLBACK_VOID);
 		}
 
 		protected abstract void callback(long args);
@@ -271,8 +214,8 @@ public abstract class Callback extends Pointer.Default {
 
 	/** A {@code Callback} that returns a boolean value. */
 	public abstract static class Z extends Callback {
-		protected Z(FFICIF cif, long classPath) {
-			super(allocate(), cif, classPath, NATIVE_CALLBACK_BOOLEAN);
+		protected Z(String signature, long classPath) {
+			super(signature, classPath, NATIVE_CALLBACK_BOOLEAN);
 		}
 
 		protected abstract boolean callback(long args);
@@ -280,8 +223,8 @@ public abstract class Callback extends Pointer.Default {
 
 	/** A {@code Callback} that returns a byte value. */
 	public abstract static class B extends Callback {
-		protected B(FFICIF cif, long classPath) {
-			super(allocate(), cif, classPath, NATIVE_CALLBACK_BYTE);
+		protected B(String signature, long classPath) {
+			super(signature, classPath, NATIVE_CALLBACK_BYTE);
 		}
 
 		protected abstract byte callback(long args);
@@ -289,8 +232,8 @@ public abstract class Callback extends Pointer.Default {
 
 	/** A {@code Callback} that returns a short value. */
 	public abstract static class S extends Callback {
-		protected S(FFICIF cif, long classPath) {
-			super(allocate(), cif, classPath, NATIVE_CALLBACK_SHORT);
+		protected S(String signature, long classPath) {
+			super(signature, classPath, NATIVE_CALLBACK_SHORT);
 		}
 
 		protected abstract short callback(long args);
@@ -298,8 +241,8 @@ public abstract class Callback extends Pointer.Default {
 
 	/** A {@code Callback} that returns an int value. */
 	public abstract static class I extends Callback {
-		protected I(FFICIF cif, long classPath) {
-			super(allocate(), cif, classPath, NATIVE_CALLBACK_INT);
+		protected I(String signature, long classPath) {
+			super(signature, classPath, NATIVE_CALLBACK_INT);
 		}
 
 		protected abstract int callback(long args);
@@ -307,8 +250,8 @@ public abstract class Callback extends Pointer.Default {
 
 	/** A {@code Callback} that returns a long value. */
 	public abstract static class J extends Callback {
-		protected J(FFICIF cif, long classPath) {
-			super(allocate(), cif, classPath, NATIVE_CALLBACK_LONG);
+		protected J(String signature, long classPath) {
+			super(signature, classPath, NATIVE_CALLBACK_LONG);
 		}
 
 		protected abstract long callback(long args);
@@ -316,8 +259,8 @@ public abstract class Callback extends Pointer.Default {
 
 	/** A {@code Callback} that returns a float value. */
 	public abstract static class F extends Callback {
-		protected F(FFICIF cif, long classPath) {
-			super(allocate(), cif, classPath, NATIVE_CALLBACK_FLOAT);
+		protected F(String signature, long classPath) {
+			super(signature, classPath, NATIVE_CALLBACK_FLOAT);
 		}
 
 		protected abstract float callback(long args);
@@ -325,8 +268,8 @@ public abstract class Callback extends Pointer.Default {
 
 	/** A {@code Callback} that returns a double value. */
 	public abstract static class D extends Callback {
-		protected D(FFICIF cif, long classPath) {
-			super(allocate(), cif, classPath, NATIVE_CALLBACK_DOUBLE);
+		protected D(String signature, long classPath) {
+			super(signature, classPath, NATIVE_CALLBACK_DOUBLE);
 		}
 
 		protected abstract double callback(long args);
@@ -334,8 +277,8 @@ public abstract class Callback extends Pointer.Default {
 
 	/** A {@code Callback} that returns a pointer value. */
 	public abstract static class P extends Callback {
-		protected P(FFICIF cif, long classPath) {
-			super(allocate(), cif, classPath, NATIVE_CALLBACK_PTR);
+		protected P(String signature, long classPath) {
+			super(signature, classPath, NATIVE_CALLBACK_PTR);
 		}
 
 		protected abstract long callback(long args);

@@ -89,6 +89,7 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the #DebugMessageCallbackAMD() method."
 	useSystemCallConvention()
+	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageAMDCallback} arguments to a String.
@@ -141,6 +142,7 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the #DebugMessageCallbackARB() method."
 	useSystemCallConvention()
+	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageARBCallback} arguments to a String.
@@ -201,6 +203,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the GL43##glDebugMessageCallback() and KHRDebug##glDebugMessageCallback() methods."
 	useSystemCallConvention()
+	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageCallback} arguments to a String.

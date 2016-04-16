@@ -76,7 +76,8 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 		"java.io.PrintStream",
 		"java.util.Map",
 		"org.lwjgl.system.APIUtil",
-		"static org.lwjgl.glfw.GLFW.*"
+		"static org.lwjgl.glfw.GLFW.*",
+		"static org.lwjgl.system.MemoryUtil.*"
 	)
 	additionalCode = """
 	/**
@@ -490,7 +491,11 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	const..char_pp.IN("names", "pointer to the array of UTF-8 encoded path names of the dropped files")
 ) {
 	documentation = "Instances of this interface may be passed to the #SetDropCallback() method."
-	preamble.javaImport("java.nio.*", "static org.lwjgl.glfw.GLFW.*")
+	preamble.javaImport(
+		"java.nio.*",
+		"static org.lwjgl.glfw.GLFW.*",
+		"static org.lwjgl.system.MemoryUtil.*"
+	)
 	additionalCode = """
 	/** A functional interface for {@link GLFWDropCallback}. */
 	public interface SAMBuffer {

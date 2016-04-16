@@ -86,6 +86,7 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the #DebugMessageControlKHR() method."
 	useSystemCallConvention()
+	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link EGLDebugMessageKHRCallback} argument to a String.
@@ -162,7 +163,7 @@ val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
 	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
 	documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
-	preamble.javaImport("java.nio.*")
+	preamble.javaImport("java.nio.*", "static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/** A functional interface for {@link EGLSetBlobFuncANDROID}. */
 	public interface SAMBuffer {
@@ -194,7 +195,7 @@ val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
 	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
 	documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
-	preamble.javaImport("java.nio.*")
+	preamble.javaImport("java.nio.*", "static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/** A functional interface for {@link EGLGetBlobFuncANDROID}. */
 	public interface SAMBuffer {

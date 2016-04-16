@@ -282,7 +282,7 @@ val cl_context_callback = "cl_context_callback".callback(
 	void_p.IN("user_data", "the user-specified value that was passed when calling #CreateContext() or #CreateContextFromType()")
 ) {
 	documentation = "Instances of this interface may be passed to the #CreateContext() and #CreateContextFromType() methods."
-	preamble.javaImport("java.nio.*")
+	preamble.javaImport("java.nio.*", "static org.lwjgl.system.MemoryUtil.*")
 	useSystemCallConvention()
 	additionalCode = """
 	/** A functional interface for {@link CLContextCallback}. */
@@ -371,6 +371,7 @@ val cl_svmfree_callback = "cl_svmfree_callback".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the #EnqueueSVMFree() method."
 	useSystemCallConvention()
+	preamble.javaImport("org.lwjgl.PointerBuffer", "static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/** A functional interface for {@link CLSVMFreeCallback}. */
 	public interface SAMBuffer {

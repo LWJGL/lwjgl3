@@ -42,6 +42,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	NullTerminated..const..charUTF8_p.IN("message", "a UTF8-encoded null-terminated string")
 ) {
 	documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
+	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link OVRLogCallback} argument to a String.

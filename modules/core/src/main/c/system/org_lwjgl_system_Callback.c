@@ -6,7 +6,7 @@
 	__pragma(warning(disable : 4710))
 #endif
 #include "common_tools.h"
-#include "ffi.h"
+#include "dyncall_callback.h"
 
 static jmethodID
 	javaCallbackV,
@@ -54,21 +54,21 @@ inline static jboolean verifyCallback(JNIEnv* env, jobject object, const LWJGLCa
 	return JNI_TRUE;
 }
 
-static void ffiClosureV(ffi_cif* cif, void* ret, void** args, void* user_data) {
+static char cbHandlerV(DCCallback *cb, DCArgs *args, DCValue *result, void *userdata) {
 	jboolean async;
 	JNIEnv* env = getEnv(&async);
 
-	const LWJGLCallback *cb = (const LWJGLCallback *)user_data;
+	const LWJGLCallback *lcb = (const LWJGLCallback *)userdata;
 
 	// Dereference the weak global reference
-	jobject object = (*env)->NewLocalRef(env, (jweak)cb->reference);
+	jobject object = (*env)->NewLocalRef(env, (jweak)lcb->reference);
 
-	UNUSED_PARAM(cif)
-	UNUSED_PARAM(ret)
+	UNUSED_PARAM(cb)
+	UNUSED_PARAM(result)
 
 	// Verify that the callback has not been garbage collected
-	if ( !verifyCallback(env, object, cb, async) )
-		return;
+	if ( !verifyCallback(env, object, lcb, async) )
+		return 'v';
 
 	// Invoke the Java callback
 	(*env)->CallVoidMethod(env,
@@ -80,23 +80,25 @@ static void ffiClosureV(ffi_cif* cif, void* ret, void** args, void* user_data) {
 	// Check for exception
 	if ( (*env)->ExceptionCheck(env) && async )
 		asyncCallbackException(env);
+
+	return 'v';
 }
 
-#define DEFINE_FFI_CLOSURE_FUN(Name, Type, JavaType) \
-	static void ffiClosure##Name(ffi_cif* cif, void* ret, void** args, void* user_data) { \
+#define DEFINE_CB_HANDLER(Name, Type, TypeSig, JavaType) \
+	static char cbHandler##Name(DCCallback *cb, DCArgs *args, DCValue *result, void *userdata) { \
 		jboolean async; \
 		JNIEnv* env = getEnv(&async); \
 \
-		const LWJGLCallback *cb = (const LWJGLCallback *)user_data; \
+		const LWJGLCallback *lcb = (const LWJGLCallback *)userdata; \
 \
-		jobject object = (*env)->NewLocalRef(env, (jweak)cb->reference); \
+		jobject object = (*env)->NewLocalRef(env, (jweak)lcb->reference); \
 \
-		UNUSED_PARAM(cif) \
+		UNUSED_PARAM(cb) \
 \
-		if ( !verifyCallback(env, object, cb, async) ) \
-			return; \
+		if ( !verifyCallback(env, object, lcb, async) ) \
+			return TypeSig; \
 \
-		*(Type*)ret = (Type)(*env)->Call##JavaType##Method(env, \
+		*(Type*)result = (Type)(*env)->Call##JavaType##Method(env, \
 			object, \
 			javaCallback##Name, \
 			args \
@@ -104,22 +106,24 @@ static void ffiClosureV(ffi_cif* cif, void* ret, void** args, void* user_data) {
 \
 		if ( (*env)->ExceptionCheck(env) && async ) \
 			asyncCallbackException(env); \
+\
+		return TypeSig; \
 	}
 
-DEFINE_FFI_CLOSURE_FUN(Z, jboolean, Boolean)
-DEFINE_FFI_CLOSURE_FUN(B, jbyte,    Byte)
-DEFINE_FFI_CLOSURE_FUN(S, jshort,   Short)
-DEFINE_FFI_CLOSURE_FUN(I, jint,     Int)
-DEFINE_FFI_CLOSURE_FUN(J, jlong,    Long)
-DEFINE_FFI_CLOSURE_FUN(F, jfloat,   Float)
-DEFINE_FFI_CLOSURE_FUN(D, jdouble,  Double)
-DEFINE_FFI_CLOSURE_FUN(P, intptr_t, Long)
+DEFINE_CB_HANDLER(Z, jboolean, 'B', Boolean)
+DEFINE_CB_HANDLER(B, jbyte,    'c', Byte)
+DEFINE_CB_HANDLER(S, jshort,   's', Short)
+DEFINE_CB_HANDLER(I, jint,     'i', Int)
+DEFINE_CB_HANDLER(J, jlong,    'l', Long)
+DEFINE_CB_HANDLER(F, jfloat,   'f', Float)
+DEFINE_CB_HANDLER(D, jdouble,  'd', Double)
+DEFINE_CB_HANDLER(P, intptr_t, 'p', Long)
 
 EXTERN_C_ENTER
 
 #define SETUP_CALLBACK(Index, Type) \
 	javaCallback##Type = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, Index)); \
-	callbacks[Index] = (uintptr_t)&ffiClosure##Type;
+	callbacks[Index] = (uintptr_t)&cbHandler##Type;
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_Callback_getNativeCallbacks(JNIEnv *env, jclass clazz, jobjectArray methods, jlong callbacksAddress) {
 	uintptr_t* callbacks = (uintptr_t *)(intptr_t)callbacksAddress;
