@@ -50,7 +50,7 @@ License terms: http://lwjgl.org/license.php
 			<arguments>
 				<arg value="-I${src.include.rel}/system/dyncall"/>
 				<arg value="-I${src.include.rel}/system/jemalloc"/>
-+				<arg value="-I${src.include.rel}/util"/>
+				<arg value="-I${src.include.rel}/util"/>
 				<arg value="-I${src.include.rel}/util/xxhash"/>
 				<arg value="-I${src.native.rel}/util/xxhash"/> <!-- xxhash.c is included in the binding -->
 				<fileset dir=".">
