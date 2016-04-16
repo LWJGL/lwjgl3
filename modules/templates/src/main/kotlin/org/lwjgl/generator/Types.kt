@@ -218,7 +218,6 @@ open class PrimitiveMapping(
 		val BOOLEAN = PrimitiveMapping("jboolean", Boolean::class, 1, PointerMapping.DATA_BOOLEAN)
 
 		val BYTE = PrimitiveMapping("jbyte", Byte::class, 1, PointerMapping.DATA_BYTE)
-		val CHAR = PrimitiveMapping("jchar", Char::class, 2, PointerMapping.DATA_SHORT)
 		val SHORT = PrimitiveMapping("jshort", Short::class, 2, PointerMapping.DATA_SHORT)
 		val INT = PrimitiveMapping("jint", Int::class, 4, PointerMapping.DATA_INT)
 		val LONG = PrimitiveMapping("jlong", Long::class, 8, PointerMapping.DATA_LONG)
