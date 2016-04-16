@@ -15,7 +15,7 @@ License terms: http://lwjgl.org/license.php
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
 	<fileset id="link-libraries" dir="${lib}/linux/${build.arch}/">
-		<include name="dyn*.a"/>
+		<include name="libdyn*.a"/>
 	</fileset>
 
 	<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
@@ -140,9 +140,9 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/linux"/>
 		<mkdir dir="${lib}/linux/x64"/>
 
-		<update-dependency name="dyncall" artifact="x64/dyncall_s.a"/>
-		<update-dependency name="dyncallback" artifact="x64/dyncallback_s.a"/>
-		<update-dependency name="dynload" artifact="x64/dynload_s.a"/>
+		<update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
+		<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
+		<update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
 
 		<update-dependency name="jemalloc" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.openal}"/>
 		<update-dependency name="glfw3" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>

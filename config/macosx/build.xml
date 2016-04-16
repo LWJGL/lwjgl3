@@ -43,7 +43,7 @@ License terms: http://lwjgl.org/license.php
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
 	<fileset id="link-libraries" dir="${lib}/macosx/${build.arch}/">
-		<include name="dyn*.a"/>
+		<include name="libdyn*.a"/>
 	</fileset>
 
 	<property name="macosx-version-min" value="10.7"/>
@@ -151,9 +151,9 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/macosx"/>
 		<mkdir dir="${lib}/macosx/x64"/>
 
-		<update-dependency name="dyncall" artifact="x64/dyncall_s.a"/>
-		<update-dependency name="dyncallback" artifact="x64/dyncallback_s.a"/>
-		<update-dependency name="dynload" artifact="x64/dynload_s.a"/>
+		<update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
+		<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
+		<update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
 
 		<update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}"/>
 		<update-dependency name="glfw3" artifact="x64/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
