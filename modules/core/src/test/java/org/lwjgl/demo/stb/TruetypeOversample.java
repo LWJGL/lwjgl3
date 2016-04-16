@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.stb.STBTTAlignedQuad;
 import org.lwjgl.stb.STBTTPackContext;
 import org.lwjgl.stb.STBTTPackedchar;
-import org.lwjgl.system.libffi.Closure;
+import org.lwjgl.system.Callback;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -60,7 +60,7 @@ public final class TruetypeOversample {
 
 	private long window;
 
-	private Closure debugProc;
+	private Callback debugProc;
 
 	// ----
 

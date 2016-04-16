@@ -8,7 +8,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
-import org.lwjgl.system.libffi.Closure;
+import org.lwjgl.system.Callback;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -45,7 +45,7 @@ public final class Image {
 
 	private int scale;
 
-	private Closure debugProc;
+	private Callback debugProc;
 
 	private Image(String imagePath) {
 		ByteBuffer imageBuffer;

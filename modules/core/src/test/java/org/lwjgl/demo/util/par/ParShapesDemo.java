@@ -8,7 +8,7 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
-import org.lwjgl.system.libffi.Closure;
+import org.lwjgl.system.Callback;
 import org.lwjgl.util.par.ParShapesMesh;
 
 import java.nio.ByteBuffer;
@@ -38,7 +38,7 @@ public final class ParShapesDemo {
 
 	private ParShapesMesh mesh;
 
-	private Closure debugCB;
+	private Callback debugCB;
 
 	private int vao;
 	private int vbo;

@@ -6,7 +6,7 @@ package org.lwjgl.glfw;
 
 import org.lwjgl.system.Checks;
 import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.libffi.Closure;
+import org.lwjgl.system.Callback;
 
 import java.nio.IntBuffer;
 
@@ -26,7 +26,7 @@ public final class Callbacks {
 	private Callbacks() {}
 
 	/**
-	 * Resets all callbacks for the specified GLFW window to {@code NULL} and {@link Closure#free frees} all previously set callbacks.
+	 * Resets all callbacks for the specified GLFW window to {@code NULL} and {@link Callback#free frees} all previously set callbacks.
 	 *
 	 * @param window the GLFW window
 	 */
@@ -54,7 +54,7 @@ public final class Callbacks {
 
 		for ( long callback : callbacks ) {
 			if ( callback != NULL )
-				Closure.free(callback);
+				Callback.free(callback);
 		}
 	}
 

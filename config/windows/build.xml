@@ -47,7 +47,6 @@ License terms: http://lwjgl.org/license.php
 				<arg value="/I${src.native}\util\xxhash"/> <!-- xxhash.c is included in the binding -->
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
-					<include name="${src.native}/system/libffi/*.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/jemalloc/*.c"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>

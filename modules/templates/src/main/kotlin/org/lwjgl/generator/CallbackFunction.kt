@@ -48,6 +48,7 @@ class CallbackFunction(
 		println("package $packageName;\n")
 
 		print("""import org.lwjgl.*;
+import org.lwjgl.system.*;
 import org.lwjgl.system.libffi.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -61,12 +62,12 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 		if ( documentation != null )
 			print(processDocumentation(documentation).toJavaDoc(indentation = ""))
 		print("""
-${access.modifier}abstract class $className extends Closure.${returns.mapping.jniSignature} {
+${access.modifier}abstract class $className extends Callback.${returns.mapping.jniSignature} {
 
-	private static final FFICIF        CIF  = apiClosureCIF();
-	private static final PointerBuffer ARGS = apiClosureArgs(${signature.size});
+	private static final FFICIF        CIF  = apiCallbackCIF();
+	private static final PointerBuffer ARGS = apiCallbackArgs(${signature.size});
 
-	private static final long CLASSPATH = apiClosureText("$packageName.$className");
+	private static final long CLASSPATH = apiCallbackText("$packageName.$className");
 
 	static {
 		prepareCIF(
@@ -81,7 +82,7 @@ ${access.modifier}abstract class $className extends Closure.${returns.mapping.jn
 	}
 
 	/**
-	 * Will be called from a libffi closure invocation. Decodes the arguments and passes them to {@link #invoke}.
+	 * Will be called from native code. Decodes the arguments and passes them to {@link #invoke}.
 	 *
 	 * @param args pointer to an array of jvalues
 	 */

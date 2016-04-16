@@ -2,10 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.libffi;
+package org.lwjgl.system;
 
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.FFICIF;
+import org.lwjgl.system.libffi.FFIClosure;
+import org.lwjgl.system.libffi.FFIType;
 
 import java.lang.reflect.Method;
 
@@ -17,10 +19,10 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * This class makes it possible to dynamically create, at runtime, native functions that call into Java code. Pointers to such functions can then be passed to
  * native APIs as callbacks.
  *
- * <p>Closures must be referenced strongly in user code, else a {@link ClosureError} will be thrown on the next native callback invocation. Closures also use
- * native resources, while will result in memory leaks if not released after a Closure is no longer required.</p>
+ * <p>Callbacks must be referenced strongly in user code, else a {@link CallbackError} will be thrown on the next native callback invocation. Callbacks also
+ * use native resources, while will result in memory leaks if not released after a Callback is no longer required.</p>
  */
-public abstract class Closure extends Pointer.Default {
+public abstract class Callback extends Pointer.Default {
 
 	/** Native callback function pointer. */
 	protected static final long
@@ -67,7 +69,7 @@ public abstract class Closure extends Pointer.Default {
 			NATIVE_CALLBACK_DOUBLE = callbacks.get();
 			NATIVE_CALLBACK_PTR = callbacks.get();
 		} catch (NoSuchMethodException e) {
-			throw new IllegalStateException("Failed to initialize closure callbacks.", e);
+			throw new IllegalStateException("Failed to initialize native callbacks.", e);
 		} finally {
 			if ( callbacks != null )
 				memFree(callbacks);
@@ -91,13 +93,13 @@ public abstract class Closure extends Pointer.Default {
 	private long closure;
 
 	/**
-	 * Creates a new {@code Closure} instance.
+	 * Creates a new {@code Callback} instance.
 	 *
 	 * @param cif            a prepared {@link FFICIF} structure
 	 * @param classPath      an optional UTF-8 encoded string that will be used for debugging
 	 * @param nativeCallback the native callback function address
 	 */
-	Closure(ClosureAddress init, FFICIF cif, long classPath, long nativeCallback) {
+	Callback(ClosureAddress init, FFICIF cif, long classPath, long nativeCallback) {
 		super(init.executable);
 		this.closure = init.writable;
 
@@ -143,16 +145,16 @@ public abstract class Closure extends Pointer.Default {
 	@Override
 	public long address() {
 		if ( !isValid() )
-			throw new IllegalStateException("This closure instance has been freed.");
+			throw new IllegalStateException("This callback instance has been freed.");
 
 		return super.address();
 	}
 
 	public boolean equals(Object o) {
 		if ( this == o ) return true;
-		if ( !(o instanceof Closure) ) return false;
+		if ( !(o instanceof Callback) ) return false;
 
-		Closure that = (Closure)o;
+		Callback that = (Callback)o;
 
 		return address() == that.address();
 	}
@@ -182,20 +184,20 @@ public abstract class Closure extends Pointer.Default {
 		closure = NULL;
 	}
 
-	/** Returns true if this Closure has not been destroyed. */
+	/** Returns true if this Callback has not been destroyed. */
 	public boolean isValid() {
 		return closure != NULL;
 	}
 
 	/**
-	 * Converts the specified executable address to the Closure instance associated with it.</p>
+	 * Converts the specified executable address to the Callback instance associated with it.</p>
 	 *
 	 * @param functionPointer the function pointer
-	 * @param <T>             the Closure instance type
+	 * @param <T>             the Callback instance type
 	 *
-	 * @return the Closure instance, or null if the function pointer is null
+	 * @return the Callback instance, or null if the function pointer is null
 	 */
-	public static <T extends Closure> T create(long functionPointer) {
+	public static <T extends Callback> T create(long functionPointer) {
 		if ( functionPointer == NULL )
 			return null;
 
@@ -213,7 +215,7 @@ public abstract class Closure extends Pointer.Default {
 	 * @param functionPointer the function pointer
 	 */
 	public static void free(long functionPointer) {
-		Closure clojure = create(functionPointer);
+		Callback clojure = create(functionPointer);
 		if ( clojure != null )
 			clojure.free();
 	}
@@ -256,10 +258,10 @@ public abstract class Closure extends Pointer.Default {
 		}
 	}
 
-	// Closures types
+	// Callback types
 
-	/** A {@code Closure} with no return value. */
-	public abstract static class V extends Closure {
+	/** A {@code Callback} with no return value. */
+	public abstract static class V extends Callback {
 		protected V(FFICIF cif, long classPath) {
 			super(allocate(), cif, classPath, NATIVE_CALLBACK_VOID);
 		}
@@ -267,8 +269,8 @@ public abstract class Closure extends Pointer.Default {
 		protected abstract void callback(long args);
 	}
 
-	/** A {@code Closure} that returns a boolean value. */
-	public abstract static class Z extends Closure {
+	/** A {@code Callback} that returns a boolean value. */
+	public abstract static class Z extends Callback {
 		protected Z(FFICIF cif, long classPath) {
 			super(allocate(), cif, classPath, NATIVE_CALLBACK_BOOLEAN);
 		}
@@ -276,8 +278,8 @@ public abstract class Closure extends Pointer.Default {
 		protected abstract boolean callback(long args);
 	}
 
-	/** A {@code Closure} that returns a byte value. */
-	public abstract static class B extends Closure {
+	/** A {@code Callback} that returns a byte value. */
+	public abstract static class B extends Callback {
 		protected B(FFICIF cif, long classPath) {
 			super(allocate(), cif, classPath, NATIVE_CALLBACK_BYTE);
 		}
@@ -285,8 +287,8 @@ public abstract class Closure extends Pointer.Default {
 		protected abstract byte callback(long args);
 	}
 
-	/** A {@code Closure} that returns a short value. */
-	public abstract static class S extends Closure {
+	/** A {@code Callback} that returns a short value. */
+	public abstract static class S extends Callback {
 		protected S(FFICIF cif, long classPath) {
 			super(allocate(), cif, classPath, NATIVE_CALLBACK_SHORT);
 		}
@@ -294,8 +296,8 @@ public abstract class Closure extends Pointer.Default {
 		protected abstract short callback(long args);
 	}
 
-	/** A {@code Closure} that returns an int value. */
-	public abstract static class I extends Closure {
+	/** A {@code Callback} that returns an int value. */
+	public abstract static class I extends Callback {
 		protected I(FFICIF cif, long classPath) {
 			super(allocate(), cif, classPath, NATIVE_CALLBACK_INT);
 		}
@@ -303,8 +305,8 @@ public abstract class Closure extends Pointer.Default {
 		protected abstract int callback(long args);
 	}
 
-	/** A {@code Closure} that returns a long value. */
-	public abstract static class J extends Closure {
+	/** A {@code Callback} that returns a long value. */
+	public abstract static class J extends Callback {
 		protected J(FFICIF cif, long classPath) {
 			super(allocate(), cif, classPath, NATIVE_CALLBACK_LONG);
 		}
@@ -312,8 +314,8 @@ public abstract class Closure extends Pointer.Default {
 		protected abstract long callback(long args);
 	}
 
-	/** A {@code Closure} that returns a float value. */
-	public abstract static class F extends Closure {
+	/** A {@code Callback} that returns a float value. */
+	public abstract static class F extends Callback {
 		protected F(FFICIF cif, long classPath) {
 			super(allocate(), cif, classPath, NATIVE_CALLBACK_FLOAT);
 		}
@@ -321,8 +323,8 @@ public abstract class Closure extends Pointer.Default {
 		protected abstract float callback(long args);
 	}
 
-	/** A {@code Closure} that returns a double value. */
-	public abstract static class D extends Closure {
+	/** A {@code Callback} that returns a double value. */
+	public abstract static class D extends Callback {
 		protected D(FFICIF cif, long classPath) {
 			super(allocate(), cif, classPath, NATIVE_CALLBACK_DOUBLE);
 		}
@@ -330,8 +332,8 @@ public abstract class Closure extends Pointer.Default {
 		protected abstract double callback(long args);
 	}
 
-	/** A {@code Closure} that returns a pointer value. */
-	public abstract static class P extends Closure {
+	/** A {@code Callback} that returns a pointer value. */
+	public abstract static class P extends Callback {
 		protected P(FFICIF cif, long classPath) {
 			super(allocate(), cif, classPath, NATIVE_CALLBACK_PTR);
 		}

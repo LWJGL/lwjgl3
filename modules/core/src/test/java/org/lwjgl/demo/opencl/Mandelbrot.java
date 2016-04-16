@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.Platform;
-import org.lwjgl.system.libffi.Closure;
+import org.lwjgl.system.Callback;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -152,7 +152,7 @@ public class Mandelbrot {
 
 	// CALLBACKS
 
-	Closure debugProc;
+	Callback debugProc;
 
 	public Mandelbrot(long platform, CLCapabilities platformCaps, GLFWWindow window, int deviceType, boolean debugGL, int maxIterations) {
 		this.platform = platform;

@@ -7,7 +7,7 @@ package org.lwjgl.demo.stb;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
-import org.lwjgl.system.libffi.Closure;
+import org.lwjgl.system.Callback;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -45,7 +45,7 @@ abstract class FontDemo {
 	private int   lineOffset;
 	private float lineHeight;
 
-	private Closure debugProc;
+	private Callback debugProc;
 
 	protected FontDemo(int fontHeight, String filePath) {
 		this.fontHeight = fontHeight;

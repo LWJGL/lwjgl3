@@ -5,7 +5,7 @@
 package org.lwjgl.opengl;
 
 import org.lwjgl.system.APIUtil;
-import org.lwjgl.system.libffi.Closure;
+import org.lwjgl.system.Callback;
 
 import java.io.PrintStream;
 
@@ -69,19 +69,19 @@ public final class GLUtil {
 
 	/**
 	 * Detects the best debug output functionality to use and creates a callback that prints information to {@link APIUtil#DEBUG_STREAM}. The callback
-	 * function is returned as a {@link Closure}, that should be {@link Closure#free freed} when no longer needed.
+	 * function is returned as a {@link Callback}, that should be {@link Callback#free freed} when no longer needed.
 	 */
-	public static Closure setupDebugMessageCallback() {
+	public static Callback setupDebugMessageCallback() {
 		return setupDebugMessageCallback(APIUtil.DEBUG_STREAM);
 	}
 
 	/**
 	 * Detects the best debug output functionality to use and creates a callback that prints information to the specified {@link PrintStream}. The callback
-	 * function is returned as a {@link Closure}, that should be {@link Closure#free freed} when no longer needed.
+	 * function is returned as a {@link Callback}, that should be {@link Callback#free freed} when no longer needed.
 	 *
 	 * @param stream the output {@link PrintStream}
 	 */
-	public static Closure setupDebugMessageCallback(PrintStream stream) {
+	public static Callback setupDebugMessageCallback(PrintStream stream) {
 		GLCapabilities caps = GL.getCapabilities();
 
 		if ( caps.OpenGL43 ) {

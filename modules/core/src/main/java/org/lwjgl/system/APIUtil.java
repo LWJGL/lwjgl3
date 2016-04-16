@@ -244,15 +244,15 @@ public final class APIUtil {
 		}
 	}
 
-	public static FFICIF apiClosureCIF() {
+	public static FFICIF apiCallbackCIF() {
 		return FFICIF.create(getAllocator().malloc(FFICIF.SIZEOF));
 	}
 
-	public static PointerBuffer apiClosureArgs(int size) {
+	public static PointerBuffer apiCallbackArgs(int size) {
 		return memPointerBuffer(getAllocator().malloc(size * POINTER_SIZE), size);
 	}
 
-	public static long apiClosureText(String text) {
+	public static long apiCallbackText(String text) {
 		int size = memLengthUTF8(text, true);
 		long address = getAllocator().malloc(size);
 		memUTF8(text, true, memByteBuffer(address, size));

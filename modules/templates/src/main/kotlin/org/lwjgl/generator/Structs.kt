@@ -1302,8 +1302,8 @@ ${validations.joinToString("\n")}
 						val callbackType = it.nativeType.className
 
 						println("\tpublic static long n$getter(long $STRUCT) { return memGetAddress($STRUCT + $field); }")
-						println("\t/** Unsafe version of {@link #${getter}Closure}. */")
-						println("\tpublic static $callbackType n${getter}Closure(long $STRUCT) { return org.lwjgl.system.libffi.Closure.create(n$getter($STRUCT)); }")
+						println("\t/** Unsafe version of {@link #${getter}Callback}. */")
+						println("\tpublic static $callbackType n${getter}Callback(long $STRUCT) { return Callback.create(n$getter($STRUCT)); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType.simpleName
 						val bufferMethod = getBufferMethod(it, javaType)
@@ -1431,7 +1431,7 @@ ${validations.joinToString("\n")}
 						println("${indent}public long $getter() { return $n$getter($ADDRESS); }")
 
 						println("$indent/** Returns the {@code $callbackType} instance at the {@code $getter} field. */")
-						println("${indent}public $callbackType ${getter}Closure() { return $n${getter}Closure($ADDRESS); }")
+						println("${indent}public $callbackType ${getter}Callback() { return $n${getter}Callback($ADDRESS); }")
 					} else {
 						println("$indent/** Returns the value of the {@code $getter} field. */")
 						println("${indent}public ${it.nativeType.javaMethodType.simpleName} $getter() { return $n$getter($ADDRESS); }")

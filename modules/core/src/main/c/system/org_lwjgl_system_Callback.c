@@ -31,15 +31,15 @@ typedef struct LWJGLCallback {
 #endif
 
 noinline static void asyncCallbackException(JNIEnv* env) {
-	fprintf(stderr, "[LWJGL] Exception in closure that was invoked asynchronously from a native thread.\n");
+	fprintf(stderr, "[LWJGL] Exception in callback that was invoked asynchronously from a native thread.\n");
     fflush(stderr);
 
 	(*env)->ExceptionDescribe(env);
 	(*env)->ExceptionClear(env);
 }
 
-noinline static void throwClosureError(JNIEnv* env, const LWJGLCallback *cb, jboolean async) {
-	(*env)->ThrowNew(env, (*env)->FindClass(env, "org/lwjgl/system/libffi/ClosureError"), cb->debug);
+noinline static void throwCallbackError(JNIEnv* env, const LWJGLCallback *cb, jboolean async) {
+	(*env)->ThrowNew(env, (*env)->FindClass(env, "org/lwjgl/system/CallbackError"), cb->debug);
 
 	if ( async )
 		asyncCallbackException(env);
@@ -47,7 +47,7 @@ noinline static void throwClosureError(JNIEnv* env, const LWJGLCallback *cb, jbo
 
 inline static jboolean verifyCallback(JNIEnv* env, jobject object, const LWJGLCallback *cb, jboolean async) {
 	if ( (*env)->IsSameObject(env, object, NULL) ) {
-		throwClosureError(env, cb, async);
+		throwCallbackError(env, cb, async);
 		return JNI_FALSE;
 	}
 
@@ -121,7 +121,7 @@ EXTERN_C_ENTER
 	javaCallback##Type = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, Index)); \
 	callbacks[Index] = (uintptr_t)&ffiClosure##Type;
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_libffi_Closure_getNativeCallbacks(JNIEnv *env, jclass clazz, jobjectArray methods, jlong callbacksAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_Callback_getNativeCallbacks(JNIEnv *env, jclass clazz, jobjectArray methods, jlong callbacksAddress) {
 	uintptr_t* callbacks = (uintptr_t *)(intptr_t)callbacksAddress;
 
 	UNUSED_PARAMS(env, clazz)

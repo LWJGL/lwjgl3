@@ -9,7 +9,7 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.libffi.Closure;
+import org.lwjgl.system.Callback;
 
 import java.nio.IntBuffer;
 
@@ -26,7 +26,7 @@ public class Gears extends AbstractGears {
 	private GLFWKeyCallback        keyCB;
 	private GLFWWindowSizeCallback windowSizeCB;
 
-	private Closure debugProc;
+	private Callback debugProc;
 
 	private long window;
 

@@ -12,7 +12,7 @@ import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.stb.STBVorbisInfo;
-import org.lwjgl.system.libffi.Closure;
+import org.lwjgl.system.Callback;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -278,7 +278,7 @@ public final class Vorbis {
 		private final GLFWCursorPosCallback       cursorPosCallback;
 		private final GLFWMouseButtonCallback     mouseButtonCallback;
 
-		private final Closure debugProc;
+		private final Callback debugProc;
 
 		private final long window;
 
