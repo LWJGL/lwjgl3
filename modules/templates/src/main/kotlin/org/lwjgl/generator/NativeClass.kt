@@ -227,10 +227,15 @@ class NativeClass(
 		val hasFunctions = !_functions.isEmpty()
 		if ( hasFunctions ) {
 			// TODO: This is horrible. Refactor so that we build imports after code generation.
-			val hasNIO = functions.any { it.returns.isBufferPointer || it.hasParam { it.isBufferPointer } }
+			val hasBuffers = functions.any { it.returns.isBufferPointer || it.hasParam { it.isBufferPointer } }
 
-			if ( hasNIO ) {
-				println("import java.nio.*;\n")
+			if ( hasBuffers ) {
+				if ( functions.any {
+					(it.returns.isBufferPointer && it.returns.nativeType.mapping !== PointerMapping.DATA_POINTER && it.returns.nativeType !is StructType)
+					||
+					it.hasParam { it.isBufferPointer && it.nativeType.mapping !== PointerMapping.DATA_POINTER && it.nativeType !is StructType }
+				} )
+					println("import java.nio.*;\n")
 
 				val needsPointerBuffer: QualifiedType.() -> Boolean = {
 					this.nativeType is PointerType &&
@@ -241,18 +246,10 @@ class NativeClass(
 					)
 				}
 				if ( functions.any { it.returns.needsPointerBuffer() || it.hasParam { it.needsPointerBuffer() } } )
-					println("import org.lwjgl.*;")
+					println("import org.lwjgl.*;\n")
 			}
 
-			println("import org.lwjgl.system.*;\n")
-
-			if ( binding is SimpleBinding )
-				println("import static org.lwjgl.system.APIUtil.*;")
-			println("import static org.lwjgl.system.Checks.*;")
-			if ( binding != null )
-				println("import static org.lwjgl.system.JNI.*;")
-			if ( hasNIO && functions.any {
-				val func = it
+			val hasMemoryStack = hasBuffers && functions.any { func ->
 				func.hasParam {
 					it.nativeType is PointerType &&
 					(
@@ -263,11 +260,21 @@ class NativeClass(
 						it.nativeType is CharSequenceType
 					)
 				}
-			} )
+			}
+
+			if ( hasMemoryStack || functions.any { it.hasCustomJNI } )
+				println("import org.lwjgl.system.*;\n")
+
+			if ( binding is SimpleBinding )
+				println("import static org.lwjgl.system.APIUtil.*;")
+			println("import static org.lwjgl.system.Checks.*;")
+			if ( binding != null && functions.any { !it.hasCustomJNI } )
+				println("import static org.lwjgl.system.JNI.*;")
+			if ( hasMemoryStack )
 				println("import static org.lwjgl.system.MemoryStack.*;")
-			if ( hasNIO ) {
+			if ( hasBuffers ) {
 				println("import static org.lwjgl.system.MemoryUtil.*;")
-				if ( functions.any { it.hasParam { it.nativeType.mapping === PointerMapping.DATA_POINTER } } )
+				if ( functions.any { it.hasParam { it.has(MultiType) && it[MultiType].types.contains(PointerMapping.DATA_POINTER) } } )
 					println("import static org.lwjgl.system.Pointer.*;")
 			}
 			println()
