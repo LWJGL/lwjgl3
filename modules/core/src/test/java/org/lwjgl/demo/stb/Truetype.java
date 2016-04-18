@@ -72,7 +72,7 @@ public final class Truetype extends FontDemo {
 
 		STBTTBakedChar.Buffer cdata = init(BITMAP_W, BITMAP_H);
 
-		while ( glfwWindowShouldClose(getWindow()) == GLFW_FALSE ) {
+		while ( !glfwWindowShouldClose(getWindow()) ) {
 			glfwPollEvents();
 
 			glClear(GL_COLOR_BUFFER_BIT);

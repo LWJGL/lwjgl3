@@ -24,6 +24,8 @@ abstract class QualifiedType(
 			nativeType is StructType -> nativeType.definition.className
 			nativeType.mapping === PointerMapping.DATA
 			                         -> "ByteBuffer"
+			nativeType.mapping === PrimitiveMapping.BOOLEAN4
+			                         -> "boolean"
 			else                     -> nativeType.javaMethodType.simpleName
 		}
 
@@ -108,26 +110,20 @@ class Parameter(
 		get() = "$nativeMethodType $name"
 
 	fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
-	// Object parameter
-		nativeType is StructType || nativeType is ObjectType
-		                         ->
+		nativeType is StructType || nativeType is ObjectType ->
 			if ( has(nullable) )
 				"$name == null ? NULL : $name.$ADDRESS"
 			else if ( nativeType is ObjectType && func.hasUnsafeMethod && func.nativeClass.binding!!.hasParameterCapabilities )
 				name
 			else
 				"$name.$ADDRESS"
-
-	// Data pointer
-		nativeType.isPointerData -> {
+		nativeType.isPointerData                             ->
 			if ( !isAutoSizeResultOut && (has(nullable) || (has(optional) && mode === GenerationMode.NORMAL)) )
 				"memAddressSafe($name)"
 			else
 				"memAddress($name)"
-		}
-
-	// Normal parameter
-		else                     -> name
+		nativeType.mapping == PrimitiveMapping.BOOLEAN4      -> "$name ? 1 : 0"
+		else                                                 -> name
 	}
 
 }

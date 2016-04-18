@@ -311,10 +311,10 @@ public final class HelloVulkan {
 
 	private void demo_init_connection() {
 		errorCB = GLFWErrorCallback.createPrint().set();
-		if ( glfwInit() != GLFW_TRUE )
+		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
-		if ( glfwVulkanSupported() != GLFW_TRUE )
+		if ( !glfwVulkanSupported() )
 			throw new IllegalStateException("Cannot find a compatible Vulkan installable client driver (ICD)");
 	}
 
@@ -544,7 +544,7 @@ public final class HelloVulkan {
 		@Override
 		public void invoke(long window, int key, int scancode, int action, int mods) {
 			if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-				glfwSetWindowShouldClose(window, GLFW_TRUE);
+				glfwSetWindowShouldClose(window, true);
 		}
 	};
 
@@ -1937,7 +1937,7 @@ public final class HelloVulkan {
 	private void demo_run() {
 		int c = 0;
 		long t = System.nanoTime();
-		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
+		while ( !glfwWindowShouldClose(window) ) {
 			glfwPollEvents();
 
 			demo_draw();

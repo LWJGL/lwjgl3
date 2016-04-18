@@ -58,7 +58,7 @@ public class WindowsLibrary extends SharedLibrary.Default {
 
 	@Override
 	public void free() {
-		if ( FreeLibrary(address()) == FALSE )
+		if ( !FreeLibrary(address()) )
 			windowsThrowException("Failed to unload library: " + getName());
 	}
 

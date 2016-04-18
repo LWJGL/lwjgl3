@@ -22,7 +22,7 @@ class CallbackFunction(
 	}
 
 	private val signatureJava: String = signature.asSequence().map {
-		"${it.nativeMethodType} ${it.name}"
+		"${if ( it.nativeType.mapping == PrimitiveMapping.BOOLEAN4 ) "boolean" else it.nativeMethodType} ${it.name}"
 	}.joinToString(", ")
 
 	val NativeType.dyncall: Char
@@ -32,6 +32,7 @@ class CallbackFunction(
 				PrimitiveMapping.BOOLEAN -> 'B'
 				PrimitiveMapping.BYTE    -> 'c'
 				PrimitiveMapping.SHORT   -> 's'
+				PrimitiveMapping.BOOLEAN4,
 				PrimitiveMapping.INT     -> 'i'
 				PrimitiveMapping.LONG    -> 'l'
 				PrimitiveMapping.POINTER -> 'p'
@@ -86,7 +87,11 @@ ${access.modifier}abstract class $className extends Callback.${returns.mapping.j
 			print("return ")
 		print("""invoke(
 ${signature.asSequence().withIndex().map {
-			"\t\t\tdcbArg${it.value.nativeType.argType}(args)${if ( it.value.nativeType.mapping == PrimitiveMapping.BOOLEAN ) " != 0" else ""}"
+			"\t\t\tdcbArg${it.value.nativeType.argType}(args)${when ( it.value.nativeType.mapping ) {
+				PrimitiveMapping.BOOLEAN,
+				PrimitiveMapping.BOOLEAN4 -> " != 0"
+				else                      -> ""
+			}}"
 		}.joinToString(",\n")}
 		);
 	}

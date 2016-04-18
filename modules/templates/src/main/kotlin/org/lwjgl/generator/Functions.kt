@@ -832,6 +832,8 @@ class NativeClassFunction(
 			}
 			print(")")
 		}
+		if ( returns.nativeType.mapping == PrimitiveMapping.BOOLEAN4 )
+			print(" != 0")
 		println(";")
 	}
 

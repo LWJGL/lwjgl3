@@ -473,7 +473,7 @@ public final class GL {
 			if ( DescribePixelFormat(hdc, pixelFormat, pfd) == 0 )
 				windowsThrowException("Failed to obtain pixel format information");
 
-			if ( SetPixelFormat(hdc, pixelFormat, pfd) == 0 )
+			if ( !SetPixelFormat(hdc, pixelFormat, pfd) )
 				windowsThrowException("Failed to set the pixel format");
 
 			hglrc = checkPointer(wglCreateContext(hdc));

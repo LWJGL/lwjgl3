@@ -54,7 +54,7 @@ public final class ExampleGL3 extends Demo {
 		GLFWErrorCallback errorcb;
 		glfwSetErrorCallback(errorcb = GLFWErrorCallback.createThrow());
 
-		if ( glfwInit() == GLFW_FALSE )
+		if ( !glfwInit() )
 			throw new RuntimeException("Failed to init GLFW.");
 
 		DemoData data = new DemoData();
@@ -89,7 +89,7 @@ public final class ExampleGL3 extends Demo {
 		GLFWKeyCallback key;
 		glfwSetKeyCallback(window, key = GLFWKeyCallback.create((windowHandle, keyCode, scancode, action, mods) -> {
 			if ( keyCode == GLFW_KEY_ESCAPE && action == GLFW_PRESS )
-				glfwSetWindowShouldClose(windowHandle, GLFW_TRUE);
+				glfwSetWindowShouldClose(windowHandle, true);
 			if ( keyCode == GLFW_KEY_SPACE && action == GLFW_PRESS )
 				blowup = !blowup;
 			if ( keyCode == GLFW_KEY_S && action == GLFW_PRESS )
@@ -119,7 +119,7 @@ public final class ExampleGL3 extends Demo {
 		glfwSetTime(0);
 		double prevt = glfwGetTime();
 
-		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
+		while ( !glfwWindowShouldClose(window) ) {
 			double t, dt;
 			float pxRatio;
 

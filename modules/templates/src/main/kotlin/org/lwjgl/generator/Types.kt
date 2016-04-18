@@ -216,6 +216,7 @@ open class PrimitiveMapping(
 
 	companion object {
 		val BOOLEAN = PrimitiveMapping("jboolean", Boolean::class, 1, PointerMapping.DATA_BOOLEAN)
+		val BOOLEAN4 = PrimitiveMapping("jint", Int::class, 4, PointerMapping.DATA_INT)
 
 		val BYTE = PrimitiveMapping("jbyte", Byte::class, 1, PointerMapping.DATA_BYTE)
 		val SHORT = PrimitiveMapping("jshort", Short::class, 2, PointerMapping.DATA_SHORT)

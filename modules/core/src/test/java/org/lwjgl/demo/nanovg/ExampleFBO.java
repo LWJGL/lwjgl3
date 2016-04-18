@@ -109,7 +109,7 @@ public final class ExampleFBO extends Demo {
 		GLFWErrorCallback errorcb;
 		glfwSetErrorCallback(errorcb = GLFWErrorCallback.createThrow());
 
-		if ( glfwInit() == GLFW_FALSE )
+		if ( !glfwInit() )
 			throw new RuntimeException("Failed to init GLFW.");
 
 		GPUtimer gpuTimer = new GPUtimer();
@@ -142,7 +142,7 @@ public final class ExampleFBO extends Demo {
 		GLFWKeyCallback key;
 		glfwSetKeyCallback(window, key = GLFWKeyCallback.create((windowHandle, keyCode, scancode, action, mods) -> {
 			if ( keyCode == GLFW_KEY_ESCAPE && action == GLFW_PRESS )
-				glfwSetWindowShouldClose(windowHandle, GL_TRUE);
+				glfwSetWindowShouldClose(windowHandle, true);
 		}));
 
 		glfwMakeContextCurrent(window);
@@ -175,7 +175,7 @@ public final class ExampleFBO extends Demo {
 		glfwSetTime(0);
 		double prevt = glfwGetTime();
 
-		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
+		while ( !glfwWindowShouldClose(window) ) {
 			double t = glfwGetTime();
 			double dt = t - prevt;
 			prevt = t;

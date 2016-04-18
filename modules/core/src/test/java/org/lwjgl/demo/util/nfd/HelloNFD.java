@@ -42,7 +42,7 @@ public final class HelloNFD {
 
 				switch ( key ) {
 					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GLFW_TRUE);
+						glfwSetWindowShouldClose(window, true);
 						break;
 					case GLFW_KEY_O:
 						if ( (mods & mod) != 0 ) {
@@ -61,7 +61,7 @@ public final class HelloNFD {
 		};
 
 		errorfun.set();
-		if ( glfwInit() != GLFW_TRUE )
+		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
 		long window = glfwCreateWindow(300, 300, "Hello NativeFileDialog!", NULL, NULL);
@@ -86,7 +86,7 @@ public final class HelloNFD {
 		System.out.println("Press " + modDescr + "+O to launch the single file open dialog.");
 		System.out.println("Press " + modDescr + "+Shift+O to launch the multi file open dialog.");
 		System.out.println("Press " + modDescr + "+S to launch the file save dialog.");
-		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
+		while ( !glfwWindowShouldClose(window) ) {
 			glfwPollEvents();
 
 			glClear(GL_COLOR_BUFFER_BIT);

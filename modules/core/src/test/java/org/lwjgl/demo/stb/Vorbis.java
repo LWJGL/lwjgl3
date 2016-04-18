@@ -75,13 +75,13 @@ public final class Vorbis {
 
 			if ( !decoder.play(source, buffers) ) {
 				System.err.println("Playback failed.");
-				glfwSetWindowShouldClose(window, GLFW_TRUE);
+				glfwSetWindowShouldClose(window, true);
 			}
 
-			while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
+			while ( !glfwWindowShouldClose(window) ) {
 				if ( !renderer.paused && !decoder.update(source, true) ) {
 					System.err.println("Playback failed.");
-					glfwSetWindowShouldClose(window, GLFW_TRUE);
+					glfwSetWindowShouldClose(window, true);
 				}
 
 				float progress = decoder.getProgress();
@@ -292,7 +292,7 @@ public final class Vorbis {
 
 		Renderer(Decoder decoder, String title) {
 			errorCallback = GLFWErrorCallback.createPrint().set();
-			if ( glfwInit() != GLFW_TRUE )
+			if ( !glfwInit() )
 				throw new IllegalStateException("Unable to initialize GLFW");
 
 			glfwDefaultWindowHints();
@@ -318,7 +318,7 @@ public final class Vorbis {
 
 					switch ( key ) {
 						case GLFW_KEY_ESCAPE:
-							glfwSetWindowShouldClose(window, GLFW_TRUE);
+							glfwSetWindowShouldClose(window, true);
 							break;
 						case GLFW_KEY_HOME:
 							decoder.rewind();

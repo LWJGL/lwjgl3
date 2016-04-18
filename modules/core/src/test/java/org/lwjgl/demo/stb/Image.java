@@ -106,7 +106,7 @@ public final class Image {
 
 				switch ( key ) {
 					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GLFW_TRUE);
+						glfwSetWindowShouldClose(window, true);
 						break;
 					case GLFW_KEY_KP_ADD:
 					case GLFW_KEY_EQUAL:
@@ -160,7 +160,7 @@ public final class Image {
 
 	private void init() {
 		errorfun.set();
-		if ( glfwInit() != GLFW_TRUE )
+		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
 		glfwDefaultWindowHints();
@@ -222,7 +222,7 @@ public final class Image {
 
 		glEnable(GL_TEXTURE_2D);
 
-		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
+		while ( !glfwWindowShouldClose(window) ) {
 			glfwPollEvents();
 
 			glClear(GL_COLOR_BUFFER_BIT);

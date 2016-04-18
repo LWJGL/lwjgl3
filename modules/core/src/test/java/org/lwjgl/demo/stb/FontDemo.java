@@ -95,7 +95,7 @@ abstract class FontDemo {
 
 			switch ( key ) {
 				case GLFW_KEY_ESCAPE:
-					glfwSetWindowShouldClose(windowHandle, GLFW_TRUE);
+					glfwSetWindowShouldClose(windowHandle, true);
 					break;
 				case GLFW_KEY_PAGE_UP:
 					setLineOffset(lineOffset - wh / FontDemo.this.lineHeight);
@@ -169,7 +169,7 @@ abstract class FontDemo {
 
 	private void init(String title) {
 		errorfun.set();
-		if ( glfwInit() != GLFW_TRUE )
+		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
 		glfwDefaultWindowHints();

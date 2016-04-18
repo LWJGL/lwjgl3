@@ -24,7 +24,7 @@ val VOID = NativeType("VOID", TypeMapping.VOID)
 val HANDLE = "HANDLE".opaque_p
 val HANDLE_p = HANDLE.p
 
-val BOOL = PrimitiveType("BOOL", PrimitiveMapping.INT)
+val BOOL = PrimitiveType("BOOL", PrimitiveMapping.BOOLEAN4)
 val BYTE = IntegerType("BYTE", PrimitiveMapping.BYTE)
 val WORD = IntegerType("WORD", PrimitiveMapping.SHORT)
 val SHORT = IntegerType("SHORT", PrimitiveMapping.SHORT)

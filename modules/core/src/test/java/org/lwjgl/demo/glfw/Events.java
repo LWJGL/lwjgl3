@@ -43,10 +43,10 @@ public final class Events {
 		"refreshed", window
 	));
 	private static final GLFWWindowFocusCallback   windowFocusCB   = GLFWWindowFocusCallback.create((window, focused) -> printEvent(
-		focused == 0 ? "lost focus" : "gained focus", window
+		focused ? "gained focus" : "lost focus", window
 	));
 	private static final GLFWWindowIconifyCallback windowIconifyCB = GLFWWindowIconifyCallback.create((window, iconified) -> printEvent(
-		iconified == 0 ? "restored" : "iconified", window
+		iconified ? "iconified" : "restored", window
 	));
 
 	private static final GLFWFramebufferSizeCallback framebufferSizeCB = GLFWFramebufferSizeCallback.create((window, width, height) -> printEvent(
@@ -73,7 +73,7 @@ public final class Events {
 		printEvent("key %s[%s - %d] was %s", window, getModState(mods), KEY_CODES.get(key), scancode, state);
 
 		if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-			glfwSetWindowShouldClose(window, 1);
+			glfwSetWindowShouldClose(window, true);
 	});
 
 	private static final GLFWCharCallback charCB = GLFWCharCallback.create((window, codepoint) -> printEvent(
@@ -104,7 +104,7 @@ public final class Events {
 	));
 
 	private static final GLFWCursorEnterCallback cursorEnterCB = GLFWCursorEnterCallback.create((window, entered) -> printEvent(
-		"cursor %s", window, entered == 0 ? "left" : "entered"
+		"cursor %s", window, entered ? "entered" : "left"
 	));
 
 	private static final GLFWScrollCallback scrollCB = GLFWScrollCallback.create((window, xoffset, yoffset) -> printEvent(
@@ -128,7 +128,7 @@ public final class Events {
 		glfwDefaultWindowHints();
 		System.err.println("---- [ Error callback done ] ----");
 
-		if ( glfwInit() == 0 )
+		if ( !glfwInit() )
 			throw new IllegalStateException("Failed to initialize GLFW.");
 
 		System.out.println("GLFW initialized");
@@ -244,7 +244,7 @@ public final class Events {
 		glfwSwapInterval(1);
 
 		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
-		while ( glfwWindowShouldClose(window) == 0 ) {
+		while ( !glfwWindowShouldClose(window) ) {
 			glfwWaitEvents();
 
 			glClear(GL_COLOR_BUFFER_BIT);

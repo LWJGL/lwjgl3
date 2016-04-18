@@ -86,7 +86,7 @@ public final class CLGLInteropDemo {
 
 		GLFWErrorCallback errorfun;
 		glfwSetErrorCallback(errorfun = GLFWErrorCallback.createPrint());
-		if ( glfwInit() != GLFW_TRUE ) {
+		if ( !glfwInit() ) {
 			System.out.println("Unable to initialize glfw");
 			System.exit(-1);
 		}

@@ -548,7 +548,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"RELEASE_BEHAVIOR_NONE"..0x00035002
 	).javaDocLinks
 
-	int(
+	GLFWboolean(
 		"Init",
 		"""
 		Initializes the GLFW library. Before most GLFW functions can be used, GLFW must be initialized, and before an application terminates GLFW should be
@@ -1026,7 +1026,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 1.0"
 	)
 
-	int(
+	GLFWboolean(
 		"WindowShouldClose",
 		"""
 		Returns the value of the close flag of the specified window.
@@ -1050,7 +1050,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose flag to change"),
-		int.IN("value", "the new value"),
+		GLFWboolean.IN("value", "the new value"),
 
 		since = "version 3.0"
 	)
@@ -2402,7 +2402,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 1.0"
 	)
 
-	int(
+	GLFWboolean(
 		"ExtensionSupported",
 		"""
 		Returns whether the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">API extension</a> is supported by the current

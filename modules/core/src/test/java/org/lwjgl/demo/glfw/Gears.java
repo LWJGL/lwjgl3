@@ -51,7 +51,7 @@ public class Gears extends AbstractGears {
 
 	private void init() {
 		errorCB = GLFWErrorCallback.createPrint().set();
-		if ( glfwInit() != GLFW_TRUE )
+		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize glfw");
 
 		glfwDefaultWindowHints();
@@ -92,7 +92,7 @@ public class Gears extends AbstractGears {
 
 				switch ( key ) {
 					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GLFW_TRUE);
+						glfwSetWindowShouldClose(window, true);
 						break;
 					case GLFW_KEY_F:
 						if ( glfwGetWindowMonitor(window) == NULL ) {
@@ -144,7 +144,7 @@ public class Gears extends AbstractGears {
 		long lastUpdate = System.currentTimeMillis();
 		int frames = 0;
 
-		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
+		while ( !glfwWindowShouldClose(window) ) {
 			glfwPollEvents();
 
 			renderLoop();

@@ -25,7 +25,7 @@ public final class MultipleWindows {
 	public static void main(String[] args) {
 		GLFWErrorCallback errorfun = GLFWErrorCallback.createPrint();
 		glfwSetErrorCallback(errorfun);
-		if ( glfwInit() == 0 )
+		if ( !glfwInit() )
 			throw new IllegalStateException("Failed to initialize GLFW.");
 
 		try {
@@ -55,8 +55,8 @@ public final class MultipleWindows {
 
 			glfwSetCursorEnterCallback(handle, window.cursorenterfun = new GLFWCursorEnterCallback() {
 				@Override
-				public void invoke(long window, int entered) {
-					if ( entered == GLFW_TRUE )
+				public void invoke(long window, boolean entered) {
+					if ( entered )
 						System.out.println("Mouse entered window: " + windowIndex);
 				}
 			});
@@ -91,7 +91,7 @@ public final class MultipleWindows {
 				glClear(GL_COLOR_BUFFER_BIT);
 				glfwSwapBuffers(window.handle);
 
-				if ( glfwWindowShouldClose(window.handle) != 0 ) {
+				if ( !glfwWindowShouldClose(window.handle) ) {
 					glfwDestroyWindow(window.handle);
 					windows[i] = null;
 

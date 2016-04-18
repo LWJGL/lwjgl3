@@ -131,7 +131,7 @@ public final class ParShapesDemo {
 						updateHUD(mesh == null);
 						break;
 					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GLFW_TRUE);
+						glfwSetWindowShouldClose(window, true);
 						break;
 				}
 			}
@@ -155,7 +155,7 @@ public final class ParShapesDemo {
 
 	private void init() {
 		errorCB.set();
-		if ( glfwInit() != GLFW_TRUE )
+		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
 		glfwDefaultWindowHints();
@@ -484,7 +484,7 @@ public final class ParShapesDemo {
 	private void run() {
 		init();
 
-		while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
+		while ( !glfwWindowShouldClose(window) ) {
 			glfwPollEvents();
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

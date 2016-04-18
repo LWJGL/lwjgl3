@@ -392,7 +392,7 @@ public class Mandelbrot {
 
 			switch ( key ) {
 				case GLFW_KEY_ESCAPE:
-					glfwSetWindowShouldClose(windowHandle, GLFW_TRUE);
+					glfwSetWindowShouldClose(windowHandle, true);
 					break;
 				case GLFW_KEY_D:
 					events.offer(() -> {
@@ -489,7 +489,7 @@ public class Mandelbrot {
 		long startTime = System.currentTimeMillis() + 5000;
 		long fps = 0;
 
-		while ( glfwWindowShouldClose(window.handle) == GLFW_FALSE ) {
+		while ( !glfwWindowShouldClose(window.handle) ) {
 			Runnable event;
 			while ( (event = events.poll()) != null )
 				event.run();

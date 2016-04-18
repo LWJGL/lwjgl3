@@ -115,7 +115,7 @@ public final class TruetypeOversample {
 
 				switch ( key ) {
 					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, GLFW_TRUE);
+						glfwSetWindowShouldClose(window, true);
 						break;
 					case GLFW_KEY_O:
 						font = (font + 1) % 3 + (font / 3) * 3;
@@ -337,7 +337,7 @@ public final class TruetypeOversample {
 
 	private void createWindow(String title) {
 		glfwSetErrorCallback(errorfun);
-		if ( glfwInit() != GLFW_TRUE )
+		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
 		glfwDefaultWindowHints();
@@ -381,7 +381,7 @@ public final class TruetypeOversample {
 			load_fonts();
 
 			long time = System.nanoTime();
-			while ( glfwWindowShouldClose(window) == GLFW_FALSE ) {
+			while ( !glfwWindowShouldClose(window) ) {
 				glfwPollEvents();
 
 				long t = System.nanoTime();

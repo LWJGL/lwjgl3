@@ -75,7 +75,7 @@ public class LWJGLCanvas extends Canvas {
 							createContext(dsi_win);
 							gears.initGLState();
 						} else {
-							if ( wglMakeCurrent(hdc, hglrc) == 0 )
+							if ( !wglMakeCurrent(hdc, hglrc) )
 								throw new IllegalStateException("wglMakeCurrent() failed");
 
 							GL.setCapabilities(caps);
@@ -129,7 +129,7 @@ public class LWJGLCanvas extends Canvas {
 				if ( pixelFormat < 1 )
 					throw new IllegalStateException("ChoosePixelFormat() failed: " + WinBase.getLastError());
 
-				if ( SetPixelFormat(hdc, pixelFormat, null) == 0 )
+				if ( !SetPixelFormat(hdc, pixelFormat, null) )
 					throw new IllegalStateException("SetPixelFormat() failed: " + WinBase.getLastError());
 			}
 
@@ -138,7 +138,7 @@ public class LWJGLCanvas extends Canvas {
 			if ( hglrc == NULL )
 				throw new IllegalStateException("wglCreateContext() failed");
 
-			if ( wglMakeCurrent(hdc, hglrc) == 0 )
+			if ( !wglMakeCurrent(hdc, hglrc) )
 				throw new IllegalStateException("wglMakeCurrent() failed");
 
 			caps = GL.createCapabilities();

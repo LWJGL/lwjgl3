@@ -35,7 +35,7 @@ public final class Threads {
 	public static void main(String[] args) {
 		GLFWErrorCallback errorfun = GLFWErrorCallback.createPrint();
 		glfwSetErrorCallback(errorfun);
-		if ( glfwInit() != GLFW_TRUE )
+		if ( !glfwInit() )
 			throw new IllegalStateException("Failed to initialize GLFW.");
 
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -51,7 +51,7 @@ public final class Threads {
 			GLFWKeyCallback keyfun;
 			glfwSetKeyCallback(window, keyfun = GLFWKeyCallback.create((window1, key, scancode, action, mods) -> {
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-					glfwSetWindowShouldClose(window1, GLFW_TRUE);
+					glfwSetWindowShouldClose(window1, true);
 			}));
 			glfwSetWindowPos(window, 200 + 250 * i, 200);
 			glfwShowWindow(window);
@@ -65,7 +65,7 @@ public final class Threads {
 			glfwWaitEvents();
 
 			for ( int i = 0; i < titles.length; i++ ) {
-				if ( glfwWindowShouldClose(threads[i].window) == GLFW_TRUE ) {
+				if ( !glfwWindowShouldClose(threads[i].window) ) {
 					quit.countDown();
 					break out;
 				}

@@ -28,6 +28,8 @@ fun config() {
 val GLFW_BINDING = simpleBinding("glfw", """Configuration.GLFW_LIBRARY_NAME.get(Pointer.BITS64 ? "glfw" : "glfw32")""")
 val GLFW_BINDING_DELEGATE = GLFW_BINDING.delegate("GLFW.getLibrary()")
 
+val GLFWboolean = PrimitiveType("int", PrimitiveMapping.BOOLEAN4) // This type does not exist in GLFW.
+
 val GLFWmonitor = "GLFWmonitor".p
 val GLFWmonitor_p = GLFWmonitor.p
 
@@ -300,7 +302,7 @@ val GLFWwindowfocusfun = "GLFWwindowfocusfun".callback(
 	GLFW_PACKAGE, void, "GLFWWindowFocusCallback",
 	"Will be called when the specified window gains or loses focus.",
 	GLFWwindow.IN("window", "the window that was focused or defocused"),
-	int.IN("focused", "GL11##GL_TRUE if the window was focused, or GL11##GL_FALSE if it was defocused")
+	GLFWboolean.IN("focused", "GL11##GL_TRUE if the window was focused, or GL11##GL_FALSE if it was defocused")
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
 	documentation = "Instances of this interface may be passed to the #SetWindowFocusCallback() method."
@@ -318,7 +320,7 @@ val GLFWwindowiconifyfun = "GLFWwindowiconifyfun".callback(
 	GLFW_PACKAGE, void, "GLFWWindowIconifyCallback",
 	"Will be called when the specified window is iconified or restored.",
 	GLFWwindow.IN("window", "the window that was iconified or restored."),
-	int.IN("iconified", "GL11#GL_TRUE if the window was iconified, or GL11#GL_FALSE if it was restored")
+	GLFWboolean.IN("iconified", "GL11#GL_TRUE if the window was iconified, or GL11#GL_FALSE if it was restored")
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
 	documentation = "Instances of this interface may be passed to the #SetWindowIconifyCallback() method."
@@ -451,7 +453,7 @@ val GLFWcursorenterfun = "GLFWcursorenterfun".callback(
 	GLFW_PACKAGE, void, "GLFWCursorEnterCallback",
 	"Will be called when the cursor enters or leaves the client area of the window.",
 	GLFWwindow.IN("window", "the window that received the event"),
-	int.IN("entered", "GL11##GL_TRUE if the cursor entered the window's client area, or GL11##GL_FALSE if it left it")
+	GLFWboolean.IN("entered", "GL11##GL_TRUE if the cursor entered the window's client area, or GL11##GL_FALSE if it left it")
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
 	documentation = "Instances of this interface may be passed to the #SetCursorEnterCallback() method."
