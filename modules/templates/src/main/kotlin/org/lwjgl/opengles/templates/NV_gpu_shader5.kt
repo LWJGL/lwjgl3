@@ -2,26 +2,26 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.opengl.templates
+package org.lwjgl.opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import org.lwjgl.opengles.*
 
-val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV) {
+val NV_gpu_shader5 = "NVGPUShader5".nativeClassGLES("NV_gpu_shader5", postfix = NV) {
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
 
-		This extension provides a set of new features to the OpenGL Shading Language and related APIs to support capabilities of new GPUs. Shaders using the
+		This extension provides a set of new features to the OpenGL ES Shading Language and related APIs to support capabilities of new GPUs. Shaders using the
 		new functionality provided by this extension should enable this functionality via the construct
 		${codeBlock("""
 \\#extension GL_NV_gpu_shader5 : require (or enable)""")}
-		This extension was developed concurrently with the ARB_gpu_shader5 extension, and provides a superset of the features provided there. The features
-		common to both extensions are documented in the ARB_gpu_shader5 specification; this document describes only the addition language features not
-		available via ARB_gpu_shader5. A shader that enables this extension via an \\#extension directive also implicitly enables the common capabilities
-		provided by ARB_gpu_shader5.
+		This extension was developed concurrently with the OES_gpu_shader5 extension, and provides a superset of the features provided there. The features
+		common to both extensions are documented in the OES_gpu_shader5 specification; this document describes only the addition language features not
+		available via OES_gpu_shader5. A shader that enables this extension via an \\#extension directive also implicitly enables the common capabilities
+		provided by OES_gpu_shader5.
 
-		In addition to the capabilities of ARB_gpu_shader5, this extension provides a variety of new features for all shader types, including:
+		In addition to the capabilities of OES_gpu_shader5, this extension provides a variety of new features for all shader types, including:
 		${ul(
 			"""
 			support for a full set of 8-, 16-, 32-, and 64-bit scalar and vector data types, including uniform API, uniform buffer object, and shader input and
@@ -41,7 +41,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 			(textureGrad*).
 		    """
 		)}
-		This extension also provides additional support for processing patch primitives (introduced by ARB_tessellation_shader). ARB_tessellation_shader
+		This extension also provides additional support for processing patch primitives (introduced by OES_tessellation_shader). OES_tessellation_shader
 		requires the use of a tessellation evaluation shader when processing patches, which means that patches will never survive past the tessellation
 		pipeline stage. This extension lifts that restriction, and allows patches to proceed further in the pipeline and be used
 		${ul(
@@ -52,7 +52,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		Additionally, it allows geometry shaders to read per-patch attributes written by a tessellation control shader using input variables declared with
 		"patch in".
 
-		Requires ${GL32.core}, GLSL 1.50 and ${ARB_gpu_shader5.link}.
+		Requires ${GLES31.core} and GLSL ES 3.10.
 		"""
 
 	IntConstant(
@@ -93,7 +93,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		"",
 
 		GLint.IN("location", ""),
-		GLint64EXT.IN("x", "")
+		GLint64.IN("x", "")
 	)
 
 	void(
@@ -101,8 +101,8 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		"",
 
 		GLint.IN("location", ""),
-		GLint64EXT.IN("x", ""),
-		GLint64EXT.IN("y", "")
+		GLint64.IN("x", ""),
+		GLint64.IN("y", "")
 	)
 
 	void(
@@ -110,9 +110,9 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		"",
 
 		GLint.IN("location", ""),
-		GLint64EXT.IN("x", ""),
-		GLint64EXT.IN("y", ""),
-		GLint64EXT.IN("z", "")
+		GLint64.IN("x", ""),
+		GLint64.IN("y", ""),
+		GLint64.IN("z", "")
 	)
 
 	void(
@@ -120,10 +120,10 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		"",
 
 		GLint.IN("location", ""),
-		GLint64EXT.IN("x", ""),
-		GLint64EXT.IN("y", ""),
-		GLint64EXT.IN("z", ""),
-		GLint64EXT.IN("w", "")
+		GLint64.IN("x", ""),
+		GLint64.IN("y", ""),
+		GLint64.IN("z", ""),
+		GLint64.IN("w", "")
 	)
 
 	void(
@@ -132,7 +132,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLint.IN("location", ""),
 		AutoSize("value")..GLsizei.IN("count", ""),
-		const..GLint64EXT_p.IN("value", "")
+		const..GLint64_p.IN("value", "")
 	)
 
 	void(
@@ -141,7 +141,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLint.IN("location", ""),
 		AutoSize(2, "value")..GLsizei.IN("count", ""),
-		const..GLint64EXT_p.IN("value", "")
+		const..GLint64_p.IN("value", "")
 	)
 
 	void(
@@ -150,7 +150,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLint.IN("location", ""),
 		AutoSize(3, "value")..GLsizei.IN("count", ""),
-		const..GLint64EXT_p.IN("value", "")
+		const..GLint64_p.IN("value", "")
 	)
 
 	void(
@@ -159,7 +159,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLint.IN("location", ""),
 		AutoSize(4, "value")..GLsizei.IN("count", ""),
-		const..GLint64EXT_p.IN("value", "")
+		const..GLint64_p.IN("value", "")
 	)
 
 	void(
@@ -167,7 +167,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		"",
 
 		GLint.IN("location", ""),
-		GLuint64EXT.IN("x", "")
+		GLuint64.IN("x", "")
 	)
 
 	void(
@@ -175,8 +175,8 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		"",
 
 		GLint.IN("location", ""),
-		GLuint64EXT.IN("x", ""),
-		GLuint64EXT.IN("y", "")
+		GLuint64.IN("x", ""),
+		GLuint64.IN("y", "")
 	)
 
 	void(
@@ -184,9 +184,9 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		"",
 
 		GLint.IN("location", ""),
-		GLuint64EXT.IN("x", ""),
-		GLuint64EXT.IN("y", ""),
-		GLuint64EXT.IN("z", "")
+		GLuint64.IN("x", ""),
+		GLuint64.IN("y", ""),
+		GLuint64.IN("z", "")
 	)
 
 	void(
@@ -194,10 +194,10 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		"",
 
 		GLint.IN("location", ""),
-		GLuint64EXT.IN("x", ""),
-		GLuint64EXT.IN("y", ""),
-		GLuint64EXT.IN("z", ""),
-		GLuint64EXT.IN("w", "")
+		GLuint64.IN("x", ""),
+		GLuint64.IN("y", ""),
+		GLuint64.IN("z", ""),
+		GLuint64.IN("w", "")
 	)
 
 	void(
@@ -206,7 +206,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLint.IN("location", ""),
 		AutoSize("value")..GLsizei.IN("count", ""),
-		const..GLuint64EXT_p.IN("value", "")
+		const..GLuint64_p.IN("value", "")
 	)
 
 	void(
@@ -215,7 +215,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLint.IN("location", ""),
 		AutoSize(2, "value")..GLsizei.IN("count", ""),
-		GLuint64EXT_p.IN("value", "")
+		GLuint64_p.IN("value", "")
 	)
 
 	void(
@@ -224,7 +224,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLint.IN("location", ""),
 		AutoSize(3, "value")..GLsizei.IN("count", ""),
-		const..GLuint64EXT_p.IN("value", "")
+		const..GLuint64_p.IN("value", "")
 	)
 
 	void(
@@ -233,7 +233,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLint.IN("location", ""),
 		AutoSize(4, "value")..GLsizei.IN("count", ""),
-		const..GLuint64EXT_p.IN("value", "")
+		const..GLuint64_p.IN("value", "")
 	)
 
 	void(
@@ -242,7 +242,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		Check(1)..ReturnParam..GLint64EXT_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint64_p.OUT("params", "")
 	)
 
 	void(
@@ -251,172 +251,170 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		Check(1)..ReturnParam..GLint64EXT_p.OUT("params", "")
+		Check(1)..ReturnParam..GLint64_p.OUT("params", "")
 	)
 
-	val DSA = DependsOn("GL_EXT_direct_state_access")
-
-	DSA..void(
+	void(
 		"ProgramUniform1i64NV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		GLint64EXT.IN("x", "")
+		GLint64.IN("x", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform2i64NV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		GLint64EXT.IN("x", ""),
-		GLint64EXT.IN("y", "")
+		GLint64.IN("x", ""),
+		GLint64.IN("y", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform3i64NV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		GLint64EXT.IN("x", ""),
-		GLint64EXT.IN("y", ""),
-		GLint64EXT.IN("z", "")
+		GLint64.IN("x", ""),
+		GLint64.IN("y", ""),
+		GLint64.IN("z", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform4i64NV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		GLint64EXT.IN("x", ""),
-		GLint64EXT.IN("y", ""),
-		GLint64EXT.IN("z", ""),
-		GLint64EXT.IN("w", "")
+		GLint64.IN("x", ""),
+		GLint64.IN("y", ""),
+		GLint64.IN("z", ""),
+		GLint64.IN("w", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform1i64vNV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
 		AutoSize("value")..GLsizei.IN("count", ""),
-		const..GLint64EXT_p.IN("value", "")
+		const..GLint64_p.IN("value", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform2i64vNV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
 		AutoSize(2, "value")..GLsizei.IN("count", ""),
-		const..GLint64EXT_p.IN("value", "")
+		const..GLint64_p.IN("value", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform3i64vNV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
 		AutoSize(3, "value")..GLsizei.IN("count", ""),
-		const..GLint64EXT_p.IN("value", "")
+		const..GLint64_p.IN("value", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform4i64vNV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
 		AutoSize(4, "value")..GLsizei.IN("count", ""),
-		const..GLint64EXT_p.IN("value", "")
+		const..GLint64_p.IN("value", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform1ui64NV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		GLuint64EXT.IN("x", "")
+		GLuint64.IN("x", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform2ui64NV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		GLuint64EXT.IN("x", ""),
-		GLuint64EXT.IN("y", "")
+		GLuint64.IN("x", ""),
+		GLuint64.IN("y", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform3ui64NV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		GLuint64EXT.IN("x", ""),
-		GLuint64EXT.IN("y", ""),
-		GLuint64EXT.IN("z", "")
+		GLuint64.IN("x", ""),
+		GLuint64.IN("y", ""),
+		GLuint64.IN("z", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform4ui64NV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		GLuint64EXT.IN("x", ""),
-		GLuint64EXT.IN("y", ""),
-		GLuint64EXT.IN("z", ""),
-		GLuint64EXT.IN("w", "")
+		GLuint64.IN("x", ""),
+		GLuint64.IN("y", ""),
+		GLuint64.IN("z", ""),
+		GLuint64.IN("w", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform1ui64vNV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
 		AutoSize("value")..GLsizei.IN("count", ""),
-		const..GLuint64EXT_p.IN("value", "")
+		const..GLuint64_p.IN("value", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform2ui64vNV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
 		AutoSize(2, "value")..GLsizei.IN("count", ""),
-		const..GLuint64EXT_p.IN("value", "")
+		const..GLuint64_p.IN("value", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform3ui64vNV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
 		AutoSize(3, "value")..GLsizei.IN("count", ""),
-		const..GLuint64EXT_p.IN("value", "")
+		const..GLuint64_p.IN("value", "")
 	)
 
-	DSA..void(
+	void(
 		"ProgramUniform4ui64vNV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
 		AutoSize(4, "value")..GLsizei.IN("count", ""),
-		const..GLuint64EXT_p.IN("value", "")
+		const..GLuint64_p.IN("value", "")
 	)
 }

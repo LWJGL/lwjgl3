@@ -302,6 +302,38 @@ val EXT_shader_texture_lod = EXT_FLAG.nativeClassGLES("EXT_shader_texture_lod", 
 		"""
 }
 
+val EXT_sparse_texture2 = EXT_FLAG.nativeClassGLES("EXT_sparse_texture2", postfix = EXT) {
+	documentation =
+		"""
+		This extension builds on the EXT_sparse_texture extension, providing the following new functionality:
+		${ul(
+			"""
+			New built-in GLSL texture lookup and image load functions are provided that return information on whether the texels accessed for the texture
+			lookup accessed uncommitted texture memory.
+			""",
+			"""
+			New built-in GLSL texture lookup functions are provided that specify a minimum level of detail to use for lookups where the level of detail is
+			computed automatically. This allows shaders to avoid accessing unpopulated portions of high-resolution levels of detail when it knows that the
+			memory accessed is unpopulated, either from a priori knowledge or from feedback provided by the return value of previously executed "sparse"
+			texture lookup functions.
+			""",
+			"""
+			Reads of uncommitted texture memory will act as though such memory were filled with zeroes; previously, the values returned by reads were
+			undefined.
+			""",
+			"""
+			Standard implementation-independent virtual page sizes for internal formats required to be supported with sparse textures. These standard sizes can
+			be requested by leaving #VIRTUAL_PAGE_SIZE_INDEX_EXT at its initial value (0).
+			""",
+			"""
+			Support for creating sparse multisample and multisample array textures is added. However, the virtual page sizes for such textures remain fully
+			implementation-dependent.
+			"""
+		)}
+
+		Requires ${EXT_sparse_texture.link}.
+		"""
+}
 
 val KHR_robust_buffer_access_behavior = EXT_FLAG.nativeClassGLES("KHR_robust_buffer_access_behavior", postfix = KHR) {
 	documentation =
@@ -490,6 +522,16 @@ val NV_sample_mask_override_coverage = EXT_FLAG.nativeClassGLES("NV_sample_mask_
 		${codeBlock("""
 	layout(override_coverage) out int gl_SampleMask[];""")}
 		Requires {@link #GL_OES_sample_variables OES_sample_variables}.
+		"""
+}
+
+val NV_shader_atomic_fp16_vector = EXT_FLAG.nativeClassGLES("NV_shader_atomic_fp16_vector", postfix = NV) {
+	documentation =
+		"""
+		This extension provides GLSL built-in functions and assembly opcodes allowing shaders to perform a limited set of atomic read-modify-write operations
+		to buffer or texture memory with 16-bit floating point vector surface formats.
+
+		Requires ${NV_gpu_shader5.link}.
 		"""
 }
 
