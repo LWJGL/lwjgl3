@@ -91,9 +91,7 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 """)
 
 		classes.forEach {
-			val documentation = it.documentation
-			if ( documentation != null )
-				println((if ( it.hasBody ) "When true, {@link ${it.className}} is supported." else documentation).toJavaDoc())
+			println(it.getCapabilityJavadoc())
 			println("\tpublic final boolean ${it.capName};")
 		}
 

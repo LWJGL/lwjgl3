@@ -50,9 +50,7 @@ val GLXBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILI
 		)
 
 		classes.forEach {
-			val documentation = it.documentation
-			if ( documentation != null )
-				println((if ( it.hasBody ) "When true, {@link ${it.className}} is supported." else documentation).toJavaDoc())
+			println(it.getCapabilityJavadoc())
 			println("\tpublic final boolean ${it.capName};")
 		}
 

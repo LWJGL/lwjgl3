@@ -24,8 +24,8 @@ val OVR = "OVR"
 val SGI = "SGI"
 val SGIX = "SGIX"
 
-private val NativeClass.cap: String get() = "{@link #$capName $templateName}"
-private val String.cap: String get() = "{@link #GL_$this $this}" // TODO: remove when all extensions have been added
+private val NativeClass.cap: String get() = "{@link \\#$capName $templateName}"
+private val String.cap: String get() = "{@link \\#GL_$this $this}" // TODO: remove when all extensions have been added
 
 val ARB_arrays_of_arrays = EXT_FLAG.nativeClassGL("ARB_arrays_of_arrays", postfix = ARB) {
 	documentation =
@@ -391,8 +391,8 @@ val ARB_shader_stencil_export = EXT_FLAG.nativeClassGL("ARB_shader_stencil_expor
 		update the content of the stencil buffer are limited to operations such as incrementing the existing value, or overwriting with a fixed reference value.
 
 		This extension provides a mechanism whereby a shader may generate the stencil reference value per invocation. When stencil testing is enabled, this
-		allows the test to be performed against the value generated in the shader. When the stencil operation is set to {@link GL11#GL_REPLACE REPLACE}, this
-		allows a value generated in the shader to be written to the stencil buffer directly.
+		allows the test to be performed against the value generated in the shader. When the stencil operation is set to #REPLACE, this allows a value generated
+		in the shader to be written to the stencil buffer directly.
 
 		Requires ${"ARB_fragment_shader".cap}.
 		"""
@@ -760,8 +760,8 @@ val EXT_shadow_funcs = EXT_FLAG.nativeClassGL("EXT_shadow_funcs", postfix = EXT)
 		"""
 		When true, the $registryLink extension is supported.
 
-		This extension generalizes the ${"ARB_shadow".cap} extension to support all eight binary texture comparison functions rather than just
-		{@link GL11#GL_LEQUAL LEQUAL} and {@link GL11#GL_GEQUAL GEQUAL}.
+		This extension generalizes the ${"ARB_shadow".cap} extension to support all eight binary texture comparison functions rather than just #LEQUAL and
+		#GEQUAL.
 
 		Requires ${"ARB_depth_texture".cap} and ${"ARB_shadow".cap}.
 		"""
@@ -786,7 +786,7 @@ val EXT_sparse_texture2 = EXT_FLAG.nativeClassGL("EXT_sparse_texture2", postfix 
 			Reads of uncommitted texture memory will act as though such memory were filled with zeroes; previously, the values returned by reads were undefined.
 
 			Standard implementation-independent virtual page sizes for internal formats required to be supported with sparse textures. These standard sizes can
-			be requested by leaving ARBSparseTexture#VIRTUAL_PAGE_SIZE_INDEX_ARB at its initial value (0).
+			be requested by leaving #VIRTUAL_PAGE_SIZE_INDEX_ARB at its initial value (0).
 
 			Support for creating sparse multisample and multisample array textures is added. However, the virtual page sizes for such textures remain fully
 			implementation-dependent.
@@ -886,8 +886,8 @@ val AMD_shader_stencil_export = EXT_FLAG.nativeClassGL("AMD_shader_stencil_expor
 		update the content of the stencil buffer are limited to operations such as incrementing the existing value, or overwriting with a fixed reference value.
 
 		This extension provides a mechanism whereby a shader may generate the stencil reference value per invocation. When stencil testing is enabled, this
-		allows the test to be performed against the value generated in the shader. When the stencil operation is set to {@link GL11#GL_REPLACE REPLACE}, this
-		allows a value generated in the shader to be written to the stencil buffer directly.
+		allows the test to be performed against the value generated in the shader. When the stencil operation is set to #REPLACE, this allows a value generated
+		in the shader to be written to the stencil buffer directly.
 
 		Requires ${"ARB_fragment_shader".cap}.
 		"""
@@ -915,8 +915,8 @@ val AMD_texture_texture4 = EXT_FLAG.nativeClassGL("AMD_texture_texture4", postfi
 		These texture functions may be used to access one component textures.
 
 		The {@code texture4} built-in function returns a texture value derived from a 2x2 set of texels in the image array of level levelbase is selected. These
-		texels are selected in the same way as when the value of {@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER} is {@link GL11#GL_LINEAR LINEAR}, but instead
-		of these texels being filtered to generate the texture value, the R, G, B and A texture values are derived directly from these four texels.
+		texels are selected in the same way as when the value of #TEXTURE_MIN_FILTER is #LINEAR, but instead of these texels being filtered to generate the
+		texture value, the R, G, B and A texture values are derived directly from these four texels.
 		"""
 }
 val AMD_transform_feedback3_lines_triangles = "AMDTransformFeedback3LinesTriangles".nativeClassGL("AMD_transform_feedback3_lines_triangles", postfix = AMD) {
@@ -925,8 +925,8 @@ val AMD_transform_feedback3_lines_triangles = "AMDTransformFeedback3LinesTriangl
 		When true, the $registryLink extension is supported.
 
 		OpenGL 4.0 introduced the ability to record primitives into multiple output streams using transform feedback. However, the restriction that all streams
-		must output {@link GL11#GL_POINT POINT} primitives when more than one output stream is active was also introduced. This extension simply removes that
-		restriction, allowing the same set of primitives to be used with multiple transform feedback streams as with a single stream.
+		must output #POINT primitives when more than one output stream is active was also introduced. This extension simply removes that restriction, allowing
+		the same set of primitives to be used with multiple transform feedback streams as with a single stream.
 
 		Requires ${GL40.core} or ${ARB_transform_feedback3.link}.
 		"""
@@ -1198,8 +1198,8 @@ val WGL_EXT_swap_control_tear = EXT_FLAG.nativeClassWGL("WGL_EXT_swap_control_te
 		When true, the ${registryLink("EXT", "wgl_swap_control_tear")} extension is supported.
 
 		This extension extends the existing ${WGL_EXT_swap_control.link} extension by allowing a negative {@code interval} parameter to
-		{@link WGLEXTSwapControl#wglSwapIntervalEXT}. The negative {@code interval} allows late swaps to occur without synchronization to the video frame. This
-		reduces the visual stutter on late frames and reduces the stall on subsequent frames.
+		WGLEXTSwapControl#SwapIntervalEXT(). The negative {@code interval} allows late swaps to occur without synchronization to the video frame. This reduces
+		the visual stutter on late frames and reduces the stall on subsequent frames.
 		"""
 }
 val WGL_NV_DX_interop2 = EXT_FLAG.nativeClassWGL("WGL_NV_DX_interop2", postfix = NV) {

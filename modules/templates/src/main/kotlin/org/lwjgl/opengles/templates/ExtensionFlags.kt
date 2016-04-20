@@ -25,7 +25,7 @@ val OVR = "OVR"
 val QCOM = "QCOM"
 val VIV = "VIV"
 
-private val NativeClass.cap: String get() = "{@link #$capName $templateName}"
+private val NativeClass.cap: String get() = "{@link \\#$capName $templateName}"
 
 val ANDROID_extension_pack_es31a = EXT_FLAG.nativeClassGLES("ANDROID_extension_pack_es31a", postfix = ANDROID) {
 	documentation =
@@ -33,7 +33,7 @@ val ANDROID_extension_pack_es31a = EXT_FLAG.nativeClassGLES("ANDROID_extension_p
 		When true, the $registryLink extension is supported.
 
 		This extension changes little functionality directly. Instead it serves to roll up the 20 extensions it requires, allowing applications to check for
-		all of them at once, and enable all of their shading language features with a single #extension statement. The Android platform provides special
+		all of them at once, and enable all of their shading language features with a single \#extension statement. The Android platform provides special
 		support outside of OpenGL ES to help applications target this set of extensions.
 
 		In addition, this extension ensures support for images, shader storage buffers, and atomic counters in fragment shaders. In unextended OpenGL ES the
@@ -115,7 +115,7 @@ val EXT_gpu_shader5 = EXT_FLAG.nativeClassGLES("EXT_gpu_shader5", postfix = EXT)
 		capabilities of version 3.10 of the OpenGL ES Shading Language. Shaders using the new functionality provided by this extension should enable this
 		functionality via the construct
 		${codeBlock("""
-	#extension GL_EXT_gpu_shader5 : require (or enable)""")}
+	\#extension GL_EXT_gpu_shader5 : require (or enable)""")}
 		This extension provides a variety of new features for all shader types, including:
 		${ul(
 			"support for indexing into arrays of opaque types (samplers, and atomic counters) using dynamically uniform integer expressions;",
@@ -156,7 +156,7 @@ val EXT_post_depth_coverage = EXT_FLAG.nativeClassGLES("EXT_post_depth_coverage"
 		To use this feature, early fragment tests must also be enabled in the fragment shader via:
 		${codeBlock("""
 	layout(early_fragment_tests) in;""")}
-		Requires {@link #GL_OES_sample_variables OES_sample_variables}.
+		Requires {@link \#GL_OES_sample_variables OES_sample_variables}.
 		"""
 }
 
@@ -471,7 +471,7 @@ val NV_geometry_shader_passthrough = EXT_FLAG.nativeClassGLES("NV_geometry_shade
 
 		The following geometry shader, using this extension, is equivalent:
 		${codeBlock("""
-      #extension GL_NV_geometry_shader_passthrough : require
+      \#extension GL_NV_geometry_shader_passthrough : require
 
       layout(triangles) in;
       // No output primitive layout qualifiers required.
@@ -521,7 +521,7 @@ val NV_sample_mask_override_coverage = EXT_FLAG.nativeClassGLES("NV_sample_mask_
 		layout qualifier:
 		${codeBlock("""
 	layout(override_coverage) out int gl_SampleMask[];""")}
-		Requires {@link #GL_OES_sample_variables OES_sample_variables}.
+		Requires {@link \#GL_OES_sample_variables OES_sample_variables}.
 		"""
 }
 
@@ -672,7 +672,7 @@ val OES_gpu_shader5 = EXT_FLAG.nativeClassGLES("OES_gpu_shader5", postfix = OES)
 		capabilities of version 3.10 of the OpenGL ES Shading Language. Shaders using the new functionality provided by this extension should enable this
 		functionality via the construct
 		${codeBlock("""
-	#extension GL_OES_gpu_shader5 : require (or enable)""")}
+	\#extension GL_OES_gpu_shader5 : require (or enable)""")}
 		This extension provides a variety of new features for all shader types, including:
 		${ul(
 			"support for indexing into arrays of opaque types (samplers, and atomic counters) using dynamically uniform integer expressions;",

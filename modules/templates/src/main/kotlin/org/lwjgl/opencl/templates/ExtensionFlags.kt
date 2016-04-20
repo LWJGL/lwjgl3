@@ -112,20 +112,20 @@ val khr_select_fprounding_mode = EXT_FLAG.nativeClassCL("khr_select_fprounding_m
 
 		This extension adds support for specifying the rounding mode for an instruction or group of instructions in the program source.
 
-		The appropriate rounding mode can be specified using ${code("#pragma OPENCL SELECT_ROUNDING_MODE")} rounding-mode in the program source.
+		The appropriate rounding mode can be specified using ${code("\\#pragma OPENCL SELECT_ROUNDING_MODE")} rounding-mode in the program source.
 
-		The ${code("#pragma OPENCL SELECT_ROUNDING_MODE")} sets the rounding mode for all instructions that operate on floating-point types (scalar or vector
-		types) or produce floating-point values that follow this pragma in the program source until the next ${code("#pragma OPENCL SELECT_ROUNDING_MODE")} is
+		The ${code("\\#pragma OPENCL SELECT_ROUNDING_MODE")} sets the rounding mode for all instructions that operate on floating-point types (scalar or vector
+		types) or produce floating-point values that follow this pragma in the program source until the next ${code("\\#pragma OPENCL SELECT_ROUNDING_MODE")} is
 		encountered. Note that the rounding mode specified for a block of code is known at compile time. Except where otherwise documented, the callee
 		functions do not inherit the rounding mode of the caller function.
 
 		If this extension is enabled, the {@code __ROUNDING_MODE__} preprocessor symbol shall be defined to be one of the following according to the current
 		rounding mode:
 		${codeBlock("""
-#define __ROUNDING_MODE__ rte
-#define __ROUNDING_MODE__ rtz
-#define __ROUNDING_MODE__ rtp
-#define __ROUNDING_MODE__ rtz""")}
+\#define __ROUNDING_MODE__ rte
+\#define __ROUNDING_MODE__ rtz
+\#define __ROUNDING_MODE__ rtp
+\#define __ROUNDING_MODE__ rtz""")}
 		The default rounding mode is round to nearest even. The built-in math functions, the common functions, and the geometric functions are implemented with
 		the round to nearest even rounding mode.
 
@@ -593,7 +593,7 @@ val nv_pragma_unroll = EXT_FLAG.nativeClassCL("nv_pragma_unroll", NV) {
 
 		A user may specify that a loop in the source program be unrolled. This is done via a pragma. The syntax of this pragma is as follows
 
-		${code("#pragma unroll [unroll-factor]")}
+		${code("\\#pragma unroll [unroll-factor]")}
 
 		The pragma unroll may optionally specify an unroll factor. The pragma must be placed immediately before the loop and only applies to that loop.
 

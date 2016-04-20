@@ -112,9 +112,7 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 		println(addresses.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
 
 		classes.forEach {
-			val documentation = it.documentation
-			if ( documentation != null )
-				println((if ( it.hasBody ) "When true, {@link ${it.className}} is supported." else documentation).toJavaDoc())
+			println(it.getCapabilityJavadoc())
 			println("\tpublic final boolean ${it.capName};")
 		}
 
