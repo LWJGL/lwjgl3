@@ -22,7 +22,7 @@ class CallbackFunction(
 	}
 
 	private val signatureJava: String = signature.asSequence().map {
-		"${if ( it.nativeType.mapping == PrimitiveMapping.BOOLEAN4 ) "boolean" else it.nativeMethodType} ${it.name}"
+		"${if ( it.nativeType.mapping == PrimitiveMapping.BOOLEAN4 ) "boolean" else it.nativeType.nativeMethodType} ${it.name}"
 	}.joinToString(", ")
 
 	val NativeType.dyncall: Char
@@ -81,7 +81,7 @@ ${access.modifier}abstract class $className extends Callback.${returns.mapping.j
 	 * @param args pointer to an array of jvalues
 	 */
 	@Override
-	protected ${returns.nativeMethodType.simpleName} callback(long args) {
+	protected ${returns.nativeMethodType} callback(long args) {
 		""")
 		if ( returns.mapping != TypeMapping.VOID )
 			print("return ")
@@ -99,11 +99,11 @@ ${signature.asSequence().withIndex().map {
 """)
 		print(functionDoc(this@CallbackFunction))
 		print("""
-	public abstract ${returns.nativeMethodType.simpleName} invoke($signatureJava);
+	public abstract ${returns.nativeMethodType} invoke($signatureJava);
 
 	/** A functional interface for {@link $className}. */
 	public interface SAM {
-		${returns.nativeMethodType.simpleName} invoke($signatureJava);
+		${returns.nativeMethodType} invoke($signatureJava);
 	}
 """)
 
@@ -118,7 +118,7 @@ ${signature.asSequence().withIndex().map {
 	public static $className create(SAM sam) {
 		return new $className() {
 			@Override
-			public ${returns.nativeMethodType.simpleName} invoke($signatureJava) {
+			public ${returns.nativeMethodType} invoke($signatureJava) {
 				""")
 		if ( returns.mapping != TypeMapping.VOID )
 			print("return ")

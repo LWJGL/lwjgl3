@@ -21,12 +21,12 @@ open class NativeType(
 		get() = mapping.jniFunctionType
 
 	/** The native method argument type. */
-	val nativeMethodType: Class<*>
-		get() = mapping.nativeMethodType
+	val nativeMethodType: String
+		get() = mapping.nativeMethodType.simpleName
 
 	/** The Java method argument type. */
-	val javaMethodType: Class<*>
-		get() = mapping.javaMethodType
+	open val javaMethodType: String
+		get() = if ( this.mapping === PrimitiveMapping.BOOLEAN4 ) "boolean" else mapping.javaMethodType.simpleName
 
 	override fun toString(): String =
 		"${this.javaClass.simpleName}: $name | ${mapping.jniFunctionType} | ${mapping.nativeMethodType} | ${mapping.javaMethodType}"
@@ -91,7 +91,10 @@ open class ObjectType(
 	name: String = className,
 	/** If true, the nativeType typedef includes a pointer. */
 	includesPointer: Boolean = true
-) : PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer)
+) : PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer) {
+	override val javaMethodType: String
+		get() = className
+}
 
 // Structs, 3 cases:
 //
@@ -120,8 +123,11 @@ class StructType(
 	mapping: PointerMapping = PointerMapping.DATA_BYTE,
 	/** If true, the nativeType typedef includes a pointer. If false, the argument will be passed-by-value. */
 	includesPointer: Boolean = false,
-    elementType: NativeType? = null
-) : PointerType(name, mapping, includesPointer, elementType)
+	elementType: NativeType? = null
+) : PointerType(name, mapping, includesPointer, elementType) {
+	override val javaMethodType: String
+		get() = definition.className
+}
 
 /** Converts a struct value to a pointer to a struct value. */
 val StructType.p: PointerType get() = if ( this.includesPointer )

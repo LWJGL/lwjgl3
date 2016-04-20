@@ -57,7 +57,7 @@ open class AutoSizeTransform(
 			expression = "${bufferParam.name} == null ? 0 : $expression"
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
-			expression = "(${param.nativeType.javaMethodType.simpleName})($expression)"
+			expression = "(${param.nativeType.javaMethodType})($expression)"
 
 		return expression
 	}
@@ -82,7 +82,7 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, v
 			expression = "(${bufferParam.name} == null ? 0 : $expression)"
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
-			expression = "(${param.nativeType.javaMethodType.simpleName})($expression)"
+			expression = "(${param.nativeType.javaMethodType})($expression)"
 
 		return expression
 	}
@@ -100,7 +100,7 @@ open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : FunctionT
 			expression = "$expression ${param[AutoSize].factor!!.expression()}"
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
-			expression = "(${param.nativeType.javaMethodType.simpleName})($expression)"
+			expression = "(${param.nativeType.javaMethodType})($expression)"
 
 		return expression
 	}
@@ -201,7 +201,7 @@ class SingleValueTransform(
 class SingleValueStructTransform(
 	val newName: String
 ) : FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String) = "${(param.nativeType as StructType).definition.className} $newName" // Replace with element type + new name
+	override fun transformDeclaration(param: Parameter, original: String) = "${param.nativeType.javaMethodType} $newName" // Replace with element type + new name
 	override fun transformCall(param: Parameter, original: String): String = "$newName.address()"
 }
 
@@ -277,16 +277,16 @@ class BufferAutoSizeReturnTransform(
 ) : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
 		if ( it is StructType )
-			"${it.definition.className}.Buffer"
+			"${it.javaMethodType}.Buffer"
 		else
-			"${it.javaMethodType.simpleName}"
+			"${it.javaMethodType}"
 	}
 
 	override fun transformCall(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
 		"\t\treturn ${if (it is StructType)
-			"${it.definition.className}.create"
+			"${it.javaMethodType}.create"
 		else
-			"mem${it.javaMethodType.simpleName}"
+			"mem${it.javaMethodType}"
 		}(${outParam.name}.get(0), $lengthExpression);"
 	}
 }

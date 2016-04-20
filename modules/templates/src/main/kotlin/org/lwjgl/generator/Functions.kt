@@ -194,10 +194,10 @@ class NativeClassFunction(
 			returns.javaMethodType
 
 	private val returnsNativeMethodType: String
-		get() = if ( returns.isStructValue ) "void" else returns.nativeMethodType
+		get() = if ( returns.isStructValue ) "void" else returns.nativeType.nativeMethodType
 
 	private val returnsJniFunctionType: String
-		get() = if ( returns.isStructValue ) "void" else returns.jniFunctionType
+		get() = if ( returns.isStructValue ) "void" else returns.nativeType.jniFunctionType
 
 	private fun hasAutoSizePredicate(reference: Parameter): (Parameter) -> Boolean = { it has AutoSize && it[AutoSize].hasReference(reference.name) }
 
@@ -371,7 +371,7 @@ class NativeClassFunction(
 
 					if ( check.debug ) prefix = "if ( DEBUG )\n\t\t\t\t$prefix"
 
-					if ( it.nativeType.javaMethodType === ByteBuffer::class.java )
+					if ( it.nativeType.javaMethodType == "ByteBuffer" )
 						checks.add("${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});")
 					else if ( it.nativeType is StructType )
 						checks.add("${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});")
@@ -426,7 +426,7 @@ class NativeClassFunction(
 			// Do this after the AutoSize check
 			if ( it.nativeType is StructType && it.nativeType.definition.validations.any() && !hasUnsafeMethod )
 				checks.add(
-					"${it.nativeType.definition.className}.validate(${it.name}.address()${sequenceOf(
+					"${it.nativeType.javaMethodType}.validate(${it.name}.address()${sequenceOf(
 						if ( it.has(Check) ) it[Check].expression else null,
 						getReferenceParam(AutoSize, it.name).let { autoSize ->
 							if ( autoSize == null )
@@ -486,9 +486,6 @@ class NativeClassFunction(
 				writer.generateUnsafeMethod()
 			}
 
-			// This the only special case where we don't generate a "normal" Java method. If we did,
-			// we'd need to add a postfix to either this or the alternative method, since we're
-			// changing the return type. It looks ugly and LWJGL didn't do it pre-3.0 either.
 			if ( returns.nativeType !is CharSequenceType && parameters.none { it has AutoSize && it.paramType == ParameterType.IN } ) {
 				writer.println()
 				writer.generateJavaMethod()
@@ -557,7 +554,7 @@ class NativeClassFunction(
 				checks.add("checkPointer(${it.name});")
 			else if ( it.nativeType is StructType && it.nativeType.definition.validations.any() )
 				checks.add(
-					"${it.nativeType.definition.className}.validate(${it.name}${sequenceOf(
+					"${it.nativeType.javaMethodType}.validate(${it.name}${sequenceOf(
 						if ( it.has(Check) ) it[Check].expression else null,
 						getReferenceParam(AutoSize, it.name).let { autoSize ->
 							if ( autoSize == null )
@@ -641,7 +638,7 @@ class NativeClassFunction(
 
 		if ( returns.isStructValue ) {
 			if ( !parameters.isEmpty() ) print(", ")
-			print("${(returns.nativeType as StructType).definition.className} $RESULT")
+			print("${returns.nativeType.javaMethodType} $RESULT")
 		}
 
 		println(") {")
@@ -697,7 +694,7 @@ class NativeClassFunction(
 					print("\t")
 				print("\t\t")
 				if ( returns.nativeType is StructType ) {
-					println("return ${returns.nativeType.definition.className}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", ${it.name}.get(0)" else "" }});")
+					println("return ${returns.nativeType.javaMethodType}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", ${it.name}.get(0)" else "" }});")
 				} else {
 					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
@@ -1123,7 +1120,7 @@ class NativeClassFunction(
 							is ObjectType       -> pointerType.elementType.className
 							is StructType       -> it.javaMethodType
 							is PointerType      -> "long"
-							else                -> pointerType.elementType!!.javaMethodType.simpleName
+							else                -> pointerType.elementType!!.javaMethodType
 						},
 						primitiveType,
 						singleValue.newName
@@ -1256,7 +1253,7 @@ class NativeClassFunction(
 					print("\t")
 				print("\t\t")
 				if ( returns.nativeType is StructType ) {
-					println("return ${returns.nativeType.definition.className}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", ${it.name}.get(${it.name}.position()" else "" }});")
+					println("return ${returns.nativeType.javaMethodType}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", ${it.name}.get(${it.name}.position()" else "" }});")
 				} else {
 					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )

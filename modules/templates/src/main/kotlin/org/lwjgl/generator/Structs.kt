@@ -216,14 +216,14 @@ ${ if ( m.validSize == m.size ) "$indent   checkPointer(memGetAddress(${m.name})
 $indent       checkPointer(memGetAddress(${m.name}));
 $indent   else if ( memGetAddress(${m.name}) == NULL )
 $indent       break;"""}
-$indent   ${m.nativeType.definition.className}.validate(${m.name});
+$indent   ${m.nativeType.javaMethodType}.validate(${m.name});
 $indent   ${m.name} += POINTER_SIZE;
 $indent}"""
 				} else {
 					"${if ( hasPointer ) "" else
 						"${indent}long ${m.name} = memGetAddress($STRUCT + $className.${m.offsetField});\n" +
 						"${indent}checkPointer(${m.name});\n"
-					}$indent${m.nativeType.definition.className}.validate(${m.name}${getReferenceMember(AutoSizeMember, m.name).let { if ( it != null ) ", ${it.name}" else "" }});"
+					}$indent${m.nativeType.javaMethodType}.validate(${m.name}${getReferenceMember(AutoSizeMember, m.name).let { if ( it != null ) ", ${it.name}" else "" }});"
 				}
 			} else
 				"${indent}checkPointer(memGetAddress($STRUCT + $className.${m.offsetField}));"
@@ -276,7 +276,7 @@ $indent}"""
 							} else
 								validate(m, "\t\t")
 						} else
-							"\t\t${m.nativeType.definition.className}.validate($STRUCT + $className.${m.offsetField});"
+							"\t\t${m.nativeType.javaMethodType}.validate($STRUCT + $className.${m.offsetField});"
 					)
 				} else if ( !m.has(nullable) && !(m.nativeType is StructType && !m.nativeType.includesPointer) ) {
 					validations.add(validate(m, "\t\t"))
@@ -336,7 +336,7 @@ ${members.map {
 				"${(it.nativeType as StructType).definition.printStructLayout(memberIndentation)}${if ( it.name === ANONYMOUS ) "" else " ${it.name}"};"
 			else {
 				val nativeType = if ( it.nativeType is StructType && !it.nativeType.includesPointer )
-					"{@link ${it.nativeType.definition.className} ${it.nativeType.name}}"
+					"{@link ${it.nativeType.javaMethodType} ${it.nativeType.name}}"
 				else
 					it.nativeType.let {
 						if ( it is PointerType && !it.includesPointer )
@@ -864,8 +864,8 @@ ${validations.joinToString("\n")}
 				val alignment: String
 
 				if ( it.nativeType is StructType && !it.nativeType.includesPointer ) {
-					size = "${it.nativeType.definition.className}.SIZEOF"
-					alignment = "${it.nativeType.definition.className}.ALIGNOF"
+					size = "${it.nativeType.javaMethodType}.SIZEOF"
+					alignment = "${it.nativeType.javaMethodType}.ALIGNOF"
 				} else {
 					size = if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER )
 						"POINTER_SIZE"
@@ -924,7 +924,7 @@ ${validations.joinToString("\n")}
 					if (it.nativeType is CallbackType)
 						"${it.nativeType.className} $param"
 					else
-						"${it.nativeType.javaMethodType.simpleName} $param"
+						"${it.nativeType.javaMethodType} $param"
 				)
 			}
 		}
@@ -978,11 +978,11 @@ ${validations.joinToString("\n")}
 							if ( it.nativeType.includesPointer )
 								"PointerBuffer $param"
 							else
-								"${it.nativeType.definition.className}.Buffer $param"
+								"${it.nativeType.javaMethodType}.Buffer $param"
 						} else
 							"${it.primitiveMapping.toPointer.javaMethodType.simpleName} $param"
 					} else if ( it.nativeType.isPointerData && it.nativeType is StructType ) {
-						val structType = it.nativeType.definition.className
+						val structType = it.nativeType.javaMethodType
 						if ( it is StructMemberBuffer )
 							"$structType.Buffer $param"
 						else
@@ -990,7 +990,7 @@ ${validations.joinToString("\n")}
 					} else if ( it.nativeType is CallbackType ) {
 						"${it.nativeType.className} $param"
 					} else
-						"${it.nativeType.javaMethodType.simpleName} $param"
+						"${it.nativeType.javaMethodType} $param"
 				)
 			}
 		}
@@ -1078,7 +1078,7 @@ ${validations.joinToString("\n")}
 						println("\t/** Unsafe version of {@link #$setter(long) $setter}. */")
 						println("\tpublic static void n$setter(long $STRUCT, long value) { memPutAddress($STRUCT + $field, ${it.pointerValue}); }")
 					} else {
-						val javaType = it.nativeType.javaMethodType.simpleName
+						val javaType = it.nativeType.javaMethodType
 						val bufferMethod = getBufferMethod(it, javaType)
 
 						println(
@@ -1102,7 +1102,7 @@ ${validations.joinToString("\n")}
 
 				if ( it is StructMemberArray ) {
 					if ( it.nativeType is StructType ) {
-						val structType = it.nativeType.definition.className
+						val structType = it.nativeType.javaMethodType
 						if ( it.nativeType.includesPointer ) {
 							println("\t/** Unsafe version of {@link #$setter(PointerBuffer) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, PointerBuffer value) {")
@@ -1163,7 +1163,7 @@ ${validations.joinToString("\n")}
 					println("\t}")
 				} else if ( it.nativeType.isPointerData ) {
 					if ( it.nativeType is StructType ) {
-						val structType = it.nativeType.definition.className
+						val structType = it.nativeType.javaMethodType
 						if ( it is StructMemberBuffer ) {
 							println("\t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
 							print("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) { memPutAddress($STRUCT + $field, ${it.addressValue});")
@@ -1174,7 +1174,7 @@ ${validations.joinToString("\n")}
 							println("\tpublic static void n$setter(long $STRUCT, $structType value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
 						}
 					} else {
-						val bufferType = it.nativeType.javaMethodType.simpleName
+						val bufferType = it.nativeType.javaMethodType
 						println("\t/** Unsafe version of {@link #$setter($bufferType) $setter}. */")
 						print("\tpublic static void n$setter(long $STRUCT, $bufferType value) { memPutAddress($STRUCT + $field, ${it.memAddressValue});")
 						setRemaining(it)
@@ -1202,7 +1202,7 @@ ${validations.joinToString("\n")}
 				"$className.Buffer"
 
 			if ( it.isNestedStruct ) {
-				val structType = (it.nativeType as StructType).definition.className
+				val structType = it.nativeType.javaMethodType
 				if ( structType === ANONYMOUS )
 					generateSetters(accessMode, it.nestedMembers, if ( field === ANONYMOUS ) parentMember else field)
 				else {
@@ -1229,7 +1229,7 @@ ${validations.joinToString("\n")}
 
 				if ( it is StructMemberArray ) {
 					if ( it.nativeType is StructType ) {
-						val structType = it.nativeType.definition.className
+						val structType = it.nativeType.javaMethodType
 						if ( it.nativeType.includesPointer ) {
 							println("$indent/** Copies the specified {@link PointerBuffer} to the {@code $field} field. */")
 							println("${indent}public $returnType $setter(PointerBuffer value) { $n$setter($ADDRESS, value); return this; }")
@@ -1254,10 +1254,7 @@ ${validations.joinToString("\n")}
 					println("$indent/** Sets the address of the specified encoded string to the {@code $field} field. */")
 					println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
 				} else if ( it.nativeType.isPointerData ) {
-					val pointerType = if ( it.nativeType is StructType )
-						it.nativeType.definition.className
-					else
-						it.nativeType.javaMethodType.simpleName
+					val pointerType = it.nativeType.javaMethodType
 					if ( it is StructMemberBuffer ) {
 						println("$indent/** Sets the address of the specified {@link $pointerType.Buffer} to the {@code $field} field. */")
 						println("${indent}public $returnType $setter($pointerType.Buffer value) { $n$setter($ADDRESS, value); return this; }")
@@ -1305,7 +1302,7 @@ ${validations.joinToString("\n")}
 						println("\t/** Unsafe version of {@link #${getter}Callback}. */")
 						println("\tpublic static $callbackType n${getter}Callback(long $STRUCT) { return Callback.create(n$getter($STRUCT)); }")
 					} else {
-						val javaType = it.nativeType.javaMethodType.simpleName
+						val javaType = it.nativeType.javaMethodType
 						val bufferMethod = getBufferMethod(it, javaType)
 
 						print("\tpublic static $javaType n$getter(long $STRUCT) { return memGet$bufferMethod($STRUCT + $field)")
@@ -1319,7 +1316,7 @@ ${validations.joinToString("\n")}
 
 				if ( it is StructMemberArray ) {
 					if ( it.nativeType is StructType ) {
-						val nestedStruct = it.nativeType.definition.className
+						val nestedStruct = it.nativeType.javaMethodType
 						if ( it.nativeType.includesPointer ) {
 							val capacity = getReferenceMember(AutoSizeMember, it.name)
 
@@ -1372,7 +1369,7 @@ ${validations.joinToString("\n")}
 					println("\t/** Unsafe version of {@link #${getter}String}. */")
 					println("\tpublic static String n${getter}String(long $STRUCT) { return mem${mapping.charset}(memGetAddress($STRUCT + $field)); }")
 				} else if ( it.nativeType is StructType ) {
-					val structType = it.nativeType.definition.className
+					val structType = it.nativeType.javaMethodType
 					println("\t/** Unsafe version of {@link #$getter}. */")
 					println(if ( it is StructMemberBuffer ) {
 						val capacity = getReferenceMember(AutoSizeMember, it.name)
@@ -1384,7 +1381,7 @@ ${validations.joinToString("\n")}
 						"\tpublic static $structType n$getter(long $STRUCT) { return $structType.create(memGetAddress($STRUCT + $field)); }"
 					)
 				} else if ( it.nativeType.isPointerData ) {
-					val bufferType = it.nativeType.javaMethodType.simpleName
+					val bufferType = it.nativeType.javaMethodType
 					val capacity = getReferenceMember(AutoSizeMember, it.name)
 
 					if ( capacity == null ) {
@@ -1434,7 +1431,7 @@ ${validations.joinToString("\n")}
 						println("${indent}public $callbackType ${getter}Callback() { return $n${getter}Callback($ADDRESS); }")
 					} else {
 						println("$indent/** Returns the value of the {@code $getter} field. */")
-						println("${indent}public ${it.nativeType.javaMethodType.simpleName} $getter() { return $n$getter($ADDRESS); }")
+						println("${indent}public ${it.nativeType.javaMethodType} $getter() { return $n$getter($ADDRESS); }")
 					}
 				}
 
@@ -1442,7 +1439,7 @@ ${validations.joinToString("\n")}
 
 				if ( it is StructMemberArray ) {
 					if ( it.nativeType is StructType ) {
-						val structType = it.nativeType.definition.className
+						val structType = it.nativeType.javaMethodType
 						if (  it.nativeType.includesPointer ) {
 							println("$indent/** Returns a {@link PointerBuffer} view of the {@code $getter} field. */")
 							println("${indent}public PointerBuffer $getter() { return $n$getter($ADDRESS); }")
@@ -1464,7 +1461,7 @@ ${validations.joinToString("\n")}
 						println("$indent/** Returns a {@link $bufferType} view of the {@code $getter} field. */")
 						println("${indent}public $bufferType $getter() { return $n$getter($ADDRESS); }")
 						println("$indent/** Returns the value at the specified index of the {@code $getter} field. */")
-						println("${indent}public ${it.nativeType.javaMethodType.simpleName} $getter(int index) { return $n$getter($ADDRESS, index); }")
+						println("${indent}public ${it.nativeType.javaMethodType} $getter(int index) { return $n$getter($ADDRESS, index); }")
 					}
 				} else if ( it.nativeType is CharSequenceType ) {
 					println("$indent/** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code $getter} field. */")
@@ -1472,7 +1469,7 @@ ${validations.joinToString("\n")}
 					println("$indent/** Decodes the null-terminated string pointed to by the {@code $getter} field. */")
 					println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
 				} else if ( it.nativeType is StructType ) {
-					val structType = it.nativeType.definition.className
+					val structType = it.nativeType.javaMethodType
 					if ( it is StructMemberBuffer ) {
 						if ( getReferenceMember(AutoSizeMember, it.name) == null ) {
 							println("""$indent/**
@@ -1491,7 +1488,7 @@ $indent */""")
 						println("${indent}public $structType $getter() { return $n$getter($ADDRESS); }")
 					}
 				} else if ( it.nativeType.isPointerData ) {
-					val bufferType = it.nativeType.javaMethodType.simpleName
+					val bufferType = it.nativeType.javaMethodType
 
 					if ( getReferenceMember(AutoSizeMember, it.name) == null ) {
 						println(

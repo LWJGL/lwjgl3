@@ -19,21 +19,7 @@ abstract class QualifiedType(
 		get() = nativeType.isPointerData
 
 	val javaMethodType: String
-		get() = when {
-			nativeType is ObjectType -> nativeType.className
-			nativeType is StructType -> nativeType.definition.className
-			nativeType.mapping === PointerMapping.DATA
-			                         -> "ByteBuffer"
-			nativeType.mapping === PrimitiveMapping.BOOLEAN4
-			                         -> "boolean"
-			else                     -> nativeType.javaMethodType.simpleName
-		}
-
-	val nativeMethodType: String
-		get() = nativeType.nativeMethodType.simpleName
-
-	val jniFunctionType: String
-		get() = nativeType.jniFunctionType
+		get() = nativeType.javaMethodType
 
 	fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false): String {
 		val builder = StringBuilder()
@@ -54,7 +40,7 @@ abstract class QualifiedType(
 				if ( this.nativeType.let { it.mapping === PrimitiveMapping.POINTER || it is PointerType } )
 					"intptr_t"
 				else
-					jniFunctionType
+					nativeType.jniFunctionType
 			)
 		}
 
@@ -107,7 +93,7 @@ class Parameter(
 		get() = paramType === OUT && has(AutoSizeResult)
 
 	val asNativeMethodParam: String
-		get() = "$nativeMethodType $name"
+		get() = "${nativeType.nativeMethodType} $name"
 
 	fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
 		nativeType is StructType || nativeType is ObjectType ->
