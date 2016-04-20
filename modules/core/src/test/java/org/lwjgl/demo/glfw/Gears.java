@@ -5,11 +5,12 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.demo.opengl.AbstractGears;
-import org.lwjgl.glfw.*;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
-import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.Callback;
+import org.lwjgl.system.MemoryStack;
 
 import java.nio.IntBuffer;
 
@@ -22,13 +23,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** The Gears demo implemented using GLFW. */
 public class Gears extends AbstractGears {
 
-	private GLFWErrorCallback      errorCB;
-	private GLFWKeyCallback        keyCB;
-	private GLFWWindowSizeCallback windowSizeCB;
-
 	private Callback debugProc;
 
 	private long window;
+
+	private int xpos;
+	private int ypos;
+	private int width;
+	private int height;
 
 	public static void main(String[] args) {
 		new Gears().run();
@@ -50,7 +52,7 @@ public class Gears extends AbstractGears {
 	}
 
 	private void init() {
-		errorCB = GLFWErrorCallback.createPrint().set();
+		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize glfw");
 
@@ -79,56 +81,48 @@ public class Gears extends AbstractGears {
 			(vidmode.height() - HEIGHT) / 2
 		);
 
-		glfwSetKeyCallback(window, keyCB = new GLFWKeyCallback() {
-			private int xpos;
-			private int ypos;
-			private int width;
-			private int height;
+		glfwSetKeyCallback(window, (windowHnd, key, scancode, action, mods) -> {
+			if ( action != GLFW_RELEASE )
+				return;
 
-			@Override
-			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if ( action != GLFW_RELEASE )
-					return;
+			switch ( key ) {
+				case GLFW_KEY_ESCAPE:
+					glfwSetWindowShouldClose(windowHnd, true);
+					break;
+				case GLFW_KEY_F:
+					if ( glfwGetWindowMonitor(windowHnd) == NULL ) {
+						MemoryStack s = stackPush();
+						try {
+							IntBuffer a = s.ints(0);
+							IntBuffer b = s.ints(0);
+							glfwGetWindowPos(windowHnd, a, b);
+							xpos = a.get(0);
+							ypos = b.get(0);
 
-				switch ( key ) {
-					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, true);
-						break;
-					case GLFW_KEY_F:
-						if ( glfwGetWindowMonitor(window) == NULL ) {
-							MemoryStack s = stackPush();
-							try {
-								IntBuffer a = s.ints(0);
-								IntBuffer b = s.ints(0);
-								glfwGetWindowPos(window, a, b);
-								xpos = a.get(0);
-								ypos = b.get(0);
-
-								glfwGetWindowSize(window, a, b);
-								width = a.get(0);
-								height = b.get(0);
-							} finally {
-								s.pop();
-							}
-							glfwSetWindowMonitor(window, monitor, 0, 0, vidmode.width(), vidmode.height(), vidmode.refreshRate());
-							glfwSwapInterval(1);
+							glfwGetWindowSize(windowHnd, a, b);
+							width = a.get(0);
+							height = b.get(0);
+						} finally {
+							s.pop();
 						}
-						break;
-					case GLFW_KEY_W:
-						if ( glfwGetWindowMonitor(window) != NULL )
-							glfwSetWindowMonitor(window, NULL, xpos, ypos, width, height, 0);
-						break;
-					case GLFW_KEY_G:
-						glfwSetInputMode(window, GLFW_CURSOR, glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL
-							? GLFW_CURSOR_DISABLED
-							: GLFW_CURSOR_NORMAL
-						);
-						break;
-				}
+						glfwSetWindowMonitor(windowHnd, monitor, 0, 0, vidmode.width(), vidmode.height(), vidmode.refreshRate());
+						glfwSwapInterval(1);
+					}
+					break;
+				case GLFW_KEY_W:
+					if ( glfwGetWindowMonitor(windowHnd) != NULL )
+						glfwSetWindowMonitor(windowHnd, NULL, xpos, ypos, width, height, 0);
+					break;
+				case GLFW_KEY_G:
+					glfwSetInputMode(windowHnd, GLFW_CURSOR, glfwGetInputMode(windowHnd, GLFW_CURSOR) == GLFW_CURSOR_NORMAL
+						? GLFW_CURSOR_DISABLED
+						: GLFW_CURSOR_NORMAL
+					);
+					break;
 			}
 		});
 
-		glfwSetWindowSizeCallback(window, windowSizeCB = GLFWWindowSizeCallback.create((windowHandle, width, height) -> glViewport(0, 0, width, height)));
+		glfwSetWindowSizeCallback(window, (windowHandle, width, height) -> glViewport(0, 0, width, height));
 
 		glfwMakeContextCurrent(window);
 		GL.createCapabilities();
@@ -174,9 +168,7 @@ public class Gears extends AbstractGears {
 		}
 
 		glfwTerminate();
-
-		if ( errorCB != null )
-			errorCB.free();
+		glfwSetErrorCallback(null).free();
 	}
 
 }

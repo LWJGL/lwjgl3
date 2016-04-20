@@ -4,23 +4,14 @@
  */
 package org.lwjgl.glfw;
 
-import org.lwjgl.system.Checks;
-import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.Callback;
+import org.lwjgl.system.Checks;
 
-import java.nio.IntBuffer;
-
-import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Utility class for GLFW callbacks.
- *
- * <p>This class has been designed to work well with {@code import static}.</p>
- */
+/** Utility class for GLFW callbacks. */
 public final class Callbacks {
 
 	private Callbacks() {}
@@ -34,58 +25,26 @@ public final class Callbacks {
 		if ( Checks.CHECKS )
 			checkPointer(window);
 
-		long[] callbacks = {
-			invokePPP(GLFW.Functions.SetWindowPosCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetWindowSizeCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetWindowCloseCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetWindowRefreshCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetWindowFocusCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetWindowIconifyCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetFramebufferSizeCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetKeyCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetCharCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetCharModsCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetMouseButtonCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetCursorPosCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetCursorEnterCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetScrollCallback, window, NULL),
-			invokePPP(GLFW.Functions.SetDropCallback, window, NULL)
-		};
-
-		for ( long callback : callbacks ) {
-			if ( callback != NULL )
-				Callback.free(callback);
-		}
-	}
-
-	/**
-	 * Invokes the specified callbacks using the current window and framebuffer sizes of the specified GLFW window.
-	 *
-	 * @param window             the GLFW window
-	 * @param windowsizefun      the window size callback, may be null
-	 * @param framebuffersizefun the framebuffer size callback, may be null
-	 */
-	public static void glfwInvoke(long window, GLFWWindowSizeCallback windowsizefun, GLFWFramebufferSizeCallback framebuffersizefun) {
-		if ( Checks.CHECKS )
-			checkPointer(window);
-
-		MemoryStack stack = stackPush();
-
-		try {
-			IntBuffer x = stack.mallocInt(1);
-			IntBuffer y = stack.mallocInt(1);
-
-			if ( framebuffersizefun != null ) {
-				glfwGetFramebufferSize(window, x, y);
-				framebuffersizefun.invoke(window, x.get(0), y.get(0));
-			}
-
-			if ( windowsizefun != null ) {
-				glfwGetWindowSize(window, x, y);
-				windowsizefun.invoke(window, x.get(0), y.get(0));
-			}
-		} finally {
-			stack.pop();
+		for ( long callback : new long[] {
+			GLFW.Functions.SetWindowPosCallback,
+			GLFW.Functions.SetWindowSizeCallback,
+			GLFW.Functions.SetWindowCloseCallback,
+			GLFW.Functions.SetWindowRefreshCallback,
+			GLFW.Functions.SetWindowFocusCallback,
+			GLFW.Functions.SetWindowIconifyCallback,
+			GLFW.Functions.SetFramebufferSizeCallback,
+			GLFW.Functions.SetKeyCallback,
+			GLFW.Functions.SetCharCallback,
+			GLFW.Functions.SetCharModsCallback,
+			GLFW.Functions.SetMouseButtonCallback,
+			GLFW.Functions.SetCursorPosCallback,
+			GLFW.Functions.SetCursorEnterCallback,
+			GLFW.Functions.SetScrollCallback,
+			GLFW.Functions.SetDropCallback
+		} ) {
+			long prevCB = invokePPP(callback, window, NULL);
+			if ( prevCB != NULL )
+				Callback.free(prevCB);
 		}
 	}
 

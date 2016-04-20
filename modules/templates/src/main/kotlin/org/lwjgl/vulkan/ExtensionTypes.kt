@@ -59,7 +59,6 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 		threads).
 		"""
 	useSystemCallConvention()
-	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link VkDebugReportCallbackEXT} argument to a String.
@@ -70,29 +69,8 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 	 *
 	 * @return the message as a String
 	 */
-	public static String getString(long string) {
+	static String getString(long string) {
 		return memUTF8(string);
-	}
-
-	/** A functional interface for {@link VkDebugReportCallbackEXT}. */
-	public interface SAMString {
-		int invoke(int flags, int objectType, long object, long location, int messageCode, String pLayerPrefix, String pMessage, long pUserData);
-	}
-
-	/**
-	 * Creates a {@link VkDebugReportCallbackEXT} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link VkDebugReportCallbackEXT} instance
-	 */
-	public static VkDebugReportCallbackEXT createString(SAMString sam) {
-		return new VkDebugReportCallbackEXT() {
-			@Override
-			public int invoke(int flags, int objectType, long object, long location, int messageCode, long pLayerPrefix, long pMessage, long pUserData) {
-				return sam.invoke(flags, objectType, object, location, messageCode, getString(pLayerPrefix), getString(pMessage), pUserData);
-			}
-		};
 	}
 	"""
 }

@@ -5,7 +5,8 @@
 package org.lwjgl.demo.stb;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.glfw.*;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.Callback;
@@ -30,12 +31,6 @@ public final class Image {
 	private final int w;
 	private final int h;
 	private final int comp;
-
-	private final GLFWErrorCallback           errorfun;
-	private final GLFWWindowSizeCallback      windowSizefun;
-	private final GLFWFramebufferSizeCallback framebufferSizefun;
-	private final GLFWKeyCallback             keyfun;
-	private final GLFWScrollCallback          scrollfun;
 
 	private long window;
 	private int ww = 800;
@@ -77,61 +72,6 @@ public final class Image {
 		this.w = w.get(0);
 		this.h = h.get(0);
 		this.comp = comp.get(0);
-
-		errorfun = GLFWErrorCallback.createPrint();
-
-		windowSizefun = GLFWWindowSizeCallback.create((windowHandle, width, height) -> {
-			this.ww = width;
-			this.wh = height;
-
-			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrtho(0.0, ww, wh, 0.0, -1.0, 1.0);
-			glMatrixMode(GL_MODELVIEW);
-		});
-
-		framebufferSizefun = new GLFWFramebufferSizeCallback() {
-			@Override
-			public void invoke(long window, int width, int height) {
-				glViewport(0, 0, width, height);
-			}
-		};
-
-		keyfun = new GLFWKeyCallback() {
-			@Override
-			public void invoke(long window, int key, int scancode, int action, int mods) {
-				ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
-				if ( action == GLFW_RELEASE )
-					return;
-
-				switch ( key ) {
-					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, true);
-						break;
-					case GLFW_KEY_KP_ADD:
-					case GLFW_KEY_EQUAL:
-						setScale(scale + 1);
-						break;
-					case GLFW_KEY_KP_SUBTRACT:
-					case GLFW_KEY_MINUS:
-						setScale(scale - 1);
-						break;
-					case GLFW_KEY_0:
-					case GLFW_KEY_KP_0:
-						if ( ctrlDown )
-							setScale(0);
-						break;
-				}
-			}
-		};
-
-		scrollfun = new GLFWScrollCallback() {
-			@Override
-			public void invoke(long window, double xoffset, double yoffset) {
-				if ( ctrlDown )
-					setScale(scale + (int)yoffset);
-			}
-		};
 	}
 
 	public static void main(String[] args) {
@@ -159,7 +99,7 @@ public final class Image {
 	}
 
 	private void init() {
-		errorfun.set();
+		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -173,10 +113,47 @@ public final class Image {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		windowSizefun.set(window);
-		framebufferSizefun.set(window);
-		keyfun.set(window);
-		scrollfun.set(window);
+		glfwSetWindowSizeCallback(window, (window, width, height) -> {
+			this.ww = width;
+			this.wh = height;
+
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			glOrtho(0.0, ww, wh, 0.0, -1.0, 1.0);
+			glMatrixMode(GL_MODELVIEW);
+		});
+
+		glfwSetFramebufferSizeCallback(window, (window, width, height) -> glViewport(0, 0, width, height));
+
+		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+			ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
+			if ( action == GLFW_RELEASE )
+				return;
+
+			switch ( key ) {
+				case GLFW_KEY_ESCAPE:
+					glfwSetWindowShouldClose(window, true);
+					break;
+				case GLFW_KEY_KP_ADD:
+				case GLFW_KEY_EQUAL:
+					setScale(scale + 1);
+					break;
+				case GLFW_KEY_KP_SUBTRACT:
+				case GLFW_KEY_MINUS:
+					setScale(scale - 1);
+					break;
+				case GLFW_KEY_0:
+				case GLFW_KEY_KP_0:
+					if ( ctrlDown )
+						setScale(0);
+					break;
+			}
+		});
+
+		glfwSetScrollCallback(window, (window, xoffset, yoffset) -> {
+			if ( ctrlDown )
+				setScale(scale + (int)yoffset);
+		});
 
 		// Center window
 		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -194,7 +171,6 @@ public final class Image {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
-		glfwInvoke(window, windowSizefun, framebufferSizefun);
 	}
 
 	private void setScale(int scale) {
@@ -263,12 +239,10 @@ public final class Image {
 
 		if ( debugProc != null )
 			debugProc.free();
-		scrollfun.free();
-		keyfun.free();
-		framebufferSizefun.free();
-		windowSizefun.free();
+
+		glfwFreeCallbacks(window);
 		glfwTerminate();
-		errorfun.free();
+		glfwSetErrorCallback(null).free();
 	}
 
 }

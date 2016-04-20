@@ -5,7 +5,8 @@
 package org.lwjgl.demo.vulkan;
 
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.glfw.*;
+import org.lwjgl.glfw.Callbacks;
+import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.vulkan.*;
 
@@ -212,8 +213,6 @@ public final class HelloVulkan {
 	private final LongBuffer    lp = memAllocLong(1);
 	private final PointerBuffer pp = memAllocPointer(1);
 
-	private GLFWErrorCallback errorCB;
-
 	boolean validate = true;
 
 	PointerBuffer device_validation_layers = memAllocPointer(10);
@@ -284,13 +283,12 @@ public final class HelloVulkan {
 		}
 	}
 
-	private final VkDebugReportCallbackEXT dbgFunc = new VkDebugReportCallbackEXT() {
-		@Override
-		public int invoke(int flags, int objectType, long object, long location, int messageCode, long pLayerPrefix, long pMessage, long pUserData) {
+	private final VkDebugReportCallbackEXT dbgFunc = VkDebugReportCallbackEXT.create(
+		(flags, objectType, object, location, messageCode, pLayerPrefix, pMessage, pUserData) -> {
 			if ( (flags & VK_DEBUG_REPORT_ERROR_BIT_EXT) != 0 ) {
-				System.err.format("ERROR: [%s] Code %d : %s\n", pLayerPrefix, messageCode, getString(pMessage));
+				System.err.format("ERROR: [%s] Code %d : %s\n", pLayerPrefix, messageCode, VkDebugReportCallbackEXT.getString(pMessage));
 			} else if ( (flags & VK_DEBUG_REPORT_WARNING_BIT_EXT) != 0 ) {
-				System.err.format("WARNING: [%s] Code %d : %s\n", pLayerPrefix, messageCode, getString(pMessage));
+				System.err.format("WARNING: [%s] Code %d : %s\n", pLayerPrefix, messageCode, VkDebugReportCallbackEXT.getString(pMessage));
 			}
 
 			/*
@@ -302,15 +300,15 @@ public final class HelloVulkan {
 			 */
 			return VK_FALSE;
 		}
-	};
+	);
 
 	private static void check(int errcode) {
 		if ( errcode != 0 )
 			throw new IllegalStateException(VKUtil.translateVulkanResult(errcode));
 	}
 
-	private void demo_init_connection() {
-		errorCB = GLFWErrorCallback.createPrint().set();
+	private static void demo_init_connection() {
+		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -540,32 +538,6 @@ public final class HelloVulkan {
 		demo_init_vk();
 	}
 
-	private final GLFWKeyCallback demo_key_callback = new GLFWKeyCallback() {
-		@Override
-		public void invoke(long window, int key, int scancode, int action, int mods) {
-			if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-				glfwSetWindowShouldClose(window, true);
-		}
-	};
-
-	private final GLFWWindowRefreshCallback demo_refresh_callback = new GLFWWindowRefreshCallback() {
-		@Override
-		public void invoke(long window) {
-			demo_draw();
-		}
-	};
-
-	private final GLFWFramebufferSizeCallback demo_resize_callback = new GLFWFramebufferSizeCallback() {
-		@Override
-		public void invoke(long window, int width, int height) {
-			HelloVulkan.this.width = width;
-			HelloVulkan.this.height = height;
-
-			if ( width != 0 && height != 0 )
-				demo_resize();
-		}
-	};
-
 	private void demo_create_window() {
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
@@ -573,9 +545,20 @@ public final class HelloVulkan {
 		if ( window == NULL )
 			throw new IllegalStateException("Cannot create a window in which to draw!");
 
-		glfwSetWindowRefreshCallback(window, demo_refresh_callback);
-		glfwSetFramebufferSizeCallback(window, demo_resize_callback);
-		glfwSetKeyCallback(window, demo_key_callback);
+		glfwSetWindowRefreshCallback(window, window -> demo_draw());
+
+		glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
+			this.width = width;
+			this.height = height;
+
+			if ( width != 0 && height != 0 )
+				demo_resize();
+		});
+
+		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+			if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+				glfwSetWindowShouldClose(window, true);
+		});
 	}
 
 	private void demo_init_device() {
@@ -2014,13 +1997,10 @@ public final class HelloVulkan {
 		queue_props.free();
 		memory_properties.free();
 
+		Callbacks.glfwFreeCallbacks(window);
 		glfwDestroyWindow(window);
 		glfwTerminate();
-
-		demo_resize_callback.free();
-		demo_refresh_callback.free();
-		demo_key_callback.free();
-		errorCB.free();
+		glfwSetErrorCallback(null).free();
 
 		for ( int i = 0; i < device_validation_layers.remaining(); i++ )
 			nmemFree(device_validation_layers.get(i));

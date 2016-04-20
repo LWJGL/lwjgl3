@@ -285,7 +285,7 @@ open class PointerMapping(
 
 	val mallocType: String get() = when ( box ) {
 		"Byte" -> ""
-		else -> box
+		else   -> box
 	}
 
 }

@@ -6,12 +6,12 @@ package org.lwjgl.demo.util.nfd;
 
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.Platform;
 import org.lwjgl.util.nfd.NFDPathSet;
 
+import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -33,34 +33,7 @@ public final class HelloNFD {
 			modDescr = "Ctrl";
 		}
 
-		GLFWErrorCallback errorfun = GLFWErrorCallback.createPrint();
-		GLFWKeyCallback keyfun = new GLFWKeyCallback() {
-			@Override
-			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if ( action == GLFW_RELEASE )
-					return;
-
-				switch ( key ) {
-					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, true);
-						break;
-					case GLFW_KEY_O:
-						if ( (mods & mod) != 0 ) {
-							if ( (mods & GLFW_MOD_SHIFT) != 0 )
-								openMulti();
-							else
-								openSingle();
-						}
-						break;
-					case GLFW_KEY_S:
-						if ( (mods & mod) != 0 )
-							save();
-						break;
-				}
-			}
-		};
-
-		errorfun.set();
+		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -68,7 +41,28 @@ public final class HelloNFD {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		keyfun.set(window);
+		glfwSetKeyCallback(window, (windowHnd, key, scancode, action, mods) -> {
+			if ( action == GLFW_RELEASE )
+				return;
+
+			switch ( key ) {
+				case GLFW_KEY_ESCAPE:
+					glfwSetWindowShouldClose(windowHnd, true);
+					break;
+				case GLFW_KEY_O:
+					if ( (mods & mod) != 0 ) {
+						if ( (mods & GLFW_MOD_SHIFT) != 0 )
+							openMulti();
+						else
+							openSingle();
+					}
+					break;
+				case GLFW_KEY_S:
+					if ( (mods & mod) != 0 )
+						save();
+					break;
+			}
+		});
 
 		// Center window
 		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -95,10 +89,10 @@ public final class HelloNFD {
 
 		glfwDestroyWindow(window);
 
+		glfwFreeCallbacks(window);
 		glfwTerminate();
 
-		keyfun.free();
-		errorfun.free();
+		glfwSetErrorCallback(null).free();
 	}
 
 	private static void openSingle() {

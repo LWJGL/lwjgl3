@@ -75,13 +75,10 @@ public class CLTest {
 
 	private static void contextTest(ContextTest test) {
 		try {
-			CONTEXT_CALLBACK = new CLContextCallback() {
-				@Override
-				public void invoke(long errinfo, long private_info, long cb, long user_data) {
-					System.err.println("[LWJGL] cl_context_callback");
-					System.err.println("\tInfo: " + memUTF8(errinfo));
-				}
-			};
+			CONTEXT_CALLBACK = CLContextCallback.create((errinfo, private_info, cb, user_data) -> {
+				System.err.println("[LWJGL] cl_context_callback");
+				System.err.println("\tInfo: " + memUTF8(errinfo));
+			});
 
 			CL.create();
 
@@ -192,23 +189,20 @@ public class CLTest {
 
 			CLNativeKernel kernel;
 			checkCLError(
-				clEnqueueNativeKernel(queue, kernel = new CLNativeKernel() {
-					@Override
-					public void invoke(long args) {
-						ByteBuffer arguments = memByteBuffer(args, 4 * 2 + POINTER_SIZE);
+				clEnqueueNativeKernel(queue, kernel = CLNativeKernel.create(argAddress -> {
+					ByteBuffer arguments = memByteBuffer(argAddress, 4 * 2 + POINTER_SIZE);
 
-						assertEquals(arguments.getInt(0), 0xDEADBEEF);
-						assertEquals(arguments.getInt(4), 1337);
+					assertEquals(arguments.getInt(0), 0xDEADBEEF);
+					assertEquals(arguments.getInt(4), 1337);
 
-						long memAddress = PointerBuffer.get(arguments, 8);
-						assertTrue(memAddress != NULL);
-						assertTrue(memAddress != buffer);
+					long memAddress = PointerBuffer.get(arguments, 8);
+					assertTrue(memAddress != NULL);
+					assertTrue(memAddress != buffer);
 
-						ByteBuffer kernelBuffer = memByteBuffer(memAddress, BUFFER_SIZE);
-						for ( int i = 0; i < kernelBuffer.capacity(); i++ )
-							assertEquals(kernelBuffer.get(i), i);
-					}
-				}, args, mem_list, args_mem_loc, null, eventOut)
+					ByteBuffer kernelBuffer = memByteBuffer(memAddress, BUFFER_SIZE);
+					for ( int i = 0; i < kernelBuffer.capacity(); i++ )
+						assertEquals(kernelBuffer.get(i), i);
+				}), args, mem_list, args_mem_loc, null, eventOut)
 			);
 
 			long e = eventOut.get(0);
@@ -217,12 +211,9 @@ public class CLTest {
 			CountDownLatch latch = new CountDownLatch(1);
 			CLEventCallback eventCallback;
 			checkCLError(
-				clSetEventCallback(e, CL_COMPLETE, eventCallback = new CLEventCallback() {
-					@Override
-					public void invoke(long event, int event_command_exec_status, long user_data) {
-						latch.countDown();
-					}
-				}, NULL)
+				clSetEventCallback(e, CL_COMPLETE, eventCallback = CLEventCallback.create(
+					(event, event_command_exec_status, user_data) -> latch.countDown()
+				), NULL)
 			);
 
 			try {
@@ -254,12 +245,9 @@ public class CLTest {
 
 			CLMemObjectDestructorCallback memDestructorCallback;
 			checkCLError(
-				clSetMemObjectDestructorCallback(buffer, memDestructorCallback = new CLMemObjectDestructorCallback() {
-					@Override
-					public void invoke(long memobj, long user_data) {
-						eventLatch.countDown();
-					}
-				}, NULL)
+				clSetMemObjectDestructorCallback(buffer, memDestructorCallback = CLMemObjectDestructorCallback.create(
+					(memobj, user_data) -> eventLatch.countDown()
+				), NULL)
 			);
 			assertEquals(getMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
 
@@ -301,15 +289,12 @@ public class CLTest {
 
 			CLEventCallback eventCallback;
 			checkCLError(
-				clSetEventCallback(e, CL_COMPLETE, eventCallback = new CLEventCallback() {
-					@Override
-					public void invoke(long event, int event_command_exec_status, long user_data) {
-						assertEquals(event, e);
-						assertEquals(event_command_exec_status, CL_COMPLETE);
+				clSetEventCallback(e, CL_COMPLETE, eventCallback = CLEventCallback.create((event, event_command_exec_status, user_data) -> {
+					assertEquals(event, e);
+					assertEquals(event_command_exec_status, CL_COMPLETE);
 
-						eventLatch.countDown();
-					}
-				}, NULL)
+					eventLatch.countDown();
+				}), NULL)
 			);
 
 			checkCLError(clSetUserEventStatus(e, CL_COMPLETE));

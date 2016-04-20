@@ -5,7 +5,8 @@
 package org.lwjgl.demo.stb;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.glfw.*;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLUtil;
@@ -53,11 +54,6 @@ public final class TruetypeOversample {
 	private final FloatBuffer      xb = memAllocFloat(1);
 	private final FloatBuffer      yb = memAllocFloat(1);
 
-	private final GLFWErrorCallback           errorfun;
-	private final GLFWWindowSizeCallback      windowSizefun;
-	private final GLFWFramebufferSizeCallback framebufferSizefun;
-	private final GLFWKeyCallback             keyfun;
-
 	private long window;
 
 	private Callback debugProc;
@@ -89,70 +85,6 @@ public final class TruetypeOversample {
 	private boolean show_tex;
 
 	private TruetypeOversample() {
-		errorfun = GLFWErrorCallback.createPrint();
-
-		windowSizefun = new GLFWWindowSizeCallback() {
-			@Override
-			public void invoke(long window, int width, int height) {
-				TruetypeOversample.this.ww = width;
-				TruetypeOversample.this.wh = height;
-			}
-		};
-
-		framebufferSizefun = new GLFWFramebufferSizeCallback() {
-			@Override
-			public void invoke(long window, int width, int height) {
-				TruetypeOversample.this.fbw = width;
-				TruetypeOversample.this.fbh = height;
-			}
-		};
-
-		keyfun = new GLFWKeyCallback() {
-			@Override
-			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if ( action == GLFW_RELEASE )
-					return;
-
-				switch ( key ) {
-					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, true);
-						break;
-					case GLFW_KEY_O:
-						font = (font + 1) % 3 + (font / 3) * 3;
-						break;
-					case GLFW_KEY_S:
-						font = (font + 3) % 6;
-						break;
-					case GLFW_KEY_T:
-						translating = !translating;
-						translate_t = 0.0f;
-						break;
-					case GLFW_KEY_R:
-						rotating = !rotating;
-						rotate_t = 0.0f;
-						break;
-					case GLFW_KEY_P:
-						integer_align = !integer_align;
-						break;
-					case GLFW_KEY_G:
-						if ( !supportsSRGB )
-							break;
-
-						srgb = !srgb;
-						if ( srgb )
-							glEnable(GL_FRAMEBUFFER_SRGB);
-						else
-							glDisable(GL_FRAMEBUFFER_SRGB);
-						break;
-					case GLFW_KEY_V:
-						show_tex = !show_tex;
-						break;
-					case GLFW_KEY_B:
-						black_on_white = !black_on_white;
-						break;
-				}
-			}
-		};
 	}
 
 	public static void main(String[] args) {
@@ -336,7 +268,7 @@ public final class TruetypeOversample {
 	}
 
 	private void createWindow(String title) {
-		glfwSetErrorCallback(errorfun);
+		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -348,9 +280,59 @@ public final class TruetypeOversample {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		windowSizefun.set(window);
-		framebufferSizefun.set(window);
-		keyfun.set(window);
+		glfwSetWindowSizeCallback(window, (window, width, height) -> {
+			this.ww = width;
+			this.wh = height;
+		});
+
+		glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
+			this.fbw = width;
+			this.fbh = height;
+		});
+
+		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+			if ( action == GLFW_RELEASE )
+				return;
+
+			switch ( key ) {
+				case GLFW_KEY_ESCAPE:
+					glfwSetWindowShouldClose(window, true);
+					break;
+				case GLFW_KEY_O:
+					font = (font + 1) % 3 + (font / 3) * 3;
+					break;
+				case GLFW_KEY_S:
+					font = (font + 3) % 6;
+					break;
+				case GLFW_KEY_T:
+					translating = !translating;
+					translate_t = 0.0f;
+					break;
+				case GLFW_KEY_R:
+					rotating = !rotating;
+					rotate_t = 0.0f;
+					break;
+				case GLFW_KEY_P:
+					integer_align = !integer_align;
+					break;
+				case GLFW_KEY_G:
+					if ( !supportsSRGB )
+						break;
+
+					srgb = !srgb;
+					if ( srgb )
+						glEnable(GL_FRAMEBUFFER_SRGB);
+					else
+						glDisable(GL_FRAMEBUFFER_SRGB);
+					break;
+				case GLFW_KEY_V:
+					show_tex = !show_tex;
+					break;
+				case GLFW_KEY_B:
+					black_on_white = !black_on_white;
+					break;
+			}
+		});
 
 		// Center window
 		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -368,7 +350,6 @@ public final class TruetypeOversample {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
-		glfwInvoke(window, windowSizefun, framebufferSizefun);
 
 		// Detect sRGB support
 		GLCapabilities caps = GL.getCapabilities();
@@ -404,11 +385,10 @@ public final class TruetypeOversample {
 
 		if ( debugProc != null )
 			debugProc.free();
-		keyfun.free();
-		framebufferSizefun.free();
-		windowSizefun.free();
+
+		glfwFreeCallbacks(window);
 		glfwTerminate();
-		errorfun.free();
+		glfwSetErrorCallback(null).free();
 
 		memFree(yb);
 		memFree(xb);

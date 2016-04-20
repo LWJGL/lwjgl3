@@ -6,14 +6,13 @@ package org.lwjgl.demo.opencl;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.glfw.*;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLUtil;
+import org.lwjgl.system.Callback;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.Platform;
-import org.lwjgl.system.Callback;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -355,7 +354,7 @@ public class Mandelbrot {
 
 		setKernelConstants();
 
-		glfwSetWindowSizeCallback(window.handle, window.windowsizefun = GLFWWindowSizeCallback.create((windowHandle, width, height) -> {
+		glfwSetWindowSizeCallback(window.handle, (windowHandle, width, height) -> {
 			if ( width == 0 || height == 0 )
 				return;
 
@@ -365,9 +364,9 @@ public class Mandelbrot {
 
 				shouldInitBuffers = true;
 			});
-		}));
+		});
 
-		glfwSetFramebufferSizeCallback(window.handle, window.framebuffersizefun = GLFWFramebufferSizeCallback.create((windowHandle, width, height) -> {
+		glfwSetFramebufferSizeCallback(window.handle, (windowHandle, width, height) -> {
 			if ( width == 0 || height == 0 )
 				return;
 
@@ -377,9 +376,9 @@ public class Mandelbrot {
 
 				shouldInitBuffers = true;
 			});
-		}));
+		});
 
-		glfwSetKeyCallback(window.handle, window.keyfun = GLFWKeyCallback.create((windowHandle, key, scancode, action, mods) -> {
+		glfwSetKeyCallback(window.handle, (windowHandle, key, scancode, action, mods) -> {
 			switch ( key ) {
 				case GLFW_KEY_LEFT_CONTROL:
 				case GLFW_KEY_RIGHT_CONTROL:
@@ -409,9 +408,9 @@ public class Mandelbrot {
 					});
 					break;
 			}
-		}));
+		});
 
-		glfwSetMouseButtonCallback(window.handle, window.mousebuttonfun = GLFWMouseButtonCallback.create((windowHandle, button, action, mods) -> {
+		glfwSetMouseButtonCallback(window.handle, (windowHandle, button, action, mods) -> {
 			if ( button != GLFW_MOUSE_BUTTON_LEFT )
 				return;
 
@@ -426,9 +425,9 @@ public class Mandelbrot {
 				dragOffsetX = offsetX;
 				dragOffsetY = offsetY;
 			}
-		}));
+		});
 
-		glfwSetCursorPosCallback(window.handle, window.cursorposfun = GLFWCursorPosCallback.create((windowHandle, xpos, ypos) -> {
+		glfwSetCursorPosCallback(window.handle, (windowHandle, xpos, ypos) -> {
 			mouseX = xpos;
 			mouseY = wh - ypos;
 
@@ -436,9 +435,9 @@ public class Mandelbrot {
 				offsetX = dragOffsetX + transformX(dragX - mouseX);
 				offsetY = dragOffsetY + transformY(dragY - mouseY);
 			}
-		}));
+		});
 
-		glfwSetScrollCallback(window.handle, window.scrollfun = GLFWScrollCallback.create((windowHandle, xoffset, yoffset) -> {
+		glfwSetScrollCallback(window.handle, (windowHandle, xoffset, yoffset) -> {
 			if ( yoffset == 0 )
 				return;
 
@@ -452,7 +451,7 @@ public class Mandelbrot {
 
 			offsetX += zoomX - transformX(scrollX);
 			offsetY += zoomY - transformY(scrollY);
-		}));
+		});
 	}
 
 	private static long getDevice(long platform, CLCapabilities platformCaps, int deviceType) {
@@ -680,7 +679,7 @@ public class Mandelbrot {
 		clProgram = clCreateProgramWithSource(clContext, strings, lengths, errcode_ret);
 		checkCLError(errcode_ret);
 
-		final CountDownLatch latch = new CountDownLatch(1);
+		CountDownLatch latch = new CountDownLatch(1);
 
 		// disable 64bit floating point math if not available
 		StringBuilder options = new StringBuilder("-D USE_TEXTURE");

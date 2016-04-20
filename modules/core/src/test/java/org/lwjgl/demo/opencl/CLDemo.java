@@ -103,13 +103,10 @@ public final class CLDemo {
 					printDeviceInfo(device, "CL_DEVICE_OPENCL_C_VERSION", CL_DEVICE_OPENCL_C_VERSION);
 
 				CLContextCallback contextCB;
-				long context = clCreateContext(ctxProps, device, contextCB = new CLContextCallback() {
-					@Override
-					public void invoke(long errinfo, long private_info, long cb, long user_data) {
-						System.err.println("[LWJGL] cl_context_callback");
-						System.err.println("\tInfo: " + memUTF8(errinfo));
-					}
-				}, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device, contextCB = CLContextCallback.create((errinfo, private_info, cb, user_data) -> {
+					System.err.println("[LWJGL] cl_context_callback");
+					System.err.println("\tInfo: " + memUTF8(errinfo));
+				}), NULL, errcode_ret);
 				checkCLError(errcode_ret);
 
 				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
@@ -128,22 +125,16 @@ public final class CLDemo {
 				if ( caps.OpenCL11 ) {
 					destructorLatch = new CountDownLatch(3);
 
-					errcode = clSetMemObjectDestructorCallback(buffer, bufferCB1 = new CLMemObjectDestructorCallback() {
-						@Override
-						public void invoke(long memobj, long user_data) {
-							System.out.println("\t\tBuffer destructed (1): " + memobj);
-							destructorLatch.countDown();
-						}
-					}, NULL);
+					errcode = clSetMemObjectDestructorCallback(buffer, bufferCB1 = CLMemObjectDestructorCallback.create((memobj, user_data) -> {
+						System.out.println("\t\tBuffer destructed (1): " + memobj);
+						destructorLatch.countDown();
+					}), NULL);
 					checkCLError(errcode);
 
-					errcode = clSetMemObjectDestructorCallback(buffer, bufferCB2 = new CLMemObjectDestructorCallback() {
-						@Override
-						public void invoke(long memobj, long user_data) {
-							System.out.println("\t\tBuffer destructed (2): " + memobj);
-							destructorLatch.countDown();
-						}
-					}, NULL);
+					errcode = clSetMemObjectDestructorCallback(buffer, bufferCB2 = CLMemObjectDestructorCallback.create((memobj, user_data) -> {
+						System.out.println("\t\tBuffer destructed (2): " + memobj);
+						destructorLatch.countDown();
+					}), NULL);
 					checkCLError(errcode);
 
 					CLBufferRegion buffer_region = CLBufferRegion.malloc();
@@ -161,13 +152,10 @@ public final class CLDemo {
 						buffer_region.free();
 					}
 
-					errcode = clSetMemObjectDestructorCallback(subbuffer, subbufferCB = new CLMemObjectDestructorCallback() {
-						@Override
-						public void invoke(long memobj, long user_data) {
-							System.out.println("\t\tSub Buffer destructed: " + memobj);
-							destructorLatch.countDown();
-						}
-					}, NULL);
+					errcode = clSetMemObjectDestructorCallback(subbuffer, subbufferCB = CLMemObjectDestructorCallback.create((memobj, user_data) -> {
+						System.out.println("\t\tSub Buffer destructed: " + memobj);
+						destructorLatch.countDown();
+					}), NULL);
 					checkCLError(errcode);
 				} else
 					destructorLatch = null;
@@ -183,12 +171,9 @@ public final class CLDemo {
 					kernelArgs.putInt(0, 1337);
 
 					CLNativeKernel kernel;
-					errcode = clEnqueueNativeKernel(queue, kernel = new CLNativeKernel() {
-						@Override
-						public void invoke(long args) {
-							System.out.println("\t\tKERNEL EXEC argument: " + memByteBuffer(args, 4).getInt(0) + ", should be 1337");
-						}
-					}, kernelArgs, null, null, null, ev);
+					errcode = clEnqueueNativeKernel(queue, kernel = CLNativeKernel.create(
+						args -> System.out.println("\t\tKERNEL EXEC argument: " + memByteBuffer(args, 4).getInt(0) + ", should be 1337")
+					), kernelArgs, null, null, null, ev);
 					checkCLError(errcode);
 
 					long e = ev.get(0);
@@ -196,13 +181,10 @@ public final class CLDemo {
 					CountDownLatch latch = new CountDownLatch(1);
 
 					CLEventCallback eventCB;
-					errcode = clSetEventCallback(e, CL_COMPLETE, eventCB = new CLEventCallback() {
-						@Override
-						public void invoke(long event, int event_command_exec_status, long user_data) {
-							System.out.println("\t\tEvent callback status: " + getEventStatusName(event_command_exec_status));
-							latch.countDown();
-						}
-					}, NULL);
+					errcode = clSetEventCallback(e, CL_COMPLETE, eventCB = CLEventCallback.create((event, event_command_exec_status, user_data) -> {
+						System.out.println("\t\tEvent callback status: " + getEventStatusName(event_command_exec_status));
+						latch.countDown();
+					}), NULL);
 					checkCLError(errcode);
 
 					try {
@@ -220,11 +202,8 @@ public final class CLDemo {
 
 					kernelArgs = BufferUtils.createByteBuffer(POINTER_SIZE * 2);
 
-					kernel = new CLNativeKernel() {
-						@Override
-						public void invoke(long args) {
-						}
-					};
+					kernel = CLNativeKernel.create(args -> {
+					});
 
 					long time = System.nanoTime();
 					int REPEAT = 1000;

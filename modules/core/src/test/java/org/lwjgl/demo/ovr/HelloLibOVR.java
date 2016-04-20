@@ -25,11 +25,11 @@ public final class HelloLibOVR {
 
 		detect.free();
 
-		OVRLogCallback callback = OVRLogCallback.create((userData, level, message) -> System.out.println("LibOVR [" + level + "] " + memASCII(message)));
+		OVRInitParams initParams = OVRInitParams.calloc()
+			.LogCallback((userData, level, message) -> System.out.println("LibOVR [" + level + "] " + memASCII(message)))
+			.Flags(ovrInit_Debug);
 
-		OVRInitParams initParams = OVRInitParams.calloc();
-		initParams.LogCallback(callback);
-		initParams.Flags(ovrInit_Debug);
+		OVRLogCallback callback = initParams.LogCallback();
 
 		System.out.println("ovr_Initialize = " + ovr_Initialize(initParams));
 		initParams.free();

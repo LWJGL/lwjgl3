@@ -38,41 +38,16 @@ noinline static void asyncCallbackException(JNIEnv* env) {
 	(*env)->ExceptionClear(env);
 }
 
-noinline static void throwCallbackError(JNIEnv* env, const LWJGLCallback *cb, jboolean async) {
-	(*env)->ThrowNew(env, (*env)->FindClass(env, "org/lwjgl/system/CallbackError"), cb->debug);
-
-	if ( async )
-		asyncCallbackException(env);
-}
-
-inline static jboolean verifyCallback(JNIEnv* env, jobject object, const LWJGLCallback *cb, jboolean async) {
-	if ( (*env)->IsSameObject(env, object, NULL) ) {
-		throwCallbackError(env, cb, async);
-		return JNI_FALSE;
-	}
-
-	return JNI_TRUE;
-}
-
 static char cbHandlerV(DCCallback *cb, DCArgs *args, DCValue *result, void *userdata) {
 	jboolean async;
 	JNIEnv* env = getEnv(&async);
 
-	const LWJGLCallback *lcb = (const LWJGLCallback *)userdata;
-
-	// Dereference the weak global reference
-	jobject object = (*env)->NewLocalRef(env, (jweak)lcb->reference);
-
 	UNUSED_PARAM(cb)
 	UNUSED_PARAM(result)
 
-	// Verify that the callback has not been garbage collected
-	if ( !verifyCallback(env, object, lcb, async) )
-		return 'v';
-
 	// Invoke the Java callback
 	(*env)->CallVoidMethod(env,
-		object,
+		(jobject)userdata,
 		javaCallbackV,
 		args
 	);
@@ -89,17 +64,10 @@ static char cbHandlerV(DCCallback *cb, DCArgs *args, DCValue *result, void *user
 		jboolean async; \
 		JNIEnv* env = getEnv(&async); \
 \
-		const LWJGLCallback *lcb = (const LWJGLCallback *)userdata; \
-\
-		jobject object = (*env)->NewLocalRef(env, (jweak)lcb->reference); \
-\
 		UNUSED_PARAM(cb) \
 \
-		if ( !verifyCallback(env, object, lcb, async) ) \
-			return TypeSig; \
-\
 		*(Type*)result = (Type)(*env)->Call##JavaType##Method(env, \
-			object, \
+			(jobject)userdata, \
 			javaCallback##Name, \
 			args \
 		); \
@@ -125,7 +93,7 @@ EXTERN_C_ENTER
 	javaCallback##Type = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, Index)); \
 	callbacks[Index] = (uintptr_t)&cbHandler##Type;
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_Callback_getNativeCallbacks(JNIEnv *env, jclass clazz, jobjectArray methods, jlong callbacksAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_CallbackNative_getNativeCallbacks(JNIEnv *env, jclass clazz, jobjectArray methods, jlong callbacksAddress) {
 	uintptr_t* callbacks = (uintptr_t *)(intptr_t)callbacksAddress;
 
 	UNUSED_PARAMS(env, clazz)

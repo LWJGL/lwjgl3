@@ -86,7 +86,6 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the #DebugMessageControlKHR() method."
 	useSystemCallConvention()
-	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link EGLDebugMessageKHRCallback} argument to a String.
@@ -97,7 +96,7 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 	 *
 	 * @return the command as a String
 	 */
-	public static String getCommand(long command) {
+	static String getCommand(long command) {
 		return memASCII(command);
 	}
 
@@ -110,29 +109,8 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 	 *
 	 * @return the message as a String
 	 */
-	public static String getMessage(long message) {
+	static String getMessage(long message) {
 		return memUTF8(message);
-	}
-
-	/** A functional interface for {@link EGLDebugMessageKHRCallback}. */
-	public interface SAMString {
-		void invoke(int error, String command, int messageType, long threadLabel, long objectLabel, String message);
-	}
-
-	/**
-	 * Creates a {@link EGLDebugMessageKHRCallback} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link EGLDebugMessageKHRCallback} instance
-	 */
-	public static EGLDebugMessageKHRCallback createString(SAMString sam) {
-		return new EGLDebugMessageKHRCallback() {
-			@Override
-			public void invoke(int error, long command, int messageType, long threadLabel, long objectLabel, long message) {
-				sam.invoke(error, getCommand(command), messageType, threadLabel, objectLabel, getMessage(message));
-			}
-		};
 	}
 	"""
 }
@@ -163,29 +141,6 @@ val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
 	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
 	documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
-	preamble.javaImport("java.nio.*", "static org.lwjgl.system.MemoryUtil.*")
-	additionalCode = """
-	/** A functional interface for {@link EGLSetBlobFuncANDROID}. */
-	public interface SAMBuffer {
-		void invoke(ByteBuffer key, ByteBuffer value);
-	}
-
-	/**
-	 * Creates a {@link EGLSetBlobFuncANDROID} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link EGLSetBlobFuncANDROID} instance
-	 */
-	public static EGLSetBlobFuncANDROID createBuffer(SAMBuffer sam) {
-		return new EGLSetBlobFuncANDROID() {
-			@Override
-			public void invoke(long key, long keySize, long value, long valueSize) {
-				sam.invoke(memByteBuffer(key, (int)keySize), memByteBuffer(value, (int)valueSize));
-			}
-		};
-	}
-	"""
 }
 val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
 	EGL_PACKAGE, EGLsizeiANDROID, "EGLGetBlobFuncANDROID", "",
@@ -195,29 +150,6 @@ val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
 	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", "")
 ) {
 	documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
-	preamble.javaImport("java.nio.*", "static org.lwjgl.system.MemoryUtil.*")
-	additionalCode = """
-	/** A functional interface for {@link EGLGetBlobFuncANDROID}. */
-	public interface SAMBuffer {
-		long invoke(ByteBuffer key, ByteBuffer value);
-	}
-
-	/**
-	 * Creates a {@link EGLGetBlobFuncANDROID} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link EGLGetBlobFuncANDROID} instance
-	 */
-	public static EGLGetBlobFuncANDROID createBuffer(SAMBuffer sam) {
-		return new EGLGetBlobFuncANDROID() {
-			@Override
-			public long invoke(long key, long keySize, long value, long valueSize) {
-				return sam.invoke(memByteBuffer(key, (int)keySize), memByteBuffer(value, (int)valueSize));
-			}
-		};
-	}
-	"""
 }
 
 // EXT_device_base

@@ -78,8 +78,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 		"java.io.PrintStream",
 		"java.util.Map",
 		"org.lwjgl.system.APIUtil",
-		"static org.lwjgl.glfw.GLFW.*",
-		"static org.lwjgl.system.MemoryUtil.*"
+		"static org.lwjgl.glfw.GLFW.*"
 	)
 	additionalCode = """
 	/**
@@ -91,29 +90,8 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 *
 	 * @return the description as a String
 	 */
-	public static String getDescription(long description) {
+	static String getDescription(long description) {
 		return memUTF8(description);
-	}
-
-	/** A functional interface for {@link GLFWErrorCallback}. */
-	public interface SAMString {
-		void invoke(int error, String description);
-	}
-
-	/**
-	 * Creates a {@link GLFWErrorCallback} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link GLFWErrorCallback} instance
-	 */
-	public static GLFWErrorCallback createString(SAMString sam) {
-		return new GLFWErrorCallback() {
-			@Override
-			public void invoke(int error, long description) {
-				sam.invoke(error, getDescription(description));
-			}
-		};
 	}
 
 	/**
@@ -121,8 +99,8 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 *
 	 * @return the GLFWerrorCallback
 	 */
-	public static GLFWErrorCallback createPrint() {
-		return createPrint(DEBUG_STREAM);
+	static GLFWErrorCallback createPrint() {
+		return createPrint(APIUtil.DEBUG_STREAM);
 	}
 
 	/**
@@ -132,9 +110,9 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 *
 	 * @return the GLFWerrorCallback
 	 */
-	public static GLFWErrorCallback createPrint(PrintStream stream) {
+	static GLFWErrorCallback createPrint(PrintStream stream) {
 		return new GLFWErrorCallback() {
-			private Map<Integer, String> ERROR_CODES = apiClassTokens((field, value) -> 0x10000 < value && value < 0x20000, null, GLFW.class);
+			private Map<Integer, String> ERROR_CODES = APIUtil.apiClassTokens((field, value) -> 0x10000 < value && value < 0x20000, null, GLFW.class);
 
 			@Override
 			public void invoke(int error, long description) {
@@ -157,17 +135,14 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 *
 	 * @return the GLFWerrorCallback
 	 */
-	public static GLFWErrorCallback createThrow() {
-		return new GLFWErrorCallback() {
-			@Override
-			public void invoke(int error, long description) {
-				throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, getDescription(description)));
-			}
+	static GLFWErrorCallback createThrow() {
+		return (error, description) -> {
+			throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, getDescription(description)));
 		};
 	}
 
 	/** See {@link GLFW#glfwSetErrorCallback SetErrorCallback}. */
-	public GLFWErrorCallback set() {
+	default GLFWErrorCallback set() {
 		glfwSetErrorCallback(this);
 		return this;
 	}
@@ -184,7 +159,7 @@ val GLFWmonitorfun = "GLFWmonitorfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetMonitorCallback SetMonitorCallback}. */
-	public GLFWMonitorCallback set() {
+	default GLFWMonitorCallback set() {
 		glfwSetMonitorCallback(this);
 		return this;
 	}
@@ -219,7 +194,7 @@ val GLFWjoystickfun = "GLFWjoystickfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetJoystickCallback SetJoystickCallback}. */
-	public GLFWJoystickCallback set() {
+	default GLFWJoystickCallback set() {
 		glfwSetJoystickCallback(this);
 		return this;
 	}
@@ -237,7 +212,7 @@ val GLFWwindowposfun = "GLFWwindowposfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowPosCallback SetWindowPosCallback}. */
-	public GLFWWindowPosCallback set(long window) {
+	default GLFWWindowPosCallback set(long window) {
 		glfwSetWindowPosCallback(window, this);
 		return this;
 	}
@@ -256,7 +231,7 @@ val GLFWwindowsizefun = "GLFWwindowsizefun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowSizeCallback SetWindowSizeCallback}. */
-	public GLFWWindowSizeCallback set(long window) {
+	default GLFWWindowSizeCallback set(long window) {
 		glfwSetWindowSizeCallback(window, this);
 		return this;
 	}
@@ -272,7 +247,7 @@ val GLFWwindowclosefun = "GLFWwindowclosefun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowCloseCallback SetWindowCloseCallback}. */
-	public GLFWWindowCloseCallback set(long window) {
+	default GLFWWindowCloseCallback set(long window) {
 		glfwSetWindowCloseCallback(window, this);
 		return this;
 	}
@@ -291,7 +266,7 @@ val GLFWwindowrefreshfun = "GLFWwindowrefreshfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowRefreshCallback SetWindowRefreshCallback}. */
-	public GLFWWindowRefreshCallback set(long window) {
+	default GLFWWindowRefreshCallback set(long window) {
 		glfwSetWindowRefreshCallback(window, this);
 		return this;
 	}
@@ -309,7 +284,7 @@ val GLFWwindowfocusfun = "GLFWwindowfocusfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowFocusCallback SetWindowFocusCallback}. */
-	public GLFWWindowFocusCallback set(long window) {
+	default GLFWWindowFocusCallback set(long window) {
 		glfwSetWindowFocusCallback(window, this);
 		return this;
 	}
@@ -327,7 +302,7 @@ val GLFWwindowiconifyfun = "GLFWwindowiconifyfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowIconifyCallback SetWindowIconifyCallback}. */
-	public GLFWWindowIconifyCallback set(long window) {
+	default GLFWWindowIconifyCallback set(long window) {
 		glfwSetWindowIconifyCallback(window, this);
 		return this;
 	}
@@ -345,7 +320,7 @@ val GLFWframebuffersizefun = "GLFWframebuffersizefun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetFramebufferSizeCallback SetFramebufferSizeCallback}. */
-	public GLFWFramebufferSizeCallback set(long window) {
+	default GLFWFramebufferSizeCallback set(long window) {
 		glfwSetFramebufferSizeCallback(window, this);
 		return this;
 	}
@@ -365,7 +340,7 @@ val GLFWkeyfun = "GLFWkeyfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetKeyCallback SetKeyCallback}. */
-	public GLFWKeyCallback set(long window) {
+	default GLFWKeyCallback set(long window) {
 		glfwSetKeyCallback(window, this);
 		return this;
 	}
@@ -382,7 +357,7 @@ val GLFWcharfun = "GLFWcharfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCharCallback SetCharCallback}. */
-	public GLFWCharCallback set(long window) {
+	default GLFWCharCallback set(long window) {
 		glfwSetCharCallback(window, this);
 		return this;
 	}
@@ -400,7 +375,7 @@ val GLFWcharmodsfun = "GLFWcharmodsfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCharModsCallback SetCharModsCallback}. */
-	public GLFWCharModsCallback set(long window) {
+	default GLFWCharModsCallback set(long window) {
 		glfwSetCharModsCallback(window, this);
 		return this;
 	}
@@ -419,7 +394,7 @@ val GLFWmousebuttonfun = "GLFWmousebuttonfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetMouseButtonCallback SetMouseButtonCallback}. */
-	public GLFWMouseButtonCallback set(long window) {
+	default GLFWMouseButtonCallback set(long window) {
 		glfwSetMouseButtonCallback(window, this);
 		return this;
 	}
@@ -442,7 +417,7 @@ val GLFWcursorposfun = "GLFWcursorposfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCursorPosCallback SetCursorPosCallback}. */
-	public GLFWCursorPosCallback set(long window) {
+	default GLFWCursorPosCallback set(long window) {
 		glfwSetCursorPosCallback(window, this);
 		return this;
 	}
@@ -460,7 +435,7 @@ val GLFWcursorenterfun = "GLFWcursorenterfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCursorEnterCallback SetCursorEnterCallback}. */
-	public GLFWCursorEnterCallback set(long window) {
+	default GLFWCursorEnterCallback set(long window) {
 		glfwSetCursorEnterCallback(window, this);
 		return this;
 	}
@@ -478,7 +453,7 @@ val GLFWscrollfun = "GLFWscrollfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetScrollCallback SetScrollCallback}. */
-	public GLFWScrollCallback set(long window) {
+	default GLFWScrollCallback set(long window) {
 		glfwSetScrollCallback(window, this);
 		return this;
 	}
@@ -493,133 +468,24 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	const..char_pp.IN("names", "pointer to the array of UTF-8 encoded path names of the dropped files")
 ) {
 	documentation = "Instances of this interface may be passed to the #SetDropCallback() method."
-	preamble.javaImport(
-		"java.nio.*",
-		"static org.lwjgl.glfw.GLFW.*",
-		"static org.lwjgl.system.MemoryUtil.*"
-	)
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
-	/** A functional interface for {@link GLFWDropCallback}. */
-	public interface SAMBuffer {
-		void invoke(long window, ByteBuffer[] names);
-	}
-
 	/**
-	 * Creates a {@link GLFWDropCallback} that delegates the callback to the specified functional interface.
+	 * Decodes the specified {@link GLFWDropCallback} arguments to a String.
 	 *
-	 * @param sam the delegation target
+	 * <p>This method may only be used inside a {@code GLFWDropCallback} invocation.</p>
 	 *
-	 * @return the {@link GLFWDropCallback} instance
-	 */
-	public static GLFWDropCallback createBuffer(SAMBuffer sam) {
-		return new GLFWDropCallback() {
-			@Override
-			public void invoke(long window, int count, long names) {
-				sam.invoke(window, getNamesBuffer(count, names));
-			}
-		};
-	}
-
-	/** A functional interface for {@link GLFWDropCallback}. */
-	public interface SAMString {
-		void invoke(long window, String[] names);
-	}
-
-	/**
-	 * Creates a {@link GLFWDropCallback} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link GLFWDropCallback} instance
-	 */
-	public static GLFWDropCallback createString(SAMString sam) {
-		return new GLFWDropCallback() {
-			@Override
-			public void invoke(long window, int count, long names) {
-				sam.invoke(window, getNames(count, names));
-			}
-		};
-	}
-
-	/**
-	 * Converts the specified {@link GLFWDropCallback} arguments to a ByteBuffer array.
-	 *
-	 * <p>This method may only be used inside a GLFWdropCallback invocation. If you wish to use the array after the callback returns, you need to make a deep
-	 * copy.</p>
-	 *
-	 * @param count the number of dropped files
 	 * @param names pointer to the array of UTF-8 encoded path names of the dropped files
+	 * @param index the index to decode
 	 *
-	 * @return the array of names, as ByteBuffers
+	 * @return the name at the specified index as a String
 	 */
-	public static ByteBuffer[] getNamesBuffer(int count, long names) {
-		ByteBuffer[] buffers = new ByteBuffer[count];
-
-		for ( int i = 0; i < count; i++ )
-			buffers[i] = memByteBufferNT1(memGetAddress(names + POINTER_SIZE * i));
-
-		return buffers;
-	}
-
-	/**
-	 * Converts the specified {@link GLFWDropCallback} arguments to a String array.
-	 *
-	 * <p>This method may only be used inside a GLFWdropCallback invocation.</p>
-	 *
-	 * @param count the number of dropped files
-	 * @param names pointer to the array of UTF-8 encoded path names of the dropped files
-	 *
-	 * @return the array of names, as Strings
-	 */
-	public static String[] getNames(int count, long names) {
-		String[] strings = new String[count];
-
-		for ( int i = 0; i < count; i++ )
-			strings[i] = memUTF8(memGetAddress(names + POINTER_SIZE * i));
-
-		return strings;
-	}
-
-	/** A functional interface that can be used with {@link #apply(int, long, ConsumerBuffer) apply}. */
-	public interface ConsumerBuffer {
-		void accept(int index, ByteBuffer name);
-	}
-
-	/** A functional interface that can be used with {@link #apply(int, long, ConsumerString) apply}. */
-	public interface ConsumerString {
-		void accept(int index, String name);
-	}
-
-	/**
-	 * Applies the specified {@link ConsumerBuffer} to the specified {@link GLFWDropCallback} arguments.
-	 *
-	 * <p>This method may only be used inside a GLFWDropCallback invocation.</p>
-	 *
-	 * @param count    the number of dropped files
-	 * @param names    pointer to the array of UTF-8 encoded path names of the dropped files
-	 * @param consumer the {@link ConsumerBuffer} to apply
-	 */
-	public static void apply(int count, long names, ConsumerBuffer consumer) {
-		for ( int i = 0; i < count; i++ )
-			consumer.accept(i, memByteBufferNT1(memGetAddress(names + POINTER_SIZE * i)));
-	}
-
-	/**
-	 * Applies the specified {@link ConsumerString} to the specified {@link GLFWDropCallback} arguments.
-	 *
-	 * <p>This method may only be used inside a GLFWDropCallback invocation.</p>
-	 *
-	 * @param count    the number of dropped files
-	 * @param names    pointer to the array of UTF-8 encoded path names of the dropped files
-	 * @param consumer the {@link ConsumerString} to apply
-	 */
-	public static void apply(int count, long names, ConsumerString consumer) {
-		for ( int i = 0; i < count; i++ )
-			consumer.accept(i, memUTF8(memGetAddress(names + POINTER_SIZE * i)));
+	static String getName(long names, int index) {
+		return memUTF8(memGetAddress(names + Pointer.POINTER_SIZE * index));
 	}
 
 	/** See {@link GLFW#glfwSetDropCallback SetDropCallback}. */
-	public GLFWDropCallback set(long window) {
+	default GLFWDropCallback set(long window) {
 		glfwSetDropCallback(window, this);
 		return this;
 	}

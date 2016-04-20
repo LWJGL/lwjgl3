@@ -377,7 +377,6 @@ public final class Vorbis {
 
 			glfwSwapInterval(1);
 			glfwShowWindow(window);
-			glfwInvoke(window, null, framebufferSizeCallback);
 
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
@@ -456,7 +455,7 @@ public final class Vorbis {
 			glfwDestroyWindow(window);
 
 			glfwTerminate();
-			errorCallback.free();
+			glfwSetErrorCallback(null).free();
 		}
 
 	}

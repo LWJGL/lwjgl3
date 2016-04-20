@@ -42,7 +42,6 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	NullTerminated..const..charUTF8_p.IN("message", "a UTF8-encoded null-terminated string")
 ) {
 	documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
-	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link OVRLogCallback} argument to a String.
@@ -53,29 +52,8 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	 *
 	 * @return the message as a String
 	 */
-	public static String getMessage(long message) {
+	static String getMessage(long message) {
 		return memUTF8(message);
-	}
-
-	/** A functional interface for {@link OVRLogCallback}. */
-	public interface SAMString {
-		void invoke(long userData, int level, String message);
-	}
-
-	/**
-	 * Creates a {@link OVRLogCallback} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link OVRLogCallback} instance
-	 */
-	public static OVRLogCallback createString(SAMString sam) {
-		return new OVRLogCallback() {
-			@Override
-			public void invoke(long userData, int level, long message) {
-				sam.invoke(userData, level, getMessage(message));
-			}
-		};
 	}
 	"""
 }

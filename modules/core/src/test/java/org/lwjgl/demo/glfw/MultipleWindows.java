@@ -4,14 +4,13 @@
  */
 package org.lwjgl.demo.glfw;
 
-import org.lwjgl.glfw.GLFWCursorEnterCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -32,7 +31,7 @@ public final class MultipleWindows {
 			demo();
 		} finally {
 			glfwTerminate();
-			errorfun.free();
+			glfwSetErrorCallback(null).free();
 		}
 	}
 
@@ -53,18 +52,15 @@ public final class MultipleWindows {
 
 			Window window = new Window(handle);
 
-			glfwSetCursorEnterCallback(handle, window.cursorenterfun = new GLFWCursorEnterCallback() {
-				@Override
-				public void invoke(long window, boolean entered) {
-					if ( entered )
-						System.out.println("Mouse entered window: " + windowIndex);
-				}
+			glfwSetCursorEnterCallback(handle, (windowHnd, entered) -> {
+				if ( entered )
+					System.out.println("Mouse entered window: " + windowIndex);
 			});
 
-			glfwSetKeyCallback(handle, window.keyfun = GLFWKeyCallback.create((windowHandle, key, scancode, action, mods) -> {
+			glfwSetKeyCallback(handle, (windowHnd, key, scancode, action, mods) -> {
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 					latch.set(0);
-			}));
+			});
 
 			glfwMakeContextCurrent(handle);
 			window.capabilities = GL.createCapabilities();
@@ -92,6 +88,7 @@ public final class MultipleWindows {
 				glfwSwapBuffers(window.handle);
 
 				if ( !glfwWindowShouldClose(window.handle) ) {
+					glfwFreeCallbacks(window.handle);
 					glfwDestroyWindow(window.handle);
 					windows[i] = null;
 
@@ -111,9 +108,6 @@ public final class MultipleWindows {
 		final long handle;
 
 		GLCapabilities capabilities;
-
-		GLFWCursorEnterCallback cursorenterfun;
-		GLFWKeyCallback         keyfun;
 
 		Window(long handle) {
 			this.handle = handle;

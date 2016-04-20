@@ -2210,7 +2210,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function must only be called from the main thread.
 		""",
 
-		GLFWjoystickfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
+		nullable..GLFWjoystickfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set or the library had not been initialized",
 		since = "version 3.2"

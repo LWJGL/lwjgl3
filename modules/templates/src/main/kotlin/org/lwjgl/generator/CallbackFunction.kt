@@ -57,7 +57,7 @@ class CallbackFunction(
 
 		print("""import org.lwjgl.system.*;
 
-import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.dyncall.DynCallback.*;
 
 """)
@@ -67,27 +67,34 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 		if ( documentation != null )
 			print(processDocumentation(documentation).toJavaDoc(indentation = ""))
 		print("""
-${access.modifier}abstract class $className extends Callback.${returns.mapping.jniSignature} {
+@FunctionalInterface
+${access.modifier}interface $className extends Callback.${returns.mapping.jniSignature} {
 
-	private static final long CLASSPATH = apiCallbackText("$packageName.$className");
-
-	protected $className() {
-		super(CALL_CONVENTION_$callConvention + "(${signature.asSequence().map { it.nativeType.dyncall }.joinToString("")})${returns.dyncall}", CLASSPATH);
+	/** Creates a {@code $className} instance from the specified function pointer. */
+	static $className create(long functionPointer) {
+		return functionPointer == NULL ? null : new ${className}Handle(functionPointer, Callback.get(functionPointer));
 	}
 
-	/**
-	 * Will be called from native code. Decodes the arguments and passes them to {@link #invoke}.
-	 *
-	 * @param args pointer to an array of jvalues
-	 */
+	/** Creates a {@code $className} instance that delegates to the specified {@code $className} instance. */
+	static $className create($className sam) {
+		return new ${className}Handle(sam.address(), sam);
+	}
+
 	@Override
-	protected ${returns.nativeMethodType} callback(long args) {
+	default long address() {
+		return Callback.create(this, "(${
+		signature.asSequence().map { it.nativeType.dyncall }.joinToString("")
+		})${returns.dyncall}", ${callConvention != "DEFAULT"});
+	}
+
+	@Override
+	default ${returns.nativeMethodType} callback(long args) {
 		""")
 		if ( returns.mapping != TypeMapping.VOID )
 			print("return ")
 		print("""invoke(
-${signature.asSequence().withIndex().map {
-			"\t\t\tdcbArg${it.value.nativeType.argType}(args)${when ( it.value.nativeType.mapping ) {
+${signature.asSequence().map {
+			"\t\t\tdcbArg${it.nativeType.argType}(args)${when (it.nativeType.mapping) {
 				PrimitiveMapping.BOOLEAN,
 				PrimitiveMapping.BOOLEAN4 -> " != 0"
 				else                      -> ""
@@ -99,41 +106,38 @@ ${signature.asSequence().withIndex().map {
 """)
 		print(functionDoc(this@CallbackFunction))
 		print("""
-	public abstract ${returns.nativeMethodType} invoke($signatureJava);
-
-	/** A functional interface for {@link $className}. */
-	public interface SAM {
-		${returns.nativeMethodType} invoke($signatureJava);
-	}
+	${returns.nativeMethodType} invoke($signatureJava);
 """)
 
-		print("""
-	/**
-	 * Creates a {@link $className} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link $className} instance
-	 */
-	public static $className create(SAM sam) {
-		return new $className() {
-			@Override
-			public ${returns.nativeMethodType} invoke($signatureJava) {
-				""")
-		if ( returns.mapping != TypeMapping.VOID )
-			print("return ")
-		print("""sam.invoke(${signature.asSequence().map { it.name }.joinToString(", ")});
-			}
-		};
-	}
-""")
 		if ( additionalCode.isNotEmpty() ) {
 			print("\n\t")
 			print(additionalCode.trim())
 			println()
 		}
 
-		print("\n}")
+		print("""
+}
+
+final class ${className}Handle extends Pointer.Default implements $className {
+
+	private final $className delegate;
+
+	${className}Handle(long functionPointer, $className delegate) {
+		super(functionPointer);
+		this.delegate = delegate;
+	}
+
+	@Override
+	public void free() {
+		Callback.free(address());
+	}
+
+	@Override
+	public ${returns.nativeMethodType} invoke($signatureJava) {
+		${if ( returns.mapping != TypeMapping.VOID ) "return " else ""}delegate.invoke(${signature.asSequence().map { it.name }.joinToString(", ")});
+	}
+
+}""")
 	}
 }
 

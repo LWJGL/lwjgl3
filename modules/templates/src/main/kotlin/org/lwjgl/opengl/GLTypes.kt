@@ -89,7 +89,6 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the #DebugMessageCallbackAMD() method."
 	useSystemCallConvention()
-	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageAMDCallback} arguments to a String.
@@ -101,29 +100,8 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 	 *
 	 * @return the message as a String
 	 */
-	public static String getMessage(int length, long message) {
+	static String getMessage(int length, long message) {
 		return memUTF8(memByteBuffer(message, length));
-	}
-
-	/** A functional interface for {@link GLDebugMessageAMDCallback}. */
-	public interface SAMString {
-		void invoke(int id, int category, int severity, String message, long userParam);
-	}
-
-	/**
-	 * Creates a {@link GLDebugMessageAMDCallback} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link GLDebugMessageAMDCallback} instance
-	 */
-	public static GLDebugMessageAMDCallback createString(SAMString sam) {
-		return new GLDebugMessageAMDCallback() {
-			@Override
-			public void invoke(int id, int category, int severity, int length, long message, long userParam) {
-				sam.invoke(id, category, severity, getMessage(length, message), userParam);
-			}
-		};
 	}
 	"""
 
@@ -142,7 +120,6 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the #DebugMessageCallbackARB() method."
 	useSystemCallConvention()
-	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageARBCallback} arguments to a String.
@@ -154,29 +131,8 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 	 *
 	 * @return the message as a String
 	 */
-	public static String getMessage(int length, long message) {
+	static String getMessage(int length, long message) {
 		return memUTF8(memByteBuffer(message, length));
-	}
-
-	/** A functional interface for {@link GLDebugMessageARBCallback}. */
-	public interface SAMString {
-		void invoke(int source, int type, int id, int severity, String message, long userParam);
-	}
-
-	/**
-	 * Creates a {@link GLDebugMessageARBCallback} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link GLDebugMessageARBCallback} instance
-	 */
-	public static GLDebugMessageARBCallback createString(SAMString sam) {
-		return new GLDebugMessageARBCallback() {
-			@Override
-			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
-				sam.invoke(source, type, id, severity, getMessage(length, message), userParam);
-			}
-		};
 	}
 	"""
 }
@@ -203,7 +159,6 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the GL43##glDebugMessageCallback() and KHRDebug##glDebugMessageCallback() methods."
 	useSystemCallConvention()
-	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageCallback} arguments to a String.
@@ -215,29 +170,8 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	 *
 	 * @return the message as a String
 	 */
-	public static String getMessage(int length, long message) {
+	static String getMessage(int length, long message) {
 		return memUTF8(memByteBuffer(message, length));
-	}
-
-	/** A functional interface for {@link GLDebugMessageCallback}. */
-	public interface SAMString {
-		void invoke(int source, int type, int id, int severity, String message, long userParam);
-	}
-
-	/**
-	 * Creates a {@link GLDebugMessageCallback} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link GLDebugMessageCallback} instance
-	 */
-	public static GLDebugMessageCallback createString(SAMString sam) {
-		return new GLDebugMessageCallback() {
-			@Override
-			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
-				sam.invoke(source, type, id, severity, getMessage(length, message), userParam);
-			}
-		};
 	}
 	"""
 }

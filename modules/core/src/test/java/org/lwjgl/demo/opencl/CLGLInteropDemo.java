@@ -84,8 +84,7 @@ public final class CLGLInteropDemo {
 	public static void main(String... args) {
 		parseArgs(args);
 
-		GLFWErrorCallback errorfun;
-		glfwSetErrorCallback(errorfun = GLFWErrorCallback.createPrint());
+		glfwSetErrorCallback(GLFWErrorCallback.createPrint());
 		if ( !glfwInit() ) {
 			System.out.println("Unable to initialize glfw");
 			System.exit(-1);
@@ -222,7 +221,7 @@ public final class CLGLInteropDemo {
 
 		CL.destroy();
 		glfwTerminate();
-		errorfun.free();
+		glfwSetErrorCallback(null).free();
 
 		System.out.println("GAME OVER!");
 	}

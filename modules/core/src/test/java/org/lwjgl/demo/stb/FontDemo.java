@@ -4,7 +4,8 @@
  */
 package org.lwjgl.demo.stb;
 
-import org.lwjgl.glfw.*;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.Callback;
@@ -26,12 +27,6 @@ abstract class FontDemo {
 
 	protected final String text;
 	private final   int    lineCount;
-
-	private final GLFWErrorCallback           errorfun;
-	private final GLFWWindowSizeCallback      windowSizefun;
-	private final GLFWFramebufferSizeCallback framebufferSizefun;
-	private final GLFWKeyCallback             keyfun;
-	private final GLFWScrollCallback          scrollfun;
 
 	private long window;
 	private int ww = 800;
@@ -71,66 +66,6 @@ abstract class FontDemo {
 
 		text = t;
 		lineCount = lc;
-
-		errorfun = GLFWErrorCallback.createPrint();
-
-		windowSizefun = GLFWWindowSizeCallback.create((windowHandle, width, height) -> {
-			FontDemo.this.ww = width;
-			FontDemo.this.wh = height;
-
-			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
-			glMatrixMode(GL_MODELVIEW);
-
-			setLineOffset(lineOffset);
-		});
-
-		framebufferSizefun = GLFWFramebufferSizeCallback.create((windowHandle, width, height) -> glViewport(0, 0, width, height));
-
-		keyfun = GLFWKeyCallback.create((windowHandle, key, scancode, action, mods) -> {
-			ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
-			if ( action == GLFW_RELEASE )
-				return;
-
-			switch ( key ) {
-				case GLFW_KEY_ESCAPE:
-					glfwSetWindowShouldClose(windowHandle, true);
-					break;
-				case GLFW_KEY_PAGE_UP:
-					setLineOffset(lineOffset - wh / FontDemo.this.lineHeight);
-					break;
-				case GLFW_KEY_PAGE_DOWN:
-					setLineOffset(lineOffset + wh / FontDemo.this.lineHeight);
-					break;
-				case GLFW_KEY_HOME:
-					setLineOffset(0);
-					break;
-				case GLFW_KEY_END:
-					setLineOffset(lineCount - wh / FontDemo.this.lineHeight);
-					break;
-				case GLFW_KEY_KP_ADD:
-				case GLFW_KEY_EQUAL:
-					setScale(scale + 1);
-					break;
-				case GLFW_KEY_KP_SUBTRACT:
-				case GLFW_KEY_MINUS:
-					setScale(scale - 1);
-					break;
-				case GLFW_KEY_0:
-				case GLFW_KEY_KP_0:
-					if ( ctrlDown )
-						setScale(0);
-					break;
-			}
-		});
-
-		scrollfun = GLFWScrollCallback.create((windowHandle, xoffset, yoffset) -> {
-			if ( ctrlDown )
-				setScale(scale + (int)yoffset);
-			else
-				setLineOffset(lineOffset - (int)yoffset * 3);
-		});
 	}
 
 	public String getText() {
@@ -168,7 +103,7 @@ abstract class FontDemo {
 	}
 
 	private void init(String title) {
-		errorfun.set();
+		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -180,10 +115,63 @@ abstract class FontDemo {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		windowSizefun.set(window);
-		framebufferSizefun.set(window);
-		keyfun.set(window);
-		scrollfun.set(window);
+		glfwSetWindowSizeCallback(window, (window, width, height) -> {
+			FontDemo.this.ww = width;
+			FontDemo.this.wh = height;
+
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
+			glMatrixMode(GL_MODELVIEW);
+
+			setLineOffset(lineOffset);
+		});
+
+		glfwSetFramebufferSizeCallback(window, (window, width, height) -> glViewport(0, 0, width, height));
+
+		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+			ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
+			if ( action == GLFW_RELEASE )
+				return;
+
+			switch ( key ) {
+				case GLFW_KEY_ESCAPE:
+					glfwSetWindowShouldClose(window, true);
+					break;
+				case GLFW_KEY_PAGE_UP:
+					setLineOffset(lineOffset - wh / FontDemo.this.lineHeight);
+					break;
+				case GLFW_KEY_PAGE_DOWN:
+					setLineOffset(lineOffset + wh / FontDemo.this.lineHeight);
+					break;
+				case GLFW_KEY_HOME:
+					setLineOffset(0);
+					break;
+				case GLFW_KEY_END:
+					setLineOffset(lineCount - wh / FontDemo.this.lineHeight);
+					break;
+				case GLFW_KEY_KP_ADD:
+				case GLFW_KEY_EQUAL:
+					setScale(scale + 1);
+					break;
+				case GLFW_KEY_KP_SUBTRACT:
+				case GLFW_KEY_MINUS:
+					setScale(scale - 1);
+					break;
+				case GLFW_KEY_0:
+				case GLFW_KEY_KP_0:
+					if ( ctrlDown )
+						setScale(0);
+					break;
+			}
+		});
+
+		glfwSetScrollCallback(window, (window, xoffset, yoffset) -> {
+			if ( ctrlDown )
+				setScale(scale + (int)yoffset);
+			else
+				setLineOffset(lineOffset - (int)yoffset * 3);
+		});
 
 		// Center window
 		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -201,7 +189,6 @@ abstract class FontDemo {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
-		glfwInvoke(window, windowSizefun, framebufferSizefun);
 	}
 
 	private void setScale(int scale) {
@@ -223,12 +210,10 @@ abstract class FontDemo {
 	private void destroy() {
 		if ( debugProc != null )
 			debugProc.free();
-		scrollfun.free();
-		keyfun.free();
-		framebufferSizefun.free();
-		windowSizefun.free();
+
+		glfwFreeCallbacks(window);
 		glfwTerminate();
-		errorfun.free();
+		glfwSetErrorCallback(null).free();
 	}
 
 }

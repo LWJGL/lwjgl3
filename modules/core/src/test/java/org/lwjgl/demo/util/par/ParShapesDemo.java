@@ -5,7 +5,8 @@
 package org.lwjgl.demo.util.par;
 
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.glfw.*;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.Callback;
@@ -13,6 +14,7 @@ import org.lwjgl.util.par.ParShapesMesh;
 
 import java.nio.ByteBuffer;
 
+import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
@@ -25,11 +27,6 @@ import static org.lwjgl.util.nfd.NativeFileDialog.*;
 import static org.lwjgl.util.par.ParShapes.*;
 
 public final class ParShapesDemo {
-
-	private final GLFWErrorCallback           errorCB;
-	private final GLFWKeyCallback             keyCB;
-	private final GLFWWindowSizeCallback      windowSizeCB;
-	private final GLFWFramebufferSizeCallback framebufferSizeCB;
 
 	private long window;
 
@@ -62,99 +59,10 @@ public final class ParShapesDemo {
 	private int hudVertexCount;
 
 	private ParShapesDemo() {
-		errorCB = GLFWErrorCallback.createPrint();
-		keyCB = new GLFWKeyCallback() {
-			@Override
-			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if ( action != GLFW_RELEASE )
-					return;
-
-				switch ( key ) {
-					case GLFW_KEY_DOWN:
-						if ( slices > 3 ) {
-							slices -= (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
-							if ( slices < 3 )
-								slices = 3;
-							updateMesh();
-						}
-						break;
-					case GLFW_KEY_UP:
-						slices += (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
-						updateMesh();
-						break;
-					case GLFW_KEY_LEFT:
-						if ( stacks > 1 ) {
-							stacks -= (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
-							if ( stacks < 1 )
-								stacks = 1;
-							updateMesh();
-						}
-						break;
-					case GLFW_KEY_RIGHT:
-						stacks += (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
-						updateMesh();
-						break;
-					case GLFW_KEY_PAGE_DOWN:
-						seed--;
-						updateMesh();
-						break;
-					case GLFW_KEY_PAGE_UP:
-						seed++;
-						updateMesh();
-						break;
-					case GLFW_KEY_KP_SUBTRACT:
-						if ( subdivisions > 1 ) {
-							subdivisions--;
-							updateMesh();
-						}
-						break;
-					case GLFW_KEY_KP_ADD:
-						subdivisions++;
-						updateMesh();
-						break;
-					case GLFW_KEY_1:
-					case GLFW_KEY_2:
-					case GLFW_KEY_3:
-					case GLFW_KEY_4:
-					case GLFW_KEY_5:
-					case GLFW_KEY_6:
-					case GLFW_KEY_7:
-					case GLFW_KEY_8:
-						updateMesh(key);
-						break;
-					case GLFW_KEY_E:
-						if ( mesh != null )
-							exportMesh();
-						break;
-					case GLFW_KEY_W:
-						wireframe = !wireframe;
-						updateHUD(mesh == null);
-						break;
-					case GLFW_KEY_ESCAPE:
-						glfwSetWindowShouldClose(window, true);
-						break;
-				}
-			}
-		};
-
-		windowSizeCB = new GLFWWindowSizeCallback() {
-			@Override
-			public void invoke(long window, int width, int height) {
-				ParShapesDemo.this.width = width;
-				ParShapesDemo.this.height = height;
-			}
-		};
-
-		framebufferSizeCB = new GLFWFramebufferSizeCallback() {
-			@Override
-			public void invoke(long window, int width, int height) {
-				glViewport(0, 0, width, height);
-			}
-		};
 	}
 
 	private void init() {
-		errorCB.set();
+		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -173,8 +81,78 @@ public final class ParShapesDemo {
 		if ( debugCB != null && GL.getCapabilities().OpenGL43 )
 			glDebugMessageControl(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_OTHER, GL_DEBUG_SEVERITY_NOTIFICATION, null, false);
 
-		keyCB.set(window);
-		framebufferSizeCB.set(window);
+		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+			if ( action != GLFW_RELEASE )
+				return;
+
+			switch ( key ) {
+				case GLFW_KEY_DOWN:
+					if ( slices > 3 ) {
+						slices -= (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
+						if ( slices < 3 )
+							slices = 3;
+						updateMesh();
+					}
+					break;
+				case GLFW_KEY_UP:
+					slices += (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
+					updateMesh();
+					break;
+				case GLFW_KEY_LEFT:
+					if ( stacks > 1 ) {
+						stacks -= (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
+						if ( stacks < 1 )
+							stacks = 1;
+						updateMesh();
+					}
+					break;
+				case GLFW_KEY_RIGHT:
+					stacks += (mods & GLFW_MOD_SHIFT) != 0 ? 10 : 1;
+					updateMesh();
+					break;
+				case GLFW_KEY_PAGE_DOWN:
+					seed--;
+					updateMesh();
+					break;
+				case GLFW_KEY_PAGE_UP:
+					seed++;
+					updateMesh();
+					break;
+				case GLFW_KEY_KP_SUBTRACT:
+					if ( subdivisions > 1 ) {
+						subdivisions--;
+						updateMesh();
+					}
+					break;
+				case GLFW_KEY_KP_ADD:
+					subdivisions++;
+					updateMesh();
+					break;
+				case GLFW_KEY_1:
+				case GLFW_KEY_2:
+				case GLFW_KEY_3:
+				case GLFW_KEY_4:
+				case GLFW_KEY_5:
+				case GLFW_KEY_6:
+				case GLFW_KEY_7:
+				case GLFW_KEY_8:
+					updateMesh(key);
+					break;
+				case GLFW_KEY_E:
+					if ( mesh != null )
+						exportMesh();
+					break;
+				case GLFW_KEY_W:
+					wireframe = !wireframe;
+					updateHUD(mesh == null);
+					break;
+				case GLFW_KEY_ESCAPE:
+					glfwSetWindowShouldClose(window, true);
+					break;
+			}
+		});
+
+		glfwSetFramebufferSizeCallback(window, (window, width, height) -> glViewport(0, 0, width, height));
 
 		// center window
 		long monitor = glfwGetPrimaryMonitor();
@@ -471,14 +449,12 @@ public final class ParShapesDemo {
 		glDeleteBuffers(vbo);
 		glDeleteVertexArrays(vao);
 
+		glfwFreeCallbacks(window);
 		glfwTerminate();
+		glfwSetErrorCallback(null).free();
 
-		debugCB.free();
-
-		framebufferSizeCB.free();
-		windowSizeCB.free();
-		keyCB.free();
-		errorCB.free();
+		if ( debugCB != null )
+			debugCB.free();
 	}
 
 	private void run() {

@@ -5,11 +5,11 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL;
 
 import java.util.concurrent.CountDownLatch;
 
+import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -33,8 +33,7 @@ public final class Threads {
 	}
 
 	public static void main(String[] args) {
-		GLFWErrorCallback errorfun = GLFWErrorCallback.createPrint();
-		glfwSetErrorCallback(errorfun);
+		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
 			throw new IllegalStateException("Failed to initialize GLFW.");
 
@@ -48,15 +47,14 @@ public final class Threads {
 			if ( window == NULL )
 				throw new IllegalStateException("Failed to create GLFW window.");
 
-			GLFWKeyCallback keyfun;
-			glfwSetKeyCallback(window, keyfun = GLFWKeyCallback.create((window1, key, scancode, action, mods) -> {
+			glfwSetKeyCallback(window, (windowHnd, key, scancode, action, mods) -> {
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-					glfwSetWindowShouldClose(window1, true);
-			}));
+					glfwSetWindowShouldClose(windowHnd, true);
+			});
 			glfwSetWindowPos(window, 200 + 250 * i, 200);
 			glfwShowWindow(window);
 
-			threads[i] = new GLFWThread(window, keyfun, i, quit);
+			threads[i] = new GLFWThread(window, i, quit);
 			threads[i].start();
 		}
 
@@ -81,28 +79,25 @@ public final class Threads {
 		}
 
 		for ( int i = 0; i < threads.length; i++ ) {
+			glfwFreeCallbacks(threads[i].window);
 			glfwDestroyWindow(threads[i].window);
-			threads[i].keyfun.free();
 		}
 
 		glfwTerminate();
-		errorfun.free();
+		glfwSetErrorCallback(null).free();
 	}
 
 	private static class GLFWThread extends Thread {
 
 		final long window;
 
-		final GLFWKeyCallback keyfun;
-
 		final int   index;
 		final float r, g, b;
 
 		CountDownLatch quit;
 
-		GLFWThread(long window, GLFWKeyCallback keyfun, int index, CountDownLatch quit) {
+		GLFWThread(long window, int index, CountDownLatch quit) {
 			this.window = window;
-			this.keyfun = keyfun;
 
 			this.index = index;
 

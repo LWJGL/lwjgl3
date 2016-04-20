@@ -29,7 +29,6 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	NullTerminated..const..charASCII_p.IN("s", "the message")
 ) {
 	documentation = "Instances of this interface may be passed to the #malloc_usable_size() method."
-	preamble.javaImport("static org.lwjgl.system.MemoryUtil.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link MallocMessageCallback} arguments to a String.
@@ -40,29 +39,8 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	 *
 	 * @return the message as a String
 	 */
-	public static String getMessage(long s) {
+	static String getMessage(long s) {
 		return memASCII(s);
-	}
-
-	/** A functional interface for {@link MallocMessageCallback}. */
-	public interface SAMString {
-		void invoke(long cbopaque, String s);
-	}
-
-	/**
-	 * Creates a {@link MallocMessageCallback} that delegates the callback to the specified functional interface.
-	 *
-	 * @param sam the delegation target
-	 *
-	 * @return the {@link MallocMessageCallback} instance
-	 */
-	public static MallocMessageCallback createString(SAMString sam) {
-		return new MallocMessageCallback() {
-			@Override
-			public void invoke(long cbopaque, long s) {
-				sam.invoke(cbopaque, getMessage(s));
-			}
-		};
 	}
 	"""
 }

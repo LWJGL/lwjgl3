@@ -17,7 +17,7 @@ interface StackFunctionTransform<T : QualifiedType> {
 	fun setupStack(func: Function, qtype: T, writer: PrintWriter)
 }
 
-/** Marker trait to indicate that buffer checks should be skipped. */
+/** Marker interface to indicate that pointer and buffer checks should be skipped. */
 interface SkipCheckFunctionTransform
 
 fun <T : QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String? {

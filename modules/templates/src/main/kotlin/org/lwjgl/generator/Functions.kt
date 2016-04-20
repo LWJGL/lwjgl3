@@ -8,7 +8,6 @@ import org.lwjgl.generator.GenerationMode.ALTERNATIVE
 import org.lwjgl.generator.GenerationMode.NORMAL
 import org.lwjgl.generator.ParameterType.*
 import java.io.PrintWriter
-import java.nio.ByteBuffer
 import java.util.*
 import java.util.regex.Pattern
 
@@ -177,7 +176,10 @@ class NativeClassFunction(
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
 
 	val hasUnsafeMethod: Boolean
-		get() = nativeClass.binding != null && !(hasExplicitFunctionAddress && hasNativeCode) && (returns.isBufferPointer || hasParam { it.isBufferPointer }) && !returns.has(Address)
+		get() = nativeClass.binding != null
+		        && !(hasExplicitFunctionAddress && hasNativeCode)
+		        && (returns.isBufferPointer || returns.nativeType is CallbackType || hasParam { it.isBufferPointer || it.nativeType is CallbackType })
+		        && !returns.has(Address)
 
 	private val ReturnValue.isStructValue: Boolean
 		get() = nativeType is StructType && !nativeType.includesPointer
@@ -349,7 +351,7 @@ class NativeClassFunction(
 
 		// First pass
 		getNativeParams().forEach {
-			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType )
+			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType && transforms?.get(it) !is SkipCheckFunctionTransform )
 				checks.add("checkPointer(${it.name});")
 
 			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "if ( ${it.name} != null ) " else ""

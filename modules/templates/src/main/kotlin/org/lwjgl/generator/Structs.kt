@@ -1075,7 +1075,7 @@ ${validations.joinToString("\n")}
 
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
 					if ( it.nativeType is CallbackType ) {
-						println("\t/** Unsafe version of {@link #$setter(long) $setter}. */")
+						println("\t/** Unsafe version of {@link #$setter(${it.nativeType.className}) $setter}. */")
 						println("\tpublic static void n$setter(long $STRUCT, long value) { memPutAddress($STRUCT + $field, ${it.pointerValue}); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType
@@ -1215,13 +1215,11 @@ ${validations.joinToString("\n")}
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
 					if ( it.nativeType is CallbackType ) {
 						val callbackType = it.nativeType.className
-						println("$indent/** Sets the specified function address to the {@code $field} field. */")
-						println("${indent}public $returnType $setter(long value) { $n$setter($ADDRESS, value); return this; }")
 						println("$indent/** Sets the address of the specified {@link $callbackType} to the {@code $field} field. */")
-						println("${indent}public $returnType $setter($callbackType value) { return $setter(addressSafe(value)); }")
+						println("${indent}public $returnType $setter($callbackType value) { $n$setter($ADDRESS, addressSafe(value)); return this; }")
 					} else {
 						println("$indent/** Sets the specified value to the {@code $field} field. */")
-						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType.simpleName} value) { $n$setter($ADDRESS, value); return this; }")
+						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType} value) { $n$setter($ADDRESS, value); return this; }")
 					}
 				}
 
@@ -1296,11 +1294,7 @@ ${validations.joinToString("\n")}
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
 					println("\t/** Unsafe version of {@link #$getter}. */")
 					if ( it.nativeType is CallbackType ) {
-						val callbackType = it.nativeType.className
-
 						println("\tpublic static long n$getter(long $STRUCT) { return memGetAddress($STRUCT + $field); }")
-						println("\t/** Unsafe version of {@link #${getter}Callback}. */")
-						println("\tpublic static $callbackType n${getter}Callback(long $STRUCT) { return Callback.create(n$getter($STRUCT)); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType
 						val bufferMethod = getBufferMethod(it, javaType)
@@ -1424,11 +1418,8 @@ ${validations.joinToString("\n")}
 					if ( it.nativeType is CallbackType ) {
 						val callbackType = it.nativeType.className
 
-						println("$indent/** Returns the function address at the {@code $getter} field. */")
-						println("${indent}public long $getter() { return $n$getter($ADDRESS); }")
-
 						println("$indent/** Returns the {@code $callbackType} instance at the {@code $getter} field. */")
-						println("${indent}public $callbackType ${getter}Callback() { return $n${getter}Callback($ADDRESS); }")
+						println("${indent}public $callbackType $getter() { return $callbackType.create($n${getter}($ADDRESS)); }")
 					} else {
 						println("$indent/** Returns the value of the {@code $getter} field. */")
 						println("${indent}public ${it.nativeType.javaMethodType} $getter() { return $n$getter($ADDRESS); }")

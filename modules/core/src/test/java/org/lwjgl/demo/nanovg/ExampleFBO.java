@@ -6,7 +6,6 @@ package org.lwjgl.demo.nanovg;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.nanovg.NVGLUFramebuffer;
 import org.lwjgl.nanovg.NVGPaint;
 import org.lwjgl.opengl.GL;
@@ -16,6 +15,7 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
+import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.nanovg.NanoVG.*;
 import static org.lwjgl.nanovg.NanoVGGL3.*;
@@ -106,9 +106,7 @@ public final class ExampleFBO extends Demo {
 	}
 
 	public static void main(String[] args) {
-		GLFWErrorCallback errorcb;
-		glfwSetErrorCallback(errorcb = GLFWErrorCallback.createThrow());
-
+		GLFWErrorCallback.createThrow().set();
 		if ( !glfwInit() )
 			throw new RuntimeException("Failed to init GLFW.");
 
@@ -139,11 +137,10 @@ public final class ExampleFBO extends Demo {
 			throw new RuntimeException();
 		}
 
-		GLFWKeyCallback key;
-		glfwSetKeyCallback(window, key = GLFWKeyCallback.create((windowHandle, keyCode, scancode, action, mods) -> {
+		glfwSetKeyCallback(window, (windowHandle, keyCode, scancode, action, mods) -> {
 			if ( keyCode == GLFW_KEY_ESCAPE && action == GLFW_PRESS )
 				glfwSetWindowShouldClose(windowHandle, true);
-		}));
+		});
 
 		glfwMakeContextCurrent(window);
 		GL.createCapabilities();
@@ -250,10 +247,9 @@ public final class ExampleFBO extends Demo {
 		System.out.format("          CPU Time: %.2f ms\n", getGraphAverage(cpuGraph) * 1000.0f);
 		System.out.format("          GPU Time: %.2f ms\n", getGraphAverage(gpuGraph) * 1000.0f);
 
+		glfwFreeCallbacks(window);
 		glfwTerminate();
-
-		key.free();
-		errorcb.free();
+		glfwSetErrorCallback(null).free();
 	}
 
 }
