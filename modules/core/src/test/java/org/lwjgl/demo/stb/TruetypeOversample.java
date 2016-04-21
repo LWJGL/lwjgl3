@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -267,6 +268,16 @@ public final class TruetypeOversample {
 		draw();
 	}
 
+	private void windowSizeChanged(long window, int width, int height) {
+		this.ww = width;
+		this.wh = height;
+	}
+
+	private void framebufferSizeChanged(long window, int width, int height) {
+		this.fbw = width;
+		this.fbh = height;
+	}
+
 	private void createWindow(String title) {
 		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
@@ -280,15 +291,8 @@ public final class TruetypeOversample {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		glfwSetWindowSizeCallback(window, (window, width, height) -> {
-			this.ww = width;
-			this.wh = height;
-		});
-
-		glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
-			this.fbw = width;
-			this.fbh = height;
-		});
+		glfwSetWindowSizeCallback(window, this::windowSizeChanged);
+		glfwSetFramebufferSizeCallback(window, this::framebufferSizeChanged);
 
 		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
 			if ( action == GLFW_RELEASE )
@@ -350,6 +354,8 @@ public final class TruetypeOversample {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
+
+		glfwInvoke(window, this::windowSizeChanged, this::framebufferSizeChanged);
 
 		// Detect sRGB support
 		GLCapabilities caps = GL.getCapabilities();

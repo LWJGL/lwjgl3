@@ -16,6 +16,7 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -98,6 +99,20 @@ public final class Image {
 		}
 	}
 
+	private void windowSizeChanged(long window, int width, int height) {
+		this.ww = width;
+		this.wh = height;
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
+		glMatrixMode(GL_MODELVIEW);
+	}
+
+	private static void framebufferSizeChanged(long window, int width, int height) {
+		glViewport(0, 0, width, height);
+	}
+
 	private void init() {
 		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
@@ -113,17 +128,8 @@ public final class Image {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		glfwSetWindowSizeCallback(window, (window, width, height) -> {
-			this.ww = width;
-			this.wh = height;
-
-			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrtho(0.0, ww, wh, 0.0, -1.0, 1.0);
-			glMatrixMode(GL_MODELVIEW);
-		});
-
-		glfwSetFramebufferSizeCallback(window, (window, width, height) -> glViewport(0, 0, width, height));
+		glfwSetWindowSizeCallback(window, this::windowSizeChanged);
+		glfwSetFramebufferSizeCallback(window, Image::framebufferSizeChanged);
 
 		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
 			ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
@@ -171,6 +177,8 @@ public final class Image {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
+
+		glfwInvoke(window, this::windowSizeChanged, Image::framebufferSizeChanged);
 	}
 
 	private void setScale(int scale) {

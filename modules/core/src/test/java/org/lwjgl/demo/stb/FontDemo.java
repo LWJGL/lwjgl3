@@ -16,6 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -102,6 +103,22 @@ abstract class FontDemo {
 		}
 	}
 
+	private void windowSizeChanged(long window, int width, int height) {
+		this.ww = width;
+		this.wh = height;
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
+		glMatrixMode(GL_MODELVIEW);
+
+		FontDemo.this.setLineOffset(lineOffset);
+	}
+
+	private static void framebufferSizeChanged(long window, int width, int height) {
+		glViewport(0, 0, width, height);
+	}
+
 	private void init(String title) {
 		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
@@ -115,19 +132,8 @@ abstract class FontDemo {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		glfwSetWindowSizeCallback(window, (window, width, height) -> {
-			FontDemo.this.ww = width;
-			FontDemo.this.wh = height;
-
-			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
-			glMatrixMode(GL_MODELVIEW);
-
-			setLineOffset(lineOffset);
-		});
-
-		glfwSetFramebufferSizeCallback(window, (window, width, height) -> glViewport(0, 0, width, height));
+		glfwSetWindowSizeCallback(window, this::windowSizeChanged);
+		glfwSetFramebufferSizeCallback(window, FontDemo::framebufferSizeChanged);
 
 		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
 			ctrlDown = (mods & GLFW_MOD_CONTROL) != 0;
@@ -189,6 +195,8 @@ abstract class FontDemo {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
+
+		glfwInvoke(window, this::windowSizeChanged, FontDemo::framebufferSizeChanged);
 	}
 
 	private void setScale(int scale) {
