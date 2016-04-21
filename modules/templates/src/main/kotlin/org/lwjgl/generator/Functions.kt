@@ -192,8 +192,11 @@ class NativeClassFunction(
 				"${returns.javaMethodType}.Buffer"
 			else
 				returns.javaMethodType
-		} else
+		} else if ( returns.nativeType is CallbackType ) {
+			"${returns.nativeType.className}"
+		} else {
 			returns.javaMethodType
+		}
 
 	private val returnsNativeMethodType: String
 		get() = if ( returns.isStructValue ) "void" else returns.nativeType.nativeMethodType

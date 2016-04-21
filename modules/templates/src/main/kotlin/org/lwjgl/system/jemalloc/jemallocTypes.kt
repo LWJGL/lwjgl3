@@ -39,7 +39,7 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	 *
 	 * @return the message as a String
 	 */
-	static String getMessage(long s) {
+	public static String getMessage(long s) {
 		return memASCII(s);
 	}
 	"""

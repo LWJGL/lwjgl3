@@ -62,7 +62,7 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 	 *
 	 * @return the data as a ByteBuffer
 	 */
-	static ByteBuffer getData(long data, int size) {
+	public static ByteBuffer getData(long data, int size) {
 		return memByteBuffer(data, size);
 	}
 	"""
@@ -126,7 +126,7 @@ val stbi_write_func = "stbi_write_func *".callback(
 	 *
 	 * @return the data as a ByteBuffer
 	 */
-	static ByteBuffer getData(long data, int size) {
+	public static ByteBuffer getData(long data, int size) {
 		return memByteBuffer(data, size);
 	}
 	"""

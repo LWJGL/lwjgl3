@@ -22,11 +22,11 @@ class CallbackFunction(
 	}
 
 	private val signatureJava: String = signature.asSequence().map {
-		"${if ( it.nativeType.mapping == PrimitiveMapping.BOOLEAN4 ) "boolean" else it.nativeType.nativeMethodType} ${it.name}"
+		"${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType} ${it.name}"
 	}.joinToString(", ")
 
 	val NativeType.dyncall: Char
-		get() = when ( this ) {
+		get() = when (this) {
 			is PointerType   -> 'p'
 			is PrimitiveType -> when (mapping) {
 				PrimitiveMapping.BOOLEAN -> 'B'
@@ -44,7 +44,7 @@ class CallbackFunction(
 		}
 
 	val NativeType.argType: String
-		get() = if ( this is PointerType || mapping === PrimitiveMapping.POINTER )
+		get() = if (this is PointerType || mapping === PrimitiveMapping.POINTER)
 			"Pointer"
 		else if (mapping == PrimitiveMapping.BOOLEAN)
 			"Bool"
@@ -58,27 +58,84 @@ class CallbackFunction(
 		print("""import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.dyncall.DynCallback.*;
 
 """)
 		preamble.printJava(this)
 
 		val documentation = super.documentation
-		if ( documentation != null )
+		if (documentation != null)
+			print(processDocumentation(documentation.replace("Instances of this interface", "Instances of this class")).toJavaDoc(indentation = ""))
+		print("""
+${access.modifier}abstract class $className extends Callback implements ${className}I {
+
+	/** Creates a {@code $className} instance from the specified function pointer. */
+	public static $className create(long functionPointer) {
+		if ( functionPointer == NULL )
+			return null;
+
+		${className}I instance = Callback.get(functionPointer);
+		return instance instanceof $className
+			? ($className)instance
+			: new Container(functionPointer, instance);
+	}
+
+	/** Creates a {@code $className} instance that delegates to the specified {@code ${className}I} instance. */
+	public static $className create(${className}I instance) {
+		return instance instanceof $className
+			? ($className)instance
+			: new Container(instance.address(), instance);
+	}
+
+	protected $className() {
+		super(NULL);
+		address = ${className}I.super.address();
+	}
+
+	private $className(long functionPointer) {
+		super(functionPointer);
+	}
+""")
+		if (additionalCode.isNotEmpty()) {
+			print("\n\t")
+			print(additionalCode.trim())
+			println()
+		}
+
+		print("""
+	private static final class Container extends $className {
+
+		private final ${className}I delegate;
+
+		Container(long functionPointer, ${className}I delegate) {
+			super(functionPointer);
+			this.delegate = delegate;
+		}
+
+		@Override
+		public ${returns.nativeMethodType} invoke($signatureJava) {
+			${if (returns.mapping != TypeMapping.VOID) "return " else ""}delegate.invoke(${signature.asSequence().map { it.name }.joinToString(", ")});
+		}
+
+	}
+
+}""")
+	}
+
+	fun PrintWriter.generateInterface() {
+		print(HEADER)
+		println("package $packageName;\n")
+
+		print("""import org.lwjgl.system.*;
+
+import static org.lwjgl.system.dyncall.DynCallback.*;
+
+""")
+		val documentation = super.documentation
+		if (documentation != null)
 			print(processDocumentation(documentation).toJavaDoc(indentation = ""))
 		print("""
 @FunctionalInterface
-${access.modifier}interface $className extends Callback.${returns.mapping.jniSignature} {
-
-	/** Creates a {@code $className} instance from the specified function pointer. */
-	static $className create(long functionPointer) {
-		return functionPointer == NULL ? null : new ${className}Handle(functionPointer, Callback.get(functionPointer));
-	}
-
-	/** Creates a {@code $className} instance that delegates to the specified {@code $className} instance. */
-	static $className create($className sam) {
-		return new ${className}Handle(sam.address(), sam);
-	}
+${access.modifier}interface ${className}I extends CallbackI.${returns.mapping.jniSignature} {
 
 	@Override
 	default long address() {
@@ -90,7 +147,7 @@ ${access.modifier}interface $className extends Callback.${returns.mapping.jniSig
 	@Override
 	default ${returns.nativeMethodType} callback(long args) {
 		""")
-		if ( returns.mapping != TypeMapping.VOID )
+		if (returns.mapping != TypeMapping.VOID)
 			print("return ")
 		print("""invoke(
 ${signature.asSequence().map {
@@ -107,37 +164,17 @@ ${signature.asSequence().map {
 		print(functionDoc(this@CallbackFunction))
 		print("""
 	${returns.nativeMethodType} invoke($signatureJava);
-""")
-
-		if ( additionalCode.isNotEmpty() ) {
-			print("\n\t")
-			print(additionalCode.trim())
-			println()
-		}
-
-		print("""
-}
-
-final class ${className}Handle extends Pointer.Default implements $className {
-
-	private final $className delegate;
-
-	${className}Handle(long functionPointer, $className delegate) {
-		super(functionPointer);
-		this.delegate = delegate;
-	}
-
-	@Override
-	public void free() {
-		Callback.free(address());
-	}
-
-	@Override
-	public ${returns.nativeMethodType} invoke($signatureJava) {
-		${if ( returns.mapping != TypeMapping.VOID ) "return " else ""}delegate.invoke(${signature.asSequence().map { it.name }.joinToString(", ")});
-	}
 
 }""")
+	}
+
+}
+
+class CallbackInterface(
+	val callback: CallbackFunction
+) : GeneratorTarget(callback.packageName, "${callback.className}I") {
+	override fun PrintWriter.generateJava() = callback.run {
+		this@generateJava.generateInterface()
 	}
 }
 
@@ -152,9 +189,10 @@ fun String.callback(
 	init: (CallbackFunction.() -> Unit)? = null
 ): CallbackType {
 	val callback = CallbackFunction(packageName, className, returns, *signature)
-	if ( init != null )
+	if (init != null)
 		callback.init()
 	callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, since) }
 	Generator.register(callback)
+	Generator.register(CallbackInterface(callback))
 	return CallbackType(callback, this)
 }

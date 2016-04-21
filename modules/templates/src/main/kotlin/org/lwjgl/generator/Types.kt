@@ -166,7 +166,10 @@ val CharType.const_p: PointerType get() = CharSequenceType(CharType("const ${thi
 class CallbackType(
 	val signature: CallbackFunction,
 	name: String = signature.className
-) : ObjectType(signature.className, name)
+) : ObjectType(signature.className, name) {
+	override val javaMethodType: String
+		get() = "${super.javaMethodType}I"
+}
 
 // typedefs
 fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping as PrimitiveMapping)

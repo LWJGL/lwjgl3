@@ -100,7 +100,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	 *
 	 * @return the message as a String
 	 */
-	static String getMessage(int length, long message) {
+	public static String getMessage(int length, long message) {
 		return memUTF8(memByteBuffer(message, length));
 	}
 	"""
@@ -131,7 +131,7 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
 	 *
 	 * @return the message as a String
 	 */
-	static String getMessage(int length, long message) {
+	public static String getMessage(int length, long message) {
 		return memUTF8(memByteBuffer(message, length));
 	}
 	"""

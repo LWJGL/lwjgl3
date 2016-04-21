@@ -69,7 +69,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 	 *
 	 * @return the message as a String
 	 */
-	static String getString(long string) {
+	public static String getString(long string) {
 		return memUTF8(string);
 	}
 	"""

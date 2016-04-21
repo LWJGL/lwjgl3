@@ -93,7 +93,7 @@ EXTERN_C_ENTER
 	javaCallback##Type = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, Index)); \
 	callbacks[Index] = (uintptr_t)&cbHandler##Type;
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_CallbackNative_getNativeCallbacks(JNIEnv *env, jclass clazz, jobjectArray methods, jlong callbacksAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_Callback_getNativeCallbacks(JNIEnv *env, jclass clazz, jobjectArray methods, jlong callbacksAddress) {
 	uintptr_t* callbacks = (uintptr_t *)(intptr_t)callbacksAddress;
 
 	UNUSED_PARAMS(env, clazz)

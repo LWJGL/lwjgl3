@@ -914,12 +914,7 @@ ${validations.joinToString("\n")}
 				print("\t\t")
 
 				val param = it.field(parentMember)
-				print(
-					if (it.nativeType is CallbackType)
-						"${it.nativeType.className} $param"
-					else
-						"${it.nativeType.javaMethodType} $param"
-				)
+				print("${it.nativeType.javaMethodType} $param")
 			}
 		}
 	}
@@ -981,8 +976,6 @@ ${validations.joinToString("\n")}
 							"$structType.Buffer $param"
 						else
 							"$structType $param"
-					} else if ( it.nativeType is CallbackType ) {
-						"${it.nativeType.className} $param"
 					} else
 						"${it.nativeType.javaMethodType} $param"
 				)
@@ -1069,7 +1062,7 @@ ${validations.joinToString("\n")}
 
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
 					if ( it.nativeType is CallbackType ) {
-						println("\t/** Unsafe version of {@link #$setter(${it.nativeType.className}) $setter}. */")
+						println("\t/** Unsafe version of {@link #$setter(${it.nativeType.javaMethodType}) $setter}. */")
 						println("\tpublic static void n$setter(long $STRUCT, long value) { memPutAddress($STRUCT + $field, ${it.pointerValue}); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType
@@ -1208,7 +1201,7 @@ ${validations.joinToString("\n")}
 
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
 					if ( it.nativeType is CallbackType ) {
-						val callbackType = it.nativeType.className
+						val callbackType = it.nativeType.javaMethodType
 						println("$indent/** Sets the address of the specified {@link $callbackType} to the {@code $field} field. */")
 						println("${indent}public $returnType $setter($callbackType value) { $n$setter($ADDRESS, addressSafe(value)); return this; }")
 					} else {
@@ -1413,7 +1406,7 @@ ${validations.joinToString("\n")}
 						val callbackType = it.nativeType.className
 
 						println("$indent/** Returns the {@code $callbackType} instance at the {@code $getter} field. */")
-						println("${indent}public $callbackType $getter() { return $callbackType.create($n${getter}($ADDRESS)); }")
+						println("${indent}public $callbackType $getter() { return $callbackType.create($n$getter($ADDRESS)); }")
 					} else {
 						println("$indent/** Returns the value of the {@code $getter} field. */")
 						println("${indent}public ${it.nativeType.javaMethodType} $getter() { return $n$getter($ADDRESS); }")

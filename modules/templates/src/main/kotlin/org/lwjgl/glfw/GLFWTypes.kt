@@ -90,7 +90,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 *
 	 * @return the description as a String
 	 */
-	static String getDescription(long description) {
+	public static String getDescription(long description) {
 		return memUTF8(description);
 	}
 
@@ -99,7 +99,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 *
 	 * @return the GLFWerrorCallback
 	 */
-	static GLFWErrorCallback createPrint() {
+	public static GLFWErrorCallback createPrint() {
 		return createPrint(APIUtil.DEBUG_STREAM);
 	}
 
@@ -110,7 +110,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 *
 	 * @return the GLFWerrorCallback
 	 */
-	static GLFWErrorCallback createPrint(PrintStream stream) {
+	public static GLFWErrorCallback createPrint(PrintStream stream) {
 		return new GLFWErrorCallback() {
 			private Map<Integer, String> ERROR_CODES = APIUtil.apiClassTokens((field, value) -> 0x10000 < value && value < 0x20000, null, GLFW.class);
 
@@ -135,14 +135,17 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	 *
 	 * @return the GLFWerrorCallback
 	 */
-	static GLFWErrorCallback createThrow() {
-		return (error, description) -> {
-			throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, getDescription(description)));
+	public static GLFWErrorCallback createThrow() {
+		return new GLFWErrorCallback() {
+			@Override
+			public void invoke(int error, long description) {
+				throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, getDescription(description)));
+			}
 		};
 	}
 
 	/** See {@link GLFW#glfwSetErrorCallback SetErrorCallback}. */
-	default GLFWErrorCallback set() {
+	public GLFWErrorCallback set() {
 		glfwSetErrorCallback(this);
 		return this;
 	}
@@ -159,31 +162,13 @@ val GLFWmonitorfun = "GLFWmonitorfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetMonitorCallback SetMonitorCallback}. */
-	default GLFWMonitorCallback set() {
+	public GLFWMonitorCallback set() {
 		glfwSetMonitorCallback(this);
 		return this;
 	}
 	"""
 }
 
-/*
-/*! @brief The function signature for joystick configuration callbacks.
- *
- *  This is the function signature for joystick configuration callback
- *  functions.
- *
- *  @param[in] joy The joystick that was connected or disconnected.
- *  @param[in] event One of `GLFW_CONNECTED` or `GLFW_DISCONNECTED`.
- *
- *  @sa @ref joystick_event
- *  @sa glfwSetJoystickCallback
- *
- *  @since Added in version 3.2.
- *
- *  @ingroup input
- */
-typedef void (* GLFWjoystickfun)(int,int);
- */
 val GLFWjoystickfun = "GLFWjoystickfun".callback(
 	GLFW_PACKAGE, void, "GLFWJoystickCallback",
 	"Will be called when a joystick is connected to or disconnected from the system.",
@@ -194,7 +179,7 @@ val GLFWjoystickfun = "GLFWjoystickfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetJoystickCallback SetJoystickCallback}. */
-	default GLFWJoystickCallback set() {
+	public GLFWJoystickCallback set() {
 		glfwSetJoystickCallback(this);
 		return this;
 	}
@@ -212,7 +197,7 @@ val GLFWwindowposfun = "GLFWwindowposfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowPosCallback SetWindowPosCallback}. */
-	default GLFWWindowPosCallback set(long window) {
+	public GLFWWindowPosCallback set(long window) {
 		glfwSetWindowPosCallback(window, this);
 		return this;
 	}
@@ -231,7 +216,7 @@ val GLFWwindowsizefun = "GLFWwindowsizefun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowSizeCallback SetWindowSizeCallback}. */
-	default GLFWWindowSizeCallback set(long window) {
+	public GLFWWindowSizeCallback set(long window) {
 		glfwSetWindowSizeCallback(window, this);
 		return this;
 	}
@@ -247,7 +232,7 @@ val GLFWwindowclosefun = "GLFWwindowclosefun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowCloseCallback SetWindowCloseCallback}. */
-	default GLFWWindowCloseCallback set(long window) {
+	public GLFWWindowCloseCallback set(long window) {
 		glfwSetWindowCloseCallback(window, this);
 		return this;
 	}
@@ -266,7 +251,7 @@ val GLFWwindowrefreshfun = "GLFWwindowrefreshfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowRefreshCallback SetWindowRefreshCallback}. */
-	default GLFWWindowRefreshCallback set(long window) {
+	public GLFWWindowRefreshCallback set(long window) {
 		glfwSetWindowRefreshCallback(window, this);
 		return this;
 	}
@@ -284,7 +269,7 @@ val GLFWwindowfocusfun = "GLFWwindowfocusfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowFocusCallback SetWindowFocusCallback}. */
-	default GLFWWindowFocusCallback set(long window) {
+	public GLFWWindowFocusCallback set(long window) {
 		glfwSetWindowFocusCallback(window, this);
 		return this;
 	}
@@ -302,7 +287,7 @@ val GLFWwindowiconifyfun = "GLFWwindowiconifyfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetWindowIconifyCallback SetWindowIconifyCallback}. */
-	default GLFWWindowIconifyCallback set(long window) {
+	public GLFWWindowIconifyCallback set(long window) {
 		glfwSetWindowIconifyCallback(window, this);
 		return this;
 	}
@@ -320,7 +305,7 @@ val GLFWframebuffersizefun = "GLFWframebuffersizefun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetFramebufferSizeCallback SetFramebufferSizeCallback}. */
-	default GLFWFramebufferSizeCallback set(long window) {
+	public GLFWFramebufferSizeCallback set(long window) {
 		glfwSetFramebufferSizeCallback(window, this);
 		return this;
 	}
@@ -340,7 +325,7 @@ val GLFWkeyfun = "GLFWkeyfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetKeyCallback SetKeyCallback}. */
-	default GLFWKeyCallback set(long window) {
+	public GLFWKeyCallback set(long window) {
 		glfwSetKeyCallback(window, this);
 		return this;
 	}
@@ -357,7 +342,7 @@ val GLFWcharfun = "GLFWcharfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCharCallback SetCharCallback}. */
-	default GLFWCharCallback set(long window) {
+	public GLFWCharCallback set(long window) {
 		glfwSetCharCallback(window, this);
 		return this;
 	}
@@ -375,7 +360,7 @@ val GLFWcharmodsfun = "GLFWcharmodsfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCharModsCallback SetCharModsCallback}. */
-	default GLFWCharModsCallback set(long window) {
+	public GLFWCharModsCallback set(long window) {
 		glfwSetCharModsCallback(window, this);
 		return this;
 	}
@@ -394,7 +379,7 @@ val GLFWmousebuttonfun = "GLFWmousebuttonfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetMouseButtonCallback SetMouseButtonCallback}. */
-	default GLFWMouseButtonCallback set(long window) {
+	public GLFWMouseButtonCallback set(long window) {
 		glfwSetMouseButtonCallback(window, this);
 		return this;
 	}
@@ -417,7 +402,7 @@ val GLFWcursorposfun = "GLFWcursorposfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCursorPosCallback SetCursorPosCallback}. */
-	default GLFWCursorPosCallback set(long window) {
+	public GLFWCursorPosCallback set(long window) {
 		glfwSetCursorPosCallback(window, this);
 		return this;
 	}
@@ -435,7 +420,7 @@ val GLFWcursorenterfun = "GLFWcursorenterfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetCursorEnterCallback SetCursorEnterCallback}. */
-	default GLFWCursorEnterCallback set(long window) {
+	public GLFWCursorEnterCallback set(long window) {
 		glfwSetCursorEnterCallback(window, this);
 		return this;
 	}
@@ -453,7 +438,7 @@ val GLFWscrollfun = "GLFWscrollfun".callback(
 	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** See {@link GLFW#glfwSetScrollCallback SetScrollCallback}. */
-	default GLFWScrollCallback set(long window) {
+	public GLFWScrollCallback set(long window) {
 		glfwSetScrollCallback(window, this);
 		return this;
 	}
@@ -480,12 +465,12 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	 *
 	 * @return the name at the specified index as a String
 	 */
-	static String getName(long names, int index) {
+	public static String getName(long names, int index) {
 		return memUTF8(memGetAddress(names + Pointer.POINTER_SIZE * index));
 	}
 
 	/** See {@link GLFW#glfwSetDropCallback SetDropCallback}. */
-	default GLFWDropCallback set(long window) {
+	public GLFWDropCallback set(long window) {
 		glfwSetDropCallback(window, this);
 		return this;
 	}
