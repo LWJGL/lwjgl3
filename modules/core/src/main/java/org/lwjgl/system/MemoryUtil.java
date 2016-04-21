@@ -1398,7 +1398,7 @@ public final class MemoryUtil {
 	public static native <T> T memGlobalRefToObject(long globalRef);
 
 	/**
-	 * Creates a new global reference to the specified object. This method is a simpler wrapper over the JNI {@code NewGlobalRef} function.
+	 * Creates a new global reference to the specified object. This method is a simple wrapper over the JNI {@code NewGlobalRef} function.
 	 *
 	 * @param obj the object
 	 *
@@ -1407,14 +1407,14 @@ public final class MemoryUtil {
 	public static native long memNewGlobalRef(Object obj);
 
 	/**
-	 * Deletes a global reference. This method is a simpler wrapper over the JNI {@code DeleteGlobalRef} function.
+	 * Deletes a global reference. This method is a simple wrapper over the JNI {@code DeleteGlobalRef} function.
 	 *
 	 * @param globalRef the memory address of the global reference to delete
 	 */
 	public static native void memDeleteGlobalRef(long globalRef);
 
 	/**
-	 * Creates a new weak global reference to the specified object. This method is a simpler wrapper over the JNI {@code NewWeakGlobalRef} function.
+	 * Creates a new weak global reference to the specified object. This method is a simple wrapper over the JNI {@code NewWeakGlobalRef} function.
 	 *
 	 * @param obj the object
 	 *
@@ -1423,7 +1423,7 @@ public final class MemoryUtil {
 	public static native long memNewWeakGlobalRef(Object obj);
 
 	/**
-	 * Deletes a weak global reference. This method is a simpler wrapper over the JNI {@code DeleteWeakGlobalRef} function.
+	 * Deletes a weak global reference. This method is a simple wrapper over the JNI {@code DeleteWeakGlobalRef} function.
 	 *
 	 * @param globalRef the memory address of the weak global reference to delete
 	 */
