@@ -12,6 +12,12 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
 
 	private val signatures = ConcurrentHashMap<Signature, Unit>()
 
+	init {
+		signatures.put(Signature(
+			CallingConvention.DEFAULT, TypeMapping.VOID, listOf(PointerMapping.OPAQUE_POINTER, PointerMapping.OPAQUE_POINTER, PrimitiveMapping.BOOLEAN)
+		), Unit)
+	}
+
 	private val sortedSignatures by lazy { signatures.keys.sorted() }
 
 	fun register(function: NativeClassFunction) = signatures.put(Signature(function), Unit)

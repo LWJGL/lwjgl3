@@ -67,8 +67,7 @@ public class AbstractGears {
 
 		glMatrixMode(GL_PROJECTION);
 
-		float h = (float)300 / (float)300;
-		glFrustum(-1.0f, 1.0f, -h, h, 5.0f, 60.0f);
+		glFrustum(-1.0f, 1.0f, -1.0f, 1.0f, 5.0f, 60.0f);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		glTranslatef(0.0f, 0.0f, -40.0f);

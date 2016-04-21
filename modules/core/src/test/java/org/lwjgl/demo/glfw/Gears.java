@@ -11,14 +11,20 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.Callback;
 import org.lwjgl.system.MemoryStack;
+import org.lwjgl.system.Platform;
+import org.lwjgl.system.macosx.ObjCRuntime;
 
 import java.nio.IntBuffer;
 
+import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFWNativeCocoa.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.macosx.ObjCRuntime.*;
 
 /** The Gears demo implemented using GLFW. */
 public class Gears extends AbstractGears {
@@ -51,6 +57,10 @@ public class Gears extends AbstractGears {
 		}
 	}
 
+	private static void framebufferSizeChanged(long window, int width, int height) {
+		glViewport(0, 0, width, height);
+	}
+
 	private void init() {
 		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
@@ -67,6 +77,18 @@ public class Gears extends AbstractGears {
 		long window = glfwCreateWindow(WIDTH, HEIGHT, "GLFW Gears Demo", NULL, NULL);
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
+
+		if ( Platform.get() == Platform.MACOSX ) {
+			long cocoaWindow = glfwGetCocoaWindow(window);
+
+			long objc_msgSend = ObjCRuntime.getLibrary().getFunctionAddress("objc_msgSend");
+			long contentView = invokePPP(objc_msgSend, cocoaWindow, sel_getUid("contentView"));
+
+			invokePPZV(objc_msgSend, contentView, sel_getUid("setWantsBestResolutionOpenGLSurface:"), false);
+
+			boolean bool = invokePPZ(objc_msgSend, contentView, sel_getUid("wantsBestResolutionOpenGLSurface"));
+			System.out.println("wantsBestResolutionOpenGLSurface = " + bool);
+		}
 
 		glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, GLFW_DONT_CARE, GLFW_DONT_CARE);
 		glfwSetWindowAspectRatio(window, 1, 1);
@@ -94,6 +116,7 @@ public class Gears extends AbstractGears {
 						try ( MemoryStack s = stackPush() ) {
 							IntBuffer a = s.ints(0);
 							IntBuffer b = s.ints(0);
+
 							glfwGetWindowPos(windowHnd, a, b);
 							xpos = a.get(0);
 							ypos = b.get(0);
@@ -119,7 +142,12 @@ public class Gears extends AbstractGears {
 			}
 		});
 
-		glfwSetWindowSizeCallback(window, (windowHandle, width, height) -> glViewport(0, 0, width, height));
+		glfwSetFramebufferSizeCallback(window, Gears::framebufferSizeChanged);
+
+		glfwSetWindowRefreshCallback(window, windowHnd -> {
+			renderLoop();
+			glfwSwapBuffers(windowHnd);
+		});
 
 		glfwMakeContextCurrent(window);
 		GL.createCapabilities();
@@ -127,6 +155,8 @@ public class Gears extends AbstractGears {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
+
+		glfwInvoke(window, null, Gears::framebufferSizeChanged);
 
 		this.window = window;
 	}
