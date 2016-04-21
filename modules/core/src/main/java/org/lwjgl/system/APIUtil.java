@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
+import static org.lwjgl.system.dyncall.DynCallback.*;
 
 /**
  * Utility class useful to API bindings. [INTERNAL USE ONLY]
@@ -88,6 +89,41 @@ public final class APIUtil {
 
 	public static long apiGetFunctionAddress(FunctionProvider provider, String functionName) {
 		return checkFunctionAddress(provider.getFunctionAddress(functionName));
+	}
+
+	/**
+	 * Creates a native function that delegates to the specified {@code CallbackI} instance when called.
+	 *
+	 * <p>The native function uses the default calling convention.</p>
+	 *
+	 * @param function  the target {@code CallbackI} instance
+	 * @param signature the {@code dyncall} function signature
+	 *
+	 * @return the dynamically generated native function
+	 */
+	public static long apiCreateCallback(CallbackI function, String signature) {
+		return apiCreateCallback(function, signature, false);
+	}
+
+	/**
+	 * Creates a native function that delegates to the specified {@code Callback} instance when called.
+	 *
+	 * @param function             the target {@code CallbackI} instance
+	 * @param signature            the {@code dyncall} function signature
+	 * @param systemCallConvention if true, the system calling convention will be used (i.e. stdcall on Windows x86)
+	 *
+	 * @return the dynamically generated native function
+	 */
+	public static long apiCreateCallback(CallbackI function, String signature, boolean systemCallConvention) {
+		long handle = dcbNewCallback(
+			systemCallConvention && Platform.get() == Platform.WINDOWS && Pointer.BITS32 ? "_s" + signature : signature,
+			Callback.getNativeFunction(signature.charAt(signature.length() - 1)),
+			memNewGlobalRef(function)
+		);
+		if ( handle == NULL )
+			throw new IllegalStateException("Failed to create the DCCallback object");
+
+		return handle;
 	}
 
 	/** A data class for API versioning information. */

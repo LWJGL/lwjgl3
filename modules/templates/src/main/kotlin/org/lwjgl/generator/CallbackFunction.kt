@@ -127,6 +127,7 @@ ${access.modifier}abstract class $className extends Callback implements ${classN
 
 		print("""import org.lwjgl.system.*;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.dyncall.DynCallback.*;
 
 """)
@@ -139,7 +140,7 @@ ${access.modifier}interface ${className}I extends CallbackI.${returns.mapping.jn
 
 	@Override
 	default long address() {
-		return Callback.create(this, "(${
+		return apiCreateCallback(this, "(${
 		signature.asSequence().map { it.nativeType.dyncall }.joinToString("")
 		})${returns.dyncall}", ${callConvention != "DEFAULT"});
 	}

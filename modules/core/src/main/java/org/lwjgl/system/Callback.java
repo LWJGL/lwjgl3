@@ -76,7 +76,7 @@ public abstract class Callback extends Pointer.Default {
 
 	private static native long getNativeCallbacks(Method[] methods, long callbacks);
 
-	private static long getNativeFunction(char type) {
+	static long getNativeFunction(char type) {
 		switch ( type ) {
 			case 'v':
 				return VOID;
@@ -99,40 +99,6 @@ public abstract class Callback extends Pointer.Default {
 			default:
 				throw new IllegalArgumentException();
 		}
-	}
-	/**
-	 * Creates a native function that delegates to the specified {@code CallbackI} instance when called.
-	 *
-	 * <p>The native function uses the default calling convention.</p>
-	 *
-	 * @param function  the target {@code CallbackI} instance
-	 * @param signature the {@code dyncall} function signature
-	 *
-	 * @return the dynamically generated native function
-	 */
-	public static long create(CallbackI function, String signature) {
-		return create(function, signature, false);
-	}
-
-	/**
-	 * Creates a native function that delegates to the specified {@code Callback} instance when called.
-	 *
-	 * @param function             the target {@code CallbackI} instance
-	 * @param signature            the {@code dyncall} function signature
-	 * @param systemCallConvention if true, the system calling convention will be used (i.e. stdcall on Windows x86)
-	 *
-	 * @return the dynamically generated native function
-	 */
-	public static long create(CallbackI function, String signature, boolean systemCallConvention) {
-		long handle = dcbNewCallback(
-			systemCallConvention && Platform.get() == Platform.WINDOWS && Pointer.BITS32 ? "_s" + signature : signature,
-			getNativeFunction(signature.charAt(signature.length() - 1)),
-			memNewGlobalRef(function)
-		);
-		if ( handle == NULL )
-			throw new IllegalStateException("Failed to create the DCCallback object");
-
-		return handle;
 	}
 
 	/**
