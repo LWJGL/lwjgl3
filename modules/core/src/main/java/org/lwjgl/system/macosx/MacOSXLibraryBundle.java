@@ -23,10 +23,9 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 	}
 
 	private static long createBundle(String path) {
-		MemoryStack stack = stackPush();
 		long filePath = NULL;
 		long url = NULL;
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			filePath = CString2CFString(stack.UTF8(path), kCFStringEncodingUTF8);
 			url = checkPointer(CFURLCreateWithFileSystemPath(NULL, filePath, kCFURLPOSIXPathStyle, true));
 
@@ -39,7 +38,6 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 		} finally {
 			if ( url != NULL ) CFRelease(url);
 			if ( filePath != NULL ) CFRelease(filePath);
-			stack.pop();
 		}
 	}
 

@@ -30,14 +30,11 @@ public final class CLDemo {
 	}
 
 	public static void main(String[] args) {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			demo(stack);
-		} finally {
-			stack.pop();
 		}
-
 	}
+
 	private static void demo(MemoryStack stack) {
 		IntBuffer pi = stack.mallocInt(1);
 		checkCLError(clGetPlatformIDs(null, pi));

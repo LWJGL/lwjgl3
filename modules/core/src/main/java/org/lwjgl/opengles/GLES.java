@@ -211,8 +211,7 @@ public final class GLES {
 			int majorVersion;
 			int minorVersion;
 
-			MemoryStack stack = stackPush();
-			try {
+			try ( MemoryStack stack = stackPush() ) {
 				IntBuffer pi = stack.ints(0);
 
 				// Try the 3.0+ version query first
@@ -232,8 +231,6 @@ public final class GLES {
 					majorVersion = version.major;
 					minorVersion = version.minor;
 				}
-			} finally {
-				stack.pop();
 			}
 
 			if ( majorVersion < 2 )
@@ -272,14 +269,11 @@ public final class GLES {
 				// Use indexed EXTENSIONS
 				int extensionCount;
 
-				stack.push();
-				try {
+				try ( MemoryStack stack = stackPush() ) {
 					IntBuffer pi = stack.ints(0);
 
 					invokeIPV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
 					extensionCount = pi.get(0);
-				} finally {
-					stack.pop();
 				}
 
 				long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");

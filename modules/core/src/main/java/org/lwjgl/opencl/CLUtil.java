@@ -100,8 +100,7 @@ public final class CLUtil {
 	}
 
 	static String getPlatformInfoStringASCII(long cl_platform_id, int param_name) {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			PointerBuffer pp = stack.mallocPointer(1);
 			checkCLError(clGetPlatformInfo(cl_platform_id, param_name, (ByteBuffer)null, pp));
 			int bytes = (int)pp.get(0);
@@ -110,14 +109,11 @@ public final class CLUtil {
 			checkCLError(clGetPlatformInfo(cl_platform_id, param_name, buffer, null));
 
 			return memASCII(buffer, bytes - 1);
-		} finally {
-			stack.pop();
 		}
 	}
 
 	static String getDeviceInfoStringASCII(long cl_device_id, int param_name) {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			PointerBuffer pp = stack.mallocPointer(1);
 			checkCLError(clGetDeviceInfo(cl_device_id, param_name, (ByteBuffer)null, pp));
 			int bytes = (int)pp.get(0);
@@ -126,8 +122,6 @@ public final class CLUtil {
 			checkCLError(clGetDeviceInfo(cl_device_id, param_name, buffer, null));
 
 			return memASCII(buffer, bytes - 1);
-		} finally {
-			stack.pop();
 		}
 	}
 

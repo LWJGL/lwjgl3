@@ -172,8 +172,7 @@ class Demo {
 		nvgFontFace(vg, "sans-bold");
 		nvgTextAlign(vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
 
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			ByteBuffer titleText = stack.ASCII(title);
 
 			nvgFontBlur(vg, 2);
@@ -183,8 +182,6 @@ class Demo {
 			nvgFontBlur(vg, 0);
 			nvgFillColor(vg, rgba(220, 220, 220, 160, colorA));
 			nvgText(vg, x + w / 2, y + 16, titleText, NULL);
-		} finally {
-			stack.pop();
 		}
 
 		nvgRestore(vg);
@@ -356,8 +353,7 @@ class Demo {
 		nvgStrokeColor(vg, rgba(0, 0, 0, 48, colorA));
 		nvgStroke(vg);
 
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			ByteBuffer textEncoded = stack.ASCII(text);
 
 			nvgFontSize(vg, 20.0f);
@@ -385,8 +381,6 @@ class Demo {
 			nvgText(vg, x + w * 0.5f - tw * 0.5f + iw * 0.25f, y + h * 0.5f - 1, textEncoded, NULL);
 			nvgFillColor(vg, rgba(255, 255, 255, 160, colorA));
 			nvgText(vg, x + w * 0.5f - tw * 0.5f + iw * 0.25f, y + h * 0.5f, textEncoded, NULL);
-		} finally {
-			stack.pop();
 		}
 	}
 
@@ -636,8 +630,7 @@ class Demo {
 
 		dv = 1.0f / (float)(nimages - 1);
 
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer
 				imgw = stack.mallocInt(1),
 				imgh = stack.mallocInt(1);
@@ -687,8 +680,6 @@ class Demo {
 				nvgStrokeColor(vg, rgba(255, 255, 255, 192, colorA));
 				nvgStroke(vg);
 			}
-		} finally {
-			stack.pop();
 		}
 		nvgRestore(vg);
 
@@ -1377,8 +1368,7 @@ class Demo {
 
 		glEndQuery(GL_TIME_ELAPSED);
 
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer available = stack.ints(1);
 			while ( available.get(0) != 0 && timer.ret <= timer.cur ) {
 				// check for results if there are any
@@ -1393,8 +1383,6 @@ class Demo {
 					}
 				}
 			}
-		} finally {
-			stack.pop();
 		}
 		return n;
 	}

@@ -100,9 +100,7 @@ public final class CL {
 						if ( clGetPlatformIDs == NULL )
 							throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 
-						MemoryStack stack = stackPush();
-
-						try {
+						try ( MemoryStack stack = stackPush() ) {
 							IntBuffer pi = stack.ints(0);
 							callIPPI(clGetPlatformIDs, 0, NULL, memAddress(pi));
 
@@ -117,8 +115,6 @@ public final class CL {
 									platform = cl_platform_id;
 							} else if ( clGetExtensionFunctionAddress == NULL )
 								throw new IllegalStateException();
-						} finally {
-							stack.pop();
 						}
 					}
 					this.platform = platform;
@@ -234,8 +230,7 @@ public final class CL {
 			int num_devices;
 			long[] devices;
 
-			MemoryStack stack = stackPush();
-			try {
+			try ( MemoryStack stack = stackPush() ) {
 				IntBuffer pi = stack.mallocInt(1);
 
 				int errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, memAddress(pi));
@@ -255,8 +250,6 @@ public final class CL {
 				devices = new long[num_devices];
 				for ( int i = 0; i < num_devices; i++ )
 					devices[i] = pp.get(i);
-			} finally {
-				stack.pop();
 			}
 
 			// Add device extensions to the set

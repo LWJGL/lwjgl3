@@ -1952,15 +1952,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 	customMethod("""
 	private static long getMemObjectInfoPointer(long cl_mem, int param_name) {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			PointerBuffer pp = stack.pointers(0);
 			int errcode = clGetMemObjectInfo(cl_mem, param_name, pp, null);
 			if ( DEBUG )
 				CLUtil.checkCLError(errcode);
 			return pp.get(0);
-		} finally {
-			stack.pop();
 		}
 	}
 	""")

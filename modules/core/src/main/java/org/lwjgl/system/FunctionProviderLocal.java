@@ -13,11 +13,8 @@ public interface FunctionProviderLocal extends FunctionProvider {
 
 	/** {@link CharSequence} version of {@link #getFunctionAddress(long, ByteBuffer)}. */
 	default long getFunctionAddress(long handle, CharSequence functionName) {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			return getFunctionAddress(handle, stack.ASCII(functionName));
-		} finally {
-			stack.pop();
 		}
 	}
 

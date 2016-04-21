@@ -327,8 +327,7 @@ public final class GL {
 			int majorVersion;
 			int minorVersion;
 
-			MemoryStack stack = stackPush();
-			try {
+			try ( MemoryStack stack = stackPush() ) {
 				IntBuffer version = stack.ints(0);
 
 				// Try the 3.0+ version query first
@@ -348,8 +347,6 @@ public final class GL {
 					majorVersion = apiVersion.major;
 					minorVersion = apiVersion.minor;
 				}
-			} finally {
-				stackPop();
 			}
 
 			if ( majorVersion < 1 || (majorVersion == 1 && minorVersion < 1) )
@@ -387,8 +384,7 @@ public final class GL {
 					supportedExtensions.add(tokenizer.nextToken());
 			} else {
 				// Use indexed EXTENSIONS
-				stack.push();
-				try {
+				try ( MemoryStack stack = stackPush() ) {
 					IntBuffer pi = stack.ints(0);
 
 					callIPV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
@@ -418,8 +414,6 @@ public final class GL {
 								forwardCompatible = !supportedExtensions.contains("GL_ARB_compatibility");
 						}
 					}
-				} finally {
-					stack.pop();
 				}
 			}
 
@@ -435,12 +429,10 @@ public final class GL {
 		if ( hdc != NULL )
 			return createCapabilitiesWGL(hdc);
 
-		MemoryStack stack = stackPush();
-
 		short classAtom = 0;
 		long hwnd = NULL;
 		long hglrc = NULL;
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			WNDCLASSEX wc = WNDCLASSEX.callocStack(stack)
 				.cbSize(WNDCLASSEX.SIZEOF)
 				.style(CS_HREDRAW | CS_VREDRAW)
@@ -491,8 +483,6 @@ public final class GL {
 
 			if ( classAtom != 0 )
 				nUnregisterClass(classAtom & 0xFFFF, WindowsLibrary.HINSTANCE);
-
-			stack.pop();
 		}
 	}
 
@@ -560,8 +550,7 @@ public final class GL {
 		int majorVersion;
 		int minorVersion;
 
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer piMajor = stack.ints(0);
 			IntBuffer piMinor = stack.ints(0);
 
@@ -572,8 +561,6 @@ public final class GL {
 			minorVersion = piMinor.get(1);
 			if ( majorVersion != 1 )
 				throw new OpenGLException("Invalid GLX major version: " + majorVersion);
-		} finally {
-			stack.pop();
 		}
 
 		Set<String> supportedExtensions = new HashSet<>(32);

@@ -91,8 +91,7 @@ public class Gears extends AbstractGears {
 					break;
 				case GLFW_KEY_F:
 					if ( glfwGetWindowMonitor(windowHnd) == NULL ) {
-						MemoryStack s = stackPush();
-						try {
+						try ( MemoryStack s = stackPush() ) {
 							IntBuffer a = s.ints(0);
 							IntBuffer b = s.ints(0);
 							glfwGetWindowPos(windowHnd, a, b);
@@ -102,8 +101,6 @@ public class Gears extends AbstractGears {
 							glfwGetWindowSize(windowHnd, a, b);
 							width = a.get(0);
 							height = b.get(0);
-						} finally {
-							s.pop();
 						}
 						glfwSetWindowMonitor(windowHnd, monitor, 0, 0, vidmode.width(), vidmode.height(), vidmode.refreshRate());
 						glfwSwapInterval(1);

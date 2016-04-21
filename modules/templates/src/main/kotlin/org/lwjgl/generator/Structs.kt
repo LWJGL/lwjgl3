@@ -452,8 +452,7 @@ $indentation}"""
 			if ( nativeLayout ) {
 				print("""
 	static {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer offsets = stack.mallocInt(${memberCount + 1});
 			SIZEOF = offsets(memAddress(offsets));
 
@@ -461,8 +460,6 @@ $indentation}"""
 				generateOffsetInit(members, indentation = "\t\t\t")
 				println("""
 			ALIGNOF = offsets.get($memberCount);
-		} finally {
-			stack.pop();
 		}""")
 			} else {
 				print("""
@@ -482,13 +479,10 @@ $indentation}"""
 		} else {
 			print("""
 	static {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer offsets = stack.mallocInt(1);
 			SIZEOF = offsets(memAddress(offsets));
 			ALIGNOF = offsets.get(0);
-		} finally {
-			stack.pop();
 		}
 	}""")
 		}

@@ -13,11 +13,8 @@ public interface FunctionProvider {
 
 	/** {@link CharSequence} version of {@link #getFunctionAddress(ByteBuffer)}. */
 	default long getFunctionAddress(CharSequence functionName) {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			return getFunctionAddress(stack.ASCII(functionName));
-		} finally {
-			stack.pop();
 		}
 	}
 

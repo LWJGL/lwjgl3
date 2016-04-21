@@ -23,13 +23,10 @@ public class WindowsLibrary extends SharedLibrary.Default {
 	public static final long HINSTANCE;
 
 	static {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			HINSTANCE = GetModuleHandle(stack.UTF16(Library.JNI_LIBRARY_NAME));
 			if ( HINSTANCE == NULL )
 				throw new RuntimeException("Failed to retrieve LWJGL module handle.");
-		} finally {
-			stack.pop();
 		}
 	}
 
@@ -43,11 +40,8 @@ public class WindowsLibrary extends SharedLibrary.Default {
 	}
 
 	private static long loadLibrary(String name) {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			return LoadLibrary(stack.UTF16(name));
-		} finally {
-			stack.pop();
 		}
 	}
 

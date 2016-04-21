@@ -35,35 +35,33 @@ public class AbstractGears {
 		System.err.println("GL_RENDERER: " + glGetString(GL_RENDERER));
 		System.err.println("GL_VERSION: " + glGetString(GL_VERSION));
 
-		MemoryStack s = stackPush();
+		try ( MemoryStack s = stackPush() ) {
+			// setup ogl
+			glLightfv(GL_LIGHT0, GL_POSITION, s.floats(5.0f, 5.0f, 10.0f, 0.0f));
+			glEnable(GL_CULL_FACE);
+			glEnable(GL_LIGHTING);
+			glEnable(GL_LIGHT0);
+			glEnable(GL_DEPTH_TEST);
 
-		// setup ogl
-		glLightfv(GL_LIGHT0, GL_POSITION, s.floats(5.0f, 5.0f, 10.0f, 0.0f));
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_LIGHTING);
-		glEnable(GL_LIGHT0);
-		glEnable(GL_DEPTH_TEST);
+			// make the gears
+			gear1 = glGenLists(1);
+			glNewList(gear1, GL_COMPILE);
+			glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s.floats(0.8f, 0.1f, 0.0f, 1.0f));
+			gear(1.0f, 4.0f, 1.0f, 20, 0.7f);
+			glEndList();
 
-		/* make the gears */
-		gear1 = glGenLists(1);
-		glNewList(gear1, GL_COMPILE);
-		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s.floats(0.8f, 0.1f, 0.0f, 1.0f));
-		gear(1.0f, 4.0f, 1.0f, 20, 0.7f);
-		glEndList();
+			gear2 = glGenLists(1);
+			glNewList(gear2, GL_COMPILE);
+			glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s.floats(0.0f, 0.8f, 0.2f, 1.0f));
+			gear(0.5f, 2.0f, 2.0f, 10, 0.7f);
+			glEndList();
 
-		gear2 = glGenLists(1);
-		glNewList(gear2, GL_COMPILE);
-		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s.floats(0.0f, 0.8f, 0.2f, 1.0f));
-		gear(0.5f, 2.0f, 2.0f, 10, 0.7f);
-		glEndList();
-
-		gear3 = glGenLists(1);
-		glNewList(gear3, GL_COMPILE);
-		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s.floats(0.2f, 0.2f, 1.0f, 1.0f));
-		gear(1.3f, 2.0f, 0.5f, 10, 0.7f);
-		glEndList();
-
-		s.pop();
+			gear3 = glGenLists(1);
+			glNewList(gear3, GL_COMPILE);
+			glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s.floats(0.2f, 0.2f, 1.0f, 1.0f));
+			gear(1.3f, 2.0f, 0.5f, 10, 0.7f);
+			glEndList();
+		}
 
 		glEnable(GL_NORMALIZE);
 

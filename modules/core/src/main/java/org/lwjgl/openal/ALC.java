@@ -172,8 +172,7 @@ public final class ALC {
 		int majorVersion;
 		int minorVersion;
 
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer version = stack.mallocInt(1);
 
 			invokePIIPV(GetIntegerv, device, ALC_MAJOR_VERSION, 1, memAddress(version));
@@ -181,8 +180,6 @@ public final class ALC {
 
 			invokePIIPV(GetIntegerv, device, ALC_MINOR_VERSION, 1, memAddress(version));
 			minorVersion = version.get(0);
-		} finally {
-			stack.pop();
 		}
 
 		int[][] ALC_VERSIONS = {
@@ -205,12 +202,9 @@ public final class ALC {
 		StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 		while ( tokenizer.hasMoreTokens() ) {
 			String extName = tokenizer.nextToken();
-			stack.push();
-			try {
+			try ( MemoryStack stack = stackPush() ) {
 				if ( invokePPZ(IsExtensionPresent, device, memAddress(stack.ASCII(extName, true))) )
 					supportedExtensions.add(extName);
-			} finally {
-				stack.pop();
 			}
 		}
 

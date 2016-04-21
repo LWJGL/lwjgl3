@@ -104,8 +104,7 @@ public final class CLGLInteropDemo {
 
 		List<Long> platforms;
 
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer pi = stack.mallocInt(1);
 			checkCLError(clGetPlatformIDs(null, pi));
 			if ( pi.get(0) == 0 )
@@ -122,8 +121,6 @@ public final class CLGLInteropDemo {
 				if ( caps.cl_khr_gl_sharing || caps.cl_APPLE_gl_sharing )
 					platforms.add(platform);
 			}
-		} finally {
-			stack.pop();
 		}
 
 		if ( platforms.isEmpty() )
@@ -266,10 +263,8 @@ public final class CLGLInteropDemo {
 	}
 
 	private static List<Long> getDevices(long platform, int deviceType) {
-		MemoryStack stack = stackPush();
-
 		List<Long> devices;
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer pi = stack.mallocInt(1);
 			int errcode = clGetDeviceIDs(platform, deviceType, null, pi);
 			if ( errcode == CL_DEVICE_NOT_FOUND )
@@ -285,8 +280,6 @@ public final class CLGLInteropDemo {
 				for ( int i = 0; i < deviceIDs.capacity(); i++ )
 					devices.add(deviceIDs.get(i));
 			}
-		} finally {
-			stack.pop();
 		}
 
 		return devices;

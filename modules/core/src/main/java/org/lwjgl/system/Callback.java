@@ -223,8 +223,7 @@ final class CallbackNative {
 
 	static {
 		// Setup native callbacks
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			Class<?>[] params = new Class<?>[] { long.class };
 
 			Method[] methods = new Method[] {
@@ -254,8 +253,6 @@ final class CallbackNative {
 			PTR = callbacks.get();
 		} catch (Exception e) {
 			throw new IllegalStateException("Failed to initialize native callbacks.", e);
-		} finally {
-			stack.pop();
 		}
 	}
 

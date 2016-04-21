@@ -27,11 +27,8 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 	}
 
 	private static long loadLibrary(String name) {
-		MemoryStack stack = stackPush();
-		try {
+		try ( MemoryStack stack = stackPush() ) {
 			return dlopen(stack.ASCII(name), RTLD_LAZY | RTLD_GLOBAL);
-		} finally {
-			stack.pop();
 		}
 	}
 

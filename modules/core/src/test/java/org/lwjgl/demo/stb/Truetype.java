@@ -98,39 +98,37 @@ public final class Truetype extends FontDemo {
 	}
 
 	private void renderText(STBTTBakedChar.Buffer cdata, int BITMAP_W, int BITMAP_H) {
-		MemoryStack stack = stackPush();
+		try ( MemoryStack stack = stackPush() ) {
+			FloatBuffer x = stack.floats(0.0f);
+			FloatBuffer y = stack.floats(0.0f);
 
-		FloatBuffer x = stack.floats(0.0f);
-		FloatBuffer y = stack.floats(0.0f);
+			STBTTAlignedQuad q = STBTTAlignedQuad.mallocStack(stack);
 
-		STBTTAlignedQuad q = STBTTAlignedQuad.mallocStack(stack);
+			glBegin(GL_QUADS);
+			for ( int i = 0; i < text.length(); i++ ) {
+				char c = text.charAt(i);
+				if ( c == '\n' ) {
+					y.put(0, y.get(0) + getFontHeight());
+					x.put(0, 0.0f);
+					continue;
+				} else if ( c < 32 || 128 <= c )
+					continue;
+				stbtt_GetBakedQuad(cdata, BITMAP_W, BITMAP_H, c - 32, x, y, q, 1);
 
-		glBegin(GL_QUADS);
-		for ( int i = 0; i < text.length(); i++ ) {
-			char c = text.charAt(i);
-			if ( c == '\n' ) {
-				y.put(0, y.get(0) + getFontHeight());
-				x.put(0, 0.0f);
-				continue;
-			} else if ( c < 32 || 128 <= c )
-				continue;
-			stbtt_GetBakedQuad(cdata, BITMAP_W, BITMAP_H, c - 32, x, y, q, 1);
+				glTexCoord2f(q.s0(), q.t0());
+				glVertex2f(q.x0(), q.y0());
 
-			glTexCoord2f(q.s0(), q.t0());
-			glVertex2f(q.x0(), q.y0());
+				glTexCoord2f(q.s1(), q.t0());
+				glVertex2f(q.x1(), q.y0());
 
-			glTexCoord2f(q.s1(), q.t0());
-			glVertex2f(q.x1(), q.y0());
+				glTexCoord2f(q.s1(), q.t1());
+				glVertex2f(q.x1(), q.y1());
 
-			glTexCoord2f(q.s1(), q.t1());
-			glVertex2f(q.x1(), q.y1());
-
-			glTexCoord2f(q.s0(), q.t1());
-			glVertex2f(q.x0(), q.y1());
+				glTexCoord2f(q.s0(), q.t1());
+				glVertex2f(q.x0(), q.y1());
+			}
+			glEnd();
 		}
-		glEnd();
-
-		stack.pop();
 	}
 
 }

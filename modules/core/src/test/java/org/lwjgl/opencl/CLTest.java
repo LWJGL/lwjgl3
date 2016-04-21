@@ -46,8 +46,7 @@ public class CLTest {
 		try {
 			CL.create();
 
-			MemoryStack stack = stackPush();
-			try {
+			try ( MemoryStack stack = stackPush() ) {
 				IntBuffer pi = stack.mallocInt(1);
 				checkCLError(clGetPlatformIDs(null, pi));
 				assertNotEquals(pi.get(0), 0);
@@ -61,8 +60,6 @@ public class CLTest {
 					checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, null, pi));
 					assertNotEquals(pi.get(0), 0);
 				}
-			} finally {
-				stack.pop();
 			}
 		} finally {
 			CL.destroy();
@@ -82,8 +79,7 @@ public class CLTest {
 
 			CL.create();
 
-			MemoryStack stack = stackPush();
-			try {
+			try ( MemoryStack stack = stackPush() ) {
 				IntBuffer pi = stack.mallocInt(1);
 				checkCLError(clGetPlatformIDs(null, pi));
 
@@ -108,8 +104,6 @@ public class CLTest {
 						test.test(platform, ctxProps, devices.get(j));
 					}
 				}
-			} finally {
-				stack.pop();
 			}
 		} finally {
 			CL.destroy();

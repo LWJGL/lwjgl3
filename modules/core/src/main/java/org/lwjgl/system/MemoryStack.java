@@ -25,7 +25,7 @@ import static org.lwjgl.system.ThreadLocalUtil.*;
  * @see Configuration#STACK_SIZE
  * @see Configuration#DEBUG_STACK
  */
-public class MemoryStack {
+public class MemoryStack implements AutoCloseable {
 
 	private static final int DEFAULT_STACK_SIZE   = Configuration.STACK_SIZE.get(32) * 1024;
 	private static final int DEFAULT_STACK_FRAMES = 8;
@@ -109,6 +109,17 @@ public class MemoryStack {
 	public MemoryStack pop() {
 		pointer = frames[--frameIndex];
 		return this;
+	}
+
+	/**
+	 * Calls {@link #pop} on this {@link MemoryStack}.
+	 *
+	 * <p>This method should not be used directly. It is called automatically when the {@code MemoryStack} is used as a resource in a try-with-resources
+	 * statement.</p>
+	 */
+	@Override
+	public void close() {
+		pop();
 	}
 
 	/** Stores the method that pushed a frame and checks if it is the same method when the frame is popped. */
