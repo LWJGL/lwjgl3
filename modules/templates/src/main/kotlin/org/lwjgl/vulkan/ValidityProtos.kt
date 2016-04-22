@@ -478,7 +478,8 @@ val vkCmdClearColorImage =
 			is executed on a {@code VkDevice}
 			""",
 			"{@code imageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
-			"The image range of any given element of {@code pRanges} $must be a image subresource range that is contained within {@code image}"
+			"The image range of any given element of {@code pRanges} $must be a image subresource range that is contained within {@code image}",
+			"{@code image} $mustnot have a compressed or depth/stencil format"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -505,7 +506,8 @@ val vkCmdClearDepthStencilImage =
 			is executed on a {@code VkDevice}
 			""",
 			"{@code imageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
-			"The image range of any given element of {@code pRanges} $must be a image subresource range that is contained within {@code image}"
+			"The image range of any given element of {@code pRanges} $must be a image subresource range that is contained within {@code image}",
+			"{@code image} $must have a depth/stencil format"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -684,10 +686,10 @@ val vkCmdCopyQueryPoolResults =
 			"{@code dstOffset} $must be less than the size of {@code dstBuffer}",
 			"{@code firstQuery} $must be less than the number of queries in {@code queryPool}",
 			"The sum of {@code firstQuery} and {@code queryCount} $must be less than or equal to the number of queries in {@code queryPool}",
-			"If #QUERY_RESULT_64_BIT is not set in {@code flags} then {@code dstOffset} and {@code stride} must be multiples of 4",
-			"If #QUERY_RESULT_64_BIT is set in {@code flags} then {@code dstOffset} and {@code stride} must be multiples of 8",
+			"If #QUERY_RESULT_64_BIT is not set in {@code flags} then {@code dstOffset} and {@code stride} $must be multiples of 4",
+			"If #QUERY_RESULT_64_BIT is set in {@code flags} then {@code dstOffset} and {@code stride} $must be multiples of 8",
 			"{@code dstBuffer} $must have enough storage, from {@code dstOffset}, to contain the result of each query, as described here",
-			"{@code dstBuffer} $must have been created with {@code VK_BUFFER_USAGE_TRANSFER_DST_BIT} usage flag",
+			"{@code dstBuffer} $must have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag",
 			"If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} $mustnot contain #QUERY_RESULT_PARTIAL_BIT"
 		)}
 
@@ -1309,7 +1311,7 @@ val vkCmdPipelineBarrier =
 			""",
 			"""
 			If the tessellation shaders feature is not enabled, {@code dstStageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
-			{@code VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT}
+			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			""",
 			"""
 			If #CmdPipelineBarrier() is called within a render pass instance, the render pass $must declare at least one self-dependency from the current
@@ -3064,8 +3066,8 @@ val vkGetQueryPoolResults =
 			"{@code queryPool} $must have been created, allocated or retrieved from {@code device}",
 			"Each of {@code device} and {@code queryPool} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
 			"{@code firstQuery} $must be less than the number of queries in {@code queryPool}",
-			"If #QUERY_RESULT_64_BIT is not set in {@code flags} then {@code pData} and {@code stride} must be multiples of 4",
-			"If #QUERY_RESULT_64_BIT is set in {@code flags} then {@code pData} and {@code stride} must be multiples of 8",
+			"If #QUERY_RESULT_64_BIT is not set in {@code flags} then {@code pData} and {@code stride} $must be multiples of 4",
+			"If #QUERY_RESULT_64_BIT is set in {@code flags} then {@code pData} and {@code stride} $must be multiples of 8",
 			"The sum of {@code firstQuery} and {@code queryCount} $must be less than or equal to the number of queries in {@code queryPool}",
 			"{@code dataSize} $must be large enough to contain the result of each query, as described here",
 			"If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} $mustnot contain #QUERY_RESULT_PARTIAL_BIT"

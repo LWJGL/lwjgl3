@@ -1824,7 +1824,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			"pPhysicalDeviceCount",
 			"a pointer to an integer related to the number of physical devices available or queried"
 		),
-		nullable..VkPhysicalDevice.p.OUT("pPhysicalDevices", "either $NULL or a pointer to an array of {@code VkPhysicalDevice} structures")
+		nullable..VkPhysicalDevice.p.OUT("pPhysicalDevices", "either $NULL or a pointer to an array of {@code VkPhysicalDevice} handles")
 	)
 
 	void(

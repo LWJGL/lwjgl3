@@ -528,7 +528,7 @@ val VkImageFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkImageFormatPropertie
 	uint32_t.member("maxArrayLayers", "the maximum number of array layers")
 	VkSampleCountFlags.member("sampleCounts", "a bitmask of {@code VkSampleCountFlagBits} specifying all the supported sample counts for this image")
 		.flagLinks("SAMPLE_COUNT")
-	VkDeviceSize.member("maxResourceSize", "the maximum total image size in bytes, inclusive of all image subresources")
+	VkDeviceSize.member("maxResourceSize", "an upper bound on the total image size in bytes, inclusive of all image subresources")
 }
 
 val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mutable = false) {
@@ -2996,7 +2996,7 @@ val VkClearAttachment_p = struct_p(VULKAN_PACKAGE, "VkClearAttachment") {
 		${ValidityStructs.VkClearAttachment}
 		"""
 
-	VkImageAspectFlags.member("aspectMask", "a mask selecting the color, depth and/or stencil aspects of the attachment to be cleared")
+	VkImageAspectFlags.member("aspectMask", "a bitmask selecting the color, depth and/or stencil aspects of the attachment to be cleared")
 		.flagLinks("IMAGE_ASPECT")
 	uint32_t.member(
 		"colorAttachment",
@@ -3061,11 +3061,11 @@ val VkMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkMemoryBarrier") {
 	pNext()
 	VkAccessFlags.member(
 		"srcAccessMask",
-		"a mask of the classes of memory accesses performed by the first set of commands that will participate in the dependency"
+		"a bitmask of the classes of memory accesses performed by the first set of commands that will participate in the dependency"
 	).flagLinks("ACCESS")
 	VkAccessFlags.member(
 		"dstAccessMask",
-		"a mask of the classes of memory accesses performed by the second set of commands that will participate in the dependency"
+		"a bitmask of the classes of memory accesses performed by the second set of commands that will participate in the dependency"
 	)
 }
 
@@ -3086,11 +3086,11 @@ val VkBufferMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkBufferMemoryBarrier") 
 	pNext()
 	VkAccessFlags.member(
 		"srcAccessMask",
-		"a mask of the classes of memory accesses performed by the first set of commands that will participate in the dependency"
+		"a bitmask of the classes of memory accesses performed by the first set of commands that will participate in the dependency"
 	).flagLinks("ACCESS")
 	VkAccessFlags.member(
 		"dstAccessMask",
-		"a mask of the classes of memory accesses performed by the second set of commands that will participate in the dependency"
+		"a bitmask of the classes of memory accesses performed by the second set of commands that will participate in the dependency"
 	)
 	uint32_t.member(
 		"srcQueueFamilyIndex",
@@ -3128,11 +3128,11 @@ val VkImageMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 	pNext()
 	VkAccessFlags.member(
 		"srcAccessMask",
-		"a mask of the classes of memory accesses performed by the first set of commands that will participate in the dependency"
+		"a bitmask of the classes of memory accesses performed by the first set of commands that will participate in the dependency"
 	).flagLinks("ACCESS")
 	VkAccessFlags.member(
 		"dstAccessMask",
-		"a mask of the classes of memory accesses performed by the second set of commands that will participate in the dependency"
+		"a bitmask of the classes of memory accesses performed by the second set of commands that will participate in the dependency"
 	)
 	VkImageLayout.member("oldLayout", "describes the current layout of the image subresource(s)").links("IMAGE_LAYOUT_\\w+")
 	VkImageLayout.member("newLayout", "describes the new layout of the image subresource(s)")

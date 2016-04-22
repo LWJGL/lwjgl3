@@ -502,8 +502,8 @@ val VkDisplayModeCreateInfoKHR =
 			"{@code sType} $must be #STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR",
 			"{@code pNext} $must be $NULL",
 			"{@code flags} $must be 0",
-			"The {@code width} and {@code height} members of the {@code visibleRegion} member of {@code parameters} must be greater than 0",
-			"The {@code refreshRate} member of {@code parameters} must be greater than 0"
+			"The {@code width} and {@code height} members of the {@code visibleRegion} member of {@code parameters} $must be greater than 0",
+			"The {@code refreshRate} member of {@code parameters} $must be greater than 0"
 		)}"""
 
 val VkDisplayModePropertiesKHR =
@@ -574,7 +574,7 @@ val VkDisplaySurfaceCreateInfoKHR =
 			#GetDisplayPlaneCapabilitiesKHR() for the display plane corresponding to {@code displayMode}
 			""",
 			"""
-			The {@code width} and {@code height} members of {@code imageExtent} must be less than the {@code maxImageDimensions2D} member of
+			The {@code width} and {@code height} members of {@code imageExtent} $must be less than the {@code maxImageDimensions2D} member of
 			{@code VkPhysicalDeviceLimits}
 			"""
 		)}"""
@@ -1011,31 +1011,31 @@ val VkImageCreateInfo =
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, {@code samples} $must be a bit value that is set in
-			##VkPhysicalDeviceLimits{@code ::maxFramebufferColorSamples}
+			##VkPhysicalDeviceLimits{@code ::framebufferColorSampleCounts}
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and {@code format} includes a depth aspect, {@code samples} $must be a bit
-			value that is set in ##VkPhysicalDeviceLimits{@code ::maxFramebufferDepthSamples}
+			value that is set in ##VkPhysicalDeviceLimits{@code ::framebufferDepthSampleCounts}
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and {@code format} includes a stencil aspect, {@code samples} $must be a bit
-			value that is set in ##VkPhysicalDeviceLimits{@code ::maxFramebufferStencilSamples}
+			value that is set in ##VkPhysicalDeviceLimits{@code ::framebufferStencilSampleCounts}
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_SAMPLED_BIT, and {@code format} includes a color aspect, {@code samples} $must be a bit value that is set in
-			##VkPhysicalDeviceLimits{@code ::maxSampledImageColorSamples}
+			##VkPhysicalDeviceLimits{@code ::sampledImageColorSampleCounts}
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_SAMPLED_BIT, and {@code format} includes a depth aspect, {@code samples} $must be a bit value that is set in
-			##VkPhysicalDeviceLimits{@code ::maxSampledImageDepthSamples}
+			##VkPhysicalDeviceLimits{@code ::sampledImageDepthSampleCounts}
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_SAMPLED_BIT, and {@code format} is an integer format, {@code samples} $must be a bit value that is set in
-			##VkPhysicalDeviceLimits{@code ::maxSampledImageIntegerSamples}
+			##VkPhysicalDeviceLimits{@code ::sampledImageIntegerSampleCounts}
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_STORAGE_BIT, {@code samples} $must be a bit value that is set in
-			##VkPhysicalDeviceLimits{@code ::maxStorageImageSamples}
+			##VkPhysicalDeviceLimits{@code ::storageImageSampleCounts}
 			""",
 			"""
 			If the ETC2 texture compression feature is not enabled, {@code format} $mustnot be #FORMAT_ETC2_R8G8B8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8_SRGB_BLOCK,
@@ -1439,20 +1439,20 @@ val VkPipelineColorBlendAttachmentState =
 			"{@code alphaBlendOp} $must be a valid {@code VkBlendOp} value",
 			"{@code colorWriteMask} $must be a valid combination of {@code VkColorComponentFlagBits} values",
 			"""
-			If the dual source blending feature is not enabled, {@code srcColorBlendFactor} $mustnot be #BLEND_SRC1_COLOR, #BLEND_ONE_MINUS_SRC1_COLOR,
-			#BLEND_SRC1_ALPHA, or #BLEND_ONE_MINUS_SRC1_ALPHA
+			If the dual source blending feature is not enabled, {@code srcColorBlendFactor} $mustnot be #BLEND_FACTOR_SRC1_COLOR,
+			#BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, #BLEND_FACTOR_SRC1_ALPHA, or #BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
 			""",
 			"""
-			If the dual source blending feature is not enabled, {@code dstColorBlendFactor} $mustnot be #BLEND_SRC1_COLOR, #BLEND_ONE_MINUS_SRC1_COLOR,
-			#BLEND_SRC1_ALPHA, or #BLEND_ONE_MINUS_SRC1_ALPHA
+			If the dual source blending feature is not enabled, {@code dstColorBlendFactor} $mustnot be #BLEND_FACTOR_SRC1_COLOR,
+			#BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, #BLEND_FACTOR_SRC1_ALPHA, or #BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
 			""",
 			"""
-			If the dual source blending feature is not enabled, {@code srcAlphaBlendFactor} $mustnot be #BLEND_SRC1_COLOR, #BLEND_ONE_MINUS_SRC1_COLOR,
-			#BLEND_SRC1_ALPHA, or #BLEND_ONE_MINUS_SRC1_ALPHA
+			If the dual source blending feature is not enabled, {@code srcAlphaBlendFactor} $mustnot be #BLEND_FACTOR_SRC1_COLOR,
+			#BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, #BLEND_FACTOR_SRC1_ALPHA, or #BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
 			""",
 			"""
-			If the dual source blending feature is not enabled, {@code dstAlphaBlendFactor} $mustnot be #BLEND_SRC1_COLOR, #BLEND_ONE_MINUS_SRC1_COLOR,
-			#BLEND_SRC1_ALPHA, or #BLEND_ONE_MINUS_SRC1_ALPHA
+			If the dual source blending feature is not enabled, {@code dstAlphaBlendFactor} $mustnot be #BLEND_FACTOR_SRC1_COLOR,
+			#BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, #BLEND_FACTOR_SRC1_ALPHA, or #BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
 			"""
 		)}"""
 
@@ -1705,13 +1705,12 @@ val VkPresentInfoKHR =
 			"{@code sType} $must be #STRUCTURE_TYPE_PRESENT_INFO_KHR",
 			"{@code pNext} $must be $NULL",
 			"""
-			If {@code pWaitSemaphores} is not $NULL, {@code pWaitSemaphores} $must be a pointer to an array of {@code waitSemaphoreCount} valid
-			{@code VkSemaphore} handles
+			If {@code waitSemaphoreCount} is not 0, and {@code pWaitSemaphores} is not $NULL, {@code pWaitSemaphores} $must be a pointer to an array of
+			{@code waitSemaphoreCount} valid {@code VkSemaphore} handles
 			""",
 			"{@code pSwapchains} $must be a pointer to an array of {@code swapchainCount} valid {@code VkSwapchainKHR} handles",
 			"{@code pImageIndices} $must be a pointer to an array of {@code swapchainCount} {@code uint32_t} values",
 			"If {@code pResults} is not $NULL, {@code pResults} $must be a pointer to an array of {@code swapchainCount} {@code VkResult} values",
-			"{@code waitSemaphoreCount} $must be greater than 0",
 			"{@code swapchainCount} $must be greater than 0",
 			"""
 			Each of the elements of {@code pSwapchains} and the elements of {@code pWaitSemaphores} that are valid handles $must have been created, allocated
@@ -1962,7 +1961,7 @@ val VkSpecializationInfo =
 			""",
 			"If {@code dataSize} is not 0, {@code pData} $must be a pointer to an array of {@code dataSize} bytes",
 			"The {@code offset} member of any given element of {@code pMapEntries} $must be less than {@code dataSize}",
-			"For any given element of {@code pMapEntries}, {@code size} must be less than or equal to {@code dataSize} minus {@code offset}"
+			"For any given element of {@code pMapEntries}, {@code size} $must be less than or equal to {@code dataSize} minus {@code offset}"
 		)}"""
 
 val VkStencilOpState =
@@ -2115,7 +2114,7 @@ val VkSubpassDescription =
 			""",
 			"The {@code attachment} member of any element of {@code pPreserveAttachments} $mustnot be #ATTACHMENT_UNUSED",
 			"Any given element of {@code pPreserveAttachments} $mustnot also be an element of any other member of the subpass description",
-			"If any attachment is used as both an input attachment and a color or depth/stencil attachment, then each use must use the same {@code layout}"
+			"If any attachment is used as both an input attachment and a color or depth/stencil attachment, then each use $must use the same {@code layout}"
 		)}"""
 
 val VkSurfaceCapabilitiesKHR =
