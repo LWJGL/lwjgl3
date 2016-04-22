@@ -9,6 +9,7 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.system.MemoryStack.*;
 
 /** A provider of native function addresses. */
+@FunctionalInterface
 public interface FunctionProvider {
 
 	/** {@link CharSequence} version of {@link #getFunctionAddress(ByteBuffer)}. */
@@ -26,8 +27,5 @@ public interface FunctionProvider {
 	 * @return the function address or 0L if the function is not supported
 	 */
 	long getFunctionAddress(ByteBuffer functionName);
-
-	/** Releases any resource held by this {@link FunctionProvider}. */
-	void free();
 
 }

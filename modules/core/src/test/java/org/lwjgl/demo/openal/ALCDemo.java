@@ -74,9 +74,6 @@ public final class ALCDemo {
 	}
 
 	private static void testPlayback() {
-		STBVorbisInfo info = STBVorbisInfo.malloc();
-		ShortBuffer pcm = readVorbis("demo/footsteps.ogg", 32 * 1024, info);
-
 		// generate buffers and sources
 		int buffer = alGenBuffers();
 		checkALError();
@@ -84,11 +81,13 @@ public final class ALCDemo {
 		int source = alGenSources();
 		checkALError();
 
-		//copy to buffer
-		alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.sample_rate());
-		checkALError();
+		try ( STBVorbisInfo info = STBVorbisInfo.malloc() ) {
+			ShortBuffer pcm = readVorbis("demo/footsteps.ogg", 32 * 1024, info);
 
-		info.free();
+			//copy to buffer
+			alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.sample_rate());
+			checkALError();
+		}
 
 		//set up source input
 		alSourcei(source, AL_BUFFER, buffer);

@@ -78,9 +78,6 @@ public final class AL {
 					apiLog("Failed to locate address for AL function " + memASCII(functionName));
 				return address;
 			}
-
-			@Override
-			public void free() {}
 		};
 	}
 
@@ -90,7 +87,6 @@ public final class AL {
 
 		setCurrentProcess(null);
 
-		functionProvider.free();
 		functionProvider = null;
 	}
 

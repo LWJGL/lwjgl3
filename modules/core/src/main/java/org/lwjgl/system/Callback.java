@@ -17,7 +17,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *
  * <p>Callback instances use native resources and must be explicitly freed when no longer used by calling the {@link #free} method.</p>
  */
-public abstract class Callback extends Pointer.Default {
+public abstract class Callback extends Pointer.Default implements NativeResource {
 
 	private static final long
 		VOID,
@@ -69,7 +69,7 @@ public abstract class Callback extends Pointer.Default {
 		super(address);
 	}
 
-	/** Frees any resources held by this callback instance. */
+	@Override
 	public void free() {
 		Callback.free(address());
 	}

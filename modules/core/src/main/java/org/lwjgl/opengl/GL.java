@@ -116,34 +116,34 @@ public final class GL {
 		create(Library.loadNative(libName));
 	}
 
-	private static void create(SharedLibrary OPENGL) {
-		abstract class FunctionProviderGL implements FunctionProvider {
-			abstract long getExtensionAddress(long name);
+	private abstract static class SharedLibraryGL extends SharedLibrary.Delegate {
 
-			@Override
-			public long getFunctionAddress(ByteBuffer functionName) {
-				long address = getExtensionAddress(memAddress(functionName));
-				if ( address == NULL ) {
-					address = OPENGL.getFunctionAddress(functionName);
-					if ( address == NULL && DEBUG_FUNCTIONS )
-						apiLog("Failed to locate address for GL function " + memASCII(functionName));
-				}
+		SharedLibraryGL(SharedLibrary library) {
+			super(library);
+		}
+		abstract long getExtensionAddress(long name);
 
-				return address;
+		@Override
+		public long getFunctionAddress(ByteBuffer functionName) {
+			long address = getExtensionAddress(memAddress(functionName));
+			if ( address == NULL ) {
+				address = library.getFunctionAddress(functionName);
+				if ( address == NULL && DEBUG_FUNCTIONS )
+					apiLog("Failed to locate address for GL function " + memASCII(functionName));
 			}
 
-			@Override
-			public void free() {
-				OPENGL.free();
-			}
+			return address;
 		}
 
+	}
+
+	private static void create(SharedLibrary OPENGL) {
 		FunctionProvider functionProvider;
 		try {
 			switch ( Platform.get() ) {
 				case WINDOWS:
-					functionProvider = new FunctionProviderGL() {
-						private final long wglGetProcAddress = OPENGL.getFunctionAddress("wglGetProcAddress");
+					functionProvider = new SharedLibraryGL(OPENGL) {
+						private final long wglGetProcAddress = library.getFunctionAddress("wglGetProcAddress");
 
 						@Override
 						long getExtensionAddress(long name) {
@@ -152,13 +152,13 @@ public final class GL {
 					};
 					break;
 				case LINUX:
-					functionProvider = new FunctionProviderGL() {
+					functionProvider = new SharedLibraryGL(OPENGL) {
 						private final long glXGetProcAddress;
 
 						{
-							long GetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddress");
+							long GetProcAddress = library.getFunctionAddress("glXGetProcAddress");
 							if ( GetProcAddress == NULL )
-								GetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddressARB");
+								GetProcAddress = library.getFunctionAddress("glXGetProcAddressARB");
 
 							glXGetProcAddress = GetProcAddress;
 						}
@@ -170,7 +170,7 @@ public final class GL {
 					};
 					break;
 				case MACOSX:
-					functionProvider = new FunctionProviderGL() {
+					functionProvider = new SharedLibraryGL(OPENGL) {
 						@Override
 						long getExtensionAddress(long name) {
 							return NULL;
@@ -207,7 +207,8 @@ public final class GL {
 		capabilitiesWGL = null;
 		capabilitiesGLX = null;
 
-		functionProvider.free();
+		if ( functionProvider instanceof NativeResource )
+			((NativeResource)functionProvider).free();
 		functionProvider = null;
 	}
 

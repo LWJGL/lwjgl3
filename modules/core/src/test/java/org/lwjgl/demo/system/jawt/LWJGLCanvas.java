@@ -108,18 +108,17 @@ public class LWJGLCanvas extends Canvas {
 	private void createContext(JAWTWin32DrawingSurfaceInfo dsi_win) {
 		long hdc = dsi_win.hdc();
 
-		PIXELFORMATDESCRIPTOR pfd = PIXELFORMATDESCRIPTOR.calloc();
-
-		pfd.nSize((byte)PIXELFORMATDESCRIPTOR.SIZEOF);
-		pfd.nVersion((short)1);
-		pfd.dwFlags(PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER);
-		pfd.iPixelType(PFD_TYPE_RGBA);
-		pfd.cColorBits((byte)32);
-		pfd.cAlphaBits((byte)8);
-		pfd.cDepthBits((byte)24);
-		pfd.iLayerType(PFD_MAIN_PLANE);
-
-		try {
+		try (
+			PIXELFORMATDESCRIPTOR pfd = PIXELFORMATDESCRIPTOR.calloc()
+				.nSize((byte)PIXELFORMATDESCRIPTOR.SIZEOF)
+				.nVersion((short)1)
+				.dwFlags(PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER)
+				.iPixelType(PFD_TYPE_RGBA)
+				.cColorBits((byte)32)
+				.cAlphaBits((byte)8)
+				.cDepthBits((byte)24)
+				.iLayerType(PFD_MAIN_PLANE)
+		) {
 			int pixelFormat = GetPixelFormat(hdc);
 			if ( pixelFormat != 0 ) {
 				if ( DescribePixelFormat(hdc, pixelFormat, pfd) == 0 )
@@ -132,19 +131,17 @@ public class LWJGLCanvas extends Canvas {
 				if ( !SetPixelFormat(hdc, pixelFormat, null) )
 					throw new IllegalStateException("SetPixelFormat() failed: " + WinBase.getLastError());
 			}
-
-			hglrc = wglCreateContext(hdc);
-
-			if ( hglrc == NULL )
-				throw new IllegalStateException("wglCreateContext() failed");
-
-			if ( !wglMakeCurrent(hdc, hglrc) )
-				throw new IllegalStateException("wglMakeCurrent() failed");
-
-			caps = GL.createCapabilities();
-		} finally {
-			pfd.free();
 		}
+
+		hglrc = wglCreateContext(hdc);
+
+		if ( hglrc == NULL )
+			throw new IllegalStateException("wglCreateContext() failed");
+
+		if ( !wglMakeCurrent(hdc, hglrc) )
+			throw new IllegalStateException("wglMakeCurrent() failed");
+
+		caps = GL.createCapabilities();
 	}
 
 	public void destroy() {

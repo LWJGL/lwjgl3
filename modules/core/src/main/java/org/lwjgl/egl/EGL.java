@@ -78,12 +78,11 @@ public final class EGL {
 
 	private static void create(SharedLibrary EGL) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider() {
-				private final long eglGetProcAddress = EGL.getFunctionAddress("eglGetProcAddress");
+			create((FunctionProvider)new SharedLibrary.Delegate(EGL) {
+				private final long eglGetProcAddress = library.getFunctionAddress("eglGetProcAddress");
 
 				{
 					if ( eglGetProcAddress == NULL ) {
-						EGL.free();
 						throw new EGLException("A core EGL function is missing. Make sure that EGL is available.");
 					}
 				}
@@ -92,20 +91,14 @@ public final class EGL {
 				public long getFunctionAddress(ByteBuffer functionName) {
 					long address = invokePP(eglGetProcAddress, memAddress(functionName));
 					if ( address == NULL ) {
-						address = EGL.getFunctionAddress(functionName);
+						address = library.getFunctionAddress(functionName);
 						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
 							apiLog("Failed to locate address for EGL function " + memASCII(functionName));
 					}
 
 					return address;
 				}
-
-				@Override
-				public void free() {
-					EGL.free();
-				}
-			};
-			create(functionProvider);
+			});
 		} catch (RuntimeException e) {
 			EGL.free();
 			throw e;
@@ -133,7 +126,8 @@ public final class EGL {
 
 		caps = null;
 
-		functionProvider.free();
+		if ( functionProvider instanceof NativeResource )
+			((NativeResource)functionProvider).free();
 		functionProvider = null;
 	}
 

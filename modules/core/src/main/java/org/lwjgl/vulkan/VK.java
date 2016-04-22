@@ -76,34 +76,26 @@ public final class VK {
 
 	private static void create(SharedLibrary VULKAN) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider() {
-				private final long GetInstanceProcAddr = VULKAN.getFunctionAddress("vkGetInstanceProcAddr");
+			create((FunctionProvider)new SharedLibrary.Delegate(VULKAN) {
+				private final long GetInstanceProcAddr = library.getFunctionAddress("vkGetInstanceProcAddr");
 
 				{
-					if ( GetInstanceProcAddr == NULL ) {
-						VULKAN.free();
+					if ( GetInstanceProcAddr == NULL )
 						throw new IllegalStateException("A core Vulkan function is missing. Make sure that Vulkan is available.");
-					}
 				}
 
 				@Override
 				public long getFunctionAddress(ByteBuffer functionName) {
 					long address = callPPP(GetInstanceProcAddr, NULL, memAddress(functionName));
 					if ( address == NULL ) {
-						address = VULKAN.getFunctionAddress(functionName);
+						address = library.getFunctionAddress(functionName);
 						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
 							apiLog("Failed to locate address for VK function " + memASCII(functionName));
 					}
 
 					return address;
 				}
-
-				@Override
-				public void free() {
-					VULKAN.free();
-				}
-			};
-			create(functionProvider);
+			});
 		} catch (RuntimeException e) {
 			VULKAN.free();
 			throw e;
@@ -133,7 +125,8 @@ public final class VK {
 		if ( functionProvider == null )
 			return;
 
-		functionProvider.free();
+		if ( functionProvider instanceof NativeResource )
+			((NativeResource)functionProvider).free();
 		functionProvider = null;
 		globalCommands = null;
 	}

@@ -75,12 +75,11 @@ public final class Events {
 
 			ByteBuffer pixels = stbi_load_from_memory(png, w, h, comp, 0);
 
-			GLFWImage img = GLFWImage.malloc().set(w.get(0), h.get(0), pixels);
+			try ( GLFWImage img = GLFWImage.malloc().set(w.get(0), h.get(0), pixels) ) {
+				cursor = glfwCreateCursor(img, 0, 8);
+				glfwSetCursor(window, cursor);
+			}
 
-			cursor = glfwCreateCursor(img, 0, 8);
-			glfwSetCursor(window, cursor);
-
-			img.free();
 			stbi_image_free(pixels);
 		}
 
@@ -95,28 +94,27 @@ public final class Events {
 				throw new RuntimeException(e);
 			}
 
-			GLFWImage.Buffer icons = GLFWImage.malloc(2);
+			try ( GLFWImage.Buffer icons = GLFWImage.malloc(2) ) {
+				ByteBuffer pixels16 = stbi_load_from_memory(icon16, w, h, comp, 4);
+				icons
+					.position(0)
+					.width(w.get(0))
+					.height(h.get(0))
+					.pixels(pixels16);
 
-			ByteBuffer pixels16 = stbi_load_from_memory(icon16, w, h, comp, 4);
-			icons
-				.position(0)
-				.width(w.get(0))
-				.height(h.get(0))
-				.pixels(pixels16);
+				ByteBuffer pixels32 = stbi_load_from_memory(icon32, w, h, comp, 4);
+				icons
+					.position(1)
+					.width(w.get(0))
+					.height(h.get(0))
+					.pixels(pixels32);
 
-			ByteBuffer pixels32 = stbi_load_from_memory(icon32, w, h, comp, 4);
-			icons
-				.position(1)
-				.width(w.get(0))
-				.height(h.get(0))
-				.pixels(pixels32);
+				icons.position(0);
+				glfwSetWindowIcon(window, icons);
 
-			icons.position(0);
-			glfwSetWindowIcon(window, icons);
-
-			stbi_image_free(pixels32);
-			stbi_image_free(pixels16);
-			icons.free();
+				stbi_image_free(pixels32);
+				stbi_image_free(pixels16);
+			}
 		}
 
 		memFree(comp);

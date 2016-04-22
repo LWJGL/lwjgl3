@@ -96,12 +96,11 @@ public final class TruetypeOversample {
 		font_tex = glGenTextures();
 		chardata = STBTTPackedchar.malloc(6 * 128);
 
-		try {
+		try ( STBTTPackContext pc = STBTTPackContext.malloc() ) {
 			ByteBuffer ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 160 * 1024);
 
 			ByteBuffer bitmap = BufferUtils.createByteBuffer(BITMAP_W * BITMAP_H);
 
-			STBTTPackContext pc = STBTTPackContext.malloc();
 			stbtt_PackBegin(pc, bitmap, BITMAP_W, BITMAP_H, 0, 1, null);
 			for ( int i = 0; i < 2; i++ ) {
 				int p = (i * 3 + 0) * 128 + 32;
@@ -124,7 +123,6 @@ public final class TruetypeOversample {
 			}
 			chardata.clear();
 			stbtt_PackEnd(pc);
-			pc.free();
 
 			glBindTexture(GL_TEXTURE_2D, font_tex);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, BITMAP_W, BITMAP_H, 0, GL_ALPHA, GL_UNSIGNED_BYTE, bitmap);

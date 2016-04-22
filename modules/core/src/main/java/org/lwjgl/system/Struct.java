@@ -12,7 +12,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Base class of all struct implementations. */
-public abstract class Struct extends Pointer.Default {
+public abstract class Struct extends Pointer.Default implements NativeResource {
 
 	static {
 		Library.initialize();
@@ -38,6 +38,7 @@ public abstract class Struct extends Pointer.Default {
 	 *
 	 * <p>This method should not be used if the memory backing this struct is not owned by the struct.</p>
 	 */
+	@Override
 	public void free() {
 		nmemFree(address());
 	}

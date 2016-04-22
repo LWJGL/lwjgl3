@@ -134,19 +134,16 @@ public final class CLDemo {
 					}), NULL);
 					checkCLError(errcode);
 
-					CLBufferRegion buffer_region = CLBufferRegion.malloc();
-					buffer_region.origin(0);
-					buffer_region.size(64);
+					try ( CLBufferRegion buffer_region = CLBufferRegion.malloc() ) {
+						buffer_region.origin(0);
+						buffer_region.size(64);
 
-					try {
 						subbuffer = nclCreateSubBuffer(buffer,
 						                               CL_MEM_READ_ONLY,
 						                               CL_BUFFER_CREATE_TYPE_REGION,
 						                               buffer_region.address(),
 						                               memAddress(errcode_ret));
 						checkCLError(errcode_ret);
-					} finally {
-						buffer_region.free();
 					}
 
 					errcode = clSetMemObjectDestructorCallback(subbuffer, subbufferCB = CLMemObjectDestructorCallback.create((memobj, user_data) -> {

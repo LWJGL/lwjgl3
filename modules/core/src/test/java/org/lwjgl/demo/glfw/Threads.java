@@ -63,7 +63,7 @@ public final class Threads {
 			glfwWaitEvents();
 
 			for ( int i = 0; i < titles.length; i++ ) {
-				if ( !glfwWindowShouldClose(threads[i].window) ) {
+				if ( glfwWindowShouldClose(threads[i].window) ) {
 					quit.countDown();
 					break out;
 				}

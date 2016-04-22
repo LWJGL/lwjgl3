@@ -67,6 +67,34 @@ public final class ALC {
 		create(Configuration.OPENAL_LIBRARY_NAME.get(Pointer.BITS64 ? libName : libName + "32"));
 	}
 
+	private static class SharedLibraryAL extends SharedLibrary.Delegate implements FunctionProviderLocal {
+
+		private final long alcGetProcAddress = getFunctionAddress("alcGetProcAddress");
+
+		protected SharedLibraryAL(SharedLibrary library) {
+			super(library);
+			if ( alcGetProcAddress == NULL )
+				throw new RuntimeException("A core ALC function is missing. Make sure that the OpenAL library has been loaded correctly.");
+		}
+
+		@Override
+		public long getFunctionAddress(ByteBuffer functionName) {
+			long address = library.getFunctionAddress(functionName);
+			if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+				apiLog("Failed to locate address for ALC core function " + memASCII(functionName));
+			return address;
+		}
+
+		@Override
+		public long getFunctionAddress(long handle, ByteBuffer functionName) {
+			long address = invokePPP(alcGetProcAddress, handle, memAddress(functionName));
+			if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+				apiLog("Failed to locate address for ALC extension function " + memASCII(functionName));
+			return address;
+		}
+
+	}
+
 	/**
 	 * Loads the OpenAL native library, using the specified library name.
 	 *
@@ -74,41 +102,8 @@ public final class ALC {
 	 */
 	public static void create(String libName) {
 		SharedLibrary OPENAL = Library.loadNative(libName);
-
 		try {
-			FunctionProviderLocal functionProvider = new FunctionProviderLocal() {
-
-				private final long alcGetProcAddress = getFunctionAddress("alcGetProcAddress");
-
-				{
-					if ( alcGetProcAddress == NULL ) {
-						OPENAL.free();
-						throw new RuntimeException("A core ALC function is missing. Make sure that the OpenAL library has been loaded correctly.");
-					}
-				}
-
-				@Override
-				public long getFunctionAddress(ByteBuffer functionName) {
-					long address = OPENAL.getFunctionAddress(functionName);
-					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-						apiLog("Failed to locate address for ALC core function " + memASCII(functionName));
-					return address;
-				}
-
-				@Override
-				public long getFunctionAddress(long handle, ByteBuffer functionName) {
-					long address = invokePPP(alcGetProcAddress, handle, memAddress(functionName));
-					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-						apiLog("Failed to locate address for ALC extension function " + memASCII(functionName));
-					return address;
-				}
-
-				@Override
-				public void free() {
-					OPENAL.free();
-				}
-			};
-			create(functionProvider);
+			create(new SharedLibraryAL(OPENAL));
 		} catch (RuntimeException e) {
 			OPENAL.free();
 			throw e;
@@ -140,7 +135,8 @@ public final class ALC {
 
 		icd = null;
 
-		functionProvider.free();
+		if ( functionProvider instanceof NativeResource )
+			((NativeResource)functionProvider).free();
 		functionProvider = null;
 	}
 

@@ -105,25 +105,19 @@ public final class GLES {
 
 	private static void create(SharedLibrary GLES) {
 		try {
-			FunctionProvider functionProvider = new FunctionProvider() {
+			create((FunctionProvider)new SharedLibrary.Delegate(GLES) {
 				@Override
 				public long getFunctionAddress(ByteBuffer functionName) {
 					long address = EGL.getFunctionProvider().getFunctionAddress(functionName);
 					if ( address == NULL ) {
-						address = GLES.getFunctionAddress(functionName);
+						address = library.getFunctionAddress(functionName);
 						if ( address == NULL && DEBUG_FUNCTIONS )
 							apiLog("Failed to locate address for GLES function " + functionName);
 					}
 
 					return address;
 				}
-
-				@Override
-				public void free() {
-					GLES.free();
-				}
-			};
-			create(functionProvider);
+			});
 		} catch (RuntimeException e) {
 			GLES.free();
 			throw e;
@@ -146,7 +140,8 @@ public final class GLES {
 		if ( functionProvider == null )
 			return;
 
-		functionProvider.free();
+		if ( functionProvider instanceof NativeResource )
+			((NativeResource)functionProvider).free();
 		functionProvider = null;
 	}
 

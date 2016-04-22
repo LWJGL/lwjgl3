@@ -87,7 +87,7 @@ public final class MultipleWindows {
 				glClear(GL_COLOR_BUFFER_BIT);
 				glfwSwapBuffers(window.handle);
 
-				if ( !glfwWindowShouldClose(window.handle) ) {
+				if ( glfwWindowShouldClose(window.handle) ) {
 					glfwFreeCallbacks(window.handle);
 					glfwDestroyWindow(window.handle);
 					windows[i] = null;

@@ -17,39 +17,38 @@ public final class HelloLibOVR {
 	}
 
 	public static void main(String[] args) {
-		OVRDetectResult detect = OVRDetectResult.calloc();
-		ovr_Detect(0, detect);
+		try ( OVRDetectResult detect = OVRDetectResult.calloc() ) {
+			ovr_Detect(0, detect);
 
-		System.out.println("OVRDetectResult.IsOculusHMDConnected = " + detect.IsOculusHMDConnected());
-		System.out.println("OVRDetectResult.IsOculusServiceRunning = " + detect.IsOculusServiceRunning());
+			System.out.println("OVRDetectResult.IsOculusHMDConnected = " + detect.IsOculusHMDConnected());
+			System.out.println("OVRDetectResult.IsOculusServiceRunning = " + detect.IsOculusServiceRunning());
+		}
 
-		detect.free();
-
-		OVRInitParams initParams = OVRInitParams.calloc()
-			.LogCallback((userData, level, message) -> System.out.println("LibOVR [" + level + "] " + memASCII(message)))
-			.Flags(ovrInit_Debug);
-
-		OVRLogCallback callback = initParams.LogCallback();
-
-		System.out.println("ovr_Initialize = " + ovr_Initialize(initParams));
-		initParams.free();
+		OVRLogCallback callback;
+		try (
+			OVRInitParams initParams = OVRInitParams.calloc()
+				.LogCallback((userData, level, message) -> System.out.println("LibOVR [" + level + "] " + memASCII(message)))
+				.Flags(ovrInit_Debug)
+		) {
+			callback = initParams.LogCallback();
+			System.out.println("ovr_Initialize = " + ovr_Initialize(initParams));
+		}
 
 		System.out.println("ovr_GetVersionString = " + ovr_GetVersionString());
 
-		PointerBuffer hmd_p = memAllocPointer(1);
-		OVRGraphicsLuid luid = OVRGraphicsLuid.calloc();
-		System.out.println("ovr_Create = " + ovr_Create(hmd_p, luid));
+		try (
+			OVRGraphicsLuid luid = OVRGraphicsLuid.calloc();
+			OVRHmdDesc desc = OVRHmdDesc.malloc();
+		) {
+			PointerBuffer hmd_p = memAllocPointer(1);
+			System.out.println("ovr_Create = " + ovr_Create(hmd_p, luid));
 
-		long hmd = hmd_p.get(0);
+			long hmd = hmd_p.get(0);
+			memFree(hmd_p);
 
-		OVRHmdDesc desc = OVRHmdDesc.malloc();
-		ovr_GetHmdDesc(hmd, desc);
-
-		System.out.println("ovr_GetHmdDesc = " + desc.ManufacturerString() + " " + desc.ProductNameString() + " " + desc.SerialNumberString());
-
-		desc.free();
-		luid.free();
-		memFree(hmd_p);
+			ovr_GetHmdDesc(hmd, desc);
+			System.out.println("ovr_GetHmdDesc = " + desc.ManufacturerString() + " " + desc.ProductNameString() + " " + desc.SerialNumberString());
+		}
 
 		ovr_Shutdown();
 

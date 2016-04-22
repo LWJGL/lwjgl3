@@ -134,13 +134,11 @@ public final class Vorbis {
 			if ( handle == NULL )
 				throw new RuntimeException("Failed to open Ogg Vorbis file. Error: " + error.get(0));
 
-			STBVorbisInfo info = STBVorbisInfo.malloc();
-
-			Decoder.getInfo(handle, info);
-			this.channels = info.channels();
-			this.sampleRate = info.sample_rate();
-
-			info.free();
+			try ( STBVorbisInfo info = STBVorbisInfo.malloc() ) {
+				Decoder.getInfo(handle, info);
+				this.channels = info.channels();
+				this.sampleRate = info.sample_rate();
+			}
 
 			this.format = getFormat(channels);
 

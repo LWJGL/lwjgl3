@@ -118,9 +118,7 @@ public final class HelloNFD {
 	}
 
 	private static void openMulti() {
-		NFDPathSet pathSet = NFDPathSet.calloc();
-
-		try {
+		try ( NFDPathSet pathSet = NFDPathSet.calloc() ) {
 			int result = NFD_OpenDialogMultiple("png,jpg;pdf", null, pathSet);
 			switch ( result ) {
 				case NFD_OKAY:
@@ -137,8 +135,6 @@ public final class HelloNFD {
 				default: // NFD_ERROR
 					System.err.format("Error: %s\n", NFD_GetError());
 			}
-		} finally {
-			pathSet.free();
 		}
 	}
 

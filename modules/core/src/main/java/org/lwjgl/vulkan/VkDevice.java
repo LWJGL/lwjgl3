@@ -5,9 +5,6 @@
 package org.lwjgl.vulkan;
 
 import org.lwjgl.system.Checks;
-import org.lwjgl.system.FunctionProvider;
-
-import java.nio.ByteBuffer;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
@@ -30,28 +27,19 @@ public class VkDevice extends DispatchableHandle {
 
 	private static VKCapabilities getDeviceCapabilities(long handle, VkPhysicalDevice physicalDevice, VkDeviceCreateInfo ci) {
 		int apiVersion = physicalDevice.getCapabilities().apiVersion;
-		return new VKCapabilities(
-			new FunctionProvider() {
-				@Override
-				public long getFunctionAddress(ByteBuffer functionName) {
-					VKCapabilities caps = physicalDevice.getCapabilities();
-					long address = GetDeviceProcAddr(caps.vkGetDeviceProcAddr, handle, memAddress(functionName));
-					if ( address == NULL ) {
-						address = GetInstanceProcAddr(caps.vkGetInstanceProcAddr, physicalDevice.getInstance().address(), memAddress(functionName));
-						if ( address == NULL ) {
-							address = VK.getFunctionProvider().getFunctionAddress(functionName);
-							if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-								apiLog("Failed to locate address for VK device function " + memASCII(functionName));
-						}
-					}
-
-					return address;
+		return new VKCapabilities(functionName -> {
+			VKCapabilities caps = physicalDevice.getCapabilities();
+			long address = GetDeviceProcAddr(caps.vkGetDeviceProcAddr, handle, memAddress(functionName));
+			if ( address == NULL ) {
+				address = GetInstanceProcAddr(caps.vkGetInstanceProcAddr, physicalDevice.getInstance().address(), memAddress(functionName));
+				if ( address == NULL ) {
+					address = VK.getFunctionProvider().getFunctionAddress(functionName);
+					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+						apiLog("Failed to locate address for VK device function " + memASCII(functionName));
 				}
-
-				@Override
-				public void free() {
-				}
-			}, apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()));
+			}
+			return address;
+		}, apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()));
 	}
 
 	static long GetDeviceProcAddr(long __functionAddress, long handle, long functionName) {

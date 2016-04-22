@@ -262,11 +262,10 @@ public final class EFXTest {
 		int source = alGenSources();
 		int buffer = alGenBuffers();
 
-		STBVorbisInfo info = STBVorbisInfo.malloc();
-		ShortBuffer pcm = ALCDemo.readVorbis("demo/footsteps.ogg", 32 * 1024, info);
-
-		alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.sample_rate());
-		info.free();
+		try ( STBVorbisInfo info = STBVorbisInfo.malloc() ) {
+			ShortBuffer pcm = ALCDemo.readVorbis("demo/footsteps.ogg", 32 * 1024, info);
+			alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.sample_rate());
+		}
 		alSourcei(source, AL_BUFFER, buffer);
 		alSourcei(source, AL_LOOPING, AL_TRUE);
 

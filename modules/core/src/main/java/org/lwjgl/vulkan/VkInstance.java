@@ -5,9 +5,6 @@
 package org.lwjgl.vulkan;
 
 import org.lwjgl.system.Checks;
-import org.lwjgl.system.FunctionProvider;
-
-import java.nio.ByteBuffer;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
@@ -37,29 +34,18 @@ public class VkInstance extends DispatchableHandle {
 			apiVersion = VK_MAKE_VERSION(1, 0, 0);
 		}
 
-		return new VKCapabilities(new FunctionProvider() {
-			private final long GetInstanceProcAddr = VK.getFunctionProvider().getFunctionAddress("vkGetInstanceProcAddr");
+		long GetInstanceProcAddr = VK.getFunctionProvider().getFunctionAddress("vkGetInstanceProcAddr");
+		if ( GetInstanceProcAddr == NULL )
+			throw new IllegalStateException("A core Vulkan function is missing. Make sure that Vulkan is available.");
 
-			{
-				if ( GetInstanceProcAddr == NULL )
-					throw new IllegalStateException("A core Vulkan function is missing. Make sure that Vulkan is available.");
+		return new VKCapabilities(functionName -> {
+			long address = GetInstanceProcAddr(GetInstanceProcAddr, handle, memAddress(functionName));
+			if ( address == NULL ) {
+				address = VK.getFunctionProvider().getFunctionAddress(functionName);
+				if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+					apiLog("Failed to locate address for VK instance function " + memASCII(functionName));
 			}
-
-			@Override
-			public long getFunctionAddress(ByteBuffer functionName) {
-				long address = GetInstanceProcAddr(GetInstanceProcAddr, handle, memAddress(functionName));
-				if ( address == NULL ) {
-					address = VK.getFunctionProvider().getFunctionAddress(functionName);
-					if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-						apiLog("Failed to locate address for VK instance function " + memASCII(functionName));
-				}
-
-				return address;
-			}
-
-			@Override
-			public void free() {
-			}
+			return address;
 		}, apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()));
 	}
 

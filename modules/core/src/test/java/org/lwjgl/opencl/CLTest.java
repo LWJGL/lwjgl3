@@ -318,16 +318,13 @@ public class CLTest {
 			checkCLError(errcode_ret);
 			assertNotNull(buffer);
 
-			CLBufferRegion bufferRegion = CLBufferRegion.malloc();
-			bufferRegion.origin(0);
-			bufferRegion.size(64);
-
 			long subbuffer;
-			try {
+			try ( CLBufferRegion bufferRegion = CLBufferRegion.malloc() ) {
+				bufferRegion.origin(0);
+				bufferRegion.size(64);
+
 				subbuffer = nclCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, bufferRegion.address(), memAddress(errcode_ret));
 				checkCLError(errcode_ret);
-			} finally {
-				bufferRegion.free();
 			}
 			assertNotNull(subbuffer);
 

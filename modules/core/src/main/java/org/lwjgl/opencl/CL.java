@@ -71,107 +71,103 @@ public final class CL {
 		create(Library.loadNative(libName));
 	}
 
-	private static void create(SharedLibrary OPENCL) {
-		try {
-			FunctionProviderLocal functionProvider = new FunctionProviderLocal() {
+	private static class SharedLibraryCL extends SharedLibrary.Delegate implements FunctionProviderLocal {
 
-				private final long clGetExtensionFunctionAddress;
-				private final long clGetExtensionFunctionAddressForPlatform;
+		private final long clGetExtensionFunctionAddress;
+		private final long clGetExtensionFunctionAddressForPlatform;
 
-				// NULL if multiple platforms are available.
-				private final long platform;
+		// NULL if multiple platforms are available.
+		private final long platform;
 
-				{
-					clGetExtensionFunctionAddress = OPENCL.getFunctionAddress("clGetExtensionFunctionAddress");
-					clGetExtensionFunctionAddressForPlatform = OPENCL.getFunctionAddress("clGetExtensionFunctionAddressForPlatform");
-					if ( clGetExtensionFunctionAddress == NULL && clGetExtensionFunctionAddressForPlatform == NULL ) {
-						OPENCL.free();
-						throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
-					}
+		SharedLibraryCL(SharedLibrary library) {
+			super(library);
+
+			clGetExtensionFunctionAddress = library.getFunctionAddress("clGetExtensionFunctionAddress");
+			clGetExtensionFunctionAddressForPlatform = library.getFunctionAddress("clGetExtensionFunctionAddressForPlatform");
+			if ( clGetExtensionFunctionAddress == NULL && clGetExtensionFunctionAddressForPlatform == NULL )
+				throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 
 					/*
 					We'll use clGetExtensionFunctionAddress, even if it has been deprecated, because clGetExtensionFunctionAddressForPlatform is pointless
 					when the ICD is used. clGetExtensionFunctionAddressForPlatform will be used only if there is just 1 platform available and that platform
 					supports OpenCL 1.2 or higher.
 					*/
-					long platform = NULL;
-					if ( clGetExtensionFunctionAddressForPlatform != NULL ) {
-						long clGetPlatformIDs = OPENCL.getFunctionAddress("clGetPlatformIDs");
-						if ( clGetPlatformIDs == NULL )
-							throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
+			long platform = NULL;
+			if ( clGetExtensionFunctionAddressForPlatform != NULL ) {
+				long clGetPlatformIDs = library.getFunctionAddress("clGetPlatformIDs");
+				if ( clGetPlatformIDs == NULL )
+					throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 
-						try ( MemoryStack stack = stackPush() ) {
-							IntBuffer pi = stack.ints(0);
-							callIPPI(clGetPlatformIDs, 0, NULL, memAddress(pi));
+				try ( MemoryStack stack = stackPush() ) {
+					IntBuffer pi = stack.ints(0);
+					callIPPI(clGetPlatformIDs, 0, NULL, memAddress(pi));
 
-							int platforms = pi.get(0);
+					int platforms = pi.get(0);
 
-							if ( platforms == 1 ) {
-								PointerBuffer pp = stack.pointers(0);
+					if ( platforms == 1 ) {
+						PointerBuffer pp = stack.pointers(0);
 
-								callIPPI(clGetPlatformIDs, 1, memAddress(pp), NULL);
-								long cl_platform_id = pp.get(0);
-								if ( supportsOpenCL12(stack, cl_platform_id) )
-									platform = cl_platform_id;
-							} else if ( clGetExtensionFunctionAddress == NULL )
-								throw new IllegalStateException();
-						}
-					}
-					this.platform = platform;
+						callIPPI(clGetPlatformIDs, 1, memAddress(pp), NULL);
+						long cl_platform_id = pp.get(0);
+						if ( supportsOpenCL12(stack, cl_platform_id) )
+							platform = cl_platform_id;
+					} else if ( clGetExtensionFunctionAddress == NULL )
+						throw new IllegalStateException();
 				}
+			}
+			this.platform = platform;
+		}
 
-				private boolean supportsOpenCL12(MemoryStack stack, long platform) {
-					long clGetPlatformInfo = OPENCL.getFunctionAddress("clGetPlatformInfo");
-					if ( clGetPlatformInfo == NULL )
-						return false;
+		private boolean supportsOpenCL12(MemoryStack stack, long platform) {
+			long clGetPlatformInfo = library.getFunctionAddress("clGetPlatformInfo");
+			if ( clGetPlatformInfo == NULL )
+				return false;
 
-					PointerBuffer pp = stack.mallocPointer(1);
+			PointerBuffer pp = stack.mallocPointer(1);
 
-					int errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, 0, NULL, memAddress(pp));
-					if ( errcode != CL_SUCCESS )
-						return false;
+			int errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, 0, NULL, memAddress(pp));
+			if ( errcode != CL_SUCCESS )
+				return false;
 
-					int bytes = (int)pp.get(0);
+			int bytes = (int)pp.get(0);
 
-					ByteBuffer version = stack.malloc(bytes);
+			ByteBuffer version = stack.malloc(bytes);
 
-					errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, bytes, memAddress(version), NULL);
-					if ( errcode != CL_SUCCESS )
-						return false;
+			errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, bytes, memAddress(version), NULL);
+			if ( errcode != CL_SUCCESS )
+				return false;
 
-					APIVersion apiVersion = apiParseVersion(memASCII(version, bytes - 1), "OpenCL");
-					return 1 < apiVersion.major || 2 <= apiVersion.minor;
-				}
+			APIVersion apiVersion = apiParseVersion(memASCII(version, bytes - 1), "OpenCL");
+			return 1 < apiVersion.major || 2 <= apiVersion.minor;
+		}
 
-				@Override
-				public long getFunctionAddress(ByteBuffer functionName) {
-					long nameEncoded = memAddress(functionName);
+		@Override
+		public long getFunctionAddress(ByteBuffer functionName) {
+			long nameEncoded = memAddress(functionName);
 
-					long address = platform == NULL
-						? callPP(clGetExtensionFunctionAddress, nameEncoded)
-						: callPPP(clGetExtensionFunctionAddressForPlatform, platform, nameEncoded);
+			long address = platform == NULL
+				? callPP(clGetExtensionFunctionAddress, nameEncoded)
+				: callPPP(clGetExtensionFunctionAddressForPlatform, platform, nameEncoded);
 
-					if ( address == NULL ) {
-						address = OPENCL.getFunctionAddress(functionName);
-						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-							apiLog("Failed to locate address for CL function " + memASCII(functionName));
-					}
+			if ( address == NULL ) {
+				address = library.getFunctionAddress(functionName);
+				if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+					apiLog("Failed to locate address for CL function " + memASCII(functionName));
+			}
 
-					return address;
-				}
+			return address;
+		}
 
-				@Override
-				public long getFunctionAddress(long handle, ByteBuffer functionName) {
-					long address = callPPP(clGetExtensionFunctionAddressForPlatform, handle, memAddress(functionName));
-					return address != NULL ? address : getFunctionAddress(functionName);
-				}
+		@Override
+		public long getFunctionAddress(long handle, ByteBuffer functionName) {
+			long address = callPPP(clGetExtensionFunctionAddressForPlatform, handle, memAddress(functionName));
+			return address != NULL ? address : getFunctionAddress(functionName);
+		}
+	}
 
-				@Override
-				public void free() {
-					OPENCL.free();
-				}
-			};
-			create(functionProvider);
+	private static void create(SharedLibrary OPENCL) {
+		try {
+			create((FunctionProviderLocal)new SharedLibraryCL(OPENCL));
 		} catch (RuntimeException e) {
 			OPENCL.free();
 			throw e;
@@ -197,7 +193,8 @@ public final class CL {
 		if ( functionProvider == null )
 			return;
 
-		functionProvider.free();
+		if ( functionProvider instanceof NativeResource )
+			((NativeResource)functionProvider).free();
 		functionProvider = null;
 		icd = null;
 	}
@@ -263,14 +260,8 @@ public final class CL {
 		APIVersion version = apiParseVersion(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION), "OpenCL");
 		CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
-		return new CLCapabilities(new FunctionProvider() {
-			@Override
-			public long getFunctionAddress(ByteBuffer functionName) {
-				return getFunctionProvider().getFunctionAddress(cl_platform_id, functionName);
-			}
-			@Override
-			public void free() {
-			}
+		return new CLCapabilities(functionName -> {
+			return getFunctionProvider().getFunctionAddress(cl_platform_id, functionName);
 		}, supportedExtensions);
 	}
 
