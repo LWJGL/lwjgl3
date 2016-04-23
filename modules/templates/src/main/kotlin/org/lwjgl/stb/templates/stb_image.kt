@@ -164,7 +164,7 @@ N=\#comp     components
 		""",
 
 		const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-		nullable..void_p.IN("user", "a pointer to user data"),
+		nullable..voidptr.IN("user", "a pointer to user data"),
 		Check(1)..AutoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
 		Check(1)..AutoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
 		Check(1)..AutoSizeResult..int_p.OUT("comp", "outputs number of components in image"),
@@ -199,7 +199,7 @@ N=\#comp     components
 		"Floating-point version of #load_from_callbacks().",
 
 		const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-		nullable..void_p.IN("user", "a pointer to user data"),
+		nullable..voidptr.IN("user", "a pointer to user data"),
 		Check(1)..AutoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
 		Check(1)..AutoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
 		Check(1)..AutoSizeResult..int_p.OUT("comp", "outputs number of components in image"),
@@ -256,7 +256,7 @@ N=\#comp     components
 		"Callback version of #is_hdr().",
 
 		const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-		nullable..void_p.IN("user", "a pointer to user data")
+		nullable..voidptr.IN("user", "a pointer to user data")
 	)
 
 	(const..charASCII_p)(
@@ -299,7 +299,7 @@ N=\#comp     components
 		"Callback version of #info().",
 
 		const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-		nullable..void_p.IN("user", "a pointer to user data"),
+		nullable..voidptr.IN("user", "a pointer to user data"),
 		Check(1)..int_p.OUT("x", "outputs the image width in pixels"),
 		Check(1)..int_p.OUT("y", "outputs the image height in pixels"),
 		Check(1)..int_p.OUT("comp", "outputs number of components in image")

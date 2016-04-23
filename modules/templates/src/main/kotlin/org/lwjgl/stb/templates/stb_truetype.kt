@@ -662,7 +662,7 @@ int main(int arg, char **argv)
 		"Frees a bitmap allocated by #GetCodepointBitmap(), #GetCodepointBitmapSubpixel(), #GetGlyphBitmap() or #GetGlyphBitmapSubpixel().",
 
 		unsigned_char_p.IN("bitmap", "the bitmap to free"),
-		void_p.IN("userdata", "a pointer to user data")
+		nullable..voidptr.IN("userdata", "a pointer to user data")
 	)
 
 	unsigned_char_p(
