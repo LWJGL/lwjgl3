@@ -17,6 +17,21 @@ fun config() {
 
 		The jemalloc documentation can be found <a href="http://www.canonware.com/download/jemalloc/jemalloc-latest/doc/jemalloc.html">here</a>. The jemalloc
 		<a href="https://github.com/jemalloc/jemalloc/wiki">wiki</a> also contains useful information.
+
+		The jemalloc shared library that comes with LWJGL is configured with:
+		${ul(
+			"--with-jemalloc-prefix=je_",
+			"--with-malloc-conf=purge:decay",
+			"--disable-stats",
+			"--disable-fill",
+			"--disable-zone-allocator (OSX-only)"
+		)}
+
+		The shared library may be replaced with a custom build that has more features enabled.
+
+		Dynamic configuration (for enabled features) is also possible, using either the {@code MALLOC_CONF} environment variable or the
+		<a href="http://www.canonware.com/download/jemalloc/jemalloc-latest/doc/jemalloc.html\#mallctl_namespace">MALLCTL NAMESPACE</a> and the
+		{@code mallctl*} functions.
 		"""
 	)
 }
