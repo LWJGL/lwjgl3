@@ -10,8 +10,8 @@ import org.lwjgl.system.macosx.ObjCRuntime;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.macosx.LibC.*;
 import static org.lwjgl.system.macosx.ObjCRuntime.*;
-import static org.lwjgl.system.macosx.Unistd.*;
 
 /**
  * Contains checks for the event loop issues on OS X.

@@ -7,13 +7,8 @@ package org.lwjgl.system.macosx.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.macosx.*
 
-val unistd = "Unistd".nativeClass(MACOSX_PACKAGE) {
-	nativeImport (
-		"MacOSXLWJGL.h",
-		"<unistd.h>"
-	)
-
-	documentation = "Native bindings to <unistd.h>."
+val libc = "LibC".nativeClass(MACOSX_PACKAGE, binding = libSystem.binding!!.delegate("LibSystem.getLibrary()")) {
+	documentation = "Native bindings to libc, the Standard C Library."
 
 	pid_t(
 		"getpid",

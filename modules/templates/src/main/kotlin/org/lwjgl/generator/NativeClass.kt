@@ -141,10 +141,6 @@ fun simpleBinding(
 	libraryExpression: String = "\"$libraryName\"",
 	callingConvention: CallingConvention = CallingConvention.DEFAULT
 ) = object : SimpleBinding(libraryName.toUpperCase(), callingConvention) {
-	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
-		writer.println("\t\tlong ${if ( function.returns.has(Address) ) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
-	}
-
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		val libraryReference = libraryName.toUpperCase()
 
@@ -169,8 +165,8 @@ fun APIBinding.delegate(
 	}
 }
 
-// TODO: Remove if KT-457 or KT-1183 are fixed.
-private fun APIBinding.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionSetup(nativeClass)
+// TODO: Remove if KT-7859 is fixed.
+private fun APIBinding.generateFunctionSetup(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionSetup(nativeClass)
 
 class NativeClass(
 	packageName: String,
@@ -295,7 +291,7 @@ class NativeClass(
 	private val customMethods = ArrayList<String>()
 
 	val hasBody: Boolean
-		get() = !constantBlocks.isEmpty() || hasNativeFunctions || customMethods.isNotEmpty()
+		get() = binding is SimpleBinding || !constantBlocks.isEmpty() || hasNativeFunctions || customMethods.isNotEmpty()
 
 	val hasNativeFunctions: Boolean
 		get() = _functions.isNotEmpty()
@@ -343,7 +339,7 @@ class NativeClass(
 		println("package $packageName;\n")
 
 		val hasFunctions = !_functions.isEmpty()
-		if ( hasFunctions ) {
+		if ( hasFunctions || binding is SimpleBinding ) {
 			// TODO: This is horrible. Refactor so that we build imports after code generation.
 			val hasBuffers = functions.any { it.returns.isBufferPointer || it.hasParam { it.isBufferPointer } }
 
@@ -380,12 +376,13 @@ class NativeClass(
 				}
 			}
 
-			if ( hasMemoryStack || functions.any { it.hasCustomJNI } )
+			if ( hasMemoryStack || (binding is SimpleBinding && !binding.libraryExpression.contains('.')) || functions.any { it.hasCustomJNI } )
 				println("import org.lwjgl.system.*;\n")
 
-			if ( binding is SimpleBinding )
+			if ( hasFunctions && binding is SimpleBinding )
 				println("import static org.lwjgl.system.APIUtil.*;")
-			println("import static org.lwjgl.system.Checks.*;")
+			if ( hasFunctions )
+				println("import static org.lwjgl.system.Checks.*;")
 			if ( binding != null && functions.any { !it.hasCustomJNI } )
 				println("import static org.lwjgl.system.JNI.*;")
 			if ( hasMemoryStack )
@@ -409,19 +406,19 @@ class NativeClass(
 			it.generate(this)
 		}
 
-		if ( hasFunctions ) {
+		if ( hasFunctions || binding is SimpleBinding ) {
 			if ( binding != null ) {
 				if ( functions.any { it.hasCustomJNI } )
 					println("\n\tstatic { Library.initialize(); }")
 
 				printCustomMethods(static = true)
 
-				if ( functions.any { !it.hasExplicitFunctionAddress } ) {
+				if ( binding is SimpleBinding || functions.any { !it.hasExplicitFunctionAddress } ) {
 					println("""
-	protected $className() {
+	${if ( hasFunctions ) "protected" else "private"} $className() {
 		throw new UnsupportedOperationException();
 	}""")
-					binding.generateFunctionGetters(this, this@NativeClass)
+					binding.generateFunctionSetup(this, this@NativeClass)
 				}
 			} else {
 				println("\n\tstatic { Library.initialize(); }")
