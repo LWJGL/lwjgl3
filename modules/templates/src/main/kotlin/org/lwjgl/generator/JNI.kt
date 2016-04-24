@@ -29,20 +29,32 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
 		print(HEADER)
 		println("package $packageName;\n")
 		print(
-"""/**
- * This class contains native methods that can be used to call dynamically loaded functions. It is used internally by the LWJGL bindings, but can also be used
- * to call other dynamically loaded functions. Not all possible signatures are available, only those needed by the LWJGL bindings. To call a function that does
- * not have a matching JNI method, {@link org.lwjgl.system.dyncall.DynCall DynCall} can used.
- *
- * <p>All JNI methods in this class take an extra parameter, called {@code __functionAddress}. This must be a valid pointer to a native function with a
- * matching signature. The C language does not support method overloading, so each method has a postfix that matches the
- * <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html#type_signatures">JNI type signature</a> it supports. Only the primitive
- * type signatures are used, plus a 'P' type that corresponds to a pointer value. Pointer values are mapped to Java longs, but are properly converted in native
- * code on 32bit architectures.</p>
- *
- * <p>Methods with the {@code invoke} prefix will invoke the native function with the default calling convention. Methods with the {@code call} prefix will
- * invoke the native function with the {@code __stdcall} calling convention on Windows and the default calling convention on other systems.</p>
- */
+			"""
+			This class contains native methods that can be used to call dynamically loaded functions. It is used internally by the LWJGL bindings, but can also
+			be used to call other dynamically loaded functions. Not all possible signatures are available, only those needed by the LWJGL bindings. To call a
+			function that does not have a matching JNI method, {@link org.lwjgl.system.dyncall.DynCall DynCall} can used.
+
+			All JNI methods in this class take an extra parameter, called {@code __functionAddress}. This must be a valid pointer to a native function with a
+			matching signature. Due to overloading, method names are partially mangled:
+			${ul(
+				"""
+				{@code call} or {@code invoke}
+
+				Methods with the {@code invoke} prefix will invoke the native function with the default calling convention. Methods with the {@code call}
+				prefix will invoke the native function with the {@code __stdcall} calling convention on Windows and the default calling convention on other
+				systems.
+				""",
+				"""
+				a {@code J} or a {@code P} for each {@code long} parameter
+
+				{@code J} parameters represent 64-bit integer values. {@code P} parameters represent pointer addresses. A pointer address is a 32-bit value on
+				32-bit architectures and a 64-bit value on 64-bit architectures.
+				""",
+				"the return value <a href=\"http://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html#type_signatures\">JNI type signature</a>"
+			)}
+			""".toJavaDoc(indentation = "")
+		)
+		print("""
 public final class JNI {
 
 	static {
