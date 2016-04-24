@@ -194,6 +194,104 @@ class NativeClass(
 	val functions: Iterable<NativeClassFunction>
 		get() = _functions.values
 
+	// same as above + array overloads
+	val genFunctions: List<NativeClassFunction> by lazy {
+		val list = ArrayList<NativeClassFunction>(_functions.values)
+
+		functions.forEach { func ->
+			val hasArrayOverloads = func.hasArrayOverloads
+
+			if (hasArrayOverloads) {
+				// assumes only 1 exists per method
+				val multiTypeParam = if (!hasArrayOverloads) null else func.parameters.firstOrNull { it has MultiType }
+
+				if (multiTypeParam == null || func.parameters.any { it.nativeType.mapping.isArray }) {
+					val overload = NativeClassFunction(
+						returns = func.returns,
+						simpleName = func.simpleName,
+						name = func.name,
+						//documentation = func.documentation,
+						documentation = { processDocumentation("Array version of: ${func.methodLink}").toJavaDoc() },
+						nativeClass = this@NativeClass,
+						parameters = *(func.parameters.asSequence().map {
+							if (it.nativeType.mapping.isArray)
+								Parameter(
+									ArrayType(it.nativeType as PointerType),
+									it.name,
+									it.paramType,
+									it.documentation,
+									"", LinkMode.SINGLE
+								).copyModifiers(it).removeArrayModifiers()
+							else
+								func[it.name].removeArrayModifiers()
+						}.toList().toTypedArray())
+					).copyModifiers(func)
+
+					if (!func.hasCustomJNI)
+						JNI.registerArray(overload)
+
+					list.add(overload)
+				}
+
+				if (multiTypeParam != null) {
+					val multiType = multiTypeParam[MultiType]
+					multiType.types.asSequence().filter { it !== PointerMapping.DATA_POINTER }.forEach { autoType ->
+						val params = func.parameters.asSequence().map {
+							if (it.nativeType.mapping.isArray)
+								Parameter(
+									ArrayType(it.nativeType as PointerType),
+									it.name,
+									it.paramType,
+									it.documentation,
+									"", LinkMode.SINGLE
+								).copyModifiers(it).removeArrayModifiers()
+							else if (it has MultiType)
+								Parameter(
+									ArrayType(it.nativeType as PointerType, autoType),
+									it.name,
+									it.paramType,
+									it.documentation,
+									"", LinkMode.SINGLE
+								).copyModifiers(it).removeArrayModifiers()
+							else
+								func[it.name].removeArrayModifiers()
+						}
+
+						val overload = NativeClassFunction(
+							returns = func.returns,
+							simpleName = func.simpleName,
+							name = func.name,
+							documentation = { processDocumentation("${autoType.primitive}[] version of: ${func.methodLink}").toJavaDoc() },
+							nativeClass = this@NativeClass,
+							parameters = *params.toList().toTypedArray()
+						).copyModifiers(func)
+						overload.parameters.asSequence().firstOrNull {
+							it has AutoSize && it[AutoSize].hasReference(multiTypeParam.name)
+						}.let {
+							if (it != null) {
+								val autoSize = it[AutoSize]
+								it.replaceModifier(AutoSizeShl(
+									autoType.byteShift!!,
+									autoSize.reference,
+									*autoSize.dependent,
+									applyTo = autoSize.applyTo
+								))
+
+							}
+						}
+
+						if (!func.hasCustomJNI)
+							JNI.registerArray(overload)
+
+						list.add(overload)
+					}
+				}
+			}
+		}
+
+		list
+	}
+
 	private val customMethods = ArrayList<String>()
 
 	val hasBody: Boolean
@@ -330,12 +428,13 @@ class NativeClass(
 			println("\n\tprivate $className() {}")
 		}
 
-		functions.forEach {
-			println("\n\t// --- [ ${it.name} ] ---")
+		genFunctions.forEach { func ->
+			if ( !func.hasParam { it.nativeType is ArrayType } )
+				println("\n\t// --- [ ${func.name} ] ---")
 			try {
-				it.generateMethods(this)
+				func.generateMethods(this)
 			} catch (e: Exception) {
-				throw RuntimeException("Uncaught exception while generating method: $className.${it.name}", e)
+				throw RuntimeException("Uncaught exception while generating method: $className.${func.name}", e)
 			}
 		}
 
@@ -360,7 +459,7 @@ class NativeClass(
 
 		println("\nEXTERN_C_ENTER")
 
-		functions.asSequence().filter { it.hasCustomJNI }.forEach {
+		genFunctions.asSequence().filter { it.hasCustomJNI }.forEach {
 			println()
 			it.generateFunction(this)
 		}

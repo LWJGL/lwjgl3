@@ -52,7 +52,7 @@ public class CLTest {
 				assertNotEquals(pi.get(0), 0);
 
 				PointerBuffer platforms = stack.mallocPointer(pi.get(0));
-				checkCLError(clGetPlatformIDs(platforms, null));
+				checkCLError(clGetPlatformIDs(platforms, (IntBuffer)null));
 
 				for ( int i = 0; i < platforms.capacity(); i++ ) {
 					long platform = platforms.get(0);
@@ -84,7 +84,7 @@ public class CLTest {
 				checkCLError(clGetPlatformIDs(null, pi));
 
 				PointerBuffer platforms = stack.mallocPointer(pi.get(0));
-				checkCLError(clGetPlatformIDs(platforms, null));
+				checkCLError(clGetPlatformIDs(platforms, (IntBuffer)null));
 
 				for ( int i = 0; i < platforms.capacity(); i++ ) {
 					long platform = platforms.get(0);
@@ -92,7 +92,7 @@ public class CLTest {
 					checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, null, pi));
 
 					PointerBuffer devices = stack.mallocPointer(pi.get(0));
-					checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, devices, null));
+					checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, devices, (IntBuffer)null));
 
 					PointerBuffer ctxProps = stack.mallocPointer(3);
 					ctxProps

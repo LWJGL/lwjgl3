@@ -171,6 +171,17 @@ class CallbackType(
 		get() = "${super.javaMethodType}I"
 }
 
+// Arrays (automatically used for array overloads)
+class ArrayType(
+	type: PointerType,
+	mapping: PointerMapping = type.mapping as PointerMapping
+): PointerType(
+	type.name,
+	mapping,
+	type.includesPointer,
+	type.elementType
+)
+
 // typedefs
 fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping as PrimitiveMapping)
 
@@ -201,17 +212,33 @@ open class TypeMapping(
 		val VOID = TypeMapping("void", Void.TYPE, Void.TYPE)
 	}
 
-	val jniSignature: String get() = when ( this.nativeMethodType ) {
+	val jniSignatureStrict: String get() = when ( this.nativeMethodType ) {
 		Boolean::class.java -> "Z"
 		Byte::class.java    -> "B"
 		Char::class.java    -> "C"
 		Double::class.java  -> "D"
 		Float::class.java   -> "F"
 		Int::class.java     -> "I"
-		Long::class.java    -> if ( this === PrimitiveMapping.LONG ) "J" else "P"
+		Long::class.java    -> "J"
 		Short::class.java   -> "S"
 		Void.TYPE           -> "V"
 		else                -> "L${this.nativeMethodType.name};"
+	}
+
+	val jniSignature: String get() = if ( this.nativeMethodType === Long::class.java && this !== PrimitiveMapping.LONG ) "P" else jniSignatureStrict
+
+	val jniSignatureJava: String get() = if ( this.nativeMethodType === Long::class.java )
+		if ( this === PrimitiveMapping.LONG ) "J" else "P"
+	else
+		""
+
+	val jniSignatureArray: String get() = when ( (this as PointerMapping).primitive ) {
+		"double" -> "_3D"
+		"float"  -> "_3F"
+		"int"    -> "_3I"
+		"long"   -> "_3J"
+		"short"  -> "_3S"
+		else     -> throw IllegalStateException()
 	}
 
 }
@@ -301,3 +328,6 @@ val NativeType.isPointerData: Boolean
 
 val TypeMapping.isPointerSize: Boolean
 	get() = this === PointerMapping.DATA_INT || this === PointerMapping.DATA_POINTER
+
+val TypeMapping.isArray: Boolean
+	get() = this is PointerMapping && this.isMultiByte && this !== PointerMapping.DATA_POINTER

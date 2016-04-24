@@ -111,7 +111,7 @@ public final class CLGLInteropDemo {
 				throw new IllegalStateException("No OpenCL platforms found.");
 
 			PointerBuffer platformIDs = stack.mallocPointer(pi.get(0));
-			checkCLError(clGetPlatformIDs(platformIDs, null));
+			checkCLError(clGetPlatformIDs(platformIDs, (IntBuffer)null));
 
 			platforms = new ArrayList<>(platformIDs.capacity());
 
@@ -273,7 +273,7 @@ public final class CLGLInteropDemo {
 				checkCLError(errcode);
 
 				PointerBuffer deviceIDs = stack.mallocPointer(pi.get(0));
-				checkCLError(clGetDeviceIDs(platform, deviceType, deviceIDs, null));
+				checkCLError(clGetDeviceIDs(platform, deviceType, deviceIDs, (IntBuffer)null));
 
 				devices = new ArrayList<>(deviceIDs.capacity());
 

@@ -48,6 +48,12 @@ fun AutoSizeShr(expression: String, reference: String, vararg dependent: String,
 		override fun expressionInv() = "<< $expression"
 	})
 
+fun AutoSizeShl(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
+	AutoSize(reference, *dependent, applyTo = applyTo, factor = object : AutoSizeFactor {
+		override fun expression() = "<< $expression"
+		override fun expressionInv() = ">> $expression"
+	})
+
 class AutoSize(
 	override val reference: String,
 	vararg val dependent: String,

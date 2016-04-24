@@ -171,10 +171,10 @@ public final class ALC {
 		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer version = stack.mallocInt(1);
 
-			invokePIIPV(GetIntegerv, device, ALC_MAJOR_VERSION, 1, memAddress(version));
+			invokePPV(GetIntegerv, device, ALC_MAJOR_VERSION, 1, memAddress(version));
 			majorVersion = version.get(0);
 
-			invokePIIPV(GetIntegerv, device, ALC_MINOR_VERSION, 1, memAddress(version));
+			invokePPV(GetIntegerv, device, ALC_MINOR_VERSION, 1, memAddress(version));
 			minorVersion = version.get(0);
 		}
 
@@ -193,7 +193,7 @@ public final class ALC {
 		}
 
 		// Parse EXTENSIONS string
-		String extensionsString = memUTF8(checkPointer(invokePIP(GetString, device, ALC_EXTENSIONS)));
+		String extensionsString = memUTF8(checkPointer(invokePP(GetString, device, ALC_EXTENSIONS)));
 
 		StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 		while ( tokenizer.hasMoreTokens() ) {

@@ -42,7 +42,7 @@ public final class CLDemo {
 			throw new RuntimeException("No OpenCL platforms found.");
 
 		PointerBuffer platforms = stack.mallocPointer(pi.get(0));
-		checkCLError(clGetPlatformIDs(platforms, null));
+		checkCLError(clGetPlatformIDs(platforms, (IntBuffer)null));
 
 		PointerBuffer ctxProps = stack.mallocPointer(3);
 		ctxProps
@@ -71,7 +71,7 @@ public final class CLDemo {
 			checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, null, pi));
 
 			PointerBuffer devices = stack.mallocPointer(pi.get(0));
-			checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, devices, null));
+			checkCLError(clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, devices, (IntBuffer)null));
 
 			for ( int d = 0; d < devices.capacity(); d++ ) {
 				long device = devices.get(d);

@@ -104,12 +104,26 @@ class Parameter(
 			else
 				"$name.$ADDRESS"
 		nativeType.isPointerData                             ->
-			if ( !isAutoSizeResultOut && (has(nullable) || (has(optional) && mode === GenerationMode.NORMAL)) )
+			if ( nativeType is ArrayType )
+				name
+			else if ( !isAutoSizeResultOut && (has(nullable) || (has(optional) && mode === GenerationMode.NORMAL)) )
 				"memAddressSafe($name)"
 			else
 				"memAddress($name)"
 		nativeType.mapping == PrimitiveMapping.BOOLEAN4      -> "$name ? 1 : 0"
 		else                                                 -> name
+	}
+
+	fun removeArrayModifiers(): Parameter {
+		if ( has(optional) && has(MultiType) )
+			modifiers.remove(Nullable::class.java)
+
+		modifiers.remove(PointerArray::class.java)
+		modifiers.remove(Return::class.java)
+		modifiers.remove(SingleValue::class.java)
+		modifiers.remove(MultiType::class.java)
+
+		return this
 	}
 
 }

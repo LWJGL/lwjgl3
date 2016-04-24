@@ -100,14 +100,14 @@ public final class CL {
 
 				try ( MemoryStack stack = stackPush() ) {
 					IntBuffer pi = stack.ints(0);
-					callIPPI(clGetPlatformIDs, 0, NULL, memAddress(pi));
+					callPPI(clGetPlatformIDs, 0, NULL, memAddress(pi));
 
 					int platforms = pi.get(0);
 
 					if ( platforms == 1 ) {
 						PointerBuffer pp = stack.pointers(0);
 
-						callIPPI(clGetPlatformIDs, 1, memAddress(pp), NULL);
+						callPPI(clGetPlatformIDs, 1, memAddress(pp), NULL);
 						long cl_platform_id = pp.get(0);
 						if ( supportsOpenCL12(stack, cl_platform_id) )
 							platform = cl_platform_id;
@@ -125,7 +125,7 @@ public final class CL {
 
 			PointerBuffer pp = stack.mallocPointer(1);
 
-			int errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, 0, NULL, memAddress(pp));
+			int errcode = callPPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, 0L, NULL, memAddress(pp));
 			if ( errcode != CL_SUCCESS )
 				return false;
 
@@ -133,7 +133,7 @@ public final class CL {
 
 			ByteBuffer version = stack.malloc(bytes);
 
-			errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, bytes, memAddress(version), NULL);
+			errcode = callPPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, (long)bytes, memAddress(version), NULL);
 			if ( errcode != CL_SUCCESS )
 				return false;
 

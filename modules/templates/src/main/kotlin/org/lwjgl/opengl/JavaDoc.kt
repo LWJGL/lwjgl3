@@ -12,7 +12,7 @@ class ReferenceGL(val function: String): FunctionModifier() {
 	companion object: ModifierKey<ReferenceGL>
 
 	override val isSpecial = false
-	override protected fun validate(func: NativeClassFunction) {
+	override fun validate(func: NativeClassFunction) {
 		if ( !func.nativeClass.postfix.isEmpty() )
 			throw IllegalArgumentException("The ReferenceGL modifier can only be applied on core functionality.")
 	}

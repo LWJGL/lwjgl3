@@ -161,7 +161,7 @@ class NativeClassFunction(
 	val javaDocLink: String
 		get() = "${nativeClass.className}$methodLink"
 
-	private val methodLink: String get() = "#$simpleName()"
+	val methodLink: String get() = "#$simpleName()"
 
 	val hasExplicitFunctionAddress: Boolean
 		get() = parameters.isNotEmpty() && parameters[0] === EXPLICIT_FUNCTION_ADDRESS
@@ -180,6 +180,12 @@ class NativeClassFunction(
 		        && !(hasExplicitFunctionAddress && hasNativeCode)
 		        && (returns.isBufferPointer || returns.nativeType is CallbackType || hasParam { it.isBufferPointer || it.nativeType is CallbackType })
 		        && !returns.has(Address)
+				&& !hasParam { it.nativeType is ArrayType }
+
+	val hasArrayOverloads: Boolean
+		get() = parameters.asSequence()
+				.filter { it.nativeType.mapping.isArray || it has MultiType }
+				.let { it.any() && it.none { it.isAutoSizeResultOut } }
 
 	private val ReturnValue.isStructValue: Boolean
 		get() = nativeType is StructType && !nativeType.includesPointer
@@ -389,9 +395,12 @@ class NativeClassFunction(
 				val autoSize = it[AutoSize]
 				if ( mode === NORMAL || it.paramType === ParameterType.INOUT ) {
 					var expression = it.name
-					if ( it.paramType === ParameterType.INOUT )
-						expression += ".get($expression.position())"
-					else if ( autoSize.factor != null )
+					if ( it.paramType === ParameterType.INOUT ) {
+						if ( it.nativeType is ArrayType )
+							expression += "[0]"
+						else
+							expression += ".get($expression.position())"
+					} else if ( autoSize.factor != null )
 						expression += " ${autoSize.factor.expressionInv()}"
 
 					sequenceOf(autoSize.reference, *autoSize.dependent).forEach {
@@ -402,11 +411,12 @@ class NativeClassFunction(
 				}
 
 				if ( mode !== NORMAL ) {
-					val referenceTransform = transforms!![paramMap[autoSize.reference]!!]
+					val reference = paramMap[autoSize.reference]!!
+					val referenceTransform = transforms!![reference]
 					val expression =
 						if ( referenceTransform != null && (referenceTransform.javaClass === SingleValueTransform::class.java || referenceTransform === PointerArrayTransformSingle) )
 							"1"
-						else if ( referenceTransform != null && referenceTransform != PointerArrayTransformSingle )
+						else if ( (referenceTransform != null && referenceTransform != PointerArrayTransformSingle) || reference.nativeType is ArrayType )
 							"${autoSize.reference}.length"
 						else
 							"${autoSize.reference}.remaining()"
@@ -480,21 +490,15 @@ class NativeClassFunction(
 	fun generateMethods(writer: PrintWriter) {
 		val simpleFunction = isSimpleFunction
 
-		if ( hasCustomJNI ) {
-			writer.println()
+		if ( hasCustomJNI )
 			writer.generateNativeMethod(simpleFunction)
-		}
 
 		if ( !simpleFunction ) {
-			if ( hasUnsafeMethod ) {
-				writer.println()
+			if ( hasUnsafeMethod )
 				writer.generateUnsafeMethod()
-			}
 
-			if ( returns.nativeType !is CharSequenceType && parameters.none { it has AutoSize && it.paramType == ParameterType.IN } ) {
-				writer.println()
+			if ( returns.nativeType !is CharSequenceType && parameters.none { it has AutoSize && it.paramType == ParameterType.IN } )
 				writer.generateJavaMethod()
-			}
 
 			writer.generateAlternativeMethods()
 		}
@@ -503,6 +507,8 @@ class NativeClassFunction(
 	// --[ JAVA METHODS ]--
 
 	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean) {
+		println()
+
 		val doc = documentation() { true }
 		if ( doc.isNotEmpty() )
 			println(doc)
@@ -517,7 +523,7 @@ class NativeClassFunction(
 			if ( nativeParams.any() ) print(", ")
 		}
 		printList(nativeParams) {
-			it.asNativeMethodParam
+			if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asNativeMethodParam
 		}
 		if ( returns.isStructValue ) {
 			if ( nativeClass.binding != null || nativeParams.any() ) print(", ")
@@ -528,6 +534,7 @@ class NativeClassFunction(
 	}
 
 	private fun PrintWriter.generateUnsafeMethod() {
+		println()
 		printDocumentation { true }
 
 		print("\t${accessModifier}static $returnsNativeMethodType n$name(")
@@ -535,7 +542,7 @@ class NativeClassFunction(
 			if ( it.isFunctionProvider )
 				it.asJavaMethodParam
 			else
-				it.asNativeMethodParam
+				if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asNativeMethodParam
 		}
 
 		if ( returns.isStructValue ) {
@@ -598,7 +605,7 @@ class NativeClassFunction(
 		print(if ( hasCustomJNI )
 			"n$name("
 		else
-			"${binding.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.mapping.jniSignature }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
+			"${binding.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 		)
 		if ( !hasExplicitFunctionAddress ) {
 			print(FUNCTION_ADDRESS)
@@ -626,6 +633,8 @@ class NativeClassFunction(
 	}
 
 	private fun PrintWriter.generateJavaMethod() {
+		println()
+
 		// JavaDoc
 
 		val hideAutoSizeResult = returns.nativeType !is StructType && parameters.count { it.isAutoSizeResultOut } == 1
@@ -638,7 +647,7 @@ class NativeClassFunction(
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
 			else
-				it.asJavaMethodParam
+				if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asJavaMethodParam
 		}
 
 		if ( returns.isStructValue ) {
@@ -815,7 +824,7 @@ class NativeClassFunction(
 				if ( hasCustomJNI )
 					"n$name("
 				else
-					"${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
+					"${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 			)
 			if ( nativeClass.binding != null && !hasExplicitFunctionAddress ) {
 				print("$FUNCTION_ADDRESS")
@@ -1150,7 +1159,9 @@ class NativeClassFunction(
 		// JavaDoc
 
 		if ( description != null ) {
-			println("\t/** $description ${nativeClass.processDocumentation(methodLink)} */")
+			val doc = nativeClass.processDocumentation("$description $methodLink").toJavaDoc()
+			if ( !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false) && doc.isNotEmpty() )
+				println(doc)
 		} else {
 			val hideAutoSizeResult = returns.nativeType !is StructType && parameters.count { it.isAutoSizeResultOut } == 1
 			printDocumentation { param ->
@@ -1170,7 +1181,7 @@ class NativeClassFunction(
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
 			else
-				it.transformDeclarationOrElse(transforms, it.asJavaMethodParam)
+				it.transformDeclarationOrElse(transforms, if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asJavaMethodParam)
 		}
 		if ( returnTransform === MapPointerTransform ) {
 			if ( !parameters.isEmpty() )
@@ -1225,7 +1236,7 @@ class NativeClassFunction(
 		if ( hideAutoSizeResultParam ) {
 			val autoSizeParam = getParam { it has AutoSizeResult }
 			val autoSizeType = (autoSizeParam.nativeType.mapping as PointerMapping).mallocType
-			println("\t\t${autoSizeType}Buffer ${autoSizeParam.name} = stack.calloc$autoSizeType(1);")
+			println("\t\t\t${autoSizeType}Buffer ${autoSizeParam.name} = stack.calloc$autoSizeType(1);")
 		}
 
 		for ((qtype, transform) in stackTransforms) {
@@ -1334,21 +1345,26 @@ class NativeClassFunction(
 	}
 
 	fun generateFunction(writer: PrintWriter) {
-		writer.generateFunctionImpl(critical = false)
-		/*
-		DISABLED: Critical JNI methods have no measurable benefit for primitive-only methods.
-		if ( !parameters.contains(JNI_ENV) )
-			writer.generateFunctionImpl(critical = true)
-		*/
+		val hasArrays = hasParam { it.nativeType is ArrayType }
+		writer.generateFunctionImpl(hasArrays, critical = false)
+		if ( hasArrays && !parameters.contains(JNI_ENV) )
+			writer.generateFunctionImpl(hasArrays, critical = true)
 	}
-	private fun PrintWriter.generateFunctionImpl(critical: Boolean) {
+	private fun PrintWriter.generateFunctionImpl(hasArrays: Boolean, critical: Boolean) {
 		val params = ArrayList<String>(4 + parameters.size)
 		if ( !critical )
 			params.add("JNIEnv *$JNIENV, jclass clazz")
 		if ( nativeClass.binding != null )
 			params.add("jlong $FUNCTION_ADDRESS")
 		getNativeParams(withExplicitFunctionAddress = false).map {
-			"${it.nativeType.jniFunctionType} ${it.name}${if ( it.nativeType is PointerType ) POINTER_POSTFIX else ""}"
+			if ( it.nativeType is ArrayType ) {
+				if ( critical )
+					"jint ${it.name}__length, j${(it.nativeType.mapping as PointerMapping).primitive}* ${it.name}"
+				else
+					"j${(it.nativeType.mapping as PointerMapping).primitive}Array ${it.name}$POINTER_POSTFIX"
+			} else {
+				"${it.nativeType.jniFunctionType} ${it.name}${if (it.nativeType is PointerType) POINTER_POSTFIX else ""}"
+			}
 		}.toCollection(params)
 		if ( returns.isStructValue )
 			params.add("jlong $RESULT")
@@ -1358,7 +1374,14 @@ class NativeClassFunction(
 		print("JNIEXPORT $returnsJniFunctionType JNICALL Java${if ( critical ) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_")
 		if ( !isSimpleFunction )
 			print('n')
-		println("${name.asJNIName}(${if ( params.isEmpty() ) "void" else params.joinToString(", ")}) {")
+		print(name.asJNIName)
+		if ( hasArrays || hasArrayOverloads )
+			print(getNativeParams(withExplicitFunctionAddress = false).map { if ( it.nativeType is ArrayType )
+				it.nativeType.mapping.jniSignatureArray
+			else
+				it.nativeType.mapping.jniSignatureStrict
+			}.joinToString("", prefix = "__"))
+		println("(${if ( params.isEmpty() ) "void" else params.joinToString(", ")}) {")
 
 		// Cast function address to pointer
 
@@ -1367,7 +1390,7 @@ class NativeClassFunction(
 
 		// Cast addresses to pointers
 
-		getNativeParams(withExplicitFunctionAddress = false).filter { it.nativeType is PointerType }.forEach {
+		getNativeParams(withExplicitFunctionAddress = false).filter { it.nativeType.let { it is PointerType && it !is ArrayType } }.forEach {
 			val pointerType = it.toNativeType(nativeClass.binding, pointerMode = true)
 			print("\t$pointerType")
 			if ( !pointerType.endsWith('*') ) print(' ')
@@ -1376,21 +1399,39 @@ class NativeClassFunction(
 
 		// Custom code
 
-		val code = if ( has(Code) ) this@NativeClassFunction[Code] else null
+		var code = if ( has(Code) ) this@NativeClassFunction[Code] else Code.NO_CODE
+		if (hasArrays && !critical) {
+			code = code.append(
+				nativeBeforeCall = getParams { it.nativeType is ArrayType }.map {
+					"j${(it.nativeType.mapping as PointerMapping).primitive} *${it.name} = (*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, 0);"
+				}.joinToString("\n\t", prefix = "\t"),
+				nativeAfterCall = getParams { it.nativeType is ArrayType }
+					.withIndex()
+					.sortedByDescending { it.index }
+					.map { it.value }
+					.map {
+						"(*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, ${it.name}, 0);"
+					}.joinToString("\n\t", prefix = "\t")
+			)
+		}
 
-		if ( code?.nativeAfterCall != null && !returns.isVoid )
+		if ( code.nativeAfterCall != null && !returns.isVoid )
 			println("\t$returnsJniFunctionType $RESULT;")
 
-		code?.nativeBeforeCall.let { if ( it != null ) println(it) }
+		code.nativeBeforeCall.let { if ( it != null ) println(it) }
 
 		// Unused parameter macro
 
 		if ( !critical )
 			println("\tUNUSED_PARAMS($JNIENV, clazz)")
+		else
+			getParams { it.nativeType is ArrayType }.forEach {
+				println("\tUNUSED_PARAM(${it.name}__length)")
+			}
 
 		// Call native function
 
-		code?.nativeCall.let {
+		code.nativeCall.let {
 			if ( it != null )
 				println(it)
 			else {
@@ -1398,7 +1439,7 @@ class NativeClassFunction(
 				if ( returns.isStructValue ) {
 					print("*((${returns.nativeType.name}*)(intptr_t)$RESULT) = ")
 				} else if ( !returns.isVoid ) {
-					print(if ( code?.nativeAfterCall != null ) "$RESULT =" else "return")
+					print(if ( code.nativeAfterCall != null ) "$RESULT =" else "return")
 					print(" ($returnsJniFunctionType)")
 					if ( returns.nativeType is PointerType && nativeClass.binding == null )
 						print("(intptr_t)")
@@ -1408,9 +1449,13 @@ class NativeClassFunction(
 				print("$name")
 				if ( !has(Macro) ) print('(')
 				printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) {
-					// Avoids warning when implicitly casting from jlong to 32-bit pointer.
-					if ( it.nativeType.mapping === PrimitiveMapping.POINTER )
-						"(${if ( nativeClass.binding != null ) "intptr_t" else it.nativeType.name})${it.name}"
+					// Avoid implicit cast warnings
+					if ( it.nativeType.mapping === PrimitiveMapping.POINTER || it.nativeType is ArrayType )
+						"(${if ( nativeClass.binding != null )
+							"intptr_t"
+						else
+							"${it.nativeType.name}${if ( it.nativeType is PointerType && !it.nativeType.includesPointer ) "*" else ""}"
+						})${it.name}"
 					else if ( it.nativeType is StructType && !it.nativeType.includesPointer )
 						"*${it.name}"
 					else
@@ -1421,7 +1466,7 @@ class NativeClassFunction(
 			}
 		}
 
-		code?.nativeAfterCall.let {
+		code.nativeAfterCall.let {
 			if ( it == null ) return@let
 
 			println(it)

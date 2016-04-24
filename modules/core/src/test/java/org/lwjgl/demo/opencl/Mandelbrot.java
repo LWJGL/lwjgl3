@@ -460,7 +460,7 @@ public class Mandelbrot {
 			checkCLError(clGetDeviceIDs(platform, deviceType, null, pi));
 
 			PointerBuffer devices = stack.mallocPointer(pi.get(0));
-			checkCLError(clGetDeviceIDs(platform, deviceType, devices, null));
+			checkCLError(clGetDeviceIDs(platform, deviceType, devices, (IntBuffer)null));
 
 			for ( int i = 0; i < devices.capacity(); i++ ) {
 				long device = devices.get(i);

@@ -65,7 +65,16 @@ val INTEL_map_texture = "INTELMapTexture".nativeClassGL("INTEL_map_texture", pos
 		GLint.IN("level", "the mipmap level-of-detail of the texture")
 	)
 
-	(MapPointer("memGetInt(memAddress(stride)) * GLChecks.getTexLevelParameteri(texture, GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_HEIGHT)")..void_p)(
+	customMethod("""
+	private static int getStride(IntBuffer stride) {
+		return stride.get(stride.position());
+	}
+
+	private static int getStride(int[] stride) {
+		return stride[0];
+	}""")
+
+	(MapPointer("getStride(stride) * GLChecks.getTexLevelParameteri(texture, GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_HEIGHT)")..void_p)(
 		"MapTexture2DINTEL",
 		"""
 		Attempts to return a direct pointer to the graphics storage for 2D texture indicated by the {@code texture} parameter.

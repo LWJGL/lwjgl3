@@ -154,7 +154,7 @@ public final class AL {
 			if ( GetString == NULL || GetError == NULL || IsExtensionPresent == NULL )
 				throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that the OpenAL library has been loaded correctly.");
 
-			long versionString = invokeIP(GetString, AL_VERSION);
+			long versionString = invokeP(GetString, AL_VERSION);
 			if ( versionString == NULL || callI(GetError) != AL_NO_ERROR )
 				throw new IllegalStateException("There is no OpenAL context current in the current thread or process.");
 
@@ -177,7 +177,7 @@ public final class AL {
 			}
 
 			// Parse EXTENSIONS string
-			String extensionsString = memUTF8(checkPointer(invokeIP(GetString, AL_EXTENSIONS)));
+			String extensionsString = memUTF8(checkPointer(invokeP(GetString, AL_EXTENSIONS)));
 
 		/*
 		OpenALSoft: AL_EXT_ALAW AL_EXT_DOUBLE AL_EXT_EXPONENT_DISTANCE AL_EXT_FLOAT32 AL_EXT_IMA4 AL_EXT_LINEAR_DISTANCE AL_EXT_MCFORMATS AL_EXT_MULAW

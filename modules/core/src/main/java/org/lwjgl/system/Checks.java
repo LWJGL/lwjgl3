@@ -173,10 +173,28 @@ public final class Checks {
 		return buf;
 	}
 
+	/** Ensures that the specified array is null-terminated. */
+	public static int[] checkNT(int[] buf) {
+		checkBuffer(buf, 1);
+		if ( buf[buf.length - 1] != 0 )
+			throw new IllegalArgumentException("Missing null termination");
+
+		return buf;
+	}
+
 	/** Ensures that the specified IntBuffer is terminated with the specified terminator. */
 	public static IntBuffer checkNT(IntBuffer buf, int terminator) {
 		checkBuffer(buf, 1);
 		if ( buf.get(buf.limit() - 1) != terminator )
+			throw new IllegalArgumentException("Missing termination");
+
+		return buf;
+	}
+
+	/** Ensures that the specified array is terminated with the specified terminator. */
+	public static int[] checkNT(int[] buf, int terminator) {
+		checkBuffer(buf, 1);
+		if ( buf[buf.length - 1] != terminator )
 			throw new IllegalArgumentException("Missing termination");
 
 		return buf;
@@ -191,10 +209,28 @@ public final class Checks {
 		return buf;
 	}
 
+	/** Ensures that the specified array is null-terminated. */
+	public static long[] checkNT(long[] buf) {
+		checkBuffer(buf, 1);
+		if ( buf[buf.length - 1] != NULL )
+			throw new IllegalArgumentException("Missing null termination");
+
+		return buf;
+	}
+
 	/** Ensures that the specified FloatBuffer is null-terminated. */
 	public static FloatBuffer checkNT(FloatBuffer buf) {
 		checkBuffer(buf, 1);
 		if ( buf.get(buf.limit() - 1) != 0.0f )
+			throw new IllegalArgumentException("Missing null termination");
+
+		return buf;
+	}
+
+	/** Ensures that the specified array is null-terminated. */
+	public static float[] checkNT(float[] buf) {
+		checkBuffer(buf, 1);
+		if ( buf[buf.length - 1] != 0.0f )
 			throw new IllegalArgumentException("Missing null termination");
 
 		return buf;
@@ -216,6 +252,76 @@ public final class Checks {
 			throw new IllegalArgumentException("Missing termination");
 
 		return buf;
+	}
+
+	/**
+	 * Helper method to ensure a array has enough capacity.
+	 *
+	 * @param buf  the array to check
+	 * @param size the minimum array capacity
+	 *
+	 * @throws IllegalArgumentException
+	 */
+	public static void checkBuffer(short[] buf, int size) {
+		if ( buf.length < size ) {
+			throwArraySizeException(buf, size);
+		}
+	}
+
+	/**
+	 * Helper method to ensure a array has enough capacity.
+	 *
+	 * @param buf  the array to check
+	 * @param size the minimum array capacity
+	 *
+	 * @throws IllegalArgumentException
+	 */
+	public static void checkBuffer(int[] buf, int size) {
+		if ( buf.length < size ) {
+			throwArraySizeException(buf, size);
+		}
+	}
+
+	/**
+	 * Helper method to ensure a array has enough capacity.
+	 *
+	 * @param buf  the array to check
+	 * @param size the minimum array capacity
+	 *
+	 * @throws IllegalArgumentException
+	 */
+	public static void checkBuffer(long[] buf, int size) {
+		if ( buf.length < size ) {
+			throwArraySizeException(buf, size);
+		}
+	}
+
+	/**
+	 * Helper method to ensure a array has enough capacity.
+	 *
+	 * @param buf  the array to check
+	 * @param size the minimum array capacity
+	 *
+	 * @throws IllegalArgumentException
+	 */
+	public static void checkBuffer(float[] buf, int size) {
+		if ( buf.length < size ) {
+			throwArraySizeException(buf, size);
+		}
+	}
+
+	/**
+	 * Helper method to ensure a array has enough capacity.
+	 *
+	 * @param buf  the array to check
+	 * @param size the minimum array capacity
+	 *
+	 * @throws IllegalArgumentException
+	 */
+	public static void checkBuffer(double[] buf, int size) {
+		if ( buf.length < size ) {
+			throwArraySizeException(buf, size);
+		}
 	}
 
 	/**
@@ -310,6 +416,26 @@ public final class Checks {
 	}
 
 	private static void throwArraySizeException(Object[] array, int size) {
+		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
+	}
+
+	private static void throwArraySizeException(short[] array, int size) {
+		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
+	}
+
+	private static void throwArraySizeException(int[] array, int size) {
+		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
+	}
+
+	private static void throwArraySizeException(long[] array, int size) {
+		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
+	}
+
+	private static void throwArraySizeException(float[] array, int size) {
+		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
+	}
+
+	private static void throwArraySizeException(double[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 

@@ -18,7 +18,7 @@ abstract class TemplateElement {
 		private val EMPTY_MODIFIERS: MutableMap<Class<out TemplateModifier>, TemplateModifier> = HashMap(0)
 	}
 
-	private var modifiers = EMPTY_MODIFIERS
+	protected var modifiers = EMPTY_MODIFIERS
 
 	fun setModifiers(vararg modifiers: TemplateModifier) {
 		if ( this.modifiers === EMPTY_MODIFIERS )

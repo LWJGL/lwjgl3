@@ -13,6 +13,7 @@ import org.lwjgl.system.Callback;
 import org.lwjgl.util.par.ParShapesMesh;
 
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -79,7 +80,7 @@ public final class ParShapesDemo {
 		GL.createCapabilities();
 		debugCB = GLUtil.setupDebugMessageCallback();
 		if ( debugCB != null && GL.getCapabilities().OpenGL43 )
-			glDebugMessageControl(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_OTHER, GL_DEBUG_SEVERITY_NOTIFICATION, null, false);
+			glDebugMessageControl(GL_DEBUG_SOURCE_API, GL_DEBUG_TYPE_OTHER, GL_DEBUG_SEVERITY_NOTIFICATION, (IntBuffer)null, false);
 
 		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
 			if ( action != GLFW_RELEASE )

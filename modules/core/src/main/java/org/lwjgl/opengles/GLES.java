@@ -210,14 +210,14 @@ public final class GLES {
 				IntBuffer pi = stack.ints(0);
 
 				// Try the 3.0+ version query first
-				invokeIPV(GetIntegerv, GL_MAJOR_VERSION, memAddress(pi));
+				invokePV(GetIntegerv, GL_MAJOR_VERSION, memAddress(pi));
 				if ( invokeI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = pi.get(0)) ) {
 					// We're on an 3.0+ context.
-					invokeIPV(GetIntegerv, GL_MINOR_VERSION, memAddress(pi));
+					invokePV(GetIntegerv, GL_MINOR_VERSION, memAddress(pi));
 					minorVersion = pi.get(0);
 				} else {
 					// Fallback to the string query.
-					long versionString = invokeIP(GetString, GL_VERSION);
+					long versionString = invokeP(GetString, GL_VERSION);
 					if ( versionString == NULL || invokeI(GetError) != GL_NO_ERROR )
 						throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
 
@@ -255,7 +255,7 @@ public final class GLES {
 
 			if ( majorVersion < 3 ) {
 				// Parse EXTENSIONS string
-				String extensionsString = memASCII(checkPointer(invokeIP(GetString, GL_EXTENSIONS)));
+				String extensionsString = memASCII(checkPointer(invokeP(GetString, GL_EXTENSIONS)));
 
 				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 				while ( tokenizer.hasMoreTokens() )
@@ -267,13 +267,13 @@ public final class GLES {
 				try ( MemoryStack stack = stackPush() ) {
 					IntBuffer pi = stack.ints(0);
 
-					invokeIPV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
+					invokePV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
 					extensionCount = pi.get(0);
 				}
 
 				long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
 				for ( int i = 0; i < extensionCount; i++ )
-					supportedExtensions.add(memASCII(checkPointer(callIIP(GetStringi, GL_EXTENSIONS, i))));
+					supportedExtensions.add(memASCII(checkPointer(callP(GetStringi, GL_EXTENSIONS, i))));
 			}
 
 			caps = new GLESCapabilities(getFunctionProvider(), supportedExtensions);

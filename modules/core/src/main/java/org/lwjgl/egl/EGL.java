@@ -148,7 +148,7 @@ public final class EGL {
 
 	private static EGLCapabilities createClientCapabilities() {
 		long QueryString = functionProvider.getFunctionAddress("eglQueryString");
-		long versionString = invokePIP(QueryString, EGL_NO_DISPLAY, EGL_VERSION);
+		long versionString = invokePP(QueryString, EGL_NO_DISPLAY, EGL_VERSION);
 
 		Set<String> ext = new HashSet<>(32);
 
@@ -158,7 +158,7 @@ public final class EGL {
 			APIVersion version = apiParseVersion(memASCII(versionString), "EGL");
 
 			addEGLVersions(version.major, version.minor, ext);
-			addExtensions(memASCII(invokePIP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS)), ext);
+			addExtensions(memASCII(invokePP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS)), ext);
 		}
 
 		return new EGLCapabilities(functionProvider, ext);
