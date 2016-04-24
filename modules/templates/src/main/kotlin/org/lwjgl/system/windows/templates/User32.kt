@@ -1344,7 +1344,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		nullable..HWND.IN("hWnd", "a handle to the window whose DC is to be retrieved. If this value is $NULL, GetDC retrieves the DC for the entire screen.")
 	)
 
-	int(
+	BOOL(
 		"ReleaseDC",
 		"""
 		Releases a device context (DC), freeing it for use by other applications. The effect of the ReleaseDC function depends on the type of DC. It frees only
