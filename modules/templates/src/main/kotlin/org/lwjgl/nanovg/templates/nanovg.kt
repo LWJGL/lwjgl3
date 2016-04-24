@@ -11,13 +11,13 @@ val nanovg = "NanoVG".nativeClass(packageName = NANOVG_PACKAGE, prefix = "NVG") 
 	nativeDirective(
 		"""#ifdef LWJGL_WINDOWS
 	#define _CRT_SECURE_NO_WARNINGS
-	__pragma(warning(disable : 4710))
+	__pragma(warning(disable : 4710 4738))
 #endif""", beforeIncludes = true)
 
 	includeNanoVGAPI("""#include <stdlib.h>
 #include <string.h>
 #ifdef LWJGL_WINDOWS
-	__pragma(warning(disable : 4711 4738))
+	__pragma(warning(disable : 4711))
 #endif
 #include "nanovg.c"""")
 
