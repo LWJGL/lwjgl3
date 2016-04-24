@@ -54,7 +54,7 @@ public final class Vorbis {
 
 		ALCCapabilities deviceCaps = ALC.createCapabilities(device);
 
-		long context = alcCreateContext(device, null);
+		long context = alcCreateContext(device, (IntBuffer)null);
 		if ( device == NULL )
 			throw new IllegalStateException("Failed to create an OpenAL context.");
 

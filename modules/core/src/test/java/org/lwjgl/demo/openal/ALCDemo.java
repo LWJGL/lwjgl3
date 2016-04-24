@@ -55,7 +55,7 @@ public final class ALCDemo {
 		assertTrue(defaultDeviceSpecifier != null);
 		System.out.println("Default device: " + defaultDeviceSpecifier);
 
-		long context = alcCreateContext(device, null);
+		long context = alcCreateContext(device, (IntBuffer)null);
 		alcMakeContextCurrent(context);
 		AL.createCapabilities(deviceCaps);
 

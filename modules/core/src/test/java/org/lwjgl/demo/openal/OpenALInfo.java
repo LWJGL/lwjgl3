@@ -6,6 +6,7 @@ package org.lwjgl.demo.openal;
 
 import org.lwjgl.openal.*;
 
+import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class OpenALInfo {
 
 		ALCCapabilities deviceCaps = ALC.createCapabilities(device);
 
-		long alContext = alcCreateContext(device, null);
+		long alContext = alcCreateContext(device, (IntBuffer)null);
 		ALUtil.checkALCError(device);
 
 		alcMakeContextCurrent(alContext);

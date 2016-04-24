@@ -295,7 +295,7 @@ class Demo {
 
 		drawEditBoxBase(vg, x, y, w, h);
 
-		uw = nvgTextBounds(vg, 0, 0, units, NULL, null);
+		uw = nvgTextBounds(vg, 0, 0, units, NULL, (FloatBuffer)null);
 
 		nvgFontSize(vg, 18.0f);
 		nvgFontFace(vg, "sans");
@@ -358,11 +358,11 @@ class Demo {
 
 			nvgFontSize(vg, 20.0f);
 			nvgFontFace(vg, "sans-bold");
-			tw = nvgTextBounds(vg, 0, 0, textEncoded, NULL, null);
+			tw = nvgTextBounds(vg, 0, 0, textEncoded, NULL, (FloatBuffer)null);
 			if ( preicon != null ) {
 				nvgFontSize(vg, h * 1.3f);
 				nvgFontFace(vg, "icons");
-				iw = nvgTextBounds(vg, 0, 0, preicon, NULL, null);
+				iw = nvgTextBounds(vg, 0, 0, preicon, NULL, (FloatBuffer)null);
 				iw += h * 0.15f;
 			}
 

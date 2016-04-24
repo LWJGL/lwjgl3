@@ -254,7 +254,7 @@ public final class EFXTest {
 		}
 		System.out.println("EXTEfx found.");
 
-		long alContext = alcCreateContext(device, null);
+		long alContext = alcCreateContext(device, (IntBuffer)null);
 		alcMakeContextCurrent(alContext);
 		AL.createCapabilities(deviceCaps);
 
@@ -339,7 +339,7 @@ public final class EFXTest {
 		}
 		System.out.println("EXTEfx found.");
 
-		long alContext = alcCreateContext(device, null);
+		long alContext = alcCreateContext(device, (IntBuffer)null);
 		alcMakeContextCurrent(alContext);
 		AL.createCapabilities(deviceCaps);
 
