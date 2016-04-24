@@ -303,9 +303,7 @@ class Generator(
 
 		// Generate the template code
 		classes.forEach {
-			if ( it.binding != null )
-				it.functions.filter { !it.hasCustomJNI }.forEach { JNI.register(it) }
-
+			it.registerFunctions()
 			generate(it, max(packageLastModified, GENERATOR_LAST_MODIFIED))
 		}
 	}

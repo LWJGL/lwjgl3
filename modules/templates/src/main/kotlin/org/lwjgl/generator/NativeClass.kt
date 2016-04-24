@@ -195,7 +195,7 @@ class NativeClass(
 		get() = _functions.values
 
 	// same as above + array overloads
-	val genFunctions: List<NativeClassFunction> by lazy {
+	private val genFunctions: List<NativeClassFunction> by lazy {
 		val list = ArrayList<NativeClassFunction>(_functions.values)
 
 		functions.forEach { func ->
@@ -306,6 +306,16 @@ class NativeClass(
 
 	override fun hasField(field: String): Boolean = constantBlocks.any { it.constants.any { it.name == field } }
 	override fun hasMethod(method: String): Boolean = functions.any { it.simpleName == method }
+
+	fun registerFunctions() {
+		if ( binding != null ) {
+			functions.asSequence()
+				.filter { !it.hasCustomJNI }
+				.forEach { JNI.register(it) }
+
+			genFunctions // lazy init
+		}
+	}
 
 	fun registerLinks(
 		tokens: MutableMap<String, String>,
