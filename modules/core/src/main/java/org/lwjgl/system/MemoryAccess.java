@@ -10,12 +10,7 @@ import static java.lang.Character.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Provides 3 {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}.
- *
- * <p>Unsafe should be the most efficient implementation, even on non-Oracle VMs. In the absence of Unsafe, performance will depend on how reflection and JNI
- * are implemented. For now we'll go with what we see on the Oracle VM (that is, we'll prefer reflection over JNI).</p>
- */
+/** Provides {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}. */
 final class MemoryAccess {
 
 	static {
@@ -28,16 +23,12 @@ final class MemoryAccess {
 	static MemoryAccessor getInstance() {
 		MemoryAccessor accessor;
 		try {
-			// Depends on sun.nio.ch.DirectBuffer and sun.misc.Unsafe
+			// Depends on sun.misc.Unsafe
 			accessor = new MemoryAccessorUnsafe();
-		} catch (Throwable t0) {
-			try {
-				// Depends on sun.nio.ch.DirectBuffer and sun.reflect.FieldAccessor
-				accessor = new MemoryAccessorReflect();
-			} catch (Throwable t1) {
-				DEBUG_STREAM.println("[LWJGL] [MemoryAccessor] Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
-				accessor = new MemoryAccessorJNI();
-			}
+		} catch (Throwable t) {
+			DEBUG_STREAM
+				.println("[LWJGL] [MemoryAccessor] Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
+			accessor = new MemoryAccessorJNI();
 		}
 
 		return accessor;
@@ -208,167 +199,23 @@ final class MemoryAccess {
 	private static final class MemoryAccessorJNI implements MemoryAccessor {
 	}
 
-	abstract static class MemoryAccessorJava implements MemoryAccessor {
-
-		protected static final ByteBuffer BYTE_BUFFER = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
-
-		// These are all aligned instances and should only be set to naturally aligned memory addresses
-		protected static final ShortBuffer  SHORT_BUFFER  = BYTE_BUFFER.asShortBuffer();
-		protected static final CharBuffer   CHAR_BUFFER   = BYTE_BUFFER.asCharBuffer();
-		protected static final IntBuffer    INT_BUFFER    = BYTE_BUFFER.asIntBuffer();
-		protected static final LongBuffer   LONG_BUFFER   = BYTE_BUFFER.asLongBuffer();
-		protected static final FloatBuffer  FLOAT_BUFFER  = BYTE_BUFFER.asFloatBuffer();
-		protected static final DoubleBuffer DOUBLE_BUFFER = BYTE_BUFFER.asDoubleBuffer();
-
-		@Override
-		public ByteBuffer memByteBuffer(long address, int capacity) {
-			return memSetupBuffer(BYTE_BUFFER.slice().order(ByteOrder.nativeOrder()), address, capacity);
-		}
-
-		@Override
-		public ShortBuffer memShortBuffer(long address, int capacity) {
-			return memSetupBuffer(SHORT_BUFFER.slice(), address, capacity);
-		}
-
-		@Override
-		public CharBuffer memCharBuffer(long address, int capacity) {
-			return memSetupBuffer(CHAR_BUFFER.slice(), address, capacity);
-		}
-
-		@Override
-		public IntBuffer memIntBuffer(long address, int capacity) {
-			return memSetupBuffer(INT_BUFFER.slice(), address, capacity);
-		}
-
-		@Override
-		public LongBuffer memLongBuffer(long address, int capacity) {
-			return memSetupBuffer(LONG_BUFFER.slice(), address, capacity);
-		}
-
-		@Override
-		public FloatBuffer memFloatBuffer(long address, int capacity) {
-			return memSetupBuffer(FLOAT_BUFFER.slice(), address, capacity);
-		}
-
-		@Override
-		public DoubleBuffer memDoubleBuffer(long address, int capacity) {
-			return memSetupBuffer(DOUBLE_BUFFER.slice(), address, capacity);
-		}
-
-	}
-
-	/** Implementation using reflection. */
-	private static final class MemoryAccessorReflect extends MemoryAccessorJava {
-
-		private static final sun.reflect.FieldAccessor ADDRESS;
-		private static final sun.reflect.FieldAccessor CAPACITY;
-
-		private static final sun.reflect.FieldAccessor
-			PARENT_BYTE,
-			PARENT_SHORT,
-			PARENT_CHAR,
-			PARENT_INT,
-			PARENT_LONG,
-			PARENT_FLOAT,
-			PARENT_DOUBLE;
-
-		static {
-			ByteBuffer parent = BYTE_BUFFER;
-			if ( !(parent instanceof sun.nio.ch.DirectBuffer) )
-				throw new UnsupportedOperationException();
-
-			try {
-				ADDRESS = getFieldAccessor(getDeclaredField(Buffer.class, "address"));
-				CAPACITY = getFieldAccessor(getDeclaredField(Buffer.class, "capacity"));
-
-				PARENT_BYTE = getFieldAccessor(getField(parent.slice(), parent));
-				PARENT_SHORT = getFieldAccessor(getField(SHORT_BUFFER, parent));
-				PARENT_CHAR = getFieldAccessor(getField(CHAR_BUFFER, parent));
-				PARENT_INT = getFieldAccessor(getField(INT_BUFFER, parent));
-				PARENT_LONG = getFieldAccessor(getField(LONG_BUFFER, parent));
-				PARENT_FLOAT = getFieldAccessor(getField(FLOAT_BUFFER, parent));
-				PARENT_DOUBLE = getFieldAccessor(getField(DOUBLE_BUFFER, parent));
-			} catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-
-		MemoryAccessorReflect() {
-		}
-
-		@Override
-		public long memAddress0(Buffer buffer) {
-			return ((sun.nio.ch.DirectBuffer)buffer).address();
-		}
-
-		private static <T extends Buffer> T setup(T buffer, long address, int capacity, sun.reflect.FieldAccessor parentField) {
-			try {
-				ADDRESS.setLong(buffer, address);
-				CAPACITY.setInt(buffer, capacity);
-
-				parentField.set(buffer, null);
-			} catch (IllegalAccessException e) {
-				throw new UnsupportedOperationException(e);
-			}
-
-			buffer.clear();
-			return buffer;
-		}
-
-		@Override
-		public ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
-			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
-			if ( Checks.DEBUG && ((sun.nio.ch.DirectBuffer)buffer).cleaner() != null )
-				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
-
-			return setup(buffer, address, capacity, PARENT_BYTE);
-		}
-
-		@Override
-		public ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, PARENT_SHORT);
-		}
-
-		@Override
-		public CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, PARENT_CHAR);
-		}
-
-		@Override
-		public IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, PARENT_INT);
-		}
-
-		@Override
-		public LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, PARENT_LONG);
-		}
-
-		@Override
-		public FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, PARENT_FLOAT);
-		}
-
-		@Override
-		public DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, PARENT_DOUBLE);
-		}
-
-	}
-
 	/** Implementation using sun.misc.Unsafe. */
-	private static final class MemoryAccessorUnsafe extends MemoryAccessorJava {
+	private static final class MemoryAccessorUnsafe implements MemoryAccessor {
 
-		/**
-		 * Limits the number of bytes to affect per call to Unsafe's bulk memory operations (copy & set). A limit is imposed to allow for safepoint polling
-		 * during a large operation. This limit is equivalent to {@link java.nio.Bits#UNSAFE_COPY_THRESHOLD}.
-		 */
-		private static final long BULK_OP_THRESHOLD = 0x100000; // 1 MB
+		private static final Class<? extends ByteBuffer>   BYTE_BUFFER;
+		private static final Class<? extends ShortBuffer>  SHORT_BUFFER;
+		private static final Class<? extends CharBuffer>   CHAR_BUFFER;
+		private static final Class<? extends IntBuffer>    INT_BUFFER;
+		private static final Class<? extends LongBuffer>   LONG_BUFFER;
+		private static final Class<? extends FloatBuffer>  FLOAT_BUFFER;
+		private static final Class<? extends DoubleBuffer> DOUBLE_BUFFER;
 
 		private static final sun.misc.Unsafe UNSAFE;
 
 		private static final long ADDRESS;
 		private static final long CAPACITY;
+
+		private static final long CLEANER;
 
 		private static final long
 			PARENT_BYTE,
@@ -380,9 +227,22 @@ final class MemoryAccess {
 			PARENT_DOUBLE;
 
 		static {
-			ByteBuffer parent = BYTE_BUFFER;
-			if ( !(parent instanceof sun.nio.ch.DirectBuffer) )
-				throw new UnsupportedOperationException();
+			// These are all aligned instances and should only be set to naturally aligned memory addresses
+			ByteBuffer bb = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
+			ShortBuffer sb = bb.asShortBuffer();
+			CharBuffer cb = bb.asCharBuffer();
+			IntBuffer ib = bb.asIntBuffer();
+			LongBuffer lb = bb.asLongBuffer();
+			FloatBuffer fb = bb.asFloatBuffer();
+			DoubleBuffer db = bb.asDoubleBuffer();
+
+			BYTE_BUFFER = bb.getClass();
+			SHORT_BUFFER = sb.getClass();
+			CHAR_BUFFER = cb.getClass();
+			INT_BUFFER = ib.getClass();
+			LONG_BUFFER = lb.getClass();
+			FLOAT_BUFFER = fb.getClass();
+			DOUBLE_BUFFER = db.getClass();
 
 			try {
 				UNSAFE = getUnsafeInstance();
@@ -390,13 +250,15 @@ final class MemoryAccess {
 				ADDRESS = UNSAFE.objectFieldOffset(getDeclaredField(Buffer.class, "address"));
 				CAPACITY = UNSAFE.objectFieldOffset(getDeclaredField(Buffer.class, "capacity"));
 
-				PARENT_BYTE = UNSAFE.objectFieldOffset(getField(BYTE_BUFFER.slice(), parent));
-				PARENT_SHORT = UNSAFE.objectFieldOffset(getField(SHORT_BUFFER, parent));
-				PARENT_CHAR = UNSAFE.objectFieldOffset(getField(CHAR_BUFFER, parent));
-				PARENT_INT = UNSAFE.objectFieldOffset(getField(INT_BUFFER, parent));
-				PARENT_LONG = UNSAFE.objectFieldOffset(getField(LONG_BUFFER, parent));
-				PARENT_FLOAT = UNSAFE.objectFieldOffset(getField(FLOAT_BUFFER, parent));
-				PARENT_DOUBLE = UNSAFE.objectFieldOffset(getField(DOUBLE_BUFFER, parent));
+				CLEANER = UNSAFE.objectFieldOffset(getDeclaredField(BYTE_BUFFER, "cleaner"));
+
+				PARENT_BYTE = UNSAFE.objectFieldOffset(getField(bb.slice(), bb));
+				PARENT_SHORT = UNSAFE.objectFieldOffset(getField(sb, bb));
+				PARENT_CHAR = UNSAFE.objectFieldOffset(getField(cb, bb));
+				PARENT_INT = UNSAFE.objectFieldOffset(getField(ib, bb));
+				PARENT_LONG = UNSAFE.objectFieldOffset(getField(lb, bb));
+				PARENT_FLOAT = UNSAFE.objectFieldOffset(getField(fb, bb));
+				PARENT_DOUBLE = UNSAFE.objectFieldOffset(getField(db, bb));
 			} catch (Exception e) {
 				throw new UnsupportedOperationException(e);
 			}
@@ -418,7 +280,7 @@ final class MemoryAccess {
 		@Override
 		public ByteBuffer memByteBuffer(long address, int capacity) {
 			try {
-				ByteBuffer buffer = (ByteBuffer)UNSAFE.allocateInstance(BYTE_BUFFER.getClass());
+				ByteBuffer buffer = (ByteBuffer)UNSAFE.allocateInstance(BYTE_BUFFER);
 				buffer.order(ByteOrder.nativeOrder());
 				return memSetupBuffer(buffer, address, capacity);
 			} catch (InstantiationException e) {
@@ -429,7 +291,7 @@ final class MemoryAccess {
 		@Override
 		public ShortBuffer memShortBuffer(long address, int capacity) {
 			try {
-				return memSetupBuffer((ShortBuffer)UNSAFE.allocateInstance(SHORT_BUFFER.getClass()), address, capacity);
+				return memSetupBuffer((ShortBuffer)UNSAFE.allocateInstance(SHORT_BUFFER), address, capacity);
 			} catch (InstantiationException e) {
 				throw new UnsupportedOperationException(e);
 			}
@@ -438,7 +300,7 @@ final class MemoryAccess {
 		@Override
 		public CharBuffer memCharBuffer(long address, int capacity) {
 			try {
-				return memSetupBuffer((CharBuffer)UNSAFE.allocateInstance(CHAR_BUFFER.getClass()), address, capacity);
+				return memSetupBuffer((CharBuffer)UNSAFE.allocateInstance(CHAR_BUFFER), address, capacity);
 			} catch (InstantiationException e) {
 				throw new UnsupportedOperationException(e);
 			}
@@ -447,7 +309,7 @@ final class MemoryAccess {
 		@Override
 		public IntBuffer memIntBuffer(long address, int capacity) {
 			try {
-				return memSetupBuffer((IntBuffer)UNSAFE.allocateInstance(INT_BUFFER.getClass()), address, capacity);
+				return memSetupBuffer((IntBuffer)UNSAFE.allocateInstance(INT_BUFFER), address, capacity);
 			} catch (InstantiationException e) {
 				throw new UnsupportedOperationException(e);
 			}
@@ -456,7 +318,7 @@ final class MemoryAccess {
 		@Override
 		public LongBuffer memLongBuffer(long address, int capacity) {
 			try {
-				return memSetupBuffer((LongBuffer)UNSAFE.allocateInstance(LONG_BUFFER.getClass()), address, capacity);
+				return memSetupBuffer((LongBuffer)UNSAFE.allocateInstance(LONG_BUFFER), address, capacity);
 			} catch (InstantiationException e) {
 				throw new UnsupportedOperationException(e);
 			}
@@ -465,7 +327,7 @@ final class MemoryAccess {
 		@Override
 		public FloatBuffer memFloatBuffer(long address, int capacity) {
 			try {
-				return memSetupBuffer((FloatBuffer)UNSAFE.allocateInstance(FLOAT_BUFFER.getClass()), address, capacity);
+				return memSetupBuffer((FloatBuffer)UNSAFE.allocateInstance(FLOAT_BUFFER), address, capacity);
 			} catch (InstantiationException e) {
 				throw new UnsupportedOperationException(e);
 			}
@@ -474,7 +336,7 @@ final class MemoryAccess {
 		@Override
 		public DoubleBuffer memDoubleBuffer(long address, int capacity) {
 			try {
-				return memSetupBuffer((DoubleBuffer)UNSAFE.allocateInstance(DOUBLE_BUFFER.getClass()), address, capacity);
+				return memSetupBuffer((DoubleBuffer)UNSAFE.allocateInstance(DOUBLE_BUFFER), address, capacity);
 			} catch (InstantiationException e) {
 				throw new UnsupportedOperationException(e);
 			}
@@ -493,7 +355,7 @@ final class MemoryAccess {
 		@Override
 		public ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
 			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
-			if ( Checks.DEBUG && ((sun.nio.ch.DirectBuffer)buffer).cleaner() != null )
+			if ( Checks.DEBUG && (UNSAFE.getObject(buffer, CLEANER)) != null )
 				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
 
 			return setup(buffer, address, capacity, PARENT_BYTE);
@@ -531,34 +393,12 @@ final class MemoryAccess {
 
 		@Override
 		public void memSet(long dst, int value, int bytes) {
-			// Do the memset in BULK_OP_THRESHOLD sized batches to keep TTSP low.
-			while ( true ) {
-				long batchSize = BULK_OP_THRESHOLD < bytes ? BULK_OP_THRESHOLD : bytes;
-				UNSAFE.setMemory(dst, batchSize, (byte)(value & 0xFF));
-
-				bytes -= BULK_OP_THRESHOLD;
-				if ( bytes < 0 )
-					break;
-
-				dst += BULK_OP_THRESHOLD;
-			}
+			UNSAFE.setMemory(dst, bytes, (byte)(value & 0xFF));
 		}
 
 		@Override
 		public void memCopy(long src, long dst, int bytes) {
-			// Do the memcpy in BULK_OP_THRESHOLD sized batches to keep TTSP low.
-
-			while ( true ) {
-				long batchSize = BULK_OP_THRESHOLD < bytes ? BULK_OP_THRESHOLD : bytes;
-				UNSAFE.copyMemory(src, dst, batchSize);
-
-				bytes -= BULK_OP_THRESHOLD;
-				if ( bytes < 0 )
-					break;
-
-				src += BULK_OP_THRESHOLD;
-				dst += BULK_OP_THRESHOLD;
-			}
+			UNSAFE.copyMemory(src, dst, bytes);
 		}
 
 		@Override
@@ -769,16 +609,6 @@ final class MemoryAccess {
 			"The specified value does not exist as a field in %s or any of its superclasses.",
 			buffer.getClass().getSimpleName()
 		));
-	}
-
-	static sun.reflect.FieldAccessor getFieldAccessor(java.lang.reflect.Field field) {
-		try {
-			java.lang.reflect.Method getFieldAccessor = java.lang.reflect.Field.class.getDeclaredMethod("getFieldAccessor", Object.class);
-			getFieldAccessor.setAccessible(true);
-			return (sun.reflect.FieldAccessor)getFieldAccessor.invoke(field, (Object)null);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	static sun.misc.Unsafe getUnsafeInstance() {

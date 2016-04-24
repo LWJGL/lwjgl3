@@ -135,7 +135,14 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 	<property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>
 
 	<presetdef name="lwjgl.javac">
-		<javac sourcepath="" debug="yes" encoding="UTF-8" source="1.8" target="1.8">
+		<javac sourcepath="" debug="yes" encoding="UTF-8">
+			<compilerarg line="-source 8"/>
+			<compilerarg line="-target 8"/>
+			<!-- Currently fails with "package sun.misc does not exist" on JDK 9
+			<compilerarg line="-source 8" unless:set="jdk9"/>
+			<compilerarg line="-target 8" unless:set="jdk9"/>
+			<compilerarg line="-release 8" if:set="jdk9"/>
+			-->
 			<compilerarg value="-Xlint:all"/>
 		</javac>
 	</presetdef>
