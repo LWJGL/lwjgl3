@@ -95,6 +95,10 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_NordicEnabledNoSync".enumExpr("The nordic indicates that sync is enabled but it is not sending sync pulses", "-4015"),
 		"Error_NordicSyncNoFrames".enumExpr("It looks like we're getting a sync signal, but no camera frames have been received", "-4016"),
 		"Error_CatastrophicFailure".enumExpr("A catastrophic failure has occurred.  We will attempt to recover by resetting the device", "-4017"),
+		"Error_CatastrophicTimeout".enumExpr("The catastrophic recovery has timed out.", "-4018"),
+		"Error_RepeatCatastrophicFail".enumExpr("Catastrophic failure has repeated too many times.", "-4019"),
+		"Error_USBOpenDeviceFailure".enumExpr("Could not open handle for Rift device (likely already in use by another process).", "-4020"),
+		"Error_HMDGeneralFailure".enumExpr("Unexpected HMD issues that don't fit a specific bucket.", "-4021"),
 
 		"Error_HMDFirmwareMismatch".enumExpr("The HMD Firmware is out of date and is unacceptable.", "-4100"),
 		"Error_TrackerFirmwareMismatch".enumExpr("The sensor Firmware is out of date and is unacceptable.", "-4101"),
@@ -114,6 +118,10 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_DisplayLost".enumExpr("In the event of a system-wide graphics reset or cable unplug this is returned to the app.", "-6000"),
 		"Error_TextureSwapChainFull".enumExpr("#CommitTextureSwapChain() was called too many times on a texture swapchain without calling submit to use the chain.", "-6001"),
 		"Error_TextureSwapChainInvalid".enumExpr("The {@code ovrTextureSwapChain} is in an incomplete or inconsistent state. Ensure #CommitTextureSwapChain() was called at least once first.", "-6002"),
+		"Error_GraphicsDeviceReset".enumExpr("Graphics device has been reset (TDR, etc...)", "-6003"),
+		"Error_DisplayRemoved".enumExpr("HMD removed from the display adapter", "-6004"),
+		"Error_ApplicationInvisible".enumExpr("Application declared itself as an invisible type and is not allowed to submit frames.", "-6005"),
+		"Error_Disallowed".enumExpr("The given request is disallowed under the current conditions.", "-6006"),
 
 		/* Fatal errors */
 		"Error_RuntimeException".enumExpr("A runtime exception occurred. The application is required to shutdown LibOVR and re-initialize it before this error state will be cleared.", "-7000"),
