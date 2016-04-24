@@ -57,7 +57,7 @@ val errno = "Errno".nativeClass(packageName = "org.lwjgl.system.libc") {
 		"STRUNCATE".enum("String was truncated", 80)
 	)
 
-	Macro..int(
+	macro(dynamic = true)..int(
 		"errno",
 		"""
 		Returns the integer variable {@code errno}, which is set by system calls and some library functions in the event of an error to indicate what went

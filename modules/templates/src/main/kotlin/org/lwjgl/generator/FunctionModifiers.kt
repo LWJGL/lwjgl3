@@ -104,7 +104,12 @@ val SaveErrno = Code(nativeAfterCall = "\tsaveErrno();")
 fun statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
 
 /** Marks a function without arguments as a macro. */
-object Macro : FunctionModifier() {
+class Macro private constructor(val dynamic: Boolean) : FunctionModifier() {
+	companion object : ModifierKey<Macro> {
+		val FIXED = Macro(false)
+		val DYNAMIC = Macro(true)
+	}
+
 	override val isSpecial = false
 
 	override fun validate(func: NativeClassFunction) {
@@ -112,6 +117,8 @@ object Macro : FunctionModifier() {
 			throw IllegalArgumentException("The macro modifier can only be applied on functions with no arguments.")
 	}
 }
+val macro = Macro.FIXED
+fun macro(dynamic: Boolean) = if ( dynamic ) Macro.DYNAMIC else Macro.FIXED
 
 class AccessModifier(val access: Access) : FunctionModifier() {
 	companion object : ModifierKey<AccessModifier>

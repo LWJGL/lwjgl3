@@ -490,29 +490,39 @@ class NativeClassFunction(
 	fun generateMethods(writer: PrintWriter) {
 		val simpleFunction = isSimpleFunction
 
+		val macro = has(Macro) && !this[Macro].dynamic
+
 		if ( hasCustomJNI )
-			writer.generateNativeMethod(simpleFunction)
+			writer.generateNativeMethod(simpleFunction, macro)
 
 		if ( !simpleFunction ) {
 			if ( hasUnsafeMethod )
-				writer.generateUnsafeMethod()
+				writer.generateUnsafeMethod(macro)
 
 			if ( returns.nativeType !is CharSequenceType && parameters.none { it has AutoSize && it.paramType == ParameterType.IN } )
-				writer.generateJavaMethod()
+				writer.generateJavaMethod(macro)
 
 			writer.generateAlternativeMethods()
+		}
+
+		if ( macro ) {
+			writer.println()
+			writer.printDocumentation { true }
+			writer.println("\t${accessModifier}static final ${if (returns.nativeType is CharSequenceType) "String" else returnsJavaMethodType} $name = $name();")
 		}
 	}
 
 	// --[ JAVA METHODS ]--
 
-	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean) {
+	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean, macro: Boolean) {
 		println()
 
-		val doc = documentation() { true }
-		if ( doc.isNotEmpty() )
-			println(doc)
-		print("\t${accessModifier}static native $returnsNativeMethodType ")
+		if ( !macro ) {
+			val doc = documentation { true }
+			if (doc.isNotEmpty())
+				println(doc)
+		}
+		print("\t${if ( macro ) "private " else accessModifier}static native $returnsNativeMethodType ")
 		if ( !nativeOnly ) print('n')
 		print(name)
 		print("(")
@@ -533,11 +543,12 @@ class NativeClassFunction(
 		println(");")
 	}
 
-	private fun PrintWriter.generateUnsafeMethod() {
+	private fun PrintWriter.generateUnsafeMethod(macro: Boolean) {
 		println()
-		printDocumentation { true }
 
-		print("\t${accessModifier}static $returnsNativeMethodType n$name(")
+		if ( !macro )
+			printDocumentation { true }
+		print("\t${if ( macro ) "private " else accessModifier}static $returnsNativeMethodType n$name(")
 		printList(getNativeParams()) {
 			if ( it.isFunctionProvider )
 				it.asJavaMethodParam
@@ -632,17 +643,18 @@ class NativeClassFunction(
 			println(doc)
 	}
 
-	private fun PrintWriter.generateJavaMethod() {
+	private fun PrintWriter.generateJavaMethod(macro: Boolean) {
 		println()
 
 		// JavaDoc
 
 		val hideAutoSizeResult = returns.nativeType !is StructType && parameters.count { it.isAutoSizeResultOut } == 1
-		printDocumentation { !(hideAutoSizeResult && it.isAutoSizeResultOut) }
+		if ( !macro )
+			printDocumentation { !(hideAutoSizeResult && it.isAutoSizeResultOut) }
 
 		// Method signature
 
-		print("\t${accessModifier}static $returnsJavaMethodType $name(")
+		print("\t${if ( macro ) "private " else accessModifier}static $returnsJavaMethodType $name(")
 		printList(getNativeParams()) {
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
@@ -1154,35 +1166,36 @@ class NativeClassFunction(
 	) {
 		println()
 
-		val returnTransform = transforms[returns]
+		val macro = has(Macro) && parameters.isEmpty()
 
 		// JavaDoc
-
-		if ( description != null ) {
-			val doc = nativeClass.processDocumentation("$description $methodLink").toJavaDoc()
-			if ( !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false) && doc.isNotEmpty() )
-				println(doc)
-		} else {
-			val hideAutoSizeResult = returns.nativeType !is StructType && parameters.count { it.isAutoSizeResultOut } == 1
-			printDocumentation { param ->
-				!(hideAutoSizeResult && param.isAutoSizeResultOut) && transforms[param].let {
-					@Suppress("UNCHECKED_CAST")
-					(it == null || (it as FunctionTransform<Parameter>).transformDeclaration(param, param.name).let { it != null && it.endsWith(param.name) })
+		if ( !macro ) {
+			if ( description != null ) {
+				val doc = nativeClass.processDocumentation("$description $methodLink").toJavaDoc()
+				if ( !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false) && doc.isNotEmpty() )
+					println(doc)
+			} else {
+				val hideAutoSizeResult = returns.nativeType !is StructType && parameters.count { it.isAutoSizeResultOut } == 1
+				printDocumentation { param ->
+					!(hideAutoSizeResult && param.isAutoSizeResultOut) && transforms[param].let {
+						@Suppress("UNCHECKED_CAST")
+						(it == null || (it as FunctionTransform<Parameter>).transformDeclaration(param, param.name).let { it != null && it.endsWith(param.name) })
+					}
 				}
 			}
 		}
-
 		// Method signature
 
 		val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
 
-		print("\t${accessModifier}static $retType $name(")
+		print("\t${if ( macro ) "private " else accessModifier}static $retType $name(")
 		printList(parameters.asSequence()) {
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
 			else
 				it.transformDeclarationOrElse(transforms, if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asJavaMethodParam)
 		}
+		val returnTransform = transforms[returns]
 		if ( returnTransform === MapPointerTransform ) {
 			if ( !parameters.isEmpty() )
 				print(", ")

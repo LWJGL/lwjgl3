@@ -52,7 +52,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 	}
 
 	private static long CString2CFString(ByteBuffer name, int encoding) {
-		return checkPointer(CFStringCreateWithCStringNoCopy(NULL, name, encoding, kCFAllocatorNull()));
+		return checkPointer(CFStringCreateWithCStringNoCopy(NULL, name, encoding, kCFAllocatorNull));
 	}
 
 	@Override

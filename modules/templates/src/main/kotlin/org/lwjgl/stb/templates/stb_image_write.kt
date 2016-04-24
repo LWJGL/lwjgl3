@@ -115,7 +115,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	Macro..(Address..int_p)(
+	macro..(Address..int_p)(
 		"write_tga_with_rle",
 		"Returns the address of the global variable {@code stbi_write_tga_with_rle}."
 	)
