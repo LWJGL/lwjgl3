@@ -12,7 +12,7 @@ Downloads LWJGL's library dependencies.
 	<!-- *********************************** -->
 	<property name="testng" value="6.8.21"/>
 	<property name="jcommander" value="1.48"/>
-	<property name="kotlinc-build" value="1.0.1-1"/>
+	<property name="kotlinc-build" value="1.0.1-2"/>
 	<!-- *********************************** -->
 
 	<target name="-dependencies-uptodate">

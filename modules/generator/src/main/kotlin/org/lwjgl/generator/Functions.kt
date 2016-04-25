@@ -31,11 +31,11 @@ import java.util.regex.Pattern
 
 internal val ADDRESS = "address()"
 
-internal val RESULT = "__result"
+val RESULT = "__result"
 internal val POINTER_POSTFIX = "Address"
 internal val MAP_OLD = "old_buffer"
 internal val MAP_LENGTH = "length"
-internal val FUNCTION_ADDRESS = "__functionAddress"
+val FUNCTION_ADDRESS = "__functionAddress"
 
 internal val JNIENV = "__env"
 

@@ -32,13 +32,14 @@ License terms: http://lwjgl.org/license.php
 		<mkdir-symlink dir="${src.generated}"/>
 
 		<mkdir dir="${bin.core}"/>
+		<mkdir dir="${bin.generator}"/>
 		<mkdir dir="${bin.templates}"/>
 		<mkdir dir="${bin.tests}"/>
 		<mkdir dir="${bin.native}"/>
 
 		<ant antfile="update-dependencies.xml" target="check-dependencies" inheritAll="false"/>
 
-		<!--<taskdef resource="org/jetbrains/kotlin/buildtools/ant/antlib.xml" classpath="${kotlinc}/lib/kotlin-ant.jar"/>-->
+		<taskdef resource="org/jetbrains/kotlin/ant/antlib.xml" classpath="${kotlinc}/lib/kotlin-ant.jar"/>
 		<taskdef resource="testngtasks" classpath="libs/testng.jar"/>
 	</target>
 
@@ -109,6 +110,7 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="clean-templates" description="Deletes template binary files produced by this script">
+		<delete dir="${bin.generator}"/>
 		<delete dir="${bin.templates}"/>
 	</target>
 
@@ -127,117 +129,110 @@ License terms: http://lwjgl.org/license.php
 		<delete dir="${src.generated.native}"/>
 	</target>
 
-	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates,tests"/>
+	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates, tests"/>
 
-	<target name="compile-templates" description="Compiles the Templates module" depends="init">
-		<uptodate targetfile="${bin.templates}/org/lwjgl/generator/Generator.class" property="templates-uptodate">
-			<srcfiles dir="${config}" includes="build-bindings.xml"/>
-			<srcfiles dir="${src.templates}" includes="**"/>
-		</uptodate>
-		<antcall target="-compile-templates"/>
+	<target name="compile-generator" description="Compiles the Generator module" depends="init">
+		<local name="generator-uptodate"/>
+		<dir-uptodate src="${src.generator}/kotlin" dst="${bin.generator}" property="generator-uptodate"/>
+
+		<echo message="Compiling Kotlin generator..." level="info" taskname="Generator" unless:set="generator-uptodate"/>
+		<kotlinc moduleName="Generator" output="${bin.generator}" printVersion="true" unless:set="generator-uptodate">
+			<compilerarg value="-Xno-call-assertions"/>
+			<compilerarg value="-Xno-param-assertions"/>
+			<compilerarg value="-Xreport-perf"/>
+
+			<src path="${src.generator}/kotlin"/>
+		</kotlinc>
 	</target>
 
-	<target name="-compile-templates" description="Compiles the Templates module" depends="bindings" unless="templates-uptodate">
-		<!-- Compile Java dependencies -->
-		<lwjgl.javac destdir="${bin}/Templates" taskname="Java dependencies">
-			<src path="${src.templates}/java"/>
-			<include name="org/lwjgl/*.java"/>
-		</lwjgl.javac>
+	<target name="compile-templates" description="Compiles the Templates module" depends="compile-generator, bindings">
+		<local name="templates-uptodate"/>
+		<dir-uptodate src="${src.templates}/kotlin" dst="${bin.templates}" property="templates-uptodate"/>
 
-		<!-- Compile Kotlin code -->
-		<echo message="Compiling Kotlin templates. This will take 1-2 minutes..." level="info" taskname="Templates"/>
-		<java
-			classpath="${kotlinc}/lib/kotlin-preloader.jar"
-			classname="org.jetbrains.kotlin.preloading.Preloader"
-			fork="true" failonerror="true" taskname="Templates"
-		>
-			<jvmarg value="-server"/>
-			<jvmarg value="-Xms1024m"/>
-			<jvmarg value="-Xverify:none"/>
+		<echo message="Compiling Kotlin templates. This will take 1-2 minutes..." level="info" taskname="Templates" unless:set="templates-uptodate"/>
+		<kotlinc moduleName="Templates" output="${bin}/templates" printVersion="true" unless:set="templates-uptodate">
+			<classpath>
+		        <pathelement location="${bin.generator}"/>
+		    </classpath>
 
-			<arg value="-measure"/>
-			<arg value="-classpath"/>
-			<arg path="${kotlinc}/lib/kotlin-compiler.jar:${kotlinc}/lib/kotlin-runtime.jar:${kotlinc}/lib/kotlin-reflect.jar"/>
-			<arg line="org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"/>
+			<compilerarg value="-Xno-call-assertions"/>
+			<compilerarg value="-Xno-param-assertions"/>
+			<compilerarg value="-Xreport-perf"/>
 
-			<arg line="-kotlin-home ${kotlinc}"/>
-			<arg line="-d ${bin.templates}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" unless:true="${binding.egl}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/glfw" if:true="${binding.glfw}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/hwloc" if:true="${binding.hwloc}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/nanovg" if:true="${binding.nanovg}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/openal" if:true="${binding.openal}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/opencl" if:true="${binding.opencl}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" unless:true="${binding.opencl}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/opengl" if:true="${binding.opengl}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/opengl/GLTypes.kt" unless:true="${binding.opengl}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/opengles" if:true="${binding.opengles}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/vulkan" if:true="${binding.vulkan}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/VKypes.kt" unless:true="${binding.vulkan}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/ExtensionTypes.kt" unless:true="${binding.vulkan}"/>
 
-			<arg value="${src.templates.kotlin}/org/lwjgl/generator"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/dyncall"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/jemalloc"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/libc"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/linux"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/macosx"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/windows"/>
 
-			<arg value="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" unless:true="${binding.egl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/glfw" if:true="${binding.glfw}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/nanovg" if:true="${binding.nanovg}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/openal" if:true="${binding.openal}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/opencl" if:true="${binding.opencl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" unless:true="${binding.opencl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/opengl" if:true="${binding.opengl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/opengl/GLTypes.kt" unless:true="${binding.opengl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/opengles" if:true="${binding.opengles}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan" if:true="${binding.vulkan}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan/VKypes.kt" unless:true="${binding.vulkan}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/vulkan/ExtensionTypes.kt" unless:true="${binding.vulkan}"/>
-
-			<arg value="${src.templates.kotlin}/org/lwjgl/system/dyncall"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system/jemalloc"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system/libc"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system/linux"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system/macosx"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/system/windows"/>
-
-			<arg value="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/util/simd"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/util/xxhash"/>
-			<!--
-			<arg value="-Xno-call-assertions"/>
-			<arg value="-Xno-param-assertions"/>
-			-->
-		</java>
+			<src path="${src.templates.kotlin}/org/lwjgl/util/lmdb" if:true="${binding.lmdb}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/util/simd"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/util/xxhash"/>
+		</kotlinc>
 	</target>
 
-	<target name="formatter" description="Runs the template formatter tool" depends="init">
-		<lwjgl.javac destdir="${bin.templates}" taskname="Compile formatter">
-			<src path="${src.templates}/java"/>
+	<target name="-compile-generator-tools" description="Compiles the Generator tools" depends="init">
+		<lwjgl.javac destdir="${bin.generator}">
+			<src path="${src.generator}/java"/>
 			<include name="org/lwjgl/generator/util/**"/>
 		</lwjgl.javac>
+	</target>
 
+	<target name="formatter" description="Runs the template formatter tool" depends="-compile-generator-tools">
 		<java
 			classname="org.lwjgl.generator.util.TemplateFormatter"
 			fork="true"
 			spawn="true"
 		>
 			<classpath>
-				<pathelement path="${bin.templates}"/>
+				<pathelement path="${bin.generator}"/>
 				<pathelement path="${test.resources}"/>
 			</classpath>
 		</java>
 	</target>
 
-	<target name="generate" description="Runs the bindings Generator" depends="init">
-		<available file="${bin.templates}/org/lwjgl/generator/Generator.class" property="has-compiled-templates"/>
+	<target name="generate" description="Runs the Generator" depends="init, bindings">
+		<local name="has-compiled-templates"/>
+		<available file="${bin.templates}/META-INF/Templates.kotlin_module" property="has-compiled-templates"/>
 		<fail unless="has-compiled-templates" message="Please invoke the compile-templates target first."/>
 
+		<local name="generated-uptodate"/>
 		<uptodate property="generated-uptodate" targetfile="${src.generated}/touch.txt">
 			<srcfiles dir="${config}" includes="build-bindings.xml"/>
-			<srcfiles dir="${bin.templates}" includes="**/*.class"/>
+			<srcfiles dir="${bin.generator}" includes="**"/>
+			<srcfiles dir="${bin.templates}" includes="**"/>
 		</uptodate>
-		<antcall target="-generate"/>
-	</target>
 
-	<target name="-generate" description="Runs the code Generator" depends="bindings" unless="generated-uptodate">
 		<java
 			classname="org.lwjgl.generator.GeneratorKt"
 			fork="true"
 			failonerror="true"
 			taskname="Generator"
+		    unless:set="generated-uptodate"
 		>
 			<classpath>
+				<pathelement path="${bin.generator}"/>
 				<pathelement path="${bin.templates}"/>
 				<pathelement path="${kotlinc}/lib/kotlin-runtime.jar"/>
 			</classpath>
@@ -245,11 +240,10 @@ License terms: http://lwjgl.org/license.php
 			<jvmarg value="-server"/>
 			<jvmarg line="${bindings}"/>
 
-			<arg value="${src.templates}/kotlin"/>
+			<arg value="${src.templates.kotlin}"/>
 			<arg value="${src.generated}"/>
 		</java>
-
-		<touch file="${src.generated}/touch.txt" verbose="false"/>
+		<touch file="${src.generated}/touch.txt" verbose="false" unless:set="generated-uptodate"/>
 	</target>
 
 	<target name="-init-compile" description="Initializes properties required for compilation" depends="bindings">
@@ -475,8 +469,8 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="-javadoc" description="Generates the LWJGL JavaDoc" depends="-init-compile,-build-version" unless="javadoc-uptodate">
-		<lwjgl.javac destdir="${bin.templates}" taskname="Compile doclets">
-			<src path="${src.templates}/java"/>
+		<lwjgl.javac destdir="${bin.generator}" taskname="Compile doclets">
+			<src path="${src.generator}/java"/>
 			<include name="org/lwjgl/system/**"/>
 			<classpath>
 				<pathelement location="${env.JAVA_HOME}/lib/tools.jar"/>
@@ -496,7 +490,7 @@ License terms: http://lwjgl.org/license.php
 			notree="true"
 			public="true"
 			doclet="org.lwjgl.system.ExcludeDoclet"
-			docletpath="${bin.templates}"
+			docletpath="${bin.generator}"
 		    maxmemory="1G"
 		    failonerror="true"
 		>

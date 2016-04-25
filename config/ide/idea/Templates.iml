@@ -5,22 +5,12 @@
     <output-test url="file://$MODULE_DIR$/../../../bin/Templates" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../modules/templates">
-      <sourceFolder url="file://$MODULE_DIR$/../../../modules/templates/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../../modules/templates/src/main/kotlin" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinRuntime" level="project" />
-    <orderEntry type="library" name="JDK Tools" level="application" />
     <orderEntry type="library" scope="RUNTIME" name="Ant Launcher" level="project" />
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../modules/core/src/test/resources" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="module" module-name="Generator" />
   </component>
 </module>

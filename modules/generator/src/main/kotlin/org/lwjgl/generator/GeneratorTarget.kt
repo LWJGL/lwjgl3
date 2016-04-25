@@ -147,7 +147,7 @@ abstract class GeneratorTarget(
 		}
 	}
 
-	private val sourceFile: String = getSourceFileName();
+	val sourceFile = if ( packageName == "org.lwjgl.system" ) null else getSourceFileName();
 	open fun getLastModified(root: String): Long = File("$root/$sourceFile").let {
 		if ( it.exists() ) it else
 			throw IllegalStateException("The source file for template $packageName.$className does not exist ($it).")

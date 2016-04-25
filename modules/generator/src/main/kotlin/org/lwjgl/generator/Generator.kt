@@ -125,8 +125,6 @@ fun main(args: Array<String>) {
 
 			// Generate utility classes. These are auto-registered during the process above.
 
-			Generator.register(org.lwjgl.system.ThreadLocalState)
-
 			CountDownLatch(4).let { latch ->
 				fun submit(work: () -> Unit) {
 					pool.submit {
@@ -197,6 +195,45 @@ class Generator(
 		fun registerTLS(import: String, state: String) {
 			tlsImport.add(import)
 			tlsState.add(state)
+		}
+
+		init {
+			val CLASS = "ThreadLocalState"
+			Generator.register(object : GeneratorTarget("org.lwjgl.system", CLASS) {
+				override fun PrintWriter.generateJava() {
+					print(HEADER)
+					println("package $packageName;\n")
+
+					Generator.tlsImport.toSortedSet().forEach {
+						javaImport(it)
+					}
+
+					preamble.printJava(this)
+
+					println("""/** Thread-local state used internally by LWJGL. */
+public final class $CLASS implements Runnable {
+
+	Runnable target;
+
+	public final MemoryStack stack;
+""")
+					Generator.tlsState.toSortedSet().forEach {
+						println("\t$it")
+					}
+					println("""
+	$CLASS() {
+		stack = MemoryStack.create();
+	}
+
+	@Override
+	public void run() {
+		if ( target != null )
+			target.run();
+	}
+
+}""")
+				}
+			})
 		}
 	}
 
@@ -313,15 +350,15 @@ class Generator(
 
 		val outputJava = File("$trgPath/java/$packagePath/${nativeClass.className}.java")
 
-		val touchTimestamp = max(nativeClass.getLastModified("$srcPath/$packagePath/templates"), packageLastModified)
-		if ( outputJava.exists() && touchTimestamp < outputJava.lastModified() ) {
+		val lmt = max(nativeClass.getLastModified("$srcPath/$packagePath/templates"), packageLastModified)
+		if ( lmt < outputJava.lastModified() ) {
 			//println("SKIPPED: ${nativeClass.packageName}.${nativeClass.className}")
 			return
 		}
 
 		//println("GENERATING: ${nativeClass.packageName}.${nativeClass.className}")
 
-		generateOutput(nativeClass, outputJava, touchTimestamp) {
+		generateOutput(nativeClass, outputJava, lmt) {
 			it.generateJava()
 		}
 
@@ -350,19 +387,19 @@ class Generator(
 
 		val outputJava = File("$trgPath/java/$packagePath/${target.className}.java")
 
-		val touchTimestamp: Long?
-		if ( target.packageName != "org.lwjgl.system" ) {
-			touchTimestamp = max(target.getLastModified("$srcPath/$packagePath"), max(packageLastModifiedMap[target.packageName]!!, GENERATOR_LAST_MODIFIED))
-			if ( outputJava.exists() && touchTimestamp < outputJava.lastModified() ) {
-				//println("SKIPPED: ${target.packageName}.${target.className}")
-				return
-			}
-		} else
-			touchTimestamp = null
+		val lmt = if ( target.sourceFile == null ) null else max(
+			target.getLastModified("$srcPath/$packagePath"),
+			max(packageLastModifiedMap[target.packageName]!!, GENERATOR_LAST_MODIFIED)
+		)
+
+		if ( lmt != null && lmt < outputJava.lastModified() ) {
+			//println("SKIPPED: ${target.packageName}.${target.className}")
+			return
+		}
 
 		//println("GENERATING: ${target.packageName}.${target.className}")
 
-		generateOutput(target, outputJava, touchTimestamp) {
+		generateOutput(target, outputJava, lmt) {
 			it.generateJava()
 		}
 
@@ -441,7 +478,7 @@ private fun <T> generateOutput(
 	target: T,
 	file: File,
 	/** If not null, the file timestamp will be updated if no change occured since last generation. */
-	touchTimestamp: Long? = null,
+	lmt: Long? = null,
 	generate: T.(PrintWriter) -> Unit
 ) {
 	// TODO: Add error handling
@@ -477,9 +514,9 @@ private fun <T> generateOutput(
 			val bos = BufferedOutputStream(FileOutputStream(file))
 			bos.write(after)
 			bos.close()
-		} else if ( touchTimestamp != null ) {
+		} else if ( lmt != null ) {
 			// Update the file timestamp
-			file.setLastModified(touchTimestamp + 1)
+			file.setLastModified(lmt + 1)
 		}
 	} else {
 		println("\tWRITING: $file")

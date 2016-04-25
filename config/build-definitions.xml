@@ -51,9 +51,11 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
 	<property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
 
+	<property name="module.generator" location="${modules}/generator" relative="true"/>
 	<property name="module.templates" location="${modules}/templates" relative="true"/>
 	<property name="module.core" location="${modules}/core" relative="true"/>
 
+	<property name="src.generator" location="${module.generator}/src/main" relative="true"/>
 	<property name="src.templates" location="${module.templates}/src/main" relative="true"/>
 	<property name="src.templates.kotlin" location="${src.templates}/kotlin" relative="true"/>
 	<property name="src.core" location="${module.core}/src/main/java" relative="true"/>
@@ -66,6 +68,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 	<property name="src.generated.java" location="${src.generated}/java" relative="true"/>
 	<property name="src.generated.native" location="${src.generated}/c" relative="true"/>
 
+	<property name="bin.generator" location="${bin}/Generator" relative="true"/>
 	<property name="bin.templates" location="${bin}/Templates" relative="true"/>
 	<property name="bin.core" location="${bin}/Core" relative="true"/>
 	<property name="bin.tests" location="${bin}/Tests" relative="true"/>
@@ -159,6 +162,25 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 			</script>
 		</sequential>
 	</macrodef>
+
+	<scriptdef name="dir-uptodate" language="javascript">
+		<attribute name="src"/>
+		<attribute name="dst"/>
+		<attribute name="property"/>
+		<![CDATA[
+		with (new JavaImporter(java.nio.file)) {
+			var lmt = function(dir) Files
+				.walk(Paths.get(attributes.get(dir)))
+				.filter(function(it) Files.isRegularFile(it))
+				.mapToLong(function(it) Files.getLastModifiedTime(it).toMillis())
+				.max()
+				.orElse(0);
+
+			if ( lmt("src") <= lmt("dst") )
+				project.setProperty(attributes.get("property"), "true");
+		}
+		]]>
+	</scriptdef>
 
 	<macrodef name="mkdir-symlink">
 		<attribute name="dir"/>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../../../bin/Generator" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/Generator" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../modules/generator">
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/generator/src/main/kotlin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/generator/src/main/java" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="KotlinRuntime" level="project" />
+    <orderEntry type="library" name="JDK Tools" level="application" />
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../modules/core/src/test/resources" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>
