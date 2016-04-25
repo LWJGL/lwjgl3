@@ -150,7 +150,7 @@ License terms: http://lwjgl.org/license.php
 		<dir-uptodate src="${src.templates}/kotlin" dst="${bin.templates}" property="templates-uptodate"/>
 
 		<echo message="Compiling Kotlin templates. This will take 1-2 minutes..." level="info" taskname="Templates" unless:set="templates-uptodate"/>
-		<kotlinc moduleName="Templates" output="${bin}/templates" printVersion="true" unless:set="templates-uptodate">
+		<kotlinc moduleName="Templates" output="${bin.templates}" printVersion="true" unless:set="templates-uptodate">
 			<classpath>
 		        <pathelement location="${bin.generator}"/>
 		    </classpath>
