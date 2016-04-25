@@ -7,7 +7,7 @@ package org.lwjgl.generator
 import java.lang.Math.*
 import java.util.regex.Pattern
 
-fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
+internal fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
 
 private val REDUNDANT_WHITESPACE = Pattern.compile("^[ \\t]+$", Pattern.MULTILINE)
 private val BLOCK_NODE = "(?:div|h[1-6]|li|ol|pre|table|td|tr|ul)" // TODO: add more here if necessary
@@ -128,7 +128,7 @@ private fun StringBuilder.appendParagraph(linePrefix: String, text: String, star
 	append("</p>")
 }
 
-fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
+internal fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
 	val clean = cleanup("$indentation * ")
 
 	return if ( allowSingleLine && clean.indexOf('\n') == -1 )
@@ -138,7 +138,7 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 }
 
 /** Specialized conversion for methods. */
-fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
+internal fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
 	if ( documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && params.none() { it.documentation.isNotEmpty() } )
 		return ""
 
@@ -224,7 +224,7 @@ enum class LinkMode {
 
 	protected abstract fun print(multi: Boolean): String
 
-	fun appendLinks(documentation: String, links: String): String {
+	internal fun appendLinks(documentation: String, links: String): String {
 		val trimmed = documentation.trim()
 		val builder = StringBuilder(trimmed.length + 16 + links.length) // Rough estimate to reduce mallocs. TODO: validate
 

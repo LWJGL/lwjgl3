@@ -15,25 +15,25 @@ open class StructMember(
 	val name: String,
 	val documentation: String
 ) : TemplateElement() {
-	val offsetField: String
+	internal val offsetField: String
 		get() = name.toUpperCase()
 
-	fun offsetField(parentField: String): String {
+	internal fun offsetField(parentField: String): String {
 		return if ( parentField.isEmpty() )
 			offsetField
 		else
 			"${parentField}_$offsetField"
 	}
 
-	fun field(parentMember: String) = if ( parentMember.isEmpty() )
+	internal fun field(parentMember: String) = if ( parentMember.isEmpty() )
 		if ( name == "class" ) "$name\$" else name // TODO: use a list of Java keywords here
 	else
 		"${parentMember}_$name"
 
 	var mutable = false
 
-	var links: String = ""
-	var linkMode: LinkMode = LinkMode.SINGLE
+	internal var links: String = ""
+	internal var linkMode: LinkMode = LinkMode.SINGLE
 
 	fun links(links: String, linkMode: LinkMode = LinkMode.SINGLE) {
 		this.links = links
@@ -198,7 +198,7 @@ class Struct(
 		}
 	}
 
-	val validations: Sequence<String> by lazy {
+	internal val validations: Sequence<String> by lazy {
 		if ( union )
 			return@lazy emptySequence<String>()
 

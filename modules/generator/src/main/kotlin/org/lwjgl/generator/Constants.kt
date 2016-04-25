@@ -59,7 +59,7 @@ class EnumValueExpression(
 val EnumConstant = ConstantType(EnumValue::class, { "0x%X".format(it) })
 
 open class Constant<T : Any>(val name: String, val value: T?)
-class ConstantExpression<T : Any>(name: String, val expression: String) : Constant<T>(name, null)
+internal class ConstantExpression<T : Any>(name: String, val expression: String) : Constant<T>(name, null)
 
 class ConstantBlock<T : Any>(
 	val nativeClass: NativeClass,
@@ -77,7 +77,7 @@ class ConstantBlock<T : Any>(
 
 	private fun getConstantName(name: String) = if ( noPrefix ) name else "${nativeClass.prefixConstant}$name"
 
-	fun generate(writer: PrintWriter) {
+	internal fun generate(writer: PrintWriter) {
 		if ( constantType === EnumConstant ) {
 			// Increment/update the current enum value while iterating the enum constants.
 			// Constants without documentation are added to the root block.

@@ -34,7 +34,7 @@ class Preamble {
 	private var nativeImports: MutableList<String> = EMPTY_IMPORTS
 	private var nativeDirectives: MutableList<NativeDefine> = EMPTY_DIRECTIVES
 
-	val hasNativeDirectives: Boolean get() = nativeImports.isNotEmpty() || nativeDirectives.isNotEmpty()
+	internal val hasNativeDirectives: Boolean get() = nativeImports.isNotEmpty() || nativeDirectives.isNotEmpty()
 
 	fun javaImport(vararg classes: String) {
 		if ( javaImports === EMPTY_IMPORTS )
@@ -64,7 +64,7 @@ class Preamble {
 		nativeDirectives.add(NativeDefine(expression, beforeIncludes))
 	}
 
-	fun printJava(writer: PrintWriter) {
+	internal fun printJava(writer: PrintWriter) {
 		if ( javaImports.isEmpty() )
 			return
 
@@ -82,7 +82,7 @@ class Preamble {
 		writer.println()
 	}
 
-	fun printNative(writer: PrintWriter) {
+	internal fun printNative(writer: PrintWriter) {
 		nativeDirectives.filter { it.beforeIncludes }.forEach {
 			writer.println("${it.expression}")
 		}
@@ -101,7 +101,7 @@ class Preamble {
 
 private val JNI_UNDERSCORE_ESCAPE_PATTERN = Pattern.compile("_")
 
-val String.asJNIName: String
+internal val String.asJNIName: String
 	get() = if ( this.indexOf('_') == -1 )
 		this
 	else
@@ -147,8 +147,8 @@ abstract class GeneratorTarget(
 		}
 	}
 
-	val sourceFile = if ( packageName == "org.lwjgl.system" ) null else getSourceFileName();
-	open fun getLastModified(root: String): Long = File("$root/$sourceFile").let {
+	internal val sourceFile = if ( packageName == "org.lwjgl.system" ) null else getSourceFileName();
+	internal open fun getLastModified(root: String): Long = File("$root/$sourceFile").let {
 		if ( it.exists() ) it else
 			throw IllegalStateException("The source file for template $packageName.$className does not exist ($it).")
 	}.lastModified()
@@ -162,7 +162,7 @@ abstract class GeneratorTarget(
 
 	var documentation: String? = null
 
-	val preamble = Preamble()
+	internal val preamble = Preamble()
 
 	fun <T : GeneratorTarget> T.javaImport(vararg classes: String): T {
 		preamble.javaImport(*classes)
@@ -257,7 +257,7 @@ abstract class GeneratorTarget(
 		return buffer.toString()
 	}
 
-	protected enum class LinkType {
+	private enum class LinkType {
 		FIELD {
 			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, postfix: String, custom: Boolean): String {
 				val source = if ( className == null || className == sourceName ) "" else className
@@ -298,13 +298,13 @@ abstract class GeneratorTargetNative(
 ) : GeneratorTarget(packageName, className) {
 
 	companion object {
-		val DOT_PATTERN = Pattern.compile("[.]")
+		private val DOT_PATTERN = Pattern.compile("[.]")
 	}
 
-	val nativeFileName: String
+	internal val nativeFileName: String
 		get() = "${packageName.replace('.', '_')}_$className"
 
-	val nativeFileNameJNI: String
+	internal val nativeFileNameJNI: String
 
 	init {
 		val fileName = StringBuilder(packageName.length + className.length + 4); // some extra room for escaping

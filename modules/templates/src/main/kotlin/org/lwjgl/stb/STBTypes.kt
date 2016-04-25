@@ -50,7 +50,7 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 	returnDoc = "the number of bytes actually read"
 ) {
 	documentation = "Instances of this interface may be set to the {@code read} field of the ##STBIIOCallbacks struct."
-	preamble.javaImport("java.nio.*")
+	javaImport("java.nio.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link STBIReadCallback} arguments to a ByteBuffer.
@@ -114,7 +114,7 @@ val stbi_write_func = "stbi_write_func *".callback(
 	AutoSize("data")..int.IN("size", "the number of bytes in {@code data}")
 ) {
 	documentation = "Instances of this interface may be used with the ##STBImageWrite {@code write_type_to_func} functions."
-	preamble.javaImport("java.nio.*")
+	javaImport("java.nio.*")
 	additionalCode = """
 	/**
 	 * Converts the specified {@link STBIWriteCallback} arguments to a ByteBuffer.

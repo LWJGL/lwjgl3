@@ -13,7 +13,7 @@ class CallbackFunction(
 	vararg val signature: Parameter
 ) : GeneratorTarget(packageName, className) {
 
-	var functionDoc: (CallbackFunction) -> String = { "" }
+	internal var functionDoc: (CallbackFunction) -> String = { "" }
 	var additionalCode: String = ""
 
 	private var callConvention = "DEFAULT"
@@ -25,7 +25,7 @@ class CallbackFunction(
 		"${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType} ${it.name}"
 	}.joinToString(", ")
 
-	val NativeType.dyncall: Char
+	internal val NativeType.dyncall: Char
 		get() = when (this) {
 			is PointerType   -> 'p'
 			is PrimitiveType -> when (mapping) {
@@ -43,7 +43,7 @@ class CallbackFunction(
 			else             -> if (mapping === TypeMapping.VOID) 'v' else throw IllegalArgumentException("Unsupported callback native type: $this")
 		}
 
-	val NativeType.argType: String
+	private val NativeType.argType: String
 		get() = if (this is PointerType || mapping === PrimitiveMapping.POINTER)
 			"Pointer"
 		else if (mapping == PrimitiveMapping.BOOLEAN)
@@ -121,7 +121,7 @@ ${access.modifier}abstract class $className extends Callback implements ${classN
 }""")
 	}
 
-	fun PrintWriter.generateInterface() {
+	internal fun PrintWriter.generateInterface() {
 		print(HEADER)
 		println("package $packageName;\n")
 
@@ -171,7 +171,7 @@ ${signature.asSequence().map {
 
 }
 
-class CallbackInterface(
+private class CallbackInterface(
 	val callback: CallbackFunction
 ) : GeneratorTarget(callback.packageName, "${callback.className}I") {
 	override fun PrintWriter.generateJava() = callback.run {

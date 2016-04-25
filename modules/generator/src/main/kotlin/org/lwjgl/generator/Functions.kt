@@ -111,7 +111,7 @@ class NativeClassFunction(
 
 	val nativeName: String get() = if ( has(NativeName) ) this[NativeName].name else "\"$name\""
 
-	val accessModifier: String
+	internal val accessModifier: String
 		get() = (if ( has(AccessModifier) ) this[AccessModifier].access else nativeClass.access).modifier
 
 	fun stripPostfix(functionName: String = name, stripType: Boolean): String {
@@ -161,28 +161,28 @@ class NativeClassFunction(
 	val javaDocLink: String
 		get() = "${nativeClass.className}$methodLink"
 
-	val methodLink: String get() = "#$simpleName()"
+	internal val methodLink: String get() = "#$simpleName()"
 
-	val hasExplicitFunctionAddress: Boolean
+	internal val hasExplicitFunctionAddress: Boolean
 		get() = parameters.isNotEmpty() && parameters[0] === EXPLICIT_FUNCTION_ADDRESS
 
 	private val hasNativeCode: Boolean
 		get() = (has(Code) && this[Code].let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || parameters.contains(JNI_ENV)
 
-	val hasCustomJNI: Boolean
+	internal val hasCustomJNI: Boolean
 		get() = nativeClass.binding == null || returns.isStructValue || hasNativeCode
 
 	private val isSimpleFunction: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
 
-	val hasUnsafeMethod: Boolean
+	internal val hasUnsafeMethod: Boolean
 		get() = nativeClass.binding != null
 		        && !(hasExplicitFunctionAddress && hasNativeCode)
 		        && (returns.isBufferPointer || returns.nativeType is CallbackType || hasParam { it.isBufferPointer || it.nativeType is CallbackType })
 		        && !returns.has(Address)
 				&& !hasParam { it.nativeType is ArrayType }
 
-	val hasArrayOverloads: Boolean
+	internal val hasArrayOverloads: Boolean
 		get() = parameters.asSequence()
 				.filter { it.nativeType.mapping.isArray || it has MultiType }
 				.let { it.any() && it.none { it.isAutoSizeResultOut } }
@@ -214,7 +214,7 @@ class NativeClassFunction(
 
 	private fun hasAutoSizeFor(reference: Parameter) = hasParam(hasAutoSizePredicate(reference))
 
-	val hideAutoSizeResultParam: Boolean
+	internal val hideAutoSizeResultParam: Boolean
 		get() = returns.nativeType is PointerType && getParams { it.isAutoSizeResultOut }.count() == 1
 
 	private fun Parameter.error(msg: String) {
@@ -487,7 +487,7 @@ class NativeClassFunction(
 	}
 
 	/** This is where we start generating java code. */
-	fun generateMethods(writer: PrintWriter) {
+	internal fun generateMethods(writer: PrintWriter) {
 		val simpleFunction = isSimpleFunction
 
 		val macro = has(Macro) && !this[Macro].dynamic
@@ -1159,7 +1159,7 @@ class NativeClassFunction(
 			generateAlternativeMethod(stripPostfix(name, stripType = false), transforms)
 	}
 
-	fun PrintWriter.generateAlternativeMethod(
+	internal fun PrintWriter.generateAlternativeMethod(
 		name: String,
 		transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>,
 	    description: String? = null
@@ -1341,7 +1341,7 @@ class NativeClassFunction(
 
 	// --[ JNI FUNCTIONS ]--
 
-	fun generateFunctionDefinition(writer: PrintWriter) = writer.generateFunctionDefinitionImpl()
+	internal fun generateFunctionDefinition(writer: PrintWriter) = writer.generateFunctionDefinitionImpl()
 	private fun PrintWriter.generateFunctionDefinitionImpl() {
 		print("typedef ${returns.toNativeType(nativeClass.binding)} (")
 		if ( nativeClass.binding?.callingConvention !== CallingConvention.DEFAULT )
@@ -1357,7 +1357,7 @@ class NativeClassFunction(
 		println(");")
 	}
 
-	fun generateFunction(writer: PrintWriter) {
+	internal fun generateFunction(writer: PrintWriter) {
 		val hasArrays = hasParam { it.nativeType is ArrayType }
 		writer.generateFunctionImpl(hasArrays, critical = false)
 		if ( hasArrays && !parameters.contains(JNI_ENV) )

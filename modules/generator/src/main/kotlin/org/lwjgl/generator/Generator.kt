@@ -163,16 +163,16 @@ class Generator(
 
 	companion object {
 		// package -> #name -> class#prefix_name
-		val tokens = ConcurrentHashMap<String, MutableMap<String, String>>()
+		internal val tokens = ConcurrentHashMap<String, MutableMap<String, String>>()
 		// package -> #name() -> class#prefix_name()
-		val functions = ConcurrentHashMap<String, MutableMap<String, String>>()
+		internal val functions = ConcurrentHashMap<String, MutableMap<String, String>>()
 
-		val structs = ConcurrentLinkedQueue<Struct>()
-		val callbacks = ConcurrentLinkedQueue<CallbackFunction>()
-		val customClasses = ConcurrentLinkedQueue<GeneratorTarget>()
+		internal val structs = ConcurrentLinkedQueue<Struct>()
+		internal val callbacks = ConcurrentLinkedQueue<CallbackFunction>()
+		internal val customClasses = ConcurrentLinkedQueue<GeneratorTarget>()
 
-		val tlsImport = ConcurrentLinkedQueue<String>()
-		val tlsState = ConcurrentLinkedQueue<String>()
+		internal val tlsImport = ConcurrentLinkedQueue<String>()
+		internal val tlsState = ConcurrentLinkedQueue<String>()
 
 		/** Registers a struct definition. */
 		fun register(struct: Struct): Struct {
@@ -276,7 +276,7 @@ public final class $CLASS implements Runnable {
 		}
 	}
 
-	fun generate(packageName: String, binding: Binding? = null) {
+	internal fun generate(packageName: String, binding: Binding? = null) {
 		val packagePath = "$srcPath/${packageName.replace('.', '/')}"
 
 		val packageLastModified = getDirectoryLastModified(packagePath, false)
@@ -372,7 +372,7 @@ public final class $CLASS implements Runnable {
 			nativeClass.nativeDirectivesWarning()
 	}
 
-	fun <T : GeneratorTarget> generate(typeName: String, targets: Iterable<T>) {
+	internal fun <T : GeneratorTarget> generate(typeName: String, targets: Iterable<T>) {
 		targets.forEach {
 			try {
 				generate(it)
@@ -382,7 +382,7 @@ public final class $CLASS implements Runnable {
 		}
 	}
 
-	fun generate(target: GeneratorTarget) {
+	internal fun generate(target: GeneratorTarget) {
 		val packagePath = target.packageName.replace('.', '/')
 
 		val outputJava = File("$trgPath/java/$packagePath/${target.className}.java")
@@ -426,7 +426,7 @@ public final class $CLASS implements Runnable {
 
 private val packageLastModifiedMap: MutableMap<String, Long> = ConcurrentHashMap()
 
-fun getDirectoryLastModified(path: String, recursive: Boolean = false) = getDirectoryLastModified(File(path), recursive)
+internal fun getDirectoryLastModified(path: String, recursive: Boolean = false) = getDirectoryLastModified(File(path), recursive)
 private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 	if ( !pck.exists() || !pck.isDirectory )
 		return 0
@@ -534,17 +534,17 @@ private fun <T> generateOutput(
 }
 
 /** Returns true if the array was empty. */
-inline fun <T> Array<out T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
+internal inline fun <T> Array<out T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
 	for (i in 0..this.lastIndex)
 		apply(this[i], 0 < i)
 	return this.size == 0
 }
 
 /** Returns true if the collection was empty. */
-fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean = this.asSequence().forEachWithMore(moreOverride, apply)
+internal fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean = this.asSequence().forEachWithMore(moreOverride, apply)
 
 /** Returns true if the sequence was empty. */
-fun <T> Sequence<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean {
+internal fun <T> Sequence<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean {
 	var more = moreOverride
 	for (item in this) {
 		apply(item, more)
@@ -555,7 +555,7 @@ fun <T> Sequence<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Bo
 }
 
 /** Returns the string with the first letter uppercase. */
-val String.upperCaseFirst: String
+internal val String.upperCaseFirst: String
 	get() = if ( this.length <= 1 )
 		this.toUpperCase()
 	else

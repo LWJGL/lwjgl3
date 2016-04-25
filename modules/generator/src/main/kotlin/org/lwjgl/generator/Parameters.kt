@@ -15,13 +15,13 @@ abstract class QualifiedType(
 	override val isSpecial: Boolean
 		get() = isBufferPointer || super.isSpecial
 
-	val isBufferPointer: Boolean
+	internal val isBufferPointer: Boolean
 		get() = nativeType.isPointerData
 
-	val javaMethodType: String
+	internal val javaMethodType: String
 		get() = nativeType.javaMethodType
 
-	fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false): String {
+	internal fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false): String {
 		val builder = StringBuilder()
 
 		if ( has(const) )
@@ -57,7 +57,7 @@ class ReturnValue(nativeType: NativeType) : QualifiedType(nativeType) {
 
 	// --- [ Helper functions & properties ] ---
 
-	val isVoid: Boolean
+	internal val isVoid: Boolean
 		get() = nativeType.mapping === TypeMapping.VOID
 
 }
@@ -77,7 +77,7 @@ class Parameter(
 	linkMode: LinkMode
 ) : QualifiedType(nativeType) {
 
-	val documentation = if ( links.isEmpty() ) documentation else linkMode.appendLinks(documentation, links)
+	internal val documentation = if ( links.isEmpty() ) documentation else linkMode.appendLinks(documentation, links)
 
 	override fun hashCode() = name.hashCode()
 
@@ -89,13 +89,13 @@ class Parameter(
 		get() = (nativeType.mapping === PointerMapping.OPAQUE_POINTER && (nativeType is ObjectType || !has(nullable)) && this !== JNI_ENV) || super.isSpecial
 
 	/** Returns true if this is an output parameter with the AutoSizeResult modifier. */
-	val isAutoSizeResultOut: Boolean
+	internal val isAutoSizeResultOut: Boolean
 		get() = paramType === OUT && has(AutoSizeResult)
 
-	val asNativeMethodParam: String
+	internal val asNativeMethodParam: String
 		get() = "${nativeType.nativeMethodType} $name"
 
-	fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
+	internal fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
 		nativeType is StructType || nativeType is ObjectType ->
 			if ( has(nullable) )
 				"$name == null ? NULL : $name.$ADDRESS"
@@ -114,7 +114,7 @@ class Parameter(
 		else                                                 -> name
 	}
 
-	fun removeArrayModifiers(): Parameter {
+	internal fun removeArrayModifiers(): Parameter {
 		if ( has(optional) && has(MultiType) )
 			modifiers.remove(Nullable::class.java)
 

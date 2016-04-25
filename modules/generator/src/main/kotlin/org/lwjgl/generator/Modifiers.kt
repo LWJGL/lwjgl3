@@ -20,7 +20,7 @@ abstract class TemplateElement {
 
 	protected var modifiers = EMPTY_MODIFIERS
 
-	fun setModifiers(vararg modifiers: TemplateModifier) {
+	internal fun setModifiers(vararg modifiers: TemplateModifier) {
 		if ( this.modifiers === EMPTY_MODIFIERS )
 			this.modifiers = HashMap(modifiers.size)
 
@@ -35,7 +35,7 @@ abstract class TemplateElement {
 		}
 	}
 
-	fun replaceModifier(modifier: TemplateModifier) {
+	internal fun replaceModifier(modifier: TemplateModifier) {
 		modifiers[modifier.javaClass] = modifier
 		modifier.validate(this)
 	}
@@ -46,7 +46,7 @@ abstract class TemplateElement {
 	operator fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @Suppress("UNCHECKED_CAST")(modifiers[modKey.javaClass.declaringClass] as T)
 
 	/** Returns true if the element has a ReferenceModifier with the specified reference. */
-	fun hasRef(modKey: ModifierKey<*>, reference: String): Boolean {
+	internal fun hasRef(modKey: ModifierKey<*>, reference: String): Boolean {
 		val mod = modifiers[modKey.javaClass.declaringClass]
 		return mod != null && (mod as ReferenceModifier).hasReference(reference)
 	}

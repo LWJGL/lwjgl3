@@ -31,11 +31,11 @@ class AutoSizeMember(
 
 	override val isSpecial = true
 
-	val references: Sequence<String> = sequenceOf(reference) + dependent.asSequence()
+	internal val references: Sequence<String> = sequenceOf(reference) + dependent.asSequence()
 
-	fun members(members: Sequence<StructMember>) = references.map { ref -> members.first { it.name == ref } }
+	internal fun members(members: Sequence<StructMember>) = references.map { ref -> members.first { it.name == ref } }
 
-	fun keepSetter(members: Sequence<StructMember>) = (dependent.isNotEmpty() || members(members).any { it has NullableMember }) && !atLeastOne
+	internal fun keepSetter(members: Sequence<StructMember>) = (dependent.isNotEmpty() || members(members).any { it has NullableMember }) && !atLeastOne
 
 	override fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 

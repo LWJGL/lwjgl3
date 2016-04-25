@@ -22,8 +22,8 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
 	private val sortedSignatures by lazy { signatures.keys.sorted() }
 	private val sortedSignaturesArray by lazy { signaturesArray.keys.sorted() }
 
-	fun register(function: NativeClassFunction) = signatures.put(Signature(function), Unit)
-	fun registerArray(function: NativeClassFunction) = signaturesArray.put(SignatureArray(function), Unit)
+	internal fun register(function: NativeClassFunction) = signatures.put(Signature(function), Unit)
+	internal fun registerArray(function: NativeClassFunction) = signaturesArray.put(SignatureArray(function), Unit)
 
 	override fun PrintWriter.generateJava() {
 		print(HEADER)
@@ -177,7 +177,7 @@ if ( it.arguments.isEmpty() ) "" else it.arguments.withIndex().map { "${it.value
 	}
 }
 
-open class Signature constructor(
+private open class Signature constructor(
 	val callingConvention: CallingConvention,
 	val returnType: TypeMapping,
 	val arguments: List<TypeMapping>
@@ -214,7 +214,7 @@ open class Signature constructor(
 
 }
 
-class SignatureArray constructor(
+private class SignatureArray constructor(
 	callingConvention: CallingConvention,
 	returnType: TypeMapping,
 	arguments: List<TypeMapping>

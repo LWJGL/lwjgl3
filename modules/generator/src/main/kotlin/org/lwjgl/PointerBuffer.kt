@@ -4,4 +4,4 @@
  */
 package org.lwjgl
 
-interface PointerBuffer
+internal interface PointerBuffer

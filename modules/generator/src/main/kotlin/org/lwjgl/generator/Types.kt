@@ -17,15 +17,15 @@ open class NativeType(
 	// Lets get rid a level of indirection
 
 	/** The JNI function argument type. */
-	val jniFunctionType: String
+	internal val jniFunctionType: String
 		get() = mapping.jniFunctionType
 
 	/** The native method argument type. */
-	val nativeMethodType: String
+	internal val nativeMethodType: String
 		get() = mapping.nativeMethodType.simpleName
 
 	/** The Java method argument type. */
-	open val javaMethodType: String
+	internal open val javaMethodType: String
 		get() = if ( this.mapping === PrimitiveMapping.BOOLEAN4 ) "boolean" else mapping.javaMethodType.simpleName
 
 	override fun toString(): String =
@@ -212,7 +212,7 @@ open class TypeMapping(
 		val VOID = TypeMapping("void", Void.TYPE, Void.TYPE)
 	}
 
-	val jniSignatureStrict: String get() = when ( this.nativeMethodType ) {
+	internal val jniSignatureStrict: String get() = when ( this.nativeMethodType ) {
 		Boolean::class.java -> "Z"
 		Byte::class.java    -> "B"
 		Char::class.java    -> "C"
@@ -225,14 +225,14 @@ open class TypeMapping(
 		else                -> "L${this.nativeMethodType.name};"
 	}
 
-	val jniSignature: String get() = if ( this.nativeMethodType === Long::class.java && this !== PrimitiveMapping.LONG ) "P" else jniSignatureStrict
+	internal val jniSignature: String get() = if ( this.nativeMethodType === Long::class.java && this !== PrimitiveMapping.LONG ) "P" else jniSignatureStrict
 
-	val jniSignatureJava: String get() = if ( this.nativeMethodType === Long::class.java )
+	internal val jniSignatureJava: String get() = if ( this.nativeMethodType === Long::class.java )
 		if ( this === PrimitiveMapping.LONG ) "J" else "P"
 	else
 		""
 
-	val jniSignatureArray: String get() = when ( (this as PointerMapping).primitive ) {
+	internal val jniSignatureArray: String get() = when ( (this as PointerMapping).primitive ) {
 		"double" -> "_3D"
 		"float"  -> "_3F"
 		"int"    -> "_3I"
@@ -308,12 +308,12 @@ open class PointerMapping(
 		val DATA_DOUBLE = PointerMapping(DoubleBuffer::class, 3)
 	}
 
-	val isMultiByte = byteShift != null && byteShift != "0"
+	internal val isMultiByte = byteShift != null && byteShift != "0"
 
-	val box = javaMethodType.java.simpleName.substringBefore("Buffer")
-	val primitive = box.toLowerCase()
+	internal val box = javaMethodType.java.simpleName.substringBefore("Buffer")
+	internal val primitive = box.toLowerCase()
 
-	val mallocType: String get() = when ( box ) {
+	internal val mallocType: String get() = when ( box ) {
 		"Byte" -> ""
 		else   -> box
 	}
@@ -329,5 +329,5 @@ val NativeType.isPointerData: Boolean
 val TypeMapping.isPointerSize: Boolean
 	get() = this === PointerMapping.DATA_INT || this === PointerMapping.DATA_POINTER
 
-val TypeMapping.isArray: Boolean
+internal val TypeMapping.isArray: Boolean
 	get() = this is PointerMapping && this.isMultiByte && this !== PointerMapping.DATA_POINTER

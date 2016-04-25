@@ -20,7 +20,7 @@ interface StackFunctionTransform<T : QualifiedType> {
 /** Marker interface to indicate that pointer and buffer checks should be skipped. */
 interface SkipCheckFunctionTransform
 
-fun <T : QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String? {
+internal fun <T : QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String? {
 	val transform = transforms[this]
 	if ( transform == null )
 		return original
@@ -29,7 +29,7 @@ fun <T : QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedTy
 		return (transform as FunctionTransform<T>).transformDeclaration(this, original)
 }
 
-fun <T : QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String {
+internal fun <T : QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String {
 	val transform = transforms[this]
 	if ( transform == null )
 		return original
@@ -38,7 +38,7 @@ fun <T : QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedType, Fun
 		return (transform as FunctionTransform<T>).transformCall(this, original)
 }
 
-open class AutoSizeTransform(
+internal open class AutoSizeTransform(
 	val bufferParam: Parameter,
 	val applyTo: ApplyTo,
 	val applyFactor: Boolean = true
@@ -66,7 +66,7 @@ open class AutoSizeTransform(
 	}
 }
 
-fun AutoSizeTransform(bufferParam: Parameter, applyTo: ApplyTo, byteShift: String) =
+internal fun AutoSizeTransform(bufferParam: Parameter, applyTo: ApplyTo, byteShift: String) =
 	if ( byteShift == "0" ) AutoSizeTransform(bufferParam, applyTo) else AutoSizeBytesTransform(bufferParam, applyTo, byteShift)
 
 private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, val byteShift: String) : AutoSizeTransform(bufferParam, applyTo) {
@@ -91,7 +91,7 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, v
 	}
 }
 
-open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : FunctionTransform<Parameter> {
+internal open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
 		var expression = if ( bufferParam has nullable )
@@ -109,17 +109,17 @@ open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : FunctionT
 	}
 }
 
-class AutoTypeParamTransform(val autoType: String) : FunctionTransform<Parameter> {
+internal class AutoTypeParamTransform(val autoType: String) : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = autoType // Replace with hard-coded type
 }
 
-class AutoTypeTargetTransform(val autoType: PointerMapping) : FunctionTransform<Parameter> {
+internal class AutoTypeTargetTransform(val autoType: PointerMapping) : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "${autoType.javaMethodType.simpleName} ${param.name}"
 	override fun transformCall(param: Parameter, original: String) = original
 }
 
-open class ExpressionTransform(
+internal open class ExpressionTransform(
 	val expression: String,
 	val keepParam: Boolean = false,
 	val paramTransform: FunctionTransform<Parameter>? = null
@@ -130,7 +130,7 @@ open class ExpressionTransform(
 	override fun transformCall(param: Parameter, original: String) = expression
 }
 
-class ExpressionLocalTransform(
+internal class ExpressionLocalTransform(
 	expression: String,
 	keepParam: Boolean = false
 ) : ExpressionTransform(expression, keepParam), CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
@@ -140,7 +140,7 @@ class ExpressionLocalTransform(
 	)
 }
 
-class CharSequenceTransform(
+internal class CharSequenceTransform(
 	val nullTerminated: Boolean
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "CharSequence ${param.name}"
@@ -162,7 +162,7 @@ class CharSequenceTransform(
 	}
 }
 
-object StringReturnTransform : FunctionTransform<ReturnValue> {
+internal object StringReturnTransform : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
 		val expression = if ( original.startsWith("memByteBufferNT") )
@@ -173,7 +173,7 @@ object StringReturnTransform : FunctionTransform<ReturnValue> {
 	}
 }
 
-class PrimitiveValueReturnTransform(
+internal class PrimitiveValueReturnTransform(
 	val bufferType: PointerMapping,
 	val paramName: String
 ) : FunctionTransform<ReturnValue>, StackFunctionTransform<ReturnValue> {
@@ -182,17 +182,17 @@ class PrimitiveValueReturnTransform(
 	override fun setupStack(func: Function, qtype: ReturnValue, writer: PrintWriter) = writer.println("\t\t\t${bufferType.box}Buffer $paramName = stack.calloc${bufferType.mallocType}(1);")
 }
 
-object PrimitiveValueTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
+internal object PrimitiveValueTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
 }
 
-object Expression1Transform : FunctionTransform<Parameter> {
+internal object Expression1Transform : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "1" // Replace with 1
 }
 
-class SingleValueTransform(
+internal class SingleValueTransform(
 	val paramType: String,
 	val elementType: String,
 	val newName: String
@@ -201,14 +201,14 @@ class SingleValueTransform(
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
 	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\t\t${qtype.javaMethodType} ${qtype.name} = stack.${elementType}s($newName);")
 }
-class SingleValueStructTransform(
+internal class SingleValueStructTransform(
 	val newName: String
 ) : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "${param.nativeType.javaMethodType} $newName" // Replace with element type + new name
 	override fun transformCall(param: Parameter, original: String): String = "$newName.address()"
 }
 
-class VectorValueTransform(
+internal class VectorValueTransform(
 	val paramType: PointerMapping,
 	val elementType: String,
 	val newName: String,
@@ -226,25 +226,25 @@ class VectorValueTransform(
 	}
 }
 
-object MapPointerTransform : FunctionTransform<ReturnValue> {
+internal object MapPointerTransform : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
 	override fun transformCall(param: ReturnValue, original: String) = """int $MAP_LENGTH = ${param[MapPointer].sizeExpression};
 		return $MAP_OLD == null ? memByteBuffer($RESULT, $MAP_LENGTH) : memSetupBuffer($MAP_OLD, $RESULT, $MAP_LENGTH);"""
 }
 
-class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true) : FunctionTransform<ReturnValue> {
+internal class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true) : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
 	override fun transformCall(param: ReturnValue, original: String) =
 		"$MAP_OLD == null ? memByteBuffer($RESULT, (int)$lengthParam) : memSetupBuffer($MAP_OLD, $RESULT, (int)$lengthParam)"
 }
 
-val BufferLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+internal val BufferLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
 	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\t\tIntBuffer ${qtype.name} = stack.ints(0);")
 }
 
-class StringAutoSizeTransform(val autoSizeParam: Parameter) : FunctionTransform<Parameter>, CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+internal class StringAutoSizeTransform(val autoSizeParam: Parameter) : FunctionTransform<Parameter>, CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with address of allocated buffer
 	override fun generate(qtype: Parameter, code: Code): Code {
@@ -256,7 +256,7 @@ class StringAutoSizeTransform(val autoSizeParam: Parameter) : FunctionTransform<
 	}
 }
 
-class StringAutoSizeStackTransform(val autoSizeParam: Parameter) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+internal class StringAutoSizeStackTransform(val autoSizeParam: Parameter) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with address of allocated buffer
 	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
@@ -265,7 +265,7 @@ class StringAutoSizeStackTransform(val autoSizeParam: Parameter) : FunctionTrans
 	}
 }
 
-val BufferReplaceReturnTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+internal val BufferReplaceReturnTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stuck buffer
 	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
@@ -273,7 +273,7 @@ val BufferReplaceReturnTransform: FunctionTransform<Parameter> = object : Functi
 	}
 }
 
-class BufferAutoSizeReturnTransform(
+internal class BufferAutoSizeReturnTransform(
 	val outParam: Parameter,
 	val lengthExpression: String,
 	val encoding: String? = null
@@ -294,7 +294,7 @@ class BufferAutoSizeReturnTransform(
 	}
 }
 
-class BufferReturnTransform(
+internal class BufferReturnTransform(
 	val outParam: Parameter,
 	val lengthParam: String,
 	val encoding: String? = null
@@ -312,7 +312,7 @@ class BufferReturnTransform(
 	}
 }
 
-class BufferReturnNTTransform(
+internal class BufferReturnNTTransform(
 	val outParam: Parameter,
 	val maxLengthParam: String,
 	val encoding: String
@@ -322,7 +322,7 @@ class BufferReturnNTTransform(
 		"\t\treturn mem$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}(memAddress(${outParam.name}), $maxLengthParam));"
 }
 
-open class PointerArrayTransform(val paramType: String) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {
+internal open class PointerArrayTransform(val paramType: String) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? {
 		val name = if ( paramType.isEmpty() ) param[PointerArray].singleName else param.name
 		val paramClass = param[PointerArray].elementType.let {
@@ -364,12 +364,12 @@ open class PointerArrayTransform(val paramType: String) : FunctionTransform<Para
 	}
 }
 
-object PointerArrayTransformSingle : PointerArrayTransform(""), SkipCheckFunctionTransform
+internal object PointerArrayTransformSingle : PointerArrayTransform(""), SkipCheckFunctionTransform
 
-val PointerArrayTransformArray = PointerArrayTransform("[]")
-val PointerArrayTransformVararg = PointerArrayTransform("...")
+internal val PointerArrayTransformArray = PointerArrayTransform("[]")
+internal val PointerArrayTransformVararg = PointerArrayTransform("...")
 
-class PointerArrayLengthsTransform(
+internal class PointerArrayLengthsTransform(
 	val arrayParam: Parameter,
 	val multi: Boolean
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {

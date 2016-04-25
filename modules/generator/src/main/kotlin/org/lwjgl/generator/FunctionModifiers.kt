@@ -43,7 +43,7 @@ class Code(
 	companion object : ModifierKey<Code> {
 		// Used to avoid null checks
 		private val NO_STATEMENTS: List<Statement> = ArrayList(0)
-		val NO_CODE = Code()
+		internal val NO_CODE = Code()
 	}
 
 	data class Statement(
@@ -57,10 +57,10 @@ class Code(
 	Code.NO_STATEMENTS !== javaAfterNative ||
 	Code.NO_STATEMENTS !== javaFinally
 
-	fun hasStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
+	internal fun hasStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
 		if ( statements === NO_STATEMENTS ) false else statements.any { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
 
-	fun getStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
+	internal fun getStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
 		if ( statements === NO_STATEMENTS ) statements else statements.filter { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
 
 	private fun List<Code.Statement>.append(other: List<Code.Statement>) =
@@ -74,7 +74,7 @@ class Code(
 		else
 			"$this\n$other"
 
-	fun append(
+	internal fun append(
 		javaInit: List<Code.Statement> = Code.NO_STATEMENTS,
 
 		javaBeforeNative: List<Code.Statement> = Code.NO_STATEMENTS,
@@ -104,8 +104,8 @@ fun statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statemen
 /** Marks a function without arguments as a macro. */
 class Macro private constructor(val dynamic: Boolean) : FunctionModifier() {
 	companion object : ModifierKey<Macro> {
-		val FIXED = Macro(false)
-		val DYNAMIC = Macro(true)
+		internal val FIXED = Macro(false)
+		internal val DYNAMIC = Macro(true)
 	}
 
 	override val isSpecial = false
@@ -133,7 +133,7 @@ val internal = AccessModifier(Access.INTERNAL)
 class NativeName(name: String) : FunctionModifier() {
 	companion object : ModifierKey<NativeName>
 
-	val name: String = if ( name.contains('"') ) name else "\"$name\""
+	internal val name: String = if ( name.contains('"') ) name else "\"$name\""
 
 	override val isSpecial = false
 }

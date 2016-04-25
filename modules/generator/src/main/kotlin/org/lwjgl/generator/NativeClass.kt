@@ -78,7 +78,7 @@ abstract class APIBinding(
 	/** Can be overriden to generate binding-specific javadoc. If this function returns false, the default javadoc will be generated. */
 	open fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String) = false
 
-	open fun NativeClass.getCapabilityJavadoc(): String {
+	protected fun NativeClass.getCapabilityJavadoc(): String {
 		val documentation = this.documentation
 		return (if (documentation == null)
 			"When true, {@code $templateName} is supported."
@@ -290,7 +290,7 @@ class NativeClass(
 
 	private val customMethods = ArrayList<String>()
 
-	val hasBody: Boolean
+	internal val hasBody: Boolean
 		get() = binding is SimpleBinding || !constantBlocks.isEmpty() || hasNativeFunctions || customMethods.isNotEmpty()
 
 	val hasNativeFunctions: Boolean
@@ -303,7 +303,7 @@ class NativeClass(
 	override fun hasField(field: String): Boolean = constantBlocks.any { it.constants.any { it.name == field } }
 	override fun hasMethod(method: String): Boolean = functions.any { it.simpleName == method }
 
-	fun registerFunctions() {
+	internal fun registerFunctions() {
 		if ( binding != null ) {
 			functions.asSequence()
 				.filter { !it.hasCustomJNI }
@@ -313,7 +313,7 @@ class NativeClass(
 		}
 	}
 
-	fun registerLinks(
+	internal fun registerLinks(
 		tokens: MutableMap<String, String>,
 		duplicateTokens: MutableSet<String>,
 	    functions: MutableMap<String, String>,
@@ -474,7 +474,7 @@ class NativeClass(
 		println("\nEXTERN_C_EXIT")
 	}
 
-	fun nativeDirectivesWarning() {
+	internal fun nativeDirectivesWarning() {
 		if ( preamble.hasNativeDirectives )
 			println("\tUnnecessary native directives in: $packageName.$templateName")
 	}
@@ -533,7 +533,7 @@ class NativeClass(
 		Constant(this, EnumValueExpression({ if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc() }, expression))
 
 	/** Adds a new constant whose value is an expression. */
-	infix fun <T : Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
+	infix fun <T : Any> String.expr(expression: String): Constant<T> = ConstantExpression(this, expression)
 
 	operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =
 		ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since, noPrefix = noPrefix)
