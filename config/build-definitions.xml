@@ -127,6 +127,8 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 	<condition property="jdk9">
 		<matches string="${java.version}" pattern="^(9|\d\d+)[.-]"/>
 	</condition>
+	<property name="jni.headers" location="${java.home}/include" if:set="jdk9"/>
+	<property name="jni.headers" location="${java.home}/../include" unless:set="jdk9"/>
 
 	<!-- Different location per platform/architecture. This is intentional. -->
 	<property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>

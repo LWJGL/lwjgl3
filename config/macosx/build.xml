@@ -57,7 +57,8 @@ License terms: http://lwjgl.org/license.php
 			<apply dir="${bin.native}" executable="${compiler}" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 				<arg line="-c -std=c11 -ObjC -O3 -fPIC ${warnings} -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
 
-				<arg value="-I${sdkroot}/System/Library/Frameworks/JavaVM.framework/Versions/A/Headers"/>
+				<arg value="-I${jni.headers}"/>
+				<arg value="-I${jni.headers}/darwin"/>
 
 				<arg value="-I${src.include.rel}/system"/>
 				<arg value="-I${src.include.rel}/system/macosx"/>

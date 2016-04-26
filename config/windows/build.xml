@@ -22,8 +22,8 @@ License terms: http://lwjgl.org/license.php
 				<arg line="/c @{flags} /EHsc /Ox /Gy /GR- /MT /MP /nologo /DNDEBUG /DLWJGL_WINDOWS /DLWJGL_${build.arch}"/>
 				<arg value="/Fo${bin.native}\"/>
 
-				<arg value="/I${java.home}\..\include"/>
-				<arg value="/I${java.home}\..\include\win32"/>
+				<arg value="/I${jni.headers}"/>
+				<arg value="/I${jni.headers}\win32"/>
 
 				<arg value="/I${src.include}\system"/>
 				<arg value="/I${src.include}\system\windows"/>

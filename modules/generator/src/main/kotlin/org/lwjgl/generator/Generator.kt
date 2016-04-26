@@ -9,6 +9,7 @@ import java.lang.Math.max
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.nio.ByteBuffer
+import java.nio.file.Files
 import java.util.*
 import java.util.concurrent.*
 import java.util.concurrent.atomic.AtomicInteger
@@ -67,9 +68,6 @@ fun main(args: Array<String>) {
 
 	validateDirectory("template source", args[0])
 	validateDirectory("generation target", args[1])
-
-	// Makes sure we use \n during generation, even on Windows.
-	System.setProperty("line.separator", "\n")
 
 	Generator(args[0], args[1]) {
 		// We discover templates reflectively.
@@ -474,6 +472,10 @@ private fun readFile(file: File): ByteBuffer {
 	return buffer
 }
 
+private class LWJGLWriter(out: Writer) : PrintWriter(out) {
+	override fun println() = print('\n')
+}
+
 private fun <T> generateOutput(
 	target: T,
 	file: File,
@@ -488,7 +490,7 @@ private fun <T> generateOutput(
 	if ( file.exists() ) {
 		// Generate in-memory
 		val baos = ByteArrayOutputStream(4 * 1024)
-		val writer = PrintWriter(OutputStreamWriter(baos, Charsets.UTF_8))
+		val writer = LWJGLWriter(OutputStreamWriter(baos, Charsets.UTF_8))
 		target.generate(writer)
 		writer.close()
 
@@ -521,7 +523,7 @@ private fun <T> generateOutput(
 	} else {
 		println("\tWRITING: $file")
 		// Generate to file
-		val writer = PrintWriter(BufferedWriter(OutputStreamWriter(FileOutputStream(file), Charsets.UTF_8)))
+		val writer = LWJGLWriter(Files.newBufferedWriter(file.toPath(), Charsets.UTF_8))
 		try {
 			target.generate(writer)
 		} catch(e: Exception) {

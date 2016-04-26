@@ -31,8 +31,8 @@ License terms: http://lwjgl.org/license.php
 				<arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
 				<arg line="-O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
 
-				<arg value="-I${java.home}/../include"/>
-				<arg value="-I${java.home}/../include/linux"/>
+				<arg value="-I${jni.headers}"/>
+				<arg value="-I${jni.headers}/linux"/>
 
 				<arg value="-I${src.include.rel}/system"/>
 				<arg value="-I${src.include.rel}/system/linux"/>
