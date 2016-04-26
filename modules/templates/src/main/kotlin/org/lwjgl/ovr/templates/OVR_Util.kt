@@ -47,7 +47,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		""",
 		"Projection_ClipRangeOpenGL"..0x08
 	)
-	val ProjectionModifiers = "#Projection_None #Projection_RightHanded #Projection_FarLessThanNear #Projection_FarClipAtInfinity #Projection_ClipRangeOpenGL"
+	val ProjectionModifiers = "#Projection_None #Projection_FarLessThanNear #Projection_FarClipAtInfinity #Projection_ClipRangeOpenGL"
 
 	ovrDetectResult(
 		"_Detect",

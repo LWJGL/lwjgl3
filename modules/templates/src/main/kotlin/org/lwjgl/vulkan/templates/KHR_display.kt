@@ -115,7 +115,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 		""",
 
 		VkPhysicalDevice.IN("physicalDevice", "a physical device"),
-		uint32_t.IN("planeIndex", "the plane which the application wishes to use, and must be in the range {@code [0, physicaldeviceplanecount − 1]"),
+		uint32_t.IN("planeIndex", "the plane which the application wishes to use, and must be in the range {@code [0, physicaldeviceplanecount − 1]}"),
 		AutoSize("pDisplays")..Check(1)..uint32_t_p.INOUT(
 			"pDisplayCount",
 			"a pointer to an integer related to the number of display planes available or queried"

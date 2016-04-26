@@ -43,9 +43,9 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_NoHmd".enumExpr("The given HMD doesn't exist.", "-1007"),
 		"Error_Unsupported".enumExpr("Function call is not supported on this hardware/software", "-1009"),
 		"Error_DeviceUnavailable".enumExpr("Specified device type isn't available.", "-1010"),
-		"Error_InvalidHeadsetOrientation".enumExpr("The headset was in an invalid orientation for the requested operation (e.g. vertically oriented during OVR#RecenterPose()).", "-1011"),
-		"Error_ClientSkippedDestroy".enumExpr("The client failed to call OVR#Destroy() on an active session before calling OVR#Shutdown(). Or the client crashed.", "-1012"),
-		"Error_ClientSkippedShutdown".enumExpr("The client failed to call OVR#Shutdown() or the client crashed.", "-1013"),
+		"Error_InvalidHeadsetOrientation".enumExpr("The headset was in an invalid orientation for the requested operation (e.g. vertically oriented during OVR##ovr_RecenterTrackingOrigin()).", "-1011"),
+		"Error_ClientSkippedDestroy".enumExpr("The client failed to call OVR##ovr_Destroy() on an active session before calling OVR##ovr_Shutdown(). Or the client crashed.", "-1012"),
+		"Error_ClientSkippedShutdown".enumExpr("The client failed to call OVR##ovr_Shutdown() or the client crashed.", "-1013"),
 
 		/* Audio error range, reserved for Audio errors. */
 		"Error_AudioReservedBegin".enumExpr("First Audio error.", "-2000"),

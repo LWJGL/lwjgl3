@@ -21,10 +21,12 @@
  * the API of certain interfaces and classes will remain as stable as possible. This affects the following classes:</p>
  * <ul>
  * <li>{@link org.lwjgl.system.MemoryUtil MemoryUtil}, used for off-heap data access and memory allocation/deallocation.</li>
+ * <li>{@link org.lwjgl.system.MemoryStack MemoryStack}, used for emulated off-heap stack allocations.</li>
  * <li>{@link org.lwjgl.system.FunctionProvider FunctionProvider}, {@link org.lwjgl.system.Library Library} and
  * {@link org.lwjgl.system.SharedLibrary SharedLibrary}, used for loading shared libraries and accessing function pointers.</li>
  * <li>{@link org.lwjgl.system.Pointer Pointer}, used as off-heap resource abstractions.</li>
  * <li>{@link org.lwjgl.system.Configuration Configuration}, used for programmatic configuration at runtime.</li>
+ * <li>{@link org.lwjgl.system.Struct Struct} and {@link org.lwjgl.system.StructBuffer StructBuffer}, the base classes for struct types and struct buffers.</li>
  * </ul>
  */
 package org.lwjgl.system;

@@ -648,9 +648,10 @@ class NativeClassFunction(
 
 		// JavaDoc
 
-		val hideAutoSizeResult = returns.nativeType !is StructType && parameters.count { it.isAutoSizeResultOut } == 1
 		if ( !macro )
-			printDocumentation { !(hideAutoSizeResult && it.isAutoSizeResultOut) }
+			(parameters.count { it.isAutoSizeResultOut } == 1).let { hideAutoSizeResult ->
+				printDocumentation { !(hideAutoSizeResult && it.isAutoSizeResultOut) }
+			}
 
 		// Method signature
 
@@ -1175,7 +1176,7 @@ class NativeClassFunction(
 				if ( !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false) && doc.isNotEmpty() )
 					println(doc)
 			} else {
-				val hideAutoSizeResult = returns.nativeType !is StructType && parameters.count { it.isAutoSizeResultOut } == 1
+				val hideAutoSizeResult = parameters.count { it.isAutoSizeResultOut } == 1
 				printDocumentation { param ->
 					!(hideAutoSizeResult && param.isAutoSizeResultOut) && transforms[param].let {
 						@Suppress("UNCHECKED_CAST")

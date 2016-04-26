@@ -462,8 +462,9 @@ License terms: http://lwjgl.org/license.php
 	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate">
 		<uptodate targetfile="${bin.html.javadoc}/index.html" property="javadoc-uptodate">
 			<srcfiles dir="${src.core}" includes="**"/>
-			<srcfiles dir="${src.templates}/java" includes="org/lwjgl/system/**"/>
+			<srcfiles dir="${src.generator}/java" includes="org/lwjgl/system/**"/>
 			<srcfiles dir="${src.generated.java}" includes="**"/>
+			<srcfiles dir="${config}" includes="javadoc.css"/>
 		</uptodate>
 		<antcall target="-javadoc"/>
 	</target>
@@ -512,14 +513,16 @@ License terms: http://lwjgl.org/license.php
 
 			<arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 
-			<arg value="-Xdoclint" if:set="jdk8"/>
+			<arg value="-Xdoclint"/>
 			<arg value="-html5" if:set="jdk9"/>
 			<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
+			<arg line="-J-Dfile.encoding=UTF8"/>
+			<arg line="-J-XaddExports:jdk.javadoc/com.sun.tools.doclets.standard=ALL-UNNAMED" if:set="jdk9"/>
 		</javadoc>
 		<get-quiet name="favicon" url="http://s3.amazonaws.com/cdn.lwjgl.org/favicon.ico" dest="${bin.html.javadoc}"/>
 
 		<java classname="org.lwjgl.system.JavadocPostProcess" fork="true" failonerror="true">
-			<classpath path="${bin.templates}"/>
+			<classpath path="${bin.generator}"/>
 
 			<arg value="${bin.html.javadoc}/org/lwjgl"/>
 		</java>
