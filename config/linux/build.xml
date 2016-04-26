@@ -61,7 +61,6 @@ License terms: http://lwjgl.org/license.php
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/linux/*.c"/>
 					<include name="${src.generated.native}/util/simd/*.c"/>
-					<exclude name="${src.generated.native}/util/simd/*SSE3.c"/>
 					<include name="${src.generated.native}/util/xxhash/*.c"/>
 				</fileset>
 			</arguments>
