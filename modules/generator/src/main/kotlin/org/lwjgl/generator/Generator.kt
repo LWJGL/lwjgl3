@@ -238,7 +238,7 @@ public final class $CLASS implements Runnable {
 	}
 
 	// TODO: add more, e.g. kotlinc
-	private val GENERATOR_LAST_MODIFIED = getDirectoryLastModified("$srcPath/org/lwjgl/generator", true)
+	private val GENERATOR_LAST_MODIFIED = getDirectoryLastModified("modules/generator/src/main/kotlin", true)
 
 	init {
 		generate()
