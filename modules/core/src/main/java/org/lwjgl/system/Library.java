@@ -7,6 +7,7 @@ package org.lwjgl.system;
 import org.lwjgl.Version;
 
 import java.io.File;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -24,12 +25,14 @@ public final class Library {
 
 	private static final String JAVA_LIBRARY_PATH = "java.library.path";
 
-	private static final LibraryLoader<Boolean> LOADER_SYSTEM = library -> {
+	private static final Pattern PATH_SEPARATOR = Pattern.compile(File.pathSeparator);
+
+	private static final Function<File, Boolean> LOADER_SYSTEM = library -> {
 		System.load(library.getAbsolutePath());
 		return true;
 	};
 
-	private static final LibraryLoader<SharedLibrary> LOADER_NATIVE = library -> apiCreateLibrary(library.getPath());
+	private static final Function<File, SharedLibrary> LOADER_NATIVE = library -> apiCreateLibrary(library.getPath());
 
 	static {
 		if ( Checks.DEBUG ) {
@@ -219,18 +222,14 @@ public final class Library {
 		}
 	}
 
-	private interface LibraryLoader<T> {
-		T load(File library);
-	}
-
-	private static <T> T loadLibrary(LibraryLoader<T> loader, String path, String libName, T onFailure) {
-		for ( String root : Pattern.compile(File.pathSeparator).split(path) ) {
-			File f = new File(root + File.separator + libName);
-			if ( f.exists() )
-				return loader.load(f);
-		}
-
-		return onFailure;
+	private static <T> T loadLibrary(Function<File, T> loader, String path, String libName, T onFailure) {
+		return PATH_SEPARATOR
+			.splitAsStream(path)
+			.map(it -> new File(it + File.separator + libName))
+			.filter(File::exists)
+			.map(loader)
+			.findFirst()
+			.orElse(onFailure);
 	}
 
 }

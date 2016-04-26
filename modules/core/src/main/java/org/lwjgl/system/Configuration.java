@@ -11,6 +11,8 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * This class can be used to programmatically set the LWJGL runtime configuration. It is an alternative to using system properties.
@@ -146,8 +148,8 @@ public class Configuration<T> {
 
 	/**
 	 * Can be set to override the default {@link APIUtil#DEBUG_STREAM}. It must be the name of a class that implements the
-	 * {@link DebugStreamFactory DebugStreamFactory} interface. The class will be instantiated using reflection and the result of
-	 * {@link DebugStreamFactory#create DebugStreamFactory.create} will become the {@link #DEBUG_STREAM} used by LWJGL.
+	 * {@link Supplier Supplier&lt;PrintStream&gt;} interface. The class will be instantiated using reflection and the result of {@link Supplier#get get} will
+	 * become the {@link #DEBUG_STREAM} used by LWJGL.
 	 *
 	 * <p>When set programmatically, it can also be a {@link PrintStream} instance. The {@link #setDebugStreamConsumer} can be used to forward debug messages
 	 * to any consumer.</p>
@@ -398,7 +400,7 @@ public class Configuration<T> {
 	 *
 	 * @param consumer the debug message consumer
 	 */
-	public static void setDebugStreamConsumer(DebugStreamConsumer consumer) {
+	public static void setDebugStreamConsumer(Consumer<String> consumer) {
 		setDebugStreamConsumer(consumer, Charset.forName("UTF-8"));
 	}
 
@@ -408,7 +410,7 @@ public class Configuration<T> {
 	 * @param consumer the debug message consumer
 	 * @param charset  the message charset
 	 */
-	public static void setDebugStreamConsumer(DebugStreamConsumer consumer, Charset charset) {
+	public static void setDebugStreamConsumer(Consumer<String> consumer, Charset charset) {
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream(128) {
 
 			private final CharsetDecoder decoder = charset.newDecoder();
@@ -470,17 +472,6 @@ public class Configuration<T> {
 					}
 				}
 		);
-	}
-
-	/** Implementations of this interface may used with {@link #setDebugStreamConsumer} to receive debug messages. */
-	public interface DebugStreamConsumer {
-		void accept(String message);
-	}
-
-	/** An implementation of this interface may be set to the {@link #DEBUG_STREAM} option. */
-	public interface DebugStreamFactory {
-		/** Returns a {@link PrintStream} instance. */
-		PrintStream create();
 	}
 
 }

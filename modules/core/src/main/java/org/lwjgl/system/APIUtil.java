@@ -17,6 +17,7 @@ import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiPredicate;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,25 +39,26 @@ public final class APIUtil {
 	 * The {@link PrintStream} used by LWJGL to print debug information and non-fatal errors. Defaults to {@link System#err} which can be changed with
 	 * {@link Configuration#DEBUG_STREAM}.
 	 */
-	public static final PrintStream DEBUG_STREAM;
+	public static final PrintStream DEBUG_STREAM = getDebugStream();
 
-	static {
+	@SuppressWarnings("unchecked")
+	private static PrintStream getDebugStream() {
 		PrintStream debugStream = System.err;
 
 		Object state = Configuration.DEBUG_STREAM.get();
 		if ( state instanceof String ) {
 			try {
-				Configuration.DebugStreamFactory factory = (Configuration.DebugStreamFactory)Class.forName((String)state).newInstance();
-				debugStream = factory.create();
+				Supplier<PrintStream> factory = (Supplier<PrintStream>)Class.forName((String)state).newInstance();
+				debugStream = factory.get();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if ( state instanceof Configuration.DebugStreamFactory ) {
-			debugStream = ((Configuration.DebugStreamFactory)state).create();
+		} else if ( state instanceof Supplier<?> ) {
+			debugStream = ((Supplier<PrintStream>)state).get();
 		} else if ( state instanceof PrintStream )
 			debugStream = (PrintStream)state;
 
-		DEBUG_STREAM = debugStream;
+		return debugStream;
 	}
 
 	private APIUtil() {
