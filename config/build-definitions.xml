@@ -68,6 +68,8 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 	<property name="src.generated.java" location="${src.generated}/java" relative="true"/>
 	<property name="src.generated.native" location="${src.generated}/c" relative="true"/>
 
+	<property name="test.resources" location="${module.core}/src/test/resources" relative="true"/>
+
 	<property name="bin.generator" location="${bin}/Generator" relative="true"/>
 	<property name="bin.templates" location="${bin}/Templates" relative="true"/>
 	<property name="bin.core" location="${bin}/Core" relative="true"/>
@@ -76,8 +78,6 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 	<property name="bin.html" location="${bin}/HTML" relative="true"/>
 	<property name="bin.html.tests" location="${bin.html}/tests" relative="true"/>
 	<property name="bin.html.javadoc" location="${bin.html}/javadoc" relative="true"/>
-
-	<property name="test.resources" location="${module.core}/src/test/resources" relative="true"/>
 
 	<property name="release" location="${bin}/RELEASE" relative="true"/>
 	<property name="release.jar" location="${release}/jar" relative="true"/>

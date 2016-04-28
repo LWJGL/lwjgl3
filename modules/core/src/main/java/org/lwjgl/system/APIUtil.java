@@ -9,15 +9,20 @@ import org.lwjgl.system.linux.LinuxLibrary;
 import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiPredicate;
 import java.util.function.Supplier;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,6 +79,29 @@ public final class APIUtil {
 			DEBUG_STREAM.print("[LWJGL] ");
 			DEBUG_STREAM.println(msg);
 		}
+	}
+
+	/**
+	 * Returns the value of the specified manifest attribute in the LWJGL JAR file.
+	 *
+	 * @param attributeName the attribute name
+	 *
+	 * @return the attribute value or null if the attribute was not found or there is no LWJGL JAR file
+	 */
+	public static Optional<String> apiGetManifestValue(String attributeName) {
+		URL url = Thread.currentThread().getContextClassLoader().getResource("org/lwjgl/system/APIUtil.class");
+		if ( url != null ) {
+			String classURL = url.toString();
+			if ( classURL.startsWith("jar:") ) {
+				try ( InputStream stream = new URL(classURL.substring(0, classURL.lastIndexOf("!") + 1) + '/' + JarFile.MANIFEST_NAME).openStream() ) {
+					return Optional.ofNullable(new Manifest(stream).getAttributes("org/lwjgl/").getValue(attributeName));
+				} catch (Exception e) {
+					e.printStackTrace(APIUtil.DEBUG_STREAM);
+				}
+			}
+		}
+
+		return Optional.empty();
 	}
 
 	public static SharedLibrary apiCreateLibrary(String name) {

@@ -7,6 +7,10 @@ package org.lwjgl.system;
 import org.lwjgl.Version;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
@@ -53,9 +57,11 @@ public final class Library {
 				// and try again
 				loadSystemRelative(JNI_LIBRARY_NAME);
 			} catch (Throwable t) {
-				DEBUG_STREAM.println("[LWJGL] Failed to load the LWJGL library. Possible solutions:\n" +
-					                     "\ta) Set -Djava.library.path or -Dorg.lwjgl.librarypath to the directory that contains the LWJGL shared libraries.\n" +
-					                     "\tb) Add the JAR(s) containing the LWJGL shared libraries to the classpath.");
+				DEBUG_STREAM.println(
+					"[LWJGL] Failed to load the LWJGL library. Possible solutions:\n" +
+						"\ta) Set -Djava.library.path or -Dorg.lwjgl.librarypath to the directory that contains the LWJGL shared libraries.\n" +
+						"\tb) Add the JAR(s) containing the LWJGL shared libraries to the classpath."
+				);
 				DEBUG_STREAM.println("[LWJGL] First attempt failed with:");
 				ule.printStackTrace(DEBUG_STREAM);
 				DEBUG_STREAM.println("[LWJGL] Second attempt failed with:");
@@ -64,6 +70,8 @@ public final class Library {
 				throw ule;
 			}
 		}
+
+		checkHash();
 	}
 
 	private Library() {}
@@ -228,14 +236,73 @@ public final class Library {
 		}
 	}
 
-	private static <T> T loadLibrary(Function<File, T> loader, String path, String libName, T onFailure) {
+	private static Optional<File> findLibrary(String path, String libName) {
 		return PATH_SEPARATOR
 			.splitAsStream(path)
 			.map(it -> new File(it + File.separator + libName))
-			.filter(File::exists)
+			.filter(File::isFile)
+			.findFirst();
+	}
+
+	private static <T> T loadLibrary(Function<File, T> loader, String path, String libName, T onFailure) {
+		return findLibrary(path, libName)
 			.map(loader)
-			.findFirst()
 			.orElse(onFailure);
+	}
+
+	/**
+	 * Compares the shared library hash stored in lwjgl.jar, with the hash of the actual library loaded at runtime.
+	 *
+	 * <p>This check prints a simple warning when there's a hash mismatch, to help diagnose installation/classpath issues. It is not a security feature.</p>
+	 */
+	private static void checkHash() {
+		String libName = Platform.get().mapLibraryName(JNI_LIBRARY_NAME);
+
+		String expected = apiGetManifestValue(libName.replace('.', '-')).orElse(null);
+		if ( expected == null )
+			return;
+
+		File libFile = null;
+
+		// Try org.lwjgl.librarypath first
+		String override = Configuration.LIBRARY_PATH.get();
+		if ( override != null )
+			libFile = findLibrary(override, libName).orElse(null);
+
+		// Then java.library.path
+		if ( libFile == null )
+			libFile = findLibrary(System.getProperty(JAVA_LIBRARY_PATH), libName).orElse(null);
+
+		// Then working directory
+		if ( libFile == null ) {
+			libFile = new File("./" + libName);
+			if ( !libFile.isFile() )
+				return;
+		}
+
+		try {
+			MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
+			try ( DigestInputStream dis = new DigestInputStream(new FileInputStream(libFile), sha1) ) {
+				byte[] buffer = new byte[8 * 1024];
+				while ( dis.read(buffer) != -1 ) ;
+			}
+
+			byte[] digest = sha1.digest();
+			StringBuilder actual = new StringBuilder(40);
+			for ( int i = 0; i < digest.length; i++ ) {
+				int b = digest[i] & 0xFF;
+				if ( b < 0x10 )
+					actual.append('0');
+				actual.append(Integer.toHexString(b));
+			}
+
+			if ( !expected.contentEquals(actual) )
+				DEBUG_STREAM.println("[LWJGL] [WARNING] Mismatch detected between the Java and native LWJGL libraries." +
+					                     (Checks.DEBUG ? "" : "\n\tLaunch the JVM with -Dorg.lwjgl.util.Debug=true for more information.")
+				);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

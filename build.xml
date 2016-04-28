@@ -529,22 +529,6 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="release" description="Creates the LWJGL binary redistributable" depends="compile,javadoc,-build-version">
-		<!-- Bundle classes -->
-		<mkdir dir="${release.jar}"/>
-		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true">
-			<manifest>
-				<section name="org/lwjgl/">
-					<attribute name="Specification-Title" value="Lightweight Java Game Library"/>
-					<attribute name="Specification-Version" value="${build.version}"/>
-					<attribute name="Specification-Vendor" value="lwjgl.org"/>
-					<attribute name="Implementation-Title" value="lwjgl"/>
-					<attribute name="Implementation-Version" value="build ${build.revision}" if:set="build.revision"/>
-					<attribute name="Implementation-Version" value="SNAPSHOT" unless:set="build.revision"/>
-					<attribute name="Implementation-Vendor" value="lwjgl.org"/>
-				</section>
-			</manifest>
-		</jar>
-
 		<!-- Download binaries from build.lwjgl.org -->
 		<mkdir dir="${release.native}"/>
 
@@ -583,6 +567,36 @@ License terms: http://lwjgl.org/license.php
 		<!-- Windows OpenAL -->
 		<get src="http://build.lwjgl.org/${build.type}/windows/x64/OpenAL32.dll" dest="${release.native}/OpenAL.dll" verbose="false" usetimestamp="true"/>
 		<get src="http://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll" dest="${release.native}" verbose="false" usetimestamp="true"/>
+
+		<local name="liblwjgl-so"/>
+		<local name="liblwjgl-dylib"/>
+		<local name="lwjgl-dll"/>
+		<local name="lwjgl32-dll"/>
+
+		<checksum file="${release.native}/liblwjgl.so" algorithm="SHA-1" property="liblwjgl-so"/>
+		<checksum file="${release.native}/liblwjgl.dylib" algorithm="SHA-1" property="liblwjgl-dylib"/>
+		<checksum file="${release.native}/lwjgl.dll" algorithm="SHA-1" property="lwjgl-dll"/>
+		<checksum file="${release.native}/lwjgl32.dll" algorithm="SHA-1" property="lwjgl32-dll"/>
+
+		<!-- Bundle classes -->
+		<mkdir dir="${release.jar}"/>
+		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true">
+			<manifest>
+				<section name="org/lwjgl/">
+					<attribute name="Specification-Title" value="Lightweight Java Game Library"/>
+					<attribute name="Specification-Version" value="${build.version}"/>
+					<attribute name="Specification-Vendor" value="lwjgl.org"/>
+					<attribute name="Implementation-Title" value="lwjgl"/>
+					<attribute name="Implementation-Version" value="build ${build.revision}" if:set="build.revision"/>
+					<attribute name="Implementation-Version" value="SNAPSHOT" unless:set="build.revision"/>
+					<attribute name="Implementation-Vendor" value="lwjgl.org"/>
+					<attribute name="liblwjgl-so" value="${liblwjgl-so}"/>
+					<attribute name="liblwjgl-dylib" value="${liblwjgl-dylib}"/>
+					<attribute name="lwjgl-dll" value="${lwjgl-dll}"/>
+					<attribute name="lwjgl32-dll" value="${lwjgl32-dll}"/>
+				</section>
+			</manifest>
+		</jar>
 
 		<!-- Bundle javadoc -->
 		<mkdir dir="${release.doc}"/>

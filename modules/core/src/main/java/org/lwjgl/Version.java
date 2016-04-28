@@ -4,12 +4,7 @@
  */
 package org.lwjgl;
 
-import org.lwjgl.system.APIUtil;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
+import static org.lwjgl.system.APIUtil.*;
 
 /** This class can be used to query the LWJGL version. */
 public final class Version {
@@ -32,25 +27,10 @@ public final class Version {
 
 	/** Returns the LWJGL version. */
 	public static String getVersion() {
-		return String.valueOf(VERSION_MAJOR) + '.' + VERSION_MINOR + '.' + VERSION_REVISION + BUILD_TYPE.postfix + ' ' + getVersionImpl();
-	}
-
-	private static String getVersionImpl() {
-		URL url = Thread.currentThread().getContextClassLoader().getResource("org/lwjgl/Version.class");
-		if ( url != null ) {
-			String classURL = url.toString();
-			if ( classURL.startsWith("jar:") ) {
-				try ( InputStream stream = new URL(classURL.substring(0, classURL.lastIndexOf("!") + 1) + '/' + JarFile.MANIFEST_NAME).openStream() ) {
-					return new Manifest(stream)
-						.getAttributes("org/lwjgl/")
-						.getValue("Implementation-Version");
-				} catch (Exception e) {
-					e.printStackTrace(APIUtil.DEBUG_STREAM);
-				}
-			}
-		}
-
-		return "SNAPSHOT";
+		return String.valueOf(VERSION_MAJOR) +
+			'.' + VERSION_MINOR +
+			'.' + VERSION_REVISION + BUILD_TYPE.postfix +
+			' ' + apiGetManifestValue("Implementation-Version").orElse("SNAPSHOT");
 	}
 
 	/** The development state of the current build. */
