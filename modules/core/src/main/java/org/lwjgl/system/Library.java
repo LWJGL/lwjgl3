@@ -53,8 +53,14 @@ public final class Library {
 				// and try again
 				loadSystemRelative(JNI_LIBRARY_NAME);
 			} catch (Throwable t) {
-				if ( Checks.DEBUG )
-					t.printStackTrace(DEBUG_STREAM);
+				DEBUG_STREAM.println("[LWJGL] Failed to load the LWJGL library. Possible solutions:\n" +
+					                     "\ta) Set -Djava.library.path or -Dorg.lwjgl.librarypath to the directory that contains the LWJGL shared libraries.\n" +
+					                     "\tb) Add the JAR(s) containing the LWJGL shared libraries to the classpath.");
+				DEBUG_STREAM.println("[LWJGL] First attempt failed with:");
+				ule.printStackTrace(DEBUG_STREAM);
+				DEBUG_STREAM.println("[LWJGL] Second attempt failed with:");
+				t.printStackTrace(DEBUG_STREAM);
+				DEBUG_STREAM.println("[LWJGL] Any exception that follows was caused by the above problem.");
 				throw ule;
 			}
 		}
