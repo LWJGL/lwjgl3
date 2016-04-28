@@ -281,13 +281,6 @@ public final class APIUtil {
 		}
 	}
 
-	public static long apiCallbackText(String text) {
-		int size = memLengthUTF8(text, true);
-		long address = getAllocator().malloc(size);
-		memUTF8(text, true, memByteBuffer(address, size));
-		return address;
-	}
-
 	public static boolean apiCompareCapabilities(Iterable<Field> flags, Iterable<Field> funcs, Object a, Object b) {
 		try {
 			for ( Field f : flags ) {
