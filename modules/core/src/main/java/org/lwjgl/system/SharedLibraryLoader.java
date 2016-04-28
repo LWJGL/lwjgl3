@@ -5,6 +5,7 @@
 package org.lwjgl.system;
 
 import java.io.*;
+import java.net.URL;
 import java.util.UUID;
 import java.util.zip.CRC32;
 
@@ -47,7 +48,7 @@ final class SharedLibraryLoader {
 		else
 			libraryPath = extractPath.getAbsolutePath() + File.pathSeparator + libraryPath;
 
-		apiLog("Shared library extract path: " + libraryPath);
+		apiLog("Shared Library Loader path: " + libraryPath);
 		System.setProperty(Configuration.LIBRARY_PATH.getProperty(), libraryPath);
 		Configuration.LIBRARY_PATH.set(libraryPath);
 	}
@@ -70,8 +71,14 @@ final class SharedLibraryLoader {
 	 * @return The extracted file.
 	 */
 	private static File extractFile(String libraryFile, File libraryPath) throws IOException {
+		URL resource = SharedLibraryLoader.class.getResource("/" + libraryFile);
+		if ( resource == null )
+			throw new RuntimeException("Failed to locate resource: " + libraryFile);
+
+		apiLog(String.format("Located %s at: %s", libraryFile, resource.getPath()));
+
 		String libraryCRC;
-		try ( InputStream input = readResource(libraryFile) ) {
+		try ( InputStream input = resource.openStream() ) {
 			libraryCRC = crc(input);
 		}
 
@@ -79,7 +86,7 @@ final class SharedLibraryLoader {
 			libraryPath == null ? new File(libraryCRC) : libraryPath,
 			new File(libraryFile).getName()
 		);
-		extractFile(libraryFile, libraryCRC, extractedFile);
+		extractFile(resource, libraryCRC, extractedFile);
 
 		return extractedFile;
 	}
@@ -130,13 +137,13 @@ final class SharedLibraryLoader {
 	/**
 	 * Extracts a native library.
 	 *
-	 * @param libraryFile   the library file
+	 * @param resource      the library resource
 	 * @param libraryCRC    the library file CRC
 	 * @param extractedFile the extracted file
 	 *
 	 * @throws IOException if an IO error occurs
 	 */
-	private static void extractFile(String libraryFile, String libraryCRC, File extractedFile) throws IOException {
+	private static void extractFile(URL resource, String libraryCRC, File extractedFile) throws IOException {
 		String extractedCrc = null;
 		if ( extractedFile.exists() )
 			try ( InputStream input = new FileInputStream(extractedFile) ) {
@@ -148,7 +155,7 @@ final class SharedLibraryLoader {
 			extractedFile.getParentFile().mkdirs();
 
 			try (
-				InputStream input = readResource(libraryFile);
+				InputStream input = resource.openStream();
 				FileOutputStream output = new FileOutputStream(extractedFile)
 			) {
 				byte[] buffer = new byte[BUFFER_SIZE];
@@ -157,21 +164,6 @@ final class SharedLibraryLoader {
 					output.write(buffer, 0, n);
 			}
 		}
-	}
-
-	/**
-	 * Opens an {@link InputStream} to the specified resource in the classpath.
-	 *
-	 * @param path the resource to read
-	 *
-	 * @return an {@link InputStream} for the resource
-	 */
-	private static InputStream readResource(String path) {
-		InputStream input = SharedLibraryLoader.class.getResourceAsStream("/" + path);
-		if ( input == null )
-			throw new RuntimeException("Unable to read file for extraction: " + path);
-
-		return input;
 	}
 
 	/**
