@@ -1566,7 +1566,7 @@ val VkPipelineMultisampleStateCreateInfo =
 			""",
 			"If the sample rate shading feature is not enabled, {@code sampleShadingEnable} $must be #FALSE",
 			"If the alpha to one feature is not enabled, {@code alphaToOneEnable} $must be #FALSE",
-			"{@code minSampleShading} $must be in the range {@code [0,1]"
+			"{@code minSampleShading} $must be in the range {@code [0,1]}"
 		)}"""
 
 val VkPipelineRasterizationStateCreateInfo =
@@ -2246,7 +2246,7 @@ val VkWaylandSurfaceCreateInfoKHR =
 val VkWin32SurfaceCreateInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
-			"{@code sType} $must be #STRUCTURE_TYPE_WIN_SURFACE_CREATE_INFO_KHR",
+			"{@code sType} $must be #STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR",
 			"{@code pNext} $must be $NULL",
 			"{@code flags} $must be 0"
 		)}"""

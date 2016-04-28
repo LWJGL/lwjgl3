@@ -165,7 +165,7 @@ fun man(page: String, version: String = "1.0", link: String = "Khronos Reference
 fun spec(anchor: String, version: String = "1.0-wsi_extensions", link: String = "Vulkan Specification") =
 	"<a href=\"https://www.khronos.org/registry/vulkan/specs/$version/xhtml/vkspec.html\\#$anchor\">$link</a>"
 
-private val STRUCTURE_TYPE_REGEX = "([a-z])([A-Z])".toRegex()
+private val STRUCTURE_TYPE_REGEX = "([a-z]|[0-9])([A-Z])".toRegex()
 internal fun Struct.sType(struct: Struct) = VkStructureType.member("sType", "the type of this structure. Must be: #STRUCTURE_TYPE_${struct
 	.className
 	.substring(2)

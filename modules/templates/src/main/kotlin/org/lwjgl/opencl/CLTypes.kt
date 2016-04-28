@@ -149,7 +149,7 @@ val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_i
 		"image_width",
 		"""
 		the width of the image in pixels. For a 2D image and image array, the image width must be &le; CL10#CL_DEVICE_IMAGE2D_MAX_WIDTH. For a 3D image, the
-		image width must be &le; CL10#CL_DEVICE_IMAGE3D_MAX_WIDTH. For a 1D image buffer, the image width must be &le; CL10#CL_DEVICE_IMAGE_MAX_BUFFER_SIZE.
+		image width must be &le; CL10#CL_DEVICE_IMAGE3D_MAX_WIDTH. For a 1D image buffer, the image width must be &le; #DEVICE_IMAGE_MAX_BUFFER_SIZE.
 		For a 1D image and 1D image array, the image width must be &le; CL10#CL_DEVICE_IMAGE2D_MAX_WIDTH.
 		"""
 	)
@@ -168,7 +168,7 @@ val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_i
 		"image_array_size",
 		"""
 		the number of images in the image array. This is only used if the image is a 1D or 2D image array. The values for {@code image_array_size}, if
-		specified, must be a value &ge; 1 and &le; CL10#CL_DEVICE_IMAGE_MAX_ARRAY_SIZE.
+		specified, must be a value &ge; 1 and &le; #DEVICE_IMAGE_MAX_ARRAY_SIZE.
 
 		Note that reading and writing 2D image arrays from a kernel with {@code image_array_size = 1} may be lower performance than 2D images.
 		"""
@@ -379,7 +379,7 @@ val cl_queue_properties_APPLE_p = cl_queue_properties_APPLE.p
 val cl_report_live_objects_altera_callback = "cl_report_live_objects_altera".callback(
 	OPENCL_PACKAGE, void, "CLReportLiveObjectsAlteraCallback",
 	"Reports a live OpenCL API object.",
-	void_p.IN("user_data", "the {@code user_data} argument specified to ALTERALiveObjectTracking#clReportLiveObjectsAltera()"),
+	void_p.IN("user_data", "the {@code user_data} argument specified to #ReportLiveObjectsAltera()"),
 	void_p.IN("obj_ptr", "a pointer to the live object"),
 	const..charASCII_p.IN(
 		"type_name",
@@ -387,7 +387,7 @@ val cl_report_live_objects_altera_callback = "cl_report_live_objects_altera".cal
 	),
 	cl_uint.IN("refcount", "an instantaneous reference count for the object. Consider it to be immediately stale.")
 ) {
-	documentation = "Instances of this interface may be passed to the ALTERALiveObjectTracking#ReportLiveObjectsAltera() method."
+	documentation = "Instances of this interface may be passed to the #ReportLiveObjectsAltera() method."
 	useSystemCallConvention()
 }
 
