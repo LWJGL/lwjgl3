@@ -235,7 +235,9 @@ public final class GL {
 	public static GLCapabilities getCapabilities() {
 		GLCapabilities caps = capabilitiesState.get();
 		if ( caps == null )
-			throw new IllegalStateException("No GLCapabilities instance has been set for the current thread.");
+			throw new IllegalStateException("No GLCapabilities instance set for the current thread. Possible solutions:\n" +
+				                                "\ta) Call GL.createCapabilities() after making a context current in the current thread.\n" +
+				                                "\tb) Call GL.setCapabilities() if a GLCapabilities instance already exists for the current context.");
 
 		return caps;
 	}

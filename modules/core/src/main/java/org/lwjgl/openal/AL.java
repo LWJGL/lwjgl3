@@ -132,7 +132,9 @@ public final class AL {
 	public static ALCapabilities getCapabilities() {
 		ALCapabilities current = getCurrentCapabilities();
 		if ( current == null )
-			throw new IllegalStateException("No OpenAL context has been made current for the current thread or process.");
+			throw new IllegalStateException("No ALCapabilities instance set for the current thread or process. Possible solutions:\n" +
+				                                "\ta) Call AL.createCapabilities() after making a context current.\n" +
+				                                "\tb) Call AL.setCurrentProcess() or AL.setCurrentThread() if an ALCapabilities instance already exists.");
 
 		return current;
 	}
