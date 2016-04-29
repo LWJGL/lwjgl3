@@ -85,6 +85,7 @@ fun main(args: Array<String>) {
 
 		val bindingsSystem = arrayOf(
 			"org.lwjgl.system.dyncall",
+			"org.lwjgl.system.gamepad",
 			"org.lwjgl.system.jemalloc",
 			"org.lwjgl.system.libc",
 			"org.lwjgl.system.linux",

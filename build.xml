@@ -177,6 +177,7 @@ License terms: http://lwjgl.org/license.php
 			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/ExtensionTypes.kt" unless:true="${binding.vulkan}"/>
 
 			<src path="${src.templates.kotlin}/org/lwjgl/system/dyncall"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/gamepad"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/jemalloc"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/libc"/>
@@ -275,6 +276,7 @@ License terms: http://lwjgl.org/license.php
 
 			<include name="org/lwjgl/system/JNI.*"/>
 			<include name="org/lwjgl/system/dyncall/**"/>
+			<include name="org/lwjgl/system/gamepad/**"/>
 			<include name="org/lwjgl/system/jemalloc/**"/>
 			<include name="org/lwjgl/system/libc/**"/>
 			<include name="org/lwjgl/system/linux/**"/>
@@ -378,6 +380,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
 			<include name="org/lwjgl/demo/stb/**" if:true="${stb_glfw}"/>
 
+			<include name="org/lwjgl/demo/system/gamepad/**"/>
 			<include name="org/lwjgl/demo/system/jawt/**" if:true="${binding.jawt}"/>
 
 			<include name="org/lwjgl/demo/util/*.java"/>
