@@ -18,6 +18,7 @@ public abstract class Struct extends Pointer.Default implements NativeResource {
 		Library.initialize();
 	}
 
+	@SuppressWarnings("unused")
 	private ByteBuffer container;
 
 	protected Struct(long address, ByteBuffer container) {

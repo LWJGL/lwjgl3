@@ -35,7 +35,6 @@ public final class ThreadLocalUtil {
 		ThreadLocalState get();
 	}
 
-	@SuppressWarnings("unchecked")
 	private static State getInstance() {
 		String tls = Configuration.THREAD_LOCAL_SPACE.get("unsafe");
 

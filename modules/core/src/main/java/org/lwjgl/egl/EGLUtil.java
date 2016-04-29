@@ -4,22 +4,11 @@
  */
 package org.lwjgl.egl;
 
-import java.util.Map;
-
 import static org.lwjgl.egl.EGL10.*;
 import static org.lwjgl.egl.EGL11.*;
 import static org.lwjgl.system.APIUtil.*;
 
 public final class EGLUtil {
-
-	private static final Map<Integer, String> EGL_ERROR_TOKENS = apiClassTokens(
-		(field, value) -> field.getName().contains("_BAD_"), null,
-		EGL10.class,
-		EGL11.class,
-		EXTDeviceQuery.class,
-		EXTOutputBase.class,
-		KHRStream.class
-	);
 
 	private EGLUtil() {
 	}

@@ -374,7 +374,6 @@ public class Configuration<T> {
 	 *
 	 * <p>If the option value has not been set, null will be returned.</p>
 	 */
-	@SuppressWarnings("unchecked")
 	public T get() {
 		return state;
 	}
@@ -386,7 +385,6 @@ public class Configuration<T> {
 	 *
 	 * @param defaultValue the default value
 	 */
-	@SuppressWarnings("unchecked")
 	public T get(T defaultValue) {
 		T state = this.state;
 		if ( state == null )
