@@ -2124,7 +2124,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.1"
 	)
 
-	int(
+	GLFWboolean(
 		"JoystickPresent",
 		"""
 		Returns whether the specified joystick is present.
