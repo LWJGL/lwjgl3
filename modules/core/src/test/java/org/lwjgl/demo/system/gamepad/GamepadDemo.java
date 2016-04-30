@@ -37,6 +37,9 @@ public class GamepadDemo {
 	private int windowWidth;
 	private int windowHeight;
 
+	private int framebufferWidth;
+	private int framebufferHeight;
+
 	private static void onButtonDown(long device, int buttonID, double timestamp, long context) {
 		if ( VERBOSE ) {
 			System.out.format("Button %d down on device %d at %f\n", buttonID, GamepadDevice.create(device).deviceID(), timestamp);
@@ -50,7 +53,7 @@ public class GamepadDemo {
 	}
 
 	private static void onAxisMoved(long device, int axisID, float value, float lastValue, double timestamp, long context) {
-		if ( false && VERBOSE ) {
+		if ( VERBOSE ) {
 			System.out.format(
 				"Axis %d moved from %f to %f on device %d at %f\n",
 				axisID,
@@ -111,7 +114,7 @@ public class GamepadDemo {
 
 	private static void drawString(int rasterPosX, int rasterPosY, String string) {
 		try ( MemoryStack stack = stackPush() ) {
-			ByteBuffer charBuffer = stack.malloc(string.length() * 384);
+			ByteBuffer charBuffer = stack.malloc(string.length() * 512);
 
 			int quads = stb_easy_font_print(rasterPosX, rasterPosY - 12, string, null, charBuffer);
 
@@ -126,6 +129,7 @@ public class GamepadDemo {
 
 		glClear(GL_COLOR_BUFFER_BIT);
 		glLoadIdentity();
+		glScalef(framebufferWidth / windowWidth, framebufferHeight / windowHeight, 1.0f);
 		glTranslatef(5.0f, 20.0f, 0.0f);
 
 		int gamepadIndex;
@@ -226,12 +230,21 @@ public class GamepadDemo {
 		}
 	}
 
-	private static void reshapeFunc(long window, int width, int height) {
+	private void reshapeFunc(long window, int width, int height) {
 		glViewport(0, 0, width, height);
+
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0.0f, width, height, 0.0f, -1.0f, 1.0f);
 		glMatrixMode(GL_MODELVIEW);
+
+		this.framebufferWidth = width;
+		this.framebufferHeight = height;
+	}
+
+	private void windowSizeFunc(long window, int width, int height) {
+		this.windowWidth = width;
+		this.windowHeight = height;
 	}
 
 	private void init() {
@@ -262,11 +275,8 @@ public class GamepadDemo {
 		);
 
 		glfwSetKeyCallback(window, GamepadDemo::keyDownFunc);
-		glfwSetFramebufferSizeCallback(window, GamepadDemo::reshapeFunc);
-		glfwSetWindowSizeCallback(window, (windowHnd, width, height) -> {
-			this.windowWidth = width;
-			this.windowHeight = height;
-		});
+		glfwSetFramebufferSizeCallback(window, this::reshapeFunc);
+		glfwSetWindowSizeCallback(window, this::windowSizeFunc);
 
 		glfwSetWindowRefreshCallback(window, windowHnd -> {
 			displayFunc();
@@ -283,7 +293,7 @@ public class GamepadDemo {
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
 
-		glfwInvoke(window, null, GamepadDemo::reshapeFunc);
+		glfwInvoke(window, this::windowSizeFunc, this::reshapeFunc);
 
 		this.window = window;
 	}

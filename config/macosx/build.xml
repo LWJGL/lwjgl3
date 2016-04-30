@@ -47,15 +47,15 @@ License terms: http://lwjgl.org/license.php
 	</fileset>
 
 	<property name="macosx-version-min" value="10.7"/>
-	<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 
 	<property name="src.include.rel" value="../../../${src.include}"/>
 	<property name="src.native.rel" value="../../../${src.native}"/>
 	<macrodef name="compile">
+		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 		<element name="arguments"/>
 		<sequential>
 			<apply dir="${bin.native}" executable="${compiler}" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-				<arg line="-c -std=c11 -ObjC -O3 -fPIC ${warnings} -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
+				<arg line="-c -std=c11 -ObjC -O3 -fPIC @{flags} -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
 
 				<arg value="-I${jni.headers}"/>
 				<arg value="-I${jni.headers}/darwin"/>
@@ -85,11 +85,20 @@ License terms: http://lwjgl.org/license.php
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/dyncall/*.c"/>
+					<include name="${src.generated.native}/system/gamepad/*.c"/>
 					<include name="${src.generated.native}/system/jemalloc/*.c"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/macosx/*.c"/>
 					<include name="${src.generated.native}/util/simd/*.c"/>
 					<include name="${src.generated.native}/util/xxhash/*.c"/>
+				</fileset>
+			</arguments>
+		</compile>
+		<compile flags="">
+			<arguments>
+				<fileset dir=".">
+					<include name="${src.native}/system/gamepad/Gamepad_private.c"/>
+					<include name="${src.native}/system/gamepad/Gamepad_macosx.c"/>
 				</fileset>
 			</arguments>
 		</compile>
@@ -167,6 +176,7 @@ License terms: http://lwjgl.org/license.php
 			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/${LWJGL_LIBRARY}'/>
 			<arg line="-framework Foundation" unless:true="${binding.nfd}"/>
 			<arg line="-framework AppKit" if:true="${binding.nfd}"/>
+			<arg line="-framework IOKit"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
