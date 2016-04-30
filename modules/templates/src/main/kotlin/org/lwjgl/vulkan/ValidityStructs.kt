@@ -134,22 +134,6 @@ val VkBufferImageCopy =
 			subresource depth
 			""",
 			"If the calling command's {@code VkImage} parameter is a compressed format image:",
-			"{@code bufferRowLength} $must be a multiple of the compressed texel block width",
-			"{@code bufferImageHeight} $must be a multiple of the compressed texel block height",
-			"all members of {@code imageOffset} $must be a multiple of the corresponding dimensions of the compressed texel block",
-			"{@code bufferOffset} $must be a multiple of the compressed texel block size in bytes",
-			"""
-			{@code imageExtent.width} $must be a multiple of the compressed texel block width or ({@code imageExtent.width} + {@code imageOffset.x}) $must
-			equal the image subresource width
-			""",
-			"""
-			{@code imageExtent.height} $must be a multiple of the compressed texel block height or ({@code imageExtent.height} + {@code imageOffset.y}) $must
-			equal the image subresource height
-			""",
-			"""
-			{@code imageExtent.depth} $must be a multiple of the compressed texel block depth or ({@code imageExtent.depth} + {@code imageOffset.z}) $must
-			equal the image subresource depth
-			""",
 			"""
 			{@code bufferOffset}, {@code bufferRowLength}, {@code bufferImageHeight} and all members of {@code imageOffset} and {@code imageExtent} $must
 			respect the image transfer granularity requirements of the queue family that it will be submitted against, as described in Physical Device
@@ -199,13 +183,6 @@ val VkBufferViewCreateInfo =
 			"{@code offset} $must be less than the size of {@code buffer}",
 			"{@code offset} $must be a multiple of ##VkPhysicalDeviceLimits{@code ::minTexelBufferOffsetAlignment}",
 			"If {@code range} is not equal to #WHOLE_SIZE:",
-			"{@code range} $must be greater than 0",
-			"{@code range} $must be a multiple of the element size of {@code format}",
-			"""
-			{@code range} divided by the size of an element of {@code format}, $must be less than or equal to
-			##VkPhysicalDeviceLimits{@code ::maxTexelBufferElements}
-			""",
-			"the sum of {@code offset} and {@code range} $must be less than or equal to the size of {@code buffer}",
 			"""
 			{@code buffer} $must have been created with a {@code usage} value containing at least one of #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or
 			#BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT
@@ -897,33 +874,7 @@ val VkImageCopy =
 			destination image subresource depth
 			""",
 			"If the calling command's {@code srcImage} is a compressed format image:",
-			"all members of {@code srcOffset} $must be a multiple of the corresponding dimensions of the compressed texel block",
-			"""
-			{@code extent.width} $must be a multiple of the compressed texel block width or ({@code extent.width} + {@code srcOffset.x}) $must equal the source
-			image subresource width
-			""",
-			"""
-			{@code extent.height} $must be a multiple of the compressed texel block height or ({@code extent.height} + {@code srcOffset.y}) $must equal the
-			source image subresource height
-			""",
-			"""
-			{@code extent.depth} $must be a multiple of the compressed texel block depth or ({@code extent.depth} + {@code srcOffset.z}) $must equal the source
-			image subresource depth
-			""",
 			"If the calling command's {@code dstImage} is a compressed format image:",
-			"all members of {@code dstOffset} $must be a multiple of the corresponding dimensions of the compressed texel block",
-			"""
-			{@code extent.width} $must be a multiple of the compressed texel block width or ({@code extent.width} + {@code dstOffset.x}) $must equal the
-			destination image subresource width
-			""",
-			"""
-			{@code extent.height} $must be a multiple of the compressed texel block height or ({@code extent.height} + {@code dstOffset.y}) $must equal the
-			destination image subresource height
-			""",
-			"""
-			{@code extent.depth} $must be a multiple of the compressed texel block depth or ({@code extent.depth} + {@code dstOffset.z}) $must equal the
-			destination image subresource depth
-			""",
 			"""
 			{@code srcOffset}, {@code dstOffset}, and {@code extent} $must respect the image transfer granularity requirements of the queue family that it will
 			be submitted against, as described in Physical Device Enumeration

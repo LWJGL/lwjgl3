@@ -1031,8 +1031,10 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"FORMAT_FEATURE_BLIT_DST_BIT".enum("{@code VkImage} $can be used as {@code dstImage} for the #CmdBlitImage() command.", 0x00000800),
 		"FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT".enum(
 			"""
-			{@code VkImage} $can be used with a sampler that has either of {@code magFilter} or {@code minFilter} set to #FILTER_LINEAR, or {@code mipmapMode}
-			set to #SAMPLER_MIPMAP_MODE_LINEAR. This bit $must only be exposed for formats that also support the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT.
+			If #FORMAT_FEATURE_SAMPLED_IMAGE_BIT is also set, {@code VkImageView} $can be used with a sampler that has either of {@code magFilter} or
+			{@code minFilter} set to #FILTER_LINEAR, or {@code mipmapMode} set to #SAMPLER_MIPMAP_MODE_LINEAR. If #FORMAT_FEATURE_BLIT_SRC_BIT is also set,
+			{@code VkImage} can be used as the {@code srcImage} to #CmdBlitImage() with a {@code filter} of #FILTER_LINEAR. This bit $must only be exposed for
+			formats that also support the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT or #FORMAT_FEATURE_BLIT_SRC_BIT.
 
 			If the format being queried is a depth/stencil format, this bit only indicates that the depth aspect (not the stencil aspect) supports linear
 			filtering, and that linear filtering of the depth aspect is supported whether depth compare is enabled in the sampler or not. If this bit is not
@@ -2218,7 +2220,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		of batches to submit. Each batch includes zero or more semaphores to wait upon, and a corresponding set of stages that will wait for the semaphore to
 		be signalled before executing any work, followed by a number of command buffers that will be executed, and finally, zero or more semaphores that will
 		be signaled after command buffer execution completes. Each batch is represented as an instance of the ##VkSubmitInfo structure stored in an array, the
-		address of which is passed in {@code pSubmitInfo}.
+		address of which is passed in {@code pSubmits}.
 
 		${note(
 			"""
@@ -2242,9 +2244,10 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		VkFence.IN(
 			"fence",
 			"""
-			an optional handle to a fence. If {@code fence} is not #NULL_HANDLE, the fence is signaled when execution of all
-			{@code VkSubmitInfo::pCommandBuffers} members of {@code pSubmits} is completed. If {@code submitCount} is zero but fence is not #NULL_HANDLE, the
-			fence will still be submitted to the queue and will become signaled when all work previously submitted to the queue has completed.
+			an optional handle to a fence. If {@code fence} is not #NULL_HANDLE, the fence is signaled when execution of all command buffers specified in the
+			##VkSubmitInfo{@code ::pCommandBuffers} members of {@code pSubmits} is complete, providing certain implicit ordering guarantees. If
+			{@code submitCount} is zero but {@code fence} is not #NULL_HANDLE, the fence will still be submitted to the queue and will become signaled when all
+			work previously submitted to the queue has completed.
 			"""
 		)
 	)
@@ -2395,12 +2398,13 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 	VkResult(
 		"FlushMappedMemoryRanges",
 		"""
-		Flushes mapped memory ranges.
-
-		{@code vkFlushMappedMemoryRanges} $must be called after the host writes to non-coherent memory have completed and before command buffers that will read
-		or write any of those memory locations are submitted to a queue.
+		Flushes ranges of non-coherent memory from the host caches.
 
 		${ValidityProtos.vkFlushMappedMemoryRanges}
+
+		{@code vkFlushMappedMemoryRanges} $must be used to guarantee that host writes to non-coherent memory are visible to the device. It $must be called
+		after the host writes to non-coherent memory have completed and before command buffers that will read or write any of those memory locations are
+		submitted to a queue.
 		""",
 
 		VkDevice.IN("device", "the logical device that owns the memory ranges"),
@@ -2416,10 +2420,11 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		"""
 		Invalidates ranges of mapped memory objects.
 
-		{@code vkInvalidateMappedMemoryRanges} $must be called after command buffers that execute and flush (via memory barriers) the device writes have
-		completed, and before the host will read or write any of those locations.
-
 		${ValidityProtos.vkInvalidateMappedMemoryRanges}
+
+		{@code vkInvalidateMappedMemoryRanges} $must be used to guarantee that device writes to non-coherent memory are visible to the host. It $must be called
+		after command buffers that execute and flush (via memory barriers) the device writes have completed, and before the host will read or write any of
+		those locations. If a range of non-coherent memory is written by the host and then invalidated without first being flushed, its contents are undefined.
 		""",
 
 		VkDevice.IN("device", "the logical device that owns the memory ranges"),
@@ -2763,8 +2768,8 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		
 		${ValidityProtos.vkCreateSemaphore}
 
-		To signal a semaphore from a queue, include it in an element of the array of ##VkSubmitInfo structures passed through the {@code pSubmitInfo} parameter
-		to a call to #QueueSubmit(), or in an element of the array of ##VkBindSparseInfo structures passed through the {@code pBindInfo} parameter to a call to
+		To signal a semaphore from a queue, include it in an element of the array of ##VkSubmitInfo structures passed through the {@code pSubmits} parameter to
+		a call to #QueueSubmit(), or in an element of the array of ##VkBindSparseInfo structures passed through the {@code pBindInfo} parameter to a call to
 		#QueueBindSparse().
 
 		Semaphores included in the {@code pSignalSemaphores} array of one of the elements of a queue submission are signaled once queue execution reaches the
@@ -4529,7 +4534,7 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 		the block dimensions. If the {@code srcImage is} compressed and if {@code extent.width} is not a multiple of the block width then
 		{@code (extent.width + srcOffset.x)} $must equal the image subresource width, if {@code extent.height} is not a multiple of the block height then
 		{@code (extent.height + srcOffset.y)} $must equal the image subresource height and if {@code extent.depth} is not a multiple of the block depth then
-		{@code (extent.depth + srcOffset.z)} $must equal the image subresource depth. Similarily if the {@code dstImage} is compressed and if
+		{@code (extent.depth + srcOffset.z)} $must equal the image subresource depth. Similarly if the {@code dstImage} is compressed and if
 		{@code extent.width} is not a multiple of the block width then {@code (extent.width + dstOffset.x)} $must equal the image subresource width, if
 		{@code extent.height} is not a multiple of the block height then {@code (extent.height + dstOffset.y)} $must equal the image subresource height and if
 		{@code extent.depth} is not a multiple of the block depth then {@code (extent.depth + dstOffset.z)} $must equal the image subresource depth. This
@@ -4642,7 +4647,10 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 		VkDeviceSize.IN("dstOffset", "the byte offset into the buffer at which to start filling, and $must be a multiple of 4"),
 		VkDeviceSize.IN(
 			"size",
-			"the number of bytes to fill, and $must be either a multiple of 4, or #WHOLE_SIZE to fill the range from offset to the end of the buffer"
+			"""
+			the number of bytes to fill, and $must be either a multiple of 4, or #WHOLE_SIZE to fill the range from offset to the end of the buffer. If
+			#WHOLE_SIZE is used and the remaining size of the buffer is not a multiple of 4, then the nearest smaller multiple is used.
+			"""
 		),
 		uint32_t.IN(
 			"data",

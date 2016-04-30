@@ -425,7 +425,12 @@ val vkCmdBlitImage =
 			with an unsigned integer {@code VkFormat}
 			""",
 			"If either of {@code srcImage} or {@code dstImage} was created with a depth/stencil format, the other $must have exactly the same format",
-			"If {@code srcImage} was created with a depth/stencil format, {@code filter} $must be #FILTER_NEAREST"
+			"If {@code srcImage} was created with a depth/stencil format, {@code filter} $must be #FILTER_NEAREST",
+			"""
+			If {@code filter} is #FILTER_LINEAR, {@code srcImage} $must be of a format which supports linear filtering, as specified by the
+			#FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
+			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			"""
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -478,7 +483,7 @@ val vkCmdClearColorImage =
 			is executed on a {@code VkDevice}
 			""",
 			"{@code imageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
-			"The image range of any given element of {@code pRanges} $must be a image subresource range that is contained within {@code image}",
+			"The image range of any given element of {@code pRanges} $must be an image subresource range that is contained within {@code image}",
 			"{@code image} $mustnot have a compressed or depth/stencil format"
 		)}
 
@@ -506,7 +511,7 @@ val vkCmdClearDepthStencilImage =
 			is executed on a {@code VkDevice}
 			""",
 			"{@code imageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
-			"The image range of any given element of {@code pRanges} $must be a image subresource range that is contained within {@code image}",
+			"The image range of any given element of {@code pRanges} $must be an image subresource range that is contained within {@code image}",
 			"{@code image} $must have a depth/stencil format"
 		)}
 
@@ -749,9 +754,9 @@ val vkCmdDispatch =
 			bound descriptor set
 			""",
 			"""
-			Any {@code VkImage} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
-			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by
-			#GetPhysicalDeviceFormatProperties()
+			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
+			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			"""
 		)}
 
@@ -813,9 +818,9 @@ val vkCmdDispatchIndirect =
 			bound descriptor set
 			""",
 			"""
-			Any {@code VkImage} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
-			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by
-			#GetPhysicalDeviceFormatProperties()
+			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
+			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			"""
 		)}
 
@@ -881,9 +886,9 @@ val vkCmdDraw =
 			bound descriptor set
 			""",
 			"""
-			Any {@code VkImage} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
-			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by
-			#GetPhysicalDeviceFormatProperties()
+			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
+			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			"""
 		)}
 
@@ -954,9 +959,9 @@ val vkCmdDrawIndexed =
 			bound descriptor set
 			""",
 			"""
-			Any {@code VkImage} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
-			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by
-			#GetPhysicalDeviceFormatProperties()
+			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
+			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			"""
 		)}
 
@@ -1042,9 +1047,9 @@ val vkCmdDrawIndexedIndirect =
 			bound descriptor set
 			""",
 			"""
-			Any {@code VkImage} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
-			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by
-			#GetPhysicalDeviceFormatProperties()
+			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
+			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			"""
 		)}
 
@@ -1130,9 +1135,9 @@ val vkCmdDrawIndirect =
 			bound descriptor set
 			""",
 			"""
-			Any {@code VkImage} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
-			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by
-			#GetPhysicalDeviceFormatProperties()
+			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
+			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			"""
 		)}
 
@@ -1363,7 +1368,8 @@ val vkCmdResetEvent =
 			"""
 			If the tessellation shaders feature is not enabled, {@code stageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
 			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
-			"""
+			""",
+			"When this command executes, {@code event} $mustnot be waited on by a #CmdWaitEvents() command that is currently executing"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -3194,8 +3200,11 @@ val vkQueueSubmit =
 			"If {@code submitCount} is not 0, {@code pSubmits} $must be a pointer to an array of {@code submitCount} valid ##VkSubmitInfo structures",
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
 			"Each of {@code queue} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
-			"{@code fence} $must be unsignalled",
-			"{@code fence} $mustnot be associated with any other queue command that has not yet completed execution on that queue"
+			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be unsignalled",
+			"""
+			If {@code fence} is not #NULL_HANDLE, {@code fence} $mustnot be associated with any other queue command that has not yet completed execution on
+			that queue
+			"""
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -3265,7 +3274,8 @@ val vkResetEvent =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code event} $must be a valid {@code VkEvent} handle",
 			"{@code event} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code event} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+			"Each of {@code device} and {@code event} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code event} $mustnot be waited on by a #CmdWaitEvents() command that is currently executing"
 		)}
 
 		<h5>Host Synchronization</h5>

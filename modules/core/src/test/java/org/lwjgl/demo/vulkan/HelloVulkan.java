@@ -56,6 +56,10 @@ import static org.lwjgl.vulkan.VK10.*;
 /** Simple Vulkan demo. Ported from the GLFW <a href="https://github.com/glfw/glfw/blob/master/tests/vulkan.c">vulkan</a> test. */
 public final class HelloVulkan {
 
+	private static final boolean VALIDATE = true;
+
+	private static final boolean USE_STAGING_BUFFER = false;
+
 	private static final int DEMO_TEXTURE_COUNT    = 1;
 	private static final int VERTEX_BUFFER_BIND_ID = 0;
 
@@ -213,69 +217,65 @@ public final class HelloVulkan {
 	private final LongBuffer    lp = memAllocLong(1);
 	private final PointerBuffer pp = memAllocPointer(1);
 
-	boolean validate = true;
+	private PointerBuffer device_validation_layers = memAllocPointer(10);
 
-	PointerBuffer device_validation_layers = memAllocPointer(10);
+	private PointerBuffer extension_names = memAllocPointer(64);
 
-	PointerBuffer extension_names = memAllocPointer(64);
+	private VkInstance       inst;
+	private VkPhysicalDevice gpu;
 
-	VkInstance       inst;
-	VkPhysicalDevice gpu;
+	private long msg_callback;
 
-	long msg_callback;
+	private VkPhysicalDeviceProperties gpu_props = VkPhysicalDeviceProperties.malloc();
 
-	VkPhysicalDeviceProperties gpu_props = VkPhysicalDeviceProperties.malloc();
+	private VkQueueFamilyProperties.Buffer queue_props;
 
-	VkQueueFamilyProperties.Buffer queue_props;
+	private int   width          = 300;
+	private int   height         = 300;
+	private float depthStencil   = 1.0f;
+	private float depthIncrement = -0.01f;
 
-	int   width          = 300;
-	int   height         = 300;
-	float depthStencil   = 1.0f;
-	float depthIncrement = -0.01f;
+	private long window;
 
-	long window;
+	private long surface;
 
-	long surface;
+	private int graphics_queue_node_index;
 
-	int graphics_queue_node_index;
+	private VkDevice device;
+	private VkQueue  queue;
 
-	VkDevice device;
-	VkQueue  queue;
+	private int format;
+	private int color_space;
 
-	int format;
-	int color_space;
+	private VkPhysicalDeviceMemoryProperties memory_properties = VkPhysicalDeviceMemoryProperties.malloc();
 
-	VkPhysicalDeviceMemoryProperties memory_properties = VkPhysicalDeviceMemoryProperties.malloc();
+	private long            cmd_pool;
+	private VkCommandBuffer draw_cmd;
 
-	long            cmd_pool;
-	VkCommandBuffer draw_cmd;
+	private long               swapchain;
+	private int                swapchainImageCount;
+	private SwapchainBuffers[] buffers;
+	private int                current_buffer;
 
-	long               swapchain;
-	int                swapchainImageCount;
-	SwapchainBuffers[] buffers;
-	int                current_buffer;
+	private VkCommandBuffer setup_cmd;
 
-	VkCommandBuffer setup_cmd;
+	private Depth depth = new Depth();
 
-	Depth depth = new Depth();
+	private TextureObject[] textures = new TextureObject[DEMO_TEXTURE_COUNT];
 
-	boolean use_staging_buffer;
+	private Vertices vertices = new Vertices();
 
-	TextureObject[] textures = new TextureObject[DEMO_TEXTURE_COUNT];
+	private long desc_layout;
+	private long pipeline_layout;
 
-	Vertices vertices = new Vertices();
+	private long render_pass;
 
-	long desc_layout;
-	long pipeline_layout;
+	private long pipeline;
 
-	long render_pass;
+	private long desc_pool;
+	private long desc_set;
 
-	long pipeline;
-
-	long desc_pool;
-	long desc_set;
-
-	LongBuffer framebuffers;
+	private LongBuffer framebuffers;
 
 	private HelloVulkan() {
 		for ( int i = 0; i < textures.length; i++ ) {
@@ -341,7 +341,7 @@ public final class HelloVulkan {
 	}
 
 	private void demo_init_vk() {
-		if ( validate ) {
+		if ( VALIDATE ) {
 			device_validation_layers
 				//.put(memASCII("VK_LAYER_LUNARG_standard_validation"))
 				//.put(memASCII("VK_LAYER_LUNARG_api_dump"))
@@ -371,11 +371,11 @@ public final class HelloVulkan {
 				err = vkEnumerateInstanceLayerProperties(ip, instance_layers);
 				check(err);
 
-				if ( validate )
+				if ( VALIDATE )
 					validation_found = demo_check_layers(instance_validation_layers, instance_layers);
 			}
 
-			if ( validate && !validation_found )
+			if ( VALIDATE && !validation_found )
 				throw new IllegalStateException("vkEnumerateInstanceLayerProperties failed to find required validation layer.");
 
 			PointerBuffer required_extensions = glfwGetRequiredInstanceExtensions();
@@ -397,7 +397,7 @@ public final class HelloVulkan {
 				for ( int i = 0; i < ip.get(0); i++ ) {
 					instance_extensions.position(i);
 					if ( VK_EXT_DEBUG_REPORT_EXTENSION_NAME.equals(instance_extensions.extensionNameString()) ) {
-						if ( validate ) {
+						if ( VALIDATE ) {
 							extension_names.put(EXT_debug_report);
 						}
 					}
@@ -425,8 +425,8 @@ public final class HelloVulkan {
 				.ppEnabledExtensionNames(extension_names);
 			extension_names.clear();
 
-			VkDebugReportCallbackCreateInfoEXT dbgCreateInfo = null;
-			if ( validate ) {
+			VkDebugReportCallbackCreateInfoEXT dbgCreateInfo;
+			if ( VALIDATE ) {
 				dbgCreateInfo = VkDebugReportCallbackCreateInfoEXT.mallocStack(stack)
 					.sType(VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT)
 					.pNext(NULL)
@@ -472,11 +472,11 @@ public final class HelloVulkan {
 				err = vkEnumerateDeviceLayerProperties(gpu, ip, device_layers);
 				check(err);
 
-				if ( validate )
+				if ( VALIDATE )
 					validation_found = demo_check_layers(device_validation_layers, device_layers);
 			}
 
-			if ( validate && !validation_found )
+			if ( VALIDATE && !validation_found )
 				throw new IllegalStateException("vkEnumerateDeviceLayerProperties failed to find a required validation layer.");
 
 		/* Look for device extensions */
@@ -501,7 +501,7 @@ public final class HelloVulkan {
 			if ( !swapchainExtFound )
 				throw new IllegalStateException("vkEnumerateDeviceExtensionProperties failed to find the " + VK_KHR_SWAPCHAIN_EXTENSION_NAME + " extension.");
 
-			if ( validate ) {
+			if ( VALIDATE ) {
 				err = vkCreateDebugReportCallbackEXT(inst, dbgCreateInfo, null, lp);
 				switch ( err ) {
 					case VK_SUCCESS:
@@ -573,7 +573,7 @@ public final class HelloVulkan {
 				.pNext(NULL)
 				.flags(0)
 				.pQueueCreateInfos(queue)
-				.ppEnabledLayerNames(validate ? device_validation_layers : null)
+				.ppEnabledLayerNames(VALIDATE ? device_validation_layers : null)
 				.ppEnabledExtensionNames(extension_names)
 				.pEnabledFeatures(null);
 
@@ -1111,7 +1111,7 @@ public final class HelloVulkan {
 			vkGetPhysicalDeviceFormatProperties(gpu, tex_format, props);
 
 			for ( int i = 0; i < DEMO_TEXTURE_COUNT; i++ ) {
-				if ( (props.linearTilingFeatures() & VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT) != 0 && !use_staging_buffer ) {
+				if ( (props.linearTilingFeatures() & VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT) != 0 && !USE_STAGING_BUFFER ) {
 				    /* Device can texture using linear textures */
 					demo_prepare_texture_image(tex_colors[i], textures[i],
 					                           VK_IMAGE_TILING_LINEAR,
@@ -1473,7 +1473,8 @@ public final class HelloVulkan {
 						.frontFace(VK_FRONT_FACE_CLOCKWISE)
 						.depthClampEnable(VK_FALSE)
 						.rasterizerDiscardEnable(VK_FALSE)
-						.depthBiasEnable(VK_FALSE))
+						.depthBiasEnable(VK_FALSE)
+						.lineWidth(1.0f))
 				.pMultisampleState(
 					VkPipelineMultisampleStateCreateInfo.callocStack(stack)
 						.sType(VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO)

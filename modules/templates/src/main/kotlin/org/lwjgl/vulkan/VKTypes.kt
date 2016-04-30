@@ -1338,7 +1338,7 @@ val VkSparseImageMemoryBind = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBind") 
 	    "extent",
 	    """
 	    the size in texels of the region within the image subresource to bind. The extent must be a multiple of the sparse image block dimensions, except when
-	    binding sparse image blocks along the edge of a image subresource it can instead be such that any coordinate of offset+extentoffset+extent equals the
+	    binding sparse image blocks along the edge of an image subresource it can instead be such that any coordinate of {@code offset + extent} equals the
 	    corresponding dimensions of the image subresource.
 	    """
     )
@@ -2738,7 +2738,7 @@ val VkCommandPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandPoolCreateInf
 
 	sType(this)
 	pNext()
-	VkCommandPoolCreateFlags.member("flags", "a combination of bitfield flags indicating usage behavior for the pool and command buffers allocated from it")
+	VkCommandPoolCreateFlags.member("flags", "a bitmask indicating usage behavior for the pool and command buffers allocated from it")
 		.flagLinks("COMMAND_POOL_CREATE")
 	uint32_t.member("queueFamilyIndex", "designates a queue family")
 }
@@ -3118,7 +3118,7 @@ val VkImageMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 		${spec("VkImageMemoryBarrier")}
 
 		Specifies an image memory barrier. This type of barrier only applies to memory accesses involving a specific image subresource range of the specified
-		image object. That is, a memory dependency formed from a image memory barrier is scoped to the specified subresources of the image. It is also used to
+		image object. That is, a memory dependency formed from an image memory barrier is scoped to the specified subresources of the image. It is also used to
 		perform a layout transition for an image subresource range, or to transfer ownership of an image subresource range from one queue family to another.
 
 		${ValidityStructs.VkImageMemoryBarrier}
@@ -3178,7 +3178,8 @@ val VkRenderPassBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassBeginInfo") 
 		"pClearValues",
 		"""
 		an array of ##VkClearValue structures that contains clear values for each attachment, if the attachment uses a {@code loadOp} value of
-		#ATTACHMENT_LOAD_OP_CLEAR. The array is indexed by attachment number, with elements corresponding to uncleared attachments being unused.
+		#ATTACHMENT_LOAD_OP_CLEAR. The array is indexed by attachment number. Only elements corresponding to cleared attachments are used. Other elements of
+		{@code pClearValues} are ignored.
 		"""
 	)
 }
