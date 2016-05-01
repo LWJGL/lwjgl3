@@ -9,7 +9,6 @@ import org.lwjgl.system.SharedLibrary;
 
 import java.nio.ByteBuffer;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.DynamicLinkLoader.*;
@@ -21,9 +20,7 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 		super(loadLibrary(name), name);
 
 		if ( address() == NULL )
-			throw new RuntimeException("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
-
-		apiLog("Loaded native library: " + name);
+			throw new UnsatisfiedLinkError("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
 	}
 
 	private static long loadLibrary(String name) {

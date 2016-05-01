@@ -48,17 +48,21 @@ final class SharedLibraryLoader {
 		else
 			libraryPath = extractPath.getAbsolutePath() + File.pathSeparator + libraryPath;
 
-		apiLog("Shared Library Loader path: " + libraryPath);
 		System.setProperty(Configuration.LIBRARY_PATH.getProperty(), libraryPath);
 		Configuration.LIBRARY_PATH.set(libraryPath);
 	}
 
 	/** Extracts the specified shared library from the classpath to a temporary directory. */
 	static void load(String library) {
+		if ( Library.JNI_LIBRARY_NAME.equals(library) ) {
+			load();
+			return;
+		}
+
 		try {
 			extractFile(Platform.get().mapLibraryName(library), extractPath);
 		} catch (Exception e) {
-			apiLog("Failed to extract " + library + " library");
+			throw new RuntimeException("\tFailed to extract " + library + " library", e);
 		}
 	}
 
@@ -75,7 +79,7 @@ final class SharedLibraryLoader {
 		if ( resource == null )
 			throw new RuntimeException("Failed to locate resource: " + libraryFile);
 
-		apiLog(String.format("Located %s at: %s", libraryFile, resource.getPath()));
+		apiLog(String.format("\tExtracting: %s", resource.getPath()));
 
 		String libraryCRC;
 		try ( InputStream input = resource.openStream() ) {

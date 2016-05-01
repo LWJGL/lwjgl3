@@ -9,7 +9,6 @@ import org.lwjgl.system.SharedLibrary;
 
 import java.nio.ByteBuffer;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -31,9 +30,8 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 
 			long bundleRef = CFBundleCreate(NULL, url);
 			if ( bundleRef == NULL )
-				throw new RuntimeException("Failed to dynamically load bundle: " + path);
+				throw new UnsatisfiedLinkError("Failed to dynamically load bundle: " + path);
 
-			apiLog("Loaded native library bundle: " + path);
 			return bundleRef;
 		} finally {
 			if ( url != NULL ) CFRelease(url);

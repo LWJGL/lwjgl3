@@ -10,7 +10,6 @@ import org.lwjgl.system.SharedLibrary;
 
 import java.nio.ByteBuffer;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
@@ -34,9 +33,7 @@ public class WindowsLibrary extends SharedLibrary.Default {
 		super(loadLibrary(name), name);
 
 		if ( address() == NULL )
-			windowsThrowException("Failed to load library: " + name);
-
-		apiLog("Loaded native library: " + name);
+			throw new UnsatisfiedLinkError("Failed to load library: " + name + " (error code = " + getLastError() + ")");
 	}
 
 	private static long loadLibrary(String name) {
