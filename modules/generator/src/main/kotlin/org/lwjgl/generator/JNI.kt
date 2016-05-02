@@ -153,13 +153,13 @@ if ( it.arguments.isEmpty() ) "" else it.arguments.withIndex().map { "${it.value
 	UNUSED_PARAMS($JNIENV, clazz)
 	${it.arguments.asSequence()
 	.withIndex()
-	.mapNotNull { if ( !it.value.isArray ) null else "j${(it.value as PointerMapping).primitive} *paramArray${it.index} = (*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, param${it.index}, 0);" }
+	.mapNotNull { if ( !it.value.isArray ) null else "j${(it.value as PointerMapping).primitive} *paramArray${it.index} = param${it.index} == NULL ? NULL : (*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, param${it.index}, 0);" }
 	.joinToString("\n\t")}
 	${if ( it.returnType === TypeMapping.VOID ) "" else "${it.returnType.jniFunctionType} __result = "}Java_org_lwjgl_system_JNI_${it.signatureNative}($JNIENV, clazz, __functionAddress, ${it.arguments.withIndex().map { if ( it.value.isArray ) "(intptr_t)paramArray${it.index}" else "param${it.index}" }.joinToString(", ")});
 	${it.arguments.asSequence()
 	.withIndex()
 	.sortedByDescending { it.index }
-	.mapNotNull { if ( !it.value.isArray ) null else "(*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, param${it.index}, paramArray${it.index}, 0);" }
+	.mapNotNull { if ( !it.value.isArray ) null else "if ( param${it.index} != NULL ) (*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, param${it.index}, paramArray${it.index}, 0);" }
 	.joinToString("\n\t")}${if ( it.returnType === TypeMapping.VOID ) "" else """
 	return __result;"""}
 }""")

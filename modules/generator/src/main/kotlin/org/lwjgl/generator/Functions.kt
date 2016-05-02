@@ -1417,14 +1417,25 @@ class NativeClassFunction(
 		if (hasArrays && !critical) {
 			code = code.append(
 				nativeBeforeCall = getParams { it.nativeType is ArrayType }.map {
-					"j${(it.nativeType.mapping as PointerMapping).primitive} *${it.name} = (*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, 0);"
+					"j${(it.nativeType.mapping as PointerMapping).primitive} *${it.name} = ${
+					"(*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, 0)".let { expression ->
+						if ( it has nullable )
+							"${it.name}$POINTER_POSTFIX == NULL ? NULL : $expression"
+						else
+							expression
+					}};"
 				}.joinToString("\n\t", prefix = "\t"),
 				nativeAfterCall = getParams { it.nativeType is ArrayType }
 					.withIndex()
 					.sortedByDescending { it.index }
 					.map { it.value }
 					.map {
-						"(*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, ${it.name}, 0);"
+						"(*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, ${it.name}, 0);".let { expression ->
+							if ( it has nullable )
+								"if ( ${it.name} != NULL ) $expression"
+							else
+								expression
+						}
 					}.joinToString("\n\t", prefix = "\t")
 			)
 		}
