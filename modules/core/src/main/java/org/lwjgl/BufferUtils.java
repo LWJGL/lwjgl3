@@ -136,9 +136,9 @@ public final class BufferUtils {
 	 * Allocates a direct native-order doublebuffer with the specified number
 	 * of elements.
 	 *
-	 * @param capacity The capacity, in floats
+	 * @param capacity The capacity, in doubles
 	 *
-	 * @return a FloatBuffer
+	 * @return a DoubleBuffer
 	 */
 	public static DoubleBuffer createDoubleBuffer(int capacity) {
 		return createByteBuffer(capacity << 3).asDoubleBuffer();
