@@ -311,6 +311,15 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
+		<local name="egl_glfw"/>
+		<condition property="egl_glfw" value="true" else="false">
+			<and>
+				<istrue value="${binding.egl}"/>
+				<istrue value="${binding.opengles}"/>
+				<istrue value="${binding.glfw}"/>
+			</and>
+		</condition>
+
 		<local name="openal_stb"/>
 		<condition property="openal_stb" value="true" else="false">
 			<and>
@@ -362,7 +371,7 @@ License terms: http://lwjgl.org/license.php
 			<src path="${src.tests}/"/>
 
 			<!-- Demos -->
-			<include name="org/lwjgl/demo/egl/**" if:true="${binding.egl}"/>
+			<include name="org/lwjgl/demo/egl/**" if:true="${egl_glfw}"/>
 			<include name="org/lwjgl/demo/glfw/**" if:true="${binding.glfw}"/>
 			<include name="org/lwjgl/demo/nanovg/**" if:true="${nanovg}"/>
 
