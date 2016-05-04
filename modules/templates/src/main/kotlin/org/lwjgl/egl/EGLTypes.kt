@@ -16,7 +16,7 @@ val khronos_ssize_t = IntegerType("khronos_ssize_t", PrimitiveMapping.POINTER)
 val khronos_utime_nanoseconds_t = typedef(khronos_uint64_t, "khronos_utime_nanoseconds_t")
 
 // EGL 1.0
-val EGLBoolean = IntegerType("EGLBoolean", PrimitiveMapping.INT, unsigned = true)
+val EGLBoolean = PrimitiveType("EGLBoolean", PrimitiveMapping.BOOLEAN4)
 val EGLint = IntegerType("EGLint", PrimitiveMapping.INT)
 val EGLint_p = EGLint.p
 
