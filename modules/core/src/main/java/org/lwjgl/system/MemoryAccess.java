@@ -393,12 +393,83 @@ final class MemoryAccess {
 
 		@Override
 		public void memSet(long dst, int value, int bytes) {
-			UNSAFE.setMemory(dst, bytes, (byte)(value & 0xFF));
+			/*
+			- Unsafe.setMemory is very slow.
+			- A custom Java loop is fastest at small sizes, approximately up to 256 bytes.
+			- The native memset becomes fastest at bigger sizes, when the JNI overhead becomes negligible.
+			 */
+
+			//UNSAFE.setMemory(dst, bytes, (byte)(value & 0xFF));
+			if ( bytes < 256 )
+				memSetLoop(dst, (byte)(value & 0xFF), bytes);
+			else
+				memset(dst, value, bytes);
+		}
+
+		private void memSetLoop(long dst, byte value, int bytes) {
+			int i = 0;
+
+			if ( 8 <= bytes ) {
+				int misalignment = (int)dst & 7;
+				if ( misalignment != 0 ) {
+					// Align to 8 bytes
+					for ( int len = 8 - misalignment; i < len; i++ )
+						memPutByte(dst + i, value);
+				}
+
+				// Aligned longs for performance
+				long fill = fill(value);
+				do {
+					memPutLong(dst + i, fill);
+					i += 8;
+				} while ( i <= bytes - 8 );
+			}
+
+			// Tail
+			for ( ; i < bytes; i++ )
+				memPutByte(dst + i, value);
+		}
+
+		private static long fill(byte value) {
+			long fill = value;
+
+			if ( value != 0 ) {
+				fill += fill << 8;
+				fill += fill << 16;
+				fill += fill << 32;
+			}
+
+			return fill;
 		}
 
 		@Override
 		public void memCopy(long src, long dst, int bytes) {
-			UNSAFE.copyMemory(src, dst, bytes);
+			/*
+			- A custom Java loop is fastest at small sizes, approximately up to 64 bytes.
+			- Unsafe.copyMemory is fastest at moderate sizes, approximately up to 384 bytes.
+			- The native memcpy becomes fastest at bigger sizes, when the JNI overhead becomes negligible.
+			 */
+
+			if ( bytes < 64 && ((int)src & 7) == 0 && ((int)dst & 7) == 0 ) // both src and dst must be aligned to 8 bytes
+				memCopyAligned(src, dst, bytes);
+			else if ( bytes < 384 )
+				UNSAFE.copyMemory(src, dst, bytes);
+			else
+				MemoryAccess.memcpy(dst, src, bytes);
+		}
+
+		private void memCopyAligned(long src, long dst, int bytes) {
+			int i = 0;
+
+			// Aligned longs for performance
+			while ( i <= bytes - 8 ) {
+				memPutLong(dst + i, memGetLong(src + i));
+				i += 8;
+			}
+
+			// Tail
+			for ( ; i < bytes; i++ )
+				memPutByte(dst + i, memGetByte(src + i));
 		}
 
 		@Override
