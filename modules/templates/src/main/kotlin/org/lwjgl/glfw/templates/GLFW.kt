@@ -376,7 +376,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"NO_WINDOW_CONTEXT"..0x0001000A
 	)
 
-	val WindowAttributes = EnumConstant(
+	val WindowHints = EnumConstant(
 		"Window attributes.",
 
 		"FOCUSED".enum(
@@ -436,7 +436,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			#GetWindowAttrib(): Indicates whether the specified window is maximized, whether by the user or #MaximizeWindow().
 			""",
 			0x00020008)
-	).javaDocLinks.replace("GLFW#AUTO_ICONIFY ", "")
+	).javaDocLinks
 
 	IntConstant(
 		"Input options.",
@@ -501,19 +501,130 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"DOUBLEBUFFER"..0x00021010
 	).javaDocLinks
 
-	val ClientAPIHints = IntConstant(
+	val ClientAPIHints = EnumConstant(
 		"Client API hints.",
 
-		"CLIENT_API"..0x00022001,
-		"CONTEXT_VERSION_MAJOR"..0x00022002,
-		"CONTEXT_VERSION_MINOR"..0x00022003,
-		"CONTEXT_REVISION"..0x00022004,
-		"CONTEXT_ROBUSTNESS"..0x00022005,
-		"OPENGL_FORWARD_COMPAT"..0x00022006,
-		"OPENGL_DEBUG_CONTEXT"..0x00022007,
-		"OPENGL_PROFILE"..0x00022008,
-		"CONTEXT_RELEASE_BEHAVIOR"..0x00022009,
-		"CONTEXT_NO_ERROR"..0x0002200A
+		"CLIENT_API".enum(
+			"""
+			#WindowHint(): Specifies which client API to create the context for. Possible values are #OPENGL_API, #OPENGL_ES_API and #NO_API. This is a hard
+			constraint.
+
+			#GetWindowAttrib(): Indicates the client API provided by the window's context; either #OPENGL_API, #OPENGL_ES_API or #NO_API.
+			""",
+			0x00022001
+		),
+		"CONTEXT_VERSION_MAJOR".enum(
+			"""
+			#WindowHint(): Specifies the client API major version that the created context must be compatible with. The exact behavior of this hint depends on
+			the requested client API.
+
+			Notes:
+			${ul(
+				"""
+				While there is no way to ask the driver for a context of the highest supported version, GLFW will attempt to provide this when you ask for a
+				version 1.0 context, which is the default for these hints.
+				""",
+				"""
+				<b>OpenGL</b>: #CONTEXT_VERSION_MAJOR and #CONTEXT_VERSION_MINOR are not hard constraints, but creation will fail if the OpenGL version of the
+				created context is less than the one requested. It is therefore perfectly safe to use the default of version 1.0 for legacy code and you may
+				still get backwards-compatible contexts of version 3.0 and above when available.
+				""",
+				"""
+				<b>OpenGL ES</b>: #CONTEXT_VERSION_MAJOR and #CONTEXT_VERSION_MINOR are not hard constraints, but creation will fail if the OpenGL ES version
+				of the created context is less than the one requested. Additionally, OpenGL ES 1.x cannot be returned if 2.0 or later was requested, and vice
+				versa. This is because OpenGL ES 3.x is backward compatible with 2.0, but OpenGL ES 2.0 is not backward compatible with 1.x.
+				"""
+			)}
+
+			#GetWindowAttrib(): Indicate the client API major version of the window's context.
+			""",
+			0x00022002
+		),
+		"CONTEXT_VERSION_MINOR".enum(
+			"""
+			#WindowHint(): Specifies the client API minor version that the created context must be compatible with. The exact behavior of this hint depends on
+			the requested client API.
+
+			#GetWindowAttrib(): Indicate the client API minor version of the window's context.
+			""",
+			0x00022003
+		),
+		"CONTEXT_REVISION".enum("#GetWindowAttrib(): Indicates the client API version of the window's context.", 0x00022004),
+		"CONTEXT_ROBUSTNESS".enum(
+			"""
+			#WindowHint(): Specifies the robustness strategy to be used by the context. This can be one of #NO_RESET_NOTIFICATION or #LOSE_CONTEXT_ON_RESET, or
+			#NO_ROBUSTNESS to not request a robustness strategy.
+
+			#GetWindowAttrib(): Indicates the robustness strategy used by the context. This is #LOSE_CONTEXT_ON_RESET or #NO_RESET_NOTIFICATION if the window's
+			context supports robustness, or #NO_ROBUSTNESS otherwise.
+			""",
+			0x00022005
+		),
+		"OPENGL_FORWARD_COMPAT".enum(
+			"""
+			#WindowHint(): Specifies whether the OpenGL context should be forward-compatible, i.e. one where all functionality deprecated in the requested
+			version of OpenGL is removed. This must only be used if the requested OpenGL version is 3.0 or above. If OpenGL ES is requested, this hint is
+			ignored.
+
+			#GetWindowAttrib(): Indicates if the window's context is an OpenGL forward-compatible one.
+			""",
+			0x00022006
+		),
+		"OPENGL_DEBUG_CONTEXT".enum(
+			"""
+			#WindowHint(): Specifies whether to create a debug OpenGL context, which may have additional error and performance issue reporting functionality.
+			If OpenGL ES is requested, this hint is ignored.
+
+			#GetWindowAttrib(): Indicates if the window's context is an OpenGL debug context.
+			""",
+			0x00022007
+		),
+		"OPENGL_PROFILE".enum(
+			"""
+			#WindowHint(): Specifies which OpenGL profile to create the context for. Possible values are one of #OPENGL_CORE_PROFILE or #OPENGL_COMPAT_PROFILE,
+			or #OPENGL_ANY_PROFILE to not request a specific profile. If requesting an OpenGL version below 3.2, #OPENGL_ANY_PROFILE must be used. If OpenGL ES
+			is requested, this hint is ignored.
+
+			#GetWindowAttrib(): Indicates the OpenGL profile used by the context. This is #OPENGL_CORE_PROFILE or #OPENGL_COMPAT_PROFILE if the context uses a
+			known profile, or #OPENGL_ANY_PROFILE if the OpenGL profile is unknown or the context is an OpenGL ES context. Note that the returned profile may
+			not match the profile bits of the context flags, as GLFW will try other means of detecting the profile when no bits are set.
+			""",
+			0x00022008
+		),
+		"CONTEXT_RELEASE_BEHAVIOR".enum(
+			"""
+			#WindowHint(): Specifies the release behavior to be used by the context. If the behavior is #ANY_RELEASE_BEHAVIOR, the default behavior of the
+			context creation API will be used. If the behavior is #RELEASE_BEHAVIOR_FLUSH, the pipeline will be flushed whenever the context is released from
+			being the current one. If the behavior is #RELEASE_BEHAVIOR_NONE, the pipeline will not be flushed on release.
+			""",
+			0x00022009
+		),
+		"CONTEXT_NO_ERROR".enum(
+			"""
+			#WindowHint(): Specifies whether errors should be generated by the context. If enabled, situations that would have generated errors instead cause
+			undefined behavior.
+			""",
+			0x0002200A
+		),
+		"CONTEXT_CREATION_API".enum(
+			"""
+			#WindowHint(): Specifies which context creation API to use to create the context. Possible values are #NATIVE_CONTEXT_API and #EGL_CONTEXT_API.
+			This is a hard constraint. If no client API is requested, this hint is ignored.
+
+			Notes:
+			${ul(
+				"<b>Mac OS X</b>: The EGL API is not available on this platform and requests to use it will fail.",
+				"<b>Wayland, Mir</b>: The EGL API <i>is</i> the native context creation API, so this hint will have no effect.",
+				"""
+				An OpenGL extension loader library that assumes it knows which context creation API is used on a given platform may fail if you change this
+				hint. This can be resolved by having it load via #GetProcAddress(), which always uses the selected API.
+				"""
+			)}
+
+			#GetWindowAttrib(): Indicates the context creation API used to create the window's context; either #NATIVE_CONTEXT_API or #EGL_CONTEXT_API.
+			""",
+			0x0002200B
+		)
 	).javaDocLinks
 
 	val ClientAPIValues = IntConstant(
@@ -546,6 +657,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"ANY_RELEASE_BEHAVIOR"..0,
 		"RELEASE_BEHAVIOR_FLUSH"..0x00035001,
 		"RELEASE_BEHAVIOR_NONE"..0x00035002
+	).javaDocLinks
+
+	val ContextCreationAPIValues = IntConstant(
+		"Values for the #CONTEXT_CREATION_API hint.",
+
+		"NATIVE_CONTEXT_API"..0x00036001,
+		"EGL_CONTEXT_API"..0x00036002
 	).javaDocLinks
 
 	GLFWboolean(
@@ -910,6 +1028,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 			tr(td("#CONTEXT_ROBUSTNESS"), td("#NO_ROBUSTNESS"), td(ContextRobustnessValues)),
 			tr(td("#CONTEXT_RELEASE_BEHAVIOR"), td("#ANY_RELEASE_BEHAVIOR"), td(ContextReleaseBehaviorValues)),
+			tr(td("#CONTEXT_NO_ERROR"), td("#FALSE"), td("#TRUE or #FALSE")),
+			tr(td("#CONTEXT_CREATION_API"), td("#NATIVE_CONTEXT_API"), td(ContextCreationAPIValues)),
 
 			tr(td("#OPENGL_FORWARD_COMPAT"), td("#FALSE"), td("#TRUE or #FALSE")),
 			tr(td("#OPENGL_DEBUG_CONTEXT"), td("#FALSE"), td("#TRUE or #FALSE")),
@@ -919,7 +1039,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function must only be called from the main thread.
 		""",
 
-		int.IN("hint", "the window hint to set", "#RESIZABLE #VISIBLE #DECORATED $ClientAPIHints $PixelFormatHints"),
+		int.IN(
+			"hint",
+			"the window hint to set",
+			"${WindowHints.replace("GLFW#ICONIFIED ", "")} ${ClientAPIHints.replace("GLFW#CONTEXT_REVISION ", "")} $PixelFormatHints"
+		),
 		int.IN("value", "the new value of the window hint"),
 		since = "version 2.2"
 	)
@@ -1161,6 +1285,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		windowed. If the window is not resizable, this function does nothing.
 
 		The size limits are applied immediately to a windowed mode window and may cause it to be resized.
+
+		The maximum dimensions must be greater than or equal to the minimum dimensions and all must be greater than or equal to zero.
 
 		This function must only be called from the main thread.
 		""",
@@ -1415,7 +1541,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN(
 			"attrib",
 			"the <a href=\"http://www.glfw.org/docs/latest/window.html\\#window_attribs\">window attribute</a> whose value to return",
-			WindowAttributes
+			"${WindowHints.replace("GLFW#AUTO_ICONIFY ", "")} ${ClientAPIHints.replace("GLFW#(CONTEXT_RELEASE_BEHAVIOR|CONTEXT_NO_ERROR) ", "")}"
 		),
 
 		returnDoc = "the value of the attribute, or zero if an error occured",
