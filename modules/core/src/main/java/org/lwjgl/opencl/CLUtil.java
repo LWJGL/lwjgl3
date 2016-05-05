@@ -49,39 +49,39 @@ public final class CLUtil {
 	private CLUtil() {}
 
 	/**
-	 * Checks the {@code errcode} present in the current position of the specified {@code errcode_ret} buffer and throws an {@link OpenCLException} if it's not
-	 * equal to {@link CL10#CL_SUCCESS}.
+	 * Checks the {@code errcode} present in the current position of the specified {@code errcode_ret} buffer and throws an {@link RuntimeException} if it's
+	 * not equal to {@link CL10#CL_SUCCESS}.
 	 *
 	 * @param errcode_ret the {@code errcode} buffer
 	 *
-	 * @throws OpenCLException
+	 * @throws RuntimeException
 	 */
 	public static void checkCLError(ByteBuffer errcode_ret) {
 		checkCLError(errcode_ret.getInt(errcode_ret.position()));
 	}
 
 	/**
-	 * Checks the {@code errcode} present in the current position of the specified {@code errcode_ret} buffer and throws an {@link OpenCLException} if it's not
-	 * equal to {@link CL10#CL_SUCCESS}.
+	 * Checks the {@code errcode} present in the current position of the specified {@code errcode_ret} buffer and throws an {@link RuntimeException} if it's
+	 * not equal to {@link CL10#CL_SUCCESS}.
 	 *
 	 * @param errcode_ret the {@code errcode} buffer
 	 *
-	 * @throws OpenCLException
+	 * @throws RuntimeException
 	 */
 	public static void checkCLError(IntBuffer errcode_ret) {
 		checkCLError(errcode_ret.get(errcode_ret.position()));
 	}
 
 	/**
-	 * Checks the specified {@code errcode} and throws an {@link OpenCLException} if it's not equal to {@link CL10#CL_SUCCESS}.
+	 * Checks the specified {@code errcode} and throws an {@link RuntimeException} if it's not equal to {@link CL10#CL_SUCCESS}.
 	 *
 	 * @param errcode the {@code errcode} to check
 	 *
-	 * @throws OpenCLException
+	 * @throws RuntimeException
 	 */
 	public static void checkCLError(int errcode) {
 		if ( errcode != CL_SUCCESS )
-			throw new OpenCLException(getErrcodeName(errcode));
+			throw new RuntimeException(getErrcodeName(errcode));
 	}
 
 	/**

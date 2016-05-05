@@ -83,7 +83,7 @@ public final class EGL {
 
 				{
 					if ( eglGetProcAddress == NULL ) {
-						throw new EGLException("A core EGL function is missing. Make sure that EGL is available.");
+						throw new IllegalStateException("A core EGL function is missing. Make sure that EGL is available.");
 					}
 				}
 

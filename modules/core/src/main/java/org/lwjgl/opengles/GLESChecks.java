@@ -18,12 +18,12 @@ final class GLESChecks {
 
 	static void ensureBufferObject(int binding, boolean enabled) {
 		if ( Checks.DEBUG && (glGetInteger(binding) != 0) ^ enabled )
-			throw new OpenGLESException(
+			throw new IllegalStateException(String.format(
 				"Cannot use %s when %s buffer object is %s",
 				enabled ? "offsets" : "buffers",
 				getBufferObjectBindingString(binding),
 				enabled ? "disabled" : "enabled"
-			);
+			));
 	}
 
 	private static String getBufferObjectBindingString(int binding) {

@@ -23,12 +23,12 @@ final class GLChecks {
 
 	static void ensureBufferObject(int binding, boolean enabled) {
 		if ( Checks.DEBUG && (glGetInteger(binding) != 0) ^ enabled )
-			throw new OpenGLException(
+			throw new IllegalStateException(String.format(
 				"Cannot use %s when %s buffer object is %s",
 				enabled ? "offsets" : "buffers",
 				translateBufferObjectBinding(binding),
 				enabled ? "disabled" : "enabled"
-			);
+			));
 	}
 
 	private static String translateBufferObjectBinding(int binding) {

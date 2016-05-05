@@ -27,12 +27,12 @@ public final class GLUtil {
 	/**
 	 * Checks the current context for OpenGL errors.
 	 *
-	 * @throws OpenGLException if {@link GL11#glGetError GetError} returns anything other than {@link GL11#GL_NO_ERROR NO_ERROR}
+	 * @throws RuntimeException if {@link GL11#glGetError GetError} returns anything other than {@link GL11#GL_NO_ERROR NO_ERROR}
 	 */
-	public static void checkGLError() throws OpenGLException {
+	public static void checkGLError() {
 		int err = glGetError();
 		if ( err != GL_NO_ERROR )
-			throw new OpenGLException(err);
+			throw new RuntimeException(String.format("%s [0x%X]", getErrorString(err), err));
 	}
 
 	/**

@@ -85,7 +85,7 @@ public final class CL {
 			clGetExtensionFunctionAddress = library.getFunctionAddress("clGetExtensionFunctionAddress");
 			clGetExtensionFunctionAddressForPlatform = library.getFunctionAddress("clGetExtensionFunctionAddressForPlatform");
 			if ( clGetExtensionFunctionAddress == NULL && clGetExtensionFunctionAddressForPlatform == NULL )
-				throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
+				throw new IllegalStateException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 
 					/*
 					We'll use clGetExtensionFunctionAddress, even if it has been deprecated, because clGetExtensionFunctionAddressForPlatform is pointless
@@ -96,7 +96,7 @@ public final class CL {
 			if ( clGetExtensionFunctionAddressForPlatform != NULL ) {
 				long clGetPlatformIDs = library.getFunctionAddress("clGetPlatformIDs");
 				if ( clGetPlatformIDs == NULL )
-					throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
+					throw new IllegalStateException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 
 				try ( MemoryStack stack = stackPush() ) {
 					IntBuffer pi = stack.ints(0);
@@ -232,7 +232,7 @@ public final class CL {
 
 				int errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, memAddress(pi));
 				if ( Checks.DEBUG && errcode != CL_SUCCESS )
-					throw new OpenCLException("Failed to query number of OpenCL platform devices.");
+					throw new IllegalStateException("Failed to query number of OpenCL platform devices.");
 
 				num_devices = pi.get(0);
 				if ( num_devices == 0 )
@@ -242,7 +242,7 @@ public final class CL {
 
 				errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, num_devices, memAddress(pp), NULL);
 				if ( Checks.DEBUG && errcode != CL_SUCCESS )
-					throw new OpenCLException("Failed to query OpenCL platform devices.");
+					throw new IllegalStateException("Failed to query OpenCL platform devices.");
 
 				devices = new long[num_devices];
 				for ( int i = 0; i < num_devices; i++ )

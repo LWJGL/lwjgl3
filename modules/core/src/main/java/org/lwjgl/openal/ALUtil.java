@@ -23,23 +23,23 @@ public final class ALUtil {
 	 *
 	 * @param device an OpenAL device handle, or {@code NULL}
 	 *
-	 * @throws OpenALException if {@link ALC10#alcGetError GetError} returns anything other than {@link ALC10#ALC_NO_ERROR NO_ERROR}
+	 * @throws RuntimeException if {@link ALC10#alcGetError GetError} returns anything other than {@link ALC10#ALC_NO_ERROR NO_ERROR}
 	 */
 	public static void checkALCError(long device) {
 		int err = alcGetError(device);
 		if ( err != ALC_NO_ERROR )
-			throw new OpenALException(alcGetString(device, err));
+			throw new RuntimeException(alcGetString(device, err));
 	}
 
 	/**
 	 * Checks for Open AL errors.
 	 *
-	 * @throws OpenALException if {@link AL10#alGetError GetError} returns anything other than {@link AL10#AL_NO_ERROR NO_ERROR}
+	 * @throws RuntimeException if {@link AL10#alGetError GetError} returns anything other than {@link AL10#AL_NO_ERROR NO_ERROR}
 	 */
 	public static void checkALError() {
 		int err = alGetError();
 		if ( err != AL_NO_ERROR )
-			throw new OpenALException(alGetString(err));
+			throw new RuntimeException(alGetString(err));
 	}
 
 	/**

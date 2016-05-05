@@ -6,7 +6,7 @@ package org.lwjgl.demo.egl;
 
 import org.lwjgl.egl.EGL;
 import org.lwjgl.egl.EGLCapabilities;
-import org.lwjgl.egl.EGLException;
+import org.lwjgl.egl.EGLUtil;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengles.GLES;
 import org.lwjgl.opengles.GLESCapabilities;
@@ -63,8 +63,10 @@ public class EGLDemo {
 			IntBuffer major = stack.mallocInt(1);
 			IntBuffer minor = stack.mallocInt(1);
 
-			if ( !eglInitialize(dpy, major, minor) )
-				throw new EGLException(eglGetError());
+			if ( !eglInitialize(dpy, major, minor) ) {
+				int err = eglGetError();
+				throw new IllegalStateException(String.format("%s [0x%X]", EGLUtil.getErrorString(err), err));
+			}
 
 			egl = EGL.createDisplayCapabilities(dpy, major.get(0), minor.get(0));
 		}

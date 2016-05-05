@@ -563,7 +563,7 @@ public final class GL {
 			majorVersion = piMajor.get(0);
 			minorVersion = piMinor.get(1);
 			if ( majorVersion != 1 )
-				throw new OpenGLException("Invalid GLX major version: " + majorVersion);
+				throw new IllegalStateException("Invalid GLX major version: " + majorVersion);
 		}
 
 		Set<String> supportedExtensions = new HashSet<>(32);

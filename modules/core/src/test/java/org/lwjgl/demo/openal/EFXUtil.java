@@ -5,7 +5,6 @@
 package org.lwjgl.demo.openal;
 
 import org.lwjgl.openal.AL10;
-import org.lwjgl.openal.OpenALException;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.EXTEfx.*;
@@ -36,9 +35,9 @@ public final class EFXUtil {
 	 *
 	 * @return True if it is supported, false if not.
 	 *
-	 * @throws org.lwjgl.openal.OpenALException If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has
-	 *                                          not been created yet.
-	 * @throws IllegalArgumentException         effectType is not a valid effect type.
+	 * @throws RuntimeException         If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has
+	 *                                  not been created yet.
+	 * @throws IllegalArgumentException effectType is not a valid effect type.
 	 */
 	public static boolean isEffectSupported(int effectType) {
 		// Make sure type is a real effect.
@@ -73,9 +72,9 @@ public final class EFXUtil {
 	 *
 	 * @return True if it is supported, false if not.
 	 *
-	 * @throws org.lwjgl.openal.OpenALException If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has
-	 *                                          not been created yet.
-	 * @throws IllegalArgumentException         filterType is not a valid filter type.
+	 * @throws RuntimeException         If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has
+	 *                                  not been created yet.
+	 * @throws IllegalArgumentException filterType is not a valid filter type.
 	 */
 	public static boolean isFilterSupported(int filterType) {
 		// Make sure type is a real filter.
@@ -130,7 +129,7 @@ public final class EFXUtil {
 					throw new IllegalArgumentException("Invalid objectType: " + objectType);
 			}
 			genError = alGetError();
-		} catch (OpenALException debugBuildException) {
+		} catch (RuntimeException debugBuildException) {
 			// Hack because OpenALException hides the original error code (short of parsing the
 			// error message String which would break if it gets changed).
 			if ( debugBuildException.getMessage().contains("AL_OUT_OF_MEMORY") ) {
@@ -156,7 +155,7 @@ public final class EFXUtil {
 						throw new IllegalArgumentException("Invalid objectType: " + objectType);
 				}
 				setError = alGetError();
-			} catch (OpenALException debugBuildException) {
+			} catch (RuntimeException debugBuildException) {
 				// Hack because OpenALException hides the original error code (short of parsing
 				// the error message String which would break when it gets changed).
 				setError = AL_INVALID_VALUE;
@@ -178,12 +177,12 @@ public final class EFXUtil {
 					default:
 						throw new IllegalArgumentException("Invalid objectType: " + objectType);
 				}
-			} catch (OpenALException debugBuildException) {
+			} catch (RuntimeException debugBuildException) {
 				// Don't care about cleanup errors.
 			}
 
 		} else if ( genError == AL_OUT_OF_MEMORY ) {
-			throw new OpenALException(AL10.alGetString(genError));
+			throw new RuntimeException(AL10.alGetString(genError));
 		}
 
 		return supported;
