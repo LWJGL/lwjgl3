@@ -47,8 +47,8 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		ByteConstant(
 			"Boolean values.",
 
-			"YES" expr "1",
-			"NO" expr "0"
+			"YES".."1",
+			"NO".."0"
 		)
 
 		CharConstant(
@@ -1445,11 +1445,11 @@ void myMethodIMP(id self, SEL _cmd)
 		val AssociationPolicies = IntConstant(
 			"Policies related to associative references.",
 
-			"OBJC_ASSOCIATION_ASSIGN"..0,
-			"OBJC_ASSOCIATION_RETAIN_NONATOMIC"..1,
-			"OBJC_ASSOCIATION_COPY_NONATOMIC"..3,
-			"OBJC_ASSOCIATION_RETAIN"..1401,
-			"OBJC_ASSOCIATION_COPY"..1403
+			"OBJC_ASSOCIATION_ASSIGN".."0",
+			"OBJC_ASSOCIATION_RETAIN_NONATOMIC".."1",
+			"OBJC_ASSOCIATION_COPY_NONATOMIC".."3",
+			"OBJC_ASSOCIATION_RETAIN".."1401",
+			"OBJC_ASSOCIATION_COPY".."1403"
 		).javaDocLinks
 
 		void(

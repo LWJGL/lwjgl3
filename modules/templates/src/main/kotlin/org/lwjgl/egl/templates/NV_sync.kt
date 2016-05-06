@@ -43,7 +43,7 @@ val NV_sync = "NVSync".nativeClassEGL("NV_sync", postfix = NV) {
 	LongConstant(
 		"",
 
-		"FOREVER_NV" expr "0xFFFFFFFFFFFFFFFFL",
+		"FOREVER_NV".."0xFFFFFFFFFFFFFFFFL",
 		"NO_SYNC_NV"..0L
 	)
 

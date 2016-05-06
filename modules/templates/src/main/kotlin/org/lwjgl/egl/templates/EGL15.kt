@@ -59,7 +59,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
 	LongConstant(
 		"",
 
-		"FOREVER" expr "0xFFFFFFFFFFFFFFFFL",
+		"FOREVER".."0xFFFFFFFFFFFFFFFFL",
 		"NO_SYNC"..0L,
 		"NO_IMAGE"..0L
 	)

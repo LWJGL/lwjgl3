@@ -19,7 +19,7 @@ val khr_icd = "KHRICD".nativeClassCL("khr_icd", KHR) {
 	IntConstant(
 		"Returned by CL10#GetPlatformIDs() when no platforms are found.",
 
-		"PLATFORM_NOT_FOUND_KHR"..-1001
+		"PLATFORM_NOT_FOUND_KHR".."-1001"
 	)
 
 	// clIcdGetPlatformIDsKHR is not exposed through the ICD.

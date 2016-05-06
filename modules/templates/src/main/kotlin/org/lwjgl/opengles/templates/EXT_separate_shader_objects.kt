@@ -53,7 +53,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
 
 		"VERTEX_SHADER_BIT_EXT"..0x00000001,
 		"FRAGMENT_SHADER_BIT_EXT"..0x00000002,
-		"ALL_SHADER_BITS_EXT" expr "0xFFFFFFFF"
+		"ALL_SHADER_BITS_EXT".."0xFFFFFFFF"
 	)
 
 	IntConstant(

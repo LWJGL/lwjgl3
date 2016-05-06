@@ -51,7 +51,7 @@ val GLX_NV_multisample_coverage = "GLXNVMultisampleCoverage".nativeClassGLX("GLX
 		{@code attrib_list} parameter of glXChooseFBConfig, and the {@code attribute} parameter of glXGetFBConfigAttrib.
 		""",
 
-		"COVERAGE_SAMPLES_NV"..100001,
+		"COVERAGE_SAMPLES_NV".."100001",
 		"COLOR_SAMPLES_NV"..0x20B3
 	)
 }

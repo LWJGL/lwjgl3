@@ -177,8 +177,8 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	IntConstant(
 		"BlendingFactorDest",
-		"ZERO"..0,
-		"ONE"..1,
+		"ZERO".."0",
+		"ONE".."1",
 		"SRC_COLOR"..0x0300,
 		"ONE_MINUS_SRC_COLOR"..0x0301,
 		"SRC_ALPHA"..0x0302,
@@ -198,8 +198,8 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	IntConstant(
 		"Boolean",
-		"TRUE"..1,
-		"FALSE"..0
+		"TRUE".."1",
+		"FALSE".."0"
 	)
 
 	IntConstant(
@@ -229,7 +229,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	IntConstant(
 		"DrawBufferMode",
-		"NONE"..0,
+		"NONE".."0",
 		"FRONT_LEFT"..0x0400,
 		"FRONT_RIGHT"..0x0401,
 		"BACK_LEFT"..0x0402,
@@ -247,7 +247,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	IntConstant(
 		"ErrorCode",
-		"NO_ERROR"..0,
+		"NO_ERROR".."0",
 		"INVALID_ENUM"..0x0500,
 		"INVALID_VALUE"..0x0501,
 		"INVALID_OPERATION"..0x0502,

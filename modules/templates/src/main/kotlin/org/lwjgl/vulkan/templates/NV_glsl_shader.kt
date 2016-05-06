@@ -37,7 +37,7 @@ vkCreateShaderModule(device, &vertexShaderInfo, 0, &vertexShader);""")}
 	IntConstant(
 		"The extension specification version.",
 
-		"NV_GLSL_SHADER_SPEC_VERSION" expr "1"
+		"NV_GLSL_SHADER_SPEC_VERSION".."1"
 	)
 
 	StringConstant(
@@ -49,6 +49,6 @@ vkCreateShaderModule(device, &vertexShaderInfo, 0, &vertexShader);""")}
 	IntConstant(
 		"VkResult",
 
-		"ERROR_INVALID_SHADER_NV" expr "-1000012000"
+		"ERROR_INVALID_SHADER_NV".."-1000012000"
 	)
 }

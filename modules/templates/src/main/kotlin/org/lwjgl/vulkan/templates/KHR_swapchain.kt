@@ -17,7 +17,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 	IntConstant(
 		"The extension specification version.",
 
-		"KHR_SWAPCHAIN_SPEC_VERSION" expr "68"
+		"KHR_SWAPCHAIN_SPEC_VERSION".."68"
 	)
 
 	StringConstant(
@@ -29,8 +29,8 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 	IntConstant(
 		"VkStructureType",
 
-		"STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR" expr "1000001000",
-		"STRUCTURE_TYPE_PRESENT_INFO_KHR" expr "1000001001"
+		"STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR".."1000001000",
+		"STRUCTURE_TYPE_PRESENT_INFO_KHR".."1000001001"
 	)
 
 	EnumConstant(

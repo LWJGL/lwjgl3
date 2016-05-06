@@ -23,7 +23,7 @@ val amd_device_persistent_memory = "AMDDevicePersistentMemory".nativeClassCL("am
 		flags CL10#MEM_ALLOC_HOST_PTR and CL10#MEM_USE_HOST_PTR.
 		""",
 
-		"MEM_USE_PERSISTENT_MEM_AMD" expr "1 << 6"
+		"MEM_USE_PERSISTENT_MEM_AMD".."1 << 6"
 	)
 
 }

@@ -13,23 +13,23 @@ val OVR_Version = "OVRVersion".nativeClass(packageName = OVR_PACKAGE, prefix = "
 	IntConstant(
 		"Master version numbers.",
 
-		"PRODUCT_VERSION".expr("1"),
-		"MAJOR_VERSION".expr("1"),
-		"MINOR_VERSION".expr("3"),
-		"PATCH_VERSION".expr("2"),
-		"BUILD_NUMBER".expr("0")
+		"PRODUCT_VERSION".."1",
+		"MAJOR_VERSION".."1",
+		"MINOR_VERSION".."3",
+		"PATCH_VERSION".."2",
+		"BUILD_NUMBER".."0"
 	)
 
 	IntConstant(
 		"The {@code ((product * 100) + major)} version of the service that the DLL is compatible with.",
 
-		"DLL_COMPATIBLE_VERSION".expr("101")
+		"DLL_COMPATIBLE_VERSION".."101"
 	)
 
 	IntConstant(
 		"",
 
-		"OVR_FEATURE_VERSION".expr("0")
+		"OVR_FEATURE_VERSION".."0"
 	)
 
 	StringConstant(

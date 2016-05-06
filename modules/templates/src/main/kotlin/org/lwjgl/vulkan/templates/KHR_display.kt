@@ -14,7 +14,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 	IntConstant(
 		"The extension specification version.",
 
-		"KHR_DISPLAY_SPEC_VERSION" expr "21"
+		"KHR_DISPLAY_SPEC_VERSION".."21"
 	)
 
 	StringConstant(
@@ -26,8 +26,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
 	IntConstant(
 		"VkStructureType",
 
-		"STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR" expr "1000002000",
-        "STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR" expr "1000002001"
+		"STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR".."1000002000",
+        "STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR".."1000002001"
 	)
 
 	EnumConstant(

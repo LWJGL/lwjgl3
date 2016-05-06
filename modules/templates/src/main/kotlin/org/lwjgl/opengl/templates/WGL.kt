@@ -17,8 +17,8 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, prefix = "WGL", binding = GLBinding.
 
 	IntConstant(
 		"UseFontOutlines format.",
-		"FONT_LINES"..0,
-		"FONT_POLYGONS"..1
+		"FONT_LINES".."0",
+		"FONT_POLYGONS".."1"
 	)
 
 	IntConstant(

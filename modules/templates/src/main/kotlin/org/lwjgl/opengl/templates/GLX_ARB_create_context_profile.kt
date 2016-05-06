@@ -34,7 +34,7 @@ val GLX_ARB_create_context_profile = "GLXARBCreateContextProfile".nativeClassGLX
 	IntConstant(
 		"GLX error.",
 
-		"GLXBadProfileARB"..13
+		"GLXBadProfileARB".."13"
 	).noPrefix()
 
 }

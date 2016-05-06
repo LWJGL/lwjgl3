@@ -15,9 +15,9 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 	IntConstant(
 		"Error Codes.",
 
-		"MISALIGNED_SUB_BUFFER_OFFSET" expr "-13",
-		"EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST" expr "-14",
-		"INVALID_PROPERTY" expr "-64"
+		"MISALIGNED_SUB_BUFFER_OFFSET".."-13",
+		"EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST".."-14",
+		"INVALID_PROPERTY".."-64"
 	)
 
 	IntConstant(
@@ -44,7 +44,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 	IntConstant(
 		"cl_device_fp_config - bitfield.",
 
-		"FP_SOFT_FLOAT" expr "1 << 6"
+		"FP_SOFT_FLOAT".."1 << 6"
 	)
 
 	IntConstant(

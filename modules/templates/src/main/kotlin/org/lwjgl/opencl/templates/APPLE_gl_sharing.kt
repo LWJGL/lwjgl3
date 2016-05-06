@@ -14,7 +14,7 @@ val apple_gl_sharing = dependsOn(Binding.OPENGL) {
 		IntConstant(
 			"Error code returned by #GetGLContextInfoAPPLE() if an invalid {@code platform_gl_ctx} is provided.",
 
-			"INVALID_GL_CONTEXT_APPLE"..-1000
+			"INVALID_GL_CONTEXT_APPLE".."-1000"
 		)
 
 		IntConstant(

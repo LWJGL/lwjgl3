@@ -25,8 +25,8 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	ByteConstant(
 		"Boolean values.",
 
-		"TRUE" expr "1",
-		"FALSE" expr "0"
+		"TRUE".."1",
+		"FALSE".."0"
 	)
 
 	macro..CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for $NULL, if you'd rather use a named constant.")
@@ -107,7 +107,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	val Encodings = IntConstant(
 		"Platform-independent built-in encodings; always available on all platforms.",
 
-		"kCFStringEncodingMacRoman"..0,
+		"kCFStringEncodingMacRoman".."0",
 		"kCFStringEncodingWindowsLatin1"..0x0500,
 		"kCFStringEncodingISOLatin1"..0x0201,
 		"kCFStringEncodingNextStepLatin"..0x0B01,
@@ -155,9 +155,9 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	val PathStyles = IntConstant(
 		"URL path styles.",
 
-		"kCFURLPOSIXPathStyle"..0,
-		"kCFURLHFSPathStyle"..1,
-		"kCFURLWindowsPathStyle"..2
+		"kCFURLPOSIXPathStyle".."0",
+		"kCFURLHFSPathStyle".."1",
+		"kCFURLWindowsPathStyle".."2"
 	).javaDocLinks
 
 	CFURLRef(

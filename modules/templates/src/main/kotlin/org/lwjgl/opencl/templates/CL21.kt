@@ -13,7 +13,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 	IntConstant(
 		"OpenCL Version.",
 
-		"VERSION_2_1"..1
+		"VERSION_2_1".."1"
 	)
 
 	IntConstant(

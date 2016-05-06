@@ -40,7 +40,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		to zero.
 		""",
 
-		"RTLD_LOCAL"..0
+		"RTLD_LOCAL".."0"
 	)
 
 	IntConstant(

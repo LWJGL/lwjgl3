@@ -79,18 +79,18 @@ stbir_resize_uint8_srgb_edgemode(
 
 	IntConstant(
 		"Set this flag if you have no alpha channel, or otherwise provide the index of the alpha channel.",
-		"ALPHA_CHANNEL_NONE"..-1
+		"ALPHA_CHANNEL_NONE".."-1"
 	)
 	IntConstant(
 		"""
 		Set this flag if your texture has premultiplied alpha. Otherwise, stbir will use alpha-weighted resampling (effectively premultiplying, resampling,
 		then unpremultiplying).
 		""",
-		"FLAG_ALPHA_PREMULTIPLIED"..-1
+		"FLAG_ALPHA_PREMULTIPLIED".."-1"
 	)
 	IntConstant(
 		"The specified alpha channel should be handled as gamma-corrected value even when doing sRGB operations.",
-		"FLAG_ALPHA_USES_COLORSPACE"..-1
+		"FLAG_ALPHA_USES_COLORSPACE".."-1"
 	)
 
 	val EdgeWrapModes = EnumConstant(

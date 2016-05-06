@@ -14,7 +14,7 @@ val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", postfi
 	IntConstant(
 		"The extension specification version.",
 
-		"IMG_FILTER_CUBIC_SPEC_VERSION" expr "1"
+		"IMG_FILTER_CUBIC_SPEC_VERSION".."1"
 	)
 
 	StringConstant(
@@ -26,7 +26,7 @@ val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", postfi
 	IntConstant(
 		"VkFilter",
 
-		"FILTER_CUBIC_IMG"..1000015000
+		"FILTER_CUBIC_IMG".."1000015000"
 	)
 
 	IntConstant(

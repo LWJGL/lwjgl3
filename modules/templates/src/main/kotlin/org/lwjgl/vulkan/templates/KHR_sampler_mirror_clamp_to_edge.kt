@@ -20,7 +20,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
 	IntConstant(
 		"The extension specification version.",
 
-		"KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION" expr "1"
+		"KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION".."1"
 	)
 
 	StringConstant(
@@ -32,6 +32,6 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
 	IntConstant(
 		"Indicates that the mirror clamp to edge wrap mode will be used.",
 
-		"SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE" expr "4"
+		"SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE".."4"
 	)
 }

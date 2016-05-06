@@ -63,8 +63,8 @@ ENABLE_WARNINGS()""")
 	IntConstant(
 		"Boolean values",
 
-		"False"..0,
-		"True"..1
+		"False".."0",
+		"True".."1"
 	)
 
 	EnumConstant(
@@ -269,7 +269,7 @@ ENABLE_WARNINGS()""")
 		"Button_VolDown".enum("Button VolDown", 0x00800000), // only supported by Remote.
 		"Button_Home".enum("Button Home", 0x01000000),
 
-		"Button_Private" expr "ovrButton_VolUp | ovrButton_VolDown | ovrButton_Home"
+		"Button_Private".."ovrButton_VolUp | ovrButton_VolDown | ovrButton_Home"
 	)
 
 	EnumConstant(
@@ -645,7 +645,7 @@ ENABLE_WARNINGS()""")
 	IntConstant(
 		"Specifies the maximum number of layers supported by #SubmitFrame().",
 
-		"MaxLayerCount"..16
+		"MaxLayerCount".."16"
 	)
 
 	EnumConstant(
@@ -925,10 +925,10 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 	IntConstant(
 		"Visual properties of the stereo guide.",
 
-		"DebugHudStereo_Off"..0, ///< Turns off the Stereo Debug HUD
-		"DebugHudStereo_Quad"..1, ///< Renders Quad in world for Stereo Debugging
-		"DebugHudStereo_QuadWithCrosshair"..2, ///< Renders Quad+crosshair in world for Stereo Debugging
-		"DebugHudStereo_CrosshairAtInfinity"..3  ///< Renders screen-space crosshair at infinity for Stereo Debugging
+		"DebugHudStereo_Off".."0", ///< Turns off the Stereo Debug HUD
+		"DebugHudStereo_Quad".."1", ///< Renders Quad in world for Stereo Debugging
+		"DebugHudStereo_QuadWithCrosshair".."2", ///< Renders Quad+crosshair in world for Stereo Debugging
+		"DebugHudStereo_CrosshairAtInfinity".."3"  ///< Renders screen-space crosshair at infinity for Stereo Debugging
 	)
 
 	// ----------------

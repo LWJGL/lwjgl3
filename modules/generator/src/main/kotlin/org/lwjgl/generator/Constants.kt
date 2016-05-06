@@ -42,10 +42,6 @@ val FloatConstant = ConstantType(Float::class) { "%sf".format(it) }
 
 val StringConstant = ConstantType(String::class) { "\"$it\"" }
 
-class CustomConstant(javaType: String) : ConstantType<String>(javaType, {
-	throw UnsupportedOperationException("Custom constant types must use expressions only")
-})
-
 open class EnumValue(
 	val documentation: (() -> String?) = { null },
 	val value: Int? = null
@@ -59,7 +55,12 @@ class EnumValueExpression(
 val EnumConstant = ConstantType(EnumValue::class, { "0x%X".format(it) })
 
 open class Constant<T : Any>(val name: String, val value: T?)
-internal class ConstantExpression<T : Any>(name: String, val expression: String) : Constant<T>(name, null)
+internal class ConstantExpression<T : Any>(
+	name: String,
+	val expression: String,
+	// Used for StringConstants only, false: wrap in quotes, true: print as is
+	val unwrapped: Boolean
+) : Constant<T>(name, null)
 
 class ConstantBlock<T : Any>(
 	val nativeClass: NativeClass,
@@ -110,7 +111,7 @@ class ConstantBlock<T : Any>(
 								}
 								formatType = 0 // next values will be hex
 							}
-							ConstantExpression(c.name, ev.expression)
+							ConstantExpression(c.name, ev.expression, false)
 						}
 						ev.value != null          -> {
 							value = ev.value + 1
@@ -119,7 +120,7 @@ class ConstantBlock<T : Any>(
 						}
 						else                      -> {
 							if ( formatType == 1 )
-								ConstantExpression(c.name, Integer.toString(value++))
+								ConstantExpression(c.name, Integer.toString(value++), false)
 							else
 								Constant(c.name, value++)
 						}
@@ -194,9 +195,13 @@ class ConstantBlock<T : Any>(
 			print(' ')
 
 		print(" = ")
-		if ( constant is ConstantExpression )
-			print(constant.expression)
-		else
+		if ( constant is ConstantExpression ) {
+			print(if ( constantType !== StringConstant || constant.unwrapped )
+				constant.expression
+			else
+				constantType.print(constant.expression)
+			)
+		} else
 			print(constantType.print(constant.value!!))
 	}
 

@@ -18,34 +18,34 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"Error Codes.",
 
-		"COMPILE_PROGRAM_FAILURE" expr "-15",
-		"LINKER_NOT_AVAILABLE" expr "-16",
-		"LINK_PROGRAM_FAILURE" expr "-17",
-		"DEVICE_PARTITION_FAILED" expr "-18",
-		"KERNEL_ARG_INFO_NOT_AVAILABLE" expr "-19",
-		"INVALID_IMAGE_DESCRIPTOR" expr "-65",
-		"INVALID_COMPILER_OPTIONS" expr "-66",
-		"INVALID_LINKER_OPTIONS" expr "-67",
-		"INVALID_DEVICE_PARTITION_COUNT" expr "-68"
+		"COMPILE_PROGRAM_FAILURE".."-15",
+		"LINKER_NOT_AVAILABLE".."-16",
+		"LINK_PROGRAM_FAILURE".."-17",
+		"DEVICE_PARTITION_FAILED".."-18",
+		"KERNEL_ARG_INFO_NOT_AVAILABLE".."-19",
+		"INVALID_IMAGE_DESCRIPTOR".."-65",
+		"INVALID_COMPILER_OPTIONS".."-66",
+		"INVALID_LINKER_OPTIONS".."-67",
+		"INVALID_DEVICE_PARTITION_COUNT".."-68"
 	)
 
 	IntConstant(
 		"OpenCL Version.",
 
-		"VERSION_1_2"..1
+		"VERSION_1_2".."1"
 	)
 
 	IntConstant(
 		"cl_bool",
 
-		"BLOCKING" expr "CL10.CL_TRUE",
-		"NON_BLOCKING" expr "CL10.CL_FALSE"
+		"BLOCKING".."CL10.CL_TRUE",
+		"NON_BLOCKING".."CL10.CL_FALSE"
 	)
 
 	IntConstant(
 		"cl_device_type - bitfield",
 
-		"DEVICE_TYPE_CUSTOM" expr "1 << 4"
+		"DEVICE_TYPE_CUSTOM".."1 << 4"
 	)
 
 	IntConstant(
@@ -70,7 +70,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"cl_device_fp_config - bitfield",
 
-		"FP_CORRECTLY_ROUNDED_DIVIDE_SQRT" expr "1 << 7"
+		"FP_CORRECTLY_ROUNDED_DIVIDE_SQRT".."1 << 7"
 	)
 
 	IntConstant(
@@ -133,27 +133,27 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"cl_device_affinity_domain",
 
-		"DEVICE_AFFINITY_DOMAIN_NUMA" expr "1 << 0",
-		"DEVICE_AFFINITY_DOMAIN_L4_CACHE" expr "1 << 1",
-		"DEVICE_AFFINITY_DOMAIN_L3_CACHE" expr "1 << 2",
-		"DEVICE_AFFINITY_DOMAIN_L2_CACHE" expr "1 << 3",
-		"DEVICE_AFFINITY_DOMAIN_L1_CACHE" expr "1 << 4",
-		"DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE" expr "1 << 5"
+		"DEVICE_AFFINITY_DOMAIN_NUMA".."1 << 0",
+		"DEVICE_AFFINITY_DOMAIN_L4_CACHE".."1 << 1",
+		"DEVICE_AFFINITY_DOMAIN_L3_CACHE".."1 << 2",
+		"DEVICE_AFFINITY_DOMAIN_L2_CACHE".."1 << 3",
+		"DEVICE_AFFINITY_DOMAIN_L1_CACHE".."1 << 4",
+		"DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE".."1 << 5"
 	)
 
 	IntConstant(
 		"cl_mem_flags - bitfield",
 
-		"MEM_HOST_WRITE_ONLY" expr "1 << 7",
-		"MEM_HOST_READ_ONLY" expr "1 << 8",
-		"MEM_HOST_NO_ACCESS" expr "1 << 9"
+		"MEM_HOST_WRITE_ONLY".."1 << 7",
+		"MEM_HOST_READ_ONLY".."1 << 8",
+		"MEM_HOST_NO_ACCESS".."1 << 9"
 	)
 
 	val MigrationFlags = IntConstant(
 		"cl_mem_migration_flags - bitfield",
 
-		"MIGRATE_MEM_OBJECT_HOST" expr "1 << 0",
-		"MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED" expr "1 << 1"
+		"MIGRATE_MEM_OBJECT_HOST".."1 << 0",
+		"MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED".."1 << 1"
 	).javaDocLinks
 
 	IntConstant(
@@ -177,7 +177,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"cl_map_flags - bitfield",
 
-		"MAP_WRITE_INVALIDATE_REGION" expr "1 << 2"
+		"MAP_WRITE_INVALIDATE_REGION".."1 << 2"
 	)
 
 	IntConstant(
@@ -239,10 +239,10 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"cl_kernel_arg_type_qualifier",
 
-		"KERNEL_ARG_TYPE_NONE"..0,
-		"KERNEL_ARG_TYPE_CONST" expr "1 << 0",
-		"KERNEL_ARG_TYPE_RESTRICT" expr "1 << 1",
-		"KERNEL_ARG_TYPE_VOLATILE" expr "1 << 2"
+		"KERNEL_ARG_TYPE_NONE".."0",
+		"KERNEL_ARG_TYPE_CONST".."1 << 0",
+		"KERNEL_ARG_TYPE_RESTRICT".."1 << 1",
+		"KERNEL_ARG_TYPE_VOLATILE".."1 << 2"
 	)
 
 	IntConstant(

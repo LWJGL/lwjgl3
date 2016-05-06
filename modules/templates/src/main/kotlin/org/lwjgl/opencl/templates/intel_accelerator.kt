@@ -42,10 +42,10 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 	IntConstant(
 		"Error codes used by functions in this extension.",
 
-		"INVALID_ACCELERATOR_INTEL"..-1094,
-		"INVALID_ACCELERATOR_TYPE_INTEL"..-1095,
-		"INVALID_ACCELERATOR_DESCRIPTOR_INTEL"..-1096,
-		"ACCELERATOR_TYPE_NOT_SUPPORTED_INTEL"..-1097
+		"INVALID_ACCELERATOR_INTEL".."-1094",
+		"INVALID_ACCELERATOR_TYPE_INTEL".."-1095",
+		"INVALID_ACCELERATOR_DESCRIPTOR_INTEL".."-1096",
+		"ACCELERATOR_TYPE_NOT_SUPPORTED_INTEL".."-1097"
 	)
 
 	cl_accelerator_intel(

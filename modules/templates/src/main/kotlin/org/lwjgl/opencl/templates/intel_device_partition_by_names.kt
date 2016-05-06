@@ -41,7 +41,7 @@ val intel_device_partition_by_names = "INTELDevicePartitionByNames".nativeClassC
 	IntConstant(
 		"The name list terminator.",
 
-		"PARTITION_BY_NAMES_LIST_END_INTEL" expr "-1"
+		"PARTITION_BY_NAMES_LIST_END_INTEL".."-1"
 	)
 
 }

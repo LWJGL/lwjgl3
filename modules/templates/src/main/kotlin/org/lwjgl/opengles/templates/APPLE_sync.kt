@@ -70,7 +70,7 @@ val APPLE_sync = "APPLESync".nativeClassGLES("APPLE_sync", postfix = APPLE) {
 	LongConstant(
 		"Accepted in the {@code timeout} parameter of WaitSyncAPPLE.",
 
-		"TIMEOUT_IGNORED_APPLE" expr "0xFFFFFFFFFFFFFFFFL"
+		"TIMEOUT_IGNORED_APPLE".."0xFFFFFFFFFFFFFFFFL"
 	)
 
 	IntConstant(

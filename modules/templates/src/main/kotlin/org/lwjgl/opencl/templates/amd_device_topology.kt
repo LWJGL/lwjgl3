@@ -40,6 +40,6 @@ typedef union
 	IntConstant(
 		"Indicates the type of the struct returned by #DEVICE_TOPOLOGY_AMD.",
 
-		"DEVICE_TOPOLOGY_TYPE_PCIE_AMD"..1
+		"DEVICE_TOPOLOGY_TYPE_PCIE_AMD".."1"
 	)
 }

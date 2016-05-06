@@ -39,7 +39,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		compatibility. Differences in this version will typically require significant modification to an application in order for it to function.
 		""",
 
-		"API_VERSION_1_0".expr("VKUtil.VK_MAKE_VERSION(1, 0, 0)")
+		"API_VERSION_1_0".."VKUtil.VK_MAKE_VERSION(1, 0, 0)"
 	)
 
 	LongConstant(
@@ -61,35 +61,35 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	IntConstant(
 		"Boolean constants.",
 
-		"TRUE" expr "1",
-		"FALSE" expr "0"
+		"TRUE".."1",
+		"FALSE".."0"
 		)
 
 	IntConstant(
 		"Struct member limits.",
 
-		"MAX_PHYSICAL_DEVICE_NAME_SIZE" expr "256",
-		"UUID_SIZE" expr "16",
-		"MAX_MEMORY_TYPES" expr "32",
-		"MAX_MEMORY_HEAPS" expr "16",
-		"MAX_EXTENSION_NAME_SIZE" expr "256",
-		"MAX_DESCRIPTION_SIZE" expr "256"
+		"MAX_PHYSICAL_DEVICE_NAME_SIZE".."256",
+		"UUID_SIZE".."16",
+		"MAX_MEMORY_TYPES".."32",
+		"MAX_MEMORY_HEAPS".."16",
+		"MAX_EXTENSION_NAME_SIZE".."256",
+		"MAX_DESCRIPTION_SIZE".."256"
 	)
 
 	IntConstant(
 		"Special values.",
 
-		"REMAINING_MIP_LEVELS" expr "(~0)",
-		"REMAINING_ARRAY_LAYERS" expr "(~0)",
-		"ATTACHMENT_UNUSED" expr "(~0)",
-		"QUEUE_FAMILY_IGNORED" expr "(~0)",
-		"SUBPASS_EXTERNAL" expr "(~0)"
+		"REMAINING_MIP_LEVELS".."(~0)",
+		"REMAINING_ARRAY_LAYERS".."(~0)",
+		"ATTACHMENT_UNUSED".."(~0)",
+		"QUEUE_FAMILY_IGNORED".."(~0)",
+		"SUBPASS_EXTERNAL".."(~0)"
 	)
 
 	LongConstant(
 		"Special size value.",
 
-		"WHOLE_SIZE" expr "(~0L)"
+		"WHOLE_SIZE".."(~0L)"
 	)
 
 	EnumConstant(

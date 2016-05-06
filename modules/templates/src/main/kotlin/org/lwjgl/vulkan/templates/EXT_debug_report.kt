@@ -28,7 +28,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 	IntConstant(
 		"The extension specification version.",
 
-		"EXT_DEBUG_REPORT_SPEC_VERSION" expr "2"
+		"EXT_DEBUG_REPORT_SPEC_VERSION".."2"
 	)
 
 	StringConstant(
@@ -40,7 +40,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 	IntConstant(
 		"VkStructureType",
 
-		"STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT" expr "1000011000"
+		"STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT".."1000011000"
 	)
 
 	val VkDebugReportObjectTypesEXT = EnumConstant(
@@ -115,7 +115,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 	IntConstant(
 		"VkResult",
 
-		"ERROR_VALIDATION_FAILED_EXT" expr "-1000011001"
+		"ERROR_VALIDATION_FAILED_EXT".."-1000011001"
 	)
 
 	VkResult(

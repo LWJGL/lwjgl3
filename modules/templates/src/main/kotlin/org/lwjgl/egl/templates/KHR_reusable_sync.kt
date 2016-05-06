@@ -39,7 +39,7 @@ val KHR_reusable_sync = "KHRReusableSync".nativeClassEGL("KHR_reusable_sync", po
 	LongConstant(
 		"",
 
-		"FOREVER_KHR" expr "0xFFFFFFFFFFFFFFFFL",
+		"FOREVER_KHR".."0xFFFFFFFFFFFFFFFFL",
 		"NO_SYNC_KHR"..0L
 	)
 

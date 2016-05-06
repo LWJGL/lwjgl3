@@ -89,8 +89,8 @@ val GLX_ARB_multisample = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisampl
 	IntConstant(
 		"Accepted by the {@code attribList} parameter of GLX#ChooseVisual(), and by the {@code attrib} parameter of GLX#GetConfig().",
 
-		"SAMPLE_BUFFERS_ARB"..100000,
-		"SAMPLES_ARB"..100001
+		"SAMPLE_BUFFERS_ARB".."100000",
+		"SAMPLES_ARB".."100001"
 	)
 }
 

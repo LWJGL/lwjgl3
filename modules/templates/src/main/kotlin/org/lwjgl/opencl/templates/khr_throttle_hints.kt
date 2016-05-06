@@ -25,8 +25,8 @@ val khr_throttle_hints = "KHRThrottleHints".nativeClassCL("khr_throttle_hints", 
 	IntConstant(
 		"cl_queue_throttle_khr",
 
-		"QUEUE_THROTTLE_HIGH_KHR" expr "(1<<0)",
-		"QUEUE_THROTTLE_MED_KHR" expr "(1<<1)",
-		"QUEUE_THROTTLE_LOW_KHR" expr "(1<<2)"
+		"QUEUE_THROTTLE_HIGH_KHR".."(1<<0)",
+		"QUEUE_THROTTLE_MED_KHR".."(1<<1)",
+		"QUEUE_THROTTLE_LOW_KHR".."(1<<2)"
 	)
 }

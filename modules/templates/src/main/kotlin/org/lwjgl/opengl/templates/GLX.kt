@@ -18,53 +18,53 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, prefix = "GLX", prefixMethod = "glX"
 	IntConstant(
 		"Errors.",
 
-		"GLXBadContext"..0,
-		"GLXBadContextState"..1,
-		"GLXBadDrawable"..2,
-		"GLXBadPixmap"..3,
-		"GLXBadContextTag"..4,
-		"GLXBadCurrentWindow"..5,
-		"GLXBadRenderRequest"..6,
-		"GLXBadLargeRequest"..7,
-		"GLXUnsupportedPrivateRequest"..8,
-		"GLXBadFBConfig"..9,
-		"GLXBadPbuffer"..10,
-		"GLXBadCurrentDrawable"..11,
-		"GLXBadWindow"..12
+		"GLXBadContext".."0",
+		"GLXBadContextState".."1",
+		"GLXBadDrawable".."2",
+		"GLXBadPixmap".."3",
+		"GLXBadContextTag".."4",
+		"GLXBadCurrentWindow".."5",
+		"GLXBadRenderRequest".."6",
+		"GLXBadLargeRequest".."7",
+		"GLXUnsupportedPrivateRequest".."8",
+		"GLXBadFBConfig".."9",
+		"GLXBadPbuffer".."10",
+		"GLXBadCurrentDrawable".."11",
+		"GLXBadWindow".."12"
 	).noPrefix()
 
 	IntConstant(
 		"Names for attributes to #GetConfig().",
 
-		"USE_GL"..1,
-		"BUFFER_SIZE"..2,
-		"LEVEL"..3,
-		"RGBA"..4,
-		"DOUBLEBUFFER"..5,
-		"STEREO"..6,
-		"AUX_BUFFERS"..7,
-		"RED_SIZE"..8,
-		"GREEN_SIZE"..9,
-		"BLUE_SIZE"..10,
-		"ALPHA_SIZE"..11,
-		"DEPTH_SIZE"..12,
-		"STENCIL_SIZE"..13,
-		"ACCUM_RED_SIZE"..14,
-		"ACCUM_GREEN_SIZE"..15,
-		"ACCUM_BLUE_SIZE"..16,
-		"ACCUM_ALPHA_SIZE"..17
+		"USE_GL".."1",
+		"BUFFER_SIZE".."2",
+		"LEVEL".."3",
+		"RGBA".."4",
+		"DOUBLEBUFFER".."5",
+		"STEREO".."6",
+		"AUX_BUFFERS".."7",
+		"RED_SIZE".."8",
+		"GREEN_SIZE".."9",
+		"BLUE_SIZE".."10",
+		"ALPHA_SIZE".."11",
+		"DEPTH_SIZE".."12",
+		"STENCIL_SIZE".."13",
+		"ACCUM_RED_SIZE".."14",
+		"ACCUM_GREEN_SIZE".."15",
+		"ACCUM_BLUE_SIZE".."16",
+		"ACCUM_ALPHA_SIZE".."17"
 	)
 
 	IntConstant(
 		"Error return values from #GetConfig(). Success is indicated by a value of 0.",
 
-		"BAD_SCREEN"..1,
-		"BAD_ATTRIBUTE"..2,
-		"NO_EXTENSION"..3,
-		"BAD_VISUAL"..4,
-		"BAD_CONTEXT"..5,
-		"BAD_VALUE"..6,
-		"BAD_ENUM"..7
+		"BAD_SCREEN".."1",
+		"BAD_ATTRIBUTE".."2",
+		"NO_EXTENSION".."3",
+		"BAD_VISUAL".."4",
+		"BAD_CONTEXT".."5",
+		"BAD_VALUE".."6",
+		"BAD_ENUM".."7"
 	)
 
 	// --------------------------------------------------------

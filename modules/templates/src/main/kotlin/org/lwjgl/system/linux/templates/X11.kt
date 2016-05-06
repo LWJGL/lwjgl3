@@ -13,99 +13,99 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 	IntConstant(
 		"Boolean values",
 
-		"True"..1,
-		"False"..0
+		"True".."1",
+		"False".."0"
 	)
 
 	IntConstant(
 		"RESERVED RESOURCE AND CONSTANT DEFINITIONS",
 
-		"None"..0,
-		"ParentRelative"..1,
-		"CopyFromParent"..0,
-		"PointerWindow"..0,
-		"InputFocus"..1,
-		"PointerRoot"..1,
-		"AnyPropertyType"..0,
-		"AnyKey"..0,
-		"AnyButton"..0,
-		"AllTemporary"..0,
-		"CurrentTime"..0,
-		"NoSymbol"..0
+		"None".."0",
+		"ParentRelative".."1",
+		"CopyFromParent".."0",
+		"PointerWindow".."0",
+		"InputFocus".."1",
+		"PointerRoot".."1",
+		"AnyPropertyType".."0",
+		"AnyKey".."0",
+		"AnyButton".."0",
+		"AllTemporary".."0",
+		"CurrentTime".."0",
+		"NoSymbol".."0"
 	)
 
 	IntConstant(
 		"ERROR CODES",
 
-		"Success"..0,
-		"BadRequest"..1,
-		"BadValue"..2,
-		"BadWindow"..3,
-		"BadPixmap"..4,
-		"BadAtom"..5,
-		"BadCursor"..6,
-		"BadFont"..7,
-		"BadMatch"..8,
-		"BadDrawable"..9,
-		"BadAccess"..10,
-		"BadAlloc"..11,
-		"BadColor"..12,
-		"BadGC"..13,
-		"BadIDChoice"..14,
-		"BadName"..15,
-		"BadLength"..16,
-		"BadImplementation"..17
+		"Success".."0",
+		"BadRequest".."1",
+		"BadValue".."2",
+		"BadWindow".."3",
+		"BadPixmap".."4",
+		"BadAtom".."5",
+		"BadCursor".."6",
+		"BadFont".."7",
+		"BadMatch".."8",
+		"BadDrawable".."9",
+		"BadAccess".."10",
+		"BadAlloc".."11",
+		"BadColor".."12",
+		"BadGC".."13",
+		"BadIDChoice".."14",
+		"BadName".."15",
+		"BadLength".."16",
+		"BadImplementation".."17"
 	)
 
 	IntConstant(
 		"Window attributes for CreateWindow and ChangeWindowAttributes",
 
-		"CWBackPixmap" expr "1 << 0",
-		"CWBackPixel" expr "1 << 1",
-		"CWBorderPixmap" expr "1 << 2",
-		"CWBorderPixel" expr "1 << 3",
-		"CWBitGravity" expr "1 << 4",
-		"CWWinGravity" expr "1 << 5",
-		"CWBackingStore" expr "1 << 6",
-		"CWBackingPlanes" expr "1 << 7",
-		"CWBackingPixel" expr "1 << 8",
-		"CWOverrideRedirect" expr "1 << 9",
-		"CWSaveUnder" expr "1 << 10",
-		"CWEventMask" expr "1 << 11",
-		"CWDontPropagate" expr "1 << 12",
-		"CWColormap" expr "1 << 13",
-		"CWCursor" expr "1 << 14"
+		"CWBackPixmap".."1 << 0",
+		"CWBackPixel".."1 << 1",
+		"CWBorderPixmap".."1 << 2",
+		"CWBorderPixel".."1 << 3",
+		"CWBitGravity".."1 << 4",
+		"CWWinGravity".."1 << 5",
+		"CWBackingStore".."1 << 6",
+		"CWBackingPlanes".."1 << 7",
+		"CWBackingPixel".."1 << 8",
+		"CWOverrideRedirect".."1 << 9",
+		"CWSaveUnder".."1 << 10",
+		"CWEventMask".."1 << 11",
+		"CWDontPropagate".."1 << 12",
+		"CWColormap".."1 << 13",
+		"CWCursor".."1 << 14"
 	)
 
 	IntConstant(
 		"Input Event Masks. Used as event-mask window attribute and as arguments to Grab requests. Not to be confused with event names.",
 
-		"NoEventMask"..0,
-		"KeyPressMask" expr "1 << 0",
-		"KeyReleaseMask" expr "1 << 1",
-		"ButtonPressMask" expr "1 << 2",
-		"ButtonReleaseMask" expr "1 << 3",
-		"EnterWindowMask" expr "1 << 4",
-		"LeaveWindowMask" expr "1 << 5",
-		"PointerMotionMask" expr "1 << 6",
-		"PointerMotionHintMask" expr "1 << 7",
-		"Button1MotionMask" expr "1 << 8",
-		"Button2MotionMask" expr "1 << 9",
-		"Button3MotionMask" expr "1 << 10",
-		"Button4MotionMask" expr "1 << 11",
-		"Button5MotionMask" expr "1 << 12",
-		"ButtonMotionMask" expr "1 << 13",
-		"KeymapStateMask" expr "1 << 14",
-		"ExposureMask" expr "1 << 15",
-		"VisibilityChangeMask" expr "1 << 16",
-		"StructureNotifyMask" expr "1 << 17",
-		"ResizeRedirectMask" expr "1 << 18",
-		"SubstructureNotifyMask" expr "1 << 19",
-		"SubstructureRedirectMask" expr "1 << 20",
-		"FocusChangeMask" expr "1 << 21",
-		"PropertyChangeMask" expr "1 << 22",
-		"ColormapChangeMask" expr "1 << 23",
-		"OwnerGrabButtonMask" expr "1 << 24"
+		"NoEventMask".."0",
+		"KeyPressMask".."1 << 0",
+		"KeyReleaseMask".."1 << 1",
+		"ButtonPressMask".."1 << 2",
+		"ButtonReleaseMask".."1 << 3",
+		"EnterWindowMask".."1 << 4",
+		"LeaveWindowMask".."1 << 5",
+		"PointerMotionMask".."1 << 6",
+		"PointerMotionHintMask".."1 << 7",
+		"Button1MotionMask".."1 << 8",
+		"Button2MotionMask".."1 << 9",
+		"Button3MotionMask".."1 << 10",
+		"Button4MotionMask".."1 << 11",
+		"Button5MotionMask".."1 << 12",
+		"ButtonMotionMask".."1 << 13",
+		"KeymapStateMask".."1 << 14",
+		"ExposureMask".."1 << 15",
+		"VisibilityChangeMask".."1 << 16",
+		"StructureNotifyMask".."1 << 17",
+		"ResizeRedirectMask".."1 << 18",
+		"SubstructureNotifyMask".."1 << 19",
+		"SubstructureRedirectMask".."1 << 20",
+		"FocusChangeMask".."1 << 21",
+		"PropertyChangeMask".."1 << 22",
+		"ColormapChangeMask".."1 << 23",
+		"OwnerGrabButtonMask".."1 << 24"
 	)
 
 	IntConstant(
@@ -114,78 +114,78 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 		the protocol for errors and replies.
 		""",
 
-		"KeyPress"..2,
-		"KeyRelease"..3,
-		"ButtonPress"..4,
-		"ButtonRelease"..5,
-		"MotionNotify"..6,
-		"EnterNotify"..7,
-		"LeaveNotify"..8,
-		"FocusIn"..9,
-		"FocusOut"..10,
-		"KeymapNotify"..11,
-		"Expose"..12,
-		"GraphicsExpose"..13,
-		"NoExpose"..14,
-		"VisibilityNotify"..15,
-		"CreateNotify"..16,
-		"DestroyNotify"..17,
-		"UnmapNotify"..18,
-		"MapNotify"..19,
-		"MapRequest"..20,
-		"ReparentNotify"..21,
-		"ConfigureNotify"..22,
-		"ConfigureRequest"..23,
-		"GravityNotify"..24,
-		"ResizeRequest"..25,
-		"CirculateNotify"..26,
-		"CirculateRequest"..27,
-		"PropertyNotify"..28,
-		"SelectionClear"..29,
-		"SelectionRequest"..30,
-		"SelectionNotify"..31,
-		"ColormapNotify"..32,
-		"ClientMessage"..33,
-		"MappingNotify"..34,
-		"GenericEvent"..35,
-		"LASTEvent"..36
+		"KeyPress".."2",
+		"KeyRelease".."3",
+		"ButtonPress".."4",
+		"ButtonRelease".."5",
+		"MotionNotify".."6",
+		"EnterNotify".."7",
+		"LeaveNotify".."8",
+		"FocusIn".."9",
+		"FocusOut".."10",
+		"KeymapNotify".."11",
+		"Expose".."12",
+		"GraphicsExpose".."13",
+		"NoExpose".."14",
+		"VisibilityNotify".."15",
+		"CreateNotify".."16",
+		"DestroyNotify".."17",
+		"UnmapNotify".."18",
+		"MapNotify".."19",
+		"MapRequest".."20",
+		"ReparentNotify".."21",
+		"ConfigureNotify".."22",
+		"ConfigureRequest".."23",
+		"GravityNotify".."24",
+		"ResizeRequest".."25",
+		"CirculateNotify".."26",
+		"CirculateRequest".."27",
+		"PropertyNotify".."28",
+		"SelectionClear".."29",
+		"SelectionRequest".."30",
+		"SelectionNotify".."31",
+		"ColormapNotify".."32",
+		"ClientMessage".."33",
+		"MappingNotify".."34",
+		"GenericEvent".."35",
+		"LASTEvent".."36"
 	)
 
 	IntConstant(
 		"Key masks. Used as modifiers to GrabButton and GrabKey, results of QueryPointer, state in various key-, mouse-, and button-related events.",
 
-		"ShiftMask" expr "1<<0",
-		"LockMask" expr "1<<1",
-		"ControlMask" expr "1<<2",
-		"Mod1Mask" expr "1<<3",
-		"Mod2Mask" expr "1<<4",
-		"Mod3Mask" expr "1<<5",
-		"Mod4Mask" expr "1<<6",
-		"Mod5Mask" expr "1<<7"
+		"ShiftMask".."1<<0",
+		"LockMask".."1<<1",
+		"ControlMask".."1<<2",
+		"Mod1Mask".."1<<3",
+		"Mod2Mask".."1<<4",
+		"Mod3Mask".."1<<5",
+		"Mod4Mask".."1<<6",
+		"Mod5Mask".."1<<7"
 	)
 
 	IntConstant(
 		"modifier names. Used to build a SetModifierMapping request or to read a GetModifierMapping request. These correspond to the masks defined above.",
 
-		"ShiftMapIndex"..0,
-		"LockMapIndex"..1,
-		"ControlMapIndex"..2,
-		"Mod1MapIndex"..3,
-		"Mod2MapIndex"..4,
-		"Mod3MapIndex"..5,
-		"Mod4MapIndex"..6,
-		"Mod5MapIndex"..7
+		"ShiftMapIndex".."0",
+		"LockMapIndex".."1",
+		"ControlMapIndex".."2",
+		"Mod1MapIndex".."3",
+		"Mod2MapIndex".."4",
+		"Mod3MapIndex".."5",
+		"Mod4MapIndex".."6",
+		"Mod5MapIndex".."7"
 	)
 
 	IntConstant(
 		"button masks. Used in same manner as Key masks above. Not to be confused with button names below.",
 
-		"Button1Mask" expr "1<<8",
-		"Button2Mask" expr "1<<9",
-		"Button3Mask" expr "1<<10",
-		"Button4Mask" expr "1<<11",
-		"Button5Mask" expr "1<<12",
-		"AnyModifier" expr "1<<15"
+		"Button1Mask".."1<<8",
+		"Button2Mask".."1<<9",
+		"Button3Mask".."1<<10",
+		"Button4Mask".."1<<11",
+		"Button5Mask".."1<<12",
+		"AnyModifier".."1<<15"
 	)
 
 	IntConstant(
@@ -194,138 +194,138 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 		that 0 is already defined above as "AnyButton".
 		""",
 
-		"Button1"..1,
-		"Button2"..2,
-		"Button3"..3,
-		"Button4"..4,
-		"Button5"..5
+		"Button1".."1",
+		"Button2".."2",
+		"Button3".."3",
+		"Button4".."4",
+		"Button5".."5"
 	)
 
 	IntConstant(
 		"Notify modes",
 
-		"NotifyNormal"..0,
-		"NotifyGrab"..1,
-		"NotifyUngrab"..2,
-		"NotifyWhileGrabbed"..3,
-		"NotifyHint"..1
+		"NotifyNormal".."0",
+		"NotifyGrab".."1",
+		"NotifyUngrab".."2",
+		"NotifyWhileGrabbed".."3",
+		"NotifyHint".."1"
 	)
 
 	IntConstant(
 		"Notify detail",
 
-		"NotifyAncestor"..0,
-		"NotifyVirtual"..1,
-		"NotifyInferior"..2,
-		"NotifyNonlinear"..3,
-		"NotifyNonlinearVirtual"..4,
-		"NotifyPointer"..5,
-		"NotifyPointerRoot"..6,
-		"NotifyDetailNone"..7
+		"NotifyAncestor".."0",
+		"NotifyVirtual".."1",
+		"NotifyInferior".."2",
+		"NotifyNonlinear".."3",
+		"NotifyNonlinearVirtual".."4",
+		"NotifyPointer".."5",
+		"NotifyPointerRoot".."6",
+		"NotifyDetailNone".."7"
 	)
 
 	IntConstant(
 		"Visibility notify",
 
-		"VisibilityUnobscured"..0,
-		"VisibilityPartiallyObscured"..1,
-		"VisibilityFullyObscured"..2
+		"VisibilityUnobscured".."0",
+		"VisibilityPartiallyObscured".."1",
+		"VisibilityFullyObscured".."2"
 	)
 
 	IntConstant(
 		"Circulation request",
 
-		"PlaceOnTop"..0,
-		"PlaceOnBottom"..1
+		"PlaceOnTop".."0",
+		"PlaceOnBottom".."1"
 	)
 
 	IntConstant(
 		"Property notification",
 
-		"PropertyNewValue"..0,
-		"PropertyDelete"..1
+		"PropertyNewValue".."0",
+		"PropertyDelete".."1"
 	)
 
 	IntConstant(
 		"Color Map notification",
 
-		"ColormapUninstalled"..0,
-		"ColormapInstalled"..1
+		"ColormapUninstalled".."0",
+		"ColormapInstalled".."1"
 	)
 
 	IntConstant(
 		"GrabPointer, GrabButton, GrabKeyboard, GrabKey Modes",
 
-		"GrabModeSync"..0,
-		"GrabModeAsync"..1
+		"GrabModeSync".."0",
+		"GrabModeAsync".."1"
 	)
 
 	IntConstant(
 		"GrabPointer, GrabKeyboard reply status",
 
-		"GrabSuccess"..0,
-		"AlreadyGrabbed"..1,
-		"GrabInvalidTime"..2,
-		"GrabNotViewable"..3,
-		"GrabFrozen"..4
+		"GrabSuccess".."0",
+		"AlreadyGrabbed".."1",
+		"GrabInvalidTime".."2",
+		"GrabNotViewable".."3",
+		"GrabFrozen".."4"
 	)
 
 	IntConstant(
 		"AllowEvents modes",
 
-		"AsyncPointer"..0,
-		"SyncPointer"..1,
-		"ReplayPointer"..2,
-		"AsyncKeyboard"..3,
-		"SyncKeyboard"..4,
-		"ReplayKeyboard"..5,
-		"AsyncBoth"..6,
-		"SyncBoth"..7
+		"AsyncPointer".."0",
+		"SyncPointer".."1",
+		"ReplayPointer".."2",
+		"AsyncKeyboard".."3",
+		"SyncKeyboard".."4",
+		"ReplayKeyboard".."5",
+		"AsyncBoth".."6",
+		"SyncBoth".."7"
 	)
 
 	IntConstant(
 		"For #XCreateColormap().",
 
-		"AllocNone"..0,
-		"AllocAll"..1
+		"AllocNone".."0",
+		"AllocAll".."1"
 	)
 
 	IntConstant(
 		"Used in XSetInputFocus(), XGetInputFocus().",
 
-		"RevertToNone" expr "None",
-		"RevertToPointerRoot" expr "PointerRoot",
-		"RevertToParent"..2
+		"RevertToNone".."None",
+		"RevertToPointerRoot".."PointerRoot",
+		"RevertToParent".."2"
 	)
 
 	IntConstant(
 		"Window classes used by #XCreateWindow().",
 
-		"InputOutput"..1,
-		"InputOnly"..2
+		"InputOutput".."1",
+		"InputOnly".."2"
 	)
 
 	IntConstant(
 		"SCREEN SAVER STUFF",
 
-		"DontPreferBlanking"..0,
-		"PreferBlanking"..1,
-		"DefaultBlanking"..2,
-		"DisableScreenSaver"..0,
-		"DisableScreenInterval"..0,
-		"DontAllowExposures"..0,
-		"AllowExposures"..1,
-		"DefaultExposures"..2,
-		"ScreenSaverReset"..0,
-		"ScreenSaverActive"..1
+		"DontPreferBlanking".."0",
+		"PreferBlanking".."1",
+		"DefaultBlanking".."2",
+		"DisableScreenSaver".."0",
+		"DisableScreenInterval".."0",
+		"DontAllowExposures".."0",
+		"AllowExposures".."1",
+		"DefaultExposures".."2",
+		"ScreenSaverReset".."0",
+		"ScreenSaverActive".."1"
 	)
 
 	IntConstant(
 		"Property modes",
 
-		"PropModeReplace"..0,
-		"PropModePrepend"..1,
-		"PropModeAppend"..2
+		"PropModeReplace".."0",
+		"PropModePrepend".."1",
+		"PropModeAppend".."2"
 	)
 
 	IntConstant(
@@ -352,109 +352,109 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 	IntConstant(
 		"LineStyle",
 
-		"LineSolid"..0,
-		"LineOnOffDash"..1,
-		"LineDoubleDash"..2
+		"LineSolid".."0",
+		"LineOnOffDash".."1",
+		"LineDoubleDash".."2"
 	)
 
 	IntConstant(
 		"capStyle",
 
-		"CapNotLast"..0,
-		"CapButt"..1,
-		"CapRound"..2,
-		"CapProjecting"..3
+		"CapNotLast".."0",
+		"CapButt".."1",
+		"CapRound".."2",
+		"CapProjecting".."3"
 	)
 
 	IntConstant(
 		"joinStyle",
 
-		"JoinMiter"..0,
-		"JoinRound"..1,
-		"JoinBevel"..2
+		"JoinMiter".."0",
+		"JoinRound".."1",
+		"JoinBevel".."2"
 	)
 
 	IntConstant(
 		"fillStyle",
 
-		"FillSolid"..0,
-		"FillTiled"..1,
-		"FillStippled"..2,
-		"FillOpaqueStippled"..3
+		"FillSolid".."0",
+		"FillTiled".."1",
+		"FillStippled".."2",
+		"FillOpaqueStippled".."3"
 	)
 
 	IntConstant(
 		"fillRule",
 
-		"EvenOddRule"..0,
-		"WindingRule"..1
+		"EvenOddRule".."0",
+		"WindingRule".."1"
 	)
 
 	IntConstant(
 		"subwindow mode",
 
-		"ClipByChildren"..0,
-		"IncludeInferiors"..1
+		"ClipByChildren".."0",
+		"IncludeInferiors".."1"
 	)
 
 	IntConstant(
 		"SetClipRectangles ordering",
 
-		"Unsorted"..0,
-		"YSorted"..1,
-		"YXSorted"..2,
-		"YXBanded"..3
+		"Unsorted".."0",
+		"YSorted".."1",
+		"YXSorted".."2",
+		"YXBanded".."3"
 	)
 
 	IntConstant(
 		"CoordinateMode for drawing routines",
 
-		"CoordModeOrigin"..0,
-		"CoordModePrevious"..1
+		"CoordModeOrigin".."0",
+		"CoordModePrevious".."1"
 	)
 
 	IntConstant(
 		"Polygon shapes",
 
-		"Complex"..0,
-		"Nonconvex"..1,
-		"Convex"..2
+		"Complex".."0",
+		"Nonconvex".."1",
+		"Convex".."2"
 	)
 
 	IntConstant(
 		"Arc modes for PolyFillArc",
 
-		"ArcChord"..0,
-		"ArcPieSlice"..1
+		"ArcChord".."0",
+		"ArcPieSlice".."1"
 	)
 
 	IntConstant(
 		"GC components: masks used in CreateGC, CopyGC, ChangeGC, OR'ed into GC.stateChanges",
 
-		"GCFunction" expr "1<<0",
-		"GCPlaneMask" expr "1<<1",
-		"GCForeground" expr "1<<2",
-		"GCBackground" expr "1<<3",
-		"GCLineWidth" expr "1<<4",
-		"GCLineStyle" expr "1<<5",
-		"GCCapStyle" expr "1<<6",
-		"GCJoinStyle" expr "1<<7",
-		"GCFillStyle" expr "1<<8",
-		"GCFillRule" expr "1<<9",
-		"GCTile" expr "1<<10",
-		"GCStipple" expr "1<<11",
-		"GCTileStipXOrigin" expr "1<<12",
-		"GCTileStipYOrigin" expr "1<<13",
-		"GCFont" expr "1<<14",
-		"GCSubwindowMode" expr "1<<15",
-		"GCGraphicsExposures" expr "1<<16",
-		"GCClipXOrigin" expr "1<<17",
-		"GCClipYOrigin" expr "1<<18",
-		"GCClipMask" expr "1<<19",
-		"GCDashOffset" expr "1<<20",
-		"GCDashList" expr "1<<21",
-		"GCArcMode" expr "1<<22",
-		"GCLastBit"..22
+		"GCFunction".."1<<0",
+		"GCPlaneMask".."1<<1",
+		"GCForeground".."1<<2",
+		"GCBackground".."1<<3",
+		"GCLineWidth".."1<<4",
+		"GCLineStyle".."1<<5",
+		"GCCapStyle".."1<<6",
+		"GCJoinStyle".."1<<7",
+		"GCFillStyle".."1<<8",
+		"GCFillRule".."1<<9",
+		"GCTile".."1<<10",
+		"GCStipple".."1<<11",
+		"GCTileStipXOrigin".."1<<12",
+		"GCTileStipYOrigin".."1<<13",
+		"GCFont".."1<<14",
+		"GCSubwindowMode".."1<<15",
+		"GCGraphicsExposures".."1<<16",
+		"GCClipXOrigin".."1<<17",
+		"GCClipYOrigin".."1<<18",
+		"GCClipMask".."1<<19",
+		"GCDashOffset".."1<<20",
+		"GCDashList".."1<<21",
+		"GCArcMode".."1<<22",
+		"GCLastBit".."22"
 	)
 
 	val DISPLAY = Display_p.IN("display", "the connection to the X server")

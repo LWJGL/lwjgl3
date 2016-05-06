@@ -36,13 +36,13 @@ ENABLE_WARNINGS()""")
 	val minor = 5
 	val patch = 0
 
-	IntConstant("The major version number.", "VERSION_MAJOR" expr "$major")
-	IntConstant("The minor version number.", "VERSION_MINOR" expr "$minor")
-	IntConstant("The release version number.", "VERSION_RELEASE" expr "$patch")
+	IntConstant("The major version number.", "VERSION_MAJOR".."$major")
+	IntConstant("The minor version number.", "VERSION_MINOR".."$minor")
+	IntConstant("The release version number.", "VERSION_RELEASE".."$patch")
 
 	IntConstant(
 		"The version number",
-		"VERSION_NUMBER".expr("(XXH_VERSION_MAJOR *100*100 + XXH_VERSION_MINOR *100 + XXH_VERSION_RELEASE)")
+		"VERSION_NUMBER".."(XXH_VERSION_MAJOR *100*100 + XXH_VERSION_MINOR *100 + XXH_VERSION_RELEASE)"
 	)
 
 	// Simple Hash Functions

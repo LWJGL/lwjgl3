@@ -29,7 +29,7 @@ val qcom_ext_host_ptr = "QCOMEXTHostPtr".nativeClassCL("qcom_ext_host_ptr", QCOM
 	IntConstant(
 		"Accepted by the {@code flags} argument of CL10#CreateBuffer(), CL10#CreateImage2D() and CL10#CreateImage3D().",
 
-		"MEM_EXT_HOST_PTR_QCOM" expr "1 << 29"
+		"MEM_EXT_HOST_PTR_QCOM".."1 << 29"
 	)
 
 	IntConstant(

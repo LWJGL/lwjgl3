@@ -17,7 +17,7 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 		share group object handle is specified in {@code properties}.
 		""",
 
-			"INVALID_GL_SHAREGROUP_REFERENCE_KHR"..-1000
+			"INVALID_GL_SHAREGROUP_REFERENCE_KHR".."-1000"
 		)
 
 		val INVALID_GL_SHAREGROUP_REFERENCE_KHR = "#INVALID_GL_SHAREGROUP_REFERENCE_KHR"

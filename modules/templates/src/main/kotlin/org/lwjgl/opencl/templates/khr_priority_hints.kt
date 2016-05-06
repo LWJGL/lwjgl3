@@ -25,8 +25,8 @@ val khr_priority_hints = "KHRPriorityHints".nativeClassCL("khr_priority_hints", 
 	IntConstant(
 		"cl_queue_priority_khr",
 
-		"QUEUE_PRIORITY_HIGH_KHR" expr "(1<<0)",
-		"QUEUE_PRIORITY_MED_KHR" expr "(1<<1)",
-		"QUEUE_PRIORITY_LOW_KHR" expr "(1<<2)"
+		"QUEUE_PRIORITY_HIGH_KHR".."(1<<0)",
+		"QUEUE_PRIORITY_MED_KHR".."(1<<1)",
+		"QUEUE_PRIORITY_LOW_KHR".."(1<<2)"
 	)
 }

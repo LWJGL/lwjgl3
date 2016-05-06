@@ -17,7 +17,7 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", pos
 	IntConstant(
 		"The extension specification version.",
 
-		"KHR_WIN32_SURFACE_SPEC_VERSION" expr "5"
+		"KHR_WIN32_SURFACE_SPEC_VERSION".."5"
 	)
 
 	StringConstant(
@@ -29,7 +29,7 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", pos
 	IntConstant(
 		"VkStructureType",
 
-		"STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR" expr "1000009000"
+		"STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR".."1000009000"
 	)
 
 	VkResult(

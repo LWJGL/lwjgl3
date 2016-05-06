@@ -16,8 +16,8 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 
 	IntConstant(
 		"BOOL return values.",
-		"FALSE"..0,
-		"TRUE"..1
+		"FALSE".."0",
+		"TRUE".."1"
 	)
 
 	DWORD(

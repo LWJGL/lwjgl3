@@ -120,66 +120,66 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	IntConstant(
 		"Error Codes",
 
-		"SUCCESS"..0,
+		"SUCCESS".."0",
 		// We use expr here so that they are not converted to hex by the generator.
-		"DEVICE_NOT_FOUND" expr "-1",
-		"DEVICE_NOT_AVAILABLE" expr "-2",
-		"COMPILER_NOT_AVAILABLE" expr "-3",
-		"MEM_OBJECT_ALLOCATION_FAILURE" expr "-4",
-		"OUT_OF_RESOURCES" expr "-5",
-		"OUT_OF_HOST_MEMORY" expr "-6",
-		"PROFILING_INFO_NOT_AVAILABLE" expr "-7",
-		"MEM_COPY_OVERLAP" expr "-8",
-		"IMAGE_FORMAT_MISMATCH" expr "-9",
-		"IMAGE_FORMAT_NOT_SUPPORTED" expr "-10",
-		"BUILD_PROGRAM_FAILURE" expr "-11",
-		"MAP_FAILURE" expr "-12",
+		"DEVICE_NOT_FOUND".."-1",
+		"DEVICE_NOT_AVAILABLE".."-2",
+		"COMPILER_NOT_AVAILABLE".."-3",
+		"MEM_OBJECT_ALLOCATION_FAILURE".."-4",
+		"OUT_OF_RESOURCES".."-5",
+		"OUT_OF_HOST_MEMORY".."-6",
+		"PROFILING_INFO_NOT_AVAILABLE".."-7",
+		"MEM_COPY_OVERLAP".."-8",
+		"IMAGE_FORMAT_MISMATCH".."-9",
+		"IMAGE_FORMAT_NOT_SUPPORTED".."-10",
+		"BUILD_PROGRAM_FAILURE".."-11",
+		"MAP_FAILURE".."-12",
 
-		"INVALID_VALUE" expr "-30",
-		"INVALID_DEVICE_TYPE" expr "-31",
-		"INVALID_PLATFORM" expr "-32",
-		"INVALID_DEVICE" expr "-33",
-		"INVALID_CONTEXT" expr "-34",
-		"INVALID_QUEUE_PROPERTIES" expr "-35",
-		"INVALID_COMMAND_QUEUE" expr "-36",
-		"INVALID_HOST_PTR" expr "-37",
-		"INVALID_MEM_OBJECT" expr "-38",
-		"INVALID_IMAGE_FORMAT_DESCRIPTOR" expr "-39",
-		"INVALID_IMAGE_SIZE" expr "-40",
-		"INVALID_SAMPLER" expr "-41",
-		"INVALID_BINARY" expr "-42",
-		"INVALID_BUILD_OPTIONS" expr "-43",
-		"INVALID_PROGRAM" expr "-44",
-		"INVALID_PROGRAM_EXECUTABLE" expr "-45",
-		"INVALID_KERNEL_NAME" expr "-46",
-		"INVALID_KERNEL_DEFINITION" expr "-47",
-		"INVALID_KERNEL" expr "-48",
-		"INVALID_ARG_INDEX" expr "-49",
-		"INVALID_ARG_VALUE" expr "-50",
-		"INVALID_ARG_SIZE" expr "-51",
-		"INVALID_KERNEL_ARGS" expr "-52",
-		"INVALID_WORK_DIMENSION" expr "-53",
-		"INVALID_WORK_GROUP_SIZE" expr "-54",
-		"INVALID_WORK_ITEM_SIZE" expr "-55",
-		"INVALID_GLOBAL_OFFSET" expr "-56",
-		"INVALID_EVENT_WAIT_LIST" expr "-57",
-		"INVALID_EVENT" expr "-58",
-		"INVALID_OPERATION" expr "-59",
-		"INVALID_BUFFER_SIZE" expr "-61",
-		"INVALID_GLOBAL_WORK_SIZE" expr "-63"
+		"INVALID_VALUE".."-30",
+		"INVALID_DEVICE_TYPE".."-31",
+		"INVALID_PLATFORM".."-32",
+		"INVALID_DEVICE".."-33",
+		"INVALID_CONTEXT".."-34",
+		"INVALID_QUEUE_PROPERTIES".."-35",
+		"INVALID_COMMAND_QUEUE".."-36",
+		"INVALID_HOST_PTR".."-37",
+		"INVALID_MEM_OBJECT".."-38",
+		"INVALID_IMAGE_FORMAT_DESCRIPTOR".."-39",
+		"INVALID_IMAGE_SIZE".."-40",
+		"INVALID_SAMPLER".."-41",
+		"INVALID_BINARY".."-42",
+		"INVALID_BUILD_OPTIONS".."-43",
+		"INVALID_PROGRAM".."-44",
+		"INVALID_PROGRAM_EXECUTABLE".."-45",
+		"INVALID_KERNEL_NAME".."-46",
+		"INVALID_KERNEL_DEFINITION".."-47",
+		"INVALID_KERNEL".."-48",
+		"INVALID_ARG_INDEX".."-49",
+		"INVALID_ARG_VALUE".."-50",
+		"INVALID_ARG_SIZE".."-51",
+		"INVALID_KERNEL_ARGS".."-52",
+		"INVALID_WORK_DIMENSION".."-53",
+		"INVALID_WORK_GROUP_SIZE".."-54",
+		"INVALID_WORK_ITEM_SIZE".."-55",
+		"INVALID_GLOBAL_OFFSET".."-56",
+		"INVALID_EVENT_WAIT_LIST".."-57",
+		"INVALID_EVENT".."-58",
+		"INVALID_OPERATION".."-59",
+		"INVALID_BUFFER_SIZE".."-61",
+		"INVALID_GLOBAL_WORK_SIZE".."-63"
 	)
 
 	IntConstant(
 		"OpenCL Version",
 
-		"VERSION_1_0"..1
+		"VERSION_1_0".."1"
 	)
 
 	IntConstant(
 		"cl_bool",
 
-		"FALSE"..0,
-		"TRUE"..1
+		"FALSE".."0",
+		"TRUE".."1"
 	)
 
 	val PlatformInfo = IntConstant(
@@ -195,10 +195,10 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	val DeviceTypes = IntConstant(
 		"cl_device_type - bitfield",
 
-		"DEVICE_TYPE_DEFAULT" expr "1 << 0",
-		"DEVICE_TYPE_CPU" expr "1 << 1",
-		"DEVICE_TYPE_GPU" expr "1 << 2",
-		"DEVICE_TYPE_ACCELERATOR" expr "1 << 3",
+		"DEVICE_TYPE_DEFAULT".."1 << 0",
+		"DEVICE_TYPE_CPU".."1 << 1",
+		"DEVICE_TYPE_GPU".."1 << 2",
+		"DEVICE_TYPE_ACCELERATOR".."1 << 3",
 		"DEVICE_TYPE_ALL"..0xFFFFFFFF.i
 	).javaDocLinks + " CL12#DEVICE_TYPE_CUSTOM"
 
@@ -275,12 +275,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	IntConstant(
 		"cl_device_fp_config - bitfield",
 
-		"FP_DENORM" expr "1 << 0",
-		"FP_INF_NAN" expr "1 << 1",
-		"FP_ROUND_TO_NEAREST" expr "1 << 2",
-		"FP_ROUND_TO_ZERO" expr "1 << 3",
-		"FP_ROUND_TO_INF" expr "1 << 4",
-		"FP_FMA" expr "1 << 5"
+		"FP_DENORM".."1 << 0",
+		"FP_INF_NAN".."1 << 1",
+		"FP_ROUND_TO_NEAREST".."1 << 2",
+		"FP_ROUND_TO_ZERO".."1 << 3",
+		"FP_ROUND_TO_INF".."1 << 4",
+		"FP_FMA".."1 << 5"
 	)
 
 	IntConstant(
@@ -301,15 +301,15 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	IntConstant(
 		"cl_device_exec_capabilities - bitfield",
 
-		"EXEC_KERNEL" expr "1 << 0",
-		"EXEC_NATIVE_KERNEL" expr "1 << 1"
+		"EXEC_KERNEL".."1 << 0",
+		"EXEC_NATIVE_KERNEL".."1 << 1"
 	)
 
 	val CommandQueueProperties = IntConstant(
 		"cl_command_queue_properties - bitfield",
 
-		"QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE" expr "1 << 0",
-		"QUEUE_PROFILING_ENABLE" expr "1 << 1"
+		"QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE".."1 << 0",
+		"QUEUE_PROFILING_ENABLE".."1 << 1"
 	).javaDocLinks + " CL20#QUEUE_ON_DEVICE CL20#QUEUE_ON_DEVICE_DEFAULT"
 
 	val ContextInfo = IntConstant(
@@ -340,12 +340,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	val MemFlags = IntConstant(
 		"cl_mem_flags - bitfield",
 
-		"MEM_READ_WRITE" expr "1 << 0",
-		"MEM_WRITE_ONLY" expr "1 << 1",
-		"MEM_READ_ONLY" expr "1 << 2",
-		"MEM_USE_HOST_PTR" expr "1 << 3",
-		"MEM_ALLOC_HOST_PTR" expr "1 << 4",
-		"MEM_COPY_HOST_PTR" expr "1 << 5"
+		"MEM_READ_WRITE".."1 << 0",
+		"MEM_WRITE_ONLY".."1 << 1",
+		"MEM_READ_ONLY".."1 << 2",
+		"MEM_USE_HOST_PTR".."1 << 3",
+		"MEM_ALLOC_HOST_PTR".."1 << 4",
+		"MEM_COPY_HOST_PTR".."1 << 5"
 	).javaDocLinks + " CL12#MEM_HOST_WRITE_ONLY CL12#MEM_HOST_READ_ONLY CL12#MEM_HOST_NO_ACCESS"
 
 	IntConstant(
@@ -444,8 +444,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	val MapFlags = IntConstant(
 		"cl_map_flags - bitfield",
 
-		"MAP_READ" expr "1 << 0",
-		"MAP_WRITE" expr "1 << 1"
+		"MAP_READ".."1 << 0",
+		"MAP_WRITE".."1 << 1"
 	).javaDocLinks + " CL12#MAP_WRITE_INVALIDATE_REGION"
 
 	val ProgramInfo = IntConstant(
@@ -471,10 +471,10 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	IntConstant(
 		"cl_build_status",
 
-		"BUILD_SUCCESS"..0,
-		"BUILD_NONE"..-1,
-		"BUILD_ERROR"..-2,
-		"BUILD_IN_PROGRESS"..-3
+		"BUILD_SUCCESS".."0",
+		"BUILD_NONE".."-1",
+		"BUILD_ERROR".."-2",
+		"BUILD_IN_PROGRESS".."-3"
 	)
 
 	val KernelInfo = IntConstant(

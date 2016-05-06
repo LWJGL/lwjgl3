@@ -13,14 +13,14 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 	IntConstant(
 		"OpenCL Version.",
 
-		"VERSION_2_0"..1
+		"VERSION_2_0".."1"
 	)
 
 	IntConstant(
 		"Error Codes",
 
-		"INVALID_PIPE_SIZE" expr "-69",
-		"INVALID_DEVICE_QUEUE" expr "-70"
+		"INVALID_PIPE_SIZE".."-69",
+		"INVALID_DEVICE_QUEUE".."-70"
 	)
 
 	IntConstant(
@@ -47,17 +47,17 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 	IntConstant(
 		"cl_command_queue_properties",
 
-		"QUEUE_ON_DEVICE" expr "1 << 2",
-		"QUEUE_ON_DEVICE_DEFAULT" expr "1 << 3"
+		"QUEUE_ON_DEVICE".."1 << 2",
+		"QUEUE_ON_DEVICE_DEFAULT".."1 << 3"
 	)
 
 	IntConstant(
 		"cl_device_svm_capabilities",
 
-		"DEVICE_SVM_COARSE_GRAIN_BUFFER" expr "1 << 0",
-		"DEVICE_SVM_FINE_GRAIN_BUFFER" expr "1 << 1",
-		"DEVICE_SVM_FINE_GRAIN_SYSTEM" expr "1 << 2",
-		"DEVICE_SVM_ATOMICS" expr "1 << 3"
+		"DEVICE_SVM_COARSE_GRAIN_BUFFER".."1 << 0",
+		"DEVICE_SVM_FINE_GRAIN_BUFFER".."1 << 1",
+		"DEVICE_SVM_FINE_GRAIN_SYSTEM".."1 << 2",
+		"DEVICE_SVM_ATOMICS".."1 << 3"
 	)
 
 	IntConstant(
@@ -69,8 +69,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 	IntConstant(
 		"cl_svm_mem_flags",
 
-		"MEM_SVM_FINE_GRAIN_BUFFER" expr "1 << 10",
-		"MEM_SVM_ATOMICS" expr "1 << 11"
+		"MEM_SVM_FINE_GRAIN_BUFFER".."1 << 10",
+		"MEM_SVM_ATOMICS".."1 << 11"
 	)
 
 	IntConstant(
@@ -119,7 +119,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 	IntConstant(
 		"cl_kernel_arg_type_qualifier",
 
-		"KERNEL_ARG_TYPE_PIPE" expr "1 << 3"
+		"KERNEL_ARG_TYPE_PIPE".."1 << 3"
 	)
 
 	val cl_kernel_exec_infos = IntConstant(

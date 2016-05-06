@@ -71,7 +71,7 @@ val ext_device_fission = "EXTDeviceFission".nativeClassCL("ext_device_fission", 
 	IntConstant(
 		"Accepted as the partition names list terminator in the {@code properties} parameter of clCreateSubDeviceEXT.",
 
-		"PARTITION_BY_NAMES_LIST_END_EXT" expr "-1"
+		"PARTITION_BY_NAMES_LIST_END_EXT".."-1"
 	)
 
 	IntConstant(
@@ -80,7 +80,7 @@ val ext_device_fission = "EXTDeviceFission".nativeClassCL("ext_device_fission", 
 		partition the device in this way.
 		""",
 
-		"DEVICE_PARTITION_FAILED_EXT" expr "-1057"
+		"DEVICE_PARTITION_FAILED_EXT".."-1057"
 	)
 
 	IntConstant(
@@ -89,13 +89,13 @@ val ext_device_fission = "EXTDeviceFission".nativeClassCL("ext_device_fission", 
 		for any one sub-device is less than 1.
 		""",
 
-		"INVALID_PARTITION_COUNT_EXT" expr "-1058"
+		"INVALID_PARTITION_COUNT_EXT".."-1058"
 	)
 
 	IntConstant(
 		"Returned by clCreateSubDevicesEXT when a compute unit name appearing in a name list following CL_DEVICE_PARTITION_BY_NAMES_EXT is not in range.",
 
-		"INVALID_PARTITION_NAME_EXT" expr "-1059"
+		"INVALID_PARTITION_NAME_EXT".."-1059"
 	)
 
 	cl_int(

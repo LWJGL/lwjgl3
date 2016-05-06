@@ -21,7 +21,7 @@ val khr_egl_event = dependsOn(Binding.EGL) {
 		IntConstant(
 			"Returned by clCreateEventFromEGLSyncKHR if sync is not a valid EGLSyncKHR handle created with respect to EGLDisplay display.",
 
-			"INVALID_EGL_OBJECT_KHR" expr "-1093"
+			"INVALID_EGL_OBJECT_KHR".."-1093"
 		)
 
 		IntConstant(

@@ -64,7 +64,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 		devices against which the context is to be created.
 		""",
 
-		"INVALID_VA_API_MEDIA_ADAPTER_INTEL" expr "-1098"
+		"INVALID_VA_API_MEDIA_ADAPTER_INTEL".."-1098"
 	)
 
 	IntConstant(
@@ -74,19 +74,19 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 		{@code param_name} is #IMAGE_VA_API_PLANE_INTEL and {@code image} was not created from a VA API surface.
 		""",
 
-		"INVALID_VA_API_MEDIA_SURFACE_INTEL" expr "-1099"
+		"INVALID_VA_API_MEDIA_SURFACE_INTEL".."-1099"
 	)
 
 	IntConstant(
 		"Returned by #EnqueueAcquireVA_APIMediaSurfacesINTEL() when any of {@code mem_objects} are currently acquired by OpenCL.",
 
-		"VA_API_MEDIA_SURFACE_ALREADY_ACQUIRED_INTEL" expr "-1100"
+		"VA_API_MEDIA_SURFACE_ALREADY_ACQUIRED_INTEL".."-1100"
 	)
 
 	IntConstant(
 		"Returned by #EnqueueReleaseVA_APIMediaSurfacesINTEL() when any of {@code mem_objects} are not currently acquired by OpenCL.",
 
-		"VA_API_MEDIA_SURFACE_NOT_ACQUIRED_INTEL" expr "-1101"
+		"VA_API_MEDIA_SURFACE_NOT_ACQUIRED_INTEL".."-1101"
 	)
 
 	cl_int(

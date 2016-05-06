@@ -19,8 +19,8 @@ val khr_egl_image = dependsOn(Binding.EGL) {
 		IntConstant(
 			"Error Codes",
 
-			"EGL_RESOURCE_NOT_ACQUIRED_KHR" expr "-1092",
-			"INVALID_EGL_OBJECT_KHR" expr "-1093"
+			"EGL_RESOURCE_NOT_ACQUIRED_KHR".."-1092",
+			"INVALID_EGL_OBJECT_KHR".."-1093"
 		)
 
 		IntConstant(

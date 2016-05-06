@@ -20,7 +20,7 @@ val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", postfi
 	IntConstant(
 		"The extension specification version.",
 
-		"KHR_XLIB_SURFACE_SPEC_VERSION" expr "6"
+		"KHR_XLIB_SURFACE_SPEC_VERSION".."6"
 	)
 
 	StringConstant(
@@ -32,7 +32,7 @@ val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", postfi
 	IntConstant(
 		"VkStructureType",
 
-		"STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR" expr "1000004000"
+		"STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR".."1000004000"
 	)
 
 	VkResult(

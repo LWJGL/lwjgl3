@@ -34,9 +34,9 @@ val INTEL_map_texture = "INTELMapTexture".nativeClassGL("INTEL_map_texture", pos
 	IntConstant(
 		"Accepted by the {@code params} when {@code pname} is set to {@code TEXTURE_MEMORY_LAYOUT_INTEL}.",
 
-		"LAYOUT_DEFAULT_INTEL"..0,
-		"LAYOUT_LINEAR_INTEL"..1,
-		"LAYOUT_LINEAR_CPU_CACHED_INTEL"..2
+		"LAYOUT_DEFAULT_INTEL".."0",
+		"LAYOUT_LINEAR_INTEL".."1",
+		"LAYOUT_LINEAR_CPU_CACHED_INTEL".."2"
 	)
 
 	void(

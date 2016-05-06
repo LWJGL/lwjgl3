@@ -608,9 +608,9 @@ int main(int arg, char **argv)
 	ByteConstant(
 		"Vertex type.",
 
-		"vmove" expr "1",
-		"vline" expr "2",
-		"vcurve" expr "3"
+		"vmove".."1",
+		"vline".."2",
+		"vcurve".."3"
 	)
 
 	int(
@@ -886,52 +886,52 @@ int main(int arg, char **argv)
 	val StyleFlags = IntConstant(
 		"Style flags, use in #FindMatchingFont().",
 
-		"MACSTYLE_DONTCARE"..0,
-		"MACSTYLE_BOLD"..1,
-		"MACSTYLE_ITALIC"..2,
-		"MACSTYLE_UNDERSCORE"..4,
-		"MACSTYLE_NONE"..8
+		"MACSTYLE_DONTCARE".."0",
+		"MACSTYLE_BOLD".."1",
+		"MACSTYLE_ITALIC".."2",
+		"MACSTYLE_UNDERSCORE".."4",
+		"MACSTYLE_NONE".."8"
 	).javaDocLinks
 
 	val PlatformIDs = IntConstant(
 		"Platform IDs.",
 
-		"PLATFORM_ID_UNICODE"..0,
-		"PLATFORM_ID_MAC"..1,
-		"PLATFORM_ID_ISO"..2,
-		"PLATFORM_ID_MICROSOFT"..3
+		"PLATFORM_ID_UNICODE".."0",
+		"PLATFORM_ID_MAC".."1",
+		"PLATFORM_ID_ISO".."2",
+		"PLATFORM_ID_MICROSOFT".."3"
 	).javaDocLinks
 
 	val EncodingIDsUnicode = IntConstant(
 		"Encoding IDs for #PLATFORM_ID_UNICODE.",
 
-		"UNICODE_EID_UNICODE_1_0"..0,
-		"UNICODE_EID_UNICODE_1_1"..1,
-		"UNICODE_EID_ISO_10646"..2,
-		"UNICODE_EID_UNICODE_2_0_BMP"..3,
-		"UNICODE_EID_UNICODE_2_0_FULL"..4
+		"UNICODE_EID_UNICODE_1_0".."0",
+		"UNICODE_EID_UNICODE_1_1".."1",
+		"UNICODE_EID_ISO_10646".."2",
+		"UNICODE_EID_UNICODE_2_0_BMP".."3",
+		"UNICODE_EID_UNICODE_2_0_FULL".."4"
 	).javaDocLinks
 
 	val EncodingIDsMicrosoft = IntConstant(
 		"Encoding IDs for #PLATFORM_ID_MICROSOFT.",
 
-		"MS_EID_SYMBOL"..0,
-		"MS_EID_UNICODE_BMP"..1,
-		"MS_EID_SHIFTJIS"..2,
-		"MS_EID_UNICODE_FULL"..10
+		"MS_EID_SYMBOL".."0",
+		"MS_EID_UNICODE_BMP".."1",
+		"MS_EID_SHIFTJIS".."2",
+		"MS_EID_UNICODE_FULL".."10"
 	).javaDocLinks
 
 	val EncodingIDsMac = IntConstant(
 		"Encoding IDs for #PLATFORM_ID_MAC.",
 
-		"MAC_EID_ROMAN"..0,
-		"MAC_EID_JAPANESE"..1,
-		"MAC_EID_CHINESE_TRAD"..2,
-		"MAC_EID_KOREAN"..3,
-		"MAC_EID_ARABIC"..4,
-		"MAC_EID_HEBREW"..5,
-		"MAC_EID_GREEK"..6,
-		"MAC_EID_RUSSIAN"..7
+		"MAC_EID_ROMAN".."0",
+		"MAC_EID_JAPANESE".."1",
+		"MAC_EID_CHINESE_TRAD".."2",
+		"MAC_EID_KOREAN".."3",
+		"MAC_EID_ARABIC".."4",
+		"MAC_EID_HEBREW".."5",
+		"MAC_EID_GREEK".."6",
+		"MAC_EID_RUSSIAN".."7"
 	).javaDocLinks
 
 	val LanguageIDsMicrosoft = IntConstant(
@@ -954,20 +954,20 @@ int main(int arg, char **argv)
 	val LanguageIDsMac = IntConstant(
 		"Language ID for #PLATFORM_ID_MAC.",
 
-		"MAC_LANG_ENGLISH"..0,
-		"MAC_LANG_ARABIC"..12,
-		"MAC_LANG_DUTCH"..4,
-		"MAC_LANG_FRENCH"..1,
-		"MAC_LANG_GERMAN"..2,
-		"MAC_LANG_HEBREW"..10,
-		"MAC_LANG_ITALIAN"..3,
-		"MAC_LANG_JAPANESE"..11,
-		"MAC_LANG_KOREAN"..23,
-		"MAC_LANG_RUSSIAN"..32,
-		"MAC_LANG_SPANISH"..6,
-		"MAC_LANG_SWEDISH"..5,
-		"MAC_LANG_CHINESE_SIMPLIFIED"..33,
-		"MAC_LANG_CHINESE_TRAD"..19
+		"MAC_LANG_ENGLISH".."0",
+		"MAC_LANG_ARABIC".."12",
+		"MAC_LANG_DUTCH".."4",
+		"MAC_LANG_FRENCH".."1",
+		"MAC_LANG_GERMAN".."2",
+		"MAC_LANG_HEBREW".."10",
+		"MAC_LANG_ITALIAN".."3",
+		"MAC_LANG_JAPANESE".."11",
+		"MAC_LANG_KOREAN".."23",
+		"MAC_LANG_RUSSIAN".."32",
+		"MAC_LANG_SPANISH".."6",
+		"MAC_LANG_SWEDISH".."5",
+		"MAC_LANG_CHINESE_SIMPLIFIED".."33",
+		"MAC_LANG_CHINESE_TRAD".."19"
 	).javaDocLinks
 
 	int(

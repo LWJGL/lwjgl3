@@ -38,7 +38,7 @@ val KHR_stream_cross_process_fd = "KHRStreamCrossProcessFD".nativeClassEGL("KHR_
 	IntConstant(
 		"",
 
-		"NO_FILE_DESCRIPTOR_KHR" expr "-1"
+		"NO_FILE_DESCRIPTOR_KHR".."-1"
 	)
 
 	EGLNativeFileDescriptorKHR(

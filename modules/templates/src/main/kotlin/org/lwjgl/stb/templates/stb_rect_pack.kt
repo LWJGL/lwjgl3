@@ -27,7 +27,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 		"Packing heuristics",
 
 		"HEURISTIC_Skyline_default".enum,
-		"HEURISTIC_Skyline_BL_sortHeight" expr "STBRP_HEURISTIC_Skyline_default",
+		"HEURISTIC_Skyline_BL_sortHeight".."STBRP_HEURISTIC_Skyline_default",
 		"HEURISTIC_Skyline_BF_sortHeight".enum
 	)
 

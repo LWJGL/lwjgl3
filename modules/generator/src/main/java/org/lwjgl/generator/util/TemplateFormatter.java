@@ -288,12 +288,12 @@ public class TemplateFormatter {
 						builder.append("\"..");
 						builder.append(intValue);
 					} else {
-						builder.append("\" expr \"");
+						builder.append("\"..\"");
 						builder.append(intValue);
 						builder.append("\"");
 					}
 				} catch (NumberFormatException e) {
-					builder.append("\" expr \"");
+					builder.append("\"..\"");
 					builder.append(value.charAt(0) == '(' ? value.substring(1, value.length() - 1) : value);
 					builder.append("\"");
 				}
