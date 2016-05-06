@@ -55,7 +55,7 @@ License terms: http://lwjgl.org/license.php
 		<element name="arguments"/>
 		<sequential>
 			<apply dir="${bin.native}" executable="${compiler}" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-				<arg line="-c -std=c11 -ObjC -O3 -fPIC ${warnings} -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
+				<arg line="-c -std=c11 -ObjC -O3 -flto -fPIC ${warnings} -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
 
 				<arg value="-I${jni.headers}"/>
 				<arg value="-I${jni.headers}/darwin"/>
@@ -164,7 +164,7 @@ License terms: http://lwjgl.org/license.php
 	<target name="-link" depends="-update-dependencies">
 		<apply executable="${compiler}" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/${LWJGL_LIBRARY}'/>
+			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/${LWJGL_LIBRARY} -O3 -flto -fPIC'/>
 			<arg line="-framework Foundation" unless:true="${binding.nfd}"/>
 			<arg line="-framework AppKit" if:true="${binding.nfd}"/>
 
