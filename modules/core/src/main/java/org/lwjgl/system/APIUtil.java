@@ -329,7 +329,14 @@ public final class APIUtil {
 
 	// ----------------------------------------
 
-	/** Ensures space for an additional pointer buffer, sets the specified memory addresses and returns the address offset. */
+	/**
+	 * Stores the specified array of pointer addresses on the specified {@link MemoryStack}.
+	 *
+	 * @param stack     the stack to use
+	 * @param addresses the pointer addresses to store
+	 *
+	 * @return the pointer array address on the stack
+	 */
 	public static long apiArray(MemoryStack stack, long... addresses) {
 		PointerBuffer pointers = stack.mallocPointer(addresses.length);
 
@@ -340,6 +347,15 @@ public final class APIUtil {
 	}
 
 	/** Ensures space for an additional pointer buffer, sets the memory addresses of the specified buffers and returns the address offset. */
+
+	/**
+	 * Stores the addresses of the specified array of buffers on the specified {@link MemoryStack}.
+	 *
+	 * @param stack   the stack to use
+	 * @param buffers the buffers to store
+	 *
+	 * @return the pointer array address on the stack
+	 */
 	public static long apiArray(MemoryStack stack, ByteBuffer... buffers) {
 		PointerBuffer pointers = stack.mallocPointer(buffers.length);
 
@@ -350,206 +366,112 @@ public final class APIUtil {
 	}
 
 	/**
-	 * Ensures space for two additional pointer buffers, sets the memory addresses and remaining bytes of the specified buffers and returns the address
-	 * offset.
+	 * Stores the addresses of the specified array of buffers on the specified {@link MemoryStack}. A second array that contains the buffer remaining bytes is
+	 * stored immediately after the pointer array. Length values are pointer-sized integers.
+	 *
+	 * @param stack   the stack to use
+	 * @param buffers the buffers to store
+	 *
+	 * @return the pointer array address on the stack
 	 */
 	public static long apiArrayp(MemoryStack stack, ByteBuffer... buffers) {
 		long pointers = apiArray(stack, buffers);
 
 		PointerBuffer lengths = stack.mallocPointer(buffers.length);
-
 		for ( ByteBuffer buffer : buffers )
 			lengths.put(buffer.remaining());
 
 		return pointers;
 	}
 
+	// ----------------------------------------
+
+	public interface Encoder {
+		ByteBuffer encode(CharSequence text, boolean nullTerminated);
+	}
+
+	/**
+	 * Encodes the specified strings with the specified {@link Encoder} and stores an array of pointers to the encoded data on the specified
+	 * {@link MemoryStack}. The encoded strings include null-termination.
+	 *
+	 * @param stack   the stack to use
+	 * @param encoder the encoder to use
+	 * @param strings the strings to encode
+	 *
+	 * @return the pointer array address on the stack
+	 */
+	public static long apiArray(MemoryStack stack, Encoder encoder, CharSequence... strings) {
+		PointerBuffer pointers = stack.mallocPointer(strings.length);
+
+		for ( CharSequence s : strings )
+			pointers.put(encoder.encode(s, true));
+
+		return memAddress0(pointers);
+	}
+
+	/**
+	 * Encodes the specified strings with the specified {@link Encoder} and stores an array of pointers to the encoded data on the specified
+	 * {@link MemoryStack}. A second array that contains the string lengths is stored immediately after the pointer array. Length values are 4-byte integers.
+	 *
+	 * <p>The encoded buffers must be freed with {@link #apiArrayFree}.</p>
+	 *
+	 * @param stack   the stack to use
+	 * @param encoder the encoder to use
+	 * @param strings the strings to encode
+	 *
+	 * @return the pointer array address on the stack
+	 */
+	public static long apiArrayi(MemoryStack stack, Encoder encoder, CharSequence... strings) {
+		// Alignment rules guarantee these two will be contiguous
+		PointerBuffer pointers = stack.mallocPointer(strings.length);
+		IntBuffer lengths = stack.mallocInt(strings.length);
+
+		for ( CharSequence s : strings ) {
+			ByteBuffer buffer = encoder.encode(s, false);
+
+			pointers.put(buffer);
+			lengths.put(buffer.capacity());
+		}
+
+		return memAddress0(pointers);
+	}
+
+	/**
+	 * Encodes the specified strings with the specified {@link Encoder} and stores an array of pointers to the encoded data on the specified
+	 * {@link MemoryStack}. A second array that contains the string lengths is stored immediately after the pointer array. Length values are pointer-sized
+	 * integers.
+	 *
+	 * <p>The encoded buffers must be freed with {@link #apiArrayFree}.</p>
+	 *
+	 * @param stack   the stack to use
+	 * @param encoder the encoder to use
+	 * @param strings the strings to encode
+	 *
+	 * @return the pointer array address on the stack
+	 */
+	public static long apiArrayp(MemoryStack stack, Encoder encoder, CharSequence... strings) {
+		PointerBuffer pointers = stack.mallocPointer(strings.length);
+		PointerBuffer lengths = stack.mallocPointer(strings.length);
+
+		for ( CharSequence s : strings ) {
+			ByteBuffer buffer = encoder.encode(s, false);
+
+			pointers.put(buffer);
+			lengths.put(buffer.capacity());
+		}
+
+		return memAddress0(pointers);
+	}
+
+	/**
+	 * Frees the specified array of pointers.
+	 *
+	 * @param pointers the pointer array to free
+	 * @param length   the pointer array length
+	 */
 	public static void apiArrayFree(long pointers, int length) {
 		for ( int i = 0; i < length; i++ )
 			nmemFree(memGetAddress(pointers + (i << POINTER_SHIFT)));
-	}
-
-	// ----------------------------------------
-
-	/**
-	 * ASCII encodes the specified strings with a null-terminator and ensures space for a buffer filled with the memory addresses of the encoded strings.
-	 *
-	 * @return the buffer address
-	 */
-	public static long apiArrayASCII(MemoryStack stack, CharSequence... strings) {
-		PointerBuffer pointers = stack.mallocPointer(strings.length);
-
-		for ( CharSequence s : strings )
-			pointers.put(memASCII(s));
-
-		return memAddress0(pointers);
-	}
-
-	/**
-	 * ASCII encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
-	 * respectively. The lengths are 4-bytes integers and the memory address buffer starts immediately after the lengths buffer.
-	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
-	 *
-	 * @return the offset to the lengths buffer
-	 */
-	public static long apiArrayASCIIi(MemoryStack stack, CharSequence... strings) {
-		// Alignment rules guarantee these two will be contiguous
-		PointerBuffer pointers = stack.mallocPointer(strings.length);
-		IntBuffer lengths = stack.mallocInt(strings.length);
-
-		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memASCII(s, false);
-
-			pointers.put(buffer);
-			lengths.put(buffer.capacity());
-		}
-
-		return memAddress0(pointers);
-	}
-
-	/**
-	 * ASCII encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
-	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
-	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
-	 *
-	 * @return the offset to the lengths buffer
-	 */
-	public static long apiArrayASCIIp(MemoryStack stack, CharSequence... strings) {
-		PointerBuffer pointers = stack.mallocPointer(strings.length);
-		PointerBuffer lengths = stack.mallocPointer(strings.length);
-
-		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memASCII(s, false);
-
-			pointers.put(buffer);
-			lengths.put(buffer.capacity());
-		}
-
-		return memAddress0(pointers);
-	}
-
-	/**
-	 * UTF8 encodes the specified strings with a null-terminator and ensures space for a buffer filled with the memory addresses of the encoded strings.
-	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
-	 *
-	 * @return the offset to the memory address buffer
-	 */
-	public static long apiArrayUTF8(MemoryStack stack, CharSequence... strings) {
-		PointerBuffer pointers = stack.mallocPointer(strings.length);
-
-		for ( CharSequence s : strings )
-			pointers.put(memUTF8(s));
-
-		return memAddress0(pointers);
-	}
-
-	/**
-	 * UTF8 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
-	 * respectively. The lengths are 4-bytes integers and the memory address buffer starts immediately after the lengths buffer.
-	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
-	 *
-	 * @return the offset to the lengths buffer
-	 */
-	public static long apiArrayUTF8i(MemoryStack stack, CharSequence... strings) {
-		// Alignment rules guarantee these two will be contiguous
-		PointerBuffer pointers = stack.mallocPointer(strings.length);
-		IntBuffer lengths = stack.mallocInt(strings.length);
-
-		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memUTF8(s, false);
-
-			pointers.put(buffer);
-			lengths.put(buffer.capacity());
-		}
-
-		return memAddress0(pointers);
-	}
-
-	/**
-	 * UTF8 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
-	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
-	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
-	 *
-	 * @return the offset to the lengths buffer
-	 */
-	public static long apiArrayUTF8p(MemoryStack stack, CharSequence... strings) {
-		PointerBuffer pointers = stack.mallocPointer(strings.length);
-		PointerBuffer lengths = stack.mallocPointer(strings.length);
-
-		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memUTF8(s, false);
-
-			pointers.put(buffer);
-			lengths.put(buffer.capacity());
-		}
-
-		return memAddress0(pointers);
-	}
-
-	/**
-	 * UTF16 encodes the specified strings with a null-terminator and ensures space for a buffer filled with the memory addresses of the encoded strings.
-	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
-	 *
-	 * @return the offset to the memory address buffer
-	 */
-	public static long apiArrayUTF16(MemoryStack stack, CharSequence... strings) {
-		PointerBuffer pointers = stack.mallocPointer(strings.length);
-
-		for ( CharSequence s : strings )
-			pointers.put(memUTF16(s));
-
-		return memAddress0(pointers);
-	}
-
-	/**
-	 * UTF16 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
-	 * respectively. The lengths are 4-bytes integers and the memory address buffer starts immediately after the lengths buffer.
-	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
-	 *
-	 * @return the offset to the lengths buffer
-	 */
-	public static long apiArrayUTF16i(MemoryStack stack, CharSequence... strings) {
-		// Alignment rules guarantee these two will be contiguous
-		PointerBuffer pointers = stack.mallocPointer(strings.length);
-		IntBuffer lengths = stack.mallocInt(strings.length);
-
-		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memUTF16(s, false);
-
-			pointers.put(buffer);
-			lengths.put(buffer.capacity());
-		}
-
-		return memAddress0(pointers);
-	}
-
-	/**
-	 * UTF16 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
-	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
-	 *
-	 * <p>The encoded buffers must be later freed with {@link #apiArrayFree}.</p>
-	 *
-	 * @return the offset to the lengths buffer
-	 */
-	public static long apiArrayUTF16p(MemoryStack stack, CharSequence... strings) {
-		PointerBuffer pointers = stack.mallocPointer(strings.length);
-		PointerBuffer lengths = stack.mallocPointer(strings.length);
-
-		for ( CharSequence s : strings ) {
-			ByteBuffer buffer = memUTF16(s, false);
-
-			pointers.put(buffer);
-			lengths.put(buffer.capacity());
-		}
-
-		return memAddress0(pointers);
 	}
 
 	// ----------------------------------------
