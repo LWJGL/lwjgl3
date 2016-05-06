@@ -201,9 +201,7 @@ public final class GLES {
 
 			int errorCode = invokeI(GetError);
 			if ( errorCode != GL_NO_ERROR )
-				apiLog(
-					"An OpenGL ES context was in an error state before the creation of its capabilities instance. Error: " + GLESUtil.getErrorString(errorCode)
-				);
+				apiLog(String.format("An OpenGL ES context was in an error state before the creation of its capabilities instance. Error: [0x%X]", errorCode));
 
 			int majorVersion;
 			int minorVersion;

@@ -1954,10 +1954,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	private static long getMemObjectInfoPointer(long cl_mem, int param_name) {
 		try ( MemoryStack stack = stackPush() ) {
 			PointerBuffer pp = stack.pointers(0);
-			int errcode = clGetMemObjectInfo(cl_mem, param_name, pp, null);
-			if ( DEBUG )
-				CLUtil.checkCLError(errcode);
-			return pp.get(0);
+			return clGetMemObjectInfo(cl_mem, param_name, pp, null) == CL_SUCCESS ? pp.get(0) : NULL;
 		}
 	}
 	""")

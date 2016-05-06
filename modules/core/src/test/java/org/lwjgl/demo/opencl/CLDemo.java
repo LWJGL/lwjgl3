@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL11.*;
-import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.InfoUtil.*;
 import static org.lwjgl.opencl.KHRICD.*;
 import static org.lwjgl.system.MemoryStack.*;

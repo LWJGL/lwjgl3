@@ -14,11 +14,11 @@ import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.util.List;
 
+import static org.lwjgl.demo.openal.OpenALInfo.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.ALC11.*;
-import static org.lwjgl.openal.ALUtil.*;
 import static org.lwjgl.stb.STBVorbis.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.testng.Assert.*;
@@ -44,7 +44,7 @@ public final class ALCDemo {
 		if ( deviceCaps.OpenALC11 ) {
 			List<String> devices = ALUtil.getStringList(NULL, ALC_ALL_DEVICES_SPECIFIER);
 			if ( devices == null )
-				ALUtil.checkALCError(NULL);
+				checkALCError(NULL);
 			else {
 				for ( int i = 0; i < devices.size(); i++ )
 					System.out.println(i + ": " + devices.get(i));

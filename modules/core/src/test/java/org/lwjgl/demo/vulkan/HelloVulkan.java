@@ -304,7 +304,7 @@ public final class HelloVulkan {
 
 	private static void check(int errcode) {
 		if ( errcode != 0 )
-			throw new IllegalStateException(VKUtil.translateVulkanResult(errcode));
+			throw new IllegalStateException(String.format("Vulkan error [0x%X]", errcode));
 	}
 
 	private static void demo_init_connection() {

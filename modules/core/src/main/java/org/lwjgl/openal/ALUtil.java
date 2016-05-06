@@ -8,7 +8,6 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -16,30 +15,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 public final class ALUtil {
 
 	private ALUtil() {
-	}
-
-	/**
-	 * Checks for ALC errors in the specified device.
-	 *
-	 * @param device an OpenAL device handle, or {@code NULL}
-	 *
-	 * @throws RuntimeException if {@link ALC10#alcGetError GetError} returns anything other than {@link ALC10#ALC_NO_ERROR NO_ERROR}
-	 */
-	public static void checkALCError(long device) {
-		int err = alcGetError(device);
-		if ( err != ALC_NO_ERROR )
-			throw new RuntimeException(alcGetString(device, err));
-	}
-
-	/**
-	 * Checks for Open AL errors.
-	 *
-	 * @throws RuntimeException if {@link AL10#alGetError GetError} returns anything other than {@link AL10#AL_NO_ERROR NO_ERROR}
-	 */
-	public static void checkALError() {
-		int err = alGetError();
-		if ( err != AL_NO_ERROR )
-			throw new RuntimeException(alGetString(err));
 	}
 
 	/**

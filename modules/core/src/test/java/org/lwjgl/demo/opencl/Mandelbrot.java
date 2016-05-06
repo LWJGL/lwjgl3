@@ -30,7 +30,6 @@ import static org.lwjgl.glfw.GLFWNativeWGL.*;
 import static org.lwjgl.glfw.GLFWNativeX11.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
-import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.InfoUtil.*;
 import static org.lwjgl.opencl.KHRGLSharing.*;
 import static org.lwjgl.opengl.ARBCLEvent.*;

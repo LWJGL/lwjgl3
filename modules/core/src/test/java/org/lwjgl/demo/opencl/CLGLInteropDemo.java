@@ -18,9 +18,7 @@ import java.util.concurrent.CyclicBarrier;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opencl.CL10.*;
-import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.InfoUtil.*;
-import static org.lwjgl.opencl.InfoUtil.getPlatformInfoStringASCII;
 import static org.lwjgl.opencl.KHRICD.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;

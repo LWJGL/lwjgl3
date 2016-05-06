@@ -12,7 +12,6 @@ import java.nio.IntBuffer;
 import java.nio.LongBuffer;
 
 import static org.lwjgl.opencl.CL10.*;
-import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -120,6 +119,15 @@ public final class InfoUtil {
 
 			return memASCII(buffer, bytes - 1);
 		}
+	}
+
+	public static void checkCLError(IntBuffer errcode) {
+		checkCLError(errcode.get(errcode.position()));
+	}
+
+	public static void checkCLError(int errcode) {
+		if ( errcode != CL_SUCCESS )
+			throw new RuntimeException(String.format("OpenCL error [0x%X]", errcode));
 	}
 
 }

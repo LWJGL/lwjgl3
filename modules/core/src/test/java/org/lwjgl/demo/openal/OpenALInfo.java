@@ -27,14 +27,13 @@ public class OpenALInfo {
 	public OpenALInfo() {
 	}
 
-	/** Runs the actual test, using supplied arguments */
-	protected void execute(String[] args) {
+	public static void main(String[] args) {
 		long device = alcOpenDevice(args.length == 0 ? null : args[0]);
 
 		ALCCapabilities deviceCaps = ALC.createCapabilities(device);
 
 		long alContext = alcCreateContext(device, (IntBuffer)null);
-		ALUtil.checkALCError(device);
+		checkALCError(device);
 
 		alcMakeContextCurrent(alContext);
 		ALCapabilities contextCaps = AL.createCapabilities(deviceCaps);
@@ -71,13 +70,13 @@ public class OpenALInfo {
 
 		int majorVersion = alcGetInteger(device, ALC_MAJOR_VERSION);
 		int minorVersion = alcGetInteger(device, ALC_MINOR_VERSION);
-		ALUtil.checkALCError(device);
+		checkALCError(device);
 
 		System.out.println("ALC version: " + majorVersion + "." + minorVersion);
 
 		System.out.println("ALC extensions:");
 		String[] extensions = alcGetString(device, ALC_EXTENSIONS).split(" ");
-		ALUtil.checkALCError(device);
+		checkALCError(device);
 		for ( String extension : extensions ) {
 			if ( extension.trim().isEmpty() ) {
 				continue;
@@ -98,7 +97,7 @@ public class OpenALInfo {
 			}
 			System.out.println("    " + extension);
 		}
-		ALUtil.checkALError();
+		checkALError();
 	}
 
 	private static void printEFXInfo(long device) {
@@ -152,15 +151,16 @@ public class OpenALInfo {
 		}
 	}
 
-	/**
-	 * main entry point
-	 *
-	 * @param args String array containing arguments
-	 */
-	public static void main(String[] args) {
-		OpenALInfo openalInfo = new OpenALInfo();
-		openalInfo.execute(args);
-		System.exit(0);
+	static void checkALCError(long device) {
+		int err = alcGetError(device);
+		if ( err != ALC_NO_ERROR )
+			throw new RuntimeException(alcGetString(device, err));
+	}
+
+	static void checkALError() {
+		int err = alGetError();
+		if ( err != AL_NO_ERROR )
+			throw new RuntimeException(alGetString(err));
 	}
 
 }

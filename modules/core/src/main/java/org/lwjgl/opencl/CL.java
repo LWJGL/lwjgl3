@@ -13,7 +13,6 @@ import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.opencl.CL10.*;
-import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
@@ -230,19 +229,14 @@ public final class CL {
 			try ( MemoryStack stack = stackPush() ) {
 				IntBuffer pi = stack.mallocInt(1);
 
-				int errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, memAddress(pi));
-				if ( Checks.DEBUG && errcode != CL_SUCCESS )
-					throw new IllegalStateException("Failed to query number of OpenCL platform devices.");
-
+				checkCLError(nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, memAddress(pi)));
 				num_devices = pi.get(0);
 				if ( num_devices == 0 )
 					return null;
 
 				PointerBuffer pp = stack.mallocPointer(num_devices);
 
-				errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, num_devices, memAddress(pp), NULL);
-				if ( Checks.DEBUG && errcode != CL_SUCCESS )
-					throw new IllegalStateException("Failed to query OpenCL platform devices.");
+				checkCLError(nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, num_devices, memAddress(pp), NULL));
 
 				devices = new long[num_devices];
 				for ( int i = 0; i < num_devices; i++ )
@@ -332,6 +326,37 @@ public final class CL {
 
 		apiLog("[CL] " + extension + " was reported as available but an entry point is missing.");
 		return false;
+	}
+
+	private static String getPlatformInfoStringASCII(long cl_platform_id, int param_name) {
+		try ( MemoryStack stack = stackPush() ) {
+			PointerBuffer pp = stack.mallocPointer(1);
+			checkCLError(clGetPlatformInfo(cl_platform_id, param_name, (ByteBuffer)null, pp));
+			int bytes = (int)pp.get(0);
+
+			ByteBuffer buffer = stack.malloc(bytes);
+			checkCLError(clGetPlatformInfo(cl_platform_id, param_name, buffer, null));
+
+			return memASCII(buffer, bytes - 1);
+		}
+	}
+
+	private static String getDeviceInfoStringASCII(long cl_device_id, int param_name) {
+		try ( MemoryStack stack = stackPush() ) {
+			PointerBuffer pp = stack.mallocPointer(1);
+			checkCLError(clGetDeviceInfo(cl_device_id, param_name, (ByteBuffer)null, pp));
+			int bytes = (int)pp.get(0);
+
+			ByteBuffer buffer = stack.malloc(bytes);
+			checkCLError(clGetDeviceInfo(cl_device_id, param_name, buffer, null));
+
+			return memASCII(buffer, bytes - 1);
+		}
+	}
+
+	private static void checkCLError(int errcode) {
+		if ( errcode != CL_SUCCESS )
+			throw new RuntimeException(String.format("OpenCL error [0x%X]", errcode));
 	}
 
 }

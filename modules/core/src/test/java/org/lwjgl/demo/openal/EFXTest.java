@@ -5,13 +5,16 @@
 package org.lwjgl.demo.openal;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.openal.*;
+import org.lwjgl.openal.AL;
+import org.lwjgl.openal.ALC;
+import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.stb.STBVorbisInfo;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 
+import static org.lwjgl.demo.openal.OpenALInfo.*;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.AL11.*;
 import static org.lwjgl.openal.ALC10.*;
@@ -168,7 +171,7 @@ public final class EFXTest {
 		if ( auxSends > 1 ) {
 			// Set Source Send 1 to feed uiEffectSlot[1] with filter filter
 			alSource3i(source, AL_AUXILIARY_SEND_FILTER, auxEffectSlots[1], 1, filter);
-			ALUtil.checkALError();
+			checkALError();
 			if ( alGetError() != AL_NO_ERROR ) {
 				// e.g. if only 1 send per source is available
 				throw new Exception("Failed to configure Source Send 1");
