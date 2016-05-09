@@ -1174,8 +1174,6 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     commands and queries for multitexture
 	 */
 
-	// TODO: Reuse EXT_draw_buffers2 functions
-
 	DependsOn("OpenGL13")..void(
 		"EnableIndexedEXT",
 		"",

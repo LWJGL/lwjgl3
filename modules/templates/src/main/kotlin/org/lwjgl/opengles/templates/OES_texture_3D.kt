@@ -42,7 +42,6 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
 		"TEXTURE_BINDING_3D_OES"..0x806A
 	)
 
-	// TODO:
 	void(
 		"TexImage3DOES",
 		"",

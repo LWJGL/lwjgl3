@@ -137,7 +137,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 		"FORMAT_MONO16"..0x1101,
 		"FORMAT_STEREO8"..0x1102,
 		"FORMAT_STEREO16"..0x1103
-	).javaDocLinks // TODO: Add vorbis
+	).javaDocLinks
 
 	IntConstant(
 		"Buffer state.",
@@ -312,7 +312,6 @@ f' = f * (SS - DF * vls) / (SS - DF * vss)
 		ALfloat.IN("dopplerFactor", "the doppler factor")
 	)
 
-	// TODO: Add @deprecated
 	ALvoid(
 		"DopplerVelocity",
 		"""

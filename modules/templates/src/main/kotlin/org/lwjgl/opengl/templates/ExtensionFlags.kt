@@ -25,7 +25,6 @@ val SGI = "SGI"
 val SGIX = "SGIX"
 
 private val NativeClass.cap: String get() = "{@link \\#$capName $templateName}"
-private val String.cap: String get() = "{@link \\#GL_$this $this}" // TODO: remove when all extensions have been added
 
 val ARB_arrays_of_arrays = EXT_FLAG.nativeClassGL("ARB_arrays_of_arrays", postfix = ARB) {
 	documentation =
@@ -102,7 +101,7 @@ val ARB_explicit_attrib_location = EXT_FLAG.nativeClassGL("ARB_explicit_attrib_l
 		This allows applications to globally assign a particular semantic meaning, such as diffuse color or vertex normal, to a particular attribute location
 		without knowing how that attribute will be named in any particular shader.
 
-		Requires ${GL20.core} or ${"ARB_vertex_shader".cap}. ${GL33.promoted}
+		Requires ${GL20.core} or ${ARB_vertex_shader.cap}. ${GL33.promoted}
 		"""
 }
 val ARB_fragment_coord_conventions = EXT_FLAG.nativeClassGL("ARB_fragment_coord_conventions", postfix = ARB) {
@@ -157,7 +156,7 @@ val ARB_fragment_layer_viewport = EXT_FLAG.nativeClassGL("ARB_fragment_layer_vie
 		This extension specifies that the gl_Layer and gl_ViewportIndex built-in variables are also available to the fragment shader so the application doesn't
 		need to implement these manually.
 
-		Requires ${GL30.core} and ${"ARB_geometry_shader4".cap}, or ${GL32.core}. ${GL43.promoted}
+		Requires ${GL30.core} and ${ARB_geometry_shader4.cap}, or ${GL32.core}. ${GL43.promoted}
 		"""
 }
 val ARB_fragment_program_shadow = EXT_FLAG.nativeClassGL("ARB_fragment_program_shadow", postfix = ARB) {
@@ -167,7 +166,7 @@ val ARB_fragment_program_shadow = EXT_FLAG.nativeClassGL("ARB_fragment_program_s
 
 		This extension extends ARB_fragment_program to remove the interaction with ARB_shadow and defines the program option "ARB_fragment_program_shadow".
 
-		Requires ${"ARB_fragment_program".cap} and ${"ARB_shadow".cap}.
+		Requires ${ARB_fragment_program.cap} and ${ARB_shadow.cap}.
 		"""
 }
 val ARB_fragment_shader_interlock = EXT_FLAG.nativeClassGL("ARB_fragment_shader_interlock", postfix = ARB) {
@@ -394,7 +393,7 @@ val ARB_shader_stencil_export = EXT_FLAG.nativeClassGL("ARB_shader_stencil_expor
 		allows the test to be performed against the value generated in the shader. When the stencil operation is set to #REPLACE, this allows a value generated
 		in the shader to be written to the stencil buffer directly.
 
-		Requires ${"ARB_fragment_shader".cap}.
+		Requires ${ARB_fragment_shader.cap}.
 		"""
 }
 val ARB_shader_texture_image_samples = EXT_FLAG.nativeClassGL("ARB_shader_texture_image_samples", postfix = ARB) {
@@ -498,7 +497,7 @@ shadow2DRectProjGradARB(
 
         are added to the built-in functions for vertex shaders and fragment shaders.
 
-		Requires ${"ARB_shader_objects".cap}. ${GL30.promoted}
+		Requires ${ARB_shader_objects.cap}. ${GL30.promoted}
 		"""
 }
 val ARB_shader_viewport_layer_array = EXT_FLAG.nativeClassGL("ARB_shader_viewport_layer_array", postfix = ARB) {
@@ -562,7 +561,7 @@ val ARB_shading_language_packing = EXT_FLAG.nativeClassGL("ARB_shading_language_
 
 		This extension also adds the GLSL built-in packing functions included in GLSL version 4.00 and the ARB_gpu_shader5 extension which pack and unpack
 		vectors of small fixed-point data types into a larger scalar. By putting these packing functions in this separate extension it allows implementations to
-		provide these functions in hardware that supports them independent of the other ${"ARB_gpu_shader5".cap} features.
+		provide these functions in hardware that supports them independent of the other ${ARB_gpu_shader5.cap} features.
 
 		In addition to the packing functions from ARB_gpu_shader5 this extension also adds the missing {@code [un]packSnorm2x16} for completeness.
 
@@ -623,7 +622,7 @@ val ARB_texture_buffer_object_rgb32 = EXT_FLAG.nativeClassGL("ARB_texture_buffer
 		When true, the $registryLink extension is supported.
 
 		This extension adds three new buffer texture formats - RGB32F, RGB32I, and RGB32UI. This partially addresses one of the limitations of buffer textures
-		in the original ${"EXT_texture_buffer_object".cap} extension and in ${GL31.core}, which provide no support for three-component formats.
+		in the original ${EXT_texture_buffer_object.cap} extension and in ${GL31.core}, which provide no support for three-component formats.
 
 		${GL40.promoted}
 		"""
@@ -647,7 +646,7 @@ val ARB_texture_env_crossbar = EXT_FLAG.nativeClassGL("ARB_texture_env_crossbar"
 		function. The ${ARB_texture_env_combine.link} extension defined texture environment functions which could use the color from the current texture unit
 		as a source. This extension adds the ability to use the color from any texture unit as a source.
 
-		Requires ${"ARB_multitexture".cap} and ${ARB_texture_env_combine.link}. ${GL14.promoted}
+		Requires ${ARB_multitexture.cap} and ${ARB_texture_env_combine.link}. ${GL14.promoted}
 		"""
 }
 val ARB_texture_non_power_of_two = EXT_FLAG.nativeClassGL("ARB_texture_non_power_of_two", postfix = ARB) {
@@ -689,7 +688,7 @@ val ARB_texture_query_lod = EXT_FLAG.nativeClassGL("ARB_texture_query_lod", post
 		This extension provides a new set of fragment shader texture functions ({@code textureLOD}) that return the results of automatic level-of-detail
 		computations that would be performed if a texture lookup were performed.
 
-		Requires ${GL20.core}, ${"EXT_gpu_shader4".cap}, ${"EXT_texture_array".cap} and GLSL 1.30. ${GL40.promoted}
+		Requires ${GL20.core}, ${EXT_gpu_shader4.cap}, ${EXT_texture_array.cap} and GLSL 1.30. ${GL40.promoted}
 		"""
 }
 val ARB_texture_stencil8 = EXT_FLAG.nativeClassGL("ARB_texture_stencil8") {
@@ -760,10 +759,10 @@ val EXT_shadow_funcs = EXT_FLAG.nativeClassGL("EXT_shadow_funcs", postfix = EXT)
 		"""
 		When true, the $registryLink extension is supported.
 
-		This extension generalizes the ${"ARB_shadow".cap} extension to support all eight binary texture comparison functions rather than just #LEQUAL and
+		This extension generalizes the ${ARB_shadow.cap} extension to support all eight binary texture comparison functions rather than just #LEQUAL and
 		#GEQUAL.
 
-		Requires ${"ARB_depth_texture".cap} and ${"ARB_shadow".cap}.
+		Requires ${ARB_depth_texture.cap} and ${ARB_shadow.cap}.
 		"""
 }
 
@@ -864,7 +863,7 @@ val AMD_gcn_shader = EXT_FLAG.nativeClassGL("AMD_gcn_shader", postfix = AMD) {
 		and are not significant enough alone to warrant their own extensions. This includes cross-SIMD lane ballots, cube map query functions and a
 		functionality to query the elapsed shader core time.
 
-		Requires ${"AMD_gpu_shader_int64".cap} or ${"NV_gpu_shader5".cap}.
+		Requires ${AMD_gpu_shader_int64.cap} or ${NV_gpu_shader5.cap}.
 		"""
 }
 val AMD_shader_atomic_counter_ops = EXT_FLAG.nativeClassGL("AMD_shader_atomic_counter_ops", postfix = AMD) {
@@ -874,7 +873,7 @@ val AMD_shader_atomic_counter_ops = EXT_FLAG.nativeClassGL("AMD_shader_atomic_co
 
 		This extension is written against the OpenGL 4.3 (core) specification and the GLSL 4.30.7 specification.
 
-		Requires ${GL42.core} or ${"ARB_shader_atomic_counters".cap}.
+		Requires ${GL42.core} or ${ARB_shader_atomic_counters.cap}.
 		"""
 }
 val AMD_shader_stencil_export = EXT_FLAG.nativeClassGL("AMD_shader_stencil_export", postfix = AMD) {
@@ -889,7 +888,7 @@ val AMD_shader_stencil_export = EXT_FLAG.nativeClassGL("AMD_shader_stencil_expor
 		allows the test to be performed against the value generated in the shader. When the stencil operation is set to #REPLACE, this allows a value generated
 		in the shader to be written to the stencil buffer directly.
 
-		Requires ${"ARB_fragment_shader".cap}.
+		Requires ${ARB_fragment_shader.cap}.
 		"""
 }
 val AMD_shader_trinary_minmax = EXT_FLAG.nativeClassGL("AMD_shader_trinary_minmax", postfix = AMD) {
@@ -902,7 +901,7 @@ val AMD_shader_trinary_minmax = EXT_FLAG.nativeClassGL("AMD_shader_trinary_minma
 		performing a trinary operation with a single built-in function, shader compilers and optimizers may be able to generate better instruction sequences for
 		perform sorting and other multi-input functions.
 
-		Requires ${GL20.core} or ${"ARB_shader_objects".cap}.
+		Requires ${GL20.core} or ${ARB_shader_objects.cap}.
 		"""
 }
 val AMD_texture_texture4 = EXT_FLAG.nativeClassGL("AMD_texture_texture4", postfix = AMD) {
@@ -936,7 +935,7 @@ val AMD_vertex_shader_layer = EXT_FLAG.nativeClassGL("AMD_vertex_shader_layer", 
 		"""
 		When true, the $registryLink extension is supported.
 
-		The {@code gl_Layer} built-in shading language variable was introduced with the ${"ARB_geometry_shader4".cap} extension and subsequently promoted to core
+		The {@code gl_Layer} built-in shading language variable was introduced with the ${ARB_geometry_shader4.cap} extension and subsequently promoted to core
 		OpenGL in version 3.2. This variable is an output from the geometry shader stage that allows rendering to be directed to a specific layer of an array
 		texture, slice of a 3D texture or face of a cube map or cube map array attachment of the framebuffer. Thus, this extremely useful functionality is only
 		available if a geometry shader is present - even if the geometry shader is not otherwise required by the application. This adds overhead to the graphics
@@ -947,7 +946,7 @@ val AMD_vertex_shader_layer = EXT_FLAG.nativeClassGL("AMD_vertex_shader_layer", 
 		with only a vertex and fragment shader present. Combined with features such as instancing, or static vertex attributes and so on, this allows a wide
 		variety of techniques to be implemented without the requirement for a geometry shader to be present.
 
-		Requires ${GL30.core} or ${"EXT_texture_array".cap}.
+		Requires ${GL30.core} or ${EXT_texture_array.cap}.
 		"""
 }
 val AMD_vertex_shader_viewport_index = EXT_FLAG.nativeClassGL("AMD_vertex_shader_viewport_index", postfix = AMD) {
@@ -955,7 +954,7 @@ val AMD_vertex_shader_viewport_index = EXT_FLAG.nativeClassGL("AMD_vertex_shader
 		"""
 		When true, the $registryLink extension is supported.
 
-		The {@code gl_ViewportIndex} built-in variable was introduced by the ${"ARB_viewport_array".cap} extension and ${GL41.core}. This variable is available
+		The {@code gl_ViewportIndex} built-in variable was introduced by the ${ARB_viewport_array.cap} extension and ${GL41.core}. This variable is available
 		in un-extended OpenGL only to the geometry shader. When written in the geometry shader, it causes geometry to be directed to one of an array of several
 		independent viewport rectangles.
 
@@ -963,7 +962,7 @@ val AMD_vertex_shader_viewport_index = EXT_FLAG.nativeClassGL("AMD_vertex_shader
 		performance issues. This extension exposes the {@code gl_ViewportIndex} built-in variable to the vertex shader, allowing the functionality introduced by
 		ARB_viewport_array to be accessed without requiring a geometry shader to be present.
 
-		Requires ${GL41.core} or ${"ARB_viewport_array".cap}.
+		Requires ${GL41.core} or ${ARB_viewport_array.cap}.
 		"""
 }
 
@@ -1072,7 +1071,7 @@ val NV_geometry_shader4 = EXT_FLAG.nativeClassGL("NV_geometry_shader4", postfix 
 		"""
 		When true, the $registryLink extension is supported.
 
-		This extension builds upon the ${"EXT_geometry_shader4".cap} specification to provide two additional capabilities:
+		This extension builds upon the ${EXT_geometry_shader4.cap} specification to provide two additional capabilities:
 		${ul(
 			"""
 			Support for QUADS, QUAD_STRIP, and POLYGON primitive types when geometry shaders are enabled.  Such primitives will be tessellated into individual
@@ -1083,7 +1082,7 @@ val NV_geometry_shader4 = EXT_FLAG.nativeClassGL("NV_geometry_shader4", postfix 
 		    to take effect, as is the case in the EXT version of this extension.
 		    """
 		)}
-		Requires ${"EXT_geometry_shader4".cap}.
+		Requires ${EXT_geometry_shader4.cap}.
 		"""
 }
 val NV_geometry_shader_passthrough = EXT_FLAG.nativeClassGL("NV_geometry_shader_passthrough", postfix = NV) {
@@ -1114,8 +1113,8 @@ val NV_shader_atomic_float = EXT_FLAG.nativeClassGL("NV_shader_atomic_float", po
 		atomic add support allows shaders to atomically accumulate the sum of floating-point values into buffer or texture memory across multiple (possibly
 		concurrent) shader invocations.
 
-		This extension provides GLSL support for atomics targeting image uniforms (if GLSL 4.20, ${"ARB_shader_image_load_store".cap}, or
-		${"EXT_shader_image_load_store".cap} is supported) or floating-point pointers (if ${"NV_gpu_shader5".cap} is supported). Additionally, assembly opcodes
+		This extension provides GLSL support for atomics targeting image uniforms (if GLSL 4.20, ${ARB_shader_image_load_store.cap}, or
+		${EXT_shader_image_load_store.cap} is supported) or floating-point pointers (if ${NV_gpu_shader5.cap} is supported). Additionally, assembly opcodes
 		for these operations is also provided if ${registryLink("NV", "gpu_program5")} is supported.
 		"""
 }
@@ -1127,7 +1126,7 @@ val NV_shader_atomic_fp16_vector = EXT_FLAG.nativeClassGL("NV_shader_atomic_fp16
 		This extension provides GLSL built-in functions and assembly opcodes allowing shaders to perform a limited set of atomic read-modify-write operations
 		to buffer or texture memory with 16-bit floating point vector surface formats. 
 
-		Requires ${"NV_gpu_shader5".cap}.
+		Requires ${NV_gpu_shader5.cap}.
 		"""
 }
 val NV_shader_atomic_int64 = EXT_FLAG.nativeClassGL("NV_shader_atomic_int64", postfix = NV) {

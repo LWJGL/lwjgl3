@@ -1025,6 +1025,4 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		)}
 		"""
 	)
-
-	// TODO: add SetPrintfCallback
 }

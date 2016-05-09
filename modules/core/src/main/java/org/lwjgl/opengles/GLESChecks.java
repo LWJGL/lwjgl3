@@ -9,6 +9,7 @@ import org.lwjgl.system.Checks;
 import static org.lwjgl.opengles.GLES20.*;
 import static org.lwjgl.opengles.GLES30.*;
 import static org.lwjgl.opengles.GLES31.*;
+import static org.lwjgl.opengles.NVGPUShader5.*;
 import static org.lwjgl.system.APIUtil.*;
 
 final class GLESChecks {
@@ -67,11 +68,9 @@ final class GLESChecks {
 			case GL_FLOAT:
 			case GL_FIXED:
 				return 2;
-			// TODO:
-			/*case GL_DOUBLE:
 			case GL_INT64_NV:
 			case GL_UNSIGNED_INT64_NV:
-				return 3;*/
+				return 3;
 			default:
 				throw new IllegalArgumentException(apiUnknownToken("Unsupported OpenGL ES type", type));
 		}

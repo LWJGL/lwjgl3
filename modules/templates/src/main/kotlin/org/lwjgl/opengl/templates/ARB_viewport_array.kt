@@ -54,11 +54,4 @@ val ARB_viewport_array = "ARBViewportArray".nativeClassGL("ARB_viewport_array") 
 	GL41 reuse "DepthRangeIndexed"
 	GL41 reuse "GetFloati_v"
 	GL41 reuse "GetDoublei_v"
-
-	/* TODO: enable these
-	EXT_draw_buffers2 reuse "GetIntegerIndexedvEXT"
-	EXT_draw_buffers2 reuse "EnableIndexedEXT"
-	EXT_draw_buffers2 reuse "DisableIndexedEXT"
-	EXT_draw_buffers2 reuse "IsEnabledIndexedEXT"
-	*/
 }
