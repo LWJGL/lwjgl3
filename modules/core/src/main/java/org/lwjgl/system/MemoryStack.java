@@ -450,7 +450,7 @@ public class MemoryStack implements AutoCloseable {
 	/** Pointer version of {@link #malloc(int)}. */
 	public PointerBuffer mallocPointer(int size) { return memPointerBuffer(nmalloc(POINTER_SIZE, size << POINTER_SHIFT), size); }
 	/** Pointer version of {@link #calloc(int)}. */
-	public PointerBuffer callocPointer(int size) { return memPointerBuffer(ncalloc(POINTER_SIZE, size, POINTER_SHIFT), size); }
+	public PointerBuffer callocPointer(int size) { return memPointerBuffer(ncalloc(POINTER_SIZE, size, POINTER_SIZE), size); }
 
 	/** Single value version of {@link #mallocPointer}. */
 	public PointerBuffer pointers(long x) { return mallocPointer(1).put(0, x); }
