@@ -6,4 +6,4 @@ package org.lwjgl.system.macosx
 
 import org.lwjgl.generator.*
 
-val CGDirectDisplayID = "CGDirectDisplayID".opaque_p
+val CGDirectDisplayID = typedef(uint32_t, "CGDirectDisplayID")

@@ -20,8 +20,8 @@ val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(packageName = GLFW_PACKAGE, 
 	    """,
 
 		GLFWmonitor.IN("monitor", "the GLFW monitor"),
-		// TODO: kCGNullDirectDisplay
-		returnDoc = "The ${code("CGDirectDisplayID")} of the specified monitor, or kCGNullDirectDisplay` if an error occurred.",
+
+		returnDoc = "The ${code("CGDirectDisplayID")} of the specified monitor, or {@code kCGNullDirectDisplay} if an error occurred.",
 		since = "version 3.1"
 	)
 
