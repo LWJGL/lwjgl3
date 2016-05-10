@@ -2,10 +2,11 @@
 
 This repository hosts **LWJGL 3**, the complete rewrite and next major version of [LWJGL](https://www.lwjgl.org). Everything you need to know about the project can be found in the [Wiki](https://github.com/LWJGL/lwjgl3-wiki/wiki). Other useful links:
 
-- Forum - http://forum.lwjgl.org
-- JavaDoc - http://javadoc.lwjgl.org
-- Blog - http://blog.lwjgl.org
-- Twitter - [@LWJGL](https://twitter.com/LWJGL)
+- [Release Notes](https://github.com/LWJGL/lwjgl3/tree/master/doc/notes)  
+- [Forum](http://forum.lwjgl.org)
+- [JavaDoc](http://javadoc.lwjgl.org)
+- [Blog](http://blog.lwjgl.org)
+- [Twitter](https://twitter.com/LWJGL)
 
 For a quick overview of the project structure, installation instructions and configuration options, see [doc/README](https://github.com/LWJGL/lwjgl3/tree/master/doc).
 
@@ -20,7 +21,7 @@ org.lwjgl:lwjgl-platform:${version}:natives-linux
 org.lwjgl:lwjgl-platform:${version}:natives-osx
 ```
 
-where `${version}` is a version (e.g. `3.0.0b`) released on Maven Central. **Nightly builds** are also available from the *Sonatype Nexus* [repository](https://oss.sonatype.org/content/repositories/snapshots), with a snapshot build version (e.g. `3.0.0-SNAPSHOT`).
+where `${version}` is a version (e.g. `3.0.0`) released on Maven Central. **Nightly builds** are also available from the *Sonatype Nexus* [repository](https://oss.sonatype.org/content/repositories/snapshots), with a snapshot build version (e.g. `3.0.1-SNAPSHOT`).
 
 LWJGL 3 requires Java 8 or later to build and run and currently supports the following platforms/architectures:
 
@@ -90,3 +91,5 @@ LWJGL 3 includes the following bindings:
 |[dyncall](http://www.dyncall.org/)|Encapsulates architecture-, OS- and compiler-specific function call semantics in a virtual bind argument parameters from left to right and then call interface allowing programmers to call C functions in a completely dynamic manner.|
 |[jemalloc](http://www.canonware.com/jemalloc/)|A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.|
 |[xxHash](https://github.com/Cyan4973/xxHash)|An Extremely fast Hash algorithm, running at RAM speed limits.|
+
+Use of a binding is subject to the terms of the [corresponding license](https://github.com/LWJGL/lwjgl3/tree/master/doc/3rdparty).
