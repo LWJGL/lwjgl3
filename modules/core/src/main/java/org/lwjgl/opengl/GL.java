@@ -559,7 +559,7 @@ public final class GL {
 				throw new IllegalStateException("Failed to query GLX version");
 
 			majorVersion = piMajor.get(0);
-			minorVersion = piMinor.get(1);
+			minorVersion = piMinor.get(0);
 			if ( majorVersion != 1 )
 				throw new IllegalStateException("Invalid GLX major version: " + majorVersion);
 		}
