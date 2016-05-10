@@ -612,8 +612,8 @@ License terms: http://lwjgl.org/license.php
 		<zip destfile="${release.doc}/javadoc.zip" basedir="${bin.html.javadoc}" includes="**" level="9"/>
 
 		<!-- Copy license files -->
+		<copy file="LICENSE.md" tofile="${release}/LICENSE"/>
 		<copy todir="${release.doc}">
-			<fileset dir="${doc}" includes="LICENSE.txt"/>
 			<fileset dir="${doc}" includes="3rdparty/**"/>
 		</copy>
 
