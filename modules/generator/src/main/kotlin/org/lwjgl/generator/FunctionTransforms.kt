@@ -151,8 +151,6 @@ internal class CharSequenceTransform(
 
 	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
 		writer.print("\t\t\tByteBuffer ${qtype.name}Encoded = ")
-		if ( qtype has nullable )
-			writer.print("${qtype.name} == null ? null : ")
 		writer.print("stack.${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}")
 		if ( !nullTerminated )
 			writer.print(", false")
