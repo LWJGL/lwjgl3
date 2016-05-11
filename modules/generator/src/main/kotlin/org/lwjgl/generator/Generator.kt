@@ -37,6 +37,7 @@ enum class Binding(val key: String, val packageName: String) {
 	BGFX("binding.bgfx", "org.lwjgl.bgfx"),
 	EGL("binding.egl", "org.lwjgl.egl"),
 	GLFW("binding.glfw", "org.lwjgl.glfw"),
+	HWLOC("binding.hwloc", "org.lwjgl.hwloc"),
 	JAWT("binding.jawt", "org.lwjgl.system.jawt"),
 	JEMALLOC("binding.jemalloc", "org.lwjgl.system.jemalloc"),
 	LMDB("binding.lmdb", "org.lwjgl.util.lmdb"),

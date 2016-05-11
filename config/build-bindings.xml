@@ -17,6 +17,7 @@ This script is included in /config/build-definitions.xml.
 	<property name="binding.bgfx" value="true"/>
 	<property name="binding.egl" value="true"/>
 	<property name="binding.glfw" value="true"/>
+	<property name="binding.hwloc" value="true"/>
 	<property name="binding.jawt" value="true"/>
 	<property name="binding.jemalloc" value="true"/>
 	<property name="binding.lmdb" value="true"/>

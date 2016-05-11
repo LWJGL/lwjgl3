@@ -226,6 +226,11 @@ public class Configuration<T> {
 	/** Similar to {@link #LIBRARY_NAME} for the EGL library (<b>org.lwjgl.egl.libname</b>). */
 	public static final Configuration<String> EGL_LIBRARY_NAME = new Configuration<>("org.lwjgl.egl.libname", StateInit.STRING);
 
+	// -- HWLOC
+
+	/** Similar to {@link #LIBRARY_NAME} for the hwloc library (<b>org.lwjgl.system.hwloc.libname</b>). */
+	public static final Configuration<String> HWLOC_LIBRARY_NAME = new Configuration<>("org.lwjgl.system.hwloc.libname", StateInit.STRING);
+
 	// -- GLFW
 
 	/** Similar to {@link #LIBRARY_NAME} for the GLFW library (<b>org.lwjgl.glfw.libname</b>). */
