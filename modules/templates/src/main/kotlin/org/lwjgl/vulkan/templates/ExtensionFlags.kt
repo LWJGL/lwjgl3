@@ -4,6 +4,7 @@
  */
 package org.lwjgl.vulkan.templates
 
+val AMD = "AMD"
 val EXT = "EXT"
 val IMG = "IMG"
 val KHR = "KHR"

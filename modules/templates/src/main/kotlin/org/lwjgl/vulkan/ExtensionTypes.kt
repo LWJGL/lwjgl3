@@ -10,6 +10,23 @@ import org.lwjgl.system.linux.Window
 import org.lwjgl.system.windows.HINSTANCE
 import org.lwjgl.system.windows.HWND
 
+// AMD_rasterization_order
+
+val VkRasterizationOrderAMD = "VkRasterizationOrderAMD".enumType
+
+val VkPipelineRasterizationStateRasterizationOrderAMD = struct(VULKAN_PACKAGE, "VkPipelineRasterizationStateRasterizationOrderAMD") {
+	documentation =
+		"""
+		When the {@code VK_AMD_rasterization_order} device extension is enabled the application $can also chain a
+		{@code VkPipelineRasterizationStateRasterizationOrderAMD} structure to the ##VkPipelineRasterizationStateCreateInfo structure through its {@code pNext}
+		member. This structure enables selecting the rasterization order to use when rendering with the corresponding graphics pipeline.
+		"""
+
+    sType(this)
+	pNext()
+	VkRasterizationOrderAMD.member("rasterizationOrder", "the primitive rasterization order to use").links("RASTERIZATION_ORDER_\\w+_AMD")
+}
+
 // EXT_debug_report
 
 val VkDebugReportCallbackEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDebugReportCallbackEXT")
