@@ -43,7 +43,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 	EnumConstant(
 		"VkColorSpaceKHR",
 
-		"COLORSPACE_SRGB_NONLINEAR_KHR".enumExpr("The presentation engine supports the sRGB colorspace.", "0")
+		"COLOR_SPACE_SRGB_NONLINEAR_KHR".enumExpr("The presentation engine supports the sRGB colorspace.", "0")
 	)
 
 	EnumConstant(

@@ -1067,10 +1067,8 @@ val VkDeviceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
 		"pQueueCreateInfos",
 		"a pointer to an array of ##VkDeviceQueueCreateInfo structures describing the queues that are requested to be created along with the logical device"
 	)
-	AutoSize("ppEnabledLayerNames", optional = true)..uint32_t.member("enabledLayerCount", "the number of device layers to enable")
-	const_charUTF8_const_p.member(
-		"ppEnabledLayerNames",
-		"a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings containing the names of layers to enable for the created device")
+	AutoSize("ppEnabledLayerNames", optional = true)..uint32_t.member("enabledLayerCount", "deprecated and ignored")
+	const_charUTF8_const_p.member("ppEnabledLayerNames", "deprecated and ignored")
 	AutoSize("ppEnabledExtensionNames", optional = true)..uint32_t.member("enabledExtensionCount", "the number of device extensions to enable")
 	const_charUTF8_const_p.member(
 		"ppEnabledExtensionNames",
@@ -1109,7 +1107,14 @@ val VkLayerProperties_p = struct_p(VULKAN_PACKAGE, "VkLayerProperties", mutable 
 		Contains information about an instance layer.
 		"""
 
-	charUTF8.array("layerName", "a null-terminated UTF-8 string specifying the name of the layer", size = VK_MAX_EXTENSION_NAME_SIZE)
+	charUTF8.array(
+		"layerName",
+		"""
+		a null-terminated UTF-8 string specifying the name of the layer. Use this name in the {@code ppEnabledLayerNames} array passed in the
+		##VkInstanceCreateInfo structure to enable this layer for an instance.
+		""",
+		size = VK_MAX_EXTENSION_NAME_SIZE
+	)
 	uint32_t.member("specVersion", "the Vulkan version the layer was written to")
 	uint32_t.member("implementationVersion", "the version of this layer")
 	charUTF8.array(

@@ -2069,7 +2069,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		nullable..const..charUTF8_p.IN(
 			"pLayerName",
-			"either $NULL or a pointer to a null-terminated UTF-8 string naming the instance layer to retrieve extensions from"
+			"either $NULL or a pointer to a null-terminated UTF-8 string naming the layer to retrieve extensions from"
 		),
 		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
 			"pPropertyCount",
@@ -2101,7 +2101,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be queried"),
 		nullable..const..charUTF8_p.IN(
 			"pLayerName",
-			"either $NULL or a pointer to a null-terminated UTF-8 string naming the device layer to retrieve extensions from"
+			"either $NULL or a pointer to a null-terminated UTF-8 string naming the layer to retrieve extensions from"
 		),
 		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
 			"pPropertyCount",
@@ -2123,7 +2123,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		${ValidityProtos.vkEnumerateInstanceLayerProperties}
 
-		To enable a instance layer, the name of the layer $should be added to the {@code ppEnabledLayerNames} member of ##VkInstanceCreateInfo when creating a
+		To enable an instance layer, the name of the layer $should be added to the {@code ppEnabledLayerNames} member of ##VkInstanceCreateInfo when creating a
 		{@code VkInstance}.
 
 		When a layer is enabled, it inserts itself into the call chain for Vulkan commands the layer is interested in. A common use of layers is to validate
@@ -2218,7 +2218,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		Each call to {@code vkQueueSubmit} submits zero or more batches of work to the queue for execution. {@code submitCount} is used to specify the number
 		of batches to submit. Each batch includes zero or more semaphores to wait upon, and a corresponding set of stages that will wait for the semaphore to
-		be signalled before executing any work, followed by a number of command buffers that will be executed, and finally, zero or more semaphores that will
+		be signaled before executing any work, followed by a number of command buffers that will be executed, and finally, zero or more semaphores that will
 		be signaled after command buffer execution completes. Each batch is represented as an instance of the ##VkSubmitInfo structure stored in an array, the
 		address of which is passed in {@code pSubmits}.
 
@@ -3209,8 +3209,16 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		Pipeline cache objects allow the result of pipeline construction to be reused between pipelines and between runs of an application. Reuse between
 		pipelines is achieved by passing the same pipeline cache object when creating multiple related pipelines. Reuse across runs of an application is
 		achieved by retrieving pipeline cache contents in one run of an application, saving the contents, and using them to preinitialize a pipeline cache on a
-		subsequent run. The contents and size of the pipeline cache objects are managed by the implementation. Applications $can control the amount of data
-		retrieved from a pipeline cache object.
+		subsequent run. The contents of the pipeline cache objects are managed by the implementation. Applications $can manage the host memory consumed by a
+		pipeline cache object and control the amount of data retrieved from a pipeline cache object.
+
+		${note(
+			"""
+			Applications $can track and manage the total host memory size of a pipeline cache object using the {@code pAllocator}. Applications $can limit the
+			amount of data retrieved from a pipeline cache object in #GetPipelineCacheData(). Implementations $shouldnot internally limit the total number of
+			entries added to a pipeline cache object or the total host memory consumed.
+			"""
+		)}
 
 		Once created, a pipeline cache $can be passed to the #CreateGraphicsPipelines() and #CreateComputePipelines() commands. If the pipeline cache passed
 		into these commands is not #NULL_HANDLE, the implementation will query it for possible reuse opportunities and update it with new content. The use of
@@ -3891,7 +3899,7 @@ typedef enum VkPipelineCacheHeaderVersion {
 		A secondary command buffer is considered to be pending execution from the time its execution is recorded into a primary buffer (via
 		#CmdExecuteCommands()) until the final time that primary buffer’s submission to a queue completes. If, after the primary buffer completes, the
 		secondary command buffer is recorded to execute on a different primary buffer, the first primary buffer $mustnot be resubmitted until after it is reset
-		with #ResetCommandBuffer().
+		with #ResetCommandBuffer() unless the secondary command buffer was recorded with #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT.
 
 		If #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT is not set on a secondary command buffer, that command buffer $mustnot be used more than once in a given
 		primary command buffer. Furthermore, if a secondary command buffer without #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT set is recorded to execute in a

@@ -231,7 +231,7 @@ val VkSurfaceFormatKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutabl
 		"""
 
 	VkFormat.member("format", "a {@code VkFormat} that is compatible with the surface")
-	VkColorSpaceKHR.member("colorSpace", "a presentation {@code VkColorSpaceKHR} that is compatible with the surface").links("COLORSPACE_\\w+_KHR")
+	VkColorSpaceKHR.member("colorSpace", "a presentation {@code VkColorSpaceKHR} that is compatible with the surface").links("COLOR_SPACE_\\w+_KHR")
 }
 
 // KHR_display
@@ -472,7 +472,7 @@ val VkSwapchainCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkSwapchainCreateInfo
 	    will fail to create the swapchain.
 	    """)
     VkFormat.member("imageFormat", "a {@code VkFormat} that is valid for swapchains on the specified surface")
-    VkColorSpaceKHR.member("imageColorSpace", "a {@code VkColorSpaceKHR} that is valid for swapchains on the specified surface").links("COLORSPACE_\\w+_KHR")
+    VkColorSpaceKHR.member("imageColorSpace", "a {@code VkColorSpaceKHR} that is valid for swapchains on the specified surface").links("COLOR_SPACE_\\w+_KHR")
     VkExtent2D.member(
 	    "imageExtent",
 	    """

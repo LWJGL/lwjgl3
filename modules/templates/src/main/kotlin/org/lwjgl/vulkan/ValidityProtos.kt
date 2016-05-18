@@ -23,9 +23,9 @@ val vkAcquireNextImageKHR =
 			Each of {@code swapchain}, {@code device}, {@code semaphore} and {@code fence} that are valid handles $must have been created, allocated or
 			retrieved from the same {@code VkInstance}
 			""",
-			"If {@code semaphore} is not #NULL_HANDLE it $must be unsignalled",
+			"If {@code semaphore} is not #NULL_HANDLE it $must be unsignaled",
 			"""
-			If {@code fence} is not #NULL_HANDLE it $must be unsignalled and $mustnot be associated with any other queue command that has not yet completed
+			If {@code fence} is not #NULL_HANDLE it $must be unsignaled and $mustnot be associated with any other queue command that has not yet completed
 			execution on that queue
 			"""
 		)}
@@ -2611,7 +2611,7 @@ val vkEnumerateDeviceExtensionProperties =
 			If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not $NULL, {@code pProperties} $must be a pointer to an
 			array of {@code pPropertyCount} ##VkExtensionProperties structures
 			""",
-			"If {@code pLayerName} is not $NULL, it $must be the name of a device layer returned by #EnumerateDeviceLayerProperties()"
+			"If {@code pLayerName} is not $NULL, it $must be the name of a layer returned by #EnumerateDeviceLayerProperties()"
 		)}"""
 
 val vkEnumerateDeviceLayerProperties =
@@ -2634,7 +2634,7 @@ val vkEnumerateInstanceExtensionProperties =
 			If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not $NULL, {@code pProperties} $must be a pointer to an
 			array of {@code pPropertyCount} ##VkExtensionProperties structures
 			""",
-			"If {@code pLayerName} is not $NULL, it $must be the name of an instance layer returned by #EnumerateInstanceLayerProperties()"
+			"If {@code pLayerName} is not $NULL, it $must be the name of a layer returned by #EnumerateInstanceLayerProperties()"
 		)}"""
 
 val vkEnumerateInstanceLayerProperties =
@@ -3221,7 +3221,7 @@ val vkQueueBindSparse =
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
 			"The {@code queue} $must support sparse binding operations",
 			"Each of {@code queue} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
-			"{@code fence} $must be unsignalled",
+			"{@code fence} $must be unsignaled",
 			"{@code fence} $mustnot be associated with any other queue command that has not yet completed execution on that queue"
 		)}
 
@@ -3261,7 +3261,7 @@ val vkQueueSubmit =
 			"If {@code submitCount} is not 0, {@code pSubmits} $must be a pointer to an array of {@code submitCount} valid ##VkSubmitInfo structures",
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
 			"Each of {@code queue} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
-			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be unsignalled",
+			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be unsignaled",
 			"""
 			If {@code fence} is not #NULL_HANDLE, {@code fence} $mustnot be associated with any other queue command that has not yet completed execution on
 			that queue

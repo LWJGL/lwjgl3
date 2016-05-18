@@ -462,8 +462,8 @@ val VkDeviceCreateInfo =
 			"If {@code pEnabledFeatures} is not $NULL, {@code pEnabledFeatures} $must be a pointer to a valid ##VkPhysicalDeviceFeatures structure",
 			"{@code queueCreateInfoCount} $must be greater than 0",
 			"""
-			Any given element of {@code ppEnabledLayerNames} $must be the name of a layer present on the system, exactly matching a string returned in the
-			##VkLayerProperties structure by #EnumerateDeviceLayerProperties()
+			{@code ppEnabledLayerNames} $must either be {@code NULL} or contain the same sequence of layer names that was enabled when creating the parent
+			instance
 			""",
 			"""
 			Any given element of {@code ppEnabledExtensionNames} $must be the name of an extension present on the system, exactly matching a string returned in
@@ -1977,7 +1977,7 @@ val VkSubmitInfo =
 			Each of the elements of {@code pWaitSemaphores}, the elements of {@code pCommandBuffers} and the elements of {@code pSignalSemaphores} that are
 			valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}
 			""",
-			"Any given element of {@code pSignalSemaphores} $must currently be unsignalled",
+			"Any given element of {@code pSignalSemaphores} $must currently be unsignaled",
 			"""
 			Any given element of {@code pCommandBuffers} $must either have been recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, or not currently
 			be executing on the device
@@ -2135,7 +2135,7 @@ val VkSwapchainCreateInfoKHR =
 			"{@code surface} $must be a surface that is supported by the device as determined using #GetPhysicalDeviceSurfaceSupportKHR()",
 			"""
 			The native window referred to by {@code surface} $mustnot already be associated with a swapchain other than {@code oldSwapchain}, or with a
-			non-{apiname} graphics API surface
+			non-Vulkan graphics API surface
 			""",
 			"""
 			{@code minImageCount} $must be greater than or equal to the value returned in the {@code minImageCount} member of the ##VkSurfaceCapabilitiesKHR
