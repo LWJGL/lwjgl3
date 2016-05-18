@@ -703,6 +703,40 @@ val vkCmdCopyQueryPoolResults =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
+val vkCmdDebugMarkerBeginEXT =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code pMarkerInfo} $must be a pointer to a ##VkDebugMarkerMarkerInfoEXT structure",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations"
+		)}"""
+
+val vkCmdDebugMarkerEndEXT =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"""
+			There $must be an outstanding #CmdDebugMarkerBeginEXT() command prior to the #CmdDebugMarkerEndEXT() on the queue that {@code commandBuffer} is
+			submitted to.
+			""",
+			"""
+			If the matching #CmdDebugMarkerBeginEXT() command was in a secondary command buffer, the #CmdDebugMarkerEndEXT() must be in the same
+			{@code commandBuffer}.
+			"""
+		)}"""
+
+val vkCmdDebugMarkerInsertEXT =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code pMarkerInfo} $must be a pointer to a ##VkDebugMarkerMarkerInfoEXT structure",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations"
+		)}"""
+
 val vkCmdDispatch =
 	"""<h5>Valid Usage</h5>
 		${ul(
@@ -2037,6 +2071,33 @@ val vkCreateXlibSurfaceKHR =
 			"{@code pCreateInfo} $must be a pointer to a valid ##VkXlibSurfaceCreateInfoKHR structure",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"{@code pSurface} $must be a pointer to a {@code VkSurfaceKHR} handle"
+		)}"""
+
+val vkDebugMarkerSetObjectNameEXT =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pNameInfo} $must be a pointer to a ##VkDebugMarkerObjectNameInfoEXT structure",
+			"{@code pNameInfo.object} $must be a Vulkan object"
+		)}
+
+		<h5>Host Synchronization</h5>
+		${ul(
+			"Host access to {@code pNameInfo.object} $must be externally synchronized"
+		)}"""
+
+val vkDebugMarkerSetObjectTagEXT =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code pTagInfo} $must be a pointer to a ##VkDebugMarkerObjectTagInfoEXT structure",
+			"{@code pTagInfo.object} $must be a Vulkan object",
+			"{@code pTagInfo.tagName} $mustnot be 0"
+		)}
+
+		<h5>Host Synchronization</h5>
+		${ul(
+			"Host access to {@code pTagInfo.object} $must be externally synchronized"
 		)}"""
 
 val vkDebugReportMessageEXT =

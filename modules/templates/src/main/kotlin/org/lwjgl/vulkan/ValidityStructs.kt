@@ -333,6 +333,33 @@ val VkCopyDescriptorSet =
 			"""
 		)}"""
 
+val VkDebugMarkerMarkerInfoEXT =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT",
+			"{@code pNext} $must be $NULL",
+			"{@code pMarkerName} $must be a null-terminated string"
+		)}"""
+
+val VkDebugMarkerObjectNameInfoEXT =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT",
+			"{@code pNext} $must be $NULL",
+			"{@code objectType} $must be a valid {@code VkDebugReportObjectTypeEXT} value",
+			"{@code pObjectName} $must be a null-terminated string"
+		)}"""
+
+val VkDebugMarkerObjectTagInfoEXT =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT",
+			"{@code pNext} $must be $NULL",
+			"{@code objectType} $must be a valid {@code VkDebugReportObjectTypeEXT} value",
+			"{@code pTag} $must be a pointer to an array of {@code tagSize} bytes",
+			"{@code tagSize} $must be greater than 0"
+		)}"""
+
 val VkDebugReportCallbackCreateInfoEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
