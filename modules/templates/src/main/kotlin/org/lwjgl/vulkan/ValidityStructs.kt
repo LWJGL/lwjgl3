@@ -214,7 +214,8 @@ val VkCommandBufferAllocateInfo =
 			"{@code sType} $must be #STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO",
 			"{@code pNext} $must be $NULL",
 			"{@code commandPool} $must be a valid {@code VkCommandPool} handle",
-			"{@code level} $must be a valid {@code VkCommandBufferLevel} value"
+			"{@code level} $must be a valid {@code VkCommandBufferLevel} value",
+			"{@code commandBufferCount} $must be greater than 0"
 		)}"""
 
 val VkCommandBufferBeginInfo =

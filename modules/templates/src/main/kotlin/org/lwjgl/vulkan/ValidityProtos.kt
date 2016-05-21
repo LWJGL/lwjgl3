@@ -1247,26 +1247,25 @@ val vkCmdExecuteCommands =
 			""",
 			"""
 			If #CmdExecuteCommands() is being called within a render pass instance, any given element of {@code pCommandBuffers} $must have been recorded with
-			the {@code subpass} member of the {@code inheritanceInfo} structure set to the index of the subpass which the given command buffer will be executed
-			in
+			##VkCommandBufferInheritanceInfo{@code ::subpass} set to the index of the subpass which the given command buffer will be executed in
 			""",
 			"""
 			If #CmdExecuteCommands() is being called within a render pass instance, any given element of {@code pCommandBuffers} $must have been recorded with
 			a render pass that is compatible with the current render pass
 			""",
 			"""
-			If #CmdExecuteCommands() is being called within a render pass instance, and any given element of {@code pCommandBuffers} was recorded with the
-			{@code framebuffer} member of the ##VkCommandBufferInheritanceInfo structure not equal to #NULL_HANDLE, that {@code VkFramebuffer} $must be
-			compatible with the {@code VkFramebuffer} used in the current render pass instance
+			If #CmdExecuteCommands() is being called within a render pass instance, and any given element of {@code pCommandBuffers} was recorded with
+			##VkCommandBufferInheritanceInfo{@code ::framebuffer} not equal to #NULL_HANDLE, that {@code VkFramebuffer} $must be compatible with the
+			{@code VkFramebuffer} used in the current render pass instance
 			""",
 			"If the inherited queries feature is not enabled, {@code commandBuffer} $mustnot have any queries active",
 			"""
 			If {@code commandBuffer} has a #QUERY_TYPE_OCCLUSION query active, then each element of {@code pCommandBuffers} $must have been recorded with
-			##VkCommandBufferBeginInfo{@code ::occlusionQueryEnable} set to #TRUE
+			##VkCommandBufferInheritanceInfo{@code ::occlusionQueryEnable} set to #TRUE
 			""",
 			"""
 			If {@code commandBuffer} has a #QUERY_TYPE_OCCLUSION query active, then each element of {@code pCommandBuffers} $must have been recorded with
-			##VkCommandBufferBeginInfo{@code ::queryFlags} having all bits set that are set for the query
+			##VkCommandBufferInheritanceInfo{@code ::queryFlags} having all bits set that are set for the query
 			""",
 			"""
 			If {@code commandBuffer} has a #QUERY_TYPE_PIPELINE_STATISTICS query active, then each element of {@code pCommandBuffers} $must have been recorded
