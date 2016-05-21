@@ -39,12 +39,16 @@ extern "C" {
  */
 /* #undef JEMALLOC_USE_CXX_THROW */
 
-/* sizeof(void *) == 2^LG_SIZEOF_PTR. */
-#ifdef LWJGL_x64
-    #define	LG_SIZEOF_PTR 3
-#else
-    #define	LG_SIZEOF_PTR 2
+#ifdef _MSC_VER
+#  ifdef _WIN64
+#    define LG_SIZEOF_PTR_WIN 3
+#  else
+#    define LG_SIZEOF_PTR_WIN 2
+#  endif
 #endif
+
+/* sizeof(void *) == 2^LG_SIZEOF_PTR. */
+#define	LG_SIZEOF_PTR LG_SIZEOF_PTR_WIN
 
 /*
  * Name mangling for public symbols is controlled by --with-mangling and
@@ -80,19 +84,20 @@ extern "C" {
 #include <limits.h>
 #include <strings.h>
 
-#define	JEMALLOC_VERSION "4.0.4-12-g3a92319ddc5610b755f755cbbbd12791ca9d0c3d"
+#define	JEMALLOC_VERSION "4.2.0-0-gf70a254d44c8d30af2cd5d30531fb18fdabaae6d"
 #define	JEMALLOC_VERSION_MAJOR 4
-#define	JEMALLOC_VERSION_MINOR 0
-#define	JEMALLOC_VERSION_BUGFIX 4
-#define	JEMALLOC_VERSION_NREV 12
-#define	JEMALLOC_VERSION_GID "3a92319ddc5610b755f755cbbbd12791ca9d0c3d"
+#define	JEMALLOC_VERSION_MINOR 2
+#define	JEMALLOC_VERSION_BUGFIX 0
+#define	JEMALLOC_VERSION_NREV 0
+#define	JEMALLOC_VERSION_GID "f70a254d44c8d30af2cd5d30531fb18fdabaae6d"
 
-#  define MALLOCX_LG_ALIGN(la)	(la)
+#  define MALLOCX_LG_ALIGN(la)	((int)(la))
 #  if LG_SIZEOF_PTR == 2
-#    define MALLOCX_ALIGN(a)	(ffs(a)-1)
+#    define MALLOCX_ALIGN(a)	((int)(ffs((int)(a))-1))
 #  else
 #    define MALLOCX_ALIGN(a)						\
-	 ((a < (size_t)INT_MAX) ? ffs((unsigned int)a)-1 : ffs(a>>32)+31)
+       ((int)(((size_t)(a) < (size_t)INT_MAX) ? ffs((int)(a))-1 :	\
+       ffs((int)(((size_t)(a))>>32))+31))
 #  endif
 #  define MALLOCX_ZERO	((int)0x40)
 /*
@@ -104,7 +109,7 @@ extern "C" {
 /*
  * Bias arena index bits so that 0 encodes "use an automatically chosen arena".
  */
-#  define MALLOCX_ARENA(a)	((int)(((a)+1) << 20))
+#  define MALLOCX_ARENA(a)	((((int)(a))+1) << 20)
 
 #if defined(__cplusplus) && defined(JEMALLOC_USE_CXX_THROW)
 #  define JEMALLOC_CXX_THROW throw()
