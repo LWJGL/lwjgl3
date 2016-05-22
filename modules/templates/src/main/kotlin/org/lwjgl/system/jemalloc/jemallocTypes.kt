@@ -24,7 +24,8 @@ fun config() {
 			"--with-malloc-conf=purge:decay",
 			"--disable-stats",
 			"--disable-fill",
-			"--disable-zone-allocator (OSX-only)"
+			"--disable-zone-allocator (MacOS)",
+			"--enable-lazy-lock=no (Windows)"
 		)}
 
 		The shared library may be replaced with a custom build that has more features enabled.
