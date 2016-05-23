@@ -1519,7 +1519,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("ypos", "the desired y-coordinate of the upper-left corner of the client area"),
 		int.IN("width", "the desired with, in screen coordinates, of the client area or video mode"),
 		int.IN("height", "the desired height, in screen coordinates, of the client area or video mode"),
-		int.IN("refreshRate", "the desired refresh rate, in Hz, of the video mode"),
+		int.IN("refreshRate", "the desired refresh rate, in Hz, of the video mode, or #DONT_CARE"),
 
 		since = "version 3.2"
 	)
