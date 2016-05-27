@@ -13,10 +13,10 @@ val AMD_shader_ballot = "AMDShaderBallot".nativeClassVK("AMD_shader_ballot", pos
 		This extension introduces two new shader functions:
 		${ul(
 			"""
-			<b>mbcnt</b> computes the number of bits set in the provided argument, masked with a thread mask which contains 1 for all active threads less than
-			the current thread within a wavefront.
+			<b>mbcntAMD</b> computes the number of bits set in the provided argument, masked with a thread mask which contains 1 for all active threads less
+			than the current thread within a wavefront.
 			""",
-			"<b>ballot</b> returns a 64-bit mask which contains 1 if that thread within the wavefront passed true into the instruction, and 0 otherwise."
+			"<b>ballotARB</b> returns a 64-bit mask which contains 1 if that thread within the wavefront passed true into the instruction, and 0 otherwise."
 		)}
 		"""
 

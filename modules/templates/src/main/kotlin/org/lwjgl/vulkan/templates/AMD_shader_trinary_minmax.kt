@@ -12,6 +12,9 @@ val AMD_shader_trinary_minmax = "AMDShaderTrinaryMinmax".nativeClassVK("AMD_shad
 		"""
 		When the {@code VK_AMD_shader_trinary_minmax} device extension is enabled the application $can pass a SPIR-V module to #CreateShaderModule() that uses
 		the {@code SPV_AMD_shader_trinary_minmax} SPIR-V extension.
+
+		This extension introduces 3-parameter {@code min}, {@code max} and {@code med} functions which map directly to the corresponding GCN opcodes:
+		{@code min3}, {@code max3}, {@code med3}
 		"""
 
 	IntConstant(
