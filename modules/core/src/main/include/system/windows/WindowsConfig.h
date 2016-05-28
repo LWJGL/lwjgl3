@@ -9,4 +9,6 @@
 #define ENABLE_WARNINGS() \
 	__pragma(warning(pop))
 
-#define inline __inline
+#ifndef __cplusplus
+	#define inline __inline
+#endif
