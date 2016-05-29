@@ -133,6 +133,13 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</compile>
 
+		<compile if:true="${binding.nuklear}">
+			<arguments>
+				<arg value="-I${src.include.rel}/nuklear"/>
+				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
+			</arguments>
+		</compile>
+
 		<compile if:true="${binding.par}">
 			<arguments>
 				<arg value="-I${src.include.rel}/util/par"/>

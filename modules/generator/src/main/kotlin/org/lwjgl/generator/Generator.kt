@@ -41,6 +41,7 @@ enum class Binding(val key: String, val packageName: String) {
 	LMDB("binding.lmdb", "org.lwjgl.util.lmdb"),
 	NANOVG("binding.nanovg", "org.lwjgl.nanovg"),
 	NFD("binding.nfd", "org.lwjgl.util.nfd"),
+	NUKLEAR("binding.nuklear", "org.lwjgl.nuklear"),
 	OPENAL("binding.openal", "org.lwjgl.openal"),
 	OPENCL("binding.opencl", "org.lwjgl.opencl"),
 	OPENGL("binding.opengl", "org.lwjgl.opengl"),

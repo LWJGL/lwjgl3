@@ -102,6 +102,13 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</cl>
 
+		<cl if:true="${binding.nuklear}">
+			<arguments>
+				<arg value="/I${src.include}\nuklear"/>
+				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
+			</arguments>
+		</cl>
+
 		<cl if:true="${binding.ovr}">
 			<arguments>
 				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>

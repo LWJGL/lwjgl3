@@ -16,6 +16,7 @@ This script is included in /config/build-definitions.xml.
 	<property name="binding.lmdb" value="true"/>
 	<property name="binding.nanovg" value="true"/>
 	<property name="binding.nfd" value="true"/>
+	<property name="binding.nuklear" value="true"/>
 	<property name="binding.openal" value="true"/>
 	<property name="binding.opencl" value="true"/>
 	<property name="binding.opengl" value="true"/>
