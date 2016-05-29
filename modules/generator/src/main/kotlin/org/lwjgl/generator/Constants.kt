@@ -78,6 +78,14 @@ class ConstantBlock<T : Any>(
 
 	private fun getConstantName(name: String) = if ( noPrefix ) name else "${nativeClass.prefixConstant}$name"
 
+	private val Constant<out Int>.enumValue: Int get() = this.value.let {
+		it ?: try {
+			Integer.parseInt((this as ConstantExpression).expression)
+		} catch(e: Exception) {
+			Integer.MAX_VALUE
+		}
+	}
+
 	internal fun generate(writer: PrintWriter) {
 		if ( constantType === EnumConstant ) {
 			// Increment/update the current enum value while iterating the enum constants.
@@ -138,7 +146,7 @@ class ConstantBlock<T : Any>(
 			}
 
 			fun rootBlockBefore() =
-				enumBlocks.isEmpty() || rootBlock[0].value ?: Integer.MAX_VALUE < enumBlocks[0].constants[0].value ?: Integer.MAX_VALUE
+				enumBlocks.isEmpty() || Math.abs(rootBlock[0].enumValue) <= Math.abs(enumBlocks[0].constants[0].enumValue)
 
 			fun PrintWriter.generateRootBlock(rootBlock: ArrayList<Constant<Int>>) =
 				ConstantBlock(nativeClass, access, IntConstant, this@ConstantBlock.documentation, *rootBlock.toArray(emptyArray())).let {
