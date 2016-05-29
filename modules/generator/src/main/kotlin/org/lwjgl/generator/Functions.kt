@@ -1440,7 +1440,7 @@ class NativeClassFunction(
 			)
 		}
 
-		if ( code.nativeAfterCall != null && !returns.isVoid )
+		if ( code.nativeAfterCall != null && !returns.isVoid && !returns.isStructValue )
 			println("\t$returnsJniFunctionType $RESULT;")
 
 		code.nativeBeforeCall.let { if ( it != null ) println(it) }
@@ -1495,7 +1495,7 @@ class NativeClassFunction(
 			if ( it == null ) return@let
 
 			println(it)
-			if ( !returns.isVoid )
+			if ( !returns.isVoid && !returns.isStructValue )
 				println("\treturn $RESULT;")
 		}
 
