@@ -1573,11 +1573,13 @@ fun struct(
 	virtual: Boolean = false,
 	mutable: Boolean = true,
 	nativeLayout: Boolean = false,
-	init: Struct.() -> Unit
+	init: (Struct.() -> Unit)? = null
 ): Struct {
 	val struct = Struct(packageName, className, nativeSubPath, nativeName, false, virtual, mutable, nativeLayout)
-	struct.init()
-	Generator.register(struct)
+	if ( init != null ) {
+		struct.init()
+		Generator.register(struct)
+	}
 	return struct
 }
 
@@ -1589,7 +1591,7 @@ fun struct_p(
 	virtual: Boolean = false,
 	mutable: Boolean = true,
 	nativeLayout: Boolean = false,
-	init: Struct.() -> Unit
+	init: (Struct.() -> Unit)? = null
 ) = struct(packageName, className, nativeSubPath, nativeName, virtual, mutable, nativeLayout, init).nativeType.p
 
 fun union(
@@ -1600,11 +1602,13 @@ fun union(
 	virtual: Boolean = false,
 	mutable: Boolean = true,
 	nativeLayout: Boolean = false,
-	init: Struct.() -> Unit
+	init: (Struct.() -> Unit)? = null
 ): Struct {
 	val struct = Struct(packageName, className, nativeSubPath, nativeName, true, virtual, mutable, nativeLayout)
-	struct.init()
-	Generator.register(struct)
+	if ( init != null ) {
+		struct.init()
+		Generator.register(struct)
+	}
 	return struct
 }
 
@@ -1616,5 +1620,5 @@ fun union_p(
 	virtual: Boolean = false,
 	mutable: Boolean = true,
 	nativeLayout: Boolean = false,
-	init: Struct.() -> Unit
+	init: (Struct.() -> Unit)? = null
 ) = union(packageName, className, nativeSubPath, nativeName, virtual, mutable, nativeLayout, init).nativeType.p
