@@ -390,14 +390,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"IMAGE_TYPE_1D".enumExpr("One-dimensional image", "0"),
 		"IMAGE_TYPE_2D".enum("Two-dimensional image"),
 		"IMAGE_TYPE_3D".enum("Three-dimensional image")
-	).enumLinks
+	).javaDocLinks
 
 	val VkImageTilings = EnumConstant(
 		"VkImageTiling",
 
 		"IMAGE_TILING_OPTIMAL".enumExpr("Specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access).", "0"),
 		"IMAGE_TILING_LINEAR".enum("Specifies linear tiling (texels are laid out in memory in row-major order, possibly with some padding on each row).")
-	).enumLinks
+	).javaDocLinks
 
 	EnumConstant(
 		"VkPhysicalDeviceType",
@@ -964,7 +964,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		"PIPELINE_BIND_POINT_GRAPHICS".enumExpr("", "0"),
 		"PIPELINE_BIND_POINT_COMPUTE".enum("")
-	).enumLinks
+	).javaDocLinks
 
 	EnumConstant(
 		"VkCommandBufferLevel",
@@ -978,7 +978,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		"INDEX_TYPE_UINT16".enumExpr("", "0"),
 		"INDEX_TYPE_UINT32".enum("")
-	).enumLinks
+	).javaDocLinks
 
 	val VkSubpassContentValues = EnumConstant(
 		"VkSubpassContents",
@@ -994,7 +994,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			valid command on the command buffer until #CmdNextSubpass() or #CmdEndRenderPass().
 			"""
 		)
-	).enumLinks
+	).javaDocLinks
 
 	EnumConstant(
 		"VkFormatFeatureFlagBits",
