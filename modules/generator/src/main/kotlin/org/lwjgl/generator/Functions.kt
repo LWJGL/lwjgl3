@@ -705,11 +705,6 @@ class NativeClassFunction(
 				printList(getNativeParams()) {
 					it.asNativeMethodCallParam(this@NativeClassFunction, NORMAL)
 				}
-
-				if ( returns.isStructValue ) {
-					if ( hasNativeParams ) print(", ")
-					print("$RESULT.$ADDRESS")
-				}
 			}
 		}
 
@@ -845,6 +840,10 @@ class NativeClassFunction(
 			}
 		}
 		printParams()
+		if ( returns.isStructValue ) {
+			if ( hasNativeParams ) print(", ")
+			print("$RESULT.$ADDRESS")
+		}
 		print(")")
 
 		if ( hasConstructor ) {
@@ -1208,6 +1207,10 @@ class NativeClassFunction(
 			if ( mapPointerExplicit.addParam )
 				print("long ${mapPointerExplicit.lengthParam}, ")
 			print("ByteBuffer $MAP_OLD")
+		}
+		if ( returns.isStructValue ) {
+			if ( !parameters.isEmpty() ) print(", ")
+			print("${returns.nativeType.javaMethodType} $RESULT")
 		}
 		println(") {")
 
