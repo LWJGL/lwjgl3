@@ -264,7 +264,7 @@ public final class Checks {
 	 */
 	public static void checkBuffer(short[] buf, int size) {
 		if ( buf.length < size ) {
-			throwArraySizeException(buf, size);
+			throwSizeException(buf, size);
 		}
 	}
 
@@ -278,7 +278,7 @@ public final class Checks {
 	 */
 	public static void checkBuffer(int[] buf, int size) {
 		if ( buf.length < size ) {
-			throwArraySizeException(buf, size);
+			throwSizeException(buf, size);
 		}
 	}
 
@@ -292,7 +292,7 @@ public final class Checks {
 	 */
 	public static void checkBuffer(long[] buf, int size) {
 		if ( buf.length < size ) {
-			throwArraySizeException(buf, size);
+			throwSizeException(buf, size);
 		}
 	}
 
@@ -306,7 +306,7 @@ public final class Checks {
 	 */
 	public static void checkBuffer(float[] buf, int size) {
 		if ( buf.length < size ) {
-			throwArraySizeException(buf, size);
+			throwSizeException(buf, size);
 		}
 	}
 
@@ -320,7 +320,19 @@ public final class Checks {
 	 */
 	public static void checkBuffer(double[] buf, int size) {
 		if ( buf.length < size ) {
-			throwArraySizeException(buf, size);
+			throwSizeException(buf, size);
+		}
+	}
+
+	/**
+	 * Helper method to ensure a CharSequence has enough characters.
+	 *
+	 * @param text the text to check
+	 * @param size the minimum number of characters
+	 */
+	public static void checkBuffer(CharSequence text, int size) {
+		if ( text.length() < size ) {
+			throwSizeException(text, size);
 		}
 	}
 
@@ -334,7 +346,7 @@ public final class Checks {
 	 */
 	public static void checkBuffer(Buffer buf, int size) {
 		if ( buf.remaining() < size ) {
-			throwBufferSizeException(buf, size);
+			throwSizeException(buf, size);
 		}
 	}
 
@@ -353,7 +365,7 @@ public final class Checks {
 	 */
 	public static void checkBuffer(PointerBuffer buf, int size) {
 		if ( buf.remaining() < size ) {
-			throwBufferSizeException(buf, size);
+			throwSizeException(buf, size);
 		}
 	}
 
@@ -372,7 +384,7 @@ public final class Checks {
 	 */
 	public static void checkBuffer(StructBuffer<?, ?> buf, int size) {
 		if ( buf.remaining() < size ) {
-			throwBufferSizeException(buf, size);
+			throwSizeException(buf, size);
 		}
 	}
 
@@ -383,7 +395,7 @@ public final class Checks {
 
 	public static void checkArray(Object[] array, int size) {
 		if ( array.length < size )
-			throwArraySizeException(array, size);
+			throwSizeException(array, size);
 	}
 
 	public static void checkBufferGT(Buffer buf, int size) {
@@ -403,40 +415,44 @@ public final class Checks {
 
 	// Separate calls to help inline checkBuffer.
 
-	private static void throwBufferSizeException(Buffer buf, int size) {
+	private static void throwSizeException(Buffer buf, int size) {
 		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at least " + size);
 	}
 
-	private static void throwBufferSizeException(PointerBuffer buf, int size) {
+	private static void throwSizeException(PointerBuffer buf, int size) {
 		throw new IllegalArgumentException("Number of remaining pointer values in buffer is " + buf.remaining() + ", must be at least " + size);
 	}
 
-	private static void throwBufferSizeException(StructBuffer<?, ?> buf, int size) {
+	private static void throwSizeException(StructBuffer<?, ?> buf, int size) {
 		throw new IllegalArgumentException("Number of remaining struct values in buffer is " + buf.remaining() + ", must be at least " + size);
 	}
 
-	private static void throwArraySizeException(Object[] array, int size) {
+	private static void throwSizeException(Object[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwArraySizeException(short[] array, int size) {
+	private static void throwSizeException(short[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwArraySizeException(int[] array, int size) {
+	private static void throwSizeException(int[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwArraySizeException(long[] array, int size) {
+	private static void throwSizeException(long[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwArraySizeException(float[] array, int size) {
+	private static void throwSizeException(float[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwArraySizeException(double[] array, int size) {
+	private static void throwSizeException(double[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
+	}
+
+	private static void throwSizeException(CharSequence text, int size) {
+		throw new IllegalArgumentException("Number of characters is " + text.length() + ", must be at least " + size);
 	}
 
 	private static void throwBufferSizeGTException(Buffer buf, int size) {

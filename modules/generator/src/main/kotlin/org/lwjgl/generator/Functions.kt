@@ -365,7 +365,7 @@ class NativeClassFunction(
 
 			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "if ( ${it.name} != null ) " else ""
 
-			if ( it.nativeType is CharSequenceType && it.paramType === IN && transforms?.get(it) == null ) {
+			if ( it.nativeType is CharSequenceType && it.paramType === IN && !it.has(Check) && transforms?.get(it) == null ) {
 				if ( getReferenceParam(AutoSize, it.name) == null )
 					checks.add("${prefix}checkNT${it.nativeType.charMapping.bytes}(${it.name});")
 			}
