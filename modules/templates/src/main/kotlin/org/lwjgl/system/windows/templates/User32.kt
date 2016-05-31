@@ -1828,4 +1828,84 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 
 		returnDoc = "one of the following values: $ChangeDisplaySettingsResults"
 	)
+
+	BOOL(
+		"GetCursorPos",
+	    "Retrieves the position of the mouse cursor, in screen coordinates.",
+
+	    LPPOINT.OUT("point", "a pointer to a {@link POINT} structure that receives the screen coordinates of the cursor")
+	)
+
+	BOOL(
+		"SetCursorPos",
+	    """
+	    Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent #ClipCursor()
+	    function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle.
+	    """,
+
+	    int.IN("X", "the new x-coordinate of the cursor, in screen coordinates."),
+	    int.IN("Y", "the new y-coordinate of the cursor, in screen coordinates.")
+	)
+
+	BOOL(
+		"ClipCursor",
+	    """
+	    Confines the cursor to a rectangular area on the screen. If a subsequent cursor position (set by the #SetCursorPos() function or the mouse) lies
+	    outside the rectangle, the system automatically adjusts the position to keep the cursor inside the rectangular area.
+	    """,
+
+	    const..nullable..RECT_p.IN(
+		    "rect",
+		    """
+		    a pointer to the structure that contains the screen coordinates of the upper-left and lower-right corners of the confining rectangle. If this
+		    parameter is $NULL, the cursor is free to move anywhere on the screen.
+		    """
+	    )
+	)
+
+	int(
+		"ShowCursor",
+		"""
+		Displays or hides the cursor.
+
+		This function sets an internal display counter that determines whether the cursor should be displayed. The cursor is displayed only if the display
+		count is greater than or equal to 0. If a mouse is installed, the initial display count is 0. If no mouse is installed, the display count is –1.
+		""",
+
+		BOOL.IN(
+			"show",
+			"If {@code show} is #TRUE, the display count is incremented by one. If {@code show} is #FALSE, the display count is decremented by one."
+		),
+
+		returnDoc = "the new display counter"
+	)
+
+	HCURSOR(
+		"SetCursor",
+		"""
+		Sets the cursor shape.
+
+		The cursor is set only if the new cursor is different from the previous cursor; otherwise, the function returns immediately.
+
+		The cursor is a shared resource. A window should set the cursor shape only when the cursor is in its client area or when the window is capturing mouse
+		input. In systems without a mouse, the window should restore the previous cursor before the cursor leaves the client area or before it relinquishes
+		control to another window.
+
+		If your application must set the cursor while it is in a window, make sure the class cursor for the specified window's class is set to $NULL. If the
+		class cursor is not $NULL, the system restores the class cursor each time the mouse is moved.
+
+		The cursor is not shown on the screen if the internal cursor display count is less than zero. This occurs if the application uses the #ShowCursor()
+		function to hide the cursor more times than to show the cursor.
+		""",
+
+		nullable..HCURSOR.IN(
+			"hCursor",
+			"""
+			a handle to the cursor. The cursor must have been created by the #CreateCursor() function or loaded by the #LoadCursor() or #LoadImage() function.
+			If this parameter is $NULL, the cursor is removed from the screen.
+			"""
+		),
+
+	    returnDoc = "the handle to the previous cursor, if there was one"
+	)
 }

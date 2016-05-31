@@ -102,6 +102,7 @@ val POINT = struct(WINDOWS_PACKAGE, "POINT") {
 	LONG.member("x", "the x-coordinate of the point")
 	LONG.member("y", "the y-coordinate of the point")
 }.nativeType
+val LPPOINT = POINT.p("LPPOINT")
 
 val RECT = struct(WINDOWS_PACKAGE, "RECT") {
 	documentation = "Defines the coordinates of the upper-left and lower-right corners of a rectangle."
@@ -111,6 +112,7 @@ val RECT = struct(WINDOWS_PACKAGE, "RECT") {
 	LONG.member("right", "the x-coordinate of the lower-right corner of the rectangle")
 	LONG.member("bottom", "the y-coordinate of the lower-right corner of the rectangle")
 }.nativeType
+val RECT_p = RECT.p
 val LPRECT = RECT.p("LPRECT")
 
 val MSG = struct(WINDOWS_PACKAGE, "MSG") {
