@@ -192,9 +192,7 @@ class NativeClassFunction(
 
 	private val returnsJavaMethodType: String
 		get() = if ( returns.nativeType is StructType ) {
-			if ( !returns.nativeType.includesPointer )
-				"void"
-			else if ( hasParam { it has AutoSizeResult } )
+			if ( hasParam { it has AutoSizeResult } )
 				"${returns.javaMethodType}.Buffer"
 			else
 				returns.javaMethodType
@@ -710,7 +708,9 @@ class NativeClassFunction(
 
 		generateCodeAfterNative(code, ApplyTo.NORMAL, hasFinally)
 
-		if ( !(returns.isVoid || returns.isStructValue) ) {
+		if ( returns.isStructValue ) {
+			println("\t\treturn $RESULT;")
+		} else if ( !returns.isVoid ) {
 			if ( returns.isBufferPointer ) {
 				if ( hasFinally )
 					print("\t")
@@ -1276,10 +1276,12 @@ class NativeClassFunction(
 		// Return
 
 		if ( returns.isVoid || returns.isStructValue ) {
+			// TODO: struct value + custom transform?
 			val result = returns.transformCallOrElse(transforms, "")
 			if ( !result.isEmpty() ) {
 				println(if ( hasFinally ) result.replaceAll(TRY_FINALLY_ALIGN, "\t$1") else result)
-			}
+			} else if ( returns.isStructValue )
+				println("\t\treturn $RESULT;")
 		} else {
 			if ( returns.isBufferPointer ) {
 				if ( hasFinally )
