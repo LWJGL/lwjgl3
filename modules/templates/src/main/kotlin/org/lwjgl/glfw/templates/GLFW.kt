@@ -526,7 +526,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 				""",
 				"""
 				<b>OpenGL</b>: #CONTEXT_VERSION_MAJOR and #CONTEXT_VERSION_MINOR are not hard constraints, but creation will fail if the OpenGL version of the
-				created context is less than the one requested. It is therefore perfectly safe to use the default of version 1.0 for legacy code and you may
+				created context is less than the one requested. It is therefore perfectly safe to use the default of version 1.0 for legacy code and you will
 				still get backwards-compatible contexts of version 3.0 and above when available.
 				""",
 				"""
@@ -1090,8 +1090,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"This function must not be called from a callback.",
 			"<b>Windows</b>: Window creation will fail if the Microsoft GDI software OpenGL implementation is the only one available.",
 			"""
-		    <b>Windows</b>: If the executable has an icon resource named {@code GLFW_ICON}, it will be set as the icon for the window. If no such icon
-		    is present, the {@code IDI_WINLOGO} icon will be used instead.
+		    <b>Windows</b>: If the executable has an icon resource named {@code GLFW_ICON}, it will be set as the initial icon for the window. If no such icon
+		    is present, the {@code IDI_WINLOGO} icon will be used instead. To set a different icon, see #SetWindowIcon().
 			""",
 			"<b>Windows</b>: The context to share resources with may not be current on any other thread.",
 			"""
@@ -1208,9 +1208,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		The specified image data is copied before this function returns.
 
-		<b>OS X</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's icon. For more
-		information on bundles, see the <a href="https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming
-		Guide</a> in the Mac Developer Library.
+		<b>OS X</b>: The GLFW window has no icon, as it is not a document window, so this function does nothing. The dock icon will be the same as the
+		application bundle's icon. For more information on bundles, see the
+		<a href="https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac Developer
+		Library.
 
 		This function must only be called from the main thread.
 		""",
@@ -2389,7 +2390,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The resolution of the timer is system dependent, but is usually on the order of a few micro- or nanoseconds. It uses the highest-resolution monotonic
 		time source on each supported platform.
 
-		This function may be called from any thread. Reading of the internal timer offset is not atomic.
+		This function may be called from any thread. Reading and writing of the internal timer offset is not atomic, so it needs to be externally synchronized
+		with calls to #SetTime().
 		""",
 
 		returnDoc = "the current value, in seconds, or zero if an error occurred",
@@ -2405,7 +2407,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The upper limit of the timer is calculated as ${code("floor((2<sup>64</sup> - 1) / 10<sup>9</sup>)")} and is due to implementations storing nanoseconds
 		in 64 bits. The limit may be increased in the future.
 
-		This function may be called from any thread. Writing of the internal timer offset is not atomic.
+		This function may be called from any thread. Reading and writing of the internal timer offset is not atomic, so it needs to be externally synchronized
+		with calls to #GetTime().
 		""",
 
 		double.IN("time", "the new value, in seconds"),
