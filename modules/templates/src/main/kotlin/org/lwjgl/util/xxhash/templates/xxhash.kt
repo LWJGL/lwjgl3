@@ -9,6 +9,12 @@ import org.lwjgl.util.xxhash.*
 
 val xxhash = "XXHash".nativeClass(XXHASH_PACKAGE, prefix = "XXH", prefixMethod = "XXH") {
 	initializeAllocator()
+
+	nativeDirective(
+"""#ifdef LWJGL_WINDOWS
+	__pragma(warning(disable : 4710))
+#endif""", beforeIncludes = true)
+
 	nativeDirective(
 """DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
@@ -33,7 +39,7 @@ ENABLE_WARNINGS()""")
 	)
 
 	val major = 0
-	val minor = 5
+	val minor = 6
 	val patch = 0
 
 	IntConstant("The major version number.", "VERSION_MAJOR".."$major")
