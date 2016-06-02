@@ -1998,14 +1998,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
   		If the cursor mode is #CURSOR_DISABLED then the cursor position is unconstrained and limited only by the minimum and maximum values of <b>double</b>.
 
-		Notes:
-		${ul(
-			"This function must only be called from the main thread.",
-			"""
-		    <b>X11:</b> Due to the asynchronous nature of X11, it may take a moment for the window focus event to arrive. This means you may not be able to set
-		    the cursor position directly after window creation.
-		    """
-		)}
+		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the desired window"),
