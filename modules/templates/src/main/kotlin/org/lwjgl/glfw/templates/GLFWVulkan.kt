@@ -15,7 +15,7 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 		documentation =
 			"Native bindings to the GLFW library's Vulkan functions."
 
-		GLFWboolean(
+		intb(
 			"VulkanSupported",
 			"""
 			Returns whether the Vulkan loader has been found. This check is performed by GLFW#Init().
@@ -97,7 +97,7 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 			since = "version 3.2"
 		)
 
-		GLFWboolean(
+		intb(
 			"GetPhysicalDevicePresentationSupport",
 			"""
 			Returns whether the specified queue family of the specified physical device supports presentation to the platform GLFW was built for.

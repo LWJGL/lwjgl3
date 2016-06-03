@@ -666,7 +666,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"EGL_CONTEXT_API"..0x00036002
 	).javaDocLinks
 
-	GLFWboolean(
+	intb(
 		"Init",
 		"""
 		Initializes the GLFW library. Before most GLFW functions can be used, GLFW must be initialized, and before an application terminates GLFW should be
@@ -1150,7 +1150,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 1.0"
 	)
 
-	GLFWboolean(
+	intb(
 		"WindowShouldClose",
 		"""
 		Returns the value of the close flag of the specified window.
@@ -1174,7 +1174,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose flag to change"),
-		GLFWboolean.IN("value", "the new value"),
+		intb.IN("value", "the new value"),
 
 		since = "version 3.0"
 	)
@@ -2244,7 +2244,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.1"
 	)
 
-	GLFWboolean(
+	intb(
 		"JoystickPresent",
 		"""
 		Returns whether the specified joystick is present.
@@ -2524,7 +2524,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 1.0"
 	)
 
-	GLFWboolean(
+	intb(
 		"ExtensionSupported",
 		"""
 		Returns whether the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">API extension</a> is supported by the current
