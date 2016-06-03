@@ -262,14 +262,19 @@ class Return(
 		if ( param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The Return modifier cannot be applied on opaque pointer types.")
 
-		if ( param.paramType !== ParameterType.OUT )
-			throw IllegalArgumentException("The Return modifier can only be applied on output parameters.")
+		if ( param.paramType === ParameterType.OUT ) {
+			if (param.paramType !== ParameterType.OUT)
+				throw IllegalArgumentException("The Return modifier can only be applied on output parameters.")
 
-		if ( this !== ReturnParam && param.nativeType !is CharSequenceType && !lengthParam.startsWith(RESULT) )
-			throw IllegalArgumentException("The Return modifier can only be applied on CharSequence parameters.")
+			if (this !== ReturnParam && param.nativeType !is CharSequenceType && !lengthParam.startsWith(RESULT))
+				throw IllegalArgumentException("The Return modifier can only be applied on CharSequence parameters.")
 
-		if ( heapAllocate && param.nativeType !is CharSequenceType )
-			throw IllegalArgumentException("The heapAllocate option can only be enabled with CharSequence parameters.")
+			if (heapAllocate && param.nativeType !is CharSequenceType)
+				throw IllegalArgumentException("The heapAllocate option can only be enabled with CharSequence parameters.")
+		} else {
+			if ( this !== ReturnParam || param.nativeType !is StructType || param.nativeType.includesPointer )
+				throw IllegalArgumentException("The ReturnParam modifier can only be used on struct value parameters.")
+		}
 	}
 }
 

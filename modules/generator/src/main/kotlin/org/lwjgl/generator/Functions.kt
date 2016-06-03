@@ -278,7 +278,10 @@ class NativeClassFunction(
 				val returnMod = it[Return]
 
 				if ( returnMod === ReturnParam ) {
-					if ( !returns.isVoid )
+					if ( returns.isStructValue ) {
+						if ( !(returns.isStructValue && it.nativeType is StructType && !it.nativeType.includesPointer && returns.nativeType == it.nativeType) )
+							it.error("The ReturnParam modifier can only be used on a struct value parameter if the function returns the same type.")
+					} else if ( !returns.isVoid )
 						it.error("The ReturnParam modifier can only be used in functions with void return type.")
 				} else {
 					if ( returnMod.lengthParam.startsWith(RESULT) ) {
@@ -533,7 +536,7 @@ class NativeClassFunction(
 		printList(nativeParams) {
 			if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asNativeMethodParam
 		}
-		if ( returns.isStructValue ) {
+		if ( returns.isStructValue && !hasParam { it has ReturnParam } ) {
 			if ( nativeClass.binding != null || nativeParams.any() ) print(", ")
 			print("long $RESULT")
 		}
@@ -554,7 +557,7 @@ class NativeClassFunction(
 				if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asNativeMethodParam
 		}
 
-		if ( returns.isStructValue ) {
+		if ( returns.isStructValue && !hasParam { it has ReturnParam } ) {
 			if ( this@NativeClassFunction.hasNativeParams ) print(", ")
 			print("long $RESULT")
 		}
@@ -626,7 +629,7 @@ class NativeClassFunction(
 			else
 				it.name
 		}
-		if ( returns.isStructValue ) {
+		if ( returns.isStructValue && !hasParam { it has ReturnParam } ) {
 			print(", ")
 			print(RESULT)
 		}
@@ -661,7 +664,7 @@ class NativeClassFunction(
 				if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asJavaMethodParam
 		}
 
-		if ( returns.isStructValue ) {
+		if ( returns.isStructValue && !hasParam { it has ReturnParam } ) {
 			if ( !parameters.isEmpty() ) print(", ")
 			print("${returns.nativeType.javaMethodType} $RESULT")
 		}
@@ -709,7 +712,13 @@ class NativeClassFunction(
 		generateCodeAfterNative(code, ApplyTo.NORMAL, hasFinally)
 
 		if ( returns.isStructValue ) {
-			println("\t\treturn $RESULT;")
+			getParams { it has ReturnParam }.map { it.name }.singleOrNull().let {
+				println(if ( it != null )
+					"\t\treturn $it;"
+				else
+					"\t\treturn $RESULT;"
+				)
+			}
 		} else if ( !returns.isVoid ) {
 			if ( returns.isBufferPointer ) {
 				if ( hasFinally )
@@ -840,7 +849,7 @@ class NativeClassFunction(
 			}
 		}
 		printParams()
-		if ( returns.isStructValue ) {
+		if ( returns.isStructValue && !hasParam { it has ReturnParam } ) {
 			if ( hasNativeParams ) print(", ")
 			print("$RESULT.$ADDRESS")
 		}
@@ -944,7 +953,7 @@ class NativeClassFunction(
 			if ( it has Return && !hasParam { it has PointerArray } ) {
 				val returnMod = it[Return]
 
-				if ( returnMod === ReturnParam && it.nativeType !is CharSequenceType ) {
+				if ( returnMod === ReturnParam && returns.isVoid && it.nativeType !is CharSequenceType ) {
 					if ( !hasParam { it has SingleValue || it has PointerArray } ) {
 						// Skip, we inject the Return alternative in these transforms
 						applyReturnValueTransforms(it)
@@ -988,7 +997,7 @@ class NativeClassFunction(
 						transforms[maxLengthParam] = ExpressionLocalTransform(returnMod.maxLengthExpression)
 						generateAlternativeMethod(name, transforms)
 					}
-				} else
+				} else if ( returns.isVoid )
 					throw IllegalStateException()
 			} else if ( it has MultiType ) {
 				// Generate MultiType alternatives
@@ -1385,7 +1394,7 @@ class NativeClassFunction(
 				"${it.nativeType.jniFunctionType} ${it.name}${if (it.nativeType is PointerType) POINTER_POSTFIX else ""}"
 			}
 		}.toCollection(params)
-		if ( returns.isStructValue )
+		if ( returns.isStructValue && !hasParam { it has ReturnParam })
 			params.add("jlong $RESULT")
 
 		// Function signature
@@ -1467,7 +1476,13 @@ class NativeClassFunction(
 			else {
 				print('\t')
 				if ( returns.isStructValue ) {
-					print("*((${returns.nativeType.name}*)(intptr_t)$RESULT) = ")
+					getParams { it has ReturnParam }.map { it.name }.singleOrNull().let {
+						print(if ( it != null )
+							"*$it = "
+						else
+							"*((${returns.nativeType.name}*)(intptr_t)$RESULT) = "
+						)
+					}
 				} else if ( !returns.isVoid ) {
 					print(if ( code.nativeAfterCall != null ) "$RESULT =" else "return")
 					print(" ($returnsJniFunctionType)")
