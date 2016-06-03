@@ -113,7 +113,7 @@ public final class Truetype extends FontDemo {
 					continue;
 				} else if ( c < 32 || 128 <= c )
 					continue;
-				stbtt_GetBakedQuad(cdata, BITMAP_W, BITMAP_H, c - 32, x, y, q, 1);
+				stbtt_GetBakedQuad(cdata, BITMAP_W, BITMAP_H, c - 32, x, y, q, true);
 
 				glTexCoord2f(q.s0(), q.t0());
 				glVertex2f(q.x0(), q.y0());

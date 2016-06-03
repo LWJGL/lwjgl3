@@ -271,7 +271,7 @@ int main(int arg, char **argv)
 		Check(1)..float_p.INOUT("xpos", "the current x position, in screen pixel space"),
 		Check(1)..float_p.INOUT("ypos", "the current y position, in screen pixel space"),
 		stbtt_aligned_quad_p.IN("q", "an ##STBTTAlignedQuad struct in which to return the quad to draw"),
-		int.IN("opengl_fillrule", "1 if opengl fill rule; 0 if DX9 or earlier")
+		intb.IN("opengl_fillrule", "1 if opengl fill rule; 0 if DX9 or earlier")
 	)
 
 	// NEW TEXTURE BAKING API
@@ -399,7 +399,7 @@ int main(int arg, char **argv)
 		Check(1)..float_p.INOUT("xpos", "the current x position, in screen pixel space"),
 		Check(1)..float_p.INOUT("ypos", "the current y position, in screen pixel space"),
 		stbtt_aligned_quad_p.OUT("q", "an ##STBTTAlignedQuad struct in which to return the quad to draw"),
-		int.IN("align_to_integer", "1 to align the quad to integer coordinates")
+		intb.IN("align_to_integer", "1 to align the quad to integer coordinates")
 	)
 
 	int(
@@ -521,9 +521,9 @@ int main(int arg, char **argv)
 		""",
 
 		const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-		Check(1)..int_p.OUT("ascent", "returns the coordinate above the baseline the font extends"),
-		Check(1)..int_p.OUT("descent", "returns the coordinate below the baseline the font extends (i.e. it is typically negative)"),
-		Check(1)..int_p.OUT("lineGap", "returns the spacing between one row's descent and the next row's ascent")
+		nullable..Check(1)..int_p.OUT("ascent", "returns the coordinate above the baseline the font extends"),
+		nullable..Check(1)..int_p.OUT("descent", "returns the coordinate below the baseline the font extends (i.e. it is typically negative)"),
+		nullable..Check(1)..int_p.OUT("lineGap", "returns the spacing between one row's descent and the next row's ascent")
 	)
 
 	void(
@@ -547,8 +547,8 @@ int main(int arg, char **argv)
 
 		const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
 		int.IN("codepoint", "the unicode codepoint"),
-		Check(1)..int_p.OUT("advanceWidth", "the offset from the current horizontal position to the next horizontal position"),
-		Check(1)..int_p.OUT("leftSideBearing", "the offset from the current horizontal position to the left edge of the character")
+		nullable..Check(1)..int_p.OUT("advanceWidth", "the offset from the current horizontal position to the next horizontal position"),
+		nullable..Check(1)..int_p.OUT("leftSideBearing", "the offset from the current horizontal position to the left edge of the character")
 	)
 
 	int(
@@ -566,10 +566,10 @@ int main(int arg, char **argv)
 
 		const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
 		int.IN("codepoint", "the unicode codepoint"),
-		Check(1)..int_p.OUT("x0", "returns the left coordinate"),
-		Check(1)..int_p.OUT("y0", "returns the bottom coordinate"),
-		Check(1)..int_p.OUT("x1", "returns the right coordinate"),
-		Check(1)..int_p.OUT("y1", "returns the top coordinate")
+		nullable..Check(1)..int_p.OUT("x0", "returns the left coordinate"),
+		nullable..Check(1)..int_p.OUT("y0", "returns the bottom coordinate"),
+		nullable..Check(1)..int_p.OUT("x1", "returns the right coordinate"),
+		nullable..Check(1)..int_p.OUT("y1", "returns the top coordinate")
 	)
 
 	void(
@@ -578,8 +578,8 @@ int main(int arg, char **argv)
 
 		const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
 		int.IN("glyph_index", "the glyph index"),
-		Check(1)..int_p.OUT("advanceWidth", "the offset from the current horizontal position to the next horizontal position"),
-		Check(1)..int_p.OUT("leftSideBearing", "the offset from the current horizontal position to the left edge of the character")
+		nullable..Check(1)..int_p.OUT("advanceWidth", "the offset from the current horizontal position to the next horizontal position"),
+		nullable..Check(1)..int_p.OUT("leftSideBearing", "the offset from the current horizontal position to the left edge of the character")
 	)
 
 	int(
@@ -597,10 +597,10 @@ int main(int arg, char **argv)
 
 		const..stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
 		int.IN("glyph_index", "the glyph index"),
-		Check(1)..int_p.OUT("x0", "returns the left coordinate"),
-		Check(1)..int_p.OUT("y0", "returns the bottom coordinate"),
-		Check(1)..int_p.OUT("x1", "returns the right coordinate"),
-		Check(1)..int_p.OUT("y1", "returns the top coordinate")
+		nullable..Check(1)..int_p.OUT("x0", "returns the left coordinate"),
+		nullable..Check(1)..int_p.OUT("y0", "returns the bottom coordinate"),
+		nullable..Check(1)..int_p.OUT("x1", "returns the right coordinate"),
+		nullable..Check(1)..int_p.OUT("y1", "returns the top coordinate")
 	)
 
 	// GLYPH SHAPES
@@ -675,8 +675,8 @@ int main(int arg, char **argv)
 		int.IN("codepoint", "the unicode codepoint to render"),
 		Check(1)..AutoSizeResult..int_p.OUT("width", "returns the bitmap width"),
 		Check(1)..AutoSizeResult..int_p.OUT("height", "returns the bitmap height"),
-		Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
-		Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
+		nullable..Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
+		nullable..Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
 
 	unsigned_char_p(
@@ -691,8 +691,8 @@ int main(int arg, char **argv)
 		int.IN("codepoint", "the unicode codepoint to render"),
 		Check(1)..AutoSizeResult..int_p.OUT("width", "returns the bitmap width"),
 		Check(1)..AutoSizeResult..int_p.OUT("height", "returns the bitmap height"),
-		Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
-		Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
+		nullable..Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
+		nullable..Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
 
 	void(
@@ -741,10 +741,10 @@ int main(int arg, char **argv)
 		int.IN("codepoint", "the unicode codepoint"),
 		float.IN("scale_x", "the horizontal scale"),
 		float.IN("scale_y", "the vertical scale"),
-		Check(1)..int_p.OUT("ix0", "returns the left coordinate"),
-		Check(1)..int_p.OUT("iy0", "returns the bottom coordinate"),
-		Check(1)..int_p.OUT("ix1", "returns the right coordinate"),
-		Check(1)..int_p.OUT("iy1", "returns the top coordinate")
+		nullable..Check(1)..int_p.OUT("ix0", "returns the left coordinate"),
+		nullable..Check(1)..int_p.OUT("iy0", "returns the bottom coordinate"),
+		nullable..Check(1)..int_p.OUT("ix1", "returns the right coordinate"),
+		nullable..Check(1)..int_p.OUT("iy1", "returns the top coordinate")
 	)
 
 	void(
@@ -757,10 +757,10 @@ int main(int arg, char **argv)
 		float.IN("scale_y", "the vertical scale"),
 		float.IN("shift_x", "the horizontal subpixel shift"),
 		float.IN("shift_y", "the vertical subpixel shift"),
-		Check(1)..int_p.OUT("ix0", "returns the left coordinate"),
-		Check(1)..int_p.OUT("iy0", "returns the bottom coordinate"),
-		Check(1)..int_p.OUT("ix1", "returns the right coordinate"),
-		Check(1)..int_p.OUT("iy1", "returns the top coordinate")
+		nullable..Check(1)..int_p.OUT("ix0", "returns the left coordinate"),
+		nullable..Check(1)..int_p.OUT("iy0", "returns the bottom coordinate"),
+		nullable..Check(1)..int_p.OUT("ix1", "returns the right coordinate"),
+		nullable..Check(1)..int_p.OUT("iy1", "returns the top coordinate")
 	)
 
 	unsigned_char_p(
@@ -773,8 +773,8 @@ int main(int arg, char **argv)
 		int.IN("glyph", "the glyph index to render"),
 		Check(1)..AutoSizeResult..int_p.OUT("width", "returns the bitmap width"),
 		Check(1)..AutoSizeResult..int_p.OUT("height", "returns the bitmap height"),
-		Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
-		Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
+		nullable..Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
+		nullable..Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
 
 	unsigned_char_p(
@@ -789,8 +789,8 @@ int main(int arg, char **argv)
 		int.IN("glyph", "the glyph index to render"),
 		Check(1)..AutoSizeResult..int_p.OUT("width", "returns the bitmap width"),
 		Check(1)..AutoSizeResult..int_p.OUT("height", "returns the bitmap height"),
-		Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
-		Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
+		nullable..Check(1)..int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
+		nullable..Check(1)..int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
 
 	void(
@@ -839,10 +839,10 @@ int main(int arg, char **argv)
 		int.IN("glyph", "the glyph index"),
 		float.IN("scale_x", "the horizontal scale"),
 		float.IN("scale_y", "the vertical scale"),
-		Check(1)..int_p.OUT("ix0", "returns the left coordinate"),
-		Check(1)..int_p.OUT("iy0", "returns the bottom coordinate"),
-		Check(1)..int_p.OUT("ix1", "returns the right coordinate"),
-		Check(1)..int_p.OUT("iy1", "returns the top coordinate")
+		nullable..Check(1)..int_p.OUT("ix0", "returns the left coordinate"),
+		nullable..Check(1)..int_p.OUT("iy0", "returns the bottom coordinate"),
+		nullable..Check(1)..int_p.OUT("ix1", "returns the right coordinate"),
+		nullable..Check(1)..int_p.OUT("iy1", "returns the top coordinate")
 	)
 
 	void(
@@ -855,10 +855,10 @@ int main(int arg, char **argv)
 		float.IN("scale_y", "the vertical scale"),
 		float.IN("shift_x", "the horizontal subpixel shift"),
 		float.IN("shift_y", "the vertical subpixel shift"),
-		Check(1)..int_p.OUT("ix0", "returns the left coordinate"),
-		Check(1)..int_p.OUT("iy0", "returns the bottom coordinate"),
-		Check(1)..int_p.OUT("ix1", "returns the right coordinate"),
-		Check(1)..int_p.OUT("iy1", "returns the top coordinate")
+		nullable..Check(1)..int_p.OUT("ix0", "returns the left coordinate"),
+		nullable..Check(1)..int_p.OUT("iy0", "returns the bottom coordinate"),
+		nullable..Check(1)..int_p.OUT("ix1", "returns the right coordinate"),
+		nullable..Check(1)..int_p.OUT("iy1", "returns the top coordinate")
 	)
 
 	/*

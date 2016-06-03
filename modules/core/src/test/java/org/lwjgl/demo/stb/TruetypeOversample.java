@@ -175,7 +175,7 @@ public final class TruetypeOversample {
 
 		glBegin(GL_QUADS);
 		for ( int i = 0; i < text.length(); i++ ) {
-			stbtt_GetPackedQuad(chardata, BITMAP_W, BITMAP_H, text.charAt(i), xb, yb, q, font == 0 && integer_align ? 1 : 0);
+			stbtt_GetPackedQuad(chardata, BITMAP_W, BITMAP_H, text.charAt(i), xb, yb, q, font == 0 && integer_align);
 			drawBoxTC(
 				q.x0(), q.y0(), q.x1(), q.y1(),
 				q.s0(), q.t0(), q.s1(), q.t1()
