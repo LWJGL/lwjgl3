@@ -218,7 +218,7 @@ val ovrGraphicsLuid_p = struct_p(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "o
 val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false) {
 	documentation = "A complete descriptor of the HMD."
 
-	ovrHmdType.member("Type", "this HMD's type")
+	ovrHmdType.member("Type", "this HMD's type").links("Hmd_\\w+")
 	padding(4, "Pointer.BITS64")
 	charUTF8.array("ProductName", "name string describing the product: \"Oculus Rift DK1\", etc.", size = 64)
 	charUTF8.array("Manufacturer", "string describing the manufacturer. Usually \"Oculus\".", size = 64)
@@ -313,7 +313,7 @@ val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovr
 		included here as it can be specified separately and modified per frame by passing different viewport values in the layer structure.
 		"""
 
-	ovrEyeType.member("Eye", "the eye index this instance corresponds to")
+	ovrEyeType.member("Eye", "the eye index this instance corresponds to").links("Eye_\\w+")
 	ovrFovPort.member("Fov", "the field of view")
 	ovrRecti.member("DistortedViewport", "distortion viewport")
 	ovrVector2f.member("PixelsPerTanAngleAtCenter", "wow many display pixels will fit in tan(angle) = 1")
@@ -356,25 +356,25 @@ val ovrTextureFormat = "ovrTextureFormat".enumType
 val ovrTextureSwapChainDesc_p = struct_p(OVR_PACKAGE, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
 	documentation = "Description used to create a texture swap chain."
 
-	ovrTextureType.member("Type", "")
-	ovrTextureFormat.member("Format", "")
+	ovrTextureType.member("Type", "").links("Texture_\\w+")
+	ovrTextureFormat.member("Format", "").links("OVR_FORMAT_\\w+")
 	int.member("ArraySize", "only supported with OVR#ovrTexture_2D. Not supported on PC at this time.")
 	int.member("Width", "")
 	int.member("Height", "")
 	int.member("MipLevels", "")
 	int.member("SampleCount", "current only supported on depth textures")
 	ovrBool.member("StaticImage", "not buffered in a chain. For images that don't change")
-	unsigned_int.member("MiscFlags", "{@code ovrTextureMiscFlags}")
-	unsigned_int.member("BindFlags", "{@code ovrTextureBindFlags}. Not used for GL.")
+	unsigned_int.member("MiscFlags", "{@code ovrTextureFlags}").links("TextureMisc_\\w+", LinkMode.BITFIELD)
+	unsigned_int.member("BindFlags", "{@code ovrTextureBindFlags}. Not used for GL.").links("TextureBind_\\w+", LinkMode.BITFIELD)
 }
 
 val ovrMirrorTextureDesc_p = struct_p(OVR_PACKAGE, "OVRMirrorTextureDesc", nativeName = "ovrMirrorTextureDesc") {
 	documentation = "Description used to create a mirror texture."
 
-	ovrTextureFormat.member("Format", "")
+	ovrTextureFormat.member("Format", "").links("OVR_FORMAT_\\w+")
 	int.member("Width", "")
 	int.member("Height", "")
-	unsigned_int.member("MiscFlags", "{@code ovrTextureMiscFlags}")
+	unsigned_int.member("MiscFlags", "{@code ovrTextureFlags}").links("TextureMisc_\\w+", LinkMode.BITFIELD)
 }
 
 val ovrTextureSwapChain = "ovrTextureSwapChain".opaque_p
@@ -412,7 +412,7 @@ val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrIn
 		"horizontal and vertical thumbstick axis values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range -1.0f to 1.0f.",
 		size = ovrHand_Count
 	)
-	ovrControllerType.member("ControllerType", "The type of the controller this state is for.")
+	ovrControllerType.member("ControllerType", "The type of the controller this state is for.").links("ControllerType_\\w+")
 }
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLayerHeader") {
@@ -424,7 +424,7 @@ val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLaye
 		OVR#ovrLayerType_Disabled.
 		"""
 
-	ovrLayerType.member("Type", "described by {@code ovrLayerType}")
+	ovrLayerType.member("Type", "described by {@code ovrLayerType}").links("LayerType_\\w+")
 	unsigned_int.member("Flags", "described by {@code ovrLayerFlags}")
 }.nativeType
 val ovrLayerHeader_p = ovrLayerHeader.p

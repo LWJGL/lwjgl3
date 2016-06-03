@@ -145,7 +145,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 			"""
 		),
 		Check(2)..const..ovrVector3f_p.IN(
-			"HmdToEyeOffset",
+			"hmdToEyeOffset",
 			"""
 		    can be ##OVREyeRenderDesc{@code .HmdToEyeOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.

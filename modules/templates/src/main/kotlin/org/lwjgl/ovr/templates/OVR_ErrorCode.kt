@@ -46,6 +46,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_InvalidHeadsetOrientation".enumExpr("The headset was in an invalid orientation for the requested operation (e.g. vertically oriented during OVR##ovr_RecenterTrackingOrigin()).", "-1011"),
 		"Error_ClientSkippedDestroy".enumExpr("The client failed to call OVR##ovr_Destroy() on an active session before calling OVR##ovr_Shutdown(). Or the client crashed.", "-1012"),
 		"Error_ClientSkippedShutdown".enumExpr("The client failed to call OVR##ovr_Shutdown() or the client crashed.", "-1013"),
+		"Error_ServiceDeadlockDetected".enumExpr("The service watchdog discovered a deadlock.", "-1014"),
 
 		/* Audio error range, reserved for Audio errors. */
 		"Error_AudioReservedBegin".enumExpr("First Audio error.", "-2000"),
@@ -105,10 +106,17 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_BootloaderDeviceDetected".enumExpr("A bootloader HMD is detected by the service.", "-4102"),
 		"Error_TrackerCalibrationError".enumExpr("The sensor calibration is missing or incorrect.", "-4103"),
 		"Error_ControllerFirmwareMismatch".enumExpr("The controller firmware is out of date and is unacceptable.", "-4104"),
+		"Error_DevManDeviceDetected".enumExpr("A DeviceManagement mode HMD is detected by the service.", "-4105"),
+        "Error_RebootedBootloaderDevice".enumExpr("Had to reboot bootloader device, which succeeded.", "-4106"),
+        "Error_FailedRebootBootloaderDev".enumExpr("Had to reboot bootloader device, which failed. Device is stuck in bootloader mode.", "-4107"),
 
 		"Error_IMUTooManyLostSamples".enumExpr("Too many lost IMU samples.", "-4200"),
 		"Error_IMURateError".enumExpr("IMU rate is outside of the expected range.", "-4201"),
 		"Error_FeatureReportFailure".enumExpr("A feature report has failed.", "-4202"),
+		"Error_HMDWirelessTimeout".enumExpr("HMD wireless interface never returned from busy state.", "-4203"),
+	
+		"Error_BootloaderAssertLog".enumExpr("HMD Bootloader Assert Log was not empty.", "-4300"),
+		"Error_AppAssertLog".enumExpr("HMD App Assert Log was not empty.", "-4301"),
 
 		/* Synchronization errors */
 		"Error_Incomplete".enumExpr("Requested async work not yet complete.", "-5000"),
@@ -120,8 +128,10 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_TextureSwapChainInvalid".enumExpr("The {@code ovrTextureSwapChain} is in an incomplete or inconsistent state. Ensure #CommitTextureSwapChain() was called at least once first.", "-6002"),
 		"Error_GraphicsDeviceReset".enumExpr("Graphics device has been reset (TDR, etc...)", "-6003"),
 		"Error_DisplayRemoved".enumExpr("HMD removed from the display adapter", "-6004"),
-		"Error_ApplicationInvisible".enumExpr("Application declared itself as an invisible type and is not allowed to submit frames.", "-6005"),
-		"Error_Disallowed".enumExpr("The given request is disallowed under the current conditions.", "-6006"),
+		"Error_ContentProtectionNotAvailable".enumExpr("Content protection is not available for the display", "-6005"),
+		"Error_ApplicationInvisible".enumExpr("Application declared itself as an invisible type and is not allowed to submit frames.", "-6006"),
+		"Error_Disallowed".enumExpr("The given request is disallowed under the current conditions.", "-6007"),
+		"Error_DisplayPluggedIncorrectly".enumExpr("Display portion of HMD is plugged into an incompatible port (ex: IGP)", "-6008"),
 
 		/* Fatal errors */
 		"Error_RuntimeException".enumExpr("A runtime exception occurred. The application is required to shutdown LibOVR and re-initialize it before this error state will be cleared.", "-7000"),
@@ -139,7 +149,6 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_MetricsSessionAlreadyActive".enumExpr("", "-90009"),
 		"Error_MetricsSessionNotActive".enumExpr("", "-90010")
 	)
-
 
 	val SUCCESS = bool(
 		"SUCCESS",

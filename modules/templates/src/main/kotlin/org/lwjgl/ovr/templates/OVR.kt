@@ -238,6 +238,14 @@ ENABLE_WARNINGS()""")
 		"TextureMisc_AllowGenerateMips".enum(
 			"DX only: Allow generation of the mip chain on the GPU via the GenerateMips call. This flag requires that RenderTarget binding also be specified.",
 			0x0002
+		),
+
+		"TextureMisc_ProtectedContent".enum(
+			"""
+			Texture swap chain contains protected content, and requires HDCP connection in order to display to HMD. Also prevents mirroring or other
+			redirection of any frame containing this contents
+			""",
+			0x0004
 		)
 	)
 
@@ -326,9 +334,9 @@ ENABLE_WARNINGS()""")
 		"Initialize",
 		"""
 		Initialize LibOVR for application usage. This includes finding and loading the LibOVRRT shared library. No LibOVR API functions, other than
-		#GetLastErrorInfo(), can be called unless #Initialize() succeeds. A successful call to {@code ovr_Initialize} must be eventually followed by a call to
-		#Shutdown(). {@code ovr_Initialize} calls are idempotent. Calling {@code ovr_Initialize} twice does not require two matching calls to
-		{@code ovr_Shutdown}. If already initialized, the return value is OVRErrorCode#Success.
+		#GetLastErrorInfo() and #_Detect(), can be called unless #Initialize() succeeds. A successful call to {@code ovr_Initialize} must be eventually
+		followed by a call to #Shutdown(). {@code ovr_Initialize} calls are idempotent. Calling {@code ovr_Initialize} twice does not require two matching
+		calls to {@code ovr_Shutdown}. If already initialized, the return value is OVRErrorCode#Success.
 
 		LibOVRRT shared library search order:
 		${ol(
@@ -751,6 +759,12 @@ ENABLE_WARNINGS()""")
 
 		Higher FOV will generally require larger textures to maintain quality. Apps packing multiple eye views together on the same texture should ensure there
 		are at least 8 pixels of padding between them to prevent texture filtering and chromatic aberration causing images to leak between the two eye views.
+
+		Example code:
+${codeBlock("""
+ovrHmdDesc hmdDesc = ovr_GetHmdDesc(session);
+ovrSizei eyeSizeLeft  = ovr_GetFovTextureSize(session, ovrEye_Left,  hmdDesc.DefaultEyeFov[ovrEye_Left],  1.0f);
+ovrSizei eyeSizeRight = ovr_GetFovTextureSize(session, ovrEye_Right, hmdDesc.DefaultEyeFov[ovrEye_Right], 1.0f);""")}
 		""",
 
 		session,
