@@ -876,6 +876,20 @@ val AMD_shader_atomic_counter_ops = EXT_FLAG.nativeClassGL("AMD_shader_atomic_co
 		Requires ${GL42.core} or ${ARB_shader_atomic_counters.cap}.
 		"""
 }
+val AMD_shader_explicit_vertex_parameter = EXT_FLAG.nativeClassGL("AMD_shader_explicit_vertex_parameter", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		Unextended GLSL provides a set of fixed function interpolation modes and even those are limited to certain types of interpolants (for example,
+		interpolation of integer and double isn't supported).
+
+		This extension introduces new built-in functions allowing access to vertex parameters explicitly in the fragment shader. It also exposes barycentric
+		coordinates as new built-in variables, which can be used to implement custom interpolation algorithms using shader code.
+
+		Requires ${GL20.core} or ${ARB_shader_objects.link}.
+		"""
+}
 val AMD_shader_stencil_export = EXT_FLAG.nativeClassGL("AMD_shader_stencil_export", postfix = AMD) {
 	documentation =
 		"""
@@ -1118,6 +1132,22 @@ val NV_shader_atomic_float = EXT_FLAG.nativeClassGL("NV_shader_atomic_float", po
 		for these operations is also provided if ${registryLink("NV", "gpu_program5")} is supported.
 		"""
 }
+val NV_shader_atomic_float64 = EXT_FLAG.nativeClassGL("NV_shader_atomic_float64", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides GLSL built-in functions and assembly opcodes allowing shaders to perform atomic read-modify-write operations to buffer or
+		shared memory with double-precision floating-point components.  The set of atomic operations provided by this extension is limited to adds and
+		exchanges. Providing atomic add support allows shaders to atomically accumulate the sum of double-precision floating-point values into buffer memory
+		across multiple (possibly concurrent) shader invocations.
+
+		This extension provides GLSL support for atomics targeting double-precision floating-point pointers (if ${NV_gpu_shader5.link} is supported).
+		Additionally, assembly opcodes for these operations are also provided if {@code NV_gpu_program5} is supported.
+
+		Requires ${ARB_gpu_shader_fp64.link} or {@code NV_gpu_program_fp64}.
+		"""
+}
 val NV_shader_atomic_fp16_vector = EXT_FLAG.nativeClassGL("NV_shader_atomic_fp16_vector", postfix = NV) {
 	documentation =
 		"""
@@ -1148,6 +1178,27 @@ val NV_shader_thread_shuffle = EXT_FLAG.nativeClassGL("NV_shader_thread_shuffle"
 		new features to the OpenGL Shading Language to share data between multiple threads within a thread group.
 
 		Requires ${GL43.core} and GLSL 4.3.
+		"""
+}
+val NV_stereo_view_rendering = EXT_FLAG.nativeClassGL("NV_stereo_view_rendering", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		Virtual reality (VR) applications often render a single logical scene from multiple views corresponding to a pair of eyes. The views (eyes) are
+		separated by a fixed offset in the X direction.
+
+		Traditionally, multiple views are rendered via multiple rendering passes. This is expensive for the GPU because the objects in the scene must be
+		transformed, rasterized, shaded, and fragment processed redundantly. This is expensive for the CPU because the scene graph needs to be visited multiple
+		times and driver validation happens for each view. Rendering N passes tends to take N times longer than a single pass.
+
+		This extension provides a mechanism to render binocular (stereo) views from a single stream of OpenGL rendering commands. Vertex, tessellation, and
+		geometry (VTG) shaders can output two positions for each vertex corresponding to the two eye views. A built-in "gl_SecondaryPositionNV" is added to
+		specify the second position. The positions from each view may be sent to different viewports and/or layers. A built-in "gl_SecondaryViewportMaskNV[]"
+		is also added to specify the viewport mask for the second view. A new layout-qualifier "secondary_view_offset" is added for built-in output "gl_Layer"
+		which allows for the geometry from each view to be sent to different layers for rendering.
+
+		Requires {@link \\#GL_NV_viewport_array2 NV_viewport_array2}.
 		"""
 }
 val NV_texture_compression_vtc = EXT_FLAG.nativeClassGL("NV_texture_compression_vtc", postfix = NV) {
