@@ -33,8 +33,8 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 	EnumConstant(
 		"VkResult",
 
-		"ERROR_SURFACE_LOST_KHR".enumExpr("A surface is no longer available.", "-1000000000"),
-		"ERROR_NATIVE_WINDOW_IN_USE_KHR".enumExpr(
+		"ERROR_SURFACE_LOST_KHR".enum("A surface is no longer available.", "-1000000000"),
+		"ERROR_NATIVE_WINDOW_IN_USE_KHR".enum(
 			"The requested window is already connected to a VkSurfaceKHR, or to some other non-Vulkan API.",
 			"-1000000001"
 		)
@@ -43,13 +43,13 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 	EnumConstant(
 		"VkColorSpaceKHR",
 
-		"COLOR_SPACE_SRGB_NONLINEAR_KHR".enumExpr("The presentation engine supports the sRGB colorspace.", "0")
+		"COLOR_SPACE_SRGB_NONLINEAR_KHR".enum("The presentation engine supports the sRGB colorspace.", "0")
 	)
 
 	EnumConstant(
 		"VkPresentModeKHR",
 
-		"PRESENT_MODE_IMMEDIATE_KHR".enumExpr(
+		"PRESENT_MODE_IMMEDIATE_KHR".enum(
 			"""
 			The presentation engine does not wait for a vertical blanking period to update the current image, meaning this mode $may result in visible tearing.
 			No internal queuing of presentation requests is needed, as the requests are applied immediately.

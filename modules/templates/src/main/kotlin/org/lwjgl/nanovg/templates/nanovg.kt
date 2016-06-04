@@ -145,24 +145,24 @@ nvgFill(vg);""")}
 	val TexAlign = EnumConstant(
 		"Alignments.",
 
-		"ALIGN_LEFT".enumExpr("Default, align text horizontally to left.", "1<<0"),
-		"ALIGN_CENTER".enumExpr("Align text horizontally to center.", "1<<1"),
-		"ALIGN_RIGHT".enumExpr("Align text horizontally to right.", "1<<2"),
+		"ALIGN_LEFT".enum("Default, align text horizontally to left.", "1<<0"),
+		"ALIGN_CENTER".enum("Align text horizontally to center.", "1<<1"),
+		"ALIGN_RIGHT".enum("Align text horizontally to right.", "1<<2"),
 
-		"ALIGN_TOP".enumExpr("Align text vertically to top.", "1<<3"),
-		"ALIGN_MIDDLE".enumExpr("Align text vertically to middle.", "1<<4"),
-		"ALIGN_BOTTOM".enumExpr("Align text vertically to bottom.", "1<<5"),
-		"ALIGN_BASELINE".enumExpr("Default, align text vertically to baseline.", "1<<6")
+		"ALIGN_TOP".enum("Align text vertically to top.", "1<<3"),
+		"ALIGN_MIDDLE".enum("Align text vertically to middle.", "1<<4"),
+		"ALIGN_BOTTOM".enum("Align text vertically to bottom.", "1<<5"),
+		"ALIGN_BASELINE".enum("Default, align text vertically to baseline.", "1<<6")
 	).javaDocLinks
 
 	val ImageFlags = EnumConstant(
 		"Image flags.",
 
-		"IMAGE_GENERATE_MIPMAPS".enumExpr("Generate mipmaps during creation of the image.", "1<<0"),
-		"IMAGE_REPEATX".enumExpr("Repeat image in X direction.", "1<<1"),
-		"IMAGE_REPEATY".enumExpr("Repeat image in Y direction.", "1<<2"),
-		"IMAGE_FLIPY".enumExpr("Flips (inverses) image in Y direction when rendered.", "1<<3"),
-		"IMAGE_PREMULTIPLIED".enumExpr("Image data has premultiplied alpha.", "1<<4")
+		"IMAGE_GENERATE_MIPMAPS".enum("Generate mipmaps during creation of the image.", "1<<0"),
+		"IMAGE_REPEATX".enum("Repeat image in X direction.", "1<<1"),
+		"IMAGE_REPEATY".enum("Repeat image in Y direction.", "1<<2"),
+		"IMAGE_FLIPY".enum("Flips (inverses) image in Y direction when rendered.", "1<<3"),
+		"IMAGE_PREMULTIPLIED".enum("Image data has premultiplied alpha.", "1<<4")
 	).javaDocLinks
 	
 	val ctx = NVGcontext_p.IN("ctx", "the NanoVG context")

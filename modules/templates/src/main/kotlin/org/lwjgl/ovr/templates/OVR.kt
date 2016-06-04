@@ -98,11 +98,11 @@ ENABLE_WARNINGS()""")
 	EnumConstant(
 		"HMD types. ({@code ovrHmdType})",
 
-		"Hmd_None".enumExpr("", "0"),
-		"Hmd_DK1".enumExpr("", "3"),
+		"Hmd_None".enum("", "0"),
+		"Hmd_DK1".enum("", "3"),
 		"Hmd_DKHD".enum(""),
-		"Hmd_DK2".enumExpr("", "6"),
-		"Hmd_CB".enumExpr("", "8"),
+		"Hmd_DK2".enum("", "6"),
+		"Hmd_CB".enum("", "8"),
 		"Hmd_Other".enum(""),
 		"Hmd_E3_2015".enum(""),
 		"Hmd_ES06".enum(""),
@@ -132,7 +132,7 @@ ENABLE_WARNINGS()""")
 		This type explicitly does not include a third "NoStereo" monoscopic option, as such is not required for an HMD-centered API.
 		""",
 
-		"Eye_Left".enumExpr("The left eye, from the viewer's perspective.", "0"),
+		"Eye_Left".enum("The left eye, from the viewer's perspective.", "0"),
 		"Eye_Right".enum("The right eye, from the viewer's perspective.")
 	).javaDocLinks
 
@@ -143,7 +143,7 @@ ENABLE_WARNINGS()""")
 		Used with #SetTrackingOriginType().
 		""",
 
-		"TrackingOrigin_EyeLevel".enumExpr(
+		"TrackingOrigin_EyeLevel".enum(
 			"""
 			Tracking system origin reported at eye (HMD) height.
 
@@ -257,14 +257,14 @@ ENABLE_WARNINGS()""")
 		"Button_RThumb".enum("Button RThumb", 0x00000004),
 		"Button_RShoulder".enum("Button RShoulder", 0x00000008),
 
-		"Button_RMask".enumExpr("Bit mask of all buttons on the right Touch controller", "ovrButton_A | ovrButton_B | ovrButton_RThumb | ovrButton_RShoulder"),
+		"Button_RMask".enum("Bit mask of all buttons on the right Touch controller", "ovrButton_A | ovrButton_B | ovrButton_RThumb | ovrButton_RShoulder"),
 
 		"Button_X".enum("Button X", 0x00000100),
 		"Button_Y".enum("Button Y", 0x00000200),
 		"Button_LThumb".enum("Button LThumb", 0x00000400),
 		"Button_LShoulder".enum("Button LShoulder", 0x00000800),
 
-		"Button_LMask".enumExpr("Bit mask of all buttons on the left Touch controller", "ovrButton_X | ovrButton_Y | ovrButton_LThumb | ovrButton_LShoulder"),
+		"Button_LMask".enum("Bit mask of all buttons on the left Touch controller", "ovrButton_X | ovrButton_Y | ovrButton_LThumb | ovrButton_LShoulder"),
 
 		// Navigation through DPad.
 		"Button_Up".enum("Button Up", 0x00010000),
@@ -283,31 +283,31 @@ ENABLE_WARNINGS()""")
 	EnumConstant(
 		"Touch input types.",
 
-		"Touch_A".enumExpr("Touch A", "ovrButton_A"),
-		"Touch_B".enumExpr("Touch B", "ovrButton_B"),
-		"Touch_RThumb".enumExpr("Touch RThumb", "ovrButton_RThumb"),
+		"Touch_A".enum("Touch A", "ovrButton_A"),
+		"Touch_B".enum("Touch B", "ovrButton_B"),
+		"Touch_RThumb".enum("Touch RThumb", "ovrButton_RThumb"),
 		"Touch_RIndexTrigger".enum("Touch RIndexTrigger", 0x00000010),
 
-		"Touch_RButtonMask".enumExpr("Bit mask of all the button touches on the right controller", "ovrTouch_A | ovrTouch_B | ovrTouch_RThumb | ovrTouch_RIndexTrigger"),
+		"Touch_RButtonMask".enum("Bit mask of all the button touches on the right controller", "ovrTouch_A | ovrTouch_B | ovrTouch_RThumb | ovrTouch_RIndexTrigger"),
 
-		"Touch_X".enumExpr("Touch X", "ovrButton_X"),
-		"Touch_Y".enumExpr("Touch Y", "ovrButton_Y"),
-		"Touch_LThumb".enumExpr("Touch LThumb", "ovrButton_LThumb"),
+		"Touch_X".enum("Touch X", "ovrButton_X"),
+		"Touch_Y".enum("Touch Y", "ovrButton_Y"),
+		"Touch_LThumb".enum("Touch LThumb", "ovrButton_LThumb"),
 		"Touch_LIndexTrigger".enum("Touch LIndexTrigger", 0x00001000),
 
-		"Touch_LButtonMask".enumExpr("Bit mask of all the button touches on the left controller", "ovrTouch_X | ovrTouch_Y | ovrTouch_LThumb | ovrTouch_LIndexTrigger"),
+		"Touch_LButtonMask".enum("Bit mask of all the button touches on the left controller", "ovrTouch_X | ovrTouch_Y | ovrTouch_LThumb | ovrTouch_LIndexTrigger"),
 
 		// Finger pose state
 		// Derived internally based on distance, proximity to sensors and filtering.
 		"Touch_RIndexPointing".enum("TouchRIndexPointing", 0x00000020),
 		"Touch_RThumbUp".enum("Touch RThumbUp", 0x00000040),
 
-		"Touch_RPoseMask".enumExpr("Bit mask of all right controller poses", "ovrTouch_RIndexPointing | ovrTouch_RThumbUp"),
+		"Touch_RPoseMask".enum("Bit mask of all right controller poses", "ovrTouch_RIndexPointing | ovrTouch_RThumbUp"),
 
 		"Touch_LIndexPointing".enum("Touch LIndexPointing", 0x00002000),
 		"Touch_LThumbUp".enum("Touch LThumbUp", 0x00004000),
 
-		"Touch_LPoseMask".enumExpr("Bit mask of all left controller poses.", "ovrTouch_LIndexPointing | ovrTouch_LThumbUp")
+		"Touch_LPoseMask".enum("Bit mask of all left controller poses.", "ovrTouch_LIndexPointing | ovrTouch_LThumbUp")
 	)
 
 	EnumConstant(
@@ -663,10 +663,10 @@ ENABLE_WARNINGS()""")
 		Each layer type has an associated struct, such as ##OVRLayerEyeFov.
 		""",
 
-		"LayerType_Disabled".enumExpr("Layer is disabled.", "0"),
+		"LayerType_Disabled".enum("Layer is disabled.", "0"),
 		"LayerType_EyeFov".enum("Described by ##OVRLayerEyeFov."),
-		"LayerType_Quad".enumExpr("Described by ##OVRLayerQuad.", "3"),
-		"LayerType_EyeMatrix".enumExpr("Described by ##OVRLayerEyeMatrix.", "5")
+		"LayerType_Quad".enum("Described by ##OVRLayerQuad.", "3"),
+		"LayerType_EyeMatrix".enum("Described by ##OVRLayerEyeMatrix.", "5")
 	)
 
 	EnumConstant(

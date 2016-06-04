@@ -533,7 +533,7 @@ class NativeClass(
 	fun String.enum(documentation: String, value: Int) =
 		Constant(this, EnumValue({ if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc() }, value))
 
-	fun String.enumExpr(documentation: String, expression: String) =
+	fun String.enum(documentation: String, expression: String) =
 		Constant(this, EnumValueExpression({ if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc() }, expression))
 
 	operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =

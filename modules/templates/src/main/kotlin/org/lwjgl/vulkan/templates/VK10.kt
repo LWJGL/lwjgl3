@@ -95,39 +95,39 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPipelineCacheHeaderVersion",
 
-		"PIPELINE_CACHE_HEADER_VERSION_ONE".enumExpr("", "1")
+		"PIPELINE_CACHE_HEADER_VERSION_ONE".enum("", "1")
 	)
 
 	EnumConstant(
 		"VkResult",
 
-		"SUCCESS".enumExpr("Command successfully completed.", "0"),
-		"NOT_READY".enumExpr("A fence or query has not yet completed.", "1"),
-		"TIMEOUT".enumExpr("A wait operation has not completed in the specified time.", "2"),
-		"EVENT_SET".enumExpr("An event is signaled.", "3"),
-		"EVENT_RESET".enumExpr("An event is unsignaled.", "4"),
-		"INCOMPLETE".enumExpr("A return array was too small for the result.", "5"),
+		"SUCCESS".enum("Command successfully completed.", "0"),
+		"NOT_READY".enum("A fence or query has not yet completed.", "1"),
+		"TIMEOUT".enum("A wait operation has not completed in the specified time.", "2"),
+		"EVENT_SET".enum("An event is signaled.", "3"),
+		"EVENT_RESET".enum("An event is unsignaled.", "4"),
+		"INCOMPLETE".enum("A return array was too small for the result.", "5"),
 
-		"ERROR_OUT_OF_HOST_MEMORY".enumExpr("A host memory allocation has failed.", "-1"),
-		"ERROR_OUT_OF_DEVICE_MEMORY".enumExpr("A device memory allocation has failed.", "-2"),
-		"ERROR_INITIALIZATION_FAILED".enumExpr("Initialization of an object could not be completed for implementation-specific reasons.", "-3"),
-		"ERROR_DEVICE_LOST".enumExpr("The logical or physical device has been lost.", "-4"),
-		"ERROR_MEMORY_MAP_FAILED".enumExpr("Mapping of a memory object has failed.", "-5"),
-		"ERROR_LAYER_NOT_PRESENT".enumExpr("A requested layer is not present or could not be loaded.", "-6"),
-		"ERROR_EXTENSION_NOT_PRESENT".enumExpr("A requested extension is not supported.", "-7"),
-		"ERROR_FEATURE_NOT_PRESENT".enumExpr("A requested feature is not supported.", "-8"),
-		"ERROR_INCOMPATIBLE_DRIVER".enumExpr(
+		"ERROR_OUT_OF_HOST_MEMORY".enum("A host memory allocation has failed.", "-1"),
+		"ERROR_OUT_OF_DEVICE_MEMORY".enum("A device memory allocation has failed.", "-2"),
+		"ERROR_INITIALIZATION_FAILED".enum("Initialization of an object could not be completed for implementation-specific reasons.", "-3"),
+		"ERROR_DEVICE_LOST".enum("The logical or physical device has been lost.", "-4"),
+		"ERROR_MEMORY_MAP_FAILED".enum("Mapping of a memory object has failed.", "-5"),
+		"ERROR_LAYER_NOT_PRESENT".enum("A requested layer is not present or could not be loaded.", "-6"),
+		"ERROR_EXTENSION_NOT_PRESENT".enum("A requested extension is not supported.", "-7"),
+		"ERROR_FEATURE_NOT_PRESENT".enum("A requested feature is not supported.", "-8"),
+		"ERROR_INCOMPATIBLE_DRIVER".enum(
 			"The requested version of Vulkan is not supported by the driver or is otherwise incompatible for implementation-specific reasons.",
 			"-9"
 		),
-		"ERROR_TOO_MANY_OBJECTS".enumExpr("Too many objects of the type have already been created.", "-10"),
-		"ERROR_FORMAT_NOT_SUPPORTED".enumExpr("A requested format is not supported on this device.", "-11")
+		"ERROR_TOO_MANY_OBJECTS".enum("Too many objects of the type have already been created.", "-10"),
+		"ERROR_FORMAT_NOT_SUPPORTED".enum("A requested format is not supported on this device.", "-11")
 	)
 
 	EnumConstant(
 		"VkStructureType",
 
-		"STRUCTURE_TYPE_APPLICATION_INFO".enumExpr("", "0"),
+		"STRUCTURE_TYPE_APPLICATION_INFO".enum("", "0"),
 		"STRUCTURE_TYPE_INSTANCE_CREATE_INFO".enum(""),
 		"STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO".enum(""),
 		"STRUCTURE_TYPE_DEVICE_CREATE_INFO".enum(""),
@@ -181,7 +181,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSystemAllocationScope",
 
-		"SYSTEM_ALLOCATION_SCOPE_COMMAND".enumExpr("The allocation is scoped to the duration of the Vulkan command.", "0"),
+		"SYSTEM_ALLOCATION_SCOPE_COMMAND".enum("The allocation is scoped to the duration of the Vulkan command.", "0"),
 		"SYSTEM_ALLOCATION_SCOPE_OBJECT".enum("The allocation is scoped to the lifetime of the Vulkan object that is being created or used."),
 		"SYSTEM_ALLOCATION_SCOPE_CACHE".enum("The allocation is scoped to the lifetime of a {@code VkPipelineCache} object."),
 		"SYSTEM_ALLOCATION_SCOPE_DEVICE".enum("The allocation is scoped to the lifetime of the Vulkan device."),
@@ -191,13 +191,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkInternalAllocationType",
 
-		"INTERNAL_ALLOCATION_TYPE_EXECUTABLE".enumExpr("The allocation is intended for execution by the host.", "0")
+		"INTERNAL_ALLOCATION_TYPE_EXECUTABLE".enum("The allocation is intended for execution by the host.", "0")
 	)
 
 	EnumConstant(
 		"VkFormat",
 
-		"FORMAT_UNDEFINED".enumExpr("The format is not specified.", "0"),
+		"FORMAT_UNDEFINED".enum("The format is not specified.", "0"),
 		"FORMAT_R4G4_UNORM_PACK8".enum("A two-component, 8-bit packed unsigned normalized format that has a 4-bit R component in bits 4..7, and a 4-bit G component in bits 0..3."),
 		"FORMAT_R4G4B4A4_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 4-bit R component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit B component in bits 4..7, and a 4-bit A component in bits 0..3."),
 		"FORMAT_B4G4R4A4_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 4-bit B component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit R component in bits 4..7, and a 4-bit A component in bits 0..3."),
@@ -387,7 +387,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	val VkImageTypes = EnumConstant(
 		"VkImageType",
 
-		"IMAGE_TYPE_1D".enumExpr("One-dimensional image", "0"),
+		"IMAGE_TYPE_1D".enum("One-dimensional image", "0"),
 		"IMAGE_TYPE_2D".enum("Two-dimensional image"),
 		"IMAGE_TYPE_3D".enum("Three-dimensional image")
 	).javaDocLinks
@@ -395,14 +395,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	val VkImageTilings = EnumConstant(
 		"VkImageTiling",
 
-		"IMAGE_TILING_OPTIMAL".enumExpr("Specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access).", "0"),
+		"IMAGE_TILING_OPTIMAL".enum("Specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access).", "0"),
 		"IMAGE_TILING_LINEAR".enum("Specifies linear tiling (texels are laid out in memory in row-major order, possibly with some padding on each row).")
 	).javaDocLinks
 
 	EnumConstant(
 		"VkPhysicalDeviceType",
 
-		"PHYSICAL_DEVICE_TYPE_OTHER".enumExpr("The device does not match any other available types.", "0"),
+		"PHYSICAL_DEVICE_TYPE_OTHER".enum("The device does not match any other available types.", "0"),
 		"PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU".enum("The device is typically one embedded in or tightly coupled with the host."),
 		"PHYSICAL_DEVICE_TYPE_DISCRETE_GPU".enum("The device is typically a separate processor connected to the host via an interlink."),
 		"PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU".enum("The device is typically a virtual node in a virtualization environment."),
@@ -412,7 +412,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkQueryType",
 
-		"QUERY_TYPE_OCCLUSION".enumExpr("Occlusion query.", "0"),
+		"QUERY_TYPE_OCCLUSION".enum("Occlusion query.", "0"),
 		"QUERY_TYPE_PIPELINE_STATISTICS".enum("Pipeline statistics query"),
 		"QUERY_TYPE_TIMESTAMP".enum("Timestamp query.")
 	)
@@ -420,7 +420,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkSharingMode",
 
-		"SHARING_MODE_EXCLUSIVE".enumExpr(
+		"SHARING_MODE_EXCLUSIVE".enum(
 			"Specifies that access to any range or image subresource of the object will be exclusive to a single queue family at a time.",
 			"0"
 		),
@@ -432,7 +432,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkImageLayout",
 
-		"IMAGE_LAYOUT_UNDEFINED".enumExpr(
+		"IMAGE_LAYOUT_UNDEFINED".enum(
 			"""
 			Supports no device access. This layout $must only be used as an {@code initialLayout} or as the {@code oldLayout} in an image transition. When
 			transitioning out of this layout, the contents of the memory are not guaranteed to be preserved.
@@ -487,7 +487,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkImageViewType",
 
-		"IMAGE_VIEW_TYPE_1D".enumExpr("One-dimensional image view.", "0"),
+		"IMAGE_VIEW_TYPE_1D".enum("One-dimensional image view.", "0"),
 		"IMAGE_VIEW_TYPE_2D".enum("Two-dimensional image view."),
 		"IMAGE_VIEW_TYPE_3D".enum("Three-dimensional image view."),
 		"IMAGE_VIEW_TYPE_CUBE".enum("Cube map image view."),
@@ -499,7 +499,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkComponentSwizzle",
 
-		"COMPONENT_SWIZZLE_IDENTITY".enumExpr("The component is set to the identity swizzle.", "0"),
+		"COMPONENT_SWIZZLE_IDENTITY".enum("The component is set to the identity swizzle.", "0"),
 		"COMPONENT_SWIZZLE_ZERO".enum("The component is set to zero."),
 		"COMPONENT_SWIZZLE_ONE".enum(
 			"""
@@ -515,14 +515,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkVertexInputRate",
 
-		"VERTEX_INPUT_RATE_VERTEX".enumExpr("Indicates that vertex attribute addressing is a function of the vertex index.", "0"),
+		"VERTEX_INPUT_RATE_VERTEX".enum("Indicates that vertex attribute addressing is a function of the vertex index.", "0"),
 		"VERTEX_INPUT_RATE_INSTANCE".enum("Indicates that vertex attribute addressing is a function of the instance index.")
 	)
 
 	EnumConstant(
 		"VkPrimitiveTopology",
 
-		"PRIMITIVE_TOPOLOGY_POINT_LIST".enumExpr("A series of individual points. Each vertex defines a separate point.", "0"),
+		"PRIMITIVE_TOPOLOGY_POINT_LIST".enum("A series of individual points. Each vertex defines a separate point.", "0"),
 		"PRIMITIVE_TOPOLOGY_LINE_LIST".enum(
 			"""
 			Individual line segments, each defined by a pair of vertices. The first two vertices define the first segment, with subsequent pairs of vertices
@@ -635,7 +635,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkPolygonMode",
 
-		"POLYGON_MODE_FILL".enumExpr("Causes polygons to render using the polygon rasterization rules.", "0"),
+		"POLYGON_MODE_FILL".enum("Causes polygons to render using the polygon rasterization rules.", "0"),
 		"POLYGON_MODE_LINE".enum("Causes polygon edges to be drawn as line segments."),
 		"POLYGON_MODE_POINT".enum("The vertices of polygons are treated, for rasterization purposes, as if they had been drawn as points.")
 	)
@@ -643,14 +643,14 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkFrontFace",
 
-		"FRONT_FACE_COUNTER_CLOCKWISE".enumExpr("A triangle with positive area is considered front-facing.", "0"),
+		"FRONT_FACE_COUNTER_CLOCKWISE".enum("A triangle with positive area is considered front-facing.", "0"),
 		"FRONT_FACE_CLOCKWISE".enum("A triangle with negative area is considered front-facing.")
 	)
 
 	EnumConstant(
 		"VkCompareOp",
 
-		"COMPARE_OP_NEVER".enumExpr("The test never passes.", "0"),
+		"COMPARE_OP_NEVER".enum("The test never passes.", "0"),
 		"COMPARE_OP_LESS".enum("The test passes when <b>R</b> &lt; <b>S</b>."),
 		"COMPARE_OP_EQUAL".enum("The test passes when R = S"),
 		"COMPARE_OP_LESS_OR_EQUAL".enum("The test passes when <b>R</b> &le; <b>S</b>."),
@@ -663,7 +663,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkStencilOp",
 
-		"STENCIL_OP_KEEP".enumExpr("Keeps the current value.", "0"),
+		"STENCIL_OP_KEEP".enum("Keeps the current value.", "0"),
 		"STENCIL_OP_ZERO".enum("Sets the value to 0."),
 		"STENCIL_OP_REPLACE".enum("Sets the value to {@code reference}."),
 		"STENCIL_OP_INCREMENT_AND_CLAMP".enum("Increments the current value and clamps to the maximum representable unsigned value."),
@@ -676,7 +676,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkLogicOp",
 
-		"LOGIC_OP_CLEAR".enumExpr("{@code 0}", "0"),
+		"LOGIC_OP_CLEAR".enum("{@code 0}", "0"),
 		"LOGIC_OP_AND".enum("{@code s∧d}"),
 		"LOGIC_OP_AND_REVERSE".enum("{@code s∧¬d}"),
 		"LOGIC_OP_COPY".enum("{@code s}"),
@@ -721,7 +721,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	EnumConstant(
 		"VkBlendOp",
 
-		"BLEND_OP_ADD".enumExpr(codeBlock(
+		"BLEND_OP_ADD".enum(codeBlock(
 			"""R = R<sub>s0</sub> × S<sub>r</sub> + R<sub>d</sub> × D<sub>r</sub>
 G = G<sub>s0</sub> × S<sub>g</sub> + G<sub>d</sub> × D<sub>g</sub>
 B = B<sub>s0</sub> × S<sub>b</sub> + B<sub>d</sub> × D<sub>b</sub>
@@ -752,7 +752,7 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)"""))
 	EnumConstant(
 		"VkDynamicState",
 
-		"DYNAMIC_STATE_VIEWPORT".enumExpr(
+		"DYNAMIC_STATE_VIEWPORT".enum(
 			"""
 			Indicates that the {@code pViewports} state in ##VkPipelineViewportStateCreateInfo will be ignored and $must be set dynamically with
 			#CmdSetViewport() before any draw commands. The number of viewports used by a pipeline is still specified by the {@code viewportCount} member of
@@ -818,7 +818,7 @@ A = max(A<sub>s0</sub>, A<sub>d</sub>)"""))
 	EnumConstant(
 		"VkFilter",
 
-		"FILTER_NEAREST".enumExpr(
+		"FILTER_NEAREST".enum(
 			"""
 			Nearest filtering.
 
@@ -853,7 +853,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 	EnumConstant(
 		"VkSamplerMipmapMode",
 
-		"SAMPLER_MIPMAP_MODE_NEAREST".enumExpr(
+		"SAMPLER_MIPMAP_MODE_NEAREST".enum(
 			"""
 			Texels are read from the image level {@code d}, where:
 
@@ -896,7 +896,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 	EnumConstant(
 		"VkSamplerAddressMode",
 
-		"SAMPLER_ADDRESS_MODE_REPEAT".enumExpr("Indicates that the repeat wrap mode will be used.", "0"),
+		"SAMPLER_ADDRESS_MODE_REPEAT".enum("Indicates that the repeat wrap mode will be used.", "0"),
 		"SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT".enum("Indicates that the mirrored repeat wrap mode will be used."),
 		"SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE".enum("Indicates that the clamp to edge wrap mode will be used."),
 		"SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".enum("Indicates that the clamp to border wrap mode will be used.")
@@ -905,7 +905,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 	EnumConstant(
 		"VkBorderColor",
 
-		"BORDER_COLOR_FLOAT_TRANSPARENT_BLACK".enumExpr(code("(0.0, 0.0, 0.0, 0.0)"), "0"),
+		"BORDER_COLOR_FLOAT_TRANSPARENT_BLACK".enum(code("(0.0, 0.0, 0.0, 0.0)"), "0"),
 		"BORDER_COLOR_INT_TRANSPARENT_BLACK".enum(code("(0, 0, 0, 0)")),
 		"BORDER_COLOR_FLOAT_OPAQUE_BLACK".enum(code("(0.0, 0.0, 0.0, 1.0)")),
 		"BORDER_COLOR_INT_OPAQUE_BLACK".enum(code("(0, 0, 0, 1)")),
@@ -916,7 +916,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 	EnumConstant(
 		"VkDescriptorType",
 
-		"DESCRIPTOR_TYPE_SAMPLER".enumExpr("", "0"),
+		"DESCRIPTOR_TYPE_SAMPLER".enum("", "0"),
 		"DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER".enum(""),
 		"DESCRIPTOR_TYPE_SAMPLED_IMAGE".enum(""),
 		"DESCRIPTOR_TYPE_STORAGE_IMAGE".enum(""),
@@ -932,7 +932,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 	EnumConstant(
 		"VkAttachmentLoadOp",
 
-		"ATTACHMENT_LOAD_OP_LOAD".enumExpr("Means the contents within the render area will be preserved.", "0"),
+		"ATTACHMENT_LOAD_OP_LOAD".enum("Means the contents within the render area will be preserved.", "0"),
 		"ATTACHMENT_LOAD_OP_CLEAR".enum(
 			"Means the contents within the render area will be cleared to a uniform value, which is specified when a render pass instance is begun."
 		),
@@ -944,7 +944,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 	EnumConstant(
 		"VkAttachmentStoreOp",
 
-		"ATTACHMENT_STORE_OP_STORE".enumExpr(
+		"ATTACHMENT_STORE_OP_STORE".enum(
 			"""
 			Means the contents within the render area are written to memory and will be available for reading after the render pass instance completes once the
 			writes have been synchronized with #ACCESS_COLOR_ATTACHMENT_WRITE_BIT (for color attachments) or #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT (for
@@ -962,28 +962,28 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 	val VkPipelineBindPoints = EnumConstant(
 		"VkPipelineBindPoint",
 
-		"PIPELINE_BIND_POINT_GRAPHICS".enumExpr("", "0"),
+		"PIPELINE_BIND_POINT_GRAPHICS".enum("", "0"),
 		"PIPELINE_BIND_POINT_COMPUTE".enum("")
 	).javaDocLinks
 
 	EnumConstant(
 		"VkCommandBufferLevel",
 
-		"COMMAND_BUFFER_LEVEL_PRIMARY".enumExpr("", "0"),
+		"COMMAND_BUFFER_LEVEL_PRIMARY".enum("", "0"),
 		"COMMAND_BUFFER_LEVEL_SECONDARY".enum("")
 	)
 
 	val VkIndexTypes = EnumConstant(
 		"VkIndexType",
 
-		"INDEX_TYPE_UINT16".enumExpr("", "0"),
+		"INDEX_TYPE_UINT16".enum("", "0"),
 		"INDEX_TYPE_UINT32".enum("")
 	).javaDocLinks
 
 	val VkSubpassContentValues = EnumConstant(
 		"VkSubpassContents",
 
-		"SUBPASS_CONTENTS_INLINE".enumExpr(
+		"SUBPASS_CONTENTS_INLINE".enum(
 			"""
 			The contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers $mustnot be executed within the
 			subpass.
@@ -1541,7 +1541,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 	EnumConstant(
 		"VkCullModeFlagBits",
 
-		"CULL_MODE_NONE".enumExpr("If set, no triangles are discarded.", "0"),
+		"CULL_MODE_NONE".enum("If set, no triangles are discarded.", "0"),
 		"CULL_MODE_FRONT_BIT".enum("If set, front-facing triangles are discarded.", 0x00000001),
 		"CULL_MODE_BACK_BIT".enum("If set, back-facing triangles are discarded.", 0x00000002),
 		"CULL_MODE_FRONT_AND_BACK".enum("If set, all triangles are discarded.", 0x00000003)

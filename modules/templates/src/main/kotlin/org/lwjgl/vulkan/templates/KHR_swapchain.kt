@@ -36,7 +36,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 	EnumConstant(
 		"VkImageLayout",
 
-		"IMAGE_LAYOUT_PRESENT_SRC_KHR".enumExpr(
+		"IMAGE_LAYOUT_PRESENT_SRC_KHR".enum(
 			"""
 			$must only be used for presenting a swapchain image for display. A swapchain’s image $must be transitioned to this layout before calling
 			#QueuePresentKHR(), and $must be transitioned away from this layout after calling #AcquireNextImageKHR().
@@ -48,11 +48,11 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 	EnumConstant(
 		"VkResult",
 
-		"SUBOPTIMAL_KHR".enumExpr(
+		"SUBOPTIMAL_KHR".enum(
 			"A swapchain no longer matches the surface properties exactly, but $can still be used to present to the surface successfully.",
 			"1000001003"
 		),
-		"ERROR_OUT_OF_DATE_KHR".enumExpr(
+		"ERROR_OUT_OF_DATE_KHR".enum(
 			"""
 			A surface has changed in such a way that it is no longer compatible with the swapchain, and further presentation requests using the swapchain will
 			fail. Applications $must query the new surface properties and recreate their swapchain if they wish to continue presenting to the surface.
