@@ -18,18 +18,17 @@ License terms: http://lwjgl.org/license.php
 		<include name="libdyn*.a"/>
 	</fileset>
 
-	<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
-
 	<property name="src.include.rel" value="../../../${src.include}"/>
 	<property name="src.native.rel" value="../../../${src.native}"/>
 	<macrodef name="compile">
+		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 		<element name="arguments"/>
 		<sequential>
 			<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 				<arg line="-c -std=c11"/>
 				<arg line="-m64" if:true="${build.arch.x64}"/>
 				<arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
-				<arg line="-O3 -flto -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
+				<arg line="-O3 -flto -fPIC @{flags} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
 
 				<arg value="-I${jni.headers}"/>
 				<arg value="-I${jni.headers}/linux"/>
@@ -79,6 +78,19 @@ License terms: http://lwjgl.org/license.php
 		<compile if:true="${binding.jawt}">
 			<arguments>
 				<fileset dir="." includes="${src.generated.native}/system/jawt/*.c"/>
+			</arguments>
+		</compile>
+
+		<compile if:true="${binding.lmdb}">
+			<arguments>
+				<arg value="-I${src.include.rel}/util/lmdb"/>
+				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
+			</arguments>
+		</compile>
+		<compile flags="" if:true="${binding.lmdb}">
+			<arguments>
+				<arg value="-I${src.include.rel}/util/lmdb"/>
+				<fileset dir="." includes="${src.include}/util/lmdb/*.c"/>
 			</arguments>
 		</compile>
 

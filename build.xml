@@ -282,6 +282,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/system/windows/**"/>
 			<include name="org/lwjgl/system/jawt/**" if:true="${binding.jawt}"/>
 
+			<include name="org/lwjgl/util/lmdb/**" if:true="${binding.lmdb}"/>
 			<include name="org/lwjgl/util/nfd/**" if:true="${binding.nfd}"/>
 			<include name="org/lwjgl/util/par/**" if:true="${binding.par}"/>
 			<include name="org/lwjgl/util/simd/**"/>
@@ -390,6 +391,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/system/jawt/**" if:true="${binding.jawt}"/>
 
 			<include name="org/lwjgl/demo/util/*.java"/>
+			<include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
 			<include name="org/lwjgl/demo/util/nfd/**" if:true="${nfd}"/>
 			<include name="org/lwjgl/demo/util/par/**" if:true="${binding.par}"/>
 			<include name="org/lwjgl/demo/util/xxhash/**"/>

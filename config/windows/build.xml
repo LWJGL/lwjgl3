@@ -64,6 +64,19 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</cl>
 
+		<cl if:true="${binding.lmdb}">
+			<arguments>
+				<arg value="/I${src.include}\util\lmdb"/>
+				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
+			</arguments>
+		</cl>
+		<cl flags="/W0" if:true="${binding.lmdb}">
+			<arguments>
+				<arg value="/I${src.include}\util\lmdb"/>
+				<fileset dir="." includes="${src.include}/util/lmdb/*.c"/>
+			</arguments>
+		</cl>
+
 		<cl if:true="${binding.nanovg}">
 			<arguments>
 				<arg value="/I${src.include}\nanovg"/>
@@ -186,6 +199,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="/OPT:REF,ICF"/>
 			<arg value="/DLL"/>
 			<arg value="/LTCG"/>
+			<arg value="ntdll.lib" if:true="${binding.lmdb}"/>
 		</apply>
 
 		<!-- Compress -->
