@@ -1,3 +1,64 @@
+### 3.0.0
+
+[DOWNLOAD](http://build.lwjgl.org/release/3.0.0/lwjgl-3.0.0.zip)
+
+_Released 2016 Jun 03_
+
+This build includes the following changes:
+
+**BINDINGS**
+
+- Added support for Java array parameters and HotSpot Critical Natives. (#175)
+- Added [Vulkanl](https://www.khronos.org/vulkan/) bindings. (#50)
+- Added [NanoVG](https://github.com/memononen/nanovg) bindings. (#99)
+- Added [NativeFileDialog](https://github.com/mlabbe/nativefiledialog) bindings.
+- Added [par_shapes.h](http://github.prideout.net/shapes) bindings.
+- Added [dyncall](http://www.dyncall.org/) bindings.
+- Added [jawt](https://en.wikipedia.org/wiki/Java_AWT_Native_Interface) bindings for AWT/Swing integration. (#125)
+- Added simple OS-specific **window creation** bindings, for custom window/context creation. (#105)
+- Added missing OpenCL and OpenAL **extensions**.
+- **Fully documented** OpenCL and OpenAL.
+- Moved **WGL** and **GLX** capabilities to the new `WGLCapabilities` and `GLXCapabilities` classes, respectively. Functionality in WGL, GLX and corresponding extensions that does not require a current context can now be used without creating a dummy context first. (#171)
+
+**IMPROVEMENTS**
+
+- Added **stack allocation** APIs (the `MemoryStack` class and new allocation methods in struct classes and `MemoryUtil`).
+- Made the implementations of `PointerBuffer` and `Struct/StructBuffer` subclasses as lightweight as possible. This makes it easier for escape analysis to **eliminate allocations**.
+- Minor struct API improvements.
+- Added **nullability information** to **struct members**, to protect against buggy code crashing the JVM.
+- All bindings are updated to the **latest versions** of the corresponding libraries. Notably, GLFW now has `glfwSetWindowIcon` and `glfwSetWindowMonitor`, it now doesn't lack anything compared to LWJGL 2's Display.
+- Refactored callbacks for Java 8. (#182)
+- Added `NativeResource` interface and made freeable objects usable as resources in try-with-resources statements. (#186)
+- **Faster thread-local lookups** for the stack and current capabilities. New options in Configuration can be used to **complete eliminate** thread-local lookup in OpenGL, OpenGL ES and OpenAL, when it is known that only a single context will be used, or that all contexts will be compatible (same capabilities and same function pointers).
+- Added `memSlice` for all buffers types in `MemoryUtil`. (#179)
+- Refactored the `Configuration` class for type safety and added more options.
+- **JDK 9** can now be used to build and run LWJGL.
+- Javadoc is now generated with JDK 9. The API is fully indexed and **search** functionality is available. Also made multiple Javadoc formatting improvements.
+- Improved debug diagnostics on startup and when loading the LWJGL shared library fails.
+- Optimized `memSet` and `memCopy` for small buffers.
+
+**FIXES**
+
+- **Stopped** using **UPX** compression for binaries. This eliminates various integration issues and virus scanning false-positives.
+- The `SharedLibraryLoader` now works with any shared library, not only libraries LWJGL knows about. (#176)
+
+**BREAKING CHANGES**
+
+- LWJGL now requires **Java 8** to build and run. Certain custom interfaces have been replaced with `java.util.function` interfaces. (#177)
+- **Dropped** support for **Linux x86**. (#162)
+- **Dropped** libffi bindings.
+- **Dropped** `ALDevice/ALContext` wrappers from OpenAL and `CLPlatform/CLDevice` wrappers from OpenCL. (#152)
+- **Dropped** the `getInstance()` method from bindings loaded from shared libraries. Function pointers are now stored either in capabilities classes or in a nested **Functions** inner class.
+- **Dropped** infrequently used method overloads in bindings. Full javadoc is now generated on (almost) all overloads.
+- **Dropped** utility classes that were not useful.
+- Added **AutoSize** support to **struct members**. Instance setters for the corresponding count/size members were removed to avoid bugs and confusion.
+- Replaced `MemoryUtil.memFree(StructBuffer)` with `StructBuffer.free()`.
+- Renamed `__ALIGNMENT` to `ALIGNOF` in struct classes.
+- Removed `org.lwjgl.system.Retainable` interface. `Closure` and `FunctionProvider` subclasses are now destroyed using `.free()` instead of `.release()`.
+- Moved **xxHash** and **SSE** bindings to the `org.lwjgl.util` package.
+- Integer-boolean native types (0 or 1 are the only legal values) are now mapped to Java booleans. (#181)
+- **Macros** without parameters are now generated as static final values, not methods.
+
 ### 3.0.0 Beta
 
 [DOWNLOAD](http://build.lwjgl.org/release/3.0.0b/lwjgl-3.0.0b.zip)
