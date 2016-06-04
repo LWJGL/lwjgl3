@@ -215,7 +215,7 @@ final class MemoryManage {
 			allocator.config(malloc, calloc, realloc, free, aligned_alloc, aligned_free);
 		}
 
-		private static long track(long address, long size) {
+		static long track(long address, long size) {
 			if ( address != NULL ) {
 				Thread t = Thread.currentThread();
 				Long threadId = t.getId();
@@ -237,7 +237,7 @@ final class MemoryManage {
 			return address;
 		}
 
-		private static void untrack(long address) {
+		static void untrack(long address) {
 			if ( address == NULL )
 				return;
 

@@ -153,6 +153,9 @@ public final class APIUtil {
 		if ( handle == NULL )
 			throw new IllegalStateException("Failed to create the DCCallback object");
 
+		if ( Configuration.DEBUG_MEMORY_ALLOCATOR.get(false) )
+			MemoryManage.DebugAllocator.track(handle, 2 * POINTER_SIZE);
+
 		return handle;
 	}
 

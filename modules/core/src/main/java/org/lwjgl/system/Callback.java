@@ -63,6 +63,8 @@ public abstract class Callback extends Pointer.Default implements NativeResource
 		} catch (Exception e) {
 			throw new IllegalStateException("Failed to initialize native callbacks.", e);
 		}
+
+		MemoryUtil.getAllocator();
 	}
 
 	protected Callback(long address) {
@@ -124,6 +126,9 @@ public abstract class Callback extends Pointer.Default implements NativeResource
 	public static void free(long functionPointer) {
 		memDeleteGlobalRef(dcbGetUserData(functionPointer));
 		dcbFreeCallback(functionPointer);
+
+		if ( Configuration.DEBUG_MEMORY_ALLOCATOR.get(false) )
+			MemoryManage.DebugAllocator.untrack(functionPointer);
 	}
 
 }
