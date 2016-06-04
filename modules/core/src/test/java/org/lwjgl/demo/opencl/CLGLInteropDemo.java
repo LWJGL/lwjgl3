@@ -16,6 +16,7 @@ import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 
+import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.InfoUtil.*;
@@ -306,7 +307,7 @@ public final class CLGLInteropDemo {
 		}
 
 		void destroy() {
-			Callbacks.glfwFreeCallbacks(handle);
+			glfwFreeCallbacks(handle);
 			glfwDestroyWindow(handle);
 		}
 

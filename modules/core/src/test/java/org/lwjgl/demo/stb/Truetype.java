@@ -93,8 +93,6 @@ public final class Truetype extends FontDemo {
 		}
 
 		cdata.free();
-
-		glfwDestroyWindow(getWindow());
 	}
 
 	private void renderText(STBTTBakedChar.Buffer cdata, int BITMAP_W, int BITMAP_H) {

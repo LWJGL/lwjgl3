@@ -13,6 +13,7 @@ import java.nio.IntBuffer;
 import java.util.Map;
 
 import static org.lwjgl.demo.util.IOUtil.*;
+import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBImage.*;
@@ -199,7 +200,7 @@ public final class Events {
 			glfwSwapBuffers(window);
 		}
 
-		Callbacks.glfwFreeCallbacks(window);
+		glfwFreeCallbacks(window);
 		glfwSetJoystickCallback(null).free();
 		glfwSetMonitorCallback(null).free();
 

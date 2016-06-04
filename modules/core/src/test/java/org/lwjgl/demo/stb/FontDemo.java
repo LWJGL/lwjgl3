@@ -220,6 +220,7 @@ abstract class FontDemo {
 			debugProc.free();
 
 		glfwFreeCallbacks(window);
+		glfwDestroyWindow(window);
 		glfwTerminate();
 		glfwSetErrorCallback(null).free();
 	}

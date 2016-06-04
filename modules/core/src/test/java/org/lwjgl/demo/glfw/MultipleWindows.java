@@ -8,6 +8,7 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.lwjgl.glfw.Callbacks.*;
@@ -59,7 +60,9 @@ public final class MultipleWindows {
 
 			glfwSetKeyCallback(handle, (windowHnd, key, scancode, action, mods) -> {
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-					latch.set(0);
+					Arrays.stream(windows)
+						.filter(w -> w != null)
+						.forEach(w -> glfwSetWindowShouldClose(w.handle, true));
 			});
 
 			glfwMakeContextCurrent(handle);
@@ -95,12 +98,6 @@ public final class MultipleWindows {
 					latch.decrementAndGet();
 				}
 			}
-		}
-
-		for ( int i = 0; i < 4; i++ ) {
-			Window window = windows[i];
-			if ( window != null )
-				glfwDestroyWindow(window.handle);
 		}
 	}
 

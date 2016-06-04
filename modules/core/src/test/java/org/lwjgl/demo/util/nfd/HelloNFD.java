@@ -87,9 +87,8 @@ public final class HelloNFD {
 			glfwSwapBuffers(window);
 		}
 
-		glfwDestroyWindow(window);
-
 		glfwFreeCallbacks(window);
+		glfwDestroyWindow(window);
 		glfwTerminate();
 
 		glfwSetErrorCallback(null).free();

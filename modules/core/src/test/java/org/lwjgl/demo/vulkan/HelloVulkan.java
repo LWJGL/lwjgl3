@@ -12,6 +12,7 @@ import org.lwjgl.vulkan.*;
 
 import java.nio.*;
 
+import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWVulkan.*;
 import static org.lwjgl.system.MemoryStack.*;
@@ -1938,7 +1939,7 @@ public final class HelloVulkan {
 		queue_props.free();
 		memory_properties.free();
 
-		Callbacks.glfwFreeCallbacks(window);
+		glfwFreeCallbacks(window);
 		glfwDestroyWindow(window);
 		glfwTerminate();
 		glfwSetErrorCallback(null).free();

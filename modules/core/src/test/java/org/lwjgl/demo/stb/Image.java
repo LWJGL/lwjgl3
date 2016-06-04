@@ -238,8 +238,6 @@ public final class Image {
 		}
 
 		glDisable(GL_TEXTURE_2D);
-
-		glfwDestroyWindow(window);
 	}
 
 	private void destroy() {
@@ -249,6 +247,7 @@ public final class Image {
 			debugProc.free();
 
 		glfwFreeCallbacks(window);
+		glfwDestroyWindow(window);
 		glfwTerminate();
 		glfwSetErrorCallback(null).free();
 	}

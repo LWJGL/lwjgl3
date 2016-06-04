@@ -64,8 +64,6 @@ public final class EasyFont extends FontDemo {
 		}
 
 		glDisableClientState(GL_VERTEX_ARRAY);
-
-		glfwDestroyWindow(getWindow());
 	}
 
 }
