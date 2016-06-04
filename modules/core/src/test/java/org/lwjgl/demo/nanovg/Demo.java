@@ -945,6 +945,16 @@ class Demo {
 
 		for ( i = 0; i < 12; i++ )
 			nvgDeleteImage(vg, data.images[i]);
+
+		memFree(hoverText);
+		memFree(paragraph);
+
+		memFree(ICON_TRASH);
+		memFree(ICON_LOGIN);
+		memFree(ICON_CHECK);
+		memFree(ICON_CHEVRON_RIGHT);
+		memFree(ICON_CIRCLED_CROSS);
+		memFree(ICON_SEARCH);
 	}
 
 	private static void drawParagraph(long vg, float x, float y, float width, float height, float mx, float my) {
@@ -1389,7 +1399,7 @@ class Demo {
 
 	static void initGraph(PerfGraph fps, int style, String name) {
 		fps.style = style;
-		fps.name = memUTF8(name);
+		memUTF8(name, true, fps.name);
 		Arrays.fill(fps.values, 0);
 		fps.head = 0;
 	}
