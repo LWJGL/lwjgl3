@@ -18178,7 +18178,7 @@ nk_chart_end(struct nk_context *ctx)
 
     win = ctx->current;
     chart = &win->layout->chart;
-    memset(chart, 0, sizeof(*chart));
+    NK_MEMSET(chart, 0, sizeof(*chart));
     return;
 }
 

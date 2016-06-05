@@ -273,7 +273,8 @@ public class GLFWDemo {
 		nk_glfw3_shutdown();
 
 		glfwFreeCallbacks(win);
-		debugProc.free();
+		if ( debugProc != null )
+			debugProc.free();
 		glfwTerminate();
 		glfwSetErrorCallback(null).free();
 	}

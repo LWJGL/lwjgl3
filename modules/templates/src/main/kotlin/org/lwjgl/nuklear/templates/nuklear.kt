@@ -9,10 +9,15 @@ import org.lwjgl.nuklear.*
 
 val nuklear = "Nuklear".nativeClass(packageName = NUKLEAR_PACKAGE, prefix = "NK", prefixMethod = "nk_") {
 	initializeAllocator()
+	nativeDirective("""#ifdef LWJGL_LINUX
+	#pragma GCC diagnostic ignored "-Wunused-function"
+	#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+#endif""", beforeIncludes = true)
+
 	nativeDirective(
 		"""DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
-	__pragma(warning(disable : 4711))
+	__pragma(warning(disable : 4711 4738))
 #endif
 #define NK_PRIVATE
 #define NK_INCLUDE_FIXED_TYPES
@@ -24,6 +29,12 @@ val nuklear = "Nuklear".nativeClass(packageName = NUKLEAR_PACKAGE, prefix = "NK"
 #endif
 #define NK_ASSERT
 #define NK_IMPLEMENTATION
+#define NK_MEMSET memset
+#define NK_MEMCOPY memcpy
+#define NK_SQRT sqrt
+#define NK_SIN sinf
+#define NK_COS cosf
+#include <string.h>
 #include "nuklear.h"
 typedef float(*nk_value_getter)(void* user, int index);
 typedef void(*nk_item_getter)(void*, int, const char**);
