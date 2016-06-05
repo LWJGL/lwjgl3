@@ -27,13 +27,14 @@ val nuklear = "Nuklear".nativeClass(packageName = NUKLEAR_PACKAGE, prefix = "NK"
 #ifdef LWJGL_WINDOWS
 	#define NK_BUTTON_TRIGGER_ON_RELEASE
 #endif
-#define NK_ASSERT
+#define NK_ASSERT(expr)
 #define NK_IMPLEMENTATION
 #define NK_MEMSET memset
 #define NK_MEMCOPY memcpy
 #define NK_SQRT sqrt
 #define NK_SIN sinf
 #define NK_COS cosf
+#include <math.h>
 #include <string.h>
 #include "nuklear.h"
 typedef float(*nk_value_getter)(void* user, int index);
