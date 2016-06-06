@@ -243,8 +243,6 @@ public class GLFWDemo {
 			/* Input */
 			nk_glfw3_new_frame();
 
-			System.gc();
-
 			demo.layout(ctx, 50, 50);
 			calc.layout(ctx, 300, 50);
 
