@@ -17,7 +17,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  *
  * <p>Callback instances use native resources and must be explicitly freed when no longer used by calling the {@link #free} method.</p>
  */
-public abstract class Callback extends Pointer.Default implements NativeResource {
+public abstract class Callback implements Pointer, NativeResource {
 
 	private static final long
 		VOID,
@@ -67,8 +67,29 @@ public abstract class Callback extends Pointer.Default implements NativeResource
 		MemoryUtil.getAllocator();
 	}
 
+	private long address;
+
+	/**
+	 * Creates a callback instance using the specified dyncall signature
+	 *
+	 * @param signature the dyncall signature
+	 */
+	protected Callback(String signature) {
+		this.address = create(signature, this);
+	}
+
+	/**
+	 * Creates a callback instance using the specified function address
+	 *
+	 * @param address the function address
+	 */
 	protected Callback(long address) {
-		super(address);
+		this.address = address;
+	}
+
+	@Override
+	public long address() {
+		return address;
 	}
 
 	@Override
@@ -78,7 +99,34 @@ public abstract class Callback extends Pointer.Default implements NativeResource
 
 	private static native long getNativeCallbacks(Method[] methods, long callbacks);
 
-	static long getNativeFunction(char type) {
+	public static String __stdcall(String signature) {
+		return Platform.get() == Platform.WINDOWS && Pointer.BITS32 ? "_s" + signature : signature;
+	}
+
+	/**
+	 * Creates a native function that delegates to the specified instance when called.
+	 *
+	 * <p>The native function uses the default calling convention.</p>
+	 *
+	 * @param signature the {@code dyncall} function signature
+	 * @param instance  the callback instance
+	 *
+	 * @return the dynamically generated native function
+	 */
+	static long create(String signature, Object instance) {
+		long funcptr = Callback.getNativeFunction(signature.charAt(signature.length() - 1));
+
+		long handle = dcbNewCallback(signature, funcptr, memNewGlobalRef(instance));
+		if ( handle == NULL )
+			throw new IllegalStateException("Failed to create the DCCallback object");
+
+		if ( Configuration.DEBUG_MEMORY_ALLOCATOR.get(false) )
+			MemoryManage.DebugAllocator.track(handle, 2 * POINTER_SIZE);
+
+		return handle;
+	}
+
+	private static long getNativeFunction(char type) {
 		switch ( type ) {
 			case 'v':
 				return VOID;
@@ -129,6 +177,24 @@ public abstract class Callback extends Pointer.Default implements NativeResource
 
 		if ( Configuration.DEBUG_MEMORY_ALLOCATOR.get(false) )
 			MemoryManage.DebugAllocator.untrack(functionPointer);
+	}
+
+	public boolean equals(Object o) {
+		if ( this == o ) return true;
+		if ( !(o instanceof Callback) ) return false;
+
+		Callback that = (Callback)o;
+
+		return address == that.address();
+	}
+
+	public int hashCode() {
+		return (int)(address ^ (address >>> 32));
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s pointer [0x%X]", getClass().getSimpleName(), address);
 	}
 
 }

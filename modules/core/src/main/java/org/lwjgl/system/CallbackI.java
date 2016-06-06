@@ -22,6 +22,18 @@ package org.lwjgl.system;
  */
 public interface CallbackI extends Pointer {
 
+	/**
+	 * Returns the dyncall signature for this callback function. [INTERNAL API]
+	 *
+	 * @return the dyncall signature
+	 */
+	String getSignature();
+
+	@Override
+	default long address() {
+		return Callback.create(getSignature(), this);
+	}
+
 	/** A {@code Callback} with no return value. */
 	interface V extends CallbackI {
 		/**

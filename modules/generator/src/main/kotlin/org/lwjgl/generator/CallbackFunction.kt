@@ -16,9 +16,9 @@ class CallbackFunction(
 	internal var functionDoc: (CallbackFunction) -> String = { "" }
 	var additionalCode: String = ""
 
-	private var callConvention = "DEFAULT"
+	private var stdcall = false
 	fun useSystemCallConvention() {
-		callConvention = "SYSTEM"
+		stdcall = true
 	}
 
 	private val signatureJava: String = signature.asSequence().map {
@@ -87,8 +87,7 @@ ${access.modifier}abstract class $className extends Callback implements ${classN
 	}
 
 	protected $className() {
-		super(NULL);
-		address = ${className}I.super.address();
+		super(SIGNATURE);
 	}
 
 	private $className(long functionPointer) {
@@ -127,7 +126,6 @@ ${access.modifier}abstract class $className extends Callback implements ${classN
 
 		print("""import org.lwjgl.system.*;
 
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.dyncall.DynCallback.*;
 
 """)
@@ -138,12 +136,12 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 @FunctionalInterface
 ${access.modifier}interface ${className}I extends CallbackI.${returns.mapping.jniSignature} {
 
+	String SIGNATURE = ${"\"(${signature.asSequence().map { it.nativeType.dyncall }.joinToString("")})${returns.dyncall}\"".let {
+		if ( stdcall ) "Callback.__stdcall($it)" else it
+	}};
+
 	@Override
-	default long address() {
-		return apiCreateCallback(this, "(${
-		signature.asSequence().map { it.nativeType.dyncall }.joinToString("")
-		})${returns.dyncall}", ${callConvention != "DEFAULT"});
-	}
+	default String getSignature() { return SIGNATURE; }
 
 	@Override
 	default ${returns.nativeMethodType} callback(long args) {

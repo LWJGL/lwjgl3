@@ -41,7 +41,7 @@ public interface Pointer {
 	abstract class Default implements Pointer {
 
 		// Removed final due to JDK-8139758. TODO: Restore if the fix is backported to JDK 8.
-		protected long address;
+		private long address;
 
 		protected Default(long address) {
 			this.address = address;
