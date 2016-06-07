@@ -323,7 +323,7 @@ public final class GL {
 
 			int errorCode = callI(GetError);
 			if ( errorCode != GL_NO_ERROR )
-				apiLog(String.format("An OpenGL context was in an error state before the creation of its capabilities instance. Error: 0x%X" + errorCode));
+				apiLog(String.format("An OpenGL context was in an error state before the creation of its capabilities instance. Error: 0x%X", errorCode));
 
 			int majorVersion;
 			int minorVersion;
