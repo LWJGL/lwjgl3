@@ -106,6 +106,7 @@ public class GLFWDemo {
 			throw new IllegalStateException("Unable to initialize glfw");
 
 		glfwDefaultWindowHints();
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -216,8 +217,8 @@ public class GLFWDemo {
 					FloatBuffer x = stack.floats(0.0f);
 					FloatBuffer y = stack.floats(0.0f);
 
-					STBTTAlignedQuad q = STBTTAlignedQuad.malloc();
-					IntBuffer advance = memAllocInt(1);
+					STBTTAlignedQuad q = STBTTAlignedQuad.mallocStack(stack);
+					IntBuffer advance = stack.mallocInt(1);
 
 					stbtt_GetPackedQuad(cdata, BITMAP_W, BITMAP_H, codepoint - 32, x, y, q, false);
 					stbtt_GetCodepointHMetrics(fontInfo, codepoint, advance, null);
@@ -230,15 +231,13 @@ public class GLFWDemo {
 					ufg.xadvance(advance.get(0) * scale);
 					ufg.uv(0).set(q.s0(), q.t0());
 					ufg.uv(1).set(q.s1(), q.t1());
-
-					memFree(advance);
-					q.free();
 				}
 			})
 			.texture().id(fontTexID);
 
 		nk_style_set_font(ctx, default_font);
 
+		glfwShowWindow(win);
 		while ( !glfwWindowShouldClose(win) ) {
 			/* Input */
 			nk_glfw3_new_frame();
@@ -257,15 +256,17 @@ public class GLFWDemo {
 				glViewport(0, 0, width.get(0), height.get(0));
 
 				glClearColor(bg.get(0), bg.get(1), bg.get(2), bg.get(3));
-				glClear(GL_COLOR_BUFFER_BIT);
-				/* IMPORTANT: `nk_glfw_render` modifies some global OpenGL state
-				 * with blending, scissor, face culling, depth test and viewport and
-                 * defaults everything back into a default state.
-                 * Make sure to either a.) save and restore or b.) reset your own state after
-                 * rendering the UI. */
-				nk_glfw3_render(NK_ANTI_ALIASING_ON, MAX_VERTEX_BUFFER, MAX_ELEMENT_BUFFER);
-				glfwSwapBuffers(win);
 			}
+			glClear(GL_COLOR_BUFFER_BIT);
+			/*
+			 * IMPORTANT: `nk_glfw_render` modifies some global OpenGL state
+			 * with blending, scissor, face culling, depth test and viewport and
+			 * defaults everything back into a default state.
+			 * Make sure to either a.) save and restore or b.) reset your own state after
+			 * rendering the UI.
+			 */
+			nk_glfw3_render(NK_ANTI_ALIASING_ON, MAX_VERTEX_BUFFER, MAX_ELEMENT_BUFFER);
+			glfwSwapBuffers(win);
 		}
 
 		nk_glfw3_shutdown();
