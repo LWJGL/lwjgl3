@@ -79,7 +79,7 @@ def lwjglPOM = { String projectName, String packagingMethod ->
 			name projectName
 			packaging packagingMethod
 			description 'LWJGL'
-			url 'http://www.lwjgl.org'
+			url 'https://www.lwjgl.org'
 
 			scm {
 				url 'scm:git@github.com:LWJGL/lwjgl3.git'
@@ -90,7 +90,7 @@ def lwjglPOM = { String projectName, String packagingMethod ->
 			licenses {
 				license {
 					name 'BSD'
-					url 'http://www.lwjgl.org/license'
+					url 'https://www.lwjgl.org/license'
 					distribution 'repo'
 				}
 			}
