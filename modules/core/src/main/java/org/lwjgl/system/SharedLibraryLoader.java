@@ -33,7 +33,7 @@ final class SharedLibraryLoader {
 	 * Extracts the LWJGL native libraries from the classpath to a temporary directory and prepends the path to that directory to the
 	 * {@link Configuration#LIBRARY_PATH} option.
 	 */
-	static void load() {
+	private static void load() {
 		try {
 			// Extract the lwjgl shared library and get the library path
 			extractPath = extractFile(Platform.get().mapLibraryName(Library.JNI_LIBRARY_NAME), null).getParentFile();

@@ -147,6 +147,17 @@ public class Configuration<T> {
 	public static final Configuration<Boolean> DEBUG = new Configuration<>("org.lwjgl.util.Debug", StateInit.BOOLEAN);
 
 	/**
+	 * When enabled, ShaderLibraryLoader exceptions will be printed to the {@link #DEBUG_STREAM}.
+	 *
+	 * <p>This option requires {@link #DEBUG} to be enabled.</p>
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.util.DebugLoader</b><br>
+	 * &nbsp; &nbsp;Usage: Static<br>
+	 */
+	public static final Configuration<Boolean> DEBUG_LOADER = new Configuration<>("org.lwjgl.util.DebugLoader", StateInit.BOOLEAN);
+
+	/**
 	 * Can be set to override the default {@link APIUtil#DEBUG_STREAM}. It must be the name of a class that implements the
 	 * {@link Supplier Supplier&lt;PrintStream&gt;} interface. The class will be instantiated using reflection and the result of {@link Supplier#get get} will
 	 * become the {@link #DEBUG_STREAM} used by LWJGL.

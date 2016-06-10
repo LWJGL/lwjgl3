@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -29,6 +30,8 @@ public final class Library {
 	private static final String JAVA_LIBRARY_PATH = "java.library.path";
 
 	private static final Pattern PATH_SEPARATOR = Pattern.compile(File.pathSeparator);
+
+	private static final AtomicBoolean usedSharedLibraryLoader = new AtomicBoolean();
 
 	static {
 		if ( Checks.DEBUG ) {
@@ -67,37 +70,42 @@ public final class Library {
 			return;
 		}
 
-		try {
-			loadSystemRelative(name);
-		} catch (UnsatisfiedLinkError e) {
-			try {
-				apiLog("\tUsing SharedLibraryLoader...");
-				// Failed, attempt to extract from the classpath
-				SharedLibraryLoader.load(name);
-				// and try again
-				loadSystemRelative(name);
-			} catch (Throwable t) {
-				printError(t);
-
-				throw e;
-			}
-		}
-	}
-
-	private static void loadSystemRelative(String name) {
 		String libName = Platform.get().mapLibraryName(name);
 
 		// Try org.lwjgl.librarypath first
-		String override = Configuration.LIBRARY_PATH.get();
-		if ( override != null && loadSystem(libName, Configuration.LIBRARY_PATH.getProperty(), override) )
+		if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
 			return;
+
+		try {
+			// Failed, attempt to extract from the classpath
+			if ( Checks.DEBUG )
+				DEBUG_STREAM.print("[LWJGL] \tUsing SharedLibraryLoader...");
+			SharedLibraryLoader.load(name);
+			if ( Checks.DEBUG )
+				DEBUG_STREAM.println("found");
+			usedSharedLibraryLoader.set(true);
+			// and try again
+			if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
+				return;
+		} catch (Exception e) {
+			if ( Checks.DEBUG )
+				DEBUG_STREAM.println("failed");
+			if ( Configuration.DEBUG_LOADER.get(false) )
+				e.printStackTrace(DEBUG_STREAM);
+		}
 
 		// Then java.library.path
-		override = System.getProperty(JAVA_LIBRARY_PATH);
-		if ( override != null && loadSystem(libName, JAVA_LIBRARY_PATH, override) )
+		String paths = System.getProperty(JAVA_LIBRARY_PATH);
+		if ( paths != null && loadSystem(libName, JAVA_LIBRARY_PATH, paths) )
 			return;
 
+		printError();
 		throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
+	}
+
+	private static boolean loadSystem(String libName, Configuration<String> property) {
+		String paths = property.get();
+		return paths != null && loadSystem(libName, property.getProperty(), paths);
 	}
 
 	private static boolean loadSystem(String libName, String property, String paths) {
@@ -130,51 +138,58 @@ public final class Library {
 			return lib;
 		}
 
-		try {
-			return loadNativeRelative(name);
-		} catch (UnsatisfiedLinkError e) {
-			try {
-				apiLog("\tUsing SharedLibraryLoader...");
-				// Failed, attempt to extract from the classpath
-				SharedLibraryLoader.load(name);
-				// and try again
-				return loadNativeRelative(name);
-			} catch (Throwable t) {
-				printError(t);
-				throw e;
-			}
-		}
-	}
-
-	private static SharedLibrary loadNativeRelative(String name) {
 		String libName = Platform.get().mapLibraryName(name);
 
 		// Try org.lwjgl.librarypath first
-		String override = Configuration.LIBRARY_PATH.get();
-		if ( override != null ) {
-			SharedLibrary lib = loadNative(libName, Configuration.LIBRARY_PATH.getProperty(), override);
-			if ( lib != null )
-				return lib;
+		SharedLibrary lib = loadNative(libName, Configuration.LIBRARY_PATH);
+		if ( lib != null )
+			return lib;
+
+		try {
+			if ( Checks.DEBUG )
+				DEBUG_STREAM.print("[LWJGL] \tUsing SharedLibraryLoader...");
+			// Failed, attempt to extract from the classpath
+			SharedLibraryLoader.load(name);
+			if ( Checks.DEBUG )
+				DEBUG_STREAM.println("found");
+			// and try again
+			return loadNative(libName, Configuration.LIBRARY_PATH);
+		} catch (Exception e) {
+			if ( Checks.DEBUG )
+				DEBUG_STREAM.println("failed");
+			if ( Configuration.DEBUG_LOADER.get(usedSharedLibraryLoader.get()) )
+				e.printStackTrace(DEBUG_STREAM);
 		}
 
 		// Then java.library.path
-		override = System.getProperty(JAVA_LIBRARY_PATH);
-		if ( override != null ) {
-			SharedLibrary lib = loadNative(libName, JAVA_LIBRARY_PATH, override);
+		String paths = System.getProperty(JAVA_LIBRARY_PATH);
+		if ( paths != null ) {
+			lib = loadNative(libName, JAVA_LIBRARY_PATH, paths);
 			if ( lib != null )
 				return lib;
 		}
 
 		// Then the OS paths
 		try {
-			SharedLibrary lib = apiCreateLibrary(libName);
+			lib = apiCreateLibrary(libName);
 			apiLog("\tLoaded from system paths");
 			return lib;
 		} catch (UnsatisfiedLinkError e) {
 			apiLog(String.format("\t%s not found in system paths", libName));
 		}
 
+		printError();
 		throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
+	}
+
+	private static SharedLibrary loadNative(String libName, Configuration<String> property) {
+		String paths = property.get();
+		if ( paths != null ) {
+			SharedLibrary lib = loadNative(libName, property.getProperty(), paths);
+			if ( lib != null )
+				return lib;
+		}
+		return null;
 	}
 
 	private static SharedLibrary loadNative(String libName, String property, String paths) {
@@ -235,18 +250,18 @@ public final class Library {
 			.findFirst();
 	}
 
-	private static void printError(Throwable t) {
-		if ( Checks.DEBUG )
-			t.printStackTrace(DEBUG_STREAM);
-
+	private static void printError() {
 		DEBUG_STREAM.println(
 			"[LWJGL] Failed to load a library. Possible solutions:\n" +
 				"\ta) Set -Djava.library.path or -Dorg.lwjgl.librarypath to the directory that contains the shared libraries.\n" +
 				"\tb) Add the JAR(s) containing the shared libraries to the classpath."
 		);
 
-		if ( !Checks.DEBUG )
+		if ( !Checks.DEBUG ) {
 			DEBUG_STREAM.println("[LWJGL] Enable debug mode with -Dorg.lwjgl.util.Debug=true for better diagnostics.");
+			if ( !Configuration.DEBUG_LOADER.get(false) )
+				DEBUG_STREAM.println("[LWJGL] Enable the SharedLibraryLoader debug mode with -Dorg.lwjgl.util.DebugLoader=true for better diagnostics.");
+		}
 	}
 
 	/**
