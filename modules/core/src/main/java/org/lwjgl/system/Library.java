@@ -11,7 +11,6 @@ import java.io.FileInputStream;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -30,8 +29,6 @@ public final class Library {
 	private static final String JAVA_LIBRARY_PATH = "java.library.path";
 
 	private static final Pattern PATH_SEPARATOR = Pattern.compile(File.pathSeparator);
-
-	private static final AtomicBoolean usedSharedLibraryLoader = new AtomicBoolean();
 
 	static {
 		if ( Checks.DEBUG ) {
@@ -83,7 +80,6 @@ public final class Library {
 			SharedLibraryLoader.load(name);
 			if ( Checks.DEBUG )
 				DEBUG_STREAM.println("found");
-			usedSharedLibraryLoader.set(true);
 			// and try again
 			if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
 				return;
@@ -157,7 +153,7 @@ public final class Library {
 		} catch (Exception e) {
 			if ( Checks.DEBUG )
 				DEBUG_STREAM.println("failed");
-			if ( Configuration.DEBUG_LOADER.get(usedSharedLibraryLoader.get()) )
+			if ( Configuration.DEBUG_LOADER.get(false) )
 				e.printStackTrace(DEBUG_STREAM);
 		}
 
