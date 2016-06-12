@@ -74,7 +74,7 @@ class Preamble {
 		if ( !static.isEmpty() && static.size < javaImports.size ) {
 			// Separate plain from static imports
 			javaImports.filter { !it.startsWith("static ") }.print()
-			writer.println();
+			writer.println()
 			static.print()
 		} else
 			javaImports.print()
@@ -147,7 +147,7 @@ abstract class GeneratorTarget(
 		}
 	}
 
-	internal val sourceFile = if ( packageName == "org.lwjgl.system" ) null else getSourceFileName();
+	internal val sourceFile = if ( packageName == "org.lwjgl.system" ) null else getSourceFileName()
 	internal open fun getLastModified(root: String): Long = File("$root/$sourceFile").let {
 		if ( it.exists() ) it else
 			throw IllegalStateException("The source file for template $packageName.$className does not exist ($it).")
@@ -307,7 +307,7 @@ abstract class GeneratorTargetNative(
 	internal val nativeFileNameJNI: String
 
 	init {
-		val fileName = StringBuilder(packageName.length + className.length + 4); // some extra room for escaping
+		val fileName = StringBuilder(packageName.length + className.length + 4) // some extra room for escaping
 
 		for (subpackage in DOT_PATTERN.split(packageName)) {
 			fileName.append(subpackage.asJNIName)

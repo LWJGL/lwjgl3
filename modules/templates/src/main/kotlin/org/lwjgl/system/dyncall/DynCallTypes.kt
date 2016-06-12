@@ -56,11 +56,11 @@ val DCsize = typedef(size_t, "DCsize")
 
 // dyncall_callback.h
 
-val DCCallback_p = "DCCallback".p;
+val DCCallback_p = "DCCallback".p
 val DCCallbackHandler_p = "DCCallbackHandler".p
-val DCArgs_p = "DCArgs".p;
+val DCArgs_p = "DCArgs".p
 
 // dynload.h
 
-val DLLib_p = "DLLib".p;
-val DLSyms_p = "DLSyms".p;
+val DLLib_p = "DLLib".p
+val DLSyms_p = "DLSyms".p

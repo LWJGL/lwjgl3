@@ -121,7 +121,7 @@ val MSG = struct(WINDOWS_PACKAGE, "MSG") {
 	nullable..HWND.member(
 		"hwnd",
 		"a handle to the window whose window procedure receives the message. This member is $NULL when the message is a thread message."
-	);
+	)
 	UINT.member("message", "the message identifier. Applications can only use the low word; the high word is reserved by the system.")
 	WPARAM.member("wParam", "additional information about the message. The exact meaning depends on the value of the message member.")
 	LPARAM.member("lParam", "additional information about the message. The exact meaning depends on the value of the message member.")

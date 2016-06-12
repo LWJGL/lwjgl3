@@ -310,7 +310,7 @@ $indent}"""
 					.append(ul(*memberDoc.toTypedArray()))
 					.append("\n\n")
 
-			builder.append("<h3>Layout</h3>\n\n");
+			builder.append("<h3>Layout</h3>\n\n")
 			builder.append(codeBlock(printStructLayout()))
 		}
 
@@ -420,7 +420,7 @@ $indentation}"""
 		println("import static org.lwjgl.system.MemoryUtil.*;")
 		println("import static org.lwjgl.system.MemoryStack.*;")
 
-		println();
+		println()
 		preamble.printJava(this)
 
 		printDocumentation()
@@ -1182,7 +1182,7 @@ ${validations.joinToString("\n")}
 			val setter = it.field(parentMember)
 			val field = it.name
 
-			val indent = accessMode.indent;
+			val indent = accessMode.indent
 			val returnType = if ( accessMode === AccessMode.INSTANCE )
 				className
 			else

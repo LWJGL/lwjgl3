@@ -46,6 +46,6 @@ val GPU_DEVICE = struct(OPENGL_PACKAGE, "GPU_DEVICE", "wgl", mutable = false) {
 		specifies the display device rectangle, in virtual screen coordinates. The value of {@code rcVirtualScreen} is undefined if the device is not part of
 		the desktop, i.e. {@code DISPLAY_DEVICE_ATTACHED_TO_DESKTOP} is not set in the {@code Flags} field.
 		"""
-	);
+	)
 }.nativeType
 val PGPU_DEVICE = GPU_DEVICE.p("PGPU_DEVICE")

@@ -2,41 +2,25 @@ package org.lwjgl.generator
 
 import java.io.PrintWriter
 
-interface FunctionTransform<T : QualifiedType> {
+interface Transform
+
+interface FunctionTransform<in T : QualifiedType> : Transform {
 	fun transformDeclaration(param: T, original: String): String?
 	fun transformCall(param: T, original: String): String
 }
 
 /** A function transform that must generate additional code. */
-interface CodeFunctionTransform<T : QualifiedType> {
+interface CodeFunctionTransform<in T : QualifiedType> : Transform {
 	fun generate(qtype: T, code: Code): Code
 }
 
 /** A function transform that makes use of the stack. */
-interface StackFunctionTransform<T : QualifiedType> {
+interface StackFunctionTransform<in T : QualifiedType> : Transform {
 	fun setupStack(func: Function, qtype: T, writer: PrintWriter)
 }
 
 /** Marker interface to indicate that pointer and buffer checks should be skipped. */
 interface SkipCheckFunctionTransform
-
-internal fun <T : QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String? {
-	val transform = transforms[this]
-	if ( transform == null )
-		return original
-	else
-		@Suppress("UNCHECKED_CAST")
-		return (transform as FunctionTransform<T>).transformDeclaration(this, original)
-}
-
-internal fun <T : QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String {
-	val transform = transforms[this]
-	if ( transform == null )
-		return original
-	else
-		@Suppress("UNCHECKED_CAST")
-		return (transform as FunctionTransform<T>).transformCall(this, original)
-}
 
 internal open class AutoSizeTransform(
 	val bufferParam: Parameter,
@@ -164,10 +148,10 @@ internal object StringReturnTransform : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
 		val expression = if ( original.startsWith("memByteBufferNT") )
-			original.substring(17, original.length - 1);
+			original.substring(17, original.length - 1)
 		else
 			original
-		return "mem${(param.nativeType as CharSequenceType).charMapping.charset}($expression)";
+		return "mem${(param.nativeType as CharSequenceType).charMapping.charset}($expression)"
 	}
 }
 

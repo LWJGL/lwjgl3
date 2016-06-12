@@ -261,7 +261,7 @@ public final class $CLASS implements Runnable {
 			it.isFile && it.extension.equals("kt")
 		}!!
 
-		Arrays.sort(classFiles);
+		Arrays.sort(classFiles)
 
 		classFiles.forEach {
 			try {

@@ -141,7 +141,7 @@ abstract class StructMemberModifier : TemplateModifier {
 interface ReferenceModifier : TemplateModifier {
 	val reference: String
 
-	open fun hasReference(reference: String) = this.reference == reference
+	fun hasReference(reference: String) = this.reference == reference
 }
 
 // DSL extensions (Per TemplateModifier sub-class to avoid IAEs. Too verbose but may catch more errors at compile time)

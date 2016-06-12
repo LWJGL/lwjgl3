@@ -32,7 +32,7 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 
 	override val hasCapabilities: Boolean get() = true
 
-	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>) {
+	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, Transform>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
 		if ( boParams.any() ) {
 			boParams.forEach { transforms[it] = BufferOffsetTransform }

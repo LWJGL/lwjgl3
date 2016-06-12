@@ -167,8 +167,8 @@ val ovrMatrix4f = struct(OVR_PACKAGE, "OVRMatrix4f", nativeName = "ovrMatrix4f")
 val ovrPosef = struct(OVR_PACKAGE, "OVRPosef", nativeName = "ovrPosef") {
 	documentation = "Position and orientation together."
 
-	ovrQuatf.member("Orientation", "the pose orientation");
-	ovrVector3f.member("Position", "the pose position");
+	ovrQuatf.member("Orientation", "the pose orientation")
+	ovrVector3f.member("Position", "the pose position")
 }.nativeType
 val ovrPosef_p = ovrPosef.p
 

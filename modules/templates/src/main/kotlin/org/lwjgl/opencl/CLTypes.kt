@@ -57,7 +57,7 @@ val cl_sampler_p = cl_sampler.p
 
 // typedefs
 
-val cl_bool = typedef(cl_uint, "cl_bool");
+val cl_bool = typedef(cl_uint, "cl_bool")
 val cl_bitfield = typedef(cl_ulong, "cl_bitfield")
 val cl_device_type = typedef(cl_bitfield, "cl_device_type")
 val cl_platform_info = typedef(cl_uint, "cl_platform_info")

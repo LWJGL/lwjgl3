@@ -72,7 +72,7 @@ abstract class APIBinding(
 	open fun generateAlternativeMethods(
 		writer: PrintWriter,
 		function: NativeClassFunction,
-		transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>
+		transforms: MutableMap<QualifiedType, Transform>
 	) = Unit
 
 	/** Can be overriden to generate binding-specific javadoc. If this function returns false, the default javadoc will be generated. */
@@ -144,7 +144,7 @@ fun simpleBinding(
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		val libraryReference = libraryName.toUpperCase()
 
-		println("\n\tprivate static final SharedLibrary $libraryReference = Library.loadNative($libraryExpression);\n");
+		println("\n\tprivate static final SharedLibrary $libraryReference = Library.loadNative($libraryExpression);\n")
 		print("\t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
 		generateFunctionsClass(nativeClass)
 		println("""
@@ -511,7 +511,7 @@ class NativeClass(
 
 	// DSL extensions
 
-	operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<out T>, access: Access = Access.PUBLIC): ConstantBlock<T> {
+	operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>, access: Access = Access.PUBLIC): ConstantBlock<T> {
 		val block = ConstantBlock(this@NativeClass, access, this, { processDocumentation(documentation).toJavaDoc() }, *constants)
 		constantBlocks.add(block)
 		return block

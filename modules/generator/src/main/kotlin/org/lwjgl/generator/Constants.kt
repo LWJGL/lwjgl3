@@ -54,8 +54,8 @@ class EnumValueExpression(
 
 val EnumConstant = ConstantType(EnumValue::class, { "0x%X".format(it) })
 
-open class Constant<T : Any>(val name: String, val value: T?)
-internal class ConstantExpression<T : Any>(
+open class Constant<out T : Any>(val name: String, val value: T?)
+internal class ConstantExpression<out T : Any>(
 	name: String,
 	val expression: String,
 	// Used for StringConstants only, false: wrap in quotes, true: print as is
@@ -67,7 +67,7 @@ class ConstantBlock<T : Any>(
 	var access: Access,
 	val constantType: ConstantType<T>,
 	val documentation: () -> String?,
-	vararg val constants: Constant<out T>
+	vararg val constants: Constant<T>
 ) {
 
 	private var noPrefix = false
@@ -78,7 +78,7 @@ class ConstantBlock<T : Any>(
 
 	private fun getConstantName(name: String) = if ( noPrefix ) name else "${nativeClass.prefixConstant}$name"
 
-	private val Constant<out Int>.enumValue: Int get() = this.value.let {
+	private val Constant<Int>.enumValue: Int get() = this.value.let {
 		it ?: try {
 			Integer.parseInt((this as ConstantExpression).expression)
 		} catch(e: Exception) {
@@ -167,7 +167,7 @@ class ConstantBlock<T : Any>(
 	}
 
 	private fun PrintWriter.generateBlock() {
-		println();
+		println()
 		val doc = documentation()
 		if ( doc != null )
 			println(doc)
@@ -176,10 +176,10 @@ class ConstantBlock<T : Any>(
 
 		val indent: String
 		if ( constants.size == 1 ) {
-			indent = " ";
+			indent = " "
 		} else {
 			print('\n')
-			indent = "\t\t";
+			indent = "\t\t"
 		}
 
 		// Find maximum constant name length
@@ -197,7 +197,7 @@ class ConstantBlock<T : Any>(
 		println(";")
 	}
 
-	private fun PrintWriter.printConstant(constant: Constant<out T>, indent: String, alignment: Int) {
+	private fun PrintWriter.printConstant(constant: Constant<T>, indent: String, alignment: Int) {
 		print("$indent${getConstantName(constant.name)}")
 		for (i in 0..(alignment - constant.name.length - 1))
 			print(' ')
