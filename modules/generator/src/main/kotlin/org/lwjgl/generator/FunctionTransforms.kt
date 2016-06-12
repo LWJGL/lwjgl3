@@ -159,8 +159,11 @@ internal class PrimitiveValueReturnTransform(
 	val bufferType: PointerMapping,
 	val paramName: String
 ) : FunctionTransform<ReturnValue>, StackFunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String) = bufferType.primitive.let { if ( it == "pointer" ) "long" else it } // Replace void with the buffer value type
-	override fun transformCall(param: ReturnValue, original: String) = "\t\treturn $paramName.get(0);" // Replace with value from the stack
+	override fun transformDeclaration(param: ReturnValue, original: String) = bufferType.primitive // Replace void with the buffer value type
+	override fun transformCall(param: ReturnValue, original: String) = if ( bufferType === PointerMapping.DATA_BOOLEAN )
+			"\t\treturn $paramName.get(0) != 0;"
+		else
+			"\t\treturn $paramName.get(0);" // Replace with value from the stack
 	override fun setupStack(func: Function, qtype: ReturnValue, writer: PrintWriter) = writer.println("\t\t\t${bufferType.box}Buffer $paramName = stack.calloc${bufferType.mallocType}(1);")
 }
 
@@ -196,7 +199,7 @@ internal class VectorValueTransform(
 	val newName: String,
 	val size: Int
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String) = paramType.primitive.let { if ( it == "pointer" ) "long" else it }.let { paramType ->
+	override fun transformDeclaration(param: Parameter, original: String) = paramType.primitive.let { paramType ->
 		(0..size - 1).map { "$paramType $newName$it" }.reduce { a, b -> "$a, $b" }
 	} // Replace with vector elements
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
@@ -367,7 +370,7 @@ internal class PointerArrayLengthsTransform(
 	private fun PrintWriter.setupStackImpl(param: Parameter) {
 		val pointerArray = arrayParam[PointerArray]
 
-		val lengthType = (param.nativeType.mapping as PointerMapping).primitive[0]
+		val lengthType = (param.nativeType.mapping as PointerMapping).box[0].toLowerCase()
 		println((if ( multi ) arrayParam.name else pointerArray.singleName).let {
 			"\t\t\tlong ${arrayParam.name}$POINTER_POSTFIX = org.lwjgl.system.APIUtil.apiArray$lengthType(stack,${if ( pointerArray.elementType is CharSequenceType ) " MemoryUtil::mem${pointerArray.elementType.charMapping.charset}," else ""} $it);"
 		})

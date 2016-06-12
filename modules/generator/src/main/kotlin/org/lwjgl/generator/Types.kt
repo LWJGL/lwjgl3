@@ -4,6 +4,7 @@
  */
 package org.lwjgl.generator
 
+import org.lwjgl.PointerBuffer
 import java.nio.*
 import kotlin.reflect.KClass
 
@@ -295,7 +296,7 @@ open class PointerMapping(
 		/** Useful for void * params that will be AutoTyped. */
 		val DATA = PointerMapping(ByteBuffer::class)
 
-		val DATA_POINTER = PointerMapping(Class.forName("org.lwjgl.PointerBuffer").kotlin, "POINTER_SHIFT")
+		val DATA_POINTER = PointerMapping(PointerBuffer::class, "POINTER_SHIFT")
 
 		fun PointerMapping(javaMethodType: KClass<*>, byteShift: Int) = PointerMapping(javaMethodType, Integer.toString(byteShift))
 
@@ -310,8 +311,12 @@ open class PointerMapping(
 
 	internal val isMultiByte = byteShift != null && byteShift != "0"
 
-	internal val box = javaMethodType.java.simpleName.substringBefore("Buffer")
-	internal val primitive = box.toLowerCase()
+	internal val box = super.javaMethodType.simpleName.substringBefore("Buffer")
+	internal val primitive: String get() = when ( this ) {
+		DATA_BOOLEAN -> "boolean"
+		DATA_POINTER -> "long"
+		else -> box.toLowerCase()
+	}
 
 	internal val mallocType: String get() = when ( box ) {
 		"Byte" -> ""

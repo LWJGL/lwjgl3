@@ -1040,7 +1040,7 @@ class NativeClassFunction(
 							// Transform the AutoSize parameter
 							transforms[autoSizeParam] = ExpressionTransform("(1 << ${autoType.byteShift}) * $i")
 
-							val primitiveType = autoType.primitive
+							val primitiveType = autoType.box.toLowerCase()
 							transforms[it] = VectorValueTransform(autoType, primitiveType, singleValue.newName, i)
 							generateAlternativeMethod("$name$i${primitiveType[0]}", transforms)
 						}
@@ -1148,7 +1148,6 @@ class NativeClassFunction(
 				if ( pointerType.elementType is StructType ) {
 					transforms[it] = SingleValueStructTransform(singleValue.newName)
 				} else {
-					val primitiveType = (pointerType.mapping as PointerMapping).primitive
 					transforms[it] = SingleValueTransform(
 						when ( pointerType.elementType ) {
 							is CharSequenceType -> "CharSequence"
@@ -1157,7 +1156,7 @@ class NativeClassFunction(
 							is PointerType      -> "long"
 							else                -> pointerType.elementType!!.javaMethodType
 						},
-						primitiveType,
+						(pointerType.mapping as PointerMapping).box.toLowerCase(),
 						singleValue.newName
 					)
 				}

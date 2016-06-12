@@ -24,7 +24,7 @@ val ALCuint = IntegerType("ALCuint", PrimitiveMapping.INT, unsigned = true)
 val ALCfloat = PrimitiveType("ALCfloat", PrimitiveMapping.FLOAT)
 val ALCdouble = PrimitiveType("ALCdouble", PrimitiveMapping.DOUBLE)
 
-val ALCboolean_p = PointerType("ALCboolean", PointerMapping.DATA_BOOLEAN)
+val ALCboolean_p = ALCboolean.p
 val ALCbyte_p = ALCbyte.p
 val ALCubyte_p = ALCubyte.p
 val ALCshort_p = ALCshort.p

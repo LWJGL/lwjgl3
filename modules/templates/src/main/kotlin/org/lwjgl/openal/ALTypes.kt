@@ -43,7 +43,7 @@ val ALuint = IntegerType("ALuint", PrimitiveMapping.INT, unsigned = true)
 val ALfloat = PrimitiveType("ALfloat", PrimitiveMapping.FLOAT)
 val ALdouble = PrimitiveType("ALdouble", PrimitiveMapping.DOUBLE)
 
-val ALboolean_p = PointerType("ALboolean", PointerMapping.DATA_BOOLEAN)
+val ALboolean_p = ALboolean.p
 val ALbyte_p = ALbyte.p
 val ALubyte_p = ALubyte.p
 val ALshort_p = ALshort.p
