@@ -3007,7 +3007,8 @@ val VkClearAttachment_p = struct_p(VULKAN_PACKAGE, "VkClearAttachment") {
 		"colorAttachment",
 		"""
 		is only meaningful if #IMAGE_ASPECT_COLOR_BIT is set in {@code aspectMask}, in which case it is an index to the {@code pColorAttachments} array in the
-		##VkSubpassDescription structure of the current subpass which selects the color attachment to clear
+		##VkSubpassDescription structure of the current subpass which selects the color attachment to clear. If {@code colorAttachment} is #ATTACHMENT_UNUSED
+		or is greater than or equal to ##VkSubpassDescription{@code ::colorAttachmentCount}, then the clear has no effect.
 		"""
 	)
 	VkClearValue.member("clearValue", "the color or depth/stencil value to clear the attachment to")

@@ -1255,8 +1255,8 @@ val vkCmdExecuteCommands =
 			""",
 			"""
 			If #CmdExecuteCommands() is being called within a render pass instance, and any given element of {@code pCommandBuffers} was recorded with
-			##VkCommandBufferInheritanceInfo{@code ::framebuffer} not equal to #NULL_HANDLE, that {@code VkFramebuffer} $must be compatible with the
-			{@code VkFramebuffer} used in the current render pass instance
+			##VkCommandBufferInheritanceInfo{@code ::framebuffer} not equal to #NULL_HANDLE, that {@code VkFramebuffer} $must match the {@code VkFramebuffer}
+			used in the current render pass instance
 			""",
 			"If the inherited queries feature is not enabled, {@code commandBuffer} $mustnot have any queries active",
 			"""
@@ -1484,7 +1484,8 @@ val vkCmdSetBlendConstants =
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations"
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_BLEND_CONSTANTS dynamic state enabled"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -1498,6 +1499,7 @@ val vkCmdSetDepthBias =
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_DEPTH_BIAS dynamic state enabled",
 			"If the depth bias clamping feature is not enabled, {@code depthBiasClamp} $must be 0.0"
 		)}
 
@@ -1512,6 +1514,7 @@ val vkCmdSetDepthBounds =
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_DEPTH_BOUNDS dynamic state enabled",
 			"{@code minDepthBounds} $must be between {@code 0.0} and {@code 1.0}, inclusive",
 			"{@code maxDepthBounds} $must be between {@code 0.0} and {@code 1.0}, inclusive"
 		)}
@@ -1550,6 +1553,7 @@ val vkCmdSetLineWidth =
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_LINE_WIDTH dynamic state enabled",
 			"If the wide lines feature is not enabled, {@code lineWidth} $must be {@code 1.0}"
 		)}
 
@@ -1566,6 +1570,7 @@ val vkCmdSetScissor =
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
 			"{@code scissorCount} $must be greater than 0",
+			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_SCISSOR dynamic state enabled",
 			"{@code firstScissor} $must be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}",
 			"The sum of {@code firstScissor} and {@code scissorCount} $must be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive",
 			"The {@code x} and {@code y} members of {@code offset} $must be greater than or equal to 0",
@@ -1585,7 +1590,8 @@ val vkCmdSetStencilCompareMask =
 			"{@code faceMask} $must be a valid combination of {@code VkStencilFaceFlagBits} values",
 			"{@code faceMask} $mustnot be 0",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations"
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_STENCIL_COMPARE_MASK dynamic state enabled"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -1600,7 +1606,8 @@ val vkCmdSetStencilReference =
 			"{@code faceMask} $must be a valid combination of {@code VkStencilFaceFlagBits} values",
 			"{@code faceMask} $mustnot be 0",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations"
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_STENCIL_REFERENCE dynamic state enabled"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -1615,7 +1622,8 @@ val vkCmdSetStencilWriteMask =
 			"{@code faceMask} $must be a valid combination of {@code VkStencilFaceFlagBits} values",
 			"{@code faceMask} $mustnot be 0",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations"
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_STENCIL_WRITE_MASK dynamic state enabled"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -1631,6 +1639,7 @@ val vkCmdSetViewport =
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
 			"{@code viewportCount} $must be greater than 0",
+			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled",
 			"{@code firstViewport} $must be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}",
 			"The sum of {@code firstViewport} and {@code viewportCount} $must be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive"
 		)}
@@ -2591,7 +2600,7 @@ val vkEndCommandBuffer =
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code commandBuffer} $must be in the recording state",
-			"#EndCommandBuffer() $mustnot be called inside a render pass instance",
+			"If {@code commandBuffer} is a primary command buffer, there $mustnot be an active render pass instance",
 			"All queries made active during the recording of {@code commandBuffer} $must have been made inactive"
 		)}
 

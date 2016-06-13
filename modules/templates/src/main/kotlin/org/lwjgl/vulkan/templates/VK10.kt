@@ -3185,7 +3185,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		VkDevice.IN("device", "the logical device that creates the shader module"),
 		const..VkShaderModuleCreateInfo_p.IN("pCreateInfo", "a pointer to an instance of the ##VkShaderModuleCreateInfo structure"),
 		pAllocator,
-		Check(1)..VkShaderModule.p.OUT("pShaderModule", "points to a {@code VkShaderModule} handle in which the resulting render pass object is returned")
+		Check(1)..VkShaderModule.p.OUT("pShaderModule", "points to a {@code VkShaderModule} handle in which the resulting shader module object is returned")
 	)
 
 	void(
