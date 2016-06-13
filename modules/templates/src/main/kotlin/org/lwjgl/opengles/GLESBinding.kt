@@ -41,27 +41,6 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 		}
 	}
 
-	override fun addParameterChecks(
-		checks: MutableList<String>,
-		mode: GenerationMode,
-		parameter: Parameter,
-		hasTransform: Parameter.(FunctionTransform<Parameter>) -> Boolean
-	) {
-		if ( !parameter.has(BufferObject) )
-			return
-
-		when {
-			mode === GenerationMode.NORMAL
-			     -> "GLESChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.nativeType.mapping === PrimitiveMapping.POINTER});"
-			parameter.nativeType.mapping !== PrimitiveMapping.POINTER
-			     -> "GLESChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.hasTransform(BufferOffsetTransform)});"
-			else -> null
-		}?.let {
-			if ( !checks.contains(it) )
-				checks.add(it)
-		}
-	}
-
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "GLES20"
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {

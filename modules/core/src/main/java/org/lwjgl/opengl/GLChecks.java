@@ -4,51 +4,15 @@
  */
 package org.lwjgl.opengl;
 
-import org.lwjgl.system.Checks;
-
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.opengl.GL30.*;
-import static org.lwjgl.opengl.GL40.*;
 import static org.lwjgl.opengl.GL41.*;
-import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.opengl.NVGPUShader5.*;
 import static org.lwjgl.system.APIUtil.*;
 
 final class GLChecks {
 
 	private GLChecks() {
-	}
-
-	static void ensureBufferObject(int binding, boolean enabled) {
-		if ( Checks.DEBUG && (glGetInteger(binding) != 0) ^ enabled )
-			throw new IllegalStateException(String.format(
-				"Cannot use %s when %s buffer object is %s",
-				enabled ? "offsets" : "buffers",
-				translateBufferObjectBinding(binding),
-				enabled ? "disabled" : "enabled"
-			));
-	}
-
-	private static String translateBufferObjectBinding(int binding) {
-		switch ( binding ) {
-			case GL_ARRAY_BUFFER_BINDING:
-				return "array";
-			case GL_ELEMENT_ARRAY_BUFFER_BINDING:
-				return "element array";
-			case GL_PIXEL_PACK_BUFFER_BINDING:
-				return "pixel pack";
-			case GL_PIXEL_UNPACK_BUFFER_BINDING:
-				return "pixel unpack";
-			case GL_DRAW_INDIRECT_BUFFER_BINDING:
-				return "draw indirect";
-			case GL_DISPATCH_INDIRECT_BUFFER_BINDING:
-				return "dispatch indirect";
-			default:
-				// TODO: Add more?
-				throw new IllegalArgumentException(apiUnknownToken("Unsupported buffer binding", binding));
-		}
 	}
 
 	/**

@@ -53,27 +53,6 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		}
 	}
 
-	override fun addParameterChecks(
-		checks: MutableList<String>,
-		mode: GenerationMode,
-		parameter: Parameter,
-		hasTransform: Parameter.(FunctionTransform<Parameter>) -> Boolean
-	) {
-		if ( !parameter.has(BufferObject) )
-			return
-
-		when {
-			mode === GenerationMode.NORMAL
-			     -> "GLChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.nativeType.mapping === PrimitiveMapping.POINTER});"
-			parameter.nativeType.mapping !== PrimitiveMapping.POINTER
-			     -> "GLChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.hasTransform(BufferOffsetTransform)});"
-			else -> null
-		}?.let {
-			if ( !checks.contains(it) )
-				checks.add(it)
-		}
-	}
-
 	override fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String): Boolean {
 		if ( GLCorePattern.matcher(function.nativeClass.className).matches() ) {
 			val xmlName = if ( function has ReferenceGL )
