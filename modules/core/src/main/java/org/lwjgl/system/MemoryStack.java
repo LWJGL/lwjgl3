@@ -293,15 +293,27 @@ public class MemoryStack implements AutoCloseable {
 	// -------------------------------------------------
 
 	/**
+	 * Allocates an aligned {@link ByteBuffer} on the stack.
+	 *
+	 * @param alignment the required buffer alignment
+	 * @param size      the number of elements in the buffer
+	 *
+	 * @return the allocated buffer
+	 */
+	public ByteBuffer malloc(int alignment, int size) { return memByteBuffer(nmalloc(alignment, size), size); }
+	/** Calloc version of {@link #malloc(int, int)}. */
+	public ByteBuffer calloc(int alignment, int size) { return memByteBuffer(ncalloc(alignment, size, 1), size); }
+
+	/**
 	 * Allocates a {@link ByteBuffer} on the stack.
 	 *
 	 * @param size the number of elements in the buffer
 	 *
 	 * @return the allocated buffer
 	 */
-	public ByteBuffer malloc(int size) { return memByteBuffer(nmalloc(size), size); }
+	public ByteBuffer malloc(int size) { return malloc(1, size); }
 	/** Calloc version of {@link #malloc(int)}. */
-	public ByteBuffer calloc(int size) { return memByteBuffer(ncalloc(1, size, 1), size); }
+	public ByteBuffer calloc(int size) { return calloc(1, size); }
 
 	/** Single value version of {@link #malloc}. */
 	public ByteBuffer bytes(byte x) {
@@ -554,7 +566,7 @@ public class MemoryStack implements AutoCloseable {
 		if ( text == null )
 			return null;
 
-		ByteBuffer encoded = malloc(memLengthUTF16(text, nullTerminated));
+		ByteBuffer encoded = malloc(2, memLengthUTF16(text, nullTerminated));
 		memUTF16(text, nullTerminated, encoded);
 		return encoded;
 	}
