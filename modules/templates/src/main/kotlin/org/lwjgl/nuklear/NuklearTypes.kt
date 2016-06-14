@@ -647,6 +647,7 @@ val nk_style_toggle = struct(NUKLEAR_PACKAGE, "NkStyleToggle", nativeName = "str
 	nk_style_item.member("normal", "")
 	nk_style_item.member("hover", "")
 	nk_style_item.member("active", "")
+	nk_color.member("border_color", "")
 
 	/* cursor */
 	nk_style_item.member("cursor_normal", "")
@@ -662,6 +663,8 @@ val nk_style_toggle = struct(NUKLEAR_PACKAGE, "NkStyleToggle", nativeName = "str
 	/* properties */
 	nk_vec2.member("padding", "")
 	nk_vec2.member("touch_padding", "")
+	float.member("spacing", "")
+	float.member("border", "")
 
 	/* optional user callbacks */
 	nk_handle.member("userdata", "")
@@ -748,14 +751,19 @@ val nk_style_progress = struct(NUKLEAR_PACKAGE, "NkStyleProgress", nativeName = 
 	nk_style_item.member("normal", "")
 	nk_style_item.member("hover", "")
 	nk_style_item.member("active", "")
+	nk_color.member("border_color", "")
 
 	/* cursor */
 	nk_style_item.member("cursor_normal", "")
 	nk_style_item.member("cursor_hover", "")
 	nk_style_item.member("cursor_active", "")
+	nk_color.member("cursor_border_color", "")
 
 	/* properties */
 	float.member("rounding", "")
+	float.member("border", "")
+	float.member("cursor_border", "")
+	float.member("cursor_rounding", "")
 	nk_vec2.member("padding", "")
 
 	/* optional user callbacks */
@@ -775,10 +783,13 @@ val nk_style_scrollbar = struct(NUKLEAR_PACKAGE, "NkStyleScrollbar", nativeName 
 	nk_style_item.member("cursor_normal", "")
 	nk_style_item.member("cursor_hover", "")
 	nk_style_item.member("cursor_active", "")
+	nk_color.member("cursor_border_color", "")
 
 	/* properties */
 	float.member("border", "")
 	float.member("rounding", "")
+	float.member("border_cursor", "")
+	float.member("rounding_cursor", "")
 	nk_vec2.member("padding", "")
 
 	/* optional buttons */
@@ -910,14 +921,17 @@ val nk_style_tab = struct(NUKLEAR_PACKAGE, "NkStyleTab", nativeName = "struct nk
 	nk_color.member("text", "")
 
 	/* button */
-	nk_style_button.member("tab_button", "")
-	nk_style_button.member("node_button", "")
+	nk_style_button.member("tab_maximize_button", "")
+	nk_style_button.member("tab_minimize_button", "")
+	nk_style_button.member("node_maximize_button", "")
+	nk_style_button.member("node_minimize_button", "")
 	nk_symbol_type.member("sym_minimize", "")
 	nk_symbol_type.member("sym_maximize", "")
 
 	/* properties */
 	float.member("border", "")
 	float.member("rounding", "")
+	float.member("indent", "")
 	nk_vec2.member("padding", "")
 	nk_vec2.member("spacing", "")
 }.nativeType
@@ -1115,11 +1129,6 @@ val nk_property_state = struct(NUKLEAR_PACKAGE, "NkPropertyState", nativeName = 
 	int.member("state", "")
 }.nativeType
 
-val nk_scaling_state = struct(NUKLEAR_PACKAGE, "NkScalingState", nativeName = "struct nk_scaling_state") {
-	nk_vec2.member("start_size", "")
-	int.member("active", "")
-}.nativeType
-
 val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_window") {
 	unsigned_int.member("seq", "")
 	nk_hash.member("name", "")
@@ -1133,7 +1142,6 @@ val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_wind
 	nk_property_state.member("property", "")
 	nk_popup_state.member("popup", "")
 	nk_edit_state.member("edit", "")
-	nk_scaling_state.member("scaling", "")
 
 	"nk_table".p.member("tables", "") // TODO: private API?
 	unsigned_short.member("table_count", "")
@@ -1161,10 +1169,10 @@ val nk_context_p = struct_p(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct n
 	nk_draw_list.member("draw_list", "")
 	nk_handle.member("userdata", "")
 
-	/* text editor objects are quite big because they have a internal
-	 * undo/redo stack. It therefore does not make sense to have one for
-	 * each window for temporary use cases, so I only provide *one* instance
-	 * for all windows. This works because the content is cleared anyway */
+	/* text editor objects are quite big because of an internal
+     * undo/redo stack. Therefore does not make sense to have one for
+     * each window for temporary use cases, so I only provide *one* instance
+     * for all windows. This works because the content is cleared anyway */
 	nk_text_edit.member("text_edit", "")
 
 	/* windows */
