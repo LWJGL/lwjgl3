@@ -797,28 +797,10 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		ByteBuffer string = ACCESSOR.memByteBuffer(address, maxLength);
-
-		return memSetupBuffer(string, address, memStrLen1(string, 0));
-	}
-
-	/**
-	 * Calculates the byte count of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is assumed to be a
-	 * single {@code \0} character.
-	 *
-	 * @param buffer the {@link ByteBuffer} that contains the string
-	 * @param from   the index at which to start the search
-	 *
-	 * @return the string length, <strong>in bytes</strong>
-	 */
-	private static int memStrLen1(ByteBuffer buffer, int from) {
-		int to = from;
-		while ( to < buffer.limit() ) {
-			if ( buffer.get(to) == 0 )
-				break;
-			to++;
-		}
-		return to - from;
+		return memByteBuffer(address, BITS64
+			? TEXT_UTIL.strlen64NT1(address, maxLength)
+			: TEXT_UTIL.strlen32NT1(address, maxLength)
+		);
 	}
 
 	/**
@@ -832,7 +814,7 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBufferNT2(long address) {
-		return memByteBufferNT2(address, Integer.MAX_VALUE);
+		return memByteBufferNT2(address, Integer.MAX_VALUE - 1);
 	}
 
 	/**
@@ -849,28 +831,18 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		ByteBuffer string = ACCESSOR.memByteBuffer(address, maxLength);
+		if ( Checks.DEBUG ) {
+			if ( (address & 1L) != 0L )
+				throw new IllegalArgumentException("The string address is not aligned.");
 
-		return memSetupBuffer(string, address, memStrLen2(string, 0) << 1);
-	}
-
-	/**
-	 * Calculates the number of UTF16 code units of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is
-	 * assumed to be 2 consecutive {@code \0} characters.
-	 *
-	 * @param buffer the {@link ByteBuffer} that contains the string
-	 * @param from   the index at which to start the search
-	 *
-	 * @return the string length, <strong>in UTF16 code units</strong>
-	 */
-	private static int memStrLen2(ByteBuffer buffer, int from) {
-		int to = from;
-		while ( to < buffer.limit() ) {
-			if ( buffer.get(to) == 0 && to < buffer.limit() - 1 && buffer.get(to + 1) == 0 )
-				break;
-			to += 2;
+			if ( (maxLength & 1) != 0 )
+				throw new IllegalArgumentException("The maximum length must be an even number.");
 		}
-		return (to - from) >> 1;
+
+		return memByteBuffer(address, BITS64
+			? TEXT_UTIL.strlen64NT2(address, maxLength)
+			: TEXT_UTIL.strlen32NT2(address, maxLength)
+		);
 	}
 
 	/**

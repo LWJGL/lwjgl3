@@ -7,6 +7,7 @@ package org.lwjgl.system;
 import java.nio.ByteBuffer;
 
 import static java.lang.Character.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * This class serves two purposes:
@@ -19,6 +20,160 @@ class MemoryTextUtil {
 
 	protected MemoryTextUtil() {
 	}
+
+	/**
+	 * Optimized {@code strlen} for 64-bit architectures.
+	 *
+	 * @see MemoryUtil#memByteBufferNT1(long, int)
+	 */
+	int strlen64NT1(long address, int maxLength) {
+		int i = 0;
+
+		ByteBuffer buffer = memByteBuffer(address, maxLength);
+
+		if ( 8 <= maxLength ) {
+			int misalignment = (int)address & 7;
+			if ( misalignment != 0 ) {
+				// Align to 8 bytes
+				for ( int len = 8 - misalignment; i < len; i++ ) {
+					if ( buffer.get(i) == 0 )
+						return i;
+				}
+			}
+
+			// Aligned longs for performance
+			do {
+				long v = buffer.getLong(i);
+				if ( ((v - 0x0101010101010101L) & ~v & 0x8080808080808080L) != 0 )
+					break;
+				i += 8;
+			} while ( i <= maxLength - 8 );
+		}
+
+		// Tail
+		for ( ; i < maxLength; i++ ) {
+			if ( buffer.get(i) == 0 )
+				break;
+		}
+
+		return i;
+	}
+
+	/**
+	 * Optimized {@code strlen} for 64-bit architectures.
+	 *
+	 * @see MemoryUtil#memByteBufferNT2(long, int)
+	 */
+	int strlen64NT2(long address, int maxLength) {
+		int i = 0;
+
+		ByteBuffer buffer = memByteBuffer(address, maxLength);
+
+		if ( 8 <= maxLength ) {
+			int misalignment = (int)address & 7;
+			if ( misalignment != 0 ) {
+				// Align to 8 bytes
+				for ( int len = 8 - misalignment; i < len; i += 2 ) {
+					if ( buffer.getShort(i) == 0 )
+						return i;
+				}
+			}
+
+			// Aligned longs for performance
+			do {
+				long v = buffer.getLong(i);
+				if ( ((v - 0x0001000100010001L) & ~v & 0x8000800080008000L) != 0 )
+					break;
+				i += 8;
+			} while ( i <= maxLength - 8 );
+		}
+
+		// Tail
+		for ( ; i < maxLength; i += 2 ) {
+			if ( buffer.getShort(i) == 0 )
+				break;
+		}
+
+		return i;
+	}
+
+	/**
+	 * Optimized {@code strlen} for 32-bit architectures.
+	 *
+	 * @see MemoryUtil#memByteBufferNT1(long, int)
+	 */
+	int strlen32NT1(long address, int maxLength) {
+		int i = 0;
+
+		ByteBuffer buffer = memByteBuffer(address, maxLength);
+
+		if ( 4 <= maxLength ) {
+			int misalignment = (int)address & 3;
+			if ( misalignment != 0 ) {
+				// Align to 4 bytes
+				for ( int len = 4 - misalignment; i < len; i++ ) {
+					if ( buffer.get(i) == 0 )
+						return i;
+				}
+			}
+
+			// Aligned ints for performance
+			do {
+				int v = buffer.getInt(i);
+				if ( ((v - 0x01010101) & ~v & 0x80808080) != 0 )
+					break;
+				i += 4;
+			} while ( i <= maxLength - 4 );
+		}
+
+		// Tail
+		for ( ; i < maxLength; i++ ) {
+			if ( buffer.get(i) == 0 )
+				break;
+		}
+
+		return i;
+	}
+
+	/**
+	 * Optimized {@code strlen} for 32-bit architectures.
+	 *
+	 * @see MemoryUtil#memByteBufferNT2(long, int)
+	 */
+	int strlen32NT2(long address, int maxLength) {
+		int i = 0;
+
+		ByteBuffer buffer = memByteBuffer(address, maxLength);
+
+		if ( 4 <= maxLength ) {
+			int misalignment = (int)address & 3;
+			if ( misalignment != 0 ) {
+				// Align to 4 bytes
+				for ( int len = 4 - misalignment; i < len; i += 2 ) {
+					if ( buffer.getShort(i) == 0 )
+						return i;
+				}
+			}
+
+			// Aligned longs for performance
+			do {
+				int v = buffer.getInt(i);
+				if ( ((v - 0x00010001) & ~v & 0x80008000) != 0 )
+					break;
+				i += 4;
+			} while ( i <= maxLength - 4 );
+		}
+
+		// Tail
+		for ( ; i < maxLength; i += 2 ) {
+			if ( buffer.getShort(i) == 0 )
+				break;
+		}
+
+		return i;
+	}
+
+	// ---------------------------------------------------------------------------------------------------------------------
 
 	/** @see MemoryUtil#memASCII(CharSequence, boolean, ByteBuffer, int) */
 	int encodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {

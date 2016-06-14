@@ -551,6 +551,134 @@ final class MemoryAccess {
 			// method and, in many cases, elimination of the ByteBuffer allocation via escape analysis.
 			return new MemoryTextUtil() {
 				@Override
+				int strlen64NT1(long address, int maxLength) {
+					int i = 0;
+
+					if ( 8 <= maxLength ) {
+						int misalignment = (int)address & 7;
+						if ( misalignment != 0 ) {
+							// Align to 8 bytes
+							for ( int len = 8 - misalignment; i < len; i++ ) {
+								if ( memGetByte(address + i) == 0 )
+									return i;
+							}
+						}
+
+						// Aligned longs for performance
+						do {
+							long v = memGetLong(address + i);
+							if ( ((v - 0x0101010101010101L) & ~v & 0x8080808080808080L) != 0 )
+								break;
+							i += 8;
+						} while ( i <= maxLength - 8 );
+					}
+
+					// Tail
+					for ( ; i < maxLength; i++ ) {
+						if ( memGetByte(address + i) == 0 )
+							break;
+					}
+
+					return i;
+				}
+
+				@Override
+				int strlen64NT2(long address, int maxLength) {
+					int i = 0;
+
+					if ( 8 <= maxLength ) {
+						int misalignment = (int)address & 7;
+						if ( misalignment != 0 ) {
+							// Align to 8 bytes
+							for ( int len = 8 - misalignment; i < len; i += 2 ) {
+								if ( memGetShort(address + i) == 0 )
+									return i;
+							}
+						}
+
+						// Aligned longs for performance
+						do {
+							long v = memGetLong(address + i);
+							if ( ((v - 0x0001000100010001L) & ~v & 0x8000800080008000L) != 0 )
+								break;
+							i += 8;
+						} while ( i <= maxLength - 8 );
+					}
+
+					// Tail
+					for ( ; i < maxLength; i += 2 ) {
+						if ( memGetShort(address + i) == 0 )
+							break;
+					}
+
+					return i;
+				}
+
+				@Override
+				int strlen32NT1(long address, int maxLength) {
+					int i = 0;
+
+					if ( 4 <= maxLength ) {
+						int misalignment = (int)address & 3;
+						if ( misalignment != 0 ) {
+							// Align to 4 bytes
+							for ( int len = 4 - misalignment; i < len; i++ ) {
+								if ( memGetByte(address + i) == 0 )
+									return i;
+							}
+						}
+
+						// Aligned ints for performance
+						do {
+							int v = memGetInt(address + i);
+							if ( ((v - 0x01010101) & ~v & 0x80808080) != 0 )
+								break;
+							i += 4;
+						} while ( i <= maxLength - 4 );
+					}
+
+					// Tail
+					for ( ; i < maxLength; i++ ) {
+						if ( memGetByte(address + i) == 0 )
+							break;
+					}
+
+					return i;
+				}
+
+				@Override
+				int strlen32NT2(long address, int maxLength) {
+					int i = 0;
+
+					if ( 4 <= maxLength ) {
+						int misalignment = (int)address & 3;
+						if ( misalignment != 0 ) {
+							// Align to 4 bytes
+							for ( int len = 4 - misalignment; i < len; i += 2 ) {
+								if ( memGetShort(address + i) == 0 )
+									return i;
+							}
+						}
+
+						// Aligned longs for performance
+						do {
+							int v = memGetInt(address + i);
+							if ( ((v - 0x00010001) & ~v & 0x80008000) != 0 )
+								break;
+							i += 4;
+						} while ( i <= maxLength - 4 );
+					}
+
+					// Tail
+					for ( ; i < maxLength; i += 2 ) {
+						if ( memGetShort(address + i) == 0 )
+							break;
+					}
+
+					return i;
+				}
+
+				@Override
 				int encodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
 					return encodeASCII(text, nullTerminated, memAddress(target) + offset);
 				}
