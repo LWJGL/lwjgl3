@@ -593,7 +593,6 @@ TexV  = P.y/P.z""")}
 			app tracking latency.
 			"""
 		)
-
 	}.nativeType
 
 	union(OVR_PACKAGE, "OVRLayerUnion", nativeName = "ovrLayer_Union") {

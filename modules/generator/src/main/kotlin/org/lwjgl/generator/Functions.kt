@@ -230,8 +230,22 @@ class NativeClassFunction(
 
 	/** Validates parameters with modifiers that reference other parameters. */
 	private fun validate() {
+		if ( returns.nativeType is StructType ) {
+			if ( returns.isStructValue )
+				returns.nativeType.definition.hasUsageOutput()
+			else
+				returns.nativeType.definition.hasUsageResultPointer()
+		}
+
 		var returnCount = 0
 		parameters.forEachIndexed { i, it ->
+			if ( it.nativeType is StructType ) {
+				if ( it.paramType == OUT )
+					it.nativeType.definition.hasUsageOutput()
+				else
+					it.nativeType.definition.hasUsageInput()
+			}
+
 			if ( it === EXPLICIT_FUNCTION_ADDRESS && i != 0 )
 				it.error("The explicit function address parameter must be the first parameter.")
 

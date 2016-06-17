@@ -422,7 +422,7 @@ int main(int arg, char **argv)
 		"PackFontRangesPackRects",
 		"See #PackFontRangesGatherRects().",
 
-		stbtt_pack_context_p.OUT("spc", "an ##STBTTPackContext struct"),
+		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
 		stbrp_rect_p.INOUT("rects", "an array of ##STBRPRect structs"),
 		AutoSize("rects")..int.IN("num_rects", "the number of structs in {@code rects}")
 	)

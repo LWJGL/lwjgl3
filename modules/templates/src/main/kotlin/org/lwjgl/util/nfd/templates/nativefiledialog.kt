@@ -96,7 +96,7 @@ val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE,
 
 		OpenDialog["filterList"],
 		OpenDialog["defaultPath"],
-		nfdpathset_t_p.IN("outPaths", "a path set that will be filled with the selected files")
+		nfdpathset_t_p.OUT("outPaths", "a path set that will be filled with the selected files")
 	)
 
 	nfdresult_t(

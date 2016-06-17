@@ -20,7 +20,7 @@ val JAWT_Rectangle = struct(JAWT_PACKAGE, "JAWTRectangle", nativeName = "JAWT_Re
 }.nativeType
 val JAWT_Rectangle_p = JAWT_Rectangle.p
 
-val JAWT_DrawingSurface = struct(JAWT_PACKAGE, "JAWTDrawingSurface", nativeName = "JAWT_DrawingSurface", mutable = false) {
+val JAWT_DrawingSurface_p = struct_p(JAWT_PACKAGE, "JAWTDrawingSurface", nativeName = "JAWT_DrawingSurface", mutable = false) {
 	documentation =
 		"""
 		Structure for containing the underlying drawing information of a component.
@@ -42,8 +42,7 @@ val JAWT_DrawingSurface = struct(JAWT_PACKAGE, "JAWTDrawingSurface", nativeName 
 	voidptr.member("GetDrawingSurfaceInfo", "")
 	voidptr.member("FreeDrawingSurfaceInfo", "")
 	voidptr.member("Unlock", "")
-}.nativeType
-val JAWT_DrawingSurface_p = JAWT_DrawingSurface.p
+}
 
 val JAWT_DrawingSurfaceInfo_p = struct_p(JAWT_PACKAGE, "JAWTDrawingSurfaceInfo", nativeName = "JAWT_DrawingSurfaceInfo", mutable = false) {
 	voidptr.member(

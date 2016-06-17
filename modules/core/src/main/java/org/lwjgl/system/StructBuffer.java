@@ -9,7 +9,7 @@ import java.nio.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This is the base class of struct data container implementations. Its interface mirrors the NIO API for convenience. */
-public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T, SELF>> implements Pointer, NativeResource {
+public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T, SELF>> implements Pointer {
 
 	private long address;
 
@@ -67,7 +67,6 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 *
 	 * <p>This method should not be used if the memory backing this struct buffer is not owned by the struct buffer.</p>
 	 */
-	@Override
 	public void free() {
 		nmemFree(address0());
 	}

@@ -15,6 +15,12 @@ open class StructMember(
 	val name: String,
 	val documentation: String
 ) : TemplateElement() {
+
+	init {
+		if ( nativeType is StructType && nativeType.includesPointer )
+			nativeType.definition.hasUsageInput()
+	}
+
 	internal val offsetField: String
 		get() = name.toUpperCase()
 
@@ -115,6 +121,24 @@ class Struct(
 	}
 
 	val nativeType: StructType get() = StructType(this)
+
+	/* Output parameter or function result by value */
+	private var usageOutput = false
+	fun hasUsageOutput() {
+		usageOutput = true
+	}
+
+	/* Input parameter */
+	private var usageInput = false
+	fun hasUsageInput() {
+		usageInput = true
+	}
+
+	/* Function result by reference */
+	private var usageResultPointer = false
+	fun hasUsageResultPointer() {
+		usageResultPointer = true
+	}
 
 	private val members = ArrayList<StructMember>()
 
@@ -412,19 +436,23 @@ $indentation}"""
 
 		println("import java.nio.*;\n")
 
-		println("import org.lwjgl.*;")
+		val mallocable = mutable || usageOutput || (usageInput && !usageResultPointer)
+
+		if ( mallocable )
+			println("import org.lwjgl.*;")
 		println("import org.lwjgl.system.*;\n")
 
 		if ( hasMutableMembers )
 			println("import static org.lwjgl.system.Checks.*;")
 		println("import static org.lwjgl.system.MemoryUtil.*;")
-		println("import static org.lwjgl.system.MemoryStack.*;")
+		if ( nativeLayout || mallocable )
+			println("import static org.lwjgl.system.MemoryStack.*;")
 
 		println()
 		preamble.printJava(this)
 
 		printDocumentation()
-		println("${access.modifier}class $className extends Struct {")
+		println("${access.modifier}class $className extends Struct${if ( mallocable ) " implements NativeResource" else ""} {")
 
 		print("""
 	/** The struct size in bytes. */
@@ -551,10 +579,13 @@ $indentation}"""
 			}
 		}
 
-		// Factory constructors
-		println("""
+		print("""
 	// -----------------------------------
+""")
 
+		// Factory constructors
+		if ( mallocable ) {
+			print("""
 	/** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
 	public static $className malloc() {
 		return create(nmemAlloc(SIZEOF));
@@ -569,12 +600,17 @@ $indentation}"""
 	public static $className create() {
 		return new $className(BufferUtils.createByteBuffer(SIZEOF));
 	}
+""")
+		}
 
+		print("""
 	/** Returns a new {@link $className} instance for the specified memory address or {@code null} if the address is {@code NULL}. */
 	public static $className create(long address) {
 		return address == NULL ? null : new $className(address, null);
 	}
-
+""")
+		if ( mallocable ) {
+			print("""
 	/**
 	 * Returns a new {@link $className.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
 	 *
@@ -601,7 +637,10 @@ $indentation}"""
 	public static Buffer create(int $BUFFER_CAPACITY_PARAM) {
 		return new Buffer(BufferUtils.createByteBuffer($BUFFER_CAPACITY_PARAM * SIZEOF));
 	}
+""")
+		}
 
+		print("""
 	/**
 	 * Create a {@link $className.Buffer} instance at the specified memory.
 	 *
@@ -611,7 +650,10 @@ $indentation}"""
 	public static Buffer create(long address, int $BUFFER_CAPACITY_PARAM) {
 		return address == NULL ? null : new Buffer(address, null, -1, 0, $BUFFER_CAPACITY_PARAM, $BUFFER_CAPACITY_PARAM);
 	}
+""")
 
+		if ( mallocable ) {
+			print("""
 	// -----------------------------------
 
 	/** Returns a new {@link $className} instance allocated on the thread-local {@link MemoryStack}. */
@@ -679,8 +721,12 @@ $indentation}"""
 	public static Buffer callocStack(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
 		return create(stack.ncalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
 	}
+""")
+		}
 
+		print("""
 	// -----------------------------------
+
 """)
 
 		if ( members.any() ) {
@@ -721,7 +767,7 @@ ${validations.joinToString("\n")}
 
 		print("""
 	/** An array of {@link $className} structs. */
-	public static final class Buffer extends StructBuffer<$className, Buffer> {
+	public static final class Buffer extends StructBuffer<$className, Buffer>${if ( mallocable ) " implements NativeResource" else ""} {
 
 		/**
 		 * Creates a new {@link $className.Buffer} instance backed by the specified container.
