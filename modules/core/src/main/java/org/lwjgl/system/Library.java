@@ -73,21 +73,22 @@ public final class Library {
 		if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
 			return;
 
+		boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
 		try {
 			// Failed, attempt to extract from the classpath
-			if ( Checks.DEBUG )
+			if ( debugLoader )
 				DEBUG_STREAM.print("[LWJGL] \tUsing SharedLibraryLoader...");
 			SharedLibraryLoader.load(name);
-			if ( Checks.DEBUG )
+			if ( debugLoader )
 				DEBUG_STREAM.println("found");
 			// and try again
 			if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
 				return;
 		} catch (Exception e) {
-			if ( Checks.DEBUG )
+			if ( debugLoader ) {
 				DEBUG_STREAM.println("failed");
-			if ( Configuration.DEBUG_LOADER.get(false) )
 				e.printStackTrace(DEBUG_STREAM);
+			}
 		}
 
 		// Then java.library.path
@@ -141,20 +142,21 @@ public final class Library {
 		if ( lib != null )
 			return lib;
 
+		boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
 		try {
-			if ( Checks.DEBUG )
+			if ( debugLoader )
 				DEBUG_STREAM.print("[LWJGL] \tUsing SharedLibraryLoader...");
 			// Failed, attempt to extract from the classpath
 			SharedLibraryLoader.load(name);
-			if ( Checks.DEBUG )
+			if ( debugLoader )
 				DEBUG_STREAM.println("found");
 			// and try again
 			return loadNative(libName, Configuration.LIBRARY_PATH);
 		} catch (Exception e) {
-			if ( Checks.DEBUG )
-				DEBUG_STREAM.println("failed");
-			if ( Configuration.DEBUG_LOADER.get(false) )
+			if ( debugLoader ) {
 				e.printStackTrace(DEBUG_STREAM);
+				DEBUG_STREAM.println("failed");
+			}
 		}
 
 		// Then java.library.path
