@@ -462,18 +462,6 @@ val VkDeviceCreateInfo =
 			""",
 			"If {@code pEnabledFeatures} is not $NULL, {@code pEnabledFeatures} $must be a pointer to a valid ##VkPhysicalDeviceFeatures structure",
 			"{@code queueCreateInfoCount} $must be greater than 0",
-			"""
-			{@code ppEnabledLayerNames} $must either be {@code NULL} or contain the same sequence of layer names that was enabled when creating the parent
-			instance
-			""",
-			"""
-			Any given element of {@code ppEnabledExtensionNames} $must be the name of an extension present on the system, exactly matching a string returned in
-			the ##VkExtensionProperties structure by #EnumerateDeviceExtensionProperties()
-			""",
-			"""
-			If an extension listed in {@code ppEnabledExtensionNames} is provided as part of a layer, then both the layer and extension $must be enabled to
-			enable that extension
-			""",
 			"The {@code queueFamilyIndex} member of any given element of {@code pQueueCreateInfos} $must be unique within {@code pQueueCreateInfos}"
 		)}"""
 
@@ -1322,18 +1310,6 @@ val VkInstanceCreateInfo =
 			"""
 			If {@code enabledExtensionCount} is not 0, {@code ppEnabledExtensionNames} $must be a pointer to an array of {@code enabledExtensionCount}
 			null-terminated strings
-			""",
-			"""
-			Any given element of {@code ppEnabledLayerNames} $must be the name of a layer present on the system, exactly matching a string returned in the
-			##VkLayerProperties structure by #EnumerateInstanceLayerProperties()
-			""",
-			"""
-			Any given element of {@code ppEnabledExtensionNames} $must be the name of an extension present on the system, exactly matching a string returned in
-			the ##VkExtensionProperties structure by #EnumerateInstanceExtensionProperties()
-			""",
-			"""
-			If an extension listed in {@code ppEnabledExtensionNames} is provided as part of a layer, then both the layer and extension $must be enabled to
-			enable that extension
 			"""
 		)}"""
 

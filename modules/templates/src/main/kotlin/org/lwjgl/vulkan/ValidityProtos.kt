@@ -226,33 +226,40 @@ val vkCmdBeginRenderPass =
 			"""
 			If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the
 			##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin}
-			is #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL then the corresponding attachment image of the framebuffer specified in the {@code framebuffer} member of
-			{@code pRenderPassBegin} $must have been created with #IMAGE_USAGE_COLOR_ATTACHMENT_BIT set
+			is #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the
+			{@code framebuffer} member of {@code pRenderPassBegin} $must have been created with #IMAGE_USAGE_COLOR_ATTACHMENT_BIT set
 			""",
 			"""
 			If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the
 			##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin}
-			is #IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL then the corresponding attachment image of the
-			framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} $must have been created with
+			is #IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL then the corresponding attachment image
+			subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} $must have been created with
 			#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT set
 			""",
 			"""
 			If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the
 			##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin}
-			is #IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL then the corresponding attachment image of the framebuffer specified in the {@code framebuffer} member of
-			{@code pRenderPassBegin} $must have been created with #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT set
+			is #IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the
+			{@code framebuffer} member of {@code pRenderPassBegin} $must have been created with #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT
+			set
 			""",
 			"""
 			If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the
 			##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin}
-			is #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL then the corresponding attachment image of the framebuffer specified in the {@code framebuffer} member of
-			{@code pRenderPassBegin} $must have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT set
+			is #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer}
+			member of {@code pRenderPassBegin} $must have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT set
 			""",
 			"""
 			If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the
 			##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin}
-			is #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL then the corresponding attachment image of the framebuffer specified in the {@code framebuffer} member of
-			{@code pRenderPassBegin} $must have been created with #IMAGE_USAGE_TRANSFER_DST_BIT set
+			is #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer}
+			member of {@code pRenderPassBegin} $must have been created with #IMAGE_USAGE_TRANSFER_DST_BIT set
+			""",
+			"""
+			If any of the {@code initialLayout} members of the ##VkAttachmentDescription structures specified when creating the render pass specified in the
+			{@code renderPass} member of {@code pRenderPassBegin} is not one of #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED, then each such
+			{@code initialLayout} $must be equal to the current layout of the corresponding attachment image subresource of the framebuffer specified in the
+			{@code framebuffer} member of {@code pRenderPassBegin}.
 			"""
 		)}
 

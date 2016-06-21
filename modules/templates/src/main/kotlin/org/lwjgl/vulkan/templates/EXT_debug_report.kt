@@ -20,15 +20,15 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		the information to a file, others may cause a debug break point or other application defined behavior. An application can register callbacks even when
 		no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
 
-		To capture issues found while creating an instance an application can link a ##VkDebugReportCallbackCreateInfoEXT structure to the {@code pNext}
-		element of the ##VkInstanceCreateInfo structure given to #CreateInstance(). This callback is only valid for the duration of the
-		{@code vkCreateInstance} call. Use #CreateDebugReportCallbackEXT() to create persistent callback objects.
+		To capture issues found while creating or destroying an instance an application can link a ##VkDebugReportCallbackCreateInfoEXT structure to the
+		{@code pNext} element of the ##VkInstanceCreateInfo structure given to #CreateInstance(). This callback is only valid for the duration of the
+		#CreateInstance() and the #DestroyInstance() call. Use #CreateDebugReportCallbackEXT() to create persistent callback objects.
 		"""
 
 	IntConstant(
 		"The extension specification version.",
 
-		"EXT_DEBUG_REPORT_SPEC_VERSION".."2"
+		"EXT_DEBUG_REPORT_SPEC_VERSION".."3"
 	)
 
 	StringConstant(
