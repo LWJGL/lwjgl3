@@ -178,7 +178,8 @@ class NativeClass(
 	val prefixConstant: String,
 	val prefixTemplate: String,
 	val postfix: String,
-	val binding: APIBinding?
+	val binding: APIBinding?,
+    val library: String?
 ) : GeneratorTargetNative(packageName, className, nativeSubPath) {
 	companion object {
 		private val JDOC_LINK_PATTERN = Pattern.compile("""(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""")
@@ -406,10 +407,20 @@ class NativeClass(
 			it.generate(this)
 		}
 
+		fun PrintWriter.libraryInit() {
+			println(if ( library == null )
+				"\n\tstatic { Library.initialize(); }"
+			else if ( library.endsWith(");") )
+				"\n\tstatic { $library }"
+			else
+				"\n\tstatic { Library.loadSystem(\"$library\"); }"
+			)
+		}
+
 		if ( hasFunctions || binding is SimpleBinding ) {
 			if ( binding != null ) {
 				if ( functions.any { it.hasCustomJNI } )
-					println("\n\tstatic { Library.initialize(); }")
+					libraryInit()
 
 				printCustomMethods(static = true)
 
@@ -421,7 +432,7 @@ class NativeClass(
 					binding.generateFunctionSetup(this, this@NativeClass)
 				}
 			} else {
-				println("\n\tstatic { Library.initialize(); }")
+				libraryInit()
 
 				printCustomMethods(static = true)
 
@@ -651,9 +662,10 @@ fun String.nativeClass(
 	prefixTemplate: String = prefix,
 	postfix: String = "",
 	binding: APIBinding? = null,
+	library: String? = null,
 	init: (NativeClass.() -> Unit)? = null
 ): NativeClass {
-	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixMethod, prefixConstant, prefixTemplate, postfix, binding)
+	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixMethod, prefixConstant, prefixTemplate, postfix, binding, library)
 	if ( init != null )
 		ext.init()
 

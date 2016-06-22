@@ -38,6 +38,7 @@ enum class Binding(val key: String, val packageName: String) {
 	EGL("binding.egl", "org.lwjgl.egl"),
 	GLFW("binding.glfw", "org.lwjgl.glfw"),
 	JAWT("binding.jawt", "org.lwjgl.system.jawt"),
+	JEMALLOC("binding.jemalloc", "org.lwjgl.system.jemalloc"),
 	LMDB("binding.lmdb", "org.lwjgl.util.lmdb"),
 	NANOVG("binding.nanovg", "org.lwjgl.nanovg"),
 	NFD("binding.nfd", "org.lwjgl.util.nfd"),
@@ -48,8 +49,10 @@ enum class Binding(val key: String, val packageName: String) {
 	OPENGLES("binding.opengles", "org.lwjgl.opengles"),
 	OVR("binding.ovr", "org.lwjgl.ovr"),
 	PAR("binding.par", "org.lwjgl.util.par"),
+	SSE("binding.sse", "org.lwjgl.util.simd"),
 	STB("binding.stb", "org.lwjgl.stb"),
 	VULKAN("binding.vulkan", "org.lwjgl.vulkan"),
+	XXHASH("binding.xxhash", "org.lwjgl.util.xxhash"),
 
 	MACOSX_OBJC("binding.macosx.objc", DUMMY_PACKAGE);
 
@@ -191,6 +194,35 @@ class Generator(
 			return customClass
 		}
 
+		fun registerLibraryInit(packageName: String, className: String, libraryName: String, setupAllocator: Boolean = false) {
+			Generator.register(object : CustomClass(packageName, className) {
+				init {
+					access = Access.INTERNAL
+					documentation = "Initializes the $libraryName shared library."
+					javaImport("org.lwjgl.system.*")
+				}
+
+				override fun PrintWriter.generateContent() {
+					println(
+						"""${access.modifier}final class $className {
+
+	static {
+		Library.loadSystem("lwjgl_$libraryName");${if ( setupAllocator ) """
+		MemoryUtil.setupAllocator("lwjgl_$libraryName");""" else ""}
+	}
+
+	private $className() {
+	}
+
+	static void initialize() {
+		// intentionally empty to trigger static initializer
+	}
+
+}""")
+				}
+			})
+		}
+
 		/** Registers state that will be added to `org.lwjgl.system.ThreadLocalState`. */
 		fun registerTLS(import: String, state: String) {
 			tlsImport.add(import)
@@ -198,8 +230,7 @@ class Generator(
 		}
 
 		init {
-			val CLASS = "ThreadLocalState"
-			Generator.register(object : GeneratorTarget("org.lwjgl.system", CLASS) {
+			Generator.register(object : GeneratorTarget("org.lwjgl.system", "ThreadLocalState") {
 				override fun PrintWriter.generateJava() {
 					print(HEADER)
 					println("package $packageName;\n")
@@ -211,7 +242,7 @@ class Generator(
 					preamble.printJava(this)
 
 					println("""/** Thread-local state used internally by LWJGL. */
-public final class $CLASS implements Runnable {
+public final class $className implements Runnable {
 
 	Runnable target;
 
@@ -221,7 +252,7 @@ public final class $CLASS implements Runnable {
 						println("\t$it")
 					}
 					println("""
-	$CLASS() {
+	$className() {
 		stack = MemoryStack.create();
 	}
 

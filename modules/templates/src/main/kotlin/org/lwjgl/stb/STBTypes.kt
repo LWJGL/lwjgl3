@@ -7,6 +7,7 @@ package org.lwjgl.stb
 import org.lwjgl.generator.*
 
 val STB_PACKAGE = "org.lwjgl.stb"
+val STB_LIBRARY = "LibSTB.initialize();"
 
 fun config() {
 	packageInfo(
@@ -26,6 +27,8 @@ fun config() {
 		)}
 		"""
 	)
+
+	Generator.registerLibraryInit(STB_PACKAGE, "LibSTB", "stb", setupAllocator = true)
 }
 
 fun GeneratorTargetNative.includeSTBAPI(directives: String) = nativeDirective(
@@ -139,6 +142,7 @@ val stbrp_coord = typedef(unsigned_short, "stbrp_coord") // int is also supporte
 val stbrp_context_p = struct_p(STB_PACKAGE, "STBRPContext", nativeName = "stbrp_context", mutable = false) {
 	documentation = "The opaque {@code stbrp_context} struct."
 	includeSTBAPI("#include \"stb_rect_pack.h\"")
+	static(STB_LIBRARY)
 }
 
 val stbrp_rect_p = struct_p(STB_PACKAGE, "STBRPRect", nativeName = "stbrp_rect") {
@@ -155,6 +159,7 @@ val stbrp_rect_p = struct_p(STB_PACKAGE, "STBRPRect", nativeName = "stbrp_rect")
 val stbrp_node_p = struct_p(STB_PACKAGE, "STBRPNode", nativeName = "stbrp_node") {
 	documentation = "The opaque {@code stbrp_node} struct."
 	includeSTBAPI("#include \"stb_rect_pack.h\"")
+	static(STB_LIBRARY)
 }
 
 // stb_truetype.h
@@ -187,6 +192,7 @@ val stbtt_aligned_quad_p = struct_p(STB_PACKAGE, "STBTTAlignedQuad", nativeName 
 val stbtt_pack_context_p = struct_p(STB_PACKAGE, "STBTTPackContext", nativeName = "stbtt_pack_context", mutable = false) {
 	documentation = "An opaque structure which holds all the context needed from STBTruetype#stbtt_PackBegin to STBTruetype#stbtt_PackEnd."
 	includeSTBAPI("#include \"stb_truetype.h\"")
+	static(STB_LIBRARY)
 }
 
 val stbtt_packedchar_p = struct_p(STB_PACKAGE, "STBTTPackedchar", nativeName = "stbtt_packedchar", mutable = false) {
@@ -217,6 +223,7 @@ val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", nativeName = "s
 val stbtt_fontinfo_p = struct_p(STB_PACKAGE, "STBTTFontinfo", nativeName = "stbtt_fontinfo", mutable = false) {
 	documentation = "An opaque structure that contains font information."
 	includeSTBAPI("#include \"stb_truetype.h\"")
+	static(STB_LIBRARY)
 }
 
 val stbtt_vertex_type = PrimitiveType("stbtt_vertex_type", PrimitiveMapping.SHORT)

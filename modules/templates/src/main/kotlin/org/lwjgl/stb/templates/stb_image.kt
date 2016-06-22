@@ -7,15 +7,16 @@ package org.lwjgl.stb.templates
 import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
-val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI_") {
-	initializeAllocator()
+val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI_", library = STB_LIBRARY) {
 	includeSTBAPI(
-		"""#define STB_IMAGE_IMPLEMENTATION${if ( Binding.NANOVG.enabled ) "" else "\n#define STB_IMAGE_STATIC"}
-#define STBI_FAILURE_USERMSG
-#define STBI_ASSERT(x)
+		"""#include "lwjgl_malloc.h"
 #define STBI_MALLOC(sz)    lwjgl_malloc(sz)
 #define STBI_REALLOC(p,sz) lwjgl_realloc(p,sz)
 #define STBI_FREE(p)       lwjgl_free(p)
+#define STBI_FAILURE_USERMSG
+#define STBI_ASSERT(x)
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_STATIC
 #include "stb_image.h"""")
 
 	documentation =

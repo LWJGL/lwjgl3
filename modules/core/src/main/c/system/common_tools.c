@@ -11,27 +11,6 @@
 
 JavaVM *jvm;
 
-mallocPROC lwjgl_malloc = malloc;
-callocPROC lwjgl_calloc = calloc;
-reallocPROC lwjgl_realloc = realloc;
-freePROC lwjgl_free = free;
-
-#ifdef LWJGL_WINDOWS
-	aligned_allocPROC lwjgl_aligned_alloc = _aligned_malloc;
-	aligned_freePROC lwjgl_aligned_free = _aligned_free;
-#else
-	#ifndef __USE_ISOC11
-	static void* aligned_alloc(size_t alignment, size_t size) {
-		void *p;
-		if ( !posix_memalign(&p, alignment, size) )
-			return p;
-		return NULL;
-	}
-	#endif
-	aligned_allocPROC lwjgl_aligned_alloc = aligned_alloc;
-	aligned_freePROC lwjgl_aligned_free = free;
-#endif
-
 inline JNIEnv *getThreadEnv(void) {
 	JNIEnv *env;
 	(*jvm)->GetEnv(jvm, (void **)&env, JNI_VERSION_1_6);

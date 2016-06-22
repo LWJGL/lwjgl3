@@ -7,7 +7,7 @@ package org.lwjgl.util.par.templates
 import org.lwjgl.generator.*
 import org.lwjgl.util.par.*
 
-val par_shapes = "ParShapes".nativeClass(packageName = PAR_PACKAGE, prefix = "par_shapes_") {
+val par_shapes = "ParShapes".nativeClass(packageName = PAR_PACKAGE, prefix = "par_shapes_", library = "LibPar.initialize();") {
 	nativeDirective(
 		"""#ifdef LWJGL_WINDOWS
 	#define _CRT_SECURE_NO_WARNINGS
@@ -18,7 +18,7 @@ val par_shapes = "ParShapes".nativeClass(packageName = PAR_PACKAGE, prefix = "pa
 
 	initializeAllocator()
 	nativeDirective(
-		"""#define PAR_SHAPES_IMPLEMENTATION
+		"""#include "lwjgl_malloc.h"
 #define PAR_MALLOC(T, N) ((T*) lwjgl_malloc(N * sizeof(T)))
 #define PAR_CALLOC(T, N) ((T*) lwjgl_calloc(N, sizeof(T)))
 #define PAR_REALLOC(T, BUF, N) ((T*) lwjgl_realloc(BUF, sizeof(T) * N))
@@ -29,6 +29,7 @@ DISABLE_WARNINGS()
 #elif LWJGL_LINUX
 	#pragma GCC diagnostic ignored "-Wunused-parameter"
 #endif
+#define PAR_SHAPES_IMPLEMENTATION
 #include "par_shapes.h"
 ENABLE_WARNINGS()""")
 

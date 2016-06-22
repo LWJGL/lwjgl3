@@ -7,7 +7,7 @@ package org.lwjgl.util.lmdb.templates
 import org.lwjgl.generator.*
 import org.lwjgl.util.lmdb.*
 
-val lmdb = "LMDB".nativeClass(LMDB_PACKAGE, prefix = "MDB", prefixMethod = "mdb_") {
+val lmdb = "LMDB".nativeClass(LMDB_PACKAGE, prefix = "MDB", prefixMethod = "mdb_", library = "lwjgl_lmdb") {
 	nativeDirective(
 		"""#ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4710 4711))

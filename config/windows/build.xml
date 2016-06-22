@@ -5,22 +5,21 @@ License terms: http://lwjgl.org/license.php
 <project name="native-windows" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="../build-definitions.xml"/>
 
-	<condition property="LWJGL_LIBRARY" value="lwjgl.dll" else="lwjgl32.dll">
+	<condition property="LIB_POSTFIX" value="" else="32">
 		<equals arg1="${build.arch}" arg2="x64"/>
 	</condition>
 
-	<fileset id="link-objects" dir="${bin.native}" includes="*.obj"/>
-	<fileset id="link-libraries" dir="${lib}/windows/${build.arch}/">
-		<include name="dyn*.lib"/>
-	</fileset>
-
-	<macrodef name="cl">
-		<attribute name="flags" default="/Wall /WX"/>
-		<element name="arguments"/>
+	<macrodef name="compile">
+		<attribute name="dest"/>
+		<attribute name="flags"/>
+		<attribute name="relative" default="true"/>
+		<element name="source" implicit="true"/>
 		<sequential>
-			<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" relative="true" parallel="true" taskname="Compiler">
-				<arg line="/c @{flags} /EHsc /Ox /Gy /GL /GR- /MT /MP /nologo /DNDEBUG /DLWJGL_WINDOWS /DLWJGL_${build.arch}"/>
-				<arg value="/Fo${bin.native}\"/>
+			<mkdir dir="@{dest}"/>
+			<apply executable="cl" dest="@{dest}" skipemptyfilesets="true" failonerror="true" relative="@{relative}" parallel="true" taskname="Compiler">
+				<arg line="/c @{flags} /EHsc /Ox /GF /Gy /GL /GR- /GS- /MT /MP /nologo /DNDEBUG /DLWJGL_WINDOWS /DLWJGL_${build.arch}"/>
+
+				<arg value="/Fo@{dest}\"/>
 
 				<arg value="/I${jni.headers}"/>
 				<arg value="/I${jni.headers}\win32"/>
@@ -28,191 +27,214 @@ License terms: http://lwjgl.org/license.php
 				<arg value="/I${src.include}\system"/>
 				<arg value="/I${src.include}\system\windows"/>
 
-				<arguments/>
+				<source/>
 
-				<regexpmapper from="(\w+)\.c" to="\1.obj"/>
+				<regexpmapper from="(\w+)\.c(pp)?$" to="\1.obj"/>
 			</apply>
 		</sequential>
 	</macrodef>
 
+	<macrodef name="build">
+		<attribute name="name"/>
+		<attribute name="dest"/>
+		<attribute name="flags" default="/Wall /WX"/>
+		<element name="source"/>
+		<element name="link" optional="true"/>
+		<element name="linkargs" optional="true"/>
+		<sequential>
+			<compile dest="@{dest}" flags="@{flags}">
+				<source/>
+			</compile>
+
+			<local name="lib-uptodate"/>
+			<uptodate property="lib-uptodate" targetfile="${lib}/@{name}${LIB_POSTFIX}.dll">
+				<srcfiles file="config/${platform}/build.xml"/>
+				<srcfiles dir="@{dest}" includes="**"/>
+			</uptodate>
+
+			<!-- Lazily update dependencies -->
+			<local name="update-dependencies"/>
+			<condition property="update-dependencies" value="true">
+				<not>
+					<or>
+						<isset property="dependencies-uptodate"/>
+						<isset property="lib-uptodate"/>
+						<istrue value="${build.offline}"/>
+					</or>
+				</not>
+			</condition>
+			<antcall target="-update-dependencies-${build.arch}" if:set="update-dependencies"/>
+			<property name="dependencies-uptodate" value="true" if:set="update-dependencies"/>
+
+			<apply executable="cl" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+				<arg line='/LD /WX /nologo /Fe:"${bin.native}\build\@{name}${LIB_POSTFIX}.dll"'/>
+
+				<fileset dir="@{dest}" includes="*.obj"/>
+				<link/>
+
+				<arg value="notelemetry.obj"/>
+				<srcfile/>
+				<arg value="/link"/>
+				<arg value="/OPT:REF,ICF"/>
+				<arg value="/DLL"/>
+				<arg value="/LTCG"/>
+
+				<linkargs/>
+			</apply>
+
+			<move file="${bin.native}/build/@{name}${LIB_POSTFIX}.dll" todir="${lib}" unless:set="lib-uptodate"/>
+		</sequential>
+	</macrodef>
+
 	<target name="compile-native-platform">
-		<!-- COMPILE -->
-		<cl>
-			<arguments>
+		<mkdir dir="${bin.native}/build"/>
+
+		<!-- CORE -->
+		<build name="lwjgl" dest="${bin.native}/core">
+			<source>
 				<arg value="/I${src.include}\system\dyncall"/>
-				<arg value="/I${src.include}\system\jemalloc"/>
-				<arg value="/I${src.include}\system\jemalloc\msvc_compat"/>
-				<arg value="/I${src.include}\util"/>
-				<arg value="/I${src.include}\util\xxhash"/>
-				<arg value="/I${src.native}\util\xxhash"/> <!-- xxhash.c is included in the binding -->
+				<arg value="/I${src.include}\system\jemalloc" if:true="${binding.jemalloc}"/>
+				<arg value="/I${src.include}\system\jemalloc\msvc_compat" if:true="${binding.jemalloc}"/>
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
+					<exclude name="${src.native}/system/lwjgl_malloc.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/dyncall/*.c"/>
-					<include name="${src.generated.native}/system/jemalloc/*.c"/>
+					<include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
+					<include name="${src.generated.native}/system/jemalloc/*.c" if:true="${binding.jemalloc}"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/windows/*.c"/>
-					<include name="${src.generated.native}/util/simd/*.c"/>
-					<include name="${src.generated.native}/util/xxhash/*.c"/>
 				</fileset>
-			</arguments>
-		</cl>
+			</source>
+			<link>
+				<fileset dir="${lib}/windows/${build.arch}/">
+					<include name="dyn*.lib"/>
+				</fileset>
+			</link>
+		</build>
 
-		<cl if:true="${binding.jawt}">
-			<arguments>
-				<fileset dir="." includes="${src.generated.native}/system/jawt/*.c"/>
-			</arguments>
-		</cl>
-
-		<cl if:true="${binding.lmdb}">
-			<arguments>
+		<!-- LMDB -->
+		<compile dest="${bin.native}/lmdb" flags="/W0" if:true="${binding.lmdb}">
+			<arg value="/I${src.include}\util\lmdb"/>
+			<fileset dir="." includes="${src.include}/util/lmdb/*.c"/>
+		</compile>
+		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
+			<source>
 				<arg value="/I${src.include}\util\lmdb"/>
 				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
-			</arguments>
-		</cl>
-		<cl flags="/W0" if:true="${binding.lmdb}">
-			<arguments>
-				<arg value="/I${src.include}\util\lmdb"/>
-				<fileset dir="." includes="${src.include}/util/lmdb/*.c"/>
-			</arguments>
-		</cl>
+			</source>
+			<linkargs>
+				<arg value="ntdll.lib"/>
+			</linkargs>
+		</build>
 
-		<cl if:true="${binding.nanovg}">
-			<arguments>
+		<!-- NanoVG -->
+		<build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
+			<source>
 				<arg value="/I${src.include}\nanovg"/>
 				<arg value="/I${src.include}\stb"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
-			</arguments>
-		</cl>
+			</source>
+		</build>
 
-		<cl if:true="${binding.nfd}">
-			<arguments>
+		<!-- NativeFileDialog -->
+		<compile dest="${bin.native}/nfd" flags="" if:true="${binding.nfd}">
+			<arg value="/I${src.include}\util\nfd"/>
+			<arg value="/I${src.include}\util\nfd\include"/>
+			<fileset dir="." includes="${src.include}/util/nfd/nfd_common.c"/>
+			<fileset dir="." includes="${src.include}/util/nfd/nfd_win.cpp"/>
+		</compile>
+		<build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
+			<source>
 				<arg value="/I${src.include}\util\nfd"/>
 				<arg value="/I${src.include}\util\nfd\include"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
-			</arguments>
-		</cl>
+			</source>
+		</build>
 
-		<cl flags="" if:true="${binding.nfd}">
-			<arguments>
-				<arg value="/I${src.include}\util\nfd"/>
-				<arg value="/I${src.include}\util\nfd\include"/>
-				<fileset dir="." includes="${src.include}/util/nfd/nfd_common.c"/>
-				<fileset dir="." includes="${src.include}/util/nfd/nfd_win.cpp"/>
-			</arguments>
-		</cl>
-
-		<cl if:true="${binding.nuklear}">
-			<arguments>
+		<!-- Nuklear -->
+		<build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
+			<source>
 				<arg value="/I${src.include}\nuklear"/>
+				<arg value="/I${src.include}\stb"/>
 				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
-			</arguments>
-		</cl>
+			</source>
+		</build>
 
-		<cl if:true="${binding.ovr}">
-			<arguments>
+		<!-- LibOVR -->
+		<compile dest="${bin.native}/ovr" flags="" relative="false" if:true="${binding.ovr}">
+			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
+			<fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*.cpp"/>
+		</compile>
+		<build name="lwjgl_ovr" dest="${bin.native}/ovr" if:true="${binding.ovr}">
+			<source>
 				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
 				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Src"/>
 				<fileset dir="." includes="${src.generated.native}/ovr/*.c"/>
-			</arguments>
-		</cl>
-		<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler" if:true="${binding.ovr}">
-			<arg line="/c /EHsc /Ox /Gy /GR- /MT /MP /nologo"/>
-			<arg value="/Fo${bin.native}\"/>
+			</source>
+		</build>
 
-			<!-- Compile the LibOVR CAPI shim -->
-			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
-			<fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*.cpp"/>
-
-			<mapper type="regexp" from="(\w+)\.cpp$" to="\1.obj"/>
-		</apply>
-
-		<cl if:true="${binding.par}">
-			<arguments>
+		<!-- ParShapes -->
+		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
+			<source>
 				<arg value="/I${src.include}\util\par"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
-			</arguments>
-		</cl>
+			</source>
+		</build>
 
-		<cl if:true="${binding.stb}">
-			<arguments>
+		<!-- SSE -->
+		<build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
+			<source>
+				<arg value="/I${src.include}\util"/>
+				<fileset dir="." includes="${src.generated.native}/util/simd/*.c"/>
+			</source>
+		</build>
+
+		<!-- stb -->
+		<build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
+			<source>
 				<arg value="/I${src.include}\stb"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
-			</arguments>
-		</cl>
+			</source>
+		</build>
 
-		<!-- LINK -->
-		<uptodate property="link-uptodate" targetfile="${lib}/${LWJGL_LIBRARY}">
-			<srcfiles file="config/${platform}/build.xml"/>
-			<srcfiles refid="link-objects"/>
-			<srcfiles refid="link-libraries"/>
-		</uptodate>
-
-		<antcall target="-link-if-necessary"/>
-	</target>
-
-	<target name="-link-if-necessary" unless="link-uptodate">
-		<antcall target="-link"/>
+		<!-- xxHash -->
+		<build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
+			<source>
+				<arg value="/I${src.include}\system"/>
+				<arg value="/I${src.include}\util\xxhash"/>
+				<arg value="/I${src.native}\util\xxhash"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
+			</source>
+		</build>
 	</target>
 
 	<target name="-update-dependencies-x86">
-		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x86"/>
 
 		<update-dependency name="dyncall (x86)" artifact="x86/dyncall_s.lib"/>
 		<update-dependency name="dyncallback (x86)" artifact="x86/dyncallback_s.lib"/>
 		<update-dependency name="dynload (x86)" artifact="x86/dynload_s.lib"/>
 
-		<update-dependency name="jemalloc (x86)" artifact="x86/jemalloc.dll" dest="${lib}/jemalloc32.dll"/>
+		<update-dependency name="jemalloc (x86)" artifact="x86/jemalloc.dll" dest="${lib}/jemalloc32.dll" if:true="${binding.jemalloc}"/>
 		<update-dependency name="glfw3 (x86)" artifact="x86/glfw.dll" dest="${lib}/glfw32.dll" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" dest="${lib}" if:true="${binding.openal}"/>
 	</target>
 
 	<target name="-update-dependencies-x64">
-		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x64"/>
 
 		<update-dependency name="dyncall (x64)" artifact="x64/dyncall_s.lib"/>
 		<update-dependency name="dyncallback (x64)" artifact="x64/dyncallback_s.lib"/>
 		<update-dependency name="dynload (x64)" artifact="x64/dynload_s.lib"/>
 
-		<update-dependency name="jemalloc (x64)" artifact="x64/jemalloc.dll" dest="${lib}"/>
+		<update-dependency name="jemalloc (x64)" artifact="x64/jemalloc.dll" dest="${lib}" if:true="${binding.jemalloc}"/>
 		<update-dependency name="glfw3 (x64)" artifact="x64/glfw.dll" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll" dest="${lib}/OpenAL.dll" if:true="${binding.openal}"/>
-	</target>
-
-	<target name="-update-dependencies" unless="${build.offline}">
-		<antcall target="-update-dependencies-${build.arch}"/>
-	</target>
-
-	<target name="-link" depends="-update-dependencies">
-		<!-- Output object list to a file to avoid command length limits in Windows cmd -->
-		<local name="objects"/>
-		<pathconvert property="objects" pathsep="${line.separator}">
-			<fileset refid="link-objects"/>
-			<map from="${basedir}\" to=""></map>
-		</pathconvert>
-		<echo file="${bin.native}/objects.ant">${objects}</echo>
-
-		<!-- Link -->
-		<apply executable="cl" failonerror="true" parallel="true" taskname="Linker">
-			<arg line='/LD /WX /nologo /Fe:"${lib}\${LWJGL_LIBRARY}"'/>
-
-			<arg value="@${bin.native}\objects.ant"/>
-			<srcfile/>
-			<fileset refid="link-libraries"/>
-
-			<arg value="/link"/>
-			<arg value="/OPT:REF,ICF"/>
-			<arg value="/DLL"/>
-			<arg value="/LTCG"/>
-			<arg value="ntdll.lib" if:true="${binding.lmdb}"/>
-		</apply>
-
-		<!-- Compress -->
-		<apply executable="${org.lwjgl.upx}/upx" failonerror="true" taskname="UPX" if:set="org.lwjgl.upx">
-			<arg value="--best"/>
-			<filelist dir="${lib}" files="${LWJGL_LIBRARY}"/>
-		</apply>
 	</target>
 </project>

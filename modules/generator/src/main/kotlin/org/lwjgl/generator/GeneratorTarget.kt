@@ -64,7 +64,7 @@ class Preamble {
 		nativeDirectives.add(NativeDefine(expression, beforeIncludes))
 	}
 
-	internal fun printJava(writer: PrintWriter) {
+	fun printJava(writer: PrintWriter) {
 		if ( javaImports.isEmpty() )
 			return
 
@@ -162,7 +162,7 @@ abstract class GeneratorTarget(
 
 	var documentation: String? = null
 
-	internal val preamble = Preamble()
+	val preamble = Preamble()
 
 	fun <T : GeneratorTarget> T.javaImport(vararg classes: String): T {
 		preamble.javaImport(*classes)

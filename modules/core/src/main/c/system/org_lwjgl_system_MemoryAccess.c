@@ -4,51 +4,69 @@
  */
 #include "common_tools.h"
 DISABLE_WARNINGS()
+#include <stdlib.h>
 #include <string.h>
 ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 
+#if !(defined(LWJGL_WINDOWS) || defined(__USE_ISOC11))
+	static void* aligned_alloc(size_t alignment, size_t size) {
+		void *p;
+		if ( !posix_memalign(&p, alignment, size) )
+			return p;
+		return NULL;
+	}
+#endif
+
 // malloc()J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_malloc(JNIEnv *env, jclass clazz)
 {
 	UNUSED_PARAMS(env, clazz)
-	return (jlong)(intptr_t)&lwjgl_malloc;
+	return (jlong)(intptr_t)&malloc;
 }
 
 // calloc()J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_calloc(JNIEnv *env, jclass clazz)
 {
 	UNUSED_PARAMS(env, clazz)
-	return (jlong)(intptr_t)&lwjgl_calloc;
+	return (jlong)(intptr_t)&calloc;
 }
 
 // realloc()J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_realloc(JNIEnv *env, jclass clazz)
 {
 	UNUSED_PARAMS(env, clazz)
-	return (jlong)(intptr_t)&lwjgl_realloc;
+	return (jlong)(intptr_t)&realloc;
 }
 
 // free()J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_free(JNIEnv *env, jclass clazz)
 {
 	UNUSED_PARAMS(env, clazz)
-	return (jlong)(intptr_t)&lwjgl_free;
+	return (jlong)(intptr_t)&free;
 }
 
 // aligned_alloc()J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_aligned_1alloc(JNIEnv *env, jclass clazz)
 {
 	UNUSED_PARAMS(env, clazz)
-	return (jlong)(intptr_t)&lwjgl_aligned_alloc;
+#ifdef LWJGL_WINDOWS
+	return (jlong)(intptr_t)&_aligned_malloc;
+#else
+	return (jlong)(intptr_t)&aligned_alloc;
+#endif
 }
 
 // aligned_free()J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_aligned_1free(JNIEnv *env, jclass clazz)
 {
 	UNUSED_PARAMS(env, clazz)
-	return (jlong)(intptr_t)&lwjgl_aligned_free;
+#ifdef LWJGL_WINDOWS
+	return (jlong)(intptr_t)&_aligned_free;
+#else
+	return (jlong)(intptr_t)&free;
+#endif
 }
 
 // memset(JIJ)V

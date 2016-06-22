@@ -18,10 +18,10 @@ fun GeneratorTargetNative.includeOVRCAPI_GL() = nativeDirective(
 ENABLE_WARNINGS()""")
 
 val OVR_PACKAGE = "org.lwjgl.ovr"
+val OVR_LIBRARY = "LibOVR.initialize();"
 
 val long_long = IntegerType("long long", PrimitiveMapping.LONG)
 
-//val ovrBool = NativeType("ovrBool", TypeMapping.BOOLEAN)
 val ovrBool = IntegerType("ovrBool", PrimitiveMapping.BOOLEAN)
 val ovrResult = IntegerType("ovrResult", PrimitiveMapping.INT)
 
@@ -532,6 +532,8 @@ fun config() {
 		Documentation on how to get started with the Oculus SDK can be found <a href="https://developer.oculus.com/documentation/">here</a>.
 		"""
 	)
+
+	Generator.registerLibraryInit(OVR_PACKAGE, "LibOVR", "ovr")
 
 	struct(OVR_PACKAGE, "OVRLayerEyeMatrix", nativeName = "ovrLayerEyeMatrix") {
 		documentation =

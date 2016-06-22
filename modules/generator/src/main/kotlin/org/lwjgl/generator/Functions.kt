@@ -1493,7 +1493,11 @@ class NativeClassFunction(
 		// Unused parameter macro
 
 		if ( !critical )
-			println("\tUNUSED_PARAMS($JNIENV, clazz)")
+			println(if ( parameters.contains(JNI_ENV) )
+				"\tUNUSED_PARAM(clazz)"
+			else
+				"\tUNUSED_PARAMS($JNIENV, clazz)"
+			)
 		else
 			getParams { it.nativeType is ArrayType }.forEach {
 				println("\tUNUSED_PARAM(${it.name}__length)")

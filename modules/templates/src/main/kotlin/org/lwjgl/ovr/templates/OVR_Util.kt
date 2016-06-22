@@ -7,7 +7,11 @@ package org.lwjgl.ovr.templates
 import org.lwjgl.generator.*
 import org.lwjgl.ovr.*
 
-val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr", prefixConstant = "ovr") {
+val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr", prefixConstant = "ovr", library = OVR_LIBRARY) {
+	nativeDirective(
+		"""#ifdef LWJGL_WINDOWS
+	__pragma(warning(disable : 4711))
+#endif""", beforeIncludes = true)
 	includeOVRCAPI()
 
 	documentation = "Native bindings to the libOVR utility functions."

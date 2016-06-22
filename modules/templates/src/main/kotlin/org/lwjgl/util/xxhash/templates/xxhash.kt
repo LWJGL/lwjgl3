@@ -7,7 +7,7 @@ package org.lwjgl.util.xxhash.templates
 import org.lwjgl.generator.*
 import org.lwjgl.util.xxhash.*
 
-val xxhash = "XXHash".nativeClass(XXHASH_PACKAGE, prefix = "XXH", prefixMethod = "XXH") {
+val xxhash = "XXHash".nativeClass(XXHASH_PACKAGE, prefix = "XXH", prefixMethod = "XXH", library = "LibXXHash.initialize();") {
 	initializeAllocator()
 
 	nativeDirective(
@@ -21,6 +21,7 @@ val xxhash = "XXHash".nativeClass(XXHASH_PACKAGE, prefix = "XXH", prefixMethod =
 	__pragma(warning(disable : 4711))
 #endif
 #define XXH_PRIVATE_API
+#include "lwjgl_malloc.h"
 #include "xxhash.c"
 ENABLE_WARNINGS()""")
 

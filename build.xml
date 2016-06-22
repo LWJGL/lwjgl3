@@ -129,7 +129,7 @@ License terms: http://lwjgl.org/license.php
 		<delete dir="${src.generated.native}"/>
 	</target>
 
-	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates, tests"/>
+	<target name="all" description="Builds LWJGL and runs the tests" depends="compile-templates, tests"/>
 
 	<target name="compile-generator" description="Compiles the Generator module" depends="init">
 		<local name="generator-uptodate"/>
@@ -179,7 +179,7 @@ License terms: http://lwjgl.org/license.php
 
 			<src path="${src.templates.kotlin}/org/lwjgl/system/dyncall"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
-			<src path="${src.templates.kotlin}/org/lwjgl/system/jemalloc"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/jemalloc" if:true="${binding.jemalloc}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/libc"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/linux"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/macosx"/>
@@ -188,12 +188,12 @@ License terms: http://lwjgl.org/license.php
 			<src path="${src.templates.kotlin}/org/lwjgl/util/lmdb" if:true="${binding.lmdb}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
-			<src path="${src.templates.kotlin}/org/lwjgl/util/simd"/>
-			<src path="${src.templates.kotlin}/org/lwjgl/util/xxhash"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/util/simd" if:true="${binding.sse}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/util/xxhash" if:true="${binding.xxhash}"/>
 		</kotlinc>
 	</target>
 
-	<target name="-compile-generator-tools" description="Compiles the Generator tools" depends="init">
+	<target name="-compile-generator-tools" depends="init">
 		<lwjgl.javac destdir="${bin.generator}">
 			<src path="${src.generator}/java"/>
 			<include name="org/lwjgl/generator/util/**"/>
@@ -247,7 +247,7 @@ License terms: http://lwjgl.org/license.php
 		<touch file="${src.generated}/touch.txt" verbose="false" unless:set="generated-uptodate"/>
 	</target>
 
-	<target name="-init-compile" description="Initializes properties required for compilation" depends="bindings">
+	<target name="-init-compile" depends="bindings">
 		<patternset id="core.main.files">
 			<include name="org/lwjgl/*.java"/>
 			<include name="org/lwjgl/system/**"/>
@@ -277,7 +277,7 @@ License terms: http://lwjgl.org/license.php
 
 			<include name="org/lwjgl/system/JNI.*"/>
 			<include name="org/lwjgl/system/dyncall/**"/>
-			<include name="org/lwjgl/system/jemalloc/**"/>
+			<include name="org/lwjgl/system/jemalloc/**" if:true="${binding.jemalloc}"/>
 			<include name="org/lwjgl/system/libc/**"/>
 			<include name="org/lwjgl/system/linux/**"/>
 			<include name="org/lwjgl/system/macosx/**"/>
@@ -287,8 +287,8 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/util/lmdb/**" if:true="${binding.lmdb}"/>
 			<include name="org/lwjgl/util/nfd/**" if:true="${binding.nfd}"/>
 			<include name="org/lwjgl/util/par/**" if:true="${binding.par}"/>
-			<include name="org/lwjgl/util/simd/**"/>
-			<include name="org/lwjgl/util/xxhash/**"/>
+			<include name="org/lwjgl/util/simd/**" if:true="${binding.sse}"/>
+			<include name="org/lwjgl/util/xxhash/**" if:true="${binding.xxhash}"/>
 		</patternset>
 	</target>
 
@@ -406,18 +406,19 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
 			<include name="org/lwjgl/demo/util/nfd/**" if:true="${nfd}"/>
 			<include name="org/lwjgl/demo/util/par/**" if:true="${binding.par}"/>
-			<include name="org/lwjgl/demo/util/xxhash/**"/>
+			<include name="org/lwjgl/demo/util/xxhash/**" if:true="${binding.xxhash}"/>
 
 			<include name="org/lwjgl/demo/vulkan/**" if:true="${binding.vulkan}"/>
 
 			<!-- Tests -->
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
 			<include name="org/lwjgl/system/**"/>
-			<include name="org/lwjgl/util/**"/>
+			<include name="org/lwjgl/util/par/**" if:true="${binding.par}"/>
+			<include name="org/lwjgl/util/simd/**" if:true="${binding.sse}"/>
 		</lwjgl.javac>
 	</target>
 
-	<target name="-init-runtime" description="Initializes properties required for running demos and tests">
+	<target name="-init-runtime">
 		<path id="runtime.classpath">
 			<pathelement path="${bin.core}"/>
 			<pathelement path="${test.resources}"/>
@@ -475,24 +476,15 @@ License terms: http://lwjgl.org/license.php
 		</java>
 	</target>
 
-	<target name="-build-version" description="Retrieves the LWJGL version from org.lwjgl.Version">
+	<target name="-build-version">
 		<java classname="org.lwjgl.Version" fork="true" failonerror="true" outputproperty="build.version">
 			<classpath path="${bin.core}"/>
 			<jvmarg value="-Djava.library.path=${lib}"/>
 		</java>
 	</target>
 
-	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate">
-		<uptodate targetfile="${bin.html.javadoc}/index.html" property="javadoc-uptodate">
-			<srcfiles dir="${src.core}" includes="**"/>
-			<srcfiles dir="${src.generator}/java" includes="org/lwjgl/system/**"/>
-			<srcfiles dir="${src.generated.java}" includes="**"/>
-			<srcfiles dir="${config}" includes="javadoc.css"/>
-		</uptodate>
-		<antcall target="-javadoc"/>
-	</target>
-
-	<target name="-javadoc" description="Generates the LWJGL JavaDoc" depends="-init-compile,-build-version" unless="javadoc-uptodate">
+	<!-- Includes all modules for javadoc.lwjgl.org -->
+	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="-init-compile,-build-version">
 		<lwjgl.javac destdir="${bin.generator}" taskname="Compile doclets">
 			<src path="${src.generator}/java"/>
 			<include name="org/lwjgl/system/**"/>
@@ -551,97 +543,507 @@ License terms: http://lwjgl.org/license.php
 		</java>
 	</target>
 
-	<target name="release" description="Creates the LWJGL binary redistributable" depends="compile,javadoc,-build-version">
-		<!-- Download binaries from build.lwjgl.org -->
-		<mkdir dir="${release.native}"/>
+	<target name="upload-native" description="Uploads native build artifacts to build.lwjgl.org" depends="compile-native">
+		<fail message="AWS credentials not configured.">
+			<condition>
+				<not>
+					<or>
+						<and>
+							<isset property="env.AWS_ACCESS_KEY_ID"/>
+							<isset property="env.AWS_SECRET_ACCESS_KEY"/>
+						</and>
+						<isset property="env.AWS_CONFIG_FILE"/>
+					</or>
+				</not>
+			</condition>
+		</fail>
 
-		<get dest="${release.native}" verbose="false" usetimestamp="true">
-			<!-- Linux -->
-			<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl.so"/>
-			<url url="http://build.lwjgl.org/${build.type}/linux/x64/libjemalloc.so"/>
-			<url url="http://build.lwjgl.org/${build.type}/linux/x64/libglfw.so"/>
-			<url url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so"/>
+		<local name="type"/>
+		<condition property="type" value="dll">
+			<isset property="platform.windows"/>
+		</condition>
+		<condition property="type" value="dylib" else="so">
+			<isset property="platform.macosx"/>
+		</condition>
 
-			<!--<url url="http://build.lwjgl.org/${build.type}/linux/x86/liblwjgl.so"/>
-			<url url="http://build.lwjgl.org/${build.type}/linux/x86/libjemalloc.so"/>
-			<url url="http://build.lwjgl.org/${build.type}/linux/x86/libglfw.so"/>
-			<url url="http://build.lwjgl.org/${build.type}/linux/x86/libopenal.so"/>-->
+		<local name="postfix"/>
+		<condition property="postfix" value="32">
+			<not><equals arg1="${build.arch}" arg2="x64"/></not>
+		</condition>
 
-			<!-- Mac OS X -->
-			<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl.dylib"/>
-			<url url="http://build.lwjgl.org/${build.type}/macosx/x64/libjemalloc.dylib"/>
-			<url url="http://build.lwjgl.org/${build.type}/macosx/x64/libglfw.dylib"/>
-			<url url="http://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib"/>
+		<apply executable="aws" failonerror="true" relative="true" taskname="S3 upload">
+			<arg value="s3"/>
+			<arg value="cp"/>
 
-			<!-- Windows -->
-			<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl.dll"/>
-			<url url="http://build.lwjgl.org/${build.type}/windows/x64/jemalloc.dll"/>
-			<url url="http://build.lwjgl.org/${build.type}/windows/x64/glfw.dll"/>
+			<srcfile/>
 
-			<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl.dll"/>
-			<url url="http://build.lwjgl.org/${build.type}/windows/x86/jemalloc.dll"/>
-			<url url="http://build.lwjgl.org/${build.type}/windows/x86/glfw.dll"/>
+			<arg value="s3://build.lwjgl.org/${build.type}/${platform}/${build.arch}/"/>
+			<arg line='--acl public-read --storage-class REDUCED_REDUNDANCY --cache-control "public, must-revalidate, proxy-revalidate, max-age=0"'/>
 
-			<firstmatchmapper>
-				<regexpmapper from="x86/(\w+)[.](\w+)" to="\132.\2"/> <!-- Append "32" -->
-				<flattenmapper/>
-			</firstmatchmapper>
-		</get>
-		<!-- Windows OpenAL -->
-		<get src="http://build.lwjgl.org/${build.type}/windows/x64/OpenAL32.dll" dest="${release.native}/OpenAL.dll" verbose="false" usetimestamp="true"/>
-		<get src="http://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll" dest="${release.native}" verbose="false" usetimestamp="true"/>
+			<fileset dir=".">
+				<include name="libs/lwjgl*32.${type}" if:set="postfix"/>
+				<exclude name="libs/lwjgl*32.${type}" unless:set="postfix"/>
+				<include name="libs/lwjgl*.${type}" unless:set="postfix"/>
+			</fileset>
+		</apply>
+	</target>
 
-		<local name="liblwjgl-so"/>
-		<local name="liblwjgl-dylib"/>
-		<local name="lwjgl-dll"/>
-		<local name="lwjgl32-dll"/>
+	<macrodef name="release-module">
+		<attribute name="package"/>
+		<attribute name="name"/>
+		<attribute name="module" default="lwjgl-@{name}"/>
+		<attribute name="title"/>
+		<attribute name="java-only" default="false"/>
+		<element name="natives" optional="true"/>
+		<element name="process-natives" optional="true"/>
+		<element name="classes" optional="true"/>
+		<element name="jar-attributes" optional="true"/>
+		<element name="sources"/>
+		<element name="licenses" optional="true"/>
+		<sequential>
+			<!-- Bundle natives -->
+			<mkdir dir="${release}/@{package}/native" unless:true="@{java-only}"/>
+			<get dest="${release}/@{package}/native" verbose="false" usetimestamp="true" unless:true="@{java-only}" ignoreerrors="true"> <!-- TODO: remove ignoreerrors -->
+				<natives/>
+			</get>
+			<process-natives/>
+			<zip destfile="${release}/@{package}/@{module}-natives-windows.jar" basedir="${release}/@{package}/native" includes="*.dll" level="9" unless:true="@{java-only}"/>
+			<zip destfile="${release}/@{package}/@{module}-natives-macos.jar" basedir="${release}/@{package}/native" includes="*.dylib" level="9" unless:true="@{java-only}"/>
+			<zip destfile="${release}/@{package}/@{module}-natives-linux.jar" basedir="${release}/@{package}/native" includes="*.so" level="9" unless:true="@{java-only}"/>
+			<delete dir="${release}/@{package}/native" unless:true="@{java-only}"/>
 
-		<checksum file="${release.native}/liblwjgl.so" algorithm="SHA-1" property="liblwjgl-so"/>
-		<checksum file="${release.native}/liblwjgl.dylib" algorithm="SHA-1" property="liblwjgl-dylib"/>
-		<checksum file="${release.native}/lwjgl.dll" algorithm="SHA-1" property="lwjgl-dll"/>
-		<checksum file="${release.native}/lwjgl32.dll" algorithm="SHA-1" property="lwjgl32-dll"/>
+			<!-- Bundle classes -->
+			<local name="module.package"/>
+			<script language="javascript"><![CDATA[
+			var package = "@{package}";
+			project.setProperty("module.package", package.replaceAll("[.]", "/"));
+			]]></script>
+			<local name="module.package.include"/>
+			<condition property="module.package.skip" value="true">
+				<equals arg1="@{name}" arg2="core"/>
+			</condition>
+			<jar destfile="${release}/@{package}/@{module}.jar" level="9" index="true">
+				<manifest>
+					<section name="org/lwjgl/">
+						<attribute name="Specification-Title" value="Lightweight Java Game Library - @{title}"/>
+						<attribute name="Specification-Version" value="${build.version}"/>
+						<attribute name="Specification-Vendor" value="lwjgl.org"/>
+						<attribute name="Implementation-Title" value="@{module}"/>
+						<attribute name="Implementation-Version" value="${revision}"/>
+						<attribute name="Implementation-Vendor" value="lwjgl.org"/>
+						<jar-attributes/>
+					</section>
+				</manifest>
 
-		<!-- Bundle classes -->
-		<mkdir dir="${release.jar}"/>
-		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true">
-			<manifest>
-				<section name="org/lwjgl/">
-					<attribute name="Specification-Title" value="Lightweight Java Game Library"/>
-					<attribute name="Specification-Version" value="${build.version}"/>
-					<attribute name="Specification-Vendor" value="lwjgl.org"/>
-					<attribute name="Implementation-Title" value="lwjgl"/>
-					<attribute name="Implementation-Version" value="build ${build.revision}" if:set="build.revision"/>
-					<attribute name="Implementation-Version" value="SNAPSHOT" unless:set="build.revision"/>
-					<attribute name="Implementation-Vendor" value="lwjgl.org"/>
-					<attribute name="liblwjgl-so" value="${liblwjgl-so}"/>
-					<attribute name="liblwjgl-dylib" value="${liblwjgl-dylib}"/>
-					<attribute name="lwjgl-dll" value="${lwjgl-dll}"/>
-					<attribute name="lwjgl32-dll" value="${lwjgl32-dll}"/>
-				</section>
-			</manifest>
-		</jar>
+				<fileset dir="${bin.core}" unless:set="module.package.skip">
+					<include name="${module.package}/**"/>
+				</fileset>
+				<classes/>
+			</jar>
 
-		<!-- Bundle javadoc -->
-		<mkdir dir="${release.doc}"/>
-		<zip destfile="${release.doc}/javadoc.zip" basedir="${bin.html.javadoc}" includes="**" level="9"/>
+			<!-- Bundle javadoc -->
+			<mkdir dir="${release}/@{package}/javadoc"/>
+			<javadoc
+				destdir="${release}/@{package}/javadoc"
+				source="1.8"
+				windowtitle="LWJGL ${build.version} - @{title}"
+				encoding="UTF-8"
+				docencoding="UTF-8"
+				charset="UTF-8"
+				useexternalfile="true"
+				nohelp="true"
+				notree="true"
+				public="true"
+				doclet="org.lwjgl.system.ExcludeDoclet"
+				docletpath="${bin.generator}"
+				maxmemory="1G"
+				failonerror="true"
+			>
+				<doctitle><![CDATA[<h1>LWJGL - @{title}</h1>]]></doctitle>
+				<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="http://lwjgl.org/license.php">License terms</a>.</i>]]></bottom>
 
-		<!-- Copy license files -->
+				<classpath>
+					<pathelement path="${src.core}"/>
+					<pathelement path="${src.generated.java}"/>
+				</classpath>
+
+				<sources/>
+
+				<arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
+
+				<arg value="-Xdoclint"/>
+				<arg value="-html5" if:set="jdk9"/>
+				<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
+				<arg line="-J-Dfile.encoding=UTF8"/>
+				<arg line="-J-XaddExports:jdk.javadoc/com.sun.tools.doclets.standard=ALL-UNNAMED" if:set="jdk9"/>
+			</javadoc>
+			<get-quiet name="favicon" url="http://s3.amazonaws.com/cdn.lwjgl.org/favicon.ico" dest="${release}/@{package}/javadoc"/>
+
+			<java classname="org.lwjgl.system.JavadocPostProcess" fork="true" failonerror="true">
+				<classpath path="${bin.generator}"/>
+
+				<arg value="${release}/@{package}/javadoc/org/lwjgl"/>
+			</java>
+			<zip destfile="${release}/@{package}/@{module}-javadoc.jar" basedir="${release}/@{package}/javadoc" includes="**" level="9"/>
+			<delete dir="${release}/@{package}/javadoc"/>
+
+			<!-- Copy license files -->
+			<copy todir="${release}/@{package}">
+				<fileset dir="${doc}/3rdparty">
+					<include name=""/>
+					<licenses/>
+				</fileset>
+			</copy>
+
+			<!-- Bundle source -->
+			<jar destfile="${release}/@{package}/@{module}-sources.jar" level="9">
+				<sources/>
+			</jar>
+		</sequential>
+	</macrodef>
+
+	<target name="release" depends="compile,-build-version">
+		<lwjgl.javac destdir="${bin.generator}" taskname="Compile doclets">
+			<src path="${src.generator}/java"/>
+			<include name="org/lwjgl/system/**"/>
+			<classpath>
+				<pathelement location="${env.JAVA_HOME}/lib/tools.jar"/>
+			</classpath>
+		</lwjgl.javac>
+
+		<local name="revision"/>
+		<condition property="revision" value="build ${build.revision}" else="SNAPSHOT">
+			<isset property="build.revision"/>
+		</condition>
+
+		<delete dir="${release}"/>
+		<mkdir dir="${release}"/>
+
+		<!-- Copy license -->
 		<copy file="LICENSE.md" tofile="${release}/LICENSE"/>
-		<copy todir="${release.doc}">
-			<fileset dir="${doc}" includes="3rdparty/**"/>
-		</copy>
 
-		<!-- Bundle source -->
-		<zip destfile="${release}/src.zip" level="9">
-			<fileset dir="${src.core}">
-				<patternset refid="core.main.files"/>
-			</fileset>
+		<!-- Generate build.txt -->
+		<echo file="${release}/build.txt" if:set="build.revision">LWJGL @{title} ${build.version} ${revision}</echo>
+		<echo file="${release}/build.txt" unless:set="build.revision">LWJGL @{title} ${build.version}</echo>
 
-			<fileset dir="${src.generated.java}">
-				<patternset refid="core.generated.files"/>
-			</fileset>
-		</zip>
+		<!-- CORE -->
+		<release-module package="org.lwjgl" name="core" module="lwjgl" title="Core">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl32.dll"/>
+			</natives>
+			<process-natives>
+				<local name="liblwjgl-so"/>
+				<local name="liblwjgl-dylib"/>
+				<local name="lwjgl-dll"/>
+				<local name="lwjgl32-dll"/>
 
-		<echo file="${release}/build.txt" if:set="build.revision">LWJGL ${build.version} build ${build.revision}</echo>
+				<checksum file="${release}/@{package}/native/liblwjgl.so" algorithm="SHA-1" property="liblwjgl-so"/>
+				<checksum file="${release}/@{package}/native/liblwjgl.dylib" algorithm="SHA-1" property="liblwjgl-dylib"/>
+				<checksum file="${release}/@{package}/native/lwjgl.dll" algorithm="SHA-1" property="lwjgl-dll"/>
+				<checksum file="${release}/@{package}/native/lwjgl32.dll" algorithm="SHA-1" property="lwjgl32-dll"/>
+			</process-natives>
+			<classes>
+				<fileset dir="${bin.core}">
+					<include name="org/lwjgl/*.class"/>
+					<include name="org/lwjgl/system/**"/>
+					<exclude name="org/lwjgl/system/jawt/**"/>
+					<exclude name="org/lwjgl/system/jemalloc/**"/>
+				</fileset>
+			</classes>
+			<jar-attributes>
+				<attribute name="liblwjgl-so" value="${liblwjgl-so}"/>
+				<attribute name="liblwjgl-dylib" value="${liblwjgl-dylib}"/>
+				<attribute name="lwjgl-dll" value="${lwjgl-dll}"/>
+				<attribute name="lwjgl32-dll" value="${lwjgl32-dll}"/>
+			</jar-attributes>
+			<sources>
+				<fileset dir="${src.core}">
+					<include name="org/lwjgl/*.java"/>
+					<include name="org/lwjgl/system/**"/>
+				</fileset>
+
+				<fileset dir="${src.generated.java}">
+					<include name="org/lwjgl/system/**"/>
+					<exclude name="org/lwjgl/system/jawt/**"/>
+					<exclude name="org/lwjgl/system/jemalloc/**"/>
+				</fileset>
+			</sources>
+			<licenses><include name="dyncall*"/></licenses>
+		</release-module>
+
+		<!-- EGL -->
+		<release-module package="org.lwjgl.egl" name="egl" title="EGL" java-only="true" if:true="${binding.egl}">
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/egl/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.core}"><include name="org/lwjgl/egl/**"/></fileset>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/egl/**"/></fileset>
+			</sources>
+			<licenses><include name="khronos*"/></licenses>
+		</release-module>
+
+		<!-- GLFW -->
+		<release-module package="org.lwjgl.glfw" name="glfw" title="GLFW" if:true="${binding.glfw}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/libglfw.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/libglfw.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/glfw.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/glfw32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/glfw/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.core}"><include name="org/lwjgl/glfw/**"/></fileset>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/glfw/**"/></fileset>
+			</sources>
+			<licenses><include name="glfw*"/></licenses>
+		</release-module>
+
+		<!-- JAWT -->
+		<release-module package="org.lwjgl.system.jawt" name="jawt" title="JAWT" java-only="true" if:true="${binding.jawt}">
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/system/jawt/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/system/jawt/**"/></fileset>
+			</sources>
+		</release-module>
+
+		<!-- jemalloc -->
+		<release-module package="org.lwjgl.system.jemalloc" name="jemalloc" title="jemalloc" if:true="${binding.jemalloc}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/libjemalloc.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/libjemalloc.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/jemalloc.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/jemalloc32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/system/jemalloc/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/system/jemalloc/**"/></fileset>
+			</sources>
+			<licenses><include name="jemalloc*"/></licenses>
+		</release-module>
+
+		<!-- LMDB -->
+		<release-module package="org.lwjgl.util.lmdb" name="lmdb" title="LMDB" if:true="${binding.lmdb}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_lmdb.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_lmdb.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_lmdb.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_lmdb32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/util/lmdb/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/util/lmdb/**"/></fileset>
+			</sources>
+			<licenses><include name="lmdb*"/></licenses>
+		</release-module>
+
+		<!-- NanoVG -->
+		<release-module package="org.lwjgl.nanovg" name="nanovg" title="NanoVG" if:true="${binding.nanovg}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_nanovg.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_nanovg.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_nanovg.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_nanovg32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/nanovg/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.core}"><include name="org/lwjgl/nanovg/**"/></fileset>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/nanovg/**"/></fileset>
+			</sources>
+			<licenses><include name="nanovg*"/></licenses>
+		</release-module>
+
+		<!-- Native File Dialog -->
+		<release-module package="org.lwjgl.util.nfd" name="nfd" title="Native File Dialog" if:true="${binding.nfd}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_nfd.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_nfd.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_nfd.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_nfd32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/util/nfd/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/util/nfd/**"/></fileset>
+			</sources>
+			<licenses><include name="nfd*"/></licenses>
+		</release-module>
+
+		<!-- Nuklear -->
+		<release-module package="org.lwjgl.nuklear" name="nuklear" title="Nuklear" if:true="${binding.nuklear}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_nuklear.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_nuklear.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_nuklear.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_nuklear32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/nuklear/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/nuklear/**"/></fileset>
+			</sources>
+			<licenses><include name="nfd*"/></licenses>
+		</release-module>
+
+		<!-- OpenAL -->
+		<release-module package="org.lwjgl.openal" name="openal" title="OpenAL" if:true="${binding.openal}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/OpenAL.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/openal/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.core}"><include name="org/lwjgl/openal/**"/></fileset>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/openal/**"/></fileset>
+			</sources>
+			<licenses><include name="openal*"/></licenses>
+		</release-module>
+
+		<!-- OpenCL -->
+		<release-module package="org.lwjgl.opencl" name="opencl" title="OpenCL" java-only="true" if:true="${binding.opencl}">
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/opencl/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.core}"><include name="org/lwjgl/opencl/**"/></fileset>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/opencl/**"/></fileset>
+			</sources>
+			<licenses><include name="khronos*"/></licenses>
+		</release-module>
+
+		<!-- OpenGL -->
+		<release-module package="org.lwjgl.opengl" name="opengl" title="OpenGL" java-only="true" if:true="${binding.opengl}">
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/opengl/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.core}"><include name="org/lwjgl/opengl/**"/></fileset>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/opengl/**"/></fileset>
+			</sources>
+			<licenses><include name="khronos*"/></licenses>
+		</release-module>
+
+		<!-- OpenGL ES -->
+		<release-module package="org.lwjgl.opengles" name="opengles" title="OpenGL ES" java-only="true" if:true="${binding.opengles}">
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/opengles/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.core}"><include name="org/lwjgl/opengles/**"/></fileset>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/opengles/**"/></fileset>
+			</sources>
+			<licenses><include name="khronos*"/></licenses>
+		</release-module>
+
+		<!-- LibOVR -->
+		<release-module package="org.lwjgl.ovr" name="ovr" title="LibOVR" if:true="${binding.ovr}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_ovr.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_ovr32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/ovr/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/ovr/**"/></fileset>
+			</sources>
+			<licenses><include name="oculus*"/></licenses>
+		</release-module>
+
+		<!-- Par -->
+		<release-module package="org.lwjgl.util.par" name="par" title="par" if:true="${binding.par}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_par.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_par.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_par.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_par32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/util/par/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/util/par/**"/></fileset>
+			</sources>
+		</release-module>
+
+		<!-- SSE -->
+		<release-module package="org.lwjgl.util.sse" name="sse" title="SSE" if:true="${binding.sse}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_sse.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_sse.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_sse.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_sse32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/util/simd/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/util/simd/**"/></fileset>
+			</sources>
+		</release-module>
+
+		<!-- stb -->
+		<release-module package="org.lwjgl.stb" name="stb" title="stb" if:true="${binding.stb}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_stb.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_stb.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_stb.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_stb32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/stb/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/stb/**"/></fileset>
+			</sources>
+		</release-module>
+
+		<!-- Vulkan -->
+		<release-module package="org.lwjgl.vulkan" name="vulkan" title="Vulkan" java-only="true" if:true="${binding.vulkan}">
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/vulkan/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.core}"><include name="org/lwjgl/vulkan/**"/></fileset>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/vulkan/**"/></fileset>
+			</sources>
+			<licenses><include name="khronos*"/></licenses>
+		</release-module>
+
+		<!-- xxHash -->
+		<release-module package="org.lwjgl.util.xxhash" name="xxhash" title="xxHash" if:true="${binding.xxhash}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_xxhash.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_xxhash.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_xxhash.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_xxhash32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/util/xxhash/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/util/xxhash/**"/></fileset>
+			</sources>
+			<licenses><include name="xxhash*"/></licenses>
+		</release-module>
 	</target>
 </project>

@@ -7,7 +7,7 @@ package org.lwjgl.stb.templates
 import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
-val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, prefix = "STBI", prefixMethod = "stbi_") {
+val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, prefix = "STBI", prefixMethod = "stbi_", library = STB_LIBRARY) {
 	nativeDirective(
 """#ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4710))
@@ -15,12 +15,13 @@ val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, pre
 
 	initializeAllocator()
 	includeSTBAPI(
-		"""#define STB_IMAGE_WRITE_IMPLEMENTATION
-#define STB_IMAGE_WRITE_STATIC
-#define STBIW_ASSERT(x)
+		"""#include "lwjgl_malloc.h"
 #define STBIW_MALLOC(sz)    lwjgl_malloc(sz)
 #define STBIW_REALLOC(p,sz) lwjgl_realloc(p,sz)
 #define STBIW_FREE(p)       lwjgl_free(p)
+#define STBIW_ASSERT(x)
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_STATIC
 #include "stb_image_write.h"""")
 
 	documentation =

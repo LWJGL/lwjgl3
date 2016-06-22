@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.system.jemalloc.JEmalloc;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +14,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.jemalloc.JEmalloc.*;
 import static org.lwjgl.system.libc.Stdlib.*;
 
 /** Provides {@link MemoryAllocator} implementations for {@link MemoryUtil} to use. */
@@ -33,8 +30,8 @@ final class MemoryManage {
 		if ( "jemalloc".equals(allocator) ) {
 			try {
 				// check if the jemalloc library is available
-				Class.forName("org.lwjgl.system.jemalloc.JEmalloc").getMethod("getLibrary").invoke(null);
-				return new JEmallocAllocator();
+				Class<?> JEmallocAllocator = Class.forName("org.lwjgl.system.jemalloc.JEmallocAllocator");
+				return (MemoryAllocator)JEmallocAllocator.newInstance();
 			} catch (Throwable t) {
 				if ( Checks.DEBUG )
 					t.printStackTrace(DEBUG_STREAM);
@@ -56,9 +53,22 @@ final class MemoryManage {
 	private static class StdlibAllocator implements MemoryAllocator {
 
 		@Override
-		public void config(long malloc, long calloc, long realloc, long free, long aligned_alloc, long aligned_free) {
-			// stdlib functions are the default
-		}
+		public long getMalloc() { return MemoryAccess.malloc(); }
+
+		@Override
+		public long getCalloc() { return MemoryAccess.calloc(); }
+
+		@Override
+		public long getRealloc() { return MemoryAccess.realloc(); }
+
+		@Override
+		public long getFree() { return MemoryAccess.free(); }
+
+		@Override
+		public long getAlignedAlloc() { return MemoryAccess.aligned_alloc(); }
+
+		@Override
+		public long getAlignedFree() { return MemoryAccess.aligned_free(); }
 
 		@Override
 		public long malloc(long size) {
@@ -88,52 +98,6 @@ final class MemoryManage {
 		@Override
 		public void aligned_free(long ptr) {
 			naligned_free(ptr);
-		}
-
-	}
-
-	/** jemalloc memory allocator. */
-	private static class JEmallocAllocator implements MemoryAllocator {
-
-		@Override
-		public void config(long malloc, long calloc, long realloc, long free, long aligned_alloc, long aligned_free) {
-			memPutAddress(malloc, JEmalloc.Functions.malloc);
-			memPutAddress(calloc, JEmalloc.Functions.calloc);
-			memPutAddress(realloc, JEmalloc.Functions.realloc);
-			memPutAddress(free, JEmalloc.Functions.free);
-
-			memPutAddress(aligned_alloc, JEmalloc.Functions.aligned_alloc);
-			memPutAddress(aligned_free, JEmalloc.Functions.free);
-		}
-
-		@Override
-		public long malloc(long size) {
-			return nje_malloc(size);
-		}
-
-		@Override
-		public long calloc(long num, long size) {
-			return nje_calloc(num, size);
-		}
-
-		@Override
-		public long realloc(long ptr, long size) {
-			return nje_realloc(ptr, size);
-		}
-
-		@Override
-		public void free(long ptr) {
-			nje_free(ptr);
-		}
-
-		@Override
-		public long aligned_alloc(long alignment, long size) {
-			return nje_aligned_alloc(alignment, size);
-		}
-
-		@Override
-		public void aligned_free(long ptr) {
-			nje_free(ptr);
 		}
 
 	}
@@ -176,6 +140,24 @@ final class MemoryManage {
 		}
 
 		@Override
+		public long getMalloc() { return allocator.getMalloc(); }
+
+		@Override
+		public long getCalloc() { return allocator.getCalloc(); }
+
+		@Override
+		public long getRealloc() { return allocator.getRealloc(); }
+
+		@Override
+		public long getFree() { return allocator.getFree(); }
+
+		@Override
+		public long getAlignedAlloc() { return allocator.getAlignedAlloc(); }
+
+		@Override
+		public long getAlignedFree() { return allocator.getAlignedFree(); }
+
+		@Override
 		public long malloc(long size) {
 			return track(allocator.malloc(size), size);
 		}
@@ -208,11 +190,6 @@ final class MemoryManage {
 		public void aligned_free(long ptr) {
 			allocator.aligned_free(ptr);
 			untrack(ptr);
-		}
-
-		@Override
-		public void config(long malloc, long calloc, long realloc, long free, long aligned_alloc, long aligned_free) {
-			allocator.config(malloc, calloc, realloc, free, aligned_alloc, aligned_free);
 		}
 
 		static long track(long address, long size) {

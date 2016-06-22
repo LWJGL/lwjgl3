@@ -140,6 +140,11 @@ class Struct(
 		usageResultPointer = true
 	}
 
+	private var static: String? = null
+	fun static(expression: String) {
+		static = expression
+	}
+
 	private val members = ArrayList<StructMember>()
 
 	private val visibleMembers: Sequence<StructMember>
@@ -475,11 +480,17 @@ $indentation}"""
 				println(";")
 			}
 
+			print("""
+	static {""")
+			if ( static != null )
+				print("""
+		$static
+""")
+
 			// Member offset initialization
 
 			if ( nativeLayout ) {
 				print("""
-	static {
 		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer offsets = stack.mallocInt(${memberCount + 1});
 			SIZEOF = offsets(memAddress(offsets));
@@ -491,7 +502,6 @@ $indentation}"""
 		}""")
 			} else {
 				print("""
-	static {
 		Layout layout = """)
 				generateLayout(this@Struct)
 				print(""";
@@ -506,7 +516,12 @@ $indentation}"""
 			print("\t}")
 		} else {
 			print("""
-	static {
+	static {""")
+			if (static != null)
+				print("""
+		$static
+""")
+			print("""
 		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer offsets = stack.mallocInt(1);
 			SIZEOF = offsets(memAddress(offsets));

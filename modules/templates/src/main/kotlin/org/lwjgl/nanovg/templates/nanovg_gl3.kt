@@ -9,7 +9,7 @@ import org.lwjgl.nanovg.*
 import org.lwjgl.opengl.GLuint
 
 val nanovg_gl3 = dependsOn(Binding.OPENGL) {
-	"NanoVGGL3".nativeClass(packageName = NANOVG_PACKAGE, prefix = "NVG") {
+	"NanoVGGL3".nativeClass(packageName = NANOVG_PACKAGE, prefix = "NVG", library = NANOVG_LIBRARY) {
 		nativeDirective(
 			"""#ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4710 4711))

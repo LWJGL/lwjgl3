@@ -5,6 +5,7 @@
 package org.lwjgl.system.jemalloc
 
 import org.lwjgl.generator.*
+import java.io.PrintWriter
 
 val JEMALLOC_PACKAGE = "org.lwjgl.system.jemalloc"
 
@@ -35,6 +36,69 @@ fun config() {
 		{@code mallctl*} functions.
 		"""
 	)
+
+	Generator.register(object : CustomClass(JEMALLOC_PACKAGE, "JEmallocAllocator") {
+
+		init {
+			javaImport("org.lwjgl.system.MemoryUtil.*")
+			javaImport("static org.lwjgl.system.jemalloc.JEmalloc.*")
+			documentation = "A {@link MemoryAllocator} implementation using the jemalloc library."
+		}
+
+		override fun PrintWriter.generateContent() {
+			println("""public class JEmallocAllocator implements MemoryAllocator {
+
+	@Override
+	public long getMalloc() { return JEmalloc.Functions.malloc; }
+
+	@Override
+	public long getCalloc() { return JEmalloc.Functions.calloc; }
+
+	@Override
+	public long getRealloc() { return JEmalloc.Functions.realloc; }
+
+	@Override
+	public long getFree() { return JEmalloc.Functions.free; }
+
+	@Override
+	public long getAlignedAlloc() { return JEmalloc.Functions.aligned_alloc; }
+
+	@Override
+	public long getAlignedFree() { return JEmalloc.Functions.free; }
+
+	@Override
+	public long malloc(long size) {
+		return nje_malloc(size);
+	}
+
+	@Override
+	public long calloc(long num, long size) {
+		return nje_calloc(num, size);
+	}
+
+	@Override
+	public long realloc(long ptr, long size) {
+		return nje_realloc(ptr, size);
+	}
+
+	@Override
+	public void free(long ptr) {
+		nje_free(ptr);
+	}
+
+	@Override
+	public long aligned_alloc(long alignment, long size) {
+		return nje_aligned_alloc(alignment, size);
+	}
+
+	@Override
+	public void aligned_free(long ptr) {
+		nje_free(ptr);
+	}
+
+}""")
+		}
+	})
 }
 
 val je_malloc_message_cb = "je_malloc_message_cb".callback(

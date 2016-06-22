@@ -8,7 +8,7 @@ This script downloads such assets from S3.
 This script is included in /build.xml and depends on /build-definitions.xml
 -->
 <project name="assets" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
-	<target name="-update-assets" description="Updates the demo assets, if necessary">
+	<target name="-update-assets">
 		<uptodate property="assets-uptodate" targetfile="${test.resources}/demo/touch.txt">
 			<srcfiles dir="${config}/" includes="build-*.xml"/>
 		</uptodate>

@@ -238,7 +238,6 @@ int fons__tt_getGlyphKernAdvance(FONSttFontImpl *font, int glyph1, int glyph2)
 
 #else
 
-//#define STB_TRUETYPE_IMPLEMENTATION
 //static void* fons__tmpalloc(size_t size, void* up);
 //static void fons__tmpfree(void* ptr, void* up);
 //#define STBTT_malloc(x,u)    fons__tmpalloc(x,u)

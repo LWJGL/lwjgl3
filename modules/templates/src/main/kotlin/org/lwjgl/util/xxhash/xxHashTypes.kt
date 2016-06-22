@@ -18,6 +18,8 @@ fun config() {
 		dispersion and randomness qualities of hash functions.
 		"""
 	)
+
+	Generator.registerLibraryInit(XXHASH_PACKAGE, "LibXXHash", "xxhash", setupAllocator = true)
 }
 
 val unsigned_long_long = IntegerType("long long", PrimitiveMapping.LONG, unsigned = true)

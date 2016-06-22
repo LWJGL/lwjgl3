@@ -8,7 +8,7 @@
 #include <assert.h>
 #include <string.h>
 #include "nfd_common.h"
-#include "common_tools.h"
+#include "lwjgl_malloc.h"
 
 static char g_errorstr[NFD_MAX_STRLEN] = {0};
 

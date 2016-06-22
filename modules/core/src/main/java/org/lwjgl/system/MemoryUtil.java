@@ -15,6 +15,7 @@ import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.LazyInit.*;
 import static org.lwjgl.system.Pointer.*;
+import static org.lwjgl.system.dyncall.DynCall.*;
 
 /**
  * This class provides functionality for managing native memory.
@@ -78,16 +79,6 @@ public final class MemoryUtil {
 				? new DebugAllocator(ALLOCATOR_IMPL)
 				: ALLOCATOR_IMPL;
 
-			ALLOCATOR.config(
-				MemoryAccess.malloc(),
-				MemoryAccess.calloc(),
-				MemoryAccess.realloc(),
-				MemoryAccess.free(),
-
-				MemoryAccess.aligned_alloc(),
-				MemoryAccess.aligned_free()
-			);
-
 			apiLog("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
 		}
 	}
@@ -104,25 +95,18 @@ public final class MemoryUtil {
 	/** The interface implemented by the memory allocator used by the explicit memory management API ({@link #memAlloc}, {@link #memFree}, etc). */
 	public interface MemoryAllocator {
 
-		/**
-		 * The memory allocator may override the default explicit memory management functions used internally by LWJGL bindings.
-		 *
-		 * @param malloc        a pointer to the malloc function
-		 * @param calloc        a pointer to the calloc function
-		 * @param realloc       a pointer to the realloc function
-		 * @param free          a pointer to the free function
-		 * @param aligned_alloc a pointer to the aligned_alloc function
-		 * @param aligned_free  a pointer to the aligned_free function
-		 */
-		void config(
-			long malloc,
-			long calloc,
-			long realloc,
-			long free,
-
-			long aligned_alloc,
-			long aligned_free
-		);
+		/** Returns a pointer to the malloc function. */
+		long getMalloc();
+		/** Returns a pointer to the calloc function. */
+		long getCalloc();
+		/** Returns a pointer to the realloc function. */
+		long getRealloc();
+		/** Returns a pointer to the free function. */
+		long getFree();
+		/** Returns a pointer to the aligned_alloc function. */
+		long getAlignedAlloc();
+		/** Returns a pointer to the aligned_free function. */
+		long getAlignedFree();
 
 		/** Called by {@link MemoryUtil#memAlloc}. */
 		long malloc(long size);
@@ -153,6 +137,31 @@ public final class MemoryUtil {
 	 */
 	public static MemoryAllocator getAllocator() {
 		return ALLOCATOR_IMPL;
+	}
+
+	public static void setupAllocator(String libraryName) {
+		MemoryAllocator allocator = getAllocator();
+
+		long vm = dcNewCallVM(1024);
+		try ( SharedLibrary library = Library.loadNative(libraryName) ) {
+			long lwjgl_setup_malloc = library.getFunctionAddress("lwjgl_setup_malloc");
+
+			dcMode(vm, DC_CALL_C_DEFAULT);
+			{
+				dcReset(vm);
+
+				dcArgPointer(vm, allocator.getMalloc());
+				dcArgPointer(vm, allocator.getCalloc());
+				dcArgPointer(vm, allocator.getRealloc());
+				dcArgPointer(vm, allocator.getFree());
+				dcArgPointer(vm, allocator.getAlignedAlloc());
+				dcArgPointer(vm, allocator.getAlignedFree());
+
+				dcCallVoid(vm, lwjgl_setup_malloc);
+			}
+		} finally {
+			dcFree(vm);
+		}
 	}
 
 	// --- [ memAlloc ] ---

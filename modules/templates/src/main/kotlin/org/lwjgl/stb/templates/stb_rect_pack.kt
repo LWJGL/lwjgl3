@@ -7,10 +7,10 @@ package org.lwjgl.stb.templates
 import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
-val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix = "STBRP", prefixMethod = "stbrp_") {
+val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix = "STBRP", prefixMethod = "stbrp_", library = STB_LIBRARY) {
 	includeSTBAPI(
-		"""#define STB_RECT_PACK_IMPLEMENTATION
-#define STBRP_ASSERT
+		"""#define STBRP_ASSERT
+#define STB_RECT_PACK_IMPLEMENTATION
 #include "stb_rect_pack.h"""")
 
 	documentation =

@@ -128,7 +128,7 @@ private fun StringBuilder.appendParagraph(linePrefix: String, text: String, star
 	append("</p>")
 }
 
-internal fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
+fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
 	val clean = cleanup("$indentation * ")
 
 	return if ( allowSingleLine && clean.indexOf('\n') == -1 )

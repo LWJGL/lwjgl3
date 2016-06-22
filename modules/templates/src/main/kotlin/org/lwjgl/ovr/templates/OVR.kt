@@ -7,7 +7,7 @@ package org.lwjgl.ovr.templates
 import org.lwjgl.generator.*
 import org.lwjgl.ovr.*
 
-val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", prefixConstant = "ovr") {
+val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", prefixConstant = "ovr", library = OVR_LIBRARY) {
 	nativeDirective(
 """#ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4710))

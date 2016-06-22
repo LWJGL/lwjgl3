@@ -7,7 +7,7 @@ package org.lwjgl.ovr.templates
 import org.lwjgl.generator.*
 import org.lwjgl.ovr.*
 
-val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_", prefixConstant = "ovr") {
+val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_", prefixConstant = "ovr", library = OVR_LIBRARY) {
 	nativeImport("OVR_ErrorCode.h")
 
 	documentation = "LibOVR error code declarations."

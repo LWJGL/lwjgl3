@@ -5,8 +5,9 @@
 package org.lwjgl.util.simd.templates
 
 import org.lwjgl.generator.*
+import org.lwjgl.util.simd.*
 
-val SSE3 = "SSE3".nativeClass("org.lwjgl.util.simd", prefix = "_MM", prefixMethod = "_MM_") {
+val SSE3 = "SSE3".nativeClass("org.lwjgl.util.simd", prefix = "_MM", prefixMethod = "_MM_", library = SSE_LIBRARY) {
 	nativeImport(
 		"simd/intrinsics.h"
 	)

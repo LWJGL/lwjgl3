@@ -7,6 +7,7 @@ package org.lwjgl.nanovg
 import org.lwjgl.generator.*
 
 val NANOVG_PACKAGE = "org.lwjgl.nanovg"
+val NANOVG_LIBRARY = "LibNanoVG.initialize();"
 
 fun config() {
 	packageInfo(
@@ -16,6 +17,8 @@ fun config() {
 		lean API modeled after HTML5 canvas API. It is aimed to be a practical and fun toolset for building scalable user interfaces and visualizations.
 		"""
 	)
+
+	Generator.registerLibraryInit(NANOVG_PACKAGE, "LibNanoVG", "nanovg", setupAllocator = true)
 }
 
 fun GeneratorTargetNative.includeNanoVGAPI(directives: String) = nativeDirective(

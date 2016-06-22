@@ -7,14 +7,14 @@ package org.lwjgl.stb.templates
 import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
-val stb_image_resize = "STBImageResize".nativeClass(packageName = STB_PACKAGE, prefix = "STBIR", prefixMethod = "stbir_") {
-	initializeAllocator()
+val stb_image_resize = "STBImageResize".nativeClass(packageName = STB_PACKAGE, prefix = "STBIR", prefixMethod = "stbir_", library = STB_LIBRARY) {
 	includeSTBAPI(
-		"""#define STB_IMAGE_RESIZE_IMPLEMENTATION
-#define STB_IMAGE_RESIZE_STATIC
-#define STBIR_ASSERT(x)
+		"""#include "lwjgl_malloc.h"
 #define STBIR_MALLOC(size,c) lwjgl_malloc(size)
 #define STBIR_FREE(ptr,c)    lwjgl_free(ptr)
+#define STBIR_ASSERT(x)
+#define STB_IMAGE_RESIZE_IMPLEMENTATION
+#define STB_IMAGE_RESIZE_STATIC
 #include "stb_image_resize.h"""")
 
 	documentation =
