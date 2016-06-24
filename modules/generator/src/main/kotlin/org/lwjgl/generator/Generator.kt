@@ -32,8 +32,6 @@ import java.util.concurrent.atomic.AtomicInteger
 	- Target source (C)     -> modules/core/src/generated/c/opengl/org_lwjgl_opengl_ARBImaging.c
 */
 
-private val DUMMY_PACKAGE = "*"
-
 enum class Binding(val key: String, val packageName: String) {
 	EGL("binding.egl", "org.lwjgl.egl"),
 	GLFW("binding.glfw", "org.lwjgl.glfw"),
@@ -52,9 +50,7 @@ enum class Binding(val key: String, val packageName: String) {
 	SSE("binding.sse", "org.lwjgl.util.simd"),
 	STB("binding.stb", "org.lwjgl.stb"),
 	VULKAN("binding.vulkan", "org.lwjgl.vulkan"),
-	XXHASH("binding.xxhash", "org.lwjgl.util.xxhash"),
-
-	MACOSX_OBJC("binding.macosx.objc", DUMMY_PACKAGE);
+	XXHASH("binding.xxhash", "org.lwjgl.util.xxhash");
 
 	val enabled: Boolean
 		get() = System.getProperty(key, "false").toBoolean()
@@ -99,7 +95,7 @@ fun main(args: Array<String>) {
 			"org.lwjgl.util.simd",
 			"org.lwjgl.util.xxhash"
 		)
-		val bindingsModular = Binding.values().asSequence().filter { it.packageName !== DUMMY_PACKAGE }
+		val bindingsModular = Binding.values().asSequence()
 
 		try {
 			val errors = AtomicInteger()

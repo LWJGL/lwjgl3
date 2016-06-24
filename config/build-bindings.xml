@@ -31,8 +31,6 @@ This script is included in /config/build-definitions.xml.
 	<!-- Set the path to the Oculus SDK to enable. -->
 	<property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
 
-	<property name="binding.macosx.objc" value="true"/>
-
 	<!-- // ================================ // -->
 
 	<target name="bindings">
