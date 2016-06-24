@@ -5,8 +5,6 @@ License terms: http://lwjgl.org/license.php
 <project name="native-macosx" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="../build-definitions.xml"/>
 
-	<property name="LWJGL_LIBRARY" value="liblwjgl.dylib"/>
-
 	<!-- Ask Xcode for correct path to XCode tools -->
 	<!-- Will fail if XCode Command Line Tools are not installed on 10.7+ (Lion) -->
 	<exec executable="xcode-select" outputproperty="developer_path" errorproperty="xcode-error" failonerror="false" failifexecutionfails="false">
@@ -41,20 +39,19 @@ License terms: http://lwjgl.org/license.php
 	<find-sdkroot version="10.7"/>
 	<fail unless="sdkroot" message="Failed to find the MacOS X SDK."/>
 
-	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
-	<fileset id="link-libraries" dir="${lib}/macosx/${build.arch}/">
-		<include name="libdyn*.a"/>
-	</fileset>
-
 	<property name="macosx-version-min" value="10.7"/>
 
-	<property name="src.include.rel" value="../../../${src.include}"/>
-	<property name="src.native.rel" value="../../../${src.native}"/>
+	<property name="src.include.rel" value="../../../../${src.include}"/>
+	<property name="src.native.rel" value="../../../../${src.native}"/>
+
 	<macrodef name="compile">
-		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
-		<element name="arguments"/>
+		<attribute name="dest"/>
+		<attribute name="flags"/>
+		<attribute name="relative" default="true"/>
+		<element name="source" implicit="true"/>
 		<sequential>
-			<apply dir="${bin.native}" executable="${compiler}" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+			<mkdir dir="@{dest}"/>
+			<apply dir="@{dest}" executable="${compiler}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 				<arg line="-c -std=c11 -ObjC -O3 -flto -fPIC @{flags} -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
 
 				<arg value="-I${jni.headers}"/>
@@ -63,139 +60,179 @@ License terms: http://lwjgl.org/license.php
 				<arg value="-I${src.include.rel}/system"/>
 				<arg value="-I${src.include.rel}/system/macosx"/>
 
-				<arguments/>
+				<source/>
 
 				<regexpmapper from="(\w+)\.(c|m)" to="\1.o"/>
 			</apply>
 		</sequential>
 	</macrodef>
 
+	<macrodef name="build">
+		<attribute name="name"/>
+		<attribute name="dest"/>
+		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
+		<element name="source"/>
+		<element name="link" optional="true"/>
+		<sequential>
+			<compile dest="@{dest}" flags="@{flags}">
+				<source/>
+			</compile>
+
+			<local name="lib-uptodate"/>
+			<uptodate property="lib-uptodate" targetfile="${lib}/lib@{name}.dylib">
+				<srcfiles file="config/${platform}/build.xml"/>
+				<srcfiles dir="@{dest}" includes="**"/>
+			</uptodate>
+
+			<!-- Lazily update dependencies -->
+			<local name="update-dependencies"/>
+			<condition property="update-dependencies" value="true">
+				<not>
+					<or>
+						<isset property="dependencies-uptodate"/>
+						<isset property="lib-uptodate"/>
+						<istrue value="${build.offline}"/>
+					</or>
+				</not>
+			</condition>
+			<antcall target="-update-dependencies" if:set="update-dependencies"/>
+			<property name="dependencies-uptodate" value="true" if:set="update-dependencies"/>
+			
+			<apply executable="${compiler}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+				<srcfile/>
+				<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/lib@{name}.dylib -O3 -flto -fPIC'/>
+				<fileset dir="@{dest}" includes="*.o"/>
+				<link/>
+			</apply>
+
+			<apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
+				<arg value="-u"/>
+				<arg value="-r"/>
+				<filelist dir="${lib}" files="lib@{name}.dylib"/>
+			</apply>
+		</sequential>
+	</macrodef>
+
 	<target name="compile-native-platform">
 		<echo message="${sdkroot}" taskname="SDK Root"/>
+		<mkdir dir="${bin.native}/build"/>
 
-		<!-- COMPILE -->
-		<compile>
-			<arguments>
+		<!-- CORE -->
+		<build name="lwjgl" dest="${bin.native}/core">
+			<source>
 				<arg value="-I${src.include.rel}/system/dyncall"/>
-				<arg value="-I${src.include.rel}/system/jemalloc"/>
-				<arg value="-I${src.include.rel}/util"/>
-				<arg value="-I${src.include.rel}/util/xxhash"/>
-				<arg value="-I${src.native.rel}/util/xxhash"/> <!-- xxhash.c is included in the binding -->
+				<arg value="-I${src.include.rel}/system/jemalloc" if:true="${binding.jemalloc}"/>
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
+					<exclude name="${src.native}/system/lwjgl_malloc.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/dyncall/*.c"/>
-					<include name="${src.generated.native}/system/jemalloc/*.c"/>
+					<include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
+					<include name="${src.generated.native}/system/jemalloc/*.c" if:true="${binding.jemalloc}"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/macosx/*.c"/>
-					<include name="${src.generated.native}/util/simd/*.c"/>
-					<include name="${src.generated.native}/util/xxhash/*.c"/>
 				</fileset>
-			</arguments>
+			</source>
+			<link>
+				<arg line="-framework Foundation"/>
+				<fileset dir="${lib}/macosx/${build.arch}/">
+					<include name="libdyn*.a"/>
+				</fileset>
+			</link>
+		</build>
+
+		<!-- LMDB -->
+		<compile dest="${bin.native}/lmdb" flags="-Wno-format-extra-args" if:true="${binding.lmdb}">
+			<arg value="-I${src.include.rel}/util/lmdb"/>
+			<fileset dir="." includes="${src.include}/util/lmdb/*.c"/>
 		</compile>
-
-		<!-- Each binding is compiled separately -->
-
-		<compile if:true="${binding.jawt}">
-			<arguments>
-				<fileset dir="." includes="${src.generated.native}/system/jawt/*.c"/>
-			</arguments>
-		</compile>
-
-		<compile if:true="${binding.lmdb}">
-			<arguments>
+		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
+			<source>
 				<arg value="-I${src.include.rel}/util/lmdb"/>
 				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
-			</arguments>
-		</compile>
-		<compile flags="-Wno-format-extra-args" if:true="${binding.lmdb}">
-			<arguments>
-				<arg value="-I${src.include.rel}/util/lmdb"/>
-				<fileset dir="." includes="${src.include}/util/lmdb/*.c"/>
-			</arguments>
-		</compile>
+			</source>
+		</build>
 
-		<compile if:true="${binding.nanovg}">
-			<arguments>
+		<!-- NanoVG -->
+		<build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
+			<source>
 				<arg value="-I${src.include.rel}/nanovg"/>
 				<arg value="-I${src.include.rel}/stb"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
-			</arguments>
-		</compile>
+			</source>
+		</build>
 
-		<compile if:true="${binding.nfd}">
-			<arguments>
+		<!-- NativeFileDialog -->
+		<build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
+			<source>
 				<arg value="-I${src.include.rel}/util/nfd"/>
 				<arg value="-I${src.include.rel}/util/nfd/include"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.include}/util/nfd/nfd_common.c"/>
 				<fileset dir="." includes="${src.include}/util/nfd/nfd_cocoa.m"/>
 				<fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
-			</arguments>
-		</compile>
+			</source>
+			<link>
+				<arg line="-framework AppKit"/>
+			</link>
+		</build>
 
-		<compile if:true="${binding.nuklear}">
-			<arguments>
+		<!-- Nuklear -->
+		<build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
+			<source>
 				<arg value="-I${src.include.rel}/nuklear"/>
 				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
-			</arguments>
-		</compile>
+			</source>
+		</build>
 
-		<compile if:true="${binding.par}">
-			<arguments>
+		<!-- ParShapes -->
+		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
+			<source>
 				<arg value="-I${src.include.rel}/util/par"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
-			</arguments>
-		</compile>
+			</source>
+		</build>
 
-		<compile if:true="${binding.stb}">
-			<arguments>
-				<arg value="-isystem${src.include.rel}/stb"/>
+		<!-- SSE -->
+		<build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
+			<source>
+				<arg value="-I${src.include.rel}/util"/>
+				<fileset dir="." includes="${src.generated.native}/util/simd/*.c"/>
+			</source>
+		</build>
+
+		<!-- stb -->
+		<build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
+			<source>
+				<arg value="-I${src.include.rel}/stb"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
-			</arguments>
-		</compile>
+			</source>
+		</build>
 
-		<!-- LINK -->
-		<uptodate property="link-uptodate" targetfile="${lib}/${LWJGL_LIBRARY}">
-			<srcfiles file="config/${platform}/build.xml"/>
-			<srcfiles refid="link-objects"/>
-			<srcfiles refid="link-libraries"/>
-		</uptodate>
-
-		<antcall target="-link-if-necessary"/>
-	</target>
-
-	<target name="-link-if-necessary" unless="link-uptodate">
-		<antcall target="-link"/>
+		<!-- xxHash -->
+		<build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
+			<source>
+				<arg value="-I${src.include.rel}/system"/>
+				<arg value="-I${src.include.rel}/util/xxhash"/>
+				<arg value="-I${src.native.rel}/util/xxhash"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
+			</source>
+		</build>
 	</target>
 
 	<target name="-update-dependencies" unless="${build.offline}">
-		<mkdir dir="${lib}/macosx"/>
 		<mkdir dir="${lib}/macosx/x64"/>
 
 		<update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
 		<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
 		<update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
 
-		<update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}"/>
+		<update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}" if:true="${binding.jemalloc}"/>
 		<update-dependency name="glfw3" artifact="x64/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
-	</target>
-
-	<target name="-link" depends="-update-dependencies">
-		<apply executable="${compiler}" failonerror="true" parallel="true" taskname="Linker">
-			<srcfile/>
-			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/${LWJGL_LIBRARY} -O3 -flto -fPIC'/>
-			<arg line="-framework Foundation" unless:true="${binding.nfd}"/>
-			<arg line="-framework AppKit" if:true="${binding.nfd}"/>
-
-			<fileset refid="link-objects"/>
-			<fileset refid="link-libraries"/>
-		</apply>
-
-		<apply executable="strip" failonerror="true" taskname="Symbol strip">
-			<arg value="-u"/>
-			<arg value="-r"/>
-			<filelist dir="${lib}" files="${LWJGL_LIBRARY}"/>
-		</apply>
 	</target>
 </project>

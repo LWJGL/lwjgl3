@@ -158,7 +158,6 @@ License terms: http://lwjgl.org/license.php
 		<build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
 			<source>
 				<arg value="/I${src.include}\nuklear"/>
-				<arg value="/I${src.include}\stb"/>
 				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
 			</source>
 		</build>
