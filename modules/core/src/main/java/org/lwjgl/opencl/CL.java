@@ -53,7 +53,7 @@ public final class CL {
 				CL = Library.loadNative(Configuration.OPENCL_LIBRARY_NAME, "OpenCL");
 				break;
 			case MACOSX:
-				CL = Library.loadNative(Configuration.OPENCL_LIBRARY_NAME, "OpenCL", "/System/Library/Frameworks/OpenCL.framework");
+				CL = Library.loadNative(Configuration.OPENCL_LIBRARY_NAME, "/System/Library/Frameworks/OpenCL.framework");
 				break;
 			default:
 				throw new IllegalStateException();
