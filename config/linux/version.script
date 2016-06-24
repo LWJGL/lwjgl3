@@ -4,6 +4,7 @@
 		Java_*;
 		JNI_OnLoad;
 		JNI_OnUnload;
+		lwjgl_*;
 
 	# Hide everything else
 	local: *;

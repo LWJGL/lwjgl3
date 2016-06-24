@@ -5,7 +5,7 @@ License terms: http://lwjgl.org/license.php
 <project name="native-linux" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="../build-definitions.xml"/>
 
-	<condition property="LWJGL_LIBRARY" value="liblwjgl.so" else="liblwjgl32.so">
+	<condition property="LIB_POSTFIX" value="" else="32">
 		<equals arg1="${build.arch}" arg2="x64"/>
 	</condition>
 
@@ -13,18 +13,17 @@ License terms: http://lwjgl.org/license.php
 		<equals arg1="${build.arch}" arg2="x64"/>
 	</condition>
 
-	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
-	<fileset id="link-libraries" dir="${lib}/linux/${build.arch}/">
-		<include name="libdyn*.a"/>
-	</fileset>
+	<property name="src.include.rel" value="../../../../${src.include}"/>
+	<property name="src.native.rel" value="../../../../${src.native}"/>
 
-	<property name="src.include.rel" value="../../../${src.include}"/>
-	<property name="src.native.rel" value="../../../${src.native}"/>
 	<macrodef name="compile">
-		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
-		<element name="arguments"/>
+		<attribute name="dest"/>
+		<attribute name="flags"/>
+		<attribute name="relative" default="true"/>
+		<element name="source" implicit="true"/>
 		<sequential>
-			<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+			<mkdir dir="@{dest}"/>
+			<apply dir="@{dest}" executable="gcc" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 				<arg line="-c -std=c11"/>
 				<arg line="-m64" if:true="${build.arch.x64}"/>
 				<arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
@@ -36,22 +35,189 @@ License terms: http://lwjgl.org/license.php
 				<arg value="-I${src.include.rel}/system"/>
 				<arg value="-I${src.include.rel}/system/linux"/>
 
-				<arguments/>
+				<source/>
 
 				<regexpmapper from="(\w+)\.c" to="\1.o"/>
 			</apply>
 		</sequential>
 	</macrodef>
 
+	<macrodef name="build">
+		<attribute name="name"/>
+		<attribute name="dest"/>
+		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
+		<element name="source"/>
+		<element name="link" optional="true"/>
+		<sequential>
+			<compile dest="@{dest}" flags="@{flags}">
+				<source/>
+			</compile>
+
+			<local name="lib-uptodate"/>
+			<uptodate property="lib-uptodate" targetfile="${lib}/lib@{name}${LIB_POSTFIX}.so">
+				<srcfiles file="config/${platform}/build.xml"/>
+				<srcfiles dir="@{dest}" includes="**"/>
+			</uptodate>
+
+			<!-- Lazily update dependencies -->
+			<local name="update-dependencies"/>
+			<condition property="update-dependencies" value="true">
+				<not>
+					<or>
+						<isset property="dependencies-uptodate"/>
+						<isset property="lib-uptodate"/>
+						<istrue value="${build.offline}"/>
+					</or>
+				</not>
+			</condition>
+			<antcall target="-update-dependencies" if:set="update-dependencies"/>
+			<property name="dependencies-uptodate" value="true" if:set="update-dependencies"/>
+
+			<local name="version.script"/>
+			<property name="version.script" location="config/linux/version.script"/>
+
+			<apply executable="gcc" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+				<srcfile/>
+				<arg value="-shared"/>
+				<arg value="-m64" if:true="${build.arch.x64}"/>
+				<arg value="-m32" unless:true="${build.arch.x64}"/>
+
+				<arg line="-z noexecstack"/>
+				<arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib@{name}${LIB_POSTFIX}.so"/>
+
+				<arg line="-Xlinker --version-script -Xlinker ${version.script}"/>
+				<fileset dir="@{dest}" includes="*.o"/>
+				<link/>
+			</apply>
+
+			<apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
+				<filelist dir="${lib}" files="lib@{name}${LIB_POSTFIX}.so"/>
+			</apply>
+		</sequential>
+	</macrodef>
+	
 	<target name="compile-native-platform">
-		<!-- COMPILE -->
+		<!-- CORE -->
+		<build name="lwjgl" dest="${bin.native}/core">
+			<source>
+				<arg value="-I${src.include.rel}/system/dyncall"/>
+				<arg value="-I${src.include.rel}/system/jemalloc" if:true="${binding.jemalloc}"/>
+				<fileset dir=".">
+					<include name="${src.native}/system/*.c"/>
+					<exclude name="${src.native}/system/lwjgl_malloc.c"/>
+					<include name="${src.generated.native}/system/*.c"/>
+					<include name="${src.generated.native}/system/dyncall/*.c"/>
+					<include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
+					<include name="${src.generated.native}/system/jemalloc/*.c" if:true="${binding.jemalloc}"/>
+					<include name="${src.generated.native}/system/libc/*.c"/>
+					<include name="${src.generated.native}/system/linux/*.c"/>
+				</fileset>
+			</source>
+			<link>
+				<fileset dir="${lib}/linux/${build.arch}/">
+					<include name="libdyn*.a"/>
+				</fileset>
+			</link>
+		</build>
+
+		<!-- LMDB -->
+		<compile dest="${bin.native}/lmdb" flags="-Wno-format-extra-args" if:true="${binding.lmdb}">
+			<arg value="-I${src.include.rel}/util/lmdb"/>
+			<fileset dir="." includes="${src.include}/util/lmdb/*.c"/>
+		</compile>
+		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
+			<source>
+				<arg value="-I${src.include.rel}/util/lmdb"/>
+				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
+			</source>
+		</build>
+
+		<!-- NanoVG -->
+		<build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
+			<source>
+				<arg value="-I${src.include.rel}/nanovg"/>
+				<arg value="-isystem${src.include.rel}/stb"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
+			</source>
+		</build>
+
+		<!-- NativeFileDialog -->
+		<local name="gtk3"/>
+		<exec outputproperty="gtk3" executable="pkg-config" failonerror="true" taskname="gtk-3.0" if:true="${binding.nfd}">
+			<arg line="--cflags gtk+-3.0"/>
+		</exec>
+
+		<build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
+			<source>
+				<arg line="${gtk3}"/>
+				<arg value="-I${src.include.rel}/util/nfd"/>
+				<arg value="-I${src.include.rel}/util/nfd/include"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.include}/util/nfd/nfd_common.c"/>
+				<fileset dir="." includes="${src.include}/util/nfd/nfd_gtk.c"/>
+				<fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
+			</source>
+			<link>
+				<arg value="-lgtk-3"/>
+			</link>
+		</build>
+
+		<!-- Nuklear -->
+		<build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
+			<source>
+				<arg value="-I${src.include.rel}/nuklear"/>
+				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
+			</source>
+		</build>
+
+		<!-- ParShapes -->
+		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
+			<source>
+				<arg value="-I${src.include.rel}/util/par"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
+			</source>
+		</build>
+
+		<!-- SSE -->
+		<build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
+			<source>
+				<arg value="-msse3"/>
+				<arg value="-I${src.include.rel}/util"/>
+				<fileset dir="." includes="${src.generated.native}/util/simd/*.c"/>
+			</source>
+		</build>
+
+		<!-- stb -->
+		<build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
+			<source>
+				<arg value="-isystem${src.include.rel}/stb"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
+			</source>
+		</build>
+
+		<!-- xxHash -->
+		<build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
+			<source>
+				<arg value="-I${src.include.rel}/system"/>
+				<arg value="-I${src.include.rel}/util/xxhash"/>
+				<arg value="-I${src.native.rel}/util/xxhash"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
+			</source>
+		</build>
+	</target>	
+	<!--
+	<target name="compile-native-platform">
 		<compile>
 			<arguments>
 				<arg value="-I${src.include.rel}/system/dyncall"/>
 				<arg value="-I${src.include.rel}/system/jemalloc"/>
 				<arg value="-I${src.include.rel}/util"/>
 				<arg value="-I${src.include.rel}/util/xxhash"/>
-				<arg value="-I${src.native.rel}/util/xxhash"/> <!-- xxhash.c is included in the binding -->
+				<arg value="-I${src.native.rel}/util/xxhash"/> 
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
@@ -72,8 +238,6 @@ License terms: http://lwjgl.org/license.php
 				</fileset>
 			</arguments>
 		</compile>
-
-		<!-- Each binding is compiled separately -->
 
 		<compile if:true="${binding.jawt}">
 			<arguments>
@@ -104,7 +268,7 @@ License terms: http://lwjgl.org/license.php
 
 		<local name="gtk3"/>
 		<exec outputproperty="gtk3" executable="pkg-config" failonerror="true" taskname="gtk-3.0" if:true="${binding.nfd}">
-			<arg line="--cflags gtk+-3.0"/>
+			<arg line="cflags gtk+-3.0"/>
 		</exec>
 
 		<compile if:true="${binding.nfd}">
@@ -138,21 +302,8 @@ License terms: http://lwjgl.org/license.php
 				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
 			</arguments>
 		</compile>
-
-
-		<!-- LINK -->
-		<uptodate property="link-uptodate" targetfile="${lib}/${LWJGL_LIBRARY}">
-			<srcfiles file="config/${platform}/build.xml"/>
-			<srcfiles refid="link-objects"/>
-			<srcfiles refid="link-libraries"/>
-		</uptodate>
-
-		<antcall target="-link-if-necessary"/>
 	</target>
-
-	<target name="-link-if-necessary" unless="link-uptodate">
-		<antcall target="-link"/>
-	</target>
+-->
 
 	<target name="-update-dependencies" unless="${build.offline}">
 		<mkdir dir="${lib}/linux"/>
@@ -162,47 +313,8 @@ License terms: http://lwjgl.org/license.php
 		<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
 		<update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
 
-		<update-dependency name="jemalloc" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.openal}"/>
+		<update-dependency name="jemalloc" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>
 		<update-dependency name="glfw3" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
-	</target>
-
-	<target name="-link" depends="-update-dependencies">
-		<local name="version.script"/>
-		<property name="version.script" location="config/linux/version.script"/>
-
-		<local name="arch.postfix"/>
-		<property name="arch.postfix" value="64" if:true="${build.arch.x64}"/>
-		<property name="arch.postfix" value="" unless:true="${build.arch.x64}"/>
-
-		<apply executable="gcc" failonerror="true" parallel="true" taskname="Linker">
-			<srcfile/>
-			<arg value="-shared"/>
-			<arg value="-m64" if:true="${build.arch.x64}"/>
-			<arg value="-m32" unless:true="${build.arch.x64}"/>
-
-			<arg line="-z noexecstack"/>
-			<arg line="-O3 -flto -fPIC -pthread -o ${lib}/${LWJGL_LIBRARY}"/>
-
-			<arg line="-L/usr/X11R6/lib${arch.postfix} -L/usr/X11/lib${arch.postfix}"/>
-			<arg value="-lm"/>
-			<arg value="-lrt"/>
-			<arg value="-lpthread"/>
-			<arg value="-lgtk-3" if:true="${binding.nfd}"/>
-
-			<arg line="-Xlinker --version-script -Xlinker ${version.script}"/>
-
-			<fileset refid="link-objects"/>
-			<fileset refid="link-libraries"/>
-		</apply>
-
-		<apply executable="strip" failonerror="true" taskname="Symbol strip">
-			<filelist dir="${lib}" files="${LWJGL_LIBRARY}"/>
-		</apply>
-
-		<apply executable="${org.lwjgl.upx}/upx" failonerror="true" taskname="UPX" if:set="org.lwjgl.upx">
-			<arg value="--best"/>
-			<filelist dir="${lib}" files="${LWJGL_LIBRARY}"/>
-		</apply>
 	</target>
 </project>
