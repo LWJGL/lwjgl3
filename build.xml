@@ -484,7 +484,7 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<!-- Includes all modules for javadoc.lwjgl.org -->
-	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="-init-compile,-build-version">
+	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate,-init-compile,-build-version">
 		<lwjgl.javac destdir="${bin.generator}" taskname="Compile doclets">
 			<src path="${src.generator}/java"/>
 			<include name="org/lwjgl/system/**"/>
