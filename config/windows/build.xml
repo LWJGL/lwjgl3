@@ -220,8 +220,8 @@ License terms: http://lwjgl.org/license.php
 		<update-dependency name="dyncallback (x86)" artifact="x86/dyncallback_s.lib"/>
 		<update-dependency name="dynload (x86)" artifact="x86/dynload_s.lib"/>
 
-		<update-dependency name="jemalloc (x86)" artifact="x86/jemalloc.dll" dest="${lib}/jemalloc32.dll" if:true="${binding.jemalloc}"/>
-		<update-dependency name="glfw3 (x86)" artifact="x86/glfw.dll" dest="${lib}/glfw32.dll" if:true="${binding.glfw}"/>
+		<update-dependency name="jemalloc (x86)" artifact="x86/jemalloc32.dll" dest="${lib}" if:true="${binding.jemalloc}"/>
+		<update-dependency name="glfw3 (x86)" artifact="x86/glfw32.dll" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" dest="${lib}" if:true="${binding.openal}"/>
 	</target>
 
@@ -234,6 +234,6 @@ License terms: http://lwjgl.org/license.php
 
 		<update-dependency name="jemalloc (x64)" artifact="x64/jemalloc.dll" dest="${lib}" if:true="${binding.jemalloc}"/>
 		<update-dependency name="glfw3 (x64)" artifact="x64/glfw.dll" dest="${lib}" if:true="${binding.glfw}"/>
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll" dest="${lib}/OpenAL.dll" if:true="${binding.openal}"/>
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL.dll" dest="${lib}" if:true="${binding.openal}"/>
 	</target>
 </project>
