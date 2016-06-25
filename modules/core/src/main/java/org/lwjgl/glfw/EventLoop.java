@@ -5,6 +5,7 @@
 package org.lwjgl.glfw;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.macosx.ObjCRuntime;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -29,7 +30,7 @@ final class EventLoop {
 		static {
 			if ( Platform.get() == Platform.MACOSX && !isMainThread() ) {
 				// The only way to avoid a crash is if the shared application (NSApp) has been created by something else
-				SharedLibrary AppKit = Library.loadNative("/System/Library/Frameworks/AppKit.framework");
+				SharedLibrary AppKit = MacOSXLibrary.getWithIdentifier("com.apple.AppKit");
 				try {
 					long NSApp = AppKit.getFunctionAddress("NSApp"); // The NSApp global variable is an exported symbol
 					if ( memGetAddress(NSApp) == NULL )

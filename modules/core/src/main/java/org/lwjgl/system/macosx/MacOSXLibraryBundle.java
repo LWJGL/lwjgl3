@@ -14,14 +14,30 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.CoreFoundation.*;
 
-/** Implements a {@link SharedLibrary} on the MacOS X using CFBundleCreate. */
+/** Implements a {@link SharedLibrary} on the MacOS X using {@code CFBundle}. */
 public class MacOSXLibraryBundle extends MacOSXLibrary {
 
-	public MacOSXLibraryBundle(String name) {
-		super(createBundle(name), name);
+	public MacOSXLibraryBundle(String name, long bundleRef) {
+		super(bundleRef, name);
 	}
 
-	private static long createBundle(String path) {
+	public static MacOSXLibraryBundle getWithIdentifier(String bundleID) {
+		long filePath = NULL;
+		try ( MemoryStack stack = stackPush() ) {
+			filePath = CString2CFString(stack.ASCII(bundleID), kCFStringEncodingASCII);
+
+			long bundleRef = CFBundleGetBundleWithIdentifier(filePath);
+			if ( bundleRef == NULL )
+				throw new UnsatisfiedLinkError("Failed to retrieve bundle with identifier: " + bundleID);
+
+			CFRetain(bundleRef);
+			return new MacOSXLibraryBundle(bundleID, bundleRef);
+		} finally {
+			if ( filePath != NULL ) CFRelease(filePath);
+		}
+	}
+
+	public static MacOSXLibraryBundle create(String path) {
 		long filePath = NULL;
 		long url = NULL;
 		try ( MemoryStack stack = stackPush() ) {
@@ -30,9 +46,9 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 
 			long bundleRef = CFBundleCreate(NULL, url);
 			if ( bundleRef == NULL )
-				throw new UnsatisfiedLinkError("Failed to dynamically load bundle: " + path);
+				throw new UnsatisfiedLinkError("Failed to create bundle: " + path);
 
-			return bundleRef;
+			return new MacOSXLibraryBundle(path, bundleRef);
 		} finally {
 			if ( url != NULL ) CFRelease(url);
 			if ( filePath != NULL ) CFRelease(filePath);

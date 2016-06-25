@@ -5,6 +5,7 @@
 package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.*;
 
 import java.lang.reflect.Field;
@@ -96,7 +97,9 @@ public final class GL {
 				GL = Library.loadNative(Configuration.OPENGL_LIBRARY_NAME, "libGL.so.1", "libGL.so");
 				break;
 			case MACOSX:
-				GL = Library.loadNative(Configuration.OPENGL_LIBRARY_NAME, "/System/Library/Frameworks/OpenGL.framework");
+				GL = Configuration.OPENGL_LIBRARY_NAME.get() != null
+					? Library.loadNative(Configuration.OPENGL_LIBRARY_NAME)
+					: MacOSXLibrary.getWithIdentifier("com.apple.opengl");
 				break;
 			case WINDOWS:
 				GL = Library.loadNative(Configuration.OPENGL_LIBRARY_NAME, "opengl32");

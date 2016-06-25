@@ -6,6 +6,7 @@ package org.lwjgl.opencl;
 
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.*;
+import org.lwjgl.system.macosx.MacOSXLibrary;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -53,7 +54,9 @@ public final class CL {
 				CL = Library.loadNative(Configuration.OPENCL_LIBRARY_NAME, "OpenCL");
 				break;
 			case MACOSX:
-				CL = Library.loadNative(Configuration.OPENCL_LIBRARY_NAME, "/System/Library/Frameworks/OpenCL.framework");
+				CL = Configuration.OPENCL_LIBRARY_NAME.get() != null
+					? Library.loadNative(Configuration.OPENCL_LIBRARY_NAME)
+					: MacOSXLibrary.getWithIdentifier("com.apple.opencl");
 				break;
 			default:
 				throw new IllegalStateException();

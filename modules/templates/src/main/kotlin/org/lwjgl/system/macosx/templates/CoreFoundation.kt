@@ -93,6 +93,13 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		CFURLRef.IN("bundleURL", "the location of the bundle for which to create a {@code CFBundle} object")
 	)
 
+	CFBundleRef(
+		"CFBundleGetBundleWithIdentifier",
+		"Locates a bundle given its program-defined identifier.",
+
+		CFStringRef.IN("bundleID", "the identifier of the bundle to locate. Note that identifier names are case-sensitive.")
+	)
+
 	voidptr(
 		"CFBundleGetFunctionPointerForName",
 		"Returns a pointer to a function in a bundle’s executable code using the function name as the search key.",

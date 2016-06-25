@@ -115,7 +115,6 @@ License terms: http://lwjgl.org/license.php
 
 	<target name="compile-native-platform">
 		<echo message="${sdkroot}" taskname="SDK Root"/>
-		<mkdir dir="${bin.native}/build"/>
 
 		<!-- CORE -->
 		<build name="lwjgl" dest="${bin.native}/core">
@@ -134,7 +133,7 @@ License terms: http://lwjgl.org/license.php
 				</fileset>
 			</source>
 			<link>
-				<arg line="-framework Foundation"/>
+				<arg line="-framework CoreFoundation"/>
 				<fileset dir="${lib}/macosx/${build.arch}/">
 					<include name="libdyn*.a"/>
 				</fileset>
