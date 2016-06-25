@@ -558,17 +558,16 @@ License terms: http://lwjgl.org/license.php
 			</condition>
 		</fail>
 
-		<local name="type"/>
-		<condition property="type" value="dll">
-			<isset property="platform.windows"/>
-		</condition>
-		<condition property="type" value="dylib" else="so">
-			<isset property="platform.macosx"/>
+		<local name="libraries"/>
+		<property name="libraries" value="liblwjgl*.so" if:set="platform.linux"/>
+		<property name="libraries" value="liblwjgl*.dylib" if:set="platform.macosx"/>
+		<condition property="libraries" value="lwjgl*.dll" else="lwjgl*32.dll" if:set="platform.windows">
+			<equals arg1="${build.arch}" arg2="x64"/>
 		</condition>
 
-		<local name="postfix"/>
-		<condition property="postfix" value="32">
-			<not><equals arg1="${build.arch}" arg2="x64"/></not>
+		<local name="exclude_libraries"/>
+		<condition property="exclude_libraries" value="*32.dll" if:set="platform.windows">
+			<equals arg1="${build.arch}" arg2="x64"/>
 		</condition>
 
 		<apply executable="aws" failonerror="true" relative="true" taskname="S3 upload">
@@ -581,9 +580,8 @@ License terms: http://lwjgl.org/license.php
 			<arg line='--acl public-read --storage-class REDUCED_REDUNDANCY --cache-control "public, must-revalidate, proxy-revalidate, max-age=0"'/>
 
 			<fileset dir=".">
-				<include name="libs/lwjgl*32.${type}" if:set="postfix"/>
-				<exclude name="libs/lwjgl*32.${type}" unless:set="postfix"/>
-				<include name="libs/lwjgl*.${type}" unless:set="postfix"/>
+				<include name="libs/${libraries}"/>
+				<exclude name="libs/${exclude_libraries}" if:set="exclude_libraries"/>
 			</fileset>
 		</apply>
 	</target>
