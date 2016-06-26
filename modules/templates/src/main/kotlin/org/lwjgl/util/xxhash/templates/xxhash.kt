@@ -22,7 +22,7 @@ val xxhash = "XXHash".nativeClass(XXHASH_PACKAGE, prefix = "XXH", prefixMethod =
 #endif
 #define XXH_PRIVATE_API
 #include "lwjgl_malloc.h"
-#include "xxhash.c"
+#include "xxhash.h"
 ENABLE_WARNINGS()""")
 
 	documentation =
@@ -35,13 +35,13 @@ ENABLE_WARNINGS()""")
 	EnumConstant(
 		"Error codes.",
 
-	    "OK".enum,
-	    "ERROR".enum
+		"OK".enum,
+		"ERROR".enum
 	)
 
 	val major = 0
 	val minor = 6
-	val patch = 0
+	val patch = 1
 
 	IntConstant("The major version number.", "VERSION_MAJOR".."$major")
 	IntConstant("The minor version number.", "VERSION_MINOR".."$minor")
@@ -71,7 +71,7 @@ ENABLE_WARNINGS()""")
 		"""
 		64-bit version of #32().
 
-		This function runs faster on 64-bits systems, but slower on 32-bits systems.
+		This function runs 2x faster on 64-bits systems, but slower on 32-bits systems.
 		""",
 
 		XXH32["input"],
@@ -120,18 +120,19 @@ ENABLE_WARNINGS()""")
 	XXH_errorcode(
 		"32_update",
 		"""
-		Calculates the xxHash of an input provided in multiple segments, as opposed to provided as a single block.
+		These functions generate the xxHash of an input provided in multiple segments. Note that, for small input, they are slower than single-call functions,
+		due to state management. For small input, prefer #32().
 
-		XXH state must first be allocated.
+		XXH state must first be allocated, using #32_createState().
 
 		Start a new hash by initializing state with a seed, using #32_reset().
 
-		Then, feed the hash state by calling #32_update() as many times as necessary. Obviously, input must be valid, hence allocated and read accessible. The
-		function returns an error code, with 0 meaning OK, and any other value meaning there is an error.
+		Then, feed the hash state by calling #32_update() as many times as necessary. Obviously, input must be allocated and read accessible. The function
+		returns an error code, with 0 meaning OK, and any other value meaning there is an error.
 
 		Finally, a hash value can be produced anytime, by using #32_digest(). This function returns the 32-bits hash as an int.
 
-		It's still possible to continue inserting input into the hash state after a digest, and later on generate some new hashes, by calling again
+		It's still possible to continue inserting input into the hash state after a digest, and generate some new hashes later on, by calling again
 		#32_digest().
 
 		When done, free XXH state space.
@@ -171,6 +172,24 @@ ENABLE_WARNINGS()""")
 		"64-bit version of #32_digest().",
 
 		const..XXH64_state_t_p.IN("statePtr", "the {@code XXH64_state_t} to use")
+	)
+
+	// Utils
+
+	void(
+		"32_copyState",
+		"",
+
+		XXH32_state_t_p.OUT("dst_state", ""),
+		const..XXH32_state_t_p.IN("src_state", "")
+	)
+
+	void(
+		"64_copyState",
+		"",
+
+		XXH64_state_t_p.OUT("dst_state", ""),
+		const..XXH64_state_t_p.IN("src_state", "")
 	)
 
 	// Canonical representation

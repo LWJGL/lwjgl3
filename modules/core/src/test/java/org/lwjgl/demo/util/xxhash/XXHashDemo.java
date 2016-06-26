@@ -4,6 +4,9 @@
  */
 package org.lwjgl.demo.util.xxhash;
 
+import org.lwjgl.system.MemoryStack;
+import org.lwjgl.util.xxhash.XXH64State;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -11,6 +14,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Random;
 
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.xxhash.XXHash.*;
 import static org.testng.Assert.*;
@@ -40,31 +44,48 @@ public final class XXHashDemo {
 
 		// streaming hash with advanced functions
 		String resource = "lwjgl32.png";
-		try (InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource)) {
-			// init
-			long state = XXH64_createState();
-			XXH64_reset(state, SEED);
-			try (ReadableByteChannel rbc = Channels.newChannel(stream)) {
-				while ( true ) {
-					buffer.clear();
-					int bytes = rbc.read(buffer);
-					if ( bytes == -1 )
-						break;
-
-					// stream update
-					buffer.flip();
-					XXH64_update(state, buffer);
-				}
-				// digest
-				hash64 = XXH64_digest(state);
-				System.out.format("streaming 64-bit hash: 0x%X (%s)\n", hash64, resource);
+		try {
+			// Allocate and free using the API
+			XXH64State state = XXH64_createState();
+			try {
+				hash64 = streamingHash(buffer, resource, state, SEED);
+				System.out.format("streaming 64-bit hash: 0x%X (%s, malloc)\n", hash64, resource);
 			} finally {
 				XXH64_freeState(state);
+			}
+
+			// Using stack allocation
+			try ( MemoryStack stack = stackPush() ) {
+				state = XXH64State.mallocStack(stack);
+				hash64 = streamingHash(buffer, resource, state, SEED);
+				System.out.format("streaming 64-bit hash: 0x%X (%s, stack)\n", hash64, resource);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			memFree(buffer);
+		}
+	}
+
+	private static long streamingHash(ByteBuffer buffer, String resource, XXH64State state, int SEED) throws IOException {
+		// init
+		XXH64_reset(state, SEED);
+		try (
+			InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
+			ReadableByteChannel rbc = Channels.newChannel(stream)
+		) {
+			while ( true ) {
+				buffer.clear();
+				int bytes = rbc.read(buffer);
+				if ( bytes == -1 )
+					break;
+
+				// stream update
+				buffer.flip();
+				XXH64_update(state, buffer);
+			}
+			// digest
+			return XXH64_digest(state);
 		}
 	}
 
