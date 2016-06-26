@@ -9,7 +9,7 @@ This build includes the following changes:
 **BINDINGS**
 
 - Added support for Java array parameters and HotSpot Critical Natives. (#175)
-- Added [Vulkanl](https://www.khronos.org/vulkan/) bindings. (#50)
+- Added [Vulkan](https://www.khronos.org/vulkan/) bindings. (#50)
 - Added [NanoVG](https://github.com/memononen/nanovg) bindings. (#99)
 - Added [NativeFileDialog](https://github.com/mlabbe/nativefiledialog) bindings.
 - Added [par_shapes.h](http://github.prideout.net/shapes) bindings.
