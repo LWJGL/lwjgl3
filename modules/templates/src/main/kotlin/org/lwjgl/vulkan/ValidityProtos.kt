@@ -2776,11 +2776,7 @@ val vkGetDeviceProcAddr =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
-			"{@code pName} $must be a null-terminated string",
-			"""
-			{@code pName} $must be the name of a supported command that has a first parameter of type {@code VkDevice}, {@code VkQueue} or
-			{@code VkCommandBuffer}, either in the core API or an enabled extension
-			"""
+			"{@code pName} $must be a null-terminated string"
 		)}"""
 
 val vkGetDeviceQueue =
@@ -2904,8 +2900,8 @@ val vkGetInstanceProcAddr =
 			#CreateInstance()
 			""",
 			"""
-			If {@code instance} is not $NULL, {@code pName} $must be the name of a core command or a command from an enabled extension, other than:
-			#EnumerateInstanceExtensionProperties(), #EnumerateInstanceLayerProperties() or #CreateInstance()
+			If {@code instance} is not $NULL, {@code pName} $mustnot be #EnumerateInstanceExtensionProperties(), #EnumerateInstanceLayerProperties() or
+			#CreateInstance()
 			"""
 		)}"""
 

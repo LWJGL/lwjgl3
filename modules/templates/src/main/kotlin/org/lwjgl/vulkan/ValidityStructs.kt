@@ -1911,12 +1911,21 @@ val VkSpecializationInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"""
-			If {@code mapEntryCount} is not 0, {@code pMapEntries} $must be a pointer to an array of {@code mapEntryCount} ##VkSpecializationMapEntry
+			If {@code mapEntryCount} is not 0, {@code pMapEntries} $must be a pointer to an array of {@code mapEntryCount} valid ##VkSpecializationMapEntry
 			structures
 			""",
 			"If {@code dataSize} is not 0, {@code pData} $must be a pointer to an array of {@code dataSize} bytes",
 			"The {@code offset} member of any given element of {@code pMapEntries} $must be less than {@code dataSize}",
 			"For any given element of {@code pMapEntries}, {@code size} $must be less than or equal to {@code dataSize} minus {@code offset}"
+		)}"""
+
+val VkSpecializationMapEntry =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"""
+			For a {@code constantID} specialization constant declared in a shader, {@code size} $must match the byte size of the {@code constantID}. If the
+			specialization constant is of type boolean, {@code size} $must be the byte size of VkBool32
+			"""
 		)}"""
 
 val VkStencilOpState =

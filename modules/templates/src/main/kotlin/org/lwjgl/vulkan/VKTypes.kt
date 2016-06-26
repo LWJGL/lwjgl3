@@ -1141,9 +1141,15 @@ val VkSubmitInfo_p = struct_p(VULKAN_PACKAGE, "VkSubmitInfo") {
 		"waitSemaphoreCount",
 		"the number of semaphores upon which to wait before executing the command buffers for the batch"
 	)
-	VkSemaphore.const_p.member("pWaitSemaphores", "a pointer to an array of semaphores upon which to wait before executing the command buffers in the batch")
+	VkSemaphore.const_p.member(
+		"pWaitSemaphores",
+		"""
+		a pointer to an array of semaphores upon which to wait before the command buffers for this batch begin execution. If semaphores to wait on are
+		provided, they define a semaphore wait operation.
+		"""
+	)
 	VkPipelineStageFlags.const_p.member("pWaitDstStageMask", "a pointer to an array of pipeline stages at which each corresponding semaphore wait will occur")
-	AutoSize("pCommandBuffers")..uint32_t.member("commandBufferCount", "contains the number of command buffers to execute in the batch")
+	AutoSize("pCommandBuffers")..uint32_t.member("commandBufferCount", "the number of command buffers to execute in the batch")
 	VkCommandBuffer.const_p.member("pCommandBuffers", "a pointer to an array of command buffers to execute in the batch")
 	AutoSize("pSignalSemaphores", optional = true)..uint32_t.member(
 		"signalSemaphoreCount",
@@ -1393,22 +1399,22 @@ val VkBindSparseInfo_p = struct_p(VULKAN_PACKAGE, "VkBindSparseInfo") {
 	)
 	VkSemaphore.const_p.member(
 		"pWaitSemaphores",
-		"a pointer to an array of semaphores upon which to wait before executing the sparse binding operations in the batch"
+		"""
+		a pointer to an array of semaphores upon which to wait on before the sparse binding operations for this batch begin execution. If semaphores to wait on
+		are provided, they define a semaphore wait operation.
+		"""
 	)
-	AutoSize("pBufferBinds", optional = true)..uint32_t.member("bufferBindCount", "the number of sparse buffer bindings to perform")
-	VkSparseBufferMemoryBindInfo.const_p.buffer(
-		"pBufferBinds",
-		"an array of ##VkSparseBufferMemoryBindInfo structures, indicating sparse buffer bindings to perform"
-	)
+	AutoSize("pBufferBinds", optional = true)..uint32_t.member("bufferBindCount", "the number of sparse buffer bindings to perform in the batch")
+	VkSparseBufferMemoryBindInfo.const_p.buffer("pBufferBinds", "a pointer to an array of ##VkSparseBufferMemoryBindInfo structures")
 	AutoSize("pImageOpaqueBinds", optional = true)..uint32_t.member("imageOpaqueBindCount", "the number of opaque sparse image bindings to perform")
 	VkSparseImageOpaqueMemoryBindInfo.const_p.buffer(
 		"pImageOpaqueBinds",
-		"an array of ##VkSparseImageOpaqueMemoryBindInfo structures, indicating opaque sparse image bindings to perform"
+		"a pointer to an array of ##VkSparseImageOpaqueMemoryBindInfo structures, indicating opaque sparse image bindings to perform"
 	)
 	AutoSize("pImageBinds", optional = true)..uint32_t.member("imageBindCount", "the number of sparse image bindings to perform")
 	VkSparseImageMemoryBindInfo.const_p.buffer(
 		"pImageBinds",
-		"an array of ##VkSparseImageMemoryBindInfo structures, indicating sparse image bindings to perform"
+		"a pointer to an array of ##VkSparseImageMemoryBindInfo structures, indicating sparse image bindings to perform"
 	)
 	AutoSize("pSignalSemaphores", optional = true)..uint32_t.member(
 		"signalSemaphoreCount",
@@ -1416,7 +1422,10 @@ val VkBindSparseInfo_p = struct_p(VULKAN_PACKAGE, "VkBindSparseInfo") {
 	)
 	VkSemaphore.const_p.member(
 		"pSignalSemaphores",
-		"a pointer to an array of semaphores which will be signaled when the sparse binding operations for this batch have completed execution"
+		"""
+		a pointer to an array of semaphores which will be signaled when the sparse binding operations for this batch have completed execution. If semaphores to
+		be signaled are provided, they define a semaphore signal operation.
+		"""
 	)
 }
 
@@ -1690,6 +1699,8 @@ val VkSpecializationMapEntry = struct(VULKAN_PACKAGE, "VkSpecializationMapEntry"
 		${spec("VkSpecializationMapEntry")}
 
 		Contains information about a specialization constant.
+
+		${ValidityStructs.VkSpecializationMapEntry}
 		"""
 
 	uint32_t.member("constantID", "ID of the specialization constant in SPIR-V")

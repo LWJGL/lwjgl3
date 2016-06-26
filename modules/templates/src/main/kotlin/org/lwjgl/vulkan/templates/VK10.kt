@@ -2216,40 +2216,26 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		"""
 		Submits a sequence of semaphores or command buffers to a queue.
 
-		Each call to {@code vkQueueSubmit} submits zero or more batches of work to the queue for execution. {@code submitCount} is used to specify the number
-		of batches to submit. Each batch includes zero or more semaphores to wait upon, and a corresponding set of stages that will wait for the semaphore to
-		be signaled before executing any work, followed by a number of command buffers that will be executed, and finally, zero or more semaphores that will
-		be signaled after command buffer execution completes. Each batch is represented as an instance of the ##VkSubmitInfo structure stored in an array, the
-		address of which is passed in {@code pSubmits}.
-
+		{@code vkQueueSubmit} is a queue submission command, with each batch defined by an element of {@code pSubmits} as an instance of the ##VkSubmitInfo
+		structure.
+		
 		${note(
 			"""
-			The exact definition of a submission is platform-specific, but is considered a relatively expensive operation. In general, applications $should
-			attempt to batch work together into as few calls to {@code vkQueueSubmit} as possible.
+			Submission can be a high overhead operation, and applications $should attempt to batch work together into as few calls to {@code vkQueueSubmit} as
+			possible.
 			"""
 		)}
 
 		${ValidityProtos.vkQueueSubmit}
 		""",
 
-		VkQueue.IN("queue", "the handle of the queue that the command buffers will be submitted to"),
+		VkQueue.IN("queue", "the queue that the command buffers will be submitted to"),
 		AutoSize("pSubmits")..uint32_t.IN("submitCount", "the number of elements in the {@code pSubmits} array"),
 		SingleValue("pSubmit")..nullable..const..VkSubmitInfo_p.IN(
 			"pSubmits",
-			"""
-			a pointer to an array of ##VkSubmitInfo structures which describe the work to submit. All work described by {@code pSubmits} $must be submitted to
-			the queue before the command returns.
-			"""
+			"a pointer to an array of ##VkSubmitInfo structures, each specifying a command buffer submission batch"
 		),
-		VkFence.IN(
-			"fence",
-			"""
-			an optional handle to a fence. If {@code fence} is not #NULL_HANDLE, the fence is signaled when execution of all command buffers specified in the
-			##VkSubmitInfo{@code ::pCommandBuffers} members of {@code pSubmits} is complete, providing certain implicit ordering guarantees. If
-			{@code submitCount} is zero but {@code fence} is not #NULL_HANDLE, the fence will still be submitted to the queue and will become signaled when all
-			work previously submitted to the queue has completed.
-			"""
-		)
+		VkFence.IN("fence", "an optional handle to a fence to be signaled. If {@code fence} is not #NULL_HANDLE, it defines a fence signal operation.")
 	)
 
 	VkResult(
@@ -2625,27 +2611,26 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		"""
 		Submits sparse binding operations to a queue for execution.
 
-		Each batch of sparse binding operations is represented by a list of ##VkSparseBufferMemoryBindInfo, ##VkSparseImageOpaqueMemoryBindInfo, and
-		##VkSparseImageMemoryBindInfo structures (encapsulated in a ##VkBindSparseInfo structure), each preceded by a list of semaphores upon which to wait
-		before beginning execution of the operations, and followed by a second list of semaphores to signal upon completion of the operations.
-
-		When all sparse binding operations in {@code pBindInfo} have completed execution, the status of fence is set to signaled, providing certain implicit
-		ordering guarantees.
+		{@code vkQueueBindSparse} is a queue submission command, with each batch defined by an element of {@code pBindInfo} as an instance of the
+		##VkBindSparseInfo structure.
 
 		Within a batch, a given range of a resource $mustnot be bound more than once. Across batches, if a range is to be bound to one allocation and offset
 		and then to another allocation and offset, then the application $must guarantee (usually using semaphores) that the binding operations are executed in
 		the correct order, as well as to order binding operations against the execution of command buffer submissions.
 
 		${ValidityProtos.vkQueueBindSparse}
+
+		As no operation to {@code vkQueueBindSparse} causes any pipeline stage to access memory, synchronization primitives used in this command effectively
+		only define execution dependencies.
 		""",
 
-		VkQueue.IN("queue", "the queue to submit the sparse binding operation to"),
-		AutoSize("pBindInfo")..uint32_t.IN("bindInfoCount", "the size of the array pointed to by {@code pBindInfo}"),
+		VkQueue.IN("queue", "the queue that the sparse binding operations will be submitted to"),
+		AutoSize("pBindInfo")..uint32_t.IN("bindInfoCount", "the number of elements in the {@code pBindInfo} array"),
 		SingleValue("pBindInfo")..const..VkBindSparseInfo_p.IN(
 			"pBindInfo",
-			"an array of ##VkBindSparseInfo structures each specifying the parameters of a sparse binding operation batch"
+			"an array of ##VkBindSparseInfo structures, each specifying a sparse binding submission batch"
 		),
-		VkFence.IN("fence", "if not #NULL_HANDLE, is a fence to be signaled once the sparse binding operation completes")
+		VkFence.IN("fence", "an optional handle to a fence to be signaled. If fence is not #NULL_HANDLE, it defines a fence signal operation.")
 	)
 
 	VkResult(
@@ -2653,7 +2638,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		"""
 		Creates a new fence object.
 
-		Fences $can be used by the host to determine completion of execution of submissions to queues performed with #QueueSubmit() and #QueueBindSparse().
+		Fences $can be used by the host to determine completion of execution of queue operations.
 
 		A fence’s status is always either signaled or unsignaled. The host $can poll the status of a single fence, or wait for any or all of a group of fences
 		to become signaled.
@@ -2762,41 +2747,45 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		"""
 		Creates a new queue semaphore object.
 
-		Semaphores are used to coordinate operations between queues and between queue submissions within a single queue. An application might associate
-		semaphores with resources or groups of resources to marshal ownership of shared data. A semaphore’s status is always either <em>signaled</em> or
-		<em>unsignaled</em>. Semaphores are signaled by queues and $can also be waited on in the same or different queues until they are signaled.
+		Semaphores are used to coordinate queue operations both within a queue and
+between different queues. A semaphore's status is always either _signaled_
+or _unsignaled_.
 		
 		${ValidityProtos.vkCreateSemaphore}
 
-		To signal a semaphore from a queue, include it in an element of the array of ##VkSubmitInfo structures passed through the {@code pSubmits} parameter to
-		a call to #QueueSubmit(), or in an element of the array of ##VkBindSparseInfo structures passed through the {@code pBindInfo} parameter to a call to
-		#QueueBindSparse().
+		Semaphores $can be signaled by including them in a batch as part of a queue submission command, defining a queue operation to signal that semaphore.
+		This semaphore signal operation defines the first half of a memory dependency, guaranteeing that all memory accesses defined by the submitted queue
+		operations in the batch are made available, and that those queue operations have completed execution.
 
-		Semaphores included in the {@code pSignalSemaphores} array of one of the elements of a queue submission are signaled once queue execution reaches the
-		signal operation, and all previous work in the queue completes. Any operations waiting on that semaphore in other queues will be released once it is
-		signaled.
+		Semaphore signal operations for #QueueSubmit() additionally include all queue operations previously submitted via #QueueSubmit() in their half of a
+		memory dependency, and all batches that are stored at a lower index in the same {@code pSubmits} array.
 
-		Similarly, to wait on a semaphore from a queue, include it in the {@code pWaitSemaphores} array of one of the elements of a batch in a queue
-		submission. When queue execution reaches the wait operation, will stall execution of subsequently submitted operations until the semaphore reaches the
-		signaled state due to a signaling operation. Once the semaphore is signaled, the subsequent operations will be permitted to execute and the status of
-		the semaphore will be reset to the unsignaled state.
+		Signaling of semaphores $can be waited on by similarly including them in a batch, defining a queue operation to wait for a signal. A semaphore wait
+		operation defines the second half of a memory dependency for the semaphores being waited on. This half of the memory dependency guarantees that the
+		first half has completed execution, and also guarantees that all available memory accesses are made visible to the queue operations in the batch.
 
-		In the case of {@code VkSubmitInfo}, command buffers wait at specific pipeline stages, rather than delaying the entire command buffer’s execution, with the
-		pipeline stages determined by the value of the corresponding element of the {@code pWaitDstStageMask} member of {@code VkSubmitInfo}. Execution of work
-		by those stages in subsequent commands is stalled until the corresponding semaphore reaches the signaled state. Subsequent sparse binding operations
-		wait for the semaphore to become signaled, regardless of the values of {@code pWaitDstStageMask}.
+		Semaphore wait operations for #QueueSubmit() additionally include all queue operations subsequently submitted via #QueueSubmit() in their half of a
+		memory dependency, and all batches that are stored at a higher index in the same pname:pSubmits array.
+
+		When queue execution reaches a semaphore wait operation, the queue will stall execution of queue operations in the batch until each semaphore becomes
+		signaled. Once all semaphores are signaled, the semaphores will be reset to the unsignaled state, and subsequent queue operations will be permitted to
+		execute.
+
+		Semaphore wait operations defined by #QueueSubmit() only wait at specific pipeline stages, rather than delaying all of each command buffer's execution,
+		with the pipeline stages determined by the corresponding element of the {@code pWaitDstStageMask} member of ##VkSubmitInfo. Execution of work by those
+		stages in subsequent commands is stalled until the corresponding semaphore reaches the signaled state.
 
 		${note(
 			"""
 			A common scenario for using {@code pWaitDstStageMask} with values other than #PIPELINE_STAGE_ALL_COMMANDS_BIT is when synchronizing a window system
-			presentation operation against subsequent command buffers which render the next frame. In this case, an image that was being presented $mustnot be
-			overwritten until the presentation operation completes, but other pipeline stages $can execute without waiting. A mask of
+			presentation operation against subsequent command buffers which render the next frame. In this case, a presentation image $mustnot be overwritten
+			until the presentation operation completes, but other pipeline stages $can execute without waiting. A mask of
 			#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT prevents subsequent color attachment writes from executing until the semaphore signals. Some
 			implementations $may be able to execute transfer operations and/or vertex processing work before the semaphore is signaled.
 
-			If an image layout transition needs to be performed on a swapchain image before it is used in a framebuffer, that $can be performed as the first
-			operation submitted to the queue after acquiring the image, and $shouldnot prevent other work from overlapping with the presentation operation.
-			For example, a ##VkImageMemoryBarrier could use:
+			If an image layout transition needs to be performed on a swapchain image before it is used in a framebuffer, that can: be performed as the first
+			operation submitted to the queue after acquiring the image, and $shouldnot prevent other work from overlapping with the presentation operation. For
+			example, a ##VkImageMemoryBarrier could use:
 			${ul(
 				code("srcStageMask = #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT"),
 				code("srcAccessMask = #ACCESS_MEMORY_READ_BIT"),
@@ -2806,7 +2795,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 				code("newLayout = #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL")
 			)}
 
-			Alternately, {@code oldLayout} $can be #IMAGE_LAYOUT_UNDEFINED, if the image’s contents need not be preserved.
+			Alternatively, {@code oldLayout} $can be #IMAGE_LAYOUT_UNDEFINED, if the image's contents need not be preserved.
 
 			This barrier accomplishes a dependency chain between previous presentation operations and subsequent color attachment output operations, with the
 			layout transition performed in between, and does not introduce a dependency between previous work and any vertex processing stages. More precisely,
@@ -2814,10 +2803,6 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 			stage, then there is a dependency from that same stage to itself with the layout transition performed in between.
 			"""
 		)}
-
-		When a queue signals or waits upon a semaphore, certain implicit ordering guarantees are provided.
-
-		Semaphore operations $may not make the side effects of commands visible to the host.
 		""",
 
 		VkDevice.IN("device", "the logical device that creates the semaphore"),
