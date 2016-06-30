@@ -183,7 +183,7 @@ class NativeClassFunction(
 				&& !hasParam { it.nativeType is ArrayType }
 
 	internal val hasArrayOverloads: Boolean
-		get() = parameters.asSequence()
+		get() = !name.endsWith("free", ignoreCase = true) && parameters.asSequence()
 				.filter { it.nativeType.mapping.isArray || it has MultiType }
 				.let { it.any() && it.none { it.isAutoSizeResultOut } }
 
