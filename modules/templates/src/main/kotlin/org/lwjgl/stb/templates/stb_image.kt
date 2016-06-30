@@ -230,7 +230,7 @@ N=\#comp     components
 
 	void(
 		"ldr_to_hdr_scale",
-		"Changes the gamma value used when converting LDR images to HDR. The default value is 2.2f",
+		"Changes the scale value used when converting LDR images to HDR. The default value is 1.0f",
 
 		float.IN("scale", "the scale factor")
 	)
