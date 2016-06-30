@@ -32,7 +32,7 @@ val stb_dxt = "STBDXT".nativeClass(packageName = STB_PACKAGE, prefix = "STB", pr
 
 		unsigned_char_p.OUT("dest", "a buffer in which to store the compressed block"),
 		Check(4 * 4 * 4)..const..unsigned_char_p.IN("src", "the block to compress"),
-		int.IN("alpha", "1 to compress the alpha channel, 0 to ignore it"),
+		intb.IN("alpha", "1 to compress the alpha channel, 0 to ignore it"),
 		int.IN("mode", "the compression mode", "#DXT_NORMAL #DXT_DITHER #DXT_HIGHQUAL")
 	)
 }

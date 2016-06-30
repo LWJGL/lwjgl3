@@ -91,7 +91,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 		""",
 
 		stbrp_context_p.IN("context", "an ##STBRPContext struct"),
-		int.IN("allow_out_of_mem", "1 to allow running out of temporary storage")
+		intb.IN("allow_out_of_mem", "1 to allow running out of temporary storage")
 	)
 
 	void(

@@ -235,7 +235,7 @@ N=\#comp     components
 		float.IN("scale", "the scale factor")
 	)
 
-	int(
+	intb(
 		"is_hdr",
 		"Checks if the specified file contains an HDR image.",
 
@@ -244,7 +244,7 @@ N=\#comp     components
 		returnDoc = "1 if the image is HDR, 0 otherwise"
 	)
 
-	int(
+	intb(
 		"is_hdr_from_memory",
 		"In-memory version of #is_hdr().",
 
@@ -252,7 +252,7 @@ N=\#comp     components
 		AutoSize("buffer")..int.IN("len", "the buffer length, in bytes")
 	)
 
-	int(
+	intb(
 		"is_hdr_from_callbacks",
 		"Callback version of #is_hdr().",
 
@@ -272,7 +272,7 @@ N=\#comp     components
 		MultiType(PointerMapping.DATA_FLOAT)..void_p.IN("retval_from_stbi_load", "an stb image")
 	)
 
-	int(
+	intb(
 		"info",
 		"Returns image dimensions &amp; components without fully decoding the image.",
 
@@ -284,7 +284,7 @@ N=\#comp     components
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"info_from_memory",
 		"In-memory version of #info().",
 
@@ -295,7 +295,7 @@ N=\#comp     components
 		Check(1)..int_p.OUT("comp", "outputs number of components in image")
 	)
 
-	int(
+	intb(
 		"info_from_callbacks",
 		"Callback version of #info().",
 
@@ -313,21 +313,21 @@ N=\#comp     components
 		unpremultiplication. Results are undefined if the unpremultiply overflows.
 		""",
 
-		int.IN("flag_true_if_should_unpremultiply", "the unpremultiply flag")
+		intb.IN("flag_true_if_should_unpremultiply", "the unpremultiply flag")
 	)
 
 	void(
 		"convert_iphone_png_to_rgb",
 		"Indicate whether we should process iPhone images back to canonical format, or just pass them through \"as-is\".",
 
-		int.IN("flag_true_if_should_convert", "the convert iPhone PNG to RGB flag")
+		intb.IN("flag_true_if_should_convert", "the convert iPhone PNG to RGB flag")
 	)
 
 	void(
 		"set_flip_vertically_on_load",
 		"Flips the image vertically, so the first pixel in the output array is the bottom left.",
 
-		int.IN("flag_true_if_should_flip", "the flip vertically on load flag")
+		intb.IN("flag_true_if_should_flip", "the flip vertically on load flag")
 	)
 
 	char_p(
@@ -348,7 +348,7 @@ N=\#comp     components
 		AutoSize("buffer")..int.IN("len", ""),
 		int.IN("initial_size", ""),
 		AutoSizeResult..int_p.OUT("outlen", ""),
-		int.IN("parse_header", "")
+		intb.IN("parse_header", "")
 	)
 
 	char_p(

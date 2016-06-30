@@ -102,7 +102,7 @@ stbir_resize_uint8_srgb_edgemode(
 		"EDGE_ZERO".enum
 	).javaDocLinks
 
-	val resize_uint8 = int(
+	val resize_uint8 = intb(
 		"resize_uint8",
 		"""
 		Easy-to-use API for resizing images.
@@ -136,7 +136,7 @@ stbir_resize_uint8_srgb_edgemode(
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	val resize_float = int(
+	val resize_float = intb(
 		"resize_float",
 		"Float version of #resize_uint8().",
 
@@ -153,7 +153,7 @@ stbir_resize_uint8_srgb_edgemode(
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	val resize_uint8_srgb = int(
+	val resize_uint8_srgb = intb(
 		"resize_uint8_srgb",
 		"""
 		Easy-to-use API for resizing images.
@@ -186,7 +186,7 @@ stbir_resize_uint8_srgb_edgemode(
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	val resize_uint8_srgb_edgemode = int(
+	val resize_uint8_srgb_edgemode = intb(
 		"resize_uint8_srgb_edgemode",
 		"Same as #resize_uint8_srgb(), but adds the ability to specify how requests to sample off the edge of the image are handled.",
 
@@ -226,7 +226,7 @@ stbir_resize_uint8_srgb_edgemode(
 		"COLORSPACE_SRGB".enum
 	).javaDocLinks
 
-	val resize_uint8_generic = int(
+	val resize_uint8_generic = intb(
 		"resize_uint8_generic",
 		"Medium-complexity version of #resize_uint8().",
 
@@ -249,7 +249,7 @@ stbir_resize_uint8_srgb_edgemode(
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"resize_uint16_generic",
 		"Short version of #resize_uint8_generic().",
 
@@ -272,7 +272,7 @@ stbir_resize_uint8_srgb_edgemode(
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"resize_float_generic",
 		"Float version of #resize_uint8_generic().",
 
@@ -306,7 +306,7 @@ stbir_resize_uint8_srgb_edgemode(
 		"TYPE_FLOAT".enum
 	).javaDocLinks
 
-	val resize = int(
+	val resize = intb(
 		"resize",
 		"Full-complexity version of #resize_uint8_generic().",
 
@@ -332,7 +332,7 @@ stbir_resize_uint8_srgb_edgemode(
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"resize_subpixel",
 		"Subpixel version of #resize().",
 
@@ -362,7 +362,7 @@ stbir_resize_uint8_srgb_edgemode(
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"resize_region",
 		"Region version of #resize(), using texture coordinates.",
 

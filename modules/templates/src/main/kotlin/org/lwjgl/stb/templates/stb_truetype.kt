@@ -277,7 +277,7 @@ int main(int arg, char **argv)
 
 	// NEW TEXTURE BAKING API
 
-	int(
+	intb(
 		"PackBegin",
 		"""
 		Initializes a packing context stored in the passed-in {@code stbtt_pack_context}. Future calls using this context will pack characters into the bitmap
@@ -321,7 +321,7 @@ int main(int arg, char **argv)
 		noPrefix = true
 	)
 
-	int(
+	intb(
 		"PackFontRange",
 		"""
 		Creates character bitmaps from the {@code font_index}'th font found in fontdata (use {@code font_index=0} if you don't know what that is). It creates
@@ -349,7 +349,7 @@ int main(int arg, char **argv)
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"PackFontRanges",
 		"""
 		Creates character bitmaps from multiple ranges of characters stored in ranges. This will usually create a better-packed bitmap than multiple calls to
@@ -416,7 +416,9 @@ int main(int arg, char **argv)
 		stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
 		stbtt_pack_range_p.IN("ranges", "an array of ##STBTTPackRange structs"),
 		AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
-		stbrp_rect_p.IN("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges.")
+		stbrp_rect_p.IN("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges."),
+
+		returnDoc = "the number of structs written in {@code rects}"
 	)
 
 	void(
@@ -428,7 +430,7 @@ int main(int arg, char **argv)
 		AutoSize("rects")..int.IN("num_rects", "the number of structs in {@code rects}")
 	)
 
-	int(
+	intb(
 		"PackFontRangesRenderIntoRects",
 		"See #PackFontRangesGatherRects().",
 
@@ -436,7 +438,9 @@ int main(int arg, char **argv)
 		stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
 		stbtt_pack_range_p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
 		AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
-		stbrp_rect_p.OUT("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges.")
+		stbrp_rect_p.OUT("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges."),
+
+		returnDoc = "1 on success, 0 on failure"
 	)
 
 	// FONT LOADING
@@ -453,7 +457,7 @@ int main(int arg, char **argv)
 		int.IN("index", "the font index")
 	)
 
-	int(
+	intb(
 		"InitFont",
 		"""
 		Given an offset into the file that defines a font, this function builds the necessary cached info for the rest of the system. You must allocate the
@@ -561,7 +565,7 @@ int main(int arg, char **argv)
 		int.IN("ch2", "the second unicode codepoint")
 	)
 
-	int(
+	intb(
 		"GetCodepointBox",
 		"Gets the bounding box of the visible part of the glyph, in unscaled coordinates.",
 
@@ -592,7 +596,7 @@ int main(int arg, char **argv)
 		int.IN("glyph2", "the second glyph index")
 	)
 
-	int(
+	intb(
 		"GetGlyphBox",
 		"Glyph version of #GetCodepointBox(), for greater efficiency.",
 
@@ -614,7 +618,7 @@ int main(int arg, char **argv)
 		"vcurve".."3"
 	)
 
-	int(
+	intb(
 		"IsGlyphEmpty",
 		"Returns non-zero if nothing is drawn for this glyph.",
 
@@ -985,7 +989,7 @@ int main(int arg, char **argv)
 		int.IN("flags", "the style flags", StyleFlags)
 	)
 
-	int(
+	intb(
 		"CompareUTF8toUTF16_bigendian",
 		"""
 		Returns 1/0 whether the first string interpreted as utf8 is identical to the second string interpreted as big-endian utf16... useful for strings

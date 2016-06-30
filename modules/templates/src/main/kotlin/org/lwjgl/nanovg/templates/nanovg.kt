@@ -563,7 +563,7 @@ nvgFill(vg);""")}
 		Check(6)..const..float_p.IN("src", "the {@code B} transformation matrix")
 	)
 
-	int(
+	intb(
 		"TransformInverse",
 		"Sets the destination to inverse of specified transform.",
 
@@ -633,7 +633,9 @@ nvgFill(vg);""")}
 		int.IN("w", "the image width"),
 		int.IN("h", "the image height"),
 		imageFlags,
-		Check("w * h * 4")..const..unsigned_char_p.IN("data", "the image data")
+		Check("w * h * 4")..const..unsigned_char_p.IN("data", "the image data"),
+
+		returnDoc = "a handle to the image"
 	)
 
 	void(
@@ -952,7 +954,9 @@ nvgFill(vg);""")}
 		const..charASCII_p.IN("name", "the font name"),
 		unsigned_char_p.IN("data", "the font data"),
 		AutoSize("data")..int.IN("ndata", "the font data size, in bytes"),
-		int.IN("freeData", "1 if the font data should be freed automatically, 0 otherwise")
+		int.IN("freeData", "1 if the font data should be freed automatically, 0 otherwise"),
+
+		returnDoc = "a handle to the font"
 	)
 
 	int(

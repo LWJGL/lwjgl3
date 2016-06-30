@@ -714,7 +714,7 @@ ENABLE_WARNINGS()""")
 		""",
 
 		env_open["env"],
-		int.IN(
+		intb.IN(
 			"force",
 			"""
 			if non-zero, force a synchronous flush. Otherwise if the environment has the #NOSYNC flag set the flushes will be omitted, and with #MAPASYNC they
@@ -756,7 +756,7 @@ ENABLE_WARNINGS()""")
 
 		env_open["env"],
 		unsigned_int.IN("flags", "the flags to change, bitwise OR'ed together"),
-		int.IN("onoff", "a non-zero value sets the flags, zero clears them."),
+		intb.IN("onoff", "a non-zero value sets the flags, zero clears them."),
 
 		returnDoc =
 		"""
@@ -1184,7 +1184,7 @@ ENABLE_WARNINGS()""")
 
 		txn_env["txn"],
 		stat["dbi"],
-		int.IN("del", "0 to empty the DB, 1 to delete it from the environment and close the DB handle")
+		intb.IN("del", "0 to empty the DB, 1 to delete it from the environment and close the DB handle")
 	)
 
 	int(

@@ -248,7 +248,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		returnDoc = "the ogg vorbis decoder. On failure, returns $NULL and sets {@code *error}."
 	)
 
-	int(
+	intb(
 		"seek_frame",
 		"""
 		Seeks in the Vorbis file to (approximately) {@code sample_number}. After calling seek_frame(), the next call to {@code get_frame_*()} will include the
@@ -259,7 +259,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		unsigned_int.IN("sample_number", "the sample index")
 	)
 
-	int(
+	intb(
 		"seek",
 		"""
 		Seeks in the Vorbis file to (approximately) {@code sample_number}. After calling stb_vorbis_seek(), the next call to {@code stb_vorbis_get_samples_*}

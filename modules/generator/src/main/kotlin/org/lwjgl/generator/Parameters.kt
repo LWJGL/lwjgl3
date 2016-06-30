@@ -86,7 +86,11 @@ class Parameter(
 	// --- [ Helper functions & properties ] ----
 
 	override val isSpecial: Boolean
-		get() = (nativeType.mapping === PointerMapping.OPAQUE_POINTER && (nativeType is ObjectType || !has(nullable)) && this !== JNI_ENV) || super.isSpecial
+		get() = super.isSpecial || when ( nativeType.mapping ) {
+			PointerMapping.OPAQUE_POINTER -> (nativeType is ObjectType || !has(nullable)) && this !== JNI_ENV
+			PrimitiveMapping.BOOLEAN4 -> true
+			else -> false
+		}
 
 	/** Returns true if this is an output parameter with the AutoSizeResult modifier. */
 	internal val isAutoSizeResultOut: Boolean

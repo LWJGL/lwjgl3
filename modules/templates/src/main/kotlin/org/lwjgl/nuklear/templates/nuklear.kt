@@ -3186,7 +3186,7 @@ ENABLE_WARNINGS()""")
 			nk_text_edit_p.IN("box", "")
 		)
 
-		int(
+		intb(
 			"textedit_cut",
 			"",
 

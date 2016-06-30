@@ -52,7 +52,9 @@ val nanovg_gl3 = dependsOn(Binding.OPENGL) {
 			GLuint.IN("textureId", "the OpenGL texture id"),
 			int.IN("w", "the image width"),
 			int.IN("h", "the image height"),
-			int.IN("flags", "the image flags")
+			int.IN("flags", "the image flags"),
+
+			returnDoc = "a handle to the image"
 		)
 
 		GLuint(

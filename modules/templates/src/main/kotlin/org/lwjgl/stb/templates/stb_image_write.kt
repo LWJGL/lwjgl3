@@ -59,7 +59,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		pixel.
 		"""
 
-	val write = int(
+	val write = intb(
 		"write_png",
 		"""
 		Writes a PNR image file.
@@ -81,7 +81,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"write_bmp",
 		"""
 		Writes a BMP image file.
@@ -98,7 +98,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"write_tga",
 		"""
 		Writes a TGA image file.
@@ -121,7 +121,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		"Returns the address of the global variable {@code stbi_write_tga_with_rle}."
 	)
 
-	val write_hdr = int(
+	val write_hdr = intb(
 		"write_hdr",
 		"""
 		Writes an HDR image file.
@@ -139,7 +139,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	val write_to_func = int(
+	val write_to_func = intb(
 		"write_png_to_func",
 		"Callback version of #write_png().",
 
@@ -154,7 +154,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"write_bmp_to_func",
 		"Callback version of #write_bmp().",
 
@@ -168,7 +168,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"write_tga_to_func",
 		"Callback version of #write_tga().",
 
@@ -182,7 +182,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	int(
+	intb(
 		"write_hdr_to_func",
 		"Callback version of #write_hdr().",
 
