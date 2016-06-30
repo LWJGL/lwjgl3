@@ -192,7 +192,7 @@ class NativeClassFunction(
 
 	private val returnsJavaMethodType: String
 		get() = if ( returns.nativeType is StructType ) {
-			if ( hasParam { it has AutoSizeResult } )
+			if ( hasParam { it has AutoSizeResultParam } )
 				"${returns.javaMethodType}.Buffer"
 			else
 				returns.javaMethodType
@@ -268,7 +268,7 @@ class NativeClassFunction(
 				}
 			}
 
-			if ( it has AutoSizeResult ) {
+			if ( it has AutoSizeResultParam ) {
 				if ( !returns.nativeType.isPointerData )
 					it.error("Return type is not an array: AutoSizeResult")
 			}
@@ -702,7 +702,7 @@ class NativeClassFunction(
 		if ( hasStack ) {
 			println("\t\tMemoryStack stack = stackGet(); int stackPointer = stack.getPointer();")
 
-			val autoSizeParam = getParam { it has AutoSizeResult }
+			val autoSizeParam = getParam { it has AutoSizeResultParam }
 			val autoSizeType = (autoSizeParam.nativeType.mapping as PointerMapping).mallocType
 			println("\t\t${autoSizeType}Buffer ${autoSizeParam.name} = stack.calloc$autoSizeType(1);")
 		}
@@ -739,7 +739,7 @@ class NativeClassFunction(
 					print("\t")
 				print("\t\t")
 				if ( returns.nativeType is StructType ) {
-					println("return ${returns.nativeType.javaMethodType}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", ${it.name}.get(0)" else "" }});")
+					println("return ${returns.nativeType.javaMethodType}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResultParam }.let { if ( it != null ) ", ${it.name}.get(0)" else "" }});")
 				} else {
 					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
@@ -754,8 +754,8 @@ class NativeClassFunction(
 					if ( returns has MapPointer )
 						print(", ${if ( paramMap[returns[MapPointer].sizeExpression]?.nativeType?.mapping == PrimitiveMapping.POINTER ) "(int)" else ""}${returns[MapPointer].sizeExpression}")
 					else if ( !isNullTerminated ) {
-						if ( hasParam { it has AutoSizeResult } ) {
-							val params = getParams { it has AutoSizeResult }
+						if ( hasParam { it has AutoSizeResultParam } ) {
+							val params = getParams { it has AutoSizeResultParam }
 							val single = params.count() == 1
 							print(", ${params.map {
 								if ( it.paramType === IN ) {
@@ -764,7 +764,7 @@ class NativeClassFunction(
 									else
 										"(int)${it.name}"
 								} else {
-									(if ( single )
+									(it[AutoSizeResultParam].expression ?: if ( single )
 										"${it.name}.get(0)"
 									else
 										"${it.name}.get(${it.name}.position())").let { expression ->
@@ -1291,7 +1291,7 @@ class NativeClassFunction(
 		generateCodeBeforeNative(code, ApplyTo.ALTERNATIVE, hasFinally)
 
 		if ( hideAutoSizeResultParam ) {
-			val autoSizeParam = getParam { it has AutoSizeResult }
+			val autoSizeParam = getParam { it has AutoSizeResultParam }
 			val autoSizeType = (autoSizeParam.nativeType.mapping as PointerMapping).mallocType
 			println("\t\t\t${autoSizeType}Buffer ${autoSizeParam.name} = stack.calloc$autoSizeType(1);")
 		}
@@ -1328,7 +1328,7 @@ class NativeClassFunction(
 					print("\t")
 				print("\t\t")
 				if ( returns.nativeType is StructType ) {
-					println("return ${returns.nativeType.javaMethodType}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResult }.let { if ( it != null ) ", ${it.name}.get(${it.name}.position()" else "" }});")
+					println("return ${returns.nativeType.javaMethodType}.create($RESULT${parameters.asSequence().singleOrNull { it has AutoSizeResultParam }.let { if ( it != null ) ", ${it.name}.get(${it.name}.position()" else "" }});")
 				} else {
 					val isNullTerminated = returns.nativeType is CharSequenceType
 					val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
@@ -1344,19 +1344,19 @@ class NativeClassFunction(
 					if ( returns has MapPointer )
 						builder.append(", ${returns[MapPointer].sizeExpression}")
 					else if ( !isNullTerminated ) {
-						if ( hasParam { it has AutoSizeResult } ) {
-							val params = getParams { it has AutoSizeResult }
+						if ( hasParam { it has AutoSizeResultParam } ) {
+							val params = getParams { it has AutoSizeResultParam }
 							val single = params.count() == 1
 							builder.append(", ${params.map {
 								if ( it.paramType === IN )
 									"(int)${it.name}"
 								else if ( it.nativeType.mapping === PointerMapping.DATA_INT ) {
-									if ( single )
+									it[AutoSizeResultParam].expression ?: if ( single )
 										"${it.name}.get(0)"
 									else
 										"${it.name}.get(${it.name}.position())"
 								} else {
-									if ( single )
+									it[AutoSizeResultParam].expression ?: if ( single )
 										"(int)${it.name}.get(0)"
 									else
 										"(int)${it.name}.get(${it.name}.position())"

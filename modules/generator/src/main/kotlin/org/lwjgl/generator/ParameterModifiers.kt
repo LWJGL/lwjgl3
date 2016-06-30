@@ -98,7 +98,9 @@ class AutoSize(
 	}
 }
 
-object AutoSizeResult : ParameterModifier() {
+class AutoSizeResultParam(val expression: String?) : ParameterModifier() {
+	companion object : ModifierKey<AutoSizeResultParam>
+
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
 		if ( param.paramType === ParameterType.IN )
@@ -123,6 +125,8 @@ object AutoSizeResult : ParameterModifier() {
 			throw IllegalArgumentException("The AutoSizeResult modifier cannot be used on in/out parameters.")
 	}
 }
+val AutoSizeResult = AutoSizeResultParam(null)
+fun AutoSizeResult(expression: String) = AutoSizeResultParam(expression)
 
 /** Adds a capacity check to a buffer parameter. */
 class Check(

@@ -94,7 +94,7 @@ class Parameter(
 
 	/** Returns true if this is an output parameter with the AutoSizeResult modifier. */
 	internal val isAutoSizeResultOut: Boolean
-		get() = paramType === OUT && has(AutoSizeResult)
+		get() = paramType === OUT && has(AutoSizeResultParam)
 
 	internal val asNativeMethodParam: String
 		get() = "${nativeType.nativeMethodType} $name"
