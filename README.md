@@ -1,3 +1,7 @@
+[![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md)
+![Size](https://reposs.herokuapp.com/?path=lwjgl/lwjgl3)
+[![Build Status](https://travis-ci.org/LWJGL-CI/lwjgl3.svg?branch=master-linux64)](https://travis-ci.org/LWJGL-CI/lwjgl3)
+
 ## LWJGL - Lightweight Java Game Library 3
 
 This repository hosts **LWJGL 3**, the complete rewrite and next major version of [LWJGL](https://www.lwjgl.org). Everything you need to know about the project can be found in the [Wiki](https://github.com/LWJGL/lwjgl3-wiki/wiki). Other useful links:
