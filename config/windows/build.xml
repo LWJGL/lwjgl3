@@ -201,6 +201,24 @@ License terms: http://lwjgl.org/license.php
 			</source>
 		</build>
 
+		<!-- tiny file dialogs -->
+		<compile dest="${bin.native}/tinyfd" flags="" if:true="${binding.tinyfd}">
+			<arg value="/I${src.include}\util\tinyfd"/>
+			<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
+		</compile>
+		<build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
+			<source>
+				<arg value="/I${src.include}\util\tinyfd"/>
+				<fileset dir="." includes="${src.generated.native}/util/tinyfd/*.c"/>
+			</source>
+			<linkargs>
+				<arg value="Comdlg32.lib"/>
+				<arg value="Ole32.lib"/>
+				<arg value="Shell32.lib"/>
+				<arg value="User32.lib"/>
+			</linkargs>
+		</build>
+
 		<!-- xxHash -->
 		<build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
 			<source>

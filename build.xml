@@ -189,6 +189,7 @@ License terms: http://lwjgl.org/license.php
 			<src path="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/simd" if:true="${binding.sse}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/util/tinyfd" if:true="${binding.tinyfd}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/xxhash" if:true="${binding.xxhash}"/>
 		</kotlinc>
 	</target>
@@ -288,6 +289,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/util/nfd/**" if:true="${binding.nfd}"/>
 			<include name="org/lwjgl/util/par/**" if:true="${binding.par}"/>
 			<include name="org/lwjgl/util/simd/**" if:true="${binding.sse}"/>
+			<include name="org/lwjgl/util/tinyfd/**" if:true="${binding.tinyfd}"/>
 			<include name="org/lwjgl/util/xxhash/**" if:true="${binding.xxhash}"/>
 		</patternset>
 	</target>
@@ -374,6 +376,15 @@ License terms: http://lwjgl.org/license.php
 			</and>
 		</condition>
 
+		<local name="tinyfd"/>
+		<condition property="tinyfd" value="true" else="false">
+			<and>
+				<istrue value="${binding.tinyfd}"/>
+				<istrue value="${binding.glfw}"/>
+				<istrue value="${binding.opengl}"/>
+			</and>
+		</condition>
+
 		<lwjgl.javac destdir="${bin.tests}" taskname="Tests">
 			<classpath>
 				<pathelement path="${bin.core}"/>
@@ -406,6 +417,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
 			<include name="org/lwjgl/demo/util/nfd/**" if:true="${nfd}"/>
 			<include name="org/lwjgl/demo/util/par/**" if:true="${binding.par}"/>
+			<include name="org/lwjgl/demo/util/tinyfd/**" if:true="${tinyfd}"/>
 			<include name="org/lwjgl/demo/util/xxhash/**" if:true="${binding.xxhash}"/>
 
 			<include name="org/lwjgl/demo/vulkan/**" if:true="${binding.vulkan}"/>
@@ -1013,6 +1025,23 @@ License terms: http://lwjgl.org/license.php
 			<sources>
 				<fileset dir="${src.generated.java}"><include name="org/lwjgl/stb/**"/></fileset>
 			</sources>
+		</release-module>
+
+		<!-- tiny file dialogs -->
+		<release-module package="org.lwjgl.util.tinyfd" name="tinyfd" title="tiny file dialogs" if:true="${binding.tinyfd}">
+			<natives>
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_tinyfd.so"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_tinyfd.dylib"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_tinyfd.dll"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_tinyfd32.dll"/>
+			</natives>
+			<classes>
+				<fileset dir="${bin.core}"><include name="org/lwjgl/util/tinyfd/**"/></fileset>
+			</classes>
+			<sources>
+				<fileset dir="${src.generated.java}"><include name="org/lwjgl/util/tinyfd/**"/></fileset>
+			</sources>
+			<licenses><include name="tinyfd*"/></licenses>
 		</release-module>
 
 		<!-- Vulkan -->

@@ -1206,7 +1206,7 @@ class NativeClassFunction(
 	) {
 		println()
 
-		val macro = has(Macro) && parameters.isEmpty()
+		val macro = has(Macro) && !this@NativeClassFunction[Macro].dynamic && parameters.isEmpty()
 
 		// JavaDoc
 		if ( !macro ) {

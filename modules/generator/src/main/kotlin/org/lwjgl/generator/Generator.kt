@@ -49,6 +49,7 @@ enum class Binding(val key: String, val packageName: String) {
 	PAR("binding.par", "org.lwjgl.util.par"),
 	SSE("binding.sse", "org.lwjgl.util.simd"),
 	STB("binding.stb", "org.lwjgl.stb"),
+	TINYFD("binding.tinyfd", "org.lwjgl.util.tinyfd"),
 	VULKAN("binding.vulkan", "org.lwjgl.vulkan"),
 	XXHASH("binding.xxhash", "org.lwjgl.util.xxhash");
 
