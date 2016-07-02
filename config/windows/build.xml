@@ -125,6 +125,7 @@ License terms: http://lwjgl.org/license.php
 			</source>
 			<linkargs>
 				<arg value="ntdll.lib"/>
+				<arg value="Advapi32.lib"/>
 			</linkargs>
 		</build>
 
