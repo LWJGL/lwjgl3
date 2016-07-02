@@ -907,7 +907,6 @@ License terms: http://lwjgl.org/license.php
 			<sources>
 				<fileset dir="${src.generated.java}"><include name="org/lwjgl/nuklear/**"/></fileset>
 			</sources>
-			<licenses><include name="nfd*"/></licenses>
 		</release-module>
 
 		<!-- OpenAL -->
