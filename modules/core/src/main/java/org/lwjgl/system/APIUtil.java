@@ -88,7 +88,7 @@ public final class APIUtil {
 	 * @return the attribute value or null if the attribute was not found or there is no LWJGL JAR file
 	 */
 	public static Optional<String> apiGetManifestValue(String attributeName) {
-		URL url = Thread.currentThread().getContextClassLoader().getResource("org/lwjgl/system/APIUtil.class");
+		URL url = APIUtil.class.getClassLoader().getResource("org/lwjgl/system/APIUtil.class");
 		if ( url != null ) {
 			String classURL = url.toString();
 			if ( classURL.startsWith("jar:") ) {

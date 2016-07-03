@@ -71,7 +71,7 @@ public final class XXHashDemo {
 		// init
 		XXH64_reset(state, SEED);
 		try (
-			InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
+			InputStream stream = XXHashDemo.class.getClassLoader().getResourceAsStream(resource);
 			ReadableByteChannel rbc = Channels.newChannel(stream)
 		) {
 			while ( true ) {

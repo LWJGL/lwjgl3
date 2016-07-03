@@ -51,7 +51,7 @@ public final class IOUtil {
 			}
 		} else {
 			try (
-				InputStream source = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
+				InputStream source = IOUtil.class.getClassLoader().getResourceAsStream(resource);
 				ReadableByteChannel rbc = Channels.newChannel(source)
 			) {
 				buffer = createByteBuffer(bufferSize);

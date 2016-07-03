@@ -91,7 +91,7 @@ public class TemplateFormatter {
 		// Config and show
 
 		try {
-			ClassLoader cl = Thread.currentThread().getContextClassLoader();
+			ClassLoader cl = getClass().getClassLoader();
 			frame.setIconImages(Arrays.asList(new Image[] {
 				ImageIO.read(cl.getResource("lwjgl16.png")),
 				ImageIO.read(cl.getResource("lwjgl32.png"))
