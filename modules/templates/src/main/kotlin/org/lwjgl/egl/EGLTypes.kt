@@ -12,8 +12,10 @@ val noneTerminated = Terminated("EGL10.EGL_NONE") // EGL_NONE is not zero
 
 // khrplatform.h
 val khronos_uint64_t = IntegerType("khronos_uint64_t", PrimitiveMapping.LONG, unsigned = true)
+val khronos_int64_t = IntegerType("khronos_int64_t", PrimitiveMapping.LONG)
 val khronos_ssize_t = IntegerType("khronos_ssize_t", PrimitiveMapping.POINTER)
 val khronos_utime_nanoseconds_t = typedef(khronos_uint64_t, "khronos_utime_nanoseconds_t")
+val khronos_stime_nanoseconds_t = typedef(khronos_int64_t, "khronos_utime_nanoseconds_t")
 
 // EGL 1.0
 val EGLBoolean = PrimitiveType("EGLBoolean", PrimitiveMapping.BOOLEAN4)
@@ -45,6 +47,9 @@ val EGLAttrib = typedef(intptr_t, "EGLAttrib")
 val EGLAttrib_p = EGLAttrib.p
 val EGLTime = typedef(khronos_utime_nanoseconds_t, "EGLTime")
 val EGLImage = "EGLImage".opaque_p
+
+// ANDROID_presentation_time
+val EGLnsecsANDROID = typedef(khronos_stime_nanoseconds_t, "EGLnsecsANDROID")
 
 // KHR_cl_event2
 val EGLAttribKHR = typedef(intptr_t, "EGLAttribKHR")
