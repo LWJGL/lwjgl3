@@ -1110,9 +1110,7 @@ val VkImageMemoryBarrier =
 			"{@code newLayout} $must be a valid {@code VkImageLayout} value",
 			"{@code image} $must be a valid {@code VkImage} handle",
 			"{@code subresourceRange} $must be a valid ##VkImageSubresourceRange structure",
-			"""
-			{@code oldLayout} $must be #IMAGE_LAYOUT_UNDEFINED, #IMAGE_LAYOUT_PREINITIALIZED or the current layout of the image region affected by the barrier
-			""",
+			"{@code oldLayout} $must be #IMAGE_LAYOUT_UNDEFINED or the current layout of the image subresources affected by the barrier",
 			"{@code newLayout} $mustnot be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED",
 			"""
 			If {@code image} was created with a sharing mode of #SHARING_MODE_CONCURRENT, {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} $must

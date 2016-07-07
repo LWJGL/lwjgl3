@@ -2498,7 +2498,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 	void(
 		"GetBufferMemoryRequirements",
 		"""
-		Determines the memory requirements for a non-sparse buffer resource.
+		Determines the memory requirements for a buffer resource.
 
 		${ValidityProtos.vkGetBufferMemoryRequirements}
 		""",
@@ -2513,7 +2513,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 	void(
 		"GetImageMemoryRequirements",
 		"""
-		Determines the memory requirements for a non-sparse image resource.
+		Determines the memory requirements for an image resource.
 
 		${ValidityProtos.vkGetImageMemoryRequirements}
 		""",
@@ -3117,6 +3117,8 @@ or _unsignaled_.
 		Queries the layout of an image subresource (mipLevel/arrayLayer) of an image created with linear tiling.
 		
 		${ValidityProtos.vkGetImageSubresourceLayout}
+
+		{@code vkGetImageSubresourceLayout} is invariant for the lifetime of a single image.
 		""",
 
 		VkDevice.IN("device", "the logical device that owns the image"),
@@ -4621,7 +4623,13 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 		VkBuffer.IN("dstBuffer", "a handle to the buffer to be updated"),
 		VkDeviceSize.IN("dstOffset", "the byte offset into the buffer to start updating, and $must be a multiple of 4"),
 		AutoSize("pData")..VkDeviceSize.IN("dataSize", "the number of bytes to update, and $must be a multiple of 4"),
-		const..uint32_t_p.IN("pData", "a pointer to the source data for the buffer update, and $must be at least {@code dataSize} bytes in size")
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		)..const..void_p.IN("pData", "a pointer to the source data for the buffer update, and $must be at least {@code dataSize} bytes in size")
 	)
 
 	void(

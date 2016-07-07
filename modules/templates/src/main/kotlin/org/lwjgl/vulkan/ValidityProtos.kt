@@ -131,10 +131,13 @@ val vkBindBufferMemory =
 			{@code memory} $must have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements
 			structure returned from a call to #GetBufferMemoryRequirements() with {@code buffer}
 			""",
-			"The size of {@code buffer} $must be less than or equal to the size of {@code memory} minus {@code memoryOffset}",
 			"""
 			{@code memoryOffset} $must be an integer multiple of the {@code alignment} member of the ##VkMemoryRequirements structure returned from a call to
 			#GetBufferMemoryRequirements() with {@code buffer}
+			""",
+			"""
+			The {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetBufferMemoryRequirements() with {@code buffer} $must be
+			less than or equal to the size of {@code memory} minus {@code memoryOffset}
 			"""
 		)}
 
@@ -257,9 +260,9 @@ val vkCmdBeginRenderPass =
 			""",
 			"""
 			If any of the {@code initialLayout} members of the ##VkAttachmentDescription structures specified when creating the render pass specified in the
-			{@code renderPass} member of {@code pRenderPassBegin} is not one of #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED, then each such
-			{@code initialLayout} $must be equal to the current layout of the corresponding attachment image subresource of the framebuffer specified in the
-			{@code framebuffer} member of {@code pRenderPassBegin}.
+			{@code renderPass} member of {@code pRenderPassBegin} is not #IMAGE_LAYOUT_UNDEFINED, then each such {@code initialLayout} $must be equal to the
+			current layout of the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of
+			{@code pRenderPassBegin}.
 			"""
 		)}
 
@@ -1661,12 +1664,12 @@ val vkCmdUpdateBuffer =
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code dstBuffer} $must be a valid {@code VkBuffer} handle",
-			"{@code pData} $must be a pointer to an array of {@code dataSize / 4} {@code uint32_t} values",
+			"{@code pData} $must be a pointer to an array of {@code dataSize} bytes",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics or compute operations",
 			"This command $must only be called outside of a render pass instance",
-			"Each of {@code commandBuffer} and {@code dstBuffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
 			"{@code dataSize} $must be greater than 0",
+			"Each of {@code commandBuffer} and {@code dstBuffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
 			"{@code dstOffset} $must be less than the size of {@code dstBuffer}",
 			"{@code dataSize} $must be less than or equal to the size of {@code dstBuffer} minus {@code dstOffset}",
 			"{@code dstBuffer} $must have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag",
