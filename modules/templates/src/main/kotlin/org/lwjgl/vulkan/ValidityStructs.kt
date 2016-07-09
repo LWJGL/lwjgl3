@@ -93,7 +93,7 @@ val VkBufferCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_BUFFER_CREATE_INFO",
-			"{@code pNext} $must be $NULL",
+			"{@code pNext} $must be $NULL, or a pointer to a valid instance of {@code VkDedicatedAllocationBufferCreateInfoNV}",
 			"{@code flags} $must be a valid combination of {@code VkBufferCreateFlagBits} values",
 			"{@code usage} $must be a valid combination of {@code VkBufferUsageFlagBits} values",
 			"{@code usage} $mustnot be 0",
@@ -368,6 +368,55 @@ val VkDebugReportCallbackCreateInfoEXT =
 			"{@code pNext} $must be $NULL",
 			"{@code flags} $must be a valid combination of {@code VkDebugReportFlagBitsEXT} values",
 			"{@code flags} $mustnot be 0"
+		)}"""
+
+val VkDedicatedAllocationBufferCreateInfoNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV",
+			"{@code pNext} $must be $NULL",
+			"""
+			If {@code dedicatedAllocation} is #TRUE, ##VkBufferCreateInfo{@code ::flags} $mustnot include #BUFFER_CREATE_SPARSE_BINDING_BIT,
+			#BUFFER_CREATE_SPARSE_RESIDENCY_BIT, or #BUFFER_CREATE_SPARSE_ALIASED_BIT
+			"""
+		)}"""
+
+val VkDedicatedAllocationImageCreateInfoNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV",
+			"{@code pNext} $must be $NULL",
+			"""
+			If {@code dedicatedAllocation} is #TRUE, ##VkImageCreateInfo{@code ::flags} $mustnot include #IMAGE_CREATE_SPARSE_BINDING_BIT,
+			#IMAGE_CREATE_SPARSE_RESIDENCY_BIT, or #IMAGE_CREATE_SPARSE_ALIASED_BIT
+			"""
+		)}"""
+
+val VkDedicatedAllocationMemoryAllocateInfoNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV",
+			"{@code pNext} $must be $NULL",
+			"If {@code image} is not #NULL_HANDLE, {@code image} $must be a valid {@code VkImage} handle",
+			"If {@code buffer} is not #NULL_HANDLE, {@code buffer} $must be a valid {@code VkBuffer} handle",
+			"Each of {@code image} and {@code buffer} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"At least one of {@code image} and {@code buffer} $must be #NULL_HANDLE",
+			"""
+			If {@code image} is not #NULL_HANDLE, the image $must have been created with ##VkDedicatedAllocationImageCreateInfoNV{@code ::dedicatedAllocation}
+			equal to #TRUE
+			""",
+			"""
+			If {@code buffer} is not #NULL_HANDLE, the buffer $must have been created with
+			##VkDedicatedAllocationBufferCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE
+			""",
+			"""
+			If {@code image} is not #NULL_HANDLE, ##VkMemoryAllocateInfo{@code ::allocationSize} $must equal the ##VkMemoryRequirements{@code ::size} of the
+			image
+			""",
+			"""
+			If {@code buffer} is not #NULL_HANDLE, ##VkMemoryAllocateInfo{@code ::allocationSize} $must equal the ##VkMemoryRequirements{@code ::size} of the
+			buffer
+			"""
 		)}"""
 
 val VkDescriptorBufferInfo =
@@ -901,7 +950,7 @@ val VkImageCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_IMAGE_CREATE_INFO",
-			"{@code pNext} $must be $NULL",
+			"{@code pNext} $must be $NULL, or a pointer to a valid instance of {@code VkDedicatedAllocationImageCreateInfoNV}",
 			"{@code flags} $must be a valid combination of {@code VkImageCreateFlagBits} values",
 			"{@code imageType} $must be a valid {@code VkImageType} value",
 			"{@code format} $must be a valid {@code VkFormat} value",
@@ -1331,7 +1380,7 @@ val VkMemoryAllocateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO",
-			"{@code pNext} $must be $NULL",
+			"{@code pNext} $must be $NULL, or a pointer to a valid instance of {@code VkDedicatedAllocationMemoryAllocateInfoNV}",
 			"""
 			{@code allocationSize} $must be less than or equal to the amount of memory available to the {@code VkMemoryHeap} specified by
 			{@code memoryTypeIndex} and the calling command's {@code VkDevice}

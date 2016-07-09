@@ -638,3 +638,59 @@ val VkXlibSurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkXlibSurfaceCreate
 	Display_p.member("dpy", "a pointer to an Xlib Display connection to the X server")
 	Window.member("window", "an Xlib Window to associate the surface with")
 }
+
+// NV_dedicated_allocation
+
+val VkDedicatedAllocationBufferCreateInfoNV = struct(VULKAN_PACKAGE, "VkDedicatedAllocationBufferCreateInfoNV") {
+	documentation =
+		"""
+		${man("VkDedicatedAllocationBufferCreateInfoNV")}<br>
+		${spec("VkDedicatedAllocationBufferCreateInfoNV")}
+
+		This structure $may be included in the {@code pNext} list of a ##VkBufferCreateInfo structure. It includes an enable controlling whether the buffer
+		will have a dedicated memory allocation bound to it.
+
+		${ValidityStructs.VkDedicatedAllocationBufferCreateInfoNV}
+		"""
+
+	sType(this)
+	pNext()
+	VkBool32.member("dedicatedAllocation", "if #TRUE, the buffer will have a dedicated memory allocation bound to it")
+}
+
+val VkDedicatedAllocationImageCreateInfoNV = struct(VULKAN_PACKAGE, "VkDedicatedAllocationImageCreateInfoNV") {
+	documentation =
+		"""
+		${man("VkDedicatedAllocationImageCreateInfoNV")}<br>
+		${spec("VkDedicatedAllocationImageCreateInfoNV")}
+
+		This structure $may be included in the {@code pNext} list of a ##VkImageCreateInfo structure. It includes an enable controlling whether the image will
+		have a dedicated memory allocation bound to it.
+
+		${ValidityStructs.VkDedicatedAllocationImageCreateInfoNV}
+
+		${note("Using a dedicated allocation for color and depth/stencil attachments or other large images $may improve performance on some devices.")}
+		"""
+
+	sType(this)
+	pNext()
+	VkBool32.member("dedicatedAllocation", "if #TRUE, the image will have a dedicated memory allocation bound to it")
+}
+
+val VkDedicatedAllocationMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkDedicatedAllocationMemoryAllocateInfoNV") {
+	documentation =
+		"""
+		${man("VkDedicatedAllocationMemoryAllocateInfoNV")}<br>
+		${spec("VkDedicatedAllocationMemoryAllocateInfoNV")}
+
+		This structure $may be included in the {@code pNext} list of a ##VkMemoryAllocateInfo structure. It includes a handle of the sole buffer or image
+		resource that the memory $can be bound to.
+
+		${ValidityStructs.VkDedicatedAllocationMemoryAllocateInfoNV}
+		"""
+
+	sType(this)
+	pNext()
+	VkImage.member("image", "a {@code VkImage} handle or #NULL_HANDLE")
+	VkBuffer.member("buffer", "a {@code VkBuffer} handle or #NULL_HANDLE")
+}

@@ -138,6 +138,14 @@ val vkBindBufferMemory =
 			"""
 			The {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetBufferMemoryRequirements() with {@code buffer} $must be
 			less than or equal to the size of {@code memory} minus {@code memoryOffset}
+			""",
+			"""
+			If {@code buffer} was created with ##VkDedicatedAllocationBufferCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} $must have
+			been created with ##VkDedicatedAllocationMemoryAllocateInfoNV{@code ::buffer} equal to {@code buffer} and {@code memoryOffset} $must be zero.
+			""",
+			"""
+			If {@code buffer} was not created with ##VkDedicatedAllocationBufferCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} $must
+			not have been allocated dedicated for a specific buffer or image
 			"""
 		)}
 
@@ -169,6 +177,14 @@ val vkBindImageMemory =
 			"""
 			The {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements() with {@code image} $must be
 			less than or equal to the size of {@code memory} minus {@code memoryOffset}
+			""",
+			"""
+			If {@code image} was created with ##VkDedicatedAllocationImageCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} $must have
+			been created with ##VkDedicatedAllocationMemoryAllocateInfoNV{@code ::image} equal to {@code image} and {@code memoryOffset} $must be zero.
+			""",
+			"""
+			If {@code image} was not created with ##VkDedicatedAllocationImageCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} $must
+			not have been allocated dedicated for a specific buffer or image
 			"""
 		)}
 
