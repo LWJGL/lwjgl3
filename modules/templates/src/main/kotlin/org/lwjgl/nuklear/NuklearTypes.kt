@@ -526,7 +526,7 @@ val nk_key = struct(NUKLEAR_PACKAGE, "NkKey", nativeName = "struct nk_key") {
 	unsigned_int.member("clicked", "")
 }.nativeType
 
-val NK_KEY_MAX = 25 // TODO: last value of nk_keys enum
+val NK_KEY_MAX = 29
 val NK_INPUT_MAX = 16
 val nk_keyboard = struct(NUKLEAR_PACKAGE, "NkKeyboard", nativeName = "struct nk_keyboard") {
 	nk_key.array("keys", "", size = NK_KEY_MAX)
@@ -1079,6 +1079,7 @@ val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel"
 	float.member("footer_h", "")
 	float.member("header_h", "")
 	float.member("border", "")
+	unsigned_int.member("has_scrolling", "")
 	nk_rect.member("clip", "")
 	nk_menu_state.member("menu", "")
 	nk_row_layout.member("row", "")
@@ -1142,6 +1143,7 @@ val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_wind
 	nk_property_state.member("property", "")
 	nk_popup_state.member("popup", "")
 	nk_edit_state.member("edit", "")
+	unsigned_int.member("scrolled", "")
 
 	"nk_table".p.member("tables", "") // TODO: private API?
 	unsigned_short.member("table_count", "")

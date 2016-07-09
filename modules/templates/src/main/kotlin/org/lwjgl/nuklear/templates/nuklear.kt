@@ -246,7 +246,11 @@ ENABLE_WARNINGS()""")
 		"KEY_TEXT_REDO".enum,
 		"KEY_TEXT_WORD_LEFT".enum,
 		"KEY_TEXT_WORD_RIGHT".enum,
-		"KEY_MAX".enum
+		"KEY_SCROLL_START".enum,
+		"KEY_SCROLL_END".enum,
+		"KEY_SCROLL_DOWN".enum,
+		"KEY_SCROLL_UP".enum,
+		"KEY_MAX".enum // TODO: Update nk_keyboard.keys size if this changes
 	).javaDocLinks
 
 	val Buttons = EnumConstant(
