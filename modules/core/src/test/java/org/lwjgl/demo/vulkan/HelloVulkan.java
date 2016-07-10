@@ -5,7 +5,6 @@
 package org.lwjgl.demo.vulkan;
 
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.vulkan.*;
@@ -704,7 +703,7 @@ public final class HelloVulkan {
 							.renderPass(VK_NULL_HANDLE)
 							.subpass(0)
 							.framebuffer(VK_NULL_HANDLE)
-							.occlusionQueryEnable(VK_FALSE)
+							.occlusionQueryEnable(false)
 							.queryFlags(0)
 							.pipelineStatistics(0)
 					);
@@ -817,7 +816,7 @@ public final class HelloVulkan {
 				.preTransform(preTransform)
 				.compositeAlpha(VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR)
 				.presentMode(swapchainPresentMode)
-				.clipped(VK_TRUE)
+				.clipped(true)
 				.oldSwapchain(oldSwapchain);
 
 			err = vkCreateSwapchainKHR(device, swapchain, null, lp);
@@ -1196,13 +1195,13 @@ public final class HelloVulkan {
 					.addressModeV(VK_SAMPLER_ADDRESS_MODE_REPEAT)
 					.addressModeW(VK_SAMPLER_ADDRESS_MODE_REPEAT)
 					.mipLodBias(0.0f)
-					.anisotropyEnable(VK_FALSE)
+					.anisotropyEnable(false)
 					.maxAnisotropy(1)
 					.compareOp(VK_COMPARE_OP_NEVER)
 					.minLod(0.0f)
 					.maxLod(0.0f)
 					.borderColor(VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE)
-					.unnormalizedCoordinates(VK_FALSE);
+					.unnormalizedCoordinates(false);
 
 				/* create sampler */
 				int err = vkCreateSampler(device, sampler, null, lp);
@@ -1442,11 +1441,11 @@ public final class HelloVulkan {
 
 			VkPipelineDepthStencilStateCreateInfo ds = VkPipelineDepthStencilStateCreateInfo.callocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO)
-				.depthTestEnable(VK_TRUE)
-				.depthWriteEnable(VK_TRUE)
+				.depthTestEnable(true)
+				.depthWriteEnable(true)
 				.depthCompareOp(VK_COMPARE_OP_LESS_OR_EQUAL)
-				.depthBoundsTestEnable(VK_FALSE)
-				.stencilTestEnable(VK_FALSE);
+				.depthBoundsTestEnable(false)
+				.stencilTestEnable(false);
 			ds.back()
 				.failOp(VK_STENCIL_OP_KEEP)
 				.passOp(VK_STENCIL_OP_KEEP)
@@ -1472,9 +1471,9 @@ public final class HelloVulkan {
 						.polygonMode(VK_POLYGON_MODE_FILL)
 						.cullMode(VK_CULL_MODE_BACK_BIT)
 						.frontFace(VK_FRONT_FACE_CLOCKWISE)
-						.depthClampEnable(VK_FALSE)
-						.rasterizerDiscardEnable(VK_FALSE)
-						.depthBiasEnable(VK_FALSE)
+						.depthClampEnable(false)
+						.rasterizerDiscardEnable(false)
+						.depthBiasEnable(false)
 						.lineWidth(1.0f))
 				.pMultisampleState(
 					VkPipelineMultisampleStateCreateInfo.callocStack(stack)
@@ -1488,7 +1487,7 @@ public final class HelloVulkan {
 						.pAttachments(
 							VkPipelineColorBlendAttachmentState.callocStack(1, stack)
 								.colorWriteMask(0xf)
-								.blendEnable(VK_FALSE)
+								.blendEnable(false)
 						))
 				.pDynamicState(
 					VkPipelineDynamicStateCreateInfo.callocStack(stack)
@@ -1644,7 +1643,7 @@ public final class HelloVulkan {
 						.renderPass(VK_NULL_HANDLE)
 						.subpass(0)
 						.framebuffer(VK_NULL_HANDLE)
-						.occlusionQueryEnable(VK_FALSE)
+						.occlusionQueryEnable(false)
 						.queryFlags(0)
 						.pipelineStatistics(0)
 				);

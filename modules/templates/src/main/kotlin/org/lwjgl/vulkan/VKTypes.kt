@@ -19,7 +19,7 @@ fun config() {
 }
 
 val VkFlags = typedef(uint32_t, "VkFlags")
-val VkBool32 = typedef(uint32_t, "VkBool32")
+val VkBool32 = PrimitiveType("VkBool32", PrimitiveMapping.BOOLEAN4)
 val VkBool32_p = VkBool32.p
 val VkDeviceSize = typedef(uint64_t, "VkDeviceSize")
 val VkDeviceSize_p = VkDeviceSize.p
