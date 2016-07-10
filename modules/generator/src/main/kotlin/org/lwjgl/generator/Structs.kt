@@ -1126,7 +1126,7 @@ ${validations.joinToString("\n")}
 						println("\t/** Unsafe version of {@link #$setter(${it.nativeType.javaMethodType}) $setter}. */")
 						println("\tpublic static void n$setter(long $STRUCT, long value) { memPutAddress($STRUCT + $field, ${it.pointerValue}); }")
 					} else {
-						val javaType = it.nativeType.javaMethodType
+						val javaType = it.nativeType.nativeMethodType
 						val bufferMethod = getBufferMethod(it, javaType)
 
 						println(
@@ -1267,7 +1267,7 @@ ${validations.joinToString("\n")}
 						println("${indent}public $returnType $setter($callbackType value) { $n$setter($ADDRESS, addressSafe(value)); return this; }")
 					} else {
 						println("$indent/** Sets the specified value to the {@code $field} field. */")
-						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType} value) { $n$setter($ADDRESS, value); return this; }")
+						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType} value) { $n$setter($ADDRESS, value${if ( it.nativeType.mapping === PrimitiveMapping.BOOLEAN4 ) " ? 1 : 0" else ""}); return this; }")
 					}
 				}
 
@@ -1344,7 +1344,7 @@ ${validations.joinToString("\n")}
 					if ( it.nativeType is CallbackType ) {
 						println("\tpublic static long n$getter(long $STRUCT) { return memGetAddress($STRUCT + $field); }")
 					} else {
-						val javaType = it.nativeType.javaMethodType
+						val javaType = it.nativeType.nativeMethodType
 						val bufferMethod = getBufferMethod(it, javaType)
 
 						print("\tpublic static $javaType n$getter(long $STRUCT) { return memGet$bufferMethod($STRUCT + $field)")
@@ -1470,7 +1470,7 @@ ${validations.joinToString("\n")}
 						println("${indent}public $callbackType $getter() { return $callbackType.create($n$getter($ADDRESS)); }")
 					} else {
 						println("$indent/** Returns the value of the {@code $getter} field. */")
-						println("${indent}public ${it.nativeType.javaMethodType} $getter() { return $n$getter($ADDRESS); }")
+						println("${indent}public ${it.nativeType.javaMethodType} $getter() { return $n$getter($ADDRESS)${if ( it.nativeType.mapping === PrimitiveMapping.BOOLEAN4 ) " != 0" else ""}; }")
 					}
 				}
 
