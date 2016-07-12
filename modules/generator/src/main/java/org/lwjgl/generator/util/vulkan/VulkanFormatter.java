@@ -136,7 +136,7 @@ public class VulkanFormatter {
 	private static final Pattern NUMBER       = Pattern.compile("`(\\d+)`|code:(\\d+)");
 	private static final Pattern CODE1        = Pattern.compile("(?<=\\s)([`_])(?!\\d+\\1)(.+?)\\1");
 	private static final Pattern FUNCTION     = Pattern.compile("(?:fname|flink):vk(\\w+)");
-	private static final Pattern ENUM         = Pattern.compile("[se]name:VK_(\\w+)");
+	private static final Pattern ENUM         = Pattern.compile("(?:[se]name|dlink):VK_(\\w+)");
 	private static final Pattern STRUCT       = Pattern.compile("sname:(\\w+)(\\s+)struct");
 	private static final Pattern CODE2        = Pattern.compile("(?:pname|basetype|elink|code|sname|slink):(\\w+(?:[.]\\w+)*)");
 	private static final Pattern LINK         = Pattern.compile("<<[^,\n]+,\\s*([^>]+?)>>");

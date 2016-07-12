@@ -331,7 +331,7 @@ val vkCmdBindIndexBuffer =
 			"Each of {@code commandBuffer} and {@code buffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
 			"{@code offset} $must be less than the size of {@code buffer}",
 			"""
-			The sum of {@code offset}, and the address of the range of {@code VkDeviceMemory} object that's backing {@code buffer}, $must be a multiple of the
+			The sum of {@code offset} and the address of the range of {@code VkDeviceMemory} object that is backing {@code buffer}, $must be a multiple of the
 			type indicated by {@code indexType}
 			""",
 			"{@code buffer} $must have been created with the #BUFFER_USAGE_INDEX_BUFFER_BIT flag"
@@ -2742,6 +2742,7 @@ val vkFreeDescriptorSets =
 			{@code pDescriptorSets} $must be a pointer to an array of {@code descriptorSetCount} {@code VkDescriptorSet} handles, each element of which $must
 			either be a valid handle or #NULL_HANDLE
 			""",
+			"Each valid handle in {@code pDescriptorSets} $must have been allocated from {@code descriptorPool}",
 			"{@code descriptorPool} $must have been created with the #DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT flag"
 		)}
 
@@ -2915,12 +2916,12 @@ val vkGetInstanceProcAddr =
 			"If {@code instance} is not $NULL, {@code instance} $must be a valid {@code VkInstance} handle",
 			"{@code pName} $must be a null-terminated string",
 			"""
-			If {@code instance} is $NULL, {@code pName} $must be one of: #EnumerateInstanceExtensionProperties(), #EnumerateInstanceLayerProperties() or
-			#CreateInstance()
+			If {@code instance} is $NULL, {@code pName} $must be "vkEnumerateInstanceExtensionProperties", "vkEnumerateInstanceLayerProperties", or
+			"vkCreateInstance"
 			""",
 			"""
-			If {@code instance} is not $NULL, {@code pName} $mustnot be #EnumerateInstanceExtensionProperties(), #EnumerateInstanceLayerProperties() or
-			#CreateInstance()
+			If {@code instance} is not $NULL, {@code pName} $mustnot be "vkEnumerateInstanceExtensionProperties", "vkEnumerateInstanceLayerProperties", or
+			"vkCreateInstance"
 			"""
 		)}"""
 

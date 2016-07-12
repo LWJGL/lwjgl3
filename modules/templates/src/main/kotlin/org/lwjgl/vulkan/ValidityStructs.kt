@@ -769,7 +769,7 @@ val VkGraphicsPipelineCreateInfo =
 			#PRIMITIVE_TOPOLOGY_PATCH_LIST
 			""",
 			"""
-			If {@code pStages} includes a geometry shader stage, and doesn't include any tessellation shader stages, its shader code $must contain an
+			If {@code pStages} includes a geometry shader stage, and does not include any tessellation shader stages, its shader code $must contain an
 			{@code OpExecutionMode} instruction that specifies an input primitive type that is compatible with the primitive topology specified in
 			{@code pInputAssembly}
 			""",
@@ -1723,7 +1723,7 @@ val VkPresentInfoKHR =
 			element of the {@code pSwapchains} array
 			""",
 			"""
-			Any given element of {@code VkSemaphore} in {@code pWaitSemaphores} $must refer to a prior signal of that {@code VkSemaphore} that won't be
+			Any given element of {@code VkSemaphore} in {@code pWaitSemaphores} $must refer to a prior signal of that {@code VkSemaphore} that will not be
 			consumed by any other wait on that semaphore
 			"""
 		)}"""
@@ -2039,7 +2039,7 @@ val VkSubmitInfo =
 			""",
 			"Any given element of {@code pCommandBuffers} $mustnot have been created with #COMMAND_BUFFER_LEVEL_SECONDARY",
 			"""
-			Any given element of {@code VkSemaphore} in {@code pWaitSemaphores} $must refer to a prior signal of that {@code VkSemaphore} that won't be
+			Any given element of {@code VkSemaphore} in {@code pWaitSemaphores} $must refer to a prior signal of that {@code VkSemaphore} that will not be
 			consumed by any other wait on that semaphore
 			""",
 			"""
