@@ -555,6 +555,7 @@ NK_API int                      nk_item_is_any_active(struct nk_context*);
 NK_API void                     nk_window_set_bounds(struct nk_context*, struct nk_rect);
 NK_API void                     nk_window_set_position(struct nk_context*, struct nk_vec2);
 NK_API void                     nk_window_set_size(struct nk_context*, struct nk_vec2);
+NK_API void                     nk_window_set_title(struct nk_context*, const char *title_to_set);
 NK_API void                     nk_window_set_focus(struct nk_context*, const char *name);
 
 NK_API void                     nk_window_close(struct nk_context *ctx, const char *name);
@@ -2360,7 +2361,7 @@ struct nk_window {
     struct nk_property_state property;
     struct nk_popup_state popup;
     struct nk_edit_state edit;
-	unsigned int scrolled;
+    unsigned int scrolled;
 
     struct nk_table *tables;
     unsigned short table_count;
@@ -2415,56 +2416,6 @@ struct nk_context {
 }
 #endif
 #endif /* NK_H_ */
-
-/*
- * ==============================================================
- *
- *                          IMPLEMENTATION
- *
- * ===============================================================
- */
-#ifdef NK_IMPLEMENTATION
-
-#ifndef NK_POOL_DEFAULT_CAPACITY
-#define NK_POOL_DEFAULT_CAPACITY 16
-#endif
-
-#ifndef NK_DEFAULT_COMMAND_BUFFER_SIZE
-#define NK_DEFAULT_COMMAND_BUFFER_SIZE (4*1024)
-#endif
-
-#ifndef NK_BUFFER_DEFAULT_INITIAL_SIZE
-#define NK_BUFFER_DEFAULT_INITIAL_SIZE (4*1024)
-#endif
-
-#ifdef NK_INCLUDE_DEFAULT_ALLOCATOR
-#include <stdlib.h> /* malloc, free */
-#endif
-#ifdef NK_INCLUDE_STANDARD_IO
-#include <stdio.h> /* fopen, fclose,... */
-#include <stdarg.h>
-#endif
-
-#ifndef NK_ASSERT
-#include <assert.h>
-#define NK_ASSERT(expr) assert(expr)
-#endif
-
-#ifndef NK_MEMSET
-#define NK_MEMSET nk_memset
-#endif
-#ifndef NK_MEMCPY
-#define NK_MEMCPY nk_memcopy
-#endif
-#ifndef NK_SQRT
-#define NK_SQRT nk_sqrt
-#endif
-#ifndef NK_SIN
-#define NK_SIN nk_sin
-#endif
-#ifndef NK_COS
-#define NK_COS nk_cos
-#endif
 
 /* ==============================================================
  *                          MATH
@@ -2534,6 +2485,56 @@ template<typename T> struct nk_alignof{struct Big {T x; char c;}; enum {
 #define NK_ALIGNOF(t) (nk_alignof<t>::value);
 #else
 #define NK_ALIGNOF(t) ((char*)(&((struct {char c; t _h;}*)0)->_h) - (char*)0)
+#endif
+
+/*
+ * ==============================================================
+ *
+ *                          IMPLEMENTATION
+ *
+ * ===============================================================
+ */
+#ifdef NK_IMPLEMENTATION
+
+#ifndef NK_POOL_DEFAULT_CAPACITY
+#define NK_POOL_DEFAULT_CAPACITY 16
+#endif
+
+#ifndef NK_DEFAULT_COMMAND_BUFFER_SIZE
+#define NK_DEFAULT_COMMAND_BUFFER_SIZE (4*1024)
+#endif
+
+#ifndef NK_BUFFER_DEFAULT_INITIAL_SIZE
+#define NK_BUFFER_DEFAULT_INITIAL_SIZE (4*1024)
+#endif
+
+#ifdef NK_INCLUDE_DEFAULT_ALLOCATOR
+#include <stdlib.h> /* malloc, free */
+#endif
+#ifdef NK_INCLUDE_STANDARD_IO
+#include <stdio.h> /* fopen, fclose,... */
+#include <stdarg.h>
+#endif
+
+#ifndef NK_ASSERT
+#include <assert.h>
+#define NK_ASSERT(expr) assert(expr)
+#endif
+
+#ifndef NK_MEMSET
+#define NK_MEMSET nk_memset
+#endif
+#ifndef NK_MEMCPY
+#define NK_MEMCPY nk_memcopy
+#endif
+#ifndef NK_SQRT
+#define NK_SQRT nk_sqrt
+#endif
+#ifndef NK_SIN
+#define NK_SIN nk_sin
+#endif
+#ifndef NK_COS
+#define NK_COS nk_cos
 #endif
 
 /* make sure correct type size */
@@ -15430,6 +15431,18 @@ nk_window_set_size(struct nk_context *ctx, struct nk_vec2 size)
 }
 
 NK_API void
+nk_window_set_title(struct nk_context *ctx, const char *title)
+{
+    int title_len;
+    nk_hash title_hash;
+    NK_ASSERT(ctx); NK_ASSERT(ctx->current);
+    if (!ctx || !ctx->current) return;
+    title_len = (int)nk_strlen(title);
+    title_hash = nk_murmur_hash(title, (int)title_len, NK_WINDOW_TITLE);
+    ctx->current->name = title_hash;
+}
+
+NK_API void
 nk_window_collapse(struct nk_context *ctx, const char *name,
                     enum nk_collapse_states c)
 {
@@ -18639,13 +18652,13 @@ nk_nonblock_begin(struct nk_panel *layout, struct nk_context *ctx,
         win->popup.win = popup;
         nk_command_buffer_init(&popup->buffer, &ctx->memory, NK_CLIPPING_ON);
     } else {
-        /* check if user clicked outside the popup and close if so */
-        int clicked, in_body, in_header;
-        clicked = nk_input_has_mouse_click(&ctx->input, NK_BUTTON_LEFT);
-        in_body = nk_input_is_mouse_click_in_rect(&ctx->input, NK_BUTTON_LEFT, body);
-        in_header = nk_input_is_mouse_click_in_rect(&ctx->input, NK_BUTTON_LEFT, header);
+        /* close the popup if user pressed outside or in the header */
+        int pressed, in_body, in_header;
+        pressed = nk_input_is_mouse_pressed(&ctx->input, NK_BUTTON_LEFT);
+        in_body = nk_input_is_mouse_hovering_rect(&ctx->input, body);
+        in_header = nk_input_is_mouse_hovering_rect(&ctx->input, header);
 
-        if (clicked && !in_body && !in_header)
+        if (pressed && (!in_body || in_header))
             is_active = nk_false;
     }
 

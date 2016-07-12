@@ -637,6 +637,14 @@ ENABLE_WARNINGS()""")
 		)
 
 		void(
+			"window_set_title",
+			"",
+
+			ctx,
+			const..charUTF8_p.IN("title_to_set", "")
+		)
+
+		void(
 			"window_set_focus",
 			"",
 
