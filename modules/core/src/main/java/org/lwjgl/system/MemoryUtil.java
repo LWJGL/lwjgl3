@@ -15,7 +15,6 @@ import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.LazyInit.*;
 import static org.lwjgl.system.Pointer.*;
-import static org.lwjgl.system.dyncall.DynCall.*;
 
 /**
  * This class provides functionality for managing native memory.
@@ -137,31 +136,6 @@ public final class MemoryUtil {
 	 */
 	public static MemoryAllocator getAllocator() {
 		return ALLOCATOR_IMPL;
-	}
-
-	public static void setupAllocator(String libraryName) {
-		MemoryAllocator allocator = getAllocator();
-
-		long vm = dcNewCallVM(1024);
-		try ( SharedLibrary library = Library.loadNative(libraryName) ) {
-			long lwjgl_setup_malloc = library.getFunctionAddress("lwjgl_setup_malloc");
-
-			dcMode(vm, DC_CALL_C_DEFAULT);
-			{
-				dcReset(vm);
-
-				dcArgPointer(vm, allocator.getMalloc());
-				dcArgPointer(vm, allocator.getCalloc());
-				dcArgPointer(vm, allocator.getRealloc());
-				dcArgPointer(vm, allocator.getFree());
-				dcArgPointer(vm, allocator.getAlignedAlloc());
-				dcArgPointer(vm, allocator.getAlignedFree());
-
-				dcCallVoid(vm, lwjgl_setup_malloc);
-			}
-		} finally {
-			dcFree(vm);
-		}
 	}
 
 	// --- [ memAlloc ] ---

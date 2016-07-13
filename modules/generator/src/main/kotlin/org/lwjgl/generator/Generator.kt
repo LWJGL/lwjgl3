@@ -192,11 +192,15 @@ class Generator(
 		}
 
 		fun registerLibraryInit(packageName: String, className: String, libraryName: String, setupAllocator: Boolean = false) {
-			Generator.register(object : GeneratorTarget(packageName, className) {
+			Generator.register(object : GeneratorTargetNative(packageName, className) {
 				init {
 					access = Access.INTERNAL
 					documentation = "Initializes the $libraryName shared library."
 					javaImport("org.lwjgl.system.*")
+					if ( setupAllocator )
+						javaImport("static org.lwjgl.system.MemoryUtil.*")
+						nativeDirective("""#define LWJGL_MALLOC_LIB $nativeFileNameJNI
+#include "lwjgl_malloc.h"""")
 				}
 
 				override fun PrintWriter.generateJava() {
@@ -207,7 +211,16 @@ class Generator(
 	static {
 		String libName = Platform.mapLibraryNameBundled("lwjgl_$libraryName");
 		Library.loadSystem(libName);${if ( setupAllocator ) """
-		MemoryUtil.setupAllocator(libName);""" else ""}
+
+		MemoryAllocator allocator = getAllocator();
+		setupMalloc(
+			allocator.getMalloc(),
+			allocator.getCalloc(),
+			allocator.getRealloc(),
+			allocator.getFree(),
+			allocator.getAlignedAlloc(),
+			allocator.getAlignedFree()
+		);""" else ""}
 	}
 
 	private $className() {
@@ -215,9 +228,25 @@ class Generator(
 
 	static void initialize() {
 		// intentionally empty to trigger static initializer
-	}
+	}${if ( setupAllocator ) """
+
+	private static native void setupMalloc(
+		long malloc,
+		long calloc,
+		long realloc,
+		long free,
+		long aligned_alloc,
+		long aligned_free
+	);""" else ""}
 
 }""")
+				}
+
+				override val skipNative: Boolean
+					get() = !setupAllocator
+
+				override fun PrintWriter.generateNative() {
+					generateNativePreamble()
 				}
 			})
 		}
