@@ -204,8 +204,9 @@ class Generator(
 						"""${access.modifier}final class $className {
 
 	static {
-		Library.loadSystem("lwjgl_$libraryName");${if ( setupAllocator ) """
-		MemoryUtil.setupAllocator("lwjgl_$libraryName");""" else ""}
+		String libName = Platform.mapLibraryNameBundled("lwjgl_$libraryName");
+		Library.loadSystem(libName);${if ( setupAllocator ) """
+		MemoryUtil.setupAllocator(libName);""" else ""}
 	}
 
 	private $className() {

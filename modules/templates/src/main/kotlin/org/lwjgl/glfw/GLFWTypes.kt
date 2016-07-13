@@ -25,7 +25,7 @@ fun config() {
 	)
 }
 
-val GLFW_BINDING = simpleBinding("glfw", """Configuration.GLFW_LIBRARY_NAME.get(Pointer.BITS64 ? "glfw" : "glfw32")""")
+val GLFW_BINDING = simpleBinding("glfw", """Configuration.GLFW_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("glfw"))""")
 val GLFW_BINDING_DELEGATE = GLFW_BINDING.delegate("GLFW.getLibrary()")
 
 val GLFWmonitor = "GLFWmonitor".p

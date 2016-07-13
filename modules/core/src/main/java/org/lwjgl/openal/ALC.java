@@ -64,7 +64,7 @@ public final class ALC {
 				throw new IllegalStateException();
 		}
 
-		create(Configuration.OPENAL_LIBRARY_NAME.get(Pointer.BITS64 ? libName : libName + "32"));
+		create(Configuration.OPENAL_LIBRARY_NAME.get(Platform.mapLibraryNameBundled(libName)));
 	}
 
 	private static class SharedLibraryAL extends SharedLibrary.Delegate implements FunctionProviderLocal {

@@ -72,4 +72,8 @@ public enum Platform {
 		return PLATFORM;
 	}
 
+	public static String mapLibraryNameBundled(String name) {
+		return Pointer.BITS64 ? name : name + "32";
+	}
+
 }
