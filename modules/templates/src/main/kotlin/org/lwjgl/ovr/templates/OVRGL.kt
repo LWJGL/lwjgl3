@@ -38,7 +38,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 			"out_TextureSwapChain",
 			"""
 			returns the created {@code ovrTextureSwapChain}, which will be valid upon a successful return value, else it will be $NULL. This texture swap chain must
-			be eventually destroyed via OVR#DestroyTextureSwapChain() before destroying the HMD with OVR#Destroy().
+			be eventually destroyed via OVR#DestroyTextureSwapChain() before destroying the session with OVR#Destroy().
 			"""
 		),
 
@@ -81,7 +81,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 			"out_MirrorTexture",
 			"""
 			returns the created {@code OVRMirrorTextur}e, which will be valid upon a successful return value, else it will be $NULL. This texture must be
-			eventually destroyed via OVR#DestroyMirrorTexture() before destroying the HMD with OVR#Destroy().
+			eventually destroyed via OVR#DestroyMirrorTexture() before destroying the session with OVR#Destroy().
 			"""
 		),
 

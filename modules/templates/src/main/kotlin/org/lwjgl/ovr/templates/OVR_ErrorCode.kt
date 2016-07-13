@@ -22,11 +22,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 			continue calling #SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
 			""",
 			"1000"
-		),
-		"Success_HMDFirmwareMismatch".enum("The HMD Firmware is out of date but is acceptable.", "4100"),
-		"Success_TrackerFirmwareMismatch".enum("The Tracker Firmware is out of date but is acceptable."),
-		"Success_ControllerFirmwareMismatch".enum("The controller firmware is out of date but is acceptable.", "4104"),
-		"Success_TrackerDriverNotFound".enum("The tracker driver interface was not found. Can be a temporary error.")
+		)
 	)
 
 	EnumConstant(
@@ -34,7 +30,6 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 
 		/* General errors */
 		"Error_MemoryAllocationFailure".enum("Failure to allocate memory.", "-1000"),
-		"Error_SocketCreationFailure".enum("Failure to create a socket.", "-1001"),
 		"Error_InvalidSession".enum("Invalid ovrSession parameter provided.", "-1002"),
 		"Error_Timeout".enum("The operation timed out.", "-1003"),
 		"Error_NotInitialized".enum("The system or component has not been initialized.", "-1004"),
@@ -49,10 +44,8 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_ServiceDeadlockDetected".enum("The service watchdog discovered a deadlock.", "-1014"),
 
 		/* Audio error range, reserved for Audio errors. */
-		"Error_AudioReservedBegin".enum("First Audio error.", "-2000"),
 		"Error_AudioDeviceNotFound".enum("Failure to find the specified audio device.", "-2001"),
 		"Error_AudioComError".enum("Generic COM error.", "-2002"),
-		"Error_AudioReservedEnd".enum("Last Audio error.", "-2999"),
 
 		/* Initialization errors. */
 		"Error_Initialize".enum("Generic initialization error.", "-3000"),
@@ -77,47 +70,6 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_DisplayManagerInit".enum("Initialization of the DisplayManager failed.", "-3019"),
 		"Error_TrackerDriverInit".enum("Failed to get the interface for an attached tracker", "-3020"),
 
-		/* Hardware errors */
-		"Error_InvalidBundleAdjustment".enum("Headset has no bundle adjustment data.", "-4000"),
-		"Error_USBBandwidth".enum("The USB hub cannot handle the camera frame bandwidth.", "-4001"),
-		"Error_USBEnumeratedSpeed".enum("The USB camera is not enumerating at the correct device speed.", "-4002"),
-		"Error_ImageSensorCommError".enum("Unable to communicate with the image sensor.", "-4003"),
-		"Error_GeneralTrackerFailure".enum("We use this to report various sensor issues that don't fit in an easily classifiable bucket.", "-4004"),
-		"Error_ExcessiveFrameTruncation".enum("A more than acceptable number of frames are coming back truncated.", "-4005"),
-		"Error_ExcessiveFrameSkipping".enum("A more than acceptable number of frames have been skipped.", "-4006"),
-		"Error_SyncDisconnected".enum("The sensor is not receiving the sync signal (cable disconnected?).", "-4007"),
-		"Error_TrackerMemoryReadFailure".enum("Failed to read memory from the sensor.", "-4008"),
-		"Error_TrackerMemoryWriteFailure".enum("Failed to write memory from the sensor.", "-4009"),
-		"Error_TrackerFrameTimeout".enum("Timed out waiting for a camera frame.", "-4010"),
-		"Error_TrackerTruncatedFrame".enum("Truncated frame returned from sensor.", "-4011"),
-		"Error_TrackerDriverFailure".enum("The sensor driver has encountered a problem.", "-4012"),
-		"Error_TrackerNRFFailure".enum("The sensor wireless subsystem has encountered a problem.", "-4013"),
-		"Error_HardwareGone".enum("The hardware has been unplugged", "-4014"),
-		"Error_NordicEnabledNoSync".enum("The nordic indicates that sync is enabled but it is not sending sync pulses", "-4015"),
-		"Error_NordicSyncNoFrames".enum("It looks like we're getting a sync signal, but no camera frames have been received", "-4016"),
-		"Error_CatastrophicFailure".enum("A catastrophic failure has occurred.  We will attempt to recover by resetting the device", "-4017"),
-		"Error_CatastrophicTimeout".enum("The catastrophic recovery has timed out.", "-4018"),
-		"Error_RepeatCatastrophicFail".enum("Catastrophic failure has repeated too many times.", "-4019"),
-		"Error_USBOpenDeviceFailure".enum("Could not open handle for Rift device (likely already in use by another process).", "-4020"),
-		"Error_HMDGeneralFailure".enum("Unexpected HMD issues that don't fit a specific bucket.", "-4021"),
-
-		"Error_HMDFirmwareMismatch".enum("The HMD Firmware is out of date and is unacceptable.", "-4100"),
-		"Error_TrackerFirmwareMismatch".enum("The sensor Firmware is out of date and is unacceptable.", "-4101"),
-		"Error_BootloaderDeviceDetected".enum("A bootloader HMD is detected by the service.", "-4102"),
-		"Error_TrackerCalibrationError".enum("The sensor calibration is missing or incorrect.", "-4103"),
-		"Error_ControllerFirmwareMismatch".enum("The controller firmware is out of date and is unacceptable.", "-4104"),
-		"Error_DevManDeviceDetected".enum("A DeviceManagement mode HMD is detected by the service.", "-4105"),
-        "Error_RebootedBootloaderDevice".enum("Had to reboot bootloader device, which succeeded.", "-4106"),
-        "Error_FailedRebootBootloaderDev".enum("Had to reboot bootloader device, which failed. Device is stuck in bootloader mode.", "-4107"),
-
-		"Error_IMUTooManyLostSamples".enum("Too many lost IMU samples.", "-4200"),
-		"Error_IMURateError".enum("IMU rate is outside of the expected range.", "-4201"),
-		"Error_FeatureReportFailure".enum("A feature report has failed.", "-4202"),
-		"Error_HMDWirelessTimeout".enum("HMD wireless interface never returned from busy state.", "-4203"),
-	
-		"Error_BootloaderAssertLog".enum("HMD Bootloader Assert Log was not empty.", "-4300"),
-		"Error_AppAssertLog".enum("HMD App Assert Log was not empty.", "-4301"),
-
 		/* Synchronization errors */
 		"Error_Incomplete".enum("Requested async work not yet complete.", "-5000"),
 		"Error_Abandoned".enum("Requested async work was abandoned and result is incomplete.", "-5001"),
@@ -134,20 +86,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_DisplayPluggedIncorrectly".enum("Display portion of HMD is plugged into an incompatible port (ex: IGP)", "-6008"),
 
 		/* Fatal errors */
-		"Error_RuntimeException".enum("A runtime exception occurred. The application is required to shutdown LibOVR and re-initialize it before this error state will be cleared.", "-7000"),
-
-
-		"Error_MetricsUnknownApp".enum("", "-90000"),
-		"Error_MetricsDuplicateApp".enum("", "-90001"),
-		"Error_MetricsNoEvents".enum("", "-90002"),
-		"Error_MetricsRuntime".enum("", "-90003"),
-		"Error_MetricsFile".enum("", "-90004"),
-		"Error_MetricsNoClientInfo".enum("", "-90005"),
-		"Error_MetricsNoAppMetaData".enum("", "-90006"),
-		"Error_MetricsNoApp".enum("", "-90007"),
-		"Error_MetricsOafFailure".enum("", "-90008"),
-		"Error_MetricsSessionAlreadyActive".enum("", "-90009"),
-		"Error_MetricsSessionNotActive".enum("", "-90010")
+		"Error_RuntimeException".enum("A runtime exception occurred. The application is required to shutdown LibOVR and re-initialize it before this error state will be cleared.", "-7000")
 	)
 
 	val SUCCESS = bool(

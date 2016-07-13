@@ -22,43 +22,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 ENABLE_WARNINGS()""")
 
 	documentation =
-		"""
-		Native bindings to libOVR, using the <a href="https://developer.oculus.com/">Oculus SDK</a> C API.
-
-		Overview of the API:
-
-		<h3>Setup</h3>
-		${ul(
-			"#Initialize()",
-			"#Create()(&hmd, &graphicsId)",
-			"Use hmd members and #GetFovTextureSize() to determine graphics configuration and #GetRenderDesc() to get per-eye rendering parameters.",
-			"""
-			Allocate texture swap chains with {@code ovr_CreateTextureSwapChainDX()} or OVRGL#CreateTextureSwapChainGL(). Create any associated render target
-			views or frame buffer objects.
-			"""
-		)}
-
-		<h3>Application Loop</h3>
-		${ul(
-			"Call #GetPredictedDisplayTime() to get the current frame timing information.",
-			"Call #GetTrackingState() and OVRUtil#CalcEyePoses() to obtain the predicted rendering pose for each eye based on timing.",
-			"""
-			Render the scene content into the current buffer of the texture swapchains for each eye and layer you plan to update this frame. If you render into
-			a texture swap chain, you must call #CommitTextureSwapChain() on it to commit the changes before you reference the chain this frame (otherwise,
-			your latest changes won't be picked up).
-			""",
-			"""
-			Call #SubmitFrame() to render the distorted layers to and present them on the HMD. If #SubmitFrame() returns OVRErrorCode#Success_NotVisible, there
-			is no need to render the scene for the next loop iteration. Instead, just call #SubmitFrame() again until it returns OVRErrorCode#Success.
-			"""
-		)}
-
-		<h3>Shutdown</h3>
-		${ul(
-			"#Destroy()",
-			"#Shutdown()"
-		)}
-		"""
+		"""Native bindings to libOVR, using the <a href="https://developer.oculus.com/">Oculus SDK</a> C API."""
 
 	IntConstant(
 		"Boolean values",
@@ -100,15 +64,15 @@ ENABLE_WARNINGS()""")
 
 		"Hmd_None".enum("", "0"),
 		"Hmd_DK1".enum("", "3"),
-		"Hmd_DKHD".enum(""),
+		"Hmd_DKHD".enum,
 		"Hmd_DK2".enum("", "6"),
 		"Hmd_CB".enum("", "8"),
-		"Hmd_Other".enum(""),
-		"Hmd_E3_2015".enum(""),
-		"Hmd_ES06".enum(""),
-		"Hmd_ES09".enum(""),
-		"Hmd_ES11".enum(""),
-		"Hmd_CV1".enum("")
+		"Hmd_Other".enum,
+		"Hmd_E3_2015".enum,
+		"Hmd_ES06".enum,
+		"Hmd_ES09".enum,
+		"Hmd_ES11".enum,
+		"Hmd_CV1".enum
 	)
 
 	EnumConstant(
@@ -197,7 +161,7 @@ ENABLE_WARNINGS()""")
 		All texture swap chains are automatically bindable as shader input resources since the Oculus runtime needs this to read them.
 		""",
 
-		"TextureBind_None".enum(""),
+		"TextureBind_None".enum,
 		"TextureBind_DX_RenderTarget".enum("The application can write into the chain with pixel shader", 0x0001),
 		"TextureBind_DX_UnorderedAccess".enum("The application can write to the chain with compute shader", 0x0002),
 		"TextureBind_DX_DepthStencil".enum("The chain buffers can be bound as depth and/or stencil buffers", 0x0004)
@@ -206,27 +170,39 @@ ENABLE_WARNINGS()""")
 	EnumConstant(
 		"The format of a texture. ({@code ovrTextureFormat})",
 
-		"OVR_FORMAT_UNKNOWN".enum(""),
+		"OVR_FORMAT_UNKNOWN".enum,
 		"OVR_FORMAT_B5G6R5_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
 		"OVR_FORMAT_B5G5R5A1_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
 		"OVR_FORMAT_B4G4R4A4_UNORM".enum("Not currently supported on PC. Would require a DirectX 11.1 device."),
-		"OVR_FORMAT_R8G8B8A8_UNORM".enum(""),
-		"OVR_FORMAT_R8G8B8A8_UNORM_SRGB".enum(""),
-		"OVR_FORMAT_B8G8R8A8_UNORM".enum(""),
+		"OVR_FORMAT_R8G8B8A8_UNORM".enum,
+		"OVR_FORMAT_R8G8B8A8_UNORM_SRGB".enum,
+		"OVR_FORMAT_B8G8R8A8_UNORM".enum,
 		"OVR_FORMAT_B8G8R8A8_UNORM_SRGB".enum("Not supported for OpenGL applications."),
 		"OVR_FORMAT_B8G8R8X8_UNORM".enum("Not supported for OpenGL applications."),
 		"OVR_FORMAT_B8G8R8X8_UNORM_SRGB".enum("Not supported for OpenGL applications."),
-		"OVR_FORMAT_R16G16B16A16_FLOAT".enum(""),
-		"OVR_FORMAT_D16_UNORM".enum(""),
-		"OVR_FORMAT_D24_UNORM_S8_UINT".enum(""),
-		"OVR_FORMAT_D32_FLOAT".enum(""),
-		"OVR_FORMAT_D32_FLOAT_S8X24_UINT".enum("")
+		"OVR_FORMAT_R16G16B16A16_FLOAT".enum,
+		"OVR_FORMAT_D16_UNORM".enum,
+		"OVR_FORMAT_D24_UNORM_S8_UINT".enum,
+		"OVR_FORMAT_D32_FLOAT".enum,
+		"OVR_FORMAT_D32_FLOAT_S8X24_UINT".enum,
+		
+		// Added in 1.5 compressed formats can be used for static layers
+		"OVR_FORMAT_BC1_UNORM".enum,
+		"OVR_FORMAT_BC1_UNORM_SRGB".enum,
+		"OVR_FORMAT_BC2_UNORM".enum,
+		"OVR_FORMAT_BC2_UNORM_SRGB".enum,
+		"OVR_FORMAT_BC3_UNORM".enum,
+		"OVR_FORMAT_BC3_UNORM_SRGB".enum,
+		"OVR_FORMAT_BC6H_UF16".enum,
+		"OVR_FORMAT_BC6H_SF16".enum,
+		"OVR_FORMAT_BC7_UNORM".enum,
+		"OVR_FORMAT_BC7_UNORM_SRGB".enum
 	).noPrefix()
 
 	EnumConstant(
 		"Misc flags overriding particular behaviors of a texture swap chain. ({@code ovrTextureFlags})",
 
-		"TextureMisc_None".enum(""),
+		"TextureMisc_None".enum,
 		"TextureMisc_DX_Typeless".enum(
 			"""
 	        DX only: The underlying texture is created with a TYPELESS equivalent of the format specified in the texture desc. The SDK will still access the
@@ -286,16 +262,18 @@ ENABLE_WARNINGS()""")
 		"Touch_A".enum("Touch A", "ovrButton_A"),
 		"Touch_B".enum("Touch B", "ovrButton_B"),
 		"Touch_RThumb".enum("Touch RThumb", "ovrButton_RThumb"),
+		"Touch_RThumbRest".enum("Touch RThumbRest", 0x00000008),
 		"Touch_RIndexTrigger".enum("Touch RIndexTrigger", 0x00000010),
 
-		"Touch_RButtonMask".enum("Bit mask of all the button touches on the right controller", "ovrTouch_A | ovrTouch_B | ovrTouch_RThumb | ovrTouch_RIndexTrigger"),
+		"Touch_RButtonMask".enum("Bit mask of all the button touches on the right controller", "ovrTouch_A | ovrTouch_B | ovrTouch_RThumb | ovrTouch_RThumbRest | ovrTouch_RIndexTrigger"),
 
 		"Touch_X".enum("Touch X", "ovrButton_X"),
 		"Touch_Y".enum("Touch Y", "ovrButton_Y"),
 		"Touch_LThumb".enum("Touch LThumb", "ovrButton_LThumb"),
+		"Touch_LThumbRest".enum("Touch LThumbRest", 0x00000800),
 		"Touch_LIndexTrigger".enum("Touch LIndexTrigger", 0x00001000),
 
-		"Touch_LButtonMask".enum("Bit mask of all the button touches on the left controller", "ovrTouch_X | ovrTouch_Y | ovrTouch_LThumb | ovrTouch_LIndexTrigger"),
+		"Touch_LButtonMask".enum("Bit mask of all the button touches on the left controller", "ovrTouch_X | ovrTouch_Y | ovrTouch_LThumb | ovrTouch_LThumbRest | ovrTouch_LIndexTrigger"),
 
 		// Finger pose state
 		// Derived internally based on distance, proximity to sensors and filtering.
@@ -314,10 +292,10 @@ ENABLE_WARNINGS()""")
 		"Which controller is connected; multiple can be connected at once. ({@code ovrControllerType})",
 
 		"ControllerType_None".enum("", 0x00),
-		"ControllerType_LTouch".enum(""),
-		"ControllerType_RTouch".enum(""),
-		"ControllerType_Touch".enum(""),
-		"ControllerType_Remote".enum(""),
+		"ControllerType_LTouch".enum,
+		"ControllerType_RTouch".enum,
+		"ControllerType_Touch".enum,
+		"ControllerType_Remote".enum,
 		"ControllerType_XBox".enum("", 0x10),
 
 		"ControllerType_Active".enum("Operate on or query whichever controller is active.", 0xff)
@@ -327,7 +305,7 @@ ENABLE_WARNINGS()""")
 		"Names for the left and right hand array indexes. ({@code ovrHandType})",
 
 		"Hand_Left".enum("", 0),
-		"Hand_Right".enum("")
+		"Hand_Right".enum
 	)
 
 	ovrResult(
@@ -426,6 +404,39 @@ ENABLE_WARNINGS()""")
 		returnDoc = "the {@code strlen} of the message or a negative value if the message is too large"
 	)
 
+	ovrResult(
+		"IdentifyClient",
+		"""
+		Identifies client application info.
+
+		The string is one or more newline-delimited lines of optional info indicating engine name, engine version, engine plugin name, engine plugin version,
+		engine editor. The order of the lines is not relevant. Individual lines are optional. A newline is not necessary at the end of the last line. Call
+		after #Initialize() and before the first call to #Create(). Each value is limited to 20 characters. Key names such as 'EngineName:', 'EngineVersion:'
+		do not count towards this limit.
+
+${codeBlock("""
+EngineName: %s\n
+EngineVersion: %s\n
+EnginePluginName: %s\n
+EnginePluginVersion: %s\n
+EngineEditor: <boolean> ('true' or 'false')\n""")}
+
+		Example code:
+		${codeBlock("""
+ovr_IdentifyClient(
+	"EngineName: Unity\n" +
+	"EngineVersion: 5.3.3\n" +
+	"EnginePluginName: OVRPlugin\n" +
+	"EnginePluginVersion: 1.2.0\n" +
+	"EngineEditor: true");""")}
+		""",
+
+		const..charUTF8_p.IN(
+			"identity",
+			"specifies one or more newline-delimited lines of optional info"
+		)
+	)
+
 	// ----------------
 	// HMD Management
 
@@ -485,7 +496,7 @@ ENABLE_WARNINGS()""")
 	    Creates a handle to a VR session.
 
 		Upon success the returned {@code ovrSession} must be eventually freed with #Destroy() when it is no longer needed. A second call to #Create() will result
-		in an error return value if the previous {@code Hmd} has not been destroyed.
+		in an error return value if the previous session has not been destroyed.
 	    """,
 
 		Check(1)..ovrSession_p.OUT("pSession", "a pointer to an {@code ovrSession} which will be written to upon success"),
@@ -498,12 +509,12 @@ ENABLE_WARNINGS()""")
 			"""
 		),
 
-		returnDoc = "an {@code ovrResult} indicating success or failure. Upon failure the returned {@code pHmd} will be $NULL."
+		returnDoc = "an {@code ovrResult} indicating success or failure. Upon failure the returned {@code ovrSession} will be $NULL."
 	)
 
 	void(
 		"Destroy",
-		"Destroys the HMD.",
+		"Destroys the session.",
 
 		session
 	)
@@ -588,7 +599,7 @@ ENABLE_WARNINGS()""")
 			"latencyMarker",
 			"""
 			specifies that this call is the point in time where the "App-to-Mid-Photon" latency timer starts from. If a given {@code ovrLayer} provides
-			"SensorSampleTimestamp", that will override the value stored here.
+			"SensorSampleTime", that will override the value stored here.
 			"""
 		),
 
@@ -821,7 +832,7 @@ ovrLayerEyeFov  layer0;
 ovrLayerQuad    layer1;
 ...
 ovrLayerHeader* layers[2] = { &layer0.Header, &layer1.Header };
-ovrResult result = ovr_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
+ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")}
 	    """,
 
 		session,
@@ -918,7 +929,7 @@ ovrResult result = ovr_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 		App can toggle performance HUD modes as such:
 		${codeBlock("""
 ovrPerfHudMode PerfHudMode = ovrPerfHud_LatencyTiming;
-ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
+ovr_SetInt(session, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		""",
 
 		"PerfHud_Off".enum("Turns off the performance HUD"),
@@ -930,19 +941,38 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 	)
 
 	EnumConstant(
-		"Layer HUD enables the HMD user to see information about a layer.",
+		"""
+		Layer HUD enables the HMD user to see information about a layer.
+
+		App can toggle layer HUD modes as such:
+${codeBlock("""
+ovrLayerHudMode LayerHudMode = ovrLayerHud_Info;
+ovr_SetInt(Hmd, OVR_LAYER_HUD_MODE, (int)LayerHudMode);""")}
+		""",
 
 		"LayerHud_Off" enum "Turns off the layer HUD",
 		"LayerHud_Info" enum "Shows info about a specific layer"
 	)
 
-	IntConstant(
-		"Visual properties of the stereo guide.",
+	EnumConstant(
+		"""
+		Debug HUD is provided to help developers gauge and debug the fidelity of their app's stereo rendering characteristics. Using the provided quad and
+		crosshair guides, the developer can verify various aspects such as VR tracking units (e.g. meters), stereo camera-parallax properties (e.g. making sure
+		objects at infinity are rendered with the proper separation), measuring VR geometry sizes and distances and more.
 
-		"DebugHudStereo_Off".."0", ///< Turns off the Stereo Debug HUD
-		"DebugHudStereo_Quad".."1", ///< Renders Quad in world for Stereo Debugging
-		"DebugHudStereo_QuadWithCrosshair".."2", ///< Renders Quad+crosshair in world for Stereo Debugging
-		"DebugHudStereo_CrosshairAtInfinity".."3"  ///< Renders screen-space crosshair at infinity for Stereo Debugging
+		App can toggle the debug HUD modes as such:
+${codeBlock("""
+ovrDebugHudStereoMode DebugHudMode = ovrDebugHudStereo_QuadWithCrosshair;
+ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
+
+		The app can modify the visual properties of the stereo guide (i.e. quad, crosshair) using the #SetFloatArray() function. For a list of tweakable
+		properties, see the {@code OVR_DEBUG_HUD_STEREO_GUIDE_*} keys in ##OVRKeys.
+		""",
+
+		"DebugHudStereo_Off".enum("Turns off the Stereo Debug HUD", "0"),
+		"DebugHudStereo_Quad".enum("Renders Quad in world for Stereo Debugging"),
+		"DebugHudStereo_QuadWithCrosshair".enum("Renders Quad+crosshair in world for Stereo Debugging"),
+		"DebugHudStereo_CrosshairAtInfinity".enum("Renders screen-space crosshair at infinity for Stereo Debugging")
 	)
 
 	// ----------------
