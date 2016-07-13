@@ -32,8 +32,12 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 		println("\t}")
 	}
 
-	override fun PrintWriter.generateContent() {
-		println("""/** Defines the capabilities of an EGLDisplay or the EGL client library. */""")
+	init {
+		documentation = "Defines the capabilities of an EGLDisplay or the EGL client library."
+	}
+
+	override fun PrintWriter.generateJava() {
+		generateJavaPreamble()
 		println("public class $CAPABILITIES_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 ->

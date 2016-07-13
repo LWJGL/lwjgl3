@@ -37,7 +37,7 @@ fun config() {
 		"""
 	)
 
-	Generator.register(object : CustomClass(JEMALLOC_PACKAGE, "JEmallocAllocator") {
+	Generator.register(object : GeneratorTarget(JEMALLOC_PACKAGE, "JEmallocAllocator") {
 
 		init {
 			javaImport("org.lwjgl.system.MemoryUtil.*")
@@ -45,7 +45,8 @@ fun config() {
 			documentation = "A {@link MemoryAllocator} implementation using the jemalloc library."
 		}
 
-		override fun PrintWriter.generateContent() {
+		override fun PrintWriter.generateJava() {
+			generateJavaPreamble()
 			println("""public class JEmallocAllocator implements MemoryAllocator {
 
 	@Override

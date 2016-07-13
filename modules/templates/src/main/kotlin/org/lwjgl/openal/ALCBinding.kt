@@ -40,8 +40,12 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 		println("\t}")
 	}
 
-	override fun PrintWriter.generateContent() {
-		println("/** Defines the capabilities of the OpenAL Context API. */")
+	init {
+		documentation = "Defines the capabilities of the OpenAL Context API."
+	}
+
+	override fun PrintWriter.generateJava() {
+		generateJavaPreamble()
 		println("public final class $ALC_CAP_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 ->

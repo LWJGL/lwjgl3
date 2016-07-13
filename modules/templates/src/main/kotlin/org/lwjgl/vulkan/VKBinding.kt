@@ -60,8 +60,12 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		println("\t}")
 	}
 
-	override fun PrintWriter.generateContent() {
-		println("/** Defines the capabilities of a Vulkan {@code VkInstance} or {@code VkDevice}. */")
+	init {
+		documentation = "Defines the capabilities of a Vulkan {@code VkInstance} or {@code VkDevice}."
+	}
+
+	override fun PrintWriter.generateJava() {
+		generateJavaPreamble()
 		println("public class $CAPABILITIES_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 ->

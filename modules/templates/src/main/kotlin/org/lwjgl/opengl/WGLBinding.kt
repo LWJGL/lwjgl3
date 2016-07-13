@@ -32,8 +32,12 @@ val WGLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILI
 		println("\t}")
 	}
 
-	override fun PrintWriter.generateContent() {
-		println("/** Defines the WGL capabilities of an OpenGL device. */")
+	init {
+		documentation = "Defines the WGL capabilities of an OpenGL device."
+	}
+
+	override fun PrintWriter.generateJava() {
+		generateJavaPreamble()
 		println("public final class $CAPABILITIES_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 -> o1.templateName.compareTo(o2.templateName, ignoreCase = true) }

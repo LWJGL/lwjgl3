@@ -192,14 +192,15 @@ class Generator(
 		}
 
 		fun registerLibraryInit(packageName: String, className: String, libraryName: String, setupAllocator: Boolean = false) {
-			Generator.register(object : CustomClass(packageName, className) {
+			Generator.register(object : GeneratorTarget(packageName, className) {
 				init {
 					access = Access.INTERNAL
 					documentation = "Initializes the $libraryName shared library."
 					javaImport("org.lwjgl.system.*")
 				}
 
-				override fun PrintWriter.generateContent() {
+				override fun PrintWriter.generateJava() {
+					generateJavaPreamble()
 					println(
 						"""${access.modifier}final class $className {
 

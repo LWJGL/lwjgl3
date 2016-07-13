@@ -179,6 +179,17 @@ abstract class GeneratorTarget(
 		return this
 	}
 
+	protected fun PrintWriter.generateJavaPreamble() {
+		print(HEADER)
+		println("package $packageName;\n")
+
+		preamble.printJava(this)
+
+		val documentation = this@GeneratorTarget.documentation
+		if (documentation != null)
+			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
+	}
+
 	abstract fun PrintWriter.generateJava()
 
 	open fun processDocumentation(documentation: String): String = processDocumentation(documentation, "", "")
@@ -321,33 +332,15 @@ abstract class GeneratorTargetNative(
 
 	open val skipNative: Boolean = false
 
+	protected fun PrintWriter.generateNativePreamble() {
+		print(HEADER)
+		preamble.printNative(this)
+	}
 	abstract fun PrintWriter.generateNative()
 
 }
 
 // ------------------------------------
-
-abstract class CustomClass(
-	packageName: String,
-	className: String
-) : GeneratorTarget(packageName, className) {
-
-	override fun PrintWriter.generateJava() {
-		print(HEADER)
-		println("package $packageName;\n")
-
-		preamble.printJava(this)
-
-		val documentation = this@CustomClass.documentation
-		if ( documentation != null )
-			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
-
-		generateContent()
-	}
-
-	protected abstract fun PrintWriter.generateContent(): Unit
-
-}
 
 fun packageInfo(
 	packageName: String,

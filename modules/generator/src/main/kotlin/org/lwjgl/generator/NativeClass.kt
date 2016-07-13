@@ -26,7 +26,7 @@ abstract class APIBinding(
 	packageName: String,
 	className: String,
 	val callingConvention: CallingConvention = CallingConvention.STDCALL
-) : CustomClass(packageName, className) {
+) : GeneratorTarget(packageName, className) {
 
 	init {
 		javaImport(
@@ -106,7 +106,7 @@ abstract class SimpleBinding(
 	val libraryExpression: String,
 	callingConvention: CallingConvention
 ) : APIBinding("n/a", "n/a", callingConvention) {
-	override fun PrintWriter.generateContent() = Unit
+	override fun PrintWriter.generateJava() = Unit
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
 		writer.println("\t\tlong ${if ( function.returns.has(Address) ) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
 	}

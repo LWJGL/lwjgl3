@@ -105,8 +105,12 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		println("\t}")
 	}
 
-	override fun PrintWriter.generateContent() {
-		println("/** Defines the capabilities of an OpenGL context. */")
+	init {
+		documentation = "Defines the capabilities of an OpenGL context."
+	}
+
+	override fun PrintWriter.generateJava() {
+		generateJavaPreamble()
 		println("public final class $CAPABILITIES_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 ->

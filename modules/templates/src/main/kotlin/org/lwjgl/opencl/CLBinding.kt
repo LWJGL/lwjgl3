@@ -38,15 +38,20 @@ private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, C
 		println("\t}")
 	}
 
-	override fun PrintWriter.generateContent() {
-		println("""/**
- * Defines the capabilities of an OpenCL platform or device.
- *
- * <p>The instance returned by {@link CLPlatform#createCapabilities} exposes the functionality present on either the platform or any of its devices. This is
- * unlike the {@link CL10#CL_PLATFORM_EXTENSIONS} string, which returns only platform functionality, supported across all platform devices.</p>
- *
- * <p>The instance returned by {@link CLDevice#createCapabilities} exposes only the functionality available on that particular device.</p>
- */""")
+	init {
+		documentation =
+			"""
+			Defines the capabilities of an OpenCL platform or device.
+
+			The instance returned by {@link CLPlatform\#createCapabilities} exposes the functionality present on either the platform or any of its devices. This
+			is unlike the #PLATFORM_EXTENSIONS string, which returns only platform functionality, supported across all platform devices.
+
+			The instance returned by {@link CLDevice\#createCapabilities} exposes only the functionality available on that particular device.
+			"""
+	}
+
+	override fun PrintWriter.generateJava() {
+		generateJavaPreamble()
 		println("public class $CAPABILITIES_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 ->
