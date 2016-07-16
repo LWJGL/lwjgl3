@@ -416,8 +416,8 @@ val vkCmdBlitImage =
 			"The source region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcImage}",
 			"The destination region specified by a given element of {@code pRegions} $must be a region that is contained within {@code dstImage}",
 			"""
-			The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, $mustnot overlap in
-			memory
+			The union of all destination regions, specified by the elements of {@code pRegions}, $mustnot overlap in memory with any texel that $may be sampled
+			during the blit operation
 			""",
 			"""
 			{@code srcImage} $must use a format that supports #FORMAT_FEATURE_BLIT_SRC_BIT, which is indicated by
@@ -452,6 +452,8 @@ val vkCmdBlitImage =
 			""",
 			"If either of {@code srcImage} or {@code dstImage} was created with a depth/stencil format, the other $must have exactly the same format",
 			"If {@code srcImage} was created with a depth/stencil format, {@code filter} $must be #FILTER_NEAREST",
+			"{@code srcImage} $must have been created with a {@code samples} value of #SAMPLE_COUNT_1_BIT",
+			"{@code dstImage} $must have been created with a {@code samples} value of #SAMPLE_COUNT_1_BIT",
 			"""
 			If {@code filter} is #FILTER_LINEAR, {@code srcImage} $must be of a format which supports linear filtering, as specified by the
 			#FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
@@ -3027,24 +3029,9 @@ val vkGetPhysicalDeviceSparseImageFormatProperties =
 			array of {@code pPropertyCount} ##VkSparseImageFormatProperties structures
 			""",
 			"""
-			If {@code format} is an integer format, samples $must be one of the bit flags specified in
-			##VkPhysicalDeviceLimits{@code ::sampledImageIntegerSampleCounts}
-			""",
-			"""
-			If {@code format} is a non-integer color format, samples $must be one of the bit flags specified in
-			##VkPhysicalDeviceLimits{@code ::sampledImageColorSampleCounts}
-			""",
-			"""
-			If {@code format} is a depth format, samples $must be one of the bit flags specified in
-			##VkPhysicalDeviceLimits{@code ::sampledImageDepthSampleCounts}
-			""",
-			"""
-			If {@code format} is a stencil format, samples $must be one of the bit flags specified in
-			##VkPhysicalDeviceLimits{@code ::sampledImageStencilSampleCounts}
-			""",
-			"""
-			If {@code usage} includes #IMAGE_USAGE_STORAGE_BIT, samples $must be one of the bit flags specified in
-			##VkPhysicalDeviceLimits{@code ::storageImageSampleCounts}
+			{@code samples} $must be a bit value that is set in ##VkImageFormatProperties{@code ::sampleCounts} returned by
+			#GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, and {@code usage} equal to those in this command and
+			{@code flags} equal to the value that is set in sname::VkImageCreateInfo::pname::flags when the image is created
 			"""
 		)}"""
 
@@ -3275,6 +3262,10 @@ val vkQueuePresentKHR =
 			"""
 			Any given element of {@code pSwapchains} member of {@code pPresentInfo} $must be a swapchain that is created for a surface for which presentation
 			is supported from {@code queue} as determined using a call to #GetPhysicalDeviceSurfaceSupportKHR()
+			""",
+			"""
+			If more than one member of 'pSwapchains' was created from a display surface, all display surfaces referenced that refer to the same display $must
+			use the same display mode.
 			"""
 		)}
 

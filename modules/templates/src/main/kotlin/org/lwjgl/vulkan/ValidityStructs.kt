@@ -748,25 +748,28 @@ val VkGraphicsPipelineCreateInfo =
 			$NULL
 			""",
 			"""
-			If {@code pStages} includes both a tessellation control shader stage and a tessellation evaluation shader stage, the shader code of at least one
-			$must contain an {@code OpExecutionMode} instruction that specifies the type of subdivision in the pipeline
+			If {@code pStages} includes tessellation shader stages, the shader code of at least one stage $must contain an {@code OpExecutionMode} instruction
+			that specifies the type of subdivision in the pipeline
 			""",
 			"""
-			If {@code pStages} includes both a tessellation control shader stage and a tessellation evaluation shader stage, and the shader code of both
-			contain an {@code OpExecutionMode} instruction that specifies the type of subdivision in the pipeline, they $must both specify the same subdivision
-			mode
+			If {@code pStages} includes tessellation shader stages, and the shader code of both stages contain an {@code OpExecutionMode} instruction that
+			specifies the type of subdivision in the pipeline, they $must both specify the same subdivision mode
 			""",
 			"""
-			If {@code pStages} includes both a tessellation control shader stage and a tessellation evaluation shader stage, the shader code of at least one
-			$must contain an {@code OpExecutionMode} instruction that specifies the output patch size in the pipeline
+			If {@code pStages} includes tessellation shader stages, the shader code of at least one stage $must contain an {@code OpExecutionMode} instruction
+			that specifies the output patch size in the pipeline
 			""",
 			"""
-			If {@code pStages} includes both a tessellation control shader stage and a tessellation evaluation shader stage, and the shader code of both
-			contain an {@code OpExecutionMode} instruction that specifies the out patch size in the pipeline, they $must both specify the same patch size
+			If {@code pStages} includes tessellation shader stages, and the shader code of both contain an {@code OpExecutionMode} instruction that specifies
+			the out patch size in the pipeline, they $must both specify the same patch size
 			""",
 			"""
 			If {@code pStages} includes tessellation shader stages, the {@code topology} member of {@code pInputAssembly} $must be
 			#PRIMITIVE_TOPOLOGY_PATCH_LIST
+			""",
+			"""
+			If the {@code topology} member of {@code pInputAssembly} is #PRIMITIVE_TOPOLOGY_PATCH_LIST, {@code pStages} $must include tessellation shader
+			stages
 			""",
 			"""
 			If {@code pStages} includes a geometry shader stage, and does not include any tessellation shader stages, its shader code $must contain an
@@ -875,6 +878,7 @@ val VkImageBlit =
 			""",
 			"The {@code aspectMask} member of {@code srcSubresource} $must specify aspects present in the calling command's {@code srcImage}",
 			"The {@code aspectMask} member of {@code dstSubresource} $must specify aspects present in the calling command's {@code dstImage}",
+			"The {@code layerCount} member of {@code dstSubresource} $must be equal to the {@code layerCount} member of {@code srcSubresource}",
 			"""
 			{@code srcOffset}[0].x and {@code srcOffset}[1].x $must both be greater than or equal to 0 and less than or equal to the source image subresource
 			width
@@ -1013,11 +1017,6 @@ val VkImageCreateInfo =
 			{@code tiling}, {@code usage} and {@code flags} equal to those in this structure) - whichever is higher
 			""",
 			"""
-			{@code samples} $must be a bit value that is set in ##VkPhysicalDeviceLimits{@code ::sampleCounts} returned by #GetPhysicalDeviceProperties(), or
-			##VkImageFormatProperties{@code ::sampleCounts} returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type},
-			{@code tiling}, {@code usage} and {@code flags} equal to those in this structure
-			""",
-			"""
 			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT or
 			#IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent.width} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferWidth}
 			""",
@@ -1026,32 +1025,9 @@ val VkImageCreateInfo =
 			#IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent.height} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferHeight}
 			""",
 			"""
-			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, {@code samples} $must be a bit value that is set in
-			##VkPhysicalDeviceLimits{@code ::framebufferColorSampleCounts}
-			""",
-			"""
-			If {@code usage} includes #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and {@code format} includes a depth aspect, {@code samples} $must be a bit
-			value that is set in ##VkPhysicalDeviceLimits{@code ::framebufferDepthSampleCounts}
-			""",
-			"""
-			If {@code usage} includes #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and {@code format} includes a stencil aspect, {@code samples} $must be a bit
-			value that is set in ##VkPhysicalDeviceLimits{@code ::framebufferStencilSampleCounts}
-			""",
-			"""
-			If {@code usage} includes #IMAGE_USAGE_SAMPLED_BIT, and {@code format} includes a color aspect, {@code samples} $must be a bit value that is set in
-			##VkPhysicalDeviceLimits{@code ::sampledImageColorSampleCounts}
-			""",
-			"""
-			If {@code usage} includes #IMAGE_USAGE_SAMPLED_BIT, and {@code format} includes a depth aspect, {@code samples} $must be a bit value that is set in
-			##VkPhysicalDeviceLimits{@code ::sampledImageDepthSampleCounts}
-			""",
-			"""
-			If {@code usage} includes #IMAGE_USAGE_SAMPLED_BIT, and {@code format} is an integer format, {@code samples} $must be a bit value that is set in
-			##VkPhysicalDeviceLimits{@code ::sampledImageIntegerSampleCounts}
-			""",
-			"""
-			If {@code usage} includes #IMAGE_USAGE_STORAGE_BIT, {@code samples} $must be a bit value that is set in
-			##VkPhysicalDeviceLimits{@code ::storageImageSampleCounts}
+			{@code samples} $must be a bit value that is set in ##VkImageFormatProperties{@code ::sampleCounts} returned by
+			#GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage} and {@code flags} equal to those in this
+			structure
 			""",
 			"""
 			If the ETC2 texture compression feature is not enabled, {@code format} $mustnot be #FORMAT_ETC2_R8G8B8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8_SRGB_BLOCK,
