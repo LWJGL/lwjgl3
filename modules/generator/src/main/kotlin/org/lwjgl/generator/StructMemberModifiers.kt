@@ -66,7 +66,7 @@ fun Struct.AutoSize(
 object NullableMember : StructMemberModifier() {
 	override val isSpecial = true
 	override fun validate(member: StructMember) {
-		if ( member.nativeType !is PointerType )
+		if ( member.nativeType !is PointerType || (member.nativeType is StructType && !member.nativeType.includesPointer) )
 			throw IllegalArgumentException("The nullable modifier can only be applied on pointer types.")
 	}
 }

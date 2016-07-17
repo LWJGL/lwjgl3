@@ -295,7 +295,20 @@ ENABLE_WARNINGS()""")
 		"COLOR_TAB_HEADER".enum,
 		"COLOR_COUNT".enum
 	).javaDocLinks
+	
+	val StyleCursor = EnumConstant(
+		"nk_style_cursor",
 
+		"CURSOR_ARROW".enum,
+		"CURSOR_TEXT".enum,
+		"CURSOR_MOVE".enum,
+		"CURSOR_RESIZE_VERTICAL".enum,
+		"CURSOR_RESIZE_HORIZONTAL".enum,
+		"CURSOR_RESIZE_TOP_LEFT_DOWN_RIGHT".enum,
+		"CURSOR_RESIZE_TOP_RIGHT_DOWN_LEFT".enum,
+		"CURSOR_COUNT".enum // TODO: Update nk_style.cursors size if this changes
+	).javaDocLinks
+	
 	EnumConstant(
 		"nk_widget_layout_states",
 
@@ -906,14 +919,21 @@ ENABLE_WARNINGS()""")
 			nk_image.IN("img", "")
 		)
 
+		void(
+			"button_set_behavior",
+			"",
+
+			ctx,
+			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+		)
+
 		intb(
 			"button_text",
 			"",
 
 			ctx,
 			const..charUTF8_p.IN("title", ""),
-			AutoSize("title")..nk_int.IN("len", ""),
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+			AutoSize("title")..nk_int.IN("len", "")
 		)
 
 		intb(
@@ -921,8 +941,7 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			const..charUTF8_p.IN("title", ""),
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+			const..charUTF8_p.IN("title", "")
 		)
 
 		intb(
@@ -930,8 +949,7 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_color.IN("color", ""),
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+			nk_color.IN("color", "")
 		)
 
 		intb(
@@ -939,8 +957,7 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_symbol_type.IN("symbol", "", SymbolTypes),
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+			nk_symbol_type.IN("symbol", "", SymbolTypes)
 		)
 
 		intb(
@@ -948,8 +965,7 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_image.IN("img", ""),
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+			nk_image.IN("img", "")
 		)
 
 		intb(
@@ -959,8 +975,7 @@ ENABLE_WARNINGS()""")
 			ctx,
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
 			const..charUTF8_p.IN("text", ""),
-			nk_flags.IN("text_alignment", "", TextAlignments),
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+			nk_flags.IN("text_alignment", "", TextAlignments)
 		)
 
 		intb(
@@ -971,8 +986,7 @@ ENABLE_WARNINGS()""")
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
 			const..charUTF8_p.IN("text", ""),
 			AutoSize("text")..nk_int.IN("len", ""),
-			nk_flags.IN("alignment", "", TextAlignments),
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+			nk_flags.IN("alignment", "", TextAlignments)
 		)
 
 		intb(
@@ -982,8 +996,7 @@ ENABLE_WARNINGS()""")
 			ctx,
 			nk_image.IN("img", ""),
 			const..charUTF8_p.IN("text", ""),
-			nk_flags.IN("text_alignment", "", TextAlignments),
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+			nk_flags.IN("text_alignment", "", TextAlignments)
 		)
 
 		intb(
@@ -994,8 +1007,7 @@ ENABLE_WARNINGS()""")
 			nk_image.IN("img", ""),
 			const..charUTF8_p.IN("text", ""),
 			AutoSize("text")..nk_int.IN("len", ""),
-			nk_flags.IN("alignment", "", TextAlignments),
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+			nk_flags.IN("alignment", "", TextAlignments)
 		)
 
 		intb(
@@ -2056,6 +2068,23 @@ ENABLE_WARNINGS()""")
 			const..nk_color.p.IN("table", "")
 		)
 
+		void(
+			"style_load_cursor",
+			"",
+
+			ctx,
+			nk_style_cursor.IN("style", "", StyleCursor),
+			nk_cursor_p.IN("cursor", "")
+		)
+
+		void(
+			"style_load_all_cursors",
+			"",
+
+			ctx,
+			Check("NK_CURSOR_COUNT")..nk_cursor_p.IN("cursor", "")
+		)
+
 		(const..charUTF8_p)(
 			"style_color_name",
 			"",
@@ -2069,6 +2098,14 @@ ENABLE_WARNINGS()""")
 
 			ctx,
 			const..nk_user_font_p.IN("font", "")
+		)
+
+		int(
+			"style_set_cursor",
+			"",
+
+			ctx,
+			nk_style_cursor.IN("style", "", StyleCursor)
 		)
 
 		nk_rect("widget_bounds", "", ctx)
@@ -2763,7 +2800,7 @@ ENABLE_WARNINGS()""")
 
 			nk_buffer_p.IN("buffer", ""),
 			nk_buffer_allocation_type.IN("type", "", BufferAllocationTypes),
-			void_p.IN("memory", ""),
+			const..void_p.IN("memory", ""),
 			AutoSize("memory")..nk_size.IN("size", ""),
 			nk_size.IN("align", "")
 		)

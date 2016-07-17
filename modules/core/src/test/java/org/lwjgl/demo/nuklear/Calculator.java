@@ -81,26 +81,26 @@ class Calculator {
 				for ( int i = 0; i < 16; ++i ) {
 					if ( i >= 12 && i < 15 ) {
 						if ( i > 12 ) continue;
-						if ( nk_button_label(ctx, "C", NK_BUTTON_DEFAULT) ) {
+						if ( nk_button_label(ctx, "C") ) {
 							a[0] = b[0] = op = 0;
 							current = a;
 							set = false;
 						}
-						if ( nk_button_label(ctx, "0", NK_BUTTON_DEFAULT) ) {
+						if ( nk_button_label(ctx, "0") ) {
 							current[0] *= 10.0f;
 							set = false;
 						}
-						if ( nk_button_label(ctx, "=", NK_BUTTON_DEFAULT) ) {
+						if ( nk_button_label(ctx, "=") ) {
 							solve = true;
 							prev = op;
 							op = 0;
 						}
 					} else if ( ((i + 1) % 4) != 0 ) {
-						if ( nk_button_text(ctx, Character.toString(NUMS.charAt((i / 4) * 3 + i % 4)), NK_BUTTON_DEFAULT) ) {
+						if ( nk_button_text(ctx, Character.toString(NUMS.charAt((i / 4) * 3 + i % 4))) ) {
 							current[0] = current[0] * 10.0f + (NUMS.charAt((i / 4) * 3 + i % 4) - '0');
 							set = false;
 						}
-					} else if ( nk_button_text(ctx, Character.toString(OPS.charAt(i / 4)), NK_BUTTON_DEFAULT) ) {
+					} else if ( nk_button_text(ctx, Character.toString(OPS.charAt(i / 4))) ) {
 						if ( !set ) {
 							if ( current != b ) {
 								current = b;

@@ -46,7 +46,7 @@ class Demo {
 				NK_WINDOW_BORDER | NK_WINDOW_MOVABLE | NK_WINDOW_SCALABLE | NK_WINDOW_MINIMIZABLE | NK_WINDOW_TITLE
 			) ) {
 				nk_layout_row_static(ctx, 30, 80, 1);
-				if ( nk_button_label(ctx, "button", NK_BUTTON_DEFAULT) )
+				if ( nk_button_label(ctx, "button") )
 					System.out.println("button pressed");
 
 				nk_layout_row_dynamic(ctx, 30, 2);
