@@ -85,7 +85,7 @@ public final class ALCDemo {
 			ShortBuffer pcm = readVorbis("demo/footsteps.ogg", 32 * 1024, info);
 
 			//copy to buffer
-			alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.sample_rate());
+			alBufferData(buffer, info.channels() == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16, pcm, info.sample_rate());
 			checkALError();
 		}
 
@@ -141,7 +141,7 @@ public final class ALCDemo {
 
 		ShortBuffer pcm = BufferUtils.createShortBuffer(lengthSamples);
 
-		stb_vorbis_get_samples_short_interleaved(decoder, channels, pcm);
+		pcm.limit(stb_vorbis_get_samples_short_interleaved(decoder, channels, pcm) * channels);
 		stb_vorbis_close(decoder);
 
 		return pcm;
