@@ -733,8 +733,8 @@ License terms: http://lwjgl.org/license.php
 		<copy file="LICENSE.md" tofile="${release}/LICENSE"/>
 
 		<!-- Generate build.txt -->
-		<echo file="${release}/build.txt" if:set="build.revision">LWJGL @{title} ${build.version} ${revision}</echo>
-		<echo file="${release}/build.txt" unless:set="build.revision">LWJGL @{title} ${build.version}</echo>
+		<echo file="${release}/build.txt" if:set="build.revision">LWJGL ${build.version} ${revision}</echo>
+		<echo file="${release}/build.txt" unless:set="build.revision">LWJGL ${build.version}</echo>
 
 		<!-- CORE -->
 		<release-module package="org.lwjgl" name="core" module="lwjgl" title="Core">
