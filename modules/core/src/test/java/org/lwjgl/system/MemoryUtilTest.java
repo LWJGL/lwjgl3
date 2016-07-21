@@ -26,6 +26,32 @@ public class MemoryUtilTest {
 			assertEquals(buffer.get(i), 0x7F);
 	}
 
+	public void testMemSet2() {
+		for ( int i = 0; i < 16; i++ ) {
+			for ( int j = 0; j <= (16 - i); j++ ) {
+				long ref = nmemCalloc(1, 16);
+				long mem = nmemCalloc(1, 16);
+
+				// test misaligned memsets
+				memSetReference(ref + i, (byte)0xFF, j);
+				memSet(mem + i, (byte)0xFF, j);
+
+				for ( int k = 0; k < 16; k++ ) {
+					assertEquals(memGetByte(mem + k), memGetByte(ref + k));
+				}
+
+				nmemFree(mem);
+				nmemFree(ref);
+			}
+		}
+	}
+
+	private static void memSetReference(long m, byte value, int bytes) {
+		for ( int i = 0; i < bytes; i++ ) {
+			memPutByte(m + i, value);
+		}
+	}
+
 	public void testMemCopy() {
 		ByteBuffer src = BufferUtils.createByteBuffer(32);
 		ByteBuffer dst = BufferUtils.createByteBuffer(32);

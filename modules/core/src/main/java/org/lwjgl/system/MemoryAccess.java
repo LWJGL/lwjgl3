@@ -391,16 +391,52 @@ final class MemoryAccess {
 			return setup(buffer, address, capacity, PARENT_DOUBLE);
 		}
 
+		//  Left-shifts value by bytes*8 bits in big-endian archictures.
+		// Right-shifts value by bytes*8 bits in little-endian archictures.
+		private static long shl(long value, int bytes) {
+			if ( ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN )
+				return value << (bytes << 3);
+			else
+				return value >>> (bytes << 3);
+		}
+
+		// Right-shifts value by bytes*8 bits in big-endian archictures.
+		//  Left-shifts value by bytes*8 bits in little-endian archictures.
+		private static long shr(long value, int bytes) {
+			if ( ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN )
+				return value >>> (bytes << 3);
+			else
+				return value << (bytes << 3);
+		}
+
+		// Bit from a where mask bit is 0, bit from b where mask bit is 1.
+		private static long merge(long a, long b, long mask) {
+			return a ^ ((a ^ b) & mask);
+		}
+
+		// Returns a long where each byte is equal to value.
+		private static long fill(byte value) {
+			long fill = value;
+
+			if ( value != 0 ) {
+				fill |= fill << 8;
+				fill |= fill << 16;
+				fill |= fill << 32;
+			}
+
+			return fill;
+		}
+
 		@Override
 		public void memSet(long dst, int value, int bytes) {
 			/*
 			- Unsafe.setMemory is very slow.
-			- A custom Java loop is fastest at small sizes, approximately up to 256 bytes.
+			- A custom Java loop is fastest at small sizes, approximately up to 192 bytes.
 			- The native memset becomes fastest at bigger sizes, when the JNI overhead becomes negligible.
 			 */
 
 			//UNSAFE.setMemory(dst, bytes, (byte)(value & 0xFF));
-			if ( bytes < 256 )
+			if ( bytes < 192 )
 				memSetLoop(dst, (byte)(value & 0xFF), bytes);
 			else
 				memset(dst, value, bytes);
@@ -409,37 +445,38 @@ final class MemoryAccess {
 		private void memSetLoop(long dst, byte value, int bytes) {
 			int i = 0;
 
+			int misalignment = (int)dst & 7;
+			long fill = fill(value);
+
 			if ( 8 <= bytes ) {
-				int misalignment = (int)dst & 7;
 				if ( misalignment != 0 ) {
-					// Align to 8 bytes
-					for ( int len = 8 - misalignment; i < len; i++ )
-						memPutByte(dst + i, value);
+					memPutLong(dst - misalignment, merge(
+						memGetLong(dst - misalignment),
+						fill,
+						shr(-1L, misalignment) // 0x00000000FFFFFFFF
+					));
+					i += 8 - misalignment;
 				}
 
 				// Aligned longs for performance
-				long fill = fill(value);
-				do {
+				for ( ; i <= bytes - 8; i += 8 )
 					memPutLong(dst + i, fill);
-					i += 8;
-				} while ( i <= bytes - 8 );
+			} else if ( misalignment != 0 && 0 < bytes ) {
+				memPutLong(dst - misalignment, merge(
+					memGetLong(dst - misalignment),
+					fill,
+					shr(shl(-1L, 8 - bytes), misalignment) // 0x0000FFFFFFFF0000
+				));
+				i += 8 - misalignment;
 			}
 
-			// Tail
-			for ( ; i < bytes; i++ )
-				memPutByte(dst + i, value);
-		}
-
-		private static long fill(byte value) {
-			long fill = value;
-
-			if ( value != 0 ) {
-				fill += fill << 8;
-				fill += fill << 16;
-				fill += fill << 32;
-			}
-
-			return fill;
+			// Aligned tail
+			if ( i < bytes )
+				memPutLong(dst + i, merge(
+					memGetLong(dst + i),
+					fill,
+					shl(-1L, 8 - (bytes - i)) // 0xFFFFFFFF00000000
+				));
 		}
 
 		@Override
@@ -462,14 +499,16 @@ final class MemoryAccess {
 			int i = 0;
 
 			// Aligned longs for performance
-			while ( i <= bytes - 8 ) {
+			for ( ; i <= bytes - 8; i += 8 )
 				memPutLong(dst + i, memGetLong(src + i));
-				i += 8;
-			}
 
-			// Tail
-			for ( ; i < bytes; i++ )
-				memPutByte(dst + i, memGetByte(src + i));
+			// Aligned tail
+			if ( i < bytes )
+				memPutLong(dst + i, merge(
+					memGetLong(dst + i),
+					memGetLong(src + i),
+					shl(-1L, 8 - (bytes - i))
+				));
 		}
 
 		@Override
