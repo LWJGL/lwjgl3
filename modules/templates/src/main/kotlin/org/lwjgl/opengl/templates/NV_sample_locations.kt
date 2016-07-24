@@ -12,7 +12,7 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGL("NV_sample_locations
 		"""
 		Native bindings to the $registryLink extension.
 
-				This extension allows an application to modify the locations of samples within a pixel used in multisample rasterization. Additionally, it allows
+		This extension allows an application to modify the locations of samples within a pixel used in multisample rasterization. Additionally, it allows
 		applications to specify different sample locations for each pixel in a group of adjacent pixels, which may increase antialiasing quality (particularly
 		if a custom resolve shader is used that takes advantage of these different locations).
 

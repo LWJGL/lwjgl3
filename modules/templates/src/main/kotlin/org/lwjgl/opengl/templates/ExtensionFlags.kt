@@ -745,7 +745,7 @@ val EXT_shader_image_load_formatted = EXT_FLAG.nativeClassGL("EXT_shader_image_l
 val EXT_shader_integer_mix = "EXTShaderIntegerMix".nativeClassGL("EXT_shader_integer_mix", postfix = EXT) {
 	documentation =
 		"""
-		Native bindings to the $registryLink extension.
+		When true, the $registryLink extension is supported.
 
 		GLSL 1.30 (and GLSL ES 3.00) expanded the mix() built-in function to operate on a boolean third argument that does not interpolate but selects. This
 		extension extends mix() to select between int, uint, and bool components.
@@ -799,7 +799,7 @@ val EXT_sparse_texture2 = EXT_FLAG.nativeClassGL("EXT_sparse_texture2", postfix 
 val EXT_vertex_array_bgra = EXT_FLAG.nativeClassGL("EXT_vertex_array_bgra", postfix = EXT) {
 	documentation =
 		"""
-		Native bindings to the $registryLink extension.
+		When true, the $registryLink extension is supported.
 
 		This extension provides a single new component format for vertex arrays to read 4-component unsigned byte vertex attributes with a BGRA component
 		ordering.
@@ -1024,7 +1024,7 @@ val KHR_texture_compression_astc_hdr = EXT_FLAG.nativeClassGL("KHR_texture_compr
 val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGL("KHR_texture_compression_astc_sliced_3d", postfix = KHR) {
 	documentation =
 		"""
-		Native bindings to the $registryLink extension.
+		When true, the $registryLink extension is supported.
 
 		Adaptive Scalable Texture Compression (ASTC) is a new texture compression technology that offers unprecendented flexibility, while producing better or
 		comparable results than existing texture compressions at all bit rates. It includes support for 2D and slice-based 3D textures, with low and high
@@ -1214,6 +1214,8 @@ val NV_texture_compression_vtc = EXT_FLAG.nativeClassGL("NV_texture_compression_
 val NV_viewport_array2 = EXT_FLAG.nativeClassGL("NV_viewport_array2", postfix = NV) {
 	documentation =
 		"""
+		When true, the $registryLink extension is supported.
+
 		This extension provides new support allowing a single primitive to be broadcast to multiple viewports and/or multiple layers. A shader output
 		gl_ViewportMask[] is provided, allowing a single primitive to be output to multiple viewports simultaneously. Also, a new shader option is provided to
 		control whether the effective viewport index is added into gl_Layer. These capabilities allow a single primitive to be output to multiple layers
@@ -1227,11 +1229,24 @@ val NV_viewport_array2 = EXT_FLAG.nativeClassGL("NV_viewport_array2", postfix = 
 		expected to be exported if GL_NV_viewport_array2 is supported.
 		"""
 }
+val NVX_blend_equation_advanced_multi_draw_buffers = EXT_FLAG.nativeClassGL("NVX_blend_equation_advanced_multi_draw_buffers", postfix = NVX) {
+	documentation =
+		"""
+		When true, the ${registryLink("NVX", "nvx_blend_equation_advanced_multi_draw_buffers")} extension is supported.
+
+		This extension adds support for using advanced blend equations introduced with ${NV_blend_equation_advanced.link} (and standardized by
+		${KHR_blend_equation_advanced.link}) in conjunction with multiple draw buffers. The NV_blend_equation_advanced extension supports advanced blending
+		equations only when rending to a single color buffer using fragment color zero and throws and #INVALID_OPERATION error when multiple draw buffers are
+		used. This extension removes this restriction.
+
+		Requires either ${NV_blend_equation_advanced.link} or ${KHR_blend_equation_advanced.link}.
+		"""
+}
 
 val OVR_multiview2 = "OVRMultiview2".nativeClassGL("OVR_multiview2", postfix = OVR) {
 	documentation =
 		"""
-		Native bindings to the $registryLink extension.
+		When true, the $registryLink extension is supported.
 
 		This extension relaxes the restriction in OVR_multiview that only {@code gl_Position} can depend on {@code ViewID} in the vertex shader.  With this
 		change, view-dependent outputs like reflection vectors and similar are allowed.
