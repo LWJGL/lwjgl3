@@ -49,13 +49,15 @@ val VkAttachmentDescription =
 			"{@code stencilLoadOp} $must be a valid {@code VkAttachmentLoadOp} value",
 			"{@code stencilStoreOp} $must be a valid {@code VkAttachmentStoreOp} value",
 			"{@code initialLayout} $must be a valid {@code VkImageLayout} value",
-			"{@code finalLayout} $must be a valid {@code VkImageLayout} value"
+			"{@code finalLayout} $must be a valid {@code VkImageLayout} value",
+			"{@code finalLayout} $mustnot be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED"
 		)}"""
 
 val VkAttachmentReference =
 	"""<h5>Valid Usage</h5>
 		${ul(
-			"{@code layout} $must be a valid {@code VkImageLayout} value"
+			"{@code layout} $must be a valid {@code VkImageLayout} value",
+			"{@code layout} $mustnot be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED"
 		)}"""
 
 val VkBindSparseInfo =
@@ -84,8 +86,8 @@ val VkBindSparseInfo =
 			{@code VkSemaphore} handles
 			""",
 			"""
-			Each of the elements of {@code pWaitSemaphores} and the elements of {@code pSignalSemaphores} that are valid handles $must have been created,
-			allocated or retrieved from the same {@code VkDevice}
+			Both of the elements of {@code pSignalSemaphores}, and the elements of {@code pWaitSemaphores} that are valid handles $must have been created,
+			allocated, or retrieved from the same {@code VkDevice}
 			"""
 		)}"""
 
@@ -244,7 +246,7 @@ val VkCommandBufferInheritanceInfo =
 			"{@code sType} $must be #STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO",
 			"{@code pNext} $must be $NULL",
 			"""
-			Each of {@code renderPass} and {@code framebuffer} that are valid handles $must have been created, allocated or retrieved from the same
+			Both of {@code framebuffer}, and {@code renderPass} that are valid handles $must have been created, allocated, or retrieved from the same
 			{@code VkDevice}
 			""",
 			"If the inherited queries feature is not enabled, {@code occlusionQueryEnable} $must be #FALSE",
@@ -279,7 +281,7 @@ val VkComputePipelineCreateInfo =
 			"{@code stage} $must be a valid ##VkPipelineShaderStageCreateInfo structure",
 			"{@code layout} $must be a valid {@code VkPipelineLayout} handle",
 			"""
-			Each of {@code layout} and {@code basePipelineHandle} that are valid handles $must have been created, allocated or retrieved from the same
+			Both of {@code basePipelineHandle}, and {@code layout} that are valid handles $must have been created, allocated, or retrieved from the same
 			{@code VkDevice}
 			""",
 			"""
@@ -317,7 +319,7 @@ val VkCopyDescriptorSet =
 			"{@code pNext} $must be $NULL",
 			"{@code srcSet} $must be a valid {@code VkDescriptorSet} handle",
 			"{@code dstSet} $must be a valid {@code VkDescriptorSet} handle",
-			"Each of {@code srcSet} and {@code dstSet} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code dstSet}, and {@code srcSet} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code srcBinding} $must be a valid binding within {@code srcSet}",
 			"""
 			The sum of {@code srcArrayElement} and {@code descriptorCount} $must be less than or equal to the number of array elements in the descriptor set
@@ -432,7 +434,8 @@ val VkDescriptorImageInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"""
-			Each of {@code sampler} and {@code imageView} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}
+			Both of {@code imageView}, and {@code sampler} that are valid handles $must have been created, allocated, or retrieved from the same
+			{@code VkDevice}
 			"""
 		)}"""
 
@@ -463,7 +466,7 @@ val VkDescriptorSetAllocateInfo =
 			"{@code pSetLayouts} $must be a pointer to an array of {@code descriptorSetCount} valid {@code VkDescriptorSetLayout} handles",
 			"{@code descriptorSetCount} $must be greater than 0",
 			"""
-			Each of {@code descriptorPool} and the elements of {@code pSetLayouts} $must have been created, allocated or retrieved from the same
+			Both of {@code descriptorPool}, and the elements of {@code pSetLayouts} $must have been created, allocated, or retrieved from the same
 			{@code VkDevice}
 			""",
 			"{@code descriptorSetCount} $mustnot be greater than the number of sets that are currently available for allocation in {@code descriptorPool}",
@@ -668,8 +671,8 @@ val VkFramebufferCreateInfo =
 			handles
 			""",
 			"""
-			Each of {@code renderPass} and the elements of {@code pAttachments} that are valid handles $must have been created, allocated or retrieved from the
-			same {@code VkDevice}
+			Both of {@code renderPass}, and the elements of {@code pAttachments} that are valid handles $must have been created, allocated, or retrieved from
+			the same {@code VkDevice}
 			""",
 			"{@code attachmentCount} $must be equal to the attachment count specified in {@code renderPass}",
 			"""
@@ -715,7 +718,7 @@ val VkGraphicsPipelineCreateInfo =
 			"{@code renderPass} $must be a valid {@code VkRenderPass} handle",
 			"{@code stageCount} $must be greater than 0",
 			"""
-			Each of {@code layout}, {@code renderPass} and {@code basePipelineHandle} that are valid handles $must have been created, allocated or retrieved
+			Each of {@code basePipelineHandle}, {@code layout}, and {@code renderPass} that are valid handles $must have been created, allocated, or retrieved
 			from the same {@code VkDevice}
 			""",
 			"""
@@ -976,19 +979,19 @@ val VkImageCreateInfo =
 			"""
 			If {@code imageType} is #IMAGE_TYPE_1D, {@code extent.width} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension1D},
 			or ##VkImageFormatProperties{@code ::maxExtent}.width (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type},
-			{@code tiling}, {@code usage} and {@code flags} equal to those in this structure) - whichever is higher
+			{@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher
 			""",
 			"""
 			If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} does not contain #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and
 			{@code extent.height} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension2D}, or
 			##VkImageFormatProperties{@code ::maxExtent}.width/height (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format},
-			{@code type}, {@code tiling}, {@code usage} and {@code flags} equal to those in this structure) - whichever is higher
+			{@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher
 			""",
 			"""
 			If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and {@code extent.height}
 			$must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimensionCube}, or
 			##VkImageFormatProperties{@code ::maxExtent}.width/height (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format},
-			{@code type}, {@code tiling}, {@code usage} and {@code flags} equal to those in this structure) - whichever is higher
+			{@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher
 			""",
 			"""
 			If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and {@code extent.height}
@@ -997,8 +1000,8 @@ val VkImageCreateInfo =
 			"""
 			If {@code imageType} is #IMAGE_TYPE_3D, {@code extent.width}, {@code extent.height} and {@code extent.depth} $must be less than or equal to
 			##VkPhysicalDeviceLimits{@code ::maxImageDimension3D}, or ##VkImageFormatProperties{@code ::maxExtent}.width/height/depth (as returned by
-			#GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage} and {@code flags} equal to those in this
-			structure) - whichever is higher
+			#GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in
+			this structure) - whichever is higher
 			""",
 			"If {@code imageType} is #IMAGE_TYPE_1D, both {@code extent.height} and {@code extent.depth} $must be 1",
 			"If {@code imageType} is #IMAGE_TYPE_2D, {@code extent.depth} $must be 1",
@@ -1006,28 +1009,32 @@ val VkImageCreateInfo =
 			{@code mipLevels} $must be less than or equal to ${code("floor(log<sub>2</sub>(max(extent.width, extent.height, extent.depth))) + 1")}
 			""",
 			"""
-			If any of {@code extent.width}, {@code extent.height} or {@code extent.depth} are greater than the equivalently named members of
+			If any of {@code extent.width}, {@code extent.height}, or {@code extent.depth} are greater than the equivalently named members of
 			##VkPhysicalDeviceLimits{@code ::maxImageDimension3D}, {@code mipLevels} $must be less than or equal to
 			##VkImageFormatProperties{@code ::maxMipLevels} (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type},
-			{@code tiling}, {@code usage} and {@code flags} equal to those in this structure)
+			{@code tiling}, {@code usage}, and {@code flags} equal to those in this structure)
 			""",
 			"""
 			{@code arrayLayers} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageArrayLayers}, or
 			##VkImageFormatProperties{@code ::maxArrayLayers} (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type},
-			{@code tiling}, {@code usage} and {@code flags} equal to those in this structure) - whichever is higher
+			{@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher
 			""",
 			"""
-			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT or
+			If {@code samples} is not #SAMPLE_COUNT_1_BIT, {@code imageType} $must be #IMAGE_TYPE_2D, {@code tiling} $must be #IMAGE_TILING_OPTIMAL, and
+			{@code mipLevels} $must be equal to 1
+			""",
+			"""
+			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, or
 			#IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent.width} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferWidth}
 			""",
 			"""
-			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT or
+			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, or
 			#IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent.height} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferHeight}
 			""",
 			"""
 			{@code samples} $must be a bit value that is set in ##VkImageFormatProperties{@code ::sampleCounts} returned by
-			#GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage} and {@code flags} equal to those in this
-			structure
+			#GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in
+			this structure
 			""",
 			"""
 			If the ETC2 texture compression feature is not enabled, {@code format} $mustnot be #FORMAT_ETC2_R8G8B8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8_SRGB_BLOCK,
@@ -1079,6 +1086,10 @@ val VkImageCreateInfo =
 			#SAMPLE_COUNT_16_BIT, {@code flags} $mustnot contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT
 			""",
 			"""
+			If {@code tiling} is #IMAGE_TILING_LINEAR, {@code format} $must be a format that has at least one supported feature bit present in the value of
+			##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}
+			""",
+			"""
 			If {@code tiling} is #IMAGE_TILING_LINEAR, and ##VkFormatProperties{@code ::linearTilingFeatures} (as returned by
 			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, {@code usage}
 			$mustnot contain #IMAGE_USAGE_SAMPLED_BIT
@@ -1097,6 +1108,10 @@ val VkImageCreateInfo =
 			If {@code tiling} is #IMAGE_TILING_LINEAR, and ##VkFormatProperties{@code ::linearTilingFeatures} (as returned by
 			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT,
 			{@code usage} $mustnot contain #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
+			""",
+			"""
+			If {@code tiling} is #IMAGE_TILING_OPTIMAL, {@code format} $must be a format that has at least one supported feature bit present in the value of
+			##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_OPTIMAL, and ##VkFormatProperties{@code ::optimalTilingFeatures} (as returned by
@@ -1268,44 +1283,52 @@ val VkImageViewCreateInfo =
 			#FORMAT_BC6H_UFLOAT_BLOCK, #FORMAT_BC6H_SFLOAT_BLOCK, #FORMAT_BC7_UNORM_BLOCK, or #FORMAT_BC7_SRGB_BLOCK
 			""",
 			"""
+			If {@code image} was created with #IMAGE_TILING_LINEAR, {@code format} $must be format that has at least one supported feature bit present in the
+			value of ##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}
+			""",
+			"""
 			If {@code image} was created with #IMAGE_TILING_LINEAR and {@code usage} containing #IMAGE_USAGE_SAMPLED_BIT, {@code format} $must be supported for
 			sampled images, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by
-			#GetPhysicalDeviceFormatProperties()
+			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}
 			""",
 			"""
 			If {@code image} was created with #IMAGE_TILING_LINEAR and {@code usage} containing #IMAGE_USAGE_STORAGE_BIT, {@code format} $must be supported for
 			storage images, as specified by the #FORMAT_FEATURE_STORAGE_IMAGE_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by
-			#GetPhysicalDeviceFormatProperties()
+			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}
 			""",
 			"""
 			If {@code image} was created with #IMAGE_TILING_LINEAR and {@code usage} containing #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, {@code format} $must be
 			supported for color attachments, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT flag in
-			##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()
+			##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}
 			""",
 			"""
 			If {@code image} was created with #IMAGE_TILING_LINEAR and {@code usage} containing #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, {@code format} $must
 			be supported for depth/stencil attachments, as specified by the #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT flag in
-			##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()
+			##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}
+			""",
+			"""
+			If {@code image} was created with #IMAGE_TILING_OPTIMAL, {@code format} $must be format that has at least one supported feature bit present in the
+			value of ##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}
 			""",
 			"""
 			If {@code image} was created with #IMAGE_TILING_OPTIMAL and {@code usage} containing #IMAGE_USAGE_SAMPLED_BIT, {@code format} $must be supported
 			for sampled images, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT flag in ##VkFormatProperties{@code ::optimalTilingFeatures} returned by
-			#GetPhysicalDeviceFormatProperties()
+			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}
 			""",
 			"""
 			If {@code image} was created with #IMAGE_TILING_OPTIMAL and {@code usage} containing #IMAGE_USAGE_STORAGE_BIT, {@code format} $must be supported
 			for storage images, as specified by the #FORMAT_FEATURE_STORAGE_IMAGE_BIT flag in ##VkFormatProperties{@code ::optimalTilingFeatures} returned by
-			#GetPhysicalDeviceFormatProperties()
+			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}
 			""",
 			"""
 			If {@code image} was created with #IMAGE_TILING_OPTIMAL and {@code usage} containing #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, {@code format} $must be
 			supported for color attachments, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT flag in
-			##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()
+			##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}
 			""",
 			"""
 			If {@code image} was created with #IMAGE_TILING_OPTIMAL and {@code usage} containing #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, {@code format}
 			$must be supported for depth/stencil attachments, as specified by the #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT flag in
-			##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()
+			##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}
 			""",
 			"{@code subresourceRange} $must be a valid image subresource range for {@code image}",
 			"""
@@ -1691,10 +1714,6 @@ val VkPresentInfoKHR =
 			"If {@code pResults} is not $NULL, {@code pResults} $must be a pointer to an array of {@code swapchainCount} {@code VkResult} values",
 			"{@code swapchainCount} $must be greater than 0",
 			"""
-			Each of the elements of {@code pSwapchains} and the elements of {@code pWaitSemaphores} that are valid handles $must have been created, allocated
-			or retrieved from the same {@code VkInstance}
-			""",
-			"""
 			Any given element of {@code pImageIndices} $must be the index of a presentable image acquired from the swapchain specified by the corresponding
 			element of the {@code pSwapchains} array
 			""",
@@ -1737,10 +1756,10 @@ val VkRenderPassBeginInfo =
 			"{@code renderPass} $must be a valid {@code VkRenderPass} handle",
 			"{@code framebuffer} $must be a valid {@code VkFramebuffer} handle",
 			"If {@code clearValueCount} is not 0, {@code pClearValues} $must be a pointer to an array of {@code clearValueCount} {@code VkClearValue} unions",
-			"Each of {@code renderPass} and {@code framebuffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code framebuffer}, and {@code renderPass} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"""
-			{@code clearValueCount} $must be greater than or equal to the number of attachments in {@code renderPass} that specify a {@code loadOp} of
-			#ATTACHMENT_LOAD_OP_CLEAR
+			{@code clearValueCount} $must be greater than the largest attachment index in {@code renderPass} that specifies a {@code loadOp} (or
+			{@code stencilLoadOp}, if the attachment has a depth/stencil format) of #ATTACHMENT_LOAD_OP_CLEAR
 			"""
 		)}"""
 
@@ -1983,8 +2002,8 @@ val VkSubmitInfo =
 			{@code VkSemaphore} handles
 			""",
 			"""
-			Each of the elements of {@code pWaitSemaphores}, the elements of {@code pCommandBuffers} and the elements of {@code pSignalSemaphores} that are
-			valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}
+			Each of the elements of {@code pCommandBuffers}, the elements of {@code pSignalSemaphores}, and the elements of {@code pWaitSemaphores} that are
+			valid handles $must have been created, allocated, or retrieved from the same {@code VkDevice}
 			""",
 			"Any given element of {@code pSignalSemaphores} $must currently be unsignaled",
 			"""
@@ -2051,7 +2070,18 @@ val VkSubpassDependency =
 			{@code srcSubpass} $must be less than or equal to {@code dstSubpass}, unless one of them is #SUBPASS_EXTERNAL, to avoid cyclic dependencies and
 			ensure a valid execution order
 			""",
-			"{@code srcSubpass} and {@code dstSubpass} $mustnot both be equal to #SUBPASS_EXTERNAL"
+			"{@code srcSubpass} and {@code dstSubpass} $mustnot both be equal to #SUBPASS_EXTERNAL",
+			"""
+			If {@code srcSubpass} is equal to {@code dstSubpass}, {@code srcStageMask} and {@code dstStageMask} $must only contain one of
+			#PIPELINE_STAGE_TOP_OF_PIPE_BIT, #PIPELINE_STAGE_DRAW_INDIRECT_BIT, #PIPELINE_STAGE_VERTEX_INPUT_BIT, #PIPELINE_STAGE_VERTEX_SHADER_BIT,
+			#PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT,
+			#PIPELINE_STAGE_FRAGMENT_SHADER_BIT, #PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT, #PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,
+			#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, or #PIPELINE_STAGE_ALL_GRAPHICS_BIT
+			""",
+			"""
+			If {@code srcSubpass} is equal to {@code dstSubpass}, the highest bit value included in {@code srcStageMask} $must be less than or equal to the
+			lowest bit value in {@code dstStageMask}
+			"""
 		)}"""
 
 val VkSubpassDescription =
@@ -2136,11 +2166,7 @@ val VkSwapchainCreateInfoKHR =
 			"{@code compositeAlpha} $must be a valid {@code VkCompositeAlphaFlagBitsKHR} value",
 			"{@code presentMode} $must be a valid {@code VkPresentModeKHR} value",
 			"If {@code oldSwapchain} is not #NULL_HANDLE, {@code oldSwapchain} $must be a valid {@code VkSwapchainKHR} handle",
-			"If {@code oldSwapchain} is a valid handle, it $must have been created, allocated or retrieved from {@code surface}",
-			"""
-			Each of {@code surface} and {@code oldSwapchain} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkInstance}
-			""",
+			"If {@code oldSwapchain} is a valid handle, it $must have been created, allocated, or retrieved from {@code surface}",
 			"{@code surface} $must be a surface that is supported by the device as determined using #GetPhysicalDeviceSurfaceSupportKHR()",
 			"""
 			The native window referred to by {@code surface} $mustnot already be associated with a swapchain other than {@code oldSwapchain}, or with a
@@ -2247,8 +2273,8 @@ val VkWriteDescriptorSet =
 			"{@code descriptorType} $must be a valid {@code VkDescriptorType} value",
 			"{@code descriptorCount} $must be greater than 0",
 			"""
-			Each of {@code dstSet} and the elements of {@code pTexelBufferView} that are valid handles $must have been created, allocated or retrieved from the
-			same {@code VkDevice}
+			Both of {@code dstSet}, and the elements of {@code pTexelBufferView} that are valid handles $must have been created, allocated, or retrieved from
+			the same {@code VkDevice}
 			""",
 			"{@code dstBinding} $must be a valid binding point within {@code dstSet}",
 			"{@code descriptorType} $must match the type of {@code dstBinding} within {@code dstSet}",
@@ -2258,7 +2284,7 @@ val VkWriteDescriptorSet =
 			""",
 			"""
 			If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE,
-			#DESCRIPTOR_TYPE_STORAGE_IMAGE or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, {@code pImageInfo} $must be a pointer to an array of {@code descriptorCount}
+			#DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, {@code pImageInfo} $must be a pointer to an array of {@code descriptorCount}
 			valid ##VkDescriptorImageInfo structures
 			""",
 			"""
@@ -2266,7 +2292,7 @@ val VkWriteDescriptorSet =
 			pointer to an array of {@code descriptorCount} valid {@code VkBufferView} handles
 			""",
 			"""
-			If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_STORAGE_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC or
+			If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_STORAGE_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, or
 			#DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, {@code pBufferInfo} $must be a pointer to an array of {@code descriptorCount} valid
 			##VkDescriptorBufferInfo structures
 			""",
@@ -2276,7 +2302,7 @@ val VkWriteDescriptorSet =
 			{@code pImageInfo} $must be a valid {@code VkSampler} object
 			""",
 			"""
-			If {@code descriptorType} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE or
+			If {@code descriptorType} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or
 			#DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code imageView} and {@code imageLayout} members of any given element of {@code pImageInfo} $must be a
 			valid {@code VkImageView} and {@code VkImageLayout}, respectively
 			""",

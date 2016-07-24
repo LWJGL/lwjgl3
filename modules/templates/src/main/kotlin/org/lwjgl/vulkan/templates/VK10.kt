@@ -121,7 +121,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			"-9"
 		),
 		"ERROR_TOO_MANY_OBJECTS".enum("Too many objects of the type have already been created.", "-10"),
-		"ERROR_FORMAT_NOT_SUPPORTED".enum("A requested format is not supported on this device.", "-11")
+		"ERROR_FORMAT_NOT_SUPPORTED".enum("A requested format is not supported on this device.", "-11"),
+		"ERROR_FRAGMENTED_POOL".enum("A requested pool allocation has failed due to fragmentation of the pool’s memory.", "-12")
 	)
 
 	EnumConstant(

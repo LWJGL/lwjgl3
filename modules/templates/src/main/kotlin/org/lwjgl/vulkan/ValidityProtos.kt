@@ -17,12 +17,8 @@ val vkAcquireNextImageKHR =
 			"If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} $must be a valid {@code VkSemaphore} handle",
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
 			"{@code pImageIndex} $must be a pointer to a {@code uint32_t} value",
-			"If {@code semaphore} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"If {@code fence} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code swapchain}, {@code device}, {@code semaphore} and {@code fence} that are valid handles $must have been created, allocated or
-			retrieved from the same {@code VkInstance}
-			""",
+			"If {@code semaphore} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
+			"If {@code fence} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"If {@code semaphore} is not #NULL_HANDLE it $must be unsignaled",
 			"""
 			If {@code fence} is not #NULL_HANDLE it $must be unsignaled and $mustnot be associated with any other queue command that has not yet completed
@@ -109,9 +105,8 @@ val vkBindBufferMemory =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code buffer} $must be a valid {@code VkBuffer} handle",
 			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
-			"{@code buffer} $must have been created, allocated or retrieved from {@code device}",
-			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device}, {@code buffer} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code buffer} $must have been created, allocated, or retrieved from {@code device}",
+			"{@code memory} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code buffer} $mustnot already be backed by a memory object",
 			"{@code buffer} $mustnot have been created with any sparse memory binding flags",
 			"{@code memoryOffset} $must be less than the size of {@code memory}",
@@ -160,9 +155,8 @@ val vkBindImageMemory =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code image} $must be a valid {@code VkImage} handle",
 			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
-			"{@code image} $must have been created, allocated or retrieved from {@code device}",
-			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device}, {@code image} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code image} $must have been created, allocated, or retrieved from {@code device}",
+			"{@code memory} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code image} $mustnot already be backed by a memory object",
 			"{@code image} $mustnot have been created with any sparse memory binding flags",
 			"{@code memoryOffset} $must be less than the size of {@code memory}",
@@ -200,8 +194,8 @@ val vkCmdBeginQuery =
 			"{@code queryPool} $must be a valid {@code VkQueryPool} handle",
 			"{@code flags} $must be a valid combination of {@code VkQueryControlFlagBits} values",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
-			"Each of {@code commandBuffer} and {@code queryPool} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
+			"Both of {@code commandBuffer}, and {@code queryPool} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"The query identified by {@code queryPool} and {@code query} $must currently not be active",
 			"The query identified by {@code queryPool} and {@code query} $must be unavailable",
 			"""
@@ -299,11 +293,11 @@ val vkCmdBindDescriptorSets =
 			values
 			""",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"{@code descriptorSetCount} $must be greater than 0",
 			"""
-			Each of {@code commandBuffer}, {@code layout} and the elements of {@code pDescriptorSets} $must have been created, allocated or retrieved from the
-			same {@code VkDevice}
+			Each of {@code commandBuffer}, {@code layout}, and the elements of {@code pDescriptorSets} $must have been created, allocated, or retrieved from
+			the same {@code VkDevice}
 			""",
 			"""
 			Any given element of {@code pDescriptorSets} $must have been created with a {@code VkDescriptorSetLayout} that matches (is the same as, or defined
@@ -328,7 +322,7 @@ val vkCmdBindIndexBuffer =
 			"{@code indexType} $must be a valid {@code VkIndexType} value",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
-			"Each of {@code commandBuffer} and {@code buffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code buffer}, and {@code commandBuffer} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code offset} $must be less than the size of {@code buffer}",
 			"""
 			The sum of {@code offset} and the address of the range of {@code VkDeviceMemory} object that is backing {@code buffer}, $must be a multiple of the
@@ -349,8 +343,8 @@ val vkCmdBindPipeline =
 			"{@code pipelineBindPoint} $must be a valid {@code VkPipelineBindPoint} value",
 			"{@code pipeline} $must be a valid {@code VkPipeline} handle",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
-			"Each of {@code commandBuffer} and {@code pipeline} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
+			"Both of {@code commandBuffer}, and {@code pipeline} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"""
 			If {@code pipelineBindPoint} is #PIPELINE_BIND_POINT_COMPUTE, the {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support
 			compute operations
@@ -383,7 +377,7 @@ val vkCmdBindVertexBuffers =
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
 			"{@code bindingCount} $must be greater than 0",
 			"""
-			Each of {@code commandBuffer} and the elements of {@code pBuffers} $must have been created, allocated or retrieved from the same {@code VkDevice}
+			Both of {@code commandBuffer}, and the elements of {@code pBuffers} $must have been created, allocated, or retrieved from the same {@code VkDevice}
 			""",
 			"{@code firstBinding} $must be less than ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}",
 			"The sum of {@code firstBinding} and {@code bindingCount} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}",
@@ -411,7 +405,8 @@ val vkCmdBlitImage =
 			"This command $must only be called outside of a render pass instance",
 			"{@code regionCount} $must be greater than 0",
 			"""
-			Each of {@code commandBuffer}, {@code srcImage} and {@code dstImage} $must have been created, allocated or retrieved from the same {@code VkDevice}
+			Each of {@code commandBuffer}, {@code dstImage}, and {@code srcImage} $must have been created, allocated, or retrieved from the same
+			{@code VkDevice}
 			""",
 			"The source region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcImage}",
 			"The destination region specified by a given element of {@code pRegions} $must be a region that is contained within {@code dstImage}",
@@ -501,10 +496,10 @@ val vkCmdClearColorImage =
 			"{@code pColor} $must be a pointer to a valid {@code VkClearColorValue} union",
 			"{@code pRanges} $must be a pointer to an array of {@code rangeCount} valid ##VkImageSubresourceRange structures",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
 			"{@code rangeCount} $must be greater than 0",
-			"Each of {@code commandBuffer} and {@code image} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code commandBuffer}, and {@code image} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code image} $must have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag",
 			"""
 			{@code imageLayout} $must specify the layout of the image subresource ranges of {@code image} specified in {@code pRanges} at the time this command
@@ -532,7 +527,7 @@ val vkCmdClearDepthStencilImage =
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
 			"This command $must only be called outside of a render pass instance",
 			"{@code rangeCount} $must be greater than 0",
-			"Each of {@code commandBuffer} and {@code image} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code commandBuffer}, and {@code image} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code image} $must have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag",
 			"""
 			{@code imageLayout} $must specify the layout of the image subresource ranges of {@code image} specified in {@code pRanges} at the time this command
@@ -556,11 +551,11 @@ val vkCmdCopyBuffer =
 			"{@code dstBuffer} $must be a valid {@code VkBuffer} handle",
 			"{@code pRegions} $must be a pointer to an array of {@code regionCount} ##VkBufferCopy structures",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
 			"{@code regionCount} $must be greater than 0",
 			"""
-			Each of {@code commandBuffer}, {@code srcBuffer} and {@code dstBuffer} $must have been created, allocated or retrieved from the same
+			Each of {@code commandBuffer}, {@code dstBuffer}, and {@code srcBuffer} $must have been created, allocated, or retrieved from the same
 			{@code VkDevice}
 			""",
 			"The {@code size} member of a given element of {@code pRegions} $must be greater than 0",
@@ -594,11 +589,11 @@ val vkCmdCopyBufferToImage =
 			"{@code dstImageLayout} $must be a valid {@code VkImageLayout} value",
 			"{@code pRegions} $must be a pointer to an array of {@code regionCount} valid ##VkBufferImageCopy structures",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
 			"{@code regionCount} $must be greater than 0",
 			"""
-			Each of {@code commandBuffer}, {@code srcBuffer} and {@code dstImage} $must have been created, allocated or retrieved from the same
+			Each of {@code commandBuffer}, {@code dstImage}, and {@code srcBuffer} $must have been created, allocated, or retrieved from the same
 			{@code VkDevice}
 			""",
 			"The buffer region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcBuffer}",
@@ -632,11 +627,12 @@ val vkCmdCopyImage =
 			"{@code dstImageLayout} $must be a valid {@code VkImageLayout} value",
 			"{@code pRegions} $must be a pointer to an array of {@code regionCount} valid ##VkImageCopy structures",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
 			"{@code regionCount} $must be greater than 0",
 			"""
-			Each of {@code commandBuffer}, {@code srcImage} and {@code dstImage} $must have been created, allocated or retrieved from the same {@code VkDevice}
+			Each of {@code commandBuffer}, {@code dstImage}, and {@code srcImage} $must have been created, allocated, or retrieved from the same
+			{@code VkDevice}
 			""",
 			"The source region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcImage}",
 			"The destination region specified by a given element of {@code pRegions} $must be a region that is contained within {@code dstImage}",
@@ -674,11 +670,11 @@ val vkCmdCopyImageToBuffer =
 			"{@code dstBuffer} $must be a valid {@code VkBuffer} handle",
 			"{@code pRegions} $must be a pointer to an array of {@code regionCount} valid ##VkBufferImageCopy structures",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
 			"{@code regionCount} $must be greater than 0",
 			"""
-			Each of {@code commandBuffer}, {@code srcImage} and {@code dstBuffer} $must have been created, allocated or retrieved from the same
+			Each of {@code commandBuffer}, {@code dstBuffer}, and {@code srcImage} $must have been created, allocated, or retrieved from the same
 			{@code VkDevice}
 			""",
 			"The image region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcImage}",
@@ -710,10 +706,10 @@ val vkCmdCopyQueryPoolResults =
 			"{@code dstBuffer} $must be a valid {@code VkBuffer} handle",
 			"{@code flags} $must be a valid combination of {@code VkQueryResultFlagBits} values",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
 			"""
-			Each of {@code commandBuffer}, {@code queryPool} and {@code dstBuffer} $must have been created, allocated or retrieved from the same
+			Each of {@code commandBuffer}, {@code dstBuffer}, and {@code queryPool} $must have been created, allocated, or retrieved from the same
 			{@code VkDevice}
 			""",
 			"{@code dstOffset} $must be less than the size of {@code dstBuffer}",
@@ -835,7 +831,7 @@ val vkCmdDispatchIndirect =
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support compute operations",
 			"This command $must only be called outside of a render pass instance",
-			"Each of {@code commandBuffer} and {@code buffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code buffer}, and {@code commandBuffer} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"""
 			For each set {@code n} that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE, a descriptor set $must
 			have been bound to {@code n} at #PIPELINE_BIND_POINT_COMPUTE, with a {@code VkPipelineLayout} that is compatible for set {@code n}, with the
@@ -1040,7 +1036,7 @@ val vkCmdDrawIndexedIndirect =
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
 			"This command $must only be called inside of a render pass instance",
-			"Each of {@code commandBuffer} and {@code buffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code buffer}, and {@code commandBuffer} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code offset} $must be a multiple of 4",
 			"""
 			If {@code drawCount} is greater than 1, {@code stride} $must be a multiple of 4 and $must be greater than or equal to
@@ -1128,7 +1124,7 @@ val vkCmdDrawIndirect =
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
 			"This command $must only be called inside of a render pass instance",
-			"Each of {@code commandBuffer} and {@code buffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code buffer}, and {@code commandBuffer} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code offset} $must be a multiple of 4",
 			"""
 			If {@code drawCount} is greater than 1, {@code stride} $must be a multiple of 4 and $must be greater than or equal to
@@ -1214,8 +1210,8 @@ val vkCmdEndQuery =
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code queryPool} $must be a valid {@code VkQueryPool} handle",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
-			"Each of {@code commandBuffer} and {@code queryPool} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
+			"Both of {@code commandBuffer}, and {@code queryPool} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"The query identified by {@code queryPool} and {@code query} $must currently be active",
 			"{@code query} $must be less than the number of queries in {@code queryPool}"
 		)}
@@ -1247,11 +1243,11 @@ val vkCmdExecuteCommands =
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code pCommandBuffers} $must be a pointer to an array of {@code commandBufferCount} valid {@code VkCommandBuffer} handles",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics, or compute operations",
 			"{@code commandBuffer} $must be a primary {@code VkCommandBuffer}",
 			"{@code commandBufferCount} $must be greater than 0",
 			"""
-			Each of {@code commandBuffer} and the elements of {@code pCommandBuffers} $must have been created, allocated or retrieved from the same
+			Both of {@code commandBuffer}, and the elements of {@code pCommandBuffers} $must have been created, allocated, or retrieved from the same
 			{@code VkDevice}
 			""",
 			"{@code commandBuffer} $must have been created with a {@code level} of #COMMAND_BUFFER_LEVEL_PRIMARY",
@@ -1313,9 +1309,9 @@ val vkCmdFillBuffer =
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code dstBuffer} $must be a valid {@code VkBuffer} handle",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
-			"Each of {@code commandBuffer} and {@code dstBuffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code commandBuffer}, and {@code dstBuffer} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code dstOffset} $must be less than the size of {@code dstBuffer}",
 			"{@code dstOffset} $must be a multiple of 4",
 			"If {@code size} is not equal to #WHOLE_SIZE, {@code size} $must be greater than 0",
@@ -1368,7 +1364,7 @@ val vkCmdPipelineBarrier =
 			##VkImageMemoryBarrier structures
 			""",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics, or compute operations",
 			"If the geometry shaders feature is not enabled, {@code srcStageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
 			"If the geometry shaders feature is not enabled, {@code dstStageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
 			"""
@@ -1380,8 +1376,29 @@ val vkCmdPipelineBarrier =
 			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			""",
 			"""
-			If #CmdPipelineBarrier() is called within a render pass instance, the render pass $must declare at least one self-dependency from the current
-			subpass to itself - see Subpass Self-dependency
+			If #CmdPipelineBarrier() is called within a render pass instance, the render pass $must have been created with a {@code VkSubpassDependency}
+			instance in {@code pDependencies} that expresses a dependency from the current subpass to itself. Additionally:
+			""",
+			"If #CmdPipelineBarrier() is called within a render pass instance, {@code bufferMemoryBarrierCount} $must be 0",
+			"""
+			If #CmdPipelineBarrier() is called within a render pass instance, the {@code image} member of any element of {@code pImageMemoryBarriers} $must be
+			equal to one of the elements of {@code pAttachments} that the current {@code framebuffer} was created with, that is also referred to by one of the
+			elements of the {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment} members of the
+			{@code VkSubpassDescription} instance that the current subpass was created with
+			""",
+			"""
+			If #CmdPipelineBarrier() is called within a render pass instance, the {@code oldLayout} and {@code newLayout} members of any element of
+			{@code pImageMemoryBarriers} $must be equal to the {@code layout} member of an element of the {@code pColorAttachments},
+			{@code pResolveAttachments} or {@code pDepthStencilAttachment} members of the {@code VkSubpassDescription} instance that the current subpass was
+			created with, that refers to the same {@code image}
+			""",
+			"""
+			If #CmdPipelineBarrier() is called within a render pass instance, the {@code oldLayout} and {@code newLayout} members of an element of
+			{@code pImageMemoryBarriers} $must be equal
+			""",
+			"""
+			If #CmdPipelineBarrier() is called within a render pass instance, the {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} members of any
+			element of {@code pImageMemoryBarriers} $must be #QUEUE_FAMILY_IGNORED
 			"""
 		)}
 
@@ -1399,9 +1416,9 @@ val vkCmdPushConstants =
 			"{@code stageFlags} $mustnot be 0",
 			"{@code pValues} $must be a pointer to an array of {@code size} bytes",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"{@code size} $must be greater than 0",
-			"Each of {@code commandBuffer} and {@code layout} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code commandBuffer}, and {@code layout} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code stageFlags} $must match exactly the shader stages used in {@code layout} for the range specified by {@code offset} and {@code size}",
 			"{@code offset} $must be a multiple of 4",
 			"{@code size} $must be a multiple of 4",
@@ -1422,9 +1439,9 @@ val vkCmdResetEvent =
 			"{@code stageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
 			"{@code stageMask} $mustnot be 0",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
-			"Each of {@code commandBuffer} and {@code event} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code commandBuffer}, and {@code event} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"If the geometry shaders feature is not enabled, {@code stageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
 			"""
 			If the tessellation shaders feature is not enabled, {@code stageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
@@ -1444,9 +1461,9 @@ val vkCmdResetQueryPool =
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code queryPool} $must be a valid {@code VkQueryPool} handle",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
-			"Each of {@code commandBuffer} and {@code queryPool} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code commandBuffer}, and {@code queryPool} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code firstQuery} $must be less than the number of queries in {@code queryPool}",
 			"The sum of {@code firstQuery} and {@code queryCount} $must be less than or equal to the number of queries in {@code queryPool}"
 		)}
@@ -1470,7 +1487,8 @@ val vkCmdResolveImage =
 			"This command $must only be called outside of a render pass instance",
 			"{@code regionCount} $must be greater than 0",
 			"""
-			Each of {@code commandBuffer}, {@code srcImage} and {@code dstImage} $must have been created, allocated or retrieved from the same {@code VkDevice}
+			Each of {@code commandBuffer}, {@code dstImage}, and {@code srcImage} $must have been created, allocated, or retrieved from the same
+			{@code VkDevice}
 			""",
 			"The source region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcImage}",
 			"The destination region specified by a given element of {@code pRegions} $must be a region that is contained within {@code dstImage}",
@@ -1560,9 +1578,9 @@ val vkCmdSetEvent =
 			"{@code stageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
 			"{@code stageMask} $mustnot be 0",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
-			"Each of {@code commandBuffer} and {@code event} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code commandBuffer}, and {@code event} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"If the geometry shaders feature is not enabled, {@code stageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
 			"""
 			If the tessellation shaders feature is not enabled, {@code stageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
@@ -1684,10 +1702,10 @@ val vkCmdUpdateBuffer =
 			"{@code dstBuffer} $must be a valid {@code VkBuffer} handle",
 			"{@code pData} $must be a pointer to an array of {@code dataSize} bytes",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
 			"{@code dataSize} $must be greater than 0",
-			"Each of {@code commandBuffer} and {@code dstBuffer} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code commandBuffer}, and {@code dstBuffer} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code dstOffset} $must be less than the size of {@code dstBuffer}",
 			"{@code dataSize} $must be less than or equal to the size of {@code dstBuffer} minus {@code dstOffset}",
 			"{@code dstBuffer} $must have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag",
@@ -1723,9 +1741,11 @@ val vkCmdWaitEvents =
 			##VkImageMemoryBarrier structures
 			""",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"{@code eventCount} $must be greater than 0",
-			"Each of {@code commandBuffer} and the elements of {@code pEvents} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"""
+			Both of {@code commandBuffer}, and the elements of {@code pEvents} $must have been created, allocated, or retrieved from the same {@code VkDevice}
+			""",
 			"""
 			{@code srcStageMask} $must be the bitwise OR of the {@code stageMask} parameter used in previous calls to #CmdSetEvent() with any of the members of
 			{@code pEvents} and #PIPELINE_STAGE_HOST_BIT if any of the members of {@code pEvents} was set using #SetEvent()
@@ -1758,8 +1778,8 @@ val vkCmdWriteTimestamp =
 			"{@code pipelineStage} $must be a valid {@code VkPipelineStageFlagBits} value",
 			"{@code queryPool} $must be a valid {@code VkQueryPool} handle",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
-			"Each of {@code commandBuffer} and {@code queryPool} $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
+			"Both of {@code commandBuffer}, and {@code queryPool} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"The query identified by {@code queryPool} and {@code query} $must be {@code unavailable}",
 			"The command pool's queue family $must support a non-zero {@code timestampValidBits}"
 		)}
@@ -1819,11 +1839,7 @@ val vkCreateComputePipelines =
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"{@code pPipelines} $must be a pointer to an array of {@code createInfoCount} {@code VkPipeline} handles",
 			"{@code createInfoCount} $must be greater than 0",
-			"If {@code pipelineCache} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code pipelineCache} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code pipelineCache} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"""
 			If the {@code flags} member of any given element of {@code pCreateInfos} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and the
 			{@code basePipelineIndex} member of that same element is not {@code -1}, {@code basePipelineIndex} $must be less than the index into
@@ -1927,11 +1943,7 @@ val vkCreateGraphicsPipelines =
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"{@code pPipelines} $must be a pointer to an array of {@code createInfoCount} {@code VkPipeline} handles",
 			"{@code createInfoCount} $must be greater than 0",
-			"If {@code pipelineCache} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code pipelineCache} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code pipelineCache} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"""
 			If the {@code flags} member of any given element of {@code pCreateInfos} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and the
 			{@code basePipelineIndex} member of that same element is not {@code -1}, {@code basePipelineIndex} $must be less than the index into
@@ -2159,11 +2171,7 @@ val vkDestroyBuffer =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code buffer} is not #NULL_HANDLE, {@code buffer} $must be a valid {@code VkBuffer} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code buffer} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code buffer} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code buffer} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code buffer}, either directly or via a {@code VkBufferView}, $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code buffer} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code buffer} was created, {@code pAllocator} $must be $NULL"
@@ -2180,11 +2188,7 @@ val vkDestroyBufferView =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code bufferView} is not #NULL_HANDLE, {@code bufferView} $must be a valid {@code VkBufferView} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code bufferView} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code bufferView} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code bufferView} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code bufferView} $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code bufferView} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code bufferView} was created, {@code pAllocator} $must be $NULL"
@@ -2201,11 +2205,7 @@ val vkDestroyCommandPool =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code commandPool} is not #NULL_HANDLE, {@code commandPool} $must be a valid {@code VkCommandPool} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code commandPool} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code commandPool} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code commandPool} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All {@code VkCommandBuffer} objects allocated from {@code commandPool} $mustnot be pending execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code commandPool} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code commandPool} was created, {@code pAllocator} $must be $NULL"
@@ -2238,11 +2238,7 @@ val vkDestroyDescriptorPool =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code descriptorPool} is not #NULL_HANDLE, {@code descriptorPool} $must be a valid {@code VkDescriptorPool} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code descriptorPool} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code descriptorPool} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code descriptorPool} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code descriptorPool} (via any allocated descriptor sets) $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code descriptorPool} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code descriptorPool} was created, {@code pAllocator} $must be $NULL"
@@ -2259,11 +2255,7 @@ val vkDestroyDescriptorSetLayout =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code descriptorSetLayout} is not #NULL_HANDLE, {@code descriptorSetLayout} $must be a valid {@code VkDescriptorSetLayout} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code descriptorSetLayout} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code descriptorSetLayout} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code descriptorSetLayout} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"""
 			If {@code VkAllocationCallbacks} were provided when {@code descriptorSetLayout} was created, a compatible set of callbacks $must be provided here
 			""",
@@ -2296,11 +2288,7 @@ val vkDestroyEvent =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code event} is not #NULL_HANDLE, {@code event} $must be a valid {@code VkEvent} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code event} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code event} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code event} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code event} $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code event} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code event} was created, {@code pAllocator} $must be $NULL"
@@ -2317,11 +2305,7 @@ val vkDestroyFence =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code fence} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code fence} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"{@code fence} $mustnot be associated with any queue command that has not yet completed execution on that queue",
 			"If {@code VkAllocationCallbacks} were provided when {@code fence} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code fence} was created, {@code pAllocator} $must be $NULL"
@@ -2338,11 +2322,7 @@ val vkDestroyFramebuffer =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code framebuffer} is not #NULL_HANDLE, {@code framebuffer} $must be a valid {@code VkFramebuffer} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code framebuffer} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code framebuffer} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code framebuffer} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code framebuffer} $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code framebuffer} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code framebuffer} was created, {@code pAllocator} $must be $NULL"
@@ -2359,11 +2339,7 @@ val vkDestroyImage =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code image} is not #NULL_HANDLE, {@code image} $must be a valid {@code VkImage} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code image} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code image} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code image} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code image}, either directly or via a {@code VkImageView}, $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code image} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code image} was created, {@code pAllocator} $must be $NULL"
@@ -2380,11 +2356,7 @@ val vkDestroyImageView =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code imageView} is not #NULL_HANDLE, {@code imageView} $must be a valid {@code VkImageView} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code imageView} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code imageView} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code imageView} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code imageView} $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code imageView} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code imageView} was created, {@code pAllocator} $must be $NULL"
@@ -2416,11 +2388,7 @@ val vkDestroyPipeline =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code pipeline} is not #NULL_HANDLE, {@code pipeline} $must be a valid {@code VkPipeline} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code pipeline} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code pipeline} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code pipeline} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code pipeline} $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code pipeline} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code pipeline} was created, {@code pAllocator} $must be $NULL"
@@ -2437,11 +2405,7 @@ val vkDestroyPipelineCache =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code pipelineCache} is not #NULL_HANDLE, {@code pipelineCache} $must be a valid {@code VkPipelineCache} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code pipelineCache} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code pipelineCache} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code pipelineCache} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"If {@code VkAllocationCallbacks} were provided when {@code pipelineCache} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code pipelineCache} was created, {@code pAllocator} $must be $NULL"
 		)}
@@ -2457,11 +2421,7 @@ val vkDestroyPipelineLayout =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code pipelineLayout} is not #NULL_HANDLE, {@code pipelineLayout} $must be a valid {@code VkPipelineLayout} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code pipelineLayout} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code pipelineLayout} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code pipelineLayout} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"If {@code VkAllocationCallbacks} were provided when {@code pipelineLayout} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code pipelineLayout} was created, {@code pAllocator} $must be $NULL"
 		)}
@@ -2477,11 +2437,7 @@ val vkDestroyQueryPool =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code queryPool} is not #NULL_HANDLE, {@code queryPool} $must be a valid {@code VkQueryPool} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code queryPool} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code queryPool} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code queryPool} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code queryPool} $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code queryPool} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code queryPool} was created, {@code pAllocator} $must be $NULL"
@@ -2498,11 +2454,7 @@ val vkDestroyRenderPass =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code renderPass} is not #NULL_HANDLE, {@code renderPass} $must be a valid {@code VkRenderPass} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code renderPass} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code renderPass} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code renderPass} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code renderPass} $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code renderPass} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code renderPass} was created, {@code pAllocator} $must be $NULL"
@@ -2519,11 +2471,7 @@ val vkDestroySampler =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code sampler} is not #NULL_HANDLE, {@code sampler} $must be a valid {@code VkSampler} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code sampler} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code sampler} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code sampler} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code sampler} $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code sampler} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code sampler} was created, {@code pAllocator} $must be $NULL"
@@ -2540,11 +2488,7 @@ val vkDestroySemaphore =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} $must be a valid {@code VkSemaphore} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code semaphore} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code semaphore} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code semaphore} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"{@code semaphore} $mustnot be associated with any queue command that has not yet completed execution on that queue",
 			"If {@code VkAllocationCallbacks} were provided when {@code semaphore} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code semaphore} was created, {@code pAllocator} $must be $NULL"
@@ -2561,11 +2505,7 @@ val vkDestroyShaderModule =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code shaderModule} is not #NULL_HANDLE, {@code shaderModule} $must be a valid {@code VkShaderModule} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code shaderModule} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code shaderModule} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code shaderModule} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"If {@code VkAllocationCallbacks} were provided when {@code shaderModule} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code shaderModule} was created, {@code pAllocator} $must be $NULL"
 		)}
@@ -2581,7 +2521,7 @@ val vkDestroySurfaceKHR =
 			"{@code instance} $must be a valid {@code VkInstance} handle",
 			"If {@code surface} is not #NULL_HANDLE, {@code surface} $must be a valid {@code VkSurfaceKHR} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code surface} is a valid handle, it $must have been created, allocated or retrieved from {@code instance}",
+			"If {@code surface} is a valid handle, it $must have been created, allocated, or retrieved from {@code instance}",
 			"All {@code VkSwapchainKHR} objects created for {@code surface} $must have been destroyed prior to destroying {@code surface}",
 			"If {@code VkAllocationCallbacks} were provided when {@code surface} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code surface} was created, {@code pAllocator} $must be $NULL"
@@ -2598,10 +2538,6 @@ val vkDestroySwapchainKHR =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code swapchain} is not #NULL_HANDLE, {@code swapchain} $must be a valid {@code VkSwapchainKHR} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"""
-			Each of {@code swapchain} and {@code device} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkInstance}
-			""",
 			"All uses of presentable images acquired from {@code swapchain} $must have completed execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code swapchain} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code swapchain} was created, {@code pAllocator} $must be $NULL"
@@ -2708,12 +2644,8 @@ val vkFreeCommandBuffers =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code commandPool} $must be a valid {@code VkCommandPool} handle",
 			"{@code commandBufferCount} $must be greater than 0",
-			"{@code commandPool} $must have been created, allocated or retrieved from {@code device}",
-			"Each element of {@code pCommandBuffers} that is a valid handle $must have been created, allocated or retrieved from {@code commandPool}",
-			"""
-			Each of {@code device}, {@code commandPool} and the elements of {@code pCommandBuffers} that are valid handles $must have been created, allocated
-			or retrieved from the same {@code VkPhysicalDevice}
-			""",
+			"{@code commandPool} $must have been created, allocated, or retrieved from {@code device}",
+			"Each element of {@code pCommandBuffers} that is a valid handle $must have been created, allocated, or retrieved from {@code commandPool}",
 			"All elements of {@code pCommandBuffers} $mustnot be pending execution",
 			"""
 			{@code pCommandBuffers} $must be a pointer to an array of {@code commandBufferCount} {@code VkCommandBuffer} handles, each element of which $must
@@ -2733,12 +2665,8 @@ val vkFreeDescriptorSets =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code descriptorPool} $must be a valid {@code VkDescriptorPool} handle",
 			"{@code descriptorSetCount} $must be greater than 0",
-			"{@code descriptorPool} $must have been created, allocated or retrieved from {@code device}",
-			"Each element of {@code pDescriptorSets} that is a valid handle $must have been created, allocated or retrieved from {@code descriptorPool}",
-			"""
-			Each of {@code device}, {@code descriptorPool} and the elements of {@code pDescriptorSets} that are valid handles $must have been created,
-			allocated or retrieved from the same {@code VkPhysicalDevice}
-			""",
+			"{@code descriptorPool} $must have been created, allocated, or retrieved from {@code device}",
+			"Each element of {@code pDescriptorSets} that is a valid handle $must have been created, allocated, or retrieved from {@code descriptorPool}",
 			"All submitted commands that refer to any element of {@code pDescriptorSets} $must have completed execution",
 			"""
 			{@code pDescriptorSets} $must be a pointer to an array of {@code descriptorSetCount} {@code VkDescriptorSet} handles, each element of which $must
@@ -2760,11 +2688,7 @@ val vkFreeMemory =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"If {@code memory} is not #NULL_HANDLE, {@code memory} $must be a valid {@code VkDeviceMemory} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"If {@code memory} is a valid handle, it $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and {@code memory} that are valid handles $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"If {@code memory} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"All submitted commands that refer to {@code memory} (via images or buffers) $must have completed execution"
 		)}
 
@@ -2779,8 +2703,7 @@ val vkGetBufferMemoryRequirements =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code buffer} $must be a valid {@code VkBuffer} handle",
 			"{@code pMemoryRequirements} $must be a pointer to a ##VkMemoryRequirements structure",
-			"{@code buffer} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code buffer} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+			"{@code buffer} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
 val vkGetDeviceMemoryCommitment =
@@ -2789,8 +2712,7 @@ val vkGetDeviceMemoryCommitment =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
 			"{@code pCommittedMemoryInBytes} $must be a pointer to a {@code VkDeviceSize} value",
-			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code memory} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code memory} $must have been created with a memory type that reports #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT"
 		)}"""
 
@@ -2861,8 +2783,7 @@ val vkGetEventStatus =
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code event} $must be a valid {@code VkEvent} handle",
-			"{@code event} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code event} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+			"{@code event} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
 val vkGetFenceStatus =
@@ -2870,8 +2791,7 @@ val vkGetFenceStatus =
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code fence} $must be a valid {@code VkFence} handle",
-			"{@code fence} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code fence} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+			"{@code fence} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
 val vkGetImageMemoryRequirements =
@@ -2880,8 +2800,7 @@ val vkGetImageMemoryRequirements =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code image} $must be a valid {@code VkImage} handle",
 			"{@code pMemoryRequirements} $must be a pointer to a ##VkMemoryRequirements structure",
-			"{@code image} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code image} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+			"{@code image} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
 val vkGetImageSparseMemoryRequirements =
@@ -2895,8 +2814,7 @@ val vkGetImageSparseMemoryRequirements =
 			{@code pSparseMemoryRequirements} $must be a pointer to an array of {@code pSparseMemoryRequirementCount} ##VkSparseImageMemoryRequirements
 			structures
 			""",
-			"{@code image} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code image} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+			"{@code image} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
 val vkGetImageSubresourceLayout =
@@ -2906,8 +2824,7 @@ val vkGetImageSubresourceLayout =
 			"{@code image} $must be a valid {@code VkImage} handle",
 			"{@code pSubresource} $must be a pointer to a valid ##VkImageSubresource structure",
 			"{@code pLayout} $must be a pointer to a ##VkSubresourceLayout structure",
-			"{@code image} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code image} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code image} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code image} $must have been created with {@code tiling} equal to #IMAGE_TILING_LINEAR",
 			"The {@code aspectMask} member of {@code pSubresource} $must only have a single bit set"
 		)}"""
@@ -3040,8 +2957,7 @@ val vkGetPhysicalDeviceSurfaceCapabilitiesKHR =
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
 			"{@code surface} $must be a valid {@code VkSurfaceKHR} handle",
-			"{@code pSurfaceCapabilities} $must be a pointer to a ##VkSurfaceCapabilitiesKHR structure",
-			"Each of {@code physicalDevice} and {@code surface} $must have been created, allocated or retrieved from the same {@code VkInstance}"
+			"{@code pSurfaceCapabilities} $must be a pointer to a ##VkSurfaceCapabilitiesKHR structure"
 		)}"""
 
 val vkGetPhysicalDeviceSurfaceFormatsKHR =
@@ -3053,8 +2969,7 @@ val vkGetPhysicalDeviceSurfaceFormatsKHR =
 			"""
 			If the value referenced by {@code pSurfaceFormatCount} is not 0, and {@code pSurfaceFormats} is not $NULL, {@code pSurfaceFormats} $must be a
 			pointer to an array of {@code pSurfaceFormatCount} ##VkSurfaceFormatKHR structures
-			""",
-			"Each of {@code physicalDevice} and {@code surface} $must have been created, allocated or retrieved from the same {@code VkInstance}"
+			"""
 		)}"""
 
 val vkGetPhysicalDeviceSurfacePresentModesKHR =
@@ -3066,8 +2981,7 @@ val vkGetPhysicalDeviceSurfacePresentModesKHR =
 			"""
 			If the value referenced by {@code pPresentModeCount} is not 0, and {@code pPresentModes} is not $NULL, {@code pPresentModes} $must be a pointer to
 			an array of {@code pPresentModeCount} {@code VkPresentModeKHR} values
-			""",
-			"Each of {@code physicalDevice} and {@code surface} $must have been created, allocated or retrieved from the same {@code VkInstance}"
+			"""
 		)}"""
 
 val vkGetPhysicalDeviceSurfaceSupportKHR =
@@ -3076,7 +2990,6 @@ val vkGetPhysicalDeviceSurfaceSupportKHR =
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
 			"{@code surface} $must be a valid {@code VkSurfaceKHR} handle",
 			"{@code pSupported} $must be a pointer to a {@code VkBool32} value",
-			"Each of {@code physicalDevice} and {@code surface} $must have been created, allocated or retrieved from the same {@code VkInstance}",
 			"""
 			{@code queueFamilyIndex} $must be less than {@code pQueueFamilyPropertyCount} returned by #GetPhysicalDeviceQueueFamilyProperties() for the given
 			{@code physicalDevice}
@@ -3136,8 +3049,7 @@ val vkGetPipelineCacheData =
 			If the value referenced by {@code pDataSize} is not 0, and {@code pData} is not $NULL, {@code pData} $must be a pointer to an array of
 			{@code pDataSize} bytes
 			""",
-			"{@code pipelineCache} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code pipelineCache} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+			"{@code pipelineCache} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
 val vkGetQueryPoolResults =
@@ -3148,8 +3060,7 @@ val vkGetQueryPoolResults =
 			"{@code pData} $must be a pointer to an array of {@code dataSize} bytes",
 			"{@code flags} $must be a valid combination of {@code VkQueryResultFlagBits} values",
 			"{@code dataSize} $must be greater than 0",
-			"{@code queryPool} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code queryPool} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code queryPool} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code firstQuery} $must be less than the number of queries in {@code queryPool}",
 			"If #QUERY_RESULT_64_BIT is not set in {@code flags} then {@code pData} and {@code stride} $must be multiples of 4",
 			"If #QUERY_RESULT_64_BIT is set in {@code flags} then {@code pData} and {@code stride} $must be multiples of 8",
@@ -3164,8 +3075,7 @@ val vkGetRenderAreaGranularity =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code renderPass} $must be a valid {@code VkRenderPass} handle",
 			"{@code pGranularity} $must be a pointer to a ##VkExtent2D structure",
-			"{@code renderPass} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code renderPass} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+			"{@code renderPass} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
 val vkGetSwapchainImagesKHR =
@@ -3177,8 +3087,7 @@ val vkGetSwapchainImagesKHR =
 			"""
 			If the value referenced by {@code pSwapchainImageCount} is not 0, and {@code pSwapchainImages} is not $NULL, {@code pSwapchainImages} $must be a
 			pointer to an array of {@code pSwapchainImageCount} {@code VkImage} handles
-			""",
-			"Each of {@code swapchain} and {@code device} $must have been created, allocated or retrieved from the same {@code VkInstance}"
+			"""
 		)}"""
 
 val vkInvalidateMappedMemoryRanges =
@@ -3196,8 +3105,7 @@ val vkMapMemory =
 			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
 			"{@code flags} $must be 0",
 			"{@code ppData} $must be a pointer to a pointer",
-			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code memory} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code memory} $mustnot currently be mapped",
 			"{@code offset} $must be less than the size of {@code memory}",
 			"If {@code size} is not equal to #WHOLE_SIZE, {@code size} $must be greater than 0",
@@ -3217,12 +3125,8 @@ val vkMergePipelineCaches =
 			"{@code dstCache} $must be a valid {@code VkPipelineCache} handle",
 			"{@code pSrcCaches} $must be a pointer to an array of {@code srcCacheCount} valid {@code VkPipelineCache} handles",
 			"{@code srcCacheCount} $must be greater than 0",
-			"{@code dstCache} $must have been created, allocated or retrieved from {@code device}",
-			"Each element of {@code pSrcCaches} $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device}, {@code dstCache} and the elements of {@code pSrcCaches} $must have been created, allocated or retrieved from the same
-			{@code VkPhysicalDevice}
-			""",
+			"{@code dstCache} $must have been created, allocated, or retrieved from {@code device}",
+			"Each element of {@code pSrcCaches} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code dstCache} $mustnot appear in the list of source caches"
 		)}
 
@@ -3238,7 +3142,7 @@ val vkQueueBindSparse =
 			"If {@code bindInfoCount} is not 0, {@code pBindInfo} $must be a pointer to an array of {@code bindInfoCount} valid ##VkBindSparseInfo structures",
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
 			"The {@code queue} $must support sparse binding operations",
-			"Each of {@code queue} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code fence}, and {@code queue} that are valid handles $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code fence} $must be unsignaled",
 			"{@code fence} $mustnot be associated with any other queue command that has not yet completed execution on that queue"
 		)}
@@ -3282,7 +3186,7 @@ val vkQueueSubmit =
 			"{@code queue} $must be a valid {@code VkQueue} handle",
 			"If {@code submitCount} is not 0, {@code pSubmits} $must be a pointer to an array of {@code submitCount} valid ##VkSubmitInfo structures",
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
-			"Each of {@code queue} and {@code fence} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code fence}, and {@code queue} that are valid handles $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be unsignaled",
 			"""
 			If {@code fence} is not #NULL_HANDLE, {@code fence} $mustnot be associated with any other queue command that has not yet completed execution on
@@ -3324,8 +3228,7 @@ val vkResetCommandPool =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code commandPool} $must be a valid {@code VkCommandPool} handle",
 			"{@code flags} $must be a valid combination of {@code VkCommandPoolResetFlagBits} values",
-			"{@code commandPool} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code commandPool} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code commandPool} $must have been created, allocated, or retrieved from {@code device}",
 			"All {@code VkCommandBuffer} objects allocated from {@code commandPool} $mustnot currently be pending execution"
 		)}
 
@@ -3340,8 +3243,7 @@ val vkResetDescriptorPool =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code descriptorPool} $must be a valid {@code VkDescriptorPool} handle",
 			"{@code flags} $must be 0",
-			"{@code descriptorPool} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code descriptorPool} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code descriptorPool} $must have been created, allocated, or retrieved from {@code device}",
 			"All uses of {@code descriptorPool} (via any allocated descriptor sets) $must have completed execution"
 		)}
 
@@ -3356,8 +3258,7 @@ val vkResetEvent =
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code event} $must be a valid {@code VkEvent} handle",
-			"{@code event} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code event} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code event} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code event} $mustnot be waited on by a #CmdWaitEvents() command that is currently executing"
 		)}
 
@@ -3372,10 +3273,7 @@ val vkResetFences =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code pFences} $must be a pointer to an array of {@code fenceCount} valid {@code VkFence} handles",
 			"{@code fenceCount} $must be greater than 0",
-			"Each element of {@code pFences} $must have been created, allocated or retrieved from {@code device}",
-			"""
-			Each of {@code device} and the elements of {@code pFences} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}
-			""",
+			"Each element of {@code pFences} $must have been created, allocated, or retrieved from {@code device}",
 			"Any given element of {@code pFences} $mustnot currently be associated with any queue command that has not yet completed execution on that queue"
 		)}
 
@@ -3389,8 +3287,7 @@ val vkSetEvent =
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code event} $must be a valid {@code VkEvent} handle",
-			"{@code event} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code event} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+			"{@code event} $must have been created, allocated, or retrieved from {@code device}"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -3403,8 +3300,7 @@ val vkUnmapMemory =
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
-			"{@code memory} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and {@code memory} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}",
+			"{@code memory} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code memory} $must currently be mapped"
 		)}
 
@@ -3439,8 +3335,7 @@ val vkWaitForFences =
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code pFences} $must be a pointer to an array of {@code fenceCount} valid {@code VkFence} handles",
 			"{@code fenceCount} $must be greater than 0",
-			"Each element of {@code pFences} $must have been created, allocated or retrieved from {@code device}",
-			"Each of {@code device} and the elements of {@code pFences} $must have been created, allocated or retrieved from the same {@code VkPhysicalDevice}"
+			"Each element of {@code pFences} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
 }
