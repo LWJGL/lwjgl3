@@ -20,6 +20,7 @@ val FJ = "FJ"
 val IMG = "IMG"
 val INTEL = "INTEL"
 val NV = "NV"
+val NVX = "NVX"
 val OES = "OES"
 val OVR = "OVR"
 val QCOM = "QCOM"
@@ -244,6 +245,16 @@ val EXT_shader_io_blocks = EXT_FLAG.nativeClassGLES("EXT_shader_io_blocks", post
 		"""
 }
 
+val EXT_shader_non_constant_global_initializers = EXT_FLAG.nativeClassGLES("EXT_shader_non_constant_global_initializers", postfix = EXT) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension adds the ability to use non-constant initializers for global variables in the OpenGL ES Shading Language specifications. This
+		functionality is already present in the OpenGL Shading language specification.
+		"""
+}
+
 val EXT_shader_texture_lod = EXT_FLAG.nativeClassGLES("EXT_shader_texture_lod", postfix = EXT) {
 	documentation =
 		"""
@@ -352,7 +363,7 @@ val KHR_robust_buffer_access_behavior = EXT_FLAG.nativeClassGLES("KHR_robust_buf
 val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGLES("KHR_texture_compression_astc_sliced_3d", postfix = KHR) {
 	documentation =
 		"""
-		Native bindings to the ${registryLink("KHR", "texture_compression_astc_sliced_3d")} extension.
+		When true, the ${registryLink("KHR", "texture_compression_astc_sliced_3d")} extension is supported.
 
 		Adaptive Scalable Texture Compression (ASTC) is a new texture compression technology that offers unprecendented flexibility, while producing better or
 		comparable results than existing texture compressions at all bit rates. It includes support for 2D and slice-based 3D textures, with low and high
@@ -607,6 +618,19 @@ val NV_viewport_array2 = EXT_FLAG.nativeClassGLES("NV_viewport_array2", postfix 
 		OpenGL 4.3 specification.
 
 		Requires ${NV_viewport_array.link}, ${EXT_geometry_shader.link} and ${EXT_shader_io_blocks.cap}.
+		"""
+}
+val NVX_blend_equation_advanced_multi_draw_buffers = EXT_FLAG.nativeClassGLES("NVX_blend_equation_advanced_multi_draw_buffers", postfix = NVX) {
+	documentation =
+		"""
+		When true, the ${registryLink("NVX", "nvx_blend_equation_advanced_multi_draw_buffers")} extension is supported.
+
+		This extension adds support for using advanced blend equations introduced with ${NV_blend_equation_advanced.link} (and standardized by
+		${KHR_blend_equation_advanced.link}) in conjunction with multiple draw buffers. The NV_blend_equation_advanced extension supports advanced blending
+		equations only when rending to a single color buffer using fragment color zero and throws and #INVALID_OPERATION error when multiple draw buffers are
+		used. This extension removes this restriction.
+
+		Requires either ${NV_blend_equation_advanced.link} or ${KHR_blend_equation_advanced.link}.
 		"""
 }
 
