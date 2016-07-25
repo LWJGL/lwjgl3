@@ -52,7 +52,7 @@ public final class APIUtil {
 		Object state = Configuration.DEBUG_STREAM.get();
 		if ( state instanceof String ) {
 			try {
-				Supplier<PrintStream> factory = (Supplier<PrintStream>)Class.forName((String)state).newInstance();
+				Supplier<PrintStream> factory = (Supplier<PrintStream>)Class.forName((String)state).getConstructor().newInstance();
 				debugStream = factory.get();
 			} catch (Exception e) {
 				e.printStackTrace();
