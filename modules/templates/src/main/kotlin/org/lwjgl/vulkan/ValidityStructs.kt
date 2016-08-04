@@ -1,6 +1,6 @@
 /*
  * Copyright LWJGL. All rights reserved.
- * License terms: http://lwjgl.org/license.php
+ * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 package org.lwjgl.vulkan

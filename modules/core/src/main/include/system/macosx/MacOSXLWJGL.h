@@ -1,6 +1,6 @@
 /*
  * Copyright LWJGL. All rights reserved.
- * License terms: http://lwjgl.org/license.php
+ * License terms: https://www.lwjgl.org/license
  */
 #ifndef _MACOSX_LWJGL_INCLUDED
 	#define _MACOSX_LWJGL_INCLUDED

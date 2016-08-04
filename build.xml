@@ -1,6 +1,6 @@
 <!--
 Copyright LWJGL. All rights reserved.
-License terms: http://lwjgl.org/license.php
+License terms: https://www.lwjgl.org/license
 -->
 <project name="LWJGL" basedir="." default="all" xmlns:if="ant:if" xmlns:unless="ant:unless">
 
@@ -523,7 +523,7 @@ License terms: http://lwjgl.org/license.php
 		    failonerror="true"
 		>
 			<doctitle><![CDATA[<h1>Lightweight Java Game Library</h1>]]></doctitle>
-			<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="http://lwjgl.org/license.php">License terms</a>.</i>]]></bottom>
+			<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="https://www.lwjgl.org/license">License terms</a>.</i>]]></bottom>
 
 			<classpath>
 				<pathelement path="${src.core}"/>
@@ -670,7 +670,7 @@ License terms: http://lwjgl.org/license.php
 				failonerror="true"
 			>
 				<doctitle><![CDATA[<h1>LWJGL - @{title}</h1>]]></doctitle>
-				<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="http://lwjgl.org/license.php">License terms</a>.</i>]]></bottom>
+				<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="https://www.lwjgl.org/license">License terms</a>.</i>]]></bottom>
 
 				<classpath>
 					<pathelement path="${src.core}"/>

@@ -1,6 +1,6 @@
 /*
  * Copyright LWJGL. All rights reserved.
- * License terms: http://lwjgl.org/license.php
+ * License terms: https://www.lwjgl.org/license
  */
 package org.lwjgl.generator.util.vulkan;
 
@@ -61,7 +61,7 @@ public final class ValidityGenerator {
 
 			bw.write("/*\n" +
 				         " * Copyright LWJGL. All rights reserved.\n" +
-				         " * License terms: http://lwjgl.org/license.php\n" +
+				         " * License terms: https://www.lwjgl.org/license\n" +
 				         " * MACHINE GENERATED FILE, DO NOT EDIT\n" +
 				         " */\n");
 			bw.write("package org.lwjgl.vulkan\n\n");

@@ -1,6 +1,6 @@
 /*
  * Copyright LWJGL. All rights reserved.
- * License terms: http://lwjgl.org/license.php
+ * License terms: https://www.lwjgl.org/license
  */
 
 /**
@@ -16,6 +16,6 @@
  *
  * <p>LWJGL is open source software and freely available at no charge.</p>
  *
- * @see <a href="http://www.lwjgl.org/">www.lwjgl.org</a>
+ * @see <a href="https://www.lwjgl.org/">www.lwjgl.org</a>
  */
 package org.lwjgl;
