@@ -1,4 +1,4 @@
-Copyright (c) 2012-2016 Lightweight Java Game Library Project
+Copyright (c) 2012-present Lightweight Java Game Library
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@ met:
   notice, this list of conditions and the following disclaimer in the
   documentation and/or other materials provided with the distribution.
 
-- Neither the name of 'Light Weight Java Game Library' nor the names of
+- Neither the name Lightweight Java Game Library nor the names of
   its contributors may be used to endorse or promote products derived
   from this software without specific prior written permission.
 

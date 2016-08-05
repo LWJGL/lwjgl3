@@ -1,6 +1,6 @@
 /*
  * Copyright LWJGL. All rights reserved.
- * License terms: http://lwjgl.org/license.php
+ * License terms: https://www.lwjgl.org/license
  */
 #ifndef __LWJGL_MALLOC_H__
 #define __LWJGL_MALLOC_H__
