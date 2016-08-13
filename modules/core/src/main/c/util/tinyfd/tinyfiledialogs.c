@@ -164,9 +164,11 @@ static char gMessageUnix[] = "tiny file dialogs on UNIX needs:\n\tapplescript\
 \nor\twhiptail, gdialog, gxmessage or xmessage (really?)\
 \nor\tit will open a console (if needed) for basic input (you had it comming!)";
 
+#ifdef _WIN32
 static char gMessageWin[] = "tiny file dialogs on Windows needs:\n\t\
 a graphic display\nor\tdialog.exe (enhanced console mode)\
 \nor\ta console for basic input";
+#endif
 
 static char * getPathWithoutFinalSlash(
 	char * const aoDestination, /* make sure it is allocated, use _MAX_PATH */
