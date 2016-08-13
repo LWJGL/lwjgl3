@@ -153,6 +153,10 @@ License terms: https://www.lwjgl.org/license
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
 			</source>
+			<linkargs>
+				<arg value="Ole32.lib"/>
+				<arg value="Shell32.lib"/>
+			</linkargs>
 		</build>
 
 		<!-- Nuklear -->

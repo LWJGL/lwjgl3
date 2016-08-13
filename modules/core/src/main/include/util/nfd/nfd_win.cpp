@@ -13,7 +13,6 @@
 #include <wchar.h>
 #include <stdio.h>
 #include <assert.h>
-#include <atlbase.h>
 #include <windows.h>
 #include <ShObjIdl.h>
 
