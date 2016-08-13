@@ -72,7 +72,7 @@ ENABLE_WARNINGS()""")
 			"Ease of use by allocating everything from the standard library",
 			"Control every byte of memory inside the library",
 			"Font handling control ranging from/to",
-			"Use your own font implementation to draw shapes/vertexes",
+			"Use your own font implementation for everything",
 			"Use this libraries internal font baking and handling API",
 			"Drawing output control ranging from/to",
 			"Simple shapes for more high level APIs which already having drawing capabilities",
@@ -85,7 +85,7 @@ ENABLE_WARNINGS()""")
 			"Advanced widget like abstract comboboxes, contextual menus,...",
 			"Compile time configuration to only compile what you need",
 			"Subset which can be used if you do not want to link or use the standard library",
-			"Can be easily modified only update on user input instead of frame updates"
+			"Can be easily modified to only update on user input instead of frame updates"
 		)}
 		"""
 
@@ -96,6 +96,12 @@ ENABLE_WARNINGS()""")
 		"UTF_SIZE".."$NK_UTF_SIZE",
 		"INPUT_MAX".."16",
 		"MAX_NUMBER_BUFFER".."64"
+	)
+
+	FloatConstant(
+		"Constants.",
+
+		"SCROLLBAR_HIDING_TIMEOUT"..4.0f
 	)
 
 	EnumConstant(
@@ -320,12 +326,12 @@ ENABLE_WARNINGS()""")
 	EnumConstant(
 		"nk_widget_states",
 
-		"WIDGET_STATE_MODIFIED".enum("", "1 << 1"),
-		"WIDGET_STATE_INACTIVE".enum("widget is neither active nor hovered", "1 << 2"),
-		"WIDGET_STATE_ENTERED".enum("widget has been hovered on the current frame", "1 << 3"),
-		"WIDGET_STATE_HOVER".enum("widget is being hovered", "1 << 4"),
-		"WIDGET_STATE_ACTIVED".enum("widget is currently activated", "1 << 5"),
-		"WIDGET_STATE_LEFT".enum("widget is from this frame on not hovered anymore", "1 << 6"),
+		"WIDGET_STATE_MODIFIED".enum("", 1.NK_FLAG),
+		"WIDGET_STATE_INACTIVE".enum("widget is neither active nor hovered", 2.NK_FLAG),
+		"WIDGET_STATE_ENTERED".enum("widget has been hovered on the current frame", 3.NK_FLAG),
+		"WIDGET_STATE_HOVER".enum("widget is being hovered", 4.NK_FLAG),
+		"WIDGET_STATE_ACTIVED".enum("widget is currently activated", 5.NK_FLAG),
+		"WIDGET_STATE_LEFT".enum("widget is from this frame on not hovered anymore", 6.NK_FLAG),
 		"WIDGET_STATE_HOVERED".enum("widget is being hovered", "NK_WIDGET_STATE_HOVER|NK_WIDGET_STATE_MODIFIED"),
 		"WIDGET_STATE_ACTIVE".enum("widget is currently activated", "NK_WIDGET_STATE_ACTIVED|NK_WIDGET_STATE_MODIFIED")
 	)
@@ -353,50 +359,52 @@ ENABLE_WARNINGS()""")
 		"nk_edit_flags",
 
 		"EDIT_DEFAULT".enum(0),
-		"EDIT_READ_ONLY".enum("", "1 << 0"),
-		"EDIT_AUTO_SELECT".enum("", "1 << 1"),
-		"EDIT_SIG_ENTER".enum("", "1 << 2"),
-		"EDIT_ALLOW_TAB".enum("", "1 << 3"),
-		"EDIT_NO_CURSOR".enum("", "1 << 4"),
-		"EDIT_SELECTABLE".enum("", "1 << 5"),
-		"EDIT_CLIPBOARD".enum("", "1 << 6"),
-		"EDIT_CTRL_ENTER_NEWLINE".enum("", "1 << 7"),
-		"EDIT_NO_HORIZONTAL_SCROLL".enum("", "1 << 8"),
-		"EDIT_ALWAYS_INSERT_MODE".enum("", "1 << 9"),
-		"EDIT_MULTILINE".enum("", "1 << 11")
+		"EDIT_READ_ONLY".enum("", 0.NK_FLAG),
+		"EDIT_AUTO_SELECT".enum("", 1.NK_FLAG),
+		"EDIT_SIG_ENTER".enum("", 2.NK_FLAG),
+		"EDIT_ALLOW_TAB".enum("", 3.NK_FLAG),
+		"EDIT_NO_CURSOR".enum("", 4.NK_FLAG),
+		"EDIT_SELECTABLE".enum("", 5.NK_FLAG),
+		"EDIT_CLIPBOARD".enum("", 6.NK_FLAG),
+		"EDIT_CTRL_ENTER_NEWLINE".enum("", 7.NK_FLAG),
+		"EDIT_NO_HORIZONTAL_SCROLL".enum("", 8.NK_FLAG),
+		"EDIT_ALWAYS_INSERT_MODE".enum("", 9.NK_FLAG),
+		"EDIT_MULTILINE".enum("", 11.NK_FLAG)
 	).javaDocLinks
 
 	EnumConstant(
 		"nk_edit_types",
 
 		"EDIT_SIMPLE".enum("", "NK_EDIT_ALWAYS_INSERT_MODE"),
-		"EDIT_FIELD".enum("", "NK_EDIT_SIMPLE|NK_EDIT_SELECTABLE"),
-		"EDIT_BOX".enum("", "NK_EDIT_ALWAYS_INSERT_MODE|NK_EDIT_SELECTABLE|NK_EDIT_MULTILINE|NK_EDIT_ALLOW_TAB"),
+		"EDIT_FIELD".enum("", "NK_EDIT_SIMPLE|NK_EDIT_SELECTABLE|NK_EDIT_CLIPBOARD"),
+		"EDIT_BOX".enum("", "NK_EDIT_ALWAYS_INSERT_MODE|NK_EDIT_SELECTABLE|NK_EDIT_MULTILINE|NK_EDIT_ALLOW_TAB|NK_EDIT_CLIPBOARD"),
 		"EDIT_EDITOR".enum("", "NK_EDIT_SELECTABLE|NK_EDIT_MULTILINE|NK_EDIT_ALLOW_TAB|NK_EDIT_CLIPBOARD")
 	)
 
 	EnumConstant(
 		"nk_edit_events",
 
-		"EDIT_ACTIVE".enum("edit widget is currently being modified", "1 << 0"),
-		"EDIT_INACTIVE".enum("edit widget is not active and is not being modified", "1 << 1"),
-		"EDIT_ACTIVATED".enum("edit widget went from state inactive to state active", "1 << 2"),
-		"EDIT_DEACTIVATED".enum("edit widget went from state active to state inactive", "1 << 3"),
-		"EDIT_COMMITED".enum("edit widget has received an enter and lost focus", "1 << 4")
+		"EDIT_ACTIVE".enum("edit widget is currently being modified", 0.NK_FLAG),
+		"EDIT_INACTIVE".enum("edit widget is not active and is not being modified", 1.NK_FLAG),
+		"EDIT_ACTIVATED".enum("edit widget went from state inactive to state active", 2.NK_FLAG),
+		"EDIT_DEACTIVATED".enum("edit widget went from state active to state inactive", 3.NK_FLAG),
+		"EDIT_COMMITED".enum("edit widget has received an enter and lost focus", 4.NK_FLAG)
 	)
 
 	val PanelFlags = EnumConstant(
 		"nk_panel_flags",
 
-		"WINDOW_BORDER".enum("Draws a border around the window to visually separate the window * from the background", "1 << 0"),
-		"WINDOW_BORDER_HEADER".enum("Draws a border between window header and body", "1 << 1"),
-		"WINDOW_MOVABLE".enum("The movable flag indicates that a window can be moved by user input or * by dragging the window header", "1 << 2"),
-		"WINDOW_SCALABLE".enum("The scalable flag indicates that a window can be scaled by user input * by dragging a scaler icon at the button of the window", "1 << 3"),
-		"WINDOW_CLOSABLE".enum("adds a closable icon into the header", "1 << 4"),
-		"WINDOW_MINIMIZABLE".enum("adds a minimize icon into the header", "1 << 5"),
-		"WINDOW_DYNAMIC".enum("special window type growing up in height while being filled to a * certain maximum height", "1 << 6"),
-		"WINDOW_NO_SCROLLBAR".enum("Removes the scrollbar from the window", "1 << 7"),
-		"WINDOW_TITLE".enum("Forces a header at the top at the window showing the title", "1 << 8")
+		"WINDOW_BORDER".enum("Draws a border around the window to visually separate the window * from the background", 0.NK_FLAG),
+		"WINDOW_BORDER_HEADER".enum("Draws a border between window header and body", 1.NK_FLAG),
+		"WINDOW_MOVABLE".enum("The movable flag indicates that a window can be moved by user input or * by dragging the window header", 2.NK_FLAG),
+		"WINDOW_SCALABLE".enum("The scalable flag indicates that a window can be scaled by user input * by dragging a scaler icon at the button of the window", 3.NK_FLAG),
+		"WINDOW_CLOSABLE".enum("adds a closable icon into the header", 4.NK_FLAG),
+		"WINDOW_MINIMIZABLE".enum("adds a minimize icon into the header", 5.NK_FLAG),
+		"WINDOW_DYNAMIC".enum("special window type growing up in height while being filled to a * certain maximum height", 6.NK_FLAG),
+		"WINDOW_NO_SCROLLBAR".enum("Removes the scrollbar from the window", 7.NK_FLAG),
+		"WINDOW_TITLE".enum("Forces a header at the top at the window showing the title", 8.NK_FLAG),
+		"WINDOW_SCROLL_AUTO_HIDE".enum("Automatically hides the window scrollbar if no user interaction", 9.NK_FLAG),
+        "WINDOW_BACKGROUND".enum("Keep window always in the background", 10.NK_FLAG)
 	).javaDocLinks
 
 	EnumConstant(
@@ -497,19 +505,20 @@ ENABLE_WARNINGS()""")
 	val WindowFlags = EnumConstant(
 		"nk_window_flags",
 
-		"WINDOW_PRIVATE".enum("dummy flag which mark the beginning of the private window flag part", "1 << 9"),
-		"WINDOW_ROM".enum("sets the window into a read only mode and does not allow input changes", "1 << 10"),
-		"WINDOW_HIDDEN".enum("Hides the window and stops any window interaction and drawing can be set by user input or by closing the window", "1 << 11"),
-		"WINDOW_MINIMIZED".enum("marks the window as minimized", "1 << 12"),
-		"WINDOW_SUB".enum("Marks the window as subwindow of another window", "1 << 13"),
-		"WINDOW_GROUP".enum("Marks the window as window widget group", "1 << 14"),
-		"WINDOW_POPUP".enum("Marks the window as a popup window", "1 << 15"),
-		"WINDOW_NONBLOCK".enum("Marks the window as a nonblock popup window", "1 << 16"),
-		"WINDOW_CONTEXTUAL".enum("Marks the window as a combo box or menu", "1 << 17"),
-		"WINDOW_COMBO".enum("Marks the window as a combo box", "1 << 18"),
-		"WINDOW_MENU".enum("Marks the window as a menu", "1 << 19"),
-		"WINDOW_TOOLTIP".enum("Marks the window as a menu", "1 << 20"),
-		"WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", "1 << 21")
+		"WINDOW_PRIVATE".enum("dummy flag which mark the beginning of the private window flag part", 11.NK_FLAG),
+		"WINDOW_ROM".enum("sets the window into a read only mode and does not allow input changes", 12.NK_FLAG),
+		"WINDOW_HIDDEN".enum("Hides the window and stops any window interaction and drawing can be set by user input or by closing the window", 13.NK_FLAG),
+		"WINDOW_CLOSED".enum("Directly closes and frees the window at the end of the frame", 14.NK_FLAG),
+		"WINDOW_MINIMIZED".enum("marks the window as minimized", 15.NK_FLAG),
+		"WINDOW_SUB".enum("Marks the window as subwindow of another window", 16.NK_FLAG),
+		"WINDOW_GROUP".enum("Marks the window as window widget group", 17.NK_FLAG),
+		"WINDOW_POPUP".enum("Marks the window as a popup window", 18.NK_FLAG),
+		"WINDOW_NONBLOCK".enum("Marks the window as a nonblock popup window", 19.NK_FLAG),
+		"WINDOW_CONTEXTUAL".enum("Marks the window as a combo box or menu", 20.NK_FLAG),
+		"WINDOW_COMBO".enum("Marks the window as a combo box", 21.NK_FLAG),
+		"WINDOW_MENU".enum("Marks the window as a menu", 22.NK_FLAG),
+		"WINDOW_TOOLTIP".enum("Marks the window as a menu", 23.NK_FLAG),
+		"WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", 24.NK_FLAG)
 	).javaDocLinks
 
 	val ctx = nk_context_p.IN("ctx", "the nuklear context");
@@ -567,6 +576,18 @@ ENABLE_WARNINGS()""")
 			nk_flags.IN("flags", "", WindowFlags, LinkMode.BITFIELD)
 		)
 
+		intb(
+			"begin_titled",
+			"",
+
+			ctx,
+			nk_panel_p.OUT("panel", ""),
+			const..charUTF8_p.IN("name", ""),
+			const..charUTF8_p.IN("id", ""),
+			nk_rect.IN("bounds", ""),
+			nk_flags.IN("flags", "", WindowFlags, LinkMode.BITFIELD)
+		)
+
 		void("end", "", ctx)
 
 		nk_window_p(
@@ -605,6 +626,14 @@ ENABLE_WARNINGS()""")
 
 		intb(
 			"window_is_closed",
+			"",
+
+			ctx,
+			const..charUTF8_p.IN("name", "")
+		)
+
+		intb(
+			"window_is_hidden",
 			"",
 
 			ctx,
@@ -1299,6 +1328,19 @@ ENABLE_WARNINGS()""")
 		)
 
 		void(
+			"property_int",
+			"",
+
+			ctx,
+			const..charUTF8_p.IN("name", ""),
+			int.IN("min", ""),
+			Check(1)..int_p.INOUT("val", ""),
+			int.IN("max", ""),
+			int.IN("step", ""),
+			float.IN("inc_per_pixel", "")
+		)
+
+		void(
 			"property_float",
 			"",
 
@@ -1312,16 +1354,29 @@ ENABLE_WARNINGS()""")
 		)
 
 		void(
-			"property_int",
+			"property_double",
+			"",
+
+			ctx,
+			const..charUTF8_p.IN("name", ""),
+			double.IN("min", ""),
+			Check(1)..double_p.INOUT("val", ""),
+			double.IN("max", ""),
+			double.IN("step", ""),
+			float.IN("inc_per_pixel", "")
+		)
+
+		int(
+			"propertyi",
 			"",
 
 			ctx,
 			const..charUTF8_p.IN("name", ""),
 			int.IN("min", ""),
-			Check(1)..int_p.INOUT("val", ""),
+			int.IN("val", ""),
 			int.IN("max", ""),
 			int.IN("step", ""),
-			int.IN("inc_per_pixel", "")
+			float.IN("inc_per_pixel", "")
 		)
 
 		float(
@@ -1337,17 +1392,17 @@ ENABLE_WARNINGS()""")
 			float.IN("inc_per_pixel", "")
 		)
 
-		int(
-			"propertyi",
+		double(
+			"propertyd",
 			"",
 
 			ctx,
 			const..charUTF8_p.IN("name", ""),
-			int.IN("min", ""),
-			int.IN("val", ""),
-			int.IN("max", ""),
-			int.IN("step", ""),
-			int.IN("inc_per_pixel", "")
+			double.IN("min", ""),
+			double.IN("val", ""),
+			double.IN("max", ""),
+			double.IN("step", ""),
+			float.IN("inc_per_pixel", "")
 		)
 
 		nk_flags(
@@ -1369,6 +1424,17 @@ ENABLE_WARNINGS()""")
 			ctx,
 			nk_flags.IN("flags", "", EditFlags),
 			nk_text_edit_p.IN("edit", ""),
+			nullable..nk_filter.IN("filter", "")
+		)
+
+		nk_flags(
+			"edit_string_zero_terminated",
+			"",
+
+			ctx,
+			nk_flags.IN("flags", "", EditFlags),
+			charUTF8_p.IN("buffer", ""),
+			int.IN("max", ""),
 			nullable..nk_filter.IN("filter", "")
 		)
 	}();
@@ -2108,6 +2174,9 @@ ENABLE_WARNINGS()""")
 			nk_style_cursor.IN("style", "", StyleCursor)
 		)
 
+		void("style_show_cursor", "", ctx)
+		void("style_hide_cursor", "", ctx)
+
 		nk_rect("widget_bounds", "", ctx)
 
 		nk_vec2("widget_position", "", ctx)
@@ -2547,6 +2616,16 @@ ENABLE_WARNINGS()""")
 			nk_rect.IN("sub_region", "")
 		)
 
+		nk_image(
+			"subimage_handle",
+			"",
+
+			nk_handle.IN("handle", ""),
+			unsigned_short.IN("w", ""),
+			unsigned_short.IN("h", ""),
+			nk_rect.IN("sub_region", "")
+		)
+
 		nk_hash(
 			"murmur_hash",
 			"",
@@ -2684,12 +2763,28 @@ ENABLE_WARNINGS()""")
 			int.IN("n", "")
 		)
 
-		intb(
+		int(
+			"strtoi",
+			"",
+
+			const..charUTF8_p.IN("str", ""),
+			charUTF8_pp.OUT("endptr", "")
+		)
+
+		float(
 			"strtof",
 			"",
 
-			Check(1)..float_p.OUT("number", ""),
-			const..charUTF8_p.IN("buffer", "")
+			const..charUTF8_p.IN("str", ""),
+			charUTF8_pp.OUT("endptr", "")
+		)
+
+		double(
+			"strtod",
+			"",
+
+			const..charUTF8_p.IN("str", ""),
+			charUTF8_pp.OUT("endptr", "")
 		)
 
 		intb(
@@ -3451,7 +3546,8 @@ ENABLE_WARNINGS()""")
 
 			nk_command_buffer_p.IN("b", ""),
 			nk_rect.IN("rect", ""),
-			const..nk_image.p.IN("img", "")
+			const..nk_image.p.IN("img", ""),
+			nk_color.IN("color", "")
 		)
 
 		void(

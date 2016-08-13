@@ -24,11 +24,14 @@ fun config() {
 	)
 }
 
+val Int.NK_FLAG: String
+	get() = "1 << $this"
+
 val nk_short = typedef(int16_t, "nk_short")
 val nk_ushort = typedef(uint16_t, "nk_ushort")
 val nk_int = typedef(int32_t, "nk_int")
 val nk_uint = typedef(uint32_t, "nk_uint")
-val nk_hash = typedef(uint32_t, "nk_hash")
+val nk_hash = typedef(nk_uint, "nk_hash")
 val nk_size = typedef(uintptr_t, "nk_size")
 val nk_ptr = typedef(uintptr_t, "nk_ptr")
 val nk_flags = typedef(uint32_t, "nk_flags")
@@ -482,6 +485,7 @@ val nk_command_image = struct(NUKLEAR_PACKAGE, "NkCommandImage", nativeName = "s
 	unsigned_short.member("w", "")
 	unsigned_short.member("h", "")
 	nk_image.member("img", "")
+	nk_color.member("col", "")
 }
 
 val nk_command_text = struct(NUKLEAR_PACKAGE, "NkCommandText", nativeName = "struct nk_command_text") {
@@ -993,18 +997,26 @@ val nk_style_window = struct(NUKLEAR_PACKAGE, "NkStyleWindow", nativeName = "str
 
 	float.member("rounding", "")
 	nk_vec2.member("scaler_size", "")
-	nk_vec2.member("padding", "")
 	nk_vec2.member("spacing", "")
 	nk_vec2.member("scrollbar_size", "")
 	nk_vec2.member("min_size", "")
+	
+	nk_vec2.member("padding", "")
+	nk_vec2.member("group_padding", "")
+	nk_vec2.member("popup_padding", "")
+	nk_vec2.member("combo_padding", "")
+	nk_vec2.member("contextual_padding", "")
+	nk_vec2.member("menu_padding", "")
+	nk_vec2.member("tooltip_padding", "")
 }.nativeType
 
 val NK_CURSOR_COUNT = 7
 val nk_style = struct(NUKLEAR_PACKAGE, "NkStyle", nativeName = "struct nk_style") {
-	nk_user_font.member("font", "")
+	nk_user_font_p.member("font", "")
 	nullable..nk_cursor_p.array("cursors", "", size = NK_CURSOR_COUNT)
 	nullable..nk_cursor_p.member("cursor_active", "")
 	nullable..nk_cursor_p.member("cursor_last", "")
+	intb.member("cursor_visible", "")
 
 	nk_style_text.member("text", "")
 	nk_style_button.member("button", "")
@@ -1151,6 +1163,7 @@ val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_wind
 	nk_scroll.member("scrollbar", "")
 	nk_command_buffer.member("buffer", "")
 	nk_panel.p.member("layout", "")
+	float.member("scrollbar_hiding_timer", "")
 
 	/* persistent widget state */
 	nk_property_state.member("property", "")
@@ -1168,6 +1181,17 @@ val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_wind
 	nk_window_p.member("parent", "")
 }
 
+val nk_pool = struct(NUKLEAR_PACKAGE, "NkPool", nativeName = "struct nk_pool", mutable = false) {
+	nk_allocator.member("alloc", "")
+	nk_allocation_type.member("type", "")
+	unsigned_int.member("page_count", "")
+	"nk_page".p.member("pages", "")
+	"nk_page_element".p.member("freelist", "")
+	unsigned.member("capacity", "")
+	nk_size.member("size", "")
+	nk_size.member("cap", "")
+}.nativeType
+
 val nk_context_p = struct_p(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct nk_context", mutable = false) {
 	documentation = ""
 
@@ -1178,6 +1202,7 @@ val nk_context_p = struct_p(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct n
 	nk_clipboard.member("clip", "")
 	nk_flags.member("last_widget_state", "")
 	nk_button_behavior.member("button_behavior", "")
+	float.member("delta_time_seconds", "")
 
 /* private:
 	should only be accessed if you
@@ -1194,7 +1219,8 @@ val nk_context_p = struct_p(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct n
 
 	/* windows */
 	int.member("build", "")
-	nullable..voidptr.member("pool", "")
+	intb.member("use_pool", "")
+	nk_pool.member("pool", "")
 	nullable..nk_window_p.member("begin", "")
 	nullable..nk_window_p.member("end", "")
 	nullable..nk_window_p.member("active", "")
