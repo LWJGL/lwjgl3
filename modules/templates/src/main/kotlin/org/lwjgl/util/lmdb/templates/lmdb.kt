@@ -445,9 +445,15 @@ ENABLE_WARNINGS()""")
 	)
 
 	IntConstant(
+		"Unexpected problem - txn should abort.",
+
+		"PROBLEM".."-30779"
+	)
+
+	IntConstant(
 		"The last defined error code.",
 
-		"LAST_ERRCODE".."MDB_BAD_DBI"
+		"LAST_ERRCODE".."MDB_PROBLEM"
 	)
 
 	charASCII_p(
@@ -1103,7 +1109,7 @@ ENABLE_WARNINGS()""")
 				""",
 				"""#INTEGERKEY
 
-				Keys are binary integers in native byte order, either {@code unsigned int} or {@code size_t}, and will be sorted as such. The keys must all be
+				Keys are binary integers in native byte order, either {@code unsigned int} or {@code mdb_size_t}, and will be sorted as such. The keys must all be
 				of the same size.
 				""",
 				"""#DUPFIXED
