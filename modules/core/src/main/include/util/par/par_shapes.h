@@ -32,7 +32,17 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include <stdbool.h>
+#if !defined(_MSC_VER)
+# include <stdbool.h>
+#else // MSVC
+# if _MSC_VER >= 1800
+#  include <stdbool.h>
+# else // stdbool.h missing prior to MSVC++ 12.0 (VS2013)
+#  define bool int
+#  define true 1
+#  define false 0
+# endif
+#endif
 
 #ifndef PAR_SHAPES_T
 #define PAR_SHAPES_T uint16_t
