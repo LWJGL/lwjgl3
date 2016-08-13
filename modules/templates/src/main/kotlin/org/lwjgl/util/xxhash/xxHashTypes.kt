@@ -30,14 +30,15 @@ val XXH64_hash_t = typedef(unsigned_long_long, "XXH32_hash_t")
 val XXH32_state_t = struct(XXHASH_PACKAGE, "XXH32State", nativeName = "XXH32_state_t") {
 	documentation = "32-bit XXH state for stack allocation. Unstable API."
 
-	unsigned_long_long.member("total_len", "")
-	unsigned.member("seed", "")
+	unsigned.member("total_len_32", "")
+	unsigned.member("large_len", "")
 	unsigned.member("v1", "")
 	unsigned.member("v2", "")
 	unsigned.member("v3", "")
 	unsigned.member("v4", "")
 	unsigned.array("mem32", "", size = 4)
 	unsigned.member("memsize", "")
+	unsigned.member("reserved", "")
 }.nativeType
 val XXH32_state_t_p = XXH32_state_t.p
 
@@ -45,13 +46,13 @@ val XXH64_state_t = struct(XXHASH_PACKAGE, "XXH64State", nativeName = "XXH64_sta
 	documentation = "64-bit XXH state for stack allocation. Unstable API."
 
 	unsigned_long_long.member("total_len", "")
-	unsigned_long_long.member("seed", "")
 	unsigned_long_long.member("v1", "")
 	unsigned_long_long.member("v2", "")
 	unsigned_long_long.member("v3", "")
 	unsigned_long_long.member("v4", "")
 	unsigned_long_long.array("mem64", "", size = 4)
 	unsigned.member("memsize", "")
+	unsigned.array("reserved", "", size = 2)
 }.nativeType
 val XXH64_state_t_p = XXH64_state_t.p
 

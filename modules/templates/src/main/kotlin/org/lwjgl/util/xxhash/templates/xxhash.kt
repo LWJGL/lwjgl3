@@ -41,7 +41,7 @@ ENABLE_WARNINGS()""")
 
 	val major = 0
 	val minor = 6
-	val patch = 1
+	val patch = 2
 
 	IntConstant("The major version number.", "VERSION_MAJOR".."$major")
 	IntConstant("The minor version number.", "VERSION_MINOR".."$minor")
@@ -52,7 +52,7 @@ ENABLE_WARNINGS()""")
 		"VERSION_NUMBER".."(XXH_VERSION_MAJOR *100*100 + XXH_VERSION_MINOR *100 + XXH_VERSION_RELEASE)"
 	)
 
-	// Simple Hash Functions
+	// 32-bits hash
 
 	val XXH32 = XXH32_hash_t(
 		"32",
@@ -65,21 +65,6 @@ ENABLE_WARNINGS()""")
 		AutoSize("input")..size_t.IN("length", "the number of bytes stored at memory address {@code input}"),
 		unsigned_int.IN("seed", "the seed that can be used to alter the result predictably")
 	)
-
-	XXH64_hash_t(
-		"64",
-		"""
-		64-bit version of #32().
-
-		This function runs 2x faster on 64-bits systems, but slower on 32-bits systems.
-		""",
-
-		XXH32["input"],
-		XXH32["length"],
-		unsigned_long_long.IN("seed", "the seed that can be used to alter the result predictably")
-	)
-
-	// Advanced Hash Functions
 
 	XXH32_state_t_p(
 		"32_createState",
@@ -97,16 +82,12 @@ ENABLE_WARNINGS()""")
 		XXH32_state_t_p.IN("statePtr", "the state to free")
 	)
 
-	XXH64_state_t_p(
-		"64_createState",
-		"64-bit version of #32_createState()."
-	)
+	void(
+		"32_copyState",
+		"",
 
-	XXH_errorcode(
-		"64_freeState",
-		"64-bit version of #32_freeState().",
-
-		XXH64_state_t_p.IN("statePtr", "the state to free")
+		XXH32_state_t_p.OUT("dst_state", ""),
+		const..XXH32_state_t_p.IN("src_state", "")
 	)
 
 	XXH_errorcode(
@@ -150,6 +131,62 @@ ENABLE_WARNINGS()""")
 		const..XXH32_state_t_p.IN("statePtr", "the {@code XXH32_state_t} to use")
 	)
 
+	void(
+		"32_canonicalFromHash",
+		"""
+		Default result type for XXH functions are primitive unsigned 32 and 64 bits.
+
+		The canonical representation uses human-readable write convention, aka big-endian (large digits first). These functions allow transformation of hash
+		result into and from its canonical format. This way, hash values can be written into a file / memory, and remain comparable on different systems and
+		programs.
+		""",
+
+		XXH32_canonical_t_p.OUT("dst", "the destination canonical representation"),
+		XXH32_hash_t.IN("hash", "the source hash")
+	)
+
+	XXH32_hash_t(
+		"32_hashFromCanonical",
+		"Transforms the specified canonical representation to a primitive value.",
+
+		const..XXH32_canonical_t_p.IN("src", "the source canonical representation")
+	)
+
+	// 64-bits hash
+
+	XXH64_hash_t(
+		"64",
+		"""
+		64-bit version of #32().
+
+		This function runs 2x faster on 64-bits systems, but slower on 32-bits systems.
+		""",
+
+		XXH32["input"],
+		XXH32["length"],
+		unsigned_long_long.IN("seed", "the seed that can be used to alter the result predictably")
+	)
+
+	XXH64_state_t_p(
+		"64_createState",
+		"64-bit version of #32_createState()."
+	)
+
+	XXH_errorcode(
+		"64_freeState",
+		"64-bit version of #32_freeState().",
+
+		XXH64_state_t_p.IN("statePtr", "the state to free")
+	)
+
+	void(
+		"64_copyState",
+		"",
+
+		XXH64_state_t_p.OUT("dst_state", ""),
+		const..XXH64_state_t_p.IN("src_state", "")
+	)
+
 	XXH_errorcode(
 		"64_reset",
 		"64-bit version of #32_reset().",
@@ -174,53 +211,12 @@ ENABLE_WARNINGS()""")
 		const..XXH64_state_t_p.IN("statePtr", "the {@code XXH64_state_t} to use")
 	)
 
-	// Utils
-
-	void(
-		"32_copyState",
-		"",
-
-		XXH32_state_t_p.OUT("dst_state", ""),
-		const..XXH32_state_t_p.IN("src_state", "")
-	)
-
-	void(
-		"64_copyState",
-		"",
-
-		XXH64_state_t_p.OUT("dst_state", ""),
-		const..XXH64_state_t_p.IN("src_state", "")
-	)
-
-	// Canonical representation
-
-	void(
-		"32_canonicalFromHash",
-		"""
-		Default result type for XXH functions are primitive unsigned 32 and 64 bits.
-
-		The canonical representation uses human-readable write convention, aka big-endian (large digits first). These functions allow transformation of hash
-		result into and from its canonical format. This way, hash values can be written into a file / memory, and remain comparable on different systems and
-		programs.
-		""",
-
-		XXH32_canonical_t_p.OUT("dst", "the destination canonical representation"),
-		XXH32_hash_t.IN("hash", "the source hash")
-	)
-
 	void(
 		"64_canonicalFromHash",
 		"64-bit version of #32_canonicalFromHash().",
 
 		XXH64_canonical_t_p.OUT("dst", "the destination canonical representation"),
 		XXH64_hash_t.IN("hash", "the source hash")
-	)
-
-	XXH32_hash_t(
-		"32_hashFromCanonical",
-		"Transforms the specified canonical representation to a primitive value.",
-
-		const..XXH32_canonical_t_p.IN("src", "the source canonical representation")
 	)
 
 	XXH64_hash_t(
