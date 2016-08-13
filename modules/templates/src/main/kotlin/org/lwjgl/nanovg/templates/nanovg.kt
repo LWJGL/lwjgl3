@@ -168,6 +168,38 @@ nvgFill(vg);""")}
 		"ALIGN_BASELINE".enum("Default, align text vertically to baseline.", "1<<6")
 	).javaDocLinks
 
+	val BlendFactor = EnumConstant(
+		"Blend factors.",
+		
+		"ZERO".enum("", "1<<0"),
+		"ONE".enum("", "1<<1"),
+		"SRC_COLOR".enum("", "1<<2"),
+		"ONE_MINUS_SRC_COLOR".enum("", "1<<3"),
+		"DST_COLOR".enum("", "1<<4"),
+		"ONE_MINUS_DST_COLOR".enum("", "1<<5"),
+		"SRC_ALPHA".enum("", "1<<6"),
+		"ONE_MINUS_SRC_ALPHA".enum("", "1<<7"),
+		"DST_ALPHA".enum("", "1<<8"),
+		"ONE_MINUS_DST_ALPHA".enum("", "1<<9"),
+		"SRC_ALPHA_SATURATE".enum("", "1<<10")
+	).javaDocLinks
+
+	val CompositeOperation = EnumConstant(
+		"Composite operations.",
+		
+		"SOURCE_OVER".enum,
+		"SOURCE_IN".enum,
+		"SOURCE_OUT".enum,
+		"ATOP".enum,
+		"DESTINATION_OVER".enum,
+		"DESTINATION_IN".enum,
+		"DESTINATION_OUT".enum,
+		"DESTINATION_ATOP".enum,
+		"LIGHTER".enum,
+		"COPY".enum,
+		"XOR".enum
+	).javaDocLinks
+
 	val ImageFlags = EnumConstant(
 		"Image flags.",
 
@@ -209,6 +241,36 @@ nvgFill(vg);""")}
 		"Ends drawing flushing remaining render state.",
 
 		ctx
+	)
+
+	// Composite operation
+
+	void(
+		"GlobalCompositeOperation",
+		"Sets the composite operation.",
+
+		ctx,
+		int.IN("op", "the composite operation", CompositeOperation)
+	)
+
+	void(
+		"GlobalCompositeBlendFunc",
+		"Sets the composite operation with custom pixel arithmetic.",
+
+		ctx,
+		int.IN("sfactor", "the source blend factor", BlendFactor),
+		int.IN("dfactor", "the destination blend factor", BlendFactor)
+	)
+
+	void(
+		"GlobalCompositeBlendFuncSeparate",
+		"Sets the composite operation with custom pixel arithmetic for RGB and alpha components separately.",
+
+		ctx,
+		int.IN("srcRGB", "the source RGB blend factor", BlendFactor),
+		int.IN("dstRGB", "the destination RGB blend factor", BlendFactor),
+		int.IN("srcAlpha", "the source alpha blend factor", BlendFactor),
+		int.IN("dstAlpha", "the destination alpha blend factor", BlendFactor)
 	)
 
 	// Color utils

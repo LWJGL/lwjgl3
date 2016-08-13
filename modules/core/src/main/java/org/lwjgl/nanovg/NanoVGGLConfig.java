@@ -52,7 +52,7 @@ final class NanoVGGLConfig {
 			"glBindRenderbuffer",
 			"glBindTexture",
 			"glBindVertexArray",
-			"glBlendFunc",
+			"glBlendFuncSeparate",
 			"glBufferData",
 			"glCheckFramebufferStatus",
 			"glColorMask",

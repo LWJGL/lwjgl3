@@ -102,6 +102,8 @@ typedef ptrdiff_t GLintptr;
 #define GL_DECR_WRAP                      0x8508
 #define GL_DEPTH                          0x1801
 #define GL_DEPTH_TEST                     0x0B71
+#define GL_DST_ALPHA                      0x0304
+#define GL_DST_COLOR                      0x0306
 #define GL_EQUAL                          0x0202
 #define GL_FALSE                          0
 #define GL_FLOAT                          0x1406
@@ -122,7 +124,10 @@ typedef ptrdiff_t GLintptr;
 #define GL_NOTEQUAL                       0x0205
 #define GL_NO_ERROR                       0
 #define GL_ONE                            1
+#define GL_ONE_MINUS_DST_ALPHA            0x0305
+#define GL_ONE_MINUS_DST_COLOR            0x0307
 #define GL_ONE_MINUS_SRC_ALPHA            0x0303
+#define GL_ONE_MINUS_SRC_COLOR            0x0301
 #define GL_R8                             0x8229
 #define GL_RED                            0x1903
 #define GL_RENDERBUFFER                   0x8D41
@@ -131,6 +136,9 @@ typedef ptrdiff_t GLintptr;
 #define GL_RGB                            0x1907
 #define GL_RGBA                           0x1908
 #define GL_SCISSOR_TEST                   0x0C11
+#define GL_SRC_ALPHA                      0x0302
+#define GL_SRC_ALPHA_SATURATE             0x0308
+#define GL_SRC_COLOR                      0x0300
 #define GL_STENCIL                        0x1802
 #define GL_STENCIL_ATTACHMENT             0x8D20
 #define GL_STENCIL_INDEX                  0x1901
@@ -176,7 +184,7 @@ typedef void (APIENTRY *glBindFramebufferPROC) (GLenum target, GLuint framebuffe
 typedef void (APIENTRY *glBindRenderbufferPROC) (GLenum target, GLuint renderbuffer);
 typedef void (APIENTRY *glBindTexturePROC) (GLenum target, GLuint texture);
 typedef void (APIENTRY *glBindVertexArrayPROC) (GLuint array);
-typedef void (APIENTRY *glBlendFuncPROC) (GLenum sfactor, GLenum dfactor);
+typedef void (APIENTRY *glBlendFuncSeparatePROC) (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
 typedef void (APIENTRY *glBufferDataPROC) (GLenum target, GLsizeiptr size, const void *data, GLenum usage);
 typedef GLenum (APIENTRY *glCheckFramebufferStatusPROC) (GLenum target);
 typedef void (APIENTRY *glColorMaskPROC) (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
@@ -391,7 +399,7 @@ struct GLNVGcontext {
 	glBindRenderbufferPROC BindRenderbuffer;
 	glBindTexturePROC BindTexture;
 	glBindVertexArrayPROC BindVertexArray;
-	glBlendFuncPROC BlendFunc;
+	glBlendFuncSeparatePROC BlendFuncSeparate;
 	glBufferDataPROC BufferData;
 	glCheckFramebufferStatusPROC CheckFramebufferStatus;
 	glColorMaskPROC ColorMask;
@@ -1132,7 +1140,7 @@ static void glnvg__setUniforms(GLNVGcontext* gl, int uniformOffset, int image)
 	}
 }
 
-static void glnvg__renderViewport(void* uptr, int width, int height)
+static void glnvg__renderViewport(void* uptr, int width, int height, float devicePixelRatio)
 {
 	GLNVGcontext* gl = (GLNVGcontext*)uptr;
 	gl->view[0] = (float)width;
@@ -1263,7 +1271,39 @@ static void glnvg__renderCancel(void* uptr) {
 	gl->nuniforms = 0;
 }
 
-static void glnvg__renderFlush(void* uptr)
+static GLenum glnvg_convertBlendFuncFactor(int factor)
+{
+	if (factor == NVG_ZERO)
+		return GL_ZERO;
+	if (factor == NVG_ONE)
+		return GL_ONE;
+	if (factor == NVG_SRC_COLOR)
+		return GL_SRC_COLOR;
+	if (factor == NVG_ONE_MINUS_SRC_COLOR)
+		return GL_ONE_MINUS_SRC_COLOR;
+	if (factor == NVG_DST_COLOR)
+		return GL_DST_COLOR;
+	if (factor == NVG_ONE_MINUS_DST_COLOR)
+		return GL_ONE_MINUS_DST_COLOR;
+	if (factor == NVG_SRC_ALPHA)
+		return GL_SRC_ALPHA;
+	if (factor == NVG_ONE_MINUS_SRC_ALPHA)
+		return GL_ONE_MINUS_SRC_ALPHA;
+	if (factor == NVG_DST_ALPHA)
+		return GL_DST_ALPHA;
+	if (factor == NVG_ONE_MINUS_DST_ALPHA)
+		return GL_ONE_MINUS_DST_ALPHA;
+	if (factor == NVG_SRC_ALPHA_SATURATE)
+		return GL_SRC_ALPHA_SATURATE;
+	return 0;
+}
+
+static void glnvg__blendCompositeOperation(GLNVGcontext* gl, NVGcompositeOperationState op)
+{
+	gl->BlendFuncSeparate(glnvg_convertBlendFuncFactor(op.srcRGB), glnvg_convertBlendFuncFactor(op.dstRGB), glnvg_convertBlendFuncFactor(op.srcAlpha), glnvg_convertBlendFuncFactor(op.dstAlpha));
+}
+
+static void glnvg__renderFlush(void* uptr, NVGcompositeOperationState compositeOperation)
 {
 	GLNVGcontext* gl = (GLNVGcontext*)uptr;
 	int i;
@@ -1273,7 +1313,7 @@ static void glnvg__renderFlush(void* uptr)
 		// Setup require GL state.
 		gl->UseProgram(gl->shader.prog);
 
-		gl->BlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+		glnvg__blendCompositeOperation(gl, compositeOperation);
 		gl->Enable(GL_CULL_FACE);
 		gl->CullFace(GL_BACK);
 		gl->FrontFace(GL_CCW);

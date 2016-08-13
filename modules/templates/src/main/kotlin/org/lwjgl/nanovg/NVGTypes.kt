@@ -56,6 +56,15 @@ val NVGpaint = struct(NANOVG_PACKAGE, "NVGPaint", nativeName = "NVGpaint") {
 
 val charptr = "char".p // address, not data
 
+val NVGcompositeOperationState_p = struct_p(NANOVG_PACKAGE, "NVGCompositeOperationState", nativeName = "NVGcompositeOperationState") {
+	documentation = ""
+
+	int.member("srcRGB", "")
+	int.member("dstRGB", "")
+	int.member("srcAlpha", "")
+	int.member("dstAlpha", "")
+}
+
 val NVGglyphPosition_p = struct_p(NANOVG_PACKAGE, "NVGGlyphPosition", nativeName = "NVGglyphPosition") {
 	documentation = "A glyph position."
 
