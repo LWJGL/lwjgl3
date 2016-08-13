@@ -31,7 +31,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	IntConstant(
 		"The revision number of the GLFW library. This is incremented when a bug fix release is made that does not contain any API changes.",
 
-		"VERSION_REVISION".."0"
+		"VERSION_REVISION".."1"
 	)
 
 	IntConstant(
@@ -1810,7 +1810,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	void(
 		"PostEmptyEvent",
 		"""
-	    Posts an empty event from the current thread to the main thread event queue, causing #WaitEvents() to return.
+	    Posts an empty event from the current thread to the main thread event queue, causing #WaitEvents() or #WaitEventsTimeout() to return.
 
 	    If no windows exist, this function returns immediately. For synchronization of threads in applications that do not create windows, use your threading
 		library of choice.
