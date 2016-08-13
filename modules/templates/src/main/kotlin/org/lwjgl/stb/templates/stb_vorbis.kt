@@ -167,7 +167,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		DECODER,
 		const..unsigned_char_p.IN("datablock", "the data block containing the audio sample data"),
 		AutoSize("datablock")..int.IN("datablock_length_in_bytes", "the length of {@code datablock}, in bytes"),
-		Check(1)..int_p.OUT("channels", "place to write number of {@code float *} buffers"),
+		nullable..Check(1)..int_p.OUT("channels", "place to write number of {@code float *} buffers"),
 		Check(1)..float_ppp.OUT("output", "place to write float ** array of float * buffers"),
 		Check(1)..int_p.OUT("samples", "place to write number of output samples"),
 
