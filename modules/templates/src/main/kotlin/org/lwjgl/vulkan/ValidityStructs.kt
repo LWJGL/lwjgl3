@@ -976,6 +976,7 @@ val VkImageCreateInfo =
 			"The {@code width}, {@code height}, and {@code depth} members of {@code extent} $must all be greater than 0",
 			"{@code mipLevels} $must be greater than 0",
 			"{@code arrayLayers} $must be greater than 0",
+			"If {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code imageType} must be #IMAGE_TYPE_2D",
 			"""
 			If {@code imageType} is #IMAGE_TYPE_1D, {@code extent.width} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension1D},
 			or ##VkImageFormatProperties{@code ::maxExtent}.width (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type},
@@ -1339,7 +1340,7 @@ val VkImageViewCreateInfo =
 			If {@code image} was not created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, {@code format} $must be identical to the {@code format} used to
 			create {@code image}
 			""",
-			"{@code subResourceRange} and {@code viewType} $must be compatible with the image, as described in the table below"
+			"{@code subResourceRange} and {@code viewType} $must be compatible with the image, as described in the compatibility table"
 		)}"""
 
 val VkInstanceCreateInfo =
@@ -2016,11 +2017,11 @@ val VkSubmitInfo =
 			have been recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, or not currently be executing on the device
 			""",
 			"""
-			If any given element of {@code pCommandBuffers} was created with #COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, it $mustnot have been previously
+			If any given element of {@code pCommandBuffers} was recorded with #COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, it $mustnot have been previously
 			submitted without re-recording that command buffer
 			""",
 			"""
-			If any given element of {@code pCommandBuffers} contains commands that execute secondary command buffers created with
+			If any given element of {@code pCommandBuffers} contains commands that execute secondary command buffers recorded with
 			#COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, each such secondary command buffer $mustnot have been previously submitted without re-recording that
 			command buffer
 			""",
@@ -2029,10 +2030,10 @@ val VkSubmitInfo =
 			has been recorded in another primary command buffer after it was recorded into this {@code VkCommandBuffer}
 			""",
 			"""
-			Any given element of {@code pCommandBuffers} $must have been created on a {@code VkCommandPool} that was created for the same queue family that the
-			calling command's {@code queue} belongs to
+			Any given element of {@code pCommandBuffers} $must have been allocated from a {@code VkCommandPool} that was created for the same queue family that
+			the calling command's {@code queue} belongs to
 			""",
-			"Any given element of {@code pCommandBuffers} $mustnot have been created with #COMMAND_BUFFER_LEVEL_SECONDARY",
+			"Any given element of {@code pCommandBuffers} $mustnot have been allocated with #COMMAND_BUFFER_LEVEL_SECONDARY",
 			"""
 			Any given element of {@code VkSemaphore} in {@code pWaitSemaphores} $must refer to a prior signal of that {@code VkSemaphore} that will not be
 			consumed by any other wait on that semaphore
@@ -2297,8 +2298,8 @@ val VkWriteDescriptorSet =
 			##VkDescriptorBufferInfo structures
 			""",
 			"""
-			If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and {@code dstSet} was not created with a layout
-			that included immutable samplers for {@code dstBinding} with {@code descriptorType}, the {@code sampler} member of any given element of
+			If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and {@code dstSet} was not allocated with a
+			layout that included immutable samplers for {@code dstBinding} with {@code descriptorType}, the {@code sampler} member of any given element of
 			{@code pImageInfo} $must be a valid {@code VkSampler} object
 			""",
 			"""
@@ -2324,11 +2325,13 @@ val VkWriteDescriptorSet =
 			""",
 			"""
 			If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code range} member of any given
-			element of {@code pBufferInfo} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxUniformBufferRange}
+			element of {@code pBufferInfo}, or the effective range if {@code range} is #WHOLE_SIZE, $must be less than or equal to
+			##VkPhysicalDeviceLimits{@code ::maxUniformBufferRange}
 			""",
 			"""
 			If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code range} member of any given
-			element of {@code pBufferInfo} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxStorageBufferRange}
+			element of {@code pBufferInfo}, or the effective range if {@code range} is #WHOLE_SIZE, $must be less than or equal to
+			##VkPhysicalDeviceLimits{@code ::maxStorageBufferRange}
 			""",
 			"""
 			If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, the {@code VkBuffer} that any given element of {@code pTexelBufferView} was

@@ -1653,7 +1653,7 @@ val VkImageViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageViewCreateInfo") 
 		"components",
 		"a remapping of color components (or of depth or stencil components after they have been converted into color components)"
 	)
-	VkImageSubresourceRange.member("subresourceRange", "selects the set of mipmap levels and array layers to be accessible to the view")
+	VkImageSubresourceRange.member("subresourceRange", "a ##VkImageSubresourceRange selecting the set of mipmap levels and array layers")
 }
 
 val VkShaderModuleCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkShaderModuleCreateInfo") {
@@ -2793,22 +2793,23 @@ val VkCommandBufferInheritanceInfo = struct(VULKAN_PACKAGE, "VkCommandBufferInhe
 	VkRenderPass.member(
 		"renderPass",
 		"""
-		a {@code VkRenderPass} object that must be compatible with the one that is bound when the {@code VkCommandBuffer} is executed if the command buffer was
-		allocated with the #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT set
+		a {@code VkRenderPass} object defining which render passes the {@code VkCommandBuffer} will be compatible with and $can be executed within. If the
+		{@code VkCommandBuffer} will not be executed within a render pass instance, {@code renderPass} is ignored.
 		"""
 	)
 	uint32_t.member(
 		"subpass",
 		"""
-		the index of the subpass within {@code renderPass} that the {@code VkCommandBuffer} will be rendering against if it was allocated with the
-		#COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT set
+		the index of the subpass within {@code renderPass} that the {@code VkCommandBuffer} will be executed within. If the {@code VkCommandBuffer} will not be
+		executed within a render pass instance, {@code subpass} is ignored.
 		"""
 	)
 	VkFramebuffer.member(
 		"framebuffer",
 		"""
-		refers to the {@code VkFramebuffer} object that the {@code VkCommandBuffer} will be rendering to if it was allocated with the
-		#COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT set. It can be #NULL_HANDLE if the framebuffer is not known.
+		optionally refers to the {@code VkFramebuffer} object that the {@code VkCommandBuffer} will be rendering to if it is executed within a render pass
+		instance. It $can be #NULL_HANDLE if the framebuffer is not known, or if the {@code VkCommandBuffer} will not be executed within a render pass
+		instance.
 		"""
 	)
 	VkBool32.member(

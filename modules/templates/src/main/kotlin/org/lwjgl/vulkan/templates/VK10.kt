@@ -1965,7 +1965,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		)}
 		""",
 
-		VkInstance.IN("instance", " the instance that the function pointer will be compatible with"),
+		VkInstance.IN("instance", " the instance that the function pointer will be compatible with, or $NULL for commands not dependent on any instance"),
 		const..charASCII_p.IN("pName", "the name of the command to obtain")
 	)
 
@@ -5221,7 +5221,7 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 
 		VkCommandBuffer.IN(
 			"commandBuffer",
-			"a handle to a primary command buffer that the secondary command buffers are submitted to, and $must be in the recording state"
+			"a handle to a primary command buffer that the secondary command buffers are executed in"
 		),
 		AutoSize("pCommandBuffers")..uint32_t.IN("commandBufferCount", "the length of the {@code pCommandBuffers} array"),
 		SingleValue("pCommandBuffer")..const..VkCommandBuffer.p.IN(

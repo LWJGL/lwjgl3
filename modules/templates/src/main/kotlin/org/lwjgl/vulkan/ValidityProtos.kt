@@ -209,15 +209,15 @@ val vkCmdBeginQuery =
 			"{@code query} $must be less than the number of queries in {@code queryPool}",
 			"""
 			If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_OCCLUSION, the {@code VkCommandPool} that {@code commandBuffer} was
-			created from $must support graphics operations
+			allocated from $must support graphics operations
 			""",
 			"""
 			If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_PIPELINE_STATISTICS and any of the {@code pipelineStatistics} indicate
-			graphics operations, the {@code VkCommandPool} that {@code commandBuffer} was created from $must support graphics operations
+			graphics operations, the {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations
 			""",
 			"""
 			If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_PIPELINE_STATISTICS and any of the {@code pipelineStatistics} indicate
-			compute operations, the {@code VkCommandPool} that {@code commandBuffer} was created from $must support compute operations
+			compute operations, the {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support compute operations
 			"""
 		)}
 
@@ -300,11 +300,15 @@ val vkCmdBindDescriptorSets =
 			the same {@code VkDevice}
 			""",
 			"""
-			Any given element of {@code pDescriptorSets} $must have been created with a {@code VkDescriptorSetLayout} that matches (is the same as, or defined
-			identically to) the {@code VkDescriptorSetLayout} at set {@code n} in {@code layout}, where {@code n} is the sum of {@code firstSet} and the index
-			into {@code pDescriptorSets}
+			Any given element of {@code pDescriptorSets} $must have been allocated with a {@code VkDescriptorSetLayout} that matches (is the same as, or
+			defined identically to) the {@code VkDescriptorSetLayout} at set {@code n} in {@code layout}, where {@code n} is the sum of {@code firstSet} and
+			the index into {@code pDescriptorSets}
 			""",
 			"{@code dynamicOffsetCount} $must be equal to the total number of dynamic descriptors in {@code pDescriptorSets}",
+			"""
+			The sum of {@code firstSet} and {@code descriptorSetCount} $must be less than or equal to ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount}
+			provided when {@code layout} was created
+			""",
 			"{@code pipelineBindPoint} $must be supported by the {@code commandBuffer}'s parent {@code VkCommandPool}'s queue family",
 			"Any given element of {@code pDynamicOffsets} $must satisfy the required alignment for the corresponding descriptor binding's descriptor type"
 		)}
@@ -1250,17 +1254,21 @@ val vkCmdExecuteCommands =
 			Both of {@code commandBuffer}, and the elements of {@code pCommandBuffers} $must have been created, allocated, or retrieved from the same
 			{@code VkDevice}
 			""",
-			"{@code commandBuffer} $must have been created with a {@code level} of #COMMAND_BUFFER_LEVEL_PRIMARY",
-			"Any given element of {@code pCommandBuffers} $must have been created with a {@code level} of #COMMAND_BUFFER_LEVEL_SECONDARY",
+			"{@code commandBuffer} $must have been allocated with a {@code level} of #COMMAND_BUFFER_LEVEL_PRIMARY",
+			"Any given element of {@code pCommandBuffers} $must have been allocated with a {@code level} of #COMMAND_BUFFER_LEVEL_SECONDARY",
 			"""
 			Any given element of {@code pCommandBuffers} $mustnot be already pending execution in {@code commandBuffer}, or appear twice in
-			{@code pCommandBuffers}, unless it was created with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag
+			{@code pCommandBuffers}, unless it was recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag
 			""",
 			"""
-			Any given element of {@code pCommandBuffers} $mustnot be already pending execution in any other {@code VkCommandBuffer}, unless it was created with
-			the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag
+			Any given element of {@code pCommandBuffers} $mustnot be already pending execution in any other {@code VkCommandBuffer}, unless it was recorded
+			with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag
 			""",
 			"Any given element of {@code pCommandBuffers} $must be in the executable state",
+			"""
+			Any given element of {@code pCommandBuffers} $must have been allocated from a {@code VkCommandPool} that was created for the same queue family as
+			the {@code VkCommandPool} from which {@code commandBuffer} was allocated
+			""",
 			"""
 			If #CmdExecuteCommands() is being called within a render pass instance, that render pass instance $must have been begun with the {@code contents}
 			parameter of #CmdBeginRenderPass() set to #SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS
@@ -1281,6 +1289,10 @@ val vkCmdExecuteCommands =
 			If #CmdExecuteCommands() is being called within a render pass instance, and any given element of {@code pCommandBuffers} was recorded with
 			##VkCommandBufferInheritanceInfo{@code ::framebuffer} not equal to #NULL_HANDLE, that {@code VkFramebuffer} $must match the {@code VkFramebuffer}
 			used in the current render pass instance
+			""",
+			"""
+			If #CmdExecuteCommands() is not being called within a render pass instance, any given element of {@code pCommandBuffers} $mustnot have been
+			recorded with the #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT
 			""",
 			"If the inherited queries feature is not enabled, {@code commandBuffer} $mustnot have any queries active",
 			"""
@@ -2833,15 +2845,7 @@ val vkGetInstanceProcAddr =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"If {@code instance} is not $NULL, {@code instance} $must be a valid {@code VkInstance} handle",
-			"{@code pName} $must be a null-terminated string",
-			"""
-			If {@code instance} is $NULL, {@code pName} $must be "vkEnumerateInstanceExtensionProperties", "vkEnumerateInstanceLayerProperties", or
-			"vkCreateInstance"
-			""",
-			"""
-			If {@code instance} is not $NULL, {@code pName} $mustnot be "vkEnumerateInstanceExtensionProperties", "vkEnumerateInstanceLayerProperties", or
-			"vkCreateInstance"
-			"""
+			"{@code pName} $must be a null-terminated string"
 		)}"""
 
 val vkGetPhysicalDeviceDisplayPlanePropertiesKHR =
