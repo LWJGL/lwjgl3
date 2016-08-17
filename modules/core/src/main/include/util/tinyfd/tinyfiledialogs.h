@@ -1,6 +1,6 @@
 /*
  _________
-/         \ tinyfiledialogs.h v2.5.6 [August 6, 2016] zlib licence
+/         \ tinyfiledialogs.h v2.5.7 [August 16, 2016] zlib licence
 |tiny file| Unique header file of "tiny file dialogs" created [November 9, 2014]
 | dialogs | Copyright (c) 2014 - 2016 Guillaume Vareille http://ysengrin.com
 \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -8,7 +8,7 @@
 
 A big thank you to Don Heyse http://ldglite.sf.net for
                    his code contributions, bug corrections & thorough testing!
-		
+
             git://git.code.sf.net/p/tinyfiledialogs/code
 
 Please
@@ -39,7 +39,7 @@ NO MAIN LOOP
 
 The dialogs can be forced into console mode
 
-Windows [UTF-8 + UTF-16]
+Windows [MBCS + UTF-8 + UTF-16]
 - native code & some vbs create the graphic dialogs
 - enhanced console mode can use dialog.exe from
 http://andrear.altervista.org/home/cdialog.php
