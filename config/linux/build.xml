@@ -144,7 +144,8 @@ License terms: https://www.lwjgl.org/license
 
 		<!-- NativeFileDialog -->
 		<local name="gtk3"/>
-		<exec outputproperty="gtk3" executable="pkg-config" failonerror="true" taskname="gtk-3.0" if:true="${binding.nfd}">
+		<local name="stderr"/>
+		<exec outputproperty="gtk3" errorproperty="stderr" executable="pkg-config" failonerror="true" taskname="gtk-3.0" if:true="${binding.nfd}">
 			<arg line="--cflags gtk+-3.0"/>
 		</exec>
 

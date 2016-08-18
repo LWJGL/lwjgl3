@@ -489,7 +489,8 @@ License terms: https://www.lwjgl.org/license
 	</target>
 
 	<target name="-build-version">
-		<java classname="org.lwjgl.Version" fork="true" failonerror="true" outputproperty="build.version">
+		<local name="stderr"/>
+		<java classname="org.lwjgl.Version" fork="true" failonerror="true" outputproperty="build.version" errorproperty="stderr">
 			<classpath path="${bin.core}"/>
 			<jvmarg value="-Djava.library.path=${lib}"/>
 		</java>
@@ -632,7 +633,7 @@ License terms: https://www.lwjgl.org/license
 			<condition property="module.package.skip" value="true">
 				<equals arg1="@{name}" arg2="core"/>
 			</condition>
-			<jar destfile="${release}/@{package}/@{module}.jar" level="9" index="true">
+			<jar destfile="${release}/@{package}/@{module}.jar" level="9" index="true" indexmetainf="true">
 				<manifest>
 					<section name="org/lwjgl/">
 						<attribute name="Specification-Title" value="Lightweight Java Game Library - @{title}"/>
