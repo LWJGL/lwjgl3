@@ -212,10 +212,13 @@ License terms: https://www.lwjgl.org/license
 		</build>
 
 		<!-- tiny file dialogs -->
+		<compile dest="${bin.native}/tinyfd" flags="" if:true="${binding.tinyfd}">
+			<arg value="-I${src.include.rel}/util/tinyfd"/>
+			<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
+		</compile>
 		<build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
 			<source>
 				<arg value="-I${src.include.rel}/util/tinyfd"/>
-				<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/tinyfd/*.c"/>
 			</source>
 		</build>
