@@ -29,6 +29,7 @@ License terms: https://www.lwjgl.org/license
 		</sequential>
 	</macrodef>
 
+	<find-sdkroot version="10.12"/>
 	<find-sdkroot version="10.11"/>
 	<find-sdkroot version="10.10"/>
 	<find-sdkroot version="10.9"/>
