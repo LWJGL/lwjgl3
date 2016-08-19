@@ -93,8 +93,15 @@ public final class Library {
 
 		// Then java.library.path
 		String paths = System.getProperty(JAVA_LIBRARY_PATH);
-		if ( paths != null && loadSystem(libName, JAVA_LIBRARY_PATH, paths) )
-			return;
+		if ( paths != null ) {
+			try {
+				System.loadLibrary(name);
+				apiLog(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, findLibrary(paths, libName).orElse(null)));
+				return;
+			} catch (Exception e) {
+				apiLog(String.format("\t%s not found in %s=%s", libName, JAVA_LIBRARY_PATH, paths));
+			}
+		}
 
 		printError();
 		throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
