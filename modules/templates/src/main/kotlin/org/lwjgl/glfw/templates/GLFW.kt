@@ -1146,7 +1146,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		)}
 		""",
 
-		GLFWwindow.IN("window", "the window to destroy"),
+		nullable..GLFWwindow.IN("window", "the window to destroy"),
 		since = "version 1.0"
 	)
 
