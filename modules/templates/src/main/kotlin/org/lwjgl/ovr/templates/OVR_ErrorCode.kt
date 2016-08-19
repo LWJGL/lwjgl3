@@ -42,6 +42,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_ClientSkippedDestroy".enum("The client failed to call OVR##ovr_Destroy() on an active session before calling OVR##ovr_Shutdown(). Or the client crashed.", "-1012"),
 		"Error_ClientSkippedShutdown".enum("The client failed to call OVR##ovr_Shutdown() or the client crashed.", "-1013"),
 		"Error_ServiceDeadlockDetected".enum("The service watchdog discovered a deadlock.", "-1014"),
+		"Error_InvalidOperation".enum("Function call is invalid for object's current state.", "-1015"),
 
 		/* Audio error range, reserved for Audio errors. */
 		"Error_AudioDeviceNotFound".enum("Failure to find the specified audio device.", "-2001"),
@@ -69,6 +70,9 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_HybridGraphicsNotSupported".enum("The system is using hybrid graphics (Optimus, etc...), which is not support.", "-3018"),
 		"Error_DisplayManagerInit".enum("Initialization of the DisplayManager failed.", "-3019"),
 		"Error_TrackerDriverInit".enum("Failed to get the interface for an attached tracker", "-3020"),
+		"Error_LibSignCheck".enum("LibOVRRT signature check failure.", "-3021"),
+		"Error_LibPath".enum("LibOVRRT path failure.", "-3022"),
+		"Error_LibSymbols".enum("LibOVRRT symbol resolution failure.", "-3023"),
 
 		/* Synchronization errors */
 		"Error_Incomplete".enum("Requested async work not yet complete.", "-5000"),
@@ -86,7 +90,12 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_DisplayPluggedIncorrectly".enum("Display portion of HMD is plugged into an incompatible port (ex: IGP)", "-6008"),
 
 		/* Fatal errors */
-		"Error_RuntimeException".enum("A runtime exception occurred. The application is required to shutdown LibOVR and re-initialize it before this error state will be cleared.", "-7000")
+		"Error_RuntimeException".enum("A runtime exception occurred. The application is required to shutdown LibOVR and re-initialize it before this error state will be cleared.", "-7000"),
+
+		/* Calibration errors */
+		"Error_NoCalibration".enum("Result of a missing calibration block.", "-9000"),
+		"Error_OldVersion".enum("Result of an old calibration block.", "-9001"),
+		"Error_MisformattedBlock".enum("Result of a bad calibration block due to lengths.", "-9002")
 	)
 
 	val SUCCESS = bool(

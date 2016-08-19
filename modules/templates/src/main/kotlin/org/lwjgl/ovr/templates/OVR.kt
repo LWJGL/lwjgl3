@@ -233,14 +233,10 @@ ENABLE_WARNINGS()""")
 		"Button_RThumb".enum("Button RThumb", 0x00000004),
 		"Button_RShoulder".enum("Button RShoulder", 0x00000008),
 
-		"Button_RMask".enum("Bit mask of all buttons on the right Touch controller", "ovrButton_A | ovrButton_B | ovrButton_RThumb | ovrButton_RShoulder"),
-
 		"Button_X".enum("Button X", 0x00000100),
 		"Button_Y".enum("Button Y", 0x00000200),
 		"Button_LThumb".enum("Button LThumb", 0x00000400),
 		"Button_LShoulder".enum("Button LShoulder", 0x00000800),
-
-		"Button_LMask".enum("Bit mask of all buttons on the left Touch controller", "ovrButton_X | ovrButton_Y | ovrButton_LThumb | ovrButton_LShoulder"),
 
 		// Navigation through DPad.
 		"Button_Up".enum("Button Up", 0x00010000),
@@ -253,8 +249,17 @@ ENABLE_WARNINGS()""")
 		"Button_VolDown".enum("Button VolDown", 0x00800000), // only supported by Remote.
 		"Button_Home".enum("Button Home", 0x01000000),
 
-		"Button_Private".."ovrButton_VolUp | ovrButton_VolDown | ovrButton_Home"
-	)
+		"Button_Private".."ovrButton_VolUp | ovrButton_VolDown | ovrButton_Home",
+
+		"Button_RMask".enum(
+			"Bit mask of all buttons on the right Touch controller",
+			"ovrButton_A | ovrButton_B | ovrButton_RThumb | ovrButton_RShoulder"
+		),
+		"Button_LMask".enum(
+			"Bit mask of all buttons on the left Touch controller",
+			"ovrButton_X | ovrButton_Y | ovrButton_LThumb | ovrButton_LShoulder | ovrButton_Enter"
+		)
+		)
 
 	EnumConstant(
 		"Touch input types.",
@@ -299,6 +304,22 @@ ENABLE_WARNINGS()""")
 		"ControllerType_XBox".enum("", 0x10),
 
 		"ControllerType_Active".enum("Operate on or query whichever controller is active.", 0xff)
+	)
+
+	EnumConstant(
+		"Haptics buffer submit mode. ({@code ovrHapticsBufferSubmitMode})",
+
+		"HapticsBufferSubmit_Enqueue".enum("Enqueue buffer for later playback")
+	)
+
+	EnumConstant(
+		"Position tracked devices. ({@code ovrTrackedDeviceType})",
+
+		"TrackedDevice_HMD".enum("", 0x0001),
+		"TrackedDevice_LTouch".enum("", 0x0002),
+		"TrackedDevice_RTouch".enum("", 0x0004),
+		"TrackedDevice_Touch".enum("", 0x0006),
+		"TrackedDevice_All".enum("", 0xFFFF)
 	)
 
 	EnumConstant(
@@ -478,7 +499,7 @@ ovr_IdentifyClient(
 		"""
 		Returns a given sensor description.
 
-		It's possible that sensor {@code desc [0]} may indicate a unconnnected or non-pose tracked sensor, but sensor {@code desc [1]} may be connected.
+		It's possible that sensor {@code desc [0]} may indicate a unconnected or non-pose tracked sensor, but sensor {@code desc [1]} may be connected.
 
 		#Initialize() must have first been called in order for this to succeed, otherwise the returned {@code trackerDescArray} will be zero-initialized. The
 		data returned by this function can change at runtime.
@@ -623,7 +644,7 @@ ovr_IdentifyClient(
 
 		session,
 		ovrControllerType.IN("controllerType", "which controllers the input will be returned for"),
-		ovrInputState_p.IN("inputState", "the input state that will be filled in"),
+		ovrInputState_p.OUT("inputState", "the input state that will be filled in"),
 
 		returnDoc = "OVRErrorCode#Success if the new state was successfully obtained"
 	)
@@ -635,28 +656,60 @@ ovr_IdentifyClient(
 		session
 	)
 
+	ovrTouchHapticsDesc(
+		"GetTouchHapticsDesc",
+		"Gets information about Haptics engine for the specified Touch controller.",
+
+		session,
+		ovrControllerType.IN("controllerType", "the controller to retrieve the information from"),
+
+		returnDoc = "an ##OVRTouchHapticsDesc"
+	)
+
 	ovrResult(
 		"SetControllerVibration",
 		"""
-        Turns on vibration of the given controller.
+        Sets constant vibration (with specified frequency and amplitude) to a controller.
 
-		To disable vibration, call #SetControllerVibration() with an amplitude of 0. Vibration automatically stops after a nominal amount of time, so if you
-		want vibration to be continuous over multiple seconds then you need to call this function periodically.
+		Note: {@code ovr_SetControllerVibration} cannot be used interchangeably with #SubmitControllerVibration().
+
+		This method should be called periodically, vibration lasts for a maximum of 2.5 seconds. It's recommended to call this method once a second, calls will
+		be rejected if called too frequently (over 30hz).
         """,
 
 		session,
-		ovrControllerType.IN("controllerType", "the controller to apply the vibration to"),
-		float.IN(
-			"frequency",
-			"""
-			a vibration frequency in the range of 0.0 to 1.0. Currently the only valid values are 0.0, 0.5, and 1.0 and other values will be clamped to one of
-			these.
-			"""),
-		float.IN("amplitude", "a vibration amplitude in the range of 0.0 to 1.0."),
+		ovrControllerType.IN("controllerType", "the controller to set the vibration to"),
+		float.IN("frequency", "the vibration frequency. Supported values are: 0.0 (disabled), 0.5 and 1.0. Non valid values will be clamped."),
+		float.IN("amplitude", "the vibration amplitude in the {@code [0.0, 1.0]} range"),
 
 		returnDoc = "OVRErrorCode#Success upon success"
 	)
 
+	ovrResult(
+		"SubmitControllerVibration",
+		"""
+		Submits a Haptics buffer (used for vibration) to Touch (only) controllers.
+
+		Note: {@code ovr_SubmitControllerVibration} cannot be used interchangeably with #SetControllerVibration().
+		""",
+
+		session,
+		ovrControllerType.IN("controllerType", "the controller where the Haptics buffer will be played"),
+		const..ovrHapticsBuffer_p.IN("buffer", "the Haptics buffer containing amplitude samples to be played"),
+
+		returnDoc = "OVRErrorCode#Success upon success"
+	)
+
+	ovrResult(
+		"GetControllerVibrationState",
+		"Gets the Haptics engine playback state of a specific Touch controller.",
+
+		session,
+		ovrControllerType.IN("controllerType", "the controller where the Haptics buffer will be played"),
+		ovrHapticsPlaybackState_p.OUT("outState", "the state of the haptics engine"),
+
+		returnDoc = "OVRErrorCode#Success upon success"
+	)
 
 	// ----------------
 	// Layers
@@ -895,7 +948,7 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
 		Predicts the time at which the given frame will be displayed. The predicted time is the middle of the time period during which the corresponding eye
 		images will be displayed.
 
-		The application should increment frameIndex for each successively targeted frame, and pass that index to any relevent OVR functions that need to apply
+		The application should increment frameIndex for each successively targeted frame, and pass that index to any relevant OVR functions that need to apply
 		to the frame identified by that index.
 
 		This function is thread-safe and allows for multiple application threads to target their processing to the same displayed frame.

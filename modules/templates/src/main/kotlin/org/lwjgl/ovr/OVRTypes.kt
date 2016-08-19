@@ -112,6 +112,15 @@ val ovrInitParams_p = struct_p(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrIn
 	padding(4, condition = "Pointer.BITS64")
 }
 
+val ovrColorf = struct(OVR_PACKAGE, "OVRColorf", nativeName = "ovrColorf") {
+	documentation = "An RGBA color with normalized float components."
+
+	float.member("r", "the R component")
+	float.member("g", "the G component")
+	float.member("b", "the B component")
+	float.member("a", "the A component")
+}.nativeType
+
 val ovrVector2i = struct(OVR_PACKAGE, "OVRVector2i", nativeName = "ovrVector2i") {
 	documentation = "A 2D vector with integer components."
 
@@ -241,7 +250,7 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mu
 	padding(4, "Pointer.BITS64")
 }.nativeType
 
-val ovrTrackerDesc = struct(OVR_PACKAGE, "OVRTrackerDesc", nativeName = "ovrTrackerDesc") {
+val ovrTrackerDesc = struct(OVR_PACKAGE, "OVRTrackerDesc", nativeName = "ovrTrackerDesc", mutable = false) {
 	documentation = "Specifies the description of a single sensor."
 	
     float.member("FrustumHFovInRadians", "sensor frustum horizontal field-of-view (if present).")
@@ -250,7 +259,7 @@ val ovrTrackerDesc = struct(OVR_PACKAGE, "OVRTrackerDesc", nativeName = "ovrTrac
     float.member("FrustumFarZInMeters", "sensor frustum far Z (if present).")
 }.nativeType
 
-val ovrTrackerPose = struct(OVR_PACKAGE, "OVRTrackerPose", nativeName = "ovrTrackerPose") {
+val ovrTrackerPose = struct(OVR_PACKAGE, "OVRTrackerPose", nativeName = "ovrTrackerPose", mutable = false) {
 	documentation = "Specifies the pose for a single sensor."
 	
     unsigned_int.member("TrackerFlags", "{@code ovrTrackerFlags}.")
@@ -320,7 +329,7 @@ val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovr
 	ovrVector3f.member("HmdToEyeOffset", "translation of each eye, in meters.")
 }.nativeType
 
-val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc", nativeName = "ovrTimewarpProjectionDesc") {
+val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc", nativeName = "ovrTimewarpProjectionDesc", mutable = false) {
 	documentation =
 		"""
 		Projection information for ##OVRLayerEyeFovDepth.
@@ -383,10 +392,42 @@ val ovrTextureSwapChain_p = ovrTextureSwapChain.p
 val ovrMirrorTexture = "ovrMirrorTexture".opaque_p
 val ovrMirrorTexture_p = ovrMirrorTexture.p
 
+val ovrTouchHapticsDesc = struct(OVR_PACKAGE, "OVRTouchHapticsDesc", nativeName = "ovrTouchHapticsDesc", mutable = false) {
+	documentation = "Describes the Touch Haptics engine."
+	int.member("SampleRateHz", "Haptics engine frequency/sample-rate, sample time in seconds equals {@code 1.0/sampleRateHz}")
+	int.member("SampleSizeInBytes", "Size of each Haptics sample, sample value range is {@code [0, 2^(Bytes*8)-1]}")
+
+	int.member(
+		"QueueMinSizeToAvoidStarvation",
+		"Queue size that would guarantee Haptics engine would not starve for data. Make sure size doesn't drop below it for best results."
+	)
+
+	int.member("SubmitMinSamples", "Minimum number of samples that can be sent to Haptics through #SubmitControllerVibration()")
+	int.member("SubmitMaxSamples", "Maximum number of samples that can be sent to Haptics through #SubmitControllerVibration()")
+	int.member("SubmitOptimalSamples", "Optimal number of samples that can be sent to Haptics through #SubmitControllerVibration()")
+}.nativeType
+
+val ovrHapticsBufferSubmitMode = "ovrHapticsBufferSubmitMode".enumType
+
+val ovrHapticsBuffer_p = struct_p(OVR_PACKAGE, "OVRHapticsBuffer", nativeName = "ovrHapticsBuffer") {
+	documentation = "Haptics buffer descriptor, contains amplitude samples used for Touch vibration."
+
+	void_p.member("Samples", "")
+	int.member("SamplesCount", "")
+	ovrHapticsBufferSubmitMode.member("SubmitMode", "")
+}
+
+val ovrHapticsPlaybackState_p = struct_p(OVR_PACKAGE, "ovrHapticsPlaybackState", nativeName = "ovrHapticsPlaybackState", mutable = false) {
+	documentation = "State of the Haptics playback for Touch vibration."
+
+	int.member("RemainingQueueSpace", "Remaining space available to queue more samples")
+	int.member("SamplesQueued", "Number of samples currently queued")
+}
+
 val ovrHand_Count = 2
 val ovrControllerType = "ovrControllerType".enumType
 
-val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInputState") {
+val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
 	documentation =
 		"""
 		Describes the complete controller input state, including Oculus Touch, and XBox gamepad. If multiple inputs are connected and used at the same time,
@@ -413,6 +454,22 @@ val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrIn
 		size = ovrHand_Count
 	)
 	ovrControllerType.member("ControllerType", "The type of the controller this state is for.").links("ControllerType_\\w+")
+
+	float.array(
+		"IndexTriggerNoDeadzone",
+		"Left and right finger trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone",
+		size = ovrHand_Count
+	)
+	float.array(
+		"HandTriggerNoDeadzone",
+		"Left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone.",
+		size = ovrHand_Count
+	)
+	float.array(
+		"ThumbstickNoDeadzone",
+		"Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. Does not apply a deadzone.",
+		size = ovrHand_Count
+	)
 }
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLayerHeader") {
