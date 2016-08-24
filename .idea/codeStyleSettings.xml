@@ -78,6 +78,9 @@
           <option name="ALIGN_IN_COLUMNS_CASE_BRANCH" value="true" />
           <option name="NAME_COUNT_TO_USE_STAR_IMPORT" value="4" />
         </JetCodeStyleSettings>
+        <MarkdownNavigatorCodeStyleSettings>
+          <option name="RIGHT_MARGIN" value="72" />
+        </MarkdownNavigatorCodeStyleSettings>
         <XML>
           <option name="XML_ATTRIBUTE_WRAP" value="0" />
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />

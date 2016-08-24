@@ -3,7 +3,7 @@
     <module name="Core" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
     <option name="ALTERNATIVE_JRE_PATH" value="" />
-    <option name="SUITE_NAME" value="$PROJECT_DIR$/../../tests.xml" />
+    <option name="SUITE_NAME" value="$PROJECT_DIR$/config/tests.xml" />
     <option name="PACKAGE_NAME" value="" />
     <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
@@ -11,7 +11,7 @@
     <option name="TEST_OBJECT" value="SUITE" />
     <option name="VM_PARAMETERS" value="-Djava.library.path=libs -ea -Dorg.lwjgl.util.Debug=true -Dorg.lwjgl.util.DebugAllocator=true" />
     <option name="PARAMETERS" value="" />
-    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/../../../" />
+    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     <option name="OUTPUT_DIRECTORY" value="" />
     <option name="ANNOTATION_TYPE" />
     <option name="ENV_VARIABLES" />

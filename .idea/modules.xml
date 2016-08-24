@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Core.iml" filepath="$PROJECT_DIR$/.idea/modules/Core.iml" group="LWJGL" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Generator.iml" filepath="$PROJECT_DIR$/.idea/modules/Generator.iml" group="LWJGL" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Root.iml" filepath="$PROJECT_DIR$/.idea/modules/Root.iml" group="LWJGL" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Templates.iml" filepath="$PROJECT_DIR$/.idea/modules/Templates.iml" group="LWJGL" />
+    </modules>
+  </component>
+</project>
