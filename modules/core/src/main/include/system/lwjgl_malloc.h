@@ -2,8 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-#ifndef __LWJGL_MALLOC_H__
-#define __LWJGL_MALLOC_H__
+#pragma once
 
 // Overridable memory management functions
 
@@ -60,6 +59,4 @@ EXTERN_C_ENTER
 XSETUP_MALLOC(LWJGL_MALLOC_LIB)
 
 EXTERN_C_EXIT
-#endif
-
 #endif

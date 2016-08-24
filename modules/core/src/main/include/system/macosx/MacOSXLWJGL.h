@@ -2,8 +2,6 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-#ifndef _MACOSX_LWJGL_INCLUDED
-	#define _MACOSX_LWJGL_INCLUDED
+#pragma once
 
-	#include <CoreFoundation/CoreFoundation.h>
-#endif
+#include <CoreFoundation/CoreFoundation.h>

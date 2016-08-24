@@ -2,8 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-#ifndef __LWJGL_SIMD_INTRINSICS_H__
-#define __LWJGL_SIMD_INTRINSICS_H__
+#pragma once
 
 #if defined(_MSC_VER)
 	/* Microsoft C/C++-compatible compiler */
@@ -25,6 +24,4 @@
 #elif defined(__GNUC__) && defined(__SPE__)
 	/* GCC-compatible compiler, targeting PowerPC with SPE */
 	#include <spe.h>
-#endif
-
 #endif

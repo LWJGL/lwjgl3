@@ -2,8 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-#ifndef __LWJGL_COMMON_TOOLS_H__
-#define __LWJGL_COMMON_TOOLS_H__
+#pragma once
 
 #ifdef LWJGL_WINDOWS
 	#include "WindowsConfig.h"
@@ -63,5 +62,3 @@ extern void detachCurrentThread(void);
 	(void)(b);
 
 // -----------------------------------------------------
-
-#endif
