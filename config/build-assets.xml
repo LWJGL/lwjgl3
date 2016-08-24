@@ -1,7 +1,9 @@
 <!--
-Copyright LWJGL. All rights reserved.
-License terms: https://www.lwjgl.org/license
+  ~ Copyright LWJGL. All rights reserved.
+  ~ License terms: https://www.lwjgl.org/license
+  -->
 
+<!--
 Binary assets used in demos are not committed to the git repository.
 This script downloads such assets from S3.
 

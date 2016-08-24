@@ -1,7 +1,7 @@
 <!--
-Copyright LWJGL. All rights reserved.
-License terms: https://www.lwjgl.org/license
--->
+  ~ Copyright LWJGL. All rights reserved.
+  ~ License terms: https://www.lwjgl.org/license
+  -->
 <project name="LWJGL" basedir="." default="all" xmlns:if="ant:if" xmlns:unless="ant:unless">
 
 	<property name="build.sysclasspath" value="ignore"/>

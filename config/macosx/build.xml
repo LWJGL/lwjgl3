@@ -1,7 +1,7 @@
 <!--
-Copyright LWJGL. All rights reserved.
-License terms: https://www.lwjgl.org/license
--->
+  ~ Copyright LWJGL. All rights reserved.
+  ~ License terms: https://www.lwjgl.org/license
+  -->
 <project name="native-macosx" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="../build-definitions.xml"/>
 

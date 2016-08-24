@@ -1,7 +1,9 @@
 <!--
-Copyright LWJGL. All rights reserved.
-License terms: https://www.lwjgl.org/license
+  ~ Copyright LWJGL. All rights reserved.
+  ~ License terms: https://www.lwjgl.org/license
+  -->
 
+<!--
 Defines global properties and useful macros.
 
 This script is included in /build.xml and /config/update-dependencies.xml.

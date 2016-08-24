@@ -1,7 +1,9 @@
 <!--
-Copyright LWJGL. All rights reserved.
-License terms: https://www.lwjgl.org/license
+  ~ Copyright LWJGL. All rights reserved.
+  ~ License terms: https://www.lwjgl.org/license
+  -->
 
+<!--
 Defines which library bindings will be build with LWJGL.
 
 This script is included in /config/build-definitions.xml.

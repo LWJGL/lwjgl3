@@ -1,9 +1,9 @@
 <!--
-Copyright LWJGL. All rights reserved.
-License terms: https://www.lwjgl.org/license
+  ~ Copyright LWJGL. All rights reserved.
+  ~ License terms: https://www.lwjgl.org/license
+  -->
 
-Downloads LWJGL's library dependencies.
--->
+<!-- Downloads LWJGL's library dependencies. -->
 <project name="LWJGL" basedir="." default="update-dependencies">
 
 	<property name="config" location="config" relative="true"/>
