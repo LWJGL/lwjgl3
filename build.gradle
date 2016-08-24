@@ -2,17 +2,13 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-project.buildDir = 'bin/MAVEN'
-
 apply plugin: "maven"
 apply plugin: "signing"
 
+project.defaultTasks = ["uploadArchives"]
+project.buildDir = 'bin/MAVEN'
 project.group = "org.lwjgl"
 project.version = lwjglVersion
-
-def PATHS = [
-	release: 'bin/RELEASE'
-]
 
 // Set build variables based on build type (release, continuous integration, development)
 enum BuildType {
@@ -36,7 +32,6 @@ if ( hasProperty("release") ) {
 		user: sonatypeUsername,
 		password: sonatypePassword
 	)
-	println "Performing release build"
 } else if ( hasProperty("snapshot") ) {
 	project.version += "-SNAPSHOT"
 	deployment = new Deployment(
@@ -45,7 +40,6 @@ if ( hasProperty("release") ) {
 		user: sonatypeUsername,
 		password: sonatypePassword
 	)
-	println "Performing snapshot build"
 } else {
 	deployment = new Deployment(
 		type: BuildType.LOCAL,
@@ -54,37 +48,210 @@ if ( hasProperty("release") ) {
 }
 println "${deployment.type.name()} BUILD"
 
+enum Artifacts {
+	CORE("org.lwjgl", "lwjgl", true, "LWJGL", "The LWJGL core library."),
+	EGL(
+		"org.lwjgl.egl", "lwjgl-egl", false,
+		"LWJGL - EGL bindings",
+		"An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system."
+	),
+	GLFW(
+		"org.lwjgl.glfw", "lwjgl-glfw", true,
+		"LWJGL - GLFW bindings",
+		"An multi-platform library for OpenGL, OpenGL ES and Vulkan development on the desktop. It provides a simple API for creating windows, contexts and surfaces, receiving input and events."
+	),
+	JAWT(
+		"org.lwjgl.system.jawt", "lwjgl-jawt", false,
+		"LWJGL - JAWT bindings",
+		"The AWT native interface."),
+	JEMALLOC(
+		"org.lwjgl.system.jemalloc", "lwjgl-jemalloc", true,
+		"LWJGL - jemalloc bindings",
+		"A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support."
+	),
+	LMDB(
+		"org.lwjgl.util.lmdb", "lwjgl-lmdb", true,
+		"LWJGL - LMDB bindings",
+		"A compact, fast, powerful, and robust database that implements a simplified variant of the BerkeleyDB (BDB) API."
+	),
+	NANOVG(
+		"org.lwjgl.nanovg", "lwjgl-nanovg", true,
+		"LWJGL - NanoVG bindings",
+		"A small antialiased vector graphics rendering library for OpenGL."
+	),
+	NFD(
+		"org.lwjgl.util.nfd", "lwjgl-nfd", true,
+		"LWJGL - Native File Dialog bindings",
+		"A tiny, neat C library that portably invokes native file open and save dialogs."
+	),
+	NUKLEAR(
+		"org.lwjgl.nuklear", "lwjgl-nuklear", true,
+		"LWJGL - Nuklear bindings",
+		"A minimal state immediate mode graphical user interface toolkit."
+	),
+	OPENAL(
+		"org.lwjgl.openal", "lwjgl-openal", true,
+		"LWJGL - OpenAL bindings",
+		"A cross-platform 3D audio API appropriate for use with gaming applications and many other types of audio applications."
+	),
+	OPENCL(
+		"org.lwjgl.opencl", "lwjgl-opencl", false,
+		"LWJGL - OpenCL bindings",
+		"An open, royalty-free standard for cross-platform, parallel programming of diverse processors found in personal computers, servers, mobile devices and embedded platforms."
+	),
+	OPENGL(
+		"org.lwjgl.opengl", "lwjgl-opengl", false,
+		"LWJGL - OpenGL bindings",
+		"The most widely adopted 2D and 3D graphics API in the industry, bringing thousands of applications to a wide variety of computer platforms."
+	),
+	OPENGLES(
+		"org.lwjgl.opengles", "lwjgl-opengles", false,
+		"LWJGL - OpenGL ES bindings",
+		"A royalty-free, cross-platform API for full-function 2D and 3D graphics on embedded systems - including consoles, phones, appliances and vehicles."
+	),
+	OVR(
+		"org.lwjgl.ovr", "lwjgl-ovr", false,
+		"LWJGL - OVR bindings",
+		"The API of the Oculus SDK."
+	),
+	PAR(
+		"org.lwjgl.util.par", "lwjgl-par", true,
+		"LWJGL - par_shapes bindings",
+		"Generate parametric surfaces and other simple shapes."
+	),
+	SSE(
+		"org.lwjgl.util.sse", "lwjgl-sse", true,
+		"LWJGL - SSE bindings",
+		"Simple SSE intrinsics."
+	),
+	STB(
+		"org.lwjgl.stb", "lwjgl-stb", true,
+		"LWJGL - stb bindings",
+		"Single-file public domain libraries for fonts, images, ogg vorbis files and more."
+	),
+	TINYFD(
+		"org.lwjgl.util.tinyfd", "lwjgl-tinyfd", true,
+		"LWJGL - Tiny File Dialogs bindings",
+		"Provides basic modal dialogs."
+	),
+	VULKAN(
+		"org.lwjgl.vulkan", "lwjgl-vulkan", false,
+		"LWJGL - Vulkan bindings",
+		"A new generation graphics and compute API that provides high-efficiency, cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms."
+	),
+	XXHASH(
+		"org.lwjgl.util.xxhash", "lwjgl-xxhash", true,
+		"LWJGL - xxHash bindings",
+		"An Extremely fast Hash algorithm, running at RAM speed limits."
+	)
+
+	String packageName
+	String artifact
+	boolean hasNatives
+	String projectName
+	String projectDescription
+
+	private Artifacts(
+		String packageName, String artifact, boolean hasNatives,
+		String projectName, String projectDescription
+	) {
+		this.packageName = packageName
+		this.artifact = artifact
+		this.hasNatives = hasNatives
+		this.projectName = projectName
+		this.projectDescription = projectDescription
+	}
+
+	private def String directory(String buildDir) {
+		return "$buildDir/$packageName"
+	}
+
+	private def String path() {
+		return "${directory("bin/MAVEN")}/$artifact"
+	}
+
+	def boolean active() {
+		return new File(directory("bin/RELEASE")).exists()
+	}
+
+	def Map<String, Object> artifactNotation(String classifier = null) {
+		if ( classifier == null )
+			return [file: new File("${path()}.jar"), name: artifact, type: "jar"]
+		else
+			return [file: new File("${path()}-${classifier}.jar"), name: artifact, type: "jar", classifier: classifier]
+	}
+}
+
 artifacts {
-	archives file: file("$buildDir/lwjgl.jar"), name: "lwjgl", type: "jar"
-	archives file: file("$buildDir/src.jar"), name: "lwjgl", type: "jar", classifier: "sources"
-	archives file: file("$buildDir/javadoc.jar"), name: "lwjgl", type: "jar", classifier: "javadoc"
-	archives file: file("$buildDir/lwjgl-natives-windows.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-windows"
-	archives file: file("$buildDir/lwjgl-natives-macosx.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-osx"
-	archives file: file("$buildDir/lwjgl-natives-linux.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-linux"
+	/*
+	Ideally, we'd have the following structure:
+	-------------------------------------------
+	lwjgl
+		lwjgl-windows (depends on lwjgl)
+	glfw (depends on lwjgl)
+		glfw-windows (depends on glfw & lwjgl-windows)
+	stb (depends on lwjgl)
+		stb-windows (depends on stb & lwjgl-windows)
+	-------------------------------------------
+	If a user wanted to use GLFW + stb in their project, running on
+	the Windows platform, they'd only have to define glfw-windows
+	and stb-windows as dependencies. This would automatically
+	resolve stb, glfw, lwjgl and lwjgl-windows as transitive
+	dependencies. Unfortunately, it is not possible to define such
+	a relationship between Maven artifacts when using classifiers.
+
+	A method to make this work is make the natives-<arch> classified
+	JARs separate artifacts. We do not do it for aesthetic reasons.
+
+	Instead, we assume that a tool is available (on the LWJGL website)
+	that automatically generates POM/Gradle dependency structures for
+	projects wanting to use LWJGL. The output is going to be verbose;
+	the above example is going to look like this in Gradle:
+	-------------------------------------------
+	compile 'org.lwjgl:lwjgl:$lwjglVersion' // NOTE: this is optional, all binding artifacts have a dependency on lwjgl
+		runtime 'org.lwjgl:lwjgl:$lwjglVersion:natives-$lwjglArch'
+	compile 'org.lwjgl:lwjgl-glfw:$lwjglVersion'
+		runtime 'org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-$lwjglArch'
+	compile 'org.lwjgl:lwjgl-stb:$lwjglVersion'
+		runtime 'org.lwjgl:lwjgl-stb:$lwjglVersion:natives-$lwjglArch'
+	-------------------------------------------
+	and a whole lot more verbose in Maven. Hopefully, the automation
+	is going to alleviate the pain.
+	 */
+	Artifacts.values().each {
+		if ( it.active() ) {
+			archives it.artifactNotation()
+			archives it.artifactNotation("sources")
+			archives it.artifactNotation("javadoc")
+			if ( it.hasNatives ) {
+				archives it.artifactNotation("natives-linux")
+				archives it.artifactNotation("natives-macos")
+				archives it.artifactNotation("natives-windows")
+			}
+		}
+	}
 }
 
-if ( deployment.type == BuildType.RELEASE ) {
-	signing {
-		sign configurations.archives
-	}
-} else {
-	task signArchives {
-		// do nothing
-	}
+signing {
+	required = deployment.type == BuildType.RELEASE
+	sign configurations.archives
 }
+signArchives.dependsOn "copyArchives"
+uploadArchives.dependsOn signArchives
 
-def lwjglPOM = { String projectName, String packagingMethod ->
+// TODO: Find a way to merge the POM generation closures
+def lwjglPOM = { String projectName, String projectDescription ->
 	return {
 		project {
 			name projectName
-			packaging packagingMethod
-			description 'LWJGL'
+			description projectDescription
+			packaging "jar"
 			url 'https://www.lwjgl.org'
 
 			scm {
-				url 'scm:git@github.com:LWJGL/lwjgl3.git'
-				connection 'scm:git@github.com:LWJGL/lwjgl3.git'
-				developerConnection 'scm:git@github.com:LWJGL/lwjgl3.git'
+				connection 'scm:git:https://github.com/LWJGL/lwjgl3.git'
+				developerConnection 'scm:git:https://github.com/LWJGL/lwjgl3.git'
+				url 'https://github.com/LWJGL/lwjgl3.git'
 			}
 
 			licenses {
@@ -99,6 +266,51 @@ def lwjglPOM = { String projectName, String packagingMethod ->
 				developer {
 					id "spasi"
 					name "Ioannis Tsakpinis"
+					email "iotsakp@gmail.com"
+					url "https://github.com/Spasi"
+				}
+			}
+		}
+	}
+}
+
+def bindingPOM = { String projectName, String projectDescription ->
+	return {
+		project {
+			name projectName
+			description projectDescription
+			packaging "jar"
+			url 'https://www.lwjgl.org'
+
+			scm {
+				connection 'scm:git:https://github.com/LWJGL/lwjgl3.git'
+				developerConnection 'scm:git:https://github.com/LWJGL/lwjgl3.git'
+				url 'https://github.com/LWJGL/lwjgl3.git'
+			}
+
+			licenses {
+				license {
+					name 'BSD'
+					url 'https://www.lwjgl.org/license'
+					distribution 'repo'
+				}
+			}
+
+			developers {
+				developer {
+					id "spasi"
+					name "Ioannis Tsakpinis"
+					email "iotsakp@gmail.com"
+					url "https://github.com/Spasi"
+				}
+			}
+
+			dependencies {
+				dependency {
+					groupId 'org.lwjgl'
+					artifactId 'lwjgl'
+					version lwjglVersion
+					scope 'compile'
 				}
 			}
 		}
@@ -112,38 +324,28 @@ uploadArchives {
 				authentication(userName: deployment.user, password: deployment.password)
 			}
 
-			if ( deployment.type == BuildType.RELEASE ) {
-				beforeDeployment { signing.signPom(it) }
+			beforeDeployment {
+				signing.signPom(it)
 			}
 
-			addFilter("lwjgl") { artifact, file -> artifact.name == "lwjgl" }
-			addFilter("lwjgl-platform") { artifact, file -> artifact.name == "lwjgl-platform" }
+			Artifacts.values().each {
+				addFilter(it.artifact) {
+					artifact, file -> artifact.name == it.artifact
+				}
 
-			pom("lwjgl", lwjglPOM("LWJGL", "jar"))
-			pom("lwjgl-platform", lwjglPOM("LWJGL Platform", "pom"))
+				pom(
+					it.artifact,
+					it == Artifacts.CORE
+						? lwjglPOM(it.projectName, it.projectDescription)
+						: bindingPOM(it.projectName, it.projectDescription)
+				)
+			}
 		}
 	}
 }
 
 task copyArchives(type: Copy) {
-	from "$PATHS.release/jar/lwjgl.jar", "$PATHS.release/src.zip", "$PATHS.release/doc/javadoc.zip"
-	destinationDir file(buildDir)
-	rename { it.replace(".zip", ".jar") }
-}
-signArchives.mustRunAfter copyArchives
-uploadArchives.dependsOn copyArchives
-
-[
-	[include: "*.dll", name: "Windows"],
-	[include: "*.so", name: "Linux"],
-	[include: "*.dylib", name: "MacOSX"]
-].each { archive ->
-	def zipNatives = task("zipNatives$archive.name", type: Zip) {
-		from "$PATHS.release/native"
-		include archive.include
-		archiveName "lwjgl-natives-${archive.name.toLowerCase()}.jar"
-		destinationDir file(buildDir)
-	}
-	signArchives.mustRunAfter zipNatives
-	uploadArchives.dependsOn zipNatives
+	from "bin/RELEASE"
+	include "**"
+	destinationDir buildDir
 }
