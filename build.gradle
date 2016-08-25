@@ -309,7 +309,7 @@ def bindingPOM = { String projectName, String projectDescription ->
 				dependency {
 					groupId 'org.lwjgl'
 					artifactId 'lwjgl'
-					version lwjglVersion
+					version project.version
 					scope 'compile'
 				}
 			}
