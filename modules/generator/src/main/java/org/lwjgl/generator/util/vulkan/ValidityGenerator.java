@@ -89,7 +89,7 @@ public final class ValidityGenerator {
 					bw.write("\n\n");
 
 
-				bw.write("val " + inputFile.getName().substring(0, inputFile.getName().length() - 4) + " =\n");
+				bw.write("@JvmField val " + inputFile.getName().substring(0, inputFile.getName().length() - 4) + " =\n");
 				bw.write("\t\"\"\"");
 
 				bw.write(VulkanFormatter.formatValidation(um.group(1), ""));
