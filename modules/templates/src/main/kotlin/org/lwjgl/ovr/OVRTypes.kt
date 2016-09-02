@@ -417,7 +417,7 @@ val ovrHapticsBuffer_p = struct_p(OVR_PACKAGE, "OVRHapticsBuffer", nativeName = 
 	ovrHapticsBufferSubmitMode.member("SubmitMode", "")
 }
 
-val ovrHapticsPlaybackState_p = struct_p(OVR_PACKAGE, "ovrHapticsPlaybackState", nativeName = "ovrHapticsPlaybackState", mutable = false) {
+val ovrHapticsPlaybackState_p = struct_p(OVR_PACKAGE, "OVRHapticsPlaybackState", nativeName = "ovrHapticsPlaybackState", mutable = false) {
 	documentation = "State of the Haptics playback for Touch vibration."
 
 	int.member("RemainingQueueSpace", "Remaining space available to queue more samples")
