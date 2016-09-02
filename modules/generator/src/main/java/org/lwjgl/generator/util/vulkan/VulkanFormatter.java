@@ -140,6 +140,7 @@ public class VulkanFormatter {
 	private static final Pattern STRUCT       = Pattern.compile("sname:(\\w+)(\\s+)struct");
 	private static final Pattern CODE2        = Pattern.compile("(?:pname|basetype|elink|code|sname|slink):(\\w+(?:[.]\\w+)*)");
 	private static final Pattern LINK         = Pattern.compile("<<[^,\n]+,\\s*([^>]+?)>>");
+	private static final Pattern EXTENSION    = Pattern.compile("[+](\\w+)[+]");
 
 	private static final Pattern SECTION_LINK = Pattern.compile("(?:\\s*[,\\-])?\\s*[(]?(?:as described[^<]+<<[^>]+>>|see <<[^>]+>>)[)]?");
 
@@ -161,6 +162,7 @@ public class VulkanFormatter {
 		input = CODE2.matcher(input).replaceAll("{@code $1}");
 		input = LINK.matcher(input).replaceAll("$1");
 		input = SECTION_LINK.matcher(input).replaceAll("");
+		input = EXTENSION.matcher(input).replaceAll("{@code $1}");
 
 		StringBuilder builder = new StringBuilder(input.length());
 
