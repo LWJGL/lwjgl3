@@ -20,6 +20,8 @@ val VkPipelineRasterizationStateRasterizationOrderAMD = struct(VULKAN_PACKAGE, "
 		When the {@code VK_AMD_rasterization_order} device extension is enabled the application $can also chain a
 		{@code VkPipelineRasterizationStateRasterizationOrderAMD} structure to the ##VkPipelineRasterizationStateCreateInfo structure through its {@code pNext}
 		member. This structure enables selecting the rasterization order to use when rendering with the corresponding graphics pipeline.
+
+		${ValidityStructs.VkPipelineRasterizationStateRasterizationOrderAMD}
 		"""
 
     sType(this)
@@ -112,7 +114,12 @@ val VkDebugReportCallbackCreateInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugRepo
 // EXT_debug_marker
 
 val VkDebugMarkerObjectNameInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerObjectNameInfoEXT") {
-	documentation = "Passed to #DebugMarkerSetObjectNameEXT() to give a user-friendly name to a Vulkan object."
+	documentation =
+		"""
+		Passed to #DebugMarkerSetObjectNameEXT() to give a user-friendly name to a Vulkan object.
+
+		${ValidityStructs.VkDebugMarkerObjectNameInfoEXT}
+		"""
 
     sType(this)
 	pNext()
@@ -122,7 +129,12 @@ val VkDebugMarkerObjectNameInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerOb
 }
 
 val VkDebugMarkerObjectTagInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerObjectTagInfoEXT") {
-	documentation = "Passed to #DebugMarkerSetObjectTagEXT() to attach arbitrary data to a Vulkan object."
+	documentation =
+		"""
+		Passed to #DebugMarkerSetObjectTagEXT() to attach arbitrary data to a Vulkan object.
+
+		${ValidityStructs.VkDebugMarkerObjectTagInfoEXT}
+		"""
 
     sType(this)
 	pNext()
@@ -134,7 +146,12 @@ val VkDebugMarkerObjectTagInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerObj
 }
 
 val VkDebugMarkerMarkerInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerMarkerInfoEXT") {
-    documentation = "Passed to #CmdDebugMarkerBeginEXT() and #CmdDebugMarkerInsertEXT()."
+    documentation =
+	    """
+	    Passed to #CmdDebugMarkerBeginEXT() and #CmdDebugMarkerInsertEXT().
+
+		${ValidityStructs.VkDebugMarkerMarkerInfoEXT}
+		"""
 
     sType(this)
 	pNext()

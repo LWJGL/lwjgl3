@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 object ValidityStructs {
 
-val VkAllocationCallbacks =
+@JvmField val VkAllocationCallbacks =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code pfnAllocation} $must be a pointer to a valid user-defined PFN_vkAllocationFunction",
@@ -18,7 +18,7 @@ val VkAllocationCallbacks =
 			"If either of {@code pfnInternalAllocation} or {@code pfnInternalFree} is not $NULL, both $must be valid callbacks"
 		)}"""
 
-val VkAndroidSurfaceCreateInfoKHR =
+@JvmField val VkAndroidSurfaceCreateInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR",
@@ -28,7 +28,7 @@ val VkAndroidSurfaceCreateInfoKHR =
 			"{@code window} $mustnot be in a connected state"
 		)}"""
 
-val VkApplicationInfo =
+@JvmField val VkApplicationInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_APPLICATION_INFO",
@@ -38,7 +38,7 @@ val VkApplicationInfo =
 			"{@code apiVersion} $must be zero, or otherwise it $must be a version that the implementation supports, or supports an effective substitute for"
 		)}"""
 
-val VkAttachmentDescription =
+@JvmField val VkAttachmentDescription =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code flags} $must be a valid combination of {@code VkAttachmentDescriptionFlagBits} values",
@@ -53,14 +53,14 @@ val VkAttachmentDescription =
 			"{@code finalLayout} $mustnot be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED"
 		)}"""
 
-val VkAttachmentReference =
+@JvmField val VkAttachmentReference =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code layout} $must be a valid {@code VkImageLayout} value",
 			"{@code layout} $mustnot be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED"
 		)}"""
 
-val VkBindSparseInfo =
+@JvmField val VkBindSparseInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_BIND_SPARSE_INFO",
@@ -91,7 +91,7 @@ val VkBindSparseInfo =
 			"""
 		)}"""
 
-val VkBufferCreateInfo =
+@JvmField val VkBufferCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_BUFFER_CREATE_INFO",
@@ -115,7 +115,7 @@ val VkBufferCreateInfo =
 			"""
 		)}"""
 
-val VkBufferImageCopy =
+@JvmField val VkBufferImageCopy =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code imageSubresource} $must be a valid ##VkImageSubresourceLayers structure",
@@ -149,7 +149,7 @@ val VkBufferImageCopy =
 			"""
 		)}"""
 
-val VkBufferMemoryBarrier =
+@JvmField val VkBufferMemoryBarrier =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER",
@@ -174,7 +174,7 @@ val VkBufferMemoryBarrier =
 			"""
 		)}"""
 
-val VkBufferViewCreateInfo =
+@JvmField val VkBufferViewCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO",
@@ -201,7 +201,7 @@ val VkBufferViewCreateInfo =
 			"""
 		)}"""
 
-val VkClearAttachment =
+@JvmField val VkClearAttachment =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code aspectMask} $must be a valid combination of {@code VkImageAspectFlagBits} values",
@@ -210,7 +210,7 @@ val VkClearAttachment =
 			"{@code aspectMask} $mustnot include #IMAGE_ASPECT_METADATA_BIT"
 		)}"""
 
-val VkCommandBufferAllocateInfo =
+@JvmField val VkCommandBufferAllocateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO",
@@ -220,7 +220,7 @@ val VkCommandBufferAllocateInfo =
 			"{@code commandBufferCount} $must be greater than 0"
 		)}"""
 
-val VkCommandBufferBeginInfo =
+@JvmField val VkCommandBufferBeginInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO",
@@ -240,7 +240,7 @@ val VkCommandBufferBeginInfo =
 			"""
 		)}"""
 
-val VkCommandBufferInheritanceInfo =
+@JvmField val VkCommandBufferInheritanceInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO",
@@ -254,7 +254,7 @@ val VkCommandBufferInheritanceInfo =
 			"If the pipeline statistics queries feature is not enabled, {@code pipelineStatistics} $must be 0"
 		)}"""
 
-val VkCommandPoolCreateInfo =
+@JvmField val VkCommandPoolCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO",
@@ -263,7 +263,7 @@ val VkCommandPoolCreateInfo =
 			"{@code queueFamilyIndex} $must be the index of a queue family available in the calling command's {@code device} parameter"
 		)}"""
 
-val VkComponentMapping =
+@JvmField val VkComponentMapping =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code r} $must be a valid {@code VkComponentSwizzle} value",
@@ -272,7 +272,7 @@ val VkComponentMapping =
 			"{@code a} $must be a valid {@code VkComponentSwizzle} value"
 		)}"""
 
-val VkComputePipelineCreateInfo =
+@JvmField val VkComputePipelineCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO",
@@ -312,7 +312,7 @@ val VkComputePipelineCreateInfo =
 			"{@code layout} $must be consistent with all shaders specified in {@code pStages}"
 		)}"""
 
-val VkCopyDescriptorSet =
+@JvmField val VkCopyDescriptorSet =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_COPY_DESCRIPTOR_SET",
@@ -336,7 +336,7 @@ val VkCopyDescriptorSet =
 			"""
 		)}"""
 
-val VkDebugMarkerMarkerInfoEXT =
+@JvmField val VkDebugMarkerMarkerInfoEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT",
@@ -344,7 +344,7 @@ val VkDebugMarkerMarkerInfoEXT =
 			"{@code pMarkerName} $must be a null-terminated string"
 		)}"""
 
-val VkDebugMarkerObjectNameInfoEXT =
+@JvmField val VkDebugMarkerObjectNameInfoEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT",
@@ -353,7 +353,7 @@ val VkDebugMarkerObjectNameInfoEXT =
 			"{@code pObjectName} $must be a null-terminated string"
 		)}"""
 
-val VkDebugMarkerObjectTagInfoEXT =
+@JvmField val VkDebugMarkerObjectTagInfoEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT",
@@ -363,7 +363,7 @@ val VkDebugMarkerObjectTagInfoEXT =
 			"{@code tagSize} $must be greater than 0"
 		)}"""
 
-val VkDebugReportCallbackCreateInfoEXT =
+@JvmField val VkDebugReportCallbackCreateInfoEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT",
@@ -372,7 +372,14 @@ val VkDebugReportCallbackCreateInfoEXT =
 			"{@code flags} $mustnot be 0"
 		)}"""
 
-val VkDedicatedAllocationBufferCreateInfoNV =
+@JvmField val VkDebugReportLayerFlagsEXT =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_DEBUG_REPORT_LAYER_FLAGS_EXT",
+			"{@code pNext} $must be $NULL"
+		)}"""
+
+@JvmField val VkDedicatedAllocationBufferCreateInfoNV =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV",
@@ -383,7 +390,7 @@ val VkDedicatedAllocationBufferCreateInfoNV =
 			"""
 		)}"""
 
-val VkDedicatedAllocationImageCreateInfoNV =
+@JvmField val VkDedicatedAllocationImageCreateInfoNV =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV",
@@ -394,14 +401,14 @@ val VkDedicatedAllocationImageCreateInfoNV =
 			"""
 		)}"""
 
-val VkDedicatedAllocationMemoryAllocateInfoNV =
+@JvmField val VkDedicatedAllocationMemoryAllocateInfoNV =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV",
 			"{@code pNext} $must be $NULL",
 			"If {@code image} is not #NULL_HANDLE, {@code image} $must be a valid {@code VkImage} handle",
 			"If {@code buffer} is not #NULL_HANDLE, {@code buffer} $must be a valid {@code VkBuffer} handle",
-			"Each of {@code image} and {@code buffer} that are valid handles $must have been created, allocated or retrieved from the same {@code VkDevice}",
+			"Both of {@code buffer}, and {@code image} that are valid handles $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"At least one of {@code image} and {@code buffer} $must be #NULL_HANDLE",
 			"""
 			If {@code image} is not #NULL_HANDLE, the image $must have been created with ##VkDedicatedAllocationImageCreateInfoNV{@code ::dedicatedAllocation}
@@ -421,7 +428,7 @@ val VkDedicatedAllocationMemoryAllocateInfoNV =
 			"""
 		)}"""
 
-val VkDescriptorBufferInfo =
+@JvmField val VkDescriptorBufferInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code buffer} $must be a valid {@code VkBuffer} handle",
@@ -430,7 +437,7 @@ val VkDescriptorBufferInfo =
 			"If {@code range} is not equal to #WHOLE_SIZE, {@code range} $must be less than or equal to the size of {@code buffer} minus {@code offset}"
 		)}"""
 
-val VkDescriptorImageInfo =
+@JvmField val VkDescriptorImageInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"""
@@ -439,7 +446,7 @@ val VkDescriptorImageInfo =
 			"""
 		)}"""
 
-val VkDescriptorPoolCreateInfo =
+@JvmField val VkDescriptorPoolCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO",
@@ -450,14 +457,14 @@ val VkDescriptorPoolCreateInfo =
 			"{@code maxSets} $must be greater than 0"
 		)}"""
 
-val VkDescriptorPoolSize =
+@JvmField val VkDescriptorPoolSize =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code type} $must be a valid {@code VkDescriptorType} value",
 			"{@code descriptorCount} $must be greater than 0"
 		)}"""
 
-val VkDescriptorSetAllocateInfo =
+@JvmField val VkDescriptorSetAllocateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO",
@@ -473,7 +480,7 @@ val VkDescriptorSetAllocateInfo =
 			"{@code descriptorPool} $must have enough free descriptor capacity remaining to allocate the descriptor sets of the specified layouts"
 		)}"""
 
-val VkDescriptorSetLayoutBinding =
+@JvmField val VkDescriptorSetLayoutBinding =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code descriptorType} $must be a valid {@code VkDescriptorType} value",
@@ -485,7 +492,7 @@ val VkDescriptorSetLayoutBinding =
 			"If {@code descriptorCount} is not 0, {@code stageFlags} $must be a valid combination of {@code VkShaderStageFlagBits} values"
 		)}"""
 
-val VkDescriptorSetLayoutCreateInfo =
+@JvmField val VkDescriptorSetLayoutCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO",
@@ -497,7 +504,7 @@ val VkDescriptorSetLayoutCreateInfo =
 			"""
 		)}"""
 
-val VkDeviceCreateInfo =
+@JvmField val VkDeviceCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DEVICE_CREATE_INFO",
@@ -517,7 +524,7 @@ val VkDeviceCreateInfo =
 			"The {@code queueFamilyIndex} member of any given element of {@code pQueueCreateInfos} $must be unique within {@code pQueueCreateInfos}"
 		)}"""
 
-val VkDeviceQueueCreateInfo =
+@JvmField val VkDeviceQueueCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO",
@@ -533,7 +540,7 @@ val VkDeviceQueueCreateInfo =
 			"Each element of {@code pQueuePriorities} $must be between {@code 0.0} and {@code 1.0} inclusive"
 		)}"""
 
-val VkDispatchIndirectCommand =
+@JvmField val VkDispatchIndirectCommand =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code x} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[0]",
@@ -541,7 +548,7 @@ val VkDispatchIndirectCommand =
 			"{@code z} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[2]"
 		)}"""
 
-val VkDisplayModeCreateInfoKHR =
+@JvmField val VkDisplayModeCreateInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR",
@@ -551,25 +558,25 @@ val VkDisplayModeCreateInfoKHR =
 			"The {@code refreshRate} member of {@code parameters} $must be greater than 0"
 		)}"""
 
-val VkDisplayModePropertiesKHR =
+@JvmField val VkDisplayModePropertiesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code displayMode} $must be a valid {@code VkDisplayModeKHR} handle"
 		)}"""
 
-val VkDisplayPlaneCapabilitiesKHR =
+@JvmField val VkDisplayPlaneCapabilitiesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code supportedAlpha} $must be a valid combination of {@code VkDisplayPlaneAlphaFlagBitsKHR} values"
 		)}"""
 
-val VkDisplayPlanePropertiesKHR =
+@JvmField val VkDisplayPlanePropertiesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code currentDisplay} $must be a valid {@code VkDisplayKHR} handle"
 		)}"""
 
-val VkDisplayPresentInfoKHR =
+@JvmField val VkDisplayPresentInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR",
@@ -585,7 +592,7 @@ val VkDisplayPresentInfoKHR =
 			"""
 		)}"""
 
-val VkDisplayPropertiesKHR =
+@JvmField val VkDisplayPropertiesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code display} $must be a valid {@code VkDisplayKHR} handle",
@@ -593,7 +600,7 @@ val VkDisplayPropertiesKHR =
 			"{@code supportedTransforms} $must be a valid combination of {@code VkSurfaceTransformFlagBitsKHR} values"
 		)}"""
 
-val VkDisplaySurfaceCreateInfoKHR =
+@JvmField val VkDisplaySurfaceCreateInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR",
@@ -624,7 +631,7 @@ val VkDisplaySurfaceCreateInfoKHR =
 			"""
 		)}"""
 
-val VkDrawIndexedIndirectCommand =
+@JvmField val VkDrawIndexedIndirectCommand =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"For a given vertex buffer binding, any attribute data fetched $must be entirely contained within the corresponding vertex buffer binding",
@@ -636,14 +643,14 @@ val VkDrawIndexedIndirectCommand =
 			"If the drawIndirectFirstInstance feature is not enabled, {@code firstInstance} $must be 0"
 		)}"""
 
-val VkDrawIndirectCommand =
+@JvmField val VkDrawIndirectCommand =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"For a given vertex buffer binding, any attribute data fetched $must be entirely contained within the corresponding vertex buffer binding",
 			"If the drawIndirectFirstInstance feature is not enabled, {@code firstInstance} $must be 0"
 		)}"""
 
-val VkEventCreateInfo =
+@JvmField val VkEventCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_EVENT_CREATE_INFO",
@@ -651,7 +658,45 @@ val VkEventCreateInfo =
 			"{@code flags} $must be 0"
 		)}"""
 
-val VkFenceCreateInfo =
+@JvmField val VkExportMemoryAllocateInfoNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV",
+			"{@code pNext} $must be $NULL",
+			"{@code handleTypes} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
+			"{@code handleTypes} $mustnot be 0"
+		)}"""
+
+@JvmField val VkExportMemoryWin32HandleInfoNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV",
+			"{@code pNext} $must be $NULL",
+			"{@code pAttributes} $must be a pointer to a valid {@code SECURITY_ATTRIBUTES} value"
+		)}"""
+
+@JvmField val VkExternalImageFormatPropertiesNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code imageFormatProperties} $must be a valid ##VkImageFormatProperties structure",
+			"{@code externalMemoryFeatures} $must be a valid combination of {@code VkExternalMemoryFeatureFlagBitsNV} values",
+			"{@code externalMemoryFeatures} $mustnot be 0",
+			"{@code exportFromImportedHandleTypes} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
+			"{@code exportFromImportedHandleTypes} $mustnot be 0",
+			"{@code compatibleHandleTypes} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
+			"{@code compatibleHandleTypes} $mustnot be 0"
+		)}"""
+
+@JvmField val VkExternalMemoryImageCreateInfoNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV",
+			"{@code pNext} $must be $NULL",
+			"{@code handleTypes} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
+			"{@code handleTypes} $mustnot be 0"
+		)}"""
+
+@JvmField val VkFenceCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_FENCE_CREATE_INFO",
@@ -659,7 +704,7 @@ val VkFenceCreateInfo =
 			"{@code flags} $must be a valid combination of {@code VkFenceCreateFlagBits} values"
 		)}"""
 
-val VkFramebufferCreateInfo =
+@JvmField val VkFramebufferCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO",
@@ -703,7 +748,7 @@ val VkFramebufferCreateInfo =
 			"{@code layers} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferLayers}"
 		)}"""
 
-val VkGraphicsPipelineCreateInfo =
+@JvmField val VkGraphicsPipelineCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO",
@@ -868,7 +913,7 @@ val VkGraphicsPipelineCreateInfo =
 			"{@code subpass} $must be a valid subpass within {@code renderpass}"
 		)}"""
 
-val VkImageBlit =
+@JvmField val VkImageBlit =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code srcSubresource} $must be a valid ##VkImageSubresourceLayers structure",
@@ -908,7 +953,7 @@ val VkImageBlit =
 			"""
 		)}"""
 
-val VkImageCopy =
+@JvmField val VkImageCopy =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code srcSubresource} $must be a valid ##VkImageSubresourceLayers structure",
@@ -953,7 +998,7 @@ val VkImageCopy =
 			"""
 		)}"""
 
-val VkImageCreateInfo =
+@JvmField val VkImageCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_IMAGE_CREATE_INFO",
@@ -1140,7 +1185,7 @@ val VkImageCreateInfo =
 			"""
 		)}"""
 
-val VkImageMemoryBarrier =
+@JvmField val VkImageMemoryBarrier =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER",
@@ -1196,7 +1241,7 @@ val VkImageMemoryBarrier =
 			"""
 		)}"""
 
-val VkImageResolve =
+@JvmField val VkImageResolve =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code srcSubresource} $must be a valid ##VkImageSubresourceLayers structure",
@@ -1209,7 +1254,7 @@ val VkImageResolve =
 			"""
 		)}"""
 
-val VkImageSubresource =
+@JvmField val VkImageSubresource =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code aspectMask} $must be a valid combination of {@code VkImageAspectFlagBits} values",
@@ -1218,7 +1263,7 @@ val VkImageSubresource =
 			"{@code arrayLayer} $must be less than the {@code arrayLayers} specified in {@code VkImageCreateInfo} when the image was created"
 		)}"""
 
-val VkImageSubresourceLayers =
+@JvmField val VkImageSubresourceLayers =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code aspectMask} $must be a valid combination of {@code VkImageAspectFlagBits} values",
@@ -1232,7 +1277,7 @@ val VkImageSubresourceLayers =
 			"""
 		)}"""
 
-val VkImageSubresourceRange =
+@JvmField val VkImageSubresourceRange =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code aspectMask} $must be a valid combination of {@code VkImageAspectFlagBits} values",
@@ -1247,7 +1292,7 @@ val VkImageSubresourceRange =
 			"""
 		)}"""
 
-val VkImageViewCreateInfo =
+@JvmField val VkImageViewCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO",
@@ -1343,7 +1388,16 @@ val VkImageViewCreateInfo =
 			"{@code subResourceRange} and {@code viewType} $must be compatible with the image, as described in the compatibility table"
 		)}"""
 
-val VkInstanceCreateInfo =
+@JvmField val VkImportMemoryWin32HandleInfoNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV",
+			"{@code pNext} $must be $NULL",
+			"{@code handleType} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
+			"{@code handleType} $mustnot be 0"
+		)}"""
+
+@JvmField val VkInstanceCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_INSTANCE_CREATE_INFO",
@@ -1360,7 +1414,7 @@ val VkInstanceCreateInfo =
 			"""
 		)}"""
 
-val VkMappedMemoryRange =
+@JvmField val VkMappedMemoryRange =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_MAPPED_MEMORY_RANGE",
@@ -1376,7 +1430,7 @@ val VkMappedMemoryRange =
 			"If {@code size} is not equal to #WHOLE_SIZE, {@code size} $must be a multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}"
 		)}"""
 
-val VkMemoryAllocateInfo =
+@JvmField val VkMemoryAllocateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO",
@@ -1388,7 +1442,7 @@ val VkMemoryAllocateInfo =
 			"{@code allocationSize} $must be greater than 0"
 		)}"""
 
-val VkMemoryBarrier =
+@JvmField val VkMemoryBarrier =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_MEMORY_BARRIER",
@@ -1397,7 +1451,7 @@ val VkMemoryBarrier =
 			"{@code dstAccessMask} $must be a valid combination of {@code VkAccessFlagBits} values"
 		)}"""
 
-val VkMirSurfaceCreateInfoKHR =
+@JvmField val VkMirSurfaceCreateInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR",
@@ -1407,7 +1461,7 @@ val VkMirSurfaceCreateInfoKHR =
 			"{@code mirSurface} $must be a pointer to a {@code MirSurface} value"
 		)}"""
 
-val VkPhysicalDeviceFeatures =
+@JvmField val VkPhysicalDeviceFeatures =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"""
@@ -1416,7 +1470,7 @@ val VkPhysicalDeviceFeatures =
 			"""
 		)}"""
 
-val VkPipelineCacheCreateInfo =
+@JvmField val VkPipelineCacheCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO",
@@ -1430,7 +1484,7 @@ val VkPipelineCacheCreateInfo =
 			"If {@code initialDataSize} is not 0, {@code pInitialData} $must have been retrieved from a previous call to #GetPipelineCacheData()"
 		)}"""
 
-val VkPipelineColorBlendAttachmentState =
+@JvmField val VkPipelineColorBlendAttachmentState =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code srcColorBlendFactor} $must be a valid {@code VkBlendFactor} value",
@@ -1458,7 +1512,7 @@ val VkPipelineColorBlendAttachmentState =
 			"""
 		)}"""
 
-val VkPipelineColorBlendStateCreateInfo =
+@JvmField val VkPipelineColorBlendStateCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO",
@@ -1473,7 +1527,7 @@ val VkPipelineColorBlendStateCreateInfo =
 			"If {@code logicOpEnable} is #TRUE, {@code logicOp} $must be a valid {@code VkLogicOp} value"
 		)}"""
 
-val VkPipelineDepthStencilStateCreateInfo =
+@JvmField val VkPipelineDepthStencilStateCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO",
@@ -1485,7 +1539,7 @@ val VkPipelineDepthStencilStateCreateInfo =
 			"If the depth bounds testing feature is not enabled, {@code depthBoundsTestEnable} $must be #FALSE"
 		)}"""
 
-val VkPipelineDynamicStateCreateInfo =
+@JvmField val VkPipelineDynamicStateCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO",
@@ -1495,7 +1549,7 @@ val VkPipelineDynamicStateCreateInfo =
 			"{@code dynamicStateCount} $must be greater than 0"
 		)}"""
 
-val VkPipelineInputAssemblyStateCreateInfo =
+@JvmField val VkPipelineInputAssemblyStateCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO",
@@ -1515,7 +1569,7 @@ val VkPipelineInputAssemblyStateCreateInfo =
 			"If the tessellation shaders feature is not enabled, {@code topology} $mustnot be #PRIMITIVE_TOPOLOGY_PATCH_LIST"
 		)}"""
 
-val VkPipelineLayoutCreateInfo =
+@JvmField val VkPipelineLayoutCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO",
@@ -1556,7 +1610,7 @@ val VkPipelineLayoutCreateInfo =
 			"""
 		)}"""
 
-val VkPipelineMultisampleStateCreateInfo =
+@JvmField val VkPipelineMultisampleStateCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO",
@@ -1571,11 +1625,11 @@ val VkPipelineMultisampleStateCreateInfo =
 			"{@code minSampleShading} $must be in the range {@code [0,1]}"
 		)}"""
 
-val VkPipelineRasterizationStateCreateInfo =
+@JvmField val VkPipelineRasterizationStateCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO",
-			"{@code pNext} $must be $NULL",
+			"{@code pNext} $must be $NULL, or a pointer to a valid instance of {@code VkPipelineRasterizationStateRasterizationOrderAMD}",
 			"{@code flags} $must be 0",
 			"{@code polygonMode} $must be a valid {@code VkPolygonMode} value",
 			"{@code cullMode} $must be a valid combination of {@code VkCullModeFlagBits} values",
@@ -1584,7 +1638,15 @@ val VkPipelineRasterizationStateCreateInfo =
 			"If the non-solid fill modes feature is not enabled, {@code polygonMode} $must be #POLYGON_MODE_FILL"
 		)}"""
 
-val VkPipelineShaderStageCreateInfo =
+@JvmField val VkPipelineRasterizationStateRasterizationOrderAMD =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD",
+			"{@code pNext} $must be $NULL",
+			"{@code rasterizationOrder} $must be a valid {@code VkRasterizationOrderAMD} value"
+		)}"""
+
+@JvmField val VkPipelineShaderStageCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO",
@@ -1653,7 +1715,7 @@ val VkPipelineShaderStageCreateInfo =
 			"""
 		)}"""
 
-val VkPipelineTessellationStateCreateInfo =
+@JvmField val VkPipelineTessellationStateCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO",
@@ -1662,7 +1724,7 @@ val VkPipelineTessellationStateCreateInfo =
 			"{@code patchControlPoints} $must be greater than zero and less than or equal to ##VkPhysicalDeviceLimits{@code ::maxTessellationPatchSize}"
 		)}"""
 
-val VkPipelineVertexInputStateCreateInfo =
+@JvmField val VkPipelineVertexInputStateCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO",
@@ -1686,7 +1748,7 @@ val VkPipelineVertexInputStateCreateInfo =
 			"All elements of {@code pVertexAttributeDescriptions} $must describe distinct attribute locations"
 		)}"""
 
-val VkPipelineViewportStateCreateInfo =
+@JvmField val VkPipelineViewportStateCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO",
@@ -1701,7 +1763,7 @@ val VkPipelineViewportStateCreateInfo =
 			"{@code scissorCount} and {@code viewportCount} $must be identical"
 		)}"""
 
-val VkPresentInfoKHR =
+@JvmField val VkPresentInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_PRESENT_INFO_KHR",
@@ -1724,7 +1786,7 @@ val VkPresentInfoKHR =
 			"""
 		)}"""
 
-val VkPushConstantRange =
+@JvmField val VkPushConstantRange =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code stageFlags} $must be a valid combination of {@code VkShaderStageFlagBits} values",
@@ -1735,7 +1797,7 @@ val VkPushConstantRange =
 			"{@code size} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPushConstantsSize} minus {@code offset}"
 		)}"""
 
-val VkQueryPoolCreateInfo =
+@JvmField val VkQueryPoolCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO",
@@ -1749,7 +1811,7 @@ val VkQueryPoolCreateInfo =
 			"""
 		)}"""
 
-val VkRenderPassBeginInfo =
+@JvmField val VkRenderPassBeginInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO",
@@ -1764,7 +1826,7 @@ val VkRenderPassBeginInfo =
 			"""
 		)}"""
 
-val VkRenderPassCreateInfo =
+@JvmField val VkRenderPassCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO",
@@ -1798,7 +1860,7 @@ val VkRenderPassCreateInfo =
 			"The value of any element of the {@code pPreserveAttachments} member in any given element of {@code pSubpasses} $mustnot be #ATTACHMENT_UNUSED"
 		)}"""
 
-val VkSamplerCreateInfo =
+@JvmField val VkSamplerCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_SAMPLER_CREATE_INFO",
@@ -1830,13 +1892,14 @@ val VkSamplerCreateInfo =
 			be a valid {@code VkBorderColor} value
 			""",
 			"""
-			If the VK_KHR_mirror_clamp_to_edge extension is not enabled, {@code addressModeU}, {@code addressModeV} and {@code addressModeW} $mustnot be
-			#SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE
+			If the {@code VK_KHR_sampler_mirror_clamp_to_edge} extension is not enabled, {@code addressModeU}, {@code addressModeV} and {@code addressModeW}
+			$mustnot be #SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE
 			""",
-			"If {@code compareEnable} is #TRUE, {@code compareOp} $must be a valid {@code VkCompareOp} value"
+			"If {@code compareEnable} is #TRUE, {@code compareOp} $must be a valid {@code VkCompareOp} value",
+			"If either {@code magFilter} or {@code minFilter} is #FILTER_CUBIC_IMG, {@code anisotropyEnable} $must be #FALSE"
 		)}"""
 
-val VkSemaphoreCreateInfo =
+@JvmField val VkSemaphoreCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO",
@@ -1844,7 +1907,7 @@ val VkSemaphoreCreateInfo =
 			"{@code flags} $must be 0"
 		)}"""
 
-val VkShaderModuleCreateInfo =
+@JvmField val VkShaderModuleCreateInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO",
@@ -1852,13 +1915,20 @@ val VkShaderModuleCreateInfo =
 			"{@code flags} $must be 0",
 			"{@code pCode} $must be a pointer to an array of {@code codeSize / 4} {@code uint32_t} values",
 			"{@code codeSize} $must be greater than 0",
-			"{@code codeSize} $must be a multiple of 4",
 			"""
-			{@code pCode} $must point to valid SPIR-V code, formatted and packed as described by
-			https://www.khronos.org/registry/spir-v/specs/1.0/SPIRV.html[the SPIR-V Specification v1.0]
+			{@code codeSize} $must be a multiple of 4. If the +VK_NV_glsl_shader extension+ is enabled and {@code pCode} references GLSL code {@code codeSize}
+			can be a multiple of 1
 			""",
-			"{@code pCode} $must adhere to the validation rules described by the Validation Rules within a Module section of the SPIR-V Environment appendix",
-			"{@code pCode} $must declare the {@code Shader} capability",
+			"""
+			{@code pCode} $must point to valid SPIR-V code, formatted and packed. If the {@code VK_NV_glsl_shader} extension is enabled {@code pCode} can
+			instead reference valid GLSL code and $must be written to the {@code GL_KHR_vulkan_glsl} extension specification
+			""",
+			"""
+			{@code pCode} $must adhere to the validation rules described by the Validation Rules within a Module section of the SPIR-V Environment appendix. If
+			the {@code VK_NV_glsl_shader} extension is enabled {@code pCode} can be valid GLSL code with respect to the {@code GL_KHR_vulkan_glsl} GLSL
+			extension specification
+			""",
+			"{@code pCode} $must declare the {@code Shader} capability for SPIR-V code",
 			"""
 			{@code pCode} $mustnot declare any capability that is not supported by the API, as described by the Capabilities section of the SPIR-V Environment
 			appendix
@@ -1869,7 +1939,7 @@ val VkShaderModuleCreateInfo =
 			"""
 		)}"""
 
-val VkSparseBufferMemoryBindInfo =
+@JvmField val VkSparseBufferMemoryBindInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code buffer} $must be a valid {@code VkBuffer} handle",
@@ -1877,7 +1947,7 @@ val VkSparseBufferMemoryBindInfo =
 			"{@code bindCount} $must be greater than 0"
 		)}"""
 
-val VkSparseImageMemoryBind =
+@JvmField val VkSparseImageMemoryBind =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code subresource} $must be a valid ##VkImageSubresource structure",
@@ -1913,7 +1983,7 @@ val VkSparseImageMemoryBind =
 			"""
 		)}"""
 
-val VkSparseImageMemoryBindInfo =
+@JvmField val VkSparseImageMemoryBindInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code image} $must be a valid {@code VkImage} handle",
@@ -1921,7 +1991,7 @@ val VkSparseImageMemoryBindInfo =
 			"{@code bindCount} $must be greater than 0"
 		)}"""
 
-val VkSparseImageOpaqueMemoryBindInfo =
+@JvmField val VkSparseImageOpaqueMemoryBindInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code image} $must be a valid {@code VkImage} handle",
@@ -1933,7 +2003,7 @@ val VkSparseImageOpaqueMemoryBindInfo =
 			"""
 		)}"""
 
-val VkSparseMemoryBind =
+@JvmField val VkSparseMemoryBind =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"If {@code memory} is not #NULL_HANDLE, {@code memory} $must be a valid {@code VkDeviceMemory} handle",
@@ -1950,7 +2020,7 @@ val VkSparseMemoryBind =
 			"{@code size} $must be less than or equal to the size of {@code memory} minus {@code memoryOffset}"
 		)}"""
 
-val VkSpecializationInfo =
+@JvmField val VkSpecializationInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"""
@@ -1962,7 +2032,7 @@ val VkSpecializationInfo =
 			"For any given element of {@code pMapEntries}, {@code size} $must be less than or equal to {@code dataSize} minus {@code offset}"
 		)}"""
 
-val VkSpecializationMapEntry =
+@JvmField val VkSpecializationMapEntry =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"""
@@ -1971,7 +2041,7 @@ val VkSpecializationMapEntry =
 			"""
 		)}"""
 
-val VkStencilOpState =
+@JvmField val VkStencilOpState =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code failOp} $must be a valid {@code VkStencilOp} value",
@@ -1980,7 +2050,7 @@ val VkStencilOpState =
 			"{@code compareOp} $must be a valid {@code VkCompareOp} value"
 		)}"""
 
-val VkSubmitInfo =
+@JvmField val VkSubmitInfo =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_SUBMIT_INFO",
@@ -2047,7 +2117,7 @@ val VkSubmitInfo =
 			"""
 		)}"""
 
-val VkSubpassDependency =
+@JvmField val VkSubpassDependency =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code srcStageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
@@ -2085,7 +2155,7 @@ val VkSubpassDependency =
 			"""
 		)}"""
 
-val VkSubpassDescription =
+@JvmField val VkSubpassDescription =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code flags} $must be 0",
@@ -2135,7 +2205,7 @@ val VkSubpassDescription =
 			"If any attachment is used as both an input attachment and a color or depth/stencil attachment, then each use $must use the same {@code layout}"
 		)}"""
 
-val VkSurfaceCapabilitiesKHR =
+@JvmField val VkSurfaceCapabilitiesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code supportedTransforms} $must be a valid combination of {@code VkSurfaceTransformFlagBitsKHR} values",
@@ -2144,14 +2214,14 @@ val VkSurfaceCapabilitiesKHR =
 			"{@code supportedUsageFlags} $must be a valid combination of {@code VkImageUsageFlagBits} values"
 		)}"""
 
-val VkSurfaceFormatKHR =
+@JvmField val VkSurfaceFormatKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code format} $must be a valid {@code VkFormat} value",
 			"{@code colorSpace} $must be a valid {@code VkColorSpaceKHR} value"
 		)}"""
 
-val VkSwapchainCreateInfoKHR =
+@JvmField val VkSwapchainCreateInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR",
@@ -2214,7 +2284,7 @@ val VkSwapchainCreateInfoKHR =
 			"{@code presentMode} $must be one of the ename:VkPresentModeKHR values returned by #GetPhysicalDeviceSurfacePresentModesKHR() for the surface"
 		)}"""
 
-val VkVertexInputAttributeDescription =
+@JvmField val VkVertexInputAttributeDescription =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code format} $must be a valid {@code VkFormat} value",
@@ -2227,7 +2297,7 @@ val VkVertexInputAttributeDescription =
 			"""
 		)}"""
 
-val VkVertexInputBindingDescription =
+@JvmField val VkVertexInputBindingDescription =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code inputRate} $must be a valid {@code VkVertexInputRate} value",
@@ -2235,7 +2305,7 @@ val VkVertexInputBindingDescription =
 			"{@code stride} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindingStride}"
 		)}"""
 
-val VkViewport =
+@JvmField val VkViewport =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code width} $must be greater than {@code 0.0} and less than or equal to ##VkPhysicalDeviceLimits{@code ::maxViewportDimensions}[0]",
@@ -2247,7 +2317,7 @@ val VkViewport =
 			"{@code maxDepth} $must be between {@code 0.0} and {@code 1.0}, inclusive"
 		)}"""
 
-val VkWaylandSurfaceCreateInfoKHR =
+@JvmField val VkWaylandSurfaceCreateInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR",
@@ -2257,7 +2327,20 @@ val VkWaylandSurfaceCreateInfoKHR =
 			"{@code surface} $must be a pointer to a {@code wl_surface} value"
 		)}"""
 
-val VkWin32SurfaceCreateInfoKHR =
+@JvmField val VkWin32KeyedMutexAcquireReleaseInfoNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV",
+			"{@code pNext} $must be $NULL",
+			"{@code pAcquireSyncs} $must be a pointer to a valid {@code VkDeviceMemory} handle",
+			"{@code pAcquireKeys} $must be a pointer to a valid {@code uint64_t} value",
+			"{@code pAcquireTimeoutMilliseconds} $must be a pointer to a valid {@code uint32_t} value",
+			"{@code pReleaseSyncs} $must be a pointer to a valid {@code VkDeviceMemory} handle",
+			"{@code pReleaseKeys} $must be a pointer to a valid {@code uint64_t} value",
+			"Both of {@code pAcquireSyncs}, and {@code pReleaseSyncs} $must have been created, allocated, or retrieved from the same {@code VkDevice}"
+		)}"""
+
+@JvmField val VkWin32SurfaceCreateInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR",
@@ -2265,7 +2348,7 @@ val VkWin32SurfaceCreateInfoKHR =
 			"{@code flags} $must be 0"
 		)}"""
 
-val VkWriteDescriptorSet =
+@JvmField val VkWriteDescriptorSet =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET",
@@ -2347,7 +2430,7 @@ val VkWriteDescriptorSet =
 			"""
 		)}"""
 
-val VkXcbSurfaceCreateInfoKHR =
+@JvmField val VkXcbSurfaceCreateInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR",
@@ -2356,7 +2439,7 @@ val VkXcbSurfaceCreateInfoKHR =
 			"{@code connection} $must be a pointer to a {@code xcb_connection_t} value"
 		)}"""
 
-val VkXlibSurfaceCreateInfoKHR =
+@JvmField val VkXlibSurfaceCreateInfoKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code sType} $must be #STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR",

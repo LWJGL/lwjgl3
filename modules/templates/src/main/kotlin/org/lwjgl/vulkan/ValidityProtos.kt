@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 object ValidityProtos {
 
-val vkAcquireNextImageKHR =
+@JvmField val vkAcquireNextImageKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -33,7 +33,7 @@ val vkAcquireNextImageKHR =
 			"Host access to {@code fence} $must be externally synchronized"
 		)}"""
 
-val vkAllocateCommandBuffers =
+@JvmField val vkAllocateCommandBuffers =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -46,7 +46,7 @@ val vkAllocateCommandBuffers =
 			"Host access to {@code pAllocateInfo}->commandPool $must be externally synchronized"
 		)}"""
 
-val vkAllocateDescriptorSets =
+@JvmField val vkAllocateDescriptorSets =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -59,7 +59,7 @@ val vkAllocateDescriptorSets =
 			"Host access to {@code pAllocateInfo}->descriptorPool $must be externally synchronized"
 		)}"""
 
-val vkAllocateMemory =
+@JvmField val vkAllocateMemory =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -72,7 +72,7 @@ val vkAllocateMemory =
 			"""
 		)}"""
 
-val vkBeginCommandBuffer =
+@JvmField val vkBeginCommandBuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -99,7 +99,7 @@ val vkBeginCommandBuffer =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkBindBufferMemory =
+@JvmField val vkBindBufferMemory =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -149,7 +149,7 @@ val vkBindBufferMemory =
 			"Host access to {@code buffer} $must be externally synchronized"
 		)}"""
 
-val vkBindImageMemory =
+@JvmField val vkBindImageMemory =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -187,7 +187,7 @@ val vkBindImageMemory =
 			"Host access to {@code image} $must be externally synchronized"
 		)}"""
 
-val vkCmdBeginQuery =
+@JvmField val vkCmdBeginQuery =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -226,7 +226,7 @@ val vkCmdBeginQuery =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdBeginRenderPass =
+@JvmField val vkCmdBeginRenderPass =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -281,7 +281,7 @@ val vkCmdBeginRenderPass =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdBindDescriptorSets =
+@JvmField val vkCmdBindDescriptorSets =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -318,7 +318,7 @@ val vkCmdBindDescriptorSets =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdBindIndexBuffer =
+@JvmField val vkCmdBindIndexBuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -340,7 +340,7 @@ val vkCmdBindIndexBuffer =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdBindPipeline =
+@JvmField val vkCmdBindPipeline =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -371,7 +371,7 @@ val vkCmdBindPipeline =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdBindVertexBuffers =
+@JvmField val vkCmdBindVertexBuffers =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -394,7 +394,7 @@ val vkCmdBindVertexBuffers =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdBlitImage =
+@JvmField val vkCmdBlitImage =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -457,7 +457,13 @@ val vkCmdBlitImage =
 			If {@code filter} is #FILTER_LINEAR, {@code srcImage} $must be of a format which supports linear filtering, as specified by the
 			#FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
 			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
 			"""
+			If {@code filter} is #FILTER_CUBIC_IMG, {@code srcImage} $must be of a format which supports cubic filtering, as specified by the
+			#FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
+			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"If {@code filter} is #FILTER_CUBIC_IMG, {@code srcImage} $must have a {@code VkImageType} of #IMAGE_TYPE_3D"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -465,7 +471,7 @@ val vkCmdBlitImage =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdClearAttachments =
+@JvmField val vkCmdClearAttachments =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -491,7 +497,7 @@ val vkCmdClearAttachments =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdClearColorImage =
+@JvmField val vkCmdClearColorImage =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -519,7 +525,7 @@ val vkCmdClearColorImage =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdClearDepthStencilImage =
+@JvmField val vkCmdClearDepthStencilImage =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -547,7 +553,7 @@ val vkCmdClearDepthStencilImage =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdCopyBuffer =
+@JvmField val vkCmdCopyBuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -584,7 +590,7 @@ val vkCmdCopyBuffer =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdCopyBufferToImage =
+@JvmField val vkCmdCopyBufferToImage =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -621,7 +627,7 @@ val vkCmdCopyBufferToImage =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdCopyImage =
+@JvmField val vkCmdCopyImage =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -665,7 +671,7 @@ val vkCmdCopyImage =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdCopyImageToBuffer =
+@JvmField val vkCmdCopyImageToBuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -702,7 +708,7 @@ val vkCmdCopyImageToBuffer =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdCopyQueryPoolResults =
+@JvmField val vkCmdCopyQueryPoolResults =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -731,21 +737,21 @@ val vkCmdCopyQueryPoolResults =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdDebugMarkerBeginEXT =
+@JvmField val vkCmdDebugMarkerBeginEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code pMarkerInfo} $must be a pointer to a ##VkDebugMarkerMarkerInfoEXT structure",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations"
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations"
 		)}"""
 
-val vkCmdDebugMarkerEndEXT =
+@JvmField val vkCmdDebugMarkerEndEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"""
 			There $must be an outstanding #CmdDebugMarkerBeginEXT() command prior to the #CmdDebugMarkerEndEXT() on the queue that {@code commandBuffer} is
 			submitted to.
@@ -756,16 +762,16 @@ val vkCmdDebugMarkerEndEXT =
 			"""
 		)}"""
 
-val vkCmdDebugMarkerInsertEXT =
+@JvmField val vkCmdDebugMarkerInsertEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code pMarkerInfo} $must be a pointer to a ##VkDebugMarkerMarkerInfoEXT structure",
 			"{@code commandBuffer} $must be in the recording state",
-			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics or compute operations"
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations"
 		)}"""
 
-val vkCmdDispatch =
+@JvmField val vkCmdDispatch =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -819,6 +825,15 @@ val vkCmdDispatch =
 			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
 			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
 			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must be of a format which supports cubic filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image)
+			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
 
@@ -827,7 +842,7 @@ val vkCmdDispatch =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdDispatchIndirect =
+@JvmField val vkCmdDispatchIndirect =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -883,6 +898,15 @@ val vkCmdDispatchIndirect =
 			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
 			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
 			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must be of a format which supports cubic filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image)
+			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
 
@@ -891,7 +915,7 @@ val vkCmdDispatchIndirect =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdDraw =
+@JvmField val vkCmdDraw =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -951,6 +975,15 @@ val vkCmdDraw =
 			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
 			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
 			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must be of a format which supports cubic filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image)
+			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
 
@@ -959,7 +992,7 @@ val vkCmdDraw =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdDrawIndexed =
+@JvmField val vkCmdDrawIndexed =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1024,6 +1057,15 @@ val vkCmdDrawIndexed =
 			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
 			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
 			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must be of a format which supports cubic filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image)
+			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
 
@@ -1032,7 +1074,7 @@ val vkCmdDrawIndexed =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdDrawIndexedIndirect =
+@JvmField val vkCmdDrawIndexedIndirect =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1112,6 +1154,15 @@ val vkCmdDrawIndexedIndirect =
 			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
 			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
 			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must be of a format which supports cubic filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image)
+			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
 
@@ -1120,7 +1171,100 @@ val vkCmdDrawIndexedIndirect =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdDrawIndirect =
+@JvmField val vkCmdDrawIndexedIndirectCountAMD =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code buffer} $must be a valid {@code VkBuffer} handle",
+			"{@code countBuffer} $must be a valid {@code VkBuffer} handle",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"This command $must only be called inside of a render pass instance",
+			"""
+			Each of {@code buffer}, {@code commandBuffer}, and {@code countBuffer} $must have been created, allocated, or retrieved from the same
+			{@code VkDevice}
+			""",
+			"{@code offset} $must be a multiple of 4",
+			"{@code countBufferOffset} $must be a multiple of 4",
+			"{@code stride} $must be a multiple of 4 and $must be greater than or equal to sizeof({@code VkDrawIndirectCommand})",
+			"""
+			If {@code maxDrawCount} is greater than or equal to 1, ({@code stride} x ({@code maxDrawCount} - 1) + {@code offset} +
+			sizeof({@code VkDrawIndirectCommand})) $must be less than or equal to the size of {@code buffer}
+			""",
+			"""
+			If the drawIndirectFirstInstance feature is not enabled, all the {@code firstInstance} members of the ##VkDrawIndexedIndirectCommand structures
+			accessed by this command $must be 0
+			""",
+			"""
+			For each set {@code n} that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a descriptor set $must
+			have been bound to {@code n} at #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for set {@code n}, with the
+			{@code VkPipelineLayout} used to create the current {@code VkPipeline}
+			""",
+			"""
+			For each push constant that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a push constant value
+			$must have been set for #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for push constants, with the
+			{@code VkPipelineLayout} used to create the current {@code VkPipeline}
+			""",
+			"""
+			Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), $must be valid if they are statically used by the currently bound
+			{@code VkPipeline} object, specified via #CmdBindPipeline()
+			""",
+			"""
+			All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point's interface $must have valid buffers bound
+			""",
+			"A valid graphics pipeline $must be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS",
+			"""
+			If the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state $must have been set on the
+			current command buffer
+			""",
+			"""
+			If count stored in {@code countBuffer} is equal to 1, ({@code offset} + sizeof({@code VkDrawIndexedIndirectCommand})) $must be less than or equal
+			to the size of {@code buffer}
+			""",
+			"""
+			If count stored in {@code countBuffer} is greater than 1, ({@code stride} x ({@code drawCount} - 1) + {@code offset} +
+			sizeof({@code VkDrawIndexedIndirectCommand})) $must be less than or equal to the size of {@code buffer}
+			""",
+			"{@code drawCount} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDrawIndirectCount}",
+			"Every input attachment used by the current subpass $must be bound to the pipeline via a descriptor set",
+			"""
+			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
+			unnormalized coordinates, it $mustnot be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
+			#IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage
+			""",
+			"""
+			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
+			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
+			{@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage
+			""",
+			"""
+			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
+			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
+			includes a lod bias or any offset values, in any shader stage
+			""",
+			"""
+			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			bound descriptor set
+			""",
+			"""
+			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			bound descriptor set
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
+			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			"""
+		)}
+
+		<h5>Host Synchronization</h5>
+		${ul(
+			"Host access to {@code commandBuffer} $must be externally synchronized"
+		)}"""
+
+@JvmField val vkCmdDrawIndirect =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1200,6 +1344,15 @@ val vkCmdDrawIndirect =
 			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
 			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
 			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must be of a format which supports cubic filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image)
+			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
 
@@ -1208,7 +1361,100 @@ val vkCmdDrawIndirect =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdEndQuery =
+@JvmField val vkCmdDrawIndirectCountAMD =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
+			"{@code buffer} $must be a valid {@code VkBuffer} handle",
+			"{@code countBuffer} $must be a valid {@code VkBuffer} handle",
+			"{@code commandBuffer} $must be in the recording state",
+			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
+			"This command $must only be called inside of a render pass instance",
+			"""
+			Each of {@code buffer}, {@code commandBuffer}, and {@code countBuffer} $must have been created, allocated, or retrieved from the same
+			{@code VkDevice}
+			""",
+			"{@code offset} $must be a multiple of 4",
+			"{@code countBufferOffset} $must be a multiple of 4",
+			"{@code stride} $must be a multiple of 4 and $must be greater than or equal to sizeof({@code VkDrawIndirectCommand})",
+			"""
+			If {@code maxDrawCount} is greater than or equal to 1, ({@code stride} x ({@code maxDrawCount} - 1) + {@code offset} +
+			sizeof({@code VkDrawIndirectCommand})) $must be less than or equal to the size of {@code buffer}
+			""",
+			"""
+			If the drawIndirectFirstInstance feature is not enabled, all the {@code firstInstance} members of the ##VkDrawIndirectCommand structures accessed
+			by this command $must be 0
+			""",
+			"""
+			For each set {@code n} that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a descriptor set $must
+			have been bound to {@code n} at #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for set {@code n}, with the
+			{@code VkPipelineLayout} used to create the current {@code VkPipeline}
+			""",
+			"""
+			For each push constant that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a push constant value
+			$must have been set for #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for push constants, with the
+			{@code VkPipelineLayout} used to create the current {@code VkPipeline}
+			""",
+			"""
+			Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), $must be valid if they are statically used by the currently bound
+			{@code VkPipeline} object, specified via #CmdBindPipeline()
+			""",
+			"""
+			All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point's interface $must have valid buffers bound
+			""",
+			"A valid graphics pipeline $must be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS",
+			"""
+			If the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state $must have been set on the
+			current command buffer
+			""",
+			"""
+			If the count stored in {@code countBuffer} is equal to 1, ({@code offset} + sizeof({@code VkDrawIndirectCommand})) $must be less than or equal to
+			the size of {@code buffer}
+			""",
+			"""
+			If the count stored in {@code countBuffer} is greater than 1, ({@code stride} x ({@code drawCount} - 1) + {@code offset} +
+			sizeof({@code VkDrawIndirectCommand})) $must be less than or equal to the size of {@code buffer}
+			""",
+			"The count stored in {@code countBuffer} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDrawIndirectCount}",
+			"Every input attachment used by the current subpass $must be bound to the pipeline via a descriptor set",
+			"""
+			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
+			unnormalized coordinates, it $mustnot be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
+			#IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage
+			""",
+			"""
+			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
+			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
+			{@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage
+			""",
+			"""
+			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
+			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
+			includes a lod bias or any offset values, in any shader stage
+			""",
+			"""
+			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			bound descriptor set
+			""",
+			"""
+			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			bound descriptor set
+			""",
+			"""
+			Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command $must be of a format which supports linear filtering, as
+			specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or
+			##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
+			"""
+		)}
+
+		<h5>Host Synchronization</h5>
+		${ul(
+			"Host access to {@code commandBuffer} $must be externally synchronized"
+		)}"""
+
+@JvmField val vkCmdEndQuery =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1225,7 +1471,7 @@ val vkCmdEndQuery =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdEndRenderPass =
+@JvmField val vkCmdEndRenderPass =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1241,7 +1487,7 @@ val vkCmdEndRenderPass =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdExecuteCommands =
+@JvmField val vkCmdExecuteCommands =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1315,7 +1561,7 @@ val vkCmdExecuteCommands =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdFillBuffer =
+@JvmField val vkCmdFillBuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1337,7 +1583,7 @@ val vkCmdFillBuffer =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdNextSubpass =
+@JvmField val vkCmdNextSubpass =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1354,7 +1600,7 @@ val vkCmdNextSubpass =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdPipelineBarrier =
+@JvmField val vkCmdPipelineBarrier =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1419,7 +1665,7 @@ val vkCmdPipelineBarrier =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdPushConstants =
+@JvmField val vkCmdPushConstants =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1443,7 +1689,7 @@ val vkCmdPushConstants =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdResetEvent =
+@JvmField val vkCmdResetEvent =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1467,7 +1713,7 @@ val vkCmdResetEvent =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdResetQueryPool =
+@JvmField val vkCmdResetQueryPool =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1485,7 +1731,7 @@ val vkCmdResetQueryPool =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdResolveImage =
+@JvmField val vkCmdResolveImage =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1537,7 +1783,7 @@ val vkCmdResolveImage =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdSetBlendConstants =
+@JvmField val vkCmdSetBlendConstants =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1551,7 +1797,7 @@ val vkCmdSetBlendConstants =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdSetDepthBias =
+@JvmField val vkCmdSetDepthBias =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1566,7 +1812,7 @@ val vkCmdSetDepthBias =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdSetDepthBounds =
+@JvmField val vkCmdSetDepthBounds =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1582,7 +1828,7 @@ val vkCmdSetDepthBounds =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdSetEvent =
+@JvmField val vkCmdSetEvent =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1605,7 +1851,7 @@ val vkCmdSetEvent =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdSetLineWidth =
+@JvmField val vkCmdSetLineWidth =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1620,7 +1866,7 @@ val vkCmdSetLineWidth =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdSetScissor =
+@JvmField val vkCmdSetScissor =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1641,7 +1887,7 @@ val vkCmdSetScissor =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdSetStencilCompareMask =
+@JvmField val vkCmdSetStencilCompareMask =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1657,7 +1903,7 @@ val vkCmdSetStencilCompareMask =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdSetStencilReference =
+@JvmField val vkCmdSetStencilReference =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1673,7 +1919,7 @@ val vkCmdSetStencilReference =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdSetStencilWriteMask =
+@JvmField val vkCmdSetStencilWriteMask =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1689,7 +1935,7 @@ val vkCmdSetStencilWriteMask =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdSetViewport =
+@JvmField val vkCmdSetViewport =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1707,7 +1953,7 @@ val vkCmdSetViewport =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdUpdateBuffer =
+@JvmField val vkCmdUpdateBuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1731,7 +1977,7 @@ val vkCmdUpdateBuffer =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdWaitEvents =
+@JvmField val vkCmdWaitEvents =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1783,7 +2029,7 @@ val vkCmdWaitEvents =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCmdWriteTimestamp =
+@JvmField val vkCmdWriteTimestamp =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -1801,7 +2047,7 @@ val vkCmdWriteTimestamp =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkCreateAndroidSurfaceKHR =
+@JvmField val vkCreateAndroidSurfaceKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -1810,7 +2056,7 @@ val vkCreateAndroidSurfaceKHR =
 			"{@code pSurface} $must be a pointer to a {@code VkSurfaceKHR} handle"
 		)}"""
 
-val vkCreateBuffer =
+@JvmField val vkCreateBuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1824,7 +2070,7 @@ val vkCreateBuffer =
 			"""
 		)}"""
 
-val vkCreateBufferView =
+@JvmField val vkCreateBufferView =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1833,7 +2079,7 @@ val vkCreateBufferView =
 			"{@code pView} $must be a pointer to a {@code VkBufferView} handle"
 		)}"""
 
-val vkCreateCommandPool =
+@JvmField val vkCreateCommandPool =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1842,7 +2088,7 @@ val vkCreateCommandPool =
 			"{@code pCommandPool} $must be a pointer to a {@code VkCommandPool} handle"
 		)}"""
 
-val vkCreateComputePipelines =
+@JvmField val vkCreateComputePipelines =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1859,7 +2105,7 @@ val vkCreateComputePipelines =
 			"""
 		)}"""
 
-val vkCreateDebugReportCallbackEXT =
+@JvmField val vkCreateDebugReportCallbackEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -1868,7 +2114,7 @@ val vkCreateDebugReportCallbackEXT =
 			"{@code pCallback} $must be a pointer to a {@code VkDebugReportCallbackEXT} handle"
 		)}"""
 
-val vkCreateDescriptorPool =
+@JvmField val vkCreateDescriptorPool =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1877,7 +2123,7 @@ val vkCreateDescriptorPool =
 			"{@code pDescriptorPool} $must be a pointer to a {@code VkDescriptorPool} handle"
 		)}"""
 
-val vkCreateDescriptorSetLayout =
+@JvmField val vkCreateDescriptorSetLayout =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1886,7 +2132,7 @@ val vkCreateDescriptorSetLayout =
 			"{@code pSetLayout} $must be a pointer to a {@code VkDescriptorSetLayout} handle"
 		)}"""
 
-val vkCreateDevice =
+@JvmField val vkCreateDevice =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -1895,7 +2141,7 @@ val vkCreateDevice =
 			"{@code pDevice} $must be a pointer to a {@code VkDevice} handle"
 		)}"""
 
-val vkCreateDisplayModeKHR =
+@JvmField val vkCreateDisplayModeKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -1910,7 +2156,7 @@ val vkCreateDisplayModeKHR =
 			"Host access to {@code display} $must be externally synchronized"
 		)}"""
 
-val vkCreateDisplayPlaneSurfaceKHR =
+@JvmField val vkCreateDisplayPlaneSurfaceKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -1919,7 +2165,7 @@ val vkCreateDisplayPlaneSurfaceKHR =
 			"{@code pSurface} $must be a pointer to a {@code VkSurfaceKHR} handle"
 		)}"""
 
-val vkCreateEvent =
+@JvmField val vkCreateEvent =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1928,7 +2174,7 @@ val vkCreateEvent =
 			"{@code pEvent} $must be a pointer to a {@code VkEvent} handle"
 		)}"""
 
-val vkCreateFence =
+@JvmField val vkCreateFence =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1937,7 +2183,7 @@ val vkCreateFence =
 			"{@code pFence} $must be a pointer to a {@code VkFence} handle"
 		)}"""
 
-val vkCreateFramebuffer =
+@JvmField val vkCreateFramebuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1946,7 +2192,7 @@ val vkCreateFramebuffer =
 			"{@code pFramebuffer} $must be a pointer to a {@code VkFramebuffer} handle"
 		)}"""
 
-val vkCreateGraphicsPipelines =
+@JvmField val vkCreateGraphicsPipelines =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1963,7 +2209,7 @@ val vkCreateGraphicsPipelines =
 			"""
 		)}"""
 
-val vkCreateImage =
+@JvmField val vkCreateImage =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1977,7 +2223,7 @@ val vkCreateImage =
 			"""
 		)}"""
 
-val vkCreateImageView =
+@JvmField val vkCreateImageView =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -1986,7 +2232,7 @@ val vkCreateImageView =
 			"{@code pView} $must be a pointer to a {@code VkImageView} handle"
 		)}"""
 
-val vkCreateInstance =
+@JvmField val vkCreateInstance =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code pCreateInfo} $must be a pointer to a valid ##VkInstanceCreateInfo structure",
@@ -1994,7 +2240,7 @@ val vkCreateInstance =
 			"{@code pInstance} $must be a pointer to a {@code VkInstance} handle"
 		)}"""
 
-val vkCreateMirSurfaceKHR =
+@JvmField val vkCreateMirSurfaceKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -2003,7 +2249,7 @@ val vkCreateMirSurfaceKHR =
 			"{@code pSurface} $must be a pointer to a {@code VkSurfaceKHR} handle"
 		)}"""
 
-val vkCreatePipelineCache =
+@JvmField val vkCreatePipelineCache =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2012,7 +2258,7 @@ val vkCreatePipelineCache =
 			"{@code pPipelineCache} $must be a pointer to a {@code VkPipelineCache} handle"
 		)}"""
 
-val vkCreatePipelineLayout =
+@JvmField val vkCreatePipelineLayout =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2021,7 +2267,7 @@ val vkCreatePipelineLayout =
 			"{@code pPipelineLayout} $must be a pointer to a {@code VkPipelineLayout} handle"
 		)}"""
 
-val vkCreateQueryPool =
+@JvmField val vkCreateQueryPool =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2030,7 +2276,7 @@ val vkCreateQueryPool =
 			"{@code pQueryPool} $must be a pointer to a {@code VkQueryPool} handle"
 		)}"""
 
-val vkCreateRenderPass =
+@JvmField val vkCreateRenderPass =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2039,7 +2285,7 @@ val vkCreateRenderPass =
 			"{@code pRenderPass} $must be a pointer to a {@code VkRenderPass} handle"
 		)}"""
 
-val vkCreateSampler =
+@JvmField val vkCreateSampler =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2048,7 +2294,7 @@ val vkCreateSampler =
 			"{@code pSampler} $must be a pointer to a {@code VkSampler} handle"
 		)}"""
 
-val vkCreateSemaphore =
+@JvmField val vkCreateSemaphore =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2057,7 +2303,7 @@ val vkCreateSemaphore =
 			"{@code pSemaphore} $must be a pointer to a {@code VkSemaphore} handle"
 		)}"""
 
-val vkCreateShaderModule =
+@JvmField val vkCreateShaderModule =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2066,7 +2312,7 @@ val vkCreateShaderModule =
 			"{@code pShaderModule} $must be a pointer to a {@code VkShaderModule} handle"
 		)}"""
 
-val vkCreateSharedSwapchainsKHR =
+@JvmField val vkCreateSharedSwapchainsKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2082,7 +2328,7 @@ val vkCreateSharedSwapchainsKHR =
 			"Host access to {@code pCreateInfos}[].oldSwapchain $must be externally synchronized"
 		)}"""
 
-val vkCreateSwapchainKHR =
+@JvmField val vkCreateSwapchainKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2097,7 +2343,7 @@ val vkCreateSwapchainKHR =
 			"Host access to {@code pCreateInfo.oldSwapchain} $must be externally synchronized"
 		)}"""
 
-val vkCreateWaylandSurfaceKHR =
+@JvmField val vkCreateWaylandSurfaceKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -2106,7 +2352,7 @@ val vkCreateWaylandSurfaceKHR =
 			"{@code pSurface} $must be a pointer to a {@code VkSurfaceKHR} handle"
 		)}"""
 
-val vkCreateWin32SurfaceKHR =
+@JvmField val vkCreateWin32SurfaceKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -2115,7 +2361,7 @@ val vkCreateWin32SurfaceKHR =
 			"{@code pSurface} $must be a pointer to a {@code VkSurfaceKHR} handle"
 		)}"""
 
-val vkCreateXcbSurfaceKHR =
+@JvmField val vkCreateXcbSurfaceKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -2124,7 +2370,7 @@ val vkCreateXcbSurfaceKHR =
 			"{@code pSurface} $must be a pointer to a {@code VkSurfaceKHR} handle"
 		)}"""
 
-val vkCreateXlibSurfaceKHR =
+@JvmField val vkCreateXlibSurfaceKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -2133,7 +2379,7 @@ val vkCreateXlibSurfaceKHR =
 			"{@code pSurface} $must be a pointer to a {@code VkSurfaceKHR} handle"
 		)}"""
 
-val vkDebugMarkerSetObjectNameEXT =
+@JvmField val vkDebugMarkerSetObjectNameEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2146,7 +2392,7 @@ val vkDebugMarkerSetObjectNameEXT =
 			"Host access to {@code pNameInfo.object} $must be externally synchronized"
 		)}"""
 
-val vkDebugMarkerSetObjectTagEXT =
+@JvmField val vkDebugMarkerSetObjectTagEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2160,7 +2406,7 @@ val vkDebugMarkerSetObjectTagEXT =
 			"Host access to {@code pTagInfo.object} $must be externally synchronized"
 		)}"""
 
-val vkDebugReportMessageEXT =
+@JvmField val vkDebugReportMessageEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -2170,14 +2416,14 @@ val vkDebugReportMessageEXT =
 			"{@code pLayerPrefix} $must be a pointer to a valid ",
 			"{@code pMessage} $must be a pointer to a valid ",
 			"{@code instance} $must be a valid {@code VkInstance} handle",
-			"{@code flags} must be a combination of one or more of {@code VkDebugReportFlagBitsEXT}",
-			"{@code objType} must be one of {@code VkDebugReportObjectTypeEXT}, #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT if {@code object} is $NULL",
-			"{@code object} may be a {apiname} object",
+			"{@code flags} $must be a combination of one or more of {@code VkDebugReportFlagBitsEXT}",
+			"{@code objType} $must be one of {@code VkDebugReportObjectTypeEXT}, #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT if {@code object} is $NULL",
+			"{@code object} $may be a Vulkan object",
 			"{@code pLayerPrefix} $must be a $NULL terminated string.",
 			"{@code pMsg} $must be a $NULL terminated string."
 		)}"""
 
-val vkDestroyBuffer =
+@JvmField val vkDestroyBuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2194,7 +2440,7 @@ val vkDestroyBuffer =
 			"Host access to {@code buffer} $must be externally synchronized"
 		)}"""
 
-val vkDestroyBufferView =
+@JvmField val vkDestroyBufferView =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2211,7 +2457,7 @@ val vkDestroyBufferView =
 			"Host access to {@code bufferView} $must be externally synchronized"
 		)}"""
 
-val vkDestroyCommandPool =
+@JvmField val vkDestroyCommandPool =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2228,13 +2474,13 @@ val vkDestroyCommandPool =
 			"Host access to {@code commandPool} $must be externally synchronized"
 		)}"""
 
-val vkDestroyDebugReportCallbackEXT =
+@JvmField val vkDestroyDebugReportCallbackEXT =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
 			"{@code callback} $must be a valid {@code VkDebugReportCallbackEXT} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
-			"{@code callback} $must have been created, allocated or retrieved from {@code instance}",
+			"{@code callback} $must have been created, allocated, or retrieved from {@code instance}",
 			"If {@code VkAllocationCallbacks} were provided when {@code instance} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code instance} was created, {@code pAllocator} $must be $NULL"
 		)}
@@ -2244,7 +2490,7 @@ val vkDestroyDebugReportCallbackEXT =
 			"Host access to {@code callback} $must be externally synchronized"
 		)}"""
 
-val vkDestroyDescriptorPool =
+@JvmField val vkDestroyDescriptorPool =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2261,7 +2507,7 @@ val vkDestroyDescriptorPool =
 			"Host access to {@code descriptorPool} $must be externally synchronized"
 		)}"""
 
-val vkDestroyDescriptorSetLayout =
+@JvmField val vkDestroyDescriptorSetLayout =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2279,7 +2525,7 @@ val vkDestroyDescriptorSetLayout =
 			"Host access to {@code descriptorSetLayout} $must be externally synchronized"
 		)}"""
 
-val vkDestroyDevice =
+@JvmField val vkDestroyDevice =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"If {@code device} is not $NULL, {@code device} $must be a valid {@code VkDevice} handle",
@@ -2294,7 +2540,7 @@ val vkDestroyDevice =
 			"Host access to {@code device} $must be externally synchronized"
 		)}"""
 
-val vkDestroyEvent =
+@JvmField val vkDestroyEvent =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2311,7 +2557,7 @@ val vkDestroyEvent =
 			"Host access to {@code event} $must be externally synchronized"
 		)}"""
 
-val vkDestroyFence =
+@JvmField val vkDestroyFence =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2328,7 +2574,7 @@ val vkDestroyFence =
 			"Host access to {@code fence} $must be externally synchronized"
 		)}"""
 
-val vkDestroyFramebuffer =
+@JvmField val vkDestroyFramebuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2345,7 +2591,7 @@ val vkDestroyFramebuffer =
 			"Host access to {@code framebuffer} $must be externally synchronized"
 		)}"""
 
-val vkDestroyImage =
+@JvmField val vkDestroyImage =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2362,7 +2608,7 @@ val vkDestroyImage =
 			"Host access to {@code image} $must be externally synchronized"
 		)}"""
 
-val vkDestroyImageView =
+@JvmField val vkDestroyImageView =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2379,7 +2625,7 @@ val vkDestroyImageView =
 			"Host access to {@code imageView} $must be externally synchronized"
 		)}"""
 
-val vkDestroyInstance =
+@JvmField val vkDestroyInstance =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"If {@code instance} is not $NULL, {@code instance} $must be a valid {@code VkInstance} handle",
@@ -2394,7 +2640,7 @@ val vkDestroyInstance =
 			"Host access to {@code instance} $must be externally synchronized"
 		)}"""
 
-val vkDestroyPipeline =
+@JvmField val vkDestroyPipeline =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2411,7 +2657,7 @@ val vkDestroyPipeline =
 			"Host access to {@code pipeline} $must be externally synchronized"
 		)}"""
 
-val vkDestroyPipelineCache =
+@JvmField val vkDestroyPipelineCache =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2427,7 +2673,7 @@ val vkDestroyPipelineCache =
 			"Host access to {@code pipelineCache} $must be externally synchronized"
 		)}"""
 
-val vkDestroyPipelineLayout =
+@JvmField val vkDestroyPipelineLayout =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2443,7 +2689,7 @@ val vkDestroyPipelineLayout =
 			"Host access to {@code pipelineLayout} $must be externally synchronized"
 		)}"""
 
-val vkDestroyQueryPool =
+@JvmField val vkDestroyQueryPool =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2460,7 +2706,7 @@ val vkDestroyQueryPool =
 			"Host access to {@code queryPool} $must be externally synchronized"
 		)}"""
 
-val vkDestroyRenderPass =
+@JvmField val vkDestroyRenderPass =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2477,7 +2723,7 @@ val vkDestroyRenderPass =
 			"Host access to {@code renderPass} $must be externally synchronized"
 		)}"""
 
-val vkDestroySampler =
+@JvmField val vkDestroySampler =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2494,7 +2740,7 @@ val vkDestroySampler =
 			"Host access to {@code sampler} $must be externally synchronized"
 		)}"""
 
-val vkDestroySemaphore =
+@JvmField val vkDestroySemaphore =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2511,7 +2757,7 @@ val vkDestroySemaphore =
 			"Host access to {@code semaphore} $must be externally synchronized"
 		)}"""
 
-val vkDestroyShaderModule =
+@JvmField val vkDestroyShaderModule =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2527,7 +2773,7 @@ val vkDestroyShaderModule =
 			"Host access to {@code shaderModule} $must be externally synchronized"
 		)}"""
 
-val vkDestroySurfaceKHR =
+@JvmField val vkDestroySurfaceKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -2544,7 +2790,7 @@ val vkDestroySurfaceKHR =
 			"Host access to {@code surface} $must be externally synchronized"
 		)}"""
 
-val vkDestroySwapchainKHR =
+@JvmField val vkDestroySwapchainKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2560,7 +2806,7 @@ val vkDestroySwapchainKHR =
 			"Host access to {@code swapchain} $must be externally synchronized"
 		)}"""
 
-val vkDeviceWaitIdle =
+@JvmField val vkDeviceWaitIdle =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle"
@@ -2571,7 +2817,7 @@ val vkDeviceWaitIdle =
 			"Host access to all {@code VkQueue} objects created from {@code device} $must be externally synchronized"
 		)}"""
 
-val vkEndCommandBuffer =
+@JvmField val vkEndCommandBuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -2585,7 +2831,7 @@ val vkEndCommandBuffer =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkEnumerateDeviceExtensionProperties =
+@JvmField val vkEnumerateDeviceExtensionProperties =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2598,7 +2844,7 @@ val vkEnumerateDeviceExtensionProperties =
 			"If {@code pLayerName} is not $NULL, it $must be the name of a layer returned by #EnumerateDeviceLayerProperties()"
 		)}"""
 
-val vkEnumerateDeviceLayerProperties =
+@JvmField val vkEnumerateDeviceLayerProperties =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2609,7 +2855,7 @@ val vkEnumerateDeviceLayerProperties =
 			"""
 		)}"""
 
-val vkEnumerateInstanceExtensionProperties =
+@JvmField val vkEnumerateInstanceExtensionProperties =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"If {@code pLayerName} is not $NULL, {@code pLayerName} $must be a null-terminated string",
@@ -2621,7 +2867,7 @@ val vkEnumerateInstanceExtensionProperties =
 			"If {@code pLayerName} is not $NULL, it $must be the name of a layer returned by #EnumerateInstanceLayerProperties()"
 		)}"""
 
-val vkEnumerateInstanceLayerProperties =
+@JvmField val vkEnumerateInstanceLayerProperties =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code pPropertyCount} $must be a pointer to a {@code uint32_t} value",
@@ -2631,7 +2877,7 @@ val vkEnumerateInstanceLayerProperties =
 			"""
 		)}"""
 
-val vkEnumeratePhysicalDevices =
+@JvmField val vkEnumeratePhysicalDevices =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
@@ -2642,7 +2888,7 @@ val vkEnumeratePhysicalDevices =
 			"""
 		)}"""
 
-val vkFlushMappedMemoryRanges =
+@JvmField val vkFlushMappedMemoryRanges =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2650,7 +2896,7 @@ val vkFlushMappedMemoryRanges =
 			"{@code memoryRangeCount} $must be greater than 0"
 		)}"""
 
-val vkFreeCommandBuffers =
+@JvmField val vkFreeCommandBuffers =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2671,7 +2917,7 @@ val vkFreeCommandBuffers =
 			"Host access to each member of {@code pCommandBuffers} $must be externally synchronized"
 		)}"""
 
-val vkFreeDescriptorSets =
+@JvmField val vkFreeDescriptorSets =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2694,7 +2940,7 @@ val vkFreeDescriptorSets =
 			"Host access to each member of {@code pDescriptorSets} $must be externally synchronized"
 		)}"""
 
-val vkFreeMemory =
+@JvmField val vkFreeMemory =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2709,7 +2955,7 @@ val vkFreeMemory =
 			"Host access to {@code memory} $must be externally synchronized"
 		)}"""
 
-val vkGetBufferMemoryRequirements =
+@JvmField val vkGetBufferMemoryRequirements =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2718,7 +2964,7 @@ val vkGetBufferMemoryRequirements =
 			"{@code buffer} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
-val vkGetDeviceMemoryCommitment =
+@JvmField val vkGetDeviceMemoryCommitment =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2728,14 +2974,14 @@ val vkGetDeviceMemoryCommitment =
 			"{@code memory} $must have been created with a memory type that reports #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT"
 		)}"""
 
-val vkGetDeviceProcAddr =
+@JvmField val vkGetDeviceProcAddr =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code pName} $must be a null-terminated string"
 		)}"""
 
-val vkGetDeviceQueue =
+@JvmField val vkGetDeviceQueue =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2750,7 +2996,7 @@ val vkGetDeviceQueue =
 			"""
 		)}"""
 
-val vkGetDisplayModePropertiesKHR =
+@JvmField val vkGetDisplayModePropertiesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2762,7 +3008,7 @@ val vkGetDisplayModePropertiesKHR =
 			"""
 		)}"""
 
-val vkGetDisplayPlaneCapabilitiesKHR =
+@JvmField val vkGetDisplayPlaneCapabilitiesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2775,7 +3021,7 @@ val vkGetDisplayPlaneCapabilitiesKHR =
 			"Host access to {@code mode} $must be externally synchronized"
 		)}"""
 
-val vkGetDisplayPlaneSupportedDisplaysKHR =
+@JvmField val vkGetDisplayPlaneSupportedDisplaysKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2790,7 +3036,7 @@ val vkGetDisplayPlaneSupportedDisplaysKHR =
 			"""
 		)}"""
 
-val vkGetEventStatus =
+@JvmField val vkGetEventStatus =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2798,7 +3044,7 @@ val vkGetEventStatus =
 			"{@code event} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
-val vkGetFenceStatus =
+@JvmField val vkGetFenceStatus =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2806,7 +3052,7 @@ val vkGetFenceStatus =
 			"{@code fence} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
-val vkGetImageMemoryRequirements =
+@JvmField val vkGetImageMemoryRequirements =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2815,7 +3061,7 @@ val vkGetImageMemoryRequirements =
 			"{@code image} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
-val vkGetImageSparseMemoryRequirements =
+@JvmField val vkGetImageSparseMemoryRequirements =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2829,7 +3075,7 @@ val vkGetImageSparseMemoryRequirements =
 			"{@code image} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
-val vkGetImageSubresourceLayout =
+@JvmField val vkGetImageSubresourceLayout =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -2841,14 +3087,25 @@ val vkGetImageSubresourceLayout =
 			"The {@code aspectMask} member of {@code pSubresource} $must only have a single bit set"
 		)}"""
 
-val vkGetInstanceProcAddr =
+@JvmField val vkGetInstanceProcAddr =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"If {@code instance} is not $NULL, {@code instance} $must be a valid {@code VkInstance} handle",
 			"{@code pName} $must be a null-terminated string"
 		)}"""
 
-val vkGetPhysicalDeviceDisplayPlanePropertiesKHR =
+@JvmField val vkGetMemoryWin32HandleNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code device} $must be a valid {@code VkDevice} handle",
+			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
+			"{@code handleType} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
+			"{@code handleType} $mustnot be 0",
+			"{@code pHandle} $must be a pointer to a {@code HANDLE} value",
+			"{@code memory} $must have been created, allocated, or retrieved from {@code device}"
+		)}"""
+
+@JvmField val vkGetPhysicalDeviceDisplayPlanePropertiesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2859,7 +3116,7 @@ val vkGetPhysicalDeviceDisplayPlanePropertiesKHR =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceDisplayPropertiesKHR =
+@JvmField val vkGetPhysicalDeviceDisplayPropertiesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2870,14 +3127,30 @@ val vkGetPhysicalDeviceDisplayPropertiesKHR =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceFeatures =
+@JvmField val vkGetPhysicalDeviceExternalImageFormatPropertiesNV =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
+			"{@code format} $must be a valid {@code VkFormat} value",
+			"{@code type} $must be a valid {@code VkImageType} value",
+			"{@code tiling} $must be a valid {@code VkImageTiling} value",
+			"{@code usage} $must be a valid combination of {@code VkImageUsageFlagBits} values",
+			"{@code usage} $mustnot be 0",
+			"{@code flags} $must be a valid combination of {@code VkImageCreateFlagBits} values",
+			"{@code flags} $mustnot be 0",
+			"{@code externalHandleType} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
+			"{@code externalHandleType} $mustnot be 0",
+			"{@code pExternalImageFormatProperties} $must be a pointer to a ##VkExternalImageFormatPropertiesNV structure"
+		)}"""
+
+@JvmField val vkGetPhysicalDeviceFeatures =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
 			"{@code pFeatures} $must be a pointer to a ##VkPhysicalDeviceFeatures structure"
 		)}"""
 
-val vkGetPhysicalDeviceFormatProperties =
+@JvmField val vkGetPhysicalDeviceFormatProperties =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2885,7 +3158,7 @@ val vkGetPhysicalDeviceFormatProperties =
 			"{@code pFormatProperties} $must be a pointer to a ##VkFormatProperties structure"
 		)}"""
 
-val vkGetPhysicalDeviceImageFormatProperties =
+@JvmField val vkGetPhysicalDeviceImageFormatProperties =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2898,14 +3171,14 @@ val vkGetPhysicalDeviceImageFormatProperties =
 			"{@code pImageFormatProperties} $must be a pointer to a ##VkImageFormatProperties structure"
 		)}"""
 
-val vkGetPhysicalDeviceMemoryProperties =
+@JvmField val vkGetPhysicalDeviceMemoryProperties =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
 			"{@code pMemoryProperties} $must be a pointer to a ##VkPhysicalDeviceMemoryProperties structure"
 		)}"""
 
-val vkGetPhysicalDeviceMirPresentationSupportKHR =
+@JvmField val vkGetPhysicalDeviceMirPresentationSupportKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2916,14 +3189,14 @@ val vkGetPhysicalDeviceMirPresentationSupportKHR =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceProperties =
+@JvmField val vkGetPhysicalDeviceProperties =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
 			"{@code pProperties} $must be a pointer to a ##VkPhysicalDeviceProperties structure"
 		)}"""
 
-val vkGetPhysicalDeviceQueueFamilyProperties =
+@JvmField val vkGetPhysicalDeviceQueueFamilyProperties =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2934,7 +3207,7 @@ val vkGetPhysicalDeviceQueueFamilyProperties =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceSparseImageFormatProperties =
+@JvmField val vkGetPhysicalDeviceSparseImageFormatProperties =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2956,7 +3229,7 @@ val vkGetPhysicalDeviceSparseImageFormatProperties =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceSurfaceCapabilitiesKHR =
+@JvmField val vkGetPhysicalDeviceSurfaceCapabilitiesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2964,7 +3237,7 @@ val vkGetPhysicalDeviceSurfaceCapabilitiesKHR =
 			"{@code pSurfaceCapabilities} $must be a pointer to a ##VkSurfaceCapabilitiesKHR structure"
 		)}"""
 
-val vkGetPhysicalDeviceSurfaceFormatsKHR =
+@JvmField val vkGetPhysicalDeviceSurfaceFormatsKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2976,7 +3249,7 @@ val vkGetPhysicalDeviceSurfaceFormatsKHR =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceSurfacePresentModesKHR =
+@JvmField val vkGetPhysicalDeviceSurfacePresentModesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -2988,7 +3261,7 @@ val vkGetPhysicalDeviceSurfacePresentModesKHR =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceSurfaceSupportKHR =
+@JvmField val vkGetPhysicalDeviceSurfaceSupportKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -3000,7 +3273,7 @@ val vkGetPhysicalDeviceSurfaceSupportKHR =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceWaylandPresentationSupportKHR =
+@JvmField val vkGetPhysicalDeviceWaylandPresentationSupportKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -3011,7 +3284,7 @@ val vkGetPhysicalDeviceWaylandPresentationSupportKHR =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceWin32PresentationSupportKHR =
+@JvmField val vkGetPhysicalDeviceWin32PresentationSupportKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -3021,7 +3294,7 @@ val vkGetPhysicalDeviceWin32PresentationSupportKHR =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceXcbPresentationSupportKHR =
+@JvmField val vkGetPhysicalDeviceXcbPresentationSupportKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -3032,7 +3305,7 @@ val vkGetPhysicalDeviceXcbPresentationSupportKHR =
 			"""
 		)}"""
 
-val vkGetPhysicalDeviceXlibPresentationSupportKHR =
+@JvmField val vkGetPhysicalDeviceXlibPresentationSupportKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code physicalDevice} $must be a valid {@code VkPhysicalDevice} handle",
@@ -3043,7 +3316,7 @@ val vkGetPhysicalDeviceXlibPresentationSupportKHR =
 			"""
 		)}"""
 
-val vkGetPipelineCacheData =
+@JvmField val vkGetPipelineCacheData =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3056,7 +3329,7 @@ val vkGetPipelineCacheData =
 			"{@code pipelineCache} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
-val vkGetQueryPoolResults =
+@JvmField val vkGetQueryPoolResults =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3073,7 +3346,7 @@ val vkGetQueryPoolResults =
 			"If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} $mustnot contain #QUERY_RESULT_PARTIAL_BIT"
 		)}"""
 
-val vkGetRenderAreaGranularity =
+@JvmField val vkGetRenderAreaGranularity =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3082,7 +3355,7 @@ val vkGetRenderAreaGranularity =
 			"{@code renderPass} $must have been created, allocated, or retrieved from {@code device}"
 		)}"""
 
-val vkGetSwapchainImagesKHR =
+@JvmField val vkGetSwapchainImagesKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3094,7 +3367,7 @@ val vkGetSwapchainImagesKHR =
 			"""
 		)}"""
 
-val vkInvalidateMappedMemoryRanges =
+@JvmField val vkInvalidateMappedMemoryRanges =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3102,7 +3375,7 @@ val vkInvalidateMappedMemoryRanges =
 			"{@code memoryRangeCount} $must be greater than 0"
 		)}"""
 
-val vkMapMemory =
+@JvmField val vkMapMemory =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3122,7 +3395,7 @@ val vkMapMemory =
 			"Host access to {@code memory} $must be externally synchronized"
 		)}"""
 
-val vkMergePipelineCaches =
+@JvmField val vkMergePipelineCaches =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3139,7 +3412,7 @@ val vkMergePipelineCaches =
 			"Host access to {@code dstCache} $must be externally synchronized"
 		)}"""
 
-val vkQueueBindSparse =
+@JvmField val vkQueueBindSparse =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code queue} $must be a valid {@code VkQueue} handle",
@@ -3162,7 +3435,7 @@ val vkQueueBindSparse =
 			"Host access to {@code fence} $must be externally synchronized"
 		)}"""
 
-val vkQueuePresentKHR =
+@JvmField val vkQueuePresentKHR =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code queue} $must be a valid {@code VkQueue} handle",
@@ -3184,7 +3457,7 @@ val vkQueuePresentKHR =
 			"Host access to {@code pPresentInfo.pSwapchains}[] $must be externally synchronized"
 		)}"""
 
-val vkQueueSubmit =
+@JvmField val vkQueueSubmit =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code queue} $must be a valid {@code VkQueue} handle",
@@ -3206,13 +3479,13 @@ val vkQueueSubmit =
 			"Host access to {@code fence} $must be externally synchronized"
 		)}"""
 
-val vkQueueWaitIdle =
+@JvmField val vkQueueWaitIdle =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code queue} $must be a valid {@code VkQueue} handle"
 		)}"""
 
-val vkResetCommandBuffer =
+@JvmField val vkResetCommandBuffer =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
@@ -3226,7 +3499,7 @@ val vkResetCommandBuffer =
 			"Host access to {@code commandBuffer} $must be externally synchronized"
 		)}"""
 
-val vkResetCommandPool =
+@JvmField val vkResetCommandPool =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3241,7 +3514,7 @@ val vkResetCommandPool =
 			"Host access to {@code commandPool} $must be externally synchronized"
 		)}"""
 
-val vkResetDescriptorPool =
+@JvmField val vkResetDescriptorPool =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3257,7 +3530,7 @@ val vkResetDescriptorPool =
 			"Host access to any {@code VkDescriptorSet} objects allocated from {@code descriptorPool} $must be externally synchronized"
 		)}"""
 
-val vkResetEvent =
+@JvmField val vkResetEvent =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3271,7 +3544,7 @@ val vkResetEvent =
 			"Host access to {@code event} $must be externally synchronized"
 		)}"""
 
-val vkResetFences =
+@JvmField val vkResetFences =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3286,7 +3559,7 @@ val vkResetFences =
 			"Host access to each member of {@code pFences} $must be externally synchronized"
 		)}"""
 
-val vkSetEvent =
+@JvmField val vkSetEvent =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3299,7 +3572,7 @@ val vkSetEvent =
 			"Host access to {@code event} $must be externally synchronized"
 		)}"""
 
-val vkUnmapMemory =
+@JvmField val vkUnmapMemory =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3313,7 +3586,7 @@ val vkUnmapMemory =
 			"Host access to {@code memory} $must be externally synchronized"
 		)}"""
 
-val vkUpdateDescriptorSets =
+@JvmField val vkUpdateDescriptorSets =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
@@ -3333,7 +3606,7 @@ val vkUpdateDescriptorSets =
 			"Host access to {@code pDescriptorCopies}[].dstSet $must be externally synchronized"
 		)}"""
 
-val vkWaitForFences =
+@JvmField val vkWaitForFences =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code device} $must be a valid {@code VkDevice} handle",
