@@ -49,113 +49,93 @@ if ( hasProperty("release") ) {
 println "${deployment.type.name()} BUILD"
 
 enum Artifacts {
-	CORE("org.lwjgl", "lwjgl", true, "LWJGL", "The LWJGL core library."),
+	CORE("lwjgl", true, "LWJGL", "The LWJGL core library."),
 	EGL(
-		"org.lwjgl.egl", "lwjgl-egl", false,
-		"LWJGL - EGL bindings",
+		"lwjgl-egl", false, "LWJGL - EGL bindings",
 		"An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system."
 	),
 	GLFW(
-		"org.lwjgl.glfw", "lwjgl-glfw", true,
-		"LWJGL - GLFW bindings",
+		"lwjgl-glfw", true, "LWJGL - GLFW bindings",
 		"An multi-platform library for OpenGL, OpenGL ES and Vulkan development on the desktop. It provides a simple API for creating windows, contexts and surfaces, receiving input and events."
 	),
 	JAWT(
-		"org.lwjgl.system.jawt", "lwjgl-jawt", false,
-		"LWJGL - JAWT bindings",
-		"The AWT native interface."),
+		"lwjgl-jawt", false, "LWJGL - JAWT bindings",
+		"The AWT native interface."
+	),
 	JEMALLOC(
-		"org.lwjgl.system.jemalloc", "lwjgl-jemalloc", true,
-		"LWJGL - jemalloc bindings",
+		"lwjgl-jemalloc", true, "LWJGL - jemalloc bindings",
 		"A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support."
 	),
 	LMDB(
-		"org.lwjgl.util.lmdb", "lwjgl-lmdb", true,
-		"LWJGL - LMDB bindings",
+		"lwjgl-lmdb", true, "LWJGL - LMDB bindings",
 		"A compact, fast, powerful, and robust database that implements a simplified variant of the BerkeleyDB (BDB) API."
 	),
 	NANOVG(
-		"org.lwjgl.nanovg", "lwjgl-nanovg", true,
-		"LWJGL - NanoVG bindings",
+		"lwjgl-nanovg", true, "LWJGL - NanoVG bindings",
 		"A small antialiased vector graphics rendering library for OpenGL."
 	),
 	NFD(
-		"org.lwjgl.util.nfd", "lwjgl-nfd", true,
-		"LWJGL - Native File Dialog bindings",
+		"lwjgl-nfd", true, "LWJGL - Native File Dialog bindings",
 		"A tiny, neat C library that portably invokes native file open and save dialogs."
 	),
 	NUKLEAR(
-		"org.lwjgl.nuklear", "lwjgl-nuklear", true,
-		"LWJGL - Nuklear bindings",
+		"lwjgl-nuklear", true, "LWJGL - Nuklear bindings",
 		"A minimal state immediate mode graphical user interface toolkit."
 	),
 	OPENAL(
-		"org.lwjgl.openal", "lwjgl-openal", true,
-		"LWJGL - OpenAL bindings",
+		"lwjgl-openal", true, "LWJGL - OpenAL bindings",
 		"A cross-platform 3D audio API appropriate for use with gaming applications and many other types of audio applications."
 	),
 	OPENCL(
-		"org.lwjgl.opencl", "lwjgl-opencl", false,
-		"LWJGL - OpenCL bindings",
+		"lwjgl-opencl", false, "LWJGL - OpenCL bindings",
 		"An open, royalty-free standard for cross-platform, parallel programming of diverse processors found in personal computers, servers, mobile devices and embedded platforms."
 	),
 	OPENGL(
-		"org.lwjgl.opengl", "lwjgl-opengl", false,
-		"LWJGL - OpenGL bindings",
+		"lwjgl-opengl", false, "LWJGL - OpenGL bindings",
 		"The most widely adopted 2D and 3D graphics API in the industry, bringing thousands of applications to a wide variety of computer platforms."
 	),
 	OPENGLES(
-		"org.lwjgl.opengles", "lwjgl-opengles", false,
-		"LWJGL - OpenGL ES bindings",
+		"lwjgl-opengles", false, "LWJGL - OpenGL ES bindings",
 		"A royalty-free, cross-platform API for full-function 2D and 3D graphics on embedded systems - including consoles, phones, appliances and vehicles."
 	),
 	OVR(
-		"org.lwjgl.ovr", "lwjgl-ovr", false,
-		"LWJGL - OVR bindings",
+		"lwjgl-ovr", false, "LWJGL - OVR bindings",
 		"The API of the Oculus SDK."
 	),
 	PAR(
-		"org.lwjgl.util.par", "lwjgl-par", true,
-		"LWJGL - par_shapes bindings",
+		"lwjgl-par", true, "LWJGL - par_shapes bindings",
 		"Generate parametric surfaces and other simple shapes."
 	),
 	SSE(
-		"org.lwjgl.util.sse", "lwjgl-sse", true,
-		"LWJGL - SSE bindings",
+		"lwjgl-sse", true, "LWJGL - SSE bindings",
 		"Simple SSE intrinsics."
 	),
 	STB(
-		"org.lwjgl.stb", "lwjgl-stb", true,
-		"LWJGL - stb bindings",
+		"lwjgl-stb", true, "LWJGL - stb bindings",
 		"Single-file public domain libraries for fonts, images, ogg vorbis files and more."
 	),
 	TINYFD(
-		"org.lwjgl.util.tinyfd", "lwjgl-tinyfd", true,
-		"LWJGL - Tiny File Dialogs bindings",
+		"lwjgl-tinyfd", true, "LWJGL - Tiny File Dialogs bindings",
 		"Provides basic modal dialogs."
 	),
 	VULKAN(
-		"org.lwjgl.vulkan", "lwjgl-vulkan", false,
-		"LWJGL - Vulkan bindings",
+		"lwjgl-vulkan", false, "LWJGL - Vulkan bindings",
 		"A new generation graphics and compute API that provides high-efficiency, cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms."
 	),
 	XXHASH(
-		"org.lwjgl.util.xxhash", "lwjgl-xxhash", true,
-		"LWJGL - xxHash bindings",
+		"lwjgl-xxhash", true, "LWJGL - xxHash bindings",
 		"An Extremely fast Hash algorithm, running at RAM speed limits."
 	)
 
-	String packageName
 	String artifact
 	boolean hasNatives
 	String projectName
 	String projectDescription
 
 	private Artifacts(
-		String packageName, String artifact, boolean hasNatives,
+		String artifact, boolean hasNatives,
 		String projectName, String projectDescription
 	) {
-		this.packageName = packageName
 		this.artifact = artifact
 		this.hasNatives = hasNatives
 		this.projectName = projectName
@@ -163,7 +143,7 @@ enum Artifacts {
 	}
 
 	private def String directory(String buildDir) {
-		return "$buildDir/$packageName"
+		return "$buildDir/$artifact"
 	}
 
 	private def String path() {
