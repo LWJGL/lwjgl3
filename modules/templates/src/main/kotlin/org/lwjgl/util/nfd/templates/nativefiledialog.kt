@@ -114,6 +114,19 @@ val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE,
 		OpenDialog["outPath"]
 	)
 
+	nfdresult_t(
+		"PickFolder",
+		"""
+		Launches a select folder dialog.
+
+		If #OKAY is returned, {@code outPath} will contain a pointer to a UTF-8 encoded string. The user must free the string with #Free() when it is no longer
+		needed.
+		""",
+
+		OpenDialog["defaultPath"],
+		OpenDialog["outPath"]
+	)
+
 	(const..charASCII_p)(
 		"GetError",
 		"Returns the last error."

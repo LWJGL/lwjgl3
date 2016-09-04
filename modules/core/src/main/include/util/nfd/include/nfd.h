@@ -50,6 +50,11 @@ nfdresult_t NFD_SaveDialog( const nfdchar_t *filterList,
                             const nfdchar_t *defaultPath,
                             nfdchar_t **outPath );
 
+
+/* select folder dialog */
+nfdresult_t NFD_PickFolder( const nfdchar_t *defaultPath,
+                            nfdchar_t **outPath);
+
 /* nfd_common.c */
 
 /* get last error -- set when nfdresult_t returns NFD_ERROR */

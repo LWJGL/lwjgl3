@@ -29,7 +29,7 @@ nfdchar_t *NFD_PathSet_GetPath( const nfdpathset_t *pathset, size_t num )
 {
     assert(pathset);
     assert(num < pathset->count);
-    
+
     return pathset->buf + pathset->indices[num];
 }
 

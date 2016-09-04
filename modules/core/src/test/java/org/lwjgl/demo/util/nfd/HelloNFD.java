@@ -11,6 +11,8 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.system.Platform;
 import org.lwjgl.util.nfd.NFDPathSet;
 
+import java.nio.ByteBuffer;
+
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -53,6 +55,8 @@ public final class HelloNFD {
 					if ( (mods & mod) != 0 ) {
 						if ( (mods & GLFW_MOD_SHIFT) != 0 )
 							openMulti();
+						else if ( (mods & GLFW_MOD_ALT) != 0 )
+							openFolder();
 						else
 							openSingle();
 					}
@@ -79,6 +83,7 @@ public final class HelloNFD {
 
 		System.out.println("Press " + modDescr + "+O to launch the single file open dialog.");
 		System.out.println("Press " + modDescr + "+Shift+O to launch the multi file open dialog.");
+		System.out.println("Press " + modDescr + "+Alt+O to launch the folder select dialog.");
 		System.out.println("Press " + modDescr + "+S to launch the file save dialog.");
 		while ( !glfwWindowShouldClose(window) ) {
 			glfwPollEvents();
@@ -98,19 +103,10 @@ public final class HelloNFD {
 		PointerBuffer outPath = memAllocPointer(1);
 
 		try {
-			int result = NFD_OpenDialog("png,jpg;pdf", null, outPath);
-			switch ( result ) {
-				case NFD_OKAY:
-					System.out.println("Success!");
-					System.out.println(outPath.getStringUTF8(0));
-					nNFD_Free(outPath.get(0));
-					break;
-				case NFD_CANCEL:
-					System.out.println("User pressed cancel.");
-					break;
-				default: // NFD_ERROR
-					System.err.format("Error: %s\n", NFD_GetError());
-			}
+			checkResult(
+				NFD_OpenDialog("png,jpg;pdf", null, outPath),
+				outPath
+			);
 		} finally {
 			memFree(outPath);
 		}
@@ -137,25 +133,44 @@ public final class HelloNFD {
 		}
 	}
 
+	private static void openFolder() {
+		PointerBuffer outPath = memAllocPointer(1);
+
+		try {
+			checkResult(
+				NFD_PickFolder((ByteBuffer)null, outPath),
+				outPath
+			);
+		} finally {
+			memFree(outPath);
+		}
+	}
+
 	private static void save() {
 		PointerBuffer savePath = memAllocPointer(1);
 
 		try {
-			int result = NFD_SaveDialog("png,jpg;pdf", null, savePath);
-			switch ( result ) {
-				case NFD_OKAY:
-					System.out.println("Success!");
-					System.out.println(savePath.getStringUTF8(0));
-					nNFD_Free(savePath.get(0));
-					break;
-				case NFD_CANCEL:
-					System.out.println("User pressed cancel.");
-					break;
-				default: // NFD_ERROR
-					System.err.format("Error: %s\n", NFD_GetError());
-			}
+			checkResult(
+				NFD_SaveDialog("png,jpg;pdf", null, savePath),
+				savePath
+			);
 		} finally {
 			memFree(savePath);
+		}
+	}
+
+	private static void checkResult(int result, PointerBuffer path) {
+		switch ( result ) {
+			case NFD_OKAY:
+				System.out.println("Success!");
+				System.out.println(path.getStringUTF8(0));
+				nNFD_Free(path.get(0));
+				break;
+			case NFD_CANCEL:
+				System.out.println("User pressed cancel.");
+				break;
+			default: // NFD_ERROR
+				System.err.format("Error: %s\n", NFD_GetError());
 		}
 	}
 
