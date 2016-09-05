@@ -115,6 +115,7 @@ typedef ptrdiff_t GLintptr;
 #define GL_GENERATE_MIPMAP                0x8191
 #define GL_INCR                           0x1E02
 #define GL_INCR_WRAP                      0x8507
+#define GL_INVALID_ENUM                   0x0500
 #define GL_KEEP                           0x1E00
 #define GL_LINE                           0x1B01
 #define GL_LINEAR                         0x2601
@@ -184,6 +185,7 @@ typedef void (APIENTRY *glBindFramebufferPROC) (GLenum target, GLuint framebuffe
 typedef void (APIENTRY *glBindRenderbufferPROC) (GLenum target, GLuint renderbuffer);
 typedef void (APIENTRY *glBindTexturePROC) (GLenum target, GLuint texture);
 typedef void (APIENTRY *glBindVertexArrayPROC) (GLuint array);
+typedef void (APIENTRY *glBlendFuncPROC) (GLenum sfactor, GLenum dfactor);
 typedef void (APIENTRY *glBlendFuncSeparatePROC) (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
 typedef void (APIENTRY *glBufferDataPROC) (GLenum target, GLsizeiptr size, const void *data, GLenum usage);
 typedef GLenum (APIENTRY *glCheckFramebufferStatusPROC) (GLenum target);
@@ -399,6 +401,7 @@ struct GLNVGcontext {
 	glBindRenderbufferPROC BindRenderbuffer;
 	glBindTexturePROC BindTexture;
 	glBindVertexArrayPROC BindVertexArray;
+	glBlendFuncPROC BlendFunc;
 	glBlendFuncSeparatePROC BlendFuncSeparate;
 	glBufferDataPROC BufferData;
 	glCheckFramebufferStatusPROC CheckFramebufferStatus;
@@ -839,7 +842,11 @@ static int glnvg__renderCreate(void* uptr)
 		"		result = color * innerCol;\n"
 		"	}\n"
 		"#ifdef EDGE_AA\n"
+		"#ifdef STENCIL_STROKES\n"
 		"	if (strokeAlpha < strokeThr) discard;\n"
+		"#else\n"
+		"	if (strokeAlpha < strokeThr) result = vec4(0,0,0,0);\n"
+		"#endif\n"
 		"#endif\n"
 		"#ifdef NANOVG_GL3\n"
 		"	outColor = result;\n"
@@ -851,7 +858,12 @@ static int glnvg__renderCreate(void* uptr)
 	glnvg__checkError(gl, "init");
 
 	if (gl->flags & NVG_ANTIALIAS) {
-		if (glnvg__createShader(gl, &gl->shader, "shader", shaderHeader, "#define EDGE_AA 1\n", fillVertShader, fillFragShader) == 0)
+		char* opts;
+		if (gl->flags & NVG_STENCIL_STROKES)
+			opts = "#define EDGE_AA 1\n#define STENCIL_STROKES 1\n";
+		else
+			opts = "#define EDGE_AA 1\n";
+		if (glnvg__createShader(gl, &gl->shader, "shader", shaderHeader, opts, fillVertShader, fillFragShader) == 0)
 			return 0;
 	} else {
 		if (glnvg__createShader(gl, &gl->shader, "shader", shaderHeader, NULL, fillVertShader, fillFragShader) == 0)
@@ -1296,12 +1308,19 @@ static GLenum glnvg_convertBlendFuncFactor(int factor)
 		return GL_ONE_MINUS_DST_ALPHA;
 	if (factor == NVG_SRC_ALPHA_SATURATE)
 		return GL_SRC_ALPHA_SATURATE;
-	return 0;
+	return GL_INVALID_ENUM;
 }
 
 static void glnvg__blendCompositeOperation(GLNVGcontext* gl, NVGcompositeOperationState op)
 {
-	gl->BlendFuncSeparate(glnvg_convertBlendFuncFactor(op.srcRGB), glnvg_convertBlendFuncFactor(op.dstRGB), glnvg_convertBlendFuncFactor(op.srcAlpha), glnvg_convertBlendFuncFactor(op.dstAlpha));
+	GLenum srcRGB = glnvg_convertBlendFuncFactor(op.srcRGB);
+	GLenum dstRGB = glnvg_convertBlendFuncFactor(op.dstRGB);
+	GLenum srcAlpha = glnvg_convertBlendFuncFactor(op.srcAlpha);
+	GLenum dstAlpha = glnvg_convertBlendFuncFactor(op.dstAlpha);
+	if (srcRGB == GL_INVALID_ENUM || dstRGB == GL_INVALID_ENUM || srcAlpha == GL_INVALID_ENUM || dstAlpha == GL_INVALID_ENUM)
+		gl->BlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	else
+		gl->BlendFuncSeparate(srcRGB, dstRGB, srcAlpha, dstAlpha);
 }
 
 static void glnvg__renderFlush(void* uptr, NVGcompositeOperationState compositeOperation)
