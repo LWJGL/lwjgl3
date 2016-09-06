@@ -108,7 +108,7 @@ fun main(args: Array<String>) {
 							this@Generator.generate(packageName, binding)
 						} catch(t: Throwable) {
 							errors.incrementAndGet()
-							(t as java.lang.Throwable).printStackTrace()
+							t.printStackTrace()
 						}
 						latch.countDown()
 					}
@@ -132,7 +132,7 @@ fun main(args: Array<String>) {
 							work()
 						} catch(t: Throwable) {
 							errors.incrementAndGet()
-							(t as java.lang.Throwable).printStackTrace()
+							t.printStackTrace()
 						}
 						latch.countDown()
 					}

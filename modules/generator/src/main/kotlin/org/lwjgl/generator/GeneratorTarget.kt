@@ -133,7 +133,7 @@ abstract class GeneratorTarget(
 		try {
 			throw RuntimeException()
 		} catch (t: Throwable) {
-			return (t as java.lang.Throwable).stackTrace.asSequence()
+			return t.stackTrace.asSequence()
 				.map { it.fileName }
 				.filterNotNull()
 				.filter {
