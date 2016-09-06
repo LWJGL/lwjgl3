@@ -6,6 +6,8 @@ package org.lwjgl.system;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.channels.FileChannel;
+import java.nio.file.StandardOpenOption;
 import java.util.UUID;
 import java.util.zip.CRC32;
 
@@ -29,38 +31,30 @@ final class SharedLibraryLoader {
 	private SharedLibraryLoader() {
 	}
 
-	/**
-	 * Extracts the LWJGL native libraries from the classpath to a temporary directory and prepends the path to that directory to the
-	 * {@link Configuration#LIBRARY_PATH} option.
-	 */
-	private static void load() {
-		try {
-			// Extract the lwjgl shared library and get the library path
-			extractPath = extractFile(Platform.get().mapLibraryName(Library.JNI_LIBRARY_NAME), null).getParentFile();
-		} catch (Exception e) {
-			throw new RuntimeException("Unable to extract the LWJGL shared library", e);
-		}
-
-		// Prepend the path in which the libraries were extracted to org.lwjgl.librarypath
-		String libraryPath = Configuration.LIBRARY_PATH.get();
-		if ( libraryPath == null || libraryPath.isEmpty() )
-			libraryPath = extractPath.getAbsolutePath();
-		else
-			libraryPath = extractPath.getAbsolutePath() + File.pathSeparator + libraryPath;
-
-		System.setProperty(Configuration.LIBRARY_PATH.getProperty(), libraryPath);
-		Configuration.LIBRARY_PATH.set(libraryPath);
-	}
-
 	/** Extracts the specified shared library from the classpath to a temporary directory. */
-	static void load(String library) {
-		if ( Library.JNI_LIBRARY_NAME.equals(library) ) {
-			load();
-			return;
-		}
-
+	static FileChannel load(String library) {
 		try {
-			extractFile(Platform.get().mapLibraryName(library), extractPath);
+			File extractedFile = extractFile(Platform.get().mapLibraryName(library), extractPath);
+
+			// Wait for other processes (usually antivirus software) to unlock the extracted file
+			// before attempting to load it.
+			try {
+				FileChannel fc = FileChannel.open(extractedFile.toPath(), StandardOpenOption.READ);
+
+				//noinspection resource
+				if ( fc.tryLock(0L, Long.MAX_VALUE, true) == null ) {
+					if ( Configuration.DEBUG_LOADER.get(false) )
+						apiLog("\tFile is locked by another process, waiting...");
+
+					//noinspection resource
+					fc.lock(0L, Long.MAX_VALUE, true); // this will block until the file is locked
+				}
+
+				// the lock will be released when the channel is closed
+				return fc;
+			} catch (Exception e) {
+				throw new RuntimeException("Failed to lock the extracted file.", e);
+			}
 		} catch (Exception e) {
 			throw new RuntimeException("\tFailed to extract " + library + " library", e);
 		}
@@ -79,8 +73,6 @@ final class SharedLibraryLoader {
 		if ( resource == null )
 			throw new RuntimeException("Failed to locate resource: " + libraryFile);
 
-		apiLog(String.format("\tExtracting: %s", resource.getPath()));
-
 		String libraryCRC;
 		try ( InputStream input = resource.openStream() ) {
 			libraryCRC = crc(input);
@@ -90,6 +82,21 @@ final class SharedLibraryLoader {
 			libraryPath == null ? new File(libraryCRC) : libraryPath,
 			new File(libraryFile).getName()
 		);
+
+		if ( libraryPath == null ) {
+			extractPath = extractedFile.getParentFile();
+
+			// Prepend the path in which the libraries were extracted to org.lwjgl.librarypath
+			String libPath = Configuration.LIBRARY_PATH.get();
+			if ( libPath == null || libPath.isEmpty() )
+				libPath = extractPath.getAbsolutePath();
+			else
+				libPath = extractPath.getAbsolutePath() + File.pathSeparator + libPath;
+
+			System.setProperty(Configuration.LIBRARY_PATH.getProperty(), libPath);
+			Configuration.LIBRARY_PATH.set(libPath);
+		}
+
 		extractFile(resource, libraryCRC, extractedFile);
 
 		return extractedFile;
@@ -156,6 +163,8 @@ final class SharedLibraryLoader {
 
 		// If file doesn't exist or the CRC doesn't match, extract it to the temp dir.
 		if ( extractedCrc == null || !extractedCrc.equals(libraryCRC) ) {
+			apiLog(String.format("\tExtracting: %s", resource.getPath()));
+
 			extractedFile.getParentFile().mkdirs();
 
 			try (
@@ -167,7 +176,8 @@ final class SharedLibraryLoader {
 				while ( (n = input.read(buffer)) > 0 )
 					output.write(buffer, 0, n);
 			}
-		}
+		} else
+			apiLog(String.format("\tFound at: %s", extractedFile.getPath()));
 	}
 
 	/**

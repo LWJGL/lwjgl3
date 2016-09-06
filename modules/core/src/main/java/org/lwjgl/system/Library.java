@@ -8,6 +8,7 @@ import org.lwjgl.Version;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.channels.FileChannel;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.Optional;
@@ -59,6 +60,7 @@ public final class Library {
 	 *
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
+	@SuppressWarnings("try")
 	public static void loadSystem(String name) throws UnsatisfiedLinkError {
 		apiLog("Loading library (system): " + name);
 		if ( new File(name).isAbsolute() ) {
@@ -77,18 +79,15 @@ public final class Library {
 		try {
 			// Failed, attempt to extract from the classpath
 			if ( debugLoader )
-				DEBUG_STREAM.print("[LWJGL] \tUsing SharedLibraryLoader...");
-			SharedLibraryLoader.load(name);
-			if ( debugLoader )
-				DEBUG_STREAM.println("found");
-			// and try again
-			if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
-				return;
-		} catch (Exception e) {
-			if ( debugLoader ) {
-				DEBUG_STREAM.println("failed");
-				e.printStackTrace(DEBUG_STREAM);
+				apiLog("\tUsing SharedLibraryLoader...");
+			try ( FileChannel ignored = SharedLibraryLoader.load(name) ) {
+				// and try again
+				if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
+					return;
 			}
+		} catch (Exception e) {
+			if ( debugLoader )
+				e.printStackTrace(DEBUG_STREAM);
 		}
 
 		// Then java.library.path
@@ -134,6 +133,7 @@ public final class Library {
 	 *
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
+	@SuppressWarnings("try")
 	public static SharedLibrary loadNative(String name) {
 		apiLog("Loading library: " + name);
 		if ( new File(name).isAbsolute() ) {
@@ -152,18 +152,15 @@ public final class Library {
 		boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
 		try {
 			if ( debugLoader )
-				DEBUG_STREAM.print("[LWJGL] \tUsing SharedLibraryLoader...");
+				apiLog("\tUsing SharedLibraryLoader...");
 			// Failed, attempt to extract from the classpath
-			SharedLibraryLoader.load(name);
-			if ( debugLoader )
-				DEBUG_STREAM.println("found");
-			// and try again
-			return loadNative(libName, Configuration.LIBRARY_PATH);
-		} catch (Exception e) {
-			if ( debugLoader ) {
-				e.printStackTrace(DEBUG_STREAM);
-				DEBUG_STREAM.println("failed");
+			try ( FileChannel ignored = SharedLibraryLoader.load(name) ) {
+				// and try again
+				return loadNative(libName, Configuration.LIBRARY_PATH);
 			}
+		} catch (Exception e) {
+			if ( debugLoader )
+				e.printStackTrace(DEBUG_STREAM);
 		}
 
 		// Then java.library.path
