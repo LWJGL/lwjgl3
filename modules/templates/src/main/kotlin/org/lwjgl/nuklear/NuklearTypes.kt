@@ -27,13 +27,10 @@ fun config() {
 val Int.NK_FLAG: String
 	get() = "1 << $this"
 
-val nk_short = typedef(int16_t, "nk_short")
-val nk_ushort = typedef(uint16_t, "nk_ushort")
 val nk_int = typedef(int32_t, "nk_int")
 val nk_uint = typedef(uint32_t, "nk_uint")
 val nk_hash = typedef(nk_uint, "nk_hash")
 val nk_size = typedef(uintptr_t, "nk_size")
-val nk_ptr = typedef(uintptr_t, "nk_ptr")
 val nk_flags = typedef(uint32_t, "nk_flags")
 val nk_rune = typedef(uint32_t, "nk_rune")
 val nk_byte = typedef(uint8_t, "nk_byte")
@@ -72,8 +69,8 @@ val nk_widget_layout_states = "nk_widget_layout_states".enumType
 val nk_heading = "nk_heading".enumType
 val nk_buffer_allocation_type = "nk_buffer_allocation_type".enumType
 val nk_draw_list_stroke = "nk_draw_list_stroke".enumType
-
-val nk_draw_vertex_color = typedef(nk_uint, "nk_draw_vertex_color")
+val nk_draw_vertex_layout_attribute = "nk_draw_vertex_layout_attribute".enumType
+val nk_draw_vertex_layout_format = "nk_draw_vertex_layout_format".enumType
 
 // API
 
@@ -89,24 +86,12 @@ val nk_vec2 = struct(NUKLEAR_PACKAGE, "NkVec2", nativeName = "struct nk_vec2") {
 	float.member("y", "")
 }.nativeType
 
-/*val nk_vec2i = struct(NUKLEAR_PACKAGE, "NkVec2i", nativeName = "struct nk_vec2i") {
-	short.member("x", "")
-	short.member("y", "")
-}.nativeType*/
-
 val nk_rect = struct(NUKLEAR_PACKAGE, "NkRect", nativeName = "struct nk_rect") {
 	float.member("x", "")
 	float.member("y", "")
 	float.member("w", "")
 	float.member("h", "")
 }.nativeType
-
-/*val nk_recti = struct(NUKLEAR_PACKAGE, "NkRecti", nativeName = "struct nk_recti") {
-	short.member("x", "")
-	short.member("y", "")
-	short.member("w", "")
-	short.member("h", "")
-}.nativeType*/
 
 val nk_image = struct(NUKLEAR_PACKAGE, "NkImage", nativeName = "struct nk_image") {
 	nk_handle.member("handle", "")
@@ -127,31 +112,27 @@ val nk_scroll = struct(NUKLEAR_PACKAGE, "NkScroll", nativeName = "struct nk_scro
 	unsigned_short.member("y", "")
 }.nativeType
 
-val nk_malloc = "nk_malloc".callback(
-	NUKLEAR_PACKAGE, voidptr, "NkMalloc",
+val nk_plugin_alloc = "nk_plugin_alloc".callback(
+	NUKLEAR_PACKAGE, void_p, "NkPluginAlloc",
 	"",
 
 	nk_handle.IN("handle", ""),
 	voidptr.IN("old", ""),
 	nk_size.IN("size", "")
-) {
-	documentation = "Instances of this interface may be set to the ##NkAllocator struct."
-}
+)
 
-val nk_mfree = "nk_mfree".callback(
-	NUKLEAR_PACKAGE, void, "NkMFree",
+val nk_plugin_free = "nk_plugin_free".callback(
+	NUKLEAR_PACKAGE, void, "NkPluginFree",
 	"",
 
 	nk_handle.IN("handle", ""),
-	voidptr.IN("ptr", "")
-) {
-	documentation = "Instances of this interface may be set to the ##NkAllocator struct."
-}
+	voidptr.IN("old", "")
+)
 
 val nk_allocator = struct(NUKLEAR_PACKAGE, "NkAllocator", nativeName = "struct nk_allocator") {
 	nk_handle.member("userdata", "")
-	nullable..nk_malloc.member("alloc", "")
-	nullable..nk_mfree.member("mfree", "")
+	nullable..nk_plugin_alloc.member("alloc", "")
+	nullable..nk_plugin_free.member("mfree", "")
 }.nativeType
 val nk_allocator_p = nk_allocator.p
 
@@ -159,6 +140,12 @@ val nk_draw_null_texture = struct(NUKLEAR_PACKAGE, "NkDrawNullTexture", nativeNa
 	nk_handle.member("texture", "texture handle to a texture with a white pixel")
 	nk_vec2.member("uv", "coordinates to a white pixel in the texture")
 }.nativeType
+
+val nk_draw_vertex_layout_element_p = struct_p(NUKLEAR_PACKAGE, "NkDrawVertexLayoutElement", nativeName = "struct nk_draw_vertex_layout_element") {
+	nk_draw_vertex_layout_attribute.member("attribute", "the vertex attribute").links("VERTEX_\\w+")
+	nk_draw_vertex_layout_format.member("format", "the vertex attribute format").links("FORMAT_\\w+")
+	nk_size.member("offset", "the vertex attribute offset")
+}
 
 val nk_convert_config = struct(NUKLEAR_PACKAGE, "NkConvertConfig", nativeName = "struct nk_convert_config") {
 	float.member("global_alpha", "global alpha value")
@@ -168,6 +155,9 @@ val nk_convert_config = struct(NUKLEAR_PACKAGE, "NkConvertConfig", nativeName = 
 	unsigned_int.member("arc_segment_count", "number of segments used for arcs: default to 22")
 	unsigned_int.member("curve_segment_count", "number of segments used for curves: default to 22")
 	nk_draw_null_texture.member("null_texture", "handle to texture with a white pixel for shape drawing")
+	nk_draw_vertex_layout_element_p.buffer("vertex_layout", "describes the vertex output format and packing")
+	nk_size.member("vertex_size", "sizeof one vertex for vertex packing")
+	nk_size.member("vertex_alignment", "vertex alignment: Can be optained by NK_ALIGNOF")
 }.nativeType
 
 // MEMORY BUFFER
@@ -216,8 +206,8 @@ val nk_str_p = nk_str.p
 
 val nk_text_edit_p = struct_p(NUKLEAR_PACKAGE, "NkTextEdit", nativeName = "struct nk_text_edit")
 
-val nk_filter = "nk_filter".callback(
-	NUKLEAR_PACKAGE, int, "NkFilterCallback",
+val nk_plugin_filter = "nk_plugin_filter".callback(
+	NUKLEAR_PACKAGE, int, "NkPluginFilter",
 	"",
 
 	const..nk_text_edit_p.IN("edit", ""),
@@ -226,8 +216,8 @@ val nk_filter = "nk_filter".callback(
 	documentation = "Instances of this interface may be set to the ##NkTextEdit struct."
 }
 
-val nk_paste_f = "nk_paste_f".callback(
-	NUKLEAR_PACKAGE, void, "NkPasteCallback",
+val nk_plugin_paste = "nk_plugin_paste".callback(
+	NUKLEAR_PACKAGE, void, "NkPluginPaste",
 	"",
 
 	nk_handle.IN("handle", ""),
@@ -236,8 +226,8 @@ val nk_paste_f = "nk_paste_f".callback(
 	documentation = "Instances of this interface may be set to the ##NkClipboard struct."
 }
 
-val nk_copy_f = "nk_copy_f".callback(
-	NUKLEAR_PACKAGE, void, "NkCopyCallback",
+val nk_plugin_copy = "nk_plugin_copy".callback(
+	NUKLEAR_PACKAGE, void, "NkPluginCopy",
 	"",
 
 	nk_handle.IN("handle", ""),
@@ -249,32 +239,38 @@ val nk_copy_f = "nk_copy_f".callback(
 
 val nk_clipboard = struct(NUKLEAR_PACKAGE, "NkClipboard", nativeName = "struct nk_clipboard") {
 	nk_handle.member("userdata", "")
-	nullable..nk_paste_f.member("paste", "")
-	nullable..nk_copy_f.member("copy", "")
+	nullable..nk_plugin_paste.member("paste", "")
+	nullable..nk_plugin_copy.member("copy", "")
 }.nativeType
 
 val nk_text_undo_record = struct(NUKLEAR_PACKAGE, "NkTextUndoRecord", nativeName = "struct nk_text_undo_record", mutable = false) {
-   int.member("where", "")
-   short.member("insert_length", "")
-   short.member("delete_length", "")
-   short.member("char_storage", "")
+	access = Access.INTERNAL
+
+	int.member("where", "")
+	short.member("insert_length", "")
+	short.member("delete_length", "")
+	short.member("char_storage", "")
 }.nativeType
 
 val NK_TEXTEDIT_UNDOSTATECOUNT = 99
 val NK_TEXTEDIT_UNDOCHARCOUNT = 999
 val nk_text_undo_state = struct(NUKLEAR_PACKAGE, "NkTextUndoState", nativeName = "struct nk_text_undo_state", mutable = false) {
-   nk_text_undo_record.array("undo_rec", "", size = NK_TEXTEDIT_UNDOSTATECOUNT)
-   nk_rune.array("undo_char", "", size = NK_TEXTEDIT_UNDOCHARCOUNT)
-   short.member("undo_point", "")
-   short.member("redo_point", "")
-   short.member("undo_char_point", "")
-   short.member("redo_char_point", "")
+	access = Access.INTERNAL
+
+	nk_text_undo_record.array("undo_rec", "", size = NK_TEXTEDIT_UNDOSTATECOUNT)
+	nk_rune.array("undo_char", "", size = NK_TEXTEDIT_UNDOCHARCOUNT)
+	short.member("undo_point", "")
+	short.member("redo_point", "")
+	short.member("undo_char_point", "")
+	short.member("redo_char_point", "")
 }.nativeType
 
 val nk_text_edit = struct(NUKLEAR_PACKAGE, "NkTextEdit", nativeName = "struct nk_text_edit", mutable = false) {
+	access = Access.INTERNAL
+
 	nk_clipboard.member("clip", "")
 	nk_str.member("string", "")
-	nullable..nk_filter.member("filter", "")
+	nullable..nk_plugin_filter.member("filter", "")
 	nk_vec2.member("scrollbar", "")
 
 	int.member("cursor", "")
@@ -554,12 +550,6 @@ val nk_input_p = nk_input.p
 
 // DRAW LIST
 
-val nk_draw_vertex = struct(NUKLEAR_PACKAGE, "NkDrawVertex", nativeName = "struct nk_draw_vertex", mutable = false) {
-	nk_vec2.member("pos", "")
-	nk_vec2.member("uv", "")
-	nk_draw_vertex_color.member("col", "")
-}
-
 val nk_draw_command_p = struct_p(NUKLEAR_PACKAGE, "NkDrawCommand", nativeName = "struct nk_draw_command", mutable = false) {
 	unsigned_int.member("elem_count", "")
 	/* number of elements in the current draw batch */
@@ -571,10 +561,7 @@ val nk_draw_command_p = struct_p(NUKLEAR_PACKAGE, "NkDrawCommand", nativeName = 
 }
 
 val nk_draw_list = struct(NUKLEAR_PACKAGE, "NkDrawList", nativeName = "struct nk_draw_list", mutable = false) {
-	float.member("global_alpha", "")
-	nk_anti_aliasing.member("shape_AA", "")
-	nk_anti_aliasing.member("line_AA", "")
-	nk_draw_null_texture.member("null_texture", "")
+	nk_convert_config.member("config", "")
 	nk_rect.member("clip_rect", "")
 	nullable..nk_buffer_p.member("buffer", "")
 	nullable..nk_buffer_p.member("vertices", "")
@@ -598,8 +585,8 @@ val nk_style_item_data = union(NUKLEAR_PACKAGE, "NkStyleItemData", nativeName = 
 }.nativeType
 
 val nk_style_item = struct(NUKLEAR_PACKAGE, "NkStyleItem", nativeName = "struct nk_style_item") {
-	nk_style_item_type.member("type", "")
-	nk_style_item_data.member("data", "")
+	nk_style_item_type.member("type", "the style type").links("STYLE_ITEM_\\w+")
+	nk_style_item_data.member("data", "the style data")
 }.nativeType
 
 val nk_style_text = struct(NUKLEAR_PACKAGE, "NkStyleText", nativeName = "struct nk_style_text") {
@@ -984,9 +971,7 @@ val nk_style_window = struct(NUKLEAR_PACKAGE, "NkStyleWindow", nativeName = "str
 	nk_color.member("menu_border_color", "")
 	nk_color.member("group_border_color", "")
 	nk_color.member("tooltip_border_color", "")
-
 	nk_style_item.member("scaler", "")
-	nk_vec2.member("footer_padding", "")
 
 	float.member("border", "")
 	float.member("combo_border", "")
@@ -996,7 +981,6 @@ val nk_style_window = struct(NUKLEAR_PACKAGE, "NkStyleWindow", nativeName = "str
 	float.member("tooltip_border", "")
 
 	float.member("rounding", "")
-	nk_vec2.member("scaler_size", "")
 	nk_vec2.member("spacing", "")
 	nk_vec2.member("scrollbar_size", "")
 	nk_vec2.member("min_size", "")
@@ -1099,10 +1083,8 @@ val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel"
 	float.member("at_x", "")
 	float.member("at_y", "")
 	float.member("max_x", "")
-	float.member("width", "")
-	float.member("height", "")
-	float.member("footer_h", "")
-	float.member("header_h", "")
+	float.member("footer_height", "")
+	float.member("header_height", "")
 	float.member("border", "")
 	unsigned_int.member("has_scrolling", "")
 	nk_rect.member("clip", "")
@@ -1155,9 +1137,11 @@ val nk_property_state = struct(NUKLEAR_PACKAGE, "NkPropertyState", nativeName = 
 	int.member("state", "")
 }.nativeType
 
+val NK_WINDOW_MAX_NAME = 64
 val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_window", mutable = false) {
 	unsigned_int.member("seq", "")
 	nk_hash.member("name", "")
+	charUTF8.array("name_string", "", size = NK_WINDOW_MAX_NAME)
 	nk_flags.member("flags", "")
 	nk_rect.member("bounds", "")
 	nk_scroll.member("scrollbar", "")
@@ -1182,6 +1166,8 @@ val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_wind
 }
 
 val nk_pool = struct(NUKLEAR_PACKAGE, "NkPool", nativeName = "struct nk_pool", mutable = false) {
+	access = Access.INTERNAL
+
 	nk_allocator.member("alloc", "")
 	nk_allocation_type.member("type", "")
 	unsigned_int.member("page_count", "")
@@ -1190,6 +1176,37 @@ val nk_pool = struct(NUKLEAR_PACKAGE, "NkPool", nativeName = "struct nk_pool", m
 	unsigned.member("capacity", "")
 	nk_size.member("size", "")
 	nk_size.member("cap", "")
+}.nativeType
+
+fun NK_CONFIGURATION_STACK(address: PointerType, old_value: NativeType, javaName: String, name: String, size: Int): StructType {
+	if ( address.elementType != old_value )
+		throw IllegalArgumentException()
+
+	val element = struct(NUKLEAR_PACKAGE, "NkConfigStack${javaName}Element", nativeName = "struct nk_config_stack_${name}_element", mutable = false) {
+		access = Access.INTERNAL
+
+		address.member("pValues", "") // address
+		old_value.member("old_value", "")
+	}.nativeType
+
+	return struct(NUKLEAR_PACKAGE, "NkConfigStack$javaName", nativeName = "struct nk_config_stack_$name", mutable = false) {
+		access = Access.INTERNAL
+
+		int.member("head", "")
+		element.array("elements", "", size = size)
+	}.nativeType
+}
+
+val nk_configuration_stacks = struct(NUKLEAR_PACKAGE, "NkConfigurationStacks", nativeName = "struct nk_configuration_stacks", mutable = false) {
+	access = Access.INTERNAL
+
+	NK_CONFIGURATION_STACK(nk_style_item.p, nk_style_item, "StyleItem", "style_item", size = 16).member("style_items", "")
+	NK_CONFIGURATION_STACK(float_p, float, "Float", "float", size = 32).member("floats", "")
+	NK_CONFIGURATION_STACK(nk_vec2.p, nk_vec2, "Vec2", "vec2", size = 16).member("vectors", "")
+	NK_CONFIGURATION_STACK(nk_flags.p, nk_flags, "Flags", "flags", size = 32).member("flags", "")
+	NK_CONFIGURATION_STACK(nk_color.p, nk_color, "Color", "color", size = 32).member("colors", "")
+	NK_CONFIGURATION_STACK(nk_user_font_p.p, nk_user_font_p, "UserFont", "user_font", size = 8).member("fonts", "")
+	NK_CONFIGURATION_STACK(nk_button_behavior.p, nk_button_behavior, "ButtonBehavior", "button_behavior", size = 8).member("button_behaviors", "")
 }.nativeType
 
 val nk_context_p = struct_p(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct nk_context", mutable = false) {
@@ -1201,8 +1218,9 @@ val nk_context_p = struct_p(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct n
 	nk_buffer.member("memory", "")
 	nk_clipboard.member("clip", "")
 	nk_flags.member("last_widget_state", "")
-	nk_button_behavior.member("button_behavior", "")
 	float.member("delta_time_seconds", "")
+	nk_button_behavior.member("button_behavior", "")
+	nk_configuration_stacks.member("stacks", "")
 
 /* private:
 	should only be accessed if you

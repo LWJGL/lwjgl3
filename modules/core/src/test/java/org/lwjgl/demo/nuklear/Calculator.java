@@ -40,7 +40,7 @@ class Calculator {
 
 	private final DecimalFormat format = new DecimalFormat();
 
-	final NkFilterCallback numberFilter;
+	final NkPluginFilter numberFilter;
 
 	Calculator() {
 		format.setGroupingUsed(false);
@@ -53,7 +53,7 @@ class Calculator {
 		dfs.setDecimalSeparator('.');
 		format.setDecimalFormatSymbols(dfs);
 
-		numberFilter = NkFilterCallback.create(Nuklear::nnk_filter_float);
+		numberFilter = NkPluginFilter.create(Nuklear::nnk_filter_float);
 	}
 
 	void layout(NkContext ctx, int x, int y) {

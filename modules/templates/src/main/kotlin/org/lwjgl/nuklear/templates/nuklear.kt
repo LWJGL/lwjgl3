@@ -369,7 +369,8 @@ ENABLE_WARNINGS()""")
 		"EDIT_CTRL_ENTER_NEWLINE".enum("", 7.NK_FLAG),
 		"EDIT_NO_HORIZONTAL_SCROLL".enum("", 8.NK_FLAG),
 		"EDIT_ALWAYS_INSERT_MODE".enum("", 9.NK_FLAG),
-		"EDIT_MULTILINE".enum("", 11.NK_FLAG)
+		"EDIT_MULTILINE".enum("", 11.NK_FLAG),
+		"EDIT_GOTO_END_ON_ACTIVATE".enum("", 12.NK_FLAG)
 	).javaDocLinks
 
 	EnumConstant(
@@ -395,16 +396,14 @@ ENABLE_WARNINGS()""")
 		"nk_panel_flags",
 
 		"WINDOW_BORDER".enum("Draws a border around the window to visually separate the window * from the background", 0.NK_FLAG),
-		"WINDOW_BORDER_HEADER".enum("Draws a border between window header and body", 1.NK_FLAG),
-		"WINDOW_MOVABLE".enum("The movable flag indicates that a window can be moved by user input or * by dragging the window header", 2.NK_FLAG),
-		"WINDOW_SCALABLE".enum("The scalable flag indicates that a window can be scaled by user input * by dragging a scaler icon at the button of the window", 3.NK_FLAG),
-		"WINDOW_CLOSABLE".enum("adds a closable icon into the header", 4.NK_FLAG),
-		"WINDOW_MINIMIZABLE".enum("adds a minimize icon into the header", 5.NK_FLAG),
-		"WINDOW_DYNAMIC".enum("special window type growing up in height while being filled to a * certain maximum height", 6.NK_FLAG),
-		"WINDOW_NO_SCROLLBAR".enum("Removes the scrollbar from the window", 7.NK_FLAG),
-		"WINDOW_TITLE".enum("Forces a header at the top at the window showing the title", 8.NK_FLAG),
-		"WINDOW_SCROLL_AUTO_HIDE".enum("Automatically hides the window scrollbar if no user interaction", 9.NK_FLAG),
-        "WINDOW_BACKGROUND".enum("Keep window always in the background", 10.NK_FLAG)
+		"WINDOW_MOVABLE".enum("The movable flag indicates that a window can be moved by user input or * by dragging the window header", 1.NK_FLAG),
+		"WINDOW_SCALABLE".enum("The scalable flag indicates that a window can be scaled by user input * by dragging a scaler icon at the button of the window", 2.NK_FLAG),
+		"WINDOW_CLOSABLE".enum("adds a closable icon into the header", 3.NK_FLAG),
+		"WINDOW_MINIMIZABLE".enum("adds a minimize icon into the header", 4.NK_FLAG),
+		"WINDOW_NO_SCROLLBAR".enum("Removes the scrollbar from the window", 5.NK_FLAG),
+		"WINDOW_TITLE".enum("Forces a header at the top at the window showing the title", 6.NK_FLAG),
+		"WINDOW_SCROLL_AUTO_HIDE".enum("Automatically hides the window scrollbar if no user interaction", 7.NK_FLAG),
+        "WINDOW_BACKGROUND".enum("Keep window always in the background", 8.NK_FLAG)
 	).javaDocLinks
 
 	EnumConstant(
@@ -489,6 +488,42 @@ ENABLE_WARNINGS()""")
 	).javaDocLinks
 
 	EnumConstant(
+		"nk_draw_vertex_layout_attribute",
+
+		"VERTEX_POSITION".enum,
+		"VERTEX_COLOR".enum,
+		"VERTEX_TEXCOORD".enum,
+		"VERTEX_ATTRIBUTE_COUNT".enum
+	)
+
+	EnumConstant(
+		"nk_draw_vertex_layout_format",
+
+		"FORMAT_SCHAR".enum,
+		"FORMAT_SSHORT".enum,
+		"FORMAT_SINT".enum,
+		"FORMAT_UCHAR".enum,
+		"FORMAT_USHORT".enum,
+		"FORMAT_UINT".enum,
+		"FORMAT_FLOAT".enum,
+		"FORMAT_DOUBLE".enum,
+
+		"FORMAT_R8G8B8".enum,
+		"FORMAT_R16G15B16".enum,
+		"FORMAT_R32G32B32".enum,
+
+		"FORMAT_R8G8B8A8".enum,
+		"FORMAT_R16G15B16A16".enum,
+		"FORMAT_R32G32B32A32".enum,
+		"FORMAT_R32G32B32A32_FLOAT".enum,
+		"FORMAT_R32G32B32A32_DOUBLE".enum,
+
+		"FORMAT_RGB32".enum,
+		"FORMAT_RGBA32".enum,
+		"FORMAT_COUNT".enum
+	)
+
+	EnumConstant(
 		"nk_style_item_type",
 
 		"STYLE_ITEM_COLOR".enum,
@@ -505,20 +540,20 @@ ENABLE_WARNINGS()""")
 	val WindowFlags = EnumConstant(
 		"nk_window_flags",
 
-		"WINDOW_PRIVATE".enum("dummy flag which mark the beginning of the private window flag part", 11.NK_FLAG),
-		"WINDOW_ROM".enum("sets the window into a read only mode and does not allow input changes", 12.NK_FLAG),
-		"WINDOW_HIDDEN".enum("Hides the window and stops any window interaction and drawing can be set by user input or by closing the window", 13.NK_FLAG),
-		"WINDOW_CLOSED".enum("Directly closes and frees the window at the end of the frame", 14.NK_FLAG),
-		"WINDOW_MINIMIZED".enum("marks the window as minimized", 15.NK_FLAG),
-		"WINDOW_SUB".enum("Marks the window as subwindow of another window", 16.NK_FLAG),
-		"WINDOW_GROUP".enum("Marks the window as window widget group", 17.NK_FLAG),
-		"WINDOW_POPUP".enum("Marks the window as a popup window", 18.NK_FLAG),
-		"WINDOW_NONBLOCK".enum("Marks the window as a nonblock popup window", 19.NK_FLAG),
-		"WINDOW_CONTEXTUAL".enum("Marks the window as a combo box or menu", 20.NK_FLAG),
-		"WINDOW_COMBO".enum("Marks the window as a combo box", 21.NK_FLAG),
-		"WINDOW_MENU".enum("Marks the window as a menu", 22.NK_FLAG),
-		"WINDOW_TOOLTIP".enum("Marks the window as a menu", 23.NK_FLAG),
-		"WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", 24.NK_FLAG)
+		"WINDOW_PRIVATE".enum("dummy flag which mark the beginning of the private window flag part", 9.NK_FLAG),
+		"WINDOW_ROM".enum("sets the window into a read only mode and does not allow input changes", 10.NK_FLAG),
+		"WINDOW_HIDDEN".enum("Hides the window and stops any window interaction and drawing can be set by user input or by closing the window", 11.NK_FLAG),
+		"WINDOW_CLOSED".enum("Directly closes and frees the window at the end of the frame", 12.NK_FLAG),
+		"WINDOW_MINIMIZED".enum("marks the window as minimized", 13.NK_FLAG),
+		"WINDOW_SUB".enum("Marks the window as subwindow of another window", 14.NK_FLAG),
+		"WINDOW_GROUP".enum("Marks the window as window widget group", 15.NK_FLAG),
+		"WINDOW_POPUP".enum("Marks the window as a popup window", 16.NK_FLAG),
+		"WINDOW_NONBLOCK".enum("Marks the window as a nonblock popup window", 17.NK_FLAG),
+		"WINDOW_CONTEXTUAL".enum("Marks the window as a combo box or menu", 18.NK_FLAG),
+		"WINDOW_COMBO".enum("Marks the window as a combo box", 19.NK_FLAG),
+		"WINDOW_MENU".enum("Marks the window as a menu", 20.NK_FLAG),
+		"WINDOW_TOOLTIP".enum("Marks the window as a menu", 21.NK_FLAG),
+		"WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", 22.NK_FLAG)
 	).javaDocLinks
 
 	val ctx = nk_context_p.IN("ctx", "the nuklear context");
@@ -583,7 +618,7 @@ ENABLE_WARNINGS()""")
 			ctx,
 			nk_panel_p.OUT("panel", ""),
 			const..charUTF8_p.IN("name", ""),
-			const..charUTF8_p.IN("id", ""),
+			const..charUTF8_p.IN("title", ""),
 			nk_rect.IN("bounds", ""),
 			nk_flags.IN("flags", "", WindowFlags, LinkMode.BITFIELD)
 		)
@@ -676,14 +711,6 @@ ENABLE_WARNINGS()""")
 
 			ctx,
 			nk_vec2.IN("size", "")
-		)
-
-		void(
-			"window_set_title",
-			"",
-
-			ctx,
-			const..charUTF8_p.IN("title_to_set", "")
 		)
 
 		void(
@@ -824,6 +851,14 @@ ENABLE_WARNINGS()""")
 			ReturnParam..nk_rect.IN("ret", "")
 		)
 
+		float(
+			"layout_ratio_from_pixel",
+			"",
+
+			ctx,
+			float.IN("pixel_width", "")
+		)
+
 		intb(
 			"group_begin",
 			"",
@@ -948,14 +983,6 @@ ENABLE_WARNINGS()""")
 			nk_image.IN("img", "")
 		)
 
-		void(
-			"button_set_behavior",
-			"",
-
-			ctx,
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
-		)
-
 		intb(
 			"button_text",
 			"",
@@ -1037,6 +1064,29 @@ ENABLE_WARNINGS()""")
 			const..charUTF8_p.IN("text", ""),
 			AutoSize("text")..nk_int.IN("len", ""),
 			nk_flags.IN("alignment", "", TextAlignments)
+		)
+
+		void(
+			"button_set_behavior",
+			"",
+
+			ctx,
+			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+		)
+
+		int(
+			"button_push_behavior",
+			"",
+
+			ctx,
+			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+		)
+
+		int(
+			"button_pop_behavior",
+			"",
+
+			ctx
 		)
 
 		intb(
@@ -1414,7 +1464,7 @@ ENABLE_WARNINGS()""")
 			charUTF8_p.IN("memory", ""),
 			Check(1)..int_p.OUT("len", ""),
 			int.IN("max", ""),
-			nullable..nk_filter.IN("filter", "")
+			nullable..nk_plugin_filter.IN("filter", "")
 		)
 
 		nk_flags(
@@ -1424,7 +1474,7 @@ ENABLE_WARNINGS()""")
 			ctx,
 			nk_flags.IN("flags", "", EditFlags),
 			nk_text_edit_p.IN("edit", ""),
-			nullable..nk_filter.IN("filter", "")
+			nullable..nk_plugin_filter.IN("filter", "")
 		)
 
 		nk_flags(
@@ -1435,7 +1485,7 @@ ENABLE_WARNINGS()""")
 			nk_flags.IN("flags", "", EditFlags),
 			charUTF8_p.IN("buffer", ""),
 			int.IN("max", ""),
-			nullable..nk_filter.IN("filter", "")
+			nullable..nk_plugin_filter.IN("filter", "")
 		)
 	}();
 
@@ -1553,7 +1603,8 @@ ENABLE_WARNINGS()""")
 			const..charUTF8_pp.IN("items", ""),
 			AutoSize("items")..int.IN("count", ""),
 			intb.IN("selected", ""),
-			int.IN("item_height", "")
+			int.IN("item_height", ""),
+			int.IN("max_height", "")
 		)
 
 		intb(
@@ -1565,7 +1616,8 @@ ENABLE_WARNINGS()""")
 			int.IN("separator", ""),
 			intb.IN("selected", ""),
 			int.IN("count", ""),
-			int.IN("item_height", "")
+			int.IN("item_height", ""),
+			int.IN("max_height", "")
 		)
 
 		intb(
@@ -1576,7 +1628,8 @@ ENABLE_WARNINGS()""")
 			const..charUTF8_p.IN("items_separated_by_zeros", ""),
 			intb.IN("selected", ""),
 			int.IN("count", ""),
-			int.IN("item_height", "")
+			int.IN("item_height", ""),
+			int.IN("max_height", "")
 		)
 
 		intb(
@@ -1588,7 +1641,8 @@ ENABLE_WARNINGS()""")
 			voidptr.IN("userdata", ""),
 			intb.IN("selected", ""),
 			int.IN("count", ""),
-			int.IN("item_height", "")
+			int.IN("item_height", ""),
+			int.IN("max_height", "")
 		)
 
 		void(
@@ -1599,7 +1653,8 @@ ENABLE_WARNINGS()""")
 			const..charUTF8_pp.IN("items", ""),
 			AutoSize("items")..int.IN("count", ""),
 			Check(1)..int_p.INOUT("selected", ""),
-			int.IN("item_height", "")
+			int.IN("item_height", ""),
+			int.IN("max_height", "")
 		)
 
 		void(
@@ -1610,7 +1665,8 @@ ENABLE_WARNINGS()""")
 			const..charUTF8_p.IN("items_separated_by_zeros", ""),
 			Check(1)..int_p.INOUT("selected", ""),
 			int.IN("count", ""),
-			int.IN("item_height", "")
+			int.IN("item_height", ""),
+			int.IN("max_height", "")
 		)
 
 		void(
@@ -1622,7 +1678,8 @@ ENABLE_WARNINGS()""")
 			int.IN("separator", ""),
 			Check(1)..int_p.INOUT("selected", ""),
 			int.IN("count", ""),
-			int.IN("item_height", "")
+			int.IN("item_height", ""),
+			int.IN("max_height", "")
 		)
 
 		void(
@@ -1634,7 +1691,8 @@ ENABLE_WARNINGS()""")
 			voidptr.IN("userdata", ""),
 			Check(1)..int_p.INOUT("selected", ""),
 			int.IN("count", ""),
-			int.IN("item_height", "")
+			int.IN("item_height", ""),
+			int.IN("max_height", "")
 		)
 
 		intb(
@@ -2152,7 +2210,7 @@ ENABLE_WARNINGS()""")
 		)
 
 		(const..charUTF8_p)(
-			"style_color_name",
+			"style_get_color_by_name",
 			"",
 
 			nk_style_colors.IN("c", "", StyleColors)
@@ -2176,6 +2234,66 @@ ENABLE_WARNINGS()""")
 
 		void("style_show_cursor", "", ctx)
 		void("style_hide_cursor", "", ctx)
+
+		int(
+			"style_push_font",
+			"",
+
+			ctx,
+			nk_user_font_p.IN("font", "")
+		)
+
+		int(
+			"style_push_float",
+			"",
+
+			ctx,
+			float_p.IN("address", ""),
+			float.IN("value", "")
+		)
+
+		int(
+			"style_push_vec2",
+			"",
+
+			ctx,
+			nk_vec2.p.IN("address", ""),
+			nk_vec2.IN("value", "")
+		)
+
+		int(
+			"style_push_style_item",
+			"",
+
+			ctx,
+			nk_style_item.p.IN("address", ""),
+			nk_style_item.IN("value", "")
+		)
+
+		int(
+			"style_push_flags",
+			"",
+
+			ctx,
+			nk_flags.p.IN("address", ""),
+			nk_flags.IN("value", "")
+		)
+
+		int(
+			"style_push_color",
+			"",
+
+			ctx,
+			nk_color.p.IN("address", ""),
+			nk_color.IN("value", "")
+		)
+
+		int("style_pop_font", "", ctx)
+		int("style_pop_float", "", ctx)
+		int("style_pop_vec2", "", ctx)
+		int("style_pop_style_item", "", ctx)
+		int("style_pop_flags", "", ctx)
+		int("style_pop_color", "", ctx)
 
 		nk_rect("widget_bounds", "", ctx)
 
@@ -2573,6 +2691,13 @@ ENABLE_WARNINGS()""")
 			"",
 
 			int.IN("id", "")
+		)
+
+		nk_image(
+			"image_handle",
+			"",
+
+			nk_handle.IN("handle", "")
 		)
 
 		nk_image(
@@ -3718,14 +3843,11 @@ ENABLE_WARNINGS()""")
 			"draw_list_setup",
 			"",
 
-			nk_draw_list_p.IN("list", ""),
-			float.IN("global_alpha", ""),
-			nk_anti_aliasing.IN("line_AA", "", Antialiasing),
-			nk_anti_aliasing.IN("shape_AA", "", Antialiasing),
-			nk_draw_null_texture.IN("null_texture", ""),
+			nk_draw_list_p.IN("canvas", ""),
+			const..nk_convert_config.p.IN("config", ""),
 			nk_buffer_p.IN("cmds", ""),
-			nk_buffer_p.IN("vert", ""),
-			nk_buffer_p.IN("elem", "")
+			nk_buffer_p.IN("vertices", ""),
+			nk_buffer_p.IN("elements", "")
 		)
 
 		void(

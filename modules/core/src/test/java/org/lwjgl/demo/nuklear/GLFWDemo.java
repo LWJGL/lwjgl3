@@ -47,6 +47,8 @@ public class GLFWDemo {
 
 	private static final NkAllocator ALLOCATOR;
 
+	private static final NkDrawVertexLayoutElement.Buffer VERTEX_LAYOUT;
+
 	static {
 		ALLOCATOR = NkAllocator.create();
 		ALLOCATOR.alloc((handle, old, size) -> {
@@ -58,6 +60,13 @@ public class GLFWDemo {
 
 		});
 		ALLOCATOR.mfree((handle, ptr) -> nmemFree(ptr));
+
+		VERTEX_LAYOUT = NkDrawVertexLayoutElement.create(4)
+			.position(0).attribute(NK_VERTEX_POSITION).format(NK_FORMAT_FLOAT).offset(0)
+			.position(1).attribute(NK_VERTEX_TEXCOORD).format(NK_FORMAT_FLOAT).offset(8)
+			.position(2).attribute(NK_VERTEX_COLOR).format(NK_FORMAT_R8G8B8A8).offset(16)
+			.position(3).attribute(NK_VERTEX_ATTRIBUTE_COUNT).format(NK_FORMAT_COUNT).offset(0)
+			.flip();
 	}
 
 	public static void main(String[] args) {
@@ -342,9 +351,9 @@ public class GLFWDemo {
 			glEnableVertexAttribArray(attrib_uv);
 			glEnableVertexAttribArray(attrib_col);
 
-			glVertexAttribPointer(attrib_pos, 2, GL_FLOAT, false, NkDrawVertex.SIZEOF, NkDrawVertex.POS);
-			glVertexAttribPointer(attrib_uv, 2, GL_FLOAT, false, NkDrawVertex.SIZEOF, NkDrawVertex.UV);
-			glVertexAttribPointer(attrib_col, 4, GL_UNSIGNED_BYTE, true, NkDrawVertex.SIZEOF, NkDrawVertex.COL);
+			glVertexAttribPointer(attrib_pos, 2, GL_FLOAT, false, 20, 0);
+			glVertexAttribPointer(attrib_uv, 2, GL_FLOAT, false, 20, 8);
+			glVertexAttribPointer(attrib_col, 4, GL_UNSIGNED_BYTE, true, 20, 16);
 		}
 
 		{
@@ -372,41 +381,50 @@ public class GLFWDemo {
 		glfwSetScrollCallback(win, (window, xoffset, yoffset) -> nk_input_scroll(ctx, (float)yoffset));
 		glfwSetCharCallback(win, (window, codepoint) -> nk_input_unicode(ctx, codepoint));
 		glfwSetKeyCallback(win, (window, key, scancode, action, mods) -> {
+			boolean press = action == GLFW_PRESS;
 			switch ( key ) {
 				case GLFW_KEY_ESCAPE:
 					glfwSetWindowShouldClose(window, true);
 					break;
 				case GLFW_KEY_DELETE:
-					nk_input_key(ctx, NK_KEY_DEL, action == GLFW_PRESS);
+					nk_input_key(ctx, NK_KEY_DEL, press);
 					break;
 				case GLFW_KEY_ENTER:
-					nk_input_key(ctx, NK_KEY_ENTER, action == GLFW_PRESS);
+					nk_input_key(ctx, NK_KEY_ENTER, press);
 					break;
 				case GLFW_KEY_TAB:
-					nk_input_key(ctx, NK_KEY_TAB, action == GLFW_PRESS);
+					nk_input_key(ctx, NK_KEY_TAB, press);
 					break;
 				case GLFW_KEY_BACKSPACE:
-					nk_input_key(ctx, NK_KEY_BACKSPACE, action == GLFW_PRESS);
+					nk_input_key(ctx, NK_KEY_BACKSPACE, press);
 					break;
 				case GLFW_KEY_UP:
-					nk_input_key(ctx, NK_KEY_UP, action == GLFW_PRESS);
+					nk_input_key(ctx, NK_KEY_UP, press);
 					break;
 				case GLFW_KEY_DOWN:
-					nk_input_key(ctx, NK_KEY_DOWN, action == GLFW_PRESS);
+					nk_input_key(ctx, NK_KEY_DOWN, press);
 					break;
 				case GLFW_KEY_HOME:
-					nk_input_key(ctx, NK_KEY_TEXT_START, action == GLFW_PRESS);
+					nk_input_key(ctx, NK_KEY_TEXT_START, press);
+					nk_input_key(ctx, NK_KEY_SCROLL_START, press);
 					break;
 				case GLFW_KEY_END:
-					nk_input_key(ctx, NK_KEY_TEXT_END, action == GLFW_PRESS);
+					nk_input_key(ctx, NK_KEY_TEXT_END, press);
+					nk_input_key(ctx, NK_KEY_SCROLL_END, press);
+					break;
+				case GLFW_KEY_PAGE_DOWN:
+					nk_input_key(ctx, NK_KEY_SCROLL_DOWN, press);
+					break;
+				case GLFW_KEY_PAGE_UP:
+					nk_input_key(ctx, NK_KEY_SCROLL_UP, press);
 					break;
 				case GLFW_KEY_LEFT_SHIFT:
 				case GLFW_KEY_RIGHT_SHIFT:
-					nk_input_key(ctx, NK_KEY_SHIFT, action == GLFW_PRESS);
+					nk_input_key(ctx, NK_KEY_SHIFT, press);
 					break;
 				case GLFW_KEY_LEFT_CONTROL:
 				case GLFW_KEY_RIGHT_CONTROL:
-					if ( action == GLFW_PRESS ) {
+					if ( press ) {
 						nk_input_key(ctx, NK_KEY_COPY, glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS);
 						nk_input_key(ctx, NK_KEY_PASTE, glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS);
 						nk_input_key(ctx, NK_KEY_CUT, glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS);
@@ -492,11 +510,16 @@ public class GLFWDemo {
 		nk_input_begin(ctx);
 		glfwPollEvents();
 
-		if ( ctx.input().mouse().grab() )
+		NkMouse mouse = ctx.input().mouse();
+		if ( mouse.grab() )
 			glfwSetInputMode(win, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-		else if ( ctx.input().mouse().grabbed() )
-			glfwSetCursorPos(win, ctx.input().mouse().prev().x(), ctx.input().mouse().prev().y());
-		else if ( ctx.input().mouse().ungrab() )
+		else if ( mouse.grabbed() ) {
+			float prevX = mouse.prev().x();
+			float prevY = mouse.prev().y();
+			glfwSetCursorPos(win, prevX, prevY);
+			mouse.pos().x(prevX);
+			mouse.pos().y(prevY);
+		} else if ( mouse.ungrab() )
 			glfwSetInputMode(win, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 		nk_input_end(ctx);
@@ -540,15 +563,18 @@ public class GLFWDemo {
 			ByteBuffer vertices = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY, max_vertex_buffer, null);
 			ByteBuffer elements = glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY, max_element_buffer, null);
 			try ( MemoryStack stack = stackPush() ) {
-				// fill converting configuration
+				// fill convert configuration
 				NkConvertConfig config = NkConvertConfig.callocStack(stack)
-					.global_alpha(1.0f)
-					.shape_AA(AA)
-					.line_AA(AA)
+					.vertex_layout(VERTEX_LAYOUT)
+					.vertex_size(20)
+					.vertex_alignment(4)
+					.null_texture(null_texture)
 					.circle_segment_count(22)
 					.curve_segment_count(22)
 					.arc_segment_count(22)
-					.null_texture(null_texture);
+					.global_alpha(1.0f)
+					.shape_AA(AA)
+					.line_AA(AA);
 
 				// setup buffers to load vertices and elements
 				NkBuffer vbuf = NkBuffer.mallocStack(stack);
