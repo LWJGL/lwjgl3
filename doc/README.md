@@ -46,7 +46,7 @@ Step-by-step:
 At this point you're ready to follow the build process explained below.
 
 LWJGL comes with a preconfigured **IntelliJ IDEA** project. You can use the Community Edition with the Kotlin and Ant plugins and, optionally, the TestNG and Copyright plugins.
-* File &gt; Open &gt; choose the */config/ide/idea* folder
+* File &gt; Open &gt; choose the folder that contains the cloned LWJGL repository
 * File &gt; Project Structure &gt; Project &gt; choose or create the Project SDK
 * If you haven't used the init-generated and init-wiki targets, either ignore the VCS errors, or go to Settings &gt; Version Control &gt; remove the missing directories from the list of VCS roots.
 
