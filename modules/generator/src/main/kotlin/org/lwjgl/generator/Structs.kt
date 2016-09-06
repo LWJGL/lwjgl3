@@ -443,7 +443,7 @@ $indentation}"""
 
 		val mallocable = mutable || usageOutput || (usageInput && !usageResultPointer)
 
-		if ( mallocable )
+		if ( mallocable || members.any { it.nativeType is PointerType && it.nativeType.mapping === PointerMapping.DATA_POINTER } )
 			println("import org.lwjgl.*;")
 		println("import org.lwjgl.system.*;\n")
 
