@@ -102,7 +102,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 		If {@code vkCreateSwapchainKHR} succeeds, it will return a handle to a swapchain that contains an array of at least {@code minImageCount} presentable
 		images.
 
-		The {@code VkSurfaceKHR} associated with a swapchain $mustnot be destroyed until after the swapchain is destroyed.
+		The {@code VkSurfaceKHR} associated with a swapchain $must not be destroyed until after the swapchain is destroyed.
 
 		Like core functions, several WSI fuctions, including {@code vkCreateSwapchainKHR} return #ERROR_DEVICE_LOST if the logical device was lost. As with
 		most core objects, {@code VkSwapchainKHR} is a child of the device and is affected by the lost state; it $must be destroyed before destroying the

@@ -25,7 +25,7 @@ object ValidityStructs {
 			"{@code pNext} $must be $NULL",
 			"{@code flags} $must be 0",
 			"{@code window} $must be a pointer to a {@code ANativeWindow} value",
-			"{@code window} $mustnot be in a connected state"
+			"{@code window} $must not be in a connected state"
 		)}"""
 
 @JvmField val VkApplicationInfo =
@@ -50,14 +50,14 @@ object ValidityStructs {
 			"{@code stencilStoreOp} $must be a valid {@code VkAttachmentStoreOp} value",
 			"{@code initialLayout} $must be a valid {@code VkImageLayout} value",
 			"{@code finalLayout} $must be a valid {@code VkImageLayout} value",
-			"{@code finalLayout} $mustnot be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED"
+			"{@code finalLayout} $must not be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED"
 		)}"""
 
 @JvmField val VkAttachmentReference =
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code layout} $must be a valid {@code VkImageLayout} value",
-			"{@code layout} $mustnot be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED"
+			"{@code layout} $must not be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED"
 		)}"""
 
 @JvmField val VkBindSparseInfo =
@@ -98,7 +98,7 @@ object ValidityStructs {
 			"{@code pNext} $must be $NULL, or a pointer to a valid instance of {@code VkDedicatedAllocationBufferCreateInfoNV}",
 			"{@code flags} $must be a valid combination of {@code VkBufferCreateFlagBits} values",
 			"{@code usage} $must be a valid combination of {@code VkBufferUsageFlagBits} values",
-			"{@code usage} $mustnot be 0",
+			"{@code usage} $must not be 0",
 			"{@code sharingMode} $must be a valid {@code VkSharingMode} value",
 			"{@code size} $must be greater than 0",
 			"""
@@ -106,9 +106,9 @@ object ValidityStructs {
 			{@code uint32_t} values
 			""",
 			"If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code queueFamilyIndexCount} $must be greater than 1",
-			"If the sparse bindings feature is not enabled, {@code flags} $mustnot contain #BUFFER_CREATE_SPARSE_BINDING_BIT",
-			"If the sparse buffer residency feature is not enabled, {@code flags} $mustnot contain #BUFFER_CREATE_SPARSE_RESIDENCY_BIT",
-			"If the sparse aliased residency feature is not enabled, {@code flags} $mustnot contain #BUFFER_CREATE_SPARSE_ALIASED_BIT",
+			"If the sparse bindings feature is not enabled, {@code flags} $must not contain #BUFFER_CREATE_SPARSE_BINDING_BIT",
+			"If the sparse buffer residency feature is not enabled, {@code flags} $must not contain #BUFFER_CREATE_SPARSE_RESIDENCY_BIT",
+			"If the sparse aliased residency feature is not enabled, {@code flags} $must not contain #BUFFER_CREATE_SPARSE_ALIASED_BIT",
 			"""
 			If {@code flags} contains #BUFFER_CREATE_SPARSE_RESIDENCY_BIT or #BUFFER_CREATE_SPARSE_ALIASED_BIT, it $must also contain
 			#BUFFER_CREATE_SPARSE_BINDING_BIT
@@ -205,9 +205,9 @@ object ValidityStructs {
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code aspectMask} $must be a valid combination of {@code VkImageAspectFlagBits} values",
-			"{@code aspectMask} $mustnot be 0",
-			"If {@code aspectMask} includes #IMAGE_ASPECT_COLOR_BIT, it $mustnot include #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT",
-			"{@code aspectMask} $mustnot include #IMAGE_ASPECT_METADATA_BIT"
+			"{@code aspectMask} $must not be 0",
+			"If {@code aspectMask} includes #IMAGE_ASPECT_COLOR_BIT, it $must not include #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT",
+			"{@code aspectMask} $must not include #IMAGE_ASPECT_METADATA_BIT"
 		)}"""
 
 @JvmField val VkCommandBufferAllocateInfo =
@@ -331,8 +331,8 @@ object ValidityStructs {
 			binding specified by {@code dstBinding}, and all applicable consecutive bindings
 			""",
 			"""
-			If {@code srcSet} is equal to {@code dstSet}, then the source and destination ranges of descriptors $mustnot overlap, where the ranges $may include
-			array elements from consecutive bindings
+			If {@code srcSet} is equal to {@code dstSet}, then the source and destination ranges of descriptors $must not overlap, where the ranges $may
+			include array elements from consecutive bindings
 			"""
 		)}"""
 
@@ -369,7 +369,7 @@ object ValidityStructs {
 			"{@code sType} $must be #STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT",
 			"{@code pNext} $must be $NULL",
 			"{@code flags} $must be a valid combination of {@code VkDebugReportFlagBitsEXT} values",
-			"{@code flags} $mustnot be 0"
+			"{@code flags} $must not be 0"
 		)}"""
 
 @JvmField val VkDebugReportLayerFlagsEXT =
@@ -385,7 +385,7 @@ object ValidityStructs {
 			"{@code sType} $must be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV",
 			"{@code pNext} $must be $NULL",
 			"""
-			If {@code dedicatedAllocation} is #TRUE, ##VkBufferCreateInfo{@code ::flags} $mustnot include #BUFFER_CREATE_SPARSE_BINDING_BIT,
+			If {@code dedicatedAllocation} is #TRUE, ##VkBufferCreateInfo{@code ::flags} $must not include #BUFFER_CREATE_SPARSE_BINDING_BIT,
 			#BUFFER_CREATE_SPARSE_RESIDENCY_BIT, or #BUFFER_CREATE_SPARSE_ALIASED_BIT
 			"""
 		)}"""
@@ -396,7 +396,7 @@ object ValidityStructs {
 			"{@code sType} $must be #STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV",
 			"{@code pNext} $must be $NULL",
 			"""
-			If {@code dedicatedAllocation} is #TRUE, ##VkImageCreateInfo{@code ::flags} $mustnot include #IMAGE_CREATE_SPARSE_BINDING_BIT,
+			If {@code dedicatedAllocation} is #TRUE, ##VkImageCreateInfo{@code ::flags} $must not include #IMAGE_CREATE_SPARSE_BINDING_BIT,
 			#IMAGE_CREATE_SPARSE_RESIDENCY_BIT, or #IMAGE_CREATE_SPARSE_ALIASED_BIT
 			"""
 		)}"""
@@ -476,7 +476,7 @@ object ValidityStructs {
 			Both of {@code descriptorPool}, and the elements of {@code pSetLayouts} $must have been created, allocated, or retrieved from the same
 			{@code VkDevice}
 			""",
-			"{@code descriptorSetCount} $mustnot be greater than the number of sets that are currently available for allocation in {@code descriptorPool}",
+			"{@code descriptorSetCount} $must not be greater than the number of sets that are currently available for allocation in {@code descriptorPool}",
 			"{@code descriptorPool} $must have enough free descriptor capacity remaining to allocate the descriptor sets of the specified layouts"
 		)}"""
 
@@ -664,7 +664,7 @@ object ValidityStructs {
 			"{@code sType} $must be #STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV",
 			"{@code pNext} $must be $NULL",
 			"{@code handleTypes} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
-			"{@code handleTypes} $mustnot be 0"
+			"{@code handleTypes} $must not be 0"
 		)}"""
 
 @JvmField val VkExportMemoryWin32HandleInfoNV =
@@ -680,11 +680,11 @@ object ValidityStructs {
 		${ul(
 			"{@code imageFormatProperties} $must be a valid ##VkImageFormatProperties structure",
 			"{@code externalMemoryFeatures} $must be a valid combination of {@code VkExternalMemoryFeatureFlagBitsNV} values",
-			"{@code externalMemoryFeatures} $mustnot be 0",
+			"{@code externalMemoryFeatures} $must not be 0",
 			"{@code exportFromImportedHandleTypes} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
-			"{@code exportFromImportedHandleTypes} $mustnot be 0",
+			"{@code exportFromImportedHandleTypes} $must not be 0",
 			"{@code compatibleHandleTypes} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
-			"{@code compatibleHandleTypes} $mustnot be 0"
+			"{@code compatibleHandleTypes} $must not be 0"
 		)}"""
 
 @JvmField val VkExternalMemoryImageCreateInfoNV =
@@ -693,7 +693,7 @@ object ValidityStructs {
 			"{@code sType} $must be #STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV",
 			"{@code pNext} $must be $NULL",
 			"{@code handleTypes} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
-			"{@code handleTypes} $mustnot be 0"
+			"{@code handleTypes} $must not be 0"
 		)}"""
 
 @JvmField val VkFenceCreateInfo =
@@ -741,7 +741,7 @@ object ValidityStructs {
 			the corresponding {@code VkAttachmentDescription} in {@code renderPass}
 			""",
 			"Any given element of {@code pAttachments} $must have dimensions at least as large as the corresponding framebuffer dimension",
-			"Any given element of {@code pAttachments} $must only specify a single mip-level",
+			"Any given element of {@code pAttachments} $must only specify a single mip level",
 			"Any given element of {@code pAttachments} $must have been created with the identity swizzle",
 			"{@code width} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferWidth}",
 			"{@code height} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferHeight}",
@@ -788,11 +788,11 @@ object ValidityStructs {
 			""",
 			"The {@code stage} member of each element of {@code pStages} $must be unique",
 			"The {@code stage} member of one element of {@code pStages} $must be #SHADER_STAGE_VERTEX_BIT",
-			"The {@code stage} member of any given element of {@code pStages} $mustnot be #SHADER_STAGE_COMPUTE_BIT",
+			"The {@code stage} member of any given element of {@code pStages} $must not be #SHADER_STAGE_COMPUTE_BIT",
 			"If {@code pStages} includes a tessellation control shader stage, it $must include a tessellation evaluation shader stage",
 			"If {@code pStages} includes a tessellation evaluation shader stage, it $must include a tessellation control shader stage",
 			"""
-			If {@code pStages} includes a tessellation control shader stage and a tessellation evaluation shader stage, {@code pTessellationState} $mustnot be
+			If {@code pStages} includes a tessellation control shader stage and a tessellation evaluation shader stage, {@code pTessellationState} $must not be
 			$NULL
 			""",
 			"""
@@ -835,7 +835,7 @@ object ValidityStructs {
 			all execution paths
 			""",
 			"""
-			If {@code pStages} includes a fragment shader stage, its shader code $mustnot read from any input attachment that is defined as #ATTACHMENT_UNUSED
+			If {@code pStages} includes a fragment shader stage, its shader code $must not read from any input attachment that is defined as #ATTACHMENT_UNUSED
 			in {@code subpass}
 			""",
 			"""
@@ -1009,7 +1009,7 @@ object ValidityStructs {
 			"{@code samples} $must be a valid {@code VkSampleCountFlagBits} value",
 			"{@code tiling} $must be a valid {@code VkImageTiling} value",
 			"{@code usage} $must be a valid combination of {@code VkImageUsageFlagBits} values",
-			"{@code usage} $mustnot be 0",
+			"{@code usage} $must not be 0",
 			"{@code sharingMode} $must be a valid {@code VkSharingMode} value",
 			"{@code initialLayout} $must be a valid {@code VkImageLayout} value",
 			"""
@@ -1017,7 +1017,7 @@ object ValidityStructs {
 			{@code uint32_t} values
 			""",
 			"If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code queueFamilyIndexCount} $must be greater than 1",
-			"{@code format} $mustnot be #FORMAT_UNDEFINED",
+			"{@code format} $must not be #FORMAT_UNDEFINED",
 			"The {@code width}, {@code height}, and {@code depth} members of {@code extent} $must all be greater than 0",
 			"{@code mipLevels} $must be greater than 0",
 			"{@code arrayLayers} $must be greater than 0",
@@ -1041,7 +1041,7 @@ object ValidityStructs {
 			""",
 			"""
 			If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and {@code extent.height}
-			$must be equal
+			$must be equal and {@code arrayLayers} $must be greater than or equal to 6
 			""",
 			"""
 			If {@code imageType} is #IMAGE_TYPE_3D, {@code extent.width}, {@code extent.height} and {@code extent.depth} $must be less than or equal to
@@ -1066,8 +1066,12 @@ object ValidityStructs {
 			{@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher
 			""",
 			"""
-			If {@code samples} is not #SAMPLE_COUNT_1_BIT, {@code imageType} $must be #IMAGE_TYPE_2D, {@code tiling} $must be #IMAGE_TILING_OPTIMAL, and
-			{@code mipLevels} $must be equal to 1
+			If {@code samples} is not #SAMPLE_COUNT_1_BIT, {@code imageType} $must be #IMAGE_TYPE_2D, {@code flags} $must not contain
+			#IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code tiling} $must be #IMAGE_TILING_OPTIMAL, and {@code mipLevels} $must be equal to 1
+			""",
+			"""
+			If {@code usage} includes #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, then bits other than #IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
+			#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and #IMAGE_USAGE_INPUT_ATTACHMENT_BIT $must not be set
 			""",
 			"""
 			If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, or
@@ -1083,12 +1087,13 @@ object ValidityStructs {
 			this structure
 			""",
 			"""
-			If the ETC2 texture compression feature is not enabled, {@code format} $mustnot be #FORMAT_ETC2_R8G8B8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8_SRGB_BLOCK,
-			#FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK, #FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK,
-			#FORMAT_EAC_R11_UNORM_BLOCK, #FORMAT_EAC_R11_SNORM_BLOCK, #FORMAT_EAC_R11G11_UNORM_BLOCK, or #FORMAT_EAC_R11G11_SNORM_BLOCK
+			If the ETC2 texture compression feature is not enabled, {@code format} $must not be #FORMAT_ETC2_R8G8B8_UNORM_BLOCK,
+			#FORMAT_ETC2_R8G8B8_SRGB_BLOCK, #FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK, #FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK,
+			#FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK, #FORMAT_EAC_R11_UNORM_BLOCK, #FORMAT_EAC_R11_SNORM_BLOCK, #FORMAT_EAC_R11G11_UNORM_BLOCK, or
+			#FORMAT_EAC_R11G11_SNORM_BLOCK
 			""",
 			"""
-			If the ASTC LDR texture compression feature is not enabled, {@code format} $mustnot be #FORMAT_ASTC_4x4_UNORM_BLOCK, #FORMAT_ASTC_4x4_SRGB_BLOCK,
+			If the ASTC LDR texture compression feature is not enabled, {@code format} $must not be #FORMAT_ASTC_4x4_UNORM_BLOCK, #FORMAT_ASTC_4x4_SRGB_BLOCK,
 			#FORMAT_ASTC_5x4_UNORM_BLOCK, #FORMAT_ASTC_5x4_SRGB_BLOCK, #FORMAT_ASTC_5x5_UNORM_BLOCK, #FORMAT_ASTC_5x5_SRGB_BLOCK, #FORMAT_ASTC_6x5_UNORM_BLOCK,
 			#FORMAT_ASTC_6x5_SRGB_BLOCK, #FORMAT_ASTC_6x6_UNORM_BLOCK, #FORMAT_ASTC_6x6_SRGB_BLOCK, #FORMAT_ASTC_8x5_UNORM_BLOCK, #FORMAT_ASTC_8x5_SRGB_BLOCK,
 			#FORMAT_ASTC_8x6_UNORM_BLOCK, #FORMAT_ASTC_8x6_SRGB_BLOCK, #FORMAT_ASTC_8x8_UNORM_BLOCK, #FORMAT_ASTC_8x8_SRGB_BLOCK,
@@ -1097,7 +1102,7 @@ object ValidityStructs {
 			#FORMAT_ASTC_12x10_UNORM_BLOCK, #FORMAT_ASTC_12x10_SRGB_BLOCK, #FORMAT_ASTC_12x12_UNORM_BLOCK, or #FORMAT_ASTC_12x12_SRGB_BLOCK
 			""",
 			"""
-			If the BC texture compression feature is not enabled, {@code format} $mustnot be #FORMAT_BC1_RGB_UNORM_BLOCK, #FORMAT_BC1_RGB_SRGB_BLOCK,
+			If the BC texture compression feature is not enabled, {@code format} $must not be #FORMAT_BC1_RGB_UNORM_BLOCK, #FORMAT_BC1_RGB_SRGB_BLOCK,
 			#FORMAT_BC1_RGBA_UNORM_BLOCK, #FORMAT_BC1_RGBA_SRGB_BLOCK, #FORMAT_BC2_UNORM_BLOCK, #FORMAT_BC2_SRGB_BLOCK, #FORMAT_BC3_UNORM_BLOCK,
 			#FORMAT_BC3_SRGB_BLOCK, #FORMAT_BC4_UNORM_BLOCK, #FORMAT_BC4_SNORM_BLOCK, #FORMAT_BC5_UNORM_BLOCK, #FORMAT_BC5_SNORM_BLOCK,
 			#FORMAT_BC6H_UFLOAT_BLOCK, #FORMAT_BC6H_SFLOAT_BLOCK, #FORMAT_BC7_UNORM_BLOCK, or #FORMAT_BC7_SRGB_BLOCK
@@ -1106,30 +1111,30 @@ object ValidityStructs {
 			If the multisampled storage images feature is not enabled, and {@code usage} contains #IMAGE_USAGE_STORAGE_BIT, {@code samples} $must be
 			#SAMPLE_COUNT_1_BIT
 			""",
-			"If the sparse bindings feature is not enabled, {@code flags} $mustnot contain #IMAGE_CREATE_SPARSE_BINDING_BIT",
+			"If the sparse bindings feature is not enabled, {@code flags} $must not contain #IMAGE_CREATE_SPARSE_BINDING_BIT",
 			"""
-			If the sparse residency for 2D images feature is not enabled, and {@code imageType} is #IMAGE_TYPE_2D, {@code flags} $mustnot contain
+			If the sparse residency for 2D images feature is not enabled, and {@code imageType} is #IMAGE_TYPE_2D, {@code flags} $must not contain
 			#IMAGE_CREATE_SPARSE_RESIDENCY_BIT
 			""",
 			"""
-			If the sparse residency for 3D images feature is not enabled, and {@code imageType} is #IMAGE_TYPE_3D, {@code flags} $mustnot contain
+			If the sparse residency for 3D images feature is not enabled, and {@code imageType} is #IMAGE_TYPE_3D, {@code flags} $must not contain
 			#IMAGE_CREATE_SPARSE_RESIDENCY_BIT
 			""",
 			"""
 			If the sparse residency for images with 2 samples feature is not enabled, {@code imageType} is #IMAGE_TYPE_2D, and {@code samples} is
-			#SAMPLE_COUNT_2_BIT, {@code flags} $mustnot contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT
+			#SAMPLE_COUNT_2_BIT, {@code flags} $must not contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT
 			""",
 			"""
 			If the sparse residency for images with 4 samples feature is not enabled, {@code imageType} is #IMAGE_TYPE_2D, and {@code samples} is
-			#SAMPLE_COUNT_4_BIT, {@code flags} $mustnot contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT
+			#SAMPLE_COUNT_4_BIT, {@code flags} $must not contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT
 			""",
 			"""
 			If the sparse residency for images with 8 samples feature is not enabled, {@code imageType} is #IMAGE_TYPE_2D, and {@code samples} is
-			#SAMPLE_COUNT_8_BIT, {@code flags} $mustnot contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT
+			#SAMPLE_COUNT_8_BIT, {@code flags} $must not contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT
 			""",
 			"""
 			If the sparse residency for images with 16 samples feature is not enabled, {@code imageType} is #IMAGE_TYPE_2D, and {@code samples} is
-			#SAMPLE_COUNT_16_BIT, {@code flags} $mustnot contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT
+			#SAMPLE_COUNT_16_BIT, {@code flags} $must not contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_LINEAR, {@code format} $must be a format that has at least one supported feature bit present in the value of
@@ -1137,23 +1142,23 @@ object ValidityStructs {
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_LINEAR, and ##VkFormatProperties{@code ::linearTilingFeatures} (as returned by
-			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, {@code usage}
-			$mustnot contain #IMAGE_USAGE_SAMPLED_BIT
+			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, {@code usage} $must
+			not contain #IMAGE_USAGE_SAMPLED_BIT
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_LINEAR, and ##VkFormatProperties{@code ::linearTilingFeatures} (as returned by
-			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_STORAGE_IMAGE_BIT, {@code usage}
-			$mustnot contain #IMAGE_USAGE_STORAGE_BIT
+			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_STORAGE_IMAGE_BIT, {@code usage} $must
+			not contain #IMAGE_USAGE_STORAGE_BIT
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_LINEAR, and ##VkFormatProperties{@code ::linearTilingFeatures} (as returned by
 			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT, {@code usage}
-			$mustnot contain #IMAGE_USAGE_COLOR_ATTACHMENT_BIT
+			$must not contain #IMAGE_USAGE_COLOR_ATTACHMENT_BIT
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_LINEAR, and ##VkFormatProperties{@code ::linearTilingFeatures} (as returned by
 			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT,
-			{@code usage} $mustnot contain #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
+			{@code usage} $must not contain #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_OPTIMAL, {@code format} $must be a format that has at least one supported feature bit present in the value of
@@ -1161,23 +1166,23 @@ object ValidityStructs {
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_OPTIMAL, and ##VkFormatProperties{@code ::optimalTilingFeatures} (as returned by
-			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, {@code usage}
-			$mustnot contain #IMAGE_USAGE_SAMPLED_BIT
+			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, {@code usage} $must
+			not contain #IMAGE_USAGE_SAMPLED_BIT
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_OPTIMAL, and ##VkFormatProperties{@code ::optimalTilingFeatures} (as returned by
-			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_STORAGE_IMAGE_BIT, {@code usage}
-			$mustnot contain #IMAGE_USAGE_STORAGE_BIT
+			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_STORAGE_IMAGE_BIT, {@code usage} $must
+			not contain #IMAGE_USAGE_STORAGE_BIT
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_OPTIMAL, and ##VkFormatProperties{@code ::optimalTilingFeatures} (as returned by
 			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT, {@code usage}
-			$mustnot contain #IMAGE_USAGE_COLOR_ATTACHMENT_BIT
+			$must not contain #IMAGE_USAGE_COLOR_ATTACHMENT_BIT
 			""",
 			"""
 			If {@code tiling} is #IMAGE_TILING_OPTIMAL, and ##VkFormatProperties{@code ::optimalTilingFeatures} (as returned by
 			#GetPhysicalDeviceFormatProperties() with the same value of {@code format}) does not include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT,
-			{@code usage} $mustnot contain #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
+			{@code usage} $must not contain #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
 			""",
 			"""
 			If {@code flags} contains #IMAGE_CREATE_SPARSE_RESIDENCY_BIT or #IMAGE_CREATE_SPARSE_ALIASED_BIT, it $must also contain
@@ -1197,7 +1202,7 @@ object ValidityStructs {
 			"{@code image} $must be a valid {@code VkImage} handle",
 			"{@code subresourceRange} $must be a valid ##VkImageSubresourceRange structure",
 			"{@code oldLayout} $must be #IMAGE_LAYOUT_UNDEFINED or the current layout of the image subresources affected by the barrier",
-			"{@code newLayout} $mustnot be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED",
+			"{@code newLayout} $must not be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED",
 			"""
 			If {@code image} was created with a sharing mode of #SHARING_MODE_CONCURRENT, {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} $must
 			both be #QUEUE_FAMILY_IGNORED
@@ -1258,7 +1263,7 @@ object ValidityStructs {
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code aspectMask} $must be a valid combination of {@code VkImageAspectFlagBits} values",
-			"{@code aspectMask} $mustnot be 0",
+			"{@code aspectMask} $must not be 0",
 			"{@code mipLevel} $must be less than the {@code mipLevels} specified in {@code VkImageCreateInfo} when the image was created",
 			"{@code arrayLayer} $must be less than the {@code arrayLayers} specified in {@code VkImageCreateInfo} when the image was created"
 		)}"""
@@ -1267,9 +1272,9 @@ object ValidityStructs {
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code aspectMask} $must be a valid combination of {@code VkImageAspectFlagBits} values",
-			"{@code aspectMask} $mustnot be 0",
-			"If {@code aspectMask} contains #IMAGE_ASPECT_COLOR_BIT, it $mustnot contain either of #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT",
-			"{@code aspectMask} $mustnot contain #IMAGE_ASPECT_METADATA_BIT",
+			"{@code aspectMask} $must not be 0",
+			"If {@code aspectMask} contains #IMAGE_ASPECT_COLOR_BIT, it $must not contain either of #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT",
+			"{@code aspectMask} $must not contain #IMAGE_ASPECT_METADATA_BIT",
 			"{@code mipLevel} $must be less than the {@code mipLevels} specified in {@code VkImageCreateInfo} when the image was created",
 			"""
 			{@code baseArrayLayer + layerCount} $must be less than or equal to the {@code arrayLayers} specified in {@code VkImageCreateInfo} when
@@ -1281,7 +1286,7 @@ object ValidityStructs {
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code aspectMask} $must be a valid combination of {@code VkImageAspectFlagBits} values",
-			"{@code aspectMask} $mustnot be 0",
+			"{@code aspectMask} $must not be 0",
 			"""
 			If {@code levelCount} is not #REMAINING_MIP_LEVELS, {@code baseMipLevel + levelCount} $must be less than or equal to the
 			{@code mipLevels} specified in {@code VkImageCreateInfo} when the image was created
@@ -1304,17 +1309,18 @@ object ValidityStructs {
 			"{@code components} $must be a valid ##VkComponentMapping structure",
 			"{@code subresourceRange} $must be a valid ##VkImageSubresourceRange structure",
 			"""
-			If {@code image} was not created with #IMAGE_CREATE_CUBE_COMPATIBLE_BIT then {@code viewType} $mustnot be #IMAGE_VIEW_TYPE_CUBE or
+			If {@code image} was not created with #IMAGE_CREATE_CUBE_COMPATIBLE_BIT then {@code viewType} $must not be #IMAGE_VIEW_TYPE_CUBE or
 			#IMAGE_VIEW_TYPE_CUBE_ARRAY
 			""",
-			"If the image cubemap arrays feature is not enabled, {@code viewType} $mustnot be #IMAGE_VIEW_TYPE_CUBE_ARRAY",
+			"If the image cubemap arrays feature is not enabled, {@code viewType} $must not be #IMAGE_VIEW_TYPE_CUBE_ARRAY",
 			"""
-			If the ETC2 texture compression feature is not enabled, {@code format} $mustnot be #FORMAT_ETC2_R8G8B8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8_SRGB_BLOCK,
-			#FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK, #FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK,
-			#FORMAT_EAC_R11_UNORM_BLOCK, #FORMAT_EAC_R11_SNORM_BLOCK, #FORMAT_EAC_R11G11_UNORM_BLOCK, or #FORMAT_EAC_R11G11_SNORM_BLOCK
+			If the ETC2 texture compression feature is not enabled, {@code format} $must not be #FORMAT_ETC2_R8G8B8_UNORM_BLOCK,
+			#FORMAT_ETC2_R8G8B8_SRGB_BLOCK, #FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK, #FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK,
+			#FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK, #FORMAT_EAC_R11_UNORM_BLOCK, #FORMAT_EAC_R11_SNORM_BLOCK, #FORMAT_EAC_R11G11_UNORM_BLOCK, or
+			#FORMAT_EAC_R11G11_SNORM_BLOCK
 			""",
 			"""
-			If the ASTC LDR texture compression feature is not enabled, {@code format} $mustnot be #FORMAT_ASTC_4x4_UNORM_BLOCK, #FORMAT_ASTC_4x4_SRGB_BLOCK,
+			If the ASTC LDR texture compression feature is not enabled, {@code format} $must not be #FORMAT_ASTC_4x4_UNORM_BLOCK, #FORMAT_ASTC_4x4_SRGB_BLOCK,
 			#FORMAT_ASTC_5x4_UNORM_BLOCK, #FORMAT_ASTC_5x4_SRGB_BLOCK, #FORMAT_ASTC_5x5_UNORM_BLOCK, #FORMAT_ASTC_5x5_SRGB_BLOCK, #FORMAT_ASTC_6x5_UNORM_BLOCK,
 			#FORMAT_ASTC_6x5_SRGB_BLOCK, #FORMAT_ASTC_6x6_UNORM_BLOCK, #FORMAT_ASTC_6x6_SRGB_BLOCK, #FORMAT_ASTC_8x5_UNORM_BLOCK, #FORMAT_ASTC_8x5_SRGB_BLOCK,
 			#FORMAT_ASTC_8x6_UNORM_BLOCK, #FORMAT_ASTC_8x6_SRGB_BLOCK, #FORMAT_ASTC_8x8_UNORM_BLOCK, #FORMAT_ASTC_8x8_SRGB_BLOCK,
@@ -1323,7 +1329,7 @@ object ValidityStructs {
 			#FORMAT_ASTC_12x10_UNORM_BLOCK, #FORMAT_ASTC_12x10_SRGB_BLOCK, #FORMAT_ASTC_12x12_UNORM_BLOCK, or #FORMAT_ASTC_12x12_SRGB_BLOCK
 			""",
 			"""
-			If the BC texture compression feature is not enabled, {@code format} $mustnot be #FORMAT_BC1_RGB_UNORM_BLOCK, #FORMAT_BC1_RGB_SRGB_BLOCK,
+			If the BC texture compression feature is not enabled, {@code format} $must not be #FORMAT_BC1_RGB_UNORM_BLOCK, #FORMAT_BC1_RGB_SRGB_BLOCK,
 			#FORMAT_BC1_RGBA_UNORM_BLOCK, #FORMAT_BC1_RGBA_SRGB_BLOCK, #FORMAT_BC2_UNORM_BLOCK, #FORMAT_BC2_SRGB_BLOCK, #FORMAT_BC3_UNORM_BLOCK,
 			#FORMAT_BC3_SRGB_BLOCK, #FORMAT_BC4_UNORM_BLOCK, #FORMAT_BC4_SNORM_BLOCK, #FORMAT_BC5_UNORM_BLOCK, #FORMAT_BC5_SNORM_BLOCK,
 			#FORMAT_BC6H_UFLOAT_BLOCK, #FORMAT_BC6H_SFLOAT_BLOCK, #FORMAT_BC7_UNORM_BLOCK, or #FORMAT_BC7_SRGB_BLOCK
@@ -1394,7 +1400,7 @@ object ValidityStructs {
 			"{@code sType} $must be #STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV",
 			"{@code pNext} $must be $NULL",
 			"{@code handleType} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
-			"{@code handleType} $mustnot be 0"
+			"{@code handleType} $must not be 0"
 		)}"""
 
 @JvmField val VkInstanceCreateInfo =
@@ -1495,19 +1501,19 @@ object ValidityStructs {
 			"{@code alphaBlendOp} $must be a valid {@code VkBlendOp} value",
 			"{@code colorWriteMask} $must be a valid combination of {@code VkColorComponentFlagBits} values",
 			"""
-			If the dual source blending feature is not enabled, {@code srcColorBlendFactor} $mustnot be #BLEND_FACTOR_SRC1_COLOR,
+			If the dual source blending feature is not enabled, {@code srcColorBlendFactor} $must not be #BLEND_FACTOR_SRC1_COLOR,
 			#BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, #BLEND_FACTOR_SRC1_ALPHA, or #BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
 			""",
 			"""
-			If the dual source blending feature is not enabled, {@code dstColorBlendFactor} $mustnot be #BLEND_FACTOR_SRC1_COLOR,
+			If the dual source blending feature is not enabled, {@code dstColorBlendFactor} $must not be #BLEND_FACTOR_SRC1_COLOR,
 			#BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, #BLEND_FACTOR_SRC1_ALPHA, or #BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
 			""",
 			"""
-			If the dual source blending feature is not enabled, {@code srcAlphaBlendFactor} $mustnot be #BLEND_FACTOR_SRC1_COLOR,
+			If the dual source blending feature is not enabled, {@code srcAlphaBlendFactor} $must not be #BLEND_FACTOR_SRC1_COLOR,
 			#BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, #BLEND_FACTOR_SRC1_ALPHA, or #BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
 			""",
 			"""
-			If the dual source blending feature is not enabled, {@code dstAlphaBlendFactor} $mustnot be #BLEND_FACTOR_SRC1_COLOR,
+			If the dual source blending feature is not enabled, {@code dstAlphaBlendFactor} $must not be #BLEND_FACTOR_SRC1_COLOR,
 			#BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, #BLEND_FACTOR_SRC1_ALPHA, or #BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
 			"""
 		)}"""
@@ -1562,11 +1568,11 @@ object ValidityStructs {
 			{@code primitiveRestartEnable} $must be #FALSE
 			""",
 			"""
-			If the geometry shaders feature is not enabled, {@code topology} $mustnot be any of #PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY,
+			If the geometry shaders feature is not enabled, {@code topology} $must not be any of #PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY,
 			#PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY, #PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY or
 			#PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY
 			""",
-			"If the tessellation shaders feature is not enabled, {@code topology} $mustnot be #PRIMITIVE_TOPOLOGY_PATCH_LIST"
+			"If the tessellation shaders feature is not enabled, {@code topology} $must not be #PRIMITIVE_TOPOLOGY_PATCH_LIST"
 		)}"""
 
 @JvmField val VkPipelineLayoutCreateInfo =
@@ -1656,32 +1662,32 @@ object ValidityStructs {
 			"{@code module} $must be a valid {@code VkShaderModule} handle",
 			"{@code pName} $must be a null-terminated string",
 			"If {@code pSpecializationInfo} is not $NULL, {@code pSpecializationInfo} $must be a pointer to a valid ##VkSpecializationInfo structure",
-			"If the geometry shaders feature is not enabled, {@code stage} $mustnot be #SHADER_STAGE_GEOMETRY_BIT",
+			"If the geometry shaders feature is not enabled, {@code stage} $must not be #SHADER_STAGE_GEOMETRY_BIT",
 			"""
-			If the tessellation shaders feature is not enabled, {@code stage} $mustnot be #SHADER_STAGE_TESSELLATION_CONTROL_BIT or
+			If the tessellation shaders feature is not enabled, {@code stage} $must not be #SHADER_STAGE_TESSELLATION_CONTROL_BIT or
 			#SHADER_STAGE_TESSELLATION_EVALUATION_BIT
 			""",
-			"{@code stage} $mustnot be #SHADER_STAGE_ALL_GRAPHICS, or #SHADER_STAGE_ALL",
+			"{@code stage} $must not be #SHADER_STAGE_ALL_GRAPHICS, or #SHADER_STAGE_ALL",
 			"{@code pName} $must be the name of an {@code OpEntryPoint} in {@code module} with an execution model that matches {@code stage}",
 			"""
 			If the identified entry point includes any variable in its interface that is declared with the {@code ClipDistance} {@code BuiltIn} decoration,
-			that variable $mustnot have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxClipDistances}
+			that variable $must not have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxClipDistances}
 			""",
 			"""
 			If the identified entry point includes any variable in its interface that is declared with the {@code CullDistance} {@code BuiltIn} decoration,
-			that variable $mustnot have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxCullDistances}
+			that variable $must not have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxCullDistances}
 			""",
 			"""
 			If the identified entry point includes any variables in its interface that are declared with the {@code ClipDistance} or {@code CullDistance}
-			{@code BuiltIn} decoration, those variables $mustnot have array sizes which sum to more than
+			{@code BuiltIn} decoration, those variables $must not have array sizes which sum to more than
 			##VkPhysicalDeviceLimits{@code ::maxCombinedClipAndCullDistances}
 			""",
 			"""
 			If the identified entry point includes any variable in its interface that is declared with the {@code SampleMask} {@code BuiltIn} decoration, that
-			variable $mustnot have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxSampleMaskWords}
+			variable $must not have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxSampleMaskWords}
 			""",
 			"""
-			If {@code stage} is #SHADER_STAGE_VERTEX_BIT, the identified entry point $mustnot include any input variable in its interface that is decorated
+			If {@code stage} is #SHADER_STAGE_VERTEX_BIT, the identified entry point $must not include any input variable in its interface that is decorated
 			with {@code CullDistance}
 			""",
 			"""
@@ -1706,7 +1712,7 @@ object ValidityStructs {
 			the same value to {@code ViewportIndex} for all vertices of a given primitive
 			""",
 			"""
-			If {@code stage} is #SHADER_STAGE_FRAGMENT_BIT, the identified entry point $mustnot include any output variables in its interface decorated with
+			If {@code stage} is #SHADER_STAGE_FRAGMENT_BIT, the identified entry point $must not include any output variables in its interface decorated with
 			{@code CullDistance}
 			""",
 			"""
@@ -1790,7 +1796,7 @@ object ValidityStructs {
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code stageFlags} $must be a valid combination of {@code VkShaderStageFlagBits} values",
-			"{@code stageFlags} $mustnot be 0",
+			"{@code stageFlags} $must not be 0",
 			"{@code offset} $must be less than ##VkPhysicalDeviceLimits{@code ::maxPushConstantsSize}",
 			"{@code size} $must be greater than 0",
 			"{@code size} $must be a multiple of 4",
@@ -1804,7 +1810,7 @@ object ValidityStructs {
 			"{@code pNext} $must be $NULL",
 			"{@code flags} $must be 0",
 			"{@code queryType} $must be a valid {@code VkQueryType} value",
-			"If the pipeline statistics queries feature is not enabled, {@code queryType} $mustnot be #QUERY_TYPE_PIPELINE_STATISTICS",
+			"If the pipeline statistics queries feature is not enabled, {@code queryType} $must not be #QUERY_TYPE_PIPELINE_STATISTICS",
 			"""
 			If {@code queryType} is #QUERY_TYPE_PIPELINE_STATISTICS, {@code pipelineStatistics} $must be a valid combination of
 			{@code VkQueryPipelineStatisticFlagBits} values
@@ -1857,7 +1863,7 @@ object ValidityStructs {
 			{@code pDepthStencilAttachment}, or any element of {@code pPreserveAttachments} in any given element of {@code pSubpasses} is not
 			#ATTACHMENT_UNUSED, it $must be less than {@code attachmentCount}
 			""",
-			"The value of any element of the {@code pPreserveAttachments} member in any given element of {@code pSubpasses} $mustnot be #ATTACHMENT_UNUSED"
+			"The value of any element of the {@code pPreserveAttachments} member in any given element of {@code pSubpasses} $must not be #ATTACHMENT_UNUSED"
 		)}"""
 
 @JvmField val VkSamplerCreateInfo =
@@ -1893,7 +1899,7 @@ object ValidityStructs {
 			""",
 			"""
 			If the {@code VK_KHR_sampler_mirror_clamp_to_edge} extension is not enabled, {@code addressModeU}, {@code addressModeV} and {@code addressModeW}
-			$mustnot be #SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE
+			$must not be #SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE
 			""",
 			"If {@code compareEnable} is #TRUE, {@code compareOp} $must be a valid {@code VkCompareOp} value",
 			"If either {@code magFilter} or {@code minFilter} is #FILTER_CUBIC_IMG, {@code anisotropyEnable} $must be #FALSE"
@@ -1930,7 +1936,7 @@ object ValidityStructs {
 			""",
 			"{@code pCode} $must declare the {@code Shader} capability for SPIR-V code",
 			"""
-			{@code pCode} $mustnot declare any capability that is not supported by the API, as described by the Capabilities section of the SPIR-V Environment
+			{@code pCode} $must not declare any capability that is not supported by the API, as described by the Capabilities section of the SPIR-V Environment
 			appendix
 			""",
 			"""
@@ -1955,7 +1961,7 @@ object ValidityStructs {
 			"{@code flags} $must be a valid combination of {@code VkSparseMemoryBindFlagBits} values",
 			"""
 			If the sparse aliased residency feature is not enabled, and if any other resources are bound to ranges of {@code memory}, the range of
-			{@code memory} being bound $mustnot overlap with those bound ranges
+			{@code memory} being bound $must not overlap with those bound ranges
 			""",
 			"{@code memory} and {@code memoryOffset} $must match the memory requirements of the calling command's {@code image}",
 			"{@code subresource} $must be a valid image subresource for {@code image}",
@@ -2010,7 +2016,7 @@ object ValidityStructs {
 			"{@code flags} $must be a valid combination of {@code VkSparseMemoryBindFlagBits} values",
 			"If {@code memory} is not #NULL_HANDLE, {@code memory} and {@code memoryOffset} $must match the memory requirements of the resource",
 			"""
-			If {@code memory} is not #NULL_HANDLE, {@code memory} $mustnot have been created with a memory type that reports
+			If {@code memory} is not #NULL_HANDLE, {@code memory} $must not have been created with a memory type that reports
 			#MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT bit set
 			""",
 			"{@code size} $must be greater than 0",
@@ -2037,7 +2043,7 @@ object ValidityStructs {
 		${ul(
 			"""
 			For a {@code constantID} specialization constant declared in a shader, {@code size} $must match the byte size of the {@code constantID}. If the
-			specialization constant is of type boolean, {@code size} $must be the byte size of VkBool32
+			specialization constant is of type {@code boolean}, {@code size} $must be the byte size of VkBool32
 			"""
 		)}"""
 
@@ -2063,7 +2069,7 @@ object ValidityStructs {
 			If {@code waitSemaphoreCount} is not 0, {@code pWaitDstStageMask} $must be a pointer to an array of {@code waitSemaphoreCount} valid combinations
 			of {@code VkPipelineStageFlagBits} values
 			""",
-			"Each element of {@code pWaitDstStageMask} $mustnot be 0",
+			"Each element of {@code pWaitDstStageMask} $must not be 0",
 			"""
 			If {@code commandBufferCount} is not 0, {@code pCommandBuffers} $must be a pointer to an array of {@code commandBufferCount} valid
 			{@code VkCommandBuffer} handles
@@ -2087,32 +2093,33 @@ object ValidityStructs {
 			have been recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, or not currently be executing on the device
 			""",
 			"""
-			If any given element of {@code pCommandBuffers} was recorded with #COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, it $mustnot have been previously
+			If any given element of {@code pCommandBuffers} was recorded with #COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, it $must not have been previously
 			submitted without re-recording that command buffer
 			""",
 			"""
 			If any given element of {@code pCommandBuffers} contains commands that execute secondary command buffers recorded with
-			#COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, each such secondary command buffer $mustnot have been previously submitted without re-recording that
+			#COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT, each such secondary command buffer $must not have been previously submitted without re-recording that
 			command buffer
 			""",
 			"""
-			Any given element of {@code pCommandBuffers} $mustnot contain commands that execute a secondary command buffer, if that secondary command buffer
+			Any given element of {@code pCommandBuffers} $must not contain commands that execute a secondary command buffer, if that secondary command buffer
 			has been recorded in another primary command buffer after it was recorded into this {@code VkCommandBuffer}
 			""",
 			"""
 			Any given element of {@code pCommandBuffers} $must have been allocated from a {@code VkCommandPool} that was created for the same queue family that
 			the calling command's {@code queue} belongs to
 			""",
-			"Any given element of {@code pCommandBuffers} $mustnot have been allocated with #COMMAND_BUFFER_LEVEL_SECONDARY",
+			"Any given element of {@code pCommandBuffers} $must not have been allocated with #COMMAND_BUFFER_LEVEL_SECONDARY",
 			"""
 			Any given element of {@code VkSemaphore} in {@code pWaitSemaphores} $must refer to a prior signal of that {@code VkSemaphore} that will not be
 			consumed by any other wait on that semaphore
 			""",
 			"""
-			If the geometry shaders feature is not enabled, any given element of {@code pWaitDstStageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT
+			If the geometry shaders feature is not enabled, any given element of {@code pWaitDstStageMask} $must not contain
+			#PIPELINE_STAGE_GEOMETRY_SHADER_BIT
 			""",
 			"""
-			If the tessellation shaders feature is not enabled, any given element of {@code pWaitDstStageMask} $mustnot contain
+			If the tessellation shaders feature is not enabled, any given element of {@code pWaitDstStageMask} $must not contain
 			#PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			"""
 		)}"""
@@ -2121,27 +2128,27 @@ object ValidityStructs {
 	"""<h5>Valid Usage</h5>
 		${ul(
 			"{@code srcStageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
-			"{@code srcStageMask} $mustnot be 0",
+			"{@code srcStageMask} $must not be 0",
 			"{@code dstStageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
-			"{@code dstStageMask} $mustnot be 0",
+			"{@code dstStageMask} $must not be 0",
 			"{@code srcAccessMask} $must be a valid combination of {@code VkAccessFlagBits} values",
 			"{@code dstAccessMask} $must be a valid combination of {@code VkAccessFlagBits} values",
 			"{@code dependencyFlags} $must be a valid combination of {@code VkDependencyFlagBits} values",
-			"If the geometry shaders feature is not enabled, {@code srcStageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
-			"If the geometry shaders feature is not enabled, {@code dstStageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
+			"If the geometry shaders feature is not enabled, {@code srcStageMask} $must not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
+			"If the geometry shaders feature is not enabled, {@code dstStageMask} $must not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
 			"""
-			If the tessellation shaders feature is not enabled, {@code srcStageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
+			If the tessellation shaders feature is not enabled, {@code srcStageMask} $must not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
 			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			""",
 			"""
-			If the tessellation shaders feature is not enabled, {@code dstStageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
+			If the tessellation shaders feature is not enabled, {@code dstStageMask} $must not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
 			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			""",
 			"""
 			{@code srcSubpass} $must be less than or equal to {@code dstSubpass}, unless one of them is #SUBPASS_EXTERNAL, to avoid cyclic dependencies and
 			ensure a valid execution order
 			""",
-			"{@code srcSubpass} and {@code dstSubpass} $mustnot both be equal to #SUBPASS_EXTERNAL",
+			"{@code srcSubpass} and {@code dstSubpass} $must not both be equal to #SUBPASS_EXTERNAL",
 			"""
 			If {@code srcSubpass} is equal to {@code dstSubpass}, {@code srcStageMask} and {@code dstStageMask} $must only contain one of
 			#PIPELINE_STAGE_TOP_OF_PIPE_BIT, #PIPELINE_STAGE_DRAW_INDIRECT_BIT, #PIPELINE_STAGE_VERTEX_INPUT_BIT, #PIPELINE_STAGE_VERTEX_SHADER_BIT,
@@ -2181,11 +2188,11 @@ object ValidityStructs {
 			"{@code colorCount} $must be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxColorAttachments}",
 			"""
 			If the first use of an attachment in this render pass is as an input attachment, and the attachment is not also used as a color or depth/stencil
-			attachment in the same subpass, then {@code loadOp} $mustnot be #ATTACHMENT_LOAD_OP_CLEAR
+			attachment in the same subpass, then {@code loadOp} $must not be #ATTACHMENT_LOAD_OP_CLEAR
 			""",
 			"""
 			If {@code pResolveAttachments} is not $NULL, for each resolve attachment that does not have the value #ATTACHMENT_UNUSED, the corresponding color
-			attachment $mustnot have the value #ATTACHMENT_UNUSED
+			attachment $must not have the value #ATTACHMENT_UNUSED
 			""",
 			"""
 			If {@code pResolveAttachments} is not $NULL, the sample count of each element of {@code pColorAttachments} $must be anything other than
@@ -2197,11 +2204,11 @@ object ValidityStructs {
 			All attachments in {@code pColorAttachments} and {@code pDepthStencilAttachment} that are not #ATTACHMENT_UNUSED $must have the same sample count
 			""",
 			"""
-			If any input attachments are #ATTACHMENT_UNUSED, then any pipelines bound during the subpass $mustnot accesss those input attachments from the
+			If any input attachments are #ATTACHMENT_UNUSED, then any pipelines bound during the subpass $must not access those input attachments from the
 			fragment shader
 			""",
-			"The {@code attachment} member of any element of {@code pPreserveAttachments} $mustnot be #ATTACHMENT_UNUSED",
-			"Any given element of {@code pPreserveAttachments} $mustnot also be an element of any other member of the subpass description",
+			"The {@code attachment} member of any element of {@code pPreserveAttachments} $must not be #ATTACHMENT_UNUSED",
+			"Any given element of {@code pPreserveAttachments} $must not also be an element of any other member of the subpass description",
 			"If any attachment is used as both an input attachment and a color or depth/stencil attachment, then each use $must use the same {@code layout}"
 		)}"""
 
@@ -2231,7 +2238,7 @@ object ValidityStructs {
 			"{@code imageFormat} $must be a valid {@code VkFormat} value",
 			"{@code imageColorSpace} $must be a valid {@code VkColorSpaceKHR} value",
 			"{@code imageUsage} $must be a valid combination of {@code VkImageUsageFlagBits} values",
-			"{@code imageUsage} $mustnot be 0",
+			"{@code imageUsage} $must not be 0",
 			"{@code imageSharingMode} $must be a valid {@code VkSharingMode} value",
 			"{@code preTransform} $must be a valid {@code VkSurfaceTransformFlagBitsKHR} value",
 			"{@code compositeAlpha} $must be a valid {@code VkCompositeAlphaFlagBitsKHR} value",
@@ -2240,7 +2247,7 @@ object ValidityStructs {
 			"If {@code oldSwapchain} is a valid handle, it $must have been created, allocated, or retrieved from {@code surface}",
 			"{@code surface} $must be a surface that is supported by the device as determined using #GetPhysicalDeviceSurfaceSupportKHR()",
 			"""
-			The native window referred to by {@code surface} $mustnot already be associated with a swapchain other than {@code oldSwapchain}, or with a
+			The native window referred to by {@code surface} $must not already be associated with a swapchain other than {@code oldSwapchain}, or with a
 			non-Vulkan graphics API surface
 			""",
 			"""

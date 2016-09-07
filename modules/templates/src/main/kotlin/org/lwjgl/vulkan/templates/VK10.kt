@@ -26,13 +26,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		scope of changes.
 
 		A difference in patch version numbers indicates that some usually small aspect of the specification or header has been modified, typically to fix a
-		bug, and $may have an impact on the behavior of existing functionality. Differences in this version number $shouldnot affect either full compatibility
+		bug, and $may have an impact on the behavior of existing functionality. Differences in this version number $should not affect either full compatibility
 		or backwards compatibility between two versions, or add additional interfaces to the API.
 
 		A difference in minor version numbers indicates that some amount of new functionality has been added. This will usually include new interfaces in the
 		header, and $may also include behavior changes and bug fixes. Functionality $may be deprecated in a minor revision, but will not be removed. When a new
 		minor version is introduced, the patch version is reset to 0, and each minor revision maintains its own set of patch versions. Differences in this
-		version $shouldnot affect backwards compatibility, but will affect full compatibility.
+		version $should not affect backwards compatibility, but will affect full compatibility.
 
 		A difference in major version numbers indicates a large set of changes to the API, potentially including new functionality and header interfaces,
 		behavioral changes, removal of deprecated features, modification or outright replacement of any feature, and is thus very likely to break any and all
@@ -45,7 +45,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 	LongConstant(
 		"""
 		The reserved handle {@code VK_NULL_HANDLE} $can be passed in place of valid object handles when explicitly called out in the specification. Any command
-		that creates an object successfully $mustnot return {@code VK_NULL_HANDLE}. It is valid to pass {@code VK_NULL_HANDLE} to any {@code vkDestroy*} or
+		that creates an object successfully $must not return {@code VK_NULL_HANDLE}. It is valid to pass {@code VK_NULL_HANDLE} to any {@code vkDestroy*} or
 		{@code vkFree*} command, which will silently ignore these values.
 		""",
 
@@ -986,7 +986,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 
 		"SUBPASS_CONTENTS_INLINE".enum(
 			"""
-			The contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers $mustnot be executed within the
+			The contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers $must not be executed within the
 			subpass.
 			""", "0"),
 		"SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS".enum(
@@ -1077,7 +1077,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT".enum(
 			"""
 			Indicates that the memory bound to this image will have been allocated with the #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT. If this is set, then bits
-			other than #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and #IMAGE_USAGE_INPUT_ATTACHMENT_BIT $mustnot be set.
+			other than #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and #IMAGE_USAGE_INPUT_ATTACHMENT_BIT $must not be set.
 			""",
 			0x00000040
 		),
@@ -1601,17 +1601,17 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 			)}
 			Render passes $must include subpass dependencies (either directly or via a subpass dependency chain) between any two subpasses that operate on the
 			same attachment or aliasing attachments and those subpass dependencies $must include execution and memory dependencies separating uses of the
-			aliases, if at least one of those subpasses writes to one of the aliases. Those dependencies $mustnot include the #DEPENDENCY_BY_REGION_BIT if the
+			aliases, if at least one of those subpasses writes to one of the aliases. Those dependencies $must not include the #DEPENDENCY_BY_REGION_BIT if the
 			aliases are views of distinct image subresources which overlap in memory.
 
-			Multiple attachments that alias the same memory $mustnot be used in a single subpass. A given attachment index $mustnot be used multiple times in
+			Multiple attachments that alias the same memory $must not be used in a single subpass. A given attachment index $must not be used multiple times in
 			a single subpass, with one exception: two subpass attachments $can use the same attachment index if at least one use is as an input attachment and
 			neither use is as a resolve or preserve attachment. In other words, the same view $can be used simultaneously as an input and color or
-			depth/stencil attachment, but $mustnot be used as multiple color or depth/stencil attachments nor as resolve or preserve attachments.
+			depth/stencil attachment, but $must not be used as multiple color or depth/stencil attachments nor as resolve or preserve attachments.
 
 			If a set of attachments alias each other, then all except the first to be used in the render pass $must use an initialLayout of
 			#IMAGE_LAYOUT_UNDEFINED, since the earlier uses of the other aliases make their contents undefined. Once an alias has been used and a different
-			alias has been used after it, the first alias $mustnot be used in any later subpasses. However, an application $can assign the same image view to
+			alias has been used after it, the first alias $must not be used in any later subpasses. However, an application $can assign the same image view to
 			multiple aliasing attachment indices, which allows that image view to be used multiple times even if other aliases are used in between. Once an
 			attachment needs the {@code ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit, there $should be no additional cost of introducing additional aliases, and
 			using these additional aliases $may allow more efficient clearing of the attachments on multiple uses via #ATTACHMENT_LOAD_OP_CLEAR.
@@ -1794,7 +1794,7 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"""
 		Destroys an instance of Vulkan.
 
-		After destruction of the instance, all devices (logical and physical) and any objects created by those devices become invalid and $shouldnot be
+		After destruction of the instance, all devices (logical and physical) and any objects created by those devices become invalid and $should not be
 		accessed. However, objects allocated directly or indirectly through the instance are not destroyed automatically and so $may be leaked. Applications
 		$should destroy all objects created through instance before destroying the instance itself.
 
@@ -2198,7 +2198,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		primitives. The implementation make no guarantees with regards to queues across different devices.
 
 		An implementation $may allow a higher-priority queue to starve a lower-priority queue on the same {@code VkDevice} until the higher-priority queue has
-		no further commands to execute. The relationship of queue priorities $mustnot cause queues on one {@code VkDevice} to starve queues on another
+		no further commands to execute. The relationship of queue priorities $must not cause queues on one {@code VkDevice} to starve queues on another
 		{@code VkDevice}.
 
 		No specific guarantees are made about higher priority queues receiving more processing time or better quality of service than lower priority queues.
@@ -2615,7 +2615,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		{@code vkQueueBindSparse} is a queue submission command, with each batch defined by an element of {@code pBindInfo} as an instance of the
 		##VkBindSparseInfo structure.
 
-		Within a batch, a given range of a resource $mustnot be bound more than once. Across batches, if a range is to be bound to one allocation and offset
+		Within a batch, a given range of a resource $must not be bound more than once. Across batches, if a range is to be bound to one allocation and offset
 		and then to another allocation and offset, then the application $must guarantee (usually using semaphores) that the binding operations are executed in
 		the correct order, as well as to order binding operations against the execution of command buffer submissions.
 
@@ -2779,13 +2779,13 @@ or _unsignaled_.
 		${note(
 			"""
 			A common scenario for using {@code pWaitDstStageMask} with values other than #PIPELINE_STAGE_ALL_COMMANDS_BIT is when synchronizing a window system
-			presentation operation against subsequent command buffers which render the next frame. In this case, a presentation image $mustnot be overwritten
+			presentation operation against subsequent command buffers which render the next frame. In this case, a presentation image $must not be overwritten
 			until the presentation operation completes, but other pipeline stages $can execute without waiting. A mask of
 			#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT prevents subsequent color attachment writes from executing until the semaphore signals. Some
 			implementations $may be able to execute transfer operations and/or vertex processing work before the semaphore is signaled.
 
 			If an image layout transition needs to be performed on a swapchain image before it is used in a framebuffer, that can: be performed as the first
-			operation submitted to the queue after acquiring the image, and $shouldnot prevent other work from overlapping with the presentation operation. For
+			operation submitted to the queue after acquiring the image, and $should not prevent other work from overlapping with the presentation operation. For
 			example, a ##VkImageMemoryBarrier could use:
 			${ul(
 				code("srcStageMask = #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT"),
@@ -2980,7 +2980,7 @@ or _unsignaled_.
 		If #QUERY_RESULT_PARTIAL_BIT is set, #QUERY_RESULT_WAIT_BIT is not set, and the query’s status is unavailable, an intermediate result value between
 		zero and the final result value is written to {@code pData} for that query.
 
-		#QUERY_RESULT_PARTIAL_BIT $mustnot be used if the pool’s {@code queryType} is #QUERY_TYPE_TIMESTAMP.
+		#QUERY_RESULT_PARTIAL_BIT $must not be used if the pool’s {@code queryType} is #QUERY_TYPE_TIMESTAMP.
 
 		If #QUERY_RESULT_WITH_AVAILABILITY_BIT is set, the final integer value written for each query is non-zero if the query’s status was available or zero
 		if the status was unavailable. When #QUERY_RESULT_WITH_AVAILABILITY_BIT is used, implementations $must guarantee that if they return a non-zero
@@ -3203,7 +3203,7 @@ or _unsignaled_.
 		${note(
 			"""
 			Applications $can track and manage the total host memory size of a pipeline cache object using the {@code pAllocator}. Applications $can limit the
-			amount of data retrieved from a pipeline cache object in #GetPipelineCacheData(). Implementations $shouldnot internally limit the total number of
+			amount of data retrieved from a pipeline cache object in #GetPipelineCacheData(). Implementations $should not internally limit the total number of
 			entries added to a pipeline cache object or the total host memory consumed.
 			"""
 		)}
@@ -3585,7 +3585,7 @@ typedef enum VkPipelineCacheHeaderVersion {
 		Creates a descriptor pool object.
 
 		Descriptor sets are allocated from descriptor pool objects. A descriptor pool maintains a pool of descriptors, from which sets are allocated.
-		Descriptor pools are externally synchronized, meaning that the application $mustnot allocate and/or free descriptor sets from the same pool in multiple
+		Descriptor pools are externally synchronized, meaning that the application $must not allocate and/or free descriptor sets from the same pool in multiple
 		threads simultaneously.
 
 		${ValidityProtos.vkCreateDescriptorPool}
@@ -3800,7 +3800,7 @@ typedef enum VkPipelineCacheHeaderVersion {
 		Creates a new command pool object.
 
 		Command pools are opaque objects that command buffer memory is allocated from, and which allow the implementation to amortize the cost of resource
-		creation across multiple command buffers. Command pools are application-synchronized, meaning that a command pool $mustnot be used concurrently in
+		creation across multiple command buffers. Command pools are application-synchronized, meaning that a command pool $must not be used concurrently in
 		multiple threads. That includes use via recording commands on any command buffers allocated from the pool, as well as operations that allocate, free,
 		and reset command buffers or the pool itself.
 
@@ -3886,12 +3886,12 @@ typedef enum VkPipelineCacheHeaderVersion {
 
 		A secondary command buffer is considered to be pending execution from the time its execution is recorded into a primary buffer (via
 		#CmdExecuteCommands()) until the final time that primary buffer’s submission to a queue completes. If, after the primary buffer completes, the
-		secondary command buffer is recorded to execute on a different primary buffer, the first primary buffer $mustnot be resubmitted until after it is reset
+		secondary command buffer is recorded to execute on a different primary buffer, the first primary buffer $must not be resubmitted until after it is reset
 		with #ResetCommandBuffer() unless the secondary command buffer was recorded with #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT.
 
-		If #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT is not set on a secondary command buffer, that command buffer $mustnot be used more than once in a given
+		If #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT is not set on a secondary command buffer, that command buffer $must not be used more than once in a given
 		primary command buffer. Furthermore, if a secondary command buffer without #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT set is recorded to execute in a
-		primary command buffer with #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT set, the primary command buffer $mustnot be pending execution more than once at
+		primary command buffer with #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT set, the primary command buffer $must not be pending execution more than once at
 		a time.
 
 		${note(
@@ -4260,7 +4260,7 @@ typedef enum VkPipelineCacheHeaderVersion {
 		$must also be compatible with the pipeline used in subsequent graphics or compute commands.
 
 		The descriptor set contents bound by a call to {@code vkCmdBindDescriptorSets} $may be consumed during host execution of the command, or during shader
-		execution of the resulting draws, or any time in between. Thus, the contents $mustnot be altered (overwritten by an update command, or freed) between
+		execution of the resulting draws, or any time in between. Thus, the contents $must not be altered (overwritten by an update command, or freed) between
 		when the command is recorded and when the command completes executing on the queue. The contents of {@code pDynamicOffsets} are consumed immediately
 		during execution of {@code vkCmdBindDescriptorSets}. Once all pending uses have completed, it is legal to update and reuse a descriptor set.
 
@@ -4555,7 +4555,7 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 		"""
 		Copies regions of a source image into a destination image, potentially performing format conversion, arbitrary scaling, and filtering.
 
-		{@code vkCmdBlitImage} $mustnot be used for multisampled source or destination images. Use #CmdResolveImage() for this purpose.
+		{@code vkCmdBlitImage} $must not be used for multisampled source or destination images. Use #CmdResolveImage() for this purpose.
 
 		${ValidityProtos.vkCmdBlitImage}
 		""",
@@ -5092,7 +5092,7 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 		If #QUERY_RESULT_PARTIAL_BIT is set, #QUERY_RESULT_WAIT_BIT is not set, and the query’s status is unavailable, an intermediate result value between
 		zero and the final result value is written for that query.
 
-		#QUERY_RESULT_PARTIAL_BIT $mustnot be used if the pool’s {@code queryType} is #QUERY_TYPE_TIMESTAMP.
+		#QUERY_RESULT_PARTIAL_BIT $must not be used if the pool’s {@code queryType} is #QUERY_TYPE_TIMESTAMP.
 
 		{@code vkCmdCopyQueryPoolResults} is considered to be a transfer operation, and its writes to buffer memory $must be synchronized using
 		#PIPELINE_STAGE_TRANSFER_BIT and #ACCESS_TRANSFER_WRITE_BIT before using the results.
@@ -5210,7 +5210,7 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 		"""
 		Executes a secondary command buffer from a primary command buffer.
 
-		A secondary command buffer $mustnot be directly submitted to a queue. Instead, secondary command buffers are recorded to execute as part of a primary
+		A secondary command buffer $must not be directly submitted to a queue. Instead, secondary command buffers are recorded to execute as part of a primary
 		command buffer with this command.
 
 		${ValidityProtos.vkCmdExecuteCommands}

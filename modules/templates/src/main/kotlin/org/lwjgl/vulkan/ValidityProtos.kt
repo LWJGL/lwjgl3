@@ -21,7 +21,7 @@ object ValidityProtos {
 			"If {@code fence} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
 			"If {@code semaphore} is not #NULL_HANDLE it $must be unsignaled",
 			"""
-			If {@code fence} is not #NULL_HANDLE it $must be unsignaled and $mustnot be associated with any other queue command that has not yet completed
+			If {@code fence} is not #NULL_HANDLE it $must be unsignaled and $must not be associated with any other queue command that has not yet completed
 			execution on that queue
 			"""
 		)}
@@ -77,11 +77,11 @@ object ValidityProtos {
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code pBeginInfo} $must be a pointer to a valid ##VkCommandBufferBeginInfo structure",
-			"{@code commandBuffer} $mustnot be in the recording state",
-			"{@code commandBuffer} $mustnot currently be pending execution",
+			"{@code commandBuffer} $must not be in the recording state",
+			"{@code commandBuffer} $must not currently be pending execution",
 			"""
 			If {@code commandBuffer} was allocated from a {@code VkCommandPool} which did not have the #COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT flag set,
-			{@code commandBuffer} $must be in the initial state.
+			{@code commandBuffer} $must be in the initial state
 			""",
 			"""
 			If {@code commandBuffer} is a secondary command buffer, the {@code pInheritanceInfo} member of {@code pBeginInfo} $must be a valid
@@ -90,7 +90,7 @@ object ValidityProtos {
 			"""
 			If {@code commandBuffer} is a secondary command buffer and either the {@code occlusionQueryEnable} member of the {@code pInheritanceInfo} member of
 			{@code pBeginInfo} is #FALSE, or the precise occlusion queries feature is not enabled, the {@code queryFlags} member of the
-			{@code pInheritanceInfo} member {@code pBeginInfo} $mustnot contain #QUERY_CONTROL_PRECISE_BIT
+			{@code pInheritanceInfo} member {@code pBeginInfo} $must not contain #QUERY_CONTROL_PRECISE_BIT
 			"""
 		)}
 
@@ -107,8 +107,8 @@ object ValidityProtos {
 			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
 			"{@code buffer} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code memory} $must have been created, allocated, or retrieved from {@code device}",
-			"{@code buffer} $mustnot already be backed by a memory object",
-			"{@code buffer} $mustnot have been created with any sparse memory binding flags",
+			"{@code buffer} $must not already be backed by a memory object",
+			"{@code buffer} $must not have been created with any sparse memory binding flags",
 			"{@code memoryOffset} $must be less than the size of {@code memory}",
 			"""
 			If {@code buffer} was created with the #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT, {@code memoryOffset} $must
@@ -136,7 +136,7 @@ object ValidityProtos {
 			""",
 			"""
 			If {@code buffer} was created with ##VkDedicatedAllocationBufferCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} $must have
-			been created with ##VkDedicatedAllocationMemoryAllocateInfoNV{@code ::buffer} equal to {@code buffer} and {@code memoryOffset} $must be zero.
+			been created with ##VkDedicatedAllocationMemoryAllocateInfoNV{@code ::buffer} equal to {@code buffer} and {@code memoryOffset} $must be zero
 			""",
 			"""
 			If {@code buffer} was not created with ##VkDedicatedAllocationBufferCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} $must
@@ -157,8 +157,8 @@ object ValidityProtos {
 			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
 			"{@code image} $must have been created, allocated, or retrieved from {@code device}",
 			"{@code memory} $must have been created, allocated, or retrieved from {@code device}",
-			"{@code image} $mustnot already be backed by a memory object",
-			"{@code image} $mustnot have been created with any sparse memory binding flags",
+			"{@code image} $must not already be backed by a memory object",
+			"{@code image} $must not have been created with any sparse memory binding flags",
 			"{@code memoryOffset} $must be less than the size of {@code memory}",
 			"""
 			{@code memory} $must have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements
@@ -174,7 +174,7 @@ object ValidityProtos {
 			""",
 			"""
 			If {@code image} was created with ##VkDedicatedAllocationImageCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} $must have
-			been created with ##VkDedicatedAllocationMemoryAllocateInfoNV{@code ::image} equal to {@code image} and {@code memoryOffset} $must be zero.
+			been created with ##VkDedicatedAllocationMemoryAllocateInfoNV{@code ::image} equal to {@code image} and {@code memoryOffset} $must be zero
 			""",
 			"""
 			If {@code image} was not created with ##VkDedicatedAllocationImageCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} $must
@@ -200,7 +200,7 @@ object ValidityProtos {
 			"The query identified by {@code queryPool} and {@code query} $must be unavailable",
 			"""
 			If the precise occlusion queries feature is not enabled, or the {@code queryType} used to create {@code queryPool} was not #QUERY_TYPE_OCCLUSION,
-			{@code flags} $mustnot contain #QUERY_CONTROL_PRECISE_BIT
+			{@code flags} $must not contain #QUERY_CONTROL_PRECISE_BIT
 			""",
 			"""
 			{@code queryPool} $must have been created with a {@code queryType} that differs from that of any other queries that have been made active, and are
@@ -272,7 +272,7 @@ object ValidityProtos {
 			If any of the {@code initialLayout} members of the ##VkAttachmentDescription structures specified when creating the render pass specified in the
 			{@code renderPass} member of {@code pRenderPassBegin} is not #IMAGE_LAYOUT_UNDEFINED, then each such {@code initialLayout} $must be equal to the
 			current layout of the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of
-			{@code pRenderPassBegin}.
+			{@code pRenderPassBegin}
 			"""
 		)}
 
@@ -415,8 +415,8 @@ object ValidityProtos {
 			"The source region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcImage}",
 			"The destination region specified by a given element of {@code pRegions} $must be a region that is contained within {@code dstImage}",
 			"""
-			The union of all destination regions, specified by the elements of {@code pRegions}, $mustnot overlap in memory with any texel that $may be sampled
-			during the blit operation
+			The union of all destination regions, specified by the elements of {@code pRegions}, $must not overlap in memory with any texel that $may be
+			sampled during the blit operation
 			""",
 			"""
 			{@code srcImage} $must use a format that supports #FORMAT_FEATURE_BLIT_SRC_BIT, which is indicated by
@@ -517,7 +517,7 @@ object ValidityProtos {
 			""",
 			"{@code imageLayout} $must be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL",
 			"The image range of any given element of {@code pRanges} $must be an image subresource range that is contained within {@code image}",
-			"{@code image} $mustnot have a compressed or depth/stencil format"
+			"{@code image} $must not have a compressed or depth/stencil format"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -578,7 +578,7 @@ object ValidityProtos {
 			The {@code size} member of a given element of {@code pRegions} $must be less than or equal to the size of {@code dstBuffer} minus {@code dstOffset}
 			""",
 			"""
-			The union of the source regions, and the union of the destination regions, specified by the elements of {@code pRegions}, $mustnot overlap in
+			The union of the source regions, and the union of the destination regions, specified by the elements of {@code pRegions}, $must not overlap in
 			memory
 			""",
 			"{@code srcBuffer} $must have been created with #BUFFER_USAGE_TRANSFER_SRC_BIT usage flag",
@@ -609,7 +609,7 @@ object ValidityProtos {
 			"The buffer region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcBuffer}",
 			"The image region specified by a given element of {@code pRegions} $must be a region that is contained within {@code dstImage}",
 			"""
-			The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, $mustnot overlap in
+			The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, $must not overlap in
 			memory
 			""",
 			"{@code srcBuffer} $must have been created with #BUFFER_USAGE_TRANSFER_SRC_BIT usage flag",
@@ -647,7 +647,7 @@ object ValidityProtos {
 			"The source region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcImage}",
 			"The destination region specified by a given element of {@code pRegions} $must be a region that is contained within {@code dstImage}",
 			"""
-			The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, $mustnot overlap in
+			The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, $must not overlap in
 			memory
 			""",
 			"{@code srcImage} $must have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag",
@@ -690,7 +690,7 @@ object ValidityProtos {
 			"The image region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcImage}",
 			"The buffer region specified by a given element of {@code pRegions} $must be a region that is contained within {@code dstBuffer}",
 			"""
-			The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, $mustnot overlap in
+			The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, $must not overlap in
 			memory
 			""",
 			"{@code srcImage} $must have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag",
@@ -729,7 +729,7 @@ object ValidityProtos {
 			"If #QUERY_RESULT_64_BIT is set in {@code flags} then {@code dstOffset} and {@code stride} $must be multiples of 8",
 			"{@code dstBuffer} $must have enough storage, from {@code dstOffset}, to contain the result of each query, as described here",
 			"{@code dstBuffer} $must have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag",
-			"If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} $mustnot contain #QUERY_RESULT_PARTIAL_BIT"
+			"If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} $must not contain #QUERY_RESULT_PARTIAL_BIT"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -754,11 +754,11 @@ object ValidityProtos {
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"""
 			There $must be an outstanding #CmdDebugMarkerBeginEXT() command prior to the #CmdDebugMarkerEndEXT() on the queue that {@code commandBuffer} is
-			submitted to.
+			submitted to
 			""",
 			"""
 			If the matching #CmdDebugMarkerBeginEXT() command was in a secondary command buffer, the #CmdDebugMarkerEndEXT() must be in the same
-			{@code commandBuffer}.
+			{@code commandBuffer}
 			"""
 		)}"""
 
@@ -798,27 +798,27 @@ object ValidityProtos {
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses
-			unnormalized coordinates, it $mustnot be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
+			unnormalized coordinates, it $must not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
 			#IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
 			{@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
-			includes a lod bias or any offset values, in any shader stage
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
+			includes a LOD bias or any offset values, in any shader stage
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_COMPUTE accesses a uniform buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_COMPUTE accesses a uniform buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_COMPUTE accesses a storage buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_COMPUTE accesses a storage buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
@@ -832,7 +832,7 @@ object ValidityProtos {
 			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			""",
 			"""
-			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must not have a {@code VkImageViewType} of
 			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
@@ -871,27 +871,27 @@ object ValidityProtos {
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses
-			unnormalized coordinates, it $mustnot be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
+			unnormalized coordinates, it $must not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
 			#IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
 			{@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
-			includes a lod bias or any offset values, in any shader stage
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
+			includes a LOD bias or any offset values, in any shader stage
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_COMPUTE accesses a uniform buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_COMPUTE accesses a uniform buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_COMPUTE accesses a storage buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_COMPUTE accesses a storage buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
@@ -905,7 +905,7 @@ object ValidityProtos {
 			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			""",
 			"""
-			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must not have a {@code VkImageViewType} of
 			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
@@ -948,27 +948,27 @@ object ValidityProtos {
 			"Every input attachment used by the current subpass $must be bound to the pipeline via a descriptor set",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
+			unnormalized coordinates, it $must not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
 			#IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
 			{@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
-			includes a lod bias or any offset values, in any shader stage
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
+			includes a LOD bias or any offset values, in any shader stage
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
@@ -982,7 +982,7 @@ object ValidityProtos {
 			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			""",
 			"""
-			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must not have a {@code VkImageViewType} of
 			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
@@ -1030,27 +1030,27 @@ object ValidityProtos {
 			"Every input attachment used by the current subpass $must be bound to the pipeline via a descriptor set",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
+			unnormalized coordinates, it $must not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
 			#IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
 			{@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
-			includes a lod bias or any offset values, in any shader stage
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
+			includes a LOD bias or any offset values, in any shader stage
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
@@ -1064,7 +1064,7 @@ object ValidityProtos {
 			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			""",
 			"""
-			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must not have a {@code VkImageViewType} of
 			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
@@ -1127,27 +1127,27 @@ object ValidityProtos {
 			"Every input attachment used by the current subpass $must be bound to the pipeline via a descriptor set",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
+			unnormalized coordinates, it $must not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
 			#IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
 			{@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
-			includes a lod bias or any offset values, in any shader stage
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
+			includes a LOD bias or any offset values, in any shader stage
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
@@ -1161,7 +1161,7 @@ object ValidityProtos {
 			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			""",
 			"""
-			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must not have a {@code VkImageViewType} of
 			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
@@ -1229,27 +1229,27 @@ object ValidityProtos {
 			"Every input attachment used by the current subpass $must be bound to the pipeline via a descriptor set",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
+			unnormalized coordinates, it $must not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
 			#IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
 			{@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
-			includes a lod bias or any offset values, in any shader stage
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
+			includes a LOD bias or any offset values, in any shader stage
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
@@ -1317,27 +1317,27 @@ object ValidityProtos {
 			"Every input attachment used by the current subpass $must be bound to the pipeline via a descriptor set",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
+			unnormalized coordinates, it $must not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
 			#IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
 			{@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
-			includes a lod bias or any offset values, in any shader stage
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
+			includes a LOD bias or any offset values, in any shader stage
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
@@ -1351,7 +1351,7 @@ object ValidityProtos {
 			or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()
 			""",
 			"""
-			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $mustnot have a {@code VkImageViewType} of
+			Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command $must not have a {@code VkImageViewType} of
 			#IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY
 			"""
 		)}
@@ -1419,27 +1419,27 @@ object ValidityProtos {
 			"Every input attachment used by the current subpass $must be bound to the pipeline via a descriptor set",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
+			unnormalized coordinates, it $must not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D,
 			#IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with
 			{@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage
 			""",
 			"""
 			If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses
-			unnormalized coordinates, it $mustnot be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
-			includes a lod bias or any offset values, in any shader stage
+			unnormalized coordinates, it $must not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that
+			includes a LOD bias or any offset values, in any shader stage
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
 			If the robust buffer access feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to
-			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $mustnot access values outside of the range of that buffer specified in the currently
+			#PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it $must not access values outside of the range of that buffer specified in the currently
 			bound descriptor set
 			""",
 			"""
@@ -1503,11 +1503,11 @@ object ValidityProtos {
 			"{@code commandBuffer} $must have been allocated with a {@code level} of #COMMAND_BUFFER_LEVEL_PRIMARY",
 			"Any given element of {@code pCommandBuffers} $must have been allocated with a {@code level} of #COMMAND_BUFFER_LEVEL_SECONDARY",
 			"""
-			Any given element of {@code pCommandBuffers} $mustnot be already pending execution in {@code commandBuffer}, or appear twice in
+			Any given element of {@code pCommandBuffers} $must not be already pending execution in {@code commandBuffer}, or appear twice in
 			{@code pCommandBuffers}, unless it was recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag
 			""",
 			"""
-			Any given element of {@code pCommandBuffers} $mustnot be already pending execution in any other {@code VkCommandBuffer}, unless it was recorded
+			Any given element of {@code pCommandBuffers} $must not be already pending execution in any other {@code VkCommandBuffer}, unless it was recorded
 			with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag
 			""",
 			"Any given element of {@code pCommandBuffers} $must be in the executable state",
@@ -1537,10 +1537,10 @@ object ValidityProtos {
 			used in the current render pass instance
 			""",
 			"""
-			If #CmdExecuteCommands() is not being called within a render pass instance, any given element of {@code pCommandBuffers} $mustnot have been
+			If #CmdExecuteCommands() is not being called within a render pass instance, any given element of {@code pCommandBuffers} $must not have been
 			recorded with the #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT
 			""",
-			"If the inherited queries feature is not enabled, {@code commandBuffer} $mustnot have any queries active",
+			"If the inherited queries feature is not enabled, {@code commandBuffer} $must not have any queries active",
 			"""
 			If {@code commandBuffer} has a #QUERY_TYPE_OCCLUSION query active, then each element of {@code pCommandBuffers} $must have been recorded with
 			##VkCommandBufferInheritanceInfo{@code ::occlusionQueryEnable} set to #TRUE
@@ -1553,7 +1553,7 @@ object ValidityProtos {
 			If {@code commandBuffer} has a #QUERY_TYPE_PIPELINE_STATISTICS query active, then each element of {@code pCommandBuffers} $must have been recorded
 			with ##VkCommandBufferInheritanceInfo{@code ::pipelineStatistics} having all bits set that are set in the {@code VkQueryPool} the query uses
 			""",
-			"Any given element of {@code pCommandBuffers} $mustnot begin any query types that are active in {@code commandBuffer}"
+			"Any given element of {@code pCommandBuffers} $must not begin any query types that are active in {@code commandBuffer}"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -1605,9 +1605,9 @@ object ValidityProtos {
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code srcStageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
-			"{@code srcStageMask} $mustnot be 0",
+			"{@code srcStageMask} $must not be 0",
 			"{@code dstStageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
-			"{@code dstStageMask} $mustnot be 0",
+			"{@code dstStageMask} $must not be 0",
 			"{@code dependencyFlags} $must be a valid combination of {@code VkDependencyFlagBits} values",
 			"""
 			If {@code memoryBarrierCount} is not 0, {@code pMemoryBarriers} $must be a pointer to an array of {@code memoryBarrierCount} valid
@@ -1623,14 +1623,14 @@ object ValidityProtos {
 			""",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support transfer, graphics, or compute operations",
-			"If the geometry shaders feature is not enabled, {@code srcStageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
-			"If the geometry shaders feature is not enabled, {@code dstStageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
+			"If the geometry shaders feature is not enabled, {@code srcStageMask} $must not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
+			"If the geometry shaders feature is not enabled, {@code dstStageMask} $must not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
 			"""
-			If the tessellation shaders feature is not enabled, {@code srcStageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
+			If the tessellation shaders feature is not enabled, {@code srcStageMask} $must not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
 			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			""",
 			"""
-			If the tessellation shaders feature is not enabled, {@code dstStageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
+			If the tessellation shaders feature is not enabled, {@code dstStageMask} $must not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
 			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			""",
 			"""
@@ -1671,7 +1671,7 @@ object ValidityProtos {
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code layout} $must be a valid {@code VkPipelineLayout} handle",
 			"{@code stageFlags} $must be a valid combination of {@code VkShaderStageFlagBits} values",
-			"{@code stageFlags} $mustnot be 0",
+			"{@code stageFlags} $must not be 0",
 			"{@code pValues} $must be a pointer to an array of {@code size} bytes",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
@@ -1695,17 +1695,17 @@ object ValidityProtos {
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code event} $must be a valid {@code VkEvent} handle",
 			"{@code stageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
-			"{@code stageMask} $mustnot be 0",
+			"{@code stageMask} $must not be 0",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
 			"Both of {@code commandBuffer}, and {@code event} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
-			"If the geometry shaders feature is not enabled, {@code stageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
+			"If the geometry shaders feature is not enabled, {@code stageMask} $must not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
 			"""
-			If the tessellation shaders feature is not enabled, {@code stageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
+			If the tessellation shaders feature is not enabled, {@code stageMask} $must not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
 			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			""",
-			"When this command executes, {@code event} $mustnot be waited on by a #CmdWaitEvents() command that is currently executing"
+			"When this command executes, {@code event} $must not be waited on by a #CmdWaitEvents() command that is currently executing"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -1751,7 +1751,7 @@ object ValidityProtos {
 			"The source region specified by a given element of {@code pRegions} $must be a region that is contained within {@code srcImage}",
 			"The destination region specified by a given element of {@code pRegions} $must be a region that is contained within {@code dstImage}",
 			"""
-			The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, $mustnot overlap in
+			The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, $must not overlap in
 			memory
 			""",
 			"{@code srcImage} $must have a sample count equal to any valid sample count value other than #SAMPLE_COUNT_1_BIT",
@@ -1834,14 +1834,14 @@ object ValidityProtos {
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code event} $must be a valid {@code VkEvent} handle",
 			"{@code stageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
-			"{@code stageMask} $mustnot be 0",
+			"{@code stageMask} $must not be 0",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics, or compute operations",
 			"This command $must only be called outside of a render pass instance",
 			"Both of {@code commandBuffer}, and {@code event} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
-			"If the geometry shaders feature is not enabled, {@code stageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
+			"If the geometry shaders feature is not enabled, {@code stageMask} $must not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
 			"""
-			If the tessellation shaders feature is not enabled, {@code stageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
+			If the tessellation shaders feature is not enabled, {@code stageMask} $must not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
 			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			"""
 		)}
@@ -1878,8 +1878,8 @@ object ValidityProtos {
 			"{@code firstScissor} $must be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}",
 			"The sum of {@code firstScissor} and {@code scissorCount} $must be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive",
 			"The {@code x} and {@code y} members of {@code offset} $must be greater than or equal to 0",
-			"Evaluation of ({@code offset.x} + {@code extent.width}) $mustnot cause a signed integer addition overflow",
-			"Evaluation of ({@code offset.y} + {@code extent.height}) $mustnot cause a signed integer addition overflow"
+			"Evaluation of ({@code offset.x} + {@code extent.width}) $must not cause a signed integer addition overflow",
+			"Evaluation of ({@code offset.y} + {@code extent.height}) $must not cause a signed integer addition overflow"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -1892,7 +1892,7 @@ object ValidityProtos {
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code faceMask} $must be a valid combination of {@code VkStencilFaceFlagBits} values",
-			"{@code faceMask} $mustnot be 0",
+			"{@code faceMask} $must not be 0",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
 			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_STENCIL_COMPARE_MASK dynamic state enabled"
@@ -1908,7 +1908,7 @@ object ValidityProtos {
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code faceMask} $must be a valid combination of {@code VkStencilFaceFlagBits} values",
-			"{@code faceMask} $mustnot be 0",
+			"{@code faceMask} $must not be 0",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
 			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_STENCIL_REFERENCE dynamic state enabled"
@@ -1924,7 +1924,7 @@ object ValidityProtos {
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code faceMask} $must be a valid combination of {@code VkStencilFaceFlagBits} values",
-			"{@code faceMask} $mustnot be 0",
+			"{@code faceMask} $must not be 0",
 			"{@code commandBuffer} $must be in the recording state",
 			"The {@code VkCommandPool} that {@code commandBuffer} was allocated from $must support graphics operations",
 			"The currently bound graphics pipeline $must have been created with the #DYNAMIC_STATE_STENCIL_WRITE_MASK dynamic state enabled"
@@ -1983,9 +1983,9 @@ object ValidityProtos {
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code pEvents} $must be a pointer to an array of {@code eventCount} valid {@code VkEvent} handles",
 			"{@code srcStageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
-			"{@code srcStageMask} $mustnot be 0",
+			"{@code srcStageMask} $must not be 0",
 			"{@code dstStageMask} $must be a valid combination of {@code VkPipelineStageFlagBits} values",
-			"{@code dstStageMask} $mustnot be 0",
+			"{@code dstStageMask} $must not be 0",
 			"""
 			If {@code memoryBarrierCount} is not 0, {@code pMemoryBarriers} $must be a pointer to an array of {@code memoryBarrierCount} valid
 			##VkMemoryBarrier structures
@@ -2008,19 +2008,19 @@ object ValidityProtos {
 			{@code srcStageMask} $must be the bitwise OR of the {@code stageMask} parameter used in previous calls to #CmdSetEvent() with any of the members of
 			{@code pEvents} and #PIPELINE_STAGE_HOST_BIT if any of the members of {@code pEvents} was set using #SetEvent()
 			""",
-			"If the geometry shaders feature is not enabled, {@code srcStageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
-			"If the geometry shaders feature is not enabled, {@code dstStageMask} $mustnot contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
+			"If the geometry shaders feature is not enabled, {@code srcStageMask} $must not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
+			"If the geometry shaders feature is not enabled, {@code dstStageMask} $must not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT",
 			"""
-			If the tessellation shaders feature is not enabled, {@code srcStageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
+			If the tessellation shaders feature is not enabled, {@code srcStageMask} $must not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
 			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			""",
 			"""
-			If the tessellation shaders feature is not enabled, {@code dstStageMask} $mustnot contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
+			If the tessellation shaders feature is not enabled, {@code dstStageMask} $must not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or
 			#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
 			""",
 			"""
 			If {@code pEvents} includes one or more events that will be signaled by #SetEvent() after {@code commandBuffer} has been submitted to a queue, then
-			#CmdWaitEvents() $mustnot be called inside a render pass instance
+			#CmdWaitEvents() $must not be called inside a render pass instance
 			"""
 		)}
 
@@ -2064,7 +2064,7 @@ object ValidityProtos {
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"{@code pBuffer} $must be a pointer to a {@code VkBuffer} handle",
 			"""
-			If the {@code flags} member of {@code pCreateInfo} includes #BUFFER_CREATE_SPARSE_BINDING_BIT, creating this {@code VkBuffer} $mustnot cause the
+			If the {@code flags} member of {@code pCreateInfo} includes #BUFFER_CREATE_SPARSE_BINDING_BIT, creating this {@code VkBuffer} $must not cause the
 			total required sparse memory for all currently valid sparse resources on the device to exceed
 			##VkPhysicalDeviceLimits{@code ::sparseAddressSpaceSize}
 			"""
@@ -2217,7 +2217,7 @@ object ValidityProtos {
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"{@code pImage} $must be a pointer to a {@code VkImage} handle",
 			"""
-			If the {@code flags} member of {@code pCreateInfo} includes #IMAGE_CREATE_SPARSE_BINDING_BIT, creating this {@code VkImage} $mustnot cause the
+			If the {@code flags} member of {@code pCreateInfo} includes #IMAGE_CREATE_SPARSE_BINDING_BIT, creating this {@code VkImage} $must not cause the
 			total required sparse memory for all currently valid sparse resources on the device to exceed
 			##VkPhysicalDeviceLimits{@code ::sparseAddressSpaceSize}
 			"""
@@ -2398,7 +2398,7 @@ object ValidityProtos {
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code pTagInfo} $must be a pointer to a ##VkDebugMarkerObjectTagInfoEXT structure",
 			"{@code pTagInfo.object} $must be a Vulkan object",
-			"{@code pTagInfo.tagName} $mustnot be 0"
+			"{@code pTagInfo.tagName} $must not be 0"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -2411,7 +2411,7 @@ object ValidityProtos {
 		${ul(
 			"{@code instance} $must be a valid {@code VkInstance} handle",
 			"{@code flags} $must be a valid combination of {@code VkDebugReportFlagBitsEXT} values",
-			"{@code flags} $mustnot be 0",
+			"{@code flags} $must not be 0",
 			"{@code objectType} $must be a valid {@code VkDebugReportObjectTypeEXT} value",
 			"{@code pLayerPrefix} $must be a pointer to a valid ",
 			"{@code pMessage} $must be a pointer to a valid ",
@@ -2419,8 +2419,8 @@ object ValidityProtos {
 			"{@code flags} $must be a combination of one or more of {@code VkDebugReportFlagBitsEXT}",
 			"{@code objType} $must be one of {@code VkDebugReportObjectTypeEXT}, #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT if {@code object} is $NULL",
 			"{@code object} $may be a Vulkan object",
-			"{@code pLayerPrefix} $must be a $NULL terminated string.",
-			"{@code pMsg} $must be a $NULL terminated string."
+			"{@code pLayerPrefix} $must be a $NULL terminated string",
+			"{@code pMsg} $must be a $NULL terminated string"
 		)}"""
 
 @JvmField val vkDestroyBuffer =
@@ -2464,7 +2464,7 @@ object ValidityProtos {
 			"If {@code commandPool} is not #NULL_HANDLE, {@code commandPool} $must be a valid {@code VkCommandPool} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"If {@code commandPool} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
-			"All {@code VkCommandBuffer} objects allocated from {@code commandPool} $mustnot be pending execution",
+			"All {@code VkCommandBuffer} objects allocated from {@code commandPool} $must not be pending execution",
 			"If {@code VkAllocationCallbacks} were provided when {@code commandPool} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code commandPool} was created, {@code pAllocator} $must be $NULL"
 		)}
@@ -2564,7 +2564,7 @@ object ValidityProtos {
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be a valid {@code VkFence} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"If {@code fence} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
-			"{@code fence} $mustnot be associated with any queue command that has not yet completed execution on that queue",
+			"{@code fence} $must not be associated with any queue command that has not yet completed execution on that queue",
 			"If {@code VkAllocationCallbacks} were provided when {@code fence} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code fence} was created, {@code pAllocator} $must be $NULL"
 		)}
@@ -2747,7 +2747,7 @@ object ValidityProtos {
 			"If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} $must be a valid {@code VkSemaphore} handle",
 			"If {@code pAllocator} is not $NULL, {@code pAllocator} $must be a pointer to a valid ##VkAllocationCallbacks structure",
 			"If {@code semaphore} is a valid handle, it $must have been created, allocated, or retrieved from {@code device}",
-			"{@code semaphore} $mustnot be associated with any queue command that has not yet completed execution on that queue",
+			"{@code semaphore} $must not be associated with any queue command that has not yet completed execution on that queue",
 			"If {@code VkAllocationCallbacks} were provided when {@code semaphore} was created, a compatible set of callbacks $must be provided here",
 			"If no {@code VkAllocationCallbacks} were provided when {@code semaphore} was created, {@code pAllocator} $must be $NULL"
 		)}
@@ -2822,7 +2822,7 @@ object ValidityProtos {
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code commandBuffer} $must be in the recording state",
-			"If {@code commandBuffer} is a primary command buffer, there $mustnot be an active render pass instance",
+			"If {@code commandBuffer} is a primary command buffer, there $must not be an active render pass instance",
 			"All queries made active during the recording of {@code commandBuffer} $must have been made inactive"
 		)}
 
@@ -2904,7 +2904,7 @@ object ValidityProtos {
 			"{@code commandBufferCount} $must be greater than 0",
 			"{@code commandPool} $must have been created, allocated, or retrieved from {@code device}",
 			"Each element of {@code pCommandBuffers} that is a valid handle $must have been created, allocated, or retrieved from {@code commandPool}",
-			"All elements of {@code pCommandBuffers} $mustnot be pending execution",
+			"All elements of {@code pCommandBuffers} $must not be pending execution",
 			"""
 			{@code pCommandBuffers} $must be a pointer to an array of {@code commandBufferCount} {@code VkCommandBuffer} handles, each element of which $must
 			either be a valid handle or #NULL_HANDLE
@@ -3100,9 +3100,10 @@ object ValidityProtos {
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code memory} $must be a valid {@code VkDeviceMemory} handle",
 			"{@code handleType} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
-			"{@code handleType} $mustnot be 0",
+			"{@code handleType} $must not be 0",
 			"{@code pHandle} $must be a pointer to a {@code HANDLE} value",
-			"{@code memory} $must have been created, allocated, or retrieved from {@code device}"
+			"{@code memory} $must have been created, allocated, or retrieved from {@code device}",
+			"{@code handleType} $must be a flag specified in {@code VkExportMemoryAllocateInfoNV}::{@code handleTypes} when allocating {@code memory}"
 		)}"""
 
 @JvmField val vkGetPhysicalDeviceDisplayPlanePropertiesKHR =
@@ -3135,11 +3136,11 @@ object ValidityProtos {
 			"{@code type} $must be a valid {@code VkImageType} value",
 			"{@code tiling} $must be a valid {@code VkImageTiling} value",
 			"{@code usage} $must be a valid combination of {@code VkImageUsageFlagBits} values",
-			"{@code usage} $mustnot be 0",
+			"{@code usage} $must not be 0",
 			"{@code flags} $must be a valid combination of {@code VkImageCreateFlagBits} values",
-			"{@code flags} $mustnot be 0",
+			"{@code flags} $must not be 0",
 			"{@code externalHandleType} $must be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values",
-			"{@code externalHandleType} $mustnot be 0",
+			"{@code externalHandleType} $must not be 0",
 			"{@code pExternalImageFormatProperties} $must be a pointer to a ##VkExternalImageFormatPropertiesNV structure"
 		)}"""
 
@@ -3166,7 +3167,7 @@ object ValidityProtos {
 			"{@code type} $must be a valid {@code VkImageType} value",
 			"{@code tiling} $must be a valid {@code VkImageTiling} value",
 			"{@code usage} $must be a valid combination of {@code VkImageUsageFlagBits} values",
-			"{@code usage} $mustnot be 0",
+			"{@code usage} $must not be 0",
 			"{@code flags} $must be a valid combination of {@code VkImageCreateFlagBits} values",
 			"{@code pImageFormatProperties} $must be a pointer to a ##VkImageFormatProperties structure"
 		)}"""
@@ -3215,7 +3216,7 @@ object ValidityProtos {
 			"{@code type} $must be a valid {@code VkImageType} value",
 			"{@code samples} $must be a valid {@code VkSampleCountFlagBits} value",
 			"{@code usage} $must be a valid combination of {@code VkImageUsageFlagBits} values",
-			"{@code usage} $mustnot be 0",
+			"{@code usage} $must not be 0",
 			"{@code tiling} $must be a valid {@code VkImageTiling} value",
 			"{@code pPropertyCount} $must be a pointer to a {@code uint32_t} value",
 			"""
@@ -3343,7 +3344,7 @@ object ValidityProtos {
 			"If #QUERY_RESULT_64_BIT is set in {@code flags} then {@code pData} and {@code stride} $must be multiples of 8",
 			"The sum of {@code firstQuery} and {@code queryCount} $must be less than or equal to the number of queries in {@code queryPool}",
 			"{@code dataSize} $must be large enough to contain the result of each query, as described here",
-			"If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} $mustnot contain #QUERY_RESULT_PARTIAL_BIT"
+			"If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} $must not contain #QUERY_RESULT_PARTIAL_BIT"
 		)}"""
 
 @JvmField val vkGetRenderAreaGranularity =
@@ -3383,7 +3384,7 @@ object ValidityProtos {
 			"{@code flags} $must be 0",
 			"{@code ppData} $must be a pointer to a pointer",
 			"{@code memory} $must have been created, allocated, or retrieved from {@code device}",
-			"{@code memory} $mustnot currently be mapped",
+			"{@code memory} $must not currently be mapped",
 			"{@code offset} $must be less than the size of {@code memory}",
 			"If {@code size} is not equal to #WHOLE_SIZE, {@code size} $must be greater than 0",
 			"If {@code size} is not equal to #WHOLE_SIZE, {@code size} $must be less than or equal to the size of the {@code memory} minus {@code offset}",
@@ -3404,7 +3405,7 @@ object ValidityProtos {
 			"{@code srcCacheCount} $must be greater than 0",
 			"{@code dstCache} $must have been created, allocated, or retrieved from {@code device}",
 			"Each element of {@code pSrcCaches} $must have been created, allocated, or retrieved from {@code device}",
-			"{@code dstCache} $mustnot appear in the list of source caches"
+			"{@code dstCache} $must not appear in the list of source caches"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -3421,7 +3422,7 @@ object ValidityProtos {
 			"The {@code queue} $must support sparse binding operations",
 			"Both of {@code fence}, and {@code queue} that are valid handles $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"{@code fence} $must be unsignaled",
-			"{@code fence} $mustnot be associated with any other queue command that has not yet completed execution on that queue"
+			"{@code fence} $must not be associated with any other queue command that has not yet completed execution on that queue"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -3446,7 +3447,7 @@ object ValidityProtos {
 			""",
 			"""
 			If more than one member of 'pSwapchains' was created from a display surface, all display surfaces referenced that refer to the same display $must
-			use the same display mode.
+			use the same display mode
 			"""
 		)}
 
@@ -3466,7 +3467,7 @@ object ValidityProtos {
 			"Both of {@code fence}, and {@code queue} that are valid handles $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"If {@code fence} is not #NULL_HANDLE, {@code fence} $must be unsignaled",
 			"""
-			If {@code fence} is not #NULL_HANDLE, {@code fence} $mustnot be associated with any other queue command that has not yet completed execution on
+			If {@code fence} is not #NULL_HANDLE, {@code fence} $must not be associated with any other queue command that has not yet completed execution on
 			that queue
 			"""
 		)}
@@ -3490,7 +3491,7 @@ object ValidityProtos {
 		${ul(
 			"{@code commandBuffer} $must be a valid {@code VkCommandBuffer} handle",
 			"{@code flags} $must be a valid combination of {@code VkCommandBufferResetFlagBits} values",
-			"{@code commandBuffer} $mustnot currently be pending execution",
+			"{@code commandBuffer} $must not currently be pending execution",
 			"{@code commandBuffer} $must have been allocated from a pool that was created with the #COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT"
 		)}
 
@@ -3506,7 +3507,7 @@ object ValidityProtos {
 			"{@code commandPool} $must be a valid {@code VkCommandPool} handle",
 			"{@code flags} $must be a valid combination of {@code VkCommandPoolResetFlagBits} values",
 			"{@code commandPool} $must have been created, allocated, or retrieved from {@code device}",
-			"All {@code VkCommandBuffer} objects allocated from {@code commandPool} $mustnot currently be pending execution"
+			"All {@code VkCommandBuffer} objects allocated from {@code commandPool} $must not currently be pending execution"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -3536,7 +3537,7 @@ object ValidityProtos {
 			"{@code device} $must be a valid {@code VkDevice} handle",
 			"{@code event} $must be a valid {@code VkEvent} handle",
 			"{@code event} $must have been created, allocated, or retrieved from {@code device}",
-			"{@code event} $mustnot be waited on by a #CmdWaitEvents() command that is currently executing"
+			"{@code event} $must not be waited on by a #CmdWaitEvents() command that is currently executing"
 		)}
 
 		<h5>Host Synchronization</h5>
@@ -3551,7 +3552,7 @@ object ValidityProtos {
 			"{@code pFences} $must be a pointer to an array of {@code fenceCount} valid {@code VkFence} handles",
 			"{@code fenceCount} $must be greater than 0",
 			"Each element of {@code pFences} $must have been created, allocated, or retrieved from {@code device}",
-			"Any given element of {@code pFences} $mustnot currently be associated with any queue command that has not yet completed execution on that queue"
+			"Any given element of {@code pFences} $must not currently be associated with any queue command that has not yet completed execution on that queue"
 		)}
 
 		<h5>Host Synchronization</h5>
