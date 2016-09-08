@@ -18,7 +18,8 @@ ENABLE_WARNINGS()
 #endif""")
 
 	javaImport(
-		"java.awt.Component"
+		"java.awt.Component",
+		"java.awt.Frame"
 	)
 
 	documentation =
@@ -41,7 +42,8 @@ ENABLE_WARNINGS()
 
 		"VERSION_1_3"..0x00010003,
 		"VERSION_1_4"..0x00010004,
-		"VERSION_1_7"..0x00010007
+		"VERSION_1_7"..0x00010007,
+		"VERSION_9"..0x00090000
 	)
 
 	IntConstant(
@@ -193,5 +195,65 @@ ENABLE_WARNINGS()
 		EXPLICIT_FUNCTION_ADDRESS,
 		JNI_ENV,
 		void_p.IN("platformInfo", "the native platform handle")
+	)
+
+	// JDK 9+
+
+	Frame(
+		"CreateEmbeddedFrame",
+		"""
+		Creates a ##Frame placed in a native container. Container is referenced by the native platform handle. For example on Windows this corresponds to an
+		{@code HWND}. For other platforms, see the appropriate machine-dependent header file for a description. The reference returned by this function is a
+		local reference that is only valid in this environment. This function returns a $NULL reference if no frame could be created with matching platform
+		information.
+		""",
+
+		EXPLICIT_FUNCTION_ADDRESS,
+		JNI_ENV,
+		void_p.IN("platformInfo", "the native platform handle"),
+
+		since = "Java 9"
+	)
+
+	void(
+		"SetBounds",
+		"""
+		Moves and resizes the embedded frame. The new location of the top-left corner is specified by x and y parameters relative to the native parent
+		component. The new size is specified by width and height.
+
+		The embedded frame should be created by #CreateEmbeddedFrame() method, or this function will not have any effect.
+
+		Component##setLocation() and Component##setBounds() for {@code EmbeddedFrame} really don't move it within the native parent. These methods always locate
+		the embedded frame at (0, 0) for backward compatibility. To allow moving embedded frames this method was introduced, and it works just the same way as
+		{@code setLocation()} and {@code setBounds()} for usual, non-embedded components.
+
+		Using usual {@code get/setLocation()} and {@code get/setBounds()} together with this new method is not recommended.
+		""",
+
+		EXPLICIT_FUNCTION_ADDRESS,
+		JNI_ENV,
+		Frame.IN("embeddedFrame", "the embedded frame"),
+		jint.IN("x", "the x coordinate"),
+		jint.IN("y", "the y coordinate"),
+		jint.IN("w", "the width"),
+		jint.IN("h", "the height"),
+
+		since = "Java 9"
+	)
+
+	void(
+		"SynthesizeWindowActivation",
+		"""
+		Synthesizes a native message to activate or deactivate an {@code EmbeddedFrame} window depending on the value of parameter {@code doActivate}.
+
+		The embedded frame should be created by #CreateEmbeddedFrame() method, or this function will not have any effect.
+		""",
+
+		EXPLICIT_FUNCTION_ADDRESS,
+		JNI_ENV,
+		Frame.IN("embeddedFrame", "the embedded frame"),
+		jboolean.IN("doActivate", "if true activates the window; otherwise, deactivates the window"),
+
+		since = "Java 9"
 	)
 }

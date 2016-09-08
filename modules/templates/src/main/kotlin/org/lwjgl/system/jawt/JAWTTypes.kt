@@ -68,9 +68,13 @@ val JAWT_p = struct_p(JAWT_PACKAGE, "JAWT") {
 	nullable..voidptr.member("Lock", "")
 	nullable..voidptr.member("Unlock", "")
 	nullable..voidptr.member("GetComponent", "")
+	nullable..voidptr.member("CreateEmbeddedFrame", "")
+	nullable..voidptr.member("SetBounds", "")
+	nullable..voidptr.member("SynthesizeWindowActivation", "")
 }
 
 val Component = NativeType("jobject", TypeMapping("jobject", java.awt.Component::class.java, java.awt.Component::class.java))
+val Frame = NativeType("jobject", TypeMapping("jobject", java.awt.Frame::class.java, java.awt.Frame::class.java))
 
 fun config() {
 	packageInfo(
