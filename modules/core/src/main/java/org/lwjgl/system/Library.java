@@ -6,9 +6,10 @@ package org.lwjgl.system;
 
 import org.lwjgl.Version;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.*;
+import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.nio.file.Paths;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.Optional;
@@ -42,7 +43,6 @@ public final class Library {
 		}
 
 		loadSystem(JNI_LIBRARY_NAME);
-		checkHash();
 	}
 
 	private Library() {}
@@ -63,7 +63,7 @@ public final class Library {
 	@SuppressWarnings("try")
 	public static void loadSystem(String name) throws UnsatisfiedLinkError {
 		apiLog("Loading library (system): " + name);
-		if ( new File(name).isAbsolute() ) {
+		if ( Paths.get(name).isAbsolute() ) {
 			System.load(name);
 			apiLog("\tSuccess");
 			return;
@@ -95,7 +95,10 @@ public final class Library {
 		if ( paths != null ) {
 			try {
 				System.loadLibrary(name);
-				apiLog(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, findLibrary(paths, libName).orElse(null)));
+				findLibrary(paths, libName).ifPresent(libFile -> {
+					apiLog(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));
+					checkHash(libFile);
+				});
 				return;
 			} catch (Exception e) {
 				apiLog(String.format("\t%s not found in %s=%s", libName, JAVA_LIBRARY_PATH, paths));
@@ -120,6 +123,7 @@ public final class Library {
 
 		System.load(libFile.getAbsolutePath());
 		apiLog(String.format("\tLoaded from %s: %s", property, libFile.getPath()));
+		checkHash(libFile);
 		return true;
 	}
 
@@ -203,6 +207,7 @@ public final class Library {
 
 		SharedLibrary lib = apiCreateLibrary(libFile.getPath());
 		apiLog(String.format("\tLoaded from %s: %s", property, libFile.getPath()));
+		checkHash(libFile);
 		return lib;
 	}
 
@@ -267,36 +272,26 @@ public final class Library {
 	}
 
 	/**
-	 * Compares the shared library hash stored in lwjgl.jar, with the hash of the actual library loaded at runtime.
+	 * Compares the shared library hash stored in the classpath, with the hash of the actual library loaded at runtime.
 	 *
 	 * <p>This check prints a simple warning when there's a hash mismatch, to help diagnose installation/classpath issues. It is not a security feature.</p>
+	 *
+	 * @param libFile the library file loaded
 	 */
-	private static void checkHash() {
-		String libName = Platform.get().mapLibraryName(JNI_LIBRARY_NAME);
-
-		String expected = apiGetManifestValue(libName.replace('.', '-')).orElse(null);
-		if ( expected == null )
+	private static void checkHash(File libFile) {
+		if ( !Checks.CHECKS )
 			return;
 
-		File libFile = null;
-
-		// Try org.lwjgl.librarypath first
-		String override = Configuration.LIBRARY_PATH.get();
-		if ( override != null )
-			libFile = findLibrary(override, libName).orElse(null);
-
-		// Then java.library.path
-		if ( libFile == null )
-			libFile = findLibrary(System.getProperty(JAVA_LIBRARY_PATH), libName).orElse(null);
-
-		// Then working directory
-		if ( libFile == null ) {
-			libFile = new File("./" + libName);
-			if ( !libFile.isFile() )
-				return;
-		}
+		URL sha1URL = Library.class.getResource("/" + libFile.getName() + ".sha1");
+		if ( sha1URL == null ) // dev mode or it's a system library
+			return;
 
 		try {
+			String expected;
+			try ( BufferedReader br = new BufferedReader(new InputStreamReader(sha1URL.openStream()), 64); ) {
+				expected = br.readLine();
+			}
+
 			MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
 			try ( DigestInputStream dis = new DigestInputStream(new FileInputStream(libFile), sha1) ) {
 				byte[] buffer = new byte[8 * 1024];
@@ -313,11 +308,14 @@ public final class Library {
 			}
 
 			if ( !expected.contentEquals(actual) )
-				DEBUG_STREAM.println("[LWJGL] [WARNING] Mismatch detected between the Java and native LWJGL libraries." +
+				DEBUG_STREAM.println("[LWJGL] [WARNING] Mismatch detected between the Java and native libraries." +
 					                     (Checks.DEBUG ? "" : "\n\tLaunch the JVM with -Dorg.lwjgl.util.Debug=true for more information.")
 				);
 		} catch (Exception e) {
-			e.printStackTrace();
+			if ( Checks.DEBUG ) {
+				apiLog("Failed to verify native library.");
+				e.printStackTrace();
+			}
 		}
 	}
 

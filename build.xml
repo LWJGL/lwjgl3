@@ -599,6 +599,37 @@
 		</apply>
 	</target>
 
+	<macrodef name="release-natives">
+		<attribute name="module"/>
+		<attribute name="native-library"/>
+		<element name="content" optional="true" implicit="true"/>
+		<sequential>
+			<mkdir dir="${release}/@{module}/native"/>
+
+			<local name="auto-natives"/>
+			<condition property="auto-natives" value="false" else="true">
+				<length string="@{native-library}" length="0"/>
+			</condition>
+			<get dest="${release}/@{module}/native" verbose="false" usetimestamp="true">
+				<url url="http://build.lwjgl.org/${build.type}/linux/x64/lib@{native-library}.so" if:true="${auto-natives}"/>
+				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/lib@{native-library}.dylib" if:true="${auto-natives}"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x64/@{native-library}.dll" if:true="${auto-natives}"/>
+				<url url="http://build.lwjgl.org/${build.type}/windows/x86/@{native-library}32.dll" if:true="${auto-natives}"/>
+				<content/>
+			</get>
+			<checksum algorithm="SHA-1" fileext=".sha1">
+				<fileset dir="${release}/@{module}/native">
+					<include name="*.dll"/>
+					<include name="*.dylib"/>
+					<include name="*.so"/>
+				</fileset>
+			</checksum>
+			<zip destfile="${release}/@{module}/@{module}-natives-windows.jar" basedir="${release}/@{module}/native" includes="*.dll" level="9"/>
+			<zip destfile="${release}/@{module}/@{module}-natives-macos.jar" basedir="${release}/@{module}/native" includes="*.dylib" level="9"/>
+			<zip destfile="${release}/@{module}/@{module}-natives-linux.jar" basedir="${release}/@{module}/native" includes="*.so" level="9"/>
+		</sequential>
+	</macrodef>
+
 	<macrodef name="release-module">
 		<attribute name="package"/>
 		<attribute name="name"/>
@@ -608,31 +639,14 @@
 		<attribute name="native-library" default=""/>
 		<attribute name="license" default=""/>
 		<element name="natives" optional="true"/>
-		<element name="process-natives" optional="true"/>
 		<element name="classes" optional="true"/>
-		<element name="jar-attributes" optional="true"/>
 		<element name="sources" optional="true"/>
 		<element name="custom" optional="true"/>
 		<sequential>
 			<!-- Bundle natives -->
-			<mkdir dir="${release}/@{module}/native" unless:true="@{java-only}"/>
-
-			<local name="auto-natives"/>
-			<condition property="auto-natives" value="false" else="true">
-				<length string="@{native-library}" length="0"/>
-			</condition>
-			<get dest="${release}/@{module}/native" verbose="false" usetimestamp="true" unless:true="@{java-only}">
-				<url url="http://build.lwjgl.org/${build.type}/linux/x64/lib@{native-library}.so" if:true="${auto-natives}"/>
-				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/lib@{native-library}.dylib" if:true="${auto-natives}"/>
-				<url url="http://build.lwjgl.org/${build.type}/windows/x64/@{native-library}.dll" if:true="${auto-natives}"/>
-				<url url="http://build.lwjgl.org/${build.type}/windows/x86/@{native-library}32.dll" if:true="${auto-natives}"/>
+			<release-natives module="@{module}" native-library="@{native-library}" unless:true="@{java-only}">
 				<natives/>
-			</get>
-			<process-natives/>
-			<zip destfile="${release}/@{module}/@{module}-natives-windows.jar" basedir="${release}/@{module}/native" includes="*.dll" level="9" unless:true="@{java-only}"/>
-			<zip destfile="${release}/@{module}/@{module}-natives-macos.jar" basedir="${release}/@{module}/native" includes="*.dylib" level="9" unless:true="@{java-only}"/>
-			<zip destfile="${release}/@{module}/@{module}-natives-linux.jar" basedir="${release}/@{module}/native" includes="*.so" level="9" unless:true="@{java-only}"/>
-			<delete dir="${release}/@{module}/native" unless:true="@{java-only}"/>
+			</release-natives>
 
 			<!-- Bundle classes -->
 			<local name="module.package"/>
@@ -653,15 +667,18 @@
 						<attribute name="Implementation-Title" value="@{module}"/>
 						<attribute name="Implementation-Version" value="${revision}"/>
 						<attribute name="Implementation-Vendor" value="lwjgl.org"/>
-						<jar-attributes/>
 					</section>
 				</manifest>
 
+				<fileset dir="${release}/@{module}/native" unless:true="@{java-only}">
+					<include name="*.sha1"/>
+				</fileset>
 				<fileset dir="${bin.core}" unless:set="module.package.skip">
 					<include name="${module.package}/**"/>
 				</fileset>
 				<classes/>
 			</jar>
+			<delete dir="${release}/@{module}/native" unless:true="@{java-only}"/>
 
 			<!-- Bundle javadoc -->
 			<mkdir dir="${release}/@{module}/javadoc"/>
@@ -761,17 +778,6 @@
 
 		<!-- CORE -->
 		<release-module package="org.lwjgl" name="core" module="lwjgl" native-library="lwjgl" title="Core">
-			<process-natives>
-				<local name="liblwjgl-so"/>
-				<local name="liblwjgl-dylib"/>
-				<local name="lwjgl-dll"/>
-				<local name="lwjgl32-dll"/>
-
-				<checksum file="${release}/@{module}/native/liblwjgl.so" algorithm="SHA-1" property="liblwjgl-so"/>
-				<checksum file="${release}/@{module}/native/liblwjgl.dylib" algorithm="SHA-1" property="liblwjgl-dylib"/>
-				<checksum file="${release}/@{module}/native/lwjgl.dll" algorithm="SHA-1" property="lwjgl-dll"/>
-				<checksum file="${release}/@{module}/native/lwjgl32.dll" algorithm="SHA-1" property="lwjgl32-dll"/>
-			</process-natives>
 			<classes>
 				<fileset dir="${bin.core}">
 					<include name="org/lwjgl/*.class"/>
@@ -780,12 +786,6 @@
 					<exclude name="org/lwjgl/system/jemalloc/**"/>
 				</fileset>
 			</classes>
-			<jar-attributes>
-				<attribute name="liblwjgl-so" value="${liblwjgl-so}"/>
-				<attribute name="liblwjgl-dylib" value="${liblwjgl-dylib}"/>
-				<attribute name="lwjgl-dll" value="${lwjgl-dll}"/>
-				<attribute name="lwjgl32-dll" value="${lwjgl32-dll}"/>
-			</jar-attributes>
 			<sources>
 				<fileset dir="${src.core}">
 					<include name="org/lwjgl/*.java"/>
