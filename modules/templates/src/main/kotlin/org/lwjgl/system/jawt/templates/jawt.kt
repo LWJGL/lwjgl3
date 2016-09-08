@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.jawt.*
 
 private val JAWT_BINDING = simpleBinding("jawt", callingConvention = CallingConvention.STDCALL)
-val jawt = "JAWTFunctions".nativeClass(JAWT_PACKAGE, prefix = "JAWT_", prefixMethod = "JAWT_", binding = JAWT_BINDING, library = "lwjgl_jawt") {
+val jawt = "JAWTFunctions".nativeClass(JAWT_PACKAGE, prefix = "JAWT_", prefixMethod = "JAWT_", binding = JAWT_BINDING) {
 	nativeDirective(
 		"""DISABLE_WARNINGS()
 #include "jawt_md.h"
