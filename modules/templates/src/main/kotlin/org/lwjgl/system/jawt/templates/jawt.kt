@@ -17,6 +17,10 @@ ENABLE_WARNINGS()
 	#define APIENTRY
 #endif""")
 
+	javaImport(
+		"java.awt.Component"
+	)
+
 	documentation =
 		"""
 		Bindings to the AWT native interface (jawt.h).
@@ -177,13 +181,13 @@ ENABLE_WARNINGS()
 		JNI_ENV
 	)
 
-	jobject(
+	Component(
 		"GetComponent",
 		"""
-		Returns a reference to a {@code java.awt.Component Component} from a native platform handle. On Windows, this corresponds to an {@code HWND}; on
-		Solaris and Linux, this is a {@code Drawable}. For other platforms, see the appropriate machine-dependent header file for a description. The reference
-		returned by this function is a local reference that is only valid in this environment. This function returns a $NULL reference if no component could be
-		found with matching platform information.
+		Returns a reference to a ##Component from a native platform handle. On Windows, this corresponds to an {@code HWND}; on Solaris and Linux, this is a
+		{@code Drawable}. For other platforms, see the appropriate machine-dependent header file for a description. The reference returned by this function is
+		a local reference that is only valid in this environment. This function returns a $NULL reference if no component could be found with matching platform
+		information.
 		""",
 
 		EXPLICIT_FUNCTION_ADDRESS,

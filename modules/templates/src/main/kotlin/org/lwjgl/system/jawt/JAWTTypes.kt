@@ -70,6 +70,8 @@ val JAWT_p = struct_p(JAWT_PACKAGE, "JAWT") {
 	nullable..voidptr.member("GetComponent", "")
 }
 
+val Component = NativeType("jobject", TypeMapping("jobject", java.awt.Component::class.java, java.awt.Component::class.java))
+
 fun config() {
 	packageInfo(
 		JAWT_PACKAGE,
