@@ -18,6 +18,11 @@ public final class Version {
 	/** The development state of the current build. */
 	public static final BuildType BUILD_TYPE = BuildType.STABLE;
 
+	private static final String version = String.valueOf(VERSION_MAJOR) +
+		'.' + VERSION_MINOR +
+		'.' + VERSION_REVISION + BUILD_TYPE.postfix +
+		' ' + apiGetManifestValue("Implementation-Version").orElse("SNAPSHOT");
+
 	private Version() {
 	}
 
@@ -27,10 +32,7 @@ public final class Version {
 
 	/** Returns the LWJGL version. */
 	public static String getVersion() {
-		return String.valueOf(VERSION_MAJOR) +
-			'.' + VERSION_MINOR +
-			'.' + VERSION_REVISION + BUILD_TYPE.postfix +
-			' ' + apiGetManifestValue("Implementation-Version").orElse("SNAPSHOT");
+		return version;
 	}
 
 	/** The development state of the current build. */

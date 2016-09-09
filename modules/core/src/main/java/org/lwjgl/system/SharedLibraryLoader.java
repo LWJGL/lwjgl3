@@ -4,11 +4,18 @@
  */
 package org.lwjgl.system;
 
-import java.io.*;
+import org.lwjgl.Version;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.file.StandardOpenOption;
-import java.util.UUID;
+import java.nio.channels.FileChannel.MapMode;
+import java.nio.file.*;
+import java.nio.file.attribute.PosixFilePermission;
+import java.util.EnumSet;
 import java.util.zip.CRC32;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -24,22 +31,20 @@ import static org.lwjgl.system.APIUtil.*;
  */
 final class SharedLibraryLoader {
 
-	private static final int BUFFER_SIZE = 8192;
-
-	private static File extractPath;
+	private static Path extractPath;
 
 	private SharedLibraryLoader() {
 	}
 
 	/** Extracts the specified shared library from the classpath to a temporary directory. */
-	static FileChannel load(String library) {
+	static FileChannel load(String name, String libName, URL libURL) {
 		try {
-			File extractedFile = extractFile(Platform.get().mapLibraryName(library), extractPath);
+			Path extractedFile = extractFile(libName, libURL);
 
 			// Wait for other processes (usually antivirus software) to unlock the extracted file
 			// before attempting to load it.
 			try {
-				FileChannel fc = FileChannel.open(extractedFile.toPath(), StandardOpenOption.READ);
+				FileChannel fc = FileChannel.open(extractedFile);
 
 				//noinspection resource
 				if ( fc.tryLock(0L, Long.MAX_VALUE, true) == null ) {
@@ -56,7 +61,7 @@ final class SharedLibraryLoader {
 				throw new RuntimeException("Failed to lock the extracted file.", e);
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("\tFailed to extract " + library + " library", e);
+			throw new RuntimeException("\tFailed to extract " + name + " library", e);
 		}
 	}
 
@@ -64,40 +69,27 @@ final class SharedLibraryLoader {
 	 * Extracts the specified file into the temp directory if it does not already exist or the CRC does not match.
 	 *
 	 * @param libraryFile the file to extract from the classpath.
-	 * @param libraryPath the subdirectory where the file will be extracted. If null, the file's CRC will be used.
 	 *
 	 * @return The extracted file.
 	 */
-	private static File extractFile(String libraryFile, File libraryPath) throws IOException {
-		URL resource = SharedLibraryLoader.class.getResource("/" + libraryFile);
-		if ( resource == null )
-			throw new RuntimeException("Failed to locate resource: " + libraryFile);
+	private static Path extractFile(String libraryFile, URL libURL) throws IOException {
+		Path extractedFile = getExtractedFile(extractPath, libraryFile);
 
-		String libraryCRC;
-		try ( InputStream input = resource.openStream() ) {
-			libraryCRC = crc(input);
-		}
-
-		File extractedFile = getExtractedFile(
-			libraryPath == null ? new File(libraryCRC) : libraryPath,
-			new File(libraryFile).getName()
-		);
-
-		if ( libraryPath == null ) {
-			extractPath = extractedFile.getParentFile();
+		if ( extractPath == null ) {
+			extractPath = extractedFile.getParent();
 
 			// Prepend the path in which the libraries were extracted to org.lwjgl.librarypath
 			String libPath = Configuration.LIBRARY_PATH.get();
 			if ( libPath == null || libPath.isEmpty() )
-				libPath = extractPath.getAbsolutePath();
+				libPath = extractPath.toAbsolutePath().toString();
 			else
-				libPath = extractPath.getAbsolutePath() + File.pathSeparator + libPath;
+				libPath = extractPath.toAbsolutePath() + File.pathSeparator + libPath;
 
 			System.setProperty(Configuration.LIBRARY_PATH.getProperty(), libPath);
 			Configuration.LIBRARY_PATH.set(libPath);
 		}
 
-		extractFile(resource, libraryCRC, extractedFile);
+		extractFile(libURL, extractedFile);
 
 		return extractedFile;
 	}
@@ -110,35 +102,36 @@ final class SharedLibraryLoader {
 	 *
 	 * @return the extracted library
 	 */
-	private static File getExtractedFile(File libraryPath, String fileName) {
+	private static Path getExtractedFile(Path libraryPath, String fileName) {
 		// Reuse the lwjgl shared library location
-		if ( libraryPath.isDirectory() )
-			return new File(libraryPath, fileName);
+		if ( libraryPath != null && Files.isDirectory(libraryPath) )
+			return libraryPath.resolve(fileName);
 
 		if ( Configuration.SHARED_LIBRARY_EXTRACT_PATH.get() != null )
-			return new File(Configuration.SHARED_LIBRARY_EXTRACT_PATH.get(), fileName);
+			return Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_PATH.get(), fileName);
+
+		String version = Version.getVersion().replace(' ', '-');
 
 		// Temp directory with username in path
 		String tempDirectory = Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl" + System.getProperty("user.name"));
-		File file = new File(System.getProperty("java.io.tmpdir") + "/" + tempDirectory + "/" + libraryPath, fileName);
+		Path file = Paths.get(System.getProperty("java.io.tmpdir") + "/" + tempDirectory + "/" + version, fileName);
 		if ( canWrite(file) ) return file;
 
 		// User home
 		tempDirectory = Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl");
-		file = new File(System.getProperty("user.home") + "/." + tempDirectory + "/" + libraryPath, fileName);
+		file = Paths.get(System.getProperty("user.home") + "/." + tempDirectory + "/" + version, fileName);
 		if ( canWrite(file) ) return file;
 
 		// Relative directory
-		file = new File("." + tempDirectory + "/" + libraryPath, fileName);
+		file = Paths.get("." + tempDirectory + "/" + version, fileName);
 		if ( canWrite(file) ) return file;
 
 		// System provided temp directory
 		try {
-			file = File.createTempFile(libraryPath.getName(), null);
-			if ( file.delete() ) {
-				file = new File(file, fileName);
-				if ( canWrite(file) ) return file;
-			}
+			file = Files.createTempFile("lwjgl", "");
+			Files.delete(file);
+			file = file.resolve(fileName);
+			if ( canWrite(file) ) return file;
 		} catch (IOException ignored) {
 		}
 
@@ -148,36 +141,28 @@ final class SharedLibraryLoader {
 	/**
 	 * Extracts a native library.
 	 *
-	 * @param resource      the library resource
-	 * @param libraryCRC    the library file CRC
+	 * @param libURL        the library resource
 	 * @param extractedFile the extracted file
 	 *
 	 * @throws IOException if an IO error occurs
 	 */
-	private static void extractFile(URL resource, String libraryCRC, File extractedFile) throws IOException {
-		String extractedCrc = null;
-		if ( extractedFile.exists() )
-			try ( InputStream input = new FileInputStream(extractedFile) ) {
-				extractedCrc = crc(input);
+	private static void extractFile(URL libURL, Path extractedFile) throws IOException {
+		if ( Files.exists(extractedFile) ) {
+			try ( InputStream input = libURL.openStream() ) {
+				if ( crc(input) == crc(extractedFile) ) {
+					apiLog(String.format("\tFound at: %s", extractedFile));
+					return;
+				}
 			}
+		}
 
 		// If file doesn't exist or the CRC doesn't match, extract it to the temp dir.
-		if ( extractedCrc == null || !extractedCrc.equals(libraryCRC) ) {
-			apiLog(String.format("\tExtracting: %s", resource.getPath()));
+		apiLog(String.format("\tExtracting: %s", libURL.getPath()));
 
-			extractedFile.getParentFile().mkdirs();
-
-			try (
-				InputStream input = resource.openStream();
-				FileOutputStream output = new FileOutputStream(extractedFile)
-			) {
-				byte[] buffer = new byte[BUFFER_SIZE];
-				int n;
-				while ( (n = input.read(buffer)) > 0 )
-					output.write(buffer, 0, n);
-			}
-		} else
-			apiLog(String.format("\tFound at: %s", extractedFile.getPath()));
+		Files.createDirectories(extractedFile.getParent());
+		try ( InputStream input = libURL.openStream() ) {
+			Files.copy(input, extractedFile, StandardCopyOption.REPLACE_EXISTING);
+		}
 	}
 
 	/**
@@ -185,18 +170,34 @@ final class SharedLibraryLoader {
 	 *
 	 * @param input the stream
 	 *
-	 * @return the CRC as a hex String
+	 * @return the CRC
 	 */
-	private static String crc(InputStream input) throws IOException {
+	private static long crc(InputStream input) throws IOException {
 		CRC32 crc = new CRC32();
 
-		byte[] buffer = new byte[BUFFER_SIZE];
-		int n;
-
-		while ( (n = input.read(buffer)) > 0 )
+		byte[] buffer = new byte[8 * 1024];
+		for ( int n; (n = input.read(buffer)) != -1; )
 			crc.update(buffer, 0, n);
 
-		return Long.toHexString(crc.getValue());
+		return crc.getValue();
+	}
+
+	/**
+	 * Returns a CRC of the specified file.
+	 *
+	 * @param input the file path
+	 *
+	 * @return the CRC
+	 */
+	private static long crc(Path input) throws IOException {
+		CRC32 crc = new CRC32();
+
+		try ( FileChannel fc = FileChannel.open(input) ) {
+			MappedByteBuffer buffer = fc.map(MapMode.READ_ONLY, 0, fc.size());
+			crc.update(buffer);
+		}
+
+		return crc.getValue();
 	}
 
 	/**
@@ -206,31 +207,34 @@ final class SharedLibraryLoader {
 	 *
 	 * @return true if the file is writable
 	 */
-	private static boolean canWrite(File file) {
-		File parent = file.getParentFile();
+	private static boolean canWrite(Path file) {
+		Path parent = file.getParent();
 
-		File testFile;
-		if ( file.exists() ) {
-			if ( !file.canWrite() || !canExecute(file) )
+		Path testFile;
+		if ( Files.exists(file) ) {
+			if ( !Files.isWritable(file) || !Files.isExecutable(file) )
 				return false;
 
 			// Don't overwrite existing file just to check if we can write to directory.
-			testFile = new File(parent, UUID.randomUUID().toString());
+			testFile = parent.resolve(".lwjgl.test");
 		} else {
-			parent.mkdirs();
-			if ( !parent.isDirectory() )
+			try {
+				Files.createDirectories(parent);
+			} catch (IOException ignored) {
 				return false;
-
+			}
 			testFile = file;
 		}
 
 		try {
-			new FileOutputStream(testFile).close();
-			return canExecute(testFile);
-		} catch (Throwable t) {
+			Files.write(testFile, new byte[0]);
+			try {
+				return canExecute(testFile);
+			} finally {
+				Files.delete(testFile);
+			}
+		} catch (Throwable ignored) {
 			return false;
-		} finally {
-			testFile.delete();
 		}
 	}
 
@@ -241,18 +245,29 @@ final class SharedLibraryLoader {
 	 *
 	 * @return true if the file is executable
 	 */
-	private static boolean canExecute(File file) {
+	private static boolean canExecute(Path file) {
 		try {
-			if ( file.canExecute() )
+			if ( Files.isExecutable(file) )
 				return true;
 
-			file.setExecutable(true, false);
+			Files.setPosixFilePermissions(file, EnumSet.of(
+				PosixFilePermission.OWNER_READ,
+				PosixFilePermission.OWNER_WRITE,
+				PosixFilePermission.OWNER_EXECUTE,
 
-			return file.canExecute();
+				PosixFilePermission.GROUP_READ,
+				PosixFilePermission.GROUP_WRITE,
+				PosixFilePermission.GROUP_EXECUTE,
+
+				PosixFilePermission.OTHERS_READ,
+				PosixFilePermission.OTHERS_WRITE,
+				PosixFilePermission.OTHERS_EXECUTE
+			));
+
+			return Files.isExecutable(file);
 		} catch (Exception ignored) {
+			return false;
 		}
-
-		return false;
 	}
 
 }

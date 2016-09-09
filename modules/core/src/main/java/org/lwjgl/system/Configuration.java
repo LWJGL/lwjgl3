@@ -49,17 +49,17 @@ public class Configuration<T> {
 	 * successful will be used:
 	 *
 	 * <ul>
-	 * <li>{@code System.getProperty("java.io.tmpdir")}/extractDir/crc/</li>
-	 * <li>{@code System.getProperty("user.home")}/.extractDir/crc/</li>
-	 * <li>.extractDir/crc/</li>
-	 * <li>{@code File.createTempFile(crc)}</li>
+	 * <li>{@code System.getProperty("java.io.tmpdir")}/extractDir/version/</li>
+	 * <li>{@code System.getProperty("user.home")}/.extractDir/version/</li>
+	 * <li>.extractDir/version/</li>
+	 * <li>{@code Files.createTempFile("lwjgl", "")}</li>
 	 * </ul>
 	 *
 	 * where:
 	 *
 	 * <pre><code>
 	 * extractDir = Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY
-	 * crc = CRC of the lwjgl shared library
+	 * version = Version.getVersion().replace(' ', '-')
 	 * </code></pre>
 	 *
 	 * <p style="font-family: monospace">

@@ -6,13 +6,16 @@ package org.lwjgl.system;
 
 import org.lwjgl.Version;
 
-import java.io.*;
+import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.channels.FileChannel.MapMode;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.DigestInputStream;
 import java.security.MessageDigest;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -71,23 +74,27 @@ public final class Library {
 
 		String libName = Platform.get().mapLibraryName(name);
 
-		// Try org.lwjgl.librarypath first
-		if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
-			return;
-
-		boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
-		try {
-			// Failed, attempt to extract from the classpath
-			if ( debugLoader )
-				apiLog("\tUsing SharedLibraryLoader...");
-			try ( FileChannel ignored = SharedLibraryLoader.load(name) ) {
-				// and try again
-				if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
-					return;
+		URL libURL = Library.class.getResource("/" + libName);
+		if ( libURL == null ) {
+			// Try org.lwjgl.librarypath
+			if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
+				return;
+		} else {
+			// Always use the SLL if the library is found in the classpath,
+			// so that newer versions can be detected.
+			boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
+			try {
+				if ( debugLoader )
+					apiLog("\tUsing SharedLibraryLoader...");
+				// Extract from classpath and try org.lwjgl.librarypath
+				try ( FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL) ) {
+					if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
+						return;
+				}
+			} catch (Exception e) {
+				if ( debugLoader )
+					e.printStackTrace(DEBUG_STREAM);
 			}
-		} catch (Exception e) {
-			if ( debugLoader )
-				e.printStackTrace(DEBUG_STREAM);
 		}
 
 		// Then java.library.path
@@ -95,10 +102,12 @@ public final class Library {
 		if ( paths != null ) {
 			try {
 				System.loadLibrary(name);
-				findLibrary(paths, libName).ifPresent(libFile -> {
+
+				Path libFile = findLibrary(paths, libName);
+				if ( libFile != null ) {
 					apiLog(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));
 					checkHash(libFile);
-				});
+				}
 				return;
 			} catch (Exception e) {
 				apiLog(String.format("\t%s not found in %s=%s", libName, JAVA_LIBRARY_PATH, paths));
@@ -115,14 +124,14 @@ public final class Library {
 	}
 
 	private static boolean loadSystem(String libName, String property, String paths) {
-		File libFile = findLibrary(paths, libName).orElse(null);
+		Path libFile = findLibrary(paths, libName);
 		if ( libFile == null ) {
 			apiLog(String.format("\t%s not found in %s=%s", libName, property, paths));
 			return false;
 		}
 
-		System.load(libFile.getAbsolutePath());
-		apiLog(String.format("\tLoaded from %s: %s", property, libFile.getPath()));
+		System.load(libFile.toAbsolutePath().toString());
+		apiLog(String.format("\tLoaded from %s: %s", property, libFile));
 		checkHash(libFile);
 		return true;
 	}
@@ -147,24 +156,29 @@ public final class Library {
 		}
 
 		String libName = Platform.get().mapLibraryName(name);
+		SharedLibrary lib;
 
-		// Try org.lwjgl.librarypath first
-		SharedLibrary lib = loadNative(libName, Configuration.LIBRARY_PATH);
-		if ( lib != null )
-			return lib;
-
-		boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
-		try {
-			if ( debugLoader )
-				apiLog("\tUsing SharedLibraryLoader...");
-			// Failed, attempt to extract from the classpath
-			try ( FileChannel ignored = SharedLibraryLoader.load(name) ) {
-				// and try again
-				return loadNative(libName, Configuration.LIBRARY_PATH);
+		URL libURL = Library.class.getResource("/" + libName);
+		if ( libURL == null ) {
+			// Try org.lwjgl.librarypath
+			lib = loadNative(libName, Configuration.LIBRARY_PATH);
+			if ( lib != null )
+				return lib;
+		} else {
+			boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
+			try {
+				// Always use the SLL if the library is found in the classpath,
+				// so that newer versions can be detected.
+				if ( debugLoader )
+					apiLog("\tUsing SharedLibraryLoader...");
+				// Extract from classpath and try org.lwjgl.librarypath
+				try ( FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL) ) {
+					return loadNative(libName, Configuration.LIBRARY_PATH);
+				}
+			} catch (Exception e) {
+				if ( debugLoader )
+					e.printStackTrace(DEBUG_STREAM);
 			}
-		} catch (Exception e) {
-			if ( debugLoader )
-				e.printStackTrace(DEBUG_STREAM);
 		}
 
 		// Then java.library.path
@@ -199,14 +213,14 @@ public final class Library {
 	}
 
 	private static SharedLibrary loadNative(String libName, String property, String paths) {
-		File libFile = findLibrary(paths, libName).orElse(null);
+		Path libFile = findLibrary(paths, libName);
 		if ( libFile == null ) {
 			apiLog(String.format("\t%s not found in %s=%s", libName, property, paths));
 			return null;
 		}
 
-		SharedLibrary lib = apiCreateLibrary(libFile.getPath());
-		apiLog(String.format("\tLoaded from %s: %s", property, libFile.getPath()));
+		SharedLibrary lib = apiCreateLibrary(libFile.toString());
+		apiLog(String.format("\tLoaded from %s: %s", property, libFile));
 		checkHash(libFile);
 		return lib;
 	}
@@ -249,12 +263,13 @@ public final class Library {
 		}
 	}
 
-	private static Optional<File> findLibrary(String path, String libName) {
-		return PATH_SEPARATOR
-			.splitAsStream(path)
-			.map(it -> new File(it + File.separator + libName))
-			.filter(File::isFile)
-			.findFirst();
+	private static Path findLibrary(String path, String libName) {
+		for ( String directory : PATH_SEPARATOR.split(path) ) {
+			Path p = Paths.get(directory, libName);
+			if ( Files.isExecutable(p) )
+				return p;
+		}
+		return null;
 	}
 
 	private static void printError() {
@@ -278,24 +293,27 @@ public final class Library {
 	 *
 	 * @param libFile the library file loaded
 	 */
-	private static void checkHash(File libFile) {
-		if ( !Checks.CHECKS )
+	private static void checkHash(Path libFile) {
+		if ( !Checks.DEBUG )
 			return;
 
-		URL sha1URL = Library.class.getResource("/" + libFile.getName() + ".sha1");
+		URL sha1URL = Library.class.getResource("/" + libFile.getFileName() + ".sha1");
 		if ( sha1URL == null ) // dev mode or it's a system library
 			return;
 
 		try {
 			String expected;
-			try ( BufferedReader br = new BufferedReader(new InputStreamReader(sha1URL.openStream()), 64); ) {
-				expected = br.readLine();
+			try ( InputStream sha1 = sha1URL.openStream() ) {
+				StringBuilder buffer = new StringBuilder(40);
+				for ( int i = 0; i < 40; i++ )
+					buffer.append((char)sha1.read());
+				expected = buffer.toString();
 			}
 
 			MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
-			try ( DigestInputStream dis = new DigestInputStream(new FileInputStream(libFile), sha1) ) {
-				byte[] buffer = new byte[8 * 1024];
-				while ( dis.read(buffer) != -1 ) ;
+			try ( FileChannel fc = FileChannel.open(libFile) ) {
+				MappedByteBuffer buffer = fc.map(MapMode.READ_ONLY, 0, fc.size());
+				sha1.update(buffer);
 			}
 
 			byte[] digest = sha1.digest();
@@ -308,9 +326,7 @@ public final class Library {
 			}
 
 			if ( !expected.contentEquals(actual) )
-				DEBUG_STREAM.println("[LWJGL] [WARNING] Mismatch detected between the Java and native libraries." +
-					                     (Checks.DEBUG ? "" : "\n\tLaunch the JVM with -Dorg.lwjgl.util.Debug=true for more information.")
-				);
+				DEBUG_STREAM.println("[LWJGL] [WARNING] Mismatch detected between the Java and native libraries.");
 		} catch (Exception e) {
 			if ( Checks.DEBUG ) {
 				apiLog("Failed to verify native library.");
