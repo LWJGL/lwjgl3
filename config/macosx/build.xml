@@ -246,5 +246,7 @@
 		<update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}" if:true="${binding.jemalloc}"/>
 		<update-dependency name="glfw3" artifact="x64/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
+
+		<chmod dir="${lib}" perm="755" includes="*.dylib"/>
 	</target>
 </project>

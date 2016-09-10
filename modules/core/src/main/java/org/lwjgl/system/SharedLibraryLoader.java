@@ -163,6 +163,7 @@ final class SharedLibraryLoader {
 		try ( InputStream input = libURL.openStream() ) {
 			Files.copy(input, extractedFile, StandardCopyOption.REPLACE_EXISTING);
 		}
+		setExecutable(extractedFile);
 	}
 
 	/**
@@ -229,9 +230,10 @@ final class SharedLibraryLoader {
 		try {
 			Files.write(testFile, new byte[0]);
 			try {
-				return canExecute(testFile);
+				setExecutable(testFile);
+				return true;
 			} finally {
-				Files.delete(testFile);
+				Files.deleteIfExists(testFile);
 			}
 		} catch (Throwable ignored) {
 			return false;
@@ -245,28 +247,18 @@ final class SharedLibraryLoader {
 	 *
 	 * @return true if the file is executable
 	 */
-	private static boolean canExecute(Path file) {
-		try {
-			if ( Files.isExecutable(file) )
-				return true;
-
+	private static void setExecutable(Path file) throws IOException {
+		if ( !Files.isExecutable(file) ) {
 			Files.setPosixFilePermissions(file, EnumSet.of(
 				PosixFilePermission.OWNER_READ,
 				PosixFilePermission.OWNER_WRITE,
 				PosixFilePermission.OWNER_EXECUTE,
 
 				PosixFilePermission.GROUP_READ,
-				PosixFilePermission.GROUP_WRITE,
 				PosixFilePermission.GROUP_EXECUTE,
 
-				PosixFilePermission.OTHERS_READ,
-				PosixFilePermission.OTHERS_WRITE,
 				PosixFilePermission.OTHERS_EXECUTE
-			));
-
-			return Files.isExecutable(file);
-		} catch (Exception ignored) {
-			return false;
+			)); // 755
 		}
 	}
 
