@@ -174,7 +174,7 @@
 			<src path="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/vulkan" if:true="${binding.vulkan}"/>
-			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/VKypes.kt" unless:true="${binding.vulkan}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/VKTypes.kt" unless:true="${binding.vulkan}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/ExtensionTypes.kt" unless:true="${binding.vulkan}"/>
 
 			<src path="${src.templates.kotlin}/org/lwjgl/system/dyncall"/>
