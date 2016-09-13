@@ -27,26 +27,22 @@ final class MemoryManage {
 		if ( allocator instanceof MemoryAllocator )
 			return (MemoryAllocator)allocator;
 
-		if ( "jemalloc".equals(allocator) ) {
+		if ( !"system".equals(allocator) ) {
+			String className = "jemalloc".equals(allocator)
+				? "org.lwjgl.system.jemalloc.JEmallocAllocator"
+				: allocator.toString();
+
 			try {
-				// check if the jemalloc library is available
-				Class<?> JEmallocAllocator = Class.forName("org.lwjgl.system.jemalloc.JEmallocAllocator");
-				return (MemoryAllocator)JEmallocAllocator.getConstructor().newInstance();
+				Class<?> allocatorClass = Class.forName(className);
+				return (MemoryAllocator)allocatorClass.getConstructor().newInstance();
 			} catch (Throwable t) {
 				if ( Checks.DEBUG )
 					t.printStackTrace(DEBUG_STREAM);
-				apiLog("[MemoryAllocator] Failed to load the jemalloc library.");
-				return new StdlibAllocator();
-			}
-		} else if ( "system".equals(allocator) ) {
-			return new StdlibAllocator();
-		} else {
-			try {
-				return (MemoryAllocator)Class.forName(allocator.toString()).getConstructor().newInstance();
-			} catch (Throwable t) {
-				throw new RuntimeException("Failed to instantiate custom memory allocator: " + allocator);
+				apiLog(String.format("Failed to instantiate memory allocator: %s", className));
 			}
 		}
+
+		return new StdlibAllocator();
 	}
 
 	/** stdlib memory allocator. */

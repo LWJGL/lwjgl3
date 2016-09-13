@@ -49,6 +49,11 @@ fun config() {
 			generateJavaPreamble()
 			println("""public class JEmallocAllocator implements MemoryAllocator {
 
+	static {
+		// initialize jemalloc
+		JEmalloc.getLibrary();
+	}
+
 	@Override
 	public long getMalloc() { return JEmalloc.Functions.malloc; }
 
