@@ -178,7 +178,7 @@ class NativeClassFunction(
 	internal val hasUnsafeMethod: Boolean
 		get() = nativeClass.binding != null
 		        && !(hasExplicitFunctionAddress && hasNativeCode)
-		        && (returns.isBufferPointer || returns.nativeType is CallbackType || hasParam { it.isBufferPointer || it.nativeType is CallbackType })
+		        && (returns.isBufferPointer || returns.nativeType is CallbackType || hasParam { it.isBufferPointer || it.nativeType is CallbackType || it has MapToInt })
 		        && !returns.has(Address)
 				&& !hasParam { it.nativeType is ArrayType }
 
@@ -222,6 +222,10 @@ class NativeClassFunction(
 	private val Parameter.asJavaMethodParam: String
 		get() = if ( nativeType is StructType && (this has Check || getReferenceParam(AutoSize, name) != null) )
 			"$javaMethodType.Buffer $name"
+		else if ( nativeType is ArrayType )
+			"${(nativeType.mapping as PointerMapping).primitive}[] $name"
+		else if ( has(MapToInt) )
+			"int $name"
 		else
 			"$javaMethodType $name"
 
@@ -675,7 +679,7 @@ class NativeClassFunction(
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
 			else
-				if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asJavaMethodParam
+				it.asJavaMethodParam
 		}
 
 		if ( returns.isStructValue && !hasParam { it has ReturnParam } ) {
@@ -1233,7 +1237,7 @@ class NativeClassFunction(
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
 			else
-				it.transformDeclarationOrElse(transforms, if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asJavaMethodParam)
+				it.transformDeclarationOrElse(transforms, it.asJavaMethodParam)
 		}
 		val returnTransform = transforms[returns]
 		if ( returnTransform === MapPointerTransform ) {

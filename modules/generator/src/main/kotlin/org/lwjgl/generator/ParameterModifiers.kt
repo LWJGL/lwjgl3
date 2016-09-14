@@ -24,6 +24,14 @@ object Virtual : ParameterModifier() {
 	override val isSpecial = false
 }
 
+object MapToInt : ParameterModifier() {
+	override val isSpecial = true
+	override fun validate(param: Parameter) {
+		if ( param.nativeType.mapping !== PrimitiveMapping.BYTE && param.nativeType.mapping !== PrimitiveMapping.SHORT )
+			throw IllegalArgumentException("The MapToInt modifier can only be applied on byte or short parameters.")
+	}
+}
+
 interface AutoSizeFactor {
 	fun expression(): String
 	fun expressionInv(): String

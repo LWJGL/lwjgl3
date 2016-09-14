@@ -114,7 +114,8 @@ class Parameter(
 				"memAddressSafe($name)"
 			else
 				"memAddress($name)"
-		nativeType.mapping == PrimitiveMapping.BOOLEAN4      -> "$name ? 1 : 0"
+		nativeType.mapping === PrimitiveMapping.BOOLEAN4     -> "$name ? 1 : 0"
+		has(MapToInt)                                        -> if ( nativeType.mapping === PrimitiveMapping.BYTE ) "(byte)($name & 0xFF)" else "(short)($name & 0xFFFF)"
 		else                                                 -> name
 	}
 
