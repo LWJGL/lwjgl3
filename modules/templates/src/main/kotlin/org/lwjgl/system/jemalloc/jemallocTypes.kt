@@ -13,10 +13,10 @@ fun config() {
 	packageInfo(
 		JEMALLOC_PACKAGE,
 		"""
-		Contains bindings to the <a href="http://www.canonware.com/jemalloc/">jemalloc</a> library. jemalloc is a general purpose malloc implementation that
-		emphasizes fragmentation avoidance and scalable concurrency support.
+		Contains bindings to the <a href="http://jemalloc.net/">jemalloc</a> library. jemalloc is a general purpose malloc implementation that emphasizes
+		fragmentation avoidance and scalable concurrency support.
 
-		The jemalloc documentation can be found <a href="http://www.canonware.com/download/jemalloc/jemalloc-latest/doc/jemalloc.html">here</a>. The jemalloc
+		The jemalloc documentation can be found <a href="http://jemalloc.net/jemalloc.3.html">here</a>. The jemalloc
 		<a href="https://github.com/jemalloc/jemalloc/wiki">wiki</a> also contains useful information.
 
 		The jemalloc shared library that comes with LWJGL is configured with:
@@ -32,8 +32,7 @@ fun config() {
 		The shared library may be replaced with a custom build that has more features enabled.
 
 		Dynamic configuration (for enabled features) is also possible, using either the {@code MALLOC_CONF} environment variable or the
-		<a href="http://www.canonware.com/download/jemalloc/jemalloc-latest/doc/jemalloc.html\#mallctl_namespace">MALLCTL NAMESPACE</a> and the
-		{@code mallctl*} functions.
+		<a href="http://jemalloc.net/jemalloc.3.html#mallctl_namespace">MALLCTL NAMESPACE</a> and the {@code mallctl*} functions.
 		"""
 	)
 
