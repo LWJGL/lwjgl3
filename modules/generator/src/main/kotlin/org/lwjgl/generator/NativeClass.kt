@@ -195,14 +195,14 @@ class NativeClass(
 	private val genFunctions: List<NativeClassFunction> by lazy {
 		val list = ArrayList<NativeClassFunction>(_functions.values)
 
-		functions.forEach { func ->
-			val hasArrayOverloads = func.hasArrayOverloads
-
-			if (hasArrayOverloads) {
+		functions.asSequence()
+			.filter { it.hasArrayOverloads }
+			.forEach { func ->
 				// assumes only 1 exists per method
-				val multiTypeParam = if (!hasArrayOverloads) null else func.parameters.firstOrNull { it has MultiType }
+				val multiTypeParam = func.parameters.firstOrNull { it has MultiType }
+				val autoSizeResultOutParams = func.parameters.count { it.isAutoSizeResultOut }
 
-				if (multiTypeParam == null || func.parameters.any { it.nativeType.mapping.isArray }) {
+				if (multiTypeParam == null || func.parameters.any { it.isArrayParameter(autoSizeResultOutParams) }) {
 					val overload = NativeClassFunction(
 						returns = func.returns,
 						simpleName = func.simpleName,
@@ -210,8 +210,8 @@ class NativeClass(
 						//documentation = func.documentation,
 						documentation = { processDocumentation("Array version of: ${func.methodLink}").toJavaDoc() },
 						nativeClass = this@NativeClass,
-						parameters = *(func.parameters.asSequence().map {
-							if (it.nativeType.mapping.isArray)
+						parameters = *func.parameters.asSequence().map {
+							if (it.isArrayParameter(autoSizeResultOutParams))
 								Parameter(
 									ArrayType(it.nativeType as PointerType),
 									it.name,
@@ -221,7 +221,7 @@ class NativeClass(
 								).copyModifiers(it).removeArrayModifiers()
 							else
 								func[it.name].removeArrayModifiers()
-						}.toList().toTypedArray())
+						}.toList().toTypedArray()
 					).copyModifiers(func)
 
 					if (!func.hasCustomJNI)
@@ -233,35 +233,34 @@ class NativeClass(
 				if (multiTypeParam != null) {
 					val multiType = multiTypeParam[MultiType]
 					multiType.types.asSequence().filter { it !== PointerMapping.DATA_POINTER }.forEach { autoType ->
-						val params = func.parameters.asSequence().map {
-							if (it.nativeType.mapping.isArray)
-								Parameter(
-									ArrayType(it.nativeType as PointerType),
-									it.name,
-									it.paramType,
-									it.documentation,
-									"", LinkMode.SINGLE
-								).copyModifiers(it).removeArrayModifiers()
-							else if (it has MultiType)
-								Parameter(
-									ArrayType(it.nativeType as PointerType, autoType),
-									it.name,
-									it.paramType,
-									it.documentation,
-									"", LinkMode.SINGLE
-								).copyModifiers(it).removeArrayModifiers()
-							else
-								func[it.name].removeArrayModifiers()
-						}
-
 						val overload = NativeClassFunction(
 							returns = func.returns,
 							simpleName = func.simpleName,
 							name = func.name,
 							documentation = { processDocumentation("${autoType.primitive}[] version of: ${func.methodLink}").toJavaDoc() },
 							nativeClass = this@NativeClass,
-							parameters = *params.toList().toTypedArray()
+							parameters = *func.parameters.asSequence().map {
+								if (it.isArrayParameter(autoSizeResultOutParams))
+									Parameter(
+										ArrayType(it.nativeType as PointerType),
+										it.name,
+										it.paramType,
+										it.documentation,
+										"", LinkMode.SINGLE
+									).copyModifiers(it).removeArrayModifiers()
+								else if (it has MultiType)
+									Parameter(
+										ArrayType(it.nativeType as PointerType, autoType),
+										it.name,
+										it.paramType,
+										it.documentation,
+										"", LinkMode.SINGLE
+									).copyModifiers(it).removeArrayModifiers()
+								else
+									func[it.name].removeArrayModifiers()
+							}.toList().toTypedArray()
 						).copyModifiers(func)
+
 						overload.parameters.asSequence().firstOrNull {
 							it has AutoSize && it[AutoSize].hasReference(multiTypeParam.name)
 						}.let {
@@ -284,7 +283,6 @@ class NativeClass(
 					}
 				}
 			}
-		}
 
 		list
 	}

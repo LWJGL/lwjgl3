@@ -96,28 +96,7 @@ class Parameter(
 	internal val isAutoSizeResultOut: Boolean
 		get() = paramType === OUT && has(AutoSizeResultParam)
 
-	internal val asNativeMethodParam: String
-		get() = "${nativeType.nativeMethodType} $name"
-
-	internal fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
-		nativeType is StructType || nativeType is ObjectType ->
-			if ( has(nullable) )
-				"$name == null ? NULL : $name.$ADDRESS"
-			else if ( nativeType is ObjectType && func.hasUnsafeMethod && func.nativeClass.binding!!.hasParameterCapabilities )
-				name
-			else
-				"$name.$ADDRESS"
-		nativeType.isPointerData                             ->
-			if ( nativeType is ArrayType )
-				name
-			else if ( !isAutoSizeResultOut && (has(nullable) || (has(optional) && mode === GenerationMode.NORMAL)) )
-				"memAddressSafe($name)"
-			else
-				"memAddress($name)"
-		nativeType.mapping === PrimitiveMapping.BOOLEAN4     -> "$name ? 1 : 0"
-		has(MapToInt)                                        -> if ( nativeType.mapping === PrimitiveMapping.BYTE ) "(byte)($name & 0xFF)" else "(short)($name & 0xFFFF)"
-		else                                                 -> name
-	}
+	internal fun isArrayParameter(autoSizeResultOutParams: Int) = nativeType.mapping.isArray && (!isAutoSizeResultOut || autoSizeResultOutParams != 1)
 
 	internal fun removeArrayModifiers(): Parameter {
 		if ( has(optional) && has(MultiType) )

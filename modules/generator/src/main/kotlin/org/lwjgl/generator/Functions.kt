@@ -183,9 +183,9 @@ class NativeClassFunction(
 				&& !hasParam { it.nativeType is ArrayType }
 
 	internal val hasArrayOverloads: Boolean
-		get() = !name.endsWith("free", ignoreCase = true) && parameters.asSequence()
-				.filter { it.nativeType.mapping.isArray || it has MultiType }
-				.let { it.any() && it.none { it.isAutoSizeResultOut } }
+		get() = !name.endsWith("free", ignoreCase = true) && parameters
+			.count { it.isAutoSizeResultOut }
+			.let { autoSizeResultOutParams -> parameters.asSequence().any { it has MultiType || it.isArrayParameter(autoSizeResultOutParams) } }
 
 	private val ReturnValue.isStructValue: Boolean
 		get() = nativeType is StructType && !nativeType.includesPointer
@@ -228,6 +228,32 @@ class NativeClassFunction(
 			"int $name"
 		else
 			"$javaMethodType $name"
+
+	private val Parameter.asNativeMethodParam: String get() =
+		if ( nativeType is ArrayType )
+			"${(nativeType.mapping as PointerMapping).primitive}[] $name"
+		else
+			"${nativeType.nativeMethodType} $name"
+
+	private fun Parameter.asNativeMethodCallParam(mode: GenerationMode) = when {
+		nativeType is StructType || nativeType is ObjectType ->
+			if ( has(nullable) )
+				"$name == null ? NULL : $name.$ADDRESS"
+			else if ( nativeType is ObjectType && hasUnsafeMethod && nativeClass.binding!!.hasParameterCapabilities )
+				name
+			else
+				"$name.$ADDRESS"
+		nativeType.isPointerData                             ->
+			if ( nativeType is ArrayType )
+				name
+			else if ( !isAutoSizeResultOut && (has(nullable) || (has(optional) && mode === GenerationMode.NORMAL)) )
+				"memAddressSafe($name)"
+			else
+				"memAddress($name)"
+		nativeType.mapping === PrimitiveMapping.BOOLEAN4     -> "$name ? 1 : 0"
+		has(MapToInt)                                        -> if ( nativeType.mapping === PrimitiveMapping.BYTE ) "(byte)($name & 0xFF)" else "(short)($name & 0xFFFF)"
+		else                                                 -> name
+	}
 
 	private val Parameter.isFunctionProvider: Boolean
 		get() = nativeType is ObjectType && nativeClass.binding != null && nativeClass.binding.hasParameterCapabilities
@@ -552,7 +578,7 @@ class NativeClassFunction(
 			if ( nativeParams.any() ) print(", ")
 		}
 		printList(nativeParams) {
-			if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asNativeMethodParam
+			it.asNativeMethodParam
 		}
 		if ( returns.isStructValue && !hasParam { it has ReturnParam } ) {
 			if ( nativeClass.binding != null || nativeParams.any() ) print(", ")
@@ -572,7 +598,7 @@ class NativeClassFunction(
 			if ( it.isFunctionProvider )
 				it.asJavaMethodParam
 			else
-				if ( it.nativeType is ArrayType ) "${(it.nativeType.mapping as PointerMapping).primitive}[] ${it.name}" else it.asNativeMethodParam
+				it.asNativeMethodParam
 		}
 
 		if ( returns.isStructValue && !hasParam { it has ReturnParam } ) {
@@ -722,7 +748,7 @@ class NativeClassFunction(
 				hasStack || code.hasStatements(code.javaFinally, ApplyTo.NORMAL)
 			) {
 				printList(getNativeParams()) {
-					it.asNativeMethodCallParam(this@NativeClassFunction, NORMAL)
+					it.asNativeMethodCallParam(NORMAL)
 				}
 			}
 		}
@@ -761,21 +787,7 @@ class NativeClassFunction(
 						if ( hasParam { it has AutoSizeResultParam } ) {
 							val params = getParams { it has AutoSizeResultParam }
 							val single = params.count() == 1
-							print(", ${params.map {
-								if ( it.paramType === IN ) {
-									if ( it.nativeType.mapping === PrimitiveMapping.INT )
-										"${it.name}"
-									else
-										"(int)${it.name}"
-								} else {
-									(it[AutoSizeResultParam].expression ?: if ( single )
-										"${it.name}.get(0)"
-									else
-										"${it.name}.get(${it.name}.position())").let { expression ->
-										if ( it.nativeType.mapping === PointerMapping.DATA_INT ) expression else "(int)$expression"
-									}
-								}
-							}.joinToString(" * ")}")
+							print(", ${params.map { getAutoSizeResultExpression(single, it) }.joinToString(" * ")}")
 						} else if ( returns has Address )
 							print(", 1")
 						else
@@ -804,6 +816,25 @@ class NativeClassFunction(
 			println(it.code)
 		}
 	}
+
+	private fun getAutoSizeResultExpression(single: Boolean, param: Parameter) =
+		if ( param.paramType === IN )
+			param.name.let { if ( param.nativeType.mapping === PrimitiveMapping.INT ) it else "(int)$it" }
+		else
+		(
+			if ( single )
+				"${param.name}.get(0)"
+			else if ( param.nativeType is ArrayType )
+				"${param.name}[0]"
+			else
+				"${param.name}.get(${param.name}.position())"
+		).let {
+			val custom = param[AutoSizeResultParam].expression
+			if ( custom == null )
+				it
+			else
+				custom.replace("\$original", it)
+		}.let { if ( param.nativeType.mapping === PointerMapping.DATA_INT ) it else "(int)$it" }
 
 	private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: ApplyTo, hasFinally: Boolean) {
 		printCode(code.javaBeforeNative, applyTo, "")
@@ -1311,7 +1342,7 @@ class NativeClassFunction(
 		val returnLater = code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE) || transforms[returns] is BufferAutoSizeReturnTransform
 		generateNativeMethodCall(returnLater, hasFinally) {
 			printList(getNativeParams()) {
-				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(this@NativeClassFunction, ALTERNATIVE))
+				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(ALTERNATIVE))
 			}
 		}
 
@@ -1351,21 +1382,7 @@ class NativeClassFunction(
 						if ( hasParam { it has AutoSizeResultParam } ) {
 							val params = getParams { it has AutoSizeResultParam }
 							val single = params.count() == 1
-							builder.append(", ${params.map {
-								if ( it.paramType === IN )
-									"(int)${it.name}"
-								else if ( it.nativeType.mapping === PointerMapping.DATA_INT ) {
-									it[AutoSizeResultParam].expression ?: if ( single )
-										"${it.name}.get(0)"
-									else
-										"${it.name}.get(${it.name}.position())"
-								} else {
-									it[AutoSizeResultParam].expression ?: if ( single )
-										"(int)${it.name}.get(0)"
-									else
-										"(int)${it.name}.get(${it.name}.position())"
-								}
-							}.joinToString(" * ")}")
+							builder.append(", ${params.map { getAutoSizeResultExpression(single, it) }.joinToString(" * ")}")
 						} else
 							throw IllegalStateException("No AutoSizeResult parameter could be found.")
 					}

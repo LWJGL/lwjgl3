@@ -138,6 +138,7 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier() {
 	}
 }
 val AutoSizeResult = AutoSizeResultParam(null)
+/* Custom expression. Use $original to inject the hardcoded expression */
 fun AutoSizeResult(expression: String) = AutoSizeResultParam(expression)
 
 /** Adds a capacity check to a buffer parameter. */

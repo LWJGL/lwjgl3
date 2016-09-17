@@ -136,7 +136,7 @@ N=\#comp     components
 		const..charASCII_p.IN("filename", "the file name"),
 		Check(1)..AutoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
 		Check(1)..AutoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
-		Check(1)..AutoSizeResult("(req_comp != 0 ? req_comp : comp.get(comp.position()))")..int_p.OUT("comp", "outputs number of components in image"),
+		Check(1)..AutoSizeResult("(req_comp != 0 ? req_comp : \$original)")..int_p.OUT("comp", "outputs number of components in image"),
 		int.IN("req_comp", "0 or 1..4 to force that many components per pixel", "0 1 2 3 4")
 	)
 
