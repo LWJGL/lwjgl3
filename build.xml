@@ -547,7 +547,7 @@
 			<arg line="-J-Dfile.encoding=UTF8"/>
 			<arg line="-J-XaddExports:jdk.javadoc/com.sun.tools.doclets.standard=ALL-UNNAMED" if:set="jdk9"/>
 		</javadoc>
-		<get-quiet name="favicon" url="http://s3.amazonaws.com/cdn.lwjgl.org/favicon.ico" dest="${bin.html.javadoc}"/>
+		<get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${bin.html.javadoc}"/>
 
 		<java classname="org.lwjgl.system.JavadocPostProcess" fork="true" failonerror="true">
 			<classpath path="${bin.generator}"/>
@@ -719,7 +719,7 @@
 				<arg line="-J-Dfile.encoding=UTF8"/>
 				<arg line="-J-XaddExports:jdk.javadoc/com.sun.tools.doclets.standard=ALL-UNNAMED" if:set="jdk9"/>
 			</javadoc>
-			<get-quiet name="favicon" url="http://s3.amazonaws.com/cdn.lwjgl.org/favicon.ico" dest="${release}/@{module}/javadoc"/>
+			<get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/@{module}/javadoc"/>
 
 			<java classname="org.lwjgl.system.JavadocPostProcess" fork="true" failonerror="true">
 				<classpath path="${bin.generator}"/>
