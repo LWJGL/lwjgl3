@@ -2189,7 +2189,7 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			const..nk_color.p.IN("table", "")
+			Check("NK_COLOR_COUNT")..const..nk_color.p.IN("table", "")
 		)
 
 		void(
@@ -2206,7 +2206,7 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			Check("NK_CURSOR_COUNT")..nk_cursor_p.IN("cursor", "")
+			Check("NK_CURSOR_COUNT")..nk_cursor_p.IN("cursors", "")
 		)
 
 		(const..charUTF8_p)(
