@@ -1662,7 +1662,7 @@ public final class MemoryUtil {
 	 *
 	 * @param address the string memory address
 	 *
-	 * @return the decode {@link String} or null if the specified {@code address} is null
+	 * @return the decoded {@link String} or null if the specified {@code address} is null
 	 */
 	public static String memUTF8(long address) {
 		return address == NULL ? null : memUTF8(memByteBufferNT1(address));
