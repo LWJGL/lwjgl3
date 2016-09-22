@@ -99,7 +99,7 @@ class ConstantBlock<T : Any>(
 			var formatType = 1 // 0: hex, 1: decimal
 			for (c in constants) {
 				if ( c is ConstantExpression ) {
-					@Suppress("CAST_NEVER_SUCCEEDS")
+					@Suppress("UNCHECKED_CAST")
 					rootBlock.add(c as ConstantExpression<Int>)
 					continue
 				}

@@ -81,7 +81,7 @@ class Parameter(
 
 	override fun hashCode() = name.hashCode()
 
-	override fun equals(other: Any?) = other === this || (other is Parameter && other.name.equals(this.name))
+	override fun equals(other: Any?) = other === this || (other is Parameter && other.name == this.name)
 
 	// --- [ Helper functions & properties ] ----
 

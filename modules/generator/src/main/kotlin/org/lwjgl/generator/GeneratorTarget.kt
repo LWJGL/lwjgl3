@@ -84,7 +84,7 @@ class Preamble {
 
 	internal fun printNative(writer: PrintWriter) {
 		nativeDirectives.filter { it.beforeIncludes }.forEach {
-			writer.println("${it.expression}")
+			writer.println(it.expression)
 		}
 
 		writer.println("#include \"common_tools.h\"")
@@ -93,7 +93,7 @@ class Preamble {
 		}
 
 		nativeDirectives.filter { !it.beforeIncludes }.forEach {
-			writer.println("${it.expression}")
+			writer.println(it.expression)
 		}
 	}
 
@@ -139,9 +139,9 @@ abstract class GeneratorTarget(
 				.filter {
 					it.endsWith(".kt")
 					&& !it.startsWith("Generator")
-					&& !it.equals("NativeClass.kt")
-					&& !it.equals("Structs.kt")
-					&& !it.equals("CallbackFunction.kt")
+					&& it != "NativeClass.kt"
+					&& it != "Structs.kt"
+					&& it != "CallbackFunction.kt"
 					&& !(this is NativeClass && it.endsWith("Binding.kt"))
 				}.first()
 		}
@@ -154,7 +154,7 @@ abstract class GeneratorTarget(
 	}.lastModified()
 
 	var access = Access.PUBLIC
-		set(access: Access) {
+		set(access) {
 			if ( access === Access.PRIVATE )
 				throw IllegalArgumentException("The private access modifier is illegal on top-level classes.")
 			field = access

@@ -136,7 +136,7 @@ class NativeClassFunction(
 
 		if ( stripType ) {
 			val pointerMapping = param.nativeType.mapping as PointerMapping
-			val typeChar = when ( pointerMapping ) {
+			val typeSuffix = when ( pointerMapping ) {
 				PointerMapping.DATA_SHORT  -> "s"
 				PointerMapping.DATA_INT    -> "i"
 				PointerMapping.DATA_LONG   -> "i64"
@@ -145,10 +145,10 @@ class NativeClassFunction(
 				else                       -> ""
 			}
 
-			if ( typeChar != "" ) {
+			if ( typeSuffix != "" ) {
 				val offset = name.length - cutCount
-				if ( typeChar.equals(name.substring(offset - typeChar.length, offset)) )
-					cutCount += typeChar.length
+				if ( typeSuffix == name.substring(offset - typeSuffix.length, offset) )
+					cutCount += typeSuffix.length
 
 				if ( name[name.length - cutCount - 1] == 'u' )
 					cutCount++
@@ -197,7 +197,7 @@ class NativeClassFunction(
 			else
 				returns.javaMethodType
 		} else if ( returns.nativeType is CallbackType ) {
-			"${returns.nativeType.className}"
+			returns.nativeType.className
 		} else {
 			returns.javaMethodType
 		}
@@ -893,7 +893,7 @@ class NativeClassFunction(
 					"${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 			)
 			if ( nativeClass.binding != null && !hasExplicitFunctionAddress ) {
-				print("$FUNCTION_ADDRESS")
+				print(FUNCTION_ADDRESS)
 				if ( hasNativeParams ) print(", ")
 			}
 		}
@@ -1152,7 +1152,7 @@ class NativeClassFunction(
 			generateAlternativeMethod(name, transforms)
 
 			// Combine PointerArrayTransformSingle with BufferValueReturnTransform
-			getParams { it has ReturnParam }.forEach { applyReturnValueTransforms(it) }
+			getParams { it has ReturnParam }.forEach(::applyReturnValueTransforms)
 
 			// Single value version
 			it.forEach {
@@ -1185,7 +1185,7 @@ class NativeClassFunction(
 				false
 			} else {
 				// Compine SingleValueTransform with BufferValueReturnTransform
-				getParams { it has ReturnParam }.forEach { applyReturnValueTransforms(it) }
+				getParams { it has ReturnParam }.forEach(::applyReturnValueTransforms)
 
 				// Transform the AutoSize parameter, if there is one
 				getParams(hasAutoSizePredicate(it)).forEach {
@@ -1547,7 +1547,7 @@ class NativeClassFunction(
 					if ( returns.has(Address) )
 						print('&')
 				}
-				print("$name")
+				print(name)
 				if ( !has(Macro) ) print('(')
 				printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) {
 					// Avoid implicit cast warnings

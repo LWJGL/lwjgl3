@@ -271,7 +271,7 @@ internal class BufferAutoSizeReturnTransform(
 		if ( it is StructType )
 			"${it.javaMethodType}.Buffer"
 		else
-			"${it.javaMethodType}"
+			it.javaMethodType
 	}
 
 	override fun transformCall(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
@@ -289,7 +289,7 @@ internal class BufferReturnTransform(
 	val encoding: String? = null
 ) : FunctionTransform<ReturnValue> {
 
-	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null) (outParam.nativeType.mapping as PointerMapping).javaMethodType.simpleName else "String"
+	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null ) (outParam.nativeType.mapping as PointerMapping).javaMethodType.simpleName else "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
 		return if ( encoding != null )
 			"\t\treturn mem$encoding(${outParam.name}, $lengthParam.get(0));"

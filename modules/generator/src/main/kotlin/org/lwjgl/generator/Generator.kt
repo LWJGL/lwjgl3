@@ -71,7 +71,7 @@ fun main(args: Array<String>) {
 	validateDirectory("template source", args[0])
 	validateDirectory("generation target", args[1])
 
-	Generator(args[0], args[1]) {
+	generate(args[0], args[1]) {
 		// We discover templates reflectively.
 		// For a package passed to the generate function, we
 		// search for a <package>.templates.TemplatesPackage class file
@@ -105,7 +105,7 @@ fun main(args: Array<String>) {
 				fun generate(packageName: String, binding: Binding? = null) {
 					pool.submit {
 						try {
-							this@Generator.generate(packageName, binding)
+							this.generate(packageName, binding)
 						} catch(t: Throwable) {
 							errors.incrementAndGet()
 							t.printStackTrace()
@@ -155,10 +155,17 @@ fun main(args: Array<String>) {
 	}
 }
 
+private fun generate(
+	srcPath: String,
+	trgPath: String,
+	generate: Generator.() -> Unit
+) {
+	Generator(srcPath, trgPath).generate()
+}
+
 class Generator(
 	val srcPath: String,
-	val trgPath: String,
-	generate: Generator.() -> Unit
+	val trgPath: String
 ) {
 
 	companion object {
@@ -299,10 +306,6 @@ public final class $className implements Runnable {
 	// TODO: add more, e.g. kotlinc
 	private val GENERATOR_LAST_MODIFIED = getDirectoryLastModified("modules/generator/src/main/kotlin", true)
 
-	init {
-		generate()
-	}
-
 	private fun methodFilter(method: Method, javaClass: Class<*>) =
 		// static
 		method.modifiers and Modifier.STATIC != 0 &&
@@ -317,7 +320,7 @@ public final class $className implements Runnable {
 			return
 
 		val classFiles = packageDirectory.listFiles { it ->
-			it.isFile && it.extension.equals("kt")
+			it.isFile && it.extension == "kt"
 		}!!
 
 		Arrays.sort(classFiles)
@@ -375,7 +378,7 @@ public final class $className implements Runnable {
 		for (template in templates) {
 			val nativeClass = template.invoke(null) as NativeClass? ?: continue
 
-			if ( !(nativeClass.packageName.equals(packageName)) )
+			if ( nativeClass.packageName != packageName )
 				throw IllegalStateException("NativeClass ${nativeClass.className} has invalid package [${nativeClass.packageName}]. Should be: [$packageName]")
 
 			if ( nativeClass.hasBody ) {
@@ -502,9 +505,7 @@ private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 			getDirectoryLastModified(it, true)
 		else
 			it.lastModified()
-	}.fold(0.toLong()) { left, right ->
-		max(left, right)
-	}
+	}.fold(0.toLong(), ::max)
 }
 
 private fun ensurePath(path: File) {
