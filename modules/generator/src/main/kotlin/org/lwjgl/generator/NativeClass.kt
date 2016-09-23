@@ -408,6 +408,11 @@ class NativeClass(
 		fun PrintWriter.libraryInit() {
 			println(if ( library == null )
 				"\n\tstatic { Library.initialize(); }"
+			else if ( library.contains('\n') )
+				"""
+	static {
+		${library.trim()}
+	}"""
 			else if ( library.endsWith(");") )
 				"\n\tstatic { $library }"
 			else
