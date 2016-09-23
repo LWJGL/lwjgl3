@@ -857,18 +857,15 @@ static int glnvg__renderCreate(void* uptr)
 
 	glnvg__checkError(gl, "init");
 
+	char* opts = NULL;
 	if (gl->flags & NVG_ANTIALIAS) {
-		char* opts;
 		if (gl->flags & NVG_STENCIL_STROKES)
 			opts = "#define EDGE_AA 1\n#define STENCIL_STROKES 1\n";
 		else
 			opts = "#define EDGE_AA 1\n";
-		if (glnvg__createShader(gl, &gl->shader, "shader", shaderHeader, opts, fillVertShader, fillFragShader) == 0)
-			return 0;
-	} else {
-		if (glnvg__createShader(gl, &gl->shader, "shader", shaderHeader, NULL, fillVertShader, fillFragShader) == 0)
-			return 0;
 	}
+	if (glnvg__createShader(gl, &gl->shader, "shader", shaderHeader, opts, fillVertShader, fillFragShader) == 0)
+		return 0;
 
 	glnvg__checkError(gl, "uniform locations");
 	glnvg__getUniforms(gl, &gl->shader);

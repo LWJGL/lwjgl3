@@ -957,6 +957,21 @@ nvgFill(vg);""")}
 	)
 
 	void(
+		"RoundedRectVarying",
+		"Creates new rounded rectangle shaped sub-path with varying radii for each corner.",
+
+		ctx,
+		float.IN("x", "the rectangle X axis coordinate"),
+		float.IN("y", "the rectangle Y axis coordinate"),
+		float.IN("w", "the rectangle width"),
+		float.IN("h", "the rectangle height"),
+		float.IN("radTopLeft", "the top-left corner radius"),
+		float.IN("radTopRight", "the top-right corner radius"),
+		float.IN("radBottomRight", "the bottom-right corner radius"),
+		float.IN("radBottomLeft", "the bottom-left corner radius")
+	)
+
+	void(
 		"Ellipse",
 		"Creates new ellipse shaped sub-path.",
 
