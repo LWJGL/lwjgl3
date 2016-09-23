@@ -101,6 +101,7 @@ ENABLE_WARNINGS()""")
 	FloatConstant(
 		"Constants.",
 
+		"UNDEFINED"..-1.0f,
 		"SCROLLBAR_HIDING_TIMEOUT"..4.0f
 	)
 
@@ -211,10 +212,10 @@ ENABLE_WARNINGS()""")
 		"SYMBOL_NONE".enum,
 		"SYMBOL_X".enum,
 		"SYMBOL_UNDERSCORE".enum,
-		"SYMBOL_CIRCLE".enum,
-		"SYMBOL_CIRCLE_FILLED".enum,
-		"SYMBOL_RECT".enum,
-		"SYMBOL_RECT_FILLED".enum,
+		"SYMBOL_CIRCLE_SOLID".enum,
+		"SYMBOL_CIRCLE_OUTLINE".enum,
+		"SYMBOL_RECT_SOLID".enum,
+		"SYMBOL_RECT_OUTLINE".enum,
 		"SYMBOL_TRIANGLE_UP".enum,
 		"SYMBOL_TRIANGLE_DOWN".enum,
 		"SYMBOL_TRIANGLE_LEFT".enum,
@@ -537,23 +538,36 @@ ENABLE_WARNINGS()""")
 		"HEADER_RIGHT".enum
 	)
 
+	val PanelTypes = EnumConstant(
+		"nk_panel_type",
+
+		"PANEL_WINDOW".enum("", 0.NK_FLAG),
+		"PANEL_GROUP".enum("", 1.NK_FLAG),
+		"PANEL_POPUP".enum("", 2.NK_FLAG),
+		"PANEL_CONTEXTUAL".enum("", 4.NK_FLAG),
+		"PANEL_COMBO".enum("", 5.NK_FLAG),
+		"PANEL_MENU".enum("", 6.NK_FLAG),
+		"PANEL_TOOLTIP".enum("", 7.NK_FLAG)
+	)
+
+	val PanelSet = EnumConstant(
+		"nk_panel_set",
+
+		"PANEL_SET_NONBLOCK".enum("", "NK_PANEL_CONTEXTUAL|NK_PANEL_COMBO|NK_PANEL_MENU|NK_PANEL_TOOLTIP"),
+		"PANEL_SET_POPUP".enum("", "NK_PANEL_SET_NONBLOCK|NK_PANEL_POPUP"),
+		"PANEL_SET_SUB".enum("", "NK_PANEL_SET_POPUP|NK_PANEL_GROUP")
+	)
+
 	val WindowFlags = EnumConstant(
 		"nk_window_flags",
 
-		"WINDOW_PRIVATE".enum("dummy flag which mark the beginning of the private window flag part", 9.NK_FLAG),
-		"WINDOW_ROM".enum("sets the window into a read only mode and does not allow input changes", 10.NK_FLAG),
-		"WINDOW_HIDDEN".enum("Hides the window and stops any window interaction and drawing can be set by user input or by closing the window", 11.NK_FLAG),
-		"WINDOW_CLOSED".enum("Directly closes and frees the window at the end of the frame", 12.NK_FLAG),
-		"WINDOW_MINIMIZED".enum("marks the window as minimized", 13.NK_FLAG),
-		"WINDOW_SUB".enum("Marks the window as subwindow of another window", 14.NK_FLAG),
-		"WINDOW_GROUP".enum("Marks the window as window widget group", 15.NK_FLAG),
-		"WINDOW_POPUP".enum("Marks the window as a popup window", 16.NK_FLAG),
-		"WINDOW_NONBLOCK".enum("Marks the window as a nonblock popup window", 17.NK_FLAG),
-		"WINDOW_CONTEXTUAL".enum("Marks the window as a combo box or menu", 18.NK_FLAG),
-		"WINDOW_COMBO".enum("Marks the window as a combo box", 19.NK_FLAG),
-		"WINDOW_MENU".enum("Marks the window as a menu", 20.NK_FLAG),
-		"WINDOW_TOOLTIP".enum("Marks the window as a menu", 21.NK_FLAG),
-		"WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", 22.NK_FLAG)
+		"WINDOW_PRIVATE".enum("", 10.NK_FLAG),
+		"WINDOW_DYNAMIC".enum("special window type growing up in height while being filled to a certain maximum height", "NK_WINDOW_PRIVATE"),
+		"WINDOW_ROM".enum("sets the window into a read only mode and does not allow input changes", 11.NK_FLAG),
+		"WINDOW_HIDDEN".enum("Hides the window and stops any window interaction and drawing can be set by user input or by closing the window", 12.NK_FLAG),
+		"WINDOW_CLOSED".enum("Directly closes and frees the window at the end of the frame", 13.NK_FLAG),
+		"WINDOW_MINIMIZED".enum("marks the window as minimized", 14.NK_FLAG),
+		"WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", 15.NK_FLAG)
 	).javaDocLinks
 
 	val ctx = nk_context_p.IN("ctx", "the nuklear context");
@@ -1604,7 +1618,7 @@ ENABLE_WARNINGS()""")
 			AutoSize("items")..int.IN("count", ""),
 			intb.IN("selected", ""),
 			int.IN("item_height", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1617,7 +1631,7 @@ ENABLE_WARNINGS()""")
 			intb.IN("selected", ""),
 			int.IN("count", ""),
 			int.IN("item_height", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1629,7 +1643,7 @@ ENABLE_WARNINGS()""")
 			intb.IN("selected", ""),
 			int.IN("count", ""),
 			int.IN("item_height", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1642,7 +1656,7 @@ ENABLE_WARNINGS()""")
 			intb.IN("selected", ""),
 			int.IN("count", ""),
 			int.IN("item_height", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		void(
@@ -1654,7 +1668,7 @@ ENABLE_WARNINGS()""")
 			AutoSize("items")..int.IN("count", ""),
 			Check(1)..int_p.INOUT("selected", ""),
 			int.IN("item_height", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		void(
@@ -1666,7 +1680,7 @@ ENABLE_WARNINGS()""")
 			Check(1)..int_p.INOUT("selected", ""),
 			int.IN("count", ""),
 			int.IN("item_height", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		void(
@@ -1679,7 +1693,7 @@ ENABLE_WARNINGS()""")
 			Check(1)..int_p.INOUT("selected", ""),
 			int.IN("count", ""),
 			int.IN("item_height", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		void(
@@ -1692,7 +1706,7 @@ ENABLE_WARNINGS()""")
 			Check(1)..int_p.INOUT("selected", ""),
 			int.IN("count", ""),
 			int.IN("item_height", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1703,7 +1717,7 @@ ENABLE_WARNINGS()""")
 			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("selected", ""),
 			AutoSize("selected")..int.IN("len", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1713,7 +1727,7 @@ ENABLE_WARNINGS()""")
 			ctx,
 			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("selected", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1723,7 +1737,7 @@ ENABLE_WARNINGS()""")
 			ctx,
 			nk_panel_p.IN("layout", ""),
 			nk_color.IN("color", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1733,7 +1747,7 @@ ENABLE_WARNINGS()""")
 			ctx,
 			nk_panel_p.IN("layout", ""),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1744,7 +1758,7 @@ ENABLE_WARNINGS()""")
 			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("selected", ""),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
-			int.IN("height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1756,7 +1770,7 @@ ENABLE_WARNINGS()""")
 			const..charUTF8_p.IN("selected", ""),
 			AutoSize("selected")..int.IN("len", ""),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
-			int.IN("height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1766,7 +1780,7 @@ ENABLE_WARNINGS()""")
 			ctx,
 			nk_panel_p.IN("layout", ""),
 			nk_image.IN("img", ""),
-			int.IN("max_height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1777,7 +1791,7 @@ ENABLE_WARNINGS()""")
 			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("selected", ""),
 			nk_image.IN("img", ""),
-			int.IN("height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1789,7 +1803,7 @@ ENABLE_WARNINGS()""")
 			const..charUTF8_p.IN("selected", ""),
 			AutoSize("selected")..int.IN("len", ""),
 			nk_image.IN("img", ""),
-			int.IN("height", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1962,7 +1976,7 @@ ENABLE_WARNINGS()""")
 			const..charUTF8_p.IN("text", ""),
 			AutoSize("text")..int.IN("len", ""),
 			nk_flags.IN("align", "", TextAlignments),
-			float.IN("width", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1973,7 +1987,7 @@ ENABLE_WARNINGS()""")
 			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			nk_flags.IN("align", "", TextAlignments),
-			float.IN("width", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1984,7 +1998,7 @@ ENABLE_WARNINGS()""")
 			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			nk_image.IN("img", ""),
-			float.IN("width", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -1997,7 +2011,7 @@ ENABLE_WARNINGS()""")
 			AutoSize("text")..int.IN("len", ""),
 			nk_flags.IN("align", "", TextAlignments),
 			nk_image.IN("img", ""),
-			float.IN("width", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -2009,7 +2023,7 @@ ENABLE_WARNINGS()""")
 			const..charUTF8_p.IN("text", ""),
 			nk_flags.IN("align", "", TextAlignments),
 			nk_image.IN("img", ""),
-			float.IN("width", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -2020,7 +2034,7 @@ ENABLE_WARNINGS()""")
 			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
-			float.IN("width", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -2033,7 +2047,7 @@ ENABLE_WARNINGS()""")
 			AutoSize("text")..int.IN("len", ""),
 			nk_flags.IN("align", "", TextAlignments),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
-			float.IN("width", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -2045,7 +2059,7 @@ ENABLE_WARNINGS()""")
 			const..charUTF8_p.IN("text", ""),
 			nk_flags.IN("align", "", TextAlignments),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
-			float.IN("width", "")
+			nk_vec2.IN("size", "")
 		)
 
 		intb(
@@ -2301,6 +2315,9 @@ ENABLE_WARNINGS()""")
 
 		nk_vec2("widget_size", "", ctx)
 
+		float("widget_width", "", ctx)
+		float("widget_height", "", ctx)
+
 		intb("widget_is_hovered", "", ctx)
 
 		intb(
@@ -2542,6 +2559,25 @@ ENABLE_WARNINGS()""")
 			"",
 
 			Check(4)..float_p.OUT("rgba_out", ""),
+			nk_color.IN("color", "")
+		)
+
+		void(
+			"color_d",
+			"",
+
+			Check(1)..double_p.OUT("r", ""),
+			Check(1)..double_p.OUT("g", ""),
+			Check(1)..double_p.OUT("b", ""),
+			Check(1)..double_p.OUT("a", ""),
+			nk_color.IN("color", "")
+		)
+
+		void(
+			"color_dv",
+			"",
+
+			Check(4)..double_p.OUT("rgba_out", ""),
 			nk_color.IN("color", "")
 		)
 
@@ -3876,6 +3912,14 @@ ENABLE_WARNINGS()""")
 
 		(const..nk_draw_command_p)(
 			"_draw_begin",
+			"",
+
+			cctx,
+			const..nk_buffer_p.IN("buffer", "")
+		)
+
+		(const..nk_draw_command_p)(
+			"_draw_end",
 			"",
 
 			cctx,

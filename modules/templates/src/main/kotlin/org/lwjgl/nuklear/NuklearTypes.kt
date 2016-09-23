@@ -53,7 +53,7 @@ val nk_style_item_type = "nk_style_item_type".enumType
 val nk_symbol_type = "nk_symbol_type".enumType
 val nk_style_header_align = "nk_style_header_align".enumType
 val nk_chart_type = "nk_chart_type".enumType
-val nk_window_flags = "nk_window_flags".enumType
+val nk_panel_type = "nk_panel_type".enumType
 val nk_collapse_states = "nk_collapse_states".enumType
 val nk_show_states = "nk_show_states".enumType
 val nk_layout_format = "nk_layout_format".enumType
@@ -966,6 +966,7 @@ val nk_style_window = struct(NUKLEAR_PACKAGE, "NkStyleWindow", nativeName = "str
 	nk_color.member("background", "")
 
 	nk_color.member("border_color", "")
+	nk_color.member("popup_border_color", "")
 	nk_color.member("combo_border_color", "")
 	nk_color.member("contextual_border_color", "")
 	nk_color.member("menu_border_color", "")
@@ -979,6 +980,7 @@ val nk_style_window = struct(NUKLEAR_PACKAGE, "NkStyleWindow", nativeName = "str
 	float.member("menu_border", "")
 	float.member("group_border", "")
 	float.member("tooltip_border", "")
+	float.member("popup_border", "")
 
 	float.member("rounding", "")
 	nk_vec2.member("spacing", "")
@@ -1077,6 +1079,7 @@ val nk_menu_state = struct(NUKLEAR_PACKAGE, "NkMenuState", nativeName = "struct 
 
 val nk_panel_p = struct_p(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel")
 val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel", mutable = false) {
+	nk_panel_type.member("type", "")
 	nk_flags.member("flags", "")
 	nk_rect.member("bounds", "")
 	nk_scroll.p.member("offset", "")
@@ -1101,13 +1104,14 @@ val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel"
 val nk_window_p = struct_p(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_window")
 val nk_popup_state = struct(NUKLEAR_PACKAGE, "NkPopupState", nativeName = "struct nk_popup_state", mutable = false) {
 	nk_window_p.member("win", "")
-	nk_window_flags.member("type", "")
+	nk_panel_type.member("type", "")
 	nk_hash.member("name", "")
 	int.member("active", "")
 	unsigned.member("combo_count", "")
 	unsigned.member("con_count", "")
 	unsigned.member("con_old", "")
 	unsigned.member("active_con", "")
+	nk_rect.member("header", "")
 }.nativeType
 
 val nk_edit_state = struct(NUKLEAR_PACKAGE, "NkEditState", nativeName = "struct nk_edit_state", mutable = false) {
