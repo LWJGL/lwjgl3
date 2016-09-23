@@ -11,7 +11,6 @@ val stdio = "Stdio".nativeClass(packageName = LIBC_PACKAGE) {
 	nativeDirective(
 		"""#ifdef LWJGL_WINDOWS
 	#define _CRT_SECURE_NO_WARNINGS
-	#define snprintf_s _snprintf_s
 	__pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 
@@ -22,7 +21,6 @@ val stdio = "Stdio".nativeClass(packageName = LIBC_PACKAGE) {
 	documentation = "Native bindings to stdio.h."
 
 	macro..voidptr("sscanf", "The address of the {@code sscanf} function.")
-	macro..voidptr("sscanf_s", "The address of the {@code sscanf_s} function.")
 
 	int(
 		"vsscanf",
@@ -39,20 +37,8 @@ val stdio = "Stdio".nativeClass(packageName = LIBC_PACKAGE) {
 		"the number of receiving arguments successfully assigned, or {@code EOF} if read failure occurs before the first receiving argument was assigned"
 	)
 
-	int(
-		"vsscanf_s",
-		"Secure version of #vsscanf().",
-
-		const..char_p.IN("buffer", ""),
-		const..charASCII_p.IN("format", ""),
-		va_list.IN("vlist", "")
-	)
-
 	macro..voidptr("sprintf", "The address of the {@code sprintf} function.")
-	macro..voidptr("sprintf_s", "The address of the {@code sprintf_s} function.")
-
 	macro..voidptr("snprintf", "The address of the {@code snprintf} function.")
-	macro..voidptr("snprintf_s", "The address of the {@code snprintf_s} function.")
 
 	int(
 		"vsnprintf",
