@@ -45,6 +45,10 @@ ENABLE_WARNINGS()""")
 			"""
 			When a version is requested, the LibOVR runtime respects the {@code RequestedMinorVersion} field and verifies that the
 			{@code RequestedMinorVersion} is supported.
+
+			When a version is requested, the LibOVR runtime respects the {@code RequestedMinorVersion} field and verifies that the
+			{@code RequestedMinorVersion} is supported. Normally when you specify this flag you simply use #MINOR_VERSION for
+			##OVRInitParams{@code ::RequestedMinorVersion}, though you could use a lower version than #MINOR_VERSION to specify previous version behavior.
 			""",
 			0x00000004
 		),
@@ -312,7 +316,7 @@ ENABLE_WARNINGS()""")
 		"HapticsBufferSubmit_Enqueue".enum("Enqueue buffer for later playback")
 	)
 
-	EnumConstant(
+	val TrackedDeviceTypes = EnumConstant(
 		"Position tracked devices. ({@code ovrTrackedDeviceType})",
 
 		"TrackedDevice_HMD".enum("", 0x0001),
@@ -320,13 +324,26 @@ ENABLE_WARNINGS()""")
 		"TrackedDevice_RTouch".enum("", 0x0004),
 		"TrackedDevice_Touch".enum("", 0x0006),
 		"TrackedDevice_All".enum("", 0xFFFF)
-	)
+	).javaDocLinks
+
+	val BoundaryTypes = EnumConstant(
+		"Boundary types that specified while using the boundary system. ({@code ovrBoundaryType})",
+
+		"Boundary_Outer".enum("", 0x0001),
+		"Boundary_PlayArea".enum("", 0x0100)
+	).javaDocLinks
 
 	EnumConstant(
 		"Names for the left and right hand array indexes. ({@code ovrHandType})",
 
 		"Hand_Left".enum("", 0),
 		"Hand_Right".enum
+	)
+
+	EnumConstant(
+		"",
+
+		"MaxProvidedFrameStats".enum("Maximum number of frames of performance stats provided back to the caller of #GetPerfStats().", 5)
 	)
 
 	ovrResult(
@@ -349,7 +366,10 @@ ENABLE_WARNINGS()""")
 
 		nullable..const..ovrInitParams_p.IN(
 			"params",
-			"an ##OVRInitParams struct that cpecifies custom initialization options. May be $NULL to indicate default options."
+			"""
+			specifies custom initialization options. May be $NULL to indicate default options when using the CAPI shim. If you are directly calling the
+			LibOVRRT version of {@code ovr_Initialize} in the LibOVRRT DLL then this must be valid and include #Init_RequestVersion.
+			"""
 		),
 
 		returnDoc =
@@ -486,9 +506,9 @@ ovr_IdentifyClient(
 	unsigned_int(
 		"GetTrackerCount",
 		"""
-		Returns the number of sensors.
+		Returns the number of attached trackers.
 
-		The number of sensors may change at any time, so this function should be called before use as opposed to once on startup.
+		The number of trackers may change at any time, so this function should be called before use as opposed to once on startup.
 		""",
 
 		session
@@ -497,16 +517,14 @@ ovr_IdentifyClient(
 	ovrTrackerDesc(
 		"GetTrackerDesc",
 		"""
-		Returns a given sensor description.
-
-		It's possible that sensor {@code desc [0]} may indicate a unconnected or non-pose tracked sensor, but sensor {@code desc [1]} may be connected.
+		Returns a given attached tracker description.
 
 		#Initialize() must have first been called in order for this to succeed, otherwise the returned {@code trackerDescArray} will be zero-initialized. The
 		data returned by this function can change at runtime.
 		""",
 
 		session,
-		unsigned_int.IN("trackerDescIndex", "a sensor index. The valid indexes are in the range of 0 to the sensor count returned by #GetTrackerCount()."),
+		unsigned_int.IN("trackerDescIndex", "a tracker index. The valid indexes are in the range of 0 to the tracker count returned by #GetTrackerCount()."),
 
 		returnDoc = "an ##OVRTrackerDesc. An empty {@code OVRTrackerDesc} will be returned if {@code trackerDescIndex} is out of range."
 	)
@@ -629,10 +647,10 @@ ovr_IdentifyClient(
 
 	ovrTrackerPose(
 		"GetTrackerPose",
-		"Returns the ##OVRTrackerPose for the given sensor.",
+		"Returns the ##OVRTrackerPose for the given attached tracker.",
 
 		session,
-		unsigned_int.IN("trackerPoseIndex", "index of the sensor being requested.")
+		unsigned_int.IN("trackerPoseIndex", "index of the tracker being requested.")
 	)
 
 	ovrResult(
@@ -682,7 +700,14 @@ ovr_IdentifyClient(
 		float.IN("frequency", "the vibration frequency. Supported values are: 0.0 (disabled), 0.5 and 1.0. Non valid values will be clamped."),
 		float.IN("amplitude", "the vibration amplitude in the {@code [0.0, 1.0]} range"),
 
-		returnDoc = "OVRErrorCode#Success upon success"
+		returnDoc =
+		"""
+		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+		${ul(
+			"OVRErrorCode#Success: The call succeeded and a result was returned.",
+			"OVRErrorCode#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code controllerType} is not available."
+		)}
+		"""
 	)
 
 	ovrResult(
@@ -697,7 +722,14 @@ ovr_IdentifyClient(
 		ovrControllerType.IN("controllerType", "the controller where the Haptics buffer will be played"),
 		const..ovrHapticsBuffer_p.IN("buffer", "the Haptics buffer containing amplitude samples to be played"),
 
-		returnDoc = "OVRErrorCode#Success upon success"
+		returnDoc =
+		"""
+		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+		${ul(
+			"OVRErrorCode#Success: The call succeeded and a result was returned.",
+			"OVRErrorCode#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code controllerType} is not available."
+		)}
+		"""
 	)
 
 	ovrResult(
@@ -707,6 +739,147 @@ ovr_IdentifyClient(
 		session,
 		ovrControllerType.IN("controllerType", "the controller where the Haptics buffer will be played"),
 		ovrHapticsPlaybackState_p.OUT("outState", "the state of the haptics engine"),
+
+		returnDoc =
+		"""
+		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+		${ul(
+			"OVRErrorCode#Success: The call succeeded and a result was returned.",
+			"OVRErrorCode#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code controllerType} is not available."
+		)}
+		"""
+	)
+
+	val TestBoundary = ovrResult(
+		"TestBoundary",
+		"""
+		Tests collision/proximity of position tracked devices (e.g. HMD and/or Touch) against the Boundary System.
+
+		Note: this method is similar to #BoundaryTestPoint() but can be more precise as it may take into account device acceleration/momentum.
+		""",
+
+		session,
+		ovrTrackedDeviceType.IN("deviceBitmask", "bitmask of one or more tracked devices to test", TrackedDeviceTypes, LinkMode.BITFIELD),
+		ovrBoundaryType.IN("boundaryType", "the boundary type", BoundaryTypes),
+		ovrBoundaryTestResult_p.OUT("outTestResult", "result of collision/proximity test, contains information such as distance and closest point"),
+
+		returnDoc =
+		"""
+		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+		${ul(
+			"OVRErrorCode#Success: The call succeeded and a result was returned.",
+			"OVRErrorCode#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up.",
+			"OVRErrorCode#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code deviceBitmask} is not available."
+		)}
+		"""
+	)
+
+	ovrResult(
+		"TestBoundaryPoint",
+		"Tests collision/proximity of a 3D point against the Boundary System.",
+
+		session,
+		const..ovrVector3f_p.IN("point", "the 3D point to test"),
+		ovrBoundaryType.IN("singleBoundaryType", "the boundary type", BoundaryTypes),
+		ovrBoundaryTestResult_p.OUT("outTestResult", "result of collision/proximity test, contains information such as distance and closest point"),
+
+		returnDoc =
+		"""
+		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+		${ul(
+			"OVRErrorCode#Success: The call succeeded and a result was returned.",
+			"OVRErrorCode#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
+		)}
+		"""
+	)
+
+	ovrResult(
+		"SetBoundaryLookAndFeel",
+		"Sets the look and feel of the Boundary System.",
+
+		session,
+		const..ovrBoundaryLookAndFeel_p.IN("lookAndFeel", "the look and feel parameters"),
+
+		returnDoc = "OVRErrorCode#Success upon success"
+	)
+
+	ovrResult(
+		"ResetBoundaryLookAndFeel",
+		"Resets the look and feel of the Boundary System to its default state.",
+
+		session,
+
+		returnDoc = "OVRErrorCode#Success upon success"
+	)
+
+	ovrResult(
+		"GetBoundaryGeometry",
+		"Gets the geometry of the Boundary System's \"play area\" or \"outer boundary\" as 3D floor points.",
+
+		session,
+		TestBoundary["boundaryType"],
+		nullable..ovrVector3f_p.OUT("outFloorPoints", "an array of 3D points (in clockwise order) defining the boundary at floor height (up to 256)"),
+		nullable..int_p.OUT("outFloorPointsCount", "the number of 3D points returned in the array"),
+
+		returnDoc =
+		"""
+		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+		${ul(
+			"OVRErrorCode#Success: The call succeeded and a result was returned.",
+			"OVRErrorCode#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
+		)}
+		"""
+	)
+
+	ovrResult(
+		"GetBoundaryDimensions",
+		"Gets the dimension of the Boundary System's \"play area\" or \"outer boundary\".",
+
+		session,
+		TestBoundary["boundaryType"],
+		ovrVector3f_p.OUT("outDimensions", "dimensions of the axis aligned bounding box that encloses the area in meters (width, height and length)"),
+
+		returnDoc =
+		"""
+		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+		${ul(
+			"OVRErrorCode#Success: The call succeeded and a result was returned.",
+			"OVRErrorCode#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
+		)}
+		"""
+	)
+
+	ovrResult(
+		"GetBoundaryVisible",
+		"""
+		Returns if the boundary is currently visible.
+
+		Note: visibility is false if the user has turned off boundaries, otherwise, it's true if the app has requested boundaries to be visible or if any
+		tracked device is currently triggering it. This may not exactly match rendering due to fade-in and fade-out effects.
+		""",
+
+		session,
+		ovrBool_p.OUT("outIsVisible", "#True, if the boundary is visible"),
+
+		returnDoc =
+		"""
+		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
+		${ul(
+			"OVRErrorCode#Success: The call succeeded and a result was returned.",
+			"OVRErrorCode#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
+		)}
+		"""
+	)
+
+	ovrResult(
+		"RequestBoundaryVisible",
+		"Requests boundary to be visible.",
+
+		session,
+		ovrBool.IN(
+			"visible",
+			"forces the outer boundary to be visible. An application can't force it to be invisible, but can cancel its request by passing false."
+		),
 
 		returnDoc = "OVRErrorCode#Success upon success"
 	)
@@ -939,6 +1112,36 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
 
 	// ----------------
 	// Frame Timing
+
+	ovrResult(
+		"GetPerfStats",
+		"""
+		Retrieves performance stats for the VR app as well as the SDK compositor.
+
+		If the app calling this function is not the one in focus (i.e. not visible in the HMD), then {@code outStats} will be zero'd out. New stats are
+		populated after each successive call to #SubmitFrame(). So the app should call this function on the same thread it calls #SubmitFrame(), preferably
+		immediately afterwards.
+		""",
+
+		session,
+		ovrPerfStats_p.OUT("outStats", "contains the performance stats for the application and SDK compositor"),
+
+		returnDoc = "an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success"
+	)
+
+	ovrResult(
+		"ResetPerfStats",
+		"""
+		Resets the accumulated stats reported in each ##OVRPerfStatsPerCompositorFrame back to zero.
+
+		Only the integer values such as {@code HmdVsyncIndex}, {@code AppDroppedFrameCount} etc. will be reset as the other fields such as
+		{@code AppMotionToPhotonLatency} are independent timing values updated per-frame.
+		""",
+
+		session,
+
+		returnDoc = "an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success"
+	)
 
 	double(
 		"GetPredictedDisplayTime",

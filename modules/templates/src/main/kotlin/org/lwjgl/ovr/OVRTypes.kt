@@ -23,6 +23,8 @@ val OVR_LIBRARY = "LibOVR.initialize();"
 val long_long = IntegerType("long long", PrimitiveMapping.LONG)
 
 val ovrBool = IntegerType("ovrBool", PrimitiveMapping.BOOLEAN)
+val ovrBool_p = ovrBool.p
+
 val ovrResult = IntegerType("ovrResult", PrimitiveMapping.INT)
 
 val ovrSession = "ovrSession".opaque_p
@@ -87,8 +89,9 @@ val ovrInitParams_p = struct_p(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrIn
 	uint32_t.member(
 		"RequestedMinorVersion",
 		"""
-		requests a specific minimum minor version of the LibOVR runtime. Flags must include OVR#ovrInit_RequestVersion or this will be ignored and
-		OVRVersion#OVR_MINOR_VERSION will be used.
+		requests a specific minor version of the LibOVR runtime. Flags must include #Init_RequestVersion or this will be ignored and #MINOR_VERSION will
+		be used. If you are directly calling the LibOVRRT version of #Initialize() in the LibOVRRT DLL then this must be valid and include
+		#Init_RequestVersion.
 		"""
 	)
 	nullable..ovrLogCallback.member(
@@ -427,6 +430,24 @@ val ovrHapticsPlaybackState_p = struct_p(OVR_PACKAGE, "OVRHapticsPlaybackState",
 val ovrHand_Count = 2
 val ovrControllerType = "ovrControllerType".enumType
 
+val ovrTrackedDeviceType = "ovrTrackedDeviceType".enumType
+val ovrBoundaryType = "ovrBoundaryType".enumType
+
+val ovrBoundaryLookAndFeel_p = struct_p(OVR_PACKAGE, "OVRBoundaryLookAndFeel", nativeName = "ovrBoundaryLookAndFeel") {
+	documentation = "Boundary system look and feel."
+
+	ovrColorf.member("Color", "Boundary color (alpha channel is ignored)")
+}
+
+val ovrBoundaryTestResult_p = struct_p(OVR_PACKAGE, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult") {
+    documentation = "Provides boundary test information."
+
+	ovrBool.member("IsTriggering", "True, if the boundary system is being triggered and visible")
+    float.member("ClosestDistance", "Distance to the closest play area or outer boundary surface")
+    ovrVector3f.member("ClosestPoint", "Closest point in the surface")
+    ovrVector3f.member("ClosestPointNormal", "Normal of the closest point")
+}
+
 val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
 	documentation =
 		"""
@@ -553,6 +574,163 @@ val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQua
 	)
 	ovrVector2f.member("QuadSize", "width and height (respectively) of the quad in meters")
 }.nativeType
+
+val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerCompositorFrame", nativeName = "ovrPerfStatsPerCompositorFrame", mutable = false) {
+	documentation =
+	"""
+	Contains the performance stats for a given SDK compositor frame.
+
+	All of the int fields can be reset via the #ResetPerfStats() call.
+	"""
+	
+    int.member(
+	    "HmdVsyncIndex",
+	    """
+		Vsync Frame Index - increments with each HMD vertical synchronization signal (i.e. vsync or refresh rate).
+
+		If the compositor drops a frame, expect this value to increment more than 1 at a time.
+		"""
+    )
+
+    ///
+    /// Application stats
+    ///
+
+    int.member("AppFrameIndex", "index that increments with each successive #SubmitFrame() call")
+    int.member("AppDroppedFrameCount", "if the app fails to call #SubmitFrame() on time, then expect this value to increment with each missed frame")
+    float.member(
+	    "AppMotionToPhotonLatency",
+	    """
+		motion-to-photon latency for the application
+
+		This value is calculated by either using the {@code SensorSampleTime} provided for the ##OVRLayerEyeFov or if that is not available, then the call to
+		#GetTrackingState() which has {@code latencyMarker} set to #True.
+		"""
+    )
+    float.member(
+	    "AppQueueAheadTime",
+	    """
+		amount of queue-ahead in seconds provided to the app based on performance and overlap of CPU & GPU utilization
+
+		A value of 0.0 would mean the CPU & GPU workload is being completed in 1 frame's worth of time, while 11 ms (on the CV1) of queue ahead would indicate
+		that the app's CPU workload for the next frame is overlapping the app's GPU workload for the current frame.
+		"""
+    )
+    float.member(
+	    "AppCpuElapsedTime",
+	    """
+		amount of time in seconds spent on the CPU by the app's render-thread that calls #SubmitFrame().
+
+		Measured as elapsed time between from when app regains control from #SubmitFrame() to the next time the app calls #SubmitFrame().
+		"""
+    )
+    float.member(
+	    "AppGpuElapsedTime",
+	    """
+		amount of time in seconds spent on the GPU by the app.
+
+		Measured as elapsed time between each #SubmitFrame() call using GPU timing queries.
+		"""
+    )
+
+    ///
+    /// SDK Compositor stats
+    ///
+
+    int.member(
+	    "CompositorFrameIndex",
+	    """
+		index that increments each time the SDK compositor completes a distortion and timewarp pass.
+
+		Since the compositor operates asynchronously, even if the app calls #SubmitFrame() too late, the compositor will kick off for each vsync.
+		"""
+    )
+    int.member(
+	    "CompositorDroppedFrameCount",
+	    """
+		increments each time the SDK compositor fails to complete in time.
+
+		This is not tied to the app's performance, but failure to complete can be tied to other factors such as OS capabilities, overall available hardware
+		cycles to execute the compositor in time and other factors outside of the app's control.
+		"""
+    )
+    float.member(
+	    "CompositorLatency",
+	    """
+		motion-to-photon latency of the SDK compositor in seconds.
+
+		This is the latency of timewarp which corrects the higher app latency as well as dropped app frames.
+		"""
+    )
+    float.member(
+	    "CompositorCpuElapsedTime",
+	    """
+		the amount of time in seconds spent on the CPU by the SDK compositor.
+
+		Unless the VR app is utilizing all of the CPU cores at their peak performance, there is a good chance the compositor CPU times will not affect the
+		app's CPU performance in a major way.
+		"""
+    )
+    float.member(
+	    "CompositorGpuElapsedTime",
+	    """
+		the amount of time in seconds spent on the GPU by the SDK compositor. Any time spent on the compositor will eat away from the available GPU time for
+		the app.
+		"""
+    )
+    float.member(
+	    "CompositorCpuStartToGpuEndElapsedTime",
+	    """
+		the amount of time in seconds spent from the point the CPU kicks off the compositor to the point in time the compositor completes the distortion &amp;
+		timewarp on the GPU.
+
+		In the event the GPU time is not available, expect this value to be -1.0f.
+		"""
+    )
+    float.member(
+	    "CompositorGpuEndToVsyncElapsedTime",
+	    """
+		the amount of time in seconds left after the compositor is done on the GPU to the associated V-Sync time.
+
+		In the event the GPU time is not available, expect this value to be -1.0f.
+		"""
+    )
+}.nativeType
+
+val ovrMaxProvidedFrameStats = 5
+val ovrPerfStats_p = struct_p(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
+    documentation =
+    """
+	This is a complete descriptor of the performance stats provided by the SDK.
+
+	{@code FrameStatsCount} will have a maximum value set by #MaxProvidedFrameStats.
+
+	If the application calls #GetPerfStats() at the native refresh rate of the HMD then {@code FrameStatsCount} will be 1. If the app's workload happens to
+	force #GetPerfStats() to be called at a lower rate, then {@code FrameStatsCount} will be 2 or more.
+
+	If the app does not want to miss any performance data for any frame, it needs to ensure that it is calling #SubmitFrame() and #GetPerfStats() at a rate
+	that is at least: {@code HMD_refresh_rate / ovrMaxProvidedFrameStats}. On the Oculus Rift CV1 HMD, this will be equal to 18 times per second.
+
+	If the app calls #SubmitFrame() at a rate less than 18 fps, then when calling #GetPerfStats(), expect {@code AnyFrameStatsDropped} to become #True while
+	{@code FrameStatsCount} is equal to #MaxProvidedFrameStats.
+
+	The performance entries will be ordered in reverse chronological order such that the first entry will be the most recent one.
+
+	{@code AdaptiveGpuPerformanceScale} is an edge-filtered value that a caller can use to adjust the graphics quality of the application to keep the GPU
+	utilization in check. The value is calculated as: {@code (desired_GPU_utilization / current_GPU_utilization)}
+
+	As such, when this value is 1.0, the GPU is doing the right amount of work for the app. Lower values mean the app needs to pull back on the GPU
+	utilization. If the app is going to directly drive render-target resolution using this value, then be sure to take the square-root of the value before
+	scaling the resolution with it. Changing render target resolutions however is one of the many things an app can do increase or decrease the amount of GPU
+	utilization. Since {@code AdaptiveGpuPerformanceScale} is edge-filtered and does not change rapidly (i.e. reports non-1.0 values once every couple of
+	seconds) the app can make the necessary adjustments and then keep watching the value to see if it has been satisfied.
+	"""
+
+	ovrPerfStatsPerCompositorFrame.array("FrameStats", "an array of performance stats", size = ovrMaxProvidedFrameStats)
+    AutoSize("FrameStats")..int.member("FrameStatsCount", "the number of performance stats available in {@code FrameStats}")
+    ovrBool.member("AnyFrameStatsDropped", "if performance stats have been dropped")
+    float.member("AdaptiveGpuPerformanceScale", "the GPU performance scale")
+}
 
 // OVR_CAPI_Util.h
 

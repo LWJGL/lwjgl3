@@ -22,7 +22,9 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 			continue calling #SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
 			""",
 			"1000"
-		)
+		),
+		"Success_BoundaryInvalid".enum("Boundary is invalid due to sensor change or was not setup.", "1001"),
+		"Success_DeviceUnavailable".enum("Device is not available for the requested operation.", "1001")
 	)
 
 	EnumConstant(
