@@ -56,7 +56,7 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
 		PIXEL_UNPACK_BUFFER..MultiType(
-			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
 		)..nullable..const..void_p.IN("pixels", "")
 	)
 
@@ -75,7 +75,7 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
 		PIXEL_UNPACK_BUFFER..MultiType(
-			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
 		)..const..void_p.IN("pixels", "")
 	)
 

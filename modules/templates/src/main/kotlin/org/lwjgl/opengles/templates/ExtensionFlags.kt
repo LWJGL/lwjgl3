@@ -96,6 +96,24 @@ val EXT_color_buffer_float = EXT_FLAG.nativeClassGLES("EXT_color_buffer_float", 
 		"""
 }
 
+val EXT_conservative_depth = EXT_FLAG.nativeClassGLES("EXT_conservative_depth", postfix = EXT) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		There is a common optimization for hardware accelerated implementation of OpenGL ES which relies on an early depth test to be run before the fragment
+		shader so that the shader evaluation can be skipped if the fragment ends up being discarded because it is occluded.
+
+		This optimization does not affect the final rendering, and is typically possible when the fragment does not change the depth programmatically. (i.e.:
+		it does not write to the built-in {@code gl_FragDepth} output). There are, however a class of operations on the depth in the shader which could still
+		be performed while allowing the early depth test to operate.
+
+		This extension allows the application to pass enough information to the GL implementation to activate such optimizations safely.
+
+		Requires ${GLES30.core}.
+		"""
+}
+
 val EXT_float_blend = EXT_FLAG.nativeClassGLES("EXT_float_blend", postfix = EXT) {
 	documentation =
 		"""
