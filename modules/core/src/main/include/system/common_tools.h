@@ -32,6 +32,10 @@ extern jint getErrno(void);
 #ifdef LWJGL_WINDOWS
 	extern void saveLastError(void);
 	extern jint getLastError(void);
+
+	#define VA_LIST_CAST &(va_list)
+#else
+	#define VA_LIST_CAST (va_list *)
 #endif
 
 // Sync

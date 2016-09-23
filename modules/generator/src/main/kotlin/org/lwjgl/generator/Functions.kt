@@ -362,6 +362,9 @@ class NativeClassFunction(
 				if ( lengthsParam != null && !lengthsParam.nativeType.mapping.isPointerSize )
 					it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
 			}
+
+			if ( it.nativeType === va_list && i != parameters.lastIndex )
+				it.error("The va_list type can only be used on the last parameter of a function")
 		}
 	}
 
@@ -1474,7 +1477,11 @@ class NativeClassFunction(
 			val pointerType = it.toNativeType(nativeClass.binding, pointerMode = true)
 			print("\t$pointerType")
 			if ( !pointerType.endsWith('*') ) print(' ')
-			println("${it.name} = ($pointerType)${if ( nativeClass.binding == null ) "(intptr_t)" else ""}${it.name}$POINTER_POSTFIX;")
+			val castExpression = if ( it.nativeType === va_list )
+				"VA_LIST_CAST"
+			else
+				"($pointerType)"
+			println("${it.name} = $castExpression${if ( nativeClass.binding == null ) "(intptr_t)" else ""}${it.name}$POINTER_POSTFIX;")
 		}
 
 		// Custom code
@@ -1557,7 +1564,7 @@ class NativeClassFunction(
 						else
 							"${it.nativeType.name}${if ( it.nativeType is PointerType && !it.nativeType.includesPointer ) "*" else ""}"
 						})${it.name}"
-					else if ( it.nativeType is StructType && !it.nativeType.includesPointer )
+					else if ( it.nativeType.let { (it is StructType && !it.includesPointer) || it === va_list } )
 						"*${it.name}"
 					else
 						it.name
