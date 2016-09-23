@@ -439,7 +439,7 @@ val ovrBoundaryLookAndFeel_p = struct_p(OVR_PACKAGE, "OVRBoundaryLookAndFeel", n
 	ovrColorf.member("Color", "Boundary color (alpha channel is ignored)")
 }
 
-val ovrBoundaryTestResult_p = struct_p(OVR_PACKAGE, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult") {
+val ovrBoundaryTestResult_p = struct_p(OVR_PACKAGE, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult", mutable = false) {
     documentation = "Provides boundary test information."
 
 	ovrBool.member("IsTriggering", "True, if the boundary system is being triggered and visible")
