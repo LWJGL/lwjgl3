@@ -135,5 +135,5 @@ fun NativeClass.registryLink(prefix: String, name: String): String = registryLin
 private fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =
 	url("https://www.khronos.org/registry/egl/extensions/$prefix/$name.txt", extensionName)
 
-val NativeClass.core: String get() = "{@link ${this.className} EGL ${this.className[2]}.${this.className[3]}}"
+val NativeClass.core: String get() = "{@link ${this.className} EGL ${this.className[3]}.${this.className[4]}}"
 val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."
