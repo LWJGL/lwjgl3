@@ -7,7 +7,8 @@ package org.lwjgl.util.tinyfd
 import org.lwjgl.generator.*
 
 val TinyFD_PACKAGE = "org.lwjgl.util.tinyfd"
-val TinyFD_LIBRARY = "LibTinyFD.initialize();"
+val TinyFD_LIBRARY = """LibTinyFD.initialize();
+		tinyfd_winUtf8().put(0, 1);"""
 
 fun config() {
 	packageInfo(

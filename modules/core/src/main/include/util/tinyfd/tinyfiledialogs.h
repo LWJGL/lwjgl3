@@ -1,10 +1,10 @@
 /*
  _________
-/         \ tinyfiledialogs.h v2.5.7 [August 16, 2016] zlib licence
+/         \ tinyfiledialogs.h v2.5.9 [September 21, 2016] zlib licence
 |tiny file| Unique header file of "tiny file dialogs" created [November 9, 2014]
 | dialogs | Copyright (c) 2014 - 2016 Guillaume Vareille http://ysengrin.com
 \____  ___/ http://tinyfiledialogs.sourceforge.net
-     \|           	                     mailto:tinfyfiledialogs@ysengrin.com
+     \|           	                     mailto:tinyfiledialogs@ysengrin.com
 
 A big thank you to Don Heyse http://ldglite.sf.net for
                    his code contributions, bug corrections & thorough testing!
@@ -82,7 +82,7 @@ misrepresented as being the original software.
 #ifndef TINYFILEDIALOGS_H
 #define TINYFILEDIALOGS_H
 
-/* #define TINYFD_NOLIB //*/
+/* #define TINYFD_NOLIB */
 /* On windows, define TINYFD_NOLIB here
 if you don't want to include the code creating the graphic dialogs.
 Then you won't need to link against Comdlg32.lib and Ole32.lib */
@@ -95,21 +95,21 @@ and the corresponding closing bracket near the end of this file:
 */
 #ifdef	__cplusplus
 extern "C" {
-#endif /* __cplusplus */
+#endif
 
 extern char tinyfd_version[8]; /* contains tinyfd current version number */
 
 #ifdef _WIN32
+/* for UTF-16 use the functions at the end of this files */
 extern int tinyfd_winUtf8; /* 0 (default) or 1 */
 /* on windows string char can be 0:MBSC or 1:UTF-8 (work in progress)
-unless your code is really prepared for it, leave this on MBSC.
-for UTF-16 choose the functions at the end of this files */
+unless your code is really prepared for UTF-8 on windows, leave this on MBSC. */
 #endif
 
 extern int tinyfd_forceConsole ;  /* 0 (default) or 1 */
 /* for unix & windows: 0 (graphic mode) or 1 (console mode).
 0: try to use a graphic solution, if it fails then it uses console mode.
-1: forces all dialogs into console mode even when the X server is present,
+1: forces all dialogs into console mode even when an X server is present,
   if the package dialog (and a console is present) or dialog.exe is installed.
   on windows it only make sense for console applications */
 
@@ -242,16 +242,18 @@ char const * tinyfd_arrayDialog(
 
 #ifdef	__cplusplus
 }
-#endif /* __cplusplus */
+#endif
 
 #endif /* TINYFILEDIALOGS_H */
 
 /*
 - This is not for android nor ios.
 - The code is pure C, perfectly compatible with C++.
+- the utf-16 prototypes are in the header file
 - The API is Fortran ISO_C_BINDING compliant
 - C# via dll, see example file
-- AVOID USING " AND ' IN TITLES AND MESSAGES.
+- OSX supported from 10.4 to 10.11
+- Avoid using " and ' in titles and messages.
 - There's one file filter only, it may contain several patterns.
 - If no filter description is provided,
   the list of patterns will become the description.
@@ -283,6 +285,7 @@ char const * tinyfd_arrayDialog(
   http://andrear.altervista.org/home/cdialog.php
 - If dialog is missing, it will switch to basic console input.
 - You can query the type of dialog that will be use.
+- MinGW needs gcc >= v4.9 otherwise some headers are incomplete.
 - The Hello World (and a bit more) is on the sourceforge site:
 */
 

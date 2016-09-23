@@ -9,6 +9,11 @@ import org.lwjgl.util.tinyfd.*
 
 val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE, prefix = "tinyfd_", library = TinyFD_LIBRARY) {
 	nativeImport("tinyfiledialogs.h")
+	nativeDirective(
+		"""#ifndef LWJGL_WINDOWS
+	static int tinyfd_winUtf8;
+#endif"""
+	)
 
 	documentation =
 		"""
@@ -28,6 +33,11 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 	macro..charASCII_p(
 		"version",
 		"The library version."
+	)
+
+	private..macro..(Address..int_p)(
+		"winUtf8",
+		"On windows string char can be 0:MBSC or 1:UTF-8. Unless your code is really prepared for UTF-8 on windows, leave this on MBSC."
 	)
 
 	macro..(Address..int_p)(
