@@ -5,8 +5,9 @@
 package org.lwjgl.system.libc.templates
 
 import org.lwjgl.generator.*
+import org.lwjgl.system.libc.*
 
-val errno = "Errno".nativeClass(packageName = "org.lwjgl.system.libc") {
+val errno = "Errno".nativeClass(packageName = LIBC_PACKAGE) {
 	nativeImport (
 		"<errno.h>"
 	)
