@@ -2907,7 +2907,7 @@ object ValidityProtos {
 			"All elements of {@code pCommandBuffers} $must not be pending execution",
 			"""
 			{@code pCommandBuffers} $must be a pointer to an array of {@code commandBufferCount} {@code VkCommandBuffer} handles, each element of which $must
-			either be a valid handle or #NULL_HANDLE
+			either be a valid handle or {@code NULL}
 			"""
 		)}
 

@@ -146,7 +146,8 @@ object ValidityStructs {
 			"""
 			If the calling command's {@code VkImage} parameter is of {@code VkImageType} #IMAGE_TYPE_3D, the {@code baseArrayLayer} and {@code layerCount}
 			members of {@code imageSubresource} $must be 0 and 1, respectively
-			"""
+			""",
+			"When copying to the depth aspect of an image subresource, the data in the source buffer $must be in the range latexmath:[\$[0,1\\]\$]"
 		)}"""
 
 @JvmField val VkBufferMemoryBarrier =
@@ -206,8 +207,21 @@ object ValidityStructs {
 		${ul(
 			"{@code aspectMask} $must be a valid combination of {@code VkImageAspectFlagBits} values",
 			"{@code aspectMask} $must not be 0",
+			"{@code clearValue} $must be a valid {@code VkClearValue} union",
 			"If {@code aspectMask} includes #IMAGE_ASPECT_COLOR_BIT, it $must not include #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT",
 			"{@code aspectMask} $must not include #IMAGE_ASPECT_METADATA_BIT"
+		)}"""
+
+@JvmField val VkClearDepthStencilValue =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code depth} $must be between {@code 0.0} and {@code 1.0}, inclusive"
+		)}"""
+
+@JvmField val VkClearValue =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code depthStencil} $must be a valid ##VkClearDepthStencilValue structure"
 		)}"""
 
 @JvmField val VkCommandBufferAllocateInfo =
@@ -1824,7 +1838,10 @@ object ValidityStructs {
 			"{@code pNext} $must be $NULL",
 			"{@code renderPass} $must be a valid {@code VkRenderPass} handle",
 			"{@code framebuffer} $must be a valid {@code VkFramebuffer} handle",
-			"If {@code clearValueCount} is not 0, {@code pClearValues} $must be a pointer to an array of {@code clearValueCount} {@code VkClearValue} unions",
+			"""
+			If {@code clearValueCount} is not 0, {@code pClearValues} $must be a pointer to an array of {@code clearValueCount} valid {@code VkClearValue}
+			unions
+			""",
 			"Both of {@code framebuffer}, and {@code renderPass} $must have been created, allocated, or retrieved from the same {@code VkDevice}",
 			"""
 			{@code clearValueCount} $must be greater than the largest attachment index in {@code renderPass} that specifies a {@code loadOp} (or
@@ -1926,8 +1943,9 @@ object ValidityStructs {
 			can be a multiple of 1
 			""",
 			"""
-			{@code pCode} $must point to valid SPIR-V code, formatted and packed. If the {@code VK_NV_glsl_shader} extension is enabled {@code pCode} can
-			instead reference valid GLSL code and $must be written to the {@code GL_KHR_vulkan_glsl} extension specification
+			{@code pCode} $must point to valid SPIR-V code, formatted and packed as described by the Khronos SPIR-V Specification. If the
+			{@code VK_NV_glsl_shader} extension is enabled {@code pCode} can instead reference valid GLSL code and $must be written to the
+			{@code GL_KHR_vulkan_glsl} extension specification
 			""",
 			"""
 			{@code pCode} $must adhere to the validation rules described by the Validation Rules within a Module section of the SPIR-V Environment appendix. If
@@ -2291,6 +2309,15 @@ object ValidityStructs {
 			"{@code presentMode} $must be one of the ename:VkPresentModeKHR values returned by #GetPhysicalDeviceSurfacePresentModesKHR() for the surface"
 		)}"""
 
+@JvmField val VkValidationFlagsEXT =
+	"""<h5>Valid Usage</h5>
+		${ul(
+			"{@code sType} $must be #STRUCTURE_TYPE_VALIDATION_FLAGS_EXT",
+			"{@code pNext} $must be $NULL",
+			"{@code pDisabledValidationChecks} $must be a pointer to an array of {@code disabledValidationCheckCount} {@code VkValidationCheckEXT} values",
+			"{@code disabledValidationCheckCount} $must be greater than 0"
+		)}"""
+
 @JvmField val VkVertexInputAttributeDescription =
 	"""<h5>Valid Usage</h5>
 		${ul(
@@ -2321,7 +2348,8 @@ object ValidityStructs {
 			"{@code x} + {@code width} $must be less than or equal to {@code viewportBoundsRange}[1]",
 			"{@code y} + {@code height} $must be less than or equal to {@code viewportBoundsRange}[1]",
 			"{@code minDepth} $must be between {@code 0.0} and {@code 1.0}, inclusive",
-			"{@code maxDepth} $must be between {@code 0.0} and {@code 1.0}, inclusive"
+			"{@code maxDepth} $must be between {@code 0.0} and {@code 1.0}, inclusive",
+			"If the {@code VK_AMD_negative_viewport_height} extension is enabled, {@code height} $can also be negative"
 		)}"""
 
 @JvmField val VkWaylandSurfaceCreateInfoKHR =

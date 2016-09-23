@@ -166,6 +166,28 @@ val VkDebugMarkerMarkerInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerMarker
     )
 }
 
+// EXT_validation_flags
+
+val VkValidationCheckEXT = "VkValidationCheckEXT".enumType
+
+val VkValidationFlagsEXT = struct(VULKAN_PACKAGE, "VkValidationFlagsEXT") {
+	documentation =
+		"""
+	    When creating a Vulkan instance for which you wish to disable validation checks, add a {@code VkValidationFlagsEXT} structure to the {@code pNext}
+	    chain of the ##VkInstanceCreateInfo structure, specifying the checks to be disabled.
+
+		${ValidityStructs.VkValidationFlagsEXT}
+		"""
+
+	sType(this)
+	pNext()
+	AutoSize("pDisabledValidationChecks")..uint32_t.member("disabledValidationCheckCount", "the number of checks to disable")
+	VkValidationCheckEXT.p.member(
+		"pDisabledValidationChecks",
+		"a pointer to an array of values specifying the validation checks to be disabled"
+	).links("VALIDATION_CHECK_\\w+_EXT", linkMode = LinkMode.BITFIELD)
+}
+
 // KHR_surface (must be above KHR_display)
 
 val VkSurfaceKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSurfaceKHR")

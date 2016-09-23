@@ -2970,6 +2970,8 @@ val VkClearDepthStencilValue = struct(VULKAN_PACKAGE, "VkClearDepthStencilValue"
 		${spec("VkClearDepthStencilValue")}
 
 		Specifies the depth and stencil clear values to use when clearing a depth/stencil image or attachment.
+
+		${ValidityStructs.VkClearDepthStencilValue}
 		"""
 
 	float.member(
@@ -2996,6 +2998,8 @@ val VkClearValue = union(VULKAN_PACKAGE, "VkClearValue") {
 		${spec("VkClearValue")}
 
 		Specifies the color or depth/stencil value to clear an attachment to.
+
+		${ValidityStructs.VkClearValue}
 		"""
 
 	VkClearColorValue.member("color", "the color image clear values to use when clearing a color image or attachment")
