@@ -752,83 +752,6 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
-	 * address. A single \0 character will terminate the string. The returned buffer will NOT include the \0 byte.
-	 *
-	 * <p>This method is useful for reading ASCII and UTF8 encoded text.</p>
-	 *
-	 * @param address the starting memory address
-	 *
-	 * @return the new ByteBuffer
-	 */
-	public static ByteBuffer memByteBufferNT1(long address) {
-		return memByteBufferNT1(address, Integer.MAX_VALUE);
-	}
-
-	/**
-	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
-	 * address, up to a maximum of {@code maxLength} bytes. A single \0 character will terminate the string. The returned buffer will NOT include the \0 byte.
-	 *
-	 * <p>This method is useful for reading ASCII and UTF8 encoded text.</p>
-	 *
-	 * @param address   the starting memory address
-	 * @param maxLength the maximum string length, in bytes
-	 *
-	 * @return the new ByteBuffer
-	 */
-	public static ByteBuffer memByteBufferNT1(long address, int maxLength) {
-		if ( address == NULL )
-			return null;
-
-		return memByteBuffer(address, BITS64
-			? TEXT_UTIL.strlen64NT1(address, maxLength)
-			: TEXT_UTIL.strlen32NT1(address, maxLength)
-		);
-	}
-
-	/**
-	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
-	 * address. Two \0 characters will terminate the string. The returned buffer will NOT include the \0 bytes.
-	 *
-	 * <p>This method is useful for reading UTF16 encoded text.</p>
-	 *
-	 * @param address the starting memory address
-	 *
-	 * @return the new ByteBuffer
-	 */
-	public static ByteBuffer memByteBufferNT2(long address) {
-		return memByteBufferNT2(address, Integer.MAX_VALUE - 1);
-	}
-
-	/**
-	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
-	 * address, up to a maximum of {@code maxLength} bytes. Two \0 characters will terminate the string. The returned buffer will NOT include the \0 bytes.
-	 *
-	 * <p>This method is useful for reading UTF16 encoded text.</p>
-	 *
-	 * @param address the starting memory address
-	 *
-	 * @return the new ByteBuffer
-	 */
-	public static ByteBuffer memByteBufferNT2(long address, int maxLength) {
-		if ( address == NULL )
-			return null;
-
-		if ( Checks.DEBUG ) {
-			if ( (address & 1L) != 0L )
-				throw new IllegalArgumentException("The string address is not aligned.");
-
-			if ( (maxLength & 1) != 0 )
-				throw new IllegalArgumentException("The maximum length must be an even number.");
-		}
-
-		return memByteBuffer(address, BITS64
-			? TEXT_UTIL.strlen64NT2(address, maxLength)
-			: TEXT_UTIL.strlen32NT2(address, maxLength)
-		);
-	}
-
-	/**
 	 * Creates a new direct ShortBuffer that starts at the specified memory address and has the specified capacity.
 	 *
 	 * <p>The {@code address} specified must be aligned to 2 bytes. If not, use {@code memByteBuffer(address, capacity * 2).asShortBuffer()}.</p>
@@ -1386,7 +1309,7 @@ public final class MemoryUtil {
 
 	/*  -------------------------------------
 		-------------------------------------
-			TEXT ENCODING/DECODING API
+				TEXT ENCODING API
 		-------------------------------------
 	    ------------------------------------- */
 
@@ -1601,12 +1524,129 @@ public final class MemoryUtil {
 		return (value.length() + (nullTerminated ? 1 : 0)) << 1;
 	}
 
+	/*  -------------------------------------
+		-------------------------------------
+				TEXT DECODING API
+		-------------------------------------
+	    ------------------------------------- */
+
+	private static int memLengthNT1(long address, int maxLength) {
+		return BITS64
+			? TEXT_UTIL.strlen64NT1(address, maxLength)
+			: TEXT_UTIL.strlen32NT1(address, maxLength);
+	}
+
+	/**
+	 * Calculates the length, in bytes, of the null-terminated string that starts at the current position of the specified buffer. A single \0 character will
+	 * terminate the string. The returned length will NOT include the \0 byte.
+	 *
+	 * <p>This method is useful for reading ASCII and UTF8 encoded text.</p>
+	 *
+	 * @param buffer the buffer containing the null-terminated string
+	 *
+	 * @return the string length, in bytes
+	 */
+	public static int memLengthNT1(ByteBuffer buffer) {
+		return memLengthNT1(memAddress(buffer), buffer.remaining());
+	}
+
+	private static int memLengthNT2(long address, int maxLength) {
+		return BITS64
+			? TEXT_UTIL.strlen64NT2(address, maxLength)
+			: TEXT_UTIL.strlen32NT2(address, maxLength);
+	}
+
+	/**
+	 * Calculates the length, in bytes, of the null-terminated string that starts at the current position of the specified buffer. Two \0 characters will
+	 * terminate the string. The returned buffer will NOT include the \0 bytes.
+	 *
+	 * <p>This method is useful for reading UTF16 encoded text.</p>
+	 *
+	 * @param buffer the buffer containing the null-terminated string
+	 *
+	 * @return the string length, in bytes
+	 */
+	public static int memLengthNT2(ByteBuffer buffer) {
+		return memLengthNT2(memAddress(buffer), buffer.remaining());
+	}
+
+	/**
+	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
+	 * address. A single \0 character will terminate the string. The returned buffer will NOT include the \0 byte.
+	 *
+	 * <p>This method is useful for reading ASCII and UTF8 encoded text.</p>
+	 *
+	 * @param address the starting memory address
+	 *
+	 * @return the new ByteBuffer
+	 */
+	public static ByteBuffer memByteBufferNT1(long address) {
+		return memByteBufferNT1(address, Integer.MAX_VALUE);
+	}
+
+	/**
+	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
+	 * address, up to a maximum of {@code maxLength} bytes. A single \0 character will terminate the string. The returned buffer will NOT include the \0 byte.
+	 *
+	 * <p>This method is useful for reading ASCII and UTF8 encoded text.</p>
+	 *
+	 * @param address   the starting memory address
+	 * @param maxLength the maximum string length, in bytes
+	 *
+	 * @return the new ByteBuffer
+	 */
+	public static ByteBuffer memByteBufferNT1(long address, int maxLength) {
+		if ( address == NULL )
+			return null;
+
+		return memByteBuffer(address, memLengthNT1(address, maxLength));
+	}
+
+	/**
+	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
+	 * address. Two \0 characters will terminate the string. The returned buffer will NOT include the \0 bytes.
+	 *
+	 * <p>This method is useful for reading UTF16 encoded text.</p>
+	 *
+	 * @param address the starting memory address
+	 *
+	 * @return the new ByteBuffer
+	 */
+	public static ByteBuffer memByteBufferNT2(long address) {
+		return memByteBufferNT2(address, Integer.MAX_VALUE - 1);
+	}
+
+	/**
+	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
+	 * address, up to a maximum of {@code maxLength} bytes. Two \0 characters will terminate the string. The returned buffer will NOT include the \0 bytes.
+	 *
+	 * <p>This method is useful for reading UTF16 encoded text.</p>
+	 *
+	 * @param address the starting memory address
+	 *
+	 * @return the new ByteBuffer
+	 */
+	public static ByteBuffer memByteBufferNT2(long address, int maxLength) {
+		if ( address == NULL )
+			return null;
+
+		if ( Checks.DEBUG ) {
+			if ( (address & 1L) != 0L )
+				throw new IllegalArgumentException("The string address is not aligned.");
+
+			if ( (maxLength & 1) != 0 )
+				throw new IllegalArgumentException("The maximum length must be an even number.");
+		}
+
+		return memByteBuffer(address, memLengthNT2(address, maxLength));
+	}
+
 	/**
 	 * Converts the null-terminated ASCII encoded string at the specified memory address to a {@link String}.
 	 *
 	 * @param address the string memory address
 	 *
-	 * @return the decode {@link String} or null if the specified {@code address} is null
+	 * @return the decoded {@link String} or null if the specified {@code address} is null
 	 */
 	public static String memASCII(long address) {
 		return address == NULL ? null : memASCII(memByteBufferNT1(address));
@@ -1662,7 +1702,7 @@ public final class MemoryUtil {
 	 *
 	 * @param address the string memory address
 	 *
-	 * @return the decode {@link String} or null if the specified {@code address} is null
+	 * @return the decoded {@link String} or null if the specified {@code address} is null
 	 */
 	public static String memUTF8(long address) {
 		return address == NULL ? null : memUTF8(memByteBufferNT1(address));
@@ -1715,7 +1755,7 @@ public final class MemoryUtil {
 	 *
 	 * @param address the string memory address
 	 *
-	 * @return the decode {@link String} or null if the specified {@code address} is null
+	 * @return the decoded {@link String} or null if the specified {@code address} is null
 	 */
 	public static String memUTF16(long address) {
 		return address == NULL ? null : memUTF16(memByteBufferNT2(address));
