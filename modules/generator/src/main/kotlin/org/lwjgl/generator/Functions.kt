@@ -553,7 +553,7 @@ class NativeClassFunction(
 			writer.generateAlternativeMethods()
 		}
 
-		if ( macro ) {
+		if ( macro && !has(private) ) {
 			writer.println()
 			writer.printDocumentation { true }
 			writer.println("\t${accessModifier}static final ${if (returns.nativeType is CharSequenceType) "String" else returnsJavaMethodType} $name = $name();")

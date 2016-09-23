@@ -129,7 +129,7 @@ class AccessModifier(val access: Access) : FunctionModifier() {
 }
 
 /** Makes the generated methods private. */
-val private = AccessModifier(Access.PUBLIC)
+val private = AccessModifier(Access.PRIVATE)
 /** Makes the generated methods package private. */
 val internal = AccessModifier(Access.INTERNAL)
 
