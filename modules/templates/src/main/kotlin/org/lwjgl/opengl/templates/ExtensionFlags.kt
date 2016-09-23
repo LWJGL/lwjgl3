@@ -876,6 +876,19 @@ val AMD_shader_atomic_counter_ops = EXT_FLAG.nativeClassGL("AMD_shader_atomic_co
 		Requires ${GL42.core} or ${ARB_shader_atomic_counters.cap}.
 		"""
 }
+val AMD_shader_ballot = EXT_FLAG.nativeClassGL("AMD_shader_ballot", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		The extensions {@code ARB_shader_group_vote} and {@code ARB_shader_ballot} introduced the concept of sub-groups and a set of operations that allow data
+		exchange across shader invocations within a sub-group.
+
+		This extension further extends the capabilities of these extensions with additional sub-group operations.
+
+		Requires ${ARB_shader_group_vote.link}, ${ARB_shader_ballot.link} and ${ARB_gpu_shader_int64.link} or ${AMD_gpu_shader_int64.link}.
+		"""
+}
 val AMD_shader_explicit_vertex_parameter = EXT_FLAG.nativeClassGL("AMD_shader_explicit_vertex_parameter", postfix = AMD) {
 	documentation =
 		"""
