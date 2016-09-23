@@ -440,4 +440,26 @@ public final class APIUtil {
 
 	// ----------------------------------------
 
+	/**
+	 * Uses the vsnprintf() C library function to format a null-terminated string with a {@code va_list} argument list. The result is stored at index
+	 * {@code [position(), position()+remaining()}) in {@code buffer}, as a null-terminated string.
+	 *
+	 * <p>Output is truncated if there is not enough space in {@code buffer}. In this case, this function returns the size which would
+	 * have been required to store the full string, excluding the null terminator.</p>
+	 *
+	 * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
+	 *
+	 * @param buffer       the output buffer
+	 * @param formatString memory address of the format string
+	 * @param valist       memory address of the {@code va_list} argument list
+	 *
+	 * @return the number of characters written to {@code buffer}, excluding the null terminator, or a negative value in case of error
+	 */
+	public static int apiVPrintf(ByteBuffer buffer, long formatString, long valist) {
+		long address = memAddress(buffer, buffer.position());
+		return MemoryAccess.vsnprintf(address, buffer.remaining(), formatString, valist);
+	}
+
+	// ----------------------------------------
+
 }

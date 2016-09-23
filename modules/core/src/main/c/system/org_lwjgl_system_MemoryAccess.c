@@ -192,4 +192,16 @@ JNIEXPORT jobject JNICALL Java_org_lwjgl_system_MemoryAccess_newDirectByteBuffer
 	return (*env)->NewDirectByteBuffer(env, (void *)(intptr_t)address, capacity);
 }
 
+// vsnprintf(JIJJ)I
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_MemoryAccess_vsnprintf(JNIEnv *env, jclass clazz,
+	jlong address, jint capacity, jlong format, jlong valist
+) {
+	UNUSED_PARAMS(env, clazz)
+#ifdef LWJGL_WINDOWS
+	return vsnprintf_s((char *)(intptr_t)address, capacity, _TRUNCATE, (const char *)(intptr_t)format, (va_list)valist);
+#else
+	return vsnprintf((char *)(intptr_t)address, capacity, (const char *)(intptr_t)format, *((va_list *)valist));
+#endif
+}
+
 EXTERN_C_EXIT

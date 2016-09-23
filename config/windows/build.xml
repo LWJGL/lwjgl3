@@ -95,6 +95,7 @@
 				<arg value="/I${src.include}\system\dyncall"/>
 				<arg value="/I${src.include}\system\jemalloc" if:true="${binding.jemalloc}"/>
 				<arg value="/I${src.include}\system\jemalloc\msvc_compat" if:true="${binding.jemalloc}"/>
+				<arg value="/wd4710"/>
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<exclude name="${src.native}/system/lwjgl_malloc.c"/>

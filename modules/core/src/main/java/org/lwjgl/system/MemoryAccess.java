@@ -97,6 +97,9 @@ final class MemoryAccess {
 	// Returns a new direct ByteBuffer instance
 	static native ByteBuffer newDirectByteBuffer(long address, int capacity);
 
+	// The standard C vsnprintf function
+	static native int vsnprintf(long address, int capacity, long format, long valist);
+
 	/** Implements functionality for {@link MemoryUtil}. */
 	interface MemoryAccessor {
 
