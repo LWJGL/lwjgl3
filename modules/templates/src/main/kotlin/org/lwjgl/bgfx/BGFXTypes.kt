@@ -32,24 +32,18 @@ val bgfx_occlusion_query_result_t = "bgfx_occlusion_query_result_t".enumType
 val bgfx_topology_convert_t = "bgfx_topology_convert_t".enumType
 val bgfx_topology_sort_t = "bgfx_topology_sort_t".enumType
 
-fun bgfx_handle_t(
-	className: String, nativeName: String
-) = struct_p(BGFX_PACKAGE, className, nativeName = nativeName) {
-	uint16_t.member("idx", "")
-}
-
-val bgfx_dynamic_index_buffer_handle_t = bgfx_handle_t("BGFXDynamicIndexBufferHandle", "bgfx_dynamic_index_buffer_handle_t")
-val bgfx_dynamic_vertex_buffer_handle_t = bgfx_handle_t("BGFXDynamicVertexBufferHandle", "bgfx_dynamic_vertex_buffer_handle_t")
-val bgfx_frame_buffer_handle_t = bgfx_handle_t("BGFXFrameBufferHandle", "bgfx_frame_buffer_handle_t")
-val bgfx_index_buffer_handle_t = bgfx_handle_t("BGFXIndexBufferHandle", "bgfx_index_buffer_handle_t")
-val bgfx_indirect_buffer_handle_t = bgfx_handle_t("BGFXIndirectBufferHandle", "bgfx_indirect_buffer_handle_t")
-val bgfx_occlusion_query_handle_t = bgfx_handle_t("BGFXOcclusionQueryHandle", "bgfx_occlusion_query_handle_t")
-val bgfx_program_handle_t = bgfx_handle_t("BGFXProgramHandle", "bgfx_program_handle_t")
-val bgfx_shader_handle_t = bgfx_handle_t("BGFXShaderHandle", "bgfx_shader_handle_t")
-val bgfx_texture_handle_t = bgfx_handle_t("BGFXTextureHandle", "bgfx_texture_handle_t")
-val bgfx_uniform_handle_t = bgfx_handle_t("BGFXUniformHandle", "bgfx_uniform_handle_t")
-val bgfx_vertex_buffer_handle_t = bgfx_handle_t("BGFXVertexBufferHandle", "bgfx_vertex_buffer_handle_t")
-val bgfx_vertex_decl_handle_t = bgfx_handle_t("BGFXVertexDeclHandle", "bgfx_vertex_decl_handle_t")
+val bgfx_dynamic_index_buffer_handle_t = IntegerType("bgfx_dynamic_index_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_dynamic_vertex_buffer_handle_t = IntegerType("bgfx_dynamic_vertex_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_frame_buffer_handle_t = IntegerType("bgfx_frame_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_index_buffer_handle_t = IntegerType("bgfx_index_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_indirect_buffer_handle_t = IntegerType("bgfx_indirect_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_occlusion_query_handle_t = IntegerType("bgfx_occlusion_query_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_program_handle_t = IntegerType("bgfx_program_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_shader_handle_t = IntegerType("bgfx_shader_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_texture_handle_t = IntegerType("bgfx_texture_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_uniform_handle_t = IntegerType("bgfx_uniform_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_vertex_buffer_handle_t = IntegerType("bgfx_vertex_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+val bgfx_vertex_decl_handle_t = IntegerType("bgfx_vertex_decl_handle_t", PrimitiveMapping.SHORT, unsigned = true)
 
 val bgfx_release_fn_t = "bgfx_release_fn_t".callback(
 	BGFX_PACKAGE, void, "BGFXReleaseFunctionCallback",
@@ -142,7 +136,7 @@ val bgfx_transient_index_buffer_t = struct_p(BGFX_PACKAGE, "BGFXTransientIndexBu
 
 	nullable..uint8_t.p.member("data", "")
 	uint32_t.member("size", "")
-	nullable..bgfx_index_buffer_handle_t.member("handle", "")
+	bgfx_index_buffer_handle_t.member("handle", "")
 	uint32_t.member("startIndex", "")
 }
 
@@ -155,8 +149,8 @@ val bgfx_transient_vertex_buffer_t = struct_p(BGFX_PACKAGE, "BGFXTransientVertex
 	uint32_t.member("size", "")
 	uint32_t.member("startVertex", "")
 	uint16_t.member("stride", "")
-	nullable..bgfx_vertex_buffer_handle_t.member("handle", "")
-	nullable..bgfx_vertex_decl_handle_t.member("decl", "")
+	bgfx_vertex_buffer_handle_t.member("handle", "")
+	bgfx_vertex_decl_handle_t.member("decl", "")
 }
 
 val bgfx_instance_data_buffer_t = struct_p(BGFX_PACKAGE, "BGFXInstanceDataBuffer", nativeName = "bgfx_instance_data_buffer_t") {
@@ -169,7 +163,7 @@ val bgfx_instance_data_buffer_t = struct_p(BGFX_PACKAGE, "BGFXInstanceDataBuffer
 	uint32_t.member("offset", "")
 	uint32_t.member("num", "")
 	uint16_t.member("stride", "")
-	nullable..bgfx_vertex_buffer_handle_t.member("handle", "")
+	bgfx_vertex_buffer_handle_t.member("handle", "")
 }
 
 val bgfx_texture_info_t = struct(BGFX_PACKAGE, "BGFXTextureInfo", nativeName = "bgfx_texture_info_t") {

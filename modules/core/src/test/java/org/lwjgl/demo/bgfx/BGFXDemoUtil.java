@@ -6,7 +6,9 @@ package org.lwjgl.demo.bgfx;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-import org.lwjgl.bgfx.*;
+import org.lwjgl.bgfx.BGFXMemory;
+import org.lwjgl.bgfx.BGFXReleaseFunctionCallbackI;
+import org.lwjgl.bgfx.BGFXVertexDecl;
 import org.lwjgl.system.MemoryUtil;
 
 import java.io.BufferedInputStream;
@@ -21,7 +23,7 @@ import static org.lwjgl.system.APIUtil.*;
 final class BGFXDemoUtil {
 
 	private static int renderer = -1;
-	private static boolean oglNdc;
+	private static boolean zZeroToOne;
 
 	private static BGFXReleaseFunctionCallbackI releaseMemoryCb = (_ptr, _userData) -> {
 		MemoryUtil.nmemFree(_ptr);
@@ -31,7 +33,7 @@ final class BGFXDemoUtil {
 
 	static void configure(int renderer) {
 		BGFXDemoUtil.renderer = renderer;
-		BGFXDemoUtil.oglNdc = bgfx_get_caps().homogeneousDepth();
+		BGFXDemoUtil.zZeroToOne = !bgfx_get_caps().homogeneousDepth();
 	}
 
 	static BGFXVertexDecl createVertexDecl(boolean withNormals, boolean withColor, int numUVs) {
@@ -79,7 +81,7 @@ final class BGFXDemoUtil {
 		return decl;
 	}
 
-	static BGFXVertexBufferHandle createVertexBuffer(ByteBuffer buffer, BGFXVertexDecl decl, Object[][] vertices) {
+	static short createVertexBuffer(ByteBuffer buffer, BGFXVertexDecl decl, Object[][] vertices) {
 
 		for ( Object[] vtx : vertices ) {
 			for ( Object attr : vtx ) {
@@ -102,14 +104,14 @@ final class BGFXDemoUtil {
 		return createVertexBuffer(buffer, decl);
 	}
 
-	static BGFXVertexBufferHandle createVertexBuffer(ByteBuffer buffer, BGFXVertexDecl decl) {
+	static short createVertexBuffer(ByteBuffer buffer, BGFXVertexDecl decl) {
 
 		BGFXMemory vbhMem = bgfx_make_ref(buffer, buffer.remaining());
 
 		return bgfx_create_vertex_buffer(vbhMem, decl, BGFX_BUFFER_NONE);
 	}
 
-	static BGFXIndexBufferHandle createIndexBuffer(ByteBuffer buffer, int[] indices) {
+	static short createIndexBuffer(ByteBuffer buffer, int[] indices) {
 
 		for ( int idx : indices ) {
 			buffer.putShort((short)idx);
@@ -155,7 +157,7 @@ final class BGFXDemoUtil {
 		return resource;
 	}
 
-	static BGFXShaderHandle loadShader(String name) throws IOException {
+	static short loadShader(String name) throws IOException {
 
 		String resourcePath = "/demo/bgfx/shaders/";
 
@@ -187,7 +189,7 @@ final class BGFXDemoUtil {
 		return bgfx_create_shader(bgfx_make_ref_release(shaderCode, shaderCode.remaining(), releaseMemoryCb, null));
 	}
 
-	static BGFXShaderHandle loadShader(char[] shaderCodeGLSL, char[] shaderCodeD3D9, char[] shaderCodeD3D11, char[] shaderCodeMtl) throws IOException {
+	static short loadShader(char[] shaderCodeGLSL, char[] shaderCodeD3D9, char[] shaderCodeD3D11, char[] shaderCodeMtl) throws IOException {
 
 		char[] sc;
 
@@ -225,7 +227,7 @@ final class BGFXDemoUtil {
 		return bgfx_create_shader(bgfx_make_ref_release(shaderCode, shaderCode.remaining(), releaseMemoryCb, null));
 	}
 
-	static BGFXTextureHandle loadTexture(String fileName) throws IOException {
+	static short loadTexture(String fileName) throws IOException {
 
 		ByteBuffer textureData = loadResource("/demo/bgfx/textures/", fileName);
 
@@ -252,7 +254,7 @@ final class BGFXDemoUtil {
 	static void perspective(float fov, int width, int height, float near, float far, Matrix4f dest) {
 		float fovRadians = fov * (float)Math.PI / 180.0f;
 		float aspect = width / (float)height;
-		dest.setPerspectiveLH(fovRadians, aspect, near, far, oglNdc);
+		dest.setPerspectiveLH(fovRadians, aspect, near, far, zZeroToOne);
 	}
 
 }

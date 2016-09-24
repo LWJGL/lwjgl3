@@ -6,7 +6,7 @@ package org.lwjgl.demo.bgfx;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-import org.lwjgl.bgfx.*;
+import org.lwjgl.bgfx.BGFXVertexDecl;
 import org.lwjgl.system.MemoryUtil;
 
 import java.io.IOException;
@@ -49,12 +49,12 @@ public class Cubes extends Demo {
 		6, 3, 7
 	};
 
-	private BGFXVertexDecl         decl;
-	private ByteBuffer             vertices;
-	private BGFXVertexBufferHandle vbh;
-	private ByteBuffer             indices;
-	private BGFXIndexBufferHandle  ibh;
-	private BGFXProgramHandle      program;
+	private BGFXVertexDecl decl;
+	private ByteBuffer     vertices;
+	private short          vbh;
+	private ByteBuffer     indices;
+	private short          ibh;
+	private short          program;
 
 	private Matrix4f view = new Matrix4f();
 	private FloatBuffer viewBuf;
@@ -83,8 +83,8 @@ public class Cubes extends Demo {
 
 		ibh = BGFXDemoUtil.createIndexBuffer(indices, cubeIndices);
 
-		BGFXShaderHandle vs = BGFXDemoUtil.loadShader("vs_cubes");
-		BGFXShaderHandle fs = BGFXDemoUtil.loadShader("fs_cubes");
+		short vs = BGFXDemoUtil.loadShader("vs_cubes");
+		short fs = BGFXDemoUtil.loadShader("fs_cubes");
 
 		program = bgfx_create_program(vs, fs, true);
 

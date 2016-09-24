@@ -6,7 +6,9 @@ package org.lwjgl.demo.bgfx;
 
 import org.joml.Math;
 import org.joml.*;
-import org.lwjgl.bgfx.*;
+import org.lwjgl.bgfx.BGFXHmd;
+import org.lwjgl.bgfx.BGFXTransientVertexBuffer;
+import org.lwjgl.bgfx.BGFXVertexDecl;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
@@ -31,8 +33,8 @@ public class Metaballs extends Demo {
 		public Vector3f normal = new Vector3f();
 	}
 
-	private BGFXVertexDecl    decl;
-	private BGFXProgramHandle program;
+	private BGFXVertexDecl decl;
+	private short          program;
 
 	private Matrix4f view = new Matrix4f();
 	private FloatBuffer viewBuf;
@@ -463,8 +465,8 @@ public class Metaballs extends Demo {
 	protected void create() throws IOException {
 		decl = BGFXDemoUtil.createVertexDecl(true, true, 0);
 
-		BGFXShaderHandle vs = BGFXDemoUtil.loadShader(vs_metaballs_glsl, vs_metaballs_dx9, vs_metaballs_dx11, vs_metaballs_mtl);
-		BGFXShaderHandle fs = BGFXDemoUtil.loadShader(fs_metaballs_glsl, fs_metaballs_dx9, fs_metaballs_dx11, fs_metaballs_mtl);
+		short vs = BGFXDemoUtil.loadShader(vs_metaballs_glsl, vs_metaballs_dx9, vs_metaballs_dx11, vs_metaballs_mtl);
+		short fs = BGFXDemoUtil.loadShader(fs_metaballs_glsl, fs_metaballs_dx9, fs_metaballs_dx11, fs_metaballs_mtl);
 
 		program = bgfx_create_program(vs, fs, true);
 

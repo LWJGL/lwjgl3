@@ -1123,7 +1123,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 		"""
 		""",
 
-		bgfx_transient_index_buffer_t.IN("_tib", ""),
+		bgfx_transient_index_buffer_t.OUT("_tib", ""),
 		uint32_t.IN("_num", "")
 	)
 
@@ -1132,7 +1132,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 		"""
 		""",
 
-		bgfx_transient_vertex_buffer_t.IN("_tvb", ""),
+		bgfx_transient_vertex_buffer_t.OUT("_tvb", ""),
 		uint32_t.IN("_num", ""),
 		const..bgfx_vertex_decl_t.IN("_decl", "")
 	)
@@ -1142,10 +1142,10 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 		"""
 		""",
 
-		bgfx_transient_vertex_buffer_t.IN("_tvb", ""),
+		bgfx_transient_vertex_buffer_t.OUT("_tvb", ""),
 		const..bgfx_vertex_decl_t.IN("_decl", ""),
 		uint32_t.IN("_numVertices", ""),
-		bgfx_transient_index_buffer_t.IN("_tib", ""),
+		bgfx_transient_index_buffer_t.OUT("_tib", ""),
 		uint32_t.IN("_numIndices", "")
 	)
 
@@ -1361,7 +1361,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 		""",
 
 		bgfx_texture_handle_t.IN("_handle", ""),
-		void_p.IN("_data", "") // TODO:
+		void_p.IN("_data", "")
 	)
 
 	uint32_t(
@@ -1371,7 +1371,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 
 		bgfx_frame_buffer_handle_t.IN("_handle", ""),
 		MapToInt..uint8_t.IN("_attachment", ""),
-		void_p.IN("_data", "") // TODO:
+		void_p.IN("_data", "")
 	)
 
 	void(

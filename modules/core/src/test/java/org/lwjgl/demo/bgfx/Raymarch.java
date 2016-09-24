@@ -7,7 +7,9 @@ package org.lwjgl.demo.bgfx;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
-import org.lwjgl.bgfx.*;
+import org.lwjgl.bgfx.BGFXTransientIndexBuffer;
+import org.lwjgl.bgfx.BGFXTransientVertexBuffer;
+import org.lwjgl.bgfx.BGFXVertexDecl;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
@@ -25,10 +27,10 @@ import static org.lwjgl.bgfx.BGFX.*;
  */
 public class Raymarch extends Demo {
 
-	private BGFXVertexDecl    decl;
-	private BGFXProgramHandle program;
-	private BGFXUniformHandle uniformMtx;
-	private BGFXUniformHandle uniformLightDirTime;
+	private BGFXVertexDecl decl;
+	private short          program;
+	private short          uniformMtx;
+	private short          uniformLightDirTime;
 
 	private Matrix4f view = new Matrix4f();
 	private FloatBuffer viewBuf;
@@ -54,7 +56,7 @@ public class Raymarch extends Demo {
 		super("03-Raymarch");
 	}
 
-	void renderScreenSpaceQuad(int _view, BGFXProgramHandle _program, float _x, float _y, float _width, float _height) {
+	void renderScreenSpaceQuad(int _view, short _program, float _x, float _y, float _width, float _height) {
 		try ( MemoryStack stack = MemoryStack.stackPush() ) {
 			BGFXTransientVertexBuffer tvb = BGFXTransientVertexBuffer.callocStack(stack);
 			BGFXTransientIndexBuffer tib = BGFXTransientIndexBuffer.callocStack(stack);
@@ -131,8 +133,8 @@ public class Raymarch extends Demo {
 		uniformMtx = bgfx_create_uniform("u_mtx", BGFX_UNIFORM_TYPE_MAT4, 1);
 		uniformLightDirTime = bgfx_create_uniform("u_lightDirTime", BGFX_UNIFORM_TYPE_VEC4, 1);
 
-		BGFXShaderHandle vs = BGFXDemoUtil.loadShader("vs_raymarching");
-		BGFXShaderHandle fs = BGFXDemoUtil.loadShader("fs_raymarching");
+		short vs = BGFXDemoUtil.loadShader("vs_raymarching");
+		short fs = BGFXDemoUtil.loadShader("fs_raymarching");
 
 		program = bgfx_create_program(vs, fs, true);
 

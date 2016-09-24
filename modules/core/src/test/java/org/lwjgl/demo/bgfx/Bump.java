@@ -23,20 +23,20 @@ import static org.lwjgl.bgfx.BGFX.*;
  */
 public class Bump extends Demo {
 
-	private BGFXVertexDecl         decl;
-	private ByteBuffer             vertices;
-	private BGFXVertexBufferHandle vbh;
-	private ByteBuffer             indices;
-	private BGFXIndexBufferHandle  ibh;
-	private BGFXUniformHandle      uniformTexColor;
-	private BGFXUniformHandle      uniformTexNormal;
-	private int                    numLights;
-	private BGFXUniformHandle      uniformLightPosRadius;
-	private BGFXUniformHandle      uniformLightRgbInnerR;
-	private BGFXProgramHandle      program;
-	private BGFXTextureHandle      textureColor;
-	private BGFXTextureHandle      textureNormal;
-	private boolean                instancingSupported;
+	private BGFXVertexDecl decl;
+	private ByteBuffer     vertices;
+	private short          vbh;
+	private ByteBuffer     indices;
+	private short          ibh;
+	private short          uniformTexColor;
+	private short          uniformTexNormal;
+	private int            numLights;
+	private short          uniformLightPosRadius;
+	private short          uniformLightRgbInnerR;
+	private short          program;
+	private short          textureColor;
+	private short          textureNormal;
+	private boolean        instancingSupported;
 
 	private Matrix4f view = new Matrix4f();
 	private FloatBuffer viewBuf;
@@ -47,7 +47,7 @@ public class Bump extends Demo {
 	private ByteBuffer  uniformBuf;
 
 	public static void main(String[] args) {
-		new Bump().run(args);
+		new Bump().run(new String[] { "--gl", "--cb" });
 	}
 
 	private Bump() {
@@ -250,8 +250,8 @@ public class Bump extends Demo {
 		uniformLightPosRadius = bgfx_create_uniform("u_lightPosRadius", BGFX_UNIFORM_TYPE_VEC4, numLights);
 		uniformLightRgbInnerR = bgfx_create_uniform("u_lightRgbInnerR", BGFX_UNIFORM_TYPE_VEC4, numLights);
 
-		BGFXShaderHandle vs = BGFXDemoUtil.loadShader(instancingSupported ? "vs_bump_instanced" : "vs_bump");
-		BGFXShaderHandle fs = BGFXDemoUtil.loadShader("fs_bump");
+		short vs = BGFXDemoUtil.loadShader(instancingSupported ? "vs_bump_instanced" : "vs_bump");
+		short fs = BGFXDemoUtil.loadShader("fs_bump");
 
 		program = bgfx_create_program(vs, fs, true);
 
