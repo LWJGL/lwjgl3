@@ -159,6 +159,7 @@
 			<compilerarg value="-Xno-param-assertions"/>
 			<compilerarg value="-Xreport-perf"/>
 
+			<src path="${src.templates.kotlin}/org/lwjgl/bgfx" if:true="${binding.bgfx}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" unless:true="${binding.egl}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/glfw" if:true="${binding.glfw}"/>
@@ -253,6 +254,7 @@
 			<include name="org/lwjgl/*.java"/>
 			<include name="org/lwjgl/system/**"/>
 
+			<include name="org/lwjgl/bgfx/**" if:true="${binding.bgfx}"/>
 			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
 			<include name="org/lwjgl/nanovg/**" if:true="${binding.nanovg}"/>
@@ -264,6 +266,7 @@
 		</patternset>
 
 		<patternset id="core.generated.files">
+			<include name="org/lwjgl/bgfx/**" if:true="${binding.bgfx}"/>
 			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
 			<include name="org/lwjgl/nanovg/**" if:true="${binding.nanovg}"/>
@@ -389,11 +392,13 @@
 			<classpath>
 				<pathelement path="${bin.core}"/>
 				<pathelement path="${lib}/testng.jar"/>
+				<pathelement path="${lib}/joml.jar"/>
 			</classpath>
 
 			<src path="${src.tests}/"/>
 
 			<!-- Demos -->
+			<include name="org/lwjgl/demo/bgfx/**" if:true="${binding.bgfx}"/>
 			<include name="org/lwjgl/demo/egl/**" if:true="${egl_glfw}"/>
 			<include name="org/lwjgl/demo/glfw/**" if:true="${binding.glfw}"/>
 			<include name="org/lwjgl/demo/nanovg/**" if:true="${nanovg}"/>
@@ -472,6 +477,7 @@
 		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="${failonerror}" spawn="${spawn}" taskname="Demo">
 			<classpath>
 				<pathelement path="${lib}/testng.jar"/>
+				<pathelement path="${lib}/joml.jar"/>
 			</classpath>
 
 			<jvmarg value="-Djava.library.path=${lib}"/>
@@ -805,6 +811,13 @@
 					</fileset>
 				</copy>
 			</custom>
+		</release-module>
+
+		<!-- bgfx -->
+		<release-module package="org.lwjgl.bgfx" name="bgfx" java-only="true" title="bgfx" license="bgfx" if:true="${binding.bgfx}">
+			<sources>
+				<fileset dir="${src.core}"><include name="org/lwjgl/bgfx/**"/></fileset>
+			</sources>
 		</release-module>
 
 		<!-- EGL -->

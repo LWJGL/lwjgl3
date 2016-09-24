@@ -33,6 +33,7 @@ import java.util.concurrent.atomic.AtomicInteger
 */
 
 enum class Binding(val key: String, val packageName: String) {
+	BGFX("binding.bgfx", "org.lwjgl.bgfx"),
 	EGL("binding.egl", "org.lwjgl.egl"),
 	GLFW("binding.glfw", "org.lwjgl.glfw"),
 	JAWT("binding.jawt", "org.lwjgl.system.jawt"),

@@ -41,6 +41,42 @@ This script is included in /build.xml and depends on /build-definitions.xml
 		<update-nanovg-asset path="images/image11.jpg"/>
 		<update-nanovg-asset path="images/image12.jpg"/>
 
+		<mkdir dir="${test.resources}/demo/bgfx/shaders/dx11" if:true="${binding.bgfx}"/>
+		<update-bgfx-asset path="shaders/dx11/fs_bump.bin"/>
+		<update-bgfx-asset path="shaders/dx11/vs_bump.bin"/>
+		<update-bgfx-asset path="shaders/dx11/vs_bump_instanced.bin"/>
+		<update-bgfx-asset path="shaders/dx11/fs_cubes.bin"/>
+		<update-bgfx-asset path="shaders/dx11/vs_cubes.bin"/>
+		<update-bgfx-asset path="shaders/dx11/fs_raymarching.bin"/>
+		<update-bgfx-asset path="shaders/dx11/vs_raymarching.bin"/>
+		<mkdir dir="${test.resources}/demo/bgfx/shaders/dx9" if:true="${binding.bgfx}"/>
+		<update-bgfx-asset path="shaders/dx9/fs_bump.bin"/>
+		<update-bgfx-asset path="shaders/dx9/vs_bump.bin"/>
+		<update-bgfx-asset path="shaders/dx9/vs_bump_instanced.bin"/>
+		<update-bgfx-asset path="shaders/dx9/fs_cubes.bin"/>
+		<update-bgfx-asset path="shaders/dx9/vs_cubes.bin"/>
+		<update-bgfx-asset path="shaders/dx9/fs_raymarching.bin"/>
+		<update-bgfx-asset path="shaders/dx9/vs_raymarching.bin"/>
+		<mkdir dir="${test.resources}/demo/bgfx/shaders/glsl" if:true="${binding.bgfx}"/>
+		<update-bgfx-asset path="shaders/glsl/fs_bump.bin"/>
+		<update-bgfx-asset path="shaders/glsl/vs_bump.bin"/>
+		<update-bgfx-asset path="shaders/glsl/vs_bump_instanced.bin"/>
+		<update-bgfx-asset path="shaders/glsl/fs_cubes.bin"/>
+		<update-bgfx-asset path="shaders/glsl/vs_cubes.bin"/>
+		<update-bgfx-asset path="shaders/glsl/fs_raymarching.bin"/>
+		<update-bgfx-asset path="shaders/glsl/vs_raymarching.bin"/>
+		<mkdir dir="${test.resources}/demo/bgfx/shaders/metal" if:true="${binding.bgfx}"/>
+		<update-bgfx-asset path="shaders/metal/fs_bump.bin"/>
+		<update-bgfx-asset path="shaders/metal/vs_bump.bin"/>
+		<update-bgfx-asset path="shaders/metal/vs_bump_instanced.bin"/>
+		<update-bgfx-asset path="shaders/metal/fs_cubes.bin"/>
+		<update-bgfx-asset path="shaders/metal/vs_cubes.bin"/>
+		<update-bgfx-asset path="shaders/metal/fs_raymarching.bin"/>
+		<update-bgfx-asset path="shaders/metal/vs_raymarching.bin"/>
+		<mkdir dir="${test.resources}/demo/bgfx/textures" if:true="${binding.bgfx}"/>
+		<update-bgfx-asset path="textures/fieldstone-rgba.dds"/>
+		<update-bgfx-asset path="textures/fieldstone-n.dds"/>
+
 		<!-- Add more assets here -->
 
 		<touch file="${test.resources}/demo/touch.txt"/>
@@ -60,6 +96,14 @@ This script is included in /build.xml and depends on /build-definitions.xml
 
 		<sequential>
 			<get-quiet name="NanoVG asset @{path}" url="https://github.com/memononen/nanovg/raw/master/example/@{path}" dest="${test.resources}/demo/nanovg/@{path}" if:true="${binding.nanovg}"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="update-bgfx-asset">
+		<attribute name="path"/>
+
+		<sequential>
+			<get-quiet name="bgfx asset @{path}" url="https://github.com/bkaradzic/bgfx/raw/master/examples/runtime/@{path}" dest="${test.resources}/demo/bgfx/@{path}" if:true="${binding.bgfx}"/>
 		</sequential>
 	</macrodef>
 
