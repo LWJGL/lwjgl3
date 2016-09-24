@@ -163,12 +163,7 @@ public class Raymarch extends Demo {
 
 		bgfx_set_view_transform(0, viewBuf, projBuf);
 
-		ortho.setOrtho(0.0f, 1280.0f, 720.0f, 0.0f, 0.0f, 100.0f);
-
-		// TODO: bgfx uses a left-handed version here, which will be available with JOML 1.8.4
-		ortho.m22(0.01f);
-		ortho.m32(0.0f);
-
+		BGFXDemoUtil.ortho(0.0f, 1280.0f, 720.0f, 0.0f, 0.0f, 100.0f, ortho);
 		ortho.get(orthoBuf);
 		bgfx_set_view_transform(1, null, orthoBuf);
 

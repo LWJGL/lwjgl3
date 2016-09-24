@@ -13,7 +13,7 @@
 	<property name="testng" value="6.8.21"/>
 	<property name="jcommander" value="1.48"/>
 	<property name="kotlinc-build" value="1.0.4"/>
-	<property name="joml" value="1.8.3"/>
+	<property name="joml" value="1.8.4"/>
 	<!-- *********************************** -->
 
 	<target name="-dependencies-uptodate">

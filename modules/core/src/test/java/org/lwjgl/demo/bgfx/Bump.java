@@ -47,7 +47,7 @@ public class Bump extends Demo {
 	private ByteBuffer  uniformBuf;
 
 	public static void main(String[] args) {
-		new Bump().run(new String[] { "--gl", "--cb" });
+		new Bump().run(args);
 	}
 
 	private Bump() {

@@ -257,4 +257,8 @@ final class BGFXDemoUtil {
 		dest.setPerspectiveLH(fovRadians, aspect, near, far, zZeroToOne);
 	}
 
+	static void ortho(float left, float right, float bottom, float top, float zNear, float zFar, Matrix4f dest) {
+		dest.setOrthoLH(left, right, bottom, top, zNear, zFar, zZeroToOne);
+	}
+
 }
