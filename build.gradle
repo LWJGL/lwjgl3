@@ -50,6 +50,10 @@ println "${deployment.type.name()} BUILD"
 
 enum Artifacts {
 	CORE("lwjgl", true, "LWJGL", "The LWJGL core library."),
+	BGFX(
+		"lwjgl-bgfx", false, "LWJGL - bgfx bindings",
+		"A cross-platform, graphics API agnostic rendering library. It provides a high performance, low level abstraction for common platform graphics APIs like OpenGL, Direct3D and Apple Metal."
+	),
 	EGL(
 		"lwjgl-egl", false, "LWJGL - EGL bindings",
 		"An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system."
