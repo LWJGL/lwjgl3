@@ -452,7 +452,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 		"BGFX_RENDERER_TYPE_VULKAN".enum,
 		"BGFX_RENDERER_TYPE_GNM".enum,
 
-		"BGFX_RENDERER_TYPE_COUNT".enum
+		"BGFX_RENDERER_TYPE_COUNT".enum // TODO: Update "get_supported_renderers" if this changes
 	).javaDocLinks
 
 	val Access = EnumConstant(
@@ -813,7 +813,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 		"""
 		""",
 
-		Check(8)..bgfx_renderer_type_t.p.IN("_enum", "", RendererType)
+		Check(9)..bgfx_renderer_type_t.p.IN("_enum", "", RendererType)
 	)
 
 	(const..charUTF8.p)(
