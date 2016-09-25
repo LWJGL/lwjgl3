@@ -13,7 +13,6 @@
 	<property name="testng" value="6.8.21"/>
 	<property name="jcommander" value="1.48"/>
 	<property name="kotlinc-build" value="1.0.4"/>
-	<property name="joml" value="1.8.4"/>
 	<!-- *********************************** -->
 
 	<target name="-dependencies-uptodate">
@@ -73,7 +72,6 @@
 	<target name="-lib-download" unless="lib-uptodate">
 		<update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}"/>
 		<update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
-		<update-mvn name="JOML" group="org/joml" artifact="joml" version="${joml}" dest="${lib}"/>
 
 		<touch file="${lib}/touch.txt" verbose="false"/>
 	</target>
