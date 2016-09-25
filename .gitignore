@@ -6,8 +6,6 @@
 .gradle
 .DS_Store
 *.bat
-*.bin
-*.dds
 *.jpg
 *.ogg
 *.sh
