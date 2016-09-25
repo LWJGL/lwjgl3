@@ -12,6 +12,7 @@ This script is included in /config/build-definitions.xml.
 
 	<!-- // ========== BINDING FLAGS ======== // -->
 
+	<property name="binding.bgfx" value="true"/>
 	<property name="binding.egl" value="true"/>
 	<property name="binding.glfw" value="true"/>
 	<property name="binding.jawt" value="true"/>
