@@ -22,7 +22,7 @@ fun config() {
 }
 
 val nfdchar_t = CharType("nfdchar_t", CharMapping.UTF8)
-val nfdchar_t_p = CharSequenceType(nfdchar_t)
+val nfdchar_t_p = nfdchar_t.p
 val nfdchar_t_pp = nfdchar_t_p.p
 
 val nfdpathset_t_p = struct_p(NFD_PACKAGE, "NFDPathSet", nativeName = "nfdpathset_t", mutable = false) {

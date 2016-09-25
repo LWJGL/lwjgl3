@@ -261,19 +261,23 @@ class NativeClass(
 							}.toList().toTypedArray()
 						).copyModifiers(func)
 
-						overload.parameters.asSequence().firstOrNull {
+						overload.parameters.asSequence().filter {
 							it has AutoSize && it[AutoSize].hasReference(multiTypeParam.name)
-						}.let {
-							if (it != null) {
-								val autoSize = it[AutoSize]
+						}.forEach {
+							val autoSize = it[AutoSize]
+							if ( autoSize.factor == null )
 								it.replaceModifier(AutoSizeShl(
 									autoType.byteShift!!,
 									autoSize.reference,
 									*autoSize.dependent,
 									applyTo = autoSize.applyTo
 								))
-
-							}
+							else
+								it.replaceModifier(AutoSize(
+									autoSize.reference,
+									*autoSize.dependent,
+									applyTo = autoSize.applyTo
+								))
 						}
 
 						if (!func.hasCustomJNI)
