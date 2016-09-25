@@ -192,7 +192,7 @@ val bgfx_attachment_t = struct_p(BGFX_PACKAGE, "BGFXAttachment", nativeName = "b
 	uint16_t.member("layer", "")
 }
 
-val bgfx_caps_gpu_t = struct(BGFX_PACKAGE, "BGFXCapsGPU", nativeName = "bgfx_caps_gpu_t") {
+val bgfx_caps_gpu_t = struct(BGFX_PACKAGE, "BGFXCapsGPU", nativeName = "bgfx_caps_gpu_t", mutable = false) {
 	documentation =
 	"""
 	"""
@@ -201,8 +201,33 @@ val bgfx_caps_gpu_t = struct(BGFX_PACKAGE, "BGFXCapsGPU", nativeName = "bgfx_cap
 	uint16_t.member("deviceId", "")
 }.nativeType
 
+val bgfx_caps_limits_t = struct(BGFX_PACKAGE, "BGFXCapsLimits", nativeName = "bgfx_caps_limits_t", mutable = false) {
+	documentation =
+	"""
+	"""
+
+	uint32_t.member("maxDrawCalls", "")
+	uint32_t.member("maxBlits", "")
+	uint32_t.member("maxTextureSize", "")
+	uint32_t.member("maxViews", "")
+	uint32_t.member("maxFrameBuffers", "")
+	uint32_t.member("maxFBAttachments", "")
+	uint32_t.member("maxPrograms", "")
+	uint32_t.member("maxShaders", "")
+	uint32_t.member("maxTextures", "")
+	uint32_t.member("maxTextureSamplers", "")
+	uint32_t.member("maxVertexDecls", "")
+	uint32_t.member("maxVertexStreams", "")
+	uint32_t.member("maxIndexBuffers", "")
+	uint32_t.member("maxVertexBuffers", "")
+	uint32_t.member("maxDynamicIndexBuffers", "")
+	uint32_t.member("maxDynamicVertexBuffers", "")
+	uint32_t.member("maxUniforms", "")
+	uint32_t.member("maxOcclusionQueries", "")
+}.nativeType
+
 val BGFX_TEXTURE_FORMATS_COUNT = 76
-val bgfx_caps_t = struct_p(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t") {
+val bgfx_caps_t = struct_p(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t", mutable = false) {
 	documentation =
 	"""
 	"""
@@ -211,17 +236,13 @@ val bgfx_caps_t = struct_p(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t")
 
 	uint64_t.member("supported", "")
 
-	uint32_t.member("maxDrawCalls", "")
-	uint16_t.member("maxTextureSize", "")
-	uint16_t.member("maxViews", "")
-	uint8_t.member("maxFBAttachments", "")
-	uint8_t.member("numGPUs", "")
 	uint16_t.member("vendorId", "")
 	uint16_t.member("deviceId", "")
 	bool.member("homogeneousDepth", "")
 	bool.member("originBottomLeft", "")
 
 	bgfx_caps_gpu_t.array("gpu", "", 4)
+	bgfx_caps_limits_t.member("limits", "")
 
 	uint16_t.array("formats", "", size = BGFX_TEXTURE_FORMATS_COUNT)
 }

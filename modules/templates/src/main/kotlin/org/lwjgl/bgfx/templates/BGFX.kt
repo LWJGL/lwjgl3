@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 	IntConstant(
 		"API version",
 
-		"BGFX_API_VERSION".."20"
+		"BGFX_API_VERSION".."22"
 	)
 
 	LongConstant(
@@ -158,7 +158,6 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 		"BGFX_STENCIL_NONE".."0x00000000",
 		"BGFX_STENCIL_MASK".."0xffffffff",
 		"BGFX_STENCIL_DEFAULT".."0x00000000"
-
 	)
 
 	ShortConstant(
@@ -367,7 +366,8 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 		"BGFX_CAPS_ALPHA_TO_COVERAGE".."0x0000000000080000L",
 		"BGFX_CAPS_CONSERVATIVE_RASTER".."0x0000000000100000L",
 		"BGFX_CAPS_TEXTURE_2D_ARRAY".."0x0000000000200000L",
-		"BGFX_CAPS_TEXTURE_CUBE_ARRAY".."0x0000000000400000L"
+		"BGFX_CAPS_TEXTURE_CUBE_ARRAY".."0x0000000000400000L",
+		"BGFX_CAPS_GRAPHICS_DEBUGGER".."0x0000000000800000L"
 	)
 
 	ShortConstant(
@@ -450,6 +450,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefixMethod = "bgfx_"
 		"BGFX_RENDERER_TYPE_OPENGLES".enum,
 		"BGFX_RENDERER_TYPE_OPENGL".enum,
 		"BGFX_RENDERER_TYPE_VULKAN".enum,
+		"BGFX_RENDERER_TYPE_GNM".enum,
 
 		"BGFX_RENDERER_TYPE_COUNT".enum
 	).javaDocLinks
