@@ -41,6 +41,7 @@ class AutoSizeMember(
 
 	override fun validate(member: StructMember) {
 		if ( when ( member.nativeType.mapping ) {
+			PrimitiveMapping.BYTE,
 			PrimitiveMapping.SHORT,
 			PrimitiveMapping.INT,
 			PrimitiveMapping.LONG,
