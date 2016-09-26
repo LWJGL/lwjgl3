@@ -268,6 +268,7 @@ class NativeClassFunction(
 		}
 
 		var returnCount = 0
+		val autoSizeReferences = HashSet<String>()
 		parameters.forEachIndexed { i, it ->
 			if ( it.nativeType is StructType ) {
 				if ( it.paramType == OUT )
@@ -282,6 +283,11 @@ class NativeClassFunction(
 			if ( it has AutoSize ) {
 				val autoSize = it[AutoSize]
 				(sequenceOf(autoSize.reference) + autoSize.dependent.asSequence()).forEach { reference ->
+					if ( autoSizeReferences.contains(reference) )
+						it.error("An AutoSize reference already exists for: $reference")
+
+					autoSizeReferences.add(reference)
+
 					val bufferParam = paramMap[reference]
 					if ( bufferParam == null )
 						it.error("Buffer reference does not exist: AutoSize($reference)")
