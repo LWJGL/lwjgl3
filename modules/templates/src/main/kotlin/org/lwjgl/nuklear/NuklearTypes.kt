@@ -517,9 +517,10 @@ val nk_mouse_button = struct(NUKLEAR_PACKAGE, "NkMouseButton", nativeName = "str
 	nk_vec2.member("clicked_pos", "")
 }.nativeType
 
-val NK_BUTTON_MAX = 3
 val nk_mouse = struct(NUKLEAR_PACKAGE, "NkMouse", nativeName = "struct nk_mouse", mutable = false) {
-	nk_mouse_button.array("buttons", "", size = NK_BUTTON_MAX)
+	javaImport("static org.lwjgl.nuklear.Nuklear.NK_BUTTON_MAX")
+
+	nk_mouse_button.array("buttons", "", size = "NK_BUTTON_MAX")
 	nk_vec2.member("pos", "")
 	nk_vec2.member("prev", "")
 	nk_vec2.member("delta", "")
@@ -534,11 +535,11 @@ val nk_key = struct(NUKLEAR_PACKAGE, "NkKey", nativeName = "struct nk_key", muta
 	unsigned_int.member("clicked", "")
 }.nativeType
 
-val NK_KEY_MAX = 29
-val NK_INPUT_MAX = 16
 val nk_keyboard = struct(NUKLEAR_PACKAGE, "NkKeyboard", nativeName = "struct nk_keyboard", mutable = false) {
-	nk_key.array("keys", "", size = NK_KEY_MAX)
-	char.array("text", "", size = NK_INPUT_MAX)
+	javaImport("static org.lwjgl.nuklear.Nuklear.*")
+
+	nk_key.array("keys", "", size = "NK_KEY_MAX")
+	char.array("text", "", size = "NK_INPUT_MAX")
 	int.member("text_len", "")
 }.nativeType
 
@@ -996,10 +997,11 @@ val nk_style_window = struct(NUKLEAR_PACKAGE, "NkStyleWindow", nativeName = "str
 	nk_vec2.member("tooltip_padding", "")
 }.nativeType
 
-val NK_CURSOR_COUNT = 7
 val nk_style = struct(NUKLEAR_PACKAGE, "NkStyle", nativeName = "struct nk_style") {
+	javaImport("static org.lwjgl.nuklear.Nuklear.NK_CURSOR_COUNT")
+
 	nk_user_font_p.member("font", "")
-	nullable..nk_cursor_p.array("cursors", "", size = NK_CURSOR_COUNT)
+	nullable..nk_cursor_p.array("cursors", "", size = "NK_CURSOR_COUNT")
 	nullable..nk_cursor_p.member("cursor_active", "")
 	nullable..nk_cursor_p.member("cursor_last", "")
 	intb.member("cursor_visible", "")
@@ -1128,11 +1130,12 @@ val nk_edit_state = struct(NUKLEAR_PACKAGE, "NkEditState", nativeName = "struct 
 	bool.member("single_line", "")
 }.nativeType
 
-val NK_MAX_NUMBER_BUFFER = 64
 val nk_property_state = struct(NUKLEAR_PACKAGE, "NkPropertyState", nativeName = "struct nk_property_state", mutable = false) {
+	javaImport("static org.lwjgl.nuklear.Nuklear.NK_MAX_NUMBER_BUFFER")
+
 	int.member("active", "")
 	int.member("prev", "")
-	char.array("buffer", "", size = NK_MAX_NUMBER_BUFFER)
+	char.array("buffer", "", size = "NK_MAX_NUMBER_BUFFER")
 	int.member("length", "")
 	int.member("cursor", "")
 	nk_hash.member("name", "")

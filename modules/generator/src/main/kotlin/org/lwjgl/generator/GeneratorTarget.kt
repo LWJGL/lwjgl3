@@ -162,7 +162,7 @@ abstract class GeneratorTarget(
 
 	var documentation: String? = null
 
-	val preamble = Preamble()
+	internal val preamble = Preamble()
 
 	fun <T : GeneratorTarget> T.javaImport(vararg classes: String): T {
 		preamble.javaImport(*classes)

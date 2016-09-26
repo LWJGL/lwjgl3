@@ -34,8 +34,6 @@ val ovrHmdType = "ovrHmdType".enumType
 val ovrEyeType = "ovrEyeType".enumType
 val ovrLayerType = "ovrLayerType".enumType
 
-val ovrEye_Count = 2
-
 val ovrLogCallback = "ovrLogCallback".callback(
 	OVR_PACKAGE, void, "OVRLogCallback",
 	"The logging callback.",
@@ -228,6 +226,7 @@ val ovrGraphicsLuid_p = struct_p(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "o
 }
 
 val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false) {
+	javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
 	documentation = "A complete descriptor of the HMD."
 
 	ovrHmdType.member("Type", "this HMD's type").links("Hmd_\\w+")
@@ -245,8 +244,8 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mu
 	unsigned_int.member("AvailableTrackingCaps", "capability bits described by {@code ovrTrackingCaps} which the system currently supports")
 	unsigned_int.member("DefaultTrackingCaps", "capability bits described by {@code ovrTrackingCaps} which are default for the current system")
 
-	ovrFovPort.array("DefaultEyeFov", "the recommended optical FOV for the HMD", size = ovrEye_Count)
-	ovrFovPort.array("MaxEyeFov", "the maximum optical FOV for the HMD", size = ovrEye_Count)
+	ovrFovPort.array("DefaultEyeFov", "the recommended optical FOV for the HMD", size = "ovrEye_Count")
+	ovrFovPort.array("MaxEyeFov", "the maximum optical FOV for the HMD", size = "ovrEye_Count")
 
 	ovrSizei.member("Resolution", "resolution of the full HMD screen (both eyes) in pixels")
 	float.member("DisplayRefreshRate", "nominal refresh rate of the display in cycles per second at the time of HMD creation")
@@ -325,7 +324,7 @@ val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovr
 		included here as it can be specified separately and modified per frame by passing different viewport values in the layer structure.
 		"""
 
-	ovrEyeType.member("Eye", "the eye index this instance corresponds to").links("Eye_\\w+")
+	ovrEyeType.member("Eye", "the eye index this instance corresponds to").links("Eye_(?!Count)\\w+")
 	ovrFovPort.member("Fov", "the field of view")
 	ovrRecti.member("DistortedViewport", "distortion viewport")
 	ovrVector2f.member("PixelsPerTanAngleAtCenter", "wow many display pixels will fit in tan(angle) = 1")
@@ -346,6 +345,7 @@ val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc",
 }.nativeType
 
 val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = "ovrViewScaleDesc") {
+	javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
 	documentation =
 		"""
 		Contains the data necessary to properly calculate position info for various layer types.
@@ -358,7 +358,7 @@ val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = 
 		units are inches, but you're shrinking the player to half their normal size, then {@code HmdSpaceToWorldScaleInMeters} would be {@code 0.0254*2.0}.
 		"""
 
-	ovrVector3f.array("HmdToEyeOffset", "translation of each eye", size = ovrEye_Count)
+	ovrVector3f.array("HmdToEyeOffset", "translation of each eye", size = "ovrEye_Count")
 	float.member("HmdSpaceToWorldScaleInMeters", "ratio of viewer units to meter units")
 }
 
@@ -427,7 +427,6 @@ val ovrHapticsPlaybackState_p = struct_p(OVR_PACKAGE, "OVRHapticsPlaybackState",
 	int.member("SamplesQueued", "Number of samples currently queued")
 }
 
-val ovrHand_Count = 2
 val ovrControllerType = "ovrControllerType".enumType
 
 val ovrTrackedDeviceType = "ovrTrackedDeviceType".enumType
@@ -449,6 +448,7 @@ val ovrBoundaryTestResult_p = struct_p(OVR_PACKAGE, "OVRBoundaryTestResult", nat
 }
 
 val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
+	javaImport("static org.lwjgl.ovr.OVR.ovrHand_Count")
 	documentation =
 		"""
 		Describes the complete controller input state, including Oculus Touch, and XBox gamepad. If multiple inputs are connected and used at the same time,
@@ -462,34 +462,34 @@ val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrIn
 	float.array(
 		"IndexTrigger",
 		"left and right finger trigger values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range 0.0 to 1.0f.",
-		size = ovrHand_Count
+		size = "ovrHand_Count"
 	)
 	float.array(
 		"HandTrigger",
 		"left and right hand trigger values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range 0.0 to 1.0f.",
-		size = ovrHand_Count
+		size = "ovrHand_Count"
 	)
 	ovrVector2f.array(
 		"Thumbstick",
 		"horizontal and vertical thumbstick axis values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range -1.0f to 1.0f.",
-		size = ovrHand_Count
+		size = "ovrHand_Count"
 	)
 	ovrControllerType.member("ControllerType", "The type of the controller this state is for.").links("ControllerType_\\w+")
 
 	float.array(
 		"IndexTriggerNoDeadzone",
 		"Left and right finger trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone",
-		size = ovrHand_Count
+		size = "ovrHand_Count"
 	)
 	float.array(
 		"HandTriggerNoDeadzone",
 		"Left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone.",
-		size = ovrHand_Count
+		size = "ovrHand_Count"
 	)
 	float.array(
 		"ThumbstickNoDeadzone",
 		"Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. Does not apply a deadzone.",
-		size = ovrHand_Count
+		size = "ovrHand_Count"
 	)
 }
 
@@ -509,6 +509,7 @@ val ovrLayerHeader_p = ovrLayerHeader.p
 val ovrLayerHeader_p_const_p = ovrLayerHeader_p.p_const_p
 
 val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLayerEyeFov") {
+	javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
 	documentation =
 		"""
 		Describes a layer that specifies a monoscopic or stereoscopic view. This is the kind of layer that's typically used as layer 0 to
@@ -519,22 +520,22 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 	ovrTextureSwapChain.array(
 		"ColorTexture",
 		"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be $NULL.",
-		size = ovrEye_Count,
-		validSize = 1
+		size = "ovrEye_Count",
+		validSize = "1"
 	)
 	ovrRecti.array(
 		"Viewport",
 		"specifies the ColorTexture sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
-		size = ovrEye_Count
+		size = "ovrEye_Count"
 	)
-	ovrFovPort.array("Fov", "the viewport field of view", size = ovrEye_Count)
+	ovrFovPort.array("Fov", "the viewport field of view", size = "ovrEye_Count")
 	ovrPosef.array(
 		"RenderPose",
 		"""
 		specifies the position and orientation of each eye view, with the position specified in meters. RenderPose will typically be the value returned from
 		OVRUtil#ovr_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
 		""",
-		size = ovrEye_Count
+		size = "ovrEye_Count"
 	)
 	double.member(
 		"SensorSampleTime",
@@ -697,8 +698,9 @@ val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerComposi
     )
 }.nativeType
 
-val ovrMaxProvidedFrameStats = 5
 val ovrPerfStats_p = struct_p(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
+	javaImport("static org.lwjgl.ovr.OVR.ovrMaxProvidedFrameStats")
+
     documentation =
     """
 	This is a complete descriptor of the performance stats provided by the SDK.
@@ -726,7 +728,7 @@ val ovrPerfStats_p = struct_p(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerf
 	seconds) the app can make the necessary adjustments and then keep watching the value to see if it has been satisfied.
 	"""
 
-	ovrPerfStatsPerCompositorFrame.array("FrameStats", "an array of performance stats", size = ovrMaxProvidedFrameStats)
+	ovrPerfStatsPerCompositorFrame.array("FrameStats", "an array of performance stats", size = "ovrMaxProvidedFrameStats")
     AutoSize("FrameStats")..int.member("FrameStatsCount", "the number of performance stats available in {@code FrameStats}")
     ovrBool.member("AnyFrameStatsDropped", "if performance stats have been dropped")
     float.member("AdaptiveGpuPerformanceScale", "the GPU performance scale")
@@ -771,6 +773,7 @@ fun config() {
 	Generator.registerLibraryInit(OVR_PACKAGE, "LibOVR", "ovr")
 
 	struct(OVR_PACKAGE, "OVRLayerEyeMatrix", nativeName = "ovrLayerEyeMatrix") {
+		javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
 		documentation =
 			"""
 			Describes a layer that specifies a monoscopic or stereoscopic view. This uses a direct 3x4 matrix to map from view space to the UV coordinates. It
@@ -795,13 +798,13 @@ fun config() {
 		ovrTextureSwapChain.array(
 			"ColorTexture",
 			"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be $NULL",
-			size = ovrEye_Count,
-			validSize = 1
+			size = "ovrEye_Count",
+			validSize = "1"
 		)
 		ovrRecti.array(
 			"Viewport",
 			"specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
-			size = ovrEye_Count
+			size = "ovrEye_Count"
 		)
 		ovrPosef.array(
 			"RenderPose",
@@ -809,7 +812,7 @@ fun config() {
 			specifies the position and orientation of each eye view, with the position specified in meters. RenderPose will typically be the value returned
 			from OVRUtil#ovr_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
 			""",
-			size = ovrEye_Count
+			size = "ovrEye_Count"
 		)
 		ovrMatrix4f.array(
 			"Matrix",
@@ -820,7 +823,7 @@ P = (x,y,z,1)*Matrix
 TexU  = P.x/P.z
 TexV  = P.y/P.z""")}
 			""",
-			size = ovrEye_Count
+			size = "ovrEye_Count"
 		)
 		double.member(
 			"SensorSampleTime",

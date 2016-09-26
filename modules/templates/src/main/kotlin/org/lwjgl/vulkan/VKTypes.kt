@@ -928,9 +928,8 @@ val VkPhysicalDeviceSparseProperties = struct(VULKAN_PACKAGE, "VkPhysicalDeviceS
 	VkBool32.member("residencyNonResidentStrict", "whether the physical device $can consistently access non-resident regions of a resource")
 }.nativeType
 
-val VK_MAX_PHYSICAL_DEVICE_NAME_SIZE = 256
-val VK_UUID_SIZE = 16
 val VkPhysicalDeviceProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceProperties", mutable = false) {
+	javaImport("static org.lwjgl.vulkan.VK10.*")
 	documentation =
 		"""
 		${man("VkPhysicalDeviceProperties")}<br>
@@ -944,11 +943,11 @@ val VkPhysicalDeviceProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDevicePro
 	uint32_t.member("vendorID", "a unique identifier for the vendor of the physical device")
 	uint32_t.member("deviceID", "a unique identifier for the physical device among devices available from the vendor")
 	VkPhysicalDeviceType.member("deviceType", "a {@code VkPhysicalDeviceType} specifying the type of device").links("PHYSICAL_DEVICE_TYPE_\\w+")
-	charUTF8.array("deviceName", "a null-terminated UTF-8 string containing the name of the device", size = VK_MAX_PHYSICAL_DEVICE_NAME_SIZE)
+	charUTF8.array("deviceName", "a null-terminated UTF-8 string containing the name of the device", size = "VK_MAX_PHYSICAL_DEVICE_NAME_SIZE")
 	uint8_t.array(
 		"pipelineCacheUUID",
 		"an array of size {@code VK_UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the device",
-		size = VK_UUID_SIZE
+		size = "VK_UUID_SIZE"
 	)
 	VkPhysicalDeviceLimits.member("limits", "the ##VkPhysicalDeviceLimits structure which specifies device-specific limits of the physical device")
 	VkPhysicalDeviceSparseProperties.member(
@@ -1005,9 +1004,8 @@ val VkMemoryHeap = struct(VULKAN_PACKAGE, "VkMemoryHeap", mutable = false) {
 	VkMemoryHeapFlags.member("flags", "a bitmask of {@code VkMemoryHeapFlagBits} attribute flags for the heap").flagLinks("MEMORY_HEAP")
 }.nativeType
 
-val VK_MAX_MEMORY_TYPES = 32
-val VK_MAX_MEMORY_HEAPS = 16
 val VkPhysicalDeviceMemoryProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceMemoryProperties", mutable = false) {
+	javaImport("static org.lwjgl.vulkan.VK10.*")
 	documentation =
 		"""
 		${man("VkPhysicalDeviceMemoryProperties")}<br>
@@ -1017,9 +1015,9 @@ val VkPhysicalDeviceMemoryProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDev
 		"""
 
 	AutoSize("memoryTypes")..uint32_t.member("memoryTypeCount", "the number of memory types available across all memory heaps")
-	VkMemoryType.array("memoryTypes", "the memory type descriptions", size = VK_MAX_MEMORY_TYPES)
+	VkMemoryType.array("memoryTypes", "the memory type descriptions", size = "VK_MAX_MEMORY_TYPES")
 	AutoSize("memoryHeaps")..uint32_t.member("memoryHeapCount", "the number of memory heaps")
-	VkMemoryHeap.array("memoryHeaps", "the memory heap descriptions", size = VK_MAX_MEMORY_HEAPS)
+	VkMemoryHeap.array("memoryHeaps", "the memory heap descriptions", size = "VK_MAX_MEMORY_HEAPS")
 }
 
 val VkDeviceQueueCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceQueueCreateInfo") {

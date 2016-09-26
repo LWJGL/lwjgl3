@@ -101,7 +101,9 @@ ENABLE_WARNINGS()""")
 		""",
 
 		"Eye_Left".enum("The left eye, from the viewer's perspective.", "0"),
-		"Eye_Right".enum("The right eye, from the viewer's perspective.")
+		"Eye_Right".enum("The right eye, from the viewer's perspective."),
+
+		"Eye_Count".enum("Count of enumerated elements.")
 	).javaDocLinks
 
 	EnumConstant(
@@ -337,7 +339,9 @@ ENABLE_WARNINGS()""")
 		"Names for the left and right hand array indexes. ({@code ovrHandType})",
 
 		"Hand_Left".enum("", 0),
-		"Hand_Right".enum
+		"Hand_Right".enum,
+
+		"Hand_Count".enum
 	)
 
 	EnumConstant(

@@ -58,9 +58,9 @@ private open class StructMemberArray(
 	name: String,
 	documentation: String,
 	/** Number of elements in the array. */
-	val size: Int,
+	val size: String,
 	/** Number of pointer elements that must not be null. */
-	val validSize: Int
+	val validSize: String
 ) : StructMember(nativeType, name, documentation) {
 
 	val primitiveMapping: PrimitiveMapping get() = nativeType.let {
@@ -73,10 +73,10 @@ private class StructMemberCharArray(
 	nativeType: CharType,
 	name: String,
 	documentation: String,
-	size: Int
+	size: String
 ) : StructMemberArray(nativeType, name, documentation, size, size)
 
-private class StructMemberPadding(size: Int, val condition: String?) : StructMemberArray(char, ANONYMOUS, "", size, size)
+private class StructMemberPadding(size: String, val condition: String?) : StructMemberArray(char, ANONYMOUS, "", size, size)
 
 private enum class MultiSetterMode {
 	NORMAL,
@@ -175,12 +175,15 @@ class Struct(
 
 	// Array field
 	fun NativeType.array(name: String, documentation: String, size: Int, validSize: Int = size)
+		= array(name, documentation, size.toString(), validSize.toString())
+	fun NativeType.array(name: String, documentation: String, size: String, validSize: String = size)
 		= add(StructMemberArray(this, name, documentation, size, validSize))
 
 	// CharSequence special-case
-	fun CharType.array(name: String, documentation: String, size: Int) = add(StructMemberCharArray(this, name, documentation, size))
+	fun CharType.array(name: String, documentation: String, size: Int) = array(name, documentation, size.toString())
+	fun CharType.array(name: String, documentation: String, size: String) = add(StructMemberCharArray(this, name, documentation, size))
 
-	fun padding(size: Int, condition: String? = null) = add(StructMemberPadding(size, condition))
+	fun padding(size: Int, condition: String? = null) = add(StructMemberPadding(size.toString(), condition))
 
 	/** Anonymous nested member struct definition. */
 	fun struct(init: Struct.() -> Unit): StructMember {
@@ -1170,7 +1173,7 @@ ${validations.joinToString("\n")}
 						}
 					} else if ( it is StructMemberCharArray ) {
 						val mapping = it.nativeType.mapping as PrimitiveMapping
-						val byteSize = it.size * mapping.bytes
+						val byteSize = if ( mapping.bytes == 1 ) it.size else "${it.size} * ${mapping.bytes}"
 
 						println("\t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
 						println("\tpublic static void n$setter(long $STRUCT, ByteBuffer value) {")
@@ -1364,7 +1367,7 @@ ${validations.joinToString("\n")}
 
 							println("\t/** Unsafe version of {@link #$getter}. */")
 							println("\tpublic static PointerBuffer n$getter(long $STRUCT) {")
-							println("\t\treturn memPointerBuffer($STRUCT + $field, ${if ( capacity == null ) Integer.toString(it.size) else capacity.autoSize});")
+							println("\t\treturn memPointerBuffer($STRUCT + $field, ${if ( capacity == null ) it.size else capacity.autoSize});")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
@@ -1375,7 +1378,7 @@ ${validations.joinToString("\n")}
 
 							println("\t/** Unsafe version of {@link #$getter}. */")
 							println("\tpublic static $nestedStruct.Buffer n$getter(long $STRUCT) {")
-							println("\t\treturn $nestedStruct.create($STRUCT + $field, ${if ( capacity == null ) Integer.toString(it.size) else capacity.autoSize});")
+							println("\t\treturn $nestedStruct.create($STRUCT + $field, ${if ( capacity == null ) it.size else capacity.autoSize});")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
@@ -1384,9 +1387,10 @@ ${validations.joinToString("\n")}
 						}
 					} else if ( it is StructMemberCharArray ) {
 						val mapping = it.nativeType.mapping as CharMapping
+						val byteSize = if ( mapping.bytes == 1 ) it.size else "${it.size} * ${mapping.bytes}"
 
 						println("\t/** Unsafe version of {@link #$getter}. */")
-						println("\tpublic static ByteBuffer n$getter(long $STRUCT) { return memByteBuffer($STRUCT + $field, ${it.size * mapping.bytes}); }")
+						println("\tpublic static ByteBuffer n$getter(long $STRUCT) { return memByteBuffer($STRUCT + $field, $byteSize); }")
 						println("\t/** Unsafe version of {@link #${getter}String}. */")
 						println("\tpublic static String n${getter}String(long $STRUCT) { return mem${mapping.charset}($STRUCT + $field); }")
 					} else {
