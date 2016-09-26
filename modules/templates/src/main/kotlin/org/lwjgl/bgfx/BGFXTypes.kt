@@ -43,18 +43,24 @@ val bgfx_occlusion_query_result_t = "bgfx_occlusion_query_result_t".enumType
 val bgfx_topology_convert_t = "bgfx_topology_convert_t".enumType
 val bgfx_topology_sort_t = "bgfx_topology_sort_t".enumType
 
-val bgfx_dynamic_index_buffer_handle_t = IntegerType("bgfx_dynamic_index_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_dynamic_vertex_buffer_handle_t = IntegerType("bgfx_dynamic_vertex_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_frame_buffer_handle_t = IntegerType("bgfx_frame_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_index_buffer_handle_t = IntegerType("bgfx_index_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_indirect_buffer_handle_t = IntegerType("bgfx_indirect_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_occlusion_query_handle_t = IntegerType("bgfx_occlusion_query_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_program_handle_t = IntegerType("bgfx_program_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_shader_handle_t = IntegerType("bgfx_shader_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_texture_handle_t = IntegerType("bgfx_texture_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_uniform_handle_t = IntegerType("bgfx_uniform_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_vertex_buffer_handle_t = IntegerType("bgfx_vertex_buffer_handle_t", PrimitiveMapping.SHORT, unsigned = true)
-val bgfx_vertex_decl_handle_t = IntegerType("bgfx_vertex_decl_handle_t", PrimitiveMapping.SHORT, unsigned = true)
+/*
+#define BGFX_HANDLE_T(_name) \
+    typedef struct _name { uint16_t idx; } _name##_t
+ */
+private fun BGFX_HANDLE_T(type: String) = typedef(uint16_t, "bgfx_${type}_handle_t")
+
+val bgfx_dynamic_index_buffer_handle_t = BGFX_HANDLE_T("dynamic_index_buffer")
+val bgfx_dynamic_vertex_buffer_handle_t = BGFX_HANDLE_T("dynamic_vertex_buffer")
+val bgfx_frame_buffer_handle_t = BGFX_HANDLE_T("frame_buffer")
+val bgfx_index_buffer_handle_t = BGFX_HANDLE_T("index_buffer")
+val bgfx_indirect_buffer_handle_t = BGFX_HANDLE_T("indirect_buffer")
+val bgfx_occlusion_query_handle_t = BGFX_HANDLE_T("occlusion_query")
+val bgfx_program_handle_t = BGFX_HANDLE_T("program")
+val bgfx_shader_handle_t = BGFX_HANDLE_T("shader")
+val bgfx_texture_handle_t = BGFX_HANDLE_T("texture")
+val bgfx_uniform_handle_t = BGFX_HANDLE_T("uniform")
+val bgfx_vertex_buffer_handle_t = BGFX_HANDLE_T("vertex_buffer")
+val bgfx_vertex_decl_handle_t = BGFX_HANDLE_T("vertex_decl")
 
 val bgfx_release_fn_t = "bgfx_release_fn_t".callback(
 	BGFX_PACKAGE, void, "BGFXReleaseFunctionCallback",
@@ -77,152 +83,129 @@ val bgfx_memory_t = struct_p(BGFX_PACKAGE, "BGFXMemory", nativeName = "bgfx_memo
 	uint32_t.member("size", "")
 }
 
-val bgfx_transform_t = struct_p(BGFX_PACKAGE, "BGFXTransform", nativeName = "bgfx_transform_t") {
-	documentation =
-	"""
-	"""
+val bgfx_transform_t = struct_p(BGFX_PACKAGE, "BGFXTransform", nativeName = "bgfx_transform_t", mutable = false) {
+	documentation = "Transform data."
 
-	float_p.member("data", "")
-	uint16_t.member("num", "")
+	float_p.member("data", "pointer to first matrix")
+	uint16_t.member("num", "number of matrices")
 }
 
-val bgfx_hmd_eye_t = struct(BGFX_PACKAGE, "BGFXHmdEye", nativeName = "bgfx_hmd_eye_t") {
-	documentation =
-	"""
-	"""
+val bgfx_hmd_eye_t = struct(BGFX_PACKAGE, "BGFXHmdEye", nativeName = "bgfx_hmd_eye_t", mutable = false) {
+	documentation = "Eye."
 
-	float.array("rotation", "", 4)
-	float.array("translation", "", 3)
-	float.array("fov", "", 4)
-	float.array("viewOffset", "", 3)
-	float.array("projection", "", 16)
-	float.array("pixelsPerTanAngle", "", 2)
+	float.array("rotation", "eye rotation represented as quaternion", size = 4)
+	float.array("translation", "eye translation", size = 3)
+	float.array("fov", "field of view (up, down, left, right)", size = 4)
+	float.array("viewOffset", "eye view matrix translation adjustment", size = 3)
+	float.array("projection", "eye projection matrix", size = 16)
+	float.array("pixelsPerTanAngle", "", size = 2)
 }.nativeType
 
-val bgfx_hmd_t = struct_p(BGFX_PACKAGE, "BGFXHmd", nativeName = "bgfx_hmd_t") {
-	documentation =
-	"""
-	"""
+val bgfx_hmd_t = struct_p(BGFX_PACKAGE, "BGFXHmd", nativeName = "bgfx_hmd_t", mutable = false) {
+	documentation = "HMD info."
 
-	bgfx_hmd_eye_t.array("eye", "", 2)
-	uint16_t.member("width", "")
-	uint16_t.member("height", "")
-	uint32_t.member("deviceWidth", "")
-	uint32_t.member("deviceHeight", "")
-	uint8_t.member("flags", "")
+	bgfx_hmd_eye_t.array("eye", "", size = 2)
+	uint16_t.member("width", "framebuffer width")
+	uint16_t.member("height", "framebuffer height")
+	uint32_t.member("deviceWidth", "device resolution width")
+	uint32_t.member("deviceHeight", "device resolution height")
+	uint8_t.member("flags", "status flags")
 }
 
-val bgfx_stats_t = struct_p(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_t") {
-	documentation =
-	"""
-	"""
+val bgfx_stats_t = struct_p(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_t", mutable = false) {
+	documentation = "Renderer statistics data."
 
-	uint64_t.member("cpuTimeBegin", "")
-	uint64_t.member("cpuTimeEnd", "")
-	uint64_t.member("cpuTimerFreq", "")
+	uint64_t.member("cpuTimeBegin", "CPU frame begin time")
+	uint64_t.member("cpuTimeEnd", "CPU frame end time")
+	uint64_t.member("cpuTimerFreq", "CPU timer frequency")
 
-	uint64_t.member("gpuTimeBegin", "")
-	uint64_t.member("gpuTimeEnd", "")
-	uint64_t.member("gpuTimerFreq", "")
+	uint64_t.member("gpuTimeBegin", "GPU frame begin time")
+	uint64_t.member("gpuTimeEnd", "GPU frame end time")
+	uint64_t.member("gpuTimerFreq", "GPU timer frequency")
 
-	int64_t.member("waitRender", "")
-	int64_t.member("waitSubmit", "")
+	int64_t.member("waitRender", "time spent waiting for render backend thread to finish issuing draw commands to underlying graphics API")
+	int64_t.member("waitSubmit", "time spent waiting for submit thread to advance to next frame")
 }
 
 val bgfx_vertex_decl_t = struct_p(BGFX_PACKAGE, "BGFXVertexDecl", nativeName = "bgfx_vertex_decl_t") {
-	documentation =
-	"""
-	"""
+	javaImport("static org.lwjgl.bgfx.BGFX.BGFX_ATTRIB_COUNT")
+	documentation = "Vertex declaration."
 
 	uint32_t.member("hash", "")
-	uint16_t.member("stride", "")
-	uint16_t.array("offset", "", 16)
-	uint16_t.array("attributes", "", 16)
+	uint16_t.member("stride", "vertex stride")
+	uint16_t.array("offset", "relative attribute offset from the vertex", size = "BGFX_ATTRIB_COUNT")
+	uint16_t.array("attributes", "", size = "BGFX_ATTRIB_COUNT")
 }
 
 val bgfx_transient_index_buffer_t = struct_p(BGFX_PACKAGE, "BGFXTransientIndexBuffer", nativeName = "bgfx_transient_index_buffer_t") {
-	documentation =
-	"""
-	"""
+	documentation = "Transient index buffer."
 
-	nullable..uint8_t.p.member("data", "")
-	uint32_t.member("size", "")
-	bgfx_index_buffer_handle_t.member("handle", "")
-	uint32_t.member("startIndex", "")
+	uint8_t.p.member("data", "pointer to data")
+	AutoSize("data")..uint32_t.member("size", "data size")
+	bgfx_index_buffer_handle_t.member("handle", "index buffer handle")
+	uint32_t.member("startIndex", "first index")
 }
 
 val bgfx_transient_vertex_buffer_t = struct_p(BGFX_PACKAGE, "BGFXTransientVertexBuffer", nativeName = "bgfx_transient_vertex_buffer_t") {
-	documentation =
-	"""
-	"""
+	documentation = "Transient vertex buffer."
 
-	nullable..uint8_t.p.member("data", "")
-	uint32_t.member("size", "")
-	uint32_t.member("startVertex", "")
-	uint16_t.member("stride", "")
-	bgfx_vertex_buffer_handle_t.member("handle", "")
-	bgfx_vertex_decl_handle_t.member("decl", "")
+	uint8_t.p.member("data", "pointer to data")
+	AutoSize("data")..uint32_t.member("size", "data size")
+	uint32_t.member("startVertex", "first vertex")
+	uint16_t.member("stride", "vertex stride")
+	bgfx_vertex_buffer_handle_t.member("handle", "vertex buffer handle")
+	bgfx_vertex_decl_handle_t.member("decl", "vertex declaration handle")
 }
 
 val bgfx_instance_data_buffer_t = struct_p(BGFX_PACKAGE, "BGFXInstanceDataBuffer", nativeName = "bgfx_instance_data_buffer_t") {
-	documentation =
-	"""
-	"""
+	documentation = "Instance data buffer info."
 
-	uint8_t.p.member("data", "")
-	uint32_t.member("size", "")
-	uint32_t.member("offset", "")
-	uint32_t.member("num", "")
-	uint16_t.member("stride", "")
-	bgfx_vertex_buffer_handle_t.member("handle", "")
+	uint8_t.p.member("data", "pointer to data")
+	AutoSize("data")..uint32_t.member("size", "data size")
+	uint32_t.member("offset", "offset in vertex buffer")
+	uint32_t.member("num", "number of instances")
+	uint16_t.member("stride", "vertex stride")
+	bgfx_vertex_buffer_handle_t.member("handle", "vertex buffer object handle")
 }
 
-val bgfx_texture_info_t = struct(BGFX_PACKAGE, "BGFXTextureInfo", nativeName = "bgfx_texture_info_t") {
-	documentation =
-	"""
-	"""
+val bgfx_texture_info_t = struct(BGFX_PACKAGE, "BGFXTextureInfo", nativeName = "bgfx_texture_info_t", mutable = false) {
+	documentation = "Texture info."
 
-	bgfx_texture_format_t.member("format", "")
-	uint32_t.member("storageSize", "")
-	uint16_t.member("width", "")
-	uint16_t.member("height", "")
-	uint16_t.member("depth", "")
-	uint16_t.member("numLayers", "")
-	uint8_t.member("numMips", "")
-	uint8_t.member("bitsPerPixel", "")
-	bool.member("cubeMap", "")
+	bgfx_texture_format_t.member("format", "texture format").links("TEXTURE_FORMAT_(?!COUNT)\\w+")
+	uint32_t.member("storageSize", "total amount of bytes required to store texture")
+	uint16_t.member("width", "texture width")
+	uint16_t.member("height", "texture height")
+	uint16_t.member("depth", "texture depth")
+	uint16_t.member("numLayers", "number of layers in texture array")
+	uint8_t.member("numMips", "number of MIP maps")
+	uint8_t.member("bitsPerPixel", "format bits per pixel")
+	bool.member("cubeMap", "texture is cubemap")
 }.nativeType
 
 val bgfx_attachment_t = struct_p(BGFX_PACKAGE, "BGFXAttachment", nativeName = "bgfx_attachment_t") {
-	documentation =
-	"""
-	"""
+	documentation = "Frame buffer texture attachemnt info."
 
-	bgfx_texture_handle_t.member("handle", "")
-	uint16_t.member("mip", "")
-	uint16_t.member("layer", "")
+	bgfx_texture_handle_t.member("handle", "texture handle")
+	uint16_t.member("mip", "mip level")
+	uint16_t.member("layer", "cubemap side or depth layer/slice")
 }
 
 val bgfx_caps_gpu_t = struct(BGFX_PACKAGE, "BGFXCapsGPU", nativeName = "bgfx_caps_gpu_t", mutable = false) {
-	documentation =
-	"""
-	"""
+	documentation = "GPU info."
 
 	uint16_t.member("vendorId", "")
 	uint16_t.member("deviceId", "")
 }.nativeType
 
 val bgfx_caps_limits_t = struct(BGFX_PACKAGE, "BGFXCapsLimits", nativeName = "bgfx_caps_limits_t", mutable = false) {
-	documentation =
-	"""
-	"""
+	documentation = "Rendering limits."
 
-	uint32_t.member("maxDrawCalls", "")
+	uint32_t.member("maxDrawCalls", "maximum draw calls")
 	uint32_t.member("maxBlits", "")
-	uint32_t.member("maxTextureSize", "")
-	uint32_t.member("maxViews", "")
+	uint32_t.member("maxTextureSize", "maximum texture size")
+	uint32_t.member("maxViews", "maximum views")
 	uint32_t.member("maxFrameBuffers", "")
-	uint32_t.member("maxFBAttachments", "")
+	uint32_t.member("maxFBAttachments", "maximum frame buffer attachments")
 	uint32_t.member("maxPrograms", "")
 	uint32_t.member("maxShaders", "")
 	uint32_t.member("maxTextures", "")
@@ -237,25 +220,24 @@ val bgfx_caps_limits_t = struct(BGFX_PACKAGE, "BGFXCapsLimits", nativeName = "bg
 	uint32_t.member("maxOcclusionQueries", "")
 }.nativeType
 
-val BGFX_TEXTURE_FORMATS_COUNT = 76
 val bgfx_caps_t = struct_p(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t", mutable = false) {
-	documentation =
-	"""
-	"""
+	javaImport("static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT")
+	documentation = "Renderer capabilities."
 
-	bgfx_renderer_type_t.member("rendererType", "")
+	bgfx_renderer_type_t.member("rendererType", "renderer backend type").links("RENDERER_TYPE_(?!COUNT)\\w+")
 
-	uint64_t.member("supported", "")
+	uint64_t.member("supported", "supported functionality").links("CAPS_(?!FORMAT_)\\w+", LinkMode.BITFIELD)
 
-	uint16_t.member("vendorId", "")
-	uint16_t.member("deviceId", "")
-	bool.member("homogeneousDepth", "")
-	bool.member("originBottomLeft", "")
+	uint16_t.member("vendorId", "selected GPU vendor id")
+	uint16_t.member("deviceId", "selected GPU device id")
+	bool.member("homogeneousDepth", "true when NDC depth is in [-1, 1] range")
+	bool.member("originBottomLeft", "true when NDC origin is at bottom left")
+	AutoSize("gpu")..uint8_t.member("numGPUs", "number of enumerated GPUs")
 
-	bgfx_caps_gpu_t.array("gpu", "", 4)
-	bgfx_caps_limits_t.member("limits", "")
+	bgfx_caps_gpu_t.array("gpu", "enumerated GPUs", size = 4)
+	bgfx_caps_limits_t.member("limits", "rendering limits")
 
-	uint16_t.array("formats", "", size = BGFX_TEXTURE_FORMATS_COUNT)
+	uint16_t.array("formats", "supported texture formats", size = "BGFX_TEXTURE_FORMAT_COUNT")
 }
 
 val bgfx_fatal_t = "bgfx_fatal_t".enumType
