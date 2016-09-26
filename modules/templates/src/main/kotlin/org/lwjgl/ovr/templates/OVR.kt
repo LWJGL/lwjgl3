@@ -104,7 +104,7 @@ ENABLE_WARNINGS()""")
 		"Eye_Right".enum("The right eye, from the viewer's perspective."),
 
 		"Eye_Count".enum("Count of enumerated elements.")
-	).javaDocLinks
+	).javaDocLinks { !it.name.endsWith("_Count") }
 
 	EnumConstant(
 		"""

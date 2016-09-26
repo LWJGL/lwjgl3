@@ -257,8 +257,9 @@ ENABLE_WARNINGS()""")
 		"KEY_SCROLL_END".enum,
 		"KEY_SCROLL_DOWN".enum,
 		"KEY_SCROLL_UP".enum,
-		"KEY_MAX".enum // TODO: Update nk_keyboard.keys size if this changes
-	).javaDocLinks
+
+		"KEY_MAX".enum
+	).javaDocLinks { !it.name.endsWith("MAX") }
 
 	val Buttons = EnumConstant(
 		"nk_buttons",
@@ -266,8 +267,9 @@ ENABLE_WARNINGS()""")
 		"BUTTON_LEFT".enum,
 		"BUTTON_MIDDLE".enum,
 		"BUTTON_RIGHT".enum,
+
 		"BUTTON_MAX".enum
-	).javaDocLinks
+	).javaDocLinks { !it.name.endsWith("MAX") }
 
 	val StyleColors = EnumConstant(
 		"nk_style_colors",
@@ -300,8 +302,9 @@ ENABLE_WARNINGS()""")
 		"COLOR_SCROLLBAR_CURSOR_HOVER".enum,
 		"COLOR_SCROLLBAR_CURSOR_ACTIVE".enum,
 		"COLOR_TAB_HEADER".enum,
+
 		"COLOR_COUNT".enum
-	).javaDocLinks
+	).javaDocLinksSkipCount
 	
 	val StyleCursor = EnumConstant(
 		"nk_style_cursor",
@@ -313,8 +316,9 @@ ENABLE_WARNINGS()""")
 		"CURSOR_RESIZE_HORIZONTAL".enum,
 		"CURSOR_RESIZE_TOP_LEFT_DOWN_RIGHT".enum,
 		"CURSOR_RESIZE_TOP_RIGHT_DOWN_LEFT".enum,
-		"CURSOR_COUNT".enum // TODO: Update nk_style.cursors size if this changes
-	).javaDocLinks
+
+		"CURSOR_COUNT".enum
+	).javaDocLinksSkipCount
 	
 	EnumConstant(
 		"nk_widget_layout_states",
@@ -494,6 +498,7 @@ ENABLE_WARNINGS()""")
 		"VERTEX_POSITION".enum,
 		"VERTEX_COLOR".enum,
 		"VERTEX_TEXCOORD".enum,
+
 		"VERTEX_ATTRIBUTE_COUNT".enum
 	)
 
@@ -521,6 +526,7 @@ ENABLE_WARNINGS()""")
 
 		"FORMAT_RGB32".enum,
 		"FORMAT_RGBA32".enum,
+
 		"FORMAT_COUNT".enum
 	)
 

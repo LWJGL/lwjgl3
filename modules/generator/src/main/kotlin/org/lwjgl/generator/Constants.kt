@@ -213,22 +213,12 @@ class ConstantBlock<T : Any>(
 			print(constantType.print(constant.value!!))
 	}
 
-	val javaDocLinks: String get() {
-		val builder = StringBuilder(constants.size * 32)
+	val javaDocLinks: String get() = javaDocLinks { true }
+	val javaDocLinksSkipCount: String get() = javaDocLinks { !it.name.endsWith("_COUNT") }
 
-		printJavaDocLink(builder, constants[0])
-		for (i in 1..constants.lastIndex) {
-			builder.append(" ")
-			printJavaDocLink(builder, constants[i])
-		}
-
-		return builder.toString()
-	}
-
-	private fun <T : Any> printJavaDocLink(builder: StringBuilder, constant: Constant<T>) {
-		builder.append(nativeClass.className)
-		builder.append('#')
-		builder.append(constant.name)
-	}
+	fun javaDocLinks(predicate: (Constant<T>) -> Boolean) = constants.asSequence()
+		.filter { predicate(it) }
+		.map { "${nativeClass.className}#${it.name}" }
+		.joinToString(" ")
 
 }
