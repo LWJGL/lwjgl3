@@ -1209,7 +1209,7 @@ ${validations.joinToString("\n")}
 
 					println("\t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
 					println("\tpublic static void n$setter(long $STRUCT, ByteBuffer value) { ")
-					println("\t\tif ( CHECKS && value != null ) checkNT${mapping.bytes}(value); ")
+					println("\t\tif ( CHECKS ) checkNT${mapping.bytes}Safe(value); ")
 					println("\t\tmemPutAddress($STRUCT + $field, ${it.memAddressValue});")
 					println("\t}")
 				} else if ( it.nativeType.isPointerData ) {

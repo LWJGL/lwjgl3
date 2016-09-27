@@ -733,6 +733,9 @@ public final class MemoryUtil {
 	/** StructBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(StructBuffer<?, ?> buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
+	/** Pointer version of {@link #memAddressSafe(ByteBuffer)}. */
+	public static long memAddressSafe(Pointer pointer) { return pointer == null ? NULL : pointer.address(); }
+
 	// --- [ Buffer allocation ] ---
 
 	/**

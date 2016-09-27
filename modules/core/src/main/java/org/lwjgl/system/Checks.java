@@ -9,7 +9,6 @@ import org.lwjgl.PointerBuffer;
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.Pointer.*;
 
 /**
  * A class to check buffer boundaries in general. If there is insufficient space in the buffer when the call is made then a buffer overflow would otherwise
@@ -105,154 +104,96 @@ public final class Checks {
 		return pointer;
 	}
 
-	/** Ensures that the specified ByteBuffer is null-terminated (last byte equal to 0). */
-	public static ByteBuffer checkNT1(ByteBuffer buf) {
-		checkBuffer(buf, 1);
-		if ( buf.get(buf.limit() - 1) != 0 )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
-	}
-
-	/** Ensures that the specified ByteBuffer is null-terminated (last 2 bytes equal to 0). */
-	public static ByteBuffer checkNT2(ByteBuffer buf) {
-		checkBuffer(buf, 2);
-		if ( buf.getShort(buf.limit() - 2) != 0 )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
-	}
-
-	/** Ensures that the specified ByteBuffer is null-terminated (last 4 bytes equal to 0). */
-	public static ByteBuffer checkNT4(ByteBuffer buf) {
-		checkBuffer(buf, 4);
-		if ( buf.getInt(buf.limit() - 4) != 0 )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
-	}
-
-	/** Ensures that the specified ByteBuffer is terminated with the specified terminator (last 4 bytes equal to {@code terminator}). */
-	public static ByteBuffer checkNT4(ByteBuffer buf, int terminator) {
-		checkBuffer(buf, 4);
-		if ( buf.getInt(buf.limit() - 4) != terminator )
-			throw new IllegalArgumentException("Missing termination");
-
-		return buf;
-	}
-
-	/** Ensures that the specified ByteBuffer is null-terminated (last 8 bytes equal to 0). */
-	public static ByteBuffer checkNT8(ByteBuffer buf) {
-		checkBuffer(buf, 8);
-		if ( buf.getLong(buf.limit() - 8) != 0 )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
-	}
-
-	/** Ensures that the specified ByteBuffer is null-terminated (last 4 or 8 bytes equal to 0). */
-	public static ByteBuffer checkNTP(ByteBuffer buf) {
-		return checkNTP(buf, NULL);
-	}
-
-	/** Ensures that the specified ByteBuffer is terminated with the specified terminator (last 4 or 8 bytes equal to {@code terminator}). */
-	public static ByteBuffer checkNTP(ByteBuffer buf, long terminator) {
-		checkBuffer(buf, POINTER_SIZE);
-		if ( PointerBuffer.get(buf, buf.limit() - POINTER_SIZE) != terminator )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
-	}
-
-	/** Ensures that the specified IntBuffer is null-terminated. */
-	public static IntBuffer checkNT(IntBuffer buf) {
-		checkBuffer(buf, 1);
-		if ( buf.get(buf.limit() - 1) != 0 )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
-	}
-
 	/** Ensures that the specified array is null-terminated. */
-	public static int[] checkNT(int[] buf) {
-		checkBuffer(buf, 1);
-		if ( buf[buf.length - 1] != 0 )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
-	}
-
-	/** Ensures that the specified IntBuffer is terminated with the specified terminator. */
-	public static IntBuffer checkNT(IntBuffer buf, int terminator) {
-		checkBuffer(buf, 1);
-		if ( buf.get(buf.limit() - 1) != terminator )
-			throw new IllegalArgumentException("Missing termination");
-
-		return buf;
+	public static void checkNT(int[] buf) {
+		checkNT(buf, 0);
 	}
 
 	/** Ensures that the specified array is terminated with the specified terminator. */
-	public static int[] checkNT(int[] buf, int terminator) {
+	public static void checkNT(int[] buf, int terminator) {
 		checkBuffer(buf, 1);
 		if ( buf[buf.length - 1] != terminator )
 			throw new IllegalArgumentException("Missing termination");
-
-		return buf;
-	}
-
-	/** Ensures that the specified LongBuffer is null-terminated. */
-	public static LongBuffer checkNT(LongBuffer buf) {
-		checkBuffer(buf, 1);
-		if ( buf.get(buf.limit() - 1) != NULL )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
 	}
 
 	/** Ensures that the specified array is null-terminated. */
-	public static long[] checkNT(long[] buf) {
+	public static void checkNT(long[] buf) {
 		checkBuffer(buf, 1);
 		if ( buf[buf.length - 1] != NULL )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
-	}
-
-	/** Ensures that the specified FloatBuffer is null-terminated. */
-	public static FloatBuffer checkNT(FloatBuffer buf) {
-		checkBuffer(buf, 1);
-		if ( buf.get(buf.limit() - 1) != 0.0f )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
+			throw new IllegalArgumentException("Missing termination");
 	}
 
 	/** Ensures that the specified array is null-terminated. */
-	public static float[] checkNT(float[] buf) {
+	public static void checkNT(float[] buf) {
 		checkBuffer(buf, 1);
 		if ( buf[buf.length - 1] != 0.0f )
-			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
+			throw new IllegalArgumentException("Missing termination");
 	}
 
-	/** Ensures that the specified PointerBuffer is null-terminated. */
-	public static PointerBuffer checkNT(PointerBuffer buf) {
+	/** Ensures that the specified ByteBuffer is null-terminated (last byte equal to 0). */
+	public static void checkNT1(ByteBuffer buf) {
 		checkBuffer(buf, 1);
-		if ( buf.get(buf.limit() - 1) != NULL )
+		if ( buf.get(buf.limit() - 1) != 0 )
 			throw new IllegalArgumentException("Missing null termination");
-
-		return buf;
 	}
 
-	/** Ensures that the specified PointerBuffer is terminated with the specified terminator. */
-	public static PointerBuffer checkNT(PointerBuffer buf, long terminator) {
+	/** Ensures that the specified ByteBuffer is null-terminated (last 2 bytes equal to 0). */
+	public static void checkNT2(ByteBuffer buf) {
+		checkBuffer(buf, 2);
+		if ( buf.getShort(buf.limit() - 2) != 0 )
+			throw new IllegalArgumentException("Missing null termination");
+	}
+
+	/** Ensures that the specified IntBuffer is null-terminated. */
+	public static void checkNT(IntBuffer buf) {
+		checkNT(buf, 0);
+	}
+
+	/** Ensures that the specified IntBuffer is terminated with the specified terminator. */
+	public static void checkNT(IntBuffer buf, int terminator) {
 		checkBuffer(buf, 1);
 		if ( buf.get(buf.limit() - 1) != terminator )
 			throw new IllegalArgumentException("Missing termination");
-
-		return buf;
 	}
+
+	/** Ensures that the specified LongBuffer is null-terminated. */
+	public static void checkNT(LongBuffer buf) {
+		checkBuffer(buf, 1);
+		if ( buf.get(buf.limit() - 1) != NULL )
+			throw new IllegalArgumentException("Missing termination");
+	}
+
+	/** Ensures that the specified FloatBuffer is null-terminated. */
+	public static void checkNT(FloatBuffer buf) {
+		checkBuffer(buf, 1);
+		if ( buf.get(buf.limit() - 1) != 0.0f )
+			throw new IllegalArgumentException("Missing termination");
+	}
+
+	/** Ensures that the specified PointerBuffer is null-terminated. */
+	public static void checkNT(PointerBuffer buf) {
+		checkNT(buf, NULL);
+	}
+
+	/** Ensures that the specified PointerBuffer is terminated with the specified terminator. */
+	public static void checkNT(PointerBuffer buf, long terminator) {
+		checkBuffer(buf, 1);
+		if ( buf.get(buf.limit() - 1) != terminator )
+			throw new IllegalArgumentException("Missing termination");
+	}
+
+	public static void checkNTSafe(int[] buf) { if ( buf != null ) checkNT(buf); }
+	public static void checkNTSafe(int[] buf, int terminator) { if ( buf != null ) checkNT(buf, terminator); }
+	public static void checkNTSafe(long[] buf) { if ( buf != null ) checkNT(buf); }
+	public static void checkNTSafe(float[] buf) { if ( buf != null ) checkNT(buf); }
+	public static void checkNT1Safe(ByteBuffer buf) { if ( buf != null ) checkNT1(buf); }
+	public static void checkNT2Safe(ByteBuffer buf) { if ( buf != null ) checkNT2(buf); }
+	public static void checkNTSafe(IntBuffer buf) { if ( buf != null ) checkNT(buf); }
+	public static void checkNTSafe(IntBuffer buf, int terminator) { if ( buf != null ) checkNT(buf, terminator); }
+	public static void checkNTSafe(LongBuffer buf) { if ( buf != null ) checkNT(buf); }
+	public static void checkNTSafe(FloatBuffer buf) { if ( buf != null ) checkNT(buf); }
+	public static void checkNTSafe(PointerBuffer buf) { if ( buf != null ) checkNT(buf); }
+	public static void checkNTSafe(PointerBuffer buf, long terminator) { if ( buf != null ) checkNT(buf, terminator); }
 
 	/**
 	 * Helper method to ensure a array has enough capacity.
@@ -388,10 +329,15 @@ public final class Checks {
 		}
 	}
 
-	/** @see #checkBuffer(StructBuffer, int) */
-	public static void checkBuffer(StructBuffer<?, ?> buf, long size) {
-		checkBuffer(buf, (int)size);
-	}
+	public static void checkBufferSafe(short[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
+	public static void checkBufferSafe(int[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
+	public static void checkBufferSafe(long[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
+	public static void checkBufferSafe(float[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
+	public static void checkBufferSafe(double[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
+	public static void checkBufferSafe(Buffer buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
+	public static void checkBufferSafe(Buffer buf, long size) { if ( buf != null ) checkBuffer(buf, size); }
+	public static void checkBufferSafe(PointerBuffer buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
+	public static void checkBufferSafe(StructBuffer<?, ?> buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
 
 	public static void checkArray(Object[] array, int size) {
 		if ( array.length < size )

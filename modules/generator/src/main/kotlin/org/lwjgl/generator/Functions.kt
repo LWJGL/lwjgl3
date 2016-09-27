@@ -238,7 +238,7 @@ class NativeClassFunction(
 	private fun Parameter.asNativeMethodCallParam(mode: GenerationMode) = when {
 		nativeType is StructType || nativeType is ObjectType ->
 			if ( has(nullable) )
-				"$name == null ? NULL : $name.$ADDRESS"
+				"memAddressSafe($name)"
 			else if ( nativeType is ObjectType && hasUnsafeMethod && nativeClass.binding!!.hasParameterCapabilities )
 				name
 			else
@@ -417,16 +417,16 @@ class NativeClassFunction(
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType && transforms?.get(it) !is SkipCheckFunctionTransform )
 				checks.add("checkPointer(${it.name});")
 
-			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "if ( ${it.name} != null ) " else ""
+			var Safe = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "Safe" else ""
 
 			if ( it.nativeType is CharSequenceType && it.paramType === IN && !it.has(Check) && transforms?.get(it) == null ) {
 				if ( getReferenceParam(AutoSize, it.name) == null )
-					checks.add("${prefix}checkNT${it.nativeType.charMapping.bytes}(${it.name});")
+					checks.add("checkNT${it.nativeType.charMapping.bytes}$Safe(${it.name});")
 			}
 
 			if ( it.paramType === IN && it has Terminated ) {
 				val postfix = if ( (it.nativeType.mapping as PointerMapping).isMultiByte ) "" else "1"
-				checks.add("${prefix}checkNT$postfix(${it.name}${it[Terminated].let { if ( it === NullTerminated ) "" else ", ${it.value}" }});")
+				checks.add("checkNT$postfix$Safe(${it.name}${it[Terminated].let { if ( it === NullTerminated ) "" else ", ${it.value}" }});")
 			}
 
 			if ( it has Check ) {
@@ -434,14 +434,14 @@ class NativeClassFunction(
 				if ( transform !is SkipCheckFunctionTransform ) {
 					val check = it[Check]
 
-					if ( check.debug ) prefix = "if ( DEBUG )\n\t\t\t\t$prefix"
+					val DEBUG = if ( check.debug ) "if ( DEBUG )\n\t\t\t\t" else ""
 
 					if ( it.nativeType.javaMethodType == "ByteBuffer" )
-						checks.add("${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});")
+						checks.add("${DEBUG}checkBuffer$Safe(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});")
 					else if ( it.nativeType is StructType )
-						checks.add("${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});")
+						checks.add("${DEBUG}checkBuffer$Safe(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});")
 					else
-						checks.add("${prefix}checkBuffer(${it.name}, ${check.expression});")
+						checks.add("${DEBUG}checkBuffer$Safe(${it.name}, ${check.expression});")
 				}
 			}
 
@@ -459,8 +459,8 @@ class NativeClassFunction(
 
 					sequenceOf(autoSize.reference, *autoSize.dependent).forEach {
 						val bufferParam = paramMap[it]!!
-						prefix = if ( bufferParam has Nullable ) "if ( $it != null ) " else ""
-						checks.add("${prefix}checkBuffer($it, $expression);")
+						Safe = if ( bufferParam has Nullable ) "Safe" else ""
+						checks.add("checkBuffer$Safe($it, $expression);")
 					}
 				}
 
@@ -479,11 +479,11 @@ class NativeClassFunction(
 						val param = paramMap[it]!!
 						val transform = transforms[param]
 						if ( transform !is SkipCheckFunctionTransform ) {
-							prefix = if ( param has Nullable && transform !is PointerArrayTransform ) "if ( $it != null ) " else ""
+							Safe = if ( param has Nullable && transform !is PointerArrayTransform ) "Safe" else ""
 							checks.add(if ( transform === PointerArrayTransformArray )
-								"${prefix}checkArray($it, $expression);"
+								"checkArray$Safe($it, $expression);"
 							else
-								"${prefix}checkBuffer($it, $expression);")
+								"checkBuffer$Safe($it, $expression);")
 						}
 					}
 				}
