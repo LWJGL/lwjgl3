@@ -66,8 +66,25 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, v
 		val factor = param[AutoSize].factor
 		if ( factor == null )
 			expression = "$expression << $byteShift"
-		else if ( applyTo !== ApplyTo.ALTERNATIVE ) // Hack to skip the expression with MultiType
-			expression = "($expression ${factor.expression()}) << $byteShift"
+		else {
+			// TODO: may need to handle more cases in the future (e.g. integer factor + POINTER_SHIFT)
+			try {
+				val f = factor.expression.toInt()
+				val b = byteShift.toInt()
+				if ( factor.operator == "/" ) {
+					expression = "$expression / ${f  / (1 shl b)}"
+				} else {
+					val s = (if ( factor.operator == ">>" ) f else -f) - b
+					if (s < 0)
+						expression = "$expression << ${-s}"
+					else
+						expression = "$expression >> $s"
+				}
+			} catch(e: NumberFormatException) {
+				if ( applyTo !== ApplyTo.ALTERNATIVE ) // Hack to skip the expression with MultiType
+					expression = "($expression ${factor.expression()}) << $byteShift"
+			}
+		}
 
 		if ( bufferParam has nullable )
 			expression = "(${bufferParam.name} == null ? 0 : $expression)"

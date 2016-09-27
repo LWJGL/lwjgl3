@@ -32,9 +32,13 @@ object MapToInt : ParameterModifier() {
 	}
 }
 
-interface AutoSizeFactor {
-	fun expression(): String
-	fun expressionInv(): String
+class AutoSizeFactor(
+	val operator: String,
+    val operatorInv: String,
+    val expression: String
+) {
+	fun expression() = "$operator $expression"
+	fun expressionInv() = "$operatorInv $expression"
 }
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
@@ -49,22 +53,13 @@ fun AutoSize(div: Int, reference: String, vararg dependent: String, applyTo: App
 		AutoSizeDiv(div.toString(), reference, dependent = *dependent, applyTo = applyTo)
 
 fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
-	AutoSize(reference, *dependent, applyTo = applyTo, factor = object : AutoSizeFactor {
-		override fun expression() = "/ $expression"
-		override fun expressionInv() = "* $expression"
-	})
+	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor("/", "*", expression))
 
 fun AutoSizeShr(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
-	AutoSize(reference, *dependent, applyTo = applyTo, factor = object : AutoSizeFactor {
-		override fun expression() = ">> $expression"
-		override fun expressionInv() = "<< $expression"
-	})
+	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor(">>", "<<", expression))
 
 fun AutoSizeShl(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
-	AutoSize(reference, *dependent, applyTo = applyTo, factor = object : AutoSizeFactor {
-		override fun expression() = "<< $expression"
-		override fun expressionInv() = ">> $expression"
-	})
+	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor("<<", ">>", expression))
 
 class AutoSize(
 	override val reference: String,
@@ -86,6 +81,7 @@ class AutoSize(
 	override fun validate(param: Parameter) {
 		when ( param.paramType ) {
 			ParameterType.IN    -> if ( when ( param.nativeType.mapping ) {
+				PrimitiveMapping.BYTE,
 				PrimitiveMapping.SHORT,
 				PrimitiveMapping.INT,
 				PrimitiveMapping.LONG,
