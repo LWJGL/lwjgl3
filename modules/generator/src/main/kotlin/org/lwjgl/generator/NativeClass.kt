@@ -420,7 +420,7 @@ class NativeClass(
 			else if ( library.endsWith(");") )
 				"\n\tstatic { $library }"
 			else
-				"\n\tstatic { Library.loadSystem(\"$library\"); }"
+				"\n\tstatic { Library.loadSystem(Platform.mapLibraryNameBundled(\"$library\")); }"
 			)
 		}
 
