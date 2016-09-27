@@ -434,7 +434,7 @@ public final class APIUtil {
 	 * @param length   the pointer array length
 	 */
 	public static void apiArrayFree(long pointers, int length) {
-		for ( int i = 0; i < length; i++ )
+		for ( int i = length; --i >= 0; )
 			nmemFree(memGetAddress(pointers + (i << POINTER_SHIFT)));
 	}
 
