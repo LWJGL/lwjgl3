@@ -40,28 +40,4 @@ public final class MathUtil {
 		return 1 << (32 - Integer.numberOfLeadingZeros(value - 1));
 	}
 
-	/**
-	 * Converts an unsigned integer value to a pointer value.
-	 *
-	 * @param value the unsigned integer
-	 *
-	 * @return the pointer value
-	 */
-	public static long mathUIntToPtr(int value) {
-		return value & 0xFFFFFFFFL;
-	}
-
-	/**
-	 * Find the integer logarithm base 2 of the given value.
-	 *
-	 * @param value the value for which to find its logarithm
-	 */
-	public static int mathLog2i(int value) {
-		int r = 0;
-		while ( (value >>= 1) > 0 ) {
-			r++;
-		}
-		return r;
-	}
-
 }
