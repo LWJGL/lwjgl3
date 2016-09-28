@@ -1078,22 +1078,52 @@ ${validations.joinToString("\n")}
 		        (this is StructMemberArray && this.validSize < this.size)
 	private val StructMember.addressValue: String get() = if ( isNullable ) "addressSafe(value)" else "value.address()"
 	private val StructMember.memAddressValue: String get() = if ( isNullable ) "memAddressSafe(value)" else "memAddress(value)"
-	private val StructMember.autoSize: String get() = "n$name($STRUCT)".let { if ( nativeType.mapping != PrimitiveMapping.INT ) "(int)$it" else it }
+	private val StructMember.autoSize: String get() = "n$name($STRUCT)"
+		.let {
+			val type = this.nativeType as IntegerType
+			if ( !type.unsigned )
+				it
+			else {
+				val mapping = type.mapping as PrimitiveMapping
+				when ( mapping.bytes ) {
+					1 -> "Byte.toUnsignedInt($it)"
+					2 -> "Short.toUnsignedInt($it)"
+					else -> it
+				}
+			}
+		}
+		.let {
+			val factor = this[AutoSizeMember].factor
+			if (factor != null)
+				"($it ${factor.expression()})"
+			else
+				it
+		}
+		.let { if (4 < (nativeType.mapping as PrimitiveMapping).bytes && !it.startsWith('(') ) "(int)$it" else it }
 
 	private fun PrintWriter.setRemaining(m: StructMember) {
 		// do not do this if the AutoSize parameter auto-sizes multiple members
 		val capacity = members.firstOrNull { it has AutoSizeMember && it[AutoSizeMember].let { it.atLeastOne || (it.dependent.isEmpty() && it.reference == m.name) } }
 		if ( capacity != null ) {
 			val autoSize = capacity[AutoSizeMember]
+			val autoSizeExpression = "value.remaining()"
+				.let {
+					if (autoSize.factor != null)
+						"($it ${autoSize.factor.expressionInv()})"
+					else
+						it
+				}
+				.let { if ((capacity.nativeType.mapping as PrimitiveMapping).bytes < 4) "(${capacity.nativeType.mapping.javaMethodType})$it" else it }
+
 			print(if ( m has nullable || autoSize.optional ) {
 				if ( autoSize.atLeastOne )
-					" if ( value != null ) n${capacity.name}($STRUCT, value.remaining());"
+					" if ( value != null ) n${capacity.name}($STRUCT, $autoSizeExpression);"
 				else if ( m has nullable && !autoSize.optional )
-					" if ( value != null ) n${capacity.name}($STRUCT, value.remaining());"
+					" if ( value != null ) n${capacity.name}($STRUCT, $autoSizeExpression);"
 				else
-					" n${capacity.name}($STRUCT, value == null ? 0 : value.remaining());"
+					" n${capacity.name}($STRUCT, value == null ? 0 : $autoSizeExpression);"
 			} else
-				" n${capacity.name}($STRUCT, value.remaining());"
+				" n${capacity.name}($STRUCT, $autoSizeExpression);"
 			)
 		}
 	}

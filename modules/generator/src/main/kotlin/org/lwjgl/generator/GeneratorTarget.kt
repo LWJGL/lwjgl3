@@ -180,6 +180,8 @@ abstract class GeneratorTarget(
 		return this
 	}
 
+	infix fun Int.x(other: Int) = this * other
+
 	protected fun PrintWriter.generateJavaPreamble() {
 		print(HEADER)
 		println("package $packageName;\n")

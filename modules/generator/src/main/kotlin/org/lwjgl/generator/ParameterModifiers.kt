@@ -37,6 +37,12 @@ class AutoSizeFactor(
     val operatorInv: String,
     val expression: String
 ) {
+	companion object {
+		fun div(expression: String) = AutoSizeFactor("/", "*", expression)
+		fun shl(expression: String) = AutoSizeFactor("<<", ">>", expression)
+		fun shr(expression: String) = AutoSizeFactor(">>", "<<", expression)
+	}
+
 	fun expression() = "$operator $expression"
 	fun expressionInv() = "$operatorInv $expression"
 }
@@ -53,13 +59,13 @@ fun AutoSize(div: Int, reference: String, vararg dependent: String, applyTo: App
 		AutoSizeDiv(div.toString(), reference, dependent = *dependent, applyTo = applyTo)
 
 fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
-	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor("/", "*", expression))
+	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor.div(expression))
 
 fun AutoSizeShr(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
-	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor(">>", "<<", expression))
+	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor.shr(expression))
 
 fun AutoSizeShl(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
-	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor("<<", ">>", expression))
+	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor.shl(expression))
 
 class AutoSize(
 	override val reference: String,

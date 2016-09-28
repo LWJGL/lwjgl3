@@ -51,18 +51,28 @@ class AutoSizeMember(
 			throw IllegalArgumentException("Members with the AutoSizeMember modifier must be integer primitive types.")
 	}
 }
-fun Struct.AutoSize(
-	reference: String,
-	vararg dependent: String,
-	factor: AutoSizeFactor? = null,
-	optional: Boolean = false,
-	atLeastOne: Boolean = false
-) = AutoSizeMember(
-	reference, *dependent,
-	factor = factor,
-	optional = optional,
-	atLeastOne = atLeastOne
-)
+
+fun Struct.AutoSize(reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+	AutoSizeMember(reference, *dependent, factor = null, optional = optional, atLeastOne = atLeastOne)
+
+fun Struct.AutoSize(div: Int, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+	if (div < 1)
+		throw IllegalArgumentException()
+	else if (div == 1)
+		AutoSize(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+	else if (Integer.bitCount(div) == 1)
+		AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+	else
+		AutoSizeDiv(div.toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+
+fun Struct.AutoSizeDiv(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+	AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.div(expression), optional = optional, atLeastOne = atLeastOne)
+
+fun Struct.AutoSizeShr(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+	AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shr(expression), optional = optional, atLeastOne = atLeastOne)
+
+fun Struct.AutoSizeShl(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+	AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shl(expression), optional = optional, atLeastOne = atLeastOne)
 
 object NullableMember : StructMemberModifier() {
 	override val isSpecial = true

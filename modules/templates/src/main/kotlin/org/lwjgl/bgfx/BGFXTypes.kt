@@ -87,7 +87,7 @@ val bgfx_transform_t = struct_p(BGFX_PACKAGE, "BGFXTransform", nativeName = "bgf
 	documentation = "Transform data."
 
 	float_p.member("data", "pointer to first matrix")
-	uint16_t.member("num", "number of matrices")
+	AutoSizeShl("4", "data")..uint16_t.member("num", "number of matrices")
 }
 
 val bgfx_hmd_eye_t = struct(BGFX_PACKAGE, "BGFXHmdEye", nativeName = "bgfx_hmd_eye_t", mutable = false) {
