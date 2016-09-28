@@ -1058,57 +1058,6 @@ class NativeClassFunction(
 					}
 				} else if ( returns.isVoid )
 					throw IllegalStateException()
-			} else if ( it has MultiType ) {
-				// Generate MultiType alternatives
-
-				// Add the AutoSize transformation if we skipped it above
-				getParams { it has AutoSize }.forEach {
-					val autoSize = it[AutoSize]
-					transforms[it] = AutoSizeTransform(paramMap[autoSize.reference]!!, autoSize.applyTo)
-				}
-
-				var multiTypes = it[MultiType].types.asSequence()
-				if ( it has optional )
-					multiTypes = sequenceOf(PointerMapping.DATA_BYTE) + multiTypes
-
-				for (autoType in multiTypes) {
-					// Transform the AutoSize parameter, if there is one
-					getReferenceParam(AutoSize, it.name).let { autoSizeParam ->
-						if ( autoSizeParam != null )
-							transforms[autoSizeParam] = AutoSizeTransform(it, ApplyTo.ALTERNATIVE, autoType.byteShift!!)
-					}
-
-					transforms[it] = AutoTypeTargetTransform(autoType)
-					generateAlternativeMethod(name, transforms, "${autoType.javaMethodType.simpleName} version of:")
-				}
-
-				getReferenceParam(AutoSize, it.name).let {
-					if ( it != null )
-						transforms.remove(it)
-				}
-
-				// Generate a SingleValue alternative for each type
-				if ( it has SingleValue ) {
-					val autoSizeParam = getParam(hasAutoSizePredicate(it)) // required
-
-					val singleValue = it[SingleValue]
-					for (autoType in multiTypes) {
-						// Generate type1, type2, type3, type4 versions
-						// TODO: Make customizable? New modifier?
-						for (i in 1..4) {
-							// Transform the AutoSize parameter
-							transforms[autoSizeParam] = ExpressionTransform("(1 << ${autoType.byteShift}) * $i")
-
-							val primitiveType = autoType.box.toLowerCase()
-							transforms[it] = VectorValueTransform(autoType, primitiveType, singleValue.newName, i)
-							generateAlternativeMethod("$name$i${primitiveType[0]}", transforms)
-						}
-					}
-
-					transforms.remove(autoSizeParam)
-				}
-
-				transforms.remove(it)
 			} else if ( it has AutoType ) {
 				// Generate AutoType alternatives
 
@@ -1130,6 +1079,73 @@ class NativeClassFunction(
 				}
 
 				transforms.remove(bufferParam)
+				transforms.remove(it)
+			}
+		}
+
+		// Apply any MultiType transformations.
+		parameters.filter { it has MultiType }.let {
+			if (it.isEmpty())
+				return@let
+
+			if (it.groupBy { Arrays.hashCode(it[MultiType].types) }.size != 1)
+				throw IllegalStateException("All MultiType modifiers in a function must have the same structure.")
+
+			// Add the AutoSize transformation if we skipped it above
+			getParams { it has AutoSize }.forEach {
+				val autoSize = it[AutoSize]
+				transforms[it] = AutoSizeTransform(paramMap[autoSize.reference]!!, autoSize.applyTo)
+			}
+
+			var multiTypes = it.first()[MultiType].types.asSequence()
+			if (it.any { it has optional })
+				multiTypes = sequenceOf(PointerMapping.DATA_BYTE) + multiTypes
+
+			for (autoType in multiTypes) {
+				it.forEach {
+					// Transform the AutoSize parameter, if there is one
+					getReferenceParam(AutoSize, it.name).let { autoSizeParam ->
+						if (autoSizeParam != null)
+							transforms[autoSizeParam] = AutoSizeTransform(it, ApplyTo.ALTERNATIVE, autoType.byteShift!!)
+					}
+
+					transforms[it] = AutoTypeTargetTransform(autoType)
+				}
+				generateAlternativeMethod(name, transforms, "${autoType.javaMethodType.simpleName} version of:")
+			}
+
+			val singleValueParams = it.filter { it has SingleValue }
+			if ( singleValueParams.any() ) {
+				// Generate a SingleValue alternative for each type
+				for (autoType in multiTypes) {
+					val primitiveType = autoType.box.toLowerCase()
+
+					// Generate type1, type2, type3, type4 versions
+					// TODO: Make customizable? New modifier?
+					for (i in 1..4) {
+						singleValueParams.forEach {
+							// Transform the AutoSize parameter
+							val autoSizeParam = getParam(hasAutoSizePredicate(it)) // required
+							transforms[autoSizeParam] = ExpressionTransform("(1 << ${autoType.byteShift}) * $i")
+
+							val singleValue = it[SingleValue]
+							transforms[it] = VectorValueTransform(autoType, primitiveType, singleValue.newName, i)
+						}
+						generateAlternativeMethod("$name$i${primitiveType[0]}", transforms)
+					}
+				}
+
+				singleValueParams.forEach {
+					transforms.remove(getParam(hasAutoSizePredicate(it)))
+				}
+			}
+
+			it.forEach {
+				getReferenceParam(AutoSize, it.name).let {
+					if (it != null)
+						transforms.remove(it)
+				}
+
 				transforms.remove(it)
 			}
 		}
