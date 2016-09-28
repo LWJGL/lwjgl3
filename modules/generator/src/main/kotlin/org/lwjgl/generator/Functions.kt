@@ -733,7 +733,8 @@ class NativeClassFunction(
 
 		// Generate checks
 		printCode(code.javaInit, ApplyTo.NORMAL)
-		generateChecks(NORMAL)
+		if ( Binding.CHECKS )
+			generateChecks(NORMAL)
 
 		// Prepare stack parameters
 
@@ -1317,7 +1318,8 @@ class NativeClassFunction(
 		// Generate checks
 
 		printCode(code.javaInit, ApplyTo.ALTERNATIVE)
-		generateChecks(ALTERNATIVE, transforms)
+		if ( Binding.CHECKS )
+			generateChecks(ALTERNATIVE, transforms)
 
 		// Prepare stack parameters
 

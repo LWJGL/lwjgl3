@@ -54,6 +54,10 @@ enum class Binding(val key: String, val packageName: String) {
 	VULKAN("binding.vulkan", "org.lwjgl.vulkan"),
 	XXHASH("binding.xxhash", "org.lwjgl.util.xxhash");
 
+	companion object {
+		val CHECKS = !System.getProperty("binding.DISABLE_CHECKS", "false").toBoolean()
+	}
+
 	val enabled: Boolean
 		get() = System.getProperty(key, "false").toBoolean()
 }
