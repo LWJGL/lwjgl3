@@ -9,10 +9,12 @@ import java.lang.Math.max
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.nio.ByteBuffer
-import java.nio.file.Files
+import java.nio.file.*
+import java.nio.file.attribute.FileTime
 import java.util.*
 import java.util.concurrent.*
 import java.util.concurrent.atomic.AtomicInteger
+import java.util.function.BiPredicate
 
 /*
 	A template will be generated in the following cases:
@@ -69,7 +71,7 @@ fun main(args: Array<String>) {
 		throw IllegalArgumentException("The code Generator requires 2 paths as arguments: a) the template source path and b) the generation target path")
 
 	val validateDirectory = { name: String, path: String ->
-		if ( !File(path).isDirectory )
+		if ( !Files.isDirectory(Paths.get(path)) )
 			throw IllegalArgumentException("Invalid $name path: $path")
 	}
 
@@ -308,8 +310,10 @@ public final class $className implements Runnable {
 		}
 	}
 
-	// TODO: add more, e.g. kotlinc
-	private val GENERATOR_LAST_MODIFIED = getDirectoryLastModified("modules/generator/src/main/kotlin", true)
+	private val GENERATOR_LAST_MODIFIED = sequenceOf(
+		Paths.get("modules/generator/src/main/kotlin").lastModified(),
+		Paths.get("config/build-bindings.xml").lastModified
+	).fold(0L, ::max)
 
 	private fun methodFilter(method: Method, javaClass: Class<*>) =
 		// static
@@ -320,33 +324,30 @@ public final class $className implements Runnable {
 		method.parameterTypes.size == 0
 
 	private fun apply(packagePath: String, packageName: String, consume: Sequence<Method>.() -> Unit) {
-		val packageDirectory = File(packagePath)
-		if ( !packageDirectory.isDirectory )
-			return
+		val packageDirectory = Paths.get(packagePath)
+		if ( !Files.isDirectory(packageDirectory) )
+			throw IllegalStateException()
 
-		val classFiles = packageDirectory.listFiles { it ->
-			it.isFile && it.extension == "kt"
-		}!!
-
-		Arrays.sort(classFiles)
-
-		classFiles.forEach {
-			try {
-				Class
-					.forName("$packageName.${it.nameWithoutExtension.upperCaseFirst}Kt")
-					.methods
-					.asSequence()
-					.consume()
-			} catch (e: ClassNotFoundException) {
-				// ignore
+		Files.list(packageDirectory)
+			.filter { KOTLIN_PATH_MATCHER.matches(it) }
+			.sorted(Comparator.naturalOrder())
+			.forEach {
+				try {
+					Class
+						.forName("$packageName.${it.fileName.toString().substringBeforeLast('.').upperCaseFirst}Kt")
+						.methods
+						.asSequence()
+						.consume()
+				} catch (e: ClassNotFoundException) {
+					// ignore
+				}
 			}
-		}
 	}
 
 	internal fun generate(packageName: String, binding: Binding? = null) {
 		val packagePath = "$srcPath/${packageName.replace('.', '/')}"
 
-		val packageLastModified = getDirectoryLastModified(packagePath, false)
+		val packageLastModified = Paths.get(packagePath).lastModified(maxDepth = 1)
 		packageLastModifiedMap[packageName] = packageLastModified
 
 		if ( binding?.enabled == false )
@@ -415,10 +416,10 @@ public final class $className implements Runnable {
 	private fun generate(nativeClass: NativeClass, packageLastModified: Long) {
 		val packagePath = nativeClass.packageName.replace('.', '/')
 
-		val outputJava = File("$trgPath/java/$packagePath/${nativeClass.className}.java")
+		val outputJava = Paths.get("$trgPath/java/$packagePath/${nativeClass.className}.java")
 
 		val lmt = max(nativeClass.getLastModified("$srcPath/$packagePath/templates"), packageLastModified)
-		if ( lmt < outputJava.lastModified() ) {
+		if ( lmt < outputJava.lastModified ) {
 			//println("SKIPPED: ${nativeClass.packageName}.${nativeClass.className}")
 			return
 		}
@@ -452,14 +453,14 @@ public final class $className implements Runnable {
 	internal fun generate(target: GeneratorTarget) {
 		val packagePath = target.packageName.replace('.', '/')
 
-		val outputJava = File("$trgPath/java/$packagePath/${target.className}.java")
+		val outputJava = Paths.get("$trgPath/java/$packagePath/${target.className}.java")
 
 		val lmt = if ( target.sourceFile == null ) null else max(
 			target.getLastModified("$srcPath/$packagePath"),
 			max(packageLastModifiedMap[target.packageName]!!, GENERATOR_LAST_MODIFIED)
 		)
 
-		if ( lmt != null && lmt < outputJava.lastModified() ) {
+		if ( lmt != null && lmt < outputJava.lastModified ) {
 			//println("SKIPPED: ${target.packageName}.${target.className}")
 			return
 		}
@@ -479,12 +480,12 @@ public final class $className implements Runnable {
 		}
 	}
 
-	private fun generateNative(target: GeneratorTargetNative, generate: (File) -> Unit) {
+	private fun generateNative(target: GeneratorTargetNative, generate: (Path) -> Unit) {
 		var subPackagePath = target.packageName.substring("org.lwjgl.".length).replace('.', '/')
 		if ( !target.nativeSubPath.isEmpty() )
 			subPackagePath = "$subPackagePath/${target.nativeSubPath}"
 
-		generate(File("$trgPath/c/$subPackagePath/${target.nativeFileName}.c"))
+		generate(Paths.get("$trgPath/c/$subPackagePath/${target.nativeFileName}.c"))
 	}
 
 }
@@ -493,50 +494,47 @@ public final class $className implements Runnable {
 
 private val packageLastModifiedMap: MutableMap<String, Long> = ConcurrentHashMap()
 
-internal fun getDirectoryLastModified(path: String, recursive: Boolean = false) = getDirectoryLastModified(File(path), recursive)
-private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
-	if ( !pck.exists() || !pck.isDirectory )
-		return 0
+internal val Path.lastModified: Long get() = if ( Files.isRegularFile(this) )
+	Files.getLastModifiedTime(this).toMillis()
+else
+	0L
 
-	val classes = pck.listFiles { it ->
-		(it.isDirectory && recursive) || (it.isFile && it.name.endsWith(".kt"))
-	}
+private val KOTLIN_PATH_MATCHER = FileSystems.getDefault().getPathMatcher("glob:**/*.kt")
 
-	if ( classes == null || classes.size == 0 )
-		return 0
+internal fun Path.lastModified(
+	maxDepth: Int = Int.MAX_VALUE,
+	glob: String? = null,
+	matcher: PathMatcher = if ( glob == null ) KOTLIN_PATH_MATCHER else FileSystems.getDefault().getPathMatcher("glob:$glob")
+): Long {
+	if ( !Files.isDirectory(this) )
+		throw IllegalStateException()
 
-	return classes.map {
-		if ( it.isDirectory )
-			getDirectoryLastModified(it, true)
-		else
-			it.lastModified()
-	}.fold(0.toLong(), ::max)
+	return Files
+		.find(this, maxDepth, BiPredicate { path, attribs -> matcher.matches(path) })
+		.mapToLong { it.lastModified }
+		.reduce(0L, Math::max)
 }
 
-private fun ensurePath(path: File) {
-	val parent = path.parentFile ?: throw IllegalArgumentException("The given path has no parent directory.")
+private fun ensurePath(path: Path) {
+	val parent = path.parent ?: throw IllegalArgumentException("The given path has no parent directory.")
 
-	if ( !parent.exists() ) {
-		ensurePath(parent)
+	if ( !Files.isDirectory(parent) ) {
 		println("\tMKDIR: $parent")
-		parent.mkdir()
+		Files.createDirectories(parent)
 	}
 }
 
-private fun readFile(file: File): ByteBuffer {
-	val channel = FileInputStream(file).channel
-	val bytesTotal = channel.size().toInt()
+private fun readFile(file: Path) = Files.newByteChannel(file).use {
+	val bytesTotal = it.size().toInt()
 	val buffer = ByteBuffer.allocateDirect(bytesTotal)
 
 	var bytesRead = 0
 	do {
-		bytesRead += channel.read(buffer)
+		bytesRead += it.read(buffer)
 	} while ( bytesRead < bytesTotal )
 
 	buffer.flip()
-	channel.close()
-
-	return buffer
+	buffer
 }
 
 private class LWJGLWriter(out: Writer) : PrintWriter(out) {
@@ -545,7 +543,7 @@ private class LWJGLWriter(out: Writer) : PrintWriter(out) {
 
 private fun <T> generateOutput(
 	target: T,
-	file: File,
+	file: Path,
 	/** If not null, the file timestamp will be updated if no change occured since last generation. */
 	lmt: Long? = null,
 	generate: T.(PrintWriter) -> Unit
@@ -554,12 +552,12 @@ private fun <T> generateOutput(
 
 	ensurePath(file)
 
-	if ( file.exists() ) {
+	if ( Files.isRegularFile(file) ) {
 		// Generate in-memory
 		val baos = ByteArrayOutputStream(4 * 1024)
-		val writer = LWJGLWriter(OutputStreamWriter(baos, Charsets.UTF_8))
-		target.generate(writer)
-		writer.close()
+		LWJGLWriter(OutputStreamWriter(baos, Charsets.UTF_8)).use {
+			target.generate(it)
+		}
 
 		// Compare the existing file content with the generated content.
 		val before = readFile(file)
@@ -580,24 +578,17 @@ private fun <T> generateOutput(
 		if ( somethingChanged(before, after) ) {
 			println("\tUPDATING: $file")
 			// Overwrite
-			val bos = BufferedOutputStream(FileOutputStream(file))
-			bos.write(after)
-			bos.close()
+			Files.newOutputStream(file).use {
+				it.write(after)
+			}
 		} else if ( lmt != null ) {
 			// Update the file timestamp
-			file.setLastModified(lmt + 1)
+			Files.setLastModifiedTime(file, FileTime.fromMillis(lmt + 1))
 		}
 	} else {
 		println("\tWRITING: $file")
-		// Generate to file
-		val writer = LWJGLWriter(Files.newBufferedWriter(file.toPath(), Charsets.UTF_8))
-		try {
-			target.generate(writer)
-		} catch(e: Exception) {
-			file.deleteOnExit()
-			throw e
-		} finally {
-			writer.close()
+		LWJGLWriter(Files.newBufferedWriter(file, Charsets.UTF_8)).use {
+			target.generate(it)
 		}
 	}
 }

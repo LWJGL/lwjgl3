@@ -6,6 +6,7 @@ package org.lwjgl.generator
 
 import java.io.PrintWriter
 import java.lang.Math.*
+import java.nio.file.Paths
 import java.util.*
 import java.util.regex.Pattern
 
@@ -49,12 +50,10 @@ abstract class APIBinding(
 		_classes.add(clazz)
 	}
 
-	override fun getLastModified(root: String): Long {
-		return max(
-			super.getLastModified(root),
-			getDirectoryLastModified("$root/templates")
-		)
-	}
+	override fun getLastModified(root: String): Long = max(
+		super.getLastModified(root),
+		Paths.get(root, "templates").lastModified()
+	)
 
 	/** If true, function pointers for this binding are retrieved from custom "capabilities" instances. */
 	open val hasCapabilities: Boolean = false

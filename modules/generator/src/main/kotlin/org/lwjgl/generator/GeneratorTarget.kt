@@ -4,8 +4,9 @@
  */
 package org.lwjgl.generator
 
-import java.io.File
 import java.io.PrintWriter
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.*
 import java.util.regex.Pattern
 
@@ -148,10 +149,10 @@ abstract class GeneratorTarget(
 	}
 
 	internal val sourceFile = if ( packageName == "org.lwjgl.system" ) null else getSourceFileName()
-	internal open fun getLastModified(root: String): Long = File("$root/$sourceFile").let {
-		if ( it.exists() ) it else
+	internal open fun getLastModified(root: String): Long = Paths.get(root, sourceFile).let {
+		if ( Files.isRegularFile(it) ) it else
 			throw IllegalStateException("The source file for template $packageName.$className does not exist ($it).")
-	}.lastModified()
+	}.lastModified
 
 	var access = Access.PUBLIC
 		set(access) {
