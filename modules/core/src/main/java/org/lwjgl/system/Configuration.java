@@ -6,12 +6,8 @@ package org.lwjgl.system;
 
 import org.lwjgl.system.MemoryUtil.MemoryAllocator;
 
-import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.util.function.Consumer;
+import java.io.File;
+import java.io.PrintStream;
 import java.util.function.Supplier;
 
 /**
@@ -162,8 +158,7 @@ public class Configuration<T> {
 	 * {@link Supplier Supplier&lt;PrintStream&gt;} interface. The class will be instantiated using reflection and the result of {@link Supplier#get get} will
 	 * become the {@link #DEBUG_STREAM} used by LWJGL.
 	 *
-	 * <p>When set programmatically, it can also be a {@link PrintStream} instance. The {@link #setDebugStreamConsumer} can be used to forward debug messages
-	 * to any consumer.</p>
+	 * <p>When set programmatically, it can also be a {@link PrintStream} instance.</p>
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.DebugStream</b><br>
@@ -407,85 +402,6 @@ public class Configuration<T> {
 			state = defaultValue;
 
 		return state;
-	}
-
-	/**
-	 * Configures the {@link #DEBUG_STREAM} to forward all messages to the specified consumer.
-	 *
-	 * @param consumer the debug message consumer
-	 */
-	public static void setDebugStreamConsumer(Consumer<String> consumer) {
-		setDebugStreamConsumer(consumer, Charset.forName("UTF-8"));
-	}
-
-	/**
-	 * Configures the {@link #DEBUG_STREAM} to forward all messages to the specified consumer.
-	 *
-	 * @param consumer the debug message consumer
-	 * @param charset  the message charset
-	 */
-	public static void setDebugStreamConsumer(Consumer<String> consumer, Charset charset) {
-		ByteArrayOutputStream buffer = new ByteArrayOutputStream(128) {
-
-			private final CharsetDecoder decoder = charset.newDecoder();
-
-			private byte[] tmp;
-			private ByteBuffer in;
-			private CharBuffer out;
-
-			@Override
-			public void flush() throws IOException {
-				if ( buf != tmp ) {
-					tmp = buf;
-
-					out = CharBuffer.allocate(tmp.length);
-					in = ByteBuffer.wrap(tmp);
-				} else {
-					out.clear();
-					in.position(0);
-				}
-
-				in.limit(count);
-
-				decoder.reset();
-				decoder.decode(in, out, true);
-
-				out.flip();
-				consumer.accept(out.toString());
-
-				this.reset();
-			}
-		};
-
-		DEBUG_STREAM.set(
-			// The default implementation flushes unconditionally.
-			// We flush on a newline only.
-			// TODO: search the entire string?
-			System.getProperty("line.separator").length() == 2 ?
-				// \r\n
-				new PrintStream(buffer, false) {
-					@Override
-					public void write(byte[] b, int off, int len) {
-						int last = off + len - 1;
-						if ( b[last] == '\n' ) {
-							buffer.write(b, off, len - (off < last && b[last - 1] == '\r' ? 2 : 1));
-							flush();
-						} else
-							buffer.write(b, off, len);
-					}
-				} :
-				// \n
-				new PrintStream(buffer, false) {
-					@Override
-					public void write(byte[] b, int off, int len) {
-						if ( b[off + len - 1] == '\n' ) {
-							buffer.write(b, off, len - 1);
-							flush();
-						} else
-							buffer.write(b, off, len);
-					}
-				}
-		);
 	}
 
 }
