@@ -265,7 +265,7 @@ N=\#comp     components
 		"Returns a brief reason for failure."
 	)
 
-	void(
+	OffHeapOnly..void(
 		"image_free",
 		"Frees a loaded image",
 

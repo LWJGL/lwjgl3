@@ -2761,14 +2761,7 @@ kernel void image_filter (
 		// optional generates clSetKernelArg(long kernel, int arg_index, long arg_size)
 		// MultiType generates clSetKernalArg(long kernel, int arg_index, <type>Buffer arg_value)
 		// SingleValue generates clSetKernelArg<xp>(long kernel, int arg_index, <p> arg<x-1>, ...), where x = 1..4
-		optional..MultiType(
-			PointerMapping.DATA_SHORT,
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG,
-			PointerMapping.DATA_FLOAT,
-			PointerMapping.DATA_DOUBLE,
-			PointerMapping.DATA_POINTER
-		)..SingleValue("arg")..const..void_p.IN(
+		optional..MultiTypeAll..SingleValue("arg")..const..void_p.IN(
 			"arg_value",
 			"""
 			a pointer to data that should be used as the argument value for argument specified by {@code arg_index}. The argument data pointed to by

@@ -142,7 +142,12 @@ class NativeName(name: String) : FunctionModifier() {
 	override val isSpecial = false
 }
 
-/** Marks reused functions */
+/** Marks reused functions. */
 object Reuse : FunctionModifier() {
+	override val isSpecial = false
+}
+
+/** Disables creation of Java array overloads. */
+object OffHeapOnly: FunctionModifier() {
 	override val isSpecial = false
 }

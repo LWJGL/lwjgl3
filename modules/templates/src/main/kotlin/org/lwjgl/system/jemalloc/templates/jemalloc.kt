@@ -90,18 +90,11 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
-	void(
+	OffHeapOnly..void(
 		"free",
 		"Causes the allocated memory referenced by {@code ptr} to be made available for future allocations. If {@code ptr} is $NULL, no action occurs.",
 
-		MultiType(
-			PointerMapping.DATA_SHORT,
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG,
-			PointerMapping.DATA_FLOAT,
-			PointerMapping.DATA_DOUBLE,
-			PointerMapping.DATA_POINTER
-		)..nullable..void_p.IN("ptr", "the allocated memory to free")
+		MultiTypeAll..nullable..void_p.IN("ptr", "the allocated memory to free")
 	)
 
 	// Non-standard API
@@ -154,33 +147,19 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		flags
 	)
 
-	void(
+	OffHeapOnly..void(
 		"dallocx",
 		"Causes the memory referenced by {@code ptr} to be made available for future allocations.",
 
-		MultiType(
-			PointerMapping.DATA_SHORT,
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG,
-			PointerMapping.DATA_FLOAT,
-			PointerMapping.DATA_DOUBLE,
-			PointerMapping.DATA_POINTER
-		)..void_p.IN("ptr", "the allocated memory to deallocate"),
+		MultiTypeAll..void_p.IN("ptr", "the allocated memory to deallocate"),
 		flags
 	)
 
-	void(
+	OffHeapOnly..void(
 		"sdallocx",
 		"Sized version of #dallocx(). The primary optimization over {@code dallocx()} is the removal of a metadata read, which often suffers an L1 cache miss.",
 
-		MultiType(
-			PointerMapping.DATA_SHORT,
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG,
-			PointerMapping.DATA_FLOAT,
-			PointerMapping.DATA_DOUBLE,
-			PointerMapping.DATA_POINTER
-		)..void_p.IN("ptr", "the allocated memory to deallocate"),
+		MultiTypeAll..void_p.IN("ptr", "the allocated memory to deallocate"),
 		AutoSize("ptr")..size_t.IN("size", "the number of bytes in {@code ptr}"),
 		flags
 	)

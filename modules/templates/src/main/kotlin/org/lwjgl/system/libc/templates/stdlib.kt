@@ -66,21 +66,14 @@ val stdlib = "Stdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		AutoSizeResult..size_t.IN("size", "the new memory block size, in bytes")
 	)
 
-	void(
+	OffHeapOnly..void(
 		"free",
 		"""
 		Frees the memory space pointed to by {@code ptr}, which must have been returned by a previous call to #malloc(), #calloc(), or #realloc(). Otherwise,
 		or if {@code free(ptr)} has already been called before, undefined behavior occurs. If ptr is $NULL, no operation is performed.
 		""",
 
-		MultiType(
-			PointerMapping.DATA_SHORT,
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG,
-			PointerMapping.DATA_FLOAT,
-			PointerMapping.DATA_DOUBLE,
-			PointerMapping.DATA_POINTER
-		)..nullable..void_p.IN("ptr", "the memory space to free")
+		MultiTypeAll..nullable..void_p.IN("ptr", "the memory space to free")
 	)
 
 	void_p(
@@ -94,17 +87,10 @@ val stdlib = "Stdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate. Must be a multiple of {@code alignment}.")
 	)
 
-	void(
+	OffHeapOnly..void(
 		"aligned_free",
 		"Frees a block of memory that was allocated with #aligned_alloc(). If ptr is $NULL, no operation is performed.",
 
-		MultiType(
-			PointerMapping.DATA_SHORT,
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG,
-			PointerMapping.DATA_FLOAT,
-			PointerMapping.DATA_DOUBLE,
-			PointerMapping.DATA_POINTER
-		)..nullable..void_p.IN("ptr", "the aligned block of memory to free")
+		MultiTypeAll..nullable..void_p.IN("ptr", "the aligned block of memory to free")
 	)
 }

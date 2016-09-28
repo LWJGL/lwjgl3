@@ -261,6 +261,14 @@ class MultiType(vararg val types: PointerMapping) : ParameterModifier() {
 	}
 
 }
+val MultiTypeAll = MultiType(
+	PointerMapping.DATA_SHORT,
+	PointerMapping.DATA_INT,
+	PointerMapping.DATA_LONG,
+	PointerMapping.DATA_FLOAT,
+	PointerMapping.DATA_DOUBLE,
+	PointerMapping.DATA_POINTER
+)
 
 /** Marks a pointer parameter to become the return value of an alternative method. */
 class Return(
