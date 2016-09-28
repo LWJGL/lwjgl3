@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md)
 ![Size](https://reposs.herokuapp.com/?path=lwjgl/lwjgl3)
 [![Build Status](https://travis-ci.org/LWJGL-CI/lwjgl3.svg?branch=master-linux64)](https://travis-ci.org/LWJGL-CI/lwjgl3)
-[![Slack Status](https://www.lwjgl.org/slack/badge.svg)](https://www.lwjgl.org/slack)
+[![Slack Status](https://slack.lwjgl.org/badge.svg)](https://slack.lwjgl.org/)
 
 ## LWJGL - Lightweight Java Game Library 3
 
