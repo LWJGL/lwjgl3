@@ -55,7 +55,7 @@ val EXT_client_extensions = EXT_FLAG.nativeClassEGL("EXT_client_extensions", pos
 val KHR_client_get_all_proc_addresses = EXT_FLAG.nativeClassEGL("KHR_client_get_all_proc_addresses", postfix = KHR) {
 	documentation =
 		"""
-		When true, the ${registryLink("EXT", "EGL_KHR_get_all_proc_addresses")} extension is supported.
+		When true, the ${registryLink("KHR", "EGL_KHR_get_all_proc_addresses")} extension is supported.
 
 		eglGetProcAddress is currently defined to not support the querying of non-extension EGL or client API functions. Non-extension functions are expected
 		to be exposed as library symbols that can be resolved statically at link time, or dynamically at run time using OS-specific runtime linking mechanisms.
