@@ -14,6 +14,7 @@ import org.lwjgl.system.Platform;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.bgfx.BGFX.*;
+import static org.lwjgl.bgfx.BGFXPlatform.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -29,7 +30,6 @@ public final class HelloBGFX {
 
 	@SuppressWarnings("UnnecessaryLocalVariable")
 	public static void main(String[] args) {
-
 		int renderer = BGFX_RENDERER_TYPE_COUNT;
 		int pciId = BGFX_PCI_ID_NONE;
 		int width = 1280;

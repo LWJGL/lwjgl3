@@ -10,7 +10,7 @@ import org.lwjgl.generator.*
 val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
 	documentation =
 		"""
-		Native bindings to the <a href="https://github.com/bkaradzic/bgfx">bgfx</a> library.
+		Native bindings to the C API of the <a href="https://github.com/bkaradzic/bgfx">bgfx</a> library.
 		"""
 
 	IntConstant(
@@ -19,7 +19,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"API_VERSION".."22"
 	)
 
-	LongConstant(
+	val StateFlags = LongConstant(
 		"State",
 
 		"STATE_RGB_WRITE"..0x0000000000000001L,
@@ -35,8 +35,6 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"STATE_DEPTH_TEST_NEVER"..0x0000000000000070L,
 		"STATE_DEPTH_TEST_ALWAYS"..0x0000000000000080L,
 
-		"STATE_DEPTH_TEST_MASK"..0x00000000000000f0L,
-
 		"STATE_BLEND_ZERO"..0x0000000000001000L,
 		"STATE_BLEND_ONE"..0x0000000000002000L,
 		"STATE_BLEND_SRC_COLOR"..0x0000000000003000L,
@@ -50,40 +48,29 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"STATE_BLEND_SRC_ALPHA_SAT"..0x000000000000b000L,
 		"STATE_BLEND_FACTOR"..0x000000000000c000L,
 		"STATE_BLEND_INV_FACTOR"..0x000000000000d000L,
-		"STATE_BLEND_MASK"..0x000000000ffff000L,
 
 		"STATE_BLEND_EQUATION_ADD"..0x0000000000000000L,
 		"STATE_BLEND_EQUATION_SUB"..0x0000000010000000L,
 		"STATE_BLEND_EQUATION_REVSUB"..0x0000000020000000L,
 		"STATE_BLEND_EQUATION_MIN"..0x0000000030000000L,
 		"STATE_BLEND_EQUATION_MAX"..0x0000000040000000L,
-		"STATE_BLEND_EQUATION_MASK"..0x00000003f0000000L,
 
 		"STATE_BLEND_INDEPENDENT"..0x0000000400000000L,
 		"STATE_BLEND_ALPHA_TO_COVERAGE"..0x0000000800000000L,
 
 		"STATE_CULL_CW"..0x0000001000000000L,
 		"STATE_CULL_CCW"..0x0000002000000000L,
-		"STATE_CULL_MASK"..0x0000003000000000L,
-
-		"STATE_ALPHA_REF_MASK"..0x0000ff0000000000L,
 
 		"STATE_PT_TRISTRIP"..0x0001000000000000L,
 		"STATE_PT_LINES"..0x0002000000000000L,
 		"STATE_PT_LINESTRIP"..0x0003000000000000L,
 		"STATE_PT_POINTS"..0x0004000000000000L,
-		"STATE_PT_MASK"..0x0007000000000000L,
-
-		"STATE_POINT_SIZE_MASK"..0x00f0000000000000L,
 
 		"STATE_MSAA"..0x0100000000000000L,
 		"STATE_LINEAA"..0x0200000000000000L,
 		"STATE_CONSERVATIVE_RASTER"..0x0400000000000000L,
 
-		"STATE_RESERVED_MASK".."0xe000000000000000L",
-
 		"STATE_NONE"..0x0000000000000000L,
-		"STATE_MASK".."0xffffffffffffffffL",
 
 		"STATE_DEFAULT".."""(0L
 		| BGFX_STATE_RGB_WRITE
@@ -93,6 +80,20 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		| BGFX_STATE_CULL_CW
 		| BGFX_STATE_MSAA)
 		"""
+	).javaDocLinks
+
+	LongConstant(
+		"State",
+
+		"STATE_DEPTH_TEST_MASK"..0x00000000000000f0L,
+		"STATE_BLEND_MASK"..0x000000000ffff000L,
+		"STATE_BLEND_EQUATION_MASK"..0x00000003f0000000L,
+		"STATE_CULL_MASK"..0x0000003000000000L,
+		"STATE_ALPHA_REF_MASK"..0x0000ff0000000000L,
+		"STATE_PT_MASK"..0x0007000000000000L,
+		"STATE_POINT_SIZE_MASK"..0x00f0000000000000L,
+		"STATE_RESERVED_MASK".."0xe000000000000000L",
+		"STATE_MASK".."0xffffffffffffffffL"
 	)
 
 	IntConstant(
@@ -108,14 +109,9 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"STATE_RESERVED_SHIFT".."61"
 	)
 
-	IntConstant(
+	val StencilFlags = IntConstant(
 		"Stencil",
 		
-		"STENCIL_FUNC_REF_SHIFT".."0",
-		"STENCIL_FUNC_REF_MASK"..0x000000ff,
-		"STENCIL_FUNC_RMASK_SHIFT".."8",
-		"STENCIL_FUNC_RMASK_MASK"..0x0000ff00,
-
 		"STENCIL_TEST_LESS"..0x00010000,
 		"STENCIL_TEST_LEQUAL"..0x00020000,
 		"STENCIL_TEST_EQUAL"..0x00030000,
@@ -124,8 +120,6 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"STENCIL_TEST_NOTEQUAL"..0x00060000,
 		"STENCIL_TEST_NEVER"..0x00070000,
 		"STENCIL_TEST_ALWAYS"..0x00080000,
-		"STENCIL_TEST_SHIFT".."16",
-		"STENCIL_TEST_MASK"..0x000f0000,
 
 		"STENCIL_OP_FAIL_S_ZERO"..0x00000000,
 		"STENCIL_OP_FAIL_S_KEEP"..0x00100000,
@@ -135,8 +129,6 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"STENCIL_OP_FAIL_S_DECR"..0x00500000,
 		"STENCIL_OP_FAIL_S_DECRSAT"..0x00600000,
 		"STENCIL_OP_FAIL_S_INVERT"..0x00700000,
-		"STENCIL_OP_FAIL_S_SHIFT".."20",
-		"STENCIL_OP_FAIL_S_MASK"..0x00f00000,
 	
 		"STENCIL_OP_FAIL_Z_ZERO"..0x00000000,
 		"STENCIL_OP_FAIL_Z_KEEP"..0x01000000,
@@ -146,8 +138,6 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"STENCIL_OP_FAIL_Z_DECR"..0x05000000,
 		"STENCIL_OP_FAIL_Z_DECRSAT"..0x06000000,
 		"STENCIL_OP_FAIL_Z_INVERT"..0x07000000,
-		"STENCIL_OP_FAIL_Z_SHIFT".."24",
-		"STENCIL_OP_FAIL_Z_MASK"..0x0f000000,
 	
 		"STENCIL_OP_PASS_Z_ZERO"..0x00000000,
 		"STENCIL_OP_PASS_Z_KEEP"..0x10000000,
@@ -157,15 +147,36 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"STENCIL_OP_PASS_Z_DECR"..0x50000000,
 		"STENCIL_OP_PASS_Z_DECRSAT"..0x60000000,
 		"STENCIL_OP_PASS_Z_INVERT"..0x70000000,
-		"STENCIL_OP_PASS_Z_SHIFT".."28",
-		"STENCIL_OP_PASS_Z_MASK".."0xf0000000",
 	
 		"STENCIL_NONE"..0x00000000,
-		"STENCIL_MASK".."0xffffffff",
 		"STENCIL_DEFAULT"..0x00000000
+	).javaDocLinks
+
+	IntConstant(
+		"Stencil",
+
+		"STENCIL_FUNC_REF_SHIFT".."0",
+		"STENCIL_FUNC_REF_MASK"..0x000000ff,
+		"STENCIL_FUNC_RMASK_SHIFT".."8",
+		"STENCIL_FUNC_RMASK_MASK"..0x0000ff00,
+
+		"STENCIL_TEST_SHIFT".."16",
+		"STENCIL_TEST_MASK"..0x000f0000,
+
+		"STENCIL_OP_FAIL_S_SHIFT".."20",
+		"STENCIL_OP_FAIL_S_MASK"..0x00f00000,
+
+		"STENCIL_OP_FAIL_Z_SHIFT".."24",
+		"STENCIL_OP_FAIL_Z_MASK"..0x0f000000,
+
+		"STENCIL_OP_PASS_Z_SHIFT".."28",
+		"STENCIL_OP_PASS_Z_MASK".."0xf0000000",
+
+		"STENCIL_MASK".."0xffffffff"
 	)
 
-	ShortConstant(
+
+	val ClearFlags = ShortConstant(
 		"Clear",
 
 		"CLEAR_NONE"..0x0000.s,
@@ -199,7 +210,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		| BGFX_CLEAR_DISCARD_DEPTH
 		| BGFX_CLEAR_DISCARD_STENCIL)
 		"""
-	)
+	).javaDocLinks
 
 	val DebugFlags = IntConstant(
 		"Debug",
@@ -428,20 +439,25 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"CAPS_FORMAT_TEXTURE_MIP_AUTOGEN"..0x4000.s
 	)
 
-	ByteConstant(
+	val ViewFlags = ByteConstant(
 		"View",
 
 		"VIEW_NONE"..0x00.b,
 		"VIEW_STEREO"..0x01.b
-	)
+	).javaDocLinks
 
-	ByteConstant(
+	val SubmitFlags = ByteConstant(
 		"Submit",
 
 		"SUBMIT_EYE_LEFT"..0x01.b,
 		"SUBMIT_EYE_RIGHT"..0x02.b,
+		"SUBMIT_EYE_FIRST".."BGFX_SUBMIT_EYE_LEFT"
+	).javaDocLinks
+
+	ByteConstant(
+		"Submit",
+
 		"SUBMIT_EYE_MASK"..0x03.b,
-		"SUBMIT_EYE_FIRST".."BGFX_SUBMIT_EYE_LEFT",
 
 		"SUBMIT_RESERVED_SHIFT".."7",
 		"SUBMIT_RESERVED_MASK".."(byte)0x80"
@@ -465,7 +481,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"HMD_RENDERING"..0x02.b
 	)
 
-	ByteConstant(
+	val CubeMapSides = ByteConstant(
 		"Cubemap",
 
 		"CUBE_MAP_POSITIVE_X"..0x00.b,
@@ -474,7 +490,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"CUBE_MAP_NEGATIVE_Y"..0x03.b,
 		"CUBE_MAP_POSITIVE_Z"..0x04.b,
 		"CUBE_MAP_NEGATIVE_Z"..0x05.b
-	)
+	).javaDocLinks
 
 	val RendererType = EnumConstant(
 		"Renderer type. ({@code bgfx_renderer_type_t})",
@@ -690,7 +706,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"TOPOLOGY_SORT_COUNT".enum
 	).javaDocLinksSkipCount
 
-	/*val Fatal =*/ EnumConstant(
+	EnumConstant(
 		"bgfx_fatal_t",
 
 		"FATAL_DEBUG_CHECK".enum,
@@ -701,13 +717,13 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"FATAL_DEVICE_LOST".enum,
 
 		"FATAL_COUNT".enum
-	).javaDocLinksSkipCount
+	)
 
 	void(
 		"vertex_decl_begin",
 		"Start a vertex declaration.",
 
-		bgfx_vertex_decl_t.IN("_decl", "the vertex declaration"),
+		bgfx_vertex_decl_t_p.IN("_decl", "the vertex declaration"),
 		bgfx_renderer_type_t.IN("_renderer", "the renderer type", RendererType)
 	)
 
@@ -719,7 +735,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		Must be called between #vertex_decl_begin()/#vertex_decl_end().
 		""",
 
-		bgfx_vertex_decl_t.IN("_decl", "the vertex declaration"),
+		bgfx_vertex_decl_t_p.IN("_decl", "the vertex declaration"),
 		bgfx_attrib_t.IN("_attrib", "attribute semantics", Attrib),
 		MapToInt..uint8_t.IN("_num", "number of elements", "1 2 3 4"),
 		bgfx_attrib_type_t.IN("_type", "element type", AttribType),
@@ -743,7 +759,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"vertex_decl_skip",
 		"Skips {@code _num} bytes in vertex stream.",
 
-		bgfx_vertex_decl_t.IN("_decl", "the vertex declaration"),
+		bgfx_vertex_decl_t_p.IN("_decl", "the vertex declaration"),
 		MapToInt..uint8_t.IN("_num", "the number of bytes to skip")
 	)
 
@@ -751,7 +767,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"vertex_decl_end",
 		"Ends a vertex declaration.",
 
-		bgfx_vertex_decl_t.IN("_decl", "the vertex declaration")
+		bgfx_vertex_decl_t_p.IN("_decl", "the vertex declaration")
 	)
 
 	void(
@@ -761,7 +777,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		Check(4)..const..float_p.IN("_input", ""),
 		bool.IN("_inputNormalized", ""),
 		bgfx_attrib_t.IN("_attr", "", Attrib),
-		const..bgfx_vertex_decl_t.IN("_decl", ""),
+		const..bgfx_vertex_decl_t_p.IN("_decl", ""),
 		void_p.IN("_data", ""),
 		uint32_t.IN("_index", "")
 	)
@@ -772,7 +788,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 		Check(4)..float_p.OUT("_output", ""),
 		bgfx_attrib_t.IN("_attr", "", Attrib),
-		const..bgfx_vertex_decl_t.IN("_decl", ""),
+		const..bgfx_vertex_decl_t_p.IN("_decl", ""),
 		const..void_p.IN("_data", ""),
 		uint32_t.IN("_index", "")
 	)
@@ -781,9 +797,9 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"vertex_convert",
 		"Converts vertex stream data from one vertex stream format to another.",
 
-		const..bgfx_vertex_decl_t.IN("_destDecl", "destination vertex stream declaration"),
+		const..bgfx_vertex_decl_t_p.IN("_destDecl", "destination vertex stream declaration"),
 		void_p.IN("_destData", "destination vertex stream"),
-		const..bgfx_vertex_decl_t.IN("_srcDecl", "source vertex stream declaration"),
+		const..bgfx_vertex_decl_t_p.IN("_srcDecl", "source vertex stream declaration"),
 		const..void_p.IN("_srcData", "source vertex stream data"),
 		uint32_t.IN("_num", "number of vertices to convert from source to destination")
 	)
@@ -793,9 +809,9 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Welds vertices.",
 
 		uint16_t.p.OUT("_output", "welded vertices remapping table. The size of buffer be the same as number of vertices."),
-		const..bgfx_vertex_decl_t.IN("_decl", "vertex stream declaration"),
+		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex stream declaration"),
 		const..void_p.IN("_data", "vertex stream"),
-		AutoSize("_output")..MapToInt..uint16_t.IN("_num", "number of vertices in vertex stream"),
+		AutoSize("_output")..uint16_t.IN("_num", "number of vertices in vertex stream"),
 		float.IN("_epsilon", "error tolerance for vertex position comparison"),
 
 		returnDoc = "number of unique vertices after vertex welding"
@@ -806,7 +822,10 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Converts index buffer for use with different primitive topologies.",
 
 		bgfx_topology_convert_t.IN("_conversion", "conversion type", TopologyConvert),
-		nullable..void_p.IN("_dst", "destination index buffer. If this argument it $NULL function will return number of indices after conversion"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT
+		)..nullable..void_p.IN("_dst", "destination index buffer. If this argument it $NULL function will return number of indices after conversion"),
 		AutoSize("_dst")..uint32_t.IN(
 			"_dstSize",
 			"""
@@ -829,7 +848,10 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Sorts indices.",
 
 		bgfx_topology_sort_t.IN("_sort", "sort order", TopologySort),
-		void_p.IN("_dst", "destination index buffer"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT
+		)..void_p.IN("_dst", "destination index buffer"),
 		AutoSize("_dst")..uint32_t.IN(
 			"_dstSize",
 			"""
@@ -858,8 +880,12 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		uint32_t.IN("_width", "width of input image (pixels)"),
 		uint32_t.IN("_height", "height of input image (pixels)"),
 		uint32_t.IN("_pitch", "pitch of input image (bytes)"),
-		Check("bytes")..const..void_p.IN("_src", "source image"),
-		Check("bytes")..void_p.IN("_dst", "destination image. Must be the same size as input image. {@code _dst} might be pointer to the same memory as {@code _src}.")
+		MultiType(
+			PointerMapping.DATA_INT
+		)..Check("bytes")..const..void_p.IN("_src", "source image"),
+		MultiType(
+			PointerMapping.DATA_INT
+		)..Check("bytes")..void_p.IN("_dst", "destination image. Must be the same size as input image. {@code _dst} might be pointer to the same memory as {@code _src}.")
 	)
 
 	Code(
@@ -871,8 +897,12 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		uint32_t.IN("_width", "width of input image (pixels)"),
 		uint32_t.IN("_height", "height of input image (pixels)"),
 		uint32_t.IN("_pitch", "pitch of input image (bytes)"),
-		Check("bytes")..const..void_p.IN("_src", "source image"),
-		Check("bytes >> 2")..void_p.IN("_dst", "destination image. Must be at least quarter size of input image. {@code _dst} might be pointer to the same memory as {@code _src}.")
+		MultiType(
+			PointerMapping.DATA_INT
+		)..Check("bytes")..const..void_p.IN("_src", "source image"),
+		MultiType(
+			PointerMapping.DATA_INT
+		)..Check("bytes >> 2")..void_p.IN("_dst", "destination image. Must be at least quarter size of input image. {@code _dst} might be pointer to the same memory as {@code _src}.")
 	)
 
 	uint8_t(
@@ -898,8 +928,8 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		bgfx_renderer_type_t.IN("_type", "select rendering backend. When set to #RENDERER_TYPE_COUNT, default rendering backend will be selected.", RendererType),
 		MapToInt..uint16_t.IN("_vendorId", "vendor PCI id. If set to #PCI_ID_NONE it will select the first device."),
 		MapToInt..uint16_t.IN("_deviceId", "device id. If set to 0 it will select first device, or device with matching id."),
-		nullable..bgfx_callback_interface_t.IN("_callback", "provide application specific callback interface"),
-		nullable..bgfx_allocator_interface_t.IN("_allocator", "custom allocator. When custom allocator is not specified, library uses default CRT allocator. The library assumes custom allocator is thread safe."),
+		nullable..bgfx_callback_interface_t_p.IN("_callback", "provide application specific callback interface"),
+		nullable..bgfx_allocator_interface_t_p.IN("_allocator", "custom allocator. When custom allocator is not specified, library uses default CRT allocator. The library assumes custom allocator is thread safe."),
 
 		returnDoc = "`true` if initialization was successful"
 	)
@@ -943,37 +973,37 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Returns current renderer backend API type."
 	)
 
-	(const..bgfx_caps_t)(
+	(const..bgfx_caps_t_p)(
 		"get_caps",
 		"Returns renderer capabilities."
 	)
 
-	(const..bgfx_hmd_t)(
+	(const..bgfx_hmd_t_p)(
 		"get_hmd",
 		"Returns HMD info."
 	)
 
-	(const..bgfx_stats_t)(
+	(const..bgfx_stats_t_p)(
 		"get_stats",
 		"Returns performance counters."
 	)
 
-	(const..bgfx_memory_t)(
+	(const..bgfx_memory_t_p)(
 		"alloc",
 		"Allocates buffer to pass to bgfx calls. Data will be freed inside bgfx.",
 
 		uint32_t.IN("_size", "the number of bytes to allocate")
 	)
 
-	(const..bgfx_memory_t)(
+	(const..bgfx_memory_t_p)(
 		"copy",
 		"Allocates buffer and copies data into it. Data will be freed inside bgfx.",
 
-		const..void_p.IN("_data", "the source data"),
+		MultiTypeAll..const..void_p.IN("_data", "the source data"),
 		AutoSize("_data")..uint32_t.IN("_size", "the number of bytes to copy")
 	)
 
-	(const..bgfx_memory_t)(
+	OffHeapOnly..(const..bgfx_memory_t_p)(
 		"make_ref",
 		"""
 		Makes reference to data to pass to bgfx. Unlike #alloc() this call doesn't allocate memory for data. It just copies pointer to data.
@@ -981,20 +1011,20 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		You must make sure data is available for at least 2 #frame() calls.
 		""",
 
-		const..void_p.IN("_data", "the data to reference"),
+		MultiTypeAll..const..void_p.IN("_data", "the data to reference"),
 		AutoSize("_data")..uint32_t.IN("_size", "the number of bytes to reference")
 	)
 
-	(const..bgfx_memory_t)(
+	OffHeapOnly..(const..bgfx_memory_t_p)(
 		"make_ref_release",
 		"""
 		Makes reference to data to pass to bgfx. Unlike #alloc() this call doesn't allocate memory for data. It just copies pointer to data.
 		
 		The {@code bgfx_release_fn_t} function pointer will release this memory after it's consumed. The {@code bgfx_release_fn_t} function must be able to be
-		called called from any thread.
+		called from any thread.
 		""",
 
-		const..void_p.IN("_data", "the data to reference"),
+		MultiTypeAll..const..void_p.IN("_data", "the data to reference"),
 		AutoSize("_data")..uint32_t.IN("_size", "the number of bytes to reference"),
 		nullable..bgfx_release_fn_t.IN("_releaseFn", "the release function"),
 		nullable..voidptr.IN("_userData", "user data to pass to {@code _releaseFn}")
@@ -1028,7 +1058,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 			"_attr",
 			"color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette."
 		),
-		const..charUTF8_p.IN("_format", "`printf` style format")
+		const..charASCII_p.IN("_format", "`printf` style format")
 	)
 
 	void(
@@ -1041,7 +1071,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 			"_attr",
 			"color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette."
 		),
-		const..charUTF8_p.IN("_format", "`printf` style format"),
+		const..charASCII_p.IN("_format", "`printf` style format"),
 		va_list.IN("_argList", "additional arguments for format string")
 	)
 
@@ -1061,8 +1091,8 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"create_index_buffer",
 		"Creates static index buffer.",
 
-		const..bgfx_memory_t.IN("_mem", "index buffer data"),
-		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags)
+		const..bgfx_memory_t_p.IN("_mem", "index buffer data"),
+		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags, LinkMode.BITFIELD)
 	)
 
 	void(
@@ -1076,9 +1106,9 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"create_vertex_buffer",
 		"Creates static vertex buffer.",
 
-		const..bgfx_memory_t.IN("_mem", "vertex buffer data"),
-		const..bgfx_vertex_decl_t.IN("_decl", "vertex declaration"),
-		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags)
+		const..bgfx_memory_t_p.IN("_mem", "vertex buffer data"),
+		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex declaration"),
+		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags, LinkMode.BITFIELD)
 	)
 
 	void(
@@ -1093,15 +1123,15 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Creates empty dynamic index buffer.",
 
 		uint32_t.IN("_num", "number of indices"),
-		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags)
+		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags, LinkMode.BITFIELD)
 	)
 
 	bgfx_dynamic_index_buffer_handle_t(
 		"create_dynamic_index_buffer_mem",
 		"Creates dynamic index buffer and initializes it.",
 
-		const..bgfx_memory_t.IN("_mem", "index buffer data"),
-		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags)
+		const..bgfx_memory_t_p.IN("_mem", "index buffer data"),
+		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags, LinkMode.BITFIELD)
 	)
 
 	void(
@@ -1110,7 +1140,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 		bgfx_dynamic_index_buffer_handle_t.IN("_handle", "dynamic index buffer handle"),
 		uint32_t.IN("_startIndex", "start index"),
-		const..bgfx_memory_t.IN("_mem", "index buffer data")
+		const..bgfx_memory_t_p.IN("_mem", "index buffer data")
 	)
 
 	void(
@@ -1125,17 +1155,17 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Creates empty dynamic vertex buffer.",
 
 		uint32_t.IN("_num", "number of vertices"),
-		const..bgfx_vertex_decl_t.IN("_decl", "vertex declaration"),
-		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags)
+		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex declaration"),
+		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags, LinkMode.BITFIELD)
 	)
 
 	bgfx_dynamic_vertex_buffer_handle_t(
 		"create_dynamic_vertex_buffer_mem",
 		"Creates dynamic vertex buffer and initializes it.",
 
-		const..bgfx_memory_t.IN("_mem", "vertex buffer data"),
-		const..bgfx_vertex_decl_t.IN("_decl", "vertex declaration"),
-		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags)
+		const..bgfx_memory_t_p.IN("_mem", "vertex buffer data"),
+		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex declaration"),
+		MapToInt..uint16_t.IN("_flags", "buffer creation flags", BufferFlags, LinkMode.BITFIELD)
 	)
 
 	void(
@@ -1144,7 +1174,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 		bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer handle"),
 		uint32_t.IN("_startVertex", "start vertex"),
-		const..bgfx_memory_t.IN("_mem", "vertex buffer data")
+		const..bgfx_memory_t_p.IN("_mem", "vertex buffer data")
 	)
 
 	void(
@@ -1166,7 +1196,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Returns true if internal transient vertex buffer has enough space.",
 
 		uint32_t.IN("_num", "number of vertices"),
-		const..bgfx_vertex_decl_t.IN("_decl", "vertex declaration")
+		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex declaration")
 	)
 
 	bool(
@@ -1182,7 +1212,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Returns true if both internal transient index and vertex buffer have enough space.",
 
 		uint32_t.IN("_numVertices", "number of vertices"),
-		const..bgfx_vertex_decl_t.IN("_decl", "vertex declaration"),
+		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex declaration"),
 		uint32_t.IN("_numIndices", "number of indices")
 	)
 
@@ -1196,7 +1226,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		Only 16-bit index buffer is supported.
 		""",
 
-		bgfx_transient_index_buffer_t.OUT(
+		bgfx_transient_index_buffer_t_p.OUT(
 			"_tib",
 			"##BGFXTransientIndexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
 		),
@@ -1207,12 +1237,12 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"alloc_transient_vertex_buffer",
 		"Allocates transient vertex buffer.",
 
-		bgfx_transient_vertex_buffer_t.OUT(
+		bgfx_transient_vertex_buffer_t_p.OUT(
 			"_tvb",
 			"##BGFXTransientVertexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
 		),
 		uint32_t.IN("_num", "number of vertices to allocate"),
-		const..bgfx_vertex_decl_t.IN("_decl", "vertex declaration")
+		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex declaration")
 	)
 
 	bool(
@@ -1223,20 +1253,20 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		Only 16-bit index buffer is supported.
 		""",
 
-		bgfx_transient_vertex_buffer_t.OUT(
+		bgfx_transient_vertex_buffer_t_p.OUT(
 			"_tvb",
 			"##BGFXTransientVertexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
 		),
-		const..bgfx_vertex_decl_t.IN("_decl", "vertex declaration"),
+		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex declaration"),
 		uint32_t.IN("_numVertices", "number of vertices to allocate"),
-		bgfx_transient_index_buffer_t.OUT(
+		bgfx_transient_index_buffer_t_p.OUT(
 			"_tib",
 			"##BGFXTransientIndexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
 		),
 		uint32_t.IN("_numIndices", "number of indices to allocate")
 	)
 
-	(const..bgfx_instance_data_buffer_t)(
+	(const..bgfx_instance_data_buffer_t_p)(
 		"alloc_instance_data_buffer",
 		"""
 		Allocates instance data buffer.
@@ -1266,7 +1296,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"create_shader",
 		"Creates shader from memory buffer.",
 
-		const..bgfx_memory_t.IN("_mem", "")
+		const..bgfx_memory_t_p.IN("_mem", "")
 	)
 
 	uint16_t(
@@ -1321,7 +1351,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"calc_texture_size",
 		"Calculates amount of memory required for texture.",
 
-		bgfx_texture_info_t.OUT("_info", "resulting texture info structure"),
+		bgfx_texture_info_t_p.OUT("_info", "resulting texture info structure"),
 		MapToInt..uint16_t.IN("_width", "width"),
 		MapToInt..uint16_t.IN("_height", "height"),
 		MapToInt..uint16_t.IN("_depth", "depth"),
@@ -1335,10 +1365,10 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"create_texture",
 		"Creates texture from memory buffer.",
 
-		const..bgfx_memory_t.IN("_mem", "DDS, KTX or PVR texture data"),
+		const..bgfx_memory_t_p.IN("_mem", "DDS, KTX or PVR texture data"),
 		uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
 		MapToInt..uint8_t.IN("_skip", "skip top level mips when parsing texture"),
-		nullable..bgfx_texture_info_t.p.OUT("_info", "when non-$NULL is specified it returns parsed texture information")
+		nullable..bgfx_texture_info_t_p.OUT("_info", "when non-$NULL is specified it returns parsed texture information")
 	)
 
 	bgfx_texture_handle_t(
@@ -1351,7 +1381,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array. Must be 1 if caps #CAPS_TEXTURE_2D_ARRAY flag is not set."),
 		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
 		uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
-		const..bgfx_memory_t.IN(
+		const..bgfx_memory_t_p.IN(
 			"_mem",
 			"""
 			texture data. If {@code _mem} is non-$NULL, created texture will be immutable. When {@code _numLayers} is more than 1, expected memory layout is
@@ -1373,761 +1403,874 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 	bgfx_texture_handle_t(
 		"create_texture_3d",
-		"""
-		""",
+		"Creates 3D texture.",
 
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", ""),
-		MapToInt..uint16_t.IN("_depth", ""),
-		bool.IN("_hasMips", ""),
-		bgfx_texture_format_t.IN("_format", "", TextureFormat),
-		uint32_t.IN("_flags", ""),
-		const..bgfx_memory_t.IN("_mem", "")
+		MapToInt..uint16_t.IN("_width", "width"),
+		MapToInt..uint16_t.IN("_height", "height"),
+		MapToInt..uint16_t.IN("_depth", "depth"),
+		bool.IN("_hasMips", "indicates that texture contains full mip-map chain"),
+		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
+		uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
+		const..bgfx_memory_t_p.IN("_mem", "texture data. If {@code_mem} is non-$NULL, created texture will be immutable.")
 	)
 
 	bgfx_texture_handle_t(
 		"create_texture_cube",
-		"""
-		""",
+		"Creates Cube texture.",
 
-		MapToInt..uint16_t.IN("_size", ""),
-		bool.IN("_hasMips", ""),
-		MapToInt..uint16_t.IN("_numLayers", ""),
+		MapToInt..uint16_t.IN("_size", "cube side size"),
+		bool.IN("_hasMips", "indicates that texture contains full mip-map chain"),
+		MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array. Must be 1 if caps #CAPS_TEXTURE_CUBE_ARRAY flag is not set."),
 		bgfx_texture_format_t.IN("_format", "", TextureFormat),
-		uint32_t.IN("_flags", ""),
-		const..bgfx_memory_t.IN("_mem", "")
+		uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
+		const..bgfx_memory_t_p.IN(
+			"_mem",
+			"""
+			texture data. If {@code _mem} is non-$NULL, created texture will be immutable. When {@code _numLayers} is more than 1, expected memory layout is
+			cubemap texture and all mips together for each array element.
+			"""
+		)
 	)
 
 	void(
 		"update_texture_2d",
-		"""
-		""",
+		"Updates 2D texture.",
 
-		bgfx_texture_handle_t.IN("_handle", ""),
-		MapToInt..uint16_t.IN("_layer", ""),
-		MapToInt..uint8_t.IN("_mip", ""),
-		MapToInt..uint16_t.IN("_x", ""),
-		MapToInt..uint16_t.IN("_y", ""),
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", ""),
-		const..bgfx_memory_t.IN("_mem", ""),
-		MapToInt..uint16_t.IN("_pitch", "")
+		bgfx_texture_handle_t.IN("_handle", "texture handle"),
+		MapToInt..uint16_t.IN("_layer", "layers in texture array"),
+		MapToInt..uint8_t.IN("_mip", "mip level"),
+		MapToInt..uint16_t.IN("_x", "x offset in texture"),
+		MapToInt..uint16_t.IN("_y", "y offset in texture"),
+		MapToInt..uint16_t.IN("_width", "width of texture block"),
+		MapToInt..uint16_t.IN("_height", "height of texture block"),
+		const..bgfx_memory_t_p.IN("_mem", "texture update data"),
+		MapToInt..uint16_t.IN(
+			"_pitch",
+			"pitch of input image (bytes). When {@code _pitch} is set to {@code UINT16_MAX}, it will be calculated internally based on {@code _width}."
+		)
 	)
 
 	void(
 		"update_texture_3d",
-		"""
-		""",
+		"Updates 3D texture.",
 
-		bgfx_texture_handle_t.IN("_handle", ""),
-		MapToInt..uint8_t.IN("_mip", ""),
-		MapToInt..uint16_t.IN("_x", ""),
-		MapToInt..uint16_t.IN("_y", ""),
-		MapToInt..uint16_t.IN("_z", ""),
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", ""),
-		MapToInt..uint16_t.IN("_depth", ""),
-		const..bgfx_memory_t.IN("_mem", "")
+		bgfx_texture_handle_t.IN("_handle", "texture handle"),
+		MapToInt..uint8_t.IN("_mip", "mip level"),
+		MapToInt..uint16_t.IN("_x", "x offset in texture"),
+		MapToInt..uint16_t.IN("_y", "y offset in texture"),
+		MapToInt..uint16_t.IN("_z", "z offset in texture"),
+		MapToInt..uint16_t.IN("_width", "width of texture block"),
+		MapToInt..uint16_t.IN("_height", "height of texture block"),
+		MapToInt..uint16_t.IN("_depth", "depth of texture block"),
+		const..bgfx_memory_t_p.IN("_mem", "texture update data")
 	)
 
 	void(
 		"update_texture_cube",
 		"""
+		Updates Cube texture.
+
+		Cubemap sides: 0 is +X, 1 is -X, 2 is +Y, 3 is -Y, 4 is +Z, and 5 is -Z.
+		${codeBlock("""
+           +----------+
+           |-z       2|
+           | ^  +y    |
+           | |        |
+           | +---->+x |
++----------+----------+----------+----------+
+|+y       1|+y       4|+y       0|+y       5|
+| ^  -x    | ^  +z    | ^  +x    | ^  -z    |
+| |        | |        | |        | |        |
+| +---->+z | +---->+x | +---->-z | +---->-x |
++----------+----------+----------+----------+
+           |+z       3|
+           | ^  -y    |
+           | |        |
+           | +---->+x |
+           +----------+""")}
 		""",
 
-		bgfx_texture_handle_t.IN("_handle", ""),
-		MapToInt..uint16_t.IN("_layer", ""),
-		MapToInt..uint8_t.IN("_side", ""),
-		MapToInt..uint8_t.IN("_mip", ""),
-		MapToInt..uint16_t.IN("_x", ""),
-		MapToInt..uint16_t.IN("_y", ""),
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", ""),
-		const..bgfx_memory_t.IN("_mem", ""),
-		MapToInt..uint16_t.IN("_pitch", "")
+		bgfx_texture_handle_t.IN("_handle", "texture handle"),
+		MapToInt..uint16_t.IN("_layer", "layers in texture array"),
+		MapToInt..uint8_t.IN("_side", "cubemap side", CubeMapSides),
+		MapToInt..uint8_t.IN("_mip", "mip level"),
+		MapToInt..uint16_t.IN("_x", "x offset in texture"),
+		MapToInt..uint16_t.IN("_y", "y offset in texture"),
+		MapToInt..uint16_t.IN("_width", "width of texture block"),
+		MapToInt..uint16_t.IN("_height", "height of texture block"),
+		const..bgfx_memory_t_p.IN("_mem", "texture update data"),
+		MapToInt..uint16_t.IN(
+			"_pitch",
+			"pitch of input image (bytes). When {@code _pitch} is set to {@code UINT16_MAX}, it will be calculated internally based on {@code _width}."
+		)
 	)
 
 	uint32_t(
 		"read_texture",
 		"""
+		Reads back texture content.
+
+		Texture must be created with #TEXTURE_READ_BACK flag. Availability depends on #CAPS_TEXTURE_READ_BACK.
 		""",
 
-		bgfx_texture_handle_t.IN("_handle", ""),
-		void_p.IN("_data", "")
+		bgfx_texture_handle_t.IN("_handle", "texture handle"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT
+		)..void_p.IN("_data", "destination buffer"),
+
+		returnDoc = "frame number when the result will be available"
 	)
 
 	uint32_t(
 		"read_frame_buffer",
 		"""
+		Reads back texture content.
+
+		Texture must be created with #TEXTURE_READ_BACK flag. Availability depends on #CAPS_TEXTURE_READ_BACK.
 		""",
 
-		bgfx_frame_buffer_handle_t.IN("_handle", ""),
-		MapToInt..uint8_t.IN("_attachment", ""),
-		void_p.IN("_data", "")
+		bgfx_frame_buffer_handle_t.IN("_handle", "frame buffer handle"),
+		MapToInt..uint8_t.IN("_attachment", "frame buffer attachment index"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT
+		)..void_p.IN("_data", "destination buffer"),
+
+		returnDoc = "frame number when the result will be available"
 	)
 
 	void(
 		"destroy_texture",
-		"""
-		""",
+		"Destroys texture.",
 
-		bgfx_texture_handle_t.IN("_handle", "")
+		bgfx_texture_handle_t.IN("_handle", "texture handle")
 	)
 
 	bgfx_frame_buffer_handle_t(
 		"create_frame_buffer",
-		"""
-		""",
+		"Creates frame buffer (simple).",
 
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", ""),
-		bgfx_texture_format_t.IN("_format", "", TextureFormat),
-		uint32_t.IN("_textureFlags", "")
+		MapToInt..uint16_t.IN("_width", "texture width"),
+		MapToInt..uint16_t.IN("_height", "texture height"),
+		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
+		uint32_t.IN("_textureFlags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags),
+
+		returnDoc = "handle to frame buffer object"
 	)
 
 	bgfx_frame_buffer_handle_t(
 		"create_frame_buffer_scaled",
-		"""
-		""",
+		"Creates frame buffer with size based on backbuffer ratio. Frame buffer will maintain ratio if back buffer resolution changes.",
 
-		bgfx_backbuffer_ratio_t.IN("_ratio", "", BackbufferRatio),
-		bgfx_texture_format_t.IN("_format", "", TextureFormat),
-		uint32_t.IN("_textureFlags", "")
+		bgfx_backbuffer_ratio_t.IN("_ratio", "frame buffer size in respect to back-buffer size", BackbufferRatio),
+		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
+		uint32_t.IN("_textureFlags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags),
+
+		returnDoc = "handle to frame buffer object"
 	)
 
 	bgfx_frame_buffer_handle_t(
 		"create_frame_buffer_from_handles",
-		"""
-		""",
+		"Creates frame buffer.",
 
-		MapToInt..uint8_t.IN("_num", ""),
-		Check("_num")..const..bgfx_texture_handle_t.p.IN("_handles", ""),
-		bool.IN("_destroyTextures", "")
+		AutoSize("_handles")..uint8_t.IN("_num", "number of texture attachments"),
+		const..bgfx_texture_handle_t.p.IN("_handles", "texture attachments"),
+		bool.IN("_destroyTextures", "if true, textures will be destroyed when frame buffer is destroyed"),
+
+		returnDoc = "handle to frame buffer object"
 	)
 
 	bgfx_frame_buffer_handle_t(
 		"create_frame_buffer_from_attachment",
-		"""
-		""",
+		"Creates frame buffer.",
 
-		MapToInt..uint8_t.IN("_num", ""),
-		const..bgfx_attachment_t.IN("_attachment", ""),
-		bool.IN("_destroyTextures", "")
+		AutoSize("_attachment")..uint8_t.IN("_num", "number of texture attachments"),
+		const..bgfx_attachment_t_p.p.IN("_attachment", "attachment texture info"),
+		bool.IN("_destroyTextures", "if true, textures will be destroyed when frame buffer is destroyed"),
+
+		returnDoc = "handle to frame buffer object"
 	)
 
 	bgfx_frame_buffer_handle_t(
 		"create_frame_buffer_from_nwh",
 		"""
+		Creates frame buffer for multiple window rendering.
+
+		Frame buffer cannot be used for sampling.
 		""",
 
-		void_p.IN("_nwh", ""),
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", ""),
-		bgfx_texture_format_t.IN("_depthFormat", "", TextureFormat)
+		voidptr.IN("_nwh", "OS' target native window handle"),
+		MapToInt..uint16_t.IN("_width", "window back buffer width"),
+		MapToInt..uint16_t.IN("_height", "window back buffer height"),
+		bgfx_texture_format_t.IN("_depthFormat", "window back buffer depth format", TextureFormat),
+
+		returnDoc = "handle to frame buffer object"
 	)
 
 	void(
 		"destroy_frame_buffer",
-		"""
-		""",
+		"Destroys frame buffer.",
 
-		bgfx_frame_buffer_handle_t.IN("_handle", "")
+		bgfx_frame_buffer_handle_t.IN("_handle", "the frame buffer to destroy")
 	)
 
 	bgfx_uniform_handle_t(
 		"create_uniform",
 		"""
+		Creates shader uniform parameter.
+
+		Predefined uniforms (declared in `bgfx_shader.sh`):
+		${ul(
+			"{@code u_viewRect vec4(x, y, width, height)} - view rectangle for current view.",
+			"{@code u_viewTexel vec4(1.0/width, 1.0/height, undef, undef)} - inverse width and height",
+			"{@code u_view mat4} - view matrix",
+			"{@code u_invView mat4} - inverted view matrix",
+			"{@code u_proj mat4} - projection matrix",
+			"{@code u_invProj mat4} - inverted projection matrix",
+			"{@code u_viewProj mat4} - concatenated view projection matrix",
+			"{@code u_invViewProj mat4} - concatenated inverted view projection matrix",
+			"{@code u_model mat4[BGFX_CONFIG_MAX_BONES]} - array of model matrices.",
+			"{@code u_modelView mat4} - concatenated model view matrix, only first model matrix from array is used.",
+			"{@code u_modelViewProj mat4} - concatenated model view projection matrix.",
+			"{@code u_alphaRef float} - alpha reference value for alpha test."
+		)}
 		""",
 
-		const..charUTF8_p.IN("_name", ""),
-		bgfx_uniform_type_t.IN("_type", "", UniformType),
-		MapToInt..uint16_t.IN("_num", "")
+		const..charASCII_p.IN("_name", "uniform name in shader"),
+		bgfx_uniform_type_t.IN("_type", "type of uniform", UniformType),
+		MapToInt..uint16_t.IN("_num", "number of elements in array"),
+
+		returnDoc = "handle to uniform object"
 	)
 
 	void(
 		"destroy_uniform",
-		"""
-		""",
+		"Destroys shader uniform parameter.",
 
-		bgfx_uniform_handle_t.IN("_handle", "")
+		bgfx_uniform_handle_t.IN("_handle", "handle to uniform object")
 	)
 
 	bgfx_occlusion_query_handle_t(
 		"create_occlusion_query",
-		"""
-		"""
+		"Creates occlusion query.",
+
+		returnDoc = "handle to occlusion query object"
 	)
 
 	bgfx_occlusion_query_result_t(
 		"get_result",
-		"""
-		""",
+		"Retrieves occlusion query result from previous frame.",
 
-		bgfx_occlusion_query_handle_t.IN("_handle", "")
+		bgfx_occlusion_query_handle_t.IN("_handle", "handle to occlusion query object"),
+
+		returnDoc = "occlusion query result"
 	)
 
 	void(
 		"destroy_occlusion_query",
-		"""
-		""",
+		"Destroys occlusion query.",
 
-		bgfx_occlusion_query_handle_t.IN("_handle", "")
+		bgfx_occlusion_query_handle_t.IN("_handle", "handle to occlusion query object")
 	)
 
 	void(
 		"set_palette_color",
-		"""
-		""",
+		"Sets palette color value.",
 
-		MapToInt..uint8_t.IN("_index", ""),
-		Check(4)..const..float_p.IN("_rgba", "")
+		MapToInt..uint8_t.IN("_index", "index into palette"),
+		Check(4)..const..float_p.IN("_rgba", "packed 32-bit RGBA value")
 	)
 
 	void(
 		"set_view_name",
 		"""
+		Sets view name.
+
+		This is debug only feature. In graphics debugger view name will appear as:
+		${codeBlock("""
+"nnnce <view name>"
+ ^  ^^ ^
+ |  |+-- eye (L/R)
+ |  +--- compute (C)
+ +------ view id""")}
 		""",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		const..charUTF8_p.IN("_name", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		const..charASCII_p.IN("_name", "view name")
 	)
 
 	void(
 		"set_view_rect",
-		"""
-		""",
+		"Sets view rectangle. Draw primitive outside view will be clipped.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		MapToInt..uint16_t.IN("_x", ""),
-		MapToInt..uint16_t.IN("_y", ""),
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		MapToInt..uint16_t.IN("_x", "position x from the left corner of the window"),
+		MapToInt..uint16_t.IN("_y", "position y from the top corner of the window"),
+		MapToInt..uint16_t.IN("_width", "width of view port region"),
+		MapToInt..uint16_t.IN("_height", "height of view port region")
 	)
 
 	void(
 		"set_view_rect_auto",
-		"""
-		""",
+		"Sets view rectangle. Draw primitive outside view will be clipped.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		MapToInt..uint16_t.IN("_x", ""),
-		MapToInt..uint16_t.IN("_y", ""),
-		bgfx_backbuffer_ratio_t.IN("_ratio", "", BackbufferRatio)
+		MapToInt..uint8_t.IN("_id", "view id"),
+		MapToInt..uint16_t.IN("_x", "position x from the left corner of the window"),
+		MapToInt..uint16_t.IN("_y", "position y from the top corner of the window"),
+		bgfx_backbuffer_ratio_t.IN("_ratio", "view rectangle ratio", BackbufferRatio)
 	)
 
 	void(
 		"set_view_scissor",
 		"""
+		Sets view scissor. Draw primitive outside view will be clipped. When {@code _x}, {@code _y}, {@code _width} and {@code _height} are set to 0, scissor
+		will be disabled.
 		""",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		MapToInt..uint16_t.IN("_x", ""),
-		MapToInt..uint16_t.IN("_y", ""),
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		MapToInt..uint16_t.IN("_x", "position x from the left corner of the window"),
+		MapToInt..uint16_t.IN("_y", "position y from the top corner of the window"),
+		MapToInt..uint16_t.IN("_width", "width of scissor region"),
+		MapToInt..uint16_t.IN("_height", "height of scissor region")
 	)
 
 	void(
 		"set_view_clear",
-		"""
-		""",
+		"Sets view clear flags.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		MapToInt..uint16_t.IN("_flags", ""),
-		uint32_t.IN("_rgba", ""),
-		float.IN("_depth", ""),
-		MapToInt..uint8_t.IN("_stencil", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		MapToInt..uint16_t.IN("_flags", "clear flags. Use #CLEAR_NONE to remove any clear operation.", ClearFlags, LinkMode.BITFIELD),
+		uint32_t.IN("_rgba", "color clear value"),
+		float.IN("_depth", "depth clear value"),
+		MapToInt..uint8_t.IN("_stencil", "stencil clear value")
 	)
 
 	void(
 		"set_view_clear_mrt",
-		"""
-		""",
+		"Sets view clear flags with different clear color for each frame buffer texture. Must use {@code setClearColor} to setup clear color palette.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		MapToInt..uint16_t.IN("_flags", ""),
-		float.IN("_depth", ""),
-		MapToInt..uint8_t.IN("_stencil", ""),
-		uint8_t.IN("_0", ""),
-		uint8_t.IN("_1", ""),
-		uint8_t.IN("_2", ""),
-		uint8_t.IN("_3", ""),
-		uint8_t.IN("_4", ""),
-		uint8_t.IN("_5", ""),
-		uint8_t.IN("_6", ""),
-		uint8_t.IN("_7", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		MapToInt..uint16_t.IN("_flags", "clear flags. Use #CLEAR_NONE to remove any clear operation.", ClearFlags, LinkMode.BITFIELD),
+		float.IN("_depth", "depth clear value"),
+		MapToInt..uint8_t.IN("_stencil", "stencil clear value"),
+		uint8_t.IN("_0", "palette index for frame buffer attachment 0"),
+		uint8_t.IN("_1", "palette index for frame buffer attachment 1"),
+		uint8_t.IN("_2", "palette index for frame buffer attachment 2"),
+		uint8_t.IN("_3", "palette index for frame buffer attachment 3"),
+		uint8_t.IN("_4", "palette index for frame buffer attachment 4"),
+		uint8_t.IN("_5", "palette index for frame buffer attachment 5"),
+		uint8_t.IN("_6", "palette index for frame buffer attachment 6"),
+		uint8_t.IN("_7", "palette index for frame buffer attachment 7")
 	)
 
 	void(
 		"set_view_seq",
-		"""
-		""",
+		"Sets view into sequential mode. Draw calls will be sorted in the same order in which submit calls were called.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		bool.IN("_enabled", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		bool.IN("_enabled", "if true, sequential mode is enabled")
 	)
 
 	void(
 		"set_view_frame_buffer",
 		"""
+		Sets view frame buffer.
+
+		Not persistent after #reset() call.
 		""",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		bgfx_frame_buffer_handle_t.IN("_handle", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		bgfx_frame_buffer_handle_t.IN(
+			"_handle",
+			"frame buffer handle. Passing #INVALID_HANDLE as frame buffer handle will draw primitives from this view into default back buffer."
+		)
 	)
 
 	void(
 		"set_view_transform",
-		"""
-		""",
+		"Sets view view and projection matrices, all draw primitives in this view will use these matrices.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		nullable..const..float_p.IN("_view", ""),
-		nullable..const..float_p.IN("_proj", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		MultiType(
+			PointerMapping.DATA_FLOAT
+		)..Check(4 x 4 x 4)..nullable..const..void_p.IN("_view", "view matrix"),
+		MultiType(
+			PointerMapping.DATA_FLOAT
+		)..Check(4 x 4 x 4)..nullable..const..void_p.IN("_proj", "projection matrix")
 	)
 
 	void(
 		"set_view_transform_stereo",
-		"""
-		""",
+		"Sets view view and projection matrices, all draw primitives in this view will use these matrices.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		nullable..const..float_p.IN("_view", ""),
-		nullable..const..float_p.IN("_projL", ""),
-		MapToInt..uint8_t.IN("_flags", ""),
-		nullable..const..float_p.IN("_projR", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		MultiType(
+			PointerMapping.DATA_FLOAT
+		)..Check(4 x 4 x 4)..nullable..const..void_p.IN("_view", "project matrix"),
+		MultiType(
+			PointerMapping.DATA_FLOAT
+		)..Check(4 x 4 x 4)..nullable..const..void_p.IN("_projL", "projection matrix for left eye in stereo mode"),
+		MapToInt..uint8_t.IN("_flags", "view flags", ViewFlags),
+		MultiType(
+			PointerMapping.DATA_FLOAT
+		)..Check(4 x 4 x 4)..nullable..const..void_p.IN("_projR", "projection matrix for right eye in stereo mode")
 	)
 
 	void(
 		"set_view_remap",
-		"""
-		""",
+		"Post submit view reordering.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		MapToInt..uint8_t.IN("_num", ""),
-		const..void_p.IN("_remap", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		MapToInt..uint8_t.IN("_num", "number of views to remap"),
+		nullable..const..void_p.IN("_remap", "view remap id table. Passing $NULL will reset view ids to default state")
 	)
 
 	void(
 		"reset_view",
-		"""
-		""",
+		"Resets all view settings to default.",
 
-		MapToInt..uint8_t.IN("_id", "")
+		MapToInt..uint8_t.IN("_id", "view id")
 	)
 
 	void(
 		"set_marker",
-		"""
-		""",
+		"Sets debug marker.",
 
-		const..charUTF8_p.IN("_marker", "")
+		const..charASCII_p.IN("_marker", "debug marker")
 	)
 
 	void(
 		"set_state",
 		"""
+		Sets render states for draw primitive.
+
+		Remarks:
+		${ol(
+			"Use BGFXUtil##BGFX_STATE_ALPHA_REF(), BGFXUtil##BGFX_STATE_POINT_SIZE() and BGFXUtil##BGFX_STATE_BLEND_FUNC() macros to setup more complex states.",
+			"#STATE_BLEND_EQUATION_ADD is set when no other blend equation is specified."
+		)}
 		""",
 
-		uint64_t.IN("_state", ""),
-		uint32_t.IN("_rgba", "")
+		uint64_t.IN("_state", "state flags", StateFlags, LinkMode.BITFIELD),
+		uint32_t.IN("_rgba", "blend factor used by #STATE_BLEND_FACTOR and #STATE_BLEND_INV_FACTOR blend modes")
 	)
 
 	void(
 		"set_condition",
-		"""
-		""",
+		"Sets condition for rendering.",
 
-		bgfx_occlusion_query_handle_t.IN("_handle", ""),
-		bool.IN("_visible", "")
+		bgfx_occlusion_query_handle_t.IN("_handle", "occlusion query handle"),
+		bool.IN("_visible", "render if occlusion query is visible")
 	)
 
 	void(
 		"set_stencil",
-		"""
-		""",
+		"Sets stencil test state.",
 
-		uint32_t.IN("_fstencil", ""),
-		uint32_t.IN("_bstencil", "")
+		uint32_t.IN("_fstencil", "front stencil state", StencilFlags, LinkMode.BITFIELD),
+		uint32_t.IN(
+			"_bstencil",
+			"back stencil state. If back is set to #STENCIL_NONE {@code _fstencil} is applied to both front and back facing primitives.",
+			StencilFlags, LinkMode.BITFIELD
+		)
 	)
 
 	uint16_t(
 		"set_scissor",
-		"""
-		""",
+		"Sets scissor for draw primitive. For scissor for all primitives in view see #set_view_scissor().",
 
-		MapToInt..uint16_t.IN("_x", ""),
-		MapToInt..uint16_t.IN("_y", ""),
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", "")
+		MapToInt..uint16_t.IN("_x", "position x from the left corner of the window"),
+		MapToInt..uint16_t.IN("_y", "position y from the top corner of the window"),
+		MapToInt..uint16_t.IN("_width", "width of scissor region"),
+		MapToInt..uint16_t.IN("_height", "height of scissor region"),
+
+		returnDoc = "scissor cache index"
 	)
 
 	void(
 		"set_scissor_cached",
-		"""
-		""",
+		"Sets scissor from cache for draw primitive.",
 
-		MapToInt..uint16_t.IN("_cache", "")
+		MapToInt..uint16_t.IN("_cache", "index in scissor cache. Passing {@code UINT16_MAX} unsets primitive scissor and primitive will use view scissor instead.")
 	)
 
 	uint32_t(
 		"set_transform",
-		"""
-		""",
+		"Sets model matrix for draw primitive. If it is not called model will be rendered with identity model matrix.",
 
-		const..float_p.IN("_mtx", ""),
-		MapToInt..uint16_t.IN("_num", "")
+		MultiType(
+			PointerMapping.DATA_FLOAT
+		)..const..void_p.IN("_mtx", "pointer to first matrix in array"),
+		AutoSize(4 x 4 x 4, "_mtx")..uint16_t.IN("_num", "number of matrices in array"),
+
+		returnDoc = "index into matrix cache in case the same model matrix has to be used for other draw primitive call"
 	)
 
 	uint32_t(
 		"alloc_transform",
-		"""
-		""",
+		"Reserves {@code _num} matrices in internal matrix cache. Pointer returned can be modifed until #frame()) is called.",
 
-		bgfx_transform_t.IN("_transform", ""),
-		MapToInt..uint16_t.IN("_num", "")
+		bgfx_transform_t_p.IN("_transform", "pointer to ##BGFXTransform structure"),
+		MapToInt..uint16_t.IN("_num", "number of matrices"),
+
+		returnDoc = "index into matrix cache"
 	)
 
 	void(
 		"set_transform_cached",
-		"""
-		""",
+		"Sets model matrix from matrix cache for draw primitive.",
 
-		uint32_t.IN("_cache", ""),
-		MapToInt..uint16_t.IN("_num", "")
+		uint32_t.IN("_cache", "index in matrix cache"),
+		MapToInt..uint16_t.IN("_num", "number of matrices from cache")
 	)
 
 	void(
 		"set_uniform",
-		"""
-		""",
+		"Sets shader uniform parameter for draw primitive.",
 
-		bgfx_uniform_handle_t.IN("_handle", ""),
-		const..void_p.IN("_value", ""),
-		MapToInt..uint16_t.IN("_num", "")
+		bgfx_uniform_handle_t.IN("_handle", "uniform"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		)..const..void_p.IN("_value", "pointer to uniform data"),
+		MapToInt..uint16_t.IN("_num", "number of elements. Passing {@code UINT16_MAX} will use the {@code _num} passed on uniform creation.")
 	)
 
 	void(
 		"set_index_buffer",
-		"""
-		""",
+		"Sets index buffer for draw primitive.",
 
-		bgfx_index_buffer_handle_t.IN("_handle", ""),
-		uint32_t.IN("_firstIndex", ""),
-		uint32_t.IN("_numIndices", "")
+		bgfx_index_buffer_handle_t.IN("_handle", "index buffer"),
+		uint32_t.IN("_firstIndex", "first index to render"),
+		uint32_t.IN("_numIndices", "number of indices to render")
 	)
 
 	void(
 		"set_dynamic_index_buffer",
-		"""
-		""",
+		"Sets index buffer for draw primitive.",
 
-		bgfx_dynamic_index_buffer_handle_t.IN("_handle", ""),
-		uint32_t.IN("_firstIndex", ""),
-		uint32_t.IN("_numIndices", "")
+		bgfx_dynamic_index_buffer_handle_t.IN("_handle", "dynamic index buffer"),
+		uint32_t.IN("_firstIndex", "first index to render"),
+		uint32_t.IN("_numIndices", "number of indices to render")
 	)
 
 	void(
 		"set_transient_index_buffer",
-		"""
-		""",
+		"Sets index buffer for draw primitive.",
 
-		const..bgfx_transient_index_buffer_t.IN("_tib", ""),
-		uint32_t.IN("_firstIndex", ""),
-		uint32_t.IN("_numIndices", "")
+		const..bgfx_transient_index_buffer_t_p.IN("_tib", "transient index buffer"),
+		uint32_t.IN("_firstIndex", "first index to render"),
+		uint32_t.IN("_numIndices", "number of indices to render")
 	)
 
 	void(
 		"set_vertex_buffer",
-		"""
-		""",
+		"Sets vertex buffer for draw primitive.",
 
-		bgfx_vertex_buffer_handle_t.IN("_handle", ""),
-		uint32_t.IN("_startVertex", ""),
-		uint32_t.IN("_numVertices", "")
+		bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer"),
+		uint32_t.IN("_startVertex", "first vertex to render"),
+		uint32_t.IN("_numVertices", "number of vertices to render")
 	)
 
 	void(
 		"set_dynamic_vertex_buffer",
-		"""
-		""",
+		"Sets vertex buffer for draw primitive.",
 
-		bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", ""),
-		uint32_t.IN("_startVertex", ""),
-		uint32_t.IN("_numVertices", "")
+		bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer"),
+		uint32_t.IN("_startVertex", "first vertex to render"),
+		uint32_t.IN("_numVertices", "number of vertices to render")
 	)
 
 	void(
 		"set_transient_vertex_buffer",
-		"""
-		""",
+		"Sets vertex buffer for draw primitive.",
 
-		const..bgfx_transient_vertex_buffer_t.IN("_tvb", ""),
-		uint32_t.IN("_startVertex", ""),
-		uint32_t.IN("_numVertices", "")
+		const..bgfx_transient_vertex_buffer_t_p.IN("_tvb", "transient vertex buffer"),
+		uint32_t.IN("_startVertex", "first vertex to render"),
+		uint32_t.IN("_numVertices", "number of vertices to render")
 	)
 
 	void(
 		"set_instance_data_buffer",
-		"""
-		""",
+		"Sets instance data buffer for draw primitive.",
 
-		const..bgfx_instance_data_buffer_t.IN("_idb", ""),
-		uint32_t.IN("_num", "")
+		const..bgfx_instance_data_buffer_t_p.IN("_idb", "instance data buffer"),
+		uint32_t.IN("_num", "number of instances to render")
 	)
 
 	void(
 		"set_instance_data_from_vertex_buffer",
-		"""
-		""",
+		"Set instance data buffer for draw primitive.",
 
-		bgfx_vertex_buffer_handle_t.IN("_handle", ""),
-		uint32_t.IN("_startVertex", ""),
-		uint32_t.IN("_num", "")
+		bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer"),
+		uint32_t.IN("_startVertex", "first vertex to render"),
+		uint32_t.IN("_numVertices", "number of vertices to render")
 	)
 
 	void(
 		"set_instance_data_from_dynamic_vertex_buffer",
-		"""
-		""",
+		"Set instance data buffer for draw primitive.",
 
-		bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", ""),
-		uint32_t.IN("_startVertex", ""),
-		uint32_t.IN("_num", "")
+		bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer"),
+		uint32_t.IN("_startVertex", "first vertex to render"),
+		uint32_t.IN("_numVertices", "number of vertices to render")
 	)
 
 	void(
 		"set_texture",
-		"""
-		""",
+		"Sets texture stage for draw primitive.",
 
-		MapToInt..uint8_t.IN("_stage", ""),
-		bgfx_uniform_handle_t.IN("_sampler", ""),
-		bgfx_texture_handle_t.IN("_handle", ""),
-		uint32_t.IN("_flags", "")
+		MapToInt..uint8_t.IN("_stage", "texture unit"),
+		bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
+		bgfx_texture_handle_t.IN("_handle", "texture handle"),
+		uint32_t.IN("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", TextureFlags)
 	)
 
 	void(
 		"set_texture_from_frame_buffer",
-		"""
-		""",
+		"Sets texture stage for draw primitive.",
 
-		MapToInt..uint8_t.IN("_stage", ""),
-		bgfx_uniform_handle_t.IN("_sampler", ""),
-		bgfx_frame_buffer_handle_t.IN("_handle", ""),
-		MapToInt..uint8_t.IN("_attachment", ""),
-		uint32_t.IN("_flags", "")
+		MapToInt..uint8_t.IN("_stage", "texture unit"),
+		bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
+		bgfx_frame_buffer_handle_t.IN("_handle", "texture handle"),
+		MapToInt..uint8_t.IN("_attachment", "frame buffer attachment index"),
+		uint32_t.IN("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", TextureFlags)
 	)
 
 	uint32_t(
 		"touch",
 		"""
+		Submits an empty primitive for rendering. Uniforms and draw state will be applied but no geometry will be submitted.
+
+		These empty draw calls will sort before ordinary draw calls.
 		""",
 
-		MapToInt..uint8_t.IN("_id", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+
+		returnDoc = "number of draw calls"
 	)
 
 	uint32_t(
 		"submit",
-		"""
-		""",
+		"Submits primitive for rendering.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		bgfx_program_handle_t.IN("_handle", ""),
-		int32_t.IN("_depth", ""),
-		bool.IN("_preserveState", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		bgfx_program_handle_t.IN("_handle", "program"),
+		int32_t.IN("_depth", "depth for sorting"),
+		bool.IN("_preserveState", "preserve internal draw state for next draw call submit"),
+
+		returnDoc = "number of draw calls"
 	)
 
 	uint32_t(
 		"submit_occlusion_query",
-		"""
-		""",
+		"Submits primitive with occlusion query for rendering.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		bgfx_program_handle_t.IN("_program", ""),
-		bgfx_occlusion_query_handle_t.IN("_occlusionQuery", ""),
-		int32_t.IN("_depth", ""),
-		bool.IN("_preserveState", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		bgfx_program_handle_t.IN("_program", "program"),
+		bgfx_occlusion_query_handle_t.IN("_occlusionQuery", "occlusion query"),
+		int32_t.IN("_depth", "depth for sorting"),
+		bool.IN("_preserveState", "preserve internal draw state for next draw call submit"),
+
+		returnDoc = "number of draw calls"
 	)
 
 	uint32_t(
 		"submit_indirect",
-		"""
-		""",
+		"Submits primitive for rendering with index and instance data info from indirect buffer.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		bgfx_program_handle_t.IN("_handle", ""),
-		bgfx_indirect_buffer_handle_t.IN("_indirectHandle", ""),
-		MapToInt..uint16_t.IN("_start", ""),
-		MapToInt..uint16_t.IN("_num", ""),
-		int32_t.IN("_depth", ""),
-		bool.IN("_preserveState", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		bgfx_program_handle_t.IN("_handle", "program"),
+		bgfx_indirect_buffer_handle_t.IN("_indirectHandle", "indirect buffer"),
+		MapToInt..uint16_t.IN("_start", "first element in indirect buffer"),
+		MapToInt..uint16_t.IN("_num", "number of dispatches"),
+		int32_t.IN("_depth", "depth for sorting"),
+		bool.IN("_preserveState", "preserve internal draw state for next draw call submit"),
+
+		returnDoc = "number of draw calls"
 	)
 
 	void(
 		"set_image",
-		"""
-		""",
+		"Sets compute image from texture.",
 
-		MapToInt..uint8_t.IN("_stage", ""),
-		bgfx_uniform_handle_t.IN("_sampler", ""),
-		bgfx_texture_handle_t.IN("_handle", ""),
-		MapToInt..uint8_t.IN("_mip", ""),
-		bgfx_access_t.IN("_access", "", Access),
-		bgfx_texture_format_t.IN("_format", "", TextureFormat)
+		MapToInt..uint8_t.IN("_stage", "texture unit"),
+		bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
+		bgfx_texture_handle_t.IN("_handle", "texture handle"),
+		MapToInt..uint8_t.IN("_mip", "mip level"),
+		bgfx_access_t.IN("_access", "texture access", Access),
+		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat)
 	)
 
 	void(
 		"set_image_from_frame_buffer",
-		"""
-		""",
+		"Sets compute image from frame buffer texture.",
 
-		MapToInt..uint8_t.IN("_stage", ""),
-		bgfx_uniform_handle_t.IN("_sampler", ""),
-		bgfx_frame_buffer_handle_t.IN("_handle", ""),
-		MapToInt..uint8_t.IN("_attachment", ""),
-		bgfx_access_t.IN("_access", "", Access),
-		bgfx_texture_format_t.IN("_format", "", TextureFormat)
+		MapToInt..uint8_t.IN("_stage", "texture unit"),
+		bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
+		bgfx_texture_handle_t.IN("_handle", "texture handle"),
+		MapToInt..uint8_t.IN("_attachment", "frame buffer attachment index"),
+		bgfx_access_t.IN("_access", "texture access", Access),
+		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat)
 	)
 
 	void(
 		"set_compute_index_buffer",
-		"""
-		""",
+		"Sets compute index buffer.",
 
-		MapToInt..uint8_t.IN("_stage", ""),
-		bgfx_index_buffer_handle_t.IN("_handle", ""),
-		bgfx_access_t.IN("_access", "", Access)
+		MapToInt..uint8_t.IN("_stage", "compute stage"),
+		bgfx_index_buffer_handle_t.IN("_handle", "index buffer handle"),
+		bgfx_access_t.IN("_access", "buffer access", Access)
 	)
 
 	void(
 		"set_compute_vertex_buffer",
-		"""
-		""",
+		"Sets compute vertex buffer.",
 
-		MapToInt..uint8_t.IN("_stage", ""),
-		bgfx_vertex_buffer_handle_t.IN("_handle", ""),
-		bgfx_access_t.IN("_access", "", Access)
+		MapToInt..uint8_t.IN("_stage", "compute stage"),
+		bgfx_vertex_buffer_handle_t.IN("_handle", "vertex buffer handle"),
+		bgfx_access_t.IN("_access", "buffer access", Access)
 	)
 
 	void(
 		"set_compute_dynamic_index_buffer",
-		"""
-		""",
+		"Sets compute dynamic index buffer.",
 
-		MapToInt..uint8_t.IN("_stage", ""),
-		bgfx_dynamic_index_buffer_handle_t.IN("_handle", ""),
-		bgfx_access_t.IN("_access", "", Access)
+		MapToInt..uint8_t.IN("_stage", "compute stage"),
+		bgfx_dynamic_index_buffer_handle_t.IN("_handle", "dynamic index buffer handle"),
+		bgfx_access_t.IN("_access", "buffer access", Access)
 	)
 
 	void(
 		"set_compute_dynamic_vertex_buffer",
-		"""
-		""",
+		"Sets compute dynamic vertex buffer.",
 
-		MapToInt..uint8_t.IN("_stage", ""),
-		bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", ""),
-		bgfx_access_t.IN("_access", "", Access)
+		MapToInt..uint8_t.IN("_stage", "compute stage"),
+		bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "dynamic vertex buffer handle"),
+		bgfx_access_t.IN("_access", "buffer access", Access)
 	)
 
 	void(
 		"set_compute_indirect_buffer",
-		"""
-		""",
+		"Sets compute indirect buffer.",
 
-		MapToInt..uint8_t.IN("_stage", ""),
-		bgfx_indirect_buffer_handle_t.IN("_handle", ""),
-		bgfx_access_t.IN("_access", "", Access)
+		MapToInt..uint8_t.IN("_stage", "compute stage"),
+		bgfx_indirect_buffer_handle_t.IN("_handle", "indirect buffer handle"),
+		bgfx_access_t.IN("_access", "buffer access", Access)
 	)
 
 	uint32_t(
 		"dispatch",
-		"""
-		""",
+		"Dispatches compute.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		bgfx_program_handle_t.IN("_handle", ""),
-		MapToInt..uint16_t.IN("_numX", ""),
-		MapToInt..uint16_t.IN("_numY", ""),
-		MapToInt..uint16_t.IN("_numZ", ""),
-		MapToInt..uint8_t.IN("_flags", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		bgfx_program_handle_t.IN("_handle", "compute program"),
+		MapToInt..uint16_t.IN("_numX", "number of groups X"),
+		MapToInt..uint16_t.IN("_numY", "number of groups Y"),
+		MapToInt..uint16_t.IN("_numZ", "number of groups Z"),
+		MapToInt..uint8_t.IN("_flags", "view flags", SubmitFlags)
 	)
 
 	uint32_t(
 		"dispatch_indirect",
-		"""
-		""",
+		"Dispatches compute indirect.",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		bgfx_program_handle_t.IN("_handle", ""),
-		bgfx_indirect_buffer_handle_t.IN("_indirectHandle", ""),
-		MapToInt..uint16_t.IN("_start", ""),
-		MapToInt..uint16_t.IN("_num", ""),
-		MapToInt..uint8_t.IN("_flags", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		bgfx_program_handle_t.IN("_handle", "compute program"),
+		bgfx_indirect_buffer_handle_t.IN("_indirectHandle", "indirect buffer"),
+		MapToInt..uint16_t.IN("_start", "first element in indirect buffer"),
+		MapToInt..uint16_t.IN("_num", "number of dispatches"),
+		MapToInt..uint8_t.IN("_flags", "view flags", SubmitFlags)
 	)
 
 	void(
 		"discard",
-		"""
-		"""
+		"Discards all previously set state for draw or compute call."
 	)
 
 	void(
 		"blit",
 		"""
+		Blits texture region between two textures.
+		
+		Destination texture must be create with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
 		""",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		bgfx_texture_handle_t.IN("_dst", ""),
-		MapToInt..uint8_t.IN("_dstMip", ""),
-		MapToInt..uint16_t.IN("_dstX", ""),
-		MapToInt..uint16_t.IN("_dstY", ""),
-		MapToInt..uint16_t.IN("_dstZ", ""),
-		bgfx_texture_handle_t.IN("_src", ""),
-		MapToInt..uint8_t.IN("_srcMip", ""),
-		MapToInt..uint16_t.IN("_srcX", ""),
-		MapToInt..uint16_t.IN("_srcY", ""),
-		MapToInt..uint16_t.IN("_srcZ", ""),
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", ""),
-		MapToInt..uint16_t.IN("_depth", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		bgfx_texture_handle_t.IN("_dst", "destination texture handle"),
+		MapToInt..uint8_t.IN("_dstMip", "destination texture mip level"),
+		MapToInt..uint16_t.IN("_dstX", "destination texture X position"),
+		MapToInt..uint16_t.IN("_dstY", "destination texture Y position"),
+		MapToInt..uint16_t.IN(
+			"_dstZ",
+			"""
+			if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
+			this argument represent destination texture Z position.
+			"""
+		),
+		bgfx_texture_handle_t.IN("_src", "source texture handle"),
+		MapToInt..uint8_t.IN("_srcMip", "source texture mip level"),
+		MapToInt..uint16_t.IN("_srcX", "source texture X position"),
+		MapToInt..uint16_t.IN("_srcY", "source texture Y position"),
+		MapToInt..uint16_t.IN(
+			"_srcZ",
+			"""
+			if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
+			this argument represent destination texture Z position.
+			"""
+		),
+		MapToInt..uint16_t.IN("_width", "width of region"),
+		MapToInt..uint16_t.IN("_height", "height of region"),
+		MapToInt..uint16_t.IN("_depth", "if texture is 3D this argument represent depth of region, otherwise is unused")
 	)
 
 	void(
 		"blit_frame_buffer",
 		"""
+		Blits texture region between frame buffer and texture.
+
+		Destination texture must be create with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
 		""",
 
-		MapToInt..uint8_t.IN("_id", ""),
-		bgfx_texture_handle_t.IN("_dst", ""),
-		MapToInt..uint8_t.IN("_dstMip", ""),
-		MapToInt..uint16_t.IN("_dstX", ""),
-		MapToInt..uint16_t.IN("_dstY", ""),
-		MapToInt..uint16_t.IN("_dstZ", ""),
-		bgfx_frame_buffer_handle_t.IN("_src", ""),
-		MapToInt..uint8_t.IN("_attachment", ""),
-		MapToInt..uint8_t.IN("_srcMip", ""),
-		MapToInt..uint16_t.IN("_srcX", ""),
-		MapToInt..uint16_t.IN("_srcY", ""),
-		MapToInt..uint16_t.IN("_srcZ", ""),
-		MapToInt..uint16_t.IN("_width", ""),
-		MapToInt..uint16_t.IN("_height", ""),
-		MapToInt..uint16_t.IN("_depth", "")
+		MapToInt..uint8_t.IN("_id", "view id"),
+		bgfx_texture_handle_t.IN("_dst", "destination texture handle"),
+		MapToInt..uint8_t.IN("_dstMip", "destination texture mip level"),
+		MapToInt..uint16_t.IN("_dstX", "destination texture X position"),
+		MapToInt..uint16_t.IN("_dstY", "destination texture Y position"),
+		MapToInt..uint16_t.IN(
+			"_dstZ",
+			"""
+			if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
+			this argument represent destination texture Z position.
+			"""
+		),
+		bgfx_frame_buffer_handle_t.IN("_src", "source frame buffer handle"),
+		MapToInt..uint8_t.IN("_attachment", "source frame buffer attachment index"),
+		MapToInt..uint8_t.IN("_srcMip", "source texture mip level"),
+		MapToInt..uint16_t.IN("_srcX", "source texture X position"),
+		MapToInt..uint16_t.IN("_srcY", "source texture Y position"),
+		MapToInt..uint16_t.IN(
+			"_srcZ",
+			"""
+			if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
+			this argument represent destination texture Z position.
+			"""
+		),
+		MapToInt..uint16_t.IN("_width", "width of region"),
+		MapToInt..uint16_t.IN("_height", "height of region"),
+		MapToInt..uint16_t.IN("_depth", "if texture is 3D this argument represent depth of region, otherwise is unused")
 	)
 
 	void(
 		"save_screen_shot",
-		"""
-		""",
+		"Requests screen shot.",
 
-		const..charUTF8_p.IN("_filePath", "")
-	)
-
-	void(
-		"set_platform_data",
-		"""
-		""",
-
-		const..bgfx_platform_data_t.IN("_data", "")
+		const..charASCII_p.IN("_filePath", "will be passed to ##BGFXScreenShotCallback")
 	)
 }
