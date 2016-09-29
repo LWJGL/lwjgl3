@@ -121,14 +121,12 @@
 		<build name="lwjgl" dest="${bin.native}/core">
 			<source>
 				<arg value="-I${src.include.rel}/system/dyncall"/>
-				<arg value="-I${src.include.rel}/system/jemalloc" if:true="${binding.jemalloc}"/>
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<exclude name="${src.native}/system/lwjgl_malloc.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/dyncall/*.c"/>
 					<include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
-					<include name="${src.generated.native}/system/jemalloc/*.c" if:true="${binding.jemalloc}"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/macosx/*.c"/>
 				</fileset>
