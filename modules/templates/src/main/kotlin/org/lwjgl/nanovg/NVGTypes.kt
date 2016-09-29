@@ -56,16 +56,7 @@ val NVGpaint = struct(NANOVG_PACKAGE, "NVGPaint", nativeName = "NVGpaint") {
 
 val charptr = "char".p // address, not data
 
-val NVGcompositeOperationState_p = struct_p(NANOVG_PACKAGE, "NVGCompositeOperationState", nativeName = "NVGcompositeOperationState") {
-	documentation = ""
-
-	int.member("srcRGB", "")
-	int.member("dstRGB", "")
-	int.member("srcAlpha", "")
-	int.member("dstAlpha", "")
-}
-
-val NVGglyphPosition_p = struct_p(NANOVG_PACKAGE, "NVGGlyphPosition", nativeName = "NVGglyphPosition") {
+val NVGglyphPosition_p = struct_p(NANOVG_PACKAGE, "NVGGlyphPosition", nativeName = "NVGglyphPosition", mutable = false) {
 	documentation = "A glyph position."
 
 	charptr.member("str", "position of the glyph in the input string")
@@ -74,7 +65,7 @@ val NVGglyphPosition_p = struct_p(NANOVG_PACKAGE, "NVGGlyphPosition", nativeName
 	float.member("maxx", "the right bound of the glyph shape")
 }
 
-val NVGtextRow_p = struct_p(NANOVG_PACKAGE, "NVGTextRow", nativeName = "NVGtextRow") {
+val NVGtextRow_p = struct_p(NANOVG_PACKAGE, "NVGTextRow", nativeName = "NVGtextRow", mutable = false) {
 	documentation = "A text row."
 
 	charptr.member("start", "pointer to the input text where the row starts")

@@ -4,8 +4,7 @@
  */
 package org.lwjgl.generator
 
-import org.lwjgl.generator.GenerationMode.ALTERNATIVE
-import org.lwjgl.generator.GenerationMode.NORMAL
+import org.lwjgl.generator.GenerationMode.*
 import org.lwjgl.generator.ParameterType.*
 import java.io.PrintWriter
 import java.util.*
@@ -246,7 +245,7 @@ class NativeClassFunction(
 		nativeType.isPointerData                             ->
 			if ( nativeType is ArrayType )
 				name
-			else if ( !isAutoSizeResultOut && (has(nullable) || (has(optional) && mode === GenerationMode.NORMAL)) )
+			else if ( !isAutoSizeResultOut && (has(nullable) || (has(optional) && mode === NORMAL)) )
 				"memAddressSafe($name)"
 			else
 				"memAddress($name)"
@@ -447,9 +446,9 @@ class NativeClassFunction(
 
 			if ( it has AutoSize ) {
 				val autoSize = it[AutoSize]
-				if ( mode === NORMAL || it.paramType === ParameterType.INOUT ) {
+				if ( mode === NORMAL || it.paramType === INOUT ) {
 					var expression = it.name
-					if ( it.paramType === ParameterType.INOUT ) {
+					if ( it.paramType === INOUT ) {
 						if ( it.nativeType is ArrayType )
 							expression += "[0]"
 						else
@@ -493,7 +492,7 @@ class NativeClassFunction(
 		// Second pass
 		getNativeParams().forEach {
 			// Do this after the AutoSize check
-			if ( it.nativeType is StructType && it.nativeType.definition.validations.any() && !hasUnsafeMethod )
+			if ( it.paramType != OUT && it.nativeType is StructType && it.nativeType.definition.validations.any() && !hasUnsafeMethod )
 				checks.add(
 					"${it.nativeType.javaMethodType}.validate(${it.name}.address()${sequenceOf(
 						if ( it.has(Check) ) it[Check].expression else null,
@@ -553,7 +552,7 @@ class NativeClassFunction(
 			if ( hasUnsafeMethod )
 				writer.generateUnsafeMethod(macro)
 
-			if ( returns.nativeType !is CharSequenceType && parameters.none { it has AutoSize && it.paramType == ParameterType.IN } )
+			if ( returns.nativeType !is CharSequenceType && parameters.none { it has AutoSize && it.paramType == IN } )
 				writer.generateJavaMethod(macro)
 
 			writer.generateAlternativeMethods()
@@ -629,7 +628,7 @@ class NativeClassFunction(
 		getNativeParams().forEach {
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType )
 				checks.add("checkPointer(${it.name});")
-			else if ( it.nativeType is StructType && it.nativeType.definition.validations.any() )
+			else if ( it.paramType != OUT && it.nativeType is StructType && it.nativeType.definition.validations.any() )
 				checks.add(
 					"${it.nativeType.javaMethodType}.validate(${it.name}${sequenceOf(
 						if ( it.has(Check) ) it[Check].expression else null,

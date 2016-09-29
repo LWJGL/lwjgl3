@@ -30,7 +30,9 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(packageName = BGFX_PACKAGE, prefix
 
 		This call should be only used on platforms that don't allow creating separate rendering thread. If it is called before to #init(), render thread won't
 		be created by #init() call.
-		"""
+		""",
+
+		returnDoc = "current renderer state"
 	)
 
 	void(
