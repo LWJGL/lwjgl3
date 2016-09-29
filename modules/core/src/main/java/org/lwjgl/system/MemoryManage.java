@@ -166,9 +166,17 @@ final class MemoryManage {
 		@Override
 		public long realloc(long ptr, long size) {
 			long address = allocator.realloc(ptr, size);
-			if ( address != NULL )
-				untrack(ptr);
-			return track(address, size);
+
+			if ( size == 0L ) {
+				if ( ptr != NULL )
+					untrack(ptr);
+			} else if ( address != NULL ) {
+				if ( ptr != NULL )
+					untrack(ptr);
+				track(address, size);
+			}
+
+			return address;
 		}
 
 		@Override
