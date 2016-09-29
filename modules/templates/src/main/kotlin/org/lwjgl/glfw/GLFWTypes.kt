@@ -290,6 +290,23 @@ val GLFWwindowiconifyfun = "GLFWwindowiconifyfun".callback(
 	"""
 }
 
+val GLFWwindowmaximizefun = "GLFWwindowmaximizefun".callback(
+	GLFW_PACKAGE, void, "GLFWWindowMaximizeCallback",
+	"Will be called when the specified window is maximized or restored.",
+	GLFWwindow.IN("window", "the window that was maximized or restored."),
+	intb.IN("maximized", "#TRUE if the window was maximized, or #FALSE if it was restored")
+) {
+	documentation = "Instances of this interface may be passed to the #SetWindowMaximizeCallback() method."
+	javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetWindowMaximizeCallback SetWindowMaximizeCallback}. */
+	public GLFWWindowMaximizeCallback set(long window) {
+		glfwSetWindowMaximizeCallback(window, this);
+		return this;
+	}
+	"""
+}
+
 val GLFWframebuffersizefun = "GLFWframebuffersizefun".callback(
 	GLFW_PACKAGE, void, "GLFWFramebufferSizeCallback",
 	"Will be called when the framebuffer of the specified window is resized.",

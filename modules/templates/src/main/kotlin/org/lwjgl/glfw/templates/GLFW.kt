@@ -1692,6 +1692,21 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.0"
 	)
 
+	GLFWwindowmaximizefun(
+		"SetWindowMaximizeCallback",
+		"""
+		Sets the maximization callback of the specified window, which is called when the window is maximized or restored.
+
+		This function must only be called from the main thread.
+		""",
+
+		CALLBACK_WINDOW,
+		nullable..GLFWwindowmaximizefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+
+		returnDoc = CallbackReturnDoc,
+		since = "version 3.3"
+	)
+
 	GLFWframebuffersizefun(
 		"SetFramebufferSizeCallback",
 		"""
