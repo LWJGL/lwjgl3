@@ -2,12 +2,19 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.bgfx;
+package org.lwjgl.bgfx
 
-import static org.lwjgl.bgfx.BGFX.*;
+import org.lwjgl.generator.*
 
-/** bgfx utilities. */
-public final class BGFXUtil {
+val BGFXUtil = Generator.register(object: org.lwjgl.generator.GeneratorTarget(org.lwjgl.bgfx.BGFX_PACKAGE, "BGFXUtil") {
+	init {
+		javaImport("static org.lwjgl.bgfx.BGFX.*")
+		documentation = "bgfx utilities."
+	}
+
+	override fun java.io.PrintWriter.generateJava() {
+		generateJavaPreamble()
+		print("""public final class BGFXUtil {
 
 	private BGFXUtil() {
 	}
@@ -113,4 +120,6 @@ public final class BGFXUtil {
 		return (_index << BGFX_TEXTURE_BORDER_COLOR_SHIFT) & BGFX_TEXTURE_BORDER_COLOR_MASK;
 	}
 
-}
+}""")
+	}
+})

@@ -254,7 +254,6 @@
 			<include name="org/lwjgl/*.java"/>
 			<include name="org/lwjgl/system/**"/>
 
-			<include name="org/lwjgl/bgfx/**" if:true="${binding.bgfx}"/>
 			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
 			<include name="org/lwjgl/nanovg/**" if:true="${binding.nanovg}"/>
@@ -812,11 +811,7 @@
 		</release-module>
 
 		<!-- bgfx -->
-		<release-module package="org.lwjgl.bgfx" name="bgfx" java-only="true" title="bgfx" license="bgfx" if:true="${binding.bgfx}">
-			<sources>
-				<fileset dir="${src.core}"><include name="org/lwjgl/bgfx/**"/></fileset>
-			</sources>
-		</release-module>
+		<release-module package="org.lwjgl.bgfx" name="bgfx" java-only="true" title="bgfx" license="bgfx" if:true="${binding.bgfx}"/>
 
 		<!-- EGL -->
 		<release-module package="org.lwjgl.egl" name="egl" java-only="true" title="EGL" license="khronos" if:true="${binding.egl}">
