@@ -36,16 +36,20 @@ internal open class AutoSizeTransform(
 		if ( applyTo === ApplyTo.NORMAL )
 			return param.name
 
-		var expression = if ( bufferParam.nativeType is ArrayType )
-			"${bufferParam.name}.length"
-		else
-			"${bufferParam.name}.remaining()"
+		var expression = if (bufferParam.nativeType is ArrayType) {
+			if (bufferParam has nullable)
+				"lengthSafe(${bufferParam.name})"
+			else
+				"${bufferParam.name}.length"
+		} else {
+			if (bufferParam has nullable)
+				"remainingSafe(${bufferParam.name})"
+			else
+				"${bufferParam.name}.remaining()"
+		}
 		val factor = param[AutoSize].factor
 		if ( applyFactor && factor != null )
 			expression += " ${factor.expression()}"
-
-		if ( bufferParam has nullable )
-			expression = "${bufferParam.name} == null ? 0 : $expression"
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes != 4 )
 			expression = "(${param.nativeType.javaMethodType})${if ( expression.contains(' ') ) "($expression)" else expression}"
@@ -62,7 +66,10 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, v
 		if ( applyTo === ApplyTo.NORMAL )
 			return param.name
 
-		var expression = "${bufferParam.name}.remaining()"
+		var expression = if (bufferParam has nullable)
+			"remainingSafe(${bufferParam.name})"
+		else
+			"${bufferParam.name}.remaining()"
 		val factor = param[AutoSize].factor
 		if ( factor == null )
 			expression = "$expression << $byteShift"
@@ -85,9 +92,6 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, v
 					expression = "($expression ${factor.expression()}) << $byteShift"
 			}
 		}
-
-		if ( bufferParam has nullable )
-			expression = "(${bufferParam.name} == null ? 0 : $expression)"
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
 			expression = "(${param.nativeType.javaMethodType})($expression)"

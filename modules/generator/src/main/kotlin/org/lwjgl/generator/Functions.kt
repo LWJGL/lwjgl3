@@ -281,6 +281,7 @@ class NativeClassFunction(
 
 			if ( it has AutoSize ) {
 				val autoSize = it[AutoSize]
+				val nullableReference = paramMap[autoSize.reference]?.has(nullable) ?: false
 				(sequenceOf(autoSize.reference) + autoSize.dependent.asSequence()).forEach { reference ->
 					if ( autoSizeReferences.contains(reference) )
 						it.error("An AutoSize reference already exists for: $reference")
@@ -295,6 +296,8 @@ class NativeClassFunction(
 							bufferParam.nativeType !is PointerType
 							                             -> it.error("Buffer reference must be a pointer type: AutoSize($reference)")
 							!bufferParam.isBufferPointer -> it.error("Buffer reference must not be a opaque pointer: AutoSize($reference)")
+							nullableReference && !bufferParam.has(nullable)
+							                             -> it.error("If reference is nullable, dependent parameters must also be nullable: AutoSize($reference)")
 						}
 
 						if ( bufferParam.nativeType is CharSequenceType && bufferParam.nativeType.charMapping == CharMapping.UTF16 )
@@ -467,12 +470,19 @@ class NativeClassFunction(
 					val reference = paramMap[autoSize.reference]!!
 					val referenceTransform = transforms!![reference]
 					val expression =
-						if ( referenceTransform != null && (referenceTransform.javaClass === SingleValueTransform::class.java || referenceTransform === PointerArrayTransformSingle) )
+						if ( referenceTransform != null && (referenceTransform.javaClass === SingleValueTransform::class.java || referenceTransform === PointerArrayTransformSingle) ) {
 							"1"
-						else if ( (referenceTransform != null && referenceTransform != PointerArrayTransformSingle) || reference.nativeType is ArrayType )
-							"${autoSize.reference}.length"
-						else
-							"${autoSize.reference}.remaining()"
+						} else if ( (referenceTransform != null && referenceTransform != PointerArrayTransformSingle) || reference.nativeType is ArrayType ) {
+							if ( reference has nullable )
+								"lengthSafe(${autoSize.reference})"
+							else
+								"${autoSize.reference}.length"
+						} else {
+							if ( reference has nullable )
+								"remainingSafe(${autoSize.reference})"
+							else
+								"${autoSize.reference}.remaining()"
+						}
 
 					autoSize.dependent.forEach {
 						val param = paramMap[it]!!
@@ -490,9 +500,10 @@ class NativeClassFunction(
 		}
 
 		// Second pass
-		getNativeParams().forEach {
-			// Do this after the AutoSize check
-			if ( it.paramType != OUT && it.nativeType is StructType && it.nativeType.definition.validations.any() && !hasUnsafeMethod )
+		getNativeParams()
+			.filter { it.paramType != OUT && it.nativeType is StructType && it.nativeType.definition.validations.any() && !hasUnsafeMethod }
+			.forEach {
+				// Do this after the AutoSize check
 				checks.add(
 					"${it.nativeType.javaMethodType}.validate(${it.name}.address()${sequenceOf(
 						if ( it.has(Check) ) it[Check].expression else null,
