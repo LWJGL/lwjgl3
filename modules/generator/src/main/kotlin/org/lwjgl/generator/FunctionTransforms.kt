@@ -28,6 +28,7 @@ interface SkipCheckFunctionTransform
 
 internal open class AutoSizeTransform(
 	val bufferParam: Parameter,
+	val relaxedCast: Boolean,
 	val applyTo: ApplyTo,
 	val applyFactor: Boolean = true
 ) : FunctionTransform<Parameter> {
@@ -51,17 +52,22 @@ internal open class AutoSizeTransform(
 		if ( applyFactor && factor != null )
 			expression += " ${factor.expression()}"
 
-		if ( (param.nativeType.mapping as PrimitiveMapping).bytes != 4 )
+		if ( (param.nativeType.mapping as PrimitiveMapping).bytes.let { if (relaxedCast) it < 4 else it != 4 } )
 			expression = "(${param.nativeType.javaMethodType})${if ( expression.contains(' ') ) "($expression)" else expression}"
 
 		return expression
 	}
 }
 
-internal fun AutoSizeTransform(bufferParam: Parameter, applyTo: ApplyTo, byteShift: String) =
-	if ( byteShift == "0" ) AutoSizeTransform(bufferParam, applyTo) else AutoSizeBytesTransform(bufferParam, applyTo, byteShift)
+internal fun AutoSizeTransform(bufferParam: Parameter, relaxedCast: Boolean, applyTo: ApplyTo, byteShift: String) =
+	if ( byteShift == "0" ) AutoSizeTransform(bufferParam, relaxedCast, applyTo) else AutoSizeBytesTransform(bufferParam, relaxedCast, applyTo, byteShift)
 
-private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, val byteShift: String) : AutoSizeTransform(bufferParam, applyTo) {
+private class AutoSizeBytesTransform(
+	bufferParam: Parameter,
+	relaxedCast: Boolean,
+	applyTo: ApplyTo,
+	val byteShift: String
+) : AutoSizeTransform(bufferParam, relaxedCast, applyTo) {
 	override fun transformCall(param: Parameter, original: String): String {
 		if ( applyTo === ApplyTo.NORMAL )
 			return param.name
@@ -93,7 +99,7 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, v
 			}
 		}
 
-		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
+		if ( (param.nativeType.mapping as PrimitiveMapping).bytes.let { if (relaxedCast) it < 4 else it != 4 } )
 			expression = "(${param.nativeType.javaMethodType})($expression)"
 
 		return expression

@@ -168,18 +168,20 @@ class NativeClassFunction(
 	private val hasNativeCode: Boolean
 		get() = (has(Code) && this[Code].let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || parameters.contains(JNI_ENV)
 
-	internal val hasCustomJNI: Boolean
-		get() = nativeClass.binding == null || returns.isStructValue || hasNativeCode
+	internal val hasCustomJNI: Boolean by lazy {
+		nativeClass.binding == null || returns.isStructValue || hasNativeCode
+	}
 
 	private val isSimpleFunction: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
 
-	internal val hasUnsafeMethod: Boolean
-		get() = nativeClass.binding != null
-		        && !(hasExplicitFunctionAddress && hasNativeCode)
-		        && (returns.isBufferPointer || returns.nativeType is CallbackType || hasParam { it.isBufferPointer || it.nativeType is CallbackType || it has MapToInt })
-		        && !returns.has(Address)
-				&& !hasParam { it.nativeType is ArrayType }
+	internal val hasUnsafeMethod: Boolean by lazy {
+		nativeClass.binding != null
+		&& !(hasExplicitFunctionAddress && hasNativeCode)
+		&& (returns.isBufferPointer || returns.nativeType is CallbackType || hasParam { it.isBufferPointer || it.nativeType is CallbackType || it has MapToInt })
+		&& !returns.has(Address)
+		&& !hasParam { it.nativeType is ArrayType }
+	}
 
 	internal val hasArrayOverloads: Boolean
 		get() = !has(OffHeapOnly) && parameters
@@ -211,8 +213,7 @@ class NativeClassFunction(
 
 	private fun hasAutoSizeFor(reference: Parameter) = hasParam(hasAutoSizePredicate(reference))
 
-	internal val hideAutoSizeResultParam: Boolean
-		get() = returns.nativeType is PointerType && getParams { it.isAutoSizeResultOut }.count() == 1
+	internal val hideAutoSizeResultParam = returns.nativeType is PointerType && getParams { it.isAutoSizeResultOut }.count() == 1
 
 	private fun Parameter.error(msg: String) {
 		throw IllegalArgumentException("$msg [${nativeClass.className}.${this@NativeClassFunction.name}, parameter: ${this.name}]")
@@ -963,7 +964,7 @@ class NativeClassFunction(
 					val param = paramMap[autoSize.reference]!! // TODO: Check dependent too?
 					// Check if there's also an optional on the referenced parameter. Skip if so.
 					if ( !(param has optional) )
-						transforms[it] = AutoSizeTransform(param, autoSize.applyTo)
+						transforms[it] = AutoSizeTransform(param, hasCustomJNI || hasUnsafeMethod, autoSize.applyTo)
 				} else if ( it has optional ) {
 					transforms[it] = ExpressionTransform("NULL")
 				} else if ( it has Expression ) {
@@ -1077,7 +1078,7 @@ class NativeClassFunction(
 				// Disable AutoSize factor
 				val autoSizeParam = getReferenceParam(AutoSize, bufferParam.name)
 				if ( autoSizeParam != null )
-					transforms[autoSizeParam] = AutoSizeTransform(bufferParam, autoSizeParam[AutoSize].applyTo, applyFactor = false)
+					transforms[autoSizeParam] = AutoSizeTransform(bufferParam, hasCustomJNI || hasUnsafeMethod, autoSizeParam[AutoSize].applyTo, applyFactor = false)
 
 				val types = ArrayList<AutoTypeToken>(autoTypes.types.size)
 				autoTypes.types.forEach { types.add(it) }
@@ -1104,7 +1105,7 @@ class NativeClassFunction(
 			// Add the AutoSize transformation if we skipped it above
 			getParams { it has AutoSize }.forEach {
 				val autoSize = it[AutoSize]
-				transforms[it] = AutoSizeTransform(paramMap[autoSize.reference]!!, autoSize.applyTo)
+				transforms[it] = AutoSizeTransform(paramMap[autoSize.reference]!!, hasCustomJNI || hasUnsafeMethod, autoSize.applyTo)
 			}
 
 			var multiTypes = it.first()[MultiType].types.asSequence()
@@ -1116,7 +1117,7 @@ class NativeClassFunction(
 					// Transform the AutoSize parameter, if there is one
 					getReferenceParam(AutoSize, it.name).let { autoSizeParam ->
 						if (autoSizeParam != null)
-							transforms[autoSizeParam] = AutoSizeTransform(it, ApplyTo.ALTERNATIVE, autoType.byteShift!!)
+							transforms[autoSizeParam] = AutoSizeTransform(it, hasCustomJNI || hasUnsafeMethod, ApplyTo.ALTERNATIVE, autoType.byteShift!!)
 					}
 
 					transforms[it] = AutoTypeTargetTransform(autoType)
