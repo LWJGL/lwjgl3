@@ -297,36 +297,22 @@ public final class Checks {
 	}
 
 	/**
-	 * Helper method to ensure a {@link PointerBuffer} has enough capacity.
+	 * Helper method to ensure a {@link CustomBuffer} has enough capacity.
 	 *
 	 * @param buf  the buffer to check
 	 * @param size the minimum buffer capacity
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	public static void checkBuffer(PointerBuffer buf, int size) {
+	public static void checkBuffer(CustomBuffer<?> buf, int size) {
 		if ( buf.remaining() < size ) {
 			throwSizeException(buf, size);
 		}
 	}
 
-	/** @see #checkBuffer(PointerBuffer, int) */
-	public static void checkBuffer(PointerBuffer buf, long size) {
+	/** @see #checkBuffer(CustomBuffer, int) */
+	public static void checkBuffer(CustomBuffer<?> buf, long size) {
 		checkBuffer(buf, (int)size);
-	}
-
-	/**
-	 * Helper method to ensure a {@link StructBuffer} has enough capacity.
-	 *
-	 * @param buf  the buffer to check
-	 * @param size the minimum buffer capacity
-	 *
-	 * @throws IllegalArgumentException
-	 */
-	public static void checkBuffer(StructBuffer<?, ?> buf, int size) {
-		if ( buf.remaining() < size ) {
-			throwSizeException(buf, size);
-		}
 	}
 
 	public static void checkBufferSafe(short[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
@@ -336,8 +322,7 @@ public final class Checks {
 	public static void checkBufferSafe(double[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
 	public static void checkBufferSafe(Buffer buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
 	public static void checkBufferSafe(Buffer buf, long size) { if ( buf != null ) checkBuffer(buf, size); }
-	public static void checkBufferSafe(PointerBuffer buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
-	public static void checkBufferSafe(StructBuffer<?, ?> buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
+	public static void checkBufferSafe(CustomBuffer<?> buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
 
 	public static void checkArray(Object[] array, int size) {
 		if ( array.length < size )
@@ -349,7 +334,7 @@ public final class Checks {
 			throwBufferSizeGTException(buf, size);
 	}
 
-	public static void checkBufferGT(PointerBuffer buf, int size) {
+	public static void checkBufferGT(CustomBuffer<?> buf, int size) {
 		if ( size < buf.remaining() )
 			throwBufferSizeGTException(buf, size);
 	}
@@ -365,12 +350,8 @@ public final class Checks {
 		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at least " + size);
 	}
 
-	private static void throwSizeException(PointerBuffer buf, int size) {
-		throw new IllegalArgumentException("Number of remaining pointer values in buffer is " + buf.remaining() + ", must be at least " + size);
-	}
-
-	private static void throwSizeException(StructBuffer<?, ?> buf, int size) {
-		throw new IllegalArgumentException("Number of remaining struct values in buffer is " + buf.remaining() + ", must be at least " + size);
+	private static void throwSizeException(CustomBuffer<?> buf, int size) {
+		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at least " + size);
 	}
 
 	private static void throwSizeException(Object[] array, int size) {
@@ -405,11 +386,7 @@ public final class Checks {
 		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at most " + size + ".");
 	}
 
-	private static void throwBufferSizeGTException(PointerBuffer buf, int size) {
-		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at most " + size + ".");
-	}
-
-	private static void throwBufferSizeGTException(StructBuffer<?, ?> buf, int size) {
+	private static void throwBufferSizeGTException(CustomBuffer<?> buf, int size) {
 		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at most " + size + ".");
 	}
 

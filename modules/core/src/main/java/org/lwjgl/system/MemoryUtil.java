@@ -582,17 +582,11 @@ public final class MemoryUtil {
 	/** Null-safe version of {@link #memAddress0(Buffer)}. Returns {@link #NULL} if the specified buffer is null. */
 	public static long memAddress0Safe(Buffer buffer) { return buffer == null ? NULL : ACCESSOR.memAddress0(buffer); }
 
-	/** PointerBuffer version of {@link #memAddress0(Buffer)}. */
-	public static long memAddress0(PointerBuffer buffer) { return buffer.address0(); }
+	/** CustomBuffer version of {@link #memAddress0(Buffer)}. */
+	public static long memAddress0(CustomBuffer<?> buffer) { return buffer.address0(); }
 
-	/** PointerBuffer version of {@link #memAddress0Safe(Buffer)}. */
-	public static long memAddress0Safe(PointerBuffer buffer) { return buffer == null ? NULL : buffer.address0(); }
-
-	/** StructBuffer version of {@link #memAddress0(Buffer)}. */
-	public static long memAddress0(StructBuffer<?, ?> buffer) { return buffer.address0(); }
-
-	/** StructBuffer version of {@link #memAddress0Safe(Buffer)}. */
-	public static long memAddress0Safe(StructBuffer<?, ?> buffer) { return buffer == null ? NULL : buffer.address0(); }
+	/** CustomBuffer version of {@link #memAddress0Safe(Buffer)}. */
+	public static long memAddress0Safe(CustomBuffer<?> buffer) { return buffer == null ? NULL : buffer.address0(); }
 
 	// --- [ Buffer address ] ---
 
@@ -665,17 +659,11 @@ public final class MemoryUtil {
 	/** DoubleBuffer version of {@link #memAddress(ByteBuffer, int)}. */
 	public static long memAddress(DoubleBuffer buffer, int position) { return memAddress0(buffer) + (position << 3); }
 
-	/** PointerBuffer version of {@link #memAddress(ByteBuffer)}. */
-	public static long memAddress(PointerBuffer buffer) { return memAddress(buffer, buffer.position()); }
+	/** CustomBuffer version of {@link #memAddress(ByteBuffer)}. */
+	public static long memAddress(CustomBuffer<?> buffer) { return buffer.address(); }
 
-	/** PointerBuffer version of {@link #memAddress(ByteBuffer, int)}. */
-	public static long memAddress(PointerBuffer buffer, int position) { return memAddress0(buffer) + (position << POINTER_SHIFT); }
-
-	/** StructBuffer version of {@link #memAddress(ByteBuffer)}. */
-	public static long memAddress(StructBuffer<?, ?> buffer) { return memAddress(buffer, buffer.position()); }
-
-	/** StructBuffer version of {@link #memAddress(ByteBuffer, int)}. */
-	public static long memAddress(StructBuffer<?, ?> buffer, int position) { return memAddress0(buffer) + position * buffer.sizeof(); }
+	/** CustomBuffer version of {@link #memAddress(ByteBuffer, int)}. */
+	public static long memAddress(CustomBuffer<?> buffer, int position) { return buffer.address(position); }
 
 	// --- [ Buffer address - Safe ] ---
 
@@ -721,17 +709,8 @@ public final class MemoryUtil {
 	/** DoubleBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(DoubleBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
-	/** PointerBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
-	public static long memAddressSafe(PointerBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
-
-	/** PointerBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
-	public static long memAddressSafe(PointerBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
-
-	/** StructBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
-	public static long memAddressSafe(StructBuffer<?, ?> buffer) { return buffer == null ? NULL : memAddress(buffer); }
-
-	/** StructBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
-	public static long memAddressSafe(StructBuffer<?, ?> buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
+	/** CustomBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
+	public static long memAddressSafe(CustomBuffer<?> buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
 	/** Pointer version of {@link #memAddressSafe(ByteBuffer)}. */
 	public static long memAddressSafe(Pointer pointer) { return pointer == null ? NULL : pointer.address(); }

@@ -4,36 +4,19 @@
  */
 package org.lwjgl;
 
+import org.lwjgl.system.CustomBuffer;
 import org.lwjgl.system.MemoryUtil;
 import org.lwjgl.system.Pointer;
 
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.Pointer.*;
 
 /** This class is a container for architecture-independent pointer data. Its interface mirrors the {@link LongBuffer} API for convenience. */
-public class PointerBuffer implements Comparable<PointerBuffer> {
+public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Comparable<PointerBuffer> {
 
-	protected long address;
-
-	protected ByteBuffer container;
-
-	protected int
-		mark,
-		position,
-		limit,
-		capacity;
-
-	// disallow other implementations
-	PointerBuffer(long address, ByteBuffer container, int mark, int position, int limit, int capacity) {
-		this.address = address;
-		this.container = container;
-
-		this.mark = mark;
-		this.position = position;
-		this.limit = limit;
-		this.capacity = capacity;
+	protected PointerBuffer(long address, ByteBuffer container, int mark, int position, int limit, int capacity) {
+		super(address, container, mark, position, limit, capacity);
 	}
 
 	/**
@@ -83,206 +66,18 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 		return buffer;
 	}
 
-	/** Returns the buffer's base address. [INTERNAL USE ONLY] */
-	public long address0() {
-		return address;
-	}
-
-	/**
-	 * Returns this buffer's capacity.
-	 *
-	 * @return the capacity of this buffer
-	 */
-	public int capacity() {
-		return capacity;
-	}
-
-	/**
-	 * Returns this buffer's position.
-	 *
-	 * @return the position of this buffer
-	 */
-	public int position() {
-		return position;
-	}
-
-	/**
-	 * Sets this buffer's position. If the mark is defined and larger than the new position then it is discarded.
-	 *
-	 * @param newPosition the new position value; must be non-negative and no larger than the current limit
-	 *
-	 * @return This buffer
-	 *
-	 * @throws IllegalArgumentException If the preconditions on <tt>newPosition</tt> do not hold
-	 */
-	public PointerBuffer position(int newPosition) {
-		checkIndex(newPosition, limit);
-		position = newPosition;
-		if ( position < mark ) mark = -1;
+	@Override
+	protected PointerBuffer self() {
 		return this;
 	}
 
-	/**
-	 * Returns this buffer's limit.
-	 *
-	 * @return the limit of this buffer
-	 */
-	public int limit() {
-		return limit;
+	@Override
+	protected int sizeof() {
+		return Pointer.POINTER_SIZE;
 	}
 
-	/**
-	 * Sets this buffer's limit. If the position is larger than the new limit then it is set to the new limit. If the mark is defined and larger than the new
-	 * limit then it is discarded.
-	 *
-	 * @param newLimit the new limit value; must be non-negative and no larger than this buffer's capacity
-	 *
-	 * @return This buffer
-	 *
-	 * @throws IllegalArgumentException If the preconditions on <tt>newLimit</tt> do not hold
-	 */
-	public PointerBuffer limit(int newLimit) {
-		checkIndex(newLimit, capacity);
-		limit = newLimit;
-		if ( limit < position ) position = limit;
-		if ( limit < mark ) mark = -1;
-		return this;
-	}
-
-	/**
-	 * Sets this buffer's mark at its position.
-	 *
-	 * @return This buffer
-	 */
-	public PointerBuffer mark() {
-		mark = position;
-		return this;
-	}
-
-	/**
-	 * Resets this buffer's position to the previously-marked position.
-	 *
-	 * <p>Invoking this method neither changes nor discards the mark's value.</p>
-	 *
-	 * @return This buffer
-	 *
-	 * @throws java.nio.InvalidMarkException If the mark has not been set
-	 */
-	public PointerBuffer reset() {
-		int m = mark;
-		if ( m < 0 )
-			throw new InvalidMarkException();
-		position = m;
-		return this;
-	}
-
-	/**
-	 * Clears this buffer. The position is set to zero, the limit is set to the capacity, and the mark is discarded.
-	 *
-	 * <p>Invoke this method before using a sequence of channel-read or <i>put</i> operations to fill this buffer. For example:</p>
-	 *
-	 * <blockquote><pre>
-	 * buf.clear();     // Prepare buffer for reading
-	 * in.read(buf);    // Read data</pre></blockquote>
-	 *
-	 * <p>This method does not actually erase the data in the buffer, but it is named as if it did because it will most often be used in situations in which
-	 * that might as well be the case.</p>
-	 *
-	 * @return This buffer
-	 */
-	public PointerBuffer clear() {
-		position = 0;
-		limit = capacity;
-		mark = -1;
-		return this;
-	}
-
-	/**
-	 * Flips this buffer. The limit is set to the current position and then the position is set to zero. If the mark is defined then it is discarded.
-	 *
-	 * <p>After a sequence of channel-read or <i>put</i> operations, invoke this method to prepare for a sequence of channel-write or relative <i>get</i>
-	 * operations. For example:</p>
-	 *
-	 * <blockquote><pre>
-	 * buf.put(magic);    // Prepend header
-	 * in.read(buf);      // Read data into rest of buffer
-	 * buf.flip();        // Flip buffer
-	 * out.write(buf);    // Write header + data to channel</pre></blockquote>
-	 *
-	 * <p>This method is often used in conjunction with the {@link #compact} method when transferring data from one place to another.</p>
-	 *
-	 * @return This buffer
-	 */
-	public PointerBuffer flip() {
-		limit = position;
-		position = 0;
-		mark = -1;
-		return this;
-	}
-
-	/**
-	 * Rewinds this buffer. The position is set to zero and the mark is discarded.
-	 *
-	 * <p>Invoke this method before a sequence of channel-write or <i>get</i> operations, assuming that the limit has already been set appropriately. For
-	 * example:</p>
-	 *
-	 * <blockquote><pre>
-	 * out.write(buf);    // Write remaining data
-	 * buf.rewind();      // Rewind buffer
-	 * buf.get(array);    // Copy data into array</pre></blockquote>
-	 *
-	 * @return This buffer
-	 */
-	public PointerBuffer rewind() {
-		position = 0;
-		mark = -1;
-		return this;
-	}
-
-	/**
-	 * Returns the number of elements between the current position and the limit.
-	 *
-	 * @return the number of elements remaining in this buffer
-	 */
-	public int remaining() {
-		return limit - position;
-	}
-
-	/**
-	 * Tells whether there are any elements between the current position and the limit.
-	 *
-	 * @return <tt>true</tt> if, and only if, there is at least one element remaining in this buffer
-	 */
-	public boolean hasRemaining() {
-		return position < limit;
-	}
-
-	/**
-	 * Creates a new pointer buffer whose content is a shared subsequence of this buffer's content.
-	 *
-	 * <p>The content of the new buffer will start at this buffer's current position. Changes to this buffer's content will be visible in the new buffer, and
-	 * vice versa; the two buffers' position, limit, and mark values will be independent.</p>
-	 *
-	 * <p>The new buffer's position will be zero, its capacity and its limit will be the number of pointers remaining in this buffer, and its mark will be
-	 * undefined. The new buffer will be direct if, and only if, this buffer is direct, and it will be read-only if, and only if, this buffer is read-only.</p>
-	 *
-	 * @return the new pointer buffer
-	 */
-	public PointerBuffer slice() {
-		return new PointerBuffer(memAddress(this), container, -1, 0, this.remaining(), this.remaining());
-	}
-
-	/**
-	 * Creates a new pointer buffer that shares this buffer's content.
-	 *
-	 * <p>The content of the new buffer will be that of this buffer. Changes to this buffer's content will be visible in the new buffer, and vice versa; the
-	 * two buffers' position, limit, and mark values will be independent.
-	 *
-	 * <p>The new buffer's capacity, limit and position will be identical to those of this buffer.</p>
-	 *
-	 * @return the new pointer buffer
-	 */
-	public PointerBuffer duplicate() {
+	@Override
+	protected PointerBuffer newBufferInstance(long address, ByteBuffer container, int mark, int position, int limit, int capacity) {
 		return new PointerBuffer(address, container, mark, position, limit, capacity);
 	}
 
@@ -632,45 +427,6 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 *
-	 * <p>This method transfers the pointers remaining in the specified source buffer into this buffer. If there are more pointers remaining in the source
-	 * buffer than in this buffer, that is, if <tt>src.remaining()</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no pointers are transferred and a
-	 * {@link java.nio.BufferOverflowException} is thrown.
-	 *
-	 * <p>Otherwise, this method copies <i>n</i>&nbsp;=&nbsp;<tt>src.remaining()</tt> pointers from the specified buffer into this buffer, starting at each
-	 * buffer's current position. The positions of both buffers are then incremented by <i>n</i>.</p>
-	 *
-	 * <p>In other words, an invocation of this method of the form <tt>dst.put(src)</tt> has exactly the same effect as the loop</p>
-	 *
-	 * <pre>
-	 *     while (src.hasRemaining())
-	 *         dst.put(src.get()); </pre>
-	 *
-	 * <p>except that it first checks that there is sufficient space in this buffer and it is potentially much more efficient. </p>
-	 *
-	 * @param src the source buffer from which pointers are to be read; must not be this buffer
-	 *
-	 * @return This buffer
-	 *
-	 * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer for the remaining pointers in the source buffer
-	 * @throws IllegalArgumentException         If the source buffer is this buffer
-	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
-	 */
-	public PointerBuffer put(PointerBuffer src) {
-		if ( src == this )
-			throw new IllegalArgumentException();
-		int n = src.remaining();
-		if ( remaining() < n )
-			throw new BufferOverflowException();
-
-		memCopy(memAddress(src), memAddress(this), n << POINTER_SHIFT);
-		this.position(position + n);
-		src.position(src.position + n);
-		return this;
-	}
-
-	/**
-	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
-	 *
 	 * <p>This method transfers the entire content of the specified source pointer array into this buffer. An invocation of this method of the form
 	 * <tt>dst.put(a)</tt> behaves in exactly the same way as the invocation</p>
 	 *
@@ -723,53 +479,6 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 			put(src[i]);
 
 		return this;
-	}
-
-	/**
-	 * Compacts this buffer&nbsp;&nbsp;<i>(optional operation)</i>.
-	 *
-	 * <p>The pointers between the buffer's current position and its limit, if any, are copied to the beginning of the buffer. That is, the pointer at index
-	 * <i>p</i>&nbsp;=&nbsp;<tt>position()</tt> is copied to index zero, the pointer at index <i>p</i>&nbsp;+&nbsp;1 is copied to index one, and so forth until
-	 * the pointer at index <tt>limit()</tt>&nbsp;-&nbsp;1 is copied to index <i>n</i>&nbsp;=&nbsp;<tt>limit()</tt>&nbsp;-&nbsp;<tt>1</tt>&nbsp;-&nbsp;
-	 * <i>p</i>.
-	 * The buffer's position is then set to <i>n+1</i> and its limit is set to its capacity. The mark, if defined, is discarded.
-	 *
-	 * <p>The buffer's position is set to the number of pointers copied, rather than to zero, so that an invocation of this method can be followed
-	 * immediately by an invocation of another relative <i>put</i> method.</p>
-	 *
-	 * @return This buffer
-	 *
-	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
-	 */
-	public PointerBuffer compact() {
-		memCopy(memAddress(this), address, remaining() << POINTER_SHIFT);
-		position(remaining());
-		limit(capacity());
-		mark = -1;
-
-		return this;
-	}
-
-	/**
-	 * Retrieves this buffer's byte order.
-	 *
-	 * <p>The byte order of a pointer buffer created by allocation or by wrapping an existing <tt>pointer</tt> array is the
-	 * {@link java.nio.ByteOrder#nativeOrder </code>native order<code>} of the underlying hardware. The byte order of a pointer buffer created as a
-	 * <a href="ByteBuffer.html#views">view</a> of a byte buffer is that of the byte buffer at the moment that the view is created.</p>
-	 *
-	 * @return This buffer's byte order
-	 */
-	public ByteOrder order() {
-		return ByteOrder.nativeOrder();
-	}
-
-	/**
-	 * Returns a string summarizing the state of this buffer.
-	 *
-	 * @return A summary string
-	 */
-	public String toString() {
-		return getClass().getName() + "[pos=" + position() + " lim=" + limit() + " cap=" + capacity() + "]";
 	}
 
 	/**
@@ -855,29 +564,6 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	private static void checkBounds(int off, int len, int size) {
 		if ( (off | len | (off + len) | (size - (off + len))) < 0 )
 			throw new IndexOutOfBoundsException();
-	}
-
-	private int nextGetIndex() {
-		if ( limit <= position )
-			throw new BufferUnderflowException();
-		return position++;
-	}
-
-	private int nextPutIndex() {
-		if ( limit <= position )
-			throw new BufferOverflowException();
-		return position++;
-	}
-
-	private static void checkIndex(int index, int limit) {
-		if ( index < 0 || limit < index )
-			throw new IllegalArgumentException();
-	}
-
-	private int checkIndex(int index) {
-		if ( index < 0 || limit < index )
-			throw new IndexOutOfBoundsException();
-		return index;
 	}
 
 }

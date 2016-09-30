@@ -816,7 +816,7 @@ ${validations.joinToString("\n")}
 
 		@Override
 		protected $className newInstance(long address) {
-			return new $className(address, getContainer());
+			return new $className(address, container);
 		}
 
 		@Override
