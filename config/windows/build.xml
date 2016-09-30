@@ -38,11 +38,13 @@
 		<attribute name="name"/>
 		<attribute name="dest"/>
 		<attribute name="flags" default="/Wall /WX"/>
+		<element name="compileargs" optional="true"/>
 		<element name="source"/>
 		<element name="link" optional="true"/>
 		<element name="linkargs" optional="true"/>
 		<sequential>
 			<compile dest="@{dest}" flags="@{flags}">
+				<compileargs/>
 				<source/>
 			</compile>
 
@@ -66,6 +68,34 @@
 			<antcall target="-update-dependencies-${build.arch}" if:set="update-dependencies"/>
 			<property name="dependencies-uptodate" value="true" if:set="update-dependencies"/>
 
+			<!--
+				x86: Generate DEF file to drop __stdcall decorations from JavaCritical
+				functions. This is required because of a bug (wrong args_size) in
+				hotspot/src/share/vm/prims/nativeLookup.cpp#lookup_critical_entry.
+			 -->
+			<local name="undecorate"/>
+			<condition property="undecorate" value="true">
+				<and>
+					<not><isset property="lib-uptodate"/></not>
+					<equals arg1="${build.arch}" arg2="x86"/>
+				</and>
+			</condition>
+			<concat destfile="${bin.native}/build/@{name}${LIB_POSTFIX}.def" if:set="undecorate">
+				<header filtering="no">LIBRARY    @{name}${LIB_POSTFIX}.dll
+EXPORTS
+</header>
+				<!-- For each source file -->
+				<source/>
+				<filterchain>
+					<!-- For each line with a JNICALL -->
+					<linecontainsregexp>
+						<regexp pattern="JNICALL\s+JavaCritical_\p{javaJavaIdentifierPart}+?[(]"/>
+					</linecontainsregexp>
+					<!-- Append the function name -->
+					<replaceregex pattern="^.*?JNICALL\s+(.+?)[(].+$" replace="    \1"/>
+				</filterchain>
+			</concat>
+
 			<apply executable="cl" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
 				<arg line='/LD /WX /nologo /Fe:"${bin.native}\build\@{name}${LIB_POSTFIX}.dll"'/>
 
@@ -78,6 +108,7 @@
 				<arg value="/OPT:REF,ICF"/>
 				<arg value="/DLL"/>
 				<arg value="/LTCG"/>
+				<arg value="/DEF:${bin.native}\build\@{name}${LIB_POSTFIX}.def" if:set="undecorate"/>
 
 				<linkargs/>
 			</apply>
@@ -91,8 +122,10 @@
 
 		<!-- CORE -->
 		<build name="lwjgl" dest="${bin.native}/core">
-			<source>
+			<compileargs>
 				<arg value="/I${src.include}\system\dyncall"/>
+			</compileargs>
+			<source>
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<exclude name="${src.native}/system/lwjgl_malloc.c"/>
@@ -116,8 +149,10 @@
 			<fileset dir="." includes="${src.include}/util/lmdb/*.c"/>
 		</compile>
 		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
-			<source>
+			<compileargs>
 				<arg value="/I${src.include}\util\lmdb"/>
+			</compileargs>
+			<source>
 				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
 			</source>
 			<linkargs>
@@ -128,9 +163,11 @@
 
 		<!-- NanoVG -->
 		<build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
-			<source>
+			<compileargs>
 				<arg value="/I${src.include}\nanovg"/>
 				<arg value="/I${src.include}\stb"/>
+			</compileargs>
+			<source>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
 			</source>
@@ -144,9 +181,11 @@
 			<fileset dir="." includes="${src.include}/util/nfd/nfd_win.cpp"/>
 		</compile>
 		<build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
-			<source>
+			<compileargs>
 				<arg value="/I${src.include}\util\nfd"/>
 				<arg value="/I${src.include}\util\nfd\include"/>
+			</compileargs>
+			<source>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
 			</source>
@@ -158,8 +197,10 @@
 
 		<!-- Nuklear -->
 		<build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
-			<source>
+			<compileargs>
 				<arg value="/I${src.include}\nuklear"/>
+			</compileargs>
+			<source>
 				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
 			</source>
 		</build>
@@ -170,17 +211,21 @@
 			<fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*.cpp"/>
 		</compile>
 		<build name="lwjgl_ovr" dest="${bin.native}/ovr" if:true="${binding.ovr}">
-			<source>
+			<compileargs>
 				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
 				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Src"/>
+			</compileargs>
+			<source>
 				<fileset dir="." includes="${src.generated.native}/ovr/*.c"/>
 			</source>
 		</build>
 
 		<!-- ParShapes -->
 		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
-			<source>
+			<compileargs>
 				<arg value="/I${src.include}\util\par"/>
+			</compileargs>
+			<source>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
 			</source>
@@ -188,16 +233,20 @@
 
 		<!-- SSE -->
 		<build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
-			<source>
+			<compileargs>
 				<arg value="/I${src.include}\util"/>
+			</compileargs>
+			<source>
 				<fileset dir="." includes="${src.generated.native}/util/simd/*.c"/>
 			</source>
 		</build>
 
 		<!-- stb -->
 		<build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
-			<source>
+			<compileargs>
 				<arg value="/I${src.include}\stb"/>
+			</compileargs>
+			<source>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
 			</source>
@@ -209,8 +258,10 @@
 			<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
 		</compile>
 		<build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
-			<source>
+			<compileargs>
 				<arg value="/I${src.include}\util\tinyfd"/>
+			</compileargs>
+			<source>
 				<fileset dir="." includes="${src.generated.native}/util/tinyfd/*.c"/>
 			</source>
 			<linkargs>
@@ -223,10 +274,12 @@
 
 		<!-- xxHash -->
 		<build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
-			<source>
+			<compileargs>
 				<arg value="/I${src.include}\system"/>
 				<arg value="/I${src.include}\util\xxhash"/>
 				<arg value="/I${src.native}\util\xxhash"/>
+			</compileargs>
+			<source>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
 			</source>
