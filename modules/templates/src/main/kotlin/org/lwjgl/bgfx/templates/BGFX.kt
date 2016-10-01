@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	IntConstant(
 		"API version",
 
-		"API_VERSION".."22"
+		"API_VERSION".."23"
 	)
 
 	val StateFlags = LongConstant(
@@ -495,15 +495,15 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	val RendererType = EnumConstant(
 		"Renderer type. ({@code bgfx_renderer_type_t})",
 
-		"RENDERER_TYPE_NULL".enum,
+		"RENDERER_TYPE_NOOP".enum,
 		"RENDERER_TYPE_DIRECT3D9".enum,
 		"RENDERER_TYPE_DIRECT3D11".enum,
 		"RENDERER_TYPE_DIRECT3D12".enum,
+		"RENDERER_TYPE_GNM".enum,
 		"RENDERER_TYPE_METAL".enum,
 		"RENDERER_TYPE_OPENGLES".enum,
 		"RENDERER_TYPE_OPENGL".enum,
 		"RENDERER_TYPE_VULKAN".enum,
-		"RENDERER_TYPE_GNM".enum,
 
 		"RENDERER_TYPE_COUNT".enum
 	).javaDocLinks
