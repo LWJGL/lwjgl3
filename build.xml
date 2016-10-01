@@ -811,7 +811,7 @@
 		</release-module>
 
 		<!-- bgfx -->
-		<release-module package="org.lwjgl.bgfx" name="bgfx" java-only="true" title="bgfx" license="bgfx" if:true="${binding.bgfx}"/>
+		<release-module package="org.lwjgl.bgfx" name="bgfx" native-library="bgfx" title="bgfx" license="bgfx" if:true="${binding.bgfx}"/>
 
 		<!-- EGL -->
 		<release-module package="org.lwjgl.egl" name="egl" java-only="true" title="EGL" license="khronos" if:true="${binding.egl}">

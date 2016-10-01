@@ -241,6 +241,7 @@
 		<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
 		<update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
 
+		<update-dependency name="bgfx" artifact="x64/libbgfx.dylib" dest="${lib}" if:true="${binding.bgfx}"/>
 		<update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}" if:true="${binding.jemalloc}"/>
 		<update-dependency name="glfw3" artifact="x64/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
