@@ -51,7 +51,7 @@ println "${deployment.type.name()} BUILD"
 enum Artifacts {
 	CORE("lwjgl", true, "LWJGL", "The LWJGL core library."),
 	BGFX(
-		"lwjgl-bgfx", false, "LWJGL - bgfx bindings",
+		"lwjgl-bgfx", true, "LWJGL - bgfx bindings",
 		"A cross-platform, graphics API agnostic rendering library. It provides a high performance, low level abstraction for common platform graphics APIs like OpenGL, Direct3D and Apple Metal."
 	),
 	EGL(
