@@ -10,8 +10,8 @@ import org.lwjgl.stb.*
 val stb_truetype = "STBTruetype".nativeClass(packageName = STB_PACKAGE, prefix = "STBTT", prefixMethod = "stbtt_", library = STB_LIBRARY) {
 	includeSTBAPI(
 		"""#include "lwjgl_malloc.h"
-#define STBTT_malloc(x,u)  ((void)(u),lwjgl_malloc(x))
-#define STBTT_free(x,u)    ((void)(u),lwjgl_free(x))
+#define STBTT_malloc(x,u)  ((void)(u),org_lwjgl_malloc(x))
+#define STBTT_free(x,u)    ((void)(u),org_lwjgl_free(x))
 #define STBTT_assert
 #define STB_TRUETYPE_IMPLEMENTATION
 #define STBTT_STATIC

@@ -10,8 +10,8 @@ import org.lwjgl.stb.*
 val stb_image_resize = "STBImageResize".nativeClass(packageName = STB_PACKAGE, prefix = "STBIR", prefixMethod = "stbir_", library = STB_LIBRARY) {
 	includeSTBAPI(
 		"""#include "lwjgl_malloc.h"
-#define STBIR_MALLOC(size,c) lwjgl_malloc(size)
-#define STBIR_FREE(ptr,c)    lwjgl_free(ptr)
+#define STBIR_MALLOC(size,c) org_lwjgl_malloc(size)
+#define STBIR_FREE(ptr,c)    org_lwjgl_free(ptr)
 #define STBIR_ASSERT(x)
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
 #define STB_IMAGE_RESIZE_STATIC

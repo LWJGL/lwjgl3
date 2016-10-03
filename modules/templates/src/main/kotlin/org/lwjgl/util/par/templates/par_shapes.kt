@@ -19,10 +19,10 @@ val par_shapes = "ParShapes".nativeClass(packageName = PAR_PACKAGE, prefix = "pa
 	initializeAllocator()
 	nativeDirective(
 		"""#include "lwjgl_malloc.h"
-#define PAR_MALLOC(T, N) ((T*) lwjgl_malloc(N * sizeof(T)))
-#define PAR_CALLOC(T, N) ((T*) lwjgl_calloc(N, sizeof(T)))
-#define PAR_REALLOC(T, BUF, N) ((T*) lwjgl_realloc(BUF, sizeof(T) * N))
-#define PAR_FREE(BUF) lwjgl_free(BUF)
+#define PAR_MALLOC(T, N) ((T*) org_lwjgl_malloc(N * sizeof(T)))
+#define PAR_CALLOC(T, N) ((T*) org_lwjgl_calloc(N, sizeof(T)))
+#define PAR_REALLOC(T, BUF, N) ((T*) org_lwjgl_realloc(BUF, sizeof(T) * N))
+#define PAR_FREE(BUF) org_lwjgl_free(BUF)
 DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4711 4738))

@@ -20,15 +20,15 @@ val nanovg = "NanoVG".nativeClass(packageName = NANOVG_PACKAGE, prefix = "NVG", 
 	__pragma(warning(disable : 4711))
 #endif
 #include "lwjgl_malloc.h"
-#define STBI_MALLOC(sz)    lwjgl_malloc(sz)
-#define STBI_REALLOC(p,sz) lwjgl_realloc(p,sz)
-#define STBI_FREE(p)       lwjgl_free(p)
+#define STBI_MALLOC(sz)    org_lwjgl_malloc(sz)
+#define STBI_REALLOC(p,sz) org_lwjgl_realloc(p,sz)
+#define STBI_FREE(p)       org_lwjgl_free(p)
 #define STBI_FAILURE_USERMSG
 #define STBI_ASSERT(x)
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_STATIC
-#define STBTT_malloc(x,u)  ((void)(u),lwjgl_malloc(x))
-#define STBTT_free(x,u)    ((void)(u),lwjgl_free(x))
+#define STBTT_malloc(x,u)  ((void)(u),org_lwjgl_malloc(x))
+#define STBTT_free(x,u)    ((void)(u),org_lwjgl_free(x))
 #define STBTT_assert
 #define STB_TRUETYPE_IMPLEMENTATION
 #define STBTT_STATIC

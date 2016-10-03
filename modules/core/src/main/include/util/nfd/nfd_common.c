@@ -44,7 +44,7 @@ void NFD_PathSet_Free( nfdpathset_t *pathset )
 
 void *NFDi_Malloc( size_t bytes )
 {
-    void *ptr = lwjgl_malloc(bytes);
+    void *ptr = org_lwjgl_malloc(bytes);
     if ( !ptr )
         NFDi_SetError("NFDi_Malloc failed.");
 
@@ -54,7 +54,7 @@ void *NFDi_Malloc( size_t bytes )
 void NFDi_Free( void *ptr )
 {
     assert(ptr);
-    lwjgl_free(ptr);
+    org_lwjgl_free(ptr);
 }
 
 void NFDi_SetError( const char *msg )

@@ -1,10 +1,8 @@
 {
 	# Expose symbols required by the JVM
 	global:
-		Java_*;
-		JNI_OnLoad;
-		JNI_OnUnload;
-		lwjgl_*;
+		*org_lwjgl_*;
+		JNI_On*;
 
 	# Hide everything else
 	local: *;

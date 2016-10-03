@@ -98,8 +98,8 @@
 /* Modify the local functions below should you wish to use some other memory routines */
 /* for malloc(), free() */
 #include <stdlib.h>
-static void* XXH_malloc(size_t s) { return lwjgl_malloc(s); }
-static void  XXH_free  (void* p)  { lwjgl_free(p); }
+static void* XXH_malloc(size_t s) { return org_lwjgl_malloc(s); }
+static void  XXH_free  (void* p)  { org_lwjgl_free(p); }
 /* for memcpy() */
 #include <string.h>
 static void* XXH_memcpy(void* dest, const void* src, size_t size) { return memcpy(dest,src,size); }

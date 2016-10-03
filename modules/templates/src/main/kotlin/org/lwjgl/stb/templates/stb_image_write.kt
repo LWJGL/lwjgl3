@@ -16,9 +16,9 @@ val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, pre
 	initializeAllocator()
 	includeSTBAPI(
 		"""#include "lwjgl_malloc.h"
-#define STBIW_MALLOC(sz)    lwjgl_malloc(sz)
-#define STBIW_REALLOC(p,sz) lwjgl_realloc(p,sz)
-#define STBIW_FREE(p)       lwjgl_free(p)
+#define STBIW_MALLOC(sz)    org_lwjgl_malloc(sz)
+#define STBIW_REALLOC(p,sz) org_lwjgl_realloc(p,sz)
+#define STBIW_FREE(p)       org_lwjgl_free(p)
 #define STBIW_ASSERT(x)
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_STATIC
