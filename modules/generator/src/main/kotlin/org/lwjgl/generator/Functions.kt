@@ -108,7 +108,9 @@ class NativeClassFunction(
 		validate()
 	}
 
-	val nativeName: String get() = if ( has(NativeName) ) this[NativeName].name else "\"$name\""
+	val functionAddress: String get() = if ( has(NativeName) ) this[NativeName].name else "\"$name\""
+
+	val nativeName: String get() = if (has(NativeName) && !this[NativeName].nativeName.contains(' ')) this[NativeName].nativeName else name
 
 	internal val accessModifier: String
 		get() = (if ( has(AccessModifier) ) this[AccessModifier].access else nativeClass.access).modifier
@@ -173,7 +175,7 @@ class NativeClassFunction(
 	}
 
 	private val isSimpleFunction: Boolean
-		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
+		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial } || has(NativeName))
 
 	internal val hasUnsafeMethod: Boolean by lazy {
 		nativeClass.binding != null
@@ -589,7 +591,7 @@ class NativeClassFunction(
 		}
 		print("\t${if ( macro ) "private " else accessModifier}static native $returnsNativeMethodType ")
 		if ( !nativeOnly ) print('n')
-		print(name)
+		print(nativeName)
 		print("(")
 
 		val nativeParams = getNativeParams()
@@ -679,7 +681,7 @@ class NativeClassFunction(
 		if ( !returns.isVoid && !returns.isStructValue )
 			print("return ")
 		print(if ( hasCustomJNI )
-			"n$name("
+			"n$nativeName("
 		else
 			"${binding.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 		)
@@ -909,7 +911,7 @@ class NativeClassFunction(
 		} else {
 			print(
 				if ( hasCustomJNI )
-					"n$name("
+					"n$nativeName("
 				else
 					"${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 			)
@@ -1451,7 +1453,7 @@ class NativeClassFunction(
 		print("typedef ${returns.toNativeType(nativeClass.binding)} (")
 		if ( nativeClass.binding?.callingConvention !== CallingConvention.DEFAULT )
 			print("APIENTRY ")
-		print("*${name}PROC) (")
+		print("*${nativeName}PROC) (")
 		val nativeParams = getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)
 		if ( nativeParams.any() ) {
 			printList(nativeParams) {
@@ -1492,7 +1494,7 @@ class NativeClassFunction(
 		print("JNIEXPORT $returnsJniFunctionType JNICALL Java${if ( critical ) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_")
 		if ( !isSimpleFunction )
 			print('n')
-		print(name.asJNIName)
+		print(nativeName.asJNIName)
 		if ( hasArrays || hasArrayOverloads )
 			print(getNativeParams(withExplicitFunctionAddress = false).map { if ( it.nativeType is ArrayType )
 				it.nativeType.mapping.jniSignatureArray
@@ -1504,7 +1506,7 @@ class NativeClassFunction(
 		// Cast function address to pointer
 
 		if ( nativeClass.binding != null )
-			println("\t${name}PROC $name = (${name}PROC)(intptr_t)$FUNCTION_ADDRESS;")
+			println("\t${nativeName}PROC $nativeName = (${nativeName}PROC)(intptr_t)$FUNCTION_ADDRESS;")
 
 		// Cast addresses to pointers
 
@@ -1589,7 +1591,7 @@ class NativeClassFunction(
 					if ( returns.has(Address) )
 						print('&')
 				}
-				print(name)
+				print(nativeName)
 				if ( !has(Macro) ) print('(')
 				printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) {
 					// Avoid implicit cast warnings

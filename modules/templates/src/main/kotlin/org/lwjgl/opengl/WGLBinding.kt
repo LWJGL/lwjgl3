@@ -62,7 +62,7 @@ val WGLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILI
 
 		println(
 			functions.map {
-				"${it.name} = provider.getFunctionAddress(${it.nativeName});"
+				"${it.name} = provider.getFunctionAddress(${it.functionAddress});"
 			}.joinToString(prefix = "\t\t", separator = "\n\t\t", postfix = "\n")
 		)
 

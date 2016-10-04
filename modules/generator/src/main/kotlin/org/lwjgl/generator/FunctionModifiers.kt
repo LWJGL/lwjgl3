@@ -134,10 +134,10 @@ val private = AccessModifier(Access.PRIVATE)
 val internal = AccessModifier(Access.INTERNAL)
 
 /** Overrides the native function name. This is useful for functions like Windows functions that have both a Unicode (W suffix) and ANSI version (A suffix). */
-class NativeName(name: String) : FunctionModifier() {
+class NativeName(val nativeName: String) : FunctionModifier() {
 	companion object : ModifierKey<NativeName>
 
-	internal val name: String = if ( name.contains('"') ) name else "\"$name\""
+	internal val name: String get() = if ( nativeName.contains(' ') ) nativeName else "\"$nativeName\""
 
 	override val isSpecial = false
 }

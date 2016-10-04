@@ -44,8 +44,8 @@ val nanovg_gles3 = dependsOn(Binding.OPENGLES) {
 
 		val ctx = NVGcontext_p.IN("ctx", "the NanoVG context")
 
-		int(
-			"lCreateImageFromHandleGLES3",
+		NativeName("nvglCreateImageFromHandleGLES3")..int(
+			"lCreateImageFromHandle",
 			"Creates a NanoVG image from an OpenGL texture.",
 
 			ctx,
@@ -57,16 +57,16 @@ val nanovg_gles3 = dependsOn(Binding.OPENGLES) {
 			returnDoc = "a handle to the image"
 		)
 
-		GLuint(
-			"lImageHandleGLES3",
+		NativeName("nvglImageHandleGLES3")..GLuint(
+			"lImageHandle",
 			"Returns the OpenGL texture id associated with a NanoVG image.",
 
 			ctx,
 			int.IN("image", "the image handle")
 		)
 
-		NVGcontext_p(
-			"CreateGLES3",
+		NativeName("nvgCreateGLES3")..NVGcontext_p(
+			"Create",
 			"""
 			Creates a NanoVG context with an OpenGL ES 3.0 rendering back-end.
 
@@ -78,14 +78,14 @@ val nanovg_gles3 = dependsOn(Binding.OPENGLES) {
 			int.IN("flags", "the context flags", CreateFlags)
 		)
 
-		void(
-			"DeleteGLES3",
-			"Deletes a NanoVG context created with #CreateGLES3().",
+		NativeName("nvgDeleteGLES3")..void(
+			"Delete",
+			"Deletes a NanoVG context created with #Create().",
 
 			ctx
 		)
 
-		NVGLUframebuffer_p(
+		NativeName("nvgluCreateFramebufferGLES3")..NVGLUframebuffer_p(
 			"luCreateFramebuffer",
 			"Creates a framebuffer object to render to.",
 
@@ -95,7 +95,7 @@ val nanovg_gles3 = dependsOn(Binding.OPENGLES) {
 			int.IN("imageFlags", "the image flags")
 		)
 
-		void(
+		NativeName("nvgluBindFramebufferGLES3")..void(
 			"luBindFramebuffer",
 			"Binds the framebuffer object associated with the specified ##NVGLUFramebuffer.",
 
@@ -103,7 +103,7 @@ val nanovg_gles3 = dependsOn(Binding.OPENGLES) {
 			nullable..NVGLUframebuffer_p.IN("fb", "the framebuffer to bind")
 		)
 
-		void(
+		NativeName("nvgluDeleteFramebufferGLES3")..void(
 			"luDeleteFramebuffer",
 			"Deletes an ##NVGLUFramebuffer.",
 

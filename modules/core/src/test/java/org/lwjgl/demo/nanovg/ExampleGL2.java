@@ -85,8 +85,8 @@ public final class ExampleGL2 extends Demo {
 		GL.createCapabilities();
 
 		long vg = DEMO_MSAA
-			? nvgCreateGL2(NVG_STENCIL_STROKES | NVG_DEBUG)
-			: nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
+			? nvgCreate(NVG_STENCIL_STROKES | NVG_DEBUG)
+			: nvgCreate(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
 
 		if ( vg == NULL )
 			throw new RuntimeException("Could not init nanovg.");
@@ -138,7 +138,7 @@ public final class ExampleGL2 extends Demo {
 
 		freeDemoData(vg, data);
 
-		nvgDeleteGL2(vg);
+		nvgDelete(vg);
 
 		glfwFreeCallbacks(window);
 		glfwTerminate();

@@ -68,7 +68,7 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 
 		// Client constructor
 		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
-		println(addresses.map { "provider.getFunctionAddress(${it.nativeName})" }.joinToString(",\n\t\t\t", prefix = "\t\tthis(ext,\n\t\t\t", postfix = "\n\t\t);\n\t}"))
+		println(addresses.map { "provider.getFunctionAddress(${it.functionAddress})" }.joinToString(",\n\t\t\t", prefix = "\t\tthis(ext,\n\t\t\t", postfix = "\n\t\t);\n\t}"))
 
 		// Display constructor
 		println("\n\t$CAPABILITIES_CLASS(EGLCapabilities caps, Set<String> ext) {")

@@ -101,7 +101,7 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 
 		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
 
-		println(addresses.map { "${it.name} = provider.getFunctionAddress(${it.nativeName});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
+		println(addresses.map { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
 
 		for (extension in classes) {
 			val capName = extension.capName

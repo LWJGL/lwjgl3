@@ -126,7 +126,7 @@ abstract class SimpleBinding(
 		public static final long
 			${
 		bindingFunctions
-			.map { "${it.simpleName}${" ".repeat(alignment - it.simpleName.length)} = apiGetFunctionAddress($libraryExpression, ${it.nativeName})" }
+			.map { "${it.simpleName}${" ".repeat(alignment - it.simpleName.length)} = apiGetFunctionAddress($libraryExpression, ${it.functionAddress})" }
 			.joinToString(separator = ",\n\t\t\t", postfix = ";")
 		}
 

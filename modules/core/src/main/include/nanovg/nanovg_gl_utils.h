@@ -18,6 +18,16 @@
 #ifndef NANOVG_GL_UTILS_H
 #define NANOVG_GL_UTILS_H
 
+#if defined NANOVG_GL2
+	#define EXT(name) name##GL2
+#elif defined NANOVG_GL3
+	#define EXT(name) name##GL3
+#elif defined NANOVG_GLES2
+	#define EXT(name) name##GLES2
+#elif defined NANOVG_GLES3
+	#define EXT(name) name##GLES3
+#endif
+
 struct NVGLUframebuffer {
 	GLuint fbo;
 	GLuint rbo;
@@ -27,9 +37,9 @@ struct NVGLUframebuffer {
 typedef struct NVGLUframebuffer NVGLUframebuffer;
 
 // Helper function to create GL frame buffer to render to.
-static void nvgluBindFramebuffer(NVGcontext* ctx, NVGLUframebuffer* fb);
-static NVGLUframebuffer* nvgluCreateFramebuffer(NVGcontext* ctx, int w, int h, int imageFlags);
-static void nvgluDeleteFramebuffer(NVGcontext* ctx, NVGLUframebuffer* fb);
+void EXT(nvgluBindFramebuffer)(NVGcontext* ctx, NVGLUframebuffer* fb);
+NVGLUframebuffer* EXT(nvgluCreateFramebuffer)(NVGcontext* ctx, int w, int h, int imageFlags);
+void EXT(nvgluDeleteFramebuffer)(NVGcontext* ctx, NVGLUframebuffer* fb);
 
 #endif // NANOVG_GL_UTILS_H
 
@@ -37,7 +47,7 @@ static void nvgluDeleteFramebuffer(NVGcontext* ctx, NVGLUframebuffer* fb);
 
 static GLint defaultFBO = -1;
 
-static NVGLUframebuffer* nvgluCreateFramebuffer(NVGcontext* ctx, int w, int h, int imageFlags)
+NVGLUframebuffer* EXT(nvgluCreateFramebuffer)(NVGcontext* ctx, int w, int h, int imageFlags)
 {
 	GLNVGcontext* gl = (GLNVGcontext*)((NVGparams*)ctx)->userPtr;
 	GLint defaultFBO;
@@ -53,15 +63,7 @@ static NVGLUframebuffer* nvgluCreateFramebuffer(NVGcontext* ctx, int w, int h, i
 
 	fb->image = nvgCreateImageRGBA(ctx, w, h, imageFlags | NVG_IMAGE_FLIPY | NVG_IMAGE_PREMULTIPLIED, NULL);
 
-#if defined NANOVG_GL2
-	fb->texture = nvglImageHandleGL2(ctx, fb->image);
-#elif defined NANOVG_GL3
-	fb->texture = nvglImageHandleGL3(ctx, fb->image);
-#elif defined NANOVG_GLES2
-	fb->texture = nvglImageHandleGLES2(ctx, fb->image);
-#elif defined NANOVG_GLES3
-	fb->texture = nvglImageHandleGLES3(ctx, fb->image);
-#endif
+	fb->texture = EXT(nvglImageHandle)(ctx, fb->image);
 
 	// frame buffer object
 	gl->GenFramebuffers(1, &fb->fbo);
@@ -84,18 +86,18 @@ static NVGLUframebuffer* nvgluCreateFramebuffer(NVGcontext* ctx, int w, int h, i
 error:
 	gl->BindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
 	gl->BindRenderbuffer(GL_RENDERBUFFER, defaultRBO);
-	nvgluDeleteFramebuffer(ctx, fb);
+	EXT(nvgluDeleteFramebuffer)(ctx, fb);
 	return NULL;
 }
 
-static void nvgluBindFramebuffer(NVGcontext* ctx, NVGLUframebuffer* fb)
+void EXT(nvgluBindFramebuffer)(NVGcontext* ctx, NVGLUframebuffer* fb)
 {
 	GLNVGcontext* gl = (GLNVGcontext*)((NVGparams*)ctx)->userPtr;
 	if (defaultFBO == -1) gl->GetIntegerv(GL_FRAMEBUFFER_BINDING, &defaultFBO);
 	gl->BindFramebuffer(GL_FRAMEBUFFER, fb != NULL ? fb->fbo : (GLuint)defaultFBO);
 }
 
-static void nvgluDeleteFramebuffer(NVGcontext* ctx, NVGLUframebuffer* fb)
+void EXT(nvgluDeleteFramebuffer)(NVGcontext* ctx, NVGLUframebuffer* fb)
 {
 	GLNVGcontext* gl = (GLNVGcontext*)((NVGparams*)ctx)->userPtr;
 	if (fb == NULL) return;

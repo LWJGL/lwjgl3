@@ -99,8 +99,8 @@ public final class ExampleGL3 extends Demo {
 		GL.createCapabilities();
 
 		long vg = DEMO_MSAA
-			? nvgCreateGL3(NVG_STENCIL_STROKES | NVG_DEBUG)
-			: nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
+			? nvgCreate(NVG_STENCIL_STROKES | NVG_DEBUG)
+			: nvgCreate(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
 
 		if ( vg == NULL ) {
 			throw new RuntimeException("Could not init nanovg.");
@@ -174,7 +174,7 @@ public final class ExampleGL3 extends Demo {
 
 		freeDemoData(vg, data);
 
-		nvgDeleteGL3(vg);
+		nvgDelete(vg);
 
 		System.out.printf("Average Frame Time: %.2f ms\n", getGraphAverage(fps) * 1000.0f);
 		System.out.printf("          CPU Time: %.2f ms\n", getGraphAverage(cpuGraph) * 1000.0f);

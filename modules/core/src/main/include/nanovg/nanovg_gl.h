@@ -37,16 +37,24 @@ enum NVGcreateFlags {
 #if defined NANOVG_GL2_IMPLEMENTATION
 #  define NANOVG_GL2 1
 #  define NANOVG_GL_IMPLEMENTATION 1
+#  define EXT(name) name##GL2
+#  define CONFIG_METHOD "configGL"
 #elif defined NANOVG_GL3_IMPLEMENTATION
 #  define NANOVG_GL3 1
 #  define NANOVG_GL_IMPLEMENTATION 1
 #  define NANOVG_GL_USE_UNIFORMBUFFER 1
+#  define EXT(name) name##GL3
+#  define CONFIG_METHOD "configGL"
 #elif defined NANOVG_GLES2_IMPLEMENTATION
 #  define NANOVG_GLES2 1
 #  define NANOVG_GL_IMPLEMENTATION 1
+#  define EXT(name) name##GLES2
+#  define CONFIG_METHOD "configGLES"
 #elif defined NANOVG_GLES3_IMPLEMENTATION
 #  define NANOVG_GLES3 1
 #  define NANOVG_GL_IMPLEMENTATION 1
+#  define EXT(name) name##GLES3
+#  define CONFIG_METHOD "configGLES"
 #endif
 
 #define NANOVG_GL_USE_STATE_FILTER (1)
@@ -1697,19 +1705,7 @@ static void glnvg__renderDelete(void* uptr)
 }
 
 
-#if defined NANOVG_GL2
-static NVGcontext* nvgCreateGL2(JNIEnv* env, int flags)
-#define CONFIG_METHOD "configGL"
-#elif defined NANOVG_GL3
-static NVGcontext* nvgCreateGL3(JNIEnv* env, int flags)
-#define CONFIG_METHOD "configGL"
-#elif defined NANOVG_GLES2
-static NVGcontext* nvgCreateGLES2(JNIEnv* env, int flags)
-#define CONFIG_METHOD "configGLES"
-#elif defined NANOVG_GLES3
-static NVGcontext* nvgCreateGLES3(JNIEnv* env, int flags)
-#define CONFIG_METHOD "configGLES"
-#endif
+NVGcontext* EXT(nvgCreate)(JNIEnv* env, int flags)
 {
 	jclass NanoVGGLConfig = (*env)->FindClass(env, "org/lwjgl/nanovg/NanoVGGLConfig");
 	jmethodID config = (*env)->GetStaticMethodID(env, NanoVGGLConfig, CONFIG_METHOD, "(J)V");
@@ -1753,28 +1749,12 @@ error:
 	return NULL;
 }
 
-#if defined NANOVG_GL2
-static void nvgDeleteGL2(NVGcontext* ctx)
-#elif defined NANOVG_GL3
-static void nvgDeleteGL3(NVGcontext* ctx)
-#elif defined NANOVG_GLES2
-static void nvgDeleteGLES2(NVGcontext* ctx)
-#elif defined NANOVG_GLES3
-static void nvgDeleteGLES3(NVGcontext* ctx)
-#endif
+void EXT(nvgDelete)(NVGcontext* ctx)
 {
 	nvgDeleteInternal(ctx);
 }
 
-#if defined NANOVG_GL2
-static int nvglCreateImageFromHandleGL2(NVGcontext* ctx, GLuint textureId, int w, int h, int imageFlags)
-#elif defined NANOVG_GL3
-static int nvglCreateImageFromHandleGL3(NVGcontext* ctx, GLuint textureId, int w, int h, int imageFlags)
-#elif defined NANOVG_GLES2
-static int nvglCreateImageFromHandleGLES2(NVGcontext* ctx, GLuint textureId, int w, int h, int imageFlags)
-#elif defined NANOVG_GLES3
-static int nvglCreateImageFromHandleGLES3(NVGcontext* ctx, GLuint textureId, int w, int h, int imageFlags)
-#endif
+int EXT(nvglCreateImageFromHandle)(NVGcontext* ctx, GLuint textureId, int w, int h, int imageFlags)
 {
 	GLNVGcontext* gl = (GLNVGcontext*)nvgInternalParams(ctx)->userPtr;
 	GLNVGtexture* tex = glnvg__allocTexture(gl);
@@ -1790,15 +1770,7 @@ static int nvglCreateImageFromHandleGLES3(NVGcontext* ctx, GLuint textureId, int
 	return tex->id;
 }
 
-#if defined NANOVG_GL2
-static GLuint nvglImageHandleGL2(NVGcontext* ctx, int image)
-#elif defined NANOVG_GL3
-static GLuint nvglImageHandleGL3(NVGcontext* ctx, int image)
-#elif defined NANOVG_GLES2
-static GLuint nvglImageHandleGLES2(NVGcontext* ctx, int image)
-#elif defined NANOVG_GLES3
-static GLuint nvglImageHandleGLES3(NVGcontext* ctx, int image)
-#endif
+GLuint EXT(nvglImageHandle)(NVGcontext* ctx, int image)
 {
 	GLNVGcontext* gl = (GLNVGcontext*)nvgInternalParams(ctx)->userPtr;
 	GLNVGtexture* tex = glnvg__findTexture(gl, image);

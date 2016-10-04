@@ -82,7 +82,7 @@ private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, C
 
 		// ICD/Platform constructor
 		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
-		println(addresses.map { "provider.getFunctionAddress(${it.nativeName})" }.joinToString(",\n\t\t\t", prefix = "\t\tthis(ext,\n\t\t\t", postfix = "\n\t\t);\n\t}"))
+		println(addresses.map { "provider.getFunctionAddress(${it.functionAddress})" }.joinToString(",\n\t\t\t", prefix = "\t\tthis(ext,\n\t\t\t", postfix = "\n\t\t);\n\t}"))
 
 		// Device constructor
 		println("\n\t$CAPABILITIES_CLASS(CLCapabilities caps, Set<String> ext) {")

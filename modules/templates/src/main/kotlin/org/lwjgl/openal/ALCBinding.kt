@@ -76,7 +76,7 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 
 		println("\n\t$ALC_CAP_CLASS(FunctionProviderLocal provider, long device, Set<String> ext) {")
 
-		println(addresses.map { "${it.name} = provider.getFunctionAddress(${if ( it.nativeClass.isCore ) "" else "device, "}${it.nativeName});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
+		println(addresses.map { "${it.name} = provider.getFunctionAddress(${if ( it.nativeClass.isCore ) "" else "device, "}${it.functionAddress});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
 
 		for (extension in classes) {
 			val capName = extension.capName("ALC")

@@ -150,9 +150,9 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 
 		println(functions.map {
 			if ( it has DeprecatedGL )
-				"${it.name} = getFunctionAddress(fc, provider, ${it.nativeName});"
+				"${it.name} = getFunctionAddress(fc, provider, ${it.functionAddress});"
 			else
-				"${it.name} = provider.getFunctionAddress(${it.nativeName});"
+				"${it.name} = provider.getFunctionAddress(${it.functionAddress});"
 		}.joinToString(prefix = "\t\t", separator = "\n\t\t", postfix = "\n"))
 
 		for (extension in classes) {
