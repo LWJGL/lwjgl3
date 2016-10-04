@@ -100,44 +100,32 @@ public final class JNI {
 		print(HEADER)
 		preamble.printNative(this)
 
-		println("""#define _p_ ,
-#define ARITY0(type, signature, expression) \
+		println("""#define ARITY0(type, signature, expression) \
 JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jclass clazz, jlong __functionAddress) { \
 	UNUSED_PARAMS($JNIENV, clazz) \
 	expression; \
 }
 
-#define ARITYn(type, signature, params, expression) \
-JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jclass clazz, jlong __functionAddress, params) { \
+#define ARITYn(type, signature, expression, ...) \
+JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jclass clazz, jlong __functionAddress, __VA_ARGS__) { \
 	UNUSED_PARAMS($JNIENV, clazz) \
 	expression; \
 }
 """)
-		/* DISABLED JavaCritical: no measurable benefit for primitive-only methods.
-		// ARITY0
-		JNIEXPORT type JNICALL JavaCritical_org_lwjgl_system_JNI_##signature(jlong __functionAddress) { \
-			expression; \
-		}
-		// ARITYn
-		JNIEXPORT type JNICALL JavaCritical_org_lwjgl_system_JNI_##signature(jlong __functionAddress, params) { \
-			expression; \
-		}
-		*/
 		sortedSignatures.forEach {
-			print("ARITY${if ( it.arguments.isEmpty() ) "0" else "n"}(${it.returnType.jniFunctionType}, ${it.signatureNative}")
-			if ( it.arguments.isNotEmpty() )
-				print(it.arguments.asSequence().mapIndexed { i, param -> "${param.jniFunctionType} param$i" }.joinToString(" _p_ ", prefix = ", "))
-			print(", ")
+			print("ARITY${if ( it.arguments.isEmpty() ) "0" else "n"}(${it.returnType.jniFunctionType}, ${it.signatureNative}, ")
 			if ( it.returnType.mapping !== TypeMapping.VOID ) {
 				print("return ")
 				if ( it.returnType.isPointer )
 					print("(jlong)")
 			}
-			print("((${it.returnType.nativeType} (${if ( it.callingConvention === CallingConvention.STDCALL ) "APIENTRY " else ""}*) (")
-			print(it.arguments.asSequence().map { it.nativeType }.joinToString(", "))
-			print("))(intptr_t)__functionAddress)(")
-			print(it.arguments.asSequence().mapIndexed { i, param -> if ( param.isPointer ) "(intptr_t)param$i" else "param$i" }.joinToString(", "))
-			println("))")
+			print("((${it.returnType.nativeType} (${if ( it.callingConvention === CallingConvention.STDCALL ) "APIENTRY " else ""}*) ")
+			print(it.arguments.asSequence().map { it.nativeType }.joinToString(", ", prefix = "(", postfix = ")"))
+			print(")(intptr_t)__functionAddress)")
+			print(it.arguments.asSequence().mapIndexed { i, param -> if ( param.isPointer ) "(intptr_t)param$i" else "param$i" }.joinToString(", ", prefix = "(", postfix = ")"))
+			if ( it.arguments.isNotEmpty() )
+				print(it.arguments.asSequence().mapIndexed { i, param -> "${param.jniFunctionType} param$i" }.joinToString(", ", prefix = ", "))
+			println(")")
 		}
 
 		println()
