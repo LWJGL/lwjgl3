@@ -190,9 +190,6 @@ class NativeClassFunction(
 			.count { it.isAutoSizeResultOut }
 			.let { autoSizeResultOutParams -> parameters.asSequence().any { it has MultiType || it.isArrayParameter(autoSizeResultOutParams) } }
 
-	private val ReturnValue.isStructValue: Boolean
-		get() = nativeType is StructType && !nativeType.includesPointer
-
 	private val returnsJavaMethodType: String
 		get() = if ( returns.nativeType is StructType ) {
 			if ( hasParam { it has AutoSizeResultParam } )

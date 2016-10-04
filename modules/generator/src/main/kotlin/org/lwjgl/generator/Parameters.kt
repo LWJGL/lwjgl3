@@ -21,13 +21,16 @@ abstract class QualifiedType(
 	internal val javaMethodType: String
 		get() = nativeType.javaMethodType
 
+	internal val isStructValue: Boolean
+		get() = nativeType is StructType && !nativeType.includesPointer
+
 	internal fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false): String {
 		val builder = StringBuilder()
 
 		if ( has(const) )
 			builder.append("const ")
 
-		if ( binding == null || this === JNI_ENV || (nativeType is StructType && !nativeType.includesPointer) ) {
+		if ( binding == null || this === JNI_ENV || isStructValue ) {
 			builder.append(nativeType.name)
 			if ( nativeType is PointerType && !nativeType.includesPointer && (pointerMode || nativeType !is StructType) ) {
 				if ( !nativeType.name.endsWith('*') )
