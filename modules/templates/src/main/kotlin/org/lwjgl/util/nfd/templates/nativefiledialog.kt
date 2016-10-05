@@ -154,12 +154,12 @@ val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE,
 		nfdpathset_t_p.IN("pathSet", "the path set")
 	)
 
-	Code(
-		nativeCall = "\tNFDi_Free(outPath);"
-	)..void(
-		"Free",
+	void(
+		"NFDi_Free",
 		"Frees memory allocated by NativeFileDialog.",
 
-		void_p.IN("outPath", "the string to free")
+		void_p.IN("outPath", "the string to free"),
+
+		noPrefix = true
 	)
 }
