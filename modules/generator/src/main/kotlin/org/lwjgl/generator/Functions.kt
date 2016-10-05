@@ -112,6 +112,9 @@ class NativeClassFunction(
 
 	val nativeName: String get() = if (has(NativeName) && !this[NativeName].nativeName.contains(' ')) this[NativeName].nativeName else name
 
+	fun jniFunctionName(critical: Boolean)
+		= "Java${if (critical) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_${if (isSimpleFunction) "" else "n"}${nativeName.asJNIName}"
+
 	internal val accessModifier: String
 		get() = (if ( has(AccessModifier) ) this[AccessModifier].access else nativeClass.access).modifier
 
@@ -173,6 +176,11 @@ class NativeClassFunction(
 	internal val hasCustomJNI: Boolean by lazy {
 		(nativeClass.binding == null || returns.isStructValue || hasNativeCode) && (!has(Macro) || this[Macro].expression == null)
 	}
+
+	private fun hasCriticalJNI(hasArrays: Boolean) =
+		!hasArrays
+		&& !returns.isStructValue && !hasParam { it.isStructValue || it == JNI_ENV || it == EXPLICIT_FUNCTION_ADDRESS }
+		&& !has(Macro) && !has(Address) && (!has(Code) || !this[Code].hasNativeCode)
 
 	private val isSimpleFunction: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial } || has(NativeName) || (has(Macro) && this[Macro].expression != null))
@@ -1466,7 +1474,22 @@ class NativeClassFunction(
 
 	internal fun generateFunction(writer: PrintWriter) {
 		val hasArrays = hasParam { it.nativeType is ArrayType }
+
+		// Standard JNI
 		writer.generateFunctionImpl(hasArrays, critical = false)
+
+		// Critical JNI
+		if ( hasCriticalJNI(hasArrays) ) {
+			writer.println("CRITICAL(${jniFunctionName(critical = true)}, ${returns.nativeType.name}, $nativeName, ${if (returns.isVoid) "" else "return "}$nativeName(${parameters
+				.map(Parameter::name)
+				.joinToString(", ")
+			}), ${if (parameters.isEmpty()) "void" else parameters
+				.map { "${it.toNativeType(nativeClass.binding, pointerMode = true).let { if (it.endsWith('*')) it else "$it " }}${it.name}" }
+				.joinToString(", ")
+			})")
+		}
+
+		// Critical JNI for Java array params
 		if ( hasArrays && !parameters.contains(JNI_ENV) )
 			writer.generateFunctionImpl(hasArrays, critical = true)
 	}
@@ -1491,10 +1514,7 @@ class NativeClassFunction(
 
 		// Function signature
 
-		print("JNIEXPORT $returnsJniFunctionType JNICALL Java${if ( critical ) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_")
-		if ( !isSimpleFunction )
-			print('n')
-		print(nativeName.asJNIName)
+		print("JNIEXPORT $returnsJniFunctionType JNICALL ${jniFunctionName(critical)}")
 		if ( hasArrays || hasArrayOverloads )
 			print(getNativeParams(withExplicitFunctionAddress = false).map { if ( it.nativeType is ArrayType )
 				it.nativeType.mapping.jniSignatureArray

@@ -21,7 +21,9 @@ val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, pre
 #define STBIW_FREE(p)       org_lwjgl_free(p)
 #define STBIW_ASSERT(x)
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#define STB_IMAGE_WRITE_STATIC
+#ifdef CRITICAL_DISABLED
+	#define STB_IMAGE_WRITE_STATIC
+#endif
 #include "stb_image_write.h"""")
 
 	documentation =

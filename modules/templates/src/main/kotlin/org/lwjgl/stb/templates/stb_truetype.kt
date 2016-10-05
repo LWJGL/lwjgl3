@@ -14,7 +14,9 @@ val stb_truetype = "STBTruetype".nativeClass(packageName = STB_PACKAGE, prefix =
 #define STBTT_free(x,u)    ((void)(u),org_lwjgl_free(x))
 #define STBTT_assert
 #define STB_TRUETYPE_IMPLEMENTATION
-#define STBTT_STATIC
+#ifdef CRITICAL_DISABLED
+	#define STBTT_STATIC
+#endif
 #include "stb_rect_pack.h"
 #include "stb_truetype.h"""")
 

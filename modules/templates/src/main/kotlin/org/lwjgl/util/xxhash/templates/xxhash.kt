@@ -20,9 +20,13 @@ val xxhash = "XXHash".nativeClass(XXHASH_PACKAGE, prefix = "XXH", prefixMethod =
 #ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4711))
 #endif
-#define XXH_PRIVATE_API
 #include "lwjgl_malloc.h"
-#include "xxhash.h"
+#ifdef CRITICAL_DISABLED
+	#define XXH_PRIVATE_API
+	#include "xxhash.h"
+#else
+	#include "xxhash.c"
+#endif
 ENABLE_WARNINGS()""")
 
 	documentation =

@@ -75,3 +75,23 @@ extern void asyncException(JNIEnv *env);
 #endif
 
 // -----------------------------------------------------
+
+#ifdef LWJGL_LINUX
+	#define CRITICAL(critical, returnType, target, expression, ...) JNIEXPORT returnType JNICALL JavaCritical_##critical##(__VA_ARGS__) __attribute__ ((alias("##target##")));
+#endif
+
+#ifdef LWJGL_MACOSX
+	#define CRITICAL(critical, returnType, target, expression, ...) JNIEXPORT returnType JNICALL JavaCritical_##critical##(__VA_ARGS__) { \
+		expression; \
+	}
+#endif
+
+#ifdef LWJGL_WINDOWS
+	#ifdef _WIN64
+		#define LWJGL_STRINGIFY(x) #x
+		#define CRITICAL(critical, returnType, target, expression, ...) __pragma(comment(linker, LWJGL_STRINGIFY(/export:##critical##=##target##)))
+	#else
+		#define CRITICAL(critical, returnType, target, expression, ...)
+		#define CRITICAL_DISABLED
+	#endif
+#endif

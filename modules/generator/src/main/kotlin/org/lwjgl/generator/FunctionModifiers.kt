@@ -61,6 +61,11 @@ class Code(
 	Code.NO_STATEMENTS !== javaAfterNative ||
 	Code.NO_STATEMENTS !== javaFinally
 
+	val hasNativeCode: Boolean get() =
+	null !== nativeBeforeCall ||
+	null !== nativeCall ||
+	null !== nativeAfterCall
+
 	internal fun hasStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
 		if ( statements === NO_STATEMENTS ) false else statements.any { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
 
