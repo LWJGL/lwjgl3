@@ -294,7 +294,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 		<attribute name="dest" default="${lib}/${platform}/@{artifact}"/>
 
 		<sequential>
-			<get-quiet name="@{name}" url="http://s3.amazonaws.com/build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="@{dest}"/>
+			<get-quiet name="@{name}" url="https://build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="@{dest}"/>
 		</sequential>
 	</macrodef>
 </project>

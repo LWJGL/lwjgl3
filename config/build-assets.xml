@@ -51,7 +51,7 @@ This script is included in /build.xml and depends on /build-definitions.xml
 		<attribute name="path"/>
 
 		<sequential>
-			<get-quiet name="Asset @{path}" url="http://s3.amazonaws.com/build.lwjgl.org/res/demo/@{path}" dest="${test.resources}/demo/@{path}"/>
+			<get-quiet name="Asset @{path}" url="https://build.lwjgl.org/res/demo/@{path}" dest="${test.resources}/demo/@{path}"/>
 		</sequential>
 	</macrodef>
 

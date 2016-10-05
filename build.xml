@@ -614,10 +614,10 @@
 				<length string="@{native-library}" length="0"/>
 			</condition>
 			<get dest="${release}/@{module}/native" verbose="false" usetimestamp="true">
-				<url url="http://build.lwjgl.org/${build.type}/linux/x64/lib@{native-library}.so" if:true="${auto-natives}"/>
-				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/lib@{native-library}.dylib" if:true="${auto-natives}"/>
-				<url url="http://build.lwjgl.org/${build.type}/windows/x64/@{native-library}.dll" if:true="${auto-natives}"/>
-				<url url="http://build.lwjgl.org/${build.type}/windows/x86/@{native-library}32.dll" if:true="${auto-natives}"/>
+				<url url="https://build.lwjgl.org/${build.type}/linux/x64/lib@{native-library}.so" if:true="${auto-natives}"/>
+				<url url="https://build.lwjgl.org/${build.type}/macosx/x64/lib@{native-library}.dylib" if:true="${auto-natives}"/>
+				<url url="https://build.lwjgl.org/${build.type}/windows/x64/@{native-library}.dll" if:true="${auto-natives}"/>
+				<url url="https://build.lwjgl.org/${build.type}/windows/x86/@{native-library}32.dll" if:true="${auto-natives}"/>
 				<content/>
 			</get>
 			<checksum algorithm="SHA-1" fileext=".sha1">
@@ -852,10 +852,10 @@
 		<!-- OpenAL -->
 		<release-module package="org.lwjgl.openal" name="openal" title="OpenAL" license="openal" if:true="${binding.openal}">
 			<natives>
-				<url url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so"/>
-				<url url="http://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib"/>
-				<url url="http://build.lwjgl.org/${build.type}/windows/x64/OpenAL.dll"/>
-				<url url="http://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll"/>
+				<url url="https://build.lwjgl.org/${build.type}/linux/x64/libopenal.so"/>
+				<url url="https://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib"/>
+				<url url="https://build.lwjgl.org/${build.type}/windows/x64/OpenAL.dll"/>
+				<url url="https://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll"/>
 			</natives>
 			<sources>
 				<fileset dir="${src.core}"><include name="org/lwjgl/openal/**"/></fileset>
@@ -886,8 +886,8 @@
 		<!-- LibOVR -->
 		<release-module package="org.lwjgl.ovr" name="ovr" title="LibOVR" license="oculus" if:true="${binding.ovr}">
 			<natives>
-				<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl_ovr.dll"/>
-				<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl_ovr32.dll"/>
+				<url url="https://build.lwjgl.org/${build.type}/windows/x64/lwjgl_ovr.dll"/>
+				<url url="https://build.lwjgl.org/${build.type}/windows/x86/lwjgl_ovr32.dll"/>
 			</natives>
 		</release-module>
 

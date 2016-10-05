@@ -1,6 +1,6 @@
 ### 3.0.0
 
-[DOWNLOAD](http://build.lwjgl.org/release/3.0.0/lwjgl-3.0.0.zip)
+[DOWNLOAD](https://build.lwjgl.org/release/3.0.0/lwjgl-3.0.0.zip)
 
 _Released 2016 Jun 03_
 
