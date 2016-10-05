@@ -311,27 +311,14 @@ abstract class GeneratorTargetNative(
 	val nativeSubPath: String = ""
 ) : GeneratorTarget(packageName, className) {
 
-	companion object {
-		private val DOT_PATTERN = Pattern.compile("[.]")
-	}
-
 	internal val nativeFileName: String
 		get() = "${packageName.replace('.', '_')}_$className"
 
-	internal val nativeFileNameJNI: String
-
-	init {
-		val fileName = StringBuilder(packageName.length + className.length + 4) // some extra room for escaping
-
-		for (subpackage in DOT_PATTERN.split(packageName)) {
-			fileName.append(subpackage.asJNIName)
-			fileName.append('_')
-		}
-
-		fileName.append(className.asJNIName)
-
-		nativeFileNameJNI = fileName.toString()
-	}
+	internal val nativeFileNameJNI = packageName
+		.splitToSequence('.')
+		.plus(className)
+		.map { it.asJNIName }
+		.joinToString("_")
 
 	open val skipNative: Boolean = false
 
