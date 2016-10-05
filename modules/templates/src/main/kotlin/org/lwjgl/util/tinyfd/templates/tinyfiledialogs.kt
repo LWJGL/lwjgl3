@@ -53,7 +53,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		"""
 	)
 
-	macro(dynamic = true)..charUTF8_p(
+	macro(variable = true)..charUTF8_p(
 		"response",
 		"""
 		If you pass "tinyfd_query" as {@code aTitle}, the functions will not display the dialogs but will fill {@code tinyfd_response} with the retain solution

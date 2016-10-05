@@ -308,7 +308,7 @@ int main(int arg, char **argv)
 		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct")
 	)
 
-	int(
+	macro(expression = "-font_size")..int(
 		"STBTT_POINT_SIZE",
 		"""
 		Converts the full height of a character from ascender to descender, as computed by #ScaleForPixelHeight(), to a point size as computed by

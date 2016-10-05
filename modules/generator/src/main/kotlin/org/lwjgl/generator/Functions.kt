@@ -171,11 +171,11 @@ class NativeClassFunction(
 		get() = (has(Code) && this[Code].let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || parameters.contains(JNI_ENV)
 
 	internal val hasCustomJNI: Boolean by lazy {
-		nativeClass.binding == null || returns.isStructValue || hasNativeCode
+		(nativeClass.binding == null || returns.isStructValue || hasNativeCode) && (!has(Macro) || this[Macro].expression == null)
 	}
 
 	private val isSimpleFunction: Boolean
-		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial } || has(NativeName))
+		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial } || has(NativeName) || (has(Macro) && this[Macro].expression != null))
 
 	internal val hasUnsafeMethod: Boolean by lazy {
 		nativeClass.binding != null
@@ -554,7 +554,7 @@ class NativeClassFunction(
 	internal fun generateMethods(writer: PrintWriter) {
 		val simpleFunction = isSimpleFunction
 
-		val macro = has(Macro) && !this[Macro].dynamic
+		val macro = has(Macro) && this[Macro].constant
 
 		if ( hasCustomJNI )
 			writer.generateNativeMethod(simpleFunction, macro)
@@ -903,26 +903,29 @@ class NativeClassFunction(
 			}
 		}
 
+		val macroExpression = if ( has(Macro) ) get(Macro).expression else null
 		if ( hasUnsafeMethod ) {
 			print("n$name(")
 		} else {
 			print(
 				if ( hasCustomJNI )
 					"n$nativeName("
-				else
-					"${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
+				else macroExpression ?:
+				     "${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 			)
 			if ( nativeClass.binding != null && !hasExplicitFunctionAddress ) {
 				print(FUNCTION_ADDRESS)
 				if ( hasNativeParams ) print(", ")
 			}
 		}
-		printParams()
-		if ( returns.isStructValue && !hasParam { it has ReturnParam } ) {
-			if ( hasNativeParams ) print(", ")
-			print("$RESULT.$ADDRESS")
+		if ( macroExpression == null ) {
+			printParams()
+			if ( returns.isStructValue && !hasParam { it has ReturnParam } ) {
+				if ( hasNativeParams ) print(", ")
+				print("$RESULT.$ADDRESS")
+			}
+			print(")")
 		}
-		print(")")
 
 		if ( hasConstructor ) {
 			if ( returns has Construct ) {
@@ -1277,7 +1280,7 @@ class NativeClassFunction(
 	) {
 		println()
 
-		val macro = has(Macro) && !this@NativeClassFunction[Macro].dynamic && parameters.isEmpty()
+		val macro = has(Macro) && get(Macro).constant
 
 		// JavaDoc
 		if ( !macro ) {
@@ -1520,7 +1523,7 @@ class NativeClassFunction(
 
 		// Custom code
 
-		var code = if ( has(Code) ) this@NativeClassFunction[Code] else Code.NO_CODE
+		var code = if ( has(Code) ) get(Code) else Code.NO_CODE
 		if (hasArrays && !critical) {
 			code = code.append(
 				nativeBeforeCall = getParams { it.nativeType is ArrayType }.map {
@@ -1589,21 +1592,17 @@ class NativeClassFunction(
 						print('&')
 				}
 				print(nativeName)
-				if ( !has(Macro) ) print('(')
+				if ( !has(Macro) || get(Macro).function ) print('(')
 				printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) {
 					// Avoid implicit cast warnings
 					if ( it.nativeType.mapping === PrimitiveMapping.POINTER || it.nativeType is ArrayType )
-						"(${if ( nativeClass.binding != null )
-							"intptr_t"
-						else
-							"${it.nativeType.name}${if ( it.nativeType is PointerType && !it.nativeType.includesPointer ) "*" else ""}"
-						})${it.name}"
+						"(${it.toNativeType(nativeClass.binding, pointerMode = true)})${it.name}"
 					else if ( it.nativeType.let { (it is StructType && !it.includesPointer) || it === va_list } )
 						"*${it.name}"
 					else
 						it.name
 				}
-				if ( !has(Macro) ) print(')')
+				if ( !has(Macro) || get(Macro).function ) print(')')
 				println(';')
 			}
 		}

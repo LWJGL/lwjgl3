@@ -22,7 +22,7 @@ val SSE3 = "SSE3".nativeClass("org.lwjgl.util.simd", prefix = "_MM", prefixMetho
 		"DENORMALS_ZERO_OFF"..0x0000
 	).javaDocLinks
 
-	void(
+	macro()..void(
 		"SET_DENORMALS_ZERO_MODE",
 		"""
 		Causes the \"denormals are zero\" mode to be turned ON or OFF by setting the appropriate bit of the control register. DAZ treats denormal values used
@@ -35,5 +35,5 @@ val SSE3 = "SSE3".nativeClass("org.lwjgl.util.simd", prefix = "_MM", prefixMetho
 
 		unsigned_int.IN("mode", "the denormals are zero mode", DenormalsZeroMode)
 	)
-	unsigned_int("GET_DENORMALS_ZERO_MODE", "Returns the current value of the \"denormals are zero mode\" bit of the control register.")
+	macro()..unsigned_int("GET_DENORMALS_ZERO_MODE", "Returns the current value of the \"denormals are zero mode\" bit of the control register.")
 }

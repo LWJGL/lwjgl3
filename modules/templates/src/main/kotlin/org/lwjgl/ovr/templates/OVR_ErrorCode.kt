@@ -100,7 +100,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_MisformattedBlock".enum("Result of a bad calibration block due to lengths.", "-9002")
 	)
 
-	val SUCCESS = bool(
+	val SUCCESS = macro()..bool(
 		"SUCCESS",
 		"""
 		Indicates if an {@code ovrResult} indicates success.
@@ -111,7 +111,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		ovrResult.IN("result", "the {@code ovrResult} to check")
 	)
 
-	bool(
+	macro()..bool(
 		"UNQUALIFIED_SUCCESS",
 		"""
 		Indicates if an {@code ovrResult} indicates an unqualified success.
@@ -123,7 +123,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		SUCCESS["result"]
 	)
 
-	bool(
+	macro()..bool(
 		"FAILURE",
 		"Indicates if an {@code ovrResult} indicates failure.",
 

@@ -76,7 +76,7 @@ val stdlib = "Stdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		MultiTypeAll..nullable..void_p.IN("ptr", "the memory space to free")
 	)
 
-	void_p(
+	macro()..void_p(
 		"aligned_alloc",
 		"""
 		Allocates {@code size} bytes of uninitialized storage whose alignment is specified by {@code alignment}. The size parameter must be an integral multiple
@@ -87,7 +87,7 @@ val stdlib = "Stdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate. Must be a multiple of {@code alignment}.")
 	)
 
-	OffHeapOnly..void(
+	macro()..OffHeapOnly..void(
 		"aligned_free",
 		"Frees a block of memory that was allocated with #aligned_alloc(). If ptr is $NULL, no operation is performed.",
 
