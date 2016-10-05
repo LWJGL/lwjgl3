@@ -32,25 +32,22 @@ static void init(JNIEnv *env, jclass clazz, jobject method) {
 	getFunctionAddress = (*env)->FromReflectedMethod(env, method);
 }
 
-static jboolean criticalLookup(const char *name, void **functionAddress) {
+static void* criticalLookup(const char *name) {
 	if (
 	#if defined(LWJGL_WINDOWS) && !defined(_WIN64)
-		strncmp("_JavaCritical_org_lwjgl_", name, strlen("_JavaCritical_org_lwjgl_")) == 0
+		strncmp("_JavaCritical_org_lwjgl_", name, strlen("_JavaCritical_org_lwjgl_")) != 0
 	#else
-		strncmp("JavaCritical_org_lwjgl_", name, strlen("JavaCritical_org_lwjgl_")) == 0
+		strncmp("JavaCritical_org_lwjgl_", name, strlen("JavaCritical_org_lwjgl_")) != 0
 	#endif
-	) {
-		JNIEnv* env = getThreadEnv();
+	)
+		return NULL;
 
-		*functionAddress = (void *)(intptr_t)(*env)->CallStaticLongMethod(env,
-            CriticalNatives,
-            getFunctionAddress,
-            (*env)->NewStringUTF(env, name)
-        );
-
-        return JNI_TRUE;
-    }
-    return JNI_FALSE;
+	JNIEnv* env = getThreadEnv();
+	return (void *)(intptr_t)(*env)->CallStaticLongMethod(env,
+        CriticalNatives,
+        getFunctionAddress,
+        (*env)->NewStringUTF(env, name)
+    );
 }
 
 // -------------------------------------
@@ -60,11 +57,27 @@ static jboolean criticalLookup(const char *name, void **functionAddress) {
 	static GetProcAddressPROC SystemGetProcAddress = NULL;
 
 	static FARPROC WINAPI LWJGLGetProcAddress(HMODULE hModule, LPCSTR lpProcName) {
-		void *functionAddress;
-		if ( ((uintptr_t)lpProcName & 0xFFFF0000) != 0 && criticalLookup((const char *)lpProcName, &functionAddress) == JNI_TRUE )
-			return (FARPROC)(uintptr_t)functionAddress;
+		FARPROC functionAddress;
+		if ( ((uintptr_t)lpProcName & 0xFFFF0000) != 0 ) {
+			functionAddress = (FARPROC)(uintptr_t)criticalLookup((const char *)lpProcName);
+			if ( functionAddress != NULL )
+				return functionAddress;
+		}
 
-		return SystemGetProcAddress(hModule, lpProcName);
+		functionAddress = SystemGetProcAddress(hModule, lpProcName);
+		/*
+		if ( functionAddress && ((uintptr_t)lpProcName & 0xFFFF0000) != 0 &&
+        //#if defined(LWJGL_WINDOWS) && !defined(_WIN64)
+            //strncmp("_JavaCritical_org_lwjgl_", lpProcName, strlen("_JavaCritical_org_lwjgl_")) == 0
+        //#else
+            strncmp("JavaCritical_org_lwjgl_", lpProcName, strlen("JavaCritical_org_lwjgl_")) == 0
+        //#endif
+        ) {
+			fprintf(stderr, "GetProcAddress(%p, %s) = %p\n", (void *)(uintptr_t)hModule, lpProcName, (void *)(uintptr_t)functionAddress);
+			fflush(stderr);
+		}
+		*/
+		return functionAddress;
 	}
 
 	static MH_STATUS minHookStatus = MH_UNKNOWN;
@@ -119,11 +132,8 @@ static jboolean criticalLookup(const char *name, void **functionAddress) {
 	EXTERN_C_EXIT
 #else
 	static void *dlsymLWJGL(void *handle, const char* name) {
-		void *functionAddress;
-		if ( criticalLookup(name, &functionAddress) == JNI_TRUE )
-			return functionAddress;
-
-		return dlsym(handle, name);
+		void *functionAddress = criticalLookup(name);
+		return functionAddress ? functionAddress : dlsym(handle, name);
 	}
 
 	#ifdef LWJGL_LINUX
