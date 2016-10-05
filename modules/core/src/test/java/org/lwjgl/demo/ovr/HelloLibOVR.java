@@ -40,14 +40,17 @@ public final class HelloLibOVR {
 			OVRGraphicsLuid luid = OVRGraphicsLuid.calloc();
 			OVRHmdDesc desc = OVRHmdDesc.malloc();
 		) {
-			PointerBuffer hmd_p = memAllocPointer(1);
-			System.out.println("ovr_Create = " + ovr_Create(hmd_p, luid));
+			PointerBuffer pSession = memAllocPointer(1);
+			System.out.println("ovr_Create = " + ovr_Create(pSession, luid));
 
-			long hmd = hmd_p.get(0);
-			memFree(hmd_p);
+			long session = pSession.get(0);
+			memFree(pSession);
 
-			ovr_GetHmdDesc(hmd, desc);
+			ovr_GetHmdDesc(session, desc);
 			System.out.println("ovr_GetHmdDesc = " + desc.ManufacturerString() + " " + desc.ProductNameString() + " " + desc.SerialNumberString());
+
+			if ( session != NULL )
+				ovr_Destroy(session);
 		}
 
 		ovr_Shutdown();
