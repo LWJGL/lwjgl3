@@ -11,7 +11,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Provides {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}. */
-final class MemoryAccess {
+public final class MemoryAccess {
 
 	static {
 		Library.initialize();
@@ -35,6 +35,8 @@ final class MemoryAccess {
 	}
 
 	// Pointers to the explicit memory management functions used internally by LWJGL bindings
+
+	public static native void test(long x, long y, int z, int w, boolean a, boolean b, float r);
 
 	static native long malloc();
 

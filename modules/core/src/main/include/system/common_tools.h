@@ -45,6 +45,7 @@ extern JNIEnv *getThreadEnv(void);
 extern JNIEnv *attachCurrentThread(void);
 extern JNIEnv *attachCurrentThreadAsDaemon(void);
 extern void detachCurrentThread(void);
+extern void asyncException(JNIEnv *env);
 
 // -----------------------------------------------------
 
@@ -64,5 +65,13 @@ extern void detachCurrentThread(void);
 #define UNUSED_PARAMS(a, b) \
 	(void)(a); \
 	(void)(b);
+
+// -----------------------------------------------------
+
+#ifdef LWJGL_WINDOWS
+	#define notinline __declspec(noinline)
+#else
+	#define notinline __attribute__((noinline))
+#endif
 
 // -----------------------------------------------------

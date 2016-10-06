@@ -46,6 +46,16 @@ public final class Library {
 		}
 
 		loadSystem(JNI_LIBRARY_NAME);
+
+		if ( Configuration.CRITICAL_NATIVES.get(true) ) {
+			CriticalNatives.enable();
+			Runtime.getRuntime().addShutdownHook(new Thread() {
+				@Override
+				public void run() {
+					CriticalNatives.disable();
+				}
+			});
+		}
 	}
 
 	private Library() {}

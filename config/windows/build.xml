@@ -89,7 +89,7 @@ EXPORTS
 				<filterchain>
 					<!-- For each line with a JNICALL -->
 					<linecontainsregexp>
-						<regexp pattern="JNICALL\s+JavaCritical_\p{javaJavaIdentifierPart}+?[(]"/>
+						<regexp pattern="JNICALL\s+\p{javaJavaIdentifierPart}+?[(]"/>
 					</linecontainsregexp>
 					<!-- Append the function name -->
 					<replaceregex pattern="^.*?JNICALL\s+(.+?)[(].+$" replace="    \1"/>
@@ -121,6 +121,11 @@ EXPORTS
 		<mkdir dir="${bin.native}/build"/>
 
 		<!-- CORE -->
+		<compile dest="${bin.native}/core" flags="/W3 /WX">
+			<fileset dir=".">
+				<include name="${src.native}/minhook/src/**/*.c"/>
+			</fileset>
+		</compile>
 		<build name="lwjgl" dest="${bin.native}/core">
 			<compileargs>
 				<arg value="/I${src.include}\system\dyncall"/>

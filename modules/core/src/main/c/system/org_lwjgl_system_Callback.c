@@ -24,20 +24,6 @@ typedef struct LWJGLCallback {
 	const char* debug;
 } LWJGLCallback;
 
-#if LWJGL_WINDOWS
-	#define noinline __declspec(noinline)
-#else
-	#define noinline __attribute__((noinline))
-#endif
-
-noinline static void asyncCallbackException(JNIEnv* env) {
-	fprintf(stderr, "[LWJGL] Exception in callback that was invoked asynchronously from a native thread.\n");
-    fflush(stderr);
-
-	(*env)->ExceptionDescribe(env);
-	(*env)->ExceptionClear(env);
-}
-
 static char cbHandlerV(DCCallback *cb, DCArgs *args, DCValue *result, void *userdata) {
 	jboolean async;
 	JNIEnv* env = getEnv(&async);
@@ -54,7 +40,7 @@ static char cbHandlerV(DCCallback *cb, DCArgs *args, DCValue *result, void *user
 
 	// Check for exception
 	if ( (*env)->ExceptionCheck(env) && async )
-		asyncCallbackException(env);
+		asyncException(env);
 
 	return 'v';
 }
@@ -73,7 +59,7 @@ static char cbHandlerV(DCCallback *cb, DCArgs *args, DCValue *result, void *user
 		); \
 \
 		if ( (*env)->ExceptionCheck(env) && async ) \
-			asyncCallbackException(env); \
+			asyncException(env); \
 \
 		return TypeSig; \
 	}

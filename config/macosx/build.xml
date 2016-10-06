@@ -122,6 +122,7 @@
 			<source>
 				<arg value="-I${src.include.rel}/system/dyncall"/>
 				<fileset dir=".">
+					<include name="${src.native}/mach-o-hook/*.c"/>
 					<include name="${src.native}/system/*.c"/>
 					<exclude name="${src.native}/system/lwjgl_malloc.c"/>
 					<include name="${src.generated.native}/system/*.c"/>

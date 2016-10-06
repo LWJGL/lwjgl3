@@ -76,6 +76,8 @@ public class Configuration<T> {
 	 */
 	public static final Configuration<String> LIBRARY_NAME = new Configuration<>("org.lwjgl.libname", StateInit.STRING);
 
+	public static final Configuration<Boolean> CRITICAL_NATIVES = new Configuration<>("org.lwjgl.system.criticalNatives", StateInit.BOOLEAN);
+
 	/**
 	 * Sets the allocator used for the {@link MemoryUtil} explicit memory management API
 	 * ({@link MemoryUtil#memAlloc memAlloc}/{@link MemoryUtil#memFree memFree}/etc). Supported values:

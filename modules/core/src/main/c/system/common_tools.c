@@ -22,6 +22,7 @@ inline JNIEnv *attachCurrentThreadAsDaemon(void) {
     (*jvm)->AttachCurrentThreadAsDaemon(jvm, (void **)&env, NULL);
     if ( env == NULL ) {
         fprintf(stderr, "[LWJGL] Failed to attach native thread to the JVM.");
+        fflush(stderr);
         exit(1);
     }
     return env;
@@ -32,6 +33,7 @@ inline JNIEnv *attachCurrentThread(void) {
     (*jvm)->AttachCurrentThread(jvm, (void **)&env, NULL);
     if ( env == NULL ) {
         fprintf(stderr, "[LWJGL] Failed to attach native thread to the JVM.");
+        fflush(stderr);
         exit(1);
     }
     return env;
@@ -42,6 +44,14 @@ inline void detachCurrentThread(void) {
 		fprintf(stderr, "[LWJGL] Failed to detach native thread from the JVM.");
 		fflush(stderr);
 	}
+}
+
+notinline void asyncException(JNIEnv *env) {
+	fprintf(stderr, "[LWJGL] Exception in callback that was invoked asynchronously from a native thread.\n");
+    fflush(stderr);
+
+	(*env)->ExceptionDescribe(env);
+	(*env)->ExceptionClear(env);
 }
 
 // Put JNIEnv in thread-local storage. getEnv() is ~2x faster than getThreadEnv().
@@ -201,6 +211,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
 
 JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved) {
 	UNUSED_PARAMS(vm, reserved);
+
 	envTLSDestroy();
 }
 

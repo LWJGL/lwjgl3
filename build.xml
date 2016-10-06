@@ -805,6 +805,8 @@
 				<copy todir="${release}/lwjgl">
 					<fileset dir="${doc}/3rdparty">
 						<include name="dyncall*"/>
+						<include name="mach-o-hook*"/>
+						<include name="minhook*"/>
 					</fileset>
 				</copy>
 			</custom>
