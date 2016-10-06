@@ -112,8 +112,17 @@ class NativeClassFunction(
 
 	val nativeName: String get() = if (has(NativeName) && !this[NativeName].nativeName.contains(' ')) this[NativeName].nativeName else name
 
-	fun jniFunctionName(critical: Boolean)
-		= "Java${if (critical) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_${if (isSimpleFunction) "" else "n"}${nativeName.asJNIName}"
+	fun jniFunctionName(critical: Boolean, hasArrays: Boolean)
+		= "Java${if (critical) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_${if (isSimpleFunction) "" else "n"}${nativeName.asJNIName}".let {
+		if ( hasArrays || hasArrayOverloads )
+			getNativeParams(withExplicitFunctionAddress = false).map { if ( it.nativeType is ArrayType )
+				it.nativeType.mapping.jniSignatureArray
+			else
+				it.nativeType.mapping.jniSignatureStrict
+			}.joinToString("", prefix = "${it}__")
+		else
+			it
+	}
 
 	internal val accessModifier: String
 		get() = (if ( has(AccessModifier) ) this[AccessModifier].access else nativeClass.access).modifier
@@ -1480,13 +1489,16 @@ class NativeClassFunction(
 
 		// Critical JNI
 		if ( hasCriticalJNI(hasArrays) ) {
-			writer.println("CRITICAL(${jniFunctionName(critical = true)}, ${returns.nativeType.name}, $nativeName, ${if (returns.isVoid) "" else "return "}$nativeName(${parameters
+			val name = jniFunctionName(critical = true, hasArrays = hasArrays).substring("JavaCritical_".length)
+			val returnType = returns.toNativeType(nativeClass.binding, pointerMode = true)
+			val expression = "${if (returns.isVoid) "" else "return "}$nativeName(${parameters
 				.map(Parameter::name)
 				.joinToString(", ")
-			}), ${if (parameters.isEmpty()) "void" else parameters
+			})"
+			val params = if (parameters.isEmpty()) "void" else parameters
 				.map { "${it.toNativeType(nativeClass.binding, pointerMode = true).let { if (it.endsWith('*')) it else "$it " }}${it.name}" }
 				.joinToString(", ")
-			})")
+			writer.println("CRITICAL($name, $returnType, $nativeName, $expression, $params)")
 		}
 
 		// Critical JNI for Java array params
@@ -1514,13 +1526,7 @@ class NativeClassFunction(
 
 		// Function signature
 
-		print("JNIEXPORT $returnsJniFunctionType JNICALL ${jniFunctionName(critical)}")
-		if ( hasArrays || hasArrayOverloads )
-			print(getNativeParams(withExplicitFunctionAddress = false).map { if ( it.nativeType is ArrayType )
-				it.nativeType.mapping.jniSignatureArray
-			else
-				it.nativeType.mapping.jniSignatureStrict
-			}.joinToString("", prefix = "__"))
+		print("JNIEXPORT $returnsJniFunctionType JNICALL ${jniFunctionName(critical, hasArrays)}")
 		println("(${if ( params.isEmpty() ) "void" else params.joinToString(", ")}) {")
 
 		// Cast function address to pointer
@@ -1531,13 +1537,13 @@ class NativeClassFunction(
 		// Cast addresses to pointers
 
 		getNativeParams(withExplicitFunctionAddress = false).filter { it.nativeType.let { it is PointerType && it !is ArrayType } }.forEach {
-			val pointerType = it.toNativeType(nativeClass.binding, pointerMode = true)
+			val (pointerType, castExpression) = if ( it.nativeType === va_list )
+				"va_list *" to "VA_LIST_CAST"
+			else
+				it.toNativeType(nativeClass.binding, pointerMode = true).let { it to "($it)" }
+
 			print("\t$pointerType")
 			if ( !pointerType.endsWith('*') ) print(' ')
-			val castExpression = if ( it.nativeType === va_list )
-				"VA_LIST_CAST"
-			else
-				"($pointerType)"
 			println("${it.name} = $castExpression${if ( nativeClass.binding == null ) "(intptr_t)" else ""}${it.name}$POINTER_POSTFIX;")
 		}
 

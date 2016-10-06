@@ -76,7 +76,7 @@ static void* criticalLookup(const char *name) {
 			fprintf(stderr, "GetProcAddress(%p, %s) = %p\n", (void *)(uintptr_t)hModule, lpProcName, (void *)(uintptr_t)functionAddress);
 			fflush(stderr);
 		}
-		*/
+		//*/
 		return functionAddress;
 	}
 
@@ -133,7 +133,17 @@ static void* criticalLookup(const char *name) {
 #else
 	static void *dlsymLWJGL(void *handle, const char* name) {
 		void *functionAddress = criticalLookup(name);
-		return functionAddress ? functionAddress : dlsym(handle, name);
+		if ( functionAddress != NULL )
+			return functionAddress;
+
+		functionAddress = dlsym(handle, name);
+		/*
+		if ( functionAddress && strncmp("JavaCritical_org_lwjgl_", name, strlen("JavaCritical_org_lwjgl_")) == 0 ) {
+			fprintf(stderr, "dlsym(%p, %s) = %p\n", handle, name, (void *)(uintptr_t)functionAddress);
+			fflush(stderr);
+		}
+		//*/
+		return functionAddress;
 	}
 
 	#ifdef LWJGL_LINUX

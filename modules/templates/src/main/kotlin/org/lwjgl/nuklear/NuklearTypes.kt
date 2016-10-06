@@ -46,31 +46,31 @@ val nk_handle = union(NUKLEAR_PACKAGE, "NkHandle", nativeName = "nk_handle") {
 val NK_UTF_SIZE = 4
 val nk_glyph = char_p
 
-val nk_anti_aliasing = "nk_anti_aliasing".enumType
-val nk_allocation_type = "nk_allocation_type".enumType
-val nk_command_type = "nk_command_type".enumType
-val nk_style_item_type = "nk_style_item_type".enumType
-val nk_symbol_type = "nk_symbol_type".enumType
-val nk_style_header_align = "nk_style_header_align".enumType
-val nk_chart_type = "nk_chart_type".enumType
-val nk_panel_type = "nk_panel_type".enumType
-val nk_collapse_states = "nk_collapse_states".enumType
-val nk_show_states = "nk_show_states".enumType
-val nk_layout_format = "nk_layout_format".enumType
-val nk_tree_type = "nk_tree_type".enumType
-val nk_button_behavior = "nk_button_behavior".enumType
-val nk_color_format = "nk_color_format".enumType
-val nk_popup_type = "nk_popup_type".enumType
-val nk_keys = "nk_keys".enumType
-val nk_buttons = "nk_buttons".enumType
-val nk_style_colors = "nk_style_colors".enumType
-val nk_style_cursor = "nk_style_cursor".enumType
-val nk_widget_layout_states = "nk_widget_layout_states".enumType
-val nk_heading = "nk_heading".enumType
-val nk_buffer_allocation_type = "nk_buffer_allocation_type".enumType
-val nk_draw_list_stroke = "nk_draw_list_stroke".enumType
-val nk_draw_vertex_layout_attribute = "nk_draw_vertex_layout_attribute".enumType
-val nk_draw_vertex_layout_format = "nk_draw_vertex_layout_format".enumType
+val nk_anti_aliasing = "enum nk_anti_aliasing".enumType
+val nk_allocation_type = "enum nk_allocation_type".enumType
+val nk_command_type = "enum nk_command_type".enumType
+val nk_style_item_type = "enum nk_style_item_type".enumType
+val nk_symbol_type = "enum nk_symbol_type".enumType
+val nk_style_header_align = "enum nk_style_header_align".enumType
+val nk_chart_type = "enum nk_chart_type".enumType
+val nk_panel_type = "enum nk_panel_type".enumType
+val nk_collapse_states = "enum nk_collapse_states".enumType
+val nk_show_states = "enum nk_show_states".enumType
+val nk_layout_format = "enum nk_layout_format".enumType
+val nk_tree_type = "enum nk_tree_type".enumType
+val nk_button_behavior = "enum nk_button_behavior".enumType
+val nk_color_format = "enum nk_color_format".enumType
+val nk_popup_type = "enum nk_popup_type".enumType
+val nk_keys = "enum nk_keys".enumType
+val nk_buttons = "enum nk_buttons".enumType
+val nk_style_colors = "enum nk_style_colors".enumType
+val nk_style_cursor = "enum nk_style_cursor".enumType
+val nk_widget_layout_states = "enum nk_widget_layout_states".enumType
+val nk_heading = "enum nk_heading".enumType
+val nk_buffer_allocation_type = "enum nk_buffer_allocation_type".enumType
+val nk_draw_list_stroke = "enum nk_draw_list_stroke".enumType
+val nk_draw_vertex_layout_attribute = "enum nk_draw_vertex_layout_attribute".enumType
+val nk_draw_vertex_layout_format = "enum nk_draw_vertex_layout_format".enumType
 
 // API
 
