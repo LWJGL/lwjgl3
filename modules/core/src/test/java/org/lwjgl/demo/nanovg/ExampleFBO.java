@@ -145,10 +145,7 @@ public final class ExampleFBO extends Demo {
 		glfwMakeContextCurrent(window);
 		GL.createCapabilities();
 
-		long vg = DEMO_MSAA
-			? nvgCreateGL3(NVG_STENCIL_STROKES | NVG_DEBUG)
-			: nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
-
+		long vg = nvgCreate((DEMO_MSAA ? NVG_ANTIALIAS : 0) | NVG_STENCIL_STROKES | NVG_DEBUG);
 		if ( vg == NULL )
 			throw new RuntimeException("Could not init nanovg.");
 
@@ -241,7 +238,7 @@ public final class ExampleFBO extends Demo {
 
 		nvgluDeleteFramebuffer(vg, fb);
 
-		nvgDeleteGL3(vg);
+		nvgDelete(vg);
 
 		System.out.format("Average Frame Time: %.2f ms\n", getGraphAverage(fps) * 1000.0f);
 		System.out.format("          CPU Time: %.2f ms\n", getGraphAverage(cpuGraph) * 1000.0f);
