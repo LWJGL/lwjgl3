@@ -1584,8 +1584,9 @@ class NativeClassFunction(
 						)
 					}
 				} else if ( !returns.isVoid ) {
-					print(if ( code.nativeAfterCall != null ) "$RESULT =" else "return")
-					print(" ($returnsJniFunctionType)")
+					print(if ( code.nativeAfterCall != null ) "$RESULT = " else "return ")
+					if ( returnsJniFunctionType != returns.nativeType.name )
+						print("($returnsJniFunctionType)")
 					if ( returns.nativeType is PointerType && nativeClass.binding == null )
 						print("(intptr_t)")
 					if ( returns.has(Address) )
