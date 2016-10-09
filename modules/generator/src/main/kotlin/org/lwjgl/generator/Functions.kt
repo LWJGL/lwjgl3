@@ -438,7 +438,7 @@ class NativeClassFunction(
 
 					val DEBUG = if ( check.debug ) "if ( DEBUG )\n\t\t\t\t" else ""
 
-					if ( it.nativeType.javaMethodType == "ByteBuffer" )
+					if ( it has MultiType )
 						checks.add("${DEBUG}checkBuffer$Safe(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});")
 					else if ( it.nativeType is StructType )
 						checks.add("${DEBUG}checkBuffer$Safe(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});")

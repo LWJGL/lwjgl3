@@ -113,6 +113,22 @@ class Parameter(
 		return this
 	}
 
+	/**
+	 * If this parameter has a modifier of the specified key, it replaces it with the result of the specified function.
+	 *
+	 * @param modKey the modifier key
+	 * @param replaceWith a function that takes the current modifier and returns the new one
+	 *
+	 * @return this parameter
+	 */
+	internal fun <T : ParameterModifier> replaceModifier(modKey: ModifierKey<T>, replaceWith: (T) -> T): Parameter {
+		if (this.has(modKey)) {
+			val modifier = replaceWith(this[modKey])
+			modifiers[modifier.javaClass] = modifier
+		}
+		return this
+	}
+
 }
 
 // DSL extensions
