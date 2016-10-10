@@ -2,6 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
+ #ifdef LWJGL_WINDOWS
+ 	__pragma(warning(disable : 4711))
+ #endif
 #include "common_tools.h"
 DISABLE_WARNINGS()
 #include <stdlib.h>
@@ -10,12 +13,15 @@ ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 
-#if !(defined(LWJGL_WINDOWS) || defined(__USE_ISOC11))
+#ifdef LWJGL_WINDOWS
 	static void* aligned_alloc(size_t alignment, size_t size) {
-		void *p;
-		if ( !posix_memalign(&p, alignment, size) )
-			return p;
-		return NULL;
+        return _aligned_malloc(size, alignment);
+    }
+#elif !defined(__USE_ISOC11)
+	static void* aligned_alloc(size_t alignment, size_t size) {
+		void *p = NULL;
+		posix_memalign(&p, alignment, size);
+		return p;
 	}
 #endif
 
@@ -51,11 +57,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_free(JNIEnv *env, jcl
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryAccess_aligned_1alloc(JNIEnv *env, jclass clazz)
 {
 	UNUSED_PARAMS(env, clazz)
-#ifdef LWJGL_WINDOWS
-	return (jlong)(intptr_t)&_aligned_malloc;
-#else
 	return (jlong)(intptr_t)&aligned_alloc;
-#endif
 }
 
 // aligned_free()J
