@@ -1491,6 +1491,10 @@ class NativeClassFunction(
 
 		// Function signature
 
+		val workaroundJDK8167409 = critical && 6 <= parameters.count() && parameters.any {
+			(it.nativeType is PointerType && it.nativeType !is ArrayType) || it.nativeType.mapping.let { it is PrimitiveMapping && 4 < it.bytes }
+		}
+		if (workaroundJDK8167409) println("#ifdef LWJGL_WINDOWS")
 		print("JNIEXPORT $returnsJniFunctionType JNICALL Java${if ( critical ) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_")
 		if ( !isSimpleFunction )
 			print('n')
@@ -1617,6 +1621,7 @@ class NativeClassFunction(
 		}
 
 		println("}")
+		if (workaroundJDK8167409) println("#endif")
 	}
 
 }

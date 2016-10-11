@@ -147,7 +147,10 @@ if ( it.arguments.isEmpty() ) "" else it.arguments.mapIndexed { i, param -> "${p
 	.joinToString("\n\t")}${if ( it.returnType.mapping === TypeMapping.VOID ) "" else """
 	return __result;"""}
 }""")
-
+			val workaroundJDK8167409 = 6 <= it.arguments.count() && it.arguments.any {
+				(it is PointerType && it !is ArrayType) || it.mapping.let { it is PrimitiveMapping && 4 < it.bytes }
+			}
+			if (workaroundJDK8167409) println("#ifdef LWJGL_WINDOWS")
 			println(
 """JNIEXPORT ${it.returnType.jniFunctionType} JNICALL JavaCritical_org_lwjgl_system_JNI_${it.signatureArray}(jlong __functionAddress${
 if ( it.arguments.isEmpty() ) "" else it.arguments.asSequence().mapIndexed { i, param -> "${param.jniFunctionTypeArrayCritical(i)} param$i" }.joinToString(", ", prefix = ", ")
@@ -155,6 +158,7 @@ if ( it.arguments.isEmpty() ) "" else it.arguments.asSequence().mapIndexed { i, 
 	${it.arguments.asSequence().mapIndexedNotNull { i, param -> if ( param !is ArrayType ) null else "UNUSED_PARAM(length$i)" }.joinToString("\n\t")}
 	${if ( it.returnType.mapping === TypeMapping.VOID ) "" else "return "}Java_org_lwjgl_system_JNI_${it.signatureNative}(NULL, NULL, __functionAddress, ${it.arguments.mapIndexed { i, param -> if ( param is ArrayType ) "(intptr_t)param$i" else "param$i" }.joinToString(", ")});
 }""")
+			if (workaroundJDK8167409) println("#endif")
 		}
 
 		println("\nEXTERN_C_EXIT")
