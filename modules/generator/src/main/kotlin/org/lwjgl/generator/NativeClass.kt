@@ -436,7 +436,7 @@ class NativeClass(
 
 		if ( hasFunctions || binding is SimpleBinding ) {
 			if ( binding != null ) {
-				if ( functions.any { it.hasCustomJNI } )
+				if ( binding !is SimpleBinding && functions.any { it.hasCustomJNI } )
 					libraryInit()
 
 				printCustomMethods(static = true)
