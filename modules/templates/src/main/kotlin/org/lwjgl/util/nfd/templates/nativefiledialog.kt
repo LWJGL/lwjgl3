@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.util.nfd.*
 
 val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE, prefix = "NFD_", prefixMethod = "NFD_", library = NFD_LIBRARY) {
-	initializeAllocator()
 	nativeDirective(
 		"""#ifdef LWJGL_WINDOWS
 	#define _CRT_SECURE_NO_WARNINGS

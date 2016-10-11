@@ -50,10 +50,6 @@ val EXT_packed_float = "EXTPackedFloat".nativeClassGL("EXT_packed_float", postfi
 }
 
 val GLX_EXT_fbconfig_packed_float = "GLXEXTFBConfigPackedFloat".nativeClassGLX("GLX_EXT_fbconfig_packed_float", EXT) {
-	javaImport(
-		"org.lwjgl.system.linux.*"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("EXT", "packed_float")} extension.

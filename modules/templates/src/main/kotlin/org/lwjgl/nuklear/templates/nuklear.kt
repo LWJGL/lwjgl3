@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.nuklear.*
 
 val nuklear = "Nuklear".nativeClass(packageName = NUKLEAR_PACKAGE, prefix = "NK", prefixMethod = "nk_", library = "lwjgl_nuklear") {
-	initializeAllocator()
 	nativeDirective("""#ifdef LWJGL_LINUX
 	#pragma GCC diagnostic ignored "-Wunused-function"
 	#pragma GCC diagnostic ignored "-Wunused-but-set-variable"

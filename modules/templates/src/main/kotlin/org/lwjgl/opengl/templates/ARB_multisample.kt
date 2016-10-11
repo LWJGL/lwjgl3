@@ -75,10 +75,6 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
 }
 
 val GLX_ARB_multisample = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisample", ARB) {
-	javaImport(
-		"org.lwjgl.system.linux.*"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("ARB", "multisample")} extension.

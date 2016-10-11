@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.util.xxhash.*
 
 val xxhash = "XXHash".nativeClass(XXHASH_PACKAGE, prefix = "XXH", prefixMethod = "XXH", library = "LibXXHash.initialize();") {
-	initializeAllocator()
-
 	nativeDirective(
 """#ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4710))

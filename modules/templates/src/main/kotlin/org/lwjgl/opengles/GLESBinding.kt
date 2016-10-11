@@ -26,8 +26,6 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 			"org.lwjgl.opengles.*",
 			"public GLESCapabilities capsGLES;"
 		)
-
-		javaImport("static org.lwjgl.system.MemoryUtil.*")
 	}
 
 	override val hasCapabilities: Boolean get() = true

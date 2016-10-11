@@ -9,8 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 val GLX_EXT_swap_control = "GLXEXTSwapControl".nativeClassGLX("GLX_EXT_swap_control", EXT) {
-	javaImport("org.lwjgl.system.linux.*")
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("EXT", "swap_control")} extension.

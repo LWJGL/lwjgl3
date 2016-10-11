@@ -13,7 +13,6 @@ val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, pre
 	__pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 
-	initializeAllocator()
 	includeSTBAPI(
 		"""#include "lwjgl_malloc.h"
 #define STBIW_MALLOC(sz)    org_lwjgl_malloc(sz)

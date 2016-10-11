@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.system.linux.*
 
 val GLX_ARB_create_context_profile = "GLXARBCreateContextProfile".nativeClassGLX("GLX_ARB_create_context_profile", ARB) {
 	documentation =

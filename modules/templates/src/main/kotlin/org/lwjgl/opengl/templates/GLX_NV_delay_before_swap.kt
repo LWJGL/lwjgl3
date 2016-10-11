@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 val GLX_NV_delay_before_swap = "GLXNVDelayBeforeSwap".nativeClassGLX("GLX_NV_delay_before_swap", NV) {
-	javaImport(
-		"org.lwjgl.system.linux.*"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "glx_delay_before_swap")} extension.

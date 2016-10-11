@@ -215,7 +215,7 @@ class Struct(
 
 	/** The nested struct is not defined elsewhere, it's part of the parent struct's definition */
 	private val StructMember.isNestedStructDefinition: Boolean
-		get() = isNestedStruct && (nativeType as StructType).name == ANONYMOUS
+		get() = isNestedStruct && (nativeType as StructType).name === ANONYMOUS
 
 	private val StructMember.nestedMembers: Sequence<StructMember>
 		get() = (nativeType as StructType).definition.visibleMembers
@@ -223,7 +223,7 @@ class Struct(
 	private val containsUnion: Boolean get() =
 	union || members.any {
 		it.isNestedStruct && (it.nativeType as StructType).let {
-			if ( it.name == ANONYMOUS )
+			if ( it.name === ANONYMOUS )
 				it.definition.containsUnion
 			else
 				it.definition.union
@@ -450,7 +450,15 @@ $indentation}"""
 			println("import org.lwjgl.*;")
 		println("import org.lwjgl.system.*;\n")
 
-		if ( hasMutableMembers )
+		fun Struct.hasChecks(): Boolean =
+			mutableMembers.any {
+				it is StructMemberArray ||
+				it.nativeType is CharSequenceType ||
+				(it.nativeType is PointerType && (!it.has(NullableMember) && (it.nativeType !is StructType || it.nativeType.includesPointer))) ||
+				(it.isNestedStructDefinition && (it.nativeType as StructType).definition.hasChecks())
+			}
+
+		if ( hasChecks() )
 			println("import static org.lwjgl.system.Checks.*;")
 		println("import static org.lwjgl.system.MemoryUtil.*;")
 		if ( nativeLayout || mallocable )
@@ -1650,7 +1658,7 @@ EXTERN_C_EXIT""")
 				if ( it.isNestedStruct ) {
 					// Output nested structs
 					val structType = it.nativeType as StructType
-					if ( structType.name == ANONYMOUS )
+					if ( structType.name === ANONYMOUS )
 						index = generateNativeMembers(structType.definition.members, index, prefix = "$prefix${it.name}.") // recursion
 				}
 			}

@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val GLX_ARB_fbconfig_float = "GLXARBFBConfigFloat".nativeClassGLX("GLX_ARB_fbconfig_float", ARB) {
-	javaImport("org.lwjgl.system.linux.*")
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("ARB", "color_buffer_float")} extension.

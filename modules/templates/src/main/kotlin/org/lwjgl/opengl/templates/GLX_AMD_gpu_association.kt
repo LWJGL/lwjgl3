@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu_association", AMD) {
-	javaImport(
-		"org.lwjgl.system.linux.*"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("AMD", "glx_gpu_association")} extension.

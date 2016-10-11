@@ -210,7 +210,7 @@ class NativeClassFunction(
 
 	private fun hasAutoSizePredicate(reference: Parameter): (Parameter) -> Boolean = { it has AutoSize && it[AutoSize].hasReference(reference.name) }
 
-	private fun hasAutoSizeFor(reference: Parameter) = hasParam(hasAutoSizePredicate(reference))
+	internal fun hasAutoSizeFor(reference: Parameter) = hasParam(hasAutoSizePredicate(reference))
 
 	internal val hideAutoSizeResultParam = returns.nativeType is PointerType && getParams { it.isAutoSizeResultOut }.count() == 1
 

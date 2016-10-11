@@ -16,7 +16,6 @@ val par_shapes = "ParShapes".nativeClass(packageName = PAR_PACKAGE, prefix = "pa
 		beforeIncludes = true
 	)
 
-	initializeAllocator()
 	nativeDirective(
 		"""#include "lwjgl_malloc.h"
 #define PAR_MALLOC(T, N) ((T*) org_lwjgl_malloc(N * sizeof(T)))

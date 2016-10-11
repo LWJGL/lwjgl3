@@ -8,11 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuffer_object") {
-	javaImport (
-		"org.lwjgl.system.windows.*",
-		"org.lwjgl.system.linux.*"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

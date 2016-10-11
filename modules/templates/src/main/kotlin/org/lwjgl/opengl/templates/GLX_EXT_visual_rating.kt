@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val GLX_EXT_visual_rating = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visual_rating", EXT) {
-	javaImport("org.lwjgl.system.linux.*")
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("EXT", "visual_info")} extension.

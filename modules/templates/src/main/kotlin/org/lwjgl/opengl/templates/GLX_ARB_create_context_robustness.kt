@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val GLX_ARB_create_context_robustness = "GLXARBCreateContextRobustness".nativeClassGLX("GLX_ARB_create_context_robustness", ARB) {
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("ARB", "glx_create_context_robustness")} extension.

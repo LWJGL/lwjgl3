@@ -75,7 +75,6 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	javaImport(
 		"java.io.PrintStream",
 		"java.util.Map",
-		"org.lwjgl.system.APIUtil",
 		"static org.lwjgl.glfw.GLFW.*"
 	)
 	additionalCode = """

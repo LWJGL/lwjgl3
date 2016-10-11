@@ -349,7 +349,7 @@ class NativeClass(
 
 			if ( hasBuffers ) {
 				if ( functions.any {
-					(it.returns.isBufferPointer && it.returns.nativeType.mapping !== PointerMapping.DATA_POINTER && it.returns.nativeType !is StructType)
+					(it.returns.isBufferPointer && it.returns.nativeType.mapping !== PointerMapping.DATA_POINTER && it.returns.nativeType !is StructType && it.returns.nativeType !is CharSequenceType)
 					||
 					it.hasParam { it.isBufferPointer && it.nativeType.mapping !== PointerMapping.DATA_POINTER && it.nativeType !is StructType }
 				} )
@@ -358,8 +358,7 @@ class NativeClass(
 				val needsPointerBuffer: QualifiedType.() -> Boolean = {
 					this.nativeType is PointerType &&
 					(
-						this.nativeType.elementType.let { it != null && (it !is StructType || it.includesPointer) && (it is PointerType || it.mapping == PrimitiveMapping.POINTER) } ||
-						(this.has(Return) && this[Return] !== ReturnParam) ||
+						this.nativeType.elementType.let { it != null && (it is PointerType || it.mapping == PrimitiveMapping.POINTER) && (it !is StructType || it.includesPointer) } ||
 						(this.has(MultiType) && this[MultiType].types.contains(PointerMapping.DATA_POINTER))
 					)
 				}
@@ -375,25 +374,35 @@ class NativeClass(
 						it has SingleValue ||
 						(it.isAutoSizeResultOut && func.hideAutoSizeResultParam) ||
 						it has PointerArray ||
-						it.nativeType is CharSequenceType
+						(it.nativeType is CharSequenceType && it.paramType !== ParameterType.OUT)
 					)
 				}
 			}
 
-			if ( hasMemoryStack || (binding is SimpleBinding && !binding.libraryExpression.contains('.')) || functions.any { it.hasCustomJNI } )
-				println("import org.lwjgl.system.*;\n")
+			if ( hasMemoryStack || (binding is SimpleBinding && !binding.libraryExpression.contains('.')) || (binding == null && library == null) ) {
+				if ( packageName != "org.lwjgl.system" )
+					println("import org.lwjgl.system.*;\n")
+			}
 
 			if ( hasFunctions && binding is SimpleBinding )
 				println("import static org.lwjgl.system.APIUtil.*;")
-			if ( hasFunctions )
+			if ( hasFunctions && ((binding != null && binding !is SimpleBinding) || functions.any { func ->
+				func.hasParam { it.nativeType is PointerType && !it.has(Nullable) && it.nativeType !is StructType && !func.hasAutoSizeFor(it) }
+			}) )
 				println("import static org.lwjgl.system.Checks.*;")
 			if ( binding != null && functions.any { !it.hasCustomJNI } )
 				println("import static org.lwjgl.system.JNI.*;")
 			if ( hasMemoryStack )
 				println("import static org.lwjgl.system.MemoryStack.*;")
-			if ( hasBuffers ) {
+			if ( hasBuffers && functions.any {
+				(it.returns.isBufferPointer && it.returns.nativeType !is StructType) || it.hasParam {
+					it.isBufferPointer && (it.nativeType !is StructType || it has Nullable)
+				}
+			} ) {
 				println("import static org.lwjgl.system.MemoryUtil.*;")
-				if ( functions.any { it.hasParam { it.has(MultiType) && it[MultiType].types.contains(PointerMapping.DATA_POINTER) } } )
+				if ( functions.any { func -> func.hasParam {
+					it.has(MultiType) && it[MultiType].types.contains(PointerMapping.DATA_POINTER) && func.hasAutoSizeFor(it)
+				} } )
 					println("import static org.lwjgl.system.Pointer.*;")
 			}
 			println()
@@ -582,10 +591,6 @@ class NativeClass(
 
 	fun customMethod(method: String) {
 		customMethods.add(method)
-	}
-
-	fun initializeAllocator() {
-		customMethod("static { MemoryUtil.getAllocator(); }")
 	}
 
 	private fun PrintWriter.printCustomMethods(static: Boolean) {
