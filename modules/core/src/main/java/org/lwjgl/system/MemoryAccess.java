@@ -8,6 +8,7 @@ import java.nio.*;
 
 import static java.lang.Character.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryAccessJNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Provides {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}. */
@@ -34,59 +35,11 @@ final class MemoryAccess {
 		return accessor;
 	}
 
-	// Pointers to the explicit memory management functions used internally by LWJGL bindings
-
-	static native long malloc();
-
-	static native long calloc();
-
-	static native long realloc();
-
-	static native long free();
-
-	static native long aligned_alloc();
-
-	static native long aligned_free();
-
-	// -----------
-
 	// The standard C memset function
 	private static native void memset(long ptr, int value, long bytes);
 
 	// The standard C memcpy function
 	private static native void memcpy(long dst, long src, long bytes);
-
-	// Primitive getters
-
-	private static native byte getByte(long ptr);
-
-	private static native short getShort(long ptr);
-
-	private static native int getInt(long ptr);
-
-	private static native long getLong(long ptr);
-
-	private static native float getFloat(long ptr);
-
-	private static native double getDouble(long ptr);
-
-	private static native long getAddress(long ptr);
-
-	// Primitive setters
-
-	private static native void putByte(long ptr, byte value);
-
-	private static native void putShort(long ptr, short value);
-
-	private static native void putInt(long ptr, int value);
-
-	private static native void putLong(long ptr, long value);
-
-	private static native void putFloat(long ptr, float value);
-
-	private static native void putDouble(long ptr, double value);
-
-	private static native void putAddress(long ptr, long value);
 
 	// Returns the {@code sizeof(void *)}.
 	static native int getPointerSize();

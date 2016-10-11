@@ -93,15 +93,13 @@ fun main(args: Array<String>) {
 		// Generate bindings
 
 		val bindingsSystem = arrayOf(
+			"org.lwjgl.system",
 			"org.lwjgl.system.dyncall",
 			"org.lwjgl.system.jemalloc",
 			"org.lwjgl.system.libc",
 			"org.lwjgl.system.linux",
 			"org.lwjgl.system.macosx",
-			"org.lwjgl.system.windows",
-
-			"org.lwjgl.util.simd",
-			"org.lwjgl.util.xxhash"
+			"org.lwjgl.system.windows"
 		)
 		val bindingsModular = Binding.values().asSequence()
 

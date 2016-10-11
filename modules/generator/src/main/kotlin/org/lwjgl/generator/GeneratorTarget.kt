@@ -127,7 +127,7 @@ abstract class GeneratorTarget(
 		}()
 	}
 
-	private fun getSourceFileName(): String {
+	private fun getSourceFileName(): String? {
 		// Nasty hack to retrieve the source file that defines this template, without having to specify it explictly.
 		// This enables incremental builds to work even with arbitrary file names or when multiple templates are bundled
 		// in the same file (e.g. ExtensionFlags).
@@ -135,20 +135,14 @@ abstract class GeneratorTarget(
 			throw RuntimeException()
 		} catch (t: Throwable) {
 			return t.stackTrace.asSequence()
-				.map { it.fileName }
-				.filterNotNull()
-				.filter {
-					it.endsWith(".kt")
-					&& !it.startsWith("Generator")
-					&& it != "NativeClass.kt"
-					&& it != "Structs.kt"
-					&& it != "CallbackFunction.kt"
-					&& !(this is NativeClass && it.endsWith("Binding.kt"))
-				}.first()
+				.filter { !it.className.startsWith("org.lwjgl.generator.") }
+				.mapNotNull { it.fileName }
+				.filter { it.endsWith(".kt") && !(this is NativeClass && it.endsWith("Binding.kt")) }
+				.firstOrNull()
 		}
 	}
 
-	internal val sourceFile = if ( packageName == "org.lwjgl.system" ) null else getSourceFileName()
+	internal val sourceFile = getSourceFileName()
 	internal open fun getLastModified(root: String): Long = Paths.get(root, sourceFile).let {
 		if ( Files.isRegularFile(it) ) it else
 			throw IllegalStateException("The source file for template $packageName.$className does not exist ($it).")

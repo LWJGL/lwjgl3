@@ -49,22 +49,22 @@ final class MemoryManage {
 	private static class StdlibAllocator implements MemoryAllocator {
 
 		@Override
-		public long getMalloc() { return MemoryAccess.malloc(); }
+		public long getMalloc() { return MemoryAccessJNI.malloc; }
 
 		@Override
-		public long getCalloc() { return MemoryAccess.calloc(); }
+		public long getCalloc() { return MemoryAccessJNI.calloc; }
 
 		@Override
-		public long getRealloc() { return MemoryAccess.realloc(); }
+		public long getRealloc() { return MemoryAccessJNI.realloc; }
 
 		@Override
-		public long getFree() { return MemoryAccess.free(); }
+		public long getFree() { return MemoryAccessJNI.free; }
 
 		@Override
-		public long getAlignedAlloc() { return MemoryAccess.aligned_alloc(); }
+		public long getAlignedAlloc() { return MemoryAccessJNI.aligned_alloc; }
 
 		@Override
-		public long getAlignedFree() { return MemoryAccess.aligned_free(); }
+		public long getAlignedFree() { return MemoryAccessJNI.aligned_free; }
 
 		@Override
 		public long malloc(long size) {
