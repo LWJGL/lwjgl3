@@ -40,9 +40,9 @@ val UINT_p = UINT.p
 val FLOAT_p = FLOAT.p
 val PULONG = ULONG.p("PULONG")
 
-val UINT_PTR = PrimitiveType("UINT_PTR", PrimitiveMapping.POINTER)
-val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.POINTER)
-val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.POINTER)
+val UINT_PTR = IntegerType("UINT_PTR", PrimitiveMapping.POINTER, unsigned = true)
+val LONG_PTR = IntegerType("LONG_PTR", PrimitiveMapping.POINTER)
+val ULONG_PTR = IntegerType("ULONG_PTR", PrimitiveMapping.POINTER, unsigned = true)
 
 val LRESULT = typedef(LONG_PTR, "LRESULT")
 val WPARAM = typedef(UINT_PTR, "WPARAM")
@@ -356,8 +356,6 @@ val POINTL = struct(WINDOWS_PACKAGE, "POINTL") {
 	LONG.member("y", "the vertical (y) coordinate of the point.")
 }.nativeType
 
-val PRINTER_ONLY = "for printer devices only"
-
 val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 	documentation = "Contains information about the initialization and environment of a printer or a display device."
 
@@ -398,6 +396,8 @@ val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 		otherwise the bit is clear. A driver supports only those {@code DEVMODE} members that are appropriate for the printer or display technology.
 		"""
 	)
+
+	val PRINTER_ONLY = "for printer devices only"
 	union {
 		struct {
 			short.member("dmOrientation", PRINTER_ONLY)
