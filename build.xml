@@ -184,6 +184,7 @@
 			<src path="${src.templates.kotlin}/org/lwjgl/system/libc"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/linux"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/macosx"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/templates"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/windows"/>
 
 			<src path="${src.templates.kotlin}/org/lwjgl/util/lmdb" if:true="${binding.lmdb}"/>
@@ -196,10 +197,13 @@
 	</target>
 
 	<target name="-compile-generator-tools" depends="init">
-		<lwjgl.javac destdir="${bin.generator}">
-			<src path="${src.generator}/java"/>
-			<include name="org/lwjgl/generator/util/**"/>
-		</lwjgl.javac>
+		<lwjgl.javac
+			destdir="${bin.generator}"
+
+			srcdir="${src.generator}/java"
+			includes="org/lwjgl/generator/util/**"
+			description="javac: Generator Tools"
+		/>
 	</target>
 
 	<target name="formatter" description="Runs the template formatter tool" depends="-compile-generator-tools">
@@ -250,63 +254,47 @@
 	</target>
 
 	<target name="-init-compile" depends="bindings">
-		<patternset id="core.main.files">
-			<include name="org/lwjgl/*.java"/>
-			<include name="org/lwjgl/system/**"/>
-
-			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
-			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
-			<include name="org/lwjgl/nanovg/**" if:true="${binding.nanovg}"/>
-			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
-			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
-			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
-			<include name="org/lwjgl/opengles/**" if:true="${binding.opengles}"/>
-			<include name="org/lwjgl/vulkan/**" if:true="${binding.vulkan}"/>
+		<patternset id="excluded.sources.withCore">
+			<exclude name="org/lwjgl/egl/**" unless:true="${binding.egl}"/>
+			<exclude name="org/lwjgl/glfw/**" unless:true="${binding.glfw}"/>
+			<exclude name="org/lwjgl/nanovg/**" unless:true="${binding.nanovg}"/>
+			<exclude name="org/lwjgl/openal/**" unless:true="${binding.openal}"/>
+			<exclude name="org/lwjgl/opencl/**" unless:true="${binding.opencl}"/>
+			<exclude name="org/lwjgl/opengl/**" unless:true="${binding.opengl}"/>
+			<exclude name="org/lwjgl/opengles/**" unless:true="${binding.opengles}"/>
+			<exclude name="org/lwjgl/vulkan/**" unless:true="${binding.vulkan}"/>
 		</patternset>
 
-		<patternset id="core.generated.files">
-			<include name="org/lwjgl/bgfx/**" if:true="${binding.bgfx}"/>
-			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
-			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
-			<include name="org/lwjgl/nanovg/**" if:true="${binding.nanovg}"/>
-			<include name="org/lwjgl/nuklear/**" if:true="${binding.nuklear}"/>
-			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
-			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
-			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
-			<include name="org/lwjgl/opengles/**" if:true="${binding.opengles}"/>
-			<include name="org/lwjgl/ovr/**" if:true="${binding.ovr}"/>
-			<include name="org/lwjgl/stb/**" if:true="${binding.stb}"/>
-			<include name="org/lwjgl/vulkan/**" if:true="${binding.vulkan}"/>
+		<patternset id="excluded.sources">
+			<exclude name="org/lwjgl/bgfx/**" unless:true="${binding.bgfx}"/>
+			<exclude name="org/lwjgl/nuklear/**" unless:true="${binding.nuklear}"/>
+			<exclude name="org/lwjgl/ovr/**" unless:true="${binding.ovr}"/>
+			<exclude name="org/lwjgl/stb/**" unless:true="${binding.stb}"/>
 
-			<include name="org/lwjgl/system/JNI.*"/>
-			<include name="org/lwjgl/system/dyncall/**"/>
-			<include name="org/lwjgl/system/jemalloc/**" if:true="${binding.jemalloc}"/>
-			<include name="org/lwjgl/system/libc/**"/>
-			<include name="org/lwjgl/system/linux/**"/>
-			<include name="org/lwjgl/system/macosx/**"/>
-			<include name="org/lwjgl/system/windows/**"/>
-			<include name="org/lwjgl/system/jawt/**" if:true="${binding.jawt}"/>
+			<exclude name="org/lwjgl/system/jemalloc/**" unless:true="${binding.jemalloc}"/>
+			<exclude name="org/lwjgl/system/jawt/**" unless:true="${binding.jawt}"/>
 
-			<include name="org/lwjgl/util/lmdb/**" if:true="${binding.lmdb}"/>
-			<include name="org/lwjgl/util/nfd/**" if:true="${binding.nfd}"/>
-			<include name="org/lwjgl/util/par/**" if:true="${binding.par}"/>
-			<include name="org/lwjgl/util/simd/**" if:true="${binding.sse}"/>
-			<include name="org/lwjgl/util/tinyfd/**" if:true="${binding.tinyfd}"/>
-			<include name="org/lwjgl/util/xxhash/**" if:true="${binding.xxhash}"/>
+			<exclude name="org/lwjgl/util/lmdb/**" unless:true="${binding.lmdb}"/>
+			<exclude name="org/lwjgl/util/nfd/**" unless:true="${binding.nfd}"/>
+			<exclude name="org/lwjgl/util/par/**" unless:true="${binding.par}"/>
+			<exclude name="org/lwjgl/util/simd/**" unless:true="${binding.sse}"/>
+			<exclude name="org/lwjgl/util/tinyfd/**" unless:true="${binding.tinyfd}"/>
+			<exclude name="org/lwjgl/util/xxhash/**" unless:true="${binding.xxhash}"/>
 		</patternset>
 	</target>
 
 	<target name="compile" description="Compiles the Java source code" depends="generate, -init-compile">
-		<lwjgl.javac destdir="${bin.core}" taskname="Core">
+		<lwjgl.javac destdir="${bin.core}" taskname="javac: Core">
 			<src>
 				<pathelement path="${src.core}"/>
 				<pathelement path="${src.generated.java}"/>
 			</src>
 
-			<patternset refid="core.main.files"/>
-			<patternset refid="core.generated.files"/>
+			<include name="**/*.java"/>
+			<exclude name="**/package-info.java"/>
 
-			<patternset excludes="**/package-info.java"/>
+			<patternset refid="excluded.sources.withCore"/>
+			<patternset refid="excluded.sources"/>
 
 			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 			<compilerarg value="-XDignore.symbol.file=true"/>
@@ -387,13 +375,11 @@
 			</and>
 		</condition>
 
-		<lwjgl.javac destdir="${bin.tests}" taskname="Tests">
+		<lwjgl.javac srcdir="${src.tests}" destdir="${bin.tests}" taskname="javac: Tests">
 			<classpath>
 				<pathelement path="${bin.core}"/>
 				<pathelement path="${lib}/testng.jar"/>
 			</classpath>
-
-			<src path="${src.tests}/"/>
 
 			<!-- Demos -->
 			<include name="org/lwjgl/demo/bgfx/**" if:true="${binding.bgfx}"/>
@@ -499,16 +485,20 @@
 		</java>
 	</target>
 
-	<!-- Includes all modules for javadoc.lwjgl.org -->
-	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate,-init-compile,-build-version">
-		<lwjgl.javac destdir="${bin.generator}" taskname="Compile doclets">
-			<src path="${src.generator}/java"/>
-			<include name="org/lwjgl/system/**"/>
-			<classpath>
-				<pathelement location="${env.JAVA_HOME}/lib/tools.jar"/>
-			</classpath>
-		</lwjgl.javac>
+	<target name="-compile-doclets">
+		<lwjgl.javac
+			destdir="${bin.generator}"
 
+			srcdir="${src.generator}/java"
+			includes="org/lwjgl/system/**"
+			classpath="${env.JAVA_HOME}/lib/tools.jar"
+
+			taskname="javac: Doclets"
+		/>
+	</target>
+
+	<!-- Includes all modules for javadoc.lwjgl.org -->
+	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate,-init-compile,-compile-doclets,-build-version">
 		<delete dir="${bin.html.javadoc}"/>
 		<javadoc
 			destdir="${bin.html.javadoc}"
@@ -535,11 +525,14 @@
 			</classpath>
 
 			<fileset dir="${src.core}">
-				<patternset refid="core.main.files"/>
+				<include name="**/*.java"/>
+				<patternset refid="excluded.sources.withCore"/>
 			</fileset>
 
 			<fileset dir="${src.generated.java}">
-				<patternset refid="core.generated.files"/>
+				<include name="**/*.java"/>
+				<patternset refid="excluded.sources.withCore"/>
+				<patternset refid="excluded.sources"/>
 			</fileset>
 
 			<arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
@@ -755,15 +748,7 @@
 		</sequential>
 	</macrodef>
 
-	<target name="release" depends="compile,-build-version">
-		<lwjgl.javac destdir="${bin.generator}" taskname="Compile doclets">
-			<src path="${src.generator}/java"/>
-			<include name="org/lwjgl/system/**"/>
-			<classpath>
-				<pathelement location="${env.JAVA_HOME}/lib/tools.jar"/>
-			</classpath>
-		</lwjgl.javac>
-
+	<target name="release" depends="compile,-compile-doclets,-build-version">
 		<local name="revision"/>
 		<condition property="revision" value="build ${build.revision}" else="SNAPSHOT">
 			<isset property="build.revision"/>
