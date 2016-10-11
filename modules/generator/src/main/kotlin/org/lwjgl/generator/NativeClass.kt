@@ -443,7 +443,7 @@ class NativeClass(
 
 				if ( binding is SimpleBinding || functions.any { !it.hasExplicitFunctionAddress } ) {
 					println("""
-	${if ( hasFunctions ) "protected" else "private"} $className() {
+	${if (hasFunctions && access === Access.PUBLIC ) "protected" else "private"} $className() {
 		throw new UnsupportedOperationException();
 	}""")
 					binding.generateFunctionSetup(this, this@NativeClass)
@@ -455,7 +455,7 @@ class NativeClass(
 
 				// This allows binding classes to be "statically" extended. Not a good practice, but usable with static imports.
 				println("""
-	protected $className() {
+	${if (hasFunctions && access === Access.PUBLIC ) "protected" else "private"} $className() {
 		throw new UnsupportedOperationException();
 	}""")
 			}
