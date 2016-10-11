@@ -109,7 +109,7 @@ private class AutoSizeBytesTransform(
 internal open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
-		var expression = if ( bufferParam has nullable )
+		var expression = if ( bufferParam has Nullable )
 			"${bufferParam.name} == null ? 0 : ${bufferParam.name}Encoded.remaining()"
 		else
 			"${bufferParam.name}EncodedLen"
@@ -159,7 +159,7 @@ internal class CharSequenceTransform(
 	val nullTerminated: Boolean
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "CharSequence ${param.name}"
-	override fun transformCall(param: Parameter, original: String) = if ( param has nullable )
+	override fun transformCall(param: Parameter, original: String) = if ( param has Nullable )
 		"memAddressSafe(${param.name}Encoded)"
 	else
 		"memAddress(${param.name}Encoded)"

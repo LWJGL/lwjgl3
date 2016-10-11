@@ -524,7 +524,7 @@ class NativeClassFunction(
 								}
 						}
 					).firstOrNull { it != null }.let { if ( it == null ) "" else ", $it" }});".let { validation ->
-						if ( it has nullable )
+						if ( it has Nullable )
 							"if ( ${it.name} != null ) $validation"
 						else
 							validation
@@ -655,7 +655,7 @@ class NativeClassFunction(
 								}
 						}
 					).firstOrNull { it != null }.let { if ( it == null ) "" else ", $it" }});".let { validation ->
-						if ( it has nullable )
+						if ( it has Nullable )
 							"if ( ${it.name} != NULL ) $validation"
 						else
 							validation
@@ -1529,7 +1529,7 @@ class NativeClassFunction(
 				nativeBeforeCall = getParams { it.nativeType is ArrayType }.map {
 					"j${(it.nativeType.mapping as PointerMapping).primitive} *${it.name} = ${
 					"(*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, 0)".let { expression ->
-						if ( it has nullable )
+						if ( it has Nullable )
 							"${it.name}$POINTER_POSTFIX == NULL ? NULL : $expression"
 						else
 							expression
@@ -1541,7 +1541,7 @@ class NativeClassFunction(
 					.map { it.value }
 					.map {
 						"(*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, ${it.name}, 0);".let { expression ->
-							if ( it has nullable )
+							if ( it has Nullable )
 								"if ( ${it.name} != NULL ) $expression"
 							else
 								expression
