@@ -99,6 +99,8 @@ class Struct(
 	private val virtual: Boolean,
 	/** when false, setters methods will not be generated. */
 	private val mutable: Boolean,
+	/** if specified, is the super-type of this struct. */
+	private val extends: Struct?,
 	/** when true, the struct layout will be built using native code. */
 	private val nativeLayout: Boolean
 ) : GeneratorTargetNative(packageName, className, nativeSubPath) {
@@ -192,7 +194,7 @@ class Struct(
 
 	/** Nested member struct definition. */
 	fun struct(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
-		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, false, false, true, false)
+		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, false, false, true, null, false)
 		struct.init()
 		return StructType(struct).member(name, documentation)
 	}
@@ -204,7 +206,7 @@ class Struct(
 
 	/** Nested member union definition. */
 	fun union(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
-		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, true, false, true, false)
+		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, true, false, true, null, false)
 		struct.init()
 		return StructType(struct).member(name, documentation)
 	}
@@ -468,9 +470,15 @@ $indentation}"""
 		preamble.printJava(this)
 
 		printDocumentation()
-		println("${access.modifier}class $className extends Struct${if ( mallocable ) " implements NativeResource" else ""} {")
+		print("${access.modifier}class $className extends ")
+		print(if (extends == null)
+			"Struct${if ( mallocable ) " implements NativeResource" else ""}"
+		else
+			extends.className
+		)
 
-		print("""
+		print(""" {
+
 	/** The struct size in bytes. */
 	public static final int SIZEOF;
 
@@ -585,7 +593,8 @@ $indentation}"""
 				}
 
 				print("""
-	/** Unsafe version of {@link #set($className) set}. */
+	/** Unsafe version of {@link #set($className) set}. */${if (extends != null) """
+	@Override""" else ""}
 	public $className nset(long struct) {
 		memCopy(struct, $ADDRESS, SIZEOF);
 		return this;
@@ -793,7 +802,15 @@ ${validations.joinToString("\n")}
 
 		print("""
 	/** An array of {@link $className} structs. */
-	public static final class Buffer extends StructBuffer<$className, Buffer>${if ( mallocable ) " implements NativeResource" else ""} {
+	public static class Buffer extends """)
+
+		print(if (extends == null)
+			"StructBuffer<$className, Buffer>${if (mallocable) " implements NativeResource" else ""}"
+		else
+			"${extends.className}.Buffer"
+		)
+
+		print(""" {
 
 		/**
 		 * Creates a new {@link $className.Buffer} instance backed by the specified container.
@@ -803,10 +820,24 @@ ${validations.joinToString("\n")}
 		 * by {@link $className#SIZEOF}, and its mark will be undefined.
 		 *
 		 * <p>The created buffer instance holds a strong reference to the container object.</p>
-		 */
+		 */""")
+
+		print(if (extends == null)
+		"""
 		public Buffer(ByteBuffer container) {
 			super(container, container.remaining() / SIZEOF);
+		}"""
+		else
+		"""
+		public Buffer(ByteBuffer container) {
+			this(container, container.remaining() / SIZEOF);
 		}
+
+		private Buffer(ByteBuffer container, int remaining) {
+			super(memAddress(container), container, -1, 0, remaining, remaining);
+		}""")
+
+		print("""
 
 		Buffer(long address, ByteBuffer container, int mark, int pos, int lim, int cap) {
 			super(address, container, mark, pos, lim, cap);
@@ -1285,6 +1316,8 @@ ${validations.joinToString("\n")}
 			val field = it.name
 
 			val indent = accessMode.indent
+			val overrides = extends != null && extends.members.any { parentMember -> parentMember.name == it.name }
+
 			val returnType = if ( accessMode === AccessMode.INSTANCE )
 				className
 			else
@@ -1296,6 +1329,7 @@ ${validations.joinToString("\n")}
 					generateSetters(accessMode, it.nestedMembers, if ( field === ANONYMOUS ) parentMember else field)
 				else {
 					println("$indent/** Copies the specified {@link $structType} to the {@code $field} field. */")
+					if (overrides) println("$indent@Override")
 					println("${indent}public $returnType $setter($structType value) { $n$setter($ADDRESS, value); return this; }")
 				}
 			} else {
@@ -1305,9 +1339,11 @@ ${validations.joinToString("\n")}
 					if ( it.nativeType is CallbackType ) {
 						val callbackType = it.nativeType.javaMethodType
 						println("$indent/** Sets the address of the specified {@link $callbackType} to the {@code $field} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $returnType $setter($callbackType value) { $n$setter($ADDRESS, addressSafe(value)); return this; }")
 					} else {
 						println("$indent/** Sets the specified value to the {@code $field} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType} value) { $n$setter($ADDRESS, value${if ( it.nativeType.mapping === PrimitiveMapping.BOOLEAN4 ) " ? 1 : 0" else ""}); return this; }")
 					}
 				}
@@ -1319,34 +1355,43 @@ ${validations.joinToString("\n")}
 						val structType = it.nativeType.javaMethodType
 						if ( it.nativeType.includesPointer ) {
 							println("$indent/** Copies the specified {@link PointerBuffer} to the {@code $field} field. */")
+							if (overrides) println("$indent@Override")
 							println("${indent}public $returnType $setter(PointerBuffer value) { $n$setter($ADDRESS, value); return this; }")
 							println("$indent/** Copies the address of the specified {@link $structType} at the specified index of the {@code $field} field. */")
 						} else {
 							println("$indent/** Copies the specified {@link $structType.Buffer} to the {@code $field} field. */")
+							if (overrides) println("$indent@Override")
 							println("${indent}public $returnType $setter($structType.Buffer value) { $n$setter($ADDRESS, value); return this; }")
 							println("$indent/** Copies the specified {@link $structType} at the specified index of the {@code $field} field. */")
 						}
+						if (overrides) println("$indent@Override")
 						println("${indent}public $returnType $setter(int index, $structType value) { $n$setter($ADDRESS, index, value); return this; }")
 					} else if ( it is StructMemberCharArray ) {
 						println("$indent/** Copies the specified encoded string to the {@code $field} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
 					} else {
 						val bufferType = it.primitiveMapping.toPointer.javaMethodType.simpleName
 						println("$indent/** Copies the specified {@link $bufferType} to the {@code $field} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $returnType $setter($bufferType value) { $n$setter($ADDRESS, value); return this; }")
 						println("$indent/** Sets the specified value at the specified index of the {@code $field} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $returnType $setter(int index, ${it.nativeType.mapping.javaMethodType} value) { $n$setter($ADDRESS, index, value); return this; }")
 					}
 				} else if ( it.nativeType is CharSequenceType ) {
 					println("$indent/** Sets the address of the specified encoded string to the {@code $field} field. */")
+					if (overrides) println("$indent@Override")
 					println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
 				} else if ( it.nativeType.isPointerData ) {
 					val pointerType = it.nativeType.javaMethodType
 					if ( it is StructMemberBuffer ) {
 						println("$indent/** Sets the address of the specified {@link $pointerType.Buffer} to the {@code $field} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $returnType $setter($pointerType.Buffer value) { $n$setter($ADDRESS, value); return this; }")
 					} else {
 						println("$indent/** Sets the address of the specified {@link $pointerType} to the {@code $field} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $returnType $setter($pointerType value) { $n$setter($ADDRESS, value); return this; }")
 					}
 				}
@@ -1491,6 +1536,7 @@ ${validations.joinToString("\n")}
 			val getter = it.field(parentMember)
 
 			val indent = accessMode.indent
+			val overrides = extends != null && extends.members.any { parentMember -> parentMember.name == it.name }
 
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
@@ -1499,6 +1545,7 @@ ${validations.joinToString("\n")}
 					generateGetters(accessMode, it.nestedMembers, if ( it.name === ANONYMOUS ) parentMember else getter)
 				else {
 					println("$indent/** Returns a {@link $structType} view of the {@code $getter} field. */")
+					if (overrides) println("$indent@Override")
 					println("${indent}public $structType $getter() { return $n$getter($ADDRESS); }")
 				}
 			} else {
@@ -1509,9 +1556,11 @@ ${validations.joinToString("\n")}
 						val callbackType = it.nativeType.className
 
 						println("$indent/** Returns the {@code $callbackType} instance at the {@code $getter} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $callbackType $getter() { return $callbackType.create($n$getter($ADDRESS)); }")
 					} else {
 						println("$indent/** Returns the value of the {@code $getter} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public ${it.nativeType.javaMethodType} $getter() { return $n$getter($ADDRESS)${if ( it.nativeType.mapping === PrimitiveMapping.BOOLEAN4 ) " != 0" else ""}; }")
 					}
 				}
@@ -1523,31 +1572,41 @@ ${validations.joinToString("\n")}
 						val structType = it.nativeType.javaMethodType
 						if (  it.nativeType.includesPointer ) {
 							println("$indent/** Returns a {@link PointerBuffer} view of the {@code $getter} field. */")
+							if (overrides) println("$indent@Override")
 							println("${indent}public PointerBuffer $getter() { return $n$getter($ADDRESS); }")
 							println("$indent/** Returns a {@link $structType} view of the pointer at the specified index of the {@code $getter}. */")
+							if (overrides) println("$indent@Override")
 							println("${indent}public $structType $getter(int index) { return $n$getter($ADDRESS, index); }")
 						} else {
 							println("$indent/** Returns a {@link $structType}.Buffer view of the {@code $getter} field. */")
+							if (overrides) println("$indent@Override")
 							println("${indent}public $structType.Buffer $getter() { return $n$getter($ADDRESS); }")
 							println("$indent/** Returns a {@link $structType} view of the struct at the specified index of the {@code $getter} field. */")
+							if (overrides) println("$indent@Override")
 							println("${indent}public $structType $getter(int index) { return $n$getter($ADDRESS, index); }")
 						}
 					} else if ( it is StructMemberCharArray ) {
 						println("$indent/** Returns a {@link ByteBuffer} view of the {@code $getter} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")
 						println("$indent/** Decodes the null-terminated string stored in the {@code $getter} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
 					} else {
 						val bufferType = it.primitiveMapping.toPointer.javaMethodType.simpleName
 						println("$indent/** Returns a {@link $bufferType} view of the {@code $getter} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $bufferType $getter() { return $n$getter($ADDRESS); }")
 						println("$indent/** Returns the value at the specified index of the {@code $getter} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public ${it.nativeType.javaMethodType} $getter(int index) { return $n$getter($ADDRESS, index); }")
 					}
 				} else if ( it.nativeType is CharSequenceType ) {
 					println("$indent/** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code $getter} field. */")
+					if (overrides) println("$indent@Override")
 					println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")
 					println("$indent/** Decodes the null-terminated string pointed to by the {@code $getter} field. */")
+					if (overrides) println("$indent@Override")
 					println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
 				} else if ( it.nativeType is StructType ) {
 					val structType = it.nativeType.javaMethodType
@@ -1558,14 +1617,17 @@ $indent * Returns a {@link $structType.Buffer} view of the struct array pointed 
 $indent *
 $indent * @param $BUFFER_CAPACITY_PARAM the number of elements in the returned buffer
 $indent */""")
+							if (overrides) println("$indent@Override")
 							println("${indent}public $structType.Buffer $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
 						} else {
 							println("$indent/** Returns a {@link $structType.Buffer} view of the struct array pointed to by the {@code $getter} field. */")
+							if (overrides) println("$indent@Override")
 							println("${indent}public $structType.Buffer $getter() { return $n$getter($ADDRESS); }")
 						}
 
 					} else {
 						println("$indent/** Returns a {@link $structType} view of the struct pointed to by the {@code $getter} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $structType $getter() { return $n$getter($ADDRESS); }")
 					}
 				} else if ( it.nativeType.isPointerData ) {
@@ -1578,9 +1640,11 @@ $indent * Returns a {@link $bufferType} view of the data pointed to by the {@cod
 $indent *
 $indent * @param $BUFFER_CAPACITY_PARAM the number of elements in the returned buffer
 $indent */""")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $bufferType $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
 					} else {
 						println("$indent/** Returns a {@link $bufferType} view of the data pointed to by the {@code $getter} field. */")
+						if (overrides) println("$indent@Override")
 						println("${indent}public $bufferType $getter() { return $n$getter($ADDRESS); }")
 					}
 				}
@@ -1668,6 +1732,18 @@ EXTERN_C_EXIT""")
 
 }
 
+private val PointerType?.toStruct: Struct? get() = if (this == null)
+	null
+else if (this is StructType)
+	this.definition
+else {
+	this.elementType.let {
+		if (it !is PointerType)
+			throw IllegalStateException("Invalid struct parent type specified.")
+		it.toStruct
+	}
+}
+
 fun struct(
 	packageName: String,
 	className: String,
@@ -1675,10 +1751,11 @@ fun struct(
 	nativeName: String = className,
 	virtual: Boolean = false,
 	mutable: Boolean = true,
+	extends: PointerType? = null,
 	nativeLayout: Boolean = false,
 	init: (Struct.() -> Unit)? = null
 ): Struct {
-	val struct = Struct(packageName, className, nativeSubPath, nativeName, false, virtual, mutable, nativeLayout)
+	val struct = Struct(packageName, className, nativeSubPath, nativeName, false, virtual, mutable, extends.toStruct, nativeLayout)
 	if ( init != null ) {
 		struct.init()
 		Generator.register(struct)
@@ -1693,9 +1770,10 @@ fun struct_p(
 	nativeName: String = className,
 	virtual: Boolean = false,
 	mutable: Boolean = true,
+	extends: PointerType? = null,
 	nativeLayout: Boolean = false,
 	init: (Struct.() -> Unit)? = null
-) = struct(packageName, className, nativeSubPath, nativeName, virtual, mutable, nativeLayout, init).nativeType.p
+) = struct(packageName, className, nativeSubPath, nativeName, virtual, mutable, extends, nativeLayout, init).nativeType.p
 
 fun union(
 	packageName: String,
@@ -1704,10 +1782,11 @@ fun union(
 	nativeName: String = className,
 	virtual: Boolean = false,
 	mutable: Boolean = true,
+	extends: PointerType? = null,
 	nativeLayout: Boolean = false,
 	init: (Struct.() -> Unit)? = null
 ): Struct {
-	val struct = Struct(packageName, className, nativeSubPath, nativeName, true, virtual, mutable, nativeLayout)
+	val struct = Struct(packageName, className, nativeSubPath, nativeName, true, virtual, mutable, extends.toStruct, nativeLayout)
 	if ( init != null ) {
 		struct.init()
 		Generator.register(struct)
@@ -1722,6 +1801,7 @@ fun union_p(
 	nativeName: String = className,
 	virtual: Boolean = false,
 	mutable: Boolean = true,
+	extends: PointerType? = null,
 	nativeLayout: Boolean = false,
 	init: (Struct.() -> Unit)? = null
-) = union(packageName, className, nativeSubPath, nativeName, virtual, mutable, nativeLayout, init).nativeType.p
+) = union(packageName, className, nativeSubPath, nativeName, virtual, mutable, extends, nativeLayout, init).nativeType.p

@@ -47,9 +47,9 @@ val GLFWvidmode_p = struct_p(GLFW_PACKAGE, "GLFWVidMode", nativeName = "GLFWvidm
 val GLFWgammaramp_p = struct_p(GLFW_PACKAGE, "GLFWGammaRamp", nativeName = "GLFWgammaramp") {
 	documentation = "Describes the gamma ramp for a monitor."
 
-	unsigned_short_p.member("red", "an array of value describing the response of the red channel")
-	unsigned_short_p.member("green", "an array of value describing the response of the green channel")
-	unsigned_short_p.member("blue", "an array of value describing the response of the blue channel")
+	unsigned_short_p.member("red", "an array of values describing the response of the red channel")
+	unsigned_short_p.member("green", "an array of values describing the response of the green channel")
+	unsigned_short_p.member("blue", "an array of values describing the response of the blue channel")
 	AutoSize("red", "green", "blue")..unsigned_int.member("size", "the number of elements in each array")
 }
 
