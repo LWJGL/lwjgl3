@@ -183,7 +183,10 @@ private open class Signature constructor(
 	constructor(function: NativeClassFunction) : this(
 		function.nativeClass.binding!!.callingConvention,
 		function.returns.nativeType,
-		function.parameters.map { it.nativeType }
+		function.parameters.asSequence()
+			.filter { it !== EXPLICIT_FUNCTION_ADDRESS }
+			.map { it.nativeType }
+			.toList()
 	)
 
 	override fun equals(other: Any?) = other is Signature && this.signatureNative == other.signatureNative
@@ -217,7 +220,10 @@ private class SignatureArray constructor(
 	constructor(function: NativeClassFunction) : this(
 		function.nativeClass.binding!!.callingConvention,
 		function.returns.nativeType,
-		function.parameters.map { it.nativeType }
+		function.parameters.asSequence()
+			.filter { it !== EXPLICIT_FUNCTION_ADDRESS }
+			.map { it.nativeType }
+			.toList()
 	)
 
 	override fun equals(other: Any?) = other is SignatureArray && this.signatureArray == other.signatureArray

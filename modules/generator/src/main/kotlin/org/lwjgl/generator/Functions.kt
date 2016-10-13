@@ -911,7 +911,7 @@ class NativeClassFunction(
 				if ( hasCustomJNI )
 					"n$nativeName("
 				else macroExpression ?:
-				     "${nativeClass.binding!!.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
+				     "${nativeClass.binding!!.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 			)
 			if ( nativeClass.binding != null && !hasExplicitFunctionAddress ) {
 				print(FUNCTION_ADDRESS)
