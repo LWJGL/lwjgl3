@@ -381,7 +381,7 @@ public class TemplateFormatter {
 
 	private static final Pattern TYPE_PATTERN = Pattern.compile(
 		"(?:const\\s+)?" + // const
-			"(?:(?:un)signed\\s+)?" + // (un)signed
+			"(?:(?:un)?signed\\s+)?" + // (un)signed
 			"(?:(?:struct|enum)\\s+)?" + // struct or enum (ignored)
 			"[0-9a-zA-Z_]++" + // type
 			"(?:\\s+const)?(?:\\s*[*]+\\s*|\\s+)" + // pointer. This is a little funny because we can have whitespace on either side of *
