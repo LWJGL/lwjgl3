@@ -24,7 +24,7 @@ class Deployment {
 	String password
 }
 
-Deployment deployment;
+Deployment deployment
 if ( hasProperty("release") ) {
 	deployment = new Deployment(
 		type: BuildType.RELEASE,
@@ -48,117 +48,153 @@ if ( hasProperty("release") ) {
 }
 println "${deployment.type.name()} BUILD"
 
+enum Platforms {
+	LINUX("linux"),
+	MACOS("macos"),
+	WINDOWS("windows")
+
+	static final Platforms[] JAVA_ONLY = []
+	static final Platforms[] ALL = values()
+
+	final String name
+
+	Platforms(String name) {
+		this.name = name
+	}
+}
+
 enum Artifacts {
-	CORE("lwjgl", true, "LWJGL", "The LWJGL core library."),
+	CORE("lwjgl", "LWJGL", "The LWJGL core library.", Platforms.ALL),
 	BGFX(
-		"lwjgl-bgfx", true, "LWJGL - bgfx bindings",
-		"A cross-platform, graphics API agnostic rendering library. It provides a high performance, low level abstraction for common platform graphics APIs like OpenGL, Direct3D and Apple Metal."
+		"lwjgl-bgfx", "LWJGL - bgfx bindings",
+		"A cross-platform, graphics API agnostic rendering library. It provides a high performance, low level abstraction for common platform graphics APIs like OpenGL, Direct3D and Apple Metal.",
+		Platforms.ALL
 	),
 	EGL(
-		"lwjgl-egl", false, "LWJGL - EGL bindings",
-		"An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system."
+		"lwjgl-egl", "LWJGL - EGL bindings",
+		"An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system.",
+		Platforms.JAVA_ONLY
 	),
 	GLFW(
-		"lwjgl-glfw", true, "LWJGL - GLFW bindings",
-		"An multi-platform library for OpenGL, OpenGL ES and Vulkan development on the desktop. It provides a simple API for creating windows, contexts and surfaces, receiving input and events."
+		"lwjgl-glfw", "LWJGL - GLFW bindings",
+		"An multi-platform library for OpenGL, OpenGL ES and Vulkan development on the desktop. It provides a simple API for creating windows, contexts and surfaces, receiving input and events.",
+		Platforms.ALL
 	),
 	JAWT(
-		"lwjgl-jawt", false, "LWJGL - JAWT bindings",
-		"The AWT native interface."
+		"lwjgl-jawt", "LWJGL - JAWT bindings",
+		"The AWT native interface.",
+		Platforms.JAVA_ONLY
 	),
 	JEMALLOC(
-		"lwjgl-jemalloc", true, "LWJGL - jemalloc bindings",
-		"A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support."
+		"lwjgl-jemalloc", "LWJGL - jemalloc bindings",
+		"A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.",
+		Platforms.ALL
 	),
 	LMDB(
-		"lwjgl-lmdb", true, "LWJGL - LMDB bindings",
-		"A compact, fast, powerful, and robust database that implements a simplified variant of the BerkeleyDB (BDB) API."
+		"lwjgl-lmdb", "LWJGL - LMDB bindings",
+		"A compact, fast, powerful, and robust database that implements a simplified variant of the BerkeleyDB (BDB) API.",
+		Platforms.ALL
 	),
 	NANOVG(
-		"lwjgl-nanovg", true, "LWJGL - NanoVG bindings",
-		"A small antialiased vector graphics rendering library for OpenGL."
+		"lwjgl-nanovg", "LWJGL - NanoVG bindings",
+		"A small antialiased vector graphics rendering library for OpenGL.",
+		Platforms.ALL
 	),
 	NFD(
-		"lwjgl-nfd", true, "LWJGL - Native File Dialog bindings",
-		"A tiny, neat C library that portably invokes native file open and save dialogs."
+		"lwjgl-nfd", "LWJGL - Native File Dialog bindings",
+		"A tiny, neat C library that portably invokes native file open and save dialogs.",
+		Platforms.ALL
 	),
 	NUKLEAR(
-		"lwjgl-nuklear", true, "LWJGL - Nuklear bindings",
-		"A minimal state immediate mode graphical user interface toolkit."
+		"lwjgl-nuklear", "LWJGL - Nuklear bindings",
+		"A minimal state immediate mode graphical user interface toolkit.",
+		Platforms.ALL
 	),
 	OPENAL(
-		"lwjgl-openal", true, "LWJGL - OpenAL bindings",
-		"A cross-platform 3D audio API appropriate for use with gaming applications and many other types of audio applications."
+		"lwjgl-openal", "LWJGL - OpenAL bindings",
+		"A cross-platform 3D audio API appropriate for use with gaming applications and many other types of audio applications.",
+		Platforms.ALL
 	),
 	OPENCL(
-		"lwjgl-opencl", false, "LWJGL - OpenCL bindings",
-		"An open, royalty-free standard for cross-platform, parallel programming of diverse processors found in personal computers, servers, mobile devices and embedded platforms."
+		"lwjgl-opencl", "LWJGL - OpenCL bindings",
+		"An open, royalty-free standard for cross-platform, parallel programming of diverse processors found in personal computers, servers, mobile devices and embedded platforms.",
+		Platforms.JAVA_ONLY
 	),
 	OPENGL(
-		"lwjgl-opengl", false, "LWJGL - OpenGL bindings",
-		"The most widely adopted 2D and 3D graphics API in the industry, bringing thousands of applications to a wide variety of computer platforms."
+		"lwjgl-opengl", "LWJGL - OpenGL bindings",
+		"The most widely adopted 2D and 3D graphics API in the industry, bringing thousands of applications to a wide variety of computer platforms.",
+		Platforms.JAVA_ONLY
 	),
 	OPENGLES(
-		"lwjgl-opengles", false, "LWJGL - OpenGL ES bindings",
-		"A royalty-free, cross-platform API for full-function 2D and 3D graphics on embedded systems - including consoles, phones, appliances and vehicles."
+		"lwjgl-opengles", "LWJGL - OpenGL ES bindings",
+		"A royalty-free, cross-platform API for full-function 2D and 3D graphics on embedded systems - including consoles, phones, appliances and vehicles.",
+		Platforms.JAVA_ONLY
 	),
 	OVR(
-		"lwjgl-ovr", false, "LWJGL - OVR bindings",
-		"The API of the Oculus SDK."
+		"lwjgl-ovr", "LWJGL - OVR bindings",
+		"The API of the Oculus SDK.",
+		Platforms.WINDOWS
 	),
 	PAR(
-		"lwjgl-par", true, "LWJGL - par_shapes bindings",
-		"Generate parametric surfaces and other simple shapes."
+		"lwjgl-par", "LWJGL - par_shapes bindings",
+		"Generate parametric surfaces and other simple shapes.",
+		Platforms.ALL
 	),
 	SSE(
-		"lwjgl-sse", true, "LWJGL - SSE bindings",
-		"Simple SSE intrinsics."
+		"lwjgl-sse", "LWJGL - SSE bindings",
+		"Simple SSE intrinsics.",
+		Platforms.ALL
 	),
 	STB(
-		"lwjgl-stb", true, "LWJGL - stb bindings",
-		"Single-file public domain libraries for fonts, images, ogg vorbis files and more."
+		"lwjgl-stb", "LWJGL - stb bindings",
+		"Single-file public domain libraries for fonts, images, ogg vorbis files and more.",
+		Platforms.ALL
 	),
 	TINYFD(
-		"lwjgl-tinyfd", true, "LWJGL - Tiny File Dialogs bindings",
-		"Provides basic modal dialogs."
+		"lwjgl-tinyfd", "LWJGL - Tiny File Dialogs bindings",
+		"Provides basic modal dialogs.",
+		Platforms.ALL
 	),
 	VULKAN(
-		"lwjgl-vulkan", false, "LWJGL - Vulkan bindings",
-		"A new generation graphics and compute API that provides high-efficiency, cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms."
+		"lwjgl-vulkan", "LWJGL - Vulkan bindings",
+		"A new generation graphics and compute API that provides high-efficiency, cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms.",
+		Platforms.JAVA_ONLY
 	),
 	XXHASH(
-		"lwjgl-xxhash", true, "LWJGL - xxHash bindings",
-		"An Extremely fast Hash algorithm, running at RAM speed limits."
+		"lwjgl-xxhash", "LWJGL - xxHash bindings",
+		"An Extremely fast Hash algorithm, running at RAM speed limits.",
+		Platforms.ALL
 	)
 
 	String artifact
-	boolean hasNatives
 	String projectName
 	String projectDescription
+	Platforms[] platforms
 
 	private Artifacts(
-		String artifact, boolean hasNatives,
-		String projectName, String projectDescription
+		String artifact,
+		String projectName, String projectDescription,
+		Platforms... platforms
 	) {
 		this.artifact = artifact
-		this.hasNatives = hasNatives
 		this.projectName = projectName
 		this.projectDescription = projectDescription
+		this.platforms = platforms
 	}
 
-	private def String directory(String buildDir) {
+	private String directory(String buildDir) {
 		return "$buildDir/$artifact"
 	}
 
-	private def String path() {
+	private String path() {
 		return "${directory("bin/MAVEN")}/$artifact"
 	}
 
-	def boolean active() {
+	boolean active() {
 		return new File(directory("bin/RELEASE")).exists()
 	}
 
-	def Map<String, Object> artifactNotation(String classifier = null) {
+	Map<String, Object> artifactNotation(String classifier = null) {
 		if ( classifier == null )
 			return [file: new File("${path()}.jar"), name: artifact, type: "jar"]
 		else
@@ -202,15 +238,13 @@ artifacts {
 	and a whole lot more verbose in Maven. Hopefully, the automation
 	is going to alleviate the pain.
 	 */
-	Artifacts.values().each {
-		if ( it.active() ) {
-			archives it.artifactNotation()
-			archives it.artifactNotation("sources")
-			archives it.artifactNotation("javadoc")
-			if ( it.hasNatives ) {
-				archives it.artifactNotation("natives-linux")
-				archives it.artifactNotation("natives-macos")
-				archives it.artifactNotation("natives-windows")
+	Artifacts.values().each { module ->
+		if ( module.active() ) {
+			archives module.artifactNotation()
+			archives module.artifactNotation("sources")
+			archives module.artifactNotation("javadoc")
+			module.platforms.each {
+				archives module.artifactNotation("natives-${it.name}")
 			}
 		}
 	}
