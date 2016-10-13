@@ -620,14 +620,17 @@ class NativeClass(
 	operator fun NativeClassFunction.get(paramName: String): Parameter {
 		val param = getParam(paramName)
 
-		return Parameter(
-			param.nativeType,
-			param.name,
-			param.paramType,
-			this@NativeClass.convertDocumentation(this.nativeClass, this.name, param.documentation),
-			"",
-			LinkMode.SINGLE
-		).copyModifiers(param)
+		return if (param === EXPLICIT_FUNCTION_ADDRESS || param === JNI_ENV)
+			param
+		else
+			Parameter(
+				param.nativeType,
+				param.name,
+				param.paramType,
+				this@NativeClass.convertDocumentation(this.nativeClass, this.name, param.documentation),
+				"",
+				LinkMode.SINGLE
+			).copyModifiers(param)
 	}
 
 	private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String): String {
