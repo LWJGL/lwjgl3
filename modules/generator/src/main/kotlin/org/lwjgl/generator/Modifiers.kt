@@ -186,16 +186,11 @@ operator fun StructMemberModifier.rangeTo(member: StructMember): StructMember {
 }
 
 // Used with multiple Parameter/ReturnValue/QualifiedType modifiers
-class ModifierList<M : TemplateModifier, Q : QualifiedType>(
+class ModifierList<M : TemplateModifier, Q : TemplateElement>(
 	modA: M,
 	modB: TemplateModifier
 ) {
 	val list = arrayListOf(modA, modB)
-
-	operator fun rangeTo(other: QualifiedTypeModifier): ModifierList<M, Q> {
-		list.add(other)
-		return this
-	}
 
 	operator fun rangeTo(other: M): ModifierList<M, Q> {
 		list.add(other)
@@ -215,3 +210,7 @@ operator fun QualifiedTypeModifier.rangeTo(other: ParameterModifier) = ModifierL
 operator fun ReturnValueModifier.rangeTo(other: ReturnValueModifier) = ModifierList<ReturnValueModifier, ReturnValue>(this, other)
 operator fun ReturnValueModifier.rangeTo(other: QualifiedTypeModifier) = ModifierList<ReturnValueModifier, ReturnValue>(this, other)
 operator fun QualifiedTypeModifier.rangeTo(other: ReturnValueModifier) = ModifierList<ReturnValueModifier, ReturnValue>(other, this)
+
+operator fun <M : TemplateModifier, Q : TemplateElement> ModifierList<M, Q>.rangeTo(other: QualifiedTypeModifier) = this.apply { list.add(other) }
+
+operator fun StructMemberModifier.rangeTo(other: StructMemberModifier) = ModifierList<StructMemberModifier, StructMember>(this, other)

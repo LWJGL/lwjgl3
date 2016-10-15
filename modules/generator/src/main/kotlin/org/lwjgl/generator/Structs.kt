@@ -378,7 +378,7 @@ ${members.map {
 						else
 							it.name
 					}
-				"$nativeType${if ( it.name === ANONYMOUS ) "" else " ${it.name}"}${if ( it is StructMemberArray ) "[${it.size}]" else ""};"
+				"${if (it has ConstMember) "const " else ""}$nativeType${if ( it.name === ANONYMOUS ) "" else " ${it.name}"}${if ( it is StructMemberArray ) "[${it.size}]" else ""};"
 			}
 		}.joinToString("\n$memberIndentation", prefix = memberIndentation)}
 $indentation}"""

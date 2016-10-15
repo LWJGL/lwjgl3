@@ -164,6 +164,6 @@ internal fun Struct.sType(struct: Struct) = VkStructureType.member("sType", "the
 	.replace(STRUCTURE_TYPE_REGEX, "$1_$2")
 	.toUpperCase()
 }")
-internal fun Struct.pNext() = nullable.."const void".p.member("pNext", "reserved for use by extensions")
+internal fun Struct.pNext() = nullable..const..voidptr.member("pNext", "reserved for use by extensions")
 
 internal fun StructMember.flagLinks(prefix: String) = links("${prefix}_\\w+", LinkMode.BITFIELD)

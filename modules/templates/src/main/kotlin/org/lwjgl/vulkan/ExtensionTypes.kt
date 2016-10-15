@@ -125,7 +125,7 @@ val VkDebugMarkerObjectNameInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerOb
 	pNext()
     VkDebugReportObjectTypeEXT.member("objectType", "the type of the object to be named").links("DEBUG_REPORT_OBJECT_TYPE_\\w+")
     uint64_t.member("object", "the object to be named")
-    nullable..const_charUTF8_p.member("pObjectName", "a null-terminated UTF-8 string specifying the name to apply to {@code object}")
+    nullable..const..charUTF8_p.member("pObjectName", "a null-terminated UTF-8 string specifying the name to apply to {@code object}")
 }
 
 val VkDebugMarkerObjectTagInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerObjectTagInfoEXT") {
@@ -142,7 +142,7 @@ val VkDebugMarkerObjectTagInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerObj
     uint64_t.member("object", "the object to be tagged")
     uint64_t.member("tagName", "a numerical identifier of the tag")
     AutoSize("pTag")..size_t.member("tagSize", "the number of bytes of data to attach to the object")
-    const_void_p.member("pTag", "an array of {@code tagSize} bytes containing the data to be associated with the object")
+    const..void_p.member("pTag", "an array of {@code tagSize} bytes containing the data to be associated with the object")
 }
 
 val VkDebugMarkerMarkerInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerMarkerInfoEXT") {
@@ -155,7 +155,7 @@ val VkDebugMarkerMarkerInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerMarker
 
     sType(this)
 	pNext()
-    const_charUTF8_p.member("pMarkerName", "a pointer to a null-terminated UTF-8 string that contains the name of the marker")
+    const..charUTF8_p.member("pMarkerName", "a pointer to a null-terminated UTF-8 string that contains the name of the marker")
     float.array(
 	    "color",
 	    """
@@ -298,7 +298,7 @@ val VkDisplayPropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPropertiesKHR"
 		"display",
 		"a handle that is used to refer to the display described here. This handle will be valid for the lifetime of the Vulkan instance."
 	)
-	const_charUTF8_p.member(
+	const..charUTF8_p.member(
 		"displayName",
 		"a pointer to a NULL-terminated string containing the name of the display. Generally, this will be the name provided by the display’s EDID. It can be NULL if no suitable name is available."
 	)

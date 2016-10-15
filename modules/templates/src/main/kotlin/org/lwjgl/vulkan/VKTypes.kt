@@ -156,12 +156,10 @@ val VkCommandBufferResetFlags = typedef(VkFlags, "VkCommandBufferResetFlags")
 val VkStencilFaceFlags = typedef(VkFlags, "VkStencilFaceFlags")
 
 // ----
-val const_void_p = PointerType("const void", PointerMapping.DATA)
-val const_charUTF8_p = charUTF8.const_p
-val const_charUTF8_const_p = const_charUTF8_p.p_const_p
+val charUTF8_p_const_p = charUTF8_p.p_const_p
 // ----
 
-val VkApplicationInfo = struct(VULKAN_PACKAGE, "VkApplicationInfo") {
+val VkApplicationInfo_p = struct_p(VULKAN_PACKAGE, "VkApplicationInfo") {
 	documentation =
 		"""
 		${man("VkApplicationInfo")}<br>
@@ -174,7 +172,7 @@ val VkApplicationInfo = struct(VULKAN_PACKAGE, "VkApplicationInfo") {
 
 	sType(this)
 	pNext()
-	nullable..const_charUTF8_p.member("pApplicationName", "a pointer to a $NULL-terminated UTF-8 string containing the name of the application")
+	nullable..const..charUTF8_p.member("pApplicationName", "a pointer to a $NULL-terminated UTF-8 string containing the name of the application")
 	uint32_t.member(
 		"applicationVersion",
 		"""
@@ -182,7 +180,7 @@ val VkApplicationInfo = struct(VULKAN_PACKAGE, "VkApplicationInfo") {
 		for {@code applicationVersion}.
 		"""
 	)
-	nullable..const_charUTF8_p.member(
+	nullable..const..charUTF8_p.member(
 		"pEngineName",
 		"""
 		if the application is built on a reusable engine, the name of the engine may be specified in the $NULL-terminated UTF-8 string pointed to by
@@ -191,8 +189,7 @@ val VkApplicationInfo = struct(VULKAN_PACKAGE, "VkApplicationInfo") {
 	)
 	uint32_t.member("engineVersion", "the version of the engine used to create the application")
 	uint32_t.member("apiVersion", "the version of the Vulkan API that the application expects to use")
-}.nativeType
-val const_VkApplicationInfo_p = VkApplicationInfo.const_p
+}
 
 val VkInstanceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkInstanceCreateInfo") {
 	documentation =
@@ -208,14 +205,14 @@ val VkInstanceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkInstanceCreateInfo") {
 	sType(this)
 	pNext()
 	VkInstanceCreateFlags.member("flags", "reserved for future use")
-	nullable..const_VkApplicationInfo_p.member("pApplicationInfo", "a pointer to an instance of ##VkApplicationInfo")
+	nullable..const..VkApplicationInfo_p.member("pApplicationInfo", "a pointer to an instance of ##VkApplicationInfo")
 	AutoSize("ppEnabledLayerNames", optional = true)..uint32_t.member("enabledLayerCount", "the number of global layers to enable")
-	const_charUTF8_const_p.member(
+	const..charUTF8_p_const_p.member(
 		"ppEnabledLayerNames",
 		"a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings containing the names of layers to enable"
 	)
 	AutoSize("ppEnabledExtensionNames", optional = true)..uint32_t.member("enabledExtensionCount", "the number of global extensions to enable")
-	const_charUTF8_const_p.member(
+	const..charUTF8_p_const_p.member(
 		"ppEnabledExtensionNames",
 		"a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings containing the names of extensions to enable"
 	)
@@ -361,7 +358,7 @@ val VkAllocationCallbacks_p = struct_p(VULKAN_PACKAGE, "VkAllocationCallbacks") 
 }
 val pAllocator = nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "controls host memory allocation")
 
-val VkPhysicalDeviceFeatures = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures") {
+val VkPhysicalDeviceFeatures_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures") {
 	documentation =
 		"""
 		${man("VkPhysicalDeviceFeatures")}<br>
@@ -481,10 +478,7 @@ val VkPhysicalDeviceFeatures = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures"
 		"""
 	)
 	VkBool32.member("inheritedQueries", "indicates whether a secondary command buffer may be executed while a query is active")
-}.nativeType
-
-val VkPhysicalDeviceFeatures_p = VkPhysicalDeviceFeatures.p
-val const_VkPhysicalDeviceFeatures_p = VkPhysicalDeviceFeatures.const_p
+}
 
 val VkFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkFormatProperties", mutable = false) {
 	documentation =
@@ -1020,7 +1014,7 @@ val VkPhysicalDeviceMemoryProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDev
 	VkMemoryHeap.array("memoryHeaps", "the memory heap descriptions", size = "VK_MAX_MEMORY_HEAPS")
 }
 
-val VkDeviceQueueCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceQueueCreateInfo") {
+val VkDeviceQueueCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDeviceQueueCreateInfo") {
 	documentation =
 		"""
 		${man("VkDeviceQueueCreateInfo")}<br>
@@ -1043,8 +1037,7 @@ val VkDeviceQueueCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceQueueCreateInfo") 
 		"pQueuePriorities",
 		"an array of {@code queueCount} normalized floating point values, specifying priorities of work that will be submitted to each created queue"
 	)
-}.nativeType
-val const_VkDeviceQueueCreateInfo_p = VkDeviceQueueCreateInfo.const_p
+}
 
 val VkDeviceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
 	documentation =
@@ -1061,21 +1054,21 @@ val VkDeviceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
 	pNext()
 	VkDeviceCreateFlags.member("flags", "reserved for future use")
 	AutoSize("pQueueCreateInfos")..uint32_t.member("queueCreateInfoCount", "the unsigned integer size of the {@code pQueueCreateInfos} array")
-	const_VkDeviceQueueCreateInfo_p.buffer(
+	const..VkDeviceQueueCreateInfo_p.buffer(
 		"pQueueCreateInfos",
 		"a pointer to an array of ##VkDeviceQueueCreateInfo structures describing the queues that are requested to be created along with the logical device"
 	)
 	AutoSize("ppEnabledLayerNames", optional = true)..uint32_t.member("enabledLayerCount", "deprecated and ignored")
-	const_charUTF8_const_p.member("ppEnabledLayerNames", "deprecated and ignored")
+	const..charUTF8_p_const_p.member("ppEnabledLayerNames", "deprecated and ignored")
 	AutoSize("ppEnabledExtensionNames", optional = true)..uint32_t.member("enabledExtensionCount", "the number of device extensions to enable")
-	const_charUTF8_const_p.member(
+	const..charUTF8_p_const_p.member(
 		"ppEnabledExtensionNames",
 		"""
 		a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings containing the names of extensions to enable for the created
 		device
 		"""
 	)
-	nullable..const_VkPhysicalDeviceFeatures_p.member(
+	nullable..const..VkPhysicalDeviceFeatures_p.member(
 		"pEnabledFeatures",
 		"$NULL or a pointer to a ##VkPhysicalDeviceFeatures structure that contains boolean indicators of all the features to be enabled"
 	)
@@ -1687,7 +1680,7 @@ val VkPipelineCacheCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkPipelineCacheCreat
 	pNext()
 	VkPipelineCacheCreateFlags.member("flags", "reserved for future use")
 	AutoSize("pInitialData", optional = true)..size_t.member("initialDataSize", "the number of bytes in {@code pInitialData}")
-	const_void_p.member("pInitialData", "a pointer to previously retrieved pipeline cache data")
+	const..void_p.member("pInitialData", "a pointer to previously retrieved pipeline cache data")
 }
 
 val VkSpecializationMapEntry = struct(VULKAN_PACKAGE, "VkSpecializationMapEntry") {
@@ -1727,7 +1720,7 @@ val VkSpecializationInfo = struct(VULKAN_PACKAGE, "VkSpecializationInfo") {
 		"a pointer to an array of ##VkSpecializationMapEntry which maps constant IDs to offsets in {@code pData}"
 	)
 	AutoSize("pData", optional = true)..size_t.member("dataSize", "the byte size of the {@code pData} buffer")
-	const_void_p.member("pData", "contains the actual constant values to specialize with")
+	const..void_p.member("pData", "contains the actual constant values to specialize with")
 }.nativeType
 
 val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderStageCreateInfo") {
@@ -1746,7 +1739,7 @@ val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderSt
 	VkPipelineShaderStageCreateFlags.member("flags", "reserved for future use")
 	VkShaderStageFlagBits.member("stage", "a {@code VkShaderStageFlagBits} naming the pipeline stage").flagLinks("SHADER_STAGE")
 	VkShaderModule.member("module", "a {@code VkShaderModule} object that contains the shader for this stage")
-	const_charUTF8_p.member("pName", "a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage")
+	const..charUTF8_p.member("pName", "a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage")
 	nullable..VkSpecializationInfo.const_p.member("pSpecializationInfo", "a pointer to ##VkSpecializationInfo, can be $NULL")
 }.nativeType
 

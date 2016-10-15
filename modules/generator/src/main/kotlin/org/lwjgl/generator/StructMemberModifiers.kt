@@ -4,6 +4,14 @@
  */
 package org.lwjgl.generator
 
+object ConstMember: StructMemberModifier() {
+	override val isSpecial = false
+	override fun validate(member: StructMember) {
+		if (member.nativeType !is PointerType)
+			throw IllegalArgumentException("The const modifier can only be applied on pointer types.")
+	}
+}
+
 /*
 	required AutoSize + non-null reference: ref must not be null and size must not be 0.
 	optional AutoSize + non-null reference: ref may be null, if size is 0.
@@ -51,6 +59,8 @@ class AutoSizeMember(
 			throw IllegalArgumentException("Members with the AutoSizeMember modifier must be integer primitive types.")
 	}
 }
+
+val Struct.const: ConstMember get() = ConstMember
 
 fun Struct.AutoSize(reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
 	AutoSizeMember(reference, *dependent, factor = null, optional = optional, atLeastOne = atLeastOne)
