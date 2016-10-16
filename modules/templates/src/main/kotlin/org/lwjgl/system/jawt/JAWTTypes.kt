@@ -20,7 +20,7 @@ val JAWT_Rectangle = struct(JAWT_PACKAGE, "JAWTRectangle", nativeName = "JAWT_Re
 }
 val JAWT_Rectangle_p = JAWT_Rectangle.p
 
-val JAWT_DrawingSurface_p = struct_p(JAWT_PACKAGE, "JAWTDrawingSurface", nativeName = "JAWT_DrawingSurface", mutable = false) {
+val JAWT_DrawingSurface_p = struct(JAWT_PACKAGE, "JAWTDrawingSurface", nativeName = "JAWT_DrawingSurface", mutable = false) {
 	documentation =
 		"""
 		Structure for containing the underlying drawing information of a component.
@@ -42,9 +42,9 @@ val JAWT_DrawingSurface_p = struct_p(JAWT_PACKAGE, "JAWTDrawingSurface", nativeN
 	voidptr.member("GetDrawingSurfaceInfo", "")
 	voidptr.member("FreeDrawingSurfaceInfo", "")
 	voidptr.member("Unlock", "")
-}
+}.p
 
-val JAWT_DrawingSurfaceInfo_p = struct_p(JAWT_PACKAGE, "JAWTDrawingSurfaceInfo", nativeName = "JAWT_DrawingSurfaceInfo", mutable = false) {
+val JAWT_DrawingSurfaceInfo_p = struct(JAWT_PACKAGE, "JAWTDrawingSurfaceInfo", nativeName = "JAWT_DrawingSurfaceInfo", mutable = false) {
 	voidptr.member(
 		"platformInfo",
 		"""
@@ -57,9 +57,9 @@ val JAWT_DrawingSurfaceInfo_p = struct_p(JAWT_PACKAGE, "JAWTDrawingSurfaceInfo",
 	JAWT_Rectangle.member("bounds", "Bounding rectangle of the drawing surface.")
 	AutoSize("clip")..jint.member("clipSize", "Number of rectangles in the clip.")
 	JAWT_Rectangle_p.buffer("clip", "Clip rectangle array.")
-}
+}.p
 
-val JAWT_p = struct_p(JAWT_PACKAGE, "JAWT") {
+val JAWT_p = struct(JAWT_PACKAGE, "JAWT") {
 	documentation = "Structure for containing native AWT functions."
 
 	jint.member("version", "Version of this structure. This must always be set before calling JAWT_GetAWT()")
@@ -71,7 +71,7 @@ val JAWT_p = struct_p(JAWT_PACKAGE, "JAWT") {
 	nullable..voidptr.member("CreateEmbeddedFrame", "")
 	nullable..voidptr.member("SetBounds", "")
 	nullable..voidptr.member("SynthesizeWindowActivation", "")
-}
+}.p
 
 val Component = NativeType("jobject", TypeMapping("jobject", java.awt.Component::class.java, java.awt.Component::class.java))
 val Frame = NativeType("jobject", TypeMapping("jobject", java.awt.Frame::class.java, java.awt.Frame::class.java))

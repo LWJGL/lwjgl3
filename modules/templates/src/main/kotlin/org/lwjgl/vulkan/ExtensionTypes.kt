@@ -94,7 +94,7 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 	"""
 }
 
-val VkDebugReportCallbackCreateInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugReportCallbackCreateInfoEXT") {
+val VkDebugReportCallbackCreateInfoEXT_p = struct(VULKAN_PACKAGE, "VkDebugReportCallbackCreateInfoEXT") {
 	documentation =
 		"""
 		${man("VkDebugReportCallbackCreateInfoEXT")}
@@ -109,11 +109,11 @@ val VkDebugReportCallbackCreateInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugRepo
     VkDebugReportFlagsEXT.member("flags", "indicate which event(s) will cause this callback to be called").flagLinks("DEBUG_REPORT")
     PFN_vkDebugReportCallbackEXT.member("pfnCallback", "the application callback function to call")
     nullable..voidptr.member("pUserData", "user data to be passed to the callback")
-}
+}.p
 
 // EXT_debug_marker
 
-val VkDebugMarkerObjectNameInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerObjectNameInfoEXT") {
+val VkDebugMarkerObjectNameInfoEXT_p = struct(VULKAN_PACKAGE, "VkDebugMarkerObjectNameInfoEXT") {
 	documentation =
 		"""
 		Passed to #DebugMarkerSetObjectNameEXT() to give a user-friendly name to a Vulkan object.
@@ -126,9 +126,9 @@ val VkDebugMarkerObjectNameInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerOb
     VkDebugReportObjectTypeEXT.member("objectType", "the type of the object to be named").links("DEBUG_REPORT_OBJECT_TYPE_\\w+")
     uint64_t.member("object", "the object to be named")
     nullable..const..charUTF8_p.member("pObjectName", "a null-terminated UTF-8 string specifying the name to apply to {@code object}")
-}
+}.p
 
-val VkDebugMarkerObjectTagInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerObjectTagInfoEXT") {
+val VkDebugMarkerObjectTagInfoEXT_p = struct(VULKAN_PACKAGE, "VkDebugMarkerObjectTagInfoEXT") {
 	documentation =
 		"""
 		Passed to #DebugMarkerSetObjectTagEXT() to attach arbitrary data to a Vulkan object.
@@ -143,9 +143,9 @@ val VkDebugMarkerObjectTagInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerObj
     uint64_t.member("tagName", "a numerical identifier of the tag")
     AutoSize("pTag")..size_t.member("tagSize", "the number of bytes of data to attach to the object")
     const..void_p.member("pTag", "an array of {@code tagSize} bytes containing the data to be associated with the object")
-}
+}.p
 
-val VkDebugMarkerMarkerInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerMarkerInfoEXT") {
+val VkDebugMarkerMarkerInfoEXT_p = struct(VULKAN_PACKAGE, "VkDebugMarkerMarkerInfoEXT") {
     documentation =
 	    """
 	    Passed to #CmdDebugMarkerBeginEXT() and #CmdDebugMarkerInsertEXT().
@@ -164,7 +164,7 @@ val VkDebugMarkerMarkerInfoEXT_p = struct_p(VULKAN_PACKAGE, "VkDebugMarkerMarker
 		""",
 	    size = 4
     )
-}
+}.p
 
 // EXT_validation_flags
 
@@ -201,7 +201,7 @@ val VkSurfaceTransformFlagBitsKHR = "VkSurfaceTransformFlagBitsKHR".enumType
 val VkSurfaceTransformFlagsKHR = typedef(VkFlags, "VkSurfaceTransformFlagsKHR")
 val VkCompositeAlphaFlagsKHR = typedef(VkFlags, "VkCompositeAlphaFlagsKHR")
 
-val VkSurfaceCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceCapabilitiesKHR", mutable = false) {
+val VkSurfaceCapabilitiesKHR_p = struct(VULKAN_PACKAGE, "VkSurfaceCapabilitiesKHR", mutable = false) {
 	documentation =
 		"""
 		${man("VkSurfaceCapabilitiesKHR")}<br>
@@ -256,9 +256,9 @@ val VkSurfaceCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceCapabilities
 		on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT must be included in the set but implementations may support additional usages.
 		"""
 	).flagLinks("IMAGE_USAGE")
-}
+}.p
 
-val VkSurfaceFormatKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutable = false) {
+val VkSurfaceFormatKHR_p = struct(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutable = false) {
 	documentation =
 		"""
 		${man("VkSurfaceFormatKHR")}<br>
@@ -271,7 +271,7 @@ val VkSurfaceFormatKHR_p = struct_p(VULKAN_PACKAGE, "VkSurfaceFormatKHR", mutabl
 
 	VkFormat.member("format", "a {@code VkFormat} that is compatible with the surface")
 	VkColorSpaceKHR.member("colorSpace", "a presentation {@code VkColorSpaceKHR} that is compatible with the surface").links("COLOR_SPACE_\\w+_KHR")
-}
+}.p
 
 // KHR_display
 
@@ -283,7 +283,7 @@ val VkDisplayModeCreateFlagsKHR = typedef(VkFlags, "VkDisplayModeCreateFlagsKHR"
 val VkDisplayPlaneAlphaFlagsKHR = typedef(VkFlags, "VkDisplayPlaneAlphaFlagsKHR")
 val VkDisplaySurfaceCreateFlagsKHR = typedef(VkFlags, "VkDisplaySurfaceCreateFlagsKHR")
 
-val VkDisplayPropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPropertiesKHR", mutable = false) {
+val VkDisplayPropertiesKHR_p = struct(VULKAN_PACKAGE, "VkDisplayPropertiesKHR", mutable = false) {
 	documentation =
 		"""
 		${man("VkDisplayPropertiesKHR")}<br>
@@ -293,7 +293,7 @@ val VkDisplayPropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPropertiesKHR"
 
 		${ValidityStructs.VkDisplayPropertiesKHR}
 		"""
-	
+
 	VkDisplayKHR.member(
 		"display",
 		"a handle that is used to refer to the display described here. This handle will be valid for the lifetime of the Vulkan instance."
@@ -319,7 +319,7 @@ val VkDisplayPropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPropertiesKHR"
 		created against this display.
 		"""
 	)
-}
+}.p
 
 val VkDisplayModeParametersKHR = struct(VULKAN_PACKAGE, "VkDisplayModeParametersKHR") {
 	documentation =
@@ -334,7 +334,7 @@ val VkDisplayModeParametersKHR = struct(VULKAN_PACKAGE, "VkDisplayModeParameters
 	uint32_t.member("refreshRate", "a {@code uint32_t} that is the number of times the display is refreshed each second multiplied by 1000")
 }
 
-val VkDisplayModePropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModePropertiesKHR", mutable = false) {
+val VkDisplayModePropertiesKHR_p = struct(VULKAN_PACKAGE, "VkDisplayModePropertiesKHR", mutable = false) {
 	documentation =
 		"""
 		${man("VkDisplayModePropertiesKHR")}<br>
@@ -344,7 +344,7 @@ val VkDisplayModePropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModeProper
 
 		${ValidityStructs.VkDisplayModePropertiesKHR}
 		"""
-	
+
 	VkDisplayModeKHR.member(
 		"displayMode",
 		"a handle to the display mode described in this structure. This handle will be valid for the lifetime of the Vulkan instance."
@@ -353,9 +353,9 @@ val VkDisplayModePropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModeProper
 		"parameters",
 		"a ##VkDisplayModeParametersKHR structure describing the display parameters associated with {@code displayMode}"
 	)
-}
+}.p
 
-val VkDisplayModeCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModeCreateInfoKHR") {
+val VkDisplayModeCreateInfoKHR_p = struct(VULKAN_PACKAGE, "VkDisplayModeCreateInfoKHR") {
 	documentation =
 		"""
 		${man("VkDisplayModeCreateInfoKHR")}<br>
@@ -365,7 +365,7 @@ val VkDisplayModeCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModeCreate
 
 		${ValidityStructs.VkDisplayModeCreateInfoKHR}
 		"""
-	
+
 	sType(this)
 	pNext()
 	VkDisplayModeCreateFlagsKHR.member("flags", "reserved for future use, and $must be zero")
@@ -373,9 +373,9 @@ val VkDisplayModeCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModeCreate
 		"parameters",
 		"a ##VkDisplayModeParametersKHR structure describing the display parameters to use in creating the new mode"
 	)
-}
+}.p
 
-val VkDisplayPlaneCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlaneCapabilitiesKHR", mutable = false) {
+val VkDisplayPlaneCapabilitiesKHR_p = struct(VULKAN_PACKAGE, "VkDisplayPlaneCapabilitiesKHR", mutable = false) {
 	documentation =
 		"""
 		${man("VkDisplayPlaneCapabilitiesKHR")}<br>
@@ -385,7 +385,7 @@ val VkDisplayPlaneCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlaneCa
 
 		${ValidityStructs.VkDisplayPlaneCapabilitiesKHR}
 		"""
-	
+
 	VkDisplayPlaneAlphaFlagsKHR.member("supportedAlpha", "a bitmask describing the supported alpha blending modes").flagLinks("DISPLAY_PLANE_ALPHA")
 	VkOffset2D.member("minSrcPosition", "the minimum source rect offset supported by this plane using the specified mode")
 	VkOffset2D.member("maxSrcPosition", "the maximum source rect offset supported by this plane using the specified mode")
@@ -395,9 +395,9 @@ val VkDisplayPlaneCapabilitiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlaneCa
 	VkOffset2D.member("maxDstPosition", "the maximum output rect offset supported by this plane using the specified mode")
 	VkExtent2D.member("minDstExtent", "the minimum output rect size supported by this plane using the specified mode")
 	VkExtent2D.member("maxDstExtent", "the maximum output rect size supported by this plane using the specified mode")
-}
+}.p
 
-val VkDisplayPlanePropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlanePropertiesKHR", mutable = false) {
+val VkDisplayPlanePropertiesKHR_p = struct(VULKAN_PACKAGE, "VkDisplayPlanePropertiesKHR", mutable = false) {
 	documentation =
 		"""
 		${man("VkDisplayPlanePropertiesKHR")}<br>
@@ -407,15 +407,15 @@ val VkDisplayPlanePropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayPlaneProp
 
 		${ValidityStructs.VkDisplayPlanePropertiesKHR}
 		"""
-	
+
 	VkDisplayKHR.member(
 		"currentDisplay",
 		"the handle of the display the plane is currently associated with. If the plane is not currently attached to any displays, this will be #NULL_HANDLE."
 	)
 	uint32_t.member("currentStackIndex", "the current z-order of the plane")
-}
+}.p
 
-val VkDisplaySurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplaySurfaceCreateInfoKHR") {
+val VkDisplaySurfaceCreateInfoKHR_p = struct(VULKAN_PACKAGE, "VkDisplaySurfaceCreateInfoKHR") {
 	documentation =
 		"""
 		${man("VkDisplaySurfaceCreateInfoKHR")}<br>
@@ -437,7 +437,7 @@ val VkDisplaySurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplaySurface
 	float.member("globalAlpha", "the global alpha value. This value is ignored if {@code alphaMode} is not #DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR.")
 	VkDisplayPlaneAlphaFlagBitsKHR.member("alphaMode", "the type of alpha blending to use").links("DISPLAY_PLANE_ALPHA_\\w+_BIT_KHR")
 	VkExtent2D.member("imageExtent", "the size of the presentable images to use with the surface")
-}
+}.p
 
 // KHR_display_swapchain
 
@@ -489,7 +489,7 @@ val VkSwapchainKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSwapchainKHR")
 val VkSwapchainCreateFlagsKHR = typedef(VkFlags, "VkSwapchainCreateFlagsKHR")
 val VkCompositeAlphaFlagBitsKHR = "VkCompositeAlphaFlagBitsKHR".enumType
 
-val VkSwapchainCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkSwapchainCreateInfoKHR") {
+val VkSwapchainCreateInfoKHR_p = struct(VULKAN_PACKAGE, "VkSwapchainCreateInfoKHR") {
 	documentation =
 		"""
 		${man("VkSwapchainCreateInfoKHR")}<br>
@@ -586,9 +586,9 @@ val VkSwapchainCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkSwapchainCreateInfo
 	    swapchain succeeds.
 	    """
     )
-}
+}.p
 
-val VkPresentInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkPresentInfoKHR") {
+val VkPresentInfoKHR_p = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 	documentation =
 		"""
 		${man("VkPresentInfoKHR")}<br>
@@ -632,13 +632,13 @@ val VkPresentInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 		same index in {@code pSwapchains}.
 		"""
 	)
-}
+}.p
 
 // KHR_win32_surface
 
 val VkWin32SurfaceCreateFlagsKHR = typedef(VkFlags, "VkWin32SurfaceCreateFlagsKHR")
 
-val VkWin32SurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkWin32SurfaceCreateInfoKHR") {
+val VkWin32SurfaceCreateInfoKHR_p = struct(VULKAN_PACKAGE, "VkWin32SurfaceCreateInfoKHR") {
 	documentation =
 		"""
 		${man("VkWin32SurfaceCreateFlagsKHR")}<br>
@@ -654,13 +654,13 @@ val VkWin32SurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkWin32SurfaceCrea
 	VkWin32SurfaceCreateFlagsKHR.member("flags", "reserved for future use")
 	HINSTANCE.member("hinstance", "the WIN32 HINSTANCE for the window to associate the surface with")
 	HWND.member("hwnd", "the WIN32 HWND for the window to associate the surface with")
-}
+}.p
 
 // KHR_xlib_surface
 
 val VkXlibSurfaceCreateFlagsKHR = typedef(VkFlags, "VkXlibSurfaceCreateFlagsKHR")
 
-val VkXlibSurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkXlibSurfaceCreateInfoKHR") {
+val VkXlibSurfaceCreateInfoKHR_p = struct(VULKAN_PACKAGE, "VkXlibSurfaceCreateInfoKHR") {
 	documentation =
 		"""
 		${man("VkXlibSurfaceCreateFlagsKHR")}<br>
@@ -676,7 +676,7 @@ val VkXlibSurfaceCreateInfoKHR_p = struct_p(VULKAN_PACKAGE, "VkXlibSurfaceCreate
 	VkXlibSurfaceCreateFlagsKHR.member("flags", "reserved for future use")
 	Display_p.member("dpy", "a pointer to an Xlib Display connection to the X server")
 	Window.member("window", "an Xlib Window to associate the surface with")
-}
+}.p
 
 // NV_dedicated_allocation
 

@@ -58,7 +58,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	"""
 }
 
-val ovrErrorInfo_p = struct_p(OVR_PACKAGE, "OVRErrorInfo", nativeName = "ovrErrorInfo", mutable = false) {
+val ovrErrorInfo_p = struct(OVR_PACKAGE, "OVRErrorInfo", nativeName = "ovrErrorInfo", mutable = false) {
 	documentation = "Provides information about the last error."
 
 	ovrResult.member("Result", "the result from the last API call that generated an error {@code ovrResult}")
@@ -67,9 +67,9 @@ val ovrErrorInfo_p = struct_p(OVR_PACKAGE, "OVRErrorInfo", nativeName = "ovrErro
 		"a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions",
 		size = 512
 	)
-}
+}.p
 
-val ovrSessionStatus_p = struct_p(OVR_PACKAGE, "OVRSessionStatus", nativeName = "ovrSessionStatus", mutable = false) {
+val ovrSessionStatus_p = struct(OVR_PACKAGE, "OVRSessionStatus", nativeName = "ovrSessionStatus", mutable = false) {
 	documentation = "Specifies status information for the current session."
 
 	ovrBool.member("IsVisible", "True if the process has VR focus and thus is visible in the HMD.")
@@ -78,9 +78,9 @@ val ovrSessionStatus_p = struct_p(OVR_PACKAGE, "OVRSessionStatus", nativeName = 
 	ovrBool.member("DisplayLost", "True if the session is in a display-lost state. See OVR#ovr_SubmitFrame().")
 	ovrBool.member("ShouldQuit", "True if the application should initiate shutdown.    ")
 	ovrBool.member("ShouldRecenter", "True if UX has requested re-centering. Must call OVR#ovr_ClearShouldRecenterFlag() or OVR#ovr_RecenterTrackingOrigin().")
-}
+}.p
 
-val ovrInitParams_p = struct_p(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInitParams") {
+val ovrInitParams_p = struct(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInitParams") {
 	documentation = "Parameters for OVR#ovr_Initialize()."
 
 	uint32_t.member("Flags", "flags from {@code ovrInitFlags} to override default behavior. Use 0 for the defaults.")
@@ -111,7 +111,7 @@ val ovrInitParams_p = struct_p(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrIn
 		"relative number of milliseconds to wait for a connection to the server before failing. Use 0 for the default timeout."
 	)
 	padding(4, condition = "Pointer.BITS64")
-}
+}.p
 
 val ovrColorf = struct(OVR_PACKAGE, "OVRColorf", nativeName = "ovrColorf") {
 	documentation = "An RGBA color with normalized float components."
@@ -214,7 +214,7 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
 
 val ovrTrackingOrigin = "ovrTrackingOrigin".enumType
 
-val ovrGraphicsLuid_p = struct_p(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "ovrGraphicsLuid", mutable = false) {
+val ovrGraphicsLuid_p = struct(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "ovrGraphicsLuid", mutable = false) {
 	documentation =
 		"""
 		Identifies a graphics device in a platform-specific way.
@@ -223,7 +223,7 @@ val ovrGraphicsLuid_p = struct_p(OVR_PACKAGE, "OVRGraphicsLuid", nativeName = "o
 		"""
 
 	char.array("Reserved", "public definition reserves space for graphics API-specific implementation.", size = 8)
-}
+}.p
 
 val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false) {
 	javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
@@ -344,7 +344,7 @@ val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc",
 	float.member("Projection32", "projection matrix element [3][2]")
 }
 
-val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = "ovrViewScaleDesc") {
+val ovrViewScaleDesc_p = struct(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = "ovrViewScaleDesc") {
 	javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
 	documentation =
 		"""
@@ -360,12 +360,12 @@ val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = 
 
 	ovrVector3f.array("HmdToEyeOffset", "translation of each eye", size = "ovrEye_Count")
 	float.member("HmdSpaceToWorldScaleInMeters", "ratio of viewer units to meter units")
-}
+}.p
 
 val ovrTextureType = "ovrTextureType".enumType
 val ovrTextureFormat = "ovrTextureFormat".enumType
 
-val ovrTextureSwapChainDesc_p = struct_p(OVR_PACKAGE, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
+val ovrTextureSwapChainDesc_p = struct(OVR_PACKAGE, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
 	documentation = "Description used to create a texture swap chain."
 
 	ovrTextureType.member("Type", "").links("Texture_\\w+")
@@ -378,16 +378,16 @@ val ovrTextureSwapChainDesc_p = struct_p(OVR_PACKAGE, "OVRTextureSwapChainDesc",
 	ovrBool.member("StaticImage", "not buffered in a chain. For images that don't change")
 	unsigned_int.member("MiscFlags", "{@code ovrTextureFlags}").links("TextureMisc_\\w+", LinkMode.BITFIELD)
 	unsigned_int.member("BindFlags", "{@code ovrTextureBindFlags}. Not used for GL.").links("TextureBind_\\w+", LinkMode.BITFIELD)
-}
+}.p
 
-val ovrMirrorTextureDesc_p = struct_p(OVR_PACKAGE, "OVRMirrorTextureDesc", nativeName = "ovrMirrorTextureDesc") {
+val ovrMirrorTextureDesc_p = struct(OVR_PACKAGE, "OVRMirrorTextureDesc", nativeName = "ovrMirrorTextureDesc") {
 	documentation = "Description used to create a mirror texture."
 
 	ovrTextureFormat.member("Format", "").links("OVR_FORMAT_\\w+")
 	int.member("Width", "")
 	int.member("Height", "")
 	unsigned_int.member("MiscFlags", "{@code ovrTextureFlags}").links("TextureMisc_\\w+", LinkMode.BITFIELD)
-}
+}.p
 
 val ovrTextureSwapChain = "ovrTextureSwapChain".opaque_p
 val ovrTextureSwapChain_p = ovrTextureSwapChain.p
@@ -412,42 +412,42 @@ val ovrTouchHapticsDesc = struct(OVR_PACKAGE, "OVRTouchHapticsDesc", nativeName 
 
 val ovrHapticsBufferSubmitMode = "ovrHapticsBufferSubmitMode".enumType
 
-val ovrHapticsBuffer_p = struct_p(OVR_PACKAGE, "OVRHapticsBuffer", nativeName = "ovrHapticsBuffer") {
+val ovrHapticsBuffer_p = struct(OVR_PACKAGE, "OVRHapticsBuffer", nativeName = "ovrHapticsBuffer") {
 	documentation = "Haptics buffer descriptor, contains amplitude samples used for Touch vibration."
 
 	void_p.member("Samples", "")
 	int.member("SamplesCount", "")
 	ovrHapticsBufferSubmitMode.member("SubmitMode", "")
-}
+}.p
 
-val ovrHapticsPlaybackState_p = struct_p(OVR_PACKAGE, "OVRHapticsPlaybackState", nativeName = "ovrHapticsPlaybackState", mutable = false) {
+val ovrHapticsPlaybackState_p = struct(OVR_PACKAGE, "OVRHapticsPlaybackState", nativeName = "ovrHapticsPlaybackState", mutable = false) {
 	documentation = "State of the Haptics playback for Touch vibration."
 
 	int.member("RemainingQueueSpace", "Remaining space available to queue more samples")
 	int.member("SamplesQueued", "Number of samples currently queued")
-}
+}.p
 
 val ovrControllerType = "ovrControllerType".enumType
 
 val ovrTrackedDeviceType = "ovrTrackedDeviceType".enumType
 val ovrBoundaryType = "ovrBoundaryType".enumType
 
-val ovrBoundaryLookAndFeel_p = struct_p(OVR_PACKAGE, "OVRBoundaryLookAndFeel", nativeName = "ovrBoundaryLookAndFeel") {
+val ovrBoundaryLookAndFeel_p = struct(OVR_PACKAGE, "OVRBoundaryLookAndFeel", nativeName = "ovrBoundaryLookAndFeel") {
 	documentation = "Boundary system look and feel."
 
 	ovrColorf.member("Color", "Boundary color (alpha channel is ignored)")
-}
+}.p
 
-val ovrBoundaryTestResult_p = struct_p(OVR_PACKAGE, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult", mutable = false) {
+val ovrBoundaryTestResult_p = struct(OVR_PACKAGE, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult", mutable = false) {
     documentation = "Provides boundary test information."
 
 	ovrBool.member("IsTriggering", "True, if the boundary system is being triggered and visible")
     float.member("ClosestDistance", "Distance to the closest play area or outer boundary surface")
     ovrVector3f.member("ClosestPoint", "Closest point in the surface")
     ovrVector3f.member("ClosestPointNormal", "Normal of the closest point")
-}
+}.p
 
-val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
+val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
 	javaImport("static org.lwjgl.ovr.OVR.ovrHand_Count")
 	documentation =
 		"""
@@ -491,7 +491,7 @@ val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", nativeName = "ovrIn
 		"Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. Does not apply a deadzone.",
 		size = "ovrHand_Count"
 	)
-}
+}.p
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLayerHeader") {
 	documentation =
@@ -698,7 +698,7 @@ val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerComposi
 	)
 }
 
-val ovrPerfStats_p = struct_p(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
+val ovrPerfStats_p = struct(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
 	javaImport("static org.lwjgl.ovr.OVR.ovrMaxProvidedFrameStats")
 
     documentation =
@@ -732,7 +732,7 @@ val ovrPerfStats_p = struct_p(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerf
     AutoSize("FrameStats")..int.member("FrameStatsCount", "the number of performance stats available in {@code FrameStats}")
     ovrBool.member("AnyFrameStatsDropped", "if performance stats have been dropped")
     float.member("AdaptiveGpuPerformanceScale", "the GPU performance scale")
-}
+}.p
 
 // OVR_CAPI_Util.h
 

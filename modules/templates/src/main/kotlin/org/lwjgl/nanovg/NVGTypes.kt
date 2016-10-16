@@ -56,16 +56,16 @@ val NVGpaint = struct(NANOVG_PACKAGE, "NVGPaint", nativeName = "NVGpaint") {
 
 val charptr = "char".p // address, not data
 
-val NVGglyphPosition_p = struct_p(NANOVG_PACKAGE, "NVGGlyphPosition", nativeName = "NVGglyphPosition", mutable = false) {
+val NVGglyphPosition_p = struct(NANOVG_PACKAGE, "NVGGlyphPosition", nativeName = "NVGglyphPosition", mutable = false) {
 	documentation = "A glyph position."
 
 	charptr.member("str", "position of the glyph in the input string")
 	float.member("x", "the x-coordinate of the logical glyph position")
 	float.member("minx", "the left bound of the glyph shape")
 	float.member("maxx", "the right bound of the glyph shape")
-}
+}.p
 
-val NVGtextRow_p = struct_p(NANOVG_PACKAGE, "NVGTextRow", nativeName = "NVGtextRow", mutable = false) {
+val NVGtextRow_p = struct(NANOVG_PACKAGE, "NVGTextRow", nativeName = "NVGtextRow", mutable = false) {
 	documentation = "A text row."
 
 	charptr.member("start", "pointer to the input text where the row starts")
@@ -74,4 +74,4 @@ val NVGtextRow_p = struct_p(NANOVG_PACKAGE, "NVGTextRow", nativeName = "NVGtextR
 	float.member("width", "logical width of the row")
 	float.member("minx", "actual left bound of the row. Logical width and bounds can differ because of kerning and some parts over extending.")
 	float.member("maxx", "actual right bound of the row. Logical width and bounds can differ because of kerning and some parts over extending.")
-}
+}.p

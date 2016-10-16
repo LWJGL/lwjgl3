@@ -168,7 +168,7 @@ val EGLOutputPortEXT = "EGLOutputPortEXT".opaque_p
 val EGLOutputPortEXT_p = EGLOutputPortEXT.p
 
 // HI_clientpixmap
-val EGLClientPixmapHI_p = struct_p(EGL_PACKAGE, "EGLClientPixmapHI", nativeName = "struct EGLClientPixmapHI") {
+val EGLClientPixmapHI_p = struct(EGL_PACKAGE, "EGLClientPixmapHI", nativeName = "struct EGLClientPixmapHI") {
 	documentation =
 		"""
 		Specifies the width, height, stride, format and memory pointer of the pixmap to be used by the function #CreatePixmapSurfaceHI() to
@@ -190,7 +190,7 @@ val EGLClientPixmapHI_p = struct_p(EGL_PACKAGE, "EGLClientPixmapHI", nativeName 
 		"""
 	)
 	EGLint.member("iStride", "stride of the buffer, in pixels. It is important to note that each row of the buffer must start on 32-bit boundaries.")
-}
+}.p
 
 // NV_sync
 val EGLSyncNV = "EGLSyncNV".opaque_p

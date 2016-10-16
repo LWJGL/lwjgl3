@@ -133,7 +133,7 @@ val MDB_dbi_p = MDB_dbi.p
 val MDB_txn_p = "MDB_txn".p
 val MDB_txn_pp = MDB_txn_p.p
 
-val MDB_val_p = struct_p(LMDB_PACKAGE, "MDBVal", nativeName = "MDB_val") {
+val MDB_val_p = struct(LMDB_PACKAGE, "MDBVal", nativeName = "MDB_val") {
 	documentation =
 		"""
 		Generic structure used for passing keys and data in and out of the database.
@@ -147,14 +147,14 @@ val MDB_val_p = struct_p(LMDB_PACKAGE, "MDBVal", nativeName = "MDB_val") {
 
 	AutoSize("mv_data")..size_t.member("mv_size", "Size of the data item.")
 	nullable..void_p.member("mv_data", "Address of the data item.")
-}
+}.p
 
 val MDB_cursor_p = "MDB_cursor".p
 val MDB_cursor_pp = MDB_cursor_p.p
 
 val MDB_cursor_op = "MDB_cursor_op".enumType
 
-val MDB_stat_p = struct_p(LMDB_PACKAGE, "MDBStat", nativeName = "MDB_stat", mutable = false) {
+val MDB_stat_p = struct(LMDB_PACKAGE, "MDBStat", nativeName = "MDB_stat", mutable = false) {
 	documentation = "Statistics for a database in the environment."
 
 	unsigned_int.member("ms_psize", "Size of a database page. This is currently the same for all databases.")
@@ -163,9 +163,9 @@ val MDB_stat_p = struct_p(LMDB_PACKAGE, "MDBStat", nativeName = "MDB_stat", muta
 	mdb_size_t.member("ms_leaf_pages", "Number of leaf pages.")
 	mdb_size_t.member("ms_overflow_pages", "Number of overflow pages.")
 	mdb_size_t.member("ms_entries", "Number of data items.")
-}
+}.p
 
-val MDB_envinfo_p = struct_p(LMDB_PACKAGE, "MDBEnvInfo", nativeName = "MDB_envinfo", mutable = false) {
+val MDB_envinfo_p = struct(LMDB_PACKAGE, "MDBEnvInfo", nativeName = "MDB_envinfo", mutable = false) {
 	documentation = "Information about the environment."
 
 	voidptr.member("me_mapaddr", "Address of map, if fixed.")
@@ -174,7 +174,7 @@ val MDB_envinfo_p = struct_p(LMDB_PACKAGE, "MDBEnvInfo", nativeName = "MDB_envin
 	mdb_size_t.member("me_last_txnid", "ID of the last committed transaction.")
 	unsigned_int.member("me_maxreaders", "Max reader slots in the environment.")
 	unsigned_int.member("me_numreaders", "Max reader slots used in the environment.")
-}
+}.p
 
 val MDB_cmp_func = "MDB_cmp_func *".callback(
 	LMDB_PACKAGE, int, "MDBCmpFunc",

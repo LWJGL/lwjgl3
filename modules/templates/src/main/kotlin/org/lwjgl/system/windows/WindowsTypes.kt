@@ -194,7 +194,7 @@ val WNDPROC = "WNDPROC".callback(
 	useSystemCallConvention()
 }
 
-val WNDCLASSEX_p = struct_p(WINDOWS_PACKAGE, "WNDCLASSEX") {
+val WNDCLASSEX_p = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
 	documentation = "Contains the window class attributes that are registered by the User32#RegisterClassEx() function."
 
 	UINT.member("cbSize", "the size, in bytes, of this structure")
@@ -236,9 +236,9 @@ val WNDCLASSEX_p = struct_p(WINDOWS_PACKAGE, "WNDCLASSEX") {
 		{@code hIcon} member for an icon of the appropriate size to use as the small icon.
 		"""
 	)
-}
+}.p
 
-val WINDOWPLACEMENT_p = struct_p(WINDOWS_PACKAGE, "WINDOWPLACEMENT") {
+val WINDOWPLACEMENT_p = struct(WINDOWS_PACKAGE, "WINDOWPLACEMENT") {
 	documentation = "Contains information about the placement of a window on the screen."
 
 	UINT.member(
@@ -257,7 +257,7 @@ val WINDOWPLACEMENT_p = struct_p(WINDOWS_PACKAGE, "WINDOWPLACEMENT") {
 	POINT.member("ptMinPosition", "the coordinates of the window's upper-left corner when the window is minimized")
 	POINT.member("ptMaxPosition", "the coordinates of the window's upper-left corner when the window is maximized")
 	RECT.member("rcNormalPosition", "the window's coordinates when the window is in the restored position")
-}
+}.p
 
 val TOUCHINPUT = struct(WINDOWS_PACKAGE, "TOUCHINPUT", mutable = false) {
 	documentation = "Encapsulates data for touch input."
@@ -356,7 +356,7 @@ val POINTL = struct(WINDOWS_PACKAGE, "POINTL") {
 	LONG.member("y", "the vertical (y) coordinate of the point.")
 }
 
-val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
+val DEVMODE_p = struct(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 	documentation = "Contains information about the initialization and environment of a printer or a display device."
 
 	TCHAR.array(
@@ -480,7 +480,7 @@ val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 
 	DWORD.member("dmPanningWidth", "this member must be zero")
 	DWORD.member("dmPanningHeight", "this member must be zero")
-}
+}.p
 
 val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE", mutable = false) {
 	documentation =

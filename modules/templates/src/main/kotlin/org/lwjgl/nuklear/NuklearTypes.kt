@@ -141,11 +141,11 @@ val nk_draw_null_texture = struct(NUKLEAR_PACKAGE, "NkDrawNullTexture", nativeNa
 	nk_vec2.member("uv", "coordinates to a white pixel in the texture")
 }
 
-val nk_draw_vertex_layout_element_p = struct_p(NUKLEAR_PACKAGE, "NkDrawVertexLayoutElement", nativeName = "struct nk_draw_vertex_layout_element") {
+val nk_draw_vertex_layout_element_p = struct(NUKLEAR_PACKAGE, "NkDrawVertexLayoutElement", nativeName = "struct nk_draw_vertex_layout_element") {
 	nk_draw_vertex_layout_attribute.member("attribute", "the vertex attribute").links("VERTEX_\\w+")
 	nk_draw_vertex_layout_format.member("format", "the vertex attribute format").links("FORMAT_\\w+")
 	nk_size.member("offset", "the vertex attribute offset")
-}
+}.p
 
 val nk_convert_config = struct(NUKLEAR_PACKAGE, "NkConvertConfig", nativeName = "struct nk_convert_config") {
 	float.member("global_alpha", "global alpha value")
@@ -204,7 +204,7 @@ val nk_str_p = nk_str.p
 
 // TEXT EDITOR
 
-val nk_text_edit_p = struct_p(NUKLEAR_PACKAGE, "NkTextEdit", nativeName = "struct nk_text_edit")
+val nk_text_edit_p = struct(NUKLEAR_PACKAGE, "NkTextEdit", nativeName = "struct nk_text_edit").p
 
 val nk_plugin_filter = "nk_plugin_filter".callback(
 	NUKLEAR_PACKAGE, int, "NkPluginFilter",
@@ -551,7 +551,7 @@ val nk_input_p = nk_input.p
 
 // DRAW LIST
 
-val nk_draw_command_p = struct_p(NUKLEAR_PACKAGE, "NkDrawCommand", nativeName = "struct nk_draw_command", mutable = false) {
+val nk_draw_command_p = struct(NUKLEAR_PACKAGE, "NkDrawCommand", nativeName = "struct nk_draw_command", mutable = false) {
 	unsigned_int.member("elem_count", "")
 	/* number of elements in the current draw batch */
 	nk_rect.member("clip_rect", "")
@@ -559,7 +559,7 @@ val nk_draw_command_p = struct_p(NUKLEAR_PACKAGE, "NkDrawCommand", nativeName = 
 	nk_handle.member("texture", "")
 	/* current texture to set */
 	nk_handle.member("userdata", "")
-}
+}.p
 
 val nk_draw_list = struct(NUKLEAR_PACKAGE, "NkDrawList", nativeName = "struct nk_draw_list", mutable = false) {
 	nk_convert_config.member("config", "")
@@ -1079,7 +1079,7 @@ val nk_menu_state = struct(NUKLEAR_PACKAGE, "NkMenuState", nativeName = "struct 
 	nk_scroll.member("offset", "")
 }
 
-val nk_panel_p = struct_p(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel")
+val nk_panel_p = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel").p
 val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel", mutable = false) {
 	nk_panel_type.member("type", "")
 	nk_flags.member("flags", "")
@@ -1103,7 +1103,7 @@ val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel"
 
 // WINDOW
 
-val nk_window_p = struct_p(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_window")
+val nk_window_p = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_window").p
 val nk_popup_state = struct(NUKLEAR_PACKAGE, "NkPopupState", nativeName = "struct nk_popup_state", mutable = false) {
 	nk_window_p.member("win", "")
 	nk_panel_type.member("type", "")
@@ -1216,7 +1216,7 @@ val nk_configuration_stacks = struct(NUKLEAR_PACKAGE, "NkConfigurationStacks", n
 	NK_CONFIGURATION_STACK(nk_button_behavior.p, nk_button_behavior, "ButtonBehavior", "button_behavior", size = 8).member("button_behaviors", "")
 }
 
-val nk_context_p = struct_p(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct nk_context", mutable = false) {
+val nk_context_p = struct(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct nk_context", mutable = false) {
 	documentation = ""
 
 /* public: can be accessed freely */
@@ -1253,7 +1253,7 @@ val nk_context_p = struct_p(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct n
 	nullable.."nk_page_element".p.member("freelist", "")
 	unsigned_int.member("count", "")
 	unsigned_int.member("seq", "")
-}
+}.p
 
 val nk_value_getter = "nk_value_getter".callback(
 	NUKLEAR_PACKAGE, float, "NkValueGetter",

@@ -33,7 +33,7 @@ val GLFWmonitor_p = GLFWmonitor.p
 
 val GLFWwindow = "GLFWwindow".p
 
-val GLFWvidmode_p = struct_p(GLFW_PACKAGE, "GLFWVidMode", nativeName = "GLFWvidmode", mutable = false) {
+val GLFWvidmode_p = struct(GLFW_PACKAGE, "GLFWVidMode", nativeName = "GLFWvidmode", mutable = false) {
 	documentation = "Describes a single video mode."
 
 	int.member("width", "the width, in screen coordinates, of the video mode")
@@ -42,26 +42,26 @@ val GLFWvidmode_p = struct_p(GLFW_PACKAGE, "GLFWVidMode", nativeName = "GLFWvidm
 	int.member("greenBits", "the bit depth of the green channel of the video mode")
 	int.member("blueBits", "the bit depth of the blue channel of the video mode")
 	int.member("refreshRate", "the refresh rate, in Hz, of the video mode")
-}
+}.p
 
-val GLFWgammaramp_p = struct_p(GLFW_PACKAGE, "GLFWGammaRamp", nativeName = "GLFWgammaramp") {
+val GLFWgammaramp_p = struct(GLFW_PACKAGE, "GLFWGammaRamp", nativeName = "GLFWgammaramp") {
 	documentation = "Describes the gamma ramp for a monitor."
 
 	unsigned_short_p.member("red", "an array of values describing the response of the red channel")
 	unsigned_short_p.member("green", "an array of values describing the response of the green channel")
 	unsigned_short_p.member("blue", "an array of values describing the response of the blue channel")
 	AutoSize("red", "green", "blue")..unsigned_int.member("size", "the number of elements in each array")
-}
+}.p
 
 val GLFWcursor = "GLFWcursor".p
 
-val GLFWimage_p = struct_p(GLFW_PACKAGE, "GLFWImage", nativeName = "GLFWimage") {
+val GLFWimage_p = struct(GLFW_PACKAGE, "GLFWImage", nativeName = "GLFWimage") {
 	documentation = "Image data."
 
 	int.member("width", "the width, in pixels, of this image")
 	int.member("height", "the height, in pixels, of this image")
 	unsigned_char_p.member("pixels", "the pixel data of this image, arranged left-to-right, top-to-bottom")
-}
+}.p
 
 // callback functions
 

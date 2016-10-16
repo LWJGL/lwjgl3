@@ -125,7 +125,7 @@ val cl_charUTF8_pp = cl_charUTF8_p.p
 
 // structs
 
-val cl_image_format_p = struct_p(OPENCL_PACKAGE, "CLImageFormat", nativeName = "cl_image_format") {
+val cl_image_format_p = struct(OPENCL_PACKAGE, "CLImageFormat", nativeName = "cl_image_format") {
 	documentation = "The image format descriptor struct."
 
 	cl_channel_order.member(
@@ -139,9 +139,9 @@ val cl_image_format_p = struct_p(OPENCL_PACKAGE, "CLImageFormat", nativeName = "
 		{@code image_channel_order} must be a power of two.
 		"""
 	)
-}
+}.p
 
-val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_image_desc") {
+val cl_image_desc_p = struct(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_image_desc") {
 	documentation = "Describes the type and dimensions of the image or image array."
 
 	cl_mem_object_type.member("image_type", "describes the image type")
@@ -202,9 +202,9 @@ val cl_image_desc_p = struct_p(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_i
 		element in bytes must be &le; size of buffer object data store.
 		"""
 	)
-}
+}.p
 
-val cl_bus_address_amd_p = struct_p(OPENCL_PACKAGE, "CLBusAddressAMD", nativeName = "cl_bus_address_amd") {
+val cl_bus_address_amd_p = struct(OPENCL_PACKAGE, "CLBusAddressAMD", nativeName = "cl_bus_address_amd") {
 	documentation = "Bus address information used in #EnqueueMakeBuffersResidentAMD()."
 
 	cl_long.member(
@@ -215,7 +215,7 @@ val cl_bus_address_amd_p = struct_p(OPENCL_PACKAGE, "CLBusAddressAMD", nativeNam
 		"signalbusaddress",
 		"contains the page aligned physical starting address of preallocated signaling surface"
 	)
-}
+}.p
 
 fun config() {
 	packageInfo(
@@ -396,12 +396,12 @@ val cl_device_partition_property_ext_p = cl_device_partition_property_ext.p
 val cl_mem_migration_flags_ext = typedef(cl_bitfield, "cl_mem_migration_flags_ext")
 
 val cl_image_pitch_info_qcom = typedef(cl_uint, "cl_image_pitch_info_qcom")
-val cl_mem_ext_host_ptr = struct_p(OPENCL_PACKAGE, "CLMemEXTHostPtr", nativeName = "cl_mem_ext_host_ptr") {
+val cl_mem_ext_host_ptr = struct(OPENCL_PACKAGE, "CLMemEXTHostPtr", nativeName = "cl_mem_ext_host_ptr") {
 	documentation = "Accepted by the {@code host_ptr} argument of CL10#clCreateBuffer(), CL10#clCreateImage2D() and CL10#clCreateImage3D()."
 
 	cl_uint.member("allocation_type", "type of external memory allocation. Legal values will be defined in layered extensions.")
 	cl_uint.member("host_cache_policy", "host cache policy for this external memory allocation")
-}
+}.p
 
 // INTEL
 

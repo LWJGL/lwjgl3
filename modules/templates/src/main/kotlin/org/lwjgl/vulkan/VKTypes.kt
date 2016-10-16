@@ -159,7 +159,7 @@ val VkStencilFaceFlags = typedef(VkFlags, "VkStencilFaceFlags")
 val charUTF8_p_const_p = charUTF8_p.p_const_p
 // ----
 
-val VkApplicationInfo_p = struct_p(VULKAN_PACKAGE, "VkApplicationInfo") {
+val VkApplicationInfo_p = struct(VULKAN_PACKAGE, "VkApplicationInfo") {
 	documentation =
 		"""
 		${man("VkApplicationInfo")}<br>
@@ -189,9 +189,9 @@ val VkApplicationInfo_p = struct_p(VULKAN_PACKAGE, "VkApplicationInfo") {
 	)
 	uint32_t.member("engineVersion", "the version of the engine used to create the application")
 	uint32_t.member("apiVersion", "the version of the Vulkan API that the application expects to use")
-}
+}.p
 
-val VkInstanceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkInstanceCreateInfo") {
+val VkInstanceCreateInfo_p = struct(VULKAN_PACKAGE, "VkInstanceCreateInfo") {
 	documentation =
 		"""
 		${man("VkInstanceCreateInfo")}<br>
@@ -216,7 +216,7 @@ val VkInstanceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkInstanceCreateInfo") {
 		"ppEnabledExtensionNames",
 		"a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings containing the names of extensions to enable"
 	)
-}
+}.p
 
 val PFN_vkAllocationFunction = "PFN_vkAllocationFunction".callback(
 	VULKAN_PACKAGE, void_p, "VkAllocationFunction",
@@ -316,7 +316,7 @@ val PFN_vkInternalFreeNotification = "PFN_vkInternalFreeNotification".callback(
 	useSystemCallConvention()
 }
 
-val VkAllocationCallbacks_p = struct_p(VULKAN_PACKAGE, "VkAllocationCallbacks") {
+val VkAllocationCallbacks_p = struct(VULKAN_PACKAGE, "VkAllocationCallbacks") {
 	documentation =
 		"""
 		${man("VkAllocationCallbacks")}<br>
@@ -355,10 +355,10 @@ val VkAllocationCallbacks_p = struct_p(VULKAN_PACKAGE, "VkAllocationCallbacks") 
 		{@code PFN_vkInternalFreeNotification}
 		"""
 	)
-}
+}.p
 val pAllocator = nullable..const..VkAllocationCallbacks_p.IN("pAllocator", "controls host memory allocation")
 
-val VkPhysicalDeviceFeatures_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures") {
+val VkPhysicalDeviceFeatures_p = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures") {
 	documentation =
 		"""
 		${man("VkPhysicalDeviceFeatures")}<br>
@@ -478,9 +478,9 @@ val VkPhysicalDeviceFeatures_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceFeatu
 		"""
 	)
 	VkBool32.member("inheritedQueries", "indicates whether a secondary command buffer may be executed while a query is active")
-}
+}.p
 
-val VkFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkFormatProperties", mutable = false) {
+val VkFormatProperties_p = struct(VULKAN_PACKAGE, "VkFormatProperties", mutable = false) {
 	documentation =
 		"""
 		${man("VkFormatProperties")}<br>
@@ -492,7 +492,7 @@ val VkFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkFormatProperties", mutabl
 	VkFormatFeatureFlags.member("linearTilingFeatures", "what features are supported by #IMAGE_TILING_LINEAR images").flagLinks("FORMAT_FEATURE")
 	VkFormatFeatureFlags.member("optimalTilingFeatures", "what features are supported by #IMAGE_TILING_OPTIMAL images")
 	VkFormatFeatureFlags.member("bufferFeatures", "what features are supported by buffers")
-}
+}.p
 
 val VkExtent3D = struct(VULKAN_PACKAGE, "VkExtent3D") {
 	documentation =
@@ -508,7 +508,7 @@ val VkExtent3D = struct(VULKAN_PACKAGE, "VkExtent3D") {
 	uint32_t.member("depth", "the region depth")
 }
 
-val VkImageFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkImageFormatProperties", mutable = false) {
+val VkImageFormatProperties_p = struct(VULKAN_PACKAGE, "VkImageFormatProperties", mutable = false) {
 	documentation =
 		"""
 		${man("VkImageFormatProperties")}<br>
@@ -523,7 +523,7 @@ val VkImageFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkImageFormatPropertie
 	VkSampleCountFlags.member("sampleCounts", "a bitmask of {@code VkSampleCountFlagBits} specifying all the supported sample counts for this image")
 		.flagLinks("SAMPLE_COUNT")
 	VkDeviceSize.member("maxResourceSize", "an upper bound on the total image size in bytes, inclusive of all image subresources")
-}
+}.p
 
 val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mutable = false) {
 	documentation =
@@ -922,7 +922,7 @@ val VkPhysicalDeviceSparseProperties = struct(VULKAN_PACKAGE, "VkPhysicalDeviceS
 	VkBool32.member("residencyNonResidentStrict", "whether the physical device $can consistently access non-resident regions of a resource")
 }
 
-val VkPhysicalDeviceProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceProperties", mutable = false) {
+val VkPhysicalDeviceProperties_p = struct(VULKAN_PACKAGE, "VkPhysicalDeviceProperties", mutable = false) {
 	javaImport("static org.lwjgl.vulkan.VK10.*")
 	documentation =
 		"""
@@ -948,9 +948,9 @@ val VkPhysicalDeviceProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDevicePro
 		"sparseProperties",
 		"the ##VkPhysicalDeviceSparseProperties structure which specifies various sparse related properties of the physical device"
 	)
-}
+}.p
 
-val VkQueueFamilyProperties_p = struct_p(VULKAN_PACKAGE, "VkQueueFamilyProperties", mutable = false) {
+val VkQueueFamilyProperties_p = struct(VULKAN_PACKAGE, "VkQueueFamilyProperties", mutable = false) {
 	documentation =
 		"""
 		${man("VkQueueFamilyProperties")}<br>
@@ -963,7 +963,7 @@ val VkQueueFamilyProperties_p = struct_p(VULKAN_PACKAGE, "VkQueueFamilyPropertie
 	uint32_t.member("queueCount", "the unsigned integer count of queues in this queue family")
 	uint32_t.member("timestampValidBits", "the unsigned integer count of meaningful bits in the timestamps written via #CmdWriteTimestamp()")
 	VkExtent3D.member("minImageTransferGranularity", "the minimum granularity supported for image transfer operations on the queues in this queue family")
-}
+}.p
 
 val VkMemoryType = struct(VULKAN_PACKAGE, "VkMemoryType", mutable = false) {
 	documentation =
@@ -998,7 +998,7 @@ val VkMemoryHeap = struct(VULKAN_PACKAGE, "VkMemoryHeap", mutable = false) {
 	VkMemoryHeapFlags.member("flags", "a bitmask of {@code VkMemoryHeapFlagBits} attribute flags for the heap").flagLinks("MEMORY_HEAP")
 }
 
-val VkPhysicalDeviceMemoryProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceMemoryProperties", mutable = false) {
+val VkPhysicalDeviceMemoryProperties_p = struct(VULKAN_PACKAGE, "VkPhysicalDeviceMemoryProperties", mutable = false) {
 	javaImport("static org.lwjgl.vulkan.VK10.*")
 	documentation =
 		"""
@@ -1012,9 +1012,9 @@ val VkPhysicalDeviceMemoryProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDev
 	VkMemoryType.array("memoryTypes", "the memory type descriptions", size = "VK_MAX_MEMORY_TYPES")
 	AutoSize("memoryHeaps")..uint32_t.member("memoryHeapCount", "the number of memory heaps")
 	VkMemoryHeap.array("memoryHeaps", "the memory heap descriptions", size = "VK_MAX_MEMORY_HEAPS")
-}
+}.p
 
-val VkDeviceQueueCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDeviceQueueCreateInfo") {
+val VkDeviceQueueCreateInfo_p = struct(VULKAN_PACKAGE, "VkDeviceQueueCreateInfo") {
 	documentation =
 		"""
 		${man("VkDeviceQueueCreateInfo")}<br>
@@ -1037,9 +1037,9 @@ val VkDeviceQueueCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDeviceQueueCreateInf
 		"pQueuePriorities",
 		"an array of {@code queueCount} normalized floating point values, specifying priorities of work that will be submitted to each created queue"
 	)
-}
+}.p
 
-val VkDeviceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
+val VkDeviceCreateInfo_p = struct(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
 	documentation =
 		"""
 		${man("VkDeviceCreateInfo")}<br>
@@ -1072,10 +1072,10 @@ val VkDeviceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
 		"pEnabledFeatures",
 		"$NULL or a pointer to a ##VkPhysicalDeviceFeatures structure that contains boolean indicators of all the features to be enabled"
 	)
-}
+}.p
 
 val VK_MAX_EXTENSION_NAME_SIZE = 256
-val VkExtensionProperties_p = struct_p(VULKAN_PACKAGE, "VkExtensionProperties", mutable = false) {
+val VkExtensionProperties_p = struct(VULKAN_PACKAGE, "VkExtensionProperties", mutable = false) {
 	documentation =
 		"""
 		${man("VkExtensionProperties")}<br>
@@ -1086,10 +1086,10 @@ val VkExtensionProperties_p = struct_p(VULKAN_PACKAGE, "VkExtensionProperties", 
 
 	charUTF8.array("extensionName", "a null-terminated string specifying the name of the extension", size = VK_MAX_EXTENSION_NAME_SIZE)
 	uint32_t.member("specVersion", "the version of this extension")
-}
+}.p
 
 val VK_MAX_DESCRIPTION_SIZE = 256
-val VkLayerProperties_p = struct_p(VULKAN_PACKAGE, "VkLayerProperties", mutable = false) {
+val VkLayerProperties_p = struct(VULKAN_PACKAGE, "VkLayerProperties", mutable = false) {
 	documentation =
 		"""
 		${man("VkLayerProperties")}<br>
@@ -1113,9 +1113,9 @@ val VkLayerProperties_p = struct_p(VULKAN_PACKAGE, "VkLayerProperties", mutable 
 		"a null-terminated UTF-8 string providing additional details that can be used by the application to identify the layer",
 		size = VK_MAX_DESCRIPTION_SIZE
 	)
-}
+}.p
 
-val VkSubmitInfo_p = struct_p(VULKAN_PACKAGE, "VkSubmitInfo") {
+val VkSubmitInfo_p = struct(VULKAN_PACKAGE, "VkSubmitInfo") {
 	documentation =
 		"""
 		${man("VkSubmitInfo")}<br>
@@ -1150,9 +1150,9 @@ val VkSubmitInfo_p = struct_p(VULKAN_PACKAGE, "VkSubmitInfo") {
 		"pSignalSemaphores",
 		"a pointer to an array of semaphores which will be signaled when the command buffers for this batch have completed execution"
 	)
-}
+}.p
 
-val VkMemoryAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkMemoryAllocateInfo") {
+val VkMemoryAllocateInfo_p = struct(VULKAN_PACKAGE, "VkMemoryAllocateInfo") {
 	documentation =
 		"""
 		${man("VkMemoryAllocateInfo")}<br>
@@ -1170,9 +1170,9 @@ val VkMemoryAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkMemoryAllocateInfo") {
 		"memoryTypeIndex",
 		"the memory type index, which selects the properties of the memory to be allocated, as well as the heap the memory will come from"
 	)
-}
+}.p
 
-val VkMappedMemoryRange_p = struct_p(VULKAN_PACKAGE, "VkMappedMemoryRange") {
+val VkMappedMemoryRange_p = struct(VULKAN_PACKAGE, "VkMappedMemoryRange") {
 	documentation =
 		"""
 		${man("VkMappedMemoryRange")}<br>
@@ -1188,9 +1188,9 @@ val VkMappedMemoryRange_p = struct_p(VULKAN_PACKAGE, "VkMappedMemoryRange") {
 	VkDeviceMemory.member("memory", "the memory object to which this range belongs")
 	VkDeviceSize.member("offset", "the zero-based byte offset from the beginning of the memory object")
 	VkDeviceSize.member("size", "either the size of range, or #WHOLE_SIZE to affect the range from offset to the end of the current mapping of the allocation")
-}
+}.p
 
-val VkMemoryRequirements_p = struct_p(VULKAN_PACKAGE, "VkMemoryRequirements", mutable = false) {
+val VkMemoryRequirements_p = struct(VULKAN_PACKAGE, "VkMemoryRequirements", mutable = false) {
 	documentation =
 		"""
 		${man("VkMemoryRequirements")}<br>
@@ -1202,7 +1202,7 @@ val VkMemoryRequirements_p = struct_p(VULKAN_PACKAGE, "VkMemoryRequirements", mu
 	VkDeviceSize.member("size", "the size, in bytes, of the memory allocation required for the resource")
 	VkDeviceSize.member("alignment", "the alignment, in bytes, of the offset within the allocation required for the resource")
 	uint32_t.member("memoryTypeBits", "a bitfield and contains one bit set for every supported memory type for the resource")
-}
+}.p
 
 val VkSparseImageFormatProperties = struct(VULKAN_PACKAGE, "VkSparseImageFormatProperties", mutable = false) {
 	documentation =
@@ -1220,7 +1220,7 @@ val VkSparseImageFormatProperties = struct(VULKAN_PACKAGE, "VkSparseImageFormatP
 }
 val VkSparseImageFormatProperties_p = VkSparseImageFormatProperties.p
 
-val VkSparseImageMemoryRequirements_p = struct_p(VULKAN_PACKAGE, "VkSparseImageMemoryRequirements", mutable = false) {
+val VkSparseImageMemoryRequirements_p = struct(VULKAN_PACKAGE, "VkSparseImageMemoryRequirements", mutable = false) {
 	documentation =
 		"""
 		${man("VkSparseImageMemoryRequirements")}<br>
@@ -1240,7 +1240,7 @@ val VkSparseImageMemoryRequirements_p = struct_p(VULKAN_PACKAGE, "VkSparseImageM
 		(otherwise the value is undefined)
 		"""
 	)
-}
+}.p
 
 val VkSparseMemoryBind = struct(VULKAN_PACKAGE, "VkSparseMemoryBind") {
 	documentation =
@@ -1371,7 +1371,7 @@ val VkSparseImageMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBin
 	VkSparseImageMemoryBind.const_p.buffer("pBinds", "a pointer to array of ##VkSparseImageMemoryBind structures")
 }
 
-val VkBindSparseInfo_p = struct_p(VULKAN_PACKAGE, "VkBindSparseInfo") {
+val VkBindSparseInfo_p = struct(VULKAN_PACKAGE, "VkBindSparseInfo") {
 	documentation =
 		"""
 		${man("VkBindSparseInfo")}<br>
@@ -1418,9 +1418,9 @@ val VkBindSparseInfo_p = struct_p(VULKAN_PACKAGE, "VkBindSparseInfo") {
 		be signaled are provided, they define a semaphore signal operation.
 		"""
 	)
-}
+}.p
 
-val VkFenceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkFenceCreateInfo") {
+val VkFenceCreateInfo_p = struct(VULKAN_PACKAGE, "VkFenceCreateInfo") {
 	documentation =
 		"""
 		${man("VkFenceCreateInfo")}<br>
@@ -1435,9 +1435,9 @@ val VkFenceCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkFenceCreateInfo") {
 	pNext()
 	VkFenceCreateFlags.member("flags", "contains {@code VkFenceCreateFlags} flags defining the initial state and behavior of the fence")
 		.flagLinks("FENCE_CREATE")
-}
+}.p
 
-val VkSemaphoreCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkSemaphoreCreateInfo") {
+val VkSemaphoreCreateInfo_p = struct(VULKAN_PACKAGE, "VkSemaphoreCreateInfo") {
 	documentation =
 		"""
 		${man("VkSemaphoreCreateInfo")}<br>
@@ -1451,9 +1451,9 @@ val VkSemaphoreCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkSemaphoreCreateInfo") 
 	sType(this)
 	pNext()
 	VkSemaphoreCreateFlags.member("flags", "reserved for future use")
-}
+}.p
 
-val VkEventCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkEventCreateInfo") {
+val VkEventCreateInfo_p = struct(VULKAN_PACKAGE, "VkEventCreateInfo") {
 	documentation =
 		"""
 		${man("VkEventCreateInfo")}<br>
@@ -1467,9 +1467,9 @@ val VkEventCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkEventCreateInfo") {
 	sType(this)
 	pNext()
 	VkEventCreateFlags.member("flags", "reserved for future use")
-}
+}.p
 
-val VkQueryPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkQueryPoolCreateInfo") {
+val VkQueryPoolCreateInfo_p = struct(VULKAN_PACKAGE, "VkQueryPoolCreateInfo") {
 	documentation =
 		"""
 		${man("VkQueryPoolCreateInfo")}<br>
@@ -1487,9 +1487,9 @@ val VkQueryPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkQueryPoolCreateInfo") 
 	uint32_t.member("queryCount", "the number of queries managed by the pool")
 	VkQueryPipelineStatisticFlags.member("pipelineStatistics", "a bitmask indicating which counters will be returned in queries on the new pool")
 		.flagLinks("QUERY_PIPELINE_STATISTIC")
-}
+}.p
 
-val VkBufferCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkBufferCreateInfo") {
+val VkBufferCreateInfo_p = struct(VULKAN_PACKAGE, "VkBufferCreateInfo") {
 	documentation =
 		"""
 		${man("VkBufferCreateInfo")}<br>
@@ -1516,9 +1516,9 @@ val VkBufferCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkBufferCreateInfo") {
 		"pQueueFamilyIndices",
 		"a list of queue families that will access this buffer (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT)"
 	)
-}
+}.p
 
-val VkBufferViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkBufferViewCreateInfo") {
+val VkBufferViewCreateInfo_p = struct(VULKAN_PACKAGE, "VkBufferViewCreateInfo") {
 	documentation =
 		"""
 		${man("VkBufferViewCreateInfo")}<br>
@@ -1536,9 +1536,9 @@ val VkBufferViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkBufferViewCreateInfo"
 	VkFormat.member("format", "a {@code VkFormat} describing the format of the data elements in the buffer")
 	VkDeviceSize.member("offset", "an offset in bytes from the base address of the buffer")
 	VkDeviceSize.member("range", "a size in bytes of the buffer view")
-}
+}.p
 
-val VkImageCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageCreateInfo") {
+val VkImageCreateInfo_p = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 	documentation =
 		"""
 		${man("VkImageCreateInfo")}<br>
@@ -1571,9 +1571,9 @@ val VkImageCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageCreateInfo") {
 		"a list of queue families that will access this image (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT)"
 	)
 	VkImageLayout.member("initialLayout", "selects the initial {@code VkImageLayout} state of all image subresources of the image").links("IMAGE_LAYOUT_\\w+")
-}
+}.p
 
-val VkSubresourceLayout_p = struct_p(VULKAN_PACKAGE, "VkSubresourceLayout", mutable = false) {
+val VkSubresourceLayout_p = struct(VULKAN_PACKAGE, "VkSubresourceLayout", mutable = false) {
 	documentation =
 		"""
 		${man("VkSubresourceLayout")}<br>
@@ -1587,7 +1587,7 @@ val VkSubresourceLayout_p = struct_p(VULKAN_PACKAGE, "VkSubresourceLayout", muta
 	VkDeviceSize.member("rowPitch", "the number of bytes between each row of texels in an image")
 	VkDeviceSize.member("arrayPitch", "the number of bytes between each array layer of an image")
 	VkDeviceSize.member("depthPitch", "the number of bytes between each slice of 3D image")
-}
+}.p
 
 val VkComponentMapping = struct(VULKAN_PACKAGE, "VkComponentMapping") {
 	documentation =
@@ -1625,7 +1625,7 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 }
 val VkImageSubresourceRange_p = VkImageSubresourceRange.p
 
-val VkImageViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
+val VkImageViewCreateInfo_p = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
 	documentation =
 		"""
 		${man("VkImageViewCreateInfo")}<br>
@@ -1645,9 +1645,9 @@ val VkImageViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageViewCreateInfo") 
 		"a remapping of color components (or of depth or stencil components after they have been converted into color components)"
 	)
 	VkImageSubresourceRange.member("subresourceRange", "a ##VkImageSubresourceRange selecting the set of mipmap levels and array layers")
-}
+}.p
 
-val VkShaderModuleCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkShaderModuleCreateInfo") {
+val VkShaderModuleCreateInfo_p = struct(VULKAN_PACKAGE, "VkShaderModuleCreateInfo") {
 	documentation =
 		"""
 		${man("VkShaderModuleCreateInfo")}<br>
@@ -1663,9 +1663,9 @@ val VkShaderModuleCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkShaderModuleCreateI
 	VkShaderModuleCreateFlags.member("flags", "reserved for future use")
 	AutoSize("pCode")..size_t.member("codeSize", "the size, in bytes, of the code pointed to by {@code pCode}")
 	PointerType("const uint32_t", PointerMapping.DATA_BYTE).member("pCode", "points to code that is used to create the shader module")
-}
+}.p
 
-val VkPipelineCacheCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkPipelineCacheCreateInfo") {
+val VkPipelineCacheCreateInfo_p = struct(VULKAN_PACKAGE, "VkPipelineCacheCreateInfo") {
 	documentation =
 		"""
 		${man("VkPipelineCacheCreateInfo")}<br>
@@ -1681,7 +1681,7 @@ val VkPipelineCacheCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkPipelineCacheCreat
 	VkPipelineCacheCreateFlags.member("flags", "reserved for future use")
 	AutoSize("pInitialData", optional = true)..size_t.member("initialDataSize", "the number of bytes in {@code pInitialData}")
 	const..void_p.member("pInitialData", "a pointer to previously retrieved pipeline cache data")
-}
+}.p
 
 val VkSpecializationMapEntry = struct(VULKAN_PACKAGE, "VkSpecializationMapEntry") {
 	documentation =
@@ -2106,7 +2106,7 @@ val VkPipelineDynamicStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDynamic
 	)
 }
 
-val VkGraphicsPipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkGraphicsPipelineCreateInfo") {
+val VkGraphicsPipelineCreateInfo_p = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCreateInfo") {
 	documentation =
 		"""
 		${man("VkGraphicsPipelineCreateInfo")}<br>
@@ -2189,9 +2189,9 @@ val VkGraphicsPipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkGraphicsPipelin
 	uint32_t.member("subpass", "the index of the subpass in {@code renderPass} where this pipeline will be used")
 	VkPipeline.member("basePipelineHandle", "a pipeline to derive from")
 	int32_t.member("basePipelineIndex", "an index into the {@code pCreateInfos} parameter to use as a pipeline to derive from")
-}
+}.p
 
-val VkComputePipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkComputePipelineCreateInfo") {
+val VkComputePipelineCreateInfo_p = struct(VULKAN_PACKAGE, "VkComputePipelineCreateInfo") {
 	documentation =
 		"""
 		${man("VkComputePipelineCreateInfo")}<br>
@@ -2210,7 +2210,7 @@ val VkComputePipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkComputePipelineC
 	VkPipelineLayout.member("layout", "the description of binding locations used by both the pipeline and descriptor sets used with the pipeline")
 	VkPipeline.member("basePipelineHandle", "a pipeline to derive from")
 	int32_t.member("basePipelineIndex", "an index into the {@code pCreateInfos} parameter to use as a pipeline to derive from")
-}
+}.p
 
 val VkPushConstantRange = struct(VULKAN_PACKAGE, "VkPushConstantRange") {
 	documentation =
@@ -2229,7 +2229,7 @@ val VkPushConstantRange = struct(VULKAN_PACKAGE, "VkPushConstantRange") {
 	uint32_t.member("size", "the size, in bytes, consumed by the range")
 }
 
-val VkPipelineLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkPipelineLayoutCreateInfo") {
+val VkPipelineLayoutCreateInfo_p = struct(VULKAN_PACKAGE, "VkPipelineLayoutCreateInfo") {
 	documentation =
 		"""
 		${man("VkPipelineLayoutCreateInfo")}<br>
@@ -2253,9 +2253,9 @@ val VkPipelineLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkPipelineLayoutCre
 		"pPushConstantRanges",
 		"a pointer to an array of ##VkPushConstantRange structures defining a set of push constant ranges for use in a single pipeline layout"
 	)
-}
+}.p
 
-val VkSamplerCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
+val VkSamplerCreateInfo_p = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
 	documentation =
 		"""
 		${man("VkSamplerCreateInfo")}<br>
@@ -2284,7 +2284,7 @@ val VkSamplerCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
 	float.member("maxLod", "the maximum value to which the computed level-of-detail value will be clamped")
 	VkBorderColor.member("borderColor", "the predefined border color to use").links("BORDER_COLOR_\\w+")
 	VkBool32.member("unnormalizedCoordinates", "controls whether to use unnormalized or normalized texel coordinates to address texels of the image")
-}
+}.p
 
 val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayoutBinding") {
 	documentation =
@@ -2324,7 +2324,7 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
 	)
 }
 
-val VkDescriptorSetLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSetLayoutCreateInfo") {
+val VkDescriptorSetLayoutCreateInfo_p = struct(VULKAN_PACKAGE, "VkDescriptorSetLayoutCreateInfo") {
 	documentation =
 		"""
 		${man("VkDescriptorSetLayoutCreateInfo")}<br>
@@ -2340,7 +2340,7 @@ val VkDescriptorSetLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSe
 	VkDescriptorSetLayoutCreateFlags.member("flags", "reserved for future use")
 	AutoSize("pBindings", optional = true)..uint32_t.member("bindingCount", "the number of elements in {@code pBindings}")
 	VkDescriptorSetLayoutBinding.const_p.buffer("pBindings", "a pointer to an array of ##VkDescriptorSetLayoutBinding structures")
-}
+}.p
 
 val VkDescriptorPoolSize = struct(VULKAN_PACKAGE, "VkDescriptorPoolSize") {
 	documentation =
@@ -2357,7 +2357,7 @@ val VkDescriptorPoolSize = struct(VULKAN_PACKAGE, "VkDescriptorPoolSize") {
 	uint32_t.member("descriptorCount", "the number of descriptors of that type to allocate")
 }
 
-val VkDescriptorPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorPoolCreateInfo") {
+val VkDescriptorPoolCreateInfo_p = struct(VULKAN_PACKAGE, "VkDescriptorPoolCreateInfo") {
 	documentation =
 		"""
 		${man("VkDescriptorPoolCreateInfo")}<br>
@@ -2380,9 +2380,9 @@ val VkDescriptorPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorPoolCre
 		the pool
 		"""
 	)
-}
+}.p
 
-val VkDescriptorSetAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSetAllocateInfo") {
+val VkDescriptorSetAllocateInfo_p = struct(VULKAN_PACKAGE, "VkDescriptorSetAllocateInfo") {
 	documentation =
 		"""
 		${man("VkDescriptorSetAllocateInfo")}<br>
@@ -2401,7 +2401,7 @@ val VkDescriptorSetAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSetAll
 		"pSetLayouts",
 		"an array of descriptor set layouts, with each member specifying how the corresponding descriptor set is allocated"
 	)
-}
+}.p
 
 val VkDescriptorImageInfo = struct(VULKAN_PACKAGE, "VkDescriptorImageInfo") {
 	documentation =
@@ -2455,7 +2455,7 @@ val VkDescriptorBufferInfo = struct(VULKAN_PACKAGE, "VkDescriptorBufferInfo") {
 	)
 }
 
-val VkWriteDescriptorSet_p = struct_p(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
+val VkWriteDescriptorSet_p = struct(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
 	documentation =
 		"""
 		${man("VkWriteDescriptorSet")}<br>
@@ -2486,9 +2486,9 @@ val VkWriteDescriptorSet_p = struct_p(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
 	nullable..VkDescriptorImageInfo.const_p.buffer("pImageInfo", "points to an array of ##VkDescriptorImageInfo structures or is ignored")
 	nullable..VkDescriptorBufferInfo.const_p.buffer("pBufferInfo", "points to an array of ##VkDescriptorBufferInfo structures or is ignored")
 	nullable..VkBufferView.const_p.member("pTexelBufferView", "points to an array of {@code VkBufferView} handles or is ignored")
-}
+}.p
 
-val VkCopyDescriptorSet_p = struct_p(VULKAN_PACKAGE, "VkCopyDescriptorSet") {
+val VkCopyDescriptorSet_p = struct(VULKAN_PACKAGE, "VkCopyDescriptorSet") {
 	documentation =
 		"""
 		${man("VkCopyDescriptorSet")}<br>
@@ -2514,9 +2514,9 @@ val VkCopyDescriptorSet_p = struct_p(VULKAN_PACKAGE, "VkCopyDescriptorSet") {
 		the source or destination binding, those affect consecutive bindings in a manner similar to ##VkWriteDescriptorSet.
 		"""
 	)
-}
+}.p
 
-val VkFramebufferCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkFramebufferCreateInfo") {
+val VkFramebufferCreateInfo_p = struct(VULKAN_PACKAGE, "VkFramebufferCreateInfo") {
 	documentation =
 		"""
 		${man("VkFramebufferCreateInfo")}<br>
@@ -2539,7 +2539,7 @@ val VkFramebufferCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkFramebufferCreateInf
 	uint32_t.member("width", "the framebuffer width")
 	uint32_t.member("height", "the framebuffer height")
 	uint32_t.member("layers", "the number of layers in the framebuffer")
-}
+}.p
 
 val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") {
 	documentation =
@@ -2689,7 +2689,7 @@ val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
 	VkDependencyFlags.member("dependencyFlags", "a combination of {@code VkDependencyFlagBits} values").flagLinks("DEPENDENCY")
 }
 
-val VkRenderPassCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
+val VkRenderPassCreateInfo_p = struct(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
 	documentation =
 		"""
 		${man("VkRenderPassCreateInfo")}<br>
@@ -2730,9 +2730,9 @@ val VkRenderPassCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassCreateInfo"
 		if {@code dependencyCount} is zero
 		"""
 	)
-}
+}.p
 
-val VkCommandPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandPoolCreateInfo") {
+val VkCommandPoolCreateInfo_p = struct(VULKAN_PACKAGE, "VkCommandPoolCreateInfo") {
 	documentation =
 		"""
 		${man("VkCommandPoolCreateInfo")}<br>
@@ -2748,9 +2748,9 @@ val VkCommandPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandPoolCreateInf
 	VkCommandPoolCreateFlags.member("flags", "a bitmask indicating usage behavior for the pool and command buffers allocated from it")
 		.flagLinks("COMMAND_POOL_CREATE")
 	uint32_t.member("queueFamilyIndex", "designates a queue family")
-}
+}.p
 
-val VkCommandBufferAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferAllocateInfo") {
+val VkCommandBufferAllocateInfo_p = struct(VULKAN_PACKAGE, "VkCommandBufferAllocateInfo") {
 	documentation =
 		"""
 		${man("VkCommandBufferAllocateInfo")}<br>
@@ -2766,7 +2766,7 @@ val VkCommandBufferAllocateInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferAll
 	VkCommandPool.member("commandPool", "the name of the command pool that the command buffers allocate their memory from")
 	VkCommandBufferLevel.member("level", "determines whether the command buffers are primary or secondary command buffers").links("COMMAND_BUFFER_LEVEL_\\w+")
 	uint32_t.member("commandBufferCount", "the number of command buffers to allocate from the pool")
-}
+}.p
 
 val VkCommandBufferInheritanceInfo = struct(VULKAN_PACKAGE, "VkCommandBufferInheritanceInfo") {
 	documentation =
@@ -2820,7 +2820,7 @@ val VkCommandBufferInheritanceInfo = struct(VULKAN_PACKAGE, "VkCommandBufferInhe
 	).flagLinks("QUERY_PIPELINE_STATISTIC")
 }
 
-val VkCommandBufferBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferBeginInfo") {
+val VkCommandBufferBeginInfo_p = struct(VULKAN_PACKAGE, "VkCommandBufferBeginInfo") {
 	documentation =
 		"""
 		${man("VkCommandBufferBeginInfo")}<br>
@@ -2842,9 +2842,9 @@ val VkCommandBufferBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferBeginI
 		command buffer, then this value is ignored.
 		"""
 	)
-}
+}.p
 
-val VkBufferCopy_p = struct_p(VULKAN_PACKAGE, "VkBufferCopy") {
+val VkBufferCopy_p = struct(VULKAN_PACKAGE, "VkBufferCopy") {
 	documentation =
 		"""
 		${man("VkBufferCopy")}<br>
@@ -2856,7 +2856,7 @@ val VkBufferCopy_p = struct_p(VULKAN_PACKAGE, "VkBufferCopy") {
 	VkDeviceSize.member("srcOffset", "the starting offset in bytes from the start of {@code srcBuffer}")
 	VkDeviceSize.member("dstOffset", "the starting offset in bytes from the start of {@code dstBuffer}")
 	VkDeviceSize.member("size", "the number of bytes to copy")
-}
+}.p
 
 val VkImageSubresourceLayers = struct(VULKAN_PACKAGE, "VkImageSubresourceLayers") {
 	documentation =
@@ -2876,7 +2876,7 @@ val VkImageSubresourceLayers = struct(VULKAN_PACKAGE, "VkImageSubresourceLayers"
 	uint32_t.member("layerCount", "the number of layers")
 }
 
-val VkImageCopy_p = struct_p(VULKAN_PACKAGE, "VkImageCopy") {
+val VkImageCopy_p = struct(VULKAN_PACKAGE, "VkImageCopy") {
 	documentation =
 		"""
 		${man("VkImageCopy")}<br>
@@ -2898,9 +2898,9 @@ val VkImageCopy_p = struct_p(VULKAN_PACKAGE, "VkImageCopy") {
 	)
 	VkOffset3D.member("dstOffset", "selects the initial x, y, and z offsets in texels of the sub-regions of the destination image data")
 	VkExtent3D.member("extent", "the size in texels of the source image to copy in width, height and depth")
-}
+}.p
 
-val VkImageBlit_p = struct_p(VULKAN_PACKAGE, "VkImageBlit") {
+val VkImageBlit_p = struct(VULKAN_PACKAGE, "VkImageBlit") {
 	documentation =
 		"""
 		${man("VkImageBlit")}<br>
@@ -2915,9 +2915,9 @@ val VkImageBlit_p = struct_p(VULKAN_PACKAGE, "VkImageBlit") {
 	VkOffset3D.array("srcOffsets", "the source region", size = 2)
 	VkImageSubresourceLayers.member("dstSubresource", "the destination image subresource")
 	VkOffset3D.array("dstOffsets", "the destination region", size = 2)
-}
+}.p
 
-val VkBufferImageCopy_p = struct_p(VULKAN_PACKAGE, "VkBufferImageCopy") {
+val VkBufferImageCopy_p = struct(VULKAN_PACKAGE, "VkBufferImageCopy") {
 	documentation =
 		"""
 		${man("VkBufferImageCopy")}<br>
@@ -2937,7 +2937,7 @@ val VkBufferImageCopy_p = struct_p(VULKAN_PACKAGE, "VkBufferImageCopy") {
 	)
 	VkOffset3D.member("imageOffset", "selects the initial x, y, z offsets in texels of the sub-region of the source or destination image data")
 	VkExtent3D.member("imageExtent", "the size in texels of the image to copy in width, height and depth")
-}
+}.p
 
 val VkClearColorValue = union(VULKAN_PACKAGE, "VkClearColorValue") {
 	documentation =
@@ -2997,7 +2997,7 @@ val VkClearValue = union(VULKAN_PACKAGE, "VkClearValue") {
 	VkClearDepthStencilValue.member("depthStencil", "the depth and stencil clear values to use when clearing a depth/stencil image or attachment")
 }
 
-val VkClearAttachment_p = struct_p(VULKAN_PACKAGE, "VkClearAttachment") {
+val VkClearAttachment_p = struct(VULKAN_PACKAGE, "VkClearAttachment") {
 	documentation =
 		"""
 		${man("VkClearAttachment")}<br>
@@ -3019,9 +3019,9 @@ val VkClearAttachment_p = struct_p(VULKAN_PACKAGE, "VkClearAttachment") {
 		"""
 	)
 	VkClearValue.member("clearValue", "the color or depth/stencil value to clear the attachment to")
-}
+}.p
 
-val VkClearRect_p = struct_p(VULKAN_PACKAGE, "VkClearRect") {
+val VkClearRect_p = struct(VULKAN_PACKAGE, "VkClearRect") {
 	documentation =
 		"""
 		${man("VkClearRect")}<br>
@@ -3033,9 +3033,9 @@ val VkClearRect_p = struct_p(VULKAN_PACKAGE, "VkClearRect") {
 	VkRect2D.member("rect", "the two-dimensional region to be cleared")
 	uint32_t.member("baseArrayLayer", "the first layer to be cleared")
 	uint32_t.member("layerCount", "the number of layers to clear")
-}
+}.p
 
-val VkImageResolve_p = struct_p(VULKAN_PACKAGE, "VkImageResolve") {
+val VkImageResolve_p = struct(VULKAN_PACKAGE, "VkImageResolve") {
 	documentation =
 		"""
 		${man("VkImageResolve")}<br>
@@ -3056,9 +3056,9 @@ val VkImageResolve_p = struct_p(VULKAN_PACKAGE, "VkImageResolve") {
 		"a ##VkImageSubresourceLayers structure specifying the image subresource of the image used for the destination image data")
 	VkOffset3D.member("dstOffset", "selects the initial x, y, and z offsets in texels of the sub-region of the destination image data")
 	VkExtent3D.member("extent", "the size in texels of the source image to resolve in width, height and depth")
-}
+}.p
 
-val VkMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkMemoryBarrier") {
+val VkMemoryBarrier_p = struct(VULKAN_PACKAGE, "VkMemoryBarrier") {
 	documentation =
 		"""
 		${man("VkMemoryBarrier")}<br>
@@ -3080,9 +3080,9 @@ val VkMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkMemoryBarrier") {
 		"dstAccessMask",
 		"a bitmask of the classes of memory accesses performed by the second set of commands that will participate in the dependency"
 	)
-}
+}.p
 
-val VkBufferMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkBufferMemoryBarrier") {
+val VkBufferMemoryBarrier_p = struct(VULKAN_PACKAGE, "VkBufferMemoryBarrier") {
 	documentation =
 		"""
 		${man("VkBufferMemoryBarrier")}<br>
@@ -3122,9 +3122,9 @@ val VkBufferMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkBufferMemoryBarrier") 
 		"size",
 		"a size in bytes of the affected area of backing memory for buffer, or #WHOLE_SIZE to use the range from offset to the end of the buffer"
 	)
-}
+}.p
 
-val VkImageMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
+val VkImageMemoryBarrier_p = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 	documentation =
 		"""
 		${man("VkImageMemoryBarrier")}<br>
@@ -3168,9 +3168,9 @@ val VkImageMemoryBarrier_p = struct_p(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 		"subresourceRange",
 		"describes an area of the backing memory for image, as well as the set of image subresources whose image layouts are modified"
 	)
-}
+}.p
 
-val VkRenderPassBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassBeginInfo") {
+val VkRenderPassBeginInfo_p = struct(VULKAN_PACKAGE, "VkRenderPassBeginInfo") {
 	documentation =
 		"""
 		${man("VkRenderPassBeginInfo")}<br>
@@ -3195,7 +3195,7 @@ val VkRenderPassBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassBeginInfo") 
 		{@code pClearValues} are ignored.
 		"""
 	)
-}
+}.p
 
 // Indirect commands (not used in the API, for reference only)
 

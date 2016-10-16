@@ -21,7 +21,7 @@ val Window = typedef(XID, "Window")
 val Display_p = "Display".p // Display is a struct, but should be treated as an opaque type by apps
 val DISPLAY = Display_p.IN("display", "the connection to the X server") // This is here so that GLX extensions can use it
 
-val Visual_p = struct_p(LINUX_PACKAGE, "Visual") {
+val Visual_p = struct(LINUX_PACKAGE, "Visual") {
 	documentation = "Visual structure; contains information about colormapping possible."
 
 	nullable..voidptr.member("ext_data", "")
@@ -32,9 +32,9 @@ val Visual_p = struct_p(LINUX_PACKAGE, "Visual") {
 	unsigned_long.member("blue_mask", "")
 	int.member("bits_per_rgb", "")
 	int.member("map_entries", "")
-}
+}.p
 
-val XVisualInfo_p = struct_p(LINUX_PACKAGE, "XVisualInfo") {
+val XVisualInfo_p = struct(LINUX_PACKAGE, "XVisualInfo") {
 	documentation = "Information used by the visual utility routines to find desired visual type from the many visuals a display may support."
 
 	Visual_p.member("visual", "")
@@ -47,9 +47,9 @@ val XVisualInfo_p = struct_p(LINUX_PACKAGE, "XVisualInfo") {
 	unsigned_long.member("blue_mask", "")
 	int.member("colormap_size", "")
 	int.member("bits_per_rgb", "")
-}
+}.p
 
-val XSetWindowAttributes_p = struct_p(LINUX_PACKAGE, "XSetWindowAttributes") {
+val XSetWindowAttributes_p = struct(LINUX_PACKAGE, "XSetWindowAttributes") {
 	documentation = "Data structure for setting window attributes."
 
 	Pixmap.member("background_pixmap", "")
@@ -67,7 +67,7 @@ val XSetWindowAttributes_p = struct_p(LINUX_PACKAGE, "XSetWindowAttributes") {
 	Bool.member("override_redirect", "")
 	Colormap.member("colormap", "")
 	Cursor.member("cursor", "")
-}
+}.p
 
 // --------------- Xrandr.h ---------------
 

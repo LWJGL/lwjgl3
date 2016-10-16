@@ -1763,18 +1763,6 @@ fun struct(
 	return struct.nativeType
 }
 
-fun struct_p(
-	packageName: String,
-	className: String,
-	nativeSubPath: String = "",
-	nativeName: String = className,
-	virtual: Boolean = false,
-	mutable: Boolean = true,
-	extends: PointerType? = null,
-	nativeLayout: Boolean = false,
-	init: (Struct.() -> Unit)? = null
-) = struct(packageName, className, nativeSubPath, nativeName, virtual, mutable, extends, nativeLayout, init).p
-
 fun union(
 	packageName: String,
 	className: String,
@@ -1793,15 +1781,3 @@ fun union(
 	}
 	return struct.nativeType
 }
-
-fun union_p(
-	packageName: String,
-	className: String,
-	nativeSubPath: String = "",
-	nativeName: String = className,
-	virtual: Boolean = false,
-	mutable: Boolean = true,
-	extends: PointerType? = null,
-	nativeLayout: Boolean = false,
-	init: (Struct.() -> Unit)? = null
-) = union(packageName, className, nativeSubPath, nativeName, virtual, mutable, extends, nativeLayout, init).p

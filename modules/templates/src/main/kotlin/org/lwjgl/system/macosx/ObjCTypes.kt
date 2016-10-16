@@ -28,12 +28,12 @@ val objc_property_t = "objc_property_t".opaque_p
 val objc_property_t_p = objc_property_t.p
 
 // Defines a property attribute
-val objc_property_attribute_t_p = struct_p(MACOSX_PACKAGE, "ObjCPropertyAttribute", nativeName = "objc_property_attribute_t") {
+val objc_property_attribute_t_p = struct(MACOSX_PACKAGE, "ObjCPropertyAttribute", nativeName = "objc_property_attribute_t") {
 	documentation = "Defines a property attribute."
 
 	charUTF8_p.member("name", "the name of the attribute")
 	charUTF8_p.member("value", "the value of the attribute (usually empty)")
-}
+}.p
 
 // Defines a method
 val objc_method_description = struct(MACOSX_PACKAGE, "ObjCMethodDescription", nativeName = "struct objc_method_description", mutable = false) {

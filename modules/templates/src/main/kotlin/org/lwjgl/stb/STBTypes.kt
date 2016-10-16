@@ -89,13 +89,13 @@ val stbi_io_callbacks_eof = "stbi_io_callbacks.eof".callback(
 	documentation = "Instances of this interface may be set to the {@code eof} field of the ##STBIIOCallbacks struct."
 }
 
-val stbi_io_callbacks_p = struct_p(STB_PACKAGE, "STBIIOCallbacks", nativeName = "stbi_io_callbacks") {
+val stbi_io_callbacks_p = struct(STB_PACKAGE, "STBIIOCallbacks", nativeName = "stbi_io_callbacks") {
 	documentation = "Image IO callbacks, used by #load_from_callbacks()."
 
 	stbi_io_callbacks_read.member("read", "fill {@code data} with {@code size} bytes. Return number of bytes actually read.")
 	stbi_io_callbacks_skip.member("skip", "skip the next {@code n} bytes, or {@code unget} the last -n bytes if negative")
 	stbi_io_callbacks_eof.member("eof", "returns nonzero if we are at end of file/data")
-}
+}.p
 
 // stb_image_resize.h
 
@@ -139,13 +139,13 @@ val stbi_write_func = "stbi_write_func *".callback(
 
 val stbrp_coord = typedef(unsigned_short, "stbrp_coord") // int is also supported if STBRP_LARGE_RECTS is defined
 
-val stbrp_context_p = struct_p(STB_PACKAGE, "STBRPContext", nativeName = "stbrp_context", mutable = false) {
+val stbrp_context_p = struct(STB_PACKAGE, "STBRPContext", nativeName = "stbrp_context", mutable = false) {
 	documentation = "The opaque {@code stbrp_context} struct."
 	includeSTBAPI("#include \"stb_rect_pack.h\"")
 	static(STB_LIBRARY)
-}
+}.p
 
-val stbrp_rect_p = struct_p(STB_PACKAGE, "STBRPRect", nativeName = "stbrp_rect") {
+val stbrp_rect_p = struct(STB_PACKAGE, "STBRPRect", nativeName = "stbrp_rect") {
 	documentation = "A packed rectangle."
 
 	int.member("id", "reserved for your use")
@@ -154,17 +154,17 @@ val stbrp_rect_p = struct_p(STB_PACKAGE, "STBRPRect", nativeName = "stbrp_rect")
 	stbrp_coord.member("x", "output x coordinate")
 	stbrp_coord.member("y", "output y coordinate")
 	int.member("was_packed", "non-zero if valid packing")
-}
+}.p
 
-val stbrp_node_p = struct_p(STB_PACKAGE, "STBRPNode", nativeName = "stbrp_node") {
+val stbrp_node_p = struct(STB_PACKAGE, "STBRPNode", nativeName = "stbrp_node") {
 	documentation = "The opaque {@code stbrp_node} struct."
 	includeSTBAPI("#include \"stb_rect_pack.h\"")
 	static(STB_LIBRARY)
-}
+}.p
 
 // stb_truetype.h
 
-val stbtt_bakedchar_p = struct_p(STB_PACKAGE, "STBTTBakedChar", nativeName = "stbtt_bakedchar", mutable = false) {
+val stbtt_bakedchar_p = struct(STB_PACKAGE, "STBTTBakedChar", nativeName = "stbtt_bakedchar", mutable = false) {
 	documentation = "Baked character data, returned by STBTruetype#stbtt_BakeFontBitmap()."
 
 	unsigned_short.member("x0", "")
@@ -174,9 +174,9 @@ val stbtt_bakedchar_p = struct_p(STB_PACKAGE, "STBTTBakedChar", nativeName = "st
 	float.member("xoff", "")
 	float.member("yoff", "")
 	float.member("xadvance", "")
-}
+}.p
 
-val stbtt_aligned_quad_p = struct_p(STB_PACKAGE, "STBTTAlignedQuad", nativeName = "stbtt_aligned_quad", mutable = false) {
+val stbtt_aligned_quad_p = struct(STB_PACKAGE, "STBTTAlignedQuad", nativeName = "stbtt_aligned_quad", mutable = false) {
 	documentation = "Quad used for drawing a baked character, returned by STBTruetype#stbtt_GetBakedQuad()."
 
 	float.member("x0", "")
@@ -187,15 +187,15 @@ val stbtt_aligned_quad_p = struct_p(STB_PACKAGE, "STBTTAlignedQuad", nativeName 
 	float.member("y1", "")
 	float.member("s1", "")
 	float.member("t1", "")
-}
+}.p
 
-val stbtt_pack_context_p = struct_p(STB_PACKAGE, "STBTTPackContext", nativeName = "stbtt_pack_context", mutable = false) {
+val stbtt_pack_context_p = struct(STB_PACKAGE, "STBTTPackContext", nativeName = "stbtt_pack_context", mutable = false) {
 	documentation = "An opaque structure which holds all the context needed from STBTruetype#stbtt_PackBegin to STBTruetype#stbtt_PackEnd."
 	includeSTBAPI("#include \"stb_truetype.h\"")
 	static(STB_LIBRARY)
-}
+}.p
 
-val stbtt_packedchar_p = struct_p(STB_PACKAGE, "STBTTPackedchar", nativeName = "stbtt_packedchar", mutable = false) {
+val stbtt_packedchar_p = struct(STB_PACKAGE, "STBTTPackedchar", nativeName = "stbtt_packedchar", mutable = false) {
 	documentation = "Packed character data, returned by STBTruetype#stbtt_PackFontRange()"
 
 	unsigned_short.member("x0", "")
@@ -207,9 +207,9 @@ val stbtt_packedchar_p = struct_p(STB_PACKAGE, "STBTTPackedchar", nativeName = "
 	float.member("xadvance", "")
 	float.member("xoff2", "")
 	float.member("yoff2", "")
-}
+}.p
 
-val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", nativeName = "stbtt_pack_range") {
+val stbtt_pack_range_p = struct(STB_PACKAGE, "STBTTPackRange", nativeName = "stbtt_pack_range") {
 	documentation = "A range of packed character data, used by STBTruetype#stbtt_PackFontRanges()"
 
 	float.member("font_size", "the font size")
@@ -218,17 +218,17 @@ val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", nativeName = "s
 	AutoSize("array_of_unicode_codepoints", "chardata_for_range")..int.member("num_chars", "the number of codepoints in the range")
 	stbtt_packedchar_p.buffer("chardata_for_range", "output")
 	padding(2) // h_oversample & v_oversample
-}
+}.p
 
-val stbtt_fontinfo_p = struct_p(STB_PACKAGE, "STBTTFontinfo", nativeName = "stbtt_fontinfo", mutable = false) {
+val stbtt_fontinfo_p = struct(STB_PACKAGE, "STBTTFontinfo", nativeName = "stbtt_fontinfo", mutable = false) {
 	documentation = "An opaque structure that contains font information."
 	includeSTBAPI("#include \"stb_truetype.h\"")
 	static(STB_LIBRARY)
-}
+}.p
 
 val stbtt_vertex_type = PrimitiveType("stbtt_vertex_type", PrimitiveMapping.SHORT)
 
-val stbtt_vertex_p = struct_p(STB_PACKAGE, "STBTTVertex", nativeName = "stbtt_vertex", mutable = false) {
+val stbtt_vertex_p = struct(STB_PACKAGE, "STBTTVertex", nativeName = "stbtt_vertex", mutable = false) {
 	documentation = "Vertex data."
 
 	stbtt_vertex_type.member("x", "")
@@ -236,7 +236,7 @@ val stbtt_vertex_p = struct_p(STB_PACKAGE, "STBTTVertex", nativeName = "stbtt_ve
 	stbtt_vertex_type.member("cx", "")
 	stbtt_vertex_type.member("cy", "")
 	unsigned_char.member("type", "")
-}
+}.p
 val stbtt_vertex_pp = stbtt_vertex_p.p
 
 // stb_vorbis.c
@@ -245,12 +245,12 @@ val stb_vorbis_p = "stb_vorbis".p
 
 val float_ppp = float_pp.p
 
-val stb_vorbis_alloc_p = struct_p(STB_PACKAGE, "STBVorbisAlloc", nativeName = "stb_vorbis_alloc") {
+val stb_vorbis_alloc_p = struct(STB_PACKAGE, "STBVorbisAlloc", nativeName = "stb_vorbis_alloc") {
 	documentation = "A buffer to use for allocations by ##STBVorbis"
 
 	char_p.member("alloc_buffer", "")
 	AutoSize("alloc_buffer")..int.member("alloc_buffer_length_in_bytes", "")
-}
+}.p
 
 val stb_vorbis_info = struct(STB_PACKAGE, "STBVorbisInfo", nativeName = "stb_vorbis_info", mutable = false) {
 	documentation = "Information about a Vorbis stream."
