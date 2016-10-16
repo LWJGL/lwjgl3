@@ -233,7 +233,7 @@ fun config() {
 
 		size_t.member("origin", "the region offset, in bytes")
 		size_t.member("size", "the region size, in bytes")
-	}.hasUsageOutput()
+	}.definition.hasUsageOutput()
 
 	union(OPENCL_PACKAGE, "CLDeviceTopologyAMD", nativeName = "cl_device_topology_amd", mutable = false) {
 		documentation =
@@ -250,7 +250,7 @@ fun config() {
 			cl_char.member("device", "")
 			cl_char.member("function", "")
 		}
-	}.hasUsageOutput()
+	}.definition.hasUsageOutput()
 
 	struct(OPENCL_PACKAGE, "CLMotionEstimationDescINTEL", nativeName = "cl_motion_estimation_desc_intel") {
 		documentation = "Describes the configuration of the motion estimation algorithm."
@@ -266,7 +266,7 @@ fun config() {
 			radius from the current source pixel block location (optionally offset by the predicted motion vector)
 			"""
 		)
-	}.hasUsageOutput()
+	}.definition.hasUsageOutput()
 }
 
 // callback functions

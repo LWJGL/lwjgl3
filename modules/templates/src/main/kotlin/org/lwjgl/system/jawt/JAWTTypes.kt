@@ -17,7 +17,7 @@ val JAWT_Rectangle = struct(JAWT_PACKAGE, "JAWTRectangle", nativeName = "JAWT_Re
 	jint.member("y", "the rectangle Y axis coordinate")
 	jint.member("width", "the rectangle width")
 	jint.member("height", "the rectangle height")
-}.nativeType
+}
 val JAWT_Rectangle_p = JAWT_Rectangle.p
 
 val JAWT_DrawingSurface_p = struct_p(JAWT_PACKAGE, "JAWTDrawingSurface", nativeName = "JAWT_DrawingSurface", mutable = false) {

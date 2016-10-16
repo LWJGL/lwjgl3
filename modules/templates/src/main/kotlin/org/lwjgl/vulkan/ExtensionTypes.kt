@@ -332,7 +332,7 @@ val VkDisplayModeParametersKHR = struct(VULKAN_PACKAGE, "VkDisplayModeParameters
 	
 	VkExtent2D.member("visibleRegion", "the 2D extents of the visible region")
 	uint32_t.member("refreshRate", "a {@code uint32_t} that is the number of times the display is refreshed each second multiplied by 1000")
-}.nativeType
+}
 
 val VkDisplayModePropertiesKHR_p = struct_p(VULKAN_PACKAGE, "VkDisplayModePropertiesKHR", mutable = false) {
 	documentation =

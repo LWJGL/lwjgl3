@@ -1754,13 +1754,13 @@ fun struct(
 	extends: PointerType? = null,
 	nativeLayout: Boolean = false,
 	init: (Struct.() -> Unit)? = null
-): Struct {
+): StructType {
 	val struct = Struct(packageName, className, nativeSubPath, nativeName, false, virtual, mutable, extends.toStruct, nativeLayout)
 	if ( init != null ) {
 		struct.init()
 		Generator.register(struct)
 	}
-	return struct
+	return struct.nativeType
 }
 
 fun struct_p(
@@ -1773,7 +1773,7 @@ fun struct_p(
 	extends: PointerType? = null,
 	nativeLayout: Boolean = false,
 	init: (Struct.() -> Unit)? = null
-) = struct(packageName, className, nativeSubPath, nativeName, virtual, mutable, extends, nativeLayout, init).nativeType.p
+) = struct(packageName, className, nativeSubPath, nativeName, virtual, mutable, extends, nativeLayout, init).p
 
 fun union(
 	packageName: String,
@@ -1785,13 +1785,13 @@ fun union(
 	extends: PointerType? = null,
 	nativeLayout: Boolean = false,
 	init: (Struct.() -> Unit)? = null
-): Struct {
+): StructType {
 	val struct = Struct(packageName, className, nativeSubPath, nativeName, true, virtual, mutable, extends.toStruct, nativeLayout)
 	if ( init != null ) {
 		struct.init()
 		Generator.register(struct)
 	}
-	return struct
+	return struct.nativeType
 }
 
 fun union_p(
@@ -1804,4 +1804,4 @@ fun union_p(
 	extends: PointerType? = null,
 	nativeLayout: Boolean = false,
 	init: (Struct.() -> Unit)? = null
-) = union(packageName, className, nativeSubPath, nativeName, virtual, mutable, extends, nativeLayout, init).nativeType.p
+) = union(packageName, className, nativeSubPath, nativeName, virtual, mutable, extends, nativeLayout, init).p

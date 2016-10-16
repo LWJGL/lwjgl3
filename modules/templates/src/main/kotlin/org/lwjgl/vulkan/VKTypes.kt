@@ -506,7 +506,7 @@ val VkExtent3D = struct(VULKAN_PACKAGE, "VkExtent3D") {
 	uint32_t.member("width", "the region width")
 	uint32_t.member("height", "the region height")
 	uint32_t.member("depth", "the region depth")
-}.nativeType
+}
 
 val VkImageFormatProperties_p = struct_p(VULKAN_PACKAGE, "VkImageFormatProperties", mutable = false) {
 	documentation =
@@ -888,7 +888,7 @@ val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mu
 		"the optimal buffer row pitch alignment in bytes for #CmdCopyBufferToImage() and #CmdCopyImageToBuffer()"
 	)
 	VkDeviceSize.member("nonCoherentAtomSize", "the size and alignment in bytes that bounds concurrent access to host-mapped device memory")
-}.nativeType
+}
 
 val VkPhysicalDeviceSparseProperties = struct(VULKAN_PACKAGE, "VkPhysicalDeviceSparseProperties", mutable = false) {
 	documentation =
@@ -920,7 +920,7 @@ val VkPhysicalDeviceSparseProperties = struct(VULKAN_PACKAGE, "VkPhysicalDeviceS
 		"""
 	)
 	VkBool32.member("residencyNonResidentStrict", "whether the physical device $can consistently access non-resident regions of a resource")
-}.nativeType
+}
 
 val VkPhysicalDeviceProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceProperties", mutable = false) {
 	javaImport("static org.lwjgl.vulkan.VK10.*")
@@ -983,7 +983,7 @@ val VkMemoryType = struct(VULKAN_PACKAGE, "VkMemoryType", mutable = false) {
 		structure
 		"""
 	)
-}.nativeType
+}
 
 val VkMemoryHeap = struct(VULKAN_PACKAGE, "VkMemoryHeap", mutable = false) {
 	documentation =
@@ -996,7 +996,7 @@ val VkMemoryHeap = struct(VULKAN_PACKAGE, "VkMemoryHeap", mutable = false) {
 
 	VkDeviceSize.member("size", "the total memory size in bytes in the heap")
 	VkMemoryHeapFlags.member("flags", "a bitmask of {@code VkMemoryHeapFlagBits} attribute flags for the heap").flagLinks("MEMORY_HEAP")
-}.nativeType
+}
 
 val VkPhysicalDeviceMemoryProperties_p = struct_p(VULKAN_PACKAGE, "VkPhysicalDeviceMemoryProperties", mutable = false) {
 	javaImport("static org.lwjgl.vulkan.VK10.*")
@@ -1217,7 +1217,7 @@ val VkSparseImageFormatProperties = struct(VULKAN_PACKAGE, "VkSparseImageFormatP
 	VkExtent3D.member("imageGranularity", "the width, height, and depth of the sparse image block in texels or compressed texel blocks")
 	VkSparseImageFormatFlags.member("flags", "a {@code VkSparseImageFormatFlagBits} bitmask specifying additional information about the sparse resource")
 		.flagLinks("SPARSE_IMAGE_FORMAT")
-}.nativeType
+}
 val VkSparseImageFormatProperties_p = VkSparseImageFormatProperties.p
 
 val VkSparseImageMemoryRequirements_p = struct_p(VULKAN_PACKAGE, "VkSparseImageMemoryRequirements", mutable = false) {
@@ -1258,7 +1258,7 @@ val VkSparseMemoryBind = struct(VULKAN_PACKAGE, "VkSparseMemoryBind") {
 	VkDeviceMemory.member("memory", "the {@code VkDeviceMemory} object that the range of the resource is bound to")
 	VkDeviceSize.member("memoryOffset", "the offset into the {@code VkDeviceMemory} object to bind the resource range to")
 	VkSparseMemoryBindFlags.member("flags", "are sparse memory binding flags").flagLinks("SPARSE_MEMORY_BIND")
-}.nativeType
+}
 
 val VkSparseBufferMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseBufferMemoryBindInfo") {
 	documentation =
@@ -1274,7 +1274,7 @@ val VkSparseBufferMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseBufferMemoryB
 	VkBuffer.member("buffer", "the {@code VkBuffer} object to be bound")
 	AutoSize("pBinds")..uint32_t.member("bindCount", "the number of {@code VkSparseMemoryBind} structures in the {@code pBinds} array")
 	VkSparseMemoryBind.const_p.buffer("pBinds", "a pointer to array of ##VkSparseMemoryBind structures")
-}.nativeType
+}
 
 val VkSparseImageOpaqueMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageOpaqueMemoryBindInfo") {
 	documentation =
@@ -1290,7 +1290,7 @@ val VkSparseImageOpaqueMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageOpa
 	VkImage.member("image", "the {@code VkImage} object to be bound")
 	AutoSize("pBinds")..uint32_t.member("bindCount", "the number of {@code VkSparseMemoryBind} structures in the {@code pBinds} array")
 	VkSparseMemoryBind.const_p.buffer("pBinds", " a pointer to array of ##VkSparseMemoryBind structures")
-}.nativeType
+}
 
 val VkImageSubresource = struct(VULKAN_PACKAGE, "VkImageSubresource") {
 	documentation =
@@ -1306,7 +1306,7 @@ val VkImageSubresource = struct(VULKAN_PACKAGE, "VkImageSubresource") {
 	VkImageAspectFlags.member("aspectMask", "a {@code VkImageAspectFlags} selecting the image aspect").flagLinks("IMAGE_ASPECT")
 	uint32_t.member("mipLevel", "selects the mipmap level")
 	uint32_t.member("arrayLayer", "selects the array layer")
-}.nativeType
+}
 val VkImageSubresource_p = VkImageSubresource.p
 
 val VkOffset3D = struct(VULKAN_PACKAGE, "VkOffset3D") {
@@ -1321,7 +1321,7 @@ val VkOffset3D = struct(VULKAN_PACKAGE, "VkOffset3D") {
 	int32_t.member("x", "the x offset")
 	int32_t.member("y", "the y offset")
 	int32_t.member("z", "the z offset")
-}.nativeType
+}
 
 val VkSparseImageMemoryBind = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBind") {
     documentation =
@@ -1353,7 +1353,7 @@ val VkSparseImageMemoryBind = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBind") 
     )
     VkDeviceSize.member("memoryOffset", "an offset into {@code VkDeviceMemory} object. If {@code memory} is #NULL_HANDLE, this value is ignored.")
     VkSparseMemoryBindFlags.member("flags", "sparse memory binding flags").flagLinks("SPARSE_MEMORY_BIND")
-}.nativeType
+}
 
 val VkSparseImageMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBindInfo") {
 	documentation =
@@ -1369,7 +1369,7 @@ val VkSparseImageMemoryBindInfo = struct(VULKAN_PACKAGE, "VkSparseImageMemoryBin
 	VkImage.member("image", "the {@code VkImage} object to be bound")
 	AutoSize("pBinds")..uint32_t.member("bindCount", "the number of {@code VkSparseImageMemoryBind} structures in {@code pBinds} array")
 	VkSparseImageMemoryBind.const_p.buffer("pBinds", "a pointer to array of ##VkSparseImageMemoryBind structures")
-}.nativeType
+}
 
 val VkBindSparseInfo_p = struct_p(VULKAN_PACKAGE, "VkBindSparseInfo") {
 	documentation =
@@ -1604,7 +1604,7 @@ val VkComponentMapping = struct(VULKAN_PACKAGE, "VkComponentMapping") {
 	VkComponentSwizzle.member("g", "the value placed in the g component of the output vector")
 	VkComponentSwizzle.member("b", "the value placed in the b component of the output vector")
 	VkComponentSwizzle.member("a", "the value placed in the a component of the output vector")
-}.nativeType
+}
 
 val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") {
 	documentation =
@@ -1622,7 +1622,7 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 	uint32_t.member("levelCount", "the number of mipmap levels (starting from {@code baseMipLevel}) accessible to the view")
 	uint32_t.member("baseArrayLayer", "the first array layer accessible to the view")
 	uint32_t.member("layerCount", "the number of array layers (starting from {@code baseArrayLayer}) accessible to the view")
-}.nativeType
+}
 val VkImageSubresourceRange_p = VkImageSubresourceRange.p
 
 val VkImageViewCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
@@ -1697,7 +1697,7 @@ val VkSpecializationMapEntry = struct(VULKAN_PACKAGE, "VkSpecializationMapEntry"
 	uint32_t.member("constantID", "ID of the specialization constant in SPIR-V")
 	uint32_t.member("offset", "byte offset of the specialization constant value within the supplied data buffer")
 	size_t.member("size", "byte size of the specialization constant value within the supplied data buffer")
-}.nativeType
+}
 
 val VkSpecializationInfo = struct(VULKAN_PACKAGE, "VkSpecializationInfo") {
 	documentation =
@@ -1721,7 +1721,7 @@ val VkSpecializationInfo = struct(VULKAN_PACKAGE, "VkSpecializationInfo") {
 	)
 	AutoSize("pData", optional = true)..size_t.member("dataSize", "the byte size of the {@code pData} buffer")
 	const..void_p.member("pData", "contains the actual constant values to specialize with")
-}.nativeType
+}
 
 val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderStageCreateInfo") {
 	documentation =
@@ -1741,7 +1741,7 @@ val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderSt
 	VkShaderModule.member("module", "a {@code VkShaderModule} object that contains the shader for this stage")
 	const..charUTF8_p.member("pName", "a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage")
 	nullable..VkSpecializationInfo.const_p.member("pSpecializationInfo", "a pointer to ##VkSpecializationInfo, can be $NULL")
-}.nativeType
+}
 
 val VkVertexInputBindingDescription = struct(VULKAN_PACKAGE, "VkVertexInputBindingDescription") {
 	documentation =
@@ -1760,7 +1760,7 @@ val VkVertexInputBindingDescription = struct(VULKAN_PACKAGE, "VkVertexInputBindi
 		"inputRate",
 		"a {@code VkVertexInputRate} value that specifies whether vertex attribute addressing is a function of the vertex index or of the instance index"
 	).links("VERTEX_INPUT_RATE_\\w+")
-}.nativeType
+}
 
 val VkVertexInputAttributeDescription = struct(VULKAN_PACKAGE, "VkVertexInputAttributeDescription") {
 	documentation =
@@ -1777,7 +1777,7 @@ val VkVertexInputAttributeDescription = struct(VULKAN_PACKAGE, "VkVertexInputAtt
 	uint32_t.member("binding", "the binding number which this attribute takes its data from")
 	VkFormat.member("format", "the size and type of the vertex attribute data")
 	uint32_t.member("offset", "a byte offset of this attribute relative to the start of an element in the vertex input binding")
-}.nativeType
+}
 
 val VkPipelineVertexInputStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineVertexInputStateCreateInfo") {
 	documentation =
@@ -1803,7 +1803,7 @@ val VkPipelineVertexInputStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineVer
 		"the number of vertex attribute descriptions provided in {@code pVertexAttributeDescriptions}"
 	)
 	VkVertexInputAttributeDescription.const_p.buffer("pVertexAttributeDescriptions", "a pointer to an array of ##VkVertexInputAttributeDescription structures")
-}.nativeType
+}
 
 val VkPipelineInputAssemblyStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineInputAssemblyStateCreateInfo") {
 	documentation =
@@ -1821,7 +1821,7 @@ val VkPipelineInputAssemblyStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineI
 	VkPipelineInputAssemblyStateCreateFlags.member("flags", "reserved for future use")
 	VkPrimitiveTopology.member("topology", "a {@code VkPrimitiveTopology} defining the primitive topology").links("PRIMITIVE_TOPOLOGY_\\w+")
 	VkBool32.member("primitiveRestartEnable", "controls whether a special vertex index value is treated as restarting the assembly of primitives")
-}.nativeType
+}
 
 val VkPipelineTessellationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineTessellationStateCreateInfo") {
 	documentation =
@@ -1838,7 +1838,7 @@ val VkPipelineTessellationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineTe
 	pNext()
 	VkPipelineTessellationStateCreateFlags.member("flags", "reserved for future use")
 	uint32_t.member("patchControlPoints", "the number of control points per patch")
-}.nativeType
+}
 
 val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
 	documentation =
@@ -1857,7 +1857,7 @@ val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
 	float.member("height", "the viewport's height")
 	float.member("minDepth", "the minimum viewport depth")
 	float.member("maxDepth", "the maximum viewport depth")
-}.nativeType
+}
 
 val VkOffset2D = struct(VULKAN_PACKAGE, "VkOffset2D") {
 	documentation =
@@ -1870,7 +1870,7 @@ val VkOffset2D = struct(VULKAN_PACKAGE, "VkOffset2D") {
 
 	int32_t.member("x", "the x offset")
 	int32_t.member("y", "the y offset")
-}.nativeType
+}
 
 val VkExtent2D = struct(VULKAN_PACKAGE, "VkExtent2D") {
 	documentation =
@@ -1883,7 +1883,7 @@ val VkExtent2D = struct(VULKAN_PACKAGE, "VkExtent2D") {
 
 	uint32_t.member("width", "the width")
 	uint32_t.member("height", "the height")
-}.nativeType
+}
 
 val VkRect2D = struct(VULKAN_PACKAGE, "VkRect2D") {
 	documentation =
@@ -1896,7 +1896,7 @@ val VkRect2D = struct(VULKAN_PACKAGE, "VkRect2D") {
 
 	VkOffset2D.member("offset", "the region offset")
 	VkExtent2D.member("extent", "the region extent")
-}.nativeType
+}
 
 val VkPipelineViewportStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineViewportStateCreateInfo") {
 	documentation =
@@ -1925,7 +1925,7 @@ val VkPipelineViewportStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineViewpo
 		dynamic, this member is ignored.
 		"""
 	)
-}.nativeType
+}
 
 val VkPipelineRasterizationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineRasterizationStateCreateInfo") {
 	documentation =
@@ -1951,7 +1951,7 @@ val VkPipelineRasterizationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineR
 	float.member("depthBiasClamp", "the maximum (or minimum) depth bias of a fragment")
 	float.member("depthBiasSlopeFactor", "a scalar factor applied to a fragment’s slope in depth bias calculations")
 	float.member("lineWidth", "the width of rasterized line segments")
-}.nativeType
+}
 
 val VkPipelineMultisampleStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineMultisampleStateCreateInfo") {
 	documentation =
@@ -1980,7 +1980,7 @@ val VkPipelineMultisampleStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineMul
 		"controls whether a temporary coverage value is generated based on the alpha component of the fragment’s first color output"
 	)
 	VkBool32.member("alphaToOneEnable", "controls whether the alpha component of the fragment’s first color output is replaced with one")
-}.nativeType
+}
 
 val VkStencilOpState = struct(VULKAN_PACKAGE, "VkStencilOpState") {
 	documentation =
@@ -2000,7 +2000,7 @@ val VkStencilOpState = struct(VULKAN_PACKAGE, "VkStencilOpState") {
 	uint32_t.member("compareMask", "selects the bits of the unsigned integer stencil values participating in the stencil test")
 	uint32_t.member("writeMask", "selects the bits of the unsigned integer stencil values updated by the stencil test in the stencil framebuffer attachment")
 	uint32_t.member("reference", "an integer reference value that is used in the unsigned stencil comparison")
-}.nativeType
+}
 
 val VkPipelineDepthStencilStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDepthStencilStateCreateInfo") {
 	documentation =
@@ -2025,7 +2025,7 @@ val VkPipelineDepthStencilStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDe
 	VkStencilOpState.member("back", "control the parameters of the stencil test for back facing primitives")
 	float.member("minDepthBounds", "the minimum depths bounds test value")
 	float.member("maxDepthBounds", "the maximum depths bounds test value")
-}.nativeType
+}
 
 val VkPipelineColorBlendAttachmentState = struct(VULKAN_PACKAGE, "VkPipelineColorBlendAttachmentState") {
 	documentation =
@@ -2052,7 +2052,7 @@ val VkPipelineColorBlendAttachmentState = struct(VULKAN_PACKAGE, "VkPipelineColo
 	VkBlendOp.member("alphaBlendOp", "selects which blend operation is use to calculate the alpha values to write to the color attachment")
 	VkColorComponentFlags.member("colorWriteMask", "a bitmask selecting which of the R, G, B, and/or A components are enabled for writing")
 		.flagLinks("COLOR_COMPONENT")
-}.nativeType
+}
 
 val VkPipelineColorBlendStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineColorBlendStateCreateInfo") {
 	documentation =
@@ -2080,7 +2080,7 @@ val VkPipelineColorBlendStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineColo
 		"an array of four values used as the R, G, B, and A components of the blend constant that are used in blending, depending on the blend factor",
 		size = 4
 	)
-}.nativeType
+}
 
 val VkPipelineDynamicStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDynamicStateCreateInfo") {
 	documentation =
@@ -2104,7 +2104,7 @@ val VkPipelineDynamicStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDynamic
 		the pipeline state creation info
 		"""
 	)
-}.nativeType
+}
 
 val VkGraphicsPipelineCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkGraphicsPipelineCreateInfo") {
 	documentation =
@@ -2227,7 +2227,7 @@ val VkPushConstantRange = struct(VULKAN_PACKAGE, "VkPushConstantRange") {
 		.links("SHADER_STAGE_\\w+")
 	uint32_t.member("offset", "the start offset, in bytes, consumed by the range")
 	uint32_t.member("size", "the size, in bytes, consumed by the range")
-}.nativeType
+}
 
 val VkPipelineLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkPipelineLayoutCreateInfo") {
 	documentation =
@@ -2322,7 +2322,7 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
 		{@code descriptorType} is not one of these descriptor types, then {@code pImmutableSamplers} is ignored.
 		"""
 	)
-}.nativeType
+}
 
 val VkDescriptorSetLayoutCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorSetLayoutCreateInfo") {
 	documentation =
@@ -2355,7 +2355,7 @@ val VkDescriptorPoolSize = struct(VULKAN_PACKAGE, "VkDescriptorPoolSize") {
 
 	VkDescriptorType.member("type", "the type of descriptor").links("DESCRIPTOR_TYPE_\\w+")
 	uint32_t.member("descriptorCount", "the number of descriptors of that type to allocate")
-}.nativeType
+}
 
 val VkDescriptorPoolCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkDescriptorPoolCreateInfo") {
 	documentation =
@@ -2433,7 +2433,7 @@ val VkDescriptorImageInfo = struct(VULKAN_PACKAGE, "VkDescriptorImageInfo") {
 		#DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and #DESCRIPTOR_TYPE_INPUT_ATTACHMENT.
 		"""
 	).links("IMAGE_LAYOUT_\\w+")
-}.nativeType
+}
 
 val VkDescriptorBufferInfo = struct(VULKAN_PACKAGE, "VkDescriptorBufferInfo") {
 	documentation =
@@ -2453,7 +2453,7 @@ val VkDescriptorBufferInfo = struct(VULKAN_PACKAGE, "VkDescriptorBufferInfo") {
 		"range",
 		"the size in bytes that is used for this descriptor update, or #WHOLE_SIZE to use the range from offset to the end of the buffer"
 	)
-}.nativeType
+}
 
 val VkWriteDescriptorSet_p = struct_p(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
 	documentation =
@@ -2587,7 +2587,7 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
 		use a different layout in each subpass, if desired.
 		"""
 	)
-}.nativeType
+}
 
 val VkAttachmentReference = struct(VULKAN_PACKAGE, "VkAttachmentReference") {
 	documentation =
@@ -2614,7 +2614,7 @@ val VkAttachmentReference = struct(VULKAN_PACKAGE, "VkAttachmentReference") {
 		transitions as needed between subpasses to make each subpass use the requested layouts.
 		"""
 	).links("IMAGE_LAYOUT_\\w+")
-}.nativeType
+}
 
 val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
 	documentation =
@@ -2667,7 +2667,7 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
 		contents must be preserved throughout the subpass
 		"""
 	)
-}.nativeType
+}
 
 val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
 	documentation =
@@ -2687,7 +2687,7 @@ val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
 	VkAccessFlags.member("srcAccessMask", "a combination of {@code VkAccessFlagBits} values").flagLinks("ACCESS")
 	VkAccessFlags.member("dstAccessMask", "a combination of {@code VkAccessFlagBits} values")
 	VkDependencyFlags.member("dependencyFlags", "a combination of {@code VkDependencyFlagBits} values").flagLinks("DEPENDENCY")
-}.nativeType
+}
 
 val VkRenderPassCreateInfo_p = struct_p(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
 	documentation =
@@ -2818,7 +2818,7 @@ val VkCommandBufferInheritanceInfo = struct(VULKAN_PACKAGE, "VkCommandBufferInhe
 		executed
 		"""
 	).flagLinks("QUERY_PIPELINE_STATISTIC")
-}.nativeType
+}
 
 val VkCommandBufferBeginInfo_p = struct_p(VULKAN_PACKAGE, "VkCommandBufferBeginInfo") {
 	documentation =
@@ -2874,7 +2874,7 @@ val VkImageSubresourceLayers = struct(VULKAN_PACKAGE, "VkImageSubresourceLayers"
 	uint32_t.member("mipLevel", "the mipmap level")
 	uint32_t.member("baseArrayLayer", "the starting layer")
 	uint32_t.member("layerCount", "the number of layers")
-}.nativeType
+}
 
 val VkImageCopy_p = struct_p(VULKAN_PACKAGE, "VkImageCopy") {
 	documentation =
@@ -2951,7 +2951,7 @@ val VkClearColorValue = union(VULKAN_PACKAGE, "VkClearColorValue") {
 	float.array("float32", "used for floating point, unorm, snorm, uscaled, packed float, and sRGB formats", size = 4)
 	int32_t.array("int32", "used for signed integer formats", size = 4)
 	uint32_t.array("uint32", "used for unsigned integer formats", size = 4)
-}.nativeType
+}
 val VkClearColorValue_p = VkClearColorValue.p
 
 val VkClearDepthStencilValue = struct(VULKAN_PACKAGE, "VkClearDepthStencilValue") {
@@ -2979,7 +2979,7 @@ val VkClearDepthStencilValue = struct(VULKAN_PACKAGE, "VkClearDepthStencilValue"
 		taking the appropriate number of LSBs.
 		"""
 	)
-}.nativeType
+}
 val VkClearDepthStencilValue_p = VkClearDepthStencilValue.p
 
 val VkClearValue = union(VULKAN_PACKAGE, "VkClearValue") {
@@ -2995,7 +2995,7 @@ val VkClearValue = union(VULKAN_PACKAGE, "VkClearValue") {
 
 	VkClearColorValue.member("color", "the color image clear values to use when clearing a color image or attachment")
 	VkClearDepthStencilValue.member("depthStencil", "the depth and stencil clear values to use when clearing a depth/stencil image or attachment")
-}.nativeType
+}
 
 val VkClearAttachment_p = struct_p(VULKAN_PACKAGE, "VkClearAttachment") {
 	documentation =
@@ -3213,7 +3213,7 @@ val VkDispatchIndirectCommand = struct(VULKAN_PACKAGE, "VkDispatchIndirectComman
 	uint32_t.member("x", "the number of local workgroups to dispatch in the X dimension")
     uint32_t.member("y", "the number of local workgroups to dispatch in the Y dimension")
     uint32_t.member("z", "the number of local workgroups to dispatch in the Z dimension")
-}.nativeType
+}
 
 val VkDrawIndexedIndirectCommand = struct(VULKAN_PACKAGE, "VkDrawIndexedIndirectCommand", mutable = false) {
 	documentation =
@@ -3231,7 +3231,7 @@ val VkDrawIndexedIndirectCommand = struct(VULKAN_PACKAGE, "VkDrawIndexedIndirect
     uint32_t.member("firstIndex", "the base index within the index buffer")
     int32_t.member("vertexOffset", "the value added to the vertex index before indexing into the vertex buffer")
     uint32_t.member("firstInstance", "the instance ID of the first instance to draw")
-}.nativeType
+}
 
 val VkDrawIndirectCommand = struct(VULKAN_PACKAGE, "VkDrawIndirectCommand", mutable = false) {
 	documentation =
@@ -3248,4 +3248,4 @@ val VkDrawIndirectCommand = struct(VULKAN_PACKAGE, "VkDrawIndirectCommand", muta
     uint32_t.member("instanceCount", "the number of instances to draw")
     uint32_t.member("firstVertex", "the index of the first vertex to draw")
     uint32_t.member("firstInstance", "the instance ID of the first instance to draw")
-}.nativeType
+}

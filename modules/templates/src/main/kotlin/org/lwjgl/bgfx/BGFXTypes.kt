@@ -96,7 +96,7 @@ val bgfx_hmd_eye_t = struct(BGFX_PACKAGE, "BGFXHmdEye", nativeName = "bgfx_hmd_e
 	float.array("viewOffset", "eye view matrix translation adjustment", size = 3)
 	float.array("projection", "eye projection matrix", size = 16)
 	float.array("pixelsPerTanAngle", "", size = 2)
-}.nativeType
+}
 
 val bgfx_hmd_t_p = struct_p(BGFX_PACKAGE, "BGFXHmd", nativeName = "bgfx_hmd_t", mutable = false) {
 	documentation = "HMD info."
@@ -192,7 +192,7 @@ val bgfx_caps_gpu_t = struct(BGFX_PACKAGE, "BGFXCapsGPU", nativeName = "bgfx_cap
 
 	uint16_t.member("vendorId", "vendor id")
 	uint16_t.member("deviceId", "device id")
-}.nativeType
+}
 
 val bgfx_caps_limits_t = struct(BGFX_PACKAGE, "BGFXCapsLimits", nativeName = "bgfx_caps_limits_t", mutable = false) {
 	documentation = "Rendering limits."
@@ -215,7 +215,7 @@ val bgfx_caps_limits_t = struct(BGFX_PACKAGE, "BGFXCapsLimits", nativeName = "bg
 	uint32_t.member("maxDynamicVertexBuffers", "")
 	uint32_t.member("maxUniforms", "")
 	uint32_t.member("maxOcclusionQueries", "")
-}.nativeType
+}
 
 val bgfx_caps_t_p = struct_p(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t", mutable = false) {
 	javaImport("static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT")
@@ -377,7 +377,7 @@ val bgfx_callback_vtbl_t = struct(BGFX_PACKAGE, "BGFXCallbackVtbl", nativeName =
 	capture_begin.member("capture_begin", "the capture begin callback")
 	capture_end.member("capture_end", "the capture end callback")
 	capture_frame.member("capture_frame", "the capture framecallback")
-}.nativeType
+}
 
 val bgfx_callback_interface_t = struct(BGFX_PACKAGE, "BGFXCallbackInterface", nativeName = "bgfx_callback_interface_t") {
 	documentation =
@@ -390,7 +390,7 @@ val bgfx_callback_interface_t = struct(BGFX_PACKAGE, "BGFXCallbackInterface", na
 	"""
 
 	bgfx_callback_vtbl_t.const_p.member("vtbl", "the callback virtual table")
-}.nativeType
+}
 
 // Allocator interface
 
@@ -414,14 +414,14 @@ val bgfx_allocator_vtbl_t = struct(BGFX_PACKAGE, "BGFXAllocatorVtbl", nativeName
 	documentation = "Allocator virtual table"
 
 	realloc.member("realloc", "the reallocation callback")
-}.nativeType
+}
 
 val bgfx_allocator_interface_t = struct(BGFX_PACKAGE, "BGFXAllocatorInterface", nativeName = "bgfx_allocator_interface_t") {
 	documentation =
 		"Custom allocator. When custom allocator is not specified, library uses default CRT allocator. The library assumes custom allocator is thread safe."
 
 	bgfx_allocator_vtbl_t.const_p.member("vtbl", "the allocator virtual table")
-}.nativeType
+}
 
 // Platform API
 

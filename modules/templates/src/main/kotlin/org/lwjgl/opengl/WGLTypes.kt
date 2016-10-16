@@ -47,5 +47,5 @@ val GPU_DEVICE = struct(OPENGL_PACKAGE, "GPU_DEVICE", "wgl", mutable = false) {
 		the desktop, i.e. {@code DISPLAY_DEVICE_ATTACHED_TO_DESKTOP} is not set in the {@code Flags} field.
 		"""
 	)
-}.nativeType
+}
 val PGPU_DEVICE = GPU_DEVICE.p("PGPU_DEVICE")

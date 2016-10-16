@@ -40,7 +40,7 @@ val NVGcolor = struct(NANOVG_PACKAGE, "NVGColor", nativeName = "NVGcolor") {
 			float.member("a", "the color alpha component")
 		}
 	}
-}.nativeType
+}
 
 val NVGpaint = struct(NANOVG_PACKAGE, "NVGPaint", nativeName = "NVGpaint") {
 	documentation = "A NanoVG paint."
@@ -52,7 +52,7 @@ val NVGpaint = struct(NANOVG_PACKAGE, "NVGPaint", nativeName = "NVGpaint") {
 	NVGcolor.member("innerColor", "the inner color")
 	NVGcolor.member("outerColor", "the outer color")
 	int.member("image", "the image handle")
-}.nativeType
+}
 
 val charptr = "char".p // address, not data
 

@@ -83,7 +83,7 @@ val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 
 	FLOAT.member("x", "specifies the horizontal (x) coordinate of a point")
 	FLOAT.member("y", "specifies the vertical (y) coordinate of a point")
-}.nativeType
+}
 
 val GLYPHMETRICSFLOAT = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT", mutable = false) {
 	documentation = "Contains information about the placement and orientation of a glyph in a character cell."
@@ -93,7 +93,7 @@ val GLYPHMETRICSFLOAT = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT", mutable = f
 	POINTFLOAT.member("gmfptGlyphOrigin", "specifies the x and y coordinates of the upper-left corner of the smallest rectangle that completely encloses the glyph")
 	FLOAT.member("gmfCellIncX", "specifies the horizontal distance from the origin of the current character cell to the origin of the next character cell")
 	FLOAT.member("gmfCellIncY", "specifies the vertical distance from the origin of the current character cell to the origin of the next character cell")
-}.nativeType
+}
 val LPGLYPHMETRICSFLOAT = GLYPHMETRICSFLOAT.p("LPGLYPHMETRICSFLOAT")
 
 val POINT = struct(WINDOWS_PACKAGE, "POINT") {
@@ -101,7 +101,7 @@ val POINT = struct(WINDOWS_PACKAGE, "POINT") {
 
 	LONG.member("x", "the x-coordinate of the point")
 	LONG.member("y", "the y-coordinate of the point")
-}.nativeType
+}
 val LPPOINT = POINT.p("LPPOINT")
 
 val RECT = struct(WINDOWS_PACKAGE, "RECT") {
@@ -111,7 +111,7 @@ val RECT = struct(WINDOWS_PACKAGE, "RECT") {
 	LONG.member("top", "the y-coordinate of the upper-left corner of the rectangle")
 	LONG.member("right", "the x-coordinate of the lower-right corner of the rectangle")
 	LONG.member("bottom", "the y-coordinate of the lower-right corner of the rectangle")
-}.nativeType
+}
 val RECT_p = RECT.p
 val LPRECT = RECT.p("LPRECT")
 
@@ -127,7 +127,7 @@ val MSG = struct(WINDOWS_PACKAGE, "MSG") {
 	LPARAM.member("lParam", "additional information about the message. The exact meaning depends on the value of the message member.")
 	DWORD.member("time", "the time at which the message was posted")
 	POINT.member("pt", "the cursor position, in screen coordinates, when the message was posted.")
-}.nativeType
+}
 val LPMSG = MSG.p("LPMSG")
 val MSG_p = MSG.p
 
@@ -178,7 +178,7 @@ val PIXELFORMATDESCRIPTOR = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTOR") {
 		"""
 	)
 	DWORD.member("dwDamageMask", "Ignored. Earlier implementations of OpenGL used this member, but it is no longer used.")
-}.nativeType
+}
 val LPPIXELFORMATDESCRIPTOR = PIXELFORMATDESCRIPTOR.p("LPPIXELFORMATDESCRIPTOR")
 val PIXELFORMATDESCRIPTOR_p = PIXELFORMATDESCRIPTOR.p
 
@@ -313,7 +313,7 @@ val TOUCHINPUT = struct(WINDOWS_PACKAGE, "TOUCHINPUT", mutable = false) {
 		the User32#TOUCHINPUTMASKF_CONTACTAREA flag set.
 		"""
 	)
-}.nativeType
+}
 val PTOUCHINPUT = TOUCHINPUT.p("PTOUCHINPUT")
 
 val MONITORINFOEX = struct(WINDOWS_PACKAGE, "MONITORINFOEX", mutable = false) {
@@ -346,7 +346,7 @@ val MONITORINFOEX = struct(WINDOWS_PACKAGE, "MONITORINFOEX", mutable = false) {
 	)
 	DWORD.member("dwFlags", "the attributes of the display monitor. May be:<br>User32#MONITORINFOF_PRIMARY")
 	TCHAR.array("szDevice", "a string that specifies the device name of the monitor being used", 32)
-}.nativeType
+}
 val LPMONITORINFOEX = MONITORINFOEX.p("LPMONITORINFOEX")
 
 val POINTL = struct(WINDOWS_PACKAGE, "POINTL") {
@@ -354,7 +354,7 @@ val POINTL = struct(WINDOWS_PACKAGE, "POINTL") {
 
 	LONG.member("x", "the horizontal (x) coordinate of the point")
 	LONG.member("y", "the vertical (y) coordinate of the point.")
-}.nativeType
+}
 
 val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 	documentation = "Contains information about the initialization and environment of a printer or a display device."
@@ -505,5 +505,5 @@ val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE", mutable = false) 
 	DWORD.member("StateFlags", "device state flags")
 	TCHAR.array("DeviceID", "not used", size = 128)
 	TCHAR.array("DeviceKey", "reserved", size = 128)
-}.nativeType
+}
 val PDISPLAY_DEVICE = DISPLAY_DEVICE.p("PDISPLAY_DEVICE")

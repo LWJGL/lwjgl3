@@ -41,7 +41,7 @@ val objc_method_description = struct(MACOSX_PACKAGE, "ObjCMethodDescription", na
 
 	SEL.member("name", "the name of the method at runtime")
 	charUTF8_p.member("types", "the types of the method arguments")
-}.nativeType
+}
 val objc_method_description_p = objc_method_description.p
 
 val EnumerationMutationHandler = "EnumerationMutationHandler".callback(

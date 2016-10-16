@@ -120,28 +120,28 @@ val ovrColorf = struct(OVR_PACKAGE, "OVRColorf", nativeName = "ovrColorf") {
 	float.member("g", "the G component")
 	float.member("b", "the B component")
 	float.member("a", "the A component")
-}.nativeType
+}
 
 val ovrVector2i = struct(OVR_PACKAGE, "OVRVector2i", nativeName = "ovrVector2i") {
 	documentation = "A 2D vector with integer components."
 
 	int.member("x", "the vector x component")
 	int.member("y", "the vector y component")
-}.nativeType
+}
 
 val ovrSizei = struct(OVR_PACKAGE, "OVRSizei", nativeName = "ovrSizei") {
 	documentation = "A 2D size with integer components."
 
 	int.member("w", "the width")
 	int.member("h", "the height")
-}.nativeType
+}
 
 val ovrRecti = struct(OVR_PACKAGE, "OVRRecti", nativeName = "ovrRecti") {
 	documentation = "A 2D rectangle with a position and size. All components are integers."
 
 	ovrVector2i.member("Pos", "the rectangle position")
 	ovrSizei.member("Size", "the rectangle size")
-}.nativeType
+}
 
 val ovrQuatf = struct(OVR_PACKAGE, "OVRQuatf", nativeName = "ovrQuatf") {
 	documentation = "A quaternion rotation."
@@ -150,14 +150,14 @@ val ovrQuatf = struct(OVR_PACKAGE, "OVRQuatf", nativeName = "ovrQuatf") {
 	float.member("y", "the vector y component")
 	float.member("z", "the vector z component")
 	float.member("w", "the vector w component")
-}.nativeType
+}
 
 val ovrVector2f = struct(OVR_PACKAGE, "OVRVector2f", nativeName = "ovrVector2f") {
 	documentation = "A 2D vector with float components."
 
 	float.member("x", "the vector x component")
 	float.member("y", "the vector y component")
-}.nativeType
+}
 
 val ovrVector3f = struct(OVR_PACKAGE, "OVRVector3f", nativeName = "ovrVector3f") {
 	documentation = "A 3D vector with float components."
@@ -165,21 +165,21 @@ val ovrVector3f = struct(OVR_PACKAGE, "OVRVector3f", nativeName = "ovrVector3f")
 	float.member("x", "the vector x component")
 	float.member("y", "the vector y component")
 	float.member("z", "the vector z component")
-}.nativeType
+}
 val ovrVector3f_p = ovrVector3f.p
 
 val ovrMatrix4f = struct(OVR_PACKAGE, "OVRMatrix4f", nativeName = "ovrMatrix4f") {
 	documentation = "A 4x4 matrix with float components."
 
 	float.array("M", "the matrix components", 16)
-}.nativeType
+}
 
 val ovrPosef = struct(OVR_PACKAGE, "OVRPosef", nativeName = "ovrPosef") {
 	documentation = "Position and orientation together."
 
 	ovrQuatf.member("Orientation", "the pose orientation")
 	ovrVector3f.member("Position", "the pose position")
-}.nativeType
+}
 val ovrPosef_p = ovrPosef.p
 
 val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", nativeName = "ovrPoseStatef", mutable = false) {
@@ -197,7 +197,7 @@ val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", nativeName = "ovrPoseSt
 	ovrVector3f.member("AngularAcceleration", "angular acceleration in radians per second per second")
 	ovrVector3f.member("LinearAcceleration", "acceleration in meters per second per second")
 	double.member("TimeInSeconds", "absolute time that this pose refers to. See OVR#ovr_GetTimeInSeconds()")
-}.nativeType
+}
 
 val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
 	documentation =
@@ -210,7 +210,7 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
 	float.member("DownTan", "the tangent of the angle between the viewing vector and the bottom edge of the field of view")
 	float.member("LeftTan", "the tangent of the angle between the viewing vector and the left edge of the field of view")
 	float.member("RightTan", "the tangent of the angle between the viewing vector and the right edge of the field of view")
-}.nativeType
+}
 
 val ovrTrackingOrigin = "ovrTrackingOrigin".enumType
 
@@ -250,31 +250,31 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", nativeName = "ovrHmdDesc", mu
 	ovrSizei.member("Resolution", "resolution of the full HMD screen (both eyes) in pixels")
 	float.member("DisplayRefreshRate", "nominal refresh rate of the display in cycles per second at the time of HMD creation")
 	padding(4, "Pointer.BITS64")
-}.nativeType
+}
 
 val ovrTrackerDesc = struct(OVR_PACKAGE, "OVRTrackerDesc", nativeName = "ovrTrackerDesc", mutable = false) {
 	documentation = "Specifies the description of a single sensor."
-	
-    float.member("FrustumHFovInRadians", "sensor frustum horizontal field-of-view (if present).")
-    float.member("FrustumVFovInRadians", "sensor frustum vertical field-of-view (if present).")
-    float.member("FrustumNearZInMeters", "sensor frustum near Z (if present).")
-    float.member("FrustumFarZInMeters", "sensor frustum far Z (if present).")
-}.nativeType
+
+	float.member("FrustumHFovInRadians", "sensor frustum horizontal field-of-view (if present).")
+	float.member("FrustumVFovInRadians", "sensor frustum vertical field-of-view (if present).")
+	float.member("FrustumNearZInMeters", "sensor frustum near Z (if present).")
+	float.member("FrustumFarZInMeters", "sensor frustum far Z (if present).")
+}
 
 val ovrTrackerPose = struct(OVR_PACKAGE, "OVRTrackerPose", nativeName = "ovrTrackerPose", mutable = false) {
 	documentation = "Specifies the pose for a single sensor."
-	
-    unsigned_int.member("TrackerFlags", "{@code ovrTrackerFlags}.")
-    ovrPosef.member("Pose", "the sensor's pose. This pose includes sensor tilt (roll and pitch). For a leveled coordinate system use {@code LeveledPose}.")
-    ovrPosef.member(
-	    "LeveledPose",
-	    """t
+
+	unsigned_int.member("TrackerFlags", "{@code ovrTrackerFlags}.")
+	ovrPosef.member("Pose", "the sensor's pose. This pose includes sensor tilt (roll and pitch). For a leveled coordinate system use {@code LeveledPose}.")
+	ovrPosef.member(
+		"LeveledPose",
+		"""t
 	    the sensor's leveled pose, aligned with gravity. This value includes position and yaw of the sensor, but not roll and pitch. It can be used as a
 	    reference point to render real-world objects in the correct location.
 	    """
-    )
+	)
 	padding(4)
-}.nativeType
+}
 
 val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovrTrackingState", mutable = false) {
 	documentation = "Tracking state at a given absolute time (describes predicted HMD pose etc). Returned by OVR#ovr_GetTrackingState()."
@@ -315,7 +315,7 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovr
 		this value to be the identity pose and as such will point respective origin based on {@code ovrTrackingOrigin} requested when calling
 		#GetTrackingState().
 		""")
-}.nativeType
+}
 
 val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovrEyeRenderDesc", mutable = false) {
 	documentation =
@@ -329,7 +329,7 @@ val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovr
 	ovrRecti.member("DistortedViewport", "distortion viewport")
 	ovrVector2f.member("PixelsPerTanAngleAtCenter", "wow many display pixels will fit in tan(angle) = 1")
 	ovrVector3f.member("HmdToEyeOffset", "translation of each eye, in meters.")
-}.nativeType
+}
 
 val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc", nativeName = "ovrTimewarpProjectionDesc", mutable = false) {
 	documentation =
@@ -342,7 +342,7 @@ val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc",
 	float.member("Projection22", "projection matrix element [2][2]")
 	float.member("Projection23", "projection matrix element [2][3]")
 	float.member("Projection32", "projection matrix element [3][2]")
-}.nativeType
+}
 
 val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", nativeName = "ovrViewScaleDesc") {
 	javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
@@ -408,7 +408,7 @@ val ovrTouchHapticsDesc = struct(OVR_PACKAGE, "OVRTouchHapticsDesc", nativeName 
 	int.member("SubmitMinSamples", "Minimum number of samples that can be sent to Haptics through #SubmitControllerVibration()")
 	int.member("SubmitMaxSamples", "Maximum number of samples that can be sent to Haptics through #SubmitControllerVibration()")
 	int.member("SubmitOptimalSamples", "Optimal number of samples that can be sent to Haptics through #SubmitControllerVibration()")
-}.nativeType
+}
 
 val ovrHapticsBufferSubmitMode = "ovrHapticsBufferSubmitMode".enumType
 
@@ -504,7 +504,7 @@ val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLaye
 
 	ovrLayerType.member("Type", "described by {@code ovrLayerType}").links("LayerType_\\w+")
 	unsigned_int.member("Flags", "described by {@code ovrLayerFlags}")
-}.nativeType
+}
 val ovrLayerHeader_p = ovrLayerHeader.p
 val ovrLayerHeader_p_const_p = ovrLayerHeader_p.p_const_p
 
@@ -545,7 +545,7 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 		tracking latency.
 		"""
 	)
-}.nativeType
+}
 
 val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQuad") {
 	documentation =
@@ -574,129 +574,129 @@ val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQua
 		"""
 	)
 	ovrVector2f.member("QuadSize", "width and height (respectively) of the quad in meters")
-}.nativeType
+}
 
 val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerCompositorFrame", nativeName = "ovrPerfStatsPerCompositorFrame", mutable = false) {
 	documentation =
-	"""
+		"""
 	Contains the performance stats for a given SDK compositor frame.
 
 	All of the int fields can be reset via the #ResetPerfStats() call.
 	"""
-	
-    int.member(
-	    "HmdVsyncIndex",
-	    """
+
+	int.member(
+		"HmdVsyncIndex",
+		"""
 		Vsync Frame Index - increments with each HMD vertical synchronization signal (i.e. vsync or refresh rate).
 
 		If the compositor drops a frame, expect this value to increment more than 1 at a time.
 		"""
-    )
+	)
 
-    ///
-    /// Application stats
-    ///
+	///
+	/// Application stats
+	///
 
-    int.member("AppFrameIndex", "index that increments with each successive #SubmitFrame() call")
-    int.member("AppDroppedFrameCount", "if the app fails to call #SubmitFrame() on time, then expect this value to increment with each missed frame")
-    float.member(
-	    "AppMotionToPhotonLatency",
-	    """
+	int.member("AppFrameIndex", "index that increments with each successive #SubmitFrame() call")
+	int.member("AppDroppedFrameCount", "if the app fails to call #SubmitFrame() on time, then expect this value to increment with each missed frame")
+	float.member(
+		"AppMotionToPhotonLatency",
+		"""
 		motion-to-photon latency for the application
 
 		This value is calculated by either using the {@code SensorSampleTime} provided for the ##OVRLayerEyeFov or if that is not available, then the call to
 		#GetTrackingState() which has {@code latencyMarker} set to #True.
 		"""
-    )
-    float.member(
-	    "AppQueueAheadTime",
-	    """
+	)
+	float.member(
+		"AppQueueAheadTime",
+		"""
 		amount of queue-ahead in seconds provided to the app based on performance and overlap of CPU & GPU utilization
 
 		A value of 0.0 would mean the CPU & GPU workload is being completed in 1 frame's worth of time, while 11 ms (on the CV1) of queue ahead would indicate
 		that the app's CPU workload for the next frame is overlapping the app's GPU workload for the current frame.
 		"""
-    )
-    float.member(
-	    "AppCpuElapsedTime",
-	    """
+	)
+	float.member(
+		"AppCpuElapsedTime",
+		"""
 		amount of time in seconds spent on the CPU by the app's render-thread that calls #SubmitFrame().
 
 		Measured as elapsed time between from when app regains control from #SubmitFrame() to the next time the app calls #SubmitFrame().
 		"""
-    )
-    float.member(
-	    "AppGpuElapsedTime",
-	    """
+	)
+	float.member(
+		"AppGpuElapsedTime",
+		"""
 		amount of time in seconds spent on the GPU by the app.
 
 		Measured as elapsed time between each #SubmitFrame() call using GPU timing queries.
 		"""
-    )
+	)
 
-    ///
-    /// SDK Compositor stats
-    ///
+	///
+	/// SDK Compositor stats
+	///
 
-    int.member(
-	    "CompositorFrameIndex",
-	    """
+	int.member(
+		"CompositorFrameIndex",
+		"""
 		index that increments each time the SDK compositor completes a distortion and timewarp pass.
 
 		Since the compositor operates asynchronously, even if the app calls #SubmitFrame() too late, the compositor will kick off for each vsync.
 		"""
-    )
-    int.member(
-	    "CompositorDroppedFrameCount",
-	    """
+	)
+	int.member(
+		"CompositorDroppedFrameCount",
+		"""
 		increments each time the SDK compositor fails to complete in time.
 
 		This is not tied to the app's performance, but failure to complete can be tied to other factors such as OS capabilities, overall available hardware
 		cycles to execute the compositor in time and other factors outside of the app's control.
 		"""
-    )
-    float.member(
-	    "CompositorLatency",
-	    """
+	)
+	float.member(
+		"CompositorLatency",
+		"""
 		motion-to-photon latency of the SDK compositor in seconds.
 
 		This is the latency of timewarp which corrects the higher app latency as well as dropped app frames.
 		"""
-    )
-    float.member(
-	    "CompositorCpuElapsedTime",
-	    """
+	)
+	float.member(
+		"CompositorCpuElapsedTime",
+		"""
 		the amount of time in seconds spent on the CPU by the SDK compositor.
 
 		Unless the VR app is utilizing all of the CPU cores at their peak performance, there is a good chance the compositor CPU times will not affect the
 		app's CPU performance in a major way.
 		"""
-    )
-    float.member(
-	    "CompositorGpuElapsedTime",
-	    """
+	)
+	float.member(
+		"CompositorGpuElapsedTime",
+		"""
 		the amount of time in seconds spent on the GPU by the SDK compositor. Any time spent on the compositor will eat away from the available GPU time for
 		the app.
 		"""
-    )
-    float.member(
-	    "CompositorCpuStartToGpuEndElapsedTime",
-	    """
+	)
+	float.member(
+		"CompositorCpuStartToGpuEndElapsedTime",
+		"""
 		the amount of time in seconds spent from the point the CPU kicks off the compositor to the point in time the compositor completes the distortion &amp;
 		timewarp on the GPU.
 
 		In the event the GPU time is not available, expect this value to be -1.0f.
 		"""
-    )
-    float.member(
-	    "CompositorGpuEndToVsyncElapsedTime",
-	    """
+	)
+	float.member(
+		"CompositorGpuEndToVsyncElapsedTime",
+		"""
 		the amount of time in seconds left after the compositor is done on the GPU to the associated V-Sync time.
 
 		In the event the GPU time is not available, expect this value to be -1.0f.
 		"""
-    )
-}.nativeType
+	)
+}
 
 val ovrPerfStats_p = struct_p(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
 	javaImport("static org.lwjgl.ovr.OVR.ovrMaxProvidedFrameStats")
@@ -758,7 +758,7 @@ val ovrDetectResult = struct(OVR_PACKAGE, "OVRDetectResult", nativeName = "ovrDe
 		"""
 	)
 	padding(6)
-}.nativeType
+}
 
 fun config() {
 	packageInfo(
@@ -833,7 +833,7 @@ TexV  = P.y/P.z""")}
 			app tracking latency.
 			"""
 		)
-	}.nativeType
+	}
 
 	union(OVR_PACKAGE, "OVRLayerUnion", nativeName = "ovrLayer_Union") {
 		documentation = "Union that combines {@code ovrLayer} types in a way that allows them to be used in a polymorphic way."
