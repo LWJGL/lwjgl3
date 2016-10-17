@@ -16,7 +16,13 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	IntConstant(
 		"API version",
 
-		"API_VERSION".."24"
+		"API_VERSION".."26"
+	)
+
+	ShortConstant(
+		"Invalid handle",
+
+		"INVALID_HANDLE"..0xFFFF.s
 	)
 
 	val StateFlags = LongConstant(
@@ -710,7 +716,6 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"bgfx_fatal_t",
 
 		"FATAL_DEBUG_CHECK".enum,
-		"FATAL_MINIMUM_REQUIRED_SPECS".enum,
 		"FATAL_INVALID_SHADER".enum,
 		"FATAL_UNABLE_TO_INITIALIZE".enum,
 		"FATAL_UNABLE_TO_CREATE_TEXTURE".enum,
@@ -909,7 +914,8 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"get_supported_renderers",
 		"Returns supported backend API renderers.",
 
-		Check("BGFX_RENDERER_TYPE_COUNT")..bgfx_renderer_type_t.p.IN("_enum", "pointer to an array of #RENDERER_TYPE_COUNT renderer types"),
+		AutoSize("_enum")..MapToInt..uint8_t.IN("_max", "maximum number of elements in {@code _enum} array"),
+		bgfx_renderer_type_t.p.IN("_enum", "array where supported renderers will be written"),
 
 		returnDoc = "the number of renderers written to {@code _enum}"
 	)
@@ -1849,7 +1855,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 		Remarks:
 		${ol(
-			"Use BGFXUtil##BGFX_STATE_ALPHA_REF(), BGFXUtil##BGFX_STATE_POINT_SIZE() and BGFXUtil##BGFX_STATE_BLEND_FUNC() macros to setup more complex states.",
+			"Use ##BGFX_STATE_ALPHA_REF(), ##BGFX_STATE_POINT_SIZE() and ##BGFX_STATE_BLEND_FUNC() macros to setup more complex states.",
 			"#STATE_BLEND_EQUATION_ADD is set when no other blend equation is specified."
 		)}
 		""",
@@ -2272,5 +2278,137 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Requests screen shot.",
 
 		const..charASCII_p.IN("_filePath", "will be passed to ##BGFXScreenShotCallback")
+	)
+
+	macro(expression = "(_ref << BGFX_STATE_ALPHA_REF_SHIFT) & BGFX_STATE_ALPHA_REF_MASK")..uint64_t(
+		"BGFX_STATE_ALPHA_REF", "",
+		uint64_t.IN("_ref", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "(_size << BGFX_STATE_POINT_SIZE_SHIFT) & BGFX_STATE_POINT_SIZE_MASK")..uint64_t(
+		"BGFX_STATE_POINT_SIZE", "",
+		uint64_t.IN("_size", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "((_srcRGB | (_dstRGB << 4))) | ((_srcA | (_dstA << 4)) << 8)")..uint64_t(
+		"BGFX_STATE_BLEND_FUNC_SEPARATE", "",
+		uint64_t.IN("_srcRGB", ""),
+		uint64_t.IN("_dstRGB", ""),
+		uint64_t.IN("_srcA", ""),
+		uint64_t.IN("_dstA", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "_rgb | (_a << 3)")..uint64_t(
+		"BGFX_STATE_BLEND_EQUATION_SEPARATE", "",
+		uint64_t.IN("_rgb", ""),
+		uint64_t.IN("_a", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "BGFX_STATE_BLEND_FUNC_SEPARATE(_src, _dst, _src, _dst)")..uint64_t(
+		"BGFX_STATE_BLEND_FUNC", "",
+		uint64_t.IN("_src", ""),
+		uint64_t.IN("_dst", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "BGFX_STATE_BLEND_EQUATION_SEPARATE(_equation, _equation)")..uint64_t(
+		"BGFX_STATE_BLEND_EQUATION", "",
+		uint64_t.IN("_equation", ""),
+		noPrefix = true
+	)
+
+	LongConstant(
+		"Blend state macros",
+
+		"STATE_BLEND_ADD".."BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_ONE, BGFX_STATE_BLEND_ONE)",
+		"STATE_BLEND_ALPHA".."BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_SRC_ALPHA, BGFX_STATE_BLEND_INV_SRC_ALPHA)",
+		"STATE_BLEND_DARKEN".."BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_ONE, BGFX_STATE_BLEND_ONE) | BGFX_STATE_BLEND_EQUATION(BGFX_STATE_BLEND_EQUATION_MIN)",
+		"STATE_BLEND_LIGHTEN".."BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_ONE, BGFX_STATE_BLEND_ONE) | BGFX_STATE_BLEND_EQUATION(BGFX_STATE_BLEND_EQUATION_MAX)",
+		"STATE_BLEND_MULTIPLY".."BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_DST_COLOR, BGFX_STATE_BLEND_ZERO)",
+		"STATE_BLEND_NORMAL".."BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_ONE, BGFX_STATE_BLEND_INV_SRC_ALPHA)",
+		"STATE_BLEND_SCREEN".."BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_ONE, BGFX_STATE_BLEND_INV_SRC_COLOR)",
+		"STATE_BLEND_LINEAR_BURN".."BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_DST_COLOR, BGFX_STATE_BLEND_INV_DST_COLOR) | BGFX_STATE_BLEND_EQUATION(BGFX_STATE_BLEND_EQUATION_SUB)"
+	)
+
+	macro(expression = "(_src >> BGFX_STATE_BLEND_SHIFT) | ((_dst >> BGFX_STATE_BLEND_SHIFT) << 4)")..uint64_t(
+		"BGFX_STATE_BLEND_FUNC_RT_x", "",
+		uint64_t.IN("_src", ""),
+		uint64_t.IN("_dst", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "BGFX_STATE_BLEND_FUNC_RT_x(_src, _dst) | ((_equation >> BGFX_STATE_BLEND_EQUATION_SHIFT) << 8)")..uint64_t(
+		"BGFX_STATE_BLEND_FUNC_RT_xE", "",
+		uint64_t.IN("_src", ""),
+		uint64_t.IN("_dst", ""),
+		uint64_t.IN("_equation", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "BGFX_STATE_BLEND_FUNC_RT_x(_src, _dst) << 0")..uint64_t(
+		"BGFX_STATE_BLEND_FUNC_RT_1", "",
+		uint64_t.IN("_src", ""),
+		uint64_t.IN("_dst", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "BGFX_STATE_BLEND_FUNC_RT_x(_src, _dst) << 11")..uint64_t(
+		"BGFX_STATE_BLEND_FUNC_RT_2", "",
+		uint64_t.IN("_src", ""),
+		uint64_t.IN("_dst", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "BGFX_STATE_BLEND_FUNC_RT_x(_src, _dst) << 22")..uint64_t(
+		"BGFX_STATE_BLEND_FUNC_RT_3", "",
+		uint64_t.IN("_src", ""),
+		uint64_t.IN("_dst", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "BGFX_STATE_BLEND_FUNC_RT_xE(_src, _dst, _equation) << 0")..uint64_t(
+		"BGFX_STATE_BLEND_FUNC_RT_1E", "",
+		uint64_t.IN("_src", ""),
+		uint64_t.IN("_dst", ""),
+		uint64_t.IN("_equation", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "BGFX_STATE_BLEND_FUNC_RT_xE(_src, _dst, _equation) << 11")..uint64_t(
+		"BGFX_STATE_BLEND_FUNC_RT_2E", "",
+		uint64_t.IN("_src", ""),
+		uint64_t.IN("_dst", ""),
+		uint64_t.IN("_equation", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "BGFX_STATE_BLEND_FUNC_RT_xE(_src, _dst, _equation) << 22")..uint64_t(
+		"BGFX_STATE_BLEND_FUNC_RT_3E", "",
+		uint64_t.IN("_src", ""),
+		uint64_t.IN("_dst", ""),
+		uint64_t.IN("_equation", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "(_ref << BGFX_STENCIL_FUNC_REF_SHIFT) & BGFX_STENCIL_FUNC_REF_MASK")..uint32_t(
+		"BGFX_STENCIL_FUNC_REF", "",
+		uint32_t.IN("_ref", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "(_mask << BGFX_STENCIL_FUNC_RMASK_SHIFT) & BGFX_STENCIL_FUNC_RMASK_MASK")..uint32_t(
+		"BGFX_STENCIL_FUNC_RMASK", "",
+		uint32_t.IN("_mask", ""),
+		noPrefix = true
+	)
+
+	macro(expression = "(_index << BGFX_TEXTURE_BORDER_COLOR_SHIFT) & BGFX_TEXTURE_BORDER_COLOR_MASK")..uint32_t(
+		"BGFX_TEXTURE_BORDER_COLOR", "",
+		uint32_t.IN("_index", ""),
+		noPrefix = true
 	)
 }

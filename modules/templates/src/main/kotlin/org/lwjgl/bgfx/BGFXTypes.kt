@@ -190,7 +190,7 @@ val bgfx_attachment_t_p = struct(BGFX_PACKAGE, "BGFXAttachment", nativeName = "b
 val bgfx_caps_gpu_t = struct(BGFX_PACKAGE, "BGFXCapsGPU", nativeName = "bgfx_caps_gpu_t", mutable = false) {
 	documentation = "GPU info."
 
-	uint16_t.member("vendorId", "vendor id")
+	uint16_t.member("vendorId", "vendor PCI id").links("PCI_ID_\\w+")
 	uint16_t.member("deviceId", "device id")
 }
 
@@ -198,23 +198,23 @@ val bgfx_caps_limits_t = struct(BGFX_PACKAGE, "BGFXCapsLimits", nativeName = "bg
 	documentation = "Rendering limits."
 
 	uint32_t.member("maxDrawCalls", "maximum draw calls")
-	uint32_t.member("maxBlits", "")
+	uint32_t.member("maxBlits", "maximum number of blit calls")
 	uint32_t.member("maxTextureSize", "maximum texture size")
 	uint32_t.member("maxViews", "maximum views")
-	uint32_t.member("maxFrameBuffers", "")
+	uint32_t.member("maxFrameBuffers", "maximum number of frame buffer handles")
 	uint32_t.member("maxFBAttachments", "maximum frame buffer attachments")
-	uint32_t.member("maxPrograms", "")
-	uint32_t.member("maxShaders", "")
-	uint32_t.member("maxTextures", "")
-	uint32_t.member("maxTextureSamplers", "")
-	uint32_t.member("maxVertexDecls", "")
-	uint32_t.member("maxVertexStreams", "")
-	uint32_t.member("maxIndexBuffers", "")
-	uint32_t.member("maxVertexBuffers", "")
-	uint32_t.member("maxDynamicIndexBuffers", "")
-	uint32_t.member("maxDynamicVertexBuffers", "")
-	uint32_t.member("maxUniforms", "")
-	uint32_t.member("maxOcclusionQueries", "")
+	uint32_t.member("maxPrograms", "maximum number of program handles")
+	uint32_t.member("maxShaders", "maximum number of shader handles")
+	uint32_t.member("maxTextures", "maximum number of texture handles")
+	uint32_t.member("maxTextureSamplers", "maximum number of texture samplers")
+	uint32_t.member("maxVertexDecls", "maximum number of vertex format declarations")
+	uint32_t.member("maxVertexStreams", "maximum number of vertex streams")
+	uint32_t.member("maxIndexBuffers", "maximum number of index buffer handles")
+	uint32_t.member("maxVertexBuffers", "maximum number of vertex buffer handles")
+	uint32_t.member("maxDynamicIndexBuffers", "maximum number of dynamic index buffer handles")
+	uint32_t.member("maxDynamicVertexBuffers", "maximum number of vertex buffer handles")
+	uint32_t.member("maxUniforms", "maximum number of uniform handles")
+	uint32_t.member("maxOcclusionQueries", "maximum number of occlusion query handles")
 }
 
 val bgfx_caps_t_p = struct(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t", mutable = false) {
@@ -225,7 +225,7 @@ val bgfx_caps_t_p = struct(BGFX_PACKAGE, "BGFXCaps", nativeName = "bgfx_caps_t",
 
 	uint64_t.member("supported", "supported functionality").links("CAPS_(?!FORMAT_)\\w+", LinkMode.BITFIELD)
 
-	uint16_t.member("vendorId", "selected GPU vendor id")
+	uint16_t.member("vendorId", "selected GPU vendor PCI id").links("PCI_ID_\\w+")
 	uint16_t.member("deviceId", "selected GPU device id")
 	bool.member("homogeneousDepth", "true when NDC depth is in [-1, 1] range")
 	bool.member("originBottomLeft", "true when NDC origin is at bottom left")
@@ -435,6 +435,7 @@ val bgfx_platform_data_t_p = struct(BGFX_PACKAGE, "BGFXPlatformData", nativeName
 	nullable..voidptr.member("context", "GL context, or D3D device")
 	nullable..voidptr.member("backBuffer", "GL backbuffer, or D3D render target view")
 	nullable..voidptr.member("backBufferDS", "Backbuffer depth/stencil")
+	nullable..voidptr.member("session", "{@code ovrSession}, for Oculus SDK")
 }.p
 
 val bgfx_internal_data_t_p = struct(BGFX_PACKAGE, "BGFXInternalData", nativeName = "bgfx_internal_data_t", mutable = false)  {

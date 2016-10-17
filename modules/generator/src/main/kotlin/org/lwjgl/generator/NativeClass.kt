@@ -111,7 +111,7 @@ abstract class SimpleBinding(
 	}
 
 	protected fun PrintWriter.generateFunctionsClass(nativeClass: NativeClass) {
-		val bindingFunctions = nativeClass.functions.filter { !it.hasExplicitFunctionAddress }
+		val bindingFunctions = nativeClass.functions.filter { !it.hasExplicitFunctionAddress && !it.has(Macro) }
 		if ( bindingFunctions.isEmpty() )
 			return
 
