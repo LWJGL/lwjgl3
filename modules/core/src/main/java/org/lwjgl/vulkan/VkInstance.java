@@ -9,7 +9,7 @@ import org.lwjgl.system.Checks;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.vulkan.VKUtil.*;
+import static org.lwjgl.vulkan.VK10.*;
 
 /** Wraps a Vulkan instance handle. */
 public class VkInstance extends DispatchableHandle {
