@@ -15,31 +15,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 	IntConstant(
 		"""
-		The Vulkan version number is used in several places in the API. In each such use, the API major version number, minor version number, and patch version
-		number are packed into a 32-bit integer as follows:
-		${ul(
-			"The major version number is a 10-bit integer packed into bits 31-22.",
-			"The minor version number is a 10-bit integer packed into bits 21-12.",
-			"The patch version number is a 12-bit integer packed into bits 11-0."
-		)}
-		Differences in any of the Vulkan version numbers indicates a change to the API in some way, with each part of the version number indicating a different
-		scope of changes.
+		The API version number for Vulkan 1.0.
 
-		A difference in patch version numbers indicates that some usually small aspect of the specification or header has been modified, typically to fix a
-		bug, and $may have an impact on the behavior of existing functionality. Differences in this version number $should not affect either full compatibility
-		or backwards compatibility between two versions, or add additional interfaces to the API.
-
-		A difference in minor version numbers indicates that some amount of new functionality has been added. This will usually include new interfaces in the
-		header, and $may also include behavior changes and bug fixes. Functionality $may be deprecated in a minor revision, but will not be removed. When a new
-		minor version is introduced, the patch version is reset to 0, and each minor revision maintains its own set of patch versions. Differences in this
-		version $should not affect backwards compatibility, but will affect full compatibility.
-
-		A difference in major version numbers indicates a large set of changes to the API, potentially including new functionality and header interfaces,
-		behavioral changes, removal of deprecated features, modification or outright replacement of any feature, and is thus very likely to break any and all
-		compatibility. Differences in this version will typically require significant modification to an application in order for it to function.
+		The patch version number in this macro will always be zero. The supported patch version for a physical device $can be queried with
+		#GetPhysicalDeviceProperties().
 		""",
 
-		"API_VERSION_1_0".."VKUtil.VK_MAKE_VERSION(1, 0, 0)"
+		"API_VERSION_1_0".."VK_MAKE_VERSION(1, 0, 0)"
 	)
 
 	LongConstant(
@@ -1770,6 +1752,48 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		)
 	).javaDocLinks
 
+	macro(expression = "(major << 22) | (minor << 12) | patch")..uint32_t(
+		"VK_MAKE_VERSION",
+		"""
+		Constructs an API version number.
+
+		This macro $can be used when constructing the ##VkApplicationInfo{@code ::pname:apiVersion} parameter passed to #CreateInstance().
+		""",
+
+		uint32_t.IN("major", "the major version number"),
+		uint32_t.IN("minor", "the minor version number"),
+		uint32_t.IN("patch", "the patch version number"),
+
+		noPrefix = true
+	)
+
+	macro(expression = "version >> 22")..uint32_t(
+		"VK_VERSION_MAJOR",
+		"Extracts the API major version number from a packed version number.",
+
+		uint32_t.IN("version", "the Vulkan API version"),
+
+		noPrefix = true
+	)
+
+	macro(expression = "(version >> 12) & 0x3FF")..uint32_t(
+		"VK_VERSION_MINOR",
+		"Extracts the API minor version number from a packed version number.",
+
+		uint32_t.IN("version", "the Vulkan API version"),
+
+		noPrefix = true
+	)
+
+	macro(expression = "version & 0xFFF")..uint32_t(
+		"VK_VERSION_PATCH",
+		"Extracts the API patch version number from a packed version number.",
+
+		uint32_t.IN("version", "the Vulkan API version"),
+
+		noPrefix = true
+	)
+
 	GlobalCommand..VkResult(
 		"CreateInstance",
 		"""
@@ -2219,7 +2243,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		{@code vkQueueSubmit} is a queue submission command, with each batch defined by an element of {@code pSubmits} as an instance of the ##VkSubmitInfo
 		structure.
-		
+
 		${note(
 			"""
 			Submission can be a high overhead operation, and applications $should attempt to batch work together into as few calls to {@code vkQueueSubmit} as
@@ -2643,7 +2667,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 
 		A fence’s status is always either signaled or unsignaled. The host $can poll the status of a single fence, or wait for any or all of a group of fences
 		to become signaled.
-		
+
 		${ValidityProtos.vkCreateFence}
 		""",
 
@@ -2657,7 +2681,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		"DestroyFence",
 		"""
 		Destroys a fence object.
-		
+
 		${ValidityProtos.vkDestroyFence}
 		""",
 
@@ -2672,7 +2696,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		Resets the status of one or more fences to the unsignaled state.
 
 		If a fence is already in the unsignaled state, then resetting it has no effect.
-		
+
 		${ValidityProtos.vkResetFences}
 		""",
 
@@ -2703,7 +2727,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		"WaitForFences",
 		"""
 		Causes the host to wait until any one or all of a group of fences is signaled.
-		
+
 		If the condition is satisfied when {@code vkWaitForFences} is called, then {@code vkWaitForFences} returns immediately. If the condition is not
 		satisfied at the time {@code vkWaitForFences} is called, then {@code vkWaitForFences} will block and wait up to timeout nanoseconds for the condition
 		to become satisfied.
@@ -2751,7 +2775,7 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		Semaphores are used to coordinate queue operations both within a queue and
 between different queues. A semaphore's status is always either _signaled_
 or _unsignaled_.
-		
+
 		${ValidityProtos.vkCreateSemaphore}
 
 		Semaphores $can be signaled by including them in a batch as part of a queue submission command, defining a queue operation to signal that semaphore.
@@ -2819,7 +2843,7 @@ or _unsignaled_.
 		"DestroySemaphore",
 		"""
 		Destroys a semaphore object.
-		
+
 		${ValidityProtos.vkDestroySemaphore}
 		""",
 
@@ -2832,12 +2856,12 @@ or _unsignaled_.
 		"CreateEvent",
 		"""
 		Creates a new event object.
-		
+
 		Events represent a fine-grained synchronization primitive that $can be used to gauge progress through a sequence of commands executed on a queue by
 		Vulkan. An event is initially in the unsignaled state. It $can be signaled by a device, using commands inserted into the command buffer, or by the
 		host. It $can also be reset to the unsignaled state by a device or the host. The host $can query the state of an event. A device $can wait for one or
 		more events to become signaled.
-		
+
 		${ValidityProtos.vkCreateEvent}
 		""",
 
@@ -2854,7 +2878,7 @@ or _unsignaled_.
 		"DestroyEvent",
 		"""
 		Destroys an event object.
-		
+
 		${ValidityProtos.vkDestroyEvent}
 		""",
 
@@ -2888,7 +2912,7 @@ or _unsignaled_.
 		"SetEvent",
 		"""
 		Sets the state of an event to signaled from the host.
-		
+
 		${ValidityProtos.vkSetEvent}
 		""",
 
@@ -2900,7 +2924,7 @@ or _unsignaled_.
 		"ResetEvent",
 		"""
 		Sets the state of an event to unsignaled from the host.
-		
+
 		${ValidityProtos.vkResetEvent}
 		""",
 
@@ -2912,9 +2936,9 @@ or _unsignaled_.
 		"CreateQueryPool",
 		"""
 		Creates a new query pool object.
-		
+
 		Queries are managed using query pool objects. Each query pool is a collection of a specific number of queries of a particular type.
-		
+
 		${ValidityProtos.vkCreateQueryPool}
 		""",
 
@@ -2931,7 +2955,7 @@ or _unsignaled_.
 		"DestroyQueryPool",
 		"""
 		Destroys a query pool object.
-		
+
 		${ValidityProtos.vkDestroyQueryPool}
 		""",
 
@@ -3012,10 +3036,10 @@ or _unsignaled_.
 		"CreateBuffer",
 		"""
 		Creates a new buffer object.
-		
+
 		Buffers represent linear arrays of data which are used for various purposes by binding them to the graphics pipeline via descriptor sets or via certain
 		commands, or by directly specifying them as parameters to certain commands.
-		
+
 		${ValidityProtos.vkCreateBuffer}
 		""",
 
@@ -3032,7 +3056,7 @@ or _unsignaled_.
 		"DestroyBuffer",
 		"""
 		Destroys a buffer object.
-		
+
 		${ValidityProtos.vkDestroyBuffer}
 		""",
 
@@ -3045,7 +3069,7 @@ or _unsignaled_.
 		"CreateBufferView",
 		"""
 		Creates a new buffer view object.
-		
+
 		A buffer view represents a contiguous range of a buffer and a specific format to be used to interpret the data. Buffer views are used to enable shaders
 		to access buffer contents interpreted as formatted data. In order to create a valid buffer view, the buffer $must have been created with at least one of
 		the following usage flags:
@@ -3070,7 +3094,7 @@ or _unsignaled_.
 		"DestroyBufferView",
 		"""
 		Destroys a buffer view object.
-		
+
 		${ValidityProtos.vkDestroyBufferView}
 		""",
 
@@ -3103,7 +3127,7 @@ or _unsignaled_.
 		"DestroyImage",
 		"""
 		Destroys an image object.
-		
+
 		${ValidityProtos.vkDestroyImage}
 		""",
 
@@ -3116,7 +3140,7 @@ or _unsignaled_.
 		"GetImageSubresourceLayout",
 		"""
 		Queries the layout of an image subresource (mipLevel/arrayLayer) of an image created with linear tiling.
-		
+
 		${ValidityProtos.vkGetImageSubresourceLayout}
 
 		{@code vkGetImageSubresourceLayout} is invariant for the lifetime of a single image.
@@ -3132,13 +3156,13 @@ or _unsignaled_.
 		"CreateImageView",
 		"""
 		Creates an image view from an existing image.
-		
+
 		${ValidityProtos.vkCreateImageView}
 		""",
 
 		VkDevice.IN("device", "the logical device that creates the image view"),
 		const..VkImageViewCreateInfo_p.IN(
-			"pCreateInfo", 
+			"pCreateInfo",
 			"a pointer to an instance of the ##VkImageViewCreateInfo structure containing parameters to be used to create the image view"
 		),
 		pAllocator,
@@ -3162,11 +3186,11 @@ or _unsignaled_.
 		"CreateShaderModule",
 		"""
 		Creates a new shader module object.
-		
+
 		Shader modules contain shader code and one or more entry points. Shaders are selected from a shader module by specifying an entry point as part of
 		pipeline creation. The stages of a pipeline $can use shaders that come from different modules. The shader code defining a shader module $must be in the
 		SPIR-V format.
-		
+
 		${ValidityProtos.vkCreateShaderModule}
 		""",
 
@@ -3180,7 +3204,7 @@ or _unsignaled_.
 		"DestroyShaderModule",
 		"""
 		Destroys a shader module object.
-		
+
 		${ValidityProtos.vkDestroyShaderModule}
 		""",
 

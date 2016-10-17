@@ -16,7 +16,7 @@ import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.vulkan.VKUtil.*;
+import static org.lwjgl.vulkan.VK10.*;
 
 /**
  * This class loads the Vulkan library into the JVM process.

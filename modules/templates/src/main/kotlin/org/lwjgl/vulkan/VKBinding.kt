@@ -55,7 +55,9 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		println("\n\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
 		print("\t\treturn checkFunctions(")
-		nativeClass.printPointers(this, { "caps.${it.name}" })
+		nativeClass.printPointers(this, { "caps.${it.name}" }) {
+			!it.has(Macro)
+		}
 		println(");")
 		println("\t}")
 	}

@@ -554,22 +554,22 @@ class NativeClassFunction(
 	internal fun generateMethods(writer: PrintWriter) {
 		val simpleFunction = isSimpleFunction
 
-		val macro = has(Macro) && this[Macro].constant
+		val constantMacro = has(Macro) && this[Macro].constant
 
 		if ( hasCustomJNI )
-			writer.generateNativeMethod(simpleFunction, macro)
+			writer.generateNativeMethod(simpleFunction, constantMacro)
 
 		if ( !simpleFunction ) {
 			if ( hasUnsafeMethod )
-				writer.generateUnsafeMethod(macro)
+				writer.generateUnsafeMethod(constantMacro)
 
 			if ( returns.nativeType !is CharSequenceType && parameters.none { it has AutoSize && it.paramType == IN } )
-				writer.generateJavaMethod(macro)
+				writer.generateJavaMethod(constantMacro)
 
 			writer.generateAlternativeMethods()
 		}
 
-		if ( macro && !has(private) ) {
+		if ( constantMacro && !has(private) ) {
 			writer.println()
 			writer.printDocumentation { true }
 			writer.println("\t${accessModifier}static final ${if (returns.nativeType is CharSequenceType) "String" else returnsJavaMethodType} $name = $name();")
@@ -578,15 +578,15 @@ class NativeClassFunction(
 
 	// --[ JAVA METHODS ]--
 
-	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean, macro: Boolean) {
+	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean, constantMacro: Boolean) {
 		println()
 
-		if ( !macro ) {
+		if (!constantMacro) {
 			val doc = documentation { true }
 			if (doc.isNotEmpty())
 				println(doc)
 		}
-		print("\t${if ( macro ) "private " else accessModifier}static native $returnsNativeMethodType ")
+		print("\t${if (constantMacro) "private " else accessModifier}static native $returnsNativeMethodType ")
 		if ( !nativeOnly ) print('n')
 		print(nativeName)
 		print("(")
@@ -607,12 +607,12 @@ class NativeClassFunction(
 		println(");")
 	}
 
-	private fun PrintWriter.generateUnsafeMethod(macro: Boolean) {
+	private fun PrintWriter.generateUnsafeMethod(constantMacro: Boolean) {
 		println()
 
-		if ( !macro )
+		if (!constantMacro)
 			printDocumentation { true }
-		print("\t${if ( macro ) "private " else accessModifier}static $returnsNativeMethodType n$name(")
+		print("\t${if (constantMacro) "private " else accessModifier}static $returnsNativeMethodType n$name(")
 		printList(getNativeParams()) {
 			if ( it.isFunctionProvider )
 				it.asJavaMethodParam
@@ -629,7 +629,7 @@ class NativeClassFunction(
 		val binding = nativeClass.binding!!
 
 		// Get function address
-		if ( !hasExplicitFunctionAddress )
+		if ( !hasExplicitFunctionAddress && !constantMacro)
 			binding.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Basic checks
@@ -707,19 +707,19 @@ class NativeClassFunction(
 			println(doc)
 	}
 
-	private fun PrintWriter.generateJavaMethod(macro: Boolean) {
+	private fun PrintWriter.generateJavaMethod(constantMacro: Boolean) {
 		println()
 
 		// JavaDoc
 
-		if ( !macro )
+		if (!constantMacro)
 			(parameters.count { it.isAutoSizeResultOut } == 1).let { hideAutoSizeResult ->
 				printDocumentation { !(hideAutoSizeResult && it.isAutoSizeResultOut) }
 			}
 
 		// Method signature
 
-		print("\t${if ( macro ) "private " else accessModifier}static $returnsJavaMethodType $name(")
+		print("\t${if (constantMacro) "private " else accessModifier}static $returnsJavaMethodType $name(")
 		printList(getNativeParams()) {
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
@@ -738,7 +738,7 @@ class NativeClassFunction(
 
 		// Get function address
 
-		if ( nativeClass.binding != null && !hasUnsafeMethod && !hasExplicitFunctionAddress )
+		if ( nativeClass.binding != null && !hasUnsafeMethod && !hasExplicitFunctionAddress && !has(Macro) )
 			nativeClass.binding.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Generate checks
@@ -913,7 +913,7 @@ class NativeClassFunction(
 				else macroExpression ?:
 				     "${nativeClass.binding!!.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 			)
-			if ( nativeClass.binding != null && !hasExplicitFunctionAddress ) {
+			if ( nativeClass.binding != null && !hasExplicitFunctionAddress && !has(Macro) ) {
 				print(FUNCTION_ADDRESS)
 				if ( hasNativeParams ) print(", ")
 			}
