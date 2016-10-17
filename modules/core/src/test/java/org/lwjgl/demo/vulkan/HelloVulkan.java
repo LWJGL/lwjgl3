@@ -285,11 +285,24 @@ public final class HelloVulkan {
 
 	private final VkDebugReportCallbackEXT dbgFunc = VkDebugReportCallbackEXT.create(
 		(flags, objectType, object, location, messageCode, pLayerPrefix, pMessage, pUserData) -> {
-			if ( (flags & VK_DEBUG_REPORT_ERROR_BIT_EXT) != 0 ) {
-				System.err.format("ERROR: [%s] Code %d : %s\n", pLayerPrefix, messageCode, VkDebugReportCallbackEXT.getString(pMessage));
+			String type;
+			if ( (flags & VK_DEBUG_REPORT_INFORMATION_BIT_EXT) != 0 ) {
+				type = "INFORMATION";
 			} else if ( (flags & VK_DEBUG_REPORT_WARNING_BIT_EXT) != 0 ) {
-				System.err.format("WARNING: [%s] Code %d : %s\n", pLayerPrefix, messageCode, VkDebugReportCallbackEXT.getString(pMessage));
-			}
+				type = "WARNING";
+			} else if ( (flags & VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT) != 0 ) {
+				type = "PERFORMANCE WARNING";
+			} else if ( (flags & VK_DEBUG_REPORT_ERROR_BIT_EXT) != 0 ) {
+				type = "ERROR";
+			} else if ( (flags & VK_DEBUG_REPORT_DEBUG_BIT_EXT) != 0 ) {
+				type = "DEBUG";
+			} else
+				type ="UNKNOWN";
+
+			System.err.format(
+				"%s: [%s] Code %d : %s\n",
+				type, memASCII(pLayerPrefix), messageCode, VkDebugReportCallbackEXT.getString(pMessage)
+			);
 
 			/*
 			 * false indicates that layer should not bail-out of an
@@ -344,15 +357,14 @@ public final class HelloVulkan {
 		if ( VALIDATE ) {
 			device_validation_layers
 				//.put(memASCII("VK_LAYER_LUNARG_standard_validation"))
-				//.put(memASCII("VK_LAYER_LUNARG_api_dump"))
-				.put(memASCII("VK_LAYER_LUNARG_core_validation"))
-				.put(memASCII("VK_LAYER_LUNARG_device_limits"))
-				.put(memASCII("VK_LAYER_LUNARG_image"))
-				.put(memASCII("VK_LAYER_LUNARG_object_tracker"))
-				.put(memASCII("VK_LAYER_LUNARG_parameter_validation"))
-				.put(memASCII("VK_LAYER_LUNARG_swapchain"))
 				.put(memASCII("VK_LAYER_GOOGLE_threading"))
+				.put(memASCII("VK_LAYER_LUNARG_parameter_validation"))
+				.put(memASCII("VK_LAYER_LUNARG_object_tracker"))
+				.put(memASCII("VK_LAYER_LUNARG_image"))
+				.put(memASCII("VK_LAYER_LUNARG_core_validation"))
+				.put(memASCII("VK_LAYER_LUNARG_swapchain"))
 				.put(memASCII("VK_LAYER_GOOGLE_unique_objects"));
+				//.put(memASCII("VK_LAYER_LUNARG_api_dump"))
 		}
 		device_validation_layers.flip();
 
@@ -714,7 +726,7 @@ public final class HelloVulkan {
 			VkImageMemoryBarrier.Buffer image_memory_barrier = VkImageMemoryBarrier.mallocStack(1, stack)
 				.sType(VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER)
 				.pNext(NULL)
-				.srcAccessMask(0)
+				.srcAccessMask(old_image_layout == VK_IMAGE_LAYOUT_UNDEFINED ? 0 : VK_ACCESS_MEMORY_READ_BIT)
 				.dstAccessMask(0)
 				.oldLayout(old_image_layout)
 				.newLayout(new_image_layout)
@@ -729,22 +741,25 @@ public final class HelloVulkan {
 				.baseArrayLayer(0)
 				.layerCount(1);
 
-			if ( new_image_layout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL ) {
-			/* Make sure anything that was copying from this image has completed */
-				image_memory_barrier.dstAccessMask(VK_ACCESS_TRANSFER_READ_BIT);
-			}
-
-			if ( new_image_layout == VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL ) {
-				image_memory_barrier.dstAccessMask(VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT);
-			}
-
-			if ( new_image_layout == VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL ) {
-				image_memory_barrier.dstAccessMask(VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT);
-			}
-
-			if ( new_image_layout == VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL ) {
-			/* Make sure any Copy or CPU writes to image are flushed */
-				image_memory_barrier.dstAccessMask(VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_INPUT_ATTACHMENT_READ_BIT);
+			switch (new_image_layout) {
+				case VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL:
+					image_memory_barrier.dstAccessMask(VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT);
+					break;
+				case VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL:
+					image_memory_barrier.dstAccessMask(VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT);
+					break;
+				case VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL:
+					/* Make sure any Copy or CPU writes to image are flushed */
+					image_memory_barrier.dstAccessMask(VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_INPUT_ATTACHMENT_READ_BIT);
+					break;
+				case VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL:
+					image_memory_barrier.srcAccessMask(VK_ACCESS_MEMORY_READ_BIT);
+					/* Make sure anything that was copying from this image has completed */
+					image_memory_barrier.dstAccessMask(VK_ACCESS_TRANSFER_READ_BIT);
+					break;
+				case VK_IMAGE_LAYOUT_PRESENT_SRC_KHR:
+					image_memory_barrier.dstAccessMask(VK_ACCESS_MEMORY_READ_BIT);
+					break;
 			}
 
 			int src_stages = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
@@ -1573,6 +1588,7 @@ public final class HelloVulkan {
 			VkFramebufferCreateInfo fb_info = VkFramebufferCreateInfo.mallocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO)
 				.pNext(NULL)
+				.flags(0)
 				.renderPass(render_pass)
 				.pAttachments(attachments)
 				.width(width)
