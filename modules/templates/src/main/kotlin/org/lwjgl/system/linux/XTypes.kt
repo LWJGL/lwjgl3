@@ -18,7 +18,8 @@ val Font = typedef(XID, "Font")
 val Pixmap = typedef(XID, "Pixmap")
 val Window = typedef(XID, "Window")
 
-val Display_p = "Display".p // Display is a struct, but should be treated as an opaque type by apps
+val Display = "Display"
+val Display_p = Display.p // Display is a struct, but should be treated as an opaque type by apps
 val DISPLAY = Display_p.IN("display", "the connection to the X server") // This is here so that GLX extensions can use it
 
 val Visual_p = struct(LINUX_PACKAGE, "Visual") {

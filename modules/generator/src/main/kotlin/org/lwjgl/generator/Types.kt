@@ -57,7 +57,6 @@ open class PointerType(
 
 /** Converts primitive to array */
 val PrimitiveType.p: PointerType get() = PointerType(this.name, (this.mapping as PrimitiveMapping).toPointer, elementType = this)
-val PrimitiveType.const_p: PointerType get() = PointerType("const ${this.name}", (this.mapping as PrimitiveMapping).toPointer, elementType = this)
 fun PrimitiveType.p(name: String) = PointerType(
 	name,
 	(this.mapping as PrimitiveMapping).toPointer,
@@ -135,10 +134,6 @@ val StructType.p: PointerType get() = if ( this.includesPointer )
 	PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
 else
 	StructType(this.definition, this.pointerTo(), includesPointer = true, elementType = this)
-val StructType.const_p: PointerType get() = if ( this.includesPointer )
-	PointerType("const ${this.pointerTo()}", PointerMapping.DATA_POINTER, elementType = this)
-else
-	StructType(this.definition, "const ${this.pointerTo()}", includesPointer = true, elementType = this)
 fun StructType.p(name: String) = StructType(this.definition, name, includesPointer = true)
 
 // Strings

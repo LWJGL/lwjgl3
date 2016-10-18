@@ -528,7 +528,7 @@ val VkSwapchainCreateInfoKHR_p = struct(VULKAN_PACKAGE, "VkSwapchainCreateInfoKH
     AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member(
 	    "queueFamilyIndexCount",
 	    "the number of queue families having access to the images of the swapchain in case {@code imageSharingMode} is #SHARING_MODE_CONCURRENT")
-	uint32_t.const_p.member(
+	const..uint32_t.p.member(
 		"pQueueFamilyIndices",
 		"an array of queue family indices having access to the images of the swapchain in case {@code imageSharingMode} is #SHARING_MODE_CONCURRENT")
     VkSurfaceTransformFlagBitsKHR.member(
@@ -605,7 +605,7 @@ val VkPresentInfoKHR_p = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 	    "waitSemaphoreCount",
 	    "the number of semaphores to wait for before issuing the present request. The number may be zero."
     )
-	VkSemaphore.const_p.member(
+	const..VkSemaphore.p.member(
 		"pWaitSemaphores",
 		"""
 		if non-$NULL, is an array of {@code VkSemaphore} objects with {@code waitSemaphoreCount} entries, and specifies the semaphores to wait for before
@@ -613,11 +613,11 @@ val VkPresentInfoKHR_p = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 		"""
 	)
     AutoSize("pSwapchains", "pImageIndices", "pResults")..uint32_t.member("swapchainCount", "the number of swapchains being presented to by this command")
-    VkSwapchainKHR.const_p.member(
+    const..VkSwapchainKHR.p.member(
 	    "pSwapchains",
 	    "an array of {@code VkSwapchainKHR} objects with {@code swapchainCount} entries. A given swapchain must not appear in this list more than once."
     )
-    uint32_t.const_p.member(
+	const..uint32_t.p.member(
 	    "pImageIndices",
 	    """
 		an array of indices into the array of each swapchain’s presentable images, with {@code swapchainCount} entries. Each entry in this array identifies the

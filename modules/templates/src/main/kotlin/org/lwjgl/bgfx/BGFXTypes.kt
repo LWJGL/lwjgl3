@@ -389,7 +389,7 @@ val bgfx_callback_interface_t = struct(BGFX_PACKAGE, "BGFXCallbackInterface", na
 	{@code fatal} and {@code trace_vargs} callbacks can be called from any thread. Other callbacks are called from the render thread.
 	"""
 
-	bgfx_callback_vtbl_t.const_p.member("vtbl", "the callback virtual table")
+	const..bgfx_callback_vtbl_t.p.member("vtbl", "the callback virtual table")
 }
 
 // Allocator interface
@@ -420,7 +420,7 @@ val bgfx_allocator_interface_t = struct(BGFX_PACKAGE, "BGFXAllocatorInterface", 
 	documentation =
 		"Custom allocator. When custom allocator is not specified, library uses default CRT allocator. The library assumes custom allocator is thread safe."
 
-	bgfx_allocator_vtbl_t.const_p.member("vtbl", "the allocator virtual table")
+	const..bgfx_allocator_vtbl_t.p.member("vtbl", "the allocator virtual table")
 }
 
 // Platform API

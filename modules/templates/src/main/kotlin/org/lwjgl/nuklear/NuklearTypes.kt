@@ -486,7 +486,7 @@ val nk_command_image = struct(NUKLEAR_PACKAGE, "NkCommandImage", nativeName = "s
 
 val nk_command_text = struct(NUKLEAR_PACKAGE, "NkCommandText", nativeName = "struct nk_command_text") {
 	nk_command.member("header", "")
-	nk_user_font.const_p.member("font", "")
+	const..nk_user_font.p.member("font", "")
 	nk_color.member("background", "")
 	nk_color.member("foreground", "")
 	short.member("x", "")
@@ -1054,7 +1054,7 @@ val nk_row_layout = struct(NUKLEAR_PACKAGE, "NkRowLayout", nativeName = "struct 
 	int.member("index", "")
 	float.member("height", "")
 	int.member("columns", "")
-	float.const_p.member("ratio", "")
+	const..float_p.member("ratio", "")
 	float.member("item_width", "")
 	float.member("item_height", "")
 	float.member("item_offset", "")
