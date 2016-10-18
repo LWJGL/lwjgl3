@@ -86,6 +86,7 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		val addresses = classesWithFunctions
 			.map { it.functions }
 			.flatten()
+			.filter { !it.has(Macro) }
 			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
 
 		println("\tpublic final long")
