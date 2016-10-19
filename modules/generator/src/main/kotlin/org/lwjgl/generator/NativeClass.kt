@@ -206,7 +206,6 @@ class NativeClass(
 						returns = func.returns,
 						simpleName = func.simpleName,
 						name = func.name,
-						//documentation = func.documentation,
 						documentation = { processDocumentation("Array version of: ${func.methodLink}").toJavaDoc() },
 						nativeClass = this@NativeClass,
 						parameters = *func.parameters.asSequence().map {

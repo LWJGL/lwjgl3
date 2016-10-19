@@ -174,7 +174,7 @@ class NativeClassFunction(
 		(nativeClass.binding == null || returns.isStructValue || hasNativeCode) && (!has(Macro) || this[Macro].expression == null)
 	}
 
-	private val isSimpleFunction: Boolean
+	private val isNativeOnly: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial } || has(NativeName) || (has(Macro) && this[Macro].expression != null))
 
 	internal val hasUnsafeMethod: Boolean by lazy {
@@ -552,14 +552,14 @@ class NativeClassFunction(
 
 	/** This is where we start generating java code. */
 	internal fun generateMethods(writer: PrintWriter) {
-		val simpleFunction = isSimpleFunction
+		val nativeOnly = isNativeOnly
 
 		val constantMacro = has(Macro) && this[Macro].constant
 
 		if ( hasCustomJNI )
-			writer.generateNativeMethod(simpleFunction, constantMacro)
+			writer.generateNativeMethod(constantMacro, nativeOnly)
 
-		if ( !simpleFunction ) {
+		if ( !nativeOnly ) {
 			if ( hasUnsafeMethod )
 				writer.generateUnsafeMethod(constantMacro)
 
@@ -578,14 +578,42 @@ class NativeClassFunction(
 
 	// --[ JAVA METHODS ]--
 
-	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean, constantMacro: Boolean) {
+	private fun PrintWriter.printUnsafeJavadoc(private: Boolean, verbose: Boolean = false) {
+		if (private)
+			return
+
+		val javadoc = documentation { it !== JNI_ENV }
+		if (javadoc.isEmpty())
+			return
+
+		if (verbose) {
+			println(javadoc)
+		} else if (hasParam { it.nativeType is ArrayType }) {
+			println(nativeClass.processDocumentation("Array version of: ##n$name()").toJavaDoc())
+		} else {
+			getNativeParams().filter {
+				it.documentation.isNotEmpty() &&
+				(
+					it has AutoSize ||
+					it has AutoType ||
+					(it.isAutoSizeResultOut && hideAutoSizeResultParam)
+					// TODO: more?
+				)
+			}.let { hiddenParameters ->
+				val documentation = nativeClass.processDocumentation("Unsafe version of: $methodLink")
+				println(if (hiddenParameters.any())
+					nativeClass.toJavaDoc(documentation, hiddenParameters, returns.nativeType, "", "")
+				else
+					documentation.toJavaDoc()
+				)
+			}
+		}
+	}
+
+	private fun PrintWriter.generateNativeMethod(constantMacro: Boolean, nativeOnly: Boolean) {
 		println()
 
-		if (!constantMacro) {
-			val doc = documentation { true }
-			if (doc.isNotEmpty())
-				println(doc)
-		}
+		printUnsafeJavadoc(constantMacro, nativeOnly)
 		print("\t${if (constantMacro) "private " else accessModifier}static native $returnsNativeMethodType ")
 		if ( !nativeOnly ) print('n')
 		print(nativeName)
@@ -610,8 +638,7 @@ class NativeClassFunction(
 	private fun PrintWriter.generateUnsafeMethod(constantMacro: Boolean) {
 		println()
 
-		if (!constantMacro)
-			printDocumentation { true }
+		printUnsafeJavadoc(constantMacro)
 		print("\t${if (constantMacro) "private " else accessModifier}static $returnsNativeMethodType n$name(")
 		printList(getNativeParams()) {
 			if ( it.isFunctionProvider )
@@ -703,7 +730,7 @@ class NativeClassFunction(
 
 	private fun PrintWriter.printDocumentation(parameterFilter: (Parameter) -> Boolean) {
 		val doc = documentation(parameterFilter)
-		if ( !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false) && doc.isNotEmpty() )
+		if (doc.isNotEmpty() && !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false) )
 			println(doc)
 	}
 
@@ -1298,6 +1325,7 @@ class NativeClassFunction(
 				}
 			}
 		}
+
 		// Method signature
 
 		val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
@@ -1496,7 +1524,7 @@ class NativeClassFunction(
 		}
 		if (workaroundJDK8167409) println("#ifdef LWJGL_WINDOWS")
 		print("JNIEXPORT $returnsJniFunctionType JNICALL Java${if ( critical ) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_")
-		if ( !isSimpleFunction )
+		if ( !isNativeOnly)
 			print('n')
 		print(nativeName.asJNIName)
 		if ( hasArrays || hasArrayOverloads )
