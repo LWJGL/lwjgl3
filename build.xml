@@ -541,7 +541,7 @@
 			<arg value="-html5" if:set="jdk9"/>
 			<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
 			<arg line="-J-Dfile.encoding=UTF8"/>
-			<arg line="-J-XaddExports:jdk.javadoc/com.sun.tools.doclets.standard=ALL-UNNAMED" if:set="jdk9"/>
+			<arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
 		</javadoc>
 		<get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${bin.html.javadoc}"/>
 
@@ -713,7 +713,7 @@
 				<arg value="-html5" if:set="jdk9"/>
 				<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
 				<arg line="-J-Dfile.encoding=UTF8"/>
-				<arg line="-J-XaddExports:jdk.javadoc/com.sun.tools.doclets.standard=ALL-UNNAMED" if:set="jdk9"/>
+				<arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
 			</javadoc>
 			<get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/@{module}/javadoc"/>
 
