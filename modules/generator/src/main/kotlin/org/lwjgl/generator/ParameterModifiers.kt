@@ -126,7 +126,7 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier() {
 					throw IllegalArgumentException("The AutoSizeResult modifier on input parameters can only be applied on integer primitive types.")
 				}
 			}
-		else if ( param.paramType === ParameterType.OUT )
+		else if ( param.paramType === ParameterType.OUT ) {
 			when ( param.nativeType.mapping ) {
 				PointerMapping.DATA_INT,
 				PointerMapping.DATA_POINTER -> {
@@ -135,7 +135,10 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier() {
 					throw IllegalArgumentException("The AutoSizeResult modifier on output parameters can only be applied on integer pointer types.")
 				}
 			}
-		else
+
+			if (param has nullable)
+				throw IllegalArgumentException("The AutoSizeResult modifier cannot be applied on nullable parameters.")
+		} else
 			throw IllegalArgumentException("The AutoSizeResult modifier cannot be used on in/out parameters.")
 	}
 }
@@ -155,10 +158,10 @@ class Check(
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
-			throw IllegalArgumentException("The Check modifier can only be applied on pointer types ${param.name}")
+			throw IllegalArgumentException("The Check modifier can only be applied on pointer types.")
 
 		if ( param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The Check modifier cannot be applied on opaque pointer types ${param.name}")
+			throw IllegalArgumentException("The Check modifier cannot be applied on opaque pointer types.")
 	}
 }
 

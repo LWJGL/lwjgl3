@@ -296,7 +296,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		"objc_copyClassList",
 		"Creates and returns a list of pointers to all registered class definitions.",
 
-		nullable..AutoSizeResult..unsigned_int_p.OUT(
+		AutoSizeResult..unsigned_int_p.OUT(
 			"outCount",
 			"an integer pointer used to store the number of classes returned by this function in the list. This parameter may be #nil"
 		),
@@ -404,7 +404,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		"Describes the instance variables declared by a class.",
 
 		nullable..Class.IN("cls", "the class to inspect"),
-		nullable..AutoSizeResult..unsigned_int_p.OUT(
+		AutoSizeResult..unsigned_int_p.OUT(
 			"outCount",
 			"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 		),
@@ -493,7 +493,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		"Describes the instance methods implemented by a class.",
 
 		nullable..Class.IN("cls", "the class you want to inspect"),
-		nullable..AutoSizeResult..unsigned_int_p.OUT(
+		AutoSizeResult..unsigned_int_p.OUT(
 			"outCount",
 			"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 		),
@@ -526,7 +526,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		"Describes the protocols adopted by a class.",
 
 		nullable..Class.IN("cls", "the class you want to inspect"),
-		nullable..AutoSizeResult..unsigned_int_p.OUT(
+		AutoSizeResult..unsigned_int_p.OUT(
 			"outCount",
 			"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 		),
@@ -559,7 +559,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		"Describes the properties declared by a class.",
 
 		nullable..Class.IN("cls", "the class you want to inspect"),
-		nullable..AutoSizeResult..unsigned_int_p.OUT(
+		AutoSizeResult..unsigned_int_p.OUT(
 			"outCount",
 			"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 		),
