@@ -10,8 +10,9 @@ import java.util.regex.Pattern
 internal fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
 
 private val REDUNDANT_WHITESPACE = Pattern.compile("^[ \\t]+$", Pattern.MULTILINE)
-private val BLOCK_NODE = "(?:div|h[1-6]|li|ol|pre|table|td|tr|ul)" // TODO: add more here if necessary
-private val FRAGMENT = Pattern.compile("(</?$BLOCK_NODE[^>]*>|\\A)((?:[\\s\\S])*?)(?=</?$BLOCK_NODE|\\z)")
+private val BLOCK_NODE = "(?:div|h[1-6]|pre|table|thead|tfoot|tbody|td|tr|ul|li|ol|dl|dt|dd)" // TODO: add more here if necessary
+private val FRAGMENT = Pattern.compile("(</?$BLOCK_NODE(?:\\s[^>]+)?>|^)([\\s\\S]*?)(?=</?$BLOCK_NODE(?:\\s[^>]+)?>|$)")
+private val CHILD_NODE = Pattern.compile("<(?:tr|thead|tfoot|tbody|li|dt|dd)>")
 private val PARAGRAPH_PATTERN = Pattern.compile("\\n\\n(?:\\n?[ \\t]*[\\S][^\\n]*)+", Pattern.MULTILINE)
 private val CLEANUP_PATTERN = Pattern.compile("^[ \t]++(?![*])", Pattern.MULTILINE)
 private val UNESCAPE_PATTERN = Pattern.compile("\uFFFF")
@@ -58,7 +59,7 @@ private fun StringBuilder.layoutDOM(dom: String, linePrefix: String): StringBuil
 		val tag = matcher.group(1)
 		if ( tag.isNotEmpty() ) {
 			if ( startNewLine(dom, matcher.start()) ) {
-				if ( !tag.startsWith("</") && tag != "<tr>" && tag != "<li>" ) {
+				if ( !tag.startsWith("</") && !CHILD_NODE.matcher(tag).matches() ) {
 					append('\n')
 					append(linePrefix)
 				}
