@@ -1,6 +1,7 @@
 /*
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
  */
 package org.lwjgl.vulkan.templates
 
@@ -9,7 +10,9 @@ import org.lwjgl.vulkan.*
 
 val IMG_format_pvrtc = "IMGFormatPVRTC".nativeClassVK("IMG_format_pvrtc", postfix = IMG) {
 	documentation =
-		"The $templateName extension."
+		"""
+		The $templateName extension.
+		"""
 
 	IntConstant(
 		"The extension specification version.",
@@ -23,8 +26,8 @@ val IMG_format_pvrtc = "IMGFormatPVRTC".nativeClassVK("IMG_format_pvrtc", postfi
 		"IMG_FORMAT_PVRTC_EXTENSION_NAME".."VK_IMG_format_pvrtc"
 	)
 
-	IntConstant(
-		"VkFormat",
+	EnumConstant(
+		"Extends {@code VkFormat}.",
 
 		"FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG".."1000054000",
 		"FORMAT_PVRTC1_4BPP_UNORM_BLOCK_IMG".."1000054001",

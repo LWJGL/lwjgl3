@@ -26,22 +26,6 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 	override val hasCapabilities: Boolean get() = true
 	override val hasParameterCapabilities: Boolean = true
 
-	private val VKCorePattern = Pattern.compile("VK[1-9][0-9]")
-	override fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String): Boolean {
-		if ( VKCorePattern.matcher(function.nativeClass.className).matches() ) {
-			writer.print("\t/**\n\t * <p>${url("https://www.khronos.org/registry/vulkan/specs/1.0/man/html/${function.name}.html", "Khronos Reference Page")}</p>\n\t * \n")
-			if ( documentation.indexOf('\n') == -1 ) {
-				writer.print("\t * ")
-				writer.println(documentation.substring("\t/** ".length, documentation.length - 3))
-				writer.println("\t */")
-			} else
-				writer.println(documentation.substring("\t/**\n".length))
-
-			return true
-		}
-		return false
-	}
-
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "VK10"
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
@@ -143,30 +127,3 @@ fun String.nativeClassVK(
 	binding = VK_BINDING,
 	init = init
 )
-
-val must = "<b>must</b>"
-val should = "<b>should</b>"
-val may = "<b>may</b>"
-val can = "<b>can</b>"
-val cannot = "<b>cannot</b>"
-
-fun note(javadoc: String, title: String = "Note") =
-	""" <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>$title</h5>
-	$javadoc
-	</div>"""
-
-fun man(page: String, version: String = "1.0", link: String = "Khronos Reference Page") =
-	"<a href=\"https://www.khronos.org/registry/vulkan/specs/$version/man/html/$page.html\">$link</a>"
-fun spec(anchor: String, version: String = "1.0-wsi_extensions", link: String = "Vulkan Specification") =
-	"<a href=\"https://www.khronos.org/registry/vulkan/specs/$version/xhtml/vkspec.html\\#$anchor\">$link</a>"
-
-private val STRUCTURE_TYPE_REGEX = "([a-z]|[0-9])([A-Z])".toRegex()
-internal fun Struct.sType(struct: Struct) = VkStructureType.member("sType", "the type of this structure. Must be: #STRUCTURE_TYPE_${struct
-	.className
-	.substring(2)
-	.replace(STRUCTURE_TYPE_REGEX, "$1_$2")
-	.toUpperCase()
-}")
-internal fun Struct.pNext() = nullable..const..voidptr.member("pNext", "reserved for use by extensions")
-
-internal fun StructMember.flagLinks(prefix: String) = links("${prefix}_\\w+", LinkMode.BITFIELD)

@@ -144,8 +144,8 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 
 			VkInstance.IN("instance", "the Vulkan instance to create the surface in"),
 			GLFWwindow.IN("window", "the window to create the surface for"),
-			nullable..const..VkAllocationCallbacks_p.IN("allocator", "the allocator to use, or $NULL to use the default allocator."),
-			Check(1)..VkSurfaceKHR_p.OUT("surface", "where to store the handle of the surface. This is set to VK10##VK_NULL_HANDLE if an error occurred."),
+			nullable..const..VkAllocationCallbacks.p.IN("allocator", "the allocator to use, or $NULL to use the default allocator."),
+			Check(1)..VkSurfaceKHR.p.OUT("surface", "where to store the handle of the surface. This is set to VK10##VK_NULL_HANDLE if an error occurred."),
 
 			returnDoc = "VK10##VK_SUCCESS if successful, or a Vulkan error code if an error occurred",
 			since = "version 3.2"

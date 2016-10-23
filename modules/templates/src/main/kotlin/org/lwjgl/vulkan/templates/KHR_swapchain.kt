@@ -1,6 +1,7 @@
 /*
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
  */
 package org.lwjgl.vulkan.templates
 
@@ -10,8 +11,7 @@ import org.lwjgl.vulkan.*
 val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR) {
 	documentation =
 		"""
-		The {@code VK_KHR_swapchain} extension is the device-level companion to the {@code VK_KHR_surface} extension. It introduces {@code VkSwapchainKHR}
-		objects, which provide the ability to present rendering results to a surface.
+		The {@code VK_KHR_swapchain} extension is the device-level companion to the {@code VK_KHR_surface} extension. It introduces {@code VkSwapchainKHR} objects, which provide the ability to present rendering results to a surface.
 		"""
 
 	IntConstant(
@@ -26,364 +26,303 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 		"KHR_SWAPCHAIN_EXTENSION_NAME".."VK_KHR_swapchain"
 	)
 
-	IntConstant(
-		"VkStructureType",
+	EnumConstant(
+		"Extends {@code VkStructureType}.",
 
 		"STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR".."1000001000",
 		"STRUCTURE_TYPE_PRESENT_INFO_KHR".."1000001001"
 	)
 
 	EnumConstant(
-		"VkImageLayout",
+		"Extends {@code VkImageLayout}.",
 
-		"IMAGE_LAYOUT_PRESENT_SRC_KHR".enum(
-			"""
-			$must only be used for presenting a swapchain image for display. A swapchain’s image $must be transitioned to this layout before calling
-			#QueuePresentKHR(), and $must be transitioned away from this layout after calling #AcquireNextImageKHR().
-			""",
-			"1000001002"
-		)
+		"IMAGE_LAYOUT_PRESENT_SRC_KHR".."1000001002"
 	)
 
 	EnumConstant(
-		"VkResult",
+		"Extends {@code VkResult}.",
 
-		"SUBOPTIMAL_KHR".enum(
-			"A swapchain no longer matches the surface properties exactly, but $can still be used to present to the surface successfully.",
-			"1000001003"
-		),
-		"ERROR_OUT_OF_DATE_KHR".enum(
-			"""
-			A surface has changed in such a way that it is no longer compatible with the swapchain, and further presentation requests using the swapchain will
-			fail. Applications $must query the new surface properties and recreate their swapchain if they wish to continue presenting to the surface.
-			""",
-			"-1000001004"
-		)
+		"SUBOPTIMAL_KHR".."1000001003",
+		"ERROR_OUT_OF_DATE_KHR".."-1000001004"
 	)
 
 	VkResult(
 		"CreateSwapchainKHR",
 		"""
-		Creates a swapchain.
+		Create a swapchain.
 
-		A {@code VkSwapchainKHR} object (a.k.a. swapchain) provides the ability to present rendering results to a surface. A swapchain is an abstraction for an
-		array of presentable images that are associated with a surface. The swapchain images are represented by {@code VkImage} objects created by the
-		platform. One image (which $can be an array image for multiview/stereoscopic-3D surfaces) is displayed at a time, but multiple images $can be queued
-		for presentation. An application renders to the image, and then queues the image for presentation to the surface. A native window $cannot be associated
-		with more than one swapchain at a time. Further, swapchains $cannot be created for native windows that have a non-Vulkan graphics API surface
-		associated with them.
+		<h5>C Specification</h5>
+		To create a swapchain, call:
 
-		The presentation engine is an abstraction for the platform’s compositor or hardware/software display engine.
+		<pre><code>VkResult vkCreateSwapchainKHR(
+￿    VkDevice                                    device,
+￿    const VkSwapchainCreateInfoKHR*             pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkSwapchainKHR*                             pSwapchain);</code></pre>
 
-		The presentation engine may: be synchronous or asynchronous with respect to the application and/or logical device.
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkSwapchainCreateInfoKHR structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pSwapchain} <b>must</b> be a pointer to a {@code VkSwapchainKHR} handle</li>
+		</ul>
 
-		${note("Some implementations may use the device’s graphics queue or dedicated presentation hardware to perform presentation.")}
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code pCreateInfo.surface} <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pCreateInfo.oldSwapchain} <b>must</b> be externally synchronized</li>
+		</ul>
 
-		The presentable images of a swapchain are owned by the presentation engine. An application $can acquire use of a presentable image from the
-		presentation engine. Use of a presentable image $must occur only after the image is returned by #AcquireNextImageKHR(), and before it is presented by
-		#QueuePresentKHR(). This includes transitioning the image layout and rendering commands.
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
 
-		An application $can acquire use of a presentable image with #AcquireNextImageKHR(). After acquiring a presentable image and before modifying it, the
-		application $must use a synchronization primitive to ensure that the presentation engine has finished reading from the image. The application $can then
-		transition the image's layout, queue rendering commands to it, etc. Finally, the application presents the image with #QueuePresentKHR(), which releases
-		the acquisition of the image.
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+				<li>#ERROR_SURFACE_LOST_KHR</li>
+				<li>#ERROR_NATIVE_WINDOW_IN_USE_KHR</li>
+			</ul></dd>
+		</dl>
 
-		The presentation engine controls the order in which presentable images are acquired for use by the application.
-
-		${note(
-			"""
-			This allows the platform to handle situations which require out-of-order return of images after presentation. At the same time, it allows the
-			application to generate command buffers referencing all of the images in the swapchain at initialization time, rather than in its main loop.
-			"""
-		)}
-
-		${ValidityProtos.vkCreateSwapchainKHR}
-
-		If {@code vkCreateSwapchainKHR} succeeds, it will return a handle to a swapchain that contains an array of at least {@code minImageCount} presentable
-		images.
-
-		The {@code VkSurfaceKHR} associated with a swapchain $must not be destroyed until after the swapchain is destroyed.
-
-		Like core functions, several WSI fuctions, including {@code vkCreateSwapchainKHR} return #ERROR_DEVICE_LOST if the logical device was lost. As with
-		most core objects, {@code VkSwapchainKHR} is a child of the device and is affected by the lost state; it $must be destroyed before destroying the
-		{@code VkDevice}. However, {@code VkSurfaceKHR} is not a child of any {@code VkDevice} and is not otherwise affected by the lost device. After
-		successfully recreating a {@code VkDevice}, the same {@code VkSurfaceKHR} $can be used to create a new {@code VkSwapchainKHR}, provided the previous one
-		was destroyed.
-
-		${note(
-			"""
-			After a lost device event, the {@code VkPhysicalDevice} $may also be lost. If other {@code VkPhysicalDevice} are available, they $can be used
-			together with the same {@code VkSurfaceKHR} to create the new {@code VkSwapchainKHR}, however the application $must query the surface capabilities
-			again, because they $may differ on a per-physical device basis.
-			"""
-		)}
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkSwapchainCreateInfoKHR
 		""",
 
-		VkDevice.IN("device", "the device to create the swapchain for"),
-		const..VkSwapchainCreateInfoKHR_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkSwapchainCreateInfoKHR structure specifying the parameters of the created swapchain"
-		),
-		pAllocator,
-		Check(1)..VkSwapchainKHR.p.OUT("pSwapchain", "a pointer to a {@code VkSwapchainKHR} handle in which the created swapchain object will be returned")
+		VkDevice.IN("device", "the device to create the swapchain for."),
+		const..VkSwapchainCreateInfoKHR.p.IN("pCreateInfo", "a pointer to an instance of the ##VkSwapchainCreateInfoKHR structure specifying the parameters of the created swapchain."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
+		Check(1)..VkSwapchainKHR.p.OUT("pSwapchain", "a pointer to a {@code VkSwapchainKHR} handle in which the created swapchain object will be returned.")
 	)
 
 	void(
 		"DestroySwapchainKHR",
 		"""
-		Destroys a swapchain object.
+		Destroy a swapchain object.
 
-		{@code swapchain} and all associated {@code VkImage} handles are destroyed, and $must not be acquired or used any more by the application. The memory
-		of each {@code VkImage} will only be freed after that image is no longer used by the platform. For example, if one image of the swapchain is being
-		displayed in a window, the memory for that image may not be freed until the window is destroyed, or another swapchain is created for the window.
-		Destroying the swapchain does not invalidate the parent {@code VkSurfaceKHR}, and a new swapchain can be created with it.
+		<h5>C Specification</h5>
+		To destroy a swapchain object call:
 
-		${ValidityProtos.vkDestroySwapchainKHR}
+		<pre><code>void vkDestroySwapchainKHR(
+￿    VkDevice                                    device,
+￿    VkSwapchainKHR                              swapchain,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Description</h5>
+		{@code swapchain} and all associated {@code VkImage} handles are destroyed, and <b>must</b> not be acquired or used any more by the application. The memory of each {@code VkImage} will only be freed after that image is no longer used by the platform. For example, if one image of the swapchain is being displayed in a window, the memory for that image <b>may</b> not be freed until the window is destroyed, or another swapchain is created for the window. Destroying the swapchain does not invalidate the parent {@code VkSurfaceKHR}, and a new swapchain <b>can</b> be created with it.
+
+		If a swapchain associated with a display surface is destroyed and there are no valid descendants of that swapchain, the implementation <b>must</b> either revert any display resources modified by presenting images with the swapchain to their state prior to the first present performed with the swapchain and its ancestors, or leave such resources in their current state.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All uses of presentable images acquired from {@code swapchain} <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code swapchain} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code swapchain} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code swapchain} is not #NULL_HANDLE, {@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code swapchain} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the {@code VkDevice} associated with the swapchain"),
-		VkSwapchainKHR.IN("swapchain", "the swapchain to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the {@code VkDevice} associated with {@code swapchain}."),
+		VkSwapchainKHR.IN("swapchain", "the swapchain to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a>).")
 	)
 
 	VkResult(
 		"GetSwapchainImagesKHR",
 		"""
-		Obtains the array of presentable images associated with a swapchain.
+		Obtain the array of presentable images associated with a swapchain.
 
-		If {@code pSwapchainImages} is $NULL, then the number of presentable images for swapchain is returned in {@code pSwapchainImageCount}. Otherwise,
-		{@code pSwapchainImageCount} $must point to a variable set by the user to the number of elements in the {@code pSwapchainImages} array, and on return
-		the variable is overwritten with the number of structures actually written to {@code pSwapchainImages}. If the value of {@code pSwapchainImageCount} is
-		less than the number of presentable images for {@code swapchain}, at most {@code pSwapchainImageCount} structures will be written. If
-		{@code pSwapchainImageCount} is smaller than the number of presentable images for {@code swapchain}, #INCOMPLETE will be returned instead of
-		#SUCCESS to indicate that not all the available values were returned.
+		<h5>C Specification</h5>
+		To obtain the array of presentable images associated with a swapchain, call:
 
-		${ValidityProtos.vkGetSwapchainImagesKHR}
+		<pre><code>VkResult vkGetSwapchainImagesKHR(
+￿    VkDevice                                    device,
+￿    VkSwapchainKHR                              swapchain,
+￿    uint32_t*                                   pSwapchainImageCount,
+￿    VkImage*                                    pSwapchainImages);</code></pre>
 
-		${note(
-			"""
-			By knowing all presentable images used in the swapchain, the application $can create command buffers that reference these images prior to entering
-			its main rendering loop.
-			"""
-		)}
+		<h5>Description</h5>
+		If {@code pSwapchainImages} is {@code NULL}, then the number of presentable images for {@code swapchain} is returned in {@code pSwapchainImageCount}. Otherwise, {@code pSwapchainImageCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSwapchainImages} array, and on return the variable is overwritten with the number of structures actually written to {@code pSwapchainImages}. If the value of {@code pSwapchainImageCount} is less than the number of presentable images for {@code swapchain}, at most {@code pSwapchainImageCount} structures will be written. If {@code pSwapchainImageCount} is smaller than the number of presentable images for {@code swapchain}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
 
-		The implementation will have already allocated and bound the memory backing the {@code VkImages} returned by {@code vkGetSwapchainImagesKHR}. The
-		memory for each image will not alias with the memory for other images or with any {@code VkDeviceMemory} object. As such, performing any operation
-		affecting the binding of memory to a presentable image results in undefined behavior. All presentable images are initially in the
-		#IMAGE_LAYOUT_UNDEFINED layout, thus before using presentable images, the application must transition them to a valid layout for the intended use.
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
+			<li>{@code pSwapchainImageCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+			<li>If the value referenced by {@code pSwapchainImageCount} is not 0, and {@code pSwapchainImages} is not {@code NULL}, {@code pSwapchainImages} <b>must</b> be a pointer to an array of {@code pSwapchainImageCount} {@code VkImage} handles</li>
+		</ul>
 
-		Further, the lifetime of presentable images is controlled by the implementation so destroying a presentable image with #DestroyImage() results in
-		undefined behavior. See #DestroySwapchainKHR() for further details on the lifetime of presentable images.
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#INCOMPLETE</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the device associated with {@code swapchain}"),
-		VkSwapchainKHR.IN("swapchain", "the swapchain to query"),
-		AutoSize("pSwapchainImages")..Check(1)..uint32_t_p.INOUT(
-			"pSwapchainImageCount",
-			"a pointer to an integer related to the number of format pairs available or queried"
-		),
-		nullable..VkImage.p.OUT("pSwapchainImages", "either $NULL or a pointer to an array of {@code VkSwapchainImageKHR} structures")
+		VkDevice.IN("device", "the device associated with {@code swapchain}."),
+		VkSwapchainKHR.IN("swapchain", "the swapchain to query."),
+		AutoSize("pSwapchainImages")..Check(1)..uint32_t_p.INOUT("pSwapchainImageCount", "a pointer to an integer related to the number of swapchain images available or queried, as described below."),
+		nullable..VkImage.p.OUT("pSwapchainImages", "either {@code NULL} or a pointer to an array of {@code VkImage} handles.")
 	)
 
 	VkResult(
 		"AcquireNextImageKHR",
 		"""
-		Acquires an available presentable image to use, and retrieves the index of that image.
+		Retrieve the index of the next available presentable image.
 
-		${ValidityProtos.vkAcquireNextImageKHR}
+		<h5>C Specification</h5>
+		To acquire an available presentable image to use, and retrieve the index of that image, call:
 
-		When successful, {@code vkAcquireNextImageKHR} acquires a presentable image that the application can use, and sets {@code pImageIndex} to the index of
-		that image. The presentation engine may not have finished reading from the image at the time it is acquired, so the application $must use
-		{@code semaphore} and/or {@code fence} to ensure that the image layout and contents are not modified until the presentation engine reads have
-		completed.
+		<pre><code>VkResult vkAcquireNextImageKHR(
+￿    VkDevice                                    device,
+￿    VkSwapchainKHR                              swapchain,
+￿    uint64_t                                    timeout,
+￿    VkSemaphore                                 semaphore,
+￿    VkFence                                     fence,
+￿    uint32_t*                                   pImageIndex);</code></pre>
 
-		The presentation engine controls the order in which presentable images are made available to the application. This allows the platform to handle
-		special situations. The order in which images are acquired is implementation-dependent. Images $may be acquired in a seemingly random order that is not
-		a simple round-robin.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If {@code semaphore} is not #NULL_HANDLE it <b>must</b> be unsignaled</li>
+			<li>If {@code fence} is not #NULL_HANDLE it <b>must</b> be unsignaled and <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
+		</ul>
 
-		If a swapchain has enough presentable images, applications $can acquire multiple images without an intervening #QueuePresentKHR(). Applications $can
-		present images in a different order than the order in which they were acquired.
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
+			<li>If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
+			<li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
+			<li>{@code pImageIndex} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+			<li>If {@code semaphore} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+			<li>If {@code fence} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
 
-		If {@code timeout} is 0, {@code vkAcquireNextImageKHR} will not block, but will either succeed or return #NOT_READY. If {@code timeout} is
-		{@code UINT64_MAX}, the function will not return until an image is acquired from the presentation engine. Other values for {@code timeout} will cause
-		the function to return when an image becomes available, or when the specified number of nanoseconds have passed (in which case it will return
-		#TIMEOUT). An error can also cause {@code vkAcquireNextImageKHR} to return early.
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code swapchain} <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code semaphore} <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code fence} <b>must</b> be externally synchronized</li>
+		</ul>
 
-		${note(
-			"""
-			As mentioned above, the presentation engine may be asynchronous with respect to the application and/or logical device.
-			{@code vkAcquireNextImageKHR} $may return as soon as it can identify which image will be acquired, and can guarantee that {@code semaphore} and
-			{@code fence} will be signaled by the presentation engine; and $may not successfully return sooner. The application uses {@code timeout} to specify
-			how long {@code vkAcquireNextImageKHR} waits for an image to become acquired.
-			"""
-		)}
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#TIMEOUT</li>
+				<li>#NOT_READY</li>
+				<li>#SUBOPTIMAL_KHR</li>
+			</ul></dd>
 
-		Applications $cannot rely on {@code vkAcquireNextImageKHR} blocking in order to meter their rendering speed. Various factors $can interrupt
-		{@code vkAcquireNextImageKHR} from blocking.
-
-		${note(
-			"""
-			For example, if an error occurs, {@code vkAcquireNextImageKHR} $may return even though no image is available. As another example, some presentation
-			engines are able to enqueue an unbounded number of presentation and acquire next image operations such that {@code vkAcquireNextImageKHR} never
-			needs to wait for completion of outstanding present operations before returning.
-			"""
-		)}
-
-		The availability of presentable images is influenced by factors such as the implementation of the presentation engine, the {@code VkPresentModeKHR}
-		being used, the number of images in the swapchain, the number of images that the application has acquired at any given time, and the performance of the
-		application. The value of ##VkSurfaceCapabilitiesKHR{@code ::minImageCount} indicates how many images $must be in the swapchain in order for
-		{@code vkAcquireNextImageKHR} to acquire an image if the application currently has no acquired images.
-
-		Let {@code n} be the total number of images in the swapchain, {@code m} be the value of ##VkSurfaceCapabilitiesKHR{@code ::minImageCount}, and
-		{@code a} be the number of presentable images that the application has currently acquired (i.e. images acquired with {@code vkAcquireNextImageKH}R, but
-		not yet presented with #QueuePresentKHR()). {@code vkAcquireNextImageKHR} $can always succeed if {@code a <= n - m} at the time
-		{@code vkAcquireNextImageKHR} is called. {@code vkAcquireNextImageKHR} $must not be called when {@code a > n - m}; in such a case, and if
-		{@code timeout} is {@code UINT64_MAX}, {@code vkAcquireNextImageKHR} $may block indefinitely.
-
-		${note(
-			"""
-			For example, if the {@code minImageCount} member of ##VkSurfaceCapabilitiesKHR is 2, and the application creates a swapchain with 2 presentable
-			images, the application can: acquire one image, and $must present it before trying to acquire another image.
-
-			If we modify this example so that the application wishes to acquire up to 3 presentable images simultaneously, it $must request a minimum image
-			count of 4 when creating the swapchain.
-			"""
-		)}
-
-		If {@code semaphore} is not #NULL_HANDLE, the semaphore $must be unsignaled and not have any uncompleted signal or wait operations pending. It will
-		become signaled when the application $can use the image. Queue operations that access the image contents $must wait until the semaphore signals;
-		typically applications should: include the semaphore in the {@code pWaitSemaphores} list for the queue submission that transitions the image away from
-		the #IMAGE_LAYOUT_PRESENT_SRC_KHR layout. Use of the semaphore allows rendering operations to be recorded and submitted before the presentation engine
-		has completed its use of the image.
-
-		If {@code fence} is not equal to #NULL_HANDLE, the fence $must be unsignaled and not have any uncompleted signal operations pending. It will become
-		signaled when the application $can use the image. Applications $can use this to meter their frame generation work to match the presentation rate.
-
-		{@code semaphore} and {@code fence} $must not both be equal to #NULL_HANDLE. An application $must wait until either the {@code semaphore} or
-		{@code fence} is signaled before using the presentable image.
-
-		{@code semaphore} and {@code fence} $may already be signaled when {@code vkAcquireNextImageKHR} returns, if the image is being acquired for the first
-		time, or if the presentable image is immediately ready for use.
-
-		A successful call to {@code vkAcquireNextImageKHR} counts as a signal operation on semaphore for the purposes of queue forward-progress requirements.
-		The semaphore is guaranteed to signal, so a wait operation $can be queued for the semaphore without risk of deadlock.
-
-		The #CmdWaitEvents() or #CmdPipelineBarrier() used to transition the image away from #IMAGE_LAYOUT_PRESENT_SRC_KHR layout $must have
-		{@code dstStageMask} and {@code dstAccessMask} parameters set based on the next use of the image. The {@code srcAccessMask} $must include
-		#ACCESS_MEMORY_READ_BIT to ensure that all prior reads by the presentation engine are complete before the image layout transition occurs. The
-		application $must use implicit ordering guarantees and execution dependencies to prevent the image transition from occurring before the semaphore
-		passed to {@code vkAcquireNextImageKHR} has signaled.
-
-		${note(
-			"""
-			When the swapchain image will be written by some stage {@code S}, the recommended idiom for ensuring the semaphore signals before the transition
-			occurs is:
-			${ul(
-				"""
-				The batch that contains the transition includes the image-acquire semaphore in the list of semaphores to wait for, with a wait stage mask that
-				includes {@code S}.
-				""",
-				"The pipeline barrier that performs the transition includes {@code S} in both the {@code srcStageMask} and {@code dstStageMask}."
-			)}
-
-			This causes the pipeline barrer to wait at {@code S} until the semaphore signals before performing the transition and memory barrier, while
-			allowing earlier pipeline stages of subsequent commands to proceed.
-			"""
-		)}
-
-		After a successful return, the image indicated by {@code pImageIndex} will still be in the #IMAGE_LAYOUT_PRESENT_SRC_KHR layout if it was previously
-		presented, or in the #IMAGE_LAYOUT_UNDEFINED layout if this is the first time it has been acquired.
-
-		The possible return values for {@code vkAcquireNextImageKHR} depend on the timeout provided:
-		${ul(
-			"#SUCCESS is returned if an image became available.",
-			"#ERROR_SURFACE_LOST_KHR if the surface becomes no longer available.",
-			"#NOT_READY is returned if {@code timeout} is zero and no image was available.",
-			"""
-			#TIMEOUT is returned if {@code timeout} is greater than zero and less than {@code UINT64_MAX}, and no image became available within the time
-			allowed.
-			""",
-			"""
-			#SUBOPTIMAL_KHR is returned if an image became available, and the swapchain no longer matches the surface properties exactly, but can still be used
-			to present to the surface successfully.
-
-			${note(
-			"""
-			This may happen, for example, if the platform surface has been resized but the platform is able to scale the presented images to the new size to
-			produce valid surface updates. It is up to applications to decide whether they prefer to continue using the current swapchain indefinitely or
-			temporarily in this state, or to re-create the swapchain to better match the platform surface properties.
-			"""
-			)}
-			""",
-			"""
-			#ERROR_OUT_OF_DATE_KHR is returned if the surface has changed in such a way that it is no longer compatible with the swapchain, and further
-			presentation requests using the swapchain will fail. Applications $must query the new surface properties and recreate their swapchain if they wish
-			to continue presenting to the surface.
-			"""
-		)}
-
-		If the native surface and presented image sizes no longer match, presentation may not succeed. If presentation does succeed, parts of the native
-		surface $may be undefined, parts of the presented image $may have been clipped before presentation, and/or the image $may have been scaled (uniformly
-		or not uniformly) before presentation. It is the application’s responsibility to detect surface size changes and react appropriately. If presentation
-		does not succeed because of a mismatch in the surface and presented image sizes, a #ERROR_OUT_OF_DATE_KHR error will be returned.
-
-		Before an application $can present an image, the image’s layout $must be transitioned to the #IMAGE_LAYOUT_PRESENT_SRC_KHR layout. The
-		#CmdWaitEvents() or #CmdPipelineBarrier() that perform the transition $must have {@code srcStageMask} and {@code srcAccessMask} parameters set
-		based on the preceding use of the image. The {@code dstAccessMask} $must include #ACCESS_MEMORY_READ_BIT indicating all prior accesses indicated in
-		{@code srcAccessMask} from stages in {@code srcStageMask} are to be made available to reads by the presentation engine. Any value of
-		{@code dstStageMask} is valid, but should be set to #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT to avoid delaying subsequent commands that don’t access the
-		image.
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+				<li>#ERROR_OUT_OF_DATE_KHR</li>
+				<li>#ERROR_SURFACE_LOST_KHR</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the device assocated with {@code swapchain}"),
-		VkSwapchainKHR.IN("swapchain", "the swapchain from which an image is being acquired"),
-		uint64_t.IN("timeout", "indicates how long the function waits, in nanoseconds, if no image is available"),
-		VkSemaphore.IN("semaphore", "is #NULL_HANDLE or a semaphore to signal"),
-		VkFence.IN("fence", "is #NULL_HANDLE or a fence to signal"),
-		Check(1)..uint32_t_p.OUT(
-			"pImageIndex",
-			"""
-			a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by
-			#GetSwapchainImagesKHR()).
-			"""
-		)
+		VkDevice.IN("device", "the device associated with {@code swapchain}."),
+		VkSwapchainKHR.IN("swapchain", "the swapchain from which an image is being acquired."),
+		uint64_t.IN("timeout", "indicates how long the function waits, in nanoseconds, if no image is available."),
+		VkSemaphore.IN("semaphore", "#NULL_HANDLE or a semaphore to signal."),
+		VkFence.IN("fence", "#NULL_HANDLE or a fence to signal."),
+		Check(1)..uint32_t_p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by #GetSwapchainImagesKHR()).")
 	)
 
 	VkResult(
 		"QueuePresentKHR",
 		"""
-		Queues an image for presentation.
+		Queue an image for presentation.
 
-		${ValidityProtos.vkQueuePresentKHR}
+		<h5>C Specification</h5>
+		After queueing all rendering commands and transitioning the image to the correct layout, to queue an image for presentation, call:
 
-		{@code vkQueuePresentKH}R, releases the acquisition of the images referenced by {@code imageIndices}. A presented images $must not be used again before
-		it has been reacquired using #AcquireNextImageKHR().
+		<pre><code>VkResult vkQueuePresentKHR(
+￿    VkQueue                                     queue,
+￿    const VkPresentInfoKHR*                     pPresentInfo);</code></pre>
 
-		The processing of the presentation happens in issue order with other queue operations, but semaphores have to be used to ensure that prior rendering
-		and other commands in the specified queue complete before the presentation begins. The presentation command itself does not delay processing of
-		subsequent commands on the queue, however, presentation requests sent to a particular queue are always performed in order. Exact presentation timing is
-		controled by the semantics of the presentation engine and native platform in use.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>Any given element of {@code pSwapchains} member of {@code pPresentInfo} <b>must</b> be a swapchain that is created for a surface for which presentation is supported from {@code queue} as determined using a call to #GetPhysicalDeviceSurfaceSupportKHR()</li>
+			<li>If more than one member of {@code pSwapchains} was created from a display surface, all display surfaces referenced that refer to the same display <b>must</b> use the same display mode</li>
+		</ul>
 
-		The result codes #ERROR_OUT_OF_DATE_KHR and #SUBOPTIMAL_KHR have the same meaning when returned by {@code vkQueuePresentKHR} as they do when returned
-		by #AcquireNextImageKHR(). If multiple swapchains are presented, the result code is determined applying the following rules in order:
-		${ul(
-			"If the device is lost, #ERROR_DEVICE_LOST is returned.",
-			"If any of the target surfaces are no longer available the error #ERROR_SURFACE_LOST_KHR is returned.",
-			"If any of the presents would have a result of #ERROR_OUT_OF_DATE_KHR if issued separately then #ERROR_OUT_OF_DATE_KHR is returned.",
-			"If any of the presents would have a result of #SUBOPTIMAL_KHR if issued separately then #SUBOPTIMAL_KHR is returned.",
-			"Otherwise #SUCCESS is returned."
-		)}
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code queue} <b>must</b> be a valid {@code VkQueue} handle</li>
+			<li>{@code pPresentInfo} <b>must</b> be a pointer to a valid ##VkPresentInfoKHR structure</li>
+		</ul>
 
-		Presentation is a read-only operation that will not affect the content of the presentable images. Upon reacquiring the image and transitioning it away
-		from the #IMAGE_LAYOUT_PRESENT_SRC_KHR layout, the contents will be the same as they were prior to transitioning the image to the present source layout
-		and presenting it. However, if a mechanism other than Vulkan is used to modify the platform window associated with the swapchain, the content of all
-		presentable images in the swapchain becomes undefined.
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code queue} <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pPresentInfo.pWaitSemaphores}[] <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pPresentInfo.pSwapchains}[] <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>-</td><td>-</td><td>Any</td></tr></tbody>
+		</table>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#SUBOPTIMAL_KHR</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+				<li>#ERROR_OUT_OF_DATE_KHR</li>
+				<li>#ERROR_SURFACE_LOST_KHR</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkPresentInfoKHR
 		""",
 
-		VkQueue.IN("queue", "a queue that is capable of presentation to the target surface’s platform on the same device as the image’s swapchain"),
-		const..VkPresentInfoKHR_p.IN(
-			"pPresentInfo",
-			"a pointer to an instance of the ##VkPresentInfoKHR structure specifying the parameters of the presentation"
-		)
+		VkQueue.IN("queue", "a queue that is capable of presentation to the target surface&#8217;s platform on the same device as the image&#8217;s swapchain."),
+		const..VkPresentInfoKHR.p.IN("pPresentInfo", "a pointer to an instance of the ##VkPresentInfoKHR structure specifying the parameters of the presentation.")
 	)
 }

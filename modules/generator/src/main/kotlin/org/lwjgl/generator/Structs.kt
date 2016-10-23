@@ -159,6 +159,13 @@ class Struct(
 
 	private val hasMutableMembers: Boolean get() = members.isNotEmpty() && (mutable || mutableMembers.any())
 
+	operator fun get(name: String): StructMember = members.asSequence().first { it.name == name }
+
+	fun StructMember.replace(old: StructMember) {
+		members.remove(this)
+		members[members.indexOf(old)] = this
+	}
+
 	private fun add(member: StructMember): StructMember {
 		members.add(member)
 		return member

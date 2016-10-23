@@ -1,6 +1,7 @@
 /*
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
  */
 package org.lwjgl.vulkan.templates
 
@@ -14,1844 +15,2670 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		"""
 
 	IntConstant(
-		"""
-		The API version number for Vulkan 1.0.
-
-		The patch version number in this macro will always be zero. The supported patch version for a physical device $can be queried with
-		#GetPhysicalDeviceProperties().
-		""",
-
-		"API_VERSION_1_0".."VK_MAKE_VERSION(1, 0, 0)"
-	)
-
-	LongConstant(
-		"""
-		The reserved handle {@code VK_NULL_HANDLE} $can be passed in place of valid object handles when explicitly called out in the specification. Any command
-		that creates an object successfully $must not return {@code VK_NULL_HANDLE}. It is valid to pass {@code VK_NULL_HANDLE} to any {@code vkDestroy*} or
-		{@code vkFree*} command, which will silently ignore these values.
-		""",
-
-		"NULL_HANDLE"..0L
-	)
-
-	FloatConstant(
-		"",
-
-		"LOD_CLAMP_NONE"..1000.0f
-	)
-
-	IntConstant(
-		"Boolean constants.",
-
-		"TRUE".."1",
-		"FALSE".."0"
-		)
-
-	IntConstant(
-		"Struct member limits.",
+		"API Constants",
 
 		"MAX_PHYSICAL_DEVICE_NAME_SIZE".."256",
 		"UUID_SIZE".."16",
+		"MAX_EXTENSION_NAME_SIZE".."256",
+		"MAX_DESCRIPTION_SIZE".."256",
 		"MAX_MEMORY_TYPES".."32",
 		"MAX_MEMORY_HEAPS".."16",
-		"MAX_EXTENSION_NAME_SIZE".."256",
-		"MAX_DESCRIPTION_SIZE".."256"
-	)
-
-	IntConstant(
-		"Special values.",
-
 		"REMAINING_MIP_LEVELS".."(~0)",
 		"REMAINING_ARRAY_LAYERS".."(~0)",
 		"ATTACHMENT_UNUSED".."(~0)",
+		"TRUE".."1",
+		"FALSE".."0",
 		"QUEUE_FAMILY_IGNORED".."(~0)",
 		"SUBPASS_EXTERNAL".."(~0)"
 	)
 
+	FloatConstant(
+		"API Constants",
+
+		"LOD_CLAMP_NONE".."1000.0f"
+	)
+
 	LongConstant(
-		"Special size value.",
+		"API Constants",
 
 		"WHOLE_SIZE".."(~0L)"
 	)
 
 	EnumConstant(
-		"VkPipelineCacheHeaderVersion",
-
-		"PIPELINE_CACHE_HEADER_VERSION_ONE".enum("", "1")
-	)
-
-	EnumConstant(
-		"VkResult",
-
-		"SUCCESS".enum("Command successfully completed.", "0"),
-		"NOT_READY".enum("A fence or query has not yet completed.", "1"),
-		"TIMEOUT".enum("A wait operation has not completed in the specified time.", "2"),
-		"EVENT_SET".enum("An event is signaled.", "3"),
-		"EVENT_RESET".enum("An event is unsignaled.", "4"),
-		"INCOMPLETE".enum("A return array was too small for the result.", "5"),
-
-		"ERROR_OUT_OF_HOST_MEMORY".enum("A host memory allocation has failed.", "-1"),
-		"ERROR_OUT_OF_DEVICE_MEMORY".enum("A device memory allocation has failed.", "-2"),
-		"ERROR_INITIALIZATION_FAILED".enum("Initialization of an object could not be completed for implementation-specific reasons.", "-3"),
-		"ERROR_DEVICE_LOST".enum("The logical or physical device has been lost.", "-4"),
-		"ERROR_MEMORY_MAP_FAILED".enum("Mapping of a memory object has failed.", "-5"),
-		"ERROR_LAYER_NOT_PRESENT".enum("A requested layer is not present or could not be loaded.", "-6"),
-		"ERROR_EXTENSION_NOT_PRESENT".enum("A requested extension is not supported.", "-7"),
-		"ERROR_FEATURE_NOT_PRESENT".enum("A requested feature is not supported.", "-8"),
-		"ERROR_INCOMPATIBLE_DRIVER".enum(
-			"The requested version of Vulkan is not supported by the driver or is otherwise incompatible for implementation-specific reasons.",
-			"-9"
-		),
-		"ERROR_TOO_MANY_OBJECTS".enum("Too many objects of the type have already been created.", "-10"),
-		"ERROR_FORMAT_NOT_SUPPORTED".enum("A requested format is not supported on this device.", "-11"),
-		"ERROR_FRAGMENTED_POOL".enum("A requested pool allocation has failed due to fragmentation of the pool’s memory.", "-12")
-	)
-
-	EnumConstant(
-		"VkStructureType",
-
-		"STRUCTURE_TYPE_APPLICATION_INFO".enum("", "0"),
-		"STRUCTURE_TYPE_INSTANCE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_DEVICE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_SUBMIT_INFO".enum(""),
-		"STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO".enum(""),
-		"STRUCTURE_TYPE_MAPPED_MEMORY_RANGE".enum(""),
-		"STRUCTURE_TYPE_BIND_SPARSE_INFO".enum(""),
-		"STRUCTURE_TYPE_FENCE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_EVENT_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_BUFFER_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_IMAGE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_SAMPLER_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO".enum(""),
-		"STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET".enum(""),
-		"STRUCTURE_TYPE_COPY_DESCRIPTOR_SET".enum(""),
-		"STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO".enum(""),
-		"STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO".enum(""),
-		"STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO".enum(""),
-		"STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO".enum(""),
-		"STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER".enum(""),
-		"STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER".enum(""),
-		"STRUCTURE_TYPE_MEMORY_BARRIER".enum(""),
-		"STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO".enum(""),
-		"STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO".enum("")
-	)
-
-	EnumConstant(
-		"VkSystemAllocationScope",
-
-		"SYSTEM_ALLOCATION_SCOPE_COMMAND".enum("The allocation is scoped to the duration of the Vulkan command.", "0"),
-		"SYSTEM_ALLOCATION_SCOPE_OBJECT".enum("The allocation is scoped to the lifetime of the Vulkan object that is being created or used."),
-		"SYSTEM_ALLOCATION_SCOPE_CACHE".enum("The allocation is scoped to the lifetime of a {@code VkPipelineCache} object."),
-		"SYSTEM_ALLOCATION_SCOPE_DEVICE".enum("The allocation is scoped to the lifetime of the Vulkan device."),
-		"SYSTEM_ALLOCATION_SCOPE_INSTANCE".enum("The allocation is scoped to the lifetime of the Vulkan instance.")
-	)
-
-	EnumConstant(
-		"VkInternalAllocationType",
-
-		"INTERNAL_ALLOCATION_TYPE_EXECUTABLE".enum("The allocation is intended for execution by the host.", "0")
-	)
-
-	EnumConstant(
-		"VkFormat",
-
-		"FORMAT_UNDEFINED".enum("The format is not specified.", "0"),
-		"FORMAT_R4G4_UNORM_PACK8".enum("A two-component, 8-bit packed unsigned normalized format that has a 4-bit R component in bits 4..7, and a 4-bit G component in bits 0..3."),
-		"FORMAT_R4G4B4A4_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 4-bit R component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit B component in bits 4..7, and a 4-bit A component in bits 0..3."),
-		"FORMAT_B4G4R4A4_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 4-bit B component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit R component in bits 4..7, and a 4-bit A component in bits 0..3."),
-		"FORMAT_R5G6B5_UNORM_PACK16".enum("A three-component, 16-bit packed unsigned normalized format that has a 5-bit R component in bits 11..15, a 6-bit G component in bits 5..10, and a 5-bit B component in bits 0..4."),
-		"FORMAT_B5G6R5_UNORM_PACK16".enum("A three-component, 16-bit packed unsigned normalized format that has a 5-bit B component in bits 11..15, a 6-bit G component in bits 5..10, and a 5-bit R component in bits 0..4."),
-		"FORMAT_R5G5B5A1_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 5-bit R component in bits 11..15, a 5-bit G component in bits 6..10, a 5-bit B component in bits 1..5, and a 1-bit A component in bit 0."),
-		"FORMAT_B5G5R5A1_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 5-bit B component in bits 11..15, a 5-bit G component in bits 6..10, a 5-bit R component in bits 1..5, and a 1-bit A component in bit 0."),
-		"FORMAT_A1R5G5B5_UNORM_PACK16".enum("A four-component, 16-bit packed unsigned normalized format that has a 1-bit A component in bit 15, a 5-bit R component in bits 10..14, a 5-bit G component in bits 5..9, and a 5-bit B component in bits 0..4."),
-		"FORMAT_R8_UNORM".enum("A one-component, 8-bit unsigned normalized format that has a single 8-bit R component."),
-		"FORMAT_R8_SNORM".enum("A one-component, 8-bit signed normalized format that has a single 8-bit R component."),
-		"FORMAT_R8_USCALED".enum("A one-component, 8-bit unsigned scaled integer format that has a single 8-bit R component."),
-		"FORMAT_R8_SSCALED".enum("A one-component, 8-bit signed scaled integer format that has a single 8-bit R component."),
-		"FORMAT_R8_UINT".enum("A one-component, 8-bit unsigned integer format that has a single 8-bit R component."),
-		"FORMAT_R8_SINT".enum("A one-component, 8-bit signed integer format that has a single 8-bit R component."),
-		"FORMAT_R8_SRGB".enum("A one-component, 8-bit unsigned normalized format that has a single 8-bit R component stored with sRGB nonlinear encoding."),
-		"FORMAT_R8G8_UNORM".enum("A two-component, 16-bit unsigned normalized format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
-		"FORMAT_R8G8_SNORM".enum("A two-component, 16-bit signed normalized format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
-		"FORMAT_R8G8_USCALED".enum("A two-component, 16-bit unsigned scaled integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
-		"FORMAT_R8G8_SSCALED".enum("A two-component, 16-bit signed scaled integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
-		"FORMAT_R8G8_UINT".enum("A two-component, 16-bit unsigned integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
-		"FORMAT_R8G8_SINT".enum("A two-component, 16-bit signed integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1."),
-		"FORMAT_R8G8_SRGB".enum("A two-component, 16-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, and an 8-bit G component stored with sRGB nonlinear encoding in byte 1."),
-		"FORMAT_R8G8B8_UNORM".enum("A three-component, 24-bit unsigned normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
-		"FORMAT_R8G8B8_SNORM".enum("A three-component, 24-bit signed normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
-		"FORMAT_R8G8B8_USCALED".enum("A three-component, 24-bit unsigned scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
-		"FORMAT_R8G8B8_SSCALED".enum("A three-component, 24-bit signed scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
-		"FORMAT_R8G8B8_UINT".enum("A three-component, 24-bit unsigned integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
-		"FORMAT_R8G8B8_SINT".enum("A three-component, 24-bit signed integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2."),
-		"FORMAT_R8G8B8_SRGB".enum("A three-component, 24-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, and an 8-bit B component stored with sRGB nonlinear encoding in byte 2."),
-		"FORMAT_B8G8R8_UNORM".enum("A three-component, 24-bit unsigned normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
-		"FORMAT_B8G8R8_SNORM".enum("A three-component, 24-bit signed normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
-		"FORMAT_B8G8R8_USCALED".enum("A three-component, 24-bit unsigned scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
-		"FORMAT_B8G8R8_SSCALED".enum("A three-component, 24-bit signed scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
-		"FORMAT_B8G8R8_UINT".enum("A three-component, 24-bit unsigned integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
-		"FORMAT_B8G8R8_SINT".enum("A three-component, 24-bit signed integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2."),
-		"FORMAT_B8G8R8_SRGB".enum("A three-component, 24-bit unsigned normalized format that has an 8-bit B component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, and an 8-bit R component stored with sRGB nonlinear encoding in byte 2."),
-		"FORMAT_R8G8B8A8_UNORM".enum("A four-component, 32-bit unsigned normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_R8G8B8A8_SNORM".enum("A four-component, 32-bit signed normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_R8G8B8A8_USCALED".enum("A four-component, 32-bit unsigned scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_R8G8B8A8_SSCALED".enum("A four-component, 32-bit signed scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_R8G8B8A8_UINT".enum("A four-component, 32-bit unsigned integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_R8G8B8A8_SINT".enum("A four-component, 32-bit signed integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_R8G8B8A8_SRGB".enum("A four-component, 32-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, an 8-bit B component stored with sRGB nonlinear encoding in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_B8G8R8A8_UNORM".enum("A four-component, 32-bit unsigned normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_B8G8R8A8_SNORM".enum("A four-component, 32-bit signed normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_B8G8R8A8_USCALED".enum("A four-component, 32-bit unsigned scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_B8G8R8A8_SSCALED".enum("A four-component, 32-bit signed scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_B8G8R8A8_UINT".enum("A four-component, 32-bit unsigned integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_B8G8R8A8_SINT".enum("A four-component, 32-bit signed integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_B8G8R8A8_SRGB".enum("A four-component, 32-bit unsigned normalized format that has an 8-bit B component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, an 8-bit R component stored with sRGB nonlinear encoding in byte 2, and an 8-bit A component in byte 3."),
-		"FORMAT_A8B8G8R8_UNORM_PACK32".enum("A four-component, 32-bit packed unsigned normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
-		"FORMAT_A8B8G8R8_SNORM_PACK32".enum("A four-component, 32-bit packed signed normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
-		"FORMAT_A8B8G8R8_USCALED_PACK32".enum("A four-component, 32-bit packed unsigned scaled integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
-		"FORMAT_A8B8G8R8_SSCALED_PACK32".enum("A four-component, 32-bit packed signed scaled integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
-		"FORMAT_A8B8G8R8_UINT_PACK32".enum("A four-component, 32-bit packed unsigned integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
-		"FORMAT_A8B8G8R8_SINT_PACK32".enum("A four-component, 32-bit packed signed integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7."),
-		"FORMAT_A8B8G8R8_SRGB_PACK32".enum("A four-component, 32-bit packed unsigned normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component stored with sRGB nonlinear encoding in bits 16..23, an 8-bit G component stored with sRGB nonlinear encoding in bits 8..15, and an 8-bit R component stored with sRGB nonlinear encoding in bits 0..7."),
-		"FORMAT_A2R10G10B10_UNORM_PACK32".enum("A four-component, 32-bit packed unsigned normalized format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
-		"FORMAT_A2R10G10B10_SNORM_PACK32".enum("A four-component, 32-bit packed signed normalized format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
-		"FORMAT_A2R10G10B10_USCALED_PACK32".enum("A four-component, 32-bit packed unsigned scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
-		"FORMAT_A2R10G10B10_SSCALED_PACK32".enum("A four-component, 32-bit packed signed scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
-		"FORMAT_A2R10G10B10_UINT_PACK32".enum("A four-component, 32-bit packed unsigned integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
-		"FORMAT_A2R10G10B10_SINT_PACK32".enum("A four-component, 32-bit packed signed integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9."),
-		"FORMAT_A2B10G10R10_UNORM_PACK32".enum("A four-component, 32-bit packed unsigned normalized format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
-		"FORMAT_A2B10G10R10_SNORM_PACK32".enum("A four-component, 32-bit packed signed normalized format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
-		"FORMAT_A2B10G10R10_USCALED_PACK32".enum("A four-component, 32-bit packed unsigned scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
-		"FORMAT_A2B10G10R10_SSCALED_PACK32".enum("A four-component, 32-bit packed signed scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
-		"FORMAT_A2B10G10R10_UINT_PACK32".enum("A four-component, 32-bit packed unsigned integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
-		"FORMAT_A2B10G10R10_SINT_PACK32".enum("A four-component, 32-bit packed signed integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9."),
-		"FORMAT_R16_UNORM".enum("A one-component, 16-bit unsigned normalized format that has a single 16-bit R component."),
-		"FORMAT_R16_SNORM".enum("A one-component, 16-bit signed normalized format that has a single 16-bit R component."),
-		"FORMAT_R16_USCALED".enum("A one-component, 16-bit unsigned scaled integer format that has a single 16-bit R component."),
-		"FORMAT_R16_SSCALED".enum("A one-component, 16-bit signed scaled integer format that has a single 16-bit R component."),
-		"FORMAT_R16_UINT".enum("A one-component, 16-bit unsigned integer format that has a single 16-bit R component."),
-		"FORMAT_R16_SINT".enum("A one-component, 16-bit signed integer format that has a single 16-bit R component."),
-		"FORMAT_R16_SFLOAT".enum("A one-component, 16-bit signed floating-point format that has a single 16-bit R component."),
-		"FORMAT_R16G16_UNORM".enum("A two-component, 32-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
-		"FORMAT_R16G16_SNORM".enum("A two-component, 32-bit signed normalized format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
-		"FORMAT_R16G16_USCALED".enum("A two-component, 32-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
-		"FORMAT_R16G16_SSCALED".enum("A two-component, 32-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
-		"FORMAT_R16G16_UINT".enum("A two-component, 32-bit unsigned integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
-		"FORMAT_R16G16_SINT".enum("A two-component, 32-bit signed integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
-		"FORMAT_R16G16_SFLOAT".enum("A two-component, 32-bit signed floating-point format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3."),
-		"FORMAT_R16G16B16_UNORM".enum("A three-component, 48-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
-		"FORMAT_R16G16B16_SNORM".enum("A three-component, 48-bit signed normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
-		"FORMAT_R16G16B16_USCALED".enum("A three-component, 48-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
-		"FORMAT_R16G16B16_SSCALED".enum("A three-component, 48-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
-		"FORMAT_R16G16B16_UINT".enum("A three-component, 48-bit unsigned integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
-		"FORMAT_R16G16B16_SINT".enum("A three-component, 48-bit signed integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
-		"FORMAT_R16G16B16_SFLOAT".enum("A three-component, 48-bit signed floating-point format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5."),
-		"FORMAT_R16G16B16A16_UNORM".enum("A four-component, 64-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
-		"FORMAT_R16G16B16A16_SNORM".enum("A four-component, 64-bit signed normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
-		"FORMAT_R16G16B16A16_USCALED".enum("A four-component, 64-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
-		"FORMAT_R16G16B16A16_SSCALED".enum("A four-component, 64-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
-		"FORMAT_R16G16B16A16_UINT".enum("A four-component, 64-bit unsigned integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
-		"FORMAT_R16G16B16A16_SINT".enum("A four-component, 64-bit signed integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
-		"FORMAT_R16G16B16A16_SFLOAT".enum("A four-component, 64-bit signed floating-point format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7."),
-		"FORMAT_R32_UINT".enum("A one-component, 32-bit unsigned integer format that has a single 32-bit R component."),
-		"FORMAT_R32_SINT".enum("A one-component, 32-bit signed integer format that has a single 32-bit R component."),
-		"FORMAT_R32_SFLOAT".enum("A one-component, 32-bit signed floating-point format that has a single 32-bit R component."),
-		"FORMAT_R32G32_UINT".enum("A two-component, 64-bit unsigned integer format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7."),
-		"FORMAT_R32G32_SINT".enum("A two-component, 64-bit signed integer format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7."),
-		"FORMAT_R32G32_SFLOAT".enum("A two-component, 64-bit signed floating-point format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7."),
-		"FORMAT_R32G32B32_UINT".enum("A three-component, 96-bit unsigned integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11."),
-		"FORMAT_R32G32B32_SINT".enum("A three-component, 96-bit signed integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11."),
-		"FORMAT_R32G32B32_SFLOAT".enum("A three-component, 96-bit signed floating-point format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11."),
-		"FORMAT_R32G32B32A32_UINT".enum("A four-component, 128-bit unsigned integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15."),
-		"FORMAT_R32G32B32A32_SINT".enum("A four-component, 128-bit signed integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15."),
-		"FORMAT_R32G32B32A32_SFLOAT".enum("A four-component, 128-bit signed floating-point format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15."),
-		"FORMAT_R64_UINT".enum("A one-component, 64-bit unsigned integer format that has a single 64-bit R component."),
-		"FORMAT_R64_SINT".enum("A one-component, 64-bit signed integer format that has a single 64-bit R component."),
-		"FORMAT_R64_SFLOAT".enum("A one-component, 64-bit signed floating-point format that has a single 64-bit R component."),
-		"FORMAT_R64G64_UINT".enum("A two-component, 128-bit unsigned integer format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15."),
-		"FORMAT_R64G64_SINT".enum("A two-component, 128-bit signed integer format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15."),
-		"FORMAT_R64G64_SFLOAT".enum("A two-component, 128-bit signed floating-point format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15."),
-		"FORMAT_R64G64B64_UINT".enum("A three-component, 192-bit unsigned integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23."),
-		"FORMAT_R64G64B64_SINT".enum("A three-component, 192-bit signed integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23."),
-		"FORMAT_R64G64B64_SFLOAT".enum("A three-component, 192-bit signed floating-point format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23."),
-		"FORMAT_R64G64B64A64_UINT".enum("A four-component, 256-bit unsigned integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31."),
-		"FORMAT_R64G64B64A64_SINT".enum("A four-component, 256-bit signed integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31."),
-		"FORMAT_R64G64B64A64_SFLOAT".enum("A four-component, 256-bit signed floating-point format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31."),
-		"FORMAT_B10G11R11_UFLOAT_PACK32".enum("A three-component, 32-bit packed unsigned floating-point format that has a 10-bit B component in bits 22..31, an 11-bit G component in bits 11..21, an 11-bit R component in bits 0..10."),
-		"FORMAT_E5B9G9R9_UFLOAT_PACK32".enum("A three-component, 32-bit packed unsigned floating-point format that has a 5-bit shared exponent in bits 27..31, a 9-bit B component mantissa in bits 18..26, a 9-bit G component mantissa in bits 9..17, and a 9-bit R component mantissa in bits 0..8."),
-		"FORMAT_D16_UNORM".enum("A one-component, 16-bit unsigned normalized format that has a single 16-bit depth component."),
-		"FORMAT_X8_D24_UNORM_PACK32".enum("A two-component, 32-bit format that has 24 unsigned normalized bits in the depth component and, optionally:, 8 bits that are unused."),
-		"FORMAT_D32_SFLOAT".enum("A one-component, 32-bit signed floating-point format that has 32-bits in the depth component."),
-		"FORMAT_S8_UINT".enum("A one-component, 8-bit unsigned integer format that has 8-bits in the stencil component."),
-		"FORMAT_D16_UNORM_S8_UINT".enum("A two-component, 24-bit format that has 16 unsigned normalized bits in the depth component and 8 unsigned integer bits in the stencil component."),
-		"FORMAT_D24_UNORM_S8_UINT".enum("A two-component, 32-bit packed format that has 8 unsigned integer bits in the stencil component, and 24 unsigned normalized bits in the depth component."),
-		"FORMAT_D32_SFLOAT_S8_UINT".enum("A two-component format that has 32 signed float bits in the depth component and 8 unsigned integer bits in the stencil component. There are optionally: 24-bits that are unused."),
-		"FORMAT_BC1_RGB_UNORM_BLOCK".enum("A three-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data. This format has no alpha and is considered opaque."),
-		"FORMAT_BC1_RGB_SRGB_BLOCK".enum("A three-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding. This format has no alpha and is considered opaque."),
-		"FORMAT_BC1_RGBA_UNORM_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data, and provides 1 bit of alpha."),
-		"FORMAT_BC1_RGBA_SRGB_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding, and provides 1 bit of alpha."),
-		"FORMAT_BC2_UNORM_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of unsigned normalized alpha image data followed by 64-bits of encoded unsigned normalized RGB image data."),
-		"FORMAT_BC2_SRGB_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of unsigned normalized alpha image data followed by 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding."),
-		"FORMAT_BC3_UNORM_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of encoded alpha image data followed by 64-bits of encoded RGB image data. Both blocks are decoded as unsigned normalized values."),
-		"FORMAT_BC3_SRGB_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 64-bits of encoded alpha image data followed by 64-bits of encoded RGB image data with sRGB nonlinear encoding. Both blocks are decoded as unsigned normalized values."),
-		"FORMAT_BC4_UNORM_BLOCK".enum("A one-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized red image data."),
-		"FORMAT_BC4_SNORM_BLOCK".enum("A one-component, block compressed format where each 4x4 block consists of 64-bits of encoded signed normalized red image data."),
-		"FORMAT_BC5_UNORM_BLOCK".enum("A two-component, block compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized red image data followed by 64-bits of encoded unsigned normalized green image data."),
-		"FORMAT_BC5_SNORM_BLOCK".enum("A two-component, block compressed format where each 4x4 block consists of 64-bits of encoded signed normalized red image data followed by 64-bits of encoded signed normalized green image data."),
-		"FORMAT_BC6H_UFLOAT_BLOCK".enum("A three-component, block compressed format where each 4x4 block consists of 128-bits of encoded unsigned floating-point RGB image data."),
-		"FORMAT_BC6H_SFLOAT_BLOCK".enum("A three-component, block compressed format where each 4x4 block consists of 128-bits of encoded signed floating-point RGB image data."),
-		"FORMAT_BC7_UNORM_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 128-bits of encoded unsigned normalized RGBA image data."),
-		"FORMAT_BC7_SRGB_BLOCK".enum("A four-component, block compressed format where each 4x4 block consists of 128-bits of encoded unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ETC2_R8G8B8_UNORM_BLOCK".enum("A three-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data."),
-		"FORMAT_ETC2_R8G8B8_SRGB_BLOCK".enum("A three-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding."),
-		"FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK".enum("A four-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data, and provides 1 bit of alpha."),
-		"FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK".enum("A four-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding, and provides 1 bit of alpha."),
-		"FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK".enum("A four-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data, and 64-bits of encoded unsigned normalized alpha image data."),
-		"FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK".enum("A four-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized RGB image data with sRGB nonlinear encoding, and 64-bits of encoded unsigned normalized alpha image data."),
-		"FORMAT_EAC_R11_UNORM_BLOCK".enum("A one-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized red image data."),
-		"FORMAT_EAC_R11_SNORM_BLOCK".enum("A one-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded signed normalized red image data."),
-		"FORMAT_EAC_R11G11_UNORM_BLOCK".enum("A two-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded unsigned normalized red image data followed by 64-bits of encoded unsigned normalized green image data."),
-		"FORMAT_EAC_R11G11_SNORM_BLOCK".enum("A two-component, ETC2 compressed format where each 4x4 block consists of 64-bits of encoded signed normalized red image data followed by 64-bits of encoded signed normalized green image data."),
-		"FORMAT_ASTC_4x4_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 4x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_4x4_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 4x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_5x4_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 5x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_5x4_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 5x4 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_5x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 5x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_5x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 5x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_6x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 6x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_6x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 6x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_6x6_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 6x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_6x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 6x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_8x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 8x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_8x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_8x6_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 8x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_8x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_8x8_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 8x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_8x8_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 8x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_10x5_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_10x5_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x5 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_10x6_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_10x6_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x6 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_10x8_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_10x8_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x8 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_10x10_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 10x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_10x10_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 10x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_12x10_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 12x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_12x10_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x10 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components."),
-		"FORMAT_ASTC_12x12_UNORM_BLOCK".enum("A four-component, ASTC compressed format where each 12x12 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data."),
-		"FORMAT_ASTC_12x12_SRGB_BLOCK".enum("A four-component, ASTC compressed format where each 12x12 block consists of 128-bits of encoded image data which is decoded as unsigned normalized RGBA image data with sRGB nonlinear encoding applied to the RGB components.")
-	)
-
-	val VkImageTypes = EnumConstant(
-		"VkImageType",
-
-		"IMAGE_TYPE_1D".enum("One-dimensional image", "0"),
-		"IMAGE_TYPE_2D".enum("Two-dimensional image"),
-		"IMAGE_TYPE_3D".enum("Three-dimensional image")
-	).javaDocLinks
-
-	val VkImageTilings = EnumConstant(
-		"VkImageTiling",
-
-		"IMAGE_TILING_OPTIMAL".enum("Specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access).", "0"),
-		"IMAGE_TILING_LINEAR".enum("Specifies linear tiling (texels are laid out in memory in row-major order, possibly with some padding on each row).")
-	).javaDocLinks
-
-	EnumConstant(
-		"VkPhysicalDeviceType",
-
-		"PHYSICAL_DEVICE_TYPE_OTHER".enum("The device does not match any other available types.", "0"),
-		"PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU".enum("The device is typically one embedded in or tightly coupled with the host."),
-		"PHYSICAL_DEVICE_TYPE_DISCRETE_GPU".enum("The device is typically a separate processor connected to the host via an interlink."),
-		"PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU".enum("The device is typically a virtual node in a virtualization environment."),
-		"PHYSICAL_DEVICE_TYPE_CPU".enum("The device is typically running on the same processors as the host.")
-	)
-
-	EnumConstant(
-		"VkQueryType",
-
-		"QUERY_TYPE_OCCLUSION".enum("Occlusion query.", "0"),
-		"QUERY_TYPE_PIPELINE_STATISTICS".enum("Pipeline statistics query"),
-		"QUERY_TYPE_TIMESTAMP".enum("Timestamp query.")
-	)
-
-	EnumConstant(
-		"VkSharingMode",
-
-		"SHARING_MODE_EXCLUSIVE".enum(
-			"Specifies that access to any range or image subresource of the object will be exclusive to a single queue family at a time.",
-			"0"
-		),
-		"SHARING_MODE_CONCURRENT".enum(
-			"Specifies that concurrent access to any range or image subresource of the object from multiple queue families is supported."
-		)
-	)
-
-	EnumConstant(
-		"VkImageLayout",
-
-		"IMAGE_LAYOUT_UNDEFINED".enum(
-			"""
-			Supports no device access. This layout $must only be used as an {@code initialLayout} or as the {@code oldLayout} in an image transition. When
-			transitioning out of this layout, the contents of the memory are not guaranteed to be preserved.
-			""", "0"),
-		"IMAGE_LAYOUT_GENERAL".enum("Supports all types of device access."),
-		"IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL".enum(
-			"""
-			$must only be used as a color or resolve attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created
-			with the #IMAGE_USAGE_COLOR_ATTACHMENT_BIT usage bit enabled.
-			"""),
-		"IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL".enum(
-			"""
-			$must only be used as a depth/stencil attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created
-			with the #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.
-			"""),
-		"IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL".enum(
-			"""
-			$must only be used as a read-only depth/stencil attachment in a {@code VkFramebuffer} and/or as a read-only image in a shader (which $can be read as
-			a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with both the
-			#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.
-			"""
-		),
-		"IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL".enum(
-			"""
-			$must only be used as a read-only image in a shader (which $can be read as a sampled image, combined image/sampler and/or input attachment). This
-			layout is valid only for image subresources of images created with the #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled.
-			"""
-		),
-		"IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL".enum(
-			"""
-			$must only be used as a source image of a transfer command (see the definition of #PIPELINE_STAGE_TRANSFER_BIT). This layout is valid only for
-			image subresources of images created with the #IMAGE_USAGE_TRANSFER_SRC_BIT usage bit enabled.
-			"""
-		),
-		"IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL".enum(
-			"""
-			$must only be used as a destination image of a transfer command. This layout is valid only for image subresources of images created with the
-			#IMAGE_USAGE_TRANSFER_DST_BIT usage bit enabled.
-			"""
-		),
-		"IMAGE_LAYOUT_PREINITIALIZED".enum(
-			"""
-			Supports no device access. This layout $must only be used as an {@code initialLayout} or as the {@code oldLayout} in an image transition. When
-			transitioning out of this layout, the contents of the memory are preserved. This layout is intended to be used as the initial layout for an image
-			whose contents are written by the host, and hence the data $can be written to memory immediately, without first executing a layout transition.
-			Currently, #IMAGE_LAYOUT_PREINITIALIZED is only useful with #IMAGE_TILING_LINEAR images because there is not a standard layout defined for
-			#IMAGE_TILING_OPTIMAL images.
-			"""
-		)
-	)
-
-	EnumConstant(
-		"VkImageViewType",
-
-		"IMAGE_VIEW_TYPE_1D".enum("One-dimensional image view.", "0"),
-		"IMAGE_VIEW_TYPE_2D".enum("Two-dimensional image view."),
-		"IMAGE_VIEW_TYPE_3D".enum("Three-dimensional image view."),
-		"IMAGE_VIEW_TYPE_CUBE".enum("Cube map image view."),
-		"IMAGE_VIEW_TYPE_1D_ARRAY".enum("One-dimensional array image view."),
-		"IMAGE_VIEW_TYPE_2D_ARRAY".enum("Two-dimensional array image view."),
-		"IMAGE_VIEW_TYPE_CUBE_ARRAY".enum("Cube map array image view.")
-	)
-
-	EnumConstant(
-		"VkComponentSwizzle",
-
-		"COMPONENT_SWIZZLE_IDENTITY".enum("The component is set to the identity swizzle.", "0"),
-		"COMPONENT_SWIZZLE_ZERO".enum("The component is set to zero."),
-		"COMPONENT_SWIZZLE_ONE".enum(
-			"""
-			The component is set to either 1 or 1.0 depending on whether the type of the image view format is integer or floating-point respectively, as
-			determined by the <b>Format Definition</b> section for each {@code VkFormat}.
-			"""),
-		"COMPONENT_SWIZZLE_R".enum("The component is set to the value of the R component of the image."),
-		"COMPONENT_SWIZZLE_G".enum("The component is set to the value of the G component of the image."),
-		"COMPONENT_SWIZZLE_B".enum("The component is set to the value of the B component of the image."),
-		"COMPONENT_SWIZZLE_A".enum("The component is set to the value of the A component of the image.")
-	)
-
-	EnumConstant(
-		"VkVertexInputRate",
-
-		"VERTEX_INPUT_RATE_VERTEX".enum("Indicates that vertex attribute addressing is a function of the vertex index.", "0"),
-		"VERTEX_INPUT_RATE_INSTANCE".enum("Indicates that vertex attribute addressing is a function of the instance index.")
-	)
-
-	EnumConstant(
-		"VkPrimitiveTopology",
-
-		"PRIMITIVE_TOPOLOGY_POINT_LIST".enum("A series of individual points. Each vertex defines a separate point.", "0"),
-		"PRIMITIVE_TOPOLOGY_LINE_LIST".enum(
-			"""
-			Individual line segments, each defined by a pair of vertices. The first two vertices define the first segment, with subsequent pairs of vertices
-			each defining one more segment. If the number of vertices is odd, then the last vertex is ignored.
-			"""),
-		"PRIMITIVE_TOPOLOGY_LINE_STRIP".enum(
-			"""
-			A series of one or more connected line segments. In this case, the first vertex specifies the first segment’s start point while the second vertex
-			specifies the first segment’s endpoint and the second segment’s start point. In general, the i<sup>th</sup> vertex (for i &gt; 0) specifies the
-			beginning of the i<sup>th</sup> segment and the end of the {@code i−1}<sup>st</sup>. The last vertex specifies the end of the last segment. If only
-			one vertex is specified, then no primitive is generated.
-			"""
-		),
-		"PRIMITIVE_TOPOLOGY_TRIANGLE_LIST".enum(
-			"""
-			Separate triangles. In this case, vertices {@code 3i}, {@code 3i + 1}, and {@code 3i + 2} (in that order) determine a triangle for each
-			{@code i = 0,1,…,n − 1}, where there are {@code 3n + k} vertices drawn. {@code k} is either 0, 1, or 2; if {@code k} is not zero, the final
-			{@code k} vertices are ignored.
-			"""
-		),
-		"PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP".enum(
-			"""
-			A triangle strip is a series of triangles connected along shared edges. In this case, the first three vertices define the first triangle, and their
-			order is significant. Each subsequent vertex defines a new triangle using that point along with the last two vertices from the previous triangle.
-			If fewer than three vertices are specified, no primitive is produced. The order of vertices in successive triangles changes, so that all triangle
-			faces have the same orientation.
-			"""
-		),
-		"PRIMITIVE_TOPOLOGY_TRIANGLE_FAN".enum(
-			"""
-			A triangle fan. It is similar to a triangle strip, but changes the vertex replaced from the previous triangle, so that all triangles in the fan
-			share a common vertex.
-			"""
-		),
-		"PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY".enum(
-			"""
-			Lines with adjacency are independent line segments where each endpoint has a corresponding adjacent vertex that is accessible in a geometry shader.
-			If a geometry shader is not active, the adjacent vertices are ignored.
-
-			A line segment is drawn from the {@code 4i + 1}<sup>st</sup> vertex to the {@code 4i + 2}<sup>nd</sup> vertex for each {@code i = 0,1,…,n − 1},
-			where there are {@code 4n + k} vertices. {@code k} is either 0, 1, 2, or 3; if {@code k} is not zero, the final {@code k} vertices are ignored. For
-			line segment {@code i}, the {@code 4i}<sup>th</sup> and {@code 4i + 3}<sup>rd</sup> vertices are considered adjacent to the
-			{@code 4i + 1}<sup>st</sup> and {@code 4i + 2}<sup>nd</sup> vertices, respectively.
-			"""
-		),
-		"PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY".enum(
-			"""
-			Line strips with adjacency are similar to line strips, except that each line segment has a pair of adjacent vertices that are accessible in a
-			geometry shader. If a geometry shader is not active, the adjacent vertices are ignored.
-
-			A line segment is drawn from the {@code i + 1}<sup>st</sup> vertex to the {@code i + 2}<sup>nd</sup> vertex for each {@code i = 0,1,…,n − 1}, where
-			there are {@code n + 3} vertices. If there are fewer than four vertices, all vertices are ignored. For line segment {@code i}, the
-			{@code i}<sup>th</sup> and {@code i + 3}<sup>rd</sup> vertex are considered adjacent to the {@code i + 1}<sup>st</sup> and
-			{@code i + 2}<sup>nd</sup> vertices, respectively.
-			"""
-		),
-		"PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY".enum(
-			"""
-			Triangles with adjacency are similar to separate triangles except that each triangle edge has an adjacent vertex that is accessible in a geometry
-			shader. If a geometry shader is not active, the adjacent vertices are ignored.
-
-			The {@code 6i}<sup>th</sup>, {@code 6i + 2}<sup>nd</sup>, and {@code 6i + 4}<sup>th</sup> vertices (in that order) determine a triangle for each
-			{@code i = 0,1,…,n − 1}, where there are {@code 6n + k} vertices. {@code k} is either 0, 1, 2, 3, 4, or 5; if {@code k} is non-zero, the final
-			{@code k} vertices are ignored. For triangle {@code i}, the {@code 6i + 1}<sup>st</sup>, {@code 6i + 3}<sup>rd</sup>, and
-			{@code 6i + 5}<sup>th</sup> vertices are considered adjacent to edges from the {@code 6i}<sup>th</sup> to the {@code 6i + 2}<sup>nd</sup>, from the
-			{@code 6i + 2}<sup>nd</sup> to the {@code 6i + 4}<sup>th</sup>, and from the {@code 6i + 4}<sup>th</sup> to the {@code 6i}<sup>th</sup> vertices,
-			respectively.
-			"""
-		),
-		"PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY".enum(
-			"""
-			Triangle strips with adjacency are similar to triangle strips except that each triangle edge has an adjacent vertex that is accessible in a
-			geometry shader. If a geometry shader is not active, the adjacent vertices are ignored.
-
-			In triangle strips with adjacency, {@code n} triangles are drawn where there are {@code 2(n + 2) + k} vertices. {@code k} is either 0 or 1; if
-			{@code k} is 1, the final vertex is ignored. If there are fewer than 6 vertices, the entire primitive is ignored. The table below describes the
-			vertices and order used to draw each triangle, and which vertices are considered adjacent to each edge of the triangle:
-			${table(
-				tr(
-					th(),
-					th("Primitive Vertices", colspan = 3),
-					th("Adjacent Vertices", colspan = 3)
-				),
-				tr(td("Primitive"), td("1<sup>st</sup>"), td("2<sup>nd</sup>"), td("3<sup>rd</sup>"), td("1/2"), td("2/3"), td("3/1")),
-				tr(td("only ( {@code i = 0} , {@code n = 1} )"), td("0"), td("2"), td("4"), td("1"), td("5"), td("3")),
-				tr(td("first ( {@code i = 0} )"), td("0"), td("2"), td("4"), td("1"), td("6"), td("3")),
-				tr(td("middle ( {@code i} odd)"), td("2i+2"), td("2i"), td("2i+4"), td("2i−2"), td("2i+3"), td("2i+6")),
-				tr(td("middle ( {@code i} even)"), td("2i"), td("2i+2"), td("2i+4"), td("2i−2"), td("2i+6"), td("2i+3")),
-				tr(td("last ( {@code i = n − 1} , {@code i} odd)"), td("2i+2"), td("2i"), td("2i+4"), td("2i−2"), td("2i+3"), td("2i+5")),
-				tr(td("last ( {@code i = n − 1} , {@code i} even)"), td("2i"), td("2i+2"), td("2i+4"), td("2i−2"), td("2i+5"), td("2i+3"))
-			)}
-			"""
-		),
-		"PRIMITIVE_TOPOLOGY_PATCH_LIST".enum(
-			"""
-			Separate patches. A patch is an ordered collection of vertices used for primitive tessellation. The vertices comprising a patch have no implied
-			geometric ordering, and are used by tessellation shaders and the fixed-function tessellator to generate new point, line, or triangle primitives.
-
-			Each patch in the series has a fixed number of vertices, specified by the {@code patchControlPoints} member of the
-			##VkPipelineTessellationStateCreateInfo structure passed to #CreateGraphicsPipelines(). Once assembled and vertex shaded, these patches are
-			provided as input to the tessellation control shader stage.
-
-			If the number of vertices in a patch is given by {@code v}, the {@code vi}<sup>th</sup> through {@code vi + v − 1}<sup>st</sup> vertices (in that
-			order) determine a patch for each {@code i = 0,1,…n − 1}, where there are {@code vn + k} vertices. {@code k} is in the range {@code [0,v − 1]} ; if
-			{@code k} is not zero, the final {@code k} vertices are ignored.
-			"""
-		)
-	)
-
-	EnumConstant(
-		"VkPolygonMode",
-
-		"POLYGON_MODE_FILL".enum("Causes polygons to render using the polygon rasterization rules.", "0"),
-		"POLYGON_MODE_LINE".enum("Causes polygon edges to be drawn as line segments."),
-		"POLYGON_MODE_POINT".enum("The vertices of polygons are treated, for rasterization purposes, as if they had been drawn as points.")
-	)
-
-	EnumConstant(
-		"VkFrontFace",
-
-		"FRONT_FACE_COUNTER_CLOCKWISE".enum("A triangle with positive area is considered front-facing.", "0"),
-		"FRONT_FACE_CLOCKWISE".enum("A triangle with negative area is considered front-facing.")
-	)
-
-	EnumConstant(
-		"VkCompareOp",
-
-		"COMPARE_OP_NEVER".enum("The test never passes.", "0"),
-		"COMPARE_OP_LESS".enum("The test passes when <b>R</b> &lt; <b>S</b>."),
-		"COMPARE_OP_EQUAL".enum("The test passes when R = S"),
-		"COMPARE_OP_LESS_OR_EQUAL".enum("The test passes when <b>R</b> &le; <b>S</b>."),
-		"COMPARE_OP_GREATER".enum("The test passes when <b>R</b> &gt; <b>S</b>."),
-		"COMPARE_OP_NOT_EQUAL".enum("The test passes when <b>R</b> &ne; <b>S</b>."),
-		"COMPARE_OP_GREATER_OR_EQUAL".enum("The test passes when <b>R</b> &ge; <b>S</b>."),
-		"COMPARE_OP_ALWAYS".enum("The test always passes.")
-	)
-
-	EnumConstant(
-		"VkStencilOp",
-
-		"STENCIL_OP_KEEP".enum("Keeps the current value.", "0"),
-		"STENCIL_OP_ZERO".enum("Sets the value to 0."),
-		"STENCIL_OP_REPLACE".enum("Sets the value to {@code reference}."),
-		"STENCIL_OP_INCREMENT_AND_CLAMP".enum("Increments the current value and clamps to the maximum representable unsigned value."),
-		"STENCIL_OP_DECREMENT_AND_CLAMP".enum("Decrements the current value and clamps to 0."),
-		"STENCIL_OP_INVERT".enum("Bitwise-inverts the current value."),
-		"STENCIL_OP_INCREMENT_AND_WRAP".enum("Increments the current value and wraps to 0 when the maximum value would have been exceeded."),
-		"STENCIL_OP_DECREMENT_AND_WRAP".enum("Decrements the current value and wraps to the maximum possible value when the value would go below 0.")
-	)
-
-	EnumConstant(
-		"VkLogicOp",
-
-		"LOGIC_OP_CLEAR".enum("{@code 0}", "0"),
-		"LOGIC_OP_AND".enum("{@code s∧d}"),
-		"LOGIC_OP_AND_REVERSE".enum("{@code s∧¬d}"),
-		"LOGIC_OP_COPY".enum("{@code s}"),
-		"LOGIC_OP_AND_INVERTED".enum("{@code ¬s∧d}"),
-		"LOGIC_OP_NO_OP".enum("{@code d}"),
-		"LOGIC_OP_XOR".enum("{@code s⊕d}"),
-		"LOGIC_OP_OR".enum("{@code s∨d}"),
-		"LOGIC_OP_NOR".enum("{@code ¬(s∨d)}"),
-		"LOGIC_OP_EQUIVALENT".enum("{@code ¬(s⊕d)}"),
-		"LOGIC_OP_INVERT".enum("{@code ¬d}"),
-		"LOGIC_OP_OR_REVERSE".enum("{@code s∨¬d}"),
-		"LOGIC_OP_COPY_INVERTED".enum("{@code ¬s}"),
-		"LOGIC_OP_OR_INVERTED".enum("{@code ¬s∨d}"),
-		"LOGIC_OP_NAND".enum("{@code ¬(s∧d)}"),
-		"LOGIC_OP_SET".enum("{@code all 1s}")
-	)
-
-	EnumConstant(
-		"VkBlendFactor",
-
-		"BLEND_FACTOR_ZERO".enum(code("(0, 0, 0, 0)")),
-		"BLEND_FACTOR_ONE".enum(code("(1, 1, 1, 1)")),
-		"BLEND_FACTOR_SRC_COLOR".enum(code("(R<sub>s0</sub>, G<sub>s0</sub>, B<sub>s0</sub>, A<sub>s0</sub>)")),
-		"BLEND_FACTOR_ONE_MINUS_SRC_COLOR".enum(code("(1 − R<sub>s0</sub>, 1 − G<sub>s0</sub>, 1 − B<sub>s0</sub>, 1 − A<sub>s0</sub>)")),
-		"BLEND_FACTOR_DST_COLOR".enum(code("(R<sub>d</sub>, G<sub>d</sub>, B<sub>d</sub>, A<sub>d</sub>)")),
-		"BLEND_FACTOR_ONE_MINUS_DST_COLOR".enum(code("(1 − R<sub>d</sub>, 1 − G<sub>d</sub>, 1 − B<sub>d</sub>, 1 − A<sub>d</sub>)")),
-		"BLEND_FACTOR_SRC_ALPHA".enum(code("(A<sub>s0</sub>, A<sub>s0</sub>, A<sub>s0</sub>, A<sub>s0</sub>)")),
-		"BLEND_FACTOR_ONE_MINUS_SRC_ALPHA".enum(code("(1 − A<sub>s0</sub>, 1 − A<sub>s0</sub>, 1 − A<sub>s0</sub>, 1 − A<sub>s0</sub>)")),
-		"BLEND_FACTOR_DST_ALPHA".enum(code("(A<sub>d</sub>, A<sub>d</sub>, A<sub>d</sub>, A<sub>d</sub>)")),
-		"BLEND_FACTOR_ONE_MINUS_DST_ALPHA".enum(code("(1 − A<sub>d</sub>, 1 − A<sub>d</sub>, 1 − A<sub>d</sub>, 1 − A<sub>d</sub>)")),
-		"BLEND_FACTOR_CONSTANT_COLOR".enum(code("(R<sub>c</sub>, G<sub>c</sub>, B<sub>c</sub>, A<sub>c</sub>)")),
-		"BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR".enum(code("(1 − R<sub>c</sub>, 1 − G<sub>c</sub>, 1 − B<sub>c</sub>, 1 − A<sub>c</sub>)")),
-		"BLEND_FACTOR_CONSTANT_ALPHA".enum(code("(A<sub>c</sub>, A<sub>c</sub>, A<sub>c</sub>, A<sub>c</sub>)")),
-		"BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA".enum(code("(1 − A<sub>c</sub>, 1 − A<sub>c</sub>, 1 − A<sub>c</sub>, 1 − A<sub>c</sub>)")),
-		"BLEND_FACTOR_SRC_ALPHA_SATURATE".enum(code("(f, f, f, 1) ; f = min(A<sub>s0</sub>, 1 − A<sub>d</sub>)")),
-		"BLEND_FACTOR_SRC1_COLOR".enum(code("(R<sub>s1</sub>, G<sub>s1</sub>, B<sub>s1</sub>, A<sub>s1</sub>)")),
-		"BLEND_FACTOR_ONE_MINUS_SRC1_COLOR".enum(code("(1 − R<sub>s1</sub>, 1 − G<sub>s1</sub>, 1 − B<sub>s1</sub>, 1 − A<sub>s1</sub>)")),
-		"BLEND_FACTOR_SRC1_ALPHA".enum(code("(A<sub>s1</sub>, A<sub>s1</sub>, A<sub>s1</sub>, A<sub>s1</sub>)")),
-		"BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA".enum(code("(1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>, 1 − A<sub>s1</sub>)"))
-	)
-
-	EnumConstant(
-		"VkBlendOp",
-
-		"BLEND_OP_ADD".enum(codeBlock(
-			"""R = R<sub>s0</sub> × S<sub>r</sub> + R<sub>d</sub> × D<sub>r</sub>
-G = G<sub>s0</sub> × S<sub>g</sub> + G<sub>d</sub> × D<sub>g</sub>
-B = B<sub>s0</sub> × S<sub>b</sub> + B<sub>d</sub> × D<sub>b</sub>
-A = A<sub>s0</sub> × S<sub>a</sub> + A<sub>d</sub> × D<sub>a</sub>"""),
-			"0"),
-		"BLEND_OP_SUBTRACT".enum(codeBlock(
-			"""R = R<sub>s0</sub> × S<sub>r</sub> − R<sub>d</sub> × D<sub>r</sub>
-G = G<sub>s0</sub> × S<sub>g</sub> − G<sub>d</sub> × D<sub>g</sub>
-B = B<sub>s0</sub> × S<sub>b</sub> − B<sub>d</sub> × D<sub>b</sub>
-A = A<sub>s0</sub> × S<sub>a</sub> − A<sub>d</sub> × D<sub>a</sub>""")),
-		"BLEND_OP_REVERSE_SUBTRACT".enum(codeBlock(
-			"""R = R<sub>d</sub> × D<sub>r</sub> − R<sub>s0</sub> × S<sub>r</sub>
-G = G<sub>d</sub> × D<sub>g</sub> − G<sub>s0</sub> × S<sub>g</sub>
-B = B<sub>d</sub> × D<sub>b</sub> − B<sub>s0</sub> × S<sub>b</sub>
-A = A<sub>d</sub> × D<sub>a</sub> − A<sub>s0</sub> × S<sub>a</sub>""")),
-		"BLEND_OP_MIN".enum(codeBlock(
-			"""R = min(R<sub>s0</sub>, R<sub>d</sub>)
-G = min(G<sub>s0</sub>, G<sub>d</sub>)
-B = min(B<sub>s0</sub>, B<sub>d</sub>)
-A = min(A<sub>s0</sub>, A<sub>d</sub>)""")),
-		"BLEND_OP_MAX".enum(codeBlock(
-			"""R = max(R<sub>s0</sub>, R<sub>d</sub>)
-G = max(G<sub>s0</sub>, G<sub>d</sub>)
-B = max(B<sub>s0</sub>, B<sub>d</sub>)
-A = max(A<sub>s0</sub>, A<sub>d</sub>)"""))
-	)
-
-	EnumConstant(
-		"VkDynamicState",
-
-		"DYNAMIC_STATE_VIEWPORT".enum(
-			"""
-			Indicates that the {@code pViewports} state in ##VkPipelineViewportStateCreateInfo will be ignored and $must be set dynamically with
-			#CmdSetViewport() before any draw commands. The number of viewports used by a pipeline is still specified by the {@code viewportCount} member of
-			{@code VkPipelineViewportStateCreateInfo}.
-			""", "0"),
-		"DYNAMIC_STATE_SCISSOR".enum(
-			"""
-			Indicates that the {@code pScissors} state in ##VkPipelineViewportStateCreateInfo will be ignored and $must be set dynamically with
-			#CmdSetScissor() before any draw commands. The number of scissor rectangles used by a pipeline is still specified by the {@code scissorCount}
-			member of {@code VkPipelineViewportStateCreateInfo}.
-			"""
-		),
-		"DYNAMIC_STATE_LINE_WIDTH".enum(
-			"""
-			Indicates that the {@code lineWidth} state in ##VkPipelineRasterizationStateCreateInfo will be ignored and $must be set dynamically with
-			#CmdSetLineWidth() before any draw commands that generate line primitives for the rasterizer.
-			"""
-		),
-		"DYNAMIC_STATE_DEPTH_BIAS".enum(
-			"""
-			Indicates that the {@code depthBiasConstantFactor}, {@code depthBiasClamp} and {@code depthBiasSlopeFactor} states in
-			##VkPipelineRasterizationStateCreateInfo will be ignored and $must be set dynamically with #CmdSetDepthBias() before any draws are performed with
-			{@code depthBiasEnable} in {@code VkPipelineRasterizationStateCreateInfo} set to #TRUE.
-			"""
-		),
-		"DYNAMIC_STATE_BLEND_CONSTANTS".enum(
-			"""
-			Indicates that the {@code blendConstants} state in ##VkPipelineColorBlendStateCreateInfo will be ignored and $must be set dynamically with
-			#CmdSetBlendConstants() before any draws are performed with a pipeline state with {@code VkPipelineColorBlendAttachmentState} member
-			{@code blendEnable} set to #TRUE and any of the blend functions using a constant blend color.
-			"""
-		),
-		"DYNAMIC_STATE_DEPTH_BOUNDS".enum(
-			"""
-			Indicates that the {@code minDepthBounds} and {@code maxDepthBounds} states of ##VkPipelineDepthStencilStateCreateInfo will be ignored and $must be
-			set dynamically with #CmdSetDepthBounds() before any draws are performed with a pipeline state with {@code VkPipelineDepthStencilStateCreateInfo}
-			member {@code depthBoundsTestEnable} set to #TRUE.
-			"""
-		),
-		"DYNAMIC_STATE_STENCIL_COMPARE_MASK".enum(
-			"""
-			Indicates that the {@code compareMask} state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and $must be set
-			dynamically with #CmdSetStencilCompareMask() before any draws are performed with a pipeline state with
-			{@code VkPipelineDepthStencilStateCreateInfo} member {@code stencilTestEnable} set to #TRUE.
-			"""
-		),
-		"DYNAMIC_STATE_STENCIL_WRITE_MASK".enum(
-			"""
-			Indicates that the {@code writeMask} state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and $must be set
-			dynamically with #CmdSetStencilWriteMask() before any draws are performed with a pipeline state with {@code VkPipelineDepthStencilStateCreateInfo}
-			member {@code stencilTestEnable} set to #TRUE.
-			"""
-		),
-		"DYNAMIC_STATE_STENCIL_REFERENCE".enum(
-			"""
-			Indicates that the reference state in ##VkPipelineDepthStencilStateCreateInfo for both front and back will be ignored and $must be set dynamically
-			with #CmdSetStencilReference() before any draws are performed with a pipeline state with {@code VkPipelineDepthStencilStateCreateInfo} member
-			{@code stencilTestEnable} set to #TRUE.
-			"""
-		)
-	)
-
-	EnumConstant(
-		"VkFilter",
-
-		"FILTER_NEAREST".enum(
-			"""
-			Nearest filtering.
-
-			Computes the integer texel coordinates that the unnormalized coordinates lie within:
-			${codeBlock("""
-i = floor(u)
-j = floor(v)
-k = floor(w)""")}
-			""",
-			"0"),
-		"FILTER_LINEAR".enum(
-			"""
-			Linear filtering.
-
-			Computes a set of neighboring coordinates which bound the unnormalized coordinates. The integer texel coordinates are combinations of
-			${code("i<sub>0</sub>")} or ${code("i<sub>1</sub>")}, ${code("j<sub>0</sub>")} or ${code("j<sub>1</sub>")}, ${code("k<sub>0</sub>")} or
-			${code("k<sub>1</sub>")}, as well as weights {@code α}, {@code β}, and {@code γ}.
-			${codeBlock("""
-i<sub>0</sub> = floor(u - 0.5)      i<sub>1</sub> = i<sub>0</sub> + 1
-j<sub>0</sub> = floor(v - 0.5)      j<sub>1</sub> = j<sub>0</sub> + 1
-k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
-
-α = frac(u - 0.5)
-β = frac(v - 0.5)
-γ = frac(w - 0.5)""")}
-			"""
-		)
-	)
-
-	val baseLevel = "level<sub>base</sub>"
-
-	EnumConstant(
-		"VkSamplerMipmapMode",
-
-		"SAMPLER_MIPMAP_MODE_NEAREST".enum(
-			"""
-			Texels are read from the image level {@code d}, where:
-
-			<table>
-			${tr(td(code("d = $baseLevel")), td(code("when λ &le; 0.5")))}
-			${tr(td(code("d = nearest(λ)")), td(code("when λ &gt; 0.5 && $baseLevel + λ &le; q + 0.5")))}
-			${tr(td(code("d = q")), td(code("when λ &gt; 0.5 && $baseLevel + λ &gt; q + 0.5")))}
-			</table>
-
-			and:
-
-			<table>
-			${tr(td(code("nearest(λ) = ceil($baseLevel + λ + 0.5) - 1,")), td("preferred"))}
-			${tr(td(code("nearest(λ) = floor($baseLevel + λ + 0.5),")), td("alternative"))}
-			</table>
-
-			and where {@code q} is the {@code levelCount} from the {@code subresourceRange} of the image view.
-			""", "0"),
-		"SAMPLER_MIPMAP_MODE_LINEAR".enum(
-			"""
-			Texels are read from image levels ${code("d<sub>hi</sub>")} and ${code("d<sub>lo</sub>")}, where:
-
-			<table>
-			${tr(td(code("d<sub>hi</sub> = q")), td(code("when $baseLevel + λ &ge; q")))}
-			${tr(td(code("d<sub>hi</sub> = floor($baseLevel + λ)")), td("otherwise"))}
-			</table>
-
-			and:
-
-			<table>
-			${tr(td(code("d<sub>lo</sub> = q")), td(code("when $baseLevel + λ &ge; q")))}
-			${tr(td(code("d<sub>lo</sub> = d<sub>hi</sub> + 1")), td("otherwise"))}
-			</table>
-
-			${code("δ = frac(λ)")} is the fractional value used for linear filtering between levels:
-			"""
-		)
-	)
-
-	EnumConstant(
-		"VkSamplerAddressMode",
-
-		"SAMPLER_ADDRESS_MODE_REPEAT".enum("Indicates that the repeat wrap mode will be used.", "0"),
-		"SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT".enum("Indicates that the mirrored repeat wrap mode will be used."),
-		"SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE".enum("Indicates that the clamp to edge wrap mode will be used."),
-		"SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".enum("Indicates that the clamp to border wrap mode will be used.")
-	)
-
-	EnumConstant(
-		"VkBorderColor",
-
-		"BORDER_COLOR_FLOAT_TRANSPARENT_BLACK".enum(code("(0.0, 0.0, 0.0, 0.0)"), "0"),
-		"BORDER_COLOR_INT_TRANSPARENT_BLACK".enum(code("(0, 0, 0, 0)")),
-		"BORDER_COLOR_FLOAT_OPAQUE_BLACK".enum(code("(0.0, 0.0, 0.0, 1.0)")),
-		"BORDER_COLOR_INT_OPAQUE_BLACK".enum(code("(0, 0, 0, 1)")),
-		"BORDER_COLOR_FLOAT_OPAQUE_WHITE".enum(code("(1.0, 1.0, 1.0, 1.0)")),
-		"BORDER_COLOR_INT_OPAQUE_WHITE".enum(code("(1, 1, 1, 1)"))
-	)
-
-	EnumConstant(
-		"VkDescriptorType",
-
-		"DESCRIPTOR_TYPE_SAMPLER".enum("", "0"),
-		"DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER".enum(""),
-		"DESCRIPTOR_TYPE_SAMPLED_IMAGE".enum(""),
-		"DESCRIPTOR_TYPE_STORAGE_IMAGE".enum(""),
-		"DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER".enum(""),
-		"DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER".enum(""),
-		"DESCRIPTOR_TYPE_UNIFORM_BUFFER".enum(""),
-		"DESCRIPTOR_TYPE_STORAGE_BUFFER".enum(""),
-		"DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC".enum(""),
-		"DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC".enum(""),
-		"DESCRIPTOR_TYPE_INPUT_ATTACHMENT".enum("")
-	)
-
-	EnumConstant(
-		"VkAttachmentLoadOp",
-
-		"ATTACHMENT_LOAD_OP_LOAD".enum("Means the contents within the render area will be preserved.", "0"),
-		"ATTACHMENT_LOAD_OP_CLEAR".enum(
-			"Means the contents within the render area will be cleared to a uniform value, which is specified when a render pass instance is begun."
-		),
-		"ATTACHMENT_LOAD_OP_DONT_CARE".enum(
-			"Means the contents within the area need not be preserved; the contents of the attachment will be undefined inside the render area."
-		)
-	)
-
-	EnumConstant(
-		"VkAttachmentStoreOp",
-
-		"ATTACHMENT_STORE_OP_STORE".enum(
-			"""
-			Means the contents within the render area are written to memory and will be available for reading after the render pass instance completes once the
-			writes have been synchronized with #ACCESS_COLOR_ATTACHMENT_WRITE_BIT (for color attachments) or #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT (for
-			depth/stencil attachments).
-			""", "0"
-		),
-		"ATTACHMENT_STORE_OP_DONT_CARE".enum(
-			"""
-			Means the contents within the render area are not needed after rendering, and $may be discarded; the contents of the attachment will be undefined
-			inside the render area.
-			"""
-		)
-	)
-
-	val VkPipelineBindPoints = EnumConstant(
-		"VkPipelineBindPoint",
-
-		"PIPELINE_BIND_POINT_GRAPHICS".enum("", "0"),
-		"PIPELINE_BIND_POINT_COMPUTE".enum("")
-	).javaDocLinks
-
-	EnumConstant(
-		"VkCommandBufferLevel",
-
-		"COMMAND_BUFFER_LEVEL_PRIMARY".enum("", "0"),
-		"COMMAND_BUFFER_LEVEL_SECONDARY".enum("")
-	)
-
-	val VkIndexTypes = EnumConstant(
-		"VkIndexType",
-
-		"INDEX_TYPE_UINT16".enum("", "0"),
-		"INDEX_TYPE_UINT32".enum("")
-	).javaDocLinks
-
-	val VkSubpassContentValues = EnumConstant(
-		"VkSubpassContents",
-
-		"SUBPASS_CONTENTS_INLINE".enum(
-			"""
-			The contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers $must not be executed within the
-			subpass.
-			""", "0"),
-		"SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS".enum(
-			"""
-			The contents are recorded in secondary command buffers that will be called from the primary command buffer, and #CmdExecuteCommands() is the only
-			valid command on the command buffer until #CmdNextSubpass() or #CmdEndRenderPass().
-			"""
-		)
-	).javaDocLinks
-
-	EnumConstant(
-		"VkFormatFeatureFlagBits",
-
-		"FORMAT_FEATURE_SAMPLED_IMAGE_BIT".enum("{@code VkImageView} $can be sampled from.", 0x00000001),
-		"FORMAT_FEATURE_STORAGE_IMAGE_BIT".enum("{@code VkImageView} $can be used as storage image.", 0x00000002),
-		"FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT".enum("{@code VkImageView} $can be used as storage image that supports atomic operations.", 0x00000004),
-		"FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT".enum(
-			"Format $can be used to create a {@code VkBufferView} that $can be bound to a #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER descriptor.",
-			0x00000008
-		),
-		"FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT".enum(
-			"Format $can be used to create a {@code VkBufferView} that $can be bound to a #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER descriptor.",
-			0x00000010
-		),
-		"FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT".enum(
-			"Atomic operations are supported on #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER with this format.",
-			0x00000020
-		),
-		"FORMAT_FEATURE_VERTEX_BUFFER_BIT".enum(
-			"Format $can be used as a vertex attribute format (##VkVertexInputAttributeDescription{@code .format}).",
-			0x00000040
-		),
-		"FORMAT_FEATURE_COLOR_ATTACHMENT_BIT".enum("{@code VkImageView} $can be used as a framebuffer color attachment and as an input attachment.", 0x00000080),
-		"FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT".enum(
-			"{@code VkImageView} $can be used as a framebuffer color attachment that supports blending and as an input attachment.",
-			0x00000100
-		),
-		"FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT".enum(
-			"{@code VkImageView} $can be used as a framebuffer depth/stencil attachment and as an input attachment.",
-			0x00000200
-		),
-		"FORMAT_FEATURE_BLIT_SRC_BIT".enum("{@code VkImage} $can be used as {@code srcImage} for the #CmdBlitImage() command.", 0x00000400),
-		"FORMAT_FEATURE_BLIT_DST_BIT".enum("{@code VkImage} $can be used as {@code dstImage} for the #CmdBlitImage() command.", 0x00000800),
-		"FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT".enum(
-			"""
-			If #FORMAT_FEATURE_SAMPLED_IMAGE_BIT is also set, {@code VkImageView} $can be used with a sampler that has either of {@code magFilter} or
-			{@code minFilter} set to #FILTER_LINEAR, or {@code mipmapMode} set to #SAMPLER_MIPMAP_MODE_LINEAR. If #FORMAT_FEATURE_BLIT_SRC_BIT is also set,
-			{@code VkImage} can be used as the {@code srcImage} to #CmdBlitImage() with a {@code filter} of #FILTER_LINEAR. This bit $must only be exposed for
-			formats that also support the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT or #FORMAT_FEATURE_BLIT_SRC_BIT.
-
-			If the format being queried is a depth/stencil format, this bit only indicates that the depth aspect (not the stencil aspect) supports linear
-			filtering, and that linear filtering of the depth aspect is supported whether depth compare is enabled in the sampler or not. If this bit is not
-			present, linear filtering with depth compare disabled is unsupported and linear filtering with depth compare enabled is supported, but $may compute
-			the filtered value in an implementation-dependent manner which differs from the normal rules of linear filtering. The resulting value $must be in
-			the range {@code [0,1]} and $should be proportional to, or a weighted average of, the number of comparison passes or failures.
-			""",
-			0x00001000
-		)
-	)
-
-	val VkImageUsageFlagBits = EnumConstant(
-		"VkImageUsageFlagBits",
-
-		"IMAGE_USAGE_TRANSFER_SRC_BIT".enum("Indicates that the image $can be used as the source of a transfer command.", 0x00000001),
-		"IMAGE_USAGE_TRANSFER_DST_BIT".enum("Indicates that the image $can be used as the destination of a transfer command.", 0x00000002),
-		"IMAGE_USAGE_SAMPLED_BIT".enum(
-			"""
-			Indicates that the image $can be used to create a {@code VkImageView} suitable for occupying a {@code VkDescriptorSet} slot either of type
-			#DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and be sampled by a shader.
-			""",
-			0x00000004
-		),
-		"IMAGE_USAGE_STORAGE_BIT".enum(
-			"""
-			Indicates that the image $can be used to create a {@code VkImageView} suitable for occupying a {@code VkDescriptorSet} slot of type
-			#DESCRIPTOR_TYPE_STORAGE_IMAGE.
-			""",
-			0x00000008
-		),
-		"IMAGE_USAGE_COLOR_ATTACHMENT_BIT".enum(
-			"Indicates that the image $can be used to create a {@code VkImageView} suitable for use as a color or resolve attachment in a {@code VkFramebuffer}.",
-			0x00000010
-		),
-		"IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT".enum(
-			"Indicates that the image $can be used to create a {@code VkImageView} suitable for use as a depth/stencil attachment in a {@code VkFramebuffer}.",
-			0x00000020
-		),
-		"IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT".enum(
-			"""
-			Indicates that the memory bound to this image will have been allocated with the #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT. If this is set, then bits
-			other than #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and #IMAGE_USAGE_INPUT_ATTACHMENT_BIT $must not be set.
-			""",
-			0x00000040
-		),
-		"IMAGE_USAGE_INPUT_ATTACHMENT_BIT".enum(
-			"""
-			Indicates that the image $can be used to create a {@code VkImageView} suitable for occupying {@code VkDescriptorSet} slot of type
-			#DESCRIPTOR_TYPE_INPUT_ATTACHMENT; be read from a shader as an input attachment; and be used as an input attachment in a framebuffer.
-			""",
-			0x00000080
-		)
-	).javaDocLinks
-
-	val VkImageCreateFlagBits = EnumConstant(
-		"VkImageCreateFlagBits",
-
-		"IMAGE_CREATE_SPARSE_BINDING_BIT".enum("Indicates that the image will be backed using sparse memory binding.", 0x00000001),
-		"IMAGE_CREATE_SPARSE_RESIDENCY_BIT".enum(
-			"""
-			Indicates that the image $can be partially backed using sparse memory binding. Images created with this flag $must also be created with the
-			#IMAGE_CREATE_SPARSE_BINDING_BIT flag.
-			""",
-			0x00000002
-		),
-		"IMAGE_CREATE_SPARSE_ALIASED_BIT".enum(
-			"""
-			Indicates that the image will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another image (or
-			another portion of the same image). Images created with this flag $must also be created with the #IMAGE_CREATE_SPARSE_BINDING_BIT flag.
-			""",
-			0x00000004
-		),
-		"IMAGE_CREATE_MUTABLE_FORMAT_BIT".enum(
-			"Indicates that the image $can be used to create a {@code VkImageView} with a different format from the image.",
-			0x00000008
-		),
-		"IMAGE_CREATE_CUBE_COMPATIBLE_BIT".enum(
-			"Indicates that the image $can be used to create a {@code VkImageView} of type #IMAGE_VIEW_TYPE_CUBE or #IMAGE_VIEW_TYPE_CUBE_ARRAY.",
-			0x00000010
-		)
-	).javaDocLinks
-
-	val VkSampleCountFlagBitLinks = EnumConstant(
-		"VkSampleCountFlagBits",
-
-		"SAMPLE_COUNT_1_BIT".enum(
-			"""
-			1 sample per pixel. Standard sample locations:
-			${codeBlock("(0.5, 0.5)")}
-			""",
-			0x00000001
-		),
-		"SAMPLE_COUNT_2_BIT".enum(
-			"""
-			2 samples per pixel. Standard sample locations:
-			${codeBlock("""
-(0.25, 0.25)
-(0.75, 0.75)""")}
-			""",
-			0x00000002
-		),
-		"SAMPLE_COUNT_4_BIT".enum(
-			"""
-			4 samples per pixel. Standard sample locations:
-			${codeBlock("""
-(0.375, 0.125)
-(0.875, 0.375)
-(0.125, 0.625)
-(0.625, 0.875)""")}
-			""",
-			0x00000004
-		),
-		"SAMPLE_COUNT_8_BIT".enum(
-			"""
-			8 samples per pixel. Standard sample locations:
-			${codeBlock("""
-(0.5625, 0.3125)
-(0.4375, 0.6875)
-(0.8125, 0.5625)
-(0.3125, 0.1875)
-(0.1875, 0.8125)
-(0.0625, 0.4375)
-(0.6875, 0.9375)
-(0.9375, 0.0625)""")}
-			""",
-			0x00000008
-		),
-		"SAMPLE_COUNT_16_BIT".enum(
-			"""
-			16 samples per pixel. Standard sample locations:
-			${codeBlock("""
-(0.5625, 0.5625)
-(0.4375, 0.3125)
-(0.3125, 0.625)
-(0.75, 0.4375)
-(0.1875, 0.375)
-(0.625, 0.8125)
-(0.8125, 0.6875)
-(0.6875, 0.1875)
-(0.375, 0.875)
-(0.5, 0.0625)
-(0.25, 0.125)
-(0.125, 0.75)
-(0.0, 0.5)
-(0.9375, 0.25)
-(0.875, 0.9375)
-(0.0625, 0.0)""")}
-			""",
-			0x00000010
-		),
-		"SAMPLE_COUNT_32_BIT".enum("32 samples per pixel.", 0x00000020),
-		"SAMPLE_COUNT_64_BIT".enum("64 samples per pixel.", 0x00000040)
-	).javaDocLinks
-
-	EnumConstant(
-		"VkQueueFlagBits",
-
-		"QUEUE_GRAPHICS_BIT".enum("If set, then the queues in this queue family support graphics operations.", 0x00000001),
-		"QUEUE_COMPUTE_BIT".enum("If set, then the queues in this queue family support compute operations.", 0x00000002),
-		"QUEUE_TRANSFER_BIT".enum("If set, then the queues in this queue family support transfer operations.", 0x00000004),
-		"QUEUE_SPARSE_BINDING_BIT".enum(
-			"""
-			If set, then the queues in this queue family support sparse memory management operations. If any of the sparse resource features are enabled, then
-			at least one queue family $must support this bit.
-			""",
-			0x00000008
-		)
-	)
-
-	EnumConstant(
-		"VkMemoryPropertyFlagBits",
-
-		"MEMORY_PROPERTY_DEVICE_LOCAL_BIT".enum(
-			"""
-			If set, memory allocated with this type is the most efficient for device access. This property will only be set for memory types belonging to heaps
-			with the #MEMORY_HEAP_DEVICE_LOCAL_BIT set.
-			""", 0x00000001),
-		"MEMORY_PROPERTY_HOST_VISIBLE_BIT".enum(
-			"If set, memory allocated with this type $can be mapped using #MapMemory() so that it $can be accessed on the host.",
-			0x00000002
-		),
-		"MEMORY_PROPERTY_HOST_COHERENT_BIT".enum(
-			"""
-			If set, host cache management commands #FlushMappedMemoryRanges() and #InvalidateMappedMemoryRanges() are not needed to make host writes visible to
-			the device or device writes visible to the host, respectively.
-			""",
-			0x00000004
-		),
-		"MEMORY_PROPERTY_HOST_CACHED_BIT".enum(
-			"""
-			If set, memory allocated with this type is cached on the host. Host memory accesses to uncached memory are slower than to cached memory, however
-			uncached memory is always host coherent.
-			""",
-			0x00000008
-		),
-		"MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT".enum(
-			"""
-			If set, the memory type only allows device access to the memory. Memory types $must not have both #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT and
-			#MEMORY_PROPERTY_HOST_VISIBLE_BIT set. Additionally, the object's backing memory $may be provided by the implementation lazily.
-			""",
-			0x00000010
-		)
-	)
-
-	EnumConstant(
-		"VkMemoryHeapFlagBits",
-
-		"MEMORY_HEAP_DEVICE_LOCAL_BIT".enum(
-			"""
-			Means the heap corresponds to device local memory. Device local memory $may have different performance characteristics than host local memory, and
-			$may support different memory property flags.
-			""",
-			0x00000001
-		)
-	)
-
-	val VkPipelineStageFlagBitsLinks = EnumConstant(
-		"VkPipelineStageFlagBits",
-
-		"PIPELINE_STAGE_TOP_OF_PIPE_BIT".enum("Stage of the pipeline where commands are initially received by the queue.", 0x00000001),
-		"PIPELINE_STAGE_DRAW_INDIRECT_BIT".enum("Stage of the pipeline where Draw/DispatchIndirect data structures are consumed.", 0x00000002),
-		"PIPELINE_STAGE_VERTEX_INPUT_BIT".enum("Stage of the pipeline where vertex and index buffers are consumed.", 0x00000004),
-		"PIPELINE_STAGE_VERTEX_SHADER_BIT".enum("Vertex shader stage.", 0x00000008),
-		"PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT".enum("Tessellation control shader stage.", 0x00000010),
-		"PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT".enum("Tessellation evaluation shader stage.", 0x00000020),
-		"PIPELINE_STAGE_GEOMETRY_SHADER_BIT".enum("Geometry shader stage.", 0x00000040),
-		"PIPELINE_STAGE_FRAGMENT_SHADER_BIT".enum("Fragment shader stage.", 0x00000080),
-		"PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT".enum(
-			"Stage of the pipeline where early fragment tests (depth and stencil tests before fragment shading) are performed.",
-			0x00000100
-		),
-		"PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT".enum(
-			"Stage of the pipeline where late fragment tests (depth and stencil tests after fragment shading) are performed.",
-			0x00000200
-		),
-		"PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT".enum(
-			"""
-			Stage of the pipeline after blending where the final color values are output from the pipeline. This stage also includes resolve operations that
-			occur at the end of a subpass. Note that this does not necessarily indicate that the values have been committed to memory.
-			""",
-			0x00000400
-		),
-		"PIPELINE_STAGE_COMPUTE_SHADER_BIT".enum("Execution of a compute shader.", 0x00000800),
-		"PIPELINE_STAGE_TRANSFER_BIT".enum(
-			"""
-			Execution of copy commands. This includes the operations resulting from all transfer commands. The set of transfer commands comprises
-			#CmdCopyBuffer(), #CmdCopyImage(), #CmdBlitImage(), #CmdCopyBufferToImage(), #CmdCopyImageToBuffer(), #CmdUpdateBuffer(), #CmdFillBuffer(),
-			#CmdClearColorImage(), #CmdClearDepthStencilImage(), #CmdResolveImage(), and #CmdCopyQueryPoolResults().
-			""",
-			0x00001000
-		),
-		"PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT".enum("Final stage in the pipeline where commands complete execution.", 0x00002000),
-		"PIPELINE_STAGE_HOST_BIT".enum("A pseudo-stage indicating execution on the host of reads/writes of device memory.", 0x00004000),
-		"PIPELINE_STAGE_ALL_GRAPHICS_BIT".enum("Execution of all graphics pipeline stages.", 0x00008000),
-		"PIPELINE_STAGE_ALL_COMMANDS_BIT".enum("Execution of all stages supported on the queue.", 0x00010000)
-	).javaDocLinks
-
-	EnumConstant(
-		"VkImageAspectFlagBits",
-
-		"IMAGE_ASPECT_COLOR_BIT".enum("", 0x00000001),
-		"IMAGE_ASPECT_DEPTH_BIT".enum("", 0x00000002),
-		"IMAGE_ASPECT_STENCIL_BIT".enum("", 0x00000004),
-		"IMAGE_ASPECT_METADATA_BIT".enum("", 0x00000008)
-	)
-
-	EnumConstant(
-		"VkSparseImageFormatFlagBits",
-
-		"SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT".enum("If set, the image uses a single mip tail region for all array layers.", 0x00000001),
-		"SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT".enum(
-			"If set, the first mip level that is not an exact multiple of the sparse image block size begins the mip tail region.",
-			0x00000002
-		),
-		"SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT".enum(
-			"""
-			If set, the image uses a non-standard sparse block size, and the imageGranularity values do not match the standard block size for the given pixel
-			format.
-			""",
-			0x00000004
-		)
-	)
-
-	EnumConstant(
-		"VkSparseMemoryBindFlagBits",
-
-		"SPARSE_MEMORY_BIND_METADATA_BIT".enum("Is used to indicate that the memory being bound is only for the metadata aspect.", 0x00000001)
-	)
-
-	EnumConstant(
-		"VkFenceCreateFlagBits",
-
-		"FENCE_CREATE_SIGNALED_BIT".enum(
-			"If set, then the fence object is created in the signaled state. Otherwise it is created in the unsignaled state.",
-			0x00000001
-		)
-	)
-
-	EnumConstant(
-		"VkQueryPipelineStatisticFlagBits",
-
-		"QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT".enum(
-			"""
-			If set, queries managed by the pool will count the number of vertices processed by the input assembly stage. Vertices corresponding to incomplete
-			primitives $may contribute to the count.
-			""",
-			0x00000001
-		),
-		"QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT".enum(
-			"""
-			If set, queries managed by the pool will count the number of primitives processed by the input assembly stage. If primitive restart is enabled,
-			restarting the primitive topology has no effect on the count. Incomplete primitives $may be counted.
-			""",
-			0x00000002
-		),
-		"QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT".enum(
-			"""
-			If set, queries managed by the pool will count the number of vertex shader invocations. This counter’s value is incremented each time a vertex
-			shader is invoked.
-			""",
-			0x00000004
-		),
-		"QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT".enum(
-			"""
-			If set, queries managed by the pool will count the number of geometry shader invocations. This counter’s value is incremented each time a geometry
-			shader is invoked. In the case of instanced geometry shaders, the geometry shader invocations count is incremented for each separate instanced
-			invocation.
-			""",
-			0x00000008
-		),
-		"QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT".enum(
-			"""
-			If set, queries managed by the pool will count the number of primitives generated by geometry shader invocations. The counter’s value is
-			incremented each time the geometry shader emits a primitive. Restarting primitive topology using the SPIR-V instructions {@code OpEndPrimitive} or
-			{@code OpEndStreamPrimitive} has no effect on the geometry shader output primitives count.
-			""",
-			0x00000010
-		),
-		"QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT".enum(
-			"""
-			If set, queries managed by the pool will count the number of primitives processed by the Primitive Clipping stage of the pipeline. The counter’s
-			value is incremented each time a primitive reaches the primitive clipping stage.
-			""",
-			0x00000020
-		),
-		"QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT".enum(
-			"""
-			IF set, queries managed by the pool will count the number of primitives output by the Primitive Clipping stage of the pipeline. The counter’s value
-			is incremented each time a primitive passes the primitive clipping stage. The actual number of primitives output by the primitive clipping stage
-			for a particular input primitive is implementation-dependent but $must satisfy the following conditions:
-			${ul(
-				"If at least one vertex of the input primitive lies inside the clipping volume, the counter is incremented by one or more.",
-				"Otherwise, the counter is incremented by zero or more."
-			)}
-			""",
-			0x00000040
-		),
-		"QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT".enum(
-			"""
-			IF set, queries managed by the pool will count the number of fragment shader invocations. The counter’s value is incremented each time the fragment
-			shader is invoked.
-			""",
-			0x00000080
-		),
-		"QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT".enum(
-			"""
-			If set, queries managed by the pool will count the number of patches processed by the tessellation control shader. The counter’s value is
-			incremented once for each patch for which a tessellation control shader is invoked.
-			""",
-			0x00000100
-		),
-		"QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT".enum(
-			"""
-			If set, queries managed by the pool will count the number of invocations of the tessellation evaluation shader. The counter’s value is incremented
-			each time the tessellation evaluation shader is invoked.
-			""",
-			0x00000200
-		),
-		"QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT".enum(
-			"""
-			If set, queries managed by the pool will count the number of compute shader invocations. The counter’s value is incremented every time the compute
-			shader is invoked. Implementations $may skip the execution of certain compute shader invocations or execute additional compute shader invocations
-			for implementation-dependent reasons as long as the results of rendering otherwise remain unchanged.
-			""",
-			0x00000400
-		)
-	)
-
-	val VkQueryResultFlagBits = EnumConstant(
-		"VkQueryResultFlagBits",
-
-		"QUERY_RESULT_64_BIT".enum(
-			"""
-			Indicates the results will be written as an array of 64-bit unsigned integer values. If this bit is not set, the results will be written as an
-			array of 32-bit unsigned integer values.
-			""",
-			0x00000001
-		),
-		"QUERY_RESULT_WAIT_BIT".enum("Indicates that Vulkan will wait for each query’s status to become available before retrieving its results.", 0x00000002),
-		"QUERY_RESULT_WITH_AVAILABILITY_BIT".enum("Indicates that the availability status accompanies the results.", 0x00000004),
-		"QUERY_RESULT_PARTIAL_BIT".enum("Indicates that returning partial results is acceptable.", 0x00000008)
-	).javaDocLinks
-
-	EnumConstant(
-		"VkBufferCreateFlagBits",
-
-		"BUFFER_CREATE_SPARSE_BINDING_BIT".enum("Indicates that the buffer will be backed using sparse memory binding.", 0x00000001),
-		"BUFFER_CREATE_SPARSE_RESIDENCY_BIT".enum(
-			"""
-			Indicates that the buffer $can be partially backed using sparse memory binding. Buffers created with this flag $must also be created with the
-			#BUFFER_CREATE_SPARSE_BINDING_BIT flag.
-			""",
-			0x00000002
-		),
-		"BUFFER_CREATE_SPARSE_ALIASED_BIT".enum(
-			"""
-			Iindicates that the buffer will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another buffer
-			(or another portion of the same buffer). Buffers created with this flag $must also be created with the #BUFFER_CREATE_SPARSE_BINDING_BIT flag.
-			""",
-			0x00000004
-		)
-	)
-
-	EnumConstant(
-		"VkBufferUsageFlagBits",
-
-		"BUFFER_USAGE_TRANSFER_SRC_BIT".enum("Indicates that the buffer $can be used as the source of a transfer command.", 0x00000001),
-		"BUFFER_USAGE_TRANSFER_DST_BIT".enum("Indicates that the buffer $can be used as the destination of a transfer command.", 0x00000002),
-		"BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT".enum(
-			"""
-			Indicates that the buffer $can be used to create a {@code VkBufferView} suitable for occupying a {@code VkDescriptorSet} slot of type
-			#DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER.
-			""",
-			0x00000004
-		),
-		"BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT".enum(
-			"""
-			Indicates that the buffer $can be used to create a {@code VkBufferView} suitable for occupying a {@code VkDescriptorSet} slot of type
-			#DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER.
-			""",
-			0x00000008
-		),
-		"BUFFER_USAGE_UNIFORM_BUFFER_BIT".enum(
-			"""
-			Indicates that the buffer $can be used in a ##VkDescriptorBufferInfo suitable for occupying a {@code VkDescriptorSet} slot either of type
-			#DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC.
-			""",
-			0x00000010
-		),
-		"BUFFER_USAGE_STORAGE_BUFFER_BIT".enum(
-			"""
-			Indicates that the buffer $can be used in a ##VkDescriptorBufferInfo suitable for occupying a {@code VkDescriptorSet} slot either of type
-			#DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC.
-			""",
-			0x00000020
-		),
-		"BUFFER_USAGE_INDEX_BUFFER_BIT".enum(
-			"Indicates that the buffer is suitable for passing as the {@code buffer} parameter to #CmdBindIndexBuffer().",
-			0x00000040
-		),
-		"BUFFER_USAGE_VERTEX_BUFFER_BIT".enum(
-			"Indicates that the buffer is suitable for passing as an element of the {@code pBuffers} array to #CmdBindVertexBuffers().",
-			0x00000080
-		),
-		"BUFFER_USAGE_INDIRECT_BUFFER_BIT".enum(
-			"""
-			Indicates that the buffer is suitable for passing as the {@code buffer} parameter to #CmdDrawIndirect(), #CmdDrawIndexedIndirect(), or
-			#CmdDispatchIndirect().
-			""",
-			0x00000100
-		)
-	)
-
-	EnumConstant(
-		"VkPipelineCreateFlagBits",
-
-		"PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT".enum(
-			"Specifies that the created pipeline will not be optimized. Using this flag $may reduce the time taken to create the pipeline.",
-			0x00000001
-		),
-		"PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT".enum(
-			"""
-			Specifies that the pipeline to be created is allowed to be the parent of a pipeline that will be created in a subsequent call to
-			#CreateGraphicsPipelines().
-			""",
-			0x00000002
-		),
-		"PIPELINE_CREATE_DERIVATIVE_BIT".enum("Specifies that the pipeline to be created will be a child of a previously created parent pipeline.", 0x00000004)
-	)
-
-	val VkShaderStageFlagBits = EnumConstant(
-		"VkShaderStageFlagBits",
-
-		"SHADER_STAGE_VERTEX_BIT".enum("", 0x00000001),
-		"SHADER_STAGE_TESSELLATION_CONTROL_BIT".enum("", 0x00000002),
-		"SHADER_STAGE_TESSELLATION_EVALUATION_BIT".enum("", 0x00000004),
-		"SHADER_STAGE_GEOMETRY_BIT".enum("", 0x00000008),
-		"SHADER_STAGE_FRAGMENT_BIT".enum("", 0x00000010),
-		"SHADER_STAGE_COMPUTE_BIT".enum("", 0x00000020),
-		"SHADER_STAGE_ALL_GRAPHICS".enum("", 0x0000001F),
-		"SHADER_STAGE_ALL".enum("", 0x7FFFFFFF)
-	).javaDocLinks
-
-	EnumConstant(
-		"VkCullModeFlagBits",
-
-		"CULL_MODE_NONE".enum("If set, no triangles are discarded.", "0"),
-		"CULL_MODE_FRONT_BIT".enum("If set, front-facing triangles are discarded.", 0x00000001),
-		"CULL_MODE_BACK_BIT".enum("If set, back-facing triangles are discarded.", 0x00000002),
-		"CULL_MODE_FRONT_AND_BACK".enum("If set, all triangles are discarded.", 0x00000003)
-	)
-
-	EnumConstant(
-		"VkColorComponentFlagBits",
-
-		"COLOR_COMPONENT_R_BIT".enum(
-			"If set, then the {@code R} value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified.",
-			0x00000001
-		),
-		"COLOR_COMPONENT_G_BIT".enum(
-			"If set, then the {@code G} value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified.",
-			0x00000002
-		),
-		"COLOR_COMPONENT_B_BIT".enum(
-			"If set, then the {@code B} value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified.",
-			0x00000004
-		),
-		"COLOR_COMPONENT_A_BIT".enum(
-			"If set, then the {@code A} value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified.",
-			0x00000008
-		)
-	)
-
-	EnumConstant(
-		"VkDescriptorPoolCreateFlagBits",
-
-		"DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT".enum(
-			"""
-			If set, then descriptor sets $can return their individual allocations to the pool, i.e. all of #AllocateDescriptorSets(), #FreeDescriptorSets(), and
-			#ResetDescriptorPool() are allowed. Otherwise, descriptor sets allocated from the pool $must not be individually freed back to the pool, i.e. only
-			#AllocateDescriptorSets() and #ResetDescriptorPool() are allowed.
-			""",
-			0x00000001
-		)
-	)
-
-	EnumConstant(
-		"VkAttachmentDescriptionFlagBits",
-
-		"ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT".enum(
-			"""
-			If set, then the attachment is treated as if it shares physical memory with another attachment in the same render pass. This information limits the
-			ability of the implementation to reorder certain operations (like layout transitions and the {@code loadOp}) such that it is not improperly
-			reordered against other uses of the same physical memory via a different attachment. This is described in more detail below.
-
-			If a render pass uses multiple attachments that alias the same device memory, those attachments $must each include the
-			{@code ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit in their attachment description flags. Attachments aliasing the same memory occurs in multiple
-			ways:
-			${ul(
-				"Multiple attachments being assigned the same image view as part of framebuffer creation.",
-				"Attachments using distinct image views that correspond to the same image subresource of an image.",
-				"Attachments using views of distinct image subresources which are bound to overlapping memory."
-			)}
-			Render passes $must include subpass dependencies (either directly or via a subpass dependency chain) between any two subpasses that operate on the
-			same attachment or aliasing attachments and those subpass dependencies $must include execution and memory dependencies separating uses of the
-			aliases, if at least one of those subpasses writes to one of the aliases. Those dependencies $must not include the #DEPENDENCY_BY_REGION_BIT if the
-			aliases are views of distinct image subresources which overlap in memory.
-
-			Multiple attachments that alias the same memory $must not be used in a single subpass. A given attachment index $must not be used multiple times in
-			a single subpass, with one exception: two subpass attachments $can use the same attachment index if at least one use is as an input attachment and
-			neither use is as a resolve or preserve attachment. In other words, the same view $can be used simultaneously as an input and color or
-			depth/stencil attachment, but $must not be used as multiple color or depth/stencil attachments nor as resolve or preserve attachments.
-
-			If a set of attachments alias each other, then all except the first to be used in the render pass $must use an initialLayout of
-			#IMAGE_LAYOUT_UNDEFINED, since the earlier uses of the other aliases make their contents undefined. Once an alias has been used and a different
-			alias has been used after it, the first alias $must not be used in any later subpasses. However, an application $can assign the same image view to
-			multiple aliasing attachment indices, which allows that image view to be used multiple times even if other aliases are used in between. Once an
-			attachment needs the {@code ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit, there $should be no additional cost of introducing additional aliases, and
-			using these additional aliases $may allow more efficient clearing of the attachments on multiple uses via #ATTACHMENT_LOAD_OP_CLEAR.
-
-			${note(
-				"""
-				The exact set of attachment indices that alias with each other is not known until a framebuffer is created using the render pass, so the above
-				conditions $cannot be validated at render pass creation time.
-				"""
-			)}
-			""",
-			0x00000001
-		)
-	)
-
-	EnumConstant(
-		"VkAccessFlagBits",
-
-		"ACCESS_INDIRECT_COMMAND_READ_BIT".enum(
-			"Indicates that the access is an indirect command structure read as part of an indirect drawing command.",
-			0x00000001
-		),
-		"ACCESS_INDEX_READ_BIT".enum("Indicates that the access is an index buffer read.", 0x00000002),
-		"ACCESS_VERTEX_ATTRIBUTE_READ_BIT".enum("Indicates that the access is a read via the vertex input bindings.", 0x00000004),
-		"ACCESS_UNIFORM_READ_BIT".enum("Indicates that the access is a read via a uniform buffer or dynamic uniform buffer descriptor.", 0x00000008),
-		"ACCESS_INPUT_ATTACHMENT_READ_BIT".enum("Indicates that the access is a read via an input attachment descriptor.", 0x00000010),
-		"ACCESS_SHADER_READ_BIT".enum("Indicates that the access is a read from a shader via any other descriptor type.", 0x00000020),
-		"ACCESS_SHADER_WRITE_BIT".enum(
-			"Indicates that the access is a write or atomic from a shader via the same descriptor types as in #ACCESS_SHADER_READ_BIT.",
-			0x00000040
-		),
-		"ACCESS_COLOR_ATTACHMENT_READ_BIT".enum("Indicates that the access is a read via a color attachment.", 0x00000080),
-		"ACCESS_COLOR_ATTACHMENT_WRITE_BIT".enum("Indicates that the access is a write via a color or resolve attachment.", 0x00000100),
-		"ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT".enum("Indicates that the access is a read via a depth/stencil attachment.", 0x00000200),
-		"ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT".enum("Indicates that the access is a write via a depth/stencil attachment.", 0x00000400),
-		"ACCESS_TRANSFER_READ_BIT".enum(
-			"""
-			Indicates that the access is a read from a transfer (copy, blit, resolve, etc.) operation. For the complete set of transfer operations, see
-			#PIPELINE_STAGE_TRANSFER_BIT.
-			""",
-			0x00000800
-		),
-		"ACCESS_TRANSFER_WRITE_BIT".enum(
-			"""
-			Indicates that the access is a write from a transfer (copy, blit, resolve, etc.) operation. For the complete set of transfer operations, see
-			#PIPELINE_STAGE_TRANSFER_BIT.
-			""",
-			0x00001000
-		),
-		"ACCESS_HOST_READ_BIT".enum("Indicates that the access is a read via the host.", 0x00002000),
-		"ACCESS_HOST_WRITE_BIT".enum("Indicates that the access is a write via the host.", 0x00004000),
-		"ACCESS_MEMORY_READ_BIT".enum(
-			"""
-			Indicates that the access is a read via a non-specific unit attached to the memory. This unit $may be external to the Vulkan device or otherwise not
-			part of the core Vulkan pipeline. When included in {@code dstAccessMask}, all writes using access types in {@code srcAccessMask} performed by
-			pipeline stages in {@code srcStageMask} $must be visible in memory.
-			""",
-			0x00008000
-		),
-		"ACCESS_MEMORY_WRITE_BIT".enum(
-			"""
-			Indicates that the access is a write via a non-specific unit attached to the memory. This unit $may be external to the Vulkan device or otherwise
-			not part of the core Vulkan pipeline. When included in {@code srcAccessMask}, all access types in {@code dstAccessMask} from pipeline stages in
-			{@code dstStageMask} will observe the side effects of commands that executed before the barrier. When included in {@code dstAccessMask} all writes
-			using access types in {@code srcAccessMask} performed by pipeline stages in {@code srcStageMask} $must be visible in memory.
-			""",
-			0x00010000
-		)
-	)
-
-	val VkDependencyFlagBits = EnumConstant(
-		"VkDependencyFlagBits",
-
-		"DEPENDENCY_BY_REGION_BIT".enum("If set, then the dependency is by-region.", 0x00000001)
-	).javaDocLinks
-
-	EnumConstant(
-		"VkCommandPoolCreateFlagBits",
-
-		"COMMAND_POOL_CREATE_TRANSIENT_BIT".enum(
-			"""
-			Indicates that command buffers allocated from the pool will be short-lived, meaning that they will be reset or freed in a relatively short
-			timeframe. This flag $may be used by the implementation to control memory allocation behavior within the pool.
-			""",
-			0x00000001
-		),
-		"COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT".enum(
-			"""
-			Controls whether command buffers allocated from the pool $can be individually reset. If this flag is set, individual command buffers allocated from
-			the pool $can be reset either explicitly, by calling #ResetCommandBuffer(), or implicitly, by calling #BeginCommandBuffer() on an executable
-			command buffer. If this flag is not set, then #ResetCommandBuffer() and #BeginCommandBuffer() (on an executable command buffer) $must not be called
-			on the command buffers allocated from the pool, and they $can only be reset in bulk by calling #ResetCommandPool().
-			""",
-			0x00000002
-		)
-	)
-
-	val VkCommandPoolResetFlagBits = EnumConstant(
-		"VkCommandPoolResetFlagBits",
-
-		"COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT".enum(
-			"If set, resetting a command pool recycles all of the resources from the command pool back to the system.",
-			0x00000001
-		)
-	).javaDocLinks
-
-	EnumConstant(
-		"VkCommandBufferUsageFlagBits",
-
-		"COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT".enum(
-			"""
-			Indicates that each recording of the command buffer will only be submitted once, and the command buffer will be reset and recorded again between
-			each submission.
-			""",
-			0x00000001
-		),
-		"COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT".enum(
-			"""
-			Indicates that a secondary command buffer is considered to be entirely inside a render pass. If this is a primary command buffer, then this bit is
-			ignored.
-			""",
-			0x00000002
-		),
-		"COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT".enum(
-			"Allows the command buffer to be resubmitted to a queue or recorded into a primary command buffer while it is pending execution.",
-			0x00000004
-		)
-	)
-
-	val VkQueryControlFlagBits = EnumConstant(
-		"VkQueryControlFlagBits",
-
-		"QUERY_CONTROL_PRECISE_BIT".enum("If set, an implementation $must return a result that matches the actual number of samples passed.", 0x00000001)
-	).javaDocLinks
-
-	val VkCommandBufferResetFlagBits = EnumConstant(
-		"VkCommandBufferResetFlagBits",
-
-		"COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT".enum(
-			"""
-			If set, then most or all memory resources currently owned by the command buffer $should be returned to the parent command pool. If this flag is not
-			set, then the command buffer $may hold onto memory resources and reuse them when recording commands.
-			""",
-			0x00000001
-		)
-	).javaDocLinks
-
-	val VkStencilFaceFlagBits = EnumConstant(
-		"VkStencilFaceFlagBits",
-
-		"STENCIL_FACE_FRONT_BIT".enum("Indicates that only the front set of stencil state is updated.", 0x00000001),
-		"STENCIL_FACE_BACK_BIT".enum("Indicates that only the back set of stencil state is updated.", 0x00000002),
-		"STENCIL_FRONT_AND_BACK".enum(
-			"Is the combination of #STENCIL_FACE_FRONT_BIT and #STENCIL_FACE_BACK_BIT and indicates that both sets of stencil state are updated.",
-			0x00000003
-		)
-	).javaDocLinks
-
-	macro(expression = "(major << 22) | (minor << 12) | patch")..uint32_t(
-		"VK_MAKE_VERSION",
 		"""
-		Constructs an API version number.
+		VkPipelineCacheHeaderVersion - Encode pipeline cache version
 
-		This macro $can be used when constructing the ##VkApplicationInfo{@code ::pname:apiVersion} parameter passed to #CreateInstance().
+		<h5>Description</h5>
+		A consumer of the pipeline cache <b>should</b> use the cache version to interpret the remainder of the cache header.
+
+		<h5>See Also</h5>
+		#CreatePipelineCache(), #GetPipelineCacheData()
 		""",
 
-		uint32_t.IN("major", "the major version number"),
-		uint32_t.IN("minor", "the minor version number"),
-		uint32_t.IN("patch", "the patch version number"),
-
-		noPrefix = true
+		"PIPELINE_CACHE_HEADER_VERSION_ONE".."1"
 	)
 
-	macro(expression = "version >> 22")..uint32_t(
-		"VK_VERSION_MAJOR",
-		"Extracts the API major version number from a packed version number.",
+	EnumConstant(
+		"""
+		VkResult - Vulkan command return codes
 
-		uint32_t.IN("version", "the Vulkan API version"),
+		<h5>Description</h5>
+		<ul>
+			<li>#SUCCESS Command successfully completed</li>
+			<li>#NOT_READY A fence or query has not yet completed</li>
+			<li>#TIMEOUT A wait operation has not completed in the specified time</li>
+			<li>#EVENT_SET An event is signaled</li>
+			<li>#EVENT_RESET An event is unsignaled</li>
+			<li>#INCOMPLETE A return array was too small for the result</li>
+			<li>#SUBOPTIMAL_KHR A swapchain no longer matches the surface properties exactly, but <b>can</b> still be used to present to the surface successfully.</li>
+		</ul>
 
-		noPrefix = true
+		<ul>
+			<li>#ERROR_OUT_OF_HOST_MEMORY A host memory allocation has failed.</li>
+			<li>#ERROR_OUT_OF_DEVICE_MEMORY A device memory allocation has failed.</li>
+			<li>#ERROR_INITIALIZATION_FAILED Initialization of an object could not be completed for implementation-specific reasons.</li>
+			<li>#ERROR_DEVICE_LOST The logical or physical device has been lost. See <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-lost-device">Lost Device</a></li>
+			<li>#ERROR_MEMORY_MAP_FAILED Mapping of a memory object has failed.</li>
+			<li>#ERROR_LAYER_NOT_PRESENT A requested layer is not present or could not be loaded.</li>
+			<li>#ERROR_EXTENSION_NOT_PRESENT A requested extension is not supported.</li>
+			<li>#ERROR_FEATURE_NOT_PRESENT A requested feature is not supported.</li>
+			<li>#ERROR_INCOMPATIBLE_DRIVER The requested version of Vulkan is not supported by the driver or is otherwise incompatible for implementation-specific reasons.</li>
+			<li>#ERROR_TOO_MANY_OBJECTS Too many objects of the type have already been created.</li>
+			<li>#ERROR_FORMAT_NOT_SUPPORTED A requested format is not supported on this device.</li>
+			<li>#ERROR_FRAGMENTED_POOL A requested pool allocation has failed due to fragmentation of the pool&#8217;s memory.</li>
+			<li>#ERROR_SURFACE_LOST_KHR A surface is no longer available.</li>
+			<li>#ERROR_NATIVE_WINDOW_IN_USE_KHR The requested window is already in use by Vulkan or another API in a manner which prevents it from being used again.</li>
+			<li>#ERROR_OUT_OF_DATE_KHR A surface has changed in such a way that it is no longer compatible with the swapchain, and further presentation requests using the swapchain will fail. Applications <b>must</b> query the new surface properties and recreate their swapchain if they wish to continue presenting to the surface.</li>
+			<li>#ERROR_INCOMPATIBLE_DISPLAY_KHR The display used by a swapchain does not use the same presentable image layout, or is incompatible in a way that prevents sharing an image.</li>
+			<li>#ERROR_INVALID_SHADER_NV One or more shaders failed to compile or link. More details are reported back to the application via {@code VK_EXT_debug_report} if enabled.</li>
+		</ul>
+
+		If a command returns a run time error, it will leave any result pointers unmodified, unless other behavior is explicitly defined in the specification.
+
+		Out of memory errors do not damage any currently existing Vulkan objects. Objects that have already been successfully created <b>can</b> still be used by the application.
+
+		Performance-critical commands generally do not have return codes. If a run time error occurs in such commands, the implementation will defer reporting the error until a specified point. For commands that record into command buffers (ftext:vkCmd*) run time errors are reported by #EndCommandBuffer().
+
+		<h5>See Also</h5>
+		No cross-references are available, ##VkPresentInfoKHR
+		""",
+
+		"SUCCESS".."0",
+		"NOT_READY".."1",
+		"TIMEOUT".."2",
+		"EVENT_SET".."3",
+		"EVENT_RESET".."4",
+		"INCOMPLETE".."5",
+		"ERROR_OUT_OF_HOST_MEMORY".."-1",
+		"ERROR_OUT_OF_DEVICE_MEMORY".."-2",
+		"ERROR_INITIALIZATION_FAILED".."-3",
+		"ERROR_DEVICE_LOST".."-4",
+		"ERROR_MEMORY_MAP_FAILED".."-5",
+		"ERROR_LAYER_NOT_PRESENT".."-6",
+		"ERROR_EXTENSION_NOT_PRESENT".."-7",
+		"ERROR_FEATURE_NOT_PRESENT".."-8",
+		"ERROR_INCOMPATIBLE_DRIVER".."-9",
+		"ERROR_TOO_MANY_OBJECTS".."-10",
+		"ERROR_FORMAT_NOT_SUPPORTED".."-11",
+		"ERROR_FRAGMENTED_POOL".."-12"
 	)
 
-	macro(expression = "(version >> 12) & 0x3FF")..uint32_t(
-		"VK_VERSION_MINOR",
-		"Extracts the API minor version number from a packed version number.",
+	EnumConstant(
+		"""
+		VkStructureType - Vulkan structure types ({@code stype})
 
-		uint32_t.IN("version", "the Vulkan API version"),
+		<h5>See Also</h5>
+		##VkAndroidSurfaceCreateInfoKHR, ##VkApplicationInfo, ##VkBindSparseInfo, ##VkBufferCreateInfo, ##VkBufferMemoryBarrier, ##VkBufferViewCreateInfo, ##VkCommandBufferAllocateInfo, ##VkCommandBufferBeginInfo, ##VkCommandBufferInheritanceInfo, ##VkCommandPoolCreateInfo, ##VkComputePipelineCreateInfo, ##VkCopyDescriptorSet, ##VkDebugMarkerMarkerInfoEXT, ##VkDebugMarkerObjectNameInfoEXT, ##VkDebugMarkerObjectTagInfoEXT, ##VkDebugReportCallbackCreateInfoEXT, ##VkDedicatedAllocationBufferCreateInfoNV, ##VkDedicatedAllocationImageCreateInfoNV, ##VkDedicatedAllocationMemoryAllocateInfoNV, ##VkDescriptorPoolCreateInfo, ##VkDescriptorSetAllocateInfo, ##VkDescriptorSetLayoutCreateInfo, ##VkDeviceCreateInfo, ##VkDeviceQueueCreateInfo, ##VkDisplayModeCreateInfoKHR, ##VkDisplayPresentInfoKHR, ##VkDisplaySurfaceCreateInfoKHR, ##VkEventCreateInfo, ##VkExportMemoryAllocateInfoNV, ##VkExportMemoryWin32HandleInfoNV, ##VkExternalMemoryImageCreateInfoNV, ##VkFenceCreateInfo, ##VkFramebufferCreateInfo, ##VkGraphicsPipelineCreateInfo, ##VkImageCreateInfo, ##VkImageMemoryBarrier, ##VkImageViewCreateInfo, ##VkImportMemoryWin32HandleInfoNV, ##VkInstanceCreateInfo, ##VkMappedMemoryRange, ##VkMemoryAllocateInfo, ##VkMemoryBarrier, ##VkMirSurfaceCreateInfoKHR, ##VkPipelineCacheCreateInfo, ##VkPipelineColorBlendStateCreateInfo, ##VkPipelineDepthStencilStateCreateInfo, ##VkPipelineDynamicStateCreateInfo, ##VkPipelineInputAssemblyStateCreateInfo, ##VkPipelineLayoutCreateInfo, ##VkPipelineMultisampleStateCreateInfo, ##VkPipelineRasterizationStateCreateInfo, ##VkPipelineRasterizationStateRasterizationOrderAMD, ##VkPipelineShaderStageCreateInfo, ##VkPipelineTessellationStateCreateInfo, ##VkPipelineVertexInputStateCreateInfo, ##VkPipelineViewportStateCreateInfo, ##VkPresentInfoKHR, ##VkQueryPoolCreateInfo, ##VkRenderPassBeginInfo, ##VkRenderPassCreateInfo, ##VkSamplerCreateInfo, ##VkSemaphoreCreateInfo, ##VkShaderModuleCreateInfo, ##VkSubmitInfo, ##VkSwapchainCreateInfoKHR, ##VkValidationFlagsEXT, ##VkWaylandSurfaceCreateInfoKHR, ##VkWin32KeyedMutexAcquireReleaseInfoNV, ##VkWin32SurfaceCreateInfoKHR, ##VkWriteDescriptorSet, ##VkXcbSurfaceCreateInfoKHR, ##VkXlibSurfaceCreateInfoKHR
+		""",
 
-		noPrefix = true
+		"STRUCTURE_TYPE_APPLICATION_INFO".."0",
+		"STRUCTURE_TYPE_INSTANCE_CREATE_INFO".."1",
+		"STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO".."2",
+		"STRUCTURE_TYPE_DEVICE_CREATE_INFO".."3",
+		"STRUCTURE_TYPE_SUBMIT_INFO".."4",
+		"STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO".."5",
+		"STRUCTURE_TYPE_MAPPED_MEMORY_RANGE".."6",
+		"STRUCTURE_TYPE_BIND_SPARSE_INFO".."7",
+		"STRUCTURE_TYPE_FENCE_CREATE_INFO".."8",
+		"STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO".."9",
+		"STRUCTURE_TYPE_EVENT_CREATE_INFO".."10",
+		"STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO".."11",
+		"STRUCTURE_TYPE_BUFFER_CREATE_INFO".."12",
+		"STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO".."13",
+		"STRUCTURE_TYPE_IMAGE_CREATE_INFO".."14",
+		"STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO".."15",
+		"STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO".."16",
+		"STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO".."17",
+		"STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO".."18",
+		"STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO".."19",
+		"STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO".."20",
+		"STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO".."21",
+		"STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO".."22",
+		"STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO".."23",
+		"STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO".."24",
+		"STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO".."25",
+		"STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO".."26",
+		"STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO".."27",
+		"STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO".."28",
+		"STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO".."29",
+		"STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO".."30",
+		"STRUCTURE_TYPE_SAMPLER_CREATE_INFO".."31",
+		"STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO".."32",
+		"STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO".."33",
+		"STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO".."34",
+		"STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET".."35",
+		"STRUCTURE_TYPE_COPY_DESCRIPTOR_SET".."36",
+		"STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO".."37",
+		"STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO".."38",
+		"STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO".."39",
+		"STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO".."40",
+		"STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO".."41",
+		"STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO".."42",
+		"STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO".."43",
+		"STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER".."44",
+		"STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER".."45",
+		"STRUCTURE_TYPE_MEMORY_BARRIER".."46",
+		"STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO".."47",
+		"STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO".."48"
 	)
 
-	macro(expression = "version & 0xFFF")..uint32_t(
-		"VK_VERSION_PATCH",
-		"Extracts the API patch version number from a packed version number.",
+	EnumConstant(
+		"""
+		VkSystemAllocationScope - Allocation scope
 
-		uint32_t.IN("version", "the Vulkan API version"),
+		<h5>Description</h5>
+		<ul>
+			<li>#SYSTEM_ALLOCATION_SCOPE_COMMAND - The allocation is scoped to the duration of the Vulkan command.</li>
+			<li>#SYSTEM_ALLOCATION_SCOPE_OBJECT - The allocation is scoped to the lifetime of the Vulkan object that is being created or used.</li>
+			<li>#SYSTEM_ALLOCATION_SCOPE_CACHE - The allocation is scoped to the lifetime of a {@code VkPipelineCache} object.</li>
+			<li>#SYSTEM_ALLOCATION_SCOPE_DEVICE - The allocation is scoped to the lifetime of the Vulkan device.</li>
+			<li>#SYSTEM_ALLOCATION_SCOPE_INSTANCE - The allocation is scoped to the lifetime of the Vulkan instance.</li>
+		</ul>
 
-		noPrefix = true
+		Most Vulkan commands operate on a single object, or there is a sole object that is being created or manipulated. When an allocation uses an allocation scope of #SYSTEM_ALLOCATION_SCOPE_OBJECT or #SYSTEM_ALLOCATION_SCOPE_CACHE, the allocation is scoped to the object being created or manipulated.
+
+		When an implementation requires host memory, it will make callbacks to the application using the most specific allocator and allocation scope available:
+
+		<ul>
+			<li>If an allocation is scoped to the duration of a command, the allocator will use the #SYSTEM_ALLOCATION_SCOPE_COMMAND allocation scope. The most specific allocator available is used: if the object being created or manipulated has an allocator, that object&#8217;s allocator will be used, else if the parent {@code VkDevice} has an allocator it will be used, else if the parent {@code VkInstance} has an allocator it will be used. Else,</li>
+			<li>If an allocation is associated with an object of type {@code VkPipelineCache}, the allocator will use the #SYSTEM_ALLOCATION_SCOPE_CACHE allocation scope. The most specific allocator available is used (pipeline cache, else device, else instance). Else,</li>
+			<li>If an allocation is scoped to the lifetime of an object, that object is being created or manipulated by the command, and that object&#8217;s type is not {@code VkDevice} or {@code VkInstance}, the allocator will use an allocation scope of #SYSTEM_ALLOCATION_SCOPE_OBJECT. The most specific allocator available is used (object, else device, else instance). Else,</li>
+			<li>If an allocation is scoped to the lifetime of a device, the allocator will use an allocation scope of ename VK_SYSTEM_ALLOCATION_SCOPE_DEVICE. The most specific allocator available is used (device, else instance). Else,</li>
+			<li>If the allocation is scoped to the lifetime of an instance and the instance has an allocator, its allocator will be used with an allocation scope of #SYSTEM_ALLOCATION_SCOPE_INSTANCE.</li>
+			<li>Otherwise an implementation will allocate memory through an alternative mechanism that is unspecified.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
+		""",
+
+		"SYSTEM_ALLOCATION_SCOPE_COMMAND".."0",
+		"SYSTEM_ALLOCATION_SCOPE_OBJECT".."1",
+		"SYSTEM_ALLOCATION_SCOPE_CACHE".."2",
+		"SYSTEM_ALLOCATION_SCOPE_DEVICE".."3",
+		"SYSTEM_ALLOCATION_SCOPE_INSTANCE".."4"
 	)
+
+	EnumConstant(
+		"""
+		VkInternalAllocationType - Allocation type
+
+		<h5>Description</h5>
+		<ul>
+			<li>#INTERNAL_ALLOCATION_TYPE_EXECUTABLE - The allocation is intended for execution by the host.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkInternalAllocationNotification, ##VkInternalFreeNotification
+		""",
+
+		"INTERNAL_ALLOCATION_TYPE_EXECUTABLE".."0"
+	)
+
+	EnumConstant(
+		"""
+		VkFormat - Available image formats
+
+		<h5>Description</h5>
+		<dl>
+			<dt>#FORMAT_UNDEFINED</dt>
+			<dd>The format is not specified.</dd>
+
+			<dt>#FORMAT_R4G4_UNORM_PACK8</dt>
+			<dd>A two-component, 8-bit packed unsigned normalized format that has a 4-bit R component in bits 4..7, and a 4-bit G component in bits 0..3.</dd>
+
+			<dt>#FORMAT_R4G4B4A4_UNORM_PACK16</dt>
+			<dd>A four-component, 16-bit packed unsigned normalized format that has a 4-bit R component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit B component in bits 4..7, and a 4-bit A component in bits 0..3.</dd>
+
+			<dt>#FORMAT_B4G4R4A4_UNORM_PACK16</dt>
+			<dd>A four-component, 16-bit packed unsigned normalized format that has a 4-bit B component in bits 12..15, a 4-bit G component in bits 8..11, a 4-bit R component in bits 4..7, and a 4-bit A component in bits 0..3.</dd>
+
+			<dt>#FORMAT_R5G6B5_UNORM_PACK16</dt>
+			<dd>A three-component, 16-bit packed unsigned normalized format that has a 5-bit R component in bits 11..15, a 6-bit G component in bits 5..10, and a 5-bit B component in bits 0..4.</dd>
+
+			<dt>#FORMAT_B5G6R5_UNORM_PACK16</dt>
+			<dd>A three-component, 16-bit packed unsigned normalized format that has a 5-bit B component in bits 11..15, a 6-bit G component in bits 5..10, and a 5-bit R component in bits 0..4.</dd>
+
+			<dt>#FORMAT_R5G5B5A1_UNORM_PACK16</dt>
+			<dd>A four-component, 16-bit packed unsigned normalized format that has a 5-bit R component in bits 11..15, a 5-bit G component in bits 6..10, a 5-bit B component in bits 1..5, and a 1-bit A component in bit 0.</dd>
+
+			<dt>#FORMAT_B5G5R5A1_UNORM_PACK16</dt>
+			<dd>A four-component, 16-bit packed unsigned normalized format that has a 5-bit B component in bits 11..15, a 5-bit G component in bits 6..10, a 5-bit R component in bits 1..5, and a 1-bit A component in bit 0.</dd>
+
+			<dt>#FORMAT_A1R5G5B5_UNORM_PACK16</dt>
+			<dd>A four-component, 16-bit packed unsigned normalized format that has a 1-bit A component in bit 15, a 5-bit R component in bits 10..14, a 5-bit G component in bits 5..9, and a 5-bit B component in bits 0..4.</dd>
+
+			<dt>#FORMAT_R8_UNORM</dt>
+			<dd>A one-component, 8-bit unsigned normalized format that has a single 8-bit R component.</dd>
+
+			<dt>#FORMAT_R8_SNORM</dt>
+			<dd>A one-component, 8-bit signed normalized format that has a single 8-bit R component.</dd>
+
+			<dt>#FORMAT_R8_USCALED</dt>
+			<dd>A one-component, 8-bit unsigned scaled integer format that has a single 8-bit R component.</dd>
+
+			<dt>#FORMAT_R8_SSCALED</dt>
+			<dd>A one-component, 8-bit signed scaled integer format that has a single 8-bit R component.</dd>
+
+			<dt>#FORMAT_R8_UINT</dt>
+			<dd>A one-component, 8-bit unsigned integer format that has a single 8-bit R component.</dd>
+
+			<dt>#FORMAT_R8_SINT</dt>
+			<dd>A one-component, 8-bit signed integer format that has a single 8-bit R component.</dd>
+
+			<dt>#FORMAT_R8_SRGB</dt>
+			<dd>A one-component, 8-bit unsigned normalized format that has a single 8-bit R component stored with sRGB nonlinear encoding.</dd>
+
+			<dt>#FORMAT_R8G8_UNORM</dt>
+			<dd>A two-component, 16-bit unsigned normalized format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
+
+			<dt>#FORMAT_R8G8_SNORM</dt>
+			<dd>A two-component, 16-bit signed normalized format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
+
+			<dt>#FORMAT_R8G8_USCALED</dt>
+			<dd>A two-component, 16-bit unsigned scaled integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
+
+			<dt>#FORMAT_R8G8_SSCALED</dt>
+			<dd>A two-component, 16-bit signed scaled integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
+
+			<dt>#FORMAT_R8G8_UINT</dt>
+			<dd>A two-component, 16-bit unsigned integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
+
+			<dt>#FORMAT_R8G8_SINT</dt>
+			<dd>A two-component, 16-bit signed integer format that has an 8-bit R component in byte 0, and an 8-bit G component in byte 1.</dd>
+
+			<dt>#FORMAT_R8G8_SRGB</dt>
+			<dd>A two-component, 16-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, and an 8-bit G component stored with sRGB nonlinear encoding in byte 1.</dd>
+
+			<dt>#FORMAT_R8G8B8_UNORM</dt>
+			<dd>A three-component, 24-bit unsigned normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
+
+			<dt>#FORMAT_R8G8B8_SNORM</dt>
+			<dd>A three-component, 24-bit signed normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
+
+			<dt>#FORMAT_R8G8B8_USCALED</dt>
+			<dd>A three-component, 24-bit unsigned scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
+
+			<dt>#FORMAT_R8G8B8_SSCALED</dt>
+			<dd>A three-component, 24-bit signed scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
+
+			<dt>#FORMAT_R8G8B8_UINT</dt>
+			<dd>A three-component, 24-bit unsigned integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
+
+			<dt>#FORMAT_R8G8B8_SINT</dt>
+			<dd>A three-component, 24-bit signed integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, and an 8-bit B component in byte 2.</dd>
+
+			<dt>#FORMAT_R8G8B8_SRGB</dt>
+			<dd>A three-component, 24-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, and an 8-bit B component stored with sRGB nonlinear encoding in byte 2.</dd>
+
+			<dt>#FORMAT_B8G8R8_UNORM</dt>
+			<dd>A three-component, 24-bit unsigned normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
+
+			<dt>#FORMAT_B8G8R8_SNORM</dt>
+			<dd>A three-component, 24-bit signed normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
+
+			<dt>#FORMAT_B8G8R8_USCALED</dt>
+			<dd>A three-component, 24-bit unsigned scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
+
+			<dt>#FORMAT_B8G8R8_SSCALED</dt>
+			<dd>A three-component, 24-bit signed scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
+
+			<dt>#FORMAT_B8G8R8_UINT</dt>
+			<dd>A three-component, 24-bit unsigned integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
+
+			<dt>#FORMAT_B8G8R8_SINT</dt>
+			<dd>A three-component, 24-bit signed integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, and an 8-bit R component in byte 2.</dd>
+
+			<dt>#FORMAT_B8G8R8_SRGB</dt>
+			<dd>A three-component, 24-bit unsigned normalized format that has an 8-bit B component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, and an 8-bit R component stored with sRGB nonlinear encoding in byte 2.</dd>
+
+			<dt>#FORMAT_R8G8B8A8_UNORM</dt>
+			<dd>A four-component, 32-bit unsigned normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_R8G8B8A8_SNORM</dt>
+			<dd>A four-component, 32-bit signed normalized format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_R8G8B8A8_USCALED</dt>
+			<dd>A four-component, 32-bit unsigned scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_R8G8B8A8_SSCALED</dt>
+			<dd>A four-component, 32-bit signed scaled format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_R8G8B8A8_UINT</dt>
+			<dd>A four-component, 32-bit unsigned integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_R8G8B8A8_SINT</dt>
+			<dd>A four-component, 32-bit signed integer format that has an 8-bit R component in byte 0, an 8-bit G component in byte 1, an 8-bit B component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_R8G8B8A8_SRGB</dt>
+			<dd>A four-component, 32-bit unsigned normalized format that has an 8-bit R component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, an 8-bit B component stored with sRGB nonlinear encoding in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_B8G8R8A8_UNORM</dt>
+			<dd>A four-component, 32-bit unsigned normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_B8G8R8A8_SNORM</dt>
+			<dd>A four-component, 32-bit signed normalized format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_B8G8R8A8_USCALED</dt>
+			<dd>A four-component, 32-bit unsigned scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_B8G8R8A8_SSCALED</dt>
+			<dd>A four-component, 32-bit signed scaled format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_B8G8R8A8_UINT</dt>
+			<dd>A four-component, 32-bit unsigned integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_B8G8R8A8_SINT</dt>
+			<dd>A four-component, 32-bit signed integer format that has an 8-bit B component in byte 0, an 8-bit G component in byte 1, an 8-bit R component in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_B8G8R8A8_SRGB</dt>
+			<dd>A four-component, 32-bit unsigned normalized format that has an 8-bit B component stored with sRGB nonlinear encoding in byte 0, an 8-bit G component stored with sRGB nonlinear encoding in byte 1, an 8-bit R component stored with sRGB nonlinear encoding in byte 2, and an 8-bit A component in byte 3.</dd>
+
+			<dt>#FORMAT_A8B8G8R8_UNORM_PACK32</dt>
+			<dd>A four-component, 32-bit packed unsigned normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
+
+			<dt>#FORMAT_A8B8G8R8_SNORM_PACK32</dt>
+			<dd>A four-component, 32-bit packed signed normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
+
+			<dt>#FORMAT_A8B8G8R8_USCALED_PACK32</dt>
+			<dd>A four-component, 32-bit packed unsigned scaled integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
+
+			<dt>#FORMAT_A8B8G8R8_SSCALED_PACK32</dt>
+			<dd>A four-component, 32-bit packed signed scaled integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
+
+			<dt>#FORMAT_A8B8G8R8_UINT_PACK32</dt>
+			<dd>A four-component, 32-bit packed unsigned integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
+
+			<dt>#FORMAT_A8B8G8R8_SINT_PACK32</dt>
+			<dd>A four-component, 32-bit packed signed integer format that has an 8-bit A component in bits 24..31, an 8-bit B component in bits 16..23, an 8-bit G component in bits 8..15, and an 8-bit R component in bits 0..7.</dd>
+
+			<dt>#FORMAT_A8B8G8R8_SRGB_PACK32</dt>
+			<dd>A four-component, 32-bit packed unsigned normalized format that has an 8-bit A component in bits 24..31, an 8-bit B component stored with sRGB nonlinear encoding in bits 16..23, an 8-bit G component stored with sRGB nonlinear encoding in bits 8..15, and an 8-bit R component stored with sRGB nonlinear encoding in bits 0..7.</dd>
+
+			<dt>#FORMAT_A2R10G10B10_UNORM_PACK32</dt>
+			<dd>A four-component, 32-bit packed unsigned normalized format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2R10G10B10_SNORM_PACK32</dt>
+			<dd>A four-component, 32-bit packed signed normalized format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2R10G10B10_USCALED_PACK32</dt>
+			<dd>A four-component, 32-bit packed unsigned scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2R10G10B10_SSCALED_PACK32</dt>
+			<dd>A four-component, 32-bit packed signed scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2R10G10B10_UINT_PACK32</dt>
+			<dd>A four-component, 32-bit packed unsigned integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2R10G10B10_SINT_PACK32</dt>
+			<dd>A four-component, 32-bit packed signed integer format that has a 2-bit A component in bits 30..31, a 10-bit R component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit B component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2B10G10R10_UNORM_PACK32</dt>
+			<dd>A four-component, 32-bit packed unsigned normalized format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2B10G10R10_SNORM_PACK32</dt>
+			<dd>A four-component, 32-bit packed signed normalized format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2B10G10R10_USCALED_PACK32</dt>
+			<dd>A four-component, 32-bit packed unsigned scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2B10G10R10_SSCALED_PACK32</dt>
+			<dd>A four-component, 32-bit packed signed scaled integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2B10G10R10_UINT_PACK32</dt>
+			<dd>A four-component, 32-bit packed unsigned integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
+
+			<dt>#FORMAT_A2B10G10R10_SINT_PACK32</dt>
+			<dd>A four-component, 32-bit packed signed integer format that has a 2-bit A component in bits 30..31, a 10-bit B component in bits 20..29, a 10-bit G component in bits 10..19, and a 10-bit R component in bits 0..9.</dd>
+
+			<dt>#FORMAT_R16_UNORM</dt>
+			<dd>A one-component, 16-bit unsigned normalized format that has a single 16-bit R component.</dd>
+
+			<dt>#FORMAT_R16_SNORM</dt>
+			<dd>A one-component, 16-bit signed normalized format that has a single 16-bit R component.</dd>
+
+			<dt>#FORMAT_R16_USCALED</dt>
+			<dd>A one-component, 16-bit unsigned scaled integer format that has a single 16-bit R component.</dd>
+
+			<dt>#FORMAT_R16_SSCALED</dt>
+			<dd>A one-component, 16-bit signed scaled integer format that has a single 16-bit R component.</dd>
+
+			<dt>#FORMAT_R16_UINT</dt>
+			<dd>A one-component, 16-bit unsigned integer format that has a single 16-bit R component.</dd>
+
+			<dt>#FORMAT_R16_SINT</dt>
+			<dd>A one-component, 16-bit signed integer format that has a single 16-bit R component.</dd>
+
+			<dt>#FORMAT_R16_SFLOAT</dt>
+			<dd>A one-component, 16-bit signed floating-point format that has a single 16-bit R component.</dd>
+
+			<dt>#FORMAT_R16G16_UNORM</dt>
+			<dd>A two-component, 32-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
+
+			<dt>#FORMAT_R16G16_SNORM</dt>
+			<dd>A two-component, 32-bit signed normalized format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
+
+			<dt>#FORMAT_R16G16_USCALED</dt>
+			<dd>A two-component, 32-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
+
+			<dt>#FORMAT_R16G16_SSCALED</dt>
+			<dd>A two-component, 32-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
+
+			<dt>#FORMAT_R16G16_UINT</dt>
+			<dd>A two-component, 32-bit unsigned integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
+
+			<dt>#FORMAT_R16G16_SINT</dt>
+			<dd>A two-component, 32-bit signed integer format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
+
+			<dt>#FORMAT_R16G16_SFLOAT</dt>
+			<dd>A two-component, 32-bit signed floating-point format that has a 16-bit R component in bytes 0..1, and a 16-bit G component in bytes 2..3.</dd>
+
+			<dt>#FORMAT_R16G16B16_UNORM</dt>
+			<dd>A three-component, 48-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
+
+			<dt>#FORMAT_R16G16B16_SNORM</dt>
+			<dd>A three-component, 48-bit signed normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
+
+			<dt>#FORMAT_R16G16B16_USCALED</dt>
+			<dd>A three-component, 48-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
+
+			<dt>#FORMAT_R16G16B16_SSCALED</dt>
+			<dd>A three-component, 48-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
+
+			<dt>#FORMAT_R16G16B16_UINT</dt>
+			<dd>A three-component, 48-bit unsigned integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
+
+			<dt>#FORMAT_R16G16B16_SINT</dt>
+			<dd>A three-component, 48-bit signed integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
+
+			<dt>#FORMAT_R16G16B16_SFLOAT</dt>
+			<dd>A three-component, 48-bit signed floating-point format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, and a 16-bit B component in bytes 4..5.</dd>
+
+			<dt>#FORMAT_R16G16B16A16_UNORM</dt>
+			<dd>A four-component, 64-bit unsigned normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
+
+			<dt>#FORMAT_R16G16B16A16_SNORM</dt>
+			<dd>A four-component, 64-bit signed normalized format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
+
+			<dt>#FORMAT_R16G16B16A16_USCALED</dt>
+			<dd>A four-component, 64-bit unsigned scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
+
+			<dt>#FORMAT_R16G16B16A16_SSCALED</dt>
+			<dd>A four-component, 64-bit signed scaled integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
+
+			<dt>#FORMAT_R16G16B16A16_UINT</dt>
+			<dd>A four-component, 64-bit unsigned integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
+
+			<dt>#FORMAT_R16G16B16A16_SINT</dt>
+			<dd>A four-component, 64-bit signed integer format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
+
+			<dt>#FORMAT_R16G16B16A16_SFLOAT</dt>
+			<dd>A four-component, 64-bit signed floating-point format that has a 16-bit R component in bytes 0..1, a 16-bit G component in bytes 2..3, a 16-bit B component in bytes 4..5, and a 16-bit A component in bytes 6..7.</dd>
+
+			<dt>#FORMAT_R32_UINT</dt>
+			<dd>A one-component, 32-bit unsigned integer format that has a single 32-bit R component.</dd>
+
+			<dt>#FORMAT_R32_SINT</dt>
+			<dd>A one-component, 32-bit signed integer format that has a single 32-bit R component.</dd>
+
+			<dt>#FORMAT_R32_SFLOAT</dt>
+			<dd>A one-component, 32-bit signed floating-point format that has a single 32-bit R component.</dd>
+
+			<dt>#FORMAT_R32G32_UINT</dt>
+			<dd>A two-component, 64-bit unsigned integer format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7.</dd>
+
+			<dt>#FORMAT_R32G32_SINT</dt>
+			<dd>A two-component, 64-bit signed integer format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7.</dd>
+
+			<dt>#FORMAT_R32G32_SFLOAT</dt>
+			<dd>A two-component, 64-bit signed floating-point format that has a 32-bit R component in bytes 0..3, and a 32-bit G component in bytes 4..7.</dd>
+
+			<dt>#FORMAT_R32G32B32_UINT</dt>
+			<dd>A three-component, 96-bit unsigned integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11.</dd>
+
+			<dt>#FORMAT_R32G32B32_SINT</dt>
+			<dd>A three-component, 96-bit signed integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11.</dd>
+
+			<dt>#FORMAT_R32G32B32_SFLOAT</dt>
+			<dd>A three-component, 96-bit signed floating-point format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, and a 32-bit B component in bytes 8..11.</dd>
+
+			<dt>#FORMAT_R32G32B32A32_UINT</dt>
+			<dd>A four-component, 128-bit unsigned integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15.</dd>
+
+			<dt>#FORMAT_R32G32B32A32_SINT</dt>
+			<dd>A four-component, 128-bit signed integer format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15.</dd>
+
+			<dt>#FORMAT_R32G32B32A32_SFLOAT</dt>
+			<dd>A four-component, 128-bit signed floating-point format that has a 32-bit R component in bytes 0..3, a 32-bit G component in bytes 4..7, a 32-bit B component in bytes 8..11, and a 32-bit A component in bytes 12..15.</dd>
+
+			<dt>#FORMAT_R64_UINT</dt>
+			<dd>A one-component, 64-bit unsigned integer format that has a single 64-bit R component.</dd>
+
+			<dt>#FORMAT_R64_SINT</dt>
+			<dd>A one-component, 64-bit signed integer format that has a single 64-bit R component.</dd>
+
+			<dt>#FORMAT_R64_SFLOAT</dt>
+			<dd>A one-component, 64-bit signed floating-point format that has a single 64-bit R component.</dd>
+
+			<dt>#FORMAT_R64G64_UINT</dt>
+			<dd>A two-component, 128-bit unsigned integer format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15.</dd>
+
+			<dt>#FORMAT_R64G64_SINT</dt>
+			<dd>A two-component, 128-bit signed integer format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15.</dd>
+
+			<dt>#FORMAT_R64G64_SFLOAT</dt>
+			<dd>A two-component, 128-bit signed floating-point format that has a 64-bit R component in bytes 0..7, and a 64-bit G component in bytes 8..15.</dd>
+
+			<dt>#FORMAT_R64G64B64_UINT</dt>
+			<dd>A three-component, 192-bit unsigned integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23.</dd>
+
+			<dt>#FORMAT_R64G64B64_SINT</dt>
+			<dd>A three-component, 192-bit signed integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23.</dd>
+
+			<dt>#FORMAT_R64G64B64_SFLOAT</dt>
+			<dd>A three-component, 192-bit signed floating-point format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, and a 64-bit B component in bytes 16..23.</dd>
+
+			<dt>#FORMAT_R64G64B64A64_UINT</dt>
+			<dd>A four-component, 256-bit unsigned integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31.</dd>
+
+			<dt>#FORMAT_R64G64B64A64_SINT</dt>
+			<dd>A four-component, 256-bit signed integer format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31.</dd>
+
+			<dt>#FORMAT_R64G64B64A64_SFLOAT</dt>
+			<dd>A four-component, 256-bit signed floating-point format that has a 64-bit R component in bytes 0..7, a 64-bit G component in bytes 8..15, a 64-bit B component in bytes 16..23, and a 64-bit A component in bytes 24..31.</dd>
+
+			<dt>#FORMAT_B10G11R11_UFLOAT_PACK32</dt>
+			<dd>A three-component, 32-bit packed unsigned floating-point format that has a 10-bit B component in bits 22..31, an 11-bit G component in bits 11..21, an 11-bit R component in bits 0..10. See <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fp10">the “Unsigned 10-Bit Floating-Point Numbers” section</a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fp11">the “Unsigned 11-Bit Floating-Point Numbers” section</a>.</dd>
+
+			<dt>#FORMAT_E5B9G9R9_UFLOAT_PACK32</dt>
+			<dd>A three-component, 32-bit packed unsigned floating-point format that has a 5-bit shared exponent in bits 27..31, a 9-bit B component mantissa in bits 18..26, a 9-bit G component mantissa in bits 9..17, and a 9-bit R component mantissa in bits 0..8.</dd>
+
+			<dt>#FORMAT_D16_UNORM</dt>
+			<dd>A one-component, 16-bit unsigned normalized format that has a single 16-bit depth component.</dd>
+
+			<dt>#FORMAT_X8_D24_UNORM_PACK32</dt>
+			<dd>A two-component, 32-bit format that has 24 unsigned normalized bits in the depth component and, optionally:, 8 bits that are unused.</dd>
+
+			<dt>#FORMAT_D32_SFLOAT</dt>
+			<dd>A one-component, 32-bit signed floating-point format that has 32-bits in the depth component.</dd>
+
+			<dt>#FORMAT_S8_UINT</dt>
+			<dd>A one-component, 8-bit unsigned integer format that has 8-bits in the stencil component.</dd>
+
+			<dt>#FORMAT_D16_UNORM_S8_UINT</dt>
+			<dd>A two-component, 24-bit format that has 16 unsigned normalized bits in the depth component and 8 unsigned integer bits in the stencil component.</dd>
+
+			<dt>#FORMAT_D24_UNORM_S8_UINT</dt>
+			<dd>A two-component, 32-bit packed format that has 8 unsigned integer bits in the stencil component, and 24 unsigned normalized bits in the depth component.</dd>
+
+			<dt>#FORMAT_D32_SFLOAT_S8_UINT</dt>
+			<dd>A two-component format that has 32 signed float bits in the depth component and 8 unsigned integer bits in the stencil component. There are optionally: 24-bits that are unused.</dd>
+
+			<dt>#FORMAT_BC1_RGB_UNORM_BLOCK</dt>
+			<dd>A three-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data. This format has no alpha and is considered opaque.</dd>
+
+			<dt>#FORMAT_BC1_RGB_SRGB_BLOCK</dt>
+			<dd>A three-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding. This format has no alpha and is considered opaque.</dd>
+
+			<dt>#FORMAT_BC1_RGBA_UNORM_BLOCK</dt>
+			<dd>A four-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data, and provides 1 bit of alpha.</dd>
+
+			<dt>#FORMAT_BC1_RGBA_SRGB_BLOCK</dt>
+			<dd>A four-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding, and provides 1 bit of alpha.</dd>
+
+			<dt>#FORMAT_BC2_UNORM_BLOCK</dt>
+			<dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values.</dd>
+
+			<dt>#FORMAT_BC2_SRGB_BLOCK</dt>
+			<dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values with sRGB nonlinear encoding.</dd>
+
+			<dt>#FORMAT_BC3_UNORM_BLOCK</dt>
+			<dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values.</dd>
+
+			<dt>#FORMAT_BC3_SRGB_BLOCK</dt>
+			<dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values with sRGB nonlinear encoding.</dd>
+
+			<dt>#FORMAT_BC4_UNORM_BLOCK</dt>
+			<dd>A one-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized red texel data.</dd>
+
+			<dt>#FORMAT_BC4_SNORM_BLOCK</dt>
+			<dd>A one-component, block-compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of signed normalized red texel data.</dd>
+
+			<dt>#FORMAT_BC5_UNORM_BLOCK</dt>
+			<dd>A two-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</dd>
+
+			<dt>#FORMAT_BC5_SNORM_BLOCK</dt>
+			<dd>A two-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of signed normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</dd>
+
+			<dt>#FORMAT_BC6H_UFLOAT_BLOCK</dt>
+			<dd>A three-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned floating-point RGB texel data.</dd>
+
+			<dt>#FORMAT_BC6H_SFLOAT_BLOCK</dt>
+			<dd>A three-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of signed floating-point RGB texel data.</dd>
+
+			<dt>#FORMAT_BC7_UNORM_BLOCK</dt>
+			<dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_BC7_SRGB_BLOCK</dt>
+			<dd>A four-component, block-compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ETC2_R8G8B8_UNORM_BLOCK</dt>
+			<dd>A three-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data. This format has no alpha and is considered opaque.</dd>
+
+			<dt>#FORMAT_ETC2_R8G8B8_SRGB_BLOCK</dt>
+			<dd>A three-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding. This format has no alpha and is considered opaque.</dd>
+
+			<dt>#FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK</dt>
+			<dd>A four-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data, and provides 1 bit of alpha.</dd>
+
+			<dt>#FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK</dt>
+			<dd>A four-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGB texel data with sRGB nonlinear encoding, and provides 1 bit of alpha.</dd>
+
+			<dt>#FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK</dt>
+			<dd>A four-component, ETC2 compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values.</dd>
+
+			<dt>#FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK</dt>
+			<dd>A four-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with the first 64 bits encoding alpha values followed by 64 bits encoding RGB values with sRGB nonlinear encoding applied.</dd>
+
+			<dt>#FORMAT_EAC_R11_UNORM_BLOCK</dt>
+			<dd>A one-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized red texel data.</dd>
+
+			<dt>#FORMAT_EAC_R11_SNORM_BLOCK</dt>
+			<dd>A one-component, ETC2 compressed format where each 64-bit compressed texel block encodes a 4x4 rectangle of signed normalized red texel data.</dd>
+
+			<dt>#FORMAT_EAC_R11G11_UNORM_BLOCK</dt>
+			<dd>A two-component, ETC2 compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</dd>
+
+			<dt>#FORMAT_EAC_R11G11_SNORM_BLOCK</dt>
+			<dd>A two-component, ETC2 compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of signed normalized RG texel data with the first 64 bits encoding red values followed by 64 bits encoding green values.</dd>
+
+			<dt>#FORMAT_ASTC_4x4_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_4x4_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 4x4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_5x4_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x4 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_5x4_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x4 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_5x5_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x5 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_5x5_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 5x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_6x5_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x5 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_6x5_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_6x6_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x6 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_6x6_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 6x6 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_8x5_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x5 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_8x5_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_8x6_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x6 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_8x6_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x6 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_8x8_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x8 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_8x8_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes an 8x8 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_10x5_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x5 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_10x5_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x5 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_10x6_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x6 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_10x6_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x6 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_10x8_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x8 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_10x8_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x8 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_10x10_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x10 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_10x10_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 10x10 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_12x10_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x10 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_12x10_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x10 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+
+			<dt>#FORMAT_ASTC_12x12_UNORM_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x12 rectangle of unsigned normalized RGBA texel data.</dd>
+
+			<dt>#FORMAT_ASTC_12x12_SRGB_BLOCK</dt>
+			<dd>A four-component, ASTC compressed format where each 128-bit compressed texel block encodes a 12x12 rectangle of unsigned normalized RGBA texel data with sRGB nonlinear encoding applied to the RGB components.</dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAttachmentDescription, ##VkBufferViewCreateInfo, ##VkImageCreateInfo, ##VkImageViewCreateInfo, ##VkSurfaceFormatKHR, ##VkSwapchainCreateInfoKHR, ##VkVertexInputAttributeDescription, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceFormatProperties(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
+		""",
+
+		"FORMAT_UNDEFINED".."0",
+		"FORMAT_R4G4_UNORM_PACK8".."1",
+		"FORMAT_R4G4B4A4_UNORM_PACK16".."2",
+		"FORMAT_B4G4R4A4_UNORM_PACK16".."3",
+		"FORMAT_R5G6B5_UNORM_PACK16".."4",
+		"FORMAT_B5G6R5_UNORM_PACK16".."5",
+		"FORMAT_R5G5B5A1_UNORM_PACK16".."6",
+		"FORMAT_B5G5R5A1_UNORM_PACK16".."7",
+		"FORMAT_A1R5G5B5_UNORM_PACK16".."8",
+		"FORMAT_R8_UNORM".."9",
+		"FORMAT_R8_SNORM".."10",
+		"FORMAT_R8_USCALED".."11",
+		"FORMAT_R8_SSCALED".."12",
+		"FORMAT_R8_UINT".."13",
+		"FORMAT_R8_SINT".."14",
+		"FORMAT_R8_SRGB".."15",
+		"FORMAT_R8G8_UNORM".."16",
+		"FORMAT_R8G8_SNORM".."17",
+		"FORMAT_R8G8_USCALED".."18",
+		"FORMAT_R8G8_SSCALED".."19",
+		"FORMAT_R8G8_UINT".."20",
+		"FORMAT_R8G8_SINT".."21",
+		"FORMAT_R8G8_SRGB".."22",
+		"FORMAT_R8G8B8_UNORM".."23",
+		"FORMAT_R8G8B8_SNORM".."24",
+		"FORMAT_R8G8B8_USCALED".."25",
+		"FORMAT_R8G8B8_SSCALED".."26",
+		"FORMAT_R8G8B8_UINT".."27",
+		"FORMAT_R8G8B8_SINT".."28",
+		"FORMAT_R8G8B8_SRGB".."29",
+		"FORMAT_B8G8R8_UNORM".."30",
+		"FORMAT_B8G8R8_SNORM".."31",
+		"FORMAT_B8G8R8_USCALED".."32",
+		"FORMAT_B8G8R8_SSCALED".."33",
+		"FORMAT_B8G8R8_UINT".."34",
+		"FORMAT_B8G8R8_SINT".."35",
+		"FORMAT_B8G8R8_SRGB".."36",
+		"FORMAT_R8G8B8A8_UNORM".."37",
+		"FORMAT_R8G8B8A8_SNORM".."38",
+		"FORMAT_R8G8B8A8_USCALED".."39",
+		"FORMAT_R8G8B8A8_SSCALED".."40",
+		"FORMAT_R8G8B8A8_UINT".."41",
+		"FORMAT_R8G8B8A8_SINT".."42",
+		"FORMAT_R8G8B8A8_SRGB".."43",
+		"FORMAT_B8G8R8A8_UNORM".."44",
+		"FORMAT_B8G8R8A8_SNORM".."45",
+		"FORMAT_B8G8R8A8_USCALED".."46",
+		"FORMAT_B8G8R8A8_SSCALED".."47",
+		"FORMAT_B8G8R8A8_UINT".."48",
+		"FORMAT_B8G8R8A8_SINT".."49",
+		"FORMAT_B8G8R8A8_SRGB".."50",
+		"FORMAT_A8B8G8R8_UNORM_PACK32".."51",
+		"FORMAT_A8B8G8R8_SNORM_PACK32".."52",
+		"FORMAT_A8B8G8R8_USCALED_PACK32".."53",
+		"FORMAT_A8B8G8R8_SSCALED_PACK32".."54",
+		"FORMAT_A8B8G8R8_UINT_PACK32".."55",
+		"FORMAT_A8B8G8R8_SINT_PACK32".."56",
+		"FORMAT_A8B8G8R8_SRGB_PACK32".."57",
+		"FORMAT_A2R10G10B10_UNORM_PACK32".."58",
+		"FORMAT_A2R10G10B10_SNORM_PACK32".."59",
+		"FORMAT_A2R10G10B10_USCALED_PACK32".."60",
+		"FORMAT_A2R10G10B10_SSCALED_PACK32".."61",
+		"FORMAT_A2R10G10B10_UINT_PACK32".."62",
+		"FORMAT_A2R10G10B10_SINT_PACK32".."63",
+		"FORMAT_A2B10G10R10_UNORM_PACK32".."64",
+		"FORMAT_A2B10G10R10_SNORM_PACK32".."65",
+		"FORMAT_A2B10G10R10_USCALED_PACK32".."66",
+		"FORMAT_A2B10G10R10_SSCALED_PACK32".."67",
+		"FORMAT_A2B10G10R10_UINT_PACK32".."68",
+		"FORMAT_A2B10G10R10_SINT_PACK32".."69",
+		"FORMAT_R16_UNORM".."70",
+		"FORMAT_R16_SNORM".."71",
+		"FORMAT_R16_USCALED".."72",
+		"FORMAT_R16_SSCALED".."73",
+		"FORMAT_R16_UINT".."74",
+		"FORMAT_R16_SINT".."75",
+		"FORMAT_R16_SFLOAT".."76",
+		"FORMAT_R16G16_UNORM".."77",
+		"FORMAT_R16G16_SNORM".."78",
+		"FORMAT_R16G16_USCALED".."79",
+		"FORMAT_R16G16_SSCALED".."80",
+		"FORMAT_R16G16_UINT".."81",
+		"FORMAT_R16G16_SINT".."82",
+		"FORMAT_R16G16_SFLOAT".."83",
+		"FORMAT_R16G16B16_UNORM".."84",
+		"FORMAT_R16G16B16_SNORM".."85",
+		"FORMAT_R16G16B16_USCALED".."86",
+		"FORMAT_R16G16B16_SSCALED".."87",
+		"FORMAT_R16G16B16_UINT".."88",
+		"FORMAT_R16G16B16_SINT".."89",
+		"FORMAT_R16G16B16_SFLOAT".."90",
+		"FORMAT_R16G16B16A16_UNORM".."91",
+		"FORMAT_R16G16B16A16_SNORM".."92",
+		"FORMAT_R16G16B16A16_USCALED".."93",
+		"FORMAT_R16G16B16A16_SSCALED".."94",
+		"FORMAT_R16G16B16A16_UINT".."95",
+		"FORMAT_R16G16B16A16_SINT".."96",
+		"FORMAT_R16G16B16A16_SFLOAT".."97",
+		"FORMAT_R32_UINT".."98",
+		"FORMAT_R32_SINT".."99",
+		"FORMAT_R32_SFLOAT".."100",
+		"FORMAT_R32G32_UINT".."101",
+		"FORMAT_R32G32_SINT".."102",
+		"FORMAT_R32G32_SFLOAT".."103",
+		"FORMAT_R32G32B32_UINT".."104",
+		"FORMAT_R32G32B32_SINT".."105",
+		"FORMAT_R32G32B32_SFLOAT".."106",
+		"FORMAT_R32G32B32A32_UINT".."107",
+		"FORMAT_R32G32B32A32_SINT".."108",
+		"FORMAT_R32G32B32A32_SFLOAT".."109",
+		"FORMAT_R64_UINT".."110",
+		"FORMAT_R64_SINT".."111",
+		"FORMAT_R64_SFLOAT".."112",
+		"FORMAT_R64G64_UINT".."113",
+		"FORMAT_R64G64_SINT".."114",
+		"FORMAT_R64G64_SFLOAT".."115",
+		"FORMAT_R64G64B64_UINT".."116",
+		"FORMAT_R64G64B64_SINT".."117",
+		"FORMAT_R64G64B64_SFLOAT".."118",
+		"FORMAT_R64G64B64A64_UINT".."119",
+		"FORMAT_R64G64B64A64_SINT".."120",
+		"FORMAT_R64G64B64A64_SFLOAT".."121",
+		"FORMAT_B10G11R11_UFLOAT_PACK32".."122",
+		"FORMAT_E5B9G9R9_UFLOAT_PACK32".."123",
+		"FORMAT_D16_UNORM".."124",
+		"FORMAT_X8_D24_UNORM_PACK32".."125",
+		"FORMAT_D32_SFLOAT".."126",
+		"FORMAT_S8_UINT".."127",
+		"FORMAT_D16_UNORM_S8_UINT".."128",
+		"FORMAT_D24_UNORM_S8_UINT".."129",
+		"FORMAT_D32_SFLOAT_S8_UINT".."130",
+		"FORMAT_BC1_RGB_UNORM_BLOCK".."131",
+		"FORMAT_BC1_RGB_SRGB_BLOCK".."132",
+		"FORMAT_BC1_RGBA_UNORM_BLOCK".."133",
+		"FORMAT_BC1_RGBA_SRGB_BLOCK".."134",
+		"FORMAT_BC2_UNORM_BLOCK".."135",
+		"FORMAT_BC2_SRGB_BLOCK".."136",
+		"FORMAT_BC3_UNORM_BLOCK".."137",
+		"FORMAT_BC3_SRGB_BLOCK".."138",
+		"FORMAT_BC4_UNORM_BLOCK".."139",
+		"FORMAT_BC4_SNORM_BLOCK".."140",
+		"FORMAT_BC5_UNORM_BLOCK".."141",
+		"FORMAT_BC5_SNORM_BLOCK".."142",
+		"FORMAT_BC6H_UFLOAT_BLOCK".."143",
+		"FORMAT_BC6H_SFLOAT_BLOCK".."144",
+		"FORMAT_BC7_UNORM_BLOCK".."145",
+		"FORMAT_BC7_SRGB_BLOCK".."146",
+		"FORMAT_ETC2_R8G8B8_UNORM_BLOCK".."147",
+		"FORMAT_ETC2_R8G8B8_SRGB_BLOCK".."148",
+		"FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK".."149",
+		"FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK".."150",
+		"FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK".."151",
+		"FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK".."152",
+		"FORMAT_EAC_R11_UNORM_BLOCK".."153",
+		"FORMAT_EAC_R11_SNORM_BLOCK".."154",
+		"FORMAT_EAC_R11G11_UNORM_BLOCK".."155",
+		"FORMAT_EAC_R11G11_SNORM_BLOCK".."156",
+		"FORMAT_ASTC_4x4_UNORM_BLOCK".."157",
+		"FORMAT_ASTC_4x4_SRGB_BLOCK".."158",
+		"FORMAT_ASTC_5x4_UNORM_BLOCK".."159",
+		"FORMAT_ASTC_5x4_SRGB_BLOCK".."160",
+		"FORMAT_ASTC_5x5_UNORM_BLOCK".."161",
+		"FORMAT_ASTC_5x5_SRGB_BLOCK".."162",
+		"FORMAT_ASTC_6x5_UNORM_BLOCK".."163",
+		"FORMAT_ASTC_6x5_SRGB_BLOCK".."164",
+		"FORMAT_ASTC_6x6_UNORM_BLOCK".."165",
+		"FORMAT_ASTC_6x6_SRGB_BLOCK".."166",
+		"FORMAT_ASTC_8x5_UNORM_BLOCK".."167",
+		"FORMAT_ASTC_8x5_SRGB_BLOCK".."168",
+		"FORMAT_ASTC_8x6_UNORM_BLOCK".."169",
+		"FORMAT_ASTC_8x6_SRGB_BLOCK".."170",
+		"FORMAT_ASTC_8x8_UNORM_BLOCK".."171",
+		"FORMAT_ASTC_8x8_SRGB_BLOCK".."172",
+		"FORMAT_ASTC_10x5_UNORM_BLOCK".."173",
+		"FORMAT_ASTC_10x5_SRGB_BLOCK".."174",
+		"FORMAT_ASTC_10x6_UNORM_BLOCK".."175",
+		"FORMAT_ASTC_10x6_SRGB_BLOCK".."176",
+		"FORMAT_ASTC_10x8_UNORM_BLOCK".."177",
+		"FORMAT_ASTC_10x8_SRGB_BLOCK".."178",
+		"FORMAT_ASTC_10x10_UNORM_BLOCK".."179",
+		"FORMAT_ASTC_10x10_SRGB_BLOCK".."180",
+		"FORMAT_ASTC_12x10_UNORM_BLOCK".."181",
+		"FORMAT_ASTC_12x10_SRGB_BLOCK".."182",
+		"FORMAT_ASTC_12x12_UNORM_BLOCK".."183",
+		"FORMAT_ASTC_12x12_SRGB_BLOCK".."184"
+	)
+
+	EnumConstant(
+		"""
+		VkFormatFeatureFlagBits - Bitmask specifying features supported by a buffer
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkFormatProperties, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkFormatFeatureFlags}
+		""",
+
+		"FORMAT_FEATURE_SAMPLED_IMAGE_BIT".enum(0x00000001),
+		"FORMAT_FEATURE_STORAGE_IMAGE_BIT".enum(0x00000002),
+		"FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT".enum(0x00000004),
+		"FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT".enum(0x00000008),
+		"FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT".enum(0x00000010),
+		"FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT".enum(0x00000020),
+		"FORMAT_FEATURE_VERTEX_BUFFER_BIT".enum(0x00000040),
+		"FORMAT_FEATURE_COLOR_ATTACHMENT_BIT".enum(0x00000080),
+		"FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT".enum(0x00000100),
+		"FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT".enum(0x00000200),
+		"FORMAT_FEATURE_BLIT_SRC_BIT".enum(0x00000400),
+		"FORMAT_FEATURE_BLIT_DST_BIT".enum(0x00000800),
+		"FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT".enum(0x00001000)
+	)
+
+	EnumConstant(
+		"""
+		VkImageType - Specifies the type of an image object
+
+		<h5>Description</h5>
+		These values specify one-, two-, or three-dimensional images, respectively.
+
+		<h5>See Also</h5>
+		##VkImageCreateInfo, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
+		""",
+
+		"IMAGE_TYPE_1D".."0",
+		"IMAGE_TYPE_2D".."1",
+		"IMAGE_TYPE_3D".."2"
+	)
+
+	EnumConstant(
+		"""
+		VkImageTiling - Specifies the tiling arrangement of data in an image
+
+		<h5>Description</h5>
+		#IMAGE_TILING_OPTIMAL specifies optimal tiling (texels are laid out in an implementation-dependent arrangement, for more optimal memory access), and #IMAGE_TILING_LINEAR specifies linear tiling (texels are laid out in memory in row-major order, possibly with some padding on each row).
+
+		<h5>See Also</h5>
+		##VkImageCreateInfo, #GetPhysicalDeviceExternalImageFormatPropertiesNV(), #GetPhysicalDeviceImageFormatProperties(), #GetPhysicalDeviceSparseImageFormatProperties()
+		""",
+
+		"IMAGE_TILING_OPTIMAL".."0",
+		"IMAGE_TILING_LINEAR".."1"
+	)
+
+	EnumConstant(
+		"""
+		VkImageUsageFlagBits - Bitmask specifying intended usage of an image
+
+		<h5>Description</h5>
+		These bits have the following meanings:
+
+		<ul>
+			<li>#IMAGE_USAGE_TRANSFER_SRC_BIT indicates that the image <b>can</b> be used as the source of a transfer command.</li>
+			<li>#IMAGE_USAGE_TRANSFER_DST_BIT indicates that the image <b>can</b> be used as the destination of a transfer command.</li>
+			<li>#IMAGE_USAGE_SAMPLED_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} suitable for occupying a {@code VkDescriptorSet} slot either of type #DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, and be sampled by a shader.</li>
+			<li>#IMAGE_USAGE_STORAGE_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} suitable for occupying a {@code VkDescriptorSet} slot of type #DESCRIPTOR_TYPE_STORAGE_IMAGE.</li>
+			<li>#IMAGE_USAGE_COLOR_ATTACHMENT_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} suitable for use as a color or resolve attachment in a {@code VkFramebuffer}.</li>
+			<li>#IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} suitable for use as a depth/stencil attachment in a {@code VkFramebuffer}.</li>
+			<li>#IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT indicates that the memory bound to this image will have been allocated with the #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#memory">the “Memory Allocation” chapter</a> for more detail). This bit <b>can</b> be set for any image that <b>can</b> be used to create a {@code VkImageView} suitable for use as a color, resolve, depth/stencil, or input attachment.</li>
+			<li>#IMAGE_USAGE_INPUT_ATTACHMENT_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} suitable for occupying {@code VkDescriptorSet} slot of type #DESCRIPTOR_TYPE_INPUT_ATTACHMENT; be read from a shader as an input attachment; and be used as an input attachment in a framebuffer.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkImageUsageFlags}
+		""",
+
+		"IMAGE_USAGE_TRANSFER_SRC_BIT".enum(0x00000001),
+		"IMAGE_USAGE_TRANSFER_DST_BIT".enum(0x00000002),
+		"IMAGE_USAGE_SAMPLED_BIT".enum(0x00000004),
+		"IMAGE_USAGE_STORAGE_BIT".enum(0x00000008),
+		"IMAGE_USAGE_COLOR_ATTACHMENT_BIT".enum(0x00000010),
+		"IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT".enum(0x00000020),
+		"IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT".enum(0x00000040),
+		"IMAGE_USAGE_INPUT_ATTACHMENT_BIT".enum(0x00000080)
+	)
+
+	EnumConstant(
+		"""
+		VkImageCreateFlagBits - Bitmask specifying additional parameters of an image
+
+		<h5>Description</h5>
+		These bits have the following meanings:
+
+		<ul>
+			<li>#IMAGE_CREATE_SPARSE_BINDING_BIT indicates that the image will be backed using sparse memory binding.</li>
+			<li>#IMAGE_CREATE_SPARSE_RESIDENCY_BIT indicates that the image <b>can</b> be partially backed using sparse memory binding. Images created with this flag <b>must</b> also be created with the #IMAGE_CREATE_SPARSE_BINDING_BIT flag.</li>
+			<li>#IMAGE_CREATE_SPARSE_ALIASED_BIT indicates that the image will be backed using sparse memory binding with memory ranges that might also simultaneously be backing another image (or another portion of the same image). Images created with this flag <b>must</b> also be created with the #IMAGE_CREATE_SPARSE_BINDING_BIT flag</li>
+			<li>#IMAGE_CREATE_MUTABLE_FORMAT_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} with a different format from the image.</li>
+			<li>#IMAGE_CREATE_CUBE_COMPATIBLE_BIT indicates that the image <b>can</b> be used to create a {@code VkImageView} of type #IMAGE_VIEW_TYPE_CUBE or #IMAGE_VIEW_TYPE_CUBE_ARRAY.</li>
+		</ul>
+
+		If any of the bits #IMAGE_CREATE_SPARSE_BINDING_BIT, #IMAGE_CREATE_SPARSE_RESIDENCY_BIT, or #IMAGE_CREATE_SPARSE_ALIASED_BIT are set, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT <b>must</b> not also be set.
+
+		See <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#sparsememory-sparseresourcefeatures">Sparse Resource Features</a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#sparsememory-physicalfeatures">Sparse Physical Device Features</a> for more details.
+
+		<h5>See Also</h5>
+		{@code VkImageCreateFlags}
+		""",
+
+		"IMAGE_CREATE_SPARSE_BINDING_BIT".enum(0x00000001),
+		"IMAGE_CREATE_SPARSE_RESIDENCY_BIT".enum(0x00000002),
+		"IMAGE_CREATE_SPARSE_ALIASED_BIT".enum(0x00000004),
+		"IMAGE_CREATE_MUTABLE_FORMAT_BIT".enum(0x00000008),
+		"IMAGE_CREATE_CUBE_COMPATIBLE_BIT".enum(0x00000010)
+	)
+
+	EnumConstant(
+		"""
+		VkSampleCountFlagBits - Bitmask specifying sample counts supported for an image used for storage operations
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkPhysicalDeviceLimits, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAttachmentDescription, ##VkImageCreateInfo, ##VkPipelineMultisampleStateCreateInfo, {@code VkSampleCountFlags}, #GetPhysicalDeviceSparseImageFormatProperties()
+		""",
+
+		"SAMPLE_COUNT_1_BIT".enum(0x00000001),
+		"SAMPLE_COUNT_2_BIT".enum(0x00000002),
+		"SAMPLE_COUNT_4_BIT".enum(0x00000004),
+		"SAMPLE_COUNT_8_BIT".enum(0x00000008),
+		"SAMPLE_COUNT_16_BIT".enum(0x00000010),
+		"SAMPLE_COUNT_32_BIT".enum(0x00000020),
+		"SAMPLE_COUNT_64_BIT".enum(0x00000040)
+	)
+
+	EnumConstant(
+		"""
+		VkPhysicalDeviceType - Supported physical device types
+
+		<h5>Description</h5>
+		<ul>
+			<li>#PHYSICAL_DEVICE_TYPE_OTHER The device does not match any other available types.</li>
+			<li>#PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU The device is typically one embedded in or tightly coupled with the host.</li>
+			<li>#PHYSICAL_DEVICE_TYPE_DISCRETE_GPU The device is typically a separate processor connected to the host via an interlink.</li>
+			<li>#PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU The device is typically a virtual node in a virtualization environment.</li>
+			<li>#PHYSICAL_DEVICE_TYPE_CPU The device is typically running on the same processors as the host.</li>
+		</ul>
+
+		The physical device type is advertised for informational purposes only, and does not directly affect the operation of the system. However, the device type <b>may</b> correlate with other advertised properties or capabilities of the system, such as how many memory heaps there are.
+
+		<h5>See Also</h5>
+		##VkPhysicalDeviceProperties
+		""",
+
+		"PHYSICAL_DEVICE_TYPE_OTHER".."0",
+		"PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU".."1",
+		"PHYSICAL_DEVICE_TYPE_DISCRETE_GPU".."2",
+		"PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU".."3",
+		"PHYSICAL_DEVICE_TYPE_CPU".."4"
+	)
+
+	EnumConstant(
+		"""
+		VkQueueFlagBits - Bitmask specifying capabilities of queues in a queue family
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkQueueFamilyProperties, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkQueueFlags}
+		""",
+
+		"QUEUE_GRAPHICS_BIT".enum(0x00000001),
+		"QUEUE_COMPUTE_BIT".enum(0x00000002),
+		"QUEUE_TRANSFER_BIT".enum(0x00000004),
+		"QUEUE_SPARSE_BINDING_BIT".enum(0x00000008)
+	)
+
+	EnumConstant(
+		"""
+		VkMemoryPropertyFlagBits - Bitmask specifying properties for a memory type
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkMemoryType, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkMemoryPropertyFlags}
+		""",
+
+		"MEMORY_PROPERTY_DEVICE_LOCAL_BIT".enum(0x00000001),
+		"MEMORY_PROPERTY_HOST_VISIBLE_BIT".enum(0x00000002),
+		"MEMORY_PROPERTY_HOST_COHERENT_BIT".enum(0x00000004),
+		"MEMORY_PROPERTY_HOST_CACHED_BIT".enum(0x00000008),
+		"MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT".enum(0x00000010)
+	)
+
+	EnumConstant(
+		"""
+		VkMemoryHeapFlagBits - Bitmask specifying attribute flags for a heap
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkMemoryHeap, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkMemoryHeapFlags}
+		""",
+
+		"MEMORY_HEAP_DEVICE_LOCAL_BIT".enum(0x00000001)
+	)
+
+	EnumConstant(
+		"""
+		VkPipelineStageFlagBits - Bitmask specifying pipeline stages
+
+		<h5>Description</h5>
+		The meaning of each bit is:
+
+		<ul>
+			<li>#PIPELINE_STAGE_TOP_OF_PIPE_BIT: Stage of the pipeline where commands are initially received by the queue.</li>
+			<li>#PIPELINE_STAGE_DRAW_INDIRECT_BIT: Stage of the pipeline where Draw/DispatchIndirect data structures are consumed.</li>
+			<li>#PIPELINE_STAGE_VERTEX_INPUT_BIT: Stage of the pipeline where vertex and index buffers are consumed.</li>
+			<li>#PIPELINE_STAGE_VERTEX_SHADER_BIT: Vertex shader stage.</li>
+			<li>#PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT: Tessellation control shader stage.</li>
+			<li>#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT: Tessellation evaluation shader stage.</li>
+			<li>#PIPELINE_STAGE_GEOMETRY_SHADER_BIT: Geometry shader stage.</li>
+			<li>#PIPELINE_STAGE_FRAGMENT_SHADER_BIT: Fragment shader stage.</li>
+			<li>#PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT: Stage of the pipeline where early fragment tests (depth and stencil tests before fragment shading) are performed.</li>
+			<li>#PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT: Stage of the pipeline where late fragment tests (depth and stencil tests after fragment shading) are performed.</li>
+			<li>#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT: Stage of the pipeline after blending where the final color values are output from the pipeline. This stage also includes resolve operations that occur at the end of a subpass. Note that this does not necessarily indicate that the values have been committed to memory.</li>
+			<li>#PIPELINE_STAGE_TRANSFER_BIT: Execution of copy commands. This includes the operations resulting from all transfer commands. The set of transfer commands comprises #CmdCopyBuffer(), #CmdCopyImage(), #CmdBlitImage(), #CmdCopyBufferToImage(), #CmdCopyImageToBuffer(), #CmdUpdateBuffer(), #CmdFillBuffer(), #CmdClearColorImage(), #CmdClearDepthStencilImage(), #CmdResolveImage(), and #CmdCopyQueryPoolResults().</li>
+			<li>#PIPELINE_STAGE_COMPUTE_SHADER_BIT: Execution of a compute shader.</li>
+			<li>#PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT: Final stage in the pipeline where commands complete execution.</li>
+			<li>#PIPELINE_STAGE_HOST_BIT: A pseudo-stage indicating execution on the host of reads/writes of device memory.</li>
+			<li>#PIPELINE_STAGE_ALL_GRAPHICS_BIT: Execution of all graphics pipeline stages.</li>
+			<li>#PIPELINE_STAGE_ALL_COMMANDS_BIT: Execution of all stages supported on the queue.</li>
+		</ul>
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		The #PIPELINE_STAGE_ALL_COMMANDS_BIT and #PIPELINE_STAGE_ALL_GRAPHICS_BIT differ from #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT in that they correspond to all (or all graphics) stages, rather than to a specific stage at the end of the pipeline. An execution dependency with only #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT in {@code dstStageMask} will not delay subsequent commands, while including either of the other two bits will. Similarly, when defining a memory dependency, if the stage mask(s) refer to all stages, then the indicated access types from all stages will be made available and/or visible, but using only #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT would not make any accesses available and/or visible because this stage does not access memory. The #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT is useful for accomplishing memory barriers and layout transitions when the next accesses will be done in a different queue or by a presentation engine; in these cases subsequent commands in the same queue do not need to wait, but the barrier or transition <b>must</b> complete before semaphores associated with the batch signal.
+		</div>
+
+		<h5>See Also</h5>
+		{@code VkPipelineStageFlags}, #CmdWriteTimestamp()
+		""",
+
+		"PIPELINE_STAGE_TOP_OF_PIPE_BIT".enum(0x00000001),
+		"PIPELINE_STAGE_DRAW_INDIRECT_BIT".enum(0x00000002),
+		"PIPELINE_STAGE_VERTEX_INPUT_BIT".enum(0x00000004),
+		"PIPELINE_STAGE_VERTEX_SHADER_BIT".enum(0x00000008),
+		"PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT".enum(0x00000010),
+		"PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT".enum(0x00000020),
+		"PIPELINE_STAGE_GEOMETRY_SHADER_BIT".enum(0x00000040),
+		"PIPELINE_STAGE_FRAGMENT_SHADER_BIT".enum(0x00000080),
+		"PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT".enum(0x00000100),
+		"PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT".enum(0x00000200),
+		"PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT".enum(0x00000400),
+		"PIPELINE_STAGE_COMPUTE_SHADER_BIT".enum(0x00000800),
+		"PIPELINE_STAGE_TRANSFER_BIT".enum(0x00001000),
+		"PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT".enum(0x00002000),
+		"PIPELINE_STAGE_HOST_BIT".enum(0x00004000),
+		"PIPELINE_STAGE_ALL_GRAPHICS_BIT".enum(0x00008000),
+		"PIPELINE_STAGE_ALL_COMMANDS_BIT".enum(0x00010000)
+	)
+
+	EnumConstant(
+		"""
+		VkImageAspectFlagBits - Bitmask specifying which aspects of an image are included in a view
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkImageSubresourceRange, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkImageAspectFlags}
+		""",
+
+		"IMAGE_ASPECT_COLOR_BIT".enum(0x00000001),
+		"IMAGE_ASPECT_DEPTH_BIT".enum(0x00000002),
+		"IMAGE_ASPECT_STENCIL_BIT".enum(0x00000004),
+		"IMAGE_ASPECT_METADATA_BIT".enum(0x00000008)
+	)
+
+	EnumConstant(
+		"""
+		VkSparseImageFormatFlagBits - Bitmask specifying additional information about a sparse image resource
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkSparseImageFormatProperties, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkSparseImageFormatFlags}
+		""",
+
+		"SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT".enum(0x00000001),
+		"SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT".enum(0x00000002),
+		"SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT".enum(0x00000004)
+	)
+
+	EnumConstant(
+		"""
+		VkSparseMemoryBindFlagBits - Bitmask specifying usage of a sparse memory binding operation
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkSparseMemoryBind, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkSparseMemoryBindFlags}
+		""",
+
+		"SPARSE_MEMORY_BIND_METADATA_BIT".enum(0x00000001)
+	)
+
+	EnumConstant(
+		"""
+		VkFenceCreateFlagBits - Bitmask specifying initial state and behavior of a fence
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkFenceCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkFenceCreateFlags}
+		""",
+
+		"FENCE_CREATE_SIGNALED_BIT".enum(0x00000001)
+	)
+
+	EnumConstant(
+		"""
+		VkQueryType - Specify the type of queries managed by a query pool
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkQueryPoolCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkQueryPoolCreateInfo
+		""",
+
+		"QUERY_TYPE_OCCLUSION".."0",
+		"QUERY_TYPE_PIPELINE_STATISTICS".."1",
+		"QUERY_TYPE_TIMESTAMP".."2"
+	)
+
+	EnumConstant(
+		"""
+		VkQueryPipelineStatisticFlagBits - Bitmask specifying queried pipeline statistics
+
+		<h5>Description</h5>
+		These bits have the following meanings:
+
+		<ul>
+			<li>If #QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT is set, queries managed by the pool will count the number of vertices processed by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#drawing">input assembly</a> stage. Vertices corresponding to incomplete primitives <b>may</b> contribute to the count.</li>
+			<li>If #QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT is set, queries managed by the pool will count the number of primitives processed by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#drawing">input assembly</a> stage. If primitive restart is enabled, restarting the primitive topology has no effect on the count. Incomplete primitives <b>may</b> be counted.</li>
+			<li>If #QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT is set, queries managed by the pool will count the number of vertex shader invocations. This counter&#8217;s value is incremented each time a vertex shader is <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-vertex-execution">invoked</a>.</li>
+			<li>If #QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT is set, queries managed by the pool will count the number of geometry shader invocations. This counter&#8217;s value is incremented each time a geometry shader is <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-geometry-execution">invoked</a>. In the case of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#geometry-invocations">instanced geometry shaders</a>, the geometry shader invocations count is incremented for each separate instanced invocation.</li>
+			<li>If #QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT is set, queries managed by the pool will count the number of primitives generated by geometry shader invocations. The counter&#8217;s value is incremented each time the geometry shader emits a primitive. Restarting primitive topology using the SPIR-V instructions {@code OpEndPrimitive} or {@code OpEndStreamPrimitive} has no effect on the geometry shader output primitives count.</li>
+			<li>If #QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT is set, queries managed by the pool will count the number of primitives processed by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-clipping">Primitive Clipping</a> stage of the pipeline. The counter&#8217;s value is incremented each time a primitive reaches the primitive clipping stage.</li>
+			<li>
+				If #QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT is set, queries managed by the pool will count the number of primitives output by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-clipping">Primitive Clipping</a> stage of the pipeline. The counter&#8217;s value is incremented each time a primitive passes the primitive clipping stage. The actual number of primitives output by the primitive clipping stage for a particular input primitive is implementation-dependent but <b>must</b> satisfy the following conditions:
+				<ul>
+					<li>If at least one vertex of the input primitive lies inside the clipping volume, the counter is incremented by one or more.</li>
+					<li>Otherwise, the counter is incremented by zero or more.</li>
+				</ul>
+			</li>
+			<li>If #QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT is set, queries managed by the pool will count the number of fragment shader invocations. The counter&#8217;s value is incremented each time the fragment shader is <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-fragment-execution">invoked</a>.</li>
+			<li>If #QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT is set, queries managed by the pool will count the number of patches processed by the tessellation control shader. The counter&#8217;s value is incremented once for each patch for which a tessellation control shader is <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-tessellation-control-execution">invoked</a>.</li>
+			<li>If #QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT is set, queries managed by the pool will count the number of invocations of the tessellation evaluation shader. The counter&#8217;s value is incremented each time the tessellation evaluation shader is <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#shaders-tessellation-evaluation-execution">invoked</a>.</li>
+			<li>If #QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT is set, queries managed by the pool will count the number of compute shader invocations. The counter&#8217;s value is incremented every time the compute shader is invoked. Implementations <b>may</b> skip the execution of certain compute shader invocations or execute additional compute shader invocations for implementation-dependent reasons as long as the results of rendering otherwise remain unchanged.</li>
+		</ul>
+
+		These values are intended to measure relative statistics on one implementation. Various device architectures will count these values differently. Any or all counters <b>may</b> be affected by the issues described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-undefined">Query Operation</a>.
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		For example, tile-based rendering devices <b>may</b> need to replay the scene multiple times, affecting some of the counts.
+		</div>
+
+		If a pipeline has {@code rasterizerDiscardEnable} enabled, implementations <b>may</b> discard primitives after the final vertex processing stage. As a result, if {@code rasterizerDiscardEnable} is enabled, the clipping input and output primitives counters <b>may</b> not be incremented.
+
+		When a pipeline statistics query finishes, the result for that query is marked as available. The application <b>can</b> copy the result to a buffer (via #CmdCopyQueryPoolResults()), or request it be put into host memory (via #GetQueryPoolResults()).
+
+		<h5>See Also</h5>
+		{@code VkQueryPipelineStatisticFlags}
+		""",
+
+		"QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT".enum(0x00000001),
+		"QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT".enum(0x00000002),
+		"QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT".enum(0x00000004),
+		"QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT".enum(0x00000008),
+		"QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT".enum(0x00000010),
+		"QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT".enum(0x00000020),
+		"QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT".enum(0x00000040),
+		"QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT".enum(0x00000080),
+		"QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT".enum(0x00000100),
+		"QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT".enum(0x00000200),
+		"QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT".enum(0x00000400)
+	)
+
+	EnumConstant(
+		"""
+		VkQueryResultFlagBits - Bitmask specifying how and when query results are returned
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for #GetQueryPoolResults(), where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkQueryResultFlags}
+		""",
+
+		"QUERY_RESULT_64_BIT".enum(0x00000001),
+		"QUERY_RESULT_WAIT_BIT".enum(0x00000002),
+		"QUERY_RESULT_WITH_AVAILABILITY_BIT".enum(0x00000004),
+		"QUERY_RESULT_PARTIAL_BIT".enum(0x00000008)
+	)
+
+	EnumConstant(
+		"""
+		VkBufferCreateFlagBits - Bitmask specifying additional parameters of a buffer
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkBufferCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkBufferCreateFlags}
+		""",
+
+		"BUFFER_CREATE_SPARSE_BINDING_BIT".enum(0x00000001),
+		"BUFFER_CREATE_SPARSE_RESIDENCY_BIT".enum(0x00000002),
+		"BUFFER_CREATE_SPARSE_ALIASED_BIT".enum(0x00000004)
+	)
+
+	EnumConstant(
+		"""
+		VkBufferUsageFlagBits - Bitmask specifying allowed usage of a buffer
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkBufferCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkBufferUsageFlags}
+		""",
+
+		"BUFFER_USAGE_TRANSFER_SRC_BIT".enum(0x00000001),
+		"BUFFER_USAGE_TRANSFER_DST_BIT".enum(0x00000002),
+		"BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT".enum(0x00000004),
+		"BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT".enum(0x00000008),
+		"BUFFER_USAGE_UNIFORM_BUFFER_BIT".enum(0x00000010),
+		"BUFFER_USAGE_STORAGE_BUFFER_BIT".enum(0x00000020),
+		"BUFFER_USAGE_INDEX_BUFFER_BIT".enum(0x00000040),
+		"BUFFER_USAGE_VERTEX_BUFFER_BIT".enum(0x00000080),
+		"BUFFER_USAGE_INDIRECT_BUFFER_BIT".enum(0x00000100)
+	)
+
+	EnumConstant(
+		"""
+		VkSharingMode - Buffer and image sharing modes
+
+		<h5>Description</h5>
+		<ul>
+			<li>#SHARING_MODE_EXCLUSIVE specifies that access to any range or image subresource of the object will be exclusive to a single queue family at a time.</li>
+			<li>#SHARING_MODE_CONCURRENT specifies that concurrent access to any range or image subresource of the object from multiple queue families is supported.</li>
+		</ul>
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		#SHARING_MODE_CONCURRENT <b>may</b> result in lower performance access to the buffer or image than #SHARING_MODE_EXCLUSIVE.
+		</div>
+
+		Ranges of buffers and image subresources of image objects created using #SHARING_MODE_EXCLUSIVE <b>must</b> only be accessed by queues in the same queue family at any given time. In order for a different queue family to be able to interpret the memory contents of a range or image subresource, the application <b>must</b> transfer exclusive ownership of the range or image subresource between the source and destination queue families with the following sequence of operations:
+
+		<ul>
+			<li>Release exclusive ownership from the source queue family to the destination queue family.</li>
+			<li>Use semaphores to ensure proper execution control for the ownership transfer.</li>
+			<li>Acquire exclusive ownership for the destination queue family from the source queue family.</li>
+		</ul>
+
+		To release exclusive ownership of a range of a buffer or image subresource of an image object, the application <b>must</b> execute a buffer or image memory barrier, respectively (see ##VkBufferMemoryBarrier and ##VkImageMemoryBarrier) on a queue from the source queue family. The {@code srcQueueFamilyIndex} parameter of the barrier <b>must</b> be set to the source queue family index, and the {@code dstQueueFamilyIndex} parameter to the destination queue family index.
+
+		To acquire exclusive ownership, the application <b>must</b> execute the same buffer or image memory barrier (i.e. an identically defined instance of the ##VkBufferMemoryBarrier or ##VkImageMemoryBarrier structure that was used for the exclusive ownership release) on a queue from the destination queue family.
+
+		Upon creation, resources using #SHARING_MODE_EXCLUSIVE are not owned by any queue family. A buffer or image memory barrier is not required to acquire ownership when no queue family owns the resource - it is implicitly acquired upon first use within a queue. However, images still require a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-layouts">layout transition</a> from #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED before being used on the first queue. This layout transition <b>can</b> either be accomplished by an image memory barrier or by use in a render pass instance.
+
+		Once a queue family has used a range or image subresource of an #SHARING_MODE_EXCLUSIVE resource, its contents are undefined to other queue families unless ownership is transferred. The contents <b>may</b> also become undefined for other reasons, e.g. as a result of writes to an image subresource that aliases the same memory. A queue family <b>can</b> take ownership of a range or image subresource without an ownership transfer in the same way as for a resource that was just created, however doing so means any contents written by other queue families or via incompatible aliases are undefined.
+
+		<h5>See Also</h5>
+		##VkBufferCreateInfo, ##VkImageCreateInfo, ##VkSwapchainCreateInfoKHR
+		""",
+
+		"SHARING_MODE_EXCLUSIVE".."0",
+		"SHARING_MODE_CONCURRENT".."1"
+	)
+
+	EnumConstant(
+		"""
+		VkImageLayout - Layout of image and image subresources
+
+		<h5>Description</h5>
+		The type(s) of device access supported by each layout are:
+
+		<ul>
+			<li>#IMAGE_LAYOUT_UNDEFINED: Supports no device access. This layout <b>must</b> only be used as the {@code initialLayout} member of ##VkImageCreateInfo or ##VkAttachmentDescription, or as the {@code oldLayout} in an image transition. When transitioning out of this layout, the contents of the memory are not guaranteed to be preserved.</li>
+			<li>#IMAGE_LAYOUT_PREINITIALIZED: Supports no device access. This layout <b>must</b> only be used as the {@code initialLayout} member of ##VkImageCreateInfo or ##VkAttachmentDescription, or as the {@code oldLayout} in an image transition. When transitioning out of this layout, the contents of the memory are preserved. This layout is intended to be used as the initial layout for an image whose contents are written by the host, and hence the data <b>can</b> be written to memory immediately, without first executing a layout transition. Currently, #IMAGE_LAYOUT_PREINITIALIZED is only useful with #IMAGE_TILING_LINEAR images because there is not a standard layout defined for #IMAGE_TILING_OPTIMAL images.</li>
+			<li>#IMAGE_LAYOUT_GENERAL: Supports all types of device access.</li>
+			<li>#IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL: <b>must</b> only be used as a color or resolve attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_COLOR_ATTACHMENT_BIT usage bit enabled.</li>
+			<li>#IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL: <b>must</b> only be used as a depth/stencil attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.</li>
+			<li>#IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL: <b>must</b> only be used as a read-only depth/stencil attachment in a {@code VkFramebuffer} and/or as a read-only image in a shader (which <b>can</b> be read as a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled. Only image subresources of images created with #IMAGE_USAGE_SAMPLED_BIT <b>can</b> be used as sampled image or combined image/sampler in a shader. Similarly, only image subresources of images created with #IMAGE_USAGE_INPUT_ATTACHMENT_BIT <b>can</b> be used as input attachments.</li>
+			<li>#IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL: <b>must</b> only be used as a read-only image in a shader (which <b>can</b> be read as a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled.</li>
+			<li>#IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL: <b>must</b> only be used as a source image of a transfer command (see the definition of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_SRC_BIT usage bit enabled.</li>
+			<li>#IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL: <b>must</b> only be used as a destination image of a transfer command. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_DST_BIT usage bit enabled.</li>
+			<li>#IMAGE_LAYOUT_PRESENT_SRC_KHR: <b>must</b> only be used for presenting a swapchain image for display. A swapchain&#8217;s image <b>must</b> be transitioned to this layout before calling #QueuePresentKHR(), and <b>must</b> be transitioned away from this layout after calling #AcquireNextImageKHR().</li>
+		</ul>
+
+		For each mechanism of accessing an image in the API, there is a parameter or structure member that controls the image layout used to access the image. For transfer commands, this is a parameter to the command (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#clears>> and <<copies>>). For use as a framebuffer attachment"> this is a member in the substructures of the ##VkRenderPassCreateInfo (see <<renderpass,Render Pass</a>). For use in a descriptor set, this is a member in the ##VkDescriptorImageInfo structure (see <<descriptorsets-updates>>). At the time that any command buffer command accessing an image executes on any queue, the layouts of the image subresources that are accessed <b>must</b> all match the layout specified via the API controlling those accesses.
+
+		The image layout of each image subresource <b>must</b> be well-defined at each point in the image subresource's lifetime. This means that when performing a layout transition on the image subresource, the old layout value <b>must</b> either equal the current layout of the image subresource (at the time the transition executes), or else be #IMAGE_LAYOUT_UNDEFINED (implying that the contents of the image subresource need not be preserved). The new layout used in a transition <b>must</b> not be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED.
+
+		<h5>See Also</h5>
+		##VkAttachmentDescription, ##VkAttachmentReference, ##VkDescriptorImageInfo, ##VkImageCreateInfo, ##VkImageMemoryBarrier, #CmdBlitImage(), #CmdClearColorImage(), #CmdClearDepthStencilImage(), #CmdCopyBufferToImage(), #CmdCopyImage(), #CmdCopyImageToBuffer(), #CmdResolveImage()
+		""",
+
+		"IMAGE_LAYOUT_UNDEFINED".."0",
+		"IMAGE_LAYOUT_GENERAL".."1",
+		"IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL".."2",
+		"IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL".."3",
+		"IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL".."4",
+		"IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL".."5",
+		"IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL".."6",
+		"IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL".."7",
+		"IMAGE_LAYOUT_PREINITIALIZED".."8"
+	)
+
+	EnumConstant(
+		"""
+		VkImageViewType - Image view types
+
+		<h5>Description</h5>
+		The exact image view type is partially implicit, based on the image's type and sample count, as well as the view creation parameters as described in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-views-compatibility">table below</a>. This table also shows which SPIR-V OpTypeImage Dim and Arrayed parameters correspond to each image view type.
+
+		<h5>See Also</h5>
+		##VkImageViewCreateInfo
+		""",
+
+		"IMAGE_VIEW_TYPE_1D".."0",
+		"IMAGE_VIEW_TYPE_2D".."1",
+		"IMAGE_VIEW_TYPE_3D".."2",
+		"IMAGE_VIEW_TYPE_CUBE".."3",
+		"IMAGE_VIEW_TYPE_1D_ARRAY".."4",
+		"IMAGE_VIEW_TYPE_2D_ARRAY".."5",
+		"IMAGE_VIEW_TYPE_CUBE_ARRAY".."6"
+	)
+
+	EnumConstant(
+		"""
+		VkComponentSwizzle - Specify how a component is swizzled
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkComponentMapping, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkComponentMapping
+		""",
+
+		"COMPONENT_SWIZZLE_IDENTITY".."0",
+		"COMPONENT_SWIZZLE_ZERO".."1",
+		"COMPONENT_SWIZZLE_ONE".."2",
+		"COMPONENT_SWIZZLE_R".."3",
+		"COMPONENT_SWIZZLE_G".."4",
+		"COMPONENT_SWIZZLE_B".."5",
+		"COMPONENT_SWIZZLE_A".."6"
+	)
+
+	EnumConstant(
+		"""
+		VkPipelineCreateFlagBits - Bitmask controlling how a pipeline is generated
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkGraphicsPipelineCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkPipelineCreateFlags}
+		""",
+
+		"PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT".enum(0x00000001),
+		"PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT".enum(0x00000002),
+		"PIPELINE_CREATE_DERIVATIVE_BIT".enum(0x00000004)
+	)
+
+	EnumConstant(
+		"""
+		VkShaderStageFlagBits - Bitmask specifying a pipeline stage
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkPipelineShaderStageCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkPipelineShaderStageCreateInfo, {@code VkShaderStageFlags}
+		""",
+
+		"SHADER_STAGE_VERTEX_BIT".enum(0x00000001),
+		"SHADER_STAGE_TESSELLATION_CONTROL_BIT".enum(0x00000002),
+		"SHADER_STAGE_TESSELLATION_EVALUATION_BIT".enum(0x00000004),
+		"SHADER_STAGE_GEOMETRY_BIT".enum(0x00000008),
+		"SHADER_STAGE_FRAGMENT_BIT".enum(0x00000010),
+		"SHADER_STAGE_COMPUTE_BIT".enum(0x00000020),
+		"SHADER_STAGE_ALL_GRAPHICS".."0x0000001F",
+		"SHADER_STAGE_ALL".."0x7FFFFFFF"
+	)
+
+	EnumConstant(
+		"""
+		VkVertexInputRate - Specify rate at which vertex attributes are pulled from buffers
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkVertexInputBindingDescription, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkVertexInputBindingDescription
+		""",
+
+		"VERTEX_INPUT_RATE_VERTEX".."0",
+		"VERTEX_INPUT_RATE_INSTANCE".."1"
+	)
+
+	EnumConstant(
+		"""
+		VkPrimitiveTopology - Supported primitive topologies
+
+		<h5>See Also</h5>
+		##VkPipelineInputAssemblyStateCreateInfo
+		""",
+
+		"PRIMITIVE_TOPOLOGY_POINT_LIST".."0",
+		"PRIMITIVE_TOPOLOGY_LINE_LIST".."1",
+		"PRIMITIVE_TOPOLOGY_LINE_STRIP".."2",
+		"PRIMITIVE_TOPOLOGY_TRIANGLE_LIST".."3",
+		"PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP".."4",
+		"PRIMITIVE_TOPOLOGY_TRIANGLE_FAN".."5",
+		"PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY".."6",
+		"PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY".."7",
+		"PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY".."8",
+		"PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY".."9",
+		"PRIMITIVE_TOPOLOGY_PATCH_LIST".."10"
+	)
+
+	EnumConstant(
+		"""
+		VkPolygonMode - Control polygon rasterization mode
+
+		<h5>Description</h5>
+		The {@code polygonMode} selects which method of rasterization is used for polygons. If {@code polygonMode} is #POLYGON_MODE_POINT, then the vertices of polygons are treated, for rasterization purposes, as if they had been drawn as points. #POLYGON_MODE_LINE causes polygon edges to be drawn as line segments. #POLYGON_MODE_FILL causes polygons to render using the polygon rasterization rules in this section.
+
+		Note that these modes affect only the final rasterization of polygons: in particular, a polygon's vertices are shaded and the polygon is clipped and possibly culled before these modes are applied.
+
+		<h5>See Also</h5>
+		##VkPipelineRasterizationStateCreateInfo
+		""",
+
+		"POLYGON_MODE_FILL".."0",
+		"POLYGON_MODE_LINE".."1",
+		"POLYGON_MODE_POINT".."2"
+	)
+
+	EnumConstant(
+		"""
+		VkCullModeFlagBits - Bitmask controlling triangle culling
+
+		<h5>Description</h5>
+		If the {@code cullMode} is set to #CULL_MODE_NONE no triangles are discarded, if it is set to #CULL_MODE_FRONT_BIT front-facing triangles are discarded, if it is set to #CULL_MODE_BACK_BIT then back-facing triangles are discarded and if it is set to #CULL_MODE_FRONT_AND_BACK then all triangles are discarded. Following culling, fragments are produced for any triangles which have not been discarded.
+
+		<h5>See Also</h5>
+		{@code VkCullModeFlags}
+		""",
+
+		"CULL_MODE_NONE".."0",
+		"CULL_MODE_FRONT_BIT".enum(0x00000001),
+		"CULL_MODE_BACK_BIT".enum(0x00000002),
+		"CULL_MODE_FRONT_AND_BACK".."0x00000003"
+	)
+
+	EnumConstant(
+		"""
+		VkFrontFace - Interpret polygon front-facing orientation
+
+		<h5>Description</h5>
+		If {@code frontFace} is set to #FRONT_FACE_COUNTER_CLOCKWISE, a triangle with positive area is considered front-facing. If it is set to #FRONT_FACE_CLOCKWISE, a triangle with negative area is considered front-facing. Any triangle which is not front-facing is back-facing, including zero-area triangles.
+
+		<h5>See Also</h5>
+		##VkPipelineRasterizationStateCreateInfo
+		""",
+
+		"FRONT_FACE_COUNTER_CLOCKWISE".."0",
+		"FRONT_FACE_CLOCKWISE".."1"
+	)
+
+	EnumConstant(
+		"""
+		VkCompareOp - Stencil comparison function
+
+		<h5>Description</h5>
+		<ul>
+			<li>#COMPARE_OP_NEVER: the test never passes.</li>
+			<li>#COMPARE_OP_LESS: the test passes when <code>R &lt; S</code>.</li>
+			<li>#COMPARE_OP_EQUAL: the test passes when <code>R = S</code>.</li>
+			<li>#COMPARE_OP_LESS_OR_EQUAL: the test passes when <code>R &#x2264; S</code>.</li>
+			<li>#COMPARE_OP_GREATER: the test passes when <code>R &gt; S</code>.</li>
+			<li>#COMPARE_OP_NOT_EQUAL: the test passes when <code>R &#x2260; S</code>.</li>
+			<li>#COMPARE_OP_GREATER_OR_EQUAL: the test passes when <code>R &#x2265; S</code>.</li>
+			<li>#COMPARE_OP_ALWAYS: the test always passes.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkPipelineDepthStencilStateCreateInfo, ##VkSamplerCreateInfo, ##VkStencilOpState
+		""",
+
+		"COMPARE_OP_NEVER".."0",
+		"COMPARE_OP_LESS".."1",
+		"COMPARE_OP_EQUAL".."2",
+		"COMPARE_OP_LESS_OR_EQUAL".."3",
+		"COMPARE_OP_GREATER".."4",
+		"COMPARE_OP_NOT_EQUAL".."5",
+		"COMPARE_OP_GREATER_OR_EQUAL".."6",
+		"COMPARE_OP_ALWAYS".."7"
+	)
+
+	EnumConstant(
+		"""
+		VkStencilOp - Stencil comparison function
+
+		<h5>Description</h5>
+		The possible values are:
+
+		<ul>
+			<li>#STENCIL_OP_KEEP keeps the current value.</li>
+			<li>#STENCIL_OP_ZERO sets the value to 0.</li>
+			<li>#STENCIL_OP_REPLACE sets the value to {@code reference}.</li>
+			<li>#STENCIL_OP_INCREMENT_AND_CLAMP increments the current value and clamps to the maximum representable unsigned value.</li>
+			<li>#STENCIL_OP_DECREMENT_AND_CLAMP decrements the current value and clamps to 0.</li>
+			<li>#STENCIL_OP_INVERT bitwise-inverts the current value.</li>
+			<li>#STENCIL_OP_INCREMENT_AND_WRAP increments the current value and wraps to 0 when the maximum value would have been exceeded.</li>
+			<li>#STENCIL_OP_DECREMENT_AND_WRAP decrements the current value and wraps to the maximum possible value when the value would go below 0.</li>
+		</ul>
+
+		For purposes of increment and decrement, the stencil bits are considered as an unsigned integer.
+
+		If the stencil test fails, the sample's coverage bit is cleared in the fragment. If there is no stencil framebuffer attachment, stencil modification <b>cannot</b> occur, and it is as if the stencil tests always pass.
+
+		If the stencil test passes, the {@code writeMask} member of the ##VkStencilOpState structures controls how the updated stencil value is written to the stencil framebuffer attachment.
+
+		The least significant <code>s</code> bits of {@code writeMask}, where <code>s</code> is the number of bits in the stencil framebuffer attachment, specify an integer mask. Where a <code>1</code> appears in this mask, the corresponding bit in the stencil value in the depth/stencil attachment is written; where a <code>0</code> appears, the bit is not written. The {@code writeMask} value uses either the front-facing or back-facing state based on the facing-ness of the fragment. Fragments generated by front-facing primitives use the front mask and fragments generated by back-facing primitives use the back mask.
+
+		<h5>See Also</h5>
+		##VkStencilOpState
+		""",
+
+		"STENCIL_OP_KEEP".."0",
+		"STENCIL_OP_ZERO".."1",
+		"STENCIL_OP_REPLACE".."2",
+		"STENCIL_OP_INCREMENT_AND_CLAMP".."3",
+		"STENCIL_OP_DECREMENT_AND_CLAMP".."4",
+		"STENCIL_OP_INVERT".."5",
+		"STENCIL_OP_INCREMENT_AND_WRAP".."6",
+		"STENCIL_OP_DECREMENT_AND_WRAP".."7"
+	)
+
+	EnumConstant(
+		"""
+		VkLogicOp - Framebuffer logical operations
+
+		<h5>Description</h5>
+		
+
+		The logical operations supported by Vulkan are summarized in the following table in which
+
+		<ul>
+			<li><code>&#x00ac;</code> is bitwise invert,</li>
+			<li><code>&#x2227;</code> is bitwise and,</li>
+			<li><code>&#x2228;</code> is bitwise or,</li>
+			<li><code>&#x2295;</code> is bitwise exclusive or,</li>
+			<li><code>s</code> is the fragment&#8217;s <code>R<sub>s0</sub>, G<sub>s0</sub>, B<sub>s0</sub></code> or <code>A<sub>s0</sub></code> component value for the fragment output corresponding to the color attachment being updated, and</li>
+			<li><code>d</code> is the color attachment&#8217;s <code>R, G, B</code> or <code>A</code> component value:</li>
+		</ul>
+
+		<h6>Logical Operations</h6>
+		<table class="lwjgl">
+			<thead><tr><th>Mode</th><th>Operation</th></tr></thead>
+			<tbody>
+				<tr><td>#LOGIC_OP_CLEAR</td><td><code>0</code></td></tr>
+				<tr><td>#LOGIC_OP_AND</td><td><code>s &#x2227; d</code></td></tr>
+				<tr><td>#LOGIC_OP_AND_REVERSE</td><td><code>s &#x2227; &#x00ac; d</code></td></tr>
+				<tr><td>#LOGIC_OP_COPY</td><td><code>s</code></td></tr>
+				<tr><td>#LOGIC_OP_AND_INVERTED</td><td><code>&#x00ac; s &#x2227; d</code></td></tr>
+				<tr><td>#LOGIC_OP_NO_OP</td><td><code>d</code></td></tr>
+				<tr><td>#LOGIC_OP_XOR</td><td><code>s &#x2295; d</code></td></tr>
+				<tr><td>#LOGIC_OP_OR</td><td><code>s &#x2228; d</code></td></tr>
+				<tr><td>#LOGIC_OP_NOR</td><td><code>&#x00ac; (s &#x2228; d)</code></td></tr>
+				<tr><td>#LOGIC_OP_EQUIVALENT</td><td><code>&#x00ac; (s &#x2295; d)</code></td></tr>
+				<tr><td>#LOGIC_OP_INVERT</td><td><code>&#x00ac; d</code></td></tr>
+				<tr><td>#LOGIC_OP_OR_REVERSE</td><td><code>s &#x2228; &#x00ac; d</code></td></tr>
+				<tr><td>#LOGIC_OP_COPY_INVERTED</td><td><code>&#x00ac; s</code></td></tr>
+				<tr><td>#LOGIC_OP_OR_INVERTED</td><td><code>&#x00ac; s &#x2228; d</code></td></tr>
+				<tr><td>#LOGIC_OP_NAND</td><td><code>&#x00ac; (s &#x2227; d)</code></td></tr>
+				<tr><td>#LOGIC_OP_SET</td><td>all 1s</td></tr>
+			</tbody>
+		</table>
+
+		The result of the logical operation is then written to the color attachment as controlled by the component write mask, described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#framebuffer-blendoperations">Blend Operations</a>.
+
+		<h5>See Also</h5>
+		##VkPipelineColorBlendStateCreateInfo
+		""",
+
+		"LOGIC_OP_CLEAR".."0",
+		"LOGIC_OP_AND".."1",
+		"LOGIC_OP_AND_REVERSE".."2",
+		"LOGIC_OP_COPY".."3",
+		"LOGIC_OP_AND_INVERTED".."4",
+		"LOGIC_OP_NO_OP".."5",
+		"LOGIC_OP_XOR".."6",
+		"LOGIC_OP_OR".."7",
+		"LOGIC_OP_NOR".."8",
+		"LOGIC_OP_EQUIVALENT".."9",
+		"LOGIC_OP_INVERT".."10",
+		"LOGIC_OP_OR_REVERSE".."11",
+		"LOGIC_OP_COPY_INVERTED".."12",
+		"LOGIC_OP_OR_INVERTED".."13",
+		"LOGIC_OP_NAND".."14",
+		"LOGIC_OP_SET".."15"
+	)
+
+	EnumConstant(
+		"""
+		VkBlendFactor - Framebuffer blending factors
+
+		<h5>Description</h5>
+		The semantics of each enum value is described in the table below:
+
+		<h6>Blend Factors</h6>
+		<table class="lwjgl">
+			<thead><tr><th>VkBlendFactor</th><th>RGB Blend Factors <code>(S<sub>r</sub>,S<sub>g</sub>,S<sub>b</sub>)</code> or <code>(D<sub>r</sub>,D<sub>g</sub>,D<sub>b</sub>)</code></th><th>Alpha Blend Factor (<code>S<sub>a</sub></code> or <code>D<sub>a</sub></code>)</th></tr></thead>
+			<tbody>
+				<tr><td>#BLEND_FACTOR_ZERO</td><td><code>(0,0,0)</code></td><td><code>0</code></td></tr>
+				<tr><td>#BLEND_FACTOR_ONE</td><td><code>(1,1,1)</code></td><td><code>1</code></td></tr>
+				<tr><td>#BLEND_FACTOR_SRC_COLOR</td><td><code>(R<sub>s0</sub>,G<sub>s0</sub>,B<sub>s0</sub>)</code></td><td><code>A<sub>s0</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_ONE_MINUS_SRC_COLOR</td><td><code>(1-R<sub>s0</sub>,1-G<sub>s0</sub>,1-B<sub>s0</sub>)</code></td><td><code>1-A<sub>s0</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_DST_COLOR</td><td><code>(R<sub>d</sub>,G<sub>d</sub>,B<sub>d</sub>)</code></td><td><code>A<sub>d</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_ONE_MINUS_DST_COLOR</td><td><code>(1-R<sub>d</sub>,1-G<sub>d</sub>,1-B<sub>d</sub>)</code></td><td><code>1-A<sub>d</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_SRC_ALPHA</td><td><code>(A<sub>s0</sub>,A<sub>s0</sub>,A<sub>s0</sub>)</code></td><td><code>A<sub>s0</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_ONE_MINUS_SRC_ALPHA</td><td><code>(1-A<sub>s0</sub>,1-A<sub>s0</sub>,1-A<sub>s0</sub>)</code></td><td><code>1-A<sub>s0</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_DST_ALPHA</td><td><code>(A<sub>d</sub>,A<sub>d</sub>,A<sub>d</sub>)</code></td><td><code>A<sub>d</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_ONE_MINUS_DST_ALPHA</td><td><code>(1-A<sub>d</sub>,1-A<sub>d</sub>,1-A<sub>d</sub>)</code></td><td><code>1-A<sub>d</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_CONSTANT_COLOR</td><td><code>(R<sub>c</sub>,G<sub>c</sub>,B<sub>c</sub>)</code></td><td><code>A<sub>c</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR</td><td><code>(1-R<sub>c</sub>,1-G<sub>c</sub>,1-B<sub>c</sub>)</code></td><td><code>1-A<sub>c</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_CONSTANT_ALPHA</td><td><code>(A<sub>c</sub>,A<sub>c</sub>,A<sub>c</sub>)</code></td><td><code>A<sub>c</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</td><td><code>(1-A<sub>c</sub>,1-A<sub>c</sub>,1-A<sub>c</sub>)</code></td><td><code>1-A<sub>c</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_SRC_ALPHA_SATURATE</td><td><code>(f,f,f)</code>; <code>f = min(A<sub>s0</sub>,1-A<sub>d</sub>)</code></td><td><code>1</code></td></tr>
+				<tr><td>#BLEND_FACTOR_SRC1_COLOR</td><td><code>(R<sub>s1</sub>,G<sub>s1</sub>,B<sub>s1</sub>)</code></td><td><code>A<sub>s1</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_ONE_MINUS_SRC1_COLOR</td><td><code>(1-R<sub>s1</sub>,1-G<sub>s1</sub>,1-B<sub>s1</sub>)</code></td><td><code>1-A<sub>s1</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_SRC1_ALPHA</td><td><code>(A<sub>s1</sub>,A<sub>s1</sub>,A<sub>s1</sub>)</code></td><td><code>A<sub>s1</sub></code></td></tr>
+				<tr><td>#BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA</td><td><code>(1-A<sub>s1</sub>,1-A<sub>s1</sub>,1-A<sub>s1</sub>)</code></td><td><code>1-A<sub>s1</sub></code></td></tr>
+			</tbody>
+		</table>
+
+		In this table, the following conventions are used:
+
+		<ul>
+			<li><code>R<sub>s0</sub>,G<sub>s0</sub>,B<sub>s0</sub></code> and <code>A<sub>s0</sub></code> represent the first source color R, G, B, and A components, respectively, for the fragment output location corresponding to the color attachment being blended.</li>
+			<li><code>R<sub>s1</sub>,G<sub>s1</sub>,B<sub>s1</sub></code> and <code>A<sub>s1</sub></code> represent the second source color R, G, B, and A components, respectively, used in dual source blending modes, for the fragment output location corresponding to the color attachment being blended.</li>
+			<li><code>R<sub>d</sub>,G<sub>d</sub>,B<sub>d</sub></code> and <code>A<sub>d</sub></code> represent the R, G, B, and A components of the destination color. That is, the color currently in the corresponding color attachment for this fragment/sample.</li>
+			<li><code>R<sub>c</sub>,G<sub>c</sub>,B<sub>c</sub></code> and <code>A<sub>c</sub></code> represent the blend constant R, G, B, and A components, respectively.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkPipelineColorBlendAttachmentState
+		""",
+
+		"BLEND_FACTOR_ZERO".."0",
+		"BLEND_FACTOR_ONE".."1",
+		"BLEND_FACTOR_SRC_COLOR".."2",
+		"BLEND_FACTOR_ONE_MINUS_SRC_COLOR".."3",
+		"BLEND_FACTOR_DST_COLOR".."4",
+		"BLEND_FACTOR_ONE_MINUS_DST_COLOR".."5",
+		"BLEND_FACTOR_SRC_ALPHA".."6",
+		"BLEND_FACTOR_ONE_MINUS_SRC_ALPHA".."7",
+		"BLEND_FACTOR_DST_ALPHA".."8",
+		"BLEND_FACTOR_ONE_MINUS_DST_ALPHA".."9",
+		"BLEND_FACTOR_CONSTANT_COLOR".."10",
+		"BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR".."11",
+		"BLEND_FACTOR_CONSTANT_ALPHA".."12",
+		"BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA".."13",
+		"BLEND_FACTOR_SRC_ALPHA_SATURATE".."14",
+		"BLEND_FACTOR_SRC1_COLOR".."15",
+		"BLEND_FACTOR_ONE_MINUS_SRC1_COLOR".."16",
+		"BLEND_FACTOR_SRC1_ALPHA".."17",
+		"BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA".."18"
+	)
+
+	EnumConstant(
+		"""
+		VkBlendOp - Framebuffer blending operations
+
+		<h5>Description</h5>
+		
+
+		The semantics of each enum value is described in the table below:
+
+		<h6>Blend Operations</h6>
+		<table class="lwjgl">
+			<thead><tr><th>VkBlendOp</th><th>RGB Components</th><th>Alpha Component</th></tr></thead>
+			<tbody>
+				<tr><td>#BLEND_OP_ADD</td><td><code>R = R<sub>s0</sub> &#x00d7; S<sub>r</sub> + R<sub>d</sub> &#x00d7; D<sub>r</sub></code> <code>G = G<sub>s0</sub> &#x00d7; S<sub>g</sub> + G<sub>d</sub> &#x00d7; D<sub>g</sub></code> <code>B = B<sub>s0</sub> &#x00d7; S<sub>b</sub> + B<sub>d</sub> &#x00d7; D<sub>b</sub></code></td><td><code>A = A<sub>s0</sub> &#x00d7; S<sub>a</sub> + A<sub>d</sub> &#x00d7; D<sub>a</sub></code></td></tr>
+				<tr><td>#BLEND_OP_SUBTRACT</td><td><code>R = R<sub>s0</sub> &#x00d7; S<sub>r</sub> - R<sub>d</sub> &#x00d7; D<sub>r</sub></code> <code>G = G<sub>s0</sub> &#x00d7; S<sub>g</sub> - G<sub>d</sub> &#x00d7; D<sub>g</sub></code> <code>B = B<sub>s0</sub> &#x00d7; S<sub>b</sub> - B<sub>d</sub> &#x00d7; D<sub>b</sub></code></td><td><code>A = A<sub>s0</sub> &#x00d7; S<sub>a</sub> - A<sub>d</sub> &#x00d7; D<sub>a</sub></code></td></tr>
+				<tr><td>#BLEND_OP_REVERSE_SUBTRACT</td><td><code>R = R<sub>d</sub> &#x00d7; D<sub>r</sub> - R<sub>s0</sub> &#x00d7; S<sub>r</sub></code> <code>G = G<sub>d</sub> &#x00d7; D<sub>g</sub> - G<sub>s0</sub> &#x00d7; S<sub>g</sub></code> <code>B = B<sub>d</sub> &#x00d7; D<sub>b</sub> - B<sub>s0</sub> &#x00d7; S<sub>b</sub></code></td><td><code>A = A<sub>d</sub> &#x00d7; D<sub>a</sub> - A<sub>s0</sub> &#x00d7; S<sub>a</sub></code></td></tr>
+				<tr><td>#BLEND_OP_MIN</td><td><code>R = min(R<sub>s0</sub>,R<sub>d</sub>)</code> <code>G = min(G<sub>s0</sub>,G<sub>d</sub>)</code> <code>B = min(B<sub>s0</sub>,B<sub>d</sub>)</code></td><td><code>A = min(A<sub>s0</sub>,A<sub>d</sub>)</code></td></tr>
+				<tr><td>#BLEND_OP_MAX</td><td><code>R = max(R<sub>s0</sub>,R<sub>d</sub>)</code> <code>G = max(G<sub>s0</sub>,G<sub>d</sub>)</code> <code>B = max(B<sub>s0</sub>,B<sub>d</sub>)</code></td><td><code>A = max(A<sub>s0</sub>,A<sub>d</sub>)</code></td></tr>
+			</tbody>
+		</table>
+
+		In this table, the following conventions are used:
+
+		<ul>
+			<li><code>R<sub>s0</sub>, G<sub>s0</sub>, B<sub>s0</sub></code> and <code>A<sub>s0</sub></code> represent the first source color R, G, B, and A components, respectively.</li>
+			<li><code>R<sub>d</sub>, G<sub>d</sub>, B<sub>d</sub></code> and <code>A<sub>d</sub></code> represent the R, G, B, and A components of the destination color. That is, the color currently in the corresponding color attachment for this fragment/sample.</li>
+			<li><code>S<sub>r</sub>, S<sub>g</sub>, S<sub>b</sub></code> and <code>S<sub>a</sub></code> represent the source blend factor R, G, B, and A components, respectively.</li>
+			<li><code>D<sub>r</sub>, D<sub>g</sub>, D<sub>b</sub></code> and <code>D<sub>a</sub></code> represent the destination blend factor R, G, B, and A components, respectively.</li>
+		</ul>
+
+		The blending operation produces a new set of values <code>R, G, B</code> and <code>A</code>, which are written to the framebuffer attachment. If blending is not enabled for this attachment, then <code>R, G, B</code> and <code>A</code> are assigned <code>R<sub>s0</sub>, G<sub>s0</sub>, B<sub>s0</sub></code> and <code>A<sub>s0</sub></code>, respectively.
+
+		If the color attachment is fixed-point, the components of the source and destination values and blend factors are each clamped to <code>[0,1]</code> or <code>[-1,1]</code> respectively for an unsigned normalized or signed normalized color attachment prior to evaluating the blend operations. If the color attachment is floating-point, no clamping occurs.
+
+		<h5>See Also</h5>
+		##VkPipelineColorBlendAttachmentState
+		""",
+
+		"BLEND_OP_ADD".."0",
+		"BLEND_OP_SUBTRACT".."1",
+		"BLEND_OP_REVERSE_SUBTRACT".."2",
+		"BLEND_OP_MIN".."3",
+		"BLEND_OP_MAX".."4"
+	)
+
+	EnumConstant(
+		"""
+		VkColorComponentFlagBits - Bitmask controlling which components are written to the framebuffer
+
+		<h5>Description</h5>
+		If #COLOR_COMPONENT_R_BIT is set, then the <code>R</code> value is written to color attachment for the appropriate sample, otherwise the value in memory is unmodified. The #COLOR_COMPONENT_G_BIT, #COLOR_COMPONENT_B_BIT, and #COLOR_COMPONENT_A_BIT bits similarly control writing of the <code>G, B,</code> and <code>A</code> values. The {@code colorWriteMask} is applied regardless of whether blending is enabled.
+
+		<h5>See Also</h5>
+		{@code VkColorComponentFlags}
+		""",
+
+		"COLOR_COMPONENT_R_BIT".enum(0x00000001),
+		"COLOR_COMPONENT_G_BIT".enum(0x00000002),
+		"COLOR_COMPONENT_B_BIT".enum(0x00000004),
+		"COLOR_COMPONENT_A_BIT".enum(0x00000008)
+	)
+
+	EnumConstant(
+		"""
+		VkDynamicState - Indicate which dynamic state is taken from dynamic state commands
+
+		<h5>Description</h5>
+		<ul>
+			<li>#DYNAMIC_STATE_VIEWPORT indicates that the {@code pViewports} state in ##VkPipelineViewportStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetViewport() before any draw commands. The number of viewports used by a pipeline is still specified by the {@code viewportCount} member of ##VkPipelineViewportStateCreateInfo.</li>
+			<li>#DYNAMIC_STATE_SCISSOR indicates that the {@code pScissors} state in ##VkPipelineViewportStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetScissor() before any draw commands. The number of scissor rectangles used by a pipeline is still specified by the {@code scissorCount} member of ##VkPipelineViewportStateCreateInfo.</li>
+			<li>#DYNAMIC_STATE_LINE_WIDTH indicates that the {@code lineWidth} state in ##VkPipelineRasterizationStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetLineWidth() before any draw commands that generate line primitives for the rasterizer.</li>
+			<li>#DYNAMIC_STATE_DEPTH_BIAS indicates that the {@code depthBiasConstantFactor}, {@code depthBiasClamp} and {@code depthBiasSlopeFactor} states in ##VkPipelineRasterizationStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetDepthBias() before any draws are performed with {@code depthBiasEnable} in ##VkPipelineRasterizationStateCreateInfo set to #TRUE.</li>
+			<li>#DYNAMIC_STATE_BLEND_CONSTANTS indicates that the {@code blendConstants} state in ##VkPipelineColorBlendStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetBlendConstants() before any draws are performed with a pipeline state with ##VkPipelineColorBlendAttachmentState member {@code blendEnable} set to #TRUE and any of the blend functions using a constant blend color.</li>
+			<li>#DYNAMIC_STATE_DEPTH_BOUNDS indicates that the {@code minDepthBounds} and {@code maxDepthBounds} states of ##VkPipelineDepthStencilStateCreateInfo will be ignored and <b>must</b> be set dynamically with #CmdSetDepthBounds() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code depthBoundsTestEnable} set to #TRUE.</li>
+			<li>#DYNAMIC_STATE_STENCIL_COMPARE_MASK indicates that the {@code compareMask} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilCompareMask() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
+			<li>#DYNAMIC_STATE_STENCIL_WRITE_MASK indicates that the {@code writeMask} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilWriteMask() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
+			<li>#DYNAMIC_STATE_STENCIL_REFERENCE indicates that the {@code reference} state in ##VkPipelineDepthStencilStateCreateInfo for both {@code front} and {@code back} will be ignored and <b>must</b> be set dynamically with #CmdSetStencilReference() before any draws are performed with a pipeline state with ##VkPipelineDepthStencilStateCreateInfo member {@code stencilTestEnable} set to #TRUE</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkPipelineDynamicStateCreateInfo
+		""",
+
+		"DYNAMIC_STATE_VIEWPORT".."0",
+		"DYNAMIC_STATE_SCISSOR".."1",
+		"DYNAMIC_STATE_LINE_WIDTH".."2",
+		"DYNAMIC_STATE_DEPTH_BIAS".."3",
+		"DYNAMIC_STATE_BLEND_CONSTANTS".."4",
+		"DYNAMIC_STATE_DEPTH_BOUNDS".."5",
+		"DYNAMIC_STATE_STENCIL_COMPARE_MASK".."6",
+		"DYNAMIC_STATE_STENCIL_WRITE_MASK".."7",
+		"DYNAMIC_STATE_STENCIL_REFERENCE".."8"
+	)
+
+	EnumConstant(
+		"""
+		VkFilter - Specify filters used for texture lookups
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkSamplerCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkSamplerCreateInfo, #CmdBlitImage()
+		""",
+
+		"FILTER_NEAREST".."0",
+		"FILTER_LINEAR".."1"
+	)
+
+	EnumConstant(
+		"""
+		VkSamplerMipmapMode - Specify mipmap mode used for texture lookups
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkSamplerCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkSamplerCreateInfo
+		""",
+
+		"SAMPLER_MIPMAP_MODE_NEAREST".."0",
+		"SAMPLER_MIPMAP_MODE_LINEAR".."1"
+	)
+
+	EnumConstant(
+		"""
+		VkSamplerAddressMode - Specify behavior of sampling with texture coordinates outside an image
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkSamplerCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkSamplerCreateInfo
+		""",
+
+		"SAMPLER_ADDRESS_MODE_REPEAT".."0",
+		"SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT".."1",
+		"SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE".."2",
+		"SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".."3"
+	)
+
+	EnumConstant(
+		"""
+		VkBorderColor - Specify border color used for texture lookups
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkSamplerCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkSamplerCreateInfo
+		""",
+
+		"BORDER_COLOR_FLOAT_TRANSPARENT_BLACK".."0",
+		"BORDER_COLOR_INT_TRANSPARENT_BLACK".."1",
+		"BORDER_COLOR_FLOAT_OPAQUE_BLACK".."2",
+		"BORDER_COLOR_INT_OPAQUE_BLACK".."3",
+		"BORDER_COLOR_FLOAT_OPAQUE_WHITE".."4",
+		"BORDER_COLOR_INT_OPAQUE_WHITE".."5"
+	)
+
+	EnumConstant(
+		"""
+		VkDescriptorType - Specifies the type of a descriptor in a descriptor set
+
+		<h5>Description</h5>
+		If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_STORAGE_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the elements of the ##VkWriteDescriptorSet{@code ::pBufferInfo} array of ##VkDescriptorBufferInfo structures will be used to update the descriptors, and other arrays will be ignored.
+
+		If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER or #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, the ##VkWriteDescriptorSet{@code ::pTexelBufferView} array will be used to update the descriptors, and other arrays will be ignored.
+
+		If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the elements of the ##VkWriteDescriptorSet{@code ::pImageInfo} array of ##VkDescriptorImageInfo structures will be used to update the descriptors, and other arrays will be ignored.
+
+		<h5>See Also</h5>
+		##VkDescriptorPoolSize, ##VkDescriptorSetLayoutBinding, ##VkWriteDescriptorSet
+		""",
+
+		"DESCRIPTOR_TYPE_SAMPLER".."0",
+		"DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER".."1",
+		"DESCRIPTOR_TYPE_SAMPLED_IMAGE".."2",
+		"DESCRIPTOR_TYPE_STORAGE_IMAGE".."3",
+		"DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER".."4",
+		"DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER".."5",
+		"DESCRIPTOR_TYPE_UNIFORM_BUFFER".."6",
+		"DESCRIPTOR_TYPE_STORAGE_BUFFER".."7",
+		"DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC".."8",
+		"DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC".."9",
+		"DESCRIPTOR_TYPE_INPUT_ATTACHMENT".."10"
+	)
+
+	EnumConstant(
+		"""
+		VkDescriptorPoolCreateFlagBits - Bitmask specifying certain supported operations on a descriptor pool
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkDescriptorPoolCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkDescriptorPoolCreateFlags}
+		""",
+
+		"DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT".enum(0x00000001)
+	)
+
+	EnumConstant(
+		"""
+		VkAttachmentDescriptionFlagBits - Bitmask specifying additional properties of an attachment
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkAttachmentDescription, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkAttachmentDescriptionFlags}
+		""",
+
+		"ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT".enum(0x00000001)
+	)
+
+	EnumConstant(
+		"""
+		VkAttachmentLoadOp - Specify how contents of an attachment are treated at the beginning of a subpass
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkAttachmentDescription, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAttachmentDescription
+		""",
+
+		"ATTACHMENT_LOAD_OP_LOAD".."0",
+		"ATTACHMENT_LOAD_OP_CLEAR".."1",
+		"ATTACHMENT_LOAD_OP_DONT_CARE".."2"
+	)
+
+	EnumConstant(
+		"""
+		VkAttachmentStoreOp - Specify how contents of an attachment are treated at the end of a subpass
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkAttachmentDescription, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAttachmentDescription
+		""",
+
+		"ATTACHMENT_STORE_OP_STORE".."0",
+		"ATTACHMENT_STORE_OP_DONT_CARE".."1"
+	)
+
+	EnumConstant(
+		"""
+		VkPipelineBindPoint - Specify the bind point of a pipeline object to a command buffer
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for #CmdBindPipeline(), where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkSubpassDescription, #CmdBindDescriptorSets(), #CmdBindPipeline()
+		""",
+
+		"PIPELINE_BIND_POINT_GRAPHICS".."0",
+		"PIPELINE_BIND_POINT_COMPUTE".."1"
+	)
+
+	EnumConstant(
+		"""
+		VkAccessFlagBits - Bitmask specifying classes of memory access the will participate in a memory barrier dependency
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkMemoryBarrier, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkAccessFlags}
+		""",
+
+		"ACCESS_INDIRECT_COMMAND_READ_BIT".enum(0x00000001),
+		"ACCESS_INDEX_READ_BIT".enum(0x00000002),
+		"ACCESS_VERTEX_ATTRIBUTE_READ_BIT".enum(0x00000004),
+		"ACCESS_UNIFORM_READ_BIT".enum(0x00000008),
+		"ACCESS_INPUT_ATTACHMENT_READ_BIT".enum(0x00000010),
+		"ACCESS_SHADER_READ_BIT".enum(0x00000020),
+		"ACCESS_SHADER_WRITE_BIT".enum(0x00000040),
+		"ACCESS_COLOR_ATTACHMENT_READ_BIT".enum(0x00000080),
+		"ACCESS_COLOR_ATTACHMENT_WRITE_BIT".enum(0x00000100),
+		"ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT".enum(0x00000200),
+		"ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT".enum(0x00000400),
+		"ACCESS_TRANSFER_READ_BIT".enum(0x00000800),
+		"ACCESS_TRANSFER_WRITE_BIT".enum(0x00001000),
+		"ACCESS_HOST_READ_BIT".enum(0x00002000),
+		"ACCESS_HOST_WRITE_BIT".enum(0x00004000),
+		"ACCESS_MEMORY_READ_BIT".enum(0x00008000),
+		"ACCESS_MEMORY_WRITE_BIT".enum(0x00010000)
+	)
+
+	EnumConstant(
+		"""
+		VkDependencyFlagBits - Bitmask specifying dependencies between subpasses
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkSubpassDependency, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkDependencyFlags}
+		""",
+
+		"DEPENDENCY_BY_REGION_BIT".enum(0x00000001)
+	)
+
+	EnumConstant(
+		"""
+		VkCommandPoolCreateFlagBits - Bitmask specifying usage behavior for a command pool
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkCommandPoolCreateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkCommandPoolCreateFlags}
+		""",
+
+		"COMMAND_POOL_CREATE_TRANSIENT_BIT".enum(0x00000001),
+		"COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT".enum(0x00000002)
+	)
+
+	EnumConstant(
+		"""
+		VkCommandPoolResetFlagBits - Bitmask controlling behavior of a command pool reset
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for #ResetCommandPool(), where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkCommandPoolResetFlags}
+		""",
+
+		"COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT".enum(0x00000001)
+	)
+
+	EnumConstant(
+		"""
+		VkCommandBufferLevel - Structure specifying a command buffer level
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkCommandBufferAllocateInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkCommandBufferAllocateInfo
+		""",
+
+		"COMMAND_BUFFER_LEVEL_PRIMARY".."0",
+		"COMMAND_BUFFER_LEVEL_SECONDARY".."1"
+	)
+
+	EnumConstant(
+		"""
+		VkCommandBufferUsageFlagBits - Bitmask specifying usage behavior for command buffer
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for ##VkCommandBufferBeginInfo, where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkCommandBufferUsageFlags}
+		""",
+
+		"COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT".enum(0x00000001),
+		"COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT".enum(0x00000002),
+		"COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT".enum(0x00000004)
+	)
+
+	EnumConstant(
+		"""
+		VkQueryControlFlagBits - Bitmask specifying constraints on a query
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for #CmdBeginQuery(), where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkQueryControlFlags}
+		""",
+
+		"QUERY_CONTROL_PRECISE_BIT".enum(0x00000001)
+	)
+
+	EnumConstant(
+		"""
+		VkCommandBufferResetFlagBits - Bitmask controlling behavior of a command buffer reset
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for #ResetCommandBuffer(), where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkCommandBufferResetFlags}
+		""",
+
+		"COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT".enum(0x00000001)
+	)
+
+	EnumConstant(
+		"""
+		VkStencilFaceFlagBits - Bitmask specifying sets of stencil state for which to update the compare mask
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for #CmdSetStencilCompareMask(), where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code VkStencilFaceFlags}
+		""",
+
+		"STENCIL_FACE_FRONT_BIT".enum(0x00000001),
+		"STENCIL_FACE_BACK_BIT".enum(0x00000002),
+		"STENCIL_FRONT_AND_BACK".."0x00000003"
+	)
+
+	EnumConstant(
+		"""
+		VkIndexType - Type of index buffer indices
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for #CmdBindIndexBuffer(), where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#CmdBindIndexBuffer()
+		""",
+
+		"INDEX_TYPE_UINT16".."0",
+		"INDEX_TYPE_UINT32".."1"
+	)
+
+	EnumConstant(
+		"""
+		VkSubpassContents - Specify how commands in the first subpass of a render pass are provided
+
+		<h5>Description</h5>
+		For more information, see:
+
+		<ul>
+			<li>The reference page for #CmdBeginRenderPass(), where this interface is defined.</li>
+			<li>The See Also section for other reference pages using this type.</li>
+			<li>The Vulkan Specification.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#CmdBeginRenderPass(), #CmdNextSubpass()
+		""",
+
+		"SUBPASS_CONTENTS_INLINE".."0",
+		"SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS".."1"
+	)
+
+	// Device initialization
 
 	GlobalCommand..VkResult(
 		"CreateInstance",
 		"""
-		Creates a new Vulkan instance.
+		Create a new Vulkan instance.
 
-		There is no global state in Vulkan and all per-application state is stored in a {@code VkInstance} object. Creating a {@code VkInstance} object
-		initializes the Vulkan library and allows the application to pass information about itself to the implementation.
+		<h5>C Specification</h5>
+		To create an instance object, call:
 
-		{@code vkCreateInstance} creates the instance, then enables and initializes global layers and extensions requested by the application. If an extension
-		is provided by a layer, both the layer and extension $must be specified at {@code vkCreateInstance} time.
+		<pre><code>VkResult vkCreateInstance(
+￿    const VkInstanceCreateInfo*                 pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkInstance*                                 pInstance);</code></pre>
 
-		${ValidityProtos.vkCreateInstance}
+		<h5>Description</h5>
+		#CreateInstance() creates the instance, then enables and initializes global layers and extensions requested by the application. If an extension is provided by a layer, both the layer and extension <b>must</b> be specified at #CreateInstance() time. If a specified layer cannot be found, no {@code VkInstance} will be created and the function will return #ERROR_LAYER_NOT_PRESENT. Likewise, if a specified extension cannot be found the call will return #ERROR_EXTENSION_NOT_PRESENT.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkInstanceCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pInstance} <b>must</b> be a pointer to a {@code VkInstance} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_INITIALIZATION_FAILED</li>
+				<li>#ERROR_LAYER_NOT_PRESENT</li>
+				<li>#ERROR_EXTENSION_NOT_PRESENT</li>
+				<li>#ERROR_INCOMPATIBLE_DRIVER</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkInstanceCreateInfo
 		""",
 
-		const..VkInstanceCreateInfo_p.IN("pCreateInfo", "points to an instance of ##VkInstanceCreateInfo controlling creation of the instance"),
-		pAllocator,
-		Check(1)..VkInstance.p.OUT("pInstance", "a pointer to a {@code VkInstance} handle in which the resulting instance is returned")
+		const..VkInstanceCreateInfo.p.IN("pCreateInfo", "points to an instance of ##VkInstanceCreateInfo controlling creation of the instance."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkInstance.p.OUT("pInstance", "points a {@code VkInstance} handle in which the resulting instance is returned.")
 	)
 
 	void(
 		"DestroyInstance",
 		"""
-		Destroys an instance of Vulkan.
+		Destroy an instance of Vulkan.
 
-		After destruction of the instance, all devices (logical and physical) and any objects created by those devices become invalid and $should not be
-		accessed. However, objects allocated directly or indirectly through the instance are not destroyed automatically and so $may be leaked. Applications
-		$should destroy all objects created through instance before destroying the instance itself.
+		<h5>C Specification</h5>
+		To destroy an instance, call:
 
-		${ValidityProtos.vkDestroyInstance}
+		<pre><code>void vkDestroyInstance(
+￿    VkInstance                                  instance,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All child objects created using {@code instance} <b>must</b> have been destroyed prior to destroying {@code instance}</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code instance} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code instance} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>If {@code instance} is not {@code NULL}, {@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code instance} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkInstance.IN("instance", "the handle of the instance to destroy"),
-		pAllocator
+		VkInstance.IN("instance", "the handle of the instance to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	VkResult(
 		"EnumeratePhysicalDevices",
 		"""
-		Retrieves a list of physical device objects representing the physical devices installed in the system.
+		Enumerates the physical devices accessible to a Vulkan instance.
 
-		If {@code pPhysicalDevices} is $NULL, then the number of physical devices available is returned in {@code pPhysicalDeviceCount}. Otherwise,
-		{@code pPhysicalDeviceCount} $must point to a variable set by the user to the number of elements in the {@code pPhysicalDevices} array, and on return
-		the variable is overwritten with the number of structures actually written to {@code pPhysicalDevices}. If {@code pPhysicalDeviceCount} is less than
-		the number of physical devices available, at most {@code pPhysicalDeviceCount} structures will be written. If {@code pPhysicalDeviceCount} is smaller
-		than the number of physical devices available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available physical
-		devices were returned.
+		<h5>C Specification</h5>
+		To retrieve a list of physical device objects representing the physical devices installed in the system, call:
 
-		Once enumerated, general properties of the physical devices are queried by calling #GetPhysicalDeviceProperties().
+		<pre><code>VkResult vkEnumeratePhysicalDevices(
+￿    VkInstance                                  instance,
+￿    uint32_t*                                   pPhysicalDeviceCount,
+￿    VkPhysicalDevice*                           pPhysicalDevices);</code></pre>
 
-		${ValidityProtos.vkEnumeratePhysicalDevices}
+		<h5>Description</h5>
+		If {@code pPhysicalDevices} is {@code NULL}, then the number of physical devices available is returned in {@code pPhysicalDeviceCount}. Otherwise, {@code pPhysicalDeviceCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pPhysicalDevices} array, and on return the variable is overwritten with the number of structures actually written to {@code pPhysicalDevices}. If {@code pPhysicalDeviceCount} is less than the number of physical devices available, at most {@code pPhysicalDeviceCount} structures will be written. If {@code pPhysicalDeviceCount} is smaller than the number of physical devices available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available physical devices were returned.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
+			<li>{@code pPhysicalDeviceCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+			<li>If the value referenced by {@code pPhysicalDeviceCount} is not 0, and {@code pPhysicalDevices} is not {@code NULL}, {@code pPhysicalDevices} <b>must</b> be a pointer to an array of {@code pPhysicalDeviceCount} {@code VkPhysicalDevice} handles</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#INCOMPLETE</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_INITIALIZATION_FAILED</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkInstance.IN("instance", "a handle to a Vulkan instance previously created with #CreateInstance()"),
-		AutoSize("pPhysicalDevices")..Check(1)..uint32_t_p.INOUT(
-			"pPhysicalDeviceCount",
-			"a pointer to an integer related to the number of physical devices available or queried"
-		),
-		nullable..VkPhysicalDevice.p.OUT("pPhysicalDevices", "either $NULL or a pointer to an array of {@code VkPhysicalDevice} handles")
+		VkInstance.IN("instance", "a handle to a Vulkan instance previously created with #CreateInstance()."),
+		AutoSize("pPhysicalDevices")..Check(1)..uint32_t_p.INOUT("pPhysicalDeviceCount", "a pointer to an integer related to the number of physical devices available or queried, as described below."),
+		nullable..VkPhysicalDevice.p.OUT("pPhysicalDevices", "either {@code NULL} or a pointer to an array of {@code VkPhysicalDevice} handles.")
 	)
 
 	void(
@@ -1859,30 +2686,54 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"""
 		Reports capabilities of a physical device.
 
-		${ValidityProtos.vkGetPhysicalDeviceFeatures}
+		<h5>C Specification</h5>
+		To query supported features, call:
+
+		<pre><code>void vkGetPhysicalDeviceFeatures(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    VkPhysicalDeviceFeatures*                   pFeatures);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+			<li>{@code pFeatures} <b>must</b> be a pointer to a ##VkPhysicalDeviceFeatures structure</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkPhysicalDeviceFeatures
 		""",
 
-		VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried"),
-		VkPhysicalDeviceFeatures_p.OUT(
-			"pFeatures",
-			"points to an instance of the ##VkPhysicalDeviceProperties structure, that will be filled with returned information"
-		)
+		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the supported features."),
+		VkPhysicalDeviceFeatures.p.OUT("pFeatures", "a pointer to a ##VkPhysicalDeviceFeatures structure in which the physical device features are returned. For each feature, a value of #TRUE indicates that the feature is supported on this physical device, and #FALSE indicates that the feature is not supported.")
 	)
 
 	void(
 		"GetPhysicalDeviceFormatProperties",
 		"""
-		Lists physical device’s format capabilities.
+		Lists physical device's format capabilities.
 
-		${ValidityProtos.vkGetPhysicalDeviceFormatProperties}
+		<h5>C Specification</h5>
+		To query supported format features which are properties of the physical device, call:
+
+		<pre><code>void vkGetPhysicalDeviceFormatProperties(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    VkFormat                                    format,
+￿    VkFormatProperties*                         pFormatProperties);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+			<li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
+			<li>{@code pFormatProperties} <b>must</b> be a pointer to a ##VkFormatProperties structure</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkFormatProperties
 		""",
 
-		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the format properties"),
-		VkFormat.IN("format", "the format whose properties are queried"),
-		VkFormatProperties_p.OUT(
-			"pFormatProperties",
-			"a pointer to a ##VkFormatProperties structure in which physical device properties for format are returned"
-		)
+		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the format properties."),
+		VkFormat.IN("format", "the format whose properties are queried."),
+		VkFormatProperties.p.OUT("pFormatProperties", "a pointer to a ##VkFormatProperties structure in which physical device properties for {@code format} are returned.")
 	)
 
 	VkResult(
@@ -1890,33 +2741,63 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"""
 		Lists physical device's image format capabilities.
 
-		In addition to the minimum capabilities, implementations $may support additional capabilities for certain types of images. For example, larger
-		dimensions or additional sample counts for certain image types, or additional capabilities for linear tiling format images.
+		<h5>C Specification</h5>
+		To query additional capabilities specific to image types, call:
 
-		The {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} parameters correspond to parameters that would be consumed by
-		#CreateImage().
+		<pre><code>VkResult vkGetPhysicalDeviceImageFormatProperties(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    VkFormat                                    format,
+￿    VkImageType                                 type,
+￿    VkImageTiling                               tiling,
+￿    VkImageUsageFlags                           usage,
+￿    VkImageCreateFlags                          flags,
+￿    VkImageFormatProperties*                    pImageFormatProperties);</code></pre>
 
-		${ValidityProtos.vkGetPhysicalDeviceImageFormatProperties}
+		<h5>Description</h5>
+		The {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} parameters correspond to parameters that would be consumed by #CreateImage().
+
+		If {@code format} is not a supported image format, or if the combination of {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} is not supported for images, then #GetPhysicalDeviceImageFormatProperties() returns #ERROR_FORMAT_NOT_SUPPORTED.
+
+		The limitations on an image format that are reported by #GetPhysicalDeviceImageFormatProperties() have the following property: if {@code usage1} and {@code usage2} of type {@code VkImageUsageFlags} are such that the bits set in {@code usage1} are a subset of the bits set in {@code usage2}, and {@code flags1} and {@code flags2} of type {@code VkImageCreateFlags} are such that the bits set in {@code flags1} are a subset of the bits set in {@code flags2}, then the limitations for {@code usage1} and {@code flags1} <b>must</b> be no more strict than the limitations for {@code usage2} and {@code flags2}, for all values of {@code format}, {@code type}, and {@code tiling}.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+			<li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
+			<li>{@code type} <b>must</b> be a valid {@code VkImageType} value</li>
+			<li>{@code tiling} <b>must</b> be a valid {@code VkImageTiling} value</li>
+			<li>{@code usage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
+			<li>{@code usage} <b>must</b> not be 0</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkImageCreateFlagBits} values</li>
+			<li>{@code pImageFormatProperties} <b>must</b> be a pointer to a ##VkImageFormatProperties structure</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_FORMAT_NOT_SUPPORTED</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkImageFormatProperties
 		""",
 
-		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the image capabilities"),
-		VkFormat.IN("format", "the image format, corresponding to {@code VkImageCreateInfo.format}"),
-		VkImageType.IN("type", "the image type, corresponding to {@code VkImageCreateInfo.imageType}", VkImageTypes),
-		VkImageTiling.IN("tiling", " the image tiling, corresponding to {@code VkImageCreateInfo.tiling}", VkImageTilings),
-		VkImageUsageFlags.IN(
-			"usage",
-			"the intended usage of the image, corresponding to {@code VkImageCreateInfo.usage}",
-			VkImageUsageFlagBits, LinkMode.BITFIELD
-		),
-		VkImageCreateFlags.IN(
-			"flags",
-			"a bitfield describing additional parameters of the image, corresponding to {@code VkImageCreateInfo.flags}",
-			VkImageCreateFlagBits, LinkMode.BITFIELD
-		),
-		VkImageFormatProperties_p.OUT(
-			"pImageFormatProperties",
-			"points to an instance of the ##VkImageFormatProperties structure in which capabilities are returned"
-		)
+		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the image capabilities."),
+		VkFormat.IN("format", "the image format, corresponding to ##VkImageCreateInfo{@code ::format}."),
+		VkImageType.IN("type", "the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}."),
+		VkImageTiling.IN("tiling", "the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}."),
+		VkImageUsageFlags.IN("usage", "the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}."),
+		VkImageCreateFlags.IN("flags", "a bitmask describing additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}."),
+		VkImageFormatProperties.p.OUT("pImageFormatProperties", "points to an instance of the ##VkImageFormatProperties structure in which capabilities are returned.")
 	)
 
 	void(
@@ -1924,14 +2805,25 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"""
 		Returns properties of a physical device.
 
-		${ValidityProtos.vkGetPhysicalDeviceProperties}
+		<h5>C Specification</h5>
+		To query general properties of physical devices once enumerated, call:
+
+		<pre><code>void vkGetPhysicalDeviceProperties(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    VkPhysicalDeviceProperties*                 pProperties);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+			<li>{@code pProperties} <b>must</b> be a pointer to a ##VkPhysicalDeviceProperties structure</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkPhysicalDeviceProperties
 		""",
 
-		VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried"),
-		VkPhysicalDeviceProperties_p.OUT(
-			"pProperties",
-			"points to an instance of the ##VkPhysicalDeviceProperties structure, that will be filled with returned information"
-		)
+		VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried."),
+		VkPhysicalDeviceProperties.p.OUT("pProperties", "points to an instance of the ##VkPhysicalDeviceProperties structure, that will be filled with returned information.")
 	)
 
 	void(
@@ -1939,21 +2831,31 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"""
 		Reports properties of the queues of the specified physical device.
 
-		If {@code pQueueFamilyProperties} is $NULL, then the number of queue families available is returned in {@code pQueueFamilyPropertyCount}. Otherwise,
-		{@code pQueueFamilyPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pQueueFamilyProperties} array, and
-		on return the variable is overwritten with the number of structures actually written to {@code pQueueFamilyProperties}. If the value of
-		{@code pQueueFamilyPropertyCount} is less than the number of queue families available, at most {@code pQueueFamilyPropertyCount} structures will be
-		written.
+		<h5>C Specification</h5>
+		To query properties of queues available on a physical device, call:
 
-		${ValidityProtos.vkGetPhysicalDeviceQueueFamilyProperties}
+		<pre><code>void vkGetPhysicalDeviceQueueFamilyProperties(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    uint32_t*                                   pQueueFamilyPropertyCount,
+￿    VkQueueFamilyProperties*                    pQueueFamilyProperties);</code></pre>
+
+		<h5>Description</h5>
+		If {@code pQueueFamilyProperties} is {@code NULL}, then the number of queue families available is returned in {@code pQueueFamilyPropertyCount}. Otherwise, {@code pQueueFamilyPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pQueueFamilyProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pQueueFamilyProperties}. If {@code pQueueFamilyPropertyCount} is less than the number of queue families available, at most {@code pQueueFamilyPropertyCount} structures will be written.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+			<li>{@code pQueueFamilyPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+			<li>If the value referenced by {@code pQueueFamilyPropertyCount} is not 0, and {@code pQueueFamilyProperties} is not {@code NULL}, {@code pQueueFamilyProperties} <b>must</b> be a pointer to an array of {@code pQueueFamilyPropertyCount} ##VkQueueFamilyProperties structures</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkQueueFamilyProperties
 		""",
 
-		VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried"),
-		AutoSize("pQueueFamilyProperties")..Check(1)..uint32_t_p.INOUT(
-			"pQueueFamilyPropertyCount",
-			"a pointer to an integer related to the number of queue families available or queried"
-		),
-		nullable..VkQueueFamilyProperties_p.OUT("pQueueFamilyProperties", "either $NULL or a pointer to an array of ##VkQueueFamilyProperties structures")
+		VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried."),
+		AutoSize("pQueueFamilyProperties")..Check(1)..uint32_t_p.INOUT("pQueueFamilyPropertyCount", "a pointer to an integer related to the number of queue families available or queried, as described below."),
+		nullable..VkQueueFamilyProperties.p.OUT("pQueueFamilyProperties", "either {@code NULL} or a pointer to an array of ##VkQueueFamilyProperties structures.")
 	)
 
 	void(
@@ -1961,279 +2863,478 @@ k<sub>0</sub> = floor(w - 0.5)      k<sub>1</sub> = k<sub>0</sub> + 1
 		"""
 		Reports memory information for the specified physical device.
 
-		${ValidityProtos.vkGetPhysicalDeviceMemoryProperties}
+		<h5>C Specification</h5>
+		To query memory properties, call:
+
+		<pre><code>void vkGetPhysicalDeviceMemoryProperties(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    VkPhysicalDeviceMemoryProperties*           pMemoryProperties);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+			<li>{@code pMemoryProperties} <b>must</b> be a pointer to a ##VkPhysicalDeviceMemoryProperties structure</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkPhysicalDeviceMemoryProperties
 		""",
 
-		VkPhysicalDevice.IN("physicalDevice", "the handle to the device to query"),
-		VkPhysicalDeviceMemoryProperties_p.OUT(
-			"pMemoryProperties",
-			"points to an instance of ##VkPhysicalDeviceMemoryProperties structure in which the properties are returned"
-		)
+		VkPhysicalDevice.IN("physicalDevice", "the handle to the device to query."),
+		VkPhysicalDeviceMemoryProperties.p.OUT("pMemoryProperties", "points to an instance of ##VkPhysicalDeviceMemoryProperties structure in which the properties are returned.")
 	)
 
 	PFN_vkVoidFunction(
 		"GetInstanceProcAddr",
 		"""
-		Returns a function pointer for a command.
+		Return a function pointer for a command.
 
-		${ValidityProtos.vkGetInstanceProcAddr}
+		<h5>C Specification</h5>
+		Vulkan commands are not necessarily exposed statically on a platform. Function pointers for all Vulkan commands <b>can</b> be obtained with the command:
 
-		${note(
-			"""
-			LWJGL requires a non-$NULL {@code instance} argument when calling this method. If $NULL must be used, do the following:
-			${codeBlock("""
-long GetInstanceProcAddr = VK.getFunctionProvider().getFunctionAddress("vkGetInstanceProcAddr");
-long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
-			""",
-			title = "LWJGL Note"
-		)}
+		<pre><code>PFN_vkVoidFunction vkGetInstanceProcAddr(
+￿    VkInstance                                  instance,
+￿    const char*                                 pName);</code></pre>
+
+		<h5>Description</h5>
+		#GetInstanceProcAddr() itself is obtained in a platform- and loader- specific manner. Typically, the loader library will export this command as a function symbol, so applications <b>can</b> link against the loader library, or load it dynamically and look up the symbol using platform-specific APIs. Loaders are encouraged to export function symbols for all other core Vulkan commands as well; if this is done, then applications that use only the core Vulkan commands have no need to use #GetInstanceProcAddr().
+
+		The table below defines the various use cases for #GetInstanceProcAddr() and expected return value ("fp" is function pointer) for each case.
+
+		The returned function pointer is of type {@code PFN_vkVoidFunction}, and must be cast to the type of the command being queried.
+
+		<h6>vkGetInstanceProcAddr behavior</h6>
+		<table class="lwjgl">
+			<thead><tr><th>{@code instance}</th><th>{@code pName}</th><th>return value</th></tr></thead>
+			<tbody>
+				<tr><td>*</td><td>{@code NULL}</td><td>undefined</td></tr>
+				<tr><td>invalid instance</td><td>*</td><td>undefined</td></tr>
+				<tr><td>{@code NULL}</td><td>#EnumerateInstanceExtensionProperties()</td><td>fp</td></tr>
+				<tr><td>{@code NULL}</td><td>#EnumerateInstanceLayerProperties()</td><td>fp</td></tr>
+				<tr><td>{@code NULL}</td><td>#CreateInstance()</td><td>fp</td></tr>
+				<tr><td>{@code NULL}</td><td>* (any {@code pName} not covered above)</td><td>{@code NULL}</td></tr>
+				<tr><td>instance</td><td>core Vulkan command</td><td>fp<sup>1</sup></td></tr>
+				<tr><td>instance</td><td>enabled instance extension commands for {@code instance}</td><td>fp<sup>1</sup></td></tr>
+				<tr><td>instance</td><td>available device extension<sup>2</sup> commands for {@code instance}</td><td>fp<sup>1</sup></td></tr>
+				<tr><td>instance</td><td>* (any {@code pName} not covered above)</td><td>{@code NULL}</td></tr>
+			</tbody>
+		</table>
+
+		<dl>
+			<dt>1</dt>
+			<dd>The returned function pointer <b>must</b> only be called with a dispatchable object (the first parameter) that is {@code instance} or a child of {@code instance}. e.g. {@code VkInstance}, {@code VkPhysicalDevice}, {@code VkDevice}, {@code VkQueue}, or {@code VkCommandBuffer}.</dd>
+
+			<dt>2</dt>
+			<dd>An “available extension” is an extension function supported by any of the loader, driver or layer.</dd>
+		</dl>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>If {@code instance} is not {@code NULL}, {@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
+			<li>{@code pName} <b>must</b> be a null-terminated string</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code PFN_vkVoidFunction}
 		""",
 
-		VkInstance.IN("instance", " the instance that the function pointer will be compatible with, or $NULL for commands not dependent on any instance"),
-		const..charASCII_p.IN("pName", "the name of the command to obtain")
+		VkInstance.IN("instance", "the instance that the function pointer will be compatible with, or {@code NULL} for commands not dependent on any instance."),
+		const..charASCII_p.IN("pName", "the name of the command to obtain.")
 	)
 
 	PFN_vkVoidFunction(
 		"GetDeviceProcAddr",
 		"""
-		Returns a device-specific function pointer for a command.
+		Return a function pointer for a command.
 
-		In order to support systems with multiple Vulkan implementations comprising heterogeneous collections of hardware and software, the function pointers
-		returned by #GetInstanceProcAddr() $may point to dispatch code, which calls a different real implementation for different {@code VkDevice} objects (and
-		objects created from them). The overhead of this internal dispatch $can be avoided by obtaining device-specific function pointers for any commands that
-		use a device or device-child object as their dispatchable object.
+		<h5>C Specification</h5>
+		In order to support systems with multiple Vulkan implementations comprising heterogeneous collections of hardware and software, the function pointers returned by #GetInstanceProcAddr() <b>may</b> point to dispatch code, which calls a different real implementation for different {@code VkDevice} objects (and objects created from them). The overhead of this internal dispatch <b>can</b> be avoided by obtaining device-specific function pointers for any commands that use a device or device-child object as their dispatchable object. Such function pointers <b>can</b> be obtained with the command:
 
-		${ValidityProtos.vkGetDeviceProcAddr}
+		<pre><code>PFN_vkVoidFunction vkGetDeviceProcAddr(
+￿    VkDevice                                    device,
+￿    const char*                                 pName);</code></pre>
 
-		${note(
-			"""
-			The function pointers used by LWJGL for commands that have a first parameter of type ##VkDevice, ##VkQueue or ##VkCommandBuffer, have been acquired
-			using this command.
-			""",
-			title = "LWJGL Note"
-		)}
+		<h5>Description</h5>
+		The returned function pointer is of type {@code PFN_vkVoidFunction}, and must be cast to the type of the command being queried.
+
+		<h6>vkGetDeviceProcAddr behavior</h6>
+		<table class="lwjgl">
+			<thead><tr><th>{@code device}</th><th>{@code pName}</th><th>return value</th></tr></thead>
+			<tbody>
+				<tr><td>{@code NULL}</td><td>*</td><td>undefined</td></tr>
+				<tr><td>invalid device</td><td>*</td><td>undefined</td></tr>
+				<tr><td>device</td><td>{@code NULL}</td><td>undefined</td></tr>
+				<tr><td>device</td><td>core Vulkan command</td><td>fp<sup>1</sup></td></tr>
+				<tr><td>device</td><td>enabled extension commands</td><td>fp<sup>1</sup></td></tr>
+				<tr><td>device</td><td>* (any {@code pName} not covered above)</td><td>{@code NULL}</td></tr>
+			</tbody>
+		</table>
+
+		<dl>
+			<dt>1</dt>
+			<dd>The returned function pointer <b>must</b> only be called with a dispatchable object (the first parameter) that is {@code device} or a child of {@code device}. e.g. {@code VkDevice}, {@code VkQueue}, or {@code VkCommandBuffer}.</dd>
+		</dl>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pName} <b>must</b> be a null-terminated string</li>
+		</ul>
+
+		<h5>See Also</h5>
+		{@code PFN_vkVoidFunction}
 		""",
 
-		VkDevice.IN("device", "the logical device that provides the function pointer"),
-		const..charASCII_p.IN(
-			"pName",
-			"""
-			the name of any Vulkan command whose first parameter is one of
-			${ul(
-				"##VkDevice",
-				"##VkQueue",
-				"##VkCommandBuffer"
-			)}
-			If {@code pName} is not the name of one of these Vulkan commands, and is not the name of an extension command belonging to an extension enabled for
-			device, then {@code vkGetDeviceProcAddr} will return $NULL.
-			"""
-		)
+		VkDevice.IN("device", ""),
+		const..charASCII_p.IN("pName", "")
 	)
+
+	// Device commands
 
 	VkResult(
 		"CreateDevice",
 		"""
-		Creates a new logical device instance.
+		Create a new device instance.
 
-		${ValidityProtos.vkCreateDevice}
+		<h5>C Specification</h5>
+		A logical device is created as a <em>connection</em> to a physical device. To create a logical device, call:
+
+		<pre><code>VkResult vkCreateDevice(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    const VkDeviceCreateInfo*                   pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkDevice*                                   pDevice);</code></pre>
+
+		<h5>Description</h5>
+		Multiple logical devices <b>can</b> be created from the same physical device. Logical device creation <b>may</b> fail due to lack of device-specific resources (in addition to the other errors). If that occurs, #CreateDevice() will return #ERROR_TOO_MANY_OBJECTS.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkDeviceCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pDevice} <b>must</b> be a pointer to a {@code VkDevice} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_INITIALIZATION_FAILED</li>
+				<li>#ERROR_EXTENSION_NOT_PRESENT</li>
+				<li>#ERROR_FEATURE_NOT_PRESENT</li>
+				<li>#ERROR_TOO_MANY_OBJECTS</li>
+				<li>#ERROR_DEVICE_LOST</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkDeviceCreateInfo
 		""",
 
-		VkPhysicalDevice.IN("physicalDevice", "$must be one of the device handles returned from a call to #EnumeratePhysicalDevices()"),
-		const..VkDeviceCreateInfo_p.IN("pCreateInfo", "a pointer to a ##VkDeviceCreateInfo structure containing information about how to create the device"),
-		pAllocator,
-		Check(1)..VkDevice.p.OUT("pDevice", "points to a handle in which the created {@code VkDevice} is returned")
+		VkPhysicalDevice.IN("physicalDevice", "<b>must</b> be one of the device handles returned from a call to #EnumeratePhysicalDevices() (see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#devsandqueues-physical-device-enumeration\">Physical Device Enumeration</a>)."),
+		const..VkDeviceCreateInfo.p.IN("pCreateInfo", "a pointer to a ##VkDeviceCreateInfo structure containing information about how to create the device."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkDevice.p.OUT("pDevice", "points to a handle in which the created {@code VkDevice} is returned.")
 	)
 
 	void(
 		"DestroyDevice",
 		"""
-		Destroys a logical device.
+		Destroy a logical device.
 
-		To ensure that no work is active on the device, #DeviceWaitIdle() $can be used to gate the destruction of the device. Prior to destroying a device, an
-		application is responsible for destroying/freeing any Vulkan objects that were created using that device as the first parameter of the corresponding
-		{@code vkCreate*} or {@code vkAllocate*} command.
+		<h5>C Specification</h5>
+		To destroy a device, call:
 
-		${note(
-			"""
-			The lifetime of each of these objects is bound by the lifetime of the {@code VkDevice} object. Therefore, to avoid resource leaks, it is critical
-			that an application explicitly free all of these resources prior to calling {@code vkDestroyDevice}.
-			"""
-		)}
+		<pre><code>void vkDestroyDevice(
+￿    VkDevice                                    device,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
 
-		${ValidityProtos.vkDestroyDevice}
+		<h5>Description</h5>
+		To ensure that no work is active on the device, #DeviceWaitIdle() <b>can</b> be used to gate the destruction of the device. Prior to destroying a device, an application is responsible for destroying/freeing any Vulkan objects that were created using that device as the first parameter of the corresponding ftext:vkCreate* or ftext:vkAllocate* command.
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		The lifetime of each of these objects is bound by the lifetime of the {@code VkDevice} object. Therefore, to avoid resource leaks, it is critical that an application explicitly free all of these resources prior to calling #DestroyDevice().
+		</div>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All child objects created on {@code device} <b>must</b> have been destroyed prior to destroying {@code device}</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code device} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code device} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>If {@code device} is not {@code NULL}, {@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code device} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
+
+	// Extension discovery commands
 
 	GlobalCommand..VkResult(
 		"EnumerateInstanceExtensionProperties",
 		"""
-		Queries the available instance extensions.
+		Returns up to requested number of global extension properties.
 
-		Extensions $may define new Vulkan commands, structures, and enumerants. For compilation purposes, the interfaces defined by registered extensions,
-		including new structures and enumerants as well as function pointer types for new commands, are defined in the Khronos-supplied vulkan.h together with
-		the core API. However, commands defined by extensions may not be available for static linking - in which case function pointers to these commands
-		$should be queried at runtime. Extensions $may be provided by layers as well as by a Vulkan implementation.
+		<h5>C Specification</h5>
+		To query the available instance extensions, call:
 
-		If {@code pProperties} is $NULL, then the number of extensions properties available is returned in {@code pPropertyCount}. Otherwise,
-		{@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable
-		is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of
-		extension properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of
-		extensions available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
+		<pre><code>VkResult vkEnumerateInstanceExtensionProperties(
+￿    const char*                                 pLayerName,
+￿    uint32_t*                                   pPropertyCount,
+￿    VkExtensionProperties*                      pProperties);</code></pre>
 
-		${ValidityProtos.vkEnumerateInstanceExtensionProperties}
+		<h5>Description</h5>
+		When {@code pLayerName} parameter is NULL, only extensions provided by the Vulkan implementation or by implicitly enabled layers are returned. When {@code pLayerName} is the name of a layer, the instance extensions provided by that layer are returned.
 
-		When {@code pLayerName} parameter is $NULL, only extensions provided by the Vulkan implementation or by implicitly enabled layers are returned. When
-		{@code pLayerName} is the name of a layer, the instance extensions provided by that layer are returned.
+		If {@code pProperties} is {@code NULL}, then the number of extensions properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of extension properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of extensions available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
 
-		To enable an instance extension, the name of the extension $should be added to the {@code ppEnabledExtensionNames} member of ##VkInstanceCreateInfo when
-		creating a {@code VkInstance}.
+		Because the list of available layers may change externally between calls to {@code vkEnumerateInstanceExtensionProperties}, two calls may retrieve different results if a {@code pLayerName} is available in one call but not in another. The extensions supported by a layer may also change between two calls, e.g. if the layer implementation is replaced by a different version between those calls.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If {@code pLayerName} is not {@code NULL}, it <b>must</b> be the name of a layer returned by #EnumerateInstanceLayerProperties()</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>If {@code pLayerName} is not {@code NULL}, {@code pLayerName} <b>must</b> be a null-terminated string</li>
+			<li>{@code pPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+			<li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a pointer to an array of {@code pPropertyCount} ##VkExtensionProperties structures</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#INCOMPLETE</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_LAYER_NOT_PRESENT</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkExtensionProperties
 		""",
 
-		nullable..const..charUTF8_p.IN(
-			"pLayerName",
-			"either $NULL or a pointer to a null-terminated UTF-8 string naming the layer to retrieve extensions from"
-		),
-		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
-			"pPropertyCount",
-			"a pointer to an integer related to the number of extension properties available or queried"
-		),
-		nullable..VkExtensionProperties_p.OUT("pProperties", "either $NULL or a pointer to an array of ##VkExtensionProperties structures")
+		nullable..const..charUTF8_p.IN("pLayerName", "either {@code NULL} or a pointer to a null-terminated UTF-8 string naming the layer to retrieve extensions from."),
+		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT("pPropertyCount", "a pointer to an integer related to the number of extension properties available or queried, as described below."),
+		nullable..VkExtensionProperties.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkExtensionProperties structures.")
 	)
 
 	VkResult(
 		"EnumerateDeviceExtensionProperties",
 		"""
-		Queries the extensions available to a given physical device.
+		Returns properties of available physical device extensions.
 
-		If {@code pProperties} is $NULL, then the number of extensions properties available is returned in {@code pPropertyCount}. Otherwise,
-		{@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable
-		is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of extension
-		properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of extensions
-		available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
+		<h5>C Specification</h5>
+		To query the extensions available to a given physical device, call:
 
-		${ValidityProtos.vkEnumerateDeviceExtensionProperties}
+		<pre><code>VkResult vkEnumerateDeviceExtensionProperties(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    const char*                                 pLayerName,
+￿    uint32_t*                                   pPropertyCount,
+￿    VkExtensionProperties*                      pProperties);</code></pre>
 
-		When {@code pLayerName} parameter is $NULL, only extensions provided by the Vulkan implementation or by implicitly enabled layers are returned. When
-		{@code pLayerName} is the name of a layer, the device extensions provided by that layer are returned.
+		<h5>Description</h5>
+		When {@code pLayerName} parameter is NULL, only extensions provided by the Vulkan implementation or by implicitly enabled layers are returned. When {@code pLayerName} is the name of a layer, the device extensions provided by that layer are returned.
 
-		To enable a device layer, the name of the layer $should be added to the {@code ppEnabledExtensionNames} member of ##VkDeviceCreateInfo when creating a
-		{@code VkDevice}.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If {@code pLayerName} is not {@code NULL}, it <b>must</b> be the name of a layer returned by #EnumerateDeviceLayerProperties()</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+			<li>If {@code pLayerName} is not {@code NULL}, {@code pLayerName} <b>must</b> be a null-terminated string</li>
+			<li>{@code pPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+			<li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a pointer to an array of {@code pPropertyCount} ##VkExtensionProperties structures</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#INCOMPLETE</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_LAYER_NOT_PRESENT</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkExtensionProperties
 		""",
 
-		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be queried"),
-		nullable..const..charUTF8_p.IN(
-			"pLayerName",
-			"either $NULL or a pointer to a null-terminated UTF-8 string naming the layer to retrieve extensions from"
-		),
-		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
-			"pPropertyCount",
-			"a pointer to an integer related to the number of extension properties available or queried"
-		),
-		nullable..VkExtensionProperties_p.OUT("pProperties", "either $NULL or a pointer to an array of ##VkExtensionProperties structures")
+		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be queried."),
+		nullable..const..charUTF8_p.IN("pLayerName", "either {@code NULL} or a pointer to a null-terminated UTF-8 string naming the layer to retrieve extensions from."),
+		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT("pPropertyCount", "a pointer to an integer related to the number of extension properties available or queried, and is treated in the same fashion as the #EnumerateInstanceExtensionProperties(){@code ::pPropertyCount} parameter."),
+		nullable..VkExtensionProperties.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkExtensionProperties structures.")
 	)
+
+	// Layer discovery commands
 
 	GlobalCommand..VkResult(
 		"EnumerateInstanceLayerProperties",
 		"""
-		Queries the available instance layers.
+		Returns up to requested number of global layer properties.
 
-		If {@code pProperties} is $NULL, then the number of layer properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount}
-		$must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with
-		the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of layer properties available, at
-		most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of layers available, #INCOMPLETE will be
-		returned instead of #SUCCESS, to indicate that not all the available layer properties were returned.
+		<h5>C Specification</h5>
+		To query the available layers, call:
 
-		${ValidityProtos.vkEnumerateInstanceLayerProperties}
+		<pre><code>VkResult vkEnumerateInstanceLayerProperties(
+￿    uint32_t*                                   pPropertyCount,
+￿    VkLayerProperties*                          pProperties);</code></pre>
 
-		To enable an instance layer, the name of the layer $should be added to the {@code ppEnabledLayerNames} member of ##VkInstanceCreateInfo when creating a
-		{@code VkInstance}.
+		<h5>Description</h5>
+		If {@code pProperties} is {@code NULL}, then the number of layer properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of layer properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of layers available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available layer properties were returned.
 
-		When a layer is enabled, it inserts itself into the call chain for Vulkan commands the layer is interested in. A common use of layers is to validate
-		application behavior during development. For example, the implementation will not check that Vulkan enums used by the application fall within allowed
-		ranges. Instead, a validation layer would do those checks and flag issues. This avoids a performance penalty during production use of the application
-		because those layers would not be enabled in production.
+		The list of available layers may change at any time due to actions outside of the Vulkan implementation, so two calls to #EnumerateInstanceLayerProperties() with the same parameters <b>may</b> return different results, or retrieve different {@code pPropertyCount} values or {@code pProperties} contents. Once an instance has been created, the layers enabled for that instance will continue to be enabled and valid for the lifetime of that instance, even if some of them become unavailable for future instances.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code pPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+			<li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a pointer to an array of {@code pPropertyCount} ##VkLayerProperties structures</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#INCOMPLETE</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkLayerProperties
 		""",
 
-		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
-			"pPropertyCount",
-			"a pointer to an integer related to the number of layer properties available or queried"
-		),
-		nullable..VkLayerProperties_p.OUT("pProperties", "either $NULL or a pointer to an array of ##VkLayerProperties structures")
+		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT("pPropertyCount", "a pointer to an integer related to the number of layer properties available or queried, as described below."),
+		nullable..VkLayerProperties.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkLayerProperties structures.")
 	)
 
 	VkResult(
 		"EnumerateDeviceLayerProperties",
 		"""
-		Queries the available device layers.
+		Returns properties of available physical device layers.
 
-		If {@code pProperties} is $NULL, then the number of layer properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount}
-		$must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with
-		the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of layer properties
-		available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of layers available,
-		#INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available layer properties were returned.
+		<h5>C Specification</h5>
+		To enumerate device layers, call:
 
-		${ValidityProtos.vkEnumerateDeviceLayerProperties}
+		<pre><code>VkResult vkEnumerateDeviceLayerProperties(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    uint32_t*                                   pPropertyCount,
+￿    VkLayerProperties*                          pProperties);</code></pre>
 
-		To enable a device layer, the name of the layer $should be added to the {@code ppEnabledLayerNames} member of ##VkDeviceCreateInfo when creating a
-		{@code VkDevice}.
+		<h5>Description</h5>
+		If {@code pProperties} is {@code NULL}, then the number of layer properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of layer properties available, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of layers available, #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available layer properties were returned.
 
-		Loader implementations $may provide mechanisms outside the Vulkan API for enabling specific layers. Layers enabled through such a mechanism are
-		implicitly enabled, while layers enabled by including the layer name in the {@code ppEnabledLayerNames} member of ##VkDeviceCreateInfo are explicitly
-		enabled. Except where otherwise specified, implicitly enabled and explicitly enabled layers differ only in the way they are enabled. Explicitly
-		enabling a layer that is implicitly enabled has no additional effect.
+		The list of layers enumerated by #EnumerateDeviceLayerProperties() <b>must</b> be exactly the sequence of layers enabled for the instance. The members of ##VkLayerProperties for each enumerated layer <b>must</b> be the same as the properties when the layer was enumerated by #EnumerateInstanceLayerProperties().
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+			<li>{@code pPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+			<li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a pointer to an array of {@code pPropertyCount} ##VkLayerProperties structures</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#INCOMPLETE</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkLayerProperties
 		""",
 
-		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be queried"),
-		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
-			"pPropertyCount",
-			"a pointer to an integer related to the number of layer properties available or queried"
-		),
-		nullable..VkLayerProperties_p.OUT("pProperties", "either $NULL or a pointer to an array of VkLayerProperties structures")
+		VkPhysicalDevice.IN("physicalDevice", ""),
+		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT("pPropertyCount", "a pointer to an integer related to the number of layer properties available or queried."),
+		nullable..VkLayerProperties.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkLayerProperties structures.")
 	)
+
+	// queue commands
 
 	void(
 		"GetDeviceQueue",
 		"""
-		Retrieves a handle to a {@code VkQueue} object.
+		Get a queue handle from a device.
 
-		The queue family index is used in multiple places in Vulkan in order to tie operations to a specific family of queues.
+		<h5>C Specification</h5>
+		To retrieve a handle to a VkQueue object, call:
 
-		When retrieving a handle to the queue via {@code vkGetDeviceQueue}, the queue family index is used to select which queue family to retrieve the
-		{@code VkQueue} handle from.
+		<pre><code>void vkGetDeviceQueue(
+￿    VkDevice                                    device,
+￿    uint32_t                                    queueFamilyIndex,
+￿    uint32_t                                    queueIndex,
+￿    VkQueue*                                    pQueue);</code></pre>
 
-		When creating a {@code VkCommandPool} object (see Command Pools), a queue family index is specified in the ##VkCommandPoolCreateInfo structure. Command
-		buffers from this pool $can only be submitted on queues corresponding to this queue family.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code queueFamilyIndex} <b>must</b> be one of the queue family indices specified when {@code device} was created, via the ##VkDeviceQueueCreateInfo structure</li>
+			<li>{@code queueIndex} <b>must</b> be less than the number of queues created for the specified queue family index when {@code device} was created, via the {@code queueCount} member of the ##VkDeviceQueueCreateInfo structure</li>
+		</ul>
 
-		When creating {@code VkImage} and {@code VkBuffer} resources, a set of queue families is included in the ##VkImageCreateInfo and ##VkBufferCreateInfo
-		structures to specify the queue families that $can access the resource.
-
-		When inserting a ##VkBufferMemoryBarrier or ##VkImageMemoryBarrier a source and destination queue family index is specified to allow the ownership of a
-		buffer or image to be transferred from one queue family to another.
-
-		Each queue is assigned a priority, as set in the ##VkDeviceQueueCreateInfo structures when creating the device. The priority of each queue is a
-		normalized floating point value between 0.0 and 1.0, which is then translated to a discrete priority level by the implementation. Higher values
-		indicate a higher priority, with 0.0 being the lowest priority and 1.0 being the highest.
-
-		Within the same device, queues with higher priority $may be allotted more processing time than queues with lower priority. The implementation makes no
-		guarantees with regards to ordering or scheduling among queues with the same priority, other than the constraints defined by explicit scheduling
-		primitives. The implementation make no guarantees with regards to queues across different devices.
-
-		An implementation $may allow a higher-priority queue to starve a lower-priority queue on the same {@code VkDevice} until the higher-priority queue has
-		no further commands to execute. The relationship of queue priorities $must not cause queues on one {@code VkDevice} to starve queues on another
-		{@code VkDevice}.
-
-		No specific guarantees are made about higher priority queues receiving more processing time or better quality of service than lower priority queues.
-
-		${ValidityProtos.vkGetDeviceQueue}
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pQueue} <b>must</b> be a pointer to a {@code VkQueue} handle</li>
+		</ul>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the queue"),
-		uint32_t.IN("queueFamilyIndex", "the index of the queue family to which the queue belongs"),
-		uint32_t.IN("queueIndex", "the index within this queue family of the queue to retrieve"),
-		Check(1)..VkQueue.p.OUT("pQueue", "a pointer to a {@code VkQueue} object that will be filled with the handle for the requested queue")
+		VkDevice.IN("device", "the logical device that owns the queue."),
+		uint32_t.IN("queueFamilyIndex", "the index of the queue family to which the queue belongs."),
+		uint32_t.IN("queueIndex", "the index within this queue family of the queue to retrieve."),
+		Check(1)..VkQueue.p.OUT("pQueue", "a pointer to a {@code VkQueue} object that will be filled with the handle for the requested queue.")
 	)
 
 	VkResult(
@@ -2241,1136 +3342,2479 @@ long command = JNI.callPPP(GetInstanceProcAddr, NULL, pName);""")}
 		"""
 		Submits a sequence of semaphores or command buffers to a queue.
 
-		{@code vkQueueSubmit} is a queue submission command, with each batch defined by an element of {@code pSubmits} as an instance of the ##VkSubmitInfo
-		structure.
+		<h5>C Specification</h5>
+		To submit command buffers to a queue, call:
 
-		${note(
-			"""
-			Submission can be a high overhead operation, and applications $should attempt to batch work together into as few calls to {@code vkQueueSubmit} as
-			possible.
-			"""
-		)}
+		<pre><code>VkResult vkQueueSubmit(
+￿    VkQueue                                     queue,
+￿    uint32_t                                    submitCount,
+￿    const VkSubmitInfo*                         pSubmits,
+￿    VkFence                                     fence);</code></pre>
 
-		${ValidityProtos.vkQueueSubmit}
+		<h5>Description</h5>
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Submission can be a high overhead operation, and applications <b>should</b> attempt to batch work together into as few calls to #QueueSubmit() as possible.
+		</div>
+
+		#QueueSubmit() is a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-submission">queue submission command</a>, with each batch defined by an element of {@code pSubmits} as an instance of the ##VkSubmitInfo structure.
+
+		Fence and semaphore operations submitted with #QueueSubmit() have additional ordering constraints compared to other submission commands, with dependencies involving previous and subsequent queue operations. Information about these additional constraints can be found in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores"> semaphore</a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fences"> fence</a> sections of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> the synchronization chapter</a>.
+
+		Details on the interaction of {@code pWaitDstStageMask} with synchronization are described in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-waiting"> semaphore wait operation</a> section of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> the synchronization chapter</a>.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be unsignaled</li>
+			<li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code queue} <b>must</b> be a valid {@code VkQueue} handle</li>
+			<li>If {@code submitCount} is not 0, {@code pSubmits} <b>must</b> be a pointer to an array of {@code submitCount} valid ##VkSubmitInfo structures</li>
+			<li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
+			<li>Both of {@code fence}, and {@code queue} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code queue} <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pSubmits}[].pWaitSemaphores[] <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pSubmits}[].pSignalSemaphores[] <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code fence} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>-</td><td>-</td><td>Any</td></tr></tbody>
+		</table>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkSubmitInfo
 		""",
 
-		VkQueue.IN("queue", "the queue that the command buffers will be submitted to"),
-		AutoSize("pSubmits")..uint32_t.IN("submitCount", "the number of elements in the {@code pSubmits} array"),
-		SingleValue("pSubmit")..nullable..const..VkSubmitInfo_p.IN(
-			"pSubmits",
-			"a pointer to an array of ##VkSubmitInfo structures, each specifying a command buffer submission batch"
-		),
-		VkFence.IN("fence", "an optional handle to a fence to be signaled. If {@code fence} is not #NULL_HANDLE, it defines a fence signal operation.")
+		VkQueue.IN("queue", "the queue that the command buffers will be submitted to."),
+		AutoSize("pSubmits")..uint32_t.IN("submitCount", "the number of elements in the {@code pSubmits} array."),
+		nullable..const..VkSubmitInfo.p.IN("pSubmits", "a pointer to an array of ##VkSubmitInfo structures, each specifying a command buffer submission batch."),
+		VkFence.IN("fence", "an optional handle to a fence to be signaled. If {@code fence} is not #NULL_HANDLE, it defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-fences-signaling\">fence signal operation</a>.")
 	)
 
 	VkResult(
 		"QueueWaitIdle",
 		"""
-		Waits on the completion of all work within a single queue.
+		Wait for a queue to become idle.
 
-		{@code vkQueueWaitIdle} will block until all command buffers and sparse binding operations in the queue have completed.
+		<h5>C Specification</h5>
+		To wait on the host for the completion of outstanding queue operations for a given queue, call:
 
-		${ValidityProtos.vkQueueWaitIdle}
+		<pre><code>VkResult vkQueueWaitIdle(
+￿    VkQueue                                     queue);</code></pre>
+
+		<h5>Description</h5>
+		#QueueWaitIdle() is equivalent to submitting a fence to a queue and waiting with an infinite timeout for that fence to signal.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code queue} <b>must</b> be a valid {@code VkQueue} handle</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>-</td><td>-</td><td>Any</td></tr></tbody>
+		</table>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkQueue.IN("queue", "the queue on which to wait")
+		VkQueue.IN("queue", "the queue on which to wait.")
 	)
 
 	VkResult(
 		"DeviceWaitIdle",
 		"""
-		Waits for a device to become idle.
+		Wait for a device to become idle.
 
-		A device is active while any of its queues have work to process. Once all device queues are idle, the device is idle.
+		<h5>C Specification</h5>
+		To wait on the host for the completion of outstanding queue operations for all queues on a given logical device, call:
 
-		${ValidityProtos.vkDeviceWaitIdle}
+		<pre><code>VkResult vkDeviceWaitIdle(
+￿    VkDevice                                    device);</code></pre>
+
+		<h5>Description</h5>
+		#DeviceWaitIdle() is equivalent to calling #QueueWaitIdle() for all queues owned by {@code device}.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to all {@code VkQueue} objects created from {@code device} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device to idle")
+		VkDevice.IN("device", "the logical device to idle.")
 	)
+
+	// Memory commands
 
 	VkResult(
 		"AllocateMemory",
 		"""
-		Allocates device memory.
+		Allocate GPU memory.
 
-		Allocations returned by {@code vkAllocateMemory} are guaranteed to meet any alignment requirement by the implementation. For example, if an
-		implementation requires 128 byte alignment for images and 64 byte alignment for buffers, the device memory returned through this mechanism would be
-		128-byte aligned. This ensures that applications $can correctly suballocate objects of different types (with potentially different alignment
-		requirements) in the same memory object.
+		<h5>C Specification</h5>
+		To allocate memory objects, call:
+
+		<pre><code>VkResult vkAllocateMemory(
+￿    VkDevice                                    device,
+￿    const VkMemoryAllocateInfo*                 pAllocateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkDeviceMemory*                             pMemory);</code></pre>
+
+		<h5>Description</h5>
+		Allocations returned by #AllocateMemory() are guaranteed to meet any alignment requirement by the implementation. For example, if an implementation requires 128 byte alignment for images and 64 byte alignment for buffers, the device memory returned through this mechanism would be 128-byte aligned. This ensures that applications <b>can</b> correctly suballocate objects of different types (with potentially different alignment requirements) in the same memory object.
 
 		When memory is allocated, its contents are undefined.
 
-		There is an implementation-dependent maximum number of memory allocations which $can be simultaneously created on a device. This is specified by the
-		{@code maxMemoryAllocationCount} member of the ##VkPhysicalDeviceLimits structure. If {@code maxMemoryAllocationCount} is exceeded,
-		{@code vkAllocateMemory} will return #ERROR_TOO_MANY_OBJECTS.
+		There is an implementation-dependent maximum number of memory allocations which <b>can</b> be simultaneously created on a device. This is specified by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-limits-maxMemoryAllocationCount">{@code maxMemoryAllocationCount}</a> member of the ##VkPhysicalDeviceLimits structure. If {@code maxMemoryAllocationCount} is exceeded, #AllocateMemory() will return #ERROR_TOO_MANY_OBJECTS.
 
-		${note(
-			"""
-			Some platforms $may have a limit on the maximum size of a single allocation. For example, certain systems $may fail to create allocations with a size
-			greater than or equal to 4GB. Such a limit is implementation-dependent, and if such a failure occurs then the error #ERROR_OUT_OF_DEVICE_MEMORY
-			$should be returned.
-			"""
-		)}
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Some platforms <b>may</b> have a limit on the maximum size of a single allocation. For example, certain systems <b>may</b> fail to create allocations with a size greater than or equal to 4GB. Such a limit is implementation-dependent, and if such a failure occurs then the error #ERROR_OUT_OF_DEVICE_MEMORY <b>should</b> be returned.
+		</div>
 
-		${ValidityProtos.vkAllocateMemory}
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The number of currently valid memory objects, allocated from {@code device}, <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxMemoryAllocationCount}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pAllocateInfo} <b>must</b> be a pointer to a valid ##VkMemoryAllocateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pMemory} <b>must</b> be a pointer to a {@code VkDeviceMemory} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_TOO_MANY_OBJECTS</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkMemoryAllocateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the memory"),
-		const..VkMemoryAllocateInfo_p.IN(
-			"pAllocateInfo",
-			"""
-			a pointer to an instance of the ##VkMemoryAllocateInfo structure describing parameters of the allocation. A successful returned allocation $must
-			use the requested parameters -- no substitution is permitted by the implementation.
-			"""
-		),
-		pAllocator,
-		Check(1)..VkDeviceMemory.p.OUT("pMemory", "a pointer to a {@code VkDeviceMemory} handle in which information about the allocated memory is returned")
+		VkDevice.IN("device", "the logical device that owns the memory."),
+		const..VkMemoryAllocateInfo.p.IN("pAllocateInfo", "a pointer to an instance of the ##VkMemoryAllocateInfo structure describing parameters of the allocation. A successful returned allocation <b>must</b> use the requested parameters&#8201;&#8212;&#8201;no substitution is permitted by the implementation."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkDeviceMemory.p.OUT("pMemory", "a pointer to a {@code VkDeviceMemory} handle in which information about the allocated memory is returned.")
 	)
 
 	void(
 		"FreeMemory",
 		"""
-		Frees a memory object.
+		Free GPU memory.
 
-		Before freeing a memory object, an application $must ensure the memory object is no longer in use by the device — for example by command buffers queued
-		for execution. The memory $can remain bound to images or buffers at the time the memory object is freed, but any further use of them (on host or
-		device) for anything other than destroying those objects will result in undefined behavior. If there are still any bound images or buffers, the memory
-		$may not be immediately released by the implementation, but $must be released by the time all bound images and buffers have been destroyed. Once memory
-		is released, it is returned to the heap from which it was allocated.
+		<h5>C Specification</h5>
+		To free a memory object, call:
+
+		<pre><code>void vkFreeMemory(
+￿    VkDevice                                    device,
+￿    VkDeviceMemory                              memory,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Description</h5>
+		Before freeing a memory object, an application <b>must</b> ensure the memory object is no longer in use by the device--for example by command buffers queued for execution. The memory <b>can</b> remain bound to images or buffers at the time the memory object is freed, but any further use of them (on host or device) for anything other than destroying those objects will result in undefined behavior. If there are still any bound images or buffers, the memory <b>may</b> not be immediately released by the implementation, but <b>must</b> be released by the time all bound images and buffers have been destroyed. Once memory is released, it is returned to the heap from which it was allocated.
+
+		How memory objects are bound to Images and Buffers is described in detail in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-association"> Resource Memory Association</a> section.
 
 		If a memory object is mapped at the time it is freed, it is implicitly unmapped.
 
-		${ValidityProtos.vkFreeMemory}
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code memory} (via images or buffers) <b>must</b> have completed execution</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code memory} is not #NULL_HANDLE, {@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code memory} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code memory} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the memory"),
-		VkDeviceMemory.IN("memory", "the {@code VkDeviceMemory} object to be freed"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that owns the memory."),
+		VkDeviceMemory.IN("memory", "the {@code VkDeviceMemory} object to be freed."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	VkResult(
 		"MapMemory",
 		"""
-		Retrieves a host virtual address pointer to a region of a mappable memory object.
+		Map a memory object into application address space.
 
-		Memory objects created with #AllocateMemory() are not directly host accessible. Memory objects created with the memory property
-		#MEMORY_PROPERTY_HOST_VISIBLE_BIT are considered mappable. Memory objects $must be mappable in order to be successfully mapped on the host.
+		<h5>C Specification</h5>
+		To retrieve a host virtual address pointer to a region of a mappable memory object, call:
 
-		It is an application error to call {@code vkMapMemory} on a memory object that is already mapped.
+		<pre><code>VkResult vkMapMemory(
+￿    VkDevice                                    device,
+￿    VkDeviceMemory                              memory,
+￿    VkDeviceSize                                offset,
+￿    VkDeviceSize                                size,
+￿    VkMemoryMapFlags                            flags,
+￿    void**                                      ppData);</code></pre>
 
-		{@code vkMapMemory} does not check whether the device memory is currently in use before returning the host-accessible pointer. The application $must
-		guarantee that any previously submitted command that writes to this range has completed before the host reads from or writes to that range, and that
-		any previously submitted command that reads from that range has completed before the host writes to that region. If the device memory was allocated
-		without the #MEMORY_PROPERTY_HOST_COHERENT_BIT set, these guarantees $must be made for an extended range: the application $must round down the start of
-		the range to the nearest multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}, and round the end of the range up to the nearest multiple
-		of {@code VkPhysicalDeviceLimits::nonCoherentAtomSize}.
+		<h5>Description</h5>
+		It is an application error to call #MapMemory() on a memory object that is already mapped.
 
-		While a range of device memory is mapped for host access, the application is responsible for synchronizing both device and host access to that memory
-		range.
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		#MapMemory() will fail if the implementation is unable to allocate an appropriately sized contiguous virtual address range, e.g. due to virtual address space fragmentation or platform limits. In such cases, #MapMemory() <b>must</b> return VK_ERROR_MEMORY_MAP_FAILED. The application <b>can</b> improve the likelihood of success by reducing the size of the mapped range and/or removing unneeded mappings using fname:VkUnmapMemory.
+		</div>
 
-		Host-visible memory types that advertise the #MEMORY_PROPERTY_HOST_COHERENT_BIT property still require memory barriers between host and device in order
-		to be coherent, but do not require additional cache management operations (#FlushMappedMemoryRanges() or #InvalidateMappedMemoryRanges()) to achieve
-		coherency. For host writes to be seen by subsequent command buffer operations, a pipeline barrier from a source of #ACCESS_HOST_WRITE_BIT and
-		#PIPELINE_STAGE_HOST_BIT to a destination of the relevant device pipeline stages and access types $must be performed. Note that such a barrier is
-		performed implicitly upon each command buffer submission, so an explicit barrier is only rarely needed (e.g. if a command buffer waits upon an event
-		signaled by the host, where the host wrote some data after submission). For device writes to be seen by subsequent host reads, a pipeline barrier is
-		required to make the writes visible.
+		#MapMemory() does not check whether the device memory is currently in use before returning the host-accessible pointer. The application <b>must</b> guarantee that any previously submitted command that writes to this range has completed before the host reads from or writes to that range, and that any previously submitted command that reads from that range has completed before the host writes to that region (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fences-devicewrites"> here</a> for details on fulfilling such a guarantee). If the device memory was allocated without the #MEMORY_PROPERTY_HOST_COHERENT_BIT set, these guarantees <b>must</b> be made for an extended range: the application <b>must</b> round down the start of the range to the nearest multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}, and round the end of the range up to the nearest multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}.
 
-		${ValidityProtos.vkMapMemory}
+		While a range of device memory is mapped for host access, the application is responsible for synchronizing both device and host access to that memory range.
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		It is important for the application developer to become meticulously familiar with all of the mechanisms described in the chapter on <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> Synchronization and Cache Control</a> as they are crucial to maintaining memory access ordering.
+		</div>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code memory} <b>must</b> not currently be mapped</li>
+			<li>{@code offset} <b>must</b> be less than the size of {@code memory}</li>
+			<li>If {@code size} is not equal to #WHOLE_SIZE, {@code size} <b>must</b> be greater than 0</li>
+			<li>If {@code size} is not equal to #WHOLE_SIZE, {@code size} <b>must</b> be less than or equal to the size of the {@code memory} minus {@code offset}</li>
+			<li>{@code memory} <b>must</b> have been created with a memory type that reports #MEMORY_PROPERTY_HOST_VISIBLE_BIT</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
+			<li>{@code flags} <b>must</b> be 0</li>
+			<li>{@code ppData} <b>must</b> be a pointer to a pointer</li>
+			<li>{@code memory} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code memory} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_MEMORY_MAP_FAILED</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the memory"),
-		VkDeviceMemory.IN("memory", "the {@code VkDeviceMemory} object to be mapped"),
-		VkDeviceSize.IN("offset", "a zero-based byte offset from the beginning of the memory object"),
-		VkDeviceSize.IN("size", "he size of the memory range to map, or #WHOLE_SIZE to map from offset to the end of the allocation"),
-		VkMemoryMapFlags.IN("flags", "reserved for future use, and $must be zero"),
-		Check(1)..void_pp.OUT(
-			"ppData",
-			"""
-			points to a pointer in which is returned a host-accessible pointer to the beginning of the mapped range. This pointer minus offset $must be aligned
-			to at least ##VkPhysicalDeviceLimits{@code ::minMemoryMapAlignment}.
-			"""
-		)
+		VkDevice.IN("device", "the logical device that owns the memory."),
+		VkDeviceMemory.IN("memory", "the {@code VkDeviceMemory} object to be mapped."),
+		VkDeviceSize.IN("offset", "a zero-based byte offset from the beginning of the memory object."),
+		VkDeviceSize.IN("size", "the size of the memory range to map, or #WHOLE_SIZE to map from {@code offset} to the end of the allocation."),
+		VkMemoryMapFlags.IN("flags", "reserved for future use."),
+		Check(1)..void_pp.OUT("ppData", "points to a pointer in which is returned a host-accessible pointer to the beginning of the mapped range. This pointer minus {@code offset} <b>must</b> be aligned to at least ##VkPhysicalDeviceLimits{@code ::minMemoryMapAlignment}.")
 	)
 
 	void(
 		"UnmapMemory",
 		"""
-		Unmaps a previously mapped memory object.
+		Unmap a previously mapped memory object.
 
-		${ValidityProtos.vkUnmapMemory}
+		<h5>C Specification</h5>
+		To unmap a memory object once host access to it is no longer needed by the application, call:
+
+		<pre><code>void vkUnmapMemory(
+￿    VkDevice                                    device,
+￿    VkDeviceMemory                              memory);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code memory} <b>must</b> currently be mapped</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
+			<li>{@code memory} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code memory} <b>must</b> be externally synchronized</li>
+		</ul>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the memory"),
-		VkDeviceMemory.IN("memory", "the memory object to be unmapped")
+		VkDevice.IN("device", "the logical device that owns the memory."),
+		VkDeviceMemory.IN("memory", "the memory object to be unmapped.")
 	)
 
 	VkResult(
 		"FlushMappedMemoryRanges",
 		"""
-		Flushes ranges of non-coherent memory from the host caches.
+		Flush mapped memory ranges.
 
-		${ValidityProtos.vkFlushMappedMemoryRanges}
+		<h5>C Specification</h5>
+		To flush ranges of non-coherent memory from the host caches, call:
 
-		{@code vkFlushMappedMemoryRanges} $must be used to guarantee that host writes to non-coherent memory are visible to the device. It $must be called
-		after the host writes to non-coherent memory have completed and before command buffers that will read or write any of those memory locations are
-		submitted to a queue.
+		<pre><code>VkResult vkFlushMappedMemoryRanges(
+￿    VkDevice                                    device,
+￿    uint32_t                                    memoryRangeCount,
+￿    const VkMappedMemoryRange*                  pMemoryRanges);</code></pre>
+
+		<h5>Description</h5>
+		#FlushMappedMemoryRanges() <b>must</b> be used to guarantee that host writes to non-coherent memory are visible to the device. It <b>must</b> be called after the host writes to non-coherent memory have completed and before command buffers that will read or write any of those memory locations are submitted to a queue.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pMemoryRanges} <b>must</b> be a pointer to an array of {@code memoryRangeCount} valid ##VkMappedMemoryRange structures</li>
+			<li>{@code memoryRangeCount} <b>must</b> be greater than 0</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkMappedMemoryRange
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the memory ranges"),
-		AutoSize("pMemoryRanges")..uint32_t.IN("memoryRangeCount", "the length of the {@code pMemoryRanges} array"),
-		SingleValue("pMemoryRange")..const..VkMappedMemoryRange_p.IN(
-			"pMemoryRanges",
-			"a pointer to an array of ##VkMappedMemoryRange structures describing the memory ranges to flush"
-		)
+		VkDevice.IN("device", "the logical device that owns the memory ranges."),
+		AutoSize("pMemoryRanges")..uint32_t.IN("memoryRangeCount", "the length of the {@code pMemoryRanges} array."),
+		const..VkMappedMemoryRange.p.IN("pMemoryRanges", "a pointer to an array of ##VkMappedMemoryRange structures describing the memory ranges to flush.")
 	)
 
 	VkResult(
 		"InvalidateMappedMemoryRanges",
 		"""
-		Invalidates ranges of mapped memory objects.
+		Invalidate ranges of mapped memory objects.
 
-		${ValidityProtos.vkInvalidateMappedMemoryRanges}
+		<h5>C Specification</h5>
+		To invalidate ranges of non-coherent memory from the host caches, call:
 
-		{@code vkInvalidateMappedMemoryRanges} $must be used to guarantee that device writes to non-coherent memory are visible to the host. It $must be called
-		after command buffers that execute and flush (via memory barriers) the device writes have completed, and before the host will read or write any of
-		those locations. If a range of non-coherent memory is written by the host and then invalidated without first being flushed, its contents are undefined.
+		<pre><code>VkResult vkInvalidateMappedMemoryRanges(
+￿    VkDevice                                    device,
+￿    uint32_t                                    memoryRangeCount,
+￿    const VkMappedMemoryRange*                  pMemoryRanges);</code></pre>
+
+		<h5>Description</h5>
+		#InvalidateMappedMemoryRanges() <b>must</b> be used to guarantee that device writes to non-coherent memory are visible to the host. It <b>must</b> be called after command buffers that execute and flush (via memory barriers) the device writes have completed, and before the host will read or write any of those locations. If a range of non-coherent memory is written by the host and then invalidated without first being flushed, its contents are undefined.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pMemoryRanges} <b>must</b> be a pointer to an array of {@code memoryRangeCount} valid ##VkMappedMemoryRange structures</li>
+			<li>{@code memoryRangeCount} <b>must</b> be greater than 0</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkMappedMemoryRange
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the memory ranges"),
-		AutoSize("pMemoryRanges")..uint32_t.IN("memoryRangeCount", "the length of the {@code pMemoryRanges} array"),
-		SingleValue("pMemoryRange")..const..VkMappedMemoryRange_p.IN(
-			"pMemoryRanges",
-			"a pointer to an array of ##VkMappedMemoryRange structures describing the memory ranges to invalidate"
-		)
+		VkDevice.IN("device", "the logical device that owns the memory ranges."),
+		AutoSize("pMemoryRanges")..uint32_t.IN("memoryRangeCount", "the length of the {@code pMemoryRanges} array."),
+		const..VkMappedMemoryRange.p.IN("pMemoryRanges", "a pointer to an array of ##VkMappedMemoryRange structures describing the memory ranges to invalidate.")
 	)
 
 	void(
 		"GetDeviceMemoryCommitment",
 		"""
-		Determines the amount of lazily-allocated memory that is currently committed for a memory object.
+		Query the current commitment for a VkDeviceMemory.
 
-		If the memory object is allocated from a heap with the #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT bit set, that object’s backing memory $may be provided by
-		the implementation lazily. The actual committed size of the memory $may initially be as small as zero (or as large as the requested size), and
-		monotonically increases as additional memory is needed.
+		<h5>C Specification</h5>
+		To determine the amount of lazily-allocated memory that is currently committed for a memory object, call:
 
-		A memory type with this flag set is only allowed to be bound to a {@code VkImage} whose usage flags include #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT.
+		<pre><code>void vkGetDeviceMemoryCommitment(
+￿    VkDevice                                    device,
+￿    VkDeviceMemory                              memory,
+￿    VkDeviceSize*                               pCommittedMemoryInBytes);</code></pre>
 
-		${note(
-			"""
-			Using lazily allocated memory objects for framebuffer attachments that are not needed once a render pass instance has completed $may allow some
-			implementations to never allocate memory for such attachments.
-			"""
-		)}
+		<h5>Description</h5>
+		The implementation <b>may</b> update the commitment at any time, and the value returned by this query <b>may</b> be out of date.
 
-		${ValidityProtos.vkGetDeviceMemoryCommitment}
+		The implementation guarantees to allocate any committed memory from the heapIndex indicated by the memory type that the memory object was created with.
 
-		The implementation $may update the commitment at any time, and the value returned by this query $may be out of date.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code memory} <b>must</b> have been created with a memory type that reports #MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT</li>
+		</ul>
 
-		The implementation guarantees to allocate any committed memory from the {@code heapIndex} indicated by the memory type that the memory object was
-		created with.
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
+			<li>{@code pCommittedMemoryInBytes} <b>must</b> be a pointer to a {@code VkDeviceSize} value</li>
+			<li>{@code memory} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the memory"),
-		VkDeviceMemory.IN("memory", "the memory object being queried"),
-		Check(1)..VkDeviceSize_p.OUT(
-			"pCommittedMemoryInBytes",
-			"a pointer to a {@code VkDeviceSize} value in which the number of bytes currently committed is returned, on success"
-		)
+		VkDevice.IN("device", "the logical device that owns the memory."),
+		VkDeviceMemory.IN("memory", "the memory object being queried."),
+		Check(1)..VkDeviceSize.p.OUT("pCommittedMemoryInBytes", "a pointer to a {@code VkDeviceSize} value in which the number of bytes currently committed is returned, on success.")
 	)
+
+	// Memory management API commands
 
 	VkResult(
 		"BindBufferMemory",
 		"""
-		Attaches memory to a buffer object.
+		Bind device memory to a buffer object.
 
-		${ValidityProtos.vkBindBufferMemory}
+		<h5>C Specification</h5>
+		To attach memory to a buffer object, call:
+
+		<pre><code>VkResult vkBindBufferMemory(
+￿    VkDevice                                    device,
+￿    VkBuffer                                    buffer,
+￿    VkDeviceMemory                              memory,
+￿    VkDeviceSize                                memoryOffset);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code buffer} <b>must</b> not already be backed by a memory object</li>
+			<li>{@code buffer} <b>must</b> not have been created with any sparse memory binding flags</li>
+			<li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
+			<li>If {@code buffer} was created with the #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT, {@code memoryOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minTexelBufferOffsetAlignment}</li>
+			<li>If {@code buffer} was created with the #BUFFER_USAGE_UNIFORM_BUFFER_BIT, {@code memoryOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minUniformBufferOffsetAlignment}</li>
+			<li>If {@code buffer} was created with the #BUFFER_USAGE_STORAGE_BUFFER_BIT, {@code memoryOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minStorageBufferOffsetAlignment}</li>
+			<li>{@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements structure returned from a call to #GetBufferMemoryRequirements() with {@code buffer}</li>
+			<li>{@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the ##VkMemoryRequirements structure returned from a call to #GetBufferMemoryRequirements() with {@code buffer}</li>
+			<li>The {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetBufferMemoryRequirements() with {@code buffer} <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
+			<li>If {@code buffer} was created with ##VkDedicatedAllocationBufferCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} <b>must</b> have been created with ##VkDedicatedAllocationMemoryAllocateInfoNV{@code ::buffer} equal to {@code buffer} and {@code memoryOffset} <b>must</b> be zero</li>
+			<li>If {@code buffer} was not created with ##VkDedicatedAllocationBufferCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} <b>must</b> not have been allocated dedicated for a specific buffer or image</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
+			<li>{@code buffer} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+			<li>{@code memory} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code buffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the buffer and memory"),
-		VkBuffer.IN("buffer", "the buffer"),
-		VkDeviceMemory.IN("memory", "a {@code VkDeviceMemory} object describing the device memory to attach"),
-		VkDeviceSize.IN(
-			"memoryOffset",
-			"""
-			the start offset of the region of {@code memory} which is to be bound to the buffer. The number of bytes returned in the
-			##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified buffer.
-			"""
-		)
+		VkDevice.IN("device", "the logical device that owns the buffer and memory."),
+		VkBuffer.IN("buffer", "the buffer."),
+		VkDeviceMemory.IN("memory", "a {@code VkDeviceMemory} object describing the device memory to attach."),
+		VkDeviceSize.IN("memoryOffset", "the start offset of the region of {@code memory} which is to be bound to the buffer. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified buffer.")
 	)
 
 	VkResult(
 		"BindImageMemory",
 		"""
-		Attaches memory to an image object.
+		Bind device memory to an image object.
 
-		${ValidityProtos.vkBindImageMemory}
+		<h5>C Specification</h5>
+		To attach memory to an image object, call:
+
+		<pre><code>VkResult vkBindImageMemory(
+￿    VkDevice                                    device,
+￿    VkImage                                     image,
+￿    VkDeviceMemory                              memory,
+￿    VkDeviceSize                                memoryOffset);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code image} <b>must</b> not already be backed by a memory object</li>
+			<li>{@code image} <b>must</b> not have been created with any sparse memory binding flags</li>
+			<li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
+			<li>{@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements() with {@code image}</li>
+			<li>{@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements() with {@code image}</li>
+			<li>The {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetImageMemoryRequirements() with {@code image} <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
+			<li>If {@code image} was created with ##VkDedicatedAllocationImageCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} <b>must</b> have been created with ##VkDedicatedAllocationMemoryAllocateInfoNV{@code ::image} equal to {@code image} and {@code memoryOffset} <b>must</b> be zero</li>
+			<li>If {@code image} was not created with ##VkDedicatedAllocationImageCreateInfoNV{@code ::dedicatedAllocation} equal to #TRUE, {@code memory} <b>must</b> not have been allocated dedicated for a specific buffer or image</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
+			<li>{@code image} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+			<li>{@code memory} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code image} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the image and memory"),
-		VkImage.IN("image", "the image"),
-		VkDeviceMemory.IN("memory", "a {@code VkDeviceMemory} object describing the device memory to attach"),
-		VkDeviceSize.IN(
-			"memoryOffset",
-			"""
-			the start offset of the region of {@code memory} which is to be bound to the image. The number of bytes returned in the
-			##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified image.
-			"""
-		)
+		VkDevice.IN("device", "the logical device that owns the image and memory."),
+		VkImage.IN("image", "the image."),
+		VkDeviceMemory.IN("memory", "the a {@code VkDeviceMemory} object describing the device memory to attach."),
+		VkDeviceSize.IN("memoryOffset", "the start offset of the region of {@code memory} which is to be bound to the image. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified image.")
 	)
 
 	void(
 		"GetBufferMemoryRequirements",
 		"""
-		Determines the memory requirements for a buffer resource.
+		Returns the memory requirements for specified Vulkan object.
 
-		${ValidityProtos.vkGetBufferMemoryRequirements}
+		<h5>C Specification</h5>
+		To determine the memory requirements for a buffer resource, call:
+
+		<pre><code>void vkGetBufferMemoryRequirements(
+￿    VkDevice                                    device,
+￿    VkBuffer                                    buffer,
+￿    VkMemoryRequirements*                       pMemoryRequirements);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code pMemoryRequirements} <b>must</b> be a pointer to a ##VkMemoryRequirements structure</li>
+			<li>{@code buffer} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkMemoryRequirements
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the buffer"),
-		VkBuffer.IN("buffer", "the buffer to query"),
-		VkMemoryRequirements_p.OUT(
-			"pMemoryRequirements",
-			"points to an instance of the ##VkMemoryRequirements structure in which the memory requirements of the buffer object are returned")
+		VkDevice.IN("device", "the logical device that owns the buffer."),
+		VkBuffer.IN("buffer", "the buffer to query."),
+		VkMemoryRequirements.p.OUT("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements structure in which the memory requirements of the buffer object are returned.")
 	)
 
 	void(
 		"GetImageMemoryRequirements",
 		"""
-		Determines the memory requirements for an image resource.
+		Returns the memory requirements for specified Vulkan object.
 
-		${ValidityProtos.vkGetImageMemoryRequirements}
+		<h5>C Specification</h5>
+		To determine the memory requirements for an image resource, call:
+
+		<pre><code>void vkGetImageMemoryRequirements(
+￿    VkDevice                                    device,
+￿    VkImage                                     image,
+￿    VkMemoryRequirements*                       pMemoryRequirements);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code pMemoryRequirements} <b>must</b> be a pointer to a ##VkMemoryRequirements structure</li>
+			<li>{@code image} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkMemoryRequirements
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the image"),
-		VkImage.IN("image", "the image to query"),
-		VkMemoryRequirements_p.OUT(
-			"pMemoryRequirements",
-			"points to an instance of the ##VkMemoryRequirements structure in which the memory requirements of the image object are returned"
-		)
+		VkDevice.IN("device", "the logical device that owns the image."),
+		VkImage.IN("image", "the image to query."),
+		VkMemoryRequirements.p.OUT("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements structure in which the memory requirements of the image object are returned.")
 	)
+
+	// Sparse resource memory management API commands
 
 	void(
 		"GetImageSparseMemoryRequirements",
 		"""
-		Query sparse memory requirements for an image.
+		Query the memory requirements for a sparse image.
 
-		If {@code pSparseMemoryRequirements} is $NULL, then the number of sparse memory requirements available is returned in
-		{@code pSparseMemoryRequirementCount}. Otherwise, {@code pSparseMemoryRequirementCount} $must point to a variable set by the user to the number of
-		elements in the {@code pSparseMemoryRequirements} array, and on return the variable is overwritten with the number of structures actually written to
-		{@code pSparseMemoryRequirements}. If the value of {@code pSparseMemoryRequirementCount} is less than the number of sparse memory requirements
-		available, at most {@code pSparseMemoryRequirementCount} structures will be written.
+		<h5>C Specification</h5>
+		To query sparse memory requirements for an image, call:
 
-		If the image was not created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT then {@code pSparseMemoryRequirementCount} will be set to zero and
-		{@code pSparseMemoryRequirements} will not be written to.
+		<pre><code>void vkGetImageSparseMemoryRequirements(
+￿    VkDevice                                    device,
+￿    VkImage                                     image,
+￿    uint32_t*                                   pSparseMemoryRequirementCount,
+￿    VkSparseImageMemoryRequirements*            pSparseMemoryRequirements);</code></pre>
 
-		${note(
-			"""
-			It is legal for an implementation to report a larger value in ##VkMemoryRequirements{@code ::size} than would be obtained by adding together memory
-			sizes for all ##VkSparseImageMemoryRequirements returned by {@code vkGetImageSparseMemoryRequirements}. This $may occur when the hardware requires
-			unused padding in the address range describing the resource.
-			"""
-		)}
+		<h5>Description</h5>
+		If {@code pSparseMemoryRequirements} is {@code NULL}, then the number of sparse memory requirements available is returned in {@code pSparseMemoryRequirementCount}. Otherwise, {@code pSparseMemoryRequirementCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSparseMemoryRequirements} array, and on return the variable is overwritten with the number of structures actually written to {@code pSparseMemoryRequirements}. If {@code pSparseMemoryRequirementCount} is less than the number of sparse memory requirements available, at most {@code pSparseMemoryRequirementCount} structures will be written.
 
-		${ValidityProtos.vkGetImageSparseMemoryRequirements}
+		If the image was not created with #IMAGE_CREATE_SPARSE_RESIDENCY_BIT then {@code pSparseMemoryRequirementCount} will be set to zero and {@code pSparseMemoryRequirements} will not be written to.
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		It is legal for an implementation to report a larger value in ##VkMemoryRequirements{@code ::size} than would be obtained by adding together memory sizes for all ##VkSparseImageMemoryRequirements returned by #GetImageSparseMemoryRequirements(). This <b>may</b> occur when the hardware requires unused padding in the address range describing the resource.
+		</div>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code pSparseMemoryRequirementCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+			<li>If the value referenced by {@code pSparseMemoryRequirementCount} is not 0, and {@code pSparseMemoryRequirements} is not {@code NULL}, {@code pSparseMemoryRequirements} <b>must</b> be a pointer to an array of {@code pSparseMemoryRequirementCount} ##VkSparseImageMemoryRequirements structures</li>
+			<li>{@code image} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkSparseImageMemoryRequirements
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the image"),
-		VkImage.IN("image", "the {@code VkImage} object to get the memory requirements for"),
-		AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t_p.INOUT(
-			"pSparseMemoryRequirementCount",
-			"a pointer to an integer related to the number of sparse memory requirements available or queried"
-		),
-		nullable..VkSparseImageMemoryRequirements_p.OUT(
-			"pSparseMemoryRequirements",
-			"either $NULL or a pointer to an array of ##VkSparseImageMemoryRequirements structures"
-		)
+		VkDevice.IN("device", "the logical device that owns the image."),
+		VkImage.IN("image", "the {@code VkImage} object to get the memory requirements for."),
+		AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t_p.INOUT("pSparseMemoryRequirementCount", "a pointer to an integer related to the number of sparse memory requirements available or queried, as described below."),
+		nullable..VkSparseImageMemoryRequirements.p.OUT("pSparseMemoryRequirements", "either {@code NULL} or a pointer to an array of ##VkSparseImageMemoryRequirements structures.")
 	)
 
 	void(
 		"GetPhysicalDeviceSparseImageFormatProperties",
 		"""
-		Retrieves properties of an image format applied to sparse images.
+		Retrieve properties of an image format applied to sparse images.
 
-		Given that certain aspects of sparse image support, including the sparse image block size, $may be implementation-dependent,
-		{@code vkGetPhysicalDeviceSparseImageFormatProperties} $can be used to query for sparse image format properties prior to resource creation. This command
-		is used to check whether a given set of sparse image parameters is supported and what the sparse block shape will be.
+		<h5>C Specification</h5>
+		#GetPhysicalDeviceSparseImageFormatProperties() returns an array of ##VkSparseImageFormatProperties. Each element will describe properties for one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved depth/stencil images there is only one element describing the combined aspects.
 
-		{@code vkGetPhysicalDeviceSparseImageFormatProperties} returns an array of ##VkSparseImageFormatProperties. Each element will describe properties for
-		one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved
-		depth/stencil images there is only one element describing the combined aspects.
+		<pre><code>void vkGetPhysicalDeviceSparseImageFormatProperties(
+￿    VkPhysicalDevice                            physicalDevice,
+￿    VkFormat                                    format,
+￿    VkImageType                                 type,
+￿    VkSampleCountFlagBits                       samples,
+￿    VkImageUsageFlags                           usage,
+￿    VkImageTiling                               tiling,
+￿    uint32_t*                                   pPropertyCount,
+￿    VkSparseImageFormatProperties*              pProperties);</code></pre>
 
-		If {@code pProperties} is $NULL, then the number of sparse format properties available is returned in {@code pPropertyCount}. Otherwise,
-		{@code pPropertyCount} $must point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable
-		is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of sparse
-		format properties available, at most {@code pPropertyCount} structures will be written.
+		<h5>Description</h5>
+		If {@code pProperties} is {@code NULL}, then the number of sparse format properties available is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If {@code pPropertyCount} is less than the number of sparse format properties available, at most {@code pPropertyCount} structures will be written.
 
-		${ValidityProtos.vkGetPhysicalDeviceSparseImageFormatProperties}
+		If #IMAGE_CREATE_SPARSE_RESIDENCY_BIT is not supported for the given arguments, {@code pPropertyCount} will be set to zero upon return, and no data will be written to {@code pProperties}.
 
-		If #IMAGE_CREATE_SPARSE_RESIDENCY_BIT is not supported for the given arguments, {@code pPropertyCount} will be set to zero upon return, and no data
-		will be written to {@code pProperties}.
+		Multiple aspects are returned for depth/stencil images that are implemented as separate planes by the implementation. The depth and stencil data planes each have unique ##VkSparseImageFormatProperties data.
 
-		Multiple aspects are returned for depth/stencil images that are implemented as separate planes by the implementation. The depth and stencil data planes
-		each have unique ##VkSparseImageFormatProperties data.
+		Depth/stencil images with depth and stencil data interleaved into a single plane will return a single ##VkSparseImageFormatProperties structure with the {@code aspectMask} set to #IMAGE_ASPECT_DEPTH_BIT | #IMAGE_ASPECT_STENCIL_BIT.
 
-		Depth/stencil images with depth and stencil data interleaved into a single plane will return a single ##VkSparseImageFormatProperties structure with
-		the {@code aspectMask} set to ${code("#IMAGE_ASPECT_DEPTH_BIT | #IMAGE_ASPECT_STENCIL_BIT")}.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code samples} <b>must</b> be a bit value that is set in ##VkImageFormatProperties{@code ::sampleCounts} returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, and {@code usage} equal to those in this command and {@code flags} equal to the value that is set in ##VkImageCreateInfo{@code ::flags} when the image is created</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
+			<li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
+			<li>{@code type} <b>must</b> be a valid {@code VkImageType} value</li>
+			<li>{@code samples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
+			<li>{@code usage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
+			<li>{@code usage} <b>must</b> not be 0</li>
+			<li>{@code tiling} <b>must</b> be a valid {@code VkImageTiling} value</li>
+			<li>{@code pPropertyCount} <b>must</b> be a pointer to a {@code uint32_t} value</li>
+			<li>If the value referenced by {@code pPropertyCount} is not 0, and {@code pProperties} is not {@code NULL}, {@code pProperties} <b>must</b> be a pointer to an array of {@code pPropertyCount} ##VkSparseImageFormatProperties structures</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkSparseImageFormatProperties
 		""",
 
-		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the sparse image capabilities"),
-		VkFormat.IN("format", "the image format"),
-		VkImageType.IN("type", "the dimensionality of image", VkImageTypes),
-		VkSampleCountFlagBits.IN("samples", "the number of samples per pixel as defined in {@code VkSampleCountFlagBits}", VkSampleCountFlagBitLinks),
-		VkImageUsageFlags.IN("usage", "a bitfield describing the intended usage of the image", VkImageUsageFlagBits, LinkMode.BITFIELD),
-		VkImageTiling.IN("tiling", "the tiling arrangement of the data elements in memory", VkImageTilings),
-		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT(
-			"pPropertyCount",
-			"a pointer to an integer related to the number of sparse format properties available or queried"
-		),
-		nullable..VkSparseImageFormatProperties_p.OUT("pProperties", "either $NULL or a pointer to an array of ##VkSparseImageFormatProperties structures")
+		VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the sparse image capabilities."),
+		VkFormat.IN("format", "the image format."),
+		VkImageType.IN("type", "the dimensionality of image."),
+		VkSampleCountFlagBits.IN("samples", "the number of samples per pixel as defined in {@code VkSampleCountFlagBits}."),
+		VkImageUsageFlags.IN("usage", "a bitmask describing the intended usage of the image."),
+		VkImageTiling.IN("tiling", "the tiling arrangement of the data elements in memory."),
+		AutoSize("pProperties")..Check(1)..uint32_t_p.INOUT("pPropertyCount", "a pointer to an integer related to the number of sparse format properties available or queried, as described below."),
+		nullable..VkSparseImageFormatProperties.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkSparseImageFormatProperties structures.")
 	)
 
 	VkResult(
 		"QueueBindSparse",
 		"""
-		Submits sparse binding operations to a queue for execution.
+		Bind device memory to a sparse resource object.
 
-		{@code vkQueueBindSparse} is a queue submission command, with each batch defined by an element of {@code pBindInfo} as an instance of the
-		##VkBindSparseInfo structure.
+		<h5>C Specification</h5>
+		To submit sparse binding operations to a queue, call:
 
-		Within a batch, a given range of a resource $must not be bound more than once. Across batches, if a range is to be bound to one allocation and offset
-		and then to another allocation and offset, then the application $must guarantee (usually using semaphores) that the binding operations are executed in
-		the correct order, as well as to order binding operations against the execution of command buffer submissions.
+		<pre><code>VkResult vkQueueBindSparse(
+￿    VkQueue                                     queue,
+￿    uint32_t                                    bindInfoCount,
+￿    const VkBindSparseInfo*                     pBindInfo,
+￿    VkFence                                     fence);</code></pre>
 
-		${ValidityProtos.vkQueueBindSparse}
+		<h5>Description</h5>
+		#QueueBindSparse() is a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-submission">queue submission command</a>, with each batch defined by an element of {@code pBindInfo} as an instance of the ##VkBindSparseInfo structure.
 
-		As no operation to {@code vkQueueBindSparse} causes any pipeline stage to access memory, synchronization primitives used in this command effectively
-		only define execution dependencies.
+		Within a batch, a given range of a resource <b>must</b> not be bound more than once. Across batches, if a range is to be bound to one allocation and offset and then to another allocation and offset, then the application <b>must</b> guarantee (usually using semaphores) that the binding operations are executed in the correct order, as well as to order binding operations against the execution of command buffer submissions.
+
+		As no operation to #QueueBindSparse() causes any pipeline stage to access memory, synchronization primitives used in this command effectively only define execution dependencies.
+
+		Additional information about fence and semaphore operation is described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> the synchronization chapter</a>.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code fence} <b>must</b> be unsignaled</li>
+			<li>{@code fence} <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code queue} <b>must</b> be a valid {@code VkQueue} handle</li>
+			<li>If {@code bindInfoCount} is not 0, {@code pBindInfo} <b>must</b> be a pointer to an array of {@code bindInfoCount} valid ##VkBindSparseInfo structures</li>
+			<li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
+			<li>The {@code queue} <b>must</b> support sparse binding operations</li>
+			<li>Both of {@code fence}, and {@code queue} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code queue} <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pBindInfo}[].pWaitSemaphores[] <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pBindInfo}[].pSignalSemaphores[] <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pBindInfo}[].pBufferBinds[].buffer <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pBindInfo}[].pImageOpaqueBinds[].image <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pBindInfo}[].pImageBinds[].image <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code fence} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>-</td><td>-</td><td>SPARSE_BINDING</td></tr></tbody>
+		</table>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkBindSparseInfo
 		""",
 
-		VkQueue.IN("queue", "the queue that the sparse binding operations will be submitted to"),
-		AutoSize("pBindInfo")..uint32_t.IN("bindInfoCount", "the number of elements in the {@code pBindInfo} array"),
-		SingleValue("pBindInfo")..const..VkBindSparseInfo_p.IN(
-			"pBindInfo",
-			"an array of ##VkBindSparseInfo structures, each specifying a sparse binding submission batch"
-		),
-		VkFence.IN("fence", "an optional handle to a fence to be signaled. If fence is not #NULL_HANDLE, it defines a fence signal operation.")
+		VkQueue.IN("queue", "the queue that the sparse binding operations will be submitted to."),
+		AutoSize("pBindInfo")..uint32_t.IN("bindInfoCount", "the number of elements in the {@code pBindInfo} array."),
+		nullable..const..VkBindSparseInfo.p.IN("pBindInfo", "an array of ##VkBindSparseInfo structures, each specifying a sparse binding submission batch."),
+		VkFence.IN("fence", "an optional handle to a fence to be signaled. If {@code fence} is not #NULL_HANDLE, it defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-fences-signaling\">fence signal operation</a>.")
 	)
+
+	// Fence commands
 
 	VkResult(
 		"CreateFence",
 		"""
-		Creates a new fence object.
+		Create a new fence object.
 
-		Fences $can be used by the host to determine completion of execution of queue operations.
+		<h5>C Specification</h5>
+		To create a new fence object, use the command
 
-		A fence’s status is always either signaled or unsignaled. The host $can poll the status of a single fence, or wait for any or all of a group of fences
-		to become signaled.
+		<pre><code>VkResult vkCreateFence(
+￿    VkDevice                                    device,
+￿    const VkFenceCreateInfo*                    pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkFence*                                    pFence);</code></pre>
 
-		${ValidityProtos.vkCreateFence}
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkFenceCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pFence} <b>must</b> be a pointer to a {@code VkFence} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkFenceCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the fence"),
-		const..VkFenceCreateInfo_p.IN("pCreateInfo", "points to a ##VkFenceCreateInfo structure specifying the state of the fence object"),
-		pAllocator,
-		Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned")
+		VkDevice.IN("device", "the logical device that creates the fence."),
+		const..VkFenceCreateInfo.p.IN("pCreateInfo", "points to a ##VkFenceCreateInfo structure specifying the state of the fence object."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
 	)
 
 	void(
 		"DestroyFence",
 		"""
-		Destroys a fence object.
+		Destroy a fence object.
 
-		${ValidityProtos.vkDestroyFence}
+		<h5>C Specification</h5>
+		To destroy a fence, call:
+
+		<pre><code>void vkDestroyFence(
+￿    VkDevice                                    device,
+￿    VkFence                                     fence,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code fence} <b>must</b> not be associated with any queue command that has not yet completed execution on that queue</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code fence} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code fence} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code fence} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code fence} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the fence"),
-		VkFence.IN("fence", "the handle of the fence to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the fence."),
+		VkFence.IN("fence", "the handle of the fence to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	VkResult(
 		"ResetFences",
 		"""
-		Resets the status of one or more fences to the unsignaled state.
+		Resets one or more fence objects.
 
+		<h5>C Specification</h5>
+		To reset the status of one or more fences to the unsignaled state, use the command:
+
+		<pre><code>VkResult vkResetFences(
+￿    VkDevice                                    device,
+￿    uint32_t                                    fenceCount,
+￿    const VkFence*                              pFences);</code></pre>
+
+		<h5>Description</h5>
 		If a fence is already in the unsignaled state, then resetting it has no effect.
 
-		${ValidityProtos.vkResetFences}
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>Any given element of {@code pFences} <b>must</b> not currently be associated with any queue command that has not yet completed execution on that queue</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pFences} <b>must</b> be a pointer to an array of {@code fenceCount} valid {@code VkFence} handles</li>
+			<li>{@code fenceCount} <b>must</b> be greater than 0</li>
+			<li>Each element of {@code pFences} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to each member of {@code pFences} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the fences"),
-		AutoSize("pFences")..uint32_t.IN("fenceCount", "the number of fences to reset"),
-		SingleValue("pFence")..const..VkFence.p.IN("pFences", "a pointer to an array of {@code fenceCount} fence handles to reset")
+		VkDevice.IN("device", "the logical device that owns the fences."),
+		AutoSize("pFences")..uint32_t.IN("fenceCount", "the number of fences to reset."),
+		const..VkFence.p.IN("pFences", "a pointer to an array of {@code fenceCount} fence handles to reset.")
 	)
 
 	VkResult(
 		"GetFenceStatus",
 		"""
-		Queries the status of a fence from the host.
+		Return the status of a fence.
 
-		Upon success, {@code vkGetFenceStatus} returns the status of the fence, which is one of:
-		${ul(
-			"#SUCCESS indicates that the fence is signaled.",
-			"#NOT_READY indicates that the fence is unsignaled."
-		)}
+		<h5>C Specification</h5>
+		To query the status of a fence from the host, use the command
 
-		${ValidityProtos.vkGetFenceStatus}
+		<pre><code>VkResult vkGetFenceStatus(
+￿    VkDevice                                    device,
+￿    VkFence                                     fence);</code></pre>
+
+		<h5>Description</h5>
+		Upon success, #GetFenceStatus() returns the status of the fence, which is one of:
+
+		<ul>
+			<li>#SUCCESS indicates that the fence is signaled.</li>
+			<li>#NOT_READY indicates that the fence is unsignaled.</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
+			<li>{@code fence} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#NOT_READY</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the fence"),
-		VkFence.IN("fence", "the handle of the fence to query")
+		VkDevice.IN("device", "the logical device that owns the fence."),
+		VkFence.IN("fence", "the handle of the fence to query.")
 	)
 
 	VkResult(
 		"WaitForFences",
 		"""
-		Causes the host to wait until any one or all of a group of fences is signaled.
+		Wait for one or more fences to become signaled.
 
-		If the condition is satisfied when {@code vkWaitForFences} is called, then {@code vkWaitForFences} returns immediately. If the condition is not
-		satisfied at the time {@code vkWaitForFences} is called, then {@code vkWaitForFences} will block and wait up to timeout nanoseconds for the condition
-		to become satisfied.
+		<h5>C Specification</h5>
+		To cause the host to wait until any one or all of a group of fences is signaled, use the command:
 
-		If {@code timeout} is zero, then {@code vkWaitForFences} does not wait, but simply returns the current state of the fences. #TIMEOUT will be returned
-		in this case if the condition is not satisfied, even though no actual wait was performed.
+		<pre><code>VkResult vkWaitForFences(
+￿    VkDevice                                    device,
+￿    uint32_t                                    fenceCount,
+￿    const VkFence*                              pFences,
+￿    VkBool32                                    waitAll,
+￿    uint64_t                                    timeout);</code></pre>
 
-		If the specified {@code timeout} period expires before the condition is satisfied, {@code vkWaitForFences} returns #TIMEOUT. If the condition is
-		satisfied before timeout nanoseconds has expired, {@code vkWaitForFences} returns #SUCCESS.
+		<h5>Description</h5>
+		If the condition is satisfied when #WaitForFences() is called, then #WaitForFences() returns immediately. If the condition is not satisfied at the time #WaitForFences() is called, then #WaitForFences() will block and wait up to {@code timeout} nanoseconds for the condition to become satisfied.
 
-		Fences become signaled when the device completes executing the work that was submitted to a queue accompanied by the fence. But this alone is not
-		sufficient for the host to be guaranteed to see the results of device writes to memory. To provide that guarantee, the application $must insert a
-		memory barrier between the device writes and the end of the submission that will signal the fence, with {@code dstAccessMask} having the
-		#ACCESS_HOST_READ_BIT bit set, with {@code dstStageMask} having the #PIPELINE_STAGE_HOST_BIT bit set, and with the appropriate {@code srcStageMask} and
-		{@code srcAccessMask} members set to guarantee completion of the writes. If the memory was allocated without the #MEMORY_PROPERTY_HOST_COHERENT_BIT
-		set, then #InvalidateMappedMemoryRanges() $must be called after the fence is signaled in order to ensure the writes are visible to the host.
+		If {@code timeout} is zero, then #WaitForFences() does not wait, but simply returns the current state of the fences. #TIMEOUT will be returned in this case if the condition is not satisfied, even though no actual wait was performed.
 
-		${ValidityProtos.vkWaitForFences}
+		If the specified timeout period expires before the condition is satisfied, #WaitForFences() returns #TIMEOUT. If the condition is satisfied before {@code timeout} nanoseconds has expired, #WaitForFences() returns #SUCCESS.
+
+		#WaitForFences() defines the second half of a memory dependency with the host, for each fence being waited on. The memory dependency defined by signaling a fence and waiting on the host does not guarantee that the results of memory accesses will be visible to the host, or that the memory is available. To provide that guarantee, the application <b>must</b> insert a memory barrier between the device writes and the end of the submission that will signal the fence, with {@code dstAccessMask} having the #ACCESS_HOST_READ_BIT bit set, with {@code dstStageMask} having the #PIPELINE_STAGE_HOST_BIT bit set, and with the appropriate {@code srcStageMask} and {@code srcAccessMask} members set to guarantee completion of the writes. If the memory was allocated without the #MEMORY_PROPERTY_HOST_COHERENT_BIT set, then #InvalidateMappedMemoryRanges() <b>must</b> be called after the fence is signaled in order to ensure the writes are visible to the host, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#memory-device-hostaccess">Host Access to Device Memory Objects</a>.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pFences} <b>must</b> be a pointer to an array of {@code fenceCount} valid {@code VkFence} handles</li>
+			<li>{@code fenceCount} <b>must</b> be greater than 0</li>
+			<li>Each element of {@code pFences} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#TIMEOUT</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the fences"),
-		AutoSize("pFences")..uint32_t.IN("fenceCount", "the number of fences to wait on"),
-		SingleValue("pFence")..const..VkFence.p.IN("pFences", "a pointer to an array of {@code fenceCount} fence handles"),
-		VkBool32.IN(
-			"waitAll",
-			"""
-			the condition that $must be satisfied to successfully unblock the wait. If {@code waitAll} is #TRUE, then the condition is that all fences in
-			{@code pFences} are signaled. Otherwise, the condition is that at least one fence in {@code pFences} is signaled.
-			"""
-		),
-		uint64_t.IN(
-			"timeout",
-			"""
-			the timeout period in units of nanoseconds. {@code timeout} is adjusted to the closest value allowed by the implementation-dependent
-			timeout accuracy, which $may be substantially longer than one nanosecond, and $may be longer than the requested period.
-			"""
-		)
+		VkDevice.IN("device", "the logical device that owns the fences."),
+		AutoSize("pFences")..uint32_t.IN("fenceCount", "the number of fences to wait on."),
+		const..VkFence.p.IN("pFences", "a pointer to an array of {@code fenceCount} fence handles."),
+		VkBool32.IN("waitAll", "the condition that <b>must</b> be satisfied to successfully unblock the wait. If {@code waitAll} is #TRUE, then the condition is that all fences in {@code pFences} are signaled. Otherwise, the condition is that at least one fence in {@code pFences} is signaled."),
+		uint64_t.IN("timeout", "the timeout period in units of nanoseconds. {@code timeout} is adjusted to the closest value allowed by the implementation-dependent timeout accuracy, which <b>may</b> be substantially longer than one nanosecond, and <b>may</b> be longer than the requested period.")
 	)
+
+	// Queue semaphore commands
 
 	VkResult(
 		"CreateSemaphore",
 		"""
-		Creates a new queue semaphore object.
+		Create a new queue semaphore object.
 
-		Semaphores are used to coordinate queue operations both within a queue and
-between different queues. A semaphore's status is always either _signaled_
-or _unsignaled_.
+		<h5>C Specification</h5>
+		To create a new semaphore object, use the command
 
-		${ValidityProtos.vkCreateSemaphore}
+		<pre><code>VkResult vkCreateSemaphore(
+￿    VkDevice                                    device,
+￿    const VkSemaphoreCreateInfo*                pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkSemaphore*                                pSemaphore);</code></pre>
 
-		Semaphores $can be signaled by including them in a batch as part of a queue submission command, defining a queue operation to signal that semaphore.
-		This semaphore signal operation defines the first half of a memory dependency, guaranteeing that all memory accesses defined by the submitted queue
-		operations in the batch are made available, and that those queue operations have completed execution.
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkSemaphoreCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pSemaphore} <b>must</b> be a pointer to a {@code VkSemaphore} handle</li>
+		</ul>
 
-		Semaphore signal operations for #QueueSubmit() additionally include all queue operations previously submitted via #QueueSubmit() in their half of a
-		memory dependency, and all batches that are stored at a lower index in the same {@code pSubmits} array.
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
 
-		Signaling of semaphores $can be waited on by similarly including them in a batch, defining a queue operation to wait for a signal. A semaphore wait
-		operation defines the second half of a memory dependency for the semaphores being waited on. This half of the memory dependency guarantees that the
-		first half has completed execution, and also guarantees that all available memory accesses are made visible to the queue operations in the batch.
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 
-		Semaphore wait operations for #QueueSubmit() additionally include all queue operations subsequently submitted via #QueueSubmit() in their half of a
-		memory dependency, and all batches that are stored at a higher index in the same pname:pSubmits array.
-
-		When queue execution reaches a semaphore wait operation, the queue will stall execution of queue operations in the batch until each semaphore becomes
-		signaled. Once all semaphores are signaled, the semaphores will be reset to the unsignaled state, and subsequent queue operations will be permitted to
-		execute.
-
-		Semaphore wait operations defined by #QueueSubmit() only wait at specific pipeline stages, rather than delaying all of each command buffer's execution,
-		with the pipeline stages determined by the corresponding element of the {@code pWaitDstStageMask} member of ##VkSubmitInfo. Execution of work by those
-		stages in subsequent commands is stalled until the corresponding semaphore reaches the signaled state.
-
-		${note(
-			"""
-			A common scenario for using {@code pWaitDstStageMask} with values other than #PIPELINE_STAGE_ALL_COMMANDS_BIT is when synchronizing a window system
-			presentation operation against subsequent command buffers which render the next frame. In this case, a presentation image $must not be overwritten
-			until the presentation operation completes, but other pipeline stages $can execute without waiting. A mask of
-			#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT prevents subsequent color attachment writes from executing until the semaphore signals. Some
-			implementations $may be able to execute transfer operations and/or vertex processing work before the semaphore is signaled.
-
-			If an image layout transition needs to be performed on a swapchain image before it is used in a framebuffer, that can: be performed as the first
-			operation submitted to the queue after acquiring the image, and $should not prevent other work from overlapping with the presentation operation. For
-			example, a ##VkImageMemoryBarrier could use:
-			${ul(
-				code("srcStageMask = #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT"),
-				code("srcAccessMask = #ACCESS_MEMORY_READ_BIT"),
-				code("dstStageMask = #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT"),
-				code("dstAccessMask = #ACCESS_COLOR_ATTACHMENT_READ_BIT | #ACCESS_COLOR_ATTACHMENT_WRITE_BIT."),
-				code("oldLayout = #IMAGE_LAYOUT_PRESENT_SRC_KHR"),
-				code("newLayout = #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL")
-			)}
-
-			Alternatively, {@code oldLayout} $can be #IMAGE_LAYOUT_UNDEFINED, if the image's contents need not be preserved.
-
-			This barrier accomplishes a dependency chain between previous presentation operations and subsequent color attachment output operations, with the
-			layout transition performed in between, and does not introduce a dependency between previous work and any vertex processing stages. More precisely,
-			the semaphore signals after the presentation operation completes, then the semaphore wait stalls the #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT
-			stage, then there is a dependency from that same stage to itself with the layout transition performed in between.
-			"""
-		)}
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkSemaphoreCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the semaphore"),
-		const..VkSemaphoreCreateInfo_p.IN("pCreateInfo", "points to a ##VkSemaphoreCreateInfo structure specifying the state of the semaphore object"),
-		pAllocator,
-		Check(1)..VkSemaphore.p.OUT(
-			"pSemaphore",
-			"points to a handle in which the resulting semaphore object is returned. The semaphore is created in the unsignaled state."
-		)
+		VkDevice.IN("device", "the logical device that creates the semaphore."),
+		const..VkSemaphoreCreateInfo.p.IN("pCreateInfo", "points to a ##VkSemaphoreCreateInfo structure specifying the state of the semaphore object."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkSemaphore.p.OUT("pSemaphore", "points to a handle in which the resulting semaphore object is returned. The semaphore is created in the unsignaled state.")
 	)
 
 	void(
 		"DestroySemaphore",
 		"""
-		Destroys a semaphore object.
+		Destroy a semaphore object.
 
-		${ValidityProtos.vkDestroySemaphore}
+		<h5>C Specification</h5>
+		To destroy a semaphore, call:
+
+		<pre><code>void vkDestroySemaphore(
+￿    VkDevice                                    device,
+￿    VkSemaphore                                 semaphore,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code semaphore} <b>must</b> not be associated with any queue command that has not yet completed execution on that queue</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code semaphore} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code semaphore} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code semaphore} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code semaphore} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the semaphore"),
-		VkSemaphore.IN("semaphore", "the handle of the semaphore to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the semaphore."),
+		VkSemaphore.IN("semaphore", "the handle of the semaphore to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
+
+	// Event commands
 
 	VkResult(
 		"CreateEvent",
 		"""
-		Creates a new event object.
+		Create a new event object.
 
-		Events represent a fine-grained synchronization primitive that $can be used to gauge progress through a sequence of commands executed on a queue by
-		Vulkan. An event is initially in the unsignaled state. It $can be signaled by a device, using commands inserted into the command buffer, or by the
-		host. It $can also be reset to the unsignaled state by a device or the host. The host $can query the state of an event. A device $can wait for one or
-		more events to become signaled.
+		<h5>C Specification</h5>
+		To create an event, call:
 
-		${ValidityProtos.vkCreateEvent}
+		<pre><code>VkResult vkCreateEvent(
+￿    VkDevice                                    device,
+￿    const VkEventCreateInfo*                    pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkEvent*                                    pEvent);</code></pre>
+
+		<h5>Description</h5>
+		When created, the event object is in the unsignaled state.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkEventCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pEvent} <b>must</b> be a pointer to a {@code VkEvent} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkEventCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the event"),
-		const..VkEventCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkEventCreateInfo structure which contains information about how the event is to be created"
-		),
-		pAllocator,
-		Check(1)..VkEvent.p.OUT("pEvent", "points to a handle in which the resulting event object is returned")
+		VkDevice.IN("device", "the logical device that creates the event."),
+		const..VkEventCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkEventCreateInfo structure which contains information about how the event is to be created."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkEvent.p.OUT("pEvent", "points to a handle in which the resulting event object is returned.")
 	)
 
 	void(
 		"DestroyEvent",
 		"""
-		Destroys an event object.
+		Destroy an event object.
 
-		${ValidityProtos.vkDestroyEvent}
+		<h5>C Specification</h5>
+		To destroy an event, call:
+
+		<pre><code>void vkDestroyEvent(
+￿    VkDevice                                    device,
+￿    VkEvent                                     event,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code event} <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code event} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code event} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code event} is not #NULL_HANDLE, {@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code event} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code event} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the event"),
-		VkEvent.IN("event", "the handle of the event to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the event."),
+		VkEvent.IN("event", "the handle of the event to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	VkResult(
 		"GetEventStatus",
 		"""
-		Queries the state of an event from the host.
+		Retrieve the status of an event object.
 
-		Upon success, {@code vkGetEventStatus} returns the state of the event object with the following return codes:
-		${ul(
-			"#EVENT_SET - The event specified by event is signaled.",
-			"#EVENT_RESET - The event specified by event is unsignaled."
-		)}
+		<h5>C Specification</h5>
+		To query the state of an event from the host, call:
 
-		The state of an event $can be updated by the host. The state of the event is immediately changed, and subsequent calls to {@code vkGetEventStatus} will
-		return the new state. If an event is already in the requested state, then updating it to the same state has no effect.
+		<pre><code>VkResult vkGetEventStatus(
+￿    VkDevice                                    device,
+￿    VkEvent                                     event);</code></pre>
 
-		${ValidityProtos.vkGetEventStatus}
+		<h5>Description</h5>
+		Upon success, #GetEventStatus() returns the state of the event object with the following return codes:
+
+		<h6>Event Object Status Codes</h6>
+		<table class="lwjgl">
+			<thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+			<tbody>
+				<tr><td>#EVENT_SET</td><td>The event specified by {@code event} is signaled.</td></tr>
+				<tr><td>#EVENT_RESET</td><td>The event specified by {@code event} is unsignaled.</td></tr>
+			</tbody>
+		</table>
+
+		If a #CmdSetEvent() or #CmdResetEvent() command is pending execution, then the value returned by this command <b>may</b> immediately be out of date.
+
+		The state of an event <b>can</b> be updated by the host. The state of the event is immediately changed, and subsequent calls to #GetEventStatus() will return the new state. If an event is already in the requested state, then updating it to the same state has no effect.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
+			<li>{@code event} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#EVENT_SET</li>
+				<li>#EVENT_RESET</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the event"),
-		VkEvent.IN("event", "the handle of the event to query")
+		VkDevice.IN("device", "the logical device that owns the event."),
+		VkEvent.IN("event", "the handle of the event to query.")
 	)
 
 	VkResult(
 		"SetEvent",
 		"""
-		Sets the state of an event to signaled from the host.
+		Set an event to signaled state.
 
-		${ValidityProtos.vkSetEvent}
+		<h5>C Specification</h5>
+		To set the state of an event to signaled from the host, call:
+
+		<pre><code>VkResult vkSetEvent(
+￿    VkDevice                                    device,
+￿    VkEvent                                     event);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
+			<li>{@code event} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code event} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the event"),
-		VkEvent.IN("event", "the event to set")
+		VkDevice.IN("device", "the logical device that owns the event."),
+		VkEvent.IN("event", "the event to set.")
 	)
 
 	VkResult(
 		"ResetEvent",
 		"""
-		Sets the state of an event to unsignaled from the host.
+		Reset an event to non-signaled state.
 
-		${ValidityProtos.vkResetEvent}
+		<h5>C Specification</h5>
+		To set the state of an event to unsignaled from the host, call:
+
+		<pre><code>VkResult vkResetEvent(
+￿    VkDevice                                    device,
+￿    VkEvent                                     event);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code event} <b>must</b> not be waited on by a #CmdWaitEvents() command that is currently executing</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
+			<li>{@code event} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code event} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the event"),
-		VkEvent.IN("event", "the event to reset")
+		VkDevice.IN("device", "the logical device that owns the event."),
+		VkEvent.IN("event", "the event to reset.")
 	)
+
+	// Query commands
 
 	VkResult(
 		"CreateQueryPool",
 		"""
-		Creates a new query pool object.
+		Create a new query pool object.
 
-		Queries are managed using query pool objects. Each query pool is a collection of a specific number of queries of a particular type.
+		<h5>C Specification</h5>
+		To create a query pool, call:
 
-		${ValidityProtos.vkCreateQueryPool}
+		<pre><code>VkResult vkCreateQueryPool(
+￿    VkDevice                                    device,
+￿    const VkQueryPoolCreateInfo*                pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkQueryPool*                                pQueryPool);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkQueryPoolCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pQueryPool} <b>must</b> be a pointer to a {@code VkQueryPool} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkQueryPoolCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the query pool"),
-		const..VkQueryPoolCreateInfo_p.IN(
-			"pCreateInfo",
-			"pointer to an instance of the ##VkQueryPoolCreateInfo structure containing the number and type of queries to be managed by the pool"
-		),
-		pAllocator,
-		Check(1)..VkQueryPool.p.OUT("pQueryPool", "a pointer to a {@code VkQueryPool} handle in which the resulting query pool object is returned")
+		VkDevice.IN("device", "the logical device that creates the query pool."),
+		const..VkQueryPoolCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkQueryPoolCreateInfo structure containing the number and type of queries to be managed by the pool."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkQueryPool.p.OUT("pQueryPool", "a pointer to a {@code VkQueryPool} handle in which the resulting query pool object is returned.")
 	)
 
 	void(
 		"DestroyQueryPool",
 		"""
-		Destroys a query pool object.
+		Destroy a query pool object.
 
-		${ValidityProtos.vkDestroyQueryPool}
+		<h5>C Specification</h5>
+		To destroy a query pool, call:
+
+		<pre><code>void vkDestroyQueryPool(
+￿    VkDevice                                    device,
+￿    VkQueryPool                                 queryPool,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code queryPool} <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code queryPool} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code queryPool} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code queryPool} is not #NULL_HANDLE, {@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code queryPool} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code queryPool} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the query pool"),
-		VkQueryPool.IN("queryPool", "the query pool to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the query pool."),
+		VkQueryPool.IN("queryPool", "the query pool to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	VkResult(
 		"GetQueryPoolResults",
 		"""
-		Retrieves status and results for a set of queries.
+		Copy results of queries in a query pool to a host memory region.
 
-		If no bits are set in {@code flags}, and all requested queries are in the available state, results are written as an array of 32-bit unsigned integer
-		values. The behavior when not all queries are available, is described below.
+		<h5>C Specification</h5>
+		To retrieve status and results for a set of queries, call:
 
-		If #QUERY_RESULT_64_BIT is not set and the result overflows a 32-bit value, the value $may either wrap or saturate. Similarly, if #QUERY_RESULT_64_BIT
-		is set and the result overflows a 64-bit value, the value $may either wrap or saturate.
+		<pre><code>VkResult vkGetQueryPoolResults(
+￿    VkDevice                                    device,
+￿    VkQueryPool                                 queryPool,
+￿    uint32_t                                    firstQuery,
+￿    uint32_t                                    queryCount,
+￿    size_t                                      dataSize,
+￿    void*                                       pData,
+￿    VkDeviceSize                                stride,
+￿    VkQueryResultFlags                          flags);</code></pre>
 
-		If #QUERY_RESULT_WAIT_BIT is set, Vulkan will wait for each query to be in the available state before retrieving the numerical results for that query.
-		In this case, {@code vkGetQueryPoolResults} is guaranteed to succeed and return #SUCCESS if the queries become available in a finite time (i.e. if they
-		have been issued and not reset). If queries will never finish (e.g. due to being reset but not issued), then {@code vkGetQueryPoolResults} $may not
-		return in finite time.
+		<h5>Description</h5>
+		If no bits are set in {@code flags}, and all requested queries are in the available state, results are written as an array of 32-bit unsigned integer values. The behavior when not all queries are available, is described <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-wait-bit-not-set"> below</a>.
 
-		If #QUERY_RESULT_WAIT_BIT and #QUERY_RESULT_PARTIAL_BIT are both not set then no result values are written to {@code pData} for queries that are in the
-		unavailable state at the time of the call, and {@code vkGetQueryPoolResults} returns #NOT_READY. However, availability state is still written to
-		{@code pData} for those queries if #QUERY_RESULT_WITH_AVAILABILITY_BIT is set.
+		If #QUERY_RESULT_64_BIT is not set and the result overflows a 32-bit value, the value <b>may</b> either wrap or saturate. Similarly, if #QUERY_RESULT_64_BIT is set and the result overflows a 64-bit value, the value <b>may</b> either wrap or saturate.
 
-		${note(
-			"""
-			Applications $must take care to ensure that use of the #QUERY_RESULT_WAIT_BIT bit has the desired effect.
+		If #QUERY_RESULT_WAIT_BIT is set, Vulkan will wait for each query to be in the available state before retrieving the numerical results for that query. In this case, #GetQueryPoolResults() is guaranteed to succeed and return #SUCCESS if the queries become available in a finite time (i.e. if they have been issued and not reset). If queries will never finish (e.g. due to being reset but not issued), then #GetQueryPoolResults() <b>may</b> not return in finite time.
 
-			For example, if a query has been used previously and a command buffer records the commands #CmdResetQueryPool(), #CmdBeginQuery(), and
-			#CmdEndQuery() for that query, then the query will remain in the available state until the {@code vkCmdResetQueryPool} command executes on a queue.
-			Applications $can use fences or events to ensure that an query has already been reset before checking for its results or availability status.
-			Otherwise, a stale value could be returned from a previous use of the query.
+		If #QUERY_RESULT_WAIT_BIT and #QUERY_RESULT_PARTIAL_BIT are both not set then no result values are written to {@code pData} for queries that are in the unavailable state at the time of the call, and #GetQueryPoolResults() returns #NOT_READY. However, availability state is still written to {@code pData} for those queries if #QUERY_RESULT_WITH_AVAILABILITY_BIT is set.
 
-			The above also applies when #QUERY_RESULT_WAIT_BIT is used in combination with #QUERY_RESULT_WITH_AVAILABILITY_BIT. In this case, the returned
-			availability status $may reflect the result of a previous use of the query unless the {@code vkCmdResetQueryPool} command has been executed since
-			the last use of the query.
-			"""
-		)}
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Applications <b>must</b> take care to ensure that use of the #QUERY_RESULT_WAIT_BIT bit has the desired effect.
 
-		${note("Applications $can double-buffer query pool usage, with a pool per frame, and reset queries at the end of the frame in which they are read.")}
+		For example, if a query has been used previously and a command buffer records the commands #CmdResetQueryPool(), #CmdBeginQuery(), and #CmdEndQuery() for that query, then the query will remain in the available state until the #CmdResetQueryPool() command executes on a queue. Applications <b>can</b> use fences or events to ensure that a query has already been reset before checking for its results or availability status. Otherwise, a stale value could be returned from a previous use of the query.
 
-		If #QUERY_RESULT_PARTIAL_BIT is set, #QUERY_RESULT_WAIT_BIT is not set, and the query’s status is unavailable, an intermediate result value between
-		zero and the final result value is written to {@code pData} for that query.
+		The above also applies when #QUERY_RESULT_WAIT_BIT is used in combination with #QUERY_RESULT_WITH_AVAILABILITY_BIT. In this case, the returned availability status <b>may</b> reflect the result of a previous use of the query unless the #CmdResetQueryPool() command has been executed since the last use of the query.
+		</div>
 
-		#QUERY_RESULT_PARTIAL_BIT $must not be used if the pool’s {@code queryType} is #QUERY_TYPE_TIMESTAMP.
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Applications <b>can</b> double-buffer query pool usage, with a pool per frame, and reset queries at the end of the frame in which they are read.
+		</div>
 
-		If #QUERY_RESULT_WITH_AVAILABILITY_BIT is set, the final integer value written for each query is non-zero if the query’s status was available or zero
-		if the status was unavailable. When #QUERY_RESULT_WITH_AVAILABILITY_BIT is used, implementations $must guarantee that if they return a non-zero
-		availability value then the numerical results $must be valid, assuming the results are not reset by a subsequent command.
+		If #QUERY_RESULT_PARTIAL_BIT is set, #QUERY_RESULT_WAIT_BIT is not set, and the query's status is unavailable, an intermediate result value between zero and the final result value is written to {@code pData} for that query.
 
-		${note("Satisfying this guarantee $may require careful ordering by the application, e.g. to read the availability status before reading the results.")}
+		#QUERY_RESULT_PARTIAL_BIT <b>must</b> not be used if the pool's {@code queryType} is #QUERY_TYPE_TIMESTAMP.
 
-		${ValidityProtos.vkGetQueryPoolResults}
+		If #QUERY_RESULT_WITH_AVAILABILITY_BIT is set, the final integer value written for each query is non-zero if the query's status was available or zero if the status was unavailable. When #QUERY_RESULT_WITH_AVAILABILITY_BIT is used, implementations <b>must</b> guarantee that if they return a non-zero availability value then the numerical results <b>must</b> be valid, assuming the results are not reset by a subsequent command.
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Satisfying this guarantee <b>may</b> require careful ordering by the application, e.g. to read the availability status before reading the results.
+		</div>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code firstQuery} <b>must</b> be less than the number of queries in {@code queryPool}</li>
+			<li>If #QUERY_RESULT_64_BIT is not set in {@code flags} then {@code pData} and {@code stride} <b>must</b> be multiples of 4</li>
+			<li>If #QUERY_RESULT_64_BIT is set in {@code flags} then {@code pData} and {@code stride} <b>must</b> be multiples of 8</li>
+			<li>The sum of {@code firstQuery} and {@code queryCount} <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+			<li>{@code dataSize} <b>must</b> be large enough to contain the result of each query, as described <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-memorylayout">here</a></li>
+			<li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} <b>must</b> not contain #QUERY_RESULT_PARTIAL_BIT</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
+			<li>{@code pData} <b>must</b> be a pointer to an array of {@code dataSize} bytes</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkQueryResultFlagBits} values</li>
+			<li>{@code dataSize} <b>must</b> be greater than 0</li>
+			<li>{@code queryPool} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#NOT_READY</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_DEVICE_LOST</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the query pool"),
-		VkQueryPool.IN("queryPool", "the query pool managing the queries containing the desired results"),
-		uint32_t.IN("firstQuery", "the initial query index"),
-		uint32_t.IN("queryCount", "the number of queries. {@code firstQuery} and {@code queryCount} together define a range of queries"),
-		AutoSize("pData")..size_t.IN("dataSize", "the size in bytes of the buffer pointed to by {@code pData}"),
-		MultiType(
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG
-		)..void_p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written"),
+		VkDevice.IN("device", "the logical device that owns the query pool."),
+		VkQueryPool.IN("queryPool", "the query pool managing the queries containing the desired results."),
+		uint32_t.IN("firstQuery", "the initial query index."),
+		uint32_t.IN("queryCount", "the number of queries. {@code firstQuery} and {@code queryCount} together define a range of queries."),
+		AutoSize("pData")..size_t.IN("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
+		void_p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written"),
 		VkDeviceSize.IN("stride", "the stride in bytes between results for individual queries within {@code pData}."),
-		VkQueryResultFlags.IN(
-			"flags",
-			"a bitmask of {@code VkQueryResultFlagBits} specifying how and when results are returned",
-			VkQueryResultFlagBits, LinkMode.BITFIELD
-		)
+		VkQueryResultFlags.IN("flags", """a bitmask of {@code VkQueryResultFlagBits} specifying how and when results are returned. Bits which <b>can</b> be set include:
+<pre><code>typedef enum VkQueryResultFlagBits {
+￿    VK_QUERY_RESULT_64_BIT = 0x00000001,
+￿    VK_QUERY_RESULT_WAIT_BIT = 0x00000002,
+￿    VK_QUERY_RESULT_WITH_AVAILABILITY_BIT = 0x00000004,
+￿    VK_QUERY_RESULT_PARTIAL_BIT = 0x00000008,
+} VkQueryResultFlagBits;</code></pre>
+
+		<ul>
+			<li>#QUERY_RESULT_64_BIT indicates the results will be written as an array of 64-bit unsigned integer values. If this bit is not set, the results will be written as an array of 32-bit unsigned integer values.</li>
+			<li>#QUERY_RESULT_WAIT_BIT indicates that Vulkan will wait for each query&#8217;s status to become available before retrieving its results.</li>
+			<li>#QUERY_RESULT_WITH_AVAILABILITY_BIT indicates that the availability status accompanies the results.</li>
+			<li>#QUERY_RESULT_PARTIAL_BIT indicates that returning partial results is acceptable.</li>
+		</ul>""")
 	)
+
+	// Buffer commands
 
 	VkResult(
 		"CreateBuffer",
 		"""
-		Creates a new buffer object.
+		Create a new buffer object.
 
-		Buffers represent linear arrays of data which are used for various purposes by binding them to the graphics pipeline via descriptor sets or via certain
-		commands, or by directly specifying them as parameters to certain commands.
+		<h5>C Specification</h5>
+		To create buffers, call:
 
-		${ValidityProtos.vkCreateBuffer}
+		<pre><code>VkResult vkCreateBuffer(
+￿    VkDevice                                    device,
+￿    const VkBufferCreateInfo*                   pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkBuffer*                                   pBuffer);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If the {@code flags} member of {@code pCreateInfo} includes #BUFFER_CREATE_SPARSE_BINDING_BIT, creating this {@code VkBuffer} <b>must</b> not cause the total required sparse memory for all currently valid sparse resources on the device to exceed ##VkPhysicalDeviceLimits{@code ::sparseAddressSpaceSize}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkBufferCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pBuffer} <b>must</b> be a pointer to a {@code VkBuffer} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkBufferCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the buffer object"),
-		const..VkBufferCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkBufferCreateInfo structure containing parameters affecting creation of the buffer"
-		),
-		pAllocator,
-		Check(1)..VkBuffer.p.OUT("pBuffer", "points to a {@code VkBuffer} handle in which the resulting buffer object is returned")
+		VkDevice.IN("device", "the logical device that creates the buffer object."),
+		const..VkBufferCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkBufferCreateInfo structure containing parameters affecting creation of the buffer."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkBuffer.p.OUT("pBuffer", "points to a {@code VkBuffer} handle in which the resulting buffer object is returned.")
 	)
 
 	void(
 		"DestroyBuffer",
 		"""
-		Destroys a buffer object.
+		Destroy a buffer object.
 
-		${ValidityProtos.vkDestroyBuffer}
+		<h5>C Specification</h5>
+		To destroy a buffer, call:
+
+		<pre><code>void vkDestroyBuffer(
+￿    VkDevice                                    device,
+￿    VkBuffer                                    buffer,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code buffer}, either directly or via a {@code VkBufferView}, <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code buffer} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code buffer} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code buffer} is not #NULL_HANDLE, {@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code buffer} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code buffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the buffer"),
-		VkBuffer.IN("buffer", "the buffer to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the buffer."),
+		VkBuffer.IN("buffer", "the buffer to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
+
+	// Buffer view commands
 
 	VkResult(
 		"CreateBufferView",
 		"""
-		Creates a new buffer view object.
+		Create a new buffer view object.
 
-		A buffer view represents a contiguous range of a buffer and a specific format to be used to interpret the data. Buffer views are used to enable shaders
-		to access buffer contents interpreted as formatted data. In order to create a valid buffer view, the buffer $must have been created with at least one of
-		the following usage flags:
-		${ul(
-			"#BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT",
-			"#BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT"
-		)}
+		<h5>C Specification</h5>
+		To create a buffer view, call:
 
-		${ValidityProtos.vkCreateBufferView}
+		<pre><code>VkResult vkCreateBufferView(
+￿    VkDevice                                    device,
+￿    const VkBufferViewCreateInfo*               pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkBufferView*                               pView);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkBufferViewCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pView} <b>must</b> be a pointer to a {@code VkBufferView} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkBufferViewCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the buffer view"),
-		const..VkBufferViewCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkBufferViewCreateInfo structure containing parameters to be used to create the buffer"
-		),
-		pAllocator,
-		Check(1)..VkBufferView.p.OUT("pView", "points to a {@code VkBufferView} handle in which the resulting buffer view object is returned")
+		VkDevice.IN("device", "the logical device that creates the buffer view."),
+		const..VkBufferViewCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkBufferViewCreateInfo structure containing parameters to be used to create the buffer."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkBufferView.p.OUT("pView", "points to a {@code VkBufferView} handle in which the resulting buffer view object is returned.")
 	)
 
 	void(
 		"DestroyBufferView",
 		"""
-		Destroys a buffer view object.
+		Destroy a buffer view object.
 
-		${ValidityProtos.vkDestroyBufferView}
+		<h5>C Specification</h5>
+		To destroy a buffer view, call:
+
+		<pre><code>void vkDestroyBufferView(
+￿    VkDevice                                    device,
+￿    VkBufferView                                bufferView,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code bufferView} <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code bufferView} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code bufferView} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code bufferView} is not #NULL_HANDLE, {@code bufferView} <b>must</b> be a valid {@code VkBufferView} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code bufferView} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code bufferView} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the buffer view"),
-		VkBufferView.IN("bufferView", "the buffer view to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the buffer view."),
+		VkBufferView.IN("bufferView", "the buffer view to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
+
+	// Image commands
 
 	VkResult(
 		"CreateImage",
 		"""
-		Creates a new image object.
+		Create a new image object.
 
-		Images represent multidimensional - up to 3 - arrays of data which $can be used for various purposes (e.g. attachments, textures), by binding them to
-		the graphics pipeline via descriptor sets, or by directly specifying them as parameters to certain commands.
+		<h5>C Specification</h5>
+		To create images, call:
 
-		${ValidityProtos.vkCreateImage}
+		<pre><code>VkResult vkCreateImage(
+￿    VkDevice                                    device,
+￿    const VkImageCreateInfo*                    pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkImage*                                    pImage);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If the {@code flags} member of {@code pCreateInfo} includes #IMAGE_CREATE_SPARSE_BINDING_BIT, creating this {@code VkImage} <b>must</b> not cause the total required sparse memory for all currently valid sparse resources on the device to exceed ##VkPhysicalDeviceLimits{@code ::sparseAddressSpaceSize}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkImageCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pImage} <b>must</b> be a pointer to a {@code VkImage} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkImageCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the image"),
-		const..VkImageCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkImageCreateInfo structure containing parameters to be used to create the image"
-		),
-		pAllocator,
-		Check(1)..VkImage.p.OUT("pImage", "points to a {@code VkImage} handle in which the resulting image object is returned")
+		VkDevice.IN("device", "the logical device that creates the image."),
+		const..VkImageCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkImageCreateInfo structure containing parameters to be used to create the image."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkImage.p.OUT("pImage", "points to a {@code VkImage} handle in which the resulting image object is returned.")
 	)
 
 	void(
 		"DestroyImage",
 		"""
-		Destroys an image object.
+		Destroy an image object.
 
-		${ValidityProtos.vkDestroyImage}
+		<h5>C Specification</h5>
+		To destroy an image, call:
+
+		<pre><code>void vkDestroyImage(
+￿    VkDevice                                    device,
+￿    VkImage                                     image,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code image}, either directly or via a {@code VkImageView}, <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code image} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code image} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code image} is not #NULL_HANDLE, {@code image} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code image} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code image} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the image"),
-		VkImage.IN("image", "the image to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the image."),
+		VkImage.IN("image", "the image to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	void(
 		"GetImageSubresourceLayout",
 		"""
-		Queries the layout of an image subresource (mipLevel/arrayLayer) of an image created with linear tiling.
+		Retrieve information about an image subresource.
 
-		${ValidityProtos.vkGetImageSubresourceLayout}
+		<h5>C Specification</h5>
+		To query the host access layout of an image subresource, for an image created with linear tiling, call:
 
-		{@code vkGetImageSubresourceLayout} is invariant for the lifetime of a single image.
+		<pre><code>void vkGetImageSubresourceLayout(
+￿    VkDevice                                    device,
+￿    VkImage                                     image,
+￿    const VkImageSubresource*                   pSubresource,
+￿    VkSubresourceLayout*                        pLayout);</code></pre>
+
+		<h5>Description</h5>
+		#GetImageSubresourceLayout() is invariant for the lifetime of a single image.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code image} <b>must</b> have been created with {@code tiling} equal to #IMAGE_TILING_LINEAR</li>
+			<li>The {@code aspectMask} member of {@code pSubresource} <b>must</b> only have a single bit set</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code pSubresource} <b>must</b> be a pointer to a valid ##VkImageSubresource structure</li>
+			<li>{@code pLayout} <b>must</b> be a pointer to a ##VkSubresourceLayout structure</li>
+			<li>{@code image} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkImageSubresource, ##VkSubresourceLayout
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the image"),
-		VkImage.IN("image", "the image whose layout is being queried"),
-		const..VkImageSubresource_p.IN("pSubresource", "a pointer to a ##VkImageSubresource structure selecting a specific image for the image subresource"),
-		VkSubresourceLayout_p.OUT("pLayout", "points to a ##VkSubresourceLayout structure in which the layout is returned")
+		VkDevice.IN("device", "the logical device that owns the image."),
+		VkImage.IN("image", "the image whose layout is being queried."),
+		const..VkImageSubresource.p.IN("pSubresource", "a pointer to a ##VkImageSubresource structure selecting a specific image for the image subresource."),
+		VkSubresourceLayout.p.OUT("pLayout", "points to a ##VkSubresourceLayout structure in which the layout is returned.")
 	)
+
+	// Image view commands
 
 	VkResult(
 		"CreateImageView",
 		"""
-		Creates an image view from an existing image.
+		Create an image view from an existing image.
 
-		${ValidityProtos.vkCreateImageView}
+		<h5>C Specification</h5>
+		To create an image view, call:
+
+		<pre><code>VkResult vkCreateImageView(
+￿    VkDevice                                    device,
+￿    const VkImageViewCreateInfo*                pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkImageView*                                pView);</code></pre>
+
+		<h5>Description</h5>
+		Some of the image creation parameters are inherited by the view. The remaining parameters are contained in the {@code pCreateInfo}.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkImageViewCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pView} <b>must</b> be a pointer to a {@code VkImageView} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkImageViewCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the image view"),
-		const..VkImageViewCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkImageViewCreateInfo structure containing parameters to be used to create the image view"
-		),
-		pAllocator,
-		Check(1)..VkImageView.p.OUT("pView", "points to a {@code VkImageView} handle in which the resulting image view object is returned")
+		VkDevice.IN("device", "the logical device that creates the image view."),
+		const..VkImageViewCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkImageViewCreateInfo structure containing parameters to be used to create the image view."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkImageView.p.OUT("pView", "points to a {@code VkImageView} handle in which the resulting image view object is returned.")
 	)
 
 	void(
 		"DestroyImageView",
 		"""
-		Destroys an image view object.
+		Destroy an image view object.
 
-		${ValidityProtos.vkDestroyImageView}
+		<h5>C Specification</h5>
+		To destroy an image view, call:
+
+		<pre><code>void vkDestroyImageView(
+￿    VkDevice                                    device,
+￿    VkImageView                                 imageView,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code imageView} <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code imageView} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code imageView} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code imageView} is not #NULL_HANDLE, {@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code imageView} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code imageView} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the image view"),
-		VkImageView.IN("imageView", "the image view to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the image view."),
+		VkImageView.IN("imageView", "the image view to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
+
+	// Shader commands
 
 	VkResult(
 		"CreateShaderModule",
 		"""
 		Creates a new shader module object.
 
-		Shader modules contain shader code and one or more entry points. Shaders are selected from a shader module by specifying an entry point as part of
-		pipeline creation. The stages of a pipeline $can use shaders that come from different modules. The shader code defining a shader module $must be in the
-		SPIR-V format.
+		<h5>C Specification</h5>
+		To create a shader module, call:
 
-		${ValidityProtos.vkCreateShaderModule}
+		<pre><code>VkResult vkCreateShaderModule(
+￿    VkDevice                                    device,
+￿    const VkShaderModuleCreateInfo*             pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkShaderModule*                             pShaderModule);</code></pre>
+
+		<h5>Description</h5>
+		Once a shader module has been created, any entry points it contains <b>can</b> be used in pipeline shader stages as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#pipelines-compute">Compute Pipelines</a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#pipelines-graphics">Graphics Pipelines</a>.
+
+		If the shader stage fails to compile #ERROR_INVALID_SHADER_NV will be generated and the compile log will be reported back to the application by {@code VK_EXT_debug_report} if enabled.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkShaderModuleCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pShaderModule} <b>must</b> be a pointer to a {@code VkShaderModule} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_INVALID_SHADER_NV</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkShaderModuleCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the shader module"),
-		const..VkShaderModuleCreateInfo_p.IN("pCreateInfo", "a pointer to an instance of the ##VkShaderModuleCreateInfo structure"),
-		pAllocator,
-		Check(1)..VkShaderModule.p.OUT("pShaderModule", "points to a {@code VkShaderModule} handle in which the resulting shader module object is returned")
+		VkDevice.IN("device", "the logical device that creates the shader module."),
+		const..VkShaderModuleCreateInfo.p.IN("pCreateInfo", "parameter is a pointer to an instance of the ##VkShaderModuleCreateInfo structure."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkShaderModule.p.OUT("pShaderModule", "points to a {@code VkShaderModule} handle in which the resulting shader module object is returned.")
 	)
 
 	void(
 		"DestroyShaderModule",
 		"""
-		Destroys a shader module object.
+		Destroy a shader module module.
 
-		${ValidityProtos.vkDestroyShaderModule}
+		<h5>C Specification</h5>
+		To destroy a shader module, call:
+
+		<pre><code>void vkDestroyShaderModule(
+￿    VkDevice                                    device,
+￿    VkShaderModule                              shaderModule,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Description</h5>
+		A shader module <b>can</b> be destroyed while pipelines created using its shaders are still in use.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If ##VkAllocationCallbacks were provided when {@code shaderModule} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code shaderModule} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code shaderModule} is not #NULL_HANDLE, {@code shaderModule} <b>must</b> be a valid {@code VkShaderModule} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code shaderModule} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code shaderModule} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the shader module"),
-		VkShaderModule.IN("shaderModule", "the handle of the shader module to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the shader module."),
+		VkShaderModule.IN("shaderModule", "the handle of the shader module to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
+
+	// Pipeline Cache commands
 
 	VkResult(
 		"CreatePipelineCache",
 		"""
-		Creates a new pipeline cache object.
+		Creates a new pipeline cache.
 
-		Pipeline cache objects allow the result of pipeline construction to be reused between pipelines and between runs of an application. Reuse between
-		pipelines is achieved by passing the same pipeline cache object when creating multiple related pipelines. Reuse across runs of an application is
-		achieved by retrieving pipeline cache contents in one run of an application, saving the contents, and using them to preinitialize a pipeline cache on a
-		subsequent run. The contents of the pipeline cache objects are managed by the implementation. Applications $can manage the host memory consumed by a
-		pipeline cache object and control the amount of data retrieved from a pipeline cache object.
+		<h5>C Specification</h5>
+		To create pipeline cache objects, call:
 
-		${note(
-			"""
-			Applications $can track and manage the total host memory size of a pipeline cache object using the {@code pAllocator}. Applications $can limit the
-			amount of data retrieved from a pipeline cache object in #GetPipelineCacheData(). Implementations $should not internally limit the total number of
-			entries added to a pipeline cache object or the total host memory consumed.
-			"""
-		)}
+		<pre><code>VkResult vkCreatePipelineCache(
+￿    VkDevice                                    device,
+￿    const VkPipelineCacheCreateInfo*            pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkPipelineCache*                            pPipelineCache);</code></pre>
 
-		Once created, a pipeline cache $can be passed to the #CreateGraphicsPipelines() and #CreateComputePipelines() commands. If the pipeline cache passed
-		into these commands is not #NULL_HANDLE, the implementation will query it for possible reuse opportunities and update it with new content. The use of
-		the pipeline cache object in these commands is internally synchronized, and the same pipeline cache object $can be used in multiple threads
-		simultaneously.
+		<h5>Description</h5>
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Applications <b>can</b> track and manage the total host memory size of a pipeline cache object using the {@code pAllocator}. Applications <b>can</b> limit the amount of data retrieved from a pipeline cache object in #GetPipelineCacheData(). Implementations <b>should</b> not internally limit the total number of entries added to a pipeline cache object or the total host memory consumed.
+		</div>
 
-		${note(
-			"""
-			Implementations $should make every effort to limit any critical sections to the actual accesses to the cache, which is expected to be significantly
-			shorter than the duration of the {@code vkCreateGraphicsPipelines} and {@code vkCreateComputePipelines} commands.
-			"""
-		)}
+		Once created, a pipeline cache <b>can</b> be passed to the #CreateGraphicsPipelines() and #CreateComputePipelines() commands. If the pipeline cache passed into these commands is not #NULL_HANDLE, the implementation will query it for possible reuse opportunities and update it with new content. The use of the pipeline cache object in these commands is internally synchronized, and the same pipeline cache object <b>can</b> be used in multiple threads simultaneously.
 
-		${ValidityProtos.vkCreatePipelineCache}
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Implementations <b>should</b> make every effort to limit any critical sections to the actual accesses to the cache, which is expected to be significantly shorter than the duration of the #CreateGraphicsPipelines() and #CreateComputePipelines() commands.
+		</div>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkPipelineCacheCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pPipelineCache} <b>must</b> be a pointer to a {@code VkPipelineCache} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkPipelineCacheCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the pipeline cache object"),
-		const..VkPipelineCacheCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to a ##VkPipelineCacheCreateInfo structure that contains the initial parameters for the pipeline cache object"
-		),
-		pAllocator,
-		Check(1)..VkPipelineCache.p.OUT(
-			"pPipelineCache",
-			"a pointer to a {@code VkPipelineCache} handle in which the resulting pipeline cache object is returned"
-		)
+		VkDevice.IN("device", "the logical device that creates the pipeline cache object."),
+		const..VkPipelineCacheCreateInfo.p.IN("pCreateInfo", "a pointer to a ##VkPipelineCacheCreateInfo structure that contains the initial parameters for the pipeline cache object."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkPipelineCache.p.OUT("pPipelineCache", "a pointer to a {@code VkPipelineCache} handle in which the resulting pipeline cache object is returned.")
 	)
 
 	void(
 		"DestroyPipelineCache",
 		"""
-		Destroys a pipeline cache object.
+		Destroy a pipeline cache object.
 
-		${ValidityProtos.vkDestroyPipelineCache}
+		<h5>C Specification</h5>
+		To destroy a pipeline cache, call:
+
+		<pre><code>void vkDestroyPipelineCache(
+￿    VkDevice                                    device,
+￿    VkPipelineCache                             pipelineCache,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If ##VkAllocationCallbacks were provided when {@code pipelineCache} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code pipelineCache} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code pipelineCache} is not #NULL_HANDLE, {@code pipelineCache} <b>must</b> be a valid {@code VkPipelineCache} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code pipelineCache} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code pipelineCache} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", ""),
-		VkPipelineCache.IN("pipelineCache", ""),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the pipeline cache object."),
+		VkPipelineCache.IN("pipelineCache", "the handle of the pipeline cache to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	VkResult(
 		"GetPipelineCacheData",
 		"""
-		Retrieves data from a pipeline cache object.
+		Get the data store from a pipeline cache.
 
-		If {@code pData} is $NULL, then the maximum size of the data that $can be retrieved from the pipeline cache, in bytes, is returned in {@code pDataSize}.
-		Otherwise, {@code pDataSize} $must point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return
-		the variable is overwritten with the amount of data actually written to {@code pData}.
+		<h5>C Specification</h5>
+		Data <b>can</b> be retrieved from a pipeline cache object using the command:
 
-		If {@code dataSize} is less than the maximum size that $can be retrieved by the pipeline cache, at most {@code pDataSize} bytes will be written to
-		{@code pData}, and {@code vkGetPipelineCacheData} will return #INCOMPLETE. Any data written to {@code pData} is valid and $can be provided as the
-		{@code pInitialData} member of the ##VkPipelineCacheCreateInfo structure passed to #CreatePipelineCache().
+		<pre><code>VkResult vkGetPipelineCacheData(
+￿    VkDevice                                    device,
+￿    VkPipelineCache                             pipelineCache,
+￿    size_t*                                     pDataSize,
+￿    void*                                       pData);</code></pre>
 
-		${ValidityProtos.vkGetPipelineCacheData}
+		<h5>Description</h5>
+		If {@code pData} is {@code NULL}, then the maximum size of the data that <b>can</b> be retrieved from the pipeline cache, in bytes, is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the amount of data actually written to {@code pData}.
 
-		Applications $can store the data retrieved from the pipeline cache, and use these data, possibly in a future run of the application, to populate new
-		pipeline cache objects. The results of pipeline compiles, however, $may depend on the vendor ID, device ID, driver version, and other details of the
-		device. To enable applications to detect when previously retrieved data is incompatible with the device, the initial bytes written to {@code pData}
-		$must be a header consisting of the following members:
-		${table(
-			tr(th("Offset"), th("Size"), th("Meaning")),
-			tr(td("0"), td("4"), td("length in bytes of the entire pipeline cache header written as a stream of bytes, with the least significant byte first")),
-			tr(td("4"), td("4"), td("a {@code VkPipelineCacheHeaderVersion} value written as a stream of bytes, with the least significant byte first")),
-			tr(td("8"), td("4"), td("a vendor ID equal to ##VkPhysicalDeviceProperties{@code ::vendorID} written as a stream of bytes, with the least significant byte first")),
-			tr(td("12"), td("4"), td("a device ID equal to {@code VkPhysicalDeviceProperties::deviceID} written as a stream of bytes, with the least significant byte first")),
-			tr(td("16"), td("#UUID_SIZE"), td("a pipeline cache ID equal to {@code VkPhysicalDeviceProperties::pipelineCacheUUID}"))
-		)}
+		If {@code pDataSize} is less than the maximum size that <b>can</b> be retrieved by the pipeline cache, at most {@code pDataSize} bytes will be written to {@code pData}, and #GetPipelineCacheData() will return #INCOMPLETE. Any data written to {@code pData} is valid and <b>can</b> be provided as the {@code pInitialData} member of the ##VkPipelineCacheCreateInfo structure passed to #CreatePipelineCache().
 
-		The first four bytes encode the length of the entire pipeline header, in bytes. This value includes all fields in the header including the pipeline
-		cache version field and the size of the length field.
+		Two calls to #GetPipelineCacheData() with the same parameters <b>must</b> retrieve the same data unless a command that modifies the contents of the cache is called between them.
 
-		The next four bytes encode the pipeline cache version. This field is interpreted as an {@code VkPipelineCacheHeaderVersion} value, and $must have one of
-		the following values:
-		${codeBlock("""
-typedef enum VkPipelineCacheHeaderVersion {
-	VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1,
-} VkPipelineCacheHeaderVersion;
-		""")}
-		A consumer of the pipeline cache $should use the cache version to interpret the remainder of the cache header.
+		Applications <b>can</b> store the data retrieved from the pipeline cache, and use these data, possibly in a future run of the application, to populate new pipeline cache objects. The results of pipeline compiles, however, <b>may</b> depend on the vendor ID, device ID, driver version, and other details of the device. To enable applications to detect when previously retrieved data is incompatible with the device, the initial bytes written to {@code pData} <b>must</b> be a header consisting of the following members:
 
-		If {@code dataSize} is less than what is necessary to store this header, nothing will be written to {@code pData} and zero will be written to
-		{@code dataSize}.
+		<h6>Layout for pipeline cache header version ename:VK_PIPELINE_CACHE_HEADER_VERSION_ONE</h6>
+		<table class="lwjgl">
+			<thead><tr><th>Offset</th><th>Size</th><th>Meaning</th></tr></thead>
+			<tbody>
+				<tr><td>0</td><td>4</td><td>length in bytes of the entire pipeline cache header written as a stream of bytes, with the least significant byte first</td></tr>
+				<tr><td>4</td><td>4</td><td>a {@code VkPipelineCacheHeaderVersion} value written as a stream of bytes, with the least significant byte first</td></tr>
+				<tr><td>8</td><td>4</td><td>a vendor ID equal to ##VkPhysicalDeviceProperties{@code ::vendorID} written as a stream of bytes, with the least significant byte first</td></tr>
+				<tr><td>12</td><td>4</td><td>a device ID equal to ##VkPhysicalDeviceProperties{@code ::deviceID} written as a stream of bytes, with the least significant byte first</td></tr>
+				<tr><td>16</td><td>#UUID_SIZE</td><td>a pipeline cache ID equal to ##VkPhysicalDeviceProperties{@code ::pipelineCacheUUID}</td></tr>
+			</tbody>
+		</table>
+
+		The first four bytes encode the length of the entire pipeline header, in bytes. This value includes all fields in the header including the pipeline cache version field and the size of the length field.
+
+		The next four bytes encode the pipeline cache version. This field is interpreted as a {@code VkPipelineCacheHeaderVersion} value, and <b>must</b> have one of the following values:
+
+		<pre><code>typedef enum VkPipelineCacheHeaderVersion {
+￿    VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1,
+} VkPipelineCacheHeaderVersion;</code></pre>
+
+		A consumer of the pipeline cache <b>should</b> use the cache version to interpret the remainder of the cache header.
+
+		If {@code pDataSize} is less than what is necessary to store this header, nothing will be written to {@code pData} and zero will be written to {@code pDataSize}.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pipelineCache} <b>must</b> be a valid {@code VkPipelineCache} handle</li>
+			<li>{@code pDataSize} <b>must</b> be a pointer to a {@code size_t} value</li>
+			<li>If the value referenced by {@code pDataSize} is not 0, and {@code pData} is not {@code NULL}, {@code pData} <b>must</b> be a pointer to an array of {@code pDataSize} bytes</li>
+			<li>{@code pipelineCache} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+				<li>#INCOMPLETE</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the pipeline cache"),
-		VkPipelineCache.IN("pipelineCache", "the pipeline cache to retrieve data from"),
-		AutoSize("pData")..Check(1)..size_t_p.INOUT("pDataSize", "a pointer to a value related to the amount of data in the pipeline cache"),
-		nullable..void_p.OUT("pData", "either $NULL or a pointer to a buffer")
+		VkDevice.IN("device", "the logical device that owns the pipeline cache."),
+		VkPipelineCache.IN("pipelineCache", "the pipeline cache to retrieve data from."),
+		AutoSize("pData")..Check(1)..size_t_p.INOUT("pDataSize", "a pointer to a value related to the amount of data in the pipeline cache, as described below."),
+		nullable..void_p.OUT("pData", "either {@code NULL} or a pointer to a buffer.")
 	)
 
 	VkResult(
 		"MergePipelineCaches",
 		"""
-		Merges pipeline cache objects.
+		Combine the data stores of pipeline caches.
 
-		${note(
-			"""
-			The details of the merge operation are implementation dependent, but implementations $should merge the contents of the specified pipelines and prune
-			duplicate entries.
-			"""
-		)}
+		<h5>C Specification</h5>
+		Pipeline cache objects <b>can</b> be merged using the command:
 
-		${ValidityProtos.vkMergePipelineCaches}
+		<pre><code>VkResult vkMergePipelineCaches(
+￿    VkDevice                                    device,
+￿    VkPipelineCache                             dstCache,
+￿    uint32_t                                    srcCacheCount,
+￿    const VkPipelineCache*                      pSrcCaches);</code></pre>
+
+		<h5>Description</h5>
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		The details of the merge operation are implementation dependent, but implementations <b>should</b> merge the contents of the specified pipelines and prune duplicate entries.
+		</div>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code dstCache} <b>must</b> not appear in the list of source caches</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code dstCache} <b>must</b> be a valid {@code VkPipelineCache} handle</li>
+			<li>{@code pSrcCaches} <b>must</b> be a pointer to an array of {@code srcCacheCount} valid {@code VkPipelineCache} handles</li>
+			<li>{@code srcCacheCount} <b>must</b> be greater than 0</li>
+			<li>{@code dstCache} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+			<li>Each element of {@code pSrcCaches} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code dstCache} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the pipeline cache objects"),
-		VkPipelineCache.IN("dstCache", "the handle of the pipeline cache to merge results into"),
-		AutoSize("pSrcCaches")..uint32_t.IN("srcCacheCount", "the length of the {@code pSrcCaches} array"),
-		const..VkPipelineCache.p.IN(
-			"pSrcCaches",
-			"""
-			an array of pipeline cache handles, which will be merged into {@code dstCache}. The previous contents of {@code dstCache} are included after the
-			merge.
-			"""
-		)
+		VkDevice.IN("device", "the logical device that owns the pipeline cache objects."),
+		VkPipelineCache.IN("dstCache", "the handle of the pipeline cache to merge results into."),
+		AutoSize("pSrcCaches")..uint32_t.IN("srcCacheCount", "the length of the {@code pSrcCaches} array."),
+		const..VkPipelineCache.p.IN("pSrcCaches", "an array of pipeline cache handles, which will be merged into {@code dstCache}. The previous contents of {@code dstCache} are included after the merge.")
 	)
+
+	// Pipeline commands
 
 	VkResult(
 		"CreateGraphicsPipelines",
 		"""
-		Creates graphics pipelines.
+		Create graphics pipelines.
 
-		Graphics pipelines consist of multiple shader stages, multiple fixed-function pipeline stages, and a pipeline layout.
+		<h5>C Specification</h5>
+		To create graphics pipelines, call:
 
-		${ValidityProtos.vkCreateGraphicsPipelines}
+		<pre><code>VkResult vkCreateGraphicsPipelines(
+￿    VkDevice                                    device,
+￿    VkPipelineCache                             pipelineCache,
+￿    uint32_t                                    createInfoCount,
+￿    const VkGraphicsPipelineCreateInfo*         pCreateInfos,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkPipeline*                                 pPipelines);</code></pre>
+
+		<h5>Description</h5>
+		The ##VkGraphicsPipelineCreateInfo structure includes an array of shader create info structures containing all the desired active shader stages, as well as creation info to define all relevant fixed-function stages, and a pipeline layout.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If the {@code flags} member of any given element of {@code pCreateInfos} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and the {@code basePipelineIndex} member of that same element is not {@code -1}, {@code basePipelineIndex} <b>must</b> be less than the index into {@code pCreateInfos} that corresponds to that element</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code pipelineCache} is not #NULL_HANDLE, {@code pipelineCache} <b>must</b> be a valid {@code VkPipelineCache} handle</li>
+			<li>{@code pCreateInfos} <b>must</b> be a pointer to an array of {@code createInfoCount} valid ##VkGraphicsPipelineCreateInfo structures</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pPipelines} <b>must</b> be a pointer to an array of {@code createInfoCount} {@code VkPipeline} handles</li>
+			<li>{@code createInfoCount} <b>must</b> be greater than 0</li>
+			<li>If {@code pipelineCache} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_INVALID_SHADER_NV</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkGraphicsPipelineCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the graphics pipelines"),
-		VkPipelineCache.IN(
-			"pipelineCache",
-			"""
-			either #NULL_HANDLE, indicating that pipeline caching is disabled; or the handle of a valid pipeline cache object, in which case use of that cache
-			is enabled for the duration of the command
-			"""
-		),
-		AutoSize("pCreateInfos", "pPipelines")..uint32_t.IN("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays."),
-		const..VkGraphicsPipelineCreateInfo_p.IN("pCreateInfos", "an array of ##VkGraphicsPipelineCreateInfo structures"),
-		pAllocator,
-		VkPipeline.p.OUT("pPipelines", "a pointer to an array in which the resulting graphics pipeline objects are returned")
+		VkDevice.IN("device", "the logical device that creates the graphics pipelines."),
+		VkPipelineCache.IN("pipelineCache", "either #NULL_HANDLE, indicating that pipeline caching is disabled; or the handle of a valid <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#pipelines-cache\">pipeline cache</a> object, in which case use of that cache is enabled for the duration of the command."),
+		AutoSize("pCreateInfos","pPipelines")..uint32_t.IN("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays."),
+		const..VkGraphicsPipelineCreateInfo.p.IN("pCreateInfos", "an array of ##VkGraphicsPipelineCreateInfo structures."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		VkPipeline.p.OUT("pPipelines", "a pointer to an array in which the resulting graphics pipeline objects are returned.")
 	)
 
 	VkResult(
@@ -3378,229 +5822,370 @@ typedef enum VkPipelineCacheHeaderVersion {
 		"""
 		Creates a new compute pipeline object.
 
-		Compute pipelines consist of a single static compute shader stage and the pipeline layout.
+		<h5>C Specification</h5>
+		To create compute pipelines, call:
 
-		The compute pipeline encapsulates a compute shader and is created by calling {@code vkCreateComputePipelines} with {@code module} and {@code pName}
-		selecting an entry point from a shader module, where that entry point defines a valid compute shader, in the ##VkPipelineShaderStageCreateInfo
-		structure contained within the ##VkComputePipelineCreateInfo structure.
+		<pre><code>VkResult vkCreateComputePipelines(
+￿    VkDevice                                    device,
+￿    VkPipelineCache                             pipelineCache,
+￿    uint32_t                                    createInfoCount,
+￿    const VkComputePipelineCreateInfo*          pCreateInfos,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkPipeline*                                 pPipelines);</code></pre>
 
-		${ValidityProtos.vkCreateComputePipelines}
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If the {@code flags} member of any given element of {@code pCreateInfos} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and the {@code basePipelineIndex} member of that same element is not {@code -1}, {@code basePipelineIndex} <b>must</b> be less than the index into {@code pCreateInfos} that corresponds to that element</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code pipelineCache} is not #NULL_HANDLE, {@code pipelineCache} <b>must</b> be a valid {@code VkPipelineCache} handle</li>
+			<li>{@code pCreateInfos} <b>must</b> be a pointer to an array of {@code createInfoCount} valid ##VkComputePipelineCreateInfo structures</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pPipelines} <b>must</b> be a pointer to an array of {@code createInfoCount} {@code VkPipeline} handles</li>
+			<li>{@code createInfoCount} <b>must</b> be greater than 0</li>
+			<li>If {@code pipelineCache} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_INVALID_SHADER_NV</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkComputePipelineCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the compute pipelines"),
-		VkPipelineCache.IN(
-			"pipelineCache",
-			"""
-			either #NULL_HANDLE, indicating that pipeline caching is disabled; or the handle of a valid pipeline cache object, in which case use of that cache
-			is enabled for the duration of the command
-			"""
-		),
-		AutoSize("pCreateInfos", "pPipelines")..uint32_t.IN("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays"),
-		const..VkComputePipelineCreateInfo_p.IN("pCreateInfos", "an array of ##VkComputePipelineCreateInfo structures"),
-		pAllocator,
-		VkPipeline.p.OUT("pPipelines", "a pointer to an array in which the resulting compute pipeline objects are returned")
+		VkDevice.IN("device", "the logical device that creates the compute pipelines."),
+		VkPipelineCache.IN("pipelineCache", "either #NULL_HANDLE, indicating that pipeline caching is disabled; or the handle of a valid <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#pipelines-cache\">pipeline cache</a> object, in which case use of that cache is enabled for the duration of the command."),
+		AutoSize("pCreateInfos","pPipelines")..uint32_t.IN("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays."),
+		const..VkComputePipelineCreateInfo.p.IN("pCreateInfos", "an array of ##VkComputePipelineCreateInfo structures."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		VkPipeline.p.OUT("pPipelines", """a pointer to an array in which the resulting compute pipeline objects are returned.
+""")
 	)
 
 	void(
 		"DestroyPipeline",
 		"""
-		Destroys a graphics or compute pipeline object.
+		Destroy a pipeline object.
 
-		${ValidityProtos.vkDestroyPipeline}
+		<h5>C Specification</h5>
+		To destroy a graphics or compute pipeline, call:
+
+		<pre><code>void vkDestroyPipeline(
+￿    VkDevice                                    device,
+￿    VkPipeline                                  pipeline,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code pipeline} <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code pipeline} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code pipeline} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code pipeline} is not #NULL_HANDLE, {@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code pipeline} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code pipeline} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the pipeline"),
-		VkPipeline.IN("pipeline", "the handle of the pipeline to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the pipeline."),
+		VkPipeline.IN("pipeline", "the handle of the pipeline to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
+
+	// Pipeline layout commands
 
 	VkResult(
 		"CreatePipelineLayout",
 		"""
 		Creates a new pipeline layout object.
 
-		Access to descriptor sets from a pipeline is accomplished through a pipeline layout. Zero or more descriptor set layouts and zero or more push constant
-		ranges are combined to form a pipeline layout object which describes the complete set of resources that $can be accessed by a pipeline. The pipeline
-		layout represents a sequence of descriptor sets with each having a specific layout. This sequence of layouts is used to determine the interface between
-		shader stages and shader resources. Each pipeline is created using a pipeline layout.
+		<h5>C Specification</h5>
+		To create a pipeline layout, call:
 
-		${ValidityProtos.vkCreatePipelineLayout}
+		<pre><code>VkResult vkCreatePipelineLayout(
+￿    VkDevice                                    device,
+￿    const VkPipelineLayoutCreateInfo*           pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkPipelineLayout*                           pPipelineLayout);</code></pre>
 
-		Once created, pipeline layouts are used as part of pipeline creation, as part of binding descriptor sets, and as part of setting push constants.
-		Pipeline creation accepts a pipeline layout as input, and the layout $may be used to map (set, binding, arrayElement) tuples to hardware resources or
-		memory locations within a descriptor set. The assignment of hardware resources depends only on the bindings defined in the descriptor sets that
-		comprise the pipeline layout, and not on any shader source.
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkPipelineLayoutCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pPipelineLayout} <b>must</b> be a pointer to a {@code VkPipelineLayout} handle</li>
+		</ul>
 
-		All resource variables statically used in all shaders in a pipeline $must be declared with a (set, binding, arrayElement) that exists in the
-		corresponding descriptor set layout and is of an appropriate descriptor type and includes the set of shader stages it is used by in {@code stageFlags}.
-		The pipeline layout $can include entries that are not used by a particular pipeline, or that are dead-code eliminated from any of the shaders. The
-		pipeline layout allows the application to provide a consistent set of bindings across multiple pipeline compiles, which enables those pipelines to be
-		compiled in a way that the implementation $may cheaply switch pipelines without reprogramming the bindings.
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
 
-		Similarly, the push constant block declared in each shader (if present) $must only place variables at offsets that are each included in a push constant
-		range with {@code stageFlags} including the bit corresponding to the shader stage that uses it. The pipeline layout $can include ranges or portions of
-		ranges that are not used by a particular pipeline, or for which the variables have been dead-code eliminated from any of the shaders.
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 
-		There is a limit on the total number of resources of each type that $can be included in bindings in all descriptor set layouts in a pipeline layout as
-		shown in the table below. The “Total Resources Available” column gives the limit on the number of each type of resource that $can be included in
-		bindings in all descriptor sets in the pipeline layout. Some resource types count against multiple limits. Additionally, there are limits on the total
-		number of each type of resource that $can be used in any pipeline stage.
-		${table(
-			tr(th("Total Resources Available"), th("Resource Types")),
-
-			tr(td("maxDescriptorSetSamplers", rowspan = 2), td("sampler")),
-			tr(td("combined image sampler")),
-
-			tr(td("maxDescriptorSetSampledImages", rowspan = 3), td("sampled image")),
-			tr(td("combined image sampler")),
-			tr(td("uniform texel buffer")),
-
-			tr(td("maxDescriptorSetStorageImages", rowspan = 2), td("storage image")),
-			tr(td("storage texel buffer")),
-
-			tr(td("maxDescriptorSetUniformBuffers", rowspan = 2), td("uniform buffer")),
-			tr(td("uniform buffer dynamic")),
-
-			tr(td("maxDescriptorSetUniformBuffersDynamic"), td("uniform buffer dynamic")),
-
-			tr(td("maxDescriptorSetStorageBuffers", rowspan = 2), td("storage buffer")),
-			tr(td("storage buffer dynamic")),
-
-			tr(td("maxDescriptorSetStorageBuffersDynamic"), td("storage buffer dynamic")),
-
-			tr(td("maxDescriptorSetInputAttachments"), td("input attachment"))
-		)}
-
-		<h5>Pipeline Layout Compatibility</h5>
-
-		Two pipeline layouts are defined to be “compatible for push constants” if they were created with identical push constant ranges. Two pipeline layouts
-		are defined to be “compatible for set N” if they were created with matching (the same, or identically defined) descriptor set layouts for sets zero
-		through N, and if they were created with identical push constant ranges.
-
-		When binding a descriptor set  to set number N, if the previously bound descriptor sets for sets zero through N-1 were all bound using compatible
-		pipeline layouts, then performing this binding does not disturb any of the lower numbered sets. If, additionally, the previous bound descriptor set for
-		set N was bound using a pipeline layout compatible for set N, then the bindings in sets numbered greater than N are also not disturbed.
-
-		Similarly, when binding a pipeline, the pipeline $can correctly access any previously bound descriptor sets which were bound with compatible pipeline
-		layouts, as long as all lower numbered sets were also bound with compatible layouts.
-
-		Layout compatibility means that descriptor sets $can be bound to a command buffer for use by any pipeline created with a compatible pipeline layout,
-		and without having bound a particular pipeline first. It also means that descriptor sets $can remain valid across a pipeline change, and the same
-		resources will be accessible to the newly bound pipeline.
-
-		${note(
-			"""
-			A consequence of layout compatibility is that when the implementation compiles a pipeline layout and assigns hardware units to resources, the
-			mechanism to assign hardware units for set N $should only be a function of sets [0..N].
-			""",
-			"Implementor’s Note"
-		)}
-
-		${note(
-			"""
-			Place the least frequently changing descriptor sets near the start of the pipeline layout, and place the descriptor sets representing the most
-			frequently changing resources near the end. When pipelines are switched, only the descriptor set bindings that have been invalidated will need to
-			be updated and the remainder of the descriptor set bindings will remain in place.
-			"""
-		)}
-
-		The maximum number of descriptor sets that $can be bound to a pipeline layout is queried from physical device properties (see
-		##VkPhysicalDeviceLimits{@code ::maxBoundDescriptorSets}).
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkPipelineLayoutCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the pipeline layout"),
-		const..VkPipelineLayoutCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkPipelineLayoutCreateInfo structure specifying the state of the pipeline layout object"
-		),
-		pAllocator,
-		Check(1)..VkPipelineLayout.p.OUT(
-			"pPipelineLayout",
-			"points to a {@code VkPipelineLayout} handle in which the resulting pipeline layout object is returned"
-		)
+		VkDevice.IN("device", "the logical device that creates the pipeline layout."),
+		const..VkPipelineLayoutCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkPipelineLayoutCreateInfo structure specifying the state of the pipeline layout object."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkPipelineLayout.p.OUT("pPipelineLayout", "points to a {@code VkPipelineLayout} handle in which the resulting pipeline layout object is returned.")
 	)
 
 	void(
 		"DestroyPipelineLayout",
 		"""
-		Destroys a pipeline layout object.
+		Destroy a pipeline layout object.
 
-		${ValidityProtos.vkDestroyPipelineLayout}
+		<h5>C Specification</h5>
+		To destroy a pipeline layout, call:
+
+		<pre><code>void vkDestroyPipelineLayout(
+￿    VkDevice                                    device,
+￿    VkPipelineLayout                            pipelineLayout,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If ##VkAllocationCallbacks were provided when {@code pipelineLayout} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code pipelineLayout} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code pipelineLayout} is not #NULL_HANDLE, {@code pipelineLayout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code pipelineLayout} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code pipelineLayout} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the pipeline layout"),
-		VkPipelineLayout.IN("pipelineLayout", "the pipeline layout to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the pipeline layout."),
+		VkPipelineLayout.IN("pipelineLayout", "the pipeline layout to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
+
+	// Sampler commands
 
 	VkResult(
 		"CreateSampler",
 		"""
-		Creates a new sampler object.
+		Create a new sampler object.
 
-		{@code VkSampler} objects encapsulate the state of an image sampler which is used by the implementation to read image data and apply filtering and
-		other transformations for the shader.
+		<h5>C Specification</h5>
+		To create a sampler object, call:
 
-		${ValidityProtos.vkCreateSampler}
+		<pre><code>VkResult vkCreateSampler(
+￿    VkDevice                                    device,
+￿    const VkSamplerCreateInfo*                  pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkSampler*                                  pSampler);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkSamplerCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pSampler} <b>must</b> be a pointer to a {@code VkSampler} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_TOO_MANY_OBJECTS</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkSamplerCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the sampler"),
-		const..VkSamplerCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkSamplerCreateInfo structure specifying the state of the sampler object"
-		),
-		pAllocator,
-		Check(1)..VkSampler.p.OUT("pSampler", "points to a {@code VkSampler} handle in which the resulting sampler object is returned")
+		VkDevice.IN("device", "the logical device that creates the sampler."),
+		const..VkSamplerCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkSamplerCreateInfo structure specifying the state of the sampler object."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkSampler.p.OUT("pSampler", "points to a {@code VkSampler} handle in which the resulting sampler object is returned.")
 	)
 
 	void(
 		"DestroySampler",
 		"""
-		Destroys a sampler object.
+		Destroy a sampler object.
 
-		${ValidityProtos.vkDestroySampler}
+		<h5>C Specification</h5>
+		To destroy a sampler, call:
+
+		<pre><code>void vkDestroySampler(
+￿    VkDevice                                    device,
+￿    VkSampler                                   sampler,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code sampler} <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code sampler} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code sampler} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code sampler} is not #NULL_HANDLE, {@code sampler} <b>must</b> be a valid {@code VkSampler} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code sampler} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code sampler} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the sampler"),
-		VkSampler.IN("sampler", "the sampler to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the sampler."),
+		VkSampler.IN("sampler", "the sampler to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
+
+	// Descriptor set commands
 
 	VkResult(
 		"CreateDescriptorSetLayout",
 		"""
-		Creates a new descriptor set layout object.
+		Create a new descriptor set layout.
 
-		A descriptor set layout object is defined by an array of zero or more descriptor bindings. Each individual descriptor binding is specified by a
-		descriptor type, a count (array size) of the number of descriptors in the binding, a set of shader stages that $can access the binding, and (if using
-		immutable samplers) an array of sampler descriptors.
+		<h5>C Specification</h5>
+		To create descriptor set layout objects, call:
 
-		${ValidityProtos.vkCreateDescriptorSetLayout}
+		<pre><code>VkResult vkCreateDescriptorSetLayout(
+￿    VkDevice                                    device,
+￿    const VkDescriptorSetLayoutCreateInfo*      pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkDescriptorSetLayout*                      pSetLayout);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkDescriptorSetLayoutCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pSetLayout} <b>must</b> be a pointer to a {@code VkDescriptorSetLayout} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkDescriptorSetLayoutCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the descriptor set layout"),
-		const..VkDescriptorSetLayoutCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkDescriptorSetLayoutCreateInfo structure specifying the state of the descriptor set layout object"
-		),
-		pAllocator,
-		Check(1)..VkDescriptorSetLayout.p.OUT(
-			"pSetLayout",
-			"points to a {@code VkDescriptorSetLayout} handle in which the resulting descriptor set layout object is returned"
-		)
+		VkDevice.IN("device", "the logical device that creates the descriptor set layout."),
+		const..VkDescriptorSetLayoutCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkDescriptorSetLayoutCreateInfo structure specifying the state of the descriptor set layout object."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkDescriptorSetLayout.p.OUT("pSetLayout", "points to a {@code VkDescriptorSetLayout} handle in which the resulting descriptor set layout object is returned.")
 	)
 
 	void(
 		"DestroyDescriptorSetLayout",
 		"""
-		Destroys a descriptor set layout object.
+		Destroy a descriptor set layout object.
 
-		${ValidityProtos.vkDestroyDescriptorSetLayout}
+		<h5>C Specification</h5>
+		To destroy a descriptor set layout, call:
+
+		<pre><code>void vkDestroyDescriptorSetLayout(
+￿    VkDevice                                    device,
+￿    VkDescriptorSetLayout                       descriptorSetLayout,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If ##VkAllocationCallbacks were provided when {@code descriptorSetLayout} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code descriptorSetLayout} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code descriptorSetLayout} is not #NULL_HANDLE, {@code descriptorSetLayout} <b>must</b> be a valid {@code VkDescriptorSetLayout} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code descriptorSetLayout} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code descriptorSetLayout} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the descriptor set layout"),
-		VkDescriptorSetLayout.IN("descriptorSetLayout", "the descriptor set layout to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the descriptor set layout."),
+		VkDescriptorSetLayout.IN("descriptorSetLayout", "the descriptor set layout to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	VkResult(
@@ -3608,36 +6193,95 @@ typedef enum VkPipelineCacheHeaderVersion {
 		"""
 		Creates a descriptor pool object.
 
-		Descriptor sets are allocated from descriptor pool objects. A descriptor pool maintains a pool of descriptors, from which sets are allocated.
-		Descriptor pools are externally synchronized, meaning that the application $must not allocate and/or free descriptor sets from the same pool in multiple
-		threads simultaneously.
+		<h5>C Specification</h5>
+		To create a descriptor pool object, call:
 
-		${ValidityProtos.vkCreateDescriptorPool}
+		<pre><code>VkResult vkCreateDescriptorPool(
+￿    VkDevice                                    device,
+￿    const VkDescriptorPoolCreateInfo*           pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkDescriptorPool*                           pDescriptorPool);</code></pre>
+
+		<h5>Description</h5>
+		{@code pAllocator} controls host memory allocation as described in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#memory-allocation"> Memory Allocation</a> chapter.
+
+		The created descriptor pool is returned in {@code pDescriptorPool}.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkDescriptorPoolCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pDescriptorPool} <b>must</b> be a pointer to a {@code VkDescriptorPool} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkDescriptorPoolCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the descriptor pool"),
-		const..VkDescriptorPoolCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkDescriptorPoolCreateInfo structure specifying the state of the descriptor pool object"
-		),
-		pAllocator,
-		Check(1)..VkDescriptorPool.p.OUT("pDescriptorPool", "points to a {@code VkDescriptorPool} handle in which the resulting descriptor pool object is returned")
+		VkDevice.IN("device", "the logical device that creates the descriptor pool."),
+		const..VkDescriptorPoolCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkDescriptorPoolCreateInfo structure specifying the state of the descriptor pool object."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkDescriptorPool.p.OUT("pDescriptorPool", "points to a {@code VkDescriptorPool} handle in which the resulting descriptor pool object is returned.")
 	)
 
 	void(
 		"DestroyDescriptorPool",
 		"""
-		Destroys a descriptor pool object.
+		Destroy a descriptor pool object.
 
-		When a pool is destroyed, all descriptor sets allocated from the pool are implicitly freed and become invalid. Descriptor sets allocated from a given
-		pool do not need to be freed before destroying that descriptor pool.
+		<h5>C Specification</h5>
+		To destroy a descriptor pool, call:
 
-		${ValidityProtos.vkDestroyDescriptorPool}
+		<pre><code>void vkDestroyDescriptorPool(
+￿    VkDevice                                    device,
+￿    VkDescriptorPool                            descriptorPool,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Description</h5>
+		When a pool is destroyed, all descriptor sets allocated from the pool are implicitly freed and become invalid. Descriptor sets allocated from a given pool do not need to be freed before destroying that descriptor pool.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code descriptorPool} (via any allocated descriptor sets) <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code descriptorPool} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code descriptorPool} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code descriptorPool} is not #NULL_HANDLE, {@code descriptorPool} <b>must</b> be a valid {@code VkDescriptorPool} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code descriptorPool} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code descriptorPool} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the descriptor pool"),
-		VkDescriptorPool.IN("descriptorPool", "the descriptor pool to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the descriptor pool."),
+		VkDescriptorPool.IN("descriptorPool", "the descriptor pool to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	VkResult(
@@ -3645,611 +6289,1362 @@ typedef enum VkPipelineCacheHeaderVersion {
 		"""
 		Resets a descriptor pool object.
 
-		Rather than freeing individual descriptor sets, all descriptor sets allocated from a given pool $can be returned to the pool by calling this function.
+		<h5>C Specification</h5>
+		To return all descriptor sets allocated from a given pool to the pool, rather than freeing individual descriptor sets, call:
 
-		Resetting a descriptor pool recycles all of the resources from all of the descriptor sets allocated from the descriptor pool back to the descriptor
-		pool, and the descriptor sets are implicitly freed.
+		<pre><code>VkResult vkResetDescriptorPool(
+￿    VkDevice                                    device,
+￿    VkDescriptorPool                            descriptorPool,
+￿    VkDescriptorPoolResetFlags                  flags);</code></pre>
 
-		${ValidityProtos.vkResetDescriptorPool}
+		<h5>Description</h5>
+		Resetting a descriptor pool recycles all of the resources from all of the descriptor sets allocated from the descriptor pool back to the descriptor pool, and the descriptor sets are implicitly freed.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All uses of {@code descriptorPool} (via any allocated descriptor sets) <b>must</b> have completed execution</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code descriptorPool} <b>must</b> be a valid {@code VkDescriptorPool} handle</li>
+			<li>{@code flags} <b>must</b> be 0</li>
+			<li>{@code descriptorPool} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code descriptorPool} <b>must</b> be externally synchronized</li>
+			<li>Host access to any {@code VkDescriptorSet} objects allocated from {@code descriptorPool} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the descriptor pool"),
-		VkDescriptorPool.IN("descriptorPool", "the descriptor pool to be reset"),
-		VkDescriptorPoolResetFlags.IN("flags", "is currently unused and $must be zero")
+		VkDevice.IN("device", "the logical device that owns the descriptor pool."),
+		VkDescriptorPool.IN("descriptorPool", "the descriptor pool to be reset."),
+		VkDescriptorPoolResetFlags.IN("flags", "reserved for future use.")
 	)
 
 	VkResult(
 		"AllocateDescriptorSets",
 		"""
-		Allocates descriptor sets from a descriptor pool.
+		Allocate one or more descriptor sets.
 
-		When a descriptor set is allocated, the initial state is largely uninitialized and all descriptors are undefined. However, the descriptor set $can be
-		bound in a command buffer without causing errors or exceptions. All entries that are statically used by a pipeline in a drawing or dispatching command
-		$must have been populated before the descriptor set is bound for use by that command. Entries that are not statically used by a pipeline $can have
-		uninitialized descriptors or descriptors of resources that have been destroyed, and executing a draw or dispatch with such a descriptor set bound does
-		not cause undefined behavior. This means applications need not populate unused entries with dummy descriptors.
+		<h5>C Specification</h5>
+		To allocate descriptor sets from a descriptor pool, call:
 
-		${ValidityProtos.vkAllocateDescriptorSets}
+		<pre><code>VkResult vkAllocateDescriptorSets(
+￿    VkDevice                                    device,
+￿    const VkDescriptorSetAllocateInfo*          pAllocateInfo,
+￿    VkDescriptorSet*                            pDescriptorSets);</code></pre>
+
+		<h5>Description</h5>
+		The allocated descriptor sets are returned in {@code pDescriptorSets}.
+
+		When a descriptor set is allocated, the initial state is largely uninitialized and all descriptors are undefined. However, the descriptor set <b>can</b> be bound in a command buffer without causing errors or exceptions. All entries that are statically used by a pipeline in a drawing or dispatching command <b>must</b> have been populated before the descriptor set is bound for use by that command. Entries that are not statically used by a pipeline <b>can</b> have uninitialized descriptors or descriptors of resources that have been destroyed, and executing a draw or dispatch with such a descriptor set bound does not cause undefined behavior. This means applications need not populate unused entries with dummy descriptors.
+
+		If an allocation fails due to fragmentation, an indeterminate error is returned with an unspecified error code. Any returned error other than #ERROR_FRAGMENTED_POOL does not imply its usual meaning: applications <b>should</b> assume that the allocation failed due to fragmentation, and create a new descriptor pool.
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Applications <b>should</b> check for a negative return value when allocating new descriptor sets, assume that any error effectively means #ERROR_FRAGMENTED_POOL, and try to create a new descriptor pool. If #ERROR_FRAGMENTED_POOL is the actual return value, it adds certainty to that decision.
+
+		The reason for this is that #ERROR_FRAGMENTED_POOL was only added in a later revision of the 1.0 specification, and so drivers <b>may</b> return other errors if they were written against earlier revisions. To ensure full compatibility with earlier patch revisions, these other errors are allowed.
+		</div>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pAllocateInfo} <b>must</b> be a pointer to a valid ##VkDescriptorSetAllocateInfo structure</li>
+			<li>{@code pDescriptorSets} <b>must</b> be a pointer to an array of {@code pAllocateInfo}::descriptorSetCount {@code VkDescriptorSet} handles</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code pAllocateInfo}::descriptorPool <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+				<li>#ERROR_FRAGMENTED_POOL</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkDescriptorSetAllocateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the descriptor pool"),
-		const..VkDescriptorSetAllocateInfo_p.IN(
-			"pAllocateInfo",
-			"a pointer to an instance of the ##VkDescriptorSetAllocateInfo structure describing parameters of the allocation"
-		),
-		Check("pAllocateInfo.descriptorSetCount()")..VkDescriptorSet.p.OUT(
-			"pDescriptorSets",
-			"""
-			a pointer to an array of {@code VkDescriptorSet} handles in which the resulting descriptor set objects are returned. The array $must be at least the
-			length specified by the {@code descriptorSetCount} member of {@code pAllocateInfo}.
-			"""
-		)
+		VkDevice.IN("device", "the logical device that owns the descriptor pool."),
+		const..VkDescriptorSetAllocateInfo.p.IN("pAllocateInfo", "a pointer to an instance of the ##VkDescriptorSetAllocateInfo structure describing parameters of the allocation."),
+		Check("pAllocateInfo.descriptorSetCount()")..VkDescriptorSet.p.OUT("pDescriptorSets", "a pointer to an array of {@code VkDescriptorSet} handles in which the resulting descriptor set objects are returned. The array <b>must</b> be at least the length specified by the {@code descriptorSetCount} member of {@code pAllocateInfo}.")
 	)
 
 	VkResult(
 		"FreeDescriptorSets",
 		"""
-		Frees one or more descriptor sets.
+		Free one or more descriptor sets.
 
-		${ValidityProtos.vkFreeDescriptorSets}
+		<h5>C Specification</h5>
+		To free allocated descriptor sets, call:
+
+		<pre><code>VkResult vkFreeDescriptorSets(
+￿    VkDevice                                    device,
+￿    VkDescriptorPool                            descriptorPool,
+￿    uint32_t                                    descriptorSetCount,
+￿    const VkDescriptorSet*                      pDescriptorSets);</code></pre>
+
+		<h5>Description</h5>
+		After a successful call to #FreeDescriptorSets(), all descriptor sets in {@code pDescriptorSets} are invalid.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to any element of {@code pDescriptorSets} <b>must</b> have completed execution</li>
+			<li>{@code pDescriptorSets} <b>must</b> be a pointer to an array of {@code descriptorSetCount} {@code VkDescriptorSet} handles, each element of which <b>must</b> either be a valid handle or #NULL_HANDLE</li>
+			<li>Each valid handle in {@code pDescriptorSets} <b>must</b> have been allocated from {@code descriptorPool}</li>
+			<li>{@code descriptorPool} <b>must</b> have been created with the #DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT flag</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code descriptorPool} <b>must</b> be a valid {@code VkDescriptorPool} handle</li>
+			<li>{@code descriptorSetCount} <b>must</b> be greater than 0</li>
+			<li>{@code descriptorPool} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+			<li>Each element of {@code pDescriptorSets} that is a valid handle <b>must</b> have been created, allocated, or retrieved from {@code descriptorPool}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code descriptorPool} <b>must</b> be externally synchronized</li>
+			<li>Host access to each member of {@code pDescriptorSets} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the descriptor pool"),
-		VkDescriptorPool.IN("descriptorPool", "the descriptor pool from which the descriptor sets were allocated"),
-		AutoSize("pDescriptorSets")..uint32_t.IN("descriptorSetCount", "the number of elements in the {@code pDescriptorSets} array"),
-		SingleValue("pDescriptorSet")..const..VkDescriptorSet.p.IN(
-			"pDescriptorSets",
-			"""
-			an array of handles to {@code VkDescriptorSet} objects. All elements of {@code pDescriptorSets} $must have been allocated from
-			{@code descriptorPool}.
-			"""
-		)
+		VkDevice.IN("device", "the logical device that owns the descriptor pool."),
+		VkDescriptorPool.IN("descriptorPool", "the descriptor pool from which the descriptor sets were allocated."),
+		AutoSize("pDescriptorSets")..uint32_t.IN("descriptorSetCount", "the number of elements in the {@code pDescriptorSets} array."),
+		const..VkDescriptorSet.p.IN("pDescriptorSets", "an array of handles to {@code VkDescriptorSet} objects.")
 	)
 
 	void(
 		"UpdateDescriptorSets",
 		"""
-		Updates the contents of a descriptor set object.
+		Update the contents of a descriptor set object.
 
-		Once allocated, descriptor sets $can be updated with a combination of write and copy operations.
+		<h5>C Specification</h5>
+		Once allocated, descriptor sets <b>can</b> be updated with a combination of write and copy operations. To update descriptor sets, call:
 
-		${ValidityProtos.vkUpdateDescriptorSets}
+		<pre><code>void vkUpdateDescriptorSets(
+￿    VkDevice                                    device,
+￿    uint32_t                                    descriptorWriteCount,
+￿    const VkWriteDescriptorSet*                 pDescriptorWrites,
+￿    uint32_t                                    descriptorCopyCount,
+￿    const VkCopyDescriptorSet*                  pDescriptorCopies);</code></pre>
+
+		<h5>Description</h5>
+		The operations described by {@code pDescriptorWrites} are performed first, followed by the operations described by {@code pDescriptorCopies}. Within each array, the operations are performed in the order they appear in the array.
+
+		Each element in the {@code pDescriptorWrites} array describes an operation updating the descriptor set using descriptors for resources specified in the structure.
+
+		Each element in the {@code pDescriptorCopies} array is a ##VkCopyDescriptorSet structure describing an operation copying descriptors between sets.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code descriptorWriteCount} is not 0, {@code pDescriptorWrites} <b>must</b> be a pointer to an array of {@code descriptorWriteCount} valid ##VkWriteDescriptorSet structures</li>
+			<li>If {@code descriptorCopyCount} is not 0, {@code pDescriptorCopies} <b>must</b> be a pointer to an array of {@code descriptorCopyCount} valid ##VkCopyDescriptorSet structures</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code pDescriptorWrites}[].dstSet <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code pDescriptorCopies}[].dstSet <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkCopyDescriptorSet, ##VkWriteDescriptorSet
 		""",
 
-		VkDevice.IN("device", "the logical device that updates the descriptor sets"),
-		AutoSize("pDescriptorWrites")..uint32_t.IN("descriptorWriteCount", "the number of elements in the {@code pDescriptorWrites} array"),
-		nullable..const..VkWriteDescriptorSet_p.IN(
-			"pDescriptorWrites",
-			"a pointer to an array of ##VkWriteDescriptorSet structures describing the descriptor sets to write to"
-		),
-		AutoSize("pDescriptorCopies")..uint32_t.IN("descriptorCopyCount", "the number of elements in the {@code pDescriptorCopies} array"),
-		nullable..const..VkCopyDescriptorSet_p.IN(
-			"pDescriptorCopies",
-			"a pointer to an array of ##VkCopyDescriptorSet structures describing the descriptor sets to copy between"
-		)
+		VkDevice.IN("device", "the logical device that updates the descriptor sets."),
+		AutoSize("pDescriptorWrites")..uint32_t.IN("descriptorWriteCount", "the number of elements in the {@code pDescriptorWrites} array."),
+		nullable..const..VkWriteDescriptorSet.p.IN("pDescriptorWrites", "a pointer to an array of ##VkWriteDescriptorSet structures describing the descriptor sets to write to."),
+		AutoSize("pDescriptorCopies")..uint32_t.IN("descriptorCopyCount", "the number of elements in the {@code pDescriptorCopies} array."),
+		nullable..const..VkCopyDescriptorSet.p.IN("pDescriptorCopies", "a pointer to an array of ##VkCopyDescriptorSet structures describing the descriptor sets to copy between.")
 	)
+
+	// Pass commands
 
 	VkResult(
 		"CreateFramebuffer",
 		"""
-		Creates a new framebuffer object.
+		Create a new framebuffer object.
 
-		Render passes operate in conjunction with framebuffers, which represent a collection of specific memory attachments that a render pass instance uses.
+		<h5>C Specification</h5>
+		To create a framebuffer, call:
 
-		${ValidityProtos.vkCreateFramebuffer}
+		<pre><code>VkResult vkCreateFramebuffer(
+￿    VkDevice                                    device,
+￿    const VkFramebufferCreateInfo*              pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkFramebuffer*                              pFramebuffer);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkFramebufferCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pFramebuffer} <b>must</b> be a pointer to a {@code VkFramebuffer} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkFramebufferCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the framebuffer"),
-		const..VkFramebufferCreateInfo_p.IN(
-			"pCreateInfo",
-			"points to a ##VkFramebufferCreateInfo structure which describes additional information about framebuffer creation"
-		),
-		pAllocator,
-		Check(1)..VkFramebuffer.p.OUT("pFramebuffer", "points to a {@code VkFramebuffer} handle in which the resulting framebuffer object is returned")
+		VkDevice.IN("device", "the logical device that creates the framebuffer."),
+		const..VkFramebufferCreateInfo.p.IN("pCreateInfo", "points to a ##VkFramebufferCreateInfo structure which describes additional information about framebuffer creation."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkFramebuffer.p.OUT("pFramebuffer", "points to a {@code VkFramebuffer} handle in which the resulting framebuffer object is returned.")
 	)
 
 	void(
 		"DestroyFramebuffer",
 		"""
-		Destroys a framebuffer object.
+		Destroy a framebuffer object.
 
-		${ValidityProtos.vkDestroyFramebuffer}
+		<h5>C Specification</h5>
+		To destroy a framebuffer, call:
+
+		<pre><code>void vkDestroyFramebuffer(
+￿    VkDevice                                    device,
+￿    VkFramebuffer                               framebuffer,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code framebuffer} <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code framebuffer} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code framebuffer} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code framebuffer} is not #NULL_HANDLE, {@code framebuffer} <b>must</b> be a valid {@code VkFramebuffer} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code framebuffer} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code framebuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the framebuffer"),
-		VkFramebuffer.IN("framebuffer", "the handle of the framebuffer to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the framebuffer."),
+		VkFramebuffer.IN("framebuffer", "the handle of the framebuffer to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	VkResult(
 		"CreateRenderPass",
 		"""
-		Creates a new render pass object.
+		Create a new render pass object.
 
-		${ValidityProtos.vkCreateRenderPass}
+		<h5>C Specification</h5>
+		To create a render pass, call:
+
+		<pre><code>VkResult vkCreateRenderPass(
+￿    VkDevice                                    device,
+￿    const VkRenderPassCreateInfo*               pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkRenderPass*                               pRenderPass);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkRenderPassCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pRenderPass} <b>must</b> be a pointer to a {@code VkRenderPass} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkRenderPassCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the render pass"),
-		const..VkRenderPassCreateInfo_p.IN(
-			"pCreateInfo",
-			"a pointer to an instance of the ##VkRenderPassCreateInfo structure that describes the parameters of the render pass"
-		),
-		pAllocator,
-		Check(1)..VkRenderPass.p.OUT("pRenderPass", "points to a {@code VkRenderPass} handle in which the resulting render pass object is returned")
+		VkDevice.IN("device", "the logical device that creates the render pass."),
+		const..VkRenderPassCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkRenderPassCreateInfo structure that describes the parameters of the render pass."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkRenderPass.p.OUT("pRenderPass", "points to a {@code VkRenderPass} handle in which the resulting render pass object is returned.")
 	)
 
 	void(
 		"DestroyRenderPass",
 		"""
-		Destroys a render pass object.
+		Destroy a render pass object.
 
-		${ValidityProtos.vkDestroyRenderPass}
+		<h5>C Specification</h5>
+		To destroy a render pass, call:
+
+		<pre><code>void vkDestroyRenderPass(
+￿    VkDevice                                    device,
+￿    VkRenderPass                                renderPass,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All submitted commands that refer to {@code renderPass} <b>must</b> have completed execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code renderPass} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code renderPass} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code renderPass} is not #NULL_HANDLE, {@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code renderPass} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code renderPass} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the render pass"),
-		VkRenderPass.IN("renderPass", "the handle of the render pass to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the render pass."),
+		VkRenderPass.IN("renderPass", "the handle of the render pass to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	void(
 		"GetRenderAreaGranularity",
 		"""
-		Queries the granularity for optimal render area.
+		Returns the granularity for optimal render area.
 
+		<h5>C Specification</h5>
+		To query the render area granularity, call:
+
+		<pre><code>void vkGetRenderAreaGranularity(
+￿    VkDevice                                    device,
+￿    VkRenderPass                                renderPass,
+￿    VkExtent2D*                                 pGranularity);</code></pre>
+
+		<h5>Description</h5>
 		The conditions leading to an optimal {@code renderArea} are:
-		${ul(
-			"the {@code offset.x} member in {@code renderArea} is a multiple of the width member of the returned ##VkExtent2D (the horizontal granularity).",
-			"the {@code offset.y} member in {@code renderArea} is a multiple of the height of the returned ##VkExtent2D (the vertical granularity).",
-			"""
-			either the {@code offset.width} member in {@code renderArea} is a multiple of the horizontal granularity or {@code offset.x+offset.width} is equal
-			to the width of the framebuffer in the ##VkRenderPassBeginInfo.
-			""",
-			"""
-			either the {@code offset.height} member in {@code renderArea} is a multiple of the vertical granularity or {@code offset.y+offset.height} is equal
-			to the height of the framebuffer in the ##VkRenderPassBeginInfo.
-			"""
-		)}
 
-		${ValidityProtos.vkGetRenderAreaGranularity}
+		<ul>
+			<li>the {@code offset.x} member in {@code renderArea} is a multiple of the {@code width} member of the returned ##VkExtent2D (the horizontal granularity).</li>
+			<li>the {@code offset.y} member in {@code renderArea} is a multiple of the {@code height} of the returned ##VkExtent2D (the vertical granularity).</li>
+			<li>either the {@code offset.width} member in {@code renderArea} is a multiple of the horizontal granularity or {@code offset.x}+{@code offset.width} is equal to the {@code width} of the {@code framebuffer} in the ##VkRenderPassBeginInfo.</li>
+			<li>either the {@code offset.height} member in {@code renderArea} is a multiple of the vertical granularity or {@code offset.y}+{@code offset.height} is equal to the {@code height} of the {@code framebuffer} in the ##VkRenderPassBeginInfo.</li>
+		</ul>
+
+		Subpass dependencies are not affected by the render area, and apply to the entire image subresources attached to the framebuffer. Similarly, pipeline barriers are valid even if their effect extends outside the render area.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
+			<li>{@code pGranularity} <b>must</b> be a pointer to a ##VkExtent2D structure</li>
+			<li>{@code renderPass} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkExtent2D
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the render pass"),
-		VkRenderPass.IN("renderPass", "a handle to a render pass"),
-		VkExtent2D.p.OUT("pGranularity", "points to a ##VkExtent2D structure in which the granularity is returned")
+		VkDevice.IN("device", "the logical device that owns the render pass."),
+		VkRenderPass.IN("renderPass", "a handle to a render pass."),
+		VkExtent2D.p.OUT("pGranularity", "points to a ##VkExtent2D structure in which the granularity is returned.")
 	)
+
+	// Command pool commands
 
 	VkResult(
 		"CreateCommandPool",
 		"""
-		Creates a new command pool object.
+		Create a new command pool object.
 
-		Command pools are opaque objects that command buffer memory is allocated from, and which allow the implementation to amortize the cost of resource
-		creation across multiple command buffers. Command pools are application-synchronized, meaning that a command pool $must not be used concurrently in
-		multiple threads. That includes use via recording commands on any command buffers allocated from the pool, as well as operations that allocate, free,
-		and reset command buffers or the pool itself.
+		<h5>C Specification</h5>
+		To create a command pool, call:
 
-		${ValidityProtos.vkCreateCommandPool}
+		<pre><code>VkResult vkCreateCommandPool(
+￿    VkDevice                                    device,
+￿    const VkCommandPoolCreateInfo*              pCreateInfo,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkCommandPool*                              pCommandPool);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pCreateInfo} <b>must</b> be a pointer to a valid ##VkCommandPoolCreateInfo structure</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>{@code pCommandPool} <b>must</b> be a pointer to a {@code VkCommandPool} handle</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks, ##VkCommandPoolCreateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that creates the command pool"),
-		const..VkCommandPoolCreateInfo_p.IN("pCreateInfo", "contains information used to create the command pool"),
-		pAllocator,
-		Check(1)..VkCommandPool.p.OUT("pCommandPool", "points to an {@code VkCommandPool} handle in which the created pool is returned")
+		VkDevice.IN("device", "the logical device that creates the command pool."),
+		const..VkCommandPoolCreateInfo.p.IN("pCreateInfo", "contains information used to create the command pool."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+		Check(1)..VkCommandPool.p.OUT("pCommandPool", "points to a {@code VkCommandPool} handle in which the created pool is returned.")
 	)
 
 	void(
 		"DestroyCommandPool",
 		"""
-		Destroys a command pool object.
+		Destroy a command pool object.
 
-		When a pool is destroyed, all command buffers allocated from the pool are implicitly freed and become invalid. Command buffers allocated from a given
-		pool do not need to be freed before destroying that command pool.
+		<h5>C Specification</h5>
+		To destroy a command pool, call:
 
-		${ValidityProtos.vkDestroyCommandPool}
+		<pre><code>void vkDestroyCommandPool(
+￿    VkDevice                                    device,
+￿    VkCommandPool                               commandPool,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+		<h5>Description</h5>
+		When a pool is destroyed, all command buffers allocated from the pool are implicitly freed and become invalid. Command buffers allocated from a given pool do not need to be freed before destroying that command pool.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All {@code VkCommandBuffer} objects allocated from {@code commandPool} <b>must</b> not be pending execution</li>
+			<li>If ##VkAllocationCallbacks were provided when {@code commandPool} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+			<li>If no ##VkAllocationCallbacks were provided when {@code commandPool} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>If {@code commandPool} is not #NULL_HANDLE, {@code commandPool} <b>must</b> be a valid {@code VkCommandPool} handle</li>
+			<li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a pointer to a valid ##VkAllocationCallbacks structure</li>
+			<li>If {@code commandPool} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandPool} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device that destroys the command pool"),
-		VkCommandPool.IN("commandPool", "the handle of the command pool to destroy"),
-		pAllocator
+		VkDevice.IN("device", "the logical device that destroys the command pool."),
+		VkCommandPool.IN("commandPool", "the handle of the command pool to destroy."),
+		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
 	VkResult(
 		"ResetCommandPool",
 		"""
-		Resets a command pool.
+		Reset a command pool.
 
-		${ValidityProtos.vkResetCommandPool}
+		<h5>C Specification</h5>
+		To reset a command pool, call:
+
+		<pre><code>VkResult vkResetCommandPool(
+￿    VkDevice                                    device,
+￿    VkCommandPool                               commandPool,
+￿    VkCommandPoolResetFlags                     flags);</code></pre>
+
+		<h5>Description</h5>
+		Resetting a command pool recycles all of the resources from all of the command buffers allocated from the command pool back to the command pool. All command buffers that have been allocated from the command pool are put in the initial state.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All {@code VkCommandBuffer} objects allocated from {@code commandPool} <b>must</b> not currently be pending execution</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code commandPool} <b>must</b> be a valid {@code VkCommandPool} handle</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkCommandPoolResetFlagBits} values</li>
+			<li>{@code commandPool} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandPool} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the command pool"),
-		VkCommandPool.IN("commandPool", "the command pool to reset"),
-		VkCommandPoolResetFlags.IN("flags", "contains additional flags controlling the behavior of the reset", VkCommandPoolResetFlagBits, LinkMode.BITFIELD)
+		VkDevice.IN("device", "the logical device that owns the command pool."),
+		VkCommandPool.IN("commandPool", "the command pool to reset."),
+		VkCommandPoolResetFlags.IN("flags", """contains additional flags controlling the behavior of the reset. Bits which <b>can</b> be set include:
+<pre><code>typedef enum VkCommandPoolResetFlagBits {
+￿    VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT = 0x00000001,
+} VkCommandPoolResetFlagBits;</code></pre>
+
+		If {@code flags} includes #COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT, resetting a command pool recycles all of the resources from the command pool back to the system.""")
 	)
+
+	// Command buffer commands
 
 	VkResult(
 		"AllocateCommandBuffers",
 		"""
-		Allocates command buffers.
+		Allocate command buffers from an existing command pool.
 
-		${ValidityProtos.vkAllocateCommandBuffers}
+		<h5>C Specification</h5>
+		To allocate command buffers, call:
+
+		<pre><code>VkResult vkAllocateCommandBuffers(
+￿    VkDevice                                    device,
+￿    const VkCommandBufferAllocateInfo*          pAllocateInfo,
+￿    VkCommandBuffer*                            pCommandBuffers);</code></pre>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code pAllocateInfo} <b>must</b> be a pointer to a valid ##VkCommandBufferAllocateInfo structure</li>
+			<li>{@code pCommandBuffers} <b>must</b> be a pointer to an array of {@code pAllocateInfo}::commandBufferCount {@code VkCommandBuffer} handles</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code pAllocateInfo}::commandPool <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkCommandBufferAllocateInfo
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the command pool"),
-		const..VkCommandBufferAllocateInfo_p.IN(
-			"pAllocateInfo",
-			"an instance of the ##VkCommandBufferAllocateInfo structure which defines additional information about creating the pool"
-		),
-		Check("pAllocateInfo.commandBufferCount()")..VkCommandBuffer.p.OUT(
-			"pCommandBuffers",
-			"points to an array in which the allocated command buffers are returned. Each allocated command buffer begins in the initial state."
-		)
+		VkDevice.IN("device", "the logical device that owns the command pool."),
+		const..VkCommandBufferAllocateInfo.p.IN("pAllocateInfo", "a pointer to an instance of the ##VkCommandBufferAllocateInfo structure describing parameters of the allocation."),
+		Check("pAllocateInfo.commandBufferCount()")..VkCommandBuffer.p.OUT("pCommandBuffers", "a pointer to an array of {@code VkCommandBuffer} handles in which the resulting command buffer objects are returned. The array <b>must</b> be at least the length specified by the {@code commandBufferCount} member of {@code pAllocateInfo}. Each allocated command buffer begins in the initial state.")
 	)
 
 	void(
 		"FreeCommandBuffers",
 		"""
-		Frees command buffers.
+		Free command buffers.
 
-		${ValidityProtos.vkFreeCommandBuffers}
+		<h5>C Specification</h5>
+		To free command buffers, call:
+
+		<pre><code>void vkFreeCommandBuffers(
+￿    VkDevice                                    device,
+￿    VkCommandPool                               commandPool,
+￿    uint32_t                                    commandBufferCount,
+￿    const VkCommandBuffer*                      pCommandBuffers);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>All elements of {@code pCommandBuffers} <b>must</b> not be pending execution</li>
+			<li>{@code pCommandBuffers} <b>must</b> be a pointer to an array of {@code commandBufferCount} {@code VkCommandBuffer} handles, each element of which <b>must</b> either be a valid handle or {@code NULL}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+			<li>{@code commandPool} <b>must</b> be a valid {@code VkCommandPool} handle</li>
+			<li>{@code commandBufferCount} <b>must</b> be greater than 0</li>
+			<li>{@code commandPool} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+			<li>Each element of {@code pCommandBuffers} that is a valid handle <b>must</b> have been created, allocated, or retrieved from {@code commandPool}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandPool} <b>must</b> be externally synchronized</li>
+			<li>Host access to each member of {@code pCommandBuffers} <b>must</b> be externally synchronized</li>
+		</ul>
 		""",
 
-		VkDevice.IN("device", "the logical device that owns the command pool"),
-		VkCommandPool.IN("commandPool", "the handle of the command pool that the command buffers were allocated from"),
-		AutoSize("pCommandBuffers")..uint32_t.IN("commandBufferCount", "the length of the {@code pCommandBuffers} array"),
-		SingleValue("pCommandBuffer")..const..VkCommandBuffer.p.IN("pCommandBuffers", "an array of handles of command buffers to free")
+		VkDevice.IN("device", "the logical device that owns the command pool."),
+		VkCommandPool.IN("commandPool", "the handle of the command pool that the command buffers were allocated from."),
+		AutoSize("pCommandBuffers")..uint32_t.IN("commandBufferCount", "the length of the {@code pCommandBuffers} array."),
+		const..VkCommandBuffer.p.IN("pCommandBuffers", "an array of handles of command buffers to free.")
 	)
 
 	VkResult(
 		"BeginCommandBuffer",
 		"""
-		Starts recording a command buffer.
+		Start recording a command buffer.
 
-		${ValidityProtos.vkBeginCommandBuffer}
+		<h5>C Specification</h5>
+		To begin recording a command buffer, call:
 
-		A primary command buffer is considered to be pending execution from the time it is submitted via #QueueSubmit() until that submission completes.
+		<pre><code>VkResult vkBeginCommandBuffer(
+￿    VkCommandBuffer                             commandBuffer,
+￿    const VkCommandBufferBeginInfo*             pBeginInfo);</code></pre>
 
-		A secondary command buffer is considered to be pending execution from the time its execution is recorded into a primary buffer (via
-		#CmdExecuteCommands()) until the final time that primary buffer’s submission to a queue completes. If, after the primary buffer completes, the
-		secondary command buffer is recorded to execute on a different primary buffer, the first primary buffer $must not be resubmitted until after it is reset
-		with #ResetCommandBuffer() unless the secondary command buffer was recorded with #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> not be in the recording state</li>
+			<li>{@code commandBuffer} <b>must</b> not currently be pending execution</li>
+			<li>If {@code commandBuffer} was allocated from a {@code VkCommandPool} which did not have the #COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT flag set, {@code commandBuffer} <b>must</b> be in the initial state</li>
+			<li>If {@code commandBuffer} is a secondary command buffer, the {@code pInheritanceInfo} member of {@code pBeginInfo} <b>must</b> be a valid ##VkCommandBufferInheritanceInfo structure</li>
+			<li>If {@code commandBuffer} is a secondary command buffer and either the {@code occlusionQueryEnable} member of the {@code pInheritanceInfo} member of {@code pBeginInfo} is #FALSE, or the precise occlusion queries feature is not enabled, the {@code queryFlags} member of the {@code pInheritanceInfo} member {@code pBeginInfo} <b>must</b> not contain #QUERY_CONTROL_PRECISE_BIT</li>
+		</ul>
 
-		If #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT is not set on a secondary command buffer, that command buffer $must not be used more than once in a given
-		primary command buffer. Furthermore, if a secondary command buffer without #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT set is recorded to execute in a
-		primary command buffer with #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT set, the primary command buffer $must not be pending execution more than once at
-		a time.
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pBeginInfo} <b>must</b> be a pointer to a valid ##VkCommandBufferBeginInfo structure</li>
+		</ul>
 
-		${note(
-			"""
-			On some implementations, not using the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT bit enables command buffers to be patched in-place if needed,
-			rather than creating a copy of the command buffer.
-			"""
-		)}
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
 
-		If a command buffer is in the executable state and the command buffer was allocated from a command pool with the
-		#COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT flag set, then {@code vkBeginCommandBuffer} implicitly resets the command buffer, behaving as if
-		#ResetCommandBuffer() had been called with #COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT not set. It then puts the command buffer in the recording state.
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
 
-		Once recording starts, an application records a sequence of commands ({@code vkCmd*}) to set state in the command buffer, draw, dispatch, and other
-		commands.
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
+
+		<h5>See Also</h5>
+		##VkCommandBufferBeginInfo
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the handle of the command buffer which is to be put in the recording state"),
-		const..VkCommandBufferBeginInfo_p.IN(
-			"pBeginInfo",
-			"an instance of the ##VkCommandBufferBeginInfo structure, which defines additional information about how the command buffer begins recording"
-		)
+		VkCommandBuffer.IN("commandBuffer", "the handle of the command buffer which is to be put in the recording state."),
+		const..VkCommandBufferBeginInfo.p.IN("pBeginInfo", "an instance of the ##VkCommandBufferBeginInfo structure, which defines additional information about how the command buffer begins recording.")
 	)
 
 	VkResult(
 		"EndCommandBuffer",
 		"""
-		Completes recording a command buffer.
+		Finish recording a command buffer.
 
-		If there was an error during recording, the application will be notified by an unsuccessful return code returned by {@code vkEndCommandBuffer}. If the
-		application wishes to further use the command buffer, the command buffer $must be reset.
+		<h5>C Specification</h5>
+		To complete recording of a command buffer, call:
 
-		When a command buffer is in the executable state, it $can be submitted to a queue for execution.
+		<pre><code>VkResult vkEndCommandBuffer(
+￿    VkCommandBuffer                             commandBuffer);</code></pre>
 
-		${ValidityProtos.vkEndCommandBuffer}
+		<h5>Description</h5>
+		If there was an error during recording, the application will be notified by an unsuccessful return code returned by #EndCommandBuffer(). If the application wishes to further use the command buffer, the command buffer <b>must</b> be reset.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>If {@code commandBuffer} is a primary command buffer, there <b>must</b> not be an active render pass instance</li>
+			<li>All queries made <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a> during the recording of {@code commandBuffer} <b>must</b> have been made inactive</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkCommandBuffer.IN(
-			"commandBuffer",
-			"the command buffer to complete recording. The command buffer $must have been in the recording state, and is moved to the executable state."
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer to complete recording. The command buffer <b>must</b> have been in the recording state, and is moved to the executable state.")
 	)
 
 	VkResult(
 		"ResetCommandBuffer",
 		"""
-		Resets a command buffer.
+		Reset a command buffer.
 
-		If {@code flags} includes #COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT, then most or all memory resources currently owned by the command buffer $should
-		be returned to the parent command pool. If this flag is not set, then the command buffer $may hold onto memory resources and reuse them when recording
-		commands.
+		<h5>C Specification</h5>
+		To reset command buffers, call:
 
-		${ValidityProtos.vkResetCommandBuffer}
+		<pre><code>VkResult vkResetCommandBuffer(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkCommandBufferResetFlags                   flags);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> not currently be pending execution</li>
+			<li>{@code commandBuffer} <b>must</b> have been allocated from a pool that was created with the #COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkCommandBufferResetFlagBits} values</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Return Codes</h5>
+		<dl>
+			<dt>On success, this command returns</dt>
+			<dd><ul>
+				<li>#SUCCESS</li>
+			</ul></dd>
+
+			<dt>On failure, this command returns</dt>
+			<dd><ul>
+				<li>#ERROR_OUT_OF_HOST_MEMORY</li>
+				<li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+			</ul></dd>
+		</dl>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer to reset. The command buffer $can be in any state, and is put in the initial state."),
-		VkCommandBufferResetFlags.IN("flags", "is of type {@code VkCommandBufferResetFlags}", VkCommandBufferResetFlagBits, LinkMode.BITFIELD)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer to reset. The command buffer <b>can</b> be in any state, and is put in the initial state."),
+		VkCommandBufferResetFlags.IN("flags", """a bitmask controlling the reset operation. Bits which <b>can</b> be set include:
+<pre><code>typedef enum VkCommandBufferResetFlagBits {
+￿    VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT = 0x00000001,
+} VkCommandBufferResetFlagBits;</code></pre>
+
+		If {@code flags} includes #COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT, then most or all memory resources currently owned by the command buffer <b>should</b> be returned to the parent command pool. If this flag is not set, then the command buffer <b>may</b> hold onto memory resources and reuse them when recording commands.""")
 	)
+
+	// Command buffer building commands
 
 	void(
 		"CmdBindPipeline",
 		"""
-		Binds a pipeline object to a command buffer.
+		Bind a pipeline object to a command buffer.
 
-		Once bound, a pipeline binding affects subsequent graphics or compute commands in the command buffer until a different pipeline is bound to the bind
-		point. The pipeline bound to #PIPELINE_BIND_POINT_COMPUTE controls the behavior of #CmdDispatch() and #CmdDispatchIndirect(). The pipeline bound to
-		#PIPELINE_BIND_POINT_GRAPHICS controls the behavior of #CmdDraw(), #CmdDrawIndexed(), #CmdDrawIndirect(), and #CmdDrawIndexedIndirect(). No other
-		commands are affected by the pipeline state.
+		<h5>C Specification</h5>
+		Once a pipeline has been created, it <b>can</b> be bound to the command buffer using the command:
 
-		${ValidityProtos.vkCmdBindPipeline}
+		<pre><code>void vkCmdBindPipeline(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkPipelineBindPoint                         pipelineBindPoint,
+￿    VkPipeline                                  pipeline);</code></pre>
+
+		<h5>Description</h5>
+		Once bound, a pipeline binding affects subsequent graphics or compute commands in the command buffer until a different pipeline is bound to the bind point. The pipeline bound to #PIPELINE_BIND_POINT_COMPUTE controls the behavior of #CmdDispatch() and #CmdDispatchIndirect(). The pipeline bound to #PIPELINE_BIND_POINT_GRAPHICS controls the behavior of #CmdDraw(), #CmdDrawIndexed(), #CmdDrawIndirect(), and #CmdDrawIndexedIndirect(). No other commands are affected by the pipeline state.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If {@code pipelineBindPoint} is #PIPELINE_BIND_POINT_COMPUTE, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
+			<li>If {@code pipelineBindPoint} is #PIPELINE_BIND_POINT_GRAPHICS, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>If {@code pipelineBindPoint} is #PIPELINE_BIND_POINT_COMPUTE, {@code pipeline} <b>must</b> be a compute pipeline</li>
+			<li>If {@code pipelineBindPoint} is #PIPELINE_BIND_POINT_GRAPHICS, {@code pipeline} <b>must</b> be a graphics pipeline</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-variableMultisampleRate">variable multisample rate</a> feature is not supported, {@code pipeline} is a graphics pipeline, the current subpass has no attachments, and this is not the first call to this function with a graphics pipeline after transitioning to the current subpass, then the sample count specified by this pipeline <b>must</b> match that set in the previous pipeline</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
+			<li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>Both of {@code commandBuffer}, and {@code pipeline} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer that the pipeline will be bound to"),
-		VkPipelineBindPoint.IN(
-			"pipelineBindPoint",
-			"the bind point. There are separate bind points for each of graphics and compute, so binding one does not disturb the other.",
-			VkPipelineBindPoints
-		),
-		VkPipeline.IN("pipeline", "the pipeline to be bound")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer that the pipeline will be bound to."),
+		VkPipelineBindPoint.IN("pipelineBindPoint", """specifies the bind point, and <b>must</b> have one of the values
+<pre><code>typedef enum VkPipelineBindPoint {
+￿    VK_PIPELINE_BIND_POINT_GRAPHICS = 0,
+￿    VK_PIPELINE_BIND_POINT_COMPUTE = 1,
+} VkPipelineBindPoint;</code></pre>
+
+		specifying whether {@code pipeline} will be bound as a compute (#PIPELINE_BIND_POINT_COMPUTE) or graphics (#PIPELINE_BIND_POINT_GRAPHICS) pipeline. There are separate bind points for each of graphics and compute, so binding one does not disturb the other."""),
+		VkPipeline.IN("pipeline", "the pipeline to be bound.")
 	)
 
 	void(
 		"CmdSetViewport",
 		"""
-		Sets the viewport on a command buffer.
+		Set the viewport on a command buffer.
 
-		If the bound pipeline state object was not created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled, viewport transformation parameters are
-		specified using the {@code pViewports} member of ##VkPipelineViewportStateCreateInfo in the pipeline state object. If the pipeline state object was
-		created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled, the viewport transformation parameters are dynamically set and changed with this
-		command.
+		<h5>C Specification</h5>
+		If the bound pipeline state object was not created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled, viewport transformation parameters are specified using the {@code pViewports} member of ##VkPipelineViewportStateCreateInfo in the pipeline state object. If the pipeline state object was created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled, the viewport transformation parameters are dynamically set and changed with the command:
 
-		The viewport parameters taken from element {@code i} of {@code pViewports} replace the current state for the viewport index
-		{@code firstViewport + i}, for {@code i} in {@code [0,viewportCount)}.
+		<pre><code>void vkCmdSetViewport(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    firstViewport,
+￿    uint32_t                                    viewportCount,
+￿    const VkViewport*                           pViewports);</code></pre>
 
-		${ValidityProtos.vkCmdSetViewport}
+		<h5>Description</h5>
+		The viewport parameters taken from element <code>i</code> of {@code pViewports} replace the current state for the viewport index <code>firstViewport {plus} i</code>, for <code>i</code> in <code>[0, viewportCount)</code>.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_VIEWPORT dynamic state enabled</li>
+			<li>{@code firstViewport} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}</li>
+			<li>The sum of {@code firstViewport} and {@code viewportCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pViewports} <b>must</b> be a pointer to an array of {@code viewportCount} valid ##VkViewport structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>{@code viewportCount} <b>must</b> be greater than 0</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkViewport
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		uint32_t.IN("firstViewport", "the index of the first viewport whose parameters are updated by the command"),
-		AutoSize("pViewports")..uint32_t.IN("viewportCount", "the number of viewports whose parameters are updated by the command"),
-		const..VkViewport.p.IN("pViewports", "a pointer to an array of {@code VkViewport} structures specifying viewport parameters")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		uint32_t.IN("firstViewport", "the index of the first viewport whose parameters are updated by the command."),
+		AutoSize("pViewports")..uint32_t.IN("viewportCount", "the number of viewports whose parameters are updated by the command."),
+		const..VkViewport.p.IN("pViewports", "a pointer to an array of ##VkViewport structures specifying viewport parameters.")
 	)
 
 	void(
 		"CmdSetScissor",
 		"""
-		Sets the dynamic scissor rectangles on a command buffer.
+		Set the dynamic scissor rectangles on a command buffer.
 
-		The scissor test determines if a fragment’s framebuffer coordinates ${code("(x<sub>f</sub>,y<sub>f</sub>)")} lie within the scissor rectangle
-		corresponding to the viewport index used by the primitive that generated the fragment. If the pipeline state object is created without
-		#DYNAMIC_STATE_SCISSOR enabled then the scissor rectangles are set by the ##VkPipelineViewportStateCreateInfo state of the pipeline state object.
-		Otherwise, use this command to dynamically set the scissor rectangles.
+		<h5>C Specification</h5>
+		The scissor test determines if a fragment's framebuffer coordinates <code>(x<sub>f</sub>,y<sub>f</sub>)</code> lie within the scissor rectangle corresponding to the viewport index (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-viewport">Controlling the Viewport</a>) used by the primitive that generated the fragment. If the pipeline state object is created without #DYNAMIC_STATE_SCISSOR enabled then the scissor rectangles are set by the ##VkPipelineViewportStateCreateInfo state of the pipeline state object. Otherwise, to dynamically set the scissor rectangles call:
 
-		The scissor rectangles taken from element {@code i} of {@code pScissors} replace the current state for the scissor index {@code firstScissor + i}, for
-		{@code i} in {@code [0,scissorCount)}.
+		<pre><code>void vkCmdSetScissor(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    firstScissor,
+￿    uint32_t                                    scissorCount,
+￿    const VkRect2D*                             pScissors);</code></pre>
 
-		Each scissor rectangle is described by a ##VkRect2D structure, with the {@code offset.x} and {@code offset.y} values determining the upper left corner
-		of the scissor rectangle, and the {@code extent.width} and {@code extent.height} values determining the size in pixels.
+		<h5>Description</h5>
+		The scissor rectangles taken from element <code>i</code> of {@code pScissors} replace the current state for the scissor index <code>firstScissor + i</code>, for <code>i</code> in <code>[0, scissorCount)</code>.
 
-		If ${code("offset.x &le; x<sub>f</sub> &lt; offset.x + extent.width")}  and ${code("offset.y &le; y<sub>f</sub> &lt; offset.y + extent.height")} for
-		the selected scissor rectangle, then the scissor test passes. Otherwise, the test fails and the fragment is discarded. For points, lines, and polygons,
-		the scissor rectangle for a primitive is selected in the same manner as the viewport. The scissor rectangles only apply to drawing commands, not to
-		other commands like clears or copies.
+		Each scissor rectangle is described by a ##VkRect2D structure, with the {@code offset.x} and {@code offset.y} values determining the upper left corner of the scissor rectangle, and the {@code extent.width} and {@code extent.height} values determining the size in pixels.
 
-		It is legal for {@code offset.x + extent.width} or {@code offset.y + extent.height} to exceed the dimensions of the framebuffer - the scissor test
-		still applies as defined above. Rasterization does not produce fragments outside of the framebuffer, so such fragments never have the scissor test
-		performed on them.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_SCISSOR dynamic state enabled</li>
+			<li>{@code firstScissor} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}</li>
+			<li>The sum of {@code firstScissor} and {@code scissorCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
+			<li>The {@code x} and {@code y} members of {@code offset} <b>must</b> be greater than or equal to 0</li>
+			<li>Evaluation of ({@code offset.x} + {@code extent.width}) <b>must</b> not cause a signed integer addition overflow</li>
+			<li>Evaluation of ({@code offset.y} + {@code extent.height}) <b>must</b> not cause a signed integer addition overflow</li>
+		</ul>
 
-		The scissor test is always performed. Applications $can effectively disable the scissor test by specifying a scissor rectangle that encompasses the
-		entire framebuffer.
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pScissors} <b>must</b> be a pointer to an array of {@code scissorCount} ##VkRect2D structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>{@code scissorCount} <b>must</b> be greater than 0</li>
+		</ul>
 
-		${ValidityProtos.vkCmdSetScissor}
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkRect2D
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		uint32_t.IN("firstScissor", "the index of the first scissor whose state is updated by the command"),
-		AutoSize("pScissors")..uint32_t.IN("scissorCount", "the number of scissors whose rectangles are updated by the command"),
-		const..VkRect2D.p.IN("pScissors", "a pointer to an array of ##VkRect2D structures defining scissor rectangles")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		uint32_t.IN("firstScissor", "the index of the first scissor whose state is updated by the command."),
+		AutoSize("pScissors")..uint32_t.IN("scissorCount", "the number of scissors whose rectangles are updated by the command."),
+		const..VkRect2D.p.IN("pScissors", "a pointer to an array of ##VkRect2D structures defining scissor rectangles.")
 	)
 
 	void(
 		"CmdSetLineWidth",
 		"""
-		Sets the dynamic line width state.
+		Set the dynamic line width state.
 
-		A line is drawn by generating a set of fragments overlapping a rectangle centered on the line segment. Each line segment has an associated width that
-		controls the width of that rectangle.
+		<h5>C Specification</h5>
+		The line width is set by the {@code lineWidth} property of ##VkPipelineRasterizationStateCreateInfo in the currently active pipeline if the pipeline was not created with #DYNAMIC_STATE_LINE_WIDTH enabled. Otherwise, the line width is set by calling #CmdSetLineWidth():
 
-		The line width is set by the {@code lineWidth} property of ##VkPipelineRasterizationStateCreateInfo in the currently active pipeline if the pipeline
-		was not created with #DYNAMIC_STATE_LINE_WIDTH enabled. Otherwise, the line width is set by calling {@code vkCmdSetLineWidth}.
+		<pre><code>void vkCmdSetLineWidth(
+￿    VkCommandBuffer                             commandBuffer,
+￿    float                                       lineWidth);</code></pre>
 
-		Not all line widths need be supported for line segment rasterization, but width 1.0 antialiased segments $must be provided. The range and gradations are
-		obtained from the {@code lineWidthRange} and {@code lineWidthGranularity} members of ##VkPhysicalDeviceLimits. If, for instance, the size range is from
-		0.1 to 2.0 and the gradation size is 0.1, then the size 0.1, 0.2, …, 1.9, 2.0 are supported. Additional line widths $may also be supported. There is no
-		requirement that these widths be equally spaced. If an unsupported width is requested, the nearest supported width is used instead.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_LINE_WIDTH dynamic state enabled</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-wideLines">wide lines</a> feature is not enabled, {@code lineWidth} <b>must</b> be {@code 1.0}</li>
+		</ul>
 
-		${ValidityProtos.vkCmdSetLineWidth}
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		float.IN("lineWidth", "the width of rasterized line segments")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		float.IN("lineWidth", "the width of rasterized line segments.")
 	)
 
 	void(
 		"CmdSetDepthBias",
 		"""
-		Sets the depth bias dynamic state.
+		Set the depth bias dynamic state.
 
-		The depth values of all fragments generated by the rasterization of a polygon $can be offset by a single value that is computed for that polygon. This
-		behavior is controlled by the {@code depthBiasEnable}, {@code depthBiasConstantFactor}, {@code depthBiasClamp}, and {@code depthBiasSlopeFactor}
-		members of ##VkPipelineRasterizationStateCreateInfo, or by the corresponding parameters to the {@code vkCmdSetDepthBias} command if depth bias state is
-		dynamic.
+		<h5>C Specification</h5>
+		The depth values of all fragments generated by the rasterization of a polygon <b>can</b> be offset by a single value that is computed for that polygon. This behavior is controlled by the {@code depthBiasEnable}, {@code depthBiasConstantFactor}, {@code depthBiasClamp}, and {@code depthBiasSlopeFactor} members of ##VkPipelineRasterizationStateCreateInfo, or by the corresponding parameters to the #CmdSetDepthBias() command if depth bias state is dynamic.
 
-		If {@code depthBiasEnable} is #FALSE, no depth bias is applied and the fragment’s depth values are unchanged.
+		<pre><code>void vkCmdSetDepthBias(
+￿    VkCommandBuffer                             commandBuffer,
+￿    float                                       depthBiasConstantFactor,
+￿    float                                       depthBiasClamp,
+￿    float                                       depthBiasSlopeFactor);</code></pre>
 
-		{@code depthBiasSlopeFactor} scales the maximum depth slope of the polygon, and {@code depthBiasConstantFactor} scales an implementation-dependent
-		constant that relates to the usable resolution of the depth buffer. The resulting values are summed to produce the depth bias value which is then
-		clamped to a minimum or maximum value specified by {@code depthBiasClamp}. {@code depthBiasSlopeFactor}, {@code depthBiasConstantFactor}, and
-		{@code depthBiasClamp} $can each be positive, negative, or zero.
+		<h5>Description</h5>
+		If {@code depthBiasEnable} is #FALSE, no depth bias is applied and the fragment's depth values are unchanged.
 
-		The maximum depth slope mm of a triangle is
-		${codeBlock(
-			"""
-			m = sqrt((&part;z<sub>f</sub> / &part;x<sub>f</sub>)<sup>2</sup> + (&part;z<sub>f</sub> / &part;y<sub>f</sub>)<sup>2</sup>)
-			"""
-		)}
+		{@code depthBiasSlopeFactor} scales the maximum depth slope of the polygon, and {@code depthBiasConstantFactor} scales an implementation-dependent constant that relates to the usable resolution of the depth buffer. The resulting values are summed to produce the depth bias value which is then clamped to a minimum or maximum value specified by {@code depthBiasClamp}. {@code depthBiasSlopeFactor}, {@code depthBiasConstantFactor}, and {@code depthBiasClamp} <b>can</b> each be positive, negative, or zero.
 
-		where ${code("(x<sub>f</sub>,y<sub>f</sub>,z<sub>f</sub>)")} is a point on the triangle. {@code m} $may be approximated as
-		${codeBlock(
-			"""
-			m = max(abs(&part;z<sub>f</sub> / &part;x<sub>f</sub>), abs(&part;z<sub>f</sub> / &part;y<sub>f</sub>))
-			"""
-		)}
+		The maximum depth slope <code>m</code> of a triangle is
 
-		The minimum resolvable difference {@code r} is an implementation-dependent parameter that depends on the depth buffer representation. It is the
-		smallest difference in framebuffer coordinate {@code z} values that is guaranteed to remain distinct throughout polygon rasterization and in the depth
-		buffer. All pairs of fragments generated by the rasterization of two polygons with otherwise identical vertices, but ${code("z<sub>f</sub>")} values
-		that differ by {@code r}, will have distinct depth values.
+		<pre><code>￿      m = sqrt((&part;z<sub>f</sub> / &part;x<sub>f</sub>)<sup>2</sup> + (&part;z<sub>f</sub> / &part;y<sub>f</sub>)<sup>2</sup>)</code></pre>
 
-		For fixed-point depth buffer representations, {@code r} is constant throughout the range of the entire depth buffer. For floating-point depth buffers,
-		there is no single minimum resolvable difference. In this case, the minimum resolvable difference for a given polygon is dependent on the maximum
-		exponent, {@code e}, in the range of {@code z} values spanned by the primitive. If {@code n} is the number of bits in the floating-point mantissa, the
-		minimum resolvable difference, {@code r}, for the given primitive is defined as
-		${codeBlock(
-			"""
-			r = 2<sup>e-n</sup>
-			"""
-		)}
+		where <code>(x<sub>f</sub>, y<sub>f</sub>, z<sub>f</sub>)</code> is a point on the triangle. <code>m</code> <b>may</b> be approximated as
 
-		If no depth buffer is present, {@code r} is undefined.
+		<pre><code>￿      m = max(abs(&part;z<sub>f</sub> / &part;x<sub>f</sub>), abs(&part;z<sub>f</sub> / &part;y<sub>f</sub>))</code></pre>
 
-		The bias value {@code o} for a polygon is
-		<table>
-		${tr(td(code("o ="), rowspan = 3), td(code("m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor")), td(code("when depthBiasClamp = 0 or NaN")))}
-		${tr(td(code("min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)")), td(code("when depthBiasClamp &gt; 0")))}
-		${tr(td(code("max(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)")), td(code("when depthBiasClamp &lt; 0")))}
+		The minimum resolvable difference <code>r</code> is an implementation-dependent parameter that depends on the depth buffer representation. It is the smallest difference in framebuffer coordinate <code>z</code> values that is guaranteed to remain distinct throughout polygon rasterization and in the depth buffer. All pairs of fragments generated by the rasterization of two polygons with otherwise identical vertices, but <code>z<sub>f</sub></code> values that differ by <code>r</code>, will have distinct depth values.
+
+		For fixed-point depth buffer representations, <code>r</code> is constant throughout the range of the entire depth buffer. For floating-point depth buffers, there is no single minimum resolvable difference. In this case, the minimum resolvable difference for a given polygon is dependent on the maximum exponent, <code>e</code>, in the range of <code>z</code> values spanned by the primitive. If <code>n</code> is the number of bits in the floating-point mantissa, the minimum resolvable difference, <code>r</code>, for the given primitive is defined as
+
+		<dl>
+			<dd><code>r = 2<sup>e-n</sup></code></dd>
+		</dl>
+
+		If no depth buffer is present, <code>r</code> is undefined.
+
+		The bias value <code>o</code> for a polygon is
+
+		<pre><code>￿        m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor                     depthBiasClamp = 0 or NaN
+o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)    depthBiasClamp &gt; 0
+￿    max(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, depthBiasClamp)    depthBiasClamp &lt; 0</code></pre>
+
+		<code>m</code> is computed as described above. If the depth buffer uses a fixed-point representation, <code>m</code> is a function of depth values in the range <code>[0,1]</code>, and <code>o</code> is applied to depth values in the same range.
+
+		For fixed-point depth buffers, fragment depth values are always limited to the range <code>[0,1]</code> by clamping after depth bias addition is performed. Fragment depth values are clamped even when the depth buffer uses a floating-point representation.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_DEPTH_BIAS dynamic state enabled</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-depthBiasClamp">depth bias clamping</a> feature is not enabled, {@code depthBiasClamp} <b>must</b> be {@code 0.0}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
 		</table>
-
-		{@code m} is computed as described above. If the depth buffer uses a fixed-point representation, {@code m} is a function of depth values in the range
-		{@code [0,1]}, and {@code o} is applied to depth values in the same range.
-
-		For fixed-point depth buffers, fragment depth values are always limited to the range {@code [0,1]} by clamping after depth bias addition is performed.
-		Fragment depth values are clamped even when the depth buffer uses a floating-point representation.
-
-		${ValidityProtos.vkCmdSetDepthBias}
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		float.IN("depthBiasConstantFactor", "a scalar factor controlling the constant depth value added to each fragment"),
-		float.IN("depthBiasClamp", "the maximum (or minimum) depth bias of a fragment"),
-		float.IN("depthBiasSlopeFactor", "a scalar factor applied to a fragment’s slope in depth bias calculations")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		float.IN("depthBiasConstantFactor", "a scalar factor controlling the constant depth value added to each fragment."),
+		float.IN("depthBiasClamp", "the maximum (or minimum) depth bias of a fragment."),
+		float.IN("depthBiasSlopeFactor", "a scalar factor applied to a fragment&#8217;s slope in depth bias calculations.")
 	)
 
 	void(
 		"CmdSetBlendConstants",
 		"""
-		Sets the values of blend constants.
+		Set the values of blend constants.
 
-		If the pipeline state object is created without the #DYNAMIC_STATE_BLEND_CONSTANTS dynamic state enabled then the “blend constant”
-		{@code (Rc,Gc,Bc,Ac)} is specified via the {@code blendConstants} member of ##VkPipelineColorBlendStateCreateInfo. Otherwise the blend constant is
-		dynamically set and changed by calling this command,
+		<h5>C Specification</h5>
+		Otherwise, to dynamically set and change the blend constant, call:
 
-		${ValidityProtos.vkCmdSetBlendConstants}
+		<pre><code>void vkCmdSetBlendConstants(
+￿    VkCommandBuffer                             commandBuffer,
+￿    const float                                 blendConstants[4]);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_BLEND_CONSTANTS dynamic state enabled</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		Check(4)..const..float_p.IN(
-			"blendConstants",
-			"an array of four values specifying the R, G, B, and A components of the blend constant color used in blending, depending on the blend factor"
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		Check(4)..const..float_p.IN("blendConstants", "an array of four values specifying the R, G, B, and A components of the blend constant color used in blending, depending on the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#framebuffer-blendfactors\">blend factor</a>.")
 	)
 
 	void(
 		"CmdSetDepthBounds",
 		"""
-		Sets the depth bounds test values for a command buffer.
+		Set the depth bounds test values for a command buffer.
 
-		The depth bounds test conditionally disables coverage of a sample based on the outcome of a comparison between the value zaza in the depth attachment
-		at location ${code("(x<sub>f</sub>,y<sub>f</sub>)")} (for the appropriate sample) and a range of values. The test is enabled or disabled by the
-		{@code depthBoundsTestEnable} member of ##VkPipelineDepthStencilStateCreateInfo. If the pipeline state object is created without the
-		#DYNAMIC_STATE_DEPTH_BOUNDS dynamic state enabled then the range of values used in the depth bounds test are defined by the {@code minDepthBounds} and
-		{@code maxDepthBounds} members of the ##VkPipelineDepthStencilStateCreateInfo structure. Otherwise, to dynamically set the depth bounds range values
-		call this command.
+		<h5>C Specification</h5>
+		The depth bounds test conditionally disables coverage of a sample based on the outcome of a comparison between the value <code>z<sub>a</sub></code> in the depth attachment at location <code>(x<sub>f</sub>,y<sub>f</sub>)</code> (for the appropriate sample) and a range of values. The test is enabled or disabled by the {@code depthBoundsTestEnable} member of ##VkPipelineDepthStencilStateCreateInfo: If the pipeline state object is created without the #DYNAMIC_STATE_DEPTH_BOUNDS dynamic state enabled then the range of values used in the depth bounds test are defined by the {@code minDepthBounds} and {@code maxDepthBounds} members of the ##VkPipelineDepthStencilStateCreateInfo structure. Otherwise, to dynamically set the depth bounds range values call:
 
-		If ${code("minDepthBounds &le; za &le; maxDepthBounds")}, then the depth bounds test passes. Otherwise, the test fails and the sample’s coverage bit is
-		cleared in the fragment. If there is no depth framebuffer attachment or if the depth bounds test is disabled, it is as if the depth bounds test always
-		passes.
+		<pre><code>void vkCmdSetDepthBounds(
+￿    VkCommandBuffer                             commandBuffer,
+￿    float                                       minDepthBounds,
+￿    float                                       maxDepthBounds);</code></pre>
 
-		${ValidityProtos.vkCmdSetDepthBounds}
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_DEPTH_BOUNDS dynamic state enabled</li>
+			<li>{@code minDepthBounds} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
+			<li>{@code maxDepthBounds} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		float.IN("minDepthBounds", "the lower bound of the range of depth values used in the depth bounds test"),
-		float.IN("maxDepthBounds", "the upper bound of the range")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		float.IN("minDepthBounds", "the lower bound of the range of depth values used in the depth bounds test."),
+		float.IN("maxDepthBounds", "the upper bound of the range.")
 	)
 
 	void(
 		"CmdSetStencilCompareMask",
 		"""
-		Sets the stencil compare mask dynamic state.
+		Set the stencil compare mask dynamic state.
 
-		If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_COMPARE_MASK dynamic state enabled, then to dynamically set the stencil compare
-		mask call this command.
+		<h5>C Specification</h5>
+		If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_COMPARE_MASK dynamic state enabled, then to dynamically set the stencil compare mask call:
 
-		${ValidityProtos.vkCmdSetStencilCompareMask}
+		<pre><code>void vkCmdSetStencilCompareMask(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkStencilFaceFlags                          faceMask,
+￿    uint32_t                                    compareMask);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_STENCIL_COMPARE_MASK dynamic state enabled</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code faceMask} <b>must</b> be a valid combination of {@code VkStencilFaceFlagBits} values</li>
+			<li>{@code faceMask} <b>must</b> not be 0</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkStencilFaceFlags.IN(
-			"faceMask",
-			"a bitmask specifying the set of stencil state for which to update the compare mask",
-			VkStencilFaceFlagBits, LinkMode.BITFIELD
-		),
-		uint32_t.IN("compareMask", "the new value to use as the stencil compare mask")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkStencilFaceFlags.IN("faceMask", """a bitmask specifying the set of stencil state for which to update the compare mask. Bits which <b>can</b> be set include:
+<pre><code>typedef enum VkStencilFaceFlagBits {
+￿    VK_STENCIL_FACE_FRONT_BIT = 0x00000001,
+￿    VK_STENCIL_FACE_BACK_BIT = 0x00000002,
+￿    VK_STENCIL_FRONT_AND_BACK = 0x00000003,
+} VkStencilFaceFlagBits;</code></pre>
+
+		<ul>
+			<li>#STENCIL_FACE_FRONT_BIT indicates that only the front set of stencil state is updated.</li>
+			<li>#STENCIL_FACE_BACK_BIT indicates that only the back set of stencil state is updated.</li>
+			<li>#STENCIL_FRONT_AND_BACK is the combination of #STENCIL_FACE_FRONT_BIT and #STENCIL_FACE_BACK_BIT and indicates that both sets of stencil state are updated.</li>
+		</ul>"""),
+		uint32_t.IN("compareMask", "the new value to use as the stencil compare mask.")
 	)
 
 	void(
 		"CmdSetStencilWriteMask",
 		"""
-		Sets the stencil write mask dynamic state.
+		Set the stencil write mask dynamic state.
 
-		If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_WRITE_MASK dynamic state enabled, then to dynamically set the stencil write
-		mask call this command.
+		<h5>C Specification</h5>
+		If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_WRITE_MASK dynamic state enabled, then to dynamically set the stencil write mask call:
 
-		${ValidityProtos.vkCmdSetStencilWriteMask}
+		<pre><code>void vkCmdSetStencilWriteMask(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkStencilFaceFlags                          faceMask,
+￿    uint32_t                                    writeMask);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_STENCIL_WRITE_MASK dynamic state enabled</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code faceMask} <b>must</b> be a valid combination of {@code VkStencilFaceFlagBits} values</li>
+			<li>{@code faceMask} <b>must</b> not be 0</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkStencilFaceFlags.IN(
-			"faceMask",
-			"a bitmask of {@code VkStencilFaceFlagBits} specifying the set of stencil state for which to update the write mask",
-			VkStencilFaceFlagBits, LinkMode.BITFIELD
-		),
-		uint32_t.IN("writeMask", "the new value to use as the stencil write mask")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkStencilFaceFlags.IN("faceMask", "a bitmask of {@code VkStencilFaceFlagBits} specifying the set of stencil state for which to update the write mask, as described above for #CmdSetStencilCompareMask()."),
+		uint32_t.IN("writeMask", "the new value to use as the stencil write mask.")
 	)
 
 	void(
 		"CmdSetStencilReference",
 		"""
-		Sets the stencil reference dynamic state.
+		Set the stencil reference dynamic state.
 
-		If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_REFERENCE dynamic state enabled, then to dynamically set the stencil reference
-		value call this command.
+		<h5>C Specification</h5>
+		If the pipeline state object is created with the #DYNAMIC_STATE_STENCIL_REFERENCE dynamic state enabled, then to dynamically set the stencil reference value call:
 
-		${ValidityProtos.vkCmdSetStencilReference}
+		<pre><code>void vkCmdSetStencilReference(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkStencilFaceFlags                          faceMask,
+￿    uint32_t                                    reference);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The currently bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_STENCIL_REFERENCE dynamic state enabled</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code faceMask} <b>must</b> be a valid combination of {@code VkStencilFaceFlagBits} values</li>
+			<li>{@code faceMask} <b>must</b> not be 0</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkStencilFaceFlags.IN(
-			"faceMask",
-			"a bitmask of {@code VkStencilFaceFlagBits} specifying the set of stencil state for which to update the reference value",
-			VkStencilFaceFlagBits, LinkMode.BITFIELD
-		),
-		uint32_t.IN("reference", "the new value to use as the stencil reference value")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkStencilFaceFlags.IN("faceMask", "a bitmask of {@code VkStencilFaceFlagBits} specifying the set of stencil state for which to update the reference value, as described above for #CmdSetStencilCompareMask()."),
+		uint32_t.IN("reference", "the new value to use as the stencil reference value.")
 	)
 
 	void(
@@ -4257,723 +7652,1793 @@ typedef enum VkPipelineCacheHeaderVersion {
 		"""
 		Binds descriptor sets to a command buffer.
 
-		If any of the sets being bound include dynamic uniform or storage buffers, then {@code pDynamicOffsets} includes one element for each array element in
-		each dynamic descriptor type binding in each set.
+		<h5>C Specification</h5>
+		To bind one or more descriptor sets to a command buffer, call:
 
-		{@code vkCmdBindDescriptorSets} causes the sets numbered {@code [firstSet.. firstSet+descriptorSetCount-1]} to use the bindings stored in
-		{@code pDescriptorSets[0..descriptorSetCount-1]} for subsequent rendering commands (either compute or graphics, according to the
-		{@code pipelineBindPoint}). Any bindings that were previously applied via these sets are no longer valid.
+		<pre><code>void vkCmdBindDescriptorSets(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkPipelineBindPoint                         pipelineBindPoint,
+￿    VkPipelineLayout                            layout,
+￿    uint32_t                                    firstSet,
+￿    uint32_t                                    descriptorSetCount,
+￿    const VkDescriptorSet*                      pDescriptorSets,
+￿    uint32_t                                    dynamicOffsetCount,
+￿    const uint32_t*                             pDynamicOffsets);</code></pre>
 
-		Once bound, a descriptor set affects rendering of subsequent graphics or compute commands in the command buffer until a different set is bound to the
-		same set number, or else until the set is disturbed.
+		<h5>Description</h5>
+		#CmdBindDescriptorSets() causes the sets numbered [{@code firstSet}.. {@code firstSet}+{@code descriptorSetCount}-1] to use the bindings stored in {@code pDescriptorSets}[0..{@code descriptorSetCount}-1] for subsequent rendering commands (either compute or graphics, according to the {@code pipelineBindPoint}). Any bindings that were previously applied via these sets are no longer valid.
 
-		A compatible descriptor set $must be bound for all set numbers that any shaders in a pipeline access, at the time that a draw or dispatch command is
-		recorded to execute using that pipeline. However, if none of the shaders in a pipeline statically use any bindings with a particular set number, then
-		no descriptor set need be bound for that set number, even if the pipeline layout includes a non-trivial descriptor set layout for that set number.
+		Once bound, a descriptor set affects rendering of subsequent graphics or compute commands in the command buffer until a different set is bound to the same set number, or else until the set is disturbed as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility"> Pipeline Layout Compatibility</a>.
 
-		If any of the sets being bound include dynamic uniform or storage buffers, then {@code pDynamicOffsets} includes one element for each array element in
-		each dynamic descriptor type binding in each set. Values are taken from {@code pDynamicOffsets} in an order such that all entries for set N come before
-		set N+1; within a set, entries are ordered by the binding numbers in the decriptor set layouts; and within a binding array, elements are in order.
-		{@code dynamicOffsetCount} $must equal the total number of dynamic descriptors in the sets being bound.
+		A compatible descriptor set <b>must</b> be bound for all set numbers that any shaders in a pipeline access, at the time that a draw or dispatch command is recorded to execute using that pipeline. However, if none of the shaders in a pipeline statically use any bindings with a particular set number, then no descriptor set need be bound for that set number, even if the pipeline layout includes a non-trivial descriptor set layout for that set number.
 
-		The effective offset used for dynamic uniform and storage buffer bindings is the sum of the relative offset taken from {@code pDynamicOffsets}, and the
-		base address of the buffer plus base offset in the descriptor set. The length of the dynamic uniform and storage buffer bindings is the buffer range as
-		specified in the descriptor set.
+		If any of the sets being bound include dynamic uniform or storage buffers, then {@code pDynamicOffsets} includes one element for each array element in each dynamic descriptor type binding in each set. Values are taken from {@code pDynamicOffsets} in an order such that all entries for set N come before set N+1; within a set, entries are ordered by the binding numbers in the descriptor set layouts; and within a binding array, elements are in order. {@code dynamicOffsetCount} <b>must</b> equal the total number of dynamic descriptors in the sets being bound.
 
-		Each of the {@code pDescriptorSets} $must be compatible with the pipeline layout specified by {@code layout}. The layout used to program the bindings
-		$must also be compatible with the pipeline used in subsequent graphics or compute commands.
+		The effective offset used for dynamic uniform and storage buffer bindings is the sum of the relative offset taken from {@code pDynamicOffsets}, and the base address of the buffer plus base offset in the descriptor set. The length of the dynamic uniform and storage buffer bindings is the buffer range as specified in the descriptor set.
 
-		The descriptor set contents bound by a call to {@code vkCmdBindDescriptorSets} $may be consumed during host execution of the command, or during shader
-		execution of the resulting draws, or any time in between. Thus, the contents $must not be altered (overwritten by an update command, or freed) between
-		when the command is recorded and when the command completes executing on the queue. The contents of {@code pDynamicOffsets} are consumed immediately
-		during execution of {@code vkCmdBindDescriptorSets}. Once all pending uses have completed, it is legal to update and reuse a descriptor set.
+		Each of the {@code pDescriptorSets} <b>must</b> be compatible with the pipeline layout specified by {@code layout}. The layout used to program the bindings <b>must</b> also be compatible with the pipeline used in subsequent graphics or compute commands, as defined in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility"> Pipeline Layout Compatibility</a> section.
 
-		${ValidityProtos.vkCmdBindDescriptorSets}
+		The descriptor set contents bound by a call to #CmdBindDescriptorSets() <b>may</b> be consumed during host execution of the command, or during shader execution of the resulting draws, or any time in between. Thus, the contents <b>must</b> not be altered (overwritten by an update command, or freed) between when the command is recorded and when the command completes executing on the queue. The contents of {@code pDynamicOffsets} are consumed immediately during execution of #CmdBindDescriptorSets(). Once all pending uses have completed, it is legal to update and reuse a descriptor set.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>Any given element of {@code pDescriptorSets} <b>must</b> have been allocated with a {@code VkDescriptorSetLayout} that matches (is the same as, or defined identically to) the {@code VkDescriptorSetLayout} at set <em>n</em> in {@code layout}, where <em>n</em> is the sum of {@code firstSet} and the index into {@code pDescriptorSets}</li>
+			<li>{@code dynamicOffsetCount} <b>must</b> be equal to the total number of dynamic descriptors in {@code pDescriptorSets}</li>
+			<li>The sum of {@code firstSet} and {@code descriptorSetCount} <b>must</b> be less than or equal to ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount} provided when {@code layout} was created</li>
+			<li>{@code pipelineBindPoint} <b>must</b> be supported by the {@code commandBuffer}&#8217;s parent {@code VkCommandPool}&#8217;s queue family</li>
+			<li>Any given element of {@code pDynamicOffsets} <b>must</b> satisfy the required alignment for the corresponding descriptor binding&#8217;s descriptor type</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
+			<li>{@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+			<li>{@code pDescriptorSets} <b>must</b> be a pointer to an array of {@code descriptorSetCount} valid {@code VkDescriptorSet} handles</li>
+			<li>If {@code dynamicOffsetCount} is not 0, {@code pDynamicOffsets} <b>must</b> be a pointer to an array of {@code dynamicOffsetCount} {@code uint32_t} values</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>{@code descriptorSetCount} <b>must</b> be greater than 0</li>
+			<li>Each of {@code commandBuffer}, {@code layout}, and the elements of {@code pDescriptorSets} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer that the descriptor sets will be bound to"),
-		VkPipelineBindPoint.IN(
-			"pipelineBindPoint",
-			"""
-			a {@code VkPipelineBindPoint} indicating whether the descriptors will be used by graphics pipelines or compute pipelines. There is a separate set
-			of bind points for each of graphics and compute, so binding one does not disturb the other.
-			""",
-			VkPipelineBindPoints
-		),
-		VkPipelineLayout.IN("layout", "a {@code VkPipelineLayout} object used to program the bindings"),
-		uint32_t.IN("firstSet", "the set number of the first descriptor set to be bound"),
-		AutoSize("pDescriptorSets")..uint32_t.IN("descriptorSetCount", "the number of elements in the {@code pDescriptorSets} array"),
-		const..VkDescriptorSet.p.IN(
-			"pDescriptorSets",
-			"a pointer to an array of {@code VkDescriptorSet} structures describing the descriptor sets to write to"
-		),
-		AutoSize("pDynamicOffsets")..uint32_t.IN("dynamicOffsetCount", "the number of dynamic offsets in the {@code pDynamicOffsets} array"),
-		nullable..const..uint32_t_p.IN("pDynamicOffsets", "a pointer to an array of {@code uint32_t} values specifying dynamic offsets")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer that the descriptor sets will be bound to."),
+		VkPipelineBindPoint.IN("pipelineBindPoint", "a {@code VkPipelineBindPoint} indicating whether the descriptors will be used by graphics pipelines or compute pipelines. There is a separate set of bind points for each of graphics and compute, so binding one does not disturb the other."),
+		VkPipelineLayout.IN("layout", "a {@code VkPipelineLayout} object used to program the bindings."),
+		uint32_t.IN("firstSet", "the set number of the first descriptor set to be bound."),
+		AutoSize("pDescriptorSets")..uint32_t.IN("descriptorSetCount", "the number of elements in the {@code pDescriptorSets} array."),
+		const..VkDescriptorSet.p.IN("pDescriptorSets", "an array of handles to {@code VkDescriptorSet} objects describing the descriptor sets to write to."),
+		AutoSize("pDynamicOffsets")..uint32_t.IN("dynamicOffsetCount", "the number of dynamic offsets in the {@code pDynamicOffsets} array."),
+		nullable..const..uint32_t_p.IN("pDynamicOffsets", "a pointer to an array of {@code uint32_t} values specifying dynamic offsets.")
 	)
 
 	void(
 		"CmdBindIndexBuffer",
 		"""
-		Binds an index buffer to a command buffer.
+		Bind an index buffer to a command buffer.
 
-		${ValidityProtos.vkCmdBindIndexBuffer}
+		<h5>C Specification</h5>
+		To bind an index buffer to a command buffer, call:
+
+		<pre><code>void vkCmdBindIndexBuffer(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkBuffer                                    buffer,
+￿    VkDeviceSize                                offset,
+￿    VkIndexType                                 indexType);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code offset} <b>must</b> be less than the size of {@code buffer}</li>
+			<li>The sum of {@code offset} and the address of the range of {@code VkDeviceMemory} object that is backing {@code buffer}, <b>must</b> be a multiple of the type indicated by {@code indexType}</li>
+			<li>{@code buffer} <b>must</b> have been created with the #BUFFER_USAGE_INDEX_BUFFER_BIT flag</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code indexType} <b>must</b> be a valid {@code VkIndexType} value</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>Both of {@code buffer}, and {@code commandBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
-		VkBuffer.IN("buffer", "the buffer being bound"),
-		VkDeviceSize.IN("offset", "the starting offset in bytes within {@code buffer} used in index buffer address calculations"),
-		VkIndexType.IN("indexType", "selects whether indices are treated as 16 bits or 32 bits", VkIndexTypes)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
+		VkBuffer.IN("buffer", "the buffer being bound."),
+		VkDeviceSize.IN("offset", "the starting offset in bytes within {@code buffer} used in index buffer address calculations."),
+		VkIndexType.IN("indexType", """selects whether indices are treated as 16 bits or 32 bits. Possible values include:
+<pre><code>typedef enum VkIndexType {
+￿    VK_INDEX_TYPE_UINT16 = 0,
+￿    VK_INDEX_TYPE_UINT32 = 1,
+} VkIndexType;</code></pre>""")
 	)
 
 	void(
 		"CmdBindVertexBuffers",
 		"""
-		Binds vertex buffers to a command buffer.
+		Bind vertex buffers to a command buffer.
 
-		The values taken from elements {@code i} of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding
-		{@code firstBinding + i}, for {@code i} in {@code [0,bindingCount)}. The vertex input binding is updated to start at the offset indicated by
-		{@code pOffsets[i]} from the start of the buffer {@code pBuffers[i]}. All vertex input attributes that use each of these bindings will use these
-		updated addresses in their address calculations for subsequent draw commands.
+		<h5>C Specification</h5>
+		To bind vertex buffers to a command buffer for use in subsequent draw commands, call:
 
-		The address of each attribute for each {@code vertexIndex} and {@code instanceIndex} is calculated as follows:
-		${ul(
-			"""
-			Let {@code attribDesc} be the member of ##VkPipelineVertexInputStateCreateInfo{@code ::pVertexAttributeDescriptions} with
-			##VkVertexInputAttributeDescription{@code ::location} equal to the vertex input attribute number.
-			""",
-			"""
-			Let {@code bindingDesc} be the member of {@code VkPipelineVertexInputStateCreateInfo::pVertexBindingDescriptions} with
-			{@code VkVertexInputAttributeDescription::binding} equal to {@code attribDesc.binding}.
-			""",
-			"""
-			Let {@code vertexIndex} be the index of the vertex within the draw (a value between {@code firstVertex} and {@code firstVertex+vertexCount} for
-			#CmdDraw(), or a value taken from the index buffer for #CmdDrawIndexed()), and let {@code instanceIndex} be the instance number of the draw (a
-			value between {@code firstInstance} and {@code firstInstance+instanceCount}).
-			"""
-		)}
+		<pre><code>void vkCmdBindVertexBuffers(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    firstBinding,
+￿    uint32_t                                    bindingCount,
+￿    const VkBuffer*                             pBuffers,
+￿    const VkDeviceSize*                         pOffsets);</code></pre>
 
-		${codeBlock("""
-bufferBindingAddress = buffer[binding].baseAddress + offset[binding];
+		<h5>Description</h5>
+		The values taken from elements <code>i</code> of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding <code>firstBinding + i</code>, for <code>i</code> in <code>[0, bindingCount)</code>. The vertex input binding is updated to start at the offset indicated by {@code pOffsets}[i] from the start of the buffer {@code pBuffers}[i]. All vertex input attributes that use each of these bindings will use these updated addresses in their address calculations for subsequent draw commands.
 
-if (bindingDesc.inputRate == VK_VERTEX_INPUT_RATE_VERTEX)
-    vertexOffset = vertexIndex * bindingDesc.stride;
-else
-    vertexOffset = instanceIndex * bindingDesc.stride;
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code firstBinding} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
+			<li>The sum of {@code firstBinding} and {@code bindingCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
+			<li>All elements of {@code pOffsets} <b>must</b> be less than the size of the corresponding element in {@code pBuffers}</li>
+			<li>All elements of {@code pBuffers} <b>must</b> have been created with the #BUFFER_USAGE_VERTEX_BUFFER_BIT flag</li>
+		</ul>
 
-attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pBuffers} <b>must</b> be a pointer to an array of {@code bindingCount} valid {@code VkBuffer} handles</li>
+			<li>{@code pOffsets} <b>must</b> be a pointer to an array of {@code bindingCount} {@code VkDeviceSize} values</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>{@code bindingCount} <b>must</b> be greater than 0</li>
+			<li>Both of {@code commandBuffer}, and the elements of {@code pBuffers} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
 
-		For each attribute, raw data is extracted starting at {@code attribAddress} and is converted from the {@code VkVertexInputAttributeDescription}’s
-		format to either to floating-point, unsigned integer, or signed integer based on the base type of the format; the base type of the format $must match
-		the base type of the input variable in the shader. If format is a packed format, {@code attribAddress} $must be a multiple of the size in bytes of the
-		whole attribute data type. Otherwise, {@code attribAddress} $must be a multiple of the size in bytes of the component type indicated by format. If the
-		format does not include G, B, or A components, then those are filled with (0,0,1) as needed (using either 1.0f or integer 1 based on the format) for
-		attributes that are not 64-bit data types. The number of components in the vertex shader input variable need not exactly match the number of components
-		in the format. If the vertex shader has fewer components, the extra components are discarded.
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
 
-		${ValidityProtos.vkCmdBindVertexBuffers}
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
-		uint32_t.IN("firstBinding", "the index of the first vertex input binding whose state is updated by the command"),
-		AutoSize("pBuffers", "pOffsets")..uint32_t.IN("bindingCount", "the number of vertex input bindings whose state is updated by the command"),
-		const..VkBuffer.p.IN("pBuffers", "a pointer to an array of buffer handles"),
-		const..VkDeviceSize_p.IN("pOffsets", "a pointer to an array of buffer offsets")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
+		uint32_t.IN("firstBinding", "the index of the first vertex input binding whose state is updated by the command."),
+		AutoSize("pBuffers","pOffsets")..uint32_t.IN("bindingCount", "the number of vertex input bindings whose state is updated by the command."),
+		const..VkBuffer.p.IN("pBuffers", "a pointer to an array of buffer handles."),
+		const..VkDeviceSize.p.IN("pOffsets", "a pointer to an array of buffer offsets.")
 	)
 
 	void(
 		"CmdDraw",
 		"""
-		Records a non-indexed draw.
+		Draw primitives.
 
-		When the command is executed, primitives are assembled using the current primitive topology and {@code vertexCount consecutive} vertex indices with the
-		first {@code vertexIndex value} equal to {@code firstVertex}. The primitives are drawn {@code instanceCount} times with {@code instanceIndex} starting
-		with {@code firstInstance} and increasing sequentially for each instance. The assembled primitives execute the currently bound graphics pipeline.
+		<h5>C Specification</h5>
+		To record a non-indexed draw, call:
 
-		${ValidityProtos.vkCmdDraw}
+		<pre><code>void vkCmdDraw(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    vertexCount,
+￿    uint32_t                                    instanceCount,
+￿    uint32_t                                    firstVertex,
+￿    uint32_t                                    firstInstance);</code></pre>
+
+		<h5>Description</h5>
+		When the command is executed, primitives are assembled using the current primitive topology and {@code vertexCount} consecutive vertex indices with the first {@code vertexIndex} value equal to {@code firstVertex}. The primitives are drawn {@code instanceCount} times with {@code instanceIndex} starting with {@code firstInstance} and increasing sequentially for each instance. The assembled primitives execute the currently bound graphics pipeline.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The current render pass <b>must</b> be <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-compatibility">compatible</a> with the {@code renderPass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS.</li>
+			<li>The subpass index of the current render pass <b>must</b> be equal to the {@code subpass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS.</li>
+			<li>For each set <em>n</em> that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a descriptor set <b>must</b> have been bound to <em>n</em> at #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>For each push constant that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a push constant value <b>must</b> have been set for #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), <b>must</b> be valid if they are statically used by the currently bound {@code VkPipeline} object, specified via #CmdBindPipeline()</li>
+			<li>All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <b>must</b> have valid buffers bound</li>
+			<li>For a given vertex buffer binding, any attribute data fetched <b>must</b> be entirely contained within the corresponding vertex buffer binding, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fxvertex-input">the “Vertex Input Description” section</a></li>
+			<li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS</li>
+			<li>If the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state <b>must</b> have been set on the current command buffer</li>
+			<li>Every input attachment used by the current subpass <b>must</b> be bound to the pipeline via a descriptor set</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called inside of a render pass instance</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Inside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
-		uint32_t.IN("vertexCount", "the number of vertices to draw"),
-		uint32_t.IN("instanceCount", "the number of instances to draw"),
-		uint32_t.IN("firstVertex", "the index of the first vertex to draw"),
-		uint32_t.IN("firstInstance", "the instance ID of the first instance to draw")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
+		uint32_t.IN("vertexCount", "the number of vertices to draw."),
+		uint32_t.IN("instanceCount", "the number of instances to draw."),
+		uint32_t.IN("firstVertex", "the index of the first vertex to draw."),
+		uint32_t.IN("firstInstance", "the instance ID of the first instance to draw.")
 	)
 
 	void(
 		"CmdDrawIndexed",
 		"""
-		Records an indexed draw call.
+		Issue an indexed draw into a command buffer.
 
-		When the command is executed, primitives are assembled using the current primitive topology and {@code indexCount} vertices whose indices are retrieved
-		from the index buffer. The index buffer is treated as an array of tightly packed unsigned integers of size defined by the
-		#CmdBindIndexBuffer(){@code ::indexType} parameter with which the buffer was bound.
+		<h5>C Specification</h5>
+		To record an indexed draw, call:
 
-		The first vertex index is at an offset of {@code firstIndex * indexSize + offset} within the currently bound index buffer, where offset is the offset
-		specified by {@code vkCmdBindIndexBuffer} and {@code indexSize} is the byte size of the type specified by {@code indexType}. Subsequent index values
-		are retrieved from consecutive locations in the index buffer. Indices are first compared to the primitive restart value, then zero extended to 32 bits
-		(if the {@code indexType} is #INDEX_TYPE_UINT16) and have {@code vertexOffset} added to them, before being supplied as the {@code vertexIndex} value.
+		<pre><code>void vkCmdDrawIndexed(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    indexCount,
+￿    uint32_t                                    instanceCount,
+￿    uint32_t                                    firstIndex,
+￿    int32_t                                     vertexOffset,
+￿    uint32_t                                    firstInstance);</code></pre>
 
-		The primitives are drawn {@code instanceCount} times with {@code instanceIndex} starting with {@code firstInstance} and increasing sequentially for
-		each instance. The assembled primitives execute the currently bound graphics pipeline.
+		<h5>Description</h5>
+		When the command is executed, primitives are assembled using the current primitive topology and {@code indexCount} vertices whose indices are retrieved from the index buffer. The index buffer is treated as an array of tightly packed unsigned integers of size defined by the #CmdBindIndexBuffer(){@code ::indexType} parameter with which the buffer was bound.
 
-		${ValidityProtos.vkCmdDrawIndexed}
+		The first vertex index is at an offset of {@code firstIndex} * {@code indexSize} + {@code offset} within the currently bound index buffer, where {@code offset} is the offset specified by #CmdBindIndexBuffer() and {@code indexSize} is the byte size of the type specified by {@code indexType}. Subsequent index values are retrieved from consecutive locations in the index buffer. Indices are first compared to the primitive restart value, then zero extended to 32 bits (if the {@code indexType} is #INDEX_TYPE_UINT16) and have {@code vertexOffset} added to them, before being supplied as the {@code vertexIndex} value.
+
+		The primitives are drawn {@code instanceCount} times with {@code instanceIndex} starting with {@code firstInstance} and increasing sequentially for each instance. The assembled primitives execute the currently bound graphics pipeline.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The current render pass <b>must</b> be <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-compatibility">compatible</a> with the {@code renderPass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS.</li>
+			<li>The subpass index of the current render pass <b>must</b> be equal to the {@code subpass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS.</li>
+			<li>For each set <em>n</em> that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a descriptor set <b>must</b> have been bound to <em>n</em> at #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>For each push constant that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a push constant value <b>must</b> have been set for #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), <b>must</b> be valid if they are statically used by the currently bound {@code VkPipeline} object, specified via #CmdBindPipeline()</li>
+			<li>All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <b>must</b> have valid buffers bound</li>
+			<li>For a given vertex buffer binding, any attribute data fetched <b>must</b> be entirely contained within the corresponding vertex buffer binding, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fxvertex-input">the “Vertex Input Description” section</a></li>
+			<li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS</li>
+			<li>If the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state <b>must</b> have been set on the current command buffer</li>
+			<li>({@code indexSize} * ({@code firstIndex} + {@code indexCount}) + {@code offset}) <b>must</b> be less than or equal to the size of the currently bound index buffer, with indexSize being based on the type specified by {@code indexType}, where the index buffer, {@code indexType}, and {@code offset} are specified via #CmdBindIndexBuffer()</li>
+			<li>Every input attachment used by the current subpass <b>must</b> be bound to the pipeline via a descriptor set</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called inside of a render pass instance</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Inside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
-		uint32_t.IN("indexCount", "the number of vertices to draw"),
-		uint32_t.IN("instanceCount", "the number of instances to draw"),
-		uint32_t.IN("firstIndex", "the base index within the index buffer"),
-		int32_t.IN("vertexOffset", "the value added to the vertex index before indexing into the vertex buffer"),
-		uint32_t.IN("firstInstance", "the instance ID of the first instance to draw")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
+		uint32_t.IN("indexCount", "the number of vertices to draw."),
+		uint32_t.IN("instanceCount", "the number of instances to draw."),
+		uint32_t.IN("firstIndex", "the base index within the index buffer."),
+		int32_t.IN("vertexOffset", "the value added to the vertex index before indexing into the vertex buffer."),
+		uint32_t.IN("firstInstance", "the instance ID of the first instance to draw.")
 	)
 
 	void(
 		"CmdDrawIndirect",
 		"""
-		Records a non-indexed indirect draw.
+		Issue an indirect draw into a command buffer.
 
-		{@code vkCmdDrawIndirect} behaves similarly to #CmdDraw() except that the parameters are read by the device from a buffer during execution.
-		{@code drawCount} draws are executed by the command, with parameters taken from buffer starting at {@code offset} and increasing by {@code stride}
-		bytes for each successive draw. The parameters of each draw are encoded in an array of ##VkDrawIndirectCommand structures. If {@code drawCount} is less
-		than or equal to one, {@code stride} is ignored.
+		<h5>C Specification</h5>
+		To record a non-indexed indirect draw, call:
 
-		${ValidityProtos.vkCmdDrawIndirect}
+		<pre><code>void vkCmdDrawIndirect(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkBuffer                                    buffer,
+￿    VkDeviceSize                                offset,
+￿    uint32_t                                    drawCount,
+￿    uint32_t                                    stride);</code></pre>
+
+		<h5>Description</h5>
+		#CmdDrawIndirect() behaves similarly to #CmdDraw() except that the parameters are read by the device from a buffer during execution. {@code drawCount} draws are executed by the command, with parameters taken from {@code buffer} starting at {@code offset} and increasing by {@code stride} bytes for each successive draw. The parameters of each draw are encoded in an array of ##VkDrawIndirectCommand structures. If {@code drawCount} is less than or equal to one, {@code stride} is ignored.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code offset} <b>must</b> be a multiple of 4</li>
+			<li>If {@code drawCount} is greater than 1, {@code stride} <b>must</b> be a multiple of 4 and <b>must</b> be greater than or equal to sizeof(##VkDrawIndirectCommand)</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiDrawIndirect">multi-draw indirect</a> feature is not enabled, {@code drawCount} <b>must</b> be 0 or 1</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-drawIndirectFirstInstance">drawIndirectFirstInstance</a> feature is not enabled, all the {@code firstInstance} members of the ##VkDrawIndirectCommand structures accessed by this command <b>must</b> be 0</li>
+			<li>The current render pass <b>must</b> be <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-compatibility">compatible</a> with the {@code renderPass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS.</li>
+			<li>The subpass index of the current render pass <b>must</b> be equal to the {@code subpass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS.</li>
+			<li>For each set <em>n</em> that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a descriptor set <b>must</b> have been bound to <em>n</em> at #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>For each push constant that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a push constant value <b>must</b> have been set for #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), <b>must</b> be valid if they are statically used by the currently bound {@code VkPipeline} object, specified via #CmdBindPipeline()</li>
+			<li>All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <b>must</b> have valid buffers bound</li>
+			<li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS</li>
+			<li>If the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state <b>must</b> have been set on the current command buffer</li>
+			<li>If {@code drawCount} is equal to 1, <code>(offset &#x002b; sizeof(##VkDrawIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
+			<li>If {@code drawCount} is greater than 1, <code>(stride &#x00d7; (drawCount - 1) + offset &#x002b; sizeof(##VkDrawIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
+			<li>{@code drawCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDrawIndirectCount}</li>
+			<li>Every input attachment used by the current subpass <b>must</b> be bound to the pipeline via a descriptor set</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called inside of a render pass instance</li>
+			<li>Both of {@code buffer}, and {@code commandBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Inside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
-		VkBuffer.IN("buffer", "the buffer containing draw parameters"),
-		VkDeviceSize.IN("offset", "the byte offset into buffer where parameters begin"),
-		uint32_t.IN("drawCount", "the number of draws to execute, and $can be zero"),
-		uint32_t.IN("stride", "the byte stride between successive sets of draw parameters")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
+		VkBuffer.IN("buffer", "the buffer containing draw parameters."),
+		VkDeviceSize.IN("offset", "the byte offset into {@code buffer} where parameters begin."),
+		uint32_t.IN("drawCount", "the number of draws to execute, and <b>can</b> be zero."),
+		uint32_t.IN("stride", "the byte stride between successive sets of draw parameters.")
 	)
 
 	void(
 		"CmdDrawIndexedIndirect",
 		"""
-		Records an indexed indirect draw.
+		Perform an indexed indirect draw.
 
-		{@code vkCmdDrawIndexedIndirect behaves} similarly to #CmdDrawIndirect() except that the parameters are read by the device from a buffer during
-		execution. {@code drawCount} draws are executed by the command, with parameters taken from buffer starting at {@code offset} and increasing by
-		{@code stride} bytes for each successive draw. The parameters of each draw are encoded in an array of ##VkDrawIndexedIndirectCommand structures. If
-		{@code drawCount} is less than or equal to one, {@code stride} is ignored.
+		<h5>C Specification</h5>
+		To record an indexed indirect draw, call:
 
-		${ValidityProtos.vkCmdDrawIndexedIndirect}
+		<pre><code>void vkCmdDrawIndexedIndirect(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkBuffer                                    buffer,
+￿    VkDeviceSize                                offset,
+￿    uint32_t                                    drawCount,
+￿    uint32_t                                    stride);</code></pre>
+
+		<h5>Description</h5>
+		#CmdDrawIndexedIndirect() behaves similarly to #CmdDrawIndexed() except that the parameters are read by the device from a buffer during execution. {@code drawCount} draws are executed by the command, with parameters taken from {@code buffer} starting at {@code offset} and increasing by {@code stride} bytes for each successive draw. The parameters of each draw are encoded in an array of ##VkDrawIndexedIndirectCommand structures. If {@code drawCount} is less than or equal to one, {@code stride} is ignored.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code offset} <b>must</b> be a multiple of 4</li>
+			<li>If {@code drawCount} is greater than 1, {@code stride} <b>must</b> be a multiple of 4 and <b>must</b> be greater than or equal to sizeof(##VkDrawIndexedIndirectCommand)</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-multiDrawIndirect">multi-draw indirect</a> feature is not enabled, {@code drawCount} <b>must</b> be 0 or 1</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-drawIndirectFirstInstance">drawIndirectFirstInstance</a> feature is not enabled, all the {@code firstInstance} members of the ##VkDrawIndexedIndirectCommand structures accessed by this command <b>must</b> be 0</li>
+			<li>The current render pass <b>must</b> be <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-compatibility">compatible</a> with the {@code renderPass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS.</li>
+			<li>The subpass index of the current render pass <b>must</b> be equal to the {@code subpass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS.</li>
+			<li>For each set <em>n</em> that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a descriptor set <b>must</b> have been bound to <em>n</em> at #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>For each push constant that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS, a push constant value <b>must</b> have been set for #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), <b>must</b> be valid if they are statically used by the currently bound {@code VkPipeline} object, specified via #CmdBindPipeline()</li>
+			<li>All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <b>must</b> have valid buffers bound</li>
+			<li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS</li>
+			<li>If the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state <b>must</b> have been set on the current command buffer</li>
+			<li>If {@code drawCount} is equal to 1, <code>(offset &#x002b; sizeof(##VkDrawIndexedIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
+			<li>If {@code drawCount} is greater than 1, <code>(stride &#x00d7; (drawCount - 1) + offset &#x002b; sizeof(##VkDrawIndexedIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
+			<li>{@code drawCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDrawIndirectCount}</li>
+			<li>Every input attachment used by the current subpass <b>must</b> be bound to the pipeline via a descriptor set</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS accesses a uniform buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS accesses a storage buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called inside of a render pass instance</li>
+			<li>Both of {@code buffer}, and {@code commandBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Inside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
-		VkBuffer.IN("buffer", "the buffer containing draw parameters"),
-		VkDeviceSize.IN("offset", "the byte offset into buffer where parameters begin"),
-		uint32_t.IN("drawCount", "the number of draws to execute, and $can be zero"),
-		uint32_t.IN("stride", "the byte stride between successive sets of draw parameters")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
+		VkBuffer.IN("buffer", "the buffer containing draw parameters."),
+		VkDeviceSize.IN("offset", "the byte offset into {@code buffer} where parameters begin."),
+		uint32_t.IN("drawCount", "the number of draws to execute, and <b>can</b> be zero."),
+		uint32_t.IN("stride", "the byte stride between successive sets of draw parameters.")
 	)
 
 	void(
 		"CmdDispatch",
 		"""
-		Records a dispatch.
+		Dispatch compute work items.
 
-		Dispatching commands (commands with “Dispatch” in the name) provoke work in a compute pipeline. Dispatching commands are recorded into a command buffer
-		and when executed by a queue, will produce work which executes according to the currently bound compute pipeline. A compute pipeline $must be bound to
-		a command buffer before any dispatch commands are recorded in that command buffer.
+		<h5>C Specification</h5>
+		To record a dispatch, call:
 
-		When the command is executed, a global workgroup consisting of ${code("x &times; y &times; z")} local workgroups is assembled.
+		<pre><code>void vkCmdDispatch(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    x,
+￿    uint32_t                                    y,
+￿    uint32_t                                    z);</code></pre>
 
-		${ValidityProtos.vkCmdDispatch}
+		<h5>Description</h5>
+		When the command is executed, a global workgroup consisting of <code>x {times} y {times} z</code> local workgroups is assembled.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code x} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[0]</li>
+			<li>{@code y} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[1]</li>
+			<li>{@code z} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxComputeWorkGroupCount}[2]</li>
+			<li>For each set <em>n</em> that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE, a descriptor set <b>must</b> have been bound to <em>n</em> at #PIPELINE_BIND_POINT_COMPUTE, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), <b>must</b> be valid if they are statically used by the currently bound {@code VkPipeline} object, specified via #CmdBindPipeline()</li>
+			<li>A valid compute pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_COMPUTE</li>
+			<li>For each push constant that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE, a push constant value <b>must</b> have been set for #PIPELINE_BIND_POINT_COMPUTE, with a {@code VkPipelineLayout} that is compatible for push constants with the one used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses unnormalized coordinates, it <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_COMPUTE accesses a uniform buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_COMPUTE accesses a storage buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		uint32_t.IN("x", "the number of local workgroups to dispatch in the X dimension"),
-		uint32_t.IN("y", "the number of local workgroups to dispatch in the Y dimension"),
-		uint32_t.IN("z", "the number of local workgroups to dispatch in the Z dimension")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		uint32_t.IN("x", "the number of local workgroups to dispatch in the X dimension."),
+		uint32_t.IN("y", "the number of local workgroups to dispatch in the Y dimension."),
+		uint32_t.IN("z", "the number of local workgroups to dispatch in the Z dimension.")
 	)
 
 	void(
 		"CmdDispatchIndirect",
 		"""
-		Records an indirect dispatch.
+		Dispatch compute work items using indirect parameters.
 
-		${ValidityProtos.vkCmdDispatchIndirect}
+		<h5>C Specification</h5>
+		To record an indirect command dispatch, call:
+
+		<pre><code>void vkCmdDispatchIndirect(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkBuffer                                    buffer,
+￿    VkDeviceSize                                offset);</code></pre>
+
+		<h5>Description</h5>
+		#CmdDispatchIndirect() behaves similarly to #CmdDispatch() except that the parameters are read by the device from a buffer during execution. The parameters of the dispatch are encoded in a ##VkDispatchIndirectCommand structure taken from {@code buffer} starting at {@code offset}.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>For each set <em>n</em> that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE, a descriptor set <b>must</b> have been bound to <em>n</em> at #PIPELINE_BIND_POINT_COMPUTE, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), <b>must</b> be valid if they are statically used by the currently bound {@code VkPipeline} object, specified via #CmdBindPipeline()</li>
+			<li>A valid compute pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_COMPUTE</li>
+			<li>{@code buffer} <b>must</b> have been created with the #BUFFER_USAGE_INDIRECT_BUFFER_BIT bit set</li>
+			<li>{@code offset} <b>must</b> be a multiple of 4</li>
+			<li>The sum of {@code offset} and the size of ##VkDispatchIndirectCommand <b>must</b> be less than or equal to the size of {@code buffer}</li>
+			<li>For each push constant that is statically used by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE, a push constant value <b>must</b> have been set for #PIPELINE_BIND_POINT_COMPUTE, with a {@code VkPipelineLayout} that is compatible for push constants with the one used to create the current {@code VkPipeline}, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses unnormalized coordinates, it <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
+			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_COMPUTE uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_COMPUTE accesses a uniform buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_COMPUTE accesses a storage buffer, it <b>must</b> not access values outside of the range of that buffer specified in the currently bound descriptor set</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_LINEAR as a result of this command <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>Both of {@code buffer}, and {@code commandBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkBuffer.IN("buffer", "the buffer containing dispatch parameters"),
-		VkDeviceSize.IN("offset", "the byte offset into buffer where parameters begin")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkBuffer.IN("buffer", "the buffer containing dispatch parameters."),
+		VkDeviceSize.IN("offset", "the byte offset into {@code buffer} where parameters begin.")
 	)
 
 	void(
 		"CmdCopyBuffer",
 		"""
-		Copies data between buffer objects.
+		Copy data between buffer regions.
 
-		Each region in {@code pRegions} is copied from the source buffer to the same region of the destination buffer. {@code srcBuffer} and {@code dstBuffer}
-		$can be the same buffer or alias the same memory, but the result is undefined if the copy regions overlap in memory.
+		<h5>C Specification</h5>
+		To copy data between buffer objects, call:
 
-		${ValidityProtos.vkCmdCopyBuffer}
+		<pre><code>void vkCmdCopyBuffer(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkBuffer                                    srcBuffer,
+￿    VkBuffer                                    dstBuffer,
+￿    uint32_t                                    regionCount,
+￿    const VkBufferCopy*                         pRegions);</code></pre>
+
+		<h5>Description</h5>
+		Each region in {@code pRegions} is copied from the source buffer to the same region of the destination buffer. {@code srcBuffer} and {@code dstBuffer} <b>can</b> be the same buffer or alias the same memory, but the result is undefined if the copy regions overlap in memory.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The {@code size} member of a given element of {@code pRegions} <b>must</b> be greater than 0</li>
+			<li>The {@code srcOffset} member of a given element of {@code pRegions} <b>must</b> be less than the size of {@code srcBuffer}</li>
+			<li>The {@code dstOffset} member of a given element of {@code pRegions} <b>must</b> be less than the size of {@code dstBuffer}</li>
+			<li>The {@code size} member of a given element of {@code pRegions} <b>must</b> be less than or equal to the size of {@code srcBuffer} minus {@code srcOffset}</li>
+			<li>The {@code size} member of a given element of {@code pRegions} <b>must</b> be less than or equal to the size of {@code dstBuffer} minus {@code dstOffset}</li>
+			<li>The union of the source regions, and the union of the destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory</li>
+			<li>{@code srcBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_SRC_BIT usage flag</li>
+			<li>{@code dstBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code srcBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} ##VkBufferCopy structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>{@code regionCount} <b>must</b> be greater than 0</li>
+			<li>Each of {@code commandBuffer}, {@code dstBuffer}, and {@code srcBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>TRANSFER GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkBufferCopy
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkBuffer.IN("srcBuffer", "the source buffer"),
-		VkBuffer.IN("dstBuffer", "the destination buffer"),
-		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to copy"),
-		const..VkBufferCopy_p.IN("pRegions", "a pointer to an array of ##VkBufferCopy structures specifying the regions to copy")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkBuffer.IN("srcBuffer", "the source buffer."),
+		VkBuffer.IN("dstBuffer", "the destination buffer."),
+		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to copy."),
+		const..VkBufferCopy.p.IN("pRegions", "a pointer to an array of ##VkBufferCopy structures specifying the regions to copy.")
 	)
 
 	void(
 		"CmdCopyImage",
 		"""
-		Copy data between image objects.
+		Copy data between images.
 
-		{@code vkCmdCopyImage} performs image copies in a similar manner to a host {@code memcpy}. It does not perform general-purpose conversions such as
-		scaling, resizing, blending, color-space conversion, or format conversions. Rather, it simply copies raw image data. {@code vkCmdCopyImage} $can copy
-		between images with different formats, provided the formats are compatible.
+		<h5>C Specification</h5>
+		To copy data between image objects, call:
 
-		Each region in {@code pRegions} is copied from the source image to the same region of the destination image. {@code srcImage} and {@code dstImage} $can
-		be the same image or alias the same memory.
+		<pre><code>void vkCmdCopyImage(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkImage                                     srcImage,
+￿    VkImageLayout                               srcImageLayout,
+￿    VkImage                                     dstImage,
+￿    VkImageLayout                               dstImageLayout,
+￿    uint32_t                                    regionCount,
+￿    const VkImageCopy*                          pRegions);</code></pre>
 
-		Copies are done layer by layer starting with {@code baseArrayLayer} member of {@code srcSubresource} for the source and {@code dstSubresource} for the
-		destination. {@code layerCount} layers are copied to the destination image.
+		<h5>Description</h5>
+		Each region in {@code pRegions} is copied from the source image to the same region of the destination image. {@code srcImage} and {@code dstImage} <b>can</b> be the same image or alias the same memory.
 
-		The formats of {@code srcImage} and {@code dstImage} $must be compatible. Formats are considered compatible if their texel size in bytes is the same
-		between both formats. For example, #FORMAT_R8G8B8A8_UNORM is compatible with #FORMAT_R32_UINT because because both texels are 4 bytes in size.
-		Depth/stencil formats $must match exactly.
+		Copies are done layer by layer starting with {@code baseArrayLayer} member of {@code srcSubresource} for the source and {@code dstSubresource} for the destination. {@code layerCount} layers are copied to the destination image.
 
-		{@code vkCmdCopyImage} allows copying between size-compatible compressed and uncompressed internal formats. Formats are size-compatible if the texel
-		size of the uncompressed format is equal to the block size in bytes of the compressed format. Such a copy does not perform on-the-fly compression or
-		decompression. When copying from an uncompressed format to a compressed format, each texel of uncompressed data becomes a single block of compressed
-		data. When copying from a compressed format to an uncompressed format, a block of compressed data becomes a single texel of uncompressed data. Thus,
-		for example, it is legal to copy between a 128-bit uncompressed format and a compressed format which uses 8-bit/texel 4x4 blocks, or between a 64-bit
-		uncompressed format and a compressed format which uses 4-bit/texel 4x4 blocks.
+		The formats of {@code srcImage} and {@code dstImage} <b>must</b> be compatible. Formats are considered compatible if their element size is the same between both formats. For example, #FORMAT_R8G8B8A8_UNORM is compatible with #FORMAT_R32_UINT because both texels are 4 bytes in size. Depth/stencil formats <b>must</b> match exactly.
 
-		When copying between compressed and uncompressed formats the {@code extent} members represent the texel dimensions of the source image and not the
-		destination. When copying from a compressed image to an uncompressed image the image texel dimensions written to the uncompressed image will be source
-		extent divided by the block size. When copying from an uncompressed image to a compressed image the image texel dimensions written to the compressed
-		image will be the source extent multiplied by the block size. In both cases the number of bytes read and the number of bytes written will be identical.
+		#CmdCopyImage() allows copying between size-compatible compressed and uncompressed internal formats. Formats are size-compatible if the element size of the uncompressed format is equal to the element size (compressed texel block size) of the compressed format. Such a copy does not perform on-the-fly compression or decompression. When copying from an uncompressed format to a compressed format, each texel of uncompressed data of the source image is copied as a raw value to the corresponding compressed texel block of the destination image. When copying from a compressed format to an uncompressed format, each compressed texel block of the source image is copied as a raw value to the corresponding texel of uncompressed data in the destination image. Thus, for example, it is legal to copy between a 128-bit uncompressed format and a compressed format which has a 128-bit sized compressed texel block representing 4x4 texels (using 8 bits per texel), or between a 64-bit uncompressed format and a compressed format which has a 64-bit sized compressed texel block representing 4x4 texels (using 4 bits per texel).
 
-		Copying to or from block-compressed images is typically done in multiples of the block. For this reason the {@code extent} $must be a multiple of the
-		block dimension. There is one exception to this rule which is required to handle compressed images created with dimensions that are not a multiple of
-		the block dimensions. If the {@code srcImage is} compressed and if {@code extent.width} is not a multiple of the block width then
-		{@code (extent.width + srcOffset.x)} $must equal the image subresource width, if {@code extent.height} is not a multiple of the block height then
-		{@code (extent.height + srcOffset.y)} $must equal the image subresource height and if {@code extent.depth} is not a multiple of the block depth then
-		{@code (extent.depth + srcOffset.z)} $must equal the image subresource depth. Similarly if the {@code dstImage} is compressed and if
-		{@code extent.width} is not a multiple of the block width then {@code (extent.width + dstOffset.x)} $must equal the image subresource width, if
-		{@code extent.height} is not a multiple of the block height then {@code (extent.height + dstOffset.y)} $must equal the image subresource height and if
-		{@code extent.depth} is not a multiple of the block depth then {@code (extent.depth + dstOffset.z)} $must equal the image subresource depth. This
-		allows the last block of the image in each non-multiple dimension to be included as a source or target of the copy.
+		When copying between compressed and uncompressed formats the {@code extent} members represent the texel dimensions of the source image and not the destination. When copying from a compressed image to an uncompressed image the image texel dimensions written to the uncompressed image will be source extent divided by the compressed texel block dimensions. When copying from an uncompressed image to a compressed image the image texel dimensions written to the compressed image will be the source extent multiplied by the compressed texel block dimensions. In both cases the number of bytes read and the number of bytes written will be identical.
 
-		{@code vkCmdCopyImage} $can be used to copy image data between multisample images, but both images $must have the same number of samples.
+		Copying to or from block-compressed images is typically done in multiples of the compressed texel block size. For this reason the {@code extent} <b>must</b> be a multiple of the compressed texel block dimension. There is one exception to this rule which is required: to handle compressed images created with dimensions that are not a multiple of the compressed texel block dimensions: if the {@code srcImage} is compressed, then:
 
-		${ValidityProtos.vkCmdCopyImage}
+		<ul>
+			<li>If {@code extent.width} is not a multiple of the compressed texel block width, then <code>(extent.width + srcOffset.x)</code> <b>must</b> equal the image subresource width.</li>
+			<li>If {@code extent.height} is not a multiple of the compressed texel block height, then <code>(extent.height + srcOffset.y)</code> <b>must</b> equal the image subresource height.</li>
+			<li>If {@code extent.depth} is not a multiple of the compressed texel block depth, then <code>(extent.depth + srcOffset.z)</code> <b>must</b> equal the image subresource depth.</li>
+		</ul>
+
+		Similarly, if the {@code dstImage} is compressed, then:
+
+		<ul>
+			<li>If {@code extent.width} is not a multiple of the compressed texel block width, then <code>(extent.width + dstOffset.x)</code> <b>must</b> equal the image subresource width.</li>
+			<li>If {@code extent.height} is not a multiple of the compressed texel block height, then <code>(extent.height + dstOffset.y)</code> <b>must</b> equal the image subresource height.</li>
+			<li>If {@code extent.depth} is not a multiple of the compressed texel block depth, then <code>(extent.depth + dstOffset.z)</code> <b>must</b> equal the image subresource depth.</li>
+		</ul>
+
+		This allows the last compressed texel block of the image in each non-multiple dimension to be included as a source or destination of the copy.
+
+		#CmdCopyImage() <b>can</b> be used to copy image data between multisample images, but both images <b>must</b> have the same number of samples.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The source region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code srcImage}</li>
+			<li>The destination region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code dstImage}</li>
+			<li>The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory</li>
+			<li>{@code srcImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag</li>
+			<li>{@code srcImageLayout} <b>must</b> specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
+			<li>{@code srcImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code dstImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag</li>
+			<li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
+			<li>{@code dstImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>The {@code VkFormat} of each of {@code srcImage} and {@code dstImage} <b>must</b> be compatible, as defined <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies-images-format-compatibility">below</a></li>
+			<li>The sample count of {@code srcImage} and {@code dstImage} <b>must</b> match</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code srcImage} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code srcImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+			<li>{@code dstImage} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code dstImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} valid ##VkImageCopy structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>{@code regionCount} <b>must</b> be greater than 0</li>
+			<li>Each of {@code commandBuffer}, {@code dstImage}, and {@code srcImage} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>TRANSFER GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkImageCopy
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkImage.IN("srcImage", "the source image"),
-		VkImageLayout.IN("srcImageLayout", "the current layout of the source image subresource"),
-		VkImage.IN("dstImage", "the destination image"),
-		VkImageLayout.IN("dstImageLayout", "the current layout of the destination image subresource"),
-		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to copy"),
-		const..VkImageCopy_p.IN("pRegions", "a pointer to an array of ##VkImageCopy structures specifying the regions to copy")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkImage.IN("srcImage", "the source image."),
+		VkImageLayout.IN("srcImageLayout", "the current layout of the source image subresource."),
+		VkImage.IN("dstImage", "the destination image."),
+		VkImageLayout.IN("dstImageLayout", "the current layout of the destination image subresource."),
+		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to copy."),
+		const..VkImageCopy.p.IN("pRegions", "a pointer to an array of ##VkImageCopy structures specifying the regions to copy.")
 	)
 
 	void(
 		"CmdBlitImage",
 		"""
-		Copies regions of a source image into a destination image, potentially performing format conversion, arbitrary scaling, and filtering.
+		Copy regions of an image, potentially performing format conversion,.
 
-		{@code vkCmdBlitImage} $must not be used for multisampled source or destination images. Use #CmdResolveImage() for this purpose.
+		<h5>C Specification</h5>
+		To copy regions of a source image into a destination image, potentially performing format conversion, arbitrary scaling, and filtering, call:
 
-		${ValidityProtos.vkCmdBlitImage}
+		<pre><code>void vkCmdBlitImage(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkImage                                     srcImage,
+￿    VkImageLayout                               srcImageLayout,
+￿    VkImage                                     dstImage,
+￿    VkImageLayout                               dstImageLayout,
+￿    uint32_t                                    regionCount,
+￿    const VkImageBlit*                          pRegions,
+￿    VkFilter                                    filter);</code></pre>
+
+		<h5>Description</h5>
+		#CmdBlitImage() <b>must</b> not be used for multisampled source or destination images. Use #CmdResolveImage() for this purpose.
+
+		As the sizes of the source and destination extents <b>can</b> differ in any dimension, texels in the source extent are scaled and filtered to the destination extent. Scaling occurs via the following operations:
+
+		<ul>
+			<li>
+				For each destination texel, the integer coordinate of that texel is converted to an unnormalized texture coordinate, using the effective inverse of the equations described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-unnormalized-to-integer">unnormalized to integer conversion</a>:
+				<dl>
+			<dd><code>u<sub>base</sub> = i + &#x00bd;</code></dd>
+
+					<dd><code>v<sub>base</sub> = j + &#x00bd;</code></dd>
+
+					<dd><code>w<sub>base</sub> = k + &#x00bd;</code></dd>
+				</dl>
+			</li>
+			<li>
+				These base coordinates are then offset by the first destination offset:
+				<dl>
+			<dd><code>u<sub>offset</sub> = u<sub>base</sub> - x<sub>dst0</sub></code></dd>
+
+					<dd><code>v<sub>offset</sub> = v<sub>base</sub> - y<sub>dst0</sub></code></dd>
+
+					<dd><code>w<sub>offset</sub> = w<sub>base</sub> - z<sub>dst0</sub></code></dd>
+
+					<dd><code>a<sub>offset</sub> = a - baseArrayCount<sub>dst</sub></code></dd>
+				</dl>
+			</li>
+			<li>
+				The scale is determined from the source and destination regions, and applied to the offset coordinates:
+				<dl>
+			<dd><code>scale_u = (x<sub>src1</sub> - x<sub>src0</sub>) / (x<sub>dst1</sub> - x<sub>dst0</sub>)</code></dd>
+
+					<dd><code>scale_v = (y<sub>src1</sub> - y<sub>src0</sub>) / (y<sub>dst1</sub> - y<sub>dst0</sub>)</code></dd>
+
+					<dd><code>scale_w = (z<sub>src1</sub> - z<sub>src0</sub>) / (z<sub>dst1</sub> - z<sub>dst0</sub>)</code></dd>
+
+					<dd><code>u<sub>scaled</sub> = u<sub>offset</sub> * scale<sub>u</sub></code></dd>
+
+					<dd><code>v<sub>scaled</sub> = v<sub>offset</sub> * scale<sub>v</sub></code></dd>
+
+					<dd><code>w<sub>scaled</sub> = w<sub>offset</sub> * scale<sub>w</sub></code></dd>
+				</dl>
+			</li>
+			<li>
+				Finally the source offset is added to the scaled coordinates, to determine the final unnormalized coordinates used to sample from {@code srcImage}:
+				<dl>
+			<dd><code>u = u<sub>scaled</sub> + x<sub>src0</sub></code></dd>
+
+					<dd><code>v = v<sub>scaled</sub> + y<sub>src0</sub></code></dd>
+
+					<dd><code>w = w<sub>scaled</sub> + z<sub>src0</sub></code></dd>
+
+					<dd><code>q = mipLevel</code></dd>
+
+					<dd><code>a = a<sub>offset</sub> + baseArrayCount<sub>src</sub></code></dd>
+				</dl>
+			</li>
+		</ul>
+
+		These coordinates are used to sample from the source image, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures"> Image Operations chapter</a>, with the filter mode equal to that of {@code filter}, a mipmap mode of #SAMPLER_MIPMAP_MODE_NEAREST and an address mode of #SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE. Implementations <b>must</b> clamp at the edge of the source image, and <b>may</b> additionally clamp to the edge of the source region.
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Due to allowable rounding errors in the generation of the source texture coordinates, it is not always possible to guarantee exactly which source texels will be sampled for a given blit. As rounding errors are implementation dependent, the exact results of a blitting operation are also implementation dependent.
+		</div>
+
+		Blits are done layer by layer starting with the {@code baseArrayLayer} member of {@code srcSubresource} for the source and {@code dstSubresource} for the destination. {@code layerCount} layers are blitted to the destination image.
+
+		3D textures are blitted slice by slice. Slices in the source region bounded by {@code srcOffsets}[0].{@code z} and {@code srcOffsets}[1].{@code z} are copied to slices in the destination region bounded by {@code dstOffsets}[0].{@code z} and {@code dstOffsets}[1].{@code z}. For each destination slice, a source z coordinate is linearly interpolated between {@code srcOffsets}[0].{@code z} and {@code srcOffsets}[1].{@code z}. If the {@code filter} parameter is #FILTER_LINEAR then the value sampled from the source image is taken by doing linear filtering using the interpolated z coordinate. If {@code filter} parameter is #FILTER_NEAREST then value sampled from the source image is taken from the single nearest slice (with undefined rounding mode).
+
+		The following filtering and conversion rules apply:
+
+		<ul>
+			<li>Integer formats <b>can</b> only be converted to other integer formats with the same signedness.</li>
+			<li>No format conversion is supported between depth/stencil images. The formats <b>must</b> match.</li>
+			<li>Format conversions on unorm, snorm, unscaled and packed float formats of the copied aspect of the image are performed by first converting the pixels to float values.</li>
+			<li>For sRGB source formats, nonlinear RGB values are converted to linear representation prior to filtering.</li>
+			<li>After filtering, the float values are first clamped and then cast to the destination image format. In case of sRGB destination format, linear RGB values are converted to nonlinear representation before writing the pixel to the image.</li>
+		</ul>
+
+		Signed and unsigned integers are converted by first clamping to the representable range of the destination format, then casting the value.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The source region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code srcImage}</li>
+			<li>The destination region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code dstImage}</li>
+			<li>The union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory with any texel that <b>may</b> be sampled during the blit operation</li>
+			<li>{@code srcImage} <b>must</b> use a format that supports #FORMAT_FEATURE_BLIT_SRC_BIT, which is indicated by ##VkFormatProperties{@code ::linearTilingFeatures} (for linear tiled images) or ##VkFormatProperties{@code ::optimalTilingFeatures} (for optimally tiled images) - as returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>{@code srcImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag</li>
+			<li>{@code srcImageLayout} <b>must</b> specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
+			<li>{@code srcImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code dstImage} <b>must</b> use a format that supports #FORMAT_FEATURE_BLIT_DST_BIT, which is indicated by ##VkFormatProperties{@code ::linearTilingFeatures} (for linear tiled images) or ##VkFormatProperties{@code ::optimalTilingFeatures} (for optimally tiled images) - as returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>{@code dstImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag</li>
+			<li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
+			<li>{@code dstImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>The sample count of {@code srcImage} and {@code dstImage} <b>must</b> both be equal to #SAMPLE_COUNT_1_BIT</li>
+			<li>If either of {@code srcImage} or {@code dstImage} was created with a signed integer {@code VkFormat}, the other <b>must</b> also have been created with a signed integer {@code VkFormat}</li>
+			<li>If either of {@code srcImage} or {@code dstImage} was created with an unsigned integer {@code VkFormat}, the other <b>must</b> also have been created with an unsigned integer {@code VkFormat}</li>
+			<li>If either of {@code srcImage} or {@code dstImage} was created with a depth/stencil format, the other <b>must</b> have exactly the same format</li>
+			<li>If {@code srcImage} was created with a depth/stencil format, {@code filter} <b>must</b> be #FILTER_NEAREST</li>
+			<li>{@code srcImage} <b>must</b> have been created with a {@code samples} value of #SAMPLE_COUNT_1_BIT</li>
+			<li>{@code dstImage} <b>must</b> have been created with a {@code samples} value of #SAMPLE_COUNT_1_BIT</li>
+			<li>If {@code filter} is #FILTER_LINEAR, {@code srcImage} <b>must</b> be of a format which supports linear filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>If {@code filter} is #FILTER_CUBIC_IMG, {@code srcImage} <b>must</b> be of a format which supports cubic filtering, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in ##VkFormatProperties{@code ::linearTilingFeatures} (for a linear image) or ##VkFormatProperties{@code ::optimalTilingFeatures}(for an optimally tiled image) returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>If {@code filter} is #FILTER_CUBIC_IMG, {@code srcImage} <b>must</b> have a {@code VkImageType} of #IMAGE_TYPE_3D</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code srcImage} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code srcImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+			<li>{@code dstImage} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code dstImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} valid ##VkImageBlit structures</li>
+			<li>{@code filter} <b>must</b> be a valid {@code VkFilter} value</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>{@code regionCount} <b>must</b> be greater than 0</li>
+			<li>Each of {@code commandBuffer}, {@code dstImage}, and {@code srcImage} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkImageBlit
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkImage.IN("srcImage", "the source image"),
-		VkImageLayout.IN("srcImageLayout", "the layout of the source image subresources for the blit"),
-		VkImage.IN("dstImage", "the destination image"),
-		VkImageLayout.IN("dstImageLayout", "the layout of the destination image subresources for the blit"),
-		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to blit"),
-		const..VkImageBlit_p.IN("pRegions", " a pointer to an array of ##VkImageBlit structures specifying the regions to blit"),
-		VkFilter.IN("filter", "a {@code VkFilter} specifying the filter to apply if the blits require scaling")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkImage.IN("srcImage", "the source image."),
+		VkImageLayout.IN("srcImageLayout", "the layout of the source image subresources for the blit."),
+		VkImage.IN("dstImage", "the destination image."),
+		VkImageLayout.IN("dstImageLayout", "the layout of the destination image subresources for the blit."),
+		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to blit."),
+		const..VkImageBlit.p.IN("pRegions", "a pointer to an array of ##VkImageBlit structures specifying the regions to blit."),
+		VkFilter.IN("filter", "a {@code VkFilter} specifying the filter to apply if the blits require scaling.")
 	)
 
 	void(
 		"CmdCopyBufferToImage",
 		"""
-		Copies data from a buffer object to an image object.
+		Copy data from a buffer into an image.
 
+		<h5>C Specification</h5>
+		To copy data from a buffer object to an image object, call:
+
+		<pre><code>void vkCmdCopyBufferToImage(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkBuffer                                    srcBuffer,
+￿    VkImage                                     dstImage,
+￿    VkImageLayout                               dstImageLayout,
+￿    uint32_t                                    regionCount,
+￿    const VkBufferImageCopy*                    pRegions);</code></pre>
+
+		<h5>Description</h5>
 		Each region in {@code pRegions} is copied from the specified region of the source buffer to the specified region of the destination image.
 
-		${ValidityProtos.vkCmdCopyBufferToImage}
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The buffer region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code srcBuffer}</li>
+			<li>The image region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code dstImage}</li>
+			<li>The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory</li>
+			<li>{@code srcBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_SRC_BIT usage flag</li>
+			<li>{@code dstImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag</li>
+			<li>{@code dstImage} <b>must</b> have a sample count equal to #SAMPLE_COUNT_1_BIT</li>
+			<li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
+			<li>{@code dstImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code srcBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code dstImage} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code dstImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} valid ##VkBufferImageCopy structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>{@code regionCount} <b>must</b> be greater than 0</li>
+			<li>Each of {@code commandBuffer}, {@code dstImage}, and {@code srcBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>TRANSFER GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkBufferImageCopy
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkBuffer.IN("srcBuffer", "the source buffer"),
-		VkImage.IN("dstImage", "the destination image"),
-		VkImageLayout.IN("dstImageLayout", "the layout of the destination image subresources for the copy"),
-		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to copy"),
-		const..VkBufferImageCopy_p.IN("pRegions", "a pointer to an array of ##VkBufferImageCopy structures specifying the regions to copy")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkBuffer.IN("srcBuffer", "the source buffer."),
+		VkImage.IN("dstImage", "the destination image."),
+		VkImageLayout.IN("dstImageLayout", "the layout of the destination image subresources for the copy."),
+		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to copy."),
+		const..VkBufferImageCopy.p.IN("pRegions", "a pointer to an array of ##VkBufferImageCopy structures specifying the regions to copy.")
 	)
 
 	void(
 		"CmdCopyImageToBuffer",
 		"""
-		Copies data from an image object to a buffer object.
+		Copy image data into a buffer.
 
+		<h5>C Specification</h5>
+		To copy data from an image object to a buffer object, call:
+
+		<pre><code>void vkCmdCopyImageToBuffer(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkImage                                     srcImage,
+￿    VkImageLayout                               srcImageLayout,
+￿    VkBuffer                                    dstBuffer,
+￿    uint32_t                                    regionCount,
+￿    const VkBufferImageCopy*                    pRegions);</code></pre>
+
+		<h5>Description</h5>
 		Each region in {@code pRegions} is copied from the specified region of the source image to the specified region of the destination buffer.
 
-		${ValidityProtos.vkCmdCopyImageToBuffer}
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The image region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code srcImage}</li>
+			<li>The buffer region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code dstBuffer}</li>
+			<li>The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory</li>
+			<li>{@code srcImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag</li>
+			<li>{@code srcImage} <b>must</b> have a sample count equal to #SAMPLE_COUNT_1_BIT</li>
+			<li>{@code srcImageLayout} <b>must</b> specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
+			<li>{@code srcImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code dstBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code srcImage} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code srcImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+			<li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} valid ##VkBufferImageCopy structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>{@code regionCount} <b>must</b> be greater than 0</li>
+			<li>Each of {@code commandBuffer}, {@code dstBuffer}, and {@code srcImage} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>TRANSFER GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkBufferImageCopy
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkImage.IN("srcImage", "the source image"),
-		VkImageLayout.IN("srcImageLayout", "the layout of the source image subresources for the copy"),
-		VkBuffer.IN("dstBuffer", "the destination buffer"),
-		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to copy"),
-		const..VkBufferImageCopy_p.IN("pRegions", "a pointer to an array of ##VkBufferImageCopy structures specifying the regions to copy")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkImage.IN("srcImage", "the source image."),
+		VkImageLayout.IN("srcImageLayout", "the layout of the source image subresources for the copy."),
+		VkBuffer.IN("dstBuffer", "the destination buffer."),
+		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to copy."),
+		const..VkBufferImageCopy.p.IN("pRegions", "a pointer to an array of ##VkBufferImageCopy structures specifying the regions to copy.")
 	)
 
 	void(
 		"CmdUpdateBuffer",
 		"""
-		Updates buffer data inline in a command buffer.
+		Update a buffer's contents from host memory.
+
+		<h5>C Specification</h5>
+		To update buffer data inline in a command buffer, call:
+
+		<pre><code>void vkCmdUpdateBuffer(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkBuffer                                    dstBuffer,
+￿    VkDeviceSize                                dstOffset,
+￿    VkDeviceSize                                dataSize,
+￿    const void*                                 pData);</code></pre>
+
+		<h5>Description</h5>
+		{@code dataSize} <b>must</b> be less than or equal to 65536 bytes. For larger updates, applications <b>can</b> use buffer to buffer <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies-buffers">copies</a>.
 
 		The source data is copied from the user pointer to the command buffer when the command is called.
 
-		{@code vkCmdUpdateBuffer} is only allowed outside of a render pass. This command is treated as “transfer” operation, for the purposes of
-		synchronization barriers. The #BUFFER_USAGE_TRANSFER_DST_BIT $must be specified in usage of ##VkBufferCreateInfo in order for the buffer to be
-		compatible with {@code vkCmdUpdateBuffer}.
+		#CmdUpdateBuffer() is only allowed outside of a render pass. This command is treated as “transfer” operation, for the purposes of synchronization barriers. The #BUFFER_USAGE_TRANSFER_DST_BIT <b>must</b> be specified in {@code usage} of ##VkBufferCreateInfo in order for the buffer to be compatible with #CmdUpdateBuffer().
 
-		${ValidityProtos.vkCmdUpdateBuffer}
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code dstOffset} <b>must</b> be less than the size of {@code dstBuffer}</li>
+			<li>{@code dataSize} <b>must</b> be less than or equal to the size of {@code dstBuffer} minus {@code dstOffset}</li>
+			<li>{@code dstBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag</li>
+			<li>{@code dstOffset} <b>must</b> be a multiple of 4</li>
+			<li>{@code dataSize} <b>must</b> be less than or equal to 65536</li>
+			<li>{@code dataSize} <b>must</b> be a multiple of 4</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code pData} <b>must</b> be a pointer to an array of {@code dataSize} bytes</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>{@code dataSize} <b>must</b> be greater than 0</li>
+			<li>Both of {@code commandBuffer}, and {@code dstBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>TRANSFER GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkBuffer.IN("dstBuffer", "a handle to the buffer to be updated"),
-		VkDeviceSize.IN("dstOffset", "the byte offset into the buffer to start updating, and $must be a multiple of 4"),
-		AutoSize("pData")..VkDeviceSize.IN("dataSize", "the number of bytes to update, and $must be a multiple of 4"),
-		MultiType(
-			PointerMapping.DATA_SHORT,
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG,
-			PointerMapping.DATA_FLOAT,
-			PointerMapping.DATA_DOUBLE
-		)..const..void_p.IN("pData", "a pointer to the source data for the buffer update, and $must be at least {@code dataSize} bytes in size")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkBuffer.IN("dstBuffer", "a handle to the buffer to be updated."),
+		VkDeviceSize.IN("dstOffset", "the byte offset into the buffer to start updating, and <b>must</b> be a multiple of 4."),
+		AutoSize("pData")..VkDeviceSize.IN("dataSize", "the number of bytes to update, and <b>must</b> be a multiple of 4."),
+		const..void_p.IN("pData", "a pointer to the source data for the buffer update, and <b>must</b> be at least {@code dataSize} bytes in size.")
 	)
 
 	void(
 		"CmdFillBuffer",
 		"""
-		Fills a region of a buffer with a fixed value.
+		Fill a region of a buffer with a fixed value.
 
-		{@code vkCmdFillBuffer} is treated as “transfer” operation for the purposes of synchronization barriers. The #BUFFER_USAGE_TRANSFER_DST_BIT $must be
-		specified in usage of ##VkBufferCreateInfo in order for the buffer to be compatible with {@code vkCmdFillBuffer}.
+		<h5>C Specification</h5>
+		To clear buffer data, call:
 
-		${ValidityProtos.vkCmdFillBuffer}
+		<pre><code>void vkCmdFillBuffer(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkBuffer                                    dstBuffer,
+￿    VkDeviceSize                                dstOffset,
+￿    VkDeviceSize                                size,
+￿    uint32_t                                    data);</code></pre>
+
+		<h5>Description</h5>
+		#CmdFillBuffer() is treated as “transfer” operation for the purposes of synchronization barriers. The #BUFFER_USAGE_TRANSFER_DST_BIT <b>must</b> be specified in {@code usage} of ##VkBufferCreateInfo in order for the buffer to be compatible with #CmdFillBuffer().
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code dstOffset} <b>must</b> be less than the size of {@code dstBuffer}</li>
+			<li>{@code dstOffset} <b>must</b> be a multiple of 4</li>
+			<li>If {@code size} is not equal to #WHOLE_SIZE, {@code size} <b>must</b> be greater than 0</li>
+			<li>If {@code size} is not equal to #WHOLE_SIZE, {@code size} <b>must</b> be less than or equal to the size of {@code dstBuffer} minus {@code dstOffset}</li>
+			<li>If {@code size} is not equal to #WHOLE_SIZE, {@code size} <b>must</b> be a multiple of 4</li>
+			<li>{@code dstBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>Both of {@code commandBuffer}, and {@code dstBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkBuffer.IN("dstBuffer", "the buffer to be filled"),
-		VkDeviceSize.IN("dstOffset", "the byte offset into the buffer at which to start filling, and $must be a multiple of 4"),
-		VkDeviceSize.IN(
-			"size",
-			"""
-			the number of bytes to fill, and $must be either a multiple of 4, or #WHOLE_SIZE to fill the range from offset to the end of the buffer. If
-			#WHOLE_SIZE is used and the remaining size of the buffer is not a multiple of 4, then the nearest smaller multiple is used.
-			"""
-		),
-		uint32_t.IN(
-			"data",
-			"the 4-byte word written repeatedly to the buffer to fill size bytes of data. The data word is written to memory according to the host endianness."
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkBuffer.IN("dstBuffer", "the buffer to be filled."),
+		VkDeviceSize.IN("dstOffset", "the byte offset into the buffer at which to start filling, and <b>must</b> be a multiple of 4."),
+		VkDeviceSize.IN("size", "the number of bytes to fill, and <b>must</b> be either a multiple of 4, or #WHOLE_SIZE to fill the range from {@code offset} to the end of the buffer. If #WHOLE_SIZE is used and the remaining size of the buffer is not a multiple of 4, then the nearest smaller multiple is used."),
+		uint32_t.IN("data", "the 4-byte word written repeatedly to the buffer to fill {@code size} bytes of data. The data word is written to memory according to the host endianness.")
 	)
 
 	void(
 		"CmdClearColorImage",
 		"""
-		Clears one or more subranges of a color image.
+		Clear regions of a color image.
 
+		<h5>C Specification</h5>
+		To clear one or more subranges of a color image, call:
+
+		<pre><code>void vkCmdClearColorImage(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkImage                                     image,
+￿    VkImageLayout                               imageLayout,
+￿    const VkClearColorValue*                    pColor,
+￿    uint32_t                                    rangeCount,
+￿    const VkImageSubresourceRange*              pRanges);</code></pre>
+
+		<h5>Description</h5>
 		Each specified range in {@code pRanges} is cleared to the value specified by {@code pColor}.
 
-		${ValidityProtos.vkCmdClearColorImage}
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code image} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag</li>
+			<li>{@code imageLayout} <b>must</b> specify the layout of the image subresource ranges of {@code image} specified in {@code pRanges} at the time this command is executed on a {@code VkDevice}</li>
+			<li>{@code imageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>The image range of any given element of {@code pRanges} <b>must</b> be an image subresource range that is contained within {@code image}</li>
+			<li>{@code image} <b>must</b> not have a compressed or depth/stencil format</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+			<li>{@code pColor} <b>must</b> be a pointer to a valid ##VkClearColorValue union</li>
+			<li>{@code pRanges} <b>must</b> be a pointer to an array of {@code rangeCount} valid ##VkImageSubresourceRange structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>{@code rangeCount} <b>must</b> be greater than 0</li>
+			<li>Both of {@code commandBuffer}, and {@code image} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkClearColorValue, ##VkImageSubresourceRange
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkImage.IN("image", "the image to be cleared"),
-		VkImageLayout.IN(
-			"imageLayout",
-			"the current layout of the image subresource ranges to be cleared",
-			"#IMAGE_LAYOUT_GENERAL #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL"
-		),
-		const..VkClearColorValue_p.IN(
-			"pColor",
-			"a pointer to a ##VkClearColorValue structure that contains the values the image subresource ranges will be cleared to"
-		),
-		AutoSize("pRanges")..uint32_t.IN("rangeCount", "the number of image subresource range structures in {@code pRanges}"),
-		SingleValue("pRange")..const..VkImageSubresourceRange_p.IN(
-			"pRanges",
-			"""
-			points to an array of ##VkImageSubresourceRange structures that describe a range of mipmap levels, array layers, and aspects to be cleared. The
-			{@code aspectMask} of all image subresource ranges $must only include #IMAGE_ASPECT_COLOR_BIT.
-			"""
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkImage.IN("image", "the image to be cleared."),
+		VkImageLayout.IN("imageLayout", "specifies the current layout of the image subresource ranges to be cleared, and <b>must</b> be #IMAGE_LAYOUT_GENERAL or #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL."),
+		const..VkClearColorValue.p.IN("pColor", "a pointer to a ##VkClearColorValue structure that contains the values the image subresource ranges will be cleared to (see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#clears-values\">the “Clear Values” section</a> below)."),
+		AutoSize("pRanges")..uint32_t.IN("rangeCount", "the number of image subresource range structures in {@code pRanges}."),
+		const..VkImageSubresourceRange.p.IN("pRanges", "points to an array of ##VkImageSubresourceRange structures that describe a range of mipmap levels, array layers, and aspects to be cleared, as described in <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#resources-image-views\">Image Views</a>. The {@code aspectMask} of all image subresource ranges <b>must</b> only include #IMAGE_ASPECT_COLOR_BIT.")
 	)
 
 	void(
 		"CmdClearDepthStencilImage",
 		"""
-		Clears one or more subranges of a depth/stencil image.
+		Fill regions of a combined depth-stencil image.
 
-		${ValidityProtos.vkCmdClearDepthStencilImage}
+		<h5>C Specification</h5>
+		To clear one or more subranges of a depth/stencil image, call:
+
+		<pre><code>void vkCmdClearDepthStencilImage(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkImage                                     image,
+￿    VkImageLayout                               imageLayout,
+￿    const VkClearDepthStencilValue*             pDepthStencil,
+￿    uint32_t                                    rangeCount,
+￿    const VkImageSubresourceRange*              pRanges);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code image} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag</li>
+			<li>{@code imageLayout} <b>must</b> specify the layout of the image subresource ranges of {@code image} specified in {@code pRanges} at the time this command is executed on a {@code VkDevice}</li>
+			<li>{@code imageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>The image range of any given element of {@code pRanges} <b>must</b> be an image subresource range that is contained within {@code image}</li>
+			<li>{@code image} <b>must</b> have a depth/stencil format</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+			<li>{@code pDepthStencil} <b>must</b> be a pointer to a valid ##VkClearDepthStencilValue structure</li>
+			<li>{@code pRanges} <b>must</b> be a pointer to an array of {@code rangeCount} valid ##VkImageSubresourceRange structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>{@code rangeCount} <b>must</b> be greater than 0</li>
+			<li>Both of {@code commandBuffer}, and {@code image} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkClearDepthStencilValue, ##VkImageSubresourceRange
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkImage.IN("image", "the image to be cleared"),
-		VkImageLayout.IN(
-			"imageLayout",
-			"the current layout of the image subresource ranges to be cleared",
-			"#IMAGE_LAYOUT_GENERAL #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL"
-		),
-		const..VkClearDepthStencilValue_p.IN(
-			"pDepthStencil",
-			"a pointer to a ##VkClearDepthStencilValue structure that contains the values the depth and stencil image subresource ranges will be cleared to"
-		),
-		AutoSize("pRanges")..uint32_t.IN("rangeCount", "the number of image subresource range structures in {@code pRanges}"),
-		SingleValue("pRange")..const..VkImageSubresourceRange_p.IN(
-			"pRanges",
-			"""
-			points to an array of ##VkImageSubresourceRange structures that describe a range of mipmap levels, array layers, and aspects to be cleared. The
-			{@code aspectMask} of each image subresource range in {@code pRanges} $can include #IMAGE_ASPECT_DEPTH_BIT if the image format has a depth component, and
-			#IMAGE_ASPECT_STENCIL_BIT if the image format has a stencil component. {@code pDepthStencil} is a pointer to a ##VkClearDepthStencilValue structure
-			that contains the values the image subresource ranges will be cleared to.
-			"""
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkImage.IN("image", "the image to be cleared."),
+		VkImageLayout.IN("imageLayout", "specifies the current layout of the image subresource ranges to be cleared, and <b>must</b> be #IMAGE_LAYOUT_GENERAL or #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL."),
+		const..VkClearDepthStencilValue.p.IN("pDepthStencil", "a pointer to a ##VkClearDepthStencilValue structure that contains the values the depth and stencil image subresource ranges will be cleared to (see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#clears-values\">the “Clear Values” section</a> below)."),
+		AutoSize("pRanges")..uint32_t.IN("rangeCount", "the number of image subresource range structures in {@code pRanges}."),
+		const..VkImageSubresourceRange.p.IN("pRanges", "points to an array of ##VkImageSubresourceRange structures that describe a range of mipmap levels, array layers, and aspects to be cleared, as described in <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#resources-image-views\">Image Views</a>. The {@code aspectMask} of each image subresource range in {@code pRanges} <b>can</b> include #IMAGE_ASPECT_DEPTH_BIT if the image format has a depth component, and #IMAGE_ASPECT_STENCIL_BIT if the image format has a stencil component. {@code pDepthStencil} is a pointer to a ##VkClearDepthStencilValue structure that contains the values the image subresource ranges will be cleared to (see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#clears-values\">the “Clear Values” section</a> below).")
 	)
 
 	void(
 		"CmdClearAttachments",
 		"""
-		Clears one or more regions of color and depth/stencil attachments inside a render pass instance.
+		Clear regions within currently bound framebuffer attachments.
 
-		{@code vkCmdClearAttachments} $can clear multiple regions of each attachment used in the current subpass of a render pass instance. This command $must
-		be called only inside a render pass instance, and implicitly selects the images to clear based on the current framebuffer attachments and the command
-		parameters.
+		<h5>C Specification</h5>
+		To clear one or more regions of color and depth/stencil attachments inside a render pass instance, call:
 
-		No memory barriers are needed between {@code vkCmdClearAttachments} and preceding or subsequent draw or attachment clear commands in the same subpass.
+		<pre><code>void vkCmdClearAttachments(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    attachmentCount,
+￿    const VkClearAttachment*                    pAttachments,
+￿    uint32_t                                    rectCount,
+￿    const VkClearRect*                          pRects);</code></pre>
 
-		The {@code vkCmdClearAttachments} command is not affected by the bound pipeline state.
+		<h5>Description</h5>
+		#CmdClearAttachments() <b>can</b> clear multiple regions of each attachment used in the current subpass of a render pass instance. This command <b>must</b> be called only inside a render pass instance, and implicitly selects the images to clear based on the current framebuffer attachments and the command parameters.
 
-		Attachments $can also be cleared at the beginning of a render pass instance by setting {@code loadOp} (or {@code stencilLoadOp}) of
-		##VkAttachmentDescription to #ATTACHMENT_LOAD_OP_CLEAR, as described for #CreateRenderPass().
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If the {@code aspectMask} member of any given element of {@code pAttachments} contains #IMAGE_ASPECT_COLOR_BIT, the {@code colorAttachment} member of those elements <b>must</b> refer to a valid color attachment in the current subpass</li>
+			<li>The rectangular region specified by a given element of {@code pRects} <b>must</b> be contained within the render area of the current render pass instance</li>
+			<li>The layers specified by a given element of {@code pRects} <b>must</b> be contained within every attachment that {@code pAttachments} refers to</li>
+		</ul>
 
-		${ValidityProtos.vkCmdClearAttachments}
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pAttachments} <b>must</b> be a pointer to an array of {@code attachmentCount} valid ##VkClearAttachment structures</li>
+			<li>{@code pRects} <b>must</b> be a pointer to an array of {@code rectCount} ##VkClearRect structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called inside of a render pass instance</li>
+			<li>{@code attachmentCount} <b>must</b> be greater than 0</li>
+			<li>{@code rectCount} <b>must</b> be greater than 0</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Inside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkClearAttachment, ##VkClearRect
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		AutoSize("pAttachments")..uint32_t.IN("attachmentCount", "the number of entries in the {@code pAttachments} array"),
-		const..VkClearAttachment_p.IN(
-			"pAttachments",
-			"a pointer to an array of ##VkClearAttachment structures defining the attachments to clear and the clear values to use"
-		),
-		AutoSize("pRects")..uint32_t.IN("rectCount", "the number of entries in the {@code pRects} array"),
-		const..VkClearRect_p.IN("pRects", "points to an array of ##VkClearRect structures defining regions within each selected attachment to clear")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		AutoSize("pAttachments")..uint32_t.IN("attachmentCount", "the number of entries in the {@code pAttachments} array."),
+		const..VkClearAttachment.p.IN("pAttachments", "a pointer to an array of ##VkClearAttachment structures defining the attachments to clear and the clear values to use."),
+		AutoSize("pRects")..uint32_t.IN("rectCount", "the number of entries in the {@code pRects} array."),
+		const..VkClearRect.p.IN("pRects", "points to an array of ##VkClearRect structures defining regions within each selected attachment to clear.")
 	)
 
 	void(
 		"CmdResolveImage",
 		"""
-		Resolves a multisample image to a non-multisample image.
+		Resolve regions of an image.
 
-		${ValidityProtos.vkCmdResolveImage}
+		<h5>C Specification</h5>
+		To resolve a multisample image to a non-multisample image, call:
+
+		<pre><code>void vkCmdResolveImage(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkImage                                     srcImage,
+￿    VkImageLayout                               srcImageLayout,
+￿    VkImage                                     dstImage,
+￿    VkImageLayout                               dstImageLayout,
+￿    uint32_t                                    regionCount,
+￿    const VkImageResolve*                       pRegions);</code></pre>
+
+		<h5>Description</h5>
+		During the resolve the samples corresponding to each pixel location in the source are converted to a single sample before being written to the destination. If the source formats are floating-point or normalized types, the sample values for each pixel are resolved in an implementation-dependent manner. If the source formats are integer types, a single sample's value is selected for each pixel.
+
+		{@code srcOffset} and {@code dstOffset} select the initial x, y, and z offsets in texels of the sub-regions of the source and destination image data. {@code extent} is the size in texels of the source image to resolve in {@code width}, {@code height} and {@code depth}.
+
+		Resolves are done layer by layer starting with {@code baseArrayLayer} member of {@code srcSubresource} for the source and {@code dstSubresource} for the destination. {@code layerCount} layers are resolved to the destination image.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The source region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code srcImage}</li>
+			<li>The destination region specified by a given element of {@code pRegions} <b>must</b> be a region that is contained within {@code dstImage}</li>
+			<li>The union of all source regions, and the union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory</li>
+			<li>{@code srcImage} <b>must</b> have a sample count equal to any valid sample count value other than #SAMPLE_COUNT_1_BIT</li>
+			<li>{@code dstImage} <b>must</b> have a sample count equal to #SAMPLE_COUNT_1_BIT</li>
+			<li>{@code srcImageLayout} <b>must</b> specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
+			<li>{@code srcImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
+			<li>{@code dstImageLayout} <b>must</b> be either of #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
+			<li>If {@code dstImage} was created with {@code tiling} equal to #IMAGE_TILING_LINEAR, {@code dstImage} <b>must</b> have been created with a {@code format} that supports being a color attachment, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>If {@code dstImage} was created with {@code tiling} equal to #IMAGE_TILING_OPTIMAL, {@code dstImage} <b>must</b> have been created with a {@code format} that supports being a color attachment, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT flag in ##VkFormatProperties{@code ::optimalTilingFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code srcImage} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code srcImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+			<li>{@code dstImage} <b>must</b> be a valid {@code VkImage} handle</li>
+			<li>{@code dstImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+			<li>{@code pRegions} <b>must</b> be a pointer to an array of {@code regionCount} valid ##VkImageResolve structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>{@code regionCount} <b>must</b> be greater than 0</li>
+			<li>Each of {@code commandBuffer}, {@code dstImage}, and {@code srcImage} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkImageResolve
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkImage.IN("srcImage", "the source image"),
-		VkImageLayout.IN("srcImageLayout", "the layout of the source image subresources for the resolve"),
-		VkImage.IN("dstImage", "the destination image"),
-		VkImageLayout.IN("dstImageLayout", "the layout of the destination image subresources for the resolve"),
-		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to resolve"),
-		SingleValue("pRegion")..const..VkImageResolve_p.IN(
-			"pRegions",
-			"a pointer to an array of ##VkImageResolve structures specifying the regions to resolve"
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkImage.IN("srcImage", "the source image."),
+		VkImageLayout.IN("srcImageLayout", "the layout of the source image subresources for the resolve."),
+		VkImage.IN("dstImage", "the destination image."),
+		VkImageLayout.IN("dstImageLayout", "the layout of the destination image subresources for the resolve."),
+		AutoSize("pRegions")..uint32_t.IN("regionCount", "the number of regions to resolve."),
+		const..VkImageResolve.p.IN("pRegions", "a pointer to an array of ##VkImageResolve structures specifying the regions to resolve.")
 	)
 
 	void(
 		"CmdSetEvent",
 		"""
-		Sets the state of an event to signaled from a device.
+		Set an event object to signaled state.
 
-		The status of event is updated once the pipeline stages specified by {@code stageMask} have completed executing prior commands. The command modifying
-		the event is passed through the pipeline bound to the command buffer at time of execution.
+		<h5>C Specification</h5>
+		The state of an event <b>can</b> also be updated on the device by commands inserted in command buffers. To set the state of an event to signaled from a device, call:
 
-		${ValidityProtos.vkCmdSetEvent}
+		<pre><code>void vkCmdSetEvent(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkEvent                                     event,
+￿    VkPipelineStageFlags                        stageMask);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, {@code stageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code stageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
+			<li>{@code stageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
+			<li>{@code stageMask} <b>must</b> not be 0</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>Both of {@code commandBuffer}, and {@code event} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
-		VkEvent.IN("event", "the event that will be signaled"),
-		VkPipelineStageFlags.IN(
-			"stageMask",
-			"the pipeline stage at which the state of {@code event} is updated",
-			VkPipelineStageFlagBitsLinks, LinkMode.BITFIELD
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
+		VkEvent.IN("event", "the event that will be signaled."),
+		VkPipelineStageFlags.IN("stageMask", "specifies the pipeline stage at which the state of {@code event} is updated as described below.")
 	)
 
 	void(
 		"CmdResetEvent",
 		"""
-		Sets the state of an event to unsignaled from a device.
+		Reset an event object to non-signaled state.
 
-		The status of event is updated once the pipeline stages specified by {@code stageMask} have completed executing prior commands. The command modifying
-		the event is passed through the pipeline bound to the command buffer at time of execution.
+		<h5>C Specification</h5>
+		To set the state of an event to unsignaled from a device, call:
 
-		${ValidityProtos.vkCmdResetEvent}
+		<pre><code>void vkCmdResetEvent(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkEvent                                     event,
+￿    VkPipelineStageFlags                        stageMask);</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, {@code stageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code stageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
+			<li>When this command executes, {@code event} <b>must</b> not be waited on by a #CmdWaitEvents() command that is currently executing</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
+			<li>{@code stageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
+			<li>{@code stageMask} <b>must</b> not be 0</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>Both of {@code commandBuffer}, and {@code event} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
-		VkEvent.IN("event", "the event that will be reset"),
-		VkPipelineStageFlags.IN(
-			"stageMask",
-			"the pipeline stage at which the state of {@code event} is updated",
-			VkPipelineStageFlagBitsLinks, LinkMode.BITFIELD
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
+		VkEvent.IN("event", "the event that will be reset."),
+		VkPipelineStageFlags.IN("stageMask", "specifies the pipeline stage at which the state of {@code event} is updated as described below.")
 	)
 
 	void(
 		"CmdWaitEvents",
 		"""
-		Waits for one or more events to enter the signaled state on a device.
+		Wait for one or more events and insert a set of memory.
 
-		${ValidityProtos.vkCmdWaitEvents}
+		<h5>C Specification</h5>
+		To wait for one or more events to enter the signaled state on a device, call:
 
-		{@code vkCmdWaitEvents} waits for events set by either #SetEvent() or #CmdSetEvent() to become signaled. Logically, it has three phases:
-		${ul(
-			"""
-			Wait at the pipeline stages specified by {@code dstStageMask} until the {@code eventCount} event objects specified by {@code pEvents} become
-			signaled. Implementations $may wait for each event object to become signaled in sequence (starting with the first event object in {@code pEvents},
-			and ending with the last), or wait for all of the event objects to become signaled at the same time.
-			""",
-			"Execute the memory barriers specified by {@code pMemoryBarriers}, {@code pBufferMemoryBarriers} and {@code pImageMemoryBarriers}.",
-			"Resume execution of pipeline stages specified by {@code dstStageMask}"
-		)}
+		<pre><code>void vkCmdWaitEvents(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    eventCount,
+￿    const VkEvent*                              pEvents,
+￿    VkPipelineStageFlags                        srcStageMask,
+￿    VkPipelineStageFlags                        dstStageMask,
+￿    uint32_t                                    memoryBarrierCount,
+￿    const VkMemoryBarrier*                      pMemoryBarriers,
+￿    uint32_t                                    bufferMemoryBarrierCount,
+￿    const VkBufferMemoryBarrier*                pBufferMemoryBarriers,
+￿    uint32_t                                    imageMemoryBarrierCount,
+￿    const VkImageMemoryBarrier*                 pImageMemoryBarriers);</code></pre>
 
-		Implementations may not execute commands in a pipelined manner, so {@code vkCmdWaitEvents} may not observe the results of a subsequent
-		{@code vkCmdSetEvent} or {@code vkCmdResetEvent} command, even if the stages in {@code dstStageMask} occur after the stages in {@code srcStageMask}.
+		<h5>Description</h5>
+		#CmdWaitEvents() waits for events set by either #SetEvent() or #CmdSetEvent() to become signaled. Logically, it has three phases:
 
-		Commands that update the state of events in different pipeline stages $may execute out of order, unless the ordering is enforced by execution
-		dependencies.
+		<ul>
+			<li>Wait at the pipeline stages specified by {@code dstStageMask} (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stage-flags">the “Pipeline Stage Flags” section</a>) until the {@code eventCount} event objects specified by {@code pEvents} become signaled. Implementations <b>may</b> wait for each event object to become signaled in sequence (starting with the first event object in {@code pEvents}, and ending with the last), or wait for all of the event objects to become signaled at the same time.</li>
+			<li>Execute the memory barriers specified by {@code pMemoryBarriers}, {@code pBufferMemoryBarriers} and {@code pImageMemoryBarriers} (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-memory-barriers">the “Memory Barriers” section</a>).</li>
+			<li>Resume execution of pipeline stages specified by {@code dstStageMask}</li>
+		</ul>
 
-		${note(
-			"""
-			Applications $should be careful to avoid race conditions when using events. For example, an event $should only be reset if no
-			{@code vkCmdWaitEvents} command is executing that waits upon that event.
-			""")}
+		Implementations <b>may</b> not execute commands in a pipelined manner, so #CmdWaitEvents() <b>may</b> not observe the results of a subsequent #CmdSetEvent() or #CmdResetEvent() command, even if the stages in {@code dstStageMask} occur after the stages in {@code srcStageMask}.
 
-		An act of setting or resetting an event in one queue $may not affect or be visible to other queues. For cross-queue synchronization, semaphores $can be
-		used.
+		Commands that update the state of events in different pipeline stages <b>may</b> execute out of order, unless the ordering is enforced by execution dependencies.
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Applications <b>should</b> be careful to avoid race conditions when using events. For example, an event <b>should</b> only be reset if no #CmdWaitEvents() command is executing that waits upon that event.
+		</div>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code srcStageMask} <b>must</b> be the bitwise OR of the {@code stageMask} parameter used in previous calls to #CmdSetEvent() with any of the members of {@code pEvents} and #PIPELINE_STAGE_HOST_BIT if any of the members of {@code pEvents} was set using #SetEvent()</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
+			<li>If {@code pEvents} includes one or more events that will be signaled by #SetEvent() after {@code commandBuffer} has been submitted to a queue, then #CmdWaitEvents() <b>must</b> not be called inside a render pass instance</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pEvents} <b>must</b> be a pointer to an array of {@code eventCount} valid {@code VkEvent} handles</li>
+			<li>{@code srcStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
+			<li>{@code srcStageMask} <b>must</b> not be 0</li>
+			<li>{@code dstStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
+			<li>{@code dstStageMask} <b>must</b> not be 0</li>
+			<li>If {@code memoryBarrierCount} is not 0, {@code pMemoryBarriers} <b>must</b> be a pointer to an array of {@code memoryBarrierCount} valid ##VkMemoryBarrier structures</li>
+			<li>If {@code bufferMemoryBarrierCount} is not 0, {@code pBufferMemoryBarriers} <b>must</b> be a pointer to an array of {@code bufferMemoryBarrierCount} valid ##VkBufferMemoryBarrier structures</li>
+			<li>If {@code imageMemoryBarrierCount} is not 0, {@code pImageMemoryBarriers} <b>must</b> be a pointer to an array of {@code imageMemoryBarrierCount} valid ##VkImageMemoryBarrier structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>{@code eventCount} <b>must</b> be greater than 0</li>
+			<li>Both of {@code commandBuffer}, and the elements of {@code pEvents} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkBufferMemoryBarrier, ##VkImageMemoryBarrier, ##VkMemoryBarrier
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
-		AutoSize("pEvents")..uint32_t.IN("eventCount", "the length of the {@code pEvents} array"),
-		const..VkEvent.p.IN("pEvents", "an array of event object handles to wait on"),
-		VkPipelineStageFlags.IN(
-			"srcStageMask",
-			"the bitwise OR of the pipeline stages used to signal the event object handles in {@code pEvents}",
-			VkPipelineStageFlagBitsLinks, LinkMode.BITFIELD
-		),
-		VkPipelineStageFlags.IN("dstStageMask", "the pipeline stages at which the wait will occur", VkPipelineStageFlagBitsLinks, LinkMode.BITFIELD),
-		AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", "the number of elements in the {@code pMemoryBarriers} array"),
-		nullable..const..VkMemoryBarrier_p.IN("pMemoryBarriers", "a pointer to an array of {@code memoryBarrierCount} ##VkMemoryBarrier structures"),
-		AutoSize("pBufferMemoryBarriers")..uint32_t.IN("bufferMemoryBarrierCount", "the number of elements in the {@code pBufferMemoryBarriers} array"),
-		nullable..const..VkBufferMemoryBarrier_p.IN(
-			"pBufferMemoryBarriers",
-			"a pointer to an array of {@code bufferMemoryBarrierCount} ##VkBufferMemoryBarrier structures"
-		),
-		AutoSize("pImageMemoryBarriers")..uint32_t.IN("imageMemoryBarrierCount", "the number of elements in the {@code pImageMemoryBarriers} array"),
-		nullable..const..VkImageMemoryBarrier_p.IN(
-			"pImageMemoryBarriers",
-			"a pointer to an array of {@code imageMemoryBarrierCount} ##VkImageMemoryBarrier structures"
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
+		AutoSize("pEvents")..uint32_t.IN("eventCount", "the length of the {@code pEvents} array."),
+		const..VkEvent.p.IN("pEvents", "an array of event object handles to wait on."),
+		VkPipelineStageFlags.IN("srcStageMask", "(see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stage-flags\">the “Pipeline Stage Flags” section</a>) is the bitwise OR of the pipeline stages used to signal the event object handles in {@code pEvents}."),
+		VkPipelineStageFlags.IN("dstStageMask", "the pipeline stages at which the wait will occur."),
+		AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", ""),
+		nullable..const..VkMemoryBarrier.p.IN("pMemoryBarriers", "a pointer to an array of {@code memoryBarrierCount} ##VkMemoryBarrier structures."),
+		AutoSize("pBufferMemoryBarriers")..uint32_t.IN("bufferMemoryBarrierCount", ""),
+		nullable..const..VkBufferMemoryBarrier.p.IN("pBufferMemoryBarriers", "a pointer to an array of {@code bufferMemoryBarrierCount} ##VkBufferMemoryBarrier structures."),
+		AutoSize("pImageMemoryBarriers")..uint32_t.IN("imageMemoryBarrierCount", ""),
+		nullable..const..VkImageMemoryBarrier.p.IN("pImageMemoryBarriers", "a pointer to an array of {@code imageMemoryBarrierCount} ##VkImageMemoryBarrier structures. See <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-memory-barriers\">the “Memory Barriers” section</a> for more details about memory barriers.")
 	)
 
 	void(
 		"CmdPipelineBarrier",
 		"""
-		Records a pipeline barrier.
+		Insert a set of execution and memory barriers.
 
-		A pipeline barrier inserts an execution dependency and a set of memory dependencies between a set of commands earlier in the command buffer and a set
-		of commands later in the command buffer.
+		<h5>C Specification</h5>
+		To record a pipeline barrier, call:
 
-		Each element of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers} and {@code pImageMemoryBarriers} arrays specifies two halves of a memory
-		dependency, as defined above. Specifics of each type of memory barrier and the memory access types are defined further in Memory Barriers.
+		<pre><code>void vkCmdPipelineBarrier(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkPipelineStageFlags                        srcStageMask,
+￿    VkPipelineStageFlags                        dstStageMask,
+￿    VkDependencyFlags                           dependencyFlags,
+￿    uint32_t                                    memoryBarrierCount,
+￿    const VkMemoryBarrier*                      pMemoryBarriers,
+￿    uint32_t                                    bufferMemoryBarrierCount,
+￿    const VkBufferMemoryBarrier*                pBufferMemoryBarriers,
+￿    uint32_t                                    imageMemoryBarrierCount,
+￿    const VkImageMemoryBarrier*                 pImageMemoryBarriers);</code></pre>
 
-		If {@code vkCmdPipelineBarrier} is called outside a render pass instance, then the first set of commands is all prior commands submitted to the queue
-		and recorded in the command buffer and the second set of commands is all subsequent commands recorded in the command buffer and submitted to the queue.
-		If {@code vkCmdPipelineBarrier} is called inside a render pass instance, then the first set of commands is all prior commands in the same subpass and
-		the second set of commands is all subsequent commands in the same subpass.
+		<h5>Description</h5>
+		Each element of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers} and {@code pImageMemoryBarriers} arrays specifies two halves of a memory dependency, as defined above. Specifics of each type of memory barrier and the memory access types are defined further in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-memory-barriers">Memory Barriers</a>.
 
-		${ValidityProtos.vkCmdPipelineBarrier}
+		If #CmdPipelineBarrier() is called outside a render pass instance, then the first set of commands is all prior commands submitted to the queue and recorded in the command buffer and the second set of commands is all subsequent commands recorded in the command buffer and submitted to the queue. If #CmdPipelineBarrier() is called inside a render pass instance, then the first set of commands is all prior commands in the same subpass and the second set of commands is all subsequent commands in the same subpass.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
+			<li>
+				If #CmdPipelineBarrier() is called within a render pass instance, the render pass <b>must</b> have been created with a ##VkSubpassDependency instance in {@code pDependencies} that expresses a dependency from the current subpass to itself. Additionally:
+				<ul>
+					<li>{@code srcStageMask} <b>must</b> contain a subset of the bit values in the {@code srcStageMask} member of that instance of ##VkSubpassDependency</li>
+					<li>{@code dstStageMask} <b>must</b> contain a subset of the bit values in the {@code dstStageMask} member of that instance of ##VkSubpassDependency</li>
+					<li>The {@code srcAccessMask} of any element of {@code pMemoryBarriers} or {@code pImageMemoryBarriers} <b>must</b> contain a subset of the bit values the {@code srcAccessMask} member of that instance of ##VkSubpassDependency</li>
+					<li>The {@code dstAccessMask} of any element of {@code pMemoryBarriers} or {@code pImageMemoryBarriers} <b>must</b> contain a subset of the bit values the {@code dstAccessMask} member of that instance of ##VkSubpassDependency</li>
+					<li>{@code dependencyFlags} <b>must</b> be equal to the {@code dependencyFlags} member of that instance of ##VkSubpassDependency</li>
+				</ul>
+			</li>
+			<li>If #CmdPipelineBarrier() is called within a render pass instance, {@code bufferMemoryBarrierCount} <b>must</b> be 0</li>
+			<li>If #CmdPipelineBarrier() is called within a render pass instance, the {@code image} member of any element of {@code pImageMemoryBarriers} <b>must</b> be equal to one of the elements of {@code pAttachments} that the current {@code framebuffer} was created with, that is also referred to by one of the elements of the {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment} members of the ##VkSubpassDescription instance that the current subpass was created with</li>
+			<li>If #CmdPipelineBarrier() is called within a render pass instance, the {@code oldLayout} and {@code newLayout} members of any element of {@code pImageMemoryBarriers} <b>must</b> be equal to the {@code layout} member of an element of the {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment} members of the ##VkSubpassDescription instance that the current subpass was created with, that refers to the same {@code image}</li>
+			<li>If #CmdPipelineBarrier() is called within a render pass instance, the {@code oldLayout} and {@code newLayout} members of an element of {@code pImageMemoryBarriers} <b>must</b> be equal</li>
+			<li>If #CmdPipelineBarrier() is called within a render pass instance, the {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} members of any element of {@code pImageMemoryBarriers} <b>must</b> be #QUEUE_FAMILY_IGNORED</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code srcStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
+			<li>{@code srcStageMask} <b>must</b> not be 0</li>
+			<li>{@code dstStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
+			<li>{@code dstStageMask} <b>must</b> not be 0</li>
+			<li>{@code dependencyFlags} <b>must</b> be a valid combination of {@code VkDependencyFlagBits} values</li>
+			<li>If {@code memoryBarrierCount} is not 0, {@code pMemoryBarriers} <b>must</b> be a pointer to an array of {@code memoryBarrierCount} valid ##VkMemoryBarrier structures</li>
+			<li>If {@code bufferMemoryBarrierCount} is not 0, {@code pBufferMemoryBarriers} <b>must</b> be a pointer to an array of {@code bufferMemoryBarrierCount} valid ##VkBufferMemoryBarrier structures</li>
+			<li>If {@code imageMemoryBarrierCount} is not 0, {@code pImageMemoryBarriers} <b>must</b> be a pointer to an array of {@code imageMemoryBarrierCount} valid ##VkImageMemoryBarrier structures</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>TRANSFER GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkBufferMemoryBarrier, ##VkImageMemoryBarrier, ##VkMemoryBarrier
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded"),
-		VkPipelineStageFlags.IN(
-			"srcStageMask",
-			"a bitmask of {@code VkPipelineStageFlagBits} specifying a set of source pipeline stages",
-			VkPipelineStageFlagBitsLinks, LinkMode.BITFIELD
-		),
-		VkPipelineStageFlags.IN(
-			"dstStageMask",
-			"""
-			a bitmask specifying a set of destination pipeline stages.
-
-			The pipeline barrier specifies an execution dependency such that all work performed by the set of pipeline stages included in {@code srcStageMask}
-			of the first set of commands completes before any work performed by the set of pipeline stages included in {@code dstStageMask} of the second set
-			of commands begins.
-			""",
-			VkPipelineStageFlagBitsLinks, LinkMode.BITFIELD
-		),
-		VkDependencyFlags.IN(
-			"dependencyFlags",
-			"a bitmask of {@code VkDependencyFlagBits}. The execution dependency is by-region if the mask includes #DEPENDENCY_BY_REGION_BIT.",
-			VkDependencyFlagBits, LinkMode.BITFIELD
-		),
-		AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", "the length of the {@code pMemoryBarriers} array"),
-		nullable..const..VkMemoryBarrier_p.IN("pMemoryBarriers", "a pointer to an array of ##VkMemoryBarrier structures"),
-		AutoSize("pBufferMemoryBarriers")..uint32_t.IN("bufferMemoryBarrierCount", "the length of the {@code pBufferMemoryBarriers} array"),
-		nullable..const..VkBufferMemoryBarrier_p.IN("pBufferMemoryBarriers", "a pointer to an array of ##VkBufferMemoryBarrier structures"),
-		AutoSize("pImageMemoryBarriers")..uint32_t.IN("imageMemoryBarrierCount", "the length of the {@code pImageMemoryBarriers} array"),
-		nullable..const..VkImageMemoryBarrier_p.IN("pImageMemoryBarriers", "a pointer to an array of ##VkImageMemoryBarrier structures")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
+		VkPipelineStageFlags.IN("srcStageMask", "a bitmask of {@code VkPipelineStageFlagBits} specifying a set of source pipeline stages (see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stage-flags\">the “Pipeline Stage Flags” section</a>)."),
+		VkPipelineStageFlags.IN("dstStageMask", """a bitmask specifying a set of destination pipeline stages.
+The pipeline barrier specifies an execution dependency such that all work performed by the set of pipeline stages included in {@code srcStageMask} of the first set of commands completes before any work performed by the set of pipeline stages included in {@code dstStageMask} of the second set of commands begins."""),
+		VkDependencyFlags.IN("dependencyFlags", "a bitmask of {@code VkDependencyFlagBits}. The execution dependency is by-region if the mask includes #DEPENDENCY_BY_REGION_BIT."),
+		AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", "the length of the {@code pMemoryBarriers} array."),
+		nullable..const..VkMemoryBarrier.p.IN("pMemoryBarriers", "a pointer to an array of ##VkMemoryBarrier structures."),
+		AutoSize("pBufferMemoryBarriers")..uint32_t.IN("bufferMemoryBarrierCount", "the length of the {@code pBufferMemoryBarriers} array."),
+		nullable..const..VkBufferMemoryBarrier.p.IN("pBufferMemoryBarriers", "a pointer to an array of ##VkBufferMemoryBarrier structures."),
+		AutoSize("pImageMemoryBarriers")..uint32_t.IN("imageMemoryBarrierCount", "the length of the {@code pImageMemoryBarriers} array."),
+		nullable..const..VkImageMemoryBarrier.p.IN("pImageMemoryBarriers", "a pointer to an array of ##VkImageMemoryBarrier structures.")
 	)
 
 	void(
 		"CmdBeginQuery",
 		"""
-		Begins a query.
+		Begin a query.
 
-		Once queries are reset and ready for use, query commands $can be issued to a command buffer. Occlusion queries and pipeline statistics queries count
-		events - drawn samples and pipeline stage invocations, respectively - resulting from commands that are recorded between a {@code vkCmdBeginQuery}
-		command and a #CmdEndQuery() command within a specified command buffer, effectively scoping a set of drawing and/or compute commands. Timestamp queries
-		write timestamps to a query pool.
+		<h5>C Specification</h5>
+		To begin a query, call:
 
-		A query $must begin and end in the same command buffer, although if it is a primary command buffer, and the inherited queries feature is enabled, it
-		$can execute secondary command buffers during the query operation. For a secondary command buffer to be executed while a query is active, it $must set
-		the {@code occlusionQueryEnable}, {@code queryFlags}, and/or {@code pipelineStatistics} members of ##VkCommandBufferBeginInfo to conservative values. A
-		query $must either begin and end inside the same subpass of a render pass instance, or $must both begin and end outside of a render pass instance (i.e.
-		contain entire render pass instances).
+		<pre><code>void vkCmdBeginQuery(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkQueryPool                                 queryPool,
+￿    uint32_t                                    query,
+￿    VkQueryControlFlags                         flags);</code></pre>
 
-		If the {@code queryType} of the pool is #QUERY_TYPE_OCCLUSION and flags contains #QUERY_CONTROL_PRECISE_BIT, an implementation $must return a result
-		that matches the actual number of samples passed.
+		<h5>Description</h5>
+		If the {@code queryType} of the pool is #QUERY_TYPE_OCCLUSION and {@code flags} contains #QUERY_CONTROL_PRECISE_BIT, an implementation <b>must</b> return a result that matches the actual number of samples passed. This is described in more detail in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-occlusion">Occlusion Queries</a>.
 
-		${ValidityProtos.vkCmdBeginQuery}
+		After beginning a query, that query is considered <em>active</em> within the command buffer it was called in until that same query is ended. Queries active in a primary command buffer when secondary command buffers are executed are considered active for those secondary command buffers.
 
-		After beginning a query, that query is considered active within the command buffer it was called in until that same query is ended. Queries active in a
-		primary command buffer when secondary command buffers are executed are considered active for those secondary command buffers.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The query identified by {@code queryPool} and {@code query} <b>must</b> currently not be <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a></li>
+			<li>The query identified by {@code queryPool} and {@code query} <b>must</b> be unavailable</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-occlusionQueryPrecise">precise occlusion queries</a> feature is not enabled, or the {@code queryType} used to create {@code queryPool} was not #QUERY_TYPE_OCCLUSION, {@code flags} <b>must</b> not contain #QUERY_CONTROL_PRECISE_BIT</li>
+			<li>{@code queryPool} <b>must</b> have been created with a {@code queryType} that differs from that of any other queries that have been made <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a>, and are currently still active within {@code commandBuffer}</li>
+			<li>{@code query} <b>must</b> be less than the number of queries in {@code queryPool}</li>
+			<li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_OCCLUSION, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_PIPELINE_STATISTICS and any of the {@code pipelineStatistics} indicate graphics operations, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_PIPELINE_STATISTICS and any of the {@code pipelineStatistics} indicate compute operations, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkQueryControlFlagBits} values</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>Both of {@code commandBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded"),
-		VkQueryPool.IN("queryPool", "the query pool that will manage the results of the query"),
-		uint32_t.IN("query", "the query index within the query pool that will contain the results"),
-		VkQueryControlFlags.IN(
-			"flags",
-			"a bitmask indicating constraints on the types of queries that $can be performed",
-			VkQueryControlFlagBits, LinkMode.BITFIELD
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded."),
+		VkQueryPool.IN("queryPool", "the query pool that will manage the results of the query."),
+		uint32_t.IN("query", "the query index within the query pool that will contain the results."),
+		VkQueryControlFlags.IN("flags", "a bitmask indicating constraints on the types of queries that <b>can</b> be performed. Bits which <b>can</b> be set include:")
 	)
 
 	void(
@@ -4981,279 +9446,521 @@ attribAddress = bufferBindingAddress + vertexOffset + attribDesc.offset;""")}
 		"""
 		Ends a query.
 
-		${ValidityProtos.vkCmdEndQuery}
+		<h5>C Specification</h5>
+		To end a query after the set of desired draw or dispatch commands is executed, call:
 
-		As queries operate asynchronously, ending a query does not immediately set the query’s status to available. A query is considered finished when the
-		final results of the query are ready to be retrieved by #GetQueryPoolResults() and #CmdCopyQueryPoolResults(), and this is when the query’s status is
-		set to available.
+		<pre><code>void vkCmdEndQuery(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkQueryPool                                 queryPool,
+￿    uint32_t                                    query);</code></pre>
 
-		Once a query is ended the query $must finish in finite time, unless the state of the query is changed using other commands, e.g. by issuing a reset of
-		the query.
+		<h5>Description</h5>
+		As queries operate asynchronously, ending a query does not immediately set the query's status to available. A query is considered <em>finished</em> when the final results of the query are ready to be retrieved by #GetQueryPoolResults() and #CmdCopyQueryPoolResults(), and this is when the query's status is set to available.
 
-		An application $can retrieve results either by requesting they be written into application-provided memory, or by requesting they be copied into a
-		{@code VkBuffer}. In either case, the layout in memory is defined as follows:
-		${ul(
-			"""
-			The first query’s result is written starting at the first byte requested by the command, and each subsequent query’s result begins stride bytes
-			later.
-			""",
-			"""
-			Each query’s result is a tightly packed array of unsigned integers, either 32- or 64-bits as requested by the command, storing the numerical
-			results and, if requested, the availability status.
-			""",
-			"""
-			If #QUERY_RESULT_WITH_AVAILABILITY_BIT is used, the final element of each query’s result is an integer indicating whether the query’s result is
-			available, with any non-zero value indicating that it is available.
-			""",
-			"""
-			Occlusion queries write one integer value - the number of samples passed. Pipeline statistics queries write one integer value for each bit that is
-			enabled in the {@code pipelineStatistics} when the pool is created, and the statistics values are written in bit order starting from the least
-			significant bit. Timestamps write one integer value.
-			""",
-			"""
-			If more than one query is retrieved and stride is not at least as large as the size of the array of integers corresponding to a single query, the
-			values written to memory are undefined.
-			"""
-		)}
+		Once a query is ended the query <b>must</b> finish in finite time, unless the state of the query is changed using other commands, e.g. by issuing a reset of the query.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The query identified by {@code queryPool} and {@code query} <b>must</b> currently be <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a></li>
+			<li>{@code query} <b>must</b> be less than the number of queries in {@code queryPool}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>Both of {@code commandBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded"),
-		VkQueryPool.IN("queryPool", "the query pool that is managing the results of the query"),
-		uint32_t.IN("query", "the query index within the query pool where the result is stored")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded."),
+		VkQueryPool.IN("queryPool", "the query pool that is managing the results of the query."),
+		uint32_t.IN("query", "the query index within the query pool where the result is stored.")
 	)
 
 	void(
 		"CmdResetQueryPool",
 		"""
-		Resets a range of queries in a query pool.
+		Reset queries in a query pool.
 
-		When executed on a queue, this command sets the status of query indices {@code firstQuery}, {@code firstQuery + queryCount − 1} to unavailable.
+		<h5>C Specification</h5>
+		To reset a range of queries in a query pool, call:
 
-		${ValidityProtos.vkCmdResetQueryPool}
+		<pre><code>void vkCmdResetQueryPool(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkQueryPool                                 queryPool,
+￿    uint32_t                                    firstQuery,
+￿    uint32_t                                    queryCount);</code></pre>
+
+		<h5>Description</h5>
+		When executed on a queue, this command sets the status of query indices <code>[firstQuery, firstQuery + queryCount - 1]</code> to unavailable.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code firstQuery} <b>must</b> be less than the number of queries in {@code queryPool}</li>
+			<li>The sum of {@code firstQuery} and {@code queryCount} <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>Both of {@code commandBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded"),
-		VkQueryPool.IN("queryPool", "the handle of the query pool managing the queries being reset"),
-		uint32_t.IN("firstQuery", "the initial query index to reset"),
-		uint32_t.IN("queryCount", "the number of queries to reset")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded."),
+		VkQueryPool.IN("queryPool", "the handle of the query pool managing the queries being reset."),
+		uint32_t.IN("firstQuery", "the initial query index to reset."),
+		uint32_t.IN("queryCount", "the number of queries to reset.")
 	)
 
 	void(
 		"CmdWriteTimestamp",
 		"""
-		Writes a device timestamp into a query object.
+		Write a device timestamp into a query object.
 
-		Timestamps provide applications with a mechanism for timing the execution of commands. A timestamp is an integer value generated by the
-		{@code VkPhysicalDevice}. Unlike other queries, timestamps do not operate over a range, and so do not use #CmdBeginQuery() or #CmdEndQuery(). The
-		mechanism is built around a set of commands that allow the application to tell the {@code VkPhysicalDevice} to write timestamp values to a query pool
-		and then either read timestamp values on the host (using #GetQueryPoolResults()) or copy timestamp values to a {@code VkBuffer} (using
-		#CmdCopyQueryPoolResults()). The application $can then compute differences between timestamps to determine execution time.
+		<h5>C Specification</h5>
+		To request a timestamp, call:
 
-		The number of valid bits in a timestamp value is determined by the ##VkQueueFamilyProperties{@code ::timestampValidBits} property of the queue on which
-		the timestamp is written. Timestamps are supported on any queue which reports a non-zero value for {@code timestampValidBits} via
-		#GetPhysicalDeviceQueueFamilyProperties(). If the {@code timestampComputeAndGraphics} limit is #TRUE, timestamps are supported by every queue family
-		that supports either graphics or compute operations (see ##VkQueueFamilyProperties).
+		<pre><code>void vkCmdWriteTimestamp(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkPipelineStageFlagBits                     pipelineStage,
+￿    VkQueryPool                                 queryPool,
+￿    uint32_t                                    query);</code></pre>
 
-		The number of nanoseconds it takes for a timestamp value to be incremented by 1 $can be obtained from ##VkPhysicalDeviceLimits{@code ::timestampPeriod}
-		after a call to #GetPhysicalDeviceProperties().
+		<h5>Description</h5>
+		#CmdWriteTimestamp() latches the value of the timer when all previous commands have completed executing as far as the specified pipeline stage, and writes the timestamp value to memory. When the timestamp value is written, the availability status of the query is set to available.
 
-		{@code vkCmdWriteTimestamp} latches the value of the timer when all previous commands have completed executing as far as the specified pipeline stage,
-		and writes the timestamp value to memory. When the timestamp value is written, the availability status of the query is set to available.
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		If an implementation is unable to detect completion and latch the timer at any specific stage of the pipeline, it <b>may</b> instead do so at any logically later stage.
+		</div>
 
-		${note(
-			"""
-			If an implementation is unable to detect completion and latch the timer at any specific stage of the pipeline, it $may instead do so at any
-			logically later stage.
-			"""
-		)}
+		#CmdCopyQueryPoolResults() <b>can</b> then be called to copy the timestamp value from the query pool into buffer memory, with ordering and synchronization behavior equivalent to how other queries operate. Timestamp values <b>can</b> also be retrieved from the query pool using #GetQueryPoolResults(). As with other queries, the query <b>must</b> be reset using #CmdResetQueryPool() before requesting the timestamp value be written to it.
 
-		#CmdCopyQueryPoolResults() $can then be called to copy the timestamp value from the query pool into buffer memory, with ordering and synchronization
-		behavior equivalent to how other queries operate. Timestamp values $can also be retrieved from the query pool using #GetQueryPoolResults(). As with
-		other queries, the query $must be reset using #CmdResetQueryPool() before requesting the timestamp value be written to it.
+		While #CmdWriteTimestamp() <b>can</b> be called inside or outside of a render pass instance, #CmdCopyQueryPoolResults() <b>must</b> only be called outside of a render pass instance.
 
-		While {@code vkCmdWriteTimestamp} $can be called inside or outside of a render pass instance, #CmdCopyQueryPoolResults() $must only be called outside of
-		a render pass instance.
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The query identified by {@code queryPool} and {@code query} <b>must</b> be <em>unavailable</em></li>
+			<li>The command pool&#8217;s queue family <b>must</b> support a non-zero {@code timestampValidBits}</li>
+		</ul>
 
-		${ValidityProtos.vkCmdWriteTimestamp}
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pipelineStage} <b>must</b> be a valid {@code VkPipelineStageFlagBits} value</li>
+			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>Both of {@code commandBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-		VkPipelineStageFlagBits.IN(
-			"pipelineStage",
-			"one of the {@code VkPipelineStageFlagBits}, specifying a stage of the pipeline",
-			VkPipelineStageFlagBitsLinks
-		),
-		VkQueryPool.IN("queryPool", "the query pool that will manage the timestamp"),
-		uint32_t.IN("query", "the query within the query pool that will contain the timestamp")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
+		VkPipelineStageFlagBits.IN("pipelineStage", "one of the {@code VkPipelineStageFlagBits}, specifying a stage of the pipeline."),
+		VkQueryPool.IN("queryPool", "the query pool that will manage the timestamp."),
+		uint32_t.IN("query", "the query within the query pool that will contain the timestamp.")
 	)
 
 	void(
 		"CmdCopyQueryPoolResults",
 		"""
-		Copies query statuses and numerical results directly to buffer memory.
+		Copy the results of queries in a query pool to a buffer object.
 
-		{@code vkCmdCopyQueryPoolResults} is guaranteed to see the effect of previous uses of #CmdResetQueryPool() in the same queue, without any additional
-		synchronization. Thus, the results will always reflect the most recent use of the query.
+		<h5>C Specification</h5>
+		To copy query statuses and numerical results directly to buffer memory, call:
 
-		{@code flags} has the same possible values described above for the flags parameter of #GetQueryPoolResults(), but the different style of execution
-		causes some subtle behavioral differences. Because {@code vkCmdCopyQueryPoolResults} executes in order with respect to other query commands, there is
-		less ambiguity about which use of a query is being requested.
+		<pre><code>void vkCmdCopyQueryPoolResults(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkQueryPool                                 queryPool,
+￿    uint32_t                                    firstQuery,
+￿    uint32_t                                    queryCount,
+￿    VkBuffer                                    dstBuffer,
+￿    VkDeviceSize                                dstOffset,
+￿    VkDeviceSize                                stride,
+￿    VkQueryResultFlags                          flags);</code></pre>
 
-		If no bits are set in flags, results for all requested queries in the available state are written as 32-bit unsigned integer values, and nothing is
-		written for queries in the unavailable state.
+		<h5>Description</h5>
+		#CmdCopyQueryPoolResults() is guaranteed to see the effect of previous uses of #CmdResetQueryPool() in the same queue, without any additional synchronization. Thus, the results will always reflect the most recent use of the query.
 
-		If #QUERY_RESULT_64_BIT is set, the results are written as an array of 64-bit unsigned integer values as described for {@code vkGetQueryPoolResults}.
+		{@code flags} has the same possible values described above for the {@code flags} parameter of #GetQueryPoolResults(), but the different style of execution causes some subtle behavioral differences. Because #CmdCopyQueryPoolResults() executes in order with respect to other query commands, there is less ambiguity about which use of a query is being requested.
 
-		If #QUERY_RESULT_WAIT_BIT is set, the implementation will wait for each query’s status to be in the available state before retrieving the numerical
-		results for that query. This is guaranteed to reflect the most recent use of the query on the same queue, assuming that the query is not being
-		simultaneously used by other queues. If the query does not become available in a finite amount of time (e.g. due to not issuing a query since the last
-		reset), a #ERROR_DEVICE_LOST error $may occur.
+		If no bits are set in {@code flags}, results for all requested queries in the available state are written as 32-bit unsigned integer values, and nothing is written for queries in the unavailable state.
 
-		Similarly, if #QUERY_RESULT_WITH_AVAILABILITY_BIT is set and #QUERY_RESULT_WAIT_BIT is not set, the availability is guaranteed to reflect the most
-		recent use of the query on the same queue, assuming that the query is not being simultaneously used by other queues. As with
-		{@code vkGetQueryPoolResults}, implementations $must guarantee that if they return a non-zero availability value, then the numerical results are valid.
+		If #QUERY_RESULT_64_BIT is set, the results are written as an array of 64-bit unsigned integer values as described for #GetQueryPoolResults().
 
-		If #QUERY_RESULT_PARTIAL_BIT is set, #QUERY_RESULT_WAIT_BIT is not set, and the query’s status is unavailable, an intermediate result value between
-		zero and the final result value is written for that query.
+		If #QUERY_RESULT_WAIT_BIT is set, the implementation will wait for each query's status to be in the available state before retrieving the numerical results for that query. This is guaranteed to reflect the most recent use of the query on the same queue, assuming that the query is not being simultaneously used by other queues. If the query does not become available in a finite amount of time (e.g. due to not issuing a query since the last reset), a #ERROR_DEVICE_LOST error <b>may</b> occur.
 
-		#QUERY_RESULT_PARTIAL_BIT $must not be used if the pool’s {@code queryType} is #QUERY_TYPE_TIMESTAMP.
+		Similarly, if #QUERY_RESULT_WITH_AVAILABILITY_BIT is set and #QUERY_RESULT_WAIT_BIT is not set, the availability is guaranteed to reflect the most recent use of the query on the same queue, assuming that the query is not being simultaneously used by other queues. As with #GetQueryPoolResults(), implementations <b>must</b> guarantee that if they return a non-zero availability value, then the numerical results are valid.
 
-		{@code vkCmdCopyQueryPoolResults} is considered to be a transfer operation, and its writes to buffer memory $must be synchronized using
-		#PIPELINE_STAGE_TRANSFER_BIT and #ACCESS_TRANSFER_WRITE_BIT before using the results.
+		If #QUERY_RESULT_PARTIAL_BIT is set, #QUERY_RESULT_WAIT_BIT is not set, and the query's status is unavailable, an intermediate result value between zero and the final result value is written for that query.
 
-		${ValidityProtos.vkCmdCopyQueryPoolResults}
+		#QUERY_RESULT_PARTIAL_BIT <b>must</b> not be used if the pool's {@code queryType} is #QUERY_TYPE_TIMESTAMP.
 
-		Rendering operations such as clears, MSAA resolves, attachment load/store operations, and blits $may count towards the results of queries. This
-		behavior is implementation-dependent and $may vary depending on the path used within an implementation. For example, some implementations have several
-		types of clears, some of which $may include vertices and some not.
+		#CmdCopyQueryPoolResults() is considered to be a transfer operation, and its writes to buffer memory <b>must</b> be synchronized using #PIPELINE_STAGE_TRANSFER_BIT and #ACCESS_TRANSFER_WRITE_BIT before using the results.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code dstOffset} <b>must</b> be less than the size of {@code dstBuffer}</li>
+			<li>{@code firstQuery} <b>must</b> be less than the number of queries in {@code queryPool}</li>
+			<li>The sum of {@code firstQuery} and {@code queryCount} <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+			<li>If #QUERY_RESULT_64_BIT is not set in {@code flags} then {@code dstOffset} and {@code stride} <b>must</b> be multiples of 4</li>
+			<li>If #QUERY_RESULT_64_BIT is set in {@code flags} then {@code dstOffset} and {@code stride} <b>must</b> be multiples of 8</li>
+			<li>{@code dstBuffer} <b>must</b> have enough storage, from {@code dstOffset}, to contain the result of each query, as described <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-memorylayout">here</a></li>
+			<li>{@code dstBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag</li>
+			<li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TIMESTAMP, {@code flags} <b>must</b> not contain #QUERY_RESULT_PARTIAL_BIT</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
+			<li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkQueryResultFlagBits} values</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>Each of {@code commandBuffer}, {@code dstBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Outside</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded"),
-		VkQueryPool.IN("queryPool", "the query pool managing the queries containing the desired results"),
-		uint32_t.IN("firstQuery", "the initial query index"),
-		uint32_t.IN("queryCount", "the number of queries. {@code firstQuery} and {@code queryCount} together define a range of queries"),
-		VkBuffer.IN("dstBuffer", "a {@code VkBuffer} object that will receive the results of the copy command"),
-		VkDeviceSize.IN("dstOffset", "an offset into {@code dstBuffer}"),
-		VkDeviceSize.IN("stride", "the stride in bytes between results for individual queries within {@code dstBuffer}"),
-		VkQueryResultFlags.IN(
-			"flags",
-			"a bitmask of {@code VkQueryResultFlagBits} specifying how and when results are returned",
-			VkQueryResultFlagBits, LinkMode.BITFIELD
-		)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded."),
+		VkQueryPool.IN("queryPool", "the query pool managing the queries containing the desired results."),
+		uint32_t.IN("firstQuery", "the initial query index."),
+		uint32_t.IN("queryCount", "the number of queries. {@code firstQuery} and {@code queryCount} together define a range of queries."),
+		VkBuffer.IN("dstBuffer", "a {@code VkBuffer} object that will receive the results of the copy command."),
+		VkDeviceSize.IN("dstOffset", "an offset into {@code dstBuffer}."),
+		VkDeviceSize.IN("stride", "the stride in bytes between results for individual queries within {@code dstBuffer}. The required size of the backing memory for {@code dstBuffer} is determined as described above for #GetQueryPoolResults()."),
+		VkQueryResultFlags.IN("flags", "a bitmask of {@code VkQueryResultFlagBits} specifying how and when results are returned.")
 	)
 
 	void(
 		"CmdPushConstants",
 		"""
-		Updates the values of push constants.
+		Update the values of push constants.
 
-		The pipeline layout defines shader push constants which are updated via Vulkan commands rather than via writes to memory or copy commands.
+		<h5>C Specification</h5>
+		To update push constants, call:
 
-		${note(
-			"Push constants represent a high speed path to modify constant data in pipelines that is expected to outperform memory-backed resource updates."
-		)}
+		<pre><code>void vkCmdPushConstants(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkPipelineLayout                            layout,
+￿    VkShaderStageFlags                          stageFlags,
+￿    uint32_t                                    offset,
+￿    uint32_t                                    size,
+￿    const void*                                 pValues);</code></pre>
 
-		${ValidityProtos.vkCmdPushConstants}
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code stageFlags} <b>must</b> match exactly the shader stages used in {@code layout} for the range specified by {@code offset} and {@code size}</li>
+			<li>{@code offset} <b>must</b> be a multiple of 4</li>
+			<li>{@code size} <b>must</b> be a multiple of 4</li>
+			<li>{@code offset} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxPushConstantsSize}</li>
+			<li>{@code size} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPushConstantsSize} minus {@code offset}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+			<li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+			<li>{@code stageFlags} <b>must</b> not be 0</li>
+			<li>{@code pValues} <b>must</b> be a pointer to an array of {@code size} bytes</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+			<li>{@code size} <b>must</b> be greater than 0</li>
+			<li>Both of {@code commandBuffer}, and {@code layout} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary Secondary</td><td>Both</td><td>GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer in which the push constant update will be recorded"),
-		VkPipelineLayout.IN("layout", "the pipeline layout used to program the push constant updates"),
-		VkShaderStageFlags.IN(
-			"stageFlags",
-			"a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the push constants in the updated range",
-			VkShaderStageFlagBits, LinkMode.BITFIELD
-		),
-		uint32_t.IN("offset", "the start offset of the push constant range to update, in units of bytes"),
-		AutoSize("pValues")..uint32_t.IN("size", "the size of the push constant range to update, in units of bytes"),
-		MultiType(
-			PointerMapping.DATA_SHORT,
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG,
-			PointerMapping.DATA_FLOAT,
-			PointerMapping.DATA_DOUBLE
-		)..const..void_p.IN("pValues", "an array of {@code size} bytes containing the new push constant values")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer in which the push constant update will be recorded."),
+		VkPipelineLayout.IN("layout", "the pipeline layout used to program the push constant updates."),
+		VkShaderStageFlags.IN("stageFlags", "a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the push constants in the updated range."),
+		uint32_t.IN("offset", "the start offset of the push constant range to update, in units of bytes."),
+		AutoSize("pValues")..uint32_t.IN("size", "the size of the push constant range to update, in units of bytes."),
+		const..void_p.IN("pValues", "an array of {@code size} bytes containing the new push constant values.")
 	)
 
 	void(
 		"CmdBeginRenderPass",
 		"""
-		Begins a render pass instance.
+		Begin a new render pass.
 
-		An application records the commands for a render pass instance one subpass at a time, by beginning a render pass instance, iterating over the subpasses
-		to record commands for that subpass, and then ending the render pass instance.
+		<h5>C Specification</h5>
+		To begin a render pass instance, call:
 
-		${ValidityProtos.vkCmdBeginRenderPass}
+		<pre><code>void vkCmdBeginRenderPass(
+￿    VkCommandBuffer                             commandBuffer,
+￿    const VkRenderPassBeginInfo*                pRenderPassBegin,
+￿    VkSubpassContents                           contents);</code></pre>
+
+		<h5>Description</h5>
+		After beginning a render pass instance, the command buffer is ready to record the commands for the first subpass of that render pass.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the ##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with #IMAGE_USAGE_COLOR_ATTACHMENT_BIT set</li>
+			<li>If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the ##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is #IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT set</li>
+			<li>If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the ##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is #IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT set</li>
+			<li>If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the ##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT set</li>
+			<li>If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the ##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT set</li>
+			<li>If any of the {@code initialLayout} members of the ##VkAttachmentDescription structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is not #IMAGE_LAYOUT_UNDEFINED, then each such {@code initialLayout} <b>must</b> be equal to the current layout of the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pRenderPassBegin} <b>must</b> be a pointer to a valid ##VkRenderPassBeginInfo structure</li>
+			<li>{@code contents} <b>must</b> be a valid {@code VkSubpassContents} value</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called outside of a render pass instance</li>
+			<li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary</td><td>Outside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
+
+		<h5>See Also</h5>
+		##VkRenderPassBeginInfo
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer in which to record the command"),
-		const..VkRenderPassBeginInfo_p.IN(
-			"pRenderPassBegin",
-			"a pointer to a ##VkRenderPassBeginInfo structure which indicates the render pass to begin an instance of, and the framebuffer the instance uses"
-		),
-		VkSubpassContents.IN("contents", "specifies how the commands in the first subpass will be provided", VkSubpassContentValues)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer in which to record the command."),
+		const..VkRenderPassBeginInfo.p.IN("pRenderPassBegin", "a pointer to a ##VkRenderPassBeginInfo structure (defined below) which indicates the render pass to begin an instance of, and the framebuffer the instance uses."),
+		VkSubpassContents.IN("contents", """specifies how the commands in the first subpass will be provided, and is one of the values:
+<pre><code>typedef enum VkSubpassContents {
+￿    VK_SUBPASS_CONTENTS_INLINE = 0,
+￿    VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS = 1,
+} VkSubpassContents;</code></pre>
+
+		If {@code contents} is #SUBPASS_CONTENTS_INLINE, the contents of the subpass will be recorded inline in the primary command buffer, and secondary command buffers <b>must</b> not be executed within the subpass. If {@code contents} is #SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS, the contents are recorded in secondary command buffers that will be called from the primary command buffer, and #CmdExecuteCommands() is the only valid command on the command buffer until #CmdNextSubpass() or #CmdEndRenderPass().""")
 	)
 
 	void(
 		"CmdNextSubpass",
 		"""
-		Transitions to the next subpass of a render pass.
+		Transition to the next subpass of a render pass.
 
-		${ValidityProtos.vkCmdNextSubpass}
+		<h5>C Specification</h5>
+		To transition to the next subpass in the render pass instance after recording the commands for a subpass, call:
 
-		The subpass index for a render pass begins at zero when #CmdBeginRenderPass() is recorded, and increments each time {@code vkCmdNextSubpass} is
-		recorded.
+		<pre><code>void vkCmdNextSubpass(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkSubpassContents                           contents);</code></pre>
 
-		Moving to the next subpass automatically performs any multisample resolve operations in the subpass being ended. End-of-subpass multisample resolves
-		are treated as color attachment writes for the purposes of synchronization. That is, they are considered to execute in the
-		#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage and their writes are synchronized with #ACCESS_COLOR_ATTACHMENT_WRITE_BIT. Synchronization
-		between rendering within a subpass and any resolve operations at the end of the subpass occurs automatically, without need for explicit dependencies or
-		pipeline barriers. However, if the resolve attachment is also used in a different subpass, an explicit dependency is needed.
+		<h5>Description</h5>
+		The subpass index for a render pass begins at zero when #CmdBeginRenderPass() is recorded, and increments each time #CmdNextSubpass() is recorded.
 
-		After transitioning to the next subpass, the application $can record the commands for that subpass.
+		Moving to the next subpass automatically performs any multisample resolve operations in the subpass being ended. End-of-subpass multisample resolves are treated as color attachment writes for the purposes of synchronization. That is, they are considered to execute in the #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage and their writes are synchronized with #ACCESS_COLOR_ATTACHMENT_WRITE_BIT. Synchronization between rendering within a subpass and any resolve operations at the end of the subpass occurs automatically, without need for explicit dependencies or pipeline barriers. However, if the resolve attachment is also used in a different subpass, an explicit dependency is needed.
+
+		After transitioning to the next subpass, the application <b>can</b> record the commands for that subpass.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The current subpass index <b>must</b> be less than the number of subpasses in the render pass minus one</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code contents} <b>must</b> be a valid {@code VkSubpassContents} value</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called inside of a render pass instance</li>
+			<li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary</td><td>Inside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer in which to record the command"),
-		VkSubpassContents.IN("contents", "specifies how the commands in the next subpass will be provided", VkSubpassContentValues)
+		VkCommandBuffer.IN("commandBuffer", "the command buffer in which to record the command."),
+		VkSubpassContents.IN("contents", "specifies how the commands in the next subpass will be provided, in the same fashion as the corresponding parameter of #CmdBeginRenderPass().")
 	)
 
 	void(
 		"CmdEndRenderPass",
 		"""
-		Ends a render pass instance.
+		End the current render pass.
 
-		${ValidityProtos.vkCmdEndRenderPass}
+		<h5>C Specification</h5>
+		To record a command to end a render pass instance after recording the commands for the last subpass, call:
 
+		<pre><code>void vkCmdEndRenderPass(
+￿    VkCommandBuffer                             commandBuffer);</code></pre>
+
+		<h5>Description</h5>
 		Ending a render pass instance performs any multisample resolve operations on the final subpass.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The current subpass index <b>must</b> be equal to the number of subpasses in the render pass minus one</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+			<li>This command <b>must</b> only be called inside of a render pass instance</li>
+			<li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary</td><td>Inside</td><td>GRAPHICS</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN("commandBuffer", "the command buffer in which to end the current render pass instance")
+		VkCommandBuffer.IN("commandBuffer", "the command buffer in which to end the current render pass instance.")
 	)
 
 	void(
 		"CmdExecuteCommands",
 		"""
-		Executes a secondary command buffer from a primary command buffer.
+		Execute a secondary command buffer from a primary command buffer.
 
-		A secondary command buffer $must not be directly submitted to a queue. Instead, secondary command buffers are recorded to execute as part of a primary
-		command buffer with this command.
+		<h5>C Specification</h5>
+		A secondary command buffer <b>must</b> not be directly submitted to a queue. Instead, secondary command buffers are recorded to execute as part of a primary command buffer with the command:
 
-		${ValidityProtos.vkCmdExecuteCommands}
+		<pre><code>void vkCmdExecuteCommands(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    commandBufferCount,
+￿    const VkCommandBuffer*                      pCommandBuffers);</code></pre>
 
-		Once {@code vkCmdExecuteCommands} has been called, any prior executions of the secondary command buffers specified by {@code pCommandBuffers} in any
-		other primary command buffer become invalidated, unless those secondary command buffers were recorded with #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT.
+		<h5>Description</h5>
+		Once #CmdExecuteCommands() has been called, any prior executions of the secondary command buffers specified by {@code pCommandBuffers} in any other primary command buffer become invalidated, unless those secondary command buffers were recorded with #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> have been allocated with a {@code level} of #COMMAND_BUFFER_LEVEL_PRIMARY</li>
+			<li>Any given element of {@code pCommandBuffers} <b>must</b> have been allocated with a {@code level} of #COMMAND_BUFFER_LEVEL_SECONDARY</li>
+			<li>Any given element of {@code pCommandBuffers} <b>must</b> not be already pending execution in {@code commandBuffer}, or appear twice in {@code pCommandBuffers}, unless it was recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag</li>
+			<li>Any given element of {@code pCommandBuffers} <b>must</b> not be already pending execution in any other {@code VkCommandBuffer}, unless it was recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT flag</li>
+			<li>Any given element of {@code pCommandBuffers} <b>must</b> be in the executable state</li>
+			<li>Any given element of {@code pCommandBuffers} <b>must</b> have been allocated from a {@code VkCommandPool} that was created for the same queue family as the {@code VkCommandPool} from which {@code commandBuffer} was allocated</li>
+			<li>If #CmdExecuteCommands() is being called within a render pass instance, that render pass instance <b>must</b> have been begun with the {@code contents} parameter of #CmdBeginRenderPass() set to #SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS</li>
+			<li>If #CmdExecuteCommands() is being called within a render pass instance, any given element of {@code pCommandBuffers} <b>must</b> have been recorded with the #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT</li>
+			<li>If #CmdExecuteCommands() is being called within a render pass instance, any given element of {@code pCommandBuffers} <b>must</b> have been recorded with ##VkCommandBufferInheritanceInfo{@code ::subpass} set to the index of the subpass which the given command buffer will be executed in</li>
+			<li>If #CmdExecuteCommands() is being called within a render pass instance, any given element of {@code pCommandBuffers} <b>must</b> have been recorded with a render pass that is compatible with the current render pass - see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-compatibility">the “Render Pass Compatibility” section</a></li>
+			<li>If #CmdExecuteCommands() is being called within a render pass instance, and any given element of {@code pCommandBuffers} was recorded with ##VkCommandBufferInheritanceInfo{@code ::framebuffer} not equal to #NULL_HANDLE, that {@code VkFramebuffer} <b>must</b> match the {@code VkFramebuffer} used in the current render pass instance</li>
+			<li>If #CmdExecuteCommands() is not being called within a render pass instance, any given element of {@code pCommandBuffers} <b>must</b> not have been recorded with the #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT</li>
+			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-inheritedQueries">inherited queries</a> feature is not enabled, {@code commandBuffer} <b>must</b> not have any queries <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a></li>
+			<li>If {@code commandBuffer} has a #QUERY_TYPE_OCCLUSION query <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a>, then each element of {@code pCommandBuffers} <b>must</b> have been recorded with ##VkCommandBufferInheritanceInfo{@code ::occlusionQueryEnable} set to #TRUE</li>
+			<li>If {@code commandBuffer} has a #QUERY_TYPE_OCCLUSION query <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a>, then each element of {@code pCommandBuffers} <b>must</b> have been recorded with ##VkCommandBufferInheritanceInfo{@code ::queryFlags} having all bits set that are set for the query</li>
+			<li>If {@code commandBuffer} has a #QUERY_TYPE_PIPELINE_STATISTICS query <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a>, then each element of {@code pCommandBuffers} <b>must</b> have been recorded with ##VkCommandBufferInheritanceInfo{@code ::pipelineStatistics} having all bits set that are set in the {@code VkQueryPool} the query uses</li>
+			<li>Any given element of {@code pCommandBuffers} <b>must</b> not begin any query types that are <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a> in {@code commandBuffer}</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>{@code pCommandBuffers} <b>must</b> be a pointer to an array of {@code commandBufferCount} valid {@code VkCommandBuffer} handles</li>
+			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
+			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
+			<li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
+			<li>{@code commandBufferCount} <b>must</b> be greater than 0</li>
+			<li>Both of {@code commandBuffer}, and the elements of {@code pCommandBuffers} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>Command Properties</h5>
+		<table class="lwjgl">
+			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
+			<tbody><tr><td>Primary</td><td>Both</td><td>TRANSFER GRAPHICS COMPUTE</td></tr></tbody>
+		</table>
 		""",
 
-		VkCommandBuffer.IN(
-			"commandBuffer",
-			"a handle to a primary command buffer that the secondary command buffers are executed in"
-		),
-		AutoSize("pCommandBuffers")..uint32_t.IN("commandBufferCount", "the length of the {@code pCommandBuffers} array"),
-		SingleValue("pCommandBuffer")..const..VkCommandBuffer.p.IN(
-			"pCommandBuffers",
-			"""
-			an array of secondary command buffer handles, which are recorded to execute in the primary command buffer in the order they are listed in the
-			array
-			"""
-		)
+		VkCommandBuffer.IN("commandBuffer", "a handle to a primary command buffer that the secondary command buffers are executed in."),
+		AutoSize("pCommandBuffers")..uint32_t.IN("commandBufferCount", "the length of the {@code pCommandBuffers} array."),
+		const..VkCommandBuffer.p.IN("pCommandBuffers", "an array of secondary command buffer handles, which are recorded to execute in the primary command buffer in the order they are listed in the array.")
 	)
+
 }
