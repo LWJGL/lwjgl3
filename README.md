@@ -26,7 +26,7 @@ org.lwjgl:lwjgl-platform:${version}:natives-linux
 org.lwjgl:lwjgl-platform:${version}:natives-osx
 ```
 
-where `${version}` is a version (e.g. `3.0.0`) released on Maven Central. **Nightly builds** are also available from the *Sonatype Nexus* [repository](https://oss.sonatype.org/content/repositories/snapshots), with a snapshot build version (e.g. `3.0.1-SNAPSHOT`).
+where `${version}` is a version (e.g. `3.0.0`) released on Maven Central. **Nightly builds** are also available from the *Sonatype Nexus* [repository](https://oss.sonatype.org/content/repositories/snapshots), with a snapshot build version (e.g. `3.1.0-SNAPSHOT`).
 
 LWJGL 3 requires Java 8 or later to build and run and currently supports the following platforms/architectures:
 
