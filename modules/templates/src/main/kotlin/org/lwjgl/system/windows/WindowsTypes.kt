@@ -507,3 +507,27 @@ val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE", mutable = false) 
 	TCHAR.array("DeviceKey", "reserved", size = 128)
 }
 val PDISPLAY_DEVICE = DISPLAY_DEVICE.p("PDISPLAY_DEVICE")
+
+val SECURITY_ATTRIBUTES = struct(WINDOWS_PACKAGE, "SECURITY_ATTRIBUTES") {
+	documentation =
+		"""
+		Contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable. This structure
+		provides security settings for objects created by various functions, such as {@code CreateFile}, {@code CreatePipe}, {@code CreateProcess},
+		{@code RegCreateKeyEx}, or {@code RegSaveKeyEx}.
+		"""
+
+	DWORD.member("nLength", "the size, in bytes, of this structure. Set this value to SECURITY_ATTRIBUTES##SIZEOF.")
+	LPVOID.member(
+		"lpSecurityDescriptor",
+		"""
+		a pointer to a {@code SECURITY_DESCRIPTOR} structure that controls access to the object. If the value of this member is $NULL, the object is assigned
+		the default security descriptor associated with the access token of the calling process. This is not the same as granting access to everyone by
+		assigning a $NULL discretionary access control list (DACL). By default, the default DACL in the access token of a process allows access only to the
+		user represented by the access token.
+		"""
+	)
+	BOOL.member(
+		"bInheritHandle",
+		"specifies whether the returned handle is inherited when a new process is created. If this member is {@code TRUE}, the new process inherits the handle."
+	)
+}

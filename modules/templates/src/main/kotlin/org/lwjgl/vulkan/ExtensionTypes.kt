@@ -25,6 +25,8 @@ val VkDisplayPlaneAlphaFlagBitsKHR = "VkDisplayPlaneAlphaFlagBitsKHR".enumType
 val VkDebugReportObjectTypeEXT = "VkDebugReportObjectTypeEXT".enumType
 val VkDebugReportErrorEXT = "VkDebugReportErrorEXT".enumType
 val VkRasterizationOrderAMD = "VkRasterizationOrderAMD".enumType
+val VkExternalMemoryHandleTypeFlagBitsNV = "VkExternalMemoryHandleTypeFlagBitsNV".enumType
+val VkExternalMemoryFeatureFlagBitsNV = "VkExternalMemoryFeatureFlagBitsNV".enumType
 val VkValidationCheckEXT = "VkValidationCheckEXT".enumType
 
 // Bitmask types
@@ -37,6 +39,8 @@ val VkDisplaySurfaceCreateFlagsKHR = typedef(VkFlags, "VkDisplaySurfaceCreateFla
 val VkXlibSurfaceCreateFlagsKHR = typedef(VkFlags, "VkXlibSurfaceCreateFlagsKHR")
 val VkWin32SurfaceCreateFlagsKHR = typedef(VkFlags, "VkWin32SurfaceCreateFlagsKHR")
 val VkDebugReportFlagsEXT = typedef(VkFlags, "VkDebugReportFlagsEXT")
+val VkExternalMemoryHandleTypeFlagsNV = typedef(VkFlags, "VkExternalMemoryHandleTypeFlagsNV")
+val VkExternalMemoryFeatureFlagsNV = typedef(VkFlags, "VkExternalMemoryFeatureFlagsNV")
 
 // Function pointer types
 val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
@@ -439,6 +443,7 @@ val VkDisplayPresentInfoKHR = struct(VULKAN_PACKAGE, "VkDisplayPresentInfoKHR") 
 }
 
 val VkXlibSurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkXlibSurfaceCreateInfoKHR") {
+	javaImport("org.lwjgl.system.linux.*")
 	documentation =
 		"""
 		Structure specifying parameters of a newly created Xlib surface object.
@@ -463,6 +468,7 @@ val VkXlibSurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkXlibSurfaceCreateInfo
 }
 
 val VkWin32SurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkWin32SurfaceCreateInfoKHR") {
+	javaImport("org.lwjgl.system.windows.*")
 	documentation =
 		"""
 		Structure specifying parameters of a newly created Win32 surface object.
@@ -686,6 +692,158 @@ val VkDedicatedAllocationMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkDedica
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkImage.member("image", "{@code VK_NULL_HANDLE} or a handle of an image which this memory will be bound to.")
 	VkBuffer.member("buffer", "{@code VK_NULL_HANDLE} or a handle of a buffer which this memory will be bound to.")
+}
+
+val VkExternalImageFormatPropertiesNV = struct(VULKAN_PACKAGE, "VkExternalImageFormatPropertiesNV") {
+	documentation =
+		"""
+		Structure specifying external image format properties.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code imageFormatProperties} <b>must</b> be a valid ##VkImageFormatProperties structure</li>
+			<li>{@code externalMemoryFeatures} <b>must</b> be a valid combination of {@code VkExternalMemoryFeatureFlagBitsNV} values</li>
+			<li>{@code externalMemoryFeatures} <b>must</b> not be 0</li>
+			<li>{@code exportFromImportedHandleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
+			<li>{@code exportFromImportedHandleTypes} <b>must</b> not be 0</li>
+			<li>{@code compatibleHandleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
+			<li>{@code compatibleHandleTypes} <b>must</b> not be 0</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkImageFormatProperties, #GetPhysicalDeviceExternalImageFormatPropertiesNV()
+		"""
+
+	VkImageFormatProperties.member("imageFormatProperties", "will be filled in as when calling #GetPhysicalDeviceImageFormatProperties(), but the values returned <b>may</b> vary depending on the external handle type requested.")
+	VkExternalMemoryFeatureFlagsNV.member("externalMemoryFeatures", "a bitmask of {@code VkExternalMemoryFeatureFlagBitsNV} indicating properties of the external memory handle type (#GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType}) being queried, or 0 if the external memory handle type is 0.")
+	VkExternalMemoryHandleTypeFlagsNV.member("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} containing a bit set for every external handle type that <b>may</b> be used to create memory from which the handles of the type specified in #GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType} <b>can</b> be exported, or 0 if the external memory handle type is 0.")
+	VkExternalMemoryHandleTypeFlagsNV.member("compatibleHandleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} containing a bit set for every external handle type that <b>may</b> be specified simultaneously with the handle type specified by #GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType} when calling #AllocateMemory(), or 0 if the external memory handle type is 0. {@code compatibleHandleTypes} will always contain #GetPhysicalDeviceExternalImageFormatPropertiesNV(){@code ::externalHandleType}")
+}
+
+val VkExternalMemoryImageCreateInfoNV = struct(VULKAN_PACKAGE, "VkExternalMemoryImageCreateInfoNV") {
+	documentation =
+		"""
+		Specify that an image may be backed by external memory.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
+			<li>{@code handleTypes} <b>must</b> not be 0</li>
+		</ul>
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkExternalMemoryHandleTypeFlagsNV.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more external memory handle types. The types <b>must</b> all be compatible with each other and the other image creation parameters, as reported by #GetPhysicalDeviceExternalImageFormatPropertiesNV().")
+}
+
+val VkExportMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryAllocateInfoNV") {
+	documentation =
+		"""
+		(no short description available).
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
+			<li>{@code handleTypes} <b>must</b> not be 0</li>
+		</ul>
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkExternalMemoryHandleTypeFlagsNV.member("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more memory handle types that <b>may</b> be exported. Multiple handle types <b>may</b> be requested for the same allocation as long as they are compatible, as reported by #GetPhysicalDeviceExternalImageFormatPropertiesNV().")
+}
+
+val VkImportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkImportMemoryWin32HandleInfoNV") {
+	javaImport("org.lwjgl.system.windows.*")
+	documentation =
+		"""
+		import Win32 memory created on the same physical device.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code handleType} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
+			<li>{@code handleType} <b>must</b> not be 0</li>
+		</ul>
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkExternalMemoryHandleTypeFlagsNV.member("handleType", """0 or a flag specifying the type of memory handle in {@code handle}. Flags which <b>may</b> be specified are:
+<pre><code>typedef enum VkExternalMemoryHandleTypeFlagBitsNV {
+￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV = 0x00000001,
+￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV = 0x00000002,
+￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV = 0x00000004,
+￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV = 0x00000008,
+} VkExternalMemoryHandleTypeFlagBitsNV;</code></pre>""")
+	HANDLE.member("handle", """a Windows {@code HANDLE} referring to the memory.
+<ul>
+			<li>if {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV or #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV, {@code handle} <b>must</b> be a valid handle returned by #GetMemoryWin32HandleNV() or, in the case of #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV, a handle duplicated from such a handle using {@code DuplicateHandle()}.</li>
+			<li>if {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV, {@code handle} <b>must</b> be a valid NT handle returned by {@code IDXGIResource1::ftext:CreateSharedHandle()} or a handle duplicated from such a handle using {@code DuplicateHandle()}.</li>
+			<li>if {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV, {@code handle} <b>must</b> be a valid handle returned by {@code IDXGIResource::GetSharedHandle()}.</li>
+		</ul>""")
+}
+
+val VkExportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryWin32HandleInfoNV") {
+	javaImport("org.lwjgl.system.windows.*")
+	documentation =
+		"""
+		specify security attributes and access rights for Win32 memory handles.
+
+		<h5>Description</h5>
+		If this structure is not present, or if {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for “Synchronization Object Security and Access Rights”[1]. Further, if the structure is not present, the access rights will be
+
+		{@code DXGI_SHARED_RESOURCE_READ} | {@code DXGI_SHARED_RESOURCE_WRITE}
+
+		[1] https://msdn.microsoft.com/en-us/library/windows/desktop/ms686670.aspx
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code pAttributes} <b>must</b> be a pointer to a valid {@code SECURITY_ATTRIBUTES} value</li>
+		</ul>
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	const..SECURITY_ATTRIBUTES.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
+	DWORD.member("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
+}
+
+val VkWin32KeyedMutexAcquireReleaseInfoNV = struct(VULKAN_PACKAGE, "VkWin32KeyedMutexAcquireReleaseInfoNV") {
+	documentation =
+		"""
+		use Windows keyex mutex mechanism to synchronize work.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>If {@code acquireCount} is not 0, {@code pAcquireSyncs} <b>must</b> be a pointer to an array of {@code acquireCount} valid {@code VkDeviceMemory} handles</li>
+			<li>If {@code acquireCount} is not 0, {@code pAcquireKeys} <b>must</b> be a pointer to an array of {@code acquireCount} {@code uint64_t} values</li>
+			<li>If {@code acquireCount} is not 0, {@code pAcquireTimeoutMilliseconds} <b>must</b> be a pointer to an array of {@code acquireCount} {@code uint32_t} values</li>
+			<li>If {@code releaseCount} is not 0, {@code pReleaseSyncs} <b>must</b> be a pointer to an array of {@code releaseCount} valid {@code VkDeviceMemory} handles</li>
+			<li>If {@code releaseCount} is not 0, {@code pReleaseKeys} <b>must</b> be a pointer to an array of {@code releaseCount} {@code uint64_t} values</li>
+			<li>Both of the elements of {@code pAcquireSyncs}, and the elements of {@code pReleaseSyncs} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+		"""
+
+	VkStructureType.member("sType", "")
+	nullable..const..voidptr.member("pNext", "")
+	AutoSize("pAcquireSyncs","pAcquireKeys","pAcquireTimeoutMilliseconds", optional = true)..uint32_t.member("acquireCount", "the number of entries in the {@code pAcquireSyncs}, {@code pAcquireKeys}, and {@code pAcquireTimeoutMilliseconds} arrays.")
+	const..VkDeviceMemory.p.member("pAcquireSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
+	const..uint64_t_p.member("pAcquireKeys", "a pointer to an array of mutex key values to wait for prior to beginning the submitted work. Entries refer to the keyed mutex associated with the corresponding entries in {@code pAcquireSyncs}.")
+	const..uint32_t_p.member("pAcquireTimeoutMilliseconds", "an array of timeout values, in millisecond units, for each acquire specified in {@code pAcquireKeys}.")
+	AutoSize("pReleaseSyncs","pReleaseKeys", optional = true)..uint32_t.member("releaseCount", "the number of entries in the {@code pReleaseSyncs} and {@code pReleaseKeys} arrays.")
+	const..VkDeviceMemory.p.member("pReleaseSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
+	const..uint64_t_p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
 }
 
 val VkValidationFlagsEXT = struct(VULKAN_PACKAGE, "VkValidationFlagsEXT") {
