@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.opengl.templates
+package org.lwjgl.opengles.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
+import org.lwjgl.opengles.*
 
-val NV_texture_barrier = "NVTextureBarrier".nativeClassGL("NV_texture_barrier", postfix = NV) {
+val NV_texture_barrier = "NVTextureBarrier".nativeClassGLES("NV_texture_barrier", postfix = NV) {
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
