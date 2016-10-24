@@ -17,9 +17,9 @@ fun config() {
 		GLFW comes with extensive documentation, which you can read online <a href="http://www.glfw.org/docs/latest/">here</a>. The
 		<a href="http://www.glfw.org/faq.html">Frequently Asked Questions</a> are also useful.
 
-        On Mac OS X the JVM must be started with the {@code -XstartOnFirstThread} argument for GLFW to work. This is necessary because most GLFW functions must
-        be called on the main thread and the Cocoa API on OS X requires that thread to be the first thread in the process. For this reason, on-screen GLFW
-        windows and the GLFW event loop are incompatible with other window toolkits (such as AWT/Swing or JavaFX) on OS X. Off-screen GLFW windows can be used
+        On macOS the JVM must be started with the {@code -XstartOnFirstThread} argument for GLFW to work. This is necessary because most GLFW functions must be
+        called on the main thread and the Cocoa API on macOS requires that thread to be the first thread in the process. For this reason, on-screen GLFW
+        windows and the GLFW event loop are incompatible with other window toolkits (such as AWT/Swing or JavaFX) on macOS. Off-screen GLFW windows can be used
         with other window toolkits, but only if the window toolkit is initialized before GLFW.
 		"""
 	)
@@ -169,7 +169,7 @@ val GLFWmonitorfun = "GLFWmonitorfun".callback(
 val GLFWjoystickfun = "GLFWjoystickfun".callback(
 	GLFW_PACKAGE, void, "GLFWJoystickCallback",
 	"Will be called when a joystick is connected to or disconnected from the system.",
-	int.IN("joy", "the joystick that was connected or disconnected"),
+	int.IN("jid", "the joystick that was connected or disconnected"),
 	int.IN("event", "one of #CONNECTED or #DISCONNECTED")
 ) {
 	documentation = "Instances of this interface may be passed to the #SetJoystickCallback() method."

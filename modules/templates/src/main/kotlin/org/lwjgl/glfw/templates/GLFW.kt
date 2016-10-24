@@ -319,7 +319,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		examples:
 
 		Some pre-installed Windows graphics drivers do not support OpenGL. AMD only supports OpenGL ES via EGL, while Nvidia and Intel only support it via a
-		WGL or GLX extension. OS X does not provide OpenGL ES at all. The Mesa EGL, OpenGL and OpenGL ES libraries do not interface with the Nvidia binary
+		WGL or GLX extension. macOS does not provide OpenGL ES at all. The Mesa EGL, OpenGL and OpenGL ES libraries do not interface with the Nvidia binary
 		driver. Older graphics drivers do not support Vulkan.
 		""",
 
@@ -613,7 +613,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 			Notes:
 			${ul(
-				"<b>Mac OS X</b>: The EGL API is not available on this platform and requests to use it will fail.",
+				"<b>macOS</b>: The EGL API is not available on this platform and requests to use it will fail.",
 				"<b>Wayland, Mir</b>: The EGL API <i>is</i> the native context creation API, so this hint will have no effect.",
 				"""
 				An OpenGL extension loader library that assumes it knows which context creation API is used on a given platform may fail if you change this
@@ -680,7 +680,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		${ul(
 			"This function must only be called from the main thread.",
 			"""
-			<b>Mac OS X</b>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the application's
+			<b>macOS</b>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the application's
 			bundle, if present.
 			"""
 		)}
@@ -1095,22 +1095,22 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			""",
 			"<b>Windows</b>: The context to share resources with may not be current on any other thread.",
 			"""
-		    <b>OS X</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's
+		    <b>macOS</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's
 		    icon. Also, the first time a window is opened the menu bar is populated with common commands like Hide, Quit and About. The (minimal) about dialog
 		    uses information from the application's bundle. For more information on bundles, see the
 		    <a href="https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac
 		    Developer Library.
 			""",
 			"""
-		    <b>OS X</b>: The first time a window is created the menu bar is populated with common commands like Hide, Quit and About. The About entry opens a
+		    <b>macOS</b>: The first time a window is created the menu bar is populated with common commands like Hide, Quit and About. The About entry opens a
 		    minimal about dialog with information from the application's bundle. The menu bar can be disabled with a
 		    <a href="http://www.glfw.org/docs/latest/compile.html\#compile_options_osx">compile-time option</a>.
 		    """,
 			"""
-		    <b>OS X</b>: On OS X 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
+		    <b>macOS</b>: On macOS 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
 		    {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For more information, see
 		    <a href="https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High
-		    Resolution Guidelines for OS X</a> in the Mac Developer Library.
+		    Resolution Guidelines for macOS</a> in the Mac Developer Library.
 			""",
 			"<b>X11</b>: There is no mechanism for setting the window icon yet.",
 			"<b>X11</b>: Some window managers will not respect the placement of initially hidden windows.",
@@ -1186,7 +1186,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		This function must only be called from the main thread.
 
-		<b>OS X</b>: The window title will not be updated until the next time you process events.
+		<b>macOS</b>: The window title will not be updated until the next time you process events.
 		""",
 
 		GLFWwindow.IN("window", "the window whose title to change"),
@@ -1208,7 +1208,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		The specified image data is copied before this function returns.
 
-		<b>OS X</b>: The GLFW window has no icon, as it is not a document window, so this function does nothing. The dock icon will be the same as the
+		<b>macOS</b>: The GLFW window has no icon, as it is not a document window, so this function does nothing. The dock icon will be the same as the
 		application bundle's icon. For more information on bundles, see the
 		<a href="https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac Developer
 		Library.
@@ -1629,7 +1629,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Notes:
 		${ul(
 			"This function must only be called from the main thread.",
-			"<b>Mac OS X:</b> Selecting Quit from the application menu will trigger the close callback for all windows."
+			"<b>macOS:</b> Selecting Quit from the application menu will trigger the close callback for all windows."
 		)}
 		""",
 
@@ -2141,7 +2141,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		was pressed or released, see the key callback instead.
 
 		The character callback behaves as system text input normally does and will not be called if modifier keys are held down that would prevent normal text
-		input on that platform, for example a Super (Command) key on OS X or Alt key on Windows. There is #SetCharModsCallback() that receives these events.
+		input on that platform, for example a Super (Command) key on macOS or Alt key on Windows. There is #SetCharModsCallback() that receives these events.
 
 		This function must only be called from the main thread.
 		""",
@@ -2267,7 +2267,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function must only be called from the main thread.
 		""",
 
-		int.IN("joy", "joystick to query"),
+		int.IN("jid", "joystick to query"),
 
 		returnDoc = "#TRUE if the joystick is present, or #FALSE otherwise",
 		since = "version 3.0"
@@ -2287,7 +2287,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function must only be called from the main thread.
 		""",
 
-		int.IN("joy", "the joystick to query"),
+		int.IN("jid", "the joystick to query"),
 		AutoSizeResult..int_p.OUT("count", "where to store the number of axis values in the returned array. This is set to zero if an error occurred."),
 
 		returnDoc = "an array of axis values, or $NULL if the joystick is not present",
@@ -2308,7 +2308,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
   		This function must only be called from the main thread.
 		""",
 
-		int.IN("joy", "the joystick to query"),
+		int.IN("jid", "the joystick to query"),
 		AutoSizeResult..int_p.OUT("count", "where to store the number of button states in the returned array. This is set to zero if an error occurred."),
 
 		returnDoc = "an array of button states, or $NULL if the joystick is not present",
@@ -2329,7 +2329,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function must only be called from the main thread.
 		""",
 
-		int.IN("joy", "the joystick to query"),
+		int.IN("jid", "the joystick to query"),
 
 		returnDoc = "the UTF-8 encoded name of the joystick, or $NULL if the joystick is not present",
 		since = "version 3.0"
