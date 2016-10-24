@@ -149,6 +149,41 @@
 		<local name="templates-uptodate"/>
 		<dir-uptodate src="${src.templates}/kotlin" dst="${bin.templates}" property="templates-uptodate"/>
 
+		<local name="egl_types"/>
+		<condition property="egl_types" value="true" else="false">
+			<and>
+				<isfalse value="${binding.egl}"/>
+				<istrue value="${binding.glfw}"/>
+			</and>
+		</condition>
+
+		<local name="opencl_types"/>
+		<condition property="opencl_types" value="true" else="false">
+			<and>
+				<isfalse value="${binding.opencl}"/>
+				<istrue value="${binding.opengl}"/>
+			</and>
+		</condition>
+
+		<local name="opengl_types"/>
+		<condition property="opengl_types" value="true" else="false">
+			<and>
+				<isfalse value="${binding.opengl}"/>
+				<or>
+					<istrue value="${binding.glfw}"/>
+					<istrue value="${binding.opencl}"/>
+				</or>
+			</and>
+		</condition>
+
+		<local name="vulkan_types"/>
+		<condition property="vulkan_types" value="true" else="false">
+			<and>
+				<isfalse value="${binding.vulkan}"/>
+				<istrue value="${binding.glfw}"/>
+			</and>
+		</condition>
+
 		<echo message="Compiling Kotlin templates. This will take 1-2 minutes..." level="info" taskname="Templates" unless:set="templates-uptodate"/>
 		<kotlinc moduleName="Templates" output="${bin.templates}" printVersion="true" unless:set="templates-uptodate">
 			<classpath>
@@ -161,22 +196,25 @@
 
 			<src path="${src.templates.kotlin}/org/lwjgl/bgfx" if:true="${binding.bgfx}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
-			<src path="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" unless:true="${binding.egl}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" if:true="${egl_types}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/glfw" if:true="${binding.glfw}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/hwloc" if:true="${binding.hwloc}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/nanovg" if:true="${binding.nanovg}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/nuklear" if:true="${binding.nuklear}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/openal" if:true="${binding.openal}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/opencl" if:true="${binding.opencl}"/>
-			<src path="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" unless:true="${binding.opencl}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" if:true="${opencl_types}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/opengl" if:true="${binding.opengl}"/>
-			<src path="${src.templates.kotlin}/org/lwjgl/opengl/GLTypes.kt" unless:true="${binding.opengl}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/opengl/GLTypes.kt" if:true="${opengl_types}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/opengl/GLXTypes.kt" if:true="${opengl_types}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/opengl/WGLTypes.kt" if:true="${opengl_types}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/opengles" if:true="${binding.opengles}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/vulkan" if:true="${binding.vulkan}"/>
-			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/VKTypes.kt" unless:true="${binding.vulkan}"/>
-			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/ExtensionTypes.kt" unless:true="${binding.vulkan}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/VKBase.kt" if:true="${vulkan_types}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/VKTypes.kt" if:true="${vulkan_types}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/vulkan/ExtensionTypes.kt" if:true="${vulkan_types}"/>
 
 			<src path="${src.templates.kotlin}/org/lwjgl/system/dyncall"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
@@ -375,6 +413,14 @@
 			</and>
 		</condition>
 
+		<local name="vulkan_glfw"/>
+		<condition property="vulkan_glfw" value="true" else="false">
+			<and>
+				<istrue value="${binding.vulkan}"/>
+				<istrue value="${binding.glfw}"/>
+			</and>
+		</condition>
+
 		<lwjgl.javac srcdir="${src.tests}" destdir="${bin.tests}" taskname="javac: Tests">
 			<classpath>
 				<pathelement path="${bin.core}"/>
@@ -409,7 +455,7 @@
 			<include name="org/lwjgl/demo/util/tinyfd/**" if:true="${tinyfd}"/>
 			<include name="org/lwjgl/demo/util/xxhash/**" if:true="${binding.xxhash}"/>
 
-			<include name="org/lwjgl/demo/vulkan/**" if:true="${binding.vulkan}"/>
+			<include name="org/lwjgl/demo/vulkan/**" if:true="${vulkan_glfw}"/>
 
 			<!-- Tests -->
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>

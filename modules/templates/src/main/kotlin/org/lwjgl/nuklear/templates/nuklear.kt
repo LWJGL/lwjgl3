@@ -543,7 +543,7 @@ ENABLE_WARNINGS()""")
 		"HEADER_RIGHT".enum
 	)
 
-	val PanelTypes = EnumConstant(
+	EnumConstant(
 		"nk_panel_type",
 
 		"PANEL_WINDOW".enum("", 0.NK_FLAG),
@@ -555,7 +555,7 @@ ENABLE_WARNINGS()""")
 		"PANEL_TOOLTIP".enum("", 7.NK_FLAG)
 	)
 
-	val PanelSet = EnumConstant(
+	EnumConstant(
 		"nk_panel_set",
 
 		"PANEL_SET_NONBLOCK".enum("", "NK_PANEL_CONTEXTUAL|NK_PANEL_COMBO|NK_PANEL_MENU|NK_PANEL_TOOLTIP"),
@@ -575,7 +575,7 @@ ENABLE_WARNINGS()""")
 		"WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", 15.NK_FLAG)
 	).javaDocLinks
 
-	val ctx = nk_context_p.IN("ctx", "the nuklear context");
+	val ctx = nk_context_p.IN("ctx", "the nuklear context")
 	val cctx = const..nk_context_p.IN("ctx", "the nuklear context");
 
 	{

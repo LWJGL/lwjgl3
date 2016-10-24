@@ -58,6 +58,10 @@ enum class Binding(val key: String, val packageName: String) {
 
 	companion object {
 		val CHECKS = !System.getProperty("binding.DISABLE_CHECKS", "false").toBoolean()
+
+		private val PACKAGES = Binding.values().asSequence().associateBy { it.packageName }
+
+		fun isEnabled(packageName: String) = Binding.PACKAGES[packageName]?.enabled ?: true
 	}
 
 	val enabled: Boolean
@@ -188,22 +192,28 @@ class Generator(
 
 		/** Registers a struct definition. */
 		fun register(struct: Struct): Struct {
-			structs.add(struct)
+			if (Binding.isEnabled(struct.packageName))
+				structs.add(struct)
 			return struct
 		}
 
 		/** Registers a callback function. */
 		fun register(callback: CallbackFunction) {
-			callbacks.add(callback)
+			if (Binding.isEnabled(callback.packageName))
+				callbacks.add(callback)
 		}
 
 		/** Registers a custom class. */
 		fun <T : GeneratorTarget> register(customClass: T): T {
-			customClasses.add(customClass)
+			if (Binding.isEnabled(customClass.packageName))
+				customClasses.add(customClass)
 			return customClass
 		}
 
 		fun registerLibraryInit(packageName: String, className: String, libraryName: String, setupAllocator: Boolean = false) {
+			if (!Binding.isEnabled(packageName) )
+				return
+
 			Generator.register(object : GeneratorTargetNative(packageName, className) {
 				init {
 					access = Access.INTERNAL

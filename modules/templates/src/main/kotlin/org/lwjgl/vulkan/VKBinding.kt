@@ -7,7 +7,6 @@ package org.lwjgl.vulkan
 import org.lwjgl.generator.*
 import java.io.PrintWriter
 import java.util.*
-import java.util.regex.Pattern
 
 private val NativeClass.capName: String
 	get() = if ( templateName.startsWith(prefix) ) {

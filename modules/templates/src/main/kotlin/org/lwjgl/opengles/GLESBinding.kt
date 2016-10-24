@@ -16,7 +16,7 @@ private val CAPABILITIES_CLASS = "GLESCapabilities"
 
 private object BufferOffsetTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}"
-	override fun transformCall(param: Parameter, original: String) = "${param.name}"
+	override fun transformCall(param: Parameter, original: String) = param.name
 }
 
 private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, CAPABILITIES_CLASS) {

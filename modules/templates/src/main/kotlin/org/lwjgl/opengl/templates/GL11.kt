@@ -2227,7 +2227,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		further stages of the GL as if they had been provided directly by the client.
 		""",
 
-		GLenum.IN("target", "the evaluator target", "$MAP1_TARGETS"),
+		GLenum.IN("target", "the evaluator target", MAP1_TARGETS),
 		GLfloat.IN("u1", "the first endpoint of the pre-image of the map"),
 		GLfloat.IN("u2", "the second endpoint of the pre-image of the map"),
 		GLint.IN("stride", "the number of values in each block of storage"),

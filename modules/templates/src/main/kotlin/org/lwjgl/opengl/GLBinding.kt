@@ -23,7 +23,7 @@ private val CAPABILITIES_CLASS = "GLCapabilities"
 
 private object BufferOffsetTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}"
-	override fun transformCall(param: Parameter, original: String) = "${param.name}"
+	override fun transformCall(param: Parameter, original: String) = param.name
 }
 
 val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
