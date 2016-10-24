@@ -1212,7 +1212,7 @@ ${validations.joinToString("\n")}
 							if ( it has AutoSizeMember )
 								"\t/** Sets the specified value to the {@code ${it.name}} field of the specified {@code struct}. */"
 							else
-								"\t/** Unsafe version of {@link #$setter($javaType) $setter}. */"
+								"\t/** Unsafe version of {@link #$setter(${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else javaType}) $setter}. */"
 						)
 						print("\tpublic static void n$setter(long $STRUCT, $javaType value) { memPut$bufferMethod($STRUCT + $field, ")
 						if ( javaType == "boolean" )
