@@ -26,10 +26,11 @@ val nuklear = "Nuklear".nativeClass(packageName = NUKLEAR_PACKAGE, prefix = "NK"
 #ifdef LWJGL_WINDOWS
 	#define NK_BUTTON_TRIGGER_ON_RELEASE
 #endif
+#define NK_ZERO_COMMAND_MEMORY
 #define NK_ASSERT(expr)
 #define NK_IMPLEMENTATION
 #define NK_MEMSET memset
-#define NK_MEMCOPY memcpy
+#define NK_MEMCPY memcpy
 #define NK_SQRT sqrt
 #define NK_SIN sinf
 #define NK_COS cosf
@@ -1472,6 +1473,14 @@ ENABLE_WARNINGS()""")
 			double.IN("max", ""),
 			double.IN("step", ""),
 			float.IN("inc_per_pixel", "")
+		)
+
+		void(
+			"edit_focus",
+			"",
+
+			ctx,
+			nk_flags.IN("flags", "", EditFlags)
 		)
 
 		nk_flags(
