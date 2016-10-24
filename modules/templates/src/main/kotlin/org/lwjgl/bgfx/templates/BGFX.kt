@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	IntConstant(
 		"API version",
 
-		"API_VERSION".."26"
+		"API_VERSION".."28"
 	)
 
 	ShortConstant(
@@ -399,7 +399,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Caps",
 
 		"CAPS_ALPHA_TO_COVERAGE"..0x0000000000000001L,
-		"CAPS_BLEND_INDEPENDENT"..0x0000000000000003L,
+		"CAPS_BLEND_INDEPENDENT"..0x0000000000000002L,
 		"CAPS_COMPUTE"..0x0000000000000004L,
 		"CAPS_CONSERVATIVE_RASTER"..0x0000000000000008L,
 		"CAPS_DRAW_INDIRECT"..0x0000000000000010L,
@@ -416,7 +416,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"CAPS_TEXTURE_2D_ARRAY"..0x0000000000008000L,
 		"CAPS_TEXTURE_3D"..0x0000000000010000L,
 		"CAPS_TEXTURE_BLIT"..0x0000000000020000L,
-		"CAPS_TEXTURE_COMPARE_ALL"..0x0000000000040000L,
+		"CAPS_TEXTURE_COMPARE_ALL"..0x00000000000C0000L,
 		"CAPS_TEXTURE_COMPARE_LEQUAL"..0x0000000000080000L,
 		"CAPS_TEXTURE_CUBE_ARRAY"..0x0000000000100000L,
 		"CAPS_TEXTURE_READ_BACK"..0x0000000000200000L,
@@ -1525,6 +1525,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT
 		)..void_p.IN("_data", "destination buffer"),
+		MapToInt..uint8_t.IN("_mip", "mip level"),
 
 		returnDoc = "frame number when the result will be available"
 	)
