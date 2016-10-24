@@ -1,6 +1,6 @@
 /*
  _________
-/         \ tinyfiledialogs.c v2.5.9 [September 21, 2016] zlib licence
+/         \ tinyfiledialogs.c v2.6.1 [October 18, 2016] zlib licence
 |tiny file| Unique code file of "tiny file dialogs" created [November 9, 2014]
 | dialogs | Copyright (c) 2014 - 2016 Guillaume Vareille http://ysengrin.com
 \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -112,7 +112,7 @@ misrepresented as being the original software.
 #define MAX_PATH_OR_CMD 1024 /* _MAX_PATH or MAX_PATH */
 #define MAX_MULTIPLE_FILES 32
 
-char tinyfd_version [8] = "2.5.9";
+char tinyfd_version [8] = "2.6.1";
 
 #if defined(TINYFD_NOLIB) && defined(_WIN32)
 int tinyfd_forceConsole = 1 ;
@@ -827,7 +827,6 @@ static int messageBoxWinGui8(
 	return lIntRetVal ;
 }
 
-#endif /* TINYFD_NOLIB */
 
 static char const * inputBoxWinGui(
 	char * const aoBuff ,
@@ -840,10 +839,7 @@ static char const * inputBoxWinGui(
 	int lResult;
 	int lTitleLen;
 	int lMessageLen;
-
-#ifndef TINYFD_NOLIB
 	wchar_t * lDialogStringW;
-#endif
 
 	lTitleLen =  aTitle ? strlen(aTitle) : 0 ;
 	lMessageLen =  aMessage ? strlen(aMessage) : 0 ;
@@ -895,29 +891,23 @@ static char const * inputBoxWinGui(
 <HTA:APPLICATION\n\
 ID = 'tinyfdHTA'\n\
 APPLICATIONNAME = 'tinyfd_inputBox'\n\
-BORDER = 'thin'\n\
+MINIMIZEBUTTON = 'no'\n\
+MAXIMIZEBUTTON = 'no'\n\
+BORDER = 'dialog'\n\
 SCROLL = 'no'\n\
 SINGLEINSTANCE = 'yes'\n\
-WINDOWSTATE = 'hidden'\n\
->\n\
+WINDOWSTATE = 'hidden'>\n\
 \n\
 <script language = 'VBScript'>\n\
 \n\
-'Dim arrCommands\n\
+intWidth = Screen.Width/4\n\
+intHeight = Screen.Height/6\n\
+ResizeTo intWidth, intHeight\n\
+MoveTo((Screen.Width/2)-(intWidth/2)),((Screen.Height/2)-(intHeight/2))\n\
 result = 0\n\
 \n\
 Sub Window_onLoad\n\
-intWidth = 600\n\
-intHeight = 250\n\
-Me.ResizeTo intWidth, intHeight\n\
-Me.MoveTo((Screen.Width/2)-(intWidth/2)),((Screen.Height/2)-(intHeight/2))\n\
 txt_input.Focus\n\
-' if the args are written each in ' ' \n\
-'arrCommands = Split(tinyfdHTA.commandLine, chr(34)) \n\
-'Msgbox arrCommands(0)\n\
-'For i = 1 to (Ubound(arrCommands) - 1) Step 2\n\
-'    Msgbox arrCommands(i)\n\
-'Next\n\
 End Sub\n\
 \n\
 Sub Window_onUnload\n\
@@ -955,14 +945,14 @@ End Sub\n\
 <body style = 'background-color:#EEEEEE' onkeypress = 'vbs:Default_Buttons' align = 'top'>\n\
 <table width = '100%%' height = '80%%' align = 'center' border = '0'>\n\
 <tr border = '0'>\n\
-<td align = 'left' style = 'font-family: arial; font-size: 11px;'>\n\
+<td align = 'left' valign = 'middle' style='Font-Family:Arial'>\n\
 %s\n\
 </td>\n\
-<td align = 'right' style = 'margin-top: 0em;'>\n\
+<td align = 'right' valign = 'middle' style = 'margin-top: 0em'>\n\
 <table  align = 'right' style = 'margin-right: 0em;'>\n\
-<tr align = 'right' 'margin-top: 5em;'>\n\
-<input type = 'button' value = 'OK' name = 'btn_OK' onClick = 'vbs:Run_ProgramOK' style = 'font-size: 11px; width: 5em; margin-top: 2em;'><br>\n\
-<input type = 'button' value = 'Cancel' name = 'btn_Cancel' onClick = 'vbs:Run_ProgramCancel' style = 'font-size: 11px; width: 5em;'><br><br>\n\
+<tr align = 'right' style = 'margin-top: 5em;'>\n\
+<input type = 'button' value = 'OK' name = 'btn_OK' onClick = 'vbs:Run_ProgramOK' style = 'width: 5em; margin-top: 2em;'><br>\n\
+<input type = 'button' value = 'Cancel' name = 'btn_Cancel' onClick = 'vbs:Run_ProgramCancel' style = 'width: 5em;'><br><br>\n\
 </tr>\n\
 </table>\n\
 </td>\n\
@@ -970,9 +960,9 @@ End Sub\n\
 </table>\n\
 <table width = '100%%' height = '100%%' align = 'center' border = '0'>\n\
 <tr>\n\
-<td align = 'left' style = 'font-family: arial; font-size: 16px; font-weight: bold;'>\n\
-<input type = 'password' size = '61' id = 'txt_input'\n\
-name = 'txt_input' style = 'font-size: 11px;' value = '' ><BR>\n\
+<td align = 'left' valign = 'top'>\n\
+<input type = 'password' id = 'txt_input'\n\
+name = 'txt_input' value = '' style = 'float:left;width:100%%' ><BR>\n\
 </td>\n\
 </tr>\n\
 </table>\n\
@@ -985,17 +975,12 @@ name = 'txt_input' style = 'font-size: 11px;' value = '' ><BR>\n\
 
 	strcpy(lDialogString, "");
 
-#ifndef TINYFD_NOLIB
-	if ( aDefaultInput && !GetConsoleWindow())
-	{
-		strcat(lDialogString, "powershell -WindowStyle Hidden -Command \"");
-	}
-#endif
-
 	if (aDefaultInput)
 	{
-		strcat(lDialogString,
-			"cscript.exe %USERPROFILE%\\AppData\\Local\\Temp\\tinyfd.vbs");
+		strcat(lDialogString, "cscript.exe ");
+		strcat(lDialogString, "//Nologo ");
+		strcat(lDialogString,"%USERPROFILE%\\AppData\\Local\\Temp\\tinyfd.vbs");
+		strcat(lDialogString, " > %USERPROFILE%\\AppData\\Local\\Temp\\tinyfd.txt");
 	}
 	else
 	{
@@ -1003,49 +988,51 @@ name = 'txt_input' style = 'font-size: 11px;' value = '' ><BR>\n\
 			"mshta.exe %USERPROFILE%\\AppData\\Local\\Temp\\tinyfd.hta");
 	}
 
-#ifndef TINYFD_NOLIB
-	if (aDefaultInput && !GetConsoleWindow())
-	{
-		strcat(lDialogString, "\"");
-	}
-#endif
-
 	/* printf ( "lDialogString: %s\n" , lDialogString ) ; //*/
 
-#ifndef TINYFD_NOLIB
-	if ( ! aDefaultInput )
+	if (tinyfd_winUtf8)
 	{
-		if (tinyfd_winUtf8)
-		{
-			lDialogStringW = utf8to16(lDialogString);
-			runSilentW(lDialogStringW);
-			free(lDialogStringW);
-		}
-		else
-		{
-			runSilentA(lDialogString);
-		}
+		lDialogStringW = utf8to16(lDialogString);
+		runSilentW(lDialogStringW);
+		free(lDialogStringW);
 	}
 	else
-#endif /* TINYFD_NOLIB */
 	{
-		if (!(lIn = _popen(lDialogString, "r")))
+		runSilentA(lDialogString);
+	}
+
+	//if (!(lIn = _popen(lDialogString, "r")))
+	//{
+	//	free(lDialogString);
+	//	return NULL;
+	//}
+	//while (fgets(aoBuff, MAX_PATH_OR_CMD, lIn) != NULL)
+	//{
+	//}
+	//_pclose(lIn);
+	//if (aoBuff[strlen(aoBuff) - 1] == '\n')
+	//{
+	//	aoBuff[strlen(aoBuff) - 1] = '\0';
+	//}
+
+
+	if (aDefaultInput)
+	{
+		sprintf(lDialogString, "%s\\AppData\\Local\\Temp\\tinyfd.txt",
+			getenv("USERPROFILE"));
+		if (!(lIn = fopen(lDialogString, "r")))
 		{
+			remove(lDialogString);
+			sprintf(lDialogString, "%s\\AppData\\Local\\Temp\\tinyfd.vbs",
+				getenv("USERPROFILE"));
 			free(lDialogString);
 			return NULL;
 		}
 		while (fgets(aoBuff, MAX_PATH_OR_CMD, lIn) != NULL)
-		{
-		}
-		_pclose(lIn);
-		if (aoBuff[strlen(aoBuff) - 1] == '\n')
-		{
-			aoBuff[strlen(aoBuff) - 1] = '\0';
-		}
-	}
+		{}
+		fclose(lIn);
+		remove(lDialogString);
 
-	if (aDefaultInput)
-	{
 		sprintf(lDialogString, "%s\\AppData\\Local\\Temp\\tinyfd.vbs",
 			getenv("USERPROFILE"));
 	}
@@ -1081,7 +1068,6 @@ name = 'txt_input' style = 'font-size: 11px;' value = '' ><BR>\n\
 	return aoBuff + 1;
 }
 
-#ifndef TINYFD_NOLIB
 
 wchar_t const * tinyfd_saveFileDialogW(
 	wchar_t const * const aTitle, /* NULL or "" */
@@ -2445,12 +2431,9 @@ char const * tinyfd_inputBox(
 #ifndef TINYFD_NOLIB
 	DWORD mode = 0;
 	HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
-#endif /* TINYFD_NOLIB */
 
 	if ((!tinyfd_forceConsole || !(
-#ifndef TINYFD_NOLIB
 		GetConsoleWindow() ||
-#endif /* TINYFD_NOLIB */
 		dialogPresent()))
 		&& ( !getenv("SSH_CLIENT") || getenv("DISPLAY") ) )
 	{
@@ -2458,7 +2441,9 @@ char const * tinyfd_inputBox(
 		lBuff[0]='\0';
 		return inputBoxWinGui(lBuff,aTitle,aMessage,aDefaultInput);
 	}
-	else if ( dialogPresent() )
+	else
+#endif /* TINYFD_NOLIB */
+	if ( dialogPresent() )
 	{
 		if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"dialog");return (char const *)0;}
 		lBuff[0]='\0';
@@ -3118,8 +3103,8 @@ static int zenity3Present ( )
 		{
 			lIn = popen ( "zenity --version" , "r" ) ;
 			if ( ( fgets ( lBuff , sizeof ( lBuff ) , lIn ) != NULL )
-			  && ( atoi(lBuff) >= 3 )
-			  && ( atoi(strtok(lBuff,".")+1) >= 0 ) )
+			  && ( ( atoi(lBuff) >= 3 )
+			    || ( ( atoi(lBuff) == 2 ) && ( atoi(strtok(lBuff,".")+1) >= 32 ) ) ) )
 			{
 				lZenity3Present = 1 ;
 			}
@@ -5163,8 +5148,8 @@ char const * tinyfd_colorChooser(
 	unsigned char const aDefaultRGB[3] , /* { 0 , 255 , 255 } */
 	unsigned char aoResultRGB[3] ) /* { 0 , 0 , 0 } */
 {
-	static char lBuff [16] ;
-	char lTmp [16] ;
+	static char lBuff [128] ;
+	char lTmp [128] ;
 	char lDialogString [MAX_PATH_OR_CMD] ;
 	char lDefaultHexRGB[8];
 	char * lpDefaultHexRGB;
@@ -5192,9 +5177,9 @@ char const * tinyfd_colorChooser(
 	}
 
 	if ( osascriptPresent ( ) )
-  {
+	{
 		if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"applescript");return (char const *)1;}
-  	lWasOsascript = 1 ;
+		lWasOsascript = 1 ;
 		strcpy ( lDialogString , "osascript");
 		if ( ! osx9orBetter() )
 		{
@@ -5203,7 +5188,9 @@ char const * tinyfd_colorChooser(
 		}
 		else
 		{
-			strcat ( lDialogString , " -e 'try' -e 'tell app (path to frontmost application as Unicode text) to set mycolor to choose color default color {");
+			strcat ( lDialogString ,
+" -e 'try' -e 'tell app (path to frontmost application as Unicode text) \
+to set mycolor to choose color default color {");
 		}
 
 		sprintf(lTmp, "%d", 256 * lDefaultRGB[0] ) ;
@@ -5229,8 +5216,8 @@ char const * tinyfd_colorChooser(
 		strcat(lDialogString, "-e 'end try'") ;
 		if ( ! osx9orBetter() ) strcat ( lDialogString, " -e 'end tell'") ;
 	}
-  else if ( zenity3Present() || matedialogPresent() )
-  {
+	else if ( zenity3Present() || matedialogPresent() )
+	{
 		lWasZenity3 = 1 ;
 		if ( zenity3Present() )
 		{
@@ -5353,12 +5340,24 @@ frontmost of process \\\"Python\\\" to true' ''');");
     }
     if ( lWasZenity3 )
     {
-        lBuff[3]=lBuff[5];
-        lBuff[4]=lBuff[6];
-        lBuff[5]=lBuff[9];
-        lBuff[6]=lBuff[10];
-        lBuff[7]='\0';
-        Hex2RGB(lBuff,aoResultRGB);
+		if ( lBuff[0] == '#' ) {
+		    lBuff[3]=lBuff[5];
+		    lBuff[4]=lBuff[6];
+		    lBuff[5]=lBuff[9];
+		    lBuff[6]=lBuff[10];
+		    lBuff[7]='\0';
+	        Hex2RGB(lBuff,aoResultRGB);
+		}
+		else if ( lBuff[3] == '(' ) {
+			sscanf(lBuff,"rgb(%hhu,%hhu,%hhu",
+					& aoResultRGB[0], & aoResultRGB[1],& aoResultRGB[2]);
+			RGB2Hex(aoResultRGB,lBuff);
+		}
+		else if ( lBuff[4] == '(' ) {
+			sscanf(lBuff,"rgba(%hhu,%hhu,%hhu",
+					& aoResultRGB[0], & aoResultRGB[1],& aoResultRGB[2]);
+			RGB2Hex(aoResultRGB,lBuff);
+		}
     }
     else if ( lWasOsascript || lWasXdialog )
     {
