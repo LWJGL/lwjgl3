@@ -137,9 +137,9 @@ if ( it.arguments.isEmpty() ) "" else it.arguments.mapIndexed { i, param -> "${p
 }) {
 	UNUSED_PARAMS($JNIENV, clazz)
 	${it.arguments.asSequence()
-	.mapIndexedNotNull { i, param -> if ( param !is ArrayType ) null else "j${(param.mapping as PointerMapping).primitive} *paramArray$i = param$i == NULL ? NULL : (*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, param$i, 0);" }
+	.mapIndexedNotNull { i, param -> if ( param !is ArrayType ) null else "void *paramArray$i = param$i == NULL ? NULL : (*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, param$i, 0);" }
 	.joinToString("\n\t")}
-	${if ( it.returnType.mapping === TypeMapping.VOID ) "" else "${it.returnType.jniFunctionType} __result = "}Java_org_lwjgl_system_JNI_${it.signatureNative}($JNIENV, clazz, __functionAddress, ${it.arguments.mapIndexed { i, param -> if ( param is ArrayType ) "(intptr_t)paramArray$i" else "param$i" }.joinToString(", ")});
+	${if ( it.returnType.mapping === TypeMapping.VOID ) "" else "${it.returnType.jniFunctionType} __result = "}Java_org_lwjgl_system_JNI_${it.signatureNative}(NULL, NULL, __functionAddress, ${it.arguments.mapIndexed { i, param -> if ( param is ArrayType ) "(intptr_t)paramArray$i" else "param$i" }.joinToString(", ")});
 	${it.arguments.asSequence()
 	.withIndex()
 	.sortedByDescending { it.index }
