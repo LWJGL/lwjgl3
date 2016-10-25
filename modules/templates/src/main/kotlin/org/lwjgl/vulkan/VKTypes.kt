@@ -1915,6 +1915,7 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 			<li>{@code mipLevels} <b>must</b> be less than or equal to <code>&#x230a;log<sub>2</sub>(max(extent.width, extent.height, extent.depth))&#x230b; + 1</code>.</li>
 			<li>If any of {@code extent.width}, {@code extent.height}, or {@code extent.depth} are greater than the equivalently named members of ##VkPhysicalDeviceLimits{@code ::maxImageDimension3D}, {@code mipLevels} <b>must</b> be less than or equal to ##VkImageFormatProperties{@code ::maxMipLevels} (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure)</li>
 			<li>{@code arrayLayers} <b>must</b> be less than or equal to ##VkImageFormatProperties{@code ::maxArrayLayers} (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure)</li>
+			<li>If {@code imageType} is #IMAGE_TYPE_3D, {@code arrayLayers} <b>must</b> be 1.</li>
 			<li>If {@code samples} is not #SAMPLE_COUNT_1_BIT, {@code imageType} <b>must</b> be #IMAGE_TYPE_2D, {@code flags} <b>must</b> not contain #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code tiling} <b>must</b> be #IMAGE_TILING_OPTIMAL, and {@code mipLevels} <b>must</b> be equal to 1</li>
 			<li>If {@code usage} includes #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, then bits other than #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and #IMAGE_USAGE_INPUT_ATTACHMENT_BIT <b>must</b> not be set</li>
 			<li>If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent.width} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferWidth}</li>
@@ -2291,11 +2292,11 @@ val VkSpecializationInfo = struct(VULKAN_PACKAGE, "VkSpecializationInfo") {
 		<ul>
 			<li>The {@code offset} member of any given element of {@code pMapEntries} <b>must</b> be less than {@code dataSize}</li>
 			<li>For any given element of {@code pMapEntries}, {@code size} <b>must</b> be less than or equal to {@code dataSize} minus {@code offset}</li>
+			<li>If {@code mapEntryCount} is not 0, {@code pMapEntries} <b>must</b> be a pointer to an array of {@code mapEntryCount} valid ##VkSpecializationMapEntry structures</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
-			<li>If {@code mapEntryCount} is not 0, {@code pMapEntries} <b>must</b> be a pointer to an array of {@code mapEntryCount} valid ##VkSpecializationMapEntry structures</li>
 			<li>If {@code dataSize} is not 0, {@code pData} <b>must</b> be a pointer to an array of {@code dataSize} bytes</li>
 		</ul>
 
@@ -3254,7 +3255,7 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
 		Structure specifying a descriptor set layout binding.
 
 		<h5>Description</h5>
-		The above layout definition allows the descriptor bindings to be specified sparsely such that not all binding numbers between 0 and the maximum binding number need to be specified in the {@code pBindings} array. However, all binding numbers between 0 and the maximum binding number <b>may</b> consume memory in the descriptor set layout even if not all descriptor bindings are used, though it <b>should</b> not consume additional memory from the descriptor pool.
+		The above layout definition allows the descriptor bindings to be specified sparsely such that not all binding numbers between 0 and the maximum binding number need to be specified in the {@code pBindings} array. However, all binding numbers between 0 and the maximum binding number in the ##VkDescriptorSetLayoutCreateInfo{@code ::pBindings} array <b>may</b> consume memory in the descriptor set layout even if not all descriptor bindings are used, though it <b>should</b> not consume additional memory from the descriptor pool.
 
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
 		The maximum binding number specified <b>should</b> be as compact as possible to avoid wasted memory.
@@ -3287,6 +3288,11 @@ val VkDescriptorSetLayoutCreateInfo = struct(VULKAN_PACKAGE, "VkDescriptorSetLay
 	documentation =
 		"""
 		Structure specifying parameters of a newly created descriptor set layout.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The ##VkDescriptorSetLayoutBinding{@code ::binding} members of the elements of the {@code pBindings} array <b>must</b> each have different values.</li>
+		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -4310,7 +4316,7 @@ val VkClearValue = union(VULKAN_PACKAGE, "VkClearValue") {
 		<h5>Description</h5>
 		This union is used where part of the API requires either color or depth/stencil clear values, depending on the attachment, and defines the initial clear values in the ##VkRenderPassBeginInfo structure.
 
-		<h5>Valid Usage (Implicit)</h5>
+		<h5>Valid Usage</h5>
 		<ul>
 			<li>{@code depthStencil} <b>must</b> be a valid ##VkClearDepthStencilValue structure</li>
 		</ul>
@@ -4339,13 +4345,13 @@ val VkClearAttachment = struct(VULKAN_PACKAGE, "VkClearAttachment") {
 		<ul>
 			<li>If {@code aspectMask} includes #IMAGE_ASPECT_COLOR_BIT, it <b>must</b> not include #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT</li>
 			<li>{@code aspectMask} <b>must</b> not include #IMAGE_ASPECT_METADATA_BIT</li>
+			<li>{@code clearValue} <b>must</b> be a valid ##VkClearValue union</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code aspectMask} <b>must</b> be a valid combination of {@code VkImageAspectFlagBits} values</li>
 			<li>{@code aspectMask} <b>must</b> not be 0</li>
-			<li>{@code clearValue} <b>must</b> be a valid ##VkClearValue union</li>
 		</ul>
 
 		<h5>See Also</h5>
@@ -4642,6 +4648,7 @@ val VkRenderPassBeginInfo = struct(VULKAN_PACKAGE, "VkRenderPassBeginInfo") {
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>{@code clearValueCount} <b>must</b> be greater than the largest attachment index in {@code renderPass} that specifies a {@code loadOp} (or {@code stencilLoadOp}, if the attachment has a depth/stencil format) of #ATTACHMENT_LOAD_OP_CLEAR</li>
+			<li>If {@code clearValueCount} is not 0, {@code pClearValues} <b>must</b> be a pointer to an array of {@code clearValueCount} valid ##VkClearValue unions</li>
 			<li>{@code renderPass} <b>must</b> be <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-compatibility">compatible</a> with the {@code renderPass} member of the ##VkFramebufferCreateInfo structure specified when creating {@code framebuffer}.</li>
 		</ul>
 
@@ -4651,7 +4658,6 @@ val VkRenderPassBeginInfo = struct(VULKAN_PACKAGE, "VkRenderPassBeginInfo") {
 			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
 			<li>{@code framebuffer} <b>must</b> be a valid {@code VkFramebuffer} handle</li>
-			<li>If {@code clearValueCount} is not 0, {@code pClearValues} <b>must</b> be a pointer to an array of {@code clearValueCount} valid ##VkClearValue unions</li>
 			<li>Both of {@code framebuffer}, and {@code renderPass} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
 		</ul>
 

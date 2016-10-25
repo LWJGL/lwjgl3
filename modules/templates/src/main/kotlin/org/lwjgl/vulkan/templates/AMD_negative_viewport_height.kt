@@ -17,7 +17,7 @@ val AMD_negative_viewport_height = "AMDNegativeViewportHeight".nativeClassVK("AM
 	IntConstant(
 		"The extension specification version.",
 
-		"AMD_NEGATIVE_VIEWPORT_HEIGHT_SPEC_VERSION".."0"
+		"AMD_NEGATIVE_VIEWPORT_HEIGHT_SPEC_VERSION".."1"
 	)
 
 	StringConstant(

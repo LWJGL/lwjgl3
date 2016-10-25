@@ -21,7 +21,7 @@ val AMD_shader_ballot = "AMDShaderBallot".nativeClassVK("AMD_shader_ballot", pos
 	IntConstant(
 		"The extension specification version.",
 
-		"AMD_SHADER_BALLOT_SPEC_VERSION".."0"
+		"AMD_SHADER_BALLOT_SPEC_VERSION".."1"
 	)
 
 	StringConstant(
