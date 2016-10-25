@@ -131,7 +131,7 @@
 
 	<target name="all" description="Builds LWJGL and runs the tests" depends="compile-templates, tests"/>
 
-	<target name="compile-generator" description="Compiles the Generator module" depends="init">
+	<target name="-compile-generator" description="Compiles the Generator module" depends="init">
 		<local name="generator-uptodate"/>
 		<dir-uptodate src="${src.generator}/kotlin" dst="${bin.generator}" property="generator-uptodate"/>
 
@@ -143,9 +143,20 @@
 
 			<src path="${src.generator}/kotlin"/>
 		</kotlinc>
+
+		<lwjgl.javac
+			destdir="${bin.generator}"
+
+			srcdir="${src.generator}/java"
+			includes="org/lwjgl/**"
+			classpath="${env.JAVA_HOME}/lib/tools.jar"
+
+			taskname="javac: Generator Tools &amp; Doclets"
+			unless:set="generator-uptodate"
+		/>
 	</target>
 
-	<target name="compile-templates" description="Compiles the Templates module" depends="compile-generator, bindings">
+	<target name="compile-templates" description="Compiles the Templates module" depends="-compile-generator, bindings">
 		<local name="templates-uptodate"/>
 		<dir-uptodate src="${src.templates}/kotlin" dst="${bin.templates}" property="templates-uptodate"/>
 
@@ -234,17 +245,7 @@
 		</kotlinc>
 	</target>
 
-	<target name="-compile-generator-tools" depends="init">
-		<lwjgl.javac
-			destdir="${bin.generator}"
-
-			srcdir="${src.generator}/java"
-			includes="org/lwjgl/generator/util/**"
-			description="javac: Generator Tools"
-		/>
-	</target>
-
-	<target name="formatter" description="Runs the template formatter tool" depends="-compile-generator-tools">
+	<target name="formatter" description="Runs the template formatter tool" depends="-compile-generator">
 		<java
 			classname="org.lwjgl.generator.util.TemplateFormatter"
 			fork="true"
@@ -531,20 +532,8 @@
 		</java>
 	</target>
 
-	<target name="-compile-doclets">
-		<lwjgl.javac
-			destdir="${bin.generator}"
-
-			srcdir="${src.generator}/java"
-			includes="org/lwjgl/system/**"
-			classpath="${env.JAVA_HOME}/lib/tools.jar"
-
-			taskname="javac: Doclets"
-		/>
-	</target>
-
 	<!-- Includes all modules for javadoc.lwjgl.org -->
-	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate,-init-compile,-compile-doclets,-build-version">
+	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate,-init-compile,-build-version">
 		<delete dir="${bin.html.javadoc}"/>
 		<javadoc
 			destdir="${bin.html.javadoc}"
@@ -794,7 +783,7 @@
 		</sequential>
 	</macrodef>
 
-	<target name="release" depends="compile,-compile-doclets,-build-version">
+	<target name="release" depends="compile,-build-version">
 		<local name="revision"/>
 		<condition property="revision" value="build ${build.revision}" else="SNAPSHOT">
 			<isset property="build.revision"/>
