@@ -331,8 +331,11 @@ ENABLE_WARNINGS()""")
 	val BoundaryTypes = EnumConstant(
 		"Boundary types that specified while using the boundary system. ({@code ovrBoundaryType})",
 
-		"Boundary_Outer".enum("", 0x0001),
-		"Boundary_PlayArea".enum("", 0x0100)
+		"Boundary_Outer".enum("Outer boundary - closely represents user setup walls", 0x0001),
+		"Boundary_PlayArea".enum(
+			"Play area - safe rectangular area inside outer boundary which can optionally be used to restrict user interactions and motion.",
+			0x0100
+		)
 	).javaDocLinks
 
 	EnumConstant(
@@ -695,8 +698,7 @@ ovr_IdentifyClient(
 
 		Note: {@code ovr_SetControllerVibration} cannot be used interchangeably with #SubmitControllerVibration().
 
-		This method should be called periodically, vibration lasts for a maximum of 2.5 seconds. It's recommended to call this method once a second, calls will
-		be rejected if called too frequently (over 30hz).
+		This method should be called periodically, vibration lasts for a maximum of 2.5 seconds.
         """,
 
 		session,
@@ -822,7 +824,10 @@ ovr_IdentifyClient(
 
 		session,
 		TestBoundary["boundaryType"],
-		nullable..ovrVector3f_p.OUT("outFloorPoints", "an array of 3D points (in clockwise order) defining the boundary at floor height (up to 256)"),
+		nullable..ovrVector3f_p.OUT(
+			"outFloorPoints",
+			"an array of 3D points (in clockwise order) defining the boundary at floor height (can be $NULL to retrieve only the number of points)"
+		),
 		nullable..int_p.OUT("outFloorPointsCount", "the number of 3D points returned in the array"),
 
 		returnDoc =

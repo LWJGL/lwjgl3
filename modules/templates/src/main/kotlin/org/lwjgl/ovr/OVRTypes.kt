@@ -441,10 +441,13 @@ val ovrBoundaryLookAndFeel_p = struct(OVR_PACKAGE, "OVRBoundaryLookAndFeel", nat
 val ovrBoundaryTestResult_p = struct(OVR_PACKAGE, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult", mutable = false) {
     documentation = "Provides boundary test information."
 
-	ovrBool.member("IsTriggering", "True, if the boundary system is being triggered and visible")
+	ovrBool.member(
+		"IsTriggering",
+		"True if the boundary system is being triggered. Note that due to fade in/out effects this may not exactly match visibility."
+	)
     float.member("ClosestDistance", "Distance to the closest play area or outer boundary surface")
-    ovrVector3f.member("ClosestPoint", "Closest point in the surface")
-    ovrVector3f.member("ClosestPointNormal", "Normal of the closest point")
+    ovrVector3f.member("ClosestPoint", "Closest point on the boundary surface")
+    ovrVector3f.member("ClosestPointNormal", "Unit surface normal of the closest boundary surface")
 }.p
 
 val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
@@ -478,17 +481,17 @@ val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInpu
 
 	float.array(
 		"IndexTriggerNoDeadzone",
-		"Left and right finger trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone",
+		"Left and right finger trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter.",
 		size = "ovrHand_Count"
 	)
 	float.array(
 		"HandTriggerNoDeadzone",
-		"Left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone.",
+		"Left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter.",
 		size = "ovrHand_Count"
 	)
 	float.array(
 		"ThumbstickNoDeadzone",
-		"Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. Does not apply a deadzone.",
+		"Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. Does not apply a deadzone or filter.",
 		size = "ovrHand_Count"
 	)
 }.p
