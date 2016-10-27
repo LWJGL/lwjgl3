@@ -457,7 +457,7 @@ class NativeClassFunction(
 						else
 							expression += ".get($expression.position())"
 					} else if ( autoSize.factor != null )
-						expression += " ${autoSize.factor.expressionInv()}"
+						expression = autoSize.factor.scaleInv(expression)
 
 					sequenceOf(autoSize.reference, *autoSize.dependent).forEach {
 						val bufferParam = paramMap[it]!!

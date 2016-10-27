@@ -1141,7 +1141,7 @@ ${validations.joinToString("\n")}
 		.let {
 			val factor = this[AutoSizeMember].factor
 			if (factor != null)
-				"($it ${factor.expression()})"
+				"(${factor.scale(it)})"
 			else
 				it
 		}
@@ -1155,7 +1155,7 @@ ${validations.joinToString("\n")}
 			val autoSizeExpression = "value.remaining()"
 				.let {
 					if (autoSize.factor != null)
-						"($it ${autoSize.factor.expressionInv()})"
+						"(${autoSize.factor.scaleInv(it)})"
 					else
 						it
 				}

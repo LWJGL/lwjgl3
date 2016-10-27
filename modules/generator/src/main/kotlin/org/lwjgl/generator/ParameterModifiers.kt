@@ -43,8 +43,8 @@ class AutoSizeFactor(
 		fun shr(expression: String) = AutoSizeFactor(">>", "<<", expression)
 	}
 
-	fun expression() = "$operator $expression"
-	fun expressionInv() = "$operatorInv $expression"
+	fun scale(operand: String) = "$operand $operator $expression"
+	fun scaleInv(operand: String) = "$operand $operatorInv $expression"
 }
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */

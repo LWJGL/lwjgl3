@@ -28,12 +28,12 @@ class AutoSizeMember(
 	override val reference: String,
 	vararg val dependent: String,
 	/** If not null, the expression will be appended to the parameter. */
-	val factor: AutoSizeFactor?,
+	val factor: AutoSizeFactor? = null,
 
 	/** If true, the auto-size value may be zero and referenced members can be null. */
-	val optional: Boolean,
+	val optional: Boolean = false,
 	/** If true, at least one of the nullable referenced members must not be null. */
-	val atLeastOne: Boolean
+	val atLeastOne: Boolean = false
 ) : StructMemberModifier(), ReferenceModifier {
 	companion object : ModifierKey<AutoSizeMember>
 
@@ -63,13 +63,13 @@ class AutoSizeMember(
 val Struct.const: ConstMember get() = ConstMember
 
 fun Struct.AutoSize(reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
-	AutoSizeMember(reference, *dependent, factor = null, optional = optional, atLeastOne = atLeastOne)
+	AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
 
 fun Struct.AutoSize(div: Int, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
 	if (div < 1)
 		throw IllegalArgumentException()
 	else if (div == 1)
-		AutoSize(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
+		AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
 	else if (Integer.bitCount(div) == 1)
 		AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
 	else

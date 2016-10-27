@@ -50,7 +50,7 @@ internal open class AutoSizeTransform(
 		}
 		val factor = param[AutoSize].factor
 		if ( applyFactor && factor != null )
-			expression += " ${factor.expression()}"
+			expression = factor.scale(expression)
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes.let { if (relaxedCast) it < 4 else it != 4 } )
 			expression = "(${param.nativeType.javaMethodType})${if ( expression.contains(' ') ) "($expression)" else expression}"
@@ -95,7 +95,7 @@ private class AutoSizeBytesTransform(
 				}
 			} catch(e: NumberFormatException) {
 				if ( applyTo !== ApplyTo.ALTERNATIVE ) // Hack to skip the expression with MultiType
-					expression = "($expression ${factor.expression()}) << $byteShift"
+					expression = "(${factor.scale(expression)}) << $byteShift"
 			}
 		}
 
@@ -115,7 +115,7 @@ internal open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : 
 			"${bufferParam.name}EncodedLen"
 
 		if ( param[AutoSize].factor != null )
-			expression = "$expression ${param[AutoSize].factor!!.expression()}"
+			expression = param[AutoSize].factor!!.scale(expression)
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
 			expression = "(${param.nativeType.javaMethodType})($expression)"
