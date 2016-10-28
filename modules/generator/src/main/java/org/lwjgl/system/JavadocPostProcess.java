@@ -11,7 +11,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/** Processes the "Field Summary" section of Javadoc-generated HTML files, to group contiguous fields having the same Javadoc comment. */
+/**
+ * Processes the "Field Summary" section of Javadoc-generated HTML files, to group contiguous fields having the same
+ * Javadoc comment.
+ */
 public final class JavadocPostProcess {
 
 	private JavadocPostProcess() {
@@ -48,8 +51,8 @@ public final class JavadocPostProcess {
 
 	private static boolean doProcess(File file) {
 		String html;
-		try {
-			html = new Scanner(file, "UTF-8").useDelimiter("\\Z").next();
+		try (Scanner scanner = new Scanner(file, "UTF-8").useDelimiter("\\Z")) {
+			html = scanner.next();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -108,13 +111,9 @@ public final class JavadocPostProcess {
 
 			flush(out, matches, !altColor);
 
-			try {
-				Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
-
+			try (Writer w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"))) {
 				w.write(out.toString());
 				w.write(html, lastMatchEnd, html.length() - lastMatchEnd);
-
-				w.close();
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -188,7 +187,7 @@ public final class JavadocPostProcess {
 			this.type = matcher.group(2);
 			this.link = matcher.group(3);
 			this.name = matcher.group(4);
-			this.comment = matcher.group(5).equals("&nbsp;") ? "" : matcher.group(6);
+			this.comment = "&nbsp;".equals(matcher.group(5)) ? "" : matcher.group(6);
 			this.nl = matcher.group(7);
 		}
 

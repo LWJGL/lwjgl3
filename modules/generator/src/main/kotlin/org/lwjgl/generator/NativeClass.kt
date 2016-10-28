@@ -480,7 +480,7 @@ class NativeClass(
 		print("\n}")
 	}
 
-	override val skipNative: Boolean get() = functions.none() { it.hasCustomJNI }
+	override val skipNative: Boolean get() = functions.none { it.hasCustomJNI }
 
 	override fun PrintWriter.generateNative() {
 		print(HEADER)
@@ -542,7 +542,7 @@ class NativeClass(
 	// DSL extensions
 
 	operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>, access: Access = Access.PUBLIC): ConstantBlock<T> {
-		val block = ConstantBlock(this@NativeClass, access, this, { processDocumentation(documentation).toJavaDoc() }, *constants)
+		val block = ConstantBlock(this@NativeClass, access, this, { processDocumentation(documentation) }, *constants)
 		constantBlocks.add(block)
 		return block
 	}
@@ -559,14 +559,14 @@ class NativeClass(
 	val String.enum: Constant<EnumValue> get() = Constant(this, EnumValue())
 
 	infix fun String.enum(documentation: String) =
-		Constant(this, EnumValue({ if (documentation.isEmpty()) null else processDocumentation(documentation).toJavaDoc() }))
+		Constant(this, EnumValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))
 
 	infix fun String.enum(value: Int) = Constant(this, EnumValue(value = value))
 	fun String.enum(documentation: String, value: Int) =
-		Constant(this, EnumValue({ if (documentation.isEmpty()) null else processDocumentation(documentation).toJavaDoc() }, value))
+		Constant(this, EnumValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, value))
 
 	fun String.enum(documentation: String, expression: String) =
-		Constant(this, EnumValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation).toJavaDoc() }, expression))
+		Constant(this, EnumValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
 
 	operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =
 		ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since, noPrefix = noPrefix)

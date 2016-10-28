@@ -78,14 +78,6 @@ class ConstantBlock<T : Any>(
 
 	private fun getConstantName(name: String) = if (noPrefix) name else "${nativeClass.prefixConstant}$name"
 
-	private val Constant<Int>.enumValue: Int get() = this.value.let {
-		it ?: try {
-			Integer.parseInt((this as ConstantExpression).expression)
-		} catch(e: Exception) {
-			Integer.MAX_VALUE
-		}
-	}
-
 	internal fun generate(writer: PrintWriter) {
 		if (constantType === EnumConstant) {
 			// Increment/update the current enum value while iterating the enum constants.
@@ -93,7 +85,6 @@ class ConstantBlock<T : Any>(
 			// Constants with documentation go to their own block.
 
 			val rootBlock = ArrayList<Constant<Int>>()
-			val enumBlocks = ArrayList<ConstantBlock<Int>>()
 
 			var value = 0
 			var formatType = 1 // 0: hex, 1: decimal
@@ -104,9 +95,8 @@ class ConstantBlock<T : Any>(
 					continue
 				}
 
-				val ev = c.value as EnumValue
-				(
-					when {
+				(c.value as EnumValue).let { ev ->
+					rootBlock.add(when {
 						ev is EnumValueExpression -> {
 							try {
 								value = Integer.parseInt(ev.expression) + 1 // decimal
@@ -132,36 +122,46 @@ class ConstantBlock<T : Any>(
 							else
 								Constant(c.name, value++)
 						}
-					}
-				).let {
-					val doc = ev.documentation()
-					if (doc == null)
-						rootBlock.add(it)
-					else
-						ConstantBlock(nativeClass, access, IntConstant, { doc }, it).let {
-							it.noPrefix = noPrefix
-							enumBlocks.add(it)
-						}
+					})
 				}
 			}
 
-			fun rootBlockBefore() =
-				enumBlocks.isEmpty() || Math.abs(rootBlock[0].enumValue) <= Math.abs(enumBlocks[0].constants[0].enumValue)
-
-			fun PrintWriter.generateRootBlock(rootBlock: ArrayList<Constant<Int>>) =
-				ConstantBlock(nativeClass, access, IntConstant, this@ConstantBlock.documentation, *rootBlock.toArray(emptyArray())).let {
-					it.noPrefix = noPrefix
-					it.generate(this)
-				}
-
-			if (rootBlock.isNotEmpty() && rootBlockBefore())
-				writer.generateRootBlock(rootBlock)
-
-			for (b in enumBlocks)
-				b.generate(writer)
-
-			if (rootBlock.isNotEmpty() && !rootBlockBefore())
-				writer.generateRootBlock(rootBlock)
+			ConstantBlock(nativeClass, access, IntConstant, documentation().let { doc ->
+				constants.asSequence()
+					.mapNotNull {
+						(if (it is ConstantExpression)
+							null
+						else
+							(it.value as EnumValue).documentation()
+						).let { enumDoc ->
+							val link = "#${getConstantName(it.name)}"
+							if (enumDoc == null) {
+								if ((doc != null && doc.contains(link)) || constants.size == 1)
+									null
+								else
+									"<li>{@link $link ${it.name}}</li>"
+							} else
+								"<li>{@link $link ${it.name}} - $enumDoc</li>"
+						}
+					}
+					.joinToString("\n\t\t\t")
+					.let { enumDoc ->
+						{
+							if (enumDoc.isEmpty())
+								doc
+							else
+								"""${if (doc == null) "" else "\t$doc\n\n"}
+		<h5>Enum values:</h5>
+		<ul>
+			$enumDoc
+		</ul>
+		"""
+						}
+					}
+			}, *rootBlock.toArray(emptyArray())).let {
+				it.noPrefix = noPrefix
+				it.generate(writer)
+			}
 		} else
 			writer.generateBlock()
 	}
@@ -170,7 +170,7 @@ class ConstantBlock<T : Any>(
 		println()
 		val doc = documentation()
 		if (doc != null)
-			println(doc)
+			println(doc.toJavaDoc())
 
 		print("\t${access.modifier}static final ${constantType.javaType}")
 

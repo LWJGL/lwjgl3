@@ -381,59 +381,59 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		"FOCUSED".enum(
 			"""
-			#WindowHint(): Specifies whether the windowed mode window will be given input focus when created. This hint is ignored for full screen and
+			{@code WindowHint}: Specifies whether the windowed mode window will be given input focus when created. This hint is ignored for full screen and
 			initially hidden windows.
 
-			#GetWindowAttrib(): Indicates whether the specified window has input focus.
+			{@code GetWindowAttrib}: Indicates whether the specified window has input focus.
 			""",
 			0x00020001
 		),
-		"ICONIFIED".enum("#GetWindowAttrib(): Indicates whether the specified window is iconified, whether by the user or with #IconifyWindow().", 0x00020002),
+		"ICONIFIED".enum("{@code GetWindowAttrib}: Indicates whether the specified window is iconified, whether by the user or with #IconifyWindow().", 0x00020002),
 		"RESIZABLE".enum(
 			"""
-			#WindowHint(): Specifies whether the windowed mode window will be resizable <i>by the user</i>. The window will still be resizable using the
+			{@code WindowHint}: Specifies whether the windowed mode window will be resizable <i>by the user</i>. The window will still be resizable using the
 			#SetWindowSize() function. This hint is ignored for full screen windows.
 
-			#GetWindowAttrib(): Indicates whether the specified window is resizable <i>by the user</i>.
+			{@code GetWindowAttrib}: Indicates whether the specified window is resizable <i>by the user</i>.
 			""",
 			0x00020003),
 		"VISIBLE".enum(
 			"""
-			#WindowHint(): Specifies whether the windowed mode window will be initially visible. This hint is ignored for full screen windows. Windows created
+			{@code WindowHint}: Specifies whether the windowed mode window will be initially visible. This hint is ignored for full screen windows. Windows created
 			hidden are completely invisible to the user until shown. This can be useful if you need to set up your window further before showing it, for
 			example moving it to a specific location.
 
-			#GetWindowAttrib(): Indicates whether the specified window is visible. Window visibility can be controlled with #ShowWindow() and #HideWindow().
+			{@code GetWindowAttrib}: Indicates whether the specified window is visible. Window visibility can be controlled with #ShowWindow() and #HideWindow().
 			""",
 			0x00020004),
 		"DECORATED".enum(
 			"""
-			#WindowHint(): Specifies whether the windowed mode window will have window decorations such as a border, a close widget, etc. An undecorated window
+			{@code WindowHint}: Specifies whether the windowed mode window will have window decorations such as a border, a close widget, etc. An undecorated window
 			may still allow the user to generate close events on some platforms. This hint is ignored for full screen windows.
 
-			#GetWindowAttrib(): Indicates whether the specified window has decorations such as a border, a close widget, etc.
+			{@code GetWindowAttrib}: Indicates whether the specified window has decorations such as a border, a close widget, etc.
 			""",
 			0x00020005),
 		"AUTO_ICONIFY".enum(
 			"""
-			#WindowHint(): Specifies whether the full screen window will automatically iconify and restore the previous video mode on input focus loss. This
+			{@code WindowHint}: Specifies whether the full screen window will automatically iconify and restore the previous video mode on input focus loss. This
 			hint is ignored for windowed mode windows.
 			""",
 			0x00020006),
 		"FLOATING".enum(
 			"""
-			#WindowHint(): Specifies whether the windowed mode window will be floating above other regular windows, also called topmost or always-on-top. This
+			{@code WindowHint}: Specifies whether the windowed mode window will be floating above other regular windows, also called topmost or always-on-top. This
 			is intended primarily for debugging purposes and cannot be used to implement proper full screen windows. This hint is ignored for full screen
 			windows.
 
-			#GetWindowAttrib(): Indicates whether the specified window is floating, also called topmost or always-on-top.
+			{@code GetWindowAttrib}: Indicates whether the specified window is floating, also called topmost or always-on-top.
 			""",
 			0x00020007),
 		"MAXIMIZED".enum(
 			"""
-			#WindowHint(): Specifies whether the windowed mode window will be maximized when created. This hint is ignored for full screen windows.
+			{@code WindowHint}: Specifies whether the windowed mode window will be maximized when created. This hint is ignored for full screen windows.
 
-			#GetWindowAttrib(): Indicates whether the specified window is maximized, whether by the user or #MaximizeWindow().
+			{@code GetWindowAttrib}: Indicates whether the specified window is maximized, whether by the user or #MaximizeWindow().
 			""",
 			0x00020008)
 	).javaDocLinks
@@ -506,16 +506,16 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		"CLIENT_API".enum(
 			"""
-			#WindowHint(): Specifies which client API to create the context for. Possible values are #OPENGL_API, #OPENGL_ES_API and #NO_API. This is a hard
+			{@code WindowHint}: Specifies which client API to create the context for. Possible values are #OPENGL_API, #OPENGL_ES_API and #NO_API. This is a hard
 			constraint.
 
-			#GetWindowAttrib(): Indicates the client API provided by the window's context; either #OPENGL_API, #OPENGL_ES_API or #NO_API.
+			{@code GetWindowAttrib}: Indicates the client API provided by the window's context; either #OPENGL_API, #OPENGL_ES_API or #NO_API.
 			""",
 			0x00022001
 		),
 		"CONTEXT_VERSION_MAJOR".enum(
 			"""
-			#WindowHint(): Specifies the client API major version that the created context must be compatible with. The exact behavior of this hint depends on
+			{@code WindowHint}: Specifies the client API major version that the created context must be compatible with. The exact behavior of this hint depends on
 			the requested client API.
 
 			Notes:
@@ -536,56 +536,56 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 				"""
 			)}
 
-			#GetWindowAttrib(): Indicate the client API major version of the window's context.
+			{@code GetWindowAttrib}: Indicate the client API major version of the window's context.
 			""",
 			0x00022002
 		),
 		"CONTEXT_VERSION_MINOR".enum(
 			"""
-			#WindowHint(): Specifies the client API minor version that the created context must be compatible with. The exact behavior of this hint depends on
+			{@code WindowHint}: Specifies the client API minor version that the created context must be compatible with. The exact behavior of this hint depends on
 			the requested client API.
 
-			#GetWindowAttrib(): Indicate the client API minor version of the window's context.
+			{@code GetWindowAttrib}: Indicate the client API minor version of the window's context.
 			""",
 			0x00022003
 		),
-		"CONTEXT_REVISION".enum("#GetWindowAttrib(): Indicates the client API version of the window's context.", 0x00022004),
+		"CONTEXT_REVISION".enum("{@code GetWindowAttrib}: Indicates the client API version of the window's context.", 0x00022004),
 		"CONTEXT_ROBUSTNESS".enum(
 			"""
-			#WindowHint(): Specifies the robustness strategy to be used by the context. This can be one of #NO_RESET_NOTIFICATION or #LOSE_CONTEXT_ON_RESET, or
+			{@code WindowHint}: Specifies the robustness strategy to be used by the context. This can be one of #NO_RESET_NOTIFICATION or #LOSE_CONTEXT_ON_RESET, or
 			#NO_ROBUSTNESS to not request a robustness strategy.
 
-			#GetWindowAttrib(): Indicates the robustness strategy used by the context. This is #LOSE_CONTEXT_ON_RESET or #NO_RESET_NOTIFICATION if the window's
+			{@code GetWindowAttrib}: Indicates the robustness strategy used by the context. This is #LOSE_CONTEXT_ON_RESET or #NO_RESET_NOTIFICATION if the window's
 			context supports robustness, or #NO_ROBUSTNESS otherwise.
 			""",
 			0x00022005
 		),
 		"OPENGL_FORWARD_COMPAT".enum(
 			"""
-			#WindowHint(): Specifies whether the OpenGL context should be forward-compatible, i.e. one where all functionality deprecated in the requested
+			{@code WindowHint}: Specifies whether the OpenGL context should be forward-compatible, i.e. one where all functionality deprecated in the requested
 			version of OpenGL is removed. This must only be used if the requested OpenGL version is 3.0 or above. If OpenGL ES is requested, this hint is
 			ignored.
 
-			#GetWindowAttrib(): Indicates if the window's context is an OpenGL forward-compatible one.
+			{@code GetWindowAttrib}: Indicates if the window's context is an OpenGL forward-compatible one.
 			""",
 			0x00022006
 		),
 		"OPENGL_DEBUG_CONTEXT".enum(
 			"""
-			#WindowHint(): Specifies whether to create a debug OpenGL context, which may have additional error and performance issue reporting functionality.
+			{@code WindowHint}: Specifies whether to create a debug OpenGL context, which may have additional error and performance issue reporting functionality.
 			If OpenGL ES is requested, this hint is ignored.
 
-			#GetWindowAttrib(): Indicates if the window's context is an OpenGL debug context.
+			{@code GetWindowAttrib}: Indicates if the window's context is an OpenGL debug context.
 			""",
 			0x00022007
 		),
 		"OPENGL_PROFILE".enum(
 			"""
-			#WindowHint(): Specifies which OpenGL profile to create the context for. Possible values are one of #OPENGL_CORE_PROFILE or #OPENGL_COMPAT_PROFILE,
+			{@code WindowHint}: Specifies which OpenGL profile to create the context for. Possible values are one of #OPENGL_CORE_PROFILE or #OPENGL_COMPAT_PROFILE,
 			or #OPENGL_ANY_PROFILE to not request a specific profile. If requesting an OpenGL version below 3.2, #OPENGL_ANY_PROFILE must be used. If OpenGL ES
 			is requested, this hint is ignored.
 
-			#GetWindowAttrib(): Indicates the OpenGL profile used by the context. This is #OPENGL_CORE_PROFILE or #OPENGL_COMPAT_PROFILE if the context uses a
+			{@code GetWindowAttrib}: Indicates the OpenGL profile used by the context. This is #OPENGL_CORE_PROFILE or #OPENGL_COMPAT_PROFILE if the context uses a
 			known profile, or #OPENGL_ANY_PROFILE if the OpenGL profile is unknown or the context is an OpenGL ES context. Note that the returned profile may
 			not match the profile bits of the context flags, as GLFW will try other means of detecting the profile when no bits are set.
 			""",
@@ -593,7 +593,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		),
 		"CONTEXT_RELEASE_BEHAVIOR".enum(
 			"""
-			#WindowHint(): Specifies the release behavior to be used by the context. If the behavior is #ANY_RELEASE_BEHAVIOR, the default behavior of the
+			{@code WindowHint}: Specifies the release behavior to be used by the context. If the behavior is #ANY_RELEASE_BEHAVIOR, the default behavior of the
 			context creation API will be used. If the behavior is #RELEASE_BEHAVIOR_FLUSH, the pipeline will be flushed whenever the context is released from
 			being the current one. If the behavior is #RELEASE_BEHAVIOR_NONE, the pipeline will not be flushed on release.
 			""",
@@ -601,14 +601,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		),
 		"CONTEXT_NO_ERROR".enum(
 			"""
-			#WindowHint(): Specifies whether errors should be generated by the context. If enabled, situations that would have generated errors instead cause
+			{@code WindowHint}: Specifies whether errors should be generated by the context. If enabled, situations that would have generated errors instead cause
 			undefined behavior.
 			""",
 			0x0002200A
 		),
 		"CONTEXT_CREATION_API".enum(
 			"""
-			#WindowHint(): Specifies which context creation API to use to create the context. Possible values are #NATIVE_CONTEXT_API and #EGL_CONTEXT_API.
+			{@code WindowHint}: Specifies which context creation API to use to create the context. Possible values are #NATIVE_CONTEXT_API and #EGL_CONTEXT_API.
 			This is a hard constraint. If no client API is requested, this hint is ignored.
 
 			Notes:
@@ -621,7 +621,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 				"""
 			)}
 
-			#GetWindowAttrib(): Indicates the context creation API used to create the window's context; either #NATIVE_CONTEXT_API or #EGL_CONTEXT_API.
+			{@code GetWindowAttrib}: Indicates the context creation API used to create the window's context; either #NATIVE_CONTEXT_API or #EGL_CONTEXT_API.
 			""",
 			0x0002200B
 		)
