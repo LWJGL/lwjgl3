@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ANGLE_surface_d3d_texture_2d_share_handle = "ANGLESurfaceD3DTexture2DShareHandle".nativeClassEGL("ANGLE_surface_d3d_texture_2d_share_handle", postfix = ANGLE) {
 	documentation =

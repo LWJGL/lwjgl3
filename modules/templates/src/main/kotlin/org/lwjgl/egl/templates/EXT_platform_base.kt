@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", postfix = EXT) {
 	documentation =
@@ -18,12 +18,12 @@ val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", po
 		In particular, this extension defines the following:
 		${ol(
 			"A mechanism by which an EGL client can detect which platforms the EGL implementation supports.",
-		    """
+			"""
 		    New functions that enable an EGL client to specify to which platform a native resource belongs when creating an EGL resource from that native
 			resource. For example, this extension enables an EGL client to specify, when creating an EGLSurface from a native window, that the window belongs
 			to X11.
 		    """,
-		    """
+			"""
 		    That an EGL client is not restricted to interacting with a single platform per process. A client process can create and manage EGL resources from
 			multiple platforms.
 		    """

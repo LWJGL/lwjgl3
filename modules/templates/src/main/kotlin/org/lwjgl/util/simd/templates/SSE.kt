@@ -66,13 +66,13 @@ val SSE = "SSE".nativeClass("org.lwjgl.util.simd", prefix = "_MM", prefixMethod 
 
 	macro()..void(
 		"SET_EXCEPTION_MASK",
-	    """
+		"""
 	    Sets the exception mask bits of the MXCSR control and status register.
 
 	    All six exception mask bits are always affected. Bits not set explicitly are cleared.
 	    """,
 
-	    unsigned_int.IN("mask", "the exception mask", ExceptionMask, LinkMode.BITFIELD)
+		unsigned_int.IN("mask", "the exception mask", ExceptionMask, LinkMode.BITFIELD)
 	)
 	macro()..unsigned_int("GET_EXCEPTION_MASK", "Returns the exception mask bits from the MXCSR control and status register.")
 

@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val NV_post_sub_buffer = "NVPostSubBuffer".nativeClassEGL("NV_post_sub_buffer", postfix = NV) {
 	documentation =

@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EXT_stream_consumer_egloutput = "EXTStreamConsumerEGLOutput".nativeClassEGL("EXT_stream_consumer_egloutput", postfix = EXT) {
 	documentation =

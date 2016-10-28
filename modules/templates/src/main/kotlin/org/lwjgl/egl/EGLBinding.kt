@@ -5,12 +5,12 @@
 package org.lwjgl.egl
 
 import org.lwjgl.generator.*
-import java.io.PrintWriter
+import java.io.*
 import java.util.*
-import java.util.regex.Pattern
+import java.util.regex.*
 
 val NativeClass.capName: String
-	get() = if ( templateName.startsWith(prefixTemplate) ) templateName else "${prefixTemplate}_$templateName"
+	get() = if (templateName.startsWith(prefixTemplate)) templateName else "${prefixTemplate}_$templateName"
 
 private val CAPABILITIES_CLASS = "EGLCapabilities"
 
@@ -45,8 +45,8 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 			val isEGL1 = o1.templateName.startsWith("EGL")
 			val isEGL2 = o2.templateName.startsWith("EGL")
 
-			if ( isEGL1 xor isEGL2 )
-				(if ( isEGL1 ) -1 else 1)
+			if (isEGL1 xor isEGL2)
+				(if (isEGL1) -1 else 1)
 			else
 				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
 		}
@@ -80,8 +80,8 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 		for (extension in classes) {
 			val capName = extension.capName
 			print("\t\t$capName = ext.contains(\"$capName\")")
-			if ( extension.hasNativeFunctions )
-				print(" && EGL.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$EGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+			if (extension.hasNativeFunctions)
+				print(" && EGL.checkExtension(\"$capName\", ${if (capName == extension.className) "$EGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
 			println(";")
 		}
 		println("\t}")
@@ -126,7 +126,7 @@ fun config() {
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
 val NativeClass.registryLink: String get() {
 	val matcher = REGISTRY_PATTERN.matcher(templateName)
-	if ( !matcher.matches() )
+	if (!matcher.matches())
 		throw IllegalStateException("Non-standard extension name: $templateName")
 	return url("https://www.khronos.org/registry/egl/extensions/${matcher.group(1)}/EGL_$templateName.txt", templateName)
 }

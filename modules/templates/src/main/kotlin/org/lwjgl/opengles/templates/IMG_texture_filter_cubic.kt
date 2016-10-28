@@ -4,9 +4,8 @@
  */
 package org.lwjgl.opengles.templates
 
-import org.lwjgl.generator.IntConstant
-import org.lwjgl.opengles.nativeClassGLES
-import org.lwjgl.opengles.registryLink
+import org.lwjgl.generator.*
+import org.lwjgl.opengles.*
 
 val IMG_texture_filter_cubic = "IMGTextureFilterCubic".nativeClassGLES("IMG_texture_filter_cubic", postfix = IMG) {
 	documentation =

@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EXT_device_enumeration = "EXTDeviceEnumeration".nativeClassEGL("EXT_device_enumeration", postfix = EXT) {
 	documentation =

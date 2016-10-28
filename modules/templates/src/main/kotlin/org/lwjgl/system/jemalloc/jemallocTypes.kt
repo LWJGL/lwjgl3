@@ -5,7 +5,7 @@
 package org.lwjgl.system.jemalloc
 
 import org.lwjgl.generator.*
-import java.io.PrintWriter
+import java.io.*
 
 val JEMALLOC_PACKAGE = "org.lwjgl.system.jemalloc"
 
@@ -225,7 +225,7 @@ val chunk_merge_t = "chunk_merge_t".callback(
 
 val chunk_hooks_t = struct(JEMALLOC_PACKAGE, "ChunkHooks", nativeName = "chunk_hooks_t") {
 	documentation =
-	"""
+		"""
 	Comprises function pointers which are described individually below. jemalloc uses these functions to manage chunk lifetime, which starts off with
 	allocation of mapped committed memory, in the simplest case followed by deallocation. However, there are performance and platform reasons to retain chunks
 	for later reuse. Cleanup attempts cascade from deallocation to decommit to purging, which gives the chunk management functions opportunities to reject the

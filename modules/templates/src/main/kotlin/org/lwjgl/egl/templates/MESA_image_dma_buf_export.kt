@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val MESA_image_dma_buf_export = "MESAImageDMABufExport".nativeClassEGL("MESA_image_dma_buf_export", postfix = MESA) {
 	documentation =

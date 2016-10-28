@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EXT_protected_content = "EXTProtectedContent".nativeClassEGL("EXT_protected_content", postfix = EXT) {
 	documentation =

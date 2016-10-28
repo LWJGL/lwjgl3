@@ -29,13 +29,13 @@ val NV_gpu_multicast = "NVGPUMulticast".nativeClassGL("NV_gpu_multicast", postfi
 
 		Key points:
 		${ul(
-		"One context controls multiple GPUs. Every GPU in the linked group can access every object.",
-		"Rendering is broadcast. Each draw is repeated across all GPUs in the linked group.",
-		"""
+			"One context controls multiple GPUs. Every GPU in the linked group can access every object.",
+			"Rendering is broadcast. Each draw is repeated across all GPUs in the linked group.",
+			"""
 		Each GPU gets its own instance of all framebuffers, allowing individualized output for each GPU. Input data can be customized for each GPU using
 		buffers created with the storage flag, #PER_GPU_STORAGE_BIT_NV and a new API, #MulticastBufferSubDataNV().
 		""",
-		"New interfaces provide mechanisms to transfer textures and buffers from one GPU to another."
+			"New interfaces provide mechanisms to transfer textures and buffers from one GPU to another."
 		)}
 
 		Requires ${ARB_copy_image.link} and ${EXT_direct_state_access.link}.

@@ -4,9 +4,9 @@
  */
 package org.lwjgl.glfw.templates
 
+import org.lwjgl.egl.*
 import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
-import org.lwjgl.egl.*
 
 val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "egl", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
 	javaImport(

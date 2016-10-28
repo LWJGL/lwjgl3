@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.opengl.BufferType.*
 
 val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", postfix = ARB) {
 	documentation =

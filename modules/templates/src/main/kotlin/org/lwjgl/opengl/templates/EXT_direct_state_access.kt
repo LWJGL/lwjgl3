@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.opengl.BufferType.*
 
 val EXT_direct_state_access = "EXTDirectStateAccess".nativeClassGL("EXT_direct_state_access", postfix = EXT) {
 	documentation =
@@ -172,8 +171,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 1.0: New matrix commands add "Matrix" prefix to name,
-    drops "Matrix" suffix from name, and add initial "enum matrixMode"
-    parameter
+	drops "Matrix" suffix from name, and add initial "enum matrixMode"
+	parameter
 	 */
 
 	void(
@@ -319,7 +318,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 1.1: New texture object commands and queries replace "Tex"
-    in name with "Texture" and add initial "uint texture" parameter
+	in name with "Texture" and add initial "uint texture" parameter
 	 */
 
 	void(
@@ -544,7 +543,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 1.2: New 3D texture object commands replace "Tex" in name with
-    "Texture" and adds initial "uint texture" parameter
+	"Texture" and adds initial "uint texture" parameter
 	 */
 
 	DependsOn("OpenGL12")..void(
@@ -604,8 +603,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 1.2.1: New multitexture commands and queries prefix "Multi"
-    before "Tex" and add an initial "enum texunit" parameter (to identify
-    the texture unit).
+	before "Tex" and add an initial "enum texunit" parameter (to identify
+	the texture unit).
 	 */
 
 	DependsOn("OpenGL13")..void(
@@ -1057,9 +1056,9 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 1.2.1: New indexed texture commands and queries append
-    "Indexed" to name and add "uint index" parameter (to identify the
-    texture unit index) after state name parameters (if any) and before
-    state value parameters
+	"Indexed" to name and add "uint index" parameter (to identify the
+	texture unit index) after state name parameters (if any) and before
+	state value parameters
 	 */
 
 	DependsOn("OpenGL13")..void(
@@ -1080,9 +1079,9 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New indexed texture commands and queries append "i"
-    to name and add "uint index" parameter (to identify the texture
-    unit index) after state name parameters (if any) and before state
-    value parameters
+	to name and add "uint index" parameter (to identify the texture
+	unit index) after state name parameters (if any) and before state
+	value parameters
 	 */
 
 	DependsOn("OpenGL30")..IgnoreMissing..void(
@@ -1103,9 +1102,9 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 1.2.1: New indexed generic queries (added for indexed texture
-    state) append "Indexed" to name and add "uint index" parameter
-    (to identify the texture unit) after state name parameters (if any) and
-    before state value parameters
+	state) append "Indexed" to name and add "uint index" parameter
+	(to identify the texture unit) after state name parameters (if any) and
+	before state value parameters
 	 */
 
 	DependsOn("OpenGL13")..void(
@@ -1137,9 +1136,9 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New indexed generic queries (added for indexed texture
-    state) replace "v" for "i_v" to name and add "uint index" parameter
-    (to identify the texture unit) after state name parameters (if any)
-    and before state value parameters
+	state) replace "v" for "i_v" to name and add "uint index" parameter
+	(to identify the texture unit) after state name parameters (if any)
+	and before state value parameters
 	 */
 
 	DependsOn("OpenGL30")..IgnoreMissing..void(
@@ -1171,7 +1170,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 1.2.1:  Extend the functionality of these EXT_draw_buffers2
-    commands and queries for multitexture
+	commands and queries for multitexture
 	 */
 
 	DependsOn("OpenGL13")..void(
@@ -1218,7 +1217,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	ARB_vertex_program: New program commands and queries add "Named"
-    prefix to name and adds initial "uint program" parameter
+	prefix to name and adds initial "uint program" parameter
 	 */
 
 	DependsOn("GL_ARB_vertex_program")..void(
@@ -1320,7 +1319,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 1.3: New compressed texture object commands replace "Tex"
-    in name with "Texture" and add initial "uint texture" parameter
+	in name with "Texture" and add initial "uint texture" parameter
 	 */
 
 	DependsOn("OpenGL13")..void(
@@ -1430,8 +1429,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 1.3: New multitexture compressed texture commands and queries
-    prefix "Multi" before "Tex" and add an initial "enum texunit"
-    parameter (to identify the texture unit).
+	prefix "Multi" before "Tex" and add an initial "enum texunit"
+	parameter (to identify the texture unit).
 	 */
 
 	DependsOn("OpenGL13")..void(
@@ -1541,8 +1540,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	<OpenGL 1.3: New transpose matrix commands add "Matrix" suffix
-    to name, drops "Matrix" suffix from name, and add initial "enum
-    matrixMode" parameter
+	to name, drops "Matrix" suffix from name, and add initial "enum
+	matrixMode" parameter
 	 */
 
 	DependsOn("OpenGL13")..void(
@@ -1579,8 +1578,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 1.5: New buffer commands and queries replace "Buffer" with
-    "NamedBuffer" in name and replace "enum target" parameter with
-    "uint buffer"
+	"NamedBuffer" in name and replace "enum target" parameter with
+	"uint buffer"
 	 */
 
 	DependsOn("OpenGL15")..void(
@@ -1654,7 +1653,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 2.0: New uniform commands add "Program" prefix to name and
-    add initial "uint program" parameter
+	add initial "uint program" parameter
 	 */
 
 	DependsOn("OpenGL20")..void(
@@ -1856,7 +1855,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 2.1: New uniform matrix commands add "Program" prefix to
-    name and add initial "uint program" parameter
+	name and add initial "uint program" parameter
 	 */
 
 	DependsOn("OpenGL21")..void(
@@ -1927,8 +1926,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	EXT_texture_buffer_object:  New texture buffer object command
-    replaces "Tex" in name with "Texture" and adds initial "uint texture"
-    parameter
+	replaces "Tex" in name with "Texture" and adds initial "uint texture"
+	parameter
 	 */
 
 	DependsOn("GL_EXT_texture_buffer_object")..void(
@@ -1943,8 +1942,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	EXT_texture_buffer_object: New multitexture texture buffer command
-    prefixes "Multi" before "Tex" and add an initial "enum texunit"
-    parameter (to identify the texture unit).
+	prefixes "Multi" before "Tex" and add an initial "enum texunit"
+	parameter (to identify the texture unit).
 	 */
 
 	DependsOn("GL_EXT_texture_buffer_object")..void(
@@ -1959,8 +1958,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	EXT_texture_integer: New integer texture object commands and queries
-    replace "Tex" in name with "Texture" and add initial "uint texture"
-    parameter
+	replace "Tex" in name with "Texture" and add initial "uint texture"
+	parameter
 	 */
 
 	DependsOn("GL_EXT_texture_integer")..void(
@@ -2005,8 +2004,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	EXT_texture_integer: New multitexture integer texture commands and
-    queries prefix "Multi" before "Tex" and add an initial "enum texunit"
-    parameter (to identify the texture unit).
+	queries prefix "Multi" before "Tex" and add an initial "enum texunit"
+	parameter (to identify the texture unit).
 	 */
 
 	DependsOn("GL_EXT_texture_integer")..void(
@@ -2051,7 +2050,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	EXT_gpu_shader4: New integer uniform commands add "Program" prefix
-    to name and add initial "uint program" parameter
+	to name and add initial "uint program" parameter
 	 */
 
 	DependsOn("GL_EXT_gpu_shader4")..void(
@@ -2138,7 +2137,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	EXT_gpu_program_parameters: New program command adds "Named" prefix
-    to name and adds "uint program" parameter
+	to name and adds "uint program" parameter
 	 */
 
 	DependsOn("GL_EXT_gpu_program_parameters")..void(
@@ -2154,7 +2153,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	NV_gpu_program4: New program commands and queries add "Named"
-    prefix to name and replace "enum target" with "uint program"
+	prefix to name and replace "enum target" with "uint program"
 	 */
 
 	DependsOn("GL_NV_gpu_program4")..void(
@@ -2247,7 +2246,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New renderbuffer commands add "Named" prefix to name
-    and replace "enum target" with "uint renderbuffer"
+	and replace "enum target" with "uint renderbuffer"
 	 */
 
 	DependsOn("OpenGL30")..void(
@@ -2271,7 +2270,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New renderbuffer commands add "Named"
-    prefix to name and replace "enum target" with "uint renderbuffer"
+	prefix to name and replace "enum target" with "uint renderbuffer"
 	 */
 
 	DependsOn("OpenGL30")..void(
@@ -2287,8 +2286,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	NV_framebuffer_multisample_coverage: New renderbuffer commands
-    add "Named" prefix to name and replace "enum target" with "uint
-    renderbuffer"
+	add "Named" prefix to name and replace "enum target" with "uint
+	renderbuffer"
 	 */
 
 	DependsOn("GL_NV_framebuffer_multisample_coverage")..void(
@@ -2305,7 +2304,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New framebuffer commands add "Named" prefix to name
-    and replace "enum target" with "uint framebuffer"
+	and replace "enum target" with "uint framebuffer"
 	 */
 
 	DependsOn("OpenGL30")..GLenum(
@@ -2372,7 +2371,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New texture commands add "Texture" within name and
-    replace "enum target" with "uint texture"
+	replace "enum target" with "uint texture"
 	 */
 
 	DependsOn("OpenGL30")..void(
@@ -2385,7 +2384,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New texture commands add "MultiTex" within name and
-    replace "enum target" with "enum texunit"
+	replace "enum target" with "enum texunit"
 	 */
 
 	DependsOn("OpenGL30")..void(
@@ -2449,8 +2448,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	EXT_geometry_shader4 or NV_gpu_program4: New framebuffer commands
-    add "Named" prefix to name and replace "enum target" with "uint
-    framebuffer"
+	add "Named" prefix to name and replace "enum target" with "uint
+	framebuffer"
 	 */
 
 	DependsOn("ext.contains(\"GL_EXT_geometry_shader4\") || ext.contains(\"GL_NV_gpu_program4\")")..void(
@@ -2487,8 +2486,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	NV_explicit_multisample:  New texture renderbuffer object command
-    replaces "Tex" in name with "Texture" and add initial "uint texture"
-    parameter
+	replaces "Tex" in name with "Texture" and add initial "uint texture"
+	parameter
 	 */
 
 	DependsOn("GL_NV_explicit_multisample")..void(
@@ -2502,8 +2501,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	NV_explicit_multisample: New multitexture texture renderbuffer command
-    prefixes "Multi" before "Tex" and add an initial "enum texunit"
-    parameter (to identify the texture unit)
+	prefixes "Multi" before "Tex" and add an initial "enum texunit"
+	parameter (to identify the texture unit)
 	 */
 
 	DependsOn("GL_NV_explicit_multisample")..void(
@@ -2517,9 +2516,9 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New vertex array specification commands for vertex
-    array objects prefix "VertexArray", add initial "uint vaobj" and
-    "uint buffer" parameters, change "Pointer" suffix to "Offset",
-    and change the final parameter from "const void *" to "intptr offset"
+	array objects prefix "VertexArray", add initial "uint vaobj" and
+	"uint buffer" parameters, change "Pointer" suffix to "Offset",
+	and change the final parameter from "const void *" to "intptr offset"
 	 */
 
 	DependsOn("OpenGL30")..void(
@@ -2655,8 +2654,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New vertex array enable commands for vertex array
-    objects change "ClientState" to "VertexArray" and add an initial
-    "uint vaobj" parameter
+	objects change "ClientState" to "VertexArray" and add an initial
+	"uint vaobj" parameter
 	 */
 
 	DependsOn("OpenGL30")..void(
@@ -2677,8 +2676,8 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New vertex attrib array enable commands for vertex
-    array objects change "VertexAttribArray" to "VertexArrayAttrib"
-    and add an initial "uint vaobj" parameter
+	array objects change "VertexAttribArray" to "VertexArrayAttrib"
+	and add an initial "uint vaobj" parameter
 	 */
 
 	DependsOn("OpenGL30")..void(
@@ -2739,7 +2738,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	/*
 	OpenGL 3.0: New buffer commands replace "Buffer" with "NamedBuffer"
-    in name and replace "enum target" parameter with "uint buffer"
+	in name and replace "enum target" parameter with "uint buffer"
 	 */
 
 	DependsOn("OpenGL30")..(MapPointer("length")..void_p)(

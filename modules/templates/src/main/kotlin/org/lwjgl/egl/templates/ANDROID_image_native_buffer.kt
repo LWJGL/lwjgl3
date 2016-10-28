@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ANDROID_image_native_buffer = "ANDROIDImageNativeBuffer".nativeClassEGL("ANDROID_image_native_buffer", postfix = ANDROID) {
 	documentation =

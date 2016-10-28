@@ -305,7 +305,7 @@ ENABLE_WARNINGS()""")
 
 		"COLOR_COUNT".enum
 	).javaDocLinksSkipCount
-	
+
 	val StyleCursor = EnumConstant(
 		"nk_style_cursor",
 
@@ -319,7 +319,7 @@ ENABLE_WARNINGS()""")
 
 		"CURSOR_COUNT".enum
 	).javaDocLinksSkipCount
-	
+
 	EnumConstant(
 		"nk_widget_layout_states",
 
@@ -408,7 +408,7 @@ ENABLE_WARNINGS()""")
 		"WINDOW_NO_SCROLLBAR".enum("Removes the scrollbar from the window", 5.NK_FLAG),
 		"WINDOW_TITLE".enum("Forces a header at the top at the window showing the title", 6.NK_FLAG),
 		"WINDOW_SCROLL_AUTO_HIDE".enum("Automatically hides the window scrollbar if no user interaction", 7.NK_FLAG),
-        "WINDOW_BACKGROUND".enum("Keep window always in the background", 8.NK_FLAG)
+		"WINDOW_BACKGROUND".enum("Keep window always in the background", 8.NK_FLAG)
 	).javaDocLinks
 
 	EnumConstant(
@@ -2966,11 +2966,11 @@ ENABLE_WARNINGS()""")
 			"strfilter",
 			"""
 			${ul(
-			    "c - matches any literal character c",
-			    ". - matches any single character",
-			    "^ - matches the beginning of the input string",
-			    "$ - matches the end of the input string",
-			    "* - matches zero or more occurrences of the previous character"
+				"c - matches any literal character c",
+				". - matches any single character",
+				"^ - matches the beginning of the input string",
+				"$ - matches the end of the input string",
+				"* - matches zero or more occurrences of the previous character"
 			)}
 			""",
 

@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_image_base = "KHRImageBase".nativeClassEGL("KHR_image_base", postfix = KHR) {
 	documentation =

@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_create_context_no_error = "KHRCreateContextNoError".nativeClassEGL("KHR_create_context_no_error", postfix = KHR) {
 	documentation =

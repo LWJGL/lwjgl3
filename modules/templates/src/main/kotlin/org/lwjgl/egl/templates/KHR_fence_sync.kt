@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_fence_sync = "KHRFenceSync".nativeClassEGL("KHR_fence_sync", postfix = KHR) {
 	documentation =

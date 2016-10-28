@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val NV_cuda_event = "NVCUDAEvent".nativeClassEGL("NV_cuda_event", postfix = NV) {
 	documentation =

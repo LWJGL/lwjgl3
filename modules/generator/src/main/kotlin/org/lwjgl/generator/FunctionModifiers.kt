@@ -62,18 +62,18 @@ class Code(
 	Code.NO_STATEMENTS !== javaFinally
 
 	internal fun hasStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
-		if ( statements === NO_STATEMENTS ) false else statements.any { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
+		if (statements === NO_STATEMENTS) false else statements.any { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
 
 	internal fun getStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
-		if ( statements === NO_STATEMENTS ) statements else statements.filter { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
+		if (statements === NO_STATEMENTS) statements else statements.filter { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
 
 	private fun List<Code.Statement>.append(other: List<Code.Statement>) =
-		if ( this === Code.NO_STATEMENTS && other === Code.NO_STATEMENTS ) Code.NO_STATEMENTS else this + other
+		if (this === Code.NO_STATEMENTS && other === Code.NO_STATEMENTS) Code.NO_STATEMENTS else this + other
 
 	private fun String?.append(other: String?) =
-		if ( this == null )
+		if (this == null)
 			other
-		else if ( other == null )
+		else if (other == null)
 			this
 		else
 			"$this\n$other"
@@ -116,12 +116,13 @@ class Macro internal constructor(val function: Boolean, val constant: Boolean, v
 	override val isSpecial = false
 
 	override fun validate(func: NativeClassFunction) {
-		if ( constant && func.parameters.isNotEmpty() )
+		if (constant && func.parameters.isNotEmpty())
 			throw IllegalArgumentException("The constant macro modifier can only be applied on functions with no arguments.")
 	}
 }
+
 val macro = Macro.CONSTANT
-fun macro(variable: Boolean = false) = if ( variable ) Macro.VARIABLE else Macro.FUNCTION
+fun macro(variable: Boolean = false) = if (variable) Macro.VARIABLE else Macro.FUNCTION
 fun macro(expression: String) = Macro(function = true, constant = false, expression = expression)
 
 class AccessModifier(val access: Access) : FunctionModifier() {
@@ -139,7 +140,7 @@ val internal = AccessModifier(Access.INTERNAL)
 class NativeName(val nativeName: String) : FunctionModifier() {
 	companion object : ModifierKey<NativeName>
 
-	internal val name: String get() = if ( nativeName.contains(' ') ) nativeName else "\"$nativeName\""
+	internal val name: String get() = if (nativeName.contains(' ')) nativeName else "\"$nativeName\""
 
 	override val isSpecial = false
 }
@@ -150,6 +151,6 @@ object Reuse : FunctionModifier() {
 }
 
 /** Disables creation of Java array overloads. */
-object OffHeapOnly: FunctionModifier() {
+object OffHeapOnly : FunctionModifier() {
 	override val isSpecial = false
 }

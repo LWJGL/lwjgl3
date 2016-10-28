@@ -9,7 +9,7 @@ import org.lwjgl.stb.*
 
 val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, prefix = "STBI", prefixMethod = "stbi_", library = STB_LIBRARY) {
 	nativeDirective(
-"""#ifdef LWJGL_WINDOWS
+		"""#ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 

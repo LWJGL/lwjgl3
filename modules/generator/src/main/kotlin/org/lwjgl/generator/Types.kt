@@ -4,9 +4,9 @@
  */
 package org.lwjgl.generator
 
-import org.lwjgl.PointerBuffer
+import org.lwjgl.*
 import java.nio.*
-import kotlin.reflect.KClass
+import kotlin.reflect.*
 
 open class NativeType(
 	/** The type used in the native API. */
@@ -27,7 +27,7 @@ open class NativeType(
 
 	/** The Java method argument type. */
 	internal open val javaMethodType: String
-		get() = if ( this.mapping === PrimitiveMapping.BOOLEAN4 ) "boolean" else mapping.javaMethodType.simpleName
+		get() = if (this.mapping === PrimitiveMapping.BOOLEAN4) "boolean" else mapping.javaMethodType.simpleName
 
 	override fun toString(): String =
 		"${this.javaClass.simpleName}: $name | ${mapping.jniFunctionType} | ${mapping.nativeMethodType} | ${mapping.javaMethodType}"
@@ -38,6 +38,7 @@ open class PrimitiveType(name: String, mapping: PrimitiveMapping) : NativeType(n
 
 // Specialization for integers.
 open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false) : PrimitiveType(name, mapping)
+
 val String.enumType: IntegerType get() = IntegerType(this, PrimitiveMapping.INT)
 
 // Specialization for string characters.
@@ -57,6 +58,7 @@ open class PointerType(
 
 /** Converts primitive to array */
 val PrimitiveType.p: PointerType get() = PointerType(this.name, (this.mapping as PrimitiveMapping).toPointer, elementType = this)
+
 fun PrimitiveType.p(name: String) = PointerType(
 	name,
 	(this.mapping as PrimitiveMapping).toPointer,
@@ -67,8 +69,8 @@ fun PrimitiveType.p(name: String) = PointerType(
 /** pointer to pointer. */
 private fun PointerType.pointerTo(): String {
 	val builder = StringBuilder(name)
-	if ( !includesPointer ) {
-		if ( !name.endsWith('*') )
+	if (!includesPointer) {
+		if (!name.endsWith('*'))
 			builder.append(' ')
 		builder.append('*')
 	}
@@ -77,7 +79,6 @@ private fun PointerType.pointerTo(): String {
 }
 
 val PointerType.p: PointerType get() = PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
-val PointerType.const_p: PointerType get() = PointerType("const ${this.pointerTo()}", PointerMapping.DATA_POINTER, elementType = this)
 val PointerType.p_const_p: PointerType get() = PointerType("${this.pointerTo()} const", PointerMapping.DATA_POINTER, elementType = this)
 
 val String.p: PointerType get() = PointerType(this, includesPointer = false)
@@ -130,10 +131,11 @@ class StructType(
 }
 
 /** Converts a struct value to a pointer to a struct value. */
-val StructType.p: PointerType get() = if ( this.includesPointer )
+val StructType.p: PointerType get() = if (this.includesPointer)
 	PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
 else
 	StructType(this.definition, this.pointerTo(), includesPointer = true, elementType = this)
+
 fun StructType.p(name: String) = StructType(this.definition, name, includesPointer = true)
 
 // Strings
@@ -156,7 +158,6 @@ fun CharSequenceType(
 ) = CharSequenceType(charType.name, mapping = mapping, charMapping = (charType.mapping as CharMapping))
 
 val CharType.p: CharSequenceType get() = CharSequenceType(this)
-val CharType.const_p: PointerType get() = CharSequenceType(CharType("const ${this.name}", mapping = this.mapping as CharMapping))
 
 // Callbacks
 class CallbackType(
@@ -171,7 +172,7 @@ class CallbackType(
 class ArrayType(
 	type: PointerType,
 	mapping: PointerMapping = type.mapping as PointerMapping
-): PointerType(
+) : PointerType(
 	type.name,
 	mapping,
 	type.includesPointer,
@@ -208,7 +209,7 @@ open class TypeMapping(
 		val VOID = TypeMapping("void", Void.TYPE, Void.TYPE)
 	}
 
-	internal val jniSignatureStrict: String get() = when ( this.nativeMethodType ) {
+	internal val jniSignatureStrict: String get() = when (this.nativeMethodType) {
 		Boolean::class.java -> "Z"
 		Byte::class.java    -> "B"
 		Char::class.java    -> "C"
@@ -221,14 +222,14 @@ open class TypeMapping(
 		else                -> "L${this.nativeMethodType.name};"
 	}
 
-	internal val jniSignature: String get() = if ( this.nativeMethodType === Long::class.java && this !== PrimitiveMapping.LONG ) "P" else jniSignatureStrict
+	internal val jniSignature: String get() = if (this.nativeMethodType === Long::class.java && this !== PrimitiveMapping.LONG) "P" else jniSignatureStrict
 
-	internal val jniSignatureJava: String get() = if ( this.nativeMethodType === Long::class.java )
-		if ( this === PrimitiveMapping.LONG ) "J" else "P"
+	internal val jniSignatureJava: String get() = if (this.nativeMethodType === Long::class.java)
+		if (this === PrimitiveMapping.LONG) "J" else "P"
 	else
 		""
 
-	internal val jniSignatureArray: String get() = when ( (this as PointerMapping).primitive ) {
+	internal val jniSignatureArray: String get() = when ((this as PointerMapping).primitive) {
 		"double" -> "_3D"
 		"float"  -> "_3F"
 		"int"    -> "_3I"
@@ -307,13 +308,13 @@ open class PointerMapping(
 	internal val isMultiByte = byteShift != null && byteShift != "0"
 
 	internal val box = super.javaMethodType.simpleName.substringBefore("Buffer")
-	internal val primitive: String get() = when ( this ) {
+	internal val primitive: String get() = when (this) {
 		DATA_BOOLEAN -> "boolean"
 		DATA_POINTER -> "long"
-		else -> box.toLowerCase()
+		else         -> box.toLowerCase()
 	}
 
-	internal val mallocType: String get() = when ( box ) {
+	internal val mallocType: String get() = when (box) {
 		"Byte" -> ""
 		else   -> box
 	}

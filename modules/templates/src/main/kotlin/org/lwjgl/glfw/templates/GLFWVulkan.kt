@@ -10,7 +10,7 @@ import org.lwjgl.vulkan.*
 
 val GLFWVulkan = dependsOn(Binding.VULKAN) {
 	"GLFWVulkan".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
-		javaImport ("org.lwjgl.vulkan.*")
+		javaImport("org.lwjgl.vulkan.*")
 
 		documentation =
 			"Native bindings to the GLFW library's Vulkan functions."

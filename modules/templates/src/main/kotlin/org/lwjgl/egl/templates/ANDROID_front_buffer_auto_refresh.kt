@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ANDROID_front_buffer_auto_refresh = "ANDROIDFrontBufferAutoRefresh".nativeClassEGL("ANDROID_front_buffer_auto_refresh", postfix = ANDROID) {
 	documentation =

@@ -13,7 +13,7 @@ val INVALID_MIP_LEVEL = "CL10GL#INVALID_MIP_LEVEL"
 
 val CL10GL = dependsOn(Binding.OPENGL) {
 	"CL10GL".nativeClassCL("CL10GL") {
-		javaImport (
+		javaImport(
 			"org.lwjgl.opengl.GL11",
 			"org.lwjgl.opengl.GL12",
 			"org.lwjgl.opengl.GL13",

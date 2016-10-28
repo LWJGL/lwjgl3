@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.dyncall.*
 
 val DynCall = "DynCall".nativeClass(DYNCALL_PACKAGE, prefix = "DC") {
-	nativeImport (
+	nativeImport(
 		"dyncall.h"
 	)
 
@@ -115,7 +115,7 @@ val DynCall = "DynCall".nativeClass(DYNCALL_PACKAGE, prefix = "DC") {
 
 		DCsize.IN("size", "the max size of the internal stack that will be allocated and used to bind arguments to")
 	)
-	
+
 	val vm = DCCallVM_p.IN("vm", "a {@code CallVM} instance")
 
 	void(
@@ -155,11 +155,11 @@ val DynCall = "DynCall".nativeClass(DYNCALL_PACKAGE, prefix = "DC") {
 	void("ArgBool", "Binds a {@code bool} argument.", vm, DCbool.IN("value", "the argument value"))
 	void("ArgChar", "Binds a {@code char} argument.", vm, DCchar.IN("value", "the argument value"))
 	void("ArgShort", "Binds a {@code short} argument.", vm, DCshort.IN("value", "the argument value"))
-	void("ArgInt","Binds an {@code int} argument.",vm, DCint.IN("value", "the argument value"))
-	void("ArgLong","Binds a {@code long} argument.",vm, DClong.IN("value", "the argument value"))
+	void("ArgInt", "Binds an {@code int} argument.", vm, DCint.IN("value", "the argument value"))
+	void("ArgLong", "Binds a {@code long} argument.", vm, DClong.IN("value", "the argument value"))
 	void("ArgLongLong", "Binds a {@code long long} argument.", vm, DClonglong.IN("value", "the argument value"))
 	void("ArgFloat", "Binds a {@code float} argument.", vm, DCfloat.IN("value", "the argument value"))
-	void("ArgDouble", "Binds a {@code double} argument.", vm, DCdouble.IN("value", "the argument value") )
+	void("ArgDouble", "Binds a {@code double} argument.", vm, DCdouble.IN("value", "the argument value"))
 	void("ArgPointer", "Binds a pointer argument.", vm, nullable..DCpointer.IN("value", "the argument value"))
 	void(
 		"ArgStruct",

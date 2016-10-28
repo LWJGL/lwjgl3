@@ -10,7 +10,7 @@ import org.lwjgl.generator.*
 object DeprecatedGL : FunctionModifier() {
 	override val isSpecial = false
 	override fun validate(func: NativeClassFunction) {
-		if ( !func.nativeClass.postfix.isEmpty() )
+		if (!func.nativeClass.postfix.isEmpty())
 			throw IllegalArgumentException("The deprecated modifier can only be applied on core functionality.")
 	}
 }

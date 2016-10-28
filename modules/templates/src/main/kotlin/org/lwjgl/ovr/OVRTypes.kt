@@ -439,15 +439,15 @@ val ovrBoundaryLookAndFeel_p = struct(OVR_PACKAGE, "OVRBoundaryLookAndFeel", nat
 }.p
 
 val ovrBoundaryTestResult_p = struct(OVR_PACKAGE, "OVRBoundaryTestResult", nativeName = "ovrBoundaryTestResult", mutable = false) {
-    documentation = "Provides boundary test information."
+	documentation = "Provides boundary test information."
 
 	ovrBool.member(
 		"IsTriggering",
 		"True if the boundary system is being triggered. Note that due to fade in/out effects this may not exactly match visibility."
 	)
-    float.member("ClosestDistance", "Distance to the closest play area or outer boundary surface")
-    ovrVector3f.member("ClosestPoint", "Closest point on the boundary surface")
-    ovrVector3f.member("ClosestPointNormal", "Unit surface normal of the closest boundary surface")
+	float.member("ClosestDistance", "Distance to the closest play area or outer boundary surface")
+	ovrVector3f.member("ClosestPoint", "Closest point on the boundary surface")
+	ovrVector3f.member("ClosestPointNormal", "Unit surface normal of the closest boundary surface")
 }.p
 
 val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInputState", mutable = false) {
@@ -704,8 +704,8 @@ val ovrPerfStatsPerCompositorFrame = struct(OVR_PACKAGE, "OVRPerfStatsPerComposi
 val ovrPerfStats_p = struct(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfStats", mutable = false) {
 	javaImport("static org.lwjgl.ovr.OVR.ovrMaxProvidedFrameStats")
 
-    documentation =
-    """
+	documentation =
+		"""
 	This is a complete descriptor of the performance stats provided by the SDK.
 
 	{@code FrameStatsCount} will have a maximum value set by #MaxProvidedFrameStats.
@@ -732,9 +732,9 @@ val ovrPerfStats_p = struct(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfSt
 	"""
 
 	ovrPerfStatsPerCompositorFrame.array("FrameStats", "an array of performance stats", size = "ovrMaxProvidedFrameStats")
-    AutoSize("FrameStats")..int.member("FrameStatsCount", "the number of performance stats available in {@code FrameStats}")
-    ovrBool.member("AnyFrameStatsDropped", "if performance stats have been dropped")
-    float.member("AdaptiveGpuPerformanceScale", "the GPU performance scale")
+	AutoSize("FrameStats")..int.member("FrameStatsCount", "the number of performance stats available in {@code FrameStats}")
+	ovrBool.member("AnyFrameStatsDropped", "if performance stats have been dropped")
+	float.member("AdaptiveGpuPerformanceScale", "the GPU performance scale")
 }.p
 
 // OVR_CAPI_Util.h

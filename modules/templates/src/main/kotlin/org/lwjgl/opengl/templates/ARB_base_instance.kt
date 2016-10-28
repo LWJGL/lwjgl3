@@ -4,7 +4,6 @@
  */
 package org.lwjgl.opengl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_base_instance = "ARBBaseInstance".nativeClassGL("ARB_base_instance") {

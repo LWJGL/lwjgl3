@@ -6,10 +6,9 @@ package org.lwjgl.opengles.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
-import org.lwjgl.opengles.BufferType.*
 
 val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", postfix = NV) {
-	javaImport (
+	javaImport(
 		"static org.lwjgl.opengles.GLES20.*"
 	)
 

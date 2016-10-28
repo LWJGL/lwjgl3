@@ -987,7 +987,7 @@ val nk_style_window = struct(NUKLEAR_PACKAGE, "NkStyleWindow", nativeName = "str
 	nk_vec2.member("spacing", "")
 	nk_vec2.member("scrollbar_size", "")
 	nk_vec2.member("min_size", "")
-	
+
 	nk_vec2.member("padding", "")
 	nk_vec2.member("group_padding", "")
 	nk_vec2.member("popup_padding", "")
@@ -1186,7 +1186,7 @@ val nk_pool = struct(NUKLEAR_PACKAGE, "NkPool", nativeName = "struct nk_pool", m
 }
 
 fun NK_CONFIGURATION_STACK(address: PointerType, old_value: NativeType, javaName: String, name: String, size: Int): StructType {
-	if ( address.elementType != old_value )
+	if (address.elementType != old_value)
 		throw IllegalArgumentException()
 
 	val element = struct(NUKLEAR_PACKAGE, "NkConfigStack${javaName}Element", nativeName = "struct nk_config_stack_${name}_element", mutable = false) {
@@ -1236,9 +1236,9 @@ val nk_context_p = struct(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct nk_
 	nk_handle.member("userdata", "")
 
 	/* text editor objects are quite big because of an internal
-     * undo/redo stack. Therefore does not make sense to have one for
-     * each window for temporary use cases, so I only provide *one* instance
-     * for all windows. This works because the content is cleared anyway */
+	 * undo/redo stack. Therefore does not make sense to have one for
+	 * each window for temporary use cases, so I only provide *one* instance
+	 * for all windows. This works because the content is cleared anyway */
 	nk_text_edit.member("text_edit", "")
 	nk_command_buffer.member("overlay", "")
 

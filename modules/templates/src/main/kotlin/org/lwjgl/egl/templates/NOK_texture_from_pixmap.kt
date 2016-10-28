@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val NOK_texture_from_pixmap = "NOKTextureFromPixmap".nativeClassEGL("NOK_texture_from_pixmap", postfix = NOK) {
 	documentation =
@@ -23,15 +23,15 @@ val NOK_texture_from_pixmap = "NOKTextureFromPixmap".nativeClassEGL("NOK_texture
 		Though, there is nothing that prohibits it from being used for "render to texture".
 		${ul(
 			"Windows are problematic as they can change size and therefore are not supported by this extension.",
-		    """
+			"""
 		    Only a color buffer of a EGL pixmap created using an EGLConfig with attribute EGL_BIND_TO_TEXTURE_RGB or EGL_BIND_TO_TEXTURE_RGBA set to TRUE can
 		    be bound as a texture.
 		    """,
-		    """
+			"""
 		    The texture internal format is determined when the color buffer is associated with the texture, guaranteeing that the color buffer format is
 			equivalent to the texture internal format.
 		    """,
-		    "A client can create a complete set of mipmap images."
+			"A client can create a complete set of mipmap images."
 		)}
 
 		Requires ${EGL11.core}.

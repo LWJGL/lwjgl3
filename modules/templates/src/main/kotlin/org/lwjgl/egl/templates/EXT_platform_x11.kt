@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EXT_platform_x11 = "EXTPlatformX11".nativeClassEGL("EXT_platform_x11", postfix = EXT) {
 	documentation =

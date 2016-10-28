@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_reusable_sync = "KHRReusableSync".nativeClassEGL("KHR_reusable_sync", postfix = KHR) {
 	documentation =

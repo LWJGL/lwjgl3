@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ANGLE_window_fixed_size = "ANGLEWindowFixedSize".nativeClassEGL("ANGLE_window_fixed_size", postfix = ANGLE) {
 	documentation =

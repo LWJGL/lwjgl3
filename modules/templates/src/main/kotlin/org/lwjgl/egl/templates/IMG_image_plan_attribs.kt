@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val IMG_image_plane_attribs = "IMGImagePlaneAttribs".nativeClassEGL("IMG_image_plane_attribs", postfix = IMG) {
 	documentation =

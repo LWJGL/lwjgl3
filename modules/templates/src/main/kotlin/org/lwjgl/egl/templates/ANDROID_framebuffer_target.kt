@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ANDROID_framebuffer_target = "ANDROIDFramebufferTarget".nativeClassEGL("ANDROID_framebuffer_target", postfix = ANDROID) {
 	documentation =

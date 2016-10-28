@@ -5,12 +5,12 @@
 package org.lwjgl.vulkan
 
 import org.lwjgl.generator.*
-import java.io.PrintWriter
+import java.io.*
 import java.util.*
 
 private val NativeClass.capName: String
-	get() = if ( templateName.startsWith(prefix) ) {
-		if ( prefix == "VK" )
+	get() = if (templateName.startsWith(prefix)) {
+		if (prefix == "VK")
 			"Vulkan${templateName.substring(2)}"
 		else
 			templateName
@@ -29,7 +29,7 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
 		writer.print("\t\tlong $FUNCTION_ADDRESS = ")
-		writer.println(if ( function has Capabilities )
+		writer.println(if (function has Capabilities)
 			"${function[Capabilities].expression}.${function.name};"
 		else
 			"${function.getParams() { it.nativeType is ObjectType }.first().name}.getCapabilities().${function.name};")
@@ -58,8 +58,8 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 			val isVK1 = o1.templateName.startsWith("VK")
 			val isVK2 = o2.templateName.startsWith("VK")
 
-			if ( isVK1 xor isVK2 )
-				(if ( isVK1 ) -1 else 1)
+			if (isVK1 xor isVK2)
+				(if (isVK1) -1 else 1)
 			else
 				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
 		}
@@ -95,8 +95,8 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		for (extension in classes) {
 			val capName = extension.capName
 			print("\t\t$capName = ext.contains(\"${extension.capName}\")")
-			if ( extension.hasNativeFunctions )
-				print(" && VK.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$VULKAN_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+			if (extension.hasNativeFunctions)
+				print(" && VK.checkExtension(\"$capName\", ${if (capName == extension.className) "$VULKAN_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
 			println(";")
 		}
 		println("\t}")

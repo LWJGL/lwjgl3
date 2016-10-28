@@ -4,8 +4,7 @@
  */
 package org.lwjgl.generator
 
-import org.lwjgl.generator.ParameterType.IN
-import org.lwjgl.generator.ParameterType.OUT
+import org.lwjgl.generator.ParameterType.*
 
 /** Super class of Parameter and ReturnValue with common helper properties. */
 abstract class QualifiedType(
@@ -27,20 +26,20 @@ abstract class QualifiedType(
 	internal fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false): String {
 		val builder = StringBuilder()
 
-		if ( has(const) )
+		if (has(const))
 			builder.append("const ")
 
-		if ( binding == null || this === JNI_ENV || isStructValue ) {
+		if (binding == null || this === JNI_ENV || isStructValue) {
 			builder.append(nativeType.name)
-			if ( nativeType is PointerType && !nativeType.includesPointer && (pointerMode || nativeType !is StructType) ) {
-				if ( !nativeType.name.endsWith('*') )
+			if (nativeType is PointerType && !nativeType.includesPointer && (pointerMode || nativeType !is StructType)) {
+				if (!nativeType.name.endsWith('*'))
 					builder.append(' ')
 				builder.append('*')
 			}
 		} else {
 			// map everything to plain types, this avoids having to specify the native types explicitly or via #includes
 			builder.append(
-				if ( this.nativeType.let { it.mapping === PrimitiveMapping.POINTER || it is PointerType } )
+				if (this.nativeType.let { it.mapping === PrimitiveMapping.POINTER || it is PointerType })
 					"intptr_t"
 				else
 					nativeType.jniFunctionType
@@ -80,7 +79,7 @@ class Parameter(
 	linkMode: LinkMode
 ) : QualifiedType(nativeType) {
 
-	internal val documentation = if ( links.isEmpty() ) documentation else linkMode.appendLinks(documentation, links)
+	internal val documentation = if (links.isEmpty()) documentation else linkMode.appendLinks(documentation, links)
 
 	override fun hashCode() = name.hashCode()
 
@@ -89,10 +88,10 @@ class Parameter(
 	// --- [ Helper functions & properties ] ----
 
 	override val isSpecial: Boolean
-		get() = super.isSpecial || when ( nativeType.mapping ) {
+		get() = super.isSpecial || when (nativeType.mapping) {
 			PointerMapping.OPAQUE_POINTER -> (nativeType is ObjectType || !has(nullable)) && this !== JNI_ENV
-			PrimitiveMapping.BOOLEAN4 -> true
-			else -> false
+			PrimitiveMapping.BOOLEAN4     -> true
+			else                          -> false
 		}
 
 	/** Returns true if this is an output parameter with the AutoSizeResult modifier. */
@@ -102,7 +101,7 @@ class Parameter(
 	internal fun isArrayParameter(autoSizeResultOutParams: Int) = nativeType.mapping.isArray && (!isAutoSizeResultOut || autoSizeResultOutParams != 1)
 
 	internal fun removeArrayModifiers(): Parameter {
-		if ( has(optional) && has(MultiType) )
+		if (has(optional) && has(MultiType))
 			modifiers.remove(Nullable::class.java)
 
 		modifiers.remove(PointerArray::class.java)

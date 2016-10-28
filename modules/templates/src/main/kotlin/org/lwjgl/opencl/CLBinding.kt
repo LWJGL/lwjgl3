@@ -5,12 +5,12 @@
 package org.lwjgl.opencl
 
 import org.lwjgl.generator.*
-import java.io.PrintWriter
+import java.io.*
 import java.util.*
 
 private val NativeClass.capName: String
-	get() = if ( templateName.startsWith(prefix) ) {
-		if ( prefix == "CL" )
+	get() = if (templateName.startsWith(prefix)) {
+		if (prefix == "CL")
 			"OpenCL${templateName.substring(2)}"
 		else
 			templateName
@@ -59,8 +59,8 @@ private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, C
 			val isCL1 = o1.templateName.startsWith("CL")
 			val isCL2 = o2.templateName.startsWith("CL")
 
-			if ( isCL1 xor isCL2 )
-				(if ( isCL1 ) -1 else 1)
+			if (isCL1 xor isCL2)
+				(if (isCL1) -1 else 1)
 			else
 				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
 		}
@@ -94,8 +94,8 @@ private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, C
 		for (extension in classes) {
 			val capName = extension.capName
 			print("\t\t$capName = ext.contains(\"$capName\")")
-			if ( extension.hasNativeFunctions )
-				print(" && CL.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$OPENCL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+			if (extension.hasNativeFunctions)
+				print(" && CL.checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENCL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
 			println(";")
 		}
 		println("\t}")

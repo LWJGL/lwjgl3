@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
 val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
-	nativeImport (
+	nativeImport(
 		"WindowsLWJGL.h"
 	)
 

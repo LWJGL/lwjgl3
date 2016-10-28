@@ -5,7 +5,29 @@
  */
 package org.lwjgl.vulkan
 
-import org.lwjgl.generator.*
+import org.lwjgl.generator.AutoSize
+import org.lwjgl.generator.IN
+import org.lwjgl.generator.callback
+import org.lwjgl.generator.charUTF8
+import org.lwjgl.generator.charUTF8_p
+import org.lwjgl.generator.const
+import org.lwjgl.generator.enumType
+import org.lwjgl.generator.float
+import org.lwjgl.generator.float_p
+import org.lwjgl.generator.int32_t
+import org.lwjgl.generator.nullable
+import org.lwjgl.generator.p
+import org.lwjgl.generator.rangeTo
+import org.lwjgl.generator.size_t
+import org.lwjgl.generator.struct
+import org.lwjgl.generator.typedef
+import org.lwjgl.generator.uint32_t
+import org.lwjgl.generator.uint32_t_p
+import org.lwjgl.generator.uint8_t
+import org.lwjgl.generator.union
+import org.lwjgl.generator.void
+import org.lwjgl.generator.void_p
+import org.lwjgl.generator.voidptr
 
 val IMG = "IMG"
 val AMD = "AMD"
@@ -1284,7 +1306,7 @@ val VkSubmitInfo = struct(VULKAN_PACKAGE, "VkSubmitInfo") {
 
 	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-	AutoSize("pWaitSemaphores","pWaitDstStageMask", optional = true)..uint32_t.member("waitSemaphoreCount", "the number of semaphores upon which to wait before executing the command buffers for the batch.")
+	AutoSize("pWaitSemaphores", "pWaitDstStageMask", optional = true)..uint32_t.member("waitSemaphoreCount", "the number of semaphores upon which to wait before executing the command buffers for the batch.")
 	const..VkSemaphore.p.member("pWaitSemaphores", "a pointer to an array of semaphores upon which to wait before the command buffers for this batch begin execution. If semaphores to wait on are provided, they define a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-semaphores-waiting\">semaphore wait operation</a>.")
 	const..VkPipelineStageFlags.p.member("pWaitDstStageMask", "a pointer to an array of pipeline stages at which each corresponding semaphore wait will occur.")
 	AutoSize("pCommandBuffers", optional = true)..uint32_t.member("commandBufferCount", "the number of command buffers to execute in the batch.")
@@ -3516,7 +3538,7 @@ val VkWriteDescriptorSet = struct(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
 	VkDescriptorSet.member("dstSet", "the destination descriptor set to update.")
 	uint32_t.member("dstBinding", "the descriptor binding within that set.")
 	uint32_t.member("dstArrayElement", "the starting element in that array.")
-	AutoSize("pImageInfo","pBufferInfo","pTexelBufferView", atLeastOne = true)..uint32_t.member("descriptorCount", "the number of descriptors to update (the number of elements in {@code pImageInfo}, {@code pBufferInfo}, or {@code pTexelBufferView}).")
+	AutoSize("pImageInfo", "pBufferInfo", "pTexelBufferView", atLeastOne = true)..uint32_t.member("descriptorCount", "the number of descriptors to update (the number of elements in {@code pImageInfo}, {@code pBufferInfo}, or {@code pTexelBufferView}).")
 	VkDescriptorType.member("descriptorType", "a {@code VkDescriptorType} specifying the type of each descriptor in {@code pImageInfo}, {@code pBufferInfo}, or {@code pTexelBufferView}, as described below. It <b>must</b> be the same type as that specified in ##VkDescriptorSetLayoutBinding for {@code dstSet} at {@code dstBinding}. The type of the descriptor also controls which array the descriptors are taken from.")
 	nullable..const..VkDescriptorImageInfo.p.buffer("pImageInfo", "points to an array of ##VkDescriptorImageInfo structures or is ignored, as described below.")
 	nullable..const..VkDescriptorBufferInfo.p.buffer("pBufferInfo", "points to an array of ##VkDescriptorBufferInfo structures or is ignored, as described below.")
@@ -3758,7 +3780,7 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
 	VkPipelineBindPoint.member("pipelineBindPoint", "a {@code VkPipelineBindPoint} value specifying whether this is a compute or graphics subpass. Currently, only graphics subpasses are supported.")
 	AutoSize("pInputAttachments", optional = true)..uint32_t.member("inputAttachmentCount", "the number of input attachments.")
 	const..VkAttachmentReference.p.buffer("pInputAttachments", "an array of ##VkAttachmentReference structures (defined below) that lists which of the render pass&#8217;s attachments <b>can</b> be read in the shader during the subpass, and what layout each attachment will be in during the subpass. Each element of the array corresponds to an input attachment unit number in the shader, i.e. if the shader declares an input variable {@code layout(input_attachment_index=X, set=Y, binding=Z)} then it uses the attachment provided in {@code pInputAttachments}[X]. Input attachments <b>must</b> also be bound to the pipeline with a descriptor set, with the input attachment descriptor written in the location (set=Y, binding=Z).")
-	AutoSize("pColorAttachments","pResolveAttachments", optional = true)..uint32_t.member("colorAttachmentCount", "the number of color attachments.")
+	AutoSize("pColorAttachments", "pResolveAttachments", optional = true)..uint32_t.member("colorAttachmentCount", "the number of color attachments.")
 	const..VkAttachmentReference.p.buffer("pColorAttachments", "an array of {@code colorAttachmentCount} ##VkAttachmentReference structures that lists which of the render pass&#8217;s attachments will be used as color attachments in the subpass, and what layout each attachment will be in during the subpass. Each element of the array corresponds to a fragment shader output location, i.e. if the shader declared an output variable {@code layout(location=X)} then it uses the attachment provided in {@code pColorAttachments}[X].")
 	nullable..const..VkAttachmentReference.p.buffer("pResolveAttachments", "{@code NULL} or an array of {@code colorAttachmentCount} ##VkAttachmentReference structures that lists which of the render pass&#8217;s attachments are resolved to at the end of the subpass, and what layout each attachment will be in during the resolve. If {@code pResolveAttachments} is not {@code NULL}, each of its elements corresponds to a color attachment (the element in {@code pColorAttachments} at the same index). At the end of each subpass, the subpass&#8217;s color attachments are resolved to corresponding resolve attachments, unless the resolve attachment index is #ATTACHMENT_UNUSED or {@code pResolveAttachments} is {@code NULL}. If the first use of an attachment in a render pass is as a resolve attachment, then the {@code loadOp} is effectively ignored as the resolve is guaranteed to overwrite all pixels in the render area.")
 	nullable..const..VkAttachmentReference.p.member("pDepthStencilAttachment", "a pointer to a ##VkAttachmentReference specifying which attachment will be used for depth/stencil data and the layout it will be in during the subpass. Setting the attachment index to #ATTACHMENT_UNUSED or leaving this pointer as {@code NULL} indicates that no depth/stencil attachment will be used in the subpass.")

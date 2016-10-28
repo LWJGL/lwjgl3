@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
 	documentation =

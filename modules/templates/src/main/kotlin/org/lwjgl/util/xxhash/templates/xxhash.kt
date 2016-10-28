@@ -9,12 +9,12 @@ import org.lwjgl.util.xxhash.*
 
 val xxhash = "XXHash".nativeClass(XXHASH_PACKAGE, prefix = "XXH", prefixMethod = "XXH", library = "LibXXHash.initialize();") {
 	nativeDirective(
-"""#ifdef LWJGL_WINDOWS
+		"""#ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 
 	nativeDirective(
-"""DISABLE_WARNINGS()
+		"""DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4711))
 #endif

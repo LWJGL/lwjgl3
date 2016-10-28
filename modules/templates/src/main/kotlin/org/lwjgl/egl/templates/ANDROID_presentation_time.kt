@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ANDROID_presentation_time = "ANDROIDPresentationTime".nativeClassEGL("ANDROID_presentation_time", postfix = ANDROID) {
 	documentation =

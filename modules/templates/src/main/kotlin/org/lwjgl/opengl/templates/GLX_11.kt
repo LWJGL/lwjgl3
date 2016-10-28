@@ -5,8 +5,8 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.linux.*
 import org.lwjgl.opengl.*
+import org.lwjgl.system.linux.*
 
 val GLX11 = "GLX11".nativeClassGLX("GLX11") {
 	documentation = "Native bindings to GLX 1.1."

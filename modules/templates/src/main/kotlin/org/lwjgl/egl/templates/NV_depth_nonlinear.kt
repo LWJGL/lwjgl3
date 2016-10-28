@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val NV_depth_nonlinear = "NVDepthNonlinear".nativeClassEGL("NV_depth_nonlinear", postfix = NV) {
 	documentation =

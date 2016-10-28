@@ -4,9 +4,8 @@
  */
 package org.lwjgl.openal.templates
 
-import org.lwjgl.generator.IntConstant
-import org.lwjgl.openal.extensionName
-import org.lwjgl.openal.nativeClassAL
+import org.lwjgl.generator.*
+import org.lwjgl.openal.*
 
 val AL_EXT_BFORMAT = "EXTBFormat".nativeClassAL("EXT_BFORMAT") {
 	documentation =

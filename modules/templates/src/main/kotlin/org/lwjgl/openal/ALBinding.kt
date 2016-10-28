@@ -4,8 +4,8 @@
  */
 package org.lwjgl.openal
 
-import java.io.PrintWriter
 import org.lwjgl.generator.*
+import java.io.*
 import java.util.*
 
 private val CAPABILITIES_CLASS = "ALCapabilities"
@@ -47,8 +47,8 @@ private val ALBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, C
 			val isAL1 = o1.templateName.startsWith("AL")
 			val isAL2 = o2.templateName.startsWith("AL")
 
-			if ( isAL1 xor isAL2 )
-				(if ( isAL1 ) -1 else 1)
+			if (isAL1 xor isAL2)
+				(if (isAL1) -1 else 1)
 			else
 				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
 		}
@@ -75,8 +75,8 @@ private val ALBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, C
 		for (extension in classes) {
 			val capName = extension.capName("AL")
 			print("\t\t$capName = ext.contains(\"$capName\")")
-			if ( extension.hasNativeFunctions )
-				print(" && AL.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$OPENAL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+			if (extension.hasNativeFunctions)
+				print(" && AL.checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENAL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
 			println(";")
 		}
 		println("\t}")

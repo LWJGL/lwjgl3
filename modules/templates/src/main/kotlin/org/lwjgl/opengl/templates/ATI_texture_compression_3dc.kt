@@ -4,8 +4,7 @@
  */
 package org.lwjgl.opengl.templates
 
-import org.lwjgl.generator.IN
-import org.lwjgl.generator.IntConstant
+import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ATI_texture_compression_3dc = "ATITextureCompression3DC".nativeClassGL("ATI_texture_compression_3dc", postfix = ATI) {

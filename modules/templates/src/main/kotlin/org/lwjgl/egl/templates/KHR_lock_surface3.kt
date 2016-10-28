@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_lock_surface3 = "KHRLockSurface3".nativeClassEGL("KHR_lock_surface3", postfix = KHR) {
 	documentation =

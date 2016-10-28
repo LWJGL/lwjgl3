@@ -14,7 +14,7 @@ val stdio = "Stdio".nativeClass(packageName = LIBC_PACKAGE) {
 	__pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 
-	nativeImport (
+	nativeImport(
 		"<stdio.h>"
 	)
 

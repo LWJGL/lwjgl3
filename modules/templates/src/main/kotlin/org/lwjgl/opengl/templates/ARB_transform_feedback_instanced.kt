@@ -4,7 +4,6 @@
  */
 package org.lwjgl.opengl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_transform_feedback_instanced = "ARBTransformFeedbackInstanced".nativeClassGL("ARB_transform_feedback_instanced") {

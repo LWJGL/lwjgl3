@@ -170,7 +170,7 @@ nvgFill(vg);""")}
 
 	val BlendFactor = EnumConstant(
 		"Blend factors.",
-		
+
 		"ZERO".enum("", "1<<0"),
 		"ONE".enum("", "1<<1"),
 		"SRC_COLOR".enum("", "1<<2"),
@@ -186,7 +186,7 @@ nvgFill(vg);""")}
 
 	val CompositeOperation = EnumConstant(
 		"Composite operations.",
-		
+
 		"SOURCE_OVER".enum,
 		"SOURCE_IN".enum,
 		"SOURCE_OUT".enum,
@@ -209,7 +209,7 @@ nvgFill(vg);""")}
 		"IMAGE_FLIPY".enum("Flips (inverses) image in Y direction when rendered.", "1<<3"),
 		"IMAGE_PREMULTIPLIED".enum("Image data has premultiplied alpha.", "1<<4")
 	).javaDocLinks
-	
+
 	val ctx = NVGcontext_p.IN("ctx", "the NanoVG context")
 
 	void(

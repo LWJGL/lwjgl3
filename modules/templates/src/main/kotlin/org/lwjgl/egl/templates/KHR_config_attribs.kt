@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_config_attribs = "KHRConfigAttribs".nativeClassEGL("KHR_config_attribs", postfix = KHR) {
 	documentation =

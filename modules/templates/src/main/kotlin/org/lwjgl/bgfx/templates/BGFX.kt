@@ -117,7 +117,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 	val StencilFlags = IntConstant(
 		"Stencil",
-		
+
 		"STENCIL_TEST_LESS"..0x00010000,
 		"STENCIL_TEST_LEQUAL"..0x00020000,
 		"STENCIL_TEST_EQUAL"..0x00030000,
@@ -135,7 +135,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"STENCIL_OP_FAIL_S_DECR"..0x00500000,
 		"STENCIL_OP_FAIL_S_DECRSAT"..0x00600000,
 		"STENCIL_OP_FAIL_S_INVERT"..0x00700000,
-	
+
 		"STENCIL_OP_FAIL_Z_ZERO"..0x00000000,
 		"STENCIL_OP_FAIL_Z_KEEP"..0x01000000,
 		"STENCIL_OP_FAIL_Z_REPLACE"..0x02000000,
@@ -144,7 +144,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"STENCIL_OP_FAIL_Z_DECR"..0x05000000,
 		"STENCIL_OP_FAIL_Z_DECRSAT"..0x06000000,
 		"STENCIL_OP_FAIL_Z_INVERT"..0x07000000,
-	
+
 		"STENCIL_OP_PASS_Z_ZERO"..0x00000000,
 		"STENCIL_OP_PASS_Z_KEEP"..0x10000000,
 		"STENCIL_OP_PASS_Z_REPLACE"..0x20000000,
@@ -153,7 +153,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"STENCIL_OP_PASS_Z_DECR"..0x50000000,
 		"STENCIL_OP_PASS_Z_DECRSAT"..0x60000000,
 		"STENCIL_OP_PASS_Z_INVERT"..0x70000000,
-	
+
 		"STENCIL_NONE"..0x00000000,
 		"STENCIL_DEFAULT"..0x00000000
 	).javaDocLinks
@@ -210,7 +210,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		| BGFX_CLEAR_DISCARD_COLOR_6
 		| BGFX_CLEAR_DISCARD_COLOR_7)
 		""",
-		
+
 		"CLEAR_DISCARD_MASK".."""(0
 		| BGFX_CLEAR_DISCARD_COLOR_MASK
 		| BGFX_CLEAR_DISCARD_DEPTH
@@ -674,7 +674,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 	EnumConstant(
 		"bgfx_occlusion_query_result_t",
-		
+
 		"OCCLUSION_QUERY_RESULT_INVISIBLE".enum,
 		"OCCLUSION_QUERY_RESULT_VISIBLE".enum,
 		"OCCLUSION_QUERY_RESULT_NORESULT".enum,
@@ -684,7 +684,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 	val TopologyConvert = EnumConstant(
 		"bgfx_topology_convert_t",
-	
+
 		"TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING".enum,
 		"TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST".enum,
 		"TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST".enum,

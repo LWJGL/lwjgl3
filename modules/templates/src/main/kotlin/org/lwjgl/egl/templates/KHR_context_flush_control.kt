@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_context_flush_control = "KHRContextFlushControl".nativeClassEGL("KHR_context_flush_control", postfix = KHR) {
 	documentation =

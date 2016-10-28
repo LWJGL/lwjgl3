@@ -5,8 +5,7 @@
 package org.lwjgl.opencl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opencl.extensionLink
-import org.lwjgl.opencl.nativeClassCL
+import org.lwjgl.opencl.*
 
 val intel_egl_image_yuv = dependsOn(Binding.EGL) {
 	"INTELEGLImageYUV".nativeClassCL("intel_egl_image_yuv", INTEL) {

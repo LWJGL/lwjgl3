@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.dyncall.*
 
 val DynCallback = "DynCallback".nativeClass(DYNCALL_PACKAGE, prefix = "DCB") {
-	nativeImport (
+	nativeImport(
 		"dyncall_callback.h"
 	)
 
@@ -81,7 +81,7 @@ val DynCallback = "DynCallback".nativeClass(DYNCALL_PACKAGE, prefix = "DCB") {
 	DCint("ArgUInt", "Returns the next {@code unsigned int} argument.", args)
 	DClong("ArgULong", "Returns the next {@code unsigned long} argument.", args)
 	DClonglong("ArgULongLong", "Returns the next {@code unsigned long long} argument.", args)
-	DCfloat("ArgFloat",	"Returns the next {@code float} argument.", args)
+	DCfloat("ArgFloat", "Returns the next {@code float} argument.", args)
 	DCdouble("ArgDouble", "Returns the next {@code double} argument.", args)
 	DCpointer("ArgPointer", "Returns the next {@code pointer} argument.", args)
 

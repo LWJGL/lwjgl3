@@ -13,7 +13,7 @@ val ALLOCATOR = nullable..CFAllocatorRef.IN(
 )
 
 val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
-	nativeImport (
+	nativeImport(
 		"MacOSXLWJGL.h"
 	)
 

@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EXT_yuv_surface = "EXTYUVSurface".nativeClassEGL("EXT_yuv_surface", postfix = EXT) {
 	documentation =

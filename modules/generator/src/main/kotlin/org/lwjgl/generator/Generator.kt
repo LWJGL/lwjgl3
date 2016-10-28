@@ -5,16 +5,15 @@
 package org.lwjgl.generator
 
 import java.io.*
-import java.lang.Math.max
-import java.lang.reflect.Method
-import java.lang.reflect.Modifier
-import java.nio.ByteBuffer
+import java.lang.Math.*
+import java.lang.reflect.*
+import java.nio.*
 import java.nio.file.*
-import java.nio.file.attribute.FileTime
+import java.nio.file.attribute.*
 import java.util.*
 import java.util.concurrent.*
-import java.util.concurrent.atomic.AtomicInteger
-import java.util.function.BiPredicate
+import java.util.concurrent.atomic.*
+import java.util.function.*
 
 /*
 	A template will be generated in the following cases:
@@ -68,14 +67,14 @@ enum class Binding(val key: String, val packageName: String) {
 		get() = System.getProperty(key, "false").toBoolean()
 }
 
-fun dependsOn(binding: Binding, init: () -> NativeClass): NativeClass? = if ( binding.enabled ) init() else null
+fun dependsOn(binding: Binding, init: () -> NativeClass): NativeClass? = if (binding.enabled) init() else null
 
 fun main(args: Array<String>) {
-	if ( args.size < 2 )
+	if (args.size < 2)
 		throw IllegalArgumentException("The code Generator requires 2 paths as arguments: a) the template source path and b) the generation target path")
 
 	val validateDirectory = { name: String, path: String ->
-		if ( !Files.isDirectory(Paths.get(path)) )
+		if (!Files.isDirectory(Paths.get(path)))
 			throw IllegalArgumentException("Invalid $name path: $path")
 	}
 
@@ -129,7 +128,7 @@ fun main(args: Array<String>) {
 				latch.await()
 			}
 
-			if ( errors.get() != 0 )
+			if (errors.get() != 0)
 				throw RuntimeException("Generation failed")
 
 			// Generate utility classes. These are auto-registered during the process above.
@@ -156,7 +155,7 @@ fun main(args: Array<String>) {
 				latch.await()
 			}
 
-			if ( errors.get() != 0 )
+			if (errors.get() != 0)
 				throw RuntimeException("Generation failed")
 		} finally {
 			pool.shutdown()
@@ -211,7 +210,7 @@ class Generator(
 		}
 
 		fun registerLibraryInit(packageName: String, className: String, libraryName: String, setupAllocator: Boolean = false) {
-			if (!Binding.isEnabled(packageName) )
+			if (!Binding.isEnabled(packageName))
 				return
 
 			Generator.register(object : GeneratorTargetNative(packageName, className) {
@@ -219,9 +218,9 @@ class Generator(
 					access = Access.INTERNAL
 					documentation = "Initializes the $libraryName shared library."
 					javaImport("org.lwjgl.system.*")
-					if ( setupAllocator )
+					if (setupAllocator)
 						javaImport("static org.lwjgl.system.MemoryUtil.*")
-						nativeDirective("""#define LWJGL_MALLOC_LIB $nativeFileNameJNI
+					nativeDirective("""#define LWJGL_MALLOC_LIB $nativeFileNameJNI
 #include "lwjgl_malloc.h"""")
 				}
 
@@ -232,7 +231,7 @@ class Generator(
 
 	static {
 		String libName = Platform.mapLibraryNameBundled("lwjgl_$libraryName");
-		Library.loadSystem(libName);${if ( setupAllocator ) """
+		Library.loadSystem(libName);${if (setupAllocator) """
 
 		MemoryAllocator allocator = getAllocator();
 		setupMalloc(
@@ -250,7 +249,7 @@ class Generator(
 
 	static void initialize() {
 		// intentionally empty to trigger static initializer
-	}${if ( setupAllocator ) """
+	}${if (setupAllocator) """
 
 	private static native void setupMalloc(
 		long malloc,
@@ -329,11 +328,11 @@ public final class $className implements Runnable {
 		// returns NativeClass
 		method.returnType === javaClass &&
 		// has no arguments
-		method.parameterTypes.size == 0
+		method.parameterTypes.isEmpty()
 
 	private fun apply(packagePath: String, packageName: String, consume: Sequence<Method>.() -> Unit) {
 		val packageDirectory = Paths.get(packagePath)
-		if ( !Files.isDirectory(packageDirectory) )
+		if (!Files.isDirectory(packageDirectory))
 			throw IllegalStateException()
 
 		Files.list(packageDirectory)
@@ -358,7 +357,7 @@ public final class $className implements Runnable {
 		val packageLastModified = Paths.get(packagePath).lastModified(maxDepth = 1)
 		packageLastModifiedMap[packageName] = packageLastModified
 
-		if ( binding?.enabled == false )
+		if (binding?.enabled == false)
 			return
 
 		// Find and run configuration methods
@@ -376,7 +375,7 @@ public final class $className implements Runnable {
 				methodFilter(it, NativeClass::class.java)
 			}
 		}
-		if ( templates.isEmpty() ) {
+		if (templates.isEmpty()) {
 			println("*WARNING* No templates found in $packageName.templates package.")
 			return
 		}
@@ -392,10 +391,10 @@ public final class $className implements Runnable {
 		for (template in templates) {
 			val nativeClass = template.invoke(null) as NativeClass? ?: continue
 
-			if ( nativeClass.packageName != packageName )
+			if (nativeClass.packageName != packageName)
 				throw IllegalStateException("NativeClass ${nativeClass.className} has invalid package [${nativeClass.packageName}]. Should be: [$packageName]")
 
-			if ( nativeClass.hasBody ) {
+			if (nativeClass.hasBody) {
 				classes.add(nativeClass)
 
 				// Register tokens/functions for javadoc link references
@@ -427,7 +426,7 @@ public final class $className implements Runnable {
 		val outputJava = Paths.get("$trgPath/java/$packagePath/${nativeClass.className}.java")
 
 		val lmt = max(nativeClass.getLastModified("$srcPath/$packagePath/templates"), packageLastModified)
-		if ( lmt < outputJava.lastModified ) {
+		if (lmt < outputJava.lastModified) {
 			//println("SKIPPED: ${nativeClass.packageName}.${nativeClass.className}")
 			return
 		}
@@ -438,7 +437,7 @@ public final class $className implements Runnable {
 			it.generateJava()
 		}
 
-		if ( !nativeClass.skipNative ) {
+		if (!nativeClass.skipNative) {
 			generateNative(nativeClass) {
 				generateOutput(nativeClass, it) {
 					it.generateNative()
@@ -463,12 +462,12 @@ public final class $className implements Runnable {
 
 		val outputJava = Paths.get("$trgPath/java/$packagePath/${target.className}.java")
 
-		val lmt = if ( target.sourceFile == null ) null else max(
+		val lmt = if (target.sourceFile == null) null else max(
 			target.getLastModified("$srcPath/$packagePath"),
 			max(packageLastModifiedMap[target.packageName]!!, GENERATOR_LAST_MODIFIED)
 		)
 
-		if ( lmt != null && lmt < outputJava.lastModified ) {
+		if (lmt != null && lmt < outputJava.lastModified) {
 			//println("SKIPPED: ${target.packageName}.${target.className}")
 			return
 		}
@@ -479,7 +478,7 @@ public final class $className implements Runnable {
 			it.generateJava()
 		}
 
-		if ( target is GeneratorTargetNative && !target.skipNative ) {
+		if (target is GeneratorTargetNative && !target.skipNative) {
 			generateNative(target) {
 				generateOutput(target, it) {
 					it.generateNative()
@@ -490,7 +489,7 @@ public final class $className implements Runnable {
 
 	private fun generateNative(target: GeneratorTargetNative, generate: (Path) -> Unit) {
 		var subPackagePath = target.packageName.substring("org.lwjgl.".length).replace('.', '/')
-		if ( !target.nativeSubPath.isEmpty() )
+		if (!target.nativeSubPath.isEmpty())
 			subPackagePath = "$subPackagePath/${target.nativeSubPath}"
 
 		generate(Paths.get("$trgPath/c/$subPackagePath/${target.nativeFileName}.c"))
@@ -502,7 +501,7 @@ public final class $className implements Runnable {
 
 private val packageLastModifiedMap: MutableMap<String, Long> = ConcurrentHashMap()
 
-internal val Path.lastModified: Long get() = if ( Files.isRegularFile(this) )
+internal val Path.lastModified: Long get() = if (Files.isRegularFile(this))
 	Files.getLastModifiedTime(this).toMillis()
 else
 	0L
@@ -512,9 +511,9 @@ private val KOTLIN_PATH_MATCHER = FileSystems.getDefault().getPathMatcher("glob:
 internal fun Path.lastModified(
 	maxDepth: Int = Int.MAX_VALUE,
 	glob: String? = null,
-	matcher: PathMatcher = if ( glob == null ) KOTLIN_PATH_MATCHER else FileSystems.getDefault().getPathMatcher("glob:$glob")
+	matcher: PathMatcher = if (glob == null) KOTLIN_PATH_MATCHER else FileSystems.getDefault().getPathMatcher("glob:$glob")
 ): Long {
-	if ( !Files.isDirectory(this) )
+	if (!Files.isDirectory(this))
 		throw IllegalStateException()
 
 	return Files
@@ -526,7 +525,7 @@ internal fun Path.lastModified(
 private fun ensurePath(path: Path) {
 	val parent = path.parent ?: throw IllegalArgumentException("The given path has no parent directory.")
 
-	if ( !Files.isDirectory(parent) ) {
+	if (!Files.isDirectory(parent)) {
 		println("\tMKDIR: $parent")
 		Files.createDirectories(parent)
 	}
@@ -539,7 +538,7 @@ private fun readFile(file: Path) = Files.newByteChannel(file).use {
 	var bytesRead = 0
 	do {
 		bytesRead += it.read(buffer)
-	} while ( bytesRead < bytesTotal )
+	} while (bytesRead < bytesTotal)
 
 	buffer.flip()
 	buffer
@@ -560,7 +559,7 @@ private fun <T> generateOutput(
 
 	ensurePath(file)
 
-	if ( Files.isRegularFile(file) ) {
+	if (Files.isRegularFile(file)) {
 		// Generate in-memory
 		val baos = ByteArrayOutputStream(4 * 1024)
 		LWJGLWriter(OutputStreamWriter(baos, Charsets.UTF_8)).use {
@@ -572,24 +571,19 @@ private fun <T> generateOutput(
 		val after = baos.toByteArray()
 
 		fun somethingChanged(before: ByteBuffer, after: ByteArray): Boolean {
-			if ( before.remaining() != after.size )
+			if (before.remaining() != after.size)
 				return true
 
-			for (i in 0..before.limit() - 1) {
-				if ( before.get(i) != after[i] )
-					return true
-			}
-
-			return false
+			return (0..before.limit() - 1).any { before.get(it) != after[it] }
 		}
 
-		if ( somethingChanged(before, after) ) {
+		if (somethingChanged(before, after)) {
 			println("\tUPDATING: $file")
 			// Overwrite
 			Files.newOutputStream(file).use {
 				it.write(after)
 			}
-		} else if ( lmt != null ) {
+		} else if (lmt != null) {
 			// Update the file timestamp
 			Files.setLastModifiedTime(file, FileTime.fromMillis(lmt + 1))
 		}
@@ -605,7 +599,7 @@ private fun <T> generateOutput(
 internal inline fun <T> Array<out T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
 	for (i in 0..this.lastIndex)
 		apply(this[i], 0 < i)
-	return this.size == 0
+	return this.isEmpty()
 }
 
 /** Returns true if the collection was empty. */
@@ -616,7 +610,7 @@ internal fun <T> Sequence<T>.forEachWithMore(moreOverride: Boolean = false, appl
 	var more = moreOverride
 	for (item in this) {
 		apply(item, more)
-		if ( !more )
+		if (!more)
 			more = true
 	}
 	return more
@@ -624,7 +618,7 @@ internal fun <T> Sequence<T>.forEachWithMore(moreOverride: Boolean = false, appl
 
 /** Returns the string with the first letter uppercase. */
 internal val String.upperCaseFirst: String
-	get() = if ( this.length <= 1 )
+	get() = if (this.length <= 1)
 		this.toUpperCase()
 	else
 		"${Character.toUpperCase(this[0])}${this.substring(1)}"

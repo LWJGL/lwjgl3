@@ -36,7 +36,7 @@ val OES_viewport_array = "OESViewportArray".nativeClassGLES("OES_viewport_array"
 		"VIEWPORT_BOUNDS_RANGE_OES"..0x825D,
 		"VIEWPORT_INDEX_PROVOKING_VERTEX_OES"..0x825F
 	)
-	
+
 	void(
 		"ViewportArrayvOES",
 		"",

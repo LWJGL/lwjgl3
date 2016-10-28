@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ARM_pixmap_multisample_discard = "ARMPixmapMultisampleDiscard".nativeClassEGL("ARM_pixmap_multisample_discard", postfix = ARM) {
 	documentation =

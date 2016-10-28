@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val NV_native_query = "NVNativeQuery".nativeClassEGL("NV_native_query", postfix = NV) {
 	documentation =

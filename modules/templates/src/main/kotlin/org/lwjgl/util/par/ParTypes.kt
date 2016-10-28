@@ -29,6 +29,6 @@ val par_shapes_mesh_p = struct(PAR_PACKAGE, "ParShapesMesh", nativeName = "par_s
 	int.member("npoints", "the number of points")
 	PAR_SHAPES_T_p.member("triangles", "flat list of 3-tuples (I J K I J K...)")
 	int.member("ntriangles", "the number of triangles")
-    float_p.member("normals", "an optional list of 3-tuples (X Y Z X Y Z...) for the vertex normals")
-    float_p.member("tcoords", "an optional list of 2-tuples (U V U V U V...) for the vertex texture coordinates")
+	float_p.member("normals", "an optional list of 3-tuples (X Y Z X Y Z...) for the vertex normals")
+	float_p.member("tcoords", "an optional list of 2-tuples (U V U V U V...) for the vertex texture coordinates")
 }.p

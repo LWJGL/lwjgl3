@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EXT_swap_buffers_with_damage = "EXTSwapBuffersWithDamage".nativeClassEGL("EXT_swap_buffers_with_damage", postfix = EXT) {
 	documentation =

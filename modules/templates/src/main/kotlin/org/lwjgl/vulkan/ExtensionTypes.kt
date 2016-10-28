@@ -5,7 +5,27 @@
  */
 package org.lwjgl.vulkan
 
-import org.lwjgl.generator.*
+import org.lwjgl.generator.AutoSize
+import org.lwjgl.generator.IN
+import org.lwjgl.generator.callback
+import org.lwjgl.generator.charUTF8_p
+import org.lwjgl.generator.char_p
+import org.lwjgl.generator.const
+import org.lwjgl.generator.enumType
+import org.lwjgl.generator.float
+import org.lwjgl.generator.int32_t
+import org.lwjgl.generator.nullable
+import org.lwjgl.generator.p
+import org.lwjgl.generator.rangeTo
+import org.lwjgl.generator.size_t
+import org.lwjgl.generator.struct
+import org.lwjgl.generator.typedef
+import org.lwjgl.generator.uint32_t
+import org.lwjgl.generator.uint32_t_p
+import org.lwjgl.generator.uint64_t
+import org.lwjgl.generator.uint64_t_p
+import org.lwjgl.generator.void_p
+import org.lwjgl.generator.voidptr
 import org.lwjgl.system.linux.*
 import org.lwjgl.system.windows.*
 
@@ -231,7 +251,7 @@ val VkPresentInfoKHR = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	AutoSize("pWaitSemaphores", optional = true)..uint32_t.member("waitSemaphoreCount", "the number of semaphores to wait for before issuing the present request. The number <b>may</b> be zero.")
 	nullable..const..VkSemaphore.p.member("pWaitSemaphores", "if not #NULL_HANDLE, is an array of {@code VkSemaphore} objects with {@code waitSemaphoreCount} entries, and specifies the semaphores to wait for before issuing the present request.")
-	AutoSize("pSwapchains","pImageIndices","pResults")..uint32_t.member("swapchainCount", "the number of swapchains being presented to by this command.")
+	AutoSize("pSwapchains", "pImageIndices", "pResults")..uint32_t.member("swapchainCount", "the number of swapchains being presented to by this command.")
 	const..VkSwapchainKHR.p.member("pSwapchains", "an array of {@code VkSwapchainKHR} objects with {@code swapchainCount} entries. A given swapchain <b>must</b> not appear in this list more than once.")
 	const..uint32_t_p.member("pImageIndices", "an array of indices into the array of each swapchain&#8217;s presentable images, with {@code swapchainCount} entries. Each entry in this array identifies the image to present on the corresponding entry in the {@code pSwapchains} array.")
 	nullable..VkResult.p.member("pResults", "an array of {@code VkResult} typed elements with {@code swapchainCount} entries. Applications that do not need per-swapchain results <b>can</b> use {@code NULL} for {@code pResults}. If non-{@code NULL}, each entry in {@code pResults} will be set to the {@code VkResult} for presenting the swapchain corresponding to the same index in {@code pSwapchains}.")
@@ -837,11 +857,11 @@ val VkWin32KeyedMutexAcquireReleaseInfoNV = struct(VULKAN_PACKAGE, "VkWin32Keyed
 
 	VkStructureType.member("sType", "")
 	nullable..const..voidptr.member("pNext", "")
-	AutoSize("pAcquireSyncs","pAcquireKeys","pAcquireTimeoutMilliseconds", optional = true)..uint32_t.member("acquireCount", "the number of entries in the {@code pAcquireSyncs}, {@code pAcquireKeys}, and {@code pAcquireTimeoutMilliseconds} arrays.")
+	AutoSize("pAcquireSyncs", "pAcquireKeys", "pAcquireTimeoutMilliseconds", optional = true)..uint32_t.member("acquireCount", "the number of entries in the {@code pAcquireSyncs}, {@code pAcquireKeys}, and {@code pAcquireTimeoutMilliseconds} arrays.")
 	const..VkDeviceMemory.p.member("pAcquireSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
 	const..uint64_t_p.member("pAcquireKeys", "a pointer to an array of mutex key values to wait for prior to beginning the submitted work. Entries refer to the keyed mutex associated with the corresponding entries in {@code pAcquireSyncs}.")
 	const..uint32_t_p.member("pAcquireTimeoutMilliseconds", "an array of timeout values, in millisecond units, for each acquire specified in {@code pAcquireKeys}.")
-	AutoSize("pReleaseSyncs","pReleaseKeys", optional = true)..uint32_t.member("releaseCount", "the number of entries in the {@code pReleaseSyncs} and {@code pReleaseKeys} arrays.")
+	AutoSize("pReleaseSyncs", "pReleaseKeys", optional = true)..uint32_t.member("releaseCount", "the number of entries in the {@code pReleaseSyncs} and {@code pReleaseKeys} arrays.")
 	const..VkDeviceMemory.p.member("pReleaseSyncs", "a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources.")
 	const..uint64_t_p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
 }

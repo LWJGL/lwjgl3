@@ -4,11 +4,11 @@
  */
 package org.lwjgl.generator
 
-import java.io.PrintWriter
+import java.io.*
 import java.lang.Math.*
-import java.nio.file.Paths
+import java.nio.file.*
 import java.util.*
-import java.util.regex.Pattern
+import java.util.regex.*
 
 val EXT_FLAG = ""
 
@@ -107,12 +107,12 @@ abstract class SimpleBinding(
 ) : APIBinding("n/a", "n/a", callingConvention) {
 	override fun PrintWriter.generateJava() = Unit
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
-		writer.println("\t\tlong ${if ( function.returns.has(Address) ) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
+		writer.println("\t\tlong ${if (function.returns.has(Address)) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
 	}
 
 	protected fun PrintWriter.generateFunctionsClass(nativeClass: NativeClass) {
 		val bindingFunctions = nativeClass.functions.filter { !it.hasExplicitFunctionAddress && !it.has(Macro) }
-		if ( bindingFunctions.isEmpty() )
+		if (bindingFunctions.isEmpty())
 			return
 
 		val alignment = bindingFunctions.map { it.simpleName.length }.max()!!
@@ -178,7 +178,7 @@ class NativeClass(
 	val prefixTemplate: String,
 	val postfix: String,
 	val binding: APIBinding?,
-    val library: String?
+	val library: String?
 ) : GeneratorTargetNative(packageName, className, nativeSubPath) {
 	companion object {
 		private val JDOC_LINK_PATTERN = Pattern.compile("""(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""")
@@ -254,7 +254,7 @@ class NativeClass(
 										it.documentation,
 										"", LinkMode.SINGLE
 									).copyModifiers(it).removeArrayModifiers().replaceModifier(Check) {
-										Check("${it.expression.let { if (it.contains(' ')) "($it)" else it}} >> ${autoType.byteShift}")
+										Check("${it.expression.let { if (it.contains(' ')) "($it)" else it }} >> ${autoType.byteShift}")
 									}
 								else
 									func[it.name].removeArrayModifiers()
@@ -265,7 +265,7 @@ class NativeClass(
 							it has AutoSize && it[AutoSize].hasReference(multiTypeParam.name)
 						}.forEach {
 							val autoSize = it[AutoSize]
-							if ( autoSize.factor == null )
+							if (autoSize.factor == null)
 								it.replaceModifier(AutoSizeShl(
 									autoType.byteShift!!,
 									autoSize.reference,
@@ -308,7 +308,7 @@ class NativeClass(
 	override fun hasMethod(method: String): Boolean = functions.any { it.simpleName == method }
 
 	internal fun registerFunctions() {
-		if ( binding != null ) {
+		if (binding != null) {
 			functions.asSequence()
 				.filter { !it.hasCustomJNI }
 				.forEach { JNI.register(it) }
@@ -320,8 +320,8 @@ class NativeClass(
 	internal fun registerLinks(
 		tokens: MutableMap<String, String>,
 		duplicateTokens: MutableSet<String>,
-	    functions: MutableMap<String, String>,
-	    duplicateFunctions: MutableSet<String>
+		functions: MutableMap<String, String>,
+		duplicateFunctions: MutableSet<String>
 	) {
 		if (!this.functions.any { it.has(Reuse) }) {
 			constantBlocks.forEach {
@@ -333,7 +333,7 @@ class NativeClass(
 		}
 
 		this.functions.asSequence().filter { !it.has(Reuse) }.forEach {
-			if ( functions.put(it.simpleName, "$className#${it.name}()") != null )
+			if (functions.put(it.simpleName, "$className#${it.name}()") != null)
 				duplicateFunctions.add(it.simpleName)
 		}
 	}
@@ -343,16 +343,16 @@ class NativeClass(
 		println("package $packageName;\n")
 
 		val hasFunctions = !_functions.isEmpty()
-		if ( hasFunctions || binding is SimpleBinding ) {
+		if (hasFunctions || binding is SimpleBinding) {
 			// TODO: This is horrible. Refactor so that we build imports after code generation.
 			val hasBuffers = functions.any { it.returns.isBufferPointer || it.hasParam { it.isBufferPointer } }
 
-			if ( hasBuffers ) {
-				if ( functions.any {
+			if (hasBuffers) {
+				if (functions.any {
 					(it.returns.isBufferPointer && it.returns.nativeType.mapping !== PointerMapping.DATA_POINTER && it.returns.nativeType !is StructType && it.returns.nativeType !is CharSequenceType)
 					||
 					it.hasParam { it.isBufferPointer && it.nativeType.mapping !== PointerMapping.DATA_POINTER && it.nativeType !is StructType }
-				} )
+				})
 					println("import java.nio.*;\n")
 
 				val needsPointerBuffer: QualifiedType.() -> Boolean = {
@@ -362,7 +362,7 @@ class NativeClass(
 						(this.has(MultiType) && this[MultiType].types.contains(PointerMapping.DATA_POINTER))
 					)
 				}
-				if ( functions.any { it.returns.needsPointerBuffer() || it.hasParam { it.needsPointerBuffer() } } )
+				if (functions.any { it.returns.needsPointerBuffer() || it.hasParam { it.needsPointerBuffer() } })
 					println("import org.lwjgl.*;\n")
 			}
 
@@ -379,30 +379,32 @@ class NativeClass(
 				}
 			}
 
-			if ( hasMemoryStack || (binding is SimpleBinding && !binding.libraryExpression.contains('.')) || (binding == null && library == null) ) {
-				if ( packageName != "org.lwjgl.system" )
+			if (hasMemoryStack || (binding is SimpleBinding && !binding.libraryExpression.contains('.')) || (binding == null && library == null)) {
+				if (packageName != "org.lwjgl.system")
 					println("import org.lwjgl.system.*;\n")
 			}
 
-			if ( hasFunctions && binding is SimpleBinding )
+			if (hasFunctions && binding is SimpleBinding)
 				println("import static org.lwjgl.system.APIUtil.*;")
-			if ( hasFunctions && ((binding != null && binding !is SimpleBinding) || functions.any { func ->
+			if (hasFunctions && ((binding != null && binding !is SimpleBinding) || functions.any { func ->
 				func.hasParam { it.nativeType is PointerType && !it.has(Nullable) && it.nativeType !is StructType && !func.hasAutoSizeFor(it) }
-			}) )
+			}))
 				println("import static org.lwjgl.system.Checks.*;")
-			if ( binding != null && functions.any { !it.hasCustomJNI } )
+			if (binding != null && functions.any { !it.hasCustomJNI })
 				println("import static org.lwjgl.system.JNI.*;")
-			if ( hasMemoryStack )
+			if (hasMemoryStack)
 				println("import static org.lwjgl.system.MemoryStack.*;")
-			if ( hasBuffers && functions.any {
+			if (hasBuffers && functions.any {
 				(it.returns.isBufferPointer && it.returns.nativeType !is StructType) || it.hasParam {
 					it.isBufferPointer && (it.nativeType !is StructType || it has Nullable)
 				}
-			} ) {
+			}) {
 				println("import static org.lwjgl.system.MemoryUtil.*;")
-				if ( functions.any { func -> func.hasParam {
-					it.has(MultiType) && it[MultiType].types.contains(PointerMapping.DATA_POINTER) && func.hasAutoSizeFor(it)
-				} } )
+				if (functions.any { func ->
+					func.hasParam {
+						it.has(MultiType) && it[MultiType].types.contains(PointerMapping.DATA_POINTER) && func.hasAutoSizeFor(it)
+					}
+				})
 					println("import static org.lwjgl.system.Pointer.*;")
 			}
 			println()
@@ -411,39 +413,39 @@ class NativeClass(
 		preamble.printJava(this)
 
 		val documentation = super.documentation
-		if ( documentation != null )
+		if (documentation != null)
 			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
-		println("${access.modifier}${if ( hasFunctions ) "" else "final "}class $className {")
+		println("${access.modifier}${if (hasFunctions) "" else "final "}class $className {")
 
 		constantBlocks.forEach {
 			it.generate(this)
 		}
 
 		fun PrintWriter.libraryInit() {
-			println(if ( library == null )
+			println(if (library == null)
 				"\n\tstatic { Library.initialize(); }"
-			else if ( library.contains('\n') )
+			else if (library.contains('\n'))
 				"""
 	static {
 		${library.trim()}
 	}"""
-			else if ( library.endsWith(");") )
+			else if (library.endsWith(");"))
 				"\n\tstatic { $library }"
 			else
 				"\n\tstatic { Library.loadSystem(Platform.mapLibraryNameBundled(\"$library\")); }"
 			)
 		}
 
-		if ( hasFunctions || binding is SimpleBinding ) {
-			if ( binding != null ) {
-				if ( binding !is SimpleBinding && functions.any { it.hasCustomJNI } )
+		if (hasFunctions || binding is SimpleBinding) {
+			if (binding != null) {
+				if (binding !is SimpleBinding && functions.any { it.hasCustomJNI })
 					libraryInit()
 
 				printCustomMethods(static = true)
 
-				if ( binding is SimpleBinding || functions.any { !it.hasExplicitFunctionAddress } ) {
+				if (binding is SimpleBinding || functions.any { !it.hasExplicitFunctionAddress }) {
 					println("""
-	${if (hasFunctions && access === Access.PUBLIC ) "protected" else "private"} $className() {
+	${if (hasFunctions && access === Access.PUBLIC) "protected" else "private"} $className() {
 		throw new UnsupportedOperationException();
 	}""")
 					binding.generateFunctionSetup(this, this@NativeClass)
@@ -455,7 +457,7 @@ class NativeClass(
 
 				// This allows binding classes to be "statically" extended. Not a good practice, but usable with static imports.
 				println("""
-	${if (hasFunctions && access === Access.PUBLIC ) "protected" else "private"} $className() {
+	${if (hasFunctions && access === Access.PUBLIC) "protected" else "private"} $className() {
 		throw new UnsupportedOperationException();
 	}""")
 			}
@@ -464,7 +466,7 @@ class NativeClass(
 		}
 
 		genFunctions.forEach { func ->
-			if ( !func.hasParam { it.nativeType is ArrayType } )
+			if (!func.hasParam { it.nativeType is ArrayType })
 				println("\n\t// --- [ ${func.name} ] ---")
 			try {
 				func.generateMethods(this)
@@ -484,7 +486,7 @@ class NativeClass(
 		print(HEADER)
 		preamble.printNative(this)
 
-		if ( binding != null ) {
+		if (binding != null) {
 			// Generate typedefs for casting the function pointers
 			println()
 			functions.asSequence().filter { it.hasCustomJNI }.forEach {
@@ -503,7 +505,7 @@ class NativeClass(
 	}
 
 	internal fun nativeDirectivesWarning() {
-		if ( preamble.hasNativeDirectives )
+		if (preamble.hasNativeDirectives)
 			println("\tUnnecessary native directives in: $packageName.$templateName")
 	}
 
@@ -514,11 +516,11 @@ class NativeClass(
 	) {
 		out.print("\n\t\t\t")
 
-		val functions = _functions.values.let { if ( filter == null ) it else it.filter(filter) }
+		val functions = _functions.values.let { if (filter == null) it else it.filter(filter) }
 
 		var lineSize = 12
 		functions.forEachWithMore { func, more ->
-			if ( more ) {
+			if (more) {
 				out.print(", ")
 				lineSize += 2
 			}
@@ -526,7 +528,7 @@ class NativeClass(
 			val pointer = printPointer(func)
 
 			lineSize += pointer.length
-			if ( 160 <= lineSize ) {
+			if (160 <= lineSize) {
 				out.print("\n\t\t\t")
 				lineSize = 12 + pointer.length
 			}
@@ -547,6 +549,7 @@ class NativeClass(
 
 	/** Adds a new constant. */
 	operator fun <T : Any> String.rangeTo(value: T) = Constant(this, value)
+
 	operator fun <T : Any> String.rangeTo(expression: String): Constant<T> = ConstantExpression(this, expression, false)
 
 	/** Adds a new String constant whose value is an expression. */
@@ -556,13 +559,14 @@ class NativeClass(
 	val String.enum: Constant<EnumValue> get() = Constant(this, EnumValue())
 
 	infix fun String.enum(documentation: String) =
-		Constant(this, EnumValue({ if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc() }))
+		Constant(this, EnumValue({ if (documentation.isEmpty()) null else processDocumentation(documentation).toJavaDoc() }))
+
 	infix fun String.enum(value: Int) = Constant(this, EnumValue(value = value))
 	fun String.enum(documentation: String, value: Int) =
-		Constant(this, EnumValue({ if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc() }, value))
+		Constant(this, EnumValue({ if (documentation.isEmpty()) null else processDocumentation(documentation).toJavaDoc() }, value))
 
 	fun String.enum(documentation: String, expression: String) =
-		Constant(this, EnumValueExpression({ if ( documentation.isEmpty() ) null else processDocumentation(documentation).toJavaDoc() }, expression))
+		Constant(this, EnumValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation).toJavaDoc() }, expression))
 
 	operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =
 		ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since, noPrefix = noPrefix)
@@ -571,7 +575,7 @@ class NativeClass(
 		val func = NativeClassFunction(
 			returns = this,
 			simpleName = name,
-			name = if ( noPrefix ) name else "$prefixMethod$name",
+			name = if (noPrefix) name else "$prefixMethod$name",
 			documentation = { parameterFilter ->
 				this@NativeClass.toJavaDoc(
 					processDocumentation(documentation),
@@ -635,7 +639,7 @@ class NativeClass(
 
 	private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String): String {
 		val matcher = JDOC_LINK_PATTERN.matcher(documentation)
-		if ( !matcher.find() )
+		if (!matcher.find())
 			return documentation
 
 		val buffer = StringBuilder(documentation.length)
@@ -645,18 +649,18 @@ class NativeClass(
 
 			val element = matcher.group(1)
 
-			if ( referenceClass.prefixConstant.isNotEmpty() && element.startsWith(referenceClass.prefixConstant) ) {
-				if ( element.substring(referenceClass.prefixConstant.length).let { constant ->
+			if (referenceClass.prefixConstant.isNotEmpty() && element.startsWith(referenceClass.prefixConstant)) {
+				if (element.substring(referenceClass.prefixConstant.length).let { constant ->
 					!this.constantBlocks.any { block -> block.constants.any { it -> it.name == constant } }
-				} )
+				})
 					buffer.append(referenceClass.className)
-			} else if ( !this.functions.any { it -> it.name == element } && referenceFunction != element )
+			} else if (!this.functions.any { it -> it.name == element } && referenceFunction != element)
 				buffer.append(referenceClass.className)
 
 			buffer.append(matcher.group(0))
 
 			lastEnd = matcher.end()
-		} while ( matcher.find() )
+		} while (matcher.find())
 		buffer.append(documentation, lastEnd, documentation.length)
 
 		return buffer.toString()
@@ -672,7 +676,7 @@ fun String.nativeClass(
 	nativeSubPath: String = "",
 	prefix: String = "",
 	prefixMethod: String = prefix.toLowerCase(),
-	prefixConstant: String = if ( prefix.isEmpty() || prefix.endsWith('_') ) prefix else "${prefix}_",
+	prefixConstant: String = if (prefix.isEmpty() || prefix.endsWith('_')) prefix else "${prefix}_",
 	prefixTemplate: String = prefix,
 	postfix: String = "",
 	binding: APIBinding? = null,
@@ -680,7 +684,7 @@ fun String.nativeClass(
 	init: (NativeClass.() -> Unit)? = null
 ): NativeClass {
 	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixMethod, prefixConstant, prefixTemplate, postfix, binding, library)
-	if ( init != null )
+	if (init != null)
 		ext.init()
 
 	binding?.addClass(ext)

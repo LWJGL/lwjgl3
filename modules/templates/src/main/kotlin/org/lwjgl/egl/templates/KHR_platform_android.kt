@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_platform_android = "KHRPlatformAndroid".nativeClassEGL("KHR_platform_android", postfix = KHR) {
 	documentation =

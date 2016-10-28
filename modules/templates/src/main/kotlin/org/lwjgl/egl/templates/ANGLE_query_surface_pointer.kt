@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ANGLE_query_surface_pointer = "ANGLEQuerySurfacePointer".nativeClassEGL("ANGLE_query_surface_pointer", postfix = ANGLE) {
 	documentation =

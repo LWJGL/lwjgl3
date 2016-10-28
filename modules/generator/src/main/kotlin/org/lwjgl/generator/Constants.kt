@@ -4,9 +4,9 @@
  */
 package org.lwjgl.generator
 
-import java.io.PrintWriter
+import java.io.*
 import java.util.*
-import kotlin.reflect.KClass
+import kotlin.reflect.*
 
 // Extension properties for numeric literals.
 val Int.b: Byte get() = this.toByte()
@@ -26,14 +26,14 @@ open class ConstantType<T : Any>(
 val ByteConstant = ConstantType(Byte::class) {
 	val i = it.toInt() and 0xFF
 	"0x%X".format(i).let {
-		if ( i < 0x80 ) it else "(byte)$it"
+		if (i < 0x80) it else "(byte)$it"
 	}
 }
 val CharConstant = ConstantType(Char::class) { "'$it'" }
 val ShortConstant = ConstantType(Short::class) {
 	val i = it.toInt() and 0xFFFF
 	"0x%X".format(i).let {
-		if ( i < 0x8000 ) it else "(short)$it"
+		if (i < 0x8000) it else "(short)$it"
 	}
 }
 val IntConstant = ConstantType(Int::class) { "0x%X".format(it) }
@@ -76,7 +76,7 @@ class ConstantBlock<T : Any>(
 		noPrefix = true
 	}
 
-	private fun getConstantName(name: String) = if ( noPrefix ) name else "${nativeClass.prefixConstant}$name"
+	private fun getConstantName(name: String) = if (noPrefix) name else "${nativeClass.prefixConstant}$name"
 
 	private val Constant<Int>.enumValue: Int get() = this.value.let {
 		it ?: try {
@@ -87,7 +87,7 @@ class ConstantBlock<T : Any>(
 	}
 
 	internal fun generate(writer: PrintWriter) {
-		if ( constantType === EnumConstant ) {
+		if (constantType === EnumConstant) {
 			// Increment/update the current enum value while iterating the enum constants.
 			// Constants without documentation are added to the root block.
 			// Constants with documentation go to their own block.
@@ -98,7 +98,7 @@ class ConstantBlock<T : Any>(
 			var value = 0
 			var formatType = 1 // 0: hex, 1: decimal
 			for (c in constants) {
-				if ( c is ConstantExpression ) {
+				if (c is ConstantExpression) {
 					@Suppress("UNCHECKED_CAST")
 					rootBlock.add(c as ConstantExpression<Int>)
 					continue
@@ -127,7 +127,7 @@ class ConstantBlock<T : Any>(
 							Constant(c.name, ev.value)
 						}
 						else                      -> {
-							if ( formatType == 1 )
+							if (formatType == 1)
 								ConstantExpression(c.name, Integer.toString(value++), false)
 							else
 								Constant(c.name, value++)
@@ -135,7 +135,7 @@ class ConstantBlock<T : Any>(
 					}
 				).let {
 					val doc = ev.documentation()
-					if ( doc == null )
+					if (doc == null)
 						rootBlock.add(it)
 					else
 						ConstantBlock(nativeClass, access, IntConstant, { doc }, it).let {
@@ -154,13 +154,13 @@ class ConstantBlock<T : Any>(
 					it.generate(this)
 				}
 
-			if ( rootBlock.isNotEmpty() && rootBlockBefore())
+			if (rootBlock.isNotEmpty() && rootBlockBefore())
 				writer.generateRootBlock(rootBlock)
 
 			for (b in enumBlocks)
 				b.generate(writer)
 
-			if ( rootBlock.isNotEmpty() && !rootBlockBefore())
+			if (rootBlock.isNotEmpty() && !rootBlockBefore())
 				writer.generateRootBlock(rootBlock)
 		} else
 			writer.generateBlock()
@@ -169,13 +169,13 @@ class ConstantBlock<T : Any>(
 	private fun PrintWriter.generateBlock() {
 		println()
 		val doc = documentation()
-		if ( doc != null )
+		if (doc != null)
 			println(doc)
 
 		print("\t${access.modifier}static final ${constantType.javaType}")
 
 		val indent: String
-		if ( constants.size == 1 ) {
+		if (constants.size == 1) {
 			indent = " "
 		} else {
 			print('\n')
@@ -190,7 +190,7 @@ class ConstantBlock<T : Any>(
 		}
 
 		constants.forEachWithMore { it, more ->
-			if ( more )
+			if (more)
 				println(',')
 			printConstant(it, indent, alignment)
 		}
@@ -203,8 +203,8 @@ class ConstantBlock<T : Any>(
 			print(' ')
 
 		print(" = ")
-		if ( constant is ConstantExpression ) {
-			print(if ( constantType !== StringConstant || constant.unwrapped )
+		if (constant is ConstantExpression) {
+			print(if (constantType !== StringConstant || constant.unwrapped)
 				constant.expression
 			else
 				constantType.print(constant.expression)

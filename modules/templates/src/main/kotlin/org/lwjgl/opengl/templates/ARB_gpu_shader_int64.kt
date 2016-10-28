@@ -58,7 +58,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 	val autoSizeDoc = "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."
 
 	for (i in 1..4) {
-		val glslType = if ( i == 1) "int64_t" else "i64vec$i"
+		val glslType = if (i == 1) "int64_t" else "i64vec$i"
 		val valueDoc = "a pointer to an array of {@code count} values that will be used to update the specified $glslType variable"
 
 		// Uniform{1,2,3,4}i64ARB
@@ -103,7 +103,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 	args[5] = GLuint64.IN("w", "the uniform w value")
 
 	for (i in 1..4) {
-		val glslType = if ( i == 1) "uint64_t" else "u64vec$i"
+		val glslType = if (i == 1) "uint64_t" else "u64vec$i"
 		val valueDoc = "a pointer to an array of {@code count} values that will be used to update the specified $glslType variable"
 
 		// Uniform{1,2,3,4}ui64ARB

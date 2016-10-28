@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val NV_3dvision_surface = "NV3dvisionSurface".nativeClassEGL("NV_3dvision_surface", postfix = NV) {
 	documentation =

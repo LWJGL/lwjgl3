@@ -137,7 +137,7 @@ par_shapes_free_mesh(m);""")}
 // point in [0,1] and produces a 3D point.
 typedef void (*par_shapes_fn)(float const*, float*, void*);
 par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
-    int stacks, void* userdata);
+	int stacks, void* userdata);
 	 */
 
 	par_shapes_mesh_p(

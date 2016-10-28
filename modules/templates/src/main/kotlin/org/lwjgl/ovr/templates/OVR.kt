@@ -9,12 +9,12 @@ import org.lwjgl.ovr.*
 
 val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", prefixConstant = "ovr", library = OVR_LIBRARY) {
 	nativeDirective(
-"""#ifdef LWJGL_WINDOWS
+		"""#ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4710))
 #endif""", beforeIncludes = true)
 
 	nativeDirective(
-"""DISABLE_WARNINGS()
+		"""DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4711 4738))
 #endif
@@ -191,7 +191,7 @@ ENABLE_WARNINGS()""")
 		"OVR_FORMAT_D24_UNORM_S8_UINT".enum,
 		"OVR_FORMAT_D32_FLOAT".enum,
 		"OVR_FORMAT_D32_FLOAT_S8X24_UINT".enum,
-		
+
 		// Added in 1.5 compressed formats can be used for static layers
 		"OVR_FORMAT_BC1_UNORM".enum,
 		"OVR_FORMAT_BC1_UNORM_SRGB".enum,
@@ -265,7 +265,7 @@ ENABLE_WARNINGS()""")
 			"Bit mask of all buttons on the left Touch controller",
 			"ovrButton_X | ovrButton_Y | ovrButton_LThumb | ovrButton_LShoulder | ovrButton_Enter"
 		)
-		)
+	)
 
 	EnumConstant(
 		"Touch input types.",

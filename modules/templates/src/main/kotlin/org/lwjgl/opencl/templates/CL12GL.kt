@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 
 val CL12GL = dependsOn(Binding.OPENGL) {
 	"CL12GL".nativeClassCL("CL12GL") {
-		javaImport (
+		javaImport(
 			"org.lwjgl.opengl.GL11",
 			"org.lwjgl.opengl.GL12",
 			"org.lwjgl.opengl.GL13",

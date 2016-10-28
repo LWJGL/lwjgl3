@@ -7,7 +7,6 @@ package org.lwjgl.vulkan.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
-import org.lwjgl.system.windows.*
 
 val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", postfix = KHR) {
 	documentation =

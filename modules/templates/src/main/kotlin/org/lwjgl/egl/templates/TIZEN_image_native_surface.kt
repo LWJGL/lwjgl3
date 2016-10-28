@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val TIZEN_image_native_surface = "TIZENImageNativeSurface".nativeClassEGL("TIZEN_image_native_surface", postfix = TIZEN) {
 	documentation =

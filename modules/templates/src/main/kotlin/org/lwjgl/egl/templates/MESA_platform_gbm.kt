@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val MESA_platform_gbm = "MESAPlatformGBM".nativeClassEGL("MESA_platform_gbm", postfix = MESA) {
 	documentation =

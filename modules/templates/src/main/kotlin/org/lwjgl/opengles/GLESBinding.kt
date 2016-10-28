@@ -5,12 +5,12 @@
 package org.lwjgl.opengles
 
 import org.lwjgl.generator.*
-import java.io.PrintWriter
+import java.io.*
 import java.util.*
-import java.util.regex.Pattern
+import java.util.regex.*
 
 val NativeClass.capName: String
-	get() = if ( templateName.startsWith(prefixTemplate) ) templateName else "${prefixTemplate}_$templateName"
+	get() = if (templateName.startsWith(prefixTemplate)) templateName else "${prefixTemplate}_$templateName"
 
 private val CAPABILITIES_CLASS = "GLESCapabilities"
 
@@ -32,7 +32,7 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, Transform>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
-		if ( boParams.any() ) {
+		if (boParams.any()) {
 			boParams.forEach { transforms[it] = BufferOffsetTransform }
 			function.generateAlternativeMethod(writer, function.name, transforms)
 			boParams.forEach { transforms.remove(it) }
@@ -47,12 +47,12 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		print("\n\tstatic boolean isAvailable($CAPABILITIES_CLASS caps")
-		if ( nativeClass.functions.any { it has DependsOn } ) print(", java.util.Set<String> ext")
+		if (nativeClass.functions.any { it has DependsOn }) print(", java.util.Set<String> ext")
 		println(") {")
 
 		val printPointer = { func: NativeClassFunction ->
-			if ( func has DependsOn )
-				"${func[DependsOn].reference.let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
+			if (func has DependsOn)
+				"${func[DependsOn].reference.let { if (it.indexOf(' ') == -1) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
 			else
 				"caps.${func.name}"
 		}
@@ -76,8 +76,8 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 			val isGLES1 = o1.templateName.startsWith("GLES")
 			val isGLES2 = o2.templateName.startsWith("GLES")
 
-			if ( isGLES1 xor isGLES2 )
-				(if ( isGLES1 ) -1 else 1)
+			if (isGLES1 xor isGLES2)
+				(if (isGLES1) -1 else 1)
 			else
 				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
 		}
@@ -103,9 +103,9 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 
 		for (extension in classes) {
 			val capName = extension.capName
-			if ( extension.hasNativeFunctions ) {
-				print("\t\t$capName = ext.contains(\"$capName\") && GLES.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$GLES_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
-				if ( extension.functions.any { it has DependsOn } ) print(", ext")
+			if (extension.hasNativeFunctions) {
+				print("\t\t$capName = ext.contains(\"$capName\") && GLES.checkExtension(\"$capName\", ${if (capName == extension.className) "$GLES_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
+				if (extension.functions.any { it has DependsOn }) print(", ext")
 				println("));")
 			} else
 				println("\t\t$capName = ext.contains(\"$capName\");")
@@ -139,7 +139,7 @@ val NativeClass.capLink: String get() = "{@link $CAPABILITIES_CLASS\\#$capName $
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
 val NativeClass.registryLink: String get() {
 	val matcher = REGISTRY_PATTERN.matcher(templateName)
-	if ( !matcher.matches() )
+	if (!matcher.matches())
 		throw IllegalStateException("Non-standard extension name: $templateName")
 	return url("https://www.khronos.org/registry/gles/extensions/${matcher.group(1)}/$templateName.txt", templateName)
 }

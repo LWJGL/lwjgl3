@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EXT_image_dma_buf_import = "EXTImageDMABufImport".nativeClassEGL("EXT_image_dma_buf_import", postfix = EXT) {
 	documentation =

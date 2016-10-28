@@ -5,7 +5,7 @@
 package org.lwjgl.ovr.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.ovr.OVR_PACKAGE
+import org.lwjgl.ovr.*
 
 val OVR_Keys = "OVRKeys".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") {
 	documentation = "Keys for libOVR's CAPI calls."

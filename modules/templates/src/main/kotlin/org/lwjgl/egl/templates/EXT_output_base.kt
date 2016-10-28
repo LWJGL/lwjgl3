@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EXT_output_base = "EXTOutputBase".nativeClassEGL("EXT_output_base", postfix = EXT) {
 	documentation =

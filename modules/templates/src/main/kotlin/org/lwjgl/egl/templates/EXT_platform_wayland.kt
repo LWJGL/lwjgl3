@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val EXT_platform_wayland = "EXTPlatformWayland".nativeClassEGL("EXT_platform_wayland", postfix = EXT) {
 	documentation =

@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_stream_cross_process_fd = "KHRStreamCrossProcessFD".nativeClassEGL("KHR_stream_cross_process_fd", postfix = KHR) {
 	documentation =
@@ -18,8 +18,8 @@ val KHR_stream_cross_process_fd = "KHRStreamCrossProcessFD".nativeClassEGL("KHR_
 		Duplicating the EGLStreamKHR object handle into another process is peformed in 3 steps
 		${ol(
 			"Get a file descriptor associated with the EGLStream.",
-		    "Duplicate the file descriptor into another process.",
-		    "Create an EGLStreamKHR from the duplicated file descriptor in the other process."
+			"Duplicate the file descriptor into another process.",
+			"Create an EGLStreamKHR from the duplicated file descriptor in the other process."
 		)}
 		The file descriptor is obtained by calling eglGetStreamFileDescriptorKHR().
 

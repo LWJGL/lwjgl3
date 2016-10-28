@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val NV_coverage_sample_resolve = "NVCoverageSampleResolve".nativeClassEGL("NV_coverage_sample_resolve", postfix = NV) {
 	documentation =

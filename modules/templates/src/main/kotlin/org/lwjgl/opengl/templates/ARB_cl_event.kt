@@ -5,8 +5,8 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
 import org.lwjgl.opencl.*
+import org.lwjgl.opengl.*
 
 val ARB_cl_event = dependsOn(Binding.OPENCL) {
 	"ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {

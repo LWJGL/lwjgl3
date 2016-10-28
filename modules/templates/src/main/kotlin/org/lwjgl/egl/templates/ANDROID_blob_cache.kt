@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ANDROID_blob_cache = "ANDROIDBlobCache".nativeClassEGL("ANDROID_blob_cache", postfix = ANDROID) {
 	documentation =

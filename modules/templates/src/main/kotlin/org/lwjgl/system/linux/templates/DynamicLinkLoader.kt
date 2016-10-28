@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
 val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
-	nativeImport (
+	nativeImport(
 		"LinuxLWJGL.h",
 		"<dlfcn.h>"
 	)

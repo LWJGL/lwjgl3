@@ -5,7 +5,7 @@
 package org.lwjgl.opengl
 
 import org.lwjgl.generator.*
-import java.io.PrintWriter
+import java.io.*
 import java.util.*
 
 private val CAPABILITIES_CLASS = "GLXCapabilities"
@@ -68,8 +68,8 @@ val GLXBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILI
 
 		for (extension in classes) {
 			val capName = extension.capName
-			println(if ( extension.hasNativeFunctions )
-				"\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if ( capName == extension.className ) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this));"
+			println(if (extension.hasNativeFunctions)
+				"\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this));"
 			else
 				"\t\t$capName = ext.contains(\"$capName\");"
 			)

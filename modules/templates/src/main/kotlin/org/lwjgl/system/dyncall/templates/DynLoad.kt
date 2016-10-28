@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.dyncall.*
 
 val DynLoad = "DynLoad".nativeClass(DYNCALL_PACKAGE, prefix = "DL") {
-	nativeImport (
+	nativeImport(
 		"dynload.h"
 	)
 

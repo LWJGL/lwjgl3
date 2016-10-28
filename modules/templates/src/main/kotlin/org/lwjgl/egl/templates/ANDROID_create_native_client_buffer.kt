@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ANDROID_create_native_client_buffer = "ANDROIDCreateNativeClientBuffer".nativeClassEGL("ANDROID_create_native_client_buffer", postfix = ANDROID) {
 	documentation =

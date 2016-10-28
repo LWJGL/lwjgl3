@@ -4,11 +4,10 @@
  */
 package org.lwjgl.generator
 
-import java.io.PrintWriter
-import java.nio.file.Files
-import java.nio.file.Paths
+import java.io.*
+import java.nio.file.*
 import java.util.*
-import java.util.regex.Pattern
+import java.util.regex.*
 
 
 val HEADER = """/*
@@ -38,7 +37,7 @@ class Preamble {
 	internal val hasNativeDirectives: Boolean get() = nativeImports.isNotEmpty() || nativeDirectives.isNotEmpty()
 
 	fun javaImport(vararg classes: String) {
-		if ( javaImports === EMPTY_IMPORTS )
+		if (javaImports === EMPTY_IMPORTS)
 			javaImports = ArrayList(classes.size)
 
 		classes.forEach {
@@ -47,11 +46,11 @@ class Preamble {
 	}
 
 	fun nativeImport(vararg files: String) {
-		if ( nativeImports === EMPTY_IMPORTS )
+		if (nativeImports === EMPTY_IMPORTS)
 			nativeImports = ArrayList(files.size)
 
 		files.forEach {
-			nativeImports.add(if ( it.startsWith('<') )
+			nativeImports.add(if (it.startsWith('<'))
 				it
 			else
 				"\"$it\"")
@@ -59,20 +58,20 @@ class Preamble {
 	}
 
 	fun nativeDirective(expression: String, beforeIncludes: Boolean) {
-		if ( nativeDirectives === EMPTY_DIRECTIVES )
+		if (nativeDirectives === EMPTY_DIRECTIVES)
 			nativeDirectives = ArrayList()
 
 		nativeDirectives.add(NativeDefine(expression, beforeIncludes))
 	}
 
 	fun printJava(writer: PrintWriter) {
-		if ( javaImports.isEmpty() )
+		if (javaImports.isEmpty())
 			return
 
 		fun List<String>.print() = this.forEach { writer.println("import $it;") }
 
 		val static = javaImports.filter { it.startsWith("static ") }
-		if ( !static.isEmpty() && static.size < javaImports.size ) {
+		if (!static.isEmpty() && static.size < javaImports.size) {
 			// Separate plain from static imports
 			javaImports.filter { !it.startsWith("static ") }.print()
 			writer.println()
@@ -103,7 +102,7 @@ class Preamble {
 private val JNI_UNDERSCORE_ESCAPE_PATTERN = Pattern.compile("_")
 
 internal val String.asJNIName: String
-	get() = if ( this.indexOf('_') == -1 )
+	get() = if (this.indexOf('_') == -1)
 		this
 	else
 		this.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
@@ -144,13 +143,13 @@ abstract class GeneratorTarget(
 
 	internal val sourceFile = getSourceFileName()
 	internal open fun getLastModified(root: String): Long = Paths.get(root, sourceFile).let {
-		if ( Files.isRegularFile(it) ) it else
+		if (Files.isRegularFile(it)) it else
 			throw IllegalStateException("The source file for template $packageName.$className does not exist ($it).")
 	}.lastModified
 
 	var access = Access.PUBLIC
 		set(access) {
-			if ( access === Access.PRIVATE )
+			if (access === Access.PRIVATE)
 				throw IllegalArgumentException("The private access modifier is illegal on top-level classes.")
 			field = access
 		}
@@ -196,7 +195,7 @@ abstract class GeneratorTarget(
 
 	protected fun processDocumentation(documentation: String, prefixConstant: String, prefixMethod: String, forcePackage: Boolean = false): String {
 		val matcher = LINKS.matcher(documentation)
-		if ( !matcher.find() )
+		if (!matcher.find())
 			return documentation
 
 		val buffer = StringBuilder(documentation.length * 2)
@@ -212,27 +211,27 @@ abstract class GeneratorTarget(
 			\# - escape, replace with #
 			 */
 			val linkMethod = matcher.group(2)!!
-			if ( linkMethod[0] == '\\' ) {
+			if (linkMethod[0] == '\\') {
 				buffer.append(matcher.group().replace("\\#", "#"))
 			} else {
-				if ( linkMethod[0] == '@' )
+				if (linkMethod[0] == '@')
 					buffer.append("see ")
 
 				var className = matcher.group(1)
 				val classElement = matcher.group(3)!!
 
-				val linkType = if ( classElement.endsWith(')') ) LinkType.METHOD else LinkType.FIELD
-				var prefix = if ( linkType === LinkType.FIELD ) prefixConstant else prefixMethod
+				val linkType = if (classElement.endsWith(')')) LinkType.METHOD else LinkType.FIELD
+				var prefix = if (linkType === LinkType.FIELD) prefixConstant else prefixMethod
 
 				buffer.append(when (linkMethod.count { it == '#' }) {
 					1    -> {
 						className.let {
-							if ( it != null )
+							if (it != null)
 								return@let
 
 							val qualifiedLink = if (linkType === LinkType.FIELD) {
 								if (hasField(classElement)) return@let else Generator.tokens[packageName]!![classElement]
-							} else if ( classElement[classElement.length - 2] != '(' ) {
+							} else if (classElement[classElement.length - 2] != '(') {
 								return@let
 							} else {
 								val methodName = classElement.substring(0, classElement.length - 2)
@@ -262,7 +261,7 @@ abstract class GeneratorTarget(
 			}
 
 			lastEnd = matcher.end()
-		} while ( matcher.find() )
+		} while (matcher.find())
 
 		buffer.append(documentation, lastEnd, documentation.length)
 
@@ -272,25 +271,25 @@ abstract class GeneratorTarget(
 	private enum class LinkType {
 		FIELD {
 			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, postfix: String, custom: Boolean): String {
-				val source = if ( className == null || className == sourceName ) "" else className
-				val prefix = if ( custom ) "" else sourcePrefix
+				val source = if (className == null || className == sourceName) "" else className
+				val prefix = if (custom) "" else sourcePrefix
 
-				return "{@link $source#$prefix$classElement${if ( custom || prefix.isEmpty() ) "" else " $classElement"}}"
+				return "{@link $source#$prefix$classElement${if (custom || prefix.isEmpty()) "" else " $classElement"}}"
 			}
 		},
 		METHOD {
 			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, postfix: String, custom: Boolean): String {
-				val source = if ( className == null || className == sourceName ) "" else className
-				val prefix = if ( custom ) "" else sourcePrefix
+				val source = if (className == null || className == sourceName) "" else className
+				val prefix = if (custom) "" else sourcePrefix
 
 				val parentheses = classElement.indexOf('(')
-				if ( parentheses == -1 )
+				if (parentheses == -1)
 					throw IllegalStateException("Invalid method link: $this#$prefix$classElement")
 
 				val name = classElement.substring(0, parentheses)
 
 				val hasParams = parentheses < classElement.length - 2
-				return "{@link $source#$prefix$name${if ( hasParams ) classElement.substring(parentheses) else ""}${when {
+				return "{@link $source#$prefix$name${if (hasParams) classElement.substring(parentheses) else ""}${when {
 					hasParams || custom || prefix.isEmpty()
 					     -> ""
 					else -> " $name"
@@ -324,6 +323,7 @@ abstract class GeneratorTargetNative(
 		print(HEADER)
 		preamble.printNative(this)
 	}
+
 	abstract fun PrintWriter.generateNative()
 
 }

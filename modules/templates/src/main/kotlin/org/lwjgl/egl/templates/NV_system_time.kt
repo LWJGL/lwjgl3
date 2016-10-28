@@ -4,7 +4,6 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val NV_system_time = "NVSystemTime".nativeClassEGL("NV_system_time", postfix = NV) {

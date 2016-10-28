@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_platform_x11 = "KHRPlatformX11".nativeClassEGL("KHR_platform_x11", postfix = KHR) {
 	documentation =

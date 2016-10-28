@@ -10,10 +10,10 @@ package org.lwjgl.generator
 object const : QualifiedTypeModifier() {
 	override val isSpecial = false
 	override fun validate(qtype: QualifiedType) {
-		if ( qtype.nativeType !is PointerType )
+		if (qtype.nativeType !is PointerType)
 			throw IllegalArgumentException("The const modifier can only be applied on pointer types.")
 
-		if ( qtype is Parameter && qtype.paramType != ParameterType.IN )
+		if (qtype is Parameter && qtype.paramType != ParameterType.IN)
 			throw IllegalArgumentException("The const modifier can only be applied on input parameters.")
 	}
 }
@@ -27,15 +27,15 @@ object Virtual : ParameterModifier() {
 object MapToInt : ParameterModifier() {
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
-		if ( param.nativeType.mapping !== PrimitiveMapping.BYTE && param.nativeType.mapping !== PrimitiveMapping.SHORT )
+		if (param.nativeType.mapping !== PrimitiveMapping.BYTE && param.nativeType.mapping !== PrimitiveMapping.SHORT)
 			throw IllegalArgumentException("The MapToInt modifier can only be applied on byte or short parameters.")
 	}
 }
 
 class AutoSizeFactor(
 	val operator: String,
-    val operatorInv: String,
-    val expression: String
+	val operatorInv: String,
+	val expression: String
 ) {
 	companion object {
 		fun div(expression: String) = AutoSizeFactor("/", "*", expression)
@@ -49,11 +49,11 @@ class AutoSizeFactor(
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
 fun AutoSize(div: Int, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
-	if ( div < 1 )
+	if (div < 1)
 		throw IllegalArgumentException()
-	else if ( div == 1 )
+	else if (div == 1)
 		AutoSize(reference, *dependent, applyTo = applyTo)
-	else if ( Integer.bitCount(div) == 1 )
+	else if (Integer.bitCount(div) == 1)
 		AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent, applyTo = applyTo)
 	else
 		AutoSizeDiv(div.toString(), reference, dependent = *dependent, applyTo = applyTo)
@@ -85,29 +85,29 @@ class AutoSize(
 	override fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
 	override fun validate(param: Parameter) {
-		when ( param.paramType ) {
-			ParameterType.IN    -> if ( when ( param.nativeType.mapping ) {
+		when (param.paramType) {
+			ParameterType.IN    -> if (when (param.nativeType.mapping) {
 				PrimitiveMapping.BYTE,
 				PrimitiveMapping.SHORT,
 				PrimitiveMapping.INT,
 				PrimitiveMapping.LONG,
 				PrimitiveMapping.POINTER -> false
 				else                     -> true
-			} )
+			})
 				throw IllegalArgumentException("IN parameters with the AutoSize modifier must be integer primitive types.")
 			ParameterType.INOUT -> {
-				if ( param.nativeType !is PointerType || when ( param.nativeType.mapping ) {
+				if (param.nativeType !is PointerType || when (param.nativeType.mapping) {
 					PointerMapping.DATA_INT,
 					PointerMapping.DATA_POINTER -> false
 					else                        -> true
-				} )
+				})
 					throw IllegalArgumentException("INOUT parameters with the AutoSize modifier must be integer pointer types.")
 			}
 			else                ->
 				throw IllegalArgumentException("The AutoSize modifier can only be applied on IN or INOUT parameters.")
 		}
 
-		if ( applyTo === ApplyTo.ALTERNATIVE )
+		if (applyTo === ApplyTo.ALTERNATIVE)
 			throw IllegalArgumentException("ApplyTo.ALTERNATIVE is not supported.")
 	}
 }
@@ -117,8 +117,8 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier() {
 
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
-		if ( param.paramType === ParameterType.IN )
-			when ( param.nativeType.mapping ) {
+		if (param.paramType === ParameterType.IN)
+			when (param.nativeType.mapping) {
 				PrimitiveMapping.INT,
 				PrimitiveMapping.POINTER -> {
 				}
@@ -126,8 +126,8 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier() {
 					throw IllegalArgumentException("The AutoSizeResult modifier on input parameters can only be applied on integer primitive types.")
 				}
 			}
-		else if ( param.paramType === ParameterType.OUT ) {
-			when ( param.nativeType.mapping ) {
+		else if (param.paramType === ParameterType.OUT) {
+			when (param.nativeType.mapping) {
 				PointerMapping.DATA_INT,
 				PointerMapping.DATA_POINTER -> {
 				}
@@ -142,6 +142,7 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier() {
 			throw IllegalArgumentException("The AutoSizeResult modifier cannot be used on in/out parameters.")
 	}
 }
+
 val AutoSizeResult = AutoSizeResultParam(null)
 /* Custom expression. Use $original to inject the hardcoded expression */
 fun AutoSizeResult(expression: String) = AutoSizeResultParam(expression)
@@ -157,10 +158,10 @@ class Check(
 
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
-		if ( param.nativeType !is PointerType )
+		if (param.nativeType !is PointerType)
 			throw IllegalArgumentException("The Check modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
+		if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
 			throw IllegalArgumentException("The Check modifier cannot be applied on opaque pointer types.")
 	}
 }
@@ -172,7 +173,7 @@ class Nullable internal constructor(val optional: Boolean) : ParameterModifier()
 
 	override val isSpecial = optional
 	override fun validate(param: Parameter) {
-		if ( param.nativeType !is PointerType )
+		if (param.nativeType !is PointerType)
 			throw IllegalArgumentException("The nullable modifier can only be applied on pointer types.")
 	}
 }
@@ -188,10 +189,10 @@ class Terminated(val value: String) : ParameterModifier() {
 
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
-		if ( param.nativeType !is PointerType )
+		if (param.nativeType !is PointerType)
 			throw IllegalArgumentException("The NullTerminated modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
+		if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
 			throw IllegalArgumentException("The NullTerminated modifier cannot be applied on opaque pointer types.")
 	}
 }
@@ -227,12 +228,12 @@ class AutoType(override val reference: String, vararg val types: AutoTypeToken) 
 	override val isSpecial = false
 
 	init {
-		if ( types.isEmpty() )
+		if (types.isEmpty())
 			throw IllegalArgumentException("No types specified.")
 	}
 
 	override fun validate(param: Parameter) {
-		if ( param.nativeType !is IntegerType || !param.nativeType.unsigned )
+		if (param.nativeType !is IntegerType || !param.nativeType.unsigned)
 			throw IllegalArgumentException("The AutoType modifier can only be applied on unsigned integer parameters.")
 	}
 }
@@ -242,28 +243,29 @@ class MultiType(vararg val types: PointerMapping) : ParameterModifier() {
 	companion object : ModifierKey<MultiType>
 
 	init {
-		if ( types.isEmpty() )
+		if (types.isEmpty())
 			throw IllegalArgumentException("No buffer types specified.")
 
 		for (t in types) {
-			if ( t === PointerMapping.DATA_BYTE )
+			if (t === PointerMapping.DATA_BYTE)
 				throw IllegalArgumentException("The DATA_BYTE mapping cannot be used with the MultiType modifier.")
 
-			if ( t.byteShift == null )
+			if (t.byteShift == null)
 				throw IllegalArgumentException("The MultiType modifier can only be applied with concrete PointerMappings.")
 		}
 	}
 
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
-		if ( param.nativeType !is PointerType )
+		if (param.nativeType !is PointerType)
 			throw IllegalArgumentException("The MultiType modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
+		if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
 			throw IllegalArgumentException("The MultiType modifier cannot be applied on opaque pointer types.")
 	}
 
 }
+
 val MultiTypeAll = MultiType(
 	PointerMapping.DATA_SHORT,
 	PointerMapping.DATA_INT,
@@ -280,19 +282,19 @@ class Return(
 	/** An expression that defines the maximum length value. If defined, an additional alternative method will be generated. */
 	val maxLengthExpression: String? = null,
 	/** When true, any temporary buffers will be allocated on the heap. */
-    val heapAllocate: Boolean = false
+	val heapAllocate: Boolean = false
 ) : ParameterModifier() {
 	companion object : ModifierKey<Return>
 
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
-		if ( param.nativeType !is PointerType )
+		if (param.nativeType !is PointerType)
 			throw IllegalArgumentException("The Return modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
+		if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
 			throw IllegalArgumentException("The Return modifier cannot be applied on opaque pointer types.")
 
-		if ( param.paramType === ParameterType.OUT ) {
+		if (param.paramType === ParameterType.OUT) {
 			if (param.paramType !== ParameterType.OUT)
 				throw IllegalArgumentException("The Return modifier can only be applied on output parameters.")
 
@@ -302,7 +304,7 @@ class Return(
 			if (heapAllocate && param.nativeType !is CharSequenceType)
 				throw IllegalArgumentException("The heapAllocate option can only be enabled with CharSequence parameters.")
 		} else {
-			if ( this !== ReturnParam || param.nativeType !is StructType || param.nativeType.includesPointer )
+			if (this !== ReturnParam || param.nativeType !is StructType || param.nativeType.includesPointer)
 				throw IllegalArgumentException("The ReturnParam modifier can only be used on struct value parameters.")
 		}
 	}
@@ -317,13 +319,13 @@ class SingleValue(val newName: String) : ParameterModifier() {
 
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
-		if ( param.nativeType !is PointerType )
+		if (param.nativeType !is PointerType)
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
+		if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
 			throw IllegalArgumentException("The SingleValue modifier cannot be applied on opaque pointer types.")
 
-		if ( param.paramType != ParameterType.IN )
+		if (param.paramType != ParameterType.IN)
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on input parameters.")
 	}
 }
@@ -341,13 +343,13 @@ class PointerArray(
 
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
-		if ( param.nativeType !is PointerType )
+		if (param.nativeType !is PointerType)
 			throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping != PointerMapping.DATA_POINTER )
+		if (param.nativeType.mapping != PointerMapping.DATA_POINTER)
 			throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer-to-pointer types.")
 
-		if ( param.paramType != ParameterType.IN )
+		if (param.paramType != ParameterType.IN)
 			throw IllegalArgumentException("The PointerArray modifier can only be applied on input parameters.")
 	}
 }
@@ -363,10 +365,10 @@ class MapPointer(
 
 	override val isSpecial = true
 	override fun validate(returns: ReturnValue) {
-		if ( returns.nativeType !is PointerType )
+		if (returns.nativeType !is PointerType)
 			throw IllegalArgumentException("The MapPointer modifier can only be applied on pointer types.")
 
-		if ( returns.nativeType.mapping != PointerMapping.DATA )
+		if (returns.nativeType.mapping != PointerMapping.DATA)
 			throw IllegalArgumentException("The MapPointer modifier can only be applied on void pointer types.")
 	}
 }
@@ -379,7 +381,7 @@ class Construct(
 
 	override val isSpecial = true
 	override fun validate(returns: ReturnValue) {
-		if ( returns.nativeType !is ObjectType )
+		if (returns.nativeType !is ObjectType)
 			throw IllegalArgumentException("The Construct modifier can only be applied on object types.")
 	}
 }

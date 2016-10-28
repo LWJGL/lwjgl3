@@ -4,7 +4,7 @@
  */
 package org.lwjgl.generator
 
-object ConstMember: StructMemberModifier() {
+object ConstMember : StructMemberModifier() {
 	override val isSpecial = false
 	override fun validate(member: StructMember) {
 		if (member.nativeType !is PointerType)
@@ -48,20 +48,22 @@ class AutoSizeMember(
 	override fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
 	override fun validate(member: StructMember) {
-		if ( when ( member.nativeType.mapping ) {
+		if (when (member.nativeType.mapping) {
 			PrimitiveMapping.BYTE,
 			PrimitiveMapping.SHORT,
 			PrimitiveMapping.INT,
 			PrimitiveMapping.LONG,
 			PrimitiveMapping.POINTER -> false
 			else                     -> true
-		} )
+		})
 			throw IllegalArgumentException("Members with the AutoSizeMember modifier must be integer primitive types.")
 	}
 }
 
+@Suppress("unused")
 val Struct.const: ConstMember get() = ConstMember
 
+@Suppress("unused")
 fun Struct.AutoSize(reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
 	AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
 
@@ -75,21 +77,26 @@ fun Struct.AutoSize(div: Int, reference: String, vararg dependent: String, optio
 	else
 		AutoSizeDiv(div.toString(), reference, *dependent, optional = optional, atLeastOne = atLeastOne)
 
+@Suppress("unused")
 fun Struct.AutoSizeDiv(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
 	AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.div(expression), optional = optional, atLeastOne = atLeastOne)
 
+@Suppress("unused")
 fun Struct.AutoSizeShr(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
 	AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shr(expression), optional = optional, atLeastOne = atLeastOne)
 
+@Suppress("unused")
 fun Struct.AutoSizeShl(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
 	AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shl(expression), optional = optional, atLeastOne = atLeastOne)
 
 object NullableMember : StructMemberModifier() {
 	override val isSpecial = true
 	override fun validate(member: StructMember) {
-		if ( member.nativeType !is PointerType || (member.nativeType is StructType && !member.nativeType.includesPointer) )
+		if (member.nativeType !is PointerType || (member.nativeType is StructType && !member.nativeType.includesPointer))
 			throw IllegalArgumentException("The nullable modifier can only be applied on pointer types.")
 	}
 }
+
 /** Marks a pointer member as nullable. */
+@Suppress("unused")
 val Struct.nullable: NullableMember get() = NullableMember

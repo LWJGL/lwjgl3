@@ -4,13 +4,13 @@
  */
 package org.lwjgl.openal
 
-import java.io.PrintWriter
 import org.lwjgl.generator.*
+import java.io.*
 import java.util.*
 
 fun NativeClass.capName(core: String) =
-	if ( templateName.startsWith(prefixTemplate) ) {
-		if ( prefix == core )
+	if (templateName.startsWith(prefixTemplate)) {
+		if (prefix == core)
 			"Open$core${templateName.substring(core.length)}"
 		else
 			templateName
@@ -53,8 +53,8 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 			val isALC1 = o1.isCore
 			val isALC2 = o2.isCore
 
-			if ( isALC1 xor isALC2 )
-				(if ( isALC1 ) -1 else 1)
+			if (isALC1 xor isALC2)
+				(if (isALC1) -1 else 1)
 			else
 				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
 		}
@@ -76,13 +76,13 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 
 		println("\n\t$ALC_CAP_CLASS(FunctionProviderLocal provider, long device, Set<String> ext) {")
 
-		println(addresses.map { "${it.name} = provider.getFunctionAddress(${if ( it.nativeClass.isCore ) "" else "device, "}${it.functionAddress});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
+		println(addresses.map { "${it.name} = provider.getFunctionAddress(${if (it.nativeClass.isCore) "" else "device, "}${it.functionAddress});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
 
 		for (extension in classes) {
 			val capName = extension.capName("ALC")
 			print("\t\t$capName = ext.contains(\"$capName\")")
-			if ( extension.hasNativeFunctions && extension.prefix == "ALC" )
-				print(" && ALC.checkExtension(\"$capName\", ${if ( capName == extension.className ) "$OPENAL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+			if (extension.hasNativeFunctions && extension.prefix == "ALC")
+				print(" && ALC.checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENAL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
 			println(";")
 		}
 		println("\t}")

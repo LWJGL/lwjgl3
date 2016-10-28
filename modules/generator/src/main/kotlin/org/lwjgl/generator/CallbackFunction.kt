@@ -4,7 +4,7 @@
  */
 package org.lwjgl.generator
 
-import java.io.PrintWriter
+import java.io.*
 
 class CallbackFunction(
 	packageName: String,
@@ -137,8 +137,8 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 ${access.modifier}interface ${className}I extends CallbackI.${returns.mapping.jniSignature} {
 
 	String SIGNATURE = ${"\"(${signature.asSequence().map { it.nativeType.dyncall }.joinToString("")})${returns.dyncall}\"".let {
-		if ( stdcall ) "Callback.__stdcall($it)" else it
-	}};
+			if (stdcall) "Callback.__stdcall($it)" else it
+		}};
 
 	@Override
 	default String getSignature() { return SIGNATURE; }

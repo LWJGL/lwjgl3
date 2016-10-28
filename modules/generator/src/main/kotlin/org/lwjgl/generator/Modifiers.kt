@@ -21,12 +21,12 @@ abstract class TemplateElement {
 	protected var modifiers = EMPTY_MODIFIERS
 
 	internal fun setModifiers(vararg modifiers: TemplateModifier) {
-		if ( this.modifiers === EMPTY_MODIFIERS )
+		if (this.modifiers === EMPTY_MODIFIERS)
 			this.modifiers = HashMap(modifiers.size)
 
 		modifiers.forEach {
 			val old = this.modifiers.put(it.javaClass, it)
-			if ( old != null )
+			if (old != null)
 				throw IllegalArgumentException("Template modifier ${it.javaClass.simpleName} specified more than once.")
 		}
 
@@ -42,8 +42,8 @@ abstract class TemplateElement {
 
 	infix fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] === modifier
 	infix fun has(modKey: ModifierKey<*>) = modifiers.containsKey(modKey.javaClass.declaringClass as Any?)
-	operator fun <T : TemplateModifier> get(modClass: Class<T>) = @Suppress("UNCHECKED_CAST")(modifiers[modClass] as T)
-	operator fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @Suppress("UNCHECKED_CAST")(modifiers[modKey.javaClass.declaringClass] as T)
+	operator fun <T : TemplateModifier> get(modClass: Class<T>) = @Suppress("UNCHECKED_CAST") (modifiers[modClass] as T)
+	operator fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @Suppress("UNCHECKED_CAST") (modifiers[modKey.javaClass.declaringClass] as T)
 
 	/** Returns true if the element has a ReferenceModifier with the specified reference. */
 	internal fun hasRef(modKey: ModifierKey<*>, reference: String): Boolean {
@@ -55,7 +55,7 @@ abstract class TemplateElement {
 		get() = modifiers.values.any { it.isSpecial }
 
 	protected fun <T : TemplateElement> T.copyModifiers(other: T): T {
-		if ( other.modifiers != EMPTY_MODIFIERS )
+		if (other.modifiers != EMPTY_MODIFIERS)
 			this.modifiers = HashMap(other.modifiers)
 		return this
 	}
@@ -75,7 +75,7 @@ interface ModifierKey<T : TemplateModifier>
 /** A modifier that can be applied on functions */
 abstract class FunctionModifier : TemplateModifier {
 	override fun validate(element: TemplateElement) {
-		if ( element is NativeClassFunction )
+		if (element is NativeClassFunction)
 			validate(element)
 		else
 			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on functions.")
@@ -88,7 +88,7 @@ abstract class FunctionModifier : TemplateModifier {
 /** A modifier that can be applied on either ReturnValues or Parameters. */
 abstract class QualifiedTypeModifier : TemplateModifier {
 	override fun validate(element: TemplateElement) {
-		if ( element is QualifiedType )
+		if (element is QualifiedType)
 			validate(element)
 		else
 			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on parameters or return values.")
@@ -101,7 +101,7 @@ abstract class QualifiedTypeModifier : TemplateModifier {
 /** A modifier that can be applied on parameters. */
 abstract class ParameterModifier : TemplateModifier {
 	override fun validate(element: TemplateElement) {
-		if ( element is Parameter )
+		if (element is Parameter)
 			validate(element)
 		else
 			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on parameters.")
@@ -114,7 +114,7 @@ abstract class ParameterModifier : TemplateModifier {
 /** A modifier that can be applied on return values. */
 abstract class ReturnValueModifier : TemplateModifier {
 	override fun validate(element: TemplateElement) {
-		if ( element is ReturnValue )
+		if (element is ReturnValue)
 			validate(element)
 		else
 			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on return values.")
@@ -127,7 +127,7 @@ abstract class ReturnValueModifier : TemplateModifier {
 /** A modifier that can be applied on struct members. */
 abstract class StructMemberModifier : TemplateModifier {
 	override fun validate(element: TemplateElement) {
-		if ( element is StructMember )
+		if (element is StructMember)
 			validate(element)
 		else
 			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on struct members.")

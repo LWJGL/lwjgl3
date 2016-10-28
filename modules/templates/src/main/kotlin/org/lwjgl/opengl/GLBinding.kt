@@ -5,13 +5,13 @@
 package org.lwjgl.opengl
 
 import org.lwjgl.generator.*
-import java.io.PrintWriter
+import java.io.*
 import java.util.*
-import java.util.regex.Pattern
+import java.util.regex.*
 
 val NativeClass.capName: String
-	get() = if ( templateName.startsWith(prefixTemplate) ) {
-		if ( prefix == "GL" )
+	get() = if (templateName.startsWith(prefixTemplate)) {
+		if (prefix == "GL")
 			"OpenGL${templateName.substring(2)}"
 		else
 			templateName
@@ -46,7 +46,7 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, Transform>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
-		if ( boParams.any() ) {
+		if (boParams.any()) {
 			boParams.forEach { transforms[it] = BufferOffsetTransform }
 			function.generateAlternativeMethod(writer, function.name, transforms)
 			boParams.forEach { transforms.remove(it) }
@@ -54,8 +54,8 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 	}
 
 	override fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String): Boolean {
-		if ( GLCorePattern.matcher(function.nativeClass.className).matches() ) {
-			val xmlName = if ( function has ReferenceGL )
+		if (GLCorePattern.matcher(function.nativeClass.className).matches()) {
+			val xmlName = if (function has ReferenceGL)
 				function[ReferenceGL].function
 			else
 				function.stripPostfix(stripType = true)
@@ -78,26 +78,26 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		val hasDeprecated = nativeClass.functions.hasDeprecated
 
 		print("\n\tstatic boolean isAvailable($CAPABILITIES_CLASS caps")
-		if ( nativeClass.functions.any { it has DependsOn } ) print(", java.util.Set<String> ext")
-		if ( hasDeprecated ) print(", boolean fc")
+		if (nativeClass.functions.any { it has DependsOn }) print(", java.util.Set<String> ext")
+		if (hasDeprecated) print(", boolean fc")
 		println(") {")
 		print("\t\treturn ")
 
 		val printPointer = { func: NativeClassFunction ->
-			if ( func has DependsOn )
-				"${func[DependsOn].reference.let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
+			if (func has DependsOn)
+				"${func[DependsOn].reference.let { if (it.indexOf(' ') == -1) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
 			else
 				"caps.${func.name}"
 		}
 
-		if ( hasDeprecated ) {
+		if (hasDeprecated) {
 			print("(fc || checkFunctions(")
 			nativeClass.printPointers(this, printPointer) { it has DeprecatedGL }
 			print(")) && ")
 		}
 
 		print("checkFunctions(")
-		if ( hasDeprecated )
+		if (hasDeprecated)
 			nativeClass.printPointers(this, printPointer) { !(it has DeprecatedGL || it has IgnoreMissing) }
 		else
 			nativeClass.printPointers(this, printPointer) { !(it has IgnoreMissing) }
@@ -118,8 +118,8 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 			val isGL1 = o1.templateName.startsWith("GL")
 			val isGL2 = o2.templateName.startsWith("GL")
 
-			if ( isGL1 xor isGL2 )
-				(if ( isGL1 ) -1 else 1)
+			if (isGL1 xor isGL2)
+				(if (isGL1) -1 else 1)
 			else
 				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
 		}
@@ -149,7 +149,7 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 """)
 
 		println(functions.map {
-			if ( it has DeprecatedGL )
+			if (it has DeprecatedGL)
 				"${it.name} = getFunctionAddress(fc, provider, ${it.functionAddress});"
 			else
 				"${it.name} = provider.getFunctionAddress(${it.functionAddress});"
@@ -157,10 +157,10 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 
 		for (extension in classes) {
 			val capName = extension.capName
-			if ( extension.hasNativeFunctions ) {
-				print("\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if ( capName == extension.className ) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
-				if ( extension.functions.any { it has DependsOn } ) print(", ext")
-				if ( extension.functions.hasDeprecated ) print(", fc")
+			if (extension.hasNativeFunctions) {
+				print("\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
+				if (extension.functions.any { it has DependsOn }) print(", ext")
+				if (extension.functions.hasDeprecated) print(", fc")
 				println("));")
 			} else
 				println("\t\t$capName = ext.contains(\"$capName\");")
@@ -204,7 +204,7 @@ fun String.nativeClassGL(
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
 val NativeClass.registryLink: String get() {
 	val matcher = REGISTRY_PATTERN.matcher(templateName)
-	if ( !matcher.matches() )
+	if (!matcher.matches())
 		throw IllegalStateException("Non-standard extension name: $templateName")
 	return url("http://www.opengl.org/registry/specs/${matcher.group(1)}/${matcher.group(2)}.txt", templateName)
 }

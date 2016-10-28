@@ -6,8 +6,8 @@
 package org.lwjgl.vulkan.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.vulkan.*
 import org.lwjgl.system.linux.*
+import org.lwjgl.vulkan.*
 
 val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", postfix = KHR) {
 	documentation =

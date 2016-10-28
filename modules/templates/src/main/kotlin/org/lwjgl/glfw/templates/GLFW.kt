@@ -1218,7 +1218,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window whose icon to set"),
 		AutoSize("images")..int.IN("count", "the number of images in the specified array, or zero to revert to the default window icon"),
-	    nullable..const..GLFWimage_p.IN("images", "the images to create the icon from. This is ignored if count is zero."),
+		nullable..const..GLFWimage_p.IN("images", "the images to create the icon from. This is ignored if count is zero."),
 
 		since = "version 3.2"
 	)

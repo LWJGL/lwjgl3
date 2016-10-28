@@ -4,7 +4,6 @@
  */
 package org.lwjgl.opengl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_get_texture_sub_image = "ARBGetTextureSubImage".nativeClassGL("ARB_get_texture_sub_image") {

@@ -4,10 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.egl.core
-import org.lwjgl.egl.nativeClassEGL
-import org.lwjgl.egl.registryLink
-import org.lwjgl.generator.IntConstant
+import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val KHR_mutable_render_buffer = "KHRMutableRenderBuffer".nativeClassEGL("KHR_mutable_render_buffer", postfix = KHR) {
 	documentation =

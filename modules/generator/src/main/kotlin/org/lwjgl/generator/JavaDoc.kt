@@ -5,7 +5,7 @@
 package org.lwjgl.generator
 
 import java.lang.Math.*
-import java.util.regex.Pattern
+import java.util.regex.*
 
 internal fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
 
@@ -55,11 +55,11 @@ private fun String.cleanup(linePrefix: String = "\t * "): String {
 private fun StringBuilder.layoutDOM(dom: String, linePrefix: String): StringBuilder {
 	val matcher = FRAGMENT.matcher(dom)
 
-	while ( matcher.find() ) {
+	while (matcher.find()) {
 		val tag = matcher.group(1)
-		if ( tag.isNotEmpty() ) {
-			if ( startNewLine(dom, matcher.start()) ) {
-				if ( !tag.startsWith("</") && !CHILD_NODE.matcher(tag).matches() ) {
+		if (tag.isNotEmpty()) {
+			if (startNewLine(dom, matcher.start())) {
+				if (!tag.startsWith("</") && !CHILD_NODE.matcher(tag).matches()) {
 					append('\n')
 					append(linePrefix)
 				}
@@ -70,7 +70,7 @@ private fun StringBuilder.layoutDOM(dom: String, linePrefix: String): StringBuil
 		}
 
 		val text = matcher.group(2).trim()
-		if ( text.isNotEmpty() )
+		if (text.isNotEmpty())
 			layoutText(text, linePrefix, forceParagraph = tag.isNotEmpty() && tag.startsWith("</"))
 	}
 
@@ -78,14 +78,14 @@ private fun StringBuilder.layoutDOM(dom: String, linePrefix: String): StringBuil
 }
 
 private fun startNewLine(dom: String, index: Int): Boolean {
-	if ( index == 0 )
+	if (index == 0)
 		return false
 
-	for ( i in (index - 1) downTo 0) {
-		if ( dom[i] == '\n' )
+	for (i in (index - 1) downTo 0) {
+		if (dom[i] == '\n')
 			return true
 
-		if ( !dom[i].isWhitespace() )
+		if (!dom[i].isWhitespace())
 			break
 	}
 
@@ -95,24 +95,24 @@ private fun startNewLine(dom: String, index: Int): Boolean {
 private fun StringBuilder.layoutText(text: String, linePrefix: String, forceParagraph: Boolean = false) {
 	val matcher = PARAGRAPH_PATTERN.matcher(text)
 
-	if ( matcher.find() ) {
-		if ( matcher.start() > 0 )
+	if (matcher.find()) {
+		if (matcher.start() > 0)
 			appendParagraphFirst(linePrefix, text, matcher.start(), forceParagraph)
 
 		var lastMatch: Int
 		do {
 			appendParagraph(linePrefix, text, matcher.start(), matcher.end())
 			lastMatch = matcher.end()
-		}  while ( matcher.find() )
+		} while (matcher.find())
 
-		if ( lastMatch < text.length )
+		if (lastMatch < text.length)
 			appendParagraph(linePrefix, text, lastMatch, text.length)
 	} else
 		appendParagraphFirst(linePrefix, text, text.length, forceParagraph)
 }
 
 private fun StringBuilder.appendParagraphFirst(linePrefix: String, text: String, end: Int, forceParagraph: Boolean = false) {
-	if ( forceParagraph )
+	if (forceParagraph)
 		appendParagraph(linePrefix, text, 0, end)
 	else
 		append(text, 0, end)
@@ -132,7 +132,7 @@ private fun StringBuilder.appendParagraph(linePrefix: String, text: String, star
 fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
 	val clean = cleanup("$indentation * ")
 
-	return if ( allowSingleLine && clean.indexOf('\n') == -1 )
+	return if (allowSingleLine && clean.indexOf('\n') == -1)
 		"$indentation/** $clean */"
 	else
 		"$indentation/**\n$indentation * $clean\n$indentation */"
@@ -140,19 +140,19 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 
 /** Specialized conversion for methods. */
 internal fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
-	if ( documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && params.none() { it.documentation.isNotEmpty() } )
+	if (documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && params.none() { it.documentation.isNotEmpty() })
 		return ""
 
-	if ( params.none() && returnDoc.isEmpty() )
+	if (params.none() && returnDoc.isEmpty())
 		return documentation.toJavaDoc()
 
 	return StringBuilder("\t/**\n\t * ${documentation.cleanup()}").run {
 		val returnsStructValue = !returnDoc.isEmpty() && returns is StructType && !returns.includesPointer
 
-		if ( params.any() ) {
+		if (params.any()) {
 			// Find maximum param name length
 			var alignment = params.map { it.name.length }.fold(0) { left, right -> Math.max(left, right) }
-			if ( returnsStructValue )
+			if (returnsStructValue)
 				alignment = Math.max(alignment, RESULT.length)
 
 			val multilineAligment = paramMultilineAligment(alignment)
@@ -161,17 +161,17 @@ internal fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<P
 			params.forEach {
 				printParam(this, it.name, processDocumentation(it.documentation), alignment, multilineAligment)
 			}
-			if ( returnsStructValue )
+			if (returnsStructValue)
 				printParam(this, RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
 		}
 
-		if ( !returnDoc.isEmpty() && !returnsStructValue ) {
+		if (!returnDoc.isEmpty() && !returnsStructValue) {
 			append("\n\t *")
 			append("\n\t * @return ")
 			append(processDocumentation(returnDoc).cleanup("\t *         "))
 		}
 
-		if ( !since.isEmpty() ) {
+		if (!since.isEmpty()) {
 			append("\n\t *")
 			append("\n\t * @since ")
 			append(since)
@@ -230,7 +230,7 @@ enum class LinkMode {
 		val builder = StringBuilder(trimmed.length + 16 + links.length) // Rough estimate to reduce mallocs. TODO: validate
 
 		val effectiveLinkMode: LinkMode
-		if ( trimmed.isEmpty() ) {
+		if (trimmed.isEmpty()) {
 			effectiveLinkMode = when (this) {
 				SINGLE   -> SINGLE_CNT
 				BITFIELD -> BITFIELD_CNT
@@ -288,7 +288,7 @@ fun codeBlock(code: String) = """<pre><code>${code
 fun url(href: String, innerHTML: String) = """<a href="$href">$innerHTML</a>"""
 
 fun table(vararg rows: String, matrix: Boolean = false) = StringBuilder(512).run {
-	append("<table class=${if ( matrix ) "\"lwjgl matrix\"" else "lwjgl"}>")
+	append("<table class=${if (matrix) "\"lwjgl matrix\"" else "lwjgl"}>")
 	for (row in rows) {
 		append("\n\t")
 		append(row)
@@ -310,11 +310,11 @@ fun tr(vararg columns: String) = StringBuilder().run {
 fun th(content: String = "", colspan: Int = 1, rowspan: Int = 1) = td(content, colspan, rowspan, "th")
 fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "td", className: String? = null) = StringBuilder().run {
 	append("<$tag")
-	if ( 1 < colspan )
+	if (1 < colspan)
 		append(" colspan=$colspan")
-	if ( 1 < rowspan )
+	if (1 < rowspan)
 		append(" rowspan=$rowspan")
-	if ( className != null )
+	if (className != null)
 		append(" class=\"$className\"")
 	append(">")
 	append(content.trim())
@@ -325,7 +325,7 @@ fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "
 
 private fun htmlList(tag: String, attributes: String, vararg items: String) = StringBuilder(512).run {
 	append("<$tag")
-	if ( attributes.isNotEmpty() )
+	if (attributes.isNotEmpty())
 		append(" $attributes")
 	append(">")
 	for (li in items) {
@@ -339,4 +339,4 @@ private fun htmlList(tag: String, attributes: String, vararg items: String) = St
 }
 
 fun ul(vararg items: String) = htmlList("ul", "", *items)
-fun ol(vararg items: String, marker: Char = '1') = htmlList("ol", if ( marker == '1' ) "" else "type=$marker", *items)
+fun ol(vararg items: String, marker: Char = '1') = htmlList("ol", if (marker == '1') "" else "type=$marker", *items)

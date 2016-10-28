@@ -6,7 +6,7 @@ package org.lwjgl.nanovg.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.nanovg.*
-import org.lwjgl.opengl.GLuint
+import org.lwjgl.opengl.*
 
 val nanovg_gl3 = dependsOn(Binding.OPENGL) {
 	"NanoVGGL3".nativeClass(packageName = NANOVG_PACKAGE, prefix = "NVG", library = NANOVG_LIBRARY) {

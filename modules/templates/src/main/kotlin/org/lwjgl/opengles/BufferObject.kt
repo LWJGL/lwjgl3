@@ -6,25 +6,23 @@ package org.lwjgl.opengles
 
 import org.lwjgl.generator.*
 
-class BufferObject(val binding: String): ParameterModifier() {
-	companion object: ModifierKey<BufferObject>
+class BufferObject(val binding: String) : ParameterModifier() {
+	companion object : ModifierKey<BufferObject>
 
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
-		if ( !param.nativeType.isPointer || param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
+		if (!param.nativeType.isPointer || param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
 			throw IllegalArgumentException("The BufferObject modifier can only be applied on data pointer types or long primitives.")
 
-		when ( this ) {
-			PIXEL_PACK_BUFFER ->
-				{
-					if ( param.paramType !== ParameterType.OUT )
-						throw IllegalArgumentException("The specified BufferObject modifier can only be applied on output parameters.")
-				}
-			else                                ->
-				{
-					if ( param.paramType !== ParameterType.IN )
-						throw IllegalArgumentException("The specified BufferObject modifier can only be applied on input parameters.")
-				}
+		when (this) {
+			PIXEL_PACK_BUFFER -> {
+				if (param.paramType !== ParameterType.OUT)
+					throw IllegalArgumentException("The specified BufferObject modifier can only be applied on output parameters.")
+			}
+			else              -> {
+				if (param.paramType !== ParameterType.IN)
+					throw IllegalArgumentException("The specified BufferObject modifier can only be applied on input parameters.")
+			}
 		}
 	}
 }

@@ -4,8 +4,8 @@
  */
 package org.lwjgl.egl.templates
 
-import org.lwjgl.generator.*
 import org.lwjgl.egl.*
+import org.lwjgl.generator.*
 
 val ANDROID_native_fence_sync = "ANDROIDNativeFenceSync".nativeClassEGL("ANDROID_native_fence_sync", postfix = ANDROID) {
 	documentation =

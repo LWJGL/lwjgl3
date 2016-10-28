@@ -1643,16 +1643,16 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"GetMonitorInfo",
 		"Retrieves information about a display monitor.",
 
-        HMONITOR.IN("hMonitor", "a handle to the display monitor of interest"),
-        LPMONITORINFOEX.OUT(
-	        "lpmi",
-	        """
+		HMONITOR.IN("hMonitor", "a handle to the display monitor of interest"),
+		LPMONITORINFOEX.OUT(
+			"lpmi",
+			"""
 	        a pointer to a ##MONITORINFOEX structure that receives information about the specified display monitor.
 
 			You must set the {@code cbSize} member of the structure to MONITORINFOEX#SIZEOF before calling the {@code GetMonitorInfo} function. Doing so lets
 			the function determine the type of structure you are passing to it.
 	        """
-        )
+		)
 	)
 
 	IntConstant(
@@ -1674,7 +1674,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"EDS_RAWMODE"..0x00000002,
 		"EDS_ROTATEDMODE"..0x00000004
 	).javaDocLinks
-	
+
 	val ChangeDisplaySettingsFlags = IntConstant(
 		"Flags for #ChangeDisplaySettingsEx().",
 
@@ -1695,7 +1695,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 
 	val ChangeDisplaySettingsResults = IntConstant(
 		"Return values for #ChangeDisplaySettingsEx().",
-		
+
 		"DISP_CHANGE_SUCCESSFUL".."0",
 		"DISP_CHANGE_RESTART".."1",
 		"DISP_CHANGE_FAILED".."-1",
@@ -1831,36 +1831,36 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 
 	BOOL(
 		"GetCursorPos",
-	    "Retrieves the position of the mouse cursor, in screen coordinates.",
+		"Retrieves the position of the mouse cursor, in screen coordinates.",
 
-	    LPPOINT.OUT("point", "a pointer to a {@link POINT} structure that receives the screen coordinates of the cursor")
+		LPPOINT.OUT("point", "a pointer to a {@link POINT} structure that receives the screen coordinates of the cursor")
 	)
 
 	BOOL(
 		"SetCursorPos",
-	    """
+		"""
 	    Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent #ClipCursor()
 	    function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle.
 	    """,
 
-	    int.IN("X", "the new x-coordinate of the cursor, in screen coordinates."),
-	    int.IN("Y", "the new y-coordinate of the cursor, in screen coordinates.")
+		int.IN("X", "the new x-coordinate of the cursor, in screen coordinates."),
+		int.IN("Y", "the new y-coordinate of the cursor, in screen coordinates.")
 	)
 
 	BOOL(
 		"ClipCursor",
-	    """
+		"""
 	    Confines the cursor to a rectangular area on the screen. If a subsequent cursor position (set by the #SetCursorPos() function or the mouse) lies
 	    outside the rectangle, the system automatically adjusts the position to keep the cursor inside the rectangular area.
 	    """,
 
-	    const..nullable..RECT_p.IN(
-		    "rect",
-		    """
+		const..nullable..RECT_p.IN(
+			"rect",
+			"""
 		    a pointer to the structure that contains the screen coordinates of the upper-left and lower-right corners of the confining rectangle. If this
 		    parameter is $NULL, the cursor is free to move anywhere on the screen.
 		    """
-	    )
+		)
 	)
 
 	int(
@@ -1906,6 +1906,6 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			"""
 		),
 
-	    returnDoc = "the handle to the previous cursor, if there was one"
+		returnDoc = "the handle to the previous cursor, if there was one"
 	)
 }

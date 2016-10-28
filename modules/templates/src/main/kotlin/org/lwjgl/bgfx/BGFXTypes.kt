@@ -251,7 +251,7 @@ val fatal = "fatal".callback(
 	charASCII_p.IN("_str", "the error message")
 ) {
 	documentation =
-	"""
+		"""
 	If fatal code is not #FATAL_DEBUG_CHECK this callback is called on unrecoverable error. It's not safe to continue, inform user and terminate application
 	from this call.
 
@@ -270,7 +270,7 @@ val trace_vargs = "trace_vargs".callback(
 	va_list.IN("_argList", "variable arguments list initialized with {@code va_start}")
 ) {
 	documentation =
-	"""
+		"""
 	Prints a debug message.
 
 	Not thread safe and it can be called from any thread.
@@ -381,7 +381,7 @@ val bgfx_callback_vtbl_t = struct(BGFX_PACKAGE, "BGFXCallbackVtbl", nativeName =
 
 val bgfx_callback_interface_t = struct(BGFX_PACKAGE, "BGFXCallbackInterface", nativeName = "bgfx_callback_interface_t") {
 	documentation =
-	"""
+		"""
 	Callback interface to implement application specific behavior.
 
 	Cached items are currently used for OpenGL and Direct3D 12 binary shaders.
@@ -438,7 +438,7 @@ val bgfx_platform_data_t_p = struct(BGFX_PACKAGE, "BGFXPlatformData", nativeName
 	nullable..voidptr.member("session", "{@code ovrSession}, for Oculus SDK")
 }.p
 
-val bgfx_internal_data_t_p = struct(BGFX_PACKAGE, "BGFXInternalData", nativeName = "bgfx_internal_data_t", mutable = false)  {
+val bgfx_internal_data_t_p = struct(BGFX_PACKAGE, "BGFXInternalData", nativeName = "bgfx_internal_data_t", mutable = false) {
 	documentation = "Internal data."
 
 	bgfx_caps_t_p.member("caps", "renderer capabilities")
