@@ -32,7 +32,7 @@ fun config() {
 		The shared library may be replaced with a custom build that has more features enabled.
 
 		Dynamic configuration (for enabled features) is also possible, using either the {@code MALLOC_CONF} environment variable or the
-		<a href="http://jemalloc.net/jemalloc.3.html#mallctl_namespace">MALLCTL NAMESPACE</a> and the {@code mallctl*} functions.
+		<a href="http://jemalloc.net/jemalloc.3.html\#mallctl_namespace">MALLCTL NAMESPACE</a> and the {@code mallctl*} functions.
 		"""
 	)
 

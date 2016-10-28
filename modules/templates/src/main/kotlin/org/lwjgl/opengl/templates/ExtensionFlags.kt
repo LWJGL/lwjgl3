@@ -886,7 +886,7 @@ val AMD_shader_ballot = EXT_FLAG.nativeClassGL("AMD_shader_ballot", postfix = AM
 
 		This extension further extends the capabilities of these extensions with additional sub-group operations.
 
-		Requires ${ARB_shader_group_vote.link}, ${ARB_shader_ballot.link} and ${ARB_gpu_shader_int64.link} or ${AMD_gpu_shader_int64.link}.
+		Requires ${ARB_shader_group_vote.cap}, ${ARB_shader_ballot.cap} and ${ARB_gpu_shader_int64.link} or ${AMD_gpu_shader_int64.link}.
 		"""
 }
 val AMD_shader_explicit_vertex_parameter = EXT_FLAG.nativeClassGL("AMD_shader_explicit_vertex_parameter", postfix = AMD) {
@@ -1211,7 +1211,7 @@ val NV_stereo_view_rendering = EXT_FLAG.nativeClassGL("NV_stereo_view_rendering"
 		is also added to specify the viewport mask for the second view. A new layout-qualifier "secondary_view_offset" is added for built-in output "gl_Layer"
 		which allows for the geometry from each view to be sent to different layers for rendering.
 
-		Requires {@link \\#GL_NV_viewport_array2 NV_viewport_array2}.
+		Requires {@link \#GL_NV_viewport_array2 NV_viewport_array2}.
 		"""
 }
 val NV_texture_compression_vtc = EXT_FLAG.nativeClassGL("NV_texture_compression_vtc", postfix = NV) {

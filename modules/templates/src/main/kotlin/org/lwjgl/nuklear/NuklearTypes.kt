@@ -1262,7 +1262,7 @@ val nk_value_getter = "nk_value_getter".callback(
 	voidptr.IN("userdata", ""),
 	int.IN("index", "")
 ) {
-	documentation = "Instances of this interface may be passed to the #nk_plot_function() function."
+	documentation = "Instances of this interface may be passed to the #plot_function() function."
 }
 
 val nk_item_getter = "nk_item_getter".callback(
@@ -1273,5 +1273,5 @@ val nk_item_getter = "nk_item_getter".callback(
 	int.IN("selected", ""),
 	const..charUTF8_pp.IN("item", "")
 ) {
-	documentation = "Instances of this interface may be passed to the #nk_combo_callback() and #nk_combobox_callback() functions."
+	documentation = "Instances of this interface may be passed to the #combo_callback() and #combobox_callback() functions."
 }

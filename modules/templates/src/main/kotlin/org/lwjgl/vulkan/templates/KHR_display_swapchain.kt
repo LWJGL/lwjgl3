@@ -54,7 +54,7 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
 ￿    VkSwapchainKHR*                             pSwapchains);</code></pre>
 
 		<h5>Description</h5>
-		#CreateSharedSwapchains() is similar to #CreateSwapchainKHR(), except that it takes an array of ##VkSwapchainCreateInfoKHR structures, and returns an array of swapchain objects.
+		#CreateSharedSwapchainsKHR() is similar to #CreateSwapchainKHR(), except that it takes an array of ##VkSwapchainCreateInfoKHR structures, and returns an array of swapchain objects.
 
 		The swapchain creation parameters that affect the properties and number of presentable images <b>must</b> match between all the swapchains. If the displays used by any of the swapchains do not use the same presentable image layout or are incompatible in a way that prevents sharing images, swapchain creation will fail with the result code #ERROR_INCOMPATIBLE_DISPLAY_KHR. If any error occurs, no swapchains will be created. Images presented to multiple swapchains <b>must</b> be re-acquired from all of them before transitioning away from #IMAGE_LAYOUT_PRESENT_SRC_KHR. After destroying one or more of the swapchains, the remaining swapchains and the presentable images <b>can</b> continue to be used.
 

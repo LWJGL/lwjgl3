@@ -1387,7 +1387,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array. Must be 1 if caps #CAPS_TEXTURE_2D_ARRAY flag is not set."),
 		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
 		uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
-		const..bgfx_memory_t_p.IN(
+		nullable..const..bgfx_memory_t_p.IN(
 			"_mem",
 			"""
 			texture data. If {@code _mem} is non-$NULL, created texture will be immutable. When {@code _numLayers} is more than 1, expected memory layout is
@@ -1417,7 +1417,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		bool.IN("_hasMips", "indicates that texture contains full mip-map chain"),
 		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
 		uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
-		const..bgfx_memory_t_p.IN("_mem", "texture data. If {@code_mem} is non-$NULL, created texture will be immutable.")
+		nullable..const..bgfx_memory_t_p.IN("_mem", "texture data. If {@code _mem} is non-$NULL, created texture will be immutable.")
 	)
 
 	bgfx_texture_handle_t(
@@ -1429,7 +1429,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array. Must be 1 if caps #CAPS_TEXTURE_CUBE_ARRAY flag is not set."),
 		bgfx_texture_format_t.IN("_format", "", TextureFormat),
 		uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
-		const..bgfx_memory_t_p.IN(
+		nullable..const..bgfx_memory_t_p.IN(
 			"_mem",
 			"""
 			texture data. If {@code _mem} is non-$NULL, created texture will be immutable. When {@code _numLayers} is more than 1, expected memory layout is

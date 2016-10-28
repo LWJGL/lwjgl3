@@ -44,7 +44,7 @@ val EXT_clear_texture = "EXTClearTexture".nativeClassGLES("EXT_clear_texture", p
 	)
 
 	void(
-		"ClearTexSubImage",
+		"ClearTexSubImageEXT",
 		"",
 
 		GLuint.IN("texture", ""),

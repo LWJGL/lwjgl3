@@ -573,6 +573,7 @@
 			<arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 
 			<arg value="-Xdoclint"/>
+			<arg line="-Xmaxwarns 1000"/>
 			<arg value="-html5" if:set="jdk9"/>
 			<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
 			<arg line="-J-Dfile.encoding=UTF8"/>
@@ -726,7 +727,6 @@
 				public="true"
 				doclet="org.lwjgl.system.ExcludeDoclet"
 				docletpath="${bin.generator}"
-				maxmemory="1G"
 				failonerror="true"
 			>
 				<doctitle><![CDATA[<h1>LWJGL - @{title}</h1>]]></doctitle>
@@ -744,7 +744,8 @@
 
 				<arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 
-				<arg value="-Xdoclint"/>
+				<arg value="-Xdoclint:none"/>
+				<arg line="-Xmaxwarns 1"/>
 				<arg value="-html5" if:set="jdk9"/>
 				<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
 				<arg line="-J-Dfile.encoding=UTF8"/>

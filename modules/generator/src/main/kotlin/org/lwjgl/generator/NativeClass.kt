@@ -301,7 +301,8 @@ class NativeClass(
 
 	val link: String get() = "{@link ${this.className} ${this.templateName}}"
 
-	override fun processDocumentation(documentation: String): String = processDocumentation(documentation, prefixConstant, prefixMethod)
+	override fun processDocumentation(documentation: String, forcePackage: Boolean): String =
+		processDocumentation(documentation, prefixConstant, prefixMethod, forcePackage = forcePackage)
 
 	override fun hasField(field: String): Boolean = constantBlocks.any { it.constants.any { it.name == field } }
 	override fun hasMethod(method: String): Boolean = functions.any { it.simpleName == method }

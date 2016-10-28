@@ -189,12 +189,12 @@ abstract class GeneratorTarget(
 
 	abstract fun PrintWriter.generateJava()
 
-	open fun processDocumentation(documentation: String): String = processDocumentation(documentation, "", "")
+	open fun processDocumentation(documentation: String, forcePackage: Boolean = false): String = processDocumentation(documentation, "", "", forcePackage)
 
 	open fun hasField(field: String): Boolean = false
 	open fun hasMethod(method: String): Boolean = false
 
-	protected fun processDocumentation(documentation: String, prefixConstant: String, prefixMethod: String): String {
+	protected fun processDocumentation(documentation: String, prefixConstant: String, prefixMethod: String, forcePackage: Boolean = false): String {
 		val matcher = LINKS.matcher(documentation)
 		if ( !matcher.find() )
 			return documentation
@@ -241,7 +241,11 @@ abstract class GeneratorTarget(
 
 							if (qualifiedLink != null) {
 								val hashIndex = qualifiedLink.indexOf('#')
+
 								className = qualifiedLink.substring(0, hashIndex)
+								if (forcePackage)
+									className = "$packageName.$className"
+
 								prefix = qualifiedLink.substring(hashIndex + 1, qualifiedLink.length - classElement.length)
 							}/* else
 								println("Failed to resolve link: ${matcher.group()}")*/
@@ -334,7 +338,7 @@ fun packageInfo(
 		override fun PrintWriter.generateJava() {
 			print(HEADER)
 			println()
-			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
+			println(processDocumentation(documentation, forcePackage = true).toJavaDoc(indentation = ""))
 			println("package $packageName;\n")
 		}
 	}

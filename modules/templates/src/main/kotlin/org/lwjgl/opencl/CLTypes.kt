@@ -148,21 +148,21 @@ val cl_image_desc_p = struct(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_ima
 	size_t.member(
 		"image_width",
 		"""
-		the width of the image in pixels. For a 2D image and image array, the image width must be &le; CL10#CL_DEVICE_IMAGE2D_MAX_WIDTH. For a 3D image, the
-		image width must be &le; CL10#CL_DEVICE_IMAGE3D_MAX_WIDTH. For a 1D image buffer, the image width must be &le; #DEVICE_IMAGE_MAX_BUFFER_SIZE.
-		For a 1D image and 1D image array, the image width must be &le; CL10#CL_DEVICE_IMAGE2D_MAX_WIDTH.
+		the width of the image in pixels. For a 2D image and image array, the image width must be &le; #DEVICE_IMAGE2D_MAX_WIDTH. For a 3D image, the
+		image width must be &le; #DEVICE_IMAGE3D_MAX_WIDTH. For a 1D image buffer, the image width must be &le; #DEVICE_IMAGE_MAX_BUFFER_SIZE.
+		For a 1D image and 1D image array, the image width must be &le; #DEVICE_IMAGE2D_MAX_WIDTH.
 		"""
 	)
 	size_t.member(
 		"image_height",
 		"""
 		the height of the image in pixels. This is only used if the image is a 2D, 3D or 2D image array. For a 2D image or image array, the image height must
-		be &le; CL10#CL_DEVICE_IMAGE2D_MAX_HEIGHT. For a 3D image, the image height must be &le; CL10#CL_DEVICE_IMAGE3D_MAX_HEIGHT.
+		be &le; #DEVICE_IMAGE2D_MAX_HEIGHT. For a 3D image, the image height must be &le; #DEVICE_IMAGE3D_MAX_HEIGHT.
 		"""
 	)
 	size_t.member(
 		"image_depth",
-		"the depth of the image in pixels. This is only used if the image is a 3D image and must be a value &ge; 1 and &le; CL10#CL_DEVICE_IMAGE3D_MAX_DEPTH."
+		"the depth of the image in pixels. This is only used if the image is a 3D image and must be a value &ge; 1 and &le; #DEVICE_IMAGE3D_MAX_DEPTH."
 	)
 	size_t.member(
 		"image_array_size",
@@ -196,7 +196,7 @@ val cl_image_desc_p = struct(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_ima
 	nullable..cl_mem.member(
 		"buffer",
 		"""
-		refers to a valid buffer memory object if {@code image_type} is CL10#CL_MEM_OBJECT_IMAGE1D_BUFFER. Otherwise it must be $NULL. For a 1D image buffer
+		refers to a valid buffer memory object if {@code image_type} is #MEM_OBJECT_IMAGE1D_BUFFER. Otherwise it must be $NULL. For a 1D image buffer
 		object, the image pixels are taken from the buffer object's data store. When the contents of a buffer object's data store are modified, those changes
 		are reflected in the contents of the 1D image buffer object and vice-versa at corresponding sychronization points. The {@code image_width * size} of
 		element in bytes must be &le; size of buffer object data store.
@@ -397,7 +397,7 @@ val cl_mem_migration_flags_ext = typedef(cl_bitfield, "cl_mem_migration_flags_ex
 
 val cl_image_pitch_info_qcom = typedef(cl_uint, "cl_image_pitch_info_qcom")
 val cl_mem_ext_host_ptr = struct(OPENCL_PACKAGE, "CLMemEXTHostPtr", nativeName = "cl_mem_ext_host_ptr") {
-	documentation = "Accepted by the {@code host_ptr} argument of CL10#clCreateBuffer(), CL10#clCreateImage2D() and CL10#clCreateImage3D()."
+	documentation = "Accepted by the {@code host_ptr} argument of #CreateBuffer(), #CreateImage2D() and #CreateImage3D()."
 
 	cl_uint.member("allocation_type", "type of external memory allocation. Legal values will be defined in layered extensions.")
 	cl_uint.member("host_cache_policy", "host cache policy for this external memory allocation")
