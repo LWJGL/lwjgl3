@@ -642,9 +642,11 @@ public class Mandelbrot {
 		//draw slices
 
 		if ( !syncGLtoCL ) {
-			glWaitSync(glFenceFromCLEvent, 0, 0);
-			glDeleteSync(glFenceFromCLEvent);
-			glFenceFromCLEvent = NULL;
+			if ( glFenceFromCLEvent != NULL ) {
+				glWaitSync(glFenceFromCLEvent, 0, 0);
+				glDeleteSync(glFenceFromCLEvent);
+				glFenceFromCLEvent = NULL;
+			}
 
 			int errcode = clReleaseEvent(clEvent);
 			clEvent = NULL;
