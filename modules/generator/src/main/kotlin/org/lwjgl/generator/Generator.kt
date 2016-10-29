@@ -337,7 +337,7 @@ public final class $className implements Runnable {
 
 		Files.list(packageDirectory)
 			.filter { KOTLIN_PATH_MATCHER.matches(it) }
-			.sorted(Comparator.naturalOrder())
+			.sorted(Path::compareTo)
 			.forEach {
 				try {
 					Class
