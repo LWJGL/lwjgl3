@@ -1151,7 +1151,7 @@ class NativeClassFunction(
 
 					transforms[it] = AutoTypeTargetTransform(autoType)
 				}
-				generateAlternativeMethod(name, transforms, "${autoType.javaMethodType.simpleName} version of:")
+				generateAlternativeMethod(name, transforms)
 			}
 
 			val singleValueParams = it.filter { it has SingleValue }

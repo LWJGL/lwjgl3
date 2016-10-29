@@ -235,7 +235,7 @@ class NativeClass(
 							returns = func.returns,
 							simpleName = func.simpleName,
 							name = func.name,
-							documentation = { processDocumentation("${autoType.primitive}[] version of: ${func.methodLink}").toJavaDoc() },
+							documentation = { processDocumentation("Array version of: ${func.methodLink}").toJavaDoc() },
 							nativeClass = this@NativeClass,
 							parameters = *func.parameters.asSequence().map {
 								if (it.isArrayParameter(autoSizeResultOutParams))
