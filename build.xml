@@ -152,7 +152,6 @@
 			classpath="${env.JAVA_HOME}/lib/tools.jar"
 
 			taskname="javac: Generator Tools &amp; Doclets"
-			unless:set="generator-uptodate"
 		/>
 	</target>
 
@@ -533,7 +532,7 @@
 	</target>
 
 	<!-- Includes all modules for javadoc.lwjgl.org -->
-	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate,-init-compile,-build-version">
+	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate,-init-compile,-compile-generator,-build-version">
 		<delete dir="${bin.html.javadoc}"/>
 		<javadoc
 			destdir="${bin.html.javadoc}"
@@ -546,6 +545,7 @@
 			nohelp="true"
 			notree="true"
 			public="true"
+			Splitindex="true"
 			doclet="org.lwjgl.system.ExcludeDoclet"
 			docletpath="${bin.generator}"
 		    maxmemory="1G"
