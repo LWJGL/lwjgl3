@@ -58,9 +58,8 @@ class Calculator {
 
 	void layout(NkContext ctx, int x, int y) {
 		try ( MemoryStack stack = stackPush() ) {
-			NkPanel layout = NkPanel.mallocStack(stack);
 			NkRect rect = NkRect.mallocStack(stack);
-			if ( nk_begin(ctx, layout, "Calculator", nk_rect(x, y, 180, 250, rect), NK_WINDOW_BORDER | NK_WINDOW_NO_SCROLLBAR | NK_WINDOW_MOVABLE) ) {
+			if ( nk_begin(ctx, "Calculator", nk_rect(x, y, 180, 250, rect), NK_WINDOW_BORDER | NK_WINDOW_NO_SCROLLBAR | NK_WINDOW_MOVABLE) ) {
 				nk_layout_row_dynamic(ctx, 35, 1);
 				{
 					ByteBuffer buffer = stack.calloc(256);

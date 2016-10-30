@@ -35,12 +35,10 @@ class Demo {
 
 	void layout(NkContext ctx, int x, int y) {
 		try ( MemoryStack stack = stackPush() ) {
-			NkPanel layout = NkPanel.mallocStack(stack);
 			NkRect rect = NkRect.mallocStack(stack);
 
 			if ( nk_begin(
 				ctx,
-				layout,
 				"Demo",
 				nk_rect(x, y, 230, 250, rect),
 				NK_WINDOW_BORDER | NK_WINDOW_MOVABLE | NK_WINDOW_SCALABLE | NK_WINDOW_MINIMIZABLE | NK_WINDOW_TITLE
@@ -56,11 +54,10 @@ class Demo {
 				nk_layout_row_dynamic(ctx, 25, 1);
 				nk_property_int(ctx, "Compression:", 0, compression, 100, 10, 1);
 
-				NkPanel combo = NkPanel.mallocStack(stack);
 				nk_layout_row_dynamic(ctx, 20, 1);
 				nk_label(ctx, "background:", NK_TEXT_LEFT);
 				nk_layout_row_dynamic(ctx, 25, 1);
-				if ( nk_combo_begin_color(ctx, combo, background, NkVec2.mallocStack(stack).set(nk_widget_width(ctx), 400)) ) {
+				if ( nk_combo_begin_color(ctx, background, NkVec2.mallocStack(stack).set(nk_widget_width(ctx), 400)) ) {
 					nk_layout_row_dynamic(ctx, 120, 1);
 					nk_color_picker(ctx, background, NK_RGBA);
 					nk_layout_row_dynamic(ctx, 25, 1);

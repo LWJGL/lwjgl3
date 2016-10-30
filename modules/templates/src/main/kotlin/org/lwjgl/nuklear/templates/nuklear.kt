@@ -87,6 +87,163 @@ ENABLE_WARNINGS()""")
 			"Subset which can be used if you do not want to link or use the standard library",
 			"Can be easily modified to only update on user input instead of frame updates"
 		)}
+
+		<h3>FONT</h3>
+		Font handling in this library was designed to be quite customizable and lets you decide what you want to use and what you want to provide. There are
+		three different ways to use the font atlas. The first two will use your font handling scheme and only requires essential data to run nuklear. The next
+		slightly more advanced features is font handling with vertex buffer output. <strike>Finally the most complex API wise is using nuklears font baking
+		API.</strike>
+		${ol(
+			"""
+			Using your own implementation without vertex buffer output
+			<hr>
+			So first of the easiest way to do font handling is by just providing a ##NkUserFont struct which only requires the height in pixel of the used font
+			and a callback to calculate the width of a string. This way of handling fonts is best fitted for using the normal draw shape command API where you
+			do all the text drawing yourself and the library does not require any kind of deeper knowledge about which font handling mechanism you use.
+			IMPORTANT: the ##NkUserFont pointer provided to nuklear has to persist over the complete life time! I know this sucks but it is currently the only
+			way to switch between fonts.
+
+			${codeBlock("""
+float your_text_width_calculation(nk_handle handle, float height, const char *text, int len)
+{
+	your_font_type *type = handle.ptr;
+	float text_width = ...;
+	return text_width;
+}
+
+struct nk_user_font font;
+font.userdata.ptr = &your_font_class_or_struct;
+font.height = your_font_height;
+font.width = your_text_width_calculation;
+
+struct nk_context ctx;
+nk_init_default(&ctx, &font);""")}
+			""",
+			"""
+			Using your own implementation with vertex buffer output
+			<hr>
+			While the first approach works fine if you don't want to use the optional vertex buffer output it is not enough if you do. To get font handling
+			working for these cases you have to provide two additional parameters inside the `nk_user_font`. First a texture atlas handle used to draw text as
+			subimages of a bigger font atlas texture and a callback to query a character's glyph information (offset, size, ...). So it is still possible to
+			provide your own font and use the vertex buffer output.
+
+			${codeBlock("""
+float your_text_width_calculation(nk_handle handle, float height, const char *text, int len)
+{
+	your_font_type *type = handle.ptr;
+	float text_width = ...;
+	return text_width;
+}
+void query_your_font_glyph(nk_handle handle, float font_height, struct nk_user_font_glyph *glyph, nk_rune codepoint, nk_rune next_codepoint)
+{
+	your_font_type *type = handle.ptr;
+	glyph.width = ...;
+	glyph.height = ...;
+	glyph.xadvance = ...;
+	glyph.uv[0].x = ...;
+	glyph.uv[0].y = ...;
+	glyph.uv[1].x = ...;
+	glyph.uv[1].y = ...;
+	glyph.offset.x = ...;
+	glyph.offset.y = ...;
+}
+
+struct nk_user_font font;
+font.userdata.ptr = &your_font_class_or_struct;
+font.height = your_font_height;
+font.width = your_text_width_calculation;
+font.query = query_your_font_glyph;
+font.texture.id = your_font_texture;
+
+struct nk_context ctx;
+nk_init_default(&ctx, &font);""")}
+			"""
+		)}
+
+		<h3>MEMORY BUFFER</h3>
+		A basic (double)-buffer with linear allocation and resetting as only freeing policy. The buffer's main purpose is to control all memory management
+		inside the GUI toolkit and still leave memory control as much as possible in the hand of the user while also making sure the library is easy to use if
+		not as much control is needed. In general all memory inside this library can be provided from the user in three different ways.
+
+		The first way and the one providing most control is by just passing a fixed size memory block. In this case all control lies in the hand of the user
+		since he can exactly control where the memory comes from and how much memory the library should consume. Of course using the fixed size API removes the
+		ability to automatically resize a buffer if not enough memory is provided so you have to take over the resizing. While being a fixed sized buffer
+		sounds quite limiting, it is very effective in this library since the actual memory consumption is quite stable and has a fixed upper bound for a lot
+		of cases.
+
+		If you don't want to think about how much memory the library should allocate at all time or have a very dynamic UI with unpredictable memory
+		consumption habits but still want control over memory allocation you can use the dynamic allocator based API. The allocator consists of two callbacks
+		for allocating and freeing memory and optional userdata so you can plugin your own allocator.
+
+		<h3>TEXT EDITOR</h3>
+		Editing text in this library is handled by either #edit_string() or #edit_buffer(). But like almost everything in this library there are multiple
+		ways of doing it and a balance between control and ease of use with memory as well as functionality controlled by flags.
+
+		This library generally allows three different levels of memory control: First of is the most basic way of just providing a simple char array with
+		string length. This method is probably the easiest way of handling simple user text input. Main upside is complete control over memory while the
+		biggest downside in comparsion with the other two approaches is missing undo/redo.
+
+		For UIs that require undo/redo the second way was created. It is based on a fixed size ##NkTextEdit struct, which has an internal undo/redo stack. This
+		is mainly useful if you want something more like a text editor but don't want to have a dynamically growing buffer.
+
+		The final way is using a dynamically growing nk_text_edit struct, which has both a default version if you don't care where memory comes from and an
+		allocator version if you do. While the text editor is quite powerful for its complexity I would not recommend editing gigabytes of data with it. It is
+		rather designed for uses cases which make sense for a GUI library not for an full blown text editor.
+		
+		<h3>DRAWING</h3>
+		This library was designed to be render backend agnostic so it does not draw anything to screen. Instead all drawn shapes, widgets are made of, are
+		buffered into memory and make up a command queue. Each frame therefore fills the command buffer with draw commands that then need to be executed by the
+		user and his own render backend. After that the command buffer needs to be cleared and a new frame can be started. It is probably important to note
+		that the command buffer is the main drawing API and the optional vertex buffer API only takes this format and converts it into a hardware accessible
+		format.
+
+		To use the command queue to draw your own widgets you can access the command buffer of each window by calling #window_get_canvas() after previously
+		having called #begin():
+		${codeBlock("""
+void draw_red_rectangle_widget(struct nk_context *ctx)
+{
+    struct nk_command_buffer *canvas;
+    struct nk_input *input = &ctx->input;
+    canvas = nk_window_get_canvas(ctx);
+
+    struct nk_rect space;
+    enum nk_widget_layout_states state;
+    state = nk_widget(&space, ctx);
+    if (!state) return;
+
+    if (state != NK_WIDGET_ROM)
+        update_your_widget_by_user_input(...);
+    nk_fill_rect(canvas, space, 0, nk_rgb(255,0,0));
+}
+
+if (nk_begin(...)) {
+    nk_layout_row_dynamic(ctx, 25, 1);
+    draw_red_rectangle_widget(ctx);
+}
+nk_end(..)""")}
+		Important to know if you want to create your own widgets is the #widget() call. It allocates space on the panel reserved for this widget to be used,
+		but also returns the state of the widget space. If your widget is not seen and does not have to be updated it is '0' and you can just return. If it
+		only has to be drawn the state will be #WIDGET_ROM otherwise you can do both update and draw your widget. The reason for seperating is to onl draw and
+		update what is actually neccessary which is crucial for performance.
+
+		<h3>STACK</h3>
+		The style modifier stack can be used to temporarily change a property inside `nk_style`. For example if you want a special red button you can
+		temporarily push the old button color onto a stack draw the button with a red color and then you just pop the old color back from the stack:
+		${codeBlock("""
+nk_style_push_style_item(ctx, &ctx->style.button.normal, nk_style_item_color(nk_rgb(255,0,0)));
+nk_style_push_style_item(ctx, &ctx->style.button.hover, nk_style_item_color(nk_rgb(255,0,0)));
+nk_style_push_style_item(ctx, &ctx->style.button.active, nk_style_item_color(nk_rgb(255,0,0)));
+nk_style_push_vec2(ctx, &cx->style.button.padding, nk_vec2(2,2));
+ 
+nk_button(...);
+ 
+nk_style_pop_style_item(ctx);
+nk_style_pop_style_item(ctx);
+nk_style_pop_style_item(ctx);
+nk_style_pop_vec2(ctx);""")}
+
+		Nuklear has a stack for style_items, float properties, vector properties, flags, colors, fonts and for button_behavior. Each has it's own fixed size
+		stack which can be changed in compile time.
 		"""
 
 	IntConstant(
@@ -400,15 +557,15 @@ ENABLE_WARNINGS()""")
 	val PanelFlags = EnumConstant(
 		"nk_panel_flags",
 
-		"WINDOW_BORDER".enum("Draws a border around the window to visually separate the window * from the background", 0.NK_FLAG),
-		"WINDOW_MOVABLE".enum("The movable flag indicates that a window can be moved by user input or * by dragging the window header", 1.NK_FLAG),
-		"WINDOW_SCALABLE".enum("The scalable flag indicates that a window can be scaled by user input * by dragging a scaler icon at the button of the window", 2.NK_FLAG),
+		"WINDOW_BORDER".enum("Draws a border around the window to visually separate the window from the background", 0.NK_FLAG),
+		"WINDOW_MOVABLE".enum("The movable flag indicates that a window can be moved by user input or by dragging the window header", 1.NK_FLAG),
+		"WINDOW_SCALABLE".enum("The scalable flag indicates that a window can be scaled by user input by dragging a scaler icon at the button of the window", 2.NK_FLAG),
 		"WINDOW_CLOSABLE".enum("adds a closable icon into the header", 3.NK_FLAG),
 		"WINDOW_MINIMIZABLE".enum("adds a minimize icon into the header", 4.NK_FLAG),
 		"WINDOW_NO_SCROLLBAR".enum("Removes the scrollbar from the window", 5.NK_FLAG),
 		"WINDOW_TITLE".enum("Forces a header at the top at the window showing the title", 6.NK_FLAG),
-		"WINDOW_SCROLL_AUTO_HIDE".enum("Automatically hides the window scrollbar if no user interaction", 7.NK_FLAG),
-		"WINDOW_BACKGROUND".enum("Keep window always in the background", 8.NK_FLAG)
+		"WINDOW_SCROLL_AUTO_HIDE".enum("Automatically hides the window scrollbar if no user interaction: also requires delta time in {@code nk_context} to be set each frame", 7.NK_FLAG),
+		"WINDOW_BACKGROUND".enum("Always keep window in the background", 8.NK_FLAG)
 	).javaDocLinks
 
 	EnumConstant(
@@ -439,13 +596,6 @@ ENABLE_WARNINGS()""")
 		"TEXT_EDIT_MODE_VIEW".enum,
 		"TEXT_EDIT_MODE_INSERT".enum,
 		"TEXT_EDIT_MODE_REPLACE".enum
-	)
-
-	EnumConstant(
-		"nk_font_coord_type",
-
-		"COORD_UV".enum("texture coordinates inside font glyphs are clamped between 0-1"),
-		"COORD_PIXEL".enum("texture coordinates inside font glyphs are in absolute pixel")
 	)
 
 	EnumConstant(
@@ -591,21 +741,21 @@ ENABLE_WARNINGS()""")
 		)
 
 		intb(
+			"init",
+			"",
+
+			ctx,
+			nk_allocator_p.IN("allocator", ""),
+			nullable..const..nk_user_font_p.IN("font", "")
+		)
+
+		intb(
 			"init_custom",
 			"",
 
 			ctx,
 			nk_buffer_p.IN("cmds", ""),
 			nk_buffer_p.IN("pool", ""),
-			nullable..const..nk_user_font_p.IN("font", "")
-		)
-
-		intb(
-			"init",
-			"",
-
-			ctx,
-			nk_allocator_p.IN("allocator", ""),
 			nullable..const..nk_user_font_p.IN("font", "")
 		)
 
@@ -625,7 +775,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.OUT("panel", ""),
 			const..charUTF8_p.IN("title", ""),
 			nk_rect.IN("bounds", ""),
 			nk_flags.IN("flags", "", WindowFlags, LinkMode.BITFIELD)
@@ -636,7 +785,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.OUT("panel", ""),
 			const..charUTF8_p.IN("name", ""),
 			const..charUTF8_p.IN("title", ""),
 			nk_rect.IN("bounds", ""),
@@ -884,7 +1032,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("title", ""),
 			nk_flags.IN("flags", "")
 		)
@@ -1613,7 +1760,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			nk_popup_type.IN("type", "", PopupTypes),
 			const..charUTF8_p.IN("title", ""),
 			nk_flags.IN("flags", "", PanelFlags),
@@ -1728,7 +1874,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("selected", ""),
 			AutoSize("selected")..int.IN("len", ""),
 			nk_vec2.IN("size", "")
@@ -1739,7 +1884,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("selected", ""),
 			nk_vec2.IN("size", "")
 		)
@@ -1749,7 +1893,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			nk_color.IN("color", ""),
 			nk_vec2.IN("size", "")
 		)
@@ -1759,7 +1902,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
 			nk_vec2.IN("size", "")
 		)
@@ -1769,7 +1911,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("selected", ""),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
 			nk_vec2.IN("size", "")
@@ -1780,7 +1921,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("selected", ""),
 			AutoSize("selected")..int.IN("len", ""),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
@@ -1792,7 +1932,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			nk_image.IN("img", ""),
 			nk_vec2.IN("size", "")
 		)
@@ -1802,7 +1941,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("selected", ""),
 			nk_image.IN("img", ""),
 			nk_vec2.IN("size", "")
@@ -1813,7 +1951,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("selected", ""),
 			AutoSize("selected")..int.IN("len", ""),
 			nk_image.IN("img", ""),
@@ -1889,7 +2026,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			nk_flags.IN("flags", "", WindowFlags),
 			nk_vec2.IN("size", ""),
 			nk_rect.IN("trigger_bounds", "")
@@ -1972,7 +2108,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			float.IN("width", "")
 		)
 
@@ -1986,7 +2121,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			AutoSize("text")..int.IN("len", ""),
 			nk_flags.IN("align", "", TextAlignments),
@@ -1998,7 +2132,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			nk_flags.IN("align", "", TextAlignments),
 			nk_vec2.IN("size", "")
@@ -2009,7 +2142,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			nk_image.IN("img", ""),
 			nk_vec2.IN("size", "")
@@ -2020,7 +2152,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			AutoSize("text")..int.IN("len", ""),
 			nk_flags.IN("align", "", TextAlignments),
@@ -2033,7 +2164,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			nk_flags.IN("align", "", TextAlignments),
 			nk_image.IN("img", ""),
@@ -2045,7 +2175,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),
 			nk_vec2.IN("size", "")
@@ -2056,7 +2185,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			AutoSize("text")..int.IN("len", ""),
 			nk_flags.IN("align", "", TextAlignments),
@@ -2069,7 +2197,6 @@ ENABLE_WARNINGS()""")
 			"",
 
 			ctx,
-			nk_panel_p.IN("layout", ""),
 			const..charUTF8_p.IN("text", ""),
 			nk_flags.IN("align", "", TextAlignments),
 			nk_symbol_type.IN("symbol", "", SymbolTypes),

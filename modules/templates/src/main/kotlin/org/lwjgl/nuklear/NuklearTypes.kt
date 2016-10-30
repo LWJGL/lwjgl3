@@ -197,6 +197,13 @@ val nk_buffer_p = nk_buffer.p
 // STRING
 
 val nk_str = struct(NUKLEAR_PACKAGE, "NkStr", nativeName = "struct nk_str", mutable = false) {
+	documentation =
+		"""
+		Basic string buffer which is only used in context with the text editor to manage and manipulate dynamic or
+		fixed size string content. This is <em>NOT</em> the default string handling method. The only instance you
+		should have any contact with this API is if you interact with an ##NkTextEdit object inside one of the copy and
+		paste functions and even there only for more advanced cases.
+		"""
 	nk_buffer.member("buffer", "")
 	int.member("len", "in codepoints/runes/glyphs")
 }
@@ -562,18 +569,18 @@ val nk_draw_command_p = struct(NUKLEAR_PACKAGE, "NkDrawCommand", nativeName = "s
 }.p
 
 val nk_draw_list = struct(NUKLEAR_PACKAGE, "NkDrawList", nativeName = "struct nk_draw_list", mutable = false) {
-	nk_convert_config.member("config", "")
 	nk_rect.member("clip_rect", "")
+	nk_vec2.array("circle_vtx", "", size = 12)
+	nk_convert_config.member("config", "")
 	nullable..nk_buffer_p.member("buffer", "")
 	nullable..nk_buffer_p.member("vertices", "")
 	nullable..nk_buffer_p.member("elements", "")
 	unsigned_int.member("element_count", "")
 	unsigned_int.member("vertex_count", "")
-	nk_size.member("cmd_offset", "")
 	unsigned_int.member("cmd_count", "")
+	nk_size.member("cmd_offset", "")
 	unsigned_int.member("path_count", "")
 	unsigned_int.member("path_offset", "")
-	nk_vec2.array("circle_vtx", "", size = 12)
 	nk_handle.member("userdata", "")
 }
 val nk_draw_list_p = nk_draw_list.p
@@ -1041,12 +1048,12 @@ val nk_chart_slot = struct(NUKLEAR_PACKAGE, "NkChartSlot", nativeName = "struct 
 
 val NK_CHART_MAX_SLOT = 4
 val nk_chart = struct(NUKLEAR_PACKAGE, "NkChart", nativeName = "struct nk_chart", mutable = false) {
-	nk_chart_slot.array("slots", "", size = NK_CHART_MAX_SLOT)
 	int.member("slot", "")
 	float.member("x", "")
 	float.member("y", "")
 	float.member("w", "")
 	float.member("h", "")
+	nk_chart_slot.array("slots", "", size = NK_CHART_MAX_SLOT)
 }
 
 val nk_row_layout = struct(NUKLEAR_PACKAGE, "NkRowLayout", nativeName = "struct nk_row_layout", mutable = false) {
