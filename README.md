@@ -5,30 +5,61 @@
 
 ## LWJGL - Lightweight Java Game Library 3
 
-This repository hosts **LWJGL 3**, the complete rewrite and next major version of [LWJGL](https://www.lwjgl.org). Everything you need to know about the project can be found in the [Wiki](https://github.com/LWJGL/lwjgl3-wiki/wiki). Other useful links:
+LWJGL(https://www.lwjgl.org) is a Java library that enables cross-platform
+access to popular native APIs useful in the development of graphics
+(OpenGL/Vulkan), audio (OpenAL) and parallel computing (OpenCL) applications.
+This access is direct and high-performance, yet also wrapped in a type-safe
+and user-friendly layer, appropriate for the Java ecosystem.
+
+LWJGL is an enabling technology and provides low-level access. It is not a
+framework and does not provide higher-level utilities than what the native
+libraries expose. As such, novice programmers are encouraged to try one of
+the frameworks or game engines that make use of LWJGL, before working
+directly with the library.
+
+LWJGL is open source software and freely available at no charge.
+
+Useful links:
 
 - [Release Notes](https://github.com/LWJGL/lwjgl3/tree/master/doc/notes)  
 - [Forum](http://forum.lwjgl.org)
 - [JavaDoc](http://javadoc.lwjgl.org)
 - [Blog](http://blog.lwjgl.org)
 - [Twitter](https://twitter.com/LWJGL)
+- [Wiki](https://github.com/LWJGL/lwjgl3-wiki/wiki) (partially outdated)
 
-For a quick overview of the project structure, installation instructions and configuration options, see [doc/README](https://github.com/LWJGL/lwjgl3/tree/master/doc).
+For a quick overview of the project structure, installation instructions and
+configuration options, see [doc/README](https://github.com/LWJGL/lwjgl3/tree/master/doc).
 
 For migrating LWJGL 2 code to LWJGL 3, see the [Migration Guide](https://github.com/LWJGL/lwjgl3-wiki/wiki/2.6.6-LWJGL3-migration).
 
-LWJGL 3 can be used with **Maven/Gradle/Ivy**, with the following dependencies:
+As of version `3.1.0`, LWJGL is distributed as a set of modules. Only the
+core module is required and all bindings are optional (but some bindings
+depend on other bindings). The easiest way to download LWJGL is to use the
+[build configurator](https://www.lwjgl.org/download) on the website.
 
-```
-org.lwjgl:lwjgl:${version}
-org.lwjgl:lwjgl-platform:${version}:natives-windows
-org.lwjgl:lwjgl-platform:${version}:natives-linux
-org.lwjgl:lwjgl-platform:${version}:natives-osx
-```
+The build configurator generates **Maven & Gradle** declarations that can be
+added to existing projects. This is the easiest way to use LWJGL while
+developing.
 
-where `${version}` is a version (e.g. `3.0.0`) released on Maven Central. **Nightly builds** are also available from the *Sonatype Nexus* [repository](https://oss.sonatype.org/content/repositories/snapshots), with a snapshot build version (e.g. `3.1.0-SNAPSHOT`).
+LWJGL can also be downloaded as a simple set of JAR files. Each module
+consists of the following files:
 
-LWJGL 3 requires Java 8 or later to build and run and currently supports the following platforms/architectures:
+* lwjgl-&lt;module&gt;.jar
+* lwjgl-&lt;module&gt;-sources.jar
+* lwjgl-&lt;module&gt;-javadoc.jar
+* lwjgl-&lt;module&gt;-natives-&lt;platform&gt;.jar (for some bindings)
+
+To compile and run an LWJGL application, the base and natives JAR files of
+the core module and each binding used should be added to the classpath. LWJGL
+extracts the natives to a temporary folder and loads them automatically, so
+no further configuration is necessary. If more customization is required
+(e.g. when creating a platform-specific installer) the natives may be
+extracted manually and loaded via `java.library.path`. See the [Configuration](https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/main/java/org/lwjgl/system/Configuration.java)
+class for more options.
+
+LWJGL 3 requires Java 8 or later to build and run and currently supports the
+following platforms/architectures:
 
 - Linux x64
 - MacOS X x64
@@ -59,8 +90,8 @@ LWJGL 3 includes the following bindings:
 |-------|-----------|
 |[GLFW](http://www.glfw.org/)|Create multiple windows, handle user input (keyboard, mouse, gaming peripherals) and manage contexts. Also features multi-monitor support, clipboard access, file drag-n-drop, and [much more](http://www.glfw.org/docs/latest/news.html).|
 |[JAWT](http://docs.oracle.com/javase/8/docs/technotes/guides/awt/AWT_Native_Interface.html)|The AWT native interface.|
-|[LibOVR](https://developer.oculus.com/documentation/)|The API of the Oculus SDK.|
 |[nfd](https://github.com/mlabbe/nativefiledialog)|A tiny, neat C library that portably invokes native file open and save dialogs.|
+|[tinyfd](https://sourceforge.net/projects/tinyfiledialogs/)|A native dialog library.|
 
 #### Audio
 
@@ -73,7 +104,10 @@ LWJGL 3 includes the following bindings:
 
 |Library|Description|
 |-------|-----------|
+|[bgfx](https://bkaradzic.github.io/bgfx/)|Cross-platform, graphics API agnostic, “Bring Your Own Engine/Framework” style rendering library, licensed under permissive BSD-2 clause open source license.|
+|[LibOVR](https://developer.oculus.com/documentation/)|The API of the Oculus SDK.|
 |[NanoVG](https://github.com/memononen/nanovg)|A small antialiased vector graphics rendering library for OpenGL.|
+|[Nuklear](https://github.com/vurtun/nuklear)|A minimal state immediate mode graphical user interface toolkit written in ANSI C and licensed under public domain.|
 |[par_shapes](https://github.com/prideout/par)|Generate parametric surfaces and other simple shapes.|
 
 #### [stb](https://github.com/nothings/stb) - single-file public domain libraries for C/C++
@@ -95,6 +129,7 @@ LWJGL 3 includes the following bindings:
 |-------|-----------|
 |[dyncall](http://www.dyncall.org/)|Encapsulates architecture-, OS- and compiler-specific function call semantics in a virtual bind argument parameters from left to right and then call interface allowing programmers to call C functions in a completely dynamic manner.|
 |[jemalloc](http://www.canonware.com/jemalloc/)|A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.|
+[LMDB](https://symas.com/products/lightning-memory-mapped-database/)|An extraordinarily fast, memory-efficient database. With memory-mapped files, it has the read performance of a pure in-memory database while retaining the persistence of standard disk-based databases.|
 |[xxHash](https://github.com/Cyan4973/xxHash)|An Extremely fast Hash algorithm, running at RAM speed limits.|
 
 Use of a binding is subject to the terms of the [corresponding license](https://github.com/LWJGL/lwjgl3/tree/master/doc/3rdparty).
