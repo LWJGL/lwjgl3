@@ -25,13 +25,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	IntConstant(
 		"The minor version number of the GLFW library. This is incremented when features are added to the API but it remains backward-compatible.",
 
-		"VERSION_MINOR".."2"
+		"VERSION_MINOR".."3"
 	)
 
 	IntConstant(
 		"The revision number of the GLFW library. This is incremented when a bug fix release is made that does not contain any API changes.",
 
-		"VERSION_REVISION".."1"
+		"VERSION_REVISION".."0"
 	)
 
 	IntConstant(
@@ -1072,6 +1072,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		screen windows, including the creation of so called <i>windowed full screen</i> or <i>borderless full screen</i> windows, see
 		<a href="http://www.glfw.org/docs/latest/window.html\#window_windowed_full_screen">full screen</a>.
 
+		Once you have created the window, you can switch it between windowed and full screen mode with #SetWindowMonitor(). If the window has an OpenGL or
+		OpenGL ES context, it will be unaffected.
+
 		By default, newly created windows use the placement recommended by the window system. To create the window at a specific position, make it initially
 		invisible using the #VISIBLE window hint, set its <a href="http://www.glfw.org/docs/latest/window.html\#window_pos">position</a> and then
 		<a href="http://www.glfw.org/docs/latest/window.html\#window_hide">show</a> it.
@@ -1931,6 +1934,24 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	)
 
 	int(
+		"GetKeyScancode",
+		"""
+		Returns the platform dependent scancode of the specified key.
+
+		This function returns the platform dependent scancode of the specified key. This is intended for platform specific default keybindings.
+
+		If the key is #KEY_UNKNOWN or does not exist on the keyboard this method will return {@code -1}.
+
+		This function may be called from any thread.
+		""",
+
+		int.IN("key", "the key to query, or #KEY_UNKNOWN"),
+
+		returnDoc = "the platform dependent scancode for the key, or {@code -1} if an errror occurred",
+		since = "version 3.3"
+	)
+
+	int(
 		"GetKey",
 		"""
 		Returns the last state reported for the specified key to the specified window. The returned state is one of #PRESS or #RELEASE. The higher-level action
@@ -2288,7 +2309,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		int.IN("jid", "the joystick to query"),
-		AutoSizeResult..int_p.OUT("count", "where to store the number of axis values in the returned array. This is set to zero if an error occurred."),
+		AutoSizeResult..int_p.OUT(
+			"count",
+			"where to store the number of axis values in the returned array. This is set to zero if the joystick is not present or an error occurred."
+		),
 
 		returnDoc = "an array of axis values, or $NULL if the joystick is not present",
 		since = "version 2.2"
@@ -2309,7 +2333,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		int.IN("jid", "the joystick to query"),
-		AutoSizeResult..int_p.OUT("count", "where to store the number of button states in the returned array. This is set to zero if an error occurred."),
+		AutoSizeResult..int_p.OUT(
+			"count",
+			"where to store the number of button states in the returned array. This is set to zero if the joystick is not present or an error occurred."
+		),
 
 		returnDoc = "an array of button states, or $NULL if the joystick is not present",
 		since = "version 2.2"
