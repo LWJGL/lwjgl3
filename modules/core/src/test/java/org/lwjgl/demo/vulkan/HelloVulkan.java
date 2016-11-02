@@ -26,24 +26,17 @@ import static org.lwjgl.vulkan.VK10.*;
  * Copyright (c) 2015-2016 Valve Corporation
  * Copyright (c) 2015-2016 LunarG, Inc.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and/or associated documentation files (the "Materials"), to
- * deal in the Materials without restriction, including without limitation the
- * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
- * sell copies of the Materials, and to permit persons to whom the Materials are
- * furnished to do so, subject to the following conditions:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The above copyright notice(s) and this permission notice shall be included in
- * all copies or substantial portions of the Materials.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- *
- * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE MATERIALS OR THE
- * USE OR OTHER DEALINGS IN THE MATERIALS.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * Author: Chia-I Wu <olvaffe@gmail.com>
  * Author: Cody Northrop <cody@lunarg.com>
@@ -51,6 +44,8 @@ import static org.lwjgl.vulkan.VK10.*;
  * Author: Ian Elliott <ian@LunarG.com>
  * Author: Jon Ashburn <jon@lunarg.com>
  * Author: Piers Daniell <pdaniell@nvidia.com>
+ * Author: Gwan-gyeong Mun <elongbug@gmail.com>
+ * Porter: Camilla Berglund <elmindreda@glfw.org>
  */
 
 /** Simple Vulkan demo. Ported from the GLFW <a href="https://github.com/glfw/glfw/blob/master/tests/vulkan.c">vulkan</a> test. */
@@ -217,8 +212,6 @@ public final class HelloVulkan {
 	private final LongBuffer    lp = memAllocLong(1);
 	private final PointerBuffer pp = memAllocPointer(1);
 
-	private PointerBuffer device_validation_layers = memAllocPointer(10);
-
 	private PointerBuffer extension_names = memAllocPointer(64);
 
 	private VkInstance       inst;
@@ -226,7 +219,8 @@ public final class HelloVulkan {
 
 	private long msg_callback;
 
-	private VkPhysicalDeviceProperties gpu_props = VkPhysicalDeviceProperties.malloc();
+	private VkPhysicalDeviceProperties gpu_props    = VkPhysicalDeviceProperties.malloc();
+	private VkPhysicalDeviceFeatures   gpu_features = VkPhysicalDeviceFeatures.malloc();
 
 	private VkQueueFamilyProperties.Buffer queue_props;
 
@@ -297,7 +291,7 @@ public final class HelloVulkan {
 			} else if ( (flags & VK_DEBUG_REPORT_DEBUG_BIT_EXT) != 0 ) {
 				type = "DEBUG";
 			} else
-				type ="UNKNOWN";
+				type = "UNKNOWN";
 
 			System.err.format(
 				"%s: [%s] Code %d : %s\n",
@@ -354,41 +348,49 @@ public final class HelloVulkan {
 	}
 
 	private void demo_init_vk() {
-		if ( VALIDATE ) {
-			device_validation_layers
-				//.put(memASCII("VK_LAYER_LUNARG_standard_validation"))
-				.put(memASCII("VK_LAYER_GOOGLE_threading"))
-				.put(memASCII("VK_LAYER_LUNARG_parameter_validation"))
-				.put(memASCII("VK_LAYER_LUNARG_object_tracker"))
-				.put(memASCII("VK_LAYER_LUNARG_image"))
-				.put(memASCII("VK_LAYER_LUNARG_core_validation"))
-				.put(memASCII("VK_LAYER_LUNARG_swapchain"))
-				.put(memASCII("VK_LAYER_GOOGLE_unique_objects"));
-				//.put(memASCII("VK_LAYER_LUNARG_api_dump"))
-		}
-		device_validation_layers.flip();
+		String[] instance_validation_layers_alt1 = {
+			"VK_LAYER_LUNARG_standard_validation"
+		};
 
+		String[] instance_validation_layers_alt2 = {
+			"VK_LAYER_GOOGLE_threading", "VK_LAYER_LUNARG_parameter_validation",
+			"VK_LAYER_LUNARG_object_tracker", "VK_LAYER_LUNARG_image",
+			"VK_LAYER_LUNARG_core_validation", "VK_LAYER_LUNARG_swapchain",
+			"VK_LAYER_GOOGLE_unique_objects"
+		};
+
+		PointerBuffer instance_validation_layers = null;
 		try ( MemoryStack stack = stackPush() ) {
-			PointerBuffer instance_validation_layers = stack.mallocPointer(device_validation_layers.remaining());
-			instance_validation_layers.put(device_validation_layers);
-			instance_validation_layers.flip();
-			device_validation_layers.flip();
-
 			boolean validation_found = false;
-			int err = vkEnumerateInstanceLayerProperties(ip, null);
-			check(err);
+			if ( VALIDATE ) {
+				check(vkEnumerateInstanceLayerProperties(ip, null));
 
-			if ( ip.get(0) > 0 ) {
-				VkLayerProperties.Buffer instance_layers = VkLayerProperties.mallocStack(ip.get(0), stack);
-				err = vkEnumerateInstanceLayerProperties(ip, instance_layers);
-				check(err);
+				if ( ip.get(0) > 0 ) {
+					VkLayerProperties.Buffer instance_layers = VkLayerProperties.mallocStack(ip.get(0), stack);
+					check(vkEnumerateInstanceLayerProperties(ip, instance_layers));
 
-				if ( VALIDATE )
+					instance_validation_layers = stack.mallocPointer(instance_validation_layers_alt1.length);
+					for ( int i = 0; i < instance_validation_layers_alt1.length; i++ ) {
+						instance_validation_layers.put(i, stack.ASCII(instance_validation_layers_alt1[i]));
+					}
+
 					validation_found = demo_check_layers(instance_validation_layers, instance_layers);
-			}
 
-			if ( VALIDATE && !validation_found )
-				throw new IllegalStateException("vkEnumerateInstanceLayerProperties failed to find required validation layer.");
+					if ( !validation_found ) {
+						// use alternative set of validation layers
+						instance_validation_layers = stack.mallocPointer(instance_validation_layers_alt2.length);
+						for ( int i = 0; i < instance_validation_layers_alt1.length; i++ ) {
+							instance_validation_layers.put(i, stack.ASCII(instance_validation_layers_alt2[i]));
+						}
+
+						validation_found = demo_check_layers(instance_validation_layers, instance_layers);
+					}
+				}
+
+				if ( !validation_found ) {
+					throw new IllegalStateException("vkEnumerateInstanceLayerProperties failed to find required validation layer.");
+				}
+			}
 
 			PointerBuffer required_extensions = glfwGetRequiredInstanceExtensions();
 			if ( required_extensions == null )
@@ -398,13 +400,11 @@ public final class HelloVulkan {
 				extension_names.put(required_extensions.get(i));
 			}
 
-			err = vkEnumerateInstanceExtensionProperties((String)null, ip, null);
-			check(err);
+			check(vkEnumerateInstanceExtensionProperties((String)null, ip, null));
 
 			if ( ip.get(0) != 0 ) {
 				VkExtensionProperties.Buffer instance_extensions = VkExtensionProperties.mallocStack(ip.get(0), stack);
-				err = vkEnumerateInstanceExtensionProperties((String)null, ip, instance_extensions);
-				check(err);
+				check(vkEnumerateInstanceExtensionProperties((String)null, ip, instance_extensions));
 
 				for ( int i = 0; i < ip.get(0); i++ ) {
 					instance_extensions.position(i);
@@ -416,7 +416,7 @@ public final class HelloVulkan {
 				}
 			}
 
-			ByteBuffer APP_SHORT_NAME = stack.UTF8("vulkan");
+			ByteBuffer APP_SHORT_NAME = stack.UTF8("tri");
 
 			VkApplicationInfo app = VkApplicationInfo.mallocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_APPLICATION_INFO)
@@ -449,7 +449,7 @@ public final class HelloVulkan {
 				inst_info.pNext(dbgCreateInfo.address());
 			}
 
-			err = vkCreateInstance(inst_info, null, pp);
+			int err = vkCreateInstance(inst_info, null, pp);
 			if ( err == VK_ERROR_INCOMPATIBLE_DRIVER )
 				throw new IllegalStateException("Cannot find a compatible Vulkan installable client driver (ICD).");
 			else if ( err == VK_ERROR_EXTENSION_NOT_PRESENT )
@@ -459,14 +459,12 @@ public final class HelloVulkan {
 
 			inst = new VkInstance(pp.get(0), inst_info);
 
-		/* Make initial call to query gpu_count, then second call for gpu info */
-			err = vkEnumeratePhysicalDevices(inst, ip, null);
-			check(err);
+			/* Make initial call to query gpu_count, then second call for gpu info */
+			check(vkEnumeratePhysicalDevices(inst, ip, null));
 
 			if ( ip.get(0) > 0 ) {
 				PointerBuffer physical_devices = stack.mallocPointer(ip.get(0));
-				err = vkEnumeratePhysicalDevices(inst, ip, physical_devices);
-				check(err);
+				check(vkEnumeratePhysicalDevices(inst, ip, physical_devices));
 
 				/* For tri demo we just grab the first physical device */
 				gpu = new VkPhysicalDevice(physical_devices.get(0), inst);
@@ -474,32 +472,13 @@ public final class HelloVulkan {
 				throw new IllegalStateException("vkEnumeratePhysicalDevices reported zero accessible devices.");
 			}
 
-		/* Look for validation layers */
-			validation_found = false;
-			err = vkEnumerateDeviceLayerProperties(gpu, ip, null);
-			check(err);
-
-			if ( ip.get(0) > 0 ) {
-				VkLayerProperties.Buffer device_layers = VkLayerProperties.mallocStack(ip.get(0), stack);
-				err = vkEnumerateDeviceLayerProperties(gpu, ip, device_layers);
-				check(err);
-
-				if ( VALIDATE )
-					validation_found = demo_check_layers(device_validation_layers, device_layers);
-			}
-
-			if ( VALIDATE && !validation_found )
-				throw new IllegalStateException("vkEnumerateDeviceLayerProperties failed to find a required validation layer.");
-
-		/* Look for device extensions */
+			/* Look for device extensions */
 			boolean swapchainExtFound = false;
-			err = vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, null);
-			check(err);
+			check(vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, null));
 
 			if ( ip.get(0) > 0 ) {
 				VkExtensionProperties.Buffer device_extensions = VkExtensionProperties.mallocStack(ip.get(0), stack);
-				err = vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, device_extensions);
-				check(err);
+				check(vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, device_extensions));
 
 				for ( int i = 0; i < ip.get(0); i++ ) {
 					device_extensions.position(i);
@@ -535,6 +514,8 @@ public final class HelloVulkan {
 			vkGetPhysicalDeviceQueueFamilyProperties(gpu, ip, queue_props);
 			if ( ip.get(0) == 0 )
 				throw new IllegalStateException();
+
+			vkGetPhysicalDeviceFeatures(gpu, gpu_features);
 
 			// Graphics queue and MemMgr queue can be separate.
 			// TODO: Add support for separate queues, including synchronization,
@@ -579,18 +560,22 @@ public final class HelloVulkan {
 				.queueFamilyIndex(graphics_queue_node_index)
 				.pQueuePriorities(stack.floats(0.0f));
 
+			VkPhysicalDeviceFeatures features = VkPhysicalDeviceFeatures.callocStack(stack);
+			if ( gpu_features.shaderClipDistance() ) {
+				features.shaderClipDistance(true);
+			}
+
 			extension_names.flip();
 			VkDeviceCreateInfo device = VkDeviceCreateInfo.mallocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO)
 				.pNext(NULL)
 				.flags(0)
 				.pQueueCreateInfos(queue)
-				.ppEnabledLayerNames(VALIDATE ? device_validation_layers : null)
+				.ppEnabledLayerNames(null)
 				.ppEnabledExtensionNames(extension_names)
-				.pEnabledFeatures(null);
+				.pEnabledFeatures(features);
 
-			int err = vkCreateDevice(gpu, device, null, pp);
-			check(err);
+			check(vkCreateDevice(gpu, device, null, pp));
 
 			this.device = new VkDevice(pp.get(0), gpu, device);
 		}
@@ -661,12 +646,10 @@ public final class HelloVulkan {
 			queue = new VkQueue(pp.get(0), device);
 
 			// Get the list of VkFormat's that are supported:
-			int err = vkGetPhysicalDeviceSurfaceFormatsKHR(gpu, surface, ip, null);
-			check(err);
+			check(vkGetPhysicalDeviceSurfaceFormatsKHR(gpu, surface, ip, null));
 
 			VkSurfaceFormatKHR.Buffer surfFormats = VkSurfaceFormatKHR.mallocStack(ip.get(0), stack);
-			err = vkGetPhysicalDeviceSurfaceFormatsKHR(gpu, surface, ip, surfFormats);
-			check(err);
+			check(vkGetPhysicalDeviceSurfaceFormatsKHR(gpu, surface, ip, surfFormats));
 
 			// If the format list includes just one entry of VK_FORMAT_UNDEFINED,
 			// the surface has no preferred format.  Otherwise, at least one
@@ -690,7 +673,7 @@ public final class HelloVulkan {
 		long            view;
 	}
 
-	private void demo_set_image_layout(long image, int aspectMask, int old_image_layout, int new_image_layout) {
+	private void demo_set_image_layout(long image, int aspectMask, int old_image_layout, int new_image_layout, int srcAccessMask) {
 		try ( MemoryStack stack = stackPush() ) {
 			if ( setup_cmd == null ) {
 				VkCommandBufferAllocateInfo cmd = VkCommandBufferAllocateInfo.mallocStack(stack)
@@ -700,33 +683,21 @@ public final class HelloVulkan {
 					.level(VK_COMMAND_BUFFER_LEVEL_PRIMARY)
 					.commandBufferCount(1);
 
-				int err = vkAllocateCommandBuffers(device, cmd, pp);
-				check(err);
+				check(vkAllocateCommandBuffers(device, cmd, pp));
 				setup_cmd = new VkCommandBuffer(pp.get(0), device);
 
 				VkCommandBufferBeginInfo cmd_buf_info = VkCommandBufferBeginInfo.mallocStack(stack)
 					.sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO)
 					.pNext(NULL)
 					.flags(0)
-					.pInheritanceInfo(
-						VkCommandBufferInheritanceInfo.mallocStack(stack)
-							.sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO)
-							.pNext(NULL)
-							.renderPass(VK_NULL_HANDLE)
-							.subpass(0)
-							.framebuffer(VK_NULL_HANDLE)
-							.occlusionQueryEnable(false)
-							.queryFlags(0)
-							.pipelineStatistics(0)
-					);
-				err = vkBeginCommandBuffer(setup_cmd, cmd_buf_info);
-				check(err);
+					.pInheritanceInfo(null);
+				check(vkBeginCommandBuffer(setup_cmd, cmd_buf_info));
 			}
 
 			VkImageMemoryBarrier.Buffer image_memory_barrier = VkImageMemoryBarrier.mallocStack(1, stack)
 				.sType(VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER)
 				.pNext(NULL)
-				.srcAccessMask(old_image_layout == VK_IMAGE_LAYOUT_UNDEFINED ? 0 : VK_ACCESS_MEMORY_READ_BIT)
+				.srcAccessMask(srcAccessMask)
 				.dstAccessMask(0)
 				.oldLayout(old_image_layout)
 				.newLayout(new_image_layout)
@@ -741,7 +712,7 @@ public final class HelloVulkan {
 				.baseArrayLayer(0)
 				.layerCount(1);
 
-			switch (new_image_layout) {
+			switch ( new_image_layout ) {
 				case VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL:
 					image_memory_barrier.dstAccessMask(VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT);
 					break;
@@ -775,23 +746,33 @@ public final class HelloVulkan {
 		try ( MemoryStack stack = stackPush() ) {
 			// Check the surface capabilities and formats
 			VkSurfaceCapabilitiesKHR surfCapabilities = VkSurfaceCapabilitiesKHR.mallocStack(stack);
-			int err = vkGetPhysicalDeviceSurfaceCapabilitiesKHR(gpu, surface, surfCapabilities);
-			check(err);
+			check(vkGetPhysicalDeviceSurfaceCapabilitiesKHR(gpu, surface, surfCapabilities));
 
-			err = vkGetPhysicalDeviceSurfacePresentModesKHR(gpu, surface, ip, null);
-			check(err);
+			check(vkGetPhysicalDeviceSurfacePresentModesKHR(gpu, surface, ip, null));
 
 			IntBuffer presentModes = stack.mallocInt(ip.get(0));
-			err = vkGetPhysicalDeviceSurfacePresentModesKHR(gpu, surface, ip, presentModes);
-			check(err);
+			check(vkGetPhysicalDeviceSurfacePresentModesKHR(gpu, surface, ip, presentModes));
 
 			VkExtent2D swapchainExtent = VkExtent2D.mallocStack(stack);
-			// width and height are either both -1, or both not -1.
-			if ( surfCapabilities.currentExtent().width() == -1 ) {
-				// If the surface size is undefined, the size is set to
-				// the size of the images requested.
+			// width and height are either both 0xFFFFFFFF, or both not 0xFFFFFFFF.
+			if ( surfCapabilities.currentExtent().width() == 0xFFFFFFFF ) {
+				// If the surface size is undefined, the size is set to the size
+				// of the images requested, which must fit within the minimum and
+				// maximum values.
 				swapchainExtent.width(width);
 				swapchainExtent.height(height);
+
+				if ( swapchainExtent.width() < surfCapabilities.minImageExtent().width() ) {
+					swapchainExtent.width(surfCapabilities.minImageExtent().width());
+				} else if ( swapchainExtent.width() > surfCapabilities.maxImageExtent().width() ) {
+					swapchainExtent.width(surfCapabilities.maxImageExtent().width());
+				}
+
+				if ( swapchainExtent.height() < surfCapabilities.minImageExtent().height() ) {
+					swapchainExtent.height(surfCapabilities.minImageExtent().height());
+				} else if ( swapchainExtent.height() > surfCapabilities.maxImageExtent().height() ) {
+					swapchainExtent.height(surfCapabilities.maxImageExtent().height());
+				}
 			} else {
 				// If the surface size is defined, the swap chain size must match
 				swapchainExtent.set(surfCapabilities.currentExtent());
@@ -801,14 +782,16 @@ public final class HelloVulkan {
 
 			int swapchainPresentMode = VK_PRESENT_MODE_FIFO_KHR;
 
-			// Determine the number of VkImage's to use in the swap chain (we desire to
-			// own only 1 image at a time, besides the images being displayed and
-			// queued for display):
-			int desiredNumberOfSwapchainImages = surfCapabilities.minImageCount() + 1;
+			// Determine the number of VkImage's to use in the swap chain.
+			// Application desires to only acquire 1 image at a time (which is
+			// "surfCapabilities.minImageCount").
+			int desiredNumOfSwapchainImages = surfCapabilities.minImageCount();
+			// If maxImageCount is 0, we can ask for as many images as we want;
+			// otherwise we're limited to maxImageCount
 			if ( (surfCapabilities.maxImageCount() > 0) &&
-				(desiredNumberOfSwapchainImages > surfCapabilities.maxImageCount()) ) {
+				(desiredNumOfSwapchainImages > surfCapabilities.maxImageCount()) ) {
 				// Application must settle for fewer images than desired:
-				desiredNumberOfSwapchainImages = surfCapabilities.maxImageCount();
+				desiredNumOfSwapchainImages = surfCapabilities.maxImageCount();
 			}
 
 			int preTransform;
@@ -821,7 +804,7 @@ public final class HelloVulkan {
 			VkSwapchainCreateInfoKHR swapchain = VkSwapchainCreateInfoKHR.callocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR)
 				.surface(surface)
-				.minImageCount(desiredNumberOfSwapchainImages)
+				.minImageCount(desiredNumOfSwapchainImages)
 				.imageFormat(format)
 				.imageColorSpace(color_space)
 				.imageExtent(swapchainExtent)
@@ -834,8 +817,7 @@ public final class HelloVulkan {
 				.clipped(true)
 				.oldSwapchain(oldSwapchain);
 
-			err = vkCreateSwapchainKHR(device, swapchain, null, lp);
-			check(err);
+			check(vkCreateSwapchainKHR(device, swapchain, null, lp));
 			this.swapchain = lp.get(0);
 
 			// If we just re-created an existing swapchain, we should destroy the old
@@ -846,27 +828,17 @@ public final class HelloVulkan {
 				vkDestroySwapchainKHR(device, oldSwapchain, null);
 			}
 
-			err = vkGetSwapchainImagesKHR(device, this.swapchain, ip, null);
-			check(err);
+			check(vkGetSwapchainImagesKHR(device, this.swapchain, ip, null));
 			swapchainImageCount = ip.get(0);
 
 			LongBuffer swapchainImages = stack.mallocLong(swapchainImageCount);
-			err = vkGetSwapchainImagesKHR(device, this.swapchain, ip, swapchainImages);
-			check(err);
+			check(vkGetSwapchainImagesKHR(device, this.swapchain, ip, swapchainImages));
 
 			buffers = new SwapchainBuffers[swapchainImageCount];
 
 			for ( int i = 0; i < swapchainImageCount; i++ ) {
 				buffers[i] = new SwapchainBuffers();
 				buffers[i].image = swapchainImages.get(i);
-
-				// Render loop will expect image to have been used before and in
-				// VK_IMAGE_LAYOUT_PRESENT_SRC_KHR
-				// layout and will change to COLOR_ATTACHMENT_OPTIMAL, so init the image
-				// to that state
-				demo_set_image_layout(
-					buffers[i].image, VK_IMAGE_ASPECT_COLOR_BIT,
-					VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR);
 
 				VkImageViewCreateInfo color_attachment_view = VkImageViewCreateInfo.mallocStack(stack)
 					.sType(VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
@@ -889,8 +861,7 @@ public final class HelloVulkan {
 					.baseArrayLayer(0)
 					.layerCount(1);
 
-				err = vkCreateImageView(device, color_attachment_view, null, lp);
-				check(err);
+				check(vkCreateImageView(device, color_attachment_view, null, lp));
 				buffers[i].view = lp.get(0);
 			}
 
@@ -908,7 +879,7 @@ public final class HelloVulkan {
 
 	private boolean memory_type_from_properties(int typeBits, int requirements_mask, VkMemoryAllocateInfo mem_alloc) {
 		// Search memtypes to find first index with those properties
-		for ( int i = 0; i < 32; i++ ) {
+		for ( int i = 0; i < VK_MAX_MEMORY_TYPES; i++ ) {
 			if ( (typeBits & 1) == 1 ) {
 				// Type is available, does it match user properties?
 				if ( (memory_properties.memoryTypes().get(i).propertyFlags() & requirements_mask) == requirements_mask ) {
@@ -942,8 +913,7 @@ public final class HelloVulkan {
 				.depth(1);
 
 		    /* create image */
-			int err = vkCreateImage(device, image, null, lp);
-			check(err);
+			check(vkCreateImage(device, image, null, lp));
 			depth.image = lp.get(0);
 
 		    /* get memory requirements for this object */
@@ -962,17 +932,16 @@ public final class HelloVulkan {
 			assert (pass);
 
 		    /* allocate memory */
-			err = vkAllocateMemory(device, mem_alloc, null, lp);
-			check(err);
+			check(vkAllocateMemory(device, mem_alloc, null, lp));
 			depth.mem = lp.get(0);
 
 		    /* bind memory */
-			err = vkBindImageMemory(device, depth.image, depth.mem, 0);
-			check(err);
+			check(vkBindImageMemory(device, depth.image, depth.mem, 0));
 
 			demo_set_image_layout(depth.image, VK_IMAGE_ASPECT_DEPTH_BIT,
 			                      VK_IMAGE_LAYOUT_UNDEFINED,
-			                      VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+			                      VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,
+			                      0);
 
 		    /* create image view */
 			VkImageViewCreateInfo view = VkImageViewCreateInfo.callocStack(stack)
@@ -989,8 +958,7 @@ public final class HelloVulkan {
 				.baseArrayLayer(0)
 				.layerCount(1);
 
-			err = vkCreateImageView(device, view, null, lp);
-			check(err);
+			check(vkCreateImageView(device, view, null, lp));
 			depth.view = lp.get(0);
 		}
 	}
@@ -1037,8 +1005,7 @@ public final class HelloVulkan {
 				.height(tex_height)
 				.depth(1);
 
-			int err = vkCreateImage(device, image_create_info, null, lp);
-			check(err);
+			check(vkCreateImage(device, image_create_info, null, lp));
 			tex_obj.image = lp.get(0);
 
 			VkMemoryRequirements mem_reqs = VkMemoryRequirements.mallocStack(stack);
@@ -1052,13 +1019,11 @@ public final class HelloVulkan {
 			assert (pass);
 
 	    /* allocate memory */
-			err = vkAllocateMemory(device, mem_alloc, null, lp);
-			check(err);
+			check(vkAllocateMemory(device, mem_alloc, null, lp));
 			tex_obj.mem = lp.get(0);
 
 	    /* bind memory */
-			err = vkBindImageMemory(device, tex_obj.image, tex_obj.mem, 0);
-			check(err);
+			check(vkBindImageMemory(device, tex_obj.image, tex_obj.mem, 0));
 
 			if ( (required_props & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) != 0 ) {
 				VkImageSubresource subres = VkImageSubresource.mallocStack(stack)
@@ -1069,8 +1034,7 @@ public final class HelloVulkan {
 				VkSubresourceLayout layout = VkSubresourceLayout.mallocStack(stack);
 				vkGetImageSubresourceLayout(device, tex_obj.image, subres, layout);
 
-				err = vkMapMemory(device, tex_obj.mem, 0, mem_alloc.allocationSize(), 0, pp);
-				check(err);
+				check(vkMapMemory(device, tex_obj.mem, 0, mem_alloc.allocationSize(), 0, pp));
 
 				for ( int y = 0; y < tex_height; y++ ) {
 					IntBuffer row = memIntBuffer(pp.get(0) + layout.rowPitch() * y, tex_width);
@@ -1082,7 +1046,7 @@ public final class HelloVulkan {
 			}
 
 			tex_obj.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-			demo_set_image_layout(tex_obj.image, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_UNDEFINED, tex_obj.imageLayout);
+			demo_set_image_layout(tex_obj.image, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_PREINITIALIZED, tex_obj.imageLayout, VK_ACCESS_HOST_WRITE_BIT);
 		/* setting the image layout does not reference the actual memory so no need
 		 * to add a mem ref */
 		}
@@ -1098,20 +1062,17 @@ public final class HelloVulkan {
 		if ( setup_cmd == null )
 			return;
 
-		int err = vkEndCommandBuffer(setup_cmd);
-		check(err);
+		check(vkEndCommandBuffer(setup_cmd));
 
 		try ( MemoryStack stack = stackPush() ) {
 			VkSubmitInfo submit_info = VkSubmitInfo.callocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_SUBMIT_INFO)
 				.pCommandBuffers(pp.put(0, setup_cmd));
 
-			err = vkQueueSubmit(queue, submit_info, VK_NULL_HANDLE);
-			check(err);
+			check(vkQueueSubmit(queue, submit_info, VK_NULL_HANDLE));
 		}
 
-		err = vkQueueWaitIdle(queue);
-		check(err);
+		check(vkQueueWaitIdle(queue));
 
 		vkFreeCommandBuffers(device, cmd_pool, pp);
 		setup_cmd = null;
@@ -1119,7 +1080,7 @@ public final class HelloVulkan {
 
 	private void demo_prepare_textures() {
 		int tex_format = VK_FORMAT_B8G8R8A8_UNORM;
-		int[][] tex_colors = { { 0xffff0000, 0xff00ff00 } };
+		int[][] tex_colors = {{0xffff0000, 0xff00ff00}};
 
 		try ( MemoryStack stack = stackPush() ) {
 			VkFormatProperties props = VkFormatProperties.mallocStack(stack);
@@ -1128,18 +1089,18 @@ public final class HelloVulkan {
 			for ( int i = 0; i < DEMO_TEXTURE_COUNT; i++ ) {
 				if ( (props.linearTilingFeatures() & VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT) != 0 && !USE_STAGING_BUFFER ) {
 				    /* Device can texture using linear textures */
-					demo_prepare_texture_image(tex_colors[i], textures[i],
-					                           VK_IMAGE_TILING_LINEAR,
-					                           VK_IMAGE_USAGE_SAMPLED_BIT,
-					                           VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
+					demo_prepare_texture_image(
+						tex_colors[i], textures[i], VK_IMAGE_TILING_LINEAR,
+						VK_IMAGE_USAGE_SAMPLED_BIT,
+						VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 				} else if ( (props.optimalTilingFeatures() & VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT) != 0 ) {
 				    /* Must use staging buffer to copy linear texture to optimized */
 					TextureObject staging_texture = new TextureObject();
 
-					demo_prepare_texture_image(tex_colors[i], staging_texture,
-					                           VK_IMAGE_TILING_LINEAR,
-					                           VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
-					                           VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
+					demo_prepare_texture_image(
+						tex_colors[i], staging_texture, VK_IMAGE_TILING_LINEAR,
+						VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
+						VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 
 					demo_prepare_texture_image(
 						tex_colors[i], textures[i],
@@ -1150,12 +1111,14 @@ public final class HelloVulkan {
 					demo_set_image_layout(staging_texture.image,
 					                      VK_IMAGE_ASPECT_COLOR_BIT,
 					                      staging_texture.imageLayout,
-					                      VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+					                      VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+					                      0);
 
 					demo_set_image_layout(textures[i].image,
 					                      VK_IMAGE_ASPECT_COLOR_BIT,
 					                      textures[i].imageLayout,
-					                      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+					                      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+					                      0);
 
 					VkImageCopy.Buffer copy_region = VkImageCopy.mallocStack(1, stack);
 					copy_region.srcSubresource()
@@ -1190,7 +1153,8 @@ public final class HelloVulkan {
 					demo_set_image_layout(textures[i].image,
 					                      VK_IMAGE_ASPECT_COLOR_BIT,
 					                      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-					                      textures[i].imageLayout);
+					                      textures[i].imageLayout,
+					                      0);
 
 					demo_flush_init_cmd();
 
@@ -1219,8 +1183,7 @@ public final class HelloVulkan {
 					.unnormalizedCoordinates(false);
 
 				/* create sampler */
-				int err = vkCreateSampler(device, sampler, null, lp);
-				check(err);
+				check(vkCreateSampler(device, sampler, null, lp));
 				textures[i].sampler = lp.get(0);
 
 				VkImageViewCreateInfo view = VkImageViewCreateInfo.mallocStack(stack)
@@ -1244,8 +1207,7 @@ public final class HelloVulkan {
 
 		        /* create image view */
 				view.image(textures[i].image);
-				err = vkCreateImageView(device, view, null, lp);
-				check(err);
+				check(vkCreateImageView(device, view, null, lp));
 				textures[i].view = lp.get(0);
 			}
 		}
@@ -1263,10 +1225,10 @@ public final class HelloVulkan {
 	private void demo_prepare_vertices() {
 		float[][] vb = {
 		    /*      position             texcoord */
-		    { -1.0f, -1.0f, 0.25f, 0.0f, 0.0f },
-		    { 1.0f, -1.0f, 0.25f, 1.0f, 0.0f },
-		    { 0.0f, 1.0f, 1.0f, 0.5f, 1.0f },
-		    };
+			{-1.0f, -1.0f, 0.25f, 0.0f, 0.0f},
+			{1.0f, -1.0f, 0.25f, 1.0f, 0.0f},
+			{0.0f, 1.0f, 1.0f, 0.5f, 1.0f},
+		};
 
 		try ( MemoryStack stack = stackPush() ) {
 			VkBufferCreateInfo buf_info = VkBufferCreateInfo.callocStack(stack)
@@ -1275,26 +1237,22 @@ public final class HelloVulkan {
 				.usage(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT)
 				.sharingMode(VK_SHARING_MODE_EXCLUSIVE);
 
-			int err = vkCreateBuffer(device, buf_info, null, lp);
-			check(err);
+			check(vkCreateBuffer(device, buf_info, null, lp));
 			vertices.buf = lp.get(0);
 
 			VkMemoryRequirements mem_reqs = VkMemoryRequirements.mallocStack(stack);
 			vkGetBufferMemoryRequirements(device, vertices.buf, mem_reqs);
-			check(err);
 
 			VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.callocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO)
 				.allocationSize(mem_reqs.size());
-			boolean pass = memory_type_from_properties(mem_reqs.memoryTypeBits(), VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, mem_alloc);
+			boolean pass = memory_type_from_properties(mem_reqs.memoryTypeBits(), VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, mem_alloc);
 			assert (pass);
 
-			err = vkAllocateMemory(device, mem_alloc, null, lp);
-			check(err);
+			check(vkAllocateMemory(device, mem_alloc, null, lp));
 			vertices.mem = lp.get(0);
 
-			err = vkMapMemory(device, vertices.mem, 0, mem_alloc.allocationSize(), 0, pp);
-			check(err);
+			check(vkMapMemory(device, vertices.mem, 0, mem_alloc.allocationSize(), 0, pp));
 			FloatBuffer data = pp.getFloatBuffer(0, ((int)mem_alloc.allocationSize()) >> 2);
 			data
 				.put(vb[0])
@@ -1305,8 +1263,7 @@ public final class HelloVulkan {
 
 		vkUnmapMemory(device, vertices.mem);
 
-		int err = vkBindBufferMemory(device, vertices.buf, vertices.mem, 0);
-		check(err);
+		check(vkBindBufferMemory(device, vertices.buf, vertices.mem, 0));
 
 		vertices.vi
 			.sType(VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO)
@@ -1347,8 +1304,7 @@ public final class HelloVulkan {
 				);
 
 			LongBuffer layouts = stack.mallocLong(1);
-			int err = vkCreateDescriptorSetLayout(device, descriptor_layout, null, layouts);
-			check(err);
+			check(vkCreateDescriptorSetLayout(device, descriptor_layout, null, layouts));
 			desc_layout = layouts.get(0);
 
 			VkPipelineLayoutCreateInfo pPipelineLayoutCreateInfo = VkPipelineLayoutCreateInfo.callocStack(stack)
@@ -1356,8 +1312,7 @@ public final class HelloVulkan {
 				.pNext(NULL)
 				.pSetLayouts(layouts);
 
-			err = vkCreatePipelineLayout(device, pPipelineLayoutCreateInfo, null, lp);
-			check(err);
+			check(vkCreatePipelineLayout(device, pPipelineLayoutCreateInfo, null, lp));
 			pipeline_layout = lp.get(0);
 		}
 	}
@@ -1405,8 +1360,7 @@ public final class HelloVulkan {
 				.pAttachments(attachments)
 				.pSubpasses(subpass);
 
-			int err = vkCreateRenderPass(device, rp_info, null, lp);
-			check(err);
+			check(vkCreateRenderPass(device, rp_info, null, lp));
 			render_pass = lp.get(0);
 		}
 	}
@@ -1422,8 +1376,7 @@ public final class HelloVulkan {
 				.flags(0)
 				.pCode(pCode);
 
-			int err = vkCreateShaderModule(device, moduleCreateInfo, null, lp);
-			check(err);
+			check(vkCreateShaderModule(device, moduleCreateInfo, null, lp));
 
 			memFree(pCode);
 
@@ -1517,12 +1470,10 @@ public final class HelloVulkan {
 			VkPipelineCacheCreateInfo pipelineCacheCI = VkPipelineCacheCreateInfo.callocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO);
 
-			int err = vkCreatePipelineCache(device, pipelineCacheCI, null, lp);
-			check(err);
+			check(vkCreatePipelineCache(device, pipelineCacheCI, null, lp));
 			pipelineCache = lp.get(0);
 
-			err = vkCreateGraphicsPipelines(device, pipelineCache, pipeline, null, lp);
-			check(err);
+			check(vkCreateGraphicsPipelines(device, pipelineCache, pipeline, null, lp));
 			this.pipeline = lp.get(0);
 
 			vkDestroyPipelineCache(device, pipelineCache, null);
@@ -1544,8 +1495,7 @@ public final class HelloVulkan {
 						.descriptorCount(DEMO_TEXTURE_COUNT)
 				);
 
-			int err = vkCreateDescriptorPool(device, descriptor_pool, null, lp);
-			check(err);
+			check(vkCreateDescriptorPool(device, descriptor_pool, null, lp));
 			desc_pool = lp.get(0);
 		}
 	}
@@ -1559,8 +1509,7 @@ public final class HelloVulkan {
 				.descriptorPool(desc_pool)
 				.pSetLayouts(layouts);
 
-			int err = vkAllocateDescriptorSets(device, alloc_info, lp);
-			check(err);
+			check(vkAllocateDescriptorSets(device, alloc_info, lp));
 			desc_set = lp.get(0);
 
 			VkDescriptorImageInfo.Buffer tex_descs = VkDescriptorImageInfo.callocStack(DEMO_TEXTURE_COUNT, stack);
@@ -1599,8 +1548,7 @@ public final class HelloVulkan {
 
 			for ( int i = 0; i < swapchainImageCount; i++ ) {
 				attachments.put(0, buffers[i].view);
-				int err = vkCreateFramebuffer(device, fb_info, null, lp);
-				check(err);
+				check(vkCreateFramebuffer(device, fb_info, null, lp));
 				framebuffers.put(i, lp.get(0));
 			}
 		}
@@ -1614,8 +1562,7 @@ public final class HelloVulkan {
 				.flags(VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT)
 				.queueFamilyIndex(graphics_queue_node_index);
 
-			int err = vkCreateCommandPool(device, cmd_pool_info, null, lp);
-			check(err);
+			check(vkCreateCommandPool(device, cmd_pool_info, null, lp));
 
 			cmd_pool = lp.get(0);
 
@@ -1626,8 +1573,7 @@ public final class HelloVulkan {
 				.level(VK_COMMAND_BUFFER_LEVEL_PRIMARY)
 				.commandBufferCount(1);
 
-			err = vkAllocateCommandBuffers(device, cmd, pp);
-			check(err);
+			check(vkAllocateCommandBuffers(device, cmd, pp));
 		}
 
 		draw_cmd = new VkCommandBuffer(pp.get(0), device);
@@ -1652,20 +1598,9 @@ public final class HelloVulkan {
 				.sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO)
 				.pNext(NULL)
 				.flags(0)
-				.pInheritanceInfo(
-					VkCommandBufferInheritanceInfo.mallocStack(stack)
-						.sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO)
-						.pNext(NULL)
-						.renderPass(VK_NULL_HANDLE)
-						.subpass(0)
-						.framebuffer(VK_NULL_HANDLE)
-						.occlusionQueryEnable(false)
-						.queryFlags(0)
-						.pipelineStatistics(0)
-				);
+				.pInheritanceInfo(null);
 
-			int err = vkBeginCommandBuffer(draw_cmd, cmd_buf_info);
-			check(err);
+			check(vkBeginCommandBuffer(draw_cmd, cmd_buf_info));
 
 			VkClearValue.Buffer clear_values = VkClearValue.mallocStack(2, stack);
 			clear_values.get(0).color()
@@ -1690,6 +1625,21 @@ public final class HelloVulkan {
 				.width(width)
 				.height(height);
 
+			// We can use LAYOUT_UNDEFINED as a wildcard here because we don't care what
+			// happens to the previous contents of the image
+			VkImageMemoryBarrier.Buffer image_memory_barrier = VkImageMemoryBarrier.mallocStack(1, stack)
+				.sType(VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER)
+				.pNext(NULL)
+				.srcAccessMask(0)
+				.dstAccessMask(VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT)
+				.oldLayout(VK_IMAGE_LAYOUT_UNDEFINED)
+				.newLayout(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL)
+				.srcQueueFamilyIndex(VK_QUEUE_FAMILY_IGNORED)
+				.dstQueueFamilyIndex(VK_QUEUE_FAMILY_IGNORED)
+				.image(buffers[current_buffer].image)
+				.subresourceRange(VkImageSubresourceRange.mallocStack(stack).set(VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1));
+
+			vkCmdPipelineBarrier(draw_cmd, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, 0, null, null, image_memory_barrier);
 			vkCmdBeginRenderPass(draw_cmd, rp_begin, VK_SUBPASS_CONTENTS_INLINE);
 
 			vkCmdBindPipeline(draw_cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
@@ -1740,33 +1690,35 @@ public final class HelloVulkan {
 
 			vkCmdPipelineBarrier(draw_cmd, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, 0, null, null, prePresentBarrier);
 
-			err = vkEndCommandBuffer(draw_cmd);
-			check(err);
+			check(vkEndCommandBuffer(draw_cmd));
 		}
 	}
 
 	private void demo_draw() {
 		try ( MemoryStack stack = stackPush() ) {
-			VkSemaphoreCreateInfo presentCompleteSemaphoreCreateInfo = VkSemaphoreCreateInfo.mallocStack(stack)
+			VkSemaphoreCreateInfo semaphoreCreateInfo = VkSemaphoreCreateInfo.mallocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO)
 				.pNext(NULL)
 				.flags(0);
 
-			int err = vkCreateSemaphore(device, presentCompleteSemaphoreCreateInfo, null, lp);
-			check(err);
-			long presentCompleteSemaphore = lp.get(0);
+			check(vkCreateSemaphore(device, semaphoreCreateInfo, null, lp));
+			long imageAcquiredSemaphore = lp.get(0);
+
+			check(vkCreateSemaphore(device, semaphoreCreateInfo, null, lp));
+			long drawCompleteSemaphore = lp.get(0);
 
 			// Get the index of the next available swapchain image:
-			err = vkAcquireNextImageKHR(device, swapchain, ~0L,
-			                            presentCompleteSemaphore,
-			                            NULL, // TODO: Show use of fence
-			                            ip);
+			int err = vkAcquireNextImageKHR(device, swapchain, ~0L,
+			                                imageAcquiredSemaphore,
+			                                NULL, // TODO: Show use of fence
+			                                ip);
 			if ( err == VK_ERROR_OUT_OF_DATE_KHR ) {
 				// demo->swapchain is out of date (e.g. the window was resized) and
 				// must be recreated:
 				demo_resize();
 				demo_draw();
-				vkDestroySemaphore(device, presentCompleteSemaphore, null);
+				vkDestroySemaphore(device, drawCompleteSemaphore, null);
+				vkDestroySemaphore(device, imageAcquiredSemaphore, null);
 				return;
 			} else if ( err == VK_SUBOPTIMAL_KHR ) {
 				// demo->swapchain is not as optimal as it could be, but the platform's
@@ -1776,12 +1728,6 @@ public final class HelloVulkan {
 			}
 			current_buffer = ip.get(0);
 
-			// Assume the command buffer has been run on current_buffer before so
-			// we need to set the image layout back to COLOR_ATTACHMENT_OPTIMAL
-			demo_set_image_layout(buffers[current_buffer].image,
-			                      VK_IMAGE_ASPECT_COLOR_BIT,
-			                      VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
-			                      VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 			demo_flush_init_cmd();
 
 			// Wait for the present complete semaphore to be signaled to ensure
@@ -1789,29 +1735,28 @@ public final class HelloVulkan {
 			// engine has fully released ownership to the application, and it is
 			// okay to render to the image.
 
-			// FIXME/TODO: DEAL WITH VK_IMAGE_LAYOUT_PRESENT_SRC_KHR
 			demo_draw_build_cmd();
-			int pipe_stage_flags = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
+			LongBuffer lp2 = stack.mallocLong(1);
 			VkSubmitInfo submit_info = VkSubmitInfo.mallocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_SUBMIT_INFO)
 				.pNext(NULL)
 				.waitSemaphoreCount(1)
-				.pWaitSemaphores(lp.put(0, presentCompleteSemaphore))
-				.pWaitDstStageMask(ip.put(0, pipe_stage_flags))
+				.pWaitSemaphores(lp.put(0, imageAcquiredSemaphore))
+				.pWaitDstStageMask(ip.put(0, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT))
 				.pCommandBuffers(pp.put(0, draw_cmd))
-				.pSignalSemaphores(null);
+				.pSignalSemaphores(lp2.put(0, drawCompleteSemaphore));
 
-			err = vkQueueSubmit(queue, submit_info, VK_NULL_HANDLE);
-			check(err);
+			check(vkQueueSubmit(queue, submit_info, VK_NULL_HANDLE));
 
 			VkPresentInfoKHR present = VkPresentInfoKHR.callocStack(stack)
 				.sType(VK_STRUCTURE_TYPE_PRESENT_INFO_KHR)
 				.pNext(NULL)
+				.waitSemaphoreCount(1)
+				.pWaitSemaphores(lp2)
 				.swapchainCount(1)
 				.pSwapchains(lp.put(0, swapchain))
 				.pImageIndices(ip.put(0, current_buffer));
 
-			// TBD/TODO: SHOULD THE "present" PARAMETER BE "const" IN THE HEADER?
 			err = vkQueuePresentKHR(queue, present);
 			if ( err == VK_ERROR_OUT_OF_DATE_KHR ) {
 				// demo->swapchain is out of date (e.g. the window was resized) and
@@ -1824,14 +1769,19 @@ public final class HelloVulkan {
 				check(err);
 			}
 
-			err = vkQueueWaitIdle(queue);
-			check(err);
+			check(vkQueueWaitIdle(queue));
 
-			vkDestroySemaphore(device, presentCompleteSemaphore, null);
+			vkDestroySemaphore(device, drawCompleteSemaphore, null);
+			vkDestroySemaphore(device, imageAcquiredSemaphore, null);
 		}
 	}
 
 	private void demo_resize() {
+		// In order to properly resize the window, we must re-create the swapchain
+		// AND redo the command buffers, etc.
+		//
+		// First, perform part of the demo_cleanup() function:
+
 		for ( int i = 0; i < swapchainImageCount; i++ ) {
 			vkDestroyFramebuffer(device, framebuffers.get(i), null);
 		}
@@ -1950,6 +1900,7 @@ public final class HelloVulkan {
 		dbgFunc.free();
 		vkDestroyInstance(inst, null);
 
+		gpu_features.free();
 		gpu_props.free();
 		queue_props.free();
 		memory_properties.free();
@@ -1958,10 +1909,6 @@ public final class HelloVulkan {
 		glfwDestroyWindow(window);
 		glfwTerminate();
 		glfwSetErrorCallback(null).free();
-
-		for ( int i = 0; i < device_validation_layers.remaining(); i++ )
-			nmemFree(device_validation_layers.get(i));
-		memFree(device_validation_layers);
 
 		memFree(extension_names);
 
