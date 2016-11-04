@@ -147,14 +147,18 @@
 			<arg line="--cflags gtk+-3.0"/>
 		</exec>
 
+		<compile dest="${bin.native}/nfd" flags="" if:true="${binding.nfd}">
+			<arg line="${gtk3}"/>
+			<arg value="-I${src.include.rel}/util/nfd"/>
+			<arg value="-I${src.include.rel}/util/nfd/include"/>
+			<fileset dir="." includes="${src.include}/util/nfd/nfd_common.c"/>
+			<fileset dir="." includes="${src.include}/util/nfd/nfd_gtk.c"/>
+		</compile>
 		<build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
 			<source>
-				<arg line="${gtk3}"/>
 				<arg value="-I${src.include.rel}/util/nfd"/>
 				<arg value="-I${src.include.rel}/util/nfd/include"/>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
-				<fileset dir="." includes="${src.include}/util/nfd/nfd_common.c"/>
-				<fileset dir="." includes="${src.include}/util/nfd/nfd_gtk.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
 			</source>
 			<link>
