@@ -34,9 +34,8 @@ val MemoryAccessJNI = "MemoryAccessJNI".nativeClass(packageName = "org.lwjgl.sys
 #else
 	#ifndef __USE_ISOC11
 	static void* aligned_alloc(size_t alignment, size_t size) {
-		void *p = NULL;
-		posix_memalign(&p, alignment, size);
-		return p;
+		void *p;
+		return posix_memalign(&p, alignment, size) ? NULL : p;
 	}
 	#endif
 	#define aligned_free free

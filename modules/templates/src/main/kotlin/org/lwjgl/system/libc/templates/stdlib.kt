@@ -19,9 +19,8 @@ val stdlib = "Stdlib".nativeClass(packageName = LIBC_PACKAGE) {
 #else
 	#ifndef __USE_ISOC11
 	inline void* aligned_alloc(size_t alignment, size_t size) {
-		void *p = NULL;
-		posix_memalign(&p, alignment, size);
-		return p;
+		void *p;
+		return posix_memalign(&p, alignment, size) ? NULL : p;
 	}
 	#endif
 	#define aligned_free free
