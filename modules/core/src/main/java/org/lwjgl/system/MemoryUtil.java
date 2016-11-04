@@ -1331,7 +1331,7 @@ public final class MemoryUtil {
 	 * @param text           the text to encode
 	 * @param nullTerminated if true, the text will be terminated with a '\0'.
 	 *
-	 * @return the encoded text or null
+	 * @return the number of bytes of the encoded string
 	 */
 	public static int memASCII(CharSequence text, boolean nullTerminated, ByteBuffer target) {
 		return memASCII(text, nullTerminated, target, target.position());
