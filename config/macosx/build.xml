@@ -33,14 +33,9 @@
 	<find-sdkroot version="10.11"/>
 	<find-sdkroot version="10.10"/>
 	<find-sdkroot version="10.9"/>
-	<find-sdkroot version="10.8"/>
-	<condition property="compiler" value="clang" else="gcc"> <!-- Use clang on 10.8 or newer, gcc on 10.7 -->
-		<isset property="sdkroot"/>
-	</condition>
-	<find-sdkroot version="10.7"/>
 	<fail unless="sdkroot" message="Failed to find the MacOS X SDK."/>
 
-	<property name="macosx-version-min" value="10.7"/>
+	<property name="macosx-version-min" value="10.9"/>
 
 	<property name="src.include.rel" value="../../../../${src.include}"/>
 	<property name="src.native.rel" value="../../../../${src.native}"/>
@@ -52,7 +47,7 @@
 		<element name="source" implicit="true"/>
 		<sequential>
 			<mkdir dir="@{dest}"/>
-			<apply dir="@{dest}" executable="${compiler}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+			<apply dir="@{dest}" executable="clang" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 				<arg line="-c -std=c11 -ObjC -O3 -flto -fPIC @{flags} -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
 
 				<arg value="-I${jni.headers}"/>
@@ -99,7 +94,7 @@
 			<antcall target="-update-dependencies" if:set="update-dependencies"/>
 			<property name="dependencies-uptodate" value="true" if:set="update-dependencies"/>
 			
-			<apply executable="${compiler}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+			<apply executable="clang" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
 				<srcfile/>
 				<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/lib@{name}.dylib -O3 -flto -fPIC'/>
 				<fileset dir="@{dest}" includes="*.o"/>
