@@ -594,17 +594,6 @@ public final class MemoryUtil {
 	 * Returns the memory address at the current position of the specified buffer. This is effectively a pointer value that can be used in native function
 	 * calls.
 	 *
-	 * <p><b>WARNING</b>: Direct use of pointer values is inherently unsafe. In addition to the dangers of pointer arithmetic, the user must also ensure that
-	 * the memory backing the specified buffer is not deallocated before the returned address is used. For example, this code may lead to a crash:</p>
-	 * <pre><code>
-	 * nativeFunction(memAddress(memEncodeASCII("test"));
-	 * </code></pre>
-	 * <p>because a GC execution between <code>memAddress</code> and <code>nativeFunction</code> might deallocate the ByteBuffer returned by
-	 * <code>memEncodeASCII</code>. On the other hand, this code is safe on current JVMs:</p>
-	 * <pre><code>
-	 * ByteBuffer encoded = memEncodeASCII("test");
-	 * nativeFunction(memAddress(encoded));</code><pre>
-	 *
 	 * @param buffer the buffer
 	 *
 	 * @return the memory address
