@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GLFWDemo {
 
-	private static final int NK_BUFFER_DEFAULT_INITIAL_SIZE = 4 * 1024;
+	private static final int BUFFER_INITIAL_SIZE = 4 * 1024;
 
 	private static final int MAX_VERTEX_BUFFER  = 512 * 1024;
 	private static final int MAX_ELEMENT_BUFFER = 128 * 1024;
@@ -147,7 +147,7 @@ public class GLFWDemo {
 		} else if ( caps.GL_ARB_debug_output )
 			glDebugMessageControlARB(GL_DEBUG_SOURCE_API_ARB, GL_DEBUG_TYPE_OTHER_ARB, GL_DEBUG_SEVERITY_LOW_ARB, (IntBuffer)null, false);
 
-		NkContext ctx = nk_glfw3_init(win);
+		NkContext ctx = setupWindow(win);
 
 		int BITMAP_W = 1024;
 		int BITMAP_H = 1024;
@@ -249,7 +249,7 @@ public class GLFWDemo {
 		glfwShowWindow(win);
 		while ( !glfwWindowShouldClose(win) ) {
 			/* Input */
-			nk_glfw3_new_frame();
+			newFrame();
 
 			demo.layout(ctx, 50, 50);
 			calc.layout(ctx, 300, 50);
@@ -274,11 +274,11 @@ public class GLFWDemo {
 			 * Make sure to either a.) save and restore or b.) reset your own state after
 			 * rendering the UI.
 			 */
-			nk_glfw3_render(NK_ANTI_ALIASING_ON, MAX_VERTEX_BUFFER, MAX_ELEMENT_BUFFER);
+			render(NK_ANTI_ALIASING_ON, MAX_VERTEX_BUFFER, MAX_ELEMENT_BUFFER);
 			glfwSwapBuffers(win);
 		}
 
-		nk_glfw3_shutdown();
+		shutdown();
 
 		glfwFreeCallbacks(win);
 		if ( debugProc != null )
@@ -287,7 +287,7 @@ public class GLFWDemo {
 		glfwSetErrorCallback(null).free();
 	}
 
-	private void nk_glfw3_device_create() {
+	private void setupContext() {
 		String NK_SHADER_VERSION = Platform.get() == Platform.MACOSX ? "#version 150\n" : "#version 300 es\n";
 		String vertex_shader =
 			NK_SHADER_VERSION +
@@ -313,7 +313,7 @@ public class GLFWDemo {
 				"   Out_Color = Frag_Color * texture(Texture, Frag_UV.st);\n" +
 				"}\n";
 
-		nk_buffer_init(cmds, ALLOCATOR, NK_BUFFER_DEFAULT_INITIAL_SIZE);
+		nk_buffer_init(cmds, ALLOCATOR, BUFFER_INITIAL_SIZE);
 		prog = glCreateProgram();
 		vert_shdr = glCreateShader(GL_VERTEX_SHADER);
 		frag_shdr = glCreateShader(GL_FRAGMENT_SHADER);
@@ -377,7 +377,7 @@ public class GLFWDemo {
 		glBindVertexArray(0);
 	}
 
-	private NkContext nk_glfw3_init(long win) {
+	private NkContext setupWindow(long win) {
 		glfwSetScrollCallback(win, (window, xoffset, yoffset) -> nk_input_scroll(ctx, (float)yoffset));
 		glfwSetCharCallback(win, (window, codepoint) -> nk_input_unicode(ctx, codepoint));
 		glfwSetKeyCallback(win, (window, key, scancode, action, mods) -> {
@@ -489,11 +489,11 @@ public class GLFWDemo {
 			if ( text != NULL )
 				nnk_textedit_paste(edit, text, nnk_strlen(text));
 		});
-		nk_glfw3_device_create();
+		setupContext();
 		return ctx;
 	}
 
-	private void nk_glfw3_new_frame() {
+	private void newFrame() {
 		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer w = stack.mallocInt(1);
 			IntBuffer h = stack.mallocInt(1);
@@ -525,7 +525,7 @@ public class GLFWDemo {
 		nk_input_end(ctx);
 	}
 
-	private void nk_glfw3_render(int AA, int max_vertex_buffer, int max_element_buffer) {
+	private void render(int AA, int max_vertex_buffer, int max_element_buffer) {
 		try ( MemoryStack stack = stackPush() ) {
 			// setup global state
 			glEnable(GL_BLEND);
@@ -616,7 +616,7 @@ public class GLFWDemo {
 		glDisable(GL_SCISSOR_TEST);
 	}
 
-	private void nk_glfw3_device_destroy() {
+	private void destroy() {
 		glDetachShader(prog, vert_shdr);
 		glDetachShader(prog, frag_shdr);
 		glDeleteShader(vert_shdr);
@@ -629,11 +629,11 @@ public class GLFWDemo {
 		nk_buffer_free(cmds);
 	}
 
-	private void nk_glfw3_shutdown() {
+	private void shutdown() {
 		ctx.clip().copy().free();
 		ctx.clip().paste().free();
 		nk_free(ctx);
-		nk_glfw3_device_destroy();
+		destroy();
 		default_font.query().free();
 		default_font.width().free();
 
