@@ -102,7 +102,7 @@ public final class ThreadLocalUtil {
 		@Override
 		public ThreadLocalState get() {
 			Object target = UNSAFE.getObject(Thread.currentThread(), TARGET);
-			return ThreadLocalState.class.isInstance(target) ? (ThreadLocalState)target : setInitialValue();
+			return target instanceof ThreadLocalState ? (ThreadLocalState)target : setInitialValue();
 		}
 
 		private ThreadLocalState setInitialValue() {
