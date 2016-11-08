@@ -14,8 +14,6 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 import java.nio.file.*;
-import java.nio.file.attribute.PosixFilePermission;
-import java.util.EnumSet;
 import java.util.zip.CRC32;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -163,7 +161,6 @@ final class SharedLibraryLoader {
 		try ( InputStream input = libURL.openStream() ) {
 			Files.copy(input, extractedFile, StandardCopyOption.REPLACE_EXISTING);
 		}
-		setExecutable(extractedFile);
 	}
 
 	/**
@@ -213,7 +210,7 @@ final class SharedLibraryLoader {
 
 		Path testFile;
 		if ( Files.exists(file) ) {
-			if ( !Files.isWritable(file) || !Files.isExecutable(file) )
+			if ( !Files.isWritable(file) )
 				return false;
 
 			// Don't overwrite existing file just to check if we can write to directory.
@@ -229,36 +226,10 @@ final class SharedLibraryLoader {
 
 		try {
 			Files.write(testFile, new byte[0]);
-			try {
-				setExecutable(testFile);
-				return true;
-			} finally {
-				Files.deleteIfExists(testFile);
-			}
+			Files.delete(testFile);
+			return true;
 		} catch (Throwable ignored) {
 			return false;
-		}
-	}
-
-	/**
-	 * Returns true if the specified file is or was made executable.
-	 *
-	 * @param file the file
-	 *
-	 * @return true if the file is executable
-	 */
-	private static void setExecutable(Path file) throws IOException {
-		if ( !Files.isExecutable(file) ) {
-			Files.setPosixFilePermissions(file, EnumSet.of(
-				PosixFilePermission.OWNER_READ,
-				PosixFilePermission.OWNER_WRITE,
-				PosixFilePermission.OWNER_EXECUTE,
-
-				PosixFilePermission.GROUP_READ,
-				PosixFilePermission.GROUP_EXECUTE,
-
-				PosixFilePermission.OTHERS_EXECUTE
-			)); // 755
 		}
 	}
 

@@ -266,7 +266,7 @@ public final class Library {
 	private static Path findLibrary(String path, String libName) {
 		for ( String directory : PATH_SEPARATOR.split(path) ) {
 			Path p = Paths.get(directory, libName);
-			if ( Files.isExecutable(p) )
+			if ( Files.isReadable(p) )
 				return p;
 		}
 		return null;
