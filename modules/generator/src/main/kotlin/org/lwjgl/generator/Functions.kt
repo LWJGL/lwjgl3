@@ -183,6 +183,7 @@ class NativeClassFunction(
 		&& (returns.isBufferPointer || returns.nativeType is CallbackType || hasParam { it.isBufferPointer || it.nativeType is CallbackType || it has MapToInt })
 		&& !returns.has(Address)
 		&& !hasParam { it.nativeType is ArrayType }
+		&& (!has(Macro) || this[Macro].expression == null)
 	}
 
 	internal val hasArrayOverloads: Boolean
