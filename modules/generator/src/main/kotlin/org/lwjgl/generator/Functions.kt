@@ -1308,10 +1308,10 @@ class NativeClassFunction(
 	) {
 		println()
 
-		val macro = has(Macro) && get(Macro).constant
+		val constantMacro = has(Macro) && get(Macro).constant
 
 		// JavaDoc
-		if (!macro) {
+		if (!constantMacro) {
 			if (description != null) {
 				val doc = nativeClass.processDocumentation("$description $methodLink").toJavaDoc()
 				if (!(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false) && doc.isNotEmpty())
@@ -1331,7 +1331,7 @@ class NativeClassFunction(
 
 		val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
 
-		print("\t${if (macro) "private " else accessModifier}static $retType $name(")
+		print("\t${if (constantMacro) "private " else accessModifier}static $retType $name(")
 		printList(parameters.asSequence()) {
 			if (it.isAutoSizeResultOut && hideAutoSizeResultParam)
 				null
@@ -1370,7 +1370,7 @@ class NativeClassFunction(
 
 		// Get function address
 
-		if (nativeClass.binding != null && !hasUnsafeMethod)
+		if (nativeClass.binding != null && !hasUnsafeMethod && !has(Macro))
 			nativeClass.binding.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Generate checks
