@@ -776,7 +776,7 @@ class NativeClassFunction(
 
 		// Generate checks
 		printCode(code.javaInit, ApplyTo.NORMAL)
-		if (Binding.CHECKS)
+		if (Binding.CHECKS && !has(Macro))
 			generateChecks(NORMAL)
 
 		// Prepare stack parameters
@@ -1313,7 +1313,8 @@ class NativeClassFunction(
 	) {
 		println()
 
-		val constantMacro = has(Macro) && get(Macro).constant
+		val macro = has(Macro)
+		val constantMacro = macro && get(Macro).constant
 
 		// JavaDoc
 		if (!constantMacro) {
@@ -1381,14 +1382,14 @@ class NativeClassFunction(
 		// Generate checks
 
 		printCode(code.javaInit, ApplyTo.ALTERNATIVE)
-		if (Binding.CHECKS)
+		if (Binding.CHECKS && !macro)
 			generateChecks(ALTERNATIVE, transforms)
 
 		// Prepare stack parameters
 
-		val stackTransforms = transforms.asSequence().filter { it.value is StackFunctionTransform<*> }
+		val stackTransforms = if (macro) emptySequence() else transforms.asSequence().filter { it.value is StackFunctionTransform<*> }
 		val hideAutoSizeResultParam = this@NativeClassFunction.hideAutoSizeResultParam
-		val hasStack = hideAutoSizeResultParam || stackTransforms.any()
+		val hasStack = (hideAutoSizeResultParam || stackTransforms.any()) && !macro
 
 		if (hasStack)
 			println("\t\tMemoryStack stack = stackGet(); int stackPointer = stack.getPointer();")
