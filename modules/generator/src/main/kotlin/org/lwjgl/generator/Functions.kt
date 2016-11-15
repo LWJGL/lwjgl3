@@ -417,19 +417,24 @@ class NativeClassFunction(
 
 		// First pass
 		getNativeParams().forEach {
-			if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType && transforms?.get(it) !is SkipCheckFunctionTransform)
-				checks.add("checkPointer(${it.name});")
-
-			var Safe = if (it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER) "Safe" else ""
-
-			if (it.nativeType is CharSequenceType && it.paramType === IN && !it.has(Check) && transforms?.get(it) == null) {
-				if (getReferenceParam(AutoSize, it.name) == null)
-					checks.add("checkNT${it.nativeType.charMapping.bytes}$Safe(${it.name});")
+			if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER) {
+				if (!it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType && transforms?.get(it) !is SkipCheckFunctionTransform)
+					checks.add("checkPointer(${it.name});")
+				return@forEach
 			}
 
-			if (it.paramType === IN && it has Terminated) {
-				val postfix = if ((it.nativeType.mapping as PointerMapping).isMultiByte) "" else "1"
-				checks.add("checkNT$postfix$Safe(${it.name}${it[Terminated].let { if (it === NullTerminated) "" else ", ${it.value}" }});")
+			var Safe = if (it has Nullable) "Safe" else ""
+
+			if (it.paramType === IN) {
+				if (it.nativeType is CharSequenceType && !it.has(Check) && transforms?.get(it) == null) {
+					if (getReferenceParam(AutoSize, it.name) == null)
+						checks.add("checkNT${it.nativeType.charMapping.bytes}$Safe(${it.name});")
+				}
+
+				if (it has Terminated) {
+					val postfix = if ((it.nativeType.mapping as PointerMapping).isMultiByte) "" else "1"
+					checks.add("checkNT$postfix$Safe(${it.name}${it[Terminated].let { if (it === NullTerminated) "" else ", ${it.value}" }});")
+				}
 			}
 
 			if (it has Check) {
