@@ -350,6 +350,11 @@ public final class Checks {
 			throwBufferSizeGTException(buf, size);
 	}
 
+	public static void check(int index, int size) {
+		if ( index < 0 || size <= index )
+			throwIOBE(index, size);
+	}
+
 	// Separate calls to help inline checkBuffer.
 
 	private static void throwSizeException(Buffer buf, int size) {
@@ -394,6 +399,10 @@ public final class Checks {
 
 	private static void throwBufferSizeGTException(CustomBuffer<?> buf, int size) {
 		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at most " + size + ".");
+	}
+
+	private static void throwIOBE(int index, int size) {
+		throw new IndexOutOfBoundsException("Index is " + index + ", must be between 0 and  " + (size - 1));
 	}
 
 }

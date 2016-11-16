@@ -468,13 +468,18 @@ $indentation}"""
 			println("import org.lwjgl.*;")
 		println("import org.lwjgl.system.*;\n")
 
-		fun Struct.hasChecks(): Boolean =
-			mutableMembers.any {
-				it is StructMemberArray ||
-				it.nativeType is CharSequenceType ||
-				(it.nativeType is PointerType && (!it.has(NullableMember) && (it.nativeType !is StructType || it.nativeType.includesPointer))) ||
-				(it.isNestedStructDefinition && (it.nativeType as StructType).definition.hasChecks())
-			}
+		fun Struct.hasChecks(): Boolean = visibleMembers.any {
+			(it is StructMemberArray && it !is StructMemberCharArray) ||
+			(
+				(mutable || it.mutable) &&
+				(
+					it is StructMemberArray ||
+					it.nativeType is CharSequenceType ||
+					(it.nativeType is PointerType && !it.has(NullableMember) && (it.nativeType !is StructType || it.nativeType.includesPointer))
+				)
+			) ||
+			it.isNestedStructDefinition && (it.nativeType as StructType).definition.hasChecks()
+		}
 
 		if (hasChecks())
 			println("import static org.lwjgl.system.Checks.*;")
@@ -1247,7 +1252,10 @@ ${validations.joinToString("\n")}
 							setRemaining(it, prefix = "\t\t", suffix = "\n")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
-							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) { memPutAddress($STRUCT + $field + index * POINTER_SIZE, ${it.addressValue}); }")
+							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) {")
+							println("\t\tif ( CHECKS ) check(index, ${it.size});")
+							println("\t\tmemPutAddress($STRUCT + $field + index * POINTER_SIZE, ${it.addressValue});")
+							println("\t}")
 						} else {
 							println("\t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) {")
@@ -1256,7 +1264,10 @@ ${validations.joinToString("\n")}
 							setRemaining(it, prefix = "\t\t", suffix = "\n")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
-							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) { memCopy(value.$ADDRESS, $STRUCT + $field + index * $structType.SIZEOF, $structType.SIZEOF); }")
+							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) {")
+							println("\t\tif ( CHECKS ) check(index, ${it.size});")
+							println("\t\tmemCopy(value.$ADDRESS, $STRUCT + $field + index * $structType.SIZEOF, $structType.SIZEOF);")
+							println("\t}")
 						}
 					} else if (it is StructMemberCharArray) {
 						val mapping = it.nativeType.mapping as PrimitiveMapping
@@ -1283,15 +1294,13 @@ ${validations.joinToString("\n")}
 						setRemaining(it, prefix = "\t\t", suffix = "\n")
 						println("\t}")
 
-						println("\t/** Unsafe version of {@link #$setter(int, ${mapping.javaMethodType}) $setter}. */")
-						print("\tpublic static void n$setter(long $STRUCT, int index, ${mapping.javaMethodType} value) { ")
-						print(
-							when (mapping) {
-								PrimitiveMapping.POINTER -> "memPutAddress($STRUCT + $field + index * POINTER_SIZE, value);"
-								else                     -> "memPut${bufferMethodMap[mapping.javaMethodType.simpleName]}($STRUCT + $field + index * $bytesPerElement, value);"
-							}
-						)
-						println(" }")
+						val javaType = it.nativeType.nativeMethodType
+
+						println("\t/** Unsafe version of {@link #$setter(int, $javaType) $setter}. */")
+						println("\tpublic static void n$setter(long $STRUCT, int index, $javaType value) {")
+						println("\t\tif ( CHECKS ) check(index, ${it.size});")
+						println("\t\tmemPut${getBufferMethod(it, javaType)}($STRUCT + $field + index * $bytesPerElement, value);")
+						println("\t}")
 					}
 				} else if (it.nativeType is CharSequenceType) {
 					val mapping = it.nativeType.charMapping
@@ -1472,6 +1481,7 @@ ${validations.joinToString("\n")}
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
+							println("\t\tif ( CHECKS ) check(index, ${it.size});")
 							println("\t\treturn $nestedStruct.create(memGetAddress($STRUCT + $field + index * POINTER_SIZE));")
 							println("\t}")
 						} else {
@@ -1481,6 +1491,7 @@ ${validations.joinToString("\n")}
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
+							println("\t\tif ( CHECKS ) check(index, ${it.size});")
 							println("\t\treturn $nestedStruct.create($STRUCT + $field + index * $nestedStruct.SIZEOF);")
 							println("\t}")
 						}
@@ -1502,11 +1513,14 @@ ${validations.joinToString("\n")}
 						println("\t\treturn mem$bufferType($STRUCT + $field, ${getReferenceMember(AutoSizeMember, it.name)?.autoSize ?: it.size});")
 						println("\t}")
 
-						val javaType = mapping.javaMethodType.simpleName
-						val bufferMethod = getBufferMethod(it, javaType)
+						val javaType = it.nativeType.nativeMethodType
+						val bytesPerElement = if (mapping === PrimitiveMapping.POINTER) "POINTER_SIZE" else mapping.bytes.toString()
 
 						println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
-						println("\tpublic static $javaType n$getter(long $STRUCT, int index) { return memGet$bufferMethod($STRUCT + $field + index * ${mapping.bytes}); }")
+						println("\tpublic static $javaType n$getter(long $STRUCT, int index) {")
+						println("\t\tif ( CHECKS ) check(index, ${it.size});")
+						println("\t\treturn memGet${getBufferMethod(it, javaType)}($STRUCT + $field + index * $bytesPerElement);")
+						println("\t}")
 					}
 				} else if (it.nativeType is CharSequenceType) {
 					val mapping = it.nativeType.charMapping
