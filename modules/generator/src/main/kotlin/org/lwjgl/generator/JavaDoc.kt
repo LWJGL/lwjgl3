@@ -140,7 +140,7 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 
 /** Specialized conversion for methods. */
 internal fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
-	if (documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && params.none() { it.documentation.isNotEmpty() })
+	if (documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && params.none { it.documentation.isNotEmpty() })
 		return ""
 
 	if (params.none() && returnDoc.isEmpty())

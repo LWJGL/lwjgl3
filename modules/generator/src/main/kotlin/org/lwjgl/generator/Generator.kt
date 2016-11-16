@@ -518,7 +518,7 @@ internal fun Path.lastModified(
 
 	return Files
 		.find(this, maxDepth, BiPredicate { path, attribs -> matcher.matches(path) })
-		.mapToLong { it.lastModified }
+		.mapToLong(Path::lastModified)
 		.reduce(0L, Math::max)
 }
 

@@ -883,10 +883,7 @@ class NativeClassFunction(
 					"${param.name}.get(${param.name}.position())"
 			).let {
 				val custom = param[AutoSizeResultParam].expression
-				if (custom == null)
-					it
-				else
-					custom.replace("\$original", it)
+				custom?.replace("\$original", it) ?: it
 			}.let { if (param.nativeType.mapping === PointerMapping.DATA_INT) it else "(int)$it" }
 
 	private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: ApplyTo, hasFinally: Boolean) {
@@ -1217,7 +1214,7 @@ class NativeClassFunction(
 				if (countParam != null)
 					transforms[countParam] = ExpressionTransform("${it.name}.length")
 
-				transforms[it] = if (it === parameters.last() {
+				transforms[it] = if (it === parameters.last {
 					it !== lengthsParam && it !== countParam // these will be hidden, ignore
 				}) PointerArrayTransformVararg else PointerArrayTransformArray
 			}

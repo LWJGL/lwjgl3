@@ -360,7 +360,7 @@ $indent}"""
 			builder.append(codeBlock(printStructLayout()))
 		}
 
-		if (builder.length != 0)
+		if (builder.isNotEmpty())
 			println(processDocumentation(builder.toString()).toJavaDoc(indentation = ""))
 	}
 
@@ -483,10 +483,7 @@ $indentation}"""
 
 		printDocumentation()
 		print("${access.modifier}class $className extends ")
-		print(if (extends == null)
-			"Struct${if (mallocable) " implements NativeResource" else ""}"
-		else
-			extends.className
+		print(extends?.className ?: "Struct${if (mallocable) " implements NativeResource" else ""}"
 		)
 
 		print(""" {
@@ -1462,7 +1459,7 @@ ${validations.joinToString("\n")}
 
 							println("\t/** Unsafe version of {@link #$getter}. */")
 							println("\tpublic static PointerBuffer n$getter(long $STRUCT) {")
-							println("\t\treturn memPointerBuffer($STRUCT + $field, ${if (capacity == null) it.size else capacity.autoSize});")
+							println("\t\treturn memPointerBuffer($STRUCT + $field, ${capacity?.autoSize ?: it.size});")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
@@ -1473,7 +1470,7 @@ ${validations.joinToString("\n")}
 
 							println("\t/** Unsafe version of {@link #$getter}. */")
 							println("\tpublic static $nestedStruct.Buffer n$getter(long $STRUCT) {")
-							println("\t\treturn $nestedStruct.create($STRUCT + $field, ${if (capacity == null) it.size else capacity.autoSize});")
+							println("\t\treturn $nestedStruct.create($STRUCT + $field, ${capacity?.autoSize ?: it.size});")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
