@@ -1110,9 +1110,9 @@ val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel"
 
 // WINDOW
 
-val nk_window_p = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_window").p
+val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_window")
 val nk_popup_state = struct(NUKLEAR_PACKAGE, "NkPopupState", nativeName = "struct nk_popup_state", mutable = false) {
-	nk_window_p.member("win", "")
+	nk_window.p.member("win", "")
 	nk_panel_type.member("type", "")
 	nk_hash.member("name", "")
 	int.member("active", "")
@@ -1152,7 +1152,7 @@ val nk_property_state = struct(NUKLEAR_PACKAGE, "NkPropertyState", nativeName = 
 }
 
 val NK_WINDOW_MAX_NAME = 64
-val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_window", mutable = false) {
+val nk_window_p = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_window", mutable = false) {
 	unsigned_int.member("seq", "")
 	nk_hash.member("name", "")
 	charUTF8.array("name_string", "", size = NK_WINDOW_MAX_NAME)
@@ -1174,10 +1174,10 @@ val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_wind
 	unsigned_short.member("table_size", "")
 
 	/* window list hooks */
-	nk_window_p.member("next", "")
-	nk_window_p.member("prev", "")
-	nk_window_p.member("parent", "")
-}
+	nk_window.p.member("next", "")
+	nk_window.p.member("prev", "")
+	nk_window.p.member("parent", "")
+}.p
 
 val nk_pool = struct(NUKLEAR_PACKAGE, "NkPool", nativeName = "struct nk_pool", mutable = false) {
 	access = Access.INTERNAL
@@ -1239,27 +1239,27 @@ val nk_context_p = struct(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct nk_
 /* private:
 	should only be accessed if you
 	know what you are doing */
-	nk_draw_list.member("draw_list", "")
-	nk_handle.member("userdata", "")
+	nk_draw_list.member("draw_list", "").public = false
+	nk_handle.member("userdata", "").public = false
 
 	/* text editor objects are quite big because of an internal
 	 * undo/redo stack. Therefore does not make sense to have one for
 	 * each window for temporary use cases, so I only provide *one* instance
 	 * for all windows. This works because the content is cleared anyway */
-	nk_text_edit.member("text_edit", "")
-	nk_command_buffer.member("overlay", "")
+	nk_text_edit.member("text_edit", "").public = false
+	nk_command_buffer.member("overlay", "").public = false
 
 	/* windows */
-	int.member("build", "")
-	intb.member("use_pool", "")
-	nk_pool.member("pool", "")
-	nullable..nk_window_p.member("begin", "")
-	nullable..nk_window_p.member("end", "")
-	nullable..nk_window_p.member("active", "")
-	nullable..nk_window_p.member("current", "")
-	nullable.."nk_page_element".p.member("freelist", "")
-	unsigned_int.member("count", "")
-	unsigned_int.member("seq", "")
+	int.member("build", "").public = false
+	intb.member("use_pool", "").public = false
+	nk_pool.member("pool", "").public = false
+	(nullable..nk_window_p.member("begin", "")).public = false
+	(nullable..nk_window_p.member("end", "")).public = false
+	(nullable..nk_window_p.member("active", "")).public = false
+	(nullable..nk_window_p.member("current", "")).public = false
+	(nullable.."nk_page_element".p.member("freelist", "")).public = false
+	unsigned_int.member("count", "").public = false
+	unsigned_int.member("seq", "").public = false
 }.p
 
 val nk_value_getter = "nk_value_getter".callback(
