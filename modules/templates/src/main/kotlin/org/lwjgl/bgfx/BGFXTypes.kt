@@ -179,6 +179,14 @@ val bgfx_texture_info_t_p = struct(BGFX_PACKAGE, "BGFXTextureInfo", nativeName =
 	bool.member("cubeMap", "texture is cubemap")
 }.p
 
+val bgfx_uniform_info_t_p = struct(BGFX_PACKAGE, "BGFXUniformInfo", nativeName = "bgfx_uniform_info_t") {
+	documentation = "Uniform info."
+
+	charASCII.array("name", "uniform name", size = 256)
+	bgfx_uniform_type_t.member("type", "uniform type")
+	uint16_t.member("num", "number of elements in array")
+}
+
 val bgfx_attachment_t_p = struct(BGFX_PACKAGE, "BGFXAttachment", nativeName = "bgfx_attachment_t") {
 	documentation = "Frame buffer texture attachemnt info."
 

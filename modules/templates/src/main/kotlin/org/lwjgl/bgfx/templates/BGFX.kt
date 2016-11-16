@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	IntConstant(
 		"API version",
 
-		"API_VERSION".."28"
+		"API_VERSION".."30"
 	)
 
 	ShortConstant(
@@ -1530,25 +1530,6 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		returnDoc = "frame number when the result will be available"
 	)
 
-	uint32_t(
-		"read_frame_buffer",
-		"""
-		Reads back texture content.
-
-		Texture must be created with #TEXTURE_READ_BACK flag. Availability depends on #CAPS_TEXTURE_READ_BACK.
-		""",
-
-		bgfx_frame_buffer_handle_t.IN("_handle", "frame buffer handle"),
-		MapToInt..uint8_t.IN("_attachment", "frame buffer attachment index"),
-		MultiType(
-			PointerMapping.DATA_SHORT,
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_FLOAT
-		)..void_p.IN("_data", "destination buffer"),
-
-		returnDoc = "frame number when the result will be available"
-	)
-
 	void(
 		"destroy_texture",
 		"Destroys texture.",
@@ -1617,6 +1598,16 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		returnDoc = "handle to frame buffer object"
 	)
 
+	bgfx_texture_handle_t(
+		"get_texture",
+		"Obtains texture handle of frame buffer attachment.",
+
+		bgfx_frame_buffer_handle_t.IN("_handle", "frame buffer handle"),
+		MapToInt..uint8_t.IN("_attachment", "frame buffer attachment index"),
+
+		returnDoc = "invalid texture handle if attachment index is not correct, or frame buffer is created with native window handle"
+	)
+
 	void(
 		"destroy_frame_buffer",
 		"Destroys frame buffer.",
@@ -1651,6 +1642,14 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		MapToInt..uint16_t.IN("_num", "number of elements in array"),
 
 		returnDoc = "handle to uniform object"
+	)
+
+	void(
+		"get_uniform_info",
+		"Retrieves uniform info.",
+
+		bgfx_uniform_handle_t.IN("_handle", "handle to uniform object"),
+		bgfx_uniform_info_t_p.OUT("_info", "uniform info")
 	)
 
 	void(
@@ -2039,17 +2038,6 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		uint32_t.IN("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", TextureFlags)
 	)
 
-	void(
-		"set_texture_from_frame_buffer",
-		"Sets texture stage for draw primitive.",
-
-		MapToInt..uint8_t.IN("_stage", "texture unit"),
-		bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
-		bgfx_frame_buffer_handle_t.IN("_handle", "texture handle"),
-		MapToInt..uint8_t.IN("_attachment", "frame buffer attachment index"),
-		uint32_t.IN("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", TextureFlags)
-	)
-
 	uint32_t(
 		"touch",
 		"""
@@ -2111,18 +2099,6 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
 		bgfx_texture_handle_t.IN("_handle", "texture handle"),
 		MapToInt..uint8_t.IN("_mip", "mip level"),
-		bgfx_access_t.IN("_access", "texture access", Access),
-		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat)
-	)
-
-	void(
-		"set_image_from_frame_buffer",
-		"Sets compute image from frame buffer texture.",
-
-		MapToInt..uint8_t.IN("_stage", "texture unit"),
-		bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
-		bgfx_texture_handle_t.IN("_handle", "texture handle"),
-		MapToInt..uint8_t.IN("_attachment", "frame buffer attachment index"),
 		bgfx_access_t.IN("_access", "texture access", Access),
 		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat)
 	)
@@ -2222,43 +2198,6 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 			"""
 		),
 		bgfx_texture_handle_t.IN("_src", "source texture handle"),
-		MapToInt..uint8_t.IN("_srcMip", "source texture mip level"),
-		MapToInt..uint16_t.IN("_srcX", "source texture X position"),
-		MapToInt..uint16_t.IN("_srcY", "source texture Y position"),
-		MapToInt..uint16_t.IN(
-			"_srcZ",
-			"""
-			if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
-			this argument represent destination texture Z position.
-			"""
-		),
-		MapToInt..uint16_t.IN("_width", "width of region"),
-		MapToInt..uint16_t.IN("_height", "height of region"),
-		MapToInt..uint16_t.IN("_depth", "if texture is 3D this argument represent depth of region, otherwise is unused")
-	)
-
-	void(
-		"blit_frame_buffer",
-		"""
-		Blits texture region between frame buffer and texture.
-
-		Destination texture must be create with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
-		""",
-
-		MapToInt..uint8_t.IN("_id", "view id"),
-		bgfx_texture_handle_t.IN("_dst", "destination texture handle"),
-		MapToInt..uint8_t.IN("_dstMip", "destination texture mip level"),
-		MapToInt..uint16_t.IN("_dstX", "destination texture X position"),
-		MapToInt..uint16_t.IN("_dstY", "destination texture Y position"),
-		MapToInt..uint16_t.IN(
-			"_dstZ",
-			"""
-			if texture is 2D this argument should be 0. If destination texture is cube this argument represent destination texture cube face. For 3D texture
-			this argument represent destination texture Z position.
-			"""
-		),
-		bgfx_frame_buffer_handle_t.IN("_src", "source frame buffer handle"),
-		MapToInt..uint8_t.IN("_attachment", "source frame buffer attachment index"),
 		MapToInt..uint8_t.IN("_srcMip", "source texture mip level"),
 		MapToInt..uint16_t.IN("_srcX", "source texture X position"),
 		MapToInt..uint16_t.IN("_srcY", "source texture Y position"),
