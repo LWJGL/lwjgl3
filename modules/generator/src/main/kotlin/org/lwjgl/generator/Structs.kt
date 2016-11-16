@@ -433,15 +433,18 @@ $indentation}"""
 				if (bufferParam == null)
 					it.error("Reference does not exist: AutoSize($reference)")
 				else {
-					when {
-						bufferParam.nativeType !is PointerType
-						                                      -> it.error("Reference must be a pointer type: AutoSize($reference)")
-						!bufferParam.nativeType.isPointerData -> it.error("Reference must not be a opaque pointer: AutoSize($reference)")
-						bufferParam.nativeType is StructType && !(bufferParam is StructMemberBuffer || bufferParam is StructMemberArray)
-						                                      -> it.error("Reference must be a struct buffer: AutoSize($reference)")
-						autoSize.atLeastOne && !bufferParam.has(nullable)
-						                                      -> it.error("The \"atLeastOne\" option requires references to be nullable: AutoSize($reference)")
+					if (bufferParam !is StructMemberArray) {
+						if (bufferParam.nativeType !is PointerType)
+							it.error("Reference must be a pointer type: AutoSize($reference)")
+
+						if (!bufferParam.nativeType.isPointerData)
+							it.error("Reference must not be a opaque pointer: AutoSize($reference)")
+
+						if (bufferParam.nativeType is StructType && !(bufferParam is StructMemberBuffer || bufferParam is StructMemberArray))
+							it.error("Reference must be a struct buffer: AutoSize($reference)")
 					}
+					if (autoSize.atLeastOne && !bufferParam.has(nullable))
+						it.error("The \"atLeastOne\" option requires references to be nullable: AutoSize($reference)")
 				}
 			}
 		}
@@ -1150,7 +1153,7 @@ ${validations.joinToString("\n")}
 		}
 		.let { if (4 < (nativeType.mapping as PrimitiveMapping).bytes && !it.startsWith('(')) "(int)$it" else it }
 
-	private fun PrintWriter.setRemaining(m: StructMember) {
+	private fun PrintWriter.setRemaining(m: StructMember, offset: Int = 0, prefix: String = " ", suffix: String = "") {
 		// do not do this if the AutoSize parameter auto-sizes multiple members
 		val capacity = members.firstOrNull { it has AutoSizeMember && it[AutoSizeMember].let { it.atLeastOne || (it.dependent.isEmpty() && it.reference == m.name) } }
 		if (capacity != null) {
@@ -1163,17 +1166,20 @@ ${validations.joinToString("\n")}
 						it
 				}
 				.let { if ((capacity.nativeType.mapping as PrimitiveMapping).bytes < 4) "(${capacity.nativeType.mapping.javaMethodType})$it" else it }
+				.let { if (offset != 0) "$it - $offset" else it }
 
+			print(prefix)
 			print(if (m has nullable || autoSize.optional) {
 				if (autoSize.atLeastOne)
-					" if ( value != null ) n${capacity.name}($STRUCT, $autoSizeExpression);"
+					"if ( value != null ) n${capacity.name}($STRUCT, $autoSizeExpression);"
 				else if (m has nullable && !autoSize.optional)
-					" if ( value != null ) n${capacity.name}($STRUCT, $autoSizeExpression);"
+					"if ( value != null ) n${capacity.name}($STRUCT, $autoSizeExpression);"
 				else
-					" n${capacity.name}($STRUCT, value == null ? 0 : $autoSizeExpression);"
+					"n${capacity.name}($STRUCT, value == null ? 0 : $autoSizeExpression);"
 			} else
-				" n${capacity.name}($STRUCT, $autoSizeExpression);"
+				"n${capacity.name}($STRUCT, $autoSizeExpression);"
 			)
+			print(suffix)
 		}
 	}
 
@@ -1238,6 +1244,7 @@ ${validations.joinToString("\n")}
 							println("\tpublic static void n$setter(long $STRUCT, PointerBuffer value) {")
 							println("\t\tif ( CHECKS ) checkBufferGT(value, ${it.size});")
 							println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * POINTER_SIZE);")
+							setRemaining(it, prefix = "\t\t", suffix = "\n")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) { memPutAddress($STRUCT + $field + index * POINTER_SIZE, ${it.addressValue}); }")
@@ -1246,6 +1253,7 @@ ${validations.joinToString("\n")}
 							println("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) {")
 							println("\t\tif ( CHECKS ) checkBufferGT(value, ${it.size});")
 							println("\t\tmemCopy(value.$ADDRESS, $STRUCT + $field, value.remaining() * $structType.SIZEOF);")
+							setRemaining(it, prefix = "\t\t", suffix = "\n")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) { memCopy(value.$ADDRESS, $STRUCT + $field + index * $structType.SIZEOF, $structType.SIZEOF); }")
@@ -1261,6 +1269,7 @@ ${validations.joinToString("\n")}
 						println("\t\t\tcheckBufferGT(value, $byteSize);")
 						println("\t\t}")
 						println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining());")
+						setRemaining(it, mapping.bytes, prefix = "\t\t", suffix = "\n")
 						println("\t}")
 					} else {
 						val mapping = it.primitiveMapping
@@ -1271,6 +1280,7 @@ ${validations.joinToString("\n")}
 						println("\tpublic static void n$setter(long $STRUCT, $bufferType value) {")
 						println("\t\tif ( CHECKS ) checkBufferGT(value, ${it.size});")
 						println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * $bytesPerElement);")
+						setRemaining(it, prefix = "\t\t", suffix = "\n")
 						println("\t}")
 
 						println("\t/** Unsafe version of {@link #$setter(int, ${mapping.javaMethodType}) $setter}. */")
@@ -1456,22 +1466,18 @@ ${validations.joinToString("\n")}
 					if (it.nativeType is StructType) {
 						val nestedStruct = it.nativeType.javaMethodType
 						if (it.nativeType.includesPointer) {
-							val capacity = getReferenceMember(AutoSizeMember, it.name)
-
 							println("\t/** Unsafe version of {@link #$getter}. */")
 							println("\tpublic static PointerBuffer n$getter(long $STRUCT) {")
-							println("\t\treturn memPointerBuffer($STRUCT + $field, ${capacity?.autoSize ?: it.size});")
+							println("\t\treturn memPointerBuffer($STRUCT + $field, ${getReferenceMember(AutoSizeMember, it.name)?.autoSize ?: it.size});")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
 							println("\t\treturn $nestedStruct.create(memGetAddress($STRUCT + $field + index * POINTER_SIZE));")
 							println("\t}")
 						} else {
-							val capacity = getReferenceMember(AutoSizeMember, it.name)
-
 							println("\t/** Unsafe version of {@link #$getter}. */")
 							println("\tpublic static $nestedStruct.Buffer n$getter(long $STRUCT) {")
-							println("\t\treturn $nestedStruct.create($STRUCT + $field, ${capacity?.autoSize ?: it.size});")
+							println("\t\treturn $nestedStruct.create($STRUCT + $field, ${getReferenceMember(AutoSizeMember, it.name)?.autoSize ?: it.size});")
 							println("\t}")
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
@@ -1480,19 +1486,20 @@ ${validations.joinToString("\n")}
 						}
 					} else if (it is StructMemberCharArray) {
 						val mapping = it.nativeType.mapping as CharMapping
-						val byteSize = if (mapping.bytes == 1) it.size else "${it.size} * ${mapping.bytes}"
+						val capacity = getReferenceMember(AutoSizeMember, it.name)
+						val byteSize = capacity?.autoSize ?: if (mapping.bytes == 1) it.size else "${it.size} * ${mapping.bytes}"
 
 						println("\t/** Unsafe version of {@link #$getter}. */")
 						println("\tpublic static ByteBuffer n$getter(long $STRUCT) { return memByteBuffer($STRUCT + $field, $byteSize); }")
 						println("\t/** Unsafe version of {@link #${getter}String}. */")
-						println("\tpublic static String n${getter}String(long $STRUCT) { return mem${mapping.charset}($STRUCT + $field); }")
+						println("\tpublic static String n${getter}String(long $STRUCT) { return mem${mapping.charset}(${if (capacity != null) "n$getter($STRUCT)" else "$STRUCT + $field"}); }")
 					} else {
 						val mapping = it.primitiveMapping
 						val bufferType = mapping.toPointer.javaMethodType.simpleName
 
 						println("\t/** Unsafe version of {@link #$getter}. */")
 						println("\tpublic static $bufferType n$getter(long $STRUCT) {")
-						println("\t\treturn mem$bufferType($STRUCT + $field, ${it.size});")
+						println("\t\treturn mem$bufferType($STRUCT + $field, ${getReferenceMember(AutoSizeMember, it.name)?.autoSize ?: it.size});")
 						println("\t}")
 
 						val javaType = mapping.javaMethodType.simpleName
