@@ -155,6 +155,11 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", postfi
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 		</ul>
 
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+		</ul>
+
 		<h5>Command Properties</h5>
 		<table class="lwjgl">
 			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
@@ -198,6 +203,11 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", postfi
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
 		</ul>
 
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+		</ul>
+
 		<h5>Command Properties</h5>
 		<table class="lwjgl">
 			<thead><tr><th>Command Buffer Levels</th><th>Render Pass Scope</th><th>Supported Queue Types</th></tr></thead>
@@ -226,6 +236,11 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", postfi
 			<li>{@code pMarkerInfo} <b>must</b> be a pointer to a ##VkDebugMarkerMarkerInfoEXT structure</li>
 			<li>{@code commandBuffer} <b>must</b> be in the recording state</li>
 			<li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
 		</ul>
 
 		<h5>Command Properties</h5>

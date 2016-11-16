@@ -5,29 +5,7 @@
  */
 package org.lwjgl.vulkan
 
-import org.lwjgl.generator.AutoSize
-import org.lwjgl.generator.IN
-import org.lwjgl.generator.callback
-import org.lwjgl.generator.charUTF8
-import org.lwjgl.generator.charUTF8_p
-import org.lwjgl.generator.const
-import org.lwjgl.generator.enumType
-import org.lwjgl.generator.float
-import org.lwjgl.generator.float_p
-import org.lwjgl.generator.int32_t
-import org.lwjgl.generator.nullable
-import org.lwjgl.generator.p
-import org.lwjgl.generator.rangeTo
-import org.lwjgl.generator.size_t
-import org.lwjgl.generator.struct
-import org.lwjgl.generator.typedef
-import org.lwjgl.generator.uint32_t
-import org.lwjgl.generator.uint32_t_p
-import org.lwjgl.generator.uint8_t
-import org.lwjgl.generator.union
-import org.lwjgl.generator.void
-import org.lwjgl.generator.void_p
-import org.lwjgl.generator.voidptr
+import org.lwjgl.generator.*
 
 val IMG = "IMG"
 val AMD = "AMD"

@@ -5,27 +5,7 @@
  */
 package org.lwjgl.vulkan
 
-import org.lwjgl.generator.AutoSize
-import org.lwjgl.generator.IN
-import org.lwjgl.generator.callback
-import org.lwjgl.generator.charUTF8_p
-import org.lwjgl.generator.char_p
-import org.lwjgl.generator.const
-import org.lwjgl.generator.enumType
-import org.lwjgl.generator.float
-import org.lwjgl.generator.int32_t
-import org.lwjgl.generator.nullable
-import org.lwjgl.generator.p
-import org.lwjgl.generator.rangeTo
-import org.lwjgl.generator.size_t
-import org.lwjgl.generator.struct
-import org.lwjgl.generator.typedef
-import org.lwjgl.generator.uint32_t
-import org.lwjgl.generator.uint32_t_p
-import org.lwjgl.generator.uint64_t
-import org.lwjgl.generator.uint64_t_p
-import org.lwjgl.generator.void_p
-import org.lwjgl.generator.voidptr
+import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.system.windows.*
 
@@ -197,7 +177,7 @@ val VkSwapchainCreateInfoKHR = struct(VULKAN_PACKAGE, "VkSwapchainCreateInfoKHR"
 		##VkExtent2D, #CreateSharedSwapchainsKHR(), #CreateSwapchainKHR()
 		"""
 
-	VkStructureType.member("sType", "the type of this structure and <b>must</b> be #STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR.")
+	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkSwapchainCreateFlagsKHR.member("flags", "reserved for future use, and <b>must</b> be zero.")
 	VkSurfaceKHR.member("surface", "the surface that the swapchain will present images to.")
@@ -247,7 +227,7 @@ val VkPresentInfoKHR = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 		#QueuePresentKHR()
 		"""
 
-	VkStructureType.member("sType", "the type of this structure and <b>must</b> be #STRUCTURE_TYPE_PRESENT_INFO_KHR.")
+	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	AutoSize("pWaitSemaphores", optional = true)..uint32_t.member("waitSemaphoreCount", "the number of semaphores to wait for before issuing the present request. The number <b>may</b> be zero.")
 	nullable..const..VkSemaphore.p.member("pWaitSemaphores", "if not #NULL_HANDLE, is an array of {@code VkSemaphore} objects with {@code waitSemaphoreCount} entries, and specifies the semaphores to wait for before issuing the present request.")
@@ -340,7 +320,7 @@ val VkDisplayModeCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDisplayModeCreateInfo
 		##VkDisplayModeParametersKHR, #CreateDisplayModeKHR()
 		"""
 
-	VkStructureType.member("sType", "the type of this structure and <b>must</b> be #STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR.")
+	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDisplayModeCreateFlagsKHR.member("flags", "reserved for future use, and <b>must</b> be zero.")
 	VkDisplayModeParametersKHR.member("parameters", "a ##VkDisplayModeParametersKHR structure describing the display parameters to use in creating the new mode. If the parameters are not compatible with the specified display, the implementation <b>must</b> return #ERROR_INITIALIZATION_FAILED.")
@@ -418,7 +398,7 @@ val VkDisplaySurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkDisplaySurfaceCrea
 		##VkExtent2D, #CreateDisplayPlaneSurfaceKHR()
 		"""
 
-	VkStructureType.member("sType", "the type of this structure and <b>must</b> be #STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR.")
+	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDisplaySurfaceCreateFlagsKHR.member("flags", "reserved for future use, and <b>must</b> be zero.")
 	VkDisplayModeKHR.member("displayMode", "the mode to use when displaying this surface.")
@@ -455,7 +435,7 @@ val VkDisplayPresentInfoKHR = struct(VULKAN_PACKAGE, "VkDisplayPresentInfoKHR") 
 		##VkRect2D
 		"""
 
-	VkStructureType.member("sType", "the type of this structure and <b>must</b> be #STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR.")
+	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkRect2D.member("srcRect", "a rectangular region of pixels to present. It <b>must</b> be a subset of the image being presented. If ##VkDisplayPresentInfoKHR is not specified, this region will be assumed to be the entire presentable image.")
 	VkRect2D.member("dstRect", "a rectangular region within the visible region of the swapchain&#8217;s display mode. If ##VkDisplayPresentInfoKHR is not specified, this region will be assumed to be the entire visible region of the visible region of the swapchain&#8217;s mode. If the specified rectangle is a subset of the display mode&#8217;s visible region, content from display planes below the swapchain&#8217;s plane will be visible outside the rectangle. If there are no planes below the swapchain&#8217;s, the area outside the specified rectangle will be black. If portions of the specified rectangle are outside of the display&#8217;s visible region, pixels mapping only to those portions of the rectangle will be discarded.")
@@ -480,7 +460,7 @@ val VkXlibSurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkXlibSurfaceCreateInfo
 		#CreateXlibSurfaceKHR()
 		"""
 
-	VkStructureType.member("sType", "the type of this structure and <b>must</b> be #STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR.")
+	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkXlibSurfaceCreateFlagsKHR.member("flags", "reserved for future use.")
 	Display.p.member("dpy", "a pointer to an Xlib {@code Display} connection to the X server.")
@@ -504,7 +484,7 @@ val VkWin32SurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkWin32SurfaceCreateIn
 		#CreateWin32SurfaceKHR()
 		"""
 
-	VkStructureType.member("sType", "the type of this structure and <b>must</b> be #STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR.")
+	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkWin32SurfaceCreateFlagsKHR.member("flags", "reserved for future use.")
 	HINSTANCE.member("hinstance", "{@code hinstance} and {@code hwnd} are the Win32 {@code HINSTANCE} and {@code HWND} for the window to associate the surface with.")
@@ -576,7 +556,7 @@ val VkDebugMarkerObjectNameInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObject
 		#DebugMarkerSetObjectNameEXT()
 		"""
 
-	VkStructureType.member("sType", "the type of this structure and <b>must</b> be #STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT.")
+	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDebugReportObjectTypeEXT.member("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of the object to be named.")
 	uint64_t.member("object", "the object to be named.")
@@ -604,7 +584,7 @@ val VkDebugMarkerObjectTagInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerObjectT
 		#DebugMarkerSetObjectTagEXT()
 		"""
 
-	VkStructureType.member("sType", "the type of this structure and <b>must</b> be #STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT.")
+	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDebugReportObjectTypeEXT.member("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of the object to be named.")
 	uint64_t.member("object", "the object to be tagged.")
@@ -629,7 +609,7 @@ val VkDebugMarkerMarkerInfoEXT = struct(VULKAN_PACKAGE, "VkDebugMarkerMarkerInfo
 		#CmdDebugMarkerBeginEXT(), #CmdDebugMarkerInsertEXT()
 		"""
 
-	VkStructureType.member("sType", "the type of this structure and <b>must</b> be #STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT.")
+	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	const..charUTF8_p.member("pMarkerName", "a pointer to a null-terminated UTF-8 string that contains the name of the marker.")
 	float.array("color", "an optional RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored.", size = 4)
@@ -784,12 +764,20 @@ val VkImportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkImportMemoryWin3
 		"""
 		import Win32 memory created on the same physical device.
 
+		<h5>Description</h5>
+		If {@code handleType} is 0, this structure is ignored by consumers of the ##VkMemoryAllocateInfo structure it is chained from.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code handleType} <b>must</b> not have more than one bit set.</li>
+			<li>{@code handle} <b>must</b> be a valid handle to memory, obtained as specified by {@code handleType}.</li>
+		</ul>
+
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV</li>
 			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code handleType} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
-			<li>{@code handleType} <b>must</b> not be 0</li>
 		</ul>
 		"""
 
@@ -801,13 +789,14 @@ val VkImportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkImportMemoryWin3
 ￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV = 0x00000002,
 ￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV = 0x00000004,
 ￿    VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV = 0x00000008,
-} VkExternalMemoryHandleTypeFlagBitsNV;</code></pre>""")
-	HANDLE.member("handle", """a Windows {@code HANDLE} referring to the memory.
-<ul>
-			<li>if {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV or #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV, {@code handle} <b>must</b> be a valid handle returned by #GetMemoryWin32HandleNV() or, in the case of #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV, a handle duplicated from such a handle using {@code DuplicateHandle()}.</li>
-			<li>if {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV, {@code handle} <b>must</b> be a valid NT handle returned by {@code IDXGIResource1::ftext:CreateSharedHandle()} or a handle duplicated from such a handle using {@code DuplicateHandle()}.</li>
-			<li>if {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV, {@code handle} <b>must</b> be a valid handle returned by {@code IDXGIResource::GetSharedHandle()}.</li>
+} VkExternalMemoryHandleTypeFlagBitsNV;</code></pre>
+
+		<ul>
+			<li>if {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV or #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV, the handle is one returned by #GetMemoryWin32HandleNV() or, in the case of #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV, one duplicated from such a handle using {@code DuplicateHandle()}.</li>
+			<li>if {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV, the handle is a valid NT handle returned by {@code IDXGIResource1::ftext:CreateSharedHandle()}, or a handle duplicated from such a handle using {@code DuplicateHandle()}.</li>
+			<li>if {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV, the handle is one returned by {@code IDXGIResource::GetSharedHandle()}.</li>
 		</ul>""")
+	HANDLE.member("handle", "a Windows {@code HANDLE} referring to the memory.")
 }
 
 val VkExportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryWin32HandleInfoNV") {
