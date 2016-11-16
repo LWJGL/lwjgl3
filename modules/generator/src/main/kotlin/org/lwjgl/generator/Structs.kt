@@ -207,7 +207,7 @@ class Struct(
 
 	/** Nested member struct definition. */
 	fun struct(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
-		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, false, false, true, null, false)
+		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, false)
 		struct.init()
 		return StructType(struct).member(name, documentation)
 	}
@@ -219,7 +219,7 @@ class Struct(
 
 	/** Nested member union definition. */
 	fun union(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
-		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, true, false, true, null, false)
+		val struct = Struct(ANONYMOUS, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, false)
 		struct.init()
 		return StructType(struct).member(name, documentation)
 	}
