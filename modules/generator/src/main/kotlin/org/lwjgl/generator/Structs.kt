@@ -197,7 +197,8 @@ class Struct(
 
 	fun CharType.array(name: String, documentation: String, size: String) = add(StructMemberCharArray(this, name, documentation, size))
 
-	fun padding(size: Int, condition: String? = null) = add(StructMemberPadding(size.toString(), condition))
+	fun padding(size: Int, condition: String? = null) = padding(size.toString(), condition)
+	fun padding(size: String, condition: String? = null) = add(StructMemberPadding(size, condition))
 
 	/** Anonymous nested member struct definition. */
 	fun struct(init: Struct.() -> Unit): StructMember {
