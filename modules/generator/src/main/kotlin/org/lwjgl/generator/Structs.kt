@@ -258,9 +258,9 @@ class Struct(
 			return if (m.nativeType is StructType && m.nativeType.definition.validations.any()) {
 				if (m is StructMemberArray) {
 					"""${if (hasPointer) "" else "${indent}long ${m.name} = $STRUCT + $className.${m.offsetField};\n"}${indent}for ( int i = 0; i < ${m.size}; i++ ) {
-${if (m.validSize == m.size) "$indent   checkPointer(memGetAddress(${m.name}));" else
+${if (m.validSize == m.size) "$indent   check(memGetAddress(${m.name}));" else
 						"""$indent   if ( i < ${m.validSize} )
-$indent       checkPointer(memGetAddress(${m.name}));
+$indent       check(memGetAddress(${m.name}));
 $indent   else if ( memGetAddress(${m.name}) == NULL )
 $indent       break;"""}
 $indent   ${m.nativeType.javaMethodType}.validate(${m.name});
@@ -269,11 +269,11 @@ $indent}"""
 				} else {
 					"${if (hasPointer) "" else
 						"${indent}long ${m.name} = memGetAddress($STRUCT + $className.${m.offsetField});\n" +
-						"${indent}checkPointer(${m.name});\n"
+						"${indent}check(${m.name});\n"
 					}$indent${m.nativeType.javaMethodType}.validate(${m.name}${getReferenceMember(AutoSizeMember, m.name).let { if (it != null) ", ${it.name}" else "" }});"
 				}
 			} else
-				"${indent}checkPointer(memGetAddress($STRUCT + $className.${m.offsetField}));"
+				"${indent}check(memGetAddress($STRUCT + $className.${m.offsetField}));"
 		}
 
 		fun validationBlock(condition: String, validations: String): String = validations.contains('\n').let { needBraces ->
@@ -1128,7 +1128,7 @@ ${validations.joinToString("\n")}
 	else
 		throw IllegalStateException()
 
-	private val StructMember.pointerValue: String get() = if (has(nullable)) "value" else "checkPointer(value)"
+	private val StructMember.pointerValue: String get() = if (has(nullable)) "value" else "check(value)"
 	private val StructMember.isNullable: Boolean
 		get() = has(nullable) ||
 		        getReferenceMember(AutoSizeMember, name)?.get(AutoSizeMember)?.optional ?: false ||
@@ -1247,7 +1247,7 @@ ${validations.joinToString("\n")}
 						if (it.nativeType.includesPointer) {
 							println("\t/** Unsafe version of {@link #$setter(PointerBuffer) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, PointerBuffer value) {")
-							println("\t\tif ( CHECKS ) checkBufferGT(value, ${it.size});")
+							println("\t\tif ( CHECKS ) checkGT(value, ${it.size});")
 							println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * POINTER_SIZE);")
 							setRemaining(it, prefix = "\t\t", suffix = "\n")
 							println("\t}")
@@ -1259,7 +1259,7 @@ ${validations.joinToString("\n")}
 						} else {
 							println("\t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) {")
-							println("\t\tif ( CHECKS ) checkBufferGT(value, ${it.size});")
+							println("\t\tif ( CHECKS ) checkGT(value, ${it.size});")
 							println("\t\tmemCopy(value.$ADDRESS, $STRUCT + $field, value.remaining() * $structType.SIZEOF);")
 							setRemaining(it, prefix = "\t\t", suffix = "\n")
 							println("\t}")
@@ -1277,7 +1277,7 @@ ${validations.joinToString("\n")}
 						println("\tpublic static void n$setter(long $STRUCT, ByteBuffer value) {")
 						println("\t\tif ( CHECKS ) {")
 						println("\t\t\tcheckNT${mapping.bytes}(value);")
-						println("\t\t\tcheckBufferGT(value, $byteSize);")
+						println("\t\t\tcheckGT(value, $byteSize);")
 						println("\t\t}")
 						println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining());")
 						setRemaining(it, mapping.bytes, prefix = "\t\t", suffix = "\n")
@@ -1289,7 +1289,7 @@ ${validations.joinToString("\n")}
 
 						println("\t/** Unsafe version of {@link #$setter($bufferType) $setter}. */")
 						println("\tpublic static void n$setter(long $STRUCT, $bufferType value) {")
-						println("\t\tif ( CHECKS ) checkBufferGT(value, ${it.size});")
+						println("\t\tif ( CHECKS ) checkGT(value, ${it.size});")
 						println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * $bytesPerElement);")
 						setRemaining(it, prefix = "\t\t", suffix = "\n")
 						println("\t}")

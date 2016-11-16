@@ -83,27 +83,13 @@ public final class Checks {
 	}
 
 	/**
-	 * Ensures that the specified function pointer is not-null (0L).
-	 *
-	 * @param pointer the pointer to check
-	 *
-	 * @throws IllegalStateException
-	 */
-	public static long checkFunctionAddress(long pointer) {
-		if ( pointer == NULL )
-			throw new IllegalStateException("This function is not available.");
-
-		return pointer;
-	}
-
-	/**
-	 * Ensures that the specified pointer is not-null (0L).
+	 * Ensures that the specified pointer is not {@code NULL} (0L).
 	 *
 	 * @param pointer the pointer to check
 	 *
 	 * @throws NullPointerException
 	 */
-	public static long checkPointer(long pointer) {
+	public static long check(long pointer) {
 		if ( pointer == NULL )
 			throw new NullPointerException();
 
@@ -117,35 +103,35 @@ public final class Checks {
 
 	/** Ensures that the specified array is terminated with the specified terminator. */
 	public static void checkNT(int[] buf, int terminator) {
-		checkBuffer(buf, 1);
+		check(buf, 1);
 		if ( buf[buf.length - 1] != terminator )
 			throw new IllegalArgumentException("Missing termination");
 	}
 
 	/** Ensures that the specified array is null-terminated. */
 	public static void checkNT(long[] buf) {
-		checkBuffer(buf, 1);
+		check(buf, 1);
 		if ( buf[buf.length - 1] != NULL )
 			throw new IllegalArgumentException("Missing termination");
 	}
 
 	/** Ensures that the specified array is null-terminated. */
 	public static void checkNT(float[] buf) {
-		checkBuffer(buf, 1);
+		check(buf, 1);
 		if ( buf[buf.length - 1] != 0.0f )
 			throw new IllegalArgumentException("Missing termination");
 	}
 
 	/** Ensures that the specified ByteBuffer is null-terminated (last byte equal to 0). */
 	public static void checkNT1(ByteBuffer buf) {
-		checkBuffer(buf, 1);
+		check(buf, 1);
 		if ( buf.get(buf.limit() - 1) != 0 )
 			throw new IllegalArgumentException("Missing null termination");
 	}
 
 	/** Ensures that the specified ByteBuffer is null-terminated (last 2 bytes equal to 0). */
 	public static void checkNT2(ByteBuffer buf) {
-		checkBuffer(buf, 2);
+		check(buf, 2);
 		if ( buf.getShort(buf.limit() - 2) != 0 )
 			throw new IllegalArgumentException("Missing null termination");
 	}
@@ -157,21 +143,21 @@ public final class Checks {
 
 	/** Ensures that the specified IntBuffer is terminated with the specified terminator. */
 	public static void checkNT(IntBuffer buf, int terminator) {
-		checkBuffer(buf, 1);
+		check(buf, 1);
 		if ( buf.get(buf.limit() - 1) != terminator )
 			throw new IllegalArgumentException("Missing termination");
 	}
 
 	/** Ensures that the specified LongBuffer is null-terminated. */
 	public static void checkNT(LongBuffer buf) {
-		checkBuffer(buf, 1);
+		check(buf, 1);
 		if ( buf.get(buf.limit() - 1) != NULL )
 			throw new IllegalArgumentException("Missing termination");
 	}
 
 	/** Ensures that the specified FloatBuffer is null-terminated. */
 	public static void checkNT(FloatBuffer buf) {
-		checkBuffer(buf, 1);
+		check(buf, 1);
 		if ( buf.get(buf.limit() - 1) != 0.0f )
 			throw new IllegalArgumentException("Missing termination");
 	}
@@ -183,7 +169,7 @@ public final class Checks {
 
 	/** Ensures that the specified PointerBuffer is terminated with the specified terminator. */
 	public static void checkNT(PointerBuffer buf, long terminator) {
-		checkBuffer(buf, 1);
+		check(buf, 1);
 		if ( buf.get(buf.limit() - 1) != terminator )
 			throw new IllegalArgumentException("Missing termination");
 	}
@@ -209,9 +195,9 @@ public final class Checks {
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	public static void checkBuffer(short[] buf, int size) {
+	public static void check(short[] buf, int size) {
 		if ( buf.length < size ) {
-			throwSizeException(buf, size);
+			throwIAE(buf, size);
 		}
 	}
 
@@ -223,9 +209,9 @@ public final class Checks {
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	public static void checkBuffer(int[] buf, int size) {
+	public static void check(int[] buf, int size) {
 		if ( buf.length < size ) {
-			throwSizeException(buf, size);
+			throwIAE(buf, size);
 		}
 	}
 
@@ -237,9 +223,9 @@ public final class Checks {
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	public static void checkBuffer(long[] buf, int size) {
+	public static void check(long[] buf, int size) {
 		if ( buf.length < size ) {
-			throwSizeException(buf, size);
+			throwIAE(buf, size);
 		}
 	}
 
@@ -251,9 +237,9 @@ public final class Checks {
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	public static void checkBuffer(float[] buf, int size) {
+	public static void check(float[] buf, int size) {
 		if ( buf.length < size ) {
-			throwSizeException(buf, size);
+			throwIAE(buf, size);
 		}
 	}
 
@@ -265,9 +251,9 @@ public final class Checks {
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	public static void checkBuffer(double[] buf, int size) {
+	public static void check(double[] buf, int size) {
 		if ( buf.length < size ) {
-			throwSizeException(buf, size);
+			throwIAE(buf, size);
 		}
 	}
 
@@ -277,9 +263,9 @@ public final class Checks {
 	 * @param text the text to check
 	 * @param size the minimum number of characters
 	 */
-	public static void checkBuffer(CharSequence text, int size) {
+	public static void check(CharSequence text, int size) {
 		if ( text.length() < size ) {
-			throwSizeException(text, size);
+			throwIAE(text, size);
 		}
 	}
 
@@ -291,15 +277,15 @@ public final class Checks {
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	public static void checkBuffer(Buffer buf, int size) {
+	public static void check(Buffer buf, int size) {
 		if ( buf.remaining() < size ) {
-			throwSizeException(buf, size);
+			throwIAE(buf, size);
 		}
 	}
 
-	/** @see #checkBuffer(Buffer, int) */
-	public static void checkBuffer(Buffer buf, long size) {
-		checkBuffer(buf, (int)size);
+	/** @see #check(Buffer, int) */
+	public static void check(Buffer buf, long size) {
+		check(buf, (int)size);
 	}
 
 	/**
@@ -310,44 +296,44 @@ public final class Checks {
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	public static void checkBuffer(CustomBuffer<?> buf, int size) {
+	public static void check(CustomBuffer<?> buf, int size) {
 		if ( buf.remaining() < size ) {
-			throwSizeException(buf, size);
+			throwIAE(buf, size);
 		}
 	}
 
-	/** @see #checkBuffer(CustomBuffer, int) */
-	public static void checkBuffer(CustomBuffer<?> buf, long size) {
-		checkBuffer(buf, (int)size);
+	/** @see #check(CustomBuffer, int) */
+	public static void check(CustomBuffer<?> buf, long size) {
+		check(buf, (int)size);
 	}
 
-	public static void checkBufferSafe(short[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
-	public static void checkBufferSafe(int[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
-	public static void checkBufferSafe(long[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
-	public static void checkBufferSafe(float[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
-	public static void checkBufferSafe(double[] buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
-	public static void checkBufferSafe(Buffer buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
-	public static void checkBufferSafe(Buffer buf, long size) { if ( buf != null ) checkBuffer(buf, size); }
-	public static void checkBufferSafe(CustomBuffer<?> buf, int size) { if ( buf != null ) checkBuffer(buf, size); }
+	public static void checkSafe(short[] buf, int size) { if ( buf != null ) check(buf, size); }
+	public static void checkSafe(int[] buf, int size) { if ( buf != null ) check(buf, size); }
+	public static void checkSafe(long[] buf, int size) { if ( buf != null ) check(buf, size); }
+	public static void checkSafe(float[] buf, int size) { if ( buf != null ) check(buf, size); }
+	public static void checkSafe(double[] buf, int size) { if ( buf != null ) check(buf, size); }
+	public static void checkSafe(Buffer buf, int size) { if ( buf != null ) check(buf, size); }
+	public static void checkSafe(Buffer buf, long size) { if ( buf != null ) check(buf, size); }
+	public static void checkSafe(CustomBuffer<?> buf, int size) { if ( buf != null ) check(buf, size); }
 
-	public static void checkArray(Object[] array, int size) {
+	public static void check(Object[] array, int size) {
 		if ( array.length < size )
-			throwSizeException(array, size);
+			throwIAE(array, size);
 	}
 
-	public static void checkBufferGT(Buffer buf, int size) {
+	public static void checkGT(Buffer buf, int size) {
 		if ( size < buf.remaining() )
-			throwBufferSizeGTException(buf, size);
+			throwIAEGT(buf, size);
 	}
 
-	public static void checkBufferGT(CustomBuffer<?> buf, int size) {
+	public static void checkGT(CustomBuffer<?> buf, int size) {
 		if ( size < buf.remaining() )
-			throwBufferSizeGTException(buf, size);
+			throwIAEGT(buf, size);
 	}
 
-	public static void checkBufferGT(StructBuffer<?, ?> buf, int size) {
+	public static void checkGT(StructBuffer<?, ?> buf, int size) {
 		if ( size < buf.remaining() )
-			throwBufferSizeGTException(buf, size);
+			throwIAEGT(buf, size);
 	}
 
 	public static void check(int index, int size) {
@@ -355,49 +341,49 @@ public final class Checks {
 			throwIOBE(index, size);
 	}
 
-	// Separate calls to help inline checkBuffer.
+	// Separate calls to help inline check.
 
-	private static void throwSizeException(Buffer buf, int size) {
+	private static void throwIAE(Buffer buf, int size) {
 		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at least " + size);
 	}
 
-	private static void throwSizeException(CustomBuffer<?> buf, int size) {
+	private static void throwIAE(CustomBuffer<?> buf, int size) {
 		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at least " + size);
 	}
 
-	private static void throwSizeException(Object[] array, int size) {
+	private static void throwIAE(Object[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwSizeException(short[] array, int size) {
+	private static void throwIAE(short[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwSizeException(int[] array, int size) {
+	private static void throwIAE(int[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwSizeException(long[] array, int size) {
+	private static void throwIAE(long[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwSizeException(float[] array, int size) {
+	private static void throwIAE(float[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwSizeException(double[] array, int size) {
+	private static void throwIAE(double[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 
-	private static void throwSizeException(CharSequence text, int size) {
+	private static void throwIAE(CharSequence text, int size) {
 		throw new IllegalArgumentException("Number of characters is " + text.length() + ", must be at least " + size);
 	}
 
-	private static void throwBufferSizeGTException(Buffer buf, int size) {
+	private static void throwIAEGT(Buffer buf, int size) {
 		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at most " + size + ".");
 	}
 
-	private static void throwBufferSizeGTException(CustomBuffer<?> buf, int size) {
+	private static void throwIAEGT(CustomBuffer<?> buf, int size) {
 		throw new IllegalArgumentException("Number of remaining buffer elements is " + buf.remaining() + ", must be at most " + size + ".");
 	}
 

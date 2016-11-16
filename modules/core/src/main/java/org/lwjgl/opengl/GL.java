@@ -381,7 +381,7 @@ public final class GL {
 
 			if ( majorVersion < 3 ) {
 				// Parse EXTENSIONS string
-				String extensionsString = memASCII(checkPointer(callP(GetString, GL_EXTENSIONS)));
+				String extensionsString = memASCII(check(callP(GetString, GL_EXTENSIONS)));
 
 				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 				while ( tokenizer.hasMoreTokens() )
@@ -448,14 +448,14 @@ public final class GL {
 			if ( classAtom == 0 )
 				throw new IllegalStateException("Failed to register WGL window class");
 
-			hwnd = checkPointer(nCreateWindowEx(
+			hwnd = check(nCreateWindowEx(
 				0, classAtom & 0xFFFF, NULL,
 				WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS,
 				0, 0, 1, 1,
 				NULL, NULL, NULL, NULL
 			));
 
-			hdc = checkPointer(GetDC(hwnd));
+			hdc = check(GetDC(hwnd));
 
 			PIXELFORMATDESCRIPTOR pfd = PIXELFORMATDESCRIPTOR.callocStack(stack)
 				.nSize((short)PIXELFORMATDESCRIPTOR.SIZEOF)
@@ -472,7 +472,7 @@ public final class GL {
 			if ( !SetPixelFormat(hdc, pixelFormat, pfd) )
 				windowsThrowException("Failed to set the pixel format");
 
-			hglrc = checkPointer(wglCreateContext(hdc));
+			hglrc = check(wglCreateContext(hdc));
 			wglMakeCurrent(hdc, hglrc);
 
 			return createCapabilitiesWGL(hdc);

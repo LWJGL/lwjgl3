@@ -255,7 +255,7 @@ public final class GLES {
 
 			if ( majorVersion < 3 ) {
 				// Parse EXTENSIONS string
-				String extensionsString = memASCII(checkPointer(invokeP(GetString, GL_EXTENSIONS)));
+				String extensionsString = memASCII(check(invokeP(GetString, GL_EXTENSIONS)));
 
 				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 				while ( tokenizer.hasMoreTokens() )
@@ -273,7 +273,7 @@ public final class GLES {
 
 				long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
 				for ( int i = 0; i < extensionCount; i++ )
-					supportedExtensions.add(memASCII(checkPointer(callP(GetStringi, GL_EXTENSIONS, i))));
+					supportedExtensions.add(memASCII(check(callP(GetStringi, GL_EXTENSIONS, i))));
 			}
 
 			caps = new GLESCapabilities(getFunctionProvider(), supportedExtensions);

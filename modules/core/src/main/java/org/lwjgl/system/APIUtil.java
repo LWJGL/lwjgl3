@@ -117,7 +117,7 @@ public final class APIUtil {
 	}
 
 	public static long apiGetFunctionAddress(FunctionProvider provider, String functionName) {
-		return checkFunctionAddress(provider.getFunctionAddress(functionName));
+		return check(provider.getFunctionAddress(functionName));
 	}
 
 	/** A data class for API versioning information. */

@@ -18,7 +18,7 @@ public abstract class Struct extends Pointer.Default {
 		Library.initialize();
 	}
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings({"unused", "FieldCanBeLocal"})
 	private ByteBuffer container;
 
 	protected Struct(long address, ByteBuffer container) {
@@ -45,7 +45,7 @@ public abstract class Struct extends Pointer.Default {
 
 	protected static ByteBuffer checkContainer(ByteBuffer container, int sizeof) {
 		if ( Checks.CHECKS && container != null )
-			checkBuffer(container, sizeof);
+			check(container, sizeof);
 
 		return container;
 	}

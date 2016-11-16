@@ -42,7 +42,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 		long url = NULL;
 		try ( MemoryStack stack = stackPush() ) {
 			filePath = CString2CFString(stack.UTF8(path), kCFStringEncodingUTF8);
-			url = checkPointer(CFURLCreateWithFileSystemPath(NULL, filePath, kCFURLPOSIXPathStyle, true));
+			url = check(CFURLCreateWithFileSystemPath(NULL, filePath, kCFURLPOSIXPathStyle, true));
 
 			long bundleRef = CFBundleCreate(NULL, url);
 			if ( bundleRef == NULL )
@@ -66,7 +66,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 	}
 
 	private static long CString2CFString(ByteBuffer name, int encoding) {
-		return checkPointer(CFStringCreateWithCStringNoCopy(NULL, name, encoding, kCFAllocatorNull));
+		return check(CFStringCreateWithCStringNoCopy(NULL, name, encoding, kCFAllocatorNull));
 	}
 
 	@Override

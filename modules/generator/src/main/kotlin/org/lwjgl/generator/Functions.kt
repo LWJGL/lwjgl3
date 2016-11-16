@@ -382,7 +382,7 @@ class NativeClassFunction(
 
 		// Validate function address
 		if ((has(DependsOn) || has(IgnoreMissing) || (nativeClass.binding?.shouldCheckFunctionAddress(this@NativeClassFunction) ?: false)) && !hasUnsafeMethod)
-			checks.add("checkFunctionAddress($FUNCTION_ADDRESS);")
+			checks.add("check($FUNCTION_ADDRESS);")
 
 		// We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
 		// So we need to scale the length check by the number of bytes per element.
@@ -419,7 +419,7 @@ class NativeClassFunction(
 		getNativeParams().forEach {
 			if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER) {
 				if (!it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType && transforms?.get(it) !is SkipCheckFunctionTransform)
-					checks.add("checkPointer(${it.name});")
+					checks.add("check(${it.name});")
 				return@forEach
 			}
 
@@ -445,11 +445,11 @@ class NativeClassFunction(
 					val DEBUG = if (check.debug) "if ( DEBUG )\n\t\t\t\t" else ""
 
 					if (it has MultiType)
-						checks.add("${DEBUG}checkBuffer$Safe(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});")
+						checks.add("${DEBUG}check$Safe(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});")
 					else if (it.nativeType is StructType)
-						checks.add("${DEBUG}checkBuffer$Safe(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});")
+						checks.add("${DEBUG}check$Safe(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});")
 					else
-						checks.add("${DEBUG}checkBuffer$Safe(${it.name}, ${check.expression});")
+						checks.add("${DEBUG}check$Safe(${it.name}, ${check.expression});")
 				}
 			}
 
@@ -468,7 +468,7 @@ class NativeClassFunction(
 					sequenceOf(autoSize.reference, *autoSize.dependent).forEach {
 						val bufferParam = paramMap[it]!!
 						Safe = if (bufferParam has Nullable) "Safe" else ""
-						checks.add("checkBuffer$Safe($it, $expression);")
+						checks.add("check$Safe($it, $expression);")
 					}
 				}
 
@@ -496,9 +496,9 @@ class NativeClassFunction(
 						if (transform !is SkipCheckFunctionTransform) {
 							Safe = if (param has Nullable && transform !is PointerArrayTransform) "Safe" else ""
 							checks.add(if (transform === PointerArrayTransformArray)
-								"checkArray$Safe($it, $expression);"
+								"check$Safe($it, $expression);"
 							else
-								"checkBuffer$Safe($it, $expression);")
+								"check$Safe($it, $expression);")
 						}
 					}
 				}
@@ -668,10 +668,10 @@ class NativeClassFunction(
 		// Basic checks
 		val checks = ArrayList<String>(4)
 		if (has(DependsOn) || has(IgnoreMissing) || binding.shouldCheckFunctionAddress(this@NativeClassFunction))
-			checks.add("checkFunctionAddress($FUNCTION_ADDRESS);")
+			checks.add("check($FUNCTION_ADDRESS);")
 		getNativeParams().forEach {
 			if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType)
-				checks.add("checkPointer(${it.name});")
+				checks.add("check(${it.name});")
 			else if (it.paramType != OUT && it.nativeType is StructType && it.nativeType.definition.validations.any())
 				checks.add(
 					"${it.nativeType.javaMethodType}.validate(${it.name}${sequenceOf(
