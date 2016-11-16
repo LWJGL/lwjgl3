@@ -24,13 +24,13 @@ val jemalloc_macros = Generator.register(object : GeneratorTarget(JEMALLOC_PACKA
 	public static final int JEMALLOC_VERSION_MINOR = 3;
 
 	/** The bugfix version. */
-	public static final int JEMALLOC_VERSION_BUGFIX = 0;
+	public static final int JEMALLOC_VERSION_BUGFIX = 1;
 
 	/** Tthe revision number. */
 	public static final int JEMALLOC_VERSION_NREV = 0;
 
 	/** The globally unique identifier (git commit hash). */
-	public static final String JEMALLOC_VERSION_GID = "9bef119b42d2d5041621f975177fb7dc20fc447c";
+	public static final String JEMALLOC_VERSION_GID = "0110fa8451af905affd77c3bea0d545fee2251b2";
 
 	/** Returns the version string. */
 	public static final String JEMALLOC_VERSION =
