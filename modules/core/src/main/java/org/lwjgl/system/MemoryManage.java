@@ -23,12 +23,12 @@ final class MemoryManage {
 	}
 
 	static MemoryAllocator getInstance() {
-		Object allocator = Configuration.MEMORY_ALLOCATOR.get("jemalloc");
+		Object allocator = Configuration.MEMORY_ALLOCATOR.get();
 		if ( allocator instanceof MemoryAllocator )
 			return (MemoryAllocator)allocator;
 
 		if ( !"system".equals(allocator) ) {
-			String className = "jemalloc".equals(allocator)
+			String className = allocator == null || "jemalloc".equals(allocator)
 				? "org.lwjgl.system.jemalloc.JEmallocAllocator"
 				: allocator.toString();
 
@@ -36,9 +36,9 @@ final class MemoryManage {
 				Class<?> allocatorClass = Class.forName(className);
 				return (MemoryAllocator)allocatorClass.getConstructor().newInstance();
 			} catch (Throwable t) {
-				if ( Checks.DEBUG )
+				if ( Checks.DEBUG && allocator != null )
 					t.printStackTrace(DEBUG_STREAM);
-				apiLog(String.format("Failed to instantiate memory allocator: %s", className));
+				apiLog(String.format("Warning: Failed to instantiate memory allocator: %s. Using the system default.", className));
 			}
 		}
 
