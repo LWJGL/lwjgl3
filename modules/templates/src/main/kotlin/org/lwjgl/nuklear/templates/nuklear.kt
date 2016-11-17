@@ -1038,6 +1038,35 @@ nk_style_pop_vec2(ctx);""")}
 		void("group_end", "", ctx)
 
 		intb(
+			"group_scrolled_begin",
+			"",
+
+			ctx,
+			nk_scroll_p.IN("scroll", ""),
+			const..charUTF8_p.IN("title", ""),
+			nk_flags.IN("flags", "")
+		)
+		void("group_scrolled_end", "", ctx)
+
+		intb(
+			"list_view_begin",
+			"",
+
+			ctx,
+			nk_list_view_p.OUT("view", ""),
+			const..charUTF8_p.IN("title", ""),
+			nk_flags.IN("flags", ""),
+			int.IN("row_height", ""),
+			int.IN("row_count", "")
+		)
+		void(
+			"list_view_end",
+			"",
+
+			nk_list_view_p.OUT("view", "")
+		)
+
+		intb(
 			"tree_push_hashed",
 			"",
 
@@ -1065,6 +1094,29 @@ nk_style_pop_vec2(ctx);""")}
 		)
 
 		void("tree_pop", "", ctx)
+
+		intb(
+			"tree_state_push",
+			"",
+			
+			ctx,
+			nk_tree_type.IN("type", ""),
+			const..charUTF8_p.IN("title", ""),
+			Check(1)..nk_collapse_states.p.INOUT("state", "")
+		)
+
+		intb(
+			"tree_state_image_push",
+			"",
+			
+			ctx,
+			nk_tree_type.IN("type", ""),
+			nk_image.IN("image", ""),
+			const..charUTF8_p.IN("title", ""),
+			Check(1)..nk_collapse_states.p.INOUT("state", "")
+		)
+
+		void("tree_state_pop", "", ctx)
 
 		void(
 			"text",
@@ -1150,6 +1202,29 @@ nk_style_pop_vec2(ctx);""")}
 			nk_image.IN("img", "")
 		)
 
+		void(
+			"button_set_behavior",
+			"",
+
+			ctx,
+			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+		)
+
+		intb(
+			"button_push_behavior",
+			"",
+
+			ctx,
+			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+		)
+
+		intb(
+			"button_pop_behavior",
+			"",
+
+			ctx
+		)
+
 		intb(
 			"button_text",
 			"",
@@ -1233,27 +1308,87 @@ nk_style_pop_vec2(ctx);""")}
 			nk_flags.IN("alignment", "", TextAlignments)
 		)
 
-		void(
-			"button_set_behavior",
+		intb(
+			"button_text_styled",
+			"",
+
+			nk_context_p.OUT("ctx", ""),
+			const..nk_style_button_p.IN("style", ""),
+			const..char_p.IN("title", ""),
+			int.IN("len", "")
+		)
+
+		intb(
+			"button_label_styled",
+			"",
+
+			nk_context_p.OUT("ctx", ""),
+			const..nk_style_button_p.IN("style", ""),
+			const..char_p.IN("title", "")
+		)
+
+		intb(
+			"button_symbol_styled",
+			"",
+
+			nk_context_p.OUT("ctx", ""),
+			const..nk_style_button_p.IN("style", ""),
+			nk_symbol_type.IN("symbol", "")
+		)
+
+		intb(
+			"button_image_styled",
+			"",
+
+			nk_context_p.OUT("ctx", ""),
+			const..nk_style_button_p.IN("style", ""),
+			nk_image.IN("img", "")
+		)
+
+		intb(
+			"button_symbol_label_styled",
+			"",
+
+			nk_context_p.OUT("ctx", ""),
+			const..nk_style_button_p.IN("style", ""),
+			nk_symbol_type.IN("symbol", ""),
+			const..char_p.IN("title", ""),
+			nk_flags.IN("text_alignment", "")
+		)
+
+		intb(
+			"button_symbol_text_styled",
+			"",
+
+			nk_context_p.OUT("ctx", ""),
+			const..nk_style_button_p.IN("style", ""),
+			nk_symbol_type.IN("symbol", ""),
+			const..char_p.IN("title", ""),
+			int.IN("len", ""),
+			nk_flags.IN("alignment", "")
+		)
+
+		intb(
+			"button_image_label_styled",
+			"",
+
+			nk_context_p.OUT("ctx", ""),
+			const..nk_style_button_p.IN("style", ""),
+			nk_image.IN("img", ""),
+			const..char_p.IN("title", ""),
+			nk_flags.IN("text_alignment", "")
+		)
+
+		intb(
+			"button_image_text_styled",
 			"",
 
 			ctx,
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
-		)
-
-		int(
-			"button_push_behavior",
-			"",
-
-			ctx,
-			nk_button_behavior.IN("behavior", "", ButtonBehaviors)
-		)
-
-		int(
-			"button_pop_behavior",
-			"",
-
-			ctx
+			const..nk_style_button_p.IN("style", ""),
+			nk_image.IN("img", ""),
+			const..char_p.IN("title", ""),
+			int.IN("len", ""),
+			nk_flags.IN("alignment", "")
 		)
 
 		intb(
@@ -4330,5 +4465,5 @@ nk_style_pop_vec2(ctx);""")}
 			"style_item_hide",
 			""
 		)
-	}();
+	}()
 }

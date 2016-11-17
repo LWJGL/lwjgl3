@@ -27,6 +27,7 @@ fun config() {
 val Int.NK_FLAG: String
 	get() = "1 << $this"
 
+val nk_ushort = typedef(uint16_t, "nk_ushort")
 val nk_int = typedef(int32_t, "nk_int")
 val nk_uint = typedef(uint32_t, "nk_uint")
 val nk_hash = typedef(nk_uint, "nk_hash")
@@ -36,6 +37,7 @@ val nk_rune = typedef(uint32_t, "nk_rune")
 val nk_byte = typedef(uint8_t, "nk_byte")
 
 val nk_byte_p = nk_byte.p
+val nk_ushort_p = nk_ushort.p
 val nk_rune_p = nk_rune.p
 
 val nk_handle = union(NUKLEAR_PACKAGE, "NkHandle", nativeName = "nk_handle") {
@@ -46,31 +48,31 @@ val nk_handle = union(NUKLEAR_PACKAGE, "NkHandle", nativeName = "nk_handle") {
 val NK_UTF_SIZE = 4
 val nk_glyph = char_p
 
-val nk_anti_aliasing = "nk_anti_aliasing".enumType
-val nk_allocation_type = "nk_allocation_type".enumType
-val nk_command_type = "nk_command_type".enumType
-val nk_style_item_type = "nk_style_item_type".enumType
-val nk_symbol_type = "nk_symbol_type".enumType
-val nk_style_header_align = "nk_style_header_align".enumType
-val nk_chart_type = "nk_chart_type".enumType
-val nk_panel_type = "nk_panel_type".enumType
-val nk_collapse_states = "nk_collapse_states".enumType
-val nk_show_states = "nk_show_states".enumType
-val nk_layout_format = "nk_layout_format".enumType
-val nk_tree_type = "nk_tree_type".enumType
-val nk_button_behavior = "nk_button_behavior".enumType
-val nk_color_format = "nk_color_format".enumType
-val nk_popup_type = "nk_popup_type".enumType
-val nk_keys = "nk_keys".enumType
-val nk_buttons = "nk_buttons".enumType
-val nk_style_colors = "nk_style_colors".enumType
-val nk_style_cursor = "nk_style_cursor".enumType
-val nk_widget_layout_states = "nk_widget_layout_states".enumType
-val nk_heading = "nk_heading".enumType
-val nk_buffer_allocation_type = "nk_buffer_allocation_type".enumType
-val nk_draw_list_stroke = "nk_draw_list_stroke".enumType
-val nk_draw_vertex_layout_attribute = "nk_draw_vertex_layout_attribute".enumType
-val nk_draw_vertex_layout_format = "nk_draw_vertex_layout_format".enumType
+val nk_anti_aliasing = "enum nk_anti_aliasing".enumType
+val nk_allocation_type = "enum nk_allocation_type".enumType
+val nk_command_type = "enum nk_command_type".enumType
+val nk_style_item_type = "enum nk_style_item_type".enumType
+val nk_symbol_type = "enum nk_symbol_type".enumType
+val nk_style_header_align = "enum nk_style_header_align".enumType
+val nk_chart_type = "enum nk_chart_type".enumType
+val nk_panel_type = "enum nk_panel_type".enumType
+val nk_collapse_states = "enum nk_collapse_states".enumType
+val nk_show_states = "enum nk_show_states".enumType
+val nk_layout_format = "enum nk_layout_format".enumType
+val nk_tree_type = "enum nk_tree_type".enumType
+val nk_button_behavior = "enum nk_button_behavior".enumType
+val nk_color_format = "enum nk_color_format".enumType
+val nk_popup_type = "enum nk_popup_type".enumType
+val nk_keys = "enum nk_keys".enumType
+val nk_buttons = "enum nk_buttons".enumType
+val nk_style_colors = "enum nk_style_colors".enumType
+val nk_style_cursor = "enum nk_style_cursor".enumType
+val nk_widget_layout_states = "enum nk_widget_layout_states".enumType
+val nk_heading = "enum nk_heading".enumType
+val nk_buffer_allocation_type = "enum nk_buffer_allocation_type".enumType
+val nk_draw_list_stroke = "enum nk_draw_list_stroke".enumType
+val nk_draw_vertex_layout_attribute = "enum nk_draw_vertex_layout_attribute".enumType
+val nk_draw_vertex_layout_format = "enum nk_draw_vertex_layout_format".enumType
 
 // API
 
@@ -111,6 +113,7 @@ val nk_scroll = struct(NUKLEAR_PACKAGE, "NkScroll", nativeName = "struct nk_scro
 	unsigned_short.member("x", "")
 	unsigned_short.member("y", "")
 }
+val nk_scroll_p = nk_scroll.p
 
 val nk_plugin_alloc = "nk_plugin_alloc".callback(
 	NUKLEAR_PACKAGE, void_p, "NkPluginAlloc",
@@ -159,6 +162,17 @@ val nk_convert_config = struct(NUKLEAR_PACKAGE, "NkConvertConfig", nativeName = 
 	nk_size.member("vertex_size", "sizeof one vertex for vertex packing")
 	nk_size.member("vertex_alignment", "vertex alignment: Can be optained by NK_ALIGNOF")
 }
+
+val nk_list_view_p = struct(NUKLEAR_PACKAGE, "NkListView", nativeName = "struct nk_list_view", mutable = false) {
+	int.member("begin", "")
+	int.member("end", "")
+	int.member("count", "")
+
+	int.member("total_height", "").public = false
+	struct(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct nk_context").p.member("ctx", "").public = false
+	nk_ushort_p.member("scroll_pointer", "").public = false
+	nk_ushort.member("scroll_value", "").public = false
+}.p
 
 // MEMORY BUFFER
 
@@ -587,7 +601,7 @@ val nk_draw_list_p = nk_draw_list.p
 
 // GUI
 
-val nk_style_item_data = union(NUKLEAR_PACKAGE, "NkStyleItemData", nativeName = "struct nk_style_item_data") {
+val nk_style_item_data = union(NUKLEAR_PACKAGE, "NkStyleItemData", nativeName = "union nk_style_item_data") {
 	nk_image.member("image", "")
 	nk_color.member("color", "")
 }
@@ -648,6 +662,7 @@ val nk_style_button = struct(NUKLEAR_PACKAGE, "NkStyleButton", nativeName = "str
 	nullable..nk_draw_begin.member("draw_begin", "")
 	nullable..nk_draw_end.member("draw_end", "")
 }
+val nk_style_button_p = nk_style_button.p
 
 val nk_style_toggle = struct(NUKLEAR_PACKAGE, "NkStyleToggle", nativeName = "struct nk_style_toggle") {
 	/* background */
@@ -1091,7 +1106,7 @@ val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel"
 	nk_panel_type.member("type", "")
 	nk_flags.member("flags", "")
 	nk_rect.member("bounds", "")
-	nk_scroll.p.member("offset", "")
+	nk_scroll_p.member("offset", "")
 	float.member("at_x", "")
 	float.member("at_y", "")
 	float.member("max_x", "")
