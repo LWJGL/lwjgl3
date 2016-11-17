@@ -204,6 +204,7 @@
 			<compilerarg value="-Xno-param-assertions"/>
 			<compilerarg value="-Xreport-perf"/>
 
+            <src path="${src.templates.kotlin}/org/lwjgl/assimp" if:true="${binding.assimp}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/bgfx" if:true="${binding.bgfx}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" if:true="${egl_types}"/>
@@ -830,6 +831,9 @@
 				</copy>
 			</custom>
 		</release-module>
+
+        <!-- Assimp -->
+        <release-module package="org.lwjgl.assimp" name="assimp" native-library="assimp" title="assimp" license="assimp" if:true="${binding.assimp}"/>
 
 		<!-- bgfx -->
 		<release-module package="org.lwjgl.bgfx" name="bgfx" native-library="bgfx" title="bgfx" license="bgfx" if:true="${binding.bgfx}"/>

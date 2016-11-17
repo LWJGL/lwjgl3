@@ -34,6 +34,7 @@ import java.util.function.*
 */
 
 enum class Binding(val key: String, val packageName: String) {
+    ASSIMP("binding.assimp", "org.lwjgl.assimp"),
 	BGFX("binding.bgfx", "org.lwjgl.bgfx"),
 	EGL("binding.egl", "org.lwjgl.egl"),
 	GLFW("binding.glfw", "org.lwjgl.glfw"),
