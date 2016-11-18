@@ -119,7 +119,7 @@ val aiTexture = struct(ASSIMP_PACKAGE, "AITexture", nativeName = "aiTexture") {
     unsigned_int.member("mWidth", "Width of the texture, in pixels. If mHeight is zero the texture is compressed in a format like JPEG. In this case mWidth specifies the size of the memory area pcData is pointing to, in bytes.")
     unsigned_int.member("mHeight", "Height of the texture, in pixels. If this value is zero, pcData points to an compressed texture in any format (e.g. JPEG).")
     charASCII.array("achFormatHint", "A hint from the loader to make it easier for applications to determine the type of embedded compressed textures. If mHeight != 0 this member is undefined. Otherwise it is set set to '\\0\\0\\0\\0' if the loader has no additional information about the texture file format used OR the file extension of the format without a trailing dot. If there are multiple file extensions for a format, the shortest extension is chosen (JPEG maps to 'jpg', not to 'jpeg'). E.g. 'dds\\0', 'pcx\\0', 'jpg\\0'.  All characters are lower-case. The fourth character will always be '\\0'.", size = 4)
-    aiTexel_p.member("pcData", "Data of the texture. Points to an array of mWidth * mHeight aiTexel's. The format of the texture data is always ARGB8888 to make the implementation for user of the library as easy as possible. If mHeight = 0 this is a pointer to a memory buffer of size mWidth containing the compressed texture data. Good luck, have fun!")
+    aiTexel_p.buffer("pcData", "Data of the texture. Points to an array of mWidth * mHeight aiTexel's. The format of the texture data is always ARGB8888 to make the implementation for user of the library as easy as possible. If mHeight = 0 this is a pointer to a memory buffer of size mWidth containing the compressed texture data. Good luck, have fun!")
 }
 val aiTexture_pp = aiTexture.p.p
 
@@ -209,9 +209,9 @@ val aiNode = struct(ASSIMP_PACKAGE, "AINode", nativeName = "aiNode") {
     aiString.member("mName", "The name of the node.")
     aiMatrix4x4.member("mTransformation", "The transformation relative to the node's parent.")
     nullable..aiNode_p.member("mParent", "Parent node. NULL if this node is the root node.")
-    unsigned_int.member("mNumChildren", "The number of child nodes of this node.")
+    AutoSize("mChildren")..unsigned_int.member("mNumChildren", "The number of child nodes of this node.")
     nullable..aiNode_p.buffer("mChildren", "The child nodes of this node. NULL if mNumChildren is 0.")
-    unsigned_int.member("mNumMeshes", "The number of meshes of this node.")
+    AutoSize("mMeshes")..unsigned_int.member("mNumMeshes", "The number of meshes of this node.")
     nullable..unsigned_int_p.member("mMeshes", "The meshes of this node. Each entry is an index into the mesh list of the aiScene.")
     nullable..aiMetadata_p.member("mMetadata", "Metadata associated with this node or NULL if there is no metadata.")
 }
@@ -256,7 +256,7 @@ val aiBone = struct(ASSIMP_PACKAGE, "AIBone", nativeName = "aiBone") {
         """
 
     aiString.member("mName", "The name of the bone.")
-    unsigned_int.member("mNumWeights", "The number of vertices affected by this bone. The maximum value for this member is #AI_MAX_BONE_WEIGHTS.")
+    AutoSize("mWeights")..unsigned_int.member("mNumWeights", "The number of vertices affected by this bone. The maximum value for this member is #AI_MAX_BONE_WEIGHTS.")
     aiVertexWeight_p.buffer("mWeights", "The vertices affected by this bone")
     aiMatrix4x4.member("mOffsetMatrix", "Matrix that transforms from mesh space to bone space in bind pose")
 }

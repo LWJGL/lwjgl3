@@ -1103,7 +1103,7 @@ x1
         charASCII_p.IN("pKey", "Key to search for. One of the AI_MATKEY_XXX constants."),
         unsigned_int.IN("type", "Specifies the type of the texture to be retrieved (e.g. diffuse, specular, height map ...)"),
         unsigned_int.IN("index", "Index of the texture to be retrieved."),
-        aiMaterialProperty_pp.OUT("mPropOut", "Pointer to receive a pointer to a valid aiMaterialProperty structure or NULL if the key has not been found."),
+        Check(1)..aiMaterialProperty_pp.OUT("mPropOut", "Pointer to receive a pointer to a valid aiMaterialProperty structure or NULL if the key has not been found."),
 
         returnDoc = "AI_RETURN_xxx values."
     )
@@ -1114,7 +1114,7 @@ x1
 
         aiMaterial_p.IN("pMat", "Pointer to the input material. May not be NULL"),
         charASCII_p.IN("pKey", "Key to search for. One of the AI_MATKEY_XXX constants."),
-        aiMaterialProperty_pp.OUT("mPropOut", "Pointer to receive a pointer to a valid aiMaterialProperty structure or NULL if the key has not been found."),
+        Check(1)..aiMaterialProperty_pp.OUT("mPropOut", "Pointer to receive a pointer to a valid aiMaterialProperty structure or NULL if the key has not been found."),
 
         returnDoc = "AI_RETURN_xxx values.",
         noPrefix = true
@@ -1129,7 +1129,7 @@ x1
         unsigned_int.IN("type", "Specifies the type of the texture to be retrieved (e.g. diffuse, specular, height map ...)"),
         unsigned_int.IN("index", "Index of the texture to be retrieved."),
         float_p.OUT("pOut", "Pointer to a buffer to receive the result."),
-        unsigned_int_p.INOUT("pMax", "Specifies the size of the given buffer, in float's. Receives the number of values (not bytes!) read."),
+        nullable..unsigned_int_p.INOUT("pMax", "Specifies the size of the given buffer, in float's. Receives the number of values (not bytes!) read."),
 
         returnDoc = "Specifies whether the key has been found. If not, the output arrays remains unmodified and pMax is set to 0."
     )
@@ -1142,7 +1142,7 @@ x1
         charASCII_p.IN("pKey", "Key to search for. One of the AI_MATKEY_XXX constants."),
         unsigned_int.IN("type", "Specifies the type of the texture to be retrieved (e.g. diffuse, specular, height map ...)"),
         unsigned_int.IN("index", "Index of the texture to be retrieved."),
-        float_p.OUT("pOut", "Pointer to a buffer to receive the result."),
+        Check(1)..float_p.OUT("pOut", "Pointer to a buffer to receive the result."),
 
         returnDoc = "Specifies whether the key has been found. If not, the output float remains unmodified."
     )
@@ -1156,7 +1156,7 @@ x1
         unsigned_int.IN("type", "Specifies the type of the texture to be retrieved (e.g. diffuse, specular, height map ...)"),
         unsigned_int.IN("index", "Index of the texture to be retrieved."),
         int_p.OUT("pOut", "Pointer to a buffer to receive the result."),
-        unsigned_int_p.INOUT("pMax", "Specifies the size of the given buffer, in int's. Receives the number of values (not bytes!) read."),
+        nullable..unsigned_int_p.INOUT("pMax", "Specifies the size of the given buffer, in int's. Receives the number of values (not bytes!) read."),
 
         returnDoc = "Specifies whether the key has been found. If not, the output arrays remains unmodified and pMax is set to 0."
     )
@@ -1169,7 +1169,7 @@ x1
         charASCII_p.IN("pKey", "Key to search for. One of the AI_MATKEY_XXX constants."),
         unsigned_int.IN("type", "Specifies the type of the texture to be retrieved (e.g. diffuse, specular, height map ...)"),
         unsigned_int.IN("index", "Index of the texture to be retrieved."),
-        int_p.OUT("pOut", "Pointer to a buffer to receive the result."),
+        Check(1)..int_p.OUT("pOut", "Pointer to a buffer to receive the result."),
 
         returnDoc = "Specifies whether the key has been found. If not, the output int remains unmodified."
     )
