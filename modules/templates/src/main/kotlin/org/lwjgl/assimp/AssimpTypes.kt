@@ -585,3 +585,38 @@ val aiTextureOp = "aiTextureOp".enumType
 val aiTextureOp_p = aiTextureOp.p
 val aiTextureMapMode = "aiTextureMapMode".enumType
 val aiTextureMapMode_p = aiTextureMapMode.p
+
+val aiImporterDesc = struct(ASSIMP_PACKAGE, "AIImporterDesc", nativeName = "aiImporterDesc") {
+    documentation = """
+        Meta information about a particular importer. Importers need to fill this structure, but they can freely decide
+        how talkative they are. A common use case for loader meta info is a user interface in which the user can choose
+        between various import/export file formats. Building such an UI by hand means a lot of maintenance as importers
+        / exporters are added to Assimp, so it might be useful to have a common mechanism to query some rough importer
+        characteristics.
+        """
+
+    const..charASCII_p.member("mName", "Full name of the importer (i.e. Blender3D importer)")
+    const..charASCII_p.member("mAuthor", "Original author (left blank if unknown or whole assimp team)")
+    const..charASCII_p.member("mMaintainer", "Current maintainer, left blank if the author maintains")
+    const..charASCII_p.member("mComments", "Implementation comments, i.e. unimplemented features")
+
+    unsigned_int.member("mFlags", "These flags indicate some characteristics common to many importers.")
+    unsigned_int.member("mMinMajor", "Minimum major format that can be loaded in major.minor style.")
+    unsigned_int.member("mMinMinor", "Minimum minor format that can be loaded in major.minor style.")
+    unsigned_int.member("mMaxMajor", "Maximum major format that can be loaded in major.minor style.")
+    unsigned_int.member("mMaxMinor", "Maximum minor format that can be loaded in major.minor style.")
+
+    const..charASCII_p.member(
+        "mFileExtensions",
+
+        """
+        List of file extensions this importer can handle. List entries are separated by space characters. All entries
+        are lower case without a leading dot (i.e. "xml dae" would be a valid value. Note that multiple importers may
+        respond to the same file extension - assimp calls all importers in the order in which they are registered and
+        each importer gets the opportunity to load the file until one importer "claims" the file. Apart from file
+        extension checks, importers typically use other methods to quickly reject files (i.e. magic words) so this does
+        not mean that common or generic file extensions such as XML would be tediously slow.
+        """
+    )
+}
+val aiImporterDesc_p = aiImporterDesc.p
