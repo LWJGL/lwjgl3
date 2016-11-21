@@ -628,10 +628,10 @@ val aiFileWriteProc = "aiFileWriteProc".callback(
     ASSIMP_PACKAGE, size_t, "AIFileWriteProc",
     "File write procedure.",
 
-    aiFile_p.IN("arg1", ""),
-    const..char_p.IN("arg2", ""),
-    size_t.IN("arg3", ""),
-    size_t.IN("arg4", "")
+    aiFile_p.IN("pFile", "File pointer to write to"),
+    const..char_p.IN("pBuffer", "The buffer to be written"),
+    size_t.IN("memB", "Size of the individual element to be written"),
+    size_t.IN("count", "Number of elements to be written")
 ) {
     documentation = ""
 }
@@ -640,10 +640,10 @@ val aiFileReadProc = "aiFileReadProc".callback(
     ASSIMP_PACKAGE, size_t, "AIFileReadProc",
     "File read procedure",
 
-    aiFile_p.IN("arg1", ""),
-    char_p.IN("arg2", ""),
-    size_t.IN("arg3", ""),
-    size_t.IN("arg4", "")
+    aiFile_p.IN("pFile", "File pointer to read from"),
+    char_p.IN("pBuffer", "The buffer to read the values"),
+    size_t.IN("size", "Size in bytes of each element to be read"),
+    size_t.IN("count", "Number of elements to be read")
 ) {
     documentation = ""
 }
@@ -652,7 +652,7 @@ val aiFileTellProc = "aiFileTellProc".callback(
     ASSIMP_PACKAGE, size_t, "AIFileTellProc",
     "File tell procedure.",
 
-    aiFile_p.IN("arg1", "")
+    aiFile_p.IN("pFile", "File pointer to find ftell() on")
 ) {
     documentation = ""
 }
@@ -661,7 +661,7 @@ val aiFileFlushProc = "aiFileFlushProc".callback(
     ASSIMP_PACKAGE, void, "AIFileFlushProc",
     "File flush procedure.",
 
-    aiFile_p.IN("arg1", "")
+    aiFile_p.IN("pFile", "File pointer to flush")
 ) {
     documentation = ""
 }
@@ -672,9 +672,9 @@ val aiFileSeek = "aiFileSeek".callback(
     ASSIMP_PACKAGE, aiReturn, "AIFileSeek",
     "File seek procedure",
 
-    aiFile_p.IN("arg1", ""),
-    size_t.IN("arg2", ""),
-    aiOrigin.IN("arg3", "")
+    aiFile_p.IN("pFile", "File pointer to seek to"),
+    size_t.IN("offset", "Number of bytes to shift from origin"),
+    aiOrigin.IN("origin", "Position used as reference for the offset.")
 ) {
     documentation = ""
 }
@@ -683,9 +683,9 @@ val aiFileOpenProc = "aiFileOpenProc".callback(
     ASSIMP_PACKAGE, aiFile_p, "AIFileOpenProc",
     "File open procedure",
 
-    aiFileIO_p.IN("arg1", ""),
-    const..charUTF8_p.IN("arg2", ""),
-    const..charUTF8_p.IN("arg3", "")
+    aiFileIO_p.IN("pFileIO", "FileIO system pointer"),
+    const..charUTF8_p.IN("fileName", "The name of the file to be opened"),
+    const..charUTF8_p.IN("openMode", "The mode in which to open the file")
 ) {
     documentation = ""
 }
@@ -694,8 +694,8 @@ val aiFileCloseProc = "aiFileCloseProc".callback(
     ASSIMP_PACKAGE, void, "AIFileCloseProc",
     "File close procedure",
 
-    aiFileIO_p.IN("arg1", ""),
-    aiFile_p.IN("arg2", "")
+    aiFileIO_p.IN("pFileIO", "FileIO system pointer"),
+    aiFile_p.IN("pFile", "File pointer to close")
 ) {
     documentation = ""
 }
