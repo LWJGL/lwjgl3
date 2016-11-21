@@ -620,3 +620,117 @@ val aiImporterDesc = struct(ASSIMP_PACKAGE, "AIImporterDesc", nativeName = "aiIm
     )
 }
 val aiImporterDesc_p = aiImporterDesc.p
+
+val aiFile_p = struct(ASSIMP_PACKAGE, "AIFile", nativeName = "aiFile").p
+val aiFileIO_p = struct(ASSIMP_PACKAGE, "AIFileIO", nativeName = "aiFileIO").p
+
+val aiFileWriteProc = "aiFileWriteProc".callback(
+    ASSIMP_PACKAGE, size_t, "AIFileWriteProc",
+    "File write procedure.",
+
+    aiFile_p.IN("arg1", ""),
+    const..char_p.IN("arg2", ""),
+    size_t.IN("arg3", ""),
+    size_t.IN("arg4", "")
+) {
+    documentation = ""
+}
+
+val aiFileReadProc = "aiFileReadProc".callback(
+    ASSIMP_PACKAGE, size_t, "AIFileReadProc",
+    "File read procedure",
+
+    aiFile_p.IN("arg1", ""),
+    char_p.IN("arg2", ""),
+    size_t.IN("arg3", ""),
+    size_t.IN("arg4", "")
+) {
+    documentation = ""
+}
+
+val aiFileTellProc = "aiFileTellProc".callback(
+    ASSIMP_PACKAGE, size_t, "AIFileTellProc",
+    "File tell procedure.",
+
+    aiFile_p.IN("arg1", "")
+) {
+    documentation = ""
+}
+
+val aiFileFlushProc = "aiFileFlushProc".callback(
+    ASSIMP_PACKAGE, void, "AIFileFlushProc",
+    "File flush procedure.",
+
+    aiFile_p.IN("arg1", "")
+) {
+    documentation = ""
+}
+
+val aiOrigin = "aiOrigin".enumType
+
+val aiFileSeek = "aiFileSeek".callback(
+    ASSIMP_PACKAGE, aiReturn, "AIFileSeek",
+    "File seek procedure",
+
+    aiFile_p.IN("arg1", ""),
+    size_t.IN("arg2", ""),
+    aiOrigin.IN("arg3", "")
+) {
+    documentation = ""
+}
+
+val aiFileOpenProc = "aiFileOpenProc".callback(
+    ASSIMP_PACKAGE, aiFile_p, "AIFileOpenProc",
+    "File open procedure",
+
+    aiFileIO_p.IN("arg1", ""),
+    const..charUTF8_p.IN("arg2", ""),
+    const..charUTF8_p.IN("arg3", "")
+) {
+    documentation = ""
+}
+
+val aiFileCloseProc = "aiFileCloseProc".callback(
+    ASSIMP_PACKAGE, void, "AIFileCloseProc",
+    "File close procedure",
+
+    aiFileIO_p.IN("arg1", ""),
+    aiFile_p.IN("arg2", "")
+) {
+    documentation = ""
+}
+
+val aiUserData = typedef(char_p, "aiUserData")
+
+val aiFileIO = struct(ASSIMP_PACKAGE, "AIFileIO", nativeName = "aiFileIO") {
+    documentation = """
+        Provided are functions to open and close files. Supply a custom structure to
+        the import function. If you don't, a default implementation is used. Use custom
+        file systems to enable reading from other sources, such as ZIPs
+        or memory locations.
+        """
+
+    aiFileOpenProc.member("OpenProc", "Function used to open a new file")
+    aiFileCloseProc.member("CloseProc", "Function used to close an existing file")
+    aiUserData.member("UserData", "User-defined, opaque data")
+}
+
+val aiFile = struct(ASSIMP_PACKAGE, "AIFile", nativeName = "aiFile") {
+    documentation = """
+        Actually, it's a data structure to wrap a set of fXXXX (e.g fopen)
+        replacement functions.
+
+        The default implementation of the functions utilizes the fXXX functions from
+        the CRT. However, you can supply a custom implementation to Assimp by
+        delivering a custom aiFileIO. Use this to enable reading from other sources,
+        such as ZIP archives or memory locations.
+        """
+
+    aiFileReadProc.member("ReadProc", "Callback to read from a file")
+    aiFileWriteProc.member("WriteProc", "Callback to write to a file")
+    aiFileTellProc.member("TellProc", "Callback to retrieve the current position of the file cursor (ftell())")
+    aiFileTellProc.member("FileSizeProc", "Callback to retrieve the size of the file, in bytes")
+    aiFileSeek.member("SeekProc", "Callback to set the current position of the file cursor (fseek())")
+    aiFileFlushProc.member("FlushProc", "Callback to flush the file contents")
+    aiUserData.member("UserData", "User-defined, opaque data")
+}
