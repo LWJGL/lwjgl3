@@ -84,6 +84,7 @@ val aiMemoryInfo = struct(ASSIMP_PACKAGE, "AIMemoryInfo", nativeName = "aiMemory
     unsigned_int.member("lights", "Storage allocated for light data")
     unsigned_int.member("total", "Total storage allocated for the full import.")
 }
+val aiMemoryInfo_p = aiMemoryInfo.p
 
 val aiTexel = struct(ASSIMP_PACKAGE, "AITexel", nativeName = "aiTexel") {
     documentation = "Helper structure to represent a texel in a ARGB8888 format. Used by aiTexture."
@@ -156,6 +157,7 @@ val aiMatrix4x4 = struct(ASSIMP_PACKAGE, "AIMatrix4x4", nativeName = "aiMatrix4x
     float.member("d3", "")
     float.member("d4", "")
 }
+val aiMatrix4x4_p = aiMatrix4x4.p
 
 val aiMatrix3x3 = struct(ASSIMP_PACKAGE, "AIMatrix3x3", nativeName = "aiMatrix3x3") {
     documentation = "Represents a row-major 3x3 matrix."
@@ -176,6 +178,7 @@ val aiMatrix3x3 = struct(ASSIMP_PACKAGE, "AIMatrix3x3", nativeName = "aiMatrix3x
     float.member("d2", "")
     float.member("d3", "")
 }
+val aiMatrix3x3_p = aiMatrix3x3.p
 
 val aiMetadataType = "aiMetadataType".enumType
 
@@ -399,6 +402,7 @@ val aiQuaternion = struct(ASSIMP_PACKAGE, "AIQuaternion", nativeName = "aiQuater
     float.member("y", "The y component")
     float.member("z", "The z component")
 }
+val aiQuaternion_p = aiQuaternion.p
 
 val aiVectorKey = struct(ASSIMP_PACKAGE, "AIVectorKey", nativeName = "aiVectorKey") {
     documentation = "A time-value pair specifying a certain 3D vector for the given time."
@@ -576,6 +580,7 @@ val aiScene = struct(ASSIMP_PACKAGE, "AIScene", nativeName = "aiScene") {
 
     char_p.member("mPrivate", "Internal use only, do not touch!").public = false
 }
+val aiScene_p = aiScene.p
 
 val aiReturn = "aiReturn".enumType
 val aiTextureType = "aiTextureType".enumType
@@ -734,3 +739,31 @@ val aiFile = struct(ASSIMP_PACKAGE, "AIFile", nativeName = "aiFile") {
     aiFileFlushProc.member("FlushProc", "Callback to flush the file contents")
     aiUserData.member("UserData", "User-defined, opaque data")
 }
+
+val aiLogStreamCallback = "aiLogStreamCallback".callback(
+    ASSIMP_PACKAGE, void, "AILogStreamCallback",
+    "Callback to be called for log stream messages",
+
+    const..charUTF8_p.IN("message", "The message to be logged"),
+    char_p.IN("user", "The user data from the log stream")
+) {
+    documentation = ""
+}
+
+val aiLogStream = struct(ASSIMP_PACKAGE, "AILogStream", nativeName = "aiLogStream") {
+    documentation = "Represents a log stream. A log stream receives all log messages and streams them somewhere"
+
+    aiLogStreamCallback.member("callback", "callback to be called")
+    char_p.member("user", "user data to be passed to the callback")
+}
+val aiLogStream_p = aiLogStream.p
+
+val aiPropertyStore = struct(ASSIMP_PACKAGE, "AIPropertyStore", nativeName = "aiPropertyStore") {
+    documentation = "Represents an opaque set of settings to be used during importing."
+
+    char.member("sentinel", "")
+}
+val aiPropertyStore_p = aiPropertyStore.p
+
+val aiBool = typedef(intb, "aiBool")
+val aiDefaultLogStream = "aiDefaultLogStream".enumType

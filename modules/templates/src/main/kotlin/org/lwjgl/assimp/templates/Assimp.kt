@@ -38,6 +38,13 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefixMethod = "
     )
 
     EnumConstant(
+        "Boolean constants",
+
+        "AI_TRUE".enum("", 1),
+        "AI_FALSE".enum("", 0)
+    )
+
+    EnumConstant(
         "Seek origins (for the virtual file system API).",
 
         "AI_ORIGIN_SET".enum("Beginning of the file", 0x0),
