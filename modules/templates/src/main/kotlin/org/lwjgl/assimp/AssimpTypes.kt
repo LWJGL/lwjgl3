@@ -581,6 +581,7 @@ val aiScene = struct(ASSIMP_PACKAGE, "AIScene", nativeName = "aiScene") {
     char_p.member("mPrivate", "Internal use only, do not touch!").public = false
 }
 val aiScene_p = aiScene.p
+val aiScene_pp = aiScene_p.p
 
 val aiReturn = "aiReturn".enumType
 val aiTextureType = "aiTextureType".enumType
@@ -767,3 +768,58 @@ val aiPropertyStore_p = aiPropertyStore.p
 
 val aiBool = typedef(intb, "aiBool")
 val aiDefaultLogStream = "aiDefaultLogStream".enumType
+
+val aiExportFormatDesc = struct(ASSIMP_PACKAGE, "AIExportFormatDesc", nativeName = "aiExportFormatDesc") {
+    documentation = """
+        Describes an file format which Assimp can export to. Use #aiGetExportFormatCount() to
+        learn how many export formats the current Assimp build supports and #aiGetExportFormatDescription()
+        to retrieve a description of an export format option.
+        """
+
+    const..charUTF8_p.member(
+        "id",
+        """
+        a short string ID to uniquely identify the export format. Use this ID string to
+        specify which file format you want to export to when calling #aiExportScene().
+        Example: "dae" or "obj"
+        """
+    )
+    const..charUTF8_p.member(
+        "description",
+        """
+        A short description of the file format to present to users. Useful if you want
+        to allow the user to select an export format.
+        """
+    )
+    const..charUTF8_p.member("fileExtension", "Recommended file extension for the exported file in lower case.")
+}
+val aiExportFormatDesc_p = aiExportFormatDesc.p
+
+val aiExportDataBlob_p = struct(ASSIMP_PACKAGE, "AIExportDataBlob", nativeName = "aiExportDataBlob").p
+val aiExportDataBlob = struct(ASSIMP_PACKAGE, "AIExportDataBlob", nativeName = "aiExportDataBlob") {
+    documentation = """
+        Describes a blob of exported scene data. Use #aiExportSceneToBlob() to create a blob containing an
+        exported scene. The memory referred by this structure is owned by Assimp.
+        to free its resources. Don't try to free the memory on your side - it will crash for most build configurations
+        due to conflicting heaps.
+
+        Blobs can be nested - each blob may reference another blob, which may in turn reference another blob and so on.
+        This is used when exporters write more than one output file for a given #aiScene. See the remarks for
+        #aiExportDataBlob::name for more information.
+        """
+
+    AutoSize("data")..size_t.member("size", "Size of the data in bytes")
+    nullable..void_p.member("data", "The data.")
+    aiString.member(
+        "name",
+        """
+        Name of the blob. An empty string always indicates the first (and primary) blob, which contains the actual file
+        data. Any other blobs are auxiliary files produced by exporters (i.e. material files). Existence of such files
+        depends on the file format. Most formats don't split assets across multiple files.
+
+        If used, blob names usually contain the file extension that should be used when writing the data to disc.
+        """
+    )
+
+    nullable..aiExportDataBlob_p.member("next", "Pointer to the next blob in the chain or NULL if there is none.")
+}
