@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	IntConstant(
 		"API version",
 
-		"API_VERSION".."30"
+		"API_VERSION".."32"
 	)
 
 	ShortConstant(
@@ -1356,6 +1356,17 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		bgfx_program_handle_t.IN("_handle", "the program to destroy")
 	)
 
+	bool(
+		"is_texture_valid",
+		"Validate texture parameters.",
+
+		MapToInt..uint16_t.IN("_depth", "depth"),
+		bool.IN("_cubeMap", "indicates that texture contains cubemap"),
+		MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array"),
+		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
+		uint32_t.IN("_flags", "texture flags", TextureFlags, LinkMode.BITFIELD)
+	)
+
 	void(
 		"calc_texture_size",
 		"Calculates amount of memory required for texture.",
@@ -1829,12 +1840,12 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	)
 
 	void(
-		"set_view_remap",
+		"set_view_order",
 		"Post submit view reordering.",
 
 		MapToInt..uint8_t.IN("_id", "view id"),
 		MapToInt..uint8_t.IN("_num", "number of views to remap"),
-		Check("_num")..nullable..const..void_p.IN("_remap", "view remap id table. Passing $NULL will reset view ids to default state")
+		Check("_num")..nullable..const..void_p.IN("_order", "view remap id table. Passing $NULL will reset view ids to default state")
 	)
 
 	void(
