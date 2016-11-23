@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -302,12 +303,10 @@ public final class Library {
 			return;
 
 		try {
-			String expected;
+			byte[] expected = new byte[20];
 			try ( InputStream sha1 = sha1URL.openStream() ) {
-				StringBuilder buffer = new StringBuilder(40);
-				for ( int i = 0; i < 40; i++ )
-					buffer.append((char)sha1.read());
-				expected = buffer.toString();
+				for ( int i = 0; i < 20; i++ )
+					expected[i] = (byte)((Character.digit(sha1.read(), 16) << 4) | Character.digit(sha1.read(), 16));
 			}
 
 			MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
@@ -315,17 +314,9 @@ public final class Library {
 				MappedByteBuffer buffer = fc.map(MapMode.READ_ONLY, 0, fc.size());
 				sha1.update(buffer);
 			}
+			byte[] actual = sha1.digest();
 
-			byte[] digest = sha1.digest();
-			StringBuilder actual = new StringBuilder(40);
-			for ( int i = 0; i < digest.length; i++ ) {
-				int b = digest[i] & 0xFF;
-				if ( b < 0x10 )
-					actual.append('0');
-				actual.append(Integer.toHexString(b));
-			}
-
-			if ( !expected.contentEquals(actual) )
+			if ( !Arrays.equals(expected, actual) )
 				DEBUG_STREAM.println("[LWJGL] [WARNING] Mismatch detected between the Java and native libraries.");
 		} catch (Exception e) {
 			if ( Checks.DEBUG ) {
