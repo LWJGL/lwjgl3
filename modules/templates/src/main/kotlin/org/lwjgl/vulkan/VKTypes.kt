@@ -2098,8 +2098,8 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>If {@code levelCount} is not #REMAINING_MIP_LEVELS, <code>(baseMipLevel + levelCount)</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when the image was created</li>
-			<li>If {@code layerCount} is not #REMAINING_ARRAY_LAYERS, <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when the image was created</li>
+			<li>If {@code levelCount} is not #REMAINING_MIP_LEVELS, <code>levelCount</code> <b>must</b> be non-zero and <code>(baseMipLevel levelCount)</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when the image was created</li>
+			<li>If {@code layerCount} is not #REMAINING_ARRAY_LAYERS, <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when the image was created</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -3255,7 +3255,7 @@ val VkDescriptorSetLayoutBinding = struct(VULKAN_PACKAGE, "VkDescriptorSetLayout
 		Structure specifying a descriptor set layout binding.
 
 		<h5>Description</h5>
-		The above layout definition allows the descriptor bindings to be specified sparsely such that not all binding numbers between 0 and the maximum binding number need to be specified in the {@code pBindings} array. However, all binding numbers between 0 and the maximum binding number in the ##VkDescriptorSetLayoutCreateInfo{@code ::pBindings} array <b>may</b> consume memory in the descriptor set layout even if not all descriptor bindings are used, though it <b>should</b> not consume additional memory from the descriptor pool.
+		The above layout definition allows the descriptor bindings to be specified sparsely such that not all binding numbers between 0 and the maximum binding number need to be specified in the {@code pBindings} array. Bindings that are not specified have a {@code descriptorCount} and {@code stageFlags} of zero, and the {@code descriptorType} is treated as undefined. However, all binding numbers between 0 and the maximum binding number in the ##VkDescriptorSetLayoutCreateInfo{@code ::pBindings} array <b>may</b> consume memory in the descriptor set layout even if not all descriptor bindings are used, though it <b>should</b> not consume additional memory from the descriptor pool.
 
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
 		The maximum binding number specified <b>should</b> be as compact as possible to avoid wasted memory.
@@ -3474,11 +3474,12 @@ val VkWriteDescriptorSet = struct(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
 		<h5>Description</h5>
 		Only one of {@code pImageInfo}, {@code pBufferInfo}, or {@code pTexelBufferView} members is used according to the descriptor type specified in the {@code descriptorType} member of the containing ##VkWriteDescriptorSet structure, as specified below.
 
-		If the {@code dstBinding} has fewer than {@code descriptorCount} array elements remaining starting from {@code dstArrayElement}, then the remainder will be used to update the subsequent binding - {@code dstBinding}+1 starting at array element zero. This behavior applies recursively, with the update affecting consecutive bindings as needed to update all {@code descriptorCount} descriptors. All consecutive bindings updated via a single ##VkWriteDescriptorSet structure <b>must</b> have identical {@code descriptorType} and {@code stageFlags}, and <b>must</b> all either use immutable samplers or <b>must</b> all not use immutable samplers.
+		If the {@code dstBinding} has fewer than {@code descriptorCount} array elements remaining starting from {@code dstArrayElement}, then the remainder will be used to update the subsequent binding - {@code dstBinding}+1 starting at array element zero. If a binding has a {@code descriptorCount} of zero, it is skipped. This behavior applies recursively, with the update affecting consecutive bindings as needed to update all {@code descriptorCount} descriptors. All consecutive bindings updated via a single ##VkWriteDescriptorSet structure, except those with a {@code descriptorCount} of zero, <b>must</b> have identical {@code descriptorType} and {@code stageFlags}, and <b>must</b> all either use immutable samplers or <b>must</b> all not use immutable samplers.
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code dstBinding} <b>must</b> be a valid binding point within {@code dstSet}</li>
+			<li>{@code dstBinding} <b>must</b> be less than or equal to the maximum value of {@code binding} of all ##VkDescriptorSetLayoutBinding structures specified when {@code dstSet}&#8217;s descriptor set layout was created</li>
+			<li>{@code dstBinding} <b>must</b> be a binding with a non-zero {@code descriptorCount}</li>
 			<li>{@code descriptorType} <b>must</b> match the type of {@code dstBinding} within {@code dstSet}</li>
 			<li>The sum of {@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding specified by {@code dstBinding}, and all applicable consecutive bindings, as described by <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-updates-consecutive">consecutive binding updates</a></li>
 			<li>If {@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, {@code pImageInfo} <b>must</b> be a pointer to an array of {@code descriptorCount} valid ##VkDescriptorImageInfo structures</li>
