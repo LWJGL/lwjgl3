@@ -117,14 +117,14 @@ stbir_resize_uint8_srgb_edgemode(
 		This function uses the default resampling filter defined at compile time. For a different filter, use the medium-complexity API.
 		""",
 
-		Check("input_w * input_h * num_channels")..const..unsigned_char_p.IN("input_pixels", "the source image data"),
+		Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : input_stride_in_bytes)")..const..unsigned_char_p.IN("input_pixels", "the source image data"),
 		int.IN("input_w", "the source image width"),
 		int.IN("input_h", "the source image height"),
 		int.IN(
 			"input_stride_in_bytes",
 			"the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory"
 		),
-		Check("output_w * output_h * num_channels")..unsigned_char_p.OUT("output_pixels", "returns the scaled image data"),
+		Check("output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : output_stride_in_bytes)")..unsigned_char_p.OUT("output_pixels", "returns the scaled image data"),
 		int.IN("output_w", "the resized image width"),
 		int.IN("output_h", "the resized image height"),
 		int.IN(
@@ -140,11 +140,11 @@ stbir_resize_uint8_srgb_edgemode(
 		"resize_float",
 		"Float version of #resize_uint8().",
 
-		Check("input_w * input_h * num_channels")..const..float_p.IN("input_pixels", "the source image data"),
+		Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 2))")..const..float_p.IN("input_pixels", "the source image data"),
 		resize_uint8["input_w"],
 		resize_uint8["input_h"],
 		resize_uint8["input_stride_in_bytes"],
-		Check("output_w * output_h * num_channels")..float_p.OUT("output_pixels", "returns the scaled image data"),
+		Check("output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : (output_stride_in_bytes >> 2))")..float_p.OUT("output_pixels", "returns the scaled image data"),
 		resize_uint8["output_w"],
 		resize_uint8["output_h"],
 		resize_uint8["output_stride_in_bytes"],
@@ -244,7 +244,7 @@ stbir_resize_uint8_srgb_edgemode(
 		resize_uint8_srgb_edgemode["edge_wrap_mode"],
 		stbir_filter.IN("filter", "the scale filter", Filters),
 		stbir_colorspace.IN("space", "the image colorspace", ColorSpaces),
-		Expression("NULL")..void_p.IN("alloc_context", "pointer to the allocation context"),
+		Expression("NULL")..voidptr.IN("alloc_context", "pointer to the allocation context"),
 
 		returnDoc = "1 on success, 0 on failure"
 	)
@@ -253,11 +253,11 @@ stbir_resize_uint8_srgb_edgemode(
 		"resize_uint16_generic",
 		"Short version of #resize_uint8_generic().",
 
-		Check("input_w * input_h * num_channels")..const..stbir_uint16_p.IN("input_pixels", "the source image data"),
+		Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 1))")..const..stbir_uint16_p.IN("input_pixels", "the source image data"),
 		resize_uint8["input_w"],
 		resize_uint8["input_h"],
 		resize_uint8["input_stride_in_bytes"],
-		Check("output_w * output_h * num_channels")..stbir_uint16_p.OUT("output_pixels", "returns the scaled image data"),
+		Check("output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : (output_stride_in_bytes >> 1))")..stbir_uint16_p.OUT("output_pixels", "returns the scaled image data"),
 		resize_uint8["output_w"],
 		resize_uint8["output_h"],
 		resize_uint8["output_stride_in_bytes"],
@@ -306,15 +306,27 @@ stbir_resize_uint8_srgb_edgemode(
 		"TYPE_FLOAT".enum
 	).javaDocLinks
 
+	customMethod("""
+	private static int getTypeShift(int type) {
+		switch (type) {
+			case STBIR_TYPE_UINT8:
+				return 0;
+			case STBIR_TYPE_UINT16:
+				return 1;
+			default:
+				return 2;
+		}
+	}""")
+
 	val resize = intb(
 		"resize",
 		"Full-complexity version of #resize_uint8_generic().",
 
-		const..void_p.IN("input_pixels", "the source image data"),
+		Check("input_h * (input_stride_in_bytes == 0 ? (input_w * num_channels) << getTypeShift(datatype) : input_stride_in_bytes)")..const..void_p.IN("input_pixels", "the source image data"),
 		resize_uint8["input_w"],
 		resize_uint8["input_h"],
 		resize_uint8["input_stride_in_bytes"],
-		void_p.OUT("output_pixels", "returns the scaled image data"),
+		Check("output_h * (output_stride_in_bytes == 0 ? (output_w * num_channels) << getTypeShift(datatype) : output_stride_in_bytes)")..void_p.OUT("output_pixels", "returns the scaled image data"),
 		resize_uint8["output_w"],
 		resize_uint8["output_h"],
 		resize_uint8["output_stride_in_bytes"],

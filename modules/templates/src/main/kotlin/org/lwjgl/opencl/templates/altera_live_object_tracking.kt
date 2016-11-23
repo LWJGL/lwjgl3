@@ -52,6 +52,6 @@ val altera_live_object_tracking = "ALTERALiveObjectTracking".nativeClassCL("alte
 
 		cl_platform_id.IN("platform", "the platform for which live objects are being tracked"),
 		cl_report_live_objects_altera_callback.IN("report_fn", "the callback function"),
-		void_p.OUT("user_data", "a pointer to user data that will be passed to {@code report_fn}")
+		voidptr.IN("user_data", "a pointer to user data that will be passed to {@code report_fn}")
 	)
 }

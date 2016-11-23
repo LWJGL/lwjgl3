@@ -250,7 +250,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		"Pointer version of #VertexAttribL1ui64ARB().",
 
 		GLuint.IN("index", "the index of the generic vertex attribute to be modified"),
-		const..GLuint64_p.IN("v", "the vertex attribute buffer")
+		Check(1)..const..GLuint64_p.IN("v", "the vertex attribute buffer")
 	)
 
 	void(

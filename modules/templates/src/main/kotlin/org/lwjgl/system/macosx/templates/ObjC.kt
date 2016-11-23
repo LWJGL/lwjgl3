@@ -183,7 +183,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 
 		id.IN("obj", "a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to modify"),
 		const..charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to modify"),
-		void_p.IN("value", "the new value for the instance variable"),
+		Unsafe..void_p.IN("value", "the new value for the instance variable"),
 
 		returnDoc = "a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name"
 	)
@@ -194,7 +194,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 
 		id.IN("obj", "a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to obtain"),
 		const..charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to obtain"),
-		void_pp.OUT("outValue", "on return, contains a pointer to the value of the instance variable"),
+		Check(1)..void_pp.OUT("outValue", "on return, contains a pointer to the value of the instance variable"),
 
 		returnDoc = "a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name"
 	)
@@ -763,7 +763,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"Creates an instance of a class at the specified location.",
 
 		nullable..Class.IN("cls", "the class that you want to allocate an instance of"),
-		nullable..void_p.IN(
+		Check("class_getInstanceSize(cls)", debug = true)..nullable..void_p.IN(
 			"bytes",
 			"""
 			the location at which to allocate an instance of the {@code cls} class. {@code bytes} must point to at least ${code("class_getInstanceSize(cls)")}
@@ -1419,7 +1419,7 @@ void myMethodIMP(id self, SEL _cmd)
 		alive long enough for the caller to use it. This function is typically used anywhere a {@code __weak} variable is used in an expression.
 		""",
 
-		nullable..id_p.IN("location", "the address of the weak pointer"),
+		Check(1)..nullable..id_p.IN("location", "the address of the weak pointer"),
 
 		returnDoc = "the object pointed to by location, or #nil if location is #nil"
 	)
@@ -1432,7 +1432,7 @@ void myMethodIMP(id self, SEL _cmd)
 		This function is typically used anywhere a {@code __weak} variable is the target of an assignment.
 		""",
 
-		id_p.IN("location", "the address of the weak pointer"),
+		Check(1)..id_p.IN("location", "the address of the weak pointer"),
 		id.IN("obj", "the new object you want the weak pointer to now point to"),
 
 		returnDoc = "the value stored in location (that is, {@code obj})"

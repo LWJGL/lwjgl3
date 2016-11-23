@@ -88,7 +88,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		const..ALdouble_p.IN("value", "the parameter values")
+		Check(1)..const..ALdouble_p.IN("value", "the parameter values")
 	)
 
 	ALvoid(
@@ -117,7 +117,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
-		ALdouble_p.OUT("values", "the parameter values")
+		Check(1)..ALdouble_p.OUT("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -146,7 +146,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		const..ALint64SOFT_p.IN("values", "the parameter values")
+		Check(1)..const..ALint64SOFT_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -175,6 +175,6 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
-		ALint64SOFT_p.OUT("values", "the parameter values")
+		Check(1)..ALint64SOFT_p.OUT("values", "the parameter values")
 	)
 }

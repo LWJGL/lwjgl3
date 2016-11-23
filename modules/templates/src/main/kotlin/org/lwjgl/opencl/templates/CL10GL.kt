@@ -312,12 +312,12 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 		""",
 
 			cl_mem.IN("memobj", "the memory object being queried"),
-			nullable..cl_gl_object_type_p.OUT(
+			Check(1)..nullable..cl_gl_object_type_p.OUT(
 				"gl_object_type",
 				"returns the type of GL object attached to {@code memobj}. If {@code gl_object_type} is $NULL, it is ignored.",
 				GLObjectTypes
 			),
-			nullable..GLuint_p.OUT("gl_object_name", "the GL object name used to create {@code memobj}. If {@code gl_object_name} is $NULL, it is ignored."),
+			Check(1)..nullable..GLuint_p.OUT("gl_object_name", "the GL object name used to create {@code memobj}. If {@code gl_object_name} is $NULL, it is ignored."),
 
 			returnDoc =
 			"""

@@ -828,7 +828,7 @@ ovr_IdentifyClient(
 			"outFloorPoints",
 			"an array of 3D points (in clockwise order) defining the boundary at floor height (can be $NULL to retrieve only the number of points)"
 		),
-		nullable..int_p.OUT("outFloorPointsCount", "the number of 3D points returned in the array"),
+		Check(1)..nullable..int_p.OUT("outFloorPointsCount", "the number of 3D points returned in the array"),
 
 		returnDoc =
 		"""
@@ -868,7 +868,7 @@ ovr_IdentifyClient(
 		""",
 
 		session,
-		ovrBool_p.OUT("outIsVisible", "#True, if the boundary is visible"),
+		Check(1)..ovrBool_p.OUT("outIsVisible", "#True, if the boundary is visible"),
 
 		returnDoc =
 		"""

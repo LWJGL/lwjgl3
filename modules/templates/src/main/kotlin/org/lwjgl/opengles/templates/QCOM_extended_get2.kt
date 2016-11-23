@@ -46,7 +46,7 @@ val QCOM_extended_get2 = "QCOMExtendedGet2".nativeClassGLES("QCOM_extended_get2"
 
 		GLuint.IN("program", ""),
 		GLenum.IN("shadertype", ""),
-		nullable..GLcharUTF8_p.OUT("source", ""),
+		Unsafe..GLcharUTF8_p.OUT("source", ""),
 		nullable..Check(1)..GLint_p.OUT("length", "")
 	)
 }

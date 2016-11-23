@@ -69,7 +69,7 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 
 		unsigned_int.IN("id", ""),
 		GLXContext.IN("share_context", ""),
-		const..int_p.IN("attribList", "")
+		NullTerminated..const..int_p.IN("attribList", "")
 	)
 
 	Bool(
@@ -106,8 +106,8 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 		unsigned_int.IN("id", ""),
 		int.IN("property", "", properties),
 		GLenum.IN("dataType", ""),
-		unsigned_int.IN("size", ""),
-		void_p.IN("data", "")
+		AutoSize("data")..unsigned_int.IN("size", ""),
+		void_p.OUT("data", "")
 	)
 
 	Bool(

@@ -335,7 +335,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context used to create the SVM buffer"),
-		void_p.IN("svm_pointer", "must be the value returned by a call to #SVMAlloc(). If a $NULL pointer is passed in {@code svm_pointer}, no action occurs.")
+		Unsafe..void_p.IN("svm_pointer", "must be the value returned by a call to #SVMAlloc(). If a $NULL pointer is passed in {@code svm_pointer}, no action occurs.")
 	)
 
 	cl_int(
@@ -361,7 +361,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			the OpenCL implementation will call {@code pfn_free_func} to free all the SVM pointers specified in {@code svm_pointers}.
 			"""
 		),
-		nullable..void_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be $NULL."),
+		nullable..voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be $NULL."),
 		NEWL,
 		EWL,
 		EVENT,
@@ -408,7 +408,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		),
 		void_p.IN("dst_ptr", "the pointer to a memory region where data is copied to"),
 		const..void_p.IN("src_ptr", "the pointer to a memory region where data is copied from"),
-		size_t.IN("size", "the size in bytes of data being copied"),
+		AutoSize("src_ptr", "dst_ptr")..size_t.IN("size", "the size in bytes of data being copied"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -454,7 +454,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"""
 		),
 		AutoSize("pattern")..size_t.IN("pattern_size", "the size of the {@code pattern} array, in bytes"),
-		size_t.IN("size", "the size in bytes of region being filled starting with {@code svm_ptr} and must be a multiple of {@code pattern_size}"),
+		AutoSize("svm_ptr")..size_t.IN("size", "the size in bytes of region being filled starting with {@code svm_ptr} and must be a multiple of {@code pattern_size}"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -537,7 +537,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		""",
 
 		cl_command_queue.IN("command_queue", "a valid host command-queue"),
-		void_p.IN(
+		Unsafe..void_p.IN(
 			"svm_ptr",
 			"""
 			a pointer that was specified in a previous call to #EnqueueSVMMap(). If {@code svm_ptr} is allocated using #SVMAlloc() then it must be allocated from
@@ -574,7 +574,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			{@code n} is the total number of arguments declared by a kernel.
 			"""
 		),
-		const..void_p.IN(
+		Unsafe..const..void_p.IN(
 			"arg_value",
 			"""
 			the SVM pointer that should be used as the argument value for argument specified by {@code arg_index}. The SVM pointer specified is the value used

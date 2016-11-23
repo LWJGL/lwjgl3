@@ -60,7 +60,7 @@ val stdlib = "Stdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		to #malloc(), #calloc() or #realloc(). If the area pointed to was moved, a {@code free(ptr)} is done.
 		""",
 
-		nullable..void_p.IN("ptr", "the memory block to reallocate"),
+		Unsafe..nullable..void_p.IN("ptr", "the memory block to reallocate"),
 		AutoSizeResult..size_t.IN("size", "the new memory block size, in bytes")
 	)
 
@@ -71,7 +71,7 @@ val stdlib = "Stdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		or if {@code free(ptr)} has already been called before, undefined behavior occurs. If ptr is $NULL, no operation is performed.
 		""",
 
-		MultiTypeAll..nullable..void_p.IN("ptr", "the memory space to free")
+		MultiTypeAll..Unsafe..nullable..void_p.IN("ptr", "the memory space to free")
 	)
 
 	macro()..void_p(
@@ -89,6 +89,6 @@ val stdlib = "Stdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		"aligned_free",
 		"Frees a block of memory that was allocated with #aligned_alloc(). If ptr is $NULL, no operation is performed.",
 
-		MultiTypeAll..nullable..void_p.IN("ptr", "the aligned block of memory to free")
+		Unsafe..MultiTypeAll..nullable..void_p.IN("ptr", "the aligned block of memory to free")
 	)
 }

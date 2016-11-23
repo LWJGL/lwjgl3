@@ -81,6 +81,6 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
 		VkDevice.IN("device", "the logical device that owns the memory."),
 		VkDeviceMemory.IN("memory", "the {@code VkDeviceMemory} object."),
 		VkExternalMemoryHandleTypeFlagsNV.IN("handleType", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} containing a single bit specifying the type of handle requested."),
-		HANDLE.p.IN("pHandle", "")
+		Check(1)..HANDLE.p.OUT("pHandle", "")
 	)
 }

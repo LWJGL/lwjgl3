@@ -47,7 +47,10 @@ typedef struct {
 		""",
 
 		GLenum.IN("mode", "the primitive mode", PRIMITIVE_TYPES),
-		const..void_p.IN("indirect", "an array of DrawArraysIndirectBindlessCommandNV structures (see the extension spec for more information)"),
+		Check("drawCount * (stride == 0 ? (16 + vertexBufferCount * 24) : stride)")..const..void_p.IN(
+			"indirect",
+			"an array of DrawArraysIndirectBindlessCommandNV structures (see the extension spec for more information)"
+		),
 		GLsizei.IN("drawCount", "the number of structures in the {@code indirect} array"),
 		GLsizei.IN("stride", "the size of one DrawArraysIndirectBindlessCommandNV structure"),
 		GLint.IN("vertexBufferCount", "the number of vertex buffers in the DrawArraysIndirectBindlessCommandNV structure")
@@ -76,7 +79,10 @@ typedef struct {
 
 		GLenum.IN("mode", "the primitive mode", PRIMITIVE_TYPES),
 		GLenum.IN("type", "the data type of the element indices", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
-		const..void_p.IN("indirect", "an array of DrawElementsIndirectBindlessCommandNV structures (see the extension spec for more information)"),
+		Check("drawCount * (stride == 0 ? ((vertexBufferCount + 2) * 24) : stride)")..const..void_p.IN(
+			"indirect",
+			"an array of DrawElementsIndirectBindlessCommandNV structures (see the extension spec for more information)"
+		),
 		GLsizei.IN("drawCount", "the number of structures in the {@code indirect} array"),
 		GLsizei.IN("stride", "the size of one DrawElementsIndirectBindlessCommandNV structure"),
 		GLint.IN("vertexBufferCount", "the number of vertex buffers in the DrawElementsIndirectBindlessCommandNV structure")

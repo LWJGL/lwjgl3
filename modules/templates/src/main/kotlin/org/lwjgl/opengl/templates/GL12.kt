@@ -112,9 +112,9 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GLint.IN("border", "the texture border width"),
 		GLenum.IN("format", "the texel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the texel data type", PIXEL_DATA_TYPES),
-		nullable..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the texel data")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..nullable..const..void_p.IN("pixels", "the texel data")
 	)
 
 	void(
@@ -136,7 +136,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the pixel data")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the pixel data")
 	)
 
 	void(

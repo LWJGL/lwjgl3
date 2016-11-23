@@ -172,7 +172,7 @@ public class GLFWDemo {
 			ByteBuffer bitmap = memAlloc(BITMAP_W * BITMAP_H);
 
 			STBTTPackContext pc = STBTTPackContext.mallocStack(stack);
-			stbtt_PackBegin(pc, bitmap, BITMAP_W, BITMAP_H, 0, 1, null);
+			stbtt_PackBegin(pc, bitmap, BITMAP_W, BITMAP_H, 0, 1, NULL);
 			stbtt_PackSetOversampling(pc, 4, 4);
 			stbtt_PackFontRange(pc, ttf, 0, FONT_HEIGHT, 32, cdata);
 			stbtt_PackEnd(pc);

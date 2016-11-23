@@ -85,11 +85,11 @@ val ALC_SOFT_HRTF = "SOFTHRTF".nativeClassALC("SOFT_HRTF") {
 		Resets a device after it is opened for playback, to attempt changing the playback properties.
 		""",
 
-		ALCdevice_p.OUT(
+		ALCdevice_p.IN(
 			"device",
 			"a handle to a valid playback device as returned by ALC10#OpenDevice(), otherwise the call fails and an ALC10#INVALID_DEVICE error is generated"
 		),
-		const..ALCint_p.IN(
+		nullable..NullTerminated..const..ALCint_p.IN(
 			"attrList",
 			"""
 			the same as what could be passed to ALC10#CreateContext(). The AL is allowed to ignore attributes and attribute value combinations the device

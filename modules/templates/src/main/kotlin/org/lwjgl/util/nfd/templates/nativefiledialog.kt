@@ -157,6 +157,6 @@ val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE,
 		"Free",
 		"Frees memory allocated by NativeFileDialog.",
 
-		void_p.IN("outPath", "the string to free")
+		Check(1)..void_p.IN("outPath", "the string to free")
 	)
 }

@@ -1020,7 +1020,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("yOrig", "the bitmap origin y coordinate"),
 		GLfloat.IN("xInc", "the x increment added to the raster position"),
 		GLfloat.IN("yInc", "the y increment added to the raster position"),
-		PIXEL_UNPACK_BUFFER..nullable..const..GLubyte_p.IN("data", "the buffer containing the bitmap data.")
+		Check("((w + 7) >> 3) * h")..PIXEL_UNPACK_BUFFER..nullable..const..GLubyte_p.IN("data", "the buffer containing the bitmap data.")
 	)
 
 	void(
@@ -1124,7 +1124,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("plane", "the clip plane to define"),
-		const..GLdouble_p.IN("equation", "the clip plane coefficients")
+		Check(4)..const..GLdouble_p.IN("equation", "the clip plane coefficients")
 	)
 
 	// Color functions javadoc
@@ -1221,7 +1221,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		ARRAY_BUFFER..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("pointer", "the color array data")
+		)..Unsafe..const..void_p.IN("pointer", "the color array data")
 	)
 
 	void(
@@ -1352,7 +1352,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the pixel data")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the pixel data")
 	)
 
 	DeprecatedGL..void(
@@ -1382,7 +1382,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Specifies the location and organization of an edge flag array.",
 
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER..const..GLboolean_p.IN("pointer", "the edge flag array data")
+		Unsafe..ARRAY_BUFFER..const..GLboolean_p.IN("pointer", "the edge flag array data")
 	)
 
 	DeprecatedGL..void(
@@ -1409,7 +1409,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"EvalCoord1fv",
 		"Pointer version of #EvalCoord1f().",
 
-		const..(GLfloat_p.IN("u", "the domain coordinate buffer"))
+		Check(1)..const..(GLfloat_p.IN("u", "the domain coordinate buffer"))
 	)
 
 	DeprecatedGL..void(
@@ -1423,7 +1423,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"EvalCoord1dv",
 		"Pointer version of #EvalCoord1d().",
 
-		const..(GLdouble_p.IN("u", "the domain coordinate buffer"))
+		Check(1)..const..(GLdouble_p.IN("u", "the domain coordinate buffer"))
 	)
 
 	DeprecatedGL..void(
@@ -1438,7 +1438,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"EvalCoord2fv",
 		"Pointer version of #EvalCoord2f().",
 
-		const..(GLfloat_p.IN("u", "the domain coordinate buffer"))
+		Check(2)..const..(GLfloat_p.IN("u", "the domain coordinate buffer"))
 	)
 
 	DeprecatedGL..void(
@@ -1453,7 +1453,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"EvalCoord2dv",
 		"Pointer version of #EvalCoord2d().",
 
-		const..(GLdouble_p.IN("u", "the domain coordinate buffer"))
+		Check(2)..const..(GLdouble_p.IN("u", "the domain coordinate buffer"))
 	)
 
 	DeprecatedGL..void(
@@ -1730,7 +1730,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("face", "the material face for which to return information", "#FRONT #BACK"),
 		GLenum.IN("pname", "the information to query", "#AMBIENT #DIFFUSE #SPECULAR #EMISSION #SHININESS"),
-		GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	DeprecatedGL..void(
@@ -1739,7 +1739,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("face", "the material face for which to return information"),
 		GLenum.IN("pname", "the information to query"),
-		GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	DeprecatedGL..void(
@@ -1862,7 +1862,12 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLint.IN("level", "the level-of-detail number"),
 		GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void_p.OUT("pixels", "the buffer in which to place the returned data")
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		)..Unsafe..PIXEL_PACK_BUFFER..void_p.OUT("pixels", "the buffer in which to place the returned data")
 	)
 
 	void(
@@ -2001,7 +2006,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"#UNSIGNED_BYTE #SHORT #INT #FLOAT #DOUBLE"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER..const..void_p.IN("pointer", "the color index array data")
+		Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "the color index array data")
 	)
 
 	DeprecatedGL..void("InitNames", "Clears the selection name stack.")
@@ -2021,7 +2026,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..ARRAY_BUFFER..const..void_p.IN("pointer", "the vertex array data")
+		)..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "the vertex array data")
 	)
 
 	GLboolean(
@@ -2448,9 +2453,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"#BYTE #SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("pointer", "the normal array data")
+		)..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "the normal array data")
 	)
 
 	DeprecatedGL..void(
@@ -2636,7 +2641,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		it is as if the stipple pattern were all ones.
 		""",
 
-		PIXEL_UNPACK_BUFFER..const..GLubyte_p.IN("pattern", "a pointer to memory into which a 32 &times; 32 pattern is packed")
+		Check(128)..PIXEL_UNPACK_BUFFER..const..GLubyte_p.IN("pattern", "a pointer to memory into which a 32 &times; 32 pattern is packed")
 	)
 
 	DeprecatedGL..void(
@@ -2815,7 +2820,11 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLsizei.IN("height", "the number of pixels to read in the y-dimension"),
 		GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..PIXEL_PACK_BUFFER..void_p.OUT("pixels", "a buffer in which to place the returned pixel data")
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT
+		)..Unsafe..PIXEL_PACK_BUFFER..void_p.OUT("pixels", "a buffer in which to place the returned pixel data")
 	)
 
 	// Rect functions javadoc
@@ -3110,9 +3119,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"#SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("pointer", "the texture coordinate array data")
+		)..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "the texture coordinate array data")
 	)
 
 	void(
@@ -3247,9 +3256,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLint.IN("border", "the texture border width"),
 		GLenum.IN("format", "the texel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the texel data type", PIXEL_DATA_TYPES),
-		nullable..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the texel data")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..nullable..const..void_p.IN("pixels", "the texel data")
 	)
 
 	void(
@@ -3263,9 +3272,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLint.IN("border", "the texture border width"),
 		GLenum.IN("format", "the texel data format"),
 		GLenum.IN("type", "the texel data type"),
-		nullable..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the texel data")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..nullable..const..void_p.IN("pixels", "the texel data")
 	)
 
 	void(
@@ -3405,7 +3414,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the pixel data")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the pixel data")
 	)
 
 	void(
@@ -3425,7 +3434,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the pixel data")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the pixel data")
 	)
 
 	DeprecatedGL..void(
@@ -3535,9 +3544,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"#SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("pointer", "the vertex array data")
+		)..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "the vertex array data")
 	)
 
 	void(

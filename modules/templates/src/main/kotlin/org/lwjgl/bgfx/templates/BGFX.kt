@@ -783,7 +783,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		bool.IN("_inputNormalized", ""),
 		bgfx_attrib_t.IN("_attr", "", Attrib),
 		const..bgfx_vertex_decl_t_p.IN("_decl", ""),
-		void_p.IN("_data", ""),
+		Unsafe..void_p.IN("_data", ""),
 		uint32_t.IN("_index", "")
 	)
 
@@ -794,7 +794,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		Check(4)..float_p.OUT("_output", ""),
 		bgfx_attrib_t.IN("_attr", "", Attrib),
 		const..bgfx_vertex_decl_t_p.IN("_decl", ""),
-		const..void_p.IN("_data", ""),
+		Unsafe..const..void_p.IN("_data", ""),
 		uint32_t.IN("_index", "")
 	)
 
@@ -803,9 +803,9 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Converts vertex stream data from one vertex stream format to another.",
 
 		const..bgfx_vertex_decl_t_p.IN("_destDecl", "destination vertex stream declaration"),
-		void_p.IN("_destData", "destination vertex stream"),
+		Unsafe..void_p.IN("_destData", "destination vertex stream"),
 		const..bgfx_vertex_decl_t_p.IN("_srcDecl", "source vertex stream declaration"),
-		const..void_p.IN("_srcData", "source vertex stream data"),
+		Unsafe..const..void_p.IN("_srcData", "source vertex stream data"),
 		uint32_t.IN("_num", "number of vertices to convert from source to destination")
 	)
 
@@ -815,7 +815,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 		uint16_t.p.OUT("_output", "welded vertices remapping table. The size of buffer be the same as number of vertices."),
 		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex stream declaration"),
-		const..void_p.IN("_data", "vertex stream"),
+		Unsafe..const..void_p.IN("_data", "vertex stream"),
 		AutoSize("_output")..uint16_t.IN("_num", "number of vertices in vertex stream"),
 		float.IN("_epsilon", "error tolerance for vertex position comparison"),
 
@@ -1527,7 +1527,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT
-		)..void_p.IN("_data", "destination buffer"),
+		)..Unsafe..void_p.IN("_data", "destination buffer"),
 		MapToInt..uint8_t.IN("_mip", "mip level"),
 
 		returnDoc = "frame number when the result will be available"
@@ -1947,7 +1947,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 			PointerMapping.DATA_LONG,
 			PointerMapping.DATA_FLOAT,
 			PointerMapping.DATA_DOUBLE
-		)..const..void_p.IN("_value", "pointer to uniform data"),
+		)..Unsafe..const..void_p.IN("_value", "pointer to uniform data"),
 		MapToInt..uint16_t.IN("_num", "number of elements. Passing {@code UINT16_MAX} will use the {@code _num} passed on uniform creation.")
 	)
 

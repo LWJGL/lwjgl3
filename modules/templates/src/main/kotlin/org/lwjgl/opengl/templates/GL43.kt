@@ -105,9 +105,9 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLenum.IN("internalformat", "the internal format with which the data will be stored in the buffer object"),
 		GLenum.IN("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
-		nullable..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN(
+		)..Unsafe..nullable..const..void_p.IN(
 			"data",
 			"""
 		    the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
@@ -127,9 +127,9 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLsizeiptr.IN("size", "the size, in basic machine units of the range of the data store to fill"),
 		GLenum.IN("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
-		nullable..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN(
+		)..Unsafe..nullable..const..void_p.IN(
 			"data",
 			"""
 		    the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format

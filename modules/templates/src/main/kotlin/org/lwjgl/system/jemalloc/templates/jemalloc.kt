@@ -86,7 +86,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		specified size.
 		""",
 
-		nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
 		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
@@ -94,7 +94,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		"free",
 		"Causes the allocated memory referenced by {@code ptr} to be made available for future allocations. If {@code ptr} is $NULL, no action occurs.",
 
-		MultiTypeAll..nullable..void_p.IN("ptr", "the allocated memory to free")
+		MultiTypeAll..Unsafe..nullable..void_p.IN("ptr", "the allocated memory to free")
 	)
 
 	// Non-standard API
@@ -120,7 +120,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		alignment constraints.
 		""",
 
-		nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
 		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
 		flags
 	)
@@ -133,7 +133,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		result in failure to resize. Behavior is undefined if {@code size} is 0, or if {@code (size + extra > SIZE_T_MAX)}.
 		""",
 
-		nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
 		size_t.IN("size", "the number of bytes to allocate"),
 		size_t.IN("extra", "the number of extra bytes to allocate"),
 		flags
@@ -143,7 +143,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		"sallocx",
 		"Returns the real size of the allocation at {@code ptr}.",
 
-		const..void_p.IN("ptr", "the allocated memory to query"),
+		Unsafe..const..void_p.IN("ptr", "the allocated memory to query"),
 		flags
 	)
 
@@ -151,7 +151,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		"dallocx",
 		"Causes the memory referenced by {@code ptr} to be made available for future allocations.",
 
-		MultiTypeAll..void_p.IN("ptr", "the allocated memory to deallocate"),
+		Unsafe..MultiTypeAll..void_p.IN("ptr", "the allocated memory to deallocate"),
 		flags
 	)
 
@@ -188,8 +188,8 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 	    """,
 
 		const..charASCII_p.IN("name", "the namespace location"),
-		nullable..void_p.OUT("oldp", "returns a value"),
-		nullable..Check(1)..size_t_p.OUT("oldlenp", "returns the value length"),
+		Unsafe..nullable..void_p.OUT("oldp", "returns a value"),
+		Check(1)..nullable..size_t_p.OUT("oldlenp", "returns the value length"),
 		nullable..void_p.IN("newp", "the new value"),
 		AutoSize("newp")..size_t.IN("newlen", "the new value length")
 	)
@@ -234,8 +234,8 @@ for (i = 0; i < nbins; i++) {
 
 		const..size_t_p.IN("mib", "a MIB"),
 		AutoSize("mib")..size_t.IN("miblen", "the number of elements in {@code mib}"),
-		nullable..void_p.OUT("oldp", "returns a value"),
-		nullable..Check(1)..size_t_p.OUT("oldlenp", "returns the value length"),
+		Unsafe..nullable..void_p.OUT("oldp", "returns a value"),
+		Check(1)..nullable..size_t_p.OUT("oldlenp", "returns the value length"),
 		nullable..void_p.IN("newp", "the new value"),
 		AutoSize("newp")..size_t.IN("newlen", "the new value length")
 	)
@@ -253,7 +253,7 @@ for (i = 0; i < nbins; i++) {
 		""",
 
 		nullable..je_malloc_message_cb.IN("write_cb", "the print callback, or $NULL to use {@code malloc_message()}"),
-		nullable..void_p.IN("je_cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
+		nullable..voidptr.IN("je_cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
 		nullable..const..charASCII_p.IN("opts", "an options string")
 	)
 
@@ -266,6 +266,6 @@ for (i = 0; i < nbins; i++) {
 	    such behavior is entirely implementation-dependent.
 	    """,
 
-		const..void_p.IN("ptr", "the allocated memory to query")
+		Unsafe..const..void_p.IN("ptr", "the allocated memory to query")
 	)
 }

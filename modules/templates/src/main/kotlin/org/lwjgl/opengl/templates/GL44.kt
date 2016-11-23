@@ -197,9 +197,9 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		GLsizei.IN("depth", "the subregion depth"),
 		GLenum.IN("format", "the format of the source data", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
-		nullable..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..const..void_p.IN(
+		)..Unsafe..nullable..const..void_p.IN(
 			"data",
 			"""
 			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is $NULL,
@@ -226,9 +226,9 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		GLint.IN("level", "the texture level to clear"),
 		GLenum.IN("format", "the format of the source data", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
-		nullable..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..const..void_p.IN(
+		)..Unsafe..nullable..const..void_p.IN(
 			"data",
 			"""
 			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is $NULL,

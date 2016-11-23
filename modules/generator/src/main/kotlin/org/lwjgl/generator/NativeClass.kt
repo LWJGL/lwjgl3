@@ -255,7 +255,10 @@ class NativeClass(
 										it.documentation,
 										"", LinkMode.SINGLE
 									).copyModifiers(it).removeArrayModifiers().replaceModifier(Check) {
-										Check("${it.expression.let { if (it.contains(' ')) "($it)" else it }} >> ${autoType.byteShift}")
+										if (it.expression == "0")
+											it
+										else
+											Check("${it.expression.let { if (it.contains(' ')) "($it)" else it }} >> ${autoType.byteShift}")
 									}
 								else
 									func[it.name].removeArrayModifiers()

@@ -6,6 +6,7 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
+import org.lwjgl.opengl.BufferType.*
 
 val EXT_draw_instanced = "EXTDrawInstanced".nativeClassGL("EXT_draw_instanced", postfix = EXT) {
 	documentation =
@@ -33,9 +34,9 @@ val EXT_draw_instanced = "EXTDrawInstanced".nativeClassGL("EXT_draw_instanced", 
 		"",
 
 		GLenum.IN("mode", ""),
-		GLsizei.IN("count", ""),
-		GLenum.IN("type", ""),
-		const..void_p.IN("indices", ""),
+		AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
+		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
+		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
 		GLsizei.IN("primcount", "")
 	)
 }

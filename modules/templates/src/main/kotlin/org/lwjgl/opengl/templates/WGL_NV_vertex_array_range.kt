@@ -22,6 +22,6 @@ val WGL_NV_vertex_array_range = "WGLNVVertexArrayRange".nativeClassWGL("WGL_NV_v
 		"FreeMemoryNV",
 		"",
 
-		void_p.IN("pointer", "")
+		Unsafe..void_p.IN("pointer", "")
 	)
 }

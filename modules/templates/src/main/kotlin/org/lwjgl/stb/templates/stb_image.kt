@@ -269,7 +269,7 @@ N=\#comp     components
 		"image_free",
 		"Frees a loaded image",
 
-		MultiType(PointerMapping.DATA_FLOAT)..void_p.IN("retval_from_stbi_load", "an stb image")
+		MultiType(PointerMapping.DATA_FLOAT)..Unsafe..void_p.IN("retval_from_stbi_load", "an stb image")
 	)
 
 	intb(

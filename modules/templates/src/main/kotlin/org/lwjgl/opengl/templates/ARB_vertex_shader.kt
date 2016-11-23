@@ -193,9 +193,9 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 			the array. The initial value is 0.
 			"""
 		),
-		ARRAY_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN(
+		)..Unsafe..ARRAY_BUFFER..const..void_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer

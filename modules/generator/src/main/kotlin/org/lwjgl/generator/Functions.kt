@@ -271,7 +271,7 @@ class NativeClassFunction(
 		val autoSizeReferences = HashSet<String>()
 		parameters.forEachIndexed { i, it ->
 			if (it.nativeType is StructType) {
-				if (it.paramType == OUT)
+				if (it.paramType === OUT)
 					it.nativeType.definition.hasUsageOutput()
 				else
 					it.nativeType.definition.hasUsageInput()
@@ -302,7 +302,7 @@ class NativeClassFunction(
 						}
 
 						if (bufferParam.nativeType is CharSequenceType && bufferParam.nativeType.charMapping == CharMapping.UTF16)
-							it.replaceModifier(AutoSize(2, autoSize.reference, *autoSize.dependent, applyTo = autoSize.applyTo))
+							it.replaceModifier(AutoSize(2, autoSize.reference, *autoSize.dependent))
 					}
 				}
 			}
@@ -310,6 +310,17 @@ class NativeClassFunction(
 			if (it has AutoSizeResultParam) {
 				if (!returns.nativeType.isPointerData)
 					it.error("Return type is not an array: AutoSizeResult")
+			}
+
+			if (it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER && !it.nativeType.includesPointer
+			    && it.nativeType !is StructType
+			    && it.nativeType !is CharSequenceType
+			    && !it.has(Check)
+			    && !hasAutoSizeFor(it)
+			    && !it.has(AutoSizeResultParam)
+			    && !it.has(Terminated)
+			) {
+				it.error("Data pointer not validated with Check/AutoSize/Terminated. If validation is not possible, use the Unsafe modifier.")
 			}
 
 			if (it has AutoType) {
@@ -426,10 +437,8 @@ class NativeClassFunction(
 			var Safe = if (it has Nullable) "Safe" else ""
 
 			if (it.paramType === IN) {
-				if (it.nativeType is CharSequenceType && !it.has(Check) && transforms?.get(it) == null) {
-					if (getReferenceParam(AutoSize, it.name) == null)
-						checks.add("checkNT${it.nativeType.charMapping.bytes}$Safe(${it.name});")
-				}
+				if (it.nativeType is CharSequenceType && !it.has(Check) && !hasAutoSizeFor(it) && transforms?.get(it) == null)
+					checks.add("checkNT${it.nativeType.charMapping.bytes}$Safe(${it.name});")
 
 				if (it has Terminated) {
 					val postfix = if ((it.nativeType.mapping as PointerMapping).isMultiByte) "" else "1"
@@ -438,10 +447,9 @@ class NativeClassFunction(
 			}
 
 			if (it has Check) {
+				val check = it[Check]
 				val transform = transforms?.get(it)
-				if (transform !is SkipCheckFunctionTransform) {
-					val check = it[Check]
-
+				if (check.expression != "0" && transform !is SkipCheckFunctionTransform) {
 					val DEBUG = if (check.debug) "if ( DEBUG )\n\t\t\t\t" else ""
 
 					if (it has MultiType)

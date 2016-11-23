@@ -239,7 +239,7 @@ int main(int arg, char **argv)
 		This uses a very simply packing, use with #GetBakedQuad().
 		""",
 
-		const..unsigned_char_p.IN("data", "the font data"),
+		Unsafe..const..unsigned_char_p.IN("data", "the font data"),
 		Expression("0")..int.IN("offset", "the font data offset, use 0 for plain .ttf files"),
 		float.IN("pixel_height", "the font height, in pixels"),
 		Check("pw * ph")..unsigned_char_p.OUT("pixels", "a buffer in which to write the font bitmap"),
@@ -296,7 +296,7 @@ int main(int arg, char **argv)
 			"padding",
 			"the amount of padding to leave between each character (normally you want '1' for bitmaps you'll use as textures with bilinear filtering)"
 		),
-		Expression("NULL")..nullable..void_p.IN("alloc_context", "a pointer to an allocation context"),
+		Expression("NULL")..nullable..voidptr.IN("alloc_context", "a pointer to an allocation context"),
 
 		returnDoc = "1 on success, 0 on failure"
 	)
@@ -330,7 +330,7 @@ int main(int arg, char **argv)
 		""",
 
 		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
-		unsigned_char_p.IN("fontdata", "the font data"),
+		Unsafe..unsigned_char_p.IN("fontdata", "the font data"),
 		int.IN("font_index", "the font index (use 0 if you don't know what that is"),
 		float.IN(
 			"font_size",
@@ -357,7 +357,7 @@ int main(int arg, char **argv)
 		""",
 
 		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
-		unsigned_char_p.IN("fontdata", "the font data"),
+		Unsafe..unsigned_char_p.IN("fontdata", "the font data"),
 		int.IN("font_index", "the font index (use 0 if you don't know what that is"),
 		stbtt_pack_range_p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
 		AutoSize("ranges")..int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
@@ -453,7 +453,7 @@ int main(int arg, char **argv)
 		return '0' for index 0, and -1 for all other indices. You can just skip this step if you know it's that kind of font.
 		""",
 
-		const..unsigned_char_p.IN("data", "the font data"),
+		Unsafe..const..unsigned_char_p.IN("data", "the font data"),
 		int.IN("index", "the font index")
 	)
 
@@ -466,7 +466,7 @@ int main(int arg, char **argv)
 		""",
 
 		stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
-		const..unsigned_char_p.IN("data", "the font data"),
+		Unsafe..const..unsigned_char_p.IN("data", "the font data"),
 		Expression("0")..int.IN("offset", "the font data offset"),
 
 		returnDoc = "1 on success, 0 on failure"
@@ -666,7 +666,7 @@ int main(int arg, char **argv)
 		"FreeBitmap",
 		"Frees a bitmap allocated by #GetCodepointBitmap(), #GetCodepointBitmapSubpixel(), #GetGlyphBitmap() or #GetGlyphBitmapSubpixel().",
 
-		unsigned_char_p.IN("bitmap", "the bitmap to free"),
+		Unsafe..unsigned_char_p.IN("bitmap", "the bitmap to free"),
 		nullable..voidptr.IN("userdata", "a pointer to user data")
 	)
 
@@ -984,7 +984,7 @@ int main(int arg, char **argv)
 		{@code macStyle} header field; I don't know if fonts set this consistently.
 		""",
 
-		const..unsigned_char_p.IN("fontdata", "the font data"),
+		Unsafe..const..unsigned_char_p.IN("fontdata", "the font data"),
 		const..charUTF8_p.IN("name", "the font name"),
 		int.IN("flags", "the style flags", StyleFlags)
 	)

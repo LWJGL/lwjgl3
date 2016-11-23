@@ -40,7 +40,7 @@ val GLX14 = "GLX14".nativeClassGLX("GLX14") {
 		)}
 		""",
 
-		const..GLubyte_p.IN("procName", "the function name to query")
+		const..GLcharASCII_p.IN("procName", "the function name to query")
 	)
 
 }

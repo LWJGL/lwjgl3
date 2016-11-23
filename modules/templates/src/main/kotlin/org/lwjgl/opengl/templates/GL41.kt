@@ -922,7 +922,7 @@ if (shader) {
 			the array. The initial value is 0.
 			"""
 		),
-		ARRAY_BUFFER..const..void_p.IN(
+		Unsafe..ARRAY_BUFFER..const..void_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -937,7 +937,7 @@ if (shader) {
 
 		GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-		GLdouble_p.IN("params", "the requested data")
+		Check(1)..GLdouble_p.IN("params", "the requested data")
 	)
 
 	// ARB_viewport_array

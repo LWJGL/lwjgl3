@@ -61,7 +61,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		"CoverageModulationTableNV",
 		"",
 
-		GLsizei.IN("n", "The size of the coverage modulation table. Must be equal to the value of COVERAGE_MODULATION_TABLE_SIZE_NV."),
+		AutoSize("v")..GLsizei.IN("n", "The size of the coverage modulation table. Must be equal to the value of COVERAGE_MODULATION_TABLE_SIZE_NV."),
 		const..GLfloat_p.IN("v", "")
 	)
 
@@ -69,8 +69,8 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		"GetCoverageModulationTableNV",
 		"",
 
-		GLsizei.IN("bufsize", ""),
-		GLfloat_p.IN("v", "")
+		AutoSize("v")..GLsizei.IN("bufsize", ""),
+		GLfloat_p.OUT("v", "")
 	)
 
 	void(

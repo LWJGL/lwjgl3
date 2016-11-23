@@ -12,10 +12,8 @@ val NV_vertex_array_range = "NVVertexArrayRange".nativeClassGL("NV_vertex_array_
 		"""
 		Native bindings to the $registryLink extension.
 
-		The goal of this extension is to permit extremely high vertex
-    processing rates via OpenGL vertex arrays even when the CPU lacks
-    the necessary data movement bandwidth to keep up with the rate
-    at which the vertex engine can consume vertices.
+		The goal of this extension is to permit extremely high vertex processing rates via OpenGL vertex arrays even when the CPU lacks the necessary data
+		movement bandwidth to keep up with the rate at which the vertex engine can consume vertices.
 		"""
 
 	IntConstant(
@@ -48,7 +46,7 @@ val NV_vertex_array_range = "NVVertexArrayRange".nativeClassGL("NV_vertex_array_
 		"VertexArrayRangeNV",
 		"",
 
-		GLsizei.IN("length", ""),
+		AutoSize("pointer")..GLsizei.IN("length", ""),
 		void_p.IN("pointer", "")
 	)
 

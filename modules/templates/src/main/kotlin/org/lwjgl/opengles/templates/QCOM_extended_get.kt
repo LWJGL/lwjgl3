@@ -105,7 +105,7 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
 		GLsizei.IN("depth", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		void_p.OUT("texels", "")
+		Unsafe..void_p.OUT("texels", "")
 	)
 
 	void(

@@ -778,7 +778,7 @@ ENABLE_WARNINGS()""")
 		"Gets environment flags.",
 
 		env_open["env"],
-		unsigned_int_p.OUT("flags", "the address of an integer to store the flags"),
+		Check(1)..unsigned_int_p.OUT("flags", "the address of an integer to store the flags"),
 
 		returnDoc = "a non-zero error value on failure and 0 on success"
 	)
@@ -788,7 +788,7 @@ ENABLE_WARNINGS()""")
 		"Returns the path that was used in #env_open().",
 
 		env_open["env"],
-		const..charUTF8_pp.IN(
+		Check(1)..charUTF8_pp.OUT(
 			"path",
 			"address of a string pointer to contain the path. This is the actual string in the environment, not a copy. It should not be altered in any way."
 		),
@@ -866,7 +866,7 @@ ENABLE_WARNINGS()""")
 		"Gets the maximum number of threads/reader slots for the environment.",
 
 		env_open["env"],
-		unsigned_int_p.OUT("readers", "address of an integer to store the number of readers"),
+		Check(1)..unsigned_int_p.OUT("readers", "address of an integer to store the number of readers"),
 
 		returnDoc = "a non-zero error value on failure and 0 on success"
 	)
@@ -964,7 +964,7 @@ ENABLE_WARNINGS()""")
 			)}
 			"""
 		),
-		MDB_txn_pp.OUT("txn", "address where the new {@code MDB_txn} handle will be stored"),
+		Check(1)..MDB_txn_pp.OUT("txn", "address where the new {@code MDB_txn} handle will be stored"),
 
 		returnDoc =
 		"""
@@ -1133,7 +1133,7 @@ ENABLE_WARNINGS()""")
 			)}
 			"""
 		),
-		MDB_dbi_p.OUT("dbi", "address where the new {@code MDB_dbi} handle will be stored"),
+		Check(1)..MDB_dbi_p.OUT("dbi", "address where the new {@code MDB_dbi} handle will be stored"),
 
 		returnDoc =
 		"""
@@ -1160,7 +1160,7 @@ ENABLE_WARNINGS()""")
 
 		txn_env["txn"],
 		stat["dbi"],
-		unsigned_int_p.OUT("flags", "address where the flags will be returned")
+		Check(1)..unsigned_int_p.OUT("flags", "address where the flags will be returned")
 	)
 
 	void(
@@ -1377,7 +1377,7 @@ ENABLE_WARNINGS()""")
 
 		txn_env["txn"],
 		stat["dbi"],
-		MDB_cursor_pp.OUT("cursor", "address where the new {@code MDB_cursor} handle will be stored")
+		Check(1)..MDB_cursor_pp.OUT("cursor", "address where the new {@code MDB_cursor} handle will be stored")
 	)
 
 	val cursor_close = void(
@@ -1388,7 +1388,7 @@ ENABLE_WARNINGS()""")
 		The cursor handle will be freed and must not be used again after this call. Its transaction must still be live if it is a write-transaction.
 		""",
 
-		MDB_cursor_p.OUT("cursor", "a cursor handle returned by #cursor_open()")
+		MDB_cursor_p.IN("cursor", "a cursor handle returned by #cursor_open()")
 	)
 
 	int(
@@ -1519,7 +1519,7 @@ ENABLE_WARNINGS()""")
 		""",
 
 		cursor_close["cursor"],
-		mdb_size_t_p.OUT("countp", "address where the count will be stored")
+		Check(1)..mdb_size_t_p.OUT("countp", "address where the count will be stored")
 	)
 
 	int(
@@ -1568,6 +1568,6 @@ ENABLE_WARNINGS()""")
 		"Checks for stale entries in the reader lock table.",
 
 		env_open["env"],
-		int_p.OUT("dead", "number of stale slots that were cleared")
+		Check(1)..int_p.OUT("dead", "number of stale slots that were cleared")
 	)
 }

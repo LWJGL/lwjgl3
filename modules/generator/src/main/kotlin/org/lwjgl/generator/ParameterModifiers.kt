@@ -162,8 +162,10 @@ class Check(
 			throw IllegalArgumentException("The Check modifier cannot be applied on opaque pointer types.")
 	}
 }
-
+/** Factory method for Check modifiers with integer expressions. */
 fun Check(value: Int) = Check(Integer.toString(value))
+/** Should be used on pointer parameters whose size cannot be validated and may be unsafe. */
+val Unsafe = Check(0)
 
 class Nullable internal constructor(val optional: Boolean) : ParameterModifier() {
 	companion object : ModifierKey<Nullable>

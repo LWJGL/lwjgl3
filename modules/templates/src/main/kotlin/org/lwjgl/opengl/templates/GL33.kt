@@ -141,7 +141,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter", "GL11#TEXTURE_BORDER_COLOR $SamplerParameters"),
-		const..GLint_p.IN("params", "an array where the value or values of {@code pname} are stored")
+		Check(1)..const..GLint_p.IN("params", "an array where the value or values of {@code pname} are stored")
 	)
 
 	void(
@@ -150,7 +150,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-		const..GLfloat_p.IN("params", "an array where the value or values of {@code pname} are stored")
+		Check(1)..const..GLfloat_p.IN("params", "an array where the value or values of {@code pname} are stored")
 	)
 
 	void(
@@ -159,7 +159,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-		const..GLint_p.IN("params", "an array where the value or values of {@code pname} are stored")
+		Check(1)..const..GLint_p.IN("params", "an array where the value or values of {@code pname} are stored")
 	)
 
 	void(
@@ -168,7 +168,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
-		const..GLuint_p.IN("params", "an array where the value or values of {@code pname} are stored")
+		Check(1)..const..GLuint_p.IN("params", "an array where the value or values of {@code pname} are stored")
 	)
 
 	void(

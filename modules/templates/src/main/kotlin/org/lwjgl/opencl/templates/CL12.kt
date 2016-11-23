@@ -448,7 +448,11 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"image_desc",
 			"a pointer to a ##CLImageDesc structure that describes type and dimensions of the image to be allocated"
 		),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..nullable..void_p.IN(
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT
+		)..Unsafe..nullable..void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the image data that may already be allocated by the application. Refer to table below for a description of how large the buffer that
@@ -511,7 +515,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"Creates a program object for a context, and loads the information related to the built-in kernels into a program object.",
 
 		cl_context.IN("context", "a valid OpenCL context"),
-		cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
+		AutoSize("device_list")..cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
 		SingleValue("device")..const..cl_device_id_p.IN(
 			"device_list",
 			"""
@@ -864,7 +868,10 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"the command-queue in which the fill command will be queued. The OpenCL context associated with {@code command_queue} and {@code image} must be the same."
 		),
 		cl_mem.IN("image", "a valid image object"),
-		const..void_p.IN(
+		MultiType(
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT
+		)..Check(4 x 4)..const..void_p.IN(
 			"fill_color",
 			"""
 			the fill color. The fill color is a four component RGBA floating-point color value if the {@code image} channel data type is not an unnormalized
@@ -873,7 +880,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			will be converted to the appropriate image channel format and order associated with {@code image}.
 			"""
 		),
-		const..size_t_p.IN(
+		Check(1)..const..size_t_p.IN(
 			"origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the {@code (x)}
@@ -883,7 +890,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			describes the image index in the 2D image array.
 			"""
 		),
-		const..size_t_p.IN(
+		Check(1)..const..size_t_p.IN(
 			"region",
 			"""
 			the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number

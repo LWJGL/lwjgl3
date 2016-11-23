@@ -49,9 +49,9 @@ val DynCallback = "DynCallback".nativeClass(DYNCALL_PACKAGE, prefix = "DCB") {
 		"(Re)initializes a callback object.",
 
 		DCCallback_p.IN("pcb", "the callback object"),
-		const..char_p.IN("signature", ""),
-		DCCallbackHandler_p.OUT("handler", ""),
-		void_p.OUT("userdata", "")
+		const..charASCII_p.IN("signature", "the function signature of the function to mimic"),
+		DCCallbackHandler_p.IN("handler", "a pointer to a callback handler"),
+		voidptr.IN("userdata", "a pointer to custom data that might be useful in the handler")
 	)
 
 	void(

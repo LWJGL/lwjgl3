@@ -706,7 +706,7 @@ nvgFill(vg);""")}
 
 		ctx,
 		int.IN("image", "the image handle"),
-		const..unsigned_char_p.IN("data", "the image data")
+		Unsafe..const..unsigned_char_p.IN("data", "the image data")
 	)
 
 	void(

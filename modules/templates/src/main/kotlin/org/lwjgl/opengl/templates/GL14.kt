@@ -204,9 +204,9 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 			"GL30#HALF_FLOAT GL11#FLOAT GL11#DOUBLE"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("pointer", "the fog coordinate array data")
+		)..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "the fog coordinate array data")
 	)
 
 	// EXT_multi_draw_arrays
@@ -356,9 +356,9 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 			"""
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("pointer", "the secondary color array data")
+		)..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "the secondary color array data")
 	)
 
 	// EXT_blend_func_separate

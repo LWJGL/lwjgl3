@@ -166,7 +166,7 @@ val DynCall = "DynCall".nativeClass(DYNCALL_PACKAGE, prefix = "DC") {
 		"Binds a struct argument.",
 
 		vm,
-		DCstruct_p.OUT("s", ""),
+		DCstruct_p.IN("s", ""),
 		DCpointer.IN("value", "the argument value")
 	)
 
@@ -197,7 +197,7 @@ val DynCall = "DynCall".nativeClass(DYNCALL_PACKAGE, prefix = "DC") {
 
 		vm,
 		funcptr,
-		DCstruct_p.OUT("s", ""),
+		DCstruct_p.IN("s", ""),
 		DCpointer.IN("returnValue", "")
 	)
 
@@ -268,6 +268,6 @@ val DynCall = "DynCall".nativeClass(DYNCALL_PACKAGE, prefix = "DC") {
 		"DefineStruct",
 		"Creates a new struct type using a signature string.",
 
-		const..char_p.IN("signature", "the struct signature")
+		const..charASCII_p.IN("signature", "the struct signature")
 	)
 }

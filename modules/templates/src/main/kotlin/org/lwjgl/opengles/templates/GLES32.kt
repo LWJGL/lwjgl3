@@ -943,7 +943,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		SingleValue("param")..const..GLint_p.IN("params", "")
+		SingleValue("param")..Check(1)..const..GLint_p.IN("params", "")
 	)
 
 	void(
@@ -952,7 +952,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		SingleValue("param")..const..GLuint_p.IN("params", "")
+		SingleValue("param")..Check(1)..const..GLuint_p.IN("params", "")
 	)
 
 	void(
@@ -979,7 +979,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		SingleValue("param")..const..GLint_p.IN("params", "")
+		SingleValue("param")..Check(1)..const..GLint_p.IN("params", "")
 	)
 
 	void(
@@ -988,7 +988,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		SingleValue("param")..const..GLuint_p.IN("params", "")
+		SingleValue("param")..Check(1)..const..GLuint_p.IN("params", "")
 	)
 
 	void(

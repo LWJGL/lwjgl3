@@ -1558,7 +1558,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			window.
 			"""
 		),
-		nullable..PULONG.OUT(
+		Check(1)..nullable..PULONG.OUT(
 			"pulFlags",
 			"an optional address of the {@code ULONG} variable to receive the modifier flags for the specified window's touch capability."
 		),

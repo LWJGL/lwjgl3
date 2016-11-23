@@ -1281,7 +1281,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			{@code image_width * size of element} in bytes. If {@code image_row_pitch} is not 0, it must be a multiple of the image element size in bytes.
 			"""
 		),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..nullable..void_p.IN(
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT
+		)..Unsafe..nullable..void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the image data that may already be allocated by the application. The size of the buffer that {@code host_ptr} points to must be &#x2265;
@@ -1347,7 +1351,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			the {@code image_row_pitch}.
 			"""
 		),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..nullable..void_p.IN(
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT
+		)..Unsafe..nullable..void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the image data that may already be allocated by the application. The size of the buffer that {@code host_ptr} points to must be &#x2265;
@@ -1508,7 +1516,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..void_p.OUT("ptr", "the pointer to a buffer in host memory where image data is to be read from"),
+		)..Unsafe..void_p.OUT("ptr", "the pointer to a buffer in host memory where image data is to be read to"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -1630,7 +1638,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			slice pitch is calculated based on the {@code input_row_pitch * height}.
 			"""
 		),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..const..void_p.IN("ptr", "the pointer to a buffer in host memory where image data is to be written to"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		)..Unsafe..const..void_p.IN("ptr", "the pointer to a buffer in host memory where image data is to be written from"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -2166,7 +2179,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		cl_command_queue.IN("command_queue", "a valid command-queue"),
 		cl_mem.IN("memobj", "a valid memory object. The OpenCL context associated with {@code command_queue} and {@code memobj} must be the same."),
-		void_p.IN("mapped_ptr", "the host address returned by a previous call to #EnqueueMapBuffer(), or #EnqueueMapImage() for {@code memobj}"),
+		Unsafe..void_p.IN("mapped_ptr", "the host address returned by a previous call to #EnqueueMapBuffer(), or #EnqueueMapImage() for {@code memobj}"),
 		NEWL,
 		EWL,
 		EVENT,

@@ -19,33 +19,22 @@ val APPLE_ContextLoggingFunctions = "APPLEContextLoggingFunctions".nativeClassCL
 		override.
 		"""
 
-	void(
-		"LogMessagesToSystemLogAPPLE",
+	LongConstant(
 		"Forwards on all log messages to the Apple System Logger.",
+		"clLogMessagesToSystemLogAPPLE".."CL.getICD().clLogMessagesToSystemLogAPPLE"
+	).noPrefix()
 
-		const..char_p.IN("errstr", ""),
-		const..void_p.IN("private_info", ""),
-		size_t.IN("cb", ""),
-		void_p.IN("user_data", "")
-	)
-
-	void(
-		"LogMessagesToStdoutAPPLE",
+	LongConstant(
 		"Forwards on all log messages to the standard output stream.",
+		"clLogMessagesToStdoutAPPLE".."CL.getICD().clLogMessagesToStdoutAPPLE"
+	).noPrefix()
 
-		const..char_p.IN("errstr", ""),
-		const..void_p.IN("private_info", ""),
-		size_t.IN("cb", ""),
-		void_p.IN("user_data", "")
-	)
-
-	void(
-		"LogMessagesToStderrAPPLE",
+	LongConstant(
 		"Forwards on all log messages to the standard error stream.",
+		"clLogMessagesToStderrAPPLE".."CL.getICD().clLogMessagesToStderrAPPLE"
+	).noPrefix()
 
-		const..char_p.IN("errstr", ""),
-		const..void_p.IN("private_info", ""),
-		size_t.IN("cb", ""),
-		void_p.IN("user_data", "")
-	)
+	private..macro(expression = "")..void("LogMessagesToSystemLogAPPLE", "")
+	private..macro(expression = "")..void("LogMessagesToStdoutAPPLE", "")
+	private..macro(expression = "")..void("LogMessagesToStderrAPPLE", "")
 }

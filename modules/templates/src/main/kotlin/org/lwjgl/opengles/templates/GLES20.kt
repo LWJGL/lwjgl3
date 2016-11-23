@@ -1124,11 +1124,11 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		GLsizei.IN("height", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		PIXEL_PACK_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT
-		)..void_p.OUT("pixels", "")
+		)..Unsafe..PIXEL_PACK_BUFFER..void_p.OUT("pixels", "")
 	)
 
 	void(
@@ -1250,9 +1250,9 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		GLint.IN("border", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		PIXEL_UNPACK_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..nullable..const..void_p.IN("pixels", "")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..nullable..const..void_p.IN("pixels", "")
 	)
 
 	void(
@@ -1303,9 +1303,9 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		GLsizei.IN("height", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		PIXEL_UNPACK_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("pixels", "")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "")
 	)
 
 	void(
@@ -1579,9 +1579,9 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		GLenum.IN("type", ""),
 		GLboolean.IN("normalized", ""),
 		GLsizei.IN("stride", ""),
-		ARRAY_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("pointer", "")
+		)..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "")
 	)
 
 	void(

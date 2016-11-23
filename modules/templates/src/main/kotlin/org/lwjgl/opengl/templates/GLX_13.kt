@@ -216,7 +216,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
 
 		DISPLAY,
 		GLXDrawable.IN("draw", "the GLXDrawable"),
-		unsigned_long_p.IN("event_mask", "returns the selection mask")
+		Check(1)..unsigned_long_p.IN("event_mask", "returns the selection mask")
 	)
 
 }

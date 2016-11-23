@@ -124,7 +124,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 
 		cl_context.IN("context", "a valid OpenCL context created from a VA API display"),
 		cl_mem_flags.IN("flags", "a bit-field that is used to specify usage information", "CL10#MEM_READ_ONLY CL10#MEM_WRITE_ONLY CL10#MEM_READ_WRITE"),
-		VASurfaceID_p.OUT("surface", "a pointer to the VA API surface to share"),
+		Check(1)..VASurfaceID_p.IN("surface", "a pointer to the VA API surface to share"),
 		cl_uint.IN("plane", "the plane of {@code surface} to share, for planar formats. For non-planar formats, {@code plane} must be 0."),
 		ERROR_RET
 	)

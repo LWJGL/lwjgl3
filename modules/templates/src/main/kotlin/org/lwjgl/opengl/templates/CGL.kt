@@ -289,7 +289,7 @@ val CGL = "CGL".nativeClass(
 		"ChoosePixelFormat",
 		"Creates a pixel format object that satisfies the constraints of the specified buffer and renderer attributes.",
 
-		const..CGLPixelFormatAttribute_p.IN(
+		NullTerminated..const..CGLPixelFormatAttribute_p.IN(
 			"attribs",
 			"""
 			a 0 terminated array that contains a list of buffer and renderer attributes. Attributes can be Boolean or integer. If an attribute is integer, you

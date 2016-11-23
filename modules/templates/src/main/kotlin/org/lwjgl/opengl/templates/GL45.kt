@@ -1481,7 +1481,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		PIXEL_PACK_BUFFER..void_p.OUT("row", "a buffer in which to return the filter row"),
 		AutoSize("column")..GLsizei.IN("columnBufSize", "the maximum number of bytes to write into {@code column}"),
 		PIXEL_PACK_BUFFER..void_p.OUT("column", "a buffer in which to return the filter column"),
-		nullable..void_p.IN("span", "")
+		Unsafe..nullable..void_p.IN("span", "")
 	)
 
 	src = ARB_imaging["GetHistogram"]

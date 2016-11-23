@@ -134,7 +134,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		""",
 
 		cl_device_id.IN("device", "a device returned by CL10#GetDeviceIDs()"),
-		cl_ulong_p.OUT(
+		Check(1)..cl_ulong_p.OUT(
 			"host_timestamp",
 			"""
 			will be updated with the value of the current timer in nanoseconds. The resolution of the timer may be queried via CL10#GetPlatformInfo() and the

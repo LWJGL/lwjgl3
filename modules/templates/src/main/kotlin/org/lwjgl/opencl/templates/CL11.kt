@@ -132,7 +132,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 			"the type of buffer object to be created",
 			BufferCreateType
 		),
-		const..void_p.IN(
+		Unsafe..const..void_p.IN(
 			"buffer_create_info",
 			"""
 			details about the buffer object to be created.
@@ -300,7 +300,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		BufferRectHostSlicePitch,
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		)..void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
+		)..Unsafe..void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -375,7 +375,12 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		BufferRectBufferSlicePitch,
 		BufferRectHostRowPitch,
 		BufferRectHostSlicePitch,
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..const..void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		)..Unsafe..const..void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
 		NEWL,
 		EWL,
 		EVENT,

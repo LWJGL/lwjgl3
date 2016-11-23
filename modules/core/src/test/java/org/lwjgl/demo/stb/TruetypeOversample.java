@@ -101,7 +101,7 @@ public final class TruetypeOversample {
 
 			ByteBuffer bitmap = BufferUtils.createByteBuffer(BITMAP_W * BITMAP_H);
 
-			stbtt_PackBegin(pc, bitmap, BITMAP_W, BITMAP_H, 0, 1, null);
+			stbtt_PackBegin(pc, bitmap, BITMAP_W, BITMAP_H, 0, 1, NULL);
 			for ( int i = 0; i < 2; i++ ) {
 				int p = (i * 3 + 0) * 128 + 32;
 				chardata.limit(p + 95);

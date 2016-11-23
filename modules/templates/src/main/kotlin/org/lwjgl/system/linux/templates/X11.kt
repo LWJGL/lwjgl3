@@ -589,6 +589,6 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 		"XFree",
 		"Free in-memory data that was created by an Xlib function.",
 
-		MultiType(PointerMapping.DATA_POINTER)..void_p.IN("data", "the data that is to be freed")
+		MultiType(PointerMapping.DATA_POINTER)..Unsafe..void_p.IN("data", "the data that is to be freed")
 	)
 }

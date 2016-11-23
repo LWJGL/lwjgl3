@@ -156,7 +156,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		    """
 		),
 		Check(2)..ovrPosef_p.OUT("outEyePoses", "the predicted eye poses"),
-		nullable..double_p.OUT("outSensorSampleTime", "the time when this function was called. May be NULL, in which case it is ignored.")
+		Check(1)..nullable..double_p.OUT("outSensorSampleTime", "the time when this function was called. May be NULL, in which case it is ignored.")
 	)
 
 	void(

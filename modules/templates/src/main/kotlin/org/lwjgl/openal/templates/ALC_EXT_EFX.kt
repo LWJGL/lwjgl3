@@ -779,7 +779,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
 		ALuint.IN("effect", "the effect to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		const..ALint_p.IN("values", "the parameter values")
+		Check(1)..const..ALint_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -797,7 +797,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
 		ALuint.IN("effect", "the effect to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		const..ALfloat_p.IN("values", "the parameter values")
+		Check(1)..const..ALfloat_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -874,7 +874,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
 		ALuint.IN("filter", "the filter to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		const..ALint_p.IN("values", "the parameter values")
+		Check(1)..const..ALint_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -892,7 +892,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
 		ALuint.IN("filter", "the filter to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		const..ALfloat_p.IN("values", "the parameter values")
+		Check(1)..const..ALfloat_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -969,7 +969,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
 		ALuint.IN("effectSlot", "the effect slot to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		const..ALint_p.IN("values", "the parameter values")
+		Check(1)..const..ALint_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -987,7 +987,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
 		ALuint.IN("effectSlot", "the effect slot to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		const..ALfloat_p.IN("values", "the parameter values")
+		Check(1)..const..ALfloat_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(

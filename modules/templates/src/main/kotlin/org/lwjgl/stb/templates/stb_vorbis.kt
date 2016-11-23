@@ -138,8 +138,8 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 
 		const..unsigned_char_p.IN("datablock", "the data block containing the ogg vorbis headers"),
 		AutoSize("datablock")..int.IN("datablock_length_in_bytes", "the length of {@code datablock}, in bytes"),
-		int_p.OUT("datablock_memory_consumed_in_bytes", "returns the amount of data parsed/consumed, in bytes"),
-		int_p.OUT("error", "returns the error code"),
+		Check(1)..int_p.OUT("datablock_memory_consumed_in_bytes", "returns the amount of data parsed/consumed, in bytes"),
+		Check(1)..int_p.OUT("error", "returns the error code"),
 		nullable..const..stb_vorbis_alloc_p.IN("alloc_buffer", "an ##STBVorbisAlloc struct"),
 
 		returnDoc =
@@ -304,7 +304,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 			"channels",
 			"returns the number of channels. Can be $NULL -- it is always the same as the number of channels reported by #get_info()."
 		),
-		float_ppp.OUT(
+		Check(1)..float_ppp.OUT(
 			"output",
 			"""
 			returns a pointer to an array of float* buffers, one per channel. These outputs will be overwritten on the next call to

@@ -68,8 +68,8 @@ val khr_egl_image = dependsOn(Binding.EGL) {
 			""",
 
 			cl_command_queue.IN("command_queue", "a valid command-queue"),
-			cl_uint.IN("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
-			const..cl_mem_p.IN(
+			AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
+			SingleValue("mem_object")..const..cl_mem_p.IN(
 				"mem_objects",
 				"a pointer to a list of OpenCL memory objects that were created from EGL resources, within the context associated with {@code command_queue}"
 			),

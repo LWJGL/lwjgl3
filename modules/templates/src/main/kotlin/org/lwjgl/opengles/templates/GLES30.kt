@@ -375,9 +375,9 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		GLint.IN("border", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		PIXEL_UNPACK_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..nullable..const..void_p.IN("pixels", "")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..nullable..const..void_p.IN("pixels", "")
 	)
 
 	void(
@@ -394,9 +394,9 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		GLsizei.IN("depth", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		PIXEL_UNPACK_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..const..void_p.IN("pixels", "")
+		)..Unsafe..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "")
 	)
 
 	void(
@@ -748,9 +748,9 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		GLint.IN("size", ""),
 		GLenum.IN("type", ""),
 		GLsizei.IN("stride", ""),
-		ARRAY_BUFFER..MultiType(
+		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
-		)..const..void_p.IN("pointer", "")
+		)..Unsafe..ARRAY_BUFFER..const..void_p.IN("pointer", "")
 	)
 
 	void(
@@ -1162,7 +1162,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		const..GLint_p.IN("param", "")
+		Check(1)..const..GLint_p.IN("param", "")
 	)
 
 	void(
@@ -1180,7 +1180,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		const..GLfloat_p.IN("param", "")
+		Check(1)..const..GLfloat_p.IN("param", "")
 	)
 
 	void(

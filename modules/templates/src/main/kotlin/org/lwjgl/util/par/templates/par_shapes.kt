@@ -171,8 +171,8 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
 
 		float.IN("radius", "the disk radius"),
 		shapes_create_ss["slices"],
-		const..float_p.IN("center", "the disk center"),
-		const..float_p.IN("normal", "the disk normal")
+		Check(3)..const..float_p.IN("center", "the disk center"),
+		Check(3)..const..float_p.IN("normal", "the disk normal")
 	)
 
 	par_shapes_mesh_p(
@@ -305,14 +305,11 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
 
 	par_shapes_mesh_p(
 		"weld",
-		"""
-		Merges colocated verts, builds a new index buffer, and returns the optimized mesh. {@code } is
-		the maximum distance to consider when welding vertices. The mapping argument can be
-		""",
+		"Merges colocated verts, builds a new index buffer, and returns the optimized mesh.",
 
 		const..par_shapes_mesh_p.IN("mesh", "the mesh to weld"),
 		float.IN("epsilon", "the maximum distance to consider when welding vertices"),
-		nullable..PAR_SHAPES_T_p.OUT(
+		Check("mesh.npoints()")..nullable..PAR_SHAPES_T_p.OUT(
 			"mapping",
 			"null, or a pointer to {@code npoints} 16-bit integers, which gets filled with the mapping from old vertex indices to new indices"
 		)

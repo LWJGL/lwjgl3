@@ -961,7 +961,7 @@ nk_style_pop_vec2(ctx);""")}
 			ctx,
 			nk_layout_format.IN("fmt", "", LayoutFormats),
 			float.IN("height", ""),
-			nk_int.IN("cols", ""),
+			AutoSize("ratio")..nk_int.IN("cols", ""),
 			const..float_p.IN("ratio", "")
 		)
 
@@ -1312,9 +1312,9 @@ nk_style_pop_vec2(ctx);""")}
 			"button_text_styled",
 			"",
 
-			nk_context_p.OUT("ctx", ""),
+			ctx,
 			const..nk_style_button_p.IN("style", ""),
-			const..char_p.IN("title", ""),
+			const..charUTF8_p.IN("title", ""),
 			int.IN("len", "")
 		)
 
@@ -1322,16 +1322,16 @@ nk_style_pop_vec2(ctx);""")}
 			"button_label_styled",
 			"",
 
-			nk_context_p.OUT("ctx", ""),
+			ctx,
 			const..nk_style_button_p.IN("style", ""),
-			const..char_p.IN("title", "")
+			const..charUTF8_p.IN("title", "")
 		)
 
 		intb(
 			"button_symbol_styled",
 			"",
 
-			nk_context_p.OUT("ctx", ""),
+			ctx,
 			const..nk_style_button_p.IN("style", ""),
 			nk_symbol_type.IN("symbol", "")
 		)
@@ -1340,7 +1340,7 @@ nk_style_pop_vec2(ctx);""")}
 			"button_image_styled",
 			"",
 
-			nk_context_p.OUT("ctx", ""),
+			ctx,
 			const..nk_style_button_p.IN("style", ""),
 			nk_image.IN("img", "")
 		)
@@ -1349,10 +1349,10 @@ nk_style_pop_vec2(ctx);""")}
 			"button_symbol_label_styled",
 			"",
 
-			nk_context_p.OUT("ctx", ""),
+			ctx,
 			const..nk_style_button_p.IN("style", ""),
 			nk_symbol_type.IN("symbol", ""),
-			const..char_p.IN("title", ""),
+			const..charUTF8_p.IN("title", ""),
 			nk_flags.IN("text_alignment", "")
 		)
 
@@ -1360,10 +1360,10 @@ nk_style_pop_vec2(ctx);""")}
 			"button_symbol_text_styled",
 			"",
 
-			nk_context_p.OUT("ctx", ""),
+			ctx,
 			const..nk_style_button_p.IN("style", ""),
 			nk_symbol_type.IN("symbol", ""),
-			const..char_p.IN("title", ""),
+			const..charUTF8_p.IN("title", ""),
 			int.IN("len", ""),
 			nk_flags.IN("alignment", "")
 		)
@@ -1372,10 +1372,10 @@ nk_style_pop_vec2(ctx);""")}
 			"button_image_label_styled",
 			"",
 
-			nk_context_p.OUT("ctx", ""),
+			ctx,
 			const..nk_style_button_p.IN("style", ""),
 			nk_image.IN("img", ""),
-			const..char_p.IN("title", ""),
+			const..charUTF8_p.IN("title", ""),
 			nk_flags.IN("text_alignment", "")
 		)
 
@@ -1386,7 +1386,7 @@ nk_style_pop_vec2(ctx);""")}
 			ctx,
 			const..nk_style_button_p.IN("style", ""),
 			nk_image.IN("img", ""),
-			const..char_p.IN("title", ""),
+			const..charUTF8_p.IN("title", ""),
 			int.IN("len", ""),
 			nk_flags.IN("alignment", "")
 		)
@@ -1625,7 +1625,7 @@ nk_style_pop_vec2(ctx);""")}
 
 			ctx,
 			float.IN("min", ""),
-			float_p.OUT("val", ""),
+			Check(1)..float_p.OUT("val", ""),
 			float.IN("max", ""),
 			float.IN("step", "")
 		)
@@ -1636,7 +1636,7 @@ nk_style_pop_vec2(ctx);""")}
 
 			ctx,
 			int.IN("min", ""),
-			int_p.OUT("val", ""),
+			Check(1)..int_p.OUT("val", ""),
 			int.IN("max", ""),
 			int.IN("step", "")
 		)
@@ -1646,7 +1646,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			ctx,
-			nk_size.p.INOUT("cur", ""),
+			Check(1)..nk_size.p.INOUT("cur", ""),
 			nk_size.IN("max", ""),
 			intb.IN("modifyable", "")
 		)
@@ -2538,7 +2538,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			ctx,
-			float_p.IN("address", ""),
+			Check(1)..float_p.IN("address", ""),
 			float.IN("value", "")
 		)
 
@@ -2565,7 +2565,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			ctx,
-			nk_flags.p.IN("address", ""),
+			Check(1)..nk_flags.p.IN("address", ""),
 			nk_flags.IN("value", "")
 		)
 
@@ -3205,7 +3205,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			const..charUTF8_p.IN("str", ""),
-			charUTF8_pp.OUT("endptr", "")
+			Check(1)..charUTF8_pp.OUT("endptr", "")
 		)
 
 		float(
@@ -3213,7 +3213,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			const..charUTF8_p.IN("str", ""),
-			charUTF8_pp.OUT("endptr", "")
+			Check(1)..charUTF8_pp.OUT("endptr", "")
 		)
 
 		double(
@@ -3221,7 +3221,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			const..charUTF8_p.IN("str", ""),
-			charUTF8_pp.OUT("endptr", "")
+			Check(1)..charUTF8_pp.OUT("endptr", "")
 		)
 
 		intb(
@@ -3545,7 +3545,7 @@ nk_style_pop_vec2(ctx);""")}
 
 			nk_str_p.IN("s", ""),
 			int.IN("pos", ""),
-			const..nk_rune_p.IN("runes", "")
+			NullTerminated..const..nk_rune_p.IN("runes", "")
 		)
 
 		void(
