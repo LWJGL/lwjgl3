@@ -109,8 +109,8 @@ public final class Library {
 					checkHash(libFile);
 				}
 				return;
-			} catch (Exception e) {
-				apiLog(String.format("\t%s not found in %s=%s", libName, JAVA_LIBRARY_PATH, paths));
+			} catch (Throwable t) {
+				apiLog(String.format("\t%s not found in %s", libName, JAVA_LIBRARY_PATH));
 			}
 		}
 
