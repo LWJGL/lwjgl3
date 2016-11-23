@@ -198,15 +198,16 @@ class NativeClass(
 			.filter { it.hasArrayOverloads }
 			.forEach { func ->
 				// assumes only 1 exists per method
-				val multiTypeParam = func.parameters.firstOrNull { it has MultiType }
+				val multiTypeParams = func.parameters.filter { it has MultiType }
 				val autoSizeResultOutParams = func.parameters.count { it.isAutoSizeResultOut }
+				val documentation: ((Parameter) -> Boolean) -> String = { processDocumentation("Array version of: ${func.methodLink}").toJavaDoc() }
 
-				if (multiTypeParam == null || func.parameters.any { it.isArrayParameter(autoSizeResultOutParams) }) {
+				if (multiTypeParams.isEmpty() || func.parameters.any { it.isArrayParameter(autoSizeResultOutParams) }) {
 					val overload = NativeClassFunction(
 						returns = func.returns,
 						simpleName = func.simpleName,
 						name = func.name,
-						documentation = { processDocumentation("Array version of: ${func.methodLink}").toJavaDoc() },
+						documentation = documentation,
 						nativeClass = this@NativeClass,
 						parameters = *func.parameters.asSequence().map {
 							if (it.isArrayParameter(autoSizeResultOutParams))
@@ -228,14 +229,14 @@ class NativeClass(
 					list.add(overload)
 				}
 
-				if (multiTypeParam != null) {
-					val multiType = multiTypeParam[MultiType]
+				if (multiTypeParams.isNotEmpty()) {
+					val multiType = multiTypeParams.first()[MultiType]
 					multiType.types.asSequence().filter { it !== PointerMapping.DATA_POINTER }.forEach { autoType ->
 						val overload = NativeClassFunction(
 							returns = func.returns,
 							simpleName = func.simpleName,
 							name = func.name,
-							documentation = { processDocumentation("Array version of: ${func.methodLink}").toJavaDoc() },
+							documentation = documentation,
 							nativeClass = this@NativeClass,
 							parameters = *func.parameters.asSequence().map {
 								if (it.isArrayParameter(autoSizeResultOutParams))
@@ -261,8 +262,8 @@ class NativeClass(
 							}.toList().toTypedArray()
 						).copyModifiers(func)
 
-						overload.parameters.asSequence().filter {
-							it has AutoSize && it[AutoSize].hasReference(multiTypeParam.name)
+						overload.parameters.asSequence().filter { param ->
+							param has AutoSize && multiTypeParams.any { param[AutoSize].hasReference(it.name) }
 						}.forEach {
 							val autoSize = it[AutoSize]
 							if (autoSize.factor == null)
