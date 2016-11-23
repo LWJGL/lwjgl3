@@ -265,18 +265,39 @@ class NativeClass(
 						overload.parameters.asSequence().filter { param ->
 							param has AutoSize && multiTypeParams.any { param[AutoSize].hasReference(it.name) }
 						}.forEach {
+							// TODO: This is correct for now, but we may want to add a flag to AutoSize for better control
+							fun getAutoSizeFactor(factor: AutoSizeFactor, byteShift: Int): AutoSizeFactor? {
+								if (factor.operator == "/")
+									return null
+
+								try {
+									val value = factor.expression.toInt() * (if (factor.operator == "<<") -1 else 1) - byteShift
+									if (value == 0)
+										return null
+
+									return if (value < 0)
+										AutoSizeFactor.shl("${-value}")
+									else
+										AutoSizeFactor.shr("$value")
+								} catch(e: NumberFormatException) {
+									return null
+								}
+							}
+
 							val autoSize = it[AutoSize]
-							if (autoSize.factor == null)
-								it.replaceModifier(AutoSizeShl(
+							it.replaceModifier(if (autoSize.factor == null)
+								AutoSizeShl(
 									autoType.byteShift!!,
 									autoSize.reference,
 									*autoSize.dependent
-								))
+								)
 							else
-								it.replaceModifier(AutoSize(
+								AutoSize(
 									autoSize.reference,
-									*autoSize.dependent
-								))
+									*autoSize.dependent,
+									factor = getAutoSizeFactor(autoSize.factor, autoType.byteShift!!.toInt())
+								)
+							)
 						}
 
 						if (!func.hasCustomJNI)
