@@ -32,6 +32,11 @@ object MapToInt : ParameterModifier() {
 	}
 }
 
+/** When present, the parameter transformation is stored to a local variable that can be referenced from custom code or checks. */
+object UseVariable : ParameterModifier() {
+	override val isSpecial = false
+}
+
 class AutoSizeFactor(
 	val operator: String,
 	val operatorInv: String,
@@ -48,33 +53,28 @@ class AutoSizeFactor(
 }
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
-fun AutoSize(div: Int, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
+fun AutoSize(div: Int, reference: String, vararg dependent: String) =
 	if (div < 1)
 		throw IllegalArgumentException()
 	else if (div == 1)
-		AutoSize(reference, *dependent, applyTo = applyTo)
+		AutoSize(reference, *dependent)
 	else if (Integer.bitCount(div) == 1)
-		AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent, applyTo = applyTo)
+		AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent)
 	else
-		AutoSizeDiv(div.toString(), reference, dependent = *dependent, applyTo = applyTo)
+		AutoSizeDiv(div.toString(), reference, dependent = *dependent)
 
-fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
-	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor.div(expression))
+fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String) =
+	AutoSize(reference, *dependent, factor = AutoSizeFactor.div(expression))
 
-fun AutoSizeShr(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
-	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor.shr(expression))
+fun AutoSizeShr(expression: String, reference: String, vararg dependent: String) =
+	AutoSize(reference, *dependent, factor = AutoSizeFactor.shr(expression))
 
-fun AutoSizeShl(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
-	AutoSize(reference, *dependent, applyTo = applyTo, factor = AutoSizeFactor.shl(expression))
+fun AutoSizeShl(expression: String, reference: String, vararg dependent: String) =
+	AutoSize(reference, *dependent, factor = AutoSizeFactor.shl(expression))
 
 class AutoSize(
 	override val reference: String,
 	vararg val dependent: String,
-	/**
-	 * Can be set to ApplyTo.NORMAL to skip the expression and use the parameter name directly in the alternative method.
-	 * The parameter name can then be a local variable created by a Code modifier.
-	 */
-	val applyTo: ApplyTo = ApplyTo.BOTH,
 	/** If not null, the expression will be appended to the parameter. */
 	val factor: AutoSizeFactor? = null
 ) : ParameterModifier(), ReferenceModifier {
@@ -106,9 +106,6 @@ class AutoSize(
 			else                ->
 				throw IllegalArgumentException("The AutoSize modifier can only be applied on IN or INOUT parameters.")
 		}
-
-		if (applyTo === ApplyTo.ALTERNATIVE)
-			throw IllegalArgumentException("ApplyTo.ALTERNATIVE is not supported.")
 	}
 }
 

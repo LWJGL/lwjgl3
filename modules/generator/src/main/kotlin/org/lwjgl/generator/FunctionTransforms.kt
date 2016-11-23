@@ -29,14 +29,10 @@ interface SkipCheckFunctionTransform
 internal open class AutoSizeTransform(
 	val bufferParam: Parameter,
 	val relaxedCast: Boolean,
-	val applyTo: ApplyTo,
 	val applyFactor: Boolean = true
 ) : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
-		if (applyTo === ApplyTo.NORMAL)
-			return param.name
-
 		var expression = if (bufferParam.nativeType is ArrayType) {
 			if (bufferParam has nullable)
 				"lengthSafe(${bufferParam.name})"
@@ -59,19 +55,15 @@ internal open class AutoSizeTransform(
 	}
 }
 
-internal fun AutoSizeTransform(bufferParam: Parameter, relaxedCast: Boolean, applyTo: ApplyTo, byteShift: String) =
-	if (byteShift == "0") AutoSizeTransform(bufferParam, relaxedCast, applyTo) else AutoSizeBytesTransform(bufferParam, relaxedCast, applyTo, byteShift)
+internal fun AutoSizeTransform(bufferParam: Parameter, relaxedCast: Boolean, byteShift: String) =
+	if (byteShift == "0") AutoSizeTransform(bufferParam, relaxedCast) else AutoSizeBytesTransform(bufferParam, relaxedCast, byteShift)
 
 private class AutoSizeBytesTransform(
 	bufferParam: Parameter,
 	relaxedCast: Boolean,
-	applyTo: ApplyTo,
 	val byteShift: String
-) : AutoSizeTransform(bufferParam, relaxedCast, applyTo) {
+) : AutoSizeTransform(bufferParam, relaxedCast) {
 	override fun transformCall(param: Parameter, original: String): String {
-		if (applyTo === ApplyTo.NORMAL)
-			return param.name
-
 		var expression = if (bufferParam has nullable)
 			"remainingSafe(${bufferParam.name})"
 		else
@@ -94,8 +86,7 @@ private class AutoSizeBytesTransform(
 						expression = "$expression >> $s"
 				}
 			} catch(e: NumberFormatException) {
-				if (applyTo !== ApplyTo.ALTERNATIVE) // Hack to skip the expression with MultiType
-					expression = "(${factor.scale(expression)}) << $byteShift"
+				// ignored (MultiType with non-numeric expression)
 			}
 		}
 

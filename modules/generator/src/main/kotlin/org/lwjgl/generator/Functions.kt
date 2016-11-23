@@ -996,7 +996,7 @@ class NativeClassFunction(
 					val param = paramMap[autoSize.reference]!! // TODO: Check dependent too?
 					// Check if there's also an optional on the referenced parameter. Skip if so.
 					if (!(param has optional))
-						transforms[it] = AutoSizeTransform(param, hasCustomJNI || hasUnsafeMethod, autoSize.applyTo)
+						transforms[it] = AutoSizeTransform(param, hasCustomJNI || hasUnsafeMethod)
 				} else if (it has optional) {
 					transforms[it] = ExpressionTransform("NULL")
 				} else if (it has Expression) {
@@ -1110,7 +1110,7 @@ class NativeClassFunction(
 				// Disable AutoSize factor
 				val autoSizeParam = getReferenceParam(AutoSize, bufferParam.name)
 				if (autoSizeParam != null)
-					transforms[autoSizeParam] = AutoSizeTransform(bufferParam, hasCustomJNI || hasUnsafeMethod, autoSizeParam[AutoSize].applyTo, applyFactor = false)
+					transforms[autoSizeParam] = AutoSizeTransform(bufferParam, hasCustomJNI || hasUnsafeMethod, applyFactor = false)
 
 				val types = ArrayList<AutoTypeToken>(autoTypes.types.size)
 				autoTypes.types.forEach { types.add(it) }
@@ -1137,7 +1137,7 @@ class NativeClassFunction(
 			// Add the AutoSize transformation if we skipped it above
 			getParams { it has AutoSize }.forEach {
 				val autoSize = it[AutoSize]
-				transforms[it] = AutoSizeTransform(paramMap[autoSize.reference]!!, hasCustomJNI || hasUnsafeMethod, autoSize.applyTo)
+				transforms[it] = AutoSizeTransform(paramMap[autoSize.reference]!!, hasCustomJNI || hasUnsafeMethod)
 			}
 
 			var multiTypes = it.first()[MultiType].types.asSequence()
@@ -1149,7 +1149,7 @@ class NativeClassFunction(
 					// Transform the AutoSize parameter, if there is one
 					getReferenceParam(AutoSize, it.name).let { autoSizeParam ->
 						if (autoSizeParam != null)
-							transforms[autoSizeParam] = AutoSizeTransform(it, hasCustomJNI || hasUnsafeMethod, ApplyTo.ALTERNATIVE, autoType.byteShift!!)
+							transforms[autoSizeParam] = AutoSizeTransform(it, hasCustomJNI || hasUnsafeMethod, autoType.byteShift!!)
 					}
 
 					transforms[it] = AutoTypeTargetTransform(autoType)
@@ -1296,7 +1296,7 @@ class NativeClassFunction(
 
 	private fun <T : QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedType, Transform>, original: String): String {
 		val transform = transforms[this]
-		if (transform == null)
+		if (transform == null || this has UseVariable)
 			return original
 		else
 			@Suppress("UNCHECKED_CAST")
@@ -1377,6 +1377,16 @@ class NativeClassFunction(
 			nativeClass.binding.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Generate checks
+
+		transforms
+			.asSequence()
+			.filter { it.key is Parameter && it.key.has(UseVariable) }
+			.forEach {
+				val param = it.key as Parameter
+				@Suppress("UNCHECKED_CAST")
+				val t = it.value as FunctionTransform<Parameter>
+				println("\t\t${param.asJavaMethodParam} = ${t.transformCall(param, param.name)};")
+			}
 
 		printCode(code.javaInit, ApplyTo.ALTERNATIVE)
 		if (Binding.CHECKS && !macro)

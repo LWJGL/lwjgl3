@@ -670,12 +670,11 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLuint.IN("mask", "")
 	)
 
-	val numPathsExpression = Code(javaInit = statement("\t\tint numPaths = paths.remaining() / pathNameTypeToBytes(pathNameType);", ApplyTo.ALTERNATIVE))
-	val StencilFillPathInstancedNV = numPathsExpression..void(
+	val StencilFillPathInstancedNV = void(
 		"StencilFillPathInstancedNV",
 		"",
 
-		AutoSizeDiv("pathNameTypeToBytes(pathNameType)", "paths", applyTo = ApplyTo.NORMAL)..GLsizei.IN("numPaths", ""),
+		UseVariable..AutoSizeDiv("pathNameTypeToBytes(pathNameType)", "paths")..GLsizei.IN("numPaths", ""),
 		GLenum.IN(
 			"pathNameType",
 			"",
@@ -689,7 +688,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		Check("numPaths * transformTypeToElements(transformType)")..const..GLfloat_p.IN("transformValues", "")
 	)
 
-	numPathsExpression..void(
+	void(
 		"StencilStrokePathInstancedNV",
 		"",
 
@@ -753,7 +752,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	numPathsExpression..void(
+	void(
 		"CoverFillPathInstancedNV",
 		"",
 
@@ -766,7 +765,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	numPathsExpression..void(
+	void(
 		"CoverStrokePathInstancedNV",
 		"",
 
@@ -799,7 +798,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	IgnoreMissing..numPathsExpression..void(
+	IgnoreMissing..void(
 		"StencilThenCoverFillPathInstancedNV",
 		"",
 
@@ -814,7 +813,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	IgnoreMissing..numPathsExpression..void(
+	IgnoreMissing..void(
 		"StencilThenCoverStrokePathInstancedNV",
 		"",
 
@@ -894,7 +893,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		Check("glGetPathParameteriNV(path, GL_PATH_DASH_ARRAY_COUNT_NV)", debug = true)..GLfloat_p.OUT("dashArray", "")
 	)
 
-	numPathsExpression..void(
+	void(
 		"GetPathMetricsNV",
 		"",
 
@@ -918,7 +917,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["GetPathMetricsNV"]["metrics"]
 	)
 
-	numPathsExpression..void(
+	void(
 		"GetPathSpacingNV",
 		"",
 

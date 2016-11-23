@@ -269,14 +269,12 @@ class NativeClass(
 								it.replaceModifier(AutoSizeShl(
 									autoType.byteShift!!,
 									autoSize.reference,
-									*autoSize.dependent,
-									applyTo = autoSize.applyTo
+									*autoSize.dependent
 								))
 							else
 								it.replaceModifier(AutoSize(
 									autoSize.reference,
-									*autoSize.dependent,
-									applyTo = autoSize.applyTo
+									*autoSize.dependent
 								))
 						}
 

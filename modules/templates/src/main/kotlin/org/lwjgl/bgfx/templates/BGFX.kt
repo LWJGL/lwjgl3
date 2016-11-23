@@ -866,18 +866,21 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		),
 		Check(3)..const..float_p.IN("_dir", "direction (vector must be normalized)"),
 		Check(3)..const..float_p.IN("_pos", "position"),
-		const..void_p.IN("_vertices", "pointer to first vertex represented as float x, y, z. Must contain at least number of vertices referenced by index buffer."),
+		Check("_numIndices * _stride")..const..void_p.IN(
+			"_vertices",
+			"pointer to first vertex represented as float x, y, z. Must contain at least number of vertices referenced by index buffer."
+		),
 		uint32_t.IN("_stride", "vertex stride"),
 		MultiType(
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT
 		)..const..void_p.IN("_indices", "source indices"),
-		AutoSizeShr("(_index32 ? 2 : 1)", "_indices")..uint32_t.IN("_numIndices", "number of input indices"),
+		UseVariable..AutoSizeShr("(_index32 ? 2 : 1)", "_indices")..uint32_t.IN("_numIndices", "number of input indices"),
 		bool.IN("_index32", "set to `true` if input indices are 32-bit")
 	)
 
 	Code(
-		javaInit = statement("\t\tint bytes = _height * _pitch * 4;")
+		javaInit = statement("\t\tint bytes = _height * _pitch;")
 	)..void(
 		"image_swizzle_bgra8",
 		"Swizzles RGBA8 image to BGRA8.",
@@ -894,7 +897,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	)
 
 	Code(
-		javaInit = statement("\t\tint bytes = _height * _pitch * 4;")
+		javaInit = statement("\t\tint bytes = _height * _pitch;")
 	)..void(
 		"image_rgba8_downsample_2x2",
 		"Downsamples RGBA8 image with 2x2 pixel average filter.",
@@ -1831,7 +1834,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 		MapToInt..uint8_t.IN("_id", "view id"),
 		MapToInt..uint8_t.IN("_num", "number of views to remap"),
-		nullable..const..void_p.IN("_remap", "view remap id table. Passing $NULL will reset view ids to default state")
+		Check("_num")..nullable..const..void_p.IN("_remap", "view remap id table. Passing $NULL will reset view ids to default state")
 	)
 
 	void(
