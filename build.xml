@@ -656,9 +656,9 @@
 					<include name="*.so"/>
 				</fileset>
 			</checksum>
-			<zip destfile="${release}/@{module}/@{module}-natives-windows.jar" basedir="${release}/@{module}/native" includes="*.dll" level="9"/>
-			<zip destfile="${release}/@{module}/@{module}-natives-macos.jar" basedir="${release}/@{module}/native" includes="*.dylib" level="9"/>
-			<zip destfile="${release}/@{module}/@{module}-natives-linux.jar" basedir="${release}/@{module}/native" includes="*.so" level="9"/>
+			<zip destfile="${release}/@{module}/@{module}-natives-windows.jar" basedir="${release}/@{module}/native" includes="*.dll*" level="9"/>
+			<zip destfile="${release}/@{module}/@{module}-natives-macos.jar" basedir="${release}/@{module}/native" includes="*.dylib*" level="9"/>
+			<zip destfile="${release}/@{module}/@{module}-natives-linux.jar" basedir="${release}/@{module}/native" includes="*.so*" level="9"/>
 		</sequential>
 	</macrodef>
 

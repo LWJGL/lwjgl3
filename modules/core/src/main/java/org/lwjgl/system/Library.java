@@ -7,6 +7,7 @@ package org.lwjgl.system;
 import org.lwjgl.Version;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.MappedByteBuffer;
@@ -16,10 +17,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.regex.Pattern;
 
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Initializes the LWJGL shared library and handles loading additional shared libraries.
@@ -36,8 +40,10 @@ public final class Library {
 
 	private static final Pattern PATH_SEPARATOR = Pattern.compile(File.pathSeparator);
 
+	private static final Pattern NATIVES_JAR = Pattern.compile("/[\\w-]+?-natives-\\w+.jar!/");
+
 	static {
-		if ( Checks.DEBUG ) {
+		if ( DEBUG ) {
 			apiLog("Version: " + Version.getVersion());
 			apiLog("\t OS: " + System.getProperty("os.name") + " v" + System.getProperty("os.version"));
 			apiLog("\tJRE: " + System.getProperty("java.version") + " " + System.getProperty("os.arch"));
@@ -280,7 +286,7 @@ public final class Library {
 				"\tb) Add the JAR(s) containing the shared libraries to the classpath."
 		);
 
-		if ( !Checks.DEBUG ) {
+		if ( !DEBUG ) {
 			DEBUG_STREAM.println("[LWJGL] Enable debug mode with -Dorg.lwjgl.util.Debug=true for better diagnostics.");
 			if ( !Configuration.DEBUG_LOADER.get(false) )
 				DEBUG_STREAM.println("[LWJGL] Enable the SharedLibraryLoader debug mode with -Dorg.lwjgl.util.DebugLoader=true for better diagnostics.");
@@ -295,35 +301,55 @@ public final class Library {
 	 * @param libFile the library file loaded
 	 */
 	private static void checkHash(Path libFile) {
-		if ( !Checks.DEBUG )
-			return;
-
-		URL sha1URL = Library.class.getResource("/" + libFile.getFileName() + ".sha1");
-		if ( sha1URL == null ) // dev mode or it's a system library
+		if ( !CHECKS )
 			return;
 
 		try {
-			byte[] expected = new byte[20];
-			try ( InputStream sha1 = sha1URL.openStream() ) {
-				for ( int i = 0; i < 20; i++ )
-					expected[i] = (byte)((Character.digit(sha1.read(), 16) << 4) | Character.digit(sha1.read(), 16));
-			}
+			URL classesURL = null;
+			URL nativesURL = null;
 
-			MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
-			try ( FileChannel fc = FileChannel.open(libFile) ) {
-				MappedByteBuffer buffer = fc.map(MapMode.READ_ONLY, 0, fc.size());
-				sha1.update(buffer);
+			Enumeration<URL> resources = Library.class.getClassLoader().getResources(libFile.getFileName() + ".sha1");
+			while ( resources.hasMoreElements() ) {
+				URL url = resources.nextElement();
+				if ( NATIVES_JAR.matcher(url.toExternalForm()).find() )
+					nativesURL = url;
+				else
+					classesURL = url;
 			}
-			byte[] actual = sha1.digest();
+			if ( classesURL == null )
+				return;
+
+			byte[] expected = getSHA1(classesURL);
+			byte[] actual = DEBUG || nativesURL == null
+				? getSHA1(libFile)
+				: getSHA1(nativesURL);
 
 			if ( !Arrays.equals(expected, actual) )
 				DEBUG_STREAM.println("[LWJGL] [WARNING] Mismatch detected between the Java and native libraries.");
 		} catch (Exception e) {
-			if ( Checks.DEBUG ) {
+			if ( DEBUG ) {
 				apiLog("Failed to verify native library.");
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private static byte[] getSHA1(URL hashURL) throws IOException {
+		byte[] hash = new byte[20];
+		try ( InputStream sha1 = hashURL.openStream() ) {
+			for ( int i = 0; i < 20; i++ )
+				hash[i] = (byte)((Character.digit(sha1.read(), 16) << 4) | Character.digit(sha1.read(), 16));
+		}
+		return hash;
+	}
+
+	private static byte[] getSHA1(Path libFile) throws NoSuchAlgorithmException, IOException {
+		MessageDigest digest = MessageDigest.getInstance("SHA-1");
+		try ( FileChannel fc = FileChannel.open(libFile) ) {
+			MappedByteBuffer buffer = fc.map(MapMode.READ_ONLY, 0, fc.size());
+			digest.update(buffer);
+		}
+		return digest.digest();
 	}
 
 }
