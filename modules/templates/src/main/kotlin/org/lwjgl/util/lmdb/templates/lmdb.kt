@@ -788,7 +788,7 @@ ENABLE_WARNINGS()""")
 		"Returns the path that was used in #env_open().",
 
 		env_open["env"],
-		Check(1)..charUTF8_pp.OUT(
+		Check(1)..CharType("const char", CharMapping.UTF8).p.p.OUT(
 			"path",
 			"address of a string pointer to contain the path. This is the actual string in the environment, not a copy. It should not be altered in any way."
 		),
