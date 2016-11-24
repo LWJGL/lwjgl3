@@ -1247,9 +1247,9 @@ val nk_context_p = struct(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct nk_
 	nk_buffer.member("memory", "")
 	nk_clipboard.member("clip", "")
 	nk_flags.member("last_widget_state", "")
-	float.member("delta_time_seconds", "")
 	nk_button_behavior.member("button_behavior", "")
 	nk_configuration_stacks.member("stacks", "")
+	float.member("delta_time_seconds", "")
 
 /* private:
 	should only be accessed if you
