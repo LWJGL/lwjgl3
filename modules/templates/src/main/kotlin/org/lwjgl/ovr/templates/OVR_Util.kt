@@ -16,42 +16,51 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 
 	documentation = "Native bindings to the libOVR utility functions."
 
-	// ovrProjectionModifier enum
-	IntConstant(
-		"""
-		Use for generating a default projection matrix that is:
-		${ul(
-			"Right-handed.",
-			"Near depth values stored in the depth buffer are smaller than far depth values.",
-			"Both near and far are explicitly defined.",
-			"With a clipping range that is (0 to w)."
-		)}
-		""",
-		"Projection_None"..0x00
+	val ProjectionModifiers = EnumConstant(
+		"Enumerates modifications to the projection matrix based on the application's needs.",
+
+		"Projection_None".enum(
+			"""
+			Use for generating a default projection matrix that is:
+			${ul(
+					"Right-handed.",
+					"Near depth values stored in the depth buffer are smaller than far depth values.",
+					"Both near and far are explicitly defined.",
+					"With a clipping range that is (0 to w)."
+				)}
+			""",
+			"0x00"
+		),
+		"Projection_LeftHanded".enum("Enable if using left-handed transformations in your application.", "0x01"),
+		"Projection_FarLessThanNear".enum(
+			"""
+			After the projection transform is applied, far values stored in the depth buffer will be less than closer depth values. NOTE: Enable only if the
+			application is using a floating-point depth buffer for proper precision.
+			""",
+			"0x02"
+		),
+		"Projection_FarClipAtInfinity".enum(
+			"""
+			When this flag is used, the zfar value pushed into #Matrix4f_Projection() will be ignored NOTE: Enable only if #Projection_FarLessThanNear is also
+			enabled where the far clipping plane will be pushed to infinity.
+			""",
+			"0x04"
+		),
+		"Projection_ClipRangeOpenGL".enum(
+			"""
+			Enable if the application is rendering with OpenGL and expects a projection matrix with a clipping range of (-w to w). Ignore this flag if your
+			application already handles the conversion from D3D range (0 to w) to OpenGL.
+			""",
+			"0x08"
+		)
+	).javaDocLinks
+
+	EnumConstant(
+		"Modes used to generate Touch Haptics from audio PCM buffer.",
+
+		"HapticsGenMode_PointSample" enum "Point sample original signal at Haptics frequency",
+		"HapticsGenMode_Count".enum("")
 	)
-	IntConstant("Enable if using left-handed transformations in your application.", "Projection_LeftHanded"..0x01)
-	IntConstant(
-		"""
-		After the projection transform is applied, far values stored in the depth buffer will be less than closer depth values. NOTE: Enable only if the
-		application is using a floating-point depth buffer for proper precision.
-		""",
-		"Projection_FarLessThanNear"..0x02
-	)
-	IntConstant(
-		"""
-		When this flag is used, the zfar value pushed into #Matrix4f_Projection() will be ignored NOTE: Enable only if #Projection_FarLessThanNear is also
-		enabled where the far clipping plane will be pushed to infinity.
-		""",
-		"Projection_FarClipAtInfinity"..0x04
-	)
-	IntConstant(
-		"""
-		Enable if the application is rendering with OpenGL and expects a projection matrix with a clipping range of (-w to w). Ignore this flag if your
-		application already handles the conversion from D3D range (0 to w) to OpenGL.
-		""",
-		"Projection_ClipRangeOpenGL"..0x08
-	)
-	val ProjectionModifiers = "#Projection_None #Projection_FarLessThanNear #Projection_FarClipAtInfinity #Projection_ClipRangeOpenGL"
 
 	ovrDetectResult(
 		"_Detect",
@@ -171,5 +180,45 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 
 		const..ovrPosef_p.IN("inPose", "a pose that is right-handed"),
 		ovrPosef_p.OUT("outPose", "the pose that is requested to be left-handed (can be the same pointer to {@code inPose})")
+	)
+
+	ovrResult(
+		"_ReadWavFromBuffer",
+		"""
+		Reads an audio channel from Wav (Waveform Audio File) data.
+
+		Input must be a byte buffer representing a valid Wav file. Audio samples from the specified channel are read, converted to float {@code [-1.0f, 1.0f]}
+		and returned through ##OVRAudioChannelData.
+
+		Supported formats: PCM 8b, 16b, 32b and IEEE float (little-endian only).
+		""",
+
+		ovrAudioChannelData_p.OUT("outAudioChannel", "output audio channel data"),
+		const..void_p.IN("inputData", "a binary buffer representing a valid Wav file data"),
+		AutoSize("inputData")..int.IN("dataSizeInBytes", "size of the buffer in bytes"),
+		int.IN("stereoChannelToUse", "audio channel index to extract (0 for mono)")
+	)
+
+	ovrResult(
+		"_GenHapticsFromAudioData",
+		"Generates playable Touch Haptics data from an audio channel.",
+
+		ovrHapticsClip_p.OUT("outHapticsClip", "generated Haptics clip"),
+		const..ovrAudioChannelData_p.IN("audioChannel", "input audio channel data"),
+		ovrHapticsGenMode.IN("genMode", "mode used to convert and audio channel data to Haptics data", "#HapticsGenMode_PointSample")
+	)
+
+	void(
+		"_ReleaseAudioChannelData",
+		"Releases memory allocated for ovrAudioChannelData. Must be called to avoid memory leak.",
+
+		ovrAudioChannelData_p.IN("audioChannel", "pointer to an audio channel")
+	)
+
+	void(
+		"_ReleaseHapticsClip",
+		"Releases memory allocated for ovrHapticsClip. Must be called to avoid memory leak.",
+
+		ovrHapticsClip_p.IN("hapticsClip", "pointer to a haptics clip")
 	)
 }

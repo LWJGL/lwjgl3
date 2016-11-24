@@ -942,9 +942,6 @@
 			<natives>
 				<url url="https://build.lwjgl.org/${build.type}/windows/x64/lwjgl_ovr.dll"/>
 				<url url="https://build.lwjgl.org/${build.type}/windows/x86/lwjgl_ovr32.dll"/>
-
-				<url url="https://build.lwjgl.org/${build.type}/windows/x64/lwjgl.dll.git"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x86/lwjgl32.dll.git"/>
 			</natives>
 		</release-module>
 

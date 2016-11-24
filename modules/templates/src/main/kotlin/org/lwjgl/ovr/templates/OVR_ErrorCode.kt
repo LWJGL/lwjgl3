@@ -75,6 +75,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(OVR_PACKAGE, prefixMethod = "OVR_
 		"Error_LibSignCheck".enum("LibOVRRT signature check failure.", "-3021"),
 		"Error_LibPath".enum("LibOVRRT path failure.", "-3022"),
 		"Error_LibSymbols".enum("LibOVRRT symbol resolution failure.", "-3023"),
+		"Error_RemoteSession".enum("Failed to connect to the service because remote connections to the service are not allowed.", "-3024"),
 
 		/* Synchronization errors */
 		"Error_Incomplete".enum("Requested async work not yet complete.", "-5000"),

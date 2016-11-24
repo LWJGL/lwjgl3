@@ -415,9 +415,9 @@ val ovrHapticsBufferSubmitMode = "ovrHapticsBufferSubmitMode".enumType
 val ovrHapticsBuffer_p = struct(OVR_PACKAGE, "OVRHapticsBuffer", nativeName = "ovrHapticsBuffer") {
 	documentation = "Haptics buffer descriptor, contains amplitude samples used for Touch vibration."
 
-	void_p.member("Samples", "")
-	int.member("SamplesCount", "")
-	ovrHapticsBufferSubmitMode.member("SubmitMode", "")
+	void_p.member("Samples", "samples stored in opaque format")
+	int.member("SamplesCount", "sumber of samples")
+	ovrHapticsBufferSubmitMode.member("SubmitMode", "how samples are submitted to the hardware").links("HapticsBufferSubmit_\\w+")
 }.p
 
 val ovrHapticsPlaybackState_p = struct(OVR_PACKAGE, "OVRHapticsPlaybackState", nativeName = "ovrHapticsPlaybackState", mutable = false) {
@@ -739,6 +739,8 @@ val ovrPerfStats_p = struct(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfSt
 
 // OVR_CAPI_Util.h
 
+val ovrHapticsGenMode = "ovrHapticsGenMode".enumType
+
 val ovrDetectResult = struct(OVR_PACKAGE, "OVRDetectResult", nativeName = "ovrDetectResult", mutable = false) {
 	documentation = "Return values for OVRUtil##ovr_Detect()"
 
@@ -762,6 +764,26 @@ val ovrDetectResult = struct(OVR_PACKAGE, "OVRDetectResult", nativeName = "ovrDe
 	)
 	padding(6)
 }
+
+val ovrAudioChannelData_p = struct(OVR_PACKAGE, "OVRAudioChannelData", nativeName = "ovrAudioChannelData", mutable = false) {
+	documentation =
+		"""
+		Store audio PCM data (as 32b float samples) for an audio channel.
+
+		Note: needs to be released with #_ReleaseAudioChannelData() to avoid memory leak.
+		"""
+
+	const..float_p.member("Samples", "samples stored as floats {@code [-1.0f, 1.0f]}")
+	AutoSize("Samples")..int.member("SamplesCount", "number of samples")
+	int.member("Frequency", "frequency (e.g. 44100)")
+}.p
+
+val ovrHapticsClip_p = struct(OVR_PACKAGE, "OVRHapticsClip", nativeName = "ovrHapticsClip", mutable = false) {
+	documentation = "Store a full Haptics clip, which can be used as data source for multiple ##OVRHapticsBuffer."
+
+	const..void_p.member("Samples", "samples stored in opaque format")
+	int.member("SamplesCount", "number of samples")
+}.p
 
 fun config() {
 	packageInfo(

@@ -187,7 +187,10 @@ ENABLE_WARNINGS()""")
 		"OVR_FORMAT_B8G8R8X8_UNORM".enum("Not supported for OpenGL applications."),
 		"OVR_FORMAT_B8G8R8X8_UNORM_SRGB".enum("Not supported for OpenGL applications."),
 		"OVR_FORMAT_R16G16B16A16_FLOAT".enum,
-		"OVR_FORMAT_D16_UNORM".enum,
+		"OVR_FORMAT_R11G11B10_FLOAT".enum("", "25"),
+
+		// Depth formats
+		"OVR_FORMAT_D16_UNORM".enum("", "11"),
 		"OVR_FORMAT_D24_UNORM_S8_UINT".enum,
 		"OVR_FORMAT_D32_FLOAT".enum,
 		"OVR_FORMAT_D32_FLOAT_S8X24_UINT".enum,
@@ -290,11 +293,10 @@ ENABLE_WARNINGS()""")
 		// Derived internally based on distance, proximity to sensors and filtering.
 		"Touch_RIndexPointing".enum("TouchRIndexPointing", 0x00000020),
 		"Touch_RThumbUp".enum("Touch RThumbUp", 0x00000040),
-
-		"Touch_RPoseMask".enum("Bit mask of all right controller poses", "ovrTouch_RIndexPointing | ovrTouch_RThumbUp"),
-
 		"Touch_LIndexPointing".enum("Touch LIndexPointing", 0x00002000),
 		"Touch_LThumbUp".enum("Touch LThumbUp", 0x00004000),
+
+		"Touch_RPoseMask".enum("Bit mask of all right controller poses", "ovrTouch_RIndexPointing | ovrTouch_RThumbUp"),
 
 		"Touch_LPoseMask".enum("Bit mask of all left controller poses.", "ovrTouch_LIndexPointing | ovrTouch_LThumbUp")
 	)
