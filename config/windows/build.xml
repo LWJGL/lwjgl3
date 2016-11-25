@@ -102,7 +102,6 @@ EXPORTS
 				<fileset dir="@{dest}" includes="*.obj"/>
 				<link/>
 
-				<arg value="notelemetry.obj"/>
 				<srcfile/>
 				<arg value="/link"/>
 				<arg value="/OPT:REF,ICF"/>
