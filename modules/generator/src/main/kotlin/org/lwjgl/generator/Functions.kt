@@ -1047,7 +1047,7 @@ class NativeClassFunction(
 
 		fun applyReturnValueTransforms(param: Parameter) {
 			// Transform void to the proper type
-			transforms[returns] = PrimitiveValueReturnTransform(param.nativeType.mapping as PointerMapping, param.name)
+			transforms[returns] = PrimitiveValueReturnTransform(param.nativeType as PointerType, param.name)
 
 			// Transform the AutoSize parameter, if there is one
 			getParams(hasAutoSizePredicate(param)).forEach {

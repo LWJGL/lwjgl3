@@ -178,16 +178,23 @@ internal object StringReturnTransform : FunctionTransform<ReturnValue> {
 }
 
 internal class PrimitiveValueReturnTransform(
-	val bufferType: PointerMapping,
+	val bufferType: PointerType,
 	val paramName: String
 ) : FunctionTransform<ReturnValue>, StackFunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String) = bufferType.primitive // Replace void with the buffer value type
-	override fun transformCall(param: ReturnValue, original: String) = if (bufferType === PointerMapping.DATA_BOOLEAN)
+	override fun transformDeclaration(param: ReturnValue, original: String) = if (bufferType.elementType is StructType)
+		bufferType.elementType.javaMethodType
+	else
+		(bufferType.mapping as PointerMapping).primitive // Replace void with the buffer value type
+	override fun transformCall(param: ReturnValue, original: String) = if (bufferType.elementType is StructType)
+		"\t\treturn ${bufferType.elementType.javaMethodType}.create($paramName.get(0));"
+	else if (bufferType.mapping === PointerMapping.DATA_BOOLEAN)
 		"\t\treturn $paramName.get(0) != 0;"
 	else
 		"\t\treturn $paramName.get(0);" // Replace with value from the stack
 
-	override fun setupStack(func: Function, qtype: ReturnValue, writer: PrintWriter) = writer.println("\t\t\t${bufferType.box}Buffer $paramName = stack.calloc${bufferType.mallocType}(1);")
+	override fun setupStack(func: Function, qtype: ReturnValue, writer: PrintWriter) = (bufferType.mapping as PointerMapping).let {
+		writer.println("\t\t\t${it.box}Buffer $paramName = stack.calloc${it.mallocType}(1);")
+	}
 }
 
 internal object PrimitiveValueTransform : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
