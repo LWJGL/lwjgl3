@@ -305,6 +305,7 @@
 		</patternset>
 
 		<patternset id="excluded.sources">
+			<exclude name="org/lwjgl/assimp/**" unless:true="${binding.assimp}"/>
 			<exclude name="org/lwjgl/bgfx/**" unless:true="${binding.bgfx}"/>
 			<exclude name="org/lwjgl/nuklear/**" unless:true="${binding.nuklear}"/>
 			<exclude name="org/lwjgl/ovr/**" unless:true="${binding.ovr}"/>
@@ -429,6 +430,7 @@
 			</classpath>
 
 			<!-- Demos -->
+			<include name="org/lwjgl/demo/assimp/**" if:true="${binding.assimp}"/>
 			<include name="org/lwjgl/demo/bgfx/**" if:true="${binding.bgfx}"/>
 			<include name="org/lwjgl/demo/egl/**" if:true="${egl_glfw}"/>
 			<include name="org/lwjgl/demo/glfw/**" if:true="${binding.glfw}"/>

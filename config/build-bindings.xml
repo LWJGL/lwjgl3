@@ -14,6 +14,7 @@ This script is included in /config/build-definitions.xml.
 
 	<!-- // ========== BINDING FLAGS ======== // -->
 
+	<property name="binding.assimp" value="false"/>
 	<property name="binding.bgfx" value="true"/>
 	<property name="binding.egl" value="true"/>
 	<property name="binding.glfw" value="true"/>
@@ -33,7 +34,6 @@ This script is included in /config/build-definitions.xml.
 	<property name="binding.tinyfd" value="true"/>
 	<property name="binding.vulkan" value="true"/>
 	<property name="binding.xxhash" value="true"/>
-    <property name="binding.assimp" value="true"/>
 
 	<!-- Set the path to the Oculus SDK to enable. -->
 	<property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
