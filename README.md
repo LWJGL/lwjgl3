@@ -104,6 +104,7 @@ LWJGL 3 includes the following bindings:
 
 |Library|Description|
 |-------|-----------|
+|[Assimp](http://www.assimp.org/)|A portable Open Source library to import various well-known 3D model formats in a uniform manner.|
 |[bgfx](https://bkaradzic.github.io/bgfx/)|Cross-platform, graphics API agnostic, “Bring Your Own Engine/Framework” style rendering library, licensed under permissive BSD-2 clause open source license.|
 |[LibOVR](https://developer.oculus.com/documentation/)|The API of the Oculus SDK.|
 |[NanoVG](https://github.com/memononen/nanovg)|A small antialiased vector graphics rendering library for OpenGL.|

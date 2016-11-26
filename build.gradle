@@ -65,6 +65,11 @@ enum Platforms {
 
 enum Artifacts {
 	CORE("lwjgl", "LWJGL", "The LWJGL core library.", Platforms.ALL),
+	ASSIMP(
+		"lwjgl-assimp", "LWJGL - Assimp bindings",
+		"A portable Open Source library to import various well-known 3D model formats in a uniform manner.",
+		Platforms.ALL
+	),
 	BGFX(
 		"lwjgl-bgfx", "LWJGL - bgfx bindings",
 		"A cross-platform, graphics API agnostic rendering library. It provides a high performance, low level abstraction for common platform graphics APIs like OpenGL, Direct3D and Apple Metal.",
