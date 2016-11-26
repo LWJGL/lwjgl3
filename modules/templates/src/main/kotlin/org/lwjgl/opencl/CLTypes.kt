@@ -4,34 +4,7 @@
  */
 package org.lwjgl.opencl
 
-import org.lwjgl.generator.AutoSize
-import org.lwjgl.generator.CharMapping
-import org.lwjgl.generator.CharSequenceType
-import org.lwjgl.generator.IN
-import org.lwjgl.generator.IntegerType
-import org.lwjgl.generator.NULL
-import org.lwjgl.generator.NullTerminated
-import org.lwjgl.generator.PointerMapping
-import org.lwjgl.generator.PointerType
-import org.lwjgl.generator.PrimitiveMapping
-import org.lwjgl.generator.PrimitiveType
-import org.lwjgl.generator.callback
-import org.lwjgl.generator.charASCII_p
-import org.lwjgl.generator.const
-import org.lwjgl.generator.intptr_t
-import org.lwjgl.generator.nullable
-import org.lwjgl.generator.opaque_p
-import org.lwjgl.generator.p
-import org.lwjgl.generator.packageInfo
-import org.lwjgl.generator.rangeTo
-import org.lwjgl.generator.size_t
-import org.lwjgl.generator.struct
-import org.lwjgl.generator.typedef
-import org.lwjgl.generator.union
-import org.lwjgl.generator.unsigned_int
-import org.lwjgl.generator.void
-import org.lwjgl.generator.void_p
-import org.lwjgl.generator.void_pp
+import org.lwjgl.generator.*
 
 val OPENCL_PACKAGE = "org.lwjgl.opencl"
 

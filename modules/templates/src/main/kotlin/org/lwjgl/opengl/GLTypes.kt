@@ -4,25 +4,7 @@
  */
 package org.lwjgl.opengl
 
-import org.lwjgl.generator.AutoSize
-import org.lwjgl.generator.AutoTypeToken
-import org.lwjgl.generator.CharMapping
-import org.lwjgl.generator.CharSequenceType
-import org.lwjgl.generator.IN
-import org.lwjgl.generator.IntegerType
-import org.lwjgl.generator.PointerMapping
-import org.lwjgl.generator.PointerType
-import org.lwjgl.generator.PrimitiveMapping
-import org.lwjgl.generator.PrimitiveType
-import org.lwjgl.generator.callback
-import org.lwjgl.generator.const
-import org.lwjgl.generator.opaque_p
-import org.lwjgl.generator.p
-import org.lwjgl.generator.p_const_p
-import org.lwjgl.generator.packageInfo
-import org.lwjgl.generator.rangeTo
-import org.lwjgl.generator.void
-import org.lwjgl.generator.void_p
+import org.lwjgl.generator.*
 
 val OPENGL_PACKAGE = "org.lwjgl.opengl"
 

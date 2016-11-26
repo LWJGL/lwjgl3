@@ -4,17 +4,7 @@
  */
 package org.lwjgl.openal
 
-import org.lwjgl.generator.CharMapping
-import org.lwjgl.generator.CharSequenceType
-import org.lwjgl.generator.IntegerType
-import org.lwjgl.generator.NativeType
-import org.lwjgl.generator.PointerMapping
-import org.lwjgl.generator.PointerType
-import org.lwjgl.generator.PrimitiveMapping
-import org.lwjgl.generator.PrimitiveType
-import org.lwjgl.generator.TypeMapping
-import org.lwjgl.generator.p
-import org.lwjgl.generator.packageInfo
+import org.lwjgl.generator.*
 
 val OPENAL_PACKAGE = "org.lwjgl.openal"
 
