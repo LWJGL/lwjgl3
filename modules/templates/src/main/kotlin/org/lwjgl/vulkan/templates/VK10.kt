@@ -2649,7 +2649,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		##VkAllocationCallbacks
 		""",
 
-		nullable..VkInstance.IN("instance", "the handle of the instance to destroy."),
+		VkInstance.IN("instance", "the handle of the instance to destroy."),
 		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
@@ -2955,7 +2955,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		{@code PFN_vkVoidFunction}
 		""",
 
-		nullable..VkInstance.IN("instance", "the instance that the function pointer will be compatible with, or {@code NULL} for commands not dependent on any instance."),
+		VkInstance.IN("instance", "the instance that the function pointer will be compatible with, or {@code NULL} for commands not dependent on any instance."),
 		const..charASCII_p.IN("pName", "the name of the command to obtain.")
 	)
 
@@ -3103,7 +3103,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		##VkAllocationCallbacks
 		""",
 
-		nullable..VkDevice.IN("device", "the logical device to destroy."),
+		VkDevice.IN("device", "the logical device to destroy."),
 		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
