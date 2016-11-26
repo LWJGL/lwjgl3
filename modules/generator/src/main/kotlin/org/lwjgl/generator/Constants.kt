@@ -73,8 +73,9 @@ class ConstantBlock<T : Any>(
 
 	private var noPrefix = false
 
-	fun noPrefix() {
+	fun noPrefix(): ConstantBlock<T> {
 		noPrefix = true
+		return this
 	}
 
 	internal fun getConstantName(name: String) = if (noPrefix) name else "${nativeClass.prefixConstant}$name"
@@ -219,7 +220,10 @@ class ConstantBlock<T : Any>(
 
 	fun javaDocLinks(predicate: (Constant<T>) -> Boolean) = constants.asSequence()
 		.filter { predicate(it) }
-		.map { "${nativeClass.className}#${it.name}" }
+		.let {
+			val hash = if (noPrefix) "##" else "#"
+			it.map { "${nativeClass.className}$hash${it.name}" }
+		}
 		.joinToString(" ")
 
 }
