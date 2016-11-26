@@ -241,8 +241,6 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>{@code object} <b>may</b> be a Vulkan object</li>
-			<li>{@code pLayerPrefix} <b>must</b> be a {@code NULL} terminated string</li>
-			<li>{@code pMessage} <b>must</b> be a {@code NULL} terminated string</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>

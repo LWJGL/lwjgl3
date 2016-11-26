@@ -128,7 +128,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		VkStructureType - Vulkan structure types ({@code stype})
 
 		<h5>See Also</h5>
-		##VkAndroidSurfaceCreateInfoKHR, ##VkApplicationInfo, ##VkBindSparseInfo, ##VkBufferCreateInfo, ##VkBufferMemoryBarrier, ##VkBufferViewCreateInfo, ##VkCommandBufferAllocateInfo, ##VkCommandBufferBeginInfo, ##VkCommandBufferInheritanceInfo, ##VkCommandPoolCreateInfo, ##VkComputePipelineCreateInfo, ##VkCopyDescriptorSet, ##VkDebugMarkerMarkerInfoEXT, ##VkDebugMarkerObjectNameInfoEXT, ##VkDebugMarkerObjectTagInfoEXT, ##VkDebugReportCallbackCreateInfoEXT, ##VkDedicatedAllocationBufferCreateInfoNV, ##VkDedicatedAllocationImageCreateInfoNV, ##VkDedicatedAllocationMemoryAllocateInfoNV, ##VkDescriptorPoolCreateInfo, ##VkDescriptorSetAllocateInfo, ##VkDescriptorSetLayoutCreateInfo, ##VkDeviceCreateInfo, ##VkDeviceQueueCreateInfo, ##VkDisplayModeCreateInfoKHR, ##VkDisplayPresentInfoKHR, ##VkDisplaySurfaceCreateInfoKHR, ##VkEventCreateInfo, ##VkExportMemoryAllocateInfoNV, ##VkExportMemoryWin32HandleInfoNV, ##VkExternalMemoryImageCreateInfoNV, ##VkFenceCreateInfo, ##VkFramebufferCreateInfo, ##VkGraphicsPipelineCreateInfo, ##VkImageCreateInfo, ##VkImageMemoryBarrier, ##VkImageViewCreateInfo, ##VkImportMemoryWin32HandleInfoNV, ##VkInstanceCreateInfo, ##VkMappedMemoryRange, ##VkMemoryAllocateInfo, ##VkMemoryBarrier, ##VkMirSurfaceCreateInfoKHR, ##VkPipelineCacheCreateInfo, ##VkPipelineColorBlendStateCreateInfo, ##VkPipelineDepthStencilStateCreateInfo, ##VkPipelineDynamicStateCreateInfo, ##VkPipelineInputAssemblyStateCreateInfo, ##VkPipelineLayoutCreateInfo, ##VkPipelineMultisampleStateCreateInfo, ##VkPipelineRasterizationStateCreateInfo, ##VkPipelineRasterizationStateRasterizationOrderAMD, ##VkPipelineShaderStageCreateInfo, ##VkPipelineTessellationStateCreateInfo, ##VkPipelineVertexInputStateCreateInfo, ##VkPipelineViewportStateCreateInfo, ##VkPresentInfoKHR, ##VkQueryPoolCreateInfo, ##VkRenderPassBeginInfo, ##VkRenderPassCreateInfo, ##VkSamplerCreateInfo, ##VkSemaphoreCreateInfo, ##VkShaderModuleCreateInfo, ##VkSubmitInfo, ##VkSwapchainCreateInfoKHR, ##VkValidationFlagsEXT, ##VkWaylandSurfaceCreateInfoKHR, ##VkWin32KeyedMutexAcquireReleaseInfoNV, ##VkWin32SurfaceCreateInfoKHR, ##VkWriteDescriptorSet, ##VkXcbSurfaceCreateInfoKHR, ##VkXlibSurfaceCreateInfoKHR
+		##VkAndroidSurfaceCreateInfoKHR, ##VkApplicationInfo, ##VkBindSparseInfo, ##VkBufferCreateInfo, ##VkBufferMemoryBarrier, ##VkBufferViewCreateInfo, ##VkCmdProcessCommandsInfoNVX, ##VkCmdReserveSpaceForCommandsInfoNVX, ##VkCommandBufferAllocateInfo, ##VkCommandBufferBeginInfo, ##VkCommandBufferInheritanceInfo, ##VkCommandPoolCreateInfo, ##VkComputePipelineCreateInfo, ##VkCopyDescriptorSet, ##VkDebugMarkerMarkerInfoEXT, ##VkDebugMarkerObjectNameInfoEXT, ##VkDebugMarkerObjectTagInfoEXT, ##VkDebugReportCallbackCreateInfoEXT, ##VkDedicatedAllocationBufferCreateInfoNV, ##VkDedicatedAllocationImageCreateInfoNV, ##VkDedicatedAllocationMemoryAllocateInfoNV, ##VkDescriptorPoolCreateInfo, ##VkDescriptorSetAllocateInfo, ##VkDescriptorSetLayoutCreateInfo, ##VkDeviceCreateInfo, ##VkDeviceGeneratedCommandsFeaturesNVX, ##VkDeviceGeneratedCommandsLimitsNVX, ##VkDeviceQueueCreateInfo, ##VkDisplayModeCreateInfoKHR, ##VkDisplayPresentInfoKHR, ##VkDisplaySurfaceCreateInfoKHR, ##VkEventCreateInfo, ##VkExportMemoryAllocateInfoNV, ##VkExportMemoryWin32HandleInfoNV, ##VkExternalMemoryImageCreateInfoNV, ##VkFenceCreateInfo, ##VkFramebufferCreateInfo, ##VkGraphicsPipelineCreateInfo, ##VkImageCreateInfo, ##VkImageMemoryBarrier, ##VkImageViewCreateInfo, ##VkImportMemoryWin32HandleInfoNV, ##VkIndirectCommandsLayoutCreateInfoNVX, ##VkInstanceCreateInfo, ##VkMappedMemoryRange, ##VkMemoryAllocateInfo, ##VkMemoryBarrier, ##VkMirSurfaceCreateInfoKHR, ##VkObjectTableCreateInfoNVX, ##VkPipelineCacheCreateInfo, ##VkPipelineColorBlendStateCreateInfo, ##VkPipelineDepthStencilStateCreateInfo, ##VkPipelineDynamicStateCreateInfo, ##VkPipelineInputAssemblyStateCreateInfo, ##VkPipelineLayoutCreateInfo, ##VkPipelineMultisampleStateCreateInfo, ##VkPipelineRasterizationStateCreateInfo, ##VkPipelineRasterizationStateRasterizationOrderAMD, ##VkPipelineShaderStageCreateInfo, ##VkPipelineTessellationStateCreateInfo, ##VkPipelineVertexInputStateCreateInfo, ##VkPipelineViewportStateCreateInfo, ##VkPresentInfoKHR, ##VkQueryPoolCreateInfo, ##VkRenderPassBeginInfo, ##VkRenderPassCreateInfo, ##VkSamplerCreateInfo, ##VkSemaphoreCreateInfo, ##VkShaderModuleCreateInfo, ##VkSubmitInfo, ##VkSwapchainCreateInfoKHR, ##VkValidationFlagsEXT, ##VkWaylandSurfaceCreateInfoKHR, ##VkWin32KeyedMutexAcquireReleaseInfoNV, ##VkWin32SurfaceCreateInfoKHR, ##VkWriteDescriptorSet, ##VkXcbSurfaceCreateInfoKHR, ##VkXlibSurfaceCreateInfoKHR
 		""",
 
 		"STRUCTURE_TYPE_APPLICATION_INFO".."0",
@@ -1240,7 +1240,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		The meaning of each bit is:
 
 		<ul>
-			<li>#PIPELINE_STAGE_TOP_OF_PIPE_BIT: Stage of the pipeline where commands are initially received by the queue.</li>
+			<li>#PIPELINE_STAGE_TOP_OF_PIPE_BIT: Stage of the pipeline where any commands are initially received by the queue.</li>
+			<li>#PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX: Stage of the pipeline where device-side generation of commands via #CmdProcessCommandsNVX() is handled.</li>
 			<li>#PIPELINE_STAGE_DRAW_INDIRECT_BIT: Stage of the pipeline where Draw/DispatchIndirect data structures are consumed.</li>
 			<li>#PIPELINE_STAGE_VERTEX_INPUT_BIT: Stage of the pipeline where vertex and index buffers are consumed.</li>
 			<li>#PIPELINE_STAGE_VERTEX_SHADER_BIT: Vertex shader stage.</li>
@@ -1248,19 +1249,40 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			<li>#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT: Tessellation evaluation shader stage.</li>
 			<li>#PIPELINE_STAGE_GEOMETRY_SHADER_BIT: Geometry shader stage.</li>
 			<li>#PIPELINE_STAGE_FRAGMENT_SHADER_BIT: Fragment shader stage.</li>
-			<li>#PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT: Stage of the pipeline where early fragment tests (depth and stencil tests before fragment shading) are performed.</li>
-			<li>#PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT: Stage of the pipeline where late fragment tests (depth and stencil tests after fragment shading) are performed.</li>
-			<li>#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT: Stage of the pipeline after blending where the final color values are output from the pipeline. This stage also includes resolve operations that occur at the end of a subpass. Note that this does not necessarily indicate that the values have been committed to memory.</li>
-			<li>#PIPELINE_STAGE_TRANSFER_BIT: Execution of copy commands. This includes the operations resulting from all transfer commands. The set of transfer commands comprises #CmdCopyBuffer(), #CmdCopyImage(), #CmdBlitImage(), #CmdCopyBufferToImage(), #CmdCopyImageToBuffer(), #CmdUpdateBuffer(), #CmdFillBuffer(), #CmdClearColorImage(), #CmdClearDepthStencilImage(), #CmdResolveImage(), and #CmdCopyQueryPoolResults().</li>
+			<li>#PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT: Stage of the pipeline where early fragment tests (depth and stencil tests before fragment shading) are performed. This stage also includes <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass load operations</a> for framebuffer attachments with a depth/stencil format.</li>
+			<li>#PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT: Stage of the pipeline where late fragment tests (depth and stencil tests after fragment shading) are performed. This stage also includes <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass store operations</a> for framebuffer attachments with a depth/stencil format.</li>
+			<li>#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT: Stage of the pipeline after blending where the final color values are output from the pipeline. This stage also includes <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-load-store-ops">subpass load and store operations</a> and multisample resolve operations for framebuffer attachments with a color format.</li>
+			<li>#PIPELINE_STAGE_TRANSFER_BIT: Execution of copy commands. This includes the operations resulting from all <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies">copy commands</a>, <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#clears">clear commands</a> (with the exception of #CmdClearAttachments()), and #CmdCopyQueryPoolResults().</li>
 			<li>#PIPELINE_STAGE_COMPUTE_SHADER_BIT: Execution of a compute shader.</li>
-			<li>#PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT: Final stage in the pipeline where commands complete execution.</li>
-			<li>#PIPELINE_STAGE_HOST_BIT: A pseudo-stage indicating execution on the host of reads/writes of device memory.</li>
-			<li>#PIPELINE_STAGE_ALL_GRAPHICS_BIT: Execution of all graphics pipeline stages.</li>
-			<li>#PIPELINE_STAGE_ALL_COMMANDS_BIT: Execution of all stages supported on the queue.</li>
+			<li>#PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT: Final stage in the pipeline where operations generated by all commands complete execution.</li>
+			<li>#PIPELINE_STAGE_HOST_BIT: A pseudo-stage indicating execution on the host of reads/writes of device memory. This stage is not invoked by any action commands.</li>
+			<li>
+				#PIPELINE_STAGE_ALL_GRAPHICS_BIT: Execution of all graphics pipeline stages. Equivalent to the logical or of:
+				<ul>
+					<li>#PIPELINE_STAGE_TOP_OF_PIPE_BIT</li>
+					<li>#PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX</li>
+					<li>#PIPELINE_STAGE_DRAW_INDIRECT_BIT</li>
+					<li>#PIPELINE_STAGE_VERTEX_INPUT_BIT</li>
+					<li>#PIPELINE_STAGE_VERTEX_SHADER_BIT</li>
+					<li>#PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</li>
+					<li>#PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
+					<li>#PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
+					<li>#PIPELINE_STAGE_FRAGMENT_SHADER_BIT</li>
+					<li>#PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT</li>
+					<li>#PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT</li>
+					<li>#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</li>
+					<li>#PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT</li>
+				</ul>
+			</li>
+			<li>#PIPELINE_STAGE_ALL_COMMANDS_BIT: Equivalent to the logical or of every other pipeline stage flag that is supported on the queue it is used with.</li>
 		</ul>
 
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-		The #PIPELINE_STAGE_ALL_COMMANDS_BIT and #PIPELINE_STAGE_ALL_GRAPHICS_BIT differ from #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT in that they correspond to all (or all graphics) stages, rather than to a specific stage at the end of the pipeline. An execution dependency with only #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT in {@code dstStageMask} will not delay subsequent commands, while including either of the other two bits will. Similarly, when defining a memory dependency, if the stage mask(s) refer to all stages, then the indicated access types from all stages will be made available and/or visible, but using only #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT would not make any accesses available and/or visible because this stage does not access memory. The #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT is useful for accomplishing memory barriers and layout transitions when the next accesses will be done in a different queue or by a presentation engine; in these cases subsequent commands in the same queue do not need to wait, but the barrier or transition <b>must</b> complete before semaphores associated with the batch signal.
+		An execution dependency with only #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT in the destination stage mask will only prevent that stage from executing in subsequently submitted commands. As this stage doesn't perform any actual execution, this is not observable - in effect, it does not delay processing of subsequent commands. Similarly an execution dependency with only #PIPELINE_STAGE_TOP_OF_PIPE_BIT in the source stage mask will effectively not wait for any prior commands to complete.
+
+		When defining a memory dependency, using only #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT or #PIPELINE_STAGE_TOP_OF_PIPE_BIT would never make any accesses available and/or visible because these stages do not access memory.
+
+		#PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT and #PIPELINE_STAGE_TOP_OF_PIPE_BIT are useful for accomplishing layout transitions and queue ownership operations when the required execution dependency is satisfied by other means - for example, semaphore operations between queues.
 		</div>
 
 		<h5>See Also</h5>
@@ -1534,21 +1556,15 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		#SHARING_MODE_CONCURRENT <b>may</b> result in lower performance access to the buffer or image than #SHARING_MODE_EXCLUSIVE.
 		</div>
 
-		Ranges of buffers and image subresources of image objects created using #SHARING_MODE_EXCLUSIVE <b>must</b> only be accessed by queues in the same queue family at any given time. In order for a different queue family to be able to interpret the memory contents of a range or image subresource, the application <b>must</b> transfer exclusive ownership of the range or image subresource between the source and destination queue families with the following sequence of operations:
+		Ranges of buffers and image subresources of image objects created using #SHARING_MODE_EXCLUSIVE <b>must</b> only be accessed by queues in the same queue family at any given time. In order for a different queue family to be able to interpret the memory contents of a range or image subresource, the application <b>must</b> perform a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-queue-transfers">queue family ownership transfer</a>.
 
-		<ul>
-			<li>Release exclusive ownership from the source queue family to the destination queue family.</li>
-			<li>Use semaphores to ensure proper execution control for the ownership transfer.</li>
-			<li>Acquire exclusive ownership for the destination queue family from the source queue family.</li>
-		</ul>
+		Upon creation, resources using #SHARING_MODE_EXCLUSIVE are not owned by any queue family. A buffer or image memory barrier is not required to acquire <em>ownership</em> when no queue family owns the resource - it is implicitly acquired upon first use within a queue.
 
-		To release exclusive ownership of a range of a buffer or image subresource of an image object, the application <b>must</b> execute a buffer or image memory barrier, respectively (see ##VkBufferMemoryBarrier and ##VkImageMemoryBarrier) on a queue from the source queue family. The {@code srcQueueFamilyIndex} parameter of the barrier <b>must</b> be set to the source queue family index, and the {@code dstQueueFamilyIndex} parameter to the destination queue family index.
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Images still require a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-layouts"> layout transition</a> from #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED before being used on the first queue.
+		</div>
 
-		To acquire exclusive ownership, the application <b>must</b> execute the same buffer or image memory barrier (i.e. an identically defined instance of the ##VkBufferMemoryBarrier or ##VkImageMemoryBarrier structure that was used for the exclusive ownership release) on a queue from the destination queue family.
-
-		Upon creation, resources using #SHARING_MODE_EXCLUSIVE are not owned by any queue family. A buffer or image memory barrier is not required to acquire ownership when no queue family owns the resource - it is implicitly acquired upon first use within a queue. However, images still require a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-layouts">layout transition</a> from #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED before being used on the first queue. This layout transition <b>can</b> either be accomplished by an image memory barrier or by use in a render pass instance.
-
-		Once a queue family has used a range or image subresource of an #SHARING_MODE_EXCLUSIVE resource, its contents are undefined to other queue families unless ownership is transferred. The contents <b>may</b> also become undefined for other reasons, e.g. as a result of writes to an image subresource that aliases the same memory. A queue family <b>can</b> take ownership of a range or image subresource without an ownership transfer in the same way as for a resource that was just created, however doing so means any contents written by other queue families or via incompatible aliases are undefined.
+		A queue family <b>can</b> take ownership of an image subresource or buffer range of a resource created with #SHARING_MODE_EXCLUSIVE, without an ownership transfer, in the same way as for a resource that was just created; however, taking ownership in this way has the effect that the contents of the image subresource or buffer range are undefined.
 
 		Ranges of buffers and image subresources of image objects created using #SHARING_MODE_CONCURRENT <b>must</b> only be accessed by queues from the queue families specified through the {@code queueFamilyIndexCount} and {@code pQueueFamilyIndices} members of the corresponding create info structures.
 
@@ -1575,7 +1591,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			<li>#IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL: <b>must</b> only be used as a depth/stencil attachment in a {@code VkFramebuffer}. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled.</li>
 			<li>#IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL: <b>must</b> only be used as a read-only depth/stencil attachment in a {@code VkFramebuffer} and/or as a read-only image in a shader (which <b>can</b> be read as a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT usage bit enabled. Only image subresources of images created with #IMAGE_USAGE_SAMPLED_BIT <b>can</b> be used as sampled image or combined image/sampler in a shader. Similarly, only image subresources of images created with #IMAGE_USAGE_INPUT_ATTACHMENT_BIT <b>can</b> be used as input attachments.</li>
 			<li>#IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL: <b>must</b> only be used as a read-only image in a shader (which <b>can</b> be read as a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled.</li>
-			<li>#IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL: <b>must</b> only be used as a source image of a transfer command (see the definition of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_SRC_BIT usage bit enabled.</li>
+			<li>#IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL: <b>must</b> only be used as a source image of a transfer command (see the definition of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_SRC_BIT usage bit enabled.</li>
 			<li>#IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL: <b>must</b> only be used as a destination image of a transfer command. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_DST_BIT usage bit enabled.</li>
 			<li>#IMAGE_LAYOUT_PRESENT_SRC_KHR: <b>must</b> only be used for presenting a swapchain image for display. A swapchain&#8217;s image <b>must</b> be transitioned to this layout before calling #QueuePresentKHR(), and <b>must</b> be transitioned away from this layout after calling #AcquireNextImageKHR().</li>
 		</ul>
@@ -2297,7 +2313,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		</ul>
 
 		<h5>See Also</h5>
-		##VkSubpassDescription, #CmdBindDescriptorSets(), #CmdBindPipeline()
+		##VkIndirectCommandsLayoutCreateInfoNVX, ##VkSubpassDescription, #CmdBindDescriptorSets(), #CmdBindPipeline()
 		""",
 
 		"PIPELINE_BIND_POINT_GRAPHICS".."0",
@@ -2306,13 +2322,12 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 	EnumConstant(
 		"""
-		VkAccessFlagBits - Bitmask specifying classes of memory access the will participate in a memory barrier dependency
+		VkAccessFlagBits - Bitmask specifying memory access types that will participate in a memory dependency
 
 		<h5>Description</h5>
 		For more information, see:
 
 		<ul>
-			<li>The reference page for ##VkMemoryBarrier, where this interface is defined.</li>
 			<li>The See Also section for other reference pages using this type.</li>
 			<li>The Vulkan Specification.</li>
 		</ul>
@@ -2342,13 +2357,13 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 	EnumConstant(
 		"""
-		VkDependencyFlagBits - Bitmask specifying dependencies between subpasses
+		VkDependencyFlagBits - Bitmask specifying how execution and memory dependencies are formed
 
 		<h5>Description</h5>
 		For more information, see:
 
 		<ul>
-			<li>The reference page for ##VkSubpassDependency, where this interface is defined.</li>
+			<li>The reference page for #CmdPipelineBarrier(), where this interface is defined.</li>
 			<li>The See Also section for other reference pages using this type.</li>
 			<li>The Vulkan Specification.</li>
 		</ul>
@@ -2634,7 +2649,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		##VkAllocationCallbacks
 		""",
 
-		VkInstance.IN("instance", "the handle of the instance to destroy."),
+		nullable..VkInstance.IN("instance", "the handle of the instance to destroy."),
 		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
@@ -2940,7 +2955,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		{@code PFN_vkVoidFunction}
 		""",
 
-		VkInstance.IN("instance", "the instance that the function pointer will be compatible with, or {@code NULL} for commands not dependent on any instance."),
+		nullable..VkInstance.IN("instance", "the instance that the function pointer will be compatible with, or {@code NULL} for commands not dependent on any instance."),
 		const..charASCII_p.IN("pName", "the name of the command to obtain.")
 	)
 
@@ -3088,7 +3103,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		##VkAllocationCallbacks
 		""",
 
-		VkDevice.IN("device", "the logical device to destroy."),
+		nullable..VkDevice.IN("device", "the logical device to destroy."),
 		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
 	)
 
@@ -3358,7 +3373,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		Submission can be a high overhead operation, and applications <b>should</b> attempt to batch work together into as few calls to #QueueSubmit() as possible.
 		</div>
 
-		#QueueSubmit() is a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-submission">queue submission command</a>, with each batch defined by an element of {@code pSubmits} as an instance of the ##VkSubmitInfo structure.
+		#QueueSubmit() is a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-submission">queue submission command</a>, with each batch defined by an element of {@code pSubmits} as an instance of the ##VkSubmitInfo structure. Batches begin execution in the order they appear in {@code pSubmits}, but <b>may</b> complete out of order.
 
 		Fence and semaphore operations submitted with #QueueSubmit() have additional ordering constraints compared to other submission commands, with dependencies involving previous and subsequent queue operations. Information about these additional constraints can be found in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores"> semaphore</a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fences"> fence</a> sections of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> the synchronization chapter</a>.
 
@@ -3368,6 +3383,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		<ul>
 			<li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> be unsignaled</li>
 			<li>If {@code fence} is not #NULL_HANDLE, {@code fence} <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
+			<li>Any calls to #CmdSetEvent(), #CmdResetEvent() or #CmdWaitEvents() that have been recorded into any of the command buffer elements of the {@code pCommandBuffers} member of any element of {@code pSubmits}, <b>must</b> not reference any {@code VkEvent} that is referenced by any of those commands that is pending execution on another queue.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -3639,7 +3655,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		#MapMemory() will fail if the implementation is unable to allocate an appropriately sized contiguous virtual address range, e.g. due to virtual address space fragmentation or platform limits. In such cases, #MapMemory() <b>must</b> return VK_ERROR_MEMORY_MAP_FAILED. The application <b>can</b> improve the likelihood of success by reducing the size of the mapped range and/or removing unneeded mappings using fname:VkUnmapMemory.
 		</div>
 
-		#MapMemory() does not check whether the device memory is currently in use before returning the host-accessible pointer. The application <b>must</b> guarantee that any previously submitted command that writes to this range has completed before the host reads from or writes to that range, and that any previously submitted command that reads from that range has completed before the host writes to that region (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fences-devicewrites"> here</a> for details on fulfilling such a guarantee). If the device memory was allocated without the #MEMORY_PROPERTY_HOST_COHERENT_BIT set, these guarantees <b>must</b> be made for an extended range: the application <b>must</b> round down the start of the range to the nearest multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}, and round the end of the range up to the nearest multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}.
+		#MapMemory() does not check whether the device memory is currently in use before returning the host-accessible pointer. The application <b>must</b> guarantee that any previously submitted command that writes to this range has completed before the host reads from or writes to that range, and that any previously submitted command that reads from that range has completed before the host writes to that region (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-submission-host-writes"> here</a> for details on fulfilling such a guarantee). If the device memory was allocated without the #MEMORY_PROPERTY_HOST_COHERENT_BIT set, these guarantees <b>must</b> be made for an extended range: the application <b>must</b> round down the start of the range to the nearest multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}, and round the end of the range up to the nearest multiple of ##VkPhysicalDeviceLimits{@code ::nonCoherentAtomSize}.
 
 		While a range of device memory is mapped for host access, the application is responsible for synchronizing both device and host access to that memory range.
 
@@ -3744,6 +3760,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		<h5>Description</h5>
 		#FlushMappedMemoryRanges() <b>must</b> be used to guarantee that host writes to non-coherent memory are visible to the device. It <b>must</b> be called after the host writes to non-coherent memory have completed and before command buffers that will read or write any of those memory locations are submitted to a queue.
 
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Unmapping non-coherent memory does not implicitly flush the mapped memory, and host writes that have not been flushed <b>may</b> not ever be visible to the device.
+		</div>
+
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
@@ -3789,6 +3809,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		<h5>Description</h5>
 		#InvalidateMappedMemoryRanges() <b>must</b> be used to guarantee that device writes to non-coherent memory are visible to the host. It <b>must</b> be called after command buffers that execute and flush (via memory barriers) the device writes have completed, and before the host will read or write any of those locations. If a range of non-coherent memory is written by the host and then invalidated without first being flushed, its contents are undefined.
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Mapping non-coherent memory does not implicitly invalidate the mapped memory, and device writes that have not been invalidated <b>must</b> be made visible before the host reads or overwrites them.
+		</div>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -4162,7 +4186,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    VkFence                                     fence);</code></pre>
 
 		<h5>Description</h5>
-		#QueueBindSparse() is a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-submission">queue submission command</a>, with each batch defined by an element of {@code pBindInfo} as an instance of the ##VkBindSparseInfo structure.
+		#QueueBindSparse() is a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-submission">queue submission command</a>, with each batch defined by an element of {@code pBindInfo} as an instance of the ##VkBindSparseInfo structure. Batches begin execution in the order they appear in {@code pBindInfo}, but <b>may</b> complete out of order.
 
 		Within a batch, a given range of a resource <b>must</b> not be bound more than once. Across batches, if a range is to be bound to one allocation and offset and then to another allocation and offset, then the application <b>must</b> guarantee (usually using semaphores) that the binding operations are executed in the correct order, as well as to order binding operations against the execution of command buffer submissions.
 
@@ -4235,7 +4259,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		Create a new fence object.
 
 		<h5>C Specification</h5>
-		To create a new fence object, use the command
+		To create a fence, call:
 
 		<pre><code>VkResult vkCreateFence(
 ￿    VkDevice                                    device,
@@ -4270,7 +4294,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		""",
 
 		VkDevice.IN("device", "the logical device that creates the fence."),
-		const..VkFenceCreateInfo.p.IN("pCreateInfo", "points to a ##VkFenceCreateInfo structure specifying the state of the fence object."),
+		const..VkFenceCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkFenceCreateInfo structure which contains information about how the fence is to be created."),
 		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
 		Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
 	)
@@ -4290,7 +4314,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code fence} <b>must</b> not be associated with any queue command that has not yet completed execution on that queue</li>
+			<li>All <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-submission">queue submission</a> commands that refer to {@code fence} <b>must</b> have completed execution</li>
 			<li>If ##VkAllocationCallbacks were provided when {@code fence} was created, a compatible set of callbacks <b>must</b> be provided here</li>
 			<li>If no ##VkAllocationCallbacks were provided when {@code fence} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
 		</ul>
@@ -4323,7 +4347,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		Resets one or more fence objects.
 
 		<h5>C Specification</h5>
-		To reset the status of one or more fences to the unsignaled state, use the command:
+		To set the state of fences to unsignaled from the host, call:
 
 		<pre><code>VkResult vkResetFences(
 ￿    VkDevice                                    device,
@@ -4331,7 +4355,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    const VkFence*                              pFences);</code></pre>
 
 		<h5>Description</h5>
-		If a fence is already in the unsignaled state, then resetting it has no effect.
+		When #ResetFences() is executed on the host, it defines a <em>fence unsignal operation</em> for each fence, which resets the fence to the unsignaled state.
+
+		If any member of {@code pFences} is already in the unsignaled state when #ResetFences() is executed, then #ResetFences() has no effect on that fence.
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -4368,7 +4394,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		VkDevice.IN("device", "the logical device that owns the fences."),
 		AutoSize("pFences")..uint32_t.IN("fenceCount", "the number of fences to reset."),
-		const..VkFence.p.IN("pFences", "a pointer to an array of {@code fenceCount} fence handles to reset.")
+		const..VkFence.p.IN("pFences", "a pointer to an array of fence handles to reset.")
 	)
 
 	VkResult(
@@ -4377,19 +4403,25 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		Return the status of a fence.
 
 		<h5>C Specification</h5>
-		To query the status of a fence from the host, use the command
+		To query the status of a fence from the host, call:
 
 		<pre><code>VkResult vkGetFenceStatus(
 ￿    VkDevice                                    device,
 ￿    VkFence                                     fence);</code></pre>
 
 		<h5>Description</h5>
-		Upon success, #GetFenceStatus() returns the status of the fence, which is one of:
+		Upon success, #GetFenceStatus() returns the status of the fence object, with the following return codes:
 
-		<ul>
-			<li>#SUCCESS indicates that the fence is signaled.</li>
-			<li>#NOT_READY indicates that the fence is unsignaled.</li>
-		</ul>
+		<h6>Fence Object Status Codes</h6>
+		<table class="lwjgl">
+			<thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+			<tbody>
+				<tr><td>#SUCCESS</td><td>The fence specified by {@code fence} is signaled.</td></tr>
+				<tr><td>#NOT_READY</td><td>The fence specified by {@code fence} is unsignaled.</td></tr>
+			</tbody>
+		</table>
+
+		If a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-submission"> queue submission</a> command is pending execution, then the value returned by this command <b>may</b> immediately be out of date.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -4425,7 +4457,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		Wait for one or more fences to become signaled.
 
 		<h5>C Specification</h5>
-		To cause the host to wait until any one or all of a group of fences is signaled, use the command:
+		To wait for one or more fences to enter the signaled state on the host, call:
 
 		<pre><code>VkResult vkWaitForFences(
 ￿    VkDevice                                    device,
@@ -4440,8 +4472,6 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		If {@code timeout} is zero, then #WaitForFences() does not wait, but simply returns the current state of the fences. #TIMEOUT will be returned in this case if the condition is not satisfied, even though no actual wait was performed.
 
 		If the specified timeout period expires before the condition is satisfied, #WaitForFences() returns #TIMEOUT. If the condition is satisfied before {@code timeout} nanoseconds has expired, #WaitForFences() returns #SUCCESS.
-
-		#WaitForFences() defines the second half of a memory dependency with the host, for each fence being waited on. The memory dependency defined by signaling a fence and waiting on the host does not guarantee that the results of memory accesses will be visible to the host, or that the memory is available. To provide that guarantee, the application <b>must</b> insert a memory barrier between the device writes and the end of the submission that will signal the fence, with {@code dstAccessMask} having the #ACCESS_HOST_READ_BIT bit set, with {@code dstStageMask} having the #PIPELINE_STAGE_HOST_BIT bit set, and with the appropriate {@code srcStageMask} and {@code srcAccessMask} members set to guarantee completion of the writes. If the memory was allocated without the #MEMORY_PROPERTY_HOST_COHERENT_BIT set, then #InvalidateMappedMemoryRanges() <b>must</b> be called after the fence is signaled in order to ensure the writes are visible to the host, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#memory-device-hostaccess">Host Access to Device Memory Objects</a>.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -4483,13 +4513,16 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		Create a new queue semaphore object.
 
 		<h5>C Specification</h5>
-		To create a new semaphore object, use the command
+		To create a semaphore, call:
 
 		<pre><code>VkResult vkCreateSemaphore(
 ￿    VkDevice                                    device,
 ￿    const VkSemaphoreCreateInfo*                pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
 ￿    VkSemaphore*                                pSemaphore);</code></pre>
+
+		<h5>Description</h5>
+		When created, the semaphore is in the unsignaled state.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -4518,9 +4551,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		""",
 
 		VkDevice.IN("device", "the logical device that creates the semaphore."),
-		const..VkSemaphoreCreateInfo.p.IN("pCreateInfo", "points to a ##VkSemaphoreCreateInfo structure specifying the state of the semaphore object."),
+		const..VkSemaphoreCreateInfo.p.IN("pCreateInfo", "a pointer to an instance of the ##VkSemaphoreCreateInfo structure which contains information about how the semaphore is to be created."),
 		nullable..const..VkAllocationCallbacks.p.IN("pAllocator", "controls host memory allocation as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-		Check(1)..VkSemaphore.p.OUT("pSemaphore", "points to a handle in which the resulting semaphore object is returned. The semaphore is created in the unsignaled state.")
+		Check(1)..VkSemaphore.p.OUT("pSemaphore", "points to a handle in which the resulting semaphore object is returned.")
 	)
 
 	void(
@@ -4538,7 +4571,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code semaphore} <b>must</b> not be associated with any queue command that has not yet completed execution on that queue</li>
+			<li>All submitted batches that refer to {@code semaphore} <b>must</b> have completed execution</li>
 			<li>If ##VkAllocationCallbacks were provided when {@code semaphore} was created, a compatible set of callbacks <b>must</b> be provided here</li>
 			<li>If no ##VkAllocationCallbacks were provided when {@code semaphore} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
 		</ul>
@@ -4726,6 +4759,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    VkDevice                                    device,
 ￿    VkEvent                                     event);</code></pre>
 
+		<h5>Description</h5>
+		When #SetEvent() is executed on the host, it defines an <em>event signal operation</em> which sets the event to the signaled state.
+
+		If {@code event} is already in the signaled state when #SetEvent() is executed, then #SetEvent() has no effect, and no event signal operation occurs.
+
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
@@ -4768,6 +4806,11 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		<pre><code>VkResult vkResetEvent(
 ￿    VkDevice                                    device,
 ￿    VkEvent                                     event);</code></pre>
+
+		<h5>Description</h5>
+		When #ResetEvent() is executed on the host, it defines an <em>event unsignal operation</em> which resets the event to the unsignaled state.
+
+		If {@code event} is already in the unsignaled state when #ResetEvent() is executed, then #ResetEvent() has no effect, and no event unsignal operation occurs.
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -9141,12 +9184,21 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		Set an event object to signaled state.
 
 		<h5>C Specification</h5>
-		The state of an event <b>can</b> also be updated on the device by commands inserted in command buffers. To set the state of an event to signaled from a device, call:
+		To set the state of an event to signaled from a device, call:
 
 		<pre><code>void vkCmdSetEvent(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkEvent                                     event,
 ￿    VkPipelineStageFlags                        stageMask);</code></pre>
+
+		<h5>Description</h5>
+		When #CmdSetEvent() is submitted to a queue, it defines an execution dependency on commands that were submitted before it, and defines an event signal operation which sets the event to the signaled state.
+
+		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-scopes"> synchronization scope</a> includes every command previously submitted to the same queue, including those in the same command buffer and batch. The synchronization scope is limited to operations on the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> source stage mask</a> specified by {@code stageMask}.
+
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-scopes"> synchronization scope</a> includes only the event signal operation.
+
+		If {@code event} is already in the signaled state when #CmdSetEvent() is executed on the device, then #CmdSetEvent() has no effect, no event signal operation occurs, and no execution dependency is generated.
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -9181,7 +9233,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 
 		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
 		VkEvent.IN("event", "the event that will be signaled."),
-		VkPipelineStageFlags.IN("stageMask", "specifies the pipeline stage at which the state of {@code event} is updated as described below.")
+		VkPipelineStageFlags.IN("stageMask", "specifies the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages\">source stage mask</a> used to determine when the {@code event} is signaled.")
 	)
 
 	void(
@@ -9196,6 +9248,15 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkEvent                                     event,
 ￿    VkPipelineStageFlags                        stageMask);</code></pre>
+
+		<h5>Description</h5>
+		When #CmdResetEvent() is submitted to a queue, it defines an execution dependency on commands that were submitted before it, and defines an event unsignal operation which resets the event to the unsignaled state.
+
+		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-scopes"> synchronization scope</a> includes every command previously submitted to the same queue, including those in the same command buffer and batch. The synchronization scope is limited to operations on the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> source stage mask</a> specified by {@code stageMask}.
+
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-scopes"> synchronization scope</a> includes only the event unsignal operation.
+
+		If {@code event} is already in the unsignaled state when #CmdResetEvent() is executed on the device, then #CmdResetEvent() has no effect, no event unsignal operation occurs, and no execution dependency is generated.
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -9230,8 +9291,8 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		""",
 
 		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-		VkEvent.IN("event", "the event that will be reset."),
-		VkPipelineStageFlags.IN("stageMask", "specifies the pipeline stage at which the state of {@code event} is updated as described below.")
+		VkEvent.IN("event", "the event that will be unsignaled."),
+		VkPipelineStageFlags.IN("stageMask", "specifies the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages\">source stage mask</a> used to determine when the {@code event} is unsignaled.")
 	)
 
 	void(
@@ -9256,20 +9317,22 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 ￿    const VkImageMemoryBarrier*                 pImageMemoryBarriers);</code></pre>
 
 		<h5>Description</h5>
-		#CmdWaitEvents() waits for events set by either #SetEvent() or #CmdSetEvent() to become signaled. Logically, it has three phases:
+		When #CmdWaitEvents() is submitted to a queue, it defines a memory dependency between prior event signal operations, and subsequent commands.
 
-		<ul>
-			<li>Wait at the pipeline stages specified by {@code dstStageMask} (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stage-flags">the “Pipeline Stage Flags” section</a>) until the {@code eventCount} event objects specified by {@code pEvents} become signaled. Implementations <b>may</b> wait for each event object to become signaled in sequence (starting with the first event object in {@code pEvents}, and ending with the last), or wait for all of the event objects to become signaled at the same time.</li>
-			<li>Execute the memory barriers specified by {@code pMemoryBarriers}, {@code pBufferMemoryBarriers} and {@code pImageMemoryBarriers} (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-memory-barriers">the “Memory Barriers” section</a>).</li>
-			<li>Resume execution of pipeline stages specified by {@code dstStageMask}</li>
-		</ul>
+		The first synchronization scope only includes event signal operations that operate on members of {@code pEvents}, and the operations that happened-before the event signal operations. Event signal operations performed by #CmdSetEvent() that were previously submitted to the same queue are included in the first synchronization scope, if the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-order"> logically latest</a> pipeline stage in their {@code stageMask} parameter is <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-order"> logically earlier</a> than or equal to the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-order"> logically latest</a> pipeline stage in {@code srcStageMask}. Event signal operations performed by #SetEvent() are only included in the first synchronization scope if #PIPELINE_STAGE_HOST_BIT is included in {@code srcStageMask}.
 
-		Implementations <b>may</b> not execute commands in a pipelined manner, so #CmdWaitEvents() <b>may</b> not observe the results of a subsequent #CmdSetEvent() or #CmdResetEvent() command, even if the stages in {@code dstStageMask} occur after the stages in {@code srcStageMask}.
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-scopes"> synchronization scope</a> includes commands subsequently submitted to the same queue, including those in the same command buffer and batch. The second synchronization scope is limited to operations on the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> destination stage mask</a> specified by {@code dstStageMask}.
 
-		Commands that update the state of events in different pipeline stages <b>may</b> execute out of order, unless the ordering is enforced by execution dependencies.
+		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access in the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> source stage mask</a> specified by {@code srcStageMask}. Within that, the first access scope only includes the first access scopes defined by elements of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers} and {@code pImageMemoryBarriers} arrays, which each define a set of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-memory-barriers"> memory barriers</a>. If no memory barriers are specified, then the first access scope includes no accesses.
+
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access in the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> destination stage mask</a> specified by {@code dstStageMask}. Within that, the second access scope only includes the second access scopes defined by elements of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers} and {@code pImageMemoryBarriers} arrays, which each define a set of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-memory-barriers"> memory barriers</a>. If no memory barriers are specified, then the second access scope includes no accesses.
 
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-		Applications <b>should</b> be careful to avoid race conditions when using events. For example, an event <b>should</b> only be reset if no #CmdWaitEvents() command is executing that waits upon that event.
+		#CmdWaitEvents() is used with #CmdSetEvent() to define a memory dependency between two sets of action commands, roughly in the same way as pipeline barriers, but split into two commands such that work between the two <b>may</b> execute unhindered.
+		</div>
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		Applications <b>should</b> be careful to avoid race conditions when using events. There is no direct ordering guarantee between a #CmdResetEvent() command and a #CmdWaitEvents() command submitted after it, so some other execution dependency <b>must</b> be included between these commands (e.g. a semaphore).
 		</div>
 
 		<h5>Valid Usage</h5>
@@ -9318,20 +9381,20 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
 		AutoSize("pEvents")..uint32_t.IN("eventCount", "the length of the {@code pEvents} array."),
 		const..VkEvent.p.IN("pEvents", "an array of event object handles to wait on."),
-		VkPipelineStageFlags.IN("srcStageMask", "(see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stage-flags\">the “Pipeline Stage Flags” section</a>) is the bitwise OR of the pipeline stages used to signal the event object handles in {@code pEvents}."),
-		VkPipelineStageFlags.IN("dstStageMask", "the pipeline stages at which the wait will occur."),
-		AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", ""),
-		nullable..const..VkMemoryBarrier.p.IN("pMemoryBarriers", "a pointer to an array of {@code memoryBarrierCount} ##VkMemoryBarrier structures."),
-		AutoSize("pBufferMemoryBarriers")..uint32_t.IN("bufferMemoryBarrierCount", ""),
-		nullable..const..VkBufferMemoryBarrier.p.IN("pBufferMemoryBarriers", "a pointer to an array of {@code bufferMemoryBarrierCount} ##VkBufferMemoryBarrier structures."),
-		AutoSize("pImageMemoryBarriers")..uint32_t.IN("imageMemoryBarrierCount", ""),
-		nullable..const..VkImageMemoryBarrier.p.IN("pImageMemoryBarriers", "a pointer to an array of {@code imageMemoryBarrierCount} ##VkImageMemoryBarrier structures. See <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-memory-barriers\">the “Memory Barriers” section</a> for more details about memory barriers.")
+		VkPipelineStageFlags.IN("srcStageMask", "the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages\">source stage mask</a>"),
+		VkPipelineStageFlags.IN("dstStageMask", "the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages\">destination stage mask</a>."),
+		AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", "the length of the {@code pMemoryBarriers} array."),
+		nullable..const..VkMemoryBarrier.p.IN("pMemoryBarriers", "a pointer to an array of ##VkMemoryBarrier structures."),
+		AutoSize("pBufferMemoryBarriers")..uint32_t.IN("bufferMemoryBarrierCount", "the length of the {@code pBufferMemoryBarriers} array."),
+		nullable..const..VkBufferMemoryBarrier.p.IN("pBufferMemoryBarriers", "a pointer to an array of ##VkBufferMemoryBarrier structures."),
+		AutoSize("pImageMemoryBarriers")..uint32_t.IN("imageMemoryBarrierCount", "the length of the {@code pImageMemoryBarriers} array."),
+		nullable..const..VkImageMemoryBarrier.p.IN("pImageMemoryBarriers", "a pointer to an array of ##VkImageMemoryBarrier structures.")
 	)
 
 	void(
 		"CmdPipelineBarrier",
 		"""
-		Insert a set of execution and memory barriers.
+		Insert a memory dependency.
 
 		<h5>C Specification</h5>
 		To record a pipeline barrier, call:
@@ -9349,9 +9412,26 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 ￿    const VkImageMemoryBarrier*                 pImageMemoryBarriers);</code></pre>
 
 		<h5>Description</h5>
-		Each element of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers} and {@code pImageMemoryBarriers} arrays specifies two halves of a memory dependency, as defined above. Specifics of each type of memory barrier and the memory access types are defined further in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-memory-barriers">Memory Barriers</a>.
+		<ul>
+			<li>{@code memoryBarrierCount} is the length of the {@code pMemoryBarriers} array.</li>
+			<li>{@code pMemoryBarriers} is a pointer to an array of ##VkMemoryBarrier structures.</li>
+			<li>{@code bufferMemoryBarrierCount} is the length of the {@code pBufferMemoryBarriers} array.</li>
+			<li>{@code pBufferMemoryBarriers} is a pointer to an array of ##VkBufferMemoryBarrier structures.</li>
+			<li>{@code imageMemoryBarrierCount} is the length of the {@code pImageMemoryBarriers} array.</li>
+			<li>{@code pImageMemoryBarriers} is a pointer to an array of ##VkImageMemoryBarrier structures.</li>
+		</ul>
 
-		If #CmdPipelineBarrier() is called outside a render pass instance, then the first set of commands is all prior commands submitted to the queue and recorded in the command buffer and the second set of commands is all subsequent commands recorded in the command buffer and submitted to the queue. If #CmdPipelineBarrier() is called inside a render pass instance, then the first set of commands is all prior commands in the same subpass and the second set of commands is all subsequent commands in the same subpass.
+		When #CmdPipelineBarrier() is submitted to a queue, it defines a memory dependency between commands that were submitted before it, and those submitted after it.
+
+		If #CmdPipelineBarrier() was recorded outside a render pass instance, the first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-scopes"> synchronization scope</a> includes every command submitted to the same queue before it, including those in the same command buffer and batch. If #CmdPipelineBarrier() was recorded inside a render pass instance, the first synchronization scope includes only commands submitted before it within the same subpass. In either case, the first synchronization scope is limited to operations on the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> source stage mask</a> specified by {@code srcStageMask}.
+
+		If #CmdPipelineBarrier() was recorded outside a render pass instance, the second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-scopes"> synchronization scope</a> includes every command submitted to the same queue after it, including those in the same command buffer and batch. If #CmdPipelineBarrier() was recorded inside a render pass instance, the second synchronization scope includes only commands submitted after it within the same subpass. In either case, the second synchronization scope is limited to operations on the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> destination stage mask</a> specified by {@code dstStageMask}.
+
+		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access in the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> source stage mask</a> specified by {@code srcStageMask}. Within that, the first access scope only includes the first access scopes defined by elements of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers} and {@code pImageMemoryBarriers} arrays, which each define a set of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-memory-barriers"> memory barriers</a>. If no memory barriers are specified, then the first access scope includes no accesses.
+
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access in the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> destination stage mask</a> specified by {@code dstStageMask}. Within that, the second access scope only includes the second access scopes defined by elements of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers} and {@code pImageMemoryBarriers} arrays, which each define a set of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-memory-barriers"> memory barriers</a>. If no memory barriers are specified, then the second access scope includes no accesses.
+
+		If {@code dependencyFlags} includes #DEPENDENCY_BY_REGION_BIT, then any dependency between <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-framebuffer-regions"> framebuffer-space</a> pipeline stages is <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-framebuffer-regions"> framebuffer-local</a> - otherwise it is <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-framebuffer-regions"> framebuffer-global</a>.
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -9408,16 +9488,22 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		""",
 
 		VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-		VkPipelineStageFlags.IN("srcStageMask", "a bitmask of {@code VkPipelineStageFlagBits} specifying a set of source pipeline stages (see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stage-flags\">the “Pipeline Stage Flags” section</a>)."),
-		VkPipelineStageFlags.IN("dstStageMask", """a bitmask specifying a set of destination pipeline stages.
-The pipeline barrier specifies an execution dependency such that all work performed by the set of pipeline stages included in {@code srcStageMask} of the first set of commands completes before any work performed by the set of pipeline stages included in {@code dstStageMask} of the second set of commands begins."""),
-		VkDependencyFlags.IN("dependencyFlags", "a bitmask of {@code VkDependencyFlagBits}. The execution dependency is by-region if the mask includes #DEPENDENCY_BY_REGION_BIT."),
-		AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", "the length of the {@code pMemoryBarriers} array."),
-		nullable..const..VkMemoryBarrier.p.IN("pMemoryBarriers", "a pointer to an array of ##VkMemoryBarrier structures."),
-		AutoSize("pBufferMemoryBarriers")..uint32_t.IN("bufferMemoryBarrierCount", "the length of the {@code pBufferMemoryBarriers} array."),
-		nullable..const..VkBufferMemoryBarrier.p.IN("pBufferMemoryBarriers", "a pointer to an array of ##VkBufferMemoryBarrier structures."),
-		AutoSize("pImageMemoryBarriers")..uint32_t.IN("imageMemoryBarrierCount", "the length of the {@code pImageMemoryBarriers} array."),
-		nullable..const..VkImageMemoryBarrier.p.IN("pImageMemoryBarriers", "a pointer to an array of ##VkImageMemoryBarrier structures.")
+		VkPipelineStageFlags.IN("srcStageMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages-masks\">source stage mask</a>."),
+		VkPipelineStageFlags.IN("dstStageMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages-masks\">destination stage mask</a>."),
+		VkDependencyFlags.IN("dependencyFlags", """a bitmask of {@code VkDependencyFlagBits}. The bits that <b>can</b> be included in {@code dependencyFlags} are:
+<pre><code>typedef enum VkDependencyFlagBits {
+￿    VK_DEPENDENCY_BY_REGION_BIT = 0x00000001,
+} VkDependencyFlagBits;</code></pre>
+
+		<ul>
+			<li>#DEPENDENCY_BY_REGION_BIT signifies that dependencies will be <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-framebuffer-regions">framebuffer-local</a>.</li>
+		</ul>"""),
+		AutoSize("pMemoryBarriers")..uint32_t.IN("memoryBarrierCount", ""),
+		nullable..const..VkMemoryBarrier.p.IN("pMemoryBarriers", ""),
+		AutoSize("pBufferMemoryBarriers")..uint32_t.IN("bufferMemoryBarrierCount", ""),
+		nullable..const..VkBufferMemoryBarrier.p.IN("pBufferMemoryBarriers", ""),
+		AutoSize("pImageMemoryBarriers")..uint32_t.IN("imageMemoryBarrierCount", ""),
+		nullable..const..VkImageMemoryBarrier.p.IN("pImageMemoryBarriers", "")
 	)
 
 	void(
@@ -9972,7 +10058,7 @@ The pipeline barrier specifies an execution dependency such that all work perfor
 			<li>If #CmdExecuteCommands() is being called within a render pass instance, that render pass instance <b>must</b> have been begun with the {@code contents} parameter of #CmdBeginRenderPass() set to #SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS</li>
 			<li>If #CmdExecuteCommands() is being called within a render pass instance, any given element of {@code pCommandBuffers} <b>must</b> have been recorded with the #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT</li>
 			<li>If #CmdExecuteCommands() is being called within a render pass instance, any given element of {@code pCommandBuffers} <b>must</b> have been recorded with ##VkCommandBufferInheritanceInfo{@code ::subpass} set to the index of the subpass which the given command buffer will be executed in</li>
-			<li>If #CmdExecuteCommands() is being called within a render pass instance, any given element of {@code pCommandBuffers} <b>must</b> have been recorded with a render pass that is compatible with the current render pass - see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-compatibility">the “Render Pass Compatibility” section</a></li>
+			<li>If #CmdExecuteCommands() is being called within a render pass instance, any given element of {@code pCommandBuffers} <b>must</b> have been recorded with ##VkCommandBufferInheritanceInfo{@code ::renderPass} set to a render pass that is <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-compatibility">compatible</a> with the current render pass.</li>
 			<li>If #CmdExecuteCommands() is being called within a render pass instance, and any given element of {@code pCommandBuffers} was recorded with ##VkCommandBufferInheritanceInfo{@code ::framebuffer} not equal to #NULL_HANDLE, that {@code VkFramebuffer} <b>must</b> match the {@code VkFramebuffer} used in the current render pass instance</li>
 			<li>If #CmdExecuteCommands() is not being called within a render pass instance, any given element of {@code pCommandBuffers} <b>must</b> not have been recorded with the #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-inheritedQueries">inherited queries</a> feature is not enabled, {@code commandBuffer} <b>must</b> not have any queries <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#queries-operation-active">active</a></li>

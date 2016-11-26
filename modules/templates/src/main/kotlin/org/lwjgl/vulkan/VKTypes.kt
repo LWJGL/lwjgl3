@@ -403,7 +403,7 @@ val VkAllocationCallbacks = struct(VULKAN_PACKAGE, "VkAllocationCallbacks") {
 		</ul>
 
 		<h5>See Also</h5>
-		##VkAllocationFunction, ##VkFreeFunction, ##VkInternalAllocationNotification, ##VkInternalFreeNotification, ##VkReallocationFunction, #AllocateMemory(), #CreateAndroidSurfaceKHR(), #CreateBuffer(), #CreateBufferView(), #CreateCommandPool(), #CreateComputePipelines(), #CreateDebugReportCallbackEXT(), #CreateDescriptorPool(), #CreateDescriptorSetLayout(), #CreateDevice(), #CreateDisplayModeKHR(), #CreateDisplayPlaneSurfaceKHR(), #CreateEvent(), #CreateFence(), #CreateFramebuffer(), #CreateGraphicsPipelines(), #CreateImage(), #CreateImageView(), #CreateInstance(), #CreateMirSurfaceKHR(), #CreatePipelineCache(), #CreatePipelineLayout(), #CreateQueryPool(), #CreateRenderPass(), #CreateSampler(), #CreateSemaphore(), #CreateShaderModule(), #CreateSharedSwapchainsKHR(), #CreateSwapchainKHR(), #CreateWaylandSurfaceKHR(), #CreateWin32SurfaceKHR(), #CreateXcbSurfaceKHR(), #CreateXlibSurfaceKHR(), #DestroyBuffer(), #DestroyBufferView(), #DestroyCommandPool(), #DestroyDebugReportCallbackEXT(), #DestroyDescriptorPool(), #DestroyDescriptorSetLayout(), #DestroyDevice(), #DestroyEvent(), #DestroyFence(), #DestroyFramebuffer(), #DestroyImage(), #DestroyImageView(), #DestroyInstance(), #DestroyPipeline(), #DestroyPipelineCache(), #DestroyPipelineLayout(), #DestroyQueryPool(), #DestroyRenderPass(), #DestroySampler(), #DestroySemaphore(), #DestroyShaderModule(), #DestroySurfaceKHR(), #DestroySwapchainKHR(), #FreeMemory()
+		##VkAllocationFunction, ##VkFreeFunction, ##VkInternalAllocationNotification, ##VkInternalFreeNotification, ##VkReallocationFunction, #AllocateMemory(), #CreateAndroidSurfaceKHR(), #CreateBuffer(), #CreateBufferView(), #CreateCommandPool(), #CreateComputePipelines(), #CreateDebugReportCallbackEXT(), #CreateDescriptorPool(), #CreateDescriptorSetLayout(), #CreateDevice(), #CreateDisplayModeKHR(), #CreateDisplayPlaneSurfaceKHR(), #CreateEvent(), #CreateFence(), #CreateFramebuffer(), #CreateGraphicsPipelines(), #CreateImage(), #CreateImageView(), #CreateIndirectCommandsLayoutNVX(), #CreateInstance(), #CreateMirSurfaceKHR(), #CreateObjectTableNVX(), #CreatePipelineCache(), #CreatePipelineLayout(), #CreateQueryPool(), #CreateRenderPass(), #CreateSampler(), #CreateSemaphore(), #CreateShaderModule(), #CreateSharedSwapchainsKHR(), #CreateSwapchainKHR(), #CreateWaylandSurfaceKHR(), #CreateWin32SurfaceKHR(), #CreateXcbSurfaceKHR(), #CreateXlibSurfaceKHR(), #DestroyBuffer(), #DestroyBufferView(), #DestroyCommandPool(), #DestroyDebugReportCallbackEXT(), #DestroyDescriptorPool(), #DestroyDescriptorSetLayout(), #DestroyDevice(), #DestroyEvent(), #DestroyFence(), #DestroyFramebuffer(), #DestroyImage(), #DestroyImageView(), #DestroyIndirectCommandsLayoutNVX(), #DestroyInstance(), #DestroyObjectTableNVX(), #DestroyPipeline(), #DestroyPipelineCache(), #DestroyPipelineLayout(), #DestroyQueryPool(), #DestroyRenderPass(), #DestroySampler(), #DestroySemaphore(), #DestroyShaderModule(), #DestroySurfaceKHR(), #DestroySwapchainKHR(), #FreeMemory()
 		"""
 
 	nullable..voidptr.member("pUserData", "a value to be interpreted by the implementation of the callbacks. When any of the callbacks in ##VkAllocationCallbacks are called, the Vulkan implementation will pass this value as the first parameter to the callback. This value <b>can</b> vary each time an allocator is passed into a command, even when the same object takes an allocator in multiple commands.")
@@ -1655,14 +1655,14 @@ val VkFenceCreateInfo = struct(VULKAN_PACKAGE, "VkFenceCreateInfo") {
 		#CreateFence()
 		"""
 
-	VkStructureType.member("sType", "")
-	nullable..const..voidptr.member("pNext", "")
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkFenceCreateFlags.member("flags", """defines the initial state and behavior of the fence. Bits which <b>can</b> be set include:
 <pre><code>typedef enum VkFenceCreateFlagBits {
 ￿    VK_FENCE_CREATE_SIGNALED_BIT = 0x00000001,
 } VkFenceCreateFlagBits;</code></pre>
 
-		If {@code flags} contains #FENCE_CREATE_SIGNALED_BIT then the fence object is created in the signaled state. Otherwise it is created in the unsignaled state.""")
+		If {@code flags} contains #FENCE_CREATE_SIGNALED_BIT then the fence object is created in the signaled state; otherwise it is created in the unsignaled state.""")
 }
 
 val VkSemaphoreCreateInfo = struct(VULKAN_PACKAGE, "VkSemaphoreCreateInfo") {
@@ -1702,8 +1702,8 @@ val VkEventCreateInfo = struct(VULKAN_PACKAGE, "VkEventCreateInfo") {
 		#CreateEvent()
 		"""
 
-	VkStructureType.member("sType", "")
-	nullable..const..voidptr.member("pNext", "")
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkEventCreateFlags.member("flags", "reserved for future use.")
 }
 
@@ -1764,7 +1764,7 @@ val VkBufferCreateInfo = struct(VULKAN_PACKAGE, "VkBufferCreateInfo") {
 } VkBufferUsageFlagBits;</code></pre>
 
 		<ul>
-			<li>#BUFFER_USAGE_TRANSFER_SRC_BIT indicates that the buffer <b>can</b> be used as the source of a <em>transfer command</em> (see the definition of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>).</li>
+			<li>#BUFFER_USAGE_TRANSFER_SRC_BIT indicates that the buffer <b>can</b> be used as the source of a <em>transfer command</em> (see the definition of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>).</li>
 			<li>#BUFFER_USAGE_TRANSFER_DST_BIT indicates that the buffer <b>can</b> be used as the destination of a transfer command.</li>
 			<li>#BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT indicates that the buffer <b>can</b> be used to create a {@code VkBufferView} suitable for occupying a {@code VkDescriptorSet} slot of type #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER.</li>
 			<li>#BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT indicates that the buffer <b>can</b> be used to create a {@code VkBufferView} suitable for occupying a {@code VkDescriptorSet} slot of type #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER.</li>
@@ -1772,7 +1772,7 @@ val VkBufferCreateInfo = struct(VULKAN_PACKAGE, "VkBufferCreateInfo") {
 			<li>#BUFFER_USAGE_STORAGE_BUFFER_BIT indicates that the buffer <b>can</b> be used in a ##VkDescriptorBufferInfo suitable for occupying a {@code VkDescriptorSet} slot either of type #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC.</li>
 			<li>#BUFFER_USAGE_INDEX_BUFFER_BIT indicates that the buffer is suitable for passing as the {@code buffer} parameter to #CmdBindIndexBuffer().</li>
 			<li>#BUFFER_USAGE_VERTEX_BUFFER_BIT indicates that the buffer is suitable for passing as an element of the {@code pBuffers} array to #CmdBindVertexBuffers().</li>
-			<li>#BUFFER_USAGE_INDIRECT_BUFFER_BIT indicates that the buffer is suitable for passing as the {@code buffer} parameter to #CmdDrawIndirect(), #CmdDrawIndexedIndirect(), or #CmdDispatchIndirect().</li>
+			<li>#BUFFER_USAGE_INDIRECT_BUFFER_BIT indicates that the buffer is suitable for passing as the {@code buffer} parameter to #CmdDrawIndirect(), #CmdDrawIndexedIndirect(), or #CmdDispatchIndirect(). It is also suitable for passing as the {@code buffer} member of ##VkIndirectCommandsTokenNVX, or {@code sequencesCountBuffer} or {@code sequencesIndexBuffer} member of ##VkCmdProcessCommandsInfoNVX</li>
 		</ul>
 
 		Any combination of bits <b>can</b> be specified for {@code usage}, but at least one of the bits <b>must</b> be set in order to create a valid buffer.
@@ -1926,6 +1926,7 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-textureCompressionBC">BC texture compression</a> feature is not enabled, {@code format} <b>must</b> not be #FORMAT_BC1_RGB_UNORM_BLOCK, #FORMAT_BC1_RGB_SRGB_BLOCK, #FORMAT_BC1_RGBA_UNORM_BLOCK, #FORMAT_BC1_RGBA_SRGB_BLOCK, #FORMAT_BC2_UNORM_BLOCK, #FORMAT_BC2_SRGB_BLOCK, #FORMAT_BC3_UNORM_BLOCK, #FORMAT_BC3_SRGB_BLOCK, #FORMAT_BC4_UNORM_BLOCK, #FORMAT_BC4_SNORM_BLOCK, #FORMAT_BC5_UNORM_BLOCK, #FORMAT_BC5_SNORM_BLOCK, #FORMAT_BC6H_UFLOAT_BLOCK, #FORMAT_BC6H_SFLOAT_BLOCK, #FORMAT_BC7_UNORM_BLOCK, or #FORMAT_BC7_SRGB_BLOCK</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-shaderStorageImageMultisample">multisampled storage images</a> feature is not enabled, and {@code usage} contains #IMAGE_USAGE_STORAGE_BIT, {@code samples} <b>must</b> be #SAMPLE_COUNT_1_BIT</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-sparseBinding">sparse bindings</a> feature is not enabled, {@code flags} <b>must</b> not contain #IMAGE_CREATE_SPARSE_BINDING_BIT</li>
+			<li>If {@code imageType} is #IMAGE_TYPE_1D, {@code flags} <b>must</b> not contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-sparseResidencyImage2D">sparse residency for 2D images</a> feature is not enabled, and {@code imageType} is #IMAGE_TYPE_2D, {@code flags} <b>must</b> not contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-sparseResidencyImage3D">sparse residency for 3D images</a> feature is not enabled, and {@code imageType} is #IMAGE_TYPE_3D, {@code flags} <b>must</b> not contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-sparseResidency2Samples">sparse residency for images with 2 samples</a> feature is not enabled, {@code imageType} is #IMAGE_TYPE_2D, and {@code samples} is #SAMPLE_COUNT_2_BIT, {@code flags} <b>must</b> not contain #IMAGE_CREATE_SPARSE_RESIDENCY_BIT</li>
@@ -2098,7 +2099,7 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>If {@code levelCount} is not #REMAINING_MIP_LEVELS, <code>levelCount</code> <b>must</b> be non-zero and <code>(baseMipLevel levelCount)</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when the image was created</li>
+			<li>If {@code levelCount} is not #REMAINING_MIP_LEVELS, <code>levelCount</code> <b>must</b> be non-zero and <code>(baseMipLevel &#x002b; levelCount)</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when the image was created</li>
 			<li>If {@code layerCount} is not #REMAINING_ARRAY_LAYERS, <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when the image was created</li>
 		</ul>
 
@@ -3623,9 +3624,15 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
 		Structure specifying an attachment description.
 
 		<h5>Description</h5>
-		If the attachment uses a color format, then {@code loadOp} and {@code storeOp} are used, and {@code stencilLoadOp} and {@code stencilStoreOp} are ignored. If the format has depth and/or stencil components, {@code loadOp} and {@code storeOp} apply only to the depth data, while {@code stencilLoadOp} and {@code stencilStoreOp} define how the stencil data is handled.
+		If the attachment uses a color format, then {@code loadOp} and {@code storeOp} are used, and {@code stencilLoadOp} and {@code stencilStoreOp} are ignored. If the format has depth and/or stencil components, {@code loadOp} and {@code storeOp} apply only to the depth data, while {@code stencilLoadOp} and {@code stencilStoreOp} define how the stencil data is handled. {@code loadOp} and {@code stencilLoadOp} define the <em>load operations</em> that execute as part of the first subpass that uses the attachment. {@code storeOp} and {@code stencilStoreOp} define the <em>store operations</em> that execute as part of the last subpass that uses the attachment.
 
-		During a render pass instance, input/color attachments with color formats that have a component size of 8, 16, or 32 bits <b>must</b> be represented in the attachment's format throughout the instance. Attachments with other floating- or fixed-point color formats, or with depth components <b>may</b> be represented in a format with a precision higher than the attachment format, but <b>must</b> be represented with the same range. When such a component is loaded via the {@code loadOp}, it will be converted into an implementation-dependent format used by the render pass. Such components <b>must</b> be converted from the render pass format, to the format of the attachment, before they are stored or resolved at the end of a render pass instance via {@code storeOp}. Conversions occur as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-numerics">Numeric Representation and Computation</a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fixedconv"> Fixed-Point Data Conversions</a>.
+		The load operation for each value in an attachment used by a subpass happens-before any command recorded into that subpass reads from that value. Load operations for attachments with a depth/stencil format execute in the #PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT pipeline stage. Load operations for attachments with a color format execute in the #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage.
+
+		Store operations for each value in an attachment used by a subpass happen-after any command recorded into that subpass writes to that value. Store operations for attachments with a depth/stencil format execute in the #PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT pipeline stage. Store operations for attachments with a color format execute in the #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage.
+
+		If an attachment is not used by any subpass, then {@code loadOp}, {@code storeOp}, {@code stencilStoreOp}, and {@code stencilLoadOp} are ignored, and the attachment's memory contents will not be modified by execution of a render pass instance.
+
+		During a render pass instance, input/color attachments with color formats that have a component size of 8, 16, or 32 bits <b>must</b> be represented in the attachment's format throughout the instance. Attachments with other floating- or fixed-point color formats, or with depth components <b>may</b> be represented in a format with a precision higher than the attachment format, but <b>must</b> be represented with the same range. When such a component is loaded via the {@code loadOp}, it will be converted into an implementation-dependent format used by the render pass. Such components <b>must</b> be converted from the render pass format, to the format of the attachment, before they are resolved or stored at the end of a render pass instance via {@code storeOp}. Conversions occur as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-numerics">Numeric Representation and Computation</a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#fundamentals-fixedconv"> Fixed-Point Data Conversions</a>.
 
 		If {@code flags} includes #ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT, then the attachment is treated as if it shares physical memory with another attachment in the same render pass. This information limits the ability of the implementation to reorder certain operations (like layout transitions and the {@code loadOp}) such that it is not improperly reordered against other uses of the same physical memory via a different attachment. This is described in more detail below.
 
@@ -3665,9 +3672,9 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
 } VkAttachmentLoadOp;</code></pre>
 
 		<ul>
-			<li>#ATTACHMENT_LOAD_OP_LOAD means the contents within the render area will be preserved.</li>
-			<li>#ATTACHMENT_LOAD_OP_CLEAR means the contents within the render area will be cleared to a uniform value, which is specified when a render pass instance is begun.</li>
-			<li>#ATTACHMENT_LOAD_OP_DONT_CARE means the contents within the area need not be preserved; the contents of the attachment will be undefined inside the render area.</li>
+			<li>#ATTACHMENT_LOAD_OP_LOAD means the previous contents of the image within the render area will be preserved. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_READ_BIT.</li>
+			<li>#ATTACHMENT_LOAD_OP_CLEAR means the contents within the render area will be cleared to a uniform value, which is specified when a render pass instance is begun. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_WRITE_BIT.</li>
+			<li>#ATTACHMENT_LOAD_OP_DONT_CARE means the previous contents within the area need not be preserved; the contents of the attachment will be undefined inside the render area. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_WRITE_BIT.</li>
 		</ul>""")
 	VkAttachmentStoreOp.member("storeOp", """specifies how the contents of color and depth components of the attachment are treated at the end of the subpass where it is last used:
 <pre><code>typedef enum VkAttachmentStoreOp {
@@ -3676,8 +3683,8 @@ val VkAttachmentDescription = struct(VULKAN_PACKAGE, "VkAttachmentDescription") 
 } VkAttachmentStoreOp;</code></pre>
 
 		<ul>
-			<li>#ATTACHMENT_STORE_OP_STORE means the contents within the render area are written to memory and will be available for reading after the render pass instance completes once the writes have been synchronized with #ACCESS_COLOR_ATTACHMENT_WRITE_BIT (for color attachments) or #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT (for depth/stencil attachments).</li>
-			<li>#ATTACHMENT_STORE_OP_DONT_CARE means the contents within the render area are not needed after rendering, and <b>may</b> be discarded; the contents of the attachment will be undefined inside the render area.</li>
+			<li>#ATTACHMENT_STORE_OP_STORE means the contents generated during the render pass and within the render area are written to memory. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_WRITE_BIT.</li>
+			<li>#ATTACHMENT_STORE_OP_DONT_CARE means the contents within the render area are not needed after rendering, and <b>may</b> be discarded; the contents of the attachment will be undefined inside the render area. For attachments with a depth/stencil format, this uses the access type #ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT. For attachments with a color format, this uses the access type #ACCESS_COLOR_ATTACHMENT_WRITE_BIT.</li>
 		</ul>""")
 	VkAttachmentLoadOp.member("stencilLoadOp", "specifies how the contents of stencil components of the attachment are treated at the beginning of the subpass where it is first used, and <b>must</b> be one of the same values allowed for {@code loadOp} above.")
 	VkAttachmentStoreOp.member("stencilStoreOp", "specifies how the contents of stencil components of the attachment are treated at the end of the last subpass where it is used, and <b>must</b> be one of the same values allowed for {@code storeOp} above.")
@@ -3705,7 +3712,7 @@ val VkAttachmentReference = struct(VULKAN_PACKAGE, "VkAttachmentReference") {
 		"""
 
 	uint32_t.member("attachment", "the index of the attachment of the render pass, and corresponds to the index of the corresponding element in the {@code pAttachments} array of the ##VkRenderPassCreateInfo structure. If any color or depth/stencil attachments are #ATTACHMENT_UNUSED, then no writes occur for those attachments.")
-	VkImageLayout.member("layout", "a {@code VkImageLayout} value specifying the layout the attachment uses during the subpass. The implementation will automatically perform layout transitions as needed between subpasses to make each subpass use the requested layouts.")
+	VkImageLayout.member("layout", "a {@code VkImageLayout} value specifying the layout the attachment uses during the subpass.")
 }
 
 val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
@@ -3714,15 +3721,15 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
 		Structure specifying a subpass description.
 
 		<h5>Description</h5>
-		The contents of an attachment within the render area become undefined at the start of a subpass S if all of the following conditions are true:
+		The contents of an attachment within the render area become undefined at the start of a subpass <b>S</b> if all of the following conditions are true:
 
 		<ul>
 			<li>The attachment is used as a color, depth/stencil, or resolve attachment in any subpass in the render pass.</li>
-			<li>There is a subpass S1 that uses or preserves the attachment, and a subpass dependency from S1 to S.</li>
-			<li>The attachment is not used or preserved in subpass S.</li>
+			<li>There is a subpass <b>S<sub>1</sub></b> that uses or preserves the attachment, and a subpass dependency from <b>S<sub>1</sub></b> to <b>S</b>.</li>
+			<li>The attachment is not used or preserved in subpass <b>S</b>.</li>
 		</ul>
 
-		Once the contents of an attachment become undefined in subpass S, they remain undefined for subpasses in subpass dependency chains starting with subpass S until they are written again. However, they remain valid for subpasses in other subpass dependency chains starting with subpass S1 if those subpasses use or preserve the attachment.
+		Once the contents of an attachment become undefined in subpass <b>S</b>, they remain undefined for subpasses in subpass dependency chains starting with subpass <b>S</b> until they are written again. However, they remain valid for subpasses in other subpass dependency chains starting with subpass <b>S<sub>1</sub></b> if those subpasses use or preserve the attachment.
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -3761,7 +3768,7 @@ val VkSubpassDescription = struct(VULKAN_PACKAGE, "VkSubpassDescription") {
 	const..VkAttachmentReference.p.buffer("pInputAttachments", "an array of ##VkAttachmentReference structures (defined below) that lists which of the render pass&#8217;s attachments <b>can</b> be read in the shader during the subpass, and what layout each attachment will be in during the subpass. Each element of the array corresponds to an input attachment unit number in the shader, i.e. if the shader declares an input variable {@code layout(input_attachment_index=X, set=Y, binding=Z)} then it uses the attachment provided in {@code pInputAttachments}[X]. Input attachments <b>must</b> also be bound to the pipeline with a descriptor set, with the input attachment descriptor written in the location (set=Y, binding=Z).")
 	AutoSize("pColorAttachments", "pResolveAttachments", optional = true)..uint32_t.member("colorAttachmentCount", "the number of color attachments.")
 	const..VkAttachmentReference.p.buffer("pColorAttachments", "an array of {@code colorAttachmentCount} ##VkAttachmentReference structures that lists which of the render pass&#8217;s attachments will be used as color attachments in the subpass, and what layout each attachment will be in during the subpass. Each element of the array corresponds to a fragment shader output location, i.e. if the shader declared an output variable {@code layout(location=X)} then it uses the attachment provided in {@code pColorAttachments}[X].")
-	nullable..const..VkAttachmentReference.p.buffer("pResolveAttachments", "{@code NULL} or an array of {@code colorAttachmentCount} ##VkAttachmentReference structures that lists which of the render pass&#8217;s attachments are resolved to at the end of the subpass, and what layout each attachment will be in during the resolve. If {@code pResolveAttachments} is not {@code NULL}, each of its elements corresponds to a color attachment (the element in {@code pColorAttachments} at the same index). At the end of each subpass, the subpass&#8217;s color attachments are resolved to corresponding resolve attachments, unless the resolve attachment index is #ATTACHMENT_UNUSED or {@code pResolveAttachments} is {@code NULL}. If the first use of an attachment in a render pass is as a resolve attachment, then the {@code loadOp} is effectively ignored as the resolve is guaranteed to overwrite all pixels in the render area.")
+	nullable..const..VkAttachmentReference.p.buffer("pResolveAttachments", "{@code NULL} or an array of {@code colorAttachmentCount} ##VkAttachmentReference structures that lists which of the render pass&#8217;s attachments are resolved to at the end of the subpass, and what layout each attachment will be in during the multisample resolve operation. If {@code pResolveAttachments} is not {@code NULL}, each of its elements corresponds to a color attachment (the element in {@code pColorAttachments} at the same index), and a multisample resolve operation is defined for each attachment. At the end of each subpass, multisample resolve operations read the subpass&#8217;s color attachments, and resolve the samples for each pixel to the same pixel location in the corresponding resolve attachments, unless the resolve attachment index is #ATTACHMENT_UNUSED. If the first use of an attachment in a render pass is as a resolve attachment, then the {@code loadOp} is effectively ignored as the resolve is guaranteed to overwrite all pixels in the render area.")
 	nullable..const..VkAttachmentReference.p.member("pDepthStencilAttachment", "a pointer to a ##VkAttachmentReference specifying which attachment will be used for depth/stencil data and the layout it will be in during the subpass. Setting the attachment index to #ATTACHMENT_UNUSED or leaving this pointer as {@code NULL} indicates that no depth/stencil attachment will be used in the subpass.")
 	AutoSize("pPreserveAttachments", optional = true)..uint32_t.member("preserveAttachmentCount", "the number of preserved attachments.")
 	const..uint32_t_p.member("pPreserveAttachments", "an array of {@code preserveAttachmentCount} render pass attachment indices describing the attachments that are not used by a subpass, but whose contents <b>must</b> be preserved throughout the subpass.")
@@ -3773,23 +3780,17 @@ val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
 		Structure specifying a subpass dependency.
 
 		<h5>Description</h5>
-		Each subpass dependency defines an execution and memory dependency between two sets of commands, with the second set depending on the first set. When {@code srcSubpass} does not equal {@code dstSubpass} then the first set of commands is:
+		If {@code srcSubpass} is equal to {@code dstSubpass} then the ##VkSubpassDependency describes a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-barriers-subpass-self-dependencies"> subpass self-dependency</a>, and only constrains the pipeline barriers allowed within a subpass instance. Otherwise, when a render pass instance which includes a subpass dependency is submitted to a queue, it defines a memory dependency between the subpasses identified by {@code srcSubpass} and {@code dstSubpass}.
 
-		<ul>
-			<li>All commands in the subpass indicated by {@code srcSubpass}, if {@code srcSubpass} is not #SUBPASS_EXTERNAL.</li>
-			<li>All commands before the render pass instance, if {@code srcSubpass} is #SUBPASS_EXTERNAL.</li>
-		</ul>
+		If {@code srcSubpass} is equal to #SUBPASS_EXTERNAL, the first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-scopes"> synchronization scope</a> includes commands submitted to the queue before the render pass instance began. Otherwise, the first set of commands includes all commands submitted as part of the subpass instance identified by {@code srcSubpass} and any load, store or multisample resolve operations on attachments used in {@code srcSubpass}. In either case, the first synchronization scope is limited to operations on the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> source stage mask</a> specified by {@code srcStageMask}.
 
-		While the corresponding second set of commands is:
+		If {@code dstSubpass} is equal to #SUBPASS_EXTERNAL, the second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-scopes"> synchronization scope</a> includes commands submitted after the render pass instance is ended. Otherwise, the second set of commands includes all commands submitted as part of the subpass instance identified by {@code dstSubpass} and any load, store or multisample resolve operations on attachments used in {@code dstSubpass}. In either case, the second synchronization scope is limited to operations on the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> destination stage mask</a> specified by {@code dstStageMask}.
 
-		<ul>
-			<li>All commands in the subpass indicated by {@code dstSubpass}, if {@code dstSubpass} is not #SUBPASS_EXTERNAL.</li>
-			<li>All commands after the render pass instance, if {@code dstSubpass} is #SUBPASS_EXTERNAL.</li>
-		</ul>
+		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access in the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> source stage mask</a> specified by {@code srcStageMask}. It is also limited to access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> source access mask</a> specified by {@code srcAccessMask}.
 
-		When {@code srcSubpass} equals {@code dstSubpass} then the first set consists of commands in the subpass before a call to #CmdPipelineBarrier() and the second set consists of commands in the subpass following that same call as described in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-barriers-subpass-self-dependencies"> Subpass Self-dependency</a> section.
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access in the pipeline stages determined by the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-masks"> destination stage mask</a> specified by {@code dstStageMask}. It is also limited to access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> destination access mask</a> specified by {@code dstAccessMask}.
 
-		The {@code srcStageMask}, {@code dstStageMask}, {@code srcAccessMask}, {@code dstAccessMask}, and {@code dependencyFlags} parameters of the dependency are interpreted the same way as for other dependencies, as described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> Synchronization and Cache Control</a>.
+		The <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-available-and-visible"> availability and visibility operations</a> defined by a subpass dependency affect the execution of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass-layout-transitions"> image layout transitions</a> within the render pass.
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -3800,7 +3801,7 @@ val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
 			<li>{@code srcSubpass} <b>must</b> be less than or equal to {@code dstSubpass}, unless one of them is #SUBPASS_EXTERNAL, to avoid cyclic dependencies and ensure a valid execution order</li>
 			<li>{@code srcSubpass} and {@code dstSubpass} <b>must</b> not both be equal to #SUBPASS_EXTERNAL</li>
 			<li>If {@code srcSubpass} is equal to {@code dstSubpass}, {@code srcStageMask} and {@code dstStageMask} <b>must</b> only contain one of #PIPELINE_STAGE_TOP_OF_PIPE_BIT, #PIPELINE_STAGE_DRAW_INDIRECT_BIT, #PIPELINE_STAGE_VERTEX_INPUT_BIT, #PIPELINE_STAGE_VERTEX_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT, #PIPELINE_STAGE_FRAGMENT_SHADER_BIT, #PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT, #PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT, #PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, or #PIPELINE_STAGE_ALL_GRAPHICS_BIT</li>
-			<li>If {@code srcSubpass} is equal to {@code dstSubpass}, the highest bit value included in {@code srcStageMask} <b>must</b> be less than or equal to the lowest bit value in {@code dstStageMask}</li>
+			<li>If {@code srcSubpass} is equal to {@code dstSubpass}, the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-order">logically latest</a> pipeline stage in {@code srcStageMask} <b>must</b> be <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-order">logically earlier</a> than or equal to the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-order">logically earliest</a> pipeline stage in {@code dstStageMask}</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -3818,20 +3819,13 @@ val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
 		##VkRenderPassCreateInfo
 		"""
 
-	uint32_t.member("srcSubpass", "{@code srcSubpass} and {@code dstSubpass} are the subpass indices of the producer and consumer subpasses, respectively. {@code srcSubpass} and {@code dstSubpass} <b>can</b> also have the special value #SUBPASS_EXTERNAL. The source subpass <b>must</b> always be a lower numbered subpass than the destination subpass (excluding external subpasses and <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-barriers-subpass-self-dependencies\">self-dependencies</a>), so that the order of subpass descriptions is a valid execution ordering, avoiding cycles in the dependency graph.")
-	uint32_t.member("dstSubpass", "see {@code srcSubpass}")
-	VkPipelineStageFlags.member("srcStageMask", """{@code srcStageMask}, {@code dstStageMask}, {@code srcAccessMask}, {@code dstAccessMask}, and {@code dependencyFlags} describe an <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-execution-and-memory-dependencies">execution and memory dependency</a> between subpasses. The bits that <b>can</b> be included in {@code dependencyFlags} are:
-<pre><code>typedef enum VkDependencyFlagBits {
-￿    VK_DEPENDENCY_BY_REGION_BIT = 0x00000001,
-} VkDependencyFlagBits;</code></pre>
-
-		<ul>
-			<li>If {@code dependencyFlags} contains #DEPENDENCY_BY_REGION_BIT, then the dependency is by-region as defined in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-execution-and-memory-dependencies">Execution And Memory Dependencies</a>.</li>
-		</ul>""")
-	VkPipelineStageFlags.member("dstStageMask", "see {@code srcStageMask}")
-	VkAccessFlags.member("srcAccessMask", "see {@code srcStageMask}")
-	VkAccessFlags.member("dstAccessMask", "see {@code srcStageMask}")
-	VkDependencyFlags.member("dependencyFlags", "see {@code srcStageMask}")
+	uint32_t.member("srcSubpass", "the subpass index of the first subpass in the dependency, or #SUBPASS_EXTERNAL.")
+	uint32_t.member("dstSubpass", "the subpass index of the second subpass in the dependency, or #SUBPASS_EXTERNAL.")
+	VkPipelineStageFlags.member("srcStageMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages-masks\">source stage mask</a>.")
+	VkPipelineStageFlags.member("dstStageMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-pipeline-stages-masks\">destination stage mask</a>.")
+	VkAccessFlags.member("srcAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
+	VkAccessFlags.member("dstAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
+	VkDependencyFlags.member("dependencyFlags", "a bitmask of {@code VkDependencyFlagBits}.")
 }
 
 val VkRenderPassCreateInfo = struct(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
@@ -3845,6 +3839,7 @@ val VkRenderPassCreateInfo = struct(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
 			<li>If the {@code attachment} member of any element of {@code pInputAttachments}, {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment}, or the attachment indexed by any element of {@code pPreserveAttachments} in any given element of {@code pSubpasses} is bound to a range of a {@code VkDeviceMemory} object that overlaps with any other attachment in any subpass (including the same subpass), the ##VkAttachmentDescription structures describing them <b>must</b> include #ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT in {@code flags}</li>
 			<li>If the {@code attachment} member of any element of {@code pInputAttachments}, {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment}, or any element of {@code pPreserveAttachments} in any given element of {@code pSubpasses} is not #ATTACHMENT_UNUSED, it <b>must</b> be less than {@code attachmentCount}</li>
 			<li>The value of any element of the {@code pPreserveAttachments} member in any given element of {@code pSubpasses} <b>must</b> not be #ATTACHMENT_UNUSED</li>
+			<li>For any member of {@code pAttachments} with a {@code loadOp} equal to #ATTACHMENT_LOAD_OP_CLEAR, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@code VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL} or {@code VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL}.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -4439,84 +4434,12 @@ val VkImageResolve = struct(VULKAN_PACKAGE, "VkImageResolve") {
 val VkMemoryBarrier = struct(VULKAN_PACKAGE, "VkMemoryBarrier") {
 	documentation =
 		"""
-		Structure specifying a memory barrier.
+		Structure specifying a global memory barrier.
 
 		<h5>Description</h5>
-		{@code srcAccessMask} and {@code dstAccessMask}, along with {@code srcStageMask} and {@code dstStageMask} from #CmdPipelineBarrier(), define the two halves of a memory dependency and an execution dependency. Memory accesses using the set of access types in {@code srcAccessMask} performed in pipeline stages in {@code srcStageMask} by the first set of commands <b>must</b> complete and be available to later commands. The side effects of the first set of commands will be visible to memory accesses using the set of access types in {@code dstAccessMask} performed in pipeline stages in {@code dstStageMask} by the second set of commands. If the barrier is by-region, these requirements only apply to invocations within the same framebuffer-space region, for pipeline stages that perform framebuffer-space work. The execution dependency guarantees that execution of work by the destination stages of the second set of commands will not begin until execution of work by the source stages of the first set of commands has completed.
+		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> source access mask</a> specified by {@code srcAccessMask}.
 
-		A common type of memory dependency is to avoid a read-after-write hazard. In this case, the source access mask and stages will include writes from a particular stage, and the destination access mask and stages will indicate how those writes will be read in subsequent commands. However, barriers <b>can</b> also express write-after-read dependencies and write-after-write dependencies, and are even useful to express read-after-read dependencies across an image layout change.
-
-		Bits which <b>can</b> be set in ##VkMemoryBarrier{@code ::srcAccessMask} and ##VkMemoryBarrier{@code ::dstAccessMask} include:
-
-		<pre><code>typedef enum VkAccessFlagBits {
-￿    VK_ACCESS_INDIRECT_COMMAND_READ_BIT = 0x00000001,
-￿    VK_ACCESS_INDEX_READ_BIT = 0x00000002,
-￿    VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT = 0x00000004,
-￿    VK_ACCESS_UNIFORM_READ_BIT = 0x00000008,
-￿    VK_ACCESS_INPUT_ATTACHMENT_READ_BIT = 0x00000010,
-￿    VK_ACCESS_SHADER_READ_BIT = 0x00000020,
-￿    VK_ACCESS_SHADER_WRITE_BIT = 0x00000040,
-￿    VK_ACCESS_COLOR_ATTACHMENT_READ_BIT = 0x00000080,
-￿    VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT = 0x00000100,
-￿    VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT = 0x00000200,
-￿    VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT = 0x00000400,
-￿    VK_ACCESS_TRANSFER_READ_BIT = 0x00000800,
-￿    VK_ACCESS_TRANSFER_WRITE_BIT = 0x00001000,
-￿    VK_ACCESS_HOST_READ_BIT = 0x00002000,
-￿    VK_ACCESS_HOST_WRITE_BIT = 0x00004000,
-￿    VK_ACCESS_MEMORY_READ_BIT = 0x00008000,
-￿    VK_ACCESS_MEMORY_WRITE_BIT = 0x00010000,
-} VkAccessFlagBits;</code></pre>
-
-		<ul>
-			<li>#ACCESS_INDIRECT_COMMAND_READ_BIT indicates that the access is an indirect command structure read as part of an indirect drawing command.</li>
-			<li>#ACCESS_INDEX_READ_BIT indicates that the access is an index buffer read.</li>
-			<li>#ACCESS_VERTEX_ATTRIBUTE_READ_BIT indicates that the access is a read via the vertex input bindings.</li>
-			<li>#ACCESS_UNIFORM_READ_BIT indicates that the access is a read via a uniform buffer or dynamic uniform buffer descriptor.</li>
-			<li>#ACCESS_INPUT_ATTACHMENT_READ_BIT indicates that the access is a read via an input attachment descriptor.</li>
-			<li>#ACCESS_SHADER_READ_BIT indicates that the access is a read from a shader via any other descriptor type.</li>
-			<li>#ACCESS_SHADER_WRITE_BIT indicates that the access is a write or atomic from a shader via the same descriptor types as in #ACCESS_SHADER_READ_BIT.</li>
-			<li>#ACCESS_COLOR_ATTACHMENT_READ_BIT indicates that the access is a read via a color attachment.</li>
-			<li>#ACCESS_COLOR_ATTACHMENT_WRITE_BIT indicates that the access is a write via a color or resolve attachment.</li>
-			<li>#ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT indicates that the access is a read via a depth/stencil attachment.</li>
-			<li>#ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT indicates that the access is a write via a depth/stencil attachment.</li>
-			<li>#ACCESS_TRANSFER_READ_BIT indicates that the access is a read from a transfer (copy, blit, resolve, etc.) operation. For the complete set of transfer operations, see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>.</li>
-			<li>#ACCESS_TRANSFER_WRITE_BIT indicates that the access is a write from a transfer (copy, blit, resolve, etc.) operation. For the complete set of transfer operations, see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>.</li>
-			<li>#ACCESS_HOST_READ_BIT indicates that the access is a read via the host.</li>
-			<li>#ACCESS_HOST_WRITE_BIT indicates that the access is a write via the host.</li>
-			<li>#ACCESS_MEMORY_READ_BIT indicates that the access is a read via a non-specific unit attached to the memory. This unit <b>may</b> be external to the Vulkan device or otherwise not part of the core Vulkan pipeline. When included in {@code dstAccessMask}, all writes using access types in {@code srcAccessMask} performed by pipeline stages in {@code srcStageMask} <b>must</b> be visible in memory.</li>
-			<li>#ACCESS_MEMORY_WRITE_BIT indicates that the access is a write via a non-specific unit attached to the memory. This unit <b>may</b> be external to the Vulkan device or otherwise not part of the core Vulkan pipeline. When included in {@code srcAccessMask}, all access types in {@code dstAccessMask} from pipeline stages in {@code dstStageMask} will observe the side effects of commands that executed before the barrier. When included in {@code dstAccessMask} all writes using access types in {@code srcAccessMask} performed by pipeline stages in {@code srcStageMask} <b>must</b> be visible in memory.</li>
-		</ul>
-
-		Color attachment reads and writes are automatically (without memory or execution dependencies) coherent and ordered against themselves and each other for a given sample within a subpass of a render pass instance, executing in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#primrast-order">rasterization order</a>. Similarly, depth/stencil attachment reads and writes are automatically coherent and ordered against themselves and each other in the same circumstances.
-
-		Shader reads and/or writes through two variables (in the same or different shader invocations) decorated with {@code Coherent} and which use the same image view or buffer view are automatically coherent with each other, but require execution dependencies if a specific order is desired. Similarly, shader atomic operations are coherent with each other and with {@code Coherent} variables. Non-{@code Coherent} shader memory accesses require memory dependencies for writes to be available and reads to be visible.
-
-		Certain memory access types are only supported on queues that support a particular set of operations. The following table lists, for each access flag, which queue capability flag <b>must</b> be supported by the queue. When multiple flags are enumerated in the second column of the table it means that the access type is supported on the queue if it supports any of the listed capability flags. For further details on queue capabilities see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-physical-device-enumeration">Physical Device Enumeration</a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#devsandqueues-queues">Queues</a>.
-
-		<h6>Supported access flags</h6>
-		<table class="lwjgl">
-			<thead><tr><th>Access flag</th><th>Required queue capability flag</th></tr></thead>
-			<tbody>
-				<tr><td>#ACCESS_INDIRECT_COMMAND_READ_BIT</td><td>#QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT</td></tr>
-				<tr><td>#ACCESS_INDEX_READ_BIT</td><td>#QUEUE_GRAPHICS_BIT</td></tr>
-				<tr><td>#ACCESS_VERTEX_ATTRIBUTE_READ_BIT</td><td>#QUEUE_GRAPHICS_BIT</td></tr>
-				<tr><td>#ACCESS_UNIFORM_READ_BIT</td><td>#QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT</td></tr>
-				<tr><td>#ACCESS_INPUT_ATTACHMENT_READ_BIT</td><td>#QUEUE_GRAPHICS_BIT</td></tr>
-				<tr><td>#ACCESS_SHADER_READ_BIT</td><td>#QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT</td></tr>
-				<tr><td>#ACCESS_SHADER_WRITE_BIT</td><td>#QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT</td></tr>
-				<tr><td>#ACCESS_COLOR_ATTACHMENT_READ_BIT</td><td>#QUEUE_GRAPHICS_BIT</td></tr>
-				<tr><td>#ACCESS_COLOR_ATTACHMENT_WRITE_BIT</td><td>#QUEUE_GRAPHICS_BIT</td></tr>
-				<tr><td>#ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT</td><td>#QUEUE_GRAPHICS_BIT</td></tr>
-				<tr><td>#ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT</td><td>#QUEUE_GRAPHICS_BIT</td></tr>
-				<tr><td>#ACCESS_TRANSFER_READ_BIT</td><td>#QUEUE_GRAPHICS_BIT, #QUEUE_COMPUTE_BIT or #QUEUE_TRANSFER_BIT</td></tr>
-				<tr><td>#ACCESS_TRANSFER_WRITE_BIT</td><td>#QUEUE_GRAPHICS_BIT, #QUEUE_COMPUTE_BIT or #QUEUE_TRANSFER_BIT</td></tr>
-				<tr><td>#ACCESS_HOST_READ_BIT</td><td>None</td></tr>
-				<tr><td>#ACCESS_HOST_WRITE_BIT</td><td>None</td></tr>
-				<tr><td>#ACCESS_MEMORY_READ_BIT</td><td>None</td></tr>
-				<tr><td>#ACCESS_MEMORY_WRITE_BIT</td><td>None</td></tr>
-			</tbody>
-		</table>
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> destination access mask</a> specified by {@code dstAccessMask}.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -4532,14 +4455,23 @@ val VkMemoryBarrier = struct(VULKAN_PACKAGE, "VkMemoryBarrier") {
 
 	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-	VkAccessFlags.member("srcAccessMask", "a bitmask of the classes of memory accesses performed by the first set of commands that will participate in the dependency.")
-	VkAccessFlags.member("dstAccessMask", "a bitmask of the classes of memory accesses performed by the second set of commands that will participate in the dependency.")
+	VkAccessFlags.member("srcAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
+	VkAccessFlags.member("dstAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
 }
 
 val VkBufferMemoryBarrier = struct(VULKAN_PACKAGE, "VkBufferMemoryBarrier") {
 	documentation =
 		"""
-		Structure specifying the parameters of a buffer memory barrier.
+		Structure specifying a buffer memory barrier.
+
+		<h5>Description</h5>
+		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to the memory backing the specified buffer range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> source access mask</a> specified by {@code srcAccessMask}.
+
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to the memory backing the specified buffer range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> destination access mask</a> specified by {@code dstAccessMask}.
+
+		If {@code srcQueueFamilyIndex} is not equal to {@code dstQueueFamilyIndex}, and {@code srcQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-queue-transfers-release"> queue family release operation</a> for the specified buffer range, and the second access scope includes no access, as if {@code dstAccessMask} was 0.
+
+		If {@code dstQueueFamilyIndex} is not equal to {@code srcQueueFamilyIndex}, and {@code dstQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-queue-transfers-acquire"> queue family acquire operation</a> for the specified buffer range, and the first access scope includes no access, as if {@code srcAccessMask} was 0.
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -4566,10 +4498,10 @@ val VkBufferMemoryBarrier = struct(VULKAN_PACKAGE, "VkBufferMemoryBarrier") {
 
 	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-	VkAccessFlags.member("srcAccessMask", "a bitmask of the classes of memory accesses performed by the first set of commands that will participate in the dependency.")
-	VkAccessFlags.member("dstAccessMask", "a bitmask of the classes of memory accesses performed by the second set of commands that will participate in the dependency.")
-	uint32_t.member("srcQueueFamilyIndex", "the queue family that is relinquishing ownership of the range of {@code buffer} to another queue, or #QUEUE_FAMILY_IGNORED if there is no transfer of ownership.")
-	uint32_t.member("dstQueueFamilyIndex", "the queue family that is acquiring ownership of the range of {@code buffer} from another queue, or #QUEUE_FAMILY_IGNORED if there is no transfer of ownership.")
+	VkAccessFlags.member("srcAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
+	VkAccessFlags.member("dstAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
+	uint32_t.member("srcQueueFamilyIndex", "the source queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>")
+	uint32_t.member("dstQueueFamilyIndex", "the destination queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>")
 	VkBuffer.member("buffer", "a handle to the buffer whose backing memory is affected by the barrier.")
 	VkDeviceSize.member("offset", "an offset in bytes into the backing memory for {@code buffer}; this is relative to the base offset as bound to the buffer (see #BindBufferMemory()).")
 	VkDeviceSize.member("size", "a size in bytes of the affected area of backing memory for {@code buffer}, or #WHOLE_SIZE to use the range from {@code offset} to the end of the buffer.")
@@ -4581,13 +4513,15 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 		Structure specifying the parameters of an image memory barrier.
 
 		<h5>Description</h5>
-		If {@code oldLayout} differs from {@code newLayout}, a layout transition occurs as part of the image memory barrier, affecting the data contained in the region of the image defined by the {@code subresourceRange}. If {@code oldLayout} is #IMAGE_LAYOUT_UNDEFINED, then the data is undefined after the layout transition. This <b>may</b> allow a more efficient transition, since the data <b>may</b> be discarded. The layout transition <b>must</b> occur after all operations using the old layout are completed and before all operations using the new layout are started. This is achieved by ensuring that there is a memory dependency between previous accesses and the layout transition, as well as between the layout transition and subsequent accesses, where the layout transition occurs between the two halves of a memory dependency in an image memory barrier.
+		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to the memory backing the specified image subresource range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> source access mask</a> specified by {@code srcAccessMask}.
 
-		Layout transitions that are performed via image memory barriers are automatically ordered against other layout transitions, including those that occur as part of a render pass instance.
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to the memory backing the specified image subresource range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> destination access mask</a> specified by {@code dstAccessMask}.
 
-		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-		See <<resources-image-layouts>> for details on available image layouts and their usages.
-		</div>
+		If {@code srcQueueFamilyIndex} is not equal to {@code dstQueueFamilyIndex}, and {@code srcQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-queue-transfers-release"> queue family release operation</a> for the specified image subresource range, and the second access scope includes no access, as if {@code dstAccessMask} was 0.
+
+		If {@code dstQueueFamilyIndex} is not equal to {@code srcQueueFamilyIndex}, and {@code dstQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-queue-transfers-acquire"> queue family acquire operation</a> for the specified image subresource range, and the first access scope includes no access, as if {@code srcAccessMask} was 0.
+
+		If {@code oldLayout} is not equal to {@code newLayout}, then the memory barrier defines an <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-image-layout-transitions"> image layout transition</a> for the specified image subresource range. Layout transitions that are performed via image memory barriers automatically happen-after layout transitions previously submitted to the same queue, and automatically happen-before layout transitions subsequently submitted to the same queue; this includes layout transitions that occur as part of a render pass instance, in both cases.
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -4624,12 +4558,12 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 
 	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-	VkAccessFlags.member("srcAccessMask", "a bitmask of the classes of memory accesses performed by the first set of commands that will participate in the dependency.")
-	VkAccessFlags.member("dstAccessMask", "a bitmask of the classes of memory accesses performed by the second set of commands that will participate in the dependency.")
-	VkImageLayout.member("oldLayout", "describes the current layout of the image subresource(s).")
-	VkImageLayout.member("newLayout", "describes the new layout of the image subresource(s).")
-	uint32_t.member("srcQueueFamilyIndex", "the queue family that is relinquishing ownership of the image subresource(s) to another queue, or #QUEUE_FAMILY_IGNORED if there is no transfer of ownership).")
-	uint32_t.member("dstQueueFamilyIndex", "the queue family that is acquiring ownership of the image subresource(s) from another queue, or #QUEUE_FAMILY_IGNORED if there is no transfer of ownership).")
+	VkAccessFlags.member("srcAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
+	VkAccessFlags.member("dstAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
+	VkImageLayout.member("oldLayout", "the old layout in an <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-image-layout-transitions\">image layout transition</a>.")
+	VkImageLayout.member("newLayout", "the new layout in an <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-image-layout-transitions\">image layout transition</a>.")
+	uint32_t.member("srcQueueFamilyIndex", "the source queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>")
+	uint32_t.member("dstQueueFamilyIndex", "the destination queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>")
 	VkImage.member("image", "a handle to the image whose backing memory is affected by the barrier.")
 	VkImageSubresourceRange.member("subresourceRange", "describes an area of the backing memory for {@code image} (see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#resources-image-views\">the “Image Views” section</a> for the description of ##VkImageSubresourceRange), as well as the set of image subresources whose image layouts are modified.")
 }
@@ -4640,7 +4574,7 @@ val VkRenderPassBeginInfo = struct(VULKAN_PACKAGE, "VkRenderPassBeginInfo") {
 		Structure specifying render pass begin info.
 
 		<h5>Description</h5>
-		{@code renderArea} is the render area that is affected by the render pass instance. The effects of attachment load, store and resolve operations are restricted to the pixels whose x and y coordinates fall within the render area on all attachments. The render area extends to all layers of {@code framebuffer}. The application <b>must</b> ensure (using scissor if necessary) that all rendering is contained within the render area, otherwise the pixels outside of the render area become undefined and shader side effects <b>may</b> occur for fragments outside the render area. The render area <b>must</b> be contained within the framebuffer dimensions.
+		{@code renderArea} is the render area that is affected by the render pass instance. The effects of attachment load, store and multisample resolve operations are restricted to the pixels whose x and y coordinates fall within the render area on all attachments. The render area extends to all layers of {@code framebuffer}. The application <b>must</b> ensure (using scissor if necessary) that all rendering is contained within the render area, otherwise the pixels outside of the render area become undefined and shader side effects <b>may</b> occur for fragments outside the render area. The render area <b>must</b> be contained within the framebuffer dimensions.
 
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
 		There <b>may</b> be a performance cost for using a render area smaller than the framebuffer, unless it matches the render area granularity for the render pass.

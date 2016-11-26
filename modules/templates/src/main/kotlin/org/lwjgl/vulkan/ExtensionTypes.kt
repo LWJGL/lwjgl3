@@ -15,6 +15,8 @@ val VkSwapchainKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSwapchainKHR")
 val VkDisplayKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDisplayKHR")
 val VkDisplayModeKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDisplayModeKHR")
 val VkDebugReportCallbackEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDebugReportCallbackEXT")
+val VkObjectTableNVX = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkObjectTableNVX")
+val VkIndirectCommandsLayoutNVX = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkIndirectCommandsLayoutNVX")
 
 // Enum types
 val VkSurfaceTransformFlagBitsKHR = "VkSurfaceTransformFlagBitsKHR".enumType
@@ -28,6 +30,10 @@ val VkRasterizationOrderAMD = "VkRasterizationOrderAMD".enumType
 val VkExternalMemoryHandleTypeFlagBitsNV = "VkExternalMemoryHandleTypeFlagBitsNV".enumType
 val VkExternalMemoryFeatureFlagBitsNV = "VkExternalMemoryFeatureFlagBitsNV".enumType
 val VkValidationCheckEXT = "VkValidationCheckEXT".enumType
+val VkIndirectCommandsLayoutUsageFlagBitsNVX = "VkIndirectCommandsLayoutUsageFlagBitsNVX".enumType
+val VkIndirectCommandsTokenTypeNVX = "VkIndirectCommandsTokenTypeNVX".enumType
+val VkObjectEntryUsageFlagBitsNVX = "VkObjectEntryUsageFlagBitsNVX".enumType
+val VkObjectEntryTypeNVX = "VkObjectEntryTypeNVX".enumType
 
 // Bitmask types
 val VkSurfaceTransformFlagsKHR = typedef(VkFlags, "VkSurfaceTransformFlagsKHR")
@@ -41,6 +47,8 @@ val VkWin32SurfaceCreateFlagsKHR = typedef(VkFlags, "VkWin32SurfaceCreateFlagsKH
 val VkDebugReportFlagsEXT = typedef(VkFlags, "VkDebugReportFlagsEXT")
 val VkExternalMemoryHandleTypeFlagsNV = typedef(VkFlags, "VkExternalMemoryHandleTypeFlagsNV")
 val VkExternalMemoryFeatureFlagsNV = typedef(VkFlags, "VkExternalMemoryFeatureFlagsNV")
+val VkIndirectCommandsLayoutUsageFlagsNVX = typedef(VkFlags, "VkIndirectCommandsLayoutUsageFlagsNVX")
+val VkObjectEntryUsageFlagsNVX = typedef(VkFlags, "VkObjectEntryUsageFlagsNVX")
 
 // Function pointer types
 val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
@@ -448,12 +456,17 @@ val VkXlibSurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkXlibSurfaceCreateInfo
 		"""
 		Structure specifying parameters of a newly created Xlib surface object.
 
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code dpy} <b>must</b> point to a valid Xlib {@code Display}.</li>
+			<li>{@code window} <b>must</b> be a valid Xlib {@code Window}.</li>
+		</ul>
+
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR</li>
 			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code flags} <b>must</b> be 0</li>
-			<li>{@code dpy} <b>must</b> be a pointer to a {@code Display} value</li>
 		</ul>
 
 		<h5>See Also</h5>
@@ -472,6 +485,12 @@ val VkWin32SurfaceCreateInfoKHR = struct(VULKAN_PACKAGE, "VkWin32SurfaceCreateIn
 	documentation =
 		"""
 		Structure specifying parameters of a newly created Win32 surface object.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code hinstance} <b>must</b> be a valid Win32 {@code HINSTANCE}.</li>
+			<li>{@code hwnd} <b>must</b> be a valid Win32 {@code HWND}.</li>
+		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -496,8 +515,19 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
 		"""
 		Structure specifying parameters of a newly created debug report callback.
 
+		<h5>Description</h5>
+		For each {@code VkDebugReportCallbackEXT} that is created the flags determine when that function is called. A callback will be made for issues that match any bit set in its flags. The callback will come directly from the component that detected the event, unless some other layer intercepts the calls for its own purposes (filter them in different way, log to system error log, etc.) An application may receive multiple callbacks if multiple {@code VkDebugReportCallbackEXT} objects were created. A callback will always be executed in the same thread as the originating Vulkan call. A callback may be called from multiple threads simultaneously (if the application is making Vulkan calls from multiple threads).
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkDebugReportFlagBitsEXT} values</li>
+			<li>{@code flags} <b>must</b> not be 0</li>
+		</ul>
+
 		<h5>See Also</h5>
-		##VkDebugReportCallbackEXT, {@code VkDebugReportFlagsEXT}, {@code VkStructureType}, #CreateDebugReportCallbackEXT()
+		##VkDebugReportCallbackEXT, #CreateDebugReportCallbackEXT()
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
@@ -511,11 +541,15 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
 ￿    VK_DEBUG_REPORT_DEBUG_BIT_EXT = 0x00000010,
 } VkDebugReportFlagBitsEXT;</code></pre>
 
-		Description
-
-		* #DEBUG_REPORT_ERROR_BIT_EXT indicates an error that may cause     undefined results, including an application crash.   * #DEBUG_REPORT_WARNING_BIT_EXT indicates an unexpected use.     E.g. Not destroying objects prior to destroying the containing object or     potential inconsistencies between descriptor set layout and the layout     in the corresponding shader, etc.   * #DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT indicates a     potentially non-optimal use of Vulkan.     E.g. using #CmdClearColorImage() when a RenderPass load_op would     have worked.   * #DEBUG_REPORT_INFORMATION_BIT_EXT indicates an informational     message such as resource details that may be handy when debugging an     application.   * #DEBUG_REPORT_DEBUG_BIT_EXT indicates diagnostic information     from the loader and layers.    * {@code pfnCallback} is the application callback function to call.   * {@code pUserData} is user data to be passed to the callback.""")
-	PFN_vkDebugReportCallbackEXT.member("pfnCallback", "")
-	nullable..voidptr.member("pUserData", "")
+		<ul>
+			<li>#DEBUG_REPORT_ERROR_BIT_EXT indicates an error that may cause undefined results, including an application crash.</li>
+			<li>#DEBUG_REPORT_WARNING_BIT_EXT indicates an unexpected use. E.g. Not destroying objects prior to destroying the containing object or potential inconsistencies between descriptor set layout and the layout in the corresponding shader, etc.</li>
+			<li>#DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT indicates a potentially non-optimal use of Vulkan. E.g. using #CmdClearColorImage() when a RenderPass load_op would have worked.</li>
+			<li>#DEBUG_REPORT_INFORMATION_BIT_EXT indicates an informational message such as resource details that may be handy when debugging an application.</li>
+			<li>#DEBUG_REPORT_DEBUG_BIT_EXT indicates diagnostic information from the loader and layers.</li>
+		</ul>""")
+	PFN_vkDebugReportCallbackEXT.member("pfnCallback", "the application callback function to call.")
+	nullable..voidptr.member("pUserData", "user data to be passed to the callback.")
 }
 
 val VkPipelineRasterizationStateRasterizationOrderAMD = struct(VULKAN_PACKAGE, "VkPipelineRasterizationStateRasterizationOrderAMD") {
@@ -694,24 +728,10 @@ val VkDedicatedAllocationMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkDedica
 	VkBuffer.member("buffer", "{@code VK_NULL_HANDLE} or a handle of a buffer which this memory will be bound to.")
 }
 
-val VkExternalImageFormatPropertiesNV = struct(VULKAN_PACKAGE, "VkExternalImageFormatPropertiesNV") {
+val VkExternalImageFormatPropertiesNV = struct(VULKAN_PACKAGE, "VkExternalImageFormatPropertiesNV", mutable = false) {
 	documentation =
 		"""
 		Structure specifying external image format properties.
-
-		<h5>Valid Usage (Implicit)</h5>
-		<ul>
-			<li>{@code imageFormatProperties} <b>must</b> be a valid ##VkImageFormatProperties structure</li>
-			<li>{@code externalMemoryFeatures} <b>must</b> be a valid combination of {@code VkExternalMemoryFeatureFlagBitsNV} values</li>
-			<li>{@code externalMemoryFeatures} <b>must</b> not be 0</li>
-			<li>{@code exportFromImportedHandleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
-			<li>{@code exportFromImportedHandleTypes} <b>must</b> not be 0</li>
-			<li>{@code compatibleHandleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
-			<li>{@code compatibleHandleTypes} <b>must</b> not be 0</li>
-		</ul>
-
-		<h5>See Also</h5>
-		##VkImageFormatProperties, #GetPhysicalDeviceExternalImageFormatPropertiesNV()
 		"""
 
 	VkImageFormatProperties.member("imageFormatProperties", "will be filled in as when calling #GetPhysicalDeviceImageFormatProperties(), but the values returned <b>may</b> vary depending on the external handle type requested.")
@@ -730,7 +750,6 @@ val VkExternalMemoryImageCreateInfoNV = struct(VULKAN_PACKAGE, "VkExternalMemory
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV</li>
 			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
-			<li>{@code handleTypes} <b>must</b> not be 0</li>
 		</ul>
 		"""
 
@@ -749,7 +768,6 @@ val VkExportMemoryAllocateInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryAllocat
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV</li>
 			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
-			<li>{@code handleTypes} <b>must</b> not be 0</li>
 		</ul>
 		"""
 
@@ -816,13 +834,13 @@ val VkExportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryWin3
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV</li>
 			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
-			<li>{@code pAttributes} <b>must</b> be a pointer to a valid {@code SECURITY_ATTRIBUTES} value</li>
+			<li>If {@code pAttributes} is not {@code NULL}, {@code pAttributes} <b>must</b> be a pointer to a valid {@code SECURITY_ATTRIBUTES} value</li>
 		</ul>
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-	const..SECURITY_ATTRIBUTES.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
+	nullable..const..SECURITY_ATTRIBUTES.p.member("pAttributes", "a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.")
 	DWORD.member("dwAccess", "a {@code DWORD} specifying access rights of the handle.")
 }
 
@@ -880,4 +898,487 @@ val VkValidationFlagsEXT = struct(VULKAN_PACKAGE, "VkValidationFlagsEXT") {
 		<ul>
 			<li>#VALIDATION_CHECK_ALL_EXT disables all validation checks.</li>
 		</ul>""")
+}
+
+val VkDeviceGeneratedCommandsFeaturesNVX = struct(VULKAN_PACKAGE, "VkDeviceGeneratedCommandsFeaturesNVX") {
+	documentation =
+		"""
+		Structure specifying physical device support.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_FEATURES_NVX</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#GetPhysicalDeviceGeneratedCommandsPropertiesNVX()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkBool32.member("computeBindingPointSupport", "indicates whether the {@code VkObjectTableNVX} supports entries with #OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX bit set and {@code VkIndirectCommandsLayoutNVX} supports #PIPELINE_BIND_POINT_COMPUTE.")
+}
+
+val VkDeviceGeneratedCommandsLimitsNVX = struct(VULKAN_PACKAGE, "VkDeviceGeneratedCommandsLimitsNVX") {
+	documentation =
+		"""
+		Structure specifying physical device limits.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_LIMITS_NVX</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#GetPhysicalDeviceGeneratedCommandsPropertiesNVX()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	uint32_t.member("maxIndirectCommandsLayoutTokenCount", "the maximum number of tokens in {@code VkIndirectCommandsLayoutNVX}.")
+	uint32_t.member("maxObjectEntryCounts", "the maximum number of entries per resource type in {@code VkObjectTableNVX}.")
+	uint32_t.member("minSequenceCountBufferOffsetAlignment", "the minimum alignment for memory addresses optionally used in #CmdProcessCommandsNVX().")
+	uint32_t.member("minSequenceIndexBufferOffsetAlignment", "the minimum alignment for memory addresses optionally used in #CmdProcessCommandsNVX().")
+	uint32_t.member("minCommandsTokenBufferOffsetAlignment", "the minimum alignment for memory addresses optionally used in #CmdProcessCommandsNVX().")
+}
+
+val VkIndirectCommandsTokenNVX = struct(VULKAN_PACKAGE, "VkIndirectCommandsTokenNVX") {
+	documentation =
+		"""
+		Structure specifying parameters for the reservation of command buffer space.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The {@code buffer}&#8217;s usage flag <b>must</b> have the #BUFFER_USAGE_INDIRECT_BUFFER_BIT bit set.</li>
+			<li>The {@code offset} <b>must</b> be aligned to ##VkDeviceGeneratedCommandsLimitsNVX{@code ::minCommandsTokenBufferOffsetAlignment}.</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code tokenType} <b>must</b> be a valid {@code VkIndirectCommandsTokenTypeNVX} value</li>
+			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkCmdProcessCommandsInfoNVX
+		"""
+
+	VkIndirectCommandsTokenTypeNVX.member("tokenType", "specifies the token command type.")
+	VkBuffer.member("buffer", "specifies the {@code VkBuffer} storing the functional arguments for each squence. These argumetns can be written by the device.")
+	VkDeviceSize.member("offset", "specified an offset into {@code buffer} where the arguments start.")
+}
+
+val VkIndirectCommandsLayoutTokenNVX = struct(VULKAN_PACKAGE, "VkIndirectCommandsLayoutTokenNVX") {
+	documentation =
+		"""
+		Struct specifying the details of an indirect command layout token.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code bindingUnit} must stay within device supported limits for the appropriate commands.</li>
+			<li>{@code dynamicCount} must stay within device supported limits for the appropriate commands.</li>
+			<li>{@code divisor} must greater <em>0</em> and power of two.</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code tokenType} <b>must</b> be a valid {@code VkIndirectCommandsTokenTypeNVX} value</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkIndirectCommandsLayoutCreateInfoNVX
+		"""
+
+	VkIndirectCommandsTokenTypeNVX.member("tokenType", "")
+	uint32_t.member("bindingUnit", "has a different meaning depending on the type, please refer pseudo code further down for details.")
+	uint32_t.member("dynamicCount", "has a different meaning depending on the type, please refer pseudo code further down for details.")
+	uint32_t.member("divisor", "defines the rate at which the input data buffers are accessed.")
+}
+
+val VkIndirectCommandsLayoutCreateInfoNVX = struct(VULKAN_PACKAGE, "VkIndirectCommandsLayoutCreateInfoNVX") {
+	documentation =
+		"""
+		Structure specifying the parameters of a newly created indirect commands layout object.
+
+		<h5>Description</h5>
+		Bits which <b>can</b> be set in {@code flags} are:
+
+		<pre><code>typedef enum VkIndirectCommandsLayoutUsageFlagBitsNVX {
+￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX = 0x00000001,
+￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX = 0x00000002,
+￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX = 0x00000004,
+￿    VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX = 0x00000008,
+} VkIndirectCommandsLayoutUsageFlagBitsNVX;</code></pre>
+
+		<ul>
+			<li>#INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX indicates that the processing of sequences <b>can</b> happen at an implementation-dependent order, which is not guaranteed to be coherent across multiple invocations.</li>
+			<li>#INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX indicates that there is likely a high difference between allocated number of sequences and actually used.</li>
+			<li>#INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX indicates that there is likely many draw or dispatch calls that are zero-sized (zero grid dimension, no primitives to render).</li>
+			<li>#INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX indicates that the input data for the sequences is not implicitly indexed from 0..sequencesUsed but a user provided {@code VkBuffer} encoding the index is provided.</li>
+		</ul>
+
+		The following code illustrates some of the key flags:
+
+		<pre><code>void cmdProcessAllSequences(cmd, objectTable, indirectCommandsLayout, pIndirectCommandsTokens, sequencesCount, indexbuffer, indexbufferoffset)
+{
+￿  for (s = 0; s < sequencesCount; s++)
+￿  {
+￿    sequence = s;
+￿
+￿    if (indirectCommandsLayout.flags & VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX) {
+￿      sequence = incoherent_implementation_dependent_permutation[ sequence ];
+￿    }
+￿    if (indirectCommandsLayout.flags & VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX) {
+￿      sequence = indexbuffer.load_uint32( sequence * sizeof(uint32_t) + indexbufferoffset);
+￿    }
+￿
+￿    cmdProcessSequence( cmd, objectTable, indirectCommandsLayout, pIndirectCommandsTokens, sequence );
+￿  }
+}</code></pre>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code tokenCount} <b>must</b> be greater than 0 and below ##VkDeviceGeneratedCommandsLimitsNVX{@code ::maxIndirectCommandsLayoutTokenCount}</li>
+			<li>If the ##VkDeviceGeneratedCommandsFeaturesNVX{@code ::computeBindingPointSupport} feature is not enabled, then {@code pipelineBindPoint} <b>must</b> not be #PIPELINE_BIND_POINT_COMPUTE</li>
+			<li>If {@code pTokens} contains an entry of #INDIRECT_COMMANDS_TOKEN_PIPELINE_NVX it <b>must</b> be the first element of the array and there <b>must</b> be only a single element of such token type.</li>
+			<li>All state binding tokens in {@code pTokens} <b>must</b> occur prior work provoking tokens (#INDIRECT_COMMANDS_TOKEN_DRAW_NVX, #INDIRECT_COMMANDS_TOKEN_DRAW_INDEXED_NVX, #INDIRECT_COMMANDS_TOKEN_DISPATCH_NVX).</li>
+			<li>The content of {@code pTokens} <b>must</b> include at least one work provoking token.</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkIndirectCommandsLayoutUsageFlagBitsNVX} values</li>
+			<li>{@code flags} <b>must</b> not be 0</li>
+			<li>{@code pTokens} <b>must</b> be a pointer to an array of {@code tokenCount} valid ##VkIndirectCommandsLayoutTokenNVX structures</li>
+			<li>{@code tokenCount} <b>must</b> be greater than 0</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkIndirectCommandsLayoutTokenNVX, #CreateIndirectCommandsLayoutNVX()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkPipelineBindPoint.member("pipelineBindPoint", "the {@code VkPipelineBindPoint} that this layout targets.")
+	VkIndirectCommandsLayoutUsageFlagsNVX.member("flags", "a bitmask providing usage hints of this layout. See {@code VkIndirectCommandsLayoutUsageFlagBitsNVX} below for a description of the supported bits.")
+	AutoSize("pTokens")..uint32_t.member("tokenCount", "the length of the individual command sequnce.")
+	const..VkIndirectCommandsLayoutTokenNVX.p.buffer("pTokens", "an array describing each command token in detail. See {@code VkIndirectCommandsTokenTypeNVX} and ##VkIndirectCommandsLayoutTokenNVX below for details.")
+}
+
+val VkCmdProcessCommandsInfoNVX = struct(VULKAN_PACKAGE, "VkCmdProcessCommandsInfoNVX") {
+	documentation =
+		"""
+		Structure specifying parameters for the generation of commands.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The provided {@code objectTable} <b>must</b> include all objects referenced by the generation process.</li>
+			<li>{@code indirectCommandsTokenCount} must match the {@code indirectCommandsLayout}&#8217;s tokenCount.</li>
+			<li>The {@code tokenType} member of each entry in the {@code pIndirectCommandsTokens} array must match the values used at creation time of {@code indirectCommandsLayout}</li>
+			<li>If {@code targetCommandBuffer} is provided, it must have reserved command space.</li>
+			<li>If {@code targetCommandBuffer} is provided, the {@code objectTable} <b>must</b> match the reservation&#8217;s objectTable and <b>must</b> have had all referenced objects registered at reservation time.</li>
+			<li>If {@code targetCommandBuffer} is provided, the {@code indirectCommandsLayout} <b>must</b> match the reservation&#8217;s indirectCommandsLayout.</li>
+			<li>If {@code targetCommandBuffer} is provided, the {@code maxSequencesCount} <b>must</b> not exceed the reservation&#8217;s maxSequencesCount.</li>
+			<li>If {@code sequencesCountBuffer} is used, its usage flag <b>must</b> have #BUFFER_USAGE_INDIRECT_BUFFER_BIT bit set.</li>
+			<li>If {@code sequencesCountBuffer} is used, {@code sequencesCountOffset} must be aligned to ##VkDeviceGeneratedCommandsLimitsNVX{@code ::minSequenceCountBufferOffsetAlignment}.</li>
+			<li>If {@code sequencesIndexBuffer} is used, its usage flag <b>must</b> have #BUFFER_USAGE_INDIRECT_BUFFER_BIT bit set.</li>
+			<li>If {@code sequencesIndexBuffer} is used, {@code sequencesIndexOffset} must be aligned to ##VkDeviceGeneratedCommandsLimitsNVX{@code ::minSequenceIndexBufferOffsetAlignment}.</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CMD_PROCESS_COMMANDS_INFO_NVX</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code objectTable} <b>must</b> be a valid {@code VkObjectTableNVX} handle</li>
+			<li>{@code indirectCommandsLayout} <b>must</b> be a valid {@code VkIndirectCommandsLayoutNVX} handle</li>
+			<li>{@code pIndirectCommandsTokens} <b>must</b> be a pointer to an array of {@code tokenCount} valid ##VkIndirectCommandsTokenNVX structures</li>
+			<li>If {@code targetCommandBuffer} is not {@code NULL}, {@code targetCommandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+			<li>If {@code sequencesCountBuffer} is not #NULL_HANDLE, {@code sequencesCountBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>If {@code sequencesIndexBuffer} is not #NULL_HANDLE, {@code sequencesIndexBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>Each of {@code indirectCommandsLayout}, {@code objectTable}, {@code sequencesCountBuffer}, {@code sequencesIndexBuffer}, and {@code targetCommandBuffer} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code objectTable} <b>must</b> be externally synchronized</li>
+			<li>Host access to {@code targetCommandBuffer} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkIndirectCommandsTokenNVX, #CmdProcessCommandsNVX()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkObjectTableNVX.member("objectTable", "the {@code VkObjectTableNVX} to be used for the generation process. Only registered objects at the time #CmdReserveSpaceForCommandsNVX() is called, will be taken into account for the reservation.")
+	VkIndirectCommandsLayoutNVX.member("indirectCommandsLayout", "the {@code VkIndirectCommandsLayoutNVX} that provides the command sequence to generate.")
+	uint32_t.member("indirectCommandsTokenCount", "defines the number of input tokens used.")
+	const..VkIndirectCommandsTokenNVX.p.buffer("pIndirectCommandsTokens", "provides an array of ##VkIndirectCommandsTokenNVX that reference the input data for each token command.")
+	uint32_t.member("maxSequencesCount", "the maximum number of sequences for which command buffer space will be reserved. If {@code sequencesCountBuffer} is {@code NULL}, this is also the actual number of sequences generated.")
+	nullable..VkCommandBuffer.member("targetCommandBuffer", "<b>can</b> be the secondary {@code VkCommandBuffer} in which the commands should be recorded. If {@code NULL} an implicit reservation as well as execution takes place on the processing {@code VkCommandBuffer}.")
+	VkBuffer.member("sequencesCountBuffer", "<b>can</b> be {@code VkBuffer} from which the actual amount of sequences is sourced from as ftext:uint32_t value.")
+	VkDeviceSize.member("sequencesCountOffset", "the byte offset into {@code sequencesCountBuffer} where the count value is stored.")
+	VkBuffer.member("sequencesIndexBuffer", "<b>must</b> be set if {@code indirectCommandsLayout}&#8217;s #INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX is set and provides the used sequence indices as ftext:uint32_t array. Otherwise it <b>must</b> be {@code NULL}.")
+	VkDeviceSize.member("sequencesIndexOffset", "the byte offset into {@code sequencesIndexBuffer} where the index values start.")
+}
+
+val VkCmdReserveSpaceForCommandsInfoNVX = struct(VULKAN_PACKAGE, "VkCmdReserveSpaceForCommandsInfoNVX") {
+	documentation =
+		"""
+		Structure specifying parameters for the reservation of command buffer space.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CMD_RESERVE_SPACE_FOR_COMMANDS_INFO_NVX</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code objectTable} <b>must</b> be a valid {@code VkObjectTableNVX} handle</li>
+			<li>{@code indirectCommandsLayout} <b>must</b> be a valid {@code VkIndirectCommandsLayoutNVX} handle</li>
+			<li>Both of {@code indirectCommandsLayout}, and {@code objectTable} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+
+		<h5>Host Synchronization</h5>
+		<ul>
+			<li>Host access to {@code objectTable} <b>must</b> be externally synchronized</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#CmdReserveSpaceForCommandsNVX()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkObjectTableNVX.member("objectTable", "the {@code VkObjectTableNVX} to be used for the generation process. Only registered objects at the time #CmdReserveSpaceForCommandsNVX() is called, will be taken into account for the reservation.")
+	VkIndirectCommandsLayoutNVX.member("indirectCommandsLayout", "the {@code VkIndirectCommandsLayoutNVX} that <b>must</b> also be used at generation time.")
+	uint32_t.member("maxSequencesCount", "the maximum number of sequences for which command buffer space will be reserved.")
+}
+
+val VkObjectTableCreateInfoNVX = struct(VULKAN_PACKAGE, "VkObjectTableCreateInfoNVX") {
+	documentation =
+		"""
+		Structure specifying the parameters of a newly created object table.
+
+		<h5>Description</h5>
+		Types which <b>can</b> be set in {@code pObjectEntryTypes} are:
+
+		<pre><code>typedef enum VkObjectEntryTypeNVX {
+￿    VK_OBJECT_ENTRY_DESCRIPTOR_SET_NVX = 0,
+￿    VK_OBJECT_ENTRY_PIPELINE_NVX = 1,
+￿    VK_OBJECT_ENTRY_INDEX_BUFFER_NVX = 2,
+￿    VK_OBJECT_ENTRY_VERTEX_BUFFER_NVX = 3,
+￿    VK_OBJECT_ENTRY_PUSH_CONSTANT_NVX = 4,
+} VkObjectEntryTypeNVX;</code></pre>
+
+		<ul>
+			<li>#OBJECT_ENTRY_DESCRIPTOR_SET_NVX indicates a {@code VkDescriptorSet} resource entry that is registered via ##VkObjectTableDescriptorSetEntryNVX.</li>
+			<li>#OBJECT_ENTRY_PIPELINE_NVX indicates a {@code VkPipeline} resource entry that is registered via ##VkObjectTablePipelineEntryNVX.</li>
+			<li>#OBJECT_ENTRY_INDEX_BUFFER_NVX indicates a {@code VkBuffer} resource entry that is registered via ##VkObjectTableIndexBufferEntryNVX.</li>
+			<li>#OBJECT_ENTRY_VERTEX_BUFFER_NVX indicates a {@code VkBuffer} resource entry that is registered via ##VkObjectTableVertexBufferEntryNVX.</li>
+			<li>#OBJECT_ENTRY_PUSH_CONSTANT_NVX indicates the resource entry is registered via ##VkObjectTablePushConstantEntryNVX.</li>
+		</ul>
+
+		Bits which <b>can</b> be set in {@code pObjectEntryUsageFlags} are:
+
+		<pre><code>typedef enum VkObjectEntryUsageFlagBitsNVX {
+￿    VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX = 0x00000001,
+￿    VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX = 0x00000002,
+} VkObjectEntryUsageFlagBitsNVX;</code></pre>
+
+		<ul>
+			<li>#OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX indicates that the resource is bound to #PIPELINE_BIND_POINT_GRAPHICS</li>
+			<li>#OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX indicates that the resource is bound to #PIPELINE_BIND_POINT_COMPUTE</li>
+		</ul>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code objectCount} <b>must</b> be greater than 0</li>
+			<li>If the ##VkDeviceGeneratedCommandsFeaturesNVX{@code ::computeBindingPointSupport} feature is not enabled, {@code pObjectEntryUsageFlags} <b>must</b> not contain #OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX</li>
+			<li>Any value within {@code pObjectEntryCounts} must not exceed ##VkDeviceGeneratedCommandsLimitsNVX{@code ::maxObjectEntryCounts}</li>
+			<li>{@code maxUniformBuffersPerDescriptor} must be within the limits supported by the device.</li>
+			<li>{@code maxStorageBuffersPerDescriptor} must be within the limits supported by the device.</li>
+			<li>{@code maxStorageImagesPerDescriptor} must be within the limits supported by the device.</li>
+			<li>{@code maxSampledImagesPerDescriptor} must be within the limits supported by the device.</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code pObjectEntryTypes} <b>must</b> be a pointer to an array of {@code objectCount} valid {@code VkObjectEntryTypeNVX} values</li>
+			<li>{@code pObjectEntryCounts} <b>must</b> be a pointer to an array of {@code objectCount} {@code uint32_t} values</li>
+			<li>{@code pObjectEntryUsageFlags} <b>must</b> be a pointer to an array of {@code objectCount} valid combinations of {@code VkObjectEntryUsageFlagBitsNVX} values</li>
+			<li>Each element of {@code pObjectEntryUsageFlags} <b>must</b> not be 0</li>
+			<li>{@code objectCount} <b>must</b> be greater than 0</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#CreateObjectTableNVX()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	AutoSize("pObjectEntryTypes", "pObjectEntryCounts", "pObjectEntryUsageFlags")..uint32_t.member("objectCount", "the number of entry configurations that the object table supports. The following array parameters must match the size provided here.")
+	const..VkObjectEntryTypeNVX.p.member("pObjectEntryTypes", "an array of {@code VkObjectEntryTypeNVX} providing the entry type of a given configuration.")
+	const..uint32_t_p.member("pObjectEntryCounts", "an array of counts how many objects can be registered in the table.")
+	const..VkObjectEntryUsageFlagsNVX.p.member("pObjectEntryUsageFlags", "an array of bitmasks describing the binding usage of the entry. See {@code VkObjectEntryUsageFlagBitsNVX} below for a description of the supported bits.")
+	uint32_t.member("maxUniformBuffersPerDescriptor", "the maximum number of #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC used by any single registered {@code VkDescriptorSet} in this table.")
+	uint32_t.member("maxStorageBuffersPerDescriptor", "the maximum number of #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC used by any single registered {@code VkDescriptorSet} in this table.")
+	uint32_t.member("maxStorageImagesPerDescriptor", "the maximum number of #DESCRIPTOR_TYPE_STORAGE_IMAGE or #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER used by any single registered {@code VkDescriptorSet} in this table.")
+	uint32_t.member("maxSampledImagesPerDescriptor", "the maximum number of #DESCRIPTOR_TYPE_SAMPLER, #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT used by any single registered {@code VkDescriptorSet} in this table.")
+	uint32_t.member("maxPipelineLayouts", "the maximum number of unique {@code VkPipelineLayout} used by any registered {@code VkDescriptorSet} or {@code VkPipeline} in this table.")
+}
+
+val VkObjectTableEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableEntryNVX") {
+	documentation =
+		"""
+		(no short description available).
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>If the ##VkDeviceGeneratedCommandsFeaturesNVX{@code ::computeBindingPointSupport} feature is not enabled, {@code flags} <b>must</b> not contain #OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code type} <b>must</b> be a valid {@code VkObjectEntryTypeNVX} value</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkObjectEntryUsageFlagBitsNVX} values</li>
+			<li>{@code flags} <b>must</b> not be 0</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#RegisterObjectsNVX()
+		"""
+
+	VkObjectEntryTypeNVX.member("type", "defines the entry type")
+	VkObjectEntryUsageFlagsNVX.member("flags", "defines which {@code VkPipelineBindPoint} the resource can be used with. Some entry types allow only a single flag to be set.")
+}
+
+val VkObjectTablePipelineEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTablePipelineEntryNVX") {
+	documentation =
+		"""
+		(no short description available).
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code type} must be #OBJECT_ENTRY_PIPELINE_NVX</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code type} <b>must</b> be a valid {@code VkObjectEntryTypeNVX} value</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkObjectEntryUsageFlagBitsNVX} values</li>
+			<li>{@code flags} <b>must</b> not be 0</li>
+			<li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
+		</ul>
+		"""
+
+	VkObjectEntryTypeNVX.member("type", "")
+	VkObjectEntryUsageFlagsNVX.member("flags", "")
+	VkPipeline.member("pipeline", "specifies the {@code VkPipeline} that this resource entry references.")
+}
+
+val VkObjectTableDescriptorSetEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableDescriptorSetEntryNVX") {
+	documentation =
+		"""
+		(no short description available).
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code type} must be #OBJECT_ENTRY_DESCRIPTOR_SET_NVX</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code type} <b>must</b> be a valid {@code VkObjectEntryTypeNVX} value</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkObjectEntryUsageFlagBitsNVX} values</li>
+			<li>{@code flags} <b>must</b> not be 0</li>
+			<li>{@code pipelineLayout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+			<li>{@code descriptorSet} <b>must</b> be a valid {@code VkDescriptorSet} handle</li>
+			<li>Both of {@code descriptorSet}, and {@code pipelineLayout} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+		</ul>
+		"""
+
+	VkObjectEntryTypeNVX.member("type", "")
+	VkObjectEntryUsageFlagsNVX.member("flags", "")
+	VkPipelineLayout.member("pipelineLayout", "")
+	VkDescriptorSet.member("descriptorSet", "specifies the {@code VkDescriptorSet} that can be bound with this entry.")
+}
+
+val VkObjectTableVertexBufferEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableVertexBufferEntryNVX") {
+	documentation =
+		"""
+		(no short description available).
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code type} must be #OBJECT_ENTRY_VERTEX_BUFFER_NVX</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code type} <b>must</b> be a valid {@code VkObjectEntryTypeNVX} value</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkObjectEntryUsageFlagBitsNVX} values</li>
+			<li>{@code flags} <b>must</b> not be 0</li>
+			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+		</ul>
+		"""
+
+	VkObjectEntryTypeNVX.member("type", "")
+	VkObjectEntryUsageFlagsNVX.member("flags", "")
+	VkBuffer.member("buffer", "specifies the {@code VkBuffer} that can be bound as vertex bufer")
+}
+
+val VkObjectTableIndexBufferEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableIndexBufferEntryNVX") {
+	documentation =
+		"""
+		(no short description available).
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code type} must be #OBJECT_ENTRY_INDEX_BUFFER_NVX</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code type} <b>must</b> be a valid {@code VkObjectEntryTypeNVX} value</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkObjectEntryUsageFlagBitsNVX} values</li>
+			<li>{@code flags} <b>must</b> not be 0</li>
+			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+		</ul>
+		"""
+
+	VkObjectEntryTypeNVX.member("type", "")
+	VkObjectEntryUsageFlagsNVX.member("flags", "")
+	VkBuffer.member("buffer", "specifies the {@code VkBuffer} that can be bound as index buffer")
+}
+
+val VkObjectTablePushConstantEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTablePushConstantEntryNVX") {
+	documentation =
+		"""
+		(no short description available).
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code type} must be #OBJECT_ENTRY_PUSH_CONSTANT_NVX</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code type} <b>must</b> be a valid {@code VkObjectEntryTypeNVX} value</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkObjectEntryUsageFlagBitsNVX} values</li>
+			<li>{@code flags} <b>must</b> not be 0</li>
+			<li>{@code pipelineLayout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
+			<li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+			<li>{@code stageFlags} <b>must</b> not be 0</li>
+		</ul>
+		"""
+
+	VkObjectEntryTypeNVX.member("type", "")
+	VkObjectEntryUsageFlagsNVX.member("flags", "")
+	VkPipelineLayout.member("pipelineLayout", "")
+	VkShaderStageFlags.member("stageFlags", "")
 }
