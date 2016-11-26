@@ -818,11 +818,7 @@ class NativeClassFunction(
 
 		if (returns.isStructValue) {
 			getParams { it has ReturnParam }.map { it.name }.singleOrNull().let {
-				println(if (it != null)
-					"\t\treturn $it;"
-				else
-					"\t\treturn $RESULT;"
-				)
+				println("${if (hasFinally) "\t\t\t" else "\t\t"}return ${it ?: RESULT};")
 			}
 		} else if (!returns.isVoid) {
 			if (returns.isBufferPointer) {
@@ -1446,7 +1442,7 @@ class NativeClassFunction(
 			if (!result.isEmpty()) {
 				println(if (hasFinally) result.replaceAll(TRY_FINALLY_ALIGN, "\t$1") else result)
 			} else if (returns.isStructValue)
-				println("\t\treturn $RESULT;")
+				println("${if (hasFinally) "\t\t\t" else "\t\t"}return $RESULT;")
 		} else {
 			if (returns.isBufferPointer) {
 				if (hasFinally)

@@ -64,9 +64,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 		val documentation = super.documentation
 		if (documentation != null)
-			print(processDocumentation(documentation.replace("Instances of this interface", "Instances of this class")).toJavaDoc(indentation = ""))
-		print("""
-${access.modifier}abstract class $className extends Callback implements ${className}I {
+			println(processDocumentation(documentation.replace("Instances of this interface", "Instances of this class")).toJavaDoc(indentation = ""))
+		print("""${access.modifier}abstract class $className extends Callback implements ${className}I {
 
 	/** Creates a {@code $className} instance from the specified function pointer. */
 	public static $className create(long functionPointer) {
