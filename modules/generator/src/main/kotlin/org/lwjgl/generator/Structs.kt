@@ -166,8 +166,8 @@ class Struct(
 		get() = members.asSequence().filter { it.public }
 
 	private fun mutableMembers(members: Sequence<StructMember> = publicMembers): Sequence<StructMember> = members.let {
-			if (mutable) it else it.filter { it -> it.mutable }
-		}
+		if (mutable) it else it.filter { it -> it.mutable }
+	}
 
 	private val settableMembers: Sequence<StructMember> by lazy {
 		val mutableMembers = mutableMembers()
@@ -1226,10 +1226,10 @@ ${validations.joinToString("\n")}
 				// Setter
 
 				if (it !is StructMemberArray && !it.nativeType.isPointerData) {
-					if (it.nativeType is CallbackType) {
+					if (it.nativeType is ObjectType) {
 						if (it.public)
 							println("\t/** Unsafe version of {@link #$setter(${it.nativeType.javaMethodType}) $setter}. */")
-						println("\tpublic static void n$setter(long $STRUCT, long value) { memPutAddress($STRUCT + $field, ${it.pointerValue}); }")
+						println("\tpublic static void n$setter(long $STRUCT, ${it.nativeType.javaMethodType} value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
 					} else {
 						val javaType = it.nativeType.nativeMethodType
 						val bufferMethod = getBufferMethod(it, javaType)
@@ -1389,16 +1389,9 @@ ${validations.joinToString("\n")}
 				// Setter
 
 				if (it !is StructMemberArray && !it.nativeType.isPointerData) {
-					if (it.nativeType is CallbackType) {
-						val callbackType = it.nativeType.javaMethodType
-						println("$indent/** Sets the address of the specified {@link $callbackType} to the {@code $field} field. */")
-						if (overrides) println("$indent@Override")
-						println("${indent}public $returnType $setter($callbackType value) { $n$setter($ADDRESS, addressSafe(value)); return this; }")
-					} else {
-						println("$indent/** Sets the specified value to the {@code $field} field. */")
-						if (overrides) println("$indent@Override")
-						println("${indent}public $returnType $setter(${it.nativeType.javaMethodType} value) { $n$setter($ADDRESS, value${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " ? 1 : 0" else ""}); return this; }")
-					}
+					println("$indent/** Sets the specified value to the {@code $field} field. */")
+					if (overrides) println("$indent@Override")
+					println("${indent}public $returnType $setter(${it.nativeType.javaMethodType} value) { $n$setter($ADDRESS, value${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " ? 1 : 0" else ""}); return this; }")
 				}
 
 				// Alternative setters
@@ -1481,9 +1474,9 @@ ${validations.joinToString("\n")}
 
 				if (it !is StructMemberArray && !it.nativeType.isPointerData) {
 					if (it.public)
-					println("\t/** Unsafe version of {@link #$getter}. */")
+						println("\t/** Unsafe version of {@link #$getter}. */")
 					if (it.nativeType is CallbackType) {
-						println("\tpublic static long n$getter(long $STRUCT) { return memGetAddress($STRUCT + $field); }")
+						println("\tpublic static ${it.nativeType.className} n$getter(long $STRUCT) { return ${it.nativeType.className}.create(memGetAddress($STRUCT + $field)); }")
 					} else {
 						val javaType = it.nativeType.nativeMethodType
 						val bufferMethod = getBufferMethod(it, javaType)
@@ -1622,17 +1615,14 @@ ${validations.joinToString("\n")}
 				// Getter
 
 				if (it !is StructMemberArray && !it.nativeType.isPointerData) {
-					if (it.nativeType is CallbackType) {
-						val callbackType = it.nativeType.className
-
-						println("$indent/** Returns the {@code $callbackType} instance at the {@code $getter} field. */")
-						if (overrides) println("$indent@Override")
-						println("${indent}public $callbackType $getter() { return $callbackType.create($n$getter($ADDRESS)); }")
-					} else {
-						println("$indent/** Returns the value of the {@code $getter} field. */")
-						if (overrides) println("$indent@Override")
-						println("${indent}public ${if (it.nativeType is ObjectType) "long" else it.nativeType.javaMethodType} $getter() { return $n$getter($ADDRESS)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}; }")
+					val returnType = when (it.nativeType) {
+						is CallbackType -> it.nativeType.className
+						is ObjectType   -> "long"
+						else            -> it.nativeType.javaMethodType
 					}
+					println("$indent/** Returns the value of the {@code $getter} field. */")
+					if (overrides) println("$indent@Override")
+					println("${indent}public $returnType $getter() { return $n$getter($ADDRESS)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}; }")
 				}
 
 				// Alternative getters
