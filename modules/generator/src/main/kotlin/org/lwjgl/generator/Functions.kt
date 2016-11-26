@@ -91,8 +91,6 @@ fun NativeType.IN(name: String, javadoc: String, links: String = "", linkMode: L
 fun PointerType.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, OUT, javadoc, links, linkMode)
 fun PointerType.INOUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, INOUT, javadoc, links, linkMode)
 
-private fun <T> PrintWriter.printList(items: Sequence<T>, itemPrint: (item: T) -> String?) = print(items.map(itemPrint).filterNotNull().joinToString(", "))
-
 // --- [ Native class functions ] ---
 
 class NativeClassFunction(
@@ -592,6 +590,8 @@ class NativeClassFunction(
 
 	// --[ JAVA METHODS ]--
 
+	private fun <T> PrintWriter.printList(items: Sequence<T>, itemPrint: (item: T) -> String?) = print(items.map(itemPrint).filterNotNull().joinToString(", "))
+
 	private fun PrintWriter.printUnsafeJavadoc(private: Boolean, verbose: Boolean = false) {
 		if (private)
 			return
@@ -606,7 +606,7 @@ class NativeClassFunction(
 			println(nativeClass.processDocumentation("Array version of: ##n$name()").toJavaDoc())
 		} else {
 			getNativeParams().filter {
-				it.documentation.isNotEmpty() &&
+				it.documentation != null &&
 				(
 					it has AutoSize ||
 					it has AutoType ||

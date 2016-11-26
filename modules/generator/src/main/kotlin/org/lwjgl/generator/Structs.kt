@@ -418,16 +418,11 @@ $indentation}"""
 			else if (it.documentation.isNotEmpty()) {
 				val doc = if (it.links.isEmpty())
 					it.documentation
-				else if (it.links.any { it == '#' })
-					it.linkMode.appendLinks(it.documentation, it.links)
-				else {
-					val regex = it.links.toRegex()
-					val tokens = Generator.tokens[packageName]!!.keys.filter { regex.matches(it) }
-					if (tokens.isEmpty())
-						throw IllegalStateException("Failed to match any tokens with regex: ${it.links}")
-
-					it.linkMode.appendLinks(it.documentation, tokens.sorted().joinToString(" #", prefix = "#"))
-				}
+				else
+					it.linkMode.appendLinks(
+						it.documentation,
+						if (!it.links.contains('+')) it.links else linksFromRegex(it.links)
+					)
 				documentation.add("{@code $prefix${it.name}} &ndash; $doc")
 			}
 		}

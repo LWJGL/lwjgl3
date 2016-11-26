@@ -173,6 +173,30 @@ abstract class GeneratorTarget(
 		return this
 	}
 
+	fun NativeType.IN(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.IN, javadoc, links, linkMode)
+	fun PointerType.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.OUT, javadoc, links, linkMode)
+	fun PointerType.INOUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.INOUT, javadoc, links, linkMode)
+
+	private fun NativeType.createParameter(
+		name: String,
+		paramType: ParameterType,
+		javadoc: String,
+		links: String,
+		linkMode: LinkMode = LinkMode.SINGLE
+	) = if (links.isEmpty() || !links.contains('+'))
+		Parameter(this, name, paramType, javadoc, links, linkMode)
+	else
+		Parameter(this, name, paramType) { linkMode.appendLinks(javadoc, linksFromRegex(links)) }
+
+	protected fun linksFromRegex(pattern: String): String {
+		val regex = pattern.toRegex()
+		val tokens = Generator.tokens[packageName]!!.keys.filter { regex.matches(it) }
+		if (tokens.isEmpty())
+			throw IllegalStateException("Failed to match any tokens with regex: $pattern")
+
+		return tokens.sorted().joinToString(" #", prefix = "#")
+	}
+
 	infix fun Int.x(other: Int) = this * other
 
 	protected fun PrintWriter.generateJavaPreamble() {

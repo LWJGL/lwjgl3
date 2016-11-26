@@ -74,12 +74,22 @@ class Parameter(
 	nativeType: NativeType,
 	val name: String,
 	val paramType: ParameterType = IN,
-	documentation: String,
-	links: String,
-	linkMode: LinkMode
+	val documentation: (() -> String)?
 ) : QualifiedType(nativeType) {
 
-	internal val documentation = if (links.isEmpty()) documentation else linkMode.appendLinks(documentation, links)
+	constructor(
+		nativeType: NativeType,
+		name: String,
+		paramType: ParameterType,
+		javadoc: String,
+		links: String,
+		linkMode: LinkMode
+	) : this(nativeType, name, paramType, if (javadoc.isNotEmpty() || links.isNotEmpty()) {
+		val documentation: (() -> String)? = { if (links.isEmpty()) javadoc else linkMode.appendLinks(javadoc, links) }
+		documentation
+	} else
+		null
+	)
 
 	override fun hashCode() = name.hashCode()
 

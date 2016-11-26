@@ -77,7 +77,7 @@ class ConstantBlock<T : Any>(
 		noPrefix = true
 	}
 
-	private fun getConstantName(name: String) = if (noPrefix) name else "${nativeClass.prefixConstant}$name"
+	internal fun getConstantName(name: String) = if (noPrefix) name else "${nativeClass.prefixConstant}$name"
 
 	internal fun generate(writer: PrintWriter) {
 		if (constantType === EnumConstant) {

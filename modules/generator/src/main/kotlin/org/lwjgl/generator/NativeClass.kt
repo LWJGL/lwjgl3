@@ -215,8 +215,7 @@ class NativeClass(
 									ArrayType(it.nativeType as PointerType),
 									it.name,
 									it.paramType,
-									it.documentation,
-									"", LinkMode.SINGLE
+									it.documentation
 								).copyModifiers(it).removeArrayModifiers()
 							else
 								func[it.name].removeArrayModifiers()
@@ -244,16 +243,14 @@ class NativeClass(
 										ArrayType(it.nativeType as PointerType),
 										it.name,
 										it.paramType,
-										it.documentation,
-										"", LinkMode.SINGLE
+										it.documentation
 									).copyModifiers(it).removeArrayModifiers()
 								else if (it has MultiType)
 									Parameter(
 										ArrayType(it.nativeType as PointerType, autoType),
 										it.name,
 										it.paramType,
-										it.documentation,
-										"", LinkMode.SINGLE
+										it.documentation
 									).copyModifiers(it).removeArrayModifiers().replaceModifier(Check) {
 										if (it.expression == "0")
 											it
@@ -347,9 +344,9 @@ class NativeClass(
 		duplicateFunctions: MutableSet<String>
 	) {
 		if (!this.functions.any { it.has(Reuse) }) {
-			constantBlocks.forEach {
-				it.constants.forEach {
-					if (tokens.put(it.name, "$className#$prefixConstant${it.name}") != null)
+			constantBlocks.forEach { block ->
+				block.constants.forEach {
+					if (tokens.put(it.name, "$className#${block.getConstantName(it.name)}") != null)
 						duplicateTokens.add(it.name)
 				}
 			}
@@ -649,15 +646,23 @@ class NativeClass(
 
 		return if (param === EXPLICIT_FUNCTION_ADDRESS || param === JNI_ENV)
 			param
-		else
+		else {
+			val documentation: (() -> String)? = param.documentation.let {
+				if (it != null) {
+					if (this@NativeClass !== this.nativeClass)
+						({ convertDocumentation(this.nativeClass, this.name, it()) })
+					else
+						it
+				} else
+					null
+			}
 			Parameter(
 				param.nativeType,
 				param.name,
 				param.paramType,
-				this@NativeClass.convertDocumentation(this.nativeClass, this.name, param.documentation),
-				"",
-				LinkMode.SINGLE
+				documentation
 			).copyModifiers(param)
+		}
 	}
 
 	private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String): String {

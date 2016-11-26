@@ -140,7 +140,7 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 
 /** Specialized conversion for methods. */
 internal fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
-	if (documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && params.none { it.documentation.isNotEmpty() })
+	if (documentation.isEmpty() && returnDoc.isEmpty() && since.isEmpty() && params.all { it.documentation == null })
 		return ""
 
 	if (params.none() && returnDoc.isEmpty())
@@ -159,7 +159,7 @@ internal fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<P
 
 			append("\n\t *")
 			params.forEach {
-				printParam(this, it.name, processDocumentation(it.documentation), alignment, multilineAligment)
+				printParam(this, it.name, it.documentation.let { if (it == null) "" else processDocumentation(it()) }, alignment, multilineAligment)
 			}
 			if (returnsStructValue)
 				printParam(this, RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
