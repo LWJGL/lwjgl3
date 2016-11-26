@@ -1631,7 +1631,7 @@ ${validations.joinToString("\n")}
 					} else {
 						println("$indent/** Returns the value of the {@code $getter} field. */")
 						if (overrides) println("$indent@Override")
-						println("${indent}public ${it.nativeType.javaMethodType} $getter() { return $n$getter($ADDRESS)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}; }")
+						println("${indent}public ${if (it.nativeType is ObjectType) "long" else it.nativeType.javaMethodType} $getter() { return $n$getter($ADDRESS)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}; }")
 					}
 				}
 
