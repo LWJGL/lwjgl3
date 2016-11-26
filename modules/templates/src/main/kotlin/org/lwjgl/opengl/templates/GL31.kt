@@ -320,7 +320,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 		GLuint.IN("program", "the name of a program containing uniforms whose indices to query"),
 		AutoSize("uniformNames", "uniformIndices")..GLsizei.IN("uniformCount", "the number of uniforms whose indices to query"),
-		PointerArray(GLcharASCII_p, "uniformName")..const..GLcharASCII_pp.IN(
+		PointerArray(GLcharASCII_p, "uniformName")..const..GLcharASCII_p.p.IN(
 			"uniformNames",
 			"an array of pointers to buffers containing the names of the queried uniforms"
 		),

@@ -1081,7 +1081,7 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
 			current configuration and a 1.0 world scale.
 			"""
 		),
-		const..ovrLayerHeader_p_const_p.IN(
+		const..ovrLayerHeader.p.const.p.IN(
 			"layerPtrList",
 			"""
 			a list of {@code ovrLayer} pointers, which can include $NULL entries to indicate that any previously shown layer at that index is to not be

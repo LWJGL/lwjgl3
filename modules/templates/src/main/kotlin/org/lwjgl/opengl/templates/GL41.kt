@@ -240,7 +240,7 @@ if (shader) {
 
 		GLenum.IN("type", "the type of shader to create"),
 		AutoSize("strings")..GLsizei.IN("count", "the number of source code strings in the array {@code strings}"),
-		PointerArray(GLcharUTF8_p, "string")..const..GLcharUTF8_pp.IN(
+		PointerArray(GLcharUTF8_p, "string")..const..GLcharUTF8_p.p.IN(
 			"strings",
 			"an array of pointers to source code strings from which to create the program object"
 		)

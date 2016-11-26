@@ -79,7 +79,13 @@ private fun PointerType.pointerTo(): String {
 }
 
 val PointerType.p: PointerType get() = PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
-val PointerType.p_const_p: PointerType get() = PointerType("${this.pointerTo()} const", PointerMapping.DATA_POINTER, elementType = this)
+val PointerType.const: PointerType get() = if (this.includesPointer) {
+	if (this is StructType)
+		StructType(this.definition, "${this.name} const", includesPointer = true, elementType = this.elementType)
+	else
+		throw IllegalArgumentException("The const keyword cannot be applied to opaque pointer types.")
+} else
+	PointerType("${this.name} const", PointerMapping.DATA_POINTER, elementType = this.elementType)
 
 val String.p: PointerType get() = PointerType(this, includesPointer = false)
 val String.opaque_p: PointerType get() = PointerType(this, includesPointer = true)
@@ -120,12 +126,10 @@ class StructType(
 	val definition: Struct,
 	/** The type used in the native API. */
 	name: String = definition.nativeName,
-	/** The type we map the native type to. */
-	mapping: PointerMapping = PointerMapping.DATA_BYTE,
 	/** If true, the nativeType typedef includes a pointer. If false, the argument will be passed-by-value. */
 	includesPointer: Boolean = false,
 	elementType: NativeType? = null
-) : PointerType(name, mapping, includesPointer, elementType) {
+) : PointerType(name, PointerMapping.DATA_BYTE, includesPointer, elementType) {
 	override val javaMethodType: String
 		get() = definition.className
 }

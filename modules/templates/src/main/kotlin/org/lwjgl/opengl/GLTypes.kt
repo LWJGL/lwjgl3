@@ -68,12 +68,7 @@ val GLsizeiptr_p = GLsizeiptr.p
 // strings
 
 val GLcharASCII_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.ASCII)
-val GLcharASCII_pp = GLcharASCII_p.p
-val GLcharASCII_p_const_p = GLcharASCII_p.p_const_p
-
 val GLcharUTF8_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
-val GLcharUTF8_pp = GLcharUTF8_p.p
-
 val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
 
 // AMD_debug_output

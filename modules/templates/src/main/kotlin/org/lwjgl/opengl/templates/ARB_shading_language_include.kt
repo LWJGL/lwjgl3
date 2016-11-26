@@ -114,7 +114,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 
 		GLuint.IN("shader", "the shader object compile"),
 		AutoSize("path", "length")..GLsizei.IN("count", ""),
-		const..GLcharASCII_p_const_p.IN("path", "an ordered array of {@code count} pointers to optionally null-terminated character strings defining search paths"),
+		const..GLcharASCII_p.p.const.IN("path", "an ordered array of {@code count} pointers to optionally null-terminated character strings defining search paths"),
 		nullable..const..GLint_p.IN(
 			"length",
 			"""

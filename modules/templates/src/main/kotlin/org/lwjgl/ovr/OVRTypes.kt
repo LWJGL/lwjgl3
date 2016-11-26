@@ -508,8 +508,6 @@ val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLaye
 	ovrLayerType.member("Type", "described by {@code ovrLayerType}").links("LayerType_\\w+")
 	unsigned_int.member("Flags", "described by {@code ovrLayerFlags}")
 }
-val ovrLayerHeader_p = ovrLayerHeader.p
-val ovrLayerHeader_p_const_p = ovrLayerHeader_p.p_const_p
 
 val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLayerEyeFov") {
 	javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")

@@ -103,7 +103,7 @@ val OES_draw_elements_base_vertex = "OESDrawElementsBaseVertex".nativeClassGLES(
 		GLenum.IN("mode", ""),
 		const..GLsizei_p.IN("count", ""),
 		GLenum.IN("type", ""),
-		const..void_p_const_p.IN("indices", ""),
+		const..void_p.const.p.IN("indices", ""),
 		AutoSize("count", "indices", "basevertex")..GLsizei.IN("primcount", ""),
 		const..GLint_p.IN("basevertex", "")
 	)

@@ -1181,7 +1181,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLuint.IN("shader", ""),
 		AutoSize("string", "length")..GLsizei.IN("count", ""),
-		PointerArray(GLcharUTF8_p, "string", "length")..const..GLcharUTF8_p_const_p.IN("string", ""),
+		PointerArray(GLcharUTF8_p, "string", "length")..const..GLcharUTF8_p.p.const.IN("string", ""),
 		nullable..const..GLint_p.IN("length", "")
 	)
 
