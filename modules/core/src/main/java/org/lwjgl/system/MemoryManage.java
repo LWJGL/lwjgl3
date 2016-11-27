@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.libc.Stdlib.*;
+import static org.lwjgl.system.libc.LibCStdlib.*;
 
 /** Provides {@link MemoryAllocator} implementations for {@link MemoryUtil} to use. */
 final class MemoryManage {
@@ -111,28 +111,25 @@ final class MemoryManage {
 		DebugAllocator(MemoryAllocator allocator) {
 			this.allocator = allocator;
 
-			Runtime.getRuntime().addShutdownHook(new Thread() {
-				@Override
-				public void run() {
-					if ( ALLOCATIONS.isEmpty() )
-						return;
+			Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+				if ( ALLOCATIONS.isEmpty() )
+					return;
 
-					for ( Entry<Long, Allocation> entry : ALLOCATIONS.entrySet() ) {
-						Long address = entry.getKey();
-						Allocation allocation = entry.getValue();
+				for ( Entry<Long, Allocation> entry : ALLOCATIONS.entrySet() ) {
+					Long address = entry.getKey();
+					Allocation allocation = entry.getValue();
 
-						DEBUG_STREAM.format(
-							"[LWJGL] %d bytes leaked, thread %d (%s), address: 0x%s\n",
-							allocation.size,
-							allocation.threadId,
-							THREADS.get(allocation.threadId),
-							Long.toHexString(address).toUpperCase()
-						);
-						for ( StackTraceElement el : allocation.stackTrace )
-							DEBUG_STREAM.format("\tat %s\n", el.toString());
-					}
+					DEBUG_STREAM.format(
+						"[LWJGL] %d bytes leaked, thread %d (%s), address: 0x%s\n",
+						allocation.size,
+						allocation.threadId,
+						THREADS.get(allocation.threadId),
+						Long.toHexString(address).toUpperCase()
+					);
+					for ( StackTraceElement el : allocation.stackTrace )
+						DEBUG_STREAM.format("\tat %s\n", el.toString());
 				}
-			});
+			}));
 		}
 
 		@Override

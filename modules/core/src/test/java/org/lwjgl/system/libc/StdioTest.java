@@ -14,7 +14,7 @@ import java.nio.IntBuffer;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.dyncall.DynCall.*;
-import static org.lwjgl.system.libc.Locale.*;
+import static org.lwjgl.system.libc.LibCLocale.*;
 import static org.testng.Assert.*;
 
 @Test
@@ -25,7 +25,7 @@ public class StdioTest {
 
 	@BeforeClass
 	public void init() {
-		Locale.setlocale(LC_ALL, "en_US.UTF-8");
+		LibCLocale.setlocale(LC_ALL, "en_US.UTF-8");
 	}
 
 	public void testScanf() {
@@ -50,7 +50,7 @@ public class StdioTest {
 			dcArgPointer(vm, memAddress(message));
 			dcArgPointer(vm, memAddress(answer));
 
-			int args = dcCallInt(vm, Stdio.sscanf);
+			int args = dcCallInt(vm, LibCStdio.sscanf);
 
 			assertEquals(args, 2);
 			assertEquals(memASCII(message, memLengthNT1(message)).trim(), MESSAGE);
@@ -80,7 +80,7 @@ public class StdioTest {
 			dcArgPointer(vm, memAddress(message));
 			dcArgInt(vm, ANSWER);
 
-			int chars = dcCallInt(vm, Stdio.snprintf);
+			int chars = dcCallInt(vm, LibCStdio.snprintf);
 
 			String expected = String.format(FORMAT, MESSAGE, ANSWER);
 

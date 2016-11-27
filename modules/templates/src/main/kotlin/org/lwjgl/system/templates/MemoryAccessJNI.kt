@@ -12,6 +12,16 @@ val MemoryAccessJNI = "MemoryAccessJNI".nativeClass(packageName = "org.lwjgl.sys
 		"<stdint.h>"
 	)
 
+	access = Access.INTERNAL
+	documentation = "Memory access utilities."
+
+	Code(
+		nativeCall = "\treturn (jint)sizeof(void *);"
+	)..int(
+		"getPointerSize",
+		"Returns the {@code sizeof(void *)}."
+	)
+
 	val primitives = arrayOf(
 		Triple(int8_t, "Byte", "a byte value"),
 		Triple(int16_t, "Short", "a short value"),
@@ -62,9 +72,6 @@ ${primitives
 			.joinToString("\n")}
 
 // -----------""")
-
-	access = Access.INTERNAL
-	documentation = "Memory access utilities."
 
 	arrayOf(
 		"malloc",

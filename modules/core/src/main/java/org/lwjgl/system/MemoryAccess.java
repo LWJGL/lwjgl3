@@ -10,6 +10,7 @@ import static java.lang.Character.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryAccessJNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libc.LibCString.*;
 
 /** Provides {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}. */
 final class MemoryAccess {
@@ -35,15 +36,6 @@ final class MemoryAccess {
 		return accessor;
 	}
 
-	// The standard C memset function
-	private static native void memset(long ptr, int value, long bytes);
-
-	// The standard C memcpy function
-	private static native void memcpy(long dst, long src, long bytes);
-
-	// Returns the {@code sizeof(void *)}.
-	static native int getPointerSize();
-
 	// Returns the buffer memory address
 	static native long getDirectBufferAddress(Buffer buffer);
 
@@ -67,81 +59,69 @@ final class MemoryAccess {
 			return getDirectBufferAddress(buffer);
 		}
 
-		default ByteBuffer memByteBuffer(long address, int capacity) {
-			return newDirectByteBuffer(address, capacity).order(ByteOrder.nativeOrder());
-		}
+		default ByteBuffer memByteBuffer(long address, int capacity)                         { return newDirectByteBuffer(address, capacity).order(ByteOrder.nativeOrder()); }
 
-		default ShortBuffer memShortBuffer(long address, int capacity) {
-			return memByteBuffer(address, capacity << 1).asShortBuffer();
-		}
+		default ShortBuffer memShortBuffer(long address, int capacity)                       { return memByteBuffer(address, capacity << 1).asShortBuffer(); }
 
-		default CharBuffer memCharBuffer(long address, int capacity) {
-			return memByteBuffer(address, capacity << 1).asCharBuffer();
-		}
+		default CharBuffer memCharBuffer(long address, int capacity)                         { return memByteBuffer(address, capacity << 1).asCharBuffer(); }
 
-		default IntBuffer memIntBuffer(long address, int capacity) {
-			return memByteBuffer(address, capacity << 2).asIntBuffer();
-		}
+		default IntBuffer memIntBuffer(long address, int capacity)                           { return memByteBuffer(address, capacity << 2).asIntBuffer(); }
 
-		default LongBuffer memLongBuffer(long address, int capacity) {
-			return memByteBuffer(address, capacity << 3).asLongBuffer();
-		}
+		default LongBuffer memLongBuffer(long address, int capacity)                         { return memByteBuffer(address, capacity << 3).asLongBuffer(); }
 
-		default FloatBuffer memFloatBuffer(long address, int capacity) {
-			return memByteBuffer(address, capacity << 2).asFloatBuffer();
-		}
+		default FloatBuffer memFloatBuffer(long address, int capacity)                       { return memByteBuffer(address, capacity << 2).asFloatBuffer(); }
 
-		default DoubleBuffer memDoubleBuffer(long address, int capacity) {
-			return memByteBuffer(address, capacity << 3).asDoubleBuffer();
-		}
+		default DoubleBuffer memDoubleBuffer(long address, int capacity)                     { return memByteBuffer(address, capacity << 3).asDoubleBuffer(); }
 
-		default ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) { return memByteBuffer(address, capacity); }
+		default ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity)     { return memByteBuffer(address, capacity); }
 
-		default ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity) { return memShortBuffer(address, capacity); }
+		default ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity)   { return memShortBuffer(address, capacity); }
 
-		default CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity) { return memCharBuffer(address, capacity); }
+		default CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity)     { return memCharBuffer(address, capacity); }
 
-		default IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity) { return memIntBuffer(address, capacity); }
+		default IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity)       { return memIntBuffer(address, capacity); }
 
-		default LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity) { return memLongBuffer(address, capacity); }
+		default LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity)     { return memLongBuffer(address, capacity); }
 
-		default FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity) { return memFloatBuffer(address, capacity); }
+		default FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity)   { return memFloatBuffer(address, capacity); }
 
 		default DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity) { return memDoubleBuffer(address, capacity); }
 
-		default void memSet(long dst, int value, int bytes) { memset(dst, value, bytes); }
+		default void memSet(long dst, int value, int bytes) {
+			memset(dst, value, bytes);
+		}
 
 		default void memCopy(long src, long dst, int bytes) {
 			memcpy(dst, src, bytes); // Note the swapped src & dst
 		}
 
-		default byte memGetByte(long ptr) { return getByte(ptr); }
+		default byte memGetByte(long ptr)                 { return getByte(ptr); }
 
-		default short memGetShort(long ptr) { return getShort(ptr); }
+		default short memGetShort(long ptr)               { return getShort(ptr); }
 
-		default int memGetInt(long ptr) { return getInt(ptr); }
+		default int memGetInt(long ptr)                   { return getInt(ptr); }
 
-		default long memGetLong(long ptr) { return getLong(ptr); }
+		default long memGetLong(long ptr)                 { return getLong(ptr); }
 
-		default float memGetFloat(long ptr) { return getFloat(ptr); }
+		default float memGetFloat(long ptr)               { return getFloat(ptr); }
 
-		default double memGetDouble(long ptr) { return getDouble(ptr); }
+		default double memGetDouble(long ptr)             { return getDouble(ptr); }
 
-		default long memGetAddress(long ptr) { return getAddress(ptr); }
+		default long memGetAddress(long ptr)              { return getAddress(ptr); }
 
-		default void memPutByte(long ptr, byte value) { putByte(ptr, value); }
+		default void memPutByte(long ptr, byte value)     { putByte(ptr, value); }
 
-		default void memPutShort(long ptr, short value) { putShort(ptr, value); }
+		default void memPutShort(long ptr, short value)   { putShort(ptr, value); }
 
-		default void memPutInt(long ptr, int value) { putInt(ptr, value); }
+		default void memPutInt(long ptr, int value)       { putInt(ptr, value); }
 
-		default void memPutLong(long ptr, long value) { putLong(ptr, value); }
+		default void memPutLong(long ptr, long value)     { putLong(ptr, value); }
 
-		default void memPutFloat(long ptr, float value) { putFloat(ptr, value); }
+		default void memPutFloat(long ptr, float value)   { putFloat(ptr, value); }
 
 		default void memPutDouble(long ptr, double value) { putDouble(ptr, value); }
 
-		default void memPutAddress(long ptr, long value) { putAddress(ptr, value); }
+		default void memPutAddress(long ptr, long value)  { putAddress(ptr, value); }
 
 		default MemoryTextUtil getTextUtil() {
 			return new MemoryTextUtil();
@@ -445,7 +425,7 @@ final class MemoryAccess {
 			else if ( bytes < 384 )
 				UNSAFE.copyMemory(src, dst, bytes);
 			else
-				MemoryAccess.memcpy(dst, src, bytes);
+				memcpy(dst, src, bytes);
 		}
 
 		private void memCopyAligned(long src, long dst, int bytes) {

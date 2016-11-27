@@ -7,7 +7,7 @@ package org.lwjgl.system.libc.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.libc.*
 
-val stdlib = "Stdlib".nativeClass(packageName = LIBC_PACKAGE) {
+val stdlib = "LibCStdlib".nativeClass(packageName = LIBC_PACKAGE) {
 	nativeImport(
 		"<stdlib.h>"
 	)

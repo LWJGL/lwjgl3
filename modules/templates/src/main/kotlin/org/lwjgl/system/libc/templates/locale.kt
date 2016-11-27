@@ -7,7 +7,7 @@ package org.lwjgl.system.libc.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.libc.*
 
-val locale = "Locale".nativeClass(packageName = LIBC_PACKAGE) {
+val locale = "LibCLocale".nativeClass(packageName = LIBC_PACKAGE) {
 	nativeImport(
 		"<locale.h>"
 	)

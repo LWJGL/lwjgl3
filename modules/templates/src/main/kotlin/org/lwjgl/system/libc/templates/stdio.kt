@@ -7,7 +7,7 @@ package org.lwjgl.system.libc.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.libc.*
 
-val stdio = "Stdio".nativeClass(packageName = LIBC_PACKAGE) {
+val stdio = "LibCStdio".nativeClass(packageName = LIBC_PACKAGE) {
 	nativeDirective(
 		"""#ifdef LWJGL_WINDOWS
 	#define _CRT_SECURE_NO_WARNINGS
