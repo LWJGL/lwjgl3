@@ -197,7 +197,6 @@ class NativeClass(
 		functions.asSequence()
 			.filter { it.hasArrayOverloads }
 			.forEach { func ->
-				// assumes only 1 exists per method
 				val multiTypeParams = func.parameters.filter { it has MultiType }
 				val autoSizeResultOutParams = func.parameters.count { it.isAutoSizeResultOut }
 				val documentation: ((Parameter) -> Boolean) -> String = { processDocumentation("Array version of: ${func.methodLink}").toJavaDoc() }
@@ -230,7 +229,15 @@ class NativeClass(
 
 				if (multiTypeParams.isNotEmpty()) {
 					val multiType = multiTypeParams.first()[MultiType]
-					multiType.types.asSequence().filter { it !== PointerMapping.DATA_POINTER }.forEach { autoType ->
+					multiType.types.asSequence()
+						.filter { it !== PointerMapping.DATA_POINTER }
+						.let {
+							if (multiType.byteArray)
+								sequenceOf(PointerMapping.DATA_BYTE) + it
+							else
+								it
+						}
+						.forEach { autoType ->
 						val overload = NativeClassFunction(
 							returns = func.returns,
 							simpleName = func.simpleName,

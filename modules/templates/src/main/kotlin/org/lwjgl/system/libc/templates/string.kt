@@ -24,9 +24,16 @@ val string = "LibCString".nativeClass(packageName = LIBC_PACKAGE) {
 		"memset",
 		"Fills memory with a constant byte.",
 
-		nullable..voidptr.IN("dest", "pointer to destination"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE,
+			byteArray = true
+		)..void_p.IN("dest", "pointer to destination"),
 		int.IN("c", "character to set"),
-		size_t.IN("count", "number of characters"),
+		AutoSize("dest")..size_t.IN("count", "number of characters"),
 
 		returnDoc = "the value of {@code dest}"
 	)
@@ -35,9 +42,23 @@ val string = "LibCString".nativeClass(packageName = LIBC_PACKAGE) {
 		"memcpy",
 		"Copies characters between buffers.",
 
-		nullable..voidptr.IN("dest", "new buffer"),
-		nullable..const..voidptr.IN("src", "buffer to copy from"),
-		size_t.IN("count", "number of characters to copy"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE,
+			byteArray = true
+		)..void_p.IN("dest", "new buffer"),
+		MultiType(
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE,
+			byteArray = true
+		)..const..void_p.IN("src", "buffer to copy from"),
+		AutoSize("dest", "src")..size_t.IN("count", "number of characters to copy"),
 
 		returnDoc = "the value of {@code dest}"
 	)

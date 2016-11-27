@@ -88,11 +88,11 @@ final class MemoryAccess {
 		default DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity) { return memDoubleBuffer(address, capacity); }
 
 		default void memSet(long dst, int value, int bytes) {
-			memset(dst, value, bytes);
+			nmemset(dst, value, bytes);
 		}
 
 		default void memCopy(long src, long dst, int bytes) {
-			memcpy(dst, src, bytes); // Note the swapped src & dst
+			nmemcpy(dst, src, bytes); // Note the swapped src & dst
 		}
 
 		default byte memGetByte(long ptr)                 { return getByte(ptr); }
@@ -372,7 +372,7 @@ final class MemoryAccess {
 			if ( bytes < 192 )
 				memSetLoop(dst, (byte)(value & 0xFF), bytes);
 			else
-				memset(dst, value, bytes);
+				nmemset(dst, value, bytes);
 		}
 
 		private void memSetLoop(long dst, byte value, int bytes) {
@@ -425,7 +425,7 @@ final class MemoryAccess {
 			else if ( bytes < 384 )
 				UNSAFE.copyMemory(src, dst, bytes);
 			else
-				memcpy(dst, src, bytes);
+				nmemcpy(dst, src, bytes);
 		}
 
 		private void memCopyAligned(long src, long dst, int bytes) {

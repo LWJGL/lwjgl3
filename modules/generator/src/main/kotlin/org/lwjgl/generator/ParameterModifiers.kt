@@ -238,7 +238,11 @@ class AutoType(override val reference: String, vararg val types: AutoTypeToken) 
 }
 
 /** Like AutoType, but with a hard-coded list of types. See glTexImage2D for an example. */
-class MultiType(vararg val types: PointerMapping) : ParameterModifier() {
+class MultiType(
+	vararg val types: PointerMapping,
+	/** If true, a byte[] overload will be generated as well. */
+	val byteArray: Boolean = false
+) : ParameterModifier() {
 	companion object : ModifierKey<MultiType>
 
 	init {

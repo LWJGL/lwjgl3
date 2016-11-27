@@ -195,6 +195,20 @@ public final class Checks {
 	 *
 	 * @throws IllegalArgumentException
 	 */
+	public static void check(byte[] buf, int size) {
+		if ( buf.length < size ) {
+			throwIAE(buf, size);
+		}
+	}
+
+	/**
+	 * Helper method to ensure a array has enough capacity.
+	 *
+	 * @param buf  the array to check
+	 * @param size the minimum array capacity
+	 *
+	 * @throws IllegalArgumentException
+	 */
 	public static void check(short[] buf, int size) {
 		if ( buf.length < size ) {
 			throwIAE(buf, size);
@@ -352,6 +366,10 @@ public final class Checks {
 	}
 
 	private static void throwIAE(Object[] array, int size) {
+		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
+	}
+
+	private static void throwIAE(byte[] array, int size) {
 		throw new IllegalArgumentException("Number of array elements is " + array.length + ", must be at least " + size);
 	}
 

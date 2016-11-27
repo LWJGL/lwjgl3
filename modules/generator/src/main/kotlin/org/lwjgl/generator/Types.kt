@@ -234,6 +234,7 @@ open class TypeMapping(
 		""
 
 	internal val jniSignatureArray: String get() = when ((this as PointerMapping).primitive) {
+		"byte"   -> "_3B"
 		"double" -> "_3D"
 		"float"  -> "_3F"
 		"int"    -> "_3I"
