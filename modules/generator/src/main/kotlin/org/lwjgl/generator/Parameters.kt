@@ -12,7 +12,7 @@ abstract class QualifiedType(
 ) : TemplateElement() {
 
 	override val isSpecial: Boolean
-		get() = isBufferPointer || super.isSpecial
+		get() = (isBufferPointer && nativeType !is ArrayType) || super.isSpecial
 
 	internal val isBufferPointer: Boolean
 		get() = nativeType.isPointerData

@@ -52,7 +52,7 @@ abstract class TemplateElement {
 	}
 
 	open val isSpecial: Boolean
-		get() = modifiers.values.any { it.isSpecial }
+		get() = modifiers.any { it.value.isSpecial }
 
 	protected fun <T : TemplateElement> T.copyModifiers(other: T): T {
 		if (other.modifiers != EMPTY_MODIFIERS)

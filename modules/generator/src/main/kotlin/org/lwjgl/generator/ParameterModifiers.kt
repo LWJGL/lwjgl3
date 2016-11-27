@@ -153,7 +153,7 @@ class Check(
 ) : ParameterModifier() {
 	companion object : ModifierKey<Check>
 
-	override val isSpecial = true
+	override val isSpecial = expression != "0"
 	override fun validate(param: Parameter) {
 		if (param.nativeType !is PointerType)
 			throw IllegalArgumentException("The Check modifier can only be applied on pointer types.")
@@ -165,7 +165,7 @@ class Check(
 /** Factory method for Check modifiers with integer expressions. */
 fun Check(value: Int) = Check(Integer.toString(value))
 /** Should be used on pointer parameters whose size cannot be validated and may be unsafe. */
-val Unsafe = Check(0)
+val Unsafe = Check("0")
 
 class Nullable internal constructor(val optional: Boolean) : ParameterModifier() {
 	companion object : ModifierKey<Nullable>
