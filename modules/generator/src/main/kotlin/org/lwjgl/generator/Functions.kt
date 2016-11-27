@@ -482,9 +482,9 @@ class NativeClassFunction(
 					val reference = paramMap[autoSize.reference]!!
 					val referenceTransform = transforms!![reference]
 					val expression =
-						if (referenceTransform != null && (referenceTransform.javaClass === SingleValueTransform::class.java || referenceTransform === PointerArrayTransformSingle)) {
+						if (referenceTransform is SingleValueTransform || referenceTransform === PointerArrayTransformSingle) {
 							"1"
-						} else if ((referenceTransform != null && referenceTransform != PointerArrayTransformSingle) || reference.nativeType is ArrayType) {
+						} else if (referenceTransform is PointerArrayTransform || reference.nativeType is ArrayType) {
 							if (reference has nullable)
 								"lengthSafe(${autoSize.reference})"
 							else
