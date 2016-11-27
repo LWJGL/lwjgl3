@@ -407,7 +407,14 @@ class NativeClass(
 			if (hasFunctions && binding is SimpleBinding)
 				println("import static org.lwjgl.system.APIUtil.*;")
 			if (hasFunctions && ((binding != null && binding !is SimpleBinding) || functions.any { func ->
-				func.hasParam { it.nativeType is PointerType && !it.has(Nullable) && it.nativeType !is StructType && !func.hasAutoSizeFor(it) }
+				func.hasParam { param ->
+					param.nativeType is PointerType && func.getReferenceParam(AutoSize, param.name).let {
+						if (it == null)
+							!param.has(Nullable) && param.nativeType !is StructType
+						else
+							it[AutoSize].reference != param.name // dependent auto-size
+					}
+				}
 			}))
 				println("import static org.lwjgl.system.Checks.*;")
 			if (binding != null && functions.any { !it.hasCustomJNI })
