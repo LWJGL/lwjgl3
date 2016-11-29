@@ -58,8 +58,8 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		Tokens accepted by the {@code target} parameters of Enable, Disable, and IsEnabled.
 		
 		The behavior of how and when the GL driver is allowed to generate debug messages, and subsequently either call back to the application or place the
-		message in the debug message log, is affected by the state DEBUG_OUTPUT_SYNCHRONOUS_ARB. This state can be modified by the GL11#Enable() and
-		GL11#Disable() commands. Its initial value is GL11#FALSE.
+		message in the debug message log, is affected by the state DEBUG_OUTPUT_SYNCHRONOUS_ARB. This state can be modified by the GL11#glEnable() and
+		GL11#glDisable() commands. Its initial value is #FALSE.
     
 		When DEBUG_OUTPUT_SYNCHRONOUS_ARB is disabled, the driver is optionally allowed to concurrently call the debug callback routine from potentially
 		multiple threads, including threads that the context that generated the message is not currently bound to. The implementation may also call the callback
@@ -147,18 +147,18 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		"""
 		Controls the volume of debug output by disabling specific or groups of messages.
 		
-		If {@code enabled} is GL11#TRUE, the referenced subset of messages will be enabled. If GL11#FALSE, then those messages will be disabled.
+		If {@code enabled} is #TRUE, the referenced subset of messages will be enabled. If #FALSE, then those messages will be disabled.
     
 		This command can reference different subsets of messages by first considering the set of all messages, and filtering out messages based on the following
 		ways:
 		${ul(
-			"If {@code source} is not GL11#DONT_CARE, then all messages whose source does not match {@code source} will not be referenced.",
-			"If {@code type} is not GL11#DONT_CARE, then all messages whose type does not match {@code type} will not be referenced.",
-			"If {@code severity} is not GL11#DONT_CARE, then all messages whose severity level does not match {@code severity} will not be referenced.",
+			"If {@code source} is not #DONT_CARE, then all messages whose source does not match {@code source} will not be referenced.",
+			"If {@code type} is not #DONT_CARE, then all messages whose type does not match {@code type} will not be referenced.",
+			"If {@code severity} is not #DONT_CARE, then all messages whose severity level does not match {@code severity} will not be referenced.",
 			"""
 		    If {@code count} is greater than zero, then {@code ids} is an array of {@code count} message IDs for the specified combination of {@code source} and
-		    {@code type}. In this case, if {@code source} or {@code type} is GL11#DONT_CARE, or {@code severity} is not GL11#DONT_CARE, the error
-		    GL11#INVALID_OPERATION is generated. If {@code count} is zero, the value if {@code ids} is ignored.
+		    {@code type}. In this case, if {@code source} or {@code type} is #DONT_CARE, or {@code severity} is not #DONT_CARE, the error
+		    #INVALID_OPERATION is generated. If {@code count} is zero, the value if {@code ids} is ignored.
 		    """
 		)}
 		Although messages are grouped into an implicit hierarchy by their sources and types, there is no explicit per-source, per-type or per-severity enabled
@@ -180,7 +180,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		This function can be called by applications and third-party libraries to generate their own messages, such as ones containing timestamp information or
 		signals about specific render system events.
 
-		The error GL11#INVALID_VALUE will be generated if the number of characters in {@code buf}, excluding the null terminator when {@code length} is
+		The error #INVALID_VALUE will be generated if the number of characters in {@code buf}, excluding the null terminator when {@code length} is
 		negative, is not less than #MAX_DEBUG_MESSAGE_LENGTH_ARB.
 		""",
 
@@ -254,7 +254,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		array to hold up to {@code count} elements. The string representations of all fetched messages are stored in the {@code messageLog} array. If multiple
 		messages are fetched, their strings are concatenated into the same {@code messageLog} array and will be separated by single null terminators. The last
 		string in the array will also be null-terminated. The maximum size of {@code messageLog}, including the space used by all null terminators, is given by
-		{@code bufSize}. If {@code bufSize} is less than zero, the error GL11#INVALID_VALUE will be generated. If a message's string, including its null
+		{@code bufSize}. If {@code bufSize} is less than zero, the error #INVALID_VALUE will be generated. If a message's string, including its null
 		terminator, can not fully fit within the {@code messageLog} array's remaining space, then that message and any subsequent messages will not be fetched
 		and will remain in the log. The string lengths stored in the array {@code lengths} include the space for the null terminator of each string.
   

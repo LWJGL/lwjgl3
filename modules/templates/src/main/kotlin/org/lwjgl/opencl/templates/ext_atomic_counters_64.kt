@@ -22,7 +22,7 @@ val ext_atomic_counters_64 = "EXTAtomicCounters64".nativeClassCL("ext_atomic_cou
 
 	IntConstant(
 		"""
-		Accepted as the {@code param_name} parameter of CL10#GetDeviceInfo().
+		Accepted as the {@code param_name} parameter of #GetDeviceInfo().
 
 		Max number of atomic counters that can be used by a kernel. The minimum value is 8.
 		""",

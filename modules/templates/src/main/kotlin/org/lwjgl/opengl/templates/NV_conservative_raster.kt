@@ -43,8 +43,8 @@ val NV_conservative_raster = "NVConservativeRaster".nativeClassGL("NV_conservati
 		Sets the #SUBPIXEL_PRECISION_BIAS_X_BITS_NV and #SUBPIXEL_PRECISION_BIAS_Y_BITS_NV values.
 
 		The vertex's window x and y coordinates may be optionally converted to fixed-point values with {@code N} fractional bits. If
-		#CONSERVATIVE_RASTERIZATION_NV is disabled, then {@code N} is the implementation-dependent value of GL11#SUBPIXEL_BITS. If
-		#CONSERVATIVE_RASTERIZATION_NV is enabled, {@code N} is computed as the sum of the value of GL11#SUBPIXEL_BITS and programmable values of
+		#CONSERVATIVE_RASTERIZATION_NV is disabled, then {@code N} is the implementation-dependent value of #SUBPIXEL_BITS. If
+		#CONSERVATIVE_RASTERIZATION_NV is enabled, {@code N} is computed as the sum of the value of #SUBPIXEL_BITS and programmable values of
 		#SUBPIXEL_PRECISION_BIAS_X_BITS_NV and #SUBPIXEL_PRECISION_BIAS_Y_BITS_NV.
 
 		When these values are non-zero, the invariance requirement may not apply because the subpixel precision may not be the same at all window coordinates.

@@ -21,7 +21,7 @@ val ARB_texture_rg = "ARBTextureRG".nativeClassGL("ARB_texture_rg") {
 		It is also desirable to be able to render to one- and two- component format textures using capabilities such as framebuffer objects (FBO), but rendering
 		to I/L/LA formats is under-specified (specifically how to map R/G/B/A values to I/L/A texture channels).
 
-		This extension adds new base internal formats for the one-component GL11#RED and two-component #RG (red green) texture formats as well as sized
+		This extension adds new base internal formats for the one-component #RED and two-component #RG (red green) texture formats as well as sized
 		internal formats for fixed-point, floating-point and pure integer texture formats. The new texure formats can be used for texturing as well as for
 		rendering into with framebuffer objects.
 

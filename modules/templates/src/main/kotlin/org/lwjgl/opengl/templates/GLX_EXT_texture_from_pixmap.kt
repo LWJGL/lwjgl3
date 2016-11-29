@@ -19,7 +19,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 		"""
 
 	IntConstant(
-		"Accepted by the {@code attribute} parameter of GLX13#GetFBConfigAttrib() and the {@code attrib_list} parameter of GLX13#ChooseFBConfig().",
+		"Accepted by the {@code attribute} parameter of #GetFBConfigAttrib() and the {@code attrib_list} parameter of #ChooseFBConfig().",
 
 		"BIND_TO_TEXTURE_RGB_EXT"..0x20D0,
 		"BIND_TO_TEXTURE_RGBA_EXT"..0x20D1,
@@ -29,7 +29,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 	)
 
 	IntConstant(
-		"Accepted as an attribute in the {@code attrib_list} parameter of GLX13#CreatePixmap(), and by the {@code attribute} parameter of GLX13#QueryDrawable().",
+		"Accepted as an attribute in the {@code attrib_list} parameter of #CreatePixmap(), and by the {@code attribute} parameter of #QueryDrawable().",
 
 		"TEXTURE_FORMAT_EXT"..0x20D5,
 		"TEXTURE_TARGET_EXT"..0x20D6,
@@ -38,8 +38,8 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 
 	IntConstant(
 		"""
-		Accepted as a value in the {@code attrib_list} parameter of GLX13#CreatePixmap() and returned in the {@code value} parameter of
-		GLX13#QueryDrawable() when {@code attribute} is #TEXTURE_FORMAT_EXT.
+		Accepted as a value in the {@code attrib_list} parameter of #CreatePixmap() and returned in the {@code value} parameter of
+		#QueryDrawable() when {@code attribute} is #TEXTURE_FORMAT_EXT.
 		""",
 
 		"TEXTURE_FORMAT_NONE_EXT"..0x20D8,
@@ -57,8 +57,8 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 
 	IntConstant(
 		"""
-		Accepted as a value in the {@code attrib_list} parameter of GLX13#CreatePixmap() and returned in the {@code value} parameter of
-		GLX13#QueryDrawable() when {@code attribute} is #TEXTURE_TARGET_EXT.
+		Accepted as a value in the {@code attrib_list} parameter of #CreatePixmap() and returned in the {@code value} parameter of
+		#QueryDrawable() when {@code attribute} is #TEXTURE_TARGET_EXT.
 		""",
 
 		"TEXTURE_1D_EXT"..0x20DB,

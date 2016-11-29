@@ -75,7 +75,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 	)
 
 	IntConstant(
-		"Returned by GLES20#GetError().",
+		"Returned by #GetError().",
 
 		"CONTEXT_LOST_KHR"..0x0507
 	)
@@ -85,7 +85,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 		"""
 		Indicates if the GL context has been in a reset state at any point since the last call to GetGraphicsResetStatus:
 		${ul(
-			"GLES20#NO_ERROR indicates that the GL context has not been in a reset state since the last call.",
+			"#NO_ERROR indicates that the GL context has not been in a reset state since the last call.",
 			"#GUILTY_CONTEXT_RESET_KHR indicates that a reset has been detected that is attributable to the current GL context.",
 			"#INNOCENT_CONTEXT_RESET_KHR indicates a reset has been detected that is not attributable to the current GL context.",
 			"#UNKNOWN_CONTEXT_RESET_KHR indicates a detected graphics reset whose cause is unknown."
@@ -109,7 +109,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 		and may not block indefinitely or cause termination of the application. Exceptions to this behavior include:
 		${ul(
 			"""
-			GLES20#GetError() and #GetGraphicsResetStatusKHR() behave normally following a graphics reset, so that the application can determine a reset has
+			#GetError() and #GetGraphicsResetStatusKHR() behave normally following a graphics reset, so that the application can determine a reset has
 			occurred, and when it is safe to destroy and recreate the context.
 			""",
 			"""
@@ -122,7 +122,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 
 	void(
 		"ReadnPixelsKHR",
-		"Behaves identically to GLES20#ReadPixels() except that it does not write more than {@code bufSize} bytes into {@code data}",
+		"Behaves identically to #ReadPixels() except that it does not write more than {@code bufSize} bytes into {@code data}",
 
 		GLint.IN("x", "the left pixel coordinate"),
 		GLint.IN("y", "the lower pixel coordinate"),

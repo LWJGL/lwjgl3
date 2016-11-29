@@ -31,8 +31,8 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 	IntConstant(
 		"""
 		Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX(), the {@code attrib_list} parameter of #ChooseFBConfigSGIX(),
-		by the {@code attribute} parameter of GLXSGIXPbuffer#QueryGLXPbufferSGIX() and by the {@code attribute} parameter of
-		GLXEXTImportContext#QueryContextInfoEXT().
+		by the {@code attribute} parameter of #QueryGLXPbufferSGIX() and by the {@code attribute} parameter of
+		#QueryContextInfoEXT().
 		""",
 
 		"FBCONFIG_ID_SGIX"..0x8013

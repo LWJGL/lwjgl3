@@ -195,7 +195,7 @@ val WNDPROC = "WNDPROC".callback(
 }
 
 val WNDCLASSEX_p = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
-	documentation = "Contains the window class attributes that are registered by the User32#RegisterClassEx() function."
+	documentation = "Contains the window class attributes that are registered by the #RegisterClassEx() function."
 
 	UINT.member("cbSize", "the size, in bytes, of this structure")
 	UINT.member("style", "the class style(s)")
@@ -244,14 +244,14 @@ val WINDOWPLACEMENT_p = struct(WINDOWS_PACKAGE, "WINDOWPLACEMENT") {
 	UINT.member(
 		"length",
 		"""
-		the length of the structure, in bytes. Before calling the User32#GetWindowPlacement() or User32#SetWindowPlacement() functions, set this member to
-		#SIZEOF.
+		the length of the structure, in bytes. Before calling the #GetWindowPlacement() or #SetWindowPlacement() functions, set this member to
+		WINDOWPLACEMENT#SIZEOF.
 		"""
 	)
 	UINT.member(
 		"flags",
 		"the flags that control the position of the minimized window and the method by which the window is restored. This member can be one or more of the" +
-		"following values:<br>User32#WPF_SETMINPOSITION User32#WPF_RESTORETOMAXIMIZED User32#WPF_ASYNCWINDOWPLACEMENT"
+		"following values:<br>#WPF_SETMINPOSITION #WPF_RESTORETOMAXIMIZED #WPF_ASYNCWINDOWPLACEMENT"
 	)
 	UINT.member("showCmd", "the current show state of the window")
 	POINT.member("ptMinPosition", "the coordinates of the window's upper-left corner when the window is minimized")
@@ -294,7 +294,7 @@ val TOUCHINPUT = struct(WINDOWS_PACKAGE, "TOUCHINPUT", mutable = false) {
 		"dwTime",
 		"""
 		the time stamp for the event, in milliseconds. The consuming application should note that the system performs no validation on this field; when the
-		User32#TOUCHINPUTMASKF_TIMEFROMSYSTEM flag is not set, the accuracy and sequencing of values in this field are completely dependent on the touch input
+		#TOUCHINPUTMASKF_TIMEFROMSYSTEM flag is not set, the accuracy and sequencing of values in this field are completely dependent on the touch input
 		provider.
 		"""
 	)
@@ -303,14 +303,14 @@ val TOUCHINPUT = struct(WINDOWS_PACKAGE, "TOUCHINPUT", mutable = false) {
 		"cxContact",
 		"""
 		the width of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the {@code dwMask} member has
-		the User32#TOUCHINPUTMASKF_CONTACTAREA flag set.
+		the #TOUCHINPUTMASKF_CONTACTAREA flag set.
 		"""
 	)
 	DWORD.member(
 		"cyContact",
 		"""
 		the height of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the {@code dwMask} member has
-		the User32#TOUCHINPUTMASKF_CONTACTAREA flag set.
+		the #TOUCHINPUTMASKF_CONTACTAREA flag set.
 		"""
 	)
 }
@@ -324,8 +324,8 @@ val MONITORINFOEX = struct(WINDOWS_PACKAGE, "MONITORINFOEX", mutable = false) {
 		"""
 		the size, in bytes, of the structure.
 
-		Set this member to #SIZEOF before calling the User32#GetMonitorInfo() function. Doing so lets the function determine the type of structure you are
-		passing to it.
+		Set this member to MONITORINFOEX#SIZEOF before calling the #GetMonitorInfo() function. Doing so lets the function determine the type of structure you
+		are passing to it.
 		"""
 	).mutable = true
 	RECT.member(
@@ -344,7 +344,7 @@ val MONITORINFOEX = struct(WINDOWS_PACKAGE, "MONITORINFOEX", mutable = false) {
 		values.
 		"""
 	)
-	DWORD.member("dwFlags", "the attributes of the display monitor. May be:<br>User32#MONITORINFOF_PRIMARY")
+	DWORD.member("dwFlags", "the attributes of the display monitor. May be:<br>#MONITORINFOF_PRIMARY")
 	TCHAR.array("szDevice", "a string that specifies the device name of the monitor being used", 32)
 }
 val LPMONITORINFOEX = MONITORINFOEX.p("LPMONITORINFOEX")
@@ -371,7 +371,7 @@ val DEVMODE_p = struct(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 		"dmSpecVersion",
 		"""
 		the version number of the initialization data specification on which the structure is based. To ensure the correct version is used for any operating
-		system, use GDI32#DM_SPECVERSION.
+		system, use #DM_SPECVERSION.
 		"""
 	).mutable = true
 	WORD.member("dmDriverVersion", "the driver version number assigned by the driver developer")
@@ -379,7 +379,7 @@ val DEVMODE_p = struct(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 		"dmSize",
 		"""
 		specifies the size, in bytes, of the {@code DEVMODE} structure, not including any private driver-specific data that might follow the structure's
-		public members. Set this member to #SIZEOF to indicate the version of the {@code DEVMODE} structure being used.
+		public members. Set this member to DEVMODE#SIZEOF to indicate the version of the {@code DEVMODE} structure being used.
 		"""
 	).mutable = true
 	WORD.member(
@@ -420,8 +420,8 @@ val DEVMODE_p = struct(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 			DWORD.member(
 				"dmDisplayOrientation",
 				"""
-				for display devices only, the orientation at which images should be presented. If GDI32#DM_DISPLAYORIENTATION is not set, this member must be
-				zero. If GDI32#DM_DISPLAYORIENTATION is set, this member must be one of the following values:<br>GDI32#DMDO_DEFAULT, GDI32#DMDO_90, GDI32#DMDO_180, GDI32#DMDO_270
+				for display devices only, the orientation at which images should be presented. If #DM_DISPLAYORIENTATION is not set, this member must be
+				zero. If #DM_DISPLAYORIENTATION is set, this member must be one of the following values:<br>#DMDO_DEFAULT, #DMDO_90, #DMDO_180, #DMDO_270
 
 				To determine whether the display orientation is portrait or landscape orientation, check the ratio of {@code dmPelsWidth} to
 				{@code dmPelsHeight}.
@@ -433,8 +433,8 @@ val DEVMODE_p = struct(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 				for fixed-resolution display devices only, how the display presents a low-resolution mode on a higher-resolution display. For example, if a
 				display device's resolution is fixed at 1024 x 768 pixels but its mode is set to 640 x 480 pixels, the device can either display a 640 x 480
 				image somewhere in the interior of the 1024 x 768 screen space or stretch the 640 x 480 image to fill the larger screen space. If
-				GDI32#DM_DISPLAYFIXEDOUTPUT is not set, this member must be zero. If GDI32#DM_DISPLAYFIXEDOUTPUT is set, this member must be one of the
-				following values:<br>GDI32#DMDFO_DEFAULT, GDI32#DMDFO_CENTER, GDI32#DMDFO_STRETCH
+				#DM_DISPLAYFIXEDOUTPUT is not set, this member must be zero. If #DM_DISPLAYFIXEDOUTPUT is set, this member must be one of the
+				following values:<br>#DMDFO_DEFAULT, #DMDFO_CENTER, #DMDFO_STRETCH
 				""")
 		}
 	}
@@ -456,7 +456,7 @@ val DEVMODE_p = struct(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 	DWORD.member("dmPelsWidth", "specifies the width, in pixels, of the visible device surface")
 	DWORD.member("dmPelsHeight", "specifies the height, in pixels, of the visible device surface")
 	union {
-		DWORD.member("dmDisplayFlags", "specifies the device's display mode, one or more of:<br>GDI32#DM_INTERLACED, GDI32#DMDISPLAYFLAGS_TEXTMODE")
+		DWORD.member("dmDisplayFlags", "specifies the device's display mode, one or more of:<br>#DM_INTERLACED, #DMDISPLAYFLAGS_TEXTMODE")
 		DWORD.member("dmNup", PRINTER_ONLY)
 	}
 	DWORD.member(
@@ -465,7 +465,7 @@ val DEVMODE_p = struct(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 		specifies the frequency, in hertz (cycles per second), of the display device in a particular mode. This value is also known as the display device's
 		vertical refresh rate.
 
-		When you call the User32#EnumDisplaySettingsEx() function, the {@code dmDisplayFrequency} member may return with the value 0 or 1. These values
+		When you call the #EnumDisplaySettingsEx() function, the {@code dmDisplayFrequency} member may return with the value 0 or 1. These values
 		represent the display hardware's default refresh rate. This default rate is typically set by switches on a display card or computer motherboard, or by
 		a configuration program that does not use display functions such as {@code ChangeDisplaySettingsEx}.
 		"""
@@ -485,7 +485,7 @@ val DEVMODE_p = struct(WINDOWS_PACKAGE, "DEVMODE", mutable = false) {
 val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE", mutable = false) {
 	documentation =
 		"""
-		Receives information about the display device specified by the {@code iDevNum} parameter of the User32#EnumDisplayDevices() function.
+		Receives information about the display device specified by the {@code iDevNum} parameter of the #EnumDisplayDevices() function.
 
 		The four string members are set based on the parameters passed to {@code EnumDisplayDevices}. If the {@code lpDevice} param is $NULL, then
 		{@code DISPLAY_DEVICE} is filled in with information about the display adapter(s). If it is a valid device name, then it is filled in with information
@@ -494,7 +494,7 @@ val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE", mutable = false) 
 
 	DWORD.member(
 		"cb",
-		"size, in bytes, of the {@code DISPLAY_DEVICE} structure. This must be initialized prior to calling User32#EnumDisplayDevices()."
+		"size, in bytes, of the {@code DISPLAY_DEVICE} structure. This must be initialized prior to calling #EnumDisplayDevices()."
 	).mutable = true
 	TCHAR.array("DeviceName", "an array of characters identifying the device name. This is either the adapter device or the monitor device.", size = 32)
 	TCHAR.array(
@@ -516,7 +516,7 @@ val SECURITY_ATTRIBUTES = struct(WINDOWS_PACKAGE, "SECURITY_ATTRIBUTES") {
 		{@code RegCreateKeyEx}, or {@code RegSaveKeyEx}.
 		"""
 
-	DWORD.member("nLength", "the size, in bytes, of this structure. Set this value to SECURITY_ATTRIBUTES##SIZEOF.")
+	DWORD.member("nLength", "the size, in bytes, of this structure. Set this value to SECURITY_ATTRIBUTES#SIZEOF.")
 	LPVOID.member(
 		"lpSecurityDescriptor",
 		"""

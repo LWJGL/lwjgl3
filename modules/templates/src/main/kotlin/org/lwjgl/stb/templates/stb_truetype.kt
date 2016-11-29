@@ -336,7 +336,7 @@ int main(int arg, char **argv)
 			"font_size",
 			"""
 			the full height of the character from ascender to descender, as computed by #ScaleForPixelHeight(). To use a point size as computed by
-			#ScaleForMappingEmToPixels(), wrap the font size in ##STBTT_POINT_SIZE() and pass the result, i.e.:
+			#ScaleForMappingEmToPixels(), wrap the font size in #STBTT_POINT_SIZE() and pass the result, i.e.:
 			${codeBlock("""
 ...,                  20 , ... // font max minus min y is 20 pixels tall
 ..., STBTT_POINT_SIZE(20), ... // 'M' is 20 pixels tall""")}

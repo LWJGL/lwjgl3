@@ -73,8 +73,8 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 	void(
 		"DebugMessageEnableAMD",
 		"""
-		Allows disabling or enabling generation of subsets of messages. If {@code enabled} is GL11#TRUE, the referenced subset of messages is enabled. If
-		GL11#FALSE, then those messages are disabled. This command can reference different subsets of messages by varying its parameter values in the following
+		Allows disabling or enabling generation of subsets of messages. If {@code enabled} is #TRUE, the referenced subset of messages is enabled. If
+		#FALSE, then those messages are disabled. This command can reference different subsets of messages by varying its parameter values in the following
 		ways:
 		${ol(
 			"To reference all messages, let {@code category}, {@code severity}, and {@code count} all be zero. The value of {@code ids} is ignored in this case.",
@@ -96,10 +96,10 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		    message IDs that are not valid within the category are silently ignored.
 		    """
 		)}
-		In all of the above cases, if {@code category} is non-zero and specifies an invalid category, the error GL11#INVALID_ENUM is generated. Similarly if
-		{@code severity} is non-zero and is an invalid severity level, the error GL11#INVALID_ENUM is generated. If {@code count} is less than zero, the error
-		GL11#INVALID_VALUE is generated. If the parameters do not fall into one of the cases defined above, the error GL11#INVALID_VALUE is generated. The error
-		GL11#INVALID_OPERATION is generated if this command is called in a non-debug context.
+		In all of the above cases, if {@code category} is non-zero and specifies an invalid category, the error #INVALID_ENUM is generated. Similarly if
+		{@code severity} is non-zero and is an invalid severity level, the error #INVALID_ENUM is generated. If {@code count} is less than zero, the error
+		#INVALID_VALUE is generated. If the parameters do not fall into one of the cases defined above, the error #INVALID_VALUE is generated. The error
+		#INVALID_OPERATION is generated if this command is called in a non-debug context.
   
 		Although messages are grouped into categories and severities, and entire groups of messages can be turned off with a single call, there is no explicit
 		per-category or per-severity enabled state. Instead the enabled state is stored individually for each message. There is no difference between disabling
@@ -122,12 +122,12 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		Injects an application-supplied message into the debug message stream.
 		
 		The value of {@code id} specifies the ID for the message and {@code severity} indicates its severity level as defined by the application. If
-		{@code severity} is not a valid severity level, the error GL11#INVALID_ENUM will be generated. The value of {@code category} must be
-		#DEBUG_CATEGORY_APPLICATION_AMD, or the error GL11#INVALID_ENUM will be generated. The string {@code buf} contains the string representation of the
+		{@code severity} is not a valid severity level, the error #INVALID_ENUM will be generated. The value of {@code category} must be
+		#DEBUG_CATEGORY_APPLICATION_AMD, or the error #INVALID_ENUM will be generated. The string {@code buf} contains the string representation of the
 		message. The parameter {@code length} contains the size of the message's string representation, excluding the null-terminator. If {@code length} is
 		zero, then its value is derived from the string-length of {@code buf} and {@code buf} must contain a null-terminated string. The error
-		GL11#INVALID_VALUE will be generated if {@code length} is less than zero or its derived value is larger than or equal to #MAX_DEBUG_MESSAGE_LENGTH_AMD.
-		The error GL11#INVALID_OPERATION will be generated if this function is called in a non-debug context.
+		#INVALID_VALUE will be generated if {@code length} is less than zero or its derived value is larger than or equal to #MAX_DEBUG_MESSAGE_LENGTH_AMD.
+		The error #INVALID_OPERATION will be generated if this function is called in a non-debug context.
 		""",
 
 		GLenum.IN("category", "the message category", "#DEBUG_CATEGORY_APPLICATION_AMD"),
@@ -146,7 +146,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		calling convention must be the same as the calling convention of GL functions. Anything else will result in undefined behavior. Only one debug callback
 		can be specified for the current context, and further calls overwrite the previous callback. Specifying zero as the value of {@code callback} clears the
 		current callback and disables message output through callbacks. Applications can specify user-specified data through the pointer {@code userParam}. The
-		context will store this pointer and will include it as one of the parameters of each call to the callback function. The error GL11#INVALID_OPERATION
+		context will store this pointer and will include it as one of the parameters of each call to the callback function. The error #INVALID_OPERATION
 		will be generated if this function is called for contexts created without the debug flag.
 
 		If the application has specified a callback function in a debug context, the implementation will call that function whenever any unfiltered message is
@@ -178,16 +178,16 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 
 		This function will fetch as many messages as possible from the message log up to {@code count} in order from oldest to newest, and will return the
 		number of messages fetched. Those messages that were fetched will be removed from the log. The value of {@code count} must be greater than zero and less
-		than #MAX_DEBUG_LOGGED_MESSAGES_AMD or otherwise the error GL11#INVALID_VALUE will be generated. The value of {@code count} can be larger than the
+		than #MAX_DEBUG_LOGGED_MESSAGES_AMD or otherwise the error #INVALID_VALUE will be generated. The value of {@code count} can be larger than the
 		actual number of messages currently in the log. If {@code messageLog} is not a null pointer, then the string representations of all fetched messages
 		will be stored in the buffer {@code messageLog} and will be separated by null-terminators. The maximum size of the buffer (including all
 		null-terminators) is denoted by {@code bufSize}, and strings of messages within {@code count} that do not fit in the buffer will not be fetched. If
-		{@code bufSize} is less than zero, the error GL11#INVALID_VALUE will be generated. If {@code messageLog} is a null pointer, then the value of
+		{@code bufSize} is less than zero, the error #INVALID_VALUE will be generated. If {@code messageLog} is a null pointer, then the value of
 		{@code bufSize} is ignored. The categories, severity levels, IDs, and string representation lengths of all (up to {@code count}) removed messages will
 		be stored in the arrays {@code categories}, {@code severities}, {@code ids}, and {@code lengths}, respectively. The counts stored in the array
 		{@code lengths} include the null-terminator of each string. Any and all of the output arrays, including {@code messageLog}, are optional, and no data is
 		returned for those arrays that are specified with a null pointer. To simply delete up to {@code count} messages from the message log and ignoring, the
-		application can call the function with null pointers for all output arrays. The error GL11#INVALID_OPERATION will be generated by GetDebugMessageLogAMD
+		application can call the function with null pointers for all output arrays. The error #INVALID_OPERATION will be generated by GetDebugMessageLogAMD
 		if it is called in a non-debug context.
 		""",
 

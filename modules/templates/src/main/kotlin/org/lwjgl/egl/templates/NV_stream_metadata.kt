@@ -42,7 +42,7 @@ val NV_stream_metadata = "NVStreamMetadata".nativeClassEGL("NV_stream_metadata",
 	)
 
 	IntConstant(
-		"Accepted in {@code attrib_list} by KHRStream#CreateStreamKHR() and as {@code attribute} by KHRStream#QueryStreamKHR().",
+		"Accepted in {@code attrib_list} by #CreateStreamKHR() and as {@code attribute} by #QueryStreamKHR().",
 
 		"METADATA0_SIZE_NV"..0x3255,
 		"METADATA1_SIZE_NV"..0x3256,

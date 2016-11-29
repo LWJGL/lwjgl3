@@ -203,7 +203,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		"decode_filename",
 		"""
 		Decode an entire file and output the data interleaved into a {@code malloc()ed} buffer stored in {@code *output}. When you're done with it, just
-		LibCStdlib##free() the pointer returned in {@code *output}.
+		LibCStdlib#free() the pointer returned in {@code *output}.
 		""",
 
 		const..charASCII_p.IN("filename", "the file name"),

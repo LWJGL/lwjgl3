@@ -20,7 +20,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 		"""
 
 	IntConstant(
-		"Accepted as part of the {@code flags} parameter to GL44#BufferStorage().",
+		"Accepted as part of the {@code flags} parameter to #BufferStorage().",
 
 		"SPARSE_STORAGE_BIT_ARB"..0x0400
 	)

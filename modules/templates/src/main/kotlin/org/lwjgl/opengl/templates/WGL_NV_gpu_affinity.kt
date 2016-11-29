@@ -23,8 +23,8 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		Requires ${WGL_ARB_extensions_string.link}.
 		"""
 
-	val wglMakeCurrent = "WGL#MakeCurrent()"
-	val wglMakeContextCurrentARB = "WGLARBMakeCurrentRead#MakeContextCurrentARB()"
+	val wglMakeCurrent = "WGL#wglMakeCurrent()"
+	val wglMakeContextCurrentARB = "#MakeContextCurrentARB()"
 
 	IntConstant(
 		"New error code set by wglShareLists, wglMakeCurrent and $wglMakeContextCurrentARB.",
@@ -69,7 +69,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		Creates an affinity-DC. Affinity-DCs, a new type of DC, can be used to direct OpenGL commands to a specific GPU or set of GPUs. An affinity-DC is a
 		device context with a GPU affinity mask embedded in it. This restricts the device context to only allow OpenGL commands to be sent to the GPU(s) in the
 		affinity mask. An affinity-DC can be created directly, using the new function {@code wglCreateAffinityDCNV} and also indirectly by calling
-		WGLARBPbuffer#CreatePbufferARB() followed by WGLARBPbuffer#GetPbufferDCARB().
+		#CreatePbufferARB() followed by #GetPbufferDCARB().
 
 		If successful, the function returns an affinity-DC handle. If it fails, $NULL will be returned.
 		""",

@@ -28,9 +28,9 @@ val WGL_NV_delay_before_swap = "WGLNVDelayBeforeSwap".nativeClassWGL("WGL_NV_del
 		"DelayBeforeSwapNV",
 		"""
 		Blocks the CPU until {@code seconds} seconds before a synchronized swap would occur on the window associated with {@code hDC}. It also returns a boolean
-		value equal to WinBase##TRUE when the implementation had to wait for the synchronized swap and WinBase##FALSE otherwise.
+		value equal to WinBase#TRUE when the implementation had to wait for the synchronized swap and WinBase#FALSE otherwise.
   
-		The parameter {@code hDC} must be a valid device context associated with a graphic adapter. If {@code hDC} is not valid, WinBase##GetLastError() will
+		The parameter {@code hDC} must be a valid device context associated with a graphic adapter. If {@code hDC} is not valid, WinBase#GetLastError() will
 		return WGL_INVALID_HDC, {@code DelayBeforeSwapNV} will return FALSE and will not wait for the swap. If {@code hDC} is not associated with a graphic
 		adapter, {@code GetLastError} will return ERROR_DC_NOT_FOUND, {@code DelayBeforeSwapNV} will return FALSE and will not wait for the swap.
 

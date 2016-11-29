@@ -149,10 +149,10 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	const..void_p.IN("userParam",
-		"the user-specified value that was passed when calling GL43##glDebugMessageCallback() or KHRDebug##glDebugMessageCallback()"
+		"the user-specified value that was passed when calling GL43#glDebugMessageCallback() or KHRDebug#glDebugMessageCallback()"
 	)
 ) {
-	documentation = "Instances of this interface may be passed to the GL43##glDebugMessageCallback() and KHRDebug##glDebugMessageCallback() methods."
+	documentation = "Instances of this interface may be passed to the GL43#glDebugMessageCallback() and KHRDebug#glDebugMessageCallback() methods."
 	useSystemCallConvention()
 	additionalCode = """
 	/**

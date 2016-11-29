@@ -13,8 +13,8 @@ val ARB_explicit_uniform_location = "ARBExplicitUniformLocation".nativeClassGL("
 		Native bindings to the $registryLink extension.
 
 		This extension provides a method to pre-assign uniform locations to uniform variables in the default uniform block, including subroutine uniforms. This
-		allows an application to modify the uniform values without requiring a GL query like GL20#GetUniformLocation(), GL40#GetSubroutineUniformLocation() and
-		GL40#GetSubroutineIndex().
+		allows an application to modify the uniform values without requiring a GL query like #GetUniformLocation(), #GetSubroutineUniformLocation() and
+		#GetSubroutineIndex().
 
 		Requires ${GL33.core} or ${registryLinkTo("ARB", "explicit_attrib_location")}. ${GL43.promoted}
 		"""

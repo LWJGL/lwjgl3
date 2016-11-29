@@ -160,8 +160,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		cl_device_id.IN(
 			"device",
 			"""
-			a device associated with context. It can either be in the list of devices specified when context is created using CL10#CreateContext() or have the same
-			device type as device type specified when context is created using CL10#CreateContextFromType().
+			a device associated with context. It can either be in the list of devices specified when context is created using #CreateContext() or have the same
+			device type as device type specified when context is created using #CreateContextFromType().
 			"""
 		),
 		nullable..NullTerminated..const..cl_command_queue_properties_p.IN(
@@ -171,7 +171,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			value. The list is terminated with {@code 0}. If a supported property and its value is not specified in properties, its default value will be used.
 			{@code properties} can be $NULL in which case the default values for supported command-queue properties will be used.
 			""",
-			"CL10#QUEUE_PROPERTIES #QUEUE_SIZE"
+			"#QUEUE_PROPERTIES #QUEUE_SIZE"
 		),
 		ERROR_RET,
 
@@ -199,7 +199,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"flags",
 			"""
 			a bit-field that is used to specify allocation and usage information such as the memory arena that should be used to allocate the pipe object and
-			how it will be used. If value specified for flags is 0, the default is used which is CL10#MEM_READ_WRITE.
+			how it will be used. If value specified for flags is 0, the default is used which is #MEM_READ_WRITE.
 			"""
 		),
 		cl_uint.IN("pipe_packet_size", "the size in bytes of a pipe packet"),
@@ -222,10 +222,10 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"$INVALID_VALUE if values specified in {@code flags} are invalid.",
 			"$INVALID_VALUE if {@code properties} is not $NULL.",
 			"""
-			#INVALID_PIPE_SIZE if {@code pipe_packet_size} is {@code 0} or the {@code pipe_packet_size} exceeds CL20#DEVICE_PIPE_MAX_PACKET_SIZE
+			#INVALID_PIPE_SIZE if {@code pipe_packet_size} is {@code 0} or the {@code pipe_packet_size} exceeds #DEVICE_PIPE_MAX_PACKET_SIZE
 			value for all devices in {@code context} or if {@code pipe_max_packets} is {@code 0}.
 			""",
-			"CL10#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for the pipe object.",
+			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for the pipe object.",
 			OORE,
 			OOHME
 		)}
@@ -274,12 +274,12 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		context passed to {@code SVMAlloc} has devices with mixed endianness and the OpenCL implementation is unable to implement SVM because of that mixed
 		endianness, {@code SVMAlloc} will fail and return $NULL.
 
-		Although SVM is generally not supported for image objects, CL12#CreateImage() may create an image from a buffer (a 1D image from a buffer
+		Although SVM is generally not supported for image objects, #CreateImage() may create an image from a buffer (a 1D image from a buffer
 		or a 2D image from buffer) if the buffer specified in its image description parameter is a SVM buffer. Such images have a linear memory representation
 		so their memory can be shared using SVM. However, fine grained sharing and atomics are not supported for image reads and writes in a kernel.
 
-		If CL10#CreateBuffer() is called with a pointer returned by {@code SVMAlloc} as its {@code host_ptr} argument, and
-		CL10#MEM_USE_HOST_PTR is set in its {@code flags} argument, {@code CreateBuffer} will succeed and return a valid non-zero buffer object as
+		If #CreateBuffer() is called with a pointer returned by {@code SVMAlloc} as its {@code host_ptr} argument, and
+		#MEM_USE_HOST_PTR is set in its {@code flags} argument, {@code CreateBuffer} will succeed and return a valid non-zero buffer object as
 		long as the {@code size} argument to {@code CreateBuffer} is no larger than the {@code size} argument passed in the original {@code SVMAlloc} call. The
 		new buffer object returned has the shared memory as the underlying storage. Locations in the buffer's underlying shared memory can be operated on using,
 		e.g., atomic operations if the device supports them.
@@ -289,7 +289,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		cl_svm_mem_flags.IN(
 			"flags",
 			"a bit-field that is used to specify allocation and usage information",
-			"CL10#MEM_READ_WRITE CL10#MEM_WRITE_ONLY CL10#MEM_READ_ONLY #MEM_SVM_FINE_GRAIN_BUFFER #MEM_SVM_ATOMICS"
+			"#MEM_READ_WRITE #MEM_WRITE_ONLY #MEM_READ_ONLY #MEM_SVM_FINE_GRAIN_BUFFER #MEM_SVM_ATOMICS"
 		),
 		AutoSizeResult..size_t.IN("size", "the size in bytes of the SVM buffer to be allocated"),
 		unsigned_int.IN(
@@ -312,7 +312,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"Values specified in {@code flags} do not follow rules for supported values.",
 			"#MEM_SVM_FINE_GRAIN_BUFFER or #MEM_SVM_ATOMICS is specified in flags and these are not supported by at least one device in context.",
 			"The values specified in {@code flags} are not valid.",
-			"{@code size} is {@code 0} or &gt; CL10#DEVICE_MAX_MEM_ALLOC_SIZE value for any device in context.",
+			"{@code size} is {@code 0} or &gt; #DEVICE_MAX_MEM_ALLOC_SIZE value for any device in context.",
 			"{@code alignment} is not a power of two or the OpenCL implementation cannot support the specified alignment for at least one device in context.",
 			"There was a failure to allocate resources."
 		)}
@@ -326,12 +326,12 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 
 		Note that {@code SVMFree} does not wait for previously enqueued commands that may be using {@code svm_pointer} to finish before freeing
 		{@code svm_pointer}. It is the responsibility of the application to make sure that enqueued commands that use {@code svm_pointer} have finished before
-		freeing {@code svm_pointer}. This can be done by enqueuing a blocking operation such as CL10#Finish(), CL10#WaitForEvents(),
-		CL10#EnqueueReadBuffer() or by registering a callback with the events associated with enqueued commands and when the last enqueued command
+		freeing {@code svm_pointer}. This can be done by enqueuing a blocking operation such as #Finish(), #WaitForEvents(),
+		#EnqueueReadBuffer() or by registering a callback with the events associated with enqueued commands and when the last enqueued command
 		has finished freeing {@code svm_pointer}.
 
 		The behavior of using {@code svm_pointer} after it has been freed is undefined. In addition, if a buffer object is created using
-		CL10#CreateBuffer() with {@code svm_pointer}, the buffer object must first be released before the {@code svm_pointer} is freed.
+		#CreateBuffer() with {@code svm_pointer}, the buffer object must first be released before the {@code svm_pointer} is freed.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context used to create the SVM buffer"),
@@ -423,7 +423,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			ESEFEIWLE("copy"),
 			"$INVALID_VALUE if {@code dst_ptr} or {@code src_ptr} are $NULL.",
 			"$INVALID_VALUE if {@code size} is {@code 0}.",
-			"CL10#MEM_COPY_OVERLAP if the values specified for {@code dst_ptr}, {@code src_ptr} and {@code size} result in an overlapping copy.",
+			"#MEM_COPY_OVERLAP if the values specified for {@code dst_ptr}, {@code src_ptr} and {@code size} result in an overlapping copy.",
 			OORE,
 			OOHME
 		)}
@@ -578,7 +578,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"arg_value",
 			"""
 			the SVM pointer that should be used as the argument value for argument specified by {@code arg_index}. The SVM pointer specified is the value used
-			by all API calls that enqueue kernel (CL10#EnqueueNDRangeKernel()) until the argument value is changed by a call to
+			by all API calls that enqueue kernel (#EnqueueNDRangeKernel()) until the argument value is changed by a call to
 			{@code SetKernelArgSVMPointer} for {@code kernel}. The SVM pointer can only be used for arguments that are declared to be a pointer to global or
 			constant memory. The SVM pointer value must be aligned according to the argument's type. For example, if the argument is declared to be
 			{@code global float4 *p}, the SVM pointer value passed for {@code p} must be at a minimum aligned to a {@code float4}. The SVM pointer value
@@ -625,7 +625,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 
 		#KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM = $TRUE indicates that the OpenCL implementation must assume that system pointers might be passed as
 		kernel arguments and/or stored inside SVM allocations passed as kernel arguments. In this case, if the device to which the kernel is enqueued does not
-		support system SVM pointers, CL10#EnqueueNDRangeKernel() will return a $INVALID_OPERATION error. If none of the devices in the context
+		support system SVM pointers, #EnqueueNDRangeKernel() will return a $INVALID_OPERATION error. If none of the devices in the context
 		associated with kernel support fine-grain system SVM allocations, {@code SetKernelExecInfo} will return a $INVALID_OPERATION error.
 
 		If {@code SetKernelExecInfo} has not been called with a value for #KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM, the default value is used for this

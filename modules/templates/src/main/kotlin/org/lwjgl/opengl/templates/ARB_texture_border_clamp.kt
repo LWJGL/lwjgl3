@@ -18,15 +18,15 @@ val ARB_texture_border_clamp = "ARBTextureBorderClamp".nativeClassGL("ARB_textur
 		and edge colors.
 
 		This extension defines an additional texture clamping algorithm. #CLAMP_TO_BORDER_ARB clamps texture coordinates at all mipmap levels such that
-		GL11#NEAREST and GL11#LINEAR filters return only the color of the border texels.
+		#NEAREST and #LINEAR filters return only the color of the border texels.
 
 		${GL13.promoted}
 		"""
 
 	IntConstant(
 		"""
-		Accepted by the {@code param} parameter of GL11#TexParameteri() and GL11#TexParameterf(), and by the {@code params} parameter of GL11#TexParameteriv()
-		and GL11#TexParameterfv(), when their {@code pname} parameter is GL11#TEXTURE_WRAP_S, GL11#TEXTURE_WRAP_T, or GL12#TEXTURE_WRAP_R.
+		Accepted by the {@code param} parameter of #TexParameteri() and #TexParameterf(), and by the {@code params} parameter of #TexParameteriv()
+		and #TexParameterfv(), when their {@code pname} parameter is #TEXTURE_WRAP_S, #TEXTURE_WRAP_T, or #TEXTURE_WRAP_R.
 		""",
 
 		"CLAMP_TO_BORDER_ARB"..0x812D

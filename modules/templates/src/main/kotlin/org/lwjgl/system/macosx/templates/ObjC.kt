@@ -15,7 +15,7 @@ val objc_runtime = "ObjCRuntime".nativeClass(MACOSX_PACKAGE, binding = simpleBin
 		Native bindings to the Objective-C Runtime.
 
 		Due to the nature of the {@code objc_msgSend*} functions, they are not directly exposed in this binding. Advanced users with good understanding of the
-		complexity involved with using these functions, may access them via the #getLibrary() method:
+		complexity involved with using these functions, may access them via the ObjCRuntime#getLibrary() method:
 		${codeBlock("""
 SharedLibrary objc = ObjCRuntime.getLibrary();
 long objc_msgSend = objc.getFunctionAddress("objc_msgSend");

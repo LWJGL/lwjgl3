@@ -37,7 +37,7 @@ val altera_live_object_tracking = "ALTERALiveObjectTracking".nativeClassCL("alte
 		Registers a future interest in enumerating all the live objects in the runtime API. Registering such an interest may itself increase memory use and
 		runtime, which is why is must be explicitly requested.
 
-		Behaviour is unspecified if the {@code clTrackLiveObjectsAltera} method is called before the the first call to CL10#GetPlatformIDs().
+		Behaviour is unspecified if the {@code clTrackLiveObjectsAltera} method is called before the the first call to #GetPlatformIDs().
 		""",
 
 		cl_platform_id.IN("platform", "the platform ID")

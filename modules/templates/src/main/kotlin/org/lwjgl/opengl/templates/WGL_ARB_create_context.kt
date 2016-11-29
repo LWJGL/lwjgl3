@@ -37,7 +37,7 @@ val WGL_ARB_create_context = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_creat
 	)
 
 	IntConstant(
-		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
+		"New errors returned by org.lwjgl.system.windows.WinBase#GetLastError().",
 
 		"ERROR_INVALID_VERSION_ARB"..0x2095
 	).noPrefix()

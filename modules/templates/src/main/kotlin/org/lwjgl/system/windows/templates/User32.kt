@@ -609,7 +609,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 	).javaDocLinks
 
 	IntConstant(
-		"Queue status flags for #GetQueueStatus() and #MsgWaitForMultipleObjects()",
+		"Queue status flags for {@code GetQueueStatus} and {@code MsgWaitForMultipleObjects}",
 
 		"QS_KEY"..0x0001,
 		"QS_MOUSEMOVE"..0x0002,
@@ -1256,7 +1256,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		"""
 		if the function succeeds, the return value is the previous value of the specified offset. If this was not previously set, the return value is zero.
 
-		If the function fails, the return value is zero. To get extended error information, call WinBase#getLastError().
+		If the function fails, the return value is zero. To get extended error information, call #getLastError().
 		"""
 	)
 
@@ -1488,7 +1488,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 	).javaDocLinks
 
 	IntConstant(
-		"Touch input flag values (TOUCHINPUT##dwFlags()).",
+		"Touch input flag values (TOUCHINPUT#dwFlags()).",
 
 		"TOUCHEVENTF_MOVE"..0x0001,
 		"TOUCHEVENTF_DOWN"..0x0002,
@@ -1501,7 +1501,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 	)
 
 	IntConstant(
-		"Touch input mask values (TOUCHINPUT##dwMask()).",
+		"Touch input mask values (TOUCHINPUT#dwMask()).",
 
 		"TOUCHINPUTMASKF_TIMEFROMSYSTEM"..0x0001,
 		"TOUCHINPUTMASKF_EXTRAINFO"..0x0002,
@@ -1782,7 +1782,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			"lpDevMode",
 			"""
 			a pointer to a ##DEVMODE structure into which the function stores information about the specified graphics mode. Before calling
-			{@code EnumDisplaySettingsEx}, set the {@code dmSize} member to DEVMODE##SIZEOF, and set the {@code dmDriverExtra} member to indicate the size, in
+			{@code EnumDisplaySettingsEx}, set the {@code dmSize} member to DEVMODE#SIZEOF, and set the {@code dmDriverExtra} member to indicate the size, in
 			bytes, of the additional space available to receive private driver data.
 
 			The {@code EnumDisplaySettingsEx} function will populate the {@code dmFields} member of the {@code lpDevMode} and one or more other members of the
@@ -1803,7 +1803,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			#EnumDisplayDevices() are valid.
 
 			The {@code lpszDeviceName} parameter can be $NULL. A $NULL value specifies the default display device. The default device can be determined by
-			calling {@code EnumDisplayDevices} and checking for the GDI32#DISPLAY_DEVICE_PRIMARY_DEVICE flag.
+			calling {@code EnumDisplayDevices} and checking for the #DISPLAY_DEVICE_PRIMARY_DEVICE flag.
 			"""
 		),
 		nullable..DEVMODE_p.IN(
@@ -1901,8 +1901,8 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		nullable..HCURSOR.IN(
 			"hCursor",
 			"""
-			a handle to the cursor. The cursor must have been created by the #CreateCursor() function or loaded by the #LoadCursor() or #LoadImage() function.
-			If this parameter is $NULL, the cursor is removed from the screen.
+			a handle to the cursor. The cursor must have been created by the {@code CreateCursor} function or loaded by the #LoadCursor() or {@code LoadImage}
+			function. If this parameter is $NULL, the cursor is removed from the screen.
 			"""
 		),
 

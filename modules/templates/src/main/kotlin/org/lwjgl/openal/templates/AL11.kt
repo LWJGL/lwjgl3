@@ -132,30 +132,12 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 	)
 
 	ALvoid(
-		"GetBufferi",
-		"Returns the integer value of the specified buffer parameter.",
-
-		ALuint.IN("buffer", "the buffer to query"),
-		ALenum.IN("param", "the parameter to query"),
-		Check(1)..ReturnParam..ALint_p.OUT("value", "the parameter value")
-	)
-
-	ALvoid(
 		"GetBufferiv",
 		"Returns the integer values of the specified buffer parameter.",
 
 		ALuint.IN("buffer", "the buffer to query"),
 		ALenum.IN("param", "the parameter to query"),
 		Check(1)..ALint_p.OUT("values", "the parameter values")
-	)
-
-	ALvoid(
-		"GetBufferf",
-		"Returns the float value of the specified buffer parameter.",
-
-		ALuint.IN("buffer", "the buffer to query"),
-		ALenum.IN("param", "the parameter to query"),
-		Check(1)..ReturnParam..ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(

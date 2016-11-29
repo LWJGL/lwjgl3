@@ -27,8 +27,8 @@ val WGL_ARB_robustness_application_isolation = "WGLARBRobustnessApplicationIsola
 
 	IntConstant(
 		"""
-		Accepted as a bit in the attribute value for WGLARBCreateContext#CONTEXT_FLAGS_ARB in the {@code attribList} argument to
-		WGLARBCreateContext#CreateContextAttribsARB().
+		Accepted as a bit in the attribute value for WGLARBCreateContext#WGL_CONTEXT_FLAGS_ARB in the {@code attribList} argument to
+		WGLARBCreateContext#wglCreateContextAttribsARB().
 		""",
 
 		"CONTEXT_RESET_ISOLATION_BIT_ARB"..0x00000008

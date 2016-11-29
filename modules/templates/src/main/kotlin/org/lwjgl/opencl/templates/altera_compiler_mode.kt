@@ -31,7 +31,7 @@ val altera_compiler_mode = "ALTERACompilerMode".nativeClassCL("altera_compiler_m
 		"""
 
 	IntConstant(
-		"New context properties to be used in the {@code properties} array supplied to to CL10#CreateContext() or CL10#CreateContextFromType().",
+		"New context properties to be used in the {@code properties} array supplied to to #CreateContext() or #CreateContextFromType().",
 
 		"CONTEXT_COMPILER_MODE_ALTERA"..0x40F0,
 		"CONTEXT_PROGRAM_EXE_LIBRARY_ROOT_ALTERA"..0x40F1,

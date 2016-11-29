@@ -57,6 +57,6 @@ val ARB_color_buffer_float = "ARBColorBufferFloat".nativeClassGL("ARB_color_buff
 		"Controls color clamping.",
 
 		GLenum.IN("target", "the color target", Targets),
-		GLenum.IN("clamp", "the new clamping state", "GL11#TRUE GL11#FALSE #FIXED_ONLY_ARB")
+		GLenum.IN("clamp", "the new clamping state", "#TRUE #FALSE #FIXED_ONLY_ARB")
 	)
 }

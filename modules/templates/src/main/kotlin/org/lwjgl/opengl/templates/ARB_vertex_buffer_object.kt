@@ -38,8 +38,8 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		GL that the application does not expect to update the contents of the buffer frequently or even at all, while the vertices might be retrieved from a
 		buffer object with the usage mode "STREAM_DRAW", indicating that the vertices will be updated on a regular basis.
 
-		In addition, a binding is defined by which applications can source index data (as used by GL11#DrawElements(), GL12#DrawRangeElements(), and
-		GL14#MultiDrawElements()) from a buffer object. On some platforms, this enables very large models to be rendered with no more than a few small commands
+		In addition, a binding is defined by which applications can source index data (as used by #DrawElements(), #DrawRangeElements(), and
+		#MultiDrawElements()) from a buffer object. On some platforms, this enables very large models to be rendered with no more than a few small commands
 		to the graphics device.
 
 		It is expected that a future extension will allow sourcing pixel data from and writing pixel data to a buffer object.
@@ -217,8 +217,8 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 
 		<b>LWJGL note</b>: This method comes in 3 flavors:
 		${ol(
-			"#MapBufferARB(int, int) - Calls #GetBufferParameteriARB() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
-			"#MapBufferARB(int, int, ByteBuffer) - Calls #GetBufferParameteriARB() to retrieve the buffer size and the {@code old_buffer} parameter is reused if not null.",
+			"#MapBufferARB(int, int) - Calls #GetBufferParameterivARB() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
+			"#MapBufferARB(int, int, ByteBuffer) - Calls #GetBufferParameterivARB() to retrieve the buffer size and the {@code old_buffer} parameter is reused if not null.",
 			"#MapBufferARB(int, int, long, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if not null. This is the most efficient method."
 		)}
 		""",

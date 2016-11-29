@@ -12,26 +12,26 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 	val IMAGING_INTERNAL_FORMATS =
 		"""
-		GL11#RGB GL11#RGBA
-		GL30#RG8 GL31#RG8_SNORM GL11#R3_G3_B2 GL11#RGB4 GL11#RGB5 GL41#RGB565 GL11#RGB8
-		GL31#RGB8_SNORM GL11#RGB10 GL11#RGB12 GL11#RGB16 GL31#RGB16_SNORM GL11#RGBA2 GL11#RGBA4 GL11#RGB5_A1 GL11#RGBA8 GL31#RGBA8_SNORM GL11#RGB10_A2
-		GL11#RGBA12 GL11#RGBA16 GL31#RGBA16_SNORM GL21#SRGB8 GL21#SRGB8_ALPHA8 GL30#RGB16F GL30#RGBA16F GL30#RGB32F GL30#RGBA32F
-		GL30#R11F_G11F_B10F
+		#RGB GL11#GL_RGBA
+		#RG8 #RG8_SNORM #R3_G3_B2 #RGB4 #RGB5 #RGB565 #RGB8
+		#RGB8_SNORM #RGB10 #RGB12 #RGB16 #RGB16_SNORM #RGBA2 #RGBA4 #RGB5_A1 #RGBA8 #RGBA8_SNORM #RGB10_A2
+		#RGBA12 #RGBA16 #RGBA16_SNORM #SRGB8 #SRGB8_ALPHA8 #RGB16F #RGBA16F #RGB32F #RGBA32F
+		#R11F_G11F_B10F
 
-		GL11#ALPHA GL11#LUMINANCE GL11#LUMINANCE_ALPHA GL11#INTENSITY GL11#ALPHA4 GL11#ALPHA8 GL11#ALPHA12 GL11#ALPHA16 GL11#LUMINANCE4 GL11#LUMINANCE8
-		GL11#LUMINANCE12 GL11#LUMINANCE16 GL11#LUMINANCE4_ALPHA4 GL11#LUMINANCE6_ALPHA2 GL11#LUMINANCE8_ALPHA8 GL11#LUMINANCE12_ALPHA4 GL11#LUMINANCE12_ALPHA12
-		GL11#LUMINANCE16_ALPHA16 GL11#INTENSITY4 GL11#INTENSITY8 GL11#INTENSITY12 GL11#INTENSITY16 GL21#SLUMINANCE GL21#SLUMINANCE8_ALPHA8
+		#ALPHA #LUMINANCE #LUMINANCE_ALPHA #INTENSITY #ALPHA4 #ALPHA8 #ALPHA12 #ALPHA16 #LUMINANCE4 #LUMINANCE8
+		#LUMINANCE12 #LUMINANCE16 #LUMINANCE4_ALPHA4 #LUMINANCE6_ALPHA2 #LUMINANCE8_ALPHA8 #LUMINANCE12_ALPHA4 #LUMINANCE12_ALPHA12
+		#LUMINANCE16_ALPHA16 #INTENSITY4 #INTENSITY8 #INTENSITY12 #INTENSITY16 #SLUMINANCE #SLUMINANCE8_ALPHA8
 		"""
 
 	val PIXEL_DATA_FORMATS =
-		"GL11#RED GL11#GREEN GL11#BLUE GL11#ALPHA GL11#RGB GL11#RGBA GL12#BGR GL12#BGRA GL11#LUMINANCE GL11#LUMINANCE_ALPHA"
+		"#RED #GREEN #BLUE #ALPHA #RGB GL11#GL_RGBA #BGR #BGRA #LUMINANCE #LUMINANCE_ALPHA"
 
 	val PIXEL_DATA_TYPES =
 		"""
-		GL11#UNSIGNED_BYTE GL11#BYTE GL11#UNSIGNED_SHORT GL11#SHORT GL11#UNSIGNED_INT GL11#INT
-		GL12#UNSIGNED_BYTE_3_3_2 GL12#UNSIGNED_BYTE_2_3_3_REV GL12#UNSIGNED_SHORT_5_6_5 GL12#UNSIGNED_SHORT_5_6_5_REV GL12#UNSIGNED_SHORT_4_4_4_4
-		GL12#UNSIGNED_SHORT_4_4_4_4_REV GL12#UNSIGNED_SHORT_5_5_5_1 GL12#UNSIGNED_SHORT_1_5_5_5_REV GL12#UNSIGNED_INT_8_8_8_8
-		GL12#UNSIGNED_INT_8_8_8_8_REV GL12#UNSIGNED_INT_10_10_10_2 GL12#UNSIGNED_INT_2_10_10_10_REV
+		#UNSIGNED_BYTE #BYTE #UNSIGNED_SHORT #SHORT #UNSIGNED_INT #INT
+		#UNSIGNED_BYTE_3_3_2 #UNSIGNED_BYTE_2_3_3_REV #UNSIGNED_SHORT_5_6_5 #UNSIGNED_SHORT_5_6_5_REV #UNSIGNED_SHORT_4_4_4_4
+		#UNSIGNED_SHORT_4_4_4_4_REV #UNSIGNED_SHORT_5_5_5_1 #UNSIGNED_SHORT_1_5_5_5_REV #UNSIGNED_INT_8_8_8_8
+		#UNSIGNED_INT_8_8_8_8_REV #UNSIGNED_INT_10_10_10_2 #UNSIGNED_INT_2_10_10_10_REV
 		"""
 
 	// SGI_color_table
@@ -89,7 +89,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"ColorTable",
 		"Specifies a color lookup table.",
 
-		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + " $PROXY_COLOR_TABLE_TARGETS"),
+		GLenum.IN("target", "the color table target", "$COLOR_TABLE_TARGETS $PROXY_COLOR_TABLE_TARGETS"),
 		GLenum.IN("internalformat", "the color table internal format", IMAGING_INTERNAL_FORMATS),
 		GLsizei.IN("width", "the color table width"),
 		GLenum.IN("format", "the color data format", PIXEL_DATA_FORMATS),
@@ -146,8 +146,8 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetColorTableParameteriv",
 		"Returns the integer value of the specified color table parameter.",
 
-		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + " $PROXY_COLOR_TABLE_TARGETS"),
-		GLenum.IN("pname", "the parameter to query", COLOR_TABLE_PARAMS + " $COLOR_TABLE_PROPERTIES"),
+		GLenum.IN("target", "the color table target", "$COLOR_TABLE_TARGETS $PROXY_COLOR_TABLE_TARGETS"),
+		GLenum.IN("pname", "the parameter to query", "$COLOR_TABLE_PARAMS $COLOR_TABLE_PROPERTIES"),
 		Check(4)..ReturnParam..GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
@@ -326,7 +326,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetConvolutionFilter",
 		"Returns the contents of a convolution filter.",
 
-		GLenum.IN("target", "the convolution target", "ARBImaging#CONVOLUTION_1D ARBImaging#CONVOLUTION_2D"),
+		GLenum.IN("target", "the convolution target", "#CONVOLUTION_1D #CONVOLUTION_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		Unsafe..PIXEL_PACK_BUFFER..void_p.OUT("image", "the filter data")
@@ -350,7 +350,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetSeparableFilter",
 		"Returns the current contents of a separable convolution filter.",
 
-		GLenum.IN("target", "the filter target", "ARBImaging#SEPARABLE_2D"),
+		GLenum.IN("target", "the filter target", "#SEPARABLE_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		Unsafe..PIXEL_PACK_BUFFER..void_p.OUT("row", "a buffer in which to return the filter row"),
@@ -372,7 +372,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"Pointer version of #ConvolutionParameteri().",
 
 		GLenum.IN("target", "the filter target"),
-		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
+		GLenum.IN("pname", "the parameter to set", "$CONVOLUTION_FILTER_PARAMS #CONVOLUTION_BORDER_COLOR"),
 		Check(4)..const..GLint_p.IN("params", "the parameter value")
 	)
 
@@ -390,7 +390,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"Pointer version of #ConvolutionParameterf().",
 
 		GLenum.IN("target", "the filter target"),
-		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
+		GLenum.IN("pname", "the parameter to set", "$CONVOLUTION_FILTER_PARAMS #CONVOLUTION_BORDER_COLOR"),
 		Check(4)..const..GLfloat_p.IN("params", "the parameter value")
 	)
 
@@ -511,7 +511,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLboolean.IN(
 			"sink",
 			"""
-			whether pixel groups will be consumed by the histogram operation (GL11#TRUE) or passed on to the minmax operation (GL11#FALSE)
+			whether pixel groups will be consumed by the histogram operation (#TRUE) or passed on to the minmax operation (#FALSE)
 			"""
 		)
 	)
@@ -527,10 +527,10 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetHistogram",
 		"Returns the current contents of the histogram table.",
 
-		GLenum.IN("target", "the histogram target", "ARBImaging#HISTOGRAM"),
+		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
 		GLboolean.IN(
 			"reset",
-			"if GL11#TRUE, then all counters of all elements of the histogram are reset to zero. Counters are reset whether returned or not."
+			"if #TRUE, then all counters of all elements of the histogram are reset to zero. Counters are reset whether returned or not."
 		),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data types", PIXEL_DATA_TYPES),
@@ -563,7 +563,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("internalformat", "the minmax table internal format", IMAGING_INTERNAL_FORMATS),
 		GLboolean.IN(
 			"sink",
-			"whether pixel groups will be consumed by the minmax operation (GL11#TRUE) or passed on to final conversion (GL11#FALSE)"
+			"whether pixel groups will be consumed by the minmax operation (#TRUE) or passed on to final conversion (#FALSE)"
 		)
 	)
 
@@ -578,11 +578,11 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetMinmax",
 		"Returns the current contents of the minmax table.",
 
-		GLenum.IN("target", "the minmax target", "ARBImaging#MINMAX"),
+		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLboolean.IN(
 			"reset",
 			"""
-			If GL11#TRUE, then each minimum value is reset to the maximum representable value, and each maximum value is reset to the minimum
+			If #TRUE, then each minimum value is reset to the maximum representable value, and each maximum value is reset to the minimum
 			representable value. All values are reset, whether returned or not.
 			"""
 		),

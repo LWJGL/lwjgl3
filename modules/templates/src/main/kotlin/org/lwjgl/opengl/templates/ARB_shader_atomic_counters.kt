@@ -23,15 +23,15 @@ val ARB_shader_atomic_counters = "ARBShaderAtomicCounters".nativeClassGL("ARB_sh
 		Unlike other user-defined uniforms declared at global scope, they take NO storage from the default partition, they have NO location, and they may NOT be
 		set with the Uniform* commands. Atomic counters may also NOT be grouped into uniform blocks.
 
-		Active atomic counters can be discovered by the commands GL31#GetUniformIndices(), GL31#GetActiveUniformName(), GL20#GetActiveUniform() and
-		GL31#GetActiveUniformsiv().
+		Active atomic counters can be discovered by the commands #GetUniformIndices(), #GetActiveUniformName(), #GetActiveUniform() and
+		#GetActiveUniformsiv().
 
 		Like samplers, the opaque handles of the atomic counters and are ONLY used in some GLSL built-in functions.
 
 		The atomic counters pointed to by the opaque handles are bound to buffer binding points and buffer offsets through the layout qualifiers in the shading
 		language, or they are implicitly assigned by the compiler.
 
-		Through the OpenGL API, buffer objects may be bound to these binding points with GL30#BindBufferBase() or GL30#BindBufferRange().
+		Through the OpenGL API, buffer objects may be bound to these binding points with #BindBufferBase() or #BindBufferRange().
 
 		The contents of the atomic counters are stored in the buffer objects. The contents of atomic counters may be set and queried with buffer object
 		manipulation functions (e.g. BufferData, BufferSubData, MapBuffer or MapBufferRange).

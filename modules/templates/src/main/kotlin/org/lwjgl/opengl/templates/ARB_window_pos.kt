@@ -12,15 +12,15 @@ val ARB_window_pos = "ARBWindowPos".nativeClassGL("ARB_window_pos", postfix = AR
 		"""
 		Native bindings to the $registryLink extension.
 
-		In order to set the current raster position to a specific window coordinate with the GL11#RasterPos2i() command, the modelview matrix, projection matrix
+		In order to set the current raster position to a specific window coordinate with the #RasterPos2i() command, the modelview matrix, projection matrix
 		and viewport must be set very carefully. Furthermore, if the desired window coordinate is outside of the window's bounds one must rely on a subtle
-		side-effect of the GL11#Bitmap() command in order to avoid frustum clipping.
+		side-effect of the #Bitmap() command in order to avoid frustum clipping.
 
 		This extension provides a set of functions to directly set the current raster position in window coordinates, bypassing the modelview matrix, the
 		projection matrix and the viewport-to-window mapping. Furthermore, clip testing is not performed, so that the current raster position is always valid.
 
-		This greatly simplifies the process of setting the current raster position to a specific window coordinate prior to calling GL11#DrawPixels(),
-		GL11#CopyPixels() or GL11#Bitmap(). Many matrix operations can be avoided when mixing 2D and 3D rendering.
+		This greatly simplifies the process of setting the current raster position to a specific window coordinate prior to calling #DrawPixels(),
+		#CopyPixels() or #Bitmap(). Many matrix operations can be avoided when mixing 2D and 3D rendering.
 
         ${GL14.promoted}
 		"""

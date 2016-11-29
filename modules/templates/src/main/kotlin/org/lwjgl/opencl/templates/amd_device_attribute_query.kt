@@ -16,7 +16,7 @@ val amd_device_attribute_query = "AMDDeviceAttributeQuery".nativeClassCL("amd_de
 		"""
 
 	IntConstant(
-		"Accepted as the {@code param_name} parameter of CL10#GetDeviceInfo().",
+		"Accepted as the {@code param_name} parameter of #GetDeviceInfo().",
 
 		"DEVICE_PROFILING_TIMER_OFFSET_AMD"..0x4036,
 

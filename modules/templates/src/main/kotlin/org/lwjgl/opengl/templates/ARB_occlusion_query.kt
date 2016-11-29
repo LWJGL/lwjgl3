@@ -21,7 +21,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
 		The earlier ${registryLinkTo("HP", "occlusion_test")} extension defined a similar mechanism, but it had two major shortcomings.
 		${ul(
-			"It returned the result as a simple GL11#TRUE/GL11#FALSE result, when in fact it is often useful to know exactly how many samples were drawn.",
+			"It returned the result as a simple #TRUE/#FALSE result, when in fact it is often useful to know exactly how many samples were drawn.",
 			"""
 			It provided only a simple "stop-and-wait" model for using multiple queries. The application begins an occlusion test and ends it; then, at some
 			later point, it asks for the result, at which point the driver must stop and wait until the result from the previous test is back before the

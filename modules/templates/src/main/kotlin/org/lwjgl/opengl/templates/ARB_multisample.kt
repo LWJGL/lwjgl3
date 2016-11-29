@@ -61,7 +61,7 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
 		Specifies simultaneously the values of #SAMPLE_COVERAGE_VALUE_ARB and #SAMPLE_COVERAGE_INVERT_ARB.
 
 		If #SAMPLE_COVERAGE_ARB is enabled, the fragment coverage is ANDed with another temporary coverage. This temporary coverage is a function of the value
-		of #SAMPLE_COVERAGE_VALUE_ARB. If #SAMPLE_COVERAGE_INVERT_ARB is GL11#TRUE, the temporary coverage is inverted (all bit values are inverted) before it
+		of #SAMPLE_COVERAGE_VALUE_ARB. If #SAMPLE_COVERAGE_INVERT_ARB is #TRUE, the temporary coverage is inverted (all bit values are inverted) before it
 		is ANDed with the fragment coverage.
 		""",
 
@@ -69,7 +69,7 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
 		GLboolean.IN(
 			"invert",
 			"if true, the temporary coverage is inverted",
-			"GL11#TRUE GL11#FALSE"
+			"#TRUE #FALSE"
 		)
 	)
 }
@@ -83,7 +83,7 @@ val GLX_ARB_multisample = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisampl
 		"""
 
 	IntConstant(
-		"Accepted by the {@code attribList} parameter of GLX#ChooseVisual(), and by the {@code attrib} parameter of GLX#GetConfig().",
+		"Accepted by the {@code attribList} parameter of #ChooseVisual(), and by the {@code attrib} parameter of #GetConfig().",
 
 		"SAMPLE_BUFFERS_ARB".."100000",
 		"SAMPLES_ARB".."100001"
@@ -102,9 +102,9 @@ val WGL_ARB_multisample = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisampl
 
 	IntConstant(
 		"""
-		Accepted by the {@code attributes} parameter of WGLARBPixelFormat#GetPixelFormatAttribiARB(),
-		WGLARBPixelFormat#GetPixelFormatAttribfARB(), and the {@code attribIList} and {@code attribFList} of
-		WGLARBPixelFormat#ChoosePixelFormatARB().
+		Accepted by the {@code attributes} parameter of #GetPixelFormatAttribivARB(),
+		#GetPixelFormatAttribfvARB(), and the {@code attribIList} and {@code attribFList} of
+		#ChoosePixelFormatARB().
 		""",
 
 		"SAMPLE_BUFFERS_ARB"..0x2041,

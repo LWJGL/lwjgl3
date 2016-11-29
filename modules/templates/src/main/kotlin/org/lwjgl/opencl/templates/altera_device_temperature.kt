@@ -17,7 +17,7 @@ val altera_device_temperature = "ALTERADeviceTemperature".nativeClassCL("altera_
 		"""
 
 	IntConstant(
-		"Accepted by the {@code param_name} argument of CL10#GetDeviceInfo().",
+		"Accepted by the {@code param_name} argument of #GetDeviceInfo().",
 
 		"DEVICE_CORE_TEMPERATURE_ALTERA"..0x40F3
 	)

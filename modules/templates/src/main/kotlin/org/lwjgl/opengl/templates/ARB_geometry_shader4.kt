@@ -27,7 +27,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		neighboring primitives.
 
 		Since geometry shaders expect a specific input primitive type, an error will occur if the application presents primitives of a different type. For
-		example, if a geometry shader expects points, an error will occur at GL11#Begin() time, if a primitive mode of GL11#TRIANGLES is specified.
+		example, if a geometry shader expects points, an error will occur at #Begin() time, if a primitive mode of #TRIANGLES is specified.
 
 		${GL32.promoted}
 		"""
@@ -94,17 +94,17 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		"""
 		Sets a program object parameter.
 		
-		The error GL11#INVALID_VALUE is generated if {@code pname} is #GEOMETRY_INPUT_TYPE_ARB and {@code value} is not one of GL11#POINTS, GL11#LINES,
-		#LINES_ADJACENCY_ARB, GL11#TRIANGLES or #TRIANGLES_ADJACENCY_ARB.
+		The error #INVALID_VALUE is generated if {@code pname} is #GEOMETRY_INPUT_TYPE_ARB and {@code value} is not one of #POINTS, #LINES,
+		#LINES_ADJACENCY_ARB, #TRIANGLES or #TRIANGLES_ADJACENCY_ARB.
 
-		The error GL11#INVALID_VALUE is generated if {@code pname} is #GEOMETRY_OUTPUT_TYPE_ARB and {@code value} is not one of GL11#POINTS, GL11#LINE_STRIP or
-		GL11#TRIANGLE_STRIP.
+		The error #INVALID_VALUE is generated if {@code pname} is #GEOMETRY_OUTPUT_TYPE_ARB and {@code value} is not one of #POINTS, #LINE_STRIP or
+		#TRIANGLE_STRIP.
 
-		The error GL11#INVALID_VALUE is generated if {@code pname} is #GEOMETRY_VERTICES_OUT_ARB and {@code value} is negative.
+		The error #INVALID_VALUE is generated if {@code pname} is #GEOMETRY_VERTICES_OUT_ARB and {@code value} is negative.
 
-		The error GL11#INVALID_VALUE is generated if {@code pname} is #GEOMETRY_VERTICES_OUT_ARB and {@code value} exceeds #MAX_GEOMETRY_OUTPUT_VERTICES_ARB.
+		The error #INVALID_VALUE is generated if {@code pname} is #GEOMETRY_VERTICES_OUT_ARB and {@code value} exceeds #MAX_GEOMETRY_OUTPUT_VERTICES_ARB.
 
-		The error GL11#INVALID_VALUE is generated if {@code pname} is set to #GEOMETRY_VERTICES_OUT_ARB and the product of {@code value} and the sum of all
+		The error #INVALID_VALUE is generated if {@code pname} is set to #GEOMETRY_VERTICES_OUT_ARB and the product of {@code value} and the sum of all
 		components of all active varying variables exceeds #MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_ARB.
 		""",
 
@@ -123,15 +123,15 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		attachment point is reset to its initial values.  {@code level} is ignored if {@code texture} is zero.
 
 		If {@code texture} is non-zero, FramebufferTextureARB attaches level {@code level} of the texture object named {@code texture} to the framebuffer
-		attachment point named by {@code attachment}. The error GL11#INVALID_VALUE is generated if {@code texture} is not the name of a texture object, or if
-		{@code level} is not a supported texture level number for textures of the type corresponding to {@code target}. The error GL11#INVALID_OPERATION is
+		attachment point named by {@code attachment}. The error #INVALID_VALUE is generated if {@code texture} is not the name of a texture object, or if
+		{@code level} is not a supported texture level number for textures of the type corresponding to {@code target}. The error #INVALID_OPERATION is
 		generated if {@code texture} is the name of a buffer texture.
 
 		If {@code texture} is the name of a three-dimensional texture, cube map texture, or one- or two-dimensional array texture, the texture level attached to
 		the framebuffer attachment point is an array of images, and the framebuffer attachment is considered layered.
 		""",
 
-		GLenum.IN("target", "the render target", "ARBFramebufferObject#FRAMEBUFFER"),
+		GLenum.IN("target", "the render target", "ARBFramebufferObject#GL_FRAMEBUFFER"),
 		GLenum.IN("attachment", "must be one of the attachments points of the framebuffer"),
 		GLuint.IN("texture", "the texture object name"),
 		GLint.IN("level", "the texture level")
@@ -143,12 +143,12 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		Operates like #FramebufferTextureARB(), except that only a single layer of the texture level, numbered {@code layer}, is attached to the attachment
 		point.
 		
-		If {@code texture} is non-zero, the error GL11#INVALID_VALUE is generated if {@code layer} is negative, or if {@code texture} is not the name of a
-		texture object.  The error GL11#INVALID_OPERATION is generated unless {@code texture} is zero or the name of a three-dimensional or one- or
+		If {@code texture} is non-zero, the error #INVALID_VALUE is generated if {@code layer} is negative, or if {@code texture} is not the name of a
+		texture object.  The error #INVALID_OPERATION is generated unless {@code texture} is zero or the name of a three-dimensional or one- or
 		two-dimensional array texture.
 		""",
 
-		GLenum.IN("target", "the render target", "ARBFramebufferObject#FRAMEBUFFER"),
+		GLenum.IN("target", "the render target", "ARBFramebufferObject#GL_FRAMEBUFFER"),
 		GLenum.IN("attachment", "must be one of the attachments points of the framebuffer"),
 		GLuint.IN("texture", "the texture object name"),
 		GLint.IN("level", "the texture level"),
@@ -161,11 +161,11 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		Operates like #FramebufferTextureARB(), except that only a single face of a cube map texture, given by {@code face}, is attached to the attachment
 		point.
 
-		If {@code texture} is non-zero, the error GL11#INVALID_VALUE is generated if {@code texture} is not the name of a texture object. The error
-		GL11#INVALID_OPERATION is generated unless {@code texture} is zero or the name of a cube map texture.
+		If {@code texture} is non-zero, the error #INVALID_VALUE is generated if {@code texture} is not the name of a texture object. The error
+		#INVALID_OPERATION is generated unless {@code texture} is zero or the name of a cube map texture.
 		""",
 
-		GLenum.IN("target", "the render target", "ARBFramebufferObject#FRAMEBUFFER"),
+		GLenum.IN("target", "the render target", "ARBFramebufferObject#GL_FRAMEBUFFER"),
 		GLenum.IN("attachment", "must be one of the attachments points of the framebuffer"),
 		GLuint.IN("texture", "the texture object name"),
 		GLint.IN("level", "the texture level"),

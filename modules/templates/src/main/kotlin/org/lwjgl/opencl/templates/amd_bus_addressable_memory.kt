@@ -22,11 +22,11 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 
 	IntConstant(
 		"""
-		Accepted by the {@code flags} parameter of CL10#CreateBuffer().
+		Accepted by the {@code flags} parameter of #CreateBuffer().
 
 		This flag specifies that the application wants the OpenCL implementation to create a buffer that can be accessed by remote device DMA.
 
-		#MEM_BUS_ADDRESSABLE_AMD, CL10#MEM_ALLOC_HOST_PTR and CL10#MEM_USE_HOST_PTR are mutually exclusive.
+		#MEM_BUS_ADDRESSABLE_AMD, #MEM_ALLOC_HOST_PTR and #MEM_USE_HOST_PTR are mutually exclusive.
 		""",
 
 		"MEM_BUS_ADDRESSABLE_AMD".."1<<30"
@@ -34,13 +34,13 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 
 	IntConstant(
 		"""
-		Accepted by the {@code flags} parameter of CL10#CreateBuffer().
+		Accepted by the {@code flags} parameter of #CreateBuffer().
 
 		This flag specifies that the application wants the OpenCL implementation to create a buffer from an already allocated memory on remote device.
 
-		#MEM_EXTERNAL_PHYSICAL_AMD, CL10#MEM_ALLOC_HOST_PTR, CL10#MEM_COPY_HOST_PTR and CL10#MEM_USE_HOST_PTR are mutually exclusive.
+		#MEM_EXTERNAL_PHYSICAL_AMD, #MEM_ALLOC_HOST_PTR, #MEM_COPY_HOST_PTR and #MEM_USE_HOST_PTR are mutually exclusive.
 
-		#MEM_EXTERNAL_PHYSICAL_AMD, CL10#MEM_READ_WRITE and CL10#MEM_READ_ONLY are mutually exclusive.
+		#MEM_EXTERNAL_PHYSICAL_AMD, #MEM_READ_WRITE and #MEM_READ_ONLY are mutually exclusive.
 		""",
 
 		"MEM_EXTERNAL_PHYSICAL_AMD".."1<<31"
@@ -143,7 +143,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 	        #MEM_BUS_ADDRESSABLE_AMD flag.
 	        """,
 			"""
-	        CL10#OUT_OF_HOST_MEMORY is generated if any of the mem_objects passed to clEnqueueMakeBuffersResidentAMD could not be made resident so that the buffer
+	        #OUT_OF_HOST_MEMORY is generated if any of the mem_objects passed to clEnqueueMakeBuffersResidentAMD could not be made resident so that the buffer
 	        or signal bus addresses will be returned as 0.
 	        """
 		)}

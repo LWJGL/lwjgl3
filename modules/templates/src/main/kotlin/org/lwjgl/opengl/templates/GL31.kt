@@ -74,7 +74,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
+			"#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
 		),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "the ByteBuffer containing the indices to be rendered"),
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered")
@@ -97,23 +97,23 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"""
 		Copies all or part of one buffer object's data store to the data store of another buffer object.
 
-		An GL11#INVALID_VALUE error is generated if any of readoffset, writeoffset, or size are negative, if readoffset+size exceeds the size of the buffer object
+		An #INVALID_VALUE error is generated if any of readoffset, writeoffset, or size are negative, if readoffset+size exceeds the size of the buffer object
 		bound to readtarget, or if writeoffset+size exceeds the size of the buffer object bound to writetarget.
 
-		An GL11#INVALID_VALUE error is generated if the same buffer object is bound to both readtarget and writetarget, and the ranges [readoffset, readoffset+size)
+		An #INVALID_VALUE error is generated if the same buffer object is bound to both readtarget and writetarget, and the ranges [readoffset, readoffset+size)
 		and [writeoffset, writeoffset+size) overlap.
 
-		An GL11#INVALID_OPERATION error is generated if zero is bound to readtarget or writetarget.
+		An #INVALID_OPERATION error is generated if zero is bound to readtarget or writetarget.
 
-		An GL11#INVALID_OPERATION error is generated if the buffer objects bound to either readtarget or writetarget are mapped.
+		An #INVALID_OPERATION error is generated if the buffer objects bound to either readtarget or writetarget are mapped.
 		""",
 
 		GLenum.IN(
 			"readTarget",
 			"the source buffer object target.",
 			"""
-			GL15#ARRAY_BUFFER #COPY_READ_BUFFER #COPY_WRITE_BUFFER GL15#ELEMENT_ARRAY_BUFFER GL21#PIXEL_PACK_BUFFER GL21#PIXEL_UNPACK_BUFFER
-			GL30#TRANSFORM_FEEDBACK_BUFFER GL31#TEXTURE_BUFFER GL31#UNIFORM_BUFFER
+			#ARRAY_BUFFER #COPY_READ_BUFFER #COPY_WRITE_BUFFER #ELEMENT_ARRAY_BUFFER #PIXEL_PACK_BUFFER #PIXEL_UNPACK_BUFFER
+			#TRANSFORM_FEEDBACK_BUFFER #TEXTURE_BUFFER #UNIFORM_BUFFER
 			"""
 		),
 		GLenum.IN("writeTarget", "the destination buffer object target"),
@@ -168,7 +168,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"""
 		Attaches the storage for the buffer object named {@code buffer} to the active buffer texture, and specifies an internal format for the texel array found
 		in the attached buffer object. If {@code buffer} is zero, any buffer object attached to the buffer texture is detached, and no new buffer object is
-		attached. If {@code buffer} is non-zero, but is not the name of an existing buffer object, the error GL11#INVALID_OPERATION is generated.
+		attached. If {@code buffer} is non-zero, but is not the name of an existing buffer object, the error #INVALID_OPERATION is generated.
 
 		When a buffer object is attached to a buffer texture, the buffer object's data store is taken as the texture's texel array. The number of texels in the
 		buffer texture's texel array is given by

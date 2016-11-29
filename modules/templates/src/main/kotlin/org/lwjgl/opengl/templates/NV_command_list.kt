@@ -231,7 +231,7 @@ typedef struct {
 		GLenum.IN(
 			"mode",
 			"the basic Begin mode that this state object must be used with",
-			"GL11#POINTS GL11#LINES GL11#TRIANGLES GL11#QUADS GL32#LINES_ADJACENCY GL32#TRIANGLES_ADJACENCY GL40#PATCHES"
+			"#POINTS #LINES #TRIANGLES #QUADS #LINES_ADJACENCY #TRIANGLES_ADJACENCY #PATCHES"
 		)
 	)
 

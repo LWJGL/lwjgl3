@@ -27,8 +27,8 @@ val ARB_pipeline_statistics_query = "ARBPipelineStatisticsQuery".nativeClassGL("
 
 	IntConstant(
 		"""
-		Accepted by the {@code target} parameter of GL15#BeginQuery(), GL15#EndQuery(), GL15#GetQueryiv(),
-		GL40#BeginQueryIndexed(), GL40#EndQueryIndexed() and GL40#GetQueryIndexediv().
+		Accepted by the {@code target} parameter of #BeginQuery(), #EndQuery(), #GetQueryiv(),
+		#BeginQueryIndexed(), #EndQueryIndexed() and #GetQueryIndexediv().
 		""",
 
 		"VERTICES_SUBMITTED_ARB"..0x82EE,

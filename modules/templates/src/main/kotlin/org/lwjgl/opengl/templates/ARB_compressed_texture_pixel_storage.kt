@@ -12,10 +12,10 @@ val ARB_compressed_texture_pixel_storage = "ARBCompressedTexturePixelStorage".na
 		"""
 		Native bindings to the $registryLink extension.
 
-		This extension expands the functionality of the GL11#PixelStorei() modes to allow GL11#UNPACK_ROW_LENGTH, GL11#UNPACK_SKIP_ROWS,
-		GL11#UNPACK_SKIP_PIXELS, GL12#UNPACK_IMAGE_HEIGHT and GL12#UNPACK_SKIP_IMAGES to affect the operation of CompressedTexImage*D and
-		CompressedTexSubImage*D. Similarly, it also allows GL11#PACK_ROW_LENGTH, GL11#PACK_SKIP_ROWS, GL11#PACK_SKIP_PIXELS, GL12#PACK_IMAGE_HEIGHT and
-		GL12#PACK_SKIP_IMAGES to affect the operation of GetCompressedTexImage*D. This allows data to be transferred to or from a specified sub-rectangle of a
+		This extension expands the functionality of the #PixelStorei() modes to allow #UNPACK_ROW_LENGTH, #UNPACK_SKIP_ROWS,
+		#UNPACK_SKIP_PIXELS, #UNPACK_IMAGE_HEIGHT and #UNPACK_SKIP_IMAGES to affect the operation of CompressedTexImage*D and
+		CompressedTexSubImage*D. Similarly, it also allows #PACK_ROW_LENGTH, #PACK_SKIP_ROWS, #PACK_SKIP_PIXELS, #PACK_IMAGE_HEIGHT and
+		#PACK_SKIP_IMAGES to affect the operation of GetCompressedTexImage*D. This allows data to be transferred to or from a specified sub-rectangle of a
 		larger compressed image.
 
 		This extension is designed primarily to support compressed image formats with fixed-size blocks. To use this new mechanism, an application should

@@ -15,7 +15,7 @@ val ARB_clear_texture = "ARBClearTexture".nativeClassGL("ARB_clear_texture") {
 		Texture objects are fundamental to the operation of OpenGL. They are used as a source for texture sampling and destination for rendering as well as
 		being accessed in shaders for image load/store operations. It is also possible to invalidate the contents of a texture. It is currently only possible to
 		set texture image data to known values by uploading some or all of a image array from application memory or by attaching it to a framebuffer object and
-		using GL11#Clear() or the ${GL30.core} ClearBuffer commands.
+		using #Clear() or the ${GL30.core} ClearBuffer commands.
 
 		Both uploading initial texture data and clearing by attaching to a framebuffer have potential disadvantages when one simply wants to initialize texture
 		data to a known value. Uploading initial data requires the application to allocate a (potentially large) chunk of memory and transferring that to the
@@ -31,7 +31,7 @@ val ARB_clear_texture = "ARBClearTexture".nativeClassGL("ARB_clear_texture") {
 		"""
 
 	IntConstant(
-		"Accepted by the {@code pname} parameter for GL42#GetInternalformati() and GL43#GetInternalformati64().",
+		"Accepted by the {@code pname} parameter for #GetInternalformativ() and #GetInternalformati64v().",
 
 		"CLEAR_TEXTURE"..0x9365
 	)

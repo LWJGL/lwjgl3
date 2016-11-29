@@ -71,7 +71,7 @@ val ARB_uniform_buffer_object = "ARBUniformBufferObject".nativeClassGL("ARB_unif
 			"Uniforms and \"uniform blocks\" can be inactive because they don't exist in the source, or because they have been removed by dead code elimination.",
 			"An inactive uniform has u_index == #INVALID_INDEX.",
 			"An inactive uniform block has ub_index == #INVALID_INDEX.",
-			"A u_index or ub_index of #INVALID_INDEX generates the GL11#INVALID_VALUE error if given as a function argument.",
+			"A u_index or ub_index of #INVALID_INDEX generates the #INVALID_VALUE error if given as a function argument.",
 			"""
 			The default uniform block, which is not assigned any ub_index, uses a private, internal data storage, and does not have any buffer object associated
 			with it.

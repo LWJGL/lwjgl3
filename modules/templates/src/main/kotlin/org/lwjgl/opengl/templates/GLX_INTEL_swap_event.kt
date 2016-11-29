@@ -19,7 +19,7 @@ val GLX_INTEL_swap_event = "GLXINTELSwapEvent".nativeClassGLX("GLX_INTEL_swap_ev
 		"""
 
 	IntConstant(
-		"Accepted by the {@code mask} parameter of GLX13#SelectEvent() and returned in the {@code mask} parameter of GLX13#GetSelectedEvent().",
+		"Accepted by the {@code mask} parameter of #SelectEvent() and returned in the {@code mask} parameter of #GetSelectedEvent().",
 
 		"BUFFER_SWAP_COMPLETE_INTEL_MASK"..0x04000000
 	)

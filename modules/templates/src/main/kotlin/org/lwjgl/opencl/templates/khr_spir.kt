@@ -25,7 +25,7 @@ val khr_spir = "KHRSPIR".nativeClassCL("khr_spir", KHR) {
 
 	IntConstant(
 		"""
-		Accepted by CL10#GetDeviceInfo(). Returns a space separated list of SPIR versions supported by the device. For example returning “1.2 2.0” in this
+		Accepted by #GetDeviceInfo(). Returns a space separated list of SPIR versions supported by the device. For example returning “1.2 2.0” in this
 		query implies that SPIR version 1.2 and 2.0 are supported by the implementation.
 		""",
 
@@ -34,11 +34,11 @@ val khr_spir = "KHRSPIR".nativeClassCL("khr_spir", KHR) {
 
 	IntConstant(
 		"""
-		Returned by CL10#GetProgramBuildInfo() when {@code param_name} is CL12#PROGRAM_BINARY_TYPE.
+		Returned by #GetProgramBuildInfo() when {@code param_name} is #PROGRAM_BINARY_TYPE.
 
-		An intermediate (non-source) representation for the program is loaded as a binary. The program must be further processed with CL12#CompileProgram() or
-		CL10#BuildProgram(). If processed with CL12#CompileProgram(), the result will be a binary of type CL12#PROGRAM_BINARY_TYPE_COMPILED_OBJECT or
-		CL12#PROGRAM_BINARY_TYPE_LIBRARY. If processed with CL10#BuildProgram(), the result will be a binary of type CL12#PROGRAM_BINARY_TYPE_EXECUTABLE.
+		An intermediate (non-source) representation for the program is loaded as a binary. The program must be further processed with #CompileProgram() or
+		#BuildProgram(). If processed with #CompileProgram(), the result will be a binary of type #PROGRAM_BINARY_TYPE_COMPILED_OBJECT or
+		#PROGRAM_BINARY_TYPE_LIBRARY. If processed with #BuildProgram(), the result will be a binary of type #PROGRAM_BINARY_TYPE_EXECUTABLE.
 		""",
 
 		"PROGRAM_BINARY_TYPE_INTERMEDIATE"..0x40E1

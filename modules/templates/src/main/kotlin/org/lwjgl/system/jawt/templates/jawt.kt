@@ -223,7 +223,7 @@ ENABLE_WARNINGS()
 
 		The embedded frame should be created by #CreateEmbeddedFrame() method, or this function will not have any effect.
 
-		Component##setLocation() and Component##setBounds() for {@code EmbeddedFrame} really don't move it within the native parent. These methods always locate
+		Component#setLocation() and Component#setBounds() for {@code EmbeddedFrame} really don't move it within the native parent. These methods always locate
 		the embedded frame at (0, 0) for backward compatibility. To allow moving embedded frames this method was introduced, and it works just the same way as
 		{@code setLocation()} and {@code setBounds()} for usual, non-embedded components.
 

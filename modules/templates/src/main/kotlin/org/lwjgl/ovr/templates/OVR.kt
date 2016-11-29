@@ -361,7 +361,7 @@ ENABLE_WARNINGS()""")
 		Initialize LibOVR for application usage. This includes finding and loading the LibOVRRT shared library. No LibOVR API functions, other than
 		#GetLastErrorInfo() and #_Detect(), can be called unless #Initialize() succeeds. A successful call to {@code ovr_Initialize} must be eventually
 		followed by a call to #Shutdown(). {@code ovr_Initialize} calls are idempotent. Calling {@code ovr_Initialize} twice does not require two matching
-		calls to {@code ovr_Shutdown}. If already initialized, the return value is OVRErrorCode#Success.
+		calls to {@code ovr_Shutdown}. If already initialized, the return value is #Success.
 
 		LibOVRRT shared library search order:
 		${ol(
@@ -386,15 +386,15 @@ ENABLE_WARNINGS()""")
 		an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information. Example failed results
 		include:
 		${ul(
-			"OVRErrorCode#Error_Initialize: Generic initialization error.",
-			"OVRErrorCode#Error_LibLoad: Couldn't load LibOVRRT.",
-			"OVRErrorCode#Error_LibVersion: LibOVRRT version incompatibility.",
-			"OVRErrorCode#Error_ServiceConnection: Couldn't connect to the OVR Service.",
-			"OVRErrorCode#Error_ServiceVersion: OVR Service version incompatibility.",
-			"OVRErrorCode#Error_IncompatibleOS: The operating system version is incompatible.",
-			"OVRErrorCode#Error_DisplayInit: Unable to initialize the HMD display.",
-			"OVRErrorCode#Error_ServerStart:  Unable to start the server. Is it already running?",
-			"OVRErrorCode#Error_Reinitialization: Attempted to re-initialize with a different version."
+			"#Error_Initialize: Generic initialization error.",
+			"#Error_LibLoad: Couldn't load LibOVRRT.",
+			"#Error_LibVersion: LibOVRRT version incompatibility.",
+			"#Error_ServiceConnection: Couldn't connect to the OVR Service.",
+			"#Error_ServiceVersion: OVR Service version incompatibility.",
+			"#Error_IncompatibleOS: The operating system version is incompatible.",
+			"#Error_DisplayInit: Unable to initialize the HMD display.",
+			"#Error_ServerStart:  Unable to start the server. Is it already running?",
+			"#Error_Reinitialization: Attempted to re-initialize with a different version."
 		)}
 		"""
 	)
@@ -607,7 +607,7 @@ ovr_IdentifyClient(
 		you will need to call #GetTrackerPose() after this, because the sensor position(s) will change as a result of this.
 
 		The headset cannot be facing vertically upward or downward but rather must be roughly level otherwise this function will fail with
-		OVRErrorCode#Error_InvalidHeadsetOrientation.
+		#Error_InvalidHeadsetOrientation.
 
 		For more info, see the notes on each {@code ovrTrackingOrigin} enumeration to understand how recenter will vary slightly in its behavior based on the
 		current {@code ovrTrackingOrigin} setting.
@@ -673,7 +673,7 @@ ovr_IdentifyClient(
 		ovrControllerType.IN("controllerType", "which controllers the input will be returned for"),
 		ovrInputState_p.OUT("inputState", "the input state that will be filled in"),
 
-		returnDoc = "OVRErrorCode#Success if the new state was successfully obtained"
+		returnDoc = "#Success if the new state was successfully obtained"
 	)
 
 	unsigned_int(
@@ -712,8 +712,8 @@ ovr_IdentifyClient(
 		"""
 		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
 		${ul(
-			"OVRErrorCode#Success: The call succeeded and a result was returned.",
-			"OVRErrorCode#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code controllerType} is not available."
+			"#Success: The call succeeded and a result was returned.",
+			"#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code controllerType} is not available."
 		)}
 		"""
 	)
@@ -734,8 +734,8 @@ ovr_IdentifyClient(
 		"""
 		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
 		${ul(
-			"OVRErrorCode#Success: The call succeeded and a result was returned.",
-			"OVRErrorCode#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code controllerType} is not available."
+			"#Success: The call succeeded and a result was returned.",
+			"#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code controllerType} is not available."
 		)}
 		"""
 	)
@@ -752,8 +752,8 @@ ovr_IdentifyClient(
 		"""
 		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
 		${ul(
-			"OVRErrorCode#Success: The call succeeded and a result was returned.",
-			"OVRErrorCode#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code controllerType} is not available."
+			"#Success: The call succeeded and a result was returned.",
+			"#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code controllerType} is not available."
 		)}
 		"""
 	)
@@ -763,7 +763,7 @@ ovr_IdentifyClient(
 		"""
 		Tests collision/proximity of position tracked devices (e.g. HMD and/or Touch) against the Boundary System.
 
-		Note: this method is similar to #BoundaryTestPoint() but can be more precise as it may take into account device acceleration/momentum.
+		Note: this method is similar to #TestBoundaryPoint() but can be more precise as it may take into account device acceleration/momentum.
 		""",
 
 		session,
@@ -775,9 +775,9 @@ ovr_IdentifyClient(
 		"""
 		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
 		${ul(
-			"OVRErrorCode#Success: The call succeeded and a result was returned.",
-			"OVRErrorCode#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up.",
-			"OVRErrorCode#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code deviceBitmask} is not available."
+			"#Success: The call succeeded and a result was returned.",
+			"#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up.",
+			"#Success_DeviceUnavailable: The call succeeded but the device referred to by {@code deviceBitmask} is not available."
 		)}
 		"""
 	)
@@ -795,8 +795,8 @@ ovr_IdentifyClient(
 		"""
 		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
 		${ul(
-			"OVRErrorCode#Success: The call succeeded and a result was returned.",
-			"OVRErrorCode#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
+			"#Success: The call succeeded and a result was returned.",
+			"#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
 		)}
 		"""
 	)
@@ -808,7 +808,7 @@ ovr_IdentifyClient(
 		session,
 		const..ovrBoundaryLookAndFeel_p.IN("lookAndFeel", "the look and feel parameters"),
 
-		returnDoc = "OVRErrorCode#Success upon success"
+		returnDoc = "#Success upon success"
 	)
 
 	ovrResult(
@@ -817,7 +817,7 @@ ovr_IdentifyClient(
 
 		session,
 
-		returnDoc = "OVRErrorCode#Success upon success"
+		returnDoc = "#Success upon success"
 	)
 
 	ovrResult(
@@ -836,8 +836,8 @@ ovr_IdentifyClient(
 		"""
 		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
 		${ul(
-			"OVRErrorCode#Success: The call succeeded and a result was returned.",
-			"OVRErrorCode#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
+			"#Success: The call succeeded and a result was returned.",
+			"#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
 		)}
 		"""
 	)
@@ -854,8 +854,8 @@ ovr_IdentifyClient(
 		"""
 		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
 		${ul(
-			"OVRErrorCode#Success: The call succeeded and a result was returned.",
-			"OVRErrorCode#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
+			"#Success: The call succeeded and a result was returned.",
+			"#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
 		)}
 		"""
 	)
@@ -876,8 +876,8 @@ ovr_IdentifyClient(
 		"""
 		an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success. Return values include but aren't limited to:
 		${ul(
-			"OVRErrorCode#Success: The call succeeded and a result was returned.",
-			"OVRErrorCode#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
+			"#Success: The call succeeded and a result was returned.",
+			"#Success_BoundaryInvalid: The call succeeded but the result is not a valid boundary due to not being set up."
 		)}
 		"""
 	)
@@ -892,7 +892,7 @@ ovr_IdentifyClient(
 			"forces the outer boundary to be visible. An application can't force it to be invisible, but can cancel its request by passing false."
 		),
 
-		returnDoc = "OVRErrorCode#Success upon success"
+		returnDoc = "#Success upon success"
 	)
 
 	// ----------------
@@ -1101,20 +1101,20 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
 		"""
 	    an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon one of the possible success values:
 	    ${ul(
-			"OVRErrorCode#Success: rendering completed successfully.",
+			"#Success: rendering completed successfully.",
 			"""
-	        OVRErrorCode#Success_NotVisible: rendering completed successfully but was not displayed on the HMD, usually because another application currently
+	        #Success_NotVisible: rendering completed successfully but was not displayed on the HMD, usually because another application currently
 	        has ownership of the HMD. Applications receiving this result should stop rendering new content, but continue to call {@code ovr_SubmitFrame}
-	        periodically until it returns a value other than OVRErrorCode#Success_NotVisible.
+	        periodically until it returns a value other than #Success_NotVisible.
 	        """,
 			"""
-	        OVRErrorCode#Error_DisplayLost: The session has become invalid (such as due to a device removal) and the shared resources need to be released
+	        #Error_DisplayLost: The session has become invalid (such as due to a device removal) and the shared resources need to be released
 	        (#DestroyTextureSwapChain()), the session needs to destroyed (#Destroy()) and recreated (#Create()), and new resources need to be created
 	        ({@code ovr_CreateTextureSwapChainXXX}). The application's existing private graphics resources do not need to be recreated unless the new
 	        {@code ovr_Create} call returns a different {@code GraphicsLuid}.
 	        """,
 			"""
-			OVRErrorCode#Error_TextureSwapChainInvalid: The {@code ovrTextureSwapChain} is in an incomplete or inconsistent state. Ensure
+			#Error_TextureSwapChainInvalid: The {@code ovrTextureSwapChain} is in an incomplete or inconsistent state. Ensure
 			#CommitTextureSwapChain() was called at least once first.
 			"""
 		)}

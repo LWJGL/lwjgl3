@@ -50,21 +50,21 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"""
 		Controls the clipping volume behavior.
 
-		These parameters update the clip control origin and depth mode respectively. The initial value of the clip control origin is GL20#LOWER_LEFT and the
+		These parameters update the clip control origin and depth mode respectively. The initial value of the clip control origin is #LOWER_LEFT and the
 		initial value of the depth mode is #NEGATIVE_ONE_TO_ONE.
 
-		The error GL11#INVALID_OPERATION is generated if ClipControl is executed between the execution of GL11#Begin() and the corresponding
-		execution of GL11#End().
+		The error #INVALID_OPERATION is generated if ClipControl is executed between the execution of #Begin() and the corresponding
+		execution of #End().
 		""",
 
-		GLenum.IN("origin", "the clip origin", "GL20#LOWER_LEFT GL20#UPPER_LEFT"),
+		GLenum.IN("origin", "the clip origin", "#LOWER_LEFT #UPPER_LEFT"),
 		GLenum.IN("depth", "the clip depth mode", depths)
 	)
 
 	// ARB_conditional_render_inverted
 
 	IntConstant(
-		"Accepted by the {@code mode} parameter of GL30#BeginConditionalRender().",
+		"Accepted by the {@code mode} parameter of #BeginConditionalRender().",
 
 		"QUERY_WAIT_INVERTED"..0x8E17,
 		"QUERY_NO_WAIT_INVERTED"..0x8E18,
@@ -128,7 +128,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"Returns information about a transform feedback object.",
 
 		GLuint.IN("xfb", "zero or the name of an existing transform feedback object"),
-		GLenum.IN("pname", "the parameter to query", "GL42#TRANSFORM_FEEDBACK_PAUSED GL42#TRANSFORM_FEEDBACK_ACTIVE"),
+		GLenum.IN("pname", "the parameter to query", "#TRANSFORM_FEEDBACK_PAUSED #TRANSFORM_FEEDBACK_ACTIVE"),
 		Check(1)..ReturnParam..GLint_p.OUT("param", "the buffer in which to return the parameter value")
 	)
 
@@ -137,7 +137,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"Returns information about a transform feedback object.",
 
 		GLuint.IN("xfb", "zero or the name of an existing transform feedback object"),
-		GLenum.IN("pname", "the parameter to query", "GL30#TRANSFORM_FEEDBACK_BUFFER_BINDING"),
+		GLenum.IN("pname", "the parameter to query", "#TRANSFORM_FEEDBACK_BUFFER_BINDING"),
 		GLuint.IN("index", "the transform feedback stream index"),
 		Check(1)..ReturnParam..GLint_p.OUT("param", "the buffer in which to return the parameter value")
 	)
@@ -147,7 +147,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"Returns information about a transform feedback object.",
 
 		GLuint.IN("xfb", "zero or the name of an existing transform feedback object"),
-		GLenum.IN("pname", "the parameter to query", "GL30#TRANSFORM_FEEDBACK_BUFFER_START GL30#TRANSFORM_FEEDBACK_BUFFER_SIZE"),
+		GLenum.IN("pname", "the parameter to query", "#TRANSFORM_FEEDBACK_BUFFER_START #TRANSFORM_FEEDBACK_BUFFER_SIZE"),
 		GLuint.IN("index", "the transform feedback stream index"),
 		Check(1)..ReturnParam..GLint64_p.OUT("param", "the buffer in which to return the parameter value")
 	)
@@ -562,7 +562,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLenum.IN(
 			"target",
 			"the texture target",
-			"GL11#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL31#TEXTURE_BUFFER GL32#TEXTURE_2D_MULTISAMPLE GL32#TEXTURE_2D_MULTISAMPLE_ARRAY"
+			"#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS #TEXTURE_BUFFER #TEXTURE_2D_MULTISAMPLE #TEXTURE_2D_MULTISAMPLE_ARRAY"
 		),
 		AutoSize("textures")..GLsizei.IN("n", "the number of texture names to create"),
 		ReturnParam..GLuint_p.OUT("textures", "the buffer in which to store the created texture names")
@@ -1086,7 +1086,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"Queries parameters of a vertex array object.",
 
 		GLuint.IN("vaobj", "the vertex array object name"),
-		GLenum.IN("pname", "the parameter to query", "GL15#ELEMENT_ARRAY_BUFFER_BINDING"),
+		GLenum.IN("pname", "the parameter to query", "#ELEMENT_ARRAY_BUFFER_BINDING"),
 		Check(1)..ReturnParam..GLint_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
@@ -1100,9 +1100,9 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 			"pname",
 			"the parameter to query",
 			"""
-		    GL20#VERTEX_ATTRIB_ARRAY_ENABLED GL20#VERTEX_ATTRIB_ARRAY_SIZE, GL20#VERTEX_ATTRIB_ARRAY_STRIDE GL20#VERTEX_ATTRIB_ARRAY_TYPE
-		    GL20#VERTEX_ATTRIB_ARRAY_NORMALIZED GL30#VERTEX_ATTRIB_ARRAY_INTEGER GL33#VERTEX_ATTRIB_ARRAY_DIVISOR GL43#VERTEX_ATTRIB_ARRAY_LONG
-		    GL43#VERTEX_ATTRIB_RELATIVE_OFFSET
+		    #VERTEX_ATTRIB_ARRAY_ENABLED #VERTEX_ATTRIB_ARRAY_SIZE, #VERTEX_ATTRIB_ARRAY_STRIDE #VERTEX_ATTRIB_ARRAY_TYPE
+		    #VERTEX_ATTRIB_ARRAY_NORMALIZED #VERTEX_ATTRIB_ARRAY_INTEGER #VERTEX_ATTRIB_ARRAY_DIVISOR #VERTEX_ATTRIB_ARRAY_LONG
+		    #VERTEX_ATTRIB_RELATIVE_OFFSET
 		    """
 		),
 		Check(1)..ReturnParam..GLint_p.OUT("param", "the buffer in which to return the parameter values")
@@ -1114,7 +1114,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 		GLuint.IN("vaobj", "the vertex array object name"),
 		GLuint.IN("index", "the attribute to query"),
-		GLenum.IN("pname", "the parameter to query", "GL43#VERTEX_BINDING_OFFSET"),
+		GLenum.IN("pname", "the parameter to query", "#VERTEX_BINDING_OFFSET"),
 		Check(1)..ReturnParam..GLint64_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
@@ -1188,7 +1188,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	void(
 		"MemoryBarrierByRegion",
 		"""
-		Behaves like GL42#MemoryBarrier(), with two differences:
+		Behaves like #MemoryBarrier(), with two differences:
 
 		First, it narrows the region under consideration so that only reads/writes of prior fragment shaders that are invoked for a smaller region of the
 		framebuffer will be completed/reflected prior to subsequent reads/write of following fragment shaders. The size of the region is implementation
@@ -1196,19 +1196,19 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 		Second, it only applies to memory transactions that may be read by or written by a fragment shader.
 
-		When barriers is GL42#ALL_BARRIER_BITS, shader memory accesses will be synchronized relative to all these barrier bits, but not to other
-		barrier bits specific to GL42#MemoryBarrier(). This implies that reads/writes for scatter/gather-like algorithms may or may not be
+		When barriers is #ALL_BARRIER_BITS, shader memory accesses will be synchronized relative to all these barrier bits, but not to other
+		barrier bits specific to #MemoryBarrier(). This implies that reads/writes for scatter/gather-like algorithms may or may not be
 		completed/reflected after a MemoryBarrierByRegion command. However, for uses such as deferred shading, where a linked list of visible
 		surfaces with the head at a framebuffer address may be constructed, and the entirety of the list is only dependent on previous executions at that
-		framebuffer address, MemoryBarrierByRegion may be significantly more efficient than GL42#MemoryBarrier().
+		framebuffer address, MemoryBarrierByRegion may be significantly more efficient than #MemoryBarrier().
 		""",
 
 		GLbitfield.IN(
 			"barriers",
 			"the barriers to insert",
 			"""
-			GL42#ATOMIC_COUNTER_BARRIER_BIT GL42#FRAMEBUFFER_BARRIER_BIT GL42#SHADER_IMAGE_ACCESS_BARRIER_BIT GL43#SHADER_STORAGE_BARRIER_BIT
-			GL42#TEXTURE_FETCH_BARRIER_BIT GL42#UNIFORM_BARRIER_BIT
+			#ATOMIC_COUNTER_BARRIER_BIT #FRAMEBUFFER_BARRIER_BIT #SHADER_IMAGE_ACCESS_BARRIER_BIT #SHADER_STORAGE_BARRIER_BIT
+			#TEXTURE_FETCH_BARRIER_BIT #UNIFORM_BARRIER_BIT
 			""",
 			LinkMode.BITFIELD
 		)
@@ -1301,7 +1301,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	IntConstant(
-		"Returned by GL11#GetError().",
+		"Returned by #GetError().",
 
 		"CONTEXT_LOST"..0x0507
 	)
@@ -1311,7 +1311,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"""
 		Indicates if the GL context has been in a reset state at any point since the last call to GetGraphicsResetStatus:
 		${ul(
-			"GL11#NO_ERROR indicates that the GL context has not been in a reset state since the last call.",
+			"#NO_ERROR indicates that the GL context has not been in a reset state since the last call.",
 			"#GUILTY_CONTEXT_RESET indicates that a reset has been detected that is attributable to the current GL context.",
 			"#INNOCENT_CONTEXT_RESET indicates a reset has been detected that is not attributable to the current GL context.",
 			"#UNKNOWN_CONTEXT_RESET indicates a detected graphics reset whose cause is unknown."
@@ -1335,7 +1335,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		and may not block indefinitely or cause termination of the application. Exceptions to this behavior include:
 		${ul(
 			"""
-			GL11#GetError() and GetGraphicsResetStatus behave normally following a graphics reset, so that the application can determine a reset has
+			#GetError() and GetGraphicsResetStatus behave normally following a graphics reset, so that the application can determine a reset has
 			occurred, and when it is safe to destroy and recreate the context.
 			""",
 			"""
@@ -1433,7 +1433,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 	void(
 		"ReadnPixels",
-		"Behaves identically to GL11#ReadPixels() except that it does not write more than {@code bufSize} bytes into {@code data}",
+		"Behaves identically to #ReadPixels() except that it does not write more than {@code bufSize} bytes into {@code data}",
 
 		GLint.IN("x", "the left pixel coordinate"),
 		GLint.IN("y", "the lower pixel coordinate"),

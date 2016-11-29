@@ -28,7 +28,7 @@ val INTEL_framebuffer_CMAA = "INTELFramebufferCMAA".nativeClassGLES("INTEL_frame
 	void(
 		"ApplyFramebufferAttachmentCMAAINTEL",
 		"""
-		Requests the post processing of current draw buffers pertaining to the framebuffer bound to the GLES30#DRAW_FRAMEBUFFER target according to the
+		Requests the post processing of current draw buffers pertaining to the framebuffer bound to the #DRAW_FRAMEBUFFER target according to the
 		Conservative Morphological Anti-Aliasing algorithm.
 		"""
 	)

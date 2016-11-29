@@ -27,16 +27,16 @@ val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGLES("KH
 		)}
 		Some implementations may support KHR_blend_equation_advanced without supporting KHR_blend_equation_advanced_coherent.
 
-		In unextended OpenGL, the set of blending equations is limited, and can be expressed very simply. The GLES30#MIN and GLES30#MAX blend equations
-		simply compute component-wise minimums or maximums of source and destination color components. The GLES20#FUNC_ADD, GLES20#FUNC_SUBTRACT, and
-		GLES20#FUNC_REVERSE_SUBTRACT multiply the source and destination colors by source and destination factors and either add the two products together
+		In unextended OpenGL, the set of blending equations is limited, and can be expressed very simply. The #MIN and #MAX blend equations
+		simply compute component-wise minimums or maximums of source and destination color components. The #FUNC_ADD, #FUNC_SUBTRACT, and
+		#FUNC_REVERSE_SUBTRACT multiply the source and destination colors by source and destination factors and either add the two products together
 		or subtract one from the other. This limited set of operations supports many common blending operations but precludes the use of more sophisticated
 		transparency and blending operations commonly available in many dedicated imaging APIs.
 
-		This extension provides a number of new "advanced" blending equations. Unlike traditional blending operations using the GLES20#FUNC_ADD equation,
-		these blending equations do not use source and destination factors specified by GLES20#BlendFunc(). Instead, each blend equation specifies a complete
+		This extension provides a number of new "advanced" blending equations. Unlike traditional blending operations using the #FUNC_ADD equation,
+		these blending equations do not use source and destination factors specified by #BlendFunc(). Instead, each blend equation specifies a complete
 		equation based on the source and destination colors. These new blend equations are used for both RGB and alpha components; they may not be used to
-		perform separate RGB and alpha blending (via functions like GLES20#BlendEquationSeparate()).
+		perform separate RGB and alpha blending (via functions like #BlendEquationSeparate()).
 
 		These blending operations are performed using premultiplied source and destination colors, where RGB colors produced by the fragment shader and stored
 		in the framebuffer are considered to be multiplied by alpha (coverage). Many of these advanced blending equations are formulated where the result of
@@ -45,7 +45,7 @@ val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGLES("KH
 		the source and destination coverage have no spatial correlation within the pixel.
 
 		In addition to the coherency issues on implementations not supporting KHR_blend_equation_advanced_coherent, this extension has several limitations worth
-		noting. First, the new blend equations are not supported while rendering to more than one color buffer at once; an GLES20#INVALID_OPERATION will be
+		noting. First, the new blend equations are not supported while rendering to more than one color buffer at once; an #INVALID_OPERATION will be
 		generated if an application attempts to render any primitives in this unsupported configuration. Additionally, blending precision may be limited to
 		16-bit floating-point, which could result in a loss of precision and dynamic range for framebuffer formats with 32-bit floating-point components, and in
 		a loss of precision for formats with 12- and 16-bit signed or unsigned normalized integer components.
@@ -81,7 +81,7 @@ val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGLES("KH
 		When using advanced blending equations, applications should split their rendering into a collection of blending passes, none of which touch an
 		individual sample in the framebuffer more than once. The results of blending are undefined if the sample being blended has been touched previously in
 		the same pass. Any command that causes the value of a sample to be modified using the framebuffer is considered to touch the sample, including clears,
-		blended or unblended primitives, and GLES30#BlitFramebuffer() copies.
+		blended or unblended primitives, and #BlitFramebuffer() copies.
 		"""
 	)
 }

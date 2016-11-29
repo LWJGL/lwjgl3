@@ -26,7 +26,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 	IntConstant(
 		"Listener properties.",
 
-		"METERS_PER_UNIT "..0x20004
+		"METERS_PER_UNIT"..0x20004
 	)
 
 	IntConstant(

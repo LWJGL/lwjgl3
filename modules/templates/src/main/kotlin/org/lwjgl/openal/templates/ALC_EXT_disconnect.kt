@@ -42,7 +42,7 @@ val ALC_EXT_disconnect = "EXTDisconnect".nativeClassALC("EXT_disconnect") {
 		Zombie devices may not have new contexts created on them; #CreateContext() will fail, returning a $NULL pointer, if the specified device has been
 		disconnected.
 
-		The application may determine if a device has been disconnected by using the #CONNECTED token with ALC10#GetIntegerv(). When a device has been
+		The application may determine if a device has been disconnected by using the #CONNECTED token with ALC10#alcGetIntegerv(). When a device has been
 		disconnected, the application is permitted to close the zombie device's handle in the normal way, and may choose to open a new device.
 
 		Applications that use #CONNECTED are encouraged to query it with relative frequency. A game, for example, should call it once per rendering frame, per
@@ -53,12 +53,12 @@ val ALC_EXT_disconnect = "EXTDisconnect".nativeClassALC("EXT_disconnect") {
 
 		If device enumeration is available via ALC_ENUMERATION_EXT, ALC_ENUMERATE_ALL_EXT, or AL 1.1, the list of devices may change between calls as devices
 		become disconnected and reconnected. To prevent race conditions, the pointer to device list strings provided to the application will remain valid until
-		the next call to ALC10#GetString(). The implementation may either cache the result of the previous request or perform a complete device redetection
-		during the ALC10#GetString() call. As such, enumeration may not be a "fast call" and should not be called in time-sensitive code. If capture devices
+		the next call to ALC10#alcGetString(). The implementation may either cache the result of the previous request or perform a complete device redetection
+		during the ALC10#alcGetString() call. As such, enumeration may not be a "fast call" and should not be called in time-sensitive code. If capture devices
 		are available via ALC_EXT_capture or AL 1.1, disconnection management can be used with both output and capture devices. A disconnected capture device
-		will continue to function, but will not report a larger number in the ALC11#CAPTURE_SAMPLES query. If the capture device had reported some number of
+		will continue to function, but will not report a larger number in the #CAPTURE_SAMPLES query. If the capture device had reported some number of
 		samples were available but the samples were not transferred from the device to the AL at the time of disconnect, the AL should feed the application
-		that amount of silence in the ALC11#CaptureSamples() call. Future queries of ALC11#CAPTURE_SAMPLES should report zero samples available.
+		that amount of silence in the #CaptureSamples() call. Future queries of #CAPTURE_SAMPLES should report zero samples available.
 		"""
 
 	IntConstant(

@@ -30,13 +30,13 @@ val ARB_gl_spirv = "ARBGLSPIRV".nativeClassGL("ARB_gl_spirv") {
 		"""
 
 	IntConstant(
-		"Accepted by the {@code binaryformat} parameter of GL41#ShaderBinary().",
+		"Accepted by the {@code binaryformat} parameter of #ShaderBinary().",
 
 		"SHADER_BINARY_FORMAT_SPIR_V_ARB"..0x9551
 	)
 
 	IntConstant(
-		"Accepted by the {@code pname} parameter of GL20#GetShaderiv().",
+		"Accepted by the {@code pname} parameter of #GetShaderiv().",
 
 		"SPIR_V_BINARY_ARB"..0x9552
 	)

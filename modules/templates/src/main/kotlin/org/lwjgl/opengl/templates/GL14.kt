@@ -201,7 +201,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"GL30#HALF_FLOAT GL11#FLOAT GL11#DOUBLE"
+			"#HALF_FLOAT #FLOAT #DOUBLE"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		MultiType(
@@ -226,12 +226,12 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"""
 		Renders multiple sets of primitives by specifying indices of array data elements.
 
-		<b>LWJGL note</b>: Use org.lwjgl.system.MemoryUtil##memAddress() to retrieve pointers to the index buffers.
+		<b>LWJGL note</b>: Use org.lwjgl.system.MemoryUtil#memAddress() to retrieve pointers to the index buffers.
 		""",
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
 		GLsizei_p.IN("count", "an array of the elements counts"),
-		GLenum.IN("type", "the type of the values in indices", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
+		GLenum.IN("type", "the type of the values in indices", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
 		const..void_pp.IN("indices", "a pointer to the location where the indices are stored"),
 		AutoSize("count", "indices")..GLsizei.IN("primcount", "the size of the {@code count} array")
 	)
@@ -351,8 +351,8 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 			"type",
 			"the data type of the values stored in the array",
 			"""
-			GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL30#HALF_FLOAT GL11#FLOAT
-			GL11#DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV
+			#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT #HALF_FLOAT #FLOAT
+			#DOUBLE #UNSIGNED_INT_2_10_10_10_REV #INT_2_10_10_10_REV
 			"""
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),

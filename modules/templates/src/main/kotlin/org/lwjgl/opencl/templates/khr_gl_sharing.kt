@@ -13,7 +13,7 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 
 		IntConstant(
 			"""
-		Returned by CL10#CreateContext(), CL10#CreateContextFromType(), and #GetGLContextInfoKHR() when an invalid OpenGL context or
+		Returned by #CreateContext(), #CreateContextFromType(), and #GetGLContextInfoKHR() when an invalid OpenGL context or
 		share group object handle is specified in {@code properties}.
 		""",
 
@@ -42,7 +42,7 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 
 
 		IntConstant(
-			"Accepted as an attribute name in the {@code properties} argument of CL10#CreateContext() and CL10#CreateContextFromType().",
+			"Accepted as an attribute name in the {@code properties} argument of #CreateContext() and #CreateContextFromType().",
 
 			"GL_CONTEXT_KHR"..0x2008,
 			"EGL_DISPLAY_KHR"..0x2009,
@@ -64,7 +64,7 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 			NullTerminated..const..cl_context_properties_p.IN(
 				"properties",
 				"""
-			points to an attribute list whose format and valid contents are identical to the {code properties} argument of CL10#CreateContext().
+			points to an attribute list whose format and valid contents are identical to the {code properties} argument of #CreateContext().
 			{@code properties} must identify a single valid GL context or GL share group object.
 			"""
 			),
@@ -118,8 +118,8 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 		Returns $INVALID_VALUE if an invalid attribute name is specified in {@code properties}.
 
 		Additionally, returns $INVALID_VALUE if {@code param_name} is invalid, or if the size in bytes specified by {@code param_value_size} is
-		less than the size of the return type and {@code param_value} is not a $NULL value, CL10#OUT_OF_RESOURCES if there is a failure to allocate
-		resources required by the OpenCL implementation on the device, or CL10#OUT_OF_HOST_MEMORY if there is a failure to allocate resources required by
+		less than the size of the return type and {@code param_value} is not a $NULL value, #OUT_OF_RESOURCES if there is a failure to allocate
+		resources required by the OpenCL implementation on the device, or #OUT_OF_HOST_MEMORY if there is a failure to allocate resources required by
 		the OpenCL implementation on the host.
 		"""
 		)

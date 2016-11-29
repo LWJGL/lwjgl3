@@ -12,11 +12,11 @@ val ARB_texture_filter_minmax = "ARBTextureFilterMinmax".nativeClassGL("ARB_text
 		"""
 		Native bindings to the $registryLink extension.
 
-		In unextended OpenGL, minification and magnification filters such as GL11#LINEAR allow texture lookups to returned a filtered texel value produced by
+		In unextended OpenGL, minification and magnification filters such as #LINEAR allow texture lookups to returned a filtered texel value produced by
 		computing an weighted average of a collection of texels in the neighborhood of the texture coordinate provided.
 
 		This extension provides a new texture and sampler parameter (#TEXTURE_REDUCTION_MODE_ARB) which allows applications to produce a filtered texel value
-		by computing a component-wise minimum (GL14#MIN) or maximum (GL14#MAX) of the texels that would normally be averaged. The reduction mode is orthogonal
+		by computing a component-wise minimum (#MIN) or maximum (#MAX) of the texels that would normally be averaged. The reduction mode is orthogonal
 		to the minification and magnification filter parameters. The filter parameters are used to identify the set of texels used to produce a final filtered
 		value; the reduction mode identifies how these texels are combined.
 

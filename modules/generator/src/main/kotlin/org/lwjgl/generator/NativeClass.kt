@@ -199,7 +199,7 @@ class NativeClass(
 			.forEach { func ->
 				val multiTypeParams = func.parameters.filter { it has MultiType }
 				val autoSizeResultOutParams = func.parameters.count { it.isAutoSizeResultOut }
-				val documentation: ((Parameter) -> Boolean) -> String = { processDocumentation("Array version of: ${func.methodLink}").toJavaDoc() }
+				val documentation: ((Parameter) -> Boolean) -> String = { processDocumentation("Array version of: ${func.javaDocLink}").toJavaDoc() }
 
 				if (multiTypeParams.isEmpty() || func.parameters.any { it.isArrayParameter(autoSizeResultOutParams) }) {
 					val overload = NativeClassFunction(
@@ -331,8 +331,31 @@ class NativeClass(
 	override fun processDocumentation(documentation: String, forcePackage: Boolean): String =
 		processDocumentation(documentation, prefixConstant, prefixMethod, forcePackage = forcePackage)
 
-	override fun hasField(field: String): Boolean = constantBlocks.any { it.constants.any { it.name == field } }
-	override fun hasMethod(method: String): Boolean = functions.any { it.simpleName == method }
+	private val constantLinks: Map<String, String> by lazy {
+		val map = HashMap<String, String>()
+
+		constantBlocks
+			.forEach { block ->
+				block.constants.forEach {
+					map[it.name] = block.getClassLink(it.name)
+				}
+			}
+
+		functions
+			.filter { it has macro }
+			.forEach {
+				map[it.name] = "$className#${it.name}"
+			}
+
+		map
+	}
+	override fun getFieldLink(field: String): String? = constantLinks[field]
+	override fun getMethodLink(method: String): String? = _functions[method].let {
+		if (it == null)
+			null
+		else
+			"$className#${it.name}()"
+	}
 
 	internal fun registerFunctions() {
 		if (binding != null) {
@@ -344,24 +367,40 @@ class NativeClass(
 		}
 	}
 
+	private fun registerLink(
+		name: String,
+		link: String,
+		registry: MutableMap<String, String>,
+		duplicate: MutableSet<String>
+	) {
+		val prev = registry[name]
+		if (prev == null) {
+			registry.put(name, link)
+		} else if (link.length < prev.length) { // Short link == shorter class == usually core API
+			registry.put(name, link)
+			duplicate.remove(name) // sometimes there are more than 2 definitions of the same symbol
+		} else if (link.length == prev.length) {
+			duplicate.add(name)
+		}
+	}
+
 	internal fun registerLinks(
 		tokens: MutableMap<String, String>,
 		duplicateTokens: MutableSet<String>,
 		functions: MutableMap<String, String>,
 		duplicateFunctions: MutableSet<String>
 	) {
-		if (!this.functions.any { it.has(Reuse) }) {
-			constantBlocks.forEach { block ->
-				block.constants.forEach {
-					if (tokens.put(it.name, "$className#${block.getConstantName(it.name)}") != null)
-						duplicateTokens.add(it.name)
-				}
+		constantBlocks.forEach { block ->
+			block.constants.forEach {
+				registerLink(it.name, block.getClassLink(it.name), tokens, duplicateTokens)
 			}
 		}
 
 		this.functions.asSequence().filter { !it.has(Reuse) }.forEach {
-			if (functions.put(it.simpleName, "$className#${it.name}()") != null)
-				duplicateFunctions.add(it.simpleName)
+			if (it has macro)
+				registerLink(it.simpleName, "$className#${it.name}", tokens, duplicateTokens)
+			else
+				registerLink(it.simpleName, "$className#${it.name}()", functions, duplicateFunctions)
 		}
 	}
 
@@ -661,20 +700,11 @@ class NativeClass(
 		return if (param === EXPLICIT_FUNCTION_ADDRESS || param === JNI_ENV)
 			param
 		else {
-			val documentation: (() -> String)? = param.documentation.let {
-				if (it != null) {
-					if (this@NativeClass !== this.nativeClass)
-						({ convertDocumentation(this.nativeClass, this.name, it()) })
-					else
-						it
-				} else
-					null
-			}
 			Parameter(
 				param.nativeType,
 				param.name,
 				param.paramType,
-				documentation
+				param.documentation
 			).copyModifiers(param)
 		}
 	}

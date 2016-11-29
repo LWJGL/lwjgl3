@@ -76,7 +76,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGL("KHR_robustness") {
 	)
 
 	IntConstant(
-		"Returned by GL11#GetError().",
+		"Returned by #GetError().",
 
 		"CONTEXT_LOST"..0x0507
 	)

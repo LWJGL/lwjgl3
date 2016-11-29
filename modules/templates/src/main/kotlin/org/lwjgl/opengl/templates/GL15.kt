@@ -9,21 +9,21 @@ import org.lwjgl.opengl.*
 
 val BUFFER_OBJECT_TARGETS =
 	"""
-	GL15#ARRAY_BUFFER GL15#ELEMENT_ARRAY_BUFFER GL21#PIXEL_PACK_BUFFER GL21#PIXEL_UNPACK_BUFFER GL30#TRANSFORM_FEEDBACK_BUFFER
-	GL31#UNIFORM_BUFFER GL31#TEXTURE_BUFFER GL31#COPY_READ_BUFFER GL31#COPY_WRITE_BUFFER GL40#DRAW_INDIRECT_BUFFER GL42#ATOMIC_COUNTER_BUFFER
-	GL43#DISPATCH_INDIRECT_BUFFER GL43#SHADER_STORAGE_BUFFER ARBIndirectParameters#PARAMETER_BUFFER_ARB
+	#ARRAY_BUFFER #ELEMENT_ARRAY_BUFFER #PIXEL_PACK_BUFFER #PIXEL_UNPACK_BUFFER #TRANSFORM_FEEDBACK_BUFFER
+	#UNIFORM_BUFFER #TEXTURE_BUFFER #COPY_READ_BUFFER #COPY_WRITE_BUFFER #DRAW_INDIRECT_BUFFER #ATOMIC_COUNTER_BUFFER
+	#DISPATCH_INDIRECT_BUFFER #SHADER_STORAGE_BUFFER #PARAMETER_BUFFER_ARB
 	"""
 
 val BUFFER_OBJECT_PARAMETERS =
 	"""
-	GL15#BUFFER_SIZE GL15#BUFFER_USAGE GL15#BUFFER_ACCESS GL15#BUFFER_MAPPED GL30#BUFFER_ACCESS_FLAGS GL30#BUFFER_MAP_LENGTH GL30#BUFFER_MAP_OFFSET
-	GL44#BUFFER_IMMUTABLE_STORAGE GL44#BUFFER_STORAGE_FLAGS
+	GL15#GL_BUFFER_SIZE #BUFFER_USAGE #BUFFER_ACCESS #BUFFER_MAPPED #BUFFER_ACCESS_FLAGS #BUFFER_MAP_LENGTH #BUFFER_MAP_OFFSET
+	#BUFFER_IMMUTABLE_STORAGE #BUFFER_STORAGE_FLAGS
 	"""
 
 val QUERY_TARGETS =
 	"""
-	GL15#SAMPLES_PASSED GL30#PRIMITIVES_GENERATED GL30#TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN GL33#TIME_ELAPSED GL33#TIMESTAMP
-	GL33#ANY_SAMPLES_PASSED GL43#ANY_SAMPLES_PASSED_CONSERVATIVE
+	#SAMPLES_PASSED #PRIMITIVES_GENERATED #TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN #TIME_ELAPSED #TIMESTAMP
+	#ANY_SAMPLES_PASSED #ANY_SAMPLES_PASSED_CONSERVATIVE
 	"""
 
 val GL15 = "GL15".nativeClassGL("GL15") {
@@ -230,8 +230,8 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 		<b>LWJGL note</b>: This method comes in 3 flavors:
 		${ol(
-			"#MapBuffer(int, int) - Calls #GetBufferParameteri() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
-			"#MapBuffer(int, int, ByteBuffer) - Calls #GetBufferParameteri() to retrieve the buffer size and the {@code old_buffer} parameter is reused if not null.",
+			"#MapBuffer(int, int) - Calls #GetBufferParameteriv() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
+			"#MapBuffer(int, int, ByteBuffer) - Calls #GetBufferParameteriv() to retrieve the buffer size and the {@code old_buffer} parameter is reused if not null.",
 			"#MapBuffer(int, int, long, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if not null. This is the most efficient method."
 		)}
 		""",
@@ -272,7 +272,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"Returns the pointer to a mapped buffer object's data store.",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-		GLenum.IN("pname", "the pointer to be returned", "GL15#BUFFER_MAP_POINTER"),
+		GLenum.IN("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER"),
 		Check(1)..ReturnParam..void_pp.OUT("params", "the pointer value specified by {@code pname}")
 	)
 

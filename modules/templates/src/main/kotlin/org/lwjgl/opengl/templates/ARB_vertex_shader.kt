@@ -176,13 +176,13 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 		"Specifies the location and organization of a vertex attribute array.",
 
 		GLuint.IN("index", vertexAttribIndex),
-		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 GL12#BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 #BGRA"),
 		GLenum.IN(
 			"type",
 			"the data type of each component in the array. The initial value is GL_FLOAT",
 			"""
-			GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL30#HALF_FLOAT GL11#FLOAT
-			GL11#DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV GL41#FIXED
+			#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT #HALF_FLOAT #FLOAT
+			#DOUBLE #UNSIGNED_INT_2_10_10_10_REV #INT_2_10_10_10_REV #FIXED
 			"""
 		),
 		GLboolean.IN("normalized", "whether fixed-point data values should be normalized or converted directly as fixed-point values when they are accessed"),
@@ -199,7 +199,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-			currently bound to the GL15#ARRAY_BUFFER target. The initial value is 0.
+			currently bound to the #ARRAY_BUFFER target. The initial value is 0.
 			"""
 		)
 	)
@@ -265,7 +265,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 		GLenum.IN(
 			"pname",
 			"the symbolic name of the vertex attribute parameter to be queried",
-			"GL15#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES GL30#VERTEX_ATTRIB_ARRAY_INTEGER GL33#VERTEX_ATTRIB_ARRAY_DIVISOR"
+			"#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES #VERTEX_ATTRIB_ARRAY_INTEGER #VERTEX_ATTRIB_ARRAY_DIVISOR"
 		),
 		Check(1)..ReturnParam..GLint_p.OUT("params", "returns the requested data")
 	)

@@ -31,7 +31,7 @@ val WGL_ARB_create_context_profile = "WGLARBCreateContextProfile".nativeClassWGL
 	)
 
 	IntConstant(
-		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
+		"New errors returned by org.lwjgl.system.windows.WinBase#GetLastError().",
 
 		"ERROR_INVALID_PROFILE_ARB"..0x2096
 	).noPrefix()

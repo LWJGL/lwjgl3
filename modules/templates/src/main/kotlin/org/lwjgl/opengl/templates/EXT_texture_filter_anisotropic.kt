@@ -32,8 +32,8 @@ val EXT_texture_filter_anisotropic = "EXTTextureFilterAnisotropic".nativeClassGL
 		accounts for the direction of anisotropy. Implementations are also permitted to ignore the minification or magnification filter and implement the
 		highest quality of anisotropic filtering possible.
 
-		Applications seeking the highest quality anisotropic filtering available are advised to request a GL11#LINEAR_MIPMAP_LINEAR minification filter, a
-		GL11#LINEAR magnification filter, and a large maximum degree of anisotropy.
+		Applications seeking the highest quality anisotropic filtering available are advised to request a #LINEAR_MIPMAP_LINEAR minification filter, a
+		#LINEAR magnification filter, and a large maximum degree of anisotropy.
 		"""
 
 	IntConstant(

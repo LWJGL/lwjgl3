@@ -21,8 +21,8 @@ val AMD_occlusion_query_event = "AMDOcclusionQueryEvent".nativeClassGL("AMD_occl
 
 	IntConstant(
 		"""
-		Accepted by the {@code pname} argument to #QueryObjectParameteruiAMD(), GL15#GetQueryObjectiv(), GL15#GetQueryObjectuiv(),
-		GL33#GetQueryObjecti64v(), and GL33#GetQueryObjectui64v().
+		Accepted by the {@code pname} argument to #QueryObjectParameteruiAMD(), #GetQueryObjectiv(), #GetQueryObjectuiv(),
+		#GetQueryObjecti64v(), and #GetQueryObjectui64v().
 		""",
 
 		"OCCLUSION_QUERY_EVENT_MASK_AMD"..0x874F
@@ -43,7 +43,7 @@ val AMD_occlusion_query_event = "AMDOcclusionQueryEvent".nativeClassGL("AMD_occl
 		"Changes the value of a query object parameter.",
 
 		GLenum.IN("target", "a valid query target", QUERY_TARGETS),
-		GLuint.IN("id", "a value returned from a previous call to GL15#GenQueries()"),
+		GLuint.IN("id", "a value returned from a previous call to #GenQueries()"),
 		GLenum.IN("pname", "the parameter to modify", "#OCCLUSION_QUERY_EVENT_MASK_AMD"),
 		GLuint.IN("param", "the new value", params)
 	)

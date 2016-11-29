@@ -19,8 +19,8 @@ val OVR_multiview_multisampled_render_to_texture = "OVRMultiviewMultisampledRend
 	void(
 		"FramebufferTextureMultisampleMultiviewOVR",
 		"""
-		Operates similarly to OVRMultiview#FramebufferTextureMultiviewOVR(), except that it also enables multisampled rendering into the images of a
-		non-multisampled texture object similarly to EXTMultisampledRenderToTexture#FramebufferTexture2DMultisampleEXT().
+		Operates similarly to #FramebufferTextureMultiviewOVR(), except that it also enables multisampled rendering into the images of a
+		non-multisampled texture object similarly to #FramebufferTexture2DMultisampleEXT().
 		""",
 
 		GLenum.IN("target", ""),

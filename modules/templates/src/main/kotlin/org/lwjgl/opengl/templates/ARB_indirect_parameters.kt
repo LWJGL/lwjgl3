@@ -20,7 +20,7 @@ val ARB_indirect_parameters = "ARBIndirectParameters".nativeClassGL("ARB_indirec
 		queries, or mapping buffers containing the content of atomic counters, which can cause stalls or bubbles in the OpenGL pipeline.
 
 		This extension introduces the concept of the "parameter buffer", which is a target allowing buffers to store parameters for certain drawing commands.
-		Also in this extension, new variants of GL43#MultiDrawArraysIndirect() and GL43#MultiDrawElementsIndirect() are introduced that source some of their
+		Also in this extension, new variants of #MultiDrawArraysIndirect() and #MultiDrawElementsIndirect() are introduced that source some of their
 		parameters from this buffer. Further commands could potentially be introduced that source other parameters from a buffer.
 
 		Requires ${GL42.core}.
@@ -45,7 +45,7 @@ val ARB_indirect_parameters = "ARBIndirectParameters".nativeClassGL("ARB_indirec
 	void(
 		"MultiDrawArraysIndirectCountARB",
 		"""
-		Behaves similarly to GL43#MultiDrawArraysIndirect(), except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
+		Behaves similarly to #MultiDrawArraysIndirect(), except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
 		#PARAMETER_BUFFER_ARB binding point at which a single {@code sizei} typed value is stored, which contains the draw count. {@code maxdrawcount} specifies
 		the maximum number of draws that are expected to be stored in the buffer. If the value stored at {@code drawcount} into the buffer is greater than
 		{@code maxdrawcount}, an implementation stop processing draws after {@code maxdrawcount} parameter sets. {@code drawcount} must be a multiple of four.
@@ -64,7 +64,7 @@ val ARB_indirect_parameters = "ARBIndirectParameters".nativeClassGL("ARB_indirec
 	void(
 		"MultiDrawElementsIndirectCountARB",
 		"""
-		Behaves similarly to GL43#MultiDrawElementsIndirect(), except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
+		Behaves similarly to #MultiDrawElementsIndirect(), except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
 		#PARAMETER_BUFFER_ARB binding point at which a single {@code sizei} typed value is stored, which contains the draw count. {@code maxdrawcount} specifies
 		the maximum number of draws that are expected to be stored in the buffer. If the value stored at {@code drawcount} into the buffer is greater than
 		{@code maxdrawcount}, an implementation stop processing draws after {@code maxdrawcount} parameter sets. {@code drawcount} must be a multiple of four.

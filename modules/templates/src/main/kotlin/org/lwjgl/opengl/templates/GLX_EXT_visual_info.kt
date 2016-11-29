@@ -21,7 +21,7 @@ val GLX_EXT_visual_info = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info
 		"""
 
 	IntConstant(
-		"Accepted by the {@code attrib} parameter of GLX#GetConfig(), and by the {@code attrib_list} parameter of GLX#ChooseVisual().",
+		"Accepted by the {@code attrib} parameter of #GetConfig(), and by the {@code attrib_list} parameter of #ChooseVisual().",
 
 		"X_VISUAL_TYPE_EXT"..0x22,
 		"TRANSPARENT_TYPE_EXT"..0x23,
@@ -34,7 +34,7 @@ val GLX_EXT_visual_info = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info
 
 	IntConstant(
 		"""
-		Returned by GLX#GetConfig(), and accepted by the {@code attrib_list} parameter of GLX#ChooseVisual() (following the
+		Returned by #GetConfig(), and accepted by the {@code attrib_list} parameter of #ChooseVisual() (following the
 		#X_VISUAL_TYPE_EXT token).
 		""",
 
@@ -48,7 +48,7 @@ val GLX_EXT_visual_info = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info
 
 	IntConstant(
 		"""
-		Returned by GLX#GetConfig(), and accepted by the {@code attrib_list} parameter of GLX#ChooseVisual() (following the
+		Returned by #GetConfig(), and accepted by the {@code attrib_list} parameter of #ChooseVisual() (following the
 		#TRANSPARENT_TYPE_EXT token).
 		""",
 

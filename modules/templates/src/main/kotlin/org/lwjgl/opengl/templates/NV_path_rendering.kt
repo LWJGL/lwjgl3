@@ -419,7 +419,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		AutoSize("commands")..GLsizei.IN("numCommands", ""),
 		const..GLubyte_p.IN("commands", ""),
 		AutoSizeShr("GLChecks.typeToByteShift(coordType)", "coords")..GLsizei.IN("numCoords", ""),
-		GLenum.IN("coordType", "", "GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#FLOAT"),
+		GLenum.IN("coordType", "", "#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #FLOAT"),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_FLOAT
 		)..const..void_p.IN("coords", "")
@@ -479,7 +479,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		NullTerminated..const..void_p.IN("fontName", ""),
 		GLbitfield.IN("fontStyle", "", "#BOLD_BIT_NV #ITALIC_BIT_NV", LinkMode.BITFIELD),
 		AutoSizeDiv("charcodeTypeToBytes(type)", "charcodes")..GLsizei.IN("numGlyphs", ""),
-		GLenum.IN("type", "", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"),
+		GLenum.IN("type", "", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"),
 		const..void_p.IN("charcodes", ""),
 		GLenum.IN("handleMissingGlyphs", "", "#SKIP_MISSING_GLYPH_NV #USE_MISSING_GLYPH_NV"),
 		GLuint.IN("pathParameterTemplate", ""),
@@ -657,7 +657,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"",
 
 		GLuint.IN("path", ""),
-		GLenum.IN("fillMode", "", "GL11#INVERT #COUNT_UP_NV #COUNT_DOWN_NV #PATH_FILL_MODE_NV"),
+		GLenum.IN("fillMode", "", "#INVERT #COUNT_UP_NV #COUNT_DOWN_NV #PATH_FILL_MODE_NV"),
 		GLuint.IN("mask", "")
 	)
 
@@ -678,7 +678,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLenum.IN(
 			"pathNameType",
 			"",
-			"GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL11#FLOAT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"
+			"#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT #FLOAT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"
 		),
 		const..void_p.IN("paths", ""),
 		GLuint.IN("pathBase", ""),
@@ -713,9 +713,9 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"PathColorGenNV",
 		"",
 
-		GLenum.IN("color", "", "GL13#PRIMARY_COLOR #PRIMARY_COLOR_NV #SECONDARY_COLOR_NV"),
-		GLenum.IN("genMode", "", "GL11#NONE #OBJECT_LINEAR_NV #PATH_OBJECT_BOUNDING_BOX_NV #EYE_LINEAR_NV #CONSTANT_NV"),
-		GLenum.IN("colorFormat", "GL11#LUMINANCE GL11#ALPHA GL11#INTENSITY GL11#LUMINANCE_ALPHA GL11#RGB GL11#RGBA"),
+		GLenum.IN("color", "", "#PRIMARY_COLOR #PRIMARY_COLOR_NV #SECONDARY_COLOR_NV"),
+		GLenum.IN("genMode", "", "#NONE #OBJECT_LINEAR_NV #PATH_OBJECT_BOUNDING_BOX_NV #EYE_LINEAR_NV #CONSTANT_NV"),
+		GLenum.IN("colorFormat", "#LUMINANCE #ALPHA #INTENSITY #LUMINANCE_ALPHA #RGB GL11#GL_RGBA"),
 		Check("genModeToElements(genMode) * colorFormatToComponents(colorFormat)")..const..GLfloat_p.IN("coeffs", "")
 	)
 

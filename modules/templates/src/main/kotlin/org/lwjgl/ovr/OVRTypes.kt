@@ -75,13 +75,13 @@ val ovrSessionStatus_p = struct(OVR_PACKAGE, "OVRSessionStatus", nativeName = "o
 	ovrBool.member("IsVisible", "True if the process has VR focus and thus is visible in the HMD.")
 	ovrBool.member("HmdPresent", "True if an HMD is present.")
 	ovrBool.member("HmdMounted", "True if the HMD is on the user's head.")
-	ovrBool.member("DisplayLost", "True if the session is in a display-lost state. See OVR#ovr_SubmitFrame().")
+	ovrBool.member("DisplayLost", "True if the session is in a display-lost state. See #SubmitFrame().")
 	ovrBool.member("ShouldQuit", "True if the application should initiate shutdown.    ")
-	ovrBool.member("ShouldRecenter", "True if UX has requested re-centering. Must call OVR#ovr_ClearShouldRecenterFlag() or OVR#ovr_RecenterTrackingOrigin().")
+	ovrBool.member("ShouldRecenter", "True if UX has requested re-centering. Must call #ClearShouldRecenterFlag() or #RecenterTrackingOrigin().")
 }.p
 
 val ovrInitParams_p = struct(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInitParams") {
-	documentation = "Parameters for OVR#ovr_Initialize()."
+	documentation = "Parameters for #Initialize()."
 
 	uint32_t.member("Flags", "flags from {@code ovrInitFlags} to override default behavior. Use 0 for the defaults.")
 	uint32_t.member(
@@ -95,7 +95,7 @@ val ovrInitParams_p = struct(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInit
 	nullable..ovrLogCallback.member(
 		"LogCallback",
 		"""
-		user-supplied log callback function, which may be called at any time asynchronously from multiple threads until OVR#ovr_Shutdown() completes. Use $NULL
+		user-supplied log callback function, which may be called at any time asynchronously from multiple threads until #Shutdown() completes. Use $NULL
 		to specify no log callback.
 		"""
 	)
@@ -196,7 +196,7 @@ val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", nativeName = "ovrPoseSt
 	ovrVector3f.member("LinearVelocity", "velocity in meters per second")
 	ovrVector3f.member("AngularAcceleration", "angular acceleration in radians per second per second")
 	ovrVector3f.member("LinearAcceleration", "acceleration in meters per second per second")
-	double.member("TimeInSeconds", "absolute time that this pose refers to. See OVR#ovr_GetTimeInSeconds()")
+	double.member("TimeInSeconds", "absolute time that this pose refers to. See #GetTimeInSeconds()")
 }
 
 val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", nativeName = "ovrFovPort") {
@@ -277,7 +277,7 @@ val ovrTrackerPose = struct(OVR_PACKAGE, "OVRTrackerPose", nativeName = "ovrTrac
 }
 
 val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovrTrackingState", mutable = false) {
-	documentation = "Tracking state at a given absolute time (describes predicted HMD pose etc). Returned by OVR#ovr_GetTrackingState()."
+	documentation = "Tracking state at a given absolute time (describes predicted HMD pose etc). Returned by #GetTrackingState()."
 
 	ovrPoseStatef.member(
 		"HeadPose",
@@ -300,7 +300,7 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovr
 
 	unsigned_int.array(
 		"HandStatusFlags",
-		"{@code HandPoses} status flags described by {@code ovrStatusBits}. Only OVR#ovrStatus_OrientationTracked and OVR#ovrStatus_PositionTracked are reported.",
+		"{@code HandPoses} status flags described by {@code ovrStatusBits}. Only #Status_OrientationTracked and #Status_PositionTracked are reported.",
 		size = 2
 	)
 
@@ -320,7 +320,7 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", nativeName = "ovr
 val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", nativeName = "ovrEyeRenderDesc", mutable = false) {
 	documentation =
 		"""
-		rendering information for each eye. Computed by either OVR#ovr_GetRenderDesc() based on the specified FOV. Note that the rendering viewport is not
+		rendering information for each eye. Computed by either #GetRenderDesc() based on the specified FOV. Note that the rendering viewport is not
 		included here as it can be specified separately and modified per frame by passing different viewport values in the layer structure.
 		"""
 
@@ -336,7 +336,7 @@ val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc",
 		"""
 		Projection information for ##OVRLayerEyeFovDepth.
 
-		Use the utility function OVRUtil#ovrTimewarpProjectionDesc_FromProjection() to generate this structure from the application's projection matrix.
+		Use the utility function #TimewarpProjectionDesc_FromProjection() to generate this structure from the application's projection matrix.
 		"""
 
 	float.member("Projection22", "projection matrix element [2][2]")
@@ -370,7 +370,7 @@ val ovrTextureSwapChainDesc_p = struct(OVR_PACKAGE, "OVRTextureSwapChainDesc", n
 
 	ovrTextureType.member("Type", "").links("Texture_\\w+")
 	ovrTextureFormat.member("Format", "").links("OVR_FORMAT_\\w+")
-	int.member("ArraySize", "only supported with OVR#ovrTexture_2D. Not supported on PC at this time.")
+	int.member("ArraySize", "only supported with #Texture_2D. Not supported on PC at this time.")
 	int.member("Width", "")
 	int.member("Height", "")
 	int.member("MipLevels", "")
@@ -464,17 +464,17 @@ val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInpu
 	unsigned_int.member("Touches", "touch values for buttons and sensors as described by {@code ovrTouch}.")
 	float.array(
 		"IndexTrigger",
-		"left and right finger trigger values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range 0.0 to 1.0f.",
+		"left and right finger trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f.",
 		size = "ovrHand_Count"
 	)
 	float.array(
 		"HandTrigger",
-		"left and right hand trigger values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range 0.0 to 1.0f.",
+		"left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f.",
 		size = "ovrHand_Count"
 	)
 	ovrVector2f.array(
 		"Thumbstick",
-		"horizontal and vertical thumbstick axis values (OVR#ovrHand_Left and OVR#ovrHand_Right), in the range -1.0f to 1.0f.",
+		"horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f.",
 		size = "ovrHand_Count"
 	)
 	ovrControllerType.member("ControllerType", "The type of the controller this state is for.").links("ControllerType_\\w+")
@@ -502,7 +502,7 @@ val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", nativeName = "ovrLaye
 		Defines properties shared by all ovrLayer structs, such as ##OVRLayerEyeFov.
 
 		{@code ovrLayerHeader} is used as a base member in these larger structs. This struct cannot be used by itself except for the case that {@code Type} is
-		OVR#ovrLayerType_Disabled.
+		#LayerType_Disabled.
 		"""
 
 	ovrLayerType.member("Type", "described by {@code ovrLayerType}").links("LayerType_\\w+")
@@ -514,10 +514,10 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 	documentation =
 		"""
 		Describes a layer that specifies a monoscopic or stereoscopic view. This is the kind of layer that's typically used as layer 0 to
-		OVR#ovr_SubmitFrame(), as it is the kind of layer used to render a 3D stereoscopic view.
+		#SubmitFrame(), as it is the kind of layer used to render a 3D stereoscopic view.
 		"""
 
-	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeFov.")
+	ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeFov.")
 	ovrTextureSwapChain.array(
 		"ColorTexture",
 		"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be $NULL.",
@@ -534,7 +534,7 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 		"RenderPose",
 		"""
 		specifies the position and orientation of each eye view, with the position specified in meters. RenderPose will typically be the value returned from
-		OVRUtil#ovr_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
+		#_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
 		""",
 		size = "ovrEye_Count"
 	)
@@ -542,7 +542,7 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 		"SensorSampleTime",
 		"""
 		specifies the timestamp when the source ##OVRPosef (used in calculating RenderPose) was sampled from the SDK. Typically retrieved by calling
-		OVR#ovr_GetTimeInSeconds() around the instant the application calls OVR#ovr_GetTrackingState(). The main purpose for this is to accurately track app
+		#GetTimeInSeconds() around the instant the application calls #GetTrackingState(). The main purpose for this is to accurately track app
 		tracking latency.
 		"""
 	)
@@ -551,17 +551,17 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQuad") {
 	documentation =
 		"""
-		Describes a layer of Quad type, which is a single quad in world or viewer space. It is used for both OVR#ovrLayerType_Quad. This type of layer
+		Describes a layer of Quad type, which is a single quad in world or viewer space. It is used for both #LayerType_Quad. This type of layer
 		represents a single object placed in the world and not a stereo view of the world itself.
 
-		A typical use of OVR#ovrLayerType_Quad is to draw a television screen in a room that for some reason is more convenient to draw as a layer than
+		A typical use of #LayerType_Quad is to draw a television screen in a room that for some reason is more convenient to draw as a layer than
 		as part of the main view in layer 0. For example, it could implement a 3D popup GUI that is drawn at a higher resolution than layer 0 to improve
 		fidelity of the GUI.
 
 		Quad layers are visible from both sides; they are not back-face culled.
 		"""
 
-	ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_Quad")
+	ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_Quad")
 	ovrTextureSwapChain.member("ColorTexture", "contains a single image, never with any stereo view")
 	ovrRecti.member("Viewport", "specifies the ColorTexture sub-rect UV coordinates")
 	ovrPosef.member(
@@ -570,7 +570,7 @@ val ovrLayerQuad = struct(OVR_PACKAGE, "OVRLayerQuad", nativeName = "ovrLayerQua
 		specifies the orientation and position of the center point of a Quad layer type.
 
 		The supplied direction is the vector perpendicular to the quad. The position is in real-world meters (not the application's virtual world, the physical
-		world the user is in) and is relative to the "zero" position set by OVR#ovr_RecenterTrackingOrigin() unless the OVR#ovrLayerFlag_HeadLocked flag is
+		world the user is in) and is relative to the "zero" position set by #RecenterTrackingOrigin() unless the #LayerFlag_HeadLocked flag is
 		used.
 		"""
 	)
@@ -740,24 +740,24 @@ val ovrPerfStats_p = struct(OVR_PACKAGE, "OVRPerfStats", nativeName = "ovrPerfSt
 val ovrHapticsGenMode = "ovrHapticsGenMode".enumType
 
 val ovrDetectResult = struct(OVR_PACKAGE, "OVRDetectResult", nativeName = "ovrDetectResult", mutable = false) {
-	documentation = "Return values for OVRUtil##ovr_Detect()"
+	documentation = "Return values for OVRUtil#Detect()"
 
 	ovrBool.member(
 		"IsOculusServiceRunning",
 		"""
-		is OVR#ovrFalse when the Oculus Service is not running. This means that the Oculus Service is either uninstalled or stopped.
-		{@code IsOculusHMDConnected} will be OVR#ovrFalse in this case.
+		is #False when the Oculus Service is not running. This means that the Oculus Service is either uninstalled or stopped.
+		{@code IsOculusHMDConnected} will be #False in this case.
 
-		is OVR#ovrTrue when the Oculus Service is running. This means that the Oculus Service is installed and running. {@code IsOculusHMDConnected} will
+		is #True when the Oculus Service is running. This means that the Oculus Service is installed and running. {@code IsOculusHMDConnected} will
 		reflect the state of the HMD.
 		"""
 	)
 	ovrBool.member(
 		"IsOculusHMDConnected",
 		"""
-		is OVR#ovrFalse when an Oculus HMD is not detected. If the Oculus Service is not running, this will be OVR#ovrFalse.
+		is #False when an Oculus HMD is not detected. If the Oculus Service is not running, this will be #False.
 
-		is OVR#ovrTrue when an Oculus HMD is detected. This implies that the Oculus Service is also installed and running.
+		is #True when an Oculus HMD is detected. This implies that the Oculus Service is also installed and running.
 		"""
 	)
 	padding(6)
@@ -817,7 +817,7 @@ fun config() {
 			)}
 			"""
 
-		ovrLayerHeader.member("Header", "{@code Header.Type} must be OVR#ovrLayerType_EyeMatrix")
+		ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeMatrix")
 		ovrTextureSwapChain.array(
 			"ColorTexture",
 			"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be $NULL",
@@ -833,7 +833,7 @@ fun config() {
 			"RenderPose",
 			"""
 			specifies the position and orientation of each eye view, with the position specified in meters. RenderPose will typically be the value returned
-			from OVRUtil#ovr_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
+			from #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
 			""",
 			size = "ovrEye_Count"
 		)
@@ -852,7 +852,7 @@ TexV  = P.y/P.z""")}
 			"SensorSampleTime",
 			"""
 			specifies the timestamp when the source ##OVRPosef (used in calculating RenderPose) was sampled from the SDK. Typically retrieved by calling
-			OVR#ovr_GetTimeInSeconds() around the instant the application calls OVR#ovr_GetTrackingState(). The main purpose for this is to accurately track
+			#GetTimeInSeconds() around the instant the application calls #GetTrackingState(). The main purpose for this is to accurately track
 			app tracking latency.
 			"""
 		)

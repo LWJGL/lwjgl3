@@ -50,21 +50,21 @@ val khr_terminate_context = "KHRTerminateContext".nativeClassCL("khr_terminate_c
 		When a context is terminated:
 		${ul(
 			"""
-			The execution status of enqueued commands will be #TERMINATED_KHR. Event objects can be queried using CL10#GetEventInfo(). Event
-			callbacks can be registered and registered event callbacks will be called with {@code event_command_exec_status} set to #TERMINATED_KHR.
-			CL10#WaitForEvents() will return immediately for commands associated with event objects specified in {@code event_list}. The status of user
-			events can be set. Event objects can be retained and released. CL10#GetEventProfilingInfo() returns CL10#PROFILING_INFO_NOT_AVAILABLE.
+			The execution status of enqueued commands will be {@code TERMINATED_KHR}. Event objects can be queried using #GetEventInfo(). Event
+			callbacks can be registered and registered event callbacks will be called with {@code event_command_exec_status} set to {@code TERMINATED_KHR}.
+			#WaitForEvents() will return immediately for commands associated with event objects specified in {@code event_list}. The status of user
+			events can be set. Event objects can be retained and released. #GetEventProfilingInfo() returns #PROFILING_INFO_NOT_AVAILABLE.
 			""",
 			"""
 			The context is considered to be terminated. A callback function registered when the context was created will be called. Only queries, retain and
-			release operations can be performed on the context. All other APIs that use a context as an argument will return #CONTEXT_TERMINATED_KHR.
+			release operations can be performed on the context. All other APIs that use a context as an argument will return {@code CONTEXT_TERMINATED_KHR}.
 			""",
 			"""
 			The contents of the memory regions of the memory objects is undefined. Queries, registering a destructor callback, retain and release operations can
 			be performed on the memory objects.
 			""",
 			"""
-			Once a context has been terminated, all OpenCL API calls that create objects or enqueue commands will return #CONTEXT_TERMINATED_KHR. APIs
+			Once a context has been terminated, all OpenCL API calls that create objects or enqueue commands will return {@code CONTEXT_TERMINATED_KHR}. APIs
 			that release OpenCL objects will continue to operate as though {@code clTerminateContextKHR} was not called.
 			""",
 			"""
@@ -80,7 +80,7 @@ val khr_terminate_context = "KHRTerminateContext".nativeClassCL("khr_terminate_c
 		"""
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 			"$INVALID_CONTEXT if {@code context} is not a valid OpenCL context.",
-			"#CONTEXT_TERMINATED_KHR if {@code context} has already been terminated.",
+			"{@code CONTEXT_TERMINATED_KHR} if {@code context} has already been terminated.",
 			"$INVALID_OPERATION if {@code context} was not created with #CONTEXT_TERMINATE_KHR set to $TRUE.",
 			OORE,
 			OOHME

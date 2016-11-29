@@ -567,7 +567,7 @@ val CGL = "CGL".nativeClass(
 			a constant that specifies the internal color format of the pixel buffer. The format controls whether the alpha channel of the pixel buffer is used
 			for texturing operations.
 			""",
-			"#RGB GL11##GL_RGBA"
+			"#RGB GL11#GL_RGBA"
 		),
 		GLint.IN(
 			"max_level",

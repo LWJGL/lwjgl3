@@ -69,15 +69,15 @@ val GLX_EXT_fbconfig_packed_float = "GLXEXTFBConfigPackedFloat".nativeClassGLX("
 		"""
 
 	IntConstant(
-		"Accepted as values of the {@code render_type} arguments in the GLX13#CreateNewContext() and GLX#CreateContext() functions.",
+		"Accepted as values of the {@code render_type} arguments in the #CreateNewContext() and GLX#glXCreateContext() functions.",
 
 		"RGBA_UNSIGNED_FLOAT_TYPE_EXT"..0x20B1
 	)
 
 	IntConstant(
 		"""
-		Returned by GLX13#GetFBConfigAttrib() (when {@code attribute} is set to GLX_RENDER_TYPE) and accepted by the {@code attrib_list} parameter of
-		GLX13#ChooseFBConfig() (following the GLX_RENDER_TYPE token).
+		Returned by #GetFBConfigAttrib() (when {@code attribute} is set to GLX_RENDER_TYPE) and accepted by the {@code attrib_list} parameter of
+		#ChooseFBConfig() (following the GLX_RENDER_TYPE token).
 		""",
 
 		"RGBA_UNSIGNED_FLOAT_BIT_EXT"..0x00000008
@@ -98,8 +98,8 @@ val WGL_EXT_pixel_format_packed_float = "WGLEXTPixelFormatPackedFloat".nativeCla
 
 	IntConstant(
 		"""
-		Accepted as a value in the {@code attribIList} parameter array of WGLARBPixelFormat#ChoosePixelFormatARB(), and returned in the {@code values}
-		parameter array of WGLARBPixelFormat#GetPixelFormatAttribiARB().
+		Accepted as a value in the {@code attribIList} parameter array of #ChoosePixelFormatARB(), and returned in the {@code values}
+		parameter array of #GetPixelFormatAttribivARB().
 		""",
 
 		"TYPE_RGBA_UNSIGNED_FLOAT_EXT"..0x20A8

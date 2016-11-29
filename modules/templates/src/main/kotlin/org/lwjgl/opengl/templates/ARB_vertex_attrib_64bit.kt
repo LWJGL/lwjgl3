@@ -76,8 +76,8 @@ val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_a
 		GLuint.IN("vaobj", "the vertex array object"),
 		GLuint.IN("buffer", "the buffer object"),
 		GLuint.IN("index", "the index of the generic vertex attribute to be modified"),
-		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 GL12#BGRA"),
-		GLenum.IN("type", "the data type of each component in the array", "GL11#DOUBLE"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 #BGRA"),
+		GLenum.IN("type", "the data type of each component in the array", "#DOUBLE"),
 		GLsizei.IN(
 			"stride",
 			"""

@@ -12,8 +12,8 @@ val APPLE_query_kernel_names = "APPLEQueryKernelNames".nativeClassCL("APPLE_quer
 		"""
 		Native bindings to the $extensionName extension.
 
-		These selectors may be passed to CL10#GetProgramInfo() to obtain information about the kernel functions in a {@code cl_program}. The {@code cl_program}
-		must be successfully built with CL10#BuildProgram() for at least one device to succeed. Otherwise $INVALID_PROGRAM_EXECUTABLE is returned.
+		These selectors may be passed to #GetProgramInfo() to obtain information about the kernel functions in a {@code cl_program}. The {@code cl_program}
+		must be successfully built with #BuildProgram() for at least one device to succeed. Otherwise $INVALID_PROGRAM_EXECUTABLE is returned.
 		"""
 
 	IntConstant(

@@ -34,25 +34,25 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 	).javaDocLinks
 
 	IntConstant(
-		"Accepted as a property name in the {@code properties} parameter of CL10#CreateContext() and CL10#CreateContextFromType().",
+		"Accepted as a property name in the {@code properties} parameter of #CreateContext() and #CreateContextFromType().",
 
 		"CONTEXT_VA_API_DISPLAY_INTEL"..0x4097
 	)
 
 	IntConstant(
-		"Accepted as the property being queried in the {@code param_name} parameter of CL10#GetMemObjectInfo().",
+		"Accepted as the property being queried in the {@code param_name} parameter of #GetMemObjectInfo().",
 
 		"MEM_VA_API_MEDIA_SURFACE_INTEL"..0x4098
 	)
 
 	IntConstant(
-		"Accepted as the property being queried in the {@code param_name} parameter of CL10#GetImageInfo().",
+		"Accepted as the property being queried in the {@code param_name} parameter of #GetImageInfo().",
 
 		"IMAGE_VA_API_PLANE_INTEL"..0x4099
 	)
 
 	IntConstant(
-		"Returned in the {@code param_value} parameter of CL10#GetEventInfo() when {@code param_name} is CL10#EVENT_COMMAND_TYPE.",
+		"Returned in the {@code param_value} parameter of #GetEventInfo() when {@code param_name} is #EVENT_COMMAND_TYPE.",
 
 		"COMMAND_ACQUIRE_VA_API_MEDIA_SURFACES_INTEL"..0x409A,
 		"COMMAND_RELEASE_VA_API_MEDIA_SURFACES_INTEL"..0x409B
@@ -60,7 +60,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 
 	IntConstant(
 		"""
-		Returned by CL10#CreateContext() and CL10#CreateContextFromType() if the VA API display specified for interoperability is not compatible with the
+		Returned by #CreateContext() and #CreateContextFromType() if the VA API display specified for interoperability is not compatible with the
 		devices against which the context is to be created.
 		""",
 
@@ -69,8 +69,8 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 
 	IntConstant(
 		"""
-		Returned by #CreateFromVA_APIMediaSurfaceINTEL() when {@code surface} is not a VA API surface of the required type, by CL10#GetMemObjectInfo() when
-		{@code param_name} is #MEM_VA_API_MEDIA_SURFACE_INTEL when {@code memobj} was not created from a VA API surface, and from CL10#GetImageInfo() when
+		Returned by #CreateFromVA_APIMediaSurfaceINTEL() when {@code surface} is not a VA API surface of the required type, by #GetMemObjectInfo() when
+		{@code param_name} is #MEM_VA_API_MEDIA_SURFACE_INTEL when {@code memobj} was not created from a VA API surface, and from #GetImageInfo() when
 		{@code param_name} is #IMAGE_VA_API_PLANE_INTEL and {@code image} was not created from a VA API surface.
 		""",
 
@@ -93,7 +93,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 		"GetDeviceIDsFromVA_APIMediaAdapterINTEL",
 		"Queries the OpenCL devices corresponding to a VA API display.",
 
-		cl_platform_id.IN("platform", "the platform ID returned by CL10#GetPlatformIDs()"),
+		cl_platform_id.IN("platform", "the platform ID returned by #GetPlatformIDs()"),
 		cl_va_api_device_source_intel.IN("media_adapter_type", "the type of {@code media_adapter}", MediaAdapterTypes),
 		voidptr.IN("media_adapter", "the media adapter whose corresponding OpenCL devices are being queried"),
 		cl_va_api_device_set_intel.IN("media_adapter_set", "", MediaAdapterSets),
@@ -123,7 +123,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 		"Creates an OpenCL 2D image object from a VA API media surface or a plane of a VA API media surface.",
 
 		cl_context.IN("context", "a valid OpenCL context created from a VA API display"),
-		cl_mem_flags.IN("flags", "a bit-field that is used to specify usage information", "CL10#MEM_READ_ONLY CL10#MEM_WRITE_ONLY CL10#MEM_READ_WRITE"),
+		cl_mem_flags.IN("flags", "a bit-field that is used to specify usage information", "#MEM_READ_ONLY #MEM_WRITE_ONLY #MEM_READ_WRITE"),
 		Check(1)..VASurfaceID_p.IN("surface", "a pointer to the VA API surface to share"),
 		cl_uint.IN("plane", "the plane of {@code surface} to share, for planar formats. For non-planar formats, {@code plane} must be 0."),
 		ERROR_RET
@@ -139,10 +139,10 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 		OpenCL memory object created from a VA API surface is used while it is not acquired by OpenCL, the call attempting to use that OpenCL memory object
 		will return #VA_API_MEDIA_SURFACE_NOT_ACQUIRED_INTEL.
 
-		If CL12#CONTEXT_INTEROP_USER_SYNC is not specified as CL10#TRUE during context creation, {@code clEnqueueAcquireVA_APIMediaSurfacesINTEL} provides the
+		If #CONTEXT_INTEROP_USER_SYNC is not specified as #TRUE during context creation, {@code clEnqueueAcquireVA_APIMediaSurfacesINTEL} provides the
 		synchronization guarantee that any VA API calls made before {@code clEnqueueAcquireVA_APIMediaSurfacesINTEL} is called will complete executing before
 		{@code event} reports completion and before the execution of any subsequent OpenCL work issued in {@code command_queue} begins. If the context was
-		created with properties specifying CL12#CONTEXT_INTEROP_USER_SYNC as CL10#TRUE, the user is responsible for guaranteeing that any VA API calls
+		created with properties specifying #CONTEXT_INTEROP_USER_SYNC as #TRUE, the user is responsible for guaranteeing that any VA API calls
 		involving the interop device(s) used in the OpenCL context made before {@code clEnqueueAcquireVA_APIMediaSurfacesINTEL} is called have completed before
 		calling {@code clEnqueueAcquireVA_APIMediaSurfacesINTEL}.
 		""",
@@ -165,10 +165,10 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 		Accessing a VA API surface while its corresponding OpenCL memory object is acquired is in error and will result in undefined behavior, including but
 		not limited to possible OpenCL errors, data corruption, and program termination.
 
-		If CL12#CONTEXT_INTEROP_USER_SYNC is not specified as CL10#TRUE during context creation, {@code clEnqueueReleaseVA_APIMediaSurfacesINTEL} provides the
+		If #CONTEXT_INTEROP_USER_SYNC is not specified as #TRUE during context creation, {@code clEnqueueReleaseVA_APIMediaSurfacesINTEL} provides the
 		synchronization guarantee that any VA API calls made after {@code clEnqueueReleaseVA_APIMediaSurfacesINTEL} is called will not start executing until
 		after all events in {@code event_wait_list} are complete and all work already submitted to {@code command_queue} completes execution. If the context
-		was created with properties specifying CL12#CONTEXT_INTEROP_USER_SYNC specified as CL10#TRUE, the user is responsible for guaranteeing that any VA API
+		was created with properties specifying #CONTEXT_INTEROP_USER_SYNC specified as #TRUE, the user is responsible for guaranteeing that any VA API
 		calls involving the interop device(s) used in the OpenCL context made after {@code clEnqueueReleaseVA_APIMediaSurfacesINTEL} is called will not start
 		executing until after the event returned by {@code clEnqueueReleaseVA_APIMediaSurfacesINTEL} reports completion.
 		""",

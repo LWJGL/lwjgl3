@@ -21,7 +21,7 @@ val NV_bindless_multi_draw_indirect_count = "NVBindlessMultiDrawIndirectCount".n
 	void(
 		"MultiDrawArraysIndirectBindlessCountNV",
 		"""
-		Behaves similarly to NVBindlessMultiDrawIndirect#MultiDrawArraysIndirectBindlessNV(), except that {@code drawCount} defines an offset (in bytes) into
+		Behaves similarly to #MultiDrawArraysIndirectBindlessNV(), except that {@code drawCount} defines an offset (in bytes) into
 		the buffer object bound to the PARAMETER_BUFFER_ARB binding point at which a single {@code sizei} typed value is stored, which contains the draw count.
 		If the value stored at {@code drawCount} into the buffer is greater than {@code maxDrawCount}, an implementation may stop processing draws after
 		{@code maxDrawCount} parameter sets.
@@ -41,14 +41,14 @@ val NV_bindless_multi_draw_indirect_count = "NVBindlessMultiDrawIndirectCount".n
 	void(
 		"MultiDrawElementsIndirectBindlessCountNV",
 		"""
-		Behaves similarly to NVBindlessMultiDrawIndirect#MultiDrawElementsIndirectBindlessNV(), except that {@code drawCount} defines an offset (in bytes) into
+		Behaves similarly to #MultiDrawElementsIndirectBindlessNV(), except that {@code drawCount} defines an offset (in bytes) into
 		the buffer object bound to the PARAMETER_BUFFER_ARB binding point at which a single {@code sizei} typed value is stored, which contains the draw count.
 		If the value stored at {@code drawCount} into the buffer is greater than {@code maxDrawCount}, an implementation may stop processing draws after
 		{@code maxDrawCount} parameter sets.
 		""",
 
 		GLenum.IN("mode", "the primitive mode", PRIMITIVE_TYPES),
-		GLenum.IN("type", "the data type of the element indices", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
+		GLenum.IN("type", "the data type of the element indices", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
 		Check("maxDrawCount * (stride == 0 ? ((vertexBufferCount + 2) * 24) : stride)")..const..void_p.IN(
 			"indirect",
 			"an array of DrawElementsIndirectBindlessCommandNV structures (see the extension spec for more information)"

@@ -39,7 +39,7 @@ val ARB_parallel_shader_compile = "ARBParallelShaderCompile".nativeClassGL("ARB_
 
 		An implementation may combine the maximum compiler thread request from multiple contexts in a share group in an implementation-specific way.
 
-		An application can query the current MaxShaderCompilerThreads() {@code count} by calling GL11#GetIntegerv() with {@code pname} set to
+		An application can query the current MaxShaderCompilerThreads() {@code count} by calling #GetIntegerv() with {@code pname} set to
 		#MAX_SHADER_COMPILER_THREADS_ARB.
 		""",
 

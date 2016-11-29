@@ -17,7 +17,7 @@ val AL_EXT_SOURCE_RADIUS = "EXTSourceRadius".nativeClassAL("EXT_SOURCE_RADIUS") 
 
 	IntConstant(
 		"""
-		Can be used with AL10#Sourcef() to set the source radius. Units are consistent with the coordinate system in use. The value must be at least zero. Use
+		Can be used with #Sourcef() to set the source radius. Units are consistent with the coordinate system in use. The value must be at least zero. Use
 		a value of zero to reset to a point source.
 		""",
 

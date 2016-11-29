@@ -16,7 +16,7 @@ val EXT_texture_compression_rgtc = "EXTTextureCompressionRGTC".nativeClassGL("EX
         "rgtc" for Red-Green Texture Compression).
 
 		These formats are designed to reduce the storage requirements and memory bandwidth required for red and red-green textures by a factor of 2-to-1 over
-		conventional uncompressed luminance and luminance-alpha textures with 8-bit components (GL11#LUMINANCE8 and GL11#LUMINANCE8_ALPHA8).
+		conventional uncompressed luminance and luminance-alpha textures with 8-bit components (#LUMINANCE8 and #LUMINANCE8_ALPHA8).
 
 		The compressed signed red-green format is reasonably suited for storing compressed normal maps.
 

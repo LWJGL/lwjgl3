@@ -13,7 +13,7 @@ val ARB_draw_elements_base_vertex = "ARBDrawElementsBaseVertex".nativeClassGL("A
 		Native bindings to the $registryLink extension.
 
 		This extension provides a method to specify a "base vertex offset" value which is effectively added to every vertex index that is transferred through
-		GL11#DrawElements().
+		#DrawElements().
 
 		This mechanism can be used to decouple a set of indices from the actual vertex array that it is referencing. This is useful if an application stores
 		multiple indexed models in a single vertex array. The same index array can be used to draw the model no matter where it ends up in a larger vertex array

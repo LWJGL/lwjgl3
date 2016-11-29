@@ -41,7 +41,7 @@ val ARB_transform_feedback3 = "ARBTransformFeedback3".nativeClassGL("ARB_transfo
 		vertex stream. For example, a geometry program might write each "regular" vertex it emits to one vertex stream while writing some per-primitive data it
 		computes to a second vertex stream. This extension allows applications to choose a vertex stream for each buffer object it writes to, and allows the
 		vertices written to each vertex stream to be recorded in separate buffer objects. Only one stream may be selected for rasterization, and in the initial
-		implementation, the geometry shader output topology must be GL11#POINTS if multiple streams are used. When geometry shaders are not used, or when an old
+		implementation, the geometry shader output topology must be #POINTS if multiple streams are used. When geometry shaders are not used, or when an old
 		geometry shader not writing multiple streams is used, all vertices produced by the GL are directed at the stream numbered zero. The set of transform
 		feedback-related query targets is extended to accommodate multiple vertex streams, so it is possible to count the number of processed and recorded
 		primitives for each stream separately.

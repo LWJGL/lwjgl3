@@ -26,7 +26,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 		OpenGL application writer a significant degree of per-vertex programmability for computing vertex parameters.
 
 		For the purposes of discussing this extension, a vertex program is a sequence of floating-point 4-component vector operations that determines how a set
-		of program parameters (defined outside of OpenGL's GL11#Begin()/GL11#End() pair) and an input set of per-vertex parameters are transformed to a set of
+		of program parameters (defined outside of OpenGL's #Begin()/#End() pair) and an input set of per-vertex parameters are transformed to a set of
 		per-vertex result parameters.
 
 		The per-vertex computations for standard OpenGL given a particular set of lighting and texture coordinate generation modes (along with any state for
@@ -269,9 +269,9 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 		GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"GL11#BYTE GL11#SHORT GL11#INT GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT GL30#HALF_FLOAT NVHalfFloat#HALF_FLOAT_NV GL11#FLOAT GL11#DOUBLE"
+			"#BYTE #SHORT #INT #UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT #HALF_FLOAT #HALF_FLOAT_NV #FLOAT #DOUBLE"
 		),
-		GLboolean.IN("normalized", "if GL11#TRUE, fixed-point types are normalized when converted to floating-point"),
+		GLboolean.IN("normalized", "if #TRUE, fixed-point types are normalized when converted to floating-point"),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
@@ -292,7 +292,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 		VA_INDEX
 	)
 
-	val TARGET = GLenum.IN("target", "the program target", "#VERTEX_PROGRAM_ARB ARBFragmentProgram#FRAGMENT_PROGRAM_ARB")
+	val TARGET = GLenum.IN("target", "the program target", "#VERTEX_PROGRAM_ARB #FRAGMENT_PROGRAM_ARB")
 
 	void(
 		"ProgramStringARB",
@@ -301,7 +301,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
 		When a program string is loaded, it is interpreted according to syntactic and semantic rules corresponding to the program target specified by
 		{@code target}. If a program violates the syntactic or semantic restrictions of the program target, ProgramStringARB generates the error
-		GL11#INVALID_OPERATION.
+		#INVALID_OPERATION.
 
 		Additionally, ProgramString will update the program error position (#PROGRAM_ERROR_POSITION_ARB) and error string (#PROGRAM_ERROR_STRING_ARB). If a
 		program fails to load, the value of the program error position is set to the ubyte offset into the specified program string indicating where the first
@@ -508,8 +508,8 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 	GLboolean(
 		"IsProgramARB",
 		"""
-		Returns GL11#TRUE if {@code program} is the name of a program object. If {@code program} is zero or is a non-zero value that is not the name of a
-		program object, or if an error condition occurs, IsProgramARB returns GL11#FALSE. A name returned by #GenProgramsARB(), but not yet bound, is not the
+		Returns #TRUE if {@code program} is the name of a program object. If {@code program} is zero or is a non-zero value that is not the name of a
+		program object, or if an error condition occurs, IsProgramARB returns #FALSE. A name returned by #GenProgramsARB(), but not yet bound, is not the
 		name of a program object.
 		""",
 

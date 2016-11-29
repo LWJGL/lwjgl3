@@ -146,7 +146,7 @@ val nk_draw_null_texture = struct(NUKLEAR_PACKAGE, "NkDrawNullTexture", nativeNa
 
 val nk_draw_vertex_layout_element_p = struct(NUKLEAR_PACKAGE, "NkDrawVertexLayoutElement", nativeName = "struct nk_draw_vertex_layout_element") {
 	nk_draw_vertex_layout_attribute.member("attribute", "the vertex attribute").links("VERTEX_\\w+")
-	nk_draw_vertex_layout_format.member("format", "the vertex attribute format").links("FORMAT_\\w+")
+	nk_draw_vertex_layout_format.member("format", "the vertex attribute format").links("FORMAT_(?!COUNT)\\w+")
 	nk_size.member("offset", "the vertex attribute offset")
 }.p
 

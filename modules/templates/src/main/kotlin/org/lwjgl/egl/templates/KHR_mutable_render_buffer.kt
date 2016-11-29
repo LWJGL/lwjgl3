@@ -25,7 +25,7 @@ val KHR_mutable_render_buffer = "KHRMutableRenderBuffer".nativeClassEGL("KHR_mut
 		"""
 
 	IntConstant(
-		"Accepted as a new value for the EGL10#SURFACE_TYPE {@code EGLConfig} attribute.",
+		"Accepted as a new value for the #SURFACE_TYPE {@code EGLConfig} attribute.",
 
 		"MUTABLE_RENDER_BUFFER_BIT_KHR"..0x00001000
 	)

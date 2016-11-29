@@ -21,7 +21,7 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
 
 	IntConstant(
 		"""
-		Accepted by the {@code properties} argument to CL10#CreateContext().
+		Accepted by the {@code properties} argument to #CreateContext().
 
 		Property value: ${code("void printf_callback(const char *buffer, size_t len, size_t complete, void *user_data)")}
 
@@ -30,7 +30,7 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
 			"{@code buffer} is a pointer to a character array of size {@code len} created by printf.",
 			"{@code len} is the number of new characters in {@code buffer}.",
 			"{@code complete} is set to a non zero value if there is no more data in the device's printf buffer.",
-			"{@code user_data} is the {@code user_data} parameter specified to CL10#CreateContext()."
+			"{@code user_data} is the {@code user_data} parameter specified to #CreateContext()."
 		)}
 		If this property is not specified, no callback will be registered and any printf output from a kernel will be discarded.
 		""",
@@ -40,7 +40,7 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
 
 	IntConstant(
 		"""
-		Accepted by the {@code properties} argument to CL10#CreateContext().
+		Accepted by the {@code properties} argument to #CreateContext().
 
 		Property value: {@code size_t}
 
@@ -48,8 +48,8 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
 		buffer will be shared between kernels executing on a device. The implementation is free to round up or ignore this value.
 
 		If this property is not specified an implementation defined default size will be chosen. For OpenCL driver versions prior to OpenCL 1.2 this value will
-		be 1 MiB. For driver versions of OpenCL 1.2 or greater this value is defined by the CL12#DEVICE_PRINTF_BUFFER_SIZE parameter name for
-		CL10#GetDeviceInfo().
+		be 1 MiB. For driver versions of OpenCL 1.2 or greater this value is defined by the #DEVICE_PRINTF_BUFFER_SIZE parameter name for
+		#GetDeviceInfo().
 		""",
 
 		"PRINTF_BUFFERSIZE_ARM"..0x40B1

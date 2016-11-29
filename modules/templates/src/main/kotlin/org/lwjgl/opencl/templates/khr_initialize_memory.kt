@@ -13,7 +13,7 @@ val khr_initialize_memory = "KHRInitializeMemory".nativeClassCL("khr_initialize_
 
 	IntConstant(
 		"""
-		Accepted as a property name in the {@code properties} parameter of CL10#CreateContext().
+		Accepted as a property name in the {@code properties} parameter of #CreateContext().
 
 		Describes which memory types for the context must be initialized. This is a bit-field, where the following values are currently supported:
 		${ul(

@@ -166,11 +166,11 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 		"Specifies the location and organization of a pure integer vertex attribute array.",
 
 		GLuint.IN("index", vertexAttribIndex),
-		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 GL12#BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 #BGRA"),
 		GLenum.IN(
 			"type",
 			"the data type of each component in the array",
-			"GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT"
+			"#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT"
 		),
 		GLsizei.IN(
 			"stride",
@@ -184,7 +184,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-			currently bound to the GL15#ARRAY_BUFFER target. The initial value is 0.
+			currently bound to the #ARRAY_BUFFER target. The initial value is 0.
 			"""
 		)
 	)

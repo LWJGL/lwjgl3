@@ -7,7 +7,7 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-val SHADER_TYPES = "GL20#VERTEX_SHADER GL20#FRAGMENT_SHADER GL32#GEOMETRY_SHADER GL40#TESS_CONTROL_SHADER GL40#TESS_EVALUATION_SHADER"
+val SHADER_TYPES = "#VERTEX_SHADER #FRAGMENT_SHADER #GEOMETRY_SHADER #TESS_CONTROL_SHADER #TESS_EVALUATION_SHADER"
 
 val GL20 = "GL20".nativeClassGL("GL20") {
 	documentation =
@@ -95,8 +95,8 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 	GLboolean(
 		"IsProgram",
 		"""
-	    Returns GL11#TRUE if {@code program} is the name of a program object. If {@code program} is zero, or a non-zero value that is not the name of a program
-	    object, IsProgram returns GL11#FALSE. No error is generated if program is not a valid program object name.
+	    Returns #TRUE if {@code program} is the name of a program object. If {@code program} is zero, or a non-zero value that is not the name of a program
+	    object, IsProgram returns #FALSE. No error is generated if program is not a valid program object name.
 	    """,
 
 		GLuint.IN("program", "the program object name to query")
@@ -119,8 +119,8 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 	GLboolean(
 		"IsShader",
 		"""
-	    Returns GL11#TRUE if {@code shader} is the name of a shader object. If {@code shader} is zero, or a nonzero value that is not the name of a shader
-	    object, IsShader returns GL11#FALSE. No error is generated if shader is not a valid shader object name.
+	    Returns #TRUE if {@code shader} is the name of a shader object. If {@code shader} is zero, or a nonzero value that is not the name of a shader
+	    object, IsShader returns #FALSE. No error is generated if shader is not a valid shader object name.
 	    """,
 
 		GLuint.IN("shader", "the shader object name to query")
@@ -408,10 +408,10 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 			"the object parameter",
 			"""
 			#DELETE_STATUS #LINK_STATUS #VALIDATE_STATUS #INFO_LOG_LENGTH #ATTACHED_SHADERS #ACTIVE_ATTRIBUTES #ACTIVE_ATTRIBUTE_MAX_LENGTH
-			#ACTIVE_UNIFORMS #ACTIVE_UNIFORM_MAX_LENGTH GL30#TRANSFORM_FEEDBACK_BUFFER_MODE GL30#TRANSFORM_FEEDBACK_VARYINGS
-			GL30#TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH GL31#ACTIVE_UNIFORM_BLOCKS GL31#ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH
-			GL32#GEOMETRY_VERTICES_OUT GL32#GEOMETRY_INPUT_TYPE GL32#GEOMETRY_OUTPUT_TYPE GL41#PROGRAM_BINARY_LENGTH
-			GL42#ACTIVE_ATOMIC_COUNTER_BUFFERS  GL43#COMPUTE_WORK_GROUP_SIZE
+			#ACTIVE_UNIFORMS #ACTIVE_UNIFORM_MAX_LENGTH #TRANSFORM_FEEDBACK_BUFFER_MODE #TRANSFORM_FEEDBACK_VARYINGS
+			#TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH #ACTIVE_UNIFORM_BLOCKS #ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH
+			#GEOMETRY_VERTICES_OUT #GEOMETRY_INPUT_TYPE #GEOMETRY_OUTPUT_TYPE #PROGRAM_BINARY_LENGTH
+			#ACTIVE_ATOMIC_COUNTER_BUFFERS  #COMPUTE_WORK_GROUP_SIZE
 			"""
 		),
 		Check(1)..ReturnParam..GLint_p.OUT("params", "the requested object parameter")
@@ -650,13 +650,13 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		"Specifies the location and organization of a vertex attribute array.",
 
 		GLuint.IN("index", vertexAttribIndex),
-		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 GL12#BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 #BGRA"),
 		GLenum.IN(
 			"type",
 			"the data type of each component in the array. The initial value is GL_FLOAT",
 			"""
-			GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL30#HALF_FLOAT GL11#FLOAT
-			GL11#DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV GL41#FIXED
+			#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT #HALF_FLOAT #FLOAT
+			#DOUBLE #UNSIGNED_INT_2_10_10_10_REV #INT_2_10_10_10_REV #FIXED
 			"""
 		),
 		GLboolean.IN("normalized", "whether fixed-point data values should be normalized or converted directly as fixed-point values when they are accessed"),
@@ -673,7 +673,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-			currently bound to the GL15#ARRAY_BUFFER target. The initial value is 0.
+			currently bound to the #ARRAY_BUFFER target. The initial value is 0.
 			"""
 		)
 	)
@@ -739,7 +739,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		GLenum.IN(
 			"pname",
 			"the symbolic name of the vertex attribute parameter to be queried",
-			"GL15#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES GL30#VERTEX_ATTRIB_ARRAY_INTEGER GL33#VERTEX_ATTRIB_ARRAY_DIVISOR"
+			"#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES #VERTEX_ATTRIB_ARRAY_INTEGER #VERTEX_ATTRIB_ARRAY_DIVISOR"
 		),
 		Check(1)..ReturnParam..GLint_p.OUT("params", "returns the requested data")
 	)
@@ -825,8 +825,8 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 			"bufs",
 			"an array of symbolic constants specifying the buffers into which fragment colors or data values will be written",
 			"""
-			GL11#NONE GL11#FRONT_LEFT GL11#FRONT_RIGHT GL11#BACK_LEFT GL11#BACK_RIGHT GL11#AUX0 GL11#AUX1 GL11#AUX2 GL11#AUX3
-			GL30#COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
+			#NONE #FRONT_LEFT #FRONT_RIGHT #BACK_LEFT #BACK_RIGHT #AUX0 #AUX1 #AUX2 #AUX3
+			#COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
 			"""
 		)
 	)
@@ -880,7 +880,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		GLenum.IN(
 			"modeRGB",
 			"the RGB blend equation, how the red, green, and blue components of the source and destination colors are combined",
-			"GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX"
+			"#FUNC_ADD #FUNC_SUBTRACT #FUNC_REVERSE_SUBTRACT #MIN #MAX"
 		),
 		GLenum.IN("modeAlpha", "the alpha blend equation, how the alpha component of the source and destination colors are combined")
 	)
@@ -903,11 +903,11 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		"StencilOpSeparate",
 		"Sets front and/or back stencil test actions.",
 
-		GLenum.IN("face", "whether front and/or back stencil state is updated", "GL11#FRONT GL11#BACK GL11#FRONT_AND_BACK"),
+		GLenum.IN("face", "whether front and/or back stencil state is updated", "#FRONT #BACK #FRONT_AND_BACK"),
 		GLenum.IN(
 			"sfail",
 			"the action to take when the stencil test fails. The initial value is GL_KEEP",
-			"GL11#KEEP GL11#ZERO GL11#REPLACE GL11#INCR GL14#INCR_WRAP GL11#DECR GL14#DECR_WRAP GL11#INVERT"
+			"#KEEP #ZERO #REPLACE #INCR #INCR_WRAP #DECR #DECR_WRAP #INVERT"
 		),
 		GLenum.IN("dpfail", "the stencil action when the stencil test passes, but the depth test fails. The initial value is GL_KEEP"),
 		GLenum.IN(
@@ -923,11 +923,11 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		"StencilFuncSeparate",
 		"Sets front and/or back function and reference value for stencil testing.",
 
-		GLenum.IN("face", "whether front and/or back stencil state is updated", "GL11#FRONT GL11#BACK GL11#FRONT_AND_BACK"),
+		GLenum.IN("face", "whether front and/or back stencil state is updated", "#FRONT #BACK #FRONT_AND_BACK"),
 		GLenum.IN(
 			"func",
 			"the test function. The initial value is GL_ALWAYS",
-			"GL11#NEVER GL11#LESS GL11#LEQUAL GL11#GREATER GL11#GEQUAL GL11#EQUAL GL11#NOTEQUAL GL11#ALWAYS"
+			"#NEVER #LESS #LEQUAL #GREATER #GEQUAL #EQUAL #NOTEQUAL #ALWAYS"
 		),
 		GLint.IN(
 			"ref",
@@ -943,7 +943,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		"StencilMaskSeparate",
 		"Controls the front and/or back writing of individual bits in the stencil planes.",
 
-		GLenum.IN("face", "whether front and/or back stencil writemask is updated", "GL11#FRONT GL11#BACK GL11#FRONT_AND_BACK"),
+		GLenum.IN("face", "whether front and/or back stencil writemask is updated", "#FRONT #BACK #FRONT_AND_BACK"),
 		GLuint.IN("mask", "a bit mask to enable and disable writing of individual bits in the stencil planes. Initially, the mask is all 1's.")
 	)
 

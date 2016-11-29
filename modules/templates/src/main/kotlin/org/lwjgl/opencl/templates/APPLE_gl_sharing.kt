@@ -19,7 +19,7 @@ val apple_gl_sharing = dependsOn(Binding.OPENGL) {
 
 		IntConstant(
 			"""
-		This enumerated value can be specified as part of the {@code properties} argument passed to CL10#CreateContext() to allow OpenCL compliant
+		This enumerated value can be specified as part of the {@code properties} argument passed to #CreateContext() to allow OpenCL compliant
 		devices in an existing CGL share group to be used as the devices in the newly created CL context. GL objects that were allocated in the specified CGL share
 		group can now be shared between CL and GL.
 		""",

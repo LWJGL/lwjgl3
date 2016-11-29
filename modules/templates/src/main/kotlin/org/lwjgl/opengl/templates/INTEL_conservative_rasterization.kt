@@ -27,7 +27,7 @@ val INTEL_conservative_rasterization = "INTELConservativeRasterization".nativeCl
 		"""
 
 	IntConstant(
-		"Accepted by the {@code target} parameter of GL11#Enable(), GL11#Disable(), GL11#IsEnabled().",
+		"Accepted by the {@code target} parameter of GL11#glEnable(), GL11#glDisable(), GL11#glIsEnabled().",
 
 		"CONSERVATIVE_RASTERIZATION_INTEL"..0x83FE
 	)

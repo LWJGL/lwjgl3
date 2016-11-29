@@ -21,7 +21,7 @@ val INTEL_conservative_rasterization = "INTELConservativeRasterization".nativeCl
 		"""
 
 	IntConstant(
-		"Accepted by the {@code target} parameter of GLES20#Enable(), GLES20#Disable(), GLES20#IsEnabled().",
+		"Accepted by the {@code target} parameter of #Enable(), #Disable(), #IsEnabled().",
 
 		"CONSERVATIVE_RASTERIZATION_INTEL"..0x83FE
 	)

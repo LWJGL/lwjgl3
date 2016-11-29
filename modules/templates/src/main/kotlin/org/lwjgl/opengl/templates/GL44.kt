@@ -42,7 +42,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	)
 
 	IntConstant(
-		"Equivalent to ARBTextureBufferObject#TEXTURE_BUFFER_ARB query, but named more consistently.",
+		"Equivalent to #TEXTURE_BUFFER_ARB query, but named more consistently.",
 
 		"TEXTURE_BUFFER_BINDING"..0x8C2A
 	)
@@ -50,7 +50,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	// ARB_buffer_storage
 
 	IntConstant(
-		"Accepted in the {@code flags} parameter of #BufferStorage() and ARBBufferStorage#NamedBufferStorageEXT().",
+		"Accepted in the {@code flags} parameter of #BufferStorage() and #NamedBufferStorageEXT().",
 
 		"MAP_PERSISTENT_BIT"..0x0040,
 		"MAP_COHERENT_BIT"..0x0080,
@@ -66,7 +66,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	)
 
 	IntConstant(
-		"Accepted by the {@code barriers} parameter of GL42#MemoryBarrier().",
+		"Accepted by the {@code barriers} parameter of #MemoryBarrier().",
 
 		"CLIENT_MAPPED_BUFFER_BARRIER_BIT"..0x00004000
 	)
@@ -77,11 +77,11 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		Creates the data store of a buffer object.
 
 		The data store of the buffer object bound to {@code target} is allocated as a result of a call to this function and cannot be de-allocated until the
-		buffer is deleted with a call to GL15#DeleteBuffers(). Such a store may not be re-allocated through further calls to {@code BufferStorage}
-		or GL15#BufferData().
+		buffer is deleted with a call to #DeleteBuffers(). Such a store may not be re-allocated through further calls to {@code BufferStorage}
+		or #BufferData().
 
 		{@code BufferStorage} deletes any existing data store. If any portion of the buffer object is mapped in the current context or any context current to
-		another thread, it is as though GL15#UnmapBuffer() is executed in each such context prior to deleting the existing data store.
+		another thread, it is as though #UnmapBuffer() is executed in each such context prior to deleting the existing data store.
 		""",
 
 		GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
@@ -106,17 +106,17 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 			${ul(
 				"""
 				#DYNAMIC_STORAGE_BIT &ndash; The contents of the data store may be updated after creation through calls to
-				GL15#BufferSubData(). If this bit is not set, the buffer content may not be directly updated by the client. The {@code data}
+				#BufferSubData(). If this bit is not set, the buffer content may not be directly updated by the client. The {@code data}
 				argument may be used to specify the initial content of the buffer's data store regardless of the presence of the #DYNAMIC_STORAGE_BIT.
-				Regardless of the presence of this bit, buffers may always be updated with server-side calls such as GL31#CopyBufferSubData() and
-				GL43#ClearBufferSubData().
+				Regardless of the presence of this bit, buffers may always be updated with server-side calls such as #CopyBufferSubData() and
+				#ClearBufferSubData().
 				""",
 				"""
-				GL30#MAP_READ_BIT &ndash; The buffer's data store may be mapped by the client for read access and a pointer in the client's address space
+				#MAP_READ_BIT &ndash; The buffer's data store may be mapped by the client for read access and a pointer in the client's address space
 				obtained that may be read from.
 				""",
 				"""
-				GL30#MAP_WRITE_BIT &ndash; The buffer's data store may be mapped by the client for write access and a pointer in the client's address
+				#MAP_WRITE_BIT &ndash; The buffer's data store may be mapped by the client for write access and a pointer in the client's address
 				space obtained that may be written to.
 				""",
 				"""
@@ -129,18 +129,18 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 				immediately visible to the other with no further action taken by the application. In particular:
 				${ul(
 					"""
-					If {@code MAP_COHERENT_BIT} is not set and the client performs a write followed by a call to the GL42#MemoryBarrier() command with
+					If {@code MAP_COHERENT_BIT} is not set and the client performs a write followed by a call to the #MemoryBarrier() command with
 					the #CLIENT_MAPPED_BUFFER_BARRIER_BIT set, then in subsequent commands the server will see the writes.
 					""",
 					"If {@code MAP_COHERENT_BIT} is set and the client performs a write, then in subsequent commands the server will see the writes.",
 					"""
-					If {@code MAP_COHERENT_BIT} is not set and the server performs a write, the application must call GL42#MemoryBarrier() with the
-					#CLIENT_MAPPED_BUFFER_BARRIER_BIT set and then call GL32#FenceSync() with GL32#SYNC_GPU_COMMANDS_COMPLETE (or
-					GL11#Finish()). Then the CPU will see the writes after the sync is complete.
+					If {@code MAP_COHERENT_BIT} is not set and the server performs a write, the application must call #MemoryBarrier() with the
+					#CLIENT_MAPPED_BUFFER_BARRIER_BIT set and then call #FenceSync() with #SYNC_GPU_COMMANDS_COMPLETE (or
+					#Finish()). Then the CPU will see the writes after the sync is complete.
 					""",
 					"""
-					If {@code MAP_COHERENT_BIT} is set and the server does a write, the app must call GL32#FenceSync() with
-					GL32#SYNC_GPU_COMMANDS_COMPLETE (or GL11#Finish()). Then the CPU will see the writes after the sync is complete.
+					If {@code MAP_COHERENT_BIT} is set and the server does a write, the app must call #FenceSync() with
+					#SYNC_GPU_COMMANDS_COMPLETE (or #Finish()). Then the CPU will see the writes after the sync is complete.
 					"""
 				)}
 				""",
@@ -149,7 +149,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 				implementation to determine whether to use storage that is local to the server or to the client to serve as the backing store for the buffer.
 				"""
 			)}
-			If {@code flags} contains #MAP_PERSISTENT_BIT, it must also contain at least one of GL30#MAP_READ_BIT or GL30#MAP_WRITE_BIT.
+			If {@code flags} contains #MAP_PERSISTENT_BIT, it must also contain at least one of #MAP_READ_BIT or #MAP_WRITE_BIT.
 
 			It is an error to specify #MAP_COHERENT_BIT without also specifying #MAP_PERSISTENT_BIT.
 			"""
@@ -159,7 +159,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	// ARB_clear_texture
 
 	IntConstant(
-		"Accepted by the {@code pname} parameter for GL42#GetInternalformati() and GL43#GetInternalformati64().",
+		"Accepted by the {@code pname} parameter for #GetInternalformativ() and #GetInternalformati64v().",
 
 		"CLEAR_TEXTURE"..0x9365
 	)
@@ -170,7 +170,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		Fills all or part of a texture image with a constant value.
 
 		Arguments {@code xoffset}, {@code yoffset}, and {@code zoffset} specify the lower left texel coordinates of a {@code width}-wide by {@code height}-high
-		by {@code depth}-deep rectangular subregion of the texel array and are interpreted as they are in GL12#TexSubImage3D().
+		by {@code depth}-deep rectangular subregion of the texel array and are interpreted as they are in #TexSubImage3D().
 
 		For 1D array textures, {@code yoffset} is interpreted as the first layer to be cleared and {@code height} is the number of layers to clear. For 2D array
 		textures, {@code zoffset} is interpreted as the first layer to be cleared and {@code depth} is the number of layers to clear. Cube map textures are
@@ -240,7 +240,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	// ARB_enhanced_layouts
 
 	IntConstant(
-		"Accepted in the {@code props} array of GL43#GetProgramResourceiv().",
+		"Accepted in the {@code props} array of #GetProgramResourceiv().",
 
 		"LOCATION_COMPONENT"..0x934A,
 		"TRANSFORM_FEEDBACK_BUFFER_INDEX"..0x934B,
@@ -383,13 +383,13 @@ for ( i = 0; i < count; i++ ) {
 		affected image unit from {@code first} through {@code first+count-1} will be reset to have no bound texture object.
 
 		When binding a non-zero texture object to an image unit, the image unit {@code level}, {@code layered}, {@code layer}, and {@code access} parameters are
-		set to zero, GL11#TRUE, zero, and GL15#READ_WRITE, respectively. The image unit {@code format} parameter is taken from the internal
+		set to zero, #TRUE, zero, and #READ_WRITE, respectively. The image unit {@code format} parameter is taken from the internal
 		format of the texture image at level zero of the texture object identified by {@code textures}. For cube map textures, the internal format of the
-		GL13#TEXTURE_CUBE_MAP_POSITIVE_X image of level zero is used. For multisample, multisample array, buffer, and rectangle textures, the internal
+		#TEXTURE_CUBE_MAP_POSITIVE_X image of level zero is used. For multisample, multisample array, buffer, and rectangle textures, the internal
 		format of the single texture level is used.
 
 		When unbinding a texture object from an image unit, the image unit parameters {@code level}, {@code layered}, {@code layer}, and {@code format} will be
-		reset to their default values of zero, GL11#FALSE, 0, and GL30#R8, respectively.
+		reset to their default values of zero, #FALSE, 0, and #R8, respectively.
 
 		{@code BindImageTextures} is equivalent to:
 		${codeBlock("""
@@ -450,17 +450,17 @@ for ( i = 0; i < count; i++ ) {
 	// ARB_query_buffer_object
 
 	IntConstant(
-		"Accepted by the {@code pname} parameter of GL15#GetQueryObjecti(), GL15#GetQueryObjectui(), GL33#GetQueryObjecti64() and GL33#GetQueryObjectui64().",
+		"Accepted by the {@code pname} parameter of #GetQueryObjectiv(), #GetQueryObjectuiv(), #GetQueryObjecti64v() and #GetQueryObjectui64v().",
 
 		"QUERY_RESULT_NO_WAIT"..0x9194
 	)
 
 	IntConstant(
 		"""
-		Accepted by the {@code target} parameter of GL15#BindBuffer(), GL15#BufferData(), GL15#BufferSubData(),
-		GL15#MapBuffer(), GL15#UnmapBuffer(), GL30#MapBufferRange(), GL15#GetBufferSubData(),
-		GL15#GetBufferParameteri(), GL32#GetBufferParameteri64(), GL15#GetBufferPointer(),
-		GL43#ClearBufferSubData(), and the {@code readtarget} and {@code writetarget} parameters of GL31#CopyBufferSubData().
+		Accepted by the {@code target} parameter of #BindBuffer(), #BufferData(), #BufferSubData(),
+		#MapBuffer(), #UnmapBuffer(), #MapBufferRange(), #GetBufferSubData(),
+		#GetBufferParameteriv(), #GetBufferParameteri64v(), #GetBufferPointerv(),
+		#ClearBufferSubData(), and the {@code readtarget} and {@code writetarget} parameters of #CopyBufferSubData().
 		""",
 
 		"QUERY_BUFFER"..0x9192
@@ -468,15 +468,15 @@ for ( i = 0; i < count; i++ ) {
 
 	IntConstant(
 		"""
-		Accepted by the {@code pname} parameter of GL11#GetBoolean(), GL11#GetInteger(), GL11#GetFloat(),
-		and GL11#GetDouble().
+		Accepted by the {@code pname} parameter of #GetBooleanv(), #GetIntegerv(), #GetFloatv(),
+		and #GetDoublev().
 		""",
 
 		"QUERY_BUFFER_BINDING"..0x9193
 	)
 
 	IntConstant(
-		"Accepted in the {@code barriers} bitfield in GL42#MemoryBarrier().",
+		"Accepted in the {@code barriers} bitfield in #MemoryBarrier().",
 
 		"QUERY_BUFFER_BARRIER_BIT"..0x00008000
 	)
@@ -486,8 +486,8 @@ for ( i = 0; i < count; i++ ) {
 	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of TexParameter{if}, SamplerParameter{if} and SamplerParameter{if}v, and by the {@code params} parameter of
-		TexParameter{if}v, TexParameterI{i ui}v and SamplerParameterI{i ui}v when their {@code pname} parameter is GL11#TEXTURE_WRAP_S, GL11#TEXTURE_WRAP_T, or
-		GL12#TEXTURE_WRAP_R,
+		TexParameter{if}v, TexParameterI{i ui}v and SamplerParameterI{i ui}v when their {@code pname} parameter is #TEXTURE_WRAP_S, #TEXTURE_WRAP_T, or
+		#TEXTURE_WRAP_R,
 		""",
 
 		"MIRROR_CLAMP_TO_EDGE"..0x8743

@@ -24,7 +24,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"FREQUENCY"..0x1007,
 		"REFRESH"..0x1008,
 		"SYNC"..0x1009
-	).javaDocLinks + " ALC11#MONO_SOURCES ALC11#STEREO_SOURCES"
+	).javaDocLinks + " #MONO_SOURCES #STEREO_SOURCES"
 
 	IntConstant(
 		"Error conditions.",
@@ -43,7 +43,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"DEFAULT_DEVICE_SPECIFIER"..0x1004,
 		"DEVICE_SPECIFIER"..0x1005,
 		"EXTENSIONS"..0x1006
-	).javaDocLinks + " ALC11#CAPTURE_DEFAULT_DEVICE_SPECIFIER ALC11#CAPTURE_DEVICE_SPECIFIER"
+	).javaDocLinks + " #CAPTURE_DEFAULT_DEVICE_SPECIFIER #CAPTURE_DEVICE_SPECIFIER"
 
 	val IntegerQueries = IntConstant(
 		"Integer queries.",
@@ -52,7 +52,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"MINOR_VERSION"..0x1001,
 		"ATTRIBUTES_SIZE"..0x1002,
 		"ALL_ATTRIBUTES"..0x1003
-	).javaDocLinks + " ALC11#CAPTURE_SAMPLES"
+	).javaDocLinks + " #CAPTURE_SAMPLES"
 
 	ALCdevice_p(
 		"OpenDevice",
@@ -217,7 +217,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"""
 		Obtains string value(s) from ALC.
 
-		<b>LWJGL note</b>: Use ALUtil##getStringList() for those tokens that return multiple values.
+		<b>LWJGL note</b>: Use ALUtil#getStringList() for those tokens that return multiple values.
 		""",
 
 		nullable..ALCdevice_p.IN("deviceHandle", "the device to query"),

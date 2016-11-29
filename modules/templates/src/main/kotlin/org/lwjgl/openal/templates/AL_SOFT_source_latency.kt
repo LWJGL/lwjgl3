@@ -32,7 +32,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		attribute is read-only.
 
 		The first value in the returned vector is the sample offset, which is a 32.32 fixed-point value. The whole number is stored in the upper 32 bits and
-		the fractional component is in the lower 32 bits. The value is similar to that returned by AL11#SAMPLE_OFFSET, just with more precision.
+		the fractional component is in the lower 32 bits. The value is similar to that returned by #SAMPLE_OFFSET, just with more precision.
 
 		The second value is the latency, in nanoseconds. It represents the length of time it will take for the audio at the current offset to actually reach
 		the speakers or DAC. This value should be considered volatile, as it may change very often during playback (it can depend on a number of factors,
@@ -49,7 +49,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		"""
 		The playback position, along with the playback latency, both expressed in seconds. This attribute is read-only.
 
-		The first value in the returned vector is the offset in seconds. The value is similar to that returned by AL11#SEC_OFFSET, just with more precision.
+		The first value in the returned vector is the offset in seconds. The value is similar to that returned by #SEC_OFFSET, just with more precision.
 
 		The second value is the latency, in seconds. It represents the length of time it will take for the audio at the current offset to actually reach the
 		speakers or DAC. This value should be considered volatile, as it may change very often during playback (it can depend on a number of factors, including

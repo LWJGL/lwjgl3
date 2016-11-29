@@ -18,7 +18,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		"""
 
 	IntConstant(
-		"Accepted by the {@code attribute} parameter of GLXSGIXFBConfig#GetFBConfigAttribSGIX().",
+		"Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX().",
 
 		"MAX_PBUFFER_WIDTH_SGIX"..0x8016,
 		"MAX_PBUFFER_HEIGHT_SGIX"..0x8017,
@@ -29,9 +29,9 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 
 	IntConstant(
 		"""
-		Returned by GLXSGIXFBConfig#GetFBConfigAttribSGIX() (when {@code attribute} is set to GLXSGIXFBConfig#DRAWABLE_TYPE_SGIX) and
-		accepted by the {@code attrib_list} parameter of GLXSGIXFBConfig#ChooseFBConfigSGIX() (following the
-		GLXSGIXFBConfig#DRAWABLE_TYPE_SGIX token).
+		Returned by #GetFBConfigAttribSGIX() (when {@code attribute} is set to #DRAWABLE_TYPE_SGIX) and
+		accepted by the {@code attrib_list} parameter of #ChooseFBConfigSGIX() (following the
+		#DRAWABLE_TYPE_SGIX token).
 		""",
 
 		"PBUFFER_BIT_SGIX"..0x00000004

@@ -165,7 +165,7 @@ val stbrp_node_p = struct(STB_PACKAGE, "STBRPNode", nativeName = "stbrp_node") {
 // stb_truetype.h
 
 val stbtt_bakedchar_p = struct(STB_PACKAGE, "STBTTBakedChar", nativeName = "stbtt_bakedchar", mutable = false) {
-	documentation = "Baked character data, returned by STBTruetype#stbtt_BakeFontBitmap()."
+	documentation = "Baked character data, returned by #BakeFontBitmap()."
 
 	unsigned_short.member("x0", "")
 	unsigned_short.member("y0", "")
@@ -177,7 +177,7 @@ val stbtt_bakedchar_p = struct(STB_PACKAGE, "STBTTBakedChar", nativeName = "stbt
 }.p
 
 val stbtt_aligned_quad_p = struct(STB_PACKAGE, "STBTTAlignedQuad", nativeName = "stbtt_aligned_quad", mutable = false) {
-	documentation = "Quad used for drawing a baked character, returned by STBTruetype#stbtt_GetBakedQuad()."
+	documentation = "Quad used for drawing a baked character, returned by #GetBakedQuad()."
 
 	float.member("x0", "")
 	float.member("y0", "")
@@ -190,13 +190,13 @@ val stbtt_aligned_quad_p = struct(STB_PACKAGE, "STBTTAlignedQuad", nativeName = 
 }.p
 
 val stbtt_pack_context_p = struct(STB_PACKAGE, "STBTTPackContext", nativeName = "stbtt_pack_context", mutable = false) {
-	documentation = "An opaque structure which holds all the context needed from STBTruetype#stbtt_PackBegin to STBTruetype#stbtt_PackEnd."
+	documentation = "An opaque structure which holds all the context needed from #PackBegin() to #PackEnd()."
 	includeSTBAPI("#include \"stb_truetype.h\"")
 	static(STB_LIBRARY)
 }.p
 
 val stbtt_packedchar_p = struct(STB_PACKAGE, "STBTTPackedchar", nativeName = "stbtt_packedchar", mutable = false) {
-	documentation = "Packed character data, returned by STBTruetype#stbtt_PackFontRange()"
+	documentation = "Packed character data, returned by #PackFontRange()"
 
 	unsigned_short.member("x0", "")
 	unsigned_short.member("y0", "")
@@ -210,7 +210,7 @@ val stbtt_packedchar_p = struct(STB_PACKAGE, "STBTTPackedchar", nativeName = "st
 }.p
 
 val stbtt_pack_range_p = struct(STB_PACKAGE, "STBTTPackRange", nativeName = "stbtt_pack_range") {
-	documentation = "A range of packed character data, used by STBTruetype#stbtt_PackFontRanges()"
+	documentation = "A range of packed character data, used by #PackFontRanges()"
 
 	float.member("font_size", "the font size")
 	int.member("first_unicode_codepoint_in_range", "if non-zero, then the chars are continuous, and this is the first codepoint")

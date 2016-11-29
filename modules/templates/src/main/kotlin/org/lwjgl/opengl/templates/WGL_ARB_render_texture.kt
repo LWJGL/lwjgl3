@@ -45,16 +45,16 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 
 	IntConstant(
 		"""
-		Accepted by the {@code attributes} parameter of WGLARBPixelFormat#GetPixelFormatAttribiARB(), and the {@code attribIList} parameters of
-		WGLARBPixelFormat#ChoosePixelFormatARB().
+		Accepted by the {@code attributes} parameter of #GetPixelFormatAttribivARB(), and the {@code attribIList} parameters of
+		#ChoosePixelFormatARB().
 		""",
 
 		"BIND_TO_TEXTURE_RGB_ARB"..0x2070,
 		"BIND_TO_TEXTURE_RGBA_ARB"..0x2071
 	)
 
-	val wglCreatePbufferARB = "WGLARBPbuffer#CreatePbufferARB()"
-	val wglQueryPbufferARB = "WGLARBPbuffer#QueryPbufferARB()"
+	val wglCreatePbufferARB = "#CreatePbufferARB()"
+	val wglQueryPbufferARB = "#QueryPbufferARB()"
 
 	IntConstant(
 		"Accepted by the {@code attribList} parameter of $wglCreatePbufferARB and by the {@code attribute} parameter of $wglQueryPbufferARB.",

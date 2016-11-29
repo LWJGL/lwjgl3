@@ -12,7 +12,7 @@ val ARB_internalformat_query2 = "ARBInternalformatQuery2".nativeClassGL("ARB_int
 		"""
 		Native bindings to the $registryLink extension.
 
-		This extension extends the ARBInternalformatQuery#GetInternalformativ() query that was added in the ${ARB_internalformat_query.link} extension to
+		This extension extends the ARBInternalformatQuery#glGetInternalformativ() query that was added in the ${ARB_internalformat_query.link} extension to
 		provide applications with more granular per-format capability information.
 
 		This extension allows the remainder of the texture-style targets to be specified along with any possible internal format. We add queries for additional

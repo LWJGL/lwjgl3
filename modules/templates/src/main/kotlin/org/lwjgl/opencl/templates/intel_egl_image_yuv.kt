@@ -21,8 +21,8 @@ val intel_egl_image_yuv = dependsOn(Binding.EGL) {
 
 		IntConstant(
 			"""
-			Accepted as property in {@code properties} parameter of function KHREGLImage#CreateFromEGLImageKHR() and as {@code param_name} parameter of function
-			CL10#GetImageInfo().
+			Accepted as property in {@code properties} parameter of function #CreateFromEGLImageKHR() and as {@code param_name} parameter of function
+			#GetImageInfo().
 			""",
 
 			"EGL_YUV_PLANE_INTEL"..0x4107

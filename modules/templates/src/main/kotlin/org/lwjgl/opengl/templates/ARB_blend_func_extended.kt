@@ -19,7 +19,7 @@ val ARB_blend_func_extended = "ARBBlendFuncExtended".nativeClassGL("ARB_blend_fu
 
 		This extension adds new blending functions whereby a fragment shader may output two colors, one of which is treated as the source color, and the other
 		used as a blending factor for either source or destination colors. Furthermore, this extension increases orthogonality by allowing the
-		GL11#SRC_ALPHA_SATURATE function to be used as the destination weight.
+		#SRC_ALPHA_SATURATE function to be used as the destination weight.
 
 		Requires ${ARB_fragment_shader.link} and ${registryLinkTo("EXT", "gpu_shader4")}. ${GL33.promoted}
 		"""

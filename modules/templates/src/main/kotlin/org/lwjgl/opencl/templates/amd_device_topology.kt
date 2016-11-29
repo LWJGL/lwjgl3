@@ -17,7 +17,7 @@ val amd_device_topology = "AMDDeviceTopology".nativeClassCL("amd_device_topology
 
 	IntConstant(
 		"""
-		Accepted as the {@code param_name} parameter of CL10#GetDeviceInfo(). Returns a description of the topology used to connect the device to the
+		Accepted as the {@code param_name} parameter of #GetDeviceInfo(). Returns a description of the topology used to connect the device to the
 		host, using the following 32-bytes union of structures:
 		${codeBlock("""
 typedef union

@@ -18,7 +18,7 @@ val ARB_texture_cube_map_array = "ARBTextureCubeMapArray".nativeClassGL("ARB_tex
 
 		A cube map array texture is a 2-dimensional array texture that may contain many cube map layers. Each cube map layer is a unique cube map image set.
 		Images in a cube map array have the same size and format limitations as one- and two-dimensional array textures. A cube map array texture is specified
-		using GL12#TexImage3D() in a similar manner to two-dimensional arrays. Cube map array textures can be bound to a render targets of a frame buffer object
+		using #TexImage3D() in a similar manner to two-dimensional arrays. Cube map array textures can be bound to a render targets of a frame buffer object
 		as two-dimensional arrays are using FramebufferTextureLayer.
 
 		When accessed by a programmable shader, a cube map array texture acts as a single unit. The "s", "t", "r" texture coordinates are treated as a regular

@@ -26,23 +26,23 @@ val ARB_pixel_buffer_object = "ARBPixelBufferObject".nativeClassGL("ARB_pixel_bu
 
 		This extension does not add any new functionality to buffer objects themselves.  It simply adds two new targets to which buffer objects can be bound:
 		#PIXEL_PACK_BUFFER_ARB and #PIXEL_UNPACK_BUFFER_ARB. When a buffer object is bound to the #PIXEL_PACK_BUFFER_ARB target, commands such as
-		GL11#ReadPixels() pack (write) their data into a buffer object. When a buffer object is bound to the #PIXEL_UNPACK_BUFFER_ARB target, commands such as
-		GL11#DrawPixels() and GL11#TexImage2D() unpack (read) their data from a buffer object.
+		#ReadPixels() pack (write) their data into a buffer object. When a buffer object is bound to the #PIXEL_UNPACK_BUFFER_ARB target, commands such as
+		#DrawPixels() and #TexImage2D() unpack (read) their data from a buffer object.
 
 		There are a several approaches to improve graphics performance with PBOs. Some of the most interesting approaches are:
 		${ul(
 			"""
-			Streaming texture updates: If the application uses GL15#MapBuffer()/GL15#UnmapBuffer() to write its data for glTexSubImage into a buffer object, at
+			Streaming texture updates: If the application uses #MapBuffer()/#UnmapBuffer() to write its data for glTexSubImage into a buffer object, at
 			least one of the data copies usually required to download a texture can be eliminated, significantly increasing texture download performance.
 			""",
 			"""
-		    Streaming draw pixels: When GL11#DrawPixels() sources client memory, OpenGL says the client memory can be modified immediately after the
+		    Streaming draw pixels: When #DrawPixels() sources client memory, OpenGL says the client memory can be modified immediately after the
 		    glDrawPixels command returns without disturbing the drawn image. This typically necessitates unpacking and copying the image prior to glDrawPixels
 		    returning. However, when using glDrawPixels with a pixel pack buffer object, glDrawPixels may return prior to image unpacking because future
-		    modification of the buffer data requires explicit commands (GL15#MapBuffer(), GL15#BufferData(), or GL15#BufferSubData()).
+		    modification of the buffer data requires explicit commands (#MapBuffer(), #BufferData(), or #BufferSubData()).
 		    """,
 			"""
-		    Asynchronous GL11#ReadPixels(): If an application needs to read back a number of images and process them with the CPU, the existing GL interface
+		    Asynchronous #ReadPixels(): If an application needs to read back a number of images and process them with the CPU, the existing GL interface
 		    makes it nearly impossible to pipeline this operation. The driver will typically send the hardware a readback command when glReadPixels is called,
 		    and then wait for all of the data to be available before returning control to the application. Then, the application can either process the data
 		    immediately or call glReadPixels again; in neither case will the readback overlap with the processing. If the application issues several readbacks
@@ -50,7 +50,7 @@ val ARB_pixel_buffer_object = "ARBPixelBufferObject".nativeClassGL("ARB_pixel_bu
 		    """,
 			"""
 		    Render to vertex array: The application can use a fragment program to render some image into one of its buffers, then read this image out into a
-		    buffer object via GL11#ReadPixels(). Then, it can use this buffer object as a source of vertex data.
+		    buffer object via #ReadPixels(). Then, it can use this buffer object as a source of vertex data.
 		    """
 		)}
 		Requires ${GL15.core} or ${ARB_vertex_buffer_object.link}. ${GL21.promoted}

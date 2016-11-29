@@ -239,13 +239,13 @@ val aiFace_p = struct(ASSIMP_PACKAGE, "AIFace", nativeName = "struct aiFace") {
 
         ##AIMesh{@code ::mPrimitiveTypes} can be queried to quickly examine which types of primitive are actually present in a mesh. The #Process_SortByPType
         flag executes a special post-processing algorithm which splits meshes with *different* primitive types mixed up (e.g. lines and triangles) in several
-        'clean' submeshes. Furthermore there is a configuration option (Assimp##AI_CONFIG_PP_SBP_REMOVE) to force #Process_SortByPType to remove specific kinds
-        of primitives from the imported scene, completely and forever.
+        'clean' submeshes. Furthermore there is a configuration option (#AI_CONFIG_PP_SBP_REMOVE) to force #Process_SortByPType to remove specific kinds of
+        primitives from the imported scene, completely and forever.
         """
 
     AutoSize("mIndices")..unsigned_int.member(
 	    "mNumIndices",
-	    "Number of indices defining this face. The maximum value for this member is Assimp##AI_MAX_FACE_INDICES."
+	    "Number of indices defining this face. The maximum value for this member is #AI_MAX_FACE_INDICES."
     )
     unsigned_int_p.member("mIndices", "Pointer to the indices array. Size of the array is given in {@code numIndices}.")
 }.p
@@ -269,7 +269,7 @@ val aiBone_pp = struct(ASSIMP_PACKAGE, "AIBone", nativeName = "struct aiBone") {
     aiString.member("mName", "The name of the bone.")
     AutoSize("mWeights")..unsigned_int.member(
 	    "mNumWeights",
-	    "The number of vertices affected by this bone. The maximum value for this member is Assimp##AI_MAX_BONE_WEIGHTS."
+	    "The number of vertices affected by this bone. The maximum value for this member is #AI_MAX_BONE_WEIGHTS."
     )
     aiVertexWeight_p.buffer("mWeights", "The vertices affected by this bone")
     aiMatrix4x4.member("mOffsetMatrix", "Matrix that transforms from mesh space to bone space in bind pose")
@@ -330,15 +330,14 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
     AutoSize("mVertices", "mNormals", "mTangents", "mBitangents", "mColors", "mTextureCoords")..unsigned_int.member(
 	    "mNumVertices",
 	    """
-	    The number of vertices in this mesh. This is also the size of all of the per-vertex data arrays. The maximum value for this member is
-	    Assimp##AI_MAX_VERTICES.
+	    The number of vertices in this mesh. This is also the size of all of the per-vertex data arrays. The maximum value for this member is #AI_MAX_VERTICES.
 		"""
     )
     AutoSize("mFaces")..unsigned_int.member(
 	    "mNumFaces",
 	    """
 	    The number of primitives (triangles, polygons, lines) in this  mesh. This is also the size of the mFaces array. The maximum value for this member is
-	    Assimp##AI_MAX_FACES.
+	    #AI_MAX_FACES.
 		"""
     )
     aiVector3D_p.buffer("mVertices", "Vertex positions. This array is always present in a mesh. The array is {@code mNumVertices} in size.")
@@ -369,7 +368,7 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
     nullable..aiColor4D_p.array(
 		"mColors",
 		"""
-		Vertex color sets. A mesh may contain 0 to Assimp##AI_MAX_NUMBER_OF_COLOR_SETS vertex colors per vertex. $NULL if not present. Each array is
+		Vertex color sets. A mesh may contain 0 to #AI_MAX_NUMBER_OF_COLOR_SETS vertex colors per vertex. $NULL if not present. Each array is
 		{@code mNumVertices} in size if present.
 		""",
 	    size = "Assimp.AI_MAX_NUMBER_OF_COLOR_SETS"
@@ -377,8 +376,8 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
     nullable..aiVector3D_p.array(
 	    "mTextureCoords",
 	    """
-	    Vertex texture coords, also known as UV channels. A mesh may contain 0 to Assimp##AI_MAX_NUMBER_OF_TEXTURECOORDS per vertex. $NULL if not present. The
-	    array is {@code mNumVertices} in size.
+	    Vertex texture coords, also known as UV channels. A mesh may contain 0 to #AI_MAX_NUMBER_OF_TEXTURECOORDS per vertex. $NULL if not present. The array
+	    is {@code mNumVertices} in size.
 		""",
 	    size = "Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"
     )
@@ -395,7 +394,7 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
 	    "mFaces",
 	    """
 	    The faces the mesh is constructed from. Each face refers to a number of vertices by their indices. This array is always present in a mesh, its size is
-	    given in {@code mNumFaces}. If the Assimp##AI_SCENE_FLAGS_NON_VERBOSE_FORMAT is NOT set each face references an unique set of vertices.
+	    given in {@code mNumFaces}. If the #AI_SCENE_FLAGS_NON_VERBOSE_FORMAT is NOT set each face references an unique set of vertices.
 		"""
     )
     AutoSize("mBones")..unsigned_int.member("mNumBones", "The number of bones this mesh contains. Can be 0, in which case the {@code mBones} array is $NULL.")
@@ -434,7 +433,7 @@ val aiUVTransform_p = struct(ASSIMP_PACKAGE, "AIUVTransform", "aiUVTransform", m
 	    """
         Defines how an UV channel is transformed.
 
-        This is just a helper structure for the Assimp##_AI_MATKEY_UVTRANSFORM_BASE key. See its documentation for more details.
+        This is just a helper structure for the #_AI_MATKEY_UVTRANSFORM_BASE key. See its documentation for more details.
 
         Typically you'll want to build a matrix of this information. However, we keep separate scaling/translation/rotation values to make it easier to process
         and optimize UV transformations internally.
@@ -838,7 +837,7 @@ val aiScene_p = struct(ASSIMP_PACKAGE, "AIScene", nativeName = "struct aiScene")
 	    "mMeshes",
 	    """
 	    The array of meshes. Use the indices given in the ##AINode structure to access this array. The array is {@code mNumMeshes} in size. If the
-	    Assimp##AI_SCENE_FLAGS_INCOMPLETE flag is not set there will always be at least ONE material.
+	    #AI_SCENE_FLAGS_INCOMPLETE flag is not set there will always be at least ONE material.
 		"""
     )
     AutoSize("mMaterials")..unsigned_int.member("mNumMaterials", "The number of materials in the scene.")
@@ -846,7 +845,7 @@ val aiScene_p = struct(ASSIMP_PACKAGE, "AIScene", nativeName = "struct aiScene")
 	    "mMaterials",
 	    """
 	    The array of materials. Use the index given in each ##AIMesh structure to access this array. The array is {@code mNumMaterials} in size. If the
-	    Assimp##AI_SCENE_FLAGS_INCOMPLETE flag is not set there will always be at least ONE material.
+	    #AI_SCENE_FLAGS_INCOMPLETE flag is not set there will always be at least ONE material.
 		"""
     )
     AutoSize("mAnimations")..unsigned_int.member("mNumAnimations", "The number of animations in the scene.")

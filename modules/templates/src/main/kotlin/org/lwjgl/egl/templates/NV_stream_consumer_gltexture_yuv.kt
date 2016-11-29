@@ -38,7 +38,7 @@ val NV_stream_consumer_gltexture_yuv = "NVStreamConsumerGLTextureYUV".nativeClas
 	)
 
 	IntConstant(
-		"Accepted as value for EGL12#COLOR_BUFFER_TYPE attribute in {@code attrib_list} by #StreamConsumerGLTextureExternalAttribsNV().",
+		"Accepted as value for #COLOR_BUFFER_TYPE attribute in {@code attrib_list} by #StreamConsumerGLTextureExternalAttribsNV().",
 
 		"YUV_BUFFER_EXT"..0x3300
 	)

@@ -113,8 +113,8 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 	val SamplerParameters =
 		"""
-		GL11#TEXTURE_WRAP_S GL11#TEXTURE_WRAP_T GL12#TEXTURE_WRAP_R GL11#TEXTURE_MIN_FILTER GL11#TEXTURE_MAG_FILTER GL12#TEXTURE_MIN_LOD
-		GL12#TEXTURE_MAX_LOD GL14#TEXTURE_LOD_BIAS GL14#TEXTURE_COMPARE_MODE GL14#TEXTURE_COMPARE_FUNC
+		#TEXTURE_WRAP_S #TEXTURE_WRAP_T #TEXTURE_WRAP_R #TEXTURE_MIN_FILTER #TEXTURE_MAG_FILTER #TEXTURE_MIN_LOD
+		#TEXTURE_MAX_LOD #TEXTURE_LOD_BIAS #TEXTURE_COMPARE_MODE #TEXTURE_COMPARE_FUNC
 		"""
 
 	void(
@@ -140,7 +140,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 		"Pointer version of #SamplerParameteri().",
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
-		GLenum.IN("pname", "the symbolic name of a sampler parameter", "GL11#TEXTURE_BORDER_COLOR $SamplerParameters"),
+		GLenum.IN("pname", "the symbolic name of a sampler parameter", "#TEXTURE_BORDER_COLOR $SamplerParameters"),
 		Check(1)..const..GLint_p.IN("params", "an array where the value or values of {@code pname} are stored")
 	)
 
@@ -176,7 +176,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 		"Return the integer value(s) of a sampler parameter.",
 
 		GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
-		GLenum.IN("pname", "the symbolic name of a sampler parameter", "$SamplerParameters, GL11#TEXTURE_BORDER_COLOR"),
+		GLenum.IN("pname", "the symbolic name of a sampler parameter", "$SamplerParameters, #TEXTURE_BORDER_COLOR"),
 		Check(1)..ReturnParam..GLint_p.OUT("params", "the sampler parameters")
 	)
 
@@ -265,7 +265,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 		"Returns the 64bit integer value of query object parameter.",
 
 		GLuint.IN("id", "the name of a query object"),
-		GLenum.IN("pname", "the symbolic name of a query object parameter", "GL15#QUERY_RESULT GL15#QUERY_RESULT_AVAILABLE"),
+		GLenum.IN("pname", "the symbolic name of a query object parameter", "#QUERY_RESULT #QUERY_RESULT_AVAILABLE"),
 		Check(1)..ReturnParam..GLint64_p.OUT("params", "the requested data")
 	)
 
@@ -307,21 +307,21 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 	// Packed functions javadoc
 	val packedType = "type of packing used on the data"
-	val packedTypes = "#INT_2_10_10_10_REV GL12#UNSIGNED_INT_2_10_10_10_REV"
+	val packedTypes = "#INT_2_10_10_10_REV #UNSIGNED_INT_2_10_10_10_REV"
 	val packedValue = "the packed value"
 
-	DeprecatedGL..void("VertexP2ui", "Packed component version of GL11#Vertex2f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))
-	DeprecatedGL..void("VertexP3ui", "Packed component version of GL11#Vertex3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))
-	DeprecatedGL..void("VertexP4ui", "Packed component version of GL11#Vertex4f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))
+	DeprecatedGL..void("VertexP2ui", "Packed component version of #Vertex2f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))
+	DeprecatedGL..void("VertexP3ui", "Packed component version of #Vertex3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))
+	DeprecatedGL..void("VertexP4ui", "Packed component version of #Vertex4f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))
 
 	DeprecatedGL..void("VertexP2uiv", "Pointer version of #VertexP2ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("value", packedValue))
 	DeprecatedGL..void("VertexP3uiv", "Pointer version of #VertexP3ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("value", packedValue))
 	DeprecatedGL..void("VertexP4uiv", "Pointer version of #VertexP4ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("value", packedValue))
 
-	DeprecatedGL..void("TexCoordP1ui", "Packed component version of GL11#TexCoord1f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
-	DeprecatedGL..void("TexCoordP2ui", "Packed component version of GL11#TexCoord2f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
-	DeprecatedGL..void("TexCoordP3ui", "Packed component version of GL11#TexCoord3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
-	DeprecatedGL..void("TexCoordP4ui", "Packed component version of GL11#TexCoord4f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
+	DeprecatedGL..void("TexCoordP1ui", "Packed component version of #TexCoord1f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
+	DeprecatedGL..void("TexCoordP2ui", "Packed component version of #TexCoord2f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
+	DeprecatedGL..void("TexCoordP3ui", "Packed component version of #TexCoord3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
+	DeprecatedGL..void("TexCoordP4ui", "Packed component version of #TexCoord4f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
 
 	DeprecatedGL..void("TexCoordP1uiv", "Pointer version of #TexCoordP1ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("coords", packedValue))
 	DeprecatedGL..void("TexCoordP2uiv", "Pointer version of #TexCoordP2ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("coords", packedValue))
@@ -330,36 +330,36 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 	val texCoordTex = "the coordinate set to be modified"
 
-	DeprecatedGL..void("MultiTexCoordP1ui", "Packed component version of GL13#MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
-	DeprecatedGL..void("MultiTexCoordP2ui", "Packed component version of GL13#MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
-	DeprecatedGL..void("MultiTexCoordP3ui", "Packed component version of GL13#MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
-	DeprecatedGL..void("MultiTexCoordP4ui", "Packed component version of GL13#MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
+	DeprecatedGL..void("MultiTexCoordP1ui", "Packed component version of #MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
+	DeprecatedGL..void("MultiTexCoordP2ui", "Packed component version of #MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
+	DeprecatedGL..void("MultiTexCoordP3ui", "Packed component version of #MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
+	DeprecatedGL..void("MultiTexCoordP4ui", "Packed component version of #MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
 
 	DeprecatedGL..void("MultiTexCoordP1uiv", "Pointer version of #MultiTexCoordP1ui().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("coords", packedValue))
 	DeprecatedGL..void("MultiTexCoordP2uiv", "Pointer version of #MultiTexCoordP2ui().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("coords", packedValue))
 	DeprecatedGL..void("MultiTexCoordP3uiv", "Pointer version of #MultiTexCoordP3ui().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("coords", packedValue))
 	DeprecatedGL..void("MultiTexCoordP4uiv", "Pointer version of #MultiTexCoordP4ui().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("coords", packedValue))
 
-	DeprecatedGL..void("NormalP3ui", "Packed component version of GL11#Normal3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
+	DeprecatedGL..void("NormalP3ui", "Packed component version of #Normal3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
 
 	DeprecatedGL..void("NormalP3uiv", "Pointer version #NormalP3ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("coords", packedValue))
 
-	DeprecatedGL..void("ColorP3ui", "Packed component version of GL11#Color3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue))
-	DeprecatedGL..void("ColorP4ui", "Packed component version of GL11#Color4f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue))
+	DeprecatedGL..void("ColorP3ui", "Packed component version of #Color3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue))
+	DeprecatedGL..void("ColorP4ui", "Packed component version of #Color4f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue))
 
 	DeprecatedGL..void("ColorP3uiv", "Pointer version of #ColorP3ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("color", packedValue))
 	DeprecatedGL..void("ColorP4uiv", "Pointer version of #ColorP4ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("color", packedValue))
 
-	DeprecatedGL..void("SecondaryColorP3ui", "Packed component version of GL14#SecondaryColor3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue))
+	DeprecatedGL..void("SecondaryColorP3ui", "Packed component version of #SecondaryColor3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue))
 	DeprecatedGL..void("SecondaryColorP3uiv", "Pointer version of #SecondaryColorP3ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..const..GLuint_p.IN("color", packedValue))
 
 	val vertexAttribIndex = "the index of the generic vertex attribute to be modified"
 	val vertexAttribNormalized = "whether values should be normalized or cast directly to floating-point"
 
-	void("VertexAttribP1ui", "Packed component version of GL20#VertexAttrib1f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
-	void("VertexAttribP2ui", "Packed component version of GL20#VertexAttrib2f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
-	void("VertexAttribP3ui", "Packed component version of GL20#VertexAttrib3f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
-	void("VertexAttribP4ui", "Packed component version of GL20#VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
+	void("VertexAttribP1ui", "Packed component version of #VertexAttrib1f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
+	void("VertexAttribP2ui", "Packed component version of #VertexAttrib2f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
+	void("VertexAttribP3ui", "Packed component version of #VertexAttrib3f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
+	void("VertexAttribP4ui", "Packed component version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
 
 	void("VertexAttribP1uiv", "Pointer version of #VertexAttribP1ui().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), Check(1)..const..GLuint_p.IN("value", packedValue))
 	void("VertexAttribP2uiv", "Pointer version of #VertexAttribP2ui().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), Check(1)..const..GLuint_p.IN("value", packedValue))

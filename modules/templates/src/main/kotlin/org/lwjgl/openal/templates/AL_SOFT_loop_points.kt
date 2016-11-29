@@ -17,7 +17,7 @@ val AL_SOFT_loop_points = "SOFTLoopPoints".nativeClassAL("SOFT_loop_points") {
 		"""
 
 	IntConstant(
-		"Accepted by the {@code paramName} parameter of AL11#Bufferiv() and AL11#GetBufferiv().",
+		"Accepted by the {@code paramName} parameter of #Bufferiv() and #GetBufferiv().",
 
 		"LOOP_POINTS_SOFT"..0x2015
 	)

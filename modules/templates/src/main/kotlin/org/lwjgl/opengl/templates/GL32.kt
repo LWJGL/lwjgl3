@@ -69,7 +69,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
+			"#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
 		),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
@@ -86,7 +86,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
+			"#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
 		),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
@@ -101,7 +101,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
+			"#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
 		),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
@@ -113,12 +113,12 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"""
 		Renders multiple sets of primitives by specifying indices of array data elements and an offset to apply to each index.
 
-		<b>LWJGL note</b>: Use org.lwjgl.system.MemoryUtil##memAddress() to retrieve pointers to the index buffers.
+		<b>LWJGL note</b>: Use org.lwjgl.system.MemoryUtil#memAddress() to retrieve pointers to the index buffers.
 		""",
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
 		const..GLsizei_p.IN("count", "an array of the elements counts"),
-		GLenum.IN("type", "the type of the values in {@code indices}", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
+		GLenum.IN("type", "the type of the values in {@code indices}", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
 		const..void_pp.IN("indices", "a pointer to the location where the indices are stored"),
 		AutoSize("count", "indices", "basevertex")..GLsizei.IN("primcount", "the size of the {@code count} array"),
 		GLint_p.IN("basevertex", "a pointer to the location where the base vertices are stored")
@@ -370,7 +370,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"FramebufferTexture",
 		"Attaches a level of a texture object as a logical buffer to the currently bound framebuffer object.",
 
-		GLenum.IN("target", "the framebuffer target", "GL30#FRAMEBUFFER GL30#READ_FRAMEBUFFER GL30#DRAW_FRAMEBUFFER"),
+		GLenum.IN("target", "the framebuffer target", "#FRAMEBUFFER #READ_FRAMEBUFFER #DRAW_FRAMEBUFFER"),
 		GLenum.IN("attachment", "the attachment point of the framebuffer"),
 		GLuint.IN("texture", "the texture object to attach to the framebuffer attachment point named by {@code attachment}"),
 		GLint.IN("level", "the mipmap level of {@code texture} to attach")

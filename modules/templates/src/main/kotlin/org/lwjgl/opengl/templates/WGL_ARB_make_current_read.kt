@@ -20,7 +20,7 @@ val WGL_ARB_make_current_read = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_
 		"""
 
 	IntConstant(
-		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
+		"New errors returned by org.lwjgl.system.windows.WinBase#GetLastError().",
 
 		"ERROR_INVALID_PIXEL_TYPE_ARB"..0x2043,
 		"ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB"..0x2054
@@ -33,7 +33,7 @@ val WGL_ARB_make_current_read = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_
 		by the calling thread are drawn on the device identified by {@code drawDC} and read on the device identified by {@code readDC}.
 
 		The {@code drawDC} and {@code readDC} parameters must refer to drawing surfaces supported by OpenGL. These parameters need not be the same {@code hdc}
-		that was passed to WGL#CreateContext() when {@code hglrc} was created. {@code drawDC} must have the same pixel format and be created on the same
+		that was passed to WGL#wglCreateContext() when {@code hglrc} was created. {@code drawDC} must have the same pixel format and be created on the same
 		physical device as the {@code hdc} that was passed into wglCreateContext. {@code readDC} must be created on the same device as the {@code hdc} that was
 		passed to wglCreateContext and it must support the same pixel type as the pixel format of the {@code hdc} that was passed to wglCreateContext.
 

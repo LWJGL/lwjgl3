@@ -67,7 +67,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		"""
 		Detects Oculus Runtime and Device Status.
 
-		Checks for Oculus Runtime and Oculus HMD device status without loading the LibOVRRT shared library. This may be called before OVR#_Initialize() to help
+		Checks for Oculus Runtime and Oculus HMD device status without loading the LibOVRRT shared library. This may be called before #Initialize() to help
 		decide whether or not to initialize LibOVR.
 		""",
 
@@ -125,14 +125,14 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		Check(2)..const..ovrVector3f_p.IN(
 			"HmdToEyeOffset",
 			"""
-		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
+		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from #GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
 		),
 		Check(2)..ovrPosef_p.OUT(
 			"outEyePoses",
 			"""
-			if {@code outEyePoses} are used for rendering, they should be passed to OVR#_SubmitFrame() in ##OVRLayerEyeFov{@code ::RenderPose} or
+			if {@code outEyePoses} are used for rendering, they should be passed to #SubmitFrame() in ##OVRLayerEyeFov{@code ::RenderPose} or
 			##OVRLayerEyeFovDepth{@code ::RenderPose}
 			"""
 		)
@@ -148,8 +148,8 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		not need to worry about applying {@code HmdToEyeOffset} to the returned {@code outEyePoses} variables.
 	    """,
 
-		ovrSession.IN("session", "an {@code ovrSession} previously returned by OVR#_Create()"),
-		long_long.IN("frameIndex", "the targeted frame index, or 0 to refer to one frame after the last time OVR#_SubmitFrame() was called"),
+		ovrSession.IN("session", "an {@code ovrSession} previously returned by #Create()"),
+		long_long.IN("frameIndex", "the targeted frame index, or 0 to refer to one frame after the last time #SubmitFrame() was called"),
 		ovrBool.IN(
 			"latencyMarker",
 			"""
@@ -160,7 +160,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		Check(2)..const..ovrVector3f_p.IN(
 			"hmdToEyeOffset",
 			"""
-		    can be ##OVREyeRenderDesc{@code .HmdToEyeOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
+		    can be ##OVREyeRenderDesc{@code .HmdToEyeOffset} returned from #GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
 		),

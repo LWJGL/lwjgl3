@@ -17,7 +17,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 		This class contains OpenGL specific functionality.
 		"""
 
-	val session = ovrSession.IN("session", "an {@code ovrSession} previously returned by OVR#Create()")
+	val session = ovrSession.IN("session", "an {@code ovrSession} previously returned by #Create()")
 
 	ovrResult(
 		"CreateTextureSwapChainGL",
@@ -25,7 +25,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 		Creates a TextureSwapChain suitable for use with OpenGL.
 
 		The format provided should be thought of as the format the distortion compositor will use when reading the contents of the texture. To that end, it is
-		highly recommended that the application requests texture swap chain formats that are in sRGB-space (e.g. OVR##OVR_FORMAT_R8G8B8A8_UNORM_SRGB) as the
+		highly recommended that the application requests texture swap chain formats that are in sRGB-space (e.g. OVR#OVR_FORMAT_R8G8B8A8_UNORM_SRGB) as the
 		distortion compositor does sRGB-correct rendering. Furthermore, the app should then make sure "{@code glEnable(GL_FRAMEBUFFER_SRGB);}" is called before
 		rendering into these textures. Even though it is not recommended, if the application would like to treat the texture as a linear format and do
 		linear-to-gamma conversion in GLSL, then the application can avoid calling "{@code glEnable(GL_FRAMEBUFFER_SRGB);}", but should still pass in an sRGB
@@ -38,11 +38,11 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 			"out_TextureSwapChain",
 			"""
 			returns the created {@code ovrTextureSwapChain}, which will be valid upon a successful return value, else it will be $NULL. This texture swap chain must
-			be eventually destroyed via OVR#DestroyTextureSwapChain() before destroying the session with OVR#Destroy().
+			be eventually destroyed via #DestroyTextureSwapChain() before destroying the session with #Destroy().
 			"""
 		),
 
-		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use OVR#GetLastErrorInfo() to get more information."
+		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information."
 	)
 
 	ovrResult(
@@ -54,13 +54,13 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 		int.IN(
 			"index",
 			"""
-			the index within the chain to retrieve. Must be between 0 and length (see OVR#GetTextureSwapChainLength()) or may pass -1 to get the buffer at the
-			{@code CurrentIndex} location. (Saving a call to OVR#GetTextureSwapChainCurrentIndex())
+			the index within the chain to retrieve. Must be between 0 and length (see #GetTextureSwapChainLength()) or may pass -1 to get the buffer at the
+			{@code CurrentIndex} location. (Saving a call to #GetTextureSwapChainCurrentIndex())
 			"""
 		),
 		Check(1)..unsigned_int_p.OUT("out_TexId", "returns the GL texture object name associated with the specific index requested"),
 
-		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use OVR#GetLastErrorInfo() to get more information."
+		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information."
 	)
 
 	ovrResult(
@@ -81,11 +81,11 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 			"out_MirrorTexture",
 			"""
 			returns the created {@code OVRMirrorTextur}e, which will be valid upon a successful return value, else it will be $NULL. This texture must be
-			eventually destroyed via OVR#DestroyMirrorTexture() before destroying the session with OVR#Destroy().
+			eventually destroyed via #DestroyMirrorTexture() before destroying the session with #Destroy().
 			"""
 		),
 
-		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use OVR#GetLastErrorInfo() to get more information."
+		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information."
 	)
 
 	ovrResult(
@@ -96,6 +96,6 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 		ovrMirrorTexture.IN("mirrorTexture", "an {@code OVRMirrorTexture} previously returned by #CreateMirrorTextureGL()"),
 		Check(1)..unsigned_int_p.OUT("out_TexId", "returns the GL texture object name associated with the mirror texture"),
 
-		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use OVR#GetLastErrorInfo() to get more information."
+		returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information."
 	)
 }

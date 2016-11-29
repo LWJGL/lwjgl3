@@ -80,6 +80,11 @@ class ConstantBlock<T : Any>(
 
 	internal fun getConstantName(name: String) = if (noPrefix) name else "${nativeClass.prefixConstant}$name"
 
+	internal fun getClassLink(name: String) = if (noPrefix && nativeClass.prefixConstant.isNotEmpty())
+		"${nativeClass.className}#$name"
+	else
+		"${nativeClass.className}#${nativeClass.prefixConstant}$name"
+
 	internal fun generate(writer: PrintWriter) {
 		if (constantType === EnumConstant) {
 			// Increment/update the current enum value while iterating the enum constants.
@@ -215,15 +220,13 @@ class ConstantBlock<T : Any>(
 			print(constantType.print(constant.value!!))
 	}
 
-	val javaDocLinks: String get() = javaDocLinks { true }
+	val javaDocLinks: String get() = javaDocLinks(null)
 	val javaDocLinksSkipCount: String get() = javaDocLinks { !it.name.endsWith("_COUNT") }
 
-	fun javaDocLinks(predicate: (Constant<T>) -> Boolean) = constants.asSequence()
-		.filter { predicate(it) }
+	fun javaDocLinks(predicate: ((Constant<T>) -> Boolean)?) = constants.asSequence()
 		.let {
-			val hash = if (noPrefix) "##" else "#"
-			it.map { "${nativeClass.className}$hash${it.name}" }
+			if (predicate == null) it else it.filter { predicate(it) }
 		}
-		.joinToString(" ")
-
+		.map { it.name }
+		.joinToString(" #", prefix = "#")
 }

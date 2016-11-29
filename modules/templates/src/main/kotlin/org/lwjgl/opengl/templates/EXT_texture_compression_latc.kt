@@ -16,7 +16,7 @@ val EXT_texture_compression_latc = "EXTTextureCompressionLATC".nativeClassGL("EX
         the name "latc" for Luminance-Alpha Texture Compression).
 
 		These formats are designed to reduce the storage requirements and memory bandwidth required for luminance and luminance-alpha textures by a factor of
-		2-to-1 over conventional uncompressed luminance and luminance-alpha textures with 8-bit components (GL11#LUMINANCE8 and GL11#LUMINANCE8_ALPHA8).
+		2-to-1 over conventional uncompressed luminance and luminance-alpha textures with 8-bit components (#LUMINANCE8 and #LUMINANCE8_ALPHA8).
 
 		The compressed signed luminance-alpha format is reasonably suited for storing compressed normal maps.
 

@@ -42,35 +42,35 @@ val CL12GL = dependsOn(Binding.OPENGL) {
 				"an OpenCL 3D image object from an OpenGL 3D texture object."
 			)}
 
-		If the state of a GL texture object is modified through the GL API (e.g. GL11##glTexImage2D(), GL12##glTexImage3D() or the values of the
-		texture parameters GL12##GL_TEXTURE_BASE_LEVEL or GL12##GL_TEXTURE_MAX_LEVEL are modified) while there exists a corresponding CL image
+		If the state of a GL texture object is modified through the GL API (e.g. GL11#glTexImage2D(), GL12#glTexImage3D() or the values of the
+		texture parameters GL12#GL_TEXTURE_BASE_LEVEL or GL12#GL_TEXTURE_MAX_LEVEL are modified) while there exists a corresponding CL image
 		object, subsequent use of the CL image object will result in undefined behavior.
 
-		The CL10#RetainMemObject() and CL10#ReleaseMemObject() functions can be used to retain and release the image objects.
+		The #RetainMemObject() and #ReleaseMemObject() functions can be used to retain and release the image objects.
 		""",
 
 			cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
 			cl_mem_flags.IN(
 				"flags",
 				"a bit-field that is used to specify usage information",
-				"CL10#MEM_READ_ONLY CL10#MEM_WRITE_ONLY CL10#MEM_READ_WRITE"
+				"#MEM_READ_ONLY #MEM_WRITE_ONLY #MEM_READ_WRITE"
 			),
 			GLenum.IN(
 				"texture_target",
 				"defines the image type of {@code texture}. No reference to a bound GL texture object is made or implied by this parameter.",
 				"""
-			GL11##GL_TEXTURE_1D GL30##GL_TEXTURE_1D_ARRAY GL31##GL_TEXTURE_BUFFER
-			GL11##GL_TEXTURE_2D GL30##GL_TEXTURE_2D_ARRAY GL12##GL_TEXTURE_3D
-			GL13##GL_TEXTURE_CUBE_MAP_POSITIVE_X GL13##GL_TEXTURE_CUBE_MAP_POSITIVE_Y GL13##GL_TEXTURE_CUBE_MAP_POSITIVE_Z
-			GL13##GL_TEXTURE_CUBE_MAP_NEGATIVE_X GL13##GL_TEXTURE_CUBE_MAP_NEGATIVE_Y GL13##GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
-			GL31##GL_TEXTURE_RECTANGLE
+			GL11#GL_TEXTURE_1D GL30#GL_TEXTURE_1D_ARRAY GL31#GL_TEXTURE_BUFFER
+			GL11#GL_TEXTURE_2D GL30#GL_TEXTURE_2D_ARRAY GL12#GL_TEXTURE_3D
+			GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_X GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Y GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Z
+			GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_X GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Y GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
+			GL31#GL_TEXTURE_RECTANGLE
 			"""
 			),
 			GLint.IN(
 				"miplevel",
 				"""
 			the mipmap level to be used. Implementations may return $INVALID_OPERATION for {@code miplevel} values &gt; 0. If
-			{@code texture_target} is GL31##GL_TEXTURE_BUFFER, {@code miplevel} must be 0.
+			{@code texture_target} is GL31#GL_TEXTURE_BUFFER, {@code miplevel} must be 0.
 			"""
 			),
 			GLuint.IN(

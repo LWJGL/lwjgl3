@@ -19,7 +19,7 @@ val GLX_ARB_fbconfig_float = "GLXARBFBConfigFloat".nativeClassGLX("GLX_ARB_fbcon
 		"""
 
 	IntConstant(
-		"Accepted as values of the {@code render_type} arguments in the GLX13#CreateNewContext() and GLX#CreateContext() functions.",
+		"Accepted as values of the {@code render_type} arguments in the #CreateNewContext() and GLX#glXCreateContext() functions.",
 
 		"RGBA_FLOAT_TYPE_ARB"..0x20B9
 	)

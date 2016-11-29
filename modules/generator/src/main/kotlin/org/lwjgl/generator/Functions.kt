@@ -158,9 +158,7 @@ class NativeClassFunction(
 	}
 
 	val javaDocLink: String
-		get() = "${nativeClass.className}$methodLink"
-
-	internal val methodLink: String get() = "#$simpleName()"
+		get() = "#$simpleName()"
 
 	internal val hasExplicitFunctionAddress: Boolean
 		get() = parameters.isNotEmpty() && parameters[0] === EXPLICIT_FUNCTION_ADDRESS
@@ -603,7 +601,7 @@ class NativeClassFunction(
 		if (verbose) {
 			println(javadoc)
 		} else if (hasParam { it.nativeType is ArrayType }) {
-			println(nativeClass.processDocumentation("Array version of: ##n$name()").toJavaDoc())
+			println(nativeClass.processDocumentation("Array version of: ${nativeClass.className}#n$name()").toJavaDoc())
 		} else {
 			getNativeParams().filter {
 				it.documentation != null &&
@@ -614,7 +612,7 @@ class NativeClassFunction(
 					// TODO: more?
 				)
 			}.let { hiddenParameters ->
-				val documentation = nativeClass.processDocumentation("Unsafe version of: $methodLink")
+				val documentation = nativeClass.processDocumentation("Unsafe version of: $javaDocLink")
 				println(if (hiddenParameters.any())
 					nativeClass.toJavaDoc(documentation, hiddenParameters, returns.nativeType, "", "")
 				else
@@ -1320,7 +1318,7 @@ class NativeClassFunction(
 		// JavaDoc
 		if (!constantMacro) {
 			if (description != null) {
-				val doc = nativeClass.processDocumentation("$description $methodLink").toJavaDoc()
+				val doc = nativeClass.processDocumentation("$description $javaDocLink").toJavaDoc()
 				if (!(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false) && doc.isNotEmpty())
 					println(doc)
 			} else {

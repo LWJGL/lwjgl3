@@ -61,7 +61,7 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		there to be zero messages generated, even when a GL error occurs, which is useful if the context is non-debug.
 
 		Debug output can be enabled and disabled by changing the #DEBUG_OUTPUT state. It is implementation defined how much debug output is generated if the
-		context was created without the #CONTEXT_FLAG_DEBUG_BIT set. This is a new query bit added to the existing GL30#CONTEXT_FLAGS state to specify whether the
+		context was created without the #CONTEXT_FLAG_DEBUG_BIT set. This is a new query bit added to the existing #CONTEXT_FLAGS state to specify whether the
 		context was created with debug enabled.
 
 		Finally, this extension defines a mechanism for OpenGL applications to label their objects (textures, buffers, shaders, etc.) with a descriptive string.

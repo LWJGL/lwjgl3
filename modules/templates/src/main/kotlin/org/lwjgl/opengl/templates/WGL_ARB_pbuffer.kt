@@ -34,14 +34,12 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		Requires ${WGL_ARB_extensions_string.link} and ${WGL_ARB_pixel_format.link}.
 		"""
 
-	val wglGetPixelFormatAttribiARB = "WGLARBPixelFormat#GetPixelFormatAttribiARB()"
-
 	HPBUFFERARB(
 		"CreatePbufferARB",
 		"""
 		Creates a pixel buffer (pbuffer) and returns a handle to it.
 
-		Support for pbuffers may be restricted to specific pixel formats. Use $wglGetPixelFormatAttribiARB to query the #DRAW_TO_PBUFFER_ARB
+		Support for pbuffers may be restricted to specific pixel formats. Use #GetPixelFormatAttribivARB() to query the #DRAW_TO_PBUFFER_ARB
 		attribute to determine which pixel formats support the creation of pbuffers.
 		""",
 
@@ -93,15 +91,15 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 
 	IntConstant(
 		"""
-		Accepted by the {@code attribIList} parameter of WGLARBPixelFormat#ChoosePixelFormatARB() and the {@code attributes} parameter of
-		$wglGetPixelFormatAttribiARB.
+		Accepted by the {@code attribIList} parameter of #ChoosePixelFormatARB() and the {@code attributes} parameter of
+		#GetPixelFormatAttribivARB().
 		""",
 
 		"DRAW_TO_PBUFFER_ARB"..0x202D
 	)
 
 	IntConstant(
-		"Accepted by the {@code attributes} parameter of $wglGetPixelFormatAttribiARB.",
+		"Accepted by the {@code attributes} parameter of #GetPixelFormatAttribivARB().",
 
 		"MAX_PBUFFER_PIXELS_ARB"..0x202E,
 		"MAX_PBUFFER_WIDTH_ARB"..0x202F,

@@ -21,7 +21,7 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
 		Requires ${GL20.core} and ${registryLinkTo("EXT", "draw_buffers2")}. ${GL40.promoted}
 		"""
 
-	val blendEquations = "GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX"
+	val blendEquations = "#FUNC_ADD #FUNC_SUBTRACT #FUNC_REVERSE_SUBTRACT #MIN #MAX"
 
 	void(
 		"BlendEquationiARB",
@@ -30,16 +30,16 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
 
 		This call modifies the blend equations associated with an individual draw buffer. 
 
-		The error $INVALID_ENUM is generated if the {@code buf} parameter is outside the range [0, GL20#MAX_DRAW_BUFFERS &ndash; 1].
+		The error $INVALID_ENUM is generated if the {@code buf} parameter is outside the range [0, #MAX_DRAW_BUFFERS &ndash; 1].
 
-		The error $INVALID_ENUM is generated if {@code mode} is not one of GL14#FUNC_ADD, GL14#FUNC_SUBTRACT,
-		GL14#FUNC_REVERSE_SUBTRACT, GL14#MAX, or GL14#MIN.
+		The error $INVALID_ENUM is generated if {@code mode} is not one of #FUNC_ADD, #FUNC_SUBTRACT,
+		#FUNC_REVERSE_SUBTRACT, #MAX, or #MIN.
 
-		The error $INVALID_OPERATION is generated if this method is executed between the execution of GL11#Begin() and the corresponding execution
-		of GL11#End().
+		The error $INVALID_OPERATION is generated if this method is executed between the execution of #Begin() and the corresponding execution
+		of #End().
 		""",
 
-		GLuint.IN("buf", "an integer that indicates the GL11#DRAW_BUFFER to modify."),
+		GLuint.IN("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
 		GLenum.IN("mode", "determines both the RGB and alpha blend equations", blendEquations)
 	)
 
@@ -50,16 +50,16 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
 
 		This call modifies the blend equations associated with an individual draw buffer.
 
-		The error $INVALID_ENUM is generated if the {@code buf} parameter is outside the range [0, GL20#MAX_DRAW_BUFFERS &ndash; 1].
+		The error $INVALID_ENUM is generated if the {@code buf} parameter is outside the range [0, #MAX_DRAW_BUFFERS &ndash; 1].
 
-		The error $INVALID_ENUM is generated if either {@code modeRGB} or {@code modeAlpha} are not one of GL14#FUNC_ADD,
-		GL14#FUNC_SUBTRACT, GL14#FUNC_REVERSE_SUBTRACT, GL14#MAX, or GL14#MIN.
+		The error $INVALID_ENUM is generated if either {@code modeRGB} or {@code modeAlpha} are not one of #FUNC_ADD,
+		#FUNC_SUBTRACT, #FUNC_REVERSE_SUBTRACT, #MAX, or #MIN.
 
-		The error $INVALID_OPERATION is generated if this method is executed between the execution of GL11#Begin() and the corresponding execution
-		of GL11#End().
+		The error $INVALID_OPERATION is generated if this method is executed between the execution of #Begin() and the corresponding execution
+		of #End().
 		""",
 
-		GLuint.IN("buf", "an integer that indicates the GL11#DRAW_BUFFER to modify."),
+		GLuint.IN("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
 		GLenum.IN("modeRGB", "the RGB blend equation", blendEquations),
 		GLenum.IN("modeAlpha", "the alpha blend equation", blendEquations)
 	)
@@ -71,15 +71,15 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
 
 		This call modifies the blend functions associated with an individual draw buffer.
 
-		The error $INVALID_ENUM is generated if the {@code buf} parameter is outside the range [0, GL20#MAX_DRAW_BUFFERS &ndash; 1].
+		The error $INVALID_ENUM is generated if the {@code buf} parameter is outside the range [0, #MAX_DRAW_BUFFERS &ndash; 1].
 
 		The error $INVALID_ENUM is generated if either {@code src}, or {@code dst} is not an accepted value.
 
-		The error $INVALID_OPERATION is generated if this method is executed between the execution of GL11#Begin() and the corresponding execution
-		of GL11#End().
+		The error $INVALID_OPERATION is generated if this method is executed between the execution of #Begin() and the corresponding execution
+		of #End().
 		""",
 
-		GLuint.IN("buf", "an integer that indicates the GL11#DRAW_BUFFER to modify."),
+		GLuint.IN("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
 		GLenum.IN("src", "determines both RGB and alpha source functions"),
 		GLenum.IN("dst", "determines both RGB and alpha destination functions")
 	)
@@ -91,15 +91,15 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
 
 		This call modifies the blend functions associated with an individual draw buffer.
 
-		The error $INVALID_ENUM is generated if the {@code buf} parameter is outside the range [0, GL20#MAX_DRAW_BUFFERS &ndash; 1].
+		The error $INVALID_ENUM is generated if the {@code buf} parameter is outside the range [0, #MAX_DRAW_BUFFERS &ndash; 1].
 
 		The error $INVALID_ENUM is generated if either {@code srcRGB}, {@code dstRGB}, {@code srcAlpha}, or {@code dstAlpha} is not an accepted value.
 
-		The error $INVALID_OPERATION is generated if this method is executed between the execution of GL11#Begin() and the corresponding execution
-		of GL11#End().
+		The error $INVALID_OPERATION is generated if this method is executed between the execution of #Begin() and the corresponding execution
+		of #End().
 		""",
 
-		GLuint.IN("buf", "an integer that indicates the GL11#DRAW_BUFFER to modify."),
+		GLuint.IN("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
 		GLenum.IN("srcRGB", "the source RGB blend function"),
 		GLenum.IN("dstRGB", "the destination RGB blend function"),
 		GLenum.IN("srcAlpha", "the source alpha blend function"),

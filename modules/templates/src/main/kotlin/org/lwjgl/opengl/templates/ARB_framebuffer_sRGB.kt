@@ -50,7 +50,7 @@ val GLX_ARB_framebuffer_sRGB = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB_f
 		"""
 
 	IntConstant(
-		"Accepted by the {@code attribList} parameter of GLX#ChooseVisual(), and by the {@code attrib} parameter of GLX#GetConfig().",
+		"Accepted by the {@code attribList} parameter of #ChooseVisual(), and by the {@code attrib} parameter of #GetConfig().",
 
 		"FRAMEBUFFER_SRGB_CAPABLE_ARB"..0x20B2
 	)
@@ -68,8 +68,8 @@ val WGL_ARB_framebuffer_sRGB = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB_f
 
 	IntConstant(
 		"""
-		Accepted by the {@code attributes} parameter of WGLARBPixelFormat#GetPixelFormatAttribiARB() and the {@code attribIList} of
-		WGLARBPixelFormat#ChoosePixelFormatARB().
+		Accepted by the {@code attributes} parameter of #GetPixelFormatAttribivARB() and the {@code attribIList} of
+		#ChoosePixelFormatARB().
 		""",
 
 		"FRAMEBUFFER_SRGB_CAPABLE_ARB"..0x20A9

@@ -17,10 +17,10 @@ val WGL_ARB_create_context_robustness = "WGLARBCreateContextRobustness".nativeCl
 		Requires ${WGL_ARB_extensions_string.link}, ${WGL_ARB_create_context.link} and ${ARB_robustness.link}.
 		"""
 
-	val wglCreateContextAttribsARB = "WGLARBCreateContext#CreateContextAttribsARB()"
+	val wglCreateContextAttribsARB = "WGLARBCreateContext#wglCreateContextAttribsARB()"
 	IntConstant(
 		"""
-		Accepted as a bit in the attribute value for WGLARBCreateContext#CONTEXT_FLAGS_ARB in the {@code attrib_list} argument to
+		Accepted as a bit in the attribute value for WGLARBCreateContext#WGL_CONTEXT_FLAGS_ARB in the {@code attrib_list} argument to
 		$wglCreateContextAttribsARB.
 		""",
 

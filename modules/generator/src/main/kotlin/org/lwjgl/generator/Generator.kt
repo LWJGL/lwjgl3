@@ -382,8 +382,8 @@ public final class $className implements Runnable {
 		}
 
 		// Get classes with bodies and register tokens/functions
-		val packageTokens = HashMap<String, String>()
-		val packageFunctions = HashMap<String, String>()
+		val packageTokens = LinkedHashMap<String, String>()
+		val packageFunctions = LinkedHashMap<String, String>()
 
 		val duplicateTokens = HashSet<String>()
 		val duplicateFunctions = HashSet<String>()

@@ -17,7 +17,7 @@ val ARB_point_parameters = "ARBPointParameters".nativeClassGL("ARB_point_paramet
 
 		The raster brightness of a point is a function of the point area, point color, point transparency, and the response of the display's electron gun and
 		phosphor. The point area and the point transparency are derived from the point size, currently provided with the {@code size} parameter of
-		GL11#PointSize().
+		#PointSize().
 
 		The primary motivation is to allow the size of a point to be affected by distance attenuation. When distance attenuation has an effect, the final point
 		size decreases as the distance of the point from the eye increases.

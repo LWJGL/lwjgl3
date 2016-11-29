@@ -52,7 +52,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		To facilitate efficient switching between collections of framebuffer-attachable images, this extension introduces another new GL object, called a
 		framebuffer object. A framebuffer object contains the state that defines the traditional GL framebuffer, including its set of images. Prior to this
 		extension, it was the window-system which defined and managed this collection of images, traditionally by grouping them into a "drawable". The
-		window-system API's would also provide a function (i.e., WGL##wglMakeCurrent, GLX##glXMakeCurrent, aglSetDrawable, etc.) to bind a drawable with a GL
+		window-system API's would also provide a function (i.e., WGL#wglMakeCurrent, GLX#glXMakeCurrent, aglSetDrawable, etc.) to bind a drawable with a GL
 		context (as is done in the ${WGL_ARB_pbuffer.link} extension). In this extension however, this functionality is subsumed by the GL and the GL provides
 		the function BindFramebuffer to bind a framebuffer object to the current context. Later, the context can bind back to the window-system-provided
 		framebuffer in order to display rendered content.
@@ -76,20 +76,20 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		follows:
 
 		The new operation RenderbufferStorageMultisample() allocates storage for a renderbuffer object that can be used as a multisample buffer. A multisample
-		render buffer image differs from a single-sample render buffer image in that a multisample image has a number of GL13#SAMPLES that is greater than zero.
+		render buffer image differs from a single-sample render buffer image in that a multisample image has a number of #SAMPLES that is greater than zero.
 		No method is provided for creating multisample texture images.
 
-		All of the framebuffer-attachable images attached to a framebuffer object must have the same number of GL13#SAMPLES or else the framebuffer object is
+		All of the framebuffer-attachable images attached to a framebuffer object must have the same number of #SAMPLES or else the framebuffer object is
 		not "framebuffer complete". If a framebuffer object with multisample attachments is "framebuffer complete", then the framebuffer object behaves as if
-		GL13#SAMPLE_BUFFERS is one.
+		#SAMPLE_BUFFERS is one.
 
-		In traditional multisample rendering, where #DRAW_FRAMEBUFFER_BINDING is zero and GL13#SAMPLE_BUFFERS is one, the GL spec states that "the color sample
+		In traditional multisample rendering, where #DRAW_FRAMEBUFFER_BINDING is zero and #SAMPLE_BUFFERS is one, the GL spec states that "the color sample
 		values are resolved to a single, displayable color each time a pixel is updated." There are, however, several modern hardware implementations that do
 		not actually resolve for each sample update, but instead postpones the resolve operation to a later time and resolve a batch of sample updates at a
 		time. This is OK as long as the implementation behaves "as if" it had resolved a sample-at-a-time. Unfortunately, however, honoring the "as if" rule can
 		sometimes degrade performance.
 
-		In contrast, when #DRAW_FRAMEBUFFER_BINDING is an application-created framebuffer object, GL13#MULTISAMPLE is enabled, and GL13#SAMPLE_BUFFERS is one,
+		In contrast, when #DRAW_FRAMEBUFFER_BINDING is an application-created framebuffer object, #MULTISAMPLE is enabled, and #SAMPLE_BUFFERS is one,
 		there is no implicit per-sample-update resolve. Instead, the application explicitly controls when the resolve operation is performed. The resolve
 		operation is affected by calling BlitFramebuffer where the source is a multisample application-created framebuffer object and the destination is a
 		single-sample framebuffer object (either application-created or window-system provided).
@@ -106,7 +106,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		situations:
 		${ul(
 			"Two contexts, which shared renderbuffers, might perform competing resolve operations into the same single-sample buffer with ambiguous results.",
-			"It would have introduced the unfortunate ability to use the single-sample buffer as a texture while GL13#MULTISAMPLE is enabled."
+			"It would have introduced the unfortunate ability to use the single-sample buffer as a texture while #MULTISAMPLE is enabled."
 		)}
 
 		Using #BlitFramebuffer() as an explicit resolve to serialize access to the multisampled contents and eliminate the implicit per-sample resolve operation, we avoid both of these problems.
@@ -121,7 +121,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		to the buffers, so the OpenGL implementation can provide an interface to applications where it appears the one merged buffer is composed of two logical buffers.
 
 		One disadvantage of this scheme is that OpenGL lacks any means by which this packed data can be handled efficiently. For example, when an application
-		reads from the 24-bit depth buffer, using the type GL11#UNSIGNED_SHORT will lose 8 bits of data, while GL11#UNSIGNED_INT has 8 too many. Both require
+		reads from the 24-bit depth buffer, using the type #UNSIGNED_SHORT will lose 8 bits of data, while #UNSIGNED_INT has 8 too many. Both require
 		expensive format conversion operations. A 24-bit format would be no more suitable, because it would also suffer from the unaligned memory accesses that
 		made the standalone 24-bit depth buffer an unattractive proposition in the first place.
 
@@ -129,22 +129,22 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		time. Currently this requires two separate operations, reducing performance. Since the buffers are interleaved, drawing to or reading from both should
 		be no more expensive than using just one; in some cases, it may even be cheaper.
 
-		This extension provides a new data format, #DEPTH_STENCIL, that can be used with the GL11#DrawPixels(), GL11#ReadPixels(), and GL11#CopyPixels()
+		This extension provides a new data format, #DEPTH_STENCIL, that can be used with the #DrawPixels(), #ReadPixels(), and #CopyPixels()
 		commands, as well as a packed data type, #UNSIGNED_INT_24_8, that is meant to be used with #DEPTH_STENCIL. No other data types are supported with
 		#DEPTH_STENCIL. If ${ARB_depth_texture.link} or SGIX_depth_texture is supported, #DEPTH_STENCIL/#UNSIGNED_INT_24_8 data can also be used for textures;
 		this provides a more efficient way to supply data for a 24-bit depth texture.
 
 		#DEPTH_STENCIL data, when passed through the pixel path, undergoes both depth and stencil operations. The depth data is scaled and biased by the current
-		GL11#DEPTH_SCALE and GL11#DEPTH_BIAS, while the stencil data is shifted and offset by the current GL11#INDEX_SHIFT and GL11#INDEX_OFFSET. The stencil
+		#DEPTH_SCALE and #DEPTH_BIAS, while the stencil data is shifted and offset by the current #INDEX_SHIFT and #INDEX_OFFSET. The stencil
 		data is also put through the stencil-to-stencil pixel map.
 
-		GL11#DrawPixels() of #DEPTH_STENCIL data operates similarly to that of GL11#STENCIL_INDEX data, bypassing the OpenGL fragment pipeline entirely, unlike
-		the treatment of GL11#DEPTH_COMPONENT data. The stencil and depth masks are applied, as are the pixel ownership and scissor tests, but all other
+		#DrawPixels() of #DEPTH_STENCIL data operates similarly to that of #STENCIL_INDEX data, bypassing the OpenGL fragment pipeline entirely, unlike
+		the treatment of #DEPTH_COMPONENT data. The stencil and depth masks are applied, as are the pixel ownership and scissor tests, but all other
 		operations are skipped.
 
-		GL11#ReadPixels() of #DEPTH_STENCIL data reads back a rectangle from both the depth and stencil buffers.
+		#ReadPixels() of #DEPTH_STENCIL data reads back a rectangle from both the depth and stencil buffers.
 
-		GL11#CopyPixels() of #DEPTH_STENCIL data copies a rectangle from both the depth and stencil buffers. Like glDrawPixels, it applies both the stencil and
+		#CopyPixels() of #DEPTH_STENCIL data copies a rectangle from both the depth and stencil buffers. Like glDrawPixels, it applies both the stencil and
 		depth masks but skips the remainder of the OpenGL fragment pipeline.
 
 		glTex[Sub]Image[1,2,3]D of #DEPTH_STENCIL data loads depth and stencil data into a depth_stencil texture. #GetTexImage() of #DEPTH_STENCIL data can be
@@ -154,7 +154,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		#DEPTH_STENCIL internal format is attached to both the depth and stencil attachment points of a framebuffer object, then it becomes both the depth and
 		stencil buffers of the framebuffer. This fits nicely with hardware that interleaves both depth and stencil data into a single buffer. When a texture
 		with #DEPTH_STENCIL data is bound for texturing, only the depth component is accessible through the texture fetcher. The stencil data can be written
-		with TexImage or CopyTexImage, and can be read with GL11#GetTexImage(). When a #DEPTH_STENCIL image is attached to the stencil attachment of the bound
+		with TexImage or CopyTexImage, and can be read with #GetTexImage(). When a #DEPTH_STENCIL image is attached to the stencil attachment of the bound
 		framebuffer object, the stencil data can be accessed through any operation that reads from or writes to the framebuffer's stencil buffer.
 
 		Glossary of Helpful Terms

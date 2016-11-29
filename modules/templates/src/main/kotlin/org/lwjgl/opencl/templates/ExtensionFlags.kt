@@ -159,8 +159,8 @@ val amd_compile_options = EXT_FLAG.nativeClassCL("amd_compile_options", AMD) {
 		)}
 		To avoid source changes, there are two environment variables that can be used to change CL options during the runtime:
 		${ul(
-			"AMD_OCL_BUILD_OPTIONS &ndash; Overrides the CL options specified in CL10#BuildProgram().",
-			"AMD_OCL_BUILD_OPTIONS_APPEND &ndash; Appends options to the options specified in CL10#BuildProgram()."
+			"AMD_OCL_BUILD_OPTIONS &ndash; Overrides the CL options specified in #BuildProgram().",
+			"AMD_OCL_BUILD_OPTIONS_APPEND &ndash; Appends options to the options specified in #BuildProgram()."
 		)}
 		"""
 }
@@ -169,8 +169,8 @@ val amd_event_callback = EXT_FLAG.nativeClassCL("amd_event_callback", AMD) {
 		"""
 		When true, the $extensionLink extension is supported.
 
-		This extension provides the ability to register event callbacks for states other than CL10#COMPLETE. The full set of event states are allowed:
-		CL10#QUEUED, CL10#SUBMITTED, and CL10#RUNNING.
+		This extension provides the ability to register event callbacks for states other than #COMPLETE. The full set of event states are allowed:
+		#QUEUED, #SUBMITTED, and #RUNNING.
 		"""
 }
 val amd_fp64 = EXT_FLAG.nativeClassCL("amd_fp64", AMD) {

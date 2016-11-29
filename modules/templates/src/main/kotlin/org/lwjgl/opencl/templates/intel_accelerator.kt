@@ -17,7 +17,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 		API, but they are always associated with a specific acceleration engine type, which is assigned by the application at accelerator object creation time.
 		Descriptors are used to assign acceleration engine-specific properties to the accelerator objects. This mechanism of specialized creation with generic
 		referencing is analogous to the way image objects are managed in the OpenCL 1.2 runtime API via generic cl_mem referencing but specialized
-		descriptor-based creation with CL12#CreateImage().
+		descriptor-based creation with #CreateImage().
 
 		Each accelerator object is assigned a unique type id. Vendors are freely encouraged to define new accelerator types and ids. This base extension
 		provides unified mechanism for the creation and lifetime management of new accelerator types, but the semantics and creation descriptors of these types

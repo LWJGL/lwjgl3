@@ -27,8 +27,8 @@ val GLX_ARB_robustness_application_isolation = "GLXARBRobustnessApplicationIsola
 
 	IntConstant(
 		"""
-		Accepted as a bit in the attribute value for GLXARBCreateContext#CONTEXT_FLAGS_ARB in the {@code attrib_list} argument to
-		GLXARBCreateContext#CreateContextAttribsARB().
+		Accepted as a bit in the attribute value for GLXARBCreateContext#GLX_CONTEXT_FLAGS_ARB in the {@code attrib_list} argument to
+		GLXARBCreateContext#glXCreateContextAttribsARB().
 		""",
 
 		"CONTEXT_RESET_ISOLATION_BIT_ARB"..0x00000008

@@ -7,10 +7,10 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-val INVALID_IMAGE_DESCRIPTOR = "CL12#INVALID_IMAGE_DESCRIPTOR"
-val INVALID_COMPILER_OPTIONS = "CL12#INVALID_COMPILER_OPTIONS"
-val INVALID_LINKER_OPTIONS = "CL12#INVALID_LINKER_OPTIONS"
-val INVALID_DEVICE_PARTITION_COUNT = "CL12#INVALID_DEVICE_PARTITION_COUNT"
+val INVALID_IMAGE_DESCRIPTOR = "#INVALID_IMAGE_DESCRIPTOR"
+val INVALID_COMPILER_OPTIONS = "#INVALID_COMPILER_OPTIONS"
+val INVALID_LINKER_OPTIONS = "#INVALID_LINKER_OPTIONS"
+val INVALID_DEVICE_PARTITION_COUNT = "#INVALID_DEVICE_PARTITION_COUNT"
 
 val CL12 = "CL12".nativeClassCL("CL12") {
 	documentation = "The core OpenCL 1.2 functionality."
@@ -88,7 +88,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"""
 		Split the aggregate device into as many smaller aggregate devices as can be created, each containing {@code n} compute units. The value {@code n} is
-		passed as the value accompanying this property. If {@code n} does not divide evenly into #DEVICE_PARTITION_MAX_COMPUTE_UNITS, then the
+		passed as the value accompanying this property. If {@code n} does not divide evenly into {@code DEVICE_PARTITION_MAX_COMPUTE_UNITS}, then the
 		remaining compute units are not used.
 		""",
 
@@ -102,7 +102,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 
 		The number of non-zero count entries in the list may not exceed #DEVICE_PARTITION_MAX_SUB_DEVICES.
 
-		The total number of compute units specified may not exceed #DEVICE_PARTITION_MAX_COMPUTE_UNITS.
+		The total number of compute units specified may not exceed {@code DEVICE_PARTITION_MAX_COMPUTE_UNITS}.
 		""",
 
 		"DEVICE_PARTITION_BY_COUNTS"..0x1087
@@ -124,7 +124,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			device into sub-devices comprised of compute units that share memory subsystems at this level.
 			"""
 		)}
-		The user may determine what happened by calling CL10#GetDeviceInfo()(#DEVICE_PARTITION_TYPE) on the sub-devices.
+		The user may determine what happened by calling #GetDeviceInfo()(#DEVICE_PARTITION_TYPE) on the sub-devices.
 		""",
 
 		"DEVICE_PARTITION_BY_AFFINITY_DOMAIN"..0x1088
@@ -283,7 +283,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"RetainDevice",
 		"""
 		Increments the device reference count if {@code device} is a valid sub-device created by a call to #CreateSubDevices(). If {@code device} is a
-		root level device i.e. a {@code cl_device_id} returned by CL10#GetDeviceIDs(), the device reference count remains unchanged.
+		root level device i.e. a {@code cl_device_id} returned by #GetDeviceIDs(), the device reference count remains unchanged.
 		""",
 
 		cl_device_id.IN("device", "the device to retain"),
@@ -303,7 +303,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"ReleaseDevice",
 		"""
 		Decrements the device reference count if {@code device} is a valid sub-device created by a call to #CreateSubDevices(). If {@code device} is a
-		root level device i.e. a {@code cl_device_id} returned by CL10#GetDeviceIDs(), the device reference count remains unchanged.
+		root level device i.e. a {@code cl_device_id} returned by #GetDeviceIDs(), the device reference count remains unchanged.
 
 		After the {@code device} reference count becomes zero and all the objects attached to {@code device} (such as command-queues) are released, the device
 		object is deleted.
@@ -394,8 +394,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"""
 			$INVALID_DEVICE_PARTITION_COUNT if the partition name specified in {@code properties} is #DEVICE_PARTITION_BY_COUNTS and the
 			number of sub-devices requested exceeds #DEVICE_PARTITION_MAX_SUB_DEVICES or the total number of compute units requested exceeds
-			#DEVICE_PARTITION_MAX_COMPUTE_UNITS for {@code in_device}, or the number of compute units requested for one or more sub-devices is less
-			than zero or the number of sub-devices requested exceeds #DEVICE_PARTITION_MAX_COMPUTE_UNITS for {@code in_device}.
+			{@code DEVICE_PARTITION_MAX_COMPUTE_UNITS} for {@code in_device}, or the number of compute units requested for one or more sub-devices is less
+			than zero or the number of sub-devices requested exceeds {@code DEVICE_PARTITION_MAX_COMPUTE_UNITS} for {@code in_device}.
 			""",
 			OORE,
 			OOHME
@@ -425,18 +425,18 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			a bit-field that is used to specify allocation and usage information about the image memory object being created.
 
 			For all image types except #MEM_OBJECT_IMAGE1D_BUFFER, if value specified for {@code flags} is 0, the default is used which is
-			CL10#MEM_READ_WRITE.
+			#MEM_READ_WRITE.
 
-			For CL12#MEM_OBJECT_IMAGE1D_BUFFER image type, if the CL10#MEM_READ_WRITE, CL10#MEM_READ_ONLY or CL10#MEM_WRITE_ONLY
+			For #MEM_OBJECT_IMAGE1D_BUFFER image type, if the #MEM_READ_WRITE, #MEM_READ_ONLY or #MEM_WRITE_ONLY
 			values are not specified in {@code flags}, they are inherited from the corresponding memory access qualifers associated with buffer. The
-			CL10#MEM_USE_HOST_PTR, CL10#MEM_ALLOC_HOST_PTR and CL10#MEM_COPY_HOST_PTR values cannot be specified in {@code flags}
-			but are inherited from the corresponding memory access qualifiers associated with buffer. If CL10#MEM_COPY_HOST_PTR is specified in the
+			#MEM_USE_HOST_PTR, #MEM_ALLOC_HOST_PTR and #MEM_COPY_HOST_PTR values cannot be specified in {@code flags}
+			but are inherited from the corresponding memory access qualifiers associated with buffer. If #MEM_COPY_HOST_PTR is specified in the
 			memory access qualifier values associated with buffer it does not imply any additional copies when the sub-buffer is created from buffer. If the
 			#MEM_HOST_WRITE_ONLY, #MEM_HOST_READ_ONLY or #MEM_HOST_NO_ACCESS values are not specified in {@code flags}, they
 			are inherited from the corresponding memory access qualifiers associated with buffer.
 			""",
 			"""
-			CL10#MEM_READ_WRITE CL10#MEM_WRITE_ONLY CL10#MEM_READ_ONLY CL10#MEM_USE_HOST_PTR CL10#MEM_ALLOC_HOST_PTR CL10#MEM_COPY_HOST_PTR #MEM_HOST_WRITE_ONLY
+			#MEM_READ_WRITE #MEM_WRITE_ONLY #MEM_READ_ONLY #MEM_USE_HOST_PTR #MEM_ALLOC_HOST_PTR #MEM_COPY_HOST_PTR #MEM_HOST_WRITE_ONLY
 			#MEM_HOST_READ_ONLY #MEM_HOST_NO_ACCESS
 			"""
 		),
@@ -462,8 +462,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 
 				tr(td("#MEM_OBJECT_IMAGE1D"), td("&#x2265; {@code image_row_pitch}")),
 				tr(td("#MEM_OBJECT_IMAGE1D_BUFFER"), td("&#x2265; {@code image_row_pitch}")),
-				tr(td("CL10#MEM_OBJECT_IMAGE2D"), td("&#x2265; {@code image_row_pitch * image_height}")),
-				tr(td("CL10#MEM_OBJECT_IMAGE3D"), td("&#x2265; {@code image_slice_pitch * image_depth}")),
+				tr(td("#MEM_OBJECT_IMAGE2D"), td("&#x2265; {@code image_row_pitch * image_height}")),
+				tr(td("#MEM_OBJECT_IMAGE3D"), td("&#x2265; {@code image_slice_pitch * image_depth}")),
 				tr(td("#MEM_OBJECT_IMAGE1D_ARRAY"), td("&#x2265; {@code image_slice_pitch * image_array_size}")),
 				tr(td("#MEM_OBJECT_IMAGE2D_ARRAY"), td("&#x2265; {@code image_slice_pitch * image_array_size}"))
 			)}
@@ -478,32 +478,32 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		${ul(
 			ICE,
 			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
-			"CL10#INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
+			"#INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
 			"""
-			CL10#INVALID_IMAGE_FORMAT_DESCRIPTOR if a 2D image is created from a buffer and the row pitch and base address alignment does not follow the rules
+			#INVALID_IMAGE_FORMAT_DESCRIPTOR if a 2D image is created from a buffer and the row pitch and base address alignment does not follow the rules
 			described for creating a 2D image from a buffer.
 			""",
-			"CL10#INVALID_IMAGE_FORMAT_DESCRIPTOR if a 2D image is created from a 2D image object and the rules described above are not followed.",
+			"#INVALID_IMAGE_FORMAT_DESCRIPTOR if a 2D image is created from a 2D image object and the rules described above are not followed.",
 			"#INVALID_IMAGE_DESCRIPTOR if values specified in {@code image_desc} are not valid or if {@code image_desc} is $NULL.",
-			"CL10#INVALID_IMAGE_SIZE if image dimensions specified in {@code image_desc} exceed the maximum image dimensions for all devices in context.",
+			"#INVALID_IMAGE_SIZE if image dimensions specified in {@code image_desc} exceed the maximum image dimensions for all devices in context.",
 			"""
-			$INVALID_HOST_PTR if {@code host_ptr} is $NULL and CL10#MEM_USE_HOST_PTR or CL10#MEM_COPY_HOST_PTR are set in flags or if {@code host_ptr} is not
-			$NULL but CL10#MEM_COPY_HOST_PTR or CL10#MEM_USE_HOST_PTR are not set in flags.
+			$INVALID_HOST_PTR if {@code host_ptr} is $NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in flags or if {@code host_ptr} is not
+			$NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
 			""",
 			"""
-			CL10#INVALID_VALUE if an image buffer is being created and the buffer object was created with CL10#MEM_WRITE_ONLY and flags specifies
-			CL10#MEM_READ_WRITE or CL10#MEM_READ_ONLY, or if the buffer object was created with CL10#MEM_READ_ONLY and flags specifies CL10#MEM_READ_WRITE or
-			CL10#MEM_WRITE_ONLY, or if flags specifies CL10#MEM_USE_HOST_PTR or CL10#MEM_ALLOC_HOST_PTR or CL10#MEM_COPY_HOST_PTR.
+			#INVALID_VALUE if an image buffer is being created and the buffer object was created with #MEM_WRITE_ONLY and flags specifies
+			#MEM_READ_WRITE or #MEM_READ_ONLY, or if the buffer object was created with #MEM_READ_ONLY and flags specifies #MEM_READ_WRITE or
+			#MEM_WRITE_ONLY, or if flags specifies #MEM_USE_HOST_PTR or #MEM_ALLOC_HOST_PTR or #MEM_COPY_HOST_PTR.
 			""",
 			"""
-			CL10#INVALID_VALUE if an image buffer is being created or an image is being created from another memory object (image or buffer) and the
+			#INVALID_VALUE if an image buffer is being created or an image is being created from another memory object (image or buffer) and the
 			{@code mem_object} object was created with #MEM_HOST_WRITE_ONLY and flags specifies #MEM_HOST_READ_ONLY, or if {@code mem_object} was created with
 			#MEM_HOST_READ_ONLY and flags specifies #MEM_HOST_WRITE_ONLY, or if {@code mem_object} was created with #MEM_HOST_NO_ACCESS and flags specifies
 			#MEM_HOST_READ_ONLY or #MEM_HOST_WRITE_ONLY.
 			""",
-			"CL10#IMAGE_FORMAT_NOT_SUPPORTED if the {@code image_format} is not supported.",
-			"CL10#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for image object.",
-			"CL10#INVALID_OPERATION if there are no devices in context that support images.",
+			"#IMAGE_FORMAT_NOT_SUPPORTED if the {@code image_format} is not supported.",
+			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for image object.",
+			"#INVALID_OPERATION if there are no devices in context that support images.",
 			OORE,
 			OOHME
 		)}
@@ -552,8 +552,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 		Compiles a program's source for all the devices or a specific device(s) in the OpenCL context associated with {@code program}. The pre-processor runs
 		before the program sources are compiled. The compiled binary is built for all devices associated with {@code program} or the list of devices specified.
-		The compiled binary can be queried using CL10#GetProgramInfo()(program, CL10#PROGRAM_BINARIES, &hellip;) and can be specified
-		to CL10#CreateProgramWithBinary() to create a new program object.
+		The compiled binary can be queried using #GetProgramInfo()(program, #PROGRAM_BINARIES, &hellip;) and can be specified
+		to #CreateProgramWithBinary() to create a new program object.
 		""",
 
 		cl_program.IN("program", "the program object that is the compilation target"),
@@ -575,7 +575,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		),
 		PointerArray(cl_program, "input_header")..nullable..const..cl_program_p.IN(
 			"input_headers",
-			"an array of program embedded headers created with CL10#CreateProgramWithSource()"
+			"an array of program embedded headers created with #CreateProgramWithSource()"
 		),
 		PointerArray(cl_charASCII_p, "header_include_name")..nullable..const..cl_charASCII_pp.IN(
 			"header_include_names",
@@ -621,15 +621,15 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"$INVALID_COMPILER_OPTIONS if the compiler options specified by options are invalid.",
 			"""
 			$INVALID_OPERATION if the compilation or build of a program executable for any of the devices listed in {@code device_list} by a
-			previous call to {@code clCompileProgram} or CL10#BuildProgram() for program has not completed.
+			previous call to {@code clCompileProgram} or #BuildProgram() for program has not completed.
 			""",
-			"CL10#COMPILER_NOT_AVAILABLE if a compiler is not available i.e. CL10#DEVICE_COMPILER_AVAILABLE is set to $FALSE.",
+			"#COMPILER_NOT_AVAILABLE if a compiler is not available i.e. #DEVICE_COMPILER_AVAILABLE is set to $FALSE.",
 			"""
 			#COMPILE_PROGRAM_FAILURE if there is a failure to compile the program source. This error will be returned if {@code clCompileProgram}
 			does not return until the compile has completed.
 			""",
 			"$INVALID_OPERATION if there are kernel objects attached to {@code program}.",
-			"$INVALID_OPERATION if {@code program} has no source i.e. it has not been created with CL10#CreateProgramWithSource().",
+			"$INVALID_OPERATION if {@code program} has no source i.e. it has not been created with #CreateProgramWithSource().",
 			OORE,
 			OOHME
 		)}
@@ -641,7 +641,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 		Links a set of compiled program objects and libraries for all the devices or a specific device(s) in the OpenCL context and creates an executable.
 		{@code clLinkProgram} creates a new program object which contains this executable. The executable binary can be queried using
-		CL10#GetProgramInfo()(program, CL10#PROGRAM_BINARIES, &hellip;) and can be specified to CL10#CreateProgramWithBinary() to
+		#GetProgramInfo()(program, #PROGRAM_BINARIES, &hellip;) and can be specified to #CreateProgramWithBinary() to
 		create a new program object.
 
 		The devices associated with the returned program object will be the list of devices specified by {@code device_list} or if {@code device_list} is $NULL
@@ -730,7 +730,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"$INVALID_LINKER_OPTIONS if the linker options specified by {@code options} are invalid.",
 			"""
 			$INVALID_OPERATION if the compilation or build of a program executable for any of the devices listed in {@code device_list} by a
-			previous call to #CompileProgram() or CL10#BuildProgram() for program has not completed.
+			previous call to #CompileProgram() or #BuildProgram() for program has not completed.
 			""",
 			"""
 			$INVALID_OPERATION if the rules for devices containing compiled binaries or libraries as described in {@code input_programs} argument
@@ -749,7 +749,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 		Allows the implementation to release the resources allocated by the OpenCL compiler for platform. This is a hint from the application and does not
 		guarantee that the compiler will not be used in the future or that the compiler will actually be unloaded by the implementation. Calls to
-		CL10#BuildProgram(), #CompileProgram() or #LinkProgram() after {@code clUnloadPlatformCompiler} will reload the compiler, if necessary, to build the
+		#BuildProgram(), #CompileProgram() or #LinkProgram() after {@code clUnloadPlatformCompiler} will reload the compiler, if necessary, to build the
 		appropriate program executable.
 		""",
 
@@ -768,8 +768,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"GetKernelArgInfo",
 		"""
 		Returns information about the arguments of a kernel. Kernel argument information is only available if the program object associated with kernel is
-		created with CL10#CreateProgramWithSource() and the program executable is built with the {@code -cl-kernel-arg-info} option specified in options
-		argument to CL10#BuildProgram() or #CompileProgram().
+		created with #CreateProgramWithSource() and the program executable is built with the {@code -cl-kernel-arg-info} option specified in options
+		argument to #BuildProgram() or #CompileProgram().
 		""",
 
 		cl_kernel.IN("kernel", "specifies the kernel object being queried"),
@@ -848,7 +848,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"$INVALID_VALUE if {@code offset} and {@code size} are not a multiple of {@code pattern_size}.",
 			IEWLE,
 			MSBOE("buffer"),
-			"CL10#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with {@code buffer}.",
+			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with {@code buffer}.",
 			OORE,
 			OOHME
 		)}
@@ -918,8 +918,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"$INVALID_VALUE if values in {@code origin} and {@code region} do not follow rules described in the argument description for {@code origin} and {@code region}.",
 			IEWLE,
 			"$INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for image are not supported by device associated with queue.",
-			"CL10#IMAGE_FORMAT_NOT_SUPPORTED if image format (image channel order and data type) for image are not supported by device associated with queue.",
-			"CL10#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with {@code image}.",
+			"#IMAGE_FORMAT_NOT_SUPPORTED if image format (image channel order and data type) for image are not supported by device associated with queue.",
+			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with {@code image}.",
 			OORE,
 			OOHME
 		)}
@@ -934,7 +934,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		performed ahead of the dependent commands. This allows a user to preemptively change the association of a memory object, through regular command queue
 		scheduling, in order to prepare for another upcoming command. This also permits an application to overlap the placement of memory objects with other
 		unrelated operations before these memory objects are needed potentially hiding transfer latencies. Once the event, returned from {@code clEnqueueMigrateMemObjects},
-		has been marked CL10#COMPLETE the memory objects specified in {@code mem_objects} have been successfully migrated to the device associated
+		has been marked #COMPLETE the memory objects specified in {@code mem_objects} have been successfully migrated to the device associated
 		with {@code command_queue}. The migrated memory object shall remain resident on the device until another command is enqueued that either implicitly or
 		explicitly migrates it away.
 
@@ -972,7 +972,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"$INVALID_VALUE if {@code num_mem_objects} is zero or if {@code mem_objects} is $NULL.",
 			"$INVALID_VALUE if {@code flags} is not 0 or is not any of the values described in the table above.",
 			IEWLE,
-			"CL10#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for the specified set of memory objects in {@code mem_objects}.",
+			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for the specified set of memory objects in {@code mem_objects}.",
 			OORE,
 			OOHME
 		)}

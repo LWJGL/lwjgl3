@@ -188,13 +188,17 @@ abstract class GeneratorTarget(
 	else
 		Parameter(this, name, paramType) { linkMode.appendLinks(javadoc, linksFromRegex(links)) }
 
-	protected fun linksFromRegex(pattern: String): String {
-		val regex = pattern.toRegex()
-		val tokens = Generator.tokens[packageName]!!.keys.filter { regex.matches(it) }
-		if (tokens.isEmpty())
-			throw IllegalStateException("Failed to match any tokens with regex: $pattern")
-
-		return tokens.sorted().joinToString(" #", prefix = "#")
+	protected fun linksFromRegex(pattern: String) = pattern.toRegex().let { regex ->
+		Generator.tokens[packageName]!!
+			.asSequence()
+			.mapNotNull { if (regex.matches(it.key)) it.key else null }
+			.joinToString(" #", prefix = "#")
+			.let {
+				if (it.isEmpty())
+					throw IllegalStateException("Failed to match any tokens with regex: $pattern")
+				else
+					it
+			}
 	}
 
 	infix fun Int.x(other: Int) = this * other
@@ -214,8 +218,8 @@ abstract class GeneratorTarget(
 
 	open fun processDocumentation(documentation: String, forcePackage: Boolean = false): String = processDocumentation(documentation, "", "", forcePackage)
 
-	open fun hasField(field: String): Boolean = false
-	open fun hasMethod(method: String): Boolean = false
+	open fun getFieldLink(field: String): String? = null
+	open fun getMethodLink(method: String): String? = null
 
 	protected fun processDocumentation(documentation: String, prefixConstant: String, prefixMethod: String, forcePackage: Boolean = false): String {
 		val matcher = LINKS.matcher(documentation)
@@ -242,25 +246,20 @@ abstract class GeneratorTarget(
 					buffer.append("see ")
 
 				var className = matcher.group(1)
-				val classElement = matcher.group(3)!!
+				var classElement = matcher.group(3)!!
 
 				val linkType = if (classElement.endsWith(')')) LinkType.METHOD else LinkType.FIELD
 				var prefix = if (linkType === LinkType.FIELD) prefixConstant else prefixMethod
 
-				buffer.append(when (linkMethod.count { it == '#' }) {
-					1    -> {
-						className.let {
-							if (it != null)
-								return@let
-
-							val qualifiedLink = if (linkType === LinkType.FIELD) {
-								if (hasField(classElement)) return@let else Generator.tokens[packageName]!![classElement]
-							} else if (classElement[classElement.length - 2] != '(') {
-								return@let
-							} else {
-								val methodName = classElement.substring(0, classElement.length - 2)
-								if (hasMethod(methodName)) return@let else Generator.functions[packageName]!![methodName]
-							}
+				buffer.append(linkMethod.count { it == '#' }.let { hashes ->
+					if (hashes == 1) {
+						if (className == null) {
+							val qualifiedLink = if (linkType === LinkType.FIELD)
+								getFieldLink(classElement) ?: Generator.tokens[packageName]!![classElement]
+							else
+								classElement.substring(0, classElement.lastIndexOf('(')).let {
+									getMethodLink(it) ?: Generator.functions[packageName]!![it]
+								}
 
 							if (qualifiedLink != null) {
 								val hashIndex = qualifiedLink.indexOf('#')
@@ -269,18 +268,24 @@ abstract class GeneratorTarget(
 								if (forcePackage)
 									className = "$packageName.$className"
 
-								prefix = qualifiedLink.substring(hashIndex + 1, qualifiedLink.length - classElement.length)
-							}/* else
-								println("Failed to resolve link: ${matcher.group()}")*/
+								prefix = qualifiedLink.substring(hashIndex + 1, qualifiedLink.length - if (linkType === LinkType.FIELD)
+									classElement.length
+								else
+									classElement.lastIndexOf('(') + 2
+								)
+							} else if (this.packageName != "org.lwjgl.vulkan")
+								throw IllegalStateException("Failed to resolve link: ${matcher.group()} in ${this.className}")
+						} else {
+							if (classElement.startsWith(prefix))
+								classElement = classElement.substring(prefix.length)
+							else
+								prefix = ""
 						}
 						linkType.create(this.className, prefix, className, classElement, if (this is NativeClass) this.postfix else "", custom = false)
-					}
-					2    ->
-						if (className == null && linkType === LinkType.FIELD)
-							"{@link $classElement}"
-						else
-							linkType.create(this.className, prefix, className, classElement, "", custom = true)
-					else -> throw IllegalStateException("Unsupported link type: $linkType")
+					} else if (hashes == 2 && className == null && linkType === LinkType.FIELD)
+						"{@link $classElement}"
+					else
+						throw IllegalStateException("Unsupported link syntax: ${matcher.group()} in ${this.className}")
 				})
 			}
 

@@ -1004,19 +1004,19 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			tr(td("#FLOATING"), td("#FALSE"), td("#TRUE or #FALSE")),
 			tr(td("#MAXIMIZED"), td("#FALSE"), td("#TRUE or #FALSE")),
 
-			tr(td("#RED_BITS"), td("8"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
-			tr(td("#GREEN_BITS"), td("8"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
-			tr(td("#BLUE_BITS"), td("8"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
-			tr(td("#ALPHA_BITS"), td("8"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
-			tr(td("#DEPTH_BITS"), td("24"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
-			tr(td("#STENCIL_BITS"), td("8"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
-			tr(td("#ACCUM_RED_BITS"), td("0"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
-			tr(td("#ACCUM_GREEN_BITS"), td("0"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
-			tr(td("#ACCUM_BLUE_BITS"), td("0"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
-			tr(td("#ACCUM_ALPHA_BITS"), td("0"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
-			tr(td("#AUX_BUFFERS"), td("0"), td("0 to Integer##MAX_VALUE")),
-			tr(td("#SAMPLES"), td("0"), td("0 to Integer##MAX_VALUE")),
-			tr(td("#REFRESH_RATE"), td("#DONT_CARE"), td("0 to Integer##MAX_VALUE or #DONT_CARE")),
+			tr(td("#RED_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
+			tr(td("#GREEN_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
+			tr(td("#BLUE_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
+			tr(td("#ALPHA_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
+			tr(td("#DEPTH_BITS"), td("24"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
+			tr(td("#STENCIL_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
+			tr(td("#ACCUM_RED_BITS"), td("0"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
+			tr(td("#ACCUM_GREEN_BITS"), td("0"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
+			tr(td("#ACCUM_BLUE_BITS"), td("0"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
+			tr(td("#ACCUM_ALPHA_BITS"), td("0"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
+			tr(td("#AUX_BUFFERS"), td("0"), td("0 to Integer#MAX_VALUE")),
+			tr(td("#SAMPLES"), td("0"), td("0 to Integer#MAX_VALUE")),
+			tr(td("#REFRESH_RATE"), td("#DONT_CARE"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
 
 			tr(td("#STEREO"), td("#FALSE"), td("#TRUE or #FALSE")),
 			tr(td("#SRGB_CAPABLE"), td("#FALSE"), td("#TRUE or #FALSE")),
@@ -1042,7 +1042,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN(
 			"hint",
 			"the window hint to set",
-			"${WindowHints.replace("GLFW#ICONIFIED ", "")} ${ClientAPIHints.replace("GLFW#CONTEXT_REVISION ", "")} $PixelFormatHints"
+			"${WindowHints.replace("#ICONIFIED ", "")} ${ClientAPIHints.replace("#CONTEXT_REVISION ", "")} $PixelFormatHints"
 		),
 		int.IN("value", "the new value of the window hint"),
 		since = "version 2.2"
@@ -1545,7 +1545,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN(
 			"attrib",
 			"the <a href=\"http://www.glfw.org/docs/latest/window.html\\#window_attribs\">window attribute</a> whose value to return",
-			"${WindowHints.replace("GLFW#AUTO_ICONIFY ", "")} ${ClientAPIHints.replace("GLFW#(CONTEXT_RELEASE_BEHAVIOR|CONTEXT_NO_ERROR) ", "")}"
+			"${WindowHints.replace("#AUTO_ICONIFY ", "")} ${ClientAPIHints.replace("GLFW#(CONTEXT_RELEASE_BEHAVIOR|CONTEXT_NO_ERROR) ", "")}"
 		),
 
 		returnDoc = "the value of the attribute, or zero if an error occured",
@@ -2008,7 +2008,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		If the cursor is disabled (with #CURSOR_DISABLED) then the cursor position is unbounded and limited only by the minimum and maximum values of a
 		<b>double</b>.
 
-		The coordinates can be converted to their integer equivalents with the Math##floor() function. Casting directly to an integer type works for positive
+		The coordinates can be converted to their integer equivalents with the Math#floor() function. Casting directly to an integer type works for positive
 		coordinates, but fails for negative ones.
 
 		Any or all of the position arguments may be $NULL. If an error occurs, all non-$NULL position arguments will be set to zero.
@@ -2577,7 +2577,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		As this functions retrieves and searches one or more extension strings each call, it is recommended that you cache its results if it is going to be used
 		frequently. The extension strings will not change during the lifetime of a context, so there is no danger in doing this.
 
-		This function does not apply to Vulkan. If you are using Vulkan, see GLFWVulkan#GetRequiredInstanceExtensions(),
+		This function does not apply to Vulkan. If you are using Vulkan, see #GetRequiredInstanceExtensions(),
 		{@code vkEnumerateInstanceExtensionProperties} and {@code vkEnumerateDeviceExtensionProperties} instead.
 
 		This function may be called from any thread.
@@ -2598,7 +2598,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		A context must be current on the calling thread.  Calling this function without a current context will cause a #NO_CURRENT_CONTEXT error.
 
-		This function does not apply to Vulkan. If you are rendering with Vulkan, GLFWVulkan#GetInstanceProcAddress(), {@code vkGetInstanceProcAddr} and
+		This function does not apply to Vulkan. If you are rendering with Vulkan, #GetInstanceProcAddress(), {@code vkGetInstanceProcAddr} and
 		{@code vkGetDeviceProcAddr} instead.
 
 		Notes:

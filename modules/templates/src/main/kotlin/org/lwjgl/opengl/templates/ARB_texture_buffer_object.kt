@@ -17,7 +17,7 @@ val ARB_texture_buffer_object = "ARBTextureBufferObject".nativeClassGL("ARB_text
 		array of texels of the specified format.
 
 		The use of a buffer object to provide storage allows the texture data to be specified in a number of different ways: via buffer object loads
-		(GL15#BufferData()), direct CPU writes (GL15#MapBuffer()), framebuffer readbacks (EXT_pixel_buffer_object extension). A buffer object can also be loaded
+		(#BufferData()), direct CPU writes (#MapBuffer()), framebuffer readbacks (EXT_pixel_buffer_object extension). A buffer object can also be loaded
 		by transform feedback (NV_transform_feedback extension), which captures selected transformed attributes of vertices processed by the GL. Several of
 		these mechanisms do not require an extra data copy, which would be required when using conventional TexImage-like entry points.
 
@@ -57,7 +57,7 @@ val ARB_texture_buffer_object = "ARBTextureBufferObject".nativeClassGL("ARB_text
 		"""
 		Attaches the storage for the buffer object named {@code buffer} to the active buffer texture, and specifies an internal format for the texel array found
 		in the attached buffer object. If {@code buffer} is zero, any buffer object attached to the buffer texture is detached, and no new buffer object is
-		attached. If {@code buffer} is non-zero, but is not the name of an existing buffer object, the error GL11#INVALID_OPERATION is generated.
+		attached. If {@code buffer} is non-zero, but is not the name of an existing buffer object, the error #INVALID_OPERATION is generated.
 
 		When a buffer object is attached to a buffer texture, the buffer object's data store is taken as the texture's texel array. The number of texels in the
 		buffer texture's texel array is given by 

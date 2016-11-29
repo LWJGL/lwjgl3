@@ -28,7 +28,7 @@ val GLX_EXT_swap_control = "GLXEXTSwapControl".nativeClassGLX("GLX_EXT_swap_cont
 		"SwapIntervalEXT",
 		"""
 		Specifies the minimum number of video frame periods per buffer swap for a particular GLX drawable (e.g. a value of two means that the color buffers will
-		be swapped at most every other video frame). The interval takes effect when GLX#SwapBuffers() is first called on the drawable subsequent to the
+		be swapped at most every other video frame). The interval takes effect when #SwapBuffers() is first called on the drawable subsequent to the
 		{@code glXSwapIntervalEXT} call.
 		""",
 

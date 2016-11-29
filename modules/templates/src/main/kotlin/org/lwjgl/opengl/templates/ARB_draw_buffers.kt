@@ -49,8 +49,8 @@ val ARB_draw_buffers = "ARBDrawBuffers".nativeClassGL("ARB_draw_buffers", postfi
 			"bufs",
 			"a buffer of symbolic constants specifying the buffer to which each output color is written",
 			"""
-			GL11#NONE GL11#FRONT_LEFT GL11#FRONT_RIGHT GL11#BACK_LEFT GL11#BACK_RIGHT GL11#AUX0 GL11#AUX1 GL11#AUX2 GL11#AUX3
-			GL30#COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
+			#NONE #FRONT_LEFT #FRONT_RIGHT #BACK_LEFT #BACK_RIGHT #AUX0 #AUX1 #AUX2 #AUX3
+			#COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
 			"""
 		)
 	)

@@ -12,8 +12,8 @@ val ARB_base_instance = "ARBBaseInstance".nativeClassGL("ARB_base_instance") {
 		Native bindings to the $registryLink extension.
 
 		This extension allows the offset within buffer objects used for instanced rendering to be specified. This is congruent with the {@code first} parameter
-		in GL11#DrawArrays() and the {@code basevertex} parameter in GL11#DrawElements(). When instanced rendering is performed (for example, through
-		GL31#DrawArraysInstanced()), instanced vertex attributes whose vertex attribute divisors are non-zero are fetched from enabled vertex arrays
+		in #DrawArrays() and the {@code basevertex} parameter in #DrawElements(). When instanced rendering is performed (for example, through
+		#DrawArraysInstanced()), instanced vertex attributes whose vertex attribute divisors are non-zero are fetched from enabled vertex arrays
 		per-instance rather than per-vertex. However, in unextended OpenGL, there is no way to define the offset into those arrays from which the attributes are
 		fetched. This extension adds that offset in the form of a {@code <baseinstance>} parameter to several new procedures.
 

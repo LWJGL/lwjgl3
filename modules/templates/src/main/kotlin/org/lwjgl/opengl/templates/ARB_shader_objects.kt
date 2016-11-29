@@ -124,7 +124,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"CreateShaderObjectARB",
 		"Creates a shader object.",
 
-		GLenum.IN("shaderType", "the type of the shader object to be created", "ARBVertexShader#VERTEX_SHADER_ARB ARBFragmentShader#FRAGMENT_SHADER_ARB")
+		GLenum.IN("shaderType", "the type of the shader object to be created", "#VERTEX_SHADER_ARB #FRAGMENT_SHADER_ARB")
 	)
 
 	void(
@@ -154,10 +154,10 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"CompileShaderARB",
 		"""
 		Compiles a shader object. Each shader object has a Boolean status, #OBJECT_COMPILE_STATUS_ARB, that is modified as a result of compilation. This status
-		can be queried with #GetObjectParameteriARB(). This status will be set to GL11#TRUE if the shader {@code shaderObj} was compiled without errors and is
-		ready for use, and GL11#FALSE otherwise. Compilation can fail for a variety of reasons as listed in the OpenGL Shading Language Specification. If
+		can be queried with #GetObjectParameterivARB(). This status will be set to #TRUE if the shader {@code shaderObj} was compiled without errors and is
+		ready for use, and #FALSE otherwise. Compilation can fail for a variety of reasons as listed in the OpenGL Shading Language Specification. If
 		CompileShaderARB failed, any information about a previous compile is lost and is not restored. Thus a failed compile does not restore the old state of
-		{@code shaderObj}. If {@code shaderObj} does not reference a shader object, the error GL11#INVALID_OPERATION is generated.
+		{@code shaderObj}. If {@code shaderObj} does not reference a shader object, the error #INVALID_OPERATION is generated.
 
 		Note that changing the source code of a shader object, through ShaderSourceARB, does not change its compile status #OBJECT_COMPILE_STATUS_ARB.
 
@@ -194,11 +194,11 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Links a program object.
 
 		Each program object has a Boolean status, #OBJECT_LINK_STATUS_ARB, that is modified as a result of linking. This status can be queried with
-		#GetObjectParameteriARB(). This status will be set to GL11#TRUE if a valid executable is created, and GL11#FALSE otherwise. Linking can fail for a
+		#GetObjectParameterivARB(). This status will be set to #TRUE if a valid executable is created, and #FALSE otherwise. Linking can fail for a
 		variety of reasons as specified in the OpenGL Shading Language Specification. Linking will also fail if one or more of the shader objects, attached to
 		{@code programObj}, are not compiled successfully, or if more active uniform or active sampler variables are used in {@code programObj} than allowed.
 		If LinkProgramARB failed, any information about a previous link is lost and is not restored. Thus a failed link does not restore the old state of
-		{@code programObj}. If {@code programObj} is not of type #PROGRAM_OBJECT_ARB, the error GL11#INVALID_OPERATION is generated.
+		{@code programObj}. If {@code programObj} is not of type #PROGRAM_OBJECT_ARB, the error #INVALID_OPERATION is generated.
 
 		Each program object has an information log that is modified as a result of a link operation. This information log can be queried with #GetInfoLogARB()
 		to obtain more information about the link operation.
@@ -212,9 +212,9 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"""
 		Installs the executable code as part of current rendering state if the program object {@code programObj} contains valid executable code, i.e. has been
 		linked successfully. If UseProgramObjectARB is called with the handle set to 0, it is as if the GL had no programmable stages and the fixed
-		functionality paths will be used instead. If {@code programObj} cannot be made part of the current rendering state, an GL11#INVALID_OPERATION error will
+		functionality paths will be used instead. If {@code programObj} cannot be made part of the current rendering state, an #INVALID_OPERATION error will
 		be generated and the current rendering state left unmodified. This error will be set, for example, if {@code programObj} has not been linked
-		successfully. If {@code programObj} is not of type #PROGRAM_OBJECT_ARB, the error GL11#INVALID_OPERATION is generated.
+		successfully. If {@code programObj} is not of type #PROGRAM_OBJECT_ARB, the error #INVALID_OPERATION is generated.
 
 		While a program object is in use, applications are free to modify attached shader objects, compile attached shader objects, attach additional shader
 		objects, and detach shader objects. This does not affect the link status #OBJECT_LINK_STATUS_ARB of the program object. This does not affect the
@@ -231,10 +231,10 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"ValidateProgramARB",
 		"""
 		Validates the program object {@code programObj} against the GL state at that moment. Each program object has a Boolean status,
-		#OBJECT_VALIDATE_STATUS_ARB, that is modified as a result of validation. This status can be queried with #GetObjectParameteriARB(). If validation
-		succeeded this status will be set to GL11#TRUE, otherwise it will be set to GL11#FALSE. If validation succeeded the program object is guaranteed to
+		#OBJECT_VALIDATE_STATUS_ARB, that is modified as a result of validation. This status can be queried with #GetObjectParameterivARB(). If validation
+		succeeded this status will be set to #TRUE, otherwise it will be set to #FALSE. If validation succeeded the program object is guaranteed to
 		execute, given the current GL state. If validation failed, the program object is guaranteed to not execute, given the current GL state. If
-		{@code programObj} is not of type #PROGRAM_OBJECT_ARB, the error GL11#INVALID_OPERATION is generated.
+		{@code programObj} is not of type #PROGRAM_OBJECT_ARB, the error #INVALID_OPERATION is generated.
 
 		ValidateProgramARB will validate at least as much as is done when a rendering command is issued, and it could validate more. For example, it could give
 		a hint on how to optimize some piece of shader code.
@@ -402,7 +402,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const..GLint_p.IN("value", "the values to load")
 	)
 
-	val transpose = GLboolean.IN("transpose", "if GL11#FALSE, the matrix is specified in column major order, otherwise in row major order")
+	val transpose = GLboolean.IN("transpose", "if #FALSE, the matrix is specified in column major order, otherwise in row major order")
 
 	void(
 		"UniformMatrix2fvARB",
@@ -459,10 +459,10 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		string is called the info log and can be obtained with this command.
 
 		This string will be null terminated. The number of characters in the info log is given by #OBJECT_INFO_LOG_LENGTH_ARB, which can be queried with
-		#GetObjectParameteriARB(). If {@code obj} is a shader object, the returned info log will either be an empty string or it will contain
+		#GetObjectParameterivARB(). If {@code obj} is a shader object, the returned info log will either be an empty string or it will contain
 		information about the last compilation attempt for that object. If {@code obj} is a program object, the returned info log will either be an empty string
 		or it will contain information about the last link attempt or last validation attempt for that object. If {@code obj} is not of type #PROGRAM_OBJECT_ARB
-		or #SHADER_OBJECT_ARB, the error GL11#INVALID_OPERATION is generated. If an error occurred, the return parameters {@code length} and {@code infoLog}
+		or #SHADER_OBJECT_ARB, the error #INVALID_OPERATION is generated. If an error occurred, the return parameters {@code length} and {@code infoLog}
 		will be unmodified.
 
 		The info log is typically only useful during application development and an application should not expect different OpenGL implementations to produce
@@ -489,8 +489,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"GetAttachedObjectsARB",
 		"""
 		Returns the handles of objects attached to {@code containerObj} in {@code obj}. . The number of objects attached to {@code containerObj} is given by
-		#OBJECT_ATTACHED_OBJECTS_ARB, which can be queried with #GetObjectParameteriARB(). If {@code containerObj} is not of type #PROGRAM_OBJECT_ARB, the
-		error GL11#INVALID_OPERATION is generated. If an error occurred, the return parameters {@code count} and {@code obj} will be unmodified.
+		#OBJECT_ATTACHED_OBJECTS_ARB, which can be queried with #GetObjectParameterivARB(). If {@code containerObj} is not of type #PROGRAM_OBJECT_ARB, the
+		error #INVALID_OPERATION is generated. If an error occurred, the return parameters {@code count} and {@code obj} will be unmodified.
 		""",
 
 		GLhandleARB.IN("containerObj", "the container object to query"),
@@ -508,7 +508,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Returns the location of uniform variable {@code name}. {@code name} has to be a null terminated string, without white space. The value of -1 will be
 		returned if {@code name} does not correspond to an active uniform variable name in {@code programObj} or if {@code name} starts with the reserved prefix
 		"gl_". If {@code programObj} has not been successfully linked, or if {@code programObj} is not of type #PROGRAM_OBJECT_ARB, the error
-		GL11#INVALID_OPERATION is generated. The location of a uniform variable does not change until the next link command is issued.
+		#INVALID_OPERATION is generated. The location of a uniform variable does not change until the next link command is issued.
 
 		A valid {@code name} cannot be a structure, an array of structures, or a subcomponent of a vector or a matrix. In order to identify a valid {@code name},
 		the "." (dot) and "[]" operators can be used in {@code name} to operate on a structure or to operate on an array.
@@ -529,12 +529,12 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		
 		This command provides information about the uniform selected by {@code index}. The {@code index} of 0 selects the first active uniform, and
 		{@code index} of #OBJECT_ACTIVE_UNIFORMS_ARB - 1 selects the last active uniform. The value of #OBJECT_ACTIVE_UNIFORMS_ARB can be queried with
-		#GetObjectParameteriARB(). If {@code index} is greater than or equal to #OBJECT_ACTIVE_UNIFORMS_ARB, the error GL11#INVALID_VALUE is generated.
+		#GetObjectParameterivARB(). If {@code index} is greater than or equal to #OBJECT_ACTIVE_UNIFORMS_ARB, the error #INVALID_VALUE is generated.
 		
 		If an error occurred, the return parameters {@code length}, {@code size}, {@code type} and {@code name} will be unmodified.
 		
 		The returned uniform name can be the name of built-in uniform state as well. The length of the longest uniform name in {@code programObj} is given by
-		#OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB, which can be queried with #GetObjectParameteriARB().
+		#OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB, which can be queried with #GetObjectParameterivARB().
 
 		Each uniform variable, declared in a shader, is broken down into one or more strings using the "." (dot) and "[]" operators, if necessary, to the point
 		that it is legal to pass each string back into #GetUniformLocationARB(). Each of these strings constitutes one active uniform, and each string is
@@ -596,8 +596,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Returns the string making up the source code for a shader object.
 		
 		The string {@code source} is a concatenation of the strings passed to OpenGL using #ShaderSourceARB(). The length of this concatenation is given by
-		#OBJECT_SHADER_SOURCE_LENGTH_ARB, which can be queried with #GetObjectParameteriARB(). If {@code obj} is not of type #SHADER_OBJECT_ARB, the error
-		GL11#INVALID_OPERATION is generated. If an error occurred, the return parameters {@code length} and {@code source} will be unmodified.
+		#OBJECT_SHADER_SOURCE_LENGTH_ARB, which can be queried with #GetObjectParameterivARB(). If {@code obj} is not of type #SHADER_OBJECT_ARB, the error
+		#INVALID_OPERATION is generated. If an error occurred, the return parameters {@code length} and {@code source} will be unmodified.
 		""",
 
 		GLhandleARB.IN("obj", "the shader object to query"),

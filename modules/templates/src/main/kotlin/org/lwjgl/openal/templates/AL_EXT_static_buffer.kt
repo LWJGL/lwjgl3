@@ -12,7 +12,7 @@ val AL_EXT_static_buffer = "EXTStaticBuffer".nativeClassAL("EXT_static_buffer") 
 		"""
 		Native bindings to the $extensionName extension.
 
-		This extension provides a means for the caller to avoid the overhead associated with the AL10#BufferData() call which performs a physical copy of the
+		This extension provides a means for the caller to avoid the overhead associated with the #BufferData() call which performs a physical copy of the
 		data provided by the caller to internal buffers. When using the $extensionName extension, OpenAL's internal buffers use the data pointer provided by
 		the caller for all data access.
 		"""

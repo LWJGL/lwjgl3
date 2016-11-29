@@ -24,7 +24,7 @@ val ALC_EXT_DEDICATED = "EXTDedicated".nativeClassALC("EXT_DEDICATED", prefix = 
 	IntConstant(
 		"$extensionName tokens.",
 
-		"DEDICATED_GAIN "..0x1,
+		"DEDICATED_GAIN"..0x1,
 		"EFFECT_DEDICATED_DIALOGUE"..0x9001,
 		"EFFECT_DEDICATED_LOW_FREQUENCY_EFFECT"..0x9000
 	)

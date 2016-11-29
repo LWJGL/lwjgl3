@@ -314,7 +314,7 @@ val ARB_shader_draw_parameters = EXT_FLAG.nativeClassGL("ARB_shader_draw_paramet
 		purpose.
 
 		Additionally, this extension adds a further built-in variable, {@code gl_DrawID} to the shading language. This variable contains the index of the draw
-		currently being processed by a Multi* variant of a drawing command (such as GL14#MultiDrawElements() or GL43#MultiDrawArraysIndirect()).
+		currently being processed by a Multi* variant of a drawing command (such as #MultiDrawElements() or #MultiDrawArraysIndirect()).
 
 		Requires ${GL31.core}. ${GL33.promoted}
 		"""
@@ -591,7 +591,7 @@ val ARB_sparse_texture2 = EXT_FLAG.nativeClassGL("ARB_sparse_texture2", postfix 
 		    """,
 			"""
 		    Standard implementation-independent virtual page sizes for internal formats required to be supported with sparse textures. These standard sizes can
-			be requested by leaving ARBSparseTexture#VIRTUAL_PAGE_SIZE_INDEX_ARB at its initial value (0).
+			be requested by leaving #VIRTUAL_PAGE_SIZE_INDEX_ARB at its initial value (0).
 		    """,
 			"""
 		    Support for creating sparse multisample and multisample array textures is added. However, the virtual page sizes for such textures remain fully
@@ -642,7 +642,7 @@ val ARB_texture_env_crossbar = EXT_FLAG.nativeClassGL("ARB_texture_env_crossbar"
 		"""
 		When true, the $registryLink extension is supported.
 
-		This extension adds the capability to use the texture color from other texture units as sources to the ARBTextureEnvCombine#COMBINE_ARB environment
+		This extension adds the capability to use the texture color from other texture units as sources to the #COMBINE_ARB environment
 		function. The ${ARB_texture_env_combine.link} extension defined texture environment functions which could use the color from the current texture unit
 		as a source. This extension adds the ability to use the color from any texture unit as a source.
 
@@ -667,15 +667,15 @@ val ARB_texture_query_levels = EXT_FLAG.nativeClassGL("ARB_texture_query_levels"
 
 		This extension provides a new set of texture functions ({@code textureQueryLevels}) in the OpenGL Shading Language that exposes the number of accessible
 		mipmap levels in the texture associated with a GLSL sampler variable. The set of accessible levels includes all the levels of the texture defined either
-		through TexImage*, TexStorage*, or TextureView* (${ARB_texture_view.link}) APIs that are not below the GL12#TEXTURE_BASE_LEVEL or above the
-		GL12#TEXTURE_MAX_LEVEL parameters. For textures defined with TexImage*, the set of resident levels is somewhat implementation-dependent. For fully
+		through TexImage*, TexStorage*, or TextureView* (${ARB_texture_view.link}) APIs that are not below the #TEXTURE_BASE_LEVEL or above the
+		#TEXTURE_MAX_LEVEL parameters. For textures defined with TexImage*, the set of resident levels is somewhat implementation-dependent. For fully
 		defined results, applications should use TexStorage*&#47;TextureView unless the texture has a full mipmap chain and is used with a mipmapped minification
 		filter.
 
 		These functions means that shaders are not required to manually recompute, approximate, or maintain a uniform holding a pre-computed level count, since
 		the true level count is already available to the implementation. This value can be used to avoid black or leaking pixel artifacts for rendering methods
 		which are using texture images as memory pages (eg: virtual textures); methods that can't only rely on the fixed pipeline texture functions which take
-		advantage of GL12#TEXTURE_MAX_LEVEL for their sampling.
+		advantage of #TEXTURE_MAX_LEVEL for their sampling.
 
 		Requires ${GL30.core} and GLSL 1.30. ${GL43.promoted}
 		"""
@@ -696,7 +696,7 @@ val ARB_texture_stencil8 = EXT_FLAG.nativeClassGL("ARB_texture_stencil8") {
 		"""
 		When true, the $registryLink extension is supported.
 
-		This extension accepts GL30#STENCIL_INDEX8 as a texture internal format, and adds STENCIL_INDEX8 to the required internal format list. This removes the
+		This extension accepts #STENCIL_INDEX8 as a texture internal format, and adds STENCIL_INDEX8 to the required internal format list. This removes the
 		need to use renderbuffers if a stencil-only format is desired.
 
 		${GL44.promoted}
@@ -710,7 +710,7 @@ val ARB_vertex_type_10f_11f_11f_rev = EXT_FLAG.nativeClassGL("ARB_vertex_type_10
 		This extension a new vertex attribute data format: a packed 11.11.10 unsigned float vertex data format. This vertex data format can be used to describe
 		a compressed 3 component stream of values that can be represented by 10- or 11-bit unsigned floating point values.
 
-		The GL30#UNSIGNED_INT_10F_11F_11F_REV vertex attribute type is equivalent to the GL30#R11F_G11F_B10F texture internal format.
+		The #UNSIGNED_INT_10F_11F_11F_REV vertex attribute type is equivalent to the #R11F_G11F_B10F texture internal format.
 
 		Requires ${GL30.core} and ${ARB_vertex_type_2_10_10_10_rev.link}. ${GL44.promoted}
 		"""
@@ -1276,8 +1276,8 @@ val WGL_EXT_swap_control_tear = EXT_FLAG.nativeClassWGL("WGL_EXT_swap_control_te
 		When true, the ${registryLink("EXT", "wgl_swap_control_tear")} extension is supported.
 
 		This extension extends the existing ${WGL_EXT_swap_control.link} extension by allowing a negative {@code interval} parameter to
-		WGLEXTSwapControl#SwapIntervalEXT(). The negative {@code interval} allows late swaps to occur without synchronization to the video frame. This reduces
-		the visual stutter on late frames and reduces the stall on subsequent frames.
+		WGLEXTSwapControl#wglSwapIntervalEXT(). The negative {@code interval} allows late swaps to occur without synchronization to the video frame. This
+		reduces the visual stutter on late frames and reduces the stall on subsequent frames.
 		"""
 }
 val WGL_NV_DX_interop2 = EXT_FLAG.nativeClassWGL("WGL_NV_DX_interop2", postfix = NV) {

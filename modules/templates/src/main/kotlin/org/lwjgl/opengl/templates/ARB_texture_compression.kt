@@ -102,7 +102,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		"CompressedTexImage1DARB",
 		"Specifies a one-dimensional texture image in a compressed format.",
 
-		GLenum.IN("target", "the target texture", "GL11#TEXTURE_1D GL11#PROXY_TEXTURE_1D"),
+		GLenum.IN("target", "the target texture", "#TEXTURE_1D #PROXY_TEXTURE_1D"),
 		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
 		GLsizei.IN("width", "the width of the texture image"),
@@ -147,7 +147,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		"CompressedTexSubImage1DARB",
 		"Respecifies only a subregion of an existing 1D texel array, with incoming data stored in a specific compressed image format.",
 
-		GLenum.IN("target", "the target texture", "GL11#TEXTURE_1D"),
+		GLenum.IN("target", "the target texture", "#TEXTURE_1D"),
 		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		GLint.IN("xoffset", "a texel offset in the x direction within the texture array"),
 		GLsizei.IN("width", "the width of the texture subimage"),
@@ -160,7 +160,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		"GetCompressedTexImageARB",
 		"Returns a compressed texture image.",
 
-		GLenum.IN("target", "the target texture", "GL11#TEXTURE_1D $TEXTURE_2D_FACE_TARGETS $TEXTURE_3D_TARGETS"),
+		GLenum.IN("target", "the target texture", "#TEXTURE_1D $TEXTURE_2D_FACE_TARGETS $TEXTURE_3D_TARGETS"),
 		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		Check(
 			expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB)", debug = true

@@ -180,23 +180,23 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		"""
 		Controls the volume of debug output in the active debug group, by disabling specific or groups of messages.
 
-		If {@code enabled} is GLES20#TRUE, the referenced subset of messages will be enabled. If GLES20#FALSE, then those messages will be disabled.
+		If {@code enabled} is #TRUE, the referenced subset of messages will be enabled. If #FALSE, then those messages will be disabled.
 
 		This command can reference different subsets of messages by first considering the set of all messages, and filtering out messages based on the following
 		ways:
 		${ul(
 			"""
-			If {@code source}, {@code type}, or {@code severity} is GLES20#DONT_CARE, the messages from all sources, of all types, or of all severities are
+			If {@code source}, {@code type}, or {@code severity} is #DONT_CARE, the messages from all sources, of all types, or of all severities are
 			referenced respectively.
 			""",
 			"""
-		    When values other than GLES20#DONT_CARE are specified, all messages whose source, type, or severity match the specified {@code source}, {@code type},
+		    When values other than #DONT_CARE are specified, all messages whose source, type, or severity match the specified {@code source}, {@code type},
 		    or {@code severity} respectively will be referenced.
 		    """,
 			"""
 		    If {@code count} is greater than zero, then {@code ids} is an array of {@code count} message IDs for the specified combination of {@code source} and
-		    {@code type}. In this case, if {@code source} or {@code type} is GLES20#DONT_CARE, or {@code severity} is not GLES20#DONT_CARE, the error
-		    GLES20#INVALID_OPERATION is generated.
+		    {@code type}. In this case, if {@code source} or {@code type} is #DONT_CARE, or {@code severity} is not #DONT_CARE, the error
+		    #INVALID_OPERATION is generated.
 		    """
 		)}
 		Unrecognized message IDs in {@code ids} are ignored. If {@code count} is zero, the value if {@code ids} is ignored.
@@ -225,7 +225,7 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 
 		The value of {@code id} specifies the ID for the message and {@code severity} indicates its severity level as defined by the caller. The string
 		{@code buf} contains the string representation of the message. The parameter {@code length} contains the number of characters in {@code buf}. If
-		{@code length} is negative, it is implied that {@code buf} contains a null terminated string. The error GLES20#INVALID_VALUE will be generated if the
+		{@code length} is negative, it is implied that {@code buf} contains a null terminated string. The error #INVALID_VALUE will be generated if the
 		number of characters in {@code buf}, excluding the null terminator when {@code length} is negative, is not less than the value of
 		#MAX_DEBUG_MESSAGE_LENGTH_KHR.
 
@@ -292,7 +292,7 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		array to hold up to {@code count} elements. The string representations of all fetched messages are stored in the {@code messageLog} array. If multiple
 		messages are fetched, their strings are concatenated into the same {@code messageLog} array and will be separated by single null terminators. The last
 		string in the array will also be null-terminated. The maximum size of {@code messageLog}, including the space used by all null terminators, is given by
-		{@code bufSize}. If {@code bufSize} is less than zero and {@code messageLog} is not $NULL, an GLES20#INVALID_VALUE error will be generated. If a message's
+		{@code bufSize}. If {@code bufSize} is less than zero and {@code messageLog} is not $NULL, an #INVALID_VALUE error will be generated. If a message's
 		string, including its null terminator, can not fully fit within the {@code messageLog} array's remaining space, then that message and any subsequent
 		messages will not be fetched and will remain in the log. The string lengths stored in the array {@code lengths} include the space for the null terminator of each string.
 
@@ -334,8 +334,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		additional control of the debug output volume will only apply within the active debug group and the debug groups pushed on top of the active debug
 		group.
 
-		An GLES20#INVALID_ENUM error is generated if the value of {@code source} is neither #DEBUG_SOURCE_APPLICATION_KHR nor #DEBUG_SOURCE_THIRD_PARTY_KHR. An
-		GLES20#INVALID_VALUE error is generated if {@code length} is negative and the number of characters in {@code message}, excluding the null-terminator,
+		An #INVALID_ENUM error is generated if the value of {@code source} is neither #DEBUG_SOURCE_APPLICATION_KHR nor #DEBUG_SOURCE_THIRD_PARTY_KHR. An
+		#INVALID_VALUE error is generated if {@code length} is negative and the number of characters in {@code message}, excluding the null-terminator,
 		is not less than the value of #MAX_DEBUG_MESSAGE_LENGTH_KHR.
 		""",
 
@@ -366,7 +366,7 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		GLenum.IN(
 			"identifier",
 			"the namespace from which the name of the object is allocated",
-			DebugIdentifiers + " GLES20#TEXTURE GLES20#RENDERBUFFER GLES20#FRAMEBUFFER GLES30#TRANSFORM_FEEDBACK"
+			DebugIdentifiers + " #TEXTURE #RENDERBUFFER #FRAMEBUFFER #TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object to label"),
 		AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
@@ -380,7 +380,7 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		GLenum.IN(
 			"identifier",
 			"the namespace from which the name of the object is allocated",
-			DebugIdentifiers + " GLES20#TEXTURE GLES20#RENDERBUFFER GLES20#FRAMEBUFFER GLES30#TRANSFORM_FEEDBACK"
+			DebugIdentifiers + " #TEXTURE #RENDERBUFFER #FRAMEBUFFER #TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object whose label to retrieve"),
 		AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),

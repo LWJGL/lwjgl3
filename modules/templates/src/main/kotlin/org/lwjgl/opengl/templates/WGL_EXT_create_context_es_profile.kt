@@ -18,7 +18,7 @@ val WGL_EXT_create_context_es_profile = "WGLEXTCreateContextESProfile".nativeCla
 		"""
 
 	IntConstant(
-		"Accepted as a bit in the attribute value for WGLARBCreateContextProfile#CONTEXT_PROFILE_MASK_ARB in {@code attribList}.",
+		"Accepted as a bit in the attribute value for WGLARBCreateContextProfile#WGL_CONTEXT_PROFILE_MASK_ARB in {@code attribList}.",
 
 		"CONTEXT_ES_PROFILE_BIT_EXT"..0x00000004
 	)
@@ -35,7 +35,7 @@ val WGL_EXT_create_context_es2_profile = "WGLEXTCreateContextES2Profile".nativeC
 		"""
 
 	IntConstant(
-		"Accepted as a bit in the attribute value for WGLARBCreateContextProfile#CONTEXT_PROFILE_MASK_ARB in {@code attribList}.",
+		"Accepted as a bit in the attribute value for WGLARBCreateContextProfile#WGL_CONTEXT_PROFILE_MASK_ARB in {@code attribList}.",
 
 		"CONTEXT_ES2_PROFILE_BIT_EXT"..0x00000004
 	)

@@ -164,7 +164,7 @@ val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32"
 			"bytes",
 			"""
 			the size, in bytes, of the structure pointed to by {@code pixelFormatDescriptor}. The {@code wglDescribePixelFormat} function stores no more than
-			{@code bytes} bytes of data to that structure. Set this value to PIXELFORMATDESCRIPTOR##SIZEOF.
+			{@code bytes} bytes of data to that structure. Set this value to PIXELFORMATDESCRIPTOR#SIZEOF.
 			"""
 		),
 		nullable..LPPIXELFORMATDESCRIPTOR.OUT(

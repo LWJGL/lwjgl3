@@ -44,7 +44,7 @@ val ARB_buffer_storage = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage") 
 	)
 
 	IntConstant(
-		"Accepted by the {@code barriers} parameter of GL42#MemoryBarrier().",
+		"Accepted by the {@code barriers} parameter of #MemoryBarrier().",
 
 		"CLIENT_MAPPED_BUFFER_BARRIER_BIT"..0x00004000
 	)

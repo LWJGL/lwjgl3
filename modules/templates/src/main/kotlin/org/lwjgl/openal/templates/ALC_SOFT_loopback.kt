@@ -40,7 +40,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	).javaDocLinks
 
 	IntConstant(
-		"Accepted as part of the {@code attrList} parameter of ALC10#CreateContext().",
+		"Accepted as part of the {@code attrList} parameter of #CreateContext().",
 
 		"FORMAT_CHANNELS_SOFT"..0x1990,
 		"FORMAT_TYPE_SOFT"..0x1991
@@ -58,7 +58,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		A loopback device behaves largely the same as a playback device. You may query playback state and error codes, and create contexts, which can then be
 		set as current to generate sources and buffers like normal.
 
-		Note that loopback devices do not have either the ALC10#SYNC or ALC10#REFRESH attributes. Attempting to query them will result in an ALC10#INVALID_ENUM
+		Note that loopback devices do not have either the #SYNC or #REFRESH attributes. Attempting to query them will result in an ALC10#ALC_INVALID_ENUM
 		error.
 		""",
 
@@ -75,7 +75,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"IsRenderFormatSupportedSOFT",
 		"""
 		When creating contexts, the attribute list must specify the format used for rendering. This is done with the #FORMAT_CHANNELS_SOFT, #FORMAT_TYPE_SOFT,
-		and ALC10#FREQUENCY attributes. This controls the format of the audio subsequently rendered by the device.
+		and ALC10#ALC_FREQUENCY attributes. This controls the format of the audio subsequently rendered by the device.
 
 		To check if a particular rendering format is available, use this function.
 		""",

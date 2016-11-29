@@ -24,7 +24,7 @@ val intel_motion_estimation = "INTELMotionEstimation".nativeClassCL("intel_motio
 
 	IntConstant(
 		"""
-		Accepted as a type in the {@code accelerator_type} parameter of INTELAccelerator#CreateAcceleratorINTEL(). Creates a full-frame motion estimation
+		Accepted as a type in the {@code accelerator_type} parameter of #CreateAcceleratorINTEL(). Creates a full-frame motion estimation
 		accelerator.
 		""",
 

@@ -22,34 +22,34 @@ val ALC_SOFT_HRTF = "SOFTHRTF".nativeClassALC("SOFT_HRTF") {
 
 	IntConstant(
 		"""
-		Accepted as part of the {@code attrList} parameter of ALC10#CreateContext() and #ResetDeviceSOFT(), and as the {@code paramName} parameter of
-		ALC10#GetIntegerv().
+		Accepted as part of the {@code attrList} parameter of #CreateContext() and #ResetDeviceSOFT(), and as the {@code paramName} parameter of
+		ALC10#alcGetIntegerv().
 		""",
 
 		"HRTF_SOFT"..0x1992
 	)
 
 	IntConstant(
-		"Accepted as part of the {@code attrList} parameter of ALC10#CreateContext() and #ResetDeviceSOFT().",
+		"Accepted as part of the {@code attrList} parameter of #CreateContext() and #ResetDeviceSOFT().",
 
 		"HRTF_ID_SOFT"..0x1996
 	)
 
 	IntConstant(
-		"Accepted as part of the {@code attrList} parameter of ALC10#CreateContext() and #ResetDeviceSOFT(), for the #HRTF_SOFT attribute.",
+		"Accepted as part of the {@code attrList} parameter of #CreateContext() and #ResetDeviceSOFT(), for the #HRTF_SOFT attribute.",
 
 		"DONT_CARE_SOFT"..0x0002
 	)
 
 	IntConstant(
-		"Accepted as the {@code paramName} parameter of ALC10#GetIntegerv().",
+		"Accepted as the {@code paramName} parameter of ALC10#alcGetIntegerv().",
 
 		"HRTF_STATUS_SOFT"..0x1993,
 		"NUM_HRTF_SPECIFIERS_SOFT"..0x1994
 	)
 
 	IntConstant(
-		"Accepted as the {@code paramName} parameter of ALC10#GetString() and #GetStringiSOFT().",
+		"Accepted as the {@code paramName} parameter of ALC10#alcGetString() and #GetStringiSOFT().",
 
 		"HRTF_SPECIFIER_SOFT"..0x1995
 	)
@@ -87,21 +87,21 @@ val ALC_SOFT_HRTF = "SOFTHRTF".nativeClassALC("SOFT_HRTF") {
 
 		ALCdevice_p.IN(
 			"device",
-			"a handle to a valid playback device as returned by ALC10#OpenDevice(), otherwise the call fails and an ALC10#INVALID_DEVICE error is generated"
+			"a handle to a valid playback device as returned by #OpenDevice(), otherwise the call fails and an #INVALID_DEVICE error is generated"
 		),
 		nullable..NullTerminated..const..ALCint_p.IN(
 			"attrList",
 			"""
-			the same as what could be passed to ALC10#CreateContext(). The AL is allowed to ignore attributes and attribute value combinations the device
-			cannot support, for example if the device doesn't support the requested ALC10#FREQUENCY value, another value it does support may be set.
+			the same as what could be passed to #CreateContext(). The AL is allowed to ignore attributes and attribute value combinations the device
+			cannot support, for example if the device doesn't support the requested ALC10#ALC_FREQUENCY value, another value it does support may be set.
 			"""
 		),
 
 		returnDoc =
 		"""
-		on success the function returns ALC10#TRUE, and on failure the function returns ALC10#FALSE. Note that a return of ALC10#TRUE does not indicate any
-		attributes were honored, just that the device was successfully reset. If you need to know what the attributes are after a reset, query the device using
-		ALC10#GetIntegerv() with the relevant attributes.
+		on success the function returns ALC10#ALC_TRUE, and on failure the function returns ALC10#ALC_FALSE. Note that a return of ALC10#ALC_TRUE does not
+		indicate any attributes were honored, just that the device was successfully reset. If you need to know what the attributes are after a reset, query the
+		device using ALC10#alcGetIntegerv() with the relevant attributes.
 		"""
 	)
 }

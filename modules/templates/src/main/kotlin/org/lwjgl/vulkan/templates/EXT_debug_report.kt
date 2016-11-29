@@ -257,7 +257,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		VkInstance.IN("instance", "the instance the callback will be logged on."),
 		VkDebugReportFlagsEXT.IN("flags", "indicates the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
 		VkDebugReportObjectTypeEXT.IN("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of object being used or created at the time the event was triggered."),
-		uint64_t.IN("object", "object where the issue was detected. {@code object} may be #NULL_OBJECT if there is no object associated with the event."),
+		uint64_t.IN("object", "object where the issue was detected. {@code object} may be #NULL_HANDLE if there is no object associated with the event."),
 		size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the <em>location</em> of the trigger. This is an optional value."),
 		int32_t.IN("messageCode", "a layer-defined value indicating what test triggered this callback."),
 		const..charUTF8_p.IN("pLayerPrefix", "the abbreviation of the component making the callback."),

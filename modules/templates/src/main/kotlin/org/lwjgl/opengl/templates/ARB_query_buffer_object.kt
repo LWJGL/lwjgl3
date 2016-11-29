@@ -30,33 +30,29 @@ val ARB_query_buffer_object = "ARBQueryBufferObject".nativeClassGL("ARB_query_bu
 		"""
 
 	IntConstant(
-		"Accepted by the {@code pname} parameter of GL15#GetQueryObjecti(), GL15#GetQueryObjectui(), GL33#GetQueryObjecti64() and GL33#GetQueryObjectui64().",
+		"Accepted by the {@code pname} parameter of #GetQueryObjectiv(), #GetQueryObjectuiv(), #GetQueryObjecti64v() and #GetQueryObjectui64v().",
 
 		"QUERY_RESULT_NO_WAIT"..0x9194
 	)
 
 	IntConstant(
 		"""
-		Accepted by the {@code target} parameter of GL15#BindBuffer(), GL15#BufferData(), GL15#BufferSubData(),
-		GL15#MapBuffer(), GL15#UnmapBuffer(), GL30#MapBufferRange(), GL15#GetBufferSubData(),
-		GL15#GetBufferParameteri(), GL32#GetBufferParameteri64(), GL15#GetBufferPointer(),
-		GL43#ClearBufferSubData(), and the {@code readtarget} and {@code writetarget} parameters of GL31#CopyBufferSubData().
+		Accepted by the {@code target} parameter of #BindBuffer(), #BufferData(), #BufferSubData(), #MapBuffer(), #UnmapBuffer(), #MapBufferRange(),
+		#GetBufferSubData(), #GetBufferParameteriv(), #GetBufferParameteri64v(), #GetBufferPointerv(), #ClearBufferSubData(), and the {@code readtarget} and
+		{@code writetarget} parameters of #CopyBufferSubData().
 		""",
 
 		"QUERY_BUFFER"..0x9192
 	)
 
 	IntConstant(
-		"""
-		Accepted by the {@code pname} parameter of GL11#GetBoolean(), GL11#GetInteger(), GL11#GetFloat(),
-		and GL11#GetDouble().
-		""",
+		"Accepted by the {@code pname} parameter of #GetBooleanv(), #GetIntegerv(), #GetFloatv(), and #GetDoublev().",
 
 		"QUERY_BUFFER_BINDING"..0x9193
 	)
 
 	IntConstant(
-		"Accepted in the {@code barriers} bitfield in GL42#MemoryBarrier().",
+		"Accepted in the {@code barriers} bitfield in #MemoryBarrier().",
 
 		"QUERY_BUFFER_BARRIER_BIT"..0x00008000
 	)

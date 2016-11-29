@@ -368,23 +368,23 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"""
 		Controls the volume of debug output in the active debug group, by disabling specific or groups of messages.
 		
-		If {@code enabled} is GL11#TRUE, the referenced subset of messages will be enabled. If GL11#FALSE, then those messages will be disabled.
+		If {@code enabled} is #TRUE, the referenced subset of messages will be enabled. If #FALSE, then those messages will be disabled.
     
 		This command can reference different subsets of messages by first considering the set of all messages, and filtering out messages based on the following
 		ways:
 		${ul(
 			"""
-			If {@code source}, {@code type}, or {@code severity} is GL11#DONT_CARE, the messages from all sources, of all types, or of all severities are
+			If {@code source}, {@code type}, or {@code severity} is #DONT_CARE, the messages from all sources, of all types, or of all severities are
 			referenced respectively.
 			""",
 			"""
-		    When values other than GL11#DONT_CARE are specified, all messages whose source, type, or severity match the specified {@code source}, {@code type},
+		    When values other than #DONT_CARE are specified, all messages whose source, type, or severity match the specified {@code source}, {@code type},
 		    or {@code severity} respectively will be referenced.
 		    """,
 			"""
 		    If {@code count} is greater than zero, then {@code ids} is an array of {@code count} message IDs for the specified combination of {@code source} and
-		    {@code type}. In this case, if {@code source} or {@code type} is GL11#DONT_CARE, or {@code severity} is not GL11#DONT_CARE, the error
-		    GL11#INVALID_OPERATION is generated.
+		    {@code type}. In this case, if {@code source} or {@code type} is #DONT_CARE, or {@code severity} is not #DONT_CARE, the error
+		    #INVALID_OPERATION is generated.
 		    """
 		)}
 
@@ -413,7 +413,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		
 		The value of {@code id} specifies the ID for the message and {@code severity} indicates its severity level as defined by the caller. The string
 		{@code buf} contains the string representation of the message. The parameter {@code length} contains the number of characters in {@code buf}. If
-		{@code length} is negative, it is implied that {@code buf} contains a null terminated string. The error GL11#INVALID_VALUE will be generated if the
+		{@code length} is negative, it is implied that {@code buf} contains a null terminated string. The error #INVALID_VALUE will be generated if the
 		number of characters in {@code buf}, excluding the null terminator when {@code length} is negative, is not less than the value of
 		#MAX_DEBUG_MESSAGE_LENGTH.
 
@@ -480,7 +480,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		array to hold up to {@code count} elements. The string representations of all fetched messages are stored in the {@code messageLog} array. If multiple
 		messages are fetched, their strings are concatenated into the same {@code messageLog} array and will be separated by single null terminators. The last
 		string in the array will also be null-terminated. The maximum size of {@code messageLog}, including the space used by all null terminators, is given by
-		{@code bufSize}. If {@code bufSize} is less than zero and {@code messageLog} is not $NULL, an GL11#INVALID_VALUE error will be generated. If a message's
+		{@code bufSize}. If {@code bufSize} is less than zero and {@code messageLog} is not $NULL, an #INVALID_VALUE error will be generated. If a message's
 		string, including its null terminator, can not fully fit within the {@code messageLog} array's remaining space, then that message and any subsequent
 		messages will not be fetched and will remain in the log. The string lengths stored in the array {@code lengths} include the space for the null
 		terminator of each string.
@@ -490,7 +490,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		log. Thus to simply delete up to {@code count} messages from the message log while ignoring their attributes, the application can call the function
 		with null pointers for all attribute arrays.
 
-		If the context was created without the #CONTEXT_FLAG_DEBUG_BIT in the GL30#CONTEXT_FLAGS state, then the GL can opt to never add messages to the
+		If the context was created without the #CONTEXT_FLAG_DEBUG_BIT in the #CONTEXT_FLAGS state, then the GL can opt to never add messages to the
 		message log so GetDebugMessageLog will always return zero.
 		""",
 
@@ -514,8 +514,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		volume of debug output of the debug group previously residing on the top of the debug group stack. Because debug groups are strictly hierarchical, any
 		additional control of the debug output volume will only apply within the active debug group and the debug groups pushed on top of the active debug group.
 
-		An GL11#INVALID_ENUM error is generated if the value of {@code source} is neither #DEBUG_SOURCE_APPLICATION nor #DEBUG_SOURCE_THIRD_PARTY. An
-		GL11#INVALID_VALUE error is generated if {@code length} is negative and the number of characters in {@code message}, excluding the null-terminator, is
+		An #INVALID_ENUM error is generated if the value of {@code source} is neither #DEBUG_SOURCE_APPLICATION nor #DEBUG_SOURCE_THIRD_PARTY. An
+		#INVALID_VALUE error is generated if {@code length} is negative and the number of characters in {@code message}, excluding the null-terminator, is
 		not less than the value of #MAX_DEBUG_MESSAGE_LENGTH.
 		""",
 
@@ -533,8 +533,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		and #DEBUG_TYPE_POP_GROUP share a single namespace for message {@code id}. {@code severity} has the value #DEBUG_SEVERITY_NOTIFICATION. The {@code type}
 		has the value #DEBUG_TYPE_POP_GROUP. Popping a debug group restores the debug output volume control of the parent debug group.
 
-		Attempting to pop the default debug group off the stack generates a GL11#STACK_UNDERFLOW error; pushing a debug group onto a stack containing
-		#MAX_DEBUG_GROUP_STACK_DEPTH minus one elements will generate a GL11#STACK_OVERFLOW error.
+		Attempting to pop the default debug group off the stack generates a #STACK_UNDERFLOW error; pushing a debug group onto a stack containing
+		#MAX_DEBUG_GROUP_STACK_DEPTH minus one elements will generate a #STACK_OVERFLOW error.
 		"""
 	)
 
@@ -545,7 +545,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN(
 			"identifier",
 			"the namespace from which the name of the object is allocated",
-			DebugIdentifiers + " GL11#VERTEX_ARRAY GL11#TEXTURE GL30#RENDERBUFFER GL30#FRAMEBUFFER GL40#TRANSFORM_FEEDBACK"
+			DebugIdentifiers + " #VERTEX_ARRAY #TEXTURE #RENDERBUFFER #FRAMEBUFFER #TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object to label"),
 		AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
@@ -559,7 +559,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN(
 			"identifier",
 			"the namespace from which the name of the object is allocated",
-			DebugIdentifiers + " GL11#VERTEX_ARRAY GL11#TEXTURE GL30#RENDERBUFFER GL30#FRAMEBUFFER GL40#TRANSFORM_FEEDBACK"
+			DebugIdentifiers + " #VERTEX_ARRAY #TEXTURE #RENDERBUFFER #FRAMEBUFFER #TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object whose label to retrieve"),
 		AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
@@ -622,7 +622,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"FramebufferParameteri",
 		"Sets a named parameter of a framebuffer.",
 
-		GLenum.IN("target", "target of the operation", "GL30#READ_FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#FRAMEBUFFER"),
+		GLenum.IN("target", "target of the operation", "#READ_FRAMEBUFFER #DRAW_FRAMEBUFFER #FRAMEBUFFER"),
 		GLenum.IN("pname", "a token indicating the parameter to be modified", FramebufferParameters),
 		GLint.IN("param", "the new value for the parameter named {@code pname}")
 	)
@@ -631,7 +631,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"GetFramebufferParameteriv",
 		"Retrieves a named parameter from a framebuffer.",
 
-		GLenum.IN("target", "target of the operation", "GL30#READ_FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#FRAMEBUFFER"),
+		GLenum.IN("target", "target of the operation", "#READ_FRAMEBUFFER #DRAW_FRAMEBUFFER #FRAMEBUFFER"),
 		GLenum.IN("pname", "a token indicating the parameter to be retrieved", FramebufferParameters),
 		Check(1)..ReturnParam..GLint_p.OUT("params", "a variable to receive the value of the parameter named {@code pname}")
 	)
@@ -754,8 +754,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 			"target",
 			"the usage of the internal format",
 			"""
-			GL11#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL30#RENDERBUFFER GL31#TEXTURE_BUFFER GL32#TEXTURE_2D_MULTISAMPLE
-			GL32#TEXTURE_2D_MULTISAMPLE_ARRAY
+			#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS #RENDERBUFFER #TEXTURE_BUFFER #TEXTURE_2D_MULTISAMPLE
+			#TEXTURE_2D_MULTISAMPLE_ARRAY
 			"""
 		),
 		GLenum.IN("internalformat", "the internal format about which to retrieve information"),
@@ -808,7 +808,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"InvalidateFramebuffer",
 		"Invalidate the content some or all of a framebuffer object's attachments.",
 
-		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#READ_FRAMEBUFFER"),
+		GLenum.IN("target", "the target to which the framebuffer is attached", "#FRAMEBUFFER #DRAW_FRAMEBUFFER #READ_FRAMEBUFFER"),
 		AutoSize("attachments")..GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
 		SingleValue("attachment")..const..GLenum_p.IN("attachments", "the address of an array identifying the attachments to be invalidated")
 	)
@@ -817,7 +817,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"InvalidateSubFramebuffer",
 		"Invalidates the content of a region of some or all of a framebuffer object's attachments.",
 
-		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#READ_FRAMEBUFFER"),
+		GLenum.IN("target", "the target to which the framebuffer is attached", "#FRAMEBUFFER #DRAW_FRAMEBUFFER #READ_FRAMEBUFFER"),
 		AutoSize("attachments")..GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
 		SingleValue("attachment")..const..GLenum_p.IN("attachments", "an array identifying the attachments to be invalidated"),
 		GLint.IN("x", "the X offset of the region to be invalidated"),
@@ -894,7 +894,7 @@ for ( i = 0; i < primcount; i++ ) {
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-		GLenum.IN("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
+		GLenum.IN("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
 		Check("primcount * (stride == 0 ? (5 * 4) : stride)")..MultiType(
 			PointerMapping.DATA_INT
 		)..DRAW_INDIRECT_BUFFER..const..void_p.IN("indirect", "a structure containing an array of draw parameters"),
@@ -929,7 +929,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"FRAGMENT_SUBROUTINE_UNIFORM"..0x92F2,
 		"COMPUTE_SUBROUTINE_UNIFORM"..0x92F3,
 		"TRANSFORM_FEEDBACK_VARYING"..0x92F4
-	).javaDocLinks + " GL42#ATOMIC_COUNTER_BUFFER"
+	).javaDocLinks + " #ATOMIC_COUNTER_BUFFER"
 
 	val ProgramInterfaceParameters = IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramInterfaceiv.",
@@ -1126,7 +1126,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TexBufferRange",
 		"Binds a range of a buffer's data store to a buffer texture.",
 
-		GLenum.IN("target", "the target of the operation", "GL31#TEXTURE_BUFFER"),
+		GLenum.IN("target", "the target of the operation", "#TEXTURE_BUFFER"),
 		GLenum.IN("internalformat", "the internal format of the data in the store belonging to {@code buffer}"),
 		GLuint.IN("buffer", "the name of the buffer object whose storage to attach to the active buffer texture"),
 		GLintptr.IN("offset", "the offset of the start of the range of the buffer's data store to attach"),
@@ -1139,7 +1139,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TexStorage2DMultisample",
 		"Specifies storage for a two-dimensional multisample texture.",
 
-		GLenum.IN("target", "the target of the operation", "GL32#TEXTURE_2D_MULTISAMPLE GL32#PROXY_TEXTURE_2D_MULTISAMPLE"),
+		GLenum.IN("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE #PROXY_TEXTURE_2D_MULTISAMPLE"),
 		GLsizei.IN("samples", "the number of samples in the texture"),
 		GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
 		GLsizei.IN("width", "the width of the texture, in texels"),
@@ -1157,7 +1157,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TexStorage3DMultisample",
 		"Specifies storage for a two-dimensional multisample array texture.",
 
-		GLenum.IN("target", "the target of the operation", "GL32#TEXTURE_2D_MULTISAMPLE_ARRAY GL32#PROXY_TEXTURE_2D_MULTISAMPLE"),
+		GLenum.IN("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE_ARRAY #PROXY_TEXTURE_2D_MULTISAMPLE"),
 		GLsizei.IN("samples", "the number of samples in the texture"),
 		GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
 		GLsizei.IN("width", "the width of the texture, in texels"),
@@ -1237,7 +1237,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"Specifies the organization of data in vertex arrays.",
 
 		GLuint.IN("attribindex", "the generic vertex attribute array being described"),
-		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 GL12#BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 #BGRA"),
 		GLenum.IN("type", "the type of the data stored in the array"),
 		GLboolean.IN(
 			"normalized",
@@ -1257,7 +1257,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"Specifies the organization of pure integer data in vertex arrays.",
 
 		GLuint.IN("attribindex", "the generic vertex attribute array being described"),
-		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 GL12#BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 #BGRA"),
 		GLenum.IN("type", "the type of the data stored in the array"),
 		GLuint.IN(
 			"relativeoffset",
@@ -1270,7 +1270,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"Specifies the organization of 64-bit double data in vertex arrays.",
 
 		GLuint.IN("attribindex", "the generic vertex attribute array being described"),
-		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 GL12#BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 #BGRA"),
 		GLenum.IN("type", "the type of the data stored in the array"),
 		GLuint.IN(
 			"relativeoffset",

@@ -1869,7 +1869,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 		Remarks:
 		${ol(
-			"Use ##BGFX_STATE_ALPHA_REF(), ##BGFX_STATE_POINT_SIZE() and ##BGFX_STATE_BLEND_FUNC() macros to setup more complex states.",
+			"Use #BGFX_STATE_ALPHA_REF(), #BGFX_STATE_POINT_SIZE() and #BGFX_STATE_BLEND_FUNC() macros to setup more complex states.",
 			"#STATE_BLEND_EQUATION_ADD is set when no other blend equation is specified."
 		)}
 		""",

@@ -145,7 +145,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"GetActiveAtomicCounterBufferiv",
 		"Obtains information about the set of active atomic counter buffers for a program.",
 
-		GLuint.IN("program", "the name of a program object for which the command GL20#LinkProgram() has been issued in the past"),
+		GLuint.IN("program", "the name of a program object for which the command #LinkProgram() has been issued in the past"),
 		GLuint.IN("bufferIndex", "the index of an active atomic counter buffer"),
 		GLenum.IN("pname", "the parameter to query", AtomicCounterBufferParameters),
 		Check(1)..ReturnParam..GLint_p.OUT("params", "a buffer in which to place the returned value")
@@ -163,7 +163,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"TexStorage1D",
 		"Simultaneously specifies storage for all levels of a one-dimensional texture.",
 
-		GLenum.IN("target", "the target of the operation", "GL11#TEXTURE_1D GL11#PROXY_TEXTURE_1D"),
+		GLenum.IN("target", "the target of the operation", "#TEXTURE_1D #PROXY_TEXTURE_1D"),
 		GLsizei.IN("levels", "the number of texture levels"),
 		GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
 		GLsizei.IN("width", "the width of the texture, in texels")
@@ -235,7 +235,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
+			"#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
 		),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered"),
@@ -251,7 +251,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
+			"#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
 		),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
@@ -375,7 +375,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"MemoryBarrier",
 		"Defines a barrier ordering memory transactions.",
 
-		GLbitfield.IN("barriers", "the barriers to insert (bitwise combination)", MemoryBarriers + " GL43#SHADER_STORAGE_BARRIER_BIT", LinkMode.BITFIELD)
+		GLbitfield.IN("barriers", "the barriers to insert (bitwise combination)", MemoryBarriers + " #SHADER_STORAGE_BARRIER_BIT", LinkMode.BITFIELD)
 	)
 
 	// ARB_internal_format_query
@@ -394,8 +394,8 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 			"target",
 			"the usage of the internal format",
 			"""
-			GL11#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL30#RENDERBUFFER GL31#TEXTURE_BUFFER GL32#TEXTURE_2D_MULTISAMPLE
-			GL32#TEXTURE_2D_MULTISAMPLE_ARRAY
+			#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS #RENDERBUFFER #TEXTURE_BUFFER #TEXTURE_2D_MULTISAMPLE
+			#TEXTURE_2D_MULTISAMPLE_ARRAY
 			"""
 		),
 		GLenum.IN("internalformat", "the internal format about which to retrieve information"),

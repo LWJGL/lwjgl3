@@ -33,7 +33,7 @@ val intel_device_partition_by_names = "INTELDevicePartitionByNames".nativeClassC
 		"""
 
 	IntConstant(
-		"Accepted in the {@code properties} argument of CL12#CreateSubDevices().",
+		"Accepted in the {@code properties} argument of #CreateSubDevices().",
 
 		"DEVICE_PARTITION_BY_NAMES_INTEL"..0x4052
 	)

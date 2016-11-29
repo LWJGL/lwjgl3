@@ -20,8 +20,8 @@ val ARB_transform_feedback_overflow_query = "ARBTransformFeedbackOverflowQuery".
 
 	IntConstant(
 		"""
-		Accepted by the {@code target} parameter of GL15#BeginQuery(), GL15#EndQuery(), GL15#GetQueryiv(),
-		GL40#BeginQueryIndexed(), GL40#EndQueryIndexed() and GL40#GetQueryIndexediv().
+		Accepted by the {@code target} parameter of #BeginQuery(), #EndQuery(), #GetQueryiv(),
+		#BeginQueryIndexed(), #EndQueryIndexed() and #GetQueryIndexediv().
 		""",
 
 		"TRANSFORM_FEEDBACK_OVERFLOW_ARB"..0x82EC,

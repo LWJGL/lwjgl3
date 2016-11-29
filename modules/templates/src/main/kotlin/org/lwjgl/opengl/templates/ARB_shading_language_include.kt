@@ -127,7 +127,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 	GLboolean(
 		"IsNamedStringARB",
 		"""
-		Returns GL11#TRUE if the tree location corresponding to {@code name} has a string associated with it, and GL11#FALSE if the tree location has no string
+		Returns #TRUE if the tree location corresponding to {@code name} has a string associated with it, and #FALSE if the tree location has no string
 		associated with it.
 		""",
 

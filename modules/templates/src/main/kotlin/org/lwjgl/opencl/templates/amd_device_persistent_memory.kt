@@ -20,7 +20,7 @@ val amd_device_persistent_memory = "AMDDevicePersistentMemory".nativeClassCL("am
 	IntConstant(
 		"""
 		{@code cl_mem_flags} bit. Buffers and images allocated with this flag reside in host-visible device memory. This flag is mutually exclusive with the
-		flags CL10#MEM_ALLOC_HOST_PTR and CL10#MEM_USE_HOST_PTR.
+		flags #MEM_ALLOC_HOST_PTR and #MEM_USE_HOST_PTR.
 		""",
 
 		"MEM_USE_PERSISTENT_MEM_AMD".."1 << 6"

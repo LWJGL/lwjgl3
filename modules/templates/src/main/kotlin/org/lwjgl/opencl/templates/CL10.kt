@@ -9,49 +9,49 @@ import org.lwjgl.opencl.*
 
 // -- [ Reusable definitions ] --
 
-val SUCCESS = "CL10#SUCCESS"
-val TRUE = "CL10#TRUE"
-val FALSE = "CL10#FALSE"
+val SUCCESS = "#SUCCESS"
+val TRUE = "#TRUE"
+val FALSE = "#FALSE"
 
 // Error codes
 
-val INVALID_VALUE = "CL10#INVALID_VALUE"
-val INVALID_DEVICE_TYPE = "CL10#INVALID_DEVICE_TYPE"
-val INVALID_PLATFORM = "CL10#INVALID_PLATFORM"
-val INVALID_DEVICE = "CL10#INVALID_DEVICE"
-val INVALID_CONTEXT = "CL10#INVALID_CONTEXT"
-val INVALID_QUEUE_PROPERTIES = "CL10#INVALID_QUEUE_PROPERTIES"
-val INVALID_COMMAND_QUEUE = "CL10#INVALID_COMMAND_QUEUE"
-val INVALID_HOST_PTR = "CL10#INVALID_HOST_PTR"
-val INVALID_MEM_OBJECT = "CL10#INVALID_MEM_OBJECT"
-val INVALID_IMAGE_FORMAT_DESCRIPTOR = "CL10#INVALID_IMAGE_FORMAT_DESCRIPTOR"
-val INVALID_IMAGE_SIZE = "CL10#INVALID_IMAGE_SIZE"
-val INVALID_SAMPLER = "CL10#INVALID_SAMPLER"
-val INVALID_BINARY = "CL10#INVALID_BINARY"
-val INVALID_BUILD_OPTIONS = "CL10#INVALID_BUILD_OPTIONS"
-val INVALID_PROGRAM = "CL10#INVALID_PROGRAM"
-val INVALID_PROGRAM_EXECUTABLE = "CL10#INVALID_PROGRAM_EXECUTABLE"
-val INVALID_KERNEL_NAME = "CL10#INVALID_KERNEL_NAME"
-val INVALID_KERNEL_DEFINITION = "CL10#INVALID_KERNEL_DEFINITION"
-val INVALID_KERNEL = "CL10#INVALID_KERNEL"
-val INVALID_ARG_INDEX = "CL10#INVALID_ARG_INDEX"
-val INVALID_ARG_VALUE = "CL10#INVALID_ARG_VALUE"
-val INVALID_ARG_SIZE = "CL10#INVALID_ARG_SIZE"
-val INVALID_KERNEL_ARGS = "CL10#INVALID_KERNEL_ARGS"
-val INVALID_WORK_DIMENSION = "CL10#INVALID_WORK_DIMENSION"
-val INVALID_WORK_GROUP_SIZE = "CL10#INVALID_WORK_GROUP_SIZE"
-val INVALID_WORK_ITEM_SIZE = "CL10#INVALID_WORK_ITEM_SIZE"
-val INVALID_GLOBAL_OFFSET = "CL10#INVALID_GLOBAL_OFFSET"
-val INVALID_EVENT_WAIT_LIST = "CL10#INVALID_EVENT_WAIT_LIST"
-val INVALID_EVENT = "CL10#INVALID_EVENT"
-val INVALID_OPERATION = "CL10#INVALID_OPERATION"
-val INVALID_BUFFER_SIZE = "CL10#INVALID_BUFFER_SIZE"
-val INVALID_GLOBAL_WORK_SIZE = "CL10#INVALID_GLOBAL_WORK_SIZE"
+val INVALID_VALUE = "#INVALID_VALUE"
+val INVALID_DEVICE_TYPE = "#INVALID_DEVICE_TYPE"
+val INVALID_PLATFORM = "#INVALID_PLATFORM"
+val INVALID_DEVICE = "#INVALID_DEVICE"
+val INVALID_CONTEXT = "#INVALID_CONTEXT"
+val INVALID_QUEUE_PROPERTIES = "#INVALID_QUEUE_PROPERTIES"
+val INVALID_COMMAND_QUEUE = "#INVALID_COMMAND_QUEUE"
+val INVALID_HOST_PTR = "#INVALID_HOST_PTR"
+val INVALID_MEM_OBJECT = "#INVALID_MEM_OBJECT"
+val INVALID_IMAGE_FORMAT_DESCRIPTOR = "#INVALID_IMAGE_FORMAT_DESCRIPTOR"
+val INVALID_IMAGE_SIZE = "#INVALID_IMAGE_SIZE"
+val INVALID_SAMPLER = "#INVALID_SAMPLER"
+val INVALID_BINARY = "#INVALID_BINARY"
+val INVALID_BUILD_OPTIONS = "#INVALID_BUILD_OPTIONS"
+val INVALID_PROGRAM = "#INVALID_PROGRAM"
+val INVALID_PROGRAM_EXECUTABLE = "#INVALID_PROGRAM_EXECUTABLE"
+val INVALID_KERNEL_NAME = "#INVALID_KERNEL_NAME"
+val INVALID_KERNEL_DEFINITION = "#INVALID_KERNEL_DEFINITION"
+val INVALID_KERNEL = "#INVALID_KERNEL"
+val INVALID_ARG_INDEX = "#INVALID_ARG_INDEX"
+val INVALID_ARG_VALUE = "#INVALID_ARG_VALUE"
+val INVALID_ARG_SIZE = "#INVALID_ARG_SIZE"
+val INVALID_KERNEL_ARGS = "#INVALID_KERNEL_ARGS"
+val INVALID_WORK_DIMENSION = "#INVALID_WORK_DIMENSION"
+val INVALID_WORK_GROUP_SIZE = "#INVALID_WORK_GROUP_SIZE"
+val INVALID_WORK_ITEM_SIZE = "#INVALID_WORK_ITEM_SIZE"
+val INVALID_GLOBAL_OFFSET = "#INVALID_GLOBAL_OFFSET"
+val INVALID_EVENT_WAIT_LIST = "#INVALID_EVENT_WAIT_LIST"
+val INVALID_EVENT = "#INVALID_EVENT"
+val INVALID_OPERATION = "#INVALID_OPERATION"
+val INVALID_BUFFER_SIZE = "#INVALID_BUFFER_SIZE"
+val INVALID_GLOBAL_WORK_SIZE = "#INVALID_GLOBAL_WORK_SIZE"
 
 // Errors
 
-val OORE = "CL10#OUT_OF_RESOURCES if there is a failure to allocate resources required by the OpenCL implementation on the device."
-val OOHME = "CL10#OUT_OF_HOST_MEMORY if there is a failure to allocate resources required by the OpenCL implementation on the host."
+val OORE = "#OUT_OF_RESOURCES if there is a failure to allocate resources required by the OpenCL implementation on the device."
+val OOHME = "#OUT_OF_HOST_MEMORY if there is a failure to allocate resources required by the OpenCL implementation on the host."
 
 val ICQE = "$INVALID_COMMAND_QUEUE if {@code command_queue} is not a valid command-queue."
 val ICE = "$INVALID_CONTEXT if {@code context} is not a valid context."
@@ -63,13 +63,13 @@ val IEWLE =
 
 fun MSBOE(buffer: String) =
 	"""
-	CL11#MISALIGNED_SUB_BUFFER_OFFSET if {@code $buffer} is a sub-buffer object and offset specified when the sub-buffer object is created is
-	not aligned to CL10#DEVICE_MEM_BASE_ADDR_ALIGN value for device associated with queue.
+	#MISALIGNED_SUB_BUFFER_OFFSET if {@code $buffer} is a sub-buffer object and offset specified when the sub-buffer object is created is
+	not aligned to #DEVICE_MEM_BASE_ADDR_ALIGN value for device associated with queue.
 	"""
 
 fun ESEFEIWLE(operation: String) =
 	"""
-	CL11#EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST if the $operation operation is blocking and the execution status of any of the events in
+	#EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST if the $operation operation is blocking and the execution status of any of the events in
 	{@code event_wait_list} is a negative integer value.
 	"""
 
@@ -190,7 +190,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PLATFORM_NAME"..0x0902,
 		"PLATFORM_VENDOR"..0x0903,
 		"PLATFORM_EXTENSIONS"..0x0904
-	).javaDocLinks + " CL21#PLATFORM_HOST_TIMER_RESOLUTION"
+	).javaDocLinks + " #PLATFORM_HOST_TIMER_RESOLUTION"
 
 	val DeviceTypes = IntConstant(
 		"cl_device_type - bitfield",
@@ -200,7 +200,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"DEVICE_TYPE_GPU".."1 << 2",
 		"DEVICE_TYPE_ACCELERATOR".."1 << 3",
 		"DEVICE_TYPE_ALL"..0xFFFFFFFF.i
-	).javaDocLinks + " CL12#DEVICE_TYPE_CUSTOM"
+	).javaDocLinks + " #DEVICE_TYPE_CUSTOM"
 
 	val DeviceInfo = IntConstant(
 		"cl_device_info",
@@ -255,21 +255,21 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"DEVICE_VERSION"..0x102F,
 		"DEVICE_EXTENSIONS"..0x1030,
 		"DEVICE_PLATFORM"..0x1031
-	).javaDocLinks + """ CL11#DEVICE_PREFERRED_VECTOR_WIDTH_HALF CL11#DEVICE_HOST_UNIFIED_MEMORY CL11#DEVICE_NATIVE_VECTOR_WIDTH_CHAR
-	CL11#DEVICE_NATIVE_VECTOR_WIDTH_SHORT CL11#DEVICE_NATIVE_VECTOR_WIDTH_INT CL11#DEVICE_NATIVE_VECTOR_WIDTH_LONG
-	CL11#DEVICE_NATIVE_VECTOR_WIDTH_FLOAT CL11#DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE CL11#DEVICE_NATIVE_VECTOR_WIDTH_HALF CL11#DEVICE_OPENCL_C_VERSION
+	).javaDocLinks + """ #DEVICE_PREFERRED_VECTOR_WIDTH_HALF #DEVICE_HOST_UNIFIED_MEMORY #DEVICE_NATIVE_VECTOR_WIDTH_CHAR
+	#DEVICE_NATIVE_VECTOR_WIDTH_SHORT #DEVICE_NATIVE_VECTOR_WIDTH_INT #DEVICE_NATIVE_VECTOR_WIDTH_LONG
+	#DEVICE_NATIVE_VECTOR_WIDTH_FLOAT #DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE #DEVICE_NATIVE_VECTOR_WIDTH_HALF #DEVICE_OPENCL_C_VERSION
 
-	CL12#DEVICE_DOUBLE_FP_CONFIG CL12#DEVICE_LINKER_AVAILABLE CL12#DEVICE_BUILT_IN_KERNELS CL12#DEVICE_IMAGE_MAX_BUFFER_SIZE CL12#DEVICE_IMAGE_MAX_ARRAY_SIZE
-	CL12#DEVICE_PARENT_DEVICE CL12#DEVICE_PARTITION_MAX_SUB_DEVICES CL12#DEVICE_PARTITION_PROPERTIES CL12#DEVICE_PARTITION_AFFINITY_DOMAIN
-	CL12#DEVICE_PARTITION_TYPE CL12#DEVICE_REFERENCE_COUNT CL12#DEVICE_PREFERRED_INTEROP_USER_SYNC CL12#DEVICE_PRINTF_BUFFER_SIZE
+	#DEVICE_DOUBLE_FP_CONFIG #DEVICE_LINKER_AVAILABLE #DEVICE_BUILT_IN_KERNELS #DEVICE_IMAGE_MAX_BUFFER_SIZE #DEVICE_IMAGE_MAX_ARRAY_SIZE
+	#DEVICE_PARENT_DEVICE #DEVICE_PARTITION_MAX_SUB_DEVICES #DEVICE_PARTITION_PROPERTIES #DEVICE_PARTITION_AFFINITY_DOMAIN
+	#DEVICE_PARTITION_TYPE #DEVICE_REFERENCE_COUNT #DEVICE_PREFERRED_INTEROP_USER_SYNC #DEVICE_PRINTF_BUFFER_SIZE
 
-	CL20#DEVICE_QUEUE_ON_HOST_PROPERTIES CL20#DEVICE_MAX_READ_WRITE_IMAGE_ARGS CL20#DEVICE_MAX_GLOBAL_VARIABLE_SIZE CL20#DEVICE_QUEUE_ON_DEVICE_PROPERTIES
-	CL20#DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE CL20#DEVICE_QUEUE_ON_DEVICE_MAX_SIZE CL20#DEVICE_MAX_ON_DEVICE_QUEUES CL20#DEVICE_MAX_ON_DEVICE_EVENTS
-	CL20#DEVICE_SVM_CAPABILITIES CL20#DEVICE_GLOBAL_VARIABLE_PREFERRED_TOTAL_SIZE CL20#DEVICE_MAX_PIPE_ARGS CL20#DEVICE_PIPE_MAX_ACTIVE_RESERVATIONS
-	CL20#DEVICE_PIPE_MAX_PACKET_SIZE CL20#DEVICE_PREFERRED_PLATFORM_ATOMIC_ALIGNMENT CL20#DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT
-	CL20#DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT
+	#DEVICE_QUEUE_ON_HOST_PROPERTIES #DEVICE_MAX_READ_WRITE_IMAGE_ARGS #DEVICE_MAX_GLOBAL_VARIABLE_SIZE #DEVICE_QUEUE_ON_DEVICE_PROPERTIES
+	#DEVICE_QUEUE_ON_DEVICE_PREFERRED_SIZE #DEVICE_QUEUE_ON_DEVICE_MAX_SIZE #DEVICE_MAX_ON_DEVICE_QUEUES #DEVICE_MAX_ON_DEVICE_EVENTS
+	#DEVICE_SVM_CAPABILITIES #DEVICE_GLOBAL_VARIABLE_PREFERRED_TOTAL_SIZE #DEVICE_MAX_PIPE_ARGS #DEVICE_PIPE_MAX_ACTIVE_RESERVATIONS
+	#DEVICE_PIPE_MAX_PACKET_SIZE #DEVICE_PREFERRED_PLATFORM_ATOMIC_ALIGNMENT #DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT
+	#DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT
 
-	CL21#DEVICE_IL_VERSION CL21#DEVICE_MAX_NUM_SUB_GROUPS CL21#DEVICE_SUB_GROUP_INDEPENDENT_FORWARD_PROGRESS
+	#DEVICE_IL_VERSION #DEVICE_MAX_NUM_SUB_GROUPS #DEVICE_SUB_GROUP_INDEPENDENT_FORWARD_PROGRESS
 	"""
 
 	IntConstant(
@@ -310,7 +310,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		"QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE".."1 << 0",
 		"QUEUE_PROFILING_ENABLE".."1 << 1"
-	).javaDocLinks + " CL20#QUEUE_ON_DEVICE CL20#QUEUE_ON_DEVICE_DEFAULT"
+	).javaDocLinks + " #QUEUE_ON_DEVICE #QUEUE_ON_DEVICE_DEFAULT"
 
 	val ContextInfo = IntConstant(
 		"cl_context_info",
@@ -318,14 +318,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"CONTEXT_REFERENCE_COUNT"..0x1080,
 		"CONTEXT_DEVICES"..0x1081,
 		"CONTEXT_PROPERTIES"..0x1082
-	).javaDocLinks + " CL11#CONTEXT_NUM_DEVICES"
+	).javaDocLinks + " #CONTEXT_NUM_DEVICES"
 
 	val ContextProperties = IntConstant(
 		"cl_context_info + cl_context_properties",
 
 		"CONTEXT_PLATFORM"..0x1084
-	).javaDocLinks + """ CL12#CONTEXT_INTEROP_USER_SYNC KHRGLSharing#GL_CONTEXT_KHR KHRGLSharing#EGL_DISPLAY_KHR KHRGLSharing#GLX_DISPLAY_KHR
-	KHRGLSharing#WGL_HDC_KHR KHRGLSharing#CGL_SHAREGROUP_KHR
+	).javaDocLinks + """ #CONTEXT_INTEROP_USER_SYNC #GL_CONTEXT_KHR #EGL_DISPLAY_KHR #GLX_DISPLAY_KHR
+	#WGL_HDC_KHR #CGL_SHAREGROUP_KHR
 	"""
 
 	val CommandQueueInfo = IntConstant(
@@ -335,7 +335,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"QUEUE_DEVICE"..0x1091,
 		"QUEUE_REFERENCE_COUNT"..0x1092,
 		"QUEUE_PROPERTIES"..0x1093
-	).javaDocLinks + " CL20#QUEUE_SIZE CL21#QUEUE_DEVICE_DEFAULT"
+	).javaDocLinks + " #QUEUE_SIZE #QUEUE_DEVICE_DEFAULT"
 
 	val MemFlags = IntConstant(
 		"cl_mem_flags - bitfield",
@@ -346,7 +346,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"MEM_USE_HOST_PTR".."1 << 3",
 		"MEM_ALLOC_HOST_PTR".."1 << 4",
 		"MEM_COPY_HOST_PTR".."1 << 5"
-	).javaDocLinks + " CL12#MEM_HOST_WRITE_ONLY CL12#MEM_HOST_READ_ONLY CL12#MEM_HOST_NO_ACCESS"
+	).javaDocLinks + " #MEM_HOST_WRITE_ONLY #MEM_HOST_READ_ONLY #MEM_HOST_NO_ACCESS"
 
 	IntConstant(
 		"cl_channel_order",
@@ -383,13 +383,13 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"FLOAT"..0x10DE
 	)
 
-	val cl_mem_object_types = "CL12#MEM_OBJECT_IMAGE1D CL12#MEM_OBJECT_IMAGE1D_BUFFER " + IntConstant(
+	val cl_mem_object_types = "#MEM_OBJECT_IMAGE1D #MEM_OBJECT_IMAGE1D_BUFFER " + IntConstant(
 		"cl_mem_object_type",
 
 		"MEM_OBJECT_BUFFER"..0x10F0,
 		"MEM_OBJECT_IMAGE2D"..0x10F1,
 		"MEM_OBJECT_IMAGE3D"..0x10F2
-	).javaDocLinks + " CL12#MEM_OBJECT_IMAGE1D_ARRAY CL12#MEM_OBJECT_IMAGE2D_ARRAY CL20#MEM_OBJECT_PIPE"
+	).javaDocLinks + " #MEM_OBJECT_IMAGE1D_ARRAY #MEM_OBJECT_IMAGE2D_ARRAY #MEM_OBJECT_PIPE"
 
 	val MemInfo = IntConstant(
 		"cl_mem_info",
@@ -401,7 +401,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"MEM_MAP_COUNT"..0x1104,
 		"MEM_REFERENCE_COUNT"..0x1105,
 		"MEM_CONTEXT"..0x1106
-	).javaDocLinks + " CL11#MEM_ASSOCIATED_MEMOBJECT CL11#MEM_OFFSET CL20#MEM_USES_SVM_POINTER"
+	).javaDocLinks + " #MEM_ASSOCIATED_MEMOBJECT #MEM_OFFSET #MEM_USES_SVM_POINTER"
 
 	val ImageInfo = IntConstant(
 		"cl_image_info",
@@ -413,7 +413,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"IMAGE_WIDTH"..0x1114,
 		"IMAGE_HEIGHT"..0x1115,
 		"IMAGE_DEPTH"..0x1116
-	).javaDocLinks + " CL12#IMAGE_ARRAY_SIZE CL12#IMAGE_BUFFER CL12#IMAGE_NUM_MIP_LEVELS CL12#IMAGE_NUM_SAMPLES"
+	).javaDocLinks + " #IMAGE_ARRAY_SIZE #IMAGE_BUFFER #IMAGE_NUM_MIP_LEVELS #IMAGE_NUM_SAMPLES"
 
 	val AddressingModes = IntConstant(
 		"cl_addressing_mode",
@@ -422,7 +422,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"ADDRESS_CLAMP_TO_EDGE"..0x1131,
 		"ADDRESS_CLAMP"..0x1132,
 		"ADDRESS_REPEAT"..0x1133
-	).javaDocLinks + " CL11#ADDRESS_MIRRORED_REPEAT"
+	).javaDocLinks + " #ADDRESS_MIRRORED_REPEAT"
 
 	val FilterModes = IntConstant(
 		"cl_filter_mode",
@@ -439,14 +439,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"SAMPLER_NORMALIZED_COORDS"..0x1152,
 		"SAMPLER_ADDRESSING_MODE"..0x1153,
 		"SAMPLER_FILTER_MODE"..0x1154
-	).javaDocLinks + " CL20#SAMPLER_MIP_FILTER_MODE CL20#SAMPLER_LOD_MIN CL20#SAMPLER_LOD_MAX"
+	).javaDocLinks + " #SAMPLER_MIP_FILTER_MODE #SAMPLER_LOD_MIN #SAMPLER_LOD_MAX"
 
 	val MapFlags = IntConstant(
 		"cl_map_flags - bitfield",
 
 		"MAP_READ".."1 << 0",
 		"MAP_WRITE".."1 << 1"
-	).javaDocLinks + " CL12#MAP_WRITE_INVALIDATE_REGION"
+	).javaDocLinks + " #MAP_WRITE_INVALIDATE_REGION"
 
 	val ProgramInfo = IntConstant(
 		"cl_program_info",
@@ -458,7 +458,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PROGRAM_SOURCE"..0x1164,
 		"PROGRAM_BINARY_SIZES"..0x1165,
 		"PROGRAM_BINARIES"..0x1166
-	).javaDocLinks + " CL12#PROGRAM_NUM_KERNELS CL12#PROGRAM_KERNEL_NAMES CL21#PROGRAM_IL"
+	).javaDocLinks + " #PROGRAM_NUM_KERNELS #PROGRAM_KERNEL_NAMES #PROGRAM_IL"
 
 	val ProgramBuildInfo = IntConstant(
 		"cl_program_build_info",
@@ -466,7 +466,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PROGRAM_BUILD_STATUS"..0x1181,
 		"PROGRAM_BUILD_OPTIONS"..0x1182,
 		"PROGRAM_BUILD_LOG"..0x1183
-	).javaDocLinks + " CL12#PROGRAM_BINARY_TYPE CL20#PROGRAM_BUILD_GLOBAL_VARIABLE_TOTAL_SIZE"
+	).javaDocLinks + " #PROGRAM_BINARY_TYPE #PROGRAM_BUILD_GLOBAL_VARIABLE_TOTAL_SIZE"
 
 	IntConstant(
 		"cl_build_status",
@@ -485,7 +485,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"KERNEL_REFERENCE_COUNT"..0x1192,
 		"KERNEL_CONTEXT"..0x1193,
 		"KERNEL_PROGRAM"..0x1194
-	).javaDocLinks + " CL12#KERNEL_ATTRIBUTES"
+	).javaDocLinks + " #KERNEL_ATTRIBUTES"
 
 	val KernelWorkGroupInfo = IntConstant(
 		"cl_kernel_work_group_info",
@@ -493,7 +493,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"KERNEL_WORK_GROUP_SIZE"..0x11B0,
 		"KERNEL_COMPILE_WORK_GROUP_SIZE"..0x11B1,
 		"KERNEL_LOCAL_MEM_SIZE"..0x11B2
-	).javaDocLinks + " CL11#KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE CL11#KERNEL_PRIVATE_MEM_SIZE CL12#KERNEL_GLOBAL_WORK_SIZE"
+	).javaDocLinks + " #KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE #KERNEL_PRIVATE_MEM_SIZE #KERNEL_GLOBAL_WORK_SIZE"
 
 	val EventInfo = IntConstant(
 		"cl_event_info",
@@ -502,7 +502,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"EVENT_COMMAND_TYPE"..0x11D1,
 		"EVENT_REFERENCE_COUNT"..0x11D2,
 		"EVENT_COMMAND_EXECUTION_STATUS"..0x11D3
-	).javaDocLinks + " CL11#EVENT_CONTEXT"
+	).javaDocLinks + " #EVENT_CONTEXT"
 
 	IntConstant(
 		"cl_command_type",
@@ -542,7 +542,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PROFILING_COMMAND_SUBMIT"..0x1281,
 		"PROFILING_COMMAND_START"..0x1282,
 		"PROFILING_COMMAND_END"..0x1283
-	).javaDocLinks + " CL20#PROFILING_COMMAND_COMPLETE"
+	).javaDocLinks + " #PROFILING_COMMAND_COMPLETE"
 
 	// ------------------[ OPENCL Platform Layer ]------------------
 
@@ -660,7 +660,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"GetDeviceInfo",
 		"""
 		Returns specific information about an OpenCL device. {@code device} may be a device returned by #GetDeviceIDs() or a sub-device created by
-		CL12#CreateSubDevices(). If {@code device} is a sub-device, the specific information for the sub-device will be returned.
+		#CreateSubDevices(). If {@code device} is a sub-device, the specific information for the sub-device will be returned.
 		""",
 
 		cl_device_id.IN("device", "the device to query"),
@@ -709,7 +709,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		AutoSize("devices")..cl_uint.IN("num_devices", "the number of devices specified in the {@code devices} argument"),
 		SingleValue("device")..const..cl_device_id_p.IN(
 			"devices",
-			"a list of unique devices returned by #GetDeviceIDs() or sub-devices created by CL12#CreateSubDevices() for a platform"
+			"a list of unique devices returned by #GetDeviceIDs() or sub-devices created by #CreateSubDevices() for a platform"
 		),
 		nullable..cl_context_callback.IN(
 			"pfn_notify",
@@ -1056,8 +1056,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			ESEFEIWLE("read"),
 			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with buffer.",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueReadBuffer} is called on buffer which has been created with CL12#MEM_HOST_WRITE_ONLY or
-			CL12#MEM_HOST_NO_ACCESS.
+			$INVALID_OPERATION if {@code clEnqueueReadBuffer} is called on buffer which has been created with #MEM_HOST_WRITE_ONLY or
+			#MEM_HOST_NO_ACCESS.
 			""",
 			OORE,
 			OOHME
@@ -1125,8 +1125,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			ESEFEIWLE("write"),
 			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with buffer.",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueWriteBuffer} is called on buffer which has been created with CL12#MEM_HOST_READ_ONLY or
-			CL12#MEM_HOST_NO_ACCESS.
+			$INVALID_OPERATION if {@code clEnqueueWriteBuffer} is called on buffer which has been created with #MEM_HOST_READ_ONLY or
+			#MEM_HOST_NO_ACCESS.
 			""",
 			OORE,
 			OOHME
@@ -1254,9 +1254,9 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			ESEFEIWLE("map"),
 			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with {@code buffer}.",
 			"""
-			$INVALID_OPERATION if buffer has been created with CL12#MEM_HOST_WRITE_ONLY or CL12#MEM_HOST_NO_ACCESS and
-			#MAP_READ is set in {@code map_flags} or if {@code buffer} has been created with CL12#MEM_HOST_READ_ONLY or
-			CL12#MEM_HOST_NO_ACCESS and #MAP_WRITE or CL12#MAP_WRITE_INVALIDATE_REGION is set in {@code map_flags}.
+			$INVALID_OPERATION if buffer has been created with #MEM_HOST_WRITE_ONLY or #MEM_HOST_NO_ACCESS and
+			#MAP_READ is set in {@code map_flags} or if {@code buffer} has been created with #MEM_HOST_READ_ONLY or
+			#MEM_HOST_NO_ACCESS and #MAP_WRITE or #MAP_WRITE_INVALIDATE_REGION is set in {@code map_flags}.
 			""",
 			OORE,
 			OOHME
@@ -1554,12 +1554,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			$FALSE).
 			""",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueReadImage} is called on image which has been created with CL12#MEM_HOST_WRITE_ONLY or
-			CL12#MEM_HOST_NO_ACCESS.
+			$INVALID_OPERATION if {@code clEnqueueReadImage} is called on image which has been created with #MEM_HOST_WRITE_ONLY or
+			#MEM_HOST_NO_ACCESS.
 			""",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueWriteImage} is called on image which has been created with CL12#MEM_HOST_READ_ONLY or
-			CL12#MEM_HOST_NO_ACCESS.
+			$INVALID_OPERATION if {@code clEnqueueWriteImage} is called on image which has been created with #MEM_HOST_READ_ONLY or
+			#MEM_HOST_NO_ACCESS.
 			""",
 			ESEFEIWLE("read"),
 			OORE,
@@ -1681,12 +1681,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			$FALSE).
 			""",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueReadImage} is called on image which has been created with CL12#MEM_HOST_WRITE_ONLY or
-			CL12#MEM_HOST_NO_ACCESS.
+			$INVALID_OPERATION if {@code clEnqueueReadImage} is called on image which has been created with #MEM_HOST_WRITE_ONLY or
+			#MEM_HOST_NO_ACCESS.
 			""",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueWriteImage} is called on image which has been created with CL12#MEM_HOST_READ_ONLY or
-			CL12#MEM_HOST_NO_ACCESS.
+			$INVALID_OPERATION if {@code clEnqueueWriteImage} is called on image which has been created with #MEM_HOST_READ_ONLY or
+			#MEM_HOST_NO_ACCESS.
 			""",
 			ESEFEIWLE("write"),
 			OORE,
@@ -1984,7 +1984,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		If the image object is created with #MEM_USE_HOST_PTR set in {@code mem_flags}, the following will be true:
 		${ul(
 			"""
-			The {@code host_ptr} specified in CL12#CreateImage() is guaranteed to contain the latest bits in the region being mapped when the
+			The {@code host_ptr} specified in #CreateImage() is guaranteed to contain the latest bits in the region being mapped when the
 			{@code clEnqueueMapImage} command has completed.
 			""",
 			"The pointer value returned by {@code clEnqueueMapImage} will be derived from the {@code host_ptr} specified when the image object is created."
@@ -2083,9 +2083,9 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			$FALSE).
 			""",
 			"""
-			$INVALID_OPERATION if {@code image} has been created with CL12#MEM_HOST_WRITE_ONLY or CL12#MEM_HOST_NO_ACCESS and
-			#MAP_READ is set in {@code map_flags} or if image has been created with CL12#MEM_HOST_READ_ONLY or
-			CL12#MEM_HOST_NO_ACCESS and #MAP_WRITE or CL12#MAP_WRITE_INVALIDATE_REGION is set in {@code map_flags}.
+			$INVALID_OPERATION if {@code image} has been created with #MEM_HOST_WRITE_ONLY or #MEM_HOST_NO_ACCESS and
+			#MAP_READ is set in {@code map_flags} or if image has been created with #MEM_HOST_READ_ONLY or
+			#MEM_HOST_NO_ACCESS and #MAP_WRITE or #MAP_WRITE_INVALIDATE_REGION is set in {@code map_flags}.
 			""",
 			OORE,
 			OOHME
@@ -2126,7 +2126,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 		Increments the {@code memobj} reference count.
 
-		#CreateBuffer(), CL11#CreateSubBuffer() and CL12#CreateImage() perform an implicit retain.
+		#CreateBuffer(), #CreateSubBuffer() and #CreateImage() perform an implicit retain.
 		""",
 
 		cl_mem.IN("memobj", "the memory object to retain"),
@@ -2582,7 +2582,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			""",
 			"$INVALID_PROGRAM if {@code program} is a not a valid program object.",
 			"""
-			$INVALID_PROGRAM_EXECUTABLE if {@code param_name} is CL12#PROGRAM_NUM_KERNELS or CL12#PROGRAM_KERNEL_NAMES and a
+			$INVALID_PROGRAM_EXECUTABLE if {@code param_name} is #PROGRAM_NUM_KERNELS or #PROGRAM_KERNEL_NAMES and a
 			successful program executable has not been built for at least one device in the list of devices associated with {@code program}.
 			""",
 			OORE,
@@ -2629,7 +2629,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		Kernel objects can only be created once you have a program object with a valid program source or binary loaded into the program object and the program
 		executable has been successfully built for one or more devices associated with program. No changes to the program executable are allowed while there are
-		kernel objects associated with a program object. This means that calls to #BuildProgram() and CL12#CompileProgram() return
+		kernel objects associated with a program object. This means that calls to #BuildProgram() and #CompileProgram() return
 		$INVALID_OPERATION if there are kernel objects attached to a program object. The OpenCL context associated with program will be the context
 		associated with kernel. The list of devices associated with program are the devices associated with kernel. Devices associated with a program object for
 		which a valid program executable has been built can be used to execute kernels declared in the program object.
@@ -2885,7 +2885,7 @@ kernel void image_filter (
 			and {@code param_value} is not $NULL.
 			""",
 			"""
-			$INVALID_VALUE if {@code param_name} is CL12#KERNEL_GLOBAL_WORK_SIZE and {@code device} is not a custom device or kernel is
+			$INVALID_VALUE if {@code param_name} is #KERNEL_GLOBAL_WORK_SIZE and {@code device} is not a custom device or kernel is
 			not a built-in kernel.
 			""",
 			"$INVALID_KERNEL if {@code kernel} is a not a valid kernel object.",
@@ -2987,7 +2987,7 @@ kernel void image_filter (
 			is greater than the corresponding values specified by #DEVICE_MAX_WORK_ITEM_SIZES{@code [0]}, &hellip; #DEVICE_MAX_WORK_ITEM_SIZES{@code [work_dim – 1]}.
 			""",
 			"""
-			CL11#MISALIGNED_SUB_BUFFER_OFFSET if a sub-buffer object is specified as the value for an argument that is a buffer object and the offset
+			#MISALIGNED_SUB_BUFFER_OFFSET if a sub-buffer object is specified as the value for an argument that is a buffer object and the offset
 			specified when the sub-buffer object is created is not aligned to #DEVICE_MEM_BASE_ADDR_ALIGN value for device associated with queue.
 			""",
 			"""
@@ -3125,7 +3125,7 @@ kernel void image_filter (
 			"$INVALID_VALUE if {@code num_events} is zero or {@code event_list} is $NULL.",
 			"$INVALID_CONTEXT if events specified in {@code event_list} do not belong to the same context.",
 			"$INVALID_EVENT if event objects specified in {@code event_list} are not valid event objects.",
-			"CL11#EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST if the execution status of any of the events in {@code event_list} is a negative integer value.",
+			"#EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST if the execution status of any of the events in {@code event_list} is a negative integer value.",
 			OORE,
 			OOHME
 		)}
@@ -3189,7 +3189,7 @@ kernel void image_filter (
 		The event object is deleted once the reference count becomes zero, the specific command identified by this event has completed (or terminated) and there
 		are no commands in the command-queues of a context that require a wait for this event to complete.
 
-		<strong>NOTE</strong>: Developers should be careful when releasing their last reference count on events created by CL11#CreateUserEvent() that
+		<strong>NOTE</strong>: Developers should be careful when releasing their last reference count on events created by #CreateUserEvent() that
 		have not yet been set to status of #COMPLETE or an error. If the user event was used in the {@code event_wait_list} argument passed to a
 		clEnqueue*** API or another application host thread is waiting for it in #WaitForEvents(), those commands and host threads will continue to wait for the
 		event status to reach #COMPLETE or error, even after the user has released the object. Since in this scenario the developer has released his
@@ -3313,8 +3313,8 @@ kernel void image_filter (
 		will be complete after {@code clFlush} returns.
 
 		Any blocking commands queued in a command-queue and #ReleaseCommandQueue() perform an implicit flush of the command-queue. These blocking commands are
-		#EnqueueReadBuffer(), CL11#EnqueueReadBufferRect(), #EnqueueReadImage(), with {@code blocking_read} set to $TRUE; #EnqueueWriteBuffer(),
-		CL11#EnqueueWriteBufferRect(), #EnqueueWriteImage() with {@code blocking_write} set to $TRUE; #EnqueueMapBuffer(), #EnqueueMapImage() with
+		#EnqueueReadBuffer(), #EnqueueReadBufferRect(), #EnqueueReadImage(), with {@code blocking_read} set to $TRUE; #EnqueueWriteBuffer(),
+		#EnqueueWriteBufferRect(), #EnqueueWriteImage() with {@code blocking_write} set to $TRUE; #EnqueueMapBuffer(), #EnqueueMapImage() with
 		{@code blocking_map} set to $TRUE; or #WaitForEvents().
 
 		To use event objects that refer to commands enqueued in a command-queue as event objects to wait on by commands enqueued in a different command-queue,

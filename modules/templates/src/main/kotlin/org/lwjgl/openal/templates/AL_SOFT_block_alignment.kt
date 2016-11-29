@@ -17,7 +17,7 @@ val AL_SOFT_block_alignment = "SOFTBlockAlignment".nativeClassAL("SOFT_block_ali
 		"""
 
 	IntConstant(
-		"Accepted by the {@code paramName} parameter of AL11#Bufferi(), AL11#Bufferiv(), AL10#GetBufferi(), and AL11#GetBufferiv().",
+		"Accepted by the {@code paramName} parameter of #Bufferi(), #Bufferiv(), #GetBufferi(), and #GetBufferiv().",
 
 		"UNPACK_BLOCK_ALIGNMENT_SOFT"..0x200C,
 		"PACK_BLOCK_ALIGNMENT_SOFT"..0x200D

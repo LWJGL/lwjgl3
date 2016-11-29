@@ -25,7 +25,7 @@ val khr_egl_event = dependsOn(Binding.EGL) {
 		)
 
 		IntConstant(
-			"Returned by CL10#GetEventInfo() when param_name is CL10#EVENT_COMMAND_TYPE.",
+			"Returned by #GetEventInfo() when param_name is #EVENT_COMMAND_TYPE.",
 
 			"COMMAND_EGL_FENCE_SYNC_OBJECT_KHR"..0x202F
 		)
@@ -35,7 +35,7 @@ val khr_egl_event = dependsOn(Binding.EGL) {
 			"Creates a linked event object.",
 
 			cl_context.IN("context", "a valid OpenCL context"),
-			CLeglSyncKHR.IN("sync", "the name of a sync object of type org.lwjgl.egl.EGL15##EGL_SYNC_FENCE created with respect to {@code EGLDisplay display}."),
+			CLeglSyncKHR.IN("sync", "the name of a sync object of type org.lwjgl.egl.EGL15#EGL_SYNC_FENCE created with respect to {@code EGLDisplay display}."),
 			CLeglDisplayKHR.IN("display", "an {@code EGLDisplay}"),
 			ERROR_RET
 		)

@@ -15,7 +15,7 @@ val ARB_framebuffer_no_attachments = "ARBFramebufferNoAttachments".nativeClassGL
 		Framebuffer objects as introduced by ${ARB_framebuffer_object.link} and OpenGL 3.0 provide a generalized mechanism for rendering to off-screen surfaces.
 		Each framebuffer object may have depth, stencil and zero or more color attachments that can be written to by the GL. The size of the framebuffer (width,
 		height, layer count, sample count) is derived from the attachments of that framebuffer. In unextended OpenGL 4.2, it is not legal to render into a
-		framebuffer object that has no attachments. Such a framebuffer would be considered incomplete with the GL30#FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT
+		framebuffer object that has no attachments. Such a framebuffer would be considered incomplete with the #FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT
 		status.
 
 		With OpenGL 4.2 and ${ARB_shader_image_load_store.link}, fragment shaders are capable of doing random access writes to buffer and texture memory via

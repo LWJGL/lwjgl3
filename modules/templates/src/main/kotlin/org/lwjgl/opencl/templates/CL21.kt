@@ -66,7 +66,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 
 	cl_int(
 		"SetDefaultDeviceCommandQueue",
-		"Replaces a default device command queue created with CL20#CreateCommandQueueWithProperties() and the CL20#QUEUE_ON_DEVICE_DEFAULT flag.",
+		"Replaces a default device command queue created with #CreateCommandQueueWithProperties() and the #QUEUE_ON_DEVICE_DEFAULT flag.",
 
 		cl_context.IN("context", "a valid OpenCL context"),
 		cl_device_id.IN("device", "a OpenCL device associated with {@code context}"),
@@ -91,23 +91,23 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		Returns a reasonably synchronized pair of timestamps from the device timer and the host timer as seen by device. Implementations may need to execute
 		this query with a high latency in order to provide reasonable synchronization of the timestamps. The host timestamp and device timestamp returned by
 		this function and #GetHostTimer() each have an implementation defined timebase. The timestamps will always be in their respective timebases regardless
-		of which query function is used. The timestamp returned from CL10#GetEventProfilingInfo() for an event on a device and a device timestamp queried from
+		of which query function is used. The timestamp returned from #GetEventProfilingInfo() for an event on a device and a device timestamp queried from
 		the same device will always be in the same timebase.
 		""",
 
-		cl_device_id.IN("device", "a device returned by CL10#GetDeviceIDs()"),
+		cl_device_id.IN("device", "a device returned by #GetDeviceIDs()"),
 		Check(1)..cl_ulong_p.OUT(
 			"device_timestamp",
 			"""
 			will be updated with the value of the device timer in nanoseconds. The resolution of the timer is the same as the device profiling timer returned
-			by CL10#GetDeviceInfo() and the CL10#DEVICE_PROFILING_TIMER_RESOLUTION query.
+			by #GetDeviceInfo() and the #DEVICE_PROFILING_TIMER_RESOLUTION query.
 			"""
 		),
 		Check(1)..cl_ulong_p.OUT(
 			"host_timestamp",
 			"""
 			will be updated with the value of the host timer in nanoseconds at the closest possible point in time to that at which {@code device_timestamp} was
-			returned. The resolution of the timer may be queried via CL10#GetPlatformInfo() and the flag #PLATFORM_HOST_TIMER_RESOLUTION.
+			returned. The resolution of the timer may be queried via #GetPlatformInfo() and the flag #PLATFORM_HOST_TIMER_RESOLUTION.
 			"""
 		),
 
@@ -130,14 +130,14 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		#GetDeviceAndHostTimer(). The implementation will return with as low a latency as possible to allow a correlation with a subsequent application sampled
 		time. The host timestamp and device timestamp returned by this function and #GetDeviceAndHostTimer() each have an implementation defined timebase. The
 		timestamps will always be in their respective timebases regardless of which query function is used. The timestamp returned from
-		CL10#GetEventProfilingInfo() for an event on a device and a device timestamp queried from the same device will always be in the same timebase.
+		#GetEventProfilingInfo() for an event on a device and a device timestamp queried from the same device will always be in the same timebase.
 		""",
 
-		cl_device_id.IN("device", "a device returned by CL10#GetDeviceIDs()"),
+		cl_device_id.IN("device", "a device returned by #GetDeviceIDs()"),
 		Check(1)..cl_ulong_p.OUT(
 			"host_timestamp",
 			"""
-			will be updated with the value of the current timer in nanoseconds. The resolution of the timer may be queried via CL10#GetPlatformInfo() and the
+			will be updated with the value of the current timer in nanoseconds. The resolution of the timer may be queried via #GetPlatformInfo() and the
 			flag #PLATFORM_HOST_TIMER_RESOLUTION.
 			"""
 		),
@@ -182,15 +182,15 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 	cl_kernel(
 		"CloneKernel",
 		"""
-		Makes a shallow copy of the kernel object, its arguments and any information passed to the kernel object using CL20#SetKernelExecInfo(). If the kernel
+		Makes a shallow copy of the kernel object, its arguments and any information passed to the kernel object using #SetKernelExecInfo(). If the kernel
 		object was ready to be enqueued before copying it, the clone of the kernel object is ready to enqueue.
 
 		The returned kernel object is an exact copy of {@code source_kernel}, with one caveat: the reference count on the returned kernel object is set as if
-		it had been returned by CL10#CreateKernel(). The reference count of {@code source_kernel} will not be changed.
+		it had been returned by #CreateKernel(). The reference count of {@code source_kernel} will not be changed.
 
-		The resulting kernel will be in the same state as if CL10#CreateKernel() is called to create the resultant kernel with the same arguments as those used
-		to create {@code source_kernel}, the latest call to CL10#SetKernelArg() or CL20#SetKernelArgSVMPointer() for each argument index applied to kernel and
-		the last call to CL20#SetKernelExecInfo() for each value of the param name parameter are applied to the new kernel object.
+		The resulting kernel will be in the same state as if #CreateKernel() is called to create the resultant kernel with the same arguments as those used
+		to create {@code source_kernel}, the latest call to #SetKernelArg() or #SetKernelArgSVMPointer() for each argument index applied to kernel and
+		the last call to #SetKernelExecInfo() for each value of the param name parameter are applied to the new kernel object.
 
 		All arguments of the new kernel object must be intact and it may be correctly used in the same situations as kernel except those that assume a
 		pre-existing reference count. Setting arguments on the new kernel object will not affect {@code source_kernel} except insofar as the argument points to
@@ -252,7 +252,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 			{@code param_value} is not $NULL.
 			""",
 			"""
-			$INVALID_VALUE if {@code param_name} is #KERNEL_SUB_GROUP_SIZE_FOR_NDRANGE and the size in bytes specified by {@code input_value_size} is not valid
+			$INVALID_VALUE if {@code param_name} is {@code KERNEL_SUB_GROUP_SIZE_FOR_NDRANGE} and the size in bytes specified by {@code input_value_size} is not valid
 			or if {@code input_value} is $NULL.
 			""",
 			"$INVALID_KERNEL if {@code kernel} is not a valid kernel object.",
@@ -266,7 +266,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		"EnqueueSVMMigrateMem",
 		"""
 		Enqueues a command to indicate which device a set of ranges of SVM allocations should be associated with. Once the event returned by
-		{@code clEnqueueSVMMigrateMem} has become CL10#COMPLETE, the ranges specified by svm pointers and sizes have been successfully migrated to the device
+		{@code clEnqueueSVMMigrateMem} has become #COMPLETE, the ranges specified by svm pointers and sizes have been successfully migrated to the device
 		associated with command queue.
 
 		The user is responsible for managing the event dependencies associated with this command in order to avoid overlapping access to SVM allocations.
@@ -286,7 +286,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		),
 		const..void_pp.IN(
 			"svm_pointers",
-			"a pointer to an array of pointers. Each pointer in this array must be within an allocation produced by a call to CL20#SVMAlloc()."
+			"a pointer to an array of pointers. Each pointer in this array must be within an allocation produced by a call to #SVMAlloc()."
 		),
 		nullable..const..size_t_p.IN(
 			"sizes",
@@ -310,7 +310,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 			"$INVALID_VALUE if {@code num_svm_pointers} is zero or {@code svm_pointers} is $NULL.",
 			"""
 			$INVALID_VALUE if {@code sizes[i]} is non-zero range ${code("[svm_pointers[i], svm_pointers[i]+sizes[i])")} is not contained within an existing
-			CL20#SVMAlloc() allocation.
+			#SVMAlloc() allocation.
 			""",
 			IEWLE,
 			OORE,

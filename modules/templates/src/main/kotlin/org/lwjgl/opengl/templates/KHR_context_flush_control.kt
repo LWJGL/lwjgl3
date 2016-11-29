@@ -52,7 +52,7 @@ val GLX_ARB_context_flush_control = "GLXARBContextFlushControl".nativeClassGLX("
 		"""
 
 	IntConstant(
-		"Accepted as an attribute name in the {@code *attrib_list} argument to GLXARBCreateContext#CreateContextAttribsARB().",
+		"Accepted as an attribute name in the {@code *attrib_list} argument to GLXARBCreateContext#glXCreateContextAttribsARB().",
 
 		"CONTEXT_RELEASE_BEHAVIOR_ARB"..0x2097
 	)
@@ -60,7 +60,7 @@ val GLX_ARB_context_flush_control = "GLXARBContextFlushControl".nativeClassGLX("
 	IntConstant(
 		"""
 		Accepted as an attribute value for #CONTEXT_RELEASE_BEHAVIOR_ARB in the {@code *attrib_list} argument to
-		GLXARBCreateContext#CreateContextAttribsARB().
+		GLXARBCreateContext#glXCreateContextAttribsARB().
 		""",
 
 		"CONTEXT_RELEASE_BEHAVIOR_NONE_ARB"..0x0000,
@@ -78,7 +78,7 @@ val WGL_ARB_context_flush_control = "WGLARBContextFlushControl".nativeClassWGL("
 		"""
 
 	IntConstant(
-		"Accepted as an attribute name in the {@code *attrib_list} argument to WGLARBCreateContext#CreateContextAttribsARB().",
+		"Accepted as an attribute name in the {@code *attrib_list} argument to WGLARBCreateContext#wglCreateContextAttribsARB().",
 
 		"CONTEXT_RELEASE_BEHAVIOR_ARB"..0x2097
 	)
@@ -86,7 +86,7 @@ val WGL_ARB_context_flush_control = "WGLARBContextFlushControl".nativeClassWGL("
 	IntConstant(
 		"""
 		Accepted as an attribute value for #CONTEXT_RELEASE_BEHAVIOR_ARB in the {@code *attrib_list} argument to
-		WGLARBCreateContext#CreateContextAttribsARB().
+		WGLARBCreateContext#wglCreateContextAttribsARB().
 		""",
 
 		"CONTEXT_RELEASE_BEHAVIOR_NONE_ARB"..0x0000,

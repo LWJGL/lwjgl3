@@ -82,7 +82,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		"""
 		Determine which GPU a context is attached to.
 
-		Unassociated contexts are created by calling WGL#CreateContext(). Although these contexts are unassociated, their use will still be tied to a single
+		Unassociated contexts are created by calling WGL#wglCreateContext(). Although these contexts are unassociated, their use will still be tied to a single
 		GPU in most cases. For this reason it is advantageous to be able to query the GPU an existing unassociated context resides on. If multiple GPUs are
 		available, it would be undesirable to use one for rendering to visible surfaces and then chose the same one for off-screen rendering.
 		""",
@@ -102,7 +102,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		"""
 		Create an associated context with a specific GL version.
 
-		All capabilities and limitations of WGLARBCreateContext#CreateContextAttribsARB() apply to {@code CreateAssociatedContextAttribsAMD}.
+		All capabilities and limitations of WGLARBCreateContext#wglCreateContextAttribsARB() apply to {@code CreateAssociatedContextAttribsAMD}.
 		""",
 
 		UINT.IN("id", "a valid GPU id"),
@@ -112,7 +112,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 
 	BOOL(
 		"DeleteAssociatedContextAMD",
-		"Deletes an associated context. An associated context cannot be deleted by calling WGL#DeleteContext().",
+		"Deletes an associated context. An associated context cannot be deleted by calling #DeleteContext().",
 
 		HGLRC.IN("hglrc", "a valid associated context created by calling #CreateAssociatedContextAMD()")
 	)
@@ -144,7 +144,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		GLbitfield.IN(
 			"mask",
 			"the bitwise OR of a number of values indicating which buffers are to be copied",
-			"#COLOR_BUFFER_BIT GL11##GL_DEPTH_BUFFER_BIT GL11##GL_STENCIL_BUFFER_BIT", LinkMode.BITFIELD
+			"#COLOR_BUFFER_BIT #DEPTH_BUFFER_BIT #STENCIL_BUFFER_BIT", LinkMode.BITFIELD
 		),
 		GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "#LINEAR #NEAREST")
 	)

@@ -144,7 +144,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		"""
 		Respecifies a rectangular subregion of a slice of an existing 3D texel array. No change is made to the {@code internalformat}, {@code width},
 		{@code height}, or {@code border} parameters of the specified texel array, nor is any change made to texel values outside the specified subregion. See
-		GL11#CopyTexImage2D() for more details.
+		#CopyTexImage2D() for more details.
 		""",
 		GLenum.IN("target", "the texture target", TEXTURE_3D_TARGETS),
 		GLint.IN("level", "the level-of-detail number"),
@@ -251,7 +251,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 	void(
 		"DrawRangeElements",
 		"""
-		A restricted form of GL11#DrawElements(). mode, start, end, and count match the corresponding arguments to glDrawElements, with the additional
+		A restricted form of #DrawElements(). mode, start, end, and count match the corresponding arguments to glDrawElements, with the additional
 		constraint that all values in the arrays count must lie between start and end, inclusive.
 
 		Implementations denote recommended maximum amounts of vertex and index data, which may be queried by calling glGet with argument
@@ -293,7 +293,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
+			"#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
 		),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored")
 	)

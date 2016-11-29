@@ -18,7 +18,7 @@ val AL_EXT_source_distance_model = "EXTSourceDistanceModel".nativeClassAL("EXT_s
 		"""
 
 	IntConstant(
-		"Accepted by the {@code target} parameter of AL10#Enable(), AL10#Disable(), and AL10#IsEnabled().",
+		"Accepted by the {@code target} parameter of #Enable(), #Disable(), and #IsEnabled().",
 
 		"SOURCE_DISTANCE_MODEL"..0x200
 	)
