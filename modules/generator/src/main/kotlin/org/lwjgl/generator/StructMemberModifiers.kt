@@ -12,6 +12,9 @@ object ConstMember : StructMemberModifier() {
 	}
 }
 
+@Suppress("unused")
+val Struct.const: ConstMember get() = ConstMember
+
 /*
 	required AutoSize + non-null reference: ref must not be null and size must not be 0.
 	optional AutoSize + non-null reference: ref may be null, if size is 0.
@@ -61,9 +64,6 @@ class AutoSizeMember(
 }
 
 @Suppress("unused")
-val Struct.const: ConstMember get() = ConstMember
-
-@Suppress("unused")
 fun Struct.AutoSize(reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
 	AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
 
@@ -88,6 +88,33 @@ fun Struct.AutoSizeShr(expression: String, reference: String, vararg dependent: 
 @Suppress("unused")
 fun Struct.AutoSizeShl(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
 	AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shl(expression), optional = optional, atLeastOne = atLeastOne)
+
+class AutoSizeIndirect(
+	override val reference: String,
+	vararg val dependent: String
+) : StructMemberModifier(), ReferenceModifier {
+	companion object : ModifierKey<AutoSizeMember>
+
+	override val isSpecial = true
+
+	internal val references: Sequence<String> = sequenceOf(reference) + dependent.asSequence()
+
+	internal fun members(members: Sequence<StructMember>) = references.map { ref -> members.first { it.name == ref } }
+
+	override fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
+
+	override fun validate(member: StructMember) {
+		if (when (member.nativeType.mapping) {
+			PrimitiveMapping.BYTE,
+			PrimitiveMapping.SHORT,
+			PrimitiveMapping.INT,
+			PrimitiveMapping.LONG,
+			PrimitiveMapping.POINTER -> false
+			else                     -> true
+		})
+			throw IllegalArgumentException("Members with the AutoSizeIndirect modifier must be integer primitive types.")
+	}
+}
 
 object NullableMember : StructMemberModifier() {
 	override val isSpecial = true

@@ -298,7 +298,11 @@ val aiAnimMesh_pp = struct(ASSIMP_PACKAGE, "AIAnimMesh", nativeName = "struct ai
     nullable..aiVector3D_p.buffer("mBitangents", "Replacement for ##AIMesh{@code ::mBitangents}.")
     nullable..aiColor4D_p.array("mColors", "Replacement for ##AIMesh{@code ::mColors}", size = "Assimp.AI_MAX_NUMBER_OF_COLOR_SETS")
     nullable..aiVector3D_p.array("mTextureCoords", "Replacement for ##AIMesh{@code ::mTextureCoords}", size = "Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS")
-    AutoSize("mVertices", "mNormals", "mTangents", "mBitangents", "mColors", "mTextureCoords")..unsigned_int.member(
+	AutoSize(
+		"mVertices", "mNormals", "mTangents", "mBitangents"
+	)..AutoSizeIndirect(
+		"mColors", "mTextureCoords"
+	)..unsigned_int.member(
 	    "mNumVertices",
 	    """
 	    The number of vertices in the {@code aiAnimMesh}, and thus the length of all the member arrays. This has always the same value as the
@@ -327,7 +331,11 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
 		"SortByPrimitiveType"-Step can be used to make sure the output meshes consist of one primitive type each.
 		"""
     ).links("PrimitiveType_\\w+", LinkMode.BITFIELD)
-    AutoSize("mVertices", "mNormals", "mTangents", "mBitangents", "mColors", "mTextureCoords")..unsigned_int.member(
+	AutoSize(
+		"mVertices", "mNormals", "mTangents", "mBitangents"
+	)..AutoSizeIndirect(
+		"mColors", "mTextureCoords"
+	)..unsigned_int.member(
 	    "mNumVertices",
 	    """
 	    The number of vertices in this mesh. This is also the size of all of the per-vertex data arrays. The maximum value for this member is #AI_MAX_VERTICES.
@@ -336,7 +344,7 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
     AutoSize("mFaces")..unsigned_int.member(
 	    "mNumFaces",
 	    """
-	    The number of primitives (triangles, polygons, lines) in this  mesh. This is also the size of the mFaces array. The maximum value for this member is
+	    The number of primitives (triangles, polygons, lines) in this mesh. This is also the size of the mFaces array. The maximum value for this member is
 	    #AI_MAX_FACES.
 		"""
     )

@@ -1265,9 +1265,10 @@ ${validations.joinToString("\n")}
 							println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * POINTER_SIZE);")
 							setRemaining(it, prefix = "\t\t", suffix = "\n")
 							println("\t}")
+							val structTypeIndexed = "$structType${if (getReferenceMember(AutoSizeIndirect, it.name) == null) "" else ".Buffer"}"
 							if (it.public)
-								println("\t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
-							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) {")
+								println("\t/** Unsafe version of {@link #$setter(int, $structTypeIndexed) $setter}. */")
+							println("\tpublic static void n$setter(long $STRUCT, int index, $structTypeIndexed value) {")
 							println("\t\tif ( CHECKS ) check(index, ${it.size});")
 							println("\t\tmemPutAddress($STRUCT + $field + index * POINTER_SIZE, ${it.addressValue});")
 							println("\t}")
@@ -1411,7 +1412,7 @@ ${validations.joinToString("\n")}
 							println("$indent/** Copies the specified {@link $structType} at the specified index of the {@code $field} field. */")
 						}
 						if (overrides) println("$indent@Override")
-						println("${indent}public $returnType $setter(int index, $structType value) { $n$setter($ADDRESS, index, value); return this; }")
+						println("${indent}public $returnType $setter(int index, $structType${if (getReferenceMember(AutoSizeIndirect, it.name) == null) "" else ".Buffer"} value) { $n$setter($ADDRESS, index, value); return this; }")
 					} else if (it is StructMemberCharArray) {
 						println("$indent/** Copies the specified encoded string to the {@code $field} field. */")
 						if (overrides) println("$indent@Override")
@@ -1494,6 +1495,9 @@ ${validations.joinToString("\n")}
 					if (it.nativeType is StructType) {
 						val nestedStruct = it.nativeType.javaMethodType
 						if (it.nativeType.includesPointer) {
+							val autoSize = getReferenceMember(AutoSizeMember, it.name)
+							val autoSizeIndirect = getReferenceMember(AutoSizeIndirect, it.name)
+
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$getter}. */")
 							println("\tpublic static PointerBuffer n$getter(long $STRUCT) {")
@@ -1501,9 +1505,11 @@ ${validations.joinToString("\n")}
 							println("\t}")
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
-							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
+							println("\tpublic static $nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"} n$getter(long $STRUCT, int index) {")
 							println("\t\tif ( CHECKS ) check(index, ${it.size});")
-							println("\t\treturn $nestedStruct.create(memGetAddress($STRUCT + $field + index * POINTER_SIZE));")
+							println("\t\treturn $nestedStruct.create(memGetAddress($STRUCT + $field + index * POINTER_SIZE)${autoSizeIndirect.let {
+								if (it == null) "" else ", n${it.name}($STRUCT)"
+							}});")
 							println("\t}")
 						} else {
 							if (it.public)
@@ -1636,7 +1642,7 @@ ${validations.joinToString("\n")}
 							println("${indent}public PointerBuffer $getter() { return $n$getter($ADDRESS); }")
 							println("$indent/** Returns a {@link $structType} view of the pointer at the specified index of the {@code $getter}. */")
 							if (overrides) println("$indent@Override")
-							println("${indent}public $structType $getter(int index) { return $n$getter($ADDRESS, index); }")
+							println("${indent}public $structType${if (getReferenceMember(AutoSizeIndirect, it.name) == null) "" else ".Buffer"} $getter(int index) { return $n$getter($ADDRESS, index); }")
 						} else {
 							println("$indent/** Returns a {@link $structType}.Buffer view of the {@code $getter} field. */")
 							if (overrides) println("$indent@Override")
