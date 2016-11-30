@@ -6,7 +6,6 @@ package org.lwjgl.vulkan
 
 import org.lwjgl.generator.*
 import java.io.*
-import java.util.*
 
 private val NativeClass.capName: String
 	get() = if (templateName.startsWith(prefix)) {
@@ -32,7 +31,7 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		writer.println(if (function has Capabilities)
 			"${function[Capabilities].expression}.${function.name};"
 		else
-			"${function.getParams() { it.nativeType is ObjectType }.first().name}.getCapabilities().${function.name};")
+			"${function.getParams { it.nativeType is ObjectType }.first().name}.getCapabilities().${function.name};")
 	}
 
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
@@ -46,12 +45,14 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 	}
 
 	init {
+		javaImport("static org.lwjgl.system.MemoryUtil.*")
+
 		documentation = "Defines the capabilities of a Vulkan {@code VkInstance} or {@code VkDevice}."
 	}
 
 	override fun PrintWriter.generateJava() {
 		generateJavaPreamble()
-		println("public class $CAPABILITIES_CLASS {\n")
+		println("public class $CAPABILITIES_CLASS {")
 
 		val classes = super.getClasses { o1, o2 ->
 			// Core functionality first, extensions after
@@ -64,16 +65,17 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
 		}
 
-		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-
-		val addresses = classesWithFunctions
-			.map { it.functions }
-			.flatten()
-			.filter { !it.has(Macro) }
-			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
-
-		println("\tpublic final long")
-		println(addresses.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
+		classes.asSequence()
+			.filter { it.hasNativeFunctions }
+			.forEach {
+				println("\n\t// ${it.templateName}")
+				println("\tpublic final long")
+				println(it.functions.asSequence()
+					.filter { !it.has(Macro) }
+					.map { it.name }
+					.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";")
+				)
+			}
 
 		println("""
 	/** The Vulkan API version number. */
@@ -88,19 +90,38 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 		println("""
 	$CAPABILITIES_CLASS(FunctionProvider provider, int apiVersion, Set<String> ext) {
 		this.apiVersion = apiVersion;
+
+		boolean supported;
 """)
-
-		println(addresses.map { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
-
-		for (extension in classes) {
-			val capName = extension.capName
-			print("\t\t$capName = ext.contains(\"${extension.capName}\")")
-			if (extension.hasNativeFunctions)
-				print(" && VK.checkExtension(\"$capName\", ${if (capName == extension.className) "$VULKAN_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
-			println(";")
+		classes.forEach {
+			val capName = it.capName
+			if (it.hasNativeFunctions) {
+				println("\t\t{")
+				if (it.templateName == "VK10") {
+					println(it.functions.asSequence()
+						.filter { !it.has(Macro) }
+						.map { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" }.joinToString("\n\t\t\t", prefix = "\t\t\t"))
+					println("\t\t\t$capName = VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(this));")
+				} else {
+					println("\t\t\tsupported = ext.contains(\"$capName\");")
+					println(it.functions.asSequence()
+						.filter { !it.has(Macro) }
+						.map { "${it.name} = isSupported(provider, ${it.functionAddress}, supported);" }.joinToString("\n\t\t\t", prefix = "\t\t\t"))
+					println("\t\t\t$capName = supported && VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(this));")
+				}
+				println("\t\t}")
+			} else {
+				println("\t\t$capName = ext.contains(\"$capName\");")
+			}
 		}
-		println("\t}")
-		print("\n}")
+		println("""
+	}
+
+	private static long isSupported(FunctionProvider provider, String functionName, boolean extensionSupported) {
+		return extensionSupported ? provider.getFunctionAddress(functionName) : NULL;
+	}
+
+}""")
 	}
 
 })
