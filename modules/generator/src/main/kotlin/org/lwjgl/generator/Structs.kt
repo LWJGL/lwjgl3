@@ -1185,9 +1185,7 @@ ${validations.joinToString("\n")}
 
 			print(prefix)
 			print(if (m has nullable || autoSize.optional) {
-				if (autoSize.atLeastOne)
-					"if ( value != null ) n${capacity.name}($STRUCT, $autoSizeExpression);"
-				else if (m has nullable && !autoSize.optional)
+				if (autoSize.atLeastOne || (m has nullable && autoSize.optional))
 					"if ( value != null ) n${capacity.name}($STRUCT, $autoSizeExpression);"
 				else
 					"n${capacity.name}($STRUCT, value == null ? 0 : $autoSizeExpression);"

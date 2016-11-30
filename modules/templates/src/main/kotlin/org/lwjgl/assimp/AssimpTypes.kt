@@ -1084,7 +1084,7 @@ val aiExportDataBlob = struct(ASSIMP_PACKAGE, "AIExportDataBlob", nativeName = "
         """
 
 	AutoSize("data")..size_t.member("size", "Size of the data in bytes")
-	nullable..void_p.member("data", "The data.")
+	void_p.member("data", "The data.")
 	aiString.member(
 		"name",
 		"""

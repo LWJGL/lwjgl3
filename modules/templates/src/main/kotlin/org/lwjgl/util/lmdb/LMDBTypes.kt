@@ -145,7 +145,7 @@ val MDB_val_p = struct(LMDB_PACKAGE, "MDBVal", nativeName = "MDB_val") {
 		Other data items can in theory be from 0 to {@code 0xffffffff} bytes long.
 		"""
 
-	AutoSize("mv_data")..size_t.member("mv_size", "Size of the data item.")
+	AutoSize("mv_data", optional = true)..size_t.member("mv_size", "Size of the data item.")
 	nullable..void_p.member("mv_data", "Address of the data item.")
 }.p
 

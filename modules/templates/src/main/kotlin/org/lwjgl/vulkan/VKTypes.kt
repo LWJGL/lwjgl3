@@ -2641,9 +2641,9 @@ val VkPipelineViewportStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineViewpo
 	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineViewportStateCreateFlags.member("flags", "reserved for future use.")
-	AutoSize("pViewports")..uint32_t.member("viewportCount", "the number of viewports used by the pipeline.")
+	AutoSize("pViewports", optional = true)..uint32_t.member("viewportCount", "the number of viewports used by the pipeline.")
 	nullable..const..VkViewport.p.buffer("pViewports", "a pointer to an array of ##VkViewport structures, defining the viewport transforms. If the viewport state is dynamic, this member is ignored.")
-	AutoSize("pScissors")..uint32_t.member("scissorCount", "the number of <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#fragops-scissor\">scissors</a> and <b>must</b> match the number of viewports.")
+	AutoSize("pScissors", optional = true)..uint32_t.member("scissorCount", "the number of <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#fragops-scissor\">scissors</a> and <b>must</b> match the number of viewports.")
 	nullable..const..VkRect2D.p.buffer("pScissors", "a pointer to an array of ##VkRect2D structures which define the rectangular bounds of the scissor for the corresponding viewport. If the scissor state is dynamic, this member is ignored.")
 }
 
