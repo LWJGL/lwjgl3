@@ -1500,9 +1500,7 @@ ${validations.joinToString("\n")}
 
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$getter}. */")
-							println("\tpublic static PointerBuffer n$getter(long $STRUCT) {")
-							println("\t\treturn memPointerBuffer($STRUCT + $field, ${getReferenceMember(AutoSizeMember, it.name)?.autoSize ?: it.size});")
-							println("\t}")
+							println("\tpublic static PointerBuffer n$getter(long $STRUCT) { return memPointerBuffer($STRUCT + $field, ${autoSize?.autoSize ?: it.size}); }")
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"} n$getter(long $STRUCT, int index) {")
@@ -1514,9 +1512,7 @@ ${validations.joinToString("\n")}
 						} else {
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$getter}. */")
-							println("\tpublic static $nestedStruct.Buffer n$getter(long $STRUCT) {")
-							println("\t\treturn $nestedStruct.create($STRUCT + $field, ${getReferenceMember(AutoSizeMember, it.name)?.autoSize ?: it.size});")
-							println("\t}")
+							println("\tpublic static $nestedStruct.Buffer n$getter(long $STRUCT) { return $nestedStruct.create($STRUCT + $field, ${getReferenceMember(AutoSizeMember, it.name)?.autoSize ?: it.size}); }")
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
@@ -1541,9 +1537,7 @@ ${validations.joinToString("\n")}
 
 						if (it.public)
 							println("\t/** Unsafe version of {@link #$getter}. */")
-						println("\tpublic static $bufferType n$getter(long $STRUCT) {")
-						println("\t\treturn mem$bufferType($STRUCT + $field, ${getReferenceMember(AutoSizeMember, it.name)?.autoSize ?: it.size});")
-						println("\t}")
+						println("\tpublic static $bufferType n$getter(long $STRUCT) { return mem$bufferType($STRUCT + $field, ${getReferenceMember(AutoSizeMember, it.name)?.autoSize ?: it.size}); }")
 
 						val javaType = it.nativeType.nativeMethodType
 						val bytesPerElement = if (mapping === PrimitiveMapping.POINTER) "POINTER_SIZE" else mapping.bytes.toString()
