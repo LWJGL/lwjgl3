@@ -224,7 +224,7 @@ val aiNode = struct(ASSIMP_PACKAGE, "AINode", nativeName = "struct aiNode") {
 	aiMatrix4x4.member("mTransformation", "The transformation relative to the node's parent.")
 	nullable..aiNode_p.member("mParent", "Parent node. $NULL if this node is the root node.")
 	AutoSize("mChildren")..unsigned_int.member("mNumChildren", "The number of child nodes of this node.")
-	nullable..aiNode_p.buffer("mChildren", "The child nodes of this node. $NULL if {@code mNumChildren} is 0.")
+	nullable..aiNode_p.p.member("mChildren", "The child nodes of this node. $NULL if {@code mNumChildren} is 0.")
 	AutoSize("mMeshes")..unsigned_int.member("mNumMeshes", "The number of meshes of this node.")
 	nullable..unsigned_int_p.member("mMeshes", "The meshes of this node. Each entry is an index into the mesh list of the aiScene.")
 	nullable..aiMetadata_p.member("mMetadata", "Metadata associated with this node or $NULL if there is no metadata.")
