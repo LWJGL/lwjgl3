@@ -91,12 +91,11 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 	$CAPABILITIES_CLASS(FunctionProvider provider, int apiVersion, Set<String> ext) {
 		this.apiVersion = apiVersion;
 
-		boolean supported;
-""")
+		boolean supported;""")
 		classes.forEach {
 			val capName = it.capName
 			if (it.hasNativeFunctions) {
-				println("\t\t{")
+				println("\n\t\t{")
 				if (it.templateName == "VK10") {
 					println(it.functions.asSequence()
 						.filter { !it.has(Macro) }
@@ -109,9 +108,9 @@ val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILI
 						.map { "${it.name} = isSupported(provider, ${it.functionAddress}, supported);" }.joinToString("\n\t\t\t", prefix = "\t\t\t"))
 					println("\t\t\t$capName = supported && VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(this));")
 				}
-				println("\t\t}")
+				print("\t\t}")
 			} else {
-				println("\t\t$capName = ext.contains(\"$capName\");")
+				print("\n\t\t$capName = ext.contains(\"$capName\");")
 			}
 		}
 		println("""

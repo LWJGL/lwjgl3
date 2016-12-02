@@ -102,6 +102,8 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 			<li>#COLOR_SPACE_SRGB_NONLINEAR_KHR: The presentation engine supports the sRGB color space.</li>
 		</ul>
 
+		If {@code pSurfaceFormats} includes an entry whose value for {@code colorSpace} is #COLOR_SPACE_SRGB_NONLINEAR_KHR and whose value for {@code format} is a UNORM (or SRGB) format and the corresponding SRGB (or UNORM) format is a color renderable format for #IMAGE_TILING_OPTIMAL, then {@code pSurfaceFormats} <b>must</b> also contain an entry with the same value for {@code colorSpace} and {@code format} equal to the corresponding SRGB (or UNORM) format.
+
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
 		If {@code pSurfaceFormats} includes just one entry, whose value for {@code format} is #FORMAT_UNDEFINED, {@code surface} has no preferred format. In this case, the application <b>can</b> use any valid {@code VkFormat} value.
 		</div>
