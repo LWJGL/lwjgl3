@@ -1553,6 +1553,21 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	)
 
 	void(
+		"SetWindowAttrib",
+		"""
+		Sets an attribute of the specified window.
+
+		This function must only be called from the main thread.
+		""",
+
+		GLFWwindow.IN("window", "the window to set the attribute for"),
+		int.IN("attrib", "the attribute to set", "#DECORATED #RESIZABLE #FLOATING #AUTO_ICONIFY"),
+		int.IN("value", "the value to set"),
+
+		since = "version 3.3"
+	)
+
+	void(
 		"SetWindowUserPointer",
 		"""
 		Sets the user-defined pointer of the specified window. The current value is retained until the window is destroyed. The initial value is $NULL.

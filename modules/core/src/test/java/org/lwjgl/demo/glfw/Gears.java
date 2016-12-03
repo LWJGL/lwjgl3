@@ -139,6 +139,12 @@ public class Gears extends AbstractGears {
 						: GLFW_CURSOR_NORMAL
 					);
 					break;
+				case GLFW_KEY_R:
+					glfwSetWindowAttrib(windowHnd, GLFW_RESIZABLE, 1 - glfwGetWindowAttrib(windowHnd, GLFW_RESIZABLE));
+					break;
+				case GLFW_KEY_U:
+					glfwSetWindowAttrib(windowHnd, GLFW_DECORATED, 1 - glfwGetWindowAttrib(windowHnd, GLFW_DECORATED));
+					break;
 			}
 		});
 
