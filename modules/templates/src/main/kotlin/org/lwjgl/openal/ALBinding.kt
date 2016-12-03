@@ -6,7 +6,6 @@ package org.lwjgl.openal
 
 import org.lwjgl.generator.*
 import java.io.*
-import java.util.*
 
 private val CAPABILITIES_CLASS = "ALCapabilities"
 

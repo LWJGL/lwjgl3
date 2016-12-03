@@ -4,8 +4,6 @@
  */
 package org.lwjgl.generator
 
-import java.util.*
-
 enum class ApplyTo {
 	NORMAL,
 	ALTERNATIVE,

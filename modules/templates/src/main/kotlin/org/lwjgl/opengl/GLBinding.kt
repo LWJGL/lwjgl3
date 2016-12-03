@@ -6,8 +6,6 @@ package org.lwjgl.opengl
 
 import org.lwjgl.generator.*
 import java.io.*
-import java.util.*
-import java.util.regex.*
 
 val NativeClass.capName: String
 	get() = if (templateName.startsWith(prefixTemplate)) {
@@ -40,7 +38,7 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		)
 	}
 
-	private val GLCorePattern = Pattern.compile("GL[1-9][0-9]")
+	private val GLCorePattern = "GL[1-9][0-9]".toRegex()
 
 	override val hasCapabilities: Boolean get() = true
 
@@ -54,7 +52,7 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 	}
 
 	override fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String): Boolean {
-		if (GLCorePattern.matcher(function.nativeClass.className).matches()) {
+		if (GLCorePattern.matches(function.nativeClass.className)) {
 			val xmlName = if (function has ReferenceGL)
 				function[ReferenceGL].function
 			else
@@ -201,13 +199,12 @@ fun String.nativeClassGL(
 	init = init
 )
 
-private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
-val NativeClass.registryLink: String get() {
-	val matcher = REGISTRY_PATTERN.matcher(templateName)
-	if (!matcher.matches())
-		throw IllegalStateException("Non-standard extension name: $templateName")
-	return url("http://www.opengl.org/registry/specs/${matcher.group(1)}/${matcher.group(2)}.txt", templateName)
-}
+private val REGISTRY_PATTERN = "([A-Z]+)_(\\w+)".toRegex()
+val NativeClass.registryLink: String get() = (REGISTRY_PATTERN.matchEntire(templateName) ?: throw IllegalStateException("Non-standard extension name: $templateName"))
+	.destructured
+	.let { (group, extension) ->
+		url("http://www.opengl.org/registry/specs/$group/$extension.txt", templateName)
+	}
 
 fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
 fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =

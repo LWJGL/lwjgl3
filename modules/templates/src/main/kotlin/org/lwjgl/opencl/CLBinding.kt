@@ -6,7 +6,6 @@ package org.lwjgl.opencl
 
 import org.lwjgl.generator.*
 import java.io.*
-import java.util.*
 
 private val NativeClass.capName: String
 	get() = if (templateName.startsWith(prefix)) {

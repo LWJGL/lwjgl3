@@ -6,7 +6,6 @@ package org.lwjgl.opengl
 
 import org.lwjgl.generator.*
 import java.io.*
-import java.util.*
 
 private val CAPABILITIES_CLASS = "WGLCapabilities"
 
@@ -40,7 +39,7 @@ val WGLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILI
 		generateJavaPreamble()
 		println("public final class $CAPABILITIES_CLASS {\n")
 
-		val classes = super.getClasses { o1, o2 -> o1.templateName.compareTo(o2.templateName, ignoreCase = true) }
+		val classes = getClasses()
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
 

@@ -5,7 +5,6 @@
 package org.lwjgl.generator
 
 import java.io.*
-import java.util.*
 
 private val STRUCT = "struct"
 private val ANONYMOUS = "*" // very easy to introduce bugs, unless this is an invalid character in Java identifiers
@@ -437,7 +436,7 @@ $indentation}"""
 		members.filter { it has AutoSizeMember }.forEach {
 			val autoSize = it[AutoSizeMember]
 
-			autoSize.references.forEachIndexed { i, reference ->
+			autoSize.references.forEach { reference ->
 				val bufferParam = members.firstOrNull { it.name == reference }
 				if (bufferParam == null)
 					it.error("Reference does not exist: AutoSize($reference)")

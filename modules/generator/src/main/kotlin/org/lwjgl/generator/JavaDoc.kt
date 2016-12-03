@@ -5,17 +5,14 @@
 package org.lwjgl.generator
 
 import java.lang.Math.*
-import java.util.regex.*
 
-internal fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
-
-private val REDUNDANT_WHITESPACE = Pattern.compile("^[ \\t]+$", Pattern.MULTILINE)
+private val REDUNDANT_WHITESPACE = "^[ \\t]+$".toRegex(RegexOption.MULTILINE)
 private val BLOCK_NODE = "(?:div|h[1-6]|pre|table|thead|tfoot|tbody|td|tr|ul|li|ol|dl|dt|dd)" // TODO: add more here if necessary
-private val FRAGMENT = Pattern.compile("(</?$BLOCK_NODE(?:\\s[^>]+)?>|^)([\\s\\S]*?)(?=</?$BLOCK_NODE(?:\\s[^>]+)?>|$)")
-private val CHILD_NODE = Pattern.compile("<(?:tr|thead|tfoot|tbody|li|dt|dd)>")
-private val PARAGRAPH_PATTERN = Pattern.compile("\\n\\n(?:\\n?[ \\t]*[\\S][^\\n]*)+", Pattern.MULTILINE)
-private val CLEANUP_PATTERN = Pattern.compile("^[ \t]++(?![*])", Pattern.MULTILINE)
-private val UNESCAPE_PATTERN = Pattern.compile("\uFFFF")
+private val FRAGMENT = "(</?$BLOCK_NODE(?:\\s[^>]+)?>|^)([\\s\\S]*?)(?=</?$BLOCK_NODE(?:\\s[^>]+)?>|$)".toRegex()
+private val CHILD_NODE = "<(?:tr|thead|tfoot|tbody|li|dt|dd)>".toRegex()
+private val PARAGRAPH_PATTERN = "\\n\\n(?:\\n?[ \\t]*[\\S][^\\n]*)+".toRegex(RegexOption.MULTILINE)
+private val CLEANUP_PATTERN = "^[ \t]++(?![*])".toRegex(RegexOption.MULTILINE)
+private val UNESCAPE_PATTERN = "\uFFFF".toRegex()
 
 /*
 Here we perform the following transformation:
@@ -43,23 +40,19 @@ The first text sub-block is not wrapped in <p> because:
 For the purposes of this transformation, the javadoc root is an implicit block.
  */
 private fun String.cleanup(linePrefix: String = "\t * "): String {
-	val dom = trim().replaceAll(REDUNDANT_WHITESPACE, "")
-
-	return CLEANUP_PATTERN.matcher(
-		StringBuilder(dom.length).layoutDOM(dom, linePrefix)
-	)
-		.replaceAll(linePrefix)
-		.replaceAll(UNESCAPE_PATTERN, "")
+	val dom = trim().replace(REDUNDANT_WHITESPACE, "")
+	return StringBuilder(dom.length).layoutDOM(dom, linePrefix)
+		.replace(CLEANUP_PATTERN, linePrefix)
+		.replace(UNESCAPE_PATTERN, "")
 }
 
 private fun StringBuilder.layoutDOM(dom: String, linePrefix: String): StringBuilder {
-	val matcher = FRAGMENT.matcher(dom)
+	FRAGMENT.findAll(dom).forEach { match ->
+		val (tag, text) = match.destructured
 
-	while (matcher.find()) {
-		val tag = matcher.group(1)
 		if (tag.isNotEmpty()) {
-			if (startNewLine(dom, matcher.start())) {
-				if (!tag.startsWith("</") && !CHILD_NODE.matcher(tag).matches()) {
+			if (startNewLine(dom, match.range.start)) {
+				if (!tag.startsWith("</") && !tag.matches(CHILD_NODE)) {
 					append('\n')
 					append(linePrefix)
 				}
@@ -69,9 +62,10 @@ private fun StringBuilder.layoutDOM(dom: String, linePrefix: String): StringBuil
 			append(tag)
 		}
 
-		val text = matcher.group(2).trim()
-		if (text.isNotEmpty())
-			layoutText(text, linePrefix, forceParagraph = tag.isNotEmpty() && tag.startsWith("</"))
+		text.trim().let {
+			if (it.isNotEmpty())
+				layoutText(it, linePrefix, forceParagraph = tag.isNotEmpty() && tag.startsWith("</"))
+		}
 	}
 
 	return this
@@ -93,22 +87,21 @@ private fun startNewLine(dom: String, index: Int): Boolean {
 }
 
 private fun StringBuilder.layoutText(text: String, linePrefix: String, forceParagraph: Boolean = false) {
-	val matcher = PARAGRAPH_PATTERN.matcher(text)
+	var to: Int = -1
 
-	if (matcher.find()) {
-		if (matcher.start() > 0)
-			appendParagraphFirst(linePrefix, text, matcher.start(), forceParagraph)
+	PARAGRAPH_PATTERN.findAll(text).forEach { match ->
+		val from = match.range.start
+		if (to == -1 && from > 0)
+			appendParagraphFirst(linePrefix, text, from, forceParagraph)
 
-		var lastMatch: Int
-		do {
-			appendParagraph(linePrefix, text, matcher.start(), matcher.end())
-			lastMatch = matcher.end()
-		} while (matcher.find())
+		to = match.range.endInclusive + 1
+		appendParagraph(linePrefix, text, from, to)
+	}
 
-		if (lastMatch < text.length)
-			appendParagraph(linePrefix, text, lastMatch, text.length)
-	} else
+	if (to == -1)
 		appendParagraphFirst(linePrefix, text, text.length, forceParagraph)
+	else if (to < text.length)
+		appendParagraph(linePrefix, text, to, text.length)
 }
 
 private fun StringBuilder.appendParagraphFirst(linePrefix: String, text: String, end: Int, forceParagraph: Boolean = false) {
@@ -220,7 +213,7 @@ enum class LinkMode {
 	};
 
 	companion object {
-		private val WHITESPACE = Pattern.compile("\\s+")
+		private val WHITESPACE = "\\s+".toRegex()
 	}
 
 	protected abstract fun print(multi: Boolean): String
@@ -274,15 +267,15 @@ enum class LinkMode {
 /** Useful for simple expressions. */
 fun code(code: String) = """<code>$code</code>"""
 
-private val CODE_BLOCK_TRIM_PATTERN = Pattern.compile("""^\s*\n|\n\s*$""") // first and/or last empty lines...
-private val CODE_BLOCK_ESCAPE_PATTERN = Pattern.compile("^[ \t\n]", Pattern.MULTILINE) // leading space/tab in line, empty line
-private val CODE_BLOCK_TAB_PATTERN = Pattern.compile("\t") // tabs
+private val CODE_BLOCK_TRIM_PATTERN = """^\s*\n|\n\s*$""".toRegex() // first and/or last empty lines...
+private val CODE_BLOCK_ESCAPE_PATTERN = "^[ \t\n]".toRegex(RegexOption.MULTILINE) // leading space/tab in line, empty line
+private val CODE_BLOCK_TAB_PATTERN = "\t".toRegex() // tabs
 
 /** Useful for pre-formatted code blocks. */
 fun codeBlock(code: String) = """<pre><code>${code
-	.replaceAll(CODE_BLOCK_TRIM_PATTERN, "") // ...trim
-	.replaceAll(CODE_BLOCK_ESCAPE_PATTERN, "\uFFFF$0") // ...escape
-	.replaceAll(CODE_BLOCK_TAB_PATTERN, "    ") // ...replace with 4 spaces for consistent formatting.
+	.replace(CODE_BLOCK_TRIM_PATTERN, "") // ...trim
+	.replace(CODE_BLOCK_ESCAPE_PATTERN, "\uFFFF$0") // ...escape
+	.replace(CODE_BLOCK_TAB_PATTERN, "    ") // ...replace with 4 spaces for consistent formatting.
 }</code></pre>"""
 
 fun note(content: String) = "<div style=\"margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;\"><h5>Note</h5>\n$content</div>"

@@ -6,8 +6,6 @@ package org.lwjgl.generator
 
 import java.io.*
 import java.nio.file.*
-import java.util.*
-import java.util.regex.*
 
 
 val HEADER = """/*
@@ -99,13 +97,13 @@ class Preamble {
 
 }
 
-private val JNI_UNDERSCORE_ESCAPE_PATTERN = Pattern.compile("_")
+private val JNI_UNDERSCORE_ESCAPE_PATTERN = "_".toRegex()
 
 internal val String.asJNIName: String
 	get() = if (this.indexOf('_') == -1)
 		this
 	else
-		this.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
+		this.replace(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
 
 enum class Access(val modifier: String) {
 	PUBLIC("public "),
@@ -119,11 +117,10 @@ abstract class GeneratorTarget(
 ) : TemplateElement() {
 
 	companion object {
-		private val LINKS: Pattern = {
-			val JAVA = """\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*(?:\.\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)*"""
-			val NATIVE = """\p{javaJavaIdentifierPart}+""" // Must match tokens like GL_3_BYTES (the link is #3_BYTES)
-			Pattern.compile("""($JAVA)?(?<!&)([@\\]?#{1,2})($NATIVE+(?:\((?:(?:, )?$JAVA)*\))?)""")
-		}()
+		private val LINKS = Pair(
+			"""\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*(?:\.\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)*""",
+			"""\p{javaJavaIdentifierPart}+""" // Must match tokens like GL_3_BYTES (the link is #3_BYTES)
+		).let { (JAVA, NATIVE) -> """($JAVA)?(?<!&)([@\\]?#{1,2})($NATIVE+(?:\((?:(?:, )?$JAVA)*\))?)""".toRegex() }
 	}
 
 	private fun getSourceFileName(): String? {
@@ -221,80 +218,64 @@ abstract class GeneratorTarget(
 	open fun getFieldLink(field: String): String? = null
 	open fun getMethodLink(method: String): String? = null
 
-	protected fun processDocumentation(documentation: String, prefixConstant: String, prefixMethod: String, forcePackage: Boolean = false): String {
-		val matcher = LINKS.matcher(documentation)
-		if (!matcher.find())
-			return documentation
+	protected fun processDocumentation(documentation: String, prefixConstant: String, prefixMethod: String, forcePackage: Boolean = false) = documentation.replace(LINKS) { match ->
+		/*
+		# - normal link, apply prefix
+		## - custom link, do not transform
+		@# or @## - like above, but add "see " in front
+		\# - escape, replace with #
+		 */
+		val linkMethod = match.groupValues[2]
+		if (linkMethod[0] == '\\') {
+			match.value.replace("\\#", "#")
+		} else {
+			var (className, _, classElement) = match.destructured
 
-		val buffer = StringBuilder(documentation.length * 2)
+			val linkType = if (classElement.endsWith(')')) LinkType.METHOD else LinkType.FIELD
+			var prefix = if (linkType === LinkType.FIELD) prefixConstant else prefixMethod
 
-		var lastEnd = 0
-		do {
-			buffer.append(documentation, lastEnd, matcher.start())
+			linkMethod.count { it == '#' }.let { hashes ->
+				if (hashes == 1) {
+					if (className.isEmpty()) {
+						val qualifiedLink = if (linkType === LinkType.FIELD)
+							getFieldLink(classElement) ?: Generator.tokens[packageName]!![classElement]
+						else
+							classElement.substring(0, classElement.lastIndexOf('(')).let {
+								getMethodLink(it) ?: Generator.functions[packageName]!![it]
+							}
 
-			/*
-			# - normal link, apply prefix
-			## - custom link, do not transform
-			@# or @## - like above, but add "see " in front
-			\# - escape, replace with #
-			 */
-			val linkMethod = matcher.group(2)!!
-			if (linkMethod[0] == '\\') {
-				buffer.append(matcher.group().replace("\\#", "#"))
-			} else {
+						if (qualifiedLink != null) {
+							val hashIndex = qualifiedLink.indexOf('#')
+
+							className = qualifiedLink.substring(0, hashIndex)
+							if (forcePackage)
+								className = "$packageName.$className"
+
+							prefix = qualifiedLink.substring(hashIndex + 1, qualifiedLink.length - if (linkType === LinkType.FIELD)
+								classElement.length
+							else
+								classElement.lastIndexOf('(') + 2
+							)
+						} else if (this.packageName != "org.lwjgl.vulkan")
+							throw IllegalStateException("Failed to resolve link: ${match.value} in ${this.className}")
+					} else {
+						if (classElement.startsWith(prefix))
+							classElement = classElement.substring(prefix.length)
+						else
+							prefix = ""
+					}
+					linkType.create(this.className, prefix, className, classElement, if (this is NativeClass) this.postfix else "", custom = false)
+				} else if (hashes == 2 && className.isEmpty() && linkType === LinkType.FIELD)
+					"{@link $classElement}"
+				else
+					throw IllegalStateException("Unsupported link syntax: ${match.value} in ${this.className}")
+			}.let {
 				if (linkMethod[0] == '@')
-					buffer.append("see ")
-
-				var className = matcher.group(1)
-				var classElement = matcher.group(3)!!
-
-				val linkType = if (classElement.endsWith(')')) LinkType.METHOD else LinkType.FIELD
-				var prefix = if (linkType === LinkType.FIELD) prefixConstant else prefixMethod
-
-				buffer.append(linkMethod.count { it == '#' }.let { hashes ->
-					if (hashes == 1) {
-						if (className == null) {
-							val qualifiedLink = if (linkType === LinkType.FIELD)
-								getFieldLink(classElement) ?: Generator.tokens[packageName]!![classElement]
-							else
-								classElement.substring(0, classElement.lastIndexOf('(')).let {
-									getMethodLink(it) ?: Generator.functions[packageName]!![it]
-								}
-
-							if (qualifiedLink != null) {
-								val hashIndex = qualifiedLink.indexOf('#')
-
-								className = qualifiedLink.substring(0, hashIndex)
-								if (forcePackage)
-									className = "$packageName.$className"
-
-								prefix = qualifiedLink.substring(hashIndex + 1, qualifiedLink.length - if (linkType === LinkType.FIELD)
-									classElement.length
-								else
-									classElement.lastIndexOf('(') + 2
-								)
-							} else if (this.packageName != "org.lwjgl.vulkan")
-								throw IllegalStateException("Failed to resolve link: ${matcher.group()} in ${this.className}")
-						} else {
-							if (classElement.startsWith(prefix))
-								classElement = classElement.substring(prefix.length)
-							else
-								prefix = ""
-						}
-						linkType.create(this.className, prefix, className, classElement, if (this is NativeClass) this.postfix else "", custom = false)
-					} else if (hashes == 2 && className == null && linkType === LinkType.FIELD)
-						"{@link $classElement}"
-					else
-						throw IllegalStateException("Unsupported link syntax: ${matcher.group()} in ${this.className}")
-				})
+					"see $it"
+				else
+					it
 			}
-
-			lastEnd = matcher.end()
-		} while (matcher.find())
-
-		buffer.append(documentation, lastEnd, documentation.length)
-
-		return buffer.toString()
+		}
 	}
 
 	private enum class LinkType {

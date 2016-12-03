@@ -10,7 +10,6 @@ import java.lang.reflect.*
 import java.nio.*
 import java.nio.file.*
 import java.nio.file.attribute.*
-import java.util.*
 import java.util.concurrent.*
 import java.util.concurrent.atomic.*
 import java.util.function.*
@@ -59,7 +58,7 @@ enum class Binding(val key: String, val packageName: String) {
 	companion object {
 		val CHECKS = !System.getProperty("binding.DISABLE_CHECKS", "false").toBoolean()
 
-		private val PACKAGES = Binding.values().asSequence().associateBy { it.packageName }
+		private val PACKAGES = enumValues<Binding>().associateBy { it.packageName }
 
 		fun isEnabled(packageName: String) = Binding.PACKAGES[packageName]?.enabled ?: true
 	}
@@ -370,7 +369,7 @@ public final class $className implements Runnable {
 		}
 
 		// Find the template methods
-		val templates = TreeSet<Method> { o1, o2 -> o1.name.compareTo(o2.name) }
+		val templates = java.util.TreeSet<Method> { o1, o2 -> o1.name.compareTo(o2.name) }
 		apply("$packagePath/templates", "$packageName.templates") {
 			this.filterTo(templates) {
 				methodFilter(it, NativeClass::class.java)
@@ -518,7 +517,7 @@ internal fun Path.lastModified(
 		throw IllegalStateException()
 
 	return Files
-		.find(this, maxDepth, BiPredicate { path, attribs -> matcher.matches(path) })
+		.find(this, maxDepth, BiPredicate { path, _ -> matcher.matches(path) })
 		.mapToLong(Path::lastModified)
 		.reduce(0L, Math::max)
 }

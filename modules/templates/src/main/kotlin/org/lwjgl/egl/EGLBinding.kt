@@ -6,8 +6,6 @@ package org.lwjgl.egl
 
 import org.lwjgl.generator.*
 import java.io.*
-import java.util.*
-import java.util.regex.*
 
 val NativeClass.capName: String
 	get() = if (templateName.startsWith(prefixTemplate)) templateName else "${prefixTemplate}_$templateName"
@@ -123,13 +121,11 @@ fun config() {
 	)
 }
 
-private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
-val NativeClass.registryLink: String get() {
-	val matcher = REGISTRY_PATTERN.matcher(templateName)
-	if (!matcher.matches())
-		throw IllegalStateException("Non-standard extension name: $templateName")
-	return url("https://www.khronos.org/registry/egl/extensions/${matcher.group(1)}/EGL_$templateName.txt", templateName)
-}
+private val REGISTRY_PATTERN = "([A-Z]+)_(\\w+)".toRegex()
+val NativeClass.registryLink: String get() = (REGISTRY_PATTERN.matchEntire(templateName) ?: throw IllegalStateException("Non-standard extension name: $templateName"))
+	.let {
+		url("https://www.khronos.org/registry/egl/extensions/${it.groupValues[1]}/EGL_$templateName.txt", templateName)
+	}
 
 fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
 private fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =

@@ -7,8 +7,6 @@ package org.lwjgl.generator
 import org.lwjgl.generator.GenerationMode.*
 import org.lwjgl.generator.ParameterType.*
 import java.io.*
-import java.util.*
-import java.util.regex.*
 
 /*
 	****
@@ -43,7 +41,7 @@ val EXPLICIT_FUNCTION_ADDRESS = voidptr.IN(FUNCTION_ADDRESS, "the function addre
 /** Special parameter that will accept the JNI function's JNIEnv* parameter. Hidden in Java code. */
 val JNI_ENV = JNIEnv_p.IN(JNIENV, "the JNI environment struct")
 
-private val TRY_FINALLY_ALIGN = Pattern.compile("^(\\s+)", Pattern.MULTILINE)
+private val TRY_FINALLY_ALIGN = "^(\\s+)".toRegex(RegexOption.MULTILINE)
 
 enum class GenerationMode {
 	NORMAL,
@@ -1133,7 +1131,7 @@ class NativeClassFunction(
 			if (it.isEmpty())
 				return@let
 
-			if (it.groupBy { Arrays.hashCode(it[MultiType].types) }.size != 1)
+			if (it.groupBy { it[MultiType].types.contentHashCode() }.size != 1)
 				throw IllegalStateException("All MultiType modifiers in a function must have the same structure.")
 
 			// Add the AutoSize transformation if we skipped it above
@@ -1438,7 +1436,7 @@ class NativeClassFunction(
 			// TODO: struct value + custom transform?
 			val result = returns.transformCallOrElse(transforms, "")
 			if (!result.isEmpty()) {
-				println(if (hasFinally) result.replaceAll(TRY_FINALLY_ALIGN, "\t$1") else result)
+				println(if (hasFinally) result.replace(TRY_FINALLY_ALIGN, "\t$1") else result)
 			} else if (returns.isStructValue)
 				println("${if (hasFinally) "\t\t\t" else "\t\t"}return $RESULT;")
 		} else {

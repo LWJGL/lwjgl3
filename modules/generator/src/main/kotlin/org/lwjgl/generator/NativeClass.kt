@@ -7,8 +7,6 @@ package org.lwjgl.generator
 import java.io.*
 import java.lang.Math.*
 import java.nio.file.*
-import java.util.*
-import java.util.regex.*
 
 val EXT_FLAG = ""
 
@@ -39,10 +37,10 @@ abstract class APIBinding(
 	private val _classes: MutableList<NativeClass> = ArrayList()
 
 	protected fun getClasses(
-		comparator: (NativeClass, NativeClass) -> Int = { o1, o2 -> o1.templateName.compareTo(o2.templateName) }
+		comparator: (NativeClass, NativeClass) -> Int = { o1, o2 -> o1.templateName.compareTo(o2.templateName, ignoreCase = true) }
 	): List<NativeClass> {
 		val classes = ArrayList(_classes)
-		Collections.sort(classes) { o1, o2 -> comparator(o1, o2) }
+		classes.sortWith(Comparator { o1, o2 -> comparator(o1, o2) })
 		return classes
 	}
 
@@ -181,7 +179,7 @@ class NativeClass(
 	val library: String?
 ) : GeneratorTargetNative(packageName, className, nativeSubPath) {
 	companion object {
-		private val JDOC_LINK_PATTERN = Pattern.compile("""(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""")
+		private val JDOC_LINK_PATTERN = """(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""".toRegex()
 	}
 
 	private val constantBlocks = ArrayList<ConstantBlock<*>>()
@@ -709,33 +707,19 @@ class NativeClass(
 		}
 	}
 
-	private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String): String {
-		val matcher = JDOC_LINK_PATTERN.matcher(documentation)
-		if (!matcher.find())
-			return documentation
-
-		val buffer = StringBuilder(documentation.length)
-		var lastEnd = 0
-		do {
-			buffer.append(documentation, lastEnd, matcher.start())
-
-			val element = matcher.group(1)
-
-			if (referenceClass.prefixConstant.isNotEmpty() && element.startsWith(referenceClass.prefixConstant)) {
-				if (element.substring(referenceClass.prefixConstant.length).let { constant ->
-					!this.constantBlocks.any { block -> block.constants.any { it -> it.name == constant } }
-				})
-					buffer.append(referenceClass.className)
-			} else if (!this.functions.any { it -> it.name == element } && referenceFunction != element)
-				buffer.append(referenceClass.className)
-
-			buffer.append(matcher.group(0))
-
-			lastEnd = matcher.end()
-		} while (matcher.find())
-		buffer.append(documentation, lastEnd, documentation.length)
-
-		return buffer.toString()
+	private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String): String = documentation.replace(JDOC_LINK_PATTERN) { match ->
+		match.value.let {
+			val element = match.groupValues[1]
+			if ((
+				    referenceClass.prefixConstant.isNotEmpty() &&
+				    element.startsWith(referenceClass.prefixConstant) &&
+				    !constantLinks.containsKey(element.substring(referenceClass.prefixConstant.length))
+			    ) || (referenceFunction != element && !this.functions.any { it -> it.name == element })
+			)
+				"${referenceClass.className}$it"
+			else
+				it
+		}
 	}
 
 }

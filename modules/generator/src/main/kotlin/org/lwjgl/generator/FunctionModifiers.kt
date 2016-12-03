@@ -4,8 +4,6 @@
  */
 package org.lwjgl.generator
 
-import java.util.*
-
 class DependsOn(override val reference: String, val postfix: String? = null) : FunctionModifier(), ReferenceModifier {
 	companion object : ModifierKey<DependsOn>
 

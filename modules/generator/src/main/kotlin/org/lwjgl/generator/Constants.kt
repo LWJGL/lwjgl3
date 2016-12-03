@@ -5,7 +5,6 @@
 package org.lwjgl.generator
 
 import java.io.*
-import java.util.*
 import kotlin.reflect.*
 
 // Extension properties for numeric literals.
