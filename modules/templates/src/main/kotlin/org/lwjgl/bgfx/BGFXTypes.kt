@@ -122,6 +122,11 @@ val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_
 
 	int64_t.member("waitRender", "time spent waiting for render backend thread to finish issuing draw commands to underlying graphics API")
 	int64_t.member("waitSubmit", "time spent waiting for submit thread to advance to next frame")
+
+	uint16_t.member("width", "")
+	uint16_t.member("height", "")
+	uint16_t.member("textWidth", "")
+	uint16_t.member("textHeight", "")
 }.p
 
 val bgfx_vertex_decl_t_p = struct(BGFX_PACKAGE, "BGFXVertexDecl", nativeName = "bgfx_vertex_decl_t") {
