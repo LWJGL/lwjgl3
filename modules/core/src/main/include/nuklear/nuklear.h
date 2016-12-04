@@ -14801,7 +14801,7 @@ nk_do_property(nk_flags *ws,
         dst = buffer;
     } else {
         switch (variant->kind) {
-        default: break;
+        default: num_len = 0; break;
         case NK_PROPERTY_INT:
             nk_itoa(string, variant->value.i);
             num_len = nk_strlen(string);
