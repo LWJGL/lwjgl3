@@ -41,8 +41,8 @@ ENABLE_WARNINGS()""")
 
 // stb_image.h
 
-val stbi_uc = typedef(unsigned_char, "stbi_uc")
-val stbi_uc_p = stbi_uc.p
+val stbi_uc_p = typedef(unsigned_char, "stbi_uc").p
+val stbi_us_p = typedef(unsigned_short, "stbi_us").p
 
 val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 	STB_PACKAGE, int, "STBIReadCallback",
