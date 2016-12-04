@@ -124,7 +124,12 @@ abstract class SimpleBinding(
 		public static final long
 			${
 		bindingFunctions
-			.map { "${it.simpleName}${" ".repeat(alignment - it.simpleName.length)} = apiGetFunctionAddress($libraryExpression, ${it.functionAddress})" }
+			.map {
+				"${it.simpleName}${" ".repeat(alignment - it.simpleName.length)} = ${if (it has IgnoreMissing)
+					"$libraryExpression.getFunctionAddress(${it.functionAddress})"
+				else
+					"apiGetFunctionAddress($libraryExpression, ${it.functionAddress})"}"
+			}
 			.joinToString(separator = ",\n\t\t\t", postfix = ";")
 		}
 
