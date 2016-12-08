@@ -25,6 +25,7 @@ import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.openal.EXTThreadLocalContext.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBEasyFont.*;
 import static org.lwjgl.stb.STBVorbis.*;
@@ -58,7 +59,7 @@ public final class Vorbis {
 		if ( context == NULL )
 			throw new IllegalStateException("Failed to create an OpenAL context.");
 
-		alcMakeContextCurrent(context);
+		alcSetThreadContext(context);
 		AL.createCapabilities(deviceCaps);
 
 		int source = alGenSources();

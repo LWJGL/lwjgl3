@@ -19,6 +19,7 @@ import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.AL11.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.EXTEfx.*;
+import static org.lwjgl.openal.EXTThreadLocalContext.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -64,7 +65,7 @@ public final class EFXTest {
 
 		long newContext = alcCreateContext(device, contextAttribList);
 
-		boolean makeCurrentFailed = !alcMakeContextCurrent(newContext);
+		boolean makeCurrentFailed = !alcSetThreadContext(newContext);
 		if ( makeCurrentFailed ) {
 			throw new Exception("Failed to make context current.");
 		}
@@ -258,7 +259,7 @@ public final class EFXTest {
 		System.out.println("EXTEfx found.");
 
 		long alContext = alcCreateContext(device, (IntBuffer)null);
-		alcMakeContextCurrent(alContext);
+		alcSetThreadContext(alContext);
 		AL.createCapabilities(deviceCaps);
 
 		// Create a source and buffer audio data
@@ -343,7 +344,7 @@ public final class EFXTest {
 		System.out.println("EXTEfx found.");
 
 		long alContext = alcCreateContext(device, (IntBuffer)null);
-		alcMakeContextCurrent(alContext);
+		alcSetThreadContext(alContext);
 		AL.createCapabilities(deviceCaps);
 
 		System.out.println();

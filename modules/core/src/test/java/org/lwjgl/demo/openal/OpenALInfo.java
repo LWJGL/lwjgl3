@@ -14,6 +14,7 @@ import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.ALC11.*;
 import static org.lwjgl.openal.EXTEfx.*;
+import static org.lwjgl.openal.EXTThreadLocalContext.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -35,7 +36,7 @@ public class OpenALInfo {
 		long alContext = alcCreateContext(device, (IntBuffer)null);
 		checkALCError(device);
 
-		alcMakeContextCurrent(alContext);
+		alcSetThreadContext(alContext);
 		ALCapabilities contextCaps = AL.createCapabilities(deviceCaps);
 
 		printALCInfo(device, deviceCaps);

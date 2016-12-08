@@ -19,6 +19,7 @@ import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.ALC11.*;
+import static org.lwjgl.openal.EXTThreadLocalContext.*;
 import static org.lwjgl.stb.STBVorbis.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.testng.Assert.*;
@@ -56,7 +57,7 @@ public final class ALCDemo {
 		System.out.println("Default device: " + defaultDeviceSpecifier);
 
 		long context = alcCreateContext(device, (IntBuffer)null);
-		alcMakeContextCurrent(context);
+		alcSetThreadContext(context);
 		AL.createCapabilities(deviceCaps);
 
 		System.out.println("ALC_FREQUENCY: " + alcGetInteger(device, ALC_FREQUENCY) + "Hz");

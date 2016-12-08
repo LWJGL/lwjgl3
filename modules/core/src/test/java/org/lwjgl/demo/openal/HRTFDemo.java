@@ -17,6 +17,7 @@ import java.nio.ShortBuffer;
 import static java.lang.Math.*;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.openal.EXTThreadLocalContext.*;
 import static org.lwjgl.openal.SOFTHRTF.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -46,7 +47,7 @@ public final class HRTFDemo {
 		if ( context == NULL )
 			throw new IllegalStateException("Failed to create an OpenAL context.");
 
-		alcMakeContextCurrent(context);
+		alcSetThreadContext(context);
 		AL.createCapabilities(deviceCaps);
 
 		String soundname;
