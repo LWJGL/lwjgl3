@@ -14,6 +14,12 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
 	private val signaturesArray = ConcurrentHashMap<SignatureArray, Unit>()
 
 	init {
+		// Force generation of signatures that are not used by any binding, but are required for
+		// bootstrapping or other internal functionality.
+
+		// callP(GetStringi, GL_EXTENSIONS, i)
+		signatures.put(Signature(CallingConvention.STDCALL, voidptr, listOf(int, int)), Unit)
+		// invokePPV(objc_msgSend, NSView, setWantsBestResolutionOpenGLSurface, true/false);
 		signatures.put(Signature(CallingConvention.DEFAULT, void, listOf(voidptr, voidptr, bool)), Unit)
 	}
 

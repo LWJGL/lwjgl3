@@ -5,10 +5,10 @@
 package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.*;
 
-import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.*;
@@ -25,7 +25,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.ThreadLocalUtil.*;
 import static org.lwjgl.system.linux.X11.*;
 import static org.lwjgl.system.windows.GDI32.*;
 import static org.lwjgl.system.windows.User32.*;
@@ -64,8 +63,9 @@ public final class GL {
 
 	private static FunctionProvider functionProvider;
 
-	/** See {@link Configuration#OPENGL_CAPABILITIES_STATE}. */
-	private static final CapabilitiesState capabilitiesState;
+	private static final ThreadLocal<GLCapabilities> capabilitiesTLS = new ThreadLocal<>();
+
+	private static ICD icd = new ICDStatic();
 
 	private static WGLCapabilities capabilitiesWGL;
 
@@ -73,21 +73,20 @@ public final class GL {
 	private static GLXCapabilities capabilitiesGLX;
 
 	static {
-		MAX_VERSION = apiParseVersion(Configuration.OPENGL_MAXVERSION);
+		Library.loadSystem(Platform.mapLibraryNameBundled("lwjgl_opengl"));
 
-		String capsStateType = Configuration.OPENGL_CAPABILITIES_STATE.get("ThreadLocal");
-		if ( "static".equals(capsStateType) )
-			capabilitiesState = new StaticCapabilitiesState();
-		else if ( "ThreadLocal".equals(capsStateType) )
-			capabilitiesState = new TLCapabilitiesState();
-		else
-			throw new IllegalStateException("Invalid " + Configuration.OPENGL_CAPABILITIES_STATE.getProperty() + " specified.");
+		MAX_VERSION = apiParseVersion(Configuration.OPENGL_MAXVERSION);
 
 		if ( !Configuration.OPENGL_EXPLICIT_INIT.get(false) )
 			create();
 	}
 
 	private GL() {}
+
+	/** Ensures that the lwjgl_opengl shared library has been loaded. */
+	static void initialize() {
+		// intentionally empty to trigger static initializer
+	}
 
 	/** Loads the OpenGL native library, using the default library name. */
 	public static void create() {
@@ -227,7 +226,9 @@ public final class GL {
 	 * different value.</p>
 	 */
 	public static void setCapabilities(GLCapabilities caps) {
-		capabilitiesState.set(caps);
+		capabilitiesTLS.set(caps);
+		ThreadLocalUtil.setEnv(caps == null ? NULL : memAddress(caps.addresses), 3);
+		icd.set(caps);
 	}
 
 	/**
@@ -236,12 +237,14 @@ public final class GL {
 	 * @throws IllegalStateException if {@link #setCapabilities} has never been called in the current thread or was last called with a {@code null} value
 	 */
 	public static GLCapabilities getCapabilities() {
-		GLCapabilities caps = capabilitiesState.get();
-		if ( caps == null )
+		return checkCapabilities(capabilitiesTLS.get());
+	}
+
+	private static GLCapabilities checkCapabilities(GLCapabilities caps) {
+		if ( CHECKS && caps == null )
 			throw new IllegalStateException("No GLCapabilities instance set for the current thread. Possible solutions:\n" +
 				                                "\ta) Call GL.createCapabilities() after making a context current in the current thread.\n" +
 				                                "\tb) Call GL.setCapabilities() if a GLCapabilities instance already exists for the current context.");
-
 		return caps;
 	}
 
@@ -600,55 +603,37 @@ public final class GL {
 		return new GLXCapabilities(functionProvider, supportedExtensions);
 	}
 
-	/** Manages the thread-local {@link GLCapabilities} state. */
-	private interface CapabilitiesState {
-		void set(GLCapabilities caps);
+	// Only used by array overloads
+	static GLCapabilities getICD() {
+		return icd.get();
+	}
+
+	/** Function pointer provider. */
+	private interface ICD {
+		default void set(GLCapabilities caps) {}
 		GLCapabilities get();
 	}
 
-	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalState}. */
-	private static class TLCapabilitiesState implements CapabilitiesState {
-		@Override
-		public void set(GLCapabilities caps) { tlsGet().capsGL = caps; }
-
-		@Override
-		public GLCapabilities get() { return tlsGet().capsGL; }
-	}
-
-	/** Optional, write-once {@link CapabilitiesState}. */
-	private static class StaticCapabilitiesState implements CapabilitiesState {
-
-		private static final List<Field> flags;
-		private static final List<Field> funcs;
-
-		static {
-			if ( Checks.DEBUG ) {
-				Field[] fields = GLCapabilities.class.getFields();
-
-				flags = new ArrayList<>(512);
-				funcs = new ArrayList<>(256);
-
-				for ( Field f : fields )
-					(f.getType() == Boolean.TYPE ? flags : funcs).add(f);
-			} else {
-				flags = null;
-				funcs = null;
-			}
-		}
+	/**
+	 * Write-once {@link ICD}.
+	 *
+	 * <p>This is the default implementation that skips the thread-local lookup. When a new GLCapabilities is set, we compare it to the write-once capabilities.
+	 * If different function pointers are found, we fall back to the expensive lookup.</p>
+	 */
+	private static class ICDStatic implements ICD {
 
 		private static GLCapabilities tempCaps;
 
 		@Override
 		public void set(GLCapabilities caps) {
-			if ( Checks.DEBUG )
-				checkCapabilities(caps);
+			if ( caps != null && tempCaps != null && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses) ) {
+				apiLog("[WARNING] Incompatible context detected. Falling back to thread-local lookup for GL contexts.");
+				icd = GL::getCapabilities; // fall back to thread/process lookup
+				return;
+			}
 
-			tempCaps = caps;
-		}
-
-		private static void checkCapabilities(GLCapabilities caps) {
-			if ( caps != null && tempCaps != null && !apiCompareCapabilities(flags, funcs, tempCaps, caps) )
-				apiLog("An OpenGL context with different functionality detected! The ThreadLocal capabilities state must be used.");
+			if ( tempCaps == null )
+				tempCaps = caps;
 		}
 
 		@Override
@@ -658,11 +643,11 @@ public final class GL {
 
 		private static final class WriteOnce {
 			// This will be initialized the first time get() above is called
-			private static final GLCapabilities caps = StaticCapabilitiesState.tempCaps;
+			private static final GLCapabilities caps = ICDStatic.tempCaps;
 
 			static {
 				if ( caps == null )
-					throw new IllegalStateException("The static GLCapabilities instance is null");
+					throw new IllegalStateException("No GLCapabilities instance has been set");
 			}
 		}
 

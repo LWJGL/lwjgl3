@@ -16,15 +16,10 @@ import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.BiPredicate;
-import java.util.function.Supplier;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.function.*;
+import java.util.jar.*;
+import java.util.regex.*;
 
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -271,24 +266,6 @@ public final class APIUtil {
 		} catch (ClassNotFoundException e) {
 			return null;
 		}
-	}
-
-	public static boolean apiCompareCapabilities(Iterable<Field> flags, Iterable<Field> funcs, Object a, Object b) {
-		try {
-			for ( Field f : flags ) {
-				if ( f.getBoolean(a) != f.getBoolean(b) )
-					return false;
-			}
-
-			for ( Field f : funcs ) {
-				if ( f.getLong(a) != f.getLong(b) )
-					return false;
-			}
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
 	}
 
 	// ----------------------------------------

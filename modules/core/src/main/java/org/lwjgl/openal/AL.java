@@ -5,8 +5,8 @@
 package org.lwjgl.openal;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.MemoryStack;
 
-import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.util.*;
 
@@ -17,7 +17,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.ThreadLocalUtil.*;
 
 /**
  * This class must be used before any OpenAL function is called. It has the following responsibilities:
@@ -39,7 +38,7 @@ import static org.lwjgl.system.ThreadLocalUtil.*;
  *
  * <p>Note that OpenAL contexts are made current process-wide by default. Current thread-local contexts are only available if the
  * {@link EXTThreadLocalContext ALC_EXT_thread_local_context} extension is supported by the OpenAL implementation. <em>OpenAL Soft</em>, the implementation
- * that LWJGL ships with, supports this extension.</p>
+ * that LWJGL ships with, supports this extension and performs better when it is used.</p>
  *
  * @see ALC
  */
@@ -49,18 +48,9 @@ public final class AL {
 
 	private static ALCapabilities processCaps;
 
-	/** See {@link Configuration#OPENAL_CAPABILITIES_STATE}. */
-	private static final CapabilitiesState capabilitiesState;
+	private static final ThreadLocal<ALCapabilities> capabilitiesTLS = new ThreadLocal<>();
 
-	static {
-		String capsStateType = Configuration.OPENAL_CAPABILITIES_STATE.get("ThreadLocal");
-		if ( "static".equals(capsStateType) )
-			capabilitiesState = new StaticCapabilitiesState();
-		else if ( "ThreadLocal".equals(capsStateType) )
-			capabilitiesState = new TLCapabilitiesState();
-		else
-			throw new IllegalStateException("Invalid " + Configuration.OPENAL_CAPABILITIES_STATE.getProperty() + " specified.");
-	}
+	private static ICD icd = new ICDStatic();
 
 	private AL() {}
 
@@ -93,14 +83,15 @@ public final class AL {
 	/**
 	 * Sets the specified {@link ALCapabilities} for the current process-wide OpenAL context.
 	 *
-	 * <p>If the current thread had a context current (see {@link #setCurrentThread}), those {@code ALCapabilities} cleared. Any OpenAL functions called in the
-	 * current thread, or any threads that have no context current, will use the specified {@code ALCapabilities}.</p>
+	 * <p>If the current thread had a context current (see {@link #setCurrentThread}), those {@code ALCapabilities} are cleared. Any OpenAL functions called in
+	 * the current thread, or any threads that have no context current, will use the specified {@code ALCapabilities}.</p>
 	 *
 	 * @param caps the {@link ALCapabilities} to make current, or null
 	 */
 	public static void setCurrentProcess(ALCapabilities caps) {
 		processCaps = caps;
-		capabilitiesState.set(null); // See EXT_thread_local_context, second Q.
+		capabilitiesTLS.set(null); // See EXT_thread_local_context, second Q.
+		icd.set(caps);
 	}
 
 	/**
@@ -111,17 +102,8 @@ public final class AL {
 	 * @param caps the {@link ALCapabilities} to make current, or null
 	 */
 	public static void setCurrentThread(ALCapabilities caps) {
-		capabilitiesState.set(caps);
-	}
-
-	/**
-	 * Returns the {@link ALCapabilities} for the OpenAL context that is current in the current thread or process.
-	 *
-	 * If no OpenAL context is current in the current thread or process, null is returned.
-	 */
-	public static ALCapabilities getCurrentCapabilities() {
-		ALCapabilities caps = capabilitiesState.get();
-		return caps != null ? caps : processCaps;
+		capabilitiesTLS.set(caps);
+		icd.set(caps);
 	}
 
 	/**
@@ -130,13 +112,19 @@ public final class AL {
 	 * @throws IllegalStateException if no OpenAL context is current in the current thread or process
 	 */
 	public static ALCapabilities getCapabilities() {
-		ALCapabilities current = getCurrentCapabilities();
-		if ( current == null )
+		ALCapabilities caps = capabilitiesTLS.get();
+		if ( caps == null )
+			caps = processCaps;
+
+		return checkCapabilities(caps);
+	}
+
+	private static ALCapabilities checkCapabilities(ALCapabilities caps) {
+		if ( CHECKS && caps == null )
 			throw new IllegalStateException("No ALCapabilities instance set for the current thread or process. Possible solutions:\n" +
 				                                "\ta) Call AL.createCapabilities() after making a context current.\n" +
 				                                "\tb) Call AL.setCurrentProcess() or AL.setCurrentThread() if an ALCapabilities instance already exists.");
-
-		return current;
+		return caps;
 	}
 
 	/**
@@ -181,13 +169,6 @@ public final class AL {
 			// Parse EXTENSIONS string
 			String extensionsString = memUTF8(check(invokeP(GetString, AL_EXTENSIONS)));
 
-		/*
-		OpenALSoft: AL_EXT_ALAW AL_EXT_DOUBLE AL_EXT_EXPONENT_DISTANCE AL_EXT_FLOAT32 AL_EXT_IMA4 AL_EXT_LINEAR_DISTANCE AL_EXT_MCFORMATS AL_EXT_MULAW
-		AL_EXT_MULAW_MCFORMATS AL_EXT_OFFSET AL_EXT_source_distance_model AL_LOKI_quadriphonic AL_SOFT_buffer_samples AL_SOFT_buffer_sub_data
-		AL_SOFTX_deferred_updates AL_SOFT_direct_channels AL_SOFT_loop_points
-		Creative: EAX EAX2.0 EAX3.0 EAX4.0 EAX5.0 EAX3.0EMULATED EAX4.0EMULATED AL_EXT_OFFSET AL_EXT_LINEAR_DISTANCE AL_EXT_EXPONENT_DISTANCE
-		 */
-
 			MemoryStack stack = stackGet();
 			StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 			while ( tokenizer.hasMoreTokens() ) {
@@ -213,63 +194,37 @@ public final class AL {
 		}
 	}
 
-	static boolean checkExtension(String extension, boolean supported) {
-		if ( supported )
-			return true;
-
-		apiLog("[AL] " + extension + " was reported as available but an entry point is missing.");
-		return false;
+	static ALCapabilities getICD() {
+		return icd.get();
 	}
 
-	/** Manages the thread-local {@link ALCapabilities} state. */
-	private interface CapabilitiesState {
-		void set(ALCapabilities caps);
+	/** Function pointer provider. */
+	private interface ICD {
+		default void set(ALCapabilities caps) {}
 		ALCapabilities get();
 	}
 
-	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalState}. */
-	private static class TLCapabilitiesState implements CapabilitiesState {
-		@Override
-		public void set(ALCapabilities caps) { tlsGet().capsAL = caps; }
-
-		@Override
-		public ALCapabilities get() { return tlsGet().capsAL; }
-	}
-
-	/** Optional, write-once {@link CapabilitiesState}. */
-	private static class StaticCapabilitiesState implements CapabilitiesState {
-
-		private static final List<Field> flags;
-		private static final List<Field> funcs;
-
-		static {
-			if ( Checks.DEBUG ) {
-				Field[] fields = ALCapabilities.class.getFields();
-
-				flags = new ArrayList<>(64);
-				funcs = new ArrayList<>(16);
-
-				for ( Field f : fields )
-					(f.getType() == Boolean.TYPE ? flags : funcs).add(f);
-			} else {
-				flags = null;
-				funcs = null;
-			}
-		}
+	/**
+	 * Write-once {@link ICD}.
+	 *
+	 * <p>This is the default implementation that skips the thread/process lookup. When a new ALCapabilities is set, we compare it to the write-once
+	 * capabilities. If different function pointers are found, we fall back to the expensive lookup. This will never happen with the OpenAL-Soft
+	 * implementation.</p>
+	 */
+	private static class ICDStatic implements ICD {
 
 		private static ALCapabilities tempCaps;
 
 		@Override
 		public void set(ALCapabilities caps) {
-			if ( Checks.DEBUG )
-				checkCapabilities(caps);
+			if ( caps != null && tempCaps != null && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses) ) {
+				apiLog("[WARNING] Incompatible context detected. Falling back to thread/process lookup for AL contexts.");
+				icd = AL::getCapabilities; // fall back to thread/process lookup
+				return;
+			}
 
-			tempCaps = caps;
-		}
-
-		private static void checkCapabilities(ALCapabilities caps) {
-			if ( caps != null && tempCaps != null && !apiCompareCapabilities(flags, funcs, tempCaps, caps) )
-				apiLog("An OpenAL context with different functionality detected! The ThreadLocal capabilities state must be used.");
+			if ( tempCaps == null )
+				tempCaps = caps;
 		}
 
 		@Override
@@ -279,11 +234,11 @@ public final class AL {
 
 		private static final class WriteOnce {
 			// This will be initialized the first time get() above is called
-			private static final ALCapabilities caps = StaticCapabilitiesState.tempCaps;
+			private static final ALCapabilities caps = ICDStatic.tempCaps;
 
 			static {
 				if ( caps == null )
-					throw new IllegalStateException("The static ALCapabilities instance is null");
+					throw new IllegalStateException("No ALCapabilities instance has been set");
 			}
 		}
 

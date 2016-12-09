@@ -21,9 +21,12 @@ private val NativeClass.isCore: Boolean get() = templateName.startsWith("ALC")
 
 private val ALC_CAP_CLASS = "ALCCapabilities"
 
-val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_CLASS, callingConvention = CallingConvention.DEFAULT) {
-
-	override val hasCapabilities: Boolean get() = true
+val ALCBinding = Generator.register(object : APIBinding(
+	OPENAL_PACKAGE,
+	ALC_CAP_CLASS,
+	APICapabilities.JAVA_CAPABILITIES,
+	callingConvention = CallingConvention.DEFAULT
+) {
 
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "ALC10"
 
@@ -40,6 +43,8 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 	}
 
 	init {
+		javaImport("static org.lwjgl.system.APIUtil.*")
+
 		documentation = "Defines the capabilities of the OpenAL Context API."
 	}
 
@@ -75,17 +80,27 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 
 		println("\n\t$ALC_CAP_CLASS(FunctionProviderLocal provider, long device, Set<String> ext) {")
 
-		println(addresses.map { "${it.name} = provider.getFunctionAddress(${if (it.nativeClass.isCore) "" else "device, "}${it.functionAddress});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
+		println(addresses.map { "${it.name} = provider.getFunctionAddress(${if (it.nativeClass.isCore) "" else "device, "}${it.functionAddress});" }.joinToString("\n\t\t", prefix = "\t\t"))
 
 		for (extension in classes) {
 			val capName = extension.capName("ALC")
-			print("\t\t$capName = ext.contains(\"$capName\")")
+			print("\n\t\t$capName = ext.contains(\"$capName\")")
 			if (extension.hasNativeFunctions && extension.prefix == "ALC")
-				print(" && ALC.checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENAL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
-			println(";")
+				print(" && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENAL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this))")
+			print(";")
 		}
-		println("\t}")
-		print("}")
+		print("""
+	}
+
+	private static boolean checkExtension(String extension, boolean supported) {
+		if ( supported )
+			return true;
+
+		apiLog("[ALC] " + extension + " was reported as available but an entry point is missing.");
+		return false;
+	}
+
+}""")
 	}
 
 })

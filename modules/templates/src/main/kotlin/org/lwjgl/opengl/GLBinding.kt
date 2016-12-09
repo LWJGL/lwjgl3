@@ -24,23 +24,46 @@ private object BufferOffsetTransform : FunctionTransform<Parameter>, SkipCheckFu
 	override fun transformCall(param: Parameter, original: String) = param.name
 }
 
-val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
-
-	init {
-		Generator.registerTLS(
-			"org.lwjgl.opengl.*",
-			"public GLCapabilities capsGL;"
-		)
-
-		javaImport(
-			"static org.lwjgl.system.APIUtil.*",
-			"static org.lwjgl.system.MemoryUtil.*"
-		)
-	}
+val GLBinding = Generator.register(object : APIBinding(
+	OPENGL_PACKAGE,
+	CAPABILITIES_CLASS,
+	APICapabilities.JNI_CAPABILITIES
+) {
 
 	private val GLCorePattern = "GL[1-9][0-9]".toRegex()
 
-	override val hasCapabilities: Boolean get() = true
+	private val classes: List<NativeClass> by lazy {
+		super.getClasses { o1, o2 ->
+			// Core functionality first, extensions after
+			val isGL1 = o1.templateName.startsWith("GL")
+			val isGL2 = o2.templateName.startsWith("GL")
+
+			if (isGL1 xor isGL2)
+				(if (isGL1) -1 else 1)
+			else
+				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
+		}
+	}
+
+	private val functions: java.util.SortedSet<NativeClassFunction> by lazy {
+		classes
+			.filter { it.hasNativeFunctions }
+			.map { it.functions }
+			.flatten()
+			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
+	}
+
+	private val functionOrdinals: Map<String, Int> by lazy {
+		val ordinals = HashMap<String, Int>(1024)
+		var i = 0
+		functions.asSequence()
+			.forEach {
+				ordinals[it.name] = i++
+			}
+		ordinals
+	}
+
+	override fun getFunctionOrdinal(function: NativeClassFunction) = functionOrdinals[function.name]!!
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, Transform>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
@@ -69,7 +92,7 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "GL11" || function has DeprecatedGL
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
-		writer.println("\t\tlong $FUNCTION_ADDRESS = GL.getCapabilities().${function.name};")
+		writer.println("\t\tlong $FUNCTION_ADDRESS = GL.getICD().${function.name};")
 	}
 
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
@@ -104,6 +127,12 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 	}
 
 	init {
+		javaImport(
+			"org.lwjgl.*",
+			"static org.lwjgl.system.APIUtil.*",
+			"static org.lwjgl.system.MemoryUtil.*"
+		)
+
 		documentation = "Defines the capabilities of an OpenGL context."
 	}
 
@@ -111,37 +140,23 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 		generateJavaPreamble()
 		println("public final class $CAPABILITIES_CLASS {\n")
 
-		val classes = super.getClasses { o1, o2 ->
-			// Core functionality first, extensions after
-			val isGL1 = o1.templateName.startsWith("GL")
-			val isGL2 = o2.templateName.startsWith("GL")
-
-			if (isGL1 xor isGL2)
-				(if (isGL1) -1 else 1)
-			else
-				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
-		}
-
-		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-
-		val functions = classesWithFunctions
-			.map { it.functions }
-			.flatten()
-			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
-
 		println("\tpublic final long")
-		println(functions.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n")
-		)
+		println(functions
+			.map { it.name }
+			.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
 
 		classes.forEach {
 			println(it.getCapabilityJavadoc())
 			println("\tpublic final boolean ${it.capName};")
 		}
 
-		println("\n\t/** When true, deprecated functions are not available. */")
-		println("\tpublic final boolean forwardCompatible;")
-
 		println("""
+	/** When true, deprecated functions are not available. */
+	public final boolean forwardCompatible;
+
+	/** Off-heap array of the above function addresses. */
+	final PointerBuffer addresses;
+
 	$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, boolean fc) {
 		forwardCompatible = fc;
 """)
@@ -151,20 +166,23 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 				"${it.name} = getFunctionAddress(fc, provider, ${it.functionAddress});"
 			else
 				"${it.name} = provider.getFunctionAddress(${it.functionAddress});"
-		}.joinToString(prefix = "\t\t", separator = "\n\t\t", postfix = "\n"))
+		}.joinToString(prefix = "\t\t", separator = "\n\t\t"))
 
 		for (extension in classes) {
 			val capName = extension.capName
 			if (extension.hasNativeFunctions) {
-				print("\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
+				print("\n\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
 				if (extension.functions.any { it has DependsOn }) print(", ext")
 				if (extension.functions.hasDeprecated) print(", fc")
-				println("));")
+				print("));")
 			} else
-				println("\t\t$capName = ext.contains(\"$capName\");")
+				print("\n\t\t$capName = ext.contains(\"$capName\");")
 		}
-		println("\t}")
-		println("""
+		print("""
+
+		addresses = ThreadLocalUtil.getAddressesFromCapabilities(this);
+	}
+
 	private static long getFunctionAddress(boolean fc, FunctionProvider provider, String functionName) {
 		return fc ? NULL : provider.getFunctionAddress(functionName);
 	}
@@ -175,8 +193,9 @@ val GLBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILIT
 
 		apiLog("[GL] " + extension + " was reported as available but an entry point is missing.");
 		return false;
-	}""")
-		print("\n}")
+	}
+
+}""")
 	}
 
 })
@@ -188,7 +207,7 @@ fun String.nativeClassGL(
 	prefix: String = "GL",
 	prefixMethod: String = prefix.toLowerCase(),
 	postfix: String = "",
-	init: (NativeClass.() -> Unit)? = null
+	init: NativeClass.() -> Unit
 ) = nativeClass(
 	OPENGL_PACKAGE,
 	templateName,
@@ -196,7 +215,12 @@ fun String.nativeClassGL(
 	prefixMethod = prefixMethod,
 	postfix = postfix,
 	binding = GLBinding,
-	init = init
+	library = "GL.initialize();",
+	init = {
+		init()
+		if (functions.any())
+			nativeImport("opengl.h")
+	}
 )
 
 private val REGISTRY_PATTERN = "([A-Z]+)_(\\w+)".toRegex()

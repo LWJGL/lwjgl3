@@ -19,10 +19,11 @@ private val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "VKCapabilities"
 
-val VK_BINDING = Generator.register(object : APIBinding(VULKAN_PACKAGE, CAPABILITIES_CLASS) {
-
-	override val hasCapabilities: Boolean get() = true
-	override val hasParameterCapabilities: Boolean = true
+val VK_BINDING = Generator.register(object : APIBinding(
+	VULKAN_PACKAGE,
+	CAPABILITIES_CLASS,
+	APICapabilities.PARAM_CAPABILITIES
+) {
 
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "VK10"
 

@@ -3,7 +3,6 @@
  * License terms: https://www.lwjgl.org/license
  */
 #include "common_tools.h"
-#include <string.h>
 
 EXTERN_C_ENTER
 

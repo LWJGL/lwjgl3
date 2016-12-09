@@ -15,7 +15,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
-import static org.lwjgl.system.ThreadLocalUtil.*;
 
 /**
  * An off-heap memory stack.
@@ -32,11 +31,14 @@ public class MemoryStack implements AutoCloseable {
 
 	private static final boolean DEBUG_STACK = Configuration.DEBUG_STACK.get(false);
 
+	private static final ThreadLocal<MemoryStack> TLS = ThreadLocal.withInitial(MemoryStack::create);
+
 	static {
 		if ( DEFAULT_STACK_SIZE < 0 )
 			throw new IllegalStateException("Invalid stack size.");
 	}
 
+	@SuppressWarnings("FieldCanBeLocal")
 	private final ByteBuffer buffer;
 	private final long       address;
 
@@ -119,6 +121,7 @@ public class MemoryStack implements AutoCloseable {
 	 */
 	@Override
 	public void close() {
+		//noinspection resource
 		pop();
 	}
 
@@ -150,6 +153,7 @@ public class MemoryStack implements AutoCloseable {
 			debugFrames[frameIndex - 1] = null;
 
 			if ( !popped.getClassName().equals(pushed.getClassName()) || !popped.getMethodName().equals(pushed.getMethodName()) )
+				//noinspection resource
 				DEBUG_STREAM.format(
 					"[LWJGL] Asymmetric pop detected:\n\tPUSHED: %s\n\tPOPPED: %s\n\tTHREAD: %s\n",
 					pushed.toString(),
@@ -577,7 +581,7 @@ public class MemoryStack implements AutoCloseable {
 
 	/** Returns the stack of the current thread. */
 	public static MemoryStack stackGet() {
-		return tlsGet().stack;
+		return TLS.get();
 	}
 
 	/**
@@ -586,7 +590,7 @@ public class MemoryStack implements AutoCloseable {
 	 * @return the stack of the current thread.
 	 */
 	public static MemoryStack stackPush() {
-		return tlsGet().stack.push();
+		return stackGet().push();
 	}
 
 	/**
@@ -595,7 +599,7 @@ public class MemoryStack implements AutoCloseable {
 	 * @return the stack of the current thread.
 	 */
 	public static MemoryStack stackPop() {
-		return tlsGet().stack.pop();
+		return stackGet().pop();
 	}
 
 	/** Thread-local version of {@link #nmalloc(int)}. */

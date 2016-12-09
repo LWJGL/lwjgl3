@@ -179,6 +179,22 @@
 			</source>
 		</build>
 
+		<!-- OpenGL -->
+		<build name="lwjgl_opengl" dest="${bin.native}/opengl" if:true="${binding.opengl}">
+			<source>
+				<arg value="-I${src.include.rel}/opengl"/>
+				<fileset dir="." includes="${src.generated.native}/opengl/*.c"/>
+			</source>
+		</build>
+
+		<!-- OpenGL ES -->
+		<build name="lwjgl_opengles" dest="${bin.native}/opengles" if:true="${binding.opengles}">
+			<source>
+				<arg value="-I${src.include.rel}/opengles"/>
+				<fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
+			</source>
+		</build>
+
 		<!-- ParShapes -->
 		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
 			<source>

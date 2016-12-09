@@ -6,8 +6,8 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.egl.EGL;
 import org.lwjgl.system.*;
+import org.lwjgl.system.MemoryStack;
 
-import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.*;
@@ -20,7 +20,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.ThreadLocalUtil.*;
 
 /**
  * This class must be used before any OpenGL ES function is called. It has the following responsibilities:
@@ -55,25 +54,25 @@ public final class GLES {
 
 	private static FunctionProvider functionProvider;
 
-	/** See {@link Configuration#OPENGLES_CAPABILITIES_STATE}. */
-	private static final CapabilitiesState capabilitiesState;
+	private static final ThreadLocal<GLESCapabilities> capabilitiesTLS = new ThreadLocal<>();
+
+	private static ICD icd = new ICDStatic();
 
 	static {
-		MAX_VERSION = apiParseVersion(Configuration.OPENGLES_MAXVERSION);
+		Library.loadSystem(Platform.mapLibraryNameBundled("lwjgl_opengles"));
 
-		String capsStateType = Configuration.OPENGLES_CAPABILITIES_STATE.get("ThreadLocal");
-		if ( "static".equals(capsStateType) )
-			capabilitiesState = new StaticCapabilitiesState();
-		else if ( "ThreadLocal".equals(capsStateType) )
-			capabilitiesState = new TLCapabilitiesState();
-		else
-			throw new IllegalStateException("Invalid " + Configuration.OPENGLES_CAPABILITIES_STATE.getProperty() + " specified.");
+		MAX_VERSION = apiParseVersion(Configuration.OPENGLES_MAXVERSION);
 
 		if ( !Configuration.OPENGLES_EXPLICIT_INIT.get(false) )
 			create();
 	}
 
 	private GLES() {}
+
+	/** Ensures that the lwjgl_opengles shared library has been loaded. */
+	static void initialize() {
+		// intentionally empty to trigger static initializer
+	}
 
 	/** Loads the OpenGL ES native library, using the default library name. */
 	public static void create() {
@@ -157,7 +156,8 @@ public final class GLES {
 	 * a different value.</p>
 	 */
 	public static void setCapabilities(GLESCapabilities caps) {
-		capabilitiesState.set(caps);
+		capabilitiesTLS.set(caps);
+		ThreadLocalUtil.setEnv(caps == null ? NULL : memAddress(caps.addresses), 3);
 	}
 
 	/**
@@ -166,12 +166,14 @@ public final class GLES {
 	 * @throws IllegalStateException if {@link #setCapabilities} has never been called in the current thread or was last called with a {@code null} value
 	 */
 	public static GLESCapabilities getCapabilities() {
-		GLESCapabilities caps = capabilitiesState.get();
-		if ( caps == null )
+		return checkCapabilities(capabilitiesTLS.get());
+	}
+
+	private static GLESCapabilities checkCapabilities(GLESCapabilities caps) {
+		if ( CHECKS && caps == null )
 			throw new IllegalStateException("No GLESCapabilities instance set for the current thread. Possible solutions:\n" +
 				                                "\ta) Call GLES.createCapabilities() after making a context current in the current thread.\n" +
 				                                "\tb) Call GLES.setCapabilities() if a GLESCapabilities instance already exists for the current context.");
-
 		return caps;
 	}
 
@@ -284,63 +286,37 @@ public final class GLES {
 		return caps;
 	}
 
-	static boolean checkExtension(String extension, boolean supported) {
-		if ( supported )
-			return true;
-
-		apiLog("[GLES] " + extension + " was reported as available but an entry point is missing.");
-		return false;
+	// Only used by array overloads
+	static GLESCapabilities getICD() {
+		return icd.get();
 	}
 
-	/** Manages the thread-local {@link GLESCapabilities} state. */
-	private interface CapabilitiesState {
-		void set(GLESCapabilities caps);
+	/** Function pointer provider. */
+	private interface ICD {
+		default void set(GLESCapabilities caps) {}
 		GLESCapabilities get();
 	}
 
-	/** Default {@link CapabilitiesState} implementation using {@link ThreadLocalState}. */
-	private static class TLCapabilitiesState implements CapabilitiesState {
-		@Override
-		public void set(GLESCapabilities caps) { tlsGet().capsGLES = caps; }
-
-		@Override
-		public GLESCapabilities get() { return tlsGet().capsGLES; }
-	}
-
-	/** Optional, write-once {@link CapabilitiesState}. */
-	private static class StaticCapabilitiesState implements CapabilitiesState {
-
-		private static final List<Field> flags;
-		private static final List<Field> funcs;
-
-		static {
-			if ( Checks.DEBUG ) {
-				Field[] fields = GLESCapabilities.class.getFields();
-
-				flags = new ArrayList<>(256);
-				funcs = new ArrayList<>(128);
-
-				for ( Field f : fields )
-					(f.getType() == Boolean.TYPE ? flags : funcs).add(f);
-			} else {
-				flags = null;
-				funcs = null;
-			}
-		}
+	/**
+	 * Write-once {@link ICD}.
+	 *
+	 * <p>This is the default implementation that skips the thread-local lookup. When a new GLESCapabilities is set, we compare it to the write-once
+	 * capabilities. If different function pointers are found, we fall back to the expensive lookup.</p>
+	 */
+	private static class ICDStatic implements ICD {
 
 		private static GLESCapabilities tempCaps;
 
 		@Override
 		public void set(GLESCapabilities caps) {
-			if ( Checks.DEBUG )
-				checkCapabilities(caps);
+			if ( caps != null && tempCaps != null && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses) ) {
+				apiLog("[WARNING] Incompatible context detected. Falling back to thread-local lookup for GLES contexts.");
+				icd = GLES::getCapabilities; // fall back to thread/process lookup
+				return;
+			}
 
-			tempCaps = caps;
-		}
-
-		private static void checkCapabilities(GLESCapabilities caps) {
-			if ( caps != null && tempCaps != null && !apiCompareCapabilities(flags, funcs, tempCaps, caps) )
-				apiLog("An OpenGL ES context with different functionality detected! The ThreadLocal capabilities state must be used.");
+			if ( tempCaps == null )
+				tempCaps = caps;
 		}
 
 		@Override
@@ -350,11 +326,11 @@ public final class GLES {
 
 		private static final class WriteOnce {
 			// This will be initialized the first time get() above is called
-			private static final GLESCapabilities caps = StaticCapabilitiesState.tempCaps;
+			private static final GLESCapabilities caps = ICDStatic.tempCaps;
 
 			static {
 				if ( caps == null )
-					throw new IllegalStateException("The static GLESCapabilities instance is null");
+					throw new IllegalStateException("No GLESCapabilities instance has been set");
 			}
 		}
 

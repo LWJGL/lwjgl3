@@ -128,12 +128,12 @@ enum Artifacts {
 	OPENGL(
 		"lwjgl-opengl", "LWJGL - OpenGL bindings",
 		"The most widely adopted 2D and 3D graphics API in the industry, bringing thousands of applications to a wide variety of computer platforms.",
-		Platforms.JAVA_ONLY
+		Platforms.ALL
 	),
 	OPENGLES(
 		"lwjgl-opengles", "LWJGL - OpenGL ES bindings",
 		"A royalty-free, cross-platform API for full-function 2D and 3D graphics on embedded systems - including consoles, phones, appliances and vehicles.",
-		Platforms.JAVA_ONLY
+		Platforms.ALL
 	),
 	OVR(
 		"lwjgl-ovr", "LWJGL - OVR bindings",

@@ -17,6 +17,13 @@ enum class CallingConvention(val method: String) {
 	STDCALL("call") // __stdcall on Windows, default on other systems
 }
 
+enum class APICapabilities {
+	NONE,
+	JNI_CAPABILITIES,
+	JAVA_CAPABILITIES,
+	PARAM_CAPABILITIES
+}
+
 /**
  * The Generator can be customized with binding-specific overrides using this class. This class must implemented for bindings that are loaded dynamically. It
  * is not necessary for libraries that are static compiled/linked into the LWJGL natives.
@@ -24,6 +31,7 @@ enum class CallingConvention(val method: String) {
 abstract class APIBinding(
 	packageName: String,
 	className: String,
+	val apiCapabilities: APICapabilities = APICapabilities.NONE,
 	val callingConvention: CallingConvention = CallingConvention.STDCALL
 ) : GeneratorTarget(packageName, className) {
 
@@ -53,17 +61,13 @@ abstract class APIBinding(
 		Paths.get(root, "templates").lastModified()
 	)
 
-	/** If true, function pointers for this binding are retrieved from custom "capabilities" instances. */
-	open val hasCapabilities: Boolean = false
-
-	/** If true, "capabilities" instance are retrieved from function parameters. */
-	open val hasParameterCapabilities: Boolean = false
-
 	abstract fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction)
 
 	abstract fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass)
 
 	// OVERRIDES
+
+	open fun getFunctionOrdinal(function: NativeClassFunction): Int = 0
 
 	/** Can be overriden to generate binding-specific alternative methods. */
 	open fun generateAlternativeMethods(
@@ -86,7 +90,7 @@ abstract class APIBinding(
 	}
 
 	/** Can be overriden to implement a custom condition for checking the function address. */
-	open fun shouldCheckFunctionAddress(function: NativeClassFunction) = hasCapabilities
+	open fun shouldCheckFunctionAddress(function: NativeClassFunction) = apiCapabilities.ordinal > 1
 
 	/** Can be overriden to add custom parameter checks. */
 	open fun addParameterChecks(
@@ -102,7 +106,7 @@ abstract class APIBinding(
 abstract class SimpleBinding(
 	val libraryExpression: String,
 	callingConvention: CallingConvention
-) : APIBinding("n/a", "n/a", callingConvention) {
+) : APIBinding("n/a", "n/a", callingConvention = callingConvention) {
 	override fun PrintWriter.generateJava() = Unit
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
 		writer.println("\t\tlong ${if (function.returns.has(Address)) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
@@ -224,23 +228,25 @@ class NativeClass(
 						}.toList().toTypedArray()
 					).copyModifiers(func)
 
-					if (!func.hasCustomJNI)
+					if (!overload.hasCustomJNI)
 						JNI.registerArray(overload)
 
 					list.add(overload)
 				}
 
-				if (multiTypeParams.isNotEmpty()) {
-					val multiType = multiTypeParams.first()[MultiType]
-					multiType.types.asSequence()
-						.filter { it !== PointerMapping.DATA_POINTER }
-						.let {
-							if (multiType.byteArray)
-								sequenceOf(PointerMapping.DATA_BYTE) + it
-							else
-								it
-						}
-						.forEach { autoType ->
+				if (multiTypeParams.isEmpty())
+					return@forEach
+
+				val multiType = multiTypeParams.first()[MultiType]
+				multiType.types.asSequence()
+					.filter { it !== PointerMapping.DATA_POINTER }
+					.let {
+						if (multiType.byteArray)
+							sequenceOf(PointerMapping.DATA_BYTE) + it
+						else
+							it
+					}
+					.forEach { autoType ->
 						val overload = NativeClassFunction(
 							returns = func.returns,
 							simpleName = func.simpleName,
@@ -310,12 +316,11 @@ class NativeClass(
 							)
 						}
 
-						if (!func.hasCustomJNI)
+						if (!overload.hasCustomJNI)
 							JNI.registerArray(overload)
 
 						list.add(overload)
 					}
-				}
 			}
 
 		list
@@ -363,7 +368,10 @@ class NativeClass(
 	internal fun registerFunctions() {
 		if (binding != null) {
 			functions.asSequence()
-				.filter { !it.hasCustomJNI }
+				// This will generate additional signatures that cover the entire
+				// GL/GLES API. They will not be used by LWJGL, but may be useful
+				// to users. Using !it.hasCustomJNI here will eliminate them.
+				.filter { !it.hasCustomJNIWithIgnoreAddress }
 				.forEach { JNI.register(it) }
 
 			genFunctions // lazy init
@@ -466,7 +474,7 @@ class NativeClass(
 				}
 			}))
 				println("import static org.lwjgl.system.Checks.*;")
-			if (binding != null && functions.any { !it.hasCustomJNI })
+			if (binding != null && functions.any { !it.hasCustomJNI || it.hasArrayOverloads })
 				println("import static org.lwjgl.system.JNI.*;")
 			if (hasMemoryStack)
 				println("import static org.lwjgl.system.MemoryStack.*;")

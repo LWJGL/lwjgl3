@@ -19,9 +19,11 @@ private val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "CLCapabilities"
 
-private val CLBinding = Generator.register(object : APIBinding(OPENCL_PACKAGE, CAPABILITIES_CLASS) {
-
-	override val hasCapabilities: Boolean get() = true
+private val CLBinding = Generator.register(object : APIBinding(
+	OPENCL_PACKAGE,
+	CAPABILITIES_CLASS,
+	APICapabilities.JAVA_CAPABILITIES
+) {
 
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "CL10"
 

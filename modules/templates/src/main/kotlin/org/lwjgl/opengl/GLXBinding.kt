@@ -9,13 +9,11 @@ import java.io.*
 
 private val CAPABILITIES_CLASS = "GLXCapabilities"
 
-val GLXBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
-
-	init {
-		javaImport("static org.lwjgl.system.APIUtil.*")
-	}
-
-	override val hasCapabilities: Boolean get() = true
+val GLXBinding = Generator.register(object : APIBinding(
+	OPENGL_PACKAGE,
+	CAPABILITIES_CLASS,
+	APICapabilities.JAVA_CAPABILITIES
+) {
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
 		writer.println("\t\tlong $FUNCTION_ADDRESS = GL.getCapabilitiesGLXClient().${function.name};")
@@ -32,6 +30,8 @@ val GLXBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILI
 	}
 
 	init {
+		javaImport("static org.lwjgl.system.APIUtil.*")
+
 		documentation = "Defines the GLX capabilities of a connection."
 	}
 
@@ -62,27 +62,29 @@ val GLXBinding = Generator.register(object : APIBinding(OPENGL_PACKAGE, CAPABILI
 		println(
 			functions.map {
 				"${it.name} = provider.getFunctionAddress(${it.functionAddress});"
-			}.joinToString(prefix = "\t\t", separator = "\n\t\t", postfix = "\n")
+			}.joinToString(prefix = "\t\t", separator = "\n\t\t")
 		)
 
 		for (extension in classes) {
 			val capName = extension.capName
-			println(if (extension.hasNativeFunctions)
-				"\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this));"
+			print(if (extension.hasNativeFunctions)
+				"\n\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this));"
 			else
-				"\t\t$capName = ext.contains(\"$capName\");"
+				"\n\t\t$capName = ext.contains(\"$capName\");"
 			)
 		}
-		println("\t}")
-		println("""
+		print("""
+	}
+
 	private static boolean checkExtension(String extension, boolean supported) {
 		if ( supported )
 			return true;
 
 		apiLog("[GLX] " + extension + " was reported as available but an entry point is missing.");
 		return false;
-	}""")
-		print("\n}")
+	}
+
+}""")
 	}
 
 })

@@ -6,10 +6,14 @@
 	__pragma(warning(disable : 4710))
 #endif
 #include "common_tools.h"
+DISABLE_WARNINGS()
+#include <jvmti.h>
+ENABLE_WARNINGS()
 #include <stdlib.h>
 #include <errno.h>
 
 JavaVM *jvm;
+jvmtiEnv *jvmti;
 
 inline JNIEnv *getThreadEnv(void) {
 	JNIEnv *env;
@@ -22,16 +26,7 @@ inline JNIEnv *attachCurrentThreadAsDaemon(void) {
     (*jvm)->AttachCurrentThreadAsDaemon(jvm, (void **)&env, NULL);
     if ( env == NULL ) {
         fprintf(stderr, "[LWJGL] Failed to attach native thread to the JVM.");
-        exit(1);
-    }
-    return env;
-}
-
-inline JNIEnv *attachCurrentThread(void) {
-    JNIEnv *env;
-    (*jvm)->AttachCurrentThread(jvm, (void **)&env, NULL);
-    if ( env == NULL ) {
-        fprintf(stderr, "[LWJGL] Failed to attach native thread to the JVM.");
+        fflush(stderr);
         exit(1);
     }
     return env;
@@ -49,17 +44,19 @@ inline void detachCurrentThread(void) {
 // If getThreadEnv() returns NULL, getEnv() has been called in a foreign thread that must attach to the JVM to access JNI. Such threads are detached
 // automatically using DllMain notifications (on Windows) or a pthread destructor (on Linux/OSX).
 
+typedef struct EnvData_ {
+    jboolean async;
+    char padding[sizeof(void *) - sizeof(jboolean)];
+    JNIEnv* env;
+    jint errnum;
+#ifdef LWJGL_WINDOWS
+    jint LastError;
+#endif
+} EnvData;
+
 #ifdef LWJGL_WINDOWS
 	#include <WindowsLWJGL.h>
 	DWORD envTLS = TLS_OUT_OF_INDEXES;
-
-	typedef struct {
-		jboolean async;
-		jboolean padding[sizeof(void*) - 1];
-		JNIEnv* env;
-		jint errnum;
-		jint LastError;
-	} EnvData;
 
 	BOOL WINAPI DllMain(HINSTANCE hDLL, DWORD fdwReason, LPVOID lpvReserved) {
 		UNUSED_PARAMS(hDLL, lpvReserved)
@@ -80,15 +77,17 @@ inline void detachCurrentThread(void) {
 
 	static inline void envTLSInit(void) {
 		envTLS = TlsAlloc();
-		if ( envTLS == TLS_OUT_OF_INDEXES )
-			fprintf(stderr, "Failed to allocate TLS for JNIEnv.");
+		if ( envTLS == TLS_OUT_OF_INDEXES ) {
+			fprintf(stderr, "[LWJGL] Failed to allocate TLS for JNIEnv.");
+            fflush(stderr);
+        }
 	}
 
 	static inline void envTLSDestroy(void) {
 		TlsFree(envTLS);
 	}
 
-	EnvData* envTLSGet(void) {
+	static EnvData* envTLSGet(void) {
 		EnvData* data = (EnvData*)malloc(sizeof(EnvData));
 
 		jboolean async = 0;
@@ -123,13 +122,6 @@ inline void detachCurrentThread(void) {
 	#include <pthread.h>
 	pthread_key_t envTLS = 0;
 
-	typedef struct {
-		jboolean async;
-		jboolean padding[sizeof(void*) - 1];
-		JNIEnv* env;
-		jint errnum;
-	} EnvData;
-
 	static void autoDetach(void* value) {
 		pthread_setspecific(envTLS, NULL);
 		free(value);
@@ -138,8 +130,10 @@ inline void detachCurrentThread(void) {
 	}
 
 	static inline void envTLSInit(void) {
-		if ( pthread_key_create(&envTLS, autoDetach) != 0 )
-			fprintf(stderr, "Failed to allocate TLS for JNIEnv.");
+		if ( pthread_key_create(&envTLS, autoDetach) != 0 ) {
+			fprintf(stderr, "[LWJGL] Failed to allocate TLS for JNIEnv.");
+			fflush(stderr);
+        }
 	}
 
 	static inline void envTLSDestroy(void) {
@@ -149,7 +143,7 @@ inline void detachCurrentThread(void) {
 		}
 	}
 
-	EnvData* envTLSGet(void) {
+	static EnvData* envTLSGet(void) {
 		EnvData* data = (EnvData*)malloc(sizeof(EnvData));
 
 		jboolean async = 0;
@@ -195,6 +189,11 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
 
 	jvm = vm;
 
+	if ((*jvm)->GetEnv(jvm, (void **)&jvmti, JVMTI_VERSION_1_2) != JNI_OK) {
+        fprintf(stderr, "[LWJGL] Failed to retrieve the JVMTI interface pointer.");
+        fflush(stderr);
+    }
+
     envTLSInit();
     return JNI_VERSION_1_8;
 }
@@ -202,6 +201,8 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
 JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved) {
 	UNUSED_PARAMS(vm, reserved);
 	envTLSDestroy();
+
+	(*jvmti)->DisposeEnvironment(jvmti);
 }
 
 EXTERN_C_EXIT

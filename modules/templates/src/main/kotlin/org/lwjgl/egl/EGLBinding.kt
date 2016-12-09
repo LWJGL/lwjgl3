@@ -12,9 +12,11 @@ val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "EGLCapabilities"
 
-private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAPABILITIES_CLASS) {
-
-	override val hasCapabilities: Boolean get() = true
+private val EGLBinding = Generator.register(object : APIBinding(
+	EGL_PACKAGE,
+	CAPABILITIES_CLASS,
+	APICapabilities.JAVA_CAPABILITIES
+) {
 
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "CL10"
 

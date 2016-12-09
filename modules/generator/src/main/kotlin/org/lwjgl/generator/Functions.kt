@@ -158,21 +158,27 @@ class NativeClassFunction(
 	val javaDocLink: String
 		get() = "#$simpleName()"
 
+	internal val hasFunctionAddressParam: Boolean by lazy {
+		nativeClass.binding != null && (nativeClass.binding.apiCapabilities !== APICapabilities.JNI_CAPABILITIES || hasParam { it.nativeType is ArrayType })
+	}
+
 	internal val hasExplicitFunctionAddress: Boolean
 		get() = parameters.isNotEmpty() && parameters[0] === EXPLICIT_FUNCTION_ADDRESS
 
 	private val hasNativeCode: Boolean
 		get() = (has(Code) && this[Code].let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || parameters.contains(JNI_ENV)
 
+	internal val hasCustomJNIWithIgnoreAddress: Boolean get() = (returns.isStructValue || hasNativeCode) && (!has(Macro) || this[Macro].expression == null)
+
 	internal val hasCustomJNI: Boolean by lazy {
-		(nativeClass.binding == null || returns.isStructValue || hasNativeCode) && (!has(Macro) || this[Macro].expression == null)
+		(!hasFunctionAddressParam || returns.isStructValue || hasNativeCode) && (!has(Macro) || this[Macro].expression == null)
 	}
 
 	private val isNativeOnly: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial } || has(NativeName) || (has(Macro) && this[Macro].expression != null))
 
 	internal val hasUnsafeMethod: Boolean by lazy {
-		nativeClass.binding != null
+		hasFunctionAddressParam
 		&& !(hasExplicitFunctionAddress && hasNativeCode)
 		&& (returns.isBufferPointer || returns.nativeType is CallbackType || hasParam { it.isBufferPointer || it.nativeType is CallbackType || it has MapToInt })
 		&& !returns.has(Address)
@@ -233,7 +239,7 @@ class NativeClassFunction(
 		nativeType is StructType || nativeType is ObjectType ->
 			if (has(nullable))
 				"memAddressSafe($name)"
-			else if (nativeType is ObjectType && hasUnsafeMethod && nativeClass.binding!!.hasParameterCapabilities)
+			else if (nativeType is ObjectType && hasUnsafeMethod && nativeClass.binding!!.apiCapabilities === APICapabilities.PARAM_CAPABILITIES)
 				name
 			else
 				"$name.$ADDRESS"
@@ -250,7 +256,7 @@ class NativeClassFunction(
 	}
 
 	private val Parameter.isFunctionProvider: Boolean
-		get() = nativeType is ObjectType && nativeClass.binding != null && nativeClass.binding.hasParameterCapabilities
+		get() = nativeType is ObjectType && nativeClass.binding != null && nativeClass.binding.apiCapabilities === APICapabilities.PARAM_CAPABILITIES
 
 	/** Validates parameters with modifiers that reference other parameters. */
 	private fun validate() {
@@ -386,7 +392,7 @@ class NativeClassFunction(
 		val checks = ArrayList<String>()
 
 		// Validate function address
-		if ((has(DependsOn) || has(IgnoreMissing) || (nativeClass.binding?.shouldCheckFunctionAddress(this@NativeClassFunction) ?: false)) && !hasUnsafeMethod)
+		if (hasFunctionAddressParam && (has(DependsOn) || has(IgnoreMissing) || (nativeClass.binding?.shouldCheckFunctionAddress(this@NativeClassFunction) ?: false)) && !hasUnsafeMethod)
 			checks.add("check($FUNCTION_ADDRESS);")
 
 		// We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
@@ -630,7 +636,7 @@ class NativeClassFunction(
 		print("(")
 
 		val nativeParams = getNativeParams()
-		if (nativeClass.binding != null && !hasExplicitFunctionAddress) {
+		if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
 			print("long $FUNCTION_ADDRESS")
 			if (nativeParams.any()) print(", ")
 		}
@@ -775,8 +781,8 @@ class NativeClassFunction(
 
 		// Get function address
 
-		if (nativeClass.binding != null && !hasUnsafeMethod && !hasExplicitFunctionAddress && !has(Macro))
-			nativeClass.binding.generateFunctionAddress(this, this@NativeClassFunction)
+		if (hasFunctionAddressParam && !hasUnsafeMethod && !hasExplicitFunctionAddress && !has(Macro))
+			nativeClass.binding!!.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Generate checks
 		printCode(code.javaInit, ApplyTo.NORMAL)
@@ -943,7 +949,7 @@ class NativeClassFunction(
 				else macroExpression ?:
 				     "${nativeClass.binding!!.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.mapping.jniSignatureJava }.joinToString("")}${returns.nativeType.mapping.jniSignature}("
 			)
-			if (nativeClass.binding != null && !hasExplicitFunctionAddress && !has(Macro)) {
+			if (hasFunctionAddressParam && !hasExplicitFunctionAddress && !has(Macro)) {
 				print(FUNCTION_ADDRESS)
 				if (hasNativeParams) print(", ")
 			}
@@ -1373,8 +1379,8 @@ class NativeClassFunction(
 
 		// Get function address
 
-		if (nativeClass.binding != null && !hasUnsafeMethod && !has(Macro))
-			nativeClass.binding.generateFunctionAddress(this, this@NativeClassFunction)
+		if (hasFunctionAddressParam && !hasUnsafeMethod && !has(Macro))
+			nativeClass.binding!!.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Generate checks
 
@@ -1517,7 +1523,7 @@ class NativeClassFunction(
 		val params = ArrayList<String>(4 + parameters.size)
 		if (!critical)
 			params.add("JNIEnv *$JNIENV, jclass clazz")
-		if (nativeClass.binding != null)
+		if (hasFunctionAddressParam)
 			params.add("jlong $FUNCTION_ADDRESS")
 		getNativeParams(withExplicitFunctionAddress = false).map {
 			if (it.nativeType is ArrayType) {
@@ -1548,13 +1554,17 @@ class NativeClassFunction(
 					it.nativeType.mapping.jniSignatureArray
 				else
 					it.nativeType.mapping.jniSignatureStrict
-			}.joinToString("", prefix = if (nativeClass.binding == null) "__" else "__J"))
+			}.joinToString("", prefix = if (hasFunctionAddressParam) "__J" else "__"))
 		println("(${if (params.isEmpty()) "void" else params.joinToString(", ")}) {")
 
 		// Cast function address to pointer
 
-		if (nativeClass.binding != null)
-			println("\t${nativeName}PROC $nativeName = (${nativeName}PROC)(intptr_t)$FUNCTION_ADDRESS;")
+		if (nativeClass.binding != null) {
+			if (hasFunctionAddressParam) {
+				println("\t${nativeName}PROC $nativeName = (${nativeName}PROC)(intptr_t)$FUNCTION_ADDRESS;")
+			} else
+				println("\t${nativeName}PROC $nativeName = (${nativeName}PROC)tlsGetFunction(${nativeClass.binding.getFunctionOrdinal(this@NativeClassFunction)});")
+		}
 
 		// Cast addresses to pointers
 
@@ -1606,7 +1616,7 @@ class NativeClassFunction(
 		// Unused parameter macro
 
 		if (!critical)
-			println(if (parameters.contains(JNI_ENV))
+			println(if (parameters.contains(JNI_ENV) || (nativeClass.binding != null && !hasFunctionAddressParam))
 				"\tUNUSED_PARAM(clazz)"
 			else
 				"\tUNUSED_PARAMS($JNIENV, clazz)"

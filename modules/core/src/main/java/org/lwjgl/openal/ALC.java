@@ -207,12 +207,4 @@ public final class ALC {
 		return new ALCCapabilities(getFunctionProvider(), device, supportedExtensions);
 	}
 
-	static boolean checkExtension(String extension, boolean supported) {
-		if ( supported )
-			return true;
-
-		apiLog("[ALC] " + extension + " was reported as available but an entry point is missing.");
-		return false;
-	}
-
 }

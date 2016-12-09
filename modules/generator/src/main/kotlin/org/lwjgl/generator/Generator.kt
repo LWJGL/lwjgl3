@@ -186,9 +186,6 @@ class Generator(
 		internal val callbacks = ConcurrentLinkedQueue<CallbackFunction>()
 		internal val customClasses = ConcurrentLinkedQueue<GeneratorTarget>()
 
-		internal val tlsImport = ConcurrentLinkedQueue<String>()
-		internal val tlsState = ConcurrentLinkedQueue<String>()
-
 		/** Registers a struct definition. */
 		fun register(struct: Struct): Struct {
 			if (Binding.isEnabled(struct.packageName))
@@ -268,50 +265,6 @@ class Generator(
 
 				override fun PrintWriter.generateNative() {
 					generateNativePreamble()
-				}
-			})
-		}
-
-		/** Registers state that will be added to `org.lwjgl.system.ThreadLocalState`. */
-		fun registerTLS(import: String, state: String) {
-			tlsImport.add(import)
-			tlsState.add(state)
-		}
-
-		init {
-			Generator.register(object : GeneratorTarget("org.lwjgl.system", "ThreadLocalState") {
-				override fun PrintWriter.generateJava() {
-					print(HEADER)
-					println("package $packageName;\n")
-
-					Generator.tlsImport.toSortedSet().forEach {
-						javaImport(it)
-					}
-
-					preamble.printJava(this)
-
-					println("""/** Thread-local state used internally by LWJGL. */
-public final class $className implements Runnable {
-
-	Runnable target;
-
-	public final MemoryStack stack;
-""")
-					Generator.tlsState.toSortedSet().forEach {
-						println("\t$it")
-					}
-					println("""
-	$className() {
-		stack = MemoryStack.create();
-	}
-
-	@Override
-	public void run() {
-		if ( target != null )
-			target.run();
-	}
-
-}""")
 				}
 			})
 		}

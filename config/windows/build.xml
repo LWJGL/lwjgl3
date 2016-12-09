@@ -219,6 +219,26 @@ EXPORTS
 			</source>
 		</build>
 
+		<!-- OpenGL -->
+		<build name="lwjgl_opengl" dest="${bin.native}/opengl" if:true="${binding.opengl}">
+			<compileargs>
+				<arg value="/I${src.include}\opengl"/>
+			</compileargs>
+			<source>
+				<fileset dir="." includes="${src.generated.native}/opengl/*.c"/>
+			</source>
+		</build>
+
+		<!-- OpenGL ES -->
+		<build name="lwjgl_opengles" dest="${bin.native}/opengles" if:true="${binding.opengles}">
+			<compileargs>
+				<arg value="/I${src.include}\opengles"/>
+			</compileargs>
+			<source>
+				<fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
+			</source>
+		</build>
+
 		<!-- ParShapes -->
 		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
 			<compileargs>

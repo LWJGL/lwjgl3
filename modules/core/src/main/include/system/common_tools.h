@@ -42,7 +42,6 @@ extern jint getErrno(void);
 extern JNIEnv *getThreadEnv(void);
 
 // Async
-extern JNIEnv *attachCurrentThread(void);
 extern JNIEnv *attachCurrentThreadAsDaemon(void);
 extern void detachCurrentThread(void);
 

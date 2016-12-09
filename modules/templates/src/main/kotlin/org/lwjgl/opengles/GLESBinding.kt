@@ -17,16 +17,44 @@ private object BufferOffsetTransform : FunctionTransform<Parameter>, SkipCheckFu
 	override fun transformCall(param: Parameter, original: String) = param.name
 }
 
-private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, CAPABILITIES_CLASS) {
+private val GLESBinding = Generator.register(object : APIBinding(
+	GLES_PACKAGE,
+	CAPABILITIES_CLASS,
+	APICapabilities.JNI_CAPABILITIES
+) {
 
-	init {
-		Generator.registerTLS(
-			"org.lwjgl.opengles.*",
-			"public GLESCapabilities capsGLES;"
-		)
+	private val classes: List<NativeClass> by lazy {
+		super.getClasses { o1, o2 ->
+			// Core functionality first, extensions after
+			val isGLES1 = o1.templateName.startsWith("GLES")
+			val isGLES2 = o2.templateName.startsWith("GLES")
+
+			if (isGLES1 xor isGLES2)
+				(if (isGLES1) -1 else 1)
+			else
+				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
+		}
 	}
 
-	override val hasCapabilities: Boolean get() = true
+	private val functions: java.util.SortedSet<NativeClassFunction> by lazy {
+		classes
+			.filter { it.hasNativeFunctions }
+			.map { it.functions }
+			.flatten()
+			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
+	}
+
+	private val functionOrdinals: Map<String, Int> by lazy {
+		val ordinals = HashMap<String, Int>(512)
+		var i = 0
+		functions.asSequence()
+			.forEach {
+				ordinals[it.name] = i++
+			}
+		ordinals
+	}
+
+	override fun getFunctionOrdinal(function: NativeClassFunction) = functionOrdinals[function.name]!!
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, Transform>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
@@ -40,7 +68,7 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "GLES20"
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
-		writer.println("\t\tlong $FUNCTION_ADDRESS = GLES.getCapabilities().${function.name};")
+		writer.println("\t\tlong $FUNCTION_ADDRESS = GLES.getICD().${function.name};")
 	}
 
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
@@ -62,6 +90,12 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 	}
 
 	init {
+		javaImport(
+			"org.lwjgl.*",
+			"static org.lwjgl.system.APIUtil.*",
+			"static org.lwjgl.system.MemoryUtil.*"
+		)
+
 		documentation = "Defines the capabilities of an OpenGL ES context."
 	}
 
@@ -69,47 +103,48 @@ private val GLESBinding = Generator.register(object : APIBinding(GLES_PACKAGE, C
 		generateJavaPreamble()
 		println("public final class $CAPABILITIES_CLASS {\n")
 
-		val classes = super.getClasses { o1, o2 ->
-			// Core functionality first, extensions after
-			val isGLES1 = o1.templateName.startsWith("GLES")
-			val isGLES2 = o2.templateName.startsWith("GLES")
-
-			if (isGLES1 xor isGLES2)
-				(if (isGLES1) -1 else 1)
-			else
-				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
-		}
-
-		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-
-		val addresses = classesWithFunctions
-			.map { it.functions }
-			.flatten()
-			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
-
 		println("\tpublic final long")
-		println(addresses.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
+		println(functions
+			.map { it.name }
+			.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
 
 		classes.forEach {
 			println(it.getCapabilityJavadoc())
 			println("\tpublic final boolean ${it.capName};")
 		}
 
-		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
+		println("""
+	/** Off-heap array of the above function addresses. */
+	final PointerBuffer addresses;
 
-		println(addresses.map { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" }.joinToString("\n\t\t", prefix = "\t\t", postfix = "\n"))
+	$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {
+""")
+
+		println(functions.map { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" }.joinToString(prefix = "\t\t", separator = "\n\t\t"))
 
 		for (extension in classes) {
 			val capName = extension.capName
 			if (extension.hasNativeFunctions) {
-				print("\t\t$capName = ext.contains(\"$capName\") && GLES.checkExtension(\"$capName\", ${if (capName == extension.className) "$GLES_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
+				print("\n\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$GLES_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
 				if (extension.functions.any { it has DependsOn }) print(", ext")
-				println("));")
+				print("));")
 			} else
-				println("\t\t$capName = ext.contains(\"$capName\");")
+				print("\n\t\t$capName = ext.contains(\"$capName\");")
 		}
-		println("\t}")
-		print("}")
+		print("""
+
+		addresses = ThreadLocalUtil.getAddressesFromCapabilities(this);
+	}
+
+	private static boolean checkExtension(String extension, boolean supported) {
+		if ( supported )
+			return true;
+
+		apiLog("[GLES] " + extension + " was reported as available but an entry point is missing.");
+		return false;
+	}
+
+}""")
 	}
 
 })
@@ -120,7 +155,7 @@ fun String.nativeClassGLES(
 	prefix: String = "GL",
 	prefixMethod: String = prefix.toLowerCase(),
 	postfix: String = "",
-	init: (NativeClass.() -> Unit)? = null
+	init: NativeClass.() -> Unit
 ) = nativeClass(
 	GLES_PACKAGE,
 	templateName,
@@ -129,7 +164,12 @@ fun String.nativeClassGLES(
 	prefixMethod = prefixMethod,
 	postfix = postfix,
 	binding = GLESBinding,
-	init = init
+	library = "GLES.initialize();",
+	init = {
+		init()
+		if (functions.any())
+			nativeImport("opengles.h")
+	}
 )
 
 val NativeClass.capLink: String get() = "{@link $CAPABILITIES_CLASS\\#$capName $templateName}"

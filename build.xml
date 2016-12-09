@@ -932,14 +932,14 @@
 		</release-module>
 
 		<!-- OpenGL -->
-		<release-module package="org.lwjgl.opengl" name="opengl" java-only="true" title="OpenGL" license="khronos" if:true="${binding.opengl}">
+		<release-module package="org.lwjgl.opengl" name="opengl" native-library="lwjgl_opengl" title="OpenGL" license="khronos" if:true="${binding.opengl}">
 			<sources>
 				<fileset dir="${src.core}"><include name="org/lwjgl/opengl/**"/></fileset>
 			</sources>
 		</release-module>
 
 		<!-- OpenGL ES -->
-		<release-module package="org.lwjgl.opengles" name="opengles" java-only="true" title="OpenGL ES" license="khronos" if:true="${binding.opengles}">
+		<release-module package="org.lwjgl.opengles" name="opengles" native-library="lwjgl_opengles" title="OpenGL ES" license="khronos" if:true="${binding.opengles}">
 			<sources>
 				<fileset dir="${src.core}"><include name="org/lwjgl/opengles/**"/></fileset>
 			</sources>
