@@ -44,6 +44,8 @@ val nk_handle = union(NUKLEAR_PACKAGE, "NkHandle", nativeName = "nk_handle") {
 	nullable..voidptr.member("ptr", "")
 	int.member("id", "")
 }
+// Struct values are currently not supported in callbacks
+val nk_handle_in_callback = "nk_handle".opaque_p
 
 val NK_UTF_SIZE = 4
 val nk_glyph = char_p
@@ -119,7 +121,7 @@ val nk_plugin_alloc = "nk_plugin_alloc".callback(
 	NUKLEAR_PACKAGE, void_p, "NkPluginAlloc",
 	"",
 
-	nk_handle.IN("handle", ""),
+	nk_handle_in_callback.IN("handle", ""),
 	voidptr.IN("old", ""),
 	nk_size.IN("size", "")
 )
@@ -128,7 +130,7 @@ val nk_plugin_free = "nk_plugin_free".callback(
 	NUKLEAR_PACKAGE, void, "NkPluginFree",
 	"",
 
-	nk_handle.IN("handle", ""),
+	nk_handle_in_callback.IN("handle", ""),
 	voidptr.IN("old", "")
 )
 
@@ -241,7 +243,7 @@ val nk_plugin_paste = "nk_plugin_paste".callback(
 	NUKLEAR_PACKAGE, void, "NkPluginPaste",
 	"",
 
-	nk_handle.IN("handle", ""),
+	nk_handle_in_callback.IN("handle", ""),
 	nk_text_edit_p.IN("edit", "")
 ) {
 	documentation = "Instances of this interface may be set to the ##NkClipboard struct."
@@ -251,7 +253,7 @@ val nk_plugin_copy = "nk_plugin_copy".callback(
 	NUKLEAR_PACKAGE, void, "NkPluginCopy",
 	"",
 
-	nk_handle.IN("handle", ""),
+	nk_handle_in_callback.IN("handle", ""),
 	const..charUTF8_p.IN("text", ""),
 	int.IN("len", "")
 ) {
@@ -322,7 +324,7 @@ val nk_text_width_f = "nk_text_width_f".callback(
 	NUKLEAR_PACKAGE, float, "NkTextWidthCallback",
 	"",
 
-	nk_handle.IN("handle", ""),
+	nk_handle_in_callback.IN("handle", ""),
 	float.IN("h", ""),
 	const..charUTF8_p.IN("text", ""),
 	int.IN("len", "")
@@ -334,7 +336,7 @@ val nk_query_font_glyph_f = "nk_query_font_glyph_f".callback(
 	NUKLEAR_PACKAGE, void, "NkQueryFontGlyphCallback",
 	"",
 
-	nk_handle.IN("handle", ""),
+	nk_handle_in_callback.IN("handle", ""),
 	float.IN("font_height", ""),
 	nk_user_font_glyph.p.IN("glyph", ""),
 	nk_rune.IN("codepoint", ""),
@@ -621,7 +623,7 @@ val nk_draw_begin = "nk_draw_begin".callback(
 	"",
 
 	nk_command_buffer_p.IN("buffer", ""),
-	nk_handle.IN("userdata", "")
+	nk_handle_in_callback.IN("userdata", "")
 ) {
 	documentation = "Instances of this interface may be set to the {@code nk_style_*} structs."
 }
@@ -631,7 +633,7 @@ val nk_draw_end = "nk_draw_end".callback(
 	"",
 
 	nk_command_buffer_p.IN("buffer", ""),
-	nk_handle.IN("userdata", "")
+	nk_handle_in_callback.IN("userdata", "")
 ) {
 	documentation = "Instances of this interface may be set to the {@code nk_style_*} structs."
 }
