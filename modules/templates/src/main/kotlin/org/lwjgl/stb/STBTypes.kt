@@ -227,7 +227,7 @@ val stbtt_fontinfo_p = struct(STB_PACKAGE, "STBTTFontinfo", nativeName = "stbtt_
 	static(STB_LIBRARY)
 }.p
 
-val stbtt_vertex_type = PrimitiveType("stbtt_vertex_type", PrimitiveMapping.SHORT)
+val stbtt_vertex_type = IntegerType("stbtt_vertex_type", PrimitiveMapping.SHORT)
 
 val stbtt_vertex_p = struct(STB_PACKAGE, "STBTTVertex", nativeName = "stbtt_vertex", mutable = false) {
 	documentation = "Vertex data."

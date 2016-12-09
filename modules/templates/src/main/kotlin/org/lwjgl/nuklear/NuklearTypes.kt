@@ -41,7 +41,7 @@ val nk_ushort_p = nk_ushort.p
 val nk_rune_p = nk_rune.p
 
 val nk_handle = union(NUKLEAR_PACKAGE, "NkHandle", nativeName = "nk_handle") {
-	voidptr.member("ptr", "")
+	nullable..voidptr.member("ptr", "")
 	int.member("id", "")
 }
 

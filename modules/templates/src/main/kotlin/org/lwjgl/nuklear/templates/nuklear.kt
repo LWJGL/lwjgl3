@@ -767,7 +767,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			ctx,
-			nullable..nk_handle.IN("handle", "")
+			nk_handle.IN("handle", "")
 		)
 
 		intb(
@@ -1535,7 +1535,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			ctx,
-			nullable..nk_image.IN("img", ""),
+			nk_image.IN("img", ""),
 			const..charUTF8_p.IN("str", ""),
 			nk_flags.IN("align", "", TextAlignments),
 			Check(1)..int_p.INOUT("value", "")
@@ -1546,7 +1546,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			ctx,
-			nullable..nk_image.IN("img", ""),
+			nk_image.IN("img", ""),
 			const..charUTF8_p.IN("str", ""),
 			AutoSize("str")..int.IN("len", ""),
 			nk_flags.IN("align", "", TextAlignments),
@@ -1579,7 +1579,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			ctx,
-			nullable..nk_image.IN("img", ""),
+			nk_image.IN("img", ""),
 			const..charUTF8_p.IN("str", ""),
 			nk_flags.IN("align", "", TextAlignments),
 			intb.IN("value", "")
@@ -1590,7 +1590,7 @@ nk_style_pop_vec2(ctx);""")}
 			"",
 
 			ctx,
-			nullable..nk_image.IN("img", ""),
+			nk_image.IN("img", ""),
 			const..charUTF8_p.IN("str", ""),
 			AutoSize("str")..int.IN("len", ""),
 			nk_flags.IN("align", "", TextAlignments),
