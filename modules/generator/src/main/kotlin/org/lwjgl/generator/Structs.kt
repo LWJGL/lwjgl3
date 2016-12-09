@@ -395,15 +395,27 @@ ${members.map {
 			if (it.isNestedStructDefinition)
 				"${(it.nativeType as StructType).definition.printStructLayout(memberIndentation)}${if (it.name === ANONYMOUS) "" else " ${it.name}"};"
 			else {
-				val nativeType = if (it.nativeType is StructType && !it.nativeType.includesPointer)
-					"{@link ${it.nativeType.javaMethodType} ${it.nativeType.name}}"
-				else
-					it.nativeType.let {
-						if (it is PointerType && !it.includesPointer)
+				val nativeType = it.nativeType.let {
+					(
+						if (it is PointerType && !it.includesPointer && it !is StructType)
 							"${it.name}${if (!it.name.endsWith('*')) " " else ""}*"
 						else
 							it.name
+					).let { nativeName ->
+						var elementType = it
+						while (true) {
+							if (elementType !is PointerType || elementType.elementType == null)
+								break
+
+							elementType = elementType.elementType!!
+						}
+
+						if (elementType is StructType || elementType is CallbackType)
+							nativeName.replace(elementType.name, "{@link ${elementType.javaMethodType} ${elementType.name}}")
+						else
+							nativeName
 					}
+				}
 				"${if (it has ConstMember) "const " else ""}$nativeType${if (it.name === ANONYMOUS) "" else " ${it.name}"}${if (it is StructMemberArray) "[${it.size}]" else ""};"
 			}
 		}.joinToString("\n$memberIndentation", prefix = memberIndentation)}
