@@ -248,14 +248,8 @@ class Struct(
 	private val StructMember.nestedMembers: Sequence<StructMember>
 		get() = (nativeType as StructType).definition.visibleMembers
 
-	private val containsUnion: Boolean get() =
-	union || members.any {
-		it.isNestedStruct && (it.nativeType as StructType).let {
-			if (it.name === ANONYMOUS)
-				it.definition.containsUnion
-			else
-				it.definition.union
-		}
+	private val containsUnion: Boolean get() = union || members.any {
+		it.isNestedStruct && (it.nativeType as StructType).let { it.name === ANONYMOUS && it.definition.containsUnion }
 	}
 
 	internal val validations: Sequence<String> by lazy {
