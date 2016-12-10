@@ -87,7 +87,7 @@ typedef struct EnvData_ {
 		TlsFree(envTLS);
 	}
 
-	static EnvData* envTLSGet(void) {
+	EnvData* envTLSGet(void) {
 		EnvData* data = (EnvData*)malloc(sizeof(EnvData));
 
 		jboolean async = 0;
@@ -143,7 +143,7 @@ typedef struct EnvData_ {
 		}
 	}
 
-	static EnvData* envTLSGet(void) {
+	EnvData* envTLSGet(void) {
 		EnvData* data = (EnvData*)malloc(sizeof(EnvData));
 
 		jboolean async = 0;
