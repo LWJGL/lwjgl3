@@ -181,11 +181,11 @@ internal class PrimitiveValueReturnTransform(
 	val bufferType: PointerType,
 	val paramName: String
 ) : FunctionTransform<ReturnValue>, StackFunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String) = if (bufferType.elementType is StructType)
+	override fun transformDeclaration(param: ReturnValue, original: String) = if (bufferType.elementType is PointerType && bufferType.elementType.elementType is StructType)
 		bufferType.elementType.javaMethodType
 	else
 		(bufferType.mapping as PointerMapping).primitive // Replace void with the buffer value type
-	override fun transformCall(param: ReturnValue, original: String) = if (bufferType.elementType is StructType)
+	override fun transformCall(param: ReturnValue, original: String) = if (bufferType.elementType is PointerType && bufferType.elementType.elementType is StructType)
 		"\t\treturn ${bufferType.elementType.javaMethodType}.create($paramName.get(0));"
 	else if (bufferType.mapping === PointerMapping.DATA_BOOLEAN)
 		"\t\treturn $paramName.get(0) != 0;"
@@ -296,14 +296,14 @@ internal class BufferAutoSizeReturnTransform(
 	val encoding: String? = null
 ) : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
-		if (it is StructType)
+		if (it.dereference is StructType)
 			"${it.javaMethodType}.Buffer"
 		else
 			it.javaMethodType
 	}
 
 	override fun transformCall(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
-		"\t\treturn ${if (it is StructType)
+		"\t\treturn ${if (it.dereference is StructType)
 			"${it.javaMethodType}.create"
 		else
 			"mem${it.javaMethodType}"

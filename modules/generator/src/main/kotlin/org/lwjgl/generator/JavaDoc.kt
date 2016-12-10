@@ -140,7 +140,7 @@ internal fun GeneratorTarget.toJavaDoc(documentation: String, params: Sequence<P
 		return documentation.toJavaDoc()
 
 	return StringBuilder("\t/**\n\t * ${documentation.cleanup()}").run {
-		val returnsStructValue = !returnDoc.isEmpty() && returns is StructType && !returns.includesPointer
+		val returnsStructValue = !returnDoc.isEmpty() && returns is StructType
 
 		if (params.any()) {
 			// Find maximum param name length

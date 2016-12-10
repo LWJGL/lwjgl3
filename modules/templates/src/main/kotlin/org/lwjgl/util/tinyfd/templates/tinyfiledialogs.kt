@@ -97,7 +97,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		const..charUTF8_p.IN("aTitle", "the dialog title"),
 		const..charUTF8_p.IN("aDefaultPathAndFile", "the default path and/or file"),
 		AutoSize("aFilterPatterns")..int.IN("aNumOfFilterPatterns", "the number of patterns in {@code aFilterPatterns}"),
-		nullable..const..charUTF8_p.p.const.IN("aFilterPatterns", """an array of file type patterns ($NULL or {"*.jpg","*.png"}"""),
+		nullable..const..charUTF8_p.const.p.IN("aFilterPatterns", """an array of file type patterns ($NULL or {"*.jpg","*.png"}"""),
 		nullable..const..charUTF8_p.IN("aSingleFilterDescription", "$NULL or \"image files\""),
 
 		returnDoc = "the selected file path or $NULL on cancel"

@@ -324,7 +324,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
 		GLenum.IN("type", ""),
 		AutoSize("strings")..GLsizei.IN("count", ""),
-		PointerArray(GLcharUTF8_p, "string")..const..GLcharUTF8_p.p.const.IN("strings", "")
+		PointerArray(GLcharUTF8_p, "string")..const..GLcharUTF8_p.const.p.IN("strings", "")
 	)
 
 	void(

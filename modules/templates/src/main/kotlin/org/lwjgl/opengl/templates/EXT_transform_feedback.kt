@@ -144,7 +144,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
 		GLuint.IN("program", ""),
 		AutoSize("varyings")..GLsizei.IN("count", ""),
-		PointerArray(GLcharASCII_p, "varying")..const..GLcharASCII_p.p.const.IN("varyings", ""),
+		PointerArray(GLcharASCII_p, "varying")..const..GLcharASCII_p.const.p.IN("varyings", ""),
 		GLenum.IN("bufferMode", "")
 	)
 

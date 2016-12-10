@@ -422,20 +422,20 @@ class NativeClass(
 		val hasFunctions = !_functions.isEmpty()
 		if (hasFunctions || binding is SimpleBinding) {
 			// TODO: This is horrible. Refactor so that we build imports after code generation.
-			val hasBuffers = functions.any { it.returns.isBufferPointer || it.hasParam { it.isBufferPointer } }
+			val hasBuffers = functions.any { it.returns.nativeType.isPointerData || it.hasParam { it.nativeType.isPointerData } }
 
 			if (hasBuffers) {
 				if (functions.any {
-					(it.returns.isBufferPointer && it.returns.nativeType.mapping !== PointerMapping.DATA_POINTER && it.returns.nativeType !is StructType && it.returns.nativeType !is CharSequenceType)
+					(it.returns.isBufferPointer && it.returns.nativeType.mapping !== PointerMapping.DATA_POINTER && it.returns.nativeType !is CharSequenceType)
 					||
-					it.hasParam { it.isBufferPointer && it.nativeType.mapping !== PointerMapping.DATA_POINTER && it.nativeType !is StructType }
+					it.hasParam { it.isBufferPointer && it.nativeType.mapping !== PointerMapping.DATA_POINTER }
 				})
 					println("import java.nio.*;\n")
 
 				val needsPointerBuffer: QualifiedType.() -> Boolean = {
 					this.nativeType is PointerType &&
 					(
-						this.nativeType.elementType.let { it != null && (it is PointerType || it.mapping == PrimitiveMapping.POINTER) && (it !is StructType || it.includesPointer) } ||
+						this.nativeType.elementType.let { it != null && (it is PointerType || (it.mapping == PrimitiveMapping.POINTER && it !is StructType)) } ||
 						(this.has(MultiType) && this[MultiType].types.contains(PointerMapping.DATA_POINTER))
 					)
 				}
@@ -467,7 +467,7 @@ class NativeClass(
 				func.hasParam { param ->
 					param.nativeType is PointerType && func.getReferenceParam(AutoSize, param.name).let {
 						if (it == null)
-							!param.has(Nullable) && param.nativeType !is StructType
+							!param.has(Nullable) && param.nativeType.elementType !is StructType
 						else
 							it[AutoSize].reference != param.name // dependent auto-size
 					}
@@ -479,8 +479,8 @@ class NativeClass(
 			if (hasMemoryStack)
 				println("import static org.lwjgl.system.MemoryStack.*;")
 			if (hasBuffers && functions.any {
-				(it.returns.isBufferPointer && it.returns.nativeType !is StructType) || it.hasParam {
-					it.isBufferPointer && (it.nativeType !is StructType || it has Nullable)
+				it.returns.isBufferPointer || it.hasParam { param ->
+					param.nativeType.let { it is PointerType && it.mapping !== PointerMapping.OPAQUE_POINTER && (it.elementType !is StructType || param has Nullable) }
 				}
 			}) {
 				println("import static org.lwjgl.system.MemoryUtil.*;")

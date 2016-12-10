@@ -8,6 +8,22 @@ import org.lwjgl.*
 import java.nio.*
 import kotlin.reflect.*
 
+/*
+- NativeType
+	- ValueType
+		- PrimitiveType
+			- IntegerType
+				- EnumType
+			- CharType
+		- StructType (mapped to struct class)
+	- PointerType (mapped to raw pointer or buffer)
+		- ArrayType (mapped to java array)
+		- CharSequenceType (mapped to String/CharSequence)
+		- ObjectType (mapped to a Java class)
+			- CallbackType (mapped to callback interface)
+			- C++ classes (if we add support in the future)
+*/
+
 open class NativeType(
 	/** The type used in the native API. */
 	val name: String,
@@ -33,8 +49,10 @@ open class NativeType(
 		"${this.javaClass.simpleName}: $name | ${mapping.jniFunctionType} | ${mapping.nativeMethodType} | ${mapping.javaMethodType}"
 }
 
+abstract class ValueType(name: String, mapping: TypeMapping) : NativeType(name, mapping)
+
 // Specialization for primitives.
-open class PrimitiveType(name: String, mapping: PrimitiveMapping) : NativeType(name, mapping)
+open class PrimitiveType(name: String, mapping: PrimitiveMapping) : ValueType(name, mapping)
 
 // Specialization for integers.
 open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false) : PrimitiveType(name, mapping)
@@ -43,6 +61,21 @@ val String.enumType: IntegerType get() = IntegerType(this, PrimitiveMapping.INT)
 
 // Specialization for string characters.
 class CharType(name: String, mapping: CharMapping) : PrimitiveType(name, mapping)
+
+// Structs
+class StructType(
+	/** The struct size in bytes. */
+	val definition: Struct,
+	/** The type used in the native API. */
+	name: String = definition.nativeName
+) : ValueType(name, PrimitiveMapping.POINTER) {
+	override val javaMethodType: String
+		get() = definition.className
+}
+
+internal val NativeType.dereference: NativeType get() = (if (this is PointerType && this.elementType != null) this.elementType else this)
+internal val NativeType.hasStructValidation: Boolean
+	get() = dereference.let { it is StructType && it.definition.validations.any() }
 
 // Pointers
 open class PointerType(
@@ -54,19 +87,14 @@ open class PointerType(
 	val includesPointer: Boolean = false,
 	/** Optional element type. See the secondary constructors below. */
 	val elementType: NativeType? = null
-) : NativeType(name, mapping)
+) : NativeType(name, mapping) {
+	override val javaMethodType: String
+		get() = if (elementType is StructType)
+			elementType.definition.className
+		else
+			super.javaMethodType
+}
 
-/** Converts primitive to array */
-val PrimitiveType.p: PointerType get() = PointerType(this.name, (this.mapping as PrimitiveMapping).toPointer, elementType = this)
-
-fun PrimitiveType.p(name: String) = PointerType(
-	name,
-	(this.mapping as PrimitiveMapping).toPointer,
-	elementType = this,
-	includesPointer = true
-)
-
-/** pointer to pointer. */
 private fun PointerType.pointerTo(): String {
 	val builder = StringBuilder(name)
 	if (!includesPointer) {
@@ -78,69 +106,27 @@ private fun PointerType.pointerTo(): String {
 	return builder.toString()
 }
 
+/** Pointer to value */
+val ValueType.p: PointerType get() = PointerType(this.name, (this.mapping as PrimitiveMapping).toPointer, elementType = this)
+fun ValueType.p(name: String) = PointerType(
+	name,
+	(this.mapping as PrimitiveMapping).toPointer,
+	elementType = this,
+	includesPointer = true
+)
+/** Pointer to pointer */
 val PointerType.p: PointerType get() = PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
-val PointerType.const: PointerType get() = if (this.includesPointer) {
-	if (this is StructType)
-		StructType(this.definition, "${this.name} const", includesPointer = true, elementType = this.elementType)
-	else
-		throw IllegalArgumentException("The const keyword cannot be applied to opaque pointer types.")
-} else
-	PointerType("${this.name} const", PointerMapping.DATA_POINTER, elementType = this.elementType)
-
-val String.p: PointerType get() = PointerType(this, includesPointer = false)
-val String.opaque_p: PointerType get() = PointerType(this, includesPointer = true)
-
-// Objects (pointer wrappers)
-open class ObjectType(
-	/** The Java wrapper class. */
-	val className: String,
-	/** The type used in the native API. */
-	name: String = className,
-	/** If true, the nativeType typedef includes a pointer. */
-	includesPointer: Boolean = true
-) : PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer) {
-	override val javaMethodType: String
-		get() = className
-}
-
-// Structs, 3 cases:
-//
-//     1) struct value
-//         * val foo = struct(...).nativeType
-//         * foo is <StructType with includesPointer = false>
-//         * mapped to ByteBuffer
-//     2) pointer to struct value(s), i.e. array of struct values
-//         * val foo_p = foo.p
-//         * foo_p is <StructType with includesPointer = true>
-//         * mapped to ByteBuffer
-//     3) pointer to pointer to struct value(s):
-//         * val foo_pp = foo_p.p
-//         * foo_pp is <PointerType with includesPointer = false>
-//         * mapped to PointerBuffer
-//
-// The special case is #2. One would normally expect a PointerBuffer there (#1 is a ByteBuffer),
-// but since struct arrays are packed, there's no need for an extra indirection. The difference
-// between #2 and #3 is handled in the StructType.p extension property below.
-class StructType(
-	/** The struct size in bytes. */
-	val definition: Struct,
-	/** The type used in the native API. */
-	name: String = definition.nativeName,
-	/** If true, the nativeType typedef includes a pointer. If false, the argument will be passed-by-value. */
-	includesPointer: Boolean = false,
-	elementType: NativeType? = null
-) : PointerType(name, PointerMapping.DATA_BYTE, includesPointer, elementType) {
-	override val javaMethodType: String
-		get() = definition.className
-}
-
-/** Converts a struct value to a pointer to a struct value. */
-val StructType.p: PointerType get() = if (this.includesPointer)
-	PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
+/** Const pointer */
+val PointerType.const: PointerType get() = if (this.includesPointer)
+	throw IllegalArgumentException("The const keyword cannot be applied to opaque pointer types.")
+else if (this.name.endsWith("*"))
+	PointerType("${this.name} const", this.mapping as PointerMapping, elementType = this.elementType, includesPointer = false)
 else
-	StructType(this.definition, this.pointerTo(), includesPointer = true, elementType = this)
-
-fun StructType.p(name: String) = StructType(this.definition, name, includesPointer = true)
+	PointerType("${this.name} * const", this.mapping as PointerMapping, elementType = this.elementType, includesPointer = true)
+/** Simple pointer shortcut */
+val String.p: PointerType get() = PointerType(this, includesPointer = false)
+/** Opaque pointer shortcut */
+val String.opaque_p: PointerType get() = PointerType(this, includesPointer = true)
 
 // Strings
 class CharSequenceType(
@@ -148,7 +134,7 @@ class CharSequenceType(
 	name: String,
 	/** The type we map the native type to. */
 	mapping: PointerMapping = PointerMapping.DATA_BYTE,
-	/** If true, the nativeType typedef includes a pointer. */
+	/** If true, the native typedef includes a pointer. */
 	includesPointer: Boolean = false,
 	/** The CharSequence charset. */
 	val charMapping: CharMapping = CharMapping.ASCII
@@ -163,15 +149,6 @@ fun CharSequenceType(
 
 val CharType.p: CharSequenceType get() = CharSequenceType(this)
 
-// Callbacks
-class CallbackType(
-	val signature: CallbackFunction,
-	name: String = signature.className
-) : ObjectType(signature.className, name) {
-	override val javaMethodType: String
-		get() = "${super.javaMethodType}I"
-}
-
 // Arrays (automatically used for array overloads)
 class ArrayType(
 	type: PointerType,
@@ -182,6 +159,28 @@ class ArrayType(
 	type.includesPointer,
 	type.elementType
 )
+
+// Objects
+open class ObjectType(
+	/** The Java wrapper class. */
+	val className: String,
+	/** The type used in the native API. */
+	name: String = className,
+	/** If true, the native typedef includes a pointer. */
+	includesPointer : Boolean = true
+) : PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer) {
+	override val javaMethodType: String
+		get() = className
+}
+
+// Callbacks
+class CallbackType(
+	val signature: CallbackFunction,
+	name: String = signature.className
+) : ObjectType(signature.className, name) {
+	override val javaMethodType: String
+		get() = "${super.javaMethodType}I"
+}
 
 // typedefs
 fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping as PrimitiveMapping)

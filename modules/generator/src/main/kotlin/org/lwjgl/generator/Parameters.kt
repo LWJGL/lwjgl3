@@ -11,17 +11,20 @@ abstract class QualifiedType(
 	val nativeType: NativeType
 ) : TemplateElement() {
 
+	internal val hasUnsafe: Boolean
+		get() = (nativeType is PointerType && (nativeType.mapping !== PointerMapping.OPAQUE_POINTER || nativeType is CallbackType)) || nativeType is StructType
+
 	override val isSpecial: Boolean
-		get() = (isBufferPointer && nativeType !is ArrayType) || super.isSpecial
+		get() = (hasUnsafe && nativeType !is ArrayType) || super.isSpecial
 
 	internal val isBufferPointer: Boolean
-		get() = nativeType.isPointerData
+		get() = nativeType is PointerType && nativeType.mapping !== PointerMapping.OPAQUE_POINTER && nativeType.elementType !is StructType
 
 	internal val javaMethodType: String
 		get() = nativeType.javaMethodType
 
 	internal val isStructValue: Boolean
-		get() = nativeType is StructType && !nativeType.includesPointer
+		get() = nativeType is StructType
 
 	internal fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false): String {
 		val builder = StringBuilder()
@@ -31,7 +34,7 @@ abstract class QualifiedType(
 
 		if (binding == null || this === JNI_ENV || isStructValue) {
 			builder.append(nativeType.name)
-			if (nativeType is PointerType && !nativeType.includesPointer && (pointerMode || nativeType !is StructType)) {
+			if ((nativeType is PointerType && !nativeType.includesPointer) || (pointerMode && nativeType is StructType)) {
 				if (!nativeType.name.endsWith('*'))
 					builder.append(' ')
 				builder.append('*')

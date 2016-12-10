@@ -720,7 +720,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLuint.IN("program", ""),
 		AutoSize("varyings")..GLsizei.IN("count", ""),
-		PointerArray(GLcharASCII_p, "varying")..const..GLcharASCII_p.p.const.IN("varyings", ""),
+		PointerArray(GLcharASCII_p, "varying")..const..GLcharASCII_p.const.p.IN("varyings", ""),
 		GLenum.IN("bufferMode", "")
 	)
 
@@ -962,7 +962,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 
 		GLuint.IN("program", ""),
 		AutoSize("uniformNames", "uniformIndices")..GLsizei.IN("uniformCount", ""),
-		const..GLcharASCII_p.p.const.IN("uniformNames", ""),
+		const..GLcharASCII_p.const.p.IN("uniformNames", ""),
 		GLuint_p.OUT("uniformIndices", "")
 	)
 
