@@ -10,6 +10,7 @@ import static java.lang.Character.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryAccessJNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.libc.LibCString.*;
 
 /** Provides {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}. */
@@ -28,6 +29,7 @@ final class MemoryAccess {
 			// Depends on sun.misc.Unsafe
 			accessor = new MemoryAccessorUnsafe();
 		} catch (Throwable t) {
+			t.printStackTrace(DEBUG_STREAM);
 			DEBUG_STREAM
 				.println("[LWJGL] [MemoryAccessor] Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
 			accessor = new MemoryAccessorJNI();
@@ -180,21 +182,79 @@ final class MemoryAccess {
 			try {
 				UNSAFE = getUnsafeInstance();
 
-				ADDRESS = UNSAFE.objectFieldOffset(getDeclaredField(Buffer.class, "address"));
-				CAPACITY = UNSAFE.objectFieldOffset(getDeclaredField(Buffer.class, "capacity"));
+				ADDRESS = getAddressOffset();
+				CAPACITY = getCapacityOffset();
+				CLEANER = getObjectOffset(bb);
 
-				CLEANER = UNSAFE.objectFieldOffset(getDeclaredField(BYTE_BUFFER, "cleaner"));
-
-				PARENT_BYTE = UNSAFE.objectFieldOffset(getField(bb.slice(), bb));
-				PARENT_SHORT = UNSAFE.objectFieldOffset(getField(sb, bb));
-				PARENT_CHAR = UNSAFE.objectFieldOffset(getField(cb, bb));
-				PARENT_INT = UNSAFE.objectFieldOffset(getField(ib, bb));
-				PARENT_LONG = UNSAFE.objectFieldOffset(getField(lb, bb));
-				PARENT_FLOAT = UNSAFE.objectFieldOffset(getField(fb, bb));
-				PARENT_DOUBLE = UNSAFE.objectFieldOffset(getField(db, bb));
+				PARENT_BYTE = getObjectOffset(bb.slice());
+				PARENT_SHORT = getObjectOffset(sb);
+				PARENT_CHAR = getObjectOffset(cb);
+				PARENT_INT = getObjectOffset(ib);
+				PARENT_LONG = getObjectOffset(lb);
+				PARENT_FLOAT = getObjectOffset(fb);
+				PARENT_DOUBLE = getObjectOffset(db);
 			} catch (Exception e) {
 				throw new UnsupportedOperationException(e);
 			}
+		}
+
+		private static long getAddressOffset() {
+			long MAGIC_ADDRESS = 0xDEADBEEF8BADF00DL;
+			if ( BITS32 )
+				MAGIC_ADDRESS &= 0xFFFFFFFFL;
+
+			ByteBuffer bb = newDirectByteBuffer(MAGIC_ADDRESS, 0);
+
+			long offset = 8L; // 8 byte aligned, cannot be at 0
+			while ( true ) {
+				if ( UNSAFE.getLong(bb, offset) == MAGIC_ADDRESS )
+					return offset;
+				offset += 8L;
+			}
+		}
+
+		private static long getCapacityOffset() {
+			int MAGIC_CAPACITY = 0x0D15EA5E;
+
+			ByteBuffer bb = newDirectByteBuffer(0L, MAGIC_CAPACITY);
+			bb.limit(0);
+
+			long offset = 4L; // 4 byte aligned, cannot be at 0
+			while ( true ) {
+				if ( UNSAFE.getInt(bb, offset) == MAGIC_CAPACITY )
+					return offset;
+				offset += 4L;
+			}
+		}
+
+		private static boolean hasAddress(Buffer b, long offset) {
+			// We're looking for any aligned integer, with more than 1 bit set (i.e. does not include a boolean field)
+			return Integer.bitCount(UNSAFE.getInt(b, offset)) > 1;
+		}
+
+		private static long getObjectOffset(Buffer b) {
+			/*
+			Cleaner lookup:
+				All fields except address, nativeByteOrder and the cleaner reference will be zero
+			Attachment lookup:
+				All fields except address and the attached reference will be zero
+			 */
+			b.mark();
+
+			// The reference field will be after address (in a subclass), skip the address
+			long offset = ADDRESS + 8;
+			if ( sun.misc.Unsafe.ARRAY_OBJECT_INDEX_SCALE == 4 ) // 32-bit JVM or 64-bit JVM with +UseCompressedOops
+				while ( true ) {
+					if ( hasAddress(b, offset) )
+						return offset;
+					offset += 4;
+				}
+			else
+				while ( true ) {
+					if ( hasAddress(b, offset) || hasAddress(b, offset + 4) )
+						return offset;
+					offset += 8;
+				}
 		}
 
 		MemoryAccessorUnsafe() {
@@ -734,52 +794,6 @@ final class MemoryAccess {
 			};
 		}
 
-	}
-
-	static java.lang.reflect.Field getDeclaredField(Class<?> root, String fieldName) throws NoSuchFieldException {
-		Class<?> type = root;
-
-		do {
-			try {
-				java.lang.reflect.Field field = type.getDeclaredField(fieldName);
-				field.setAccessible(true);
-				return field;
-			} catch (NoSuchFieldException e) {
-				type = type.getSuperclass();
-			}
-		} while ( type != null );
-
-		throw new NoSuchFieldException(fieldName + " does not exist in " + root.getSimpleName() + " or any of its superclasses.");
-	}
-
-	static java.lang.reflect.Field getField(Buffer buffer, Object value) throws NoSuchFieldException {
-		Class<?> type = buffer.getClass();
-
-		do {
-			for ( java.lang.reflect.Field field : type.getDeclaredFields() ) {
-				if ( java.lang.reflect.Modifier.isStatic(field.getModifiers()) )
-					continue;
-
-				if ( !field.getType().isAssignableFrom(value.getClass()) )
-					continue;
-
-				field.setAccessible(true);
-				try {
-					Object fieldValue = field.get(buffer);
-					if ( fieldValue == value )
-						return field;
-				} catch (IllegalAccessException e) {
-					// ignore
-				}
-			}
-
-			type = type.getSuperclass();
-		} while ( type != null );
-
-		throw new NoSuchFieldException(String.format(
-			"The specified value does not exist as a field in %s or any of its superclasses.",
-			buffer.getClass().getSimpleName()
-		));
 	}
 
 	static sun.misc.Unsafe getUnsafeInstance() {
