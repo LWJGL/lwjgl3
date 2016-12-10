@@ -29,7 +29,7 @@ abstract class QualifiedType(
 	internal fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false): String {
 		val builder = StringBuilder()
 
-		if (has(const))
+		if (has(const) && (binding == null || this is Parameter)) // const intptr is pointless and raises a warning on GCC/Clang
 			builder.append("const ")
 
 		if (binding == null || this === JNI_ENV || isStructValue) {
