@@ -97,10 +97,16 @@ public class MemoryStack implements AutoCloseable {
 	 */
 	public MemoryStack push() {
 		if ( frameIndex == frames.length )
-			frames = Arrays.copyOf(frames, frames.length * 2);
+			frameOverflow();
 
 		frames[frameIndex++] = pointer;
 		return this;
+	}
+
+	private void frameOverflow() {
+		if ( DEBUG )
+			apiLog("[WARNING] Out of frame stack space (" + frames.length + ") in thread: " + Thread.currentThread());
+		frames = Arrays.copyOf(frames, frames.length * 3 / 2);
 	}
 
 	/**
@@ -138,11 +144,15 @@ public class MemoryStack implements AutoCloseable {
 		@Override
 		public MemoryStack push() {
 			if ( frameIndex == debugFrames.length )
-				debugFrames = Arrays.copyOf(debugFrames, debugFrames.length * 2);
+				frameOverflow();
 
 			debugFrames[frameIndex] = getMethod();
 
 			return super.push();
+		}
+
+		private void frameOverflow() {
+			debugFrames = Arrays.copyOf(debugFrames, debugFrames.length * 3 / 2);
 		}
 
 		@Override
