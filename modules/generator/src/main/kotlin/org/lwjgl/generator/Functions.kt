@@ -158,7 +158,7 @@ class NativeClassFunction(
 	val javaDocLink: String
 		get() = "#$simpleName()"
 
-	internal val hasFunctionAddressParam: Boolean by lazy {
+	internal val hasFunctionAddressParam: Boolean by lazy(LazyThreadSafetyMode.NONE) {
 		nativeClass.binding != null && (nativeClass.binding.apiCapabilities !== APICapabilities.JNI_CAPABILITIES || hasParam { it.nativeType is ArrayType })
 	}
 
@@ -170,14 +170,14 @@ class NativeClassFunction(
 
 	internal val hasCustomJNIWithIgnoreAddress: Boolean get() = (returns.isStructValue || hasNativeCode) && (!has(Macro) || this[Macro].expression == null)
 
-	internal val hasCustomJNI: Boolean by lazy {
+	internal val hasCustomJNI: Boolean by lazy(LazyThreadSafetyMode.NONE) {
 		(!hasFunctionAddressParam || returns.isStructValue || hasNativeCode) && (!has(Macro) || this[Macro].expression == null)
 	}
 
 	private val isNativeOnly: Boolean
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial } || has(NativeName) || (has(Macro) && this[Macro].expression != null))
 
-	internal val hasUnsafeMethod: Boolean by lazy {
+	internal val hasUnsafeMethod: Boolean by lazy(LazyThreadSafetyMode.NONE) {
 		hasFunctionAddressParam
 		&& !(hasExplicitFunctionAddress && hasNativeCode)
 		&& (returns.hasUnsafe || hasParam { it.hasUnsafe || it has MapToInt })

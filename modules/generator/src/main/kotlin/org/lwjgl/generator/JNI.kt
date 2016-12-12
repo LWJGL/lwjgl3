@@ -23,8 +23,8 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
 		signatures.put(Signature(CallingConvention.DEFAULT, void, listOf(voidptr, voidptr, bool)), Unit)
 	}
 
-	private val sortedSignatures by lazy { signatures.keys.sorted() }
-	private val sortedSignaturesArray by lazy { signaturesArray.keys.sorted() }
+	private val sortedSignatures by lazy(LazyThreadSafetyMode.NONE) { signatures.keys.sorted() }
+	private val sortedSignaturesArray by lazy(LazyThreadSafetyMode.NONE) { signaturesArray.keys.sorted() }
 
 	internal fun register(function: NativeClassFunction) = signatures.put(Signature(function), Unit)
 	internal fun registerArray(function: NativeClassFunction) = signaturesArray.put(SignatureArray(function), Unit)

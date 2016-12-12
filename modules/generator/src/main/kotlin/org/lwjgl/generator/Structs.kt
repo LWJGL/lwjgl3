@@ -168,7 +168,7 @@ class Struct(
 		if (mutable) it else it.filter { it -> it.mutable }
 	}
 
-	private val settableMembers: Sequence<StructMember> by lazy {
+	private val settableMembers: Sequence<StructMember> by lazy(LazyThreadSafetyMode.NONE) {
 		val mutableMembers = mutableMembers()
 		mutableMembers.filter { !it.has(AutoSizeMember) || it[AutoSizeMember].keepSetter(mutableMembers) }
 	}
@@ -252,7 +252,7 @@ class Struct(
 		it.isNestedStruct && (it.nativeType as StructType).let { it.name === ANONYMOUS && it.definition.containsUnion }
 	}
 
-	internal val validations: Sequence<String> by lazy {
+	internal val validations: Sequence<String> by lazy(LazyThreadSafetyMode.NONE) {
 		if (union)
 			return@lazy emptySequence<String>()
 

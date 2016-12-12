@@ -198,7 +198,7 @@ class NativeClass(
 		get() = _functions.values
 
 	// same as above + array overloads
-	private val genFunctions: List<NativeClassFunction> by lazy {
+	private val genFunctions: List<NativeClassFunction> by lazy(LazyThreadSafetyMode.NONE) {
 		val list = ArrayList<NativeClassFunction>(_functions.values)
 
 		functions.asSequence()
@@ -339,7 +339,7 @@ class NativeClass(
 	override fun processDocumentation(documentation: String, forcePackage: Boolean): String =
 		processDocumentation(documentation, prefixConstant, prefixMethod, forcePackage = forcePackage)
 
-	private val constantLinks: Map<String, String> by lazy {
+	private val constantLinks: Map<String, String> by lazy(LazyThreadSafetyMode.NONE) {
 		val map = HashMap<String, String>()
 
 		constantBlocks
