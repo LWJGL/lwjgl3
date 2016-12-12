@@ -13,7 +13,6 @@ import kotlin.reflect.*
 	- ValueType
 		- PrimitiveType
 			- IntegerType
-				- EnumType
 			- CharType
 		- StructType (mapped to struct class)
 	- PointerType (mapped to raw pointer or buffer)
@@ -49,7 +48,7 @@ open class NativeType(
 		"${this.javaClass.simpleName}: $name | ${mapping.jniFunctionType} | ${mapping.nativeMethodType} | ${mapping.javaMethodType}"
 }
 
-abstract class ValueType(name: String, mapping: TypeMapping) : NativeType(name, mapping)
+abstract class ValueType internal constructor(name: String, mapping: TypeMapping) : NativeType(name, mapping)
 
 // Specialization for primitives.
 open class PrimitiveType(name: String, mapping: PrimitiveMapping) : ValueType(name, mapping)
@@ -63,7 +62,7 @@ val String.enumType: IntegerType get() = IntegerType(this, PrimitiveMapping.INT)
 class CharType(name: String, mapping: CharMapping) : PrimitiveType(name, mapping)
 
 // Structs
-class StructType(
+class StructType internal constructor(
 	/** The struct size in bytes. */
 	val definition: Struct,
 	/** The type used in the native API. */
@@ -141,16 +140,10 @@ class CharSequenceType(
 ) : PointerType(name, mapping, includesPointer)
 
 /** Converts CharType to CharSequenceType. */
-fun CharSequenceType(
-	charType: CharType,
-	/** The type we map the native type to. */
-	mapping: PointerMapping = PointerMapping.DATA_BYTE
-) = CharSequenceType(charType.name, mapping = mapping, charMapping = (charType.mapping as CharMapping))
-
-val CharType.p: CharSequenceType get() = CharSequenceType(this)
+val CharType.p: CharSequenceType get() = CharSequenceType(this.name, mapping = PointerMapping.DATA_BYTE, charMapping = (this.mapping as CharMapping))
 
 // Arrays (automatically used for array overloads)
-class ArrayType(
+class ArrayType internal constructor(
 	type: PointerType,
 	mapping: PointerMapping = type.mapping as PointerMapping
 ) : PointerType(
@@ -244,7 +237,7 @@ open class TypeMapping(
 
 }
 
-open class PrimitiveMapping(
+open class PrimitiveMapping internal constructor(
 	jniFunctionType: String,
 	javaMethodType: KClass<*>,
 	val bytes: Int,
@@ -285,7 +278,7 @@ class CharMapping(
 
 }
 
-open class PointerMapping(
+open class PointerMapping private constructor(
 	javaMethodType: KClass<*>,
 	val byteShift: String? = null
 ) : TypeMapping("jlong", Long::class, javaMethodType) {

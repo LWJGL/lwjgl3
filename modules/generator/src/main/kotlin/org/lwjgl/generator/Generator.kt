@@ -83,13 +83,11 @@ fun main(args: Array<String>) {
 
 	generate(args[0], args[1]) {
 		// We discover templates reflectively.
-		// For a package passed to the generate function, we
-		// search for a <package>.templates.TemplatesPackage class file
-		// and run any public static methods that return a NativeClass object.
+		// For a package passed to the generate function, we  search for <package>.templates.* class files and run any public static methods that return
+		// NativeClass objects.
 
-		// Note: For a Kotlin package X.Y.Z, <Z>Package is the class Kotlin generates that contains
-		// all top-level functions/properties in that package. Example:
-		// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
+		// Note: For a Kotlin package X.Y.Z, <Z>Package is the class Kotlin generates that contains all top-level functions/properties in that package.
+		// Example: org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
 
 		val pool = ForkJoinPool.commonPool()
 

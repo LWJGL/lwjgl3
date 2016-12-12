@@ -287,8 +287,6 @@ public final class APIUtil {
 		return memAddress0(pointers);
 	}
 
-	/** Ensures space for an additional pointer buffer, sets the memory addresses of the specified buffers and returns the address offset. */
-
 	/**
 	 * Stores the addresses of the specified array of buffers on the specified {@link MemoryStack}.
 	 *
