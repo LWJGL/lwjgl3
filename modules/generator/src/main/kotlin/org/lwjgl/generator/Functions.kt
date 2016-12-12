@@ -674,45 +674,47 @@ class NativeClassFunction(
 		if (!hasExplicitFunctionAddress && !constantMacro)
 			binding.generateFunctionAddress(this, this@NativeClassFunction)
 
-		// Basic checks
-		val checks = ArrayList<String>(4)
-		if (has(DependsOn) || has(IgnoreMissing) || binding.shouldCheckFunctionAddress(this@NativeClassFunction))
-			checks.add("check($FUNCTION_ADDRESS);")
-		getNativeParams().forEach {
-			if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType)
-				checks.add("check(${it.name});")
-			else if (it.paramType != OUT && it.nativeType.hasStructValidation)
-				checks.add(
-					"${it.nativeType.javaMethodType}.validate(${it.name}${sequenceOf(
-						if (it.has(Check)) it[Check].expression else null,
-						getReferenceParam(AutoSize, it.name).let { autoSize ->
-							if (autoSize == null)
-								null
+		if (Binding.CHECKS) {
+			// Basic checks
+			val checks = ArrayList<String>(4)
+			if (has(DependsOn) || has(IgnoreMissing) || binding.shouldCheckFunctionAddress(this@NativeClassFunction))
+				checks.add("check($FUNCTION_ADDRESS);")
+			getNativeParams().forEach {
+				if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType)
+					checks.add("check(${it.name});")
+				else if (it.paramType != OUT && it.nativeType.hasStructValidation)
+					checks.add(
+						"${it.nativeType.javaMethodType}.validate(${it.name}${sequenceOf(
+							if (it.has(Check)) it[Check].expression else null,
+							getReferenceParam(AutoSize, it.name).let { autoSize ->
+								if (autoSize == null)
+									null
+								else
+									autoSize.name.let {
+										if (autoSize.nativeType.mapping === PrimitiveMapping.INT)
+											it
+										else
+											"(int)$it"
+									}
+							}
+						).firstOrNull { it != null }.let { if (it == null) "" else ", $it" }});".let { validation ->
+							if (it has Nullable)
+								"if ( ${it.name} != NULL ) $validation"
 							else
-								autoSize.name.let {
-									if (autoSize.nativeType.mapping === PrimitiveMapping.INT)
-										it
-									else
-										"(int)$it"
-								}
+								validation
 						}
-					).firstOrNull { it != null }.let { if (it == null) "" else ", $it" }});".let { validation ->
-						if (it has Nullable)
-							"if ( ${it.name} != NULL ) $validation"
-						else
-							validation
-					}
-				)
-		}
-
-		if (checks.isNotEmpty()) {
-			println("\t\tif ( CHECKS )${if (checks.size == 1) "" else " {"}")
-			checks.forEach {
-				print("\t\t\t")
-				println(it)
+					)
 			}
-			if (1 < checks.size)
-				println("\t\t}")
+
+			if (checks.isNotEmpty()) {
+				println("\t\tif ( CHECKS )${if (checks.size == 1) "" else " {"}")
+				checks.forEach {
+					print("\t\t\t")
+					println(it)
+				}
+				if (1 < checks.size)
+					println("\t\t}")
+			}
 		}
 
 		// Native method call
