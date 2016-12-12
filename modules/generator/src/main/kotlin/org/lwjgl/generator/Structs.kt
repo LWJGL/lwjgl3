@@ -496,7 +496,7 @@ $indentation}"""
 			it.isNestedStructDefinition && (it.nativeType as StructType).definition.hasChecks()
 		}
 
-		if (hasChecks())
+		if (Binding.CHECKS && hasChecks())
 			println("import static org.lwjgl.system.Checks.*;")
 		println("import static org.lwjgl.system.MemoryUtil.*;")
 		if (nativeLayout || mallocable)
@@ -805,7 +805,7 @@ $indentation}"""
 				generateStaticSetters(mutableMembers(visibleMembers))
 				println()
 
-				if (validations.any()) {
+				if (Binding.CHECKS && validations.any()) {
 					println(
 						"""	/**
 	 * Validates pointer members that should not be $NULL.
@@ -1141,7 +1141,7 @@ ${validations.joinToString("\n")}
 	else
 		throw IllegalStateException()
 
-	private val StructMember.pointerValue: String get() = if (has(nullable)) "value" else "check(value)"
+	private val StructMember.pointerValue: String get() = if (!Binding.CHECKS || has(nullable)) "value" else "check(value)"
 	private val StructMember.isNullable: Boolean
 		get() = has(nullable) ||
 		        getReferenceMember(AutoSizeMember, name)?.get(AutoSizeMember)?.optional ?: false ||
@@ -1262,7 +1262,8 @@ ${validations.joinToString("\n")}
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$setter(PointerBuffer) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, PointerBuffer value) {")
-							println("\t\tif ( CHECKS ) checkGT(value, ${it.size});")
+							if (Binding.CHECKS)
+								println("\t\tif ( CHECKS ) checkGT(value, ${it.size});")
 							println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * POINTER_SIZE);")
 							setRemaining(it, prefix = "\t\t", suffix = "\n")
 							println("\t}")
@@ -1270,21 +1271,24 @@ ${validations.joinToString("\n")}
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$setter(int, $structTypeIndexed) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, int index, $structTypeIndexed value) {")
-							println("\t\tif ( CHECKS ) check(index, ${it.size});")
+							if (Binding.CHECKS)
+								println("\t\tif ( CHECKS ) check(index, ${it.size});")
 							println("\t\tmemPutAddress($STRUCT + $field + index * POINTER_SIZE, ${it.addressValue});")
 							println("\t}")
 						} else {
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, $structType.Buffer value) {")
-							println("\t\tif ( CHECKS ) checkGT(value, ${it.size});")
+							if (Binding.CHECKS)
+								println("\t\tif ( CHECKS ) checkGT(value, ${it.size});")
 							println("\t\tmemCopy(value.$ADDRESS, $STRUCT + $field, value.remaining() * $structType.SIZEOF);")
 							setRemaining(it, prefix = "\t\t", suffix = "\n")
 							println("\t}")
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
 							println("\tpublic static void n$setter(long $STRUCT, int index, $structType value) {")
-							println("\t\tif ( CHECKS ) check(index, ${it.size});")
+							if (Binding.CHECKS)
+								println("\t\tif ( CHECKS ) check(index, ${it.size});")
 							println("\t\tmemCopy(value.$ADDRESS, $STRUCT + $field + index * $structType.SIZEOF, $structType.SIZEOF);")
 							println("\t}")
 						}
@@ -1295,10 +1299,12 @@ ${validations.joinToString("\n")}
 						if (it.public)
 							println("\t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
 						println("\tpublic static void n$setter(long $STRUCT, ByteBuffer value) {")
-						println("\t\tif ( CHECKS ) {")
-						println("\t\t\tcheckNT${mapping.bytes}(value);")
-						println("\t\t\tcheckGT(value, $byteSize);")
-						println("\t\t}")
+						if (Binding.CHECKS) {
+							println("\t\tif ( CHECKS ) {")
+							println("\t\t\tcheckNT${mapping.bytes}(value);")
+							println("\t\t\tcheckGT(value, $byteSize);")
+							println("\t\t}")
+						}
 						println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining());")
 						setRemaining(it, mapping.bytes, prefix = "\t\t", suffix = "\n")
 						println("\t}")
@@ -1310,7 +1316,8 @@ ${validations.joinToString("\n")}
 						if (it.public)
 							println("\t/** Unsafe version of {@link #$setter($bufferType) $setter}. */")
 						println("\tpublic static void n$setter(long $STRUCT, $bufferType value) {")
-						println("\t\tif ( CHECKS ) checkGT(value, ${it.size});")
+						if (Binding.CHECKS)
+							println("\t\tif ( CHECKS ) checkGT(value, ${it.size});")
 						println("\t\tmemCopy(memAddress(value), $STRUCT + $field, value.remaining() * $bytesPerElement);")
 						setRemaining(it, prefix = "\t\t", suffix = "\n")
 						println("\t}")
@@ -1320,7 +1327,8 @@ ${validations.joinToString("\n")}
 						if (it.public)
 							println("\t/** Unsafe version of {@link #$setter(int, $javaType) $setter}. */")
 						println("\tpublic static void n$setter(long $STRUCT, int index, $javaType value) {")
-						println("\t\tif ( CHECKS ) check(index, ${it.size});")
+						if (Binding.CHECKS)
+							println("\t\tif ( CHECKS ) check(index, ${it.size});")
 						println("\t\tmemPut${getBufferMethod(it, javaType)}($STRUCT + $field + index * $bytesPerElement, value);")
 						println("\t}")
 					}
@@ -1330,7 +1338,8 @@ ${validations.joinToString("\n")}
 					if (it.public)
 						println("\t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
 					println("\tpublic static void n$setter(long $STRUCT, ByteBuffer value) { ")
-					println("\t\tif ( CHECKS ) checkNT${mapping.bytes}Safe(value); ")
+					if (Binding.CHECKS)
+						println("\t\tif ( CHECKS ) checkNT${mapping.bytes}Safe(value); ")
 					println("\t\tmemPutAddress($STRUCT + $field, ${it.memAddressValue});")
 					println("\t}")
 				} else if (it.nativeType.isPointerData) {
@@ -1504,7 +1513,8 @@ ${validations.joinToString("\n")}
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"} n$getter(long $STRUCT, int index) {")
-							println("\t\tif ( CHECKS ) check(index, ${it.size});")
+							if (Binding.CHECKS)
+								println("\t\tif ( CHECKS ) check(index, ${it.size});")
 							println("\t\treturn $nestedStruct.create(memGetAddress($STRUCT + $field + index * POINTER_SIZE)${autoSizeIndirect.let {
 								if (it == null) "" else ", n${it.name}($STRUCT)"
 							}});")
@@ -1516,7 +1526,8 @@ ${validations.joinToString("\n")}
 							if (it.public)
 								println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 							println("\tpublic static $nestedStruct n$getter(long $STRUCT, int index) {")
-							println("\t\tif ( CHECKS ) check(index, ${it.size});")
+							if (Binding.CHECKS)
+								println("\t\tif ( CHECKS ) check(index, ${it.size});")
 							println("\t\treturn $nestedStruct.create($STRUCT + $field + index * $nestedStruct.SIZEOF);")
 							println("\t}")
 						}
@@ -1545,7 +1556,8 @@ ${validations.joinToString("\n")}
 						if (it.public)
 							println("\t/** Unsafe version of {@link #$getter(int) $getter}. */")
 						println("\tpublic static $javaType n$getter(long $STRUCT, int index) {")
-						println("\t\tif ( CHECKS ) check(index, ${it.size});")
+						if (Binding.CHECKS)
+							println("\t\tif ( CHECKS ) check(index, ${it.size});")
 						println("\t\treturn memGet${getBufferMethod(it, javaType)}($STRUCT + $field + index * $bytesPerElement);")
 						println("\t}")
 					}
