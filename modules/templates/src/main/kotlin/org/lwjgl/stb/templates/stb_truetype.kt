@@ -1002,7 +1002,7 @@ int main(int arg, char **argv)
 		AutoSize("s2")..int.IN("len2", "the length of the second string, in bytes")
 	)
 
-	(const..char_p)(
+	const..char_p(
 		"GetFontNameString",
 		"""
 		Returns the string (which may be big-endian double byte, e.g. for unicode) and puts the length in bytes in {@code *length}.

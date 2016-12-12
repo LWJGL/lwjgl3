@@ -33,7 +33,7 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 			since = "version 3.2"
 		)
 
-		(const..charASCII_pp)(
+		const..charASCII_pp(
 			"GetRequiredInstanceExtensions",
 			"""
 			Returns an array of names of Vulkan instance extensions required by GLFW for creating Vulkan surfaces for GLFW windows. If successful, the list

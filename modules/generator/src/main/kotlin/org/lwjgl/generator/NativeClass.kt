@@ -109,7 +109,7 @@ abstract class SimpleBinding(
 ) : APIBinding("n/a", "n/a", callingConvention = callingConvention) {
 	override fun PrintWriter.generateJava() = Unit
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
-		writer.println("\t\tlong ${if (function.returns.has(Address)) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
+		writer.println("\t\tlong ${if (function has Address) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
 	}
 
 	protected fun PrintWriter.generateFunctionsClass(nativeClass: NativeClass) {
@@ -461,7 +461,7 @@ class NativeClass(
 					println("import org.lwjgl.system.*;\n")
 			}
 
-			if (hasFunctions && binding is SimpleBinding)
+			if (hasFunctions && (binding is SimpleBinding || (binding != null && functions.any { it has MapPointer })))
 				println("import static org.lwjgl.system.APIUtil.*;")
 			if (hasFunctions && ((binding != null && binding !is SimpleBinding) || functions.any { func ->
 				func.hasParam { param ->

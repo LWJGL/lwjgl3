@@ -65,7 +65,7 @@ val ALC_SOFT_HRTF = "SOFTHRTF".nativeClassALC("SOFT_HRTF") {
 		"HRTF_UNSUPPORTED_FORMAT_SOFT"..0x0005
 	)
 
-	(const..ALCcharUTF8_p)(
+	const..ALCcharUTF8_p(
 		"GetStringiSOFT",
 		"""
 		Returns a human-readable string for an HRTF.

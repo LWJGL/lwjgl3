@@ -1622,7 +1622,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		)..const..void_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL15")..(MapPointer("glGetNamedBufferParameteriEXT(buffer, GL15.GL_BUFFER_SIZE)")..void_p)(
+	DependsOn("OpenGL15")..MapPointer("glGetNamedBufferParameteriEXT(buffer, GL15.GL_BUFFER_SIZE)")..void_p(
 		"MapNamedBufferEXT",
 		"",
 
@@ -2751,7 +2751,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 	in name and replace "enum target" parameter with "uint buffer"
 	 */
 
-	DependsOn("OpenGL30")..(MapPointer("length")..void_p)(
+	DependsOn("OpenGL30")..MapPointer("length")..void_p(
 		"MapNamedBufferRangeEXT",
 		"",
 

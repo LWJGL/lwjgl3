@@ -235,7 +235,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL15["MapBuffer"]
-	(MapPointer("glGetNamedBufferParameteri(buffer, GL15.GL_BUFFER_SIZE)")..void_p)(
+	MapPointer("glGetNamedBufferParameteri(buffer, GL15.GL_BUFFER_SIZE)")..void_p(
 		"MapNamedBuffer",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -244,7 +244,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["MapBufferRange"]
-	(MapPointer("length")..void_p)(
+	MapPointer("length")..void_p(
 		"MapNamedBufferRange",
 		"DSA version of ${src.javaDocLink}.",
 

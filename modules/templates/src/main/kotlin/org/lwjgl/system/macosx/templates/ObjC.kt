@@ -124,7 +124,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		returnDoc = "the previous value of object's class, or Nil if {@code obj} is #nil"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"object_getClassName",
 		"Returns the class name of a given object.",
 
@@ -306,7 +306,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 
 	// Working with Classes
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"class_getName",
 		"Returns the name of a class.",
 
@@ -573,7 +573,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		"""
 	)
 
-	(const..uint8_tASCII_p)(
+	const..uint8_tASCII_p(
 		"class_getIvarLayout",
 		"Returns a description of the Ivar layout for a given class.",
 
@@ -582,7 +582,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		returnDoc = "a description of the Ivar layout for {@code cls}"
 	)
 
-	(const..uint8_tASCII_p)(
+	const..uint8_tASCII_p(
 		"class_getWeakIvarLayout",
 		"Returns a description of the layout of weak Ivars for a given class.",
 
@@ -855,7 +855,7 @@ void myMethodIMP(id self, SEL _cmd)
 		returnDoc = "a function pointer of type IMP"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"method_getTypeEncoding",
 		"Returns a string describing a method's parameter and return types.",
 
@@ -944,7 +944,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 	// Working with Instance Variables
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"ivar_getName",
 		"Returns the name of an instance variable.",
 
@@ -953,7 +953,7 @@ void myMethodIMP(id self, SEL _cmd)
 		returnDoc = "a C string containing the instance variable's name"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"ivar_getTypeEncoding",
 		"Returns the type string of an instance variable.",
 
@@ -978,7 +978,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 	// Working with Properties
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"property_getName",
 		"Returns the name of a property.",
 
@@ -987,7 +987,7 @@ void myMethodIMP(id self, SEL _cmd)
 		returnDoc = "a C string containing the property's name"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"property_getAttributes",
 		"Returns the attribute string of a property.",
 
@@ -1078,7 +1078,7 @@ void myMethodIMP(id self, SEL _cmd)
 		returnDoc = "#YES if proto is the same as other, otherwise #NO"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"protocol_getName",
 		"Returns a the name of a protocol.",
 
@@ -1271,7 +1271,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 	// Working with Libraries
 
-	(const..charUTF8_pp)(
+	const..charUTF8_pp(
 		"objc_copyImageNames",
 		"Returns the names of all the loaded Objective-C frameworks and dynamic libraries.",
 
@@ -1280,7 +1280,7 @@ void myMethodIMP(id self, SEL _cmd)
 		returnDoc = "an array of C strings representing the names of all the loaded Objective-C frameworks and dynamic libraries"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"class_getImageName",
 		"Returns the name of the dynamic library a class originated from.",
 
@@ -1289,7 +1289,7 @@ void myMethodIMP(id self, SEL _cmd)
 		returnDoc = "a C string representing the name of the library containing the {@code cls} class."
 	)
 
-	(const..charUTF8_pp)(
+	const..charUTF8_pp(
 		"objc_copyClassNamesForImage",
 		"Returns the names of all the classes within a specified library or framework.",
 
@@ -1301,7 +1301,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 	// Working with Selectors
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"sel_getName",
 		"Returns the name of the method specified by a given selector.",
 

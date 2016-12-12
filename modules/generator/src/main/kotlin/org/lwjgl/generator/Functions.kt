@@ -181,7 +181,7 @@ class NativeClassFunction(
 		hasFunctionAddressParam
 		&& !(hasExplicitFunctionAddress && hasNativeCode)
 		&& (returns.hasUnsafe || hasParam { it.hasUnsafe || it has MapToInt })
-		&& !returns.has(Address)
+		&& !has(Address)
 		&& !hasParam { it.nativeType is ArrayType }
 		&& (!has(Macro) || this[Macro].expression == null)
 	}
@@ -806,7 +806,7 @@ class NativeClassFunction(
 		// Call the native method
 		generateCodeBeforeNative(code, ApplyTo.NORMAL, hasFinally)
 
-		if (hasCustomJNI || !returns.has(Address)) {
+		if (hasCustomJNI || !has(Address)) {
 			generateNativeMethodCall(
 				code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL),
 				hasStack || code.hasStatements(code.javaFinally, ApplyTo.NORMAL)
@@ -841,14 +841,16 @@ class NativeClassFunction(
 					if (isNullTerminated)
 						print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
 					print("($RESULT")
-					if (returns has MapPointer)
-						print(", ${if (paramMap[returns[MapPointer].sizeExpression]?.nativeType?.mapping == PrimitiveMapping.POINTER) "(int)" else ""}${returns[MapPointer].sizeExpression}")
+					if (has(MapPointer))
+						get(MapPointer).sizeExpression.let { expression ->
+							print(", ${if (paramMap[expression]?.nativeType?.mapping === PrimitiveMapping.POINTER) "(int)" else ""}$expression")
+						}
 					else if (!isNullTerminated) {
 						if (hasParam { it has AutoSizeResultParam }) {
 							val params = getParams { it has AutoSizeResultParam }
 							val single = params.count() == 1
 							print(", ${params.map { getAutoSizeResultExpression(single, it) }.joinToString(" * ")}")
-						} else if (returns has Address)
+						} else if (has(Address))
 							print(", 1")
 						else
 							throw IllegalStateException("No AutoSizeResult parameter could be found.")
@@ -922,8 +924,8 @@ class NativeClassFunction(
 		hasFinally: Boolean,
 		printParams: PrintWriter.() -> Unit
 	) {
-		val hasConstructor = returns.nativeType is ObjectType
-		val returnType = if (hasConstructor) (returns.nativeType as ObjectType).className else returnsNativeMethodType
+		val returnsObject = returns.nativeType is ObjectType
+		val returnType = if (returnsObject) (returns.nativeType as ObjectType).className else returnsNativeMethodType
 
 		if (hasFinally)
 			print("\t")
@@ -931,11 +933,11 @@ class NativeClassFunction(
 		if (!(returns.isVoid || returns.isStructValue)) {
 			if (returnLater || returns.nativeType.isPointerData) {
 				print("$returnType $RESULT = ")
-				if (hasConstructor)
+				if (returnsObject)
 					print("$returnType.create(")
 			} else {
 				print("return ")
-				if (hasConstructor)
+				if (returnsObject)
 					print("$returnType.create(")
 			}
 		}
@@ -964,9 +966,9 @@ class NativeClassFunction(
 			print(")")
 		}
 
-		if (hasConstructor) {
-			if (returns has Construct) {
-				val construct = returns[Construct]
+		if (returnsObject) {
+			if (has(Construct)) {
+				val construct = get(Construct)
 				print(", ${construct.firstArg}")
 				for (arg in construct.otherArgs)
 					print(", $arg")
@@ -986,13 +988,13 @@ class NativeClassFunction(
 
 		if (returns.nativeType is CharSequenceType)
 			transforms[returns] = StringReturnTransform
-		else if (returns has MapPointer) {
-			val mapPointer = returns[MapPointer]
+		else if (has(MapPointer)) {
+			val mapPointer = get(MapPointer)
 
 			transforms[returns] = if (paramMap.containsKey(mapPointer.sizeExpression))
 				MapPointerExplicitTransform(lengthParam = mapPointer.sizeExpression, addParam = false)
 			else
-				MapPointerTransform
+				MapPointerTransform(mapPointer.sizeExpression)
 		}
 
 		// Apply basic transformations
@@ -1020,9 +1022,9 @@ class NativeClassFunction(
 			generateAlternativeMethod(name, transforms)
 
 		// Generate more complex alternatives if necessary
-		if (returns has MapPointer) {
+		if (has(MapPointer)) {
 			// The size expression may be an existing parameter, in which case we don't need an explicit size alternative.
-			if (!paramMap.containsKey(returns[MapPointer].sizeExpression)) {
+			if (!paramMap.containsKey(get(MapPointer).sizeExpression)) {
 				transforms[returns] = MapPointerExplicitTransform("length")
 				generateAlternativeMethod(name, transforms)
 			}
@@ -1349,7 +1351,7 @@ class NativeClassFunction(
 				it.transformDeclarationOrElse(transforms, it.asJavaMethodParam)
 		}
 		val returnTransform = transforms[returns]
-		if (returnTransform === MapPointerTransform) {
+		if (returnTransform is MapPointerTransform) {
 			if (!parameters.isEmpty())
 				print(", ")
 			print("ByteBuffer $MAP_OLD")
@@ -1465,8 +1467,8 @@ class NativeClassFunction(
 					if (isNullTerminated)
 						builder.append("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
 					builder.append("($RESULT")
-					if (returns has MapPointer)
-						builder.append(", ${returns[MapPointer].sizeExpression}")
+					if (has(MapPointer))
+						builder.append(", ${get(MapPointer).sizeExpression}")
 					else if (!isNullTerminated) {
 						if (hasParam { it has AutoSizeResultParam }) {
 							val params = getParams { it has AutoSizeResultParam }
@@ -1650,7 +1652,7 @@ class NativeClassFunction(
 						print("($returnsJniFunctionType)")
 					if (returns.nativeType is PointerType && nativeClass.binding == null)
 						print("(intptr_t)")
-					if (returns.has(Address))
+					if (has(Address))
 						print('&')
 				}
 				print(nativeName)

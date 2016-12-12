@@ -243,16 +243,17 @@ internal class VectorValueTransform(
 	}
 }
 
-internal object MapPointerTransform : FunctionTransform<ReturnValue> {
+// TODO: remove in a future version?
+internal class MapPointerTransform(val expression: String) : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
-	override fun transformCall(param: ReturnValue, original: String) = """int $MAP_LENGTH = ${param[MapPointer].sizeExpression};
-		return $MAP_OLD == null ? memByteBuffer($RESULT, $MAP_LENGTH) : memSetupBuffer($MAP_OLD, $RESULT, $MAP_LENGTH);"""
+	override fun transformCall(param: ReturnValue, original: String) = """int $MAP_LENGTH = $expression;
+		return apiGetMappedBuffer($MAP_OLD, $RESULT, $MAP_LENGTH);"""
 }
 
 internal class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true) : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
 	override fun transformCall(param: ReturnValue, original: String) =
-		"$MAP_OLD == null ? memByteBuffer($RESULT, (int)$lengthParam) : memSetupBuffer($MAP_OLD, $RESULT, (int)$lengthParam)"
+		"apiGetMappedBuffer($MAP_OLD, $RESULT, (int)$lengthParam)"
 }
 
 internal val BufferLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {

@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "windows", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
 	documentation = "Native bindings to the GLFW library's Win32 native access functions."
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"GetWin32Adapter",
 		"""
 	    Returns the adapter device name of the specified monitor.
@@ -24,7 +24,7 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(packageName = GLFW_PACKAGE, 
 		since = "version 3.1"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"GetWin32Monitor",
 		"""
 	    Returns the display device name of the specified monitor.

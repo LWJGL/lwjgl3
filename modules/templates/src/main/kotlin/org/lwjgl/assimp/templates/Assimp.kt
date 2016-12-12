@@ -2655,7 +2655,7 @@ x1""")}
 		"ASSIMP_CFLAGS_SINGLETHREADED"..0x10
 	).noPrefix()
 
-	(const..charASCII_p)(
+	const..charASCII_p(
 		"GetLegalString",
 		"Returns a string with legal copyright and licensing information about Assimp. The string may include multiple lines.",
 

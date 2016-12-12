@@ -82,7 +82,7 @@ ${primitives
 		"aligned_alloc",
 		"aligned_free"
 	).forEach {
-		macro..(Address..voidptr)(
+		macro..Address..voidptr(
 			it,
 			"Returns the address of the stdlib $it function."
 		)

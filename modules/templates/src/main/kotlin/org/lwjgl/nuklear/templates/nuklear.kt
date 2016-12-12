@@ -2499,7 +2499,7 @@ nk_style_pop_vec2(ctx);""")}
 			Check("NK_CURSOR_COUNT")..nk_cursor_p.IN("cursors", "")
 		)
 
-		(const..charUTF8_p)(
+		const..charUTF8_p(
 			"style_get_color_by_name",
 			"",
 
@@ -3289,7 +3289,7 @@ nk_style_pop_vec2(ctx);""")}
 			AutoSize("str")..int.IN("byte_len", "")
 		)
 
-		(const..char_p)(
+		const..char_p(
 			"utf_at",
 			"",
 
@@ -3374,7 +3374,7 @@ nk_style_pop_vec2(ctx);""")}
 			nk_buffer_p.IN("buffer", "")
 		)
 
-		(const..voidptr)(
+		const..voidptr(
 			"buffer_memory_const",
 			"",
 
@@ -3608,7 +3608,7 @@ nk_style_pop_vec2(ctx);""")}
 			int.IN("pos", "")
 		)
 
-		(const..charUTF8_p)(
+		const..charUTF8_p(
 			"str_at_char_const",
 			"",
 
@@ -3616,7 +3616,7 @@ nk_style_pop_vec2(ctx);""")}
 			int.IN("pos", "")
 		)
 
-		(const..char_p)(
+		const..char_p(
 			"str_at_const",
 			"",
 
@@ -3633,7 +3633,7 @@ nk_style_pop_vec2(ctx);""")}
 			nk_str_p.IN("s", "")
 		)
 
-		(const..charUTF8_p)(
+		const..charUTF8_p(
 			"str_get_const",
 			"",
 
@@ -4000,7 +4000,7 @@ nk_style_pop_vec2(ctx);""")}
 			nk_color.IN("fg", "")
 		)
 
-		(const..nk_command.p)(
+		const..nk_command.p(
 			"_next",
 			"",
 
@@ -4008,7 +4008,7 @@ nk_style_pop_vec2(ctx);""")}
 			const..nk_command.p.IN("cmd", "")
 		)
 
-		(const..nk_command.p)(
+		const..nk_command.p(
 			"_begin",
 			"",
 
@@ -4169,7 +4169,7 @@ nk_style_pop_vec2(ctx);""")}
 			nk_draw_list_p.IN("list", "")
 		)
 
-		(const..nk_draw_command_p)(
+		const..nk_draw_command_p(
 			"_draw_list_begin",
 			"",
 
@@ -4177,7 +4177,7 @@ nk_style_pop_vec2(ctx);""")}
 			const..nk_buffer_p.IN("buffer", "")
 		)
 
-		(const..nk_draw_command_p)(
+		const..nk_draw_command_p(
 			"_draw_list_next",
 			"",
 
@@ -4186,7 +4186,7 @@ nk_style_pop_vec2(ctx);""")}
 			const..nk_draw_list_p.IN("list", "")
 		)
 
-		(const..nk_draw_command_p)(
+		const..nk_draw_command_p(
 			"_draw_begin",
 			"",
 
@@ -4194,7 +4194,7 @@ nk_style_pop_vec2(ctx);""")}
 			const..nk_buffer_p.IN("buffer", "")
 		)
 
-		(const..nk_draw_command_p)(
+		const..nk_draw_command_p(
 			"_draw_end",
 			"",
 
@@ -4202,7 +4202,7 @@ nk_style_pop_vec2(ctx);""")}
 			const..nk_buffer_p.IN("buffer", "")
 		)
 
-		(const..nk_draw_command_p)(
+		const..nk_draw_command_p(
 			"_draw_next",
 			"",
 

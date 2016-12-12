@@ -7,24 +7,30 @@ package org.lwjgl.generator
 // General
 
 /** Marks the function parameter or return value as const. */
-object const : QualifiedTypeModifier() {
+object const : FunctionModifier, ParameterModifier {
 	override val isSpecial = false
-	override fun validate(qtype: QualifiedType) {
-		if (qtype.nativeType !is PointerType)
-			throw IllegalArgumentException("The const modifier can only be applied on pointer types.")
+	override fun validate(element: TemplateElement) {
+		if (element is Parameter ) {
+			if (element.nativeType !is PointerType)
+				throw IllegalArgumentException("The const modifier can only be applied on pointer parameters.")
 
-		if (qtype is Parameter && qtype.paramType != ParameterType.IN)
-			throw IllegalArgumentException("The const modifier can only be applied on input parameters.")
+			if (element.paramType != ParameterType.IN)
+				throw IllegalArgumentException("The const modifier can only be applied on input parameters.")
+		} else if (element is NativeClassFunction) {
+			if (element.returns.nativeType !is PointerType)
+				throw IllegalArgumentException("The const modifier can only be applied on functions with pointer return types.")
+		} else
+			throw IllegalArgumentException("The const modifier can only be applied on functions or parameters.")
 	}
 }
 
 // Parameter
 
-object Virtual : ParameterModifier() {
+object Virtual : ParameterModifier {
 	override val isSpecial = false
 }
 
-object MapToInt : ParameterModifier() {
+object MapToInt : ParameterModifier {
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
 		if (param.nativeType.mapping !== PrimitiveMapping.BYTE && param.nativeType.mapping !== PrimitiveMapping.SHORT)
@@ -33,7 +39,7 @@ object MapToInt : ParameterModifier() {
 }
 
 /** When present, the parameter transformation is stored to a local variable that can be referenced from custom code or checks. */
-object UseVariable : ParameterModifier() {
+object UseVariable : ParameterModifier {
 	override val isSpecial = false
 }
 
@@ -77,7 +83,7 @@ class AutoSize(
 	vararg val dependent: String,
 	/** If not null, the expression will be appended to the parameter. */
 	val factor: AutoSizeFactor? = null
-) : ParameterModifier(), ReferenceModifier {
+) : ParameterModifier, ReferenceModifier {
 	companion object : ModifierKey<AutoSize>
 
 	override val isSpecial = true
@@ -109,7 +115,7 @@ class AutoSize(
 	}
 }
 
-class AutoSizeResultParam(val expression: String?) : ParameterModifier() {
+class AutoSizeResultParam(val expression: String?) : ParameterModifier {
 	companion object : ModifierKey<AutoSizeResultParam>
 
 	override val isSpecial = true
@@ -150,7 +156,7 @@ class Check(
 	val expression: String,
 	/** If true, the check will only be performed in debug mode. Useful for expensive checks. */
 	val debug: Boolean = false
-) : ParameterModifier() {
+) : ParameterModifier {
 	companion object : ModifierKey<Check>
 
 	override val isSpecial = expression != "0"
@@ -167,7 +173,7 @@ fun Check(value: Int) = Check(Integer.toString(value))
 /** Should be used on pointer parameters whose size cannot be validated and may be unsafe. */
 val Unsafe = Check("0")
 
-class Nullable internal constructor(val optional: Boolean) : ParameterModifier() {
+class Nullable internal constructor(val optional: Boolean) : ParameterModifier {
 	companion object : ModifierKey<Nullable>
 
 	override val isSpecial = optional
@@ -183,7 +189,7 @@ val nullable = Nullable(false)
 val optional = Nullable(true)
 
 /** Marks a buffer parameter as terminated by the specified value. */
-class Terminated(val value: String) : ParameterModifier() {
+class Terminated(val value: String) : ParameterModifier {
 	companion object : ModifierKey<Terminated>
 
 	override val isSpecial = true
@@ -205,7 +211,7 @@ class Expression(
 	val value: String,
 	/** If true, the parameter will not be removed from the method signature. */
 	val keepParam: Boolean = false
-) : ParameterModifier() {
+) : ParameterModifier {
 	companion object : ModifierKey<Expression>
 
 	override val isSpecial = true
@@ -221,7 +227,7 @@ interface AutoTypeToken {
  * Replaces a parameter with specific type tokens and the referenced pointer parameter with the typed NIO buffer that corresponds to the token value. See
  * GL20#glVertexAttribPointer for an example.
  */
-class AutoType(override val reference: String, vararg val types: AutoTypeToken) : ParameterModifier(), ReferenceModifier {
+class AutoType(override val reference: String, vararg val types: AutoTypeToken) : ParameterModifier, ReferenceModifier {
 	companion object : ModifierKey<AutoType>
 
 	override val isSpecial = false
@@ -242,7 +248,7 @@ class MultiType(
 	vararg val types: PointerMapping,
 	/** If true, a byte[] overload will be generated as well. */
 	val byteArray: Boolean = false
-) : ParameterModifier() {
+) : ParameterModifier {
 	companion object : ModifierKey<MultiType>
 
 	init {
@@ -286,7 +292,7 @@ class Return(
 	val maxLengthExpression: String? = null,
 	/** When true, any temporary buffers will be allocated on the heap. */
 	val heapAllocate: Boolean = false
-) : ParameterModifier() {
+) : ParameterModifier {
 	companion object : ModifierKey<Return>
 
 	override val isSpecial = true
@@ -314,7 +320,7 @@ class Return(
 val ReturnParam = Return("", null)
 
 /** Marks a buffer parameter to transform to a single element value in an alternative method. */
-class SingleValue(val newName: String) : ParameterModifier() {
+class SingleValue(val newName: String) : ParameterModifier {
 	companion object : ModifierKey<SingleValue>
 
 	override val isSpecial = true
@@ -338,7 +344,7 @@ class PointerArray(
 	val singleName: String,
 	/** The parameter that defines the data legth of each element in the array. If null, the elements are assumed to be null-terminated. */
 	val lengthsParam: String? = null
-) : ParameterModifier() {
+) : ParameterModifier {
 	companion object : ModifierKey<PointerArray>
 
 	override val isSpecial = true
@@ -352,41 +358,4 @@ class PointerArray(
 		if (param.paramType != ParameterType.IN)
 			throw IllegalArgumentException("The PointerArray modifier can only be applied on input parameters.")
 	}
-}
-
-// ReturnValue
-
-/** Marks a return value as a pointer that should be mapped (wrapped in a ByteBuffer of some capacity). */
-class MapPointer(
-	/** An expression that defines the ByteBuffer capacity. */
-	val sizeExpression: String
-) : ReturnValueModifier() {
-	companion object : ModifierKey<MapPointer>
-
-	override val isSpecial = true
-	override fun validate(returns: ReturnValue) {
-		if (returns.nativeType !is PointerType)
-			throw IllegalArgumentException("The MapPointer modifier can only be applied on pointer types.")
-
-		if (returns.nativeType.mapping != PointerMapping.DATA)
-			throw IllegalArgumentException("The MapPointer modifier can only be applied on void pointer types.")
-	}
-}
-
-class Construct(
-	val firstArg: String, // Makes the user specify at least one, else the modifier is pointless
-	vararg val otherArgs: String
-) : ReturnValueModifier() {
-	companion object : ModifierKey<Construct>
-
-	override val isSpecial = true
-	override fun validate(returns: ReturnValue) {
-		if (returns.nativeType !is ObjectType)
-			throw IllegalArgumentException("The Construct modifier can only be applied on object types.")
-	}
-}
-
-/** Returns the address of the return value, instead of the return value itself. */
-object Address : ReturnValueModifier() {
-	override val isSpecial = false
 }

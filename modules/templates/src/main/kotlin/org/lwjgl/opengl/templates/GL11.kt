@@ -1790,7 +1790,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		Check(128)..PIXEL_PACK_BUFFER..void_p.OUT("pattern", "a buffer in which to place the returned data")
 	)
 
-	(const..GLubyteString)(
+	const..GLubyteString(
 		"GetString",
 		"Return strings describing properties of the current GL context.",
 

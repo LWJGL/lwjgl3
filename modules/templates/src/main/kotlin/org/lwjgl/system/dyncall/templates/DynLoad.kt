@@ -65,7 +65,7 @@ val DynLoad = "DynLoad".nativeClass(DYNCALL_PACKAGE, prefix = "DL") {
 		DLSyms_p.IN("pSyms", "a {@code DLSyms} object")
 	)
 
-	(const..charASCII_p)(
+	const..charASCII_p(
 		"SymsName",
 		"Returns the symbol name exported by the specified library at the specified index.",
 
@@ -73,7 +73,7 @@ val DynLoad = "DynLoad".nativeClass(DYNCALL_PACKAGE, prefix = "DL") {
 		int.IN("index", "")
 	)
 
-	(const..charASCII_p)(
+	const..charASCII_p(
 		"SymsNameFromValue",
 		"Returns the symbol name exported by the specified library at the specified address.",
 

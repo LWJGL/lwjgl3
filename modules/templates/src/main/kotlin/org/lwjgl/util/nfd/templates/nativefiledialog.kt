@@ -126,7 +126,7 @@ val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE,
 		OpenDialog["outPath"]
 	)
 
-	(const..charASCII_p)(
+	const..charASCII_p(
 		"GetError",
 		"Returns the last error."
 	)

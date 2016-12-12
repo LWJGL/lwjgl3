@@ -46,7 +46,7 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(packageName = BGFX_PACKAGE, prefix
 		const..bgfx_platform_data_t_p.IN("_data", "the platform data to set")
 	)
 
-	(const..bgfx_internal_data_t_p)(
+	const..bgfx_internal_data_t_p(
 		"get_internal_data",
 		"Gets internal data for interop."
 	)

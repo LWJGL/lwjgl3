@@ -271,7 +271,7 @@ N=\#channels_in_file     components
 		nullable..voidptr.IN("user", "a pointer to user data")
 	)
 
-	(const..charASCII_p)(
+	const..charASCII_p(
 		"failure_reason",
 		"Returns a brief reason for failure."
 	)

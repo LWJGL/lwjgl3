@@ -1071,7 +1071,7 @@ val CGL = "CGL".nativeClass(
 
 	// Convert an error code to a string
 
-	(const..charASCII_p)(
+	const..charASCII_p(
 		"ErrorString",
 		"Returns a string that describes the specified result code.",
 

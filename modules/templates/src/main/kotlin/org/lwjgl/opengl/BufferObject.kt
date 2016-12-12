@@ -6,7 +6,7 @@ package org.lwjgl.opengl
 
 import org.lwjgl.generator.*
 
-class BufferObject(val binding: String) : ParameterModifier() {
+class BufferObject(val binding: String) : ParameterModifier {
 	companion object : ModifierKey<BufferObject>
 
 	override val isSpecial = true

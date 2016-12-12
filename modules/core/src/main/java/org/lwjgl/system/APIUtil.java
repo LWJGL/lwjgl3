@@ -115,6 +115,12 @@ public final class APIUtil {
 		return check(provider.getFunctionAddress(functionName));
 	}
 
+	public static ByteBuffer apiGetMappedBuffer(ByteBuffer buffer, long mappedAddress, int capacity) {
+		return buffer == null || memAddress(buffer) != mappedAddress || buffer.capacity() != capacity
+			? memByteBuffer(mappedAddress, capacity)
+			: buffer;
+	}
+
 	/** A data class for API versioning information. */
 	public static class APIVersion {
 
@@ -258,14 +264,6 @@ public final class APIUtil {
 		}
 
 		return target;
-	}
-
-	public static Class<?> apiOptionalClass(String className) {
-		try {
-			return Class.forName(className);
-		} catch (ClassNotFoundException e) {
-			return null;
-		}
 	}
 
 	// ----------------------------------------

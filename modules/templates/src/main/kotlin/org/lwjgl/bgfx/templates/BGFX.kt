@@ -923,7 +923,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		returnDoc = "the number of renderers written to {@code _enum}"
 	)
 
-	(const..charASCII_p)(
+	const..charASCII_p(
 		"get_renderer_name",
 		"Returns name of renderer.",
 
@@ -982,29 +982,29 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"Returns current renderer backend API type."
 	)
 
-	(const..bgfx_caps_t_p)(
+	const..bgfx_caps_t_p(
 		"get_caps",
 		"Returns renderer capabilities."
 	)
 
-	(const..bgfx_hmd_t_p)(
+	const..bgfx_hmd_t_p(
 		"get_hmd",
 		"Returns HMD info."
 	)
 
-	(const..bgfx_stats_t_p)(
+	const..bgfx_stats_t_p(
 		"get_stats",
 		"Returns performance counters."
 	)
 
-	(const..bgfx_memory_t_p)(
+	const..bgfx_memory_t_p(
 		"alloc",
 		"Allocates buffer to pass to bgfx calls. Data will be freed inside bgfx.",
 
 		uint32_t.IN("_size", "the number of bytes to allocate")
 	)
 
-	(const..bgfx_memory_t_p)(
+	const..bgfx_memory_t_p(
 		"copy",
 		"Allocates buffer and copies data into it. Data will be freed inside bgfx.",
 
@@ -1012,7 +1012,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		AutoSize("_data")..uint32_t.IN("_size", "the number of bytes to copy")
 	)
 
-	OffHeapOnly..(const..bgfx_memory_t_p)(
+	OffHeapOnly..const..bgfx_memory_t_p(
 		"make_ref",
 		"""
 		Makes reference to data to pass to bgfx. Unlike #alloc() this call doesn't allocate memory for data. It just copies pointer to data.
@@ -1024,7 +1024,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		AutoSize("_data")..uint32_t.IN("_size", "the number of bytes to reference")
 	)
 
-	OffHeapOnly..(const..bgfx_memory_t_p)(
+	OffHeapOnly..const..bgfx_memory_t_p(
 		"make_ref_release",
 		"""
 		Makes reference to data to pass to bgfx. Unlike #alloc() this call doesn't allocate memory for data. It just copies pointer to data.
@@ -1275,7 +1275,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		uint32_t.IN("_numIndices", "number of indices to allocate")
 	)
 
-	(const..bgfx_instance_data_buffer_t_p)(
+	const..bgfx_instance_data_buffer_t_p(
 		"alloc_instance_data_buffer",
 		"""
 		Allocates instance data buffer.

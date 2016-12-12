@@ -72,7 +72,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"MAX_VARYING_COMPONENTS".."GL20.GL_MAX_VARYING_FLOATS"
 	)
 
-	(const..GLubyteString)(
+	const..GLubyteString(
 		"GetStringi",
 		"Queries indexed string state.",
 
@@ -403,7 +403,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"BUFFER_MAP_OFFSET"..0x9121
 	)
 
-	(MapPointer("length")..void_p)(
+	MapPointer("length")..void_p(
 		"MapBufferRange",
 		"""
 		Maps a section of a buffer object's data store.

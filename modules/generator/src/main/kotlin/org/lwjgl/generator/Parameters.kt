@@ -142,23 +142,3 @@ class Parameter(
 	}
 
 }
-
-// DSL extensions
-
-operator fun ReturnValueModifier.rangeTo(returnType: NativeType): ReturnValue {
-	val returns = ReturnValue(returnType)
-	returns.setModifiers(this)
-	return returns
-}
-
-operator fun QualifiedTypeModifier.rangeTo(returnType: NativeType): ReturnValue {
-	val returns = ReturnValue(returnType)
-	returns.setModifiers(this)
-	return returns
-}
-
-operator fun Array<TemplateModifier>.rangeTo(returnType: NativeType): ReturnValue {
-	val returns = ReturnValue(returnType)
-	returns.setModifiers(*this)
-	return returns
-}

@@ -424,7 +424,7 @@ ENABLE_WARNINGS()""")
 		ovrErrorInfo_p.OUT("errorInfo", "The last ##OVRErrorInfo for the current thread")
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"GetVersionString",
 		"""
 		Returns the version string representing the LibOVRRT version.
@@ -440,7 +440,7 @@ ENABLE_WARNINGS()""")
 		returnDoc = "a UTF8-encoded null-terminated version string"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"TraceMessage",
 		"""
 		Writes a message string to the LibOVR tracing mechanism (if enabled).
@@ -1347,7 +1347,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
 		returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"GetString",
 		"""
 		Reads a string property.

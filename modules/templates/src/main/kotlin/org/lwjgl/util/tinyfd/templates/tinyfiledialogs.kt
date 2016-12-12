@@ -35,12 +35,12 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		"The library version."
 	)
 
-	private..macro..(Address..int_p)(
+	private..macro..Address..int_p(
 		"winUtf8",
 		"On windows string char can be 0:MBSC or 1:UTF-8. Unless your code is really prepared for UTF-8 on windows, leave this on MBSC."
 	)
 
-	macro..(Address..int_p)(
+	macro..Address..int_p(
 		"forceConsole",
 		"""
 		Can be modified at run time.
@@ -79,7 +79,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		returnDoc = "0 for cancel/no, 1 for ok/yes"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"inputBox",
 		"Displays an input dialog.",
 
@@ -90,7 +90,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		returnDoc = "the input value or $NULL on cancel"
 	)
 
-	val saveFileDialog = (const..charUTF8_p)(
+	val saveFileDialog = const..charUTF8_p(
 		"saveFileDialog",
 		"Displays a file save dialog.",
 
@@ -103,7 +103,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		returnDoc = "the selected file path or $NULL on cancel"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"openFileDialog",
 		"Displays a file open dialog.",
 
@@ -117,7 +117,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		returnDoc = "the file(s) selected or $NULL on cancel. In case of multiple files, the separator is '|'."
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"selectFolderDialog",
 		"Displays a folder selection dialog.",
 
@@ -125,7 +125,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		const..charUTF8_p.IN("aDefaultPath", "the default path")
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"colorChooser",
 		"Displays a color chooser dialog.",
 

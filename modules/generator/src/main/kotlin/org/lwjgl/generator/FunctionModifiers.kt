@@ -4,7 +4,7 @@
  */
 package org.lwjgl.generator
 
-class DependsOn(override val reference: String, val postfix: String? = null) : FunctionModifier(), ReferenceModifier {
+class DependsOn(override val reference: String, val postfix: String? = null) : FunctionModifier, ReferenceModifier {
 	companion object : ModifierKey<DependsOn>
 
 	override val isSpecial = false
@@ -15,7 +15,7 @@ class DependsOn(override val reference: String, val postfix: String? = null) : F
  * This is useful for functions that have been added long after the initial release of a particular extension, or
  * as a workaround for buggy drivers.
  */
-object IgnoreMissing : FunctionModifier() {
+object IgnoreMissing : FunctionModifier {
 	override val isSpecial = false
 }
 
@@ -25,7 +25,7 @@ class Capabilities(
 	val expression: String,
 	/** If true, getInstance() will not be called and the expression will be assigned to the FUNCTION_ADDRESS variable directly. */
 	val override: Boolean = false
-) : FunctionModifier() {
+) : FunctionModifier {
 	companion object : ModifierKey<Capabilities>
 
 	override val isSpecial = true
@@ -41,7 +41,7 @@ class Code(
 	val nativeBeforeCall: String? = null,
 	val nativeCall: String? = null,
 	val nativeAfterCall: String? = null
-) : FunctionModifier() {
+) : FunctionModifier {
 	companion object : ModifierKey<Code> {
 		// Used to avoid null checks
 		private val NO_STATEMENTS: List<Statement> = ArrayList(0)
@@ -104,7 +104,7 @@ val SaveErrno = Code(nativeAfterCall = "\tsaveErrno();")
 fun statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
 
 /** Marks a function without arguments as a macro. */
-class Macro internal constructor(val function: Boolean, val constant: Boolean, val expression: String? = null) : FunctionModifier() {
+class Macro internal constructor(val function: Boolean, val constant: Boolean, val expression: String? = null) : FunctionModifier {
 	companion object : ModifierKey<Macro> {
 		internal val CONSTANT = Macro(function = false, constant = true)
 		internal val VARIABLE = Macro(function = false, constant = false)
@@ -123,7 +123,7 @@ val macro = Macro.CONSTANT
 fun macro(variable: Boolean = false) = if (variable) Macro.VARIABLE else Macro.FUNCTION
 fun macro(expression: String) = Macro(function = true, constant = false, expression = expression)
 
-class AccessModifier(val access: Access) : FunctionModifier() {
+class AccessModifier(val access: Access) : FunctionModifier {
 	companion object : ModifierKey<AccessModifier>
 
 	override val isSpecial = false
@@ -135,7 +135,7 @@ val private = AccessModifier(Access.PRIVATE)
 val internal = AccessModifier(Access.INTERNAL)
 
 /** Overrides the native function name. This is useful for functions like Windows functions that have both a Unicode (W suffix) and ANSI version (A suffix). */
-class NativeName(val nativeName: String) : FunctionModifier() {
+class NativeName(val nativeName: String) : FunctionModifier {
 	companion object : ModifierKey<NativeName>
 
 	internal val name: String get() = if (nativeName.contains(' ')) nativeName else "\"$nativeName\""
@@ -144,11 +144,46 @@ class NativeName(val nativeName: String) : FunctionModifier() {
 }
 
 /** Marks reused functions. */
-object Reuse : FunctionModifier() {
+object Reuse : FunctionModifier {
 	override val isSpecial = false
 }
 
 /** Disables creation of Java array overloads. */
-object OffHeapOnly : FunctionModifier() {
+object OffHeapOnly : FunctionModifier {
+	override val isSpecial = false
+}
+
+/** Marks a return value as a pointer that should be mapped (wrapped in a ByteBuffer of some capacity). */
+class MapPointer(
+	/** An expression that defines the ByteBuffer capacity. */
+	val sizeExpression: String
+) : FunctionModifier {
+	companion object : ModifierKey<MapPointer>
+
+	override val isSpecial = true
+	override fun validate(func: NativeClassFunction) {
+		if (func.returns.nativeType !is PointerType)
+			throw IllegalArgumentException("The MapPointer modifier can only be applied on functions with pointer return types.")
+
+		if (func.returns.nativeType.mapping != PointerMapping.DATA)
+			throw IllegalArgumentException("The MapPointer modifier can only be applied on function with void pointer return types.")
+	}
+}
+
+class Construct(
+	val firstArg: String, // Makes the user specify at least one, else the modifier is pointless
+	vararg val otherArgs: String
+) : FunctionModifier {
+	companion object : ModifierKey<Construct>
+
+	override val isSpecial = true
+	override fun validate(func: NativeClassFunction) {
+		if (func.returns.nativeType !is ObjectType)
+			throw IllegalArgumentException("The Construct modifier can only be applied on function with object return types.")
+	}
+}
+
+/** Returns the address of the return value, instead of the return value itself. */
+object Address : FunctionModifier {
 	override val isSpecial = false
 }

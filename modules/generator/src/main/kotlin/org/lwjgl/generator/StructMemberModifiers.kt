@@ -4,7 +4,7 @@
  */
 package org.lwjgl.generator
 
-object ConstMember : StructMemberModifier() {
+object ConstMember : StructMemberModifier {
 	override val isSpecial = false
 	override fun validate(member: StructMember) {
 		if (member.nativeType !is PointerType)
@@ -37,7 +37,7 @@ class AutoSizeMember(
 	val optional: Boolean = false,
 	/** If true, at least one of the nullable referenced members must not be null. */
 	val atLeastOne: Boolean = false
-) : StructMemberModifier(), ReferenceModifier {
+) : StructMemberModifier, ReferenceModifier {
 	companion object : ModifierKey<AutoSizeMember>
 
 	override val isSpecial = true
@@ -92,7 +92,7 @@ fun Struct.AutoSizeShl(expression: String, reference: String, vararg dependent: 
 class AutoSizeIndirect(
 	override val reference: String,
 	vararg val dependent: String
-) : StructMemberModifier(), ReferenceModifier {
+) : StructMemberModifier, ReferenceModifier {
 	companion object : ModifierKey<AutoSizeMember>
 
 	override val isSpecial = true
@@ -116,7 +116,7 @@ class AutoSizeIndirect(
 	}
 }
 
-object NullableMember : StructMemberModifier() {
+object NullableMember : StructMemberModifier {
 	override val isSpecial = true
 	override fun validate(member: StructMember) {
 		if (member.nativeType !is PointerType && member !is StructMemberBuffer)

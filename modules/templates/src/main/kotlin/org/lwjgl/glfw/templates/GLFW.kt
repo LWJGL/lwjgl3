@@ -731,7 +731,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 1.0"
 	)
 
-	(const..charASCII_p)(
+	const..charASCII_p(
 		"GetVersionString",
 		"""
 		Returns the compile-time generated version string of the GLFW library binary. It describes the version, platform, compiler and any platform-specific
@@ -852,7 +852,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.0"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"GetMonitorName",
 		"""
 		Returns a human-readable name, encoded as UTF-8, of the specified monitor. The name typically reflects the make and model of the monitor and is not
@@ -885,7 +885,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.0"
 	)
 
-	(const..GLFWvidmode_p)(
+	const..GLFWvidmode_p(
 		"GetVideoModes",
 		"""
 		Returns an array of all video modes supported by the specified monitor. The returned array is sorted in ascending order, first by color bit depth (the
@@ -904,7 +904,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 1.0"
 	)
 
-	(const..GLFWvidmode_p)(
+	const..GLFWvidmode_p(
 		"GetVideoMode",
 		"""
 		Returns the current video mode of the specified monitor. If you have created a full screen window for that monitor, the return value will depend on
@@ -936,7 +936,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.0"
 	)
 
-	(const..GLFWgammaramp_p)(
+	const..GLFWgammaramp_p(
 		"GetGammaRamp",
 		"""
 		Returns the current gamma ramp of the specified monitor.
@@ -1903,7 +1903,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "GFLW 3.0"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"GetKeyName",
 		"""
 		Returns the localized name of the specified printable key. This is intended for displaying key bindings to the user.
@@ -2309,7 +2309,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.0"
 	)
 
-	(const..float_p)(
+	const..float_p(
 		"GetJoystickAxes",
 		"""
 		Returns the values of all axes of the specified joystick. Each element in the array is a value between -1.0 and 1.0.
@@ -2333,7 +2333,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 2.2"
 	)
 
-	(const..unsigned_char_p)(
+	const..unsigned_char_p(
 		"GetJoystickButtons",
 		"""
 		Returns the state of all buttons of the specified joystick. Each element in the array is either #PRESS or #RELEASE.
@@ -2357,7 +2357,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 2.2"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"GetJoystickName",
 		"""
 		Returns the name, encoded as UTF-8, of the specified joystick.
@@ -2409,7 +2409,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		since = "version 3.0"
 	)
 
-	(const..charUTF8_p)(
+	const..charUTF8_p(
 		"GetClipboardString",
 		"""
 		Returns the contents of the system clipboard, if it contains or is convertible to a UTF-8 encoded string. If the clipboard is empty or if its contents

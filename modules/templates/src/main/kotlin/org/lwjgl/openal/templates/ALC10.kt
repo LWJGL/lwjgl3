@@ -212,7 +212,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		nullable..ALCdevice_p.IN("deviceHandle", "the device to query")
 	)
 
-	(const..ALCcharUTF8_p)(
+	const..ALCcharUTF8_p(
 		"GetString",
 		"""
 		Obtains string value(s) from ALC.

@@ -68,10 +68,11 @@ interface TemplateModifier {
 	fun validate(element: TemplateElement)
 }
 
+@Suppress("unused")
 interface ModifierKey<T : TemplateModifier>
 
 /** A modifier that can be applied on functions */
-abstract class FunctionModifier : TemplateModifier {
+interface FunctionModifier : TemplateModifier {
 	override fun validate(element: TemplateElement) {
 		if (element is NativeClassFunction)
 			validate(element)
@@ -79,25 +80,12 @@ abstract class FunctionModifier : TemplateModifier {
 			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on functions.")
 	}
 
-	protected open fun validate(func: NativeClassFunction) {
-	}
-}
-
-/** A modifier that can be applied on either ReturnValues or Parameters. */
-abstract class QualifiedTypeModifier : TemplateModifier {
-	override fun validate(element: TemplateElement) {
-		if (element is QualifiedType)
-			validate(element)
-		else
-			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on parameters or return values.")
-	}
-
-	protected open fun validate(qtype: QualifiedType) {
+	fun validate(func: NativeClassFunction) {
 	}
 }
 
 /** A modifier that can be applied on parameters. */
-abstract class ParameterModifier : TemplateModifier {
+interface ParameterModifier : TemplateModifier {
 	override fun validate(element: TemplateElement) {
 		if (element is Parameter)
 			validate(element)
@@ -105,25 +93,12 @@ abstract class ParameterModifier : TemplateModifier {
 			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on parameters.")
 	}
 
-	protected open fun validate(param: Parameter) {
-	}
-}
-
-/** A modifier that can be applied on return values. */
-abstract class ReturnValueModifier : TemplateModifier {
-	override fun validate(element: TemplateElement) {
-		if (element is ReturnValue)
-			validate(element)
-		else
-			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on return values.")
-	}
-
-	protected open fun validate(returns: ReturnValue) {
+	fun validate(param: Parameter) {
 	}
 }
 
 /** A modifier that can be applied on struct members. */
-abstract class StructMemberModifier : TemplateModifier {
+interface StructMemberModifier : TemplateModifier {
 	override fun validate(element: TemplateElement) {
 		if (element is StructMember)
 			validate(element)
@@ -131,12 +106,12 @@ abstract class StructMemberModifier : TemplateModifier {
 			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on struct members.")
 	}
 
-	protected open fun validate(member: StructMember) {
+	fun validate(member: StructMember) {
 	}
 }
 
-/** A TemplateModifier with a reference to another TemplateElement. */
-interface ReferenceModifier : TemplateModifier {
+/** A modifier with a reference to another element. */
+interface ReferenceModifier {
 	val reference: String
 
 	fun hasReference(reference: String) = this.reference == reference
@@ -144,71 +119,47 @@ interface ReferenceModifier : TemplateModifier {
 
 // DSL extensions (Per TemplateModifier sub-class to avoid IAEs. Too verbose but may catch more errors at compile time)
 
-operator fun FunctionModifier.rangeTo(func: NativeClassFunction): NativeClassFunction {
-	func.setModifiers(this)
-	return func
+// Function modifiers
+
+operator fun FunctionModifier.rangeTo(func: NativeClassFunction) = func.let {
+	it.setModifiers(this)
+	it
 }
 
-// Used with multiple FunctionModifiers
-operator fun FunctionModifier.rangeTo(other: FunctionModifier): Array<FunctionModifier> {
-	return arrayOf(this, other)
+operator fun Array<FunctionModifier>.rangeTo(function: NativeClassFunction) = function.let {
+	it.setModifiers(*this)
+	it
 }
 
-operator fun Array<FunctionModifier>.rangeTo(other: FunctionModifier): Array<FunctionModifier> {
-	return arrayOf(*this, other)
+inline operator fun <reified T : FunctionModifier> T.rangeTo(other: T) = arrayOf(this, other)
+inline operator fun <reified T : FunctionModifier> Array<T>.rangeTo(other: T) = arrayOf(*this, other)
+
+// Parameter modifiers
+
+operator fun ParameterModifier.rangeTo(param: Parameter) = param.let {
+	it.setModifiers(this)
+	it
 }
 
-operator fun Array<FunctionModifier>.rangeTo(function: NativeClassFunction): NativeClassFunction {
-	function.setModifiers(*this)
-	return function
+operator fun Array<ParameterModifier>.rangeTo(param: Parameter) = param.let {
+	it.setModifiers(*this)
+	it
 }
 
-operator fun ParameterModifier.rangeTo(param: Parameter): Parameter {
-	param.setModifiers(this)
-	return param
+inline operator fun <reified T : ParameterModifier> T.rangeTo(other: T) = arrayOf(this, other)
+inline operator fun <reified T : ParameterModifier> Array<T>.rangeTo(other: T) = arrayOf(*this, other)
+
+// Struct member modifiers
+
+operator fun StructMemberModifier.rangeTo(member: StructMember) = member.let {
+	it.setModifiers(this)
+	it
 }
 
-operator fun ReturnValueModifier.rangeTo(retValue: ReturnValue): ReturnValue {
-	retValue.setModifiers(this)
-	return retValue
+operator fun Array<StructMemberModifier>.rangeTo(member: StructMember) = member.let {
+	it.setModifiers(*this)
+	it
 }
 
-operator fun <T : QualifiedType> QualifiedTypeModifier.rangeTo(qtype: T): T {
-	qtype.setModifiers(this)
-	return qtype
-}
-
-operator fun StructMemberModifier.rangeTo(member: StructMember): StructMember {
-	member.setModifiers(this)
-	return member
-}
-
-// Used with multiple Parameter/ReturnValue/QualifiedType modifiers
-class ModifierList<M : TemplateModifier, Q : TemplateElement>(
-	modA: M,
-	modB: TemplateModifier
-) {
-	val list = arrayListOf(modA, modB)
-
-	operator fun rangeTo(other: M): ModifierList<M, Q> {
-		list.add(other)
-		return this
-	}
-
-	operator fun rangeTo(qtype: Q): Q {
-		qtype.setModifiers(*list.toTypedArray())
-		return qtype
-	}
-}
-
-operator fun ParameterModifier.rangeTo(other: ParameterModifier) = ModifierList<ParameterModifier, Parameter>(this, other)
-operator fun ParameterModifier.rangeTo(other: QualifiedTypeModifier) = ModifierList<ParameterModifier, Parameter>(this, other)
-operator fun QualifiedTypeModifier.rangeTo(other: ParameterModifier) = ModifierList<ParameterModifier, Parameter>(other, this)
-
-operator fun ReturnValueModifier.rangeTo(other: ReturnValueModifier) = ModifierList<ReturnValueModifier, ReturnValue>(this, other)
-operator fun ReturnValueModifier.rangeTo(other: QualifiedTypeModifier) = ModifierList<ReturnValueModifier, ReturnValue>(this, other)
-operator fun QualifiedTypeModifier.rangeTo(other: ReturnValueModifier) = ModifierList<ReturnValueModifier, ReturnValue>(other, this)
-
-operator fun <M : TemplateModifier, Q : TemplateElement> ModifierList<M, Q>.rangeTo(other: QualifiedTypeModifier) = this.apply { list.add(other) }
-
-operator fun StructMemberModifier.rangeTo(other: StructMemberModifier) = ModifierList<StructMemberModifier, StructMember>(this, other)
+inline operator fun <reified T : StructMemberModifier> T.rangeTo(other: T) = arrayOf(this, other)
+inline operator fun <reified T : StructMemberModifier> Array<T>.rangeTo(other: T) = arrayOf(*this, other)

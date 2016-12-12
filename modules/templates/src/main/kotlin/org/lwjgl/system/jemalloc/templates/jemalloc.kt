@@ -25,7 +25,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 
 	// Error & stats output
 
-	(Address..voidptr_p)(
+	Address..voidptr_p(
 		"malloc_message",
 		"Returns the {@code je_malloc_message} variable."
 	)

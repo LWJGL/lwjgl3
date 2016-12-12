@@ -223,7 +223,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		)..void_p.IN("data", "a pointer to the location where buffer object data is returned")
 	)
 
-	(MapPointer("glGetBufferParameteri(target, GL_BUFFER_SIZE)")..void_p)(
+	MapPointer("glGetBufferParameteri(target, GL_BUFFER_SIZE)")..void_p(
 		"MapBuffer",
 		"""
 		Maps a buffer object's data store.

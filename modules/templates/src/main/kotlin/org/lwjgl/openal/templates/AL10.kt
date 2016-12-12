@@ -243,7 +243,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 		Check(1)..ALdouble_p.IN("dest", "a buffer that will receive the parameter values")
 	)
 
-	(const..ALcharUTF8_p)(
+	const..ALcharUTF8_p(
 		"GetString",
 		"Returns the string value of the specified parameter",
 
