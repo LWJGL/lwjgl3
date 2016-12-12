@@ -21,12 +21,12 @@ LWJGL is open source software and freely available at no charge.
 
 Useful links:
 
+- [Wiki](https://github.com/LWJGL/lwjgl3-wiki/wiki)
 - [Release Notes](https://github.com/LWJGL/lwjgl3/tree/master/doc/notes)  
 - [Forum](http://forum.lwjgl.org)
 - [JavaDoc](http://javadoc.lwjgl.org)
 - [Blog](http://blog.lwjgl.org)
 - [Twitter](https://twitter.com/LWJGL)
-- [Wiki](https://github.com/LWJGL/lwjgl3-wiki/wiki) (partially outdated)
 
 For a quick overview of the project structure, installation instructions and
 configuration options, see [doc/README](https://github.com/LWJGL/lwjgl3/tree/master/doc).
