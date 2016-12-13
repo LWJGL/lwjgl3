@@ -29,8 +29,8 @@ val VK_BINDING = Generator.register(object : APIBinding(
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
 		writer.print("\t\tlong $FUNCTION_ADDRESS = ")
-		writer.println(if (function has Capabilities)
-			"${function[Capabilities].expression}.${function.name};"
+		writer.println(if (function.has<Capabilities>())
+			"${function.get<Capabilities>().expression}.${function.name};"
 		else
 			"${function.getParams { it.nativeType is ObjectType }.first().name}.getCapabilities().${function.name};")
 	}
@@ -39,7 +39,7 @@ val VK_BINDING = Generator.register(object : APIBinding(
 		println("\n\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
 		print("\t\treturn checkFunctions(")
 		nativeClass.printPointers(this, { "caps.${it.name}" }) {
-			!it.has(Macro)
+			!it.has<Macro>()
 		}
 		println(");")
 		println("\t}")
@@ -72,7 +72,7 @@ val VK_BINDING = Generator.register(object : APIBinding(
 				println("\n\t// ${it.templateName}")
 				println("\tpublic final long")
 				println(it.functions.asSequence()
-					.filter { !it.has(Macro) }
+					.filter { !it.has<Macro>() }
 					.map { it.name }
 					.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";")
 				)
@@ -99,13 +99,13 @@ val VK_BINDING = Generator.register(object : APIBinding(
 				println("\n\t\t{")
 				if (it.templateName == "VK10") {
 					println(it.functions.asSequence()
-						.filter { !it.has(Macro) }
+						.filter { !it.has<Macro>() }
 						.map { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" }.joinToString("\n\t\t\t", prefix = "\t\t\t"))
 					println("\t\t\t$capName = VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(this));")
 				} else {
 					println("\t\t\tsupported = ext.contains(\"$capName\");")
 					println(it.functions.asSequence()
-						.filter { !it.has(Macro) }
+						.filter { !it.has<Macro>() }
 						.map { "${it.name} = isSupported(provider, ${it.functionAddress}, supported);" }.joinToString("\n\t\t\t", prefix = "\t\t\t"))
 					println("\t\t\t$capName = supported && VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(this));")
 				}

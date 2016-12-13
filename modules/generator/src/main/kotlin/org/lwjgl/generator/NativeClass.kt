@@ -113,7 +113,7 @@ abstract class SimpleBinding(
 	}
 
 	protected fun PrintWriter.generateFunctionsClass(nativeClass: NativeClass) {
-		val bindingFunctions = nativeClass.functions.filter { !it.hasExplicitFunctionAddress && !it.has(Macro) }
+		val bindingFunctions = nativeClass.functions.filter { !it.hasExplicitFunctionAddress && !it.has<Macro>() }
 		if (bindingFunctions.isEmpty())
 			return
 
@@ -204,7 +204,7 @@ class NativeClass(
 		functions.asSequence()
 			.filter { it.hasArrayOverloads }
 			.forEach { func ->
-				val multiTypeParams = func.parameters.filter { it has MultiType }
+				val multiTypeParams = func.parameters.filter { it.has<MultiType>() }
 				val autoSizeResultOutParams = func.parameters.count { it.isAutoSizeResultOut }
 				val documentation: ((Parameter) -> Boolean) -> String = { processDocumentation("Array version of: ${func.javaDocLink}").toJavaDoc() }
 
@@ -237,7 +237,7 @@ class NativeClass(
 				if (multiTypeParams.isEmpty())
 					return@forEach
 
-				val multiType = multiTypeParams.first()[MultiType]
+				val multiType = multiTypeParams.first().get<MultiType>()
 				multiType.types.asSequence()
 					.filter { it !== PointerMapping.DATA_POINTER }
 					.let {
@@ -261,13 +261,13 @@ class NativeClass(
 										it.paramType,
 										it.documentation
 									).copyModifiers(it).removeArrayModifiers()
-								else if (it has MultiType)
+								else if (it.has<MultiType>())
 									Parameter(
 										ArrayType(it.nativeType as PointerType, autoType),
 										it.name,
 										it.paramType,
 										it.documentation
-									).copyModifiers(it).removeArrayModifiers().replaceModifier(Check) {
+									).copyModifiers(it).removeArrayModifiers().replaceModifier<Check> {
 										if (it.expression == "0")
 											it
 										else
@@ -279,7 +279,7 @@ class NativeClass(
 						).copyModifiers(func)
 
 						overload.parameters.asSequence().filter { param ->
-							param has AutoSize && multiTypeParams.any { param[AutoSize].hasReference(it.name) }
+							param.has<AutoSize>() && multiTypeParams.any { param.get<AutoSize>().hasReference(it.name) }
 						}.forEach {
 							// TODO: This is correct for now, but we may want to add a flag to AutoSize for better control
 							fun getAutoSizeFactor(factor: AutoSizeFactor, byteShift: Int): AutoSizeFactor? {
@@ -300,7 +300,7 @@ class NativeClass(
 								}
 							}
 
-							val autoSize = it[AutoSize]
+							val autoSize = it.get<AutoSize>()
 							it.replaceModifier(if (autoSize.factor == null)
 								AutoSizeShl(
 									autoType.byteShift!!,
@@ -432,14 +432,12 @@ class NativeClass(
 				})
 					println("import java.nio.*;\n")
 
-				val needsPointerBuffer: QualifiedType.() -> Boolean = {
-					this.nativeType is PointerType &&
-					(
-						this.nativeType.elementType.let { it != null && (it is PointerType || (it.mapping == PrimitiveMapping.POINTER && it !is StructType)) } ||
-						(this.has(MultiType) && this[MultiType].types.contains(PointerMapping.DATA_POINTER))
-					)
+				val needsPointerBuffer: NativeType.() -> Boolean = {
+					this is PointerType && this.elementType.let { it != null && (it is PointerType || (it.mapping == PrimitiveMapping.POINTER && it !is StructType)) }
 				}
-				if (functions.any { it.returns.needsPointerBuffer() || it.hasParam { it.needsPointerBuffer() } })
+				if (functions.any { it.returns.nativeType.needsPointerBuffer() || it.hasParam {
+					it.nativeType.needsPointerBuffer() || (it.has<MultiType>() && it.get<MultiType>().types.contains(PointerMapping.DATA_POINTER))
+				} })
 					println("import org.lwjgl.*;\n")
 			}
 
@@ -447,10 +445,10 @@ class NativeClass(
 				func.hasParam {
 					it.nativeType is PointerType &&
 					(
-						it has Return ||
-						it has SingleValue ||
+						it.has<Return>() ||
+						it.has<SingleValue>() ||
 						(it.isAutoSizeResultOut && func.hideAutoSizeResultParam) ||
-						it has PointerArray ||
+						it.has<PointerArray>() ||
 						(it.nativeType is CharSequenceType && it.paramType !== ParameterType.OUT)
 					)
 				}
@@ -461,15 +459,15 @@ class NativeClass(
 					println("import org.lwjgl.system.*;\n")
 			}
 
-			if (hasFunctions && (binding is SimpleBinding || (binding != null && functions.any { it has MapPointer })))
+			if (hasFunctions && (binding is SimpleBinding || (binding != null && functions.any { it.has<MapPointer>() })))
 				println("import static org.lwjgl.system.APIUtil.*;")
 			if (hasFunctions && ((binding != null && binding !is SimpleBinding) || functions.any { func ->
 				func.hasParam { param ->
-					param.nativeType is PointerType && func.getReferenceParam(AutoSize, param.name).let {
+					param.nativeType is PointerType && func.getReferenceParam<AutoSize>(param.name).let {
 						if (it == null)
-							!param.has(Nullable) && param.nativeType.elementType !is StructType
+							!param.has<Nullable>() && param.nativeType.elementType !is StructType
 						else
-							it[AutoSize].reference != param.name // dependent auto-size
+							it.get<AutoSize>().reference != param.name // dependent auto-size
 					}
 				}
 			}))
@@ -480,13 +478,13 @@ class NativeClass(
 				println("import static org.lwjgl.system.MemoryStack.*;")
 			if (hasBuffers && functions.any {
 				it.returns.isBufferPointer || it.hasParam { param ->
-					param.nativeType.let { it is PointerType && it.mapping !== PointerMapping.OPAQUE_POINTER && (it.elementType !is StructType || param has Nullable) }
+					param.nativeType.let { it is PointerType && it.mapping !== PointerMapping.OPAQUE_POINTER && (it.elementType !is StructType || param.has<Nullable>()) }
 				}
 			}) {
 				println("import static org.lwjgl.system.MemoryUtil.*;")
 				if (functions.any { func ->
 					func.hasParam {
-						it.has(MultiType) && it[MultiType].types.contains(PointerMapping.DATA_POINTER) && func.hasAutoSizeFor(it)
+						it.has<MultiType>() && it.get<MultiType>().types.contains(PointerMapping.DATA_POINTER) && func.hasAutoSizeFor(it)
 					}
 				})
 					println("import static org.lwjgl.system.Pointer.*;")

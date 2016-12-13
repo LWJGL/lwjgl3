@@ -7,8 +7,6 @@ package org.lwjgl.opengl
 import org.lwjgl.generator.*
 
 class BufferObject(val binding: String) : ParameterModifier {
-	companion object : ModifierKey<BufferObject>
-
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
 		if (!((param.nativeType is PointerType && param.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) || param.nativeType.mapping === PrimitiveMapping.POINTER))

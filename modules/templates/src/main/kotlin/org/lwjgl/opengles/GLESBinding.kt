@@ -57,7 +57,7 @@ private val GLESBinding = Generator.register(object : APIBinding(
 	override fun getFunctionOrdinal(function: NativeClassFunction) = functionOrdinals[function.name]!!
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, Transform>) {
-		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
+		val boParams = function.getParams { it.has<BufferObject>() && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
 		if (boParams.any()) {
 			boParams.forEach { transforms[it] = BufferOffsetTransform }
 			function.generateAlternativeMethod(writer, function.name, transforms)
@@ -73,12 +73,12 @@ private val GLESBinding = Generator.register(object : APIBinding(
 
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		print("\n\tstatic boolean isAvailable($CAPABILITIES_CLASS caps")
-		if (nativeClass.functions.any { it has DependsOn }) print(", java.util.Set<String> ext")
+		if (nativeClass.functions.any { it.has<DependsOn>() }) print(", java.util.Set<String> ext")
 		println(") {")
 
 		val printPointer = { func: NativeClassFunction ->
-			if (func has DependsOn)
-				"${func[DependsOn].reference.let { if (it.indexOf(' ') == -1) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
+			if (func.has<DependsOn>())
+				"${func.get<DependsOn>().reference.let { if (it.indexOf(' ') == -1) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
 			else
 				"caps.${func.name}"
 		}
@@ -126,7 +126,7 @@ private val GLESBinding = Generator.register(object : APIBinding(
 			val capName = extension.capName
 			if (extension.hasNativeFunctions) {
 				print("\n\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$GLES_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
-				if (extension.functions.any { it has DependsOn }) print(", ext")
+				if (extension.functions.any { it.has<DependsOn>() }) print(", ext")
 				print("));")
 			} else
 				print("\n\t\t$capName = ext.contains(\"$capName\");")

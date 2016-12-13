@@ -44,7 +44,7 @@ internal open class AutoSizeTransform(
 			else
 				"${bufferParam.name}.remaining()"
 		}
-		val factor = param[AutoSize].factor
+		val factor = param.get<AutoSize>().factor
 		if (applyFactor && factor != null)
 			expression = factor.scale(expression)
 
@@ -68,7 +68,7 @@ private class AutoSizeBytesTransform(
 			"remainingSafe(${bufferParam.name})"
 		else
 			"${bufferParam.name}.remaining()"
-		val factor = param[AutoSize].factor
+		val factor = param.get<AutoSize>().factor
 		if (factor == null)
 			expression = "$expression << $byteShift"
 		else {
@@ -100,13 +100,15 @@ private class AutoSizeBytesTransform(
 internal open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
-		var expression = if (bufferParam has Nullable)
+		var expression = if (bufferParam.has<Nullable>() )
 			"${bufferParam.name} == null ? 0 : ${bufferParam.name}Encoded.remaining()"
 		else
 			"${bufferParam.name}EncodedLen"
 
-		if (param[AutoSize].factor != null)
-			expression = param[AutoSize].factor!!.scale(expression)
+		param.get<AutoSize>().factor.let {
+			if (it != null)
+				expression = it.scale(expression)
+		}
 
 		if ((param.nativeType.mapping as PrimitiveMapping).bytes < 4)
 			expression = "(${param.nativeType.javaMethodType})($expression)"
@@ -150,7 +152,7 @@ internal class CharSequenceTransform(
 	val nullTerminated: Boolean
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "CharSequence ${param.name}"
-	override fun transformCall(param: Parameter, original: String) = if (param has Nullable)
+	override fun transformCall(param: Parameter, original: String) = if (param.has<Nullable>())
 		"memAddressSafe(${param.name}Encoded)"
 	else
 		"memAddress(${param.name}Encoded)"
@@ -346,8 +348,9 @@ internal class BufferReturnNTTransform(
 
 internal open class PointerArrayTransform(val paramType: String) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? {
-		val name = if (paramType.isEmpty()) param[PointerArray].singleName else param.name
-		val paramClass = param[PointerArray].elementType.let {
+		val pointerArray = param.get<PointerArray>()
+		val name = if (paramType.isEmpty()) pointerArray.singleName else param.name
+		val paramClass = pointerArray.elementType.let {
 			if (it.mapping === PointerMapping.OPAQUE_POINTER)
 				"long"
 			else if (it is CharSequenceType)
@@ -362,7 +365,7 @@ internal open class PointerArrayTransform(val paramType: String) : FunctionTrans
 	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupStackImpl(qtype)
 
 	private fun PrintWriter.setupStackImpl(param: Parameter) {
-		val pointerArray = param[PointerArray]
+		val pointerArray = param.get<PointerArray>()
 		if (pointerArray.lengthsParam != null)
 			return
 
@@ -372,7 +375,7 @@ internal open class PointerArrayTransform(val paramType: String) : FunctionTrans
 	}
 
 	override fun generate(qtype: Parameter, code: Code): Code {
-		val pointerArray = qtype[PointerArray]
+		val pointerArray = qtype.get<PointerArray>()
 		val elementType = pointerArray.elementType
 
 		if (elementType is CharSequenceType) {
@@ -405,7 +408,7 @@ internal class PointerArrayLengthsTransform(
 	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupStackImpl(qtype)
 
 	private fun PrintWriter.setupStackImpl(param: Parameter) {
-		val pointerArray = arrayParam[PointerArray]
+		val pointerArray = arrayParam.get<PointerArray>()
 
 		val lengthType = (param.nativeType.mapping as PointerMapping).box[0].toLowerCase()
 		println((if (multi) arrayParam.name else pointerArray.singleName).let {

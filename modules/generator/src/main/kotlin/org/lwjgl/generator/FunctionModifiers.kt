@@ -5,8 +5,6 @@
 package org.lwjgl.generator
 
 class DependsOn(override val reference: String, val postfix: String? = null) : FunctionModifier, ReferenceModifier {
-	companion object : ModifierKey<DependsOn>
-
 	override val isSpecial = false
 }
 
@@ -26,9 +24,13 @@ class Capabilities(
 	/** If true, getInstance() will not be called and the expression will be assigned to the FUNCTION_ADDRESS variable directly. */
 	val override: Boolean = false
 ) : FunctionModifier {
-	companion object : ModifierKey<Capabilities>
-
 	override val isSpecial = true
+}
+
+enum class ApplyTo {
+	NORMAL,
+	ALTERNATIVE,
+	BOTH
 }
 
 class Code(
@@ -42,7 +44,7 @@ class Code(
 	val nativeCall: String? = null,
 	val nativeAfterCall: String? = null
 ) : FunctionModifier {
-	companion object : ModifierKey<Code> {
+	companion object {
 		// Used to avoid null checks
 		private val NO_STATEMENTS: List<Statement> = ArrayList(0)
 		internal val NO_CODE = Code()
@@ -105,7 +107,7 @@ fun statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statemen
 
 /** Marks a function without arguments as a macro. */
 class Macro internal constructor(val function: Boolean, val constant: Boolean, val expression: String? = null) : FunctionModifier {
-	companion object : ModifierKey<Macro> {
+	companion object {
 		internal val CONSTANT = Macro(function = false, constant = true)
 		internal val VARIABLE = Macro(function = false, constant = false)
 		internal val FUNCTION = Macro(function = true, constant = false)
@@ -124,8 +126,6 @@ fun macro(variable: Boolean = false) = if (variable) Macro.VARIABLE else Macro.F
 fun macro(expression: String) = Macro(function = true, constant = false, expression = expression)
 
 class AccessModifier(val access: Access) : FunctionModifier {
-	companion object : ModifierKey<AccessModifier>
-
 	override val isSpecial = false
 }
 
@@ -136,8 +136,6 @@ val internal = AccessModifier(Access.INTERNAL)
 
 /** Overrides the native function name. This is useful for functions like Windows functions that have both a Unicode (W suffix) and ANSI version (A suffix). */
 class NativeName(val nativeName: String) : FunctionModifier {
-	companion object : ModifierKey<NativeName>
-
 	internal val name: String get() = if (nativeName.contains(' ')) nativeName else "\"$nativeName\""
 
 	override val isSpecial = false
@@ -158,8 +156,6 @@ class MapPointer(
 	/** An expression that defines the ByteBuffer capacity. */
 	val sizeExpression: String
 ) : FunctionModifier {
-	companion object : ModifierKey<MapPointer>
-
 	override val isSpecial = true
 	override fun validate(func: NativeClassFunction) {
 		if (func.returns.nativeType !is PointerType)
@@ -174,8 +170,6 @@ class Construct(
 	val firstArg: String, // Makes the user specify at least one, else the modifier is pointless
 	vararg val otherArgs: String
 ) : FunctionModifier {
-	companion object : ModifierKey<Construct>
-
 	override val isSpecial = true
 	override fun validate(func: NativeClassFunction) {
 		if (func.returns.nativeType !is ObjectType)

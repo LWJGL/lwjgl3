@@ -4,108 +4,31 @@
  */
 package org.lwjgl.generator
 
-enum class ApplyTo {
-	NORMAL,
-	ALTERNATIVE,
-	BOTH
-}
-
-abstract class TemplateElement {
-
-	companion object {
-		private val EMPTY_MODIFIERS: MutableMap<Class<out TemplateModifier>, TemplateModifier> = HashMap(0)
-	}
-
-	protected var modifiers = EMPTY_MODIFIERS
-
-	internal fun setModifiers(vararg modifiers: TemplateModifier) {
-		if (this.modifiers === EMPTY_MODIFIERS)
-			this.modifiers = HashMap(modifiers.size)
-
-		modifiers.forEach {
-			val old = this.modifiers.put(it.javaClass, it)
-			if (old != null)
-				throw IllegalArgumentException("Template modifier ${it.javaClass.simpleName} specified more than once.")
-		}
-
-		modifiers.forEach {
-			it.validate(this)
-		}
-	}
-
-	internal fun replaceModifier(modifier: TemplateModifier) {
-		modifiers[modifier.javaClass] = modifier
-		modifier.validate(this)
-	}
-
-	infix fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] === modifier
-	infix fun has(modKey: ModifierKey<*>) = modifiers.containsKey(modKey.javaClass.declaringClass as Any?)
-	operator fun <T : TemplateModifier> get(modClass: Class<T>) = @Suppress("UNCHECKED_CAST") (modifiers[modClass] as T)
-	operator fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @Suppress("UNCHECKED_CAST") (modifiers[modKey.javaClass.declaringClass] as T)
-
-	/** Returns true if the element has a ReferenceModifier with the specified reference. */
-	internal fun hasRef(modKey: ModifierKey<*>, reference: String): Boolean {
-		val mod = modifiers[modKey.javaClass.declaringClass]
-		return mod != null && (mod as ReferenceModifier).hasReference(reference)
-	}
-
-	open val isSpecial: Boolean
-		get() = modifiers.any { it.value.isSpecial }
-
-	protected fun <T : TemplateElement> T.copyModifiers(other: T): T {
-		if (other.modifiers != EMPTY_MODIFIERS)
-			this.modifiers = HashMap(other.modifiers)
-		return this
-	}
-}
+import kotlin.reflect.KClass
 
 /** A template modifier. Replaces the annotations in the pre-3.0 generator. */
 interface TemplateModifier {
 	/** When true, this modifier requires special Java-side handling. */
 	val isSpecial: Boolean
-
-	/** Implementations should check that the specified template type is valid for this modifier. */
-	fun validate(element: TemplateElement)
 }
-
-@Suppress("unused")
-interface ModifierKey<T : TemplateModifier>
 
 /** A modifier that can be applied on functions */
 interface FunctionModifier : TemplateModifier {
-	override fun validate(element: TemplateElement) {
-		if (element is NativeClassFunction)
-			validate(element)
-		else
-			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on functions.")
-	}
-
+	/** Implementations should check that the specified function is valid for this modifier. */
 	fun validate(func: NativeClassFunction) {
 	}
 }
 
 /** A modifier that can be applied on parameters. */
 interface ParameterModifier : TemplateModifier {
-	override fun validate(element: TemplateElement) {
-		if (element is Parameter)
-			validate(element)
-		else
-			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on parameters.")
-	}
-
+	/** Implementations should check that the specified parameter is valid for this modifier. */
 	fun validate(param: Parameter) {
 	}
 }
 
 /** A modifier that can be applied on struct members. */
 interface StructMemberModifier : TemplateModifier {
-	override fun validate(element: TemplateElement) {
-		if (element is StructMember)
-			validate(element)
-		else
-			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on struct members.")
-	}
-
+	/** Implementations should check that the specified struct member is valid for this modifier. */
 	fun validate(member: StructMember) {
 	}
 }
@@ -117,7 +40,63 @@ interface ReferenceModifier {
 	fun hasReference(reference: String) = this.reference == reference
 }
 
+abstract class ModifierTarget<T : TemplateModifier> {
+	companion object {
+		private val EMPTY_MODIFIERS: MutableMap<KClass<out TemplateModifier>, TemplateModifier> = HashMap(0)
+	}
+
+	@Suppress("UNCHECKED_CAST")
+	protected var _modifiers: MutableMap<KClass<out T>, T> = EMPTY_MODIFIERS as MutableMap<KClass<out T>, T>
+
+	val modifiers: Map<KClass<out T>, T>
+		get() = _modifiers
+
+	internal fun hasModifiers() = _modifiers !== EMPTY_MODIFIERS
+
+	internal fun setModifiers(vararg modifiers: T) {
+		if (!hasModifiers())
+			this._modifiers = HashMap(modifiers.size)
+
+		modifiers.forEach {
+			val old = this._modifiers.put(it::class, it)
+			if (old != null)
+				throw IllegalArgumentException("Template modifier ${it.javaClass.simpleName} specified more than once.")
+		}
+
+		modifiers.forEach {
+			this.validate(it)
+		}
+	}
+
+	internal abstract fun validate(modifier: T)
+
+	internal inline fun <reified M : T> replaceModifier(modifier: M) {
+		_modifiers[M::class] = modifier
+		this.validate(modifier)
+	}
+
+	inline infix fun <reified M : T> has(modifier: M) = modifiers[M::class] === modifier
+
+	inline fun <reified M : T> has() = modifiers.containsKey(M::class)
+	inline fun <reified M : T> get() = modifiers[M::class] as M
+
+}
+
 // DSL extensions (Per TemplateModifier sub-class to avoid IAEs. Too verbose but may catch more errors at compile time)
+
+// These 3 are here because Kotlin does not support: where M : T, T : ReferenceModifier
+
+/** Returns true if the function has a ReferenceModifier with the specified reference. */
+inline fun <reified T> NativeClassFunction.has(reference: String) where T : FunctionModifier, T : ReferenceModifier
+	= (modifiers[T::class] as T?).let { it != null && it.hasReference(reference) }
+
+/** Returns true if the parameter has a ReferenceModifier with the specified reference. */
+inline fun <reified T> Parameter.has(reference: String) where T : ParameterModifier, T : ReferenceModifier
+	= (modifiers[T::class] as T?).let { it != null && it.hasReference(reference) }
+
+/** Returns true if the struct member has a ReferenceModifier with the specified reference. */
+inline fun <reified T> StructMember.has(reference: String) where T : StructMemberModifier, T : ReferenceModifier
+	= (modifiers[T::class] as T?).let { it != null && it.hasReference(reference) }
 
 // Function modifiers
 

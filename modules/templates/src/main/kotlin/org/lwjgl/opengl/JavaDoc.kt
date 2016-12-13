@@ -9,8 +9,6 @@ import java.io.*
 
 /** Specifies an alternative name for the OpenGL SDK Reference url. */
 class ReferenceGL(val function: String) : FunctionModifier {
-	companion object : ModifierKey<ReferenceGL>
-
 	override val isSpecial = false
 	override fun validate(func: NativeClassFunction) {
 		if (!func.nativeClass.postfix.isEmpty())

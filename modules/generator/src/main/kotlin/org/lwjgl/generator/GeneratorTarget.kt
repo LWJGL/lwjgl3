@@ -114,7 +114,7 @@ enum class Access(val modifier: String) {
 abstract class GeneratorTarget(
 	val packageName: String,
 	val className: String
-) : TemplateElement() {
+) {
 
 	companion object {
 		private val LINKS = Pair(

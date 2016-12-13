@@ -66,7 +66,7 @@ val GLBinding = Generator.register(object : APIBinding(
 	override fun getFunctionOrdinal(function: NativeClassFunction) = functionOrdinals[function.name]!!
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, Transform>) {
-		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
+		val boParams = function.getParams { it.has<BufferObject>() && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
 		if (boParams.any()) {
 			boParams.forEach { transforms[it] = BufferOffsetTransform }
 			function.generateAlternativeMethod(writer, function.name, transforms)
@@ -76,8 +76,8 @@ val GLBinding = Generator.register(object : APIBinding(
 
 	override fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String): Boolean {
 		if (GLCorePattern.matches(function.nativeClass.className)) {
-			val xmlName = if (function has ReferenceGL)
-				function[ReferenceGL].function
+			val xmlName = if (function.has<ReferenceGL>())
+				function.get<ReferenceGL>().function
 			else
 				function.stripPostfix(stripType = true)
 			writer.printOpenGLJavaDoc(documentation, xmlName, function has DeprecatedGL)
@@ -99,14 +99,14 @@ val GLBinding = Generator.register(object : APIBinding(
 		val hasDeprecated = nativeClass.functions.hasDeprecated
 
 		print("\n\tstatic boolean isAvailable($CAPABILITIES_CLASS caps")
-		if (nativeClass.functions.any { it has DependsOn }) print(", java.util.Set<String> ext")
+		if (nativeClass.functions.any { it.has<DependsOn>() }) print(", java.util.Set<String> ext")
 		if (hasDeprecated) print(", boolean fc")
 		println(") {")
 		print("\t\treturn ")
 
 		val printPointer = { func: NativeClassFunction ->
-			if (func has DependsOn)
-				"${func[DependsOn].reference.let { if (it.indexOf(' ') == -1) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
+			if (func.has<DependsOn>())
+				"${func.get<DependsOn>().reference.let { if (it.indexOf(' ') == -1) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
 			else
 				"caps.${func.name}"
 		}
@@ -172,7 +172,7 @@ val GLBinding = Generator.register(object : APIBinding(
 			val capName = extension.capName
 			if (extension.hasNativeFunctions) {
 				print("\n\t\t$capName = ext.contains(\"$capName\") && checkExtension(\"$capName\", ${if (capName == extension.className) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.isAvailable(this")
-				if (extension.functions.any { it has DependsOn }) print(", ext")
+				if (extension.functions.any { it.has<DependsOn>() }) print(", ext")
 				if (extension.functions.hasDeprecated) print(", fc")
 				print("));")
 			} else

@@ -38,8 +38,6 @@ class AutoSizeMember(
 	/** If true, at least one of the nullable referenced members must not be null. */
 	val atLeastOne: Boolean = false
 ) : StructMemberModifier, ReferenceModifier {
-	companion object : ModifierKey<AutoSizeMember>
-
 	override val isSpecial = true
 
 	internal val references: Sequence<String> = sequenceOf(reference) + dependent.asSequence()
@@ -93,8 +91,6 @@ class AutoSizeIndirect(
 	override val reference: String,
 	vararg val dependent: String
 ) : StructMemberModifier, ReferenceModifier {
-	companion object : ModifierKey<AutoSizeMember>
-
 	override val isSpecial = true
 
 	internal val references: Sequence<String> = sequenceOf(reference) + dependent.asSequence()
