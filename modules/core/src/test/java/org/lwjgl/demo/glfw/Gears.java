@@ -70,6 +70,8 @@ public class Gears extends AbstractGears {
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+		if ( Platform.get() == Platform.MACOSX )
+			glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
 
 		int WIDTH = 300;
 		int HEIGHT = 300;
@@ -78,6 +80,8 @@ public class Gears extends AbstractGears {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
+		/*
+		// This code did the equivalent of glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE) before GLFW 3.3
 		if ( Platform.get() == Platform.MACOSX ) {
 			long cocoaWindow = glfwGetCocoaWindow(window);
 
@@ -89,6 +93,7 @@ public class Gears extends AbstractGears {
 			boolean bool = invokePPZ(objc_msgSend, contentView, sel_getUid("wantsBestResolutionOpenGLSurface"));
 			System.out.println("wantsBestResolutionOpenGLSurface = " + bool);
 		}
+		*/
 
 		glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, GLFW_DONT_CARE, GLFW_DONT_CARE);
 		glfwSetWindowAspectRatio(window, 1, 1);

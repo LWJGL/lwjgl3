@@ -627,6 +627,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		)
 	).javaDocLinks
 
+	IntConstant(
+		"Specifies whether to use full resolution framebuffers on Retina displays. This is ignored on other platforms.",
+
+		"COCOA_RETINA_FRAMEBUFFER"..0x00023001
+	)
+
 	val ClientAPIValues = IntConstant(
 		"Values for the #CLIENT_API hint.",
 
@@ -928,6 +934,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Generates a 256-element gamma ramp from the specified exponent and then calls #SetGammaRamp() with it. The value must be a finite number greater than
 		zero.
 
+		The software controlled gamma ramp is applied <em>in addition</em> to the hardware gamma correction, which today is usually an approximation of sRGB
+		gamma. This means that setting a perfectly linear ramp, or gamma 1.0, will produce the default (usually sRGB-like) behavior.
+
+		For gamma correct rendering with OpenGL or OpenGL ES, see the #SRGB_CAPABLE hint.
+
 		This function must only be called from the main thread.
 		""",
 
@@ -958,6 +969,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Sets the current gamma ramp for the specified monitor. The original gamma ramp for that monitor is saved by GLFW the first time this function is called
 		and is restored by #Terminate().
+
+		The software controlled gamma ramp is applied <em>in addition</em> to the hardware gamma correction, which today is usually an approximation of sRGB
+		gamma. This means that setting a perfectly linear ramp, or gamma 1.0, will produce the default (usually sRGB-like) behavior.
+
+		For gamma correct rendering with OpenGL or OpenGL ES, see the #SRGB_CAPABLE hint.
 
 		Notes:
 		${ul(
@@ -1033,7 +1049,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 			tr(td("#OPENGL_FORWARD_COMPAT"), td("#FALSE"), td("#TRUE or #FALSE")),
 			tr(td("#OPENGL_DEBUG_CONTEXT"), td("#FALSE"), td("#TRUE or #FALSE")),
-			tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues))
+			tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues)),
+
+			tr(td("#COCOA_RETINA_FRAMEBUFFER"), td("#TRUE"), td("#TRUE or #FALSE"))
 		)}
 
 		This function must only be called from the main thread.
@@ -1042,7 +1060,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN(
 			"hint",
 			"the window hint to set",
-			"${WindowHints.replace("#ICONIFIED ", "")} ${ClientAPIHints.replace("#CONTEXT_REVISION ", "")} $PixelFormatHints"
+			"${WindowHints.replace("#ICONIFIED ", "")} ${ClientAPIHints.replace("#CONTEXT_REVISION ", "")} $PixelFormatHints #COCOA_RETINA_FRAMEBUFFER"
 		),
 		int.IN("value", "the new value of the window hint"),
 		since = "version 2.2"
@@ -1111,7 +1129,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		    """,
 			"""
 		    <b>macOS</b>: On macOS 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
-		    {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For more information, see
+		    #COCOA_RETINA_FRAMEBUFFER hint is #TRUE and the {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For
+		    more information, see
 		    <a href="https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High
 		    Resolution Guidelines for macOS</a> in the Mac Developer Library.
 			""",
@@ -1561,7 +1580,19 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window to set the attribute for"),
-		int.IN("attrib", "the attribute to set", "#DECORATED #RESIZABLE #FLOATING #AUTO_ICONIFY"),
+		int.IN(
+			"attrib",
+			"""
+			the attribute to set.
+
+			Some of these attributes are ignored for full screen windows. The new value will take effect if the window is later made windowed.
+
+			Some of these attributes are ignored for windowed mode windows. The new value will take effect if the window is later made full screen.
+
+			Calling #GetWindowAttrib() will always return the latest value, even if that value is ignored by the current mode of the window.
+			""",
+			"#DECORATED #RESIZABLE #FLOATING #AUTO_ICONIFY"
+		),
 		int.IN("value", "the value to set"),
 
 		since = "version 3.3"
