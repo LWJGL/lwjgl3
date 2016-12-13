@@ -1523,7 +1523,7 @@ class NativeClassFunction(
 		val nativeParams = getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)
 		if (nativeParams.any()) {
 			printList(nativeParams) {
-				it.toNativeType(it.has(const), nativeClass.binding)
+				it.toNativeType(nativeClass.binding)
 			}
 		} else
 			print("void")
@@ -1589,7 +1589,7 @@ class NativeClassFunction(
 		getNativeParams(withExplicitFunctionAddress = false)
 			.filter { it.nativeType.let { (it is PointerType && it !is ArrayType) || it is StructType } }
 			.forEach {
-				val pointerType = it.toNativeType(it.has(const), nativeClass.binding, pointerMode = true)
+				val pointerType = it.toNativeType(nativeClass.binding, pointerMode = true)
 				print("\t$pointerType")
 				if (!pointerType.endsWith('*')) print(' ')
 				val castExpression = if (it.nativeType === va_list)
@@ -1676,7 +1676,7 @@ class NativeClassFunction(
 					if (it.nativeType.let { it is StructType || it === va_list })
 						"*${it.name}"
 					else if ((it.nativeType.mapping === PrimitiveMapping.POINTER || it.nativeType is ArrayType) && it.nativeType !is ObjectType)
-						"(${it.toNativeType(it.has(const), nativeClass.binding, pointerMode = true)})${it.name}" // Avoid implicit cast warnings
+						"(${it.toNativeType(nativeClass.binding, pointerMode = true)})${it.name}" // Avoid implicit cast warnings
 					else
 						it.name
 				}

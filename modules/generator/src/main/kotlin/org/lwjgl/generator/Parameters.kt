@@ -6,12 +6,9 @@ package org.lwjgl.generator
 
 import org.lwjgl.generator.ParameterType.*
 
-/** Super class of Parameter and ReturnValue with common helper properties. */
+/** A parameter or return value. */
 interface QualifiedType {
 	val nativeType: NativeType
-
-	val isSpecial: Boolean // TODO: public?
-		get() = (hasUnsafe && nativeType !is ArrayType)
 }
 
 internal val QualifiedType.hasUnsafe: Boolean
@@ -23,35 +20,6 @@ internal val QualifiedType.isBufferPointer: Boolean
 internal val QualifiedType.javaMethodType: String
 	get() = nativeType.javaMethodType
 
-internal val QualifiedType.isStructValue: Boolean
-	get() = nativeType is StructType
-
-internal fun QualifiedType.toNativeType(hasConst: Boolean, binding: APIBinding?, pointerMode: Boolean = false): String {
-	val builder = StringBuilder()
-
-	if (hasConst && (binding == null || this is Parameter)) // const intptr is pointless and raises a warning on GCC/Clang
-		builder.append("const ")
-
-	if (binding == null || this === JNI_ENV || isStructValue) {
-		builder.append(nativeType.name)
-		if ((nativeType.let { it is PointerType && !it.includesPointer }) || (pointerMode && nativeType is StructType)) {
-			if (!nativeType.name.endsWith('*'))
-				builder.append(' ')
-			builder.append('*')
-		}
-	} else {
-		// map everything to plain types, this avoids having to specify the native types explicitly or via #includes
-		builder.append(
-			if (this.nativeType.let { it.mapping === PrimitiveMapping.POINTER || it is PointerType })
-				"intptr_t"
-			else
-				nativeType.jniFunctionType
-		)
-	}
-
-	return builder.toString()
-}
-
 class ReturnValue(override val nativeType: NativeType) : QualifiedType {
 
 	override fun hashCode() = RESULT.hashCode()
@@ -60,8 +28,34 @@ class ReturnValue(override val nativeType: NativeType) : QualifiedType {
 
 	// --- [ Helper functions & properties ] ---
 
+	internal val isSpecial: Boolean
+		get() = (hasUnsafe && nativeType !is ArrayType)
+
 	internal val isVoid: Boolean
 		get() = nativeType.mapping === TypeMapping.VOID
+
+	internal val isStructValue: Boolean
+		get() = nativeType is StructType
+
+	internal fun toNativeType(hasConst: Boolean, binding: APIBinding?) =
+		if (binding == null || isStructValue) {
+			nativeType.name.let {
+				if (nativeType is PointerType && !nativeType.includesPointer) {
+					if (!it.endsWith('*')) "$it *" else "$it*"
+				} else
+					it
+			}
+		} else {
+			if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType)
+				"intptr_t"
+			else
+				nativeType.jniFunctionType
+		}.let {
+			if (hasConst && binding == null) // const intptr is pointless and raises a warning on GCC/Clang
+				"const $it"
+			else
+				it
+		}
 
 }
 
@@ -98,8 +92,8 @@ class Parameter(
 
 	// --- [ Helper functions & properties ] ----
 
-	override val isSpecial: Boolean
-		get() = super.isSpecial || when (nativeType.mapping) {
+	internal val isSpecial: Boolean
+		get() = (hasUnsafe && nativeType !is ArrayType) || when (nativeType.mapping) {
 			PointerMapping.OPAQUE_POINTER -> (nativeType is ObjectType || !has(nullable)) && this !== JNI_ENV
 			PrimitiveMapping.BOOLEAN4     -> true
 			else                          -> false
@@ -110,6 +104,26 @@ class Parameter(
 		get() = paramType === OUT && has<AutoSizeResultParam>()
 
 	internal fun isArrayParameter(autoSizeResultOutParams: Int) = nativeType.mapping.isArray && (!isAutoSizeResultOut || autoSizeResultOutParams != 1)
+
+	internal fun toNativeType(binding: APIBinding?, pointerMode: Boolean = false) =
+		if (binding == null || this === JNI_ENV || nativeType is StructType) {
+			nativeType.name.let {
+				if ((nativeType is PointerType && !nativeType.includesPointer) || (pointerMode && nativeType is StructType)) {
+					if (!it.endsWith('*')) "$it *" else "$it*"
+				} else
+					it
+			}
+		} else {
+			if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType)
+				"intptr_t"
+			else
+				nativeType.jniFunctionType
+		}.let {
+			if (has(const))
+				"const $it"
+			else
+				it
+		}
 
 	override fun validate(modifier: ParameterModifier) = modifier.validate(this)
 
