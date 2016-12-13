@@ -76,6 +76,13 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 	)
 
 	EnumConstant(
+		"Extends {@code VkAccessFlagBits}.",
+
+		"ACCESS_COMMAND_PROCESS_READ_BIT_NVX".enum(0x00020000),
+		"ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX".enum(0x00040000)
+	)
+
+	EnumConstant(
 		"""
 		VkIndirectCommandsLayoutUsageFlagBitsNVX - Bitmask specifying allowed usage of a indirect commands layout
 
