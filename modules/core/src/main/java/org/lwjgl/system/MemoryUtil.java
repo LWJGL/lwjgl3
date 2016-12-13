@@ -337,15 +337,18 @@ public final class MemoryUtil {
 		return ALLOCATOR.realloc(ptr, size);
 	}
 
+	private static <T extends Buffer> T realloc(T old_p, T new_p, int size) {
+		if ( old_p != null && new_p != null )
+			new_p.position(min(old_p.position(), size));
+		return new_p;
+	}
+
 	/**
 	 * The standard C realloc function.
 	 *
 	 * <p>Changes the size of the memory block pointed to by {@code ptr}. The function may move the memory block to a new location (whose address is returned
 	 * by the function). The content of the memory block is preserved up to the lesser of the new and old sizes, even if the block is moved to a new location.
 	 * If the new size is larger, the value of the newly allocated portion is indeterminate.</p>
-	 *
-	 * <p>In case that {@code ptr} is a {@link #NULL} pointer, the function behaves like {@link #memAlloc}, assigning a new block of size bytes and returning a
-	 * pointer to its beginning.</p>
 	 *
 	 * <p>The memory address used is always the address at the start of {@code ptr}, so the current position of {@code ptr} does not need to be set to 0 for
 	 * this function to work. The current position is preserved, even if the memory block is moved to a new location, unless {@code size} is less than the
@@ -360,15 +363,7 @@ public final class MemoryUtil {
 	 * valid, and with its contents unchanged).
 	 */
 	public static ByteBuffer memRealloc(ByteBuffer ptr, int size) {
-		if ( ptr == null )
-			return memByteBuffer(nmemRealloc(NULL, size), size);
-		else {
-			int position = min(ptr.position(), size);
-			ByteBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size), size);
-			if ( buffer != null )
-				buffer.position(position);
-			return buffer;
-		}
+		return realloc(ptr, memByteBuffer(nmemRealloc(memAddress0Safe(ptr), size), size), size);
 	}
 
 	/**
@@ -377,15 +372,7 @@ public final class MemoryUtil {
 	 * @param size the number of short values to allocate.
 	 */
 	public static ShortBuffer memRealloc(ShortBuffer ptr, int size) {
-		if ( ptr == null )
-			return memShortBuffer(nmemRealloc(NULL, size << 1), size);
-		else {
-			int position = min(ptr.position(), size);
-			ShortBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << 1), size);
-			if ( buffer != null )
-				buffer.position(position);
-			return buffer;
-		}
+		return realloc(ptr, memShortBuffer(nmemRealloc(memAddress0Safe(ptr), size << 1), size), size);
 	}
 
 	/**
@@ -394,32 +381,7 @@ public final class MemoryUtil {
 	 * @param size the number of int values to allocate.
 	 */
 	public static IntBuffer memRealloc(IntBuffer ptr, int size) {
-		if ( ptr == null )
-			return memIntBuffer(nmemRealloc(NULL, size << 2), size);
-		else {
-			int position = min(ptr.position(), size);
-			IntBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << 2), size);
-			if ( buffer != null )
-				buffer.position(position);
-			return buffer;
-		}
-	}
-
-	/**
-	 * FloatBuffer version of {@link #memRealloc}.
-	 *
-	 * @param size the number of float values to allocate.
-	 */
-	public static FloatBuffer memRealloc(FloatBuffer ptr, int size) {
-		if ( ptr == null )
-			return memFloatBuffer(nmemRealloc(NULL, size << 2), size);
-		else {
-			int position = min(ptr.position(), size);
-			FloatBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << 2), size);
-			if ( buffer != null )
-				buffer.position(position);
-			return buffer;
-		}
+		return realloc(ptr, memIntBuffer(nmemRealloc(memAddress0Safe(ptr), size << 2), size), size);
 	}
 
 	/**
@@ -428,15 +390,16 @@ public final class MemoryUtil {
 	 * @param size the number of long values to allocate.
 	 */
 	public static LongBuffer memRealloc(LongBuffer ptr, int size) {
-		if ( ptr == null )
-			return memLongBuffer(nmemRealloc(NULL, size << 3), size);
-		else {
-			int position = min(ptr.position(), size);
-			LongBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << 3), size);
-			if ( buffer != null )
-				buffer.position(position);
-			return buffer;
-		}
+		return realloc(ptr, memLongBuffer(nmemRealloc(memAddress0Safe(ptr), size << 3), size), size);
+	}
+
+	/**
+	 * FloatBuffer version of {@link #memRealloc}.
+	 *
+	 * @param size the number of float values to allocate.
+	 */
+	public static FloatBuffer memRealloc(FloatBuffer ptr, int size) {
+		return realloc(ptr, memFloatBuffer(nmemRealloc(memAddress0Safe(ptr), size << 2), size), size);
 	}
 
 	/**
@@ -445,15 +408,7 @@ public final class MemoryUtil {
 	 * @param size the number of double values to allocate.
 	 */
 	public static DoubleBuffer memRealloc(DoubleBuffer ptr, int size) {
-		if ( ptr == null )
-			return memDoubleBuffer(nmemRealloc(NULL, size << 3), size);
-		else {
-			int position = min(ptr.position(), size);
-			DoubleBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << 3), size);
-			if ( buffer != null )
-				buffer.position(position);
-			return buffer;
-		}
+		return realloc(ptr, memDoubleBuffer(nmemRealloc(memAddress0Safe(ptr), size << 3), size), size);
 	}
 
 	/**
@@ -462,15 +417,10 @@ public final class MemoryUtil {
 	 * @param size the number of pointer values to allocate.
 	 */
 	public static PointerBuffer memRealloc(PointerBuffer ptr, int size) {
-		if ( ptr == null )
-			return memPointerBuffer(nmemRealloc(NULL, size << POINTER_SHIFT), size);
-		else {
-			int position = min(ptr.position(), size);
-			PointerBuffer buffer = memSetupBuffer(ptr, nmemRealloc(memAddress0(ptr), size << POINTER_SHIFT), size);
-			if ( buffer != null )
-				buffer.position(position);
-			return buffer;
-		}
+		PointerBuffer buffer = memPointerBuffer(nmemRealloc(memAddress0Safe(ptr), size << POINTER_SHIFT), size);
+		if ( ptr != null && buffer != null )
+			buffer.position(min(ptr.position(), size));
+		return buffer;
 	}
 
 	// --- [ memAlignedAlloc ] ---
@@ -858,84 +808,6 @@ public final class MemoryUtil {
 			return null;
 
 		return PointerBuffer.create(address, capacity);
-	}
-
-	/**
-	 * This method is an alternative to {@link #memByteBuffer} that allows the reuse of an existing direct ByteBuffer instance. It modifies that instance so
-	 * that it starts at the specified memory address and has the specified capacity. The instance passed to this method should not be an instance created
-	 * using {@link ByteBuffer#allocateDirect}. Using such an instance will cause an exception to be thrown. Other instances are allowed and their parent
-	 * reference will be cleared before this method returns.
-	 *
-	 * <p>ByteBuffer instance modification might not be possible. In that case this method behaves exactly like {@link #memByteBuffer}, so the returned
-	 * instance should always replace the input one.</p>
-	 *
-	 * @param buffer   the ByteBuffer to modify
-	 * @param address  the starting memory address
-	 * @param capacity the buffer capacity
-	 *
-	 * @return the modified ByteBuffer
-	 */
-	public static ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
-		if ( address == NULL )
-			return null;
-
-		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
-	}
-
-	/** ShortBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
-	public static ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity) {
-		if ( address == NULL )
-			return null;
-
-		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
-	}
-
-	/** CharBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
-	public static CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity) {
-		if ( address == NULL )
-			return null;
-
-		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
-	}
-
-	/** IntBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
-	public static IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity) {
-		if ( address == NULL )
-			return null;
-
-		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
-	}
-
-	/** LongBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
-	public static LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity) {
-		if ( address == NULL )
-			return null;
-
-		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
-	}
-
-	/** FloatBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
-	public static FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity) {
-		if ( address == NULL )
-			return null;
-
-		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
-	}
-
-	/** DoubleBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
-	public static DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity) {
-		if ( address == NULL )
-			return null;
-
-		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
-	}
-
-	/** PointerBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
-	public static PointerBuffer memSetupBuffer(PointerBuffer buffer, long address, int capacity) {
-		if ( address == NULL )
-			return null;
-
-		return PointerBuffer.setup(buffer, address, capacity);
 	}
 
 	// --- [ Buffer slicing ] ---
