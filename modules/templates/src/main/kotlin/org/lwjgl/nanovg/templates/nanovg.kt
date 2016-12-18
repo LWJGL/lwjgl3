@@ -1108,7 +1108,7 @@ nvgFill(vg);""")}
 		float.IN("x", "the text X axis coordinate"),
 		float.IN("y", "the text Y axis coordinate"),
 		const..charUTF8_p.IN("string", "the text string to draw"),
-		nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to draw, or $NULL")
+		AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to draw, or $NULL")
 	)
 
 	void(
@@ -1126,7 +1126,7 @@ nvgFill(vg);""")}
 		float.IN("y", "the text box Y axis coordinate"),
 		float.IN("breakRowWidth", "the maximum row width"),
 		const..charUTF8_p.IN("string", "the text string to draw"),
-		nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to draw, or $NULL")
+		AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to draw, or $NULL")
 	)
 
 	float(
@@ -1144,7 +1144,7 @@ nvgFill(vg);""")}
 		float.IN("x", "the text X axis coordinate"),
 		float.IN("y", "the text Y axis coordinate"),
 		const..charUTF8_p.IN("string", "the text string to measure"),
-		nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or $NULL"),
+		AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or $NULL"),
 		nullable..Check(4)..float_p.OUT("bounds", "returns the bounding box of the text"),
 
 		returnDoc = "the horizontal advance of the measured text (i.e. where the next character should drawn)"
@@ -1166,7 +1166,7 @@ nvgFill(vg);""")}
 		float.IN("y", "the text box Y axis coordinate"),
 		float.IN("breakRowWidth", "the maximum row width"),
 		const..charUTF8_p.IN("string", "the text string to measure"),
-		nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or $NULL"),
+		AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or $NULL"),
 		nullable..Check(4)..float_p.OUT("bounds", "returns the bounding box of the text box")
 	)
 
@@ -1182,7 +1182,7 @@ nvgFill(vg);""")}
 		float.IN("x", "the text X axis coordinate"),
 		float.IN("y", "the text Y axis coordinate"),
 		const..charUTF8_p.IN("string", "the text string to measure"),
-		nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or $NULL"),
+		AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or $NULL"),
 		NVGglyphPosition_p.OUT("positions", "returns the glyph x positions"),
 		AutoSize("positions")..int.IN("maxPositions", "the maximum number of glyph positions to return")
 	)
@@ -1212,7 +1212,7 @@ nvgFill(vg);""")}
 
 		ctx,
 		const..charUTF8_p.IN("string", "the text string to measure"),
-		nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or $NULL"),
+		AutoSize("string")..nullable..const..charptr.IN("end", "a pointer to the end of the sub-string to measure, or $NULL"),
 		float.IN("breakRowWidth", "the maximum row width"),
 		NVGtextRow_p.OUT("rows", "returns the text rows"),
 		AutoSize("rows")..int.IN("maxRows", "the maximum number of text rows to return")

@@ -48,7 +48,9 @@ internal open class AutoSizeTransform(
 		if (applyFactor && factor != null)
 			expression = factor.scale(expression)
 
-		if ((param.nativeType.mapping as PrimitiveMapping).bytes.let { if (relaxedCast) it < 4 else it != 4 })
+		if (param.nativeType is PointerType)
+			expression = "memAddress${if (bufferParam has nullable) "Safe" else ""}(${bufferParam.name}) + $expression"
+		else if ((param.nativeType.mapping as PrimitiveMapping).bytes.let { if (relaxedCast) it < 4 else it != 4 })
 			expression = "(${param.nativeType.javaMethodType})${if (expression.contains(' ')) "($expression)" else expression}"
 
 		return expression
@@ -100,14 +102,19 @@ private class AutoSizeBytesTransform(
 internal open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
-		var expression = "${bufferParam.name}Encoded.capacity()"
+		var expression = if (bufferParam has nullable)
+			"remainingSafe(${bufferParam.name}Encoded)"
+		else
+			"${bufferParam.name}Encoded.remaining()"
 
 		param.get<AutoSize>().factor.let {
 			if (it != null)
 				expression = it.scale(expression)
 		}
 
-		if ((param.nativeType.mapping as PrimitiveMapping).bytes < 4)
+		if (param.nativeType is PointerType)
+			expression = "memAddress${if (bufferParam has nullable) "Safe" else ""}(${bufferParam.name}Encoded) + $expression"
+		else if ((param.nativeType.mapping as PrimitiveMapping).bytes < 4)
 			expression = "(${param.nativeType.javaMethodType})($expression)"
 
 		return expression

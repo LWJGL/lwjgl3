@@ -74,13 +74,14 @@ class Demo {
 		"This is longer chunk of text.\n  \n  Would have used lorem ipsum but she    was busy jumping over the lazy dog with the fox and all the men who " +
 			"came" +
 			" " +
-			"to the aid of the party."
+			"to the aid of the party.",
+	    false
 	);
 
 	private static final FloatBuffer lineh  = BufferUtils.createFloatBuffer(1);
 	private static final FloatBuffer bounds = BufferUtils.createFloatBuffer(4);
 
-	private static final ByteBuffer hoverText = memASCII("Hover your mouse over the text to see calculated caret position.");
+	private static final ByteBuffer hoverText = memASCII("Hover your mouse over the text to see calculated caret position.", false);
 
 	static class DemoData {
 
@@ -120,7 +121,7 @@ class Demo {
 	}
 
 	private static ByteBuffer cpToUTF8(int cp) {
-		return memUTF8(new String(Character.toChars(cp)), true);
+		return memUTF8(new String(Character.toChars(cp)), false);
 	}
 
 	static NVGColor rgba(int r, int g, int b, int a, NVGColor color) {
@@ -173,15 +174,15 @@ class Demo {
 		nvgTextAlign(vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
 
 		try ( MemoryStack stack = stackPush() ) {
-			ByteBuffer titleText = stack.ASCII(title);
+			ByteBuffer titleText = stack.ASCII(title, false);
 
 			nvgFontBlur(vg, 2);
 			nvgFillColor(vg, rgba(0, 0, 0, 128, colorA));
-			nvgText(vg, x + w / 2, y + 16 + 1, titleText, NULL);
+			nvgText(vg, x + w / 2, y + 16 + 1, titleText);
 
 			nvgFontBlur(vg, 0);
 			nvgFillColor(vg, rgba(220, 220, 220, 160, colorA));
-			nvgText(vg, x + w / 2, y + 16, titleText, NULL);
+			nvgText(vg, x + w / 2, y + 16, titleText);
 		}
 
 		nvgRestore(vg);
@@ -207,20 +208,20 @@ class Demo {
 		nvgFontFace(vg, "icons");
 		nvgFillColor(vg, rgba(255, 255, 255, 64, colorA));
 		nvgTextAlign(vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x + h * 0.55f, y + h * 0.55f, ICON_SEARCH, NULL);
+		nvgText(vg, x + h * 0.55f, y + h * 0.55f, ICON_SEARCH);
 
 		nvgFontSize(vg, 20.0f);
 		nvgFontFace(vg, "sans");
 		nvgFillColor(vg, rgba(255, 255, 255, 32, colorA));
 
 		nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x + h * 1.05f, y + h * 0.5f, text, NULL);
+		nvgText(vg, x + h * 1.05f, y + h * 0.5f, text);
 
 		nvgFontSize(vg, h * 1.3f);
 		nvgFontFace(vg, "icons");
 		nvgFillColor(vg, rgba(255, 255, 255, 32, colorA));
 		nvgTextAlign(vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x + w - h * 0.55f, y + h * 0.55f, ICON_CIRCLED_CROSS, NULL);
+		nvgText(vg, x + w - h * 0.55f, y + h * 0.55f, ICON_CIRCLED_CROSS);
 	}
 
 	private static void drawDropDown(long vg, String text, float x, float y, float w, float h) {
@@ -242,13 +243,13 @@ class Demo {
 		nvgFontFace(vg, "sans");
 		nvgFillColor(vg, rgba(255, 255, 255, 160, colorA));
 		nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x + h * 0.3f, y + h * 0.5f, text, NULL);
+		nvgText(vg, x + h * 0.3f, y + h * 0.5f, text);
 
 		nvgFontSize(vg, h * 1.3f);
 		nvgFontFace(vg, "icons");
 		nvgFillColor(vg, rgba(255, 255, 255, 64, colorA));
 		nvgTextAlign(vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x + w - h * 0.5f, y + h * 0.5f, ICON_CHEVRON_RIGHT, NULL);
+		nvgText(vg, x + w - h * 0.5f, y + h * 0.5f, ICON_CHEVRON_RIGHT);
 	}
 
 	private static void drawLabel(long vg, String text, float x, float y, float w, float h) {
@@ -257,7 +258,7 @@ class Demo {
 		nvgFillColor(vg, rgba(255, 255, 255, 128, colorA));
 
 		nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x, y + h * 0.5f, text, NULL);
+		nvgText(vg, x, y + h * 0.5f, text);
 	}
 
 	private static void drawEditBoxBase(long vg, float x, float y, float w, float h) {
@@ -283,7 +284,7 @@ class Demo {
 		nvgFontFace(vg, "sans");
 		nvgFillColor(vg, rgba(255, 255, 255, 64, colorA));
 		nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x + h * 0.3f, y + h * 0.5f, text, NULL);
+		nvgText(vg, x + h * 0.3f, y + h * 0.5f, text);
 	}
 
 	private static void drawEditBoxNum(
@@ -295,19 +296,19 @@ class Demo {
 
 		drawEditBoxBase(vg, x, y, w, h);
 
-		uw = nvgTextBounds(vg, 0, 0, units, NULL, (FloatBuffer)null);
+		uw = nvgTextBounds(vg, 0, 0, units, (FloatBuffer)null);
 
 		nvgFontSize(vg, 18.0f);
 		nvgFontFace(vg, "sans");
 		nvgFillColor(vg, rgba(255, 255, 255, 64, colorA));
 		nvgTextAlign(vg, NVG_ALIGN_RIGHT | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x + w - h * 0.3f, y + h * 0.5f, units, NULL);
+		nvgText(vg, x + w - h * 0.3f, y + h * 0.5f, units);
 
 		nvgFontSize(vg, 20.0f);
 		nvgFontFace(vg, "sans");
 		nvgFillColor(vg, rgba(255, 255, 255, 128, colorA));
 		nvgTextAlign(vg, NVG_ALIGN_RIGHT | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x + w - uw - h * 0.5f, y + h * 0.5f, text, NULL);
+		nvgText(vg, x + w - uw - h * 0.5f, y + h * 0.5f, text);
 	}
 
 	private static void drawCheckBox(long vg, String text, float x, float y, float w, float h) {
@@ -318,7 +319,7 @@ class Demo {
 		nvgFillColor(vg, rgba(255, 255, 255, 160, colorA));
 
 		nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x + 28, y + h * 0.5f, text, NULL);
+		nvgText(vg, x + 28, y + h * 0.5f, text);
 
 		nvgBoxGradient(vg, x + 1, y + (int)(h * 0.5f) - 9 + 1, 18, 18, 3, 3, rgba(0, 0, 0, 32, colorA), rgba(0, 0, 0, 92, colorB), bg);
 		nvgBeginPath(vg);
@@ -330,7 +331,7 @@ class Demo {
 		nvgFontFace(vg, "icons");
 		nvgFillColor(vg, rgba(255, 255, 255, 128, colorA));
 		nvgTextAlign(vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-		nvgText(vg, x + 9 + 2, y + h * 0.5f, ICON_CHECK, NULL);
+		nvgText(vg, x + 9 + 2, y + h * 0.5f, ICON_CHECK);
 	}
 
 	private static void drawButton(long vg, ByteBuffer preicon, String text, float x, float y, float w, float h, NVGColor col) {
@@ -354,15 +355,15 @@ class Demo {
 		nvgStroke(vg);
 
 		try ( MemoryStack stack = stackPush() ) {
-			ByteBuffer textEncoded = stack.ASCII(text);
+			ByteBuffer textEncoded = stack.ASCII(text, false);
 
 			nvgFontSize(vg, 20.0f);
 			nvgFontFace(vg, "sans-bold");
-			tw = nvgTextBounds(vg, 0, 0, textEncoded, NULL, (FloatBuffer)null);
+			tw = nvgTextBounds(vg, 0, 0, textEncoded, (FloatBuffer)null);
 			if ( preicon != null ) {
 				nvgFontSize(vg, h * 1.3f);
 				nvgFontFace(vg, "icons");
-				iw = nvgTextBounds(vg, 0, 0, preicon, NULL, (FloatBuffer)null);
+				iw = nvgTextBounds(vg, 0, 0, preicon, (FloatBuffer)null);
 				iw += h * 0.15f;
 			}
 
@@ -371,16 +372,16 @@ class Demo {
 				nvgFontFace(vg, "icons");
 				nvgFillColor(vg, rgba(255, 255, 255, 96, colorA));
 				nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-				nvgText(vg, x + w * 0.5f - tw * 0.5f - iw * 0.75f, y + h * 0.5f, preicon, NULL);
+				nvgText(vg, x + w * 0.5f - tw * 0.5f - iw * 0.75f, y + h * 0.5f, preicon);
 			}
 
 			nvgFontSize(vg, 20.0f);
 			nvgFontFace(vg, "sans-bold");
 			nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
 			nvgFillColor(vg, rgba(0, 0, 0, 160, colorA));
-			nvgText(vg, x + w * 0.5f - tw * 0.5f + iw * 0.25f, y + h * 0.5f - 1, textEncoded, NULL);
+			nvgText(vg, x + w * 0.5f - tw * 0.5f + iw * 0.25f, y + h * 0.5f - 1, textEncoded);
 			nvgFillColor(vg, rgba(255, 255, 255, 160, colorA));
-			nvgText(vg, x + w * 0.5f - tw * 0.5f + iw * 0.25f, y + h * 0.5f, textEncoded, NULL);
+			nvgText(vg, x + w * 0.5f - tw * 0.5f + iw * 0.25f, y + h * 0.5f, textEncoded);
 		}
 	}
 
@@ -1012,7 +1013,7 @@ class Demo {
 		nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
 		nvgTextLineHeight(vg, 1.2f);
 
-		nvgTextBoxBounds(vg, x, y, 150, hoverText, NULL, bounds);
+		nvgTextBoxBounds(vg, x, y, 150, hoverText, bounds);
 
 		// Fade the tooltip out when close to it.
 		gx = abs((mx - (bounds.get(0) + bounds.get(2)) * 0.5f) / (bounds.get(0) - bounds.get(2)));
@@ -1031,7 +1032,7 @@ class Demo {
 		nvgFill(vg);
 
 		nvgFillColor(vg, rgba(0, 0, 0, 220, colorA));
-		nvgTextBox(vg, x, y, 150, hoverText, NULL);
+		nvgTextBox(vg, x, y, 150, hoverText);
 
 		nvgRestore(vg);
 	}
@@ -1061,7 +1062,7 @@ class Demo {
 		nvgFontSize(vg, 13.0f);
 		nvgTextAlign(vg, NVG_ALIGN_RIGHT | NVG_ALIGN_MIDDLE);
 
-		nvgTextBounds(vg, gx, gy, txt, NULL, bounds);
+		nvgTextBounds(vg, gx, gy, txt, bounds);
 
 		nvgBeginPath(vg);
 		nvgFillColor(vg, rgba(255, 192, 0, 255, colorA));
@@ -1074,7 +1075,7 @@ class Demo {
 		nvgFill(vg);
 
 		nvgFillColor(vg, rgba(32, 32, 32, 255, colorA));
-		nvgText(vg, gx, gy, txt, NULL);
+		nvgText(vg, gx, gy, txt);
 	}
 
 	private static void drawWidths(long vg, float x, float y, float width) {
@@ -1399,7 +1400,7 @@ class Demo {
 
 	static void initGraph(PerfGraph fps, int style, String name) {
 		fps.style = style;
-		memUTF8(name, true, fps.name);
+		memUTF8(name, false, fps.name);
 		Arrays.fill(fps.values, 0);
 		fps.head = 0;
 	}
@@ -1468,29 +1469,29 @@ class Demo {
 			nvgFontSize(vg, 14.0f);
 			nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
 			nvgFillColor(vg, rgba(240, 240, 240, 192, colorA));
-			nvgText(vg, x + 3, y + 1, fps.name, NULL);
+			nvgText(vg, x + 3, y + 1, fps.name);
 		}
 
 		if ( fps.style == GRAPH_RENDER_FPS ) {
 			nvgFontSize(vg, 18.0f);
 			nvgTextAlign(vg, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
 			nvgFillColor(vg, rgba(240, 240, 240, 255, colorA));
-			nvgText(vg, x + w - 3, y + 1, String.format("%.2f FPS", 1.0f / avg), NULL);
+			nvgText(vg, x + w - 3, y + 1, String.format("%.2f FPS", 1.0f / avg));
 
 			nvgFontSize(vg, 15.0f);
 			nvgTextAlign(vg, NVG_ALIGN_RIGHT | NVG_ALIGN_BOTTOM);
 			nvgFillColor(vg, rgba(240, 240, 240, 160, colorA));
-			nvgText(vg, x + w - 3, y + h - 1, String.format("%.2f ms", avg * 1000.0f), NULL);
+			nvgText(vg, x + w - 3, y + h - 1, String.format("%.2f ms", avg * 1000.0f));
 		} else if ( fps.style == GRAPH_RENDER_PERCENT ) {
 			nvgFontSize(vg, 18.0f);
 			nvgTextAlign(vg, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
 			nvgFillColor(vg, rgba(240, 240, 240, 255, colorA));
-			nvgText(vg, x + w - 3, y + 1, String.format("%.1f %%", avg * 1.0f), NULL);
+			nvgText(vg, x + w - 3, y + 1, String.format("%.1f %%", avg * 1.0f));
 		} else {
 			nvgFontSize(vg, 18.0f);
 			nvgTextAlign(vg, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
 			nvgFillColor(vg, rgba(240, 240, 240, 255, colorA));
-			nvgText(vg, x + w - 3, y + 1, String.format("%.2f ms", avg * 1000.0f), NULL);
+			nvgText(vg, x + w - 3, y + 1, String.format("%.2f ms", avg * 1000.0f));
 		}
 	}
 

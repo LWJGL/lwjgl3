@@ -89,15 +89,19 @@ class AutoSize(
 
 	override fun validate(param: Parameter) {
 		when (param.paramType) {
-			ParameterType.IN    -> if (when (param.nativeType.mapping) {
-				PrimitiveMapping.BYTE,
-				PrimitiveMapping.SHORT,
-				PrimitiveMapping.INT,
-				PrimitiveMapping.LONG,
-				PrimitiveMapping.POINTER -> false
-				else                     -> true
-			})
-				throw IllegalArgumentException("IN parameters with the AutoSize modifier must be integer primitive types.")
+			ParameterType.IN    ->
+				if (param.nativeType is PointerType) {
+					if (dependent.isNotEmpty())
+						throw IllegalArgumentException("IN pointer parameters with the AutoSize modifier cannot reference dependent parameters.")
+				} else if (when (param.nativeType.mapping) {
+					PrimitiveMapping.BYTE,
+					PrimitiveMapping.SHORT,
+					PrimitiveMapping.INT,
+					PrimitiveMapping.LONG,
+					PrimitiveMapping.POINTER -> false
+					else                     -> true
+				})
+					throw IllegalArgumentException("IN parameters with the AutoSize modifier must be integer primitive types.")
 			ParameterType.INOUT -> {
 				if (param.nativeType !is PointerType || when (param.nativeType.mapping) {
 					PointerMapping.DATA_INT,
