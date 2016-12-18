@@ -155,7 +155,7 @@ class MemoryTextUtil {
 				}
 			}
 
-			// Aligned longs for performance
+			// Aligned ints for performance
 			do {
 				int v = buffer.getInt(i);
 				if ( ((v - 0x00010001) & ~v & 0x80008000) != 0 )
@@ -324,28 +324,21 @@ class MemoryTextUtil {
 				string[i++] = (char)b0;
 			} else if ( (b0 >> 5) == -2 && (b0 & 0x1E) != 0 ) {
 				int b1 = buffer.get(position++);
-				if ( Checks.DEBUG && (b1 & 0xC0) != 0x80 )
-					throw new RuntimeException("Malformed character sequence");
+				checkMalformed2(b1);
 
 				string[i++] = (char)(((b0 << 6) ^ b1) ^ (((byte)0xC0 << 6) ^ ((byte)0x80 << 0)));
 			} else if ( (b0 >> 4) == -2 ) {
 				int b1 = buffer.get(position++);
 				int b2 = buffer.get(position++);
-				if ( Checks.DEBUG && isMalformed3(b0, b1, b2) )
-					throw new RuntimeException("Malformed character sequence");
+				checkMalformed3(b0, b1, b2);
 
-				char c = (char)((b0 << 12) ^ (b1 << 6) ^ (b2 ^ (((byte)0xE0 << 12) ^ ((byte)0x80 << 6) ^ ((byte)0x80 << 0))));
-				if ( Checks.DEBUG && MIN_SURROGATE <= c && c <= MAX_SURROGATE )
-					throw new RuntimeException("Malformed character sequence");
-
-				string[i++] = c;
+				string[i++] = checkSurrogate((char)((b0 << 12) ^ (b1 << 6) ^ (b2 ^ (((byte)0xE0 << 12) ^ ((byte)0x80 << 6) ^ ((byte)0x80 << 0)))));;
 			} else if ( (b0 >> 3) == -2 ) {
 				int b1 = buffer.get(position++);
 				int b2 = buffer.get(position++);
 				int b3 = buffer.get(position++);
 				int cp = ((b0 << 18) ^ (b1 << 12) ^ (b2 << 6) ^ (b3 ^ ((byte)0xF0 << 18 ^ ((byte)0x80 << 12) ^ ((byte)0x80 << 6) ^ ((byte)0x80 << 0))));
-				if ( Checks.DEBUG && (isMalformed4(b1, b2, b3) || !isSupplementaryCodePoint(cp)) )
-					throw new RuntimeException("Malformed character sequence");
+				checkMalformed4(b1, b2, b3, cp);
 
 				string[i++] = (char)((cp >>> 10) + MIN_HIGH_SURROGATE - (MIN_SUPPLEMENTARY_CODE_POINT >>> 10));
 				string[i++] = (char)((cp & 0x3FF) + MIN_LOW_SURROGATE);
@@ -356,12 +349,25 @@ class MemoryTextUtil {
 		return new String(string, 0, i);
 	}
 
-	private static boolean isMalformed3(int b1, int b2, int b3) {
-		return (b1 == (byte)0xE0 && (b2 & 0xE0) == 0x80) || (b2 & 0xC0) != 0x80 || (b3 & 0xC0) != 0x80;
+	private static void checkMalformed2(int b1) {
+		if ( Checks.DEBUG && (b1 & 0xC0) != 0x80 )
+			throw new RuntimeException("Malformed character sequence");
 	}
 
-	private static boolean isMalformed4(int b2, int b3, int b4) {
-		return (b2 & 0xC0) != 0x80 || (b3 & 0xC0) != 0x80 || (b4 & 0xC0) != 0x80;
+	private static void checkMalformed3(int b0, int b1, int b2) {
+		if ( Checks.DEBUG && ((b0 == (byte)0xE0 && (b1 & 0xE0) == 0x80) || (b1 & 0xC0) != 0x80 || (b2 & 0xC0) != 0x80) )
+			throw new RuntimeException("Malformed character sequence");
+	}
+
+	private static char checkSurrogate(char c) {
+		if ( Checks.DEBUG && MIN_SURROGATE <= c && c <= MAX_SURROGATE )
+			throw new RuntimeException("Malformed character sequence");
+		return c;
+	}
+
+	private static void checkMalformed4(int b1, int b2, int b3, int cp) {
+		if ( Checks.DEBUG && ((b1 & 0xC0) != 0x80 || (b2 & 0xC0) != 0x80 || (b3 & 0xC0) != 0x80 || !isSupplementaryCodePoint(cp)) )
+			throw new RuntimeException("Malformed character sequence");
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------------

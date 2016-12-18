@@ -100,10 +100,7 @@ private class AutoSizeBytesTransform(
 internal open class AutoSizeCharSequenceTransform(val bufferParam: Parameter) : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
-		var expression = if (bufferParam.has<Nullable>() )
-			"${bufferParam.name} == null ? 0 : ${bufferParam.name}Encoded.remaining()"
-		else
-			"${bufferParam.name}EncodedLen"
+		var expression = "${bufferParam.name}Encoded.capacity()"
 
 		param.get<AutoSize>().factor.let {
 			if (it != null)
@@ -163,8 +160,6 @@ internal class CharSequenceTransform(
 		if (!nullTerminated)
 			writer.print(", false")
 		writer.println(");")
-		if (!nullTerminated)
-			writer.println("\t\t\tint ${qtype.name}EncodedLen = ${qtype.name}Encoded.capacity();")
 	}
 }
 
