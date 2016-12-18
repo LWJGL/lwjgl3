@@ -1252,7 +1252,6 @@ val VkSubmitInfo = struct(VULKAN_PACKAGE, "VkSubmitInfo") {
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>Any given element of {@code pSignalSemaphores} <b>must</b> currently be unsignaled</li>
 			<li>Any given element of {@code pCommandBuffers} <b>must</b> either have been recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, or not currently be executing on the device</li>
 			<li>Any given element of {@code pCommandBuffers} <b>must</b> be in the executable state</li>
 			<li>If any given element of {@code pCommandBuffers} contains commands that execute secondary command buffers, those secondary command buffers <b>must</b> have been recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, or not currently be executing on the device</li>
@@ -1261,9 +1260,9 @@ val VkSubmitInfo = struct(VULKAN_PACKAGE, "VkSubmitInfo") {
 			<li>Any given element of {@code pCommandBuffers} <b>must</b> not contain commands that execute a secondary command buffer, if that secondary command buffer has been recorded in another primary command buffer after it was recorded into this {@code VkCommandBuffer}</li>
 			<li>Any given element of {@code pCommandBuffers} <b>must</b> have been allocated from a {@code VkCommandPool} that was created for the same queue family that the calling command&#8217;s {@code queue} belongs to</li>
 			<li>Any given element of {@code pCommandBuffers} <b>must</b> not have been allocated with #COMMAND_BUFFER_LEVEL_SECONDARY</li>
-			<li>Any given element of {@code VkSemaphore} in {@code pWaitSemaphores} <b>must</b> refer to a prior signal of that {@code VkSemaphore} that will not be consumed by any other wait on that semaphore</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, any given element of {@code pWaitDstStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, any given element of {@code pWaitDstStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
+			<li>Any given element of {@code pWaitDstStageMask} <b>must</b> not include #PIPELINE_STAGE_HOST_BIT.</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -1851,6 +1850,7 @@ val VkBufferViewCreateInfo = struct(VULKAN_PACKAGE, "VkBufferViewCreateInfo") {
 			<li>{@code buffer} <b>must</b> have been created with a {@code usage} value containing at least one of #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT</li>
 			<li>If {@code buffer} was created with {@code usage} containing #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT, {@code format} <b>must</b> be supported for uniform texel buffers, as specified by the #FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT flag in ##VkFormatProperties{@code ::bufferFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
 			<li>If {@code buffer} was created with {@code usage} containing #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT, {@code format} <b>must</b> be supported for storage texel buffers, as specified by the #FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT flag in ##VkFormatProperties{@code ::bufferFeatures} returned by #GetPhysicalDeviceFormatProperties()</li>
+			<li>If {@code buffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -1881,8 +1881,6 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 		Structure specifying the parameters of a newly created image object.
 
 		<h5>Description</h5>
-		Valid limits for the image {@code extent}, {@code mipLevels}, {@code arrayLayers} and {@code samples} members are queried with the #GetPhysicalDeviceImageFormatProperties() command.
-
 		Images created with {@code tiling} equal to #IMAGE_TILING_LINEAR have further restrictions on their limits and capabilities compared to images created with {@code tiling} equal to #IMAGE_TILING_OPTIMAL. Creation of images with tiling #IMAGE_TILING_LINEAR <b>may</b> not be supported unless other parameters meet all of the constraints:
 
 		<ul>
@@ -1894,10 +1892,15 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 			<li>{@code usage} only includes #IMAGE_USAGE_TRANSFER_SRC_BIT and/or #IMAGE_USAGE_TRANSFER_DST_BIT</li>
 		</ul>
 
-		Implementations <b>may</b> support additional limits and capabilities beyond those listed above. To determine the specific capabilities of an implementation, query the valid {@code usage} bits by calling #GetPhysicalDeviceFormatProperties() and the valid limits for {@code mipLevels} and {@code arrayLayers} by calling #GetPhysicalDeviceImageFormatProperties().
+		Implementations <b>may</b> support additional limits and capabilities beyond those listed above.
+
+		To query an implementation's specific capabilities for a given combination of {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags}, call #GetPhysicalDeviceImageFormatProperties(). The return value indicates whether that combination of image settings is supported. On success, the ##VkImageFormatProperties output parameter indicates the set of valid {@code samples} bits and the limits for {@code extent}, {@code mipLevels}, and {@code arrayLayers}.
+
+		To determine the set of valid {@code usage} bits for a given format, call #GetPhysicalDeviceFormatProperties().
 
 		<h5>Valid Usage</h5>
 		<ul>
+			<li>The combination of {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} <b>must</b> be supported, as indicated by a VK_SUCCESS return value from #GetPhysicalDeviceImageFormatProperties() invoked with the same values passed to the corresponding parameters.</li>
 			<li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code pQueueFamilyIndices} <b>must</b> be a pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
 			<li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code queueFamilyIndexCount} <b>must</b> be greater than 1</li>
 			<li>{@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
@@ -2165,6 +2168,7 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
 			<li>{@code subresourceRange} <b>must</b> be a valid image subresource range for {@code image} (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-views">the “Image Views” section</a>)</li>
 			<li>If {@code image} was created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, {@code format} <b>must</b> be compatible with the {@code format} used to create {@code image}, as defined in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-formats-compatibility-classes">Format Compatibility Classes</a></li>
 			<li>If {@code image} was not created with the #IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, {@code format} <b>must</b> be identical to the {@code format} used to create {@code image}</li>
+			<li>If {@code image} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 			<li>{@code subResourceRange} and {@code viewType} <b>must</b> be compatible with the image, as described in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#resources-image-views-compatibility">compatibility table</a></li>
 		</ul>
 
@@ -3491,6 +3495,7 @@ val VkWriteDescriptorSet = struct(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
 			<li>If {@code descriptorType} is #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, the {@code imageView} and {@code imageLayout} members of any given element of {@code pImageInfo} <b>must</b> be a valid {@code VkImageView} and {@code VkImageLayout}, respectively</li>
 			<li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code offset} member of any given element of {@code pBufferInfo} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minUniformBufferOffsetAlignment}</li>
 			<li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code offset} member of any given element of {@code pBufferInfo} <b>must</b> be a multiple of ##VkPhysicalDeviceLimits{@code ::minStorageBufferOffsetAlignment}</li>
+			<li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER, #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, #DESCRIPTOR_TYPE_STORAGE_BUFFER, or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code buffer} member of any given element of {@code pBufferInfo} that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
 			<li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code buffer} member of any given element of {@code pBufferInfo} <b>must</b> have been created with #BUFFER_USAGE_UNIFORM_BUFFER_BIT set</li>
 			<li>If {@code descriptorType} is #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, the {@code buffer} member of any given element of {@code pBufferInfo} <b>must</b> have been created with #BUFFER_USAGE_STORAGE_BUFFER_BIT set</li>
 			<li>If {@code descriptorType} is #DESCRIPTOR_TYPE_UNIFORM_BUFFER or #DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, the {@code range} member of any given element of {@code pBufferInfo}, or the effective range if {@code range} is #WHOLE_SIZE, <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxUniformBufferRange}</li>
@@ -3795,6 +3800,8 @@ val VkSubpassDependency = struct(VULKAN_PACKAGE, "VkSubpassDependency") {
 
 		<h5>Valid Usage</h5>
 		<ul>
+			<li>If {@code srcSubpass} is not #SUBPASS_EXTERNAL, {@code srcStageMask} <b>must</b> not include #PIPELINE_STAGE_HOST_BIT</li>
+			<li>If {@code dstSubpass} is not #SUBPASS_EXTERNAL, {@code dstStageMask} <b>must</b> not include #PIPELINE_STAGE_HOST_BIT</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-geometryShader">geometry shaders</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
@@ -4187,7 +4194,7 @@ val VkBufferImageCopy = struct(VULKAN_PACKAGE, "VkBufferImageCopy") {
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code bufferOffset} <b>must</b> be a multiple of the calling command&#8217;s {@code VkImage} parameter&#8217;s format&#8217;s element size</li>
+			<li>If the the calling command&#8217;s {@code VkImage} parameter&#8217;s format is not a depth/stencil format, then {@code bufferOffset} <b>must</b> be a multiple of the format&#8217;s element size</li>
 			<li>{@code bufferOffset} <b>must</b> be a multiple of 4</li>
 			<li>{@code bufferRowLength} <b>must</b> be 0, or greater than or equal to the {@code width} member of {@code imageExtent}</li>
 			<li>{@code bufferImageHeight} <b>must</b> be 0, or greater than or equal to the {@code height} member of {@code imageExtent}</li>

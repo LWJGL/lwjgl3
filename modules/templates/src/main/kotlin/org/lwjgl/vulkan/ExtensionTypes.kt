@@ -111,15 +111,15 @@ val VkSurfaceCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkSurfaceCapabilitiesKHR"
 		##VkExtent2D, #GetPhysicalDeviceSurfaceCapabilitiesKHR()
 		"""
 
-	uint32_t.member("minImageCount", "the minimum number of images the specified device supports for a swapchain created for the surface.")
-	uint32_t.member("maxImageCount", "the maximum number of images the specified device supports for a swapchain created for the surface. A value of 0 means that there is no limit on the number of images, though there <b>may</b> be limits related to the total amount of memory used by swapchain images.")
+	uint32_t.member("minImageCount", "the minimum number of images the specified device supports for a swapchain created for the surface, and will be at least one.")
+	uint32_t.member("maxImageCount", "the maximum number of images the specified device supports for a swapchain created for the surface, and will be either 0, or greater than or equal to {@code minImageCount}. A value of 0 means that there is no limit on the number of images, though there <b>may</b> be limits related to the total amount of memory used by swapchain images.")
 	VkExtent2D.member("currentExtent", "the current width and height of the surface, or the special value <code>(0xFFFFFFFF, 0xFFFFFFFF)</code> indicating that the surface size will be determined by the extent of a swapchain targeting the surface.")
-	VkExtent2D.member("minImageExtent", "contains the smallest valid swapchain extent for the surface on the specified device.")
-	VkExtent2D.member("maxImageExtent", "contains the largest valid swapchain extent for the surface on the specified device.")
-	uint32_t.member("maxImageArrayLayers", "the maximum number of layers swapchain images <b>can</b> have for a swapchain created for this device and surface.")
-	VkSurfaceTransformFlagsKHR.member("supportedTransforms", "a bitmask of {@code VkSurfaceTransformFlagBitsKHR}, describing the presentation transforms supported for the surface on the specified device.")
-	VkSurfaceTransformFlagBitsKHR.member("currentTransform", "a bitmask of {@code VkSurfaceTransformFlagBitsKHR}, describing the surface&#8217;s current transform relative to the presentation engine&#8217;s natural orientation.")
-	VkCompositeAlphaFlagsKHR.member("supportedCompositeAlpha", "a bitmask of {@code VkCompositeAlphaFlagBitsKHR}, representing the alpha compositing modes supported by the presentation engine for the surface on the specified device. Opaque composition <b>can</b> be achieved in any alpha compositing mode by either using a swapchain image format that has no alpha component, or by ensuring that all pixels in the swapchain images have an alpha value of 1.0.")
+	VkExtent2D.member("minImageExtent", "contains the smallest valid swapchain extent for the surface on the specified device. The {@code width} and {@code height} of the extent will each be less than or equal to the corresponding {@code width} and {@code height} of {@code currentExtent}, unless {@code currentExtent} has the special value described above.")
+	VkExtent2D.member("maxImageExtent", "contains the largest valid swapchain extent for the surface on the specified device. The {@code width} and {@code height} of the extent will each be greater than or equal to the corresponding {@code width} and {@code height} of {@code minImageExtent}. The {@code width} and {@code height} of the extent will each be greater than or equal to the corresponding {@code width} and {@code height} of {@code currentExtent}, unless {@code currentExtent} has the special value described above.")
+	uint32_t.member("maxImageArrayLayers", "the maximum number of layers swapchain images <b>can</b> have for a swapchain created for this device and surface, and will be at least one.")
+	VkSurfaceTransformFlagsKHR.member("supportedTransforms", "a bitmask of {@code VkSurfaceTransformFlagBitsKHR}, describing the presentation transforms supported for the surface on the specified device, and at least one bit will be set.")
+	VkSurfaceTransformFlagBitsKHR.member("currentTransform", "the surface&#8217;s current transform relative to the presentation engine&#8217;s natural orientation, as described by {@code VkSurfaceTransformFlagBitsKHR}.")
+	VkCompositeAlphaFlagsKHR.member("supportedCompositeAlpha", "a bitmask of {@code VkCompositeAlphaFlagBitsKHR}, representing the alpha compositing modes supported by the presentation engine for the surface on the specified device, and at least one bit will be set. Opaque composition <b>can</b> be achieved in any alpha compositing mode by either using a swapchain image format that has no alpha component, or by ensuring that all pixels in the swapchain images have an alpha value of 1.0.")
 	VkImageUsageFlags.member("supportedUsageFlags", "a bitmask of {@code VkImageUsageFlagBits} representing the ways the application <b>can</b> use the presentable images of a swapchain created for the surface on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional usages.")
 }
 
@@ -217,7 +217,6 @@ val VkPresentInfoKHR = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>Any given element of {@code pImageIndices} <b>must</b> be the index of a presentable image acquired from the swapchain specified by the corresponding element of the {@code pSwapchains} array, and the presented image subresource <b>must</b> be in the #IMAGE_LAYOUT_PRESENT_SRC_KHR layout at the time the operation is executed on a {@code VkDevice}</li>
-			<li>Any given element of {@code VkSemaphore} in {@code pWaitSemaphores} <b>must</b> refer to a prior signal of that {@code VkSemaphore} that will not be consumed by any other wait on that semaphore</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -543,7 +542,7 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
 
 		<ul>
 			<li>#DEBUG_REPORT_ERROR_BIT_EXT indicates an error that may cause undefined results, including an application crash.</li>
-			<li>#DEBUG_REPORT_WARNING_BIT_EXT indicates an unexpected use. E.g. Not destroying objects prior to destroying the containing object or potential inconsistencies between descriptor set layout and the layout in the corresponding shader, etc.</li>
+			<li>#DEBUG_REPORT_WARNING_BIT_EXT indicates use of Vulkan that may expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases may point to behavior that is almost certainly bad when unintended such as using an image whose memory hasn&#8217;t been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
 			<li>#DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT indicates a potentially non-optimal use of Vulkan. E.g. using #CmdClearColorImage() when a RenderPass load_op would have worked.</li>
 			<li>#DEBUG_REPORT_INFORMATION_BIT_EXT indicates an informational message such as resource details that may be handy when debugging an application.</li>
 			<li>#DEBUG_REPORT_DEBUG_BIT_EXT indicates diagnostic information from the loader and layers.</li>
@@ -1096,10 +1095,11 @@ val VkCmdProcessCommandsInfoNVX = struct(VULKAN_PACKAGE, "VkCmdProcessCommandsIn
 			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
 			<li>{@code objectTable} <b>must</b> be a valid {@code VkObjectTableNVX} handle</li>
 			<li>{@code indirectCommandsLayout} <b>must</b> be a valid {@code VkIndirectCommandsLayoutNVX} handle</li>
-			<li>{@code pIndirectCommandsTokens} <b>must</b> be a pointer to an array of {@code tokenCount} valid ##VkIndirectCommandsTokenNVX structures</li>
+			<li>{@code pIndirectCommandsTokens} <b>must</b> be a pointer to an array of {@code indirectCommandsTokenCount} valid ##VkIndirectCommandsTokenNVX structures</li>
 			<li>If {@code targetCommandBuffer} is not {@code NULL}, {@code targetCommandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
 			<li>If {@code sequencesCountBuffer} is not #NULL_HANDLE, {@code sequencesCountBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
 			<li>If {@code sequencesIndexBuffer} is not #NULL_HANDLE, {@code sequencesIndexBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code indirectCommandsTokenCount} <b>must</b> be greater than 0</li>
 			<li>Each of {@code indirectCommandsLayout}, {@code objectTable}, {@code sequencesCountBuffer}, {@code sequencesIndexBuffer}, and {@code targetCommandBuffer} that are valid handles <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
 		</ul>
 
