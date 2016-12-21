@@ -6,8 +6,8 @@ package org.lwjgl.generator
 
 import java.io.*
 
-private val STRUCT = "struct"
-private val ANONYMOUS = "*" // very easy to introduce bugs, unless this is an invalid character in Java identifiers
+private const val STRUCT = "struct"
+private const val ANONYMOUS = "*" // very easy to introduce bugs, unless this is an invalid character in Java identifiers
 
 open class StructMember(
 	val nativeType: NativeType,
@@ -22,7 +22,7 @@ open class StructMember(
 
 	override fun validate(modifier: StructMemberModifier) = modifier.validate(this)
 
-	internal val offsetField: String
+	internal val offsetField
 		get() = name.toUpperCase()
 
 	internal fun offsetField(parentField: String): String {
@@ -67,7 +67,7 @@ private open class StructMemberArray(
 	val validSize: String
 ) : StructMember(nativeType, name, documentation) {
 
-	val primitiveMapping: PrimitiveMapping get() = nativeType.let {
+	val primitiveMapping get() = this.nativeType.let {
 		if (it is PointerType) PrimitiveMapping.POINTER else it.mapping as PrimitiveMapping
 	}
 
@@ -127,10 +127,10 @@ class Struct(
 			"double" to "Double"
 		)
 
-		private val BUFFER_CAPACITY_PARAM = "capacity"
+		private const val BUFFER_CAPACITY_PARAM = "capacity"
 	}
 
-	val nativeType: StructType get() = StructType(this)
+	val nativeType get() = StructType(this)
 
 	/* Output parameter or function result by value */
 	private var usageOutput = false
@@ -160,10 +160,10 @@ class Struct(
 
 	private val members = ArrayList<StructMember>()
 
-	private val visibleMembers: Sequence<StructMember>
+	private val visibleMembers
 		get() = members.asSequence().filter { it !is StructMemberPadding }
 
-	private val publicMembers: Sequence<StructMember>
+	private val publicMembers
 		get() = members.asSequence().filter { it.public }
 
 	private fun mutableMembers(members: Sequence<StructMember> = publicMembers): Sequence<StructMember> = members.let {
@@ -240,14 +240,14 @@ class Struct(
 	}
 
 	/** The nested struct's members are embedded in the parent struct. */
-	private val StructMember.isNestedStruct: Boolean
+	private val StructMember.isNestedStruct
 		get() = nativeType is StructType && this !is StructMemberArray
 
 	/** The nested struct is not defined elsewhere, it's part of the parent struct's definition */
-	private val StructMember.isNestedStructDefinition: Boolean
+	private val StructMember.isNestedStructDefinition
 		get() = isNestedStruct && (nativeType as StructType).name === ANONYMOUS
 
-	private val StructMember.nestedMembers: Sequence<StructMember>
+	private val StructMember.nestedMembers
 		get() = (nativeType as StructType).definition.visibleMembers
 
 	private val containsUnion: Boolean get() = union || members.any {
@@ -375,9 +375,8 @@ $indent}"""
 			println(processDocumentation(builder.toString()).toJavaDoc(indentation = ""))
 	}
 
-	private val nativeNameQualified: String get() {
-		val type = if (union) "union " else "struct "
-		return if (nativeName.startsWith(type))
+	private val nativeNameQualified get() = (if (union) "union " else "struct ").let { type ->
+		if (nativeName.startsWith(type))
 			nativeName
 		else if (nativeName === ANONYMOUS)
 			type.substring(0, type.length - 1)
@@ -1143,14 +1142,14 @@ ${validations.joinToString("\n")}
 	else
 		throw IllegalStateException()
 
-	private val StructMember.pointerValue: String get() = if (!Binding.CHECKS || has(nullable)) "value" else "check(value)"
-	private val StructMember.isNullable: Boolean
+	private val StructMember.pointerValue get() = if (!Binding.CHECKS || has(nullable)) "value" else "check(value)"
+	private val StructMember.isNullable
 		get() = has(nullable) ||
 		        getReferenceMember<AutoSizeMember>(name)?.get<AutoSizeMember>()?.optional ?: false ||
 		        (this is StructMemberArray && this.validSize < this.size)
-	private val StructMember.addressValue: String get() = if (isNullable) "addressSafe(value)" else "value.address()"
-	private val StructMember.memAddressValue: String get() = if (isNullable) "memAddressSafe(value)" else "memAddress(value)"
-	private val StructMember.autoSize: String get() = "n$name($STRUCT)"
+	private val StructMember.addressValue get() = if (isNullable) "addressSafe(value)" else "value.address()"
+	private val StructMember.memAddressValue get() = if (isNullable) "memAddressSafe(value)" else "memAddress(value)"
+	private val StructMember.autoSize get() = "n$name($STRUCT)"
 		.let {
 			val type = this.nativeType as IntegerType
 			if (!type.unsigned)
@@ -1731,7 +1730,7 @@ $indent */""")
 	else
 		bufferMethodMap[javaType] ?: throw UnsupportedOperationException("Unsupported struct member java type: $className.${member.name} ($javaType)")
 
-	override val skipNative: Boolean get() = !nativeLayout && members.isNotEmpty()
+	override val skipNative get() = !nativeLayout && members.isNotEmpty()
 
 	override fun PrintWriter.generateNative() {
 		print(HEADER)

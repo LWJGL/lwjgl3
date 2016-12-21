@@ -88,9 +88,9 @@ public final class JNI {
 		println("\n}")
 	}
 
-	private val NativeType.nativeType: String get() = if (this.isPointer) "intptr_t" else this.jniFunctionType
+	private val NativeType.nativeType get() = if (this.isPointer) "intptr_t" else this.jniFunctionType
 
-	private val NativeType.jniFunctionTypeArray: String get() = if (this is ArrayType) "j${(this.mapping as PointerMapping).primitive}Array" else this.jniFunctionType
+	private val NativeType.jniFunctionTypeArray get() = if (this is ArrayType) "j${(this.mapping as PointerMapping).primitive}Array" else this.jniFunctionType
 	private fun NativeType.jniFunctionTypeArrayCritical(index: Int) = if (this is ArrayType) "jint length$index, j${(this.mapping as PointerMapping).primitive}*" else this.jniFunctionType
 
 	override fun PrintWriter.generateNative() {
@@ -171,7 +171,7 @@ JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jc
 	}
 }
 
-private val NativeType.jniSignature: String get() = this.mapping.jniSignature
+private val NativeType.jniSignature get() = this.mapping.jniSignature
 
 private open class Signature constructor(
 	val callingConvention: CallingConvention,

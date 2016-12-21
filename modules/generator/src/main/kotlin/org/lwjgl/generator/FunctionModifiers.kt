@@ -46,7 +46,7 @@ class Code(
 ) : FunctionModifier {
 	companion object {
 		// Used to avoid null checks
-		private val NO_STATEMENTS: List<Statement> = ArrayList(0)
+		private val NO_STATEMENTS = ArrayList<Statement>(0)
 		internal val NO_CODE = Code()
 	}
 
@@ -55,7 +55,7 @@ class Code(
 		val applyTo: ApplyTo = ApplyTo.BOTH
 	)
 
-	override val isSpecial: Boolean get() =
+	override val isSpecial get() =
 	Code.NO_STATEMENTS !== javaInit ||
 	Code.NO_STATEMENTS !== javaBeforeNative ||
 	Code.NO_STATEMENTS !== javaAfterNative ||
@@ -136,7 +136,7 @@ val internal = AccessModifier(Access.INTERNAL)
 
 /** Overrides the native function name. This is useful for functions like Windows functions that have both a Unicode (W suffix) and ANSI version (A suffix). */
 class NativeName(val nativeName: String) : FunctionModifier {
-	internal val name: String get() = if (nativeName.contains(' ')) nativeName else "\"$nativeName\""
+	internal val name get() = if (nativeName.contains(' ')) nativeName else "\"$nativeName\""
 
 	override val isSpecial = false
 }

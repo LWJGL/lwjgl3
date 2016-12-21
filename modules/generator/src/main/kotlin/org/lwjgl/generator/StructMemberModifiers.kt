@@ -13,7 +13,7 @@ object ConstMember : StructMemberModifier {
 }
 
 @Suppress("unused")
-val Struct.const: ConstMember get() = ConstMember
+val Struct.const get() = ConstMember
 
 /*
 	required AutoSize + non-null reference: ref must not be null and size must not be 0.
@@ -122,4 +122,4 @@ object NullableMember : StructMemberModifier {
 
 /** Marks a pointer member as nullable. */
 @Suppress("unused")
-val Struct.nullable: NullableMember get() = NullableMember
+val Struct.nullable get() = NullableMember

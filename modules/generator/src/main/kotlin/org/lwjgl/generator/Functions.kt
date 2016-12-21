@@ -26,15 +26,15 @@ import java.io.*
 
 // Global definitions
 
-internal val ADDRESS = "address()"
+internal const val ADDRESS = "address()"
 
-val RESULT = "__result"
-internal val POINTER_POSTFIX = "Address"
-internal val MAP_OLD = "old_buffer"
-internal val MAP_LENGTH = "length"
-val FUNCTION_ADDRESS = "__functionAddress"
+const val RESULT = "__result"
+internal const val POINTER_POSTFIX = "Address"
+internal const val MAP_OLD = "old_buffer"
+internal const val MAP_LENGTH = "length"
+const val FUNCTION_ADDRESS = "__functionAddress"
 
-internal val JNIENV = "__env"
+internal const val JNIENV = "__env"
 
 /** Special parameter that generates an explicit function address parameter. */
 val EXPLICIT_FUNCTION_ADDRESS = voidptr.IN(FUNCTION_ADDRESS, "the function address")
@@ -63,7 +63,7 @@ abstract class Function(
 		map
 	}()
 
-	protected val hasNativeParams: Boolean = getNativeParams().any()
+	protected val hasNativeParams = getNativeParams().any()
 
 	fun getParam(paramName: String) = paramMap[paramName] ?: throw IllegalArgumentException("Referenced parameter does not exist: $simpleName.$paramName")
 	inline fun getParams(crossinline predicate: (Parameter) -> Boolean) = parameters.asSequence().filter {
@@ -112,11 +112,11 @@ class NativeClassFunction(
 		return this
 	}
 
-	val functionAddress: String get() = if (has<NativeName>()) get<NativeName>().name else "\"$name\""
+	val functionAddress get() = if (has<NativeName>()) get<NativeName>().name else "\"${this.name}\""
 
-	val nativeName: String get() = if (has<NativeName>() && !get<NativeName>().nativeName.contains(' ')) get<NativeName>().nativeName else name
+	val nativeName get() = if (has<NativeName>() && !get<NativeName>().nativeName.contains(' ')) get<NativeName>().nativeName else this.name
 
-	internal val accessModifier: String
+	internal val accessModifier
 		get() = (if (has<AccessModifier>()) get<AccessModifier>().access else nativeClass.access).modifier
 
 	fun stripPostfix(functionName: String = name, stripType: Boolean): String {
@@ -163,65 +163,67 @@ class NativeClassFunction(
 		return name.substring(0, name.length - cutCount) + postfix
 	}
 
-	val javaDocLink: String
-		get() = "#$simpleName()"
+	val javaDocLink
+		get() = "#${this.simpleName}()"
 
 	internal val hasFunctionAddressParam: Boolean by lazy(LazyThreadSafetyMode.NONE) {
 		nativeClass.binding != null && (nativeClass.binding.apiCapabilities !== APICapabilities.JNI_CAPABILITIES || hasParam { it.nativeType is ArrayType })
 	}
 
-	internal val hasExplicitFunctionAddress: Boolean
-		get() = parameters.isNotEmpty() && parameters[0] === EXPLICIT_FUNCTION_ADDRESS
+	internal val hasExplicitFunctionAddress
+		get() = this.parameters.isNotEmpty() && this.parameters[0] === EXPLICIT_FUNCTION_ADDRESS
 
-	private val hasNativeCode: Boolean
-		get() = (has<Code>() && get<Code>().let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || parameters.contains(JNI_ENV)
+	private val hasNativeCode
+		get() = (has<Code>() && get<Code>().let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || this.parameters.contains(JNI_ENV)
 
-	internal val hasCustomJNIWithIgnoreAddress: Boolean get() = (returns.isStructValue || hasNativeCode) && (!has<Macro>() || get<Macro>().expression == null)
+	internal val hasCustomJNIWithIgnoreAddress get() = (this.returns.isStructValue || hasNativeCode) && (!has<Macro>() || get<Macro>().expression == null)
 
 	internal val hasCustomJNI: Boolean by lazy(LazyThreadSafetyMode.NONE) {
 		(!hasFunctionAddressParam || returns.isStructValue || hasNativeCode) && (!has<Macro>() || get<Macro>().expression == null)
 	}
 
-	private val isNativeOnly: Boolean
+	private val isNativeOnly
 		get() = nativeClass.binding == null &&
 		        !(
 			        modifiers.any { it.value.isSpecial }
-			        || returns.isSpecial
+			        || this.returns.isSpecial
 			        || hasParam { it.isSpecial }
 			        || has<NativeName>()
 			        || (has<Macro>() && get<Macro>().expression != null)
 		         )
 
-	internal val hasUnsafeMethod: Boolean by lazy(LazyThreadSafetyMode.NONE) {
+	internal val hasUnsafeMethod by lazy(LazyThreadSafetyMode.NONE) {
 		hasFunctionAddressParam
 		&& !(hasExplicitFunctionAddress && hasNativeCode)
-		&& (returns.hasUnsafe || hasParam { it.hasUnsafe || it has MapToInt })
+		&& (this.returns.hasUnsafe || hasParam { it.hasUnsafe || it has MapToInt })
 		&& !has<Address>()
 		&& !hasParam { it.nativeType is ArrayType }
 		&& (!has<Macro>() || get<Macro>().expression == null)
 	}
 
-	internal val hasArrayOverloads: Boolean
-		get() = !has<OffHeapOnly>() && parameters
+	internal val hasArrayOverloads
+		get() = !has<OffHeapOnly>() && this.parameters
 			.count { it.isAutoSizeResultOut }
-			.let { autoSizeResultOutParams -> parameters.asSequence().any { it.has<MultiType>() || it.isArrayParameter(autoSizeResultOutParams) } }
+			.let { autoSizeResultOutParams -> this.parameters.asSequence().any { it.has<MultiType>() || it.isArrayParameter(autoSizeResultOutParams) } }
 
-	private val returnsJavaMethodType: String
-		get() = if (returns.nativeType is PointerType ) {
-			if (returns.nativeType.elementType is StructType && hasParam { it.has<AutoSizeResultParam>() })
-				"${returns.javaMethodType}.Buffer"
-			else if (returns.nativeType is CallbackType)
-				returns.nativeType.className
-			else
-				returns.javaMethodType
-		} else
-			returns.javaMethodType
+	private val returnsJavaMethodType
+		get() = this.returns.let {
+			if (it.nativeType is PointerType) {
+				if (it.nativeType.elementType is StructType && hasParam { it.has<AutoSizeResultParam>() })
+					"${it.javaMethodType}.Buffer"
+				else if (it.nativeType is CallbackType)
+					it.nativeType.className
+				else
+					it.javaMethodType
+			} else
+				it.javaMethodType
+		}
 
-	private val returnsNativeMethodType: String
-		get() = if (returns.isStructValue) "void" else returns.nativeType.nativeMethodType
+	private val returnsNativeMethodType
+		get() = this.returns.let { if (it.isStructValue) "void" else it.nativeType.nativeMethodType }
 
-	private val returnsJniFunctionType: String
-		get() = if (returns.isStructValue) "void" else returns.nativeType.jniFunctionType
+	private val returnsJniFunctionType
+		get() = this.returns.let { if (it.isStructValue) "void" else it.nativeType.jniFunctionType }
 
 	private fun hasAutoSizePredicate(reference: Parameter): (Parameter) -> Boolean = { it.has<AutoSize>() && it.get<AutoSize>().hasReference(reference.name) }
 
@@ -233,21 +235,23 @@ class NativeClassFunction(
 		throw IllegalArgumentException("$msg [${nativeClass.className}.${this@NativeClassFunction.name}, parameter: ${this.name}]")
 	}
 
-	private val Parameter.asJavaMethodParam: String
-		get() = if (nativeType is PointerType && nativeType.elementType is StructType && (has<Check>() || getReferenceParam<AutoSize>(name) != null))
-			"$javaMethodType.Buffer $name"
-		else if (nativeType is ArrayType)
-			"${(nativeType.mapping as PointerMapping).primitive}[] $name"
-		else if (has<MapToInt>())
-			"int $name"
-		else
-			"$javaMethodType $name"
+	private val Parameter.asJavaMethodParam
+		get() = this.name.let { name ->
+			if (nativeType is PointerType && nativeType.elementType is StructType && (has<Check>() || getReferenceParam<AutoSize>(name) != null))
+				"$javaMethodType.Buffer $name"
+			else if (nativeType is ArrayType)
+				"${(nativeType.mapping as PointerMapping).primitive}[] $name"
+			else if (has<MapToInt>())
+				"int $name"
+			else
+				"$javaMethodType $name"
+		}
 
-	private val Parameter.asNativeMethodParam: String get() =
+	private val Parameter.asNativeMethodParam get() =
 	if (nativeType is ArrayType)
-		"${(nativeType.mapping as PointerMapping).primitive}[] $name"
+		"${(nativeType.mapping as PointerMapping).primitive}[] ${this.name}"
 	else
-		"${nativeType.nativeMethodType} $name"
+		"${nativeType.nativeMethodType} ${this.name}"
 
 	private fun Parameter.asNativeMethodCallParam(mode: GenerationMode) = when {
 		nativeType.dereference is StructType || nativeType is ObjectType
@@ -270,7 +274,7 @@ class NativeClassFunction(
 		else                                             -> name
 	}
 
-	private val Parameter.isFunctionProvider: Boolean
+	private val Parameter.isFunctionProvider
 		get() = nativeType is ObjectType && nativeClass.binding != null && nativeClass.binding.apiCapabilities === APICapabilities.PARAM_CAPABILITIES
 
 	/** Validates parameters with modifiers that reference other parameters. */

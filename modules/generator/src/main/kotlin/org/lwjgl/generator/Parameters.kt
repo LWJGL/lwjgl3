@@ -11,13 +11,13 @@ interface QualifiedType {
 	val nativeType: NativeType
 }
 
-internal val QualifiedType.hasUnsafe: Boolean
+internal val QualifiedType.hasUnsafe
 		get() = (nativeType is PointerType && (nativeType.mapping !== PointerMapping.OPAQUE_POINTER || nativeType is CallbackType)) || nativeType is StructType
 
-internal val QualifiedType.isBufferPointer: Boolean
+internal val QualifiedType.isBufferPointer
 	get() = nativeType.let { it is PointerType && it.mapping !== PointerMapping.OPAQUE_POINTER && it.elementType !is StructType }
 
-internal val QualifiedType.javaMethodType: String
+internal val QualifiedType.javaMethodType
 	get() = nativeType.javaMethodType
 
 class ReturnValue(override val nativeType: NativeType) : QualifiedType {
@@ -28,13 +28,13 @@ class ReturnValue(override val nativeType: NativeType) : QualifiedType {
 
 	// --- [ Helper functions & properties ] ---
 
-	internal val isSpecial: Boolean
+	internal val isSpecial
 		get() = (hasUnsafe && nativeType !is ArrayType)
 
-	internal val isVoid: Boolean
+	internal val isVoid
 		get() = nativeType.mapping === TypeMapping.VOID
 
-	internal val isStructValue: Boolean
+	internal val isStructValue
 		get() = nativeType is StructType
 
 	internal fun toNativeType(hasConst: Boolean, binding: APIBinding?) =
@@ -92,7 +92,7 @@ class Parameter(
 
 	// --- [ Helper functions & properties ] ----
 
-	internal val isSpecial: Boolean
+	internal val isSpecial
 		get() = (hasUnsafe && nativeType !is ArrayType) || when (nativeType.mapping) {
 			PointerMapping.OPAQUE_POINTER -> (nativeType is ObjectType || !has(nullable)) && this !== JNI_ENV
 			PrimitiveMapping.BOOLEAN4     -> true
@@ -100,7 +100,7 @@ class Parameter(
 		} || modifiers.any { it.value.isSpecial }
 
 	/** Returns true if this is an output parameter with the AutoSizeResult modifier. */
-	internal val isAutoSizeResultOut: Boolean
+	internal val isAutoSizeResultOut
 		get() = paramType === OUT && has<AutoSizeResultParam>()
 
 	internal fun isArrayParameter(autoSizeResultOutParams: Int) = nativeType.mapping.isArray && (!isAutoSizeResultOut || autoSizeResultOutParams != 1)

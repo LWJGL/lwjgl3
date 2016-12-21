@@ -8,7 +8,7 @@ import java.io.*
 import java.nio.file.*
 
 
-val HEADER = """/*
+const val HEADER = """/*
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
@@ -32,7 +32,7 @@ class Preamble {
 	private var nativeImports: MutableList<String> = EMPTY_IMPORTS
 	private var nativeDirectives: MutableList<NativeDefine> = EMPTY_DIRECTIVES
 
-	internal val hasNativeDirectives: Boolean get() = nativeImports.isNotEmpty() || nativeDirectives.isNotEmpty()
+	internal val hasNativeDirectives get() = nativeImports.isNotEmpty() || nativeDirectives.isNotEmpty()
 
 	fun javaImport(vararg classes: String) {
 		if (javaImports === EMPTY_IMPORTS)
@@ -99,7 +99,7 @@ class Preamble {
 
 private val JNI_UNDERSCORE_ESCAPE_PATTERN = "_".toRegex()
 
-internal val String.asJNIName: String
+internal val String.asJNIName
 	get() = if (this.indexOf('_') == -1)
 		this
 	else
@@ -318,8 +318,8 @@ abstract class GeneratorTargetNative(
 	val nativeSubPath: String = ""
 ) : GeneratorTarget(packageName, className) {
 
-	internal val nativeFileName: String
-		get() = "${packageName.replace('.', '_')}_$className"
+	internal val nativeFileName
+		get() = "${this.packageName.replace('.', '_')}_${this.className}"
 
 	internal val nativeFileNameJNI = packageName
 		.splitToSequence('.')
@@ -327,7 +327,7 @@ abstract class GeneratorTargetNative(
 		.map { it.asJNIName }
 		.joinToString("_")
 
-	open val skipNative: Boolean = false
+	open val skipNative = false
 
 	protected fun PrintWriter.generateNativePreamble() {
 		print(HEADER)

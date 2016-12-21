@@ -63,7 +63,7 @@ enum class Binding(val key: String, val packageName: String) {
 		fun isEnabled(packageName: String) = Binding.PACKAGES[packageName]?.enabled ?: true
 	}
 
-	val enabled: Boolean
+	val enabled
 		get() = System.getProperty(key, "false").toBoolean()
 }
 
@@ -258,7 +258,7 @@ class Generator(
 }""")
 				}
 
-				override val skipNative: Boolean
+				override val skipNative
 					get() = !setupAllocator
 
 				override fun PrintWriter.generateNative() {
@@ -452,7 +452,7 @@ class Generator(
 
 private val packageLastModifiedMap: MutableMap<String, Long> = ConcurrentHashMap()
 
-internal val Path.lastModified: Long get() = if (Files.isRegularFile(this))
+internal val Path.lastModified get() = if (Files.isRegularFile(this))
 	Files.getLastModifiedTime(this).toMillis()
 else
 	0L
@@ -568,7 +568,7 @@ internal fun <T> Sequence<T>.forEachWithMore(moreOverride: Boolean = false, appl
 }
 
 /** Returns the string with the first letter uppercase. */
-internal val String.upperCaseFirst: String
+internal val String.upperCaseFirst
 	get() = if (this.length <= 1)
 		this.toUpperCase()
 	else

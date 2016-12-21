@@ -8,9 +8,9 @@ import java.io.*
 import java.lang.Math.*
 import java.nio.file.*
 
-val EXT_FLAG = ""
+const val EXT_FLAG = ""
 
-val NULL = "{@code NULL}"
+const val NULL = "{@code NULL}"
 
 enum class CallingConvention(val method: String) {
 	DEFAULT("invoke"),
@@ -328,13 +328,13 @@ class NativeClass(
 
 	private val customMethods = ArrayList<String>()
 
-	internal val hasBody: Boolean
+	internal val hasBody
 		get() = binding is SimpleBinding || !constantBlocks.isEmpty() || hasNativeFunctions || customMethods.isNotEmpty()
 
-	val hasNativeFunctions: Boolean
+	val hasNativeFunctions
 		get() = _functions.isNotEmpty()
 
-	val link: String get() = "{@link ${this.className} ${this.templateName}}"
+	val link get() = "{@link ${this.className} ${this.templateName}}"
 
 	override fun processDocumentation(documentation: String, forcePackage: Boolean): String =
 		processDocumentation(documentation, prefixConstant, prefixMethod, forcePackage = forcePackage)
@@ -562,7 +562,7 @@ class NativeClass(
 		print("\n}")
 	}
 
-	override val skipNative: Boolean get() = functions.none { it.hasCustomJNI }
+	override val skipNative get() = functions.none { it.hasCustomJNI }
 
 	override fun PrintWriter.generateNative() {
 		print(HEADER)
@@ -638,7 +638,7 @@ class NativeClass(
 	infix fun String.expr(expression: String): Constant<String> = ConstantExpression(this, expression, true)
 
 	/** Adds a new enum constant. */
-	val String.enum: Constant<EnumValue> get() = Constant(this, EnumValue())
+	val String.enum get() = Constant(this, EnumValue())
 
 	infix fun String.enum(documentation: String) =
 		Constant(this, EnumValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))

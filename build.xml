@@ -137,7 +137,7 @@
 
 		<echo message="Compiling Kotlin generator..." level="info" taskname="Generator" unless:set="generator-uptodate"/>
 		<kotlinc moduleName="Generator" output="${bin.generator}" printVersion="true" unless:set="generator-uptodate">
-			<compilerarg line="-jvm-target 1.8"/>
+			<!--<compilerarg line="-jvm-target 1.8"/>-->
 			<compilerarg value="-Xno-call-assertions"/>
 			<compilerarg value="-Xno-param-assertions"/>
 			<compilerarg value="-Xreport-perf"/>

@@ -8,9 +8,9 @@ import java.io.*
 import kotlin.reflect.*
 
 // Extension properties for numeric literals.
-val Int.b: Byte get() = this.toByte()
-val Int.s: Short get() = this.toShort()
-val Long.i: Int get() = this.toInt()
+val Int.b get() = this.toByte()
+val Int.s get() = this.toShort()
+val Long.i get() = this.toInt()
 
 open class ConstantType<T : Any>(
 	val javaType: String,
@@ -219,8 +219,8 @@ class ConstantBlock<T : Any>(
 			print(constantType.print(constant.value!!))
 	}
 
-	val javaDocLinks: String get() = javaDocLinks(null)
-	val javaDocLinksSkipCount: String get() = javaDocLinks { !it.name.endsWith("_COUNT") }
+	val javaDocLinks get() = javaDocLinks(null)
+	val javaDocLinksSkipCount get() = javaDocLinks { !it.name.endsWith("_COUNT") }
 
 	fun javaDocLinks(predicate: ((Constant<T>) -> Boolean)?) = constants.asSequence()
 		.let {

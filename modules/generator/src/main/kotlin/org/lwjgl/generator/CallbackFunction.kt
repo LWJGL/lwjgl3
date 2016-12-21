@@ -14,18 +14,18 @@ class CallbackFunction(
 ) : GeneratorTarget(packageName, className) {
 
 	internal var functionDoc: (CallbackFunction) -> String = { "" }
-	var additionalCode: String = ""
+	var additionalCode = ""
 
 	private var stdcall = false
 	fun useSystemCallConvention() {
 		stdcall = true
 	}
 
-	private val signatureJava: String = signature.asSequence().map {
+	private val signatureJava = signature.asSequence().map {
 		"${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType} ${it.name}"
 	}.joinToString(", ")
 
-	internal val NativeType.dyncall: Char
+	internal val NativeType.dyncall
 		get() = when (this) {
 			is PointerType   -> 'p'
 			is PrimitiveType -> when (mapping) {
@@ -43,7 +43,7 @@ class CallbackFunction(
 			else             -> if (mapping === TypeMapping.VOID) 'v' else throw IllegalArgumentException("Unsupported callback native type: $this")
 		}
 
-	private val NativeType.argType: String
+	private val NativeType.argType
 		get() = if (this is PointerType || mapping === PrimitiveMapping.POINTER)
 			"Pointer"
 		else if (mapping == PrimitiveMapping.BOOLEAN)
