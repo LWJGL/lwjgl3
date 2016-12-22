@@ -10,7 +10,7 @@ import org.lwjgl.generator.*
 val NV_stream_metadata = "NVStreamMetadata".nativeClassEGL("NV_stream_metadata", postfix = NV) {
 	documentation =
 		"""
-		Native bindings to the ${registryLink("NV", "EGL_NV_stream_metadata")} extension.
+		Native bindings to the $registryLink extension.
 
 		Application suites which make use of streams to transmit images may need to communicate additional data between the producer and consumer, synchronized
 		with the frame updates. This data may change infrequently, such as a movie title and track number to be displayed to the user, or every frame, such as

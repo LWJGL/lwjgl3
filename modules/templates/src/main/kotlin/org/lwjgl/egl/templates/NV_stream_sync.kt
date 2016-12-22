@@ -10,7 +10,7 @@ import org.lwjgl.generator.*
 val NV_stream_sync = "NVStreamSync".nativeClassEGL("NV_stream_sync", postfix = NV) {
 	documentation =
 		"""
-		Native bindings to the ${registryLink("NV", "EGL_NV_stream_sync")} extension.
+		Native bindings to the $registryLink extension.
 
 		This extension defines a new type of reusable sync object. This sync object will be signaled each time a new image frame becomes available in an
 		EGLStream for the consumer to consume.

@@ -113,3 +113,53 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
 		Check(1)..EGLuint64KHR_p.OUT("value", "")
 	)
 }
+
+val KHR_stream_attrib = "KHRStreamAttrib".nativeClassEGL("KHR_stream_attrib", postfix = KHR) {
+	documentation = "See ${KHR_stream.link}."
+
+	EGLStreamKHR(
+		"CreateStreamAttribKHR",
+		"",
+
+		EGLDisplay.IN("dpy", ""),
+		nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+	)
+
+	EGLBoolean(
+		"SetStreamAttribKHR",
+		"",
+
+		EGLDisplay.IN("dpy", ""),
+		EGLStreamKHR.IN("stream", ""),
+		EGLenum.IN("attribute", ""),
+		EGLAttrib.IN("value", "")
+	)
+
+	EGLBoolean(
+		"QueryStreamAttribKHR",
+		"",
+
+		EGLDisplay.IN("dpy", ""),
+		EGLStreamKHR.IN("stream", ""),
+		EGLenum.IN("attribute", ""),
+		Check(1)..EGLAttrib_p.OUT("value", "")
+	)
+
+	EGLBoolean(
+		"StreamConsumerAcquireAttribKHR",
+		"",
+
+		EGLDisplay.IN("dpy", ""),
+		EGLStreamKHR.IN("stream", ""),
+		nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+	)
+
+	EGLBoolean(
+		"StreamConsumerReleaseAttribKHR",
+		"",
+
+		EGLDisplay.IN("dpy", ""),
+		EGLStreamKHR.IN("stream", ""),
+		nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
+	)
+}

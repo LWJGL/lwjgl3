@@ -10,7 +10,7 @@ import org.lwjgl.generator.*
 val KHR_debug = "KHRDebug".nativeClassEGL("KHR_debug", postfix = KHR) {
 	documentation =
 		"""
-		Native bindings to the ${registryLink("KHR", "EGL_KHR_debug")} extension.
+		Native bindings to the $registryLink extension.
 
 		This extension allows EGL to notify applications when various events occur that may be useful during application development and debugging.
 

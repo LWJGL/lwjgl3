@@ -10,7 +10,7 @@ import org.lwjgl.generator.*
 val NV_stream_consumer_gltexture_yuv = "NVStreamConsumerGLTextureYUV".nativeClassEGL("NV_stream_consumer_gltexture_yuv", postfix = NV) {
 	documentation =
 		"""
-		Native bindings to the ${registryLink("NV", "EGL_NV_stream_consumer_gltexture_yuv")} extension.
+		Native bindings to the $registryLink extension.
 
 		The EGL_KHR_stream_consumer_gltexture extension allows EGLStream frames to be latched to a GL texture for use in rendering. These frames are assumed to
 		be stored in RGB format and accessed as such by shader programs. If the producer uses a different color space, the stream implementation must perform

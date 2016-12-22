@@ -148,3 +148,9 @@ val NV_post_convert_rounding = EXT_FLAG.nativeClassEGL("NV_post_convert_rounding
 		bit (888) destination buffer, and posting a component that is present in the source buffer, but not present in the destination buffer.
 		"""
 }
+
+val NV_stream_cross_object = EXT_FLAG.nativeClassEGL("NV_stream_cross_object", postfix = NV) { documentation = "See ${NV_stream_remote.link}." }
+val NV_stream_cross_display = EXT_FLAG.nativeClassEGL("NV_stream_cross_display", postfix = NV) { documentation = "See ${NV_stream_remote.link}." }
+val NV_stream_cross_process = EXT_FLAG.nativeClassEGL("NV_stream_cross_process", postfix = NV) { documentation = "See ${NV_stream_remote.link}." }
+val NV_stream_cross_partition = EXT_FLAG.nativeClassEGL("NV_stream_cross_partition", postfix = NV) { documentation = "See ${NV_stream_remote.link}." }
+val NV_stream_cross_system = EXT_FLAG.nativeClassEGL("NV_stream_cross_system", postfix = NV) { documentation = "See ${NV_stream_remote.link}." }

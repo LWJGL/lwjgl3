@@ -537,6 +537,21 @@ val arm_core_id = EXT_FLAG.nativeClassCL("arm_core_id", ARM) {
 }
 
 val intel_printf = EXT_FLAG.nativeClassCL("intel_printf", INTEL)
+val intel_subgroups_short = EXT_FLAG.nativeClassCL("intel_subgroups_short", INTEL) {
+	documentation =
+		"""
+        The goal of this extension is to allow programmers to improve the performance of applications operating on 16-bit data types by extending the subgroup
+        functions described in the ${intel_subgroups.link} extension to support 16-bit integer data types (shorts and ushorts). Specifically, the extension:
+		${ul(
+			"Extends the subgroup broadcast function to allow 16-bit integer values to be broadcast from one work item to all other work items in the subgroup.",
+			"Extends the subgroup scan and reduction functions to operate on 16-bit integer data types.",
+			"Extends the Intel subgroup shuffle functions to allow arbitrarily exchanging 16-bit integer values among work items in the subgroup.",
+			"Extends the Intel subgroup block read and write functions to allow reading and writing 16-bit integer data from images and buffers."
+		)}
+
+		Requires {@link CL12 OpenCL 1.2} and ${intel_subgroups.link}
+		"""
+}
 
 val nv_compiler_options = EXT_FLAG.nativeClassCL("nv_compiler_options", NV) {
 	documentation =
