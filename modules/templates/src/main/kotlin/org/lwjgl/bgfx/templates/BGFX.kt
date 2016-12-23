@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	IntConstant(
 		"API version",
 
-		"API_VERSION".."33"
+		"API_VERSION".."34"
 	)
 
 	ShortConstant(
@@ -1016,7 +1016,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"make_ref",
 		"""
 		Makes reference to data to pass to bgfx. Unlike #alloc() this call doesn't allocate memory for data. It just copies pointer to data.
-		
+
 		You must make sure data is available for at least 2 #frame() calls.
 		""",
 
@@ -1028,7 +1028,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"make_ref_release",
 		"""
 		Makes reference to data to pass to bgfx. Unlike #alloc() this call doesn't allocate memory for data. It just copies pointer to data.
-		
+
 		The {@code bgfx_release_fn_t} function pointer will release this memory after it's consumed. The {@code bgfx_release_fn_t} function must be able to be
 		called from any thread.
 		""",
@@ -1193,36 +1193,27 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		bgfx_dynamic_vertex_buffer_handle_t.IN("_handle", "the dynamic vertex buffer to destroy")
 	)
 
-	bool(
-		"check_avail_transient_index_buffer",
-		"Returns true if internal transient index buffer has enough space.",
+	uint32_t(
+		"get_avail_transient_index_buffer",
+		"Returns number of available indices.",
 
-		uint32_t.IN("_num", "number of indices")
+		uint32_t.IN("_num", "number of required indices")
 	)
 
-	bool(
-		"check_avail_transient_vertex_buffer",
-		"Returns true if internal transient vertex buffer has enough space.",
+	uint32_t(
+		"get_avail_transient_vertex_buffer",
+		"Returns number of available vertices.",
 
-		uint32_t.IN("_num", "number of vertices"),
+		uint32_t.IN("_num", "number of required vertices"),
 		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex declaration")
 	)
 
-	bool(
-		"check_avail_instance_data_buffer",
-		"Returns true if internal instance data buffer has enough space.",
+	uint32_t(
+		"get_avail_instance_data_buffer",
+		"Returns number of available instance buffer slots.",
 
-		uint32_t.IN("_num", "number of instances"),
+		uint32_t.IN("_num", "number of required instances"),
 		MapToInt..uint16_t.IN("_stride", "stride per instance")
-	)
-
-	bool(
-		"check_avail_transient_buffers",
-		"Returns true if both internal transient index and vertex buffer have enough space.",
-
-		uint32_t.IN("_numVertices", "number of vertices"),
-		const..bgfx_vertex_decl_t_p.IN("_decl", "vertex declaration"),
-		uint32_t.IN("_numIndices", "number of indices")
 	)
 
 	void(
@@ -1312,7 +1303,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"get_shader_uniforms",
 		"""
 		Returns num of uniforms, and uniform handles used inside shader.
-		
+
 		Only non-predefined uniforms are returned.
 		""",
 
@@ -1360,7 +1351,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"is_texture_valid",
 		"Validate texture parameters.",
 
-		MapToInt..uint16_t.IN("_depth", "depth"),
+		MapToInt..uint16_t.IN("_depth", "depth dimension of volume texture"),
 		bool.IN("_cubeMap", "indicates that texture contains cubemap"),
 		MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array"),
 		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
@@ -1374,7 +1365,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		bgfx_texture_info_t_p.OUT("_info", "resulting texture info structure"),
 		MapToInt..uint16_t.IN("_width", "width"),
 		MapToInt..uint16_t.IN("_height", "height"),
-		MapToInt..uint16_t.IN("_depth", "depth"),
+		MapToInt..uint16_t.IN("_depth", "depth dimension of volume texture"),
 		bool.IN("_cubeMap", "indicates that texture contains cubemap"),
 		bool.IN("_hasMips", "indicates that texture contains full mip-map chain"),
 		MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array"),
@@ -1633,6 +1624,10 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"create_uniform",
 		"""
 		Creates shader uniform parameter.
+
+		Uniform names are unique. It's valid to call {@code bgfx_create_uniform} multiple times with the same uniform name. The library will always return the
+		same handle, but the handle reference count will be incremented. This means that the same number of #destroy_uniform() must be called to properly
+		destroy the uniform.
 
 		Predefined uniforms (declared in `bgfx_shader.sh`):
 		${ul(
@@ -2195,7 +2190,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"blit",
 		"""
 		Blits texture region between two textures.
-		
+
 		Destination texture must be create with #TEXTURE_BLIT_DST flag. Availability depends on #CAPS_TEXTURE_BLIT.
 		""",
 

@@ -83,7 +83,7 @@ val bgfx_memory_t_p = struct(BGFX_PACKAGE, "BGFXMemory", nativeName = "bgfx_memo
 val bgfx_transform_t_p = struct(BGFX_PACKAGE, "BGFXTransform", nativeName = "bgfx_transform_t", mutable = false) {
 	documentation = "Transform data."
 
-	float_p.member("data", "pointer to first matrix")
+	float_p.member("data", "pointer to first 4x4 matrix")
 	AutoSizeShl("4", "data")..uint16_t.member("num", "number of matrices")
 }.p
 
@@ -95,7 +95,7 @@ val bgfx_hmd_eye_t = struct(BGFX_PACKAGE, "BGFXHmdEye", nativeName = "bgfx_hmd_e
 	float.array("fov", "field of view (up, down, left, right)", size = 4)
 	float.array("viewOffset", "eye view matrix translation adjustment", size = 3)
 	float.array("projection", "eye projection matrix", size = 16)
-	float.array("pixelsPerTanAngle", "", size = 2)
+	float.array("pixelsPerTanAngle", "number of pixels that fit in tan(angle) = 1.", size = 2)
 }
 
 val bgfx_hmd_t_p = struct(BGFX_PACKAGE, "BGFXHmd", nativeName = "bgfx_hmd_t", mutable = false) {
@@ -123,10 +123,14 @@ val bgfx_stats_t_p = struct(BGFX_PACKAGE, "BGFXStats", nativeName = "bgfx_stats_
 	int64_t.member("waitRender", "time spent waiting for render backend thread to finish issuing draw commands to underlying graphics API")
 	int64_t.member("waitSubmit", "time spent waiting for submit thread to advance to next frame")
 
-	uint16_t.member("width", "")
-	uint16_t.member("height", "")
-	uint16_t.member("textWidth", "")
-	uint16_t.member("textHeight", "")
+	uint32_t.member("numDraw", "number of draw calls submitted")
+    uint32_t.member("numCompute", "number of compute calls submitted")
+    uint32_t.member("maxGpuLatency", "GPU driver latency")
+
+	uint16_t.member("width", "backbuffer width in pixels")
+	uint16_t.member("height", "backbuffer height in pixels")
+	uint16_t.member("textWidth", "debug text width in characters")
+	uint16_t.member("textHeight", "debug text height in characters")
 }.p
 
 val bgfx_vertex_decl_t_p = struct(BGFX_PACKAGE, "BGFXVertexDecl", nativeName = "bgfx_vertex_decl_t") {
