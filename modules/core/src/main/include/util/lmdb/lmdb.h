@@ -97,11 +97,12 @@
  *	  transactions.  Each transaction belongs to one thread.  See below.
  *	  The #MDB_NOTLS flag changes this for read-only transactions.
  *
- *	- Use an MDB_env* in the process which opened it, without fork()ing.
+ *	- Use an MDB_env* in the process which opened it, not after fork().
  *
  *	- Do not have open an LMDB database twice in the same process at
  *	  the same time.  Not even from a plain open() call - close()ing it
- *	  breaks flock() advisory locking.
+ *	  breaks fcntl() advisory locking.  (It is OK to reopen it after
+ *	  fork() - exec*(), since the lockfile has FD_CLOEXEC set.)
  *
  *	- Avoid long-lived transactions.  Read transactions prevent
  *	  reuse of pages freed by newer write transactions, thus the
@@ -827,6 +828,10 @@ int  mdb_env_get_path(MDB_env *env, const char **path);
 
 	/** @brief Return the filedescriptor for the given environment.
 	 *
+	 * This function may be called after fork(), so the descriptor can be
+	 * closed before exec*().  Other LMDB file descriptors have FD_CLOEXEC.
+	 * (Until LMDB 0.9.18, only the lockfile had that.)
+	 *
 	 * @param[in] env An environment handle returned by #mdb_env_create()
 	 * @param[out] fd Address of a mdb_filehandle_t to contain the descriptor.
 	 * @return A non-zero error value on failure and 0 on success. Some possible
@@ -1135,8 +1140,9 @@ int  mdb_txn_renew(MDB_txn *txn);
 	 *		This flag may only be used in combination with #MDB_DUPSORT. This option
 	 *		tells the library that the data items for this database are all the same
 	 *		size, which allows further optimizations in storage and retrieval. When
-	 *		all data items are the same size, the #MDB_GET_MULTIPLE and #MDB_NEXT_MULTIPLE
-	 *		cursor operations may be used to retrieve multiple items at once.
+	 *		all data items are the same size, the #MDB_GET_MULTIPLE, #MDB_NEXT_MULTIPLE
+	 *		and #MDB_PREV_MULTIPLE cursor operations may be used to retrieve multiple
+	 *		items at once.
 	 *	<li>#MDB_INTEGERDUP
 	 *		This option specifies that duplicate data items are binary integers,
 	 *		similar to #MDB_INTEGERKEY keys.

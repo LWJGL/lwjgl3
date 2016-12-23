@@ -1115,8 +1115,8 @@ ENABLE_WARNINGS()""")
 				"""#DUPFIXED
 
 				This flag may only be used in combination with #DUPSORT. This option tells the library that the data items for this database are all the same
-				size, which allows further optimizations in storage and retrieval. When all data items are the same size, the #GET_MULTIPLE and #NEXT_MULTIPLE
-				cursor operations may be used to retrieve multiple items at once.
+				size, which allows further optimizations in storage and retrieval. When all data items are the same size, the #GET_MULTIPLE, #NEXT_MULTIPLE and
+				#PREV_MULTIPLE cursor operations may be used to retrieve multiple items at once.
 				""",
 				"""#INTEGERDUP
 
