@@ -10,9 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.channels.FileChannel.MapMode;
 import java.nio.file.*;
 import java.util.zip.CRC32;
 
@@ -146,8 +144,11 @@ final class SharedLibraryLoader {
 	 */
 	private static void extractFile(URL libURL, Path extractedFile) throws IOException {
 		if ( Files.exists(extractedFile) ) {
-			try ( InputStream input = libURL.openStream() ) {
-				if ( crc(input) == crc(extractedFile) ) {
+			try (
+				InputStream input = libURL.openStream();
+				InputStream target = Files.newInputStream(extractedFile);
+			) {
+				if ( crc(input) == crc(target) ) {
 					apiLog(String.format("\tFound at: %s", extractedFile));
 					return;
 				}
@@ -176,24 +177,6 @@ final class SharedLibraryLoader {
 		byte[] buffer = new byte[8 * 1024];
 		for ( int n; (n = input.read(buffer)) != -1; )
 			crc.update(buffer, 0, n);
-
-		return crc.getValue();
-	}
-
-	/**
-	 * Returns a CRC of the specified file.
-	 *
-	 * @param input the file path
-	 *
-	 * @return the CRC
-	 */
-	private static long crc(Path input) throws IOException {
-		CRC32 crc = new CRC32();
-
-		try ( FileChannel fc = FileChannel.open(input) ) {
-			MappedByteBuffer buffer = fc.map(MapMode.READ_ONLY, 0, fc.size());
-			crc.update(buffer);
-		}
 
 		return crc.getValue();
 	}

@@ -10,9 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.channels.FileChannel.MapMode;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -345,9 +343,10 @@ public final class Library {
 
 	private static byte[] getSHA1(Path libFile) throws NoSuchAlgorithmException, IOException {
 		MessageDigest digest = MessageDigest.getInstance("SHA-1");
-		try ( FileChannel fc = FileChannel.open(libFile) ) {
-			MappedByteBuffer buffer = fc.map(MapMode.READ_ONLY, 0, fc.size());
-			digest.update(buffer);
+		try ( InputStream input = Files.newInputStream(libFile) ) {
+			byte[] buffer = new byte[8 * 1024];
+			for ( int n; (n = input.read(buffer)) != -1; )
+				digest.update(buffer, 0, n);
 		}
 		return digest.digest();
 	}
