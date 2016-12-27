@@ -1,53 +1,46 @@
-### 3.1.0
+### 3.1.1
 
-_Released 2016 Oct 30_
+_Released 2016 Dec 27_
 
 This build includes the following changes:
 
 #### Bindings
 
-- Bindings have been split into modules and are available as separate artifacts. (#100)
-    * The [download configurator](https://www.lwjgl.org/download) on the website can be used to customize LWJGL builds and Maven/Gradle projects.
-- Added [LMDB](http://lmdb.tech/doc/) bindings.
-- Added [Nuklear](https://github.com/vurtun/nuklear) bindings. (#101)
-- Added [Tiny File Dialogs](https://sourceforge.net/projects/tinyfiledialogs/) bindings.
-- Added [bgfx](https://github.com/bkaradzic/bgfx) bindings. (#240)
-- Added support for new EGL, OpenCL, OpenGL, OpenGL ES and Vulkan extensions.
-- Updated all bindings to latest versions.
-- Vulkan javadoc is now almost identical to the Vulkan man pages, with links to the online Vulkan specification.
+- Added [Assimp](http://www.assimp.org/) bindings.
+- bgfx: Updated to API version 34 (up from 28)
+- jemalloc: Updated to version 4.4.0 (up from 4.2.1)
+- LibOVR: Updated to version 1.10.0 (up from 1.9.0)
+- nuklear: Updated to version 1.191 (up from 1.17)
+- Vulkan: Updated to version 1.0.38 (up from 1.0.32)
+- stb: Updated stb_image to 2.13 (up from 2.12)
+- tinyfiledialogs: Updated to version 2.7.2 (up from 2.6.1)
 
 #### Improvements
 
-- Generator: Removed buffer object binding checks. (#197)
-- Generator: Added support for mapping `byte/short` parameters to `int`.
-- Generator: Added support for `va_list` parameters.
-- Generator: Reduced bytecode size of generated methods.
-- Generator: The Vulkan bindings are now [automatically generated](https://github.com/LWJGL/lwjgl3-vulkangen).
-- Optimized `strlen` methods used internally by LWJGL.
-- Optimized misaligned `memSet` and `memCopy`.
-- Added support for stack allocations with custom alignment.
-- Removed allocation functionality from read-only, externally managed structs.
-- Improved library loading diagnostics and added `Configuration.DEBUG_LOADER` option.
-- Libraries extracted by the `SharedLibraryLoader` are now locked to avoid conflicts with other processes (e.g. antivirus software). (#225)
-- Simplified javadoc of unsafe versions.
+- Refactored function pointer lookups in OpenAL, OpenGL and OpenGL ES.
+    * Significant reduction in bytecode size (and corresponding JIT code).
+    * No thread-local lookup in GL and GLES, even with incompatible contexts.
+    * Removed obsolete thread-local and capabilities state `Configuration` options.
+- Linux: All natives are now built with GCC 6.2 (up from 4.8)
+- Loader: If `jemalloc` initialization fails and `org.lwjgl.system.allocator` has not been set, a simple warning is now shown instead of an exception.
+- Structs: Added bound checks to element accessors of array members.
+- Generator: Validation is now required for all data pointer parameters. If validation is not possible, such parameters must be marked as potentially unsafe.  
+- The SHA-1 hash of shared libraries is now included in the corresponding `natives` JAR files.
+- The upstream git revision used to build shared libraries is now included in the corresponding `natives` JAR files.
 
 #### Fixes
 
-- Callback instances are now tracked when the `DEBUG_MEMORY_ALLOCATOR` option is enabled.
-- Fixed `realloc` tracking in the debug allocator.
-- Shared libraries that ship with LWJGL are now always preferred over system libraries.
-- Fixed return type of functions that return pointer to boolean.
-- stb_image: Fixed result auto-sizing of `stbi_load*` functions.
-- Functions that deallocate memory no longer have Java array overloads.
-- Fixed `memSet` bugs.
-- Fixed Java array overload generation for functions with multiple auto-size-result parameters.
-- Fixed custom checks in Java array overloads.
-- Fixed lookup of Critical JNI natives on Windows x86.
-- Disabled Critical JNI natives for functions affected by JDK-8167409 on Linux & MacOS.
+- Fixed loader diagnostics when `System.loadLibrary` fails.
+- Fixed setters of struct members with optional AutoSize. (#255)
+- Fixed `MemoryUtil.memRealloc` to return `null` when the allocation fails.
+- Vulkan: Function pointer loading of disabled extensions is now skipped.
+- Generator: `binding.DISABLE_CHECKS` is now respected in structs.
 
 #### Breaking Changes
 
-- xxHash: Added support for stack allocation of streaming hash state. Opaque handles have been replaced by the `XXH*State` structs.
-- NanoVG: Dropped version suffixes from NanoVGGL classes.
-- Mapped more integer parameters and return values to Java booleans, that were missed while working on #181.
-- Dropped VKUtil class and moved the version macros to VK10.
+- macOS: LWJGL now requires macOS 10.9/Mavericks or later (up from 10.7/Lion)
+- A small number of method signatures have changed because of auto-size transformations that were missing in previous releases.
+- NanoVG: Text functions with an `end` pointer to the end of the string are now auto-size transformed. Buffers passed to them should not include a null-terminating byte.
+- Added `LibC` prefix to all class names in the `libc` bindings, to avoid conflicts with standard Java classes (`Locale`, `String`, etc.)
+- OpenGL and OpenGL ES now come with native libraries (`lwjgl_opengl` and `lwjgl_opengles` respectively).
+- Removed `MemoryUtil.memSetupBuffer`.
