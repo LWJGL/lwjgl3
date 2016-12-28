@@ -63,7 +63,6 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 	<property name="src.core" location="${module.core}/src/main/java" relative="true"/>
 	<property name="src.tests" location="${module.core}/src/test/java" relative="true"/>
 
-	<property name="src.include" location="${module.core}/src/main/include" relative="true"/>
 	<property name="src.native" location="${module.core}/src/main/c" relative="true"/>
 
 	<property name="src.generated" location="${module.core}/src/generated" relative="true"/>

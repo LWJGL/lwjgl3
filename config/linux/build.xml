@@ -13,7 +13,6 @@
 		<equals arg1="${build.arch}" arg2="x64"/>
 	</condition>
 
-	<property name="src.include.rel" value="../../../../${src.include}"/>
 	<property name="src.native.rel" value="../../../../${src.native}"/>
 
 	<macrodef name="compile">
@@ -32,8 +31,8 @@
 				<arg value="-I${jni.headers}"/>
 				<arg value="-I${jni.headers}/linux"/>
 
-				<arg value="-I${src.include.rel}/system"/>
-				<arg value="-I${src.include.rel}/system/linux"/>
+				<arg value="-I${src.native.rel}/system"/>
+				<arg value="-I${src.native.rel}/system/linux"/>
 
 				<source/>
 
@@ -100,7 +99,7 @@
 		<!-- CORE -->
 		<build name="lwjgl" dest="${bin.native}/core">
 			<source>
-				<arg value="-I${src.include.rel}/system/dyncall"/>
+				<arg value="-I${src.native.rel}/system/dyncall"/>
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<exclude name="${src.native}/system/lwjgl_malloc.c"/>
@@ -120,12 +119,12 @@
 
 		<!-- LMDB -->
 		<compile dest="${bin.native}/lmdb" flags="-Wno-format-extra-args" if:true="${binding.lmdb}">
-			<arg value="-I${src.include.rel}/util/lmdb"/>
-			<fileset dir="." includes="${src.include}/util/lmdb/*.c"/>
+			<arg value="-I${src.native.rel}/util/lmdb"/>
+			<fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
 		</compile>
 		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
 			<source>
-				<arg value="-I${src.include.rel}/util/lmdb"/>
+				<arg value="-I${src.native.rel}/util/lmdb"/>
 				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
 			</source>
 		</build>
@@ -133,8 +132,8 @@
 		<!-- NanoVG -->
 		<build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
 			<source>
-				<arg value="-I${src.include.rel}/nanovg"/>
-				<arg value="-isystem${src.include.rel}/stb"/>
+				<arg value="-I${src.native.rel}/nanovg"/>
+				<arg value="-isystem${src.native.rel}/stb"/>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
 			</source>
@@ -149,15 +148,15 @@
 
 		<compile dest="${bin.native}/nfd" flags="" if:true="${binding.nfd}">
 			<arg line="${gtk3}"/>
-			<arg value="-I${src.include.rel}/util/nfd"/>
-			<arg value="-I${src.include.rel}/util/nfd/include"/>
-			<fileset dir="." includes="${src.include}/util/nfd/nfd_common.c"/>
-			<fileset dir="." includes="${src.include}/util/nfd/nfd_gtk.c"/>
+			<arg value="-I${src.native.rel}/util/nfd"/>
+			<arg value="-I${src.native.rel}/util/nfd/include"/>
+			<fileset dir="." includes="${src.native}/util/nfd/nfd_common.c"/>
+			<fileset dir="." includes="${src.native}/util/nfd/nfd_gtk.c"/>
 		</compile>
 		<build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
 			<source>
-				<arg value="-I${src.include.rel}/util/nfd"/>
-				<arg value="-I${src.include.rel}/util/nfd/include"/>
+				<arg value="-I${src.native.rel}/util/nfd"/>
+				<arg value="-I${src.native.rel}/util/nfd/include"/>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/nfd/*.c"/>
 			</source>
@@ -169,7 +168,7 @@
 		<!-- Nuklear -->
 		<build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
 			<source>
-				<arg value="-I${src.include.rel}/nuklear"/>
+				<arg value="-I${src.native.rel}/nuklear"/>
 				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
 			</source>
 		</build>
@@ -177,7 +176,7 @@
 		<!-- OpenGL -->
 		<build name="lwjgl_opengl" dest="${bin.native}/opengl" if:true="${binding.opengl}">
 			<source>
-				<arg value="-I${src.include.rel}/opengl"/>
+				<arg value="-I${src.native.rel}/opengl"/>
 				<fileset dir="." includes="${src.generated.native}/opengl/*.c"/>
 			</source>
 		</build>
@@ -185,7 +184,7 @@
 		<!-- OpenGL ES -->
 		<build name="lwjgl_opengles" dest="${bin.native}/opengles" if:true="${binding.opengles}">
 			<source>
-				<arg value="-I${src.include.rel}/opengles"/>
+				<arg value="-I${src.native.rel}/opengles"/>
 				<fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
 			</source>
 		</build>
@@ -193,7 +192,7 @@
 		<!-- ParShapes -->
 		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
 			<source>
-				<arg value="-I${src.include.rel}/util/par"/>
+				<arg value="-I${src.native.rel}/util/par"/>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
 			</source>
@@ -203,7 +202,7 @@
 		<build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
 			<source>
 				<arg value="-msse3"/>
-				<arg value="-I${src.include.rel}/util"/>
+				<arg value="-I${src.native.rel}/util"/>
 				<fileset dir="." includes="${src.generated.native}/util/simd/*.c"/>
 			</source>
 		</build>
@@ -211,7 +210,7 @@
 		<!-- stb -->
 		<build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
 			<source>
-				<arg value="-isystem${src.include.rel}/stb"/>
+				<arg value="-isystem${src.native.rel}/stb"/>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
 			</source>
@@ -219,12 +218,12 @@
 
 		<!-- tiny file dialogs -->
 		<compile dest="${bin.native}/tinyfd" flags="" if:true="${binding.tinyfd}">
-			<arg value="-I${src.include.rel}/util/tinyfd"/>
+			<arg value="-I${src.native.rel}/util/tinyfd"/>
 			<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
 		</compile>
 		<build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
 			<source>
-				<arg value="-I${src.include.rel}/util/tinyfd"/>
+				<arg value="-I${src.native.rel}/util/tinyfd"/>
 				<fileset dir="." includes="${src.generated.native}/util/tinyfd/*.c"/>
 			</source>
 		</build>
@@ -232,8 +231,7 @@
 		<!-- xxHash -->
 		<build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
 			<source>
-				<arg value="-I${src.include.rel}/system"/>
-				<arg value="-I${src.include.rel}/util/xxhash"/>
+				<arg value="-I${src.native.rel}/system"/>
 				<arg value="-I${src.native.rel}/util/xxhash"/>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>

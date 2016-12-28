@@ -4,7 +4,6 @@ LWJGL is organized in modules, described below:
 ### Core
 The LWJGL core.
 * modules/core/src/main/c
-* modules/core/src/main/include
 * modules/core/src/main/java
 * modules/core/src/generated/c
 * modules/core/src/generated/java

@@ -24,8 +24,8 @@
 				<arg value="/I${jni.headers}"/>
 				<arg value="/I${jni.headers}\win32"/>
 
-				<arg value="/I${src.include}\system"/>
-				<arg value="/I${src.include}\system\windows"/>
+				<arg value="/I${src.native}\system"/>
+				<arg value="/I${src.native}\system\windows"/>
 
 				<source/>
 
@@ -122,7 +122,7 @@ EXPORTS
 		<!-- CORE -->
 		<build name="lwjgl" dest="${bin.native}/core">
 			<compileargs>
-				<arg value="/I${src.include}\system\dyncall"/>
+				<arg value="/I${src.native}\system\dyncall"/>
 			</compileargs>
 			<source>
 				<fileset dir=".">
@@ -144,12 +144,12 @@ EXPORTS
 
 		<!-- LMDB -->
 		<compile dest="${bin.native}/lmdb" flags="/W0" if:true="${binding.lmdb}">
-			<arg value="/I${src.include}\util\lmdb"/>
-			<fileset dir="." includes="${src.include}/util/lmdb/*.c"/>
+			<arg value="/I${src.native}\util\lmdb"/>
+			<fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
 		</compile>
 		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
 			<compileargs>
-				<arg value="/I${src.include}\util\lmdb"/>
+				<arg value="/I${src.native}\util\lmdb"/>
 			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
@@ -163,8 +163,8 @@ EXPORTS
 		<!-- NanoVG -->
 		<build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
 			<compileargs>
-				<arg value="/I${src.include}\nanovg"/>
-				<arg value="/I${src.include}\stb"/>
+				<arg value="/I${src.native}\nanovg"/>
+				<arg value="/I${src.native}\stb"/>
 			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
@@ -174,15 +174,15 @@ EXPORTS
 
 		<!-- NativeFileDialog -->
 		<compile dest="${bin.native}/nfd" flags="" if:true="${binding.nfd}">
-			<arg value="/I${src.include}\util\nfd"/>
-			<arg value="/I${src.include}\util\nfd\include"/>
-			<fileset dir="." includes="${src.include}/util/nfd/nfd_common.c"/>
-			<fileset dir="." includes="${src.include}/util/nfd/nfd_win.cpp"/>
+			<arg value="/I${src.native}\util\nfd"/>
+			<arg value="/I${src.native}\util\nfd\include"/>
+			<fileset dir="." includes="${src.native}/util/nfd/nfd_common.c"/>
+			<fileset dir="." includes="${src.native}/util/nfd/nfd_win.cpp"/>
 		</compile>
 		<build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
 			<compileargs>
-				<arg value="/I${src.include}\util\nfd"/>
-				<arg value="/I${src.include}\util\nfd\include"/>
+				<arg value="/I${src.native}\util\nfd"/>
+				<arg value="/I${src.native}\util\nfd\include"/>
 			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
@@ -197,7 +197,7 @@ EXPORTS
 		<!-- Nuklear -->
 		<build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
 			<compileargs>
-				<arg value="/I${src.include}\nuklear"/>
+				<arg value="/I${src.native}\nuklear"/>
 			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
@@ -222,7 +222,7 @@ EXPORTS
 		<!-- OpenGL -->
 		<build name="lwjgl_opengl" dest="${bin.native}/opengl" if:true="${binding.opengl}">
 			<compileargs>
-				<arg value="/I${src.include}\opengl"/>
+				<arg value="/I${src.native}\opengl"/>
 			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.generated.native}/opengl/*.c"/>
@@ -232,7 +232,7 @@ EXPORTS
 		<!-- OpenGL ES -->
 		<build name="lwjgl_opengles" dest="${bin.native}/opengles" if:true="${binding.opengles}">
 			<compileargs>
-				<arg value="/I${src.include}\opengles"/>
+				<arg value="/I${src.native}\opengles"/>
 			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
@@ -242,7 +242,7 @@ EXPORTS
 		<!-- ParShapes -->
 		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
 			<compileargs>
-				<arg value="/I${src.include}\util\par"/>
+				<arg value="/I${src.native}\util\par"/>
 			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
@@ -253,7 +253,7 @@ EXPORTS
 		<!-- SSE -->
 		<build name="lwjgl_sse" dest="${bin.native}/sse" if:true="${binding.sse}">
 			<compileargs>
-				<arg value="/I${src.include}\util"/>
+				<arg value="/I${src.native}\util"/>
 			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.generated.native}/util/simd/*.c"/>
@@ -263,7 +263,7 @@ EXPORTS
 		<!-- stb -->
 		<build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
 			<compileargs>
-				<arg value="/I${src.include}\stb"/>
+				<arg value="/I${src.native}\stb"/>
 			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
@@ -273,12 +273,12 @@ EXPORTS
 
 		<!-- tiny file dialogs -->
 		<compile dest="${bin.native}/tinyfd" flags="" if:true="${binding.tinyfd}">
-			<arg value="/I${src.include}\util\tinyfd"/>
+			<arg value="/I${src.native}\util\tinyfd"/>
 			<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
 		</compile>
 		<build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
 			<compileargs>
-				<arg value="/I${src.include}\util\tinyfd"/>
+				<arg value="/I${src.native}\util\tinyfd"/>
 			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.generated.native}/util/tinyfd/*.c"/>
@@ -294,8 +294,7 @@ EXPORTS
 		<!-- xxHash -->
 		<build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
 			<compileargs>
-				<arg value="/I${src.include}\system"/>
-				<arg value="/I${src.include}\util\xxhash"/>
+				<arg value="/I${src.native}\system"/>
 				<arg value="/I${src.native}\util\xxhash"/>
 			</compileargs>
 			<source>
