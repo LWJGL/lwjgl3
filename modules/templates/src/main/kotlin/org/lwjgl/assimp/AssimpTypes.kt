@@ -223,10 +223,10 @@ val aiNode = struct(ASSIMP_PACKAGE, "AINode", nativeName = "struct aiNode") {
 	aiString.member("mName", "The name of the node.")
 	aiMatrix4x4.member("mTransformation", "The transformation relative to the node's parent.")
 	nullable..aiNode_p.member("mParent", "Parent node. $NULL if this node is the root node.")
-	AutoSize("mChildren")..unsigned_int.member("mNumChildren", "The number of child nodes of this node.")
-	nullable..aiNode_p.p.member("mChildren", "The child nodes of this node. $NULL if {@code mNumChildren} is 0.")
-	AutoSize("mMeshes")..unsigned_int.member("mNumMeshes", "The number of meshes of this node.")
-	nullable..unsigned_int_p.member("mMeshes", "The meshes of this node. Each entry is an index into the mesh list of the aiScene.")
+	AutoSize("mChildren", optional = true)..unsigned_int.member("mNumChildren", "The number of child nodes of this node.")
+	aiNode_p.p.member("mChildren", "The child nodes of this node. $NULL if {@code mNumChildren} is 0.")
+	AutoSize("mMeshes", optional = true)..unsigned_int.member("mNumMeshes", "The number of meshes of this node.")
+	unsigned_int_p.member("mMeshes", "The meshes of this node. Each entry is an index into the mesh list of the aiScene.")
 	nullable..aiMetadata_p.member("mMetadata", "Metadata associated with this node or $NULL if there is no metadata.")
 }
 
@@ -405,8 +405,8 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
 	    given in {@code mNumFaces}. If the #AI_SCENE_FLAGS_NON_VERBOSE_FORMAT is NOT set each face references an unique set of vertices.
 		"""
 	)
-	AutoSize("mBones")..unsigned_int.member("mNumBones", "The number of bones this mesh contains. Can be 0, in which case the {@code mBones} array is $NULL.")
-	nullable..aiBone_pp.member(
+	AutoSize("mBones", optional = true)..unsigned_int.member("mNumBones", "The number of bones this mesh contains. Can be 0, in which case the {@code mBones} array is $NULL.")
+	aiBone_pp.member(
 		"mBones",
 		"The bones of this mesh. A bone consists of a name by which it can be found in the frame hierarchy and a set of vertex weights."
 	)
@@ -426,8 +426,8 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
 	    their names.
 		"""
 	)
-	AutoSize("mAnimMeshes")..unsigned_int.member("mNumAnimMeshes", "NOT CURRENTLY IN USE. The number of attachment meshes")
-	nullable..aiAnimMesh_pp.member(
+	AutoSize("mAnimMeshes", optional = true)..unsigned_int.member("mNumAnimMeshes", "NOT CURRENTLY IN USE. The number of attachment meshes")
+	aiAnimMesh_pp.member(
 		"mAnimMeshes",
 		"""
 	    NOT CURRENTLY IN USE. Attachment meshes for this mesh, for vertex-based animation. Attachment meshes carry replacement data for some of the mesh'es
@@ -566,7 +566,7 @@ val aiNodeAnim_pp = struct(ASSIMP_PACKAGE, "AINodeAnim", nativeName = "struct ai
         """
 
 	aiString.member("mNodeName", "The name of the node affected by this animation. The node must exist and it must be unique.")
-	AutoSize("mPositionKeys")..unsigned_int.member("mNumPositionKeys", "The number of position keys")
+	AutoSize("mPositionKeys", optional = true)..unsigned_int.member("mNumPositionKeys", "The number of position keys")
 	aiVectorKey_p.buffer(
 		"mPositionKeys",
 		"""
@@ -574,7 +574,7 @@ val aiNodeAnim_pp = struct(ASSIMP_PACKAGE, "AINodeAnim", nativeName = "struct ai
 	    keys, there will also be at least one scaling and one rotation key.
 		"""
 	)
-	AutoSize("mRotationKeys")..unsigned_int.member("mNumRotationKeys", "The number of rotation keys")
+	AutoSize("mRotationKeys", optional = true)..unsigned_int.member("mNumRotationKeys", "The number of rotation keys")
 	aiQuatKey_p.buffer(
 		"mRotationKeys",
 		"""
@@ -582,7 +582,7 @@ val aiNodeAnim_pp = struct(ASSIMP_PACKAGE, "AINodeAnim", nativeName = "struct ai
 	    If there are rotation keys, there will also be at least one scaling and one position key.
 		"""
 	)
-	AutoSize("mScalingKeys")..unsigned_int.member("mNumScalingKeys", "The number of scaling keys")
+	AutoSize("mScalingKeys", optional = true)..unsigned_int.member("mNumScalingKeys", "The number of scaling keys")
 	aiVectorKey_p.buffer(
 		"mScalingKeys",
 		"""
@@ -833,14 +833,14 @@ val aiScene_p = struct(ASSIMP_PACKAGE, "AIScene", nativeName = "struct aiScene")
 	    the AI_SCENE_FLAGS_INCOMPLETE bit set.
 		"""
 	).links("AI_SCENE_FLAGS_\\w+", LinkMode.BITFIELD)
-	aiNode_p.member(
+	nullable..aiNode_p.member(
 		"mRootNode",
 		"""
 	    The root node of the hierarchy. There will always be at least the root node if the import was successful (and no special flags have been set). Presence
 	    of further nodes depends on the format and content of the imported file.
 		"""
 	)
-	AutoSize("mMeshes")..unsigned_int.member("mNumMeshes", "The number of meshes in the scene.")
+	AutoSize("mMeshes", optional = true)..unsigned_int.member("mNumMeshes", "The number of meshes in the scene.")
 	aiMesh_pp.member(
 		"mMeshes",
 		"""
@@ -848,7 +848,7 @@ val aiScene_p = struct(ASSIMP_PACKAGE, "AIScene", nativeName = "struct aiScene")
 	    #AI_SCENE_FLAGS_INCOMPLETE flag is not set there will always be at least ONE material.
 		"""
 	)
-	AutoSize("mMaterials")..unsigned_int.member("mNumMaterials", "The number of materials in the scene.")
+	AutoSize("mMaterials", optional = true)..unsigned_int.member("mNumMaterials", "The number of materials in the scene.")
 	aiMaterial_pp.member(
 		"mMaterials",
 		"""
@@ -856,12 +856,12 @@ val aiScene_p = struct(ASSIMP_PACKAGE, "AIScene", nativeName = "struct aiScene")
 	    #AI_SCENE_FLAGS_INCOMPLETE flag is not set there will always be at least ONE material.
 		"""
 	)
-	AutoSize("mAnimations")..unsigned_int.member("mNumAnimations", "The number of animations in the scene.")
+	AutoSize("mAnimations", optional = true)..unsigned_int.member("mNumAnimations", "The number of animations in the scene.")
 	aiAnimation_pp.member(
 		"mAnimations",
 		"The array of animations. All animations imported from the given file are listed here. The array is {@code mNumAnimations} in size."
 	)
-	AutoSize("mTextures")..unsigned_int.member("mNumTextures", "The number of textures embedded into the file")
+	AutoSize("mTextures", optional = true)..unsigned_int.member("mNumTextures", "The number of textures embedded into the file")
 	aiTexture_pp.member(
 		"mTextures",
 		"""
@@ -869,7 +869,7 @@ val aiScene_p = struct(ASSIMP_PACKAGE, "AIScene", nativeName = "struct aiScene")
 	    GameStudio versions)
 		"""
 	)
-	AutoSize("mLights")..unsigned_int.member(
+	AutoSize("mLights", optional = true)..unsigned_int.member(
 		"mNumLights",
 		"The number of light sources in the scene. Light sources are fully optional, in most cases this attribute will be 0"
 	)
@@ -877,7 +877,7 @@ val aiScene_p = struct(ASSIMP_PACKAGE, "AIScene", nativeName = "struct aiScene")
 		"mLights",
 		"The array of light sources. All light sources imported from the given file are listed here. The array is {@code mNumLights} in size."
 	)
-	AutoSize("mCameras")..unsigned_int.member(
+	AutoSize("mCameras", optional = true)..unsigned_int.member(
 		"mNumCameras",
 		"The number of cameras in the scene. Cameras are fully optional, in most cases this attribute will be 0"
 	)
