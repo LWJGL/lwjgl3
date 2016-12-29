@@ -244,6 +244,7 @@
 			<src path="${src.templates.kotlin}/org/lwjgl/util/simd" if:true="${binding.sse}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/tinyfd" if:true="${binding.tinyfd}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/xxhash" if:true="${binding.xxhash}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/util/yoga" if:true="${binding.yoga}"/>
 		</kotlinc>
 	</target>
 
@@ -322,6 +323,7 @@
 			<exclude name="org/lwjgl/util/simd/**" unless:true="${binding.sse}"/>
 			<exclude name="org/lwjgl/util/tinyfd/**" unless:true="${binding.tinyfd}"/>
 			<exclude name="org/lwjgl/util/xxhash/**" unless:true="${binding.xxhash}"/>
+			<exclude name="org/lwjgl/util/yoga/**" unless:true="${binding.yoga}"/>
 		</patternset>
 	</target>
 
@@ -459,6 +461,7 @@
 			<include name="org/lwjgl/demo/util/par/**" if:true="${binding.par}"/>
 			<include name="org/lwjgl/demo/util/tinyfd/**" if:true="${tinyfd}"/>
 			<include name="org/lwjgl/demo/util/xxhash/**" if:true="${binding.xxhash}"/>
+			<include name="org/lwjgl/demo/util/yoga/**" if:true="${binding.yoga}"/>
 
 			<include name="org/lwjgl/demo/vulkan/**" if:true="${vulkan_glfw}"/>
 
@@ -467,6 +470,7 @@
 			<include name="org/lwjgl/system/**"/>
 			<include name="org/lwjgl/util/par/**" if:true="${binding.par}"/>
 			<include name="org/lwjgl/util/simd/**" if:true="${binding.sse}"/>
+			<include name="org/lwjgl/util/yoga/**" if:true="${binding.yoga}"/>
 		</lwjgl.javac>
 	</target>
 
@@ -975,5 +979,8 @@
 
 		<!-- xxHash -->
 		<release-module package="org.lwjgl.util.xxhash" name="xxhash" native-library="lwjgl_xxhash" title="xxHash" license="xxhash" if:true="${binding.xxhash}"/>
+
+		<!-- yoga -->
+		<release-module package="org.lwjgl.util.yoga" name="yoga" native-library="lwjgl_yoga" title="yoga" license="yoga" if:true="${binding.yoga}"/>
 	</target>
 </project>

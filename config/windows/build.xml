@@ -302,6 +302,20 @@ EXPORTS
 				<fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
 			</source>
 		</build>
+
+		<!-- yoga -->
+		<compile dest="${bin.native}/yoga" flags="" if:true="${binding.yoga}">
+			<arg value="/I${src.native}\util\yoga"/>
+			<fileset dir="." includes="${src.native}/util/yoga/*.c"/>
+		</compile>
+		<build name="lwjgl_yoga" dest="${bin.native}/yoga" if:true="${binding.yoga}">
+			<compileargs>
+				<arg value="/I${src.native}\util\yoga"/>
+			</compileargs>
+			<source>
+				<fileset dir="." includes="${src.generated.native}/util/yoga/*.c"/>
+			</source>
+		</build>
 	</target>
 
 	<target name="-update-dependencies-x86">

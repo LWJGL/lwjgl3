@@ -15,6 +15,7 @@
 			<package name="org.lwjgl.system.libc"/>
 			<package name="org.lwjgl.util.par"/>
 			<package name="org.lwjgl.util.simd"/>
+			<package name="org.lwjgl.util.yoga"/>
 		</packages>
 	</test>
 </suite>

@@ -110,6 +110,7 @@ LWJGL 3 includes the following bindings:
 |[NanoVG](https://github.com/memononen/nanovg)|A small antialiased vector graphics rendering library for OpenGL.|
 |[Nuklear](https://github.com/vurtun/nuklear)|A minimal state immediate mode graphical user interface toolkit written in ANSI C and licensed under public domain.|
 |[par_shapes](https://github.com/prideout/par)|Generate parametric surfaces and other simple shapes.|
+|[Yoga](https://facebook.github.io/yoga/)|An open-source, cross-platform layout library that implements Flexbox.|
 
 #### [stb](https://github.com/nothings/stb) - single-file public domain libraries for C/C++
 

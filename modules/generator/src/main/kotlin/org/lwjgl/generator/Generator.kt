@@ -53,7 +53,8 @@ enum class Binding(val key: String, val packageName: String) {
 	STB("binding.stb", "org.lwjgl.stb"),
 	TINYFD("binding.tinyfd", "org.lwjgl.util.tinyfd"),
 	VULKAN("binding.vulkan", "org.lwjgl.vulkan"),
-	XXHASH("binding.xxhash", "org.lwjgl.util.xxhash");
+	XXHASH("binding.xxhash", "org.lwjgl.util.xxhash"),
+	YOGA("binding.yoga", "org.lwjgl.util.yoga");
 
 	companion object {
 		val CHECKS = !System.getProperty("binding.DISABLE_CHECKS", "false").toBoolean()

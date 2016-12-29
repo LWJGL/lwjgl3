@@ -169,6 +169,11 @@ enum Artifacts {
 		"lwjgl-xxhash", "LWJGL - xxHash bindings",
 		"An Extremely fast Hash algorithm, running at RAM speed limits.",
 		Platforms.ALL
+	),
+	YOGA(
+		"lwjgl-yoga", "LWJGL - Yoga bindings",
+		"An open-source, cross-platform layout library that implements Flexbox.",
+		Platforms.ALL
 	)
 
 	String artifact
