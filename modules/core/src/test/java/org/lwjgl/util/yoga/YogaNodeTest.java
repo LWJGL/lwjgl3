@@ -30,21 +30,61 @@ public class YogaNodeTest {
 		YGNodeFree(node);
 	}
 
-	@Test
-	public void testMeasure() {
-		long node = YGNodeNew();
+	private static void setMeasureFunc(long node, float testWidth, float testHeight) {
 		YGNodeSetMeasureFunc(node, (n, width, widthMode, height, heightMode) -> {
 			try ( MemoryStack stack = stackPush() ) {
 				return YGMeasureFunc.toLong(
 					YGSize.mallocStack(stack)
-						.width(100)
-						.height(100)
+						.width(testWidth)
+						.height(testHeight)
 				);
 			}
 		});
+	}
+
+	@Test
+	public void testMeasure() {
+		long node = YGNodeNew();
+		setMeasureFunc(node, 100, 100);
 		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
 		assertEquals(100, (int)YGNodeLayoutGetWidth(node));
 		assertEquals(100, (int)YGNodeLayoutGetHeight(node));
+
+		YGNodeGetMeasureFunc(node).free();
+		YGNodeFree(node);
+	}
+
+	@Test
+	public void testMeasureFloat() {
+		long node = YGNodeNew();
+		setMeasureFunc(node, 100.5f, 100.5f);
+		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
+		assertEquals(100.5f, YGNodeLayoutGetWidth(node), 0.0f);
+		assertEquals(100.5f, YGNodeLayoutGetHeight(node), 0.0f);
+
+		YGNodeGetMeasureFunc(node).free();
+		YGNodeFree(node);
+	}
+
+	@Test
+	public void testMeasureFloatMin() {
+		long node = YGNodeNew();
+		setMeasureFunc(node, Float.MIN_VALUE, Float.MIN_VALUE);
+		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
+		assertEquals(Float.MIN_VALUE, YGNodeLayoutGetWidth(node), 0.0f);
+		assertEquals(Float.MIN_VALUE, YGNodeLayoutGetHeight(node), 0.0f);
+
+		YGNodeGetMeasureFunc(node).free();
+		YGNodeFree(node);
+	}
+
+	@Test
+	public void testMeasureFloatMax() {
+		long node = YGNodeNew();
+		setMeasureFunc(node, Float.MAX_VALUE, Float.MAX_VALUE);
+		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
+		assertEquals(Float.MAX_VALUE, YGNodeLayoutGetWidth(node), 0.0f);
+		assertEquals(Float.MAX_VALUE, YGNodeLayoutGetHeight(node), 0.0f);
 
 		YGNodeGetMeasureFunc(node).free();
 		YGNodeFree(node);

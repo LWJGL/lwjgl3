@@ -102,20 +102,20 @@ WIN_EXPORT void YGNodeCopyStyle(const YGNodeRef dstNode, const YGNodeRef srcNode
 
 #define YG_NODE_PROPERTY(type, name, paramName)                          \
   WIN_EXPORT void YGNodeSet##name(const YGNodeRef node, type paramName); \
-  WIN_EXPORT type YGNodeGet##name(const YGNodeRef node);
+  WIN_EXPORT type YGNodeGet##name(const YGNodeRef node)
 
 #define YG_NODE_STYLE_PROPERTY(type, name, paramName)                               \
   WIN_EXPORT void YGNodeStyleSet##name(const YGNodeRef node, const type paramName); \
-  WIN_EXPORT type YGNodeStyleGet##name(const YGNodeRef node);
+  WIN_EXPORT type YGNodeStyleGet##name(const YGNodeRef node)
 
 #define YG_NODE_STYLE_EDGE_PROPERTY(type, name, paramName)    \
   WIN_EXPORT void YGNodeStyleSet##name(const YGNodeRef node,  \
                                        const YGEdge edge,     \
                                        const type paramName); \
-  WIN_EXPORT type YGNodeStyleGet##name(const YGNodeRef node, const YGEdge edge);
+  WIN_EXPORT type YGNodeStyleGet##name(const YGNodeRef node, const YGEdge edge)
 
 #define YG_NODE_LAYOUT_PROPERTY(type, name) \
-  WIN_EXPORT type YGNodeLayoutGet##name(const YGNodeRef node);
+  WIN_EXPORT type YGNodeLayoutGet##name(const YGNodeRef node)
 
 YG_NODE_PROPERTY(void *, Context, context);
 YG_NODE_PROPERTY(YGMeasureFunc, MeasureFunc, measureFunc);

@@ -100,11 +100,6 @@ public final class HolyGrail {
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(2, GL_FLOAT, 16, charBuffer);
 
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
-		glMatrixMode(GL_MODELVIEW);
-
 		// ----------------------
 		//          Yoga
 		// ----------------------
@@ -145,6 +140,7 @@ public final class HolyGrail {
 		YGNodeInsertChild(container, sidebar, 2);
 
 		// Show window
+		windowSizeChanged(window, width, height);
 		glfwShowWindow(window);
 		this.window = window;
 	}
