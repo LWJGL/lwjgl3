@@ -350,80 +350,119 @@
 	</target>
 
 	<target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
-		<local name="egl_glfw"/>
-		<condition property="egl_glfw" value="true" else="false">
+		<local name="bgfx"/>
+		<condition property="bgfx" value="true" else="false">
+			<and>
+				<istrue value="${binding.bgfx}"/>
+				<istrue value="${binding.glfw}"/>
+			</and>
+		</condition>
+
+		<local name="egl"/>
+		<condition property="egl" value="true" else="false">
 			<and>
 				<istrue value="${binding.egl}"/>
+				<istrue value="${binding.glfw}"/>
 				<istrue value="${binding.opengles}"/>
-				<istrue value="${binding.glfw}"/>
 			</and>
 		</condition>
 
-		<local name="openal_stb"/>
-		<condition property="openal_stb" value="true" else="false">
+		<local name="glfw"/>
+		<condition property="glfw" value="true" else="false">
 			<and>
-				<istrue value="${binding.openal}"/>
-				<istrue value="${binding.stb}"/>
+				<istrue value="${binding.glfw}"/>
+				<istrue value="${binding.opengl}"/>
 			</and>
 		</condition>
 
-		<local name="opencl_glfw"/>
-		<condition property="opencl_glfw" value="true" else="false">
+		<local name="jawt"/>
+		<condition property="jawt" value="true" else="false">
 			<and>
-				<istrue value="${binding.opencl}"/>
-				<istrue value="${binding.glfw}"/>
-			</and>
-		</condition>
-
-		<local name="stb_glfw"/>
-		<condition property="stb_glfw" value="true" else="false">
-			<and>
-				<istrue value="${binding.stb}"/>
-				<istrue value="${binding.glfw}"/>
+				<istrue value="${binding.jawt}"/>
+				<istrue value="${binding.opengl}"/>
 			</and>
 		</condition>
 
 		<local name="nanovg"/>
 		<condition property="nanovg" value="true" else="false">
 			<and>
+				<istrue value="${glfw}"/>
 				<istrue value="${binding.nanovg}"/>
-				<istrue value="${binding.glfw}"/>
-				<istrue value="${binding.opengl}"/>
 			</and>
 		</condition>
 
 		<local name="nuklear"/>
 		<condition property="nuklear" value="true" else="false">
 			<and>
+				<istrue value="${glfw}"/>
 				<istrue value="${binding.nuklear}"/>
-				<istrue value="${binding.glfw}"/>
-				<istrue value="${binding.opengl}"/>
 			</and>
 		</condition>
 
 		<local name="nfd"/>
 		<condition property="nfd" value="true" else="false">
 			<and>
+				<istrue value="${glfw}"/>
 				<istrue value="${binding.nfd}"/>
+			</and>
+		</condition>
+
+		<local name="openal"/>
+		<condition property="openal" value="true" else="false">
+			<and>
+				<istrue value="${binding.openal}"/>
+				<istrue value="${binding.stb}"/>
+			</and>
+		</condition>
+
+		<local name="opencl"/>
+		<condition property="opencl" value="true" else="false">
+			<and>
 				<istrue value="${binding.glfw}"/>
-				<istrue value="${binding.opengl}"/>
+				<istrue value="${binding.opencl}"/>
+			</and>
+		</condition>
+
+		<local name="par"/>
+		<condition property="par" value="true" else="false">
+			<and>
+				<istrue value="${binding.glfw}"/>
+				<istrue value="${binding.nfd}"/>
+				<istrue value="${binding.par}"/>
+				<istrue value="${binding.stb}"/>
+			</and>
+		</condition>
+
+		<local name="stb"/>
+		<condition property="stb" value="true" else="false">
+			<and>
+				<istrue value="${binding.stb}"/>
+				<istrue value="${binding.glfw}"/>
 			</and>
 		</condition>
 
 		<local name="tinyfd"/>
 		<condition property="tinyfd" value="true" else="false">
 			<and>
+				<istrue value="${glfw}"/>
 				<istrue value="${binding.tinyfd}"/>
-				<istrue value="${binding.glfw}"/>
-				<istrue value="${binding.opengl}"/>
 			</and>
 		</condition>
 
-		<local name="vulkan_glfw"/>
-		<condition property="vulkan_glfw" value="true" else="false">
+		<local name="vulkan"/>
+		<condition property="vulkan" value="true" else="false">
 			<and>
-				<istrue value="${binding.vulkan}"/>
 				<istrue value="${binding.glfw}"/>
+				<istrue value="${binding.vulkan}"/>
+			</and>
+		</condition>
+
+		<local name="yoga"/>
+		<condition property="yoga" value="true" else="false">
+			<and>
+				<istrue value="${glfw}"/>
+				<istrue value="${binding.stb}"/>
+				<istrue value="${binding.yoga}"/>
 			</and>
 		</condition>
 
@@ -435,35 +474,35 @@
 
 			<!-- Demos -->
 			<include name="org/lwjgl/demo/assimp/**" if:true="${binding.assimp}"/>
-			<include name="org/lwjgl/demo/bgfx/**" if:true="${binding.bgfx}"/>
-			<include name="org/lwjgl/demo/egl/**" if:true="${egl_glfw}"/>
-			<include name="org/lwjgl/demo/glfw/**" if:true="${binding.glfw}"/>
+			<include name="org/lwjgl/demo/bgfx/**" if:true="${bgfx}"/>
+			<include name="org/lwjgl/demo/egl/**" if:true="${egl}"/>
+			<include name="org/lwjgl/demo/glfw/**" if:true="${glfw}"/>
 			<include name="org/lwjgl/demo/nanovg/**" if:true="${nanovg}"/>
 			<include name="org/lwjgl/demo/nuklear/**" if:true="${nuklear}"/>
 
 			<include name="org/lwjgl/demo/openal/**" if:true="${binding.openal}"/>
-			<exclude name="org/lwjgl/demo/openal/ALCDemo.java" unless:true="${openal_stb}"/>
-			<exclude name="org/lwjgl/demo/openal/EFXTest.java" unless:true="${openal_stb}"/>
+			<exclude name="org/lwjgl/demo/openal/ALCDemo.java" unless:true="${openal}"/>
+			<exclude name="org/lwjgl/demo/openal/EFXTest.java" unless:true="${openal}"/>
 
-			<include name="org/lwjgl/demo/opencl/**" if:true="${opencl_glfw}"/>
+			<include name="org/lwjgl/demo/opencl/**" if:true="${opencl}"/>
 			<include name="org/lwjgl/demo/opencl/CLDemo.java" if:true="${binding.opencl}"/>
 
-			<include name="org/lwjgl/demo/opengl/**" if:true="${binding.glfw}"/>
+			<include name="org/lwjgl/demo/opengl/**" if:true="${binding.opengl}"/>
 
 			<include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
-			<include name="org/lwjgl/demo/stb/**" if:true="${stb_glfw}"/>
+			<include name="org/lwjgl/demo/stb/**" if:true="${stb}"/>
 
-			<include name="org/lwjgl/demo/system/jawt/**" if:true="${binding.jawt}"/>
+			<include name="org/lwjgl/demo/system/jawt/**" if:true="${jawt}"/>
 
 			<include name="org/lwjgl/demo/util/*.java"/>
 			<include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
 			<include name="org/lwjgl/demo/util/nfd/**" if:true="${nfd}"/>
-			<include name="org/lwjgl/demo/util/par/**" if:true="${binding.par}"/>
+			<include name="org/lwjgl/demo/util/par/**" if:true="${par}"/>
 			<include name="org/lwjgl/demo/util/tinyfd/**" if:true="${tinyfd}"/>
 			<include name="org/lwjgl/demo/util/xxhash/**" if:true="${binding.xxhash}"/>
-			<include name="org/lwjgl/demo/util/yoga/**" if:true="${binding.yoga}"/>
+			<include name="org/lwjgl/demo/util/yoga/**" if:true="${yoga}"/>
 
-			<include name="org/lwjgl/demo/vulkan/**" if:true="${vulkan_glfw}"/>
+			<include name="org/lwjgl/demo/vulkan/**" if:true="${vulkan}"/>
 
 			<!-- Tests -->
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
