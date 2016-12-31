@@ -266,12 +266,18 @@ class Struct(
 		fun validate(m: StructMember, indent: String, hasPointer: Boolean = false): String {
 			return if (m.nativeType.hasStructValidation) {
 				if (m is StructMemberArray) {
-					"""${if (hasPointer) "" else "${indent}long ${m.name} = $STRUCT + $className.${m.offsetField};\n"}${indent}for ( int i = 0; i < ${m.size}; i++ ) {
-${if (m.validSize == m.size) "$indent   check(memGetAddress(${m.name}));" else
-						"""$indent   if ( i < ${m.validSize} )
+					"""${
+					if (hasPointer) "" else "${indent}long ${m.name} = $STRUCT + $className.${m.offsetField};\n"
+					}${indent}for ( int i = 0; i < ${getReferenceMember<AutoSizeMember>(m.name)?.name ?: m.size}; i++ ) {${
+					if (m is PointerType) {
+						if (m.validSize == m.size)
+							"\n$indent   check(memGetAddress(${m.name}));"
+						else
+							"""
+$indent   if ( i < ${m.validSize} )
 $indent       check(memGetAddress(${m.name}));
 $indent   else if ( memGetAddress(${m.name}) == NULL )
-$indent       break;"""}
+$indent       break;"""} else ""}
 $indent   ${m.nativeType.javaMethodType}.validate(${m.name});
 $indent   ${m.name} += POINTER_SIZE;
 $indent}"""
@@ -324,7 +330,10 @@ $indent}"""
 				}
 			} else if (m.nativeType is StructType && m.nativeType.definition.validations.any()) {
 				validations.add(
-					"\t\t${m.nativeType.javaMethodType}.validate($STRUCT + $className.${m.offsetField});"
+					if (m is StructMemberArray)
+						validate(m, "\t\t")
+					else
+						"\t\t${m.nativeType.javaMethodType}.validate($STRUCT + $className.${m.offsetField});"
 				)
 			} else if (m.nativeType is PointerType && getReferenceMember<AutoSizeMember>(m.name)?.get<AutoSizeMember>().let { it == null || !it.optional }) {
 				if (m.nativeType.hasStructValidation) {
@@ -456,9 +465,11 @@ $indentation}"""
 						if (!bufferParam.nativeType.isPointerData)
 							it.error("Reference must not be a opaque pointer: AutoSize($reference)")
 
-						if (bufferParam.nativeType is StructType && !(bufferParam is StructMemberBuffer || bufferParam is StructMemberArray))
+						if ((bufferParam.nativeType as PointerType).elementType is StructType && bufferParam !is StructMemberBuffer)
 							it.error("Reference must be a struct buffer: AutoSize($reference)")
-					}
+					} else if (autoSize.optional || autoSize.atLeastOne)
+						it.error("Optional cannot be used with array references: AutoSize($reference)")
+
 					if (autoSize.atLeastOne && !bufferParam.has(nullable))
 						it.error("The \"atLeastOne\" option requires references to be nullable: AutoSize($reference)")
 				}
@@ -1188,7 +1199,7 @@ ${validations.joinToString("\n")}
 				.let { if (offset != 0) "$it - $offset" else it }
 
 			print(prefix)
-			print(if (m has nullable || autoSize.optional) {
+			print(if ((m has nullable || autoSize.optional) && m !is StructMemberArray) {
 				if (autoSize.atLeastOne || (m has nullable && autoSize.optional))
 					"if ( value != null ) n${capacity.name}($STRUCT, $autoSizeExpression);"
 				else
