@@ -37,18 +37,20 @@ val MemoryAccessJNI = "MemoryAccessJNI".nativeClass(packageName = "org.lwjgl.sys
 	nativeDirective(
 		"""#ifdef LWJGL_WINDOWS
 	__pragma(warning(disable : 4711))
-	static void* aligned_alloc(size_t alignment, size_t size) {
+	static void* __aligned_alloc(size_t alignment, size_t size) {
         return _aligned_malloc(size, alignment);
     }
-	#define aligned_free _aligned_free
+	#define __aligned_free _aligned_free
 #else
-	#ifndef __USE_ISOC11
-	static void* aligned_alloc(size_t alignment, size_t size) {
-		void *p;
-		return posix_memalign(&p, alignment, size) ? NULL : p;
-	}
+	#if defined(__USE_ISOC11) && !defined(LWJGL_LINUX)
+		#define __aligned_alloc aligned_alloc
+	#else
+		static void* __aligned_alloc(size_t alignment, size_t size) {
+			void *p;
+			return posix_memalign(&p, alignment, size) ? NULL : p;
+		}
 	#endif
-	#define aligned_free free
+	#define __aligned_free free
 #endif
 
 // -----------
@@ -77,16 +79,27 @@ ${primitives
 		"malloc",
 		"calloc",
 		"realloc",
-		"free",
-
-		"aligned_alloc",
-		"aligned_free"
+		"free"
 	).forEach {
 		macro..Address..voidptr(
 			it,
 			"Returns the address of the stdlib $it function."
 		)
 	}
+
+	Code(
+		nativeCall = "return (jlong)(intptr_t)&__aligned_alloc;"
+	)..macro..Address..voidptr(
+		"aligned_alloc",
+		"Returns the address of the stdlib {@code aligned_alloc} function."
+	)
+
+	Code(
+		nativeCall = "return (jlong)(intptr_t)&__aligned_free;"
+	)..macro..Address..voidptr(
+		"aligned_free",
+		"Returns the address of the stdlib {@code aligned_free} function."
+	)
 
 	for ((type, name, msg) in primitives)
 		type(

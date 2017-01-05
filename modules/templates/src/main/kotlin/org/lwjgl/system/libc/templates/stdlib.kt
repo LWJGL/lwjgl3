@@ -14,16 +14,18 @@ val stdlib = "LibCStdlib".nativeClass(packageName = LIBC_PACKAGE) {
 
 	nativeDirective(
 		"""#ifdef LWJGL_WINDOWS
-	#define aligned_alloc(alignment, size) _aligned_malloc(size, alignment)
-	#define aligned_free _aligned_free
+	#define __aligned_alloc(alignment, size) _aligned_malloc(size, alignment)
+	#define __aligned_free _aligned_free
 #else
-	#ifndef __USE_ISOC11
-	inline void* aligned_alloc(size_t alignment, size_t size) {
-		void *p;
-		return posix_memalign(&p, alignment, size) ? NULL : p;
-	}
+	#if defined(__USE_ISOC11) && !defined(LWJGL_LINUX)
+		#define __aligned_alloc aligned_alloc
+	#else
+		inline void* __aligned_alloc(size_t alignment, size_t size) {
+			void *p;
+			return posix_memalign(&p, alignment, size) ? NULL : p;
+		}
 	#endif
-	#define aligned_free free
+	#define __aligned_free free
 #endif""")
 
 	documentation = "Native bindings to stdlib.h."
@@ -74,7 +76,9 @@ val stdlib = "LibCStdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		MultiTypeAll..Unsafe..nullable..void_p.IN("ptr", "the memory space to free")
 	)
 
-	macro()..void_p(
+	Code(
+		nativeCall = "\treturn (jlong)(intptr_t)__aligned_alloc((size_t)alignment, (size_t)size);"
+	)..void_p(
 		"aligned_alloc",
 		"""
 		Allocates {@code size} bytes of uninitialized storage whose alignment is specified by {@code alignment}. The size parameter must be an integral multiple
@@ -85,7 +89,9 @@ val stdlib = "LibCStdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate. Must be a multiple of {@code alignment}.")
 	)
 
-	macro()..OffHeapOnly..void(
+	Code(
+		nativeCall = "\t__aligned_free(ptr);"
+	)..OffHeapOnly..void(
 		"aligned_free",
 		"Frees a block of memory that was allocated with #aligned_alloc(). If ptr is $NULL, no operation is performed.",
 

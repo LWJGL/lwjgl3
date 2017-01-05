@@ -26,7 +26,7 @@
 				<arg line="-c -std=c11"/>
 				<arg line="-m64" if:true="${build.arch.x64}"/>
 				<arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
-				<arg line="-O3 -flto -fPIC @{flags} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
+				<arg line="-O3 -flto -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
 
 				<arg value="-I${jni.headers}"/>
 				<arg value="-I${jni.headers}/linux"/>
@@ -84,7 +84,9 @@
 				<arg line="-z noexecstack"/>
 				<arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib@{name}${LIB_POSTFIX}.so"/>
 
-				<arg line="-Xlinker --version-script -Xlinker ${version.script}"/>
+				<arg line="-Wl,--version-script,${version.script}"/>
+				<arg line="-Wl,--wrap,memcpy" if:true="${build.arch.x64}"/>
+				<fileset dir="${bin.native}" includes="wrap_memcpy.o" if:true="${build.arch.x64}"/>
 				<fileset dir="@{dest}" includes="*.o"/>
 				<link/>
 			</apply>
@@ -96,6 +98,10 @@
 	</macrodef>
 	
 	<target name="compile-native-platform">
+		<compile dest="${bin.native}" flags="">
+			<fileset dir="." includes="${src.native}/system/linux/wrap_memcpy.c"/>
+		</compile>
+
 		<!-- CORE -->
 		<build name="lwjgl" dest="${bin.native}/core">
 			<source>
@@ -120,6 +126,7 @@
 		<!-- LMDB -->
 		<compile dest="${bin.native}/lmdb" flags="-Wno-format-extra-args" if:true="${binding.lmdb}">
 			<arg value="-I${src.native.rel}/util/lmdb"/>
+			<arg value="-DMDB_USE_ROBUST=0"/>
 			<fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
 		</compile>
 		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
