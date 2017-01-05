@@ -494,7 +494,7 @@
 			<jvmarg value="-Dorg.lwjgl.util.DebugAllocator=true"/>
 			<jvmarg value="-Djava.library.path=${lib}"/>
 			<jvmarg value="-XstartOnFirstThread" if:set="platform.macosx"/>
-			<jvmarg value="-Xss128k"/> <!-- for StackTest::testSOE -->
+			<jvmarg value="-Xss256k"/> <!-- for StackTest::testSOE -->
 			<jvmarg line="${jvmargs}" if:set="jvmargs"/>
 
 			<xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
