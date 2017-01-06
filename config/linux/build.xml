@@ -75,6 +75,7 @@
 			<local name="version.script"/>
 			<property name="version.script" location="config/linux/version.script"/>
 
+			<echo message="Linking @{name}" taskname="gcc" unless:set="lib-uptodate"/>
 			<apply executable="gcc" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
 				<srcfile/>
 				<arg value="-shared"/>

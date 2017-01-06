@@ -92,7 +92,8 @@
 			</condition>
 			<antcall target="-update-dependencies" if:set="update-dependencies"/>
 			<property name="dependencies-uptodate" value="true" if:set="update-dependencies"/>
-			
+
+			<echo message="Linking @{name}" taskname="clang" unless:set="lib-uptodate"/>
 			<apply executable="clang" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
 				<srcfile/>
 				<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/lib@{name}.dylib -O3 -flto -fPIC'/>
