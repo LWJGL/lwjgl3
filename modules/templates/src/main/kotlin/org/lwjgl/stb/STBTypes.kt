@@ -236,6 +236,8 @@ val stbtt_vertex_p = struct(STB_PACKAGE, "STBTTVertex", nativeName = "stbtt_vert
 	stbtt_vertex_type.member("y", "")
 	stbtt_vertex_type.member("cx", "")
 	stbtt_vertex_type.member("cy", "")
+	stbtt_vertex_type.member("cx1", "")
+	stbtt_vertex_type.member("cy1", "")
 	unsigned_char.member("type", "")
 }.p
 val stbtt_vertex_pp = stbtt_vertex_p.p

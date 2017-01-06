@@ -446,11 +446,23 @@ int main(int arg, char **argv)
 	// FONT LOADING
 
 	int(
+		"GetNumberOfFonts",
+		"""
+		Determines the number of fonts in a font file.
+
+		TrueType collection (.ttc) files may contain multiple fonts, while TrueType font (.ttf) files only contain one font. The number of fonts can be used
+		for indexing with #GetFontOffsetForIndex() where the index is between zero and one less than the total fonts. If an error occurs, -1 is returned.
+		""",
+
+		Unsafe..const..unsigned_char_p.IN("data", "the font data")
+	)
+
+	int(
 		"GetFontOffsetForIndex",
 		"""
 		Each .ttf/.ttc file may have more than one font. Each font has a sequential index number starting from 0. Call this function to get the font offset for
 		a given index; it returns -1 if the index is out of range. A regular .ttf file will only define one font and it always be at offset 0, so it will
-		return '0' for index 0, and -1 for all other indices. You can just skip this step if you know it's that kind of font.
+		return '0' for index 0, and -1 for all other indices.
 		""",
 
 		Unsafe..const..unsigned_char_p.IN("data", "the font data"),
@@ -615,7 +627,8 @@ int main(int arg, char **argv)
 
 		"vmove".."1",
 		"vline".."2",
-		"vcurve".."3"
+		"vcurve".."3",
+		"vcubic".."4"
 	)
 
 	intb(
