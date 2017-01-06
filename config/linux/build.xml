@@ -17,13 +17,18 @@
 
 	<macrodef name="compile">
 		<attribute name="dest"/>
+		<attribute name="lang" default="c"/>
 		<attribute name="flags"/>
 		<attribute name="relative" default="true"/>
 		<element name="source" implicit="true"/>
 		<sequential>
+			<local name="cpp"/>
+			<condition property="cpp"><equals arg1="@{lang}" arg2="c++"/></condition>
+
 			<mkdir dir="@{dest}"/>
 			<apply dir="@{dest}" executable="gcc" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-				<arg line="-c -std=c11"/>
+				<arg line="-c -std=c11" unless:set="cpp"/>
+				<arg line="-c -std=c++11" if:set="cpp"/>
 				<arg line="-m64" if:true="${build.arch.x64}"/>
 				<arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
 				<arg line="-O3 -flto -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
@@ -44,11 +49,12 @@
 	<macrodef name="build">
 		<attribute name="name"/>
 		<attribute name="dest"/>
+		<attribute name="lang" default="c"/>
 		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 		<element name="source"/>
 		<element name="link" optional="true"/>
 		<sequential>
-			<compile dest="@{dest}" flags="@{flags}">
+			<compile dest="@{dest}" lang="@{lang}" flags="@{flags}">
 				<source/>
 			</compile>
 
@@ -225,15 +231,13 @@
 		</build>
 
 		<!-- tinyexr -->
-		<compile dest="${bin.native}/tinyexr" flags="" if:true="${binding.tinyexr}">
-			<arg value="-I${src.native.rel}\util\tinyexr"/>
+		<compile dest="${bin.native}/tinyexr" lang="c++" flags="" if:true="${binding.tinyexr}">
+			<arg value="-I${src.native.rel}/util/tinyexr"/>
 			<fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
 		</compile>
 		<build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" if:true="${binding.tinyexr}">
-			<compileargs>
-				<arg value="-I${src.native.rel}\util\tinyexr"/>
-			</compileargs>
 			<source>
+				<arg value="-I${src.native.rel}/util/tinyexr"/>
 				<fileset dir="." includes="${src.generated.native}/util/tinyexr/*.c"/>
 			</source>
 		</build>
