@@ -155,6 +155,11 @@ enum Artifacts {
 		"Single-file public domain libraries for fonts, images, ogg vorbis files and more.",
 		Platforms.ALL
 	),
+	TINYEXR(
+		"lwjgl-tinyexr", "LWJGL - Tiny OpenEXR",
+		"A small library to load and save OpenEXR(.exr) images.",
+		Platforms.ALL
+	),
 	TINYFD(
 		"lwjgl-tinyfd", "LWJGL - Tiny File Dialogs bindings",
 		"Provides basic modal dialogs.",

@@ -242,6 +242,7 @@
 			<src path="${src.templates.kotlin}/org/lwjgl/util/nfd" if:true="${binding.nfd}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/par" if:true="${binding.par}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/simd" if:true="${binding.sse}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/util/tinyexr" if:true="${binding.tinyexr}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/tinyfd" if:true="${binding.tinyfd}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/xxhash" if:true="${binding.xxhash}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/yoga" if:true="${binding.yoga}"/>
@@ -321,6 +322,7 @@
 			<exclude name="org/lwjgl/util/nfd/**" unless:true="${binding.nfd}"/>
 			<exclude name="org/lwjgl/util/par/**" unless:true="${binding.par}"/>
 			<exclude name="org/lwjgl/util/simd/**" unless:true="${binding.sse}"/>
+			<exclude name="org/lwjgl/util/tinyexr/**" unless:true="${binding.tinyexr}"/>
 			<exclude name="org/lwjgl/util/tinyfd/**" unless:true="${binding.tinyfd}"/>
 			<exclude name="org/lwjgl/util/xxhash/**" unless:true="${binding.xxhash}"/>
 			<exclude name="org/lwjgl/util/yoga/**" unless:true="${binding.yoga}"/>
@@ -441,6 +443,15 @@
 			</and>
 		</condition>
 
+		<local name="tinyexr"/>
+		<condition property="tinyexr" value="true" else="false">
+			<and>
+				<istrue value="${glfw}"/>
+				<istrue value="${binding.tinyexr}"/>
+				<istrue value="${binding.tinyfd}"/>
+			</and>
+		</condition>
+
 		<local name="tinyfd"/>
 		<condition property="tinyfd" value="true" else="false">
 			<and>
@@ -498,6 +509,7 @@
 			<include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
 			<include name="org/lwjgl/demo/util/nfd/**" if:true="${nfd}"/>
 			<include name="org/lwjgl/demo/util/par/**" if:true="${par}"/>
+			<include name="org/lwjgl/demo/util/tinyexr/**" if:true="${tinyexr}"/>
 			<include name="org/lwjgl/demo/util/tinyfd/**" if:true="${tinyfd}"/>
 			<include name="org/lwjgl/demo/util/xxhash/**" if:true="${binding.xxhash}"/>
 			<include name="org/lwjgl/demo/util/yoga/**" if:true="${yoga}"/>
@@ -1005,6 +1017,9 @@
 
 		<!-- stb -->
 		<release-module package="org.lwjgl.stb" name="stb" native-library="lwjgl_stb" title="stb" if:true="${binding.stb}"/>
+
+		<!-- Tiny OpenEXR -->
+		<release-module package="org.lwjgl.util.tinyexr" name="tinyexr" native-library="lwjgl_tinyexr" title="Tiny OpenEXR" license="tinyexr" if:true="${binding.tinyexr}"/>
 
 		<!-- tiny file dialogs -->
 		<release-module package="org.lwjgl.util.tinyfd" name="tinyfd" native-library="lwjgl_tinyfd" title="tiny file dialogs" license="tinyfd" if:true="${binding.tinyfd}"/>

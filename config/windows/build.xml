@@ -29,7 +29,7 @@
 
 				<source/>
 
-				<regexpmapper from="(\w+)\.c(pp)?$" to="\1.obj"/>
+				<regexpmapper from="(\w+)\.c(c|pp)?$" to="\1.obj"/>
 			</apply>
 		</sequential>
 	</macrodef>
@@ -268,6 +268,20 @@ EXPORTS
 			<source>
 				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
 				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
+			</source>
+		</build>
+
+		<!-- tinyexr -->
+		<compile dest="${bin.native}/tinyexr" flags="" if:true="${binding.tinyexr}">
+			<arg value="/I${src.native}\util\tinyexr"/>
+			<fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
+		</compile>
+		<build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" if:true="${binding.tinyexr}">
+			<compileargs>
+				<arg value="/I${src.native}\util\tinyexr"/>
+			</compileargs>
+			<source>
+				<fileset dir="." includes="${src.generated.native}/util/tinyexr/*.c"/>
 			</source>
 		</build>
 

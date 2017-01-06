@@ -83,7 +83,7 @@ ${primitives
 	).forEach {
 		macro..Address..voidptr(
 			it,
-			"Returns the address of the stdlib $it function."
+			"Returns the address of the stdlib {@code $it} function."
 		)
 	}
 
