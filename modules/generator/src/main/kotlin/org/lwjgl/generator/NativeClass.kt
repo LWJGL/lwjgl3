@@ -145,12 +145,13 @@ abstract class SimpleBinding(
 fun simpleBinding(
 	libraryName: String,
 	libraryExpression: String = "\"$libraryName\"",
-	callingConvention: CallingConvention = CallingConvention.DEFAULT
+	callingConvention: CallingConvention = CallingConvention.DEFAULT,
+    bundledWithLWJGL: Boolean = false
 ) = object : SimpleBinding(libraryName.toUpperCase(), callingConvention) {
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		val libraryReference = libraryName.toUpperCase()
 
-		println("\n\tprivate static final SharedLibrary $libraryReference = Library.loadNative($libraryExpression);\n")
+		println("\n\tprivate static final SharedLibrary $libraryReference = Library.loadNative($libraryExpression${if (bundledWithLWJGL) ", true" else ""});\n")
 		print("\t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
 		generateFunctionsClass(nativeClass)
 		println("""

@@ -30,7 +30,7 @@ fun config() {
 	)
 }
 
-val BGFX_BINDING = simpleBinding("bgfx", """Configuration.BGFX_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("bgfx"))""")
+val BGFX_BINDING = simpleBinding("bgfx", """Configuration.BGFX_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("bgfx"))""", bundledWithLWJGL = true)
 val BGFX_BINDING_DELEGATE = BGFX_BINDING.delegate("BGFX.getLibrary()")
 
 val bgfx_renderer_type_t = "bgfx_renderer_type_t".enumType

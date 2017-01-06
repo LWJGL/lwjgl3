@@ -22,7 +22,7 @@ fun config() {
 	)
 }
 
-val ASSIMP_BINDING = simpleBinding("assimp", """Configuration.ASSIMP_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("assimp"))""")
+val ASSIMP_BINDING = simpleBinding("assimp", """Configuration.ASSIMP_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("assimp"))""", bundledWithLWJGL = true)
 
 /*val aiPlane = struct(ASSIMP_PACKAGE, "AIPlane", nativeName = "struct aiPlane") {
     documentation = "Represents a plane in a three-dimensional, euclidean space."

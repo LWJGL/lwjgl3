@@ -119,7 +119,7 @@ public final class Library {
 			}
 		}
 
-		printError();
+		printError(true);
 		throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
 	}
 
@@ -151,8 +151,25 @@ public final class Library {
 	 *
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
-	@SuppressWarnings("try")
 	public static SharedLibrary loadNative(String name) {
+		return loadNative(name, false);
+	}
+
+	/**
+	 * Loads a shared library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
+	 * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
+	 *
+	 * @param name             the library name. OS-specific prefixes and file extensions are optional (e.g. both {@code "GL"} and {@code "libGL.so.1"} are
+	 *                         valid on Linux)
+	 * @param bundledWithLWJGL whether the default LWJGL distribution includes the shared library. This flag does not affect the shared library loading
+	 *                         process.
+	 *
+	 * @return the shared library
+	 *
+	 * @throws UnsatisfiedLinkError if the library could not be loaded
+	 */
+	@SuppressWarnings("try")
+	public static SharedLibrary loadNative(String name, boolean bundledWithLWJGL) {
 		apiLog("Loading library: " + name);
 		if ( new File(name).isAbsolute() ) {
 			SharedLibrary lib = apiCreateLibrary(name);
@@ -203,7 +220,7 @@ public final class Library {
 			apiLog(String.format("\t%s not found in system paths", libName));
 		}
 
-		printError();
+		printError(bundledWithLWJGL);
 		throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
 	}
 
@@ -277,11 +294,14 @@ public final class Library {
 		return null;
 	}
 
-	private static void printError() {
+	private static void printError(boolean bundledWithLWJGL) {
 		DEBUG_STREAM.println(
-			"[LWJGL] Failed to load a library. Possible solutions:\n" +
-				"\ta) Set -Djava.library.path or -Dorg.lwjgl.librarypath to the directory that contains the shared libraries.\n" +
-				"\tb) Add the JAR(s) containing the shared libraries to the classpath."
+			"[LWJGL] Failed to load a library. Possible solutions:\n" + (bundledWithLWJGL
+				? "\ta) Add the directory that contains the shared library to -Djava.library.path or -Dorg.lwjgl.librarypath.\n" +
+				"\tb) Add the JAR that contains the shared library to the classpath."
+				: "\ta) Install the library or the driver that provides the library.\n" +
+				"\tb) Ensure that the library is accessible from the system library paths."
+			)
 		);
 
 		if ( !DEBUG ) {
