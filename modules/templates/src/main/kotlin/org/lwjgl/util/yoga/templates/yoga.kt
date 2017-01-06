@@ -184,6 +184,14 @@ div {
 		"AlignStretch".enum
 	)
 
+	EnumConstant(
+		"YGUnit",
+
+		"UnitUndefined".enum,
+		"UnitPixel".enum,
+		"UnitPercent".enum
+	)
+
 	YGNodeRef(
 		"NodeNew",
 		""
@@ -292,7 +300,7 @@ div {
 	)
 
 	bool(
-		"ValueIsUndefined",
+		"FloatIsUndefined",
 		"",
 
 		float.IN("value", "")
@@ -358,6 +366,31 @@ div {
 		)
 	}
 
+	fun YG_NODE_STYLE_PROPERTY_UNIT(type: NativeType, name: String, paramName: String, documentation: String = "") {
+		void(
+			"NodeStyleSet$name",
+			documentation,
+
+			const..YGNodeRef.IN("node", ""),
+			float.IN(paramName, "")
+		)
+
+		void(
+			"NodeStyleSet${name}Percent",
+			documentation,
+
+			const..YGNodeRef.IN("node", ""),
+			float.IN(paramName, "")
+		)
+
+		type(
+			"NodeStyleGet$name",
+			documentation,
+
+			const..YGNodeRef.IN("node", "")
+		)
+	}
+
 	fun YG_NODE_STYLE_EDGE_PROPERTY(type: NativeType, name: String, paramName: String) {
 		void(
 			"NodeStyleSet$name",
@@ -366,6 +399,34 @@ div {
 			const..YGNodeRef.IN("node", ""),
 			YGEdge.IN("edge", ""),
 			type.IN(paramName, "")
+		)
+
+		type(
+			"NodeStyleGet$name",
+			"",
+
+			const..YGNodeRef.IN("node", ""),
+			YGEdge.IN("edge", "")
+		)
+	}
+
+	fun YG_NODE_STYLE_EDGE_PROPERTY_UNIT(type: NativeType, name: String, paramName: String) {
+		void(
+			"NodeStyleSet$name",
+			"",
+
+			const..YGNodeRef.IN("node", ""),
+			YGEdge.IN("edge", ""),
+			float.IN(paramName, "")
+		)
+
+		void(
+			"NodeStyleSet${name}Percent",
+			"",
+
+			const..YGNodeRef.IN("node", ""),
+			YGEdge.IN("edge", ""),
+			float.IN(paramName, "")
 		)
 
 		type(
@@ -411,19 +472,19 @@ div {
 
 	YG_NODE_STYLE_PROPERTY(float, "FlexGrow", "flexGrow")
 	YG_NODE_STYLE_PROPERTY(float, "FlexShrink", "flexShrink")
-	YG_NODE_STYLE_PROPERTY(float, "FlexBasis", "flexBasis")
+	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "FlexBasis", "flexBasis")
 
-	YG_NODE_STYLE_EDGE_PROPERTY(float, "Position", "position")
-	YG_NODE_STYLE_EDGE_PROPERTY(float, "Margin", "margin")
-	YG_NODE_STYLE_EDGE_PROPERTY(float, "Padding", "padding")
+	YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Position", "position")
+	YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Margin", "margin")
+	YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Padding", "padding")
 	YG_NODE_STYLE_EDGE_PROPERTY(float, "Border", "border")
 
-	YG_NODE_STYLE_PROPERTY(float, "Width", "width")
-	YG_NODE_STYLE_PROPERTY(float, "Height", "height")
-	YG_NODE_STYLE_PROPERTY(float, "MinWidth", "minWidth")
-	YG_NODE_STYLE_PROPERTY(float, "MinHeight", "minHeight")
-	YG_NODE_STYLE_PROPERTY(float, "MaxWidth", "maxWidth")
-	YG_NODE_STYLE_PROPERTY(float, "MaxHeight", "maxHeight")
+	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "Width", "width")
+	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "Height", "height")
+	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MinWidth", "minWidth")
+	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MinHeight", "minHeight")
+	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MaxWidth", "maxWidth")
+	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MaxHeight", "maxHeight")
 
 	YG_NODE_STYLE_PROPERTY(
 		float, "AspectRatio", "aspectRatio",
@@ -450,6 +511,19 @@ div {
 	YG_NODE_LAYOUT_PROPERTY(float, "Width")
 	YG_NODE_LAYOUT_PROPERTY(float, "Height")
 	YG_NODE_LAYOUT_PROPERTY(YGDirection, "Direction")
+
+	float(
+		"NodeLayoutGetPadding",
+		"""
+		Get the computed padding for this node after performing layout.
+
+		If padding was set using pixel values then the returned value will be the same as #NodeStyleGetPadding(). However if padding was set using a percentage
+		value then the returned value is the computed value used during layout.
+		""",
+
+		const..YGNodeRef.IN("node", ""),
+		YGEdge.IN("edge", "")
+	)
 
 	void(
 		"SetLogger",

@@ -138,17 +138,46 @@ public class YogaNodeTest {
 
 	@Test
 	public void testCopyStyle() {
-		long node0 = YGNodeNew();
-		assertTrue(YGValueIsUndefined(YGNodeStyleGetMaxHeight(node0)));
+		try ( MemoryStack stack = stackPush() ) {
+			YGValue v = YGValue.mallocStack(stack);
 
-		long node1 = YGNodeNew();
-		YGNodeStyleSetMaxHeight(node1, 100);
+			long node0 = YGNodeNew();
+			assertTrue(YGFloatIsUndefined(YGNodeStyleGetMaxHeight(node0, v).value()));
 
-		YGNodeCopyStyle(node0, node1);
-		assertEquals(100, (int)YGNodeStyleGetMaxHeight(node0));
+			long node1 = YGNodeNew();
+			YGNodeStyleSetMaxHeight(node1, 100);
 
-		YGNodeFree(node1);
-		YGNodeFree(node0);
+			YGNodeCopyStyle(node0, node1);
+			assertEquals(100, (int)YGNodeStyleGetMaxHeight(node0, v).value());
+
+			YGNodeFree(node1);
+			YGNodeFree(node0);
+		}
+	}
+
+	@Test
+	public void testLayoutPadding() {
+		long node = YGNodeNew();
+
+		YGNodeStyleSetWidth(node, 100);
+		YGNodeStyleSetHeight(node, 100);
+		YGNodeStyleSetPadding(node, YGEdgeStart, 1);
+		YGNodeStyleSetPadding(node, YGEdgeEnd, 2);
+		YGNodeStyleSetPadding(node, YGEdgeTop, 3);
+		YGNodeStyleSetPadding(node, YGEdgeBottom, 4);
+
+		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
+
+		try ( MemoryStack stack = stackPush() ) {
+			YGValue v = YGValue.mallocStack(stack);
+
+			assertEquals(1, (int)YGNodeStyleGetPadding(node, YGEdgeStart, v).value());
+			assertEquals(2, (int)YGNodeStyleGetPadding(node, YGEdgeEnd, v).value());
+			assertEquals(3, (int)YGNodeStyleGetPadding(node, YGEdgeTop, v).value());
+			assertEquals(4, (int)YGNodeStyleGetPadding(node, YGEdgeBottom, v).value());
+		}
+
+		YGNodeFree(node);
 	}
 
 }

@@ -48,6 +48,7 @@ float h = layout.dimensions(YGDimensionHeight);""")}
 
 val YGNodeRef = "YGNodeRef".opaque_p
 
+val YGUnit = "YGUnit".enumType
 val YGDirection = "YGDirection".enumType
 val YGPrintOptions = "YGPrintOptions".enumType
 val YGMeasureMode = "YGMeasureMode".enumType
@@ -64,6 +65,11 @@ val YGExperimentalFeature = "YGExperimentalFeature".enumType
 val YGSize = struct(YOGA_PACKAGE, "YGSize") {
 	float.member("width", "")
 	float.member("height", "")
+}
+
+val YGValue = struct(YOGA_PACKAGE, "YGValue") {
+	float.member("value", "")
+	YGUnit.member("unit", "")
 }
 
 // TODO: Returns struct by value
@@ -147,6 +153,7 @@ val YG_MAX_CACHED_RESULT_COUNT = 16
 val YGLayout = struct(YOGA_PACKAGE, "YGLayout", mutable = false) {
 	float.array("positions", "", size = 4)
 	float.array("dimensions", "", size = 2)
+	float.array("padding", "", size = 6)
 	YGDirection.member("direction", "")
 	
 	uint32_t.member("computedFlexBasisGeneration", "")
@@ -176,14 +183,14 @@ val YGStyle = struct(YOGA_PACKAGE, "YGStyle", mutable = false) {
 	float.member("flex", "")
 	float.member("flexGrow", "")
 	float.member("flexShrink", "")
-	float.member("flexBasis", "")
-	float.array("margin", "", size = YGEdgeCount)
-	float.array("positions", "", size = YGEdgeCount)
-	float.array("padding", "", size = YGEdgeCount)
-	float.array("border", "", size = YGEdgeCount)
-	float.array("dimensions", "", size = 2)
-	float.array("minDimensions", "", size = 2)
-	float.array("maxDimensions", "", size = 2)
+	YGValue.member("flexBasis", "")
+	YGValue.array("margin", "", size = YGEdgeCount)
+	YGValue.array("positions", "", size = YGEdgeCount)
+	YGValue.array("padding", "", size = YGEdgeCount)
+	YGValue.array("border", "", size = YGEdgeCount)
+	YGValue.array("dimensions", "", size = 2)
+	YGValue.array("minDimensions", "", size = 2)
+	YGValue.array("maxDimensions", "", size = 2)
 	
 	// Yoga specific properties, not compatible with flexbox specification
 	float.member("aspectRatio", "")
@@ -195,14 +202,16 @@ val YGNode = struct(YOGA_PACKAGE, "YGNode", mutable = false) {
 	YGStyle.member("style", "")
 	YGLayout.member("layout", "")
 	uint32_t.member("lineIndex", "")
-	bool.member("hasNewLayout", "")
+
 	YGNodeRef.member("parent", "")
 	YGNodeListRef.member("children", "")
-	bool.member("isDirty", "")
 
 	YGNode_p.member("nextChild", "")
 	
 	YGMeasureFunc.member("measure", "")
 	YGPrintFunc.member("print", "")
 	voidptr.member("context", "")
+
+	bool.member("isDirty", "")
+	bool.member("hasNewLayout", "")
 }
