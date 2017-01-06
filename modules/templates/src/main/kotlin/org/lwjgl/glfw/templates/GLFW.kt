@@ -633,6 +633,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"COCOA_RETINA_FRAMEBUFFER"..0x00023001
 	)
 
+	IntConstant(
+		"Specifies whether to activate frame autosaving on macOS. This is ignored on other platforms.",
+
+		"COCOA_FRAME_AUTOSAVE"..0x00023002
+	)
+
 	val ClientAPIValues = IntConstant(
 		"Values for the #CLIENT_API hint.",
 
@@ -1116,9 +1122,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			""",
 			"<b>Windows</b>: The context to share resources with may not be current on any other thread.",
 			"""
-		    <b>macOS</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's
-		    icon. Also, the first time a window is opened the menu bar is populated with common commands like Hide, Quit and About. The (minimal) about dialog
-		    uses information from the application's bundle. For more information on bundles, see the
+			The OS only supports forward-compatible core profile contexts for OpenGL versions 3.2 and later. Before creating an OpenGL context of version 3.2
+			or later you must set the #OPENGL_FORWARD_COMPAT and #OPENGL_PROFILE hints accordingly. OpenGL 3.0 and 3.1 contexts are not supported at all on
+			macOS.
+			""",
+			"""
+		    <b>macOS</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's icon. For
+		    more information on bundles, see the
 		    <a href="https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac
 		    Developer Library.
 			""",
@@ -1134,7 +1144,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		    <a href="https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High
 		    Resolution Guidelines for macOS</a> in the Mac Developer Library.
 			""",
-			"<b>X11</b>: There is no mechanism for setting the window icon yet.",
+			"When activating frame autosaving with #COCOA_FRAME_AUTOSAVE, the specified window size may be overriden by a previously saved size and position.",
 			"<b>X11</b>: Some window managers will not respect the placement of initially hidden windows.",
 			"""
 			<b>X11</b>: Due to the asynchronous nature of X11, it may take a moment for a window to reach its requested state. This means you may not be able
