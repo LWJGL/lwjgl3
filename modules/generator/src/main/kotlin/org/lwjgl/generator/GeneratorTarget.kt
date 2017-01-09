@@ -191,7 +191,7 @@ abstract class GeneratorTarget(
 			.mapNotNull { if (regex.matches(it.key)) it.key else null }
 			.joinToString(" #", prefix = "#")
 			.let {
-				if (it.isEmpty())
+				if (it.length == 1)
 					throw IllegalStateException("Failed to match any tokens with regex: $pattern")
 				else
 					it
