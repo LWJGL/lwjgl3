@@ -190,6 +190,9 @@ class MemoryTextUtil {
 
 	/** @see MemoryUtil#memASCII(ByteBuffer, int, int) */
 	static String decodeASCII(ByteBuffer buffer, int length, int offset) {
+		if ( length <= 0 )
+			return null;
+
 		char[] chars = new char[length];
 
 		for ( int i = 0; i < length; i++ )
@@ -303,6 +306,9 @@ class MemoryTextUtil {
 
 	/** @see MemoryUtil#memUTF8(ByteBuffer, int, int) */
 	static String decodeUTF8(ByteBuffer buffer, int length, int offset) {
+		if ( length <= 0 )
+			return null;
+
 		char[] string = new char[length];
 
 		int i = 0, position = offset, limit = offset + length;
@@ -388,6 +394,9 @@ class MemoryTextUtil {
 
 	/** @see MemoryUtil#memUTF16(ByteBuffer, int, int) */
 	static String decodeUTF16(ByteBuffer buffer, int length, int offset) {
+		if ( length <= 0 )
+			return null;
+
 		char[] chars = new char[length];
 
 		for ( int i = 0; i < chars.length; i++ )
