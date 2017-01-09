@@ -239,6 +239,16 @@ EXPORTS
 			</source>
 		</build>
 
+		<!-- OpenVR -->
+		<build name="lwjgl_openvr" dest="${bin.native}/openvr" if:true="${binding.openvr}">
+			<compileargs>
+				<arg value="/I${src.native}\openvr"/>
+			</compileargs>
+			<source>
+				<fileset dir="." includes="${src.generated.native}/openvr/*.c"/>
+			</source>
+		</build>
+
 		<!-- ParShapes -->
 		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
 			<compileargs>
@@ -344,6 +354,7 @@ EXPORTS
 		<update-dependency name="jemalloc (x86)" artifact="x86/jemalloc32.dll" dest="${lib}" if:true="${binding.jemalloc}"/>
 		<update-dependency name="GLFW (x86)" artifact="x86/glfw32.dll" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" dest="${lib}" if:true="${binding.openal}"/>
+		<update-dependency name="OpenVR (x86)" artifact="x86/openvr_api32.dll" dest="${lib}" if:true="${binding.openvr}"/>
 	</target>
 
 	<target name="-update-dependencies-x64">
@@ -358,5 +369,6 @@ EXPORTS
 		<update-dependency name="jemalloc (x64)" artifact="x64/jemalloc.dll" dest="${lib}" if:true="${binding.jemalloc}"/>
 		<update-dependency name="GLFW (x64)" artifact="x64/glfw.dll" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL.dll" dest="${lib}" if:true="${binding.openal}"/>
+		<update-dependency name="OpenVR (x64)" artifact="x64/openvr_api.dll" dest="${lib}" if:true="${binding.openvr}"/>
 	</target>
 </project>

@@ -45,6 +45,7 @@ val float_pp = float_p.p
 val double_p = double.p
 val size_t_p = size_t.p
 
+val int32_t_p = int32_t.p
 val uint32_t_p = uint32_t.p
 val uint64_t_p = uint64_t.p
 

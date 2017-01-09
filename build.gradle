@@ -135,6 +135,11 @@ enum Artifacts {
 		"A royalty-free, cross-platform API for full-function 2D and 3D graphics on embedded systems - including consoles, phones, appliances and vehicles.",
 		Platforms.ALL
 	),
+	OPENVR(
+		"lwjgl-openvr", "LWJGL - OpenVR bindings",
+		"OpenVR is an API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.",
+		Platforms.ALL
+	),
 	OVR(
 		"lwjgl-ovr", "LWJGL - OVR bindings",
 		"The API of the Oculus SDK.",

@@ -49,6 +49,7 @@ class AutoSizeFactor(
 ) {
 	companion object {
 		fun div(expression: String) = AutoSizeFactor("/", "*", expression)
+		fun mul(expression: String) = AutoSizeFactor("*", "/", expression)
 		fun shl(expression: String) = AutoSizeFactor("<<", ">>", expression)
 		fun shr(expression: String) = AutoSizeFactor(">>", "<<", expression)
 	}
@@ -70,6 +71,9 @@ fun AutoSize(div: Int, reference: String, vararg dependent: String) =
 
 fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String) =
 	AutoSize(reference, *dependent, factor = AutoSizeFactor.div(expression))
+
+fun AutoSizeMul(expression: String, reference: String, vararg dependent: String) =
+	AutoSize(reference, *dependent, factor = AutoSizeFactor.mul(expression))
 
 fun AutoSizeShr(expression: String, reference: String, vararg dependent: String) =
 	AutoSize(reference, *dependent, factor = AutoSizeFactor.shr(expression))

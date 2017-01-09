@@ -223,6 +223,7 @@
 			<src path="${src.templates.kotlin}/org/lwjgl/opengl/GLXTypes.kt" if:true="${opengl_types}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/opengl/WGLTypes.kt" if:true="${opengl_types}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/opengles" if:true="${binding.opengles}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/openvr" if:true="${binding.openvr}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/vulkan" if:true="${binding.vulkan}"/>
@@ -313,6 +314,7 @@
 			<exclude name="org/lwjgl/assimp/**" unless:true="${binding.assimp}"/>
 			<exclude name="org/lwjgl/bgfx/**" unless:true="${binding.bgfx}"/>
 			<exclude name="org/lwjgl/nuklear/**" unless:true="${binding.nuklear}"/>
+			<exclude name="org/lwjgl/openvr/**" unless:true="${binding.openvr}"/>
 			<exclude name="org/lwjgl/ovr/**" unless:true="${binding.ovr}"/>
 			<exclude name="org/lwjgl/stb/**" unless:true="${binding.stb}"/>
 
@@ -501,6 +503,7 @@
 
 			<include name="org/lwjgl/demo/opengl/**" if:true="${binding.opengl}"/>
 
+			<include name="org/lwjgl/demo/openvr/**" if:true="${binding.openvr}"/>
 			<include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
 			<include name="org/lwjgl/demo/stb/**" if:true="${stb}"/>
 
@@ -1001,6 +1004,9 @@
 				<fileset dir="${src.core}"><include name="org/lwjgl/opengles/**"/></fileset>
 			</sources>
 		</release-module>
+
+		<!-- OpenVR -->
+		<release-module package="org.lwjgl.openvr" name="openvr" native-library="lwjgl_openvr" title="OpenVR" license="openvr" if:true="${binding.openvr}"/>
 
 		<!-- LibOVR -->
 		<release-module package="org.lwjgl.ovr" name="ovr" title="LibOVR" license="oculus" if:true="${binding.ovr}">

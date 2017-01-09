@@ -80,6 +80,10 @@ fun Struct.AutoSizeDiv(expression: String, reference: String, vararg dependent: 
 	AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.div(expression), optional = optional, atLeastOne = atLeastOne)
 
 @Suppress("unused")
+fun Struct.AutoSizeMul(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
+	AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.mul(expression), optional = optional, atLeastOne = atLeastOne)
+
+@Suppress("unused")
 fun Struct.AutoSizeShr(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
 	AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shr(expression), optional = optional, atLeastOne = atLeastOne)
 

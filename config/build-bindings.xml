@@ -28,6 +28,7 @@ This script is included in /config/build-definitions.xml.
 	<property name="binding.opencl" value="true"/>
 	<property name="binding.opengl" value="true"/>
 	<property name="binding.opengles" value="true"/>
+	<property name="binding.openvr" value="true"/>
 	<property name="binding.par" value="true"/>
 	<property name="binding.sse" value="true"/>
 	<property name="binding.stb" value="true"/>

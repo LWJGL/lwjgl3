@@ -203,6 +203,14 @@
 			</source>
 		</build>
 
+		<!-- OpenVR -->
+		<build name="lwjgl_openvr" dest="${bin.native}/openvr" if:true="${binding.openvr}">
+			<source>
+				<arg value="-I${src.native.rel}/openvr"/>
+				<fileset dir="." includes="${src.generated.native}/openvr/*.c"/>
+			</source>
+		</build>
+
 		<!-- ParShapes -->
 		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
 			<source>
@@ -290,6 +298,7 @@
 		<update-dependency name="jemalloc" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>
 		<update-dependency name="GLFW" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
+		<update-dependency name="OpenVR" artifact="x64/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
 
 		<chmod dir="${lib}" perm="755" includes="*.so"/>
 	</target>
