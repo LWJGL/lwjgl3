@@ -445,14 +445,12 @@ public class TemplateFormatter {
 					builder.append('\t');
 					// const
 					if ( paramMatcher.group(1) != null || paramMatcher.group(4) != null )
-						builder.append("(const..");
+						builder.append("const..");
 					// type
 					formatType(paramMatcher, builder, prefixTypes ? prefix : "");
 					// pointer
 					if ( paramMatcher.group(5) != null )
 						writerPointer(builder, paramMatcher);
-					if ( paramMatcher.group(1) != null )
-						builder.append(')');
 					builder.append("(\n");
 					builder.append("\t\t\"");
 					builder.append(strip(paramMatcher.group(6), prefix));
