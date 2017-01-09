@@ -1614,7 +1614,7 @@ class NativeClassFunction(
 					it.nativeType.mapping.jniSignatureArray
 				else
 					it.nativeType.mapping.jniSignatureStrict
-			}.joinToString("", prefix = if (hasFunctionAddressParam) "__J" else "__")
+			}.joinToString("", prefix = if (hasFunctionAddressParam) "__J" else "__", postfix = if (returns.isStructValue) "J" else ""))
 		println("(${if (params.isEmpty()) "void" else params.joinToString(", ")}) {")
 
 		// Cast function address to pointer
