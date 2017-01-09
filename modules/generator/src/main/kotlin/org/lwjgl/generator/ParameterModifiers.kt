@@ -278,7 +278,9 @@ class Return(
 	/** An expression that defines the maximum length value. If defined, an additional alternative method will be generated. */
 	val maxLengthExpression: String? = null,
 	/** When true, any temporary buffers will be allocated on the heap. */
-	val heapAllocate: Boolean = false
+	val heapAllocate: Boolean = false,
+	/** When true, the actual buffer size includes the null-termination. */
+	val includesNT: Boolean = false
 ) : ParameterModifier {
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
@@ -294,6 +296,9 @@ class Return(
 
 			if (heapAllocate && param.nativeType !is CharSequenceType)
 				throw IllegalArgumentException("The heapAllocate option can only be enabled with CharSequence parameters.")
+
+			if (includesNT && param.nativeType !is CharSequenceType)
+				throw IllegalArgumentException("The includesNT option can only be enabled with CharSequence parameters.")
 		} else {
 			if (this !== ReturnParam || param.nativeType !is StructType)
 				throw IllegalArgumentException("The ReturnParam modifier can only be used on struct value parameters.")

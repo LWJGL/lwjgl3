@@ -26,6 +26,9 @@ interface StackFunctionTransform<in T : QualifiedType> : Transform {
 /** Marker interface to indicate that pointer and buffer checks should be skipped. */
 interface SkipCheckFunctionTransform
 
+/** Marker interface to indicate that the native call result should be stored and returned later. */
+interface ReturnLaterTransform
+
 internal open class AutoSizeTransform(
 	val bufferParam: Parameter,
 	val relaxedCast: Boolean,
@@ -140,16 +143,6 @@ internal open class ExpressionTransform(
 		if (keepParam) paramTransform?.transformDeclaration(param, original) ?: original else null
 
 	override fun transformCall(param: Parameter, original: String) = expression
-}
-
-internal class ExpressionLocalTransform(
-	expression: String,
-	keepParam: Boolean = false
-) : ExpressionTransform(expression, keepParam), CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformCall(param: Parameter, original: String) = original
-	override fun generate(qtype: Parameter, code: Code) = code.append(
-		javaInit = statement("\t\t${qtype.javaMethodType} ${qtype.name} = $expression;", ApplyTo.ALTERNATIVE)
-	)
 }
 
 internal class CharSequenceTransform(
@@ -299,7 +292,7 @@ internal class BufferAutoSizeReturnTransform(
 	val outParam: Parameter,
 	val lengthExpression: String,
 	val encoding: String? = null
-) : FunctionTransform<ReturnValue> {
+) : FunctionTransform<ReturnValue>, ReturnLaterTransform {
 	override fun transformDeclaration(param: ReturnValue, original: String) = (outParam.nativeType as PointerType).elementType!!.let {
 		if (it.dereference is StructType)
 			"${it.javaMethodType}.Buffer"
@@ -319,33 +312,39 @@ internal class BufferAutoSizeReturnTransform(
 internal class BufferReturnTransform(
 	val outParam: Parameter,
 	val lengthParam: String,
-	val encoding: String? = null
-) : FunctionTransform<ReturnValue> {
+	val charMapping: CharMapping? = null,
+    val includesNT: Boolean = false
+) : FunctionTransform<ReturnValue>, ReturnLaterTransform {
 
-	override fun transformDeclaration(param: ReturnValue, original: String): String? = if (encoding == null)
+	override fun transformDeclaration(param: ReturnValue, original: String): String? = if (charMapping == null)
 		(outParam.nativeType.mapping as PointerMapping).javaMethodType.simpleName
 	else
 		"String"
 
 	override fun transformCall(param: ReturnValue, original: String): String {
-		return if (encoding != null)
-			"\t\treturn mem$encoding(${outParam.name}, $lengthParam.get(0));"
+		val lengthParamExpression = (if (lengthParam == RESULT) lengthParam else "$lengthParam.get(0)").let {
+			if (includesNT) "$it - ${charMapping!!.bytes}" else it
+		}
+
+		return if (charMapping != null)
+			"\t\treturn mem${charMapping.charset}(${outParam.name}, $lengthParamExpression);"
 		else if (outParam.nativeType.mapping !== PointerMapping.DATA_BYTE)
-			"\t\t${outParam.name}.limit($lengthParam.get(0));\n" +
+			"\t\t${outParam.name}.limit($lengthParamExpression);\n" +
 			"\t\treturn ${outParam.name}.slice();"
 		else
-			"\t\treturn memSlice(${outParam.name}, $lengthParam.get(0));"
+			"\t\treturn memSlice(${outParam.name}, $lengthParamExpression);"
 	}
 }
 
 internal class BufferReturnNTTransform(
 	val outParam: Parameter,
-	val maxLengthParam: String,
-	val encoding: String
+	val maxLengthParam: String
 ) : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
-	override fun transformCall(param: ReturnValue, original: String): String =
-		"\t\treturn mem$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}(memAddress(${outParam.name}), $maxLengthParam));"
+	override fun transformCall(param: ReturnValue, original: String): String {
+		val mapping = (outParam.nativeType as CharSequenceType).charMapping
+		return "\t\treturn mem${mapping.charset}(memByteBufferNT${mapping.bytes}(memAddress(${outParam.name}), $maxLengthParam));"
+	}
 }
 
 internal open class PointerArrayTransform(val paramType: String) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {

@@ -370,11 +370,8 @@ class NativeClassFunction(
 						if (!returns.nativeType.mapping.let({ it === PrimitiveMapping.INT || it === PrimitiveMapping.POINTER }))
 							it.error("The Return modifier was used in a function with an unsupported return type")
 
-						if (!it.has<Check>())
-							it.error("A Check for ReturnParam parameter does not exist")
-
-						if (hasAutoSizeFor(it))
-							it.error("Invalid combination of AutoSize and ReturnParam modifiers in function with non-void return type")
+						if (!it.has<Check>() && !hasAutoSizeFor(it))
+							it.error("A Check or AutoSize for ReturnParam parameter does not exist")
 					} else {
 						if (!returns.isVoid)
 							it.error("The Return modifier was used in a function with an unsupported return type")
@@ -1089,10 +1086,6 @@ class NativeClassFunction(
 						applyReturnValueTransforms(it)
 						generateAlternativeMethod(stripPostfix(name, stripType = false), transforms)
 					}
-				} else if (returnMod.lengthParam.startsWith(RESULT)) {
-					transforms[returns] = BufferAutoSizeReturnTransform(it, returnMod.lengthParam)
-					transforms[it] = BufferReplaceReturnTransform
-					generateAlternativeMethod(name, transforms)
 				} else if (it.nativeType is CharSequenceType) {
 					// Remove any transform from the maxLength parameter
 					val maxLengthParam = getParam(hasAutoSizePredicate(it))
@@ -1100,7 +1093,7 @@ class NativeClassFunction(
 
 					// Hide length parameter and use the stack
 					val lengthParam = returnMod.lengthParam
-					if (lengthParam.isNotEmpty())
+					if (lengthParam.isNotEmpty() && lengthParam !== RESULT)
 						transforms[paramMap[lengthParam]!!] = BufferLengthTransform
 
 					// Hide target parameter and decode internally
@@ -1112,21 +1105,24 @@ class NativeClassFunction(
 
 					// Transform void to the buffer type
 					transforms[returns] = if (lengthParam.isNotEmpty())
-						BufferReturnTransform(it, lengthParam, it.nativeType.charMapping.charset)
+						BufferReturnTransform(it, lengthParam, it.nativeType.charMapping, returnMod.includesNT)
 					else
 						BufferReturnNTTransform(
 							it,
-							if (4 < (maxLengthParam.nativeType.mapping as PrimitiveMapping).bytes) "(int)${maxLengthParam.name}" else maxLengthParam.name,
-							it.nativeType.charMapping.charset
+							if (4 < (maxLengthParam.nativeType.mapping as PrimitiveMapping).bytes) "(int)${maxLengthParam.name}" else maxLengthParam.name
 						)
 
 					generateAlternativeMethod(name, transforms)
 
 					if (returnMod.maxLengthExpression != null) {
 						// Transform maxLength parameter and generate an additional alternative
-						transforms[maxLengthParam] = ExpressionLocalTransform(returnMod.maxLengthExpression)
-						generateAlternativeMethod(name, transforms)
+						transforms[maxLengthParam] = ExpressionTransform(returnMod.maxLengthExpression)
+						generateAlternativeMethodDelegate(name, transforms)
 					}
+				} else if (returnMod.lengthParam.startsWith(RESULT)) {
+					transforms[returns] = BufferAutoSizeReturnTransform(it, returnMod.lengthParam)
+					transforms[it] = BufferReplaceReturnTransform
+					generateAlternativeMethod(name, transforms)
 				} else if (returns.isVoid)
 					throw IllegalStateException()
 			} else if (it.has<AutoType>()) {
@@ -1331,16 +1327,18 @@ class NativeClassFunction(
 			return (transform as FunctionTransform<T>).transformCall(this, original)
 	}
 
-	internal fun PrintWriter.generateAlternativeMethod(
+	// TODO: Remove if KT-7859 is fixed.
+	fun generateAlternativeMethod(
+		writer: PrintWriter, name: String,
+		transforms: Map<QualifiedType, Transform>
+	) = writer.generateAlternativeMethod(name, transforms)
+
+	private fun PrintWriter.generateAlternativeMethodSignature(
 		name: String,
 		transforms: Map<QualifiedType, Transform>,
-		description: String? = null
+		description: String? = null,
+	    constantMacro: Boolean
 	) {
-		println()
-
-		val macro = has<Macro>()
-		val constantMacro = macro && get<Macro>().constant
-
 		// JavaDoc
 		if (!constantMacro) {
 			if (description != null) {
@@ -1387,6 +1385,17 @@ class NativeClassFunction(
 			print("${returns.nativeType.javaMethodType} $RESULT")
 		}
 		println(") {")
+	}
+
+	private fun PrintWriter.generateAlternativeMethod(
+		name: String,
+		transforms: Map<QualifiedType, Transform>,
+		description: String? = null
+	) {
+		println()
+
+		val macro = has<Macro>()
+		generateAlternativeMethodSignature(name, transforms, description, macro && get<Macro>().constant)
 
 		// Append CodeFunctionTransform statements to Code
 
@@ -1449,7 +1458,7 @@ class NativeClassFunction(
 			}
 		}
 
-		val returnLater = code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE) || transforms[returns] is BufferAutoSizeReturnTransform
+		val returnLater = code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE) || transforms[returns] is ReturnLaterTransform
 		generateNativeMethodCall(returnLater, hasFinally) {
 			printList(getNativeParams()) {
 				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(ALTERNATIVE))
@@ -1516,6 +1525,35 @@ class NativeClassFunction(
 		println("\t}")
 	}
 
+	private fun PrintWriter.generateAlternativeMethodDelegate(
+		name: String,
+		transforms: Map<QualifiedType, Transform>,
+		description: String? = null
+	) {
+		println()
+
+		generateAlternativeMethodSignature(name, transforms, description, has<Macro>() && get<Macro>().constant)
+
+		// Call the native method
+		print("\t\t")
+		if (!((returns.isVoid && transforms[returns] == null) || returns.isStructValue))
+			print("return ")
+		print("$name(")
+		printList(getNativeParams().filter {
+			@Suppress("UNCHECKED_CAST")
+			val t = transforms[it] as FunctionTransform<Parameter>?
+			t == null || t is ExpressionTransform || t.transformDeclaration(it, it.asJavaMethodParam) != null
+		}) {
+			val t = transforms[it]
+			if (t is ExpressionTransform)
+				t.transformCall(it, it.asNativeMethodCallParam(ALTERNATIVE))
+			else
+				it.name
+		}
+		println(");")
+		println("\t}")
+	}
+
 	// --[ JNI FUNCTIONS ]--
 
 	internal fun generateFunctionDefinition(writer: PrintWriter) = writer.generateFunctionDefinitionImpl()
@@ -1576,7 +1614,7 @@ class NativeClassFunction(
 					it.nativeType.mapping.jniSignatureArray
 				else
 					it.nativeType.mapping.jniSignatureStrict
-			}.joinToString("", prefix = if (hasFunctionAddressParam) "__J" else "__"))
+			}.joinToString("", prefix = if (hasFunctionAddressParam) "__J" else "__")
 		println("(${if (params.isEmpty()) "void" else params.joinToString(", ")}) {")
 
 		// Cast function address to pointer
@@ -1702,9 +1740,3 @@ class NativeClassFunction(
 	}
 
 }
-
-// TODO: Remove if KT-7859 is fixed.
-fun NativeClassFunction.generateAlternativeMethod(
-	writer: PrintWriter, name: String,
-	transforms: Map<QualifiedType, Transform>
-) = writer.generateAlternativeMethod(name, transforms)
