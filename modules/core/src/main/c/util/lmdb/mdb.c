@@ -5,7 +5,7 @@
  *	BerkeleyDB API, but much simplified.
  */
 /*
- * Copyright 2011-2016 Howard Chu, Symas Corp.
+ * Copyright 2011-2017 Howard Chu, Symas Corp.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -149,7 +149,7 @@ typedef SSIZE_T	ssize_t;
 #include <resolv.h>	/* defines BYTE_ORDER on HPUX and Solaris */
 #endif
 
-#if defined(__APPLE__) || defined (BSD)
+#if defined(__APPLE__) || defined (BSD) || defined(__FreeBSD_kernel__)
 # if !(defined(MDB_USE_POSIX_MUTEX) || defined(MDB_USE_POSIX_SEM))
 # define MDB_USE_SYSV_SEM	1
 # endif
@@ -417,15 +417,15 @@ mdb_sem_wait(mdb_mutexref_t sem)
 #define mdb_mutex_consistent(mutex)	0
 
 #else	/* MDB_USE_POSIX_MUTEX: */
-	/** Shared mutex/semaphore as it is stored (mdb_mutex_t), and as
-	 *	local variables keep it (mdb_mutexref_t).
+	/** Shared mutex/semaphore as the original is stored.
 	 *
-	 *	An mdb_mutex_t can be assigned to an mdb_mutexref_t.  They can
-	 *	be the same, or an array[size 1] and a pointer.
-	 *	@{
+	 *	Not for copies.  Instead it can be assigned to an #mdb_mutexref_t.
+	 *	When mdb_mutexref_t is a pointer and mdb_mutex_t is not, then it
+	 *	is array[size 1] so it can be assigned to the pointer.
 	 */
-typedef pthread_mutex_t mdb_mutex_t[1], *mdb_mutexref_t;
-	/*	@} */
+typedef pthread_mutex_t mdb_mutex_t[1];
+	/** Reference to an #mdb_mutex_t */
+typedef pthread_mutex_t *mdb_mutexref_t;
 	/** Lock the reader or writer mutex.
 	 *	Returns 0 or a code to give #mdb_mutex_failed(), as in #LOCK_MUTEX().
 	 */
@@ -463,7 +463,7 @@ typedef pthread_mutex_t mdb_mutex_t[1], *mdb_mutexref_t;
 
 #define	Z	MDB_FMT_Z	/**< printf/scanf format modifier for size_t */
 #define	Yu	MDB_PRIy(u)	/**< printf format for #mdb_size_t */
-#define	Yd	MDB_PRIy(d)	/**< printf format for "signed #mdb_size_t" */
+#define	Yd	MDB_PRIy(d)	/**< printf format for 'signed #mdb_size_t' */
 
 #if defined(_WIN32) || defined(MDB_USE_POSIX_SEM)
 #define MNAME_LEN	32
@@ -973,19 +973,26 @@ typedef struct MDB_page {
 	/** Header for a single key/data pair within a page.
 	 * Used in pages of type #P_BRANCH and #P_LEAF without #P_LEAF2.
 	 * We guarantee 2-byte alignment for 'MDB_node's.
+	 *
+	 * #mn_lo and #mn_hi are used for data size on leaf nodes, and for child
+	 * pgno on branch nodes.  On 64 bit platforms, #mn_flags is also used
+	 * for pgno.  (Branch nodes have no flags).  Lo and hi are in host byte
+	 * order in case some accesses can be optimized to 32-bit word access.
+	 *
+	 * Leaf node flags describe node contents.  #F_BIGDATA says the node's
+	 * data part is the page number of an overflow page with actual data.
+	 * #F_DUPDATA and #F_SUBDATA can be combined giving duplicate data in
+	 * a sub-page/sub-database, and named databases (just #F_SUBDATA).
 	 */
 typedef struct MDB_node {
-	/** lo and hi are used for data size on leaf nodes and for
-	 * child pgno on branch nodes. On 64 bit platforms, flags
-	 * is also used for pgno. (Branch nodes have no flags).
-	 * They are in host byte order in case that lets some
-	 * accesses be optimized into a 32-bit word access.
-	 */
+	/** part of data size or pgno
+	 *	@{ */
 #if BYTE_ORDER == LITTLE_ENDIAN
-	unsigned short	mn_lo, mn_hi;	/**< part of data size or pgno */
+	unsigned short	mn_lo, mn_hi;
 #else
 	unsigned short	mn_hi, mn_lo;
 #endif
+	/** @} */
 /** @defgroup mdb_node Node Flags
  *	@ingroup internal
  *	Flags for node headers.
@@ -6197,8 +6204,17 @@ mdb_page_search_root(MDB_cursor *mc, MDB_val *key, int flags)
 
 		if (flags & (MDB_PS_FIRST|MDB_PS_LAST)) {
 			i = 0;
-			if (flags & MDB_PS_LAST)
+			if (flags & MDB_PS_LAST) {
 				i = NUMKEYS(mp) - 1;
+				/* if already init'd, see if we're already in right place */
+				if (mc->mc_flags & C_INITIALIZED) {
+					if (mc->mc_ki[mc->mc_top] == i) {
+						mc->mc_top = mc->mc_snum++;
+						mp = mc->mc_pg[mc->mc_top];
+						goto ready;
+					}
+				}
+			}
 		} else {
 			int	 exact;
 			node = mdb_node_search(mc, key, &exact);
@@ -6224,6 +6240,7 @@ mdb_page_search_root(MDB_cursor *mc, MDB_val *key, int flags)
 		if ((rc = mdb_cursor_push(mc, mp)))
 			return rc;
 
+ready:
 		if (flags & MDB_PS_MODIFY) {
 			if ((rc = mdb_page_touch(mc)) != 0)
 				return rc;
@@ -6579,14 +6596,19 @@ mdb_cursor_next(MDB_cursor *mc, MDB_val *key, MDB_val *data, MDB_cursor_op op)
 	MDB_node	*leaf;
 	int rc;
 
-	if ((mc->mc_flags & C_EOF) ||
-		((mc->mc_flags & C_DEL) && op == MDB_NEXT_DUP)) {
+	if ((mc->mc_flags & C_DEL && op == MDB_NEXT_DUP))
 		return MDB_NOTFOUND;
-	}
+
 	if (!(mc->mc_flags & C_INITIALIZED))
 		return mdb_cursor_first(mc, key, data);
 
 	mp = mc->mc_pg[mc->mc_top];
+
+	if (mc->mc_flags & C_EOF) {
+		if (mc->mc_ki[mc->mc_top] >= NUMKEYS(mp)-1)
+			return MDB_NOTFOUND;
+		mc->mc_flags ^= C_EOF;
+	}
 
 	if (mc->mc_db->md_flags & MDB_DUPSORT) {
 		leaf = NODEPTR(mp, mc->mc_ki[mc->mc_top]);
@@ -7002,16 +7024,13 @@ mdb_cursor_last(MDB_cursor *mc, MDB_val *key, MDB_val *data)
 		mc->mc_xcursor->mx_cursor.mc_flags &= ~(C_INITIALIZED|C_EOF);
 	}
 
-	if (!(mc->mc_flags & C_EOF)) {
-
-		if (!(mc->mc_flags & C_INITIALIZED) || mc->mc_top) {
-			rc = mdb_page_search(mc, NULL, MDB_PS_LAST);
-			if (rc != MDB_SUCCESS)
-				return rc;
-		}
-		mdb_cassert(mc, IS_LEAF(mc->mc_pg[mc->mc_top]));
-
+	if (!(mc->mc_flags & C_INITIALIZED) || mc->mc_top) {
+		rc = mdb_page_search(mc, NULL, MDB_PS_LAST);
+		if (rc != MDB_SUCCESS)
+			return rc;
 	}
+	mdb_cassert(mc, IS_LEAF(mc->mc_pg[mc->mc_top]));
+
 	mc->mc_ki[mc->mc_top] = NUMKEYS(mc->mc_pg[mc->mc_top]) - 1;
 	mc->mc_flags |= C_INITIALIZED|C_EOF;
 	leaf = NODEPTR(mc->mc_pg[mc->mc_top], mc->mc_ki[mc->mc_top]);
@@ -7111,10 +7130,19 @@ mdb_cursor_get(MDB_cursor *mc, MDB_val *key, MDB_val *data,
 			rc = MDB_INCOMPATIBLE;
 			break;
 		}
-		rc = MDB_SUCCESS;
-		if (!(mc->mc_xcursor->mx_cursor.mc_flags & C_INITIALIZED) ||
-			(mc->mc_xcursor->mx_cursor.mc_flags & C_EOF))
+		if (!(mc->mc_xcursor->mx_cursor.mc_flags & C_INITIALIZED)) {
+			rc = EINVAL;
 			break;
+		}
+		if (mc->mc_xcursor->mx_cursor.mc_flags & C_EOF) {
+			MDB_cursor *mx = &mc->mc_xcursor->mx_cursor;
+			if (mx->mc_ki[mx->mc_top] >= NUMKEYS(mx->mc_pg[mx->mc_top])-1) {
+				rc = MDB_NOTFOUND;
+				break;
+			}
+			mx->mc_flags ^= C_EOF;
+		}
+		rc = MDB_SUCCESS;
 		goto fetchm;
 	case MDB_NEXT_MULTIPLE:
 		if (data == NULL) {
@@ -8420,8 +8448,14 @@ mdb_cursor_count(MDB_cursor *mc, mdb_size_t *countp)
 	if (!(mc->mc_flags & C_INITIALIZED))
 		return EINVAL;
 
-	if (!mc->mc_snum || (mc->mc_flags & C_EOF))
+	if (!mc->mc_snum)
 		return MDB_NOTFOUND;
+
+	if (mc->mc_flags & C_EOF) {
+		if (mc->mc_ki[mc->mc_top] >= NUMKEYS(mc->mc_pg[mc->mc_top]))
+			return MDB_NOTFOUND;
+		mc->mc_flags ^= C_EOF;
+	}
 
 	leaf = NODEPTR(mc->mc_pg[mc->mc_top], mc->mc_ki[mc->mc_top]);
 	if (!F_ISSET(leaf->mn_flags, F_DUPDATA)) {

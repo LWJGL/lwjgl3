@@ -4,6 +4,7 @@
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
  * Copyright 2000-2016 The OpenLDAP Foundation.
+ * Portions Copyright 2001-2017 Howard Chu, Symas Corp.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
