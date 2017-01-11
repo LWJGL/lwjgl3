@@ -196,6 +196,7 @@ val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", nativeName = "ovrPoseSt
 	ovrVector3f.member("LinearVelocity", "velocity in meters per second")
 	ovrVector3f.member("AngularAcceleration", "angular acceleration in radians per second per second")
 	ovrVector3f.member("LinearAcceleration", "acceleration in meters per second per second")
+	padding(4)
 	double.member("TimeInSeconds", "absolute time that this pose refers to. See #GetTimeInSeconds()")
 }
 
@@ -397,6 +398,7 @@ val ovrMirrorTexture_p = ovrMirrorTexture.p
 
 val ovrTouchHapticsDesc = struct(OVR_PACKAGE, "OVRTouchHapticsDesc", nativeName = "ovrTouchHapticsDesc", mutable = false) {
 	documentation = "Describes the Touch Haptics engine."
+
 	int.member("SampleRateHz", "Haptics engine frequency/sample-rate, sample time in seconds equals {@code 1.0/sampleRateHz}")
 	int.member("SampleSizeInBytes", "Size of each Haptics sample, sample value range is {@code [0, 2^(Bytes*8)-1]}")
 
@@ -459,7 +461,6 @@ val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInpu
 		"""
 
 	double.member("TimeInSeconds", "system type when the controller state was last updated")
-	unsigned_int.member("ConnectedControllerTypes", "described by {@code ovrControllerType}. Indicates which ControllerTypes are present.")
 	unsigned_int.member("Buttons", "values for buttons described by {@code ovrButton}")
 	unsigned_int.member("Touches", "touch values for buttons and sensors as described by {@code ovrTouch}.")
 	float.array(
@@ -489,7 +490,7 @@ val ovrInputState_p = struct(OVR_PACKAGE, "OVRInputState", nativeName = "ovrInpu
 		"Left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter.",
 		size = "ovrHand_Count"
 	)
-	float.array(
+	ovrVector2f.array(
 		"ThumbstickNoDeadzone",
 		"Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. Does not apply a deadzone or filter.",
 		size = "ovrHand_Count"
@@ -799,28 +800,30 @@ fun config() {
 		javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
 		documentation =
 			"""
-			Describes a layer that specifies a monoscopic or stereoscopic view. This uses a direct 3x4 matrix to map from view space to the UV coordinates. It
-			is essentially the same thing as ##OVRLayerEyeFov but using a much lower level. This is mainly to provide compatibility with specific apps. Unless
-			the application really requires this flexibility, it is usually better to use ##OVRLayerEyeFov.
+			Describes a layer that specifies a monoscopic or stereoscopic view.
+
+			This uses a direct 3x4 matrix to map from view space to the UV coordinates. It is essentially the same thing as ##OVRLayerEyeFov but using a much
+			lower level. This is mainly to provide compatibility with specific apps. Unless the application really requires this flexibility, it is usually
+			better to use {@code ovrLayerEyeFov}.
 
 			Three options exist with respect to mono/stereo texture usage:
 			${ul(
 				"""
-				ColorTexture[0] and ColorTexture[1] contain the left and right stereo renderings, respectively. Viewport[0] and Viewport[1] refer to
-				ColorTexture[0] and ColorTexture[1], respectively.
+				{@code ColorTexture[0]} and {@code ColorTexture[1]} contain the left and right stereo renderings, respectively. {@code Viewport[0]} and
+				{@code Viewport[1]} refer to {@code ColorTexture[0]} and {@code ColorTexture[1]}, respectively.
 				""",
 				"""
-				ColorTexture[0] contains both the left and right renderings, ColorTexture[1] is $NULL, and Viewport[0] and Viewport[1] refer to sub-rects with
-				ColorTexture[0].
+				{@code ColorTexture[0]} contains both the left and right renderings, {@code ColorTexture[1]} is $NULL, and {@code Viewport[0]} and
+				{@code Viewport[1]} refer to sub-rects with {@code ColorTexture[0]}.
 				""",
-				"ColorTexture[0] contains a single monoscopic rendering, and Viewport[0] and Viewport[1] both refer to that rendering."
+				"{@code ColorTexture[0]} contains a single monoscopic rendering, and {@code Viewport[0]} and {@code Viewport[1]} both refer to that rendering."
 			)}
 			"""
 
-		ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeMatrix")
+		ovrLayerHeader.member("Header", "must be #LayerType_EyeMatrix")
 		ovrTextureSwapChain.array(
 			"ColorTexture",
-			"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be $NULL",
+			"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be $NULL for cases described above.",
 			size = "ovrEye_Count",
 			validSize = "1"
 		)
@@ -832,8 +835,8 @@ fun config() {
 		ovrPosef.array(
 			"RenderPose",
 			"""
-			specifies the position and orientation of each eye view, with the position specified in meters. RenderPose will typically be the value returned
-			from #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
+			specifies the position and orientation of each eye view, with the position specified in meters. {@code RenderPose} will typically be the value
+			returned from #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
 			""",
 			size = "ovrEye_Count"
 		)
@@ -851,9 +854,9 @@ TexV  = P.y/P.z""")}
 		double.member(
 			"SensorSampleTime",
 			"""
-			specifies the timestamp when the source ##OVRPosef (used in calculating RenderPose) was sampled from the SDK. Typically retrieved by calling
-			#GetTimeInSeconds() around the instant the application calls #GetTrackingState(). The main purpose for this is to accurately track
-			app tracking latency.
+			specifies the timestamp when the source {@code ovrPosef} (used in calculating {@code RenderPose}) was sampled from the SDK. Typically retrieved by
+			calling #GetTimeInSeconds() around the instant the application calls #GetTrackingState() The main purpose for this is to accurately track app
+			tracking latency.
 			"""
 		)
 	}
