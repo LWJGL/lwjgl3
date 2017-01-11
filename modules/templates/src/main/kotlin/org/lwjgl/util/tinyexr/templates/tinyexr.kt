@@ -244,7 +244,8 @@ ENABLE_WARNINGS()""")
 		EXRImage_p.OUT("images", ""),
 		const..EXRHeader_p.p.IN("headers", ""),
 		AutoSize("images", "headers")..unsigned_int.IN("num_parts", ""),
-		Unsafe..const..unsigned_char_p.IN("memory", ""),
+		const..unsigned_char_p.IN("memory", ""),
+		AutoSize("memory")..size_t.IN("size", ""),
 		Check(1)..const..charASCII_pp.IN("err", ""),
 
 		returnDoc = "negative value and may set error string in {@code err} when there's an error"

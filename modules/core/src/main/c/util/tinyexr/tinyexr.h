@@ -335,8 +335,7 @@ extern int LoadEXRImageFromFile(EXRImage *image, const EXRHeader *header,
 // error
 extern int LoadEXRImageFromMemory(EXRImage *image, const EXRHeader *header,
                                   const unsigned char *memory,
-                                  const size_t size,
-                                  const char **err);
+                                  const size_t size, const char **err);
 
 // Loads multi-part OpenEXR image from a file.
 // Application must setup `ParseEXRMultipartHeaderFromFile` before calling this
@@ -360,7 +359,7 @@ extern int LoadEXRMultipartImageFromMemory(EXRImage *images,
                                            const EXRHeader **headers,
                                            unsigned int num_parts,
                                            const unsigned char *memory,
-                                           const char **err);
+                                           const size_t size, const char **err);
 
 // Saves multi-channel, single-frame OpenEXR image to a file.
 // Returns negative value and may set error string in `err` when there's an
@@ -424,6 +423,11 @@ extern int LoadEXRFromMemory(float *out_rgba, const unsigned char *memory,
 #include <string>
 #include <vector>
 
+#if __cplusplus > 199711L
+// C++11
+#include <cstdint>
+#endif  // __cplusplus > 199711L
+
 // @todo { remove including tinyexr.h }
 #include "tinyexr.h"
 
@@ -444,7 +448,6 @@ namespace tinyexr {
 
 #if __cplusplus > 199711L
 // C++11
-#include <cstdint>
 typedef uint64_t tinyexr_uint64;
 typedef int64_t tinyexr_int64;
 #else
@@ -10420,33 +10423,44 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
   return TINYEXR_SUCCESS;
 }
 
-static void ReconstructLineOffsets(std::vector<tinyexr::tinyexr_uint64> *offsets, size_t n, const unsigned char *head, const unsigned char *marker, const size_t size)
-{
+static bool ReconstructLineOffsets(
+    std::vector<tinyexr::tinyexr_uint64> *offsets, size_t n,
+    const unsigned char *head, const unsigned char *marker, const size_t size) {
   assert(head < marker);
   assert(offsets->size() == n);
 
   for (size_t i = 0; i < n; i++) {
     size_t offset = static_cast<size_t>(marker - head);
-    assert(offset < size); // Offset should not exceed whole EXR file/data size.
+    // Offset should not exceed whole EXR file/data size.
+    if (offset >= size) {
+      return false;
+    }
 
     int y;
-    int data_len;
+    unsigned int data_len;
 
     memcpy(&y, marker, sizeof(int));
     memcpy(&data_len, marker + 4, sizeof(unsigned int));
+
+    if (data_len >= size) {
+      return false;
+    }
 
     tinyexr::swap4(reinterpret_cast<unsigned int *>(&y));
     tinyexr::swap4(reinterpret_cast<unsigned int *>(&data_len));
 
     (*offsets)[i] = offset;
-    
-    marker += data_len + 8; // 8 = 4 bytes(y) + 4 bytes(data_len)
+
+    marker += data_len + 8;  // 8 = 4 bytes(y) + 4 bytes(data_len)
   }
+
+  return true;
 }
 
 static int DecodeEXRImage(EXRImage *exr_image, const EXRHeader *exr_header,
                           const unsigned char *head,
-                          const unsigned char *marker, const size_t size, const char **err) {
+                          const unsigned char *marker, const size_t size,
+                          const char **err) {
   if (exr_image == NULL || exr_header == NULL || head == NULL ||
       marker == NULL || (size <= tinyexr::kEXRVersionSize)) {
     if (err) {
@@ -10504,6 +10518,12 @@ static int DecodeEXRImage(EXRImage *exr_image, const EXRHeader *exr_header,
     tinyexr::tinyexr_uint64 offset;
     memcpy(&offset, marker, sizeof(tinyexr::tinyexr_uint64));
     tinyexr::swap8(&offset);
+    if (offset >= size) {
+      if (err) {
+        (*err) = "Invalid offset value.";
+      }
+      return TINYEXR_ERROR_INVALID_DATA;
+    }
     marker += sizeof(tinyexr::tinyexr_uint64);  // = 8
     offsets[y] = offset;
   }
@@ -10512,14 +10532,23 @@ static int DecodeEXRImage(EXRImage *exr_image, const EXRHeader *exr_header,
   // See OpenEXR/IlmImf/ImfScanLineInputFile.cpp::readLineOffsets() for details.
   for (size_t y = 0; y < num_blocks; y++) {
     if (offsets[y] <= 0) {
-      // TODO(syoyo) Report as warning.
-      //if (err) {
+      // TODO(syoyo) Report as warning?
+      // if (err) {
       //  stringstream ss;
       //  ss << "Incomplete lineOffsets." << std::endl;
       //  (*err) += ss.str();
       //}
-      ReconstructLineOffsets(&offsets, num_blocks, head, marker, size);
-      break;
+      bool ret =
+          ReconstructLineOffsets(&offsets, num_blocks, head, marker, size);
+      if (ret) {
+        // OK
+        break;
+      } else {
+        if (err) {
+          (*err) = "Cannot reconstruct lineOffset table.";
+        }
+        return TINYEXR_ERROR_INVALID_DATA;
+      }
     }
   }
 
@@ -10812,12 +10841,15 @@ int LoadEXRImageFromFile(EXRImage *exr_image, const EXRHeader *exr_header,
     (void)ret;
   }
 
-  return LoadEXRImageFromMemory(exr_image, exr_header, &buf.at(0), filesize, err);
+  return LoadEXRImageFromMemory(exr_image, exr_header, &buf.at(0), filesize,
+                                err);
 }
 
 int LoadEXRImageFromMemory(EXRImage *exr_image, const EXRHeader *exr_header,
-                           const unsigned char *memory, const size_t size, const char **err) {
-  if (exr_image == NULL || memory == NULL || (size < tinyexr::kEXRVersionSize)) {
+                           const unsigned char *memory, const size_t size,
+                           const char **err) {
+  if (exr_image == NULL || memory == NULL ||
+      (size < tinyexr::kEXRVersionSize)) {
     if (err) {
       (*err) = "Invalid argument.";
     }
@@ -10835,7 +10867,8 @@ int LoadEXRImageFromMemory(EXRImage *exr_image, const EXRHeader *exr_header,
   const unsigned char *marker = reinterpret_cast<const unsigned char *>(
       memory + exr_header->header_len +
       8);  // +8 for magic number + version header.
-  return tinyexr::DecodeEXRImage(exr_image, exr_header, head, marker, size, err);
+  return tinyexr::DecodeEXRImage(exr_image, exr_header, head, marker, size,
+                                 err);
 }
 
 size_t SaveEXRImageToMemory(const EXRImage *exr_image,
@@ -11767,7 +11800,6 @@ void InitEXRImage(EXRImage *exr_image) {
   exr_image->width = 0;
   exr_image->height = 0;
   exr_image->num_channels = 0;
-  exr_image->num_tiles = 0;
 
   exr_image->images = NULL;
   exr_image->tiles = NULL;
@@ -12106,9 +12138,9 @@ int LoadEXRMultipartImageFromMemory(EXRImage *exr_images,
                                     const EXRHeader **exr_headers,
                                     unsigned int num_parts,
                                     const unsigned char *memory,
-                                    const char **err) {
+                                    const size_t size, const char **err) {
   if (exr_images == NULL || exr_headers == NULL || num_parts == 0 ||
-      memory == NULL) {
+      memory == NULL || (size <= tinyexr::kEXRVersionSize)) {
     if (err) {
       (*err) = "Invalid argument.";
     }
@@ -12154,6 +12186,13 @@ int LoadEXRMultipartImageFromMemory(EXRImage *exr_images,
       tinyexr::tinyexr_uint64 offset;
       memcpy(&offset, marker, 8);
       tinyexr::swap8(&offset);
+
+      if (offset >= size) {
+        if (err) {
+          (*err) = "Invalid offset size.";
+        }
+        return TINYEXR_ERROR_INVALID_DATA;
+      }
 
       offset_table[c] = offset + 4;  // +4 to skip 'part number'
       marker += 8;
@@ -12231,7 +12270,7 @@ int LoadEXRMultipartImageFromFile(EXRImage *exr_images,
   }
 
   return LoadEXRMultipartImageFromMemory(exr_images, exr_headers, num_parts,
-                                         &buf.at(0), err);
+                                         &buf.at(0), filesize, err);
 }
 
 int SaveEXR(const float *data, int width, int height, int components,
