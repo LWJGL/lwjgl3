@@ -44,6 +44,7 @@ public class OpenALInfo {
 		if ( deviceCaps.ALC_EXT_EFX )
 			printEFXInfo(device);
 
+		alcSetThreadContext(NULL);
 		alcDestroyContext(alContext);
 		alcCloseDevice(device);
 	}

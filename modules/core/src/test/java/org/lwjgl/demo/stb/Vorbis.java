@@ -100,6 +100,7 @@ public final class Vorbis {
 			alDeleteBuffers(buffers);
 			alDeleteSources(source);
 
+			alcSetThreadContext(NULL);
 			alcDestroyContext(context);
 			alcCloseDevice(device);
 		}

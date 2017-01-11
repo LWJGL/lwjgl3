@@ -69,6 +69,7 @@ public final class ALCDemo {
 		try {
 			testPlayback();
 		} finally {
+			alcMakeContextCurrent(NULL);
 			alcDestroyContext(context);
 			alcCloseDevice(device);
 		}

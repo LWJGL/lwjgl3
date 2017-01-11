@@ -134,10 +134,10 @@ public final class HRTFDemo {
 					e.printStackTrace();
 				}
 
-				/* Rotate the source around the listener by about 1/4 cycle per second.
+				/* Rotate the source around the listener by about 1/8th cycle per second.
 				 * Only affects mono sounds.
 				 */
-				angle += 0.01 * Math.PI * 0.5;
+				angle += (Math.PI / 4 / 100);
 				alSource3f(source, AL_POSITION, (float)sin(angle), 0.0f, -(float)cos(angle));
 
 				state = alGetSourcei(source, AL_SOURCE_STATE);
@@ -147,6 +147,7 @@ public final class HRTFDemo {
 			alDeleteSources(source);
 			alDeleteBuffers(buffer);
 
+			alcSetThreadContext(NULL);
 			alcDestroyContext(context);
 			alcCloseDevice(device);
 		}

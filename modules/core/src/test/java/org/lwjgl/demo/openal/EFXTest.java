@@ -240,6 +240,7 @@ public final class EFXTest {
 		alDeleteEffects(effectsBuf);
 		alDeleteFilters(filter);
 
+		alcSetThreadContext(NULL);
 		alcDestroyContext(newContext);
 		alcCloseDevice(device);
 	}
@@ -325,6 +326,7 @@ public final class EFXTest {
 		alSourcePlay(source);
 		Thread.sleep(7500);
 
+		alcSetThreadContext(NULL);
 		alcDestroyContext(alContext);
 		alcCloseDevice(device);
 	}
@@ -371,6 +373,7 @@ public final class EFXTest {
 		check("AL_FILTER_HIGHPASS", EFXUtil.isFilterSupported(AL_FILTER_HIGHPASS));
 		check("AL_FILTER_BANDPASS", EFXUtil.isFilterSupported(AL_FILTER_BANDPASS));
 
+		alcSetThreadContext(NULL);
 		alcDestroyContext(alContext);
 		alcCloseDevice(device);
 	}
