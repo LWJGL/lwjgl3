@@ -13,7 +13,7 @@ val Assimp = "Assimp".nativeClass(packageName = ASSIMP_PACKAGE, prefix = "ai", p
 		Contains bindings to the <a href="http://www.assimp.org/">Assimp</a> library.
 
 		Assimp comes with fairly outdated documentation, which you can read online <a href="http://www.assimp.org/lib_html/">here</a>. The
-		<a href="http://www.assimp.org/faq.html">Frequently Asked Questions</a> are also useful.
+		<a href="http://www.assimp.org/FAQ.html">Frequently Asked Questions</a> are also useful.
 
         The bindings only consist of the C API of the Assimp model import library.
         """
