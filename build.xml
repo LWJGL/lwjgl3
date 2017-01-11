@@ -150,10 +150,11 @@
 
 			srcdir="${src.generator}/java"
 			includes="org/lwjgl/**"
-			classpath="${env.JAVA_HOME}/lib/tools.jar"
 
 			taskname="javac: Generator Tools &amp; Doclets"
-		/>
+		>
+			<classpath path="${java.home}/../lib/tools.jar" unless:set="jdk9"/>
+		</lwjgl.javac>
 	</target>
 
 	<target name="compile-templates" description="Compiles the Templates module" depends="-compile-generator, bindings">
