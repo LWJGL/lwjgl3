@@ -408,6 +408,7 @@ nk_style_pop_vec2(ctx);""")}
 		"KEY_TEXT_END".enum,
 		"KEY_TEXT_UNDO".enum,
 		"KEY_TEXT_REDO".enum,
+		"KEY_TEXT_SELECT_ALL".enum,
 		"KEY_TEXT_WORD_LEFT".enum,
 		"KEY_TEXT_WORD_RIGHT".enum,
 		"KEY_SCROLL_START".enum,
@@ -714,6 +715,21 @@ nk_style_pop_vec2(ctx);""")}
 		"PANEL_SET_SUB".enum("", "NK_PANEL_SET_POPUP|NK_PANEL_GROUP")
 	)
 
+	EnumConstant(
+		"nk_panel_row_layout_type",
+
+		"LAYOUT_DYNAMIC_FIXED".enum,
+		"LAYOUT_DYNAMIC_ROW".enum,
+		"LAYOUT_DYNAMIC_FREE".enum,
+		"LAYOUT_DYNAMIC".enum,
+		"LAYOUT_STATIC_FIXED".enum,
+		"LAYOUT_STATIC_ROW".enum,
+		"LAYOUT_STATIC_FREE".enum,
+		"LAYOUT_STATIC".enum,
+		"LAYOUT_TEMPLATE".enum,
+		"LAYOUT_COUNT".enum
+	)
+
 	val WindowFlags = EnumConstant(
 		"nk_window_flags",
 
@@ -923,7 +939,6 @@ nk_style_pop_vec2(ctx);""")}
 			float.IN("height", ""),
 			nk_int.IN("cols", "")
 		)
-
 		void(
 			"layout_row_static",
 			"",
@@ -943,7 +958,6 @@ nk_style_pop_vec2(ctx);""")}
 			float.IN("row_height", ""),
 			nk_int.IN("cols", "")
 		)
-
 		void(
 			"layout_row_push",
 			"",
@@ -951,9 +965,7 @@ nk_style_pop_vec2(ctx);""")}
 			ctx,
 			float.IN("value", "")
 		)
-
 		void("layout_row_end", "", ctx)
-
 		void(
 			"layout_row",
 			"",
@@ -966,6 +978,36 @@ nk_style_pop_vec2(ctx);""")}
 		)
 
 		void(
+			"layout_row_template_begin",
+			"",
+
+			ctx,
+			float.IN("height", "")
+		)
+		void("layout_row_template_push_dynamic", "", ctx)
+		void(
+			"layout_row_template_push_variable",
+			"",
+
+			ctx,
+			float.IN("min_width", "")
+		)
+		void(
+			"layout_row_template_push_static",
+			"",
+
+			ctx,
+			float.IN("width", "")
+		)
+
+		void(
+			"layout_row_template_end",
+			"",
+
+			nk_context_p.OUT("ctx", "")
+		)		
+
+		void(
 			"layout_space_begin",
 			"",
 
@@ -974,7 +1016,6 @@ nk_style_pop_vec2(ctx);""")}
 			float.IN("height", ""),
 			nk_int.IN("widget_count", "")
 		)
-
 		void(
 			"layout_space_push",
 			"",
@@ -982,7 +1023,6 @@ nk_style_pop_vec2(ctx);""")}
 			ctx,
 			nk_rect.IN("rect", "")
 		)
-
 		void("layout_space_end", "", ctx)
 
 		nk_rect("layout_space_bounds", "", ctx)
@@ -1035,8 +1075,16 @@ nk_style_pop_vec2(ctx);""")}
 			const..charUTF8_p.IN("title", ""),
 			nk_flags.IN("flags", "")
 		)
-		void("group_end", "", ctx)
+		intb(
+			"group_scrolled_offset_begin",
+			"",
 
+			ctx,
+			Check(1)..nk_uint_p.IN("x_offset", ""),
+			Check(1)..nk_uint_p.IN("y_offset", ""),
+			const..charUTF8_p.IN("title", ""),
+			nk_flags.IN("flags", "")
+		)
 		intb(
 			"group_scrolled_begin",
 			"",
@@ -1047,6 +1095,7 @@ nk_style_pop_vec2(ctx);""")}
 			nk_flags.IN("flags", "")
 		)
 		void("group_scrolled_end", "", ctx)
+		void("group_end", "", ctx)
 
 		intb(
 			"list_view_begin",

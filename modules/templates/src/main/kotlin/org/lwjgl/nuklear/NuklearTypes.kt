@@ -38,6 +38,7 @@ val nk_byte = typedef(uint8_t, "nk_byte")
 
 val nk_byte_p = nk_byte.p
 val nk_ushort_p = nk_ushort.p
+val nk_uint_p = nk_uint.p
 val nk_rune_p = nk_rune.p
 
 val nk_handle = union(NUKLEAR_PACKAGE, "NkHandle", nativeName = "nk_handle") {
@@ -58,6 +59,7 @@ val nk_symbol_type = "enum nk_symbol_type".enumType
 val nk_style_header_align = "enum nk_style_header_align".enumType
 val nk_chart_type = "enum nk_chart_type".enumType
 val nk_panel_type = "enum nk_panel_type".enumType
+val nk_panel_row_layout_type = "enum nk_panel_row_layout_type".enumType
 val nk_collapse_states = "enum nk_collapse_states".enumType
 val nk_show_states = "enum nk_show_states".enumType
 val nk_layout_format = "enum nk_layout_format".enumType
@@ -112,8 +114,8 @@ val nk_cursor = struct(NUKLEAR_PACKAGE, "NkCursor", nativeName = "struct nk_curs
 val nk_cursor_p = nk_cursor.p
 
 val nk_scroll = struct(NUKLEAR_PACKAGE, "NkScroll", nativeName = "struct nk_scroll", mutable = false) {
-	unsigned_short.member("x", "")
-	unsigned_short.member("y", "")
+	nk_uint.member("x", "")
+	nk_uint.member("y", "")
 }
 val nk_scroll_p = nk_scroll.p
 
@@ -172,8 +174,8 @@ val nk_list_view_p = struct(NUKLEAR_PACKAGE, "NkListView", nativeName = "struct 
 
 	int.member("total_height", "").public = false
 	struct(NUKLEAR_PACKAGE, "NkContext", nativeName = "struct nk_context").p.member("ctx", "").public = false
-	nk_ushort_p.member("scroll_pointer", "").public = false
-	nk_ushort.member("scroll_value", "").public = false
+	nk_uint_p.member("scroll_pointer", "").public = false
+	nk_uint.member("scroll_value", "").public = false
 }.p
 
 // MEMORY BUFFER
@@ -1073,8 +1075,9 @@ val nk_chart = struct(NUKLEAR_PACKAGE, "NkChart", nativeName = "struct nk_chart"
 	nk_chart_slot.array("slots", "", size = NK_CHART_MAX_SLOT)
 }
 
+val NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS = 16
 val nk_row_layout = struct(NUKLEAR_PACKAGE, "NkRowLayout", nativeName = "struct nk_row_layout", mutable = false) {
-	int.member("type", "")
+	nk_panel_row_layout_type.member("type", "")
 	int.member("index", "")
 	float.member("height", "")
 	int.member("columns", "")
@@ -1085,6 +1088,7 @@ val nk_row_layout = struct(NUKLEAR_PACKAGE, "NkRowLayout", nativeName = "struct 
 	float.member("filled", "")
 	nk_rect.member("item", "")
 	int.member("tree_depth", "")
+	float.array("templates", "", size = NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS)
 }
 
 val nk_popup_buffer = struct(NUKLEAR_PACKAGE, "NkPopupBuffer", nativeName = "struct nk_popup_buffer", mutable = false) {
@@ -1108,7 +1112,8 @@ val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel"
 	nk_panel_type.member("type", "")
 	nk_flags.member("flags", "")
 	nk_rect.member("bounds", "")
-	nk_scroll_p.member("offset", "")
+	nk_uint_p.member("offset_x", "")
+	nk_uint_p.member("offset_y", "")
 	float.member("at_x", "")
 	float.member("at_y", "")
 	float.member("max_x", "")
