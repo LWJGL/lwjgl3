@@ -26,6 +26,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.EXTThreadLocalContext.*;
+import static org.lwjgl.openal.SOFTDirectChannels.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBEasyFont.*;
 import static org.lwjgl.stb.STBVorbis.*;
@@ -63,6 +64,7 @@ public final class Vorbis {
 		AL.createCapabilities(deviceCaps);
 
 		int source = alGenSources();
+		alSourcei(source, AL_DIRECT_CHANNELS_SOFT, AL_TRUE);
 
 		IntBuffer buffers = BufferUtils.createIntBuffer(2);
 		alGenBuffers(buffers);
