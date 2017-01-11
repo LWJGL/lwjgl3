@@ -91,6 +91,15 @@ val YGMeasureFunc = "YGMeasureFunc".callback(
 	"""
 }
 
+val YGBaselineFunc = "YGBaselineFunc".callback(
+	YOGA_PACKAGE, float, "YGBaselineFunc",
+	"",
+
+	YGNodeRef.IN("node", ""),
+	float.IN("width", ""),
+	float.IN("height", "")
+)
+
 val YGPrintFunc = "YGPrintFunc".callback(
 	YOGA_PACKAGE, void, "YGPrintFunc",
 	"",

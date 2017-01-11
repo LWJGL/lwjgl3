@@ -43,6 +43,33 @@ public class YogaNodeTest {
 	}
 
 	@Test
+	public void testBaseline() {
+		long root = YGNodeNew();
+		YGNodeStyleSetFlexDirection(root, YGFlexDirectionRow);
+		YGNodeStyleSetAlignItems(root, YGAlignBaseline);
+		YGNodeStyleSetWidth(root, 100);
+		YGNodeStyleSetHeight(root, 100);
+
+		long child1 = YGNodeNew();
+		YGNodeStyleSetWidth(child1, 40);
+		YGNodeStyleSetHeight(child1, 40);
+		YGNodeInsertChild(root, child1, 0);
+
+		long child2 = YGNodeNew();
+		YGNodeStyleSetWidth(child2, 40);
+		YGNodeStyleSetHeight(child2, 40);
+		YGNodeSetBaselineFunc(child2, (node, width, height) -> 0);
+		YGNodeInsertChild(root, child2, 1);
+
+		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeStyleGetDirection(root));
+
+		assertEquals(0, (int)YGNodeLayoutGetTop(child1));
+		assertEquals(40, (int)YGNodeLayoutGetTop(child2));
+
+		YGNodeGetBaselineFunc(child2).free();
+	}
+
+	@Test
 	public void testMeasure() {
 		long node = YGNodeNew();
 		setMeasureFunc(node, 100, 100);

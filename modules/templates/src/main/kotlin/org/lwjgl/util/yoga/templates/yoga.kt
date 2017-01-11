@@ -181,7 +181,8 @@ div {
 		"AlignFlexStart".enum,
 		"AlignCenter".enum,
 		"AlignFlexEnd".enum,
-		"AlignStretch".enum
+		"AlignStretch".enum,
+		"AlignBaseline".enum
 	)
 
 	EnumConstant(
@@ -449,6 +450,7 @@ div {
 
 	YG_NODE_PROPERTY(voidptr, "Context", "context")
 	YG_NODE_PROPERTY(YGMeasureFunc, "MeasureFunc", "measureFunc")
+	YG_NODE_PROPERTY(YGBaselineFunc, "BaselineFunc", "baselineFunc")
 	YG_NODE_PROPERTY(YGPrintFunc, "PrintFunc", "printFunc")
 	YG_NODE_PROPERTY(bool, "HasNewLayout", "hasNewLayout")
 
