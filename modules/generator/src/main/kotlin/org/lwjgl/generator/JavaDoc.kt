@@ -200,16 +200,16 @@ private fun printParam(builder: StringBuilder, name: String, documentation: Stri
 
 enum class LinkMode {
 	SINGLE {
-		override fun print(multi: Boolean): String = if (multi) " One of:" else " Must be:"
+		override fun print(multi: Boolean): String = if (multi) "One of:" else "Must be:"
 	},
 	SINGLE_CNT {
-		override fun print(multi: Boolean): String = if (multi) " one of:" else " must be:"
+		override fun print(multi: Boolean): String = if (multi) "one of:" else "must be:"
 	},
 	BITFIELD {
-		override fun print(multi: Boolean): String = " One or more of:"
+		override fun print(multi: Boolean): String = "One or more of:"
 	},
 	BITFIELD_CNT {
-		override fun print(multi: Boolean): String = " one or more of:"
+		override fun print(multi: Boolean): String = "one or more of:"
 	};
 
 	companion object {
@@ -236,6 +236,7 @@ enum class LinkMode {
 				if (!trimmed.endsWith('.'))
 					builder.append('.')
 			}
+			builder.append(' ')
 		}
 
 		builder.append(effectiveLinkMode.print(links.any { Character.isWhitespace(it) }))

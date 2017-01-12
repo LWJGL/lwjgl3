@@ -431,7 +431,7 @@ $indentation}"""
 		members.forEach {
 			if (it.isNestedStructDefinition)
 				(it.nativeType as StructType).definition.printMemberDocumentation(if (it.name === ANONYMOUS) prefix else "$prefix${it.name}.", documentation)
-			else if (it.documentation.isNotEmpty()) {
+			else if (it.documentation.isNotEmpty() || it.links.isNotEmpty()) {
 				val doc = if (it.links.isEmpty())
 					it.documentation
 				else

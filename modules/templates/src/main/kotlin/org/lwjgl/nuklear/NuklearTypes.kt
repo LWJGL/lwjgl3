@@ -763,8 +763,8 @@ val nk_style_slider = struct(NUKLEAR_PACKAGE, "NkStyleSlider", nativeName = "str
 	int.member("show_buttons", "")
 	nk_style_button.member("inc_button", "")
 	nk_style_button.member("dec_button", "")
-	nk_symbol_type.member("inc_symbol", "")
-	nk_symbol_type.member("dec_symbol", "")
+	nk_symbol_type.member("inc_symbol", "").links("SYMBOL_\\w+")
+	nk_symbol_type.member("dec_symbol", "see {@code inc_symbol}")
 
 	/* optional user callbacks */
 	nk_handle.member("userdata", "")
@@ -822,8 +822,8 @@ val nk_style_scrollbar = struct(NUKLEAR_PACKAGE, "NkStyleScrollbar", nativeName 
 	int.member("show_buttons", "")
 	nk_style_button.member("inc_button", "")
 	nk_style_button.member("dec_button", "")
-	nk_symbol_type.member("inc_symbol", "")
-	nk_symbol_type.member("dec_symbol", "")
+	nk_symbol_type.member("inc_symbol", "").links("SYMBOL_\\w+")
+	nk_symbol_type.member("dec_symbol", "see {@code inc_symbol}")
 
 	/* optional user callbacks */
 	nk_handle.member("userdata", "")
@@ -878,8 +878,8 @@ val nk_style_property = struct(NUKLEAR_PACKAGE, "NkStyleProperty", nativeName = 
 	nk_color.member("label_active", "")
 
 	/* symbols */
-	nk_symbol_type.member("sym_left", "")
-	nk_symbol_type.member("sym_right", "")
+	nk_symbol_type.member("sym_left", "").links("SYMBOL_\\w+")
+	nk_symbol_type.member("sym_right", "see {@code sym_left}")
 
 	/* properties */
 	float.member("border", "")
@@ -981,7 +981,7 @@ val nk_style_window_header = struct(NUKLEAR_PACKAGE, "NkStyleWindowHeader", nati
 	nk_color.member("label_active", "")
 
 	/* properties */
-	nk_style_header_align.member("align", "")
+	nk_style_header_align.member("align", "").links("HEADER_\\w+")
 	nk_vec2.member("padding", "")
 	nk_vec2.member("label_padding", "")
 	nk_vec2.member("spacing", "")
@@ -1077,7 +1077,7 @@ val nk_chart = struct(NUKLEAR_PACKAGE, "NkChart", nativeName = "struct nk_chart"
 
 val NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS = 16
 val nk_row_layout = struct(NUKLEAR_PACKAGE, "NkRowLayout", nativeName = "struct nk_row_layout", mutable = false) {
-	nk_panel_row_layout_type.member("type", "")
+	nk_panel_row_layout_type.member("type", "").links("LAYOUT_\\w+")
 	int.member("index", "")
 	float.member("height", "")
 	int.member("columns", "")
@@ -1109,7 +1109,7 @@ val nk_menu_state = struct(NUKLEAR_PACKAGE, "NkMenuState", nativeName = "struct 
 
 val nk_panel_p = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel").p
 val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel", mutable = false) {
-	nk_panel_type.member("type", "")
+	nk_panel_type.member("type", "").links("PANEL_\\w+")
 	nk_flags.member("flags", "")
 	nk_rect.member("bounds", "")
 	nk_uint_p.member("offset_x", "")
@@ -1135,7 +1135,7 @@ val nk_panel = struct(NUKLEAR_PACKAGE, "NkPanel", nativeName = "struct nk_panel"
 val nk_window = struct(NUKLEAR_PACKAGE, "NkWindow", nativeName = "struct nk_window")
 val nk_popup_state = struct(NUKLEAR_PACKAGE, "NkPopupState", nativeName = "struct nk_popup_state", mutable = false) {
 	nk_window.p.member("win", "")
-	nk_panel_type.member("type", "")
+	nk_panel_type.member("type", "").links("PANEL_\\w+")
 	nk_hash.member("name", "")
 	int.member("active", "")
 	unsigned.member("combo_count", "")
