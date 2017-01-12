@@ -370,8 +370,13 @@ class NativeClassFunction(
 						if (!returns.nativeType.mapping.let({ it === PrimitiveMapping.INT || it === PrimitiveMapping.POINTER }))
 							it.error("The Return modifier was used in a function with an unsupported return type")
 
-						if (!it.has<Check>() && !hasAutoSizeFor(it))
-							it.error("A Check or AutoSize for ReturnParam parameter does not exist")
+						if (!it.has<Check>()) {
+							if (!hasAutoSizeFor(it))
+								it.error("A Check or AutoSize for ReturnParam parameter does not exist")
+							else if (it.nativeType !is CharSequenceType)
+								it.error("Return parameters with AutoSize must have a CharSequence type")
+						} else if (it.get<Check>().expression != "1" || it.nativeType is CharSequenceType)
+							it.error("Return parameters with Check must be pointers to a single primitive value")
 					} else {
 						if (!returns.isVoid)
 							it.error("The Return modifier was used in a function with an unsupported return type")
