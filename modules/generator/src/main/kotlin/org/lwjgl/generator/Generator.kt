@@ -32,7 +32,11 @@ import java.util.function.*
 	- Target source (C)     -> modules/core/src/generated/c/opengl/org_lwjgl_opengl_ARBImaging.c
 */
 
-enum class Binding(val key: String, val packageName: String) {
+enum class Binding(
+	val key: String,
+	val packageName: String,
+    val arrayOverloads: Boolean = true
+) {
     ASSIMP("binding.assimp", "org.lwjgl.assimp"),
 	BGFX("binding.bgfx", "org.lwjgl.bgfx"),
 	EGL("binding.egl", "org.lwjgl.egl"),
@@ -51,11 +55,11 @@ enum class Binding(val key: String, val packageName: String) {
 	PAR("binding.par", "org.lwjgl.util.par"),
 	SSE("binding.sse", "org.lwjgl.util.simd"),
 	STB("binding.stb", "org.lwjgl.stb"),
-	TINYEXR("binding.tinyexr", "org.lwjgl.util.tinyexr"),
+	TINYEXR("binding.tinyexr", "org.lwjgl.util.tinyexr", arrayOverloads = false),
 	TINYFD("binding.tinyfd", "org.lwjgl.util.tinyfd"),
 	VULKAN("binding.vulkan", "org.lwjgl.vulkan"),
 	XXHASH("binding.xxhash", "org.lwjgl.util.xxhash"),
-	YOGA("binding.yoga", "org.lwjgl.util.yoga");
+	YOGA("binding.yoga", "org.lwjgl.util.yoga", arrayOverloads = false);
 
 	companion object {
 		val CHECKS = !System.getProperty("binding.DISABLE_CHECKS", "false").toBoolean()
@@ -368,7 +372,7 @@ class Generator(
 
 		// Generate the template code
 		classes.forEach {
-			it.registerFunctions()
+			it.registerFunctions(binding?.arrayOverloads ?: true)
 			generate(it, max(packageLastModified, GENERATOR_LAST_MODIFIED))
 		}
 	}

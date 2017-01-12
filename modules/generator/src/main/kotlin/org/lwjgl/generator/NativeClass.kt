@@ -4,9 +4,9 @@
  */
 package org.lwjgl.generator
 
-import java.io.*
-import java.lang.Math.*
-import java.nio.file.*
+import java.io.PrintWriter
+import java.lang.Math.max
+import java.nio.file.Paths
 
 const val EXT_FLAG = ""
 
@@ -199,8 +199,62 @@ class NativeClass(
 		get() = _functions.values
 
 	// same as above + array overloads
-	private val genFunctions: List<NativeClassFunction> by lazy(LazyThreadSafetyMode.NONE) {
-		val list = ArrayList<NativeClassFunction>(_functions.values)
+	private val genFunctions: MutableList<NativeClassFunction> by lazy(LazyThreadSafetyMode.NONE) {
+		ArrayList<NativeClassFunction>(_functions.values)
+	}
+
+	private val customMethods = ArrayList<String>()
+
+	internal val hasBody
+		get() = binding is SimpleBinding || !constantBlocks.isEmpty() || hasNativeFunctions || customMethods.isNotEmpty()
+
+	val hasNativeFunctions
+		get() = _functions.isNotEmpty()
+
+	val link get() = "{@link ${this.className} ${this.templateName}}"
+
+	override fun processDocumentation(documentation: String, forcePackage: Boolean): String =
+		processDocumentation(documentation, prefixConstant, prefixMethod, forcePackage = forcePackage)
+
+	private val constantLinks: Map<String, String> by lazy(LazyThreadSafetyMode.NONE) {
+		val map = HashMap<String, String>()
+
+		constantBlocks
+			.forEach { block ->
+				block.constants.forEach {
+					map[it.name] = block.getClassLink(it.name)
+				}
+			}
+
+		functions
+			.filter { it has macro }
+			.forEach {
+				map[it.name] = "$className#${it.name}"
+			}
+
+		map
+	}
+	override fun getFieldLink(field: String): String? = constantLinks[field]
+	override fun getMethodLink(method: String): String? = _functions[method].let {
+		if (it == null)
+			null
+		else
+			"$className#${it.name}()"
+	}
+
+	internal fun registerFunctions(generateArrayOverloads: Boolean) {
+		if (binding != null) {
+			functions.asSequence()
+				// This will generate additional signatures that cover the entire
+				// GL/GLES API. They will not be used by LWJGL, but may be useful
+				// to users. Using !it.hasCustomJNI here will eliminate them.
+				.filter { !it.hasCustomJNIWithIgnoreAddress }
+				.forEach { JNI.register(it) }
+		}
+
+		genFunctions
+		if (!generateArrayOverloads)
+			return
 
 		functions.asSequence()
 			.filter { it.hasArrayOverloads }
@@ -232,7 +286,7 @@ class NativeClass(
 					if (!overload.hasCustomJNI)
 						JNI.registerArray(overload)
 
-					list.add(overload)
+					genFunctions.add(overload)
 				}
 
 				if (multiTypeParams.isEmpty())
@@ -320,63 +374,9 @@ class NativeClass(
 						if (!overload.hasCustomJNI)
 							JNI.registerArray(overload)
 
-						list.add(overload)
+						genFunctions.add(overload)
 					}
 			}
-
-		list
-	}
-
-	private val customMethods = ArrayList<String>()
-
-	internal val hasBody
-		get() = binding is SimpleBinding || !constantBlocks.isEmpty() || hasNativeFunctions || customMethods.isNotEmpty()
-
-	val hasNativeFunctions
-		get() = _functions.isNotEmpty()
-
-	val link get() = "{@link ${this.className} ${this.templateName}}"
-
-	override fun processDocumentation(documentation: String, forcePackage: Boolean): String =
-		processDocumentation(documentation, prefixConstant, prefixMethod, forcePackage = forcePackage)
-
-	private val constantLinks: Map<String, String> by lazy(LazyThreadSafetyMode.NONE) {
-		val map = HashMap<String, String>()
-
-		constantBlocks
-			.forEach { block ->
-				block.constants.forEach {
-					map[it.name] = block.getClassLink(it.name)
-				}
-			}
-
-		functions
-			.filter { it has macro }
-			.forEach {
-				map[it.name] = "$className#${it.name}"
-			}
-
-		map
-	}
-	override fun getFieldLink(field: String): String? = constantLinks[field]
-	override fun getMethodLink(method: String): String? = _functions[method].let {
-		if (it == null)
-			null
-		else
-			"$className#${it.name}()"
-	}
-
-	internal fun registerFunctions() {
-		if (binding != null) {
-			functions.asSequence()
-				// This will generate additional signatures that cover the entire
-				// GL/GLES API. They will not be used by LWJGL, but may be useful
-				// to users. Using !it.hasCustomJNI here will eliminate them.
-				.filter { !it.hasCustomJNIWithIgnoreAddress }
-				.forEach { JNI.register(it) }
-
-			genFunctions // lazy init
-		}
 	}
 
 	private fun registerLink(
