@@ -241,9 +241,6 @@ EXPORTS
 
 		<!-- OpenVR -->
 		<build name="lwjgl_openvr" dest="${bin.native}/openvr" if:true="${binding.openvr}">
-			<compileargs>
-				<arg value="/I${src.native}\openvr"/>
-			</compileargs>
 			<source>
 				<fileset dir="." includes="${src.generated.native}/openvr/*.c"/>
 			</source>

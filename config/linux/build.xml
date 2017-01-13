@@ -206,7 +206,6 @@
 		<!-- OpenVR -->
 		<build name="lwjgl_openvr" dest="${bin.native}/openvr" if:true="${binding.openvr}">
 			<source>
-				<arg value="-I${src.native.rel}/openvr"/>
 				<fileset dir="." includes="${src.generated.native}/openvr/*.c"/>
 			</source>
 		</build>

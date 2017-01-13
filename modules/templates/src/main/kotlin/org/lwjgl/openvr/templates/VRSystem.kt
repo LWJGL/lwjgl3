@@ -13,10 +13,45 @@ val VRSystem = "VRSystem".nativeClass(
 	library = OPENVR_LIBRARY,
 	binding = OPENVR_FNTABLE_BINDING
 ) {
-	nativeDirective("""DISABLE_WARNINGS()
-#include "openvr_capi.h"
-ENABLE_WARNINGS()
-#define APIENTRY OPENVR_FNTABLE_CALLTYPE""")
+	nativeImport("<stdint.h>")
+	nativeDirective("""
+#ifdef LWJGL_WINDOWS
+	#define APIENTRY __stdcall
+#else
+	#define APIENTRY
+#endif
+
+typedef struct HmdMatrix34_t
+{
+	float m[3][4];
+} HmdMatrix34_t;
+
+typedef struct HmdMatrix44_t
+{
+	float m[4][4];
+} HmdMatrix44_t;
+
+typedef struct HmdVector2_t
+{
+	float v[2];
+} HmdVector2_t;
+
+typedef struct HmdColor_t
+{
+	float r;
+	float g;
+	float b;
+	float a;
+} HmdColor_t;
+
+typedef struct HiddenAreaMesh_t
+{
+	struct HmdVector2_t * pVertexData;
+	uint32_t unTriangleCount;
+	#ifdef LWJGL_x64
+		char __padding[4];
+	#endif
+} HiddenAreaMesh_t;""")
 
 	documentation =
 		"""
