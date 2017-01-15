@@ -42,10 +42,10 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 		will provide an implementation specific default.
 		""",
 
-		nullable..const..ALCcharUTF8_p.IN("devicename", "the device or device configuration"),
+		nullable..const..ALCcharUTF8_p.IN("deviceName", "the device or device configuration"),
 		ALCuint.IN("frequency", "the audio frequency"),
 		ALCenum.IN("format", "the audio format"),
-		ALCsizei.IN("buffersize", "the number of sample frame to buffer in the AL")
+		ALCsizei.IN("samples", "the number of sample frames to buffer in the AL")
 	)
 
 	ALCboolean(
@@ -89,8 +89,10 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 		""",
 
 		ALCdevice_p.IN("device", "the capture device"),
-		ALCvoid_p.IN("buffer", "the buffer that will receive the samples"),
-		AutoSize("buffer")..ALCsizei.IN("samples", "the buffer size")
+		Unsafe..MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
+		)..ALCvoid_p.OUT("buffer", "the buffer that will receive the samples. It must be big enough to contain at least {@code samples} sample frames."),
+		ALCsizei.IN("samples", "the number of sample frames to obtain")
 	)
 
 }

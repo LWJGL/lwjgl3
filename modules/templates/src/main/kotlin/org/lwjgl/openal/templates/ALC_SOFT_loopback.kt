@@ -96,7 +96,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		ALCdevice_p.IN("device", "the loopback device which samples are rendered from, using its contexts and associated buffers and sources"),
 		Unsafe..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		)..ALCvoid_p.OUT("buffer", "the buffer to write to"),
+		)..ALCvoid_p.OUT("buffer", "the buffer that will receive the samples. It must be big enough to contain at least {@code samples} sample frames."),
 		ALCsizei.IN("samples", "the number of sample frames to render")
 	)
 }
