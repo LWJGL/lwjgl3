@@ -61,7 +61,7 @@ This script is included in /config/build-definitions.xml.
 				<isfalse value="${binding.opengl}"/>
 			</and>
 		</condition>
-		<fail if="check_dependencies" message="The OpenGL bindings are required."/>
+		<fail if="dependency_problem" message="The OpenGL bindings are required."/>
 
 		<condition property="dependency_problem" value="1">
 			<and>
