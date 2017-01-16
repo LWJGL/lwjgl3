@@ -1006,7 +1006,20 @@
 		</release-module>
 
 		<!-- OpenVR -->
-		<release-module package="org.lwjgl.openvr" name="openvr" native-library="lwjgl_openvr" title="OpenVR" license="openvr" if:true="${binding.openvr}"/>
+		<release-module package="org.lwjgl.openvr" name="openvr" title="OpenVR" license="openvr" if:true="${binding.openvr}">
+			<natives>
+				<url url="https://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_openvr.so"/>
+				<url url="https://build.lwjgl.org/${build.type}/linux/x64/libopenvr_api.so"/>
+
+				<url url="https://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_openvr.dylib"/>
+				<url url="https://build.lwjgl.org/${build.type}/macosx/x64/libopenvr_api.dylib"/>
+
+				<url url="https://build.lwjgl.org/${build.type}/windows/x64/lwjgl_openvr.dll"/>
+				<url url="https://build.lwjgl.org/${build.type}/windows/x86/lwjgl_openvr32.dll"/>
+				<url url="https://build.lwjgl.org/${build.type}/windows/x64/openvr_api.dll"/>
+				<url url="https://build.lwjgl.org/${build.type}/windows/x86/openvr_api32.dll"/>
+			</natives>
+		</release-module>
 
 		<!-- LibOVR -->
 		<release-module package="org.lwjgl.ovr" name="ovr" title="LibOVR" license="oculus" if:true="${binding.ovr}">
