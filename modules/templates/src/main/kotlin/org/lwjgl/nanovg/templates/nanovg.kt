@@ -207,7 +207,8 @@ nvgFill(vg);""")}
 		"IMAGE_REPEATX".enum("Repeat image in X direction.", "1<<1"),
 		"IMAGE_REPEATY".enum("Repeat image in Y direction.", "1<<2"),
 		"IMAGE_FLIPY".enum("Flips (inverses) image in Y direction when rendered.", "1<<3"),
-		"IMAGE_PREMULTIPLIED".enum("Image data has premultiplied alpha.", "1<<4")
+		"IMAGE_PREMULTIPLIED".enum("Image data has premultiplied alpha.", "1<<4"),
+		"IMAGE_NEAREST".enum("Image interpolation is Nearest instead Linear.", "1<<5")
 	).javaDocLinks
 
 	val ctx = NVGcontext_p.IN("ctx", "the NanoVG context")
