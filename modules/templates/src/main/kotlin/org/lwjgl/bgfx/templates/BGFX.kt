@@ -16,7 +16,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 	IntConstant(
 		"API version",
 
-		"API_VERSION".."34"
+		"API_VERSION".."35"
 	)
 
 	ShortConstant(
@@ -885,15 +885,19 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"image_swizzle_bgra8",
 		"Swizzles RGBA8 image to BGRA8.",
 
+		MultiType(
+			PointerMapping.DATA_INT
+		)..Check("bytes")..void_p.IN(
+			"_dst",
+			"destination image. Must be the same size as input image. {@code _dst} might be pointer to the same memory as {@code _src}."
+		),
 		uint32_t.IN("_width", "width of input image (pixels)"),
 		uint32_t.IN("_height", "height of input image (pixels)"),
 		uint32_t.IN("_pitch", "pitch of input image (bytes)"),
 		MultiType(
 			PointerMapping.DATA_INT
-		)..Check("bytes")..const..void_p.IN("_src", "source image"),
-		MultiType(
-			PointerMapping.DATA_INT
-		)..Check("bytes")..void_p.IN("_dst", "destination image. Must be the same size as input image. {@code _dst} might be pointer to the same memory as {@code _src}.")
+		)..Check("bytes")..const..void_p.IN("_src", "source image")
+
 	)
 
 	Code(
@@ -902,15 +906,18 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		"image_rgba8_downsample_2x2",
 		"Downsamples RGBA8 image with 2x2 pixel average filter.",
 
+		MultiType(
+			PointerMapping.DATA_INT
+		)..Check("bytes >> 2")..void_p.IN(
+			"_dst",
+			"destination image. Must be at least quarter size of input image. {@code _dst} might be pointer to the same memory as {@code _src}."
+		),
 		uint32_t.IN("_width", "width of input image (pixels)"),
 		uint32_t.IN("_height", "height of input image (pixels)"),
 		uint32_t.IN("_pitch", "pitch of input image (bytes)"),
 		MultiType(
 			PointerMapping.DATA_INT
-		)..Check("bytes")..const..void_p.IN("_src", "source image"),
-		MultiType(
-			PointerMapping.DATA_INT
-		)..Check("bytes >> 2")..void_p.IN("_dst", "destination image. Must be at least quarter size of input image. {@code _dst} might be pointer to the same memory as {@code _src}.")
+		)..Check("bytes")..const..void_p.IN("_src", "source image")
 	)
 
 	uint8_t(
