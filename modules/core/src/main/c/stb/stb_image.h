@@ -1,4 +1,4 @@
-/* stb_image - v2.13 - public domain image loader - http://nothings.org/stb_image.h
+/* stb_image - v2.14 - public domain image loader - http://nothings.org/stb_image.h
                                      no warranty implied; use at your own risk
 
    Do this:
@@ -172,9 +172,9 @@
     Tom Seddon (pic)                       Omar Cornut (1/2/4-bit PNG)
     Thatcher Ulrich (psd)                  Nicolas Guillemot (vertical flip)
     Ken Miller (pgm, ppm)                  Richard Mitton (16-bit PSD)
-    urraka@github (animated gif)           Junggon Kim (PNM comments)
+    github:urraka (animated gif)           Junggon Kim (PNM comments)
                                            Daniel Gibson (16-bit TGA)
-
+                                           socks-the-fox (16-bit TGA)
  Optimizations & bugfixes
     Fabian "ryg" Giesen
     Arseny Kapoulkine
@@ -185,14 +185,14 @@
     Dave Moore              Roy Eltham         Hayaki Saito       Phil Jordan
     Won Chun                Luke Graham        Johan Duparc       Nathan Reed
     the Horde3D community   Thomas Ruf         Ronny Chevalier    Nick Verigakis
-    Janez Zemva             John Bartholomew   Michal Cichon      svdijk@github
+    Janez Zemva             John Bartholomew   Michal Cichon      github:svdijk
     Jonathan Blow           Ken Hamada         Tero Hanninen      Baldur Karlsson
-    Laurent Gomila          Cort Stratton      Sergio Gonzalez    romigrou@github
+    Laurent Gomila          Cort Stratton      Sergio Gonzalez    github:romigrou
     Aruelien Pocheville     Thibault Reuille   Cass Everitt       Matthew Gregan
-    Ryamond Barbiero        Paul Du Bois       Engin Manap        snagar@github
-    Michaelangel007@github  Oriol Ferrer Mesia socks-the-fox      Zelex@github
-    Philipp Wiesemann       Josh Tobin         rlyeh@github       grim210@github
-    Blazej Dariusz Roszkowski
+    Ryamond Barbiero        Paul Du Bois       Engin Manap        github:snagar
+    Michaelangel007@github  Oriol Ferrer Mesia Dale Weiler        github:Zelex
+    Philipp Wiesemann       Josh Tobin         github:rlyeh       github:grim210@github
+    Blazej Dariusz Roszkowski                  github:sammyhw
 
 
 LICENSE
@@ -4842,7 +4842,10 @@ static void *stbi__do_png(stbi__png *p, int *x, int *y, int *n, int req_comp, st
    void *result=NULL;
    if (req_comp < 0 || req_comp > 4) return stbi__errpuc("bad req_comp", "Internal error");
    if (stbi__parse_png_file(p, STBI__SCAN_load, req_comp)) {
-      ri->bits_per_channel = p->depth;
+      if (p->depth < 8)
+         ri->bits_per_channel = 8;
+      else
+         ri->bits_per_channel = p->depth;
       result = p->out;
       p->out = NULL;
       if (req_comp && req_comp != p->s->img_out_n) {
@@ -5372,7 +5375,7 @@ static void *stbi__tga_load(stbi__context *s, int *x, int *y, int *comp, int req
    unsigned char *tga_data;
    unsigned char *tga_palette = NULL;
    int i, j;
-   unsigned char raw_data[4];
+   unsigned char raw_data[4] = {0};
    int RLE_count = 0;
    int RLE_repeating = 0;
    int read_next_pixel = 1;
