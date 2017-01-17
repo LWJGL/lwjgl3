@@ -566,7 +566,8 @@ nk_style_pop_vec2(ctx);""")}
 		"WINDOW_NO_SCROLLBAR".enum("Removes the scrollbar from the window", 5.NK_FLAG),
 		"WINDOW_TITLE".enum("Forces a header at the top at the window showing the title", 6.NK_FLAG),
 		"WINDOW_SCROLL_AUTO_HIDE".enum("Automatically hides the window scrollbar if no user interaction: also requires delta time in {@code nk_context} to be set each frame", 7.NK_FLAG),
-		"WINDOW_BACKGROUND".enum("Always keep window in the background", 8.NK_FLAG)
+		"WINDOW_BACKGROUND".enum("Always keep window in the background", 8.NK_FLAG),
+		"WINDOW_SCALE_LEFT".enum("Puts window scaler in the left-bottom corner instead right-bottom", 9.NK_FLAG)
 	).javaDocLinks
 
 	EnumConstant(

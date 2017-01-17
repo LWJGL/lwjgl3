@@ -1,5 +1,5 @@
 /*
- Nuklear - v1.21 - public domain
+ Nuklear - 1.32.0 - public domain
  no warrenty implied; use at your own risk.
  authored from 2015-2016 by Micha Mettke
 
@@ -688,7 +688,8 @@ enum nk_panel_flags {
     NK_WINDOW_NO_SCROLLBAR      = NK_FLAG(5), /* Removes the scrollbar from the window */
     NK_WINDOW_TITLE             = NK_FLAG(6), /* Forces a header at the top at the window showing the title */
     NK_WINDOW_SCROLL_AUTO_HIDE  = NK_FLAG(7), /* Automatically hides the window scrollbar if no user interaction: also requires delta time in `nk_context` to be set each frame */
-    NK_WINDOW_BACKGROUND        = NK_FLAG(8) /* Always keep window in the background */
+    NK_WINDOW_BACKGROUND        = NK_FLAG(8), /* Always keep window in the background */
+    NK_WINDOW_SCALE_LEFT        = NK_FLAG(9), /* Puts window scaler in the left-ottom corner instead right-bottom*/
 };
 
 /* context */
@@ -16824,7 +16825,9 @@ nk_panel_end(struct nk_context *ctx)
         scaler.w = scrollbar_size.x;
         scaler.h = scrollbar_size.y;
         scaler.y = layout->bounds.y + layout->bounds.h;
-        scaler.x = layout->bounds.x + layout->bounds.w + panel_padding.x;
+        if (layout->flags & NK_WINDOW_SCALE_LEFT)
+            scaler.x = layout->bounds.x - panel_padding.x * 0.5f;
+        else scaler.x = layout->bounds.x + layout->bounds.w + panel_padding.x;
         if (layout->flags & NK_WINDOW_NO_SCROLLBAR)
             scaler.x -= scaler.w;
 
@@ -16832,9 +16835,16 @@ nk_panel_end(struct nk_context *ctx)
         {const struct nk_style_item *item = &style->window.scaler;
         if (item->type == NK_STYLE_ITEM_IMAGE)
             nk_draw_image(out, scaler, &item->data.image, nk_white);
-        else nk_fill_triangle(out, scaler.x + scaler.w, scaler.y, scaler.x + scaler.w,
-            scaler.y + scaler.h, scaler.x, scaler.y + scaler.h, item->data.color);
-        }
+        else {
+            if (layout->flags & NK_WINDOW_SCALE_LEFT) {
+                nk_fill_triangle(out, scaler.x, scaler.y, scaler.x,
+                    scaler.y + scaler.h, scaler.x + scaler.w,
+                    scaler.y + scaler.h, item->data.color);
+            } else {
+                nk_fill_triangle(out, scaler.x + scaler.w, scaler.y, scaler.x + scaler.w,
+                    scaler.y + scaler.h, scaler.x, scaler.y + scaler.h, item->data.color);
+            }
+        }}
 
         /* do window scaling */
         if (!(window->flags & NK_WINDOW_ROM)) {
@@ -16844,7 +16854,13 @@ nk_panel_end(struct nk_context *ctx)
                     NK_BUTTON_LEFT, scaler, nk_true);
 
             if (nk_input_is_mouse_down(in, NK_BUTTON_LEFT) && left_mouse_down && left_mouse_click_in_scaler) {
-                window->bounds.w = NK_MAX(window_size.x, window->bounds.w + in->mouse.delta.x);
+                float delta_x = in->mouse.delta.x;
+                if (layout->flags & NK_WINDOW_SCALE_LEFT) {
+                    delta_x =- delta_x;
+                    window->bounds.x += in->mouse.delta.x;
+                }
+                window->bounds.w = NK_MAX(window_size.x, window->bounds.w + delta_x);
+
                 /* dragging in y-direction is only possible if static window */
                 if (!(layout->flags & NK_WINDOW_DYNAMIC))
                     window->bounds.h = NK_MAX(window_size.y, window->bounds.h + in->mouse.delta.y);
@@ -18358,6 +18374,9 @@ nk_layout_widget_space(struct nk_rect *bounds, const struct nk_context *ctx,
     struct nk_panel *layout;
     const struct nk_style *style;
 
+    struct nk_vec2 spacing;
+    struct nk_vec2 padding;
+
     float item_offset = 0;
     float item_width = 0;
     float item_spacing = 0;
@@ -18374,8 +18393,6 @@ nk_layout_widget_space(struct nk_rect *bounds, const struct nk_context *ctx,
     style = &ctx->style;
     NK_ASSERT(bounds);
 
-    struct nk_vec2 spacing;
-    struct nk_vec2 padding;
     spacing = style->window.spacing;
     padding = nk_panel_get_padding(style, layout->type);
     panel_space = nk_layout_row_calculate_usable_space(&ctx->style, layout->type,
