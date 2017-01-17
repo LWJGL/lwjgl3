@@ -20,7 +20,7 @@ interface CodeFunctionTransform<in T : QualifiedType> : Transform {
 
 /** A function transform that makes use of the stack. */
 interface StackFunctionTransform<in T : QualifiedType> : Transform {
-	fun setupStack(func: Function, qtype: T, writer: PrintWriter)
+	fun setupStack(func: Func, qtype: T, writer: PrintWriter)
 }
 
 /** Marker interface to indicate that pointer and buffer checks should be skipped. */
@@ -154,7 +154,7 @@ internal class CharSequenceTransform(
 	else
 		"memAddress(${param.name}Encoded)"
 
-	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
+	override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
 		writer.print("\t\t\tByteBuffer ${qtype.name}Encoded = ")
 		writer.print("stack.${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}")
 		if (!nullTerminated)
@@ -189,7 +189,7 @@ internal class PrimitiveValueReturnTransform(
 	else
 		"\t\treturn $paramName.get(0);" // Replace with value from the stack
 
-	override fun setupStack(func: Function, qtype: ReturnValue, writer: PrintWriter) = (bufferType.mapping as PointerMapping).let {
+	override fun setupStack(func: Func, qtype: ReturnValue, writer: PrintWriter) = (bufferType.mapping as PointerMapping).let {
 		writer.println("\t\t\t${it.box}Buffer $paramName = stack.calloc${it.mallocType}(1);")
 	}
 }
@@ -211,7 +211,7 @@ internal class SingleValueTransform(
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = "$paramType $newName" // Replace with element type + new name
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
-	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\t\t${qtype.javaMethodType} ${qtype.name} = stack.${elementType}s($newName);")
+	override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) = writer.println("\t\t\t${qtype.javaMethodType} ${qtype.name} = stack.${elementType}s($newName);")
 }
 
 internal class SingleValueStructTransform(
@@ -232,7 +232,7 @@ internal class VectorValueTransform(
 	} // Replace with vector elements
 
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
-	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
+	override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
 		writer.print("\t\t\t${paramType.box}Buffer ${qtype.name} = stack.${elementType}s(${newName}0")
 		for (i in 1..(size - 1))
 			writer.print(", $newName$i")
@@ -256,7 +256,7 @@ internal class MapPointerExplicitTransform(val lengthParam: String, val addParam
 internal val BufferLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stack buffer
-	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\t\tIntBuffer ${qtype.name} = stack.ints(0);")
+	override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) = writer.println("\t\t\tIntBuffer ${qtype.name} = stack.ints(0);")
 }
 
 internal class StringAutoSizeTransform(val autoSizeParam: Parameter) : FunctionTransform<Parameter>, CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
@@ -274,7 +274,7 @@ internal class StringAutoSizeTransform(val autoSizeParam: Parameter) : FunctionT
 internal class StringAutoSizeStackTransform(val autoSizeParam: Parameter) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with address of allocated buffer
-	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
+	override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
 		val len = "${if (4 < (autoSizeParam.nativeType.mapping as PrimitiveMapping).bytes) "(int)" else ""}${autoSizeParam.name}"
 		writer.println("\t\t\tByteBuffer ${qtype.name} = stack.malloc($len);")
 	}
@@ -283,7 +283,7 @@ internal class StringAutoSizeStackTransform(val autoSizeParam: Parameter) : Func
 internal val BufferReplaceReturnTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, StackFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "memAddress(${param.name})" // Replace with stuck buffer
-	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) {
+	override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
 		writer.println("\t\t\tPointerBuffer ${qtype.name} = stack.pointers(NULL);")
 	}
 }
@@ -363,7 +363,7 @@ internal open class PointerArrayTransform(val paramType: String) : FunctionTrans
 	}
 
 	override fun transformCall(param: Parameter, original: String) = "${param.name}$POINTER_POSTFIX" // Replace with stuck buffer
-	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupStackImpl(qtype)
+	override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) = writer.setupStackImpl(qtype)
 
 	private fun PrintWriter.setupStackImpl(param: Parameter) {
 		val pointerArray = param.get<PointerArray>()
@@ -406,7 +406,7 @@ internal class PointerArrayLengthsTransform(
 		else
 			"${arrayParam.name}$POINTER_POSTFIX - ${if (param.nativeType.mapping == PointerMapping.DATA_INT) "4" else "POINTER_SIZE"}"
 
-	override fun setupStack(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupStackImpl(qtype)
+	override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) = writer.setupStackImpl(qtype)
 
 	private fun PrintWriter.setupStackImpl(param: Parameter) {
 		val pointerArray = arrayParam.get<PointerArray>()

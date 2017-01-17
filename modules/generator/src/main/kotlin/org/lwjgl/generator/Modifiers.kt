@@ -15,7 +15,7 @@ interface TemplateModifier {
 /** A modifier that can be applied on functions */
 interface FunctionModifier : TemplateModifier {
 	/** Implementations should check that the specified function is valid for this modifier. */
-	fun validate(func: NativeClassFunction) {
+	fun validate(func: Func) {
 	}
 }
 
@@ -87,7 +87,7 @@ abstract class ModifierTarget<T : TemplateModifier> {
 // These 3 are here because Kotlin does not support: where M : T, T : ReferenceModifier
 
 /** Returns true if the function has a ReferenceModifier with the specified reference. */
-inline fun <reified T> NativeClassFunction.has(reference: String) where T : FunctionModifier, T : ReferenceModifier
+inline fun <reified T> Func.has(reference: String) where T : FunctionModifier, T : ReferenceModifier
 	= (modifiers[T::class] as T?).let { it != null && it.hasReference(reference) }
 
 /** Returns true if the parameter has a ReferenceModifier with the specified reference. */
@@ -100,12 +100,12 @@ inline fun <reified T> StructMember.has(reference: String) where T : StructMembe
 
 // Function modifiers
 
-operator fun FunctionModifier.rangeTo(func: NativeClassFunction) = func.let {
+operator fun FunctionModifier.rangeTo(func: Func) = func.let {
 	it.setModifiers(this)
 	it
 }
 
-operator fun Array<FunctionModifier>.rangeTo(function: NativeClassFunction) = function.let {
+operator fun Array<FunctionModifier>.rangeTo(function: Func) = function.let {
 	it.setModifiers(*this)
 	it
 }

@@ -61,23 +61,23 @@ abstract class APIBinding(
 		Paths.get(root, "templates").lastModified()
 	)
 
-	abstract fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction)
+	abstract fun generateFunctionAddress(writer: PrintWriter, function: Func)
 
 	abstract fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass)
 
 	// OVERRIDES
 
-	open fun getFunctionOrdinal(function: NativeClassFunction): Int = 0
+	open fun getFunctionOrdinal(function: Func): Int = 0
 
 	/** Can be overriden to generate binding-specific alternative methods. */
 	open fun generateAlternativeMethods(
 		writer: PrintWriter,
-		function: NativeClassFunction,
+		function: Func,
 		transforms: MutableMap<QualifiedType, Transform>
 	) = Unit
 
 	/** Can be overriden to generate binding-specific javadoc. If this function returns false, the default javadoc will be generated. */
-	open fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String) = false
+	open fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String) = false
 
 	protected fun NativeClass.getCapabilityJavadoc(): String {
 		val documentation = this.documentation
@@ -90,7 +90,7 @@ abstract class APIBinding(
 	}
 
 	/** Can be overriden to implement a custom condition for checking the function address. */
-	open fun shouldCheckFunctionAddress(function: NativeClassFunction) = apiCapabilities.ordinal > 1
+	open fun shouldCheckFunctionAddress(function: Func) = apiCapabilities.ordinal > 1
 
 	/** Can be overriden to add custom parameter checks. */
 	open fun addParameterChecks(
@@ -108,7 +108,7 @@ abstract class SimpleBinding(
 	callingConvention: CallingConvention
 ) : APIBinding("n/a", "n/a", callingConvention = callingConvention) {
 	override fun PrintWriter.generateJava() = Unit
-	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+	override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
 		writer.println("\t\tlong ${if (function has Address) RESULT else FUNCTION_ADDRESS} = Functions.${function.simpleName};")
 	}
 
@@ -194,13 +194,13 @@ class NativeClass(
 
 	private val constantBlocks = ArrayList<ConstantBlock<*>>()
 
-	private val _functions = LinkedHashMap<String, NativeClassFunction>()
-	val functions: Iterable<NativeClassFunction>
+	private val _functions = LinkedHashMap<String, Func>()
+	val functions: Iterable<Func>
 		get() = _functions.values
 
 	// same as above + array overloads
-	private val genFunctions: MutableList<NativeClassFunction> by lazy(LazyThreadSafetyMode.NONE) {
-		ArrayList<NativeClassFunction>(_functions.values)
+	private val genFunctions: MutableList<Func> by lazy(LazyThreadSafetyMode.NONE) {
+		ArrayList<Func>(_functions.values)
 	}
 
 	private val customMethods = ArrayList<String>()
@@ -264,7 +264,7 @@ class NativeClass(
 				val documentation: ((Parameter) -> Boolean) -> String = { processDocumentation("Array version of: ${func.javaDocLink}").toJavaDoc() }
 
 				if (multiTypeParams.isEmpty() || func.parameters.any { it.isArrayParameter(autoSizeResultOutParams) }) {
-					val overload = NativeClassFunction(
+					val overload = Func(
 						returns = func.returns,
 						simpleName = func.simpleName,
 						name = func.name,
@@ -302,7 +302,7 @@ class NativeClass(
 							it
 					}
 					.forEach { autoType ->
-						val overload = NativeClassFunction(
+						val overload = Func(
 							returns = func.returns,
 							simpleName = func.simpleName,
 							name = func.name,
@@ -594,8 +594,8 @@ class NativeClass(
 
 	fun printPointers(
 		out: PrintWriter,
-		printPointer: (func: NativeClassFunction) -> String = { it.name },
-		filter: ((NativeClassFunction) -> Boolean)? = null
+		printPointer: (func: Func) -> String = { it.name },
+		filter: ((Func) -> Boolean)? = null
 	) {
 		out.print("\n\t\t\t")
 
@@ -654,8 +654,8 @@ class NativeClass(
 	operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =
 		ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since, noPrefix = noPrefix)
 
-	operator fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false): NativeClassFunction {
-		val func = NativeClassFunction(
+	operator fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false): Func {
+		val func = Func(
 			returns = this,
 			simpleName = name,
 			name = if (noPrefix) name else "$prefixMethod$name",
@@ -688,10 +688,10 @@ class NativeClass(
 
 	operator fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: $templateName.$functionName")
 
-	infix fun NativeClass.reuse(functionName: String): NativeClassFunction {
+	infix fun NativeClass.reuse(functionName: String): Func {
 		val reference = this[functionName]
 
-		val func = Reuse..NativeClassFunction(
+		val func = Reuse..Func(
 			returns = reference.returns,
 			simpleName = reference.simpleName,
 			name = reference.name,
@@ -704,7 +704,7 @@ class NativeClass(
 		return func
 	}
 
-	operator fun NativeClassFunction.get(paramName: String): Parameter {
+	operator fun Func.get(paramName: String): Parameter {
 		val param = getParam(paramName)
 
 		return if (param === EXPLICIT_FUNCTION_ADDRESS || param === JNI_ENV)

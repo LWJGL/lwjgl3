@@ -18,9 +18,9 @@ private val EGLBinding = Generator.register(object : APIBinding(
 	APICapabilities.JAVA_CAPABILITIES
 ) {
 
-	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "CL10"
+	override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "CL10"
 
-	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+	override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
 		writer.println("\t\tlong $FUNCTION_ADDRESS = EGL.getCapabilities().${function.name};")
 	}
 
@@ -56,7 +56,7 @@ private val EGLBinding = Generator.register(object : APIBinding(
 		val addresses = classesWithFunctions
 			.map { it.functions }
 			.flatten()
-			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
+			.toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
 
 		println("\tpublic final long")
 		println(addresses.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))

@@ -9,7 +9,7 @@ package org.lwjgl.generator
 /** Marks the function parameter or return value as const. */
 object const : FunctionModifier, ParameterModifier {
 	override val isSpecial = false
-	override fun validate(func: NativeClassFunction) {
+	override fun validate(func: Func) {
 		if (func.returns.nativeType !is PointerType)
 			throw IllegalArgumentException("The const modifier can only be applied on functions with pointer return types.")
 	}

@@ -10,7 +10,7 @@ import java.io.*
 /** Specifies an alternative name for the OpenGL SDK Reference url. */
 class ReferenceGL(val function: String) : FunctionModifier {
 	override val isSpecial = false
-	override fun validate(func: NativeClassFunction) {
+	override fun validate(func: Func) {
 		if (!func.nativeClass.postfix.isEmpty())
 			throw IllegalArgumentException("The ReferenceGL modifier can only be applied on core functionality.")
 	}

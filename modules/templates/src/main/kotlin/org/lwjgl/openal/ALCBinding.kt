@@ -28,9 +28,9 @@ val ALCBinding = Generator.register(object : APIBinding(
 	callingConvention = CallingConvention.DEFAULT
 ) {
 
-	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "ALC10"
+	override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "ALC10"
 
-	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+	override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
 		writer.println("\t\tlong $FUNCTION_ADDRESS = ALC.getICD().${function.name};")
 	}
 
@@ -68,7 +68,7 @@ val ALCBinding = Generator.register(object : APIBinding(
 		val addresses = classesWithFunctions
 			.map { it.functions }
 			.flatten()
-			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
+			.toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
 
 		println("\tpublic final long")
 		println(addresses.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))

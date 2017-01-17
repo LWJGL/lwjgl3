@@ -25,9 +25,9 @@ val VK_BINDING = Generator.register(object : APIBinding(
 	APICapabilities.PARAM_CAPABILITIES
 ) {
 
-	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "VK10"
+	override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "VK10"
 
-	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+	override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
 		writer.print("\t\tlong $FUNCTION_ADDRESS = ")
 		writer.println(if (function.has<Capabilities>())
 			"${function.get<Capabilities>().expression}.${function.name};"

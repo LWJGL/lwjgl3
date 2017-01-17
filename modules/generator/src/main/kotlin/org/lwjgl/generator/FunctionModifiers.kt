@@ -115,7 +115,7 @@ class Macro internal constructor(val function: Boolean, val constant: Boolean, v
 
 	override val isSpecial = false
 
-	override fun validate(func: NativeClassFunction) {
+	override fun validate(func: Func) {
 		if (constant && func.parameters.isNotEmpty())
 			throw IllegalArgumentException("The constant macro modifier can only be applied on functions with no arguments.")
 	}
@@ -157,7 +157,7 @@ class MapPointer(
 	val sizeExpression: String
 ) : FunctionModifier {
 	override val isSpecial = true
-	override fun validate(func: NativeClassFunction) {
+	override fun validate(func: Func) {
 		if (func.returns.nativeType !is PointerType)
 			throw IllegalArgumentException("The MapPointer modifier can only be applied on functions with pointer return types.")
 
@@ -171,7 +171,7 @@ class Construct(
 	vararg val otherArgs: String
 ) : FunctionModifier {
 	override val isSpecial = true
-	override fun validate(func: NativeClassFunction) {
+	override fun validate(func: Func) {
 		if (func.returns.nativeType !is ObjectType)
 			throw IllegalArgumentException("The Construct modifier can only be applied on function with object return types.")
 	}

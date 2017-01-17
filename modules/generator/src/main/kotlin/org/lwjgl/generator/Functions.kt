@@ -48,41 +48,6 @@ enum class GenerationMode {
 	ALTERNATIVE
 }
 
-abstract class Function(
-	val returns: ReturnValue,
-	val simpleName: String,
-	val name: String = simpleName,
-	val documentation: ((Parameter) -> Boolean) -> String,
-	vararg val parameters: Parameter
-) : ModifierTarget<FunctionModifier>() {
-
-	protected val paramMap: Map<String, Parameter> = {
-		val map = HashMap<String, Parameter>()
-		for (param in parameters)
-			map.put(param.name, param)
-		map
-	}()
-
-	protected val hasNativeParams = getNativeParams().any()
-
-	fun getParam(paramName: String) = paramMap[paramName] ?: throw IllegalArgumentException("Referenced parameter does not exist: $simpleName.$paramName")
-	inline fun getParams(crossinline predicate: (Parameter) -> Boolean) = parameters.asSequence().filter {
-		predicate(it)
-	}
-
-	internal inline fun getParam(crossinline predicate: (Parameter) -> Boolean) = getParams(predicate).single()
-	internal inline fun hasParam(crossinline predicate: (Parameter) -> Boolean) = getParams(predicate).any()
-
-	internal fun getNativeParams(withExplicitFunctionAddress: Boolean = true, withJNIEnv: Boolean = false) =
-		getParams { (withJNIEnv || it !== JNI_ENV) && (withExplicitFunctionAddress || it !== EXPLICIT_FUNCTION_ADDRESS) && !it.has<Virtual>() }
-
-	/** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
-	internal inline fun <reified T> getReferenceParam(reference: String) where T : ParameterModifier, T : ReferenceModifier = parameters.asSequence().firstOrNull {
-		it.has<T>(reference)
-	} // Assumes at most 1 parameter will be found that references the specified parameter
-
-}
-
 // DSL extensions
 
 fun NativeType.IN(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, IN, javadoc, links, linkMode)
@@ -91,22 +56,45 @@ fun PointerType.INOUT(name: String, javadoc: String, links: String = "", linkMod
 
 // --- [ Native class functions ] ---
 
-class NativeClassFunction(
-	returns: ReturnValue,
-	simpleName: String,
-	name: String,
-	documentation: ((Parameter) -> Boolean) -> String,
+class Func(
+	val returns: ReturnValue,
+	val simpleName: String,
+	val name: String,
+	val documentation: ((Parameter) -> Boolean) -> String,
 	val nativeClass: NativeClass,
-	vararg parameters: Parameter
-) : Function(returns, simpleName, name, documentation, *parameters) {
+	vararg val parameters: Parameter
+) : ModifierTarget<FunctionModifier>() {
+
+	private val paramMap = HashMap<String, Parameter>()
 
 	init {
+		for (param in parameters)
+			paramMap.put(param.name, param)
+
 		validate()
 	}
 
+	private val hasNativeParams = getNativeParams().any()
+
+	fun getParam(paramName: String) = paramMap[paramName] ?: throw IllegalArgumentException("Referenced parameter does not exist: $simpleName.$paramName")
+	inline fun getParams(crossinline predicate: (Parameter) -> Boolean) = parameters.asSequence().filter {
+		predicate(it)
+	}
+
+	private inline fun getParam(crossinline predicate: (Parameter) -> Boolean) = getParams(predicate).single()
+	internal inline fun hasParam(crossinline predicate: (Parameter) -> Boolean) = getParams(predicate).any()
+
+	private fun getNativeParams(withExplicitFunctionAddress: Boolean = true, withJNIEnv: Boolean = false) =
+		getParams { (withJNIEnv || it !== JNI_ENV) && (withExplicitFunctionAddress || it !== EXPLICIT_FUNCTION_ADDRESS) && !it.has<Virtual>() }
+
+	/** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
+	internal inline fun <reified T> getReferenceParam(reference: String) where T : ParameterModifier, T : ReferenceModifier = parameters.asSequence().firstOrNull {
+		it.has<T>(reference)
+	} // Assumes at most 1 parameter will be found that references the specified parameter
+
 	override fun validate(modifier: FunctionModifier) = modifier.validate(this)
 
-	internal fun copyModifiers(other: NativeClassFunction): NativeClassFunction {
+	internal fun copyModifiers(other: Func): Func {
 		if (other.hasModifiers())
 			this._modifiers = HashMap(other.modifiers)
 		return this
@@ -232,7 +220,7 @@ class NativeClassFunction(
 	internal val hideAutoSizeResultParam = returns.nativeType is PointerType && getParams { it.isAutoSizeResultOut }.count() == 1
 
 	private fun Parameter.error(msg: String) {
-		throw IllegalArgumentException("$msg [${nativeClass.className}.${this@NativeClassFunction.name}, parameter: ${this.name}]")
+		throw IllegalArgumentException("$msg [${nativeClass.className}.${this@Func.name}, parameter: ${this.name}]")
 	}
 
 	private val Parameter.asJavaMethodParam
@@ -412,7 +400,7 @@ class NativeClassFunction(
 		val checks = ArrayList<String>()
 
 		// Validate function address
-		if (hasFunctionAddressParam && (has<DependsOn>() || has<IgnoreMissing>() || (nativeClass.binding?.shouldCheckFunctionAddress(this@NativeClassFunction) ?: false)) && !hasUnsafeMethod)
+		if (hasFunctionAddressParam && (has<DependsOn>() || has<IgnoreMissing>() || (nativeClass.binding?.shouldCheckFunctionAddress(this@Func) ?: false)) && !hasUnsafeMethod)
 			checks.add("check($FUNCTION_ADDRESS);")
 
 		// We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
@@ -684,7 +672,7 @@ class NativeClassFunction(
 		}
 
 		if (returns.isStructValue && !hasParam { it has ReturnParam }) {
-			if (this@NativeClassFunction.hasNativeParams) print(", ")
+			if (this@Func.hasNativeParams) print(", ")
 			print("long $RESULT")
 		}
 		println(") {")
@@ -693,12 +681,12 @@ class NativeClassFunction(
 
 		// Get function address
 		if (!hasExplicitFunctionAddress && !constantMacro)
-			binding.generateFunctionAddress(this, this@NativeClassFunction)
+			binding.generateFunctionAddress(this, this@Func)
 
 		if (Binding.CHECKS) {
 			// Basic checks
 			val checks = ArrayList<String>(4)
-			if (has<DependsOn>() || has<IgnoreMissing>() || binding.shouldCheckFunctionAddress(this@NativeClassFunction))
+			if (has<DependsOn>() || has<IgnoreMissing>() || binding.shouldCheckFunctionAddress(this@Func))
 				checks.add("check($FUNCTION_ADDRESS);")
 			getNativeParams().forEach {
 				if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType)
@@ -768,7 +756,7 @@ class NativeClassFunction(
 
 	private fun PrintWriter.printDocumentation(parameterFilter: (Parameter) -> Boolean) {
 		val doc = documentation(parameterFilter)
-		if (doc.isNotEmpty() && !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false))
+		if (doc.isNotEmpty() && !(nativeClass.binding?.printCustomJavadoc(this, this@Func, doc) ?: false))
 			println(doc)
 	}
 
@@ -804,7 +792,7 @@ class NativeClassFunction(
 		// Get function address
 
 		if (hasFunctionAddressParam && !hasUnsafeMethod && !hasExplicitFunctionAddress && !has<Macro>())
-			nativeClass.binding!!.generateFunctionAddress(this, this@NativeClassFunction)
+			nativeClass.binding!!.generateFunctionAddress(this, this@Func)
 
 		// Generate checks
 		printCode(code.javaInit, ApplyTo.NORMAL)
@@ -1005,7 +993,7 @@ class NativeClassFunction(
 	private fun PrintWriter.generateAlternativeMethods() {
 		val transforms = LinkedHashMap<QualifiedType, Transform>()
 
-		nativeClass.binding?.generateAlternativeMethods(this, this@NativeClassFunction, transforms)
+		nativeClass.binding?.generateAlternativeMethods(this, this@Func, transforms)
 
 		if (returns.nativeType is CharSequenceType)
 			transforms[returns] = StringReturnTransform
@@ -1348,7 +1336,7 @@ class NativeClassFunction(
 		if (!constantMacro) {
 			if (description != null) {
 				val doc = nativeClass.processDocumentation("$description $javaDocLink").toJavaDoc()
-				if (!(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, doc) ?: false) && doc.isNotEmpty())
+				if (!(nativeClass.binding?.printCustomJavadoc(this, this@Func, doc) ?: false) && doc.isNotEmpty())
 					println(doc)
 			} else {
 				val hideAutoSizeResult = parameters.count { it.isAutoSizeResultOut } == 1
@@ -1416,7 +1404,7 @@ class NativeClassFunction(
 		// Get function address
 
 		if (hasFunctionAddressParam && !hasUnsafeMethod && !has<Macro>())
-			nativeClass.binding!!.generateFunctionAddress(this, this@NativeClassFunction)
+			nativeClass.binding!!.generateFunctionAddress(this, this@Func)
 
 		// Generate checks
 
@@ -1437,7 +1425,7 @@ class NativeClassFunction(
 		// Prepare stack parameters
 
 		val stackTransforms = if (macro) emptySequence() else transforms.asSequence().filter { it.value is StackFunctionTransform<*> }
-		val hideAutoSizeResultParam = this@NativeClassFunction.hideAutoSizeResultParam
+		val hideAutoSizeResultParam = this@Func.hideAutoSizeResultParam
 		val hasStack = (hideAutoSizeResultParam || stackTransforms.any()) && !macro
 
 		if (hasStack)
@@ -1458,8 +1446,8 @@ class NativeClassFunction(
 		for ((qtype, transform) in stackTransforms) {
 			@Suppress("UNCHECKED_CAST")
 			when (qtype) {
-				is Parameter   -> (transform as StackFunctionTransform<Parameter>).setupStack(this@NativeClassFunction, qtype, this)
-				is ReturnValue -> (transform as StackFunctionTransform<ReturnValue>).setupStack(this@NativeClassFunction, qtype, this)
+				is Parameter   -> (transform as StackFunctionTransform<Parameter>).setupStack(this@Func, qtype, this)
+				is ReturnValue -> (transform as StackFunctionTransform<ReturnValue>).setupStack(this@Func, qtype, this)
 			}
 		}
 
@@ -1628,7 +1616,7 @@ class NativeClassFunction(
 			if (hasFunctionAddressParam) {
 				println("\t${nativeName}PROC $nativeName = (${nativeName}PROC)(intptr_t)$FUNCTION_ADDRESS;")
 			} else
-				println("\t${nativeName}PROC $nativeName = (${nativeName}PROC)tlsGetFunction(${nativeClass.binding.getFunctionOrdinal(this@NativeClassFunction)});")
+				println("\t${nativeName}PROC $nativeName = (${nativeName}PROC)tlsGetFunction(${nativeClass.binding.getFunctionOrdinal(this@Func)});")
 		}
 
 		// Cast addresses to pointers

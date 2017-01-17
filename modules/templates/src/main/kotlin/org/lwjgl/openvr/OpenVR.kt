@@ -31,7 +31,7 @@ private fun PrintWriter.generateCapabilitiesClass(nativeClass: NativeClass) {
 
 val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(OPENVR_PACKAGE, "OpenVR", APICapabilities.JAVA_CAPABILITIES) {
 
-	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+	override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
 		writer.println("\t\tlong $FUNCTION_ADDRESS = OpenVR.${function.nativeClass.capabilitiesField}.${function.simpleName};")
 	}
 

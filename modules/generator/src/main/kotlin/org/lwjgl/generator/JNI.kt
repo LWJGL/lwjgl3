@@ -26,8 +26,8 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
 	private val sortedSignatures by lazy(LazyThreadSafetyMode.NONE) { signatures.keys.sorted() }
 	private val sortedSignaturesArray by lazy(LazyThreadSafetyMode.NONE) { signaturesArray.keys.sorted() }
 
-	internal fun register(function: NativeClassFunction) = signatures.put(Signature(function), Unit)
-	internal fun registerArray(function: NativeClassFunction) = signaturesArray.put(SignatureArray(function), Unit)
+	internal fun register(function: Func) = signatures.put(Signature(function), Unit)
+	internal fun registerArray(function: Func) = signaturesArray.put(SignatureArray(function), Unit)
 
 	override fun PrintWriter.generateJava() {
 		print(HEADER)
@@ -186,7 +186,7 @@ private open class Signature constructor(
 	val signature = "${callingConvention.method}${arguments.asSequence().map { it.mapping.jniSignatureJava }.joinToString("")}${returnType.jniSignature}"
 	val signatureNative = "${signature}__J$paramSignatureStrict"
 
-	constructor(function: NativeClassFunction) : this(
+	constructor(function: Func) : this(
 		function.nativeClass.binding!!.callingConvention,
 		function.returns.nativeType,
 		function.parameters.asSequence()
@@ -223,7 +223,7 @@ private class SignatureArray constructor(
 
 	val signatureArray = "${signature}__J$paramSignatureStrict"
 
-	constructor(function: NativeClassFunction) : this(
+	constructor(function: Func) : this(
 		function.nativeClass.binding!!.callingConvention,
 		function.returns.nativeType,
 		function.parameters.asSequence()

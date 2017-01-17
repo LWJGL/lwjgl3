@@ -15,7 +15,7 @@ val WGLBinding = Generator.register(object : APIBinding(
 	APICapabilities.JAVA_CAPABILITIES
 ) {
 
-	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+	override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
 		writer.println("\t\tlong $FUNCTION_ADDRESS = GL.getCapabilitiesWGL().${function.name};")
 	}
 
@@ -46,7 +46,7 @@ val WGLBinding = Generator.register(object : APIBinding(
 		val functions = classesWithFunctions
 			.map { it.functions }
 			.flatten()
-			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
+			.toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
 
 		println("\tpublic final long")
 		println(functions.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n")

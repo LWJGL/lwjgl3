@@ -36,12 +36,12 @@ private val GLESBinding = Generator.register(object : APIBinding(
 		}
 	}
 
-	private val functions: java.util.SortedSet<NativeClassFunction> by lazy {
+	private val functions: java.util.SortedSet<Func> by lazy {
 		classes
 			.filter { it.hasNativeFunctions }
 			.map { it.functions }
 			.flatten()
-			.toSortedSet(Comparator<NativeClassFunction> { o1, o2 -> o1.name.compareTo(o2.name) })
+			.toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
 	}
 
 	private val functionOrdinals: Map<String, Int> by lazy {
@@ -54,9 +54,9 @@ private val GLESBinding = Generator.register(object : APIBinding(
 		ordinals
 	}
 
-	override fun getFunctionOrdinal(function: NativeClassFunction) = functionOrdinals[function.name]!!
+	override fun getFunctionOrdinal(function: Func) = functionOrdinals[function.name]!!
 
-	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, Transform>) {
+	override fun generateAlternativeMethods(writer: PrintWriter, function: Func, transforms: MutableMap<QualifiedType, Transform>) {
 		val boParams = function.getParams { it.has<BufferObject>() && it.nativeType.mapping != PrimitiveMapping.POINTER && it.nativeType !is ArrayType }
 		if (boParams.any()) {
 			boParams.forEach { transforms[it] = BufferOffsetTransform }
@@ -65,9 +65,9 @@ private val GLESBinding = Generator.register(object : APIBinding(
 		}
 	}
 
-	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.nativeClass.templateName != "GLES20"
+	override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "GLES20"
 
-	override fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
+	override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
 		writer.println("\t\tlong $FUNCTION_ADDRESS = GLES.getICD().${function.name};")
 	}
 
@@ -76,7 +76,7 @@ private val GLESBinding = Generator.register(object : APIBinding(
 		if (nativeClass.functions.any { it.has<DependsOn>() }) print(", java.util.Set<String> ext")
 		println(") {")
 
-		val printPointer = { func: NativeClassFunction ->
+		val printPointer = { func: Func ->
 			if (func.has<DependsOn>())
 				"${func.get<DependsOn>().reference.let { if (it.indexOf(' ') == -1) "ext.contains(\"$it\")" else it }} ? caps.${func.name} : -1L"
 			else
