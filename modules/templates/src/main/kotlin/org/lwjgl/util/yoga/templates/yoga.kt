@@ -515,6 +515,18 @@ div {
 	YG_NODE_LAYOUT_PROPERTY(YGDirection, "Direction")
 
 	float(
+		"NodeLayoutGetMargin",
+		"""
+		Get the computed margin for this node after performing layout.
+
+		If margin was set using pixel values then the returned value will be the same as #NodeStyleGetMargin(). However if margin was set using a percentage
+		value then the returned value is the computed value used during layout.
+		""",
+
+		const..YGNodeRef.IN("node", ""),
+		YGEdge.IN("edge", "")
+	)
+	float(
 		"NodeLayoutGetPadding",
 		"""
 		Get the computed padding for this node after performing layout.

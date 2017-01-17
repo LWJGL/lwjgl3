@@ -182,6 +182,32 @@ public class YogaNodeTest {
 		}
 	}
 
+
+	@Test
+	public void testLayoutMargin() {
+		long node = YGNodeNew();
+
+		YGNodeStyleSetWidth(node, 100);
+		YGNodeStyleSetHeight(node, 100);
+		YGNodeStyleSetMargin(node, YGEdgeStart, 1);
+		YGNodeStyleSetMargin(node, YGEdgeEnd, 2);
+		YGNodeStyleSetMargin(node, YGEdgeTop, 3);
+		YGNodeStyleSetMargin(node, YGEdgeBottom, 4);
+
+		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
+
+		try ( MemoryStack stack = stackPush() ) {
+			YGValue v = YGValue.mallocStack(stack);
+
+			assertEquals(1, (int)YGNodeStyleGetMargin(node, YGEdgeStart, v).value());
+			assertEquals(2, (int)YGNodeStyleGetMargin(node, YGEdgeEnd, v).value());
+			assertEquals(3, (int)YGNodeStyleGetMargin(node, YGEdgeTop, v).value());
+			assertEquals(4, (int)YGNodeStyleGetMargin(node, YGEdgeBottom, v).value());
+		}
+
+		YGNodeFree(node);
+	}
+
 	@Test
 	public void testLayoutPadding() {
 		long node = YGNodeNew();

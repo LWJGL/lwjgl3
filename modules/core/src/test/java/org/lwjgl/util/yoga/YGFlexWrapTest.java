@@ -348,4 +348,60 @@ public class YGFlexWrapTest {
 		assertEquals(30f, YGNodeLayoutGetHeight(root_child3), 0.0f);
 	}
 
+	@Test
+	public void test_flex_wrap_children_with_min_main_overriding_flex_basis() {
+		long root = YGNodeNew();
+		YGNodeStyleSetFlexDirection(root, YGFlexDirectionRow);
+		YGNodeStyleSetFlexWrap(root, YGWrapWrap);
+		YGNodeStyleSetWidth(root, 100f);
+
+		long root_child0 = YGNodeNew();
+		YGNodeStyleSetFlexBasis(root_child0, 50f);
+		YGNodeStyleSetMinWidth(root_child0, 55f);
+		YGNodeStyleSetHeight(root_child0, 50f);
+		YGNodeInsertChild(root, root_child0, 0);
+
+		long root_child1 = YGNodeNew();
+		YGNodeStyleSetFlexBasis(root_child1, 50f);
+		YGNodeStyleSetMinWidth(root_child1, 55f);
+		YGNodeStyleSetHeight(root_child1, 50f);
+		YGNodeInsertChild(root, root_child1, 1);
+
+		YGNodeStyleSetDirection(root, YGDirectionLTR);
+		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+
+		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
+		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
+		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
+		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+
+		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
+		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
+		assertEquals(55f, YGNodeLayoutGetWidth(root_child0), 0.0f);
+		assertEquals(50f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+
+		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
+		assertEquals(50f, YGNodeLayoutGetTop(root_child1), 0.0f);
+		assertEquals(55f, YGNodeLayoutGetWidth(root_child1), 0.0f);
+		assertEquals(50f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+
+		YGNodeStyleSetDirection(root, YGDirectionRTL);
+		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+
+		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
+		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
+		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
+		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+
+		assertEquals(45f, YGNodeLayoutGetLeft(root_child0), 0.0f);
+		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
+		assertEquals(55f, YGNodeLayoutGetWidth(root_child0), 0.0f);
+		assertEquals(50f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+
+		assertEquals(45f, YGNodeLayoutGetLeft(root_child1), 0.0f);
+		assertEquals(50f, YGNodeLayoutGetTop(root_child1), 0.0f);
+		assertEquals(55f, YGNodeLayoutGetWidth(root_child1), 0.0f);
+		assertEquals(50f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+	}
+
 }

@@ -162,6 +162,7 @@ val YG_MAX_CACHED_RESULT_COUNT = 16
 val YGLayout = struct(YOGA_PACKAGE, "YGLayout", mutable = false) {
 	float.array("positions", "", size = 4)
 	float.array("dimensions", "", size = 2)
+	float.array("margin", "", size = 6)
 	float.array("padding", "", size = 6)
 	YGDirection.member("direction", "")
 	
