@@ -11803,6 +11803,8 @@ void InitEXRImage(EXRImage *exr_image) {
 
   exr_image->images = NULL;
   exr_image->tiles = NULL;
+
+  exr_image->num_tiles = 0;
 }
 
 void InitEXRHeader(EXRHeader *exr_header) {
