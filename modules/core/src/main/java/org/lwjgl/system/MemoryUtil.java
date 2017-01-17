@@ -10,6 +10,7 @@ import org.lwjgl.system.MemoryManage.DebugAllocator;
 import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.Aggregate;
 
 import java.nio.*;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
@@ -1492,7 +1493,11 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String} or null if the specified {@code address} is null
 	 */
 	public static String memASCII(long address) {
-		return address == NULL ? null : memASCII(memByteBufferNT1(address));
+		if ( address == NULL )
+			return null;
+
+		ByteBuffer buffer = memByteBufferNT1(address);
+		return memASCII(buffer, buffer.remaining(), 0);
 	}
 
 	/**
@@ -1522,7 +1527,7 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String}
 	 */
 	public static String memASCII(ByteBuffer buffer, int length) {
-		return memASCII(buffer, length, buffer.position());
+		return MemoryTextUtil.decodeASCII(buffer, length, buffer.position());
 	}
 
 	/**
@@ -1537,6 +1542,7 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String}
 	 */
 	public static String memASCII(ByteBuffer buffer, int length, int offset) {
+		Objects.requireNonNull(buffer);
 		return MemoryTextUtil.decodeASCII(buffer, length, offset);
 	}
 
@@ -1548,7 +1554,11 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String} or null if the specified {@code address} is null
 	 */
 	public static String memUTF8(long address) {
-		return address == NULL ? null : memUTF8(memByteBufferNT1(address));
+		if ( address == NULL )
+			return null;
+
+		ByteBuffer buffer = memByteBufferNT1(address);
+		return memUTF8(buffer, buffer.remaining(), 0);
 	}
 
 	/**
@@ -1561,6 +1571,9 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String} or null if the specified {@code buffer} is null
 	 */
 	public static String memUTF8(ByteBuffer buffer) {
+		if ( buffer == null )
+			return null;
+
 		return memUTF8(buffer, buffer.remaining());
 	}
 
@@ -1575,7 +1588,7 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String}
 	 */
 	public static String memUTF8(ByteBuffer buffer, int length) {
-		return memUTF8(buffer, length, buffer.position());
+		return MemoryTextUtil.decodeUTF8(buffer, length, buffer.position());
 	}
 
 	/**
@@ -1590,6 +1603,7 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String}
 	 */
 	public static String memUTF8(ByteBuffer buffer, int length, int offset) {
+		Objects.requireNonNull(buffer);
 		return MemoryTextUtil.decodeUTF8(buffer, length, offset);
 	}
 
@@ -1611,7 +1625,7 @@ public final class MemoryUtil {
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode, or null
 	 *
-	 * @return the decoded {@link String} or null if the specified {@code } is null
+	 * @return the decoded {@link String} or null if the specified {@code buffer} is null
 	 */
 	public static String memUTF16(ByteBuffer buffer) {
 		if ( buffer == null )
@@ -1631,7 +1645,7 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String}
 	 */
 	public static String memUTF16(ByteBuffer buffer, int length) {
-		return memUTF16(buffer, length, buffer.position());
+		return MemoryTextUtil.decodeUTF16(buffer, length, buffer.position());
 	}
 
 	/**
@@ -1646,6 +1660,7 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String}
 	 */
 	public static String memUTF16(ByteBuffer buffer, int length, int offset) {
+		Objects.requireNonNull(buffer);
 		return MemoryTextUtil.decodeUTF16(buffer, length, offset);
 	}
 

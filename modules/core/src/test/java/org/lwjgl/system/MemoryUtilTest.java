@@ -8,6 +8,7 @@ import org.lwjgl.BufferUtils;
 import org.testng.annotations.Test;
 
 import java.nio.*;
+import java.nio.charset.StandardCharsets;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.testng.Assert.*;
@@ -165,6 +166,127 @@ public class MemoryUtilTest {
 		assertEquals(db.capacity(), 4);
 		for ( int i = 0; i < db.capacity(); i++ )
 			assertEquals(buffer.getDouble(i << 3), db.get(i));
+	}
+
+	public void testUTF8() {
+		// null-termination
+		ByteBuffer bytes = memUTF8("");
+		try {
+			assertNotNull(bytes);
+			assertEquals(bytes.remaining(), 1);
+		} finally {
+			memFree(bytes);
+		}
+
+		// no null-termination
+		bytes = memUTF8("", false);
+		try {
+			assertNotNull(bytes);
+			assertEquals(bytes.remaining(), 0);
+		} finally {
+			memFree(bytes);
+		}
+
+		// encode null returns null
+		assertNull(memUTF8((String)null));
+		assertNull(memUTF8(null, false));
+
+		// decode null/NULL returns null
+		assertNull(memUTF8(NULL));
+		assertNull(memUTF8((ByteBuffer)null));
+
+		// decode null/NULL with specific length/offset throws NPE
+		try {
+			memUTF8(null, 0);
+			fail();
+		} catch (NullPointerException ignored) {
+		}
+
+		try {
+			memUTF8(null, 0, 0);
+			fail();
+		} catch (NullPointerException ignored) {
+		}
+
+		// decode non-null/NULL with length 0 returns empty string
+		bytes = BufferUtils.createByteBuffer(4);
+		bytes.limit(0);
+
+		assertEquals(memUTF8(memAddress(bytes)), "");
+		assertEquals(memUTF8(bytes, 0), "");
+		assertEquals(memUTF8(bytes, 0, 0), "");
+
+		// test boundary conditions
+
+		CharBuffer chars = BufferUtils.createCharBuffer(2);
+
+		testUTF8(bytes, chars, Character.MIN_CODE_POINT, 1);
+		testUTF8(bytes, chars, 0x00000080, 2);
+		testUTF8(bytes, chars, 0x00000800, 3);
+		testUTF8(bytes, chars, 0x00010000, 4);
+
+		testUTF8(bytes, chars, 0x0000007F, 1);
+		testUTF8(bytes, chars, 0x000007FF, 2);
+		testUTF8(bytes, chars, 0x0000FFFF, 3);
+		testUTF8(bytes, chars, Character.MAX_CODE_POINT, 4);
+
+		bytes.clear();
+
+		memUTF8(new String(Character.toChars(0x0000D7FF)), false, bytes);
+		assertEquals(bytes.get(0) & 0xFF, 0xED);
+		assertEquals(bytes.get(1) & 0xFF, 0x9F);
+		assertEquals(bytes.get(2) & 0xFF, 0xBF);
+
+		memUTF8(new String(Character.toChars(0x0000E000)), false, bytes);
+		assertEquals(bytes.get(0) & 0xFF, 0xEE);
+		assertEquals(bytes.get(1) & 0xFF, 0x80);
+		assertEquals(bytes.get(2) & 0xFF, 0x80);
+
+		memUTF8(new String(Character.toChars(0x0000FFFD)), false, bytes);
+		assertEquals(bytes.get(0) & 0xFF, 0xEF);
+		assertEquals(bytes.get(1) & 0xFF, 0xBF);
+		assertEquals(bytes.get(2) & 0xFF, 0xBD);
+
+		memUTF8(new String(Character.toChars(0x0010FFFF)), false, bytes);
+		assertEquals(bytes.get(0) & 0xFF, 0xF4);
+		assertEquals(bytes.get(1) & 0xFF, 0x8F);
+		assertEquals(bytes.get(2) & 0xFF, 0xBF);
+		assertEquals(bytes.get(2) & 0xFF, 0xBF);
+	}
+
+	private static void testUTF8(ByteBuffer buffer, CharBuffer chars, int cp, int bytes) {
+		char[] cpChars = Character.toChars(cp);
+
+		chars.clear();
+		chars.put(cpChars);
+		chars.flip();
+
+		buffer.clear();
+		StandardCharsets.UTF_8
+			.newEncoder()
+			.encode(chars, buffer, true);
+		buffer.flip();
+
+		// test decoding
+		assertEquals(buffer.remaining(), bytes);
+		assertEquals(
+			memUTF8(buffer, bytes),
+			new String(cpChars)
+		);
+
+		ByteBuffer encoded = memUTF8(new String(cpChars), false);
+		try {
+			// test encoding
+			assertEquals(encoded.remaining(), bytes);
+			for ( int i = 0; i < encoded.remaining(); i++ ) {
+				assertEquals(
+					encoded.get(i),
+					buffer.get(i)
+				);
+			}
+		} finally {
+			memFree(encoded);
+		}
 	}
 
 }
