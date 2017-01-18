@@ -6,7 +6,7 @@ package org.lwjgl.system.linux
 
 import org.lwjgl.generator.*
 
-val Bool = typedef(int, "Bool")
+val Bool = typedef(intb, "Bool")
 
 val XID = typedef(unsigned_long, "XID")
 val VisualID = typedef(unsigned_long, "VisualID")

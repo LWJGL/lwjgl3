@@ -149,11 +149,7 @@ ${access.modifier}interface ${className}I extends CallbackI.${returns.mapping.jn
 			print("return ")
 		print("""invoke(
 ${signature.asSequence().map {
-			"\t\t\tdcbArg${it.nativeType.argType}(args)${when (it.nativeType.mapping) {
-				PrimitiveMapping.BOOLEAN,
-				PrimitiveMapping.BOOLEAN4 -> " != 0"
-				else                      -> ""
-			}}"
+			"\t\t\tdcbArg${it.nativeType.argType}(args)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4)" != 0" else ""}"
 		}.joinToString(",\n")}
 		);
 	}

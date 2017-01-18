@@ -565,7 +565,7 @@ public final class GL {
 			IntBuffer piMajor = stack.ints(0);
 			IntBuffer piMinor = stack.ints(0);
 
-			if ( glXQueryVersion(display, piMajor, piMinor) == 0 )
+			if ( !glXQueryVersion(display, piMajor, piMinor) )
 				throw new IllegalStateException("Failed to query GLX version");
 
 			majorVersion = piMajor.get(0);

@@ -157,7 +157,7 @@ public class CLTest {
 			for ( int i = 0; i < bufferContents.capacity(); i++ )
 				bufferContents.put(i, (byte)i);
 
-			checkCLError(clEnqueueWriteBuffer(queue, buffer, CL_TRUE, 0, bufferContents, null, null));
+			checkCLError(clEnqueueWriteBuffer(queue, buffer, true, 0, bufferContents, null, null));
 
 			// Prepare enqueue arguments
 

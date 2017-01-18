@@ -36,7 +36,7 @@ val DCstruct_p = "DCstruct".p
 
 val DCvoid = NativeType("DCvoid", TypeMapping.VOID)
 
-val DCbool = typedef(int, "DCbool")
+val DCbool = typedef(intb, "DCbool")
 val DCchar = typedef(char, "DCchar")
 val DCuchar = typedef(unsigned_char, "DCuchar")
 val DCshort = typedef(short, "DCshort")
