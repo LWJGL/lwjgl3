@@ -445,7 +445,11 @@ public final class GL {
 				.style(CS_HREDRAW | CS_VREDRAW)
 				.hInstance(WindowsLibrary.HINSTANCE)
 				.lpszClassName(stack.UTF16("WGL"));
-			WNDCLASSEX.nlpfnWndProc(wc.address(), WindowProc.create(User32.Functions.DefWindowProc));
+
+			memPutAddress(
+				wc.address() + WNDCLASSEX.LPFNWNDPROC,
+				User32.Functions.DefWindowProc
+			);
 
 			classAtom = RegisterClassEx(wc);
 			if ( classAtom == 0 )
