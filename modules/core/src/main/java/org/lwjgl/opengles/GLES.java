@@ -6,7 +6,6 @@ package org.lwjgl.opengles;
 
 import org.lwjgl.egl.EGL;
 import org.lwjgl.system.*;
-import org.lwjgl.system.MemoryStack;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -258,10 +257,11 @@ public final class GLES {
 			if ( majorVersion < 3 ) {
 				// Parse EXTENSIONS string
 				String extensionsString = memASCII(check(invokeP(GetString, GL_EXTENSIONS)));
-
-				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
-				while ( tokenizer.hasMoreTokens() )
-					supportedExtensions.add(tokenizer.nextToken());
+				if ( extensionsString != null ) {
+					StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+					while ( tokenizer.hasMoreTokens() )
+						supportedExtensions.add(tokenizer.nextToken());
+				}
 			} else {
 				// Use indexed EXTENSIONS
 				int extensionCount;

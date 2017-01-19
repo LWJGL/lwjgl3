@@ -314,6 +314,7 @@ public final class GL {
 	 *
 	 * @return the GLCapabilities instance
 	 */
+	@SuppressWarnings("AssignmentToMethodParameter")
 	public static GLCapabilities createCapabilities(boolean forwardCompatible) {
 		GLCapabilities caps = null;
 
@@ -384,11 +385,12 @@ public final class GL {
 
 			if ( majorVersion < 3 ) {
 				// Parse EXTENSIONS string
-				String extensionsString = memASCII(check(callP(GetString, GL_EXTENSIONS)));
-
-				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
-				while ( tokenizer.hasMoreTokens() )
-					supportedExtensions.add(tokenizer.nextToken());
+				String extensionsString = memASCII(callP(GetString, GL_EXTENSIONS));
+				if ( extensionsString != null ) {
+					StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+					while ( tokenizer.hasMoreTokens() )
+						supportedExtensions.add(tokenizer.nextToken());
+				}
 			} else {
 				// Use indexed EXTENSIONS
 				try ( MemoryStack stack = stackPush() ) {
@@ -589,19 +591,21 @@ public final class GL {
 		}
 
 		if ( 1 <= minorVersion ) {
-			long extensionsString;
+			String extensionsString;
 
 			if ( screen == -1 ) {
 				long glXGetClientString = functionProvider.getFunctionAddress("glXGetClientString");
-				extensionsString = callPP(glXGetClientString, display, GLX_EXTENSIONS);
+				extensionsString = memASCII(callPP(glXGetClientString, display, GLX_EXTENSIONS));
 			} else {
 				long glXQueryExtensionsString = functionProvider.getFunctionAddress("glXQueryExtensionsString");
-				extensionsString = callPP(glXQueryExtensionsString, display, screen);
+				extensionsString = memASCII(callPP(glXQueryExtensionsString, display, screen));
 			}
 
-			StringTokenizer tokenizer = new StringTokenizer(memASCII(extensionsString));
-			while ( tokenizer.hasMoreTokens() )
-				supportedExtensions.add(tokenizer.nextToken());
+			if ( extensionsString != null ) {
+				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+				while ( tokenizer.hasMoreTokens() )
+					supportedExtensions.add(tokenizer.nextToken());
+			}
 		}
 
 		return new GLXCapabilities(functionProvider, supportedExtensions);

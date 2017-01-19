@@ -5,6 +5,7 @@
 package org.lwjgl.openal;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.MemoryStack;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -193,14 +194,15 @@ public final class ALC {
 		}
 
 		// Parse EXTENSIONS string
-		String extensionsString = memUTF8(check(invokePP(GetString, device, ALC_EXTENSIONS)));
-
-		StringTokenizer tokenizer = new StringTokenizer(extensionsString);
-		while ( tokenizer.hasMoreTokens() ) {
-			String extName = tokenizer.nextToken();
-			try ( MemoryStack stack = stackPush() ) {
-				if ( invokePPZ(IsExtensionPresent, device, memAddress(stack.ASCII(extName, true))) )
-					supportedExtensions.add(extName);
+		String extensionsString = memASCII(check(invokePP(GetString, device, ALC_EXTENSIONS)));
+		if ( extensionsString != null ) {
+			StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+			while ( tokenizer.hasMoreTokens() ) {
+				String extName = tokenizer.nextToken();
+				try ( MemoryStack stack = stackPush() ) {
+					if ( invokePPZ(IsExtensionPresent, device, memAddress(stack.ASCII(extName, true))) )
+						supportedExtensions.add(extName);
+				}
 			}
 		}
 

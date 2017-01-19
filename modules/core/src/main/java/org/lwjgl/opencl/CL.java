@@ -257,9 +257,7 @@ public final class CL {
 		APIVersion version = apiParseVersion(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION), "OpenCL");
 		CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
-		return new CLCapabilities(functionName -> {
-			return getFunctionProvider().getFunctionAddress(cl_platform_id, functionName);
-		}, supportedExtensions);
+		return new CLCapabilities(functionName -> getFunctionProvider().getFunctionAddress(cl_platform_id, functionName), supportedExtensions);
 	}
 
 	/**

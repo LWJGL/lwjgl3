@@ -167,18 +167,19 @@ public final class AL {
 			}
 
 			// Parse EXTENSIONS string
-			String extensionsString = memUTF8(check(invokeP(GetString, AL_EXTENSIONS)));
-
-			MemoryStack stack = stackGet();
-			StringTokenizer tokenizer = new StringTokenizer(extensionsString);
-			while ( tokenizer.hasMoreTokens() ) {
-				String extName = tokenizer.nextToken();
-				stack.push();
-				try {
-					if ( invokePZ(IsExtensionPresent, memAddress(stack.ASCII(extName, true))) )
-						supportedExtensions.add(extName);
-				} finally {
-					stack.pop();
+			String extensionsString = memASCII(invokeP(GetString, AL_EXTENSIONS));
+			if ( extensionsString != null ) {
+				MemoryStack stack = stackGet();
+				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+				while ( tokenizer.hasMoreTokens() ) {
+					String extName = tokenizer.nextToken();
+					stack.push();
+					try {
+						if ( invokePZ(IsExtensionPresent, memAddress(stack.ASCII(extName, true))) )
+							supportedExtensions.add(extName);
+					} finally {
+						stack.pop();
+					}
 				}
 			}
 
