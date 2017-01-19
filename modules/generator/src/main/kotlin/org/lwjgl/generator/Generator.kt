@@ -296,16 +296,19 @@ class Generator(
 		Files.list(packageDirectory)
 			.filter { KOTLIN_PATH_MATCHER.matches(it) }
 			.sorted(Path::compareTo)
-			.forEach {
-				try {
-					Class
-						.forName("$packageName.${it.fileName.toString().substringBeforeLast('.').upperCaseFirst}Kt")
-						.methods
-						.asSequence()
-						.consume()
-				} catch (e: ClassNotFoundException) {
-					// ignore
+			.also {
+				it.forEach {
+					try {
+						Class
+							.forName("$packageName.${it.fileName.toString().substringBeforeLast('.').upperCaseFirst}Kt")
+							.methods
+							.asSequence()
+							.consume()
+					} catch (e: ClassNotFoundException) {
+						// ignore
+					}
 				}
+				it.close()
 			}
 	}
 
