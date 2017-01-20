@@ -163,7 +163,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
 		DISPLAY,
 		GLXDrawable.IN("draw", "the GLXDrawable being queried"),
 		int.IN("attribute", "the attribute to query"),
-		Check(1)..unsigned_int_p.OUT("value", "returns the attribute value")
+		ReturnParam..Check(1)..unsigned_int_p.OUT("value", "returns the attribute value")
 	)
 
 	GLXContext(
