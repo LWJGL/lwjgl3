@@ -125,7 +125,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
 		"",
 
 		EGLenum.IN("platform", ""),
-		voidptr.IN("native_display", ""),
+		opaque_p.IN("native_display", ""),
 		nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
 	)
 
@@ -135,7 +135,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
 
 		EGLDisplay.IN("dpy", ""),
 		EGLConfig.IN("config", ""),
-		voidptr.IN("native_window", ""),
+		opaque_p.IN("native_window", ""),
 		nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
 	)
 
@@ -145,7 +145,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
 
 		EGLDisplay.IN("dpy", ""),
 		EGLConfig.IN("config", ""),
-		voidptr.IN("native_pixmap", ""),
+		opaque_p.IN("native_pixmap", ""),
 		nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", "")
 	)
 

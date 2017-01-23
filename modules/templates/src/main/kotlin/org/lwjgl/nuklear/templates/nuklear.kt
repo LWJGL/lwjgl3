@@ -1934,7 +1934,7 @@ nk_style_pop_vec2(ctx);""")}
 
 			ctx,
 			nk_chart_type.IN("type", "", ChartTypes),
-			voidptr.IN("userdata", ""),
+			opaque_p.IN("userdata", ""),
 			nk_value_getter.IN("value_getter", ""),
 			int.IN("count", ""),
 			int.IN("offset", "")
@@ -1997,7 +1997,7 @@ nk_style_pop_vec2(ctx);""")}
 
 			ctx,
 			nk_item_getter.IN("item_getter", ""),
-			voidptr.IN("userdata", ""),
+			opaque_p.IN("userdata", ""),
 			intb.IN("selected", ""),
 			int.IN("count", ""),
 			int.IN("item_height", ""),
@@ -2047,7 +2047,7 @@ nk_style_pop_vec2(ctx);""")}
 
 			ctx,
 			nk_item_getter.IN("item_getter", ""),
-			voidptr.IN("userdata", ""),
+			opaque_p.IN("userdata", ""),
 			Check(1)..int_p.INOUT("selected", ""),
 			int.IN("count", ""),
 			int.IN("item_height", ""),
@@ -3045,7 +3045,7 @@ nk_style_pop_vec2(ctx);""")}
 			"handle_ptr",
 			"",
 
-			voidptr.IN("ptr", "")
+			opaque_p.IN("ptr", "")
 		)
 
 		nk_handle(
@@ -3066,7 +3066,7 @@ nk_style_pop_vec2(ctx);""")}
 			"image_ptr",
 			"",
 
-			voidptr.IN("ptr", "")
+			opaque_p.IN("ptr", "")
 		)
 
 		nk_image(
@@ -3087,7 +3087,7 @@ nk_style_pop_vec2(ctx);""")}
 			"subimage_ptr",
 			"",
 
-			voidptr.IN("ptr", ""),
+			opaque_p.IN("ptr", ""),
 			unsigned_short.IN("w", ""),
 			unsigned_short.IN("h", ""),
 			nk_rect.IN("sub_region", "")
@@ -3417,14 +3417,14 @@ nk_style_pop_vec2(ctx);""")}
 			nk_buffer_p.IN("buffer", "")
 		)
 
-		voidptr(
+		opaque_p(
 			"buffer_memory",
 			"",
 
 			nk_buffer_p.IN("buffer", "")
 		)
 
-		const..voidptr(
+		const..opaque_p(
 			"buffer_memory_const",
 			"",
 

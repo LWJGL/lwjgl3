@@ -1043,7 +1043,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		MultiTypeAll..const..void_p.IN("_data", "the data to reference"),
 		AutoSize("_data")..uint32_t.IN("_size", "the number of bytes to reference"),
 		nullable..bgfx_release_fn_t.IN("_releaseFn", "the release function"),
-		nullable..voidptr.IN("_userData", "user data to pass to {@code _releaseFn}")
+		nullable..opaque_p.IN("_userData", "user data to pass to {@code _releaseFn}")
 	)
 
 	void(
@@ -1602,7 +1602,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		Frame buffer cannot be used for sampling.
 		""",
 
-		voidptr.IN("_nwh", "OS' target native window handle"),
+		opaque_p.IN("_nwh", "OS' target native window handle"),
 		MapToInt..uint16_t.IN("_width", "window back buffer width"),
 		MapToInt..uint16_t.IN("_height", "window back buffer height"),
 		bgfx_texture_format_t.IN("_depthFormat", "window back buffer depth format", TextureFormat),

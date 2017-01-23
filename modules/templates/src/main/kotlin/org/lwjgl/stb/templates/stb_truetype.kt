@@ -296,7 +296,7 @@ int main(int arg, char **argv)
 			"padding",
 			"the amount of padding to leave between each character (normally you want '1' for bitmaps you'll use as textures with bilinear filtering)"
 		),
-		Expression("NULL")..nullable..voidptr.IN("alloc_context", "a pointer to an allocation context"),
+		Expression("NULL")..nullable..opaque_p.IN("alloc_context", "a pointer to an allocation context"),
 
 		returnDoc = "1 on success, 0 on failure"
 	)
@@ -680,7 +680,7 @@ int main(int arg, char **argv)
 		"Frees a bitmap allocated by #GetCodepointBitmap(), #GetCodepointBitmapSubpixel(), #GetGlyphBitmap() or #GetGlyphBitmapSubpixel().",
 
 		Unsafe..unsigned_char_p.IN("bitmap", "the bitmap to free"),
-		nullable..voidptr.IN("userdata", "a pointer to user data")
+		nullable..opaque_p.IN("userdata", "a pointer to user data")
 	)
 
 	unsigned_char_p(

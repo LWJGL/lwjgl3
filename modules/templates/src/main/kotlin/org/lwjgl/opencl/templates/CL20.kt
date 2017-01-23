@@ -361,7 +361,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			the OpenCL implementation will call {@code pfn_free_func} to free all the SVM pointers specified in {@code svm_pointers}.
 			"""
 		),
-		nullable..voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be $NULL."),
 		NEWL,
 		EWL,
 		EVENT,

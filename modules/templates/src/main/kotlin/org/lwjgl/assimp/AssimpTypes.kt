@@ -996,7 +996,7 @@ val aiFileCloseProc = "aiFileCloseProc".callback(
 	aiFile_p.IN("pFile", "File pointer to close")
 )
 
-val aiUserData = typedef(voidptr, "aiUserData")
+val aiUserData = typedef(opaque_p, "aiUserData")
 
 val aiFileIO = struct(ASSIMP_PACKAGE, "AIFileIO", nativeName = "struct aiFileIO") {
 	documentation =
@@ -1032,14 +1032,14 @@ val aiLogStreamCallback = "aiLogStreamCallback".callback(
 	"Callback to be called for log stream messages",
 
 	const..charUTF8_p.IN("message", "The message to be logged"),
-	voidptr.IN("user", "The user data from the log stream")
+	opaque_p.IN("user", "The user data from the log stream")
 )
 
 val aiLogStream = struct(ASSIMP_PACKAGE, "AILogStream", nativeName = "struct aiLogStream") {
 	documentation = "Represents a log stream. A log stream receives all log messages and streams them somewhere"
 
 	aiLogStreamCallback.member("callback", "callback to be called")
-	voidptr.member("user", "user data to be passed to the callback")
+	opaque_p.member("user", "user data to be passed to the callback")
 }
 val aiLogStream_p = aiLogStream.p
 

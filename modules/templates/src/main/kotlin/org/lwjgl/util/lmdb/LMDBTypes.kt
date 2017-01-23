@@ -121,7 +121,7 @@ val MDB_env_p = "MDB_env".p
 val MDB_env_pp = MDB_env_p.p
 
 val mdb_mode_t = typedef(int, "mdb_mode_t") // TODO: mode_t on Linux
-val mdb_filehandle_t = typedef(voidptr, "mdb_filehandle_t") // TODO: int on Linux
+val mdb_filehandle_t = typedef(opaque_p, "mdb_filehandle_t") // TODO: int on Linux
 //val mdb_filehandle_t_p = mdb_filehandle_t.p
 
 val mdb_size_t = typedef(size_t, "mdb_size_t")
@@ -168,7 +168,7 @@ val MDB_stat_p = struct(LMDB_PACKAGE, "MDBStat", nativeName = "MDB_stat", mutabl
 val MDB_envinfo_p = struct(LMDB_PACKAGE, "MDBEnvInfo", nativeName = "MDB_envinfo", mutable = false) {
 	documentation = "Information about the environment."
 
-	voidptr.member("me_mapaddr", "Address of map, if fixed.")
+	opaque_p.member("me_mapaddr", "Address of map, if fixed.")
 	mdb_size_t.member("me_mapsize", "Size of the data memory map.")
 	mdb_size_t.member("me_last_pgno", "ID of the last used page.")
 	mdb_size_t.member("me_last_txnid", "ID of the last committed transaction.")
@@ -191,9 +191,9 @@ val MDB_rel_func = "MDB_rel_func *".callback(
 	"A callback function used to relocate a position-dependent data item in a fixed-address database.",
 
 	MDB_val_p.IN("item", "the item that is to be relocated"),
-	voidptr.IN("oldptr", "the previous address"),
-	voidptr.IN("newptr", "the new address to relocate to"),
-	voidptr.IN("relctx", "an application-provided context, set by #set_relctx()")
+	opaque_p.IN("oldptr", "the previous address"),
+	opaque_p.IN("newptr", "the new address to relocate to"),
+	opaque_p.IN("relctx", "an application-provided context, set by #set_relctx()")
 ) {
 	documentation =
 		"""
@@ -210,7 +210,7 @@ val MDB_msg_func = "MDB_msg_func *".callback(
 	"A callback function used to print a message from the library.",
 
 	const..charASCII_p.IN("msg", "the string to be printed"),
-	voidptr.IN("ctx", "an arbitrary context pointer for the callback"),
+	opaque_p.IN("ctx", "an arbitrary context pointer for the callback"),
 	returnDoc = "&lt; 0 on failure, &ge; 0 on success"
 ) {
 	documentation = "A callback function used to print a message from the library."

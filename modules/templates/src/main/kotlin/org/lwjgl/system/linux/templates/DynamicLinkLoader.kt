@@ -49,7 +49,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"RTLD_NODELETE"..0x01000
 	)
 
-	voidptr(
+	opaque_p(
 		"dlopen",
 		"""
 		Loads the dynamic library file named by the null-terminated string {@code filename} and returns an opaque "handle" for the dynamic library. If
@@ -68,7 +68,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"""
 	)
 
-	voidptr(
+	opaque_p(
 		"dlsym",
 		"""
 		Takes a "handle" of a dynamic library returned by #dlopen() and the null-terminated symbol name, returning the address where that symbol is loaded
@@ -76,7 +76,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		library was loaded, {@code dlsym()} returns $NULL.
 		""",
 
-		voidptr.IN("handle", "the dynamic library handle"),
+		opaque_p.IN("handle", "the dynamic library handle"),
 		const..charASCII_p.IN("name", "the symbol name")
 	)
 
@@ -87,7 +87,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		it, then the dynamic library is unloaded.
 		""",
 
-		voidptr.IN("handle", "the dynamic library to close")
+		opaque_p.IN("handle", "the dynamic library to close")
 	)
 
 }

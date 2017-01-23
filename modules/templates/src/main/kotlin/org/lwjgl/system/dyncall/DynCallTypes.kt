@@ -49,7 +49,7 @@ val DClonglong = IntegerType("DClonglong", PrimitiveMapping.LONG)
 val DCulonglong = IntegerType("DCulonglong", PrimitiveMapping.LONG, unsigned = true)
 val DCfloat = typedef(float, "DCfloat")
 val DCdouble = typedef(double, "DCdouble")
-val DCpointer = typedef(voidptr, "DCpointer")
+val DCpointer = typedef(opaque_p, "DCpointer")
 val DCstring = typedef(IntegerType("const char", PrimitiveMapping.BYTE).p, "DCstring")
 
 val DCsize = typedef(size_t, "DCsize")

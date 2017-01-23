@@ -35,7 +35,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 
 	// skipping dladdr
 
-	voidptr(
+	opaque_p(
 		"dlopen",
 		"""
 		Loads and links a dynamic library or bundle.
@@ -114,7 +114,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		"""
 	)
 
-	voidptr(
+	opaque_p(
 		"dlsym",
 		"""
 		Returns the address of a symbol.
@@ -137,7 +137,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		Unlike in the NS... functions, the symbol parameter doesn't require a leading underscore to be part of the symbol name.
 		""",
 
-		voidptr.IN(
+		opaque_p.IN(
 			"handle",
 			"""
 			a handle obtained by a call to #dlopen(), or a special handle. If the handle was obtained by a call to #dlopen(), it must not have been
@@ -156,7 +156,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		in the image are called, and the image is removed from the address space of the current process. After that point, handle is rendered invalid.
 		""",
 
-		voidptr.IN("handle", "a handle obtained through a call to #dlopen().")
+		opaque_p.IN("handle", "a handle obtained through a call to #dlopen().")
 	)
 
 }

@@ -448,7 +448,7 @@ div {
 		)
 	}
 
-	YG_NODE_PROPERTY(voidptr, "Context", "context")
+	YG_NODE_PROPERTY(opaque_p, "Context", "context")
 	YG_NODE_PROPERTY(YGMeasureFunc, "MeasureFunc", "measureFunc")
 	YG_NODE_PROPERTY(YGBaselineFunc, "BaselineFunc", "baselineFunc")
 	YG_NODE_PROPERTY(YGPrintFunc, "PrintFunc", "printFunc")

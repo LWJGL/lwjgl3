@@ -26,7 +26,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 
 	// Error & stats output
 
-	Address..voidptr_p(
+	Address..opaque_p.p(
 		"malloc_message",
 		"Returns the {@code je_malloc_message} variable."
 	)
@@ -254,7 +254,7 @@ for (i = 0; i < nbins; i++) {
 		""",
 
 		nullable..je_malloc_message_cb.IN("write_cb", "the print callback, or $NULL to use {@code malloc_message()}"),
-		nullable..voidptr.IN("je_cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
+		nullable..opaque_p.IN("je_cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
 		nullable..const..charASCII_p.IN("opts", "an options string")
 	)
 

@@ -1617,12 +1617,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose pointer to set"),
-		nullable..voidptr.IN("pointer", "the new value"),
+		nullable..opaque_p.IN("pointer", "the new value"),
 
 		since = "version 3.0"
 	)
 
-	voidptr(
+	opaque_p(
 		"GetWindowUserPointer",
 		"""
 		Returns the current value of the user-defined pointer of the specified window. The initial value is $NULL.

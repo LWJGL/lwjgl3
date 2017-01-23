@@ -160,7 +160,7 @@ val PFN_vkAllocationFunction = "PFN_vkAllocationFunction".callback(
 	VULKAN_PACKAGE, void_p, "VkAllocationFunction",
 	"Application-defined memory allocation function.",
 
-	voidptr.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
+	opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
 	size_t.IN("size", "the size in bytes of the requested allocation."),
 	size_t.IN("alignment", "the requested alignment of the allocation in bytes and <b>must</b> be a power of two."),
 	VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-host-allocation-scope\">here</a>.")
@@ -201,8 +201,8 @@ val PFN_vkReallocationFunction = "PFN_vkReallocationFunction".callback(
 	VULKAN_PACKAGE, void_p, "VkReallocationFunction",
 	"Application-defined memory reallocation function.",
 
-	voidptr.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
-	voidptr.IN("pOriginal", "<b>must</b> be either {@code NULL} or a pointer previously returned by {@code pfnReallocation} or {@code pfnAllocation} of the same allocator."),
+	opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
+	opaque_p.IN("pOriginal", "<b>must</b> be either {@code NULL} or a pointer previously returned by {@code pfnReallocation} or {@code pfnAllocation} of the same allocator."),
 	size_t.IN("size", "the size in bytes of the requested allocation."),
 	size_t.IN("alignment", "the requested alignment of the allocation in bytes and <b>must</b> be a power of two."),
 	VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-host-allocation-scope\">here</a>.")
@@ -244,8 +244,8 @@ val PFN_vkFreeFunction = "PFN_vkFreeFunction".callback(
 	VULKAN_PACKAGE, void, "VkFreeFunction",
 	"Application-defined memory free function.",
 
-	voidptr.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
-	voidptr.IN("pMemory", "the allocation to be freed.")
+	opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
+	opaque_p.IN("pMemory", "the allocation to be freed.")
 ) {
 	documentation =
 		"""
@@ -271,7 +271,7 @@ val PFN_vkInternalAllocationNotification = "PFN_vkInternalAllocationNotification
 	VULKAN_PACKAGE, void, "VkInternalAllocationNotification",
 	"Application-defined memory allocation notification function.",
 
-	voidptr.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
+	opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
 	size_t.IN("size", "the requested size of an allocation."),
 	VkInternalAllocationType.IN("allocationType", "the requested type of an allocation."),
 	VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-host-allocation-scope\">here</a>.")
@@ -302,7 +302,7 @@ val PFN_vkInternalFreeNotification = "PFN_vkInternalFreeNotification".callback(
 	VULKAN_PACKAGE, void, "VkInternalFreeNotification",
 	"Application-defined memory free notification function.",
 
-	voidptr.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
+	opaque_p.IN("pUserData", "the value specified for ##VkAllocationCallbacks{@code ::pUserData} in the allocator specified by the application."),
 	size_t.IN("size", "the requested size of an allocation."),
 	VkInternalAllocationType.IN("allocationType", "the requested type of an allocation."),
 	VkSystemAllocationScope.IN("allocationScope", "a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#memory-host-allocation-scope\">here</a>.")
@@ -352,7 +352,7 @@ val VkApplicationInfo = struct(VULKAN_PACKAGE, "VkApplicationInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	nullable..const..charUTF8_p.member("pApplicationName", "a pointer to a null-terminated UTF-8 string containing the name of the application.")
 	uint32_t.member("applicationVersion", "an unsigned integer variable containing the developer-supplied version number of the application.")
 	nullable..const..charUTF8_p.member("pEngineName", "a pointer to a null-terminated UTF-8 string containing the name of the engine (if any) used to create the application.")
@@ -380,7 +380,7 @@ val VkInstanceCreateInfo = struct(VULKAN_PACKAGE, "VkInstanceCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkInstanceCreateFlags.member("flags", "reserved for future use.")
 	nullable..const..VkApplicationInfo.p.member("pApplicationInfo", "{@code NULL} or a pointer to an instance of ##VkApplicationInfo. If not {@code NULL}, this information helps implementations recognize behavior inherent to classes of applications. ##VkApplicationInfo is defined in detail below.")
 	AutoSize("ppEnabledLayerNames", optional = true)..uint32_t.member("enabledLayerCount", "the number of global layers to enable.")
@@ -406,7 +406,7 @@ val VkAllocationCallbacks = struct(VULKAN_PACKAGE, "VkAllocationCallbacks") {
 		##VkAllocationFunction, ##VkFreeFunction, ##VkInternalAllocationNotification, ##VkInternalFreeNotification, ##VkReallocationFunction, #AllocateMemory(), #CreateAndroidSurfaceKHR(), #CreateBuffer(), #CreateBufferView(), #CreateCommandPool(), #CreateComputePipelines(), #CreateDebugReportCallbackEXT(), #CreateDescriptorPool(), #CreateDescriptorSetLayout(), #CreateDevice(), #CreateDisplayModeKHR(), #CreateDisplayPlaneSurfaceKHR(), #CreateEvent(), #CreateFence(), #CreateFramebuffer(), #CreateGraphicsPipelines(), #CreateImage(), #CreateImageView(), #CreateIndirectCommandsLayoutNVX(), #CreateInstance(), #CreateMirSurfaceKHR(), #CreateObjectTableNVX(), #CreatePipelineCache(), #CreatePipelineLayout(), #CreateQueryPool(), #CreateRenderPass(), #CreateSampler(), #CreateSemaphore(), #CreateShaderModule(), #CreateSharedSwapchainsKHR(), #CreateSwapchainKHR(), #CreateWaylandSurfaceKHR(), #CreateWin32SurfaceKHR(), #CreateXcbSurfaceKHR(), #CreateXlibSurfaceKHR(), #DestroyBuffer(), #DestroyBufferView(), #DestroyCommandPool(), #DestroyDebugReportCallbackEXT(), #DestroyDescriptorPool(), #DestroyDescriptorSetLayout(), #DestroyDevice(), #DestroyEvent(), #DestroyFence(), #DestroyFramebuffer(), #DestroyImage(), #DestroyImageView(), #DestroyIndirectCommandsLayoutNVX(), #DestroyInstance(), #DestroyObjectTableNVX(), #DestroyPipeline(), #DestroyPipelineCache(), #DestroyPipelineLayout(), #DestroyQueryPool(), #DestroyRenderPass(), #DestroySampler(), #DestroySemaphore(), #DestroyShaderModule(), #DestroySurfaceKHR(), #DestroySwapchainKHR(), #FreeMemory()
 		"""
 
-	nullable..voidptr.member("pUserData", "a value to be interpreted by the implementation of the callbacks. When any of the callbacks in ##VkAllocationCallbacks are called, the Vulkan implementation will pass this value as the first parameter to the callback. This value <b>can</b> vary each time an allocator is passed into a command, even when the same object takes an allocator in multiple commands.")
+	nullable..opaque_p.member("pUserData", "a value to be interpreted by the implementation of the callbacks. When any of the callbacks in ##VkAllocationCallbacks are called, the Vulkan implementation will pass this value as the first parameter to the callback. This value <b>can</b> vary each time an allocator is passed into a command, even when the same object takes an allocator in multiple commands.")
 	PFN_vkAllocationFunction.member("pfnAllocation", "a pointer to an application-defined memory allocation function of type ##VkAllocationFunction.")
 	PFN_vkReallocationFunction.member("pfnReallocation", "a pointer to an application-defined memory reallocation function of type ##VkReallocationFunction.")
 	PFN_vkFreeFunction.member("pfnFree", "a pointer to an application-defined memory free function of type ##VkFreeFunction.")
@@ -1176,7 +1176,7 @@ val VkDeviceQueueCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceQueueCreateInfo") 
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDeviceQueueCreateFlags.member("flags", "reserved for future use.")
 	uint32_t.member("queueFamilyIndex", "an unsigned integer indicating the index of the queue family to create on this device. This index corresponds to the index of an element of the {@code pQueueFamilyProperties} array that was returned by #GetPhysicalDeviceQueueFamilyProperties().")
 	AutoSize("pQueuePriorities")..uint32_t.member("queueCount", "an unsigned integer specifying the number of queues to create in the queue family indicated by {@code queueFamilyIndex}.")
@@ -1210,7 +1210,7 @@ val VkDeviceCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDeviceCreateFlags.member("flags", "reserved for future use.")
 	AutoSize("pQueueCreateInfos")..uint32_t.member("queueCreateInfoCount", "the unsigned integer size of the {@code pQueueCreateInfos} array. Refer to the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#devsandqueues-queue-creation\">Queue Creation</a> section below for further details.")
 	const..VkDeviceQueueCreateInfo.p.buffer("pQueueCreateInfos", "a pointer to an array of ##VkDeviceQueueCreateInfo structures describing the queues that are requested to be created along with the logical device. Refer to the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#devsandqueues-queue-creation\">Queue Creation</a> section below for further details.")
@@ -1282,7 +1282,7 @@ val VkSubmitInfo = struct(VULKAN_PACKAGE, "VkSubmitInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	AutoSize("pWaitSemaphores", "pWaitDstStageMask", optional = true)..uint32_t.member("waitSemaphoreCount", "the number of semaphores upon which to wait before executing the command buffers for the batch.")
 	const..VkSemaphore.p.member("pWaitSemaphores", "a pointer to an array of semaphores upon which to wait before the command buffers for this batch begin execution. If semaphores to wait on are provided, they define a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-semaphores-waiting\">semaphore wait operation</a>.")
 	const..VkPipelineStageFlags.p.member("pWaitDstStageMask", "a pointer to an array of pipeline stages at which each corresponding semaphore wait will occur.")
@@ -1314,7 +1314,7 @@ val VkMemoryAllocateInfo = struct(VULKAN_PACKAGE, "VkMemoryAllocateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDeviceSize.member("allocationSize", "the size of the allocation in bytes")
 	uint32_t.member("memoryTypeIndex", "the memory type index, which selects the properties of the memory to be allocated, as well as the heap the memory will come from.")
 }
@@ -1345,7 +1345,7 @@ val VkMappedMemoryRange = struct(VULKAN_PACKAGE, "VkMappedMemoryRange") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDeviceMemory.member("memory", "the memory object to which this range belongs.")
 	VkDeviceSize.member("offset", "the zero-based byte offset from the beginning of the memory object.")
 	VkDeviceSize.member("size", "either the size of range, or #WHOLE_SIZE to affect the range from {@code offset} to the end of the current mapping of the allocation.")
@@ -1625,7 +1625,7 @@ val VkBindSparseInfo = struct(VULKAN_PACKAGE, "VkBindSparseInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	AutoSize("pWaitSemaphores", optional = true)..uint32_t.member("waitSemaphoreCount", "the number of semaphores upon which to wait before executing the sparse binding operations for the batch.")
 	const..VkSemaphore.p.member("pWaitSemaphores", "a pointer to an array of semaphores upon which to wait on before the sparse binding operations for this batch begin execution. If semaphores to wait on are provided, they define a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-semaphores-waiting\">semaphore wait operation</a>.")
 	AutoSize("pBufferBinds", optional = true)..uint32_t.member("bufferBindCount", "the number of sparse buffer bindings to perform in the batch.")
@@ -1655,7 +1655,7 @@ val VkFenceCreateInfo = struct(VULKAN_PACKAGE, "VkFenceCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkFenceCreateFlags.member("flags", """defines the initial state and behavior of the fence. Bits which <b>can</b> be set include:
 <pre><code>typedef enum VkFenceCreateFlagBits {
 ￿    VK_FENCE_CREATE_SIGNALED_BIT = 0x00000001,
@@ -1681,7 +1681,7 @@ val VkSemaphoreCreateInfo = struct(VULKAN_PACKAGE, "VkSemaphoreCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkSemaphoreCreateFlags.member("flags", "reserved for future use.")
 }
 
@@ -1702,7 +1702,7 @@ val VkEventCreateInfo = struct(VULKAN_PACKAGE, "VkEventCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkEventCreateFlags.member("flags", "reserved for future use.")
 }
 
@@ -1730,7 +1730,7 @@ val VkQueryPoolCreateInfo = struct(VULKAN_PACKAGE, "VkQueryPoolCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkQueryPoolCreateFlags.member("flags", "reserved for future use.")
 	VkQueryType.member("queryType", """the type of queries managed by the pool, and <b>must</b> be one of the values
 <pre><code>typedef enum VkQueryType {
@@ -1820,7 +1820,7 @@ val VkBufferCreateInfo = struct(VULKAN_PACKAGE, "VkBufferCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkBufferCreateFlags.member("flags", "a bitmask describing additional parameters of the buffer. See {@code VkBufferCreateFlagBits} below for a description of the supported bits.")
 	VkDeviceSize.member("size", "the size in bytes of the buffer to be created.")
 	VkBufferUsageFlags.member("usage", "a bitmask describing the allowed usages of the buffer. See {@code VkBufferUsageFlagBits} below for a description of the supported bits.")
@@ -1867,7 +1867,7 @@ val VkBufferViewCreateInfo = struct(VULKAN_PACKAGE, "VkBufferViewCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkBufferViewCreateFlags.member("flags", "reserved for future use.")
 	VkBuffer.member("buffer", "a {@code VkBuffer} on which the view will be created.")
 	VkFormat.member("format", "a {@code VkFormat} describing the format of the data elements in the buffer.")
@@ -1969,7 +1969,7 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkImageCreateFlags.member("flags", "a bitmask describing additional parameters of the image. See {@code VkImageCreateFlagBits} below for a description of the supported bits.")
 	VkImageType.member("imageType", "a {@code VkImageType} specifying the basic dimensionality of the image, as described below. Layers in array textures do not count as a dimension for the purposes of the image type.")
 	VkFormat.member("format", "a {@code VkFormat} describing the format and type of the data elements that will be contained in the image.")
@@ -2189,7 +2189,7 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkImageViewCreateFlags.member("flags", "reserved for future use.")
 	VkImage.member("image", "a {@code VkImage} on which the view will be created.")
 	VkImageViewType.member("viewType", "the type of the image view.")
@@ -2227,7 +2227,7 @@ val VkShaderModuleCreateInfo = struct(VULKAN_PACKAGE, "VkShaderModuleCreateInfo"
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkShaderModuleCreateFlags.member("flags", "reserved for future use.")
 	size_t.member("codeSize", "the size, in bytes, of the code pointed to by {@code pCode}.")
 	const..uint32_t_p.member("pCode", "points to code that is used to create the shader module. The type and format of the code is determined from the content of the memory addressed by {@code pCode}.")
@@ -2257,7 +2257,7 @@ val VkPipelineCacheCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineCacheCreateInf
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineCacheCreateFlags.member("flags", "reserved for future use.")
 	AutoSize("pInitialData", optional = true)..size_t.member("initialDataSize", "the number of bytes in {@code pInitialData}. If {@code initialDataSize} is zero, the pipeline cache will initially be empty.")
 	const..void_p.member("pInitialData", "a pointer to previously retrieved pipeline cache data. If the pipeline cache data is incompatible (as defined below) with the device, the pipeline cache will be initially empty. If {@code initialDataSize} is zero, {@code pInitialData} is ignored.")
@@ -2356,7 +2356,7 @@ val VkPipelineShaderStageCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineShaderSt
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineShaderStageCreateFlags.member("flags", "reserved for future use.")
 	VkShaderStageFlagBits.member("stage", """names a single pipeline stage. Bits which <b>can</b> be set include:
 <pre><code>typedef enum VkShaderStageFlagBits {
@@ -2464,7 +2464,7 @@ val VkPipelineVertexInputStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineVer
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineVertexInputStateCreateFlags.member("flags", "reserved for future use.")
 	AutoSize("pVertexBindingDescriptions", optional = true)..uint32_t.member("vertexBindingDescriptionCount", "the number of vertex binding descriptions provided in {@code pVertexBindingDescriptions}.")
 	const..VkVertexInputBindingDescription.p.buffer("pVertexBindingDescriptions", "a pointer to an array of ##VkVertexInputBindingDescription structures.")
@@ -2500,7 +2500,7 @@ val VkPipelineInputAssemblyStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineI
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineInputAssemblyStateCreateFlags.member("flags", "reserved for future use.")
 	VkPrimitiveTopology.member("topology", "a {@code VkPrimitiveTopology} defining the primitive topology, as described below.")
 	VkBool32.member("primitiveRestartEnable", "controls whether a special vertex index value is treated as restarting the assembly of primitives. This enable only applies to indexed draws (#CmdDrawIndexed() and #CmdDrawIndexedIndirect()), and the special index value is either 0xFFFFFFFF when the {@code indexType} parameter of #CmdBindIndexBuffer() is equal to #INDEX_TYPE_UINT32, or 0xFFFF when {@code indexType} is equal to #INDEX_TYPE_UINT16. Primitive restart is not allowed for “list” topologies.")
@@ -2528,7 +2528,7 @@ val VkPipelineTessellationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineTe
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineTessellationStateCreateFlags.member("flags", "reserved for future use.")
 	uint32_t.member("patchControlPoints", "number of control points per patch.")
 }
@@ -2643,7 +2643,7 @@ val VkPipelineViewportStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineViewpo
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineViewportStateCreateFlags.member("flags", "reserved for future use.")
 	AutoSize("pViewports", optional = true)..uint32_t.member("viewportCount", "the number of viewports used by the pipeline.")
 	nullable..const..VkViewport.p.buffer("pViewports", "a pointer to an array of ##VkViewport structures, defining the viewport transforms. If the viewport state is dynamic, this member is ignored.")
@@ -2680,7 +2680,7 @@ val VkPipelineRasterizationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineR
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineRasterizationStateCreateFlags.member("flags", "reserved for future use.")
 	VkBool32.member("depthClampEnable", "controls whether to clamp the fragment&#8217;s depth values instead of clipping primitives to the z planes of the frustum, as described in <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#vertexpostproc-clipping\">Primitive Clipping</a>.")
 	VkBool32.member("rasterizerDiscardEnable", "controls whether primitives are discarded immediately before the rasterization stage.")
@@ -2720,7 +2720,7 @@ val VkPipelineMultisampleStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineMul
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineMultisampleStateCreateFlags.member("flags", "reserved for future use.")
 	VkSampleCountFlagBits.member("rasterizationSamples", "a {@code VkSampleCountFlagBits} specifying the number of samples per pixel used in rasterization.")
 	VkBool32.member("sampleShadingEnable", "specifies that fragment shading executes per-sample if #TRUE, or per-fragment if #FALSE, as described in <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#primsrast-sampleshading\">Sample Shading</a>.")
@@ -2781,7 +2781,7 @@ val VkPipelineDepthStencilStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDe
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineDepthStencilStateCreateFlags.member("flags", "reserved for future use.")
 	VkBool32.member("depthTestEnable", "controls whether <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#fragops-depth\">depth testing</a> is enabled.")
 	VkBool32.member("depthWriteEnable", "controls whether <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#fragops-depth-write\">depth writes</a> are enabled.")
@@ -2860,7 +2860,7 @@ val VkPipelineColorBlendStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineColo
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineColorBlendStateCreateFlags.member("flags", "reserved for future use.")
 	VkBool32.member("logicOpEnable", "controls whether to apply <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#framebuffer-logicop\">Logical Operations</a>.")
 	VkLogicOp.member("logicOp", "selects which logical operation to apply.")
@@ -2888,7 +2888,7 @@ val VkPipelineDynamicStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineDynamic
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineDynamicStateCreateFlags.member("flags", "reserved for future use.")
 	AutoSize("pDynamicStates")..uint32_t.member("dynamicStateCount", "the number of elements in the {@code pDynamicStates} array.")
 	const..VkDynamicState.p.member("pDynamicStates", "an array of {@code VkDynamicState} enums which indicate which pieces of pipeline state will use the values from dynamic state commands rather than from the pipeline state creation info.")
@@ -2988,7 +2988,7 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineCreateFlags.member("flags", "a bitmask of {@code VkPipelineCreateFlagBits} controlling how the pipeline will be generated, as described below.")
 	AutoSize("pStages")..uint32_t.member("stageCount", "the number of entries in the {@code pStages} array.")
 	const..VkPipelineShaderStageCreateInfo.p.buffer("pStages", "an array of size {@code stageCount} structures of type ##VkPipelineShaderStageCreateInfo describing the set of the shader stages to be included in the graphics pipeline.")
@@ -3045,7 +3045,7 @@ val VkComputePipelineCreateInfo = struct(VULKAN_PACKAGE, "VkComputePipelineCreat
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineCreateFlags.member("flags", "provides options for pipeline creation, and is of type {@code VkPipelineCreateFlagBits}.")
 	VkPipelineShaderStageCreateInfo.member("stage", "a ##VkPipelineShaderStageCreateInfo describing the compute shader.")
 	VkPipelineLayout.member("layout", "the description of binding locations used by both the pipeline and descriptor sets used with the pipeline.")
@@ -3112,7 +3112,7 @@ val VkPipelineLayoutCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineLayoutCreateI
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineLayoutCreateFlags.member("flags", "reserved for future use.")
 	AutoSize("pSetLayouts", optional = true)..uint32_t.member("setLayoutCount", "the number of descriptor sets included in the pipeline layout.")
 	const..VkDescriptorSetLayout.p.member("pSetLayouts", "a pointer to an array of {@code VkDescriptorSetLayout} objects.")
@@ -3196,7 +3196,7 @@ val VkSamplerCreateInfo = struct(VULKAN_PACKAGE, "VkSamplerCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkSamplerCreateFlags.member("flags", "reserved for future use.")
 	VkFilter.member("magFilter", """the magnification filter to apply to lookups, and is of type:
 <pre><code>typedef enum VkFilter {
@@ -3313,7 +3313,7 @@ val VkDescriptorSetLayoutCreateInfo = struct(VULKAN_PACKAGE, "VkDescriptorSetLay
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDescriptorSetLayoutCreateFlags.member("flags", "reserved for future use.")
 	AutoSize("pBindings", optional = true)..uint32_t.member("bindingCount", "the number of elements in {@code pBindings}.")
 	const..VkDescriptorSetLayoutBinding.p.buffer("pBindings", "a pointer to an array of ##VkDescriptorSetLayoutBinding structures.")
@@ -3375,7 +3375,7 @@ val VkDescriptorPoolCreateInfo = struct(VULKAN_PACKAGE, "VkDescriptorPoolCreateI
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDescriptorPoolCreateFlags.member("flags", """specifies certain supported operations on the pool. Bits which <b>can</b> be set include:
 <pre><code>typedef enum VkDescriptorPoolCreateFlagBits {
 ￿    VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT = 0x00000001,
@@ -3413,7 +3413,7 @@ val VkDescriptorSetAllocateInfo = struct(VULKAN_PACKAGE, "VkDescriptorSetAllocat
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDescriptorPool.member("descriptorPool", "the pool which the sets will be allocated from.")
 	AutoSize("pSetLayouts")..uint32_t.member("descriptorSetCount", "determines the number of descriptor sets to be allocated from the pool.")
 	const..VkDescriptorSetLayout.p.member("pSetLayouts", "an array of descriptor set layouts, with each member specifying how the corresponding descriptor set is allocated.")
@@ -3520,7 +3520,7 @@ val VkWriteDescriptorSet = struct(VULKAN_PACKAGE, "VkWriteDescriptorSet") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDescriptorSet.member("dstSet", "the destination descriptor set to update.")
 	uint32_t.member("dstBinding", "the descriptor binding within that set.")
 	uint32_t.member("dstArrayElement", "the starting element in that array.")
@@ -3559,7 +3559,7 @@ val VkCopyDescriptorSet = struct(VULKAN_PACKAGE, "VkCopyDescriptorSet") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkDescriptorSet.member("srcSet", "{@code srcSet}, {@code srcBinding}, and {@code srcArrayElement} are the source set, binding, and array element, respectively.")
 	uint32_t.member("srcBinding", "see {@code srcSet}")
 	uint32_t.member("srcArrayElement", "see {@code srcSet}")
@@ -3614,7 +3614,7 @@ val VkFramebufferCreateInfo = struct(VULKAN_PACKAGE, "VkFramebufferCreateInfo") 
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkFramebufferCreateFlags.member("flags", "reserved for future use.")
 	VkRenderPass.member("renderPass", "a render pass that defines what render passes the framebuffer will be compatible with. See <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#renderpass-compatibility\">Render Pass Compatibility</a> for details.")
 	AutoSize("pAttachments", optional = true)..uint32_t.member("attachmentCount", "the number of attachments.")
@@ -3870,7 +3870,7 @@ val VkRenderPassCreateInfo = struct(VULKAN_PACKAGE, "VkRenderPassCreateInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkRenderPassCreateFlags.member("flags", "reserved for future use.")
 	AutoSize("pAttachments", optional = true)..uint32_t.member("attachmentCount", "the number of attachments used by this render pass, or zero indicating no attachments. Attachments are referred to by zero-based indices in the range [0,{@code attachmentCount}).")
 	const..VkAttachmentDescription.p.buffer("pAttachments", "points to an array of {@code attachmentCount} number of ##VkAttachmentDescription structures describing properties of the attachments, or {@code NULL} if {@code attachmentCount} is zero.")
@@ -3902,7 +3902,7 @@ val VkCommandPoolCreateInfo = struct(VULKAN_PACKAGE, "VkCommandPoolCreateInfo") 
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkCommandPoolCreateFlags.member("flags", """a bitmask indicating usage behavior for the pool and command buffers allocated from it. Bits which <b>can</b> be set include:
 <pre><code>typedef enum VkCommandPoolCreateFlagBits {
 ￿    VK_COMMAND_POOL_CREATE_TRANSIENT_BIT = 0x00000001,
@@ -3939,7 +3939,7 @@ val VkCommandBufferAllocateInfo = struct(VULKAN_PACKAGE, "VkCommandBufferAllocat
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkCommandPool.member("commandPool", "the name of the command pool that the command buffers allocate their memory from.")
 	VkCommandBufferLevel.member("level", """determines whether the command buffers are primary or secondary command buffers. Possible values include:
 <pre><code>typedef enum VkCommandBufferLevel {
@@ -3973,7 +3973,7 @@ val VkCommandBufferInheritanceInfo = struct(VULKAN_PACKAGE, "VkCommandBufferInhe
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkRenderPass.member("renderPass", "a {@code VkRenderPass} object defining which render passes the {@code VkCommandBuffer} will be <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#renderpass-compatibility\">compatible</a> with and <b>can</b> be executed within. If the {@code VkCommandBuffer} will not be executed within a render pass instance, {@code renderPass} is ignored.")
 	uint32_t.member("subpass", "the index of the subpass within the render pass instance that the {@code VkCommandBuffer} will be executed within. If the {@code VkCommandBuffer} will not be executed within a render pass instance, {@code subpass} is ignored.")
 	VkFramebuffer.member("framebuffer", """optionally refers to the {@code VkFramebuffer} object that the {@code VkCommandBuffer} will be rendering to if it is executed within a render pass instance. It <b>can</b> be #NULL_HANDLE if the framebuffer is not known, or if the {@code VkCommandBuffer} will not be executed within a render pass instance.
@@ -4009,7 +4009,7 @@ val VkCommandBufferBeginInfo = struct(VULKAN_PACKAGE, "VkCommandBufferBeginInfo"
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkCommandBufferUsageFlags.member("flags", """a bitmask indicating usage behavior for the command buffer. Bits which <b>can</b> be set include:
 <pre><code>typedef enum VkCommandBufferUsageFlagBits {
 ￿    VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT = 0x00000001,
@@ -4410,7 +4410,7 @@ val VkMemoryBarrier = struct(VULKAN_PACKAGE, "VkMemoryBarrier") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkAccessFlags.member("srcAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
 	VkAccessFlags.member("dstAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
 }
@@ -4453,7 +4453,7 @@ val VkBufferMemoryBarrier = struct(VULKAN_PACKAGE, "VkBufferMemoryBarrier") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkAccessFlags.member("srcAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
 	VkAccessFlags.member("dstAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
 	uint32_t.member("srcQueueFamilyIndex", "the source queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>")
@@ -4513,7 +4513,7 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkAccessFlags.member("srcAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
 	VkAccessFlags.member("dstAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
 	VkImageLayout.member("oldLayout", "the old layout in an <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-image-layout-transitions\">image layout transition</a>.")
@@ -4557,7 +4557,7 @@ val VkRenderPassBeginInfo = struct(VULKAN_PACKAGE, "VkRenderPassBeginInfo") {
 		"""
 
 	VkStructureType.member("sType", "the type of this structure.")
-	nullable..const..voidptr.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkRenderPass.member("renderPass", "the render pass to begin an instance of.")
 	VkFramebuffer.member("framebuffer", "the framebuffer containing the attachments that are used with the render pass.")
 	VkRect2D.member("renderArea", "the render area that is affected by the render pass instance, and is described in more detail below.")

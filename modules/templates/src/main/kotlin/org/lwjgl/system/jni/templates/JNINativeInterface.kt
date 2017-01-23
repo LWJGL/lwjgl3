@@ -111,7 +111,7 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		returnDoc = "a class object from a fully-qualified name, or $NULL if the class cannot be found"
 	)
 
-	voidptr(
+	opaque_p(
 		"NewGlobalRef",
 		"""
 		Creates a new global reference to the object referred to by the {@code obj} argument. The {@code obj} argument may be a global or local reference.
@@ -129,7 +129,7 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		"Deletes the global reference pointed to by {@code globalRef}.",
 
 		JNI_ENV,
-		voidptr.IN("globalRef", "a global reference")
+		opaque_p.IN("globalRef", "a global reference")
 	)
 
 	fun ArrayElementsRoutines(name: String, elementType: PrimitiveType, arrayType: NativeType) {
@@ -272,7 +272,7 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		Check("len")..char.p.OUT("buf", "")
 	)
 
-	voidptr(
+	opaque_p(
 		"NewWeakGlobalRef",
 		"""
 		Creates a new weak global reference. Returns $NULL if {@code obj} refers to null, or if the VM runs out of memory. If the VM runs out of memory, an
@@ -288,7 +288,7 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		"Delete the VM resources needed for the given weak global reference.",
 
 		JNI_ENV,
-		voidptr.IN("weakGlobalRef", "")
+		opaque_p.IN("weakGlobalRef", "")
 	)
 
 	java_nio_ByteBuffer(
@@ -303,7 +303,7 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		""",
 
 		JNI_ENV,
-		voidptr.IN("address", "the starting address of the memory region (must not be $NULL)"),
+		opaque_p.IN("address", "the starting address of the memory region (must not be $NULL)"),
 		jlong.IN("capacity", "the size in bytes of the memory region (must be positive)"),
 
 		returnDoc =
@@ -313,7 +313,7 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		"""
 	)
 
-	voidptr(
+	opaque_p(
 		"GetDirectBufferAddress",
 		"""
 		Fetches and returns the starting address of the memory region referenced by the given direct {@code java.nio.Buffer}.

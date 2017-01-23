@@ -165,7 +165,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		""",
 
 		nullable..GLDEBUGPROCAMD.IN("callback", "a callback function that will be called when a debug message is generated"),
-		nullable..voidptr.IN(
+		nullable..opaque_p.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)

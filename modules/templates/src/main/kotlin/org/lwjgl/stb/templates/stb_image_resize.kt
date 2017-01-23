@@ -244,7 +244,7 @@ stbir_resize_uint8_srgb_edgemode(
 		resize_uint8_srgb_edgemode["edge_wrap_mode"],
 		stbir_filter.IN("filter", "the scale filter", Filters),
 		stbir_colorspace.IN("space", "the image colorspace", ColorSpaces),
-		Expression("NULL")..voidptr.IN("alloc_context", "pointer to the allocation context"),
+		Expression("NULL")..opaque_p.IN("alloc_context", "pointer to the allocation context"),
 
 		returnDoc = "1 on success, 0 on failure"
 	)

@@ -58,4 +58,4 @@ val ALenum = IntegerType("ALenum", PrimitiveMapping.INT)
 val ALcharASCII_p = CharSequenceType(name = "ALchar", charMapping = CharMapping.ASCII)
 val ALcharUTF8_p = CharSequenceType(name = "ALchar", charMapping = CharMapping.UTF8)
 
-val ALvoidptr = "void".p // see alGetProcAddress
+val ALopaque_p = "void".p // see alGetProcAddress

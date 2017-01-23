@@ -5,8 +5,7 @@
 package org.lwjgl.generator
 
 val void = NativeType("void", TypeMapping.VOID)
-val voidptr = "void".p
-val voidptr_p = voidptr.p
+val opaque_p = "void".p
 val void_p = PointerType("void", PointerMapping.DATA)
 val void_pp = void_p.p
 

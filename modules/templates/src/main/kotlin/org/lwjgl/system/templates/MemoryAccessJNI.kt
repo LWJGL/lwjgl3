@@ -81,7 +81,7 @@ ${primitives
 		"realloc",
 		"free"
 	).forEach {
-		macro..Address..voidptr(
+		macro..Address..opaque_p(
 			it,
 			"Returns the address of the stdlib {@code $it} function."
 		)
@@ -89,14 +89,14 @@ ${primitives
 
 	Code(
 		nativeCall = "return (jlong)(intptr_t)&__aligned_alloc;"
-	)..macro..Address..voidptr(
+	)..macro..Address..opaque_p(
 		"aligned_alloc",
 		"Returns the address of the stdlib {@code aligned_alloc} function."
 	)
 
 	Code(
 		nativeCall = "return (jlong)(intptr_t)&__aligned_free;"
-	)..macro..Address..voidptr(
+	)..macro..Address..opaque_p(
 		"aligned_free",
 		"Returns the address of the stdlib {@code aligned_free} function."
 	)
@@ -106,7 +106,7 @@ ${primitives
 			"get$name",
 			"Reads $msg from the specified memory address.",
 
-			voidptr.IN("ptr", "the memory address to read")
+			opaque_p.IN("ptr", "the memory address to read")
 		)
 
 	for ((type, name, msg) in primitives)
@@ -114,7 +114,7 @@ ${primitives
 			"put$name",
 			"Writes $msg to the specified memory address.",
 
-			voidptr.IN("ptr", "the memory address to write"),
+			opaque_p.IN("ptr", "the memory address to write"),
 			type.IN("value", "the value to write")
 		)
 }

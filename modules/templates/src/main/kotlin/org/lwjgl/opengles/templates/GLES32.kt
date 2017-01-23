@@ -276,7 +276,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		""",
 
 		nullable..GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
-		nullable..const..voidptr.IN(
+		nullable..const..opaque_p.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)
@@ -396,7 +396,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		"ObjectPtrLabel",
 		"Labels a sync object identified by a pointer.",
 
-		voidptr.IN("ptr", "a pointer identifying a sync object"),
+		opaque_p.IN("ptr", "a pointer identifying a sync object"),
 		AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
 		const..GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
@@ -405,7 +405,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		"GetObjectPtrLabel",
 		"Retrieves the label of a sync object identified by a pointer.",
 
-		voidptr.IN("ptr", "the name of the sync object whose label to retrieve"),
+		opaque_p.IN("ptr", "the name of the sync object whose label to retrieve"),
 		AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
 		Check(1)..nullable..GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
 		Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8_p.OUT("label", "a string that will receive the object label")

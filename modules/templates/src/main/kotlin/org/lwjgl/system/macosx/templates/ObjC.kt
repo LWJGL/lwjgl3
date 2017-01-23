@@ -133,7 +133,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		returnDoc = "the name of the class of which {@code obj} is an instance"
 	)
 
-	voidptr(
+	opaque_p(
 		"object_getIndexedIvars",
 		"""
 		This function returns a pointer to any extra bytes allocated with the instance (as specified by #class_createInstance() with extraBytes&gt;0). This
@@ -775,7 +775,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"an instance of the class {@code cls} at {@code bytes}, if successful; otherwise #nil (for example, if {@code cls} or {@code bytes} are themselves #nil)"
 	)
 
-	voidptr(
+	opaque_p(
 		"objc_destructInstance",
 		"""
 		Destroys an instance of a class without freeing memory and removes any of its associated references.
@@ -1455,7 +1455,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"Sets an associated value for a given object using a given key and association policy.",
 
 		id.IN("object", "the source object for the association"),
-		const..voidptr.IN("key", "the key for the association"),
+		const..opaque_p.IN("key", "the key for the association"),
 		id.IN("value", "the value to associate with the key {@code key} for {@code object}. Pass #nil to clear an existing association."),
 		objc_AssociationPolicy.IN("policy", "the policy for the association", AssociationPolicies)
 	)
@@ -1465,7 +1465,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"Returns the value associated with a given object for a given key.",
 
 		id.IN("object", "the source object for the association"),
-		const..voidptr.IN("key", "the key for the association"),
+		const..opaque_p.IN("key", "the key for the association"),
 
 		returnDoc = "the value associated with the key {@code key} for {@code object}."
 	)

@@ -17,7 +17,7 @@ val GLX14 = "GLX14".nativeClassGLX("GLX14") {
 		"SAMPLES"..0x186a1
 	)
 
-	voidptr(
+	opaque_p(
 		"GetProcAddress",
 		"""
 		Returns the address of the extension function named by {@code procName}. The pointer returned should be cast to a function pointer type matching the

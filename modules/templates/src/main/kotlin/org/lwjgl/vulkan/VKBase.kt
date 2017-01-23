@@ -23,7 +23,7 @@ val VkBool32 = PrimitiveType("VkBool32", PrimitiveMapping.BOOLEAN4)
 val VkDeviceSize = typedef(uint64_t, "VkDeviceSize")
 val VkSampleMask = typedef(uint32_t, "VkSampleMask")
 
-val PFN_vkVoidFunction = typedef(voidptr, "PFN_vkVoidFunction")
+val PFN_vkVoidFunction = typedef(opaque_p, "PFN_vkVoidFunction")
 
 val charUTF8_p_const_p = charUTF8_p.const.p
 

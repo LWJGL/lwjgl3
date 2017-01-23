@@ -42,7 +42,7 @@ val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", po
 		"",
 
 		EGLenum.IN("platform", ""),
-		voidptr.IN("native_display", ""),
+		opaque_p.IN("native_display", ""),
 		nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
 	)
 
@@ -52,7 +52,7 @@ val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", po
 
 		EGLDisplay.IN("dpy", ""),
 		EGLConfig.IN("config", ""),
-		voidptr.IN("native_window", ""),
+		opaque_p.IN("native_window", ""),
 		nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
 	)
 
@@ -62,7 +62,7 @@ val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", po
 
 		EGLDisplay.IN("dpy", ""),
 		EGLConfig.IN("config", ""),
-		voidptr.IN("native_pixmap", ""),
+		opaque_p.IN("native_pixmap", ""),
 		nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
 	)
 }

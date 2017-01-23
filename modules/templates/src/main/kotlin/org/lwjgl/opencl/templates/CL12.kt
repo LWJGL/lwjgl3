@@ -260,7 +260,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"COMMAND_FILL_IMAGE"..0x1208
 	)
 
-	voidptr(
+	opaque_p(
 		"GetExtensionFunctionAddressForPlatform",
 		"""
 		Returns the address of the extension function named by {@code funcname} for a given {@code platform}. The pointer returned should be cast to a function
@@ -601,7 +601,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""
@@ -698,7 +698,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			If {@code pfn_notify} is $NULL, {@code clLinkProgram} does not return until the linker has completed.
 			"""
 		),
-		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""

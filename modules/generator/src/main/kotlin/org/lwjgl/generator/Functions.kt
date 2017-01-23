@@ -37,7 +37,7 @@ const val FUNCTION_ADDRESS = "__functionAddress"
 internal const val JNIENV = "__env"
 
 /** Special parameter that generates an explicit function address parameter. */
-val EXPLICIT_FUNCTION_ADDRESS = voidptr.IN(FUNCTION_ADDRESS, "the function address")
+val EXPLICIT_FUNCTION_ADDRESS = opaque_p.IN(FUNCTION_ADDRESS, "the function address")
 /** Special parameter that will accept the JNI function's JNIEnv* parameter. Hidden in Java code. */
 val JNI_ENV = "JNIEnv".p.IN(JNIENV, "the JNI environment struct")
 

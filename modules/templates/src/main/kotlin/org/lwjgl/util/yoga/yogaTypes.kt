@@ -117,14 +117,14 @@ val YGLogger = "YGLogger".callback(
 )
 
 val YGMalloc = "YGMalloc".callback(
-	YOGA_PACKAGE, voidptr, "YGMalloc",
+	YOGA_PACKAGE, opaque_p, "YGMalloc",
 	"",
 
 	size_t.IN("size", "")
 )
 
 val YGCalloc = "YGCalloc".callback(
-	YOGA_PACKAGE, voidptr, "YGMalloc",
+	YOGA_PACKAGE, opaque_p, "YGMalloc",
 	"",
 
 	size_t.IN("count", ""),
@@ -132,18 +132,18 @@ val YGCalloc = "YGCalloc".callback(
 )
 
 val YGRealloc = "YGRealloc".callback(
-	YOGA_PACKAGE, voidptr, "YGRealloc",
+	YOGA_PACKAGE, opaque_p, "YGRealloc",
 	"",
 
-	nullable..voidptr.IN("ptr", ""),
+	nullable..opaque_p.IN("ptr", ""),
 	size_t.IN("size", "")
 )
 
 val YGFree = "YGFree".callback(
-	YOGA_PACKAGE, voidptr, "YGFree",
+	YOGA_PACKAGE, opaque_p, "YGFree",
 	"",
 
-	nullable..voidptr.IN("ptr", "")
+	nullable..opaque_p.IN("ptr", "")
 )
 
 // Internal API, exposed for efficiency.
@@ -220,7 +220,7 @@ val YGNode = struct(YOGA_PACKAGE, "YGNode", mutable = false) {
 	
 	YGMeasureFunc.member("measure", "")
 	YGPrintFunc.member("print", "")
-	voidptr.member("context", "")
+	opaque_p.member("context", "")
 
 	bool.member("isDirty", "")
 	bool.member("hasNewLayout", "")

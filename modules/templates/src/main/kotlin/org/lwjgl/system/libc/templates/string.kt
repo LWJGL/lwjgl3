@@ -20,7 +20,7 @@ val string = "LibCString".nativeClass(packageName = LIBC_PACKAGE) {
 
 	documentation = "Native bindings to string.h."
 
-	voidptr(
+	opaque_p(
 		"memset",
 		"Fills memory with a constant byte.",
 
@@ -38,7 +38,7 @@ val string = "LibCString".nativeClass(packageName = LIBC_PACKAGE) {
 		returnDoc = "the value of {@code dest}"
 	)
 
-	voidptr(
+	opaque_p(
 		"memcpy",
 		"Copies characters between buffers.",
 

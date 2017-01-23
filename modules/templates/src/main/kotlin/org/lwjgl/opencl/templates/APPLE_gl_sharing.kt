@@ -56,7 +56,7 @@ val apple_gl_sharing = dependsOn(Binding.OPENGL) {
 		""",
 
 			cl_context.IN("context", "the context being queried"),
-			voidptr.IN("platform_gl_ctx", "the OpenGL context handle"),
+			opaque_p.IN("platform_gl_ctx", "the OpenGL context handle"),
 			cl_gl_platform_info.IN(
 				"param_name",
 				"a constant that specifies the GL context information to query",

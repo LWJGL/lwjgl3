@@ -143,7 +143,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		"Callback version of #write_png().",
 
 		stbi_write_func.IN("func", "the callback function"),
-		nullable..voidptr.IN("context", "a context that will be passed to {@code func}"),
+		nullable..opaque_p.IN("context", "a context that will be passed to {@code func}"),
 		write["w"],
 		write["h"],
 		write["comp"],

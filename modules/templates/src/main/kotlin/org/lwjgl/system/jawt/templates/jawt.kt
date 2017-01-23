@@ -195,7 +195,7 @@ ENABLE_WARNINGS()
 
 		EXPLICIT_FUNCTION_ADDRESS,
 		JNI_ENV,
-		voidptr.IN("platformInfo", "the native platform handle")
+		opaque_p.IN("platformInfo", "the native platform handle")
 	)
 
 	// JDK 9+
@@ -211,7 +211,7 @@ ENABLE_WARNINGS()
 
 		EXPLICIT_FUNCTION_ADDRESS,
 		JNI_ENV,
-		voidptr.IN("platformInfo", "the native platform handle"),
+		opaque_p.IN("platformInfo", "the native platform handle"),
 
 		since = "Java 9"
 	)

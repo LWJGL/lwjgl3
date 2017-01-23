@@ -42,7 +42,7 @@ val nk_uint_p = nk_uint.p
 val nk_rune_p = nk_rune.p
 
 val nk_handle = union(NUKLEAR_PACKAGE, "NkHandle", nativeName = "nk_handle") {
-	nullable..voidptr.member("ptr", "")
+	nullable..opaque_p.member("ptr", "")
 	int.member("id", "")
 }
 // Struct values are currently not supported in callbacks
@@ -124,7 +124,7 @@ val nk_plugin_alloc = "nk_plugin_alloc".callback(
 	"",
 
 	nk_handle_in_callback.IN("handle", ""),
-	voidptr.IN("old", ""),
+	opaque_p.IN("old", ""),
 	nk_size.IN("size", "")
 )
 
@@ -133,7 +133,7 @@ val nk_plugin_free = "nk_plugin_free".callback(
 	"",
 
 	nk_handle_in_callback.IN("handle", ""),
-	voidptr.IN("old", "")
+	opaque_p.IN("old", "")
 )
 
 val nk_allocator = struct(NUKLEAR_PACKAGE, "NkAllocator", nativeName = "struct nk_allocator") {
@@ -1288,7 +1288,7 @@ val nk_value_getter = "nk_value_getter".callback(
 	NUKLEAR_PACKAGE, float, "NkValueGetter",
 	"",
 
-	voidptr.IN("userdata", ""),
+	opaque_p.IN("userdata", ""),
 	int.IN("index", "")
 ) {
 	documentation = "Instances of this interface may be passed to the #plot_function() function."
@@ -1298,7 +1298,7 @@ val nk_item_getter = "nk_item_getter".callback(
 	NUKLEAR_PACKAGE, float, "NkItemGetter",
 	"",
 
-	voidptr.IN("userdata", ""),
+	opaque_p.IN("userdata", ""),
 	int.IN("selected", ""),
 	const..charUTF8_pp.IN("item", "")
 ) {

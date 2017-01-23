@@ -58,7 +58,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
 		"Creates a D3D11 texture and loads data into it.",
 
 		TextureID_t.IN("textureId", ""),
-		voidptr.IN("pD3D11Device", ""),
+		opaque_p.IN("pD3D11Device", ""),
 		Check(1)..void_pp.OUT("ppD3D11Texture2D", "")
 	)
 
@@ -67,14 +67,14 @@ val VRRenderModels = "VRRenderModels".nativeClass(
 		"Helper function to copy the bits into an existing texture.",
 
 		TextureID_t.IN("textureId", ""),
-		voidptr.IN("pDstTexture", "")
+		opaque_p.IN("pDstTexture", "")
 	)
 
 	void(
 		"FreeTextureD3D11",
 		"Use this to free textures created with LoadTextureD3D11_Async instead of calling Release on them.",
 
-		voidptr.IN("pD3D11Texture2D", "")
+		opaque_p.IN("pD3D11Texture2D", "")
 	)
 
 	uint32_t(

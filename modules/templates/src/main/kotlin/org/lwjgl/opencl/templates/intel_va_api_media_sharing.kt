@@ -95,7 +95,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 
 		cl_platform_id.IN("platform", "the platform ID returned by #GetPlatformIDs()"),
 		cl_va_api_device_source_intel.IN("media_adapter_type", "the type of {@code media_adapter}", MediaAdapterTypes),
-		voidptr.IN("media_adapter", "the media adapter whose corresponding OpenCL devices are being queried"),
+		opaque_p.IN("media_adapter", "the media adapter whose corresponding OpenCL devices are being queried"),
 		cl_va_api_device_set_intel.IN("media_adapter_set", "", MediaAdapterSets),
 		AutoSize("devices")..cl_uint.IN(
 			"num_entries",

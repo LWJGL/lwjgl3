@@ -54,5 +54,5 @@ val JNINativeMethod_p = struct(JNI_PACKAGE, "JNINativeMethod") {
 
 	charUTF8_p.member("name", "")
 	charUTF8_p.member("signature", "")
-	voidptr.member("fnPtr", "")
+	opaque_p.member("fnPtr", "")
 }.p

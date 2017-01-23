@@ -41,7 +41,7 @@ val DynCallback = "DynCallback".nativeClass(DYNCALL_PACKAGE, prefix = "DCB") {
 
 		const..charASCII_p.IN("signature", "the function signature of the function to mimic"),
 		DCCallbackHandler_p.IN("funcptr", "a pointer to a callback handler"),
-		voidptr.IN("userdata", "a pointer to custom data that might be useful in the handler")
+		opaque_p.IN("userdata", "a pointer to custom data that might be useful in the handler")
 	)
 
 	void(
@@ -51,7 +51,7 @@ val DynCallback = "DynCallback".nativeClass(DYNCALL_PACKAGE, prefix = "DCB") {
 		DCCallback_p.IN("pcb", "the callback object"),
 		const..charASCII_p.IN("signature", "the function signature of the function to mimic"),
 		DCCallbackHandler_p.IN("handler", "a pointer to a callback handler"),
-		voidptr.IN("userdata", "a pointer to custom data that might be useful in the handler")
+		opaque_p.IN("userdata", "a pointer to custom data that might be useful in the handler")
 	)
 
 	void(
@@ -61,7 +61,7 @@ val DynCallback = "DynCallback".nativeClass(DYNCALL_PACKAGE, prefix = "DCB") {
 		DCCallback_p.IN("pcb", "the callback object")
 	)
 
-	voidptr(
+	opaque_p(
 		"GetUserData",
 		"Returns a pointer to the {@code userdata} passed to the callback object on creation or initialization.",
 

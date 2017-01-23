@@ -913,10 +913,10 @@ ENABLE_WARNINGS()""")
 		"Set application information associated with the {@code MDB_env}.",
 
 		env_open["env"],
-		voidptr.IN("ctx", "an arbitrary pointer for whatever the application needs")
+		opaque_p.IN("ctx", "an arbitrary pointer for whatever the application needs")
 	)
 
-	voidptr(
+	opaque_p(
 		"env_get_userctx",
 		"Gets the application information associated with the {@code MDB_env}.",
 
@@ -1260,7 +1260,7 @@ ENABLE_WARNINGS()""")
 
 		txn_env["txn"],
 		stat["dbi"],
-		voidptr.IN(
+		opaque_p.IN(
 			"ctx",
 			"""
 			an arbitrary pointer for whatever the application needs. It will be passed to the callback function set by ##MDBRelFunc as its {@code relctx}
@@ -1560,7 +1560,7 @@ ENABLE_WARNINGS()""")
 
 		env_open["env"],
 		MDB_msg_func.IN("func", "an ##MDBMsgFunc function"),
-		voidptr.IN("ctx", "anything the message function needs")
+		opaque_p.IN("ctx", "anything the message function needs")
 	)
 
 	int(

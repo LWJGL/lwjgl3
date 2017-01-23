@@ -190,7 +190,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 			It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		nullable..voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""
@@ -651,7 +651,7 @@ clReleaseMemObject(buf2);
 			implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		nullable..voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""

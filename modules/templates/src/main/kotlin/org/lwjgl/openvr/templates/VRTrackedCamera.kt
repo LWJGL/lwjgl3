@@ -128,7 +128,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
 
 		TrackedCameraHandle_t.IN("hTrackedCamera", ""),
 		EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
-		voidptr.IN("pD3D11DeviceOrResource", ""),
+		opaque_p.IN("pD3D11DeviceOrResource", ""),
 		Check(1)..void_pp.OUT("ppD3D11ShaderResourceView", ""),
 		CameraVideoStreamFrameHeader_t.p.OUT("pFrameHeader", ""),
 		Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t.IN("nFrameHeaderSize", "")

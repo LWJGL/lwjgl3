@@ -581,7 +581,7 @@ val VROverlay = "VROverlay".nativeClass(
 
 		VROverlayHandle_t.IN("ulOverlayHandle", ""),
 		Check(1)..void_pp.OUT("pNativeTextureHandle", ""),
-		voidptr.IN("pNativeTextureRef", ""),
+		opaque_p.IN("pNativeTextureRef", ""),
 		Check(1)..uint32_t_p.OUT("pWidth", ""),
 		Check(1)..uint32_t_p.OUT("pHeight", ""),
 		Check(1)..uint32_t_p.OUT("pNativeFormat", ""),
@@ -598,7 +598,7 @@ val VROverlay = "VROverlay".nativeClass(
 		""",
 
 		VROverlayHandle_t.IN("ulOverlayHandle", ""),
-		voidptr.IN("pNativeTextureHandle", "")
+		opaque_p.IN("pNativeTextureHandle", "")
 	)
 
 	EVROverlayError(

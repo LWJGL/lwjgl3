@@ -756,7 +756,7 @@ val CGL = "CGL".nativeClass(
 			of rowbytes is set to 0.
 			"""
 		),
-		Check(1)..voidptr_p.OUT(
+		Check(1)..opaque_p.p.OUT(
 			"baseaddr",
 			"""
 			on return, points to the base address of the offscreen buffer. If the context is not attached to an offscreen drawable object, the value of

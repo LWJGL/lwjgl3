@@ -67,7 +67,7 @@ val bgfx_release_fn_t = "bgfx_release_fn_t".callback(
 	BGFX_PACKAGE, void, "BGFXReleaseFunctionCallback",
 	"Memory release callback.",
 
-	voidptr.IN("_ptr", ""),
+	opaque_p.IN("_ptr", ""),
 	nullable..void_p.IN("_userData", "")
 ) {
 	documentation = "Instances of this interface may be passed to the #make_ref_release() method."
@@ -414,11 +414,11 @@ val bgfx_callback_interface_t = struct(BGFX_PACKAGE, "BGFXCallbackInterface", na
 val bgfx_allocator_interface_t_p = struct(BGFX_PACKAGE, "BGFXAllocatorInterface", nativeName = "bgfx_allocator_interface_t").p
 
 val realloc = "realloc".callback(
-	BGFX_PACKAGE, voidptr, "BGFXReallocCallback",
+	BGFX_PACKAGE, opaque_p, "BGFXReallocCallback",
 	"Will be called when an allocation is requested.",
 
 	bgfx_allocator_interface_t_p.IN("_this", "the allocator interface"),
-	nullable..voidptr.IN("_ptr", "the previously allocated memory or $NULL"),
+	nullable..opaque_p.IN("_ptr", "the previously allocated memory or $NULL"),
 	size_t.IN("_size", "the number of bytes to allocate"),
 	size_t.IN("_align", "the allocation alignment, in bytes"),
 	charASCII_p.IN("_file", "file path where allocation was generated"),
@@ -447,17 +447,17 @@ val bgfx_renderer_frame_t = "bgfx_renderer_frame_t".enumType
 val bgfx_platform_data_t_p = struct(BGFX_PACKAGE, "BGFXPlatformData", nativeName = "bgfx_platform_data_t") {
 	documentation = "Platform data."
 
-	nullable..voidptr.member("ndt", "native display type")
-	nullable..voidptr.member("nwh", "native window handle")
-	nullable..voidptr.member("context", "GL context, or D3D device")
-	nullable..voidptr.member("backBuffer", "GL backbuffer, or D3D render target view")
-	nullable..voidptr.member("backBufferDS", "Backbuffer depth/stencil")
-	nullable..voidptr.member("session", "{@code ovrSession}, for Oculus SDK")
+	nullable..opaque_p.member("ndt", "native display type")
+	nullable..opaque_p.member("nwh", "native window handle")
+	nullable..opaque_p.member("context", "GL context, or D3D device")
+	nullable..opaque_p.member("backBuffer", "GL backbuffer, or D3D render target view")
+	nullable..opaque_p.member("backBufferDS", "Backbuffer depth/stencil")
+	nullable..opaque_p.member("session", "{@code ovrSession}, for Oculus SDK")
 }.p
 
 val bgfx_internal_data_t_p = struct(BGFX_PACKAGE, "BGFXInternalData", nativeName = "bgfx_internal_data_t", mutable = false) {
 	documentation = "Internal data."
 
 	bgfx_caps_t_p.member("caps", "renderer capabilities")
-	voidptr.IN("context", "GL context, or D3D device")
+	opaque_p.IN("context", "GL context, or D3D device")
 }.p

@@ -33,7 +33,7 @@ val DynLoad = "DynLoad".nativeClass(DYNCALL_PACKAGE, prefix = "DL") {
 		DLLib_p.IN("pLib", "the dynamic library to free")
 	)
 
-	voidptr(
+	opaque_p(
 		"FindSymbol",
 		"""
 		Returns a pointer to a symbol with name {@code pSymbolName} in the library with handle {@code pLib}, or returns a null pointer if the symbol cannot be
@@ -78,6 +78,6 @@ val DynLoad = "DynLoad".nativeClass(DYNCALL_PACKAGE, prefix = "DL") {
 		"Returns the symbol name exported by the specified library at the specified address.",
 
 		DLSyms_p.IN("pSyms", "a {@code DLSyms} object"),
-		voidptr.IN("value", "the symbol address")
+		opaque_p.IN("value", "the symbol address")
 	)
 }

@@ -100,7 +100,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		CFStringRef.IN("bundleID", "the identifier of the bundle to locate. Note that identifier names are case-sensitive.")
 	)
 
-	voidptr(
+	opaque_p(
 		"CFBundleGetFunctionPointerForName",
 		"Returns a pointer to a function in a bundle’s executable code using the function name as the search key.",
 

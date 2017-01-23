@@ -84,7 +84,7 @@ val VRComponentProperties = typedef(uint32_t, "VRComponentProperties")
 val VRNotificationId = typedef(uint32_t, "VRNotificationId")
 val VROverlayHandle_t = typedef(uint64_t, "VROverlayHandle_t")
 
-val glSharedTextureHandle_t = typedef(voidptr, "glSharedTextureHandle_t")
+val glSharedTextureHandle_t = typedef(opaque_p, "glSharedTextureHandle_t")
 val glInt_t = typedef(int32_t, "glInt_t")
 val glUInt_t = typedef(uint32_t, "glUInt_t")
 
@@ -381,7 +381,7 @@ val VRControllerState_t = struct(OPENVR_PACKAGE, "VRControllerState", nativeName
 }
 
 val Texture_t = struct(OPENVR_PACKAGE, "Texture", nativeName = "Texture_t") {
-	voidptr.member("handle", "") // See ETextureType definition above
+	opaque_p.member("handle", "") // See ETextureType definition above
 	ETextureType.member("eType", "")
 	EColorSpace.member("eColorSpace", "")
 }

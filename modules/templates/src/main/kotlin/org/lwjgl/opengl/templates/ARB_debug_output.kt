@@ -234,7 +234,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		""",
 
 		nullable..GLDEBUGPROCARB.IN("callback", "a callback function that will be called when a debug message is generated"),
-		nullable..const..voidptr.IN(
+		nullable..const..opaque_p.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)

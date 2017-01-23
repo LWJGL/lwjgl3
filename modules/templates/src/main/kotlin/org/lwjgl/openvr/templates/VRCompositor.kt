@@ -318,7 +318,7 @@ typedef struct HmdColor_t
 		"Opens a shared D3D11 texture with the undistorted composited image for each eye.",
 
 		EVREye.IN("eEye", ""),
-		voidptr.IN("pD3D11DeviceOrResource", ""),
+		opaque_p.IN("pD3D11DeviceOrResource", ""),
 		Check(1)..void_pp.OUT("ppD3D11ShaderResourceView", "")
 	)
 

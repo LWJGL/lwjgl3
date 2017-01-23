@@ -39,14 +39,14 @@ val JAWT_DrawingSurface_p = struct(JAWT_PACKAGE, "JAWTDrawingSurface", nativeNam
 		"""
 	)
 	jobject_p.member("target", "Cached reference to the target object.")
-	voidptr.member("Lock", "")
-	voidptr.member("GetDrawingSurfaceInfo", "")
-	voidptr.member("FreeDrawingSurfaceInfo", "")
-	voidptr.member("Unlock", "")
+	opaque_p.member("Lock", "")
+	opaque_p.member("GetDrawingSurfaceInfo", "")
+	opaque_p.member("FreeDrawingSurfaceInfo", "")
+	opaque_p.member("Unlock", "")
 }.p
 
 val JAWT_DrawingSurfaceInfo_p = struct(JAWT_PACKAGE, "JAWTDrawingSurfaceInfo", nativeName = "JAWT_DrawingSurfaceInfo", mutable = false) {
-	voidptr.member(
+	opaque_p.member(
 		"platformInfo",
 		"""
 		Pointer to the platform-specific information. This can be safely cast to a {@code JAWT_Win32DrawingSurfaceInfo} on Windows or a
@@ -64,14 +64,14 @@ val JAWT_p = struct(JAWT_PACKAGE, "JAWT") {
 	documentation = "Structure for containing native AWT functions."
 
 	jint.member("version", "Version of this structure. This must always be set before calling JAWT_GetAWT()")
-	nullable..voidptr.member("GetDrawingSurface", "")
-	nullable..voidptr.member("FreeDrawingSurface", "")
-	nullable..voidptr.member("Lock", "")
-	nullable..voidptr.member("Unlock", "")
-	nullable..voidptr.member("GetComponent", "")
-	nullable..voidptr.member("CreateEmbeddedFrame", "")
-	nullable..voidptr.member("SetBounds", "")
-	nullable..voidptr.member("SynthesizeWindowActivation", "")
+	nullable..opaque_p.member("GetDrawingSurface", "")
+	nullable..opaque_p.member("FreeDrawingSurface", "")
+	nullable..opaque_p.member("Lock", "")
+	nullable..opaque_p.member("Unlock", "")
+	nullable..opaque_p.member("GetComponent", "")
+	nullable..opaque_p.member("CreateEmbeddedFrame", "")
+	nullable..opaque_p.member("SetBounds", "")
+	nullable..opaque_p.member("SynthesizeWindowActivation", "")
 }.p
 
 val Component = NativeType("jobject", TypeMapping("jobject", java.awt.Component::class.java, java.awt.Component::class.java))

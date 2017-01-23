@@ -20,7 +20,7 @@ val stdio = "LibCStdio".nativeClass(packageName = LIBC_PACKAGE) {
 
 	documentation = "Native bindings to stdio.h."
 
-	macro..voidptr("sscanf", "The address of the {@code sscanf} function.")
+	macro..opaque_p("sscanf", "The address of the {@code sscanf} function.")
 
 	int(
 		"vsscanf",
@@ -37,8 +37,8 @@ val stdio = "LibCStdio".nativeClass(packageName = LIBC_PACKAGE) {
 		"the number of receiving arguments successfully assigned, or {@code EOF} if read failure occurs before the first receiving argument was assigned"
 	)
 
-	macro..voidptr("sprintf", "The address of the {@code sprintf} function.")
-	macro..voidptr("snprintf", "The address of the {@code snprintf} function.")
+	macro..opaque_p("sprintf", "The address of the {@code sprintf} function.")
+	macro..opaque_p("snprintf", "The address of the {@code snprintf} function.")
 
 	int(
 		"vsnprintf",

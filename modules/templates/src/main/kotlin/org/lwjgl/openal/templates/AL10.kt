@@ -703,7 +703,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		const..ALcharASCII_p.IN("enumName", "the enum name")
 	)
 
-	ALvoidptr(
+	ALopaque_p(
 		"GetProcAddress",
 		"""
 		Retrieves extension entry points.

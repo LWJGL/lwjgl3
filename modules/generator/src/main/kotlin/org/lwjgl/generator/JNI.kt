@@ -18,9 +18,9 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
 		// bootstrapping or other internal functionality.
 
 		// callP(GetStringi, GL_EXTENSIONS, i)
-		signatures.put(Signature(CallingConvention.STDCALL, voidptr, listOf(int, int)), Unit)
+		signatures.put(Signature(CallingConvention.STDCALL, opaque_p, listOf(int, int)), Unit)
 		// invokePPV(objc_msgSend, NSView, setWantsBestResolutionOpenGLSurface, true/false);
-		signatures.put(Signature(CallingConvention.DEFAULT, void, listOf(voidptr, voidptr, bool)), Unit)
+		signatures.put(Signature(CallingConvention.DEFAULT, void, listOf(opaque_p, opaque_p, bool)), Unit)
 	}
 
 	private val sortedSignatures by lazy(LazyThreadSafetyMode.NONE) { signatures.keys.sorted() }
