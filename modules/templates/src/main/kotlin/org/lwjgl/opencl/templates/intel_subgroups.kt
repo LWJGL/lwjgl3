@@ -60,7 +60,7 @@ val intel_subgroups = "INTELSubgroups".nativeClassCL("intel_subgroups", INTEL) {
 			"""
 			identifies a specific device in the list of devices associated with {@code kernel}. The list of devices is the list of devices in the OpenCL
 			context that is associated with {@code kernel}. If the list of devices associated with {@code kernel} is a single device, {@code device} can be a
-			$NULL value.
+			#NULL value.
 			"""
 		),
 		cl_kernel_sub_group_info.IN("param_name", "specifies the information to query", KernalSubGroupInfo),
@@ -70,7 +70,7 @@ val intel_subgroups = "INTELSubgroups".nativeClassCL("intel_subgroups", INTEL) {
 		),
 		const..void_p.IN(
 			"input_value",
-			"a pointer to memory where the appropriate parameterization of the query is passed from. If {@code input_value} is $NULL it is ignored."
+			"a pointer to memory where the appropriate parameterization of the query is passed from. If {@code input_value} is #NULL it is ignored."
 		),
 		PARAM_VALUE_SIZE,
 		MultiType(PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),

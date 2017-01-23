@@ -203,10 +203,10 @@ val aiMetadataEntry_p = struct(ASSIMP_PACKAGE, "AIMetaDataEntry", nativeName = "
 
 val aiMetadata_p = struct(ASSIMP_PACKAGE, "AIMetaData", nativeName = "struct aiMetadata") {
 	AutoSize("mKeys", "mValues")..unsigned_int.member("mNumProperties", "Length of the {@code mKeys} and {@code mValues} arrays, respectively")
-	aiString_p.buffer("mKeys", "Arrays of keys, may not be $NULL. Entries in this array may not be $NULL as well.")
+	aiString_p.buffer("mKeys", "Arrays of keys, may not be #NULL. Entries in this array may not be #NULL as well.")
 	aiMetadataEntry_p.buffer(
 		"mValues",
-		"Arrays of values, may not be $NULL. Entries in this array may be $NULL if the corresponding property key has no assigned value."
+		"Arrays of values, may not be #NULL. Entries in this array may be #NULL if the corresponding property key has no assigned value."
 	)
 }.p
 
@@ -222,12 +222,12 @@ val aiNode = struct(ASSIMP_PACKAGE, "AINode", nativeName = "struct aiNode") {
 
 	aiString.member("mName", "The name of the node.")
 	aiMatrix4x4.member("mTransformation", "The transformation relative to the node's parent.")
-	nullable..aiNode_p.member("mParent", "Parent node. $NULL if this node is the root node.")
+	nullable..aiNode_p.member("mParent", "Parent node. #NULL if this node is the root node.")
 	AutoSize("mChildren", optional = true)..unsigned_int.member("mNumChildren", "The number of child nodes of this node.")
-	aiNode_p.p.member("mChildren", "The child nodes of this node. $NULL if {@code mNumChildren} is 0.")
+	aiNode_p.p.member("mChildren", "The child nodes of this node. #NULL if {@code mNumChildren} is 0.")
 	AutoSize("mMeshes", optional = true)..unsigned_int.member("mNumMeshes", "The number of meshes of this node.")
 	unsigned_int_p.member("mMeshes", "The meshes of this node. Each entry is an index into the mesh list of the aiScene.")
-	nullable..aiMetadata_p.member("mMetadata", "Metadata associated with this node or $NULL if there is no metadata.")
+	nullable..aiMetadata_p.member("mMetadata", "Metadata associated with this node or #NULL if there is no metadata.")
 }
 
 val aiFace_p = struct(ASSIMP_PACKAGE, "AIFace", nativeName = "struct aiFace") {
@@ -288,8 +288,8 @@ val aiAnimMesh_pp = struct(ASSIMP_PACKAGE, "AIAnimMesh", nativeName = "struct ai
 	nullable..aiVector3D_p.buffer(
 		"mVertices",
 		"""
-	    Replacement for ##AIMesh{@code ::mVertices}. If this array is non-$NULL, it *must* contain {@code mNumVertices} entries. The corresponding array in the
-	    host mesh must be non-$NULL as well - animation meshes may neither add or nor remove vertex components (if a replacement array is $NULL and the
+	    Replacement for ##AIMesh{@code ::mVertices}. If this array is non-#NULL, it *must* contain {@code mNumVertices} entries. The corresponding array in the
+	    host mesh must be non-#NULL as well - animation meshes may neither add or nor remove vertex components (if a replacement array is #NULL and the
 	    corresponding source array is not, the source data is taken instead).
 		"""
 	)
@@ -352,7 +352,7 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
 	nullable..aiVector3D_p.buffer(
 		"mNormals",
 		"""
-	    Vertex normals. The array contains normalized vectors, $NULL if not present. The array is {@code mNumVertices} in size. Normals are undefined for point
+	    Vertex normals. The array contains normalized vectors, #NULL if not present. The array is {@code mNumVertices} in size. Normals are undefined for point
 	    and line primitives. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive types (i.e. lines and
 	    triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to {@code qNaN}.
 		"""
@@ -360,7 +360,7 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
 	nullable..aiVector3D_p.buffer(
 		"mTangents",
 		"""
-	    Vertex tangents. The tangent of a vertex points in the direction of the positive X texture axis. The array contains normalized vectors, $NULL if not
+	    Vertex tangents. The tangent of a vertex points in the direction of the positive X texture axis. The array contains normalized vectors, #NULL if not
 	    present. The array is {@code mNumVertices} in size. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive
 	    types (i.e. lines and triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and
 	    set to {@code qNaN}.
@@ -369,14 +369,14 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
 	nullable..aiVector3D_p.buffer(
 		"mBitangents",
 		"""
-	    Vertex bitangents. The bitangent of a vertex points in the direction of the positive Y texture axis. The array contains normalized vectors, $NULL if
+	    Vertex bitangents. The bitangent of a vertex points in the direction of the positive Y texture axis. The array contains normalized vectors, #NULL if
 	    not present. The array is {@code mNumVertices} in size.
 		"""
 	)
 	nullable..aiColor4D_p.array(
 		"mColors",
 		"""
-		Vertex color sets. A mesh may contain 0 to #AI_MAX_NUMBER_OF_COLOR_SETS vertex colors per vertex. $NULL if not present. Each array is
+		Vertex color sets. A mesh may contain 0 to #AI_MAX_NUMBER_OF_COLOR_SETS vertex colors per vertex. #NULL if not present. Each array is
 		{@code mNumVertices} in size if present.
 		""",
 		size = "Assimp.AI_MAX_NUMBER_OF_COLOR_SETS"
@@ -384,7 +384,7 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
 	nullable..aiVector3D_p.array(
 		"mTextureCoords",
 		"""
-	    Vertex texture coords, also known as UV channels. A mesh may contain 0 to #AI_MAX_NUMBER_OF_TEXTURECOORDS per vertex. $NULL if not present. The array
+	    Vertex texture coords, also known as UV channels. A mesh may contain 0 to #AI_MAX_NUMBER_OF_TEXTURECOORDS per vertex. #NULL if not present. The array
 	    is {@code mNumVertices} in size.
 		""",
 		size = "Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"
@@ -405,7 +405,7 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
 	    given in {@code mNumFaces}. If the #AI_SCENE_FLAGS_NON_VERBOSE_FORMAT is NOT set each face references an unique set of vertices.
 		"""
 	)
-	AutoSize("mBones", optional = true)..unsigned_int.member("mNumBones", "The number of bones this mesh contains. Can be 0, in which case the {@code mBones} array is $NULL.")
+	AutoSize("mBones", optional = true)..unsigned_int.member("mNumBones", "The number of bones this mesh contains. Can be 0, in which case the {@code mBones} array is #NULL.")
 	aiBone_pp.member(
 		"mBones",
 		"The bones of this mesh. A bone consists of a name by which it can be found in the frame hierarchy and a set of vertex weights."
@@ -621,7 +621,7 @@ val aiMeshAnim_pp = struct(ASSIMP_PACKAGE, "AIMeshAnim", nativeName = "struct ai
 	    serve as wildcard to select a group of meshes with similar animation setup)
 		""")
 	AutoSize("mKeys")..unsigned_int.member("mNumKeys", "Size of the {@code mKeys} array. Must be 1, at least.")
-	aiMeshKey_p.buffer("mKeys", "Key frames of the animation. May not be $NULL.")
+	aiMeshKey_p.buffer("mKeys", "Key frames of the animation. May not be #NULL.")
 }.p.p
 
 val aiAnimation_pp = struct(ASSIMP_PACKAGE, "AIAnimation", nativeName = "struct aiAnimation") {

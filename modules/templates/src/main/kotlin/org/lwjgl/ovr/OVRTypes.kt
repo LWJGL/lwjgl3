@@ -95,7 +95,7 @@ val ovrInitParams_p = struct(OVR_PACKAGE, "OVRInitParams", nativeName = "ovrInit
 	nullable..ovrLogCallback.member(
 		"LogCallback",
 		"""
-		user-supplied log callback function, which may be called at any time asynchronously from multiple threads until #Shutdown() completes. Use $NULL
+		user-supplied log callback function, which may be called at any time asynchronously from multiple threads until #Shutdown() completes. Use #NULL
 		to specify no log callback.
 		"""
 	)
@@ -521,7 +521,7 @@ val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", nativeName = "ovrLaye
 	ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeFov.")
 	ovrTextureSwapChain.array(
 		"ColorTexture",
-		"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be $NULL.",
+		"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL.",
 		size = "ovrEye_Count",
 		validSize = "1"
 	)
@@ -813,7 +813,7 @@ fun config() {
 				{@code Viewport[1]} refer to {@code ColorTexture[0]} and {@code ColorTexture[1]}, respectively.
 				""",
 				"""
-				{@code ColorTexture[0]} contains both the left and right renderings, {@code ColorTexture[1]} is $NULL, and {@code Viewport[0]} and
+				{@code ColorTexture[0]} contains both the left and right renderings, {@code ColorTexture[1]} is #NULL, and {@code Viewport[0]} and
 				{@code Viewport[1]} refer to sub-rects with {@code ColorTexture[0]}.
 				""",
 				"{@code ColorTexture[0]} contains a single monoscopic rendering, and {@code Viewport[0]} and {@code Viewport[1]} both refer to that rendering."
@@ -823,7 +823,7 @@ fun config() {
 		ovrLayerHeader.member("Header", "must be #LayerType_EyeMatrix")
 		ovrTextureSwapChain.array(
 			"ColorTexture",
-			"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be $NULL for cases described above.",
+			"{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above.",
 			size = "ovrEye_Count",
 			validSize = "1"
 		)

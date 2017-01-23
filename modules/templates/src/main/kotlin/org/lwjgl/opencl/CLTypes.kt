@@ -176,8 +176,8 @@ val cl_image_desc_p = struct(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_ima
 	size_t.member(
 		"image_row_pitch",
 		"""
-		the scan-line pitch in bytes. This must be 0 if {@code host_ptr} is $NULL and can be either 0 or &ge; {@code image_width * size} of element in bytes if
-		{@code host_ptr} is not $NULL. If {@code host_ptr} is not $NULL and {@code image_row_pitch = 0}, {@code image_row_pitch} is calculated as
+		the scan-line pitch in bytes. This must be 0 if {@code host_ptr} is #NULL and can be either 0 or &ge; {@code image_width * size} of element in bytes if
+		{@code host_ptr} is not #NULL. If {@code host_ptr} is not #NULL and {@code image_row_pitch = 0}, {@code image_row_pitch} is calculated as
 		{@code image_width * size} of element in bytes. If {@code image_row_pitch} is not 0, it must be a multiple of the image element size in bytes.
 		"""
 	)
@@ -185,8 +185,8 @@ val cl_image_desc_p = struct(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_ima
 		"image_slice_pitch",
 		"""
 		the size in bytes of each 2D slice in the 3D image or the size in bytes of each image in a 1D or 2D image array. This must be 0 if {@code host_ptr} is
-		$NULL. If {@code host_ptr} is not $NULL, {@code image_slice_pitch} can be either 0 or &ge; {@code image_row_pitch * image_height} for a 2D image array
-		or 3D image and can be either 0 or &ge; {@code image_row_pitch} for a 1D image array. If {@code host_ptr} is not $NULL and
+		#NULL. If {@code host_ptr} is not #NULL, {@code image_slice_pitch} can be either 0 or &ge; {@code image_row_pitch * image_height} for a 2D image array
+		or 3D image and can be either 0 or &ge; {@code image_row_pitch} for a 1D image array. If {@code host_ptr} is not #NULL and
 		{@code image_slice_pitch = 0}, {@code image_slice_pitch} is calculated as {@code image_row_pitch * image_height} for a 2D image array or 3D image and
 		{@code image_row_pitch} for a 1D image array. If {@code image_slice_pitch} is not 0, it must be a multiple of the {@code image_row_pitch}.
 		"""
@@ -196,7 +196,7 @@ val cl_image_desc_p = struct(OPENCL_PACKAGE, "CLImageDesc", nativeName = "cl_ima
 	nullable..cl_mem.member(
 		"buffer",
 		"""
-		refers to a valid buffer memory object if {@code image_type} is #MEM_OBJECT_IMAGE1D_BUFFER. Otherwise it must be $NULL. For a 1D image buffer
+		refers to a valid buffer memory object if {@code image_type} is #MEM_OBJECT_IMAGE1D_BUFFER. Otherwise it must be #NULL. For a 1D image buffer
 		object, the image pixels are taken from the buffer object's data store. When the contents of a buffer object's data store are modified, those changes
 		are reflected in the contents of the 1D image buffer object and vice-versa at corresponding sychronization points. The {@code image_width * size} of
 		element in bytes must be &le; size of buffer object data store.

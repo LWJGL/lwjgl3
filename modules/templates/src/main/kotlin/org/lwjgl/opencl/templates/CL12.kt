@@ -264,8 +264,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"GetExtensionFunctionAddressForPlatform",
 		"""
 		Returns the address of the extension function named by {@code funcname} for a given {@code platform}. The pointer returned should be cast to a function
-		pointer type matching the extension function's definition defined in the appropriate extension specification and header file. A return value of $NULL
-		indicates that the specified function does not exist for the implementation or platform is not a valid platform. A non-$NULL return value for
+		pointer type matching the extension function's definition defined in the appropriate extension specification and header file. A return value of #NULL
+		indicates that the specified function does not exist for the implementation or platform is not a valid platform. A non-#NULL return value for
 		{@code clGetExtensionFunctionAddressForPlatform} does not guarantee that an extension function is actually supported by the platform. The application
 		must also make a corresponding query using ${code("clGetPlatformInfo(platform, CL_PLATFORM_EXTENSIONS, &hellip; )")} or
 		${code("clGetDeviceInfo(device, CL_DEVICE_EXTENSIONS, &hellip; )")} to determine if an extension is supported by the OpenCL implementation.
@@ -364,8 +364,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		nullable..cl_device_id_p.OUT(
 			"out_devices",
 			"""
-			the buffer where the OpenCL sub-devices will be returned. If {@code out_devices} is $NULL, this argument is ignored. If {@code out_devices} is not
-			$NULL, {@code num_devices} must be greater than or equal to the number of sub-devices that device may be partitioned into according to the
+			the buffer where the OpenCL sub-devices will be returned. If {@code out_devices} is #NULL, this argument is ignored. If {@code out_devices} is not
+			#NULL, {@code num_devices} must be greater than or equal to the number of sub-devices that device may be partitioned into according to the
 			partitioning scheme specified in {@code properties}.
 			"""
 		),
@@ -373,13 +373,13 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"num_devices_ret",
 			"""
 			the number of sub-devices that device may be partitioned into according to the partitioning scheme specified in {@code properties}. If {@code num_devices_ret}
-			is $NULL, it is ignored.
+			is #NULL, it is ignored.
 			"""
 		),
 
 		returnDoc =
 		"""
-		$SUCCESS if the partition is created successfully. Otherwise, it returns a $NULL value with the following error values returned in $errcode_ret:
+		$SUCCESS if the partition is created successfully. Otherwise, it returns a #NULL value with the following error values returned in $errcode_ret:
 		${ul(
 			"$INVALID_DEVICE if {@code in_device} is not valid.",
 			"""
@@ -387,7 +387,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			supported by the device.
 			""",
 			"""
-			$INVALID_VALUE if {@code out_devices} is not $NULL and {@code num_devices} is less than the number of sub-devices created by the
+			$INVALID_VALUE if {@code out_devices} is not #NULL and {@code num_devices} is less than the number of sub-devices created by the
 			partition scheme.
 			""",
 			"#DEVICE_PARTITION_FAILED if the partition name is supported by the implementation but {@code in_device} could not be further partitioned.",
@@ -473,22 +473,22 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 
 		returnDoc =
 		"""
-		a valid non-zero image object and the $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
+		a valid non-zero image object and the $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a #NULL
 		value with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
 			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
-			"#INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
+			"#INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is #NULL.",
 			"""
 			#INVALID_IMAGE_FORMAT_DESCRIPTOR if a 2D image is created from a buffer and the row pitch and base address alignment does not follow the rules
 			described for creating a 2D image from a buffer.
 			""",
 			"#INVALID_IMAGE_FORMAT_DESCRIPTOR if a 2D image is created from a 2D image object and the rules described above are not followed.",
-			"#INVALID_IMAGE_DESCRIPTOR if values specified in {@code image_desc} are not valid or if {@code image_desc} is $NULL.",
+			"#INVALID_IMAGE_DESCRIPTOR if values specified in {@code image_desc} are not valid or if {@code image_desc} is #NULL.",
 			"#INVALID_IMAGE_SIZE if image dimensions specified in {@code image_desc} exceed the maximum image dimensions for all devices in context.",
 			"""
-			$INVALID_HOST_PTR if {@code host_ptr} is $NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in flags or if {@code host_ptr} is not
-			$NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
+			$INVALID_HOST_PTR if {@code host_ptr} is #NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in flags or if {@code host_ptr} is not
+			#NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
 			""",
 			"""
 			#INVALID_VALUE if an image buffer is being created and the buffer object was created with #MEM_WRITE_ONLY and flags specifies
@@ -519,7 +519,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		SingleValue("device")..const..cl_device_id_p.IN(
 			"device_list",
 			"""
-			a pointer to a list of devices that are in {@code context}. {@code device_list} must be a non-$NULL value. The built-in kernels are loaded for
+			a pointer to a list of devices that are in {@code context}. {@code device_list} must be a non-#NULL value. The built-in kernels are loaded for
 			devices specified in this list.
 
 			The devices associated with the program object will be the list of devices specified by {@code device_list}. The list of devices specified by
@@ -531,13 +531,13 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 
 		returnDoc =
 		"""
-		a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
+		a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a #NULL
 		value with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
-			"$INVALID_VALUE if {@code device_list} is $NULL or {@code num_devices} is zero.",
+			"$INVALID_VALUE if {@code device_list} is #NULL or {@code num_devices} is zero.",
 			"""
-			$INVALID_VALUE if {@code kernel_names} is $NULL or {@code kernel_names} contains a kernel name that is not supported by any of the
+			$INVALID_VALUE if {@code kernel_names} is #NULL or {@code kernel_names} contains a kernel name that is not supported by any of the
 			devices in {@code device_list}.
 			""",
 			"$INVALID_DEVICE if devices listed in {@code device_list} are not in the list of devices associated with {@code context}.",
@@ -561,8 +561,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		nullable..const..cl_device_id_p.IN(
 			"device_list",
 			"""
-			a pointer to a list of devices associated with {@code program}. If {@code device_list} is a $NULL value, the compile is performed for all devices
-			associated with program. If {@code device_list} is a non-$NULL value, the compile is performed for devices specified in this list.
+			a pointer to a list of devices associated with {@code program}. If {@code device_list} is a #NULL value, the compile is performed for all devices
+			associated with program. If {@code device_list} is a non-#NULL value, the compile is performed for devices specified in this list.
 			"""
 		),
 		const..cl_charASCII_p.IN(
@@ -592,16 +592,16 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
 			called when the program executable has been built (successfully or unsuccessfully).
 
-			If {@code pfn_notify} is not $NULL, {@code clCompileProgram} does not need to wait for the compiler to complete and can return immediately once the
+			If {@code pfn_notify} is not #NULL, {@code clCompileProgram} does not need to wait for the compiler to complete and can return immediately once the
 			compilation can begin. The compilation can begin if the context, program whose sources are being compiled, list of devices, input headers, programs
 			that describe input headers and compiler options specified are all valid and appropriate host and device resources needed to perform the compile are
 			available.
 
-			If {@code pfn_notify} is $NULL, {@code clCompileProgram} does not return until the compiler has completed. This callback function may be called
+			If {@code pfn_notify} is #NULL, {@code clCompileProgram} does not return until the compiler has completed. This callback function may be called
 			asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		nullable..opaque_p.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 
 		returnDoc =
 		"""
@@ -609,14 +609,14 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		${ul(
 			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
 			"""
-			$INVALID_VALUE if {@code device_list} is $NULL and {@code num_devices} is greater than zero, or if {@code device_list} is not $NULL
+			$INVALID_VALUE if {@code device_list} is #NULL and {@code num_devices} is greater than zero, or if {@code device_list} is not #NULL
 			and {@code num_devices} is zero.
 			""",
 			"""
-			$INVALID_VALUE if {@code num_input_headers} is zero and {@code header_include_names} or {@code input_headers} are not $NULL or if
-			{@code num_input_headers} is not zero and {@code header_include_names} or {@code input_headers} are $NULL.
+			$INVALID_VALUE if {@code num_input_headers} is zero and {@code header_include_names} or {@code input_headers} are not #NULL or if
+			{@code num_input_headers} is not zero and {@code header_include_names} or {@code input_headers} are #NULL.
 			""",
-			"$INVALID_VALUE if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
+			"$INVALID_VALUE if {@code pfn_notify} is #NULL but {@code user_data} is not #NULL.",
 			"$INVALID_DEVICE if OpenCL devices listed in {@code device_list} are not in the list of devices associated with program.",
 			"$INVALID_COMPILER_OPTIONS if the compiler options specified by options are invalid.",
 			"""
@@ -644,7 +644,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		#GetProgramInfo()(program, #PROGRAM_BINARIES, &hellip;) and can be specified to #CreateProgramWithBinary() to
 		create a new program object.
 
-		The devices associated with the returned program object will be the list of devices specified by {@code device_list} or if {@code device_list} is $NULL
+		The devices associated with the returned program object will be the list of devices specified by {@code device_list} or if {@code device_list} is #NULL
 		it will be the list of devices associated with context.
 		""",
 
@@ -653,8 +653,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		nullable..const..cl_device_id_p.IN(
 			"device_list",
 			"""
-			a pointer to a list of devices that are in {@code context}. If {@code device_list} is a $NULL value, the link is performed for all devices
-			associated with {@code context} for which a compiled object is available. If {@code device_list} is a non-$NULL value, the link is performed for
+			a pointer to a list of devices that are in {@code context}. If {@code device_list} is a #NULL value, the link is performed for all devices
+			associated with {@code context} for which a compiled object is available. If {@code device_list} is a non-#NULL value, the link is performed for
 			devices specified in this list for which a compiled object is available.
 			"""
 		),
@@ -670,7 +670,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"input_programs",
 			"""
 			an array of program objects that are compiled binaries or libraries that are to be linked to create the program executable. For each device in
-			{@code device_list} or if {@code device_list} is $NULL the list of devices associated with {@code context}, the following cases occur:
+			{@code device_list} or if {@code device_list} is #NULL the list of devices associated with {@code context}, the following cases occur:
 			${ul(
 				"""
 				All programs specified by {@code input_programs} contain a compiled binary or library for the device. In this case, a link is performed to
@@ -690,42 +690,42 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
 			called when the program executable has been built (successfully or unsuccessfully).
 
-			If {@code pfn_notify} is not $NULL, {@code clLinkProgram} does not need to wait for the linker to complete and can return immediately once the
+			If {@code pfn_notify} is not #NULL, {@code clLinkProgram} does not need to wait for the linker to complete and can return immediately once the
 			linking operation can begin. Once the linker has completed, the {@code pfn_notify} callback function is called which returns the program object
 			returned by {@code clLinkProgram}. The application can query the link status and log for this program object. This callback function may be called
 			asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 
-			If {@code pfn_notify} is $NULL, {@code clLinkProgram} does not return until the linker has completed.
+			If {@code pfn_notify} is #NULL, {@code clLinkProgram} does not return until the linker has completed.
 			"""
 		),
-		nullable..opaque_p.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 
 		returnDoc =
 		"""
 		a valid non-zero program object, if the linking operation can begin. The linking operation can begin if the context, list of devices, input programs and
 		linker options specified are all valid and appropriate host and device resources needed to perform the link are available.
 
-		If {@code pfn_notify} is $NULL, the $errcode_ret will be set to $SUCCESS if the link operation was successful and #LINK_PROGRAM_FAILURE if
+		If {@code pfn_notify} is #NULL, the $errcode_ret will be set to $SUCCESS if the link operation was successful and #LINK_PROGRAM_FAILURE if
 		there is a failure to link the compiled binaries and/or libraries.
 
-		If {@code pfn_notify} is not $NULL, {@code clLinkProgram} does not have to wait until the linker to complete and can return $SUCCESS in $errcode_ret
+		If {@code pfn_notify} is not #NULL, {@code clLinkProgram} does not have to wait until the linker to complete and can return $SUCCESS in $errcode_ret
 		if the linking operation can begin. The {@code pfn_notify} callback function will return a $SUCCESS or #LINK_PROGRAM_FAILURE if the
 		linking operation was successful or not.
 
-		Otherwise {@code clLinkProgram} returns a $NULL program object with an appropriate error in $errcode_ret. The application should query the linker status
+		Otherwise {@code clLinkProgram} returns a #NULL program object with an appropriate error in $errcode_ret. The application should query the linker status
 		of this program object to check if the link was successful or not. The list of errors that can be returned are:
 		${ul(
 			ICE,
 			"""
-			$INVALID_VALUE if {@code device_list} is $NULL and {@code num_devices} is greater than zero, or if {@code device_list} is not $NULL
+			$INVALID_VALUE if {@code device_list} is #NULL and {@code num_devices} is greater than zero, or if {@code device_list} is not #NULL
 			and {@code num_devices} is zero.
 			""",
 			"""
-			$INVALID_VALUE if {@code num_input_programs} is zero and {@code input_programs} is $NULL or if {@code num_input_programs} is zero and
-			{@code input_programs} is not $NULL or if {@code num_input_programs} is not zero and {@code input_programs} is $NULL.
+			$INVALID_VALUE if {@code num_input_programs} is zero and {@code input_programs} is #NULL or if {@code num_input_programs} is zero and
+			{@code input_programs} is not #NULL or if {@code num_input_programs} is not zero and {@code input_programs} is #NULL.
 			""",
 			"$INVALID_PROGRAM if programs specified in {@code input_programs} are not valid program objects.",
-			"$INVALID_VALUE if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
+			"$INVALID_VALUE if {@code pfn_notify} is #NULL but {@code user_data} is not #NULL.",
 			"$INVALID_DEVICE if OpenCL devices listed in {@code device_list} are not in the list of devices associated with {@code context}.",
 			"$INVALID_LINKER_OPTIONS if the linker options specified by {@code options} are invalid.",
 			"""
@@ -792,7 +792,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"$INVALID_ARG_INDEX if {@code arg_indx} is not a valid argument index.",
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value} size is &lt; size of return
-			type and {@code param_value} is not $NULL.
+			type and {@code param_value} is not #NULL.
 			""",
 			"#KERNEL_ARG_INFO_NOT_AVAILABLE if the argument information is not available for {@code kernel}.",
 			"$INVALID_KERNEL if {@code kernel} is a not a valid kernel object."
@@ -842,7 +842,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"$INVALID_MEM_OBJECT if {@code buffer} is not a valid buffer object.",
 			"$INVALID_VALUE if {@code offset} or {@code offset + size} require accessing elements outside the buffer buffer object respectively.",
 			"""
-			$INVALID_VALUE if {@code pattern} is $NULL or if {@code pattern_size} is 0 or if {@code pattern_size} is not one of
+			$INVALID_VALUE if {@code pattern} is #NULL or if {@code pattern_size} is 0 or if {@code pattern_size} is not one of
 			{@code [1, 2, 4, 8, 16, 32, 64, 128]}.
 			""",
 			"$INVALID_VALUE if {@code offset} and {@code size} are not a multiple of {@code pattern_size}.",
@@ -913,8 +913,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
 			"$INVALID_MEM_OBJECT if {@code image} is not a valid image object.",
-			"$INVALID_VALUE if {@code fill_color} is $NULL.",
-			"$INVALID_VALUE if the region being filled as specified by {@code origin} and {@code region} is out of bounds or if {@code ptr} is a $NULL value.",
+			"$INVALID_VALUE if {@code fill_color} is #NULL.",
+			"$INVALID_VALUE if the region being filled as specified by {@code origin} and {@code region} is out of bounds or if {@code ptr} is a #NULL value.",
 			"$INVALID_VALUE if values in {@code origin} and {@code region} do not follow rules described in the argument description for {@code origin} and {@code region}.",
 			IEWLE,
 			"$INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for image are not supported by device associated with queue.",
@@ -969,7 +969,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			if the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
 			"$INVALID_MEM_OBJECT if any of the memory objects in {@code mem_objects} is not a valid memory object.",
-			"$INVALID_VALUE if {@code num_mem_objects} is zero or if {@code mem_objects} is $NULL.",
+			"$INVALID_VALUE if {@code num_mem_objects} is zero or if {@code mem_objects} is #NULL.",
 			"$INVALID_VALUE if {@code flags} is not 0 or is not any of the values described in the table above.",
 			IEWLE,
 			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for the specified set of memory objects in {@code mem_objects}.",

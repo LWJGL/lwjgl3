@@ -118,7 +118,7 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 		Returns $INVALID_VALUE if an invalid attribute name is specified in {@code properties}.
 
 		Additionally, returns $INVALID_VALUE if {@code param_name} is invalid, or if the size in bytes specified by {@code param_value_size} is
-		less than the size of the return type and {@code param_value} is not a $NULL value, #OUT_OF_RESOURCES if there is a failure to allocate
+		less than the size of the return type and {@code param_value} is not a #NULL value, #OUT_OF_RESOURCES if there is a failure to allocate
 		resources required by the OpenCL implementation on the device, or #OUT_OF_HOST_MEMORY if there is a failure to allocate resources required by
 		the OpenCL implementation on the host.
 		"""

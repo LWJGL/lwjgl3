@@ -70,8 +70,8 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		"messageBox",
 		"Displays a message dialog.",
 
-		nullable..const..charUTF8_p.IN("aTitle", "the dialog title or $NULL"),
-		nullable..const..charUTF8_p.IN("aMessage", "the message or $NULL. It may contain \\n and \\t characters."),
+		nullable..const..charUTF8_p.IN("aTitle", "the dialog title or #NULL"),
+		nullable..const..charUTF8_p.IN("aMessage", "the message or #NULL. It may contain \\n and \\t characters."),
 		const..charASCII_p.IN("aDialogType", "the dialog type", """"ok" "okcancel" "yesno""""),
 		const..charASCII_p.IN("aIconType", "the icon type", """"info" "warning" "error" "question""""),
 		intb.IN("aDefaultButton", "0 for cancel/no, 1 for ok/yes"),
@@ -84,10 +84,10 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		"Displays an input dialog.",
 
 		messageBox["aTitle"],
-		nullable..const..charUTF8_p.IN("aMessage", "the message or $NULL. May NOT contain \\n and \\t characters on Windows."),
-		nullable..const..charUTF8_p.IN("aDefaultInput", "if $NULL it's a password box"),
+		nullable..const..charUTF8_p.IN("aMessage", "the message or #NULL. May NOT contain \\n and \\t characters on Windows."),
+		nullable..const..charUTF8_p.IN("aDefaultInput", "if #NULL it's a password box"),
 
-		returnDoc = "the input value or $NULL on cancel"
+		returnDoc = "the input value or #NULL on cancel"
 	)
 
 	val saveFileDialog = const..charUTF8_p(
@@ -95,12 +95,12 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		"Displays a file save dialog.",
 
 		messageBox["aTitle"],
-		nullable..const..charUTF8_p.IN("aDefaultPathAndFile", "the default path and/or file or $NULL"),
+		nullable..const..charUTF8_p.IN("aDefaultPathAndFile", "the default path and/or file or #NULL"),
 		AutoSize("aFilterPatterns")..int.IN("aNumOfFilterPatterns", "the number of patterns in {@code aFilterPatterns}"),
-		nullable..const..charUTF8_p.const.p.IN("aFilterPatterns", """an array of file type patterns ($NULL or {"*.jpg","*.png"}"""),
-		nullable..const..charUTF8_p.IN("aSingleFilterDescription", "$NULL or \"image files\""),
+		nullable..const..charUTF8_p.const.p.IN("aFilterPatterns", """an array of file type patterns (#NULL or {"*.jpg","*.png"}"""),
+		nullable..const..charUTF8_p.IN("aSingleFilterDescription", "#NULL or \"image files\""),
 
-		returnDoc = "the selected file path or $NULL on cancel"
+		returnDoc = "the selected file path or #NULL on cancel"
 	)
 
 	const..charUTF8_p(
@@ -114,7 +114,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		saveFileDialog["aSingleFilterDescription"],
 		intb.IN("aAllowMultipleSelects", "if true, multiple selections are allowed"),
 
-		returnDoc = "the file(s) selected or $NULL on cancel. In case of multiple files, the separator is '|'."
+		returnDoc = "the file(s) selected or #NULL on cancel. In case of multiple files, the separator is '|'."
 	)
 
 	const..charUTF8_p(
@@ -122,7 +122,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		"Displays a folder selection dialog.",
 
 		messageBox["aTitle"],
-		const..charUTF8_p.IN("aDefaultPath", "the default path or $NULL")
+		const..charUTF8_p.IN("aDefaultPath", "the default path or #NULL")
 	)
 
 	const..charUTF8_p(
@@ -130,10 +130,10 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(packageName = TinyFD_PACKAGE
 		"Displays a color chooser dialog.",
 
 		messageBox["aTitle"],
-		nullable..const..charASCII_p.IN("aDefaultHexRGB", "$NULL or \"\\#FF0000\""),
-		nullable..Check(3)..unsigned_char_p.INOUT("aDefaultRGB", "{ 0 , 255 , 255 }. Used only if {@code aDefaultHexRGB} is $NULL."),
+		nullable..const..charASCII_p.IN("aDefaultHexRGB", "#NULL or \"\\#FF0000\""),
+		nullable..Check(3)..unsigned_char_p.INOUT("aDefaultRGB", "{ 0 , 255 , 255 }. Used only if {@code aDefaultHexRGB} is #NULL."),
 		Check(3)..unsigned_char_p.OUT("aoResultRGB", "returns the selected color. {@code aDefaultRGB} and {@code aoResultRGB} can be the same array."),
 
-		returnDoc = "the selected hexcolor as a string \"\\#FF0000\" or $NULL on cancel"
+		returnDoc = "the selected hexcolor as a string \"\\#FF0000\" or #NULL on cancel"
 	)
 }

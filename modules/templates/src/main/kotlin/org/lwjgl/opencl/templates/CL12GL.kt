@@ -86,7 +86,7 @@ val CL12GL = dependsOn(Binding.OPENGL) {
 
 			returnDoc =
 			"""
-		a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
+		a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a #NULL
 		value with one of the following error values returned in $errcode_ret:
 		${ul(
 				"$INVALID_CONTEXT if {@code context} is not a valid context or was not created from a GL context.",

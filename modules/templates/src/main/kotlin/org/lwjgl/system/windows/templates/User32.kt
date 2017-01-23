@@ -974,12 +974,12 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			"""
 			a handle to the window whose messages are to be retrieved. The window must belong to the current thread.
 
-			If {@code hWnd} is $NULL, {@code GetMessage} retrieves messages for any window that belongs to the current thread, and any messages on the current
-			thread's message queue whose {@code hwnd} value is $NULL (see the ##MSG structure). Therefore if {@code hWnd} is $NULL, both window messages and
+			If {@code hWnd} is #NULL, {@code GetMessage} retrieves messages for any window that belongs to the current thread, and any messages on the current
+			thread's message queue whose {@code hwnd} value is #NULL (see the ##MSG structure). Therefore if {@code hWnd} is #NULL, both window messages and
 			thread messages are processed.
 
-			If {@code hWnd} is -1, {@code GetMessage} retrieves only messages on the current thread's message queue whose {@code hwnd} value is $NULL, that is,
-			thread messages as posted by #PostMessage() (when the {@code hWnd} parameter is $NULL) or {@code PostThreadMessage}.
+			If {@code hWnd} is -1, {@code GetMessage} retrieves only messages on the current thread's message queue whose {@code hwnd} value is #NULL, that is,
+			thread messages as posted by #PostMessage() (when the {@code hWnd} parameter is #NULL) or {@code PostThreadMessage}.
 			"""
 		),
 		UINT.IN("wMsgFilterMin", "the integer value of the lowest message value to be retrieved"),
@@ -1044,7 +1044,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 				#HWND_BROADCAST - The message is posted to all top-level windows in the system, including disabled or invisible unowned windows, overlapped
 				windows, and pop-up windows. The message is not posted to child windows.
 				""",
-				"$NULL - The function behaves like a call to PostThreadMessage with the dwThreadId parameter set to the identifier of the current thread."
+				"#NULL - The function behaves like a call to PostThreadMessage with the dwThreadId parameter set to the identifier of the current thread."
 			)}
 			"""
 		),
@@ -1319,7 +1319,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		nullable..HINSTANCE.IN(
 			"instance",
 			"""
-			a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be $NULL when a standard icon is
+			a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be #NULL when a standard icon is
 			being loaded.
 			"""
 		),
@@ -1341,7 +1341,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI.
 		""",
 
-		nullable..HWND.IN("hWnd", "a handle to the window whose DC is to be retrieved. If this value is $NULL, GetDC retrieves the DC for the entire screen.")
+		nullable..HWND.IN("hWnd", "a handle to the window whose DC is to be retrieved. If this value is #NULL, GetDC retrieves the DC for the entire screen.")
 	)
 
 	BOOL(
@@ -1713,7 +1713,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 
 		nullable..LPCTSTR.IN(
 			"lpDevice",
-			"the device name. If $NULL, function returns information for the display adapter(s) on the machine, based on {@code devNum}."
+			"the device name. If #NULL, function returns information for the display adapter(s) on the machine, based on {@code devNum}."
 		),
 		DWORD.IN(
 			"iDevNum",
@@ -1756,7 +1756,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			"""
 			a pointer to a null-terminated string that specifies the display device about which graphics mode the function will obtain information.
 
-			This parameter is either $NULL or a DISPLAY_DEVICE#DeviceName() returned from #EnumDisplayDevices(). A $NULL value specifies the current display
+			This parameter is either #NULL or a DISPLAY_DEVICE#DeviceName() returned from #EnumDisplayDevices(). A #NULL value specifies the current display
 			device on the computer that the calling thread is running on.
 			"""
 		),
@@ -1802,27 +1802,27 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			a pointer to a null-terminated string that specifies the display device whose graphics mode will change. Only display device names as returned by
 			#EnumDisplayDevices() are valid.
 
-			The {@code lpszDeviceName} parameter can be $NULL. A $NULL value specifies the default display device. The default device can be determined by
+			The {@code lpszDeviceName} parameter can be #NULL. A #NULL value specifies the default display device. The default device can be determined by
 			calling {@code EnumDisplayDevices} and checking for the #DISPLAY_DEVICE_PRIMARY_DEVICE flag.
 			"""
 		),
 		nullable..DEVMODE_p.IN(
 			"lpDevMode",
 			"""
-			a pointer to a ##DEVMODE structure that describes the new graphics mode. If {@code lpDevMode} is $NULL, all the values currently in the registry
-			will be used for the display setting. Passing $NULL for the {@code lpDevMode} parameter and 0 for the {@code dwFlags} parameter is the easiest way
+			a pointer to a ##DEVMODE structure that describes the new graphics mode. If {@code lpDevMode} is #NULL, all the values currently in the registry
+			will be used for the display setting. Passing #NULL for the {@code lpDevMode} parameter and 0 for the {@code dwFlags} parameter is the easiest way
 			to return to the default mode after a dynamic mode change.
 
 			The {@code dmSize} member must be initialized to the size, in bytes, of the {@code DEVMODE} structure. The {@code dmDriverExtra} member must be
 			initialized to indicate the number of bytes of private driver data following the {@code DEVMODE} structure.
 			"""
 		),
-		nullable..HWND.IN("hwnd", "reserved; must be $NULL"),
+		nullable..HWND.IN("hwnd", "reserved; must be #NULL"),
 		DWORD.IN("dwflags", "indicates how the graphics mode should be changed", ChangeDisplaySettingsFlags),
 		nullable..LPVOID.IN(
 			"lParam",
 			"""
-			if {@code flags} is #CDS_VIDEOPARAMETERS, {@code lParam} is a pointer to a {@code VIDEOPARAMETERS} structure. Otherwise {@code lParam} must be $NULL.
+			if {@code flags} is #CDS_VIDEOPARAMETERS, {@code lParam} is a pointer to a {@code VIDEOPARAMETERS} structure. Otherwise {@code lParam} must be #NULL.
 			"""
 		),
 
@@ -1858,7 +1858,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			"rect",
 			"""
 		    a pointer to the structure that contains the screen coordinates of the upper-left and lower-right corners of the confining rectangle. If this
-		    parameter is $NULL, the cursor is free to move anywhere on the screen.
+		    parameter is #NULL, the cursor is free to move anywhere on the screen.
 		    """
 		)
 	)
@@ -1891,8 +1891,8 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 		input. In systems without a mouse, the window should restore the previous cursor before the cursor leaves the client area or before it relinquishes
 		control to another window.
 
-		If your application must set the cursor while it is in a window, make sure the class cursor for the specified window's class is set to $NULL. If the
-		class cursor is not $NULL, the system restores the class cursor each time the mouse is moved.
+		If your application must set the cursor while it is in a window, make sure the class cursor for the specified window's class is set to #NULL. If the
+		class cursor is not #NULL, the system restores the class cursor each time the mouse is moved.
 
 		The cursor is not shown on the screen if the internal cursor display count is less than zero. This occurs if the application uses the #ShowCursor()
 		function to hide the cursor more times than to show the cursor.
@@ -1902,7 +1902,7 @@ val User32 = "User32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("user
 			"hCursor",
 			"""
 			a handle to the cursor. The cursor must have been created by the {@code CreateCursor} function or loaded by the #LoadCursor() or {@code LoadImage}
-			function. If this parameter is $NULL, the cursor is removed from the screen.
+			function. If this parameter is #NULL, the cursor is removed from the screen.
 			"""
 		),
 

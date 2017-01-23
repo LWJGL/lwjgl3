@@ -14,7 +14,7 @@ val APPLE_ContextLoggingFunctions = "APPLEContextLoggingFunctions".nativeClassCL
 
 		Provides convenience functions that are intended to be used as the {@code pfn_notify} parameter to #CreateContext().
 
-		Note that if you pass $NULL to the #CreateContext() {@code pfn_notify} parameter, you can also use these by setting the {@code CL_LOG_ERRORS}
+		Note that if you pass #NULL to the #CreateContext() {@code pfn_notify} parameter, you can also use these by setting the {@code CL_LOG_ERRORS}
 		environment variable to one of stdout, stderr, or console. Pass your own do-nothing context logging function to disable the {@code CL_LOG_ERRORS}
 		override.
 		"""

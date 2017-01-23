@@ -83,17 +83,17 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		Changes the size of the previously allocated memory referenced by {@code ptr} to {@code size} bytes. The contents of the memory are unchanged up to the
 		lesser of the new and old sizes. If the new size is larger, the contents of the newly allocated portion of the memory are undefined. Upon success, the
 		memory referenced by {@code ptr} is freed and a pointer to the newly allocated memory is returned. Note that realloc() may move the memory allocation,
-		resulting in a different return value than {@code ptr}. If {@code ptr} is $NULL, the realloc() function behaves identically to malloc() for the
+		resulting in a different return value than {@code ptr}. If {@code ptr} is #NULL, the realloc() function behaves identically to malloc() for the
 		specified size.
 		""",
 
-		Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or #NULL"),
 		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
 	OffHeapOnly..void(
 		"free",
-		"Causes the allocated memory referenced by {@code ptr} to be made available for future allocations. If {@code ptr} is $NULL, no action occurs.",
+		"Causes the allocated memory referenced by {@code ptr} to be made available for future allocations. If {@code ptr} is #NULL, no action occurs.",
 
 		MultiTypeAll..Unsafe..nullable..void_p.IN("ptr", "the allocated memory to free")
 	)
@@ -121,7 +121,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		alignment constraints.
 		""",
 
-		Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or #NULL"),
 		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
 		flags
 	)
@@ -134,7 +134,7 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 		result in failure to resize. Behavior is undefined if {@code size} is 0, or if {@code (size + extra > SIZE_T_MAX)}.
 		""",
 
-		Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		Unsafe..nullable..void_p.IN("ptr", "the previously allocated memory or #NULL"),
 		size_t.IN("size", "the number of bytes to allocate"),
 		size_t.IN("extra", "the number of extra bytes to allocate"),
 		flags
@@ -184,8 +184,8 @@ val jemalloc = "JEmalloc".nativeClass(JEMALLOC_PACKAGE, prefixMethod = "je_", bi
 	    period-separated {@code name} argument specifies a location in a tree-structured namespace; see the
 	    <a href="http://www.canonware.com/download/jemalloc/jemalloc-latest/doc/jemalloc.html\#mallctl_namespace">MALLCTL NAMESPACE</a> section for
 	    documentation on the tree contents. To read a value, pass a pointer via {@code oldp} to adequate space to contain the value, and a pointer to its
-	    length via {@code oldlenp}; otherwise pass $NULL and $NULL. Similarly, to write a value, pass a pointer to the value via {@code newp}, and its length
-	    via {@code newlen}; otherwise pass $NULL and {@code 0}.
+	    length via {@code oldlenp}; otherwise pass #NULL and #NULL. Similarly, to write a value, pass a pointer to the value via {@code newp}, and its length
+	    via {@code newlen}; otherwise pass #NULL and {@code 0}.
 	    """,
 
 		const..charASCII_p.IN("name", "the namespace location"),
@@ -245,7 +245,7 @@ for (i = 0; i < nbins; i++) {
 		"malloc_stats_print",
 		"""
 		Writes human-readable summary statistics via the {@code write_cb} callback function pointer and {@code cbopaque} data passed to {@code write_cb}, or
-		{@code malloc_message()} if {@code write_cb} is $NULL. This function can be called repeatedly. General information that never changes during execution
+		{@code malloc_message()} if {@code write_cb} is #NULL. This function can be called repeatedly. General information that never changes during execution
 		can be omitted by specifying "g" as a character within the {@code opts} string. Note that {@code malloc_message()} uses the {@code mallctl*()}
 		functions internally, so inconsistent statistics can be reported if multiple threads use these functions simultaneously. If {@code --enable-stats} is
 		specified during configuration, “m” and “a” can be specified to omit merged arena and per arena statistics, respectively; “b” and “l” can be specified to
@@ -253,7 +253,7 @@ for (i = 0; i < nbins; i++) {
 		prevent some statistics from being completely up to date, since extra locking would be required to merge counters that track thread cache operations.
 		""",
 
-		nullable..je_malloc_message_cb.IN("write_cb", "the print callback, or $NULL to use {@code malloc_message()}"),
+		nullable..je_malloc_message_cb.IN("write_cb", "the print callback, or #NULL to use {@code malloc_message()}"),
 		nullable..opaque_p.IN("je_cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
 		nullable..const..charASCII_p.IN("opts", "an options string")
 	)

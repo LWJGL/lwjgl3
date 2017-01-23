@@ -277,7 +277,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 			"buffer",
 			"""
 			an array of Class values. On output, each Class value points to one class definition, up to either {@code bufferCount} or the total number of
-			registered classes, whichever is less. You can pass $NULL to obtain the total number of registered class definitions without actually retrieving
+			registered classes, whichever is less. You can pass #NULL to obtain the total number of registered class definitions without actually retrieving
 			any class definitions.
 			"""
 		),
@@ -406,15 +406,15 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		nullable..Class.IN("cls", "the class to inspect"),
 		AutoSizeResult..unsigned_int_p.OUT(
 			"outCount",
-			"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
+			"on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
 		),
 
 		returnDoc =
 		"""
 		an array of pointers of type Ivar describing the instance variables declared by the class. Any instance variables declared by superclasses are not
-		included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
+		included. The array contains {@code *outCount} pointers followed by a #NULL terminator. You must free the array with free().
 
-		If the class declares no instance variables, or {@code cls} is Nil, $NULL is returned and {@code *outCount} is 0.
+		If the class declares no instance variables, or {@code cls} is Nil, #NULL is returned and {@code *outCount} is 0.
 		"""
 	)
 
@@ -431,7 +431,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 
 		returnDoc =
 		"""
-		the method that corresponds to the implementation of the selector specified by aSelector for the class specified by {@code cls}, or $NULL if the
+		the method that corresponds to the implementation of the selector specified by aSelector for the class specified by {@code cls}, or #NULL if the
 		specified class or its superclasses do not contain an instance method with the specified selector.
 		"""
 	)
@@ -450,7 +450,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		returnDoc =
 		"""
 		a pointer to the Method data structure that corresponds to the implementation of the selector specified by {@code name} for the class specified by
-		{@code cls}, or $NULL if the specified class or its superclasses do not contain a class method with the specified selector.
+		{@code cls}, or #NULL if the specified class or its superclasses do not contain a class method with the specified selector.
 		"""
 	)
 
@@ -469,7 +469,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		SEL.IN("name", "a selector"),
 
 		returnDoc =
-		"the function pointer that would be called if ${code("[object name]")} were called with an instance of the class, or $NULL if {@code cls} is Nil"
+		"the function pointer that would be called if ${code("[object name]")} were called with an instance of the class, or #NULL if {@code cls} is Nil"
 	)
 
 	// class_getMethodImplementation_stret
@@ -495,15 +495,15 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		nullable..Class.IN("cls", "the class you want to inspect"),
 		AutoSizeResult..unsigned_int_p.OUT(
 			"outCount",
-			"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
+			"on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
 		),
 
 		returnDoc =
 		"""
 		an array of pointers of type Method describing the instance methods implemented by the class—any instance methods implemented by superclasses are not
-		included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
+		included. The array contains {@code *outCount} pointers followed by a #NULL terminator. You must free the array with free().
 
-		If {@code cls} implements no instance methods, or {@code cls} is Nil, returns $NULL and {@code *outCount} is 0.
+		If {@code cls} implements no instance methods, or {@code cls} is Nil, returns #NULL and {@code *outCount} is 0.
 		"""
 	)
 
@@ -528,15 +528,15 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		nullable..Class.IN("cls", "the class you want to inspect"),
 		AutoSizeResult..unsigned_int_p.OUT(
 			"outCount",
-			"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
+			"on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
 		),
 
 		returnDoc =
 		"""
 		an array of pointers of type Protocol* describing the protocols adopted by the class. Any protocols adopted by superclasses or other protocols are not
-		included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
+		included. The array contains {@code *outCount} pointers followed by a #NULL terminator. You must free the array with free().
 
-		If {@code cls} adopts no protocols, or {@code cls} is Nil, returns $NULL and {@code *outCount} is 0.
+		If {@code cls} adopts no protocols, or {@code cls} is Nil, returns #NULL and {@code *outCount} is 0.
 		"""
 	)
 
@@ -549,7 +549,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 
 		returnDoc =
 		"""
-		a pointer of type {@code objc_property_t} describing the property, or $NULL if the class does not declare a property with that name, or $NULL if
+		a pointer of type {@code objc_property_t} describing the property, or #NULL if the class does not declare a property with that name, or #NULL if
 		{@code cls} is Nil.
 		"""
 	)
@@ -561,15 +561,15 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 		nullable..Class.IN("cls", "the class you want to inspect"),
 		AutoSizeResult..unsigned_int_p.OUT(
 			"outCount",
-			"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
+			"on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
 		),
 
 		returnDoc =
 		"""
 		an array of pointers of type {@code objc_property_t} describing the properties declared by the class. Any properties declared by superclasses are not
-		included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
+		included. The array contains {@code *outCount} pointers followed by a #NULL terminator. You must free the array with free().
 
-		If {@code cls} declares no properties, or {@code cls} is Nil, returns $NULL and {@code *outCount} is 0.
+		If {@code cls} declares no properties, or {@code cls} is Nil, returns #NULL and {@code *outCount} is 0.
 		"""
 	)
 
@@ -861,7 +861,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		Method.IN("m", "the method to inspect"),
 
-		returnDoc = "a C string. The string may be $NULL"
+		returnDoc = "a C string. The string may be #NULL"
 	)
 
 	unsigned_int(
@@ -891,7 +891,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		returnDoc =
 		"""
-		a C string describing the type of the parameter at index {@code index}, or $NULL if method has no parameter index {@code index}. You must free the
+		a C string describing the type of the parameter at index {@code index}, or #NULL if method has no parameter index {@code index}. You must free the
 		string with free().
 		"""
 	)
@@ -1032,7 +1032,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		const..charUTF8_p.IN("name", "the name of a protocol"),
 
-		returnDoc = "the protocol named {@code name}{, or $NULL if no protocol named name could be found"
+		returnDoc = "the protocol named {@code name}{, or #NULL if no protocol named name could be found"
 	)
 
 	Protocol_pp(
@@ -1043,7 +1043,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		returnDoc =
 		"""
-		a C array of all the protocols known to the runtime. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the
+		a C array of all the protocols known to the runtime. The array contains {@code *outCount} pointers followed by a #NULL terminator. You must free the
 		list with free().
 		"""
 	)
@@ -1121,9 +1121,9 @@ void myMethodIMP(id self, SEL _cmd)
 		returnDoc =
 		"""
 		a C array of objc_method_description structures containing the names and types of {@code p}'s methods specified by {@code isRequiredMethod} and
-		{@code isInstanceMethod}. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the list with free().
+		{@code isInstanceMethod}. The array contains {@code *outCount} pointers followed by a #NULL terminator. You must free the list with free().
 
-		If the protocol declares no methods that meet the specification, $NULL is returned and {@code *outCount} is 0.
+		If the protocol declares no methods that meet the specification, #NULL is returned and {@code *outCount} is 0.
 		"""
 	)
 
@@ -1138,7 +1138,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		returnDoc =
 		"""
-		the property specified by {@code name}, {@code isRequiredProperty}, and {@code isInstanceProperty} for {@code proto}, or $NULL if none of
+		the property specified by {@code name}, {@code isRequiredProperty}, and {@code isInstanceProperty} for {@code proto}, or #NULL if none of
 		{@code proto}'s properties meets the specification
 		"""
 	)
@@ -1153,9 +1153,9 @@ void myMethodIMP(id self, SEL _cmd)
 		returnDoc =
 		"""
 		a C array of pointers of type objc_property_t describing the properties declared by {@code proto}. Any properties declared by other protocols adopted
-		by this protocol are not included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
+		by this protocol are not included. The array contains {@code *outCount} pointers followed by a #NULL terminator. You must free the array with free().
 
-		If the protocol declares no properties, $NULL is returned and {@code *outCount} is 0.
+		If the protocol declares no properties, #NULL is returned and {@code *outCount} is 0.
 		"""
 	)
 
@@ -1168,10 +1168,10 @@ void myMethodIMP(id self, SEL _cmd)
 
 		returnDoc =
 		"""
-		a C array of protocols adopted by {@code proto}. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array
+		a C array of protocols adopted by {@code proto}. The array contains {@code *outCount} pointers followed by a #NULL terminator. You must free the array
 		with free().
 
-		If the protocol declares no properties, $NULL is returned and {@code *outCount} is 0.
+		If the protocol declares no properties, #NULL is returned and {@code *outCount} is 0.
 		"""
 	)
 

@@ -51,7 +51,7 @@ val ANDROID_create_native_client_buffer = "ANDROIDCreateNativeClientBuffer".nati
 		nullable..noneTerminated..const..EGLint_p.IN(
 			"attrib_list",
 			"""
-			a list of attribute-value pairs which is used to specify the dimensions, format, and usage of the underlying buffer structure. If it is non-$NULL,
+			a list of attribute-value pairs which is used to specify the dimensions, format, and usage of the underlying buffer structure. If it is non-#NULL,
 			the last attribute specified in the list must be #NONE.
 			"""
 		)

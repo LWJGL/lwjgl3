@@ -21,10 +21,10 @@ val GLX14 = "GLX14".nativeClassGLX("GLX14") {
 		"GetProcAddress",
 		"""
 		Returns the address of the extension function named by {@code procName}. The pointer returned should be cast to a function pointer type matching the
-		extension function's definition in that extension specification. A return value of $NULL indicates that the specified function does not exist for the
+		extension function's definition in that extension specification. A return value of #NULL indicates that the specified function does not exist for the
 		implementation.
 
-		A non-$NULL return value for {@code glXGetProcAddress} does not guarantee that an extension function is actually supported at runtime. The client must
+		A non-#NULL return value for {@code glXGetProcAddress} does not guarantee that an extension function is actually supported at runtime. The client must
 		also query #GetString()(GL11#GL_EXTENSIONS) or #QueryExtensionsString() to determine if an extension is supported by a particular context.
 
 		GL function pointers returned by {@code glXGetProcAddress} are independent of the currently bound context and may be used by any context which supports

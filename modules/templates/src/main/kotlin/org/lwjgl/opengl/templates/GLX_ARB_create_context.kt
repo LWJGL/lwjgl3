@@ -45,7 +45,7 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
 		handle to it. This handle can be used to render to any GLX surface (window, pixmap, or pbuffer) compatible with {@code config}, subject to constraints
 		imposed by the OpenGL API version of the context.
 
-		If {@code share_context} is not $NULL, then all shareable data (excluding OpenGL texture objects named 0) will be shared by {@code share_context}, all
+		If {@code share_context} is not #NULL, then all shareable data (excluding OpenGL texture objects named 0) will be shared by {@code share_context}, all
 		other contexts {@code share_context} already shares with, and the newly created context. An arbitrary number of {@code GLXContexts} can share data in
 		this fashion. The server context state for all sharing contexts must exist in a single address space.
 		""",
@@ -55,7 +55,7 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
 		nullable..GLXContext.IN(
 			"share_context",
 			"""
-			if not $NULL, then all shareable data (excluding OpenGL texture objects named 0) will be shared by {@code share_context}, all other contexts
+			if not #NULL, then all shareable data (excluding OpenGL texture objects named 0) will be shared by {@code share_context}, all other contexts
 			{@code share_context} already shares with, and the newly created context. An arbitrary number of GLXContexts can share data in this fashion. The
 			server context state for all sharing contexts must exist in a single address space.
 			"""

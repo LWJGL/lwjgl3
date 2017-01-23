@@ -20,7 +20,7 @@ val intel_thread_local_exec = "INTELThreadLocalExec".nativeClassCL("intel_thread
 		host-thread itself without involving any of the OpenCL runtime threads, much like function calls. The queue would typically stay empty - the queue
 		handler argument is used only for compatibility of the enqueue APIs (i.e., keeping the same API signatures) and checking, at runtime, whether the
 		enqueue API needs to be executed in such a fashion. Enqueue API calls on a "local" command queue can still use event dependency lists and output
-		events. A non-$NULL event dependency list will block the caller application thread until all the corresponding events are completed. Output events will
+		events. A non-#NULL event dependency list will block the caller application thread until all the corresponding events are completed. Output events will
 		be accessible only after the return of the enqueue API call (as with regular command queues) and should always have <strong>completed</strong> status
 		(as expected). They might be useful for querying event status and profiling data. "Local" command queues behave the same regardless if they are defined
 		as in-order or out-of-order. However, with in-order queues, threads may be blocked until execution of previously enqueued commands (by other threads)

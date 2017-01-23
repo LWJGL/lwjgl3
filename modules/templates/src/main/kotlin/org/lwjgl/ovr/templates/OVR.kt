@@ -376,7 +376,7 @@ ENABLE_WARNINGS()""")
 		nullable..const..ovrInitParams_p.IN(
 			"params",
 			"""
-			specifies custom initialization options. May be $NULL to indicate default options when using the CAPI shim. If you are directly calling the
+			specifies custom initialization options. May be #NULL to indicate default options when using the CAPI shim. If you are directly calling the
 			LibOVRRT version of {@code ovr_Initialize} in the LibOVRRT DLL then this must be valid and include #Init_RequestVersion.
 			"""
 		),
@@ -501,12 +501,12 @@ ovr_IdentifyClient(
 		nullable..ovrSession.IN(
 			"session",
 			"""
-	        an {@code ovrSession} previously returned by #Create(), else $NULL in which case this function detects whether an HMD is present and returns its
+	        an {@code ovrSession} previously returned by #Create(), else #NULL in which case this function detects whether an HMD is present and returns its
 	        info if so.
 	        """
 		),
 
-		returnDoc = "an ##OVRHmdDesc. If the {@code hmd} is $NULL and ovrHmdDesc::Type is #Hmd_None then no HMD is present."
+		returnDoc = "an ##OVRHmdDesc. If the {@code hmd} is #NULL and ovrHmdDesc::Type is #Hmd_None then no HMD is present."
 	)
 
 	val session = ovrSession.IN("session", "an {@code ovrSession} previously returned by #Create()")
@@ -557,7 +557,7 @@ ovr_IdentifyClient(
 			"""
 		),
 
-		returnDoc = "an {@code ovrResult} indicating success or failure. Upon failure the returned {@code ovrSession} will be $NULL."
+		returnDoc = "an {@code ovrResult} indicating success or failure. Upon failure the returned {@code ovrSession} will be #NULL."
 	)
 
 	void(
@@ -828,7 +828,7 @@ ovr_IdentifyClient(
 		TestBoundary["boundaryType"],
 		nullable..ovrVector3f_p.OUT(
 			"outFloorPoints",
-			"an array of 3D points (in clockwise order) defining the boundary at floor height (can be $NULL to retrieve only the number of points)"
+			"an array of 3D points (in clockwise order) defining the boundary at floor height (can be #NULL to retrieve only the number of points)"
 		),
 		Check(1)..nullable..int_p.OUT("outFloorPointsCount", "the number of 3D points returned in the array"),
 
@@ -989,7 +989,7 @@ ovr_IdentifyClient(
 		"Destroys an {@code ovrTextureSwapChain} and frees all the resources associated with it.",
 
 		session,
-		nullable..ovrTextureSwapChain.IN("chain", "the {@code ovrTextureSwapChain} to destroy. If it is $NULL then this function has no effect.")
+		nullable..ovrTextureSwapChain.IN("chain", "the {@code ovrTextureSwapChain} to destroy. If it is #NULL then this function has no effect.")
 	)
 
 	void(
@@ -997,7 +997,7 @@ ovr_IdentifyClient(
 		"Destroys a mirror texture previously created by one of the mirror texture creation functions.",
 
 		session,
-		nullable..ovrMirrorTexture.IN("mirrorTexture", "the {@code ovrTexture} to destroy. If it is $NULL then this function has no effect.")
+		nullable..ovrMirrorTexture.IN("mirrorTexture", "the {@code ovrTexture} to destroy. If it is #NULL then this function has no effect.")
 	)
 
 	ovrSizei(
@@ -1054,7 +1054,7 @@ ovrSizei eyeSizeRight = ovr_GetFovTextureSize(session, ovrEye_Right, hmdDesc.Def
 		    or it won't be displayed.
 		    """,
 			"""
-		    If a {@code layerPtrList} entry that was specified in a previous call to {@code ovr_SubmitFrame} is passed as $NULL or is of type
+		    If a {@code layerPtrList} entry that was specified in a previous call to {@code ovr_SubmitFrame} is passed as #NULL or is of type
 		    #LayerType_Disabled, that layer is no longer displayed.
 		    """,
 			"""
@@ -1077,16 +1077,16 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
 		nullable..const..ovrViewScaleDesc_p.IN(
 			"viewScaleDesc",
 			"""
-			provides additional information needed only if {@code layerPtrList} contains an #LayerType_Quad. If $NULL, a default version is used based on the
+			provides additional information needed only if {@code layerPtrList} contains an #LayerType_Quad. If #NULL, a default version is used based on the
 			current configuration and a 1.0 world scale.
 			"""
 		),
 		const..ovrLayerHeader.p.const.p.IN(
 			"layerPtrList",
 			"""
-			a list of {@code ovrLayer} pointers, which can include $NULL entries to indicate that any previously shown layer at that index is to not be
+			a list of {@code ovrLayer} pointers, which can include #NULL entries to indicate that any previously shown layer at that index is to not be
 			displayed. Each layer header must be a part of a layer structure such as ##OVRLayerEyeFov or ##OVRLayerQuad, with {@code Header.Type} identifying
-			its type. A $NULL {@code layerPtrList} entry in the array indicates the absence of the given layer.
+			its type. A #NULL {@code layerPtrList} entry in the array indicates the absence of the given layer.
 			"""
 		),
 		AutoSize("layerPtrList")..unsigned_int.IN(
@@ -1361,7 +1361,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
 
 		returnDoc =
 		"""
-		the string property if it exists. Otherwise returns {@code defaultVal}, which can be specified as $NULL. The return memory is guaranteed to be valid
+		the string property if it exists. Otherwise returns {@code defaultVal}, which can be specified as #NULL. The return memory is guaranteed to be valid
 		until next call to {@code ovr_GetString} or until the HMD is destroyed, whichever occurs first.
 		"""
 	)

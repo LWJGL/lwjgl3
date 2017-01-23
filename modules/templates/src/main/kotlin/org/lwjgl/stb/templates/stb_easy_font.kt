@@ -80,7 +80,7 @@ color:uint8[4]""")}
 		You can ignore z and color if you get them from elsewhere. This format was chosen in the hopes it would make it easier for you to reuse existing
 		buffer-drawing code.
 
-		If you pass in $NULL for color, it becomes {@code 255,255,255,255}.
+		If you pass in #NULL for color, it becomes {@code 255,255,255,255}.
 
 		If the buffer isn't large enough, it will truncate. Expect it to use an average of ~270 bytes per character.
 

@@ -23,7 +23,7 @@ val VRNotifications = "VRNotifications".nativeClass(
 		Create a notification and enqueue it to be shown to the user.
 
 		An overlay handle is required to create a notification, as otherwise it would be impossible for a user to act on it. To create a two-line notification,
-		use a line break ('\n') to split the text into two lines. The {@code pImage} argument may be $NULL, in which case the specified overlay's icon will be
+		use a line break ('\n') to split the text into two lines. The {@code pImage} argument may be #NULL, in which case the specified overlay's icon will be
 		used instead.
 		""",
 

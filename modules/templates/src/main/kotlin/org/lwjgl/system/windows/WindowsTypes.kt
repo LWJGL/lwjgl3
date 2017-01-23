@@ -120,7 +120,7 @@ val MSG = struct(WINDOWS_PACKAGE, "MSG") {
 
 	nullable..HWND.member(
 		"hwnd",
-		"a handle to the window whose window procedure receives the message. This member is $NULL when the message is a thread message."
+		"a handle to the window whose window procedure receives the message. This member is #NULL when the message is a thread message."
 	)
 	UINT.member("message", "the message identifier. Applications can only use the low word; the high word is reserved by the system.")
 	WPARAM.member("wParam", "additional information about the message. The exact meaning depends on the value of the message member.")
@@ -205,12 +205,12 @@ val WNDCLASSEX_p = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
 	HINSTANCE.member("hInstance", "a handle to the instance that contains the window procedure for the class")
 	nullable..HICON.member(
 		"hIcon",
-		"a handle to the class icon. This member must be a handle to an icon resource. If this member is $NULL, the system provides a default icon."
+		"a handle to the class icon. This member must be a handle to an icon resource. If this member is #NULL, the system provides a default icon."
 	)
 	nullable..HCURSOR.member(
 		"hCursor",
 		"""
-		a handle to the class cursor. This member must be a handle to a cursor resource. If this member is $NULL, an application must explicitly set the cursor
+		a handle to the class cursor. This member must be a handle to a cursor resource. If this member is #NULL, an application must explicitly set the cursor
 		shape whenever the mouse moves into the application's window.
 		"""
 	)
@@ -218,21 +218,21 @@ val WNDCLASSEX_p = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
 		"hbrBackground",
 		"""
 		a handle to the class background brush. This member can be a handle to the brush to be used for painting the background, or it can be a color value.
-		When this member is $NULL, an application must paint its own background whenever it is requested to paint in its client area.
+		When this member is #NULL, an application must paint its own background whenever it is requested to paint in its client area.
 		"""
 	)
 	nullable..LPCTSTR.member(
 		"lpszMenuName",
 		"""
 		pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file.  If this
-		member is $NULL, windows belonging to this class have no default menu.
+		member is #NULL, windows belonging to this class have no default menu.
 		"""
 	)
 	LPCTSTR.member("lpszClassName", "a pointer to a null-terminated string or is an atom")
 	nullable..HICON.member(
 		"hIconSm",
 		"""
-		a handle to a small icon that is associated with the window class. If this member is $NULL, the system searches the icon resource specified by the
+		a handle to a small icon that is associated with the window class. If this member is #NULL, the system searches the icon resource specified by the
 		{@code hIcon} member for an icon of the appropriate size to use as the small icon.
 		"""
 	)
@@ -487,7 +487,7 @@ val DISPLAY_DEVICE = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE", mutable = false) 
 		"""
 		Receives information about the display device specified by the {@code iDevNum} parameter of the #EnumDisplayDevices() function.
 
-		The four string members are set based on the parameters passed to {@code EnumDisplayDevices}. If the {@code lpDevice} param is $NULL, then
+		The four string members are set based on the parameters passed to {@code EnumDisplayDevices}. If the {@code lpDevice} param is #NULL, then
 		{@code DISPLAY_DEVICE} is filled in with information about the display adapter(s). If it is a valid device name, then it is filled in with information
 		about the monitor(s) for that device.
 		"""
@@ -520,9 +520,9 @@ val SECURITY_ATTRIBUTES = struct(WINDOWS_PACKAGE, "SECURITY_ATTRIBUTES") {
 	LPVOID.member(
 		"lpSecurityDescriptor",
 		"""
-		a pointer to a {@code SECURITY_DESCRIPTOR} structure that controls access to the object. If the value of this member is $NULL, the object is assigned
+		a pointer to a {@code SECURITY_DESCRIPTOR} structure that controls access to the object. If the value of this member is #NULL, the object is assigned
 		the default security descriptor associated with the access token of the calling process. This is not the same as granting access to everyone by
-		assigning a $NULL discretionary access control list (DACL). By default, the default DACL in the access token of a process allows access only to the
+		assigning a #NULL discretionary access control list (DACL). By default, the default DACL in the access token of a process allows access only to the
 		user represented by the access token.
 		"""
 	)

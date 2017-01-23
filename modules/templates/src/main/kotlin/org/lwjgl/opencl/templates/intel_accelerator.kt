@@ -83,13 +83,13 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 		returnDoc =
 		"""
 	    a valid non-zero accelerator object, and $errcode_ret is set to $SUCCESS if the accelerator object is created successfully. Otherwise, it returns a
-	    $NULL value with one of the following error values returned in $errcode_ret:
+	    #NULL value with one of the following error values returned in $errcode_ret:
 		${ul(
 			"$INVALID_CONTEXT if {@code context} is not a valid context.",
 			"#INVALID_ACCELERATOR_TYPE_INTEL if the supplied accelerator type is not valid.",
 			"""
 			#INVALID_ACCELERATOR_DESCRIPTOR_INTEL if values specified in {@code accelerator_desc} are not valid (or a combination of values is not valid) or if
-			{@code accelerator_desc} is $NULL.
+			{@code accelerator_desc} is #NULL.
 			""",
 			"#ACCELERATOR_TYPE_NOT_SUPPORTED_INTEL if the supplied accelerator type is not supported by the context.",
 			"$INVALID_OPERATION if none of the devices in the context support accelerator objects.",
@@ -152,7 +152,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 	    ${ul(
 			"""
 		    $INVALID_VALUE if {@code param_name} is not valid or if size in bytes specified by {@code param_value_size} is &lt; size of return type and
-		    {@code param_value} is not $NULL.
+		    {@code param_value} is not #NULL.
 			""",
 			"#INVALID_ACCELERATOR_INTEL if accelerator is a not a valid accelerator object.",
 			OORE,

@@ -20,7 +20,7 @@ val GLFWNativeGLX = "GLFWNativeGLX".nativeClass(packageName = GLFW_PACKAGE, nati
 		""",
 
 		GLFWwindow.IN("window", "a GLFW window"),
-		returnDoc = "the {@code GLXContext} of the specified window, or $NULL if an error occurred.",
+		returnDoc = "the {@code GLXContext} of the specified window, or #NULL if an error occurred.",
 		since = "version 3.0"
 	)
 

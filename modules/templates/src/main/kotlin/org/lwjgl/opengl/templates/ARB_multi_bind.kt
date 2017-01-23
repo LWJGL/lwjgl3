@@ -22,7 +22,7 @@ val ARB_multi_bind = "ARBMultiBind".nativeClassGL("ARB_multi_bind") {
 		as an array of &lt;count&gt; object names specifying the objects to bind. Unlike single bind commands, multi-bind commands can be used only to bind or
 		unbind existing objects. Passing a previously unused object name (generated or not) results in an error and does not create a new object. For binding
 		points with associated data (e.g., ranges of a buffer), separate arrays are used to pass the associated data for each binding point. Passing zero values
-		in the array of object names removes the object bound to the current bounding point. Additionally, if $NULL is passed as the array of objects, objects
+		in the array of object names removes the object bound to the current bounding point. Additionally, if #NULL is passed as the array of objects, objects
 		bound to the entire range of binding points are unbound, as though the caller passed an array of zeroes.
 
 		Requires ${GL30.core}. ${GL44.promoted}

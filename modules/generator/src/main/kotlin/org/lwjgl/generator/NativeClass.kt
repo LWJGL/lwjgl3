@@ -10,8 +10,6 @@ import java.nio.file.Paths
 
 const val EXT_FLAG = ""
 
-const val NULL = "{@code NULL}"
-
 enum class CallingConvention(val method: String) {
 	DEFAULT("invoke"),
 	STDCALL("call") // __stdcall on Windows, default on other systems

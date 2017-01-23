@@ -162,7 +162,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 			"$INVALID_VALUE if value specified in {@code buffer_create_type} is not valid.",
 			"""
 			$INVALID_VALUE if value(s) specified in {@code buffer_create_info} (for a given {@code buffer_create_type}) is not valid or if
-			{@code buffer_create_info} is $NULL.
+			{@code buffer_create_info} is #NULL.
 			""",
 			"$INVALID_BUFFER_SIZE if {@code size} is 0.",
 			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for sub-buffer object.",
@@ -190,7 +190,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 			It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 
 		returnDoc =
 		"""
@@ -316,7 +316,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 			""",
 			"$INVALID_MEM_OBJECT if {@code buffer} is not a valid buffer object.",
 			"$INVALID_VALUE if the region being read specified by {@code (buffer_origin, region, buffer_row_pitch, buffer_slice_pitch)} is out of bounds.",
-			"$INVALID_VALUE if {@code ptr} is a $NULL value.",
+			"$INVALID_VALUE if {@code ptr} is a #NULL value.",
 			"$INVALID_VALUE if any {@code region} array element is 0.",
 			"$INVALID_VALUE if {@code buffer_row_pitch} is not 0 and is less than {@code region[0]}.",
 			"$INVALID_VALUE if {@code host_row_pitch} is not 0 and is less than {@code region[0]}.",
@@ -396,7 +396,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 			""",
 			"$INVALID_MEM_OBJECT if {@code buffer} is not a valid buffer object.",
 			"$INVALID_VALUE if the region being written specified by {@code (buffer_origin, region, buffer_row_pitch, buffer_slice_pitch)} is out of bounds.",
-			"$INVALID_VALUE if {@code ptr} is a $NULL value.",
+			"$INVALID_VALUE if {@code ptr} is a #NULL value.",
 			"$INVALID_VALUE if any {@code region} array element is 0.",
 			"$INVALID_VALUE if {@code buffer_row_pitch} is not 0 and is less than {@code region[0]}.",
 			"$INVALID_VALUE if {@code host_row_pitch} is not 0 and is less than {@code region[0]}.",
@@ -545,7 +545,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 
 		returnDoc =
 		"""
-		a valid non-zero event object and $errcode_ret is set to $SUCCESS if the user event object is created successfully. Otherwise, it returns a $NULL
+		a valid non-zero event object and $errcode_ret is set to $SUCCESS if the user event object is created successfully. Otherwise, it returns a #NULL
 		value with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
@@ -651,7 +651,7 @@ clReleaseMemObject(buf2);
 			implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 
 		returnDoc =
 		"""
@@ -659,7 +659,7 @@ clReleaseMemObject(buf2);
 		${ul(
 			"$INVALID_EVENT if {@code event} is not a valid event object.",
 			"""
-			$INVALID_VALUE if {@code pfn_event_notify} is $NULL or if {@code command_exec_callback_type} is not #SUBMITTED,
+			$INVALID_VALUE if {@code pfn_event_notify} is #NULL or if {@code command_exec_callback_type} is not #SUBMITTED,
 			#RUNNING or #COMPLETE.
 			""",
 			"$INVALID_VALUE if {@code event} is a user event object and {@code command_exec_callback_type} is not #COMPLETE.",

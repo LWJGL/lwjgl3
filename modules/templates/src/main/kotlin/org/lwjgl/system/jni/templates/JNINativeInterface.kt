@@ -108,7 +108,7 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 			"""
 		),
 
-		returnDoc = "a class object from a fully-qualified name, or $NULL if the class cannot be found"
+		returnDoc = "a class object from a fully-qualified name, or #NULL if the class cannot be found"
 	)
 
 	opaque_p(
@@ -121,7 +121,7 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		JNI_ENV,
 		jobject.IN("obj", "a global or local reference"),
 
-		returnDoc = "a global reference, or $NULL if the system runs out of memory"
+		returnDoc = "a global reference, or #NULL if the system runs out of memory"
 	)
 
 	void(
@@ -140,14 +140,14 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 			may be a copy of the Java array, changes made to the returned array will not necessarily be reflected in the original array until
 			#Release${name}ArrayElements() is called.
 
-			If {@code isCopy} is not $NULL, then {@code *isCopy} is set to #TRUE if a copy is made; or it is set to #FALSE if no copy is made.
+			If {@code isCopy} is not #NULL, then {@code *isCopy} is set to #TRUE if a copy is made; or it is set to #FALSE if no copy is made.
 			""",
 
 			JNI_ENV,
 			AutoSizeResult("\$original.length")..arrayType.IN("array", "the primitive array"),
 			Check(1)..nullable..jboolean.p.OUT("isCopy", "a pointer to a boolean"),
 
-			returnDoc = "a pointer to the array elements, or $NULL if the operation fails"
+			returnDoc = "a pointer to the array elements, or #NULL if the operation fails"
 		)
 
 		OffHeapOnly..void(
@@ -275,7 +275,7 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 	opaque_p(
 		"NewWeakGlobalRef",
 		"""
-		Creates a new weak global reference. Returns $NULL if {@code obj} refers to null, or if the VM runs out of memory. If the VM runs out of memory, an
+		Creates a new weak global reference. Returns #NULL if {@code obj} refers to null, or if the VM runs out of memory. If the VM runs out of memory, an
 		{@code OutOfMemoryError} will be thrown.
 		""",
 
@@ -303,12 +303,12 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		""",
 
 		JNI_ENV,
-		opaque_p.IN("address", "the starting address of the memory region (must not be $NULL)"),
+		opaque_p.IN("address", "the starting address of the memory region (must not be #NULL)"),
 		jlong.IN("capacity", "the size in bytes of the memory region (must be positive)"),
 
 		returnDoc =
 		"""
-		a local reference to the newly-instantiated {@code java.nio.ByteBuffer} object. Returns $NULL if an exception occurs, or if JNI access to direct
+		a local reference to the newly-instantiated {@code java.nio.ByteBuffer} object. Returns #NULL if an exception occurs, or if JNI access to direct
 		buffers is not supported by this virtual machine.
 		"""
 	)
@@ -322,11 +322,11 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		""",
 
 		JNI_ENV,
-		java_nio_Buffer.IN("buf", "a direct {@code java.nio.Buffer} object (must not be $NULL)"),
+		java_nio_Buffer.IN("buf", "a direct {@code java.nio.Buffer} object (must not be #NULL)"),
 
 		returnDoc =
 		"""
-		the starting address of the memory region referenced by the buffer. Returns $NULL if the memory region is undefined, if the given object is not a
+		the starting address of the memory region referenced by the buffer. Returns #NULL if the memory region is undefined, if the given object is not a
 		direct {@code java.nio.Buffer}, or if JNI access to direct buffers is not supported by this virtual machine.
 		"""
 	)

@@ -44,7 +44,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		Returns the IDs for available GPUs.
 
 		If the function succeeds, the return value is the number of total GPUs available. The value 0 is returned if no GPUs are available or if the call has
-		failed. The ID 0 is reserved and will not be retuned as a valid GPU ID. If the array {@code ids} is $NULL, the function will only return the total
+		failed. The ID 0 is reserved and will not be retuned as a valid GPU ID. If the array {@code ids} is #NULL, the function will only return the total
 		number of GPUs. {@code ids} will be tightly packed with no 0 values between valid ids.
 		""",
 
@@ -58,10 +58,10 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		Each GPU in a system may have different properties, performance characteristics and different supported OpenGL versions. Use this function to determine
 		which GPU is best suited for a specific task.
 
-		For a string, {@code size} will be the number of characters allocated and will include $NULL termination. For arrays of type GL_UNSIGNED_INT, GL_INT,
+		For a string, {@code size} will be the number of characters allocated and will include #NULL termination. For arrays of type GL_UNSIGNED_INT, GL_INT,
 		and GL_FLOAT {@code size} will be the array depth. If the function succeeds, the number of values written will be returned. If the number of values
 		written is equal to {@code size}, the query should be repeated with a larger {@code data} buffer. Strings should be queried using the GL_UNSIGNED_BYTE
-		type, are UTF-8 encoded and will be $NULL terminated. If the function fails, -1 will be returned.
+		type, are UTF-8 encoded and will be #NULL terminated. If the function fails, -1 will be returned.
 		""",
 
 		UINT.IN("id", "a GPU id obtained from calling #GetGPUIDsAMD()"),
@@ -106,7 +106,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		""",
 
 		UINT.IN("id", "a valid GPU id"),
-		nullable..HGLRC.IN("shareContext", "must either be $NULL or that of an associated context created with the same GPU ID as {@code id}"),
+		nullable..HGLRC.IN("shareContext", "must either be #NULL or that of an associated context created with the same GPU ID as {@code id}"),
 		NullTerminated..nullable..const..int_p.IN("attribList", "a 0-terminated list of attributes for the context")
 	)
 

@@ -94,7 +94,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		)..const..void_p.IN(
 			"data",
 			"""
-			the address in client memory of the data that should be used to initialize the buffer's data store. If {@code data} is $NULL, the data store of the
+			the address in client memory of the data that should be used to initialize the buffer's data store. If {@code data} is #NULL, the data store of the
 			buffer is created, but contains undefined data. Otherwise, {@code data} should point to an array of at least {@code size} basic machine units.
 			"""
 		),
@@ -202,7 +202,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		)..Unsafe..nullable..const..void_p.IN(
 			"data",
 			"""
-			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is $NULL,
+			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is #NULL,
 			then the pointer is ignored and the sub-range of the texture image is filled with zeros.
 			"""
 		)
@@ -231,7 +231,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		)..Unsafe..nullable..const..void_p.IN(
 			"data",
 			"""
-			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is $NULL,
+			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is #NULL,
 			then the pointer is ignored and the sub-range of the texture image is filled with zeros.
 			"""
 		)
@@ -253,7 +253,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		"BindBuffersBase",
 		"""
 		Binds {@code count} existing buffer objects to bindings numbered {@code first} through {@code first+count-1} in the array of buffer binding points
-		corresponding to {@code target}. If {@code buffers} is not $NULL, it specifies an array of {@code count} values, each of which must be zero or the name
+		corresponding to {@code target}. If {@code buffers} is not #NULL, it specifies an array of {@code count} values, each of which must be zero or the name
 		of an existing buffer object. It is equivalent to:
 		${codeBlock("""
 for ( i = 0; i < count; i++ ) {
@@ -278,7 +278,7 @@ for ( i = 0; i < count; i++ ) {
 		"""
 		Binds {@code count} existing buffer objects to bindings numbered {@code first} through {@code first+count-1} in the array of buffer binding points
 		corresponding to {@code target}. {@code offsets} and {@code sizes} specify arrays of {@code count} values indicating the range of each buffer to bind.
-		If {@code buffers} is $NULL, all bindings from {@code first} through {@code first+count-1} are reset to their unbound (zero) state. In this
+		If {@code buffers} is #NULL, all bindings from {@code first} through {@code first+count-1} are reset to their unbound (zero) state. In this
 		case, the offsets and sizes associated with the binding points are set to default values, ignoring {@code offsets} and {@code sizes}. It is equivalent
 		to:
 		${codeBlock("""
@@ -309,10 +309,10 @@ for ( i = 0; i < count; i++ ) {
 		"BindTextures",
 		"""
 		Binds {@code count} existing texture objects to texture image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not
-		$NULL, it specifies an array of {@code count} values, each of which must be zero or the name of an existing texture object. When an entry in
+		#NULL, it specifies an array of {@code count} values, each of which must be zero or the name of an existing texture object. When an entry in
 		{@code textures} is the name of an existing texture object, that object is bound to corresponding texture unit for the target specified when the texture
 		object was created. When an entry in {@code textures} is zero, each of the targets enumerated at the beginning of this section is reset to its default
-		texture for the corresponding texture image unit. If {@code textures} is $NULL, each target of each affected texture image unit from {@code first}
+		texture for the corresponding texture image unit. If {@code textures} is #NULL, each target of each affected texture image unit from {@code first}
 		through {@code first+count-1} is reset to its default texture.
 
 		{@code BindTextures} is equivalent to:
@@ -352,7 +352,7 @@ for ( i = 0; i < count; i++ ) {
 		"BindSamplers",
 		"""
 		Binds {@code count} existing sampler objects to texture image units numbered {@code first} through {@code first+count-1}. If {@code samplers} is not
-		$NULL, it specifies an array of {@code count} values, each of which must be zero or the name of an existing sampler object. If {@code samplers} is $NULL,
+		#NULL, it specifies an array of {@code count} values, each of which must be zero or the name of an existing sampler object. If {@code samplers} is #NULL,
 		each affected texture image unit from {@code first} through {@code first+count-1} will be reset to have no bound sampler object.
 
 		{@code BindSamplers} is equivalent to:
@@ -378,8 +378,8 @@ for ( i = 0; i < count; i++ ) {
 	void(
 		"BindImageTextures",
 		"""
-		Binds {@code count} existing texture objects to image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not $NULL, it
-		specifies an array of {@code count} values, each of which must be zero or the name of an existing texture object. If {@code textures} is $NULL, each
+		Binds {@code count} existing texture objects to image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not #NULL, it
+		specifies an array of {@code count} values, each of which must be zero or the name of an existing texture object. If {@code textures} is #NULL, each
 		affected image unit from {@code first} through {@code first+count-1} will be reset to have no bound texture object.
 
 		When binding a non-zero texture object to an image unit, the image unit {@code level}, {@code layered}, {@code layer}, and {@code access} parameters are
@@ -417,9 +417,9 @@ for ( i = 0; i < count; i++ ) {
 		"BindVertexBuffers",
 		"""
 		Binds {@code count} existing buffer objects to vertex buffer binding points numbered {@code first} through {@code first+count-1}. If {@code buffers} is
-		not $NULL, it specifies an array of {@code count} values, each of which must be zero or the name of an existing buffer object. {@code offsets} and
+		not #NULL, it specifies an array of {@code count} values, each of which must be zero or the name of an existing buffer object. {@code offsets} and
 		{@code strides} specify arrays of {@code count} values indicating the offset of the first element and stride between elements in each buffer,
-		respectively. If {@code buffers} is $NULL, each affected vertex buffer binding point from {@code first} through {@code first+count-1} will be reset to
+		respectively. If {@code buffers} is #NULL, each affected vertex buffer binding point from {@code first} through {@code first+count-1} will be reset to
 		have no bound buffer object. In this case, the offsets and strides associated with the binding points are set to default values, ignoring
 		{@code offsets} and {@code strides}.
 

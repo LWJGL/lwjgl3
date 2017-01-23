@@ -1147,7 +1147,7 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 		Returns true if the system believes that an HMD is present on the system. This function is much faster than initializing all of OpenVR just to check
 		for an HMD. Use it when you have a piece of UI that you want to enable only for users with an HMD.
 
-		This function will return true in situations where #InitInternal() will return $NULL. It is a quick way to eliminate users that have no VR hardware,
+		This function will return true in situations where #InitInternal() will return #NULL. It is a quick way to eliminate users that have no VR hardware,
 		but there are some startup conditions that can only be detected by starting the system.
 		"""
 	)
@@ -1155,8 +1155,8 @@ val VR = "VR".nativeClass(packageName = OPENVR_PACKAGE, prefixMethod = "VR_", bi
 	intptr_t(
 		"GetGenericInterface",
 		"""
-		Requests an interface by name from OpenVR. It will return $NULL and pass back an error in {@code peError} if the interface can't be found. It will
-		always return $NULL if #InitInternal() has not been called successfully.
+		Requests an interface by name from OpenVR. It will return #NULL and pass back an error in {@code peError} if the interface can't be found. It will
+		always return #NULL if #InitInternal() has not been called successfully.
 		""",
 
 		const..charASCII_p.IN("pchInterfaceVersion", "the interface name and version"),

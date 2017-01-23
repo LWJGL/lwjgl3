@@ -40,10 +40,10 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 			will always contain {@code VK_KHR_surface}, so if you don't require any additional extensions you can pass this list directly to the
 			##VkInstanceCreateInfo struct.
 
-			If Vulkan is not available on the machine, this function returns $NULL and generates a #API_UNAVAILABLE error. Call #VulkanSupported() to check
+			If Vulkan is not available on the machine, this function returns #NULL and generates a #API_UNAVAILABLE error. Call #VulkanSupported() to check
 			whether Vulkan is available.
 
-			If Vulkan is available but no set of extensions allowing window surface creation was found, this function returns $NULL. You may still use Vulkan
+			If Vulkan is available but no set of extensions allowing window surface creation was found, this function returns #NULL. You may still use Vulkan
 			for off-screen rendering and compute work.
 
 			Additional extensions may be required by future versions of GLFW. You should check if any extensions you wish to enable are already in the returned
@@ -62,14 +62,14 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 				"where to store the number of extensions in the returned array. This is set to zero if an error occurred."
 			),
 
-			returnDoc = "an array of ASCII encoded extension names, or $NULL if an error occurred",
+			returnDoc = "an array of ASCII encoded extension names, or #NULL if an error occurred",
 			since = "version 3.2"
 		)
 
 		GLFWvkproc(
 			"GetInstanceProcAddress",
 			"""
-			Returns the address of the specified Vulkan core or extension function for the specified instance. If instance is set to $NULL it can return any
+			Returns the address of the specified Vulkan core or extension function for the specified instance. If instance is set to #NULL it can return any
 			function exported from the Vulkan loader, including at least the following functions:
 			${ul(
 				"VK10#vkEnumerateInstanceExtensionProperties()",
@@ -78,7 +78,7 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 				"VK10#vkGetInstanceProcAddr()"
 			)}
 
-			If Vulkan is not available on the machine, this function returns $NULL and generates a #API_UNAVAILABLE error. Call #VulkanSupported() to check
+			If Vulkan is not available on the machine, this function returns #NULL and generates a #API_UNAVAILABLE error. Call #VulkanSupported() to check
 			whether Vulkan is available.
 
 			This function is equivalent to calling VK10#vkGetInstanceProcAddr() with a platform-specific query of the Vulkan loader as a fallback.
@@ -90,10 +90,10 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 			This function may be called from any thread.
 			""",
 
-			nullable..VkInstance.IN("instance", "the Vulkan instance to query, or $NULL to retrieve functions related to instance creation"),
+			nullable..VkInstance.IN("instance", "the Vulkan instance to query, or #NULL to retrieve functions related to instance creation"),
 			const..charASCII_p.IN("procname", "the ASCII encoded name of the function"),
 
-			returnDoc = "the address of the function, or $NULL if an error occurred",
+			returnDoc = "the address of the function, or #NULL if an error occurred",
 			since = "version 3.2"
 		)
 
@@ -144,7 +144,7 @@ val GLFWVulkan = dependsOn(Binding.VULKAN) {
 
 			VkInstance.IN("instance", "the Vulkan instance to create the surface in"),
 			GLFWwindow.IN("window", "the window to create the surface for"),
-			nullable..const..VkAllocationCallbacks.p.IN("allocator", "the allocator to use, or $NULL to use the default allocator."),
+			nullable..const..VkAllocationCallbacks.p.IN("allocator", "the allocator to use, or #NULL to use the default allocator."),
 			Check(1)..VkSurfaceKHR.p.OUT("surface", "where to store the handle of the surface. This is set to VK10#VK_NULL_HANDLE if an error occurred."),
 
 			returnDoc = "VK10#VK_SUCCESS if successful, or a Vulkan error code if an error occurred",

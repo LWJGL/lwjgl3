@@ -119,7 +119,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 			"length",
 			"""
 			an array {@code count} values with the number of characters in each string (the string length). If an element in {@code length} is negative, its
-			accompanying string is null-terminated. If {@code length} is $NULL, all strings in the {@code path} argument are considered null-terminated.
+			accompanying string is null-terminated. If {@code length} is #NULL, all strings in the {@code path} argument are considered null-terminated.
 			"""
 		)
 	)
@@ -145,7 +145,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		nullable..Check(1)..GLint_p.OUT(
 			"stringlen",
 			"""
-			a buffer in which to place the actual number of characters written into {@code string}, excluding the null terminator. If $NULL, no length is
+			a buffer in which to place the actual number of characters written into {@code string}, excluding the null terminator. If #NULL, no length is
 			returned.
 			"""
 		),

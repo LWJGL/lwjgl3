@@ -111,7 +111,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 			"data",
 			"""
 		    the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
-		    specified by internalformat, and then used to fill the specified range of the destination buffer. If data is $NULL, then it is ignored and the
+		    specified by internalformat, and then used to fill the specified range of the destination buffer. If data is #NULL, then it is ignored and the
 		    sub-range of the buffer is filled with zeros.
 			"""
 		)
@@ -133,7 +133,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 			"data",
 			"""
 		    the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
-		    specified by internalformat, and then used to fill the specified range of the destination buffer. If data is $NULL, then it is ignored and the
+		    specified by internalformat, and then used to fill the specified range of the destination buffer. If data is #NULL, then it is ignored and the
 		    sub-range of the buffer is filled with zeros.
 			"""
 		)
@@ -435,7 +435,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 		The function's prototype must follow the type definition of DEBUGPROC including its platform-dependent calling convention. Anything else will result in
 		undefined behavior. Only one debug callback can be specified for the current context, and further calls overwrite the previous callback. Specifying
-		$NULL as the value of {@code callback} clears the current callback and disables message output through callbacks. Applications can provide
+		#NULL as the value of {@code callback} clears the current callback and disables message output through callbacks. Applications can provide
 		user-specified data through the pointer {@code userParam}. The context will store this pointer and will include it as one of the parameters in each call
 		to the callback function.
 
@@ -480,7 +480,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		array to hold up to {@code count} elements. The string representations of all fetched messages are stored in the {@code messageLog} array. If multiple
 		messages are fetched, their strings are concatenated into the same {@code messageLog} array and will be separated by single null terminators. The last
 		string in the array will also be null-terminated. The maximum size of {@code messageLog}, including the space used by all null terminators, is given by
-		{@code bufSize}. If {@code bufSize} is less than zero and {@code messageLog} is not $NULL, an #INVALID_VALUE error will be generated. If a message's
+		{@code bufSize}. If {@code bufSize} is less than zero and {@code messageLog} is not #NULL, an #INVALID_VALUE error will be generated. If a message's
 		string, including its null terminator, can not fully fit within the {@code messageLog} array's remaining space, then that message and any subsequent
 		messages will not be fetched and will remain in the log. The string lengths stored in the array {@code lengths} include the space for the null
 		terminator of each string.

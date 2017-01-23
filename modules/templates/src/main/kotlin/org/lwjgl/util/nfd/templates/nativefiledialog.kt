@@ -51,7 +51,7 @@ val nativefiledialog = "NativeFileDialog".nativeClass(packageName = NFD_PACKAGE,
 		${ul(
 			"<i>txt</i> The default filter is for text files. There is a wildcard option in a dropdown.",
 			"<i>png,jpg;psd</i> The default filter is for png and jpg files. A second filter is available for psd files. There is a wildcard option in a dropdown.",
-			"$NULL Wildcard only."
+			"#NULL Wildcard only."
 		)}
 
 		<h3>Known Limitations</h3>

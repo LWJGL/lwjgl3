@@ -113,7 +113,7 @@ stbi_is_hdr(char *filename);""")}
 		"""
 		Loads an image from the specified file.
 		
-		The return value from an image loader is an {@code 'unsigned char *'} which points to the pixel data, or $NULL on an allocation failure or if the image
+		The return value from an image loader is an {@code 'unsigned char *'} which points to the pixel data, or #NULL on an allocation failure or if the image
 		is corrupt or invalid. The pixel data consists of {@code *y} scanlines of {@code *x} pixels, with each pixel consisting of N interleaved 8-bit
 		components; the first pixel pointed to is top-left-most in the image. There is no padding between image scanlines or between pixels, regardless of
 		format. The number of components N is {@code 'desired_channels'} if {@code desired_channels} is non-zero, or {@code *channels_in_file} otherwise. If {@code desired_channels} is non-zero,
@@ -127,7 +127,7 @@ N=\#channels_in_file     components
   2                     grey, alpha
   3                     red, green, blue
   4                     red, green, blue, alpha""")}
-		If image loading fails for any reason, the return value will be $NULL, and {@code *x}, {@code *y}, {@code *channels_in_file} will be unchanged. The function
+		If image loading fails for any reason, the return value will be #NULL, and {@code *x}, {@code *y}, {@code *channels_in_file} will be unchanged. The function
 		#failure_reason() can be queried for an extremely brief, end-user unfriendly explanation of why the load failed.
 
 		Paletted PNG, BMP, GIF, and PIC images are automatically depalettized.

@@ -100,7 +100,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 		AutoSize("devices")..cl_uint.IN(
 			"num_entries",
 			"""
-			the number of cl_device_id entries that can be added to {@code devices}. If {@code devices} is not $NULL then {@code num_entries} must be greater
+			the number of cl_device_id entries that can be added to {@code devices}. If {@code devices} is not #NULL then {@code num_entries} must be greater
 			than zero.
 			"""
 		),
@@ -108,13 +108,13 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
 			"devices",
 			"""
 			returns a list of OpenCL devices found. The {@code cl_device_id} values returned in {@code devices} can be used to identify a specific OpenCL
-			device. If {@code devices} is $NULL, this argument is ignored. The number of OpenCL devices returned is the minimum of the value specified by
+			device. If {@code devices} is #NULL, this argument is ignored. The number of OpenCL devices returned is the minimum of the value specified by
 			{@code num_entries} and the number of OpenCL devices corresponding to {@code media_adapter}.
 			"""
 		),
 		Check(1)..nullable..cl_uint_p.OUT(
 			"num_devices",
-			"returns the number of OpenCL devices available that correspond to {@code media_adapter}. If {@code num_devices} is $NULL, this argument is ignored."
+			"returns the number of OpenCL devices available that correspond to {@code media_adapter}. If {@code num_devices} is #NULL, this argument is ignored."
 		)
 	)
 

@@ -159,8 +159,8 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		"ShaderSource",
 		"""
 		Sets the source code in {@code shader} to the source code in the array of strings specified by {@code strings}. Any source code previously stored in the
-		shader object is completely replaced. The number of strings in the array is specified by {@code count}. If {@code length} is $NULL, each string is
-		assumed to be null terminated. If {@code length} is a value other than $NULL, it points to an array containing a string length for each of the
+		shader object is completely replaced. The number of strings in the array is specified by {@code count}. If {@code length} is #NULL, each string is
+		assumed to be null terminated. If {@code length} is a value other than #NULL, it points to an array containing a string length for each of the
 		corresponding elements of {@code strings}. Each element in the length array may contain the length of the corresponding string (the null character is not
 		counted as part of the string length) or a value less than 0 to indicate that the string is null terminated. The source code strings are not scanned or
 		parsed at this time; they are simply copied into the specified shader object.
@@ -712,7 +712,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 			"length",
 			"""
 			the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than
-			$NULL is passed
+			#NULL is passed
 			"""
 		),
 		Check(1)..GLint_p.OUT("size", "the size of the attribute variable"),

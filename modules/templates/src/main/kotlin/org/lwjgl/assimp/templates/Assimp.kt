@@ -986,7 +986,7 @@ StringConstant(
 
 		size_t.IN("pIndex", "Index of the export format to retrieve information for. Valid range is 0 to #GetExportFormatCount()"),
 
-		returnDoc = "A description of that specific export format. $NULL if {@code pIndex} is out of range."
+		returnDoc = "A description of that specific export format. #NULL if {@code pIndex} is out of range."
 	)
 
 	void(
@@ -1098,7 +1098,7 @@ StringConstant(
 		ExportScene["pFormatId"],
 		ExportScene["pPreProcessing"],
 
-		returnDoc = "the exported data or $NULL in case of error"
+		returnDoc = "the exported data or #NULL in case of error"
 	)
 
 	void(
@@ -1124,7 +1124,7 @@ StringConstant(
 
 		If the call succeeds, the imported data is returned in an ##AIScene structure. The data is intended to be read-only, it stays property of the ASSIMP
 		library and will be stable until #ReleaseImport() is called. After you're done with it, call #ReleaseImport() to free the resources associated with
-		this file. If the import fails, $NULL is returned instead. Call #GetErrorString() to retrieve a human-readable error text.
+		this file. If the import fails, #NULL is returned instead. Call #GetErrorString() to retrieve a human-readable error text.
 		""",
 
 		const..charUTF8_p.IN("pFile", "Path and filename of the file to be imported"),
@@ -1137,7 +1137,7 @@ StringConstant(
 			"Process(Preset)?_\\w+", LinkMode.BITFIELD
 		),
 
-		returnDoc = "Pointer to the imported data or $NULL if the import failed."
+		returnDoc = "Pointer to the imported data or #NULL if the import failed."
 	)
 
 	val ImportFileEx = aiScene_p(
@@ -1147,14 +1147,14 @@ StringConstant(
 
 		If the call succeeds, the imported data is returned in an ##AIScene structure. The data is intended to be read-only, it stays property of the ASSIMP
 		library and will be stable until #ReleaseImport() is called. After you're done with it, call #ReleaseImport() to free the resources associated with
-		this file. If the import fails, $NULL is returned instead. Call #GetErrorString() to retrieve a human-readable error text.
+		this file. If the import fails, #NULL is returned instead. Call #GetErrorString() to retrieve a human-readable error text.
 		""",
 
 		ImportFile["pFile"],
 		ImportFile["pFlags"],
 		nullable..aiFileIO_p.IN(
 			"pFS",
-			"Will be used to open the model file itself and any other files the loader needs to open. Pass $NULL to use the default implementation."
+			"Will be used to open the model file itself and any other files the loader needs to open. Pass #NULL to use the default implementation."
 		),
 
 		returnDoc = "Pointer to the imported data or NULL if the import failed."
@@ -1169,7 +1169,7 @@ StringConstant(
 		ImportFileEx["pFS"],
 		const..aiPropertyStore_p.IN("pProps", "##AIPropertyStore instance containing import settings."),
 
-		returnDoc = "Pointer to the imported data or $NULL if the import failed."
+		returnDoc = "Pointer to the imported data or #NULL if the import failed."
 	)
 
 	val ImportFileFromMemory = aiScene_p(
@@ -1178,7 +1178,7 @@ StringConstant(
 		Reads the given file from a given memory buffer.
 
 		If the call succeeds, the contents of the file are returned as a pointer to an ##AIScene object. The returned data is intended to be read-only, the
-		importer keeps ownership of the data and will destroy it upon destruction. If the import fails, $NULL is returned. A human-readable error description
+		importer keeps ownership of the data and will destroy it upon destruction. If the import fails, #NULL is returned. A human-readable error description
 		can be retrieved by calling #GetErrorString().
 
 		${note("""
@@ -1200,7 +1200,7 @@ StringConstant(
 			"""
 		),
 
-		returnDoc = "A pointer to the imported data, $NULL if the import failed."
+		returnDoc = "A pointer to the imported data, #NULL if the import failed."
 	)
 
 	aiScene_p(
@@ -1213,7 +1213,7 @@ StringConstant(
 		ImportFileFromMemory["pHint"],
 		const..aiPropertyStore_p.IN("pProps", "##AIPropertyStore instance containing import settings."),
 
-		returnDoc = "A pointer to the imported data, $NULL if the import failed."
+		returnDoc = "A pointer to the imported data, #NULL if the import failed."
 	)
 
 	aiScene_p(
@@ -1231,9 +1231,9 @@ StringConstant(
 		returnDoc =
 		"""
 		A pointer to the post-processed data. Post processing is done in-place, meaning this is still the same ##AIScene which you passed for {@code pScene}.
-		However, <em>if</em> post-processing failed, the scene could now be $NULL. That's quite a rare case, post processing steps are not really designed to
+		However, <em>if</em> post-processing failed, the scene could now be #NULL. That's quite a rare case, post processing steps are not really designed to
 		'fail'. To be exact, the #Process_ValidateDataStructure flag is currently the only post processing step which can actually cause the scene to be reset
-		to $NULL.
+		to #NULL.
 		"""
 	)
 
@@ -1254,9 +1254,9 @@ aiAttachLogStream(&c);""")}
 		""",
 
 		aiDefaultLogStream.IN("pStreams", "One of the {@code aiDefaultLogStream} enumerated values.", "DefaultLogStream_\\w+"),
-		nullable..const..charUTF8_p.IN("file", "Solely for the #DefaultLogStream_FILE flag: specifies the file to write to. Pass $NULL for all other flags."),
+		nullable..const..charUTF8_p.IN("file", "Solely for the #DefaultLogStream_FILE flag: specifies the file to write to. Pass #NULL for all other flags."),
 
-		returnDoc = "The log stream. callback is set to $NULL if something went wrong."
+		returnDoc = "The log stream. callback is set to #NULL if something went wrong."
 	)*/
 
 	void(
@@ -1314,7 +1314,7 @@ aiAttachLogStream(&c);""")}
 		Call this function after you're done with the imported data.
 		""",
 
-		nullable..const..aiScene_p.IN("pScene", "The imported data to release. $NULL is a valid value.")
+		nullable..const..aiScene_p.IN("pScene", "The imported data to release. #NULL is a valid value.")
 	)
 
 	charUTF8_p(
@@ -1323,8 +1323,8 @@ aiAttachLogStream(&c);""")}
 
 		returnDoc =
 		"""
-		A textual description of the error that occurred at the last import process. $NULL if there was no error. There can't be an error if you got a
-		non-$NULL ##AIScene from #ImportFile()/#ImportFileEx()/#ApplyPostProcessing().
+		A textual description of the error that occurred at the last import process. #NULL if there was no error. There can't be an error if you got a
+		non-#NULL ##AIScene from #ImportFile()/#ImportFileEx()/#ApplyPostProcessing().
 		"""
 	)
 
@@ -1350,7 +1350,7 @@ aiAttachLogStream(&c);""")}
 
 		aiString_p.OUT(
 			"szOut",
-			"String to receive the extension list. Format of the list: \"*.3ds;*.obj;*.dae\". $NULL is not a valid parameter."
+			"String to receive the extension list. Format of the list: \"*.3ds;*.obj;*.dae\". #NULL is not a valid parameter."
 		)
 	)
 
@@ -1524,7 +1524,7 @@ aiAttachLogStream(&c);""")}
 
 		size_t.IN("pIndex", "Index of the import format to retrieve information for. Valid range is 0 to #GetImportFormatCount()"),
 
-		returnDoc = "A description of that specific import format. $NULL if {@code pIndex} is out of range."
+		returnDoc = "A description of that specific import format. #NULL if {@code pIndex} is out of range."
 	)
 
 	// importerdesc.h
@@ -1556,7 +1556,7 @@ aiAttachLogStream(&c);""")}
 		"""
 		Returns the Importer description for a given extension.
 
-		Will return a $NULL-pointer if no assigned importer desc. was found for the given extension.
+		Will return a #NULL-pointer if no assigned importer desc. was found for the given extension.
 		""",
 
 		const..charASCII_p.IN("extension", "The extension to look for"),
@@ -1848,13 +1848,13 @@ aiAttachLogStream(&c);""")}
 		"GetMaterialProperty",
 		"Retrieve a material property with a specific key from the material.",
 
-		aiMaterial_p.IN("pMat", "Pointer to the input material. May not be $NULL"),
+		aiMaterial_p.IN("pMat", "Pointer to the input material. May not be #NULL"),
 		charASCII_p.IN("pKey", "Key to search for. One of the AI_MATKEY_XXX constants."),
 		unsigned_int.IN("type", "Specifies the type of the texture to be retrieved", TextureTypes),
 		unsigned_int.IN("index", "Index of the texture to be retrieved."),
 		Check(1)..aiMaterialProperty_pp.OUT(
 			"mPropOut",
-			"Pointer to receive a pointer to a valid ##AIMaterialProperty structure or $NULL if the key has not been found."
+			"Pointer to receive a pointer to a valid ##AIMaterialProperty structure or #NULL if the key has not been found."
 		),
 
 		returnDoc = "Return_xxx values."
@@ -1970,19 +1970,19 @@ aiAttachLogStream(&c);""")}
 		aiTextureType.IN("type", "Specifies the texture stack to read from (e.g. diffuse, specular, height map ...).", TextureTypes),
 		unsigned_int.IN("index", "Index of the texture. The function fails if the requested index is not available for this texture type."),
 		aiString_p.OUT("path", "Receives the output path. This parameter must be non-null."),
-		Check(1)..nullable..aiTextureMapping_p.IN("mapping", "The texture mapping mode to be used. Pass $NULL if you're not interested in this information."),
+		Check(1)..nullable..aiTextureMapping_p.IN("mapping", "The texture mapping mode to be used. Pass #NULL if you're not interested in this information."),
 		Check(1)..nullable..unsigned_int_p.OUT("uvindex", "For UV-mapped textures: receives the index of the UV source channel. Unmodified otherwise."),
-		Check(1)..nullable..float_p.OUT("blend", "Receives the blend factor for the texture. Pass $NULL if you're not interested in this information."),
+		Check(1)..nullable..float_p.OUT("blend", "Receives the blend factor for the texture. Pass #NULL if you're not interested in this information."),
 		Check(1)..nullable..aiTextureOp_p.OUT(
 			"op",
 			"""
-			Receives the texture blend operation to be perform between this texture and the previous texture. Pass $NULL if you're not interested in this
+			Receives the texture blend operation to be perform between this texture and the previous texture. Pass #NULL if you're not interested in this
 			information.
 			"""),
 		Check(1)..nullable..aiTextureMapMode_p.OUT(
 			"mapmode",
 			"""
-			Receives the mapping modes to be used for the texture. Pass $NULL if you're not interested in this information. Otherwise, pass a pointer to an
+			Receives the mapping modes to be used for the texture. Pass #NULL if you're not interested in this information. Otherwise, pass a pointer to an
 			array of two {@code aiTextureMapMode}'s (one for each axis, UV order).
 			"""
 		),

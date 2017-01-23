@@ -71,7 +71,7 @@ typedef struct HmdColor_t
 		"""
 		Interface for accessing last set of poses returned by #WaitGetPoses() one at a time.
 
-		It is okay to pass $NULL for either pose if you only want one of the values.
+		It is okay to pass #NULL for either pose if you only want one of the values.
 		""",
 
 		TrackedDeviceIndex_t.IN("unDeviceIndex", ""),
@@ -90,7 +90,7 @@ typedef struct HmdColor_t
 		"""
 		Updated scene texture to display.
 
-		If {@code pBounds} is $NULL the entire texture will be used. If called from an OpenGL app, consider adding a
+		If {@code pBounds} is #NULL the entire texture will be used. If called from an OpenGL app, consider adding a
 		{@code glFlush} after submitting both frames to signal the driver to start processing, otherwise it may wait until the command buffer fills up, causing
 		the app to miss frames.
 

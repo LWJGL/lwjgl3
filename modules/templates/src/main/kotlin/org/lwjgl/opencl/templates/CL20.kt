@@ -169,7 +169,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"""
 			a list of properties for the command-queue and their corresponding values. Each property name is immediately followed by the corresponding desired
 			value. The list is terminated with {@code 0}. If a supported property and its value is not specified in properties, its default value will be used.
-			{@code properties} can be $NULL in which case the default values for supported command-queue properties will be used.
+			{@code properties} can be #NULL in which case the default values for supported command-queue properties will be used.
 			""",
 			"#QUEUE_PROPERTIES #QUEUE_SIZE"
 		),
@@ -177,7 +177,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 
 		returnDoc =
 		"""
-		a valid non-zero command-queue and $errcode_ret is set to $SUCCESS if the command-queue is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero command-queue and $errcode_ret is set to $SUCCESS if the command-queue is created successfully. Otherwise, it returns a #NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
@@ -208,19 +208,19 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"properties",
 			"""
 			a list of properties for the pipe and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
-			list is terminated with {@code 0}. In OpenCL 2.0, {@code properties} must be $NULL.
+			list is terminated with {@code 0}. In OpenCL 2.0, {@code properties} must be #NULL.
 			"""
 		),
 		ERROR_RET,
 
 		returnDoc =
 		"""
-		a valid non-zero pipe object and $errcode_ret is set to $SUCCESS if the pipe object is created successfully. Otherwise, it returns a $NULL value with
+		a valid non-zero pipe object and $errcode_ret is set to $SUCCESS if the pipe object is created successfully. Otherwise, it returns a #NULL value with
 		one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
 			"$INVALID_VALUE if values specified in {@code flags} are invalid.",
-			"$INVALID_VALUE if {@code properties} is not $NULL.",
+			"$INVALID_VALUE if {@code properties} is not #NULL.",
 			"""
 			#INVALID_PIPE_SIZE if {@code pipe_packet_size} is {@code 0} or the {@code pipe_packet_size} exceeds #DEVICE_PIPE_MAX_PACKET_SIZE
 			value for all devices in {@code context} or if {@code pipe_max_packets} is {@code 0}.
@@ -248,7 +248,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type and
-			{@code param_value} is not $NULL.
+			{@code param_value} is not #NULL.
 			""",
 			"$INVALID_MEM_OBJECT if {@code pipe} is not a valid pipe object.",
 			OORE,
@@ -272,7 +272,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 
 		For SVM to be used efficiently, the host and any devices sharing a buffer containing virtual memory pointers should have the same endianness. If the
 		context passed to {@code SVMAlloc} has devices with mixed endianness and the OpenCL implementation is unable to implement SVM because of that mixed
-		endianness, {@code SVMAlloc} will fail and return $NULL.
+		endianness, {@code SVMAlloc} will fail and return #NULL.
 
 		Although SVM is generally not supported for image objects, #CreateImage() may create an image from a buffer (a 1D image from a buffer
 		or a 2D image from buffer) if the buffer specified in its image description parameter is a SVM buffer. Such images have a linear memory representation
@@ -304,7 +304,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 
 		returnDoc =
 		"""
-		a valid non-$NULL shared virtual memory address if the SVM buffer is successfully allocated. Otherwise, like {@code malloc}, it returns a $NULL pointer
+		a valid non-#NULL shared virtual memory address if the SVM buffer is successfully allocated. Otherwise, like {@code malloc}, it returns a #NULL pointer
 		value. {@code SVMAlloc} will fail if:
 		${ul(
 			"{@code context} is not a valid context.",
@@ -335,7 +335,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context used to create the SVM buffer"),
-		Unsafe..void_p.IN("svm_pointer", "must be the value returned by a call to #SVMAlloc(). If a $NULL pointer is passed in {@code svm_pointer}, no action occurs.")
+		Unsafe..void_p.IN("svm_pointer", "must be the value returned by a call to #SVMAlloc(). If a #NULL pointer is passed in {@code svm_pointer}, no action occurs.")
 	)
 
 	cl_int(
@@ -355,13 +355,13 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		nullable..cl_svmfree_callback.IN(
 			"pfn_free_func",
 			"""
-			the callback function to be called to free the SVM pointers. If pfn_free_func is $NULL, all pointers specified in {@code svm_pointers} must be
+			the callback function to be called to free the SVM pointers. If pfn_free_func is #NULL, all pointers specified in {@code svm_pointers} must be
 			allocated using #SVMAlloc() and the OpenCL implementation will free these SVM pointers. {@code pfn_free_func} must be a valid callback function if any
 			SVM pointer to be freed is a shared system memory pointer i.e. not allocated using #SVMAlloc(). If {@code pfn_free_func} is a valid callback function,
 			the OpenCL implementation will call {@code pfn_free_func} to free all the SVM pointers specified in {@code svm_pointers}.
 			"""
 		),
-		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be #NULL."),
 		NEWL,
 		EWL,
 		EVENT,
@@ -372,8 +372,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		${ul(
 			ICQE,
 			"""
-			$INVALID_VALUE if {@code num_svm_pointers} is {@code 0} or if {@code svm_pointers} is $NULL or if any of the pointers specified in
-			{@code svm_pointers} array is $NULL.
+			$INVALID_VALUE if {@code num_svm_pointers} is {@code 0} or if {@code svm_pointers} is #NULL or if any of the pointers specified in
+			{@code svm_pointers} array is #NULL.
 			""",
 			IEWLE,
 			OORE,
@@ -421,7 +421,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"$INVALID_CONTEXT if the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
 			IEWLE,
 			ESEFEIWLE("copy"),
-			"$INVALID_VALUE if {@code dst_ptr} or {@code src_ptr} are $NULL.",
+			"$INVALID_VALUE if {@code dst_ptr} or {@code src_ptr} are #NULL.",
 			"$INVALID_VALUE if {@code size} is {@code 0}.",
 			"#MEM_COPY_OVERLAP if the values specified for {@code dst_ptr}, {@code src_ptr} and {@code size} result in an overlapping copy.",
 			OORE,
@@ -465,10 +465,10 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
-			"$INVALID_VALUE if {@code svm_ptr} is $NULL.",
+			"$INVALID_VALUE if {@code svm_ptr} is #NULL.",
 			"$INVALID_VALUE if {@code svm_ptr} is not aligned to {@code pattern_size} bytes.",
 			"""
-			$INVALID_VALUE if {@code pattern} is $NULL or if {@code pattern_size} is {@code 0} or if {@code pattern_size} is not one of
+			$INVALID_VALUE if {@code pattern} is #NULL or if {@code pattern_size} is {@code 0} or if {@code pattern_size} is not one of
 			{@code &#123;1, 2, 4, 8, 16, 32, 64, 128&#125;}.
 			""",
 			"$INVALID_VALUE if {@code size} is {@code 0} or is not a multiple of {@code pattern_size}.",
@@ -519,7 +519,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
-			"$INVALID_VALUE if {@code svm_ptr} is $NULL.",
+			"$INVALID_VALUE if {@code svm_ptr} is #NULL.",
 			"$INVALID_VALUE if {@code size} is {@code 0} or if values specified in {@code map_flags} are not valid.",
 			IEWLE,
 			ESEFEIWLE("map"),
@@ -554,7 +554,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
-			"$INVALID_VALUE if {@code svm_ptr} is $NULL.",
+			"$INVALID_VALUE if {@code svm_ptr} is #NULL.",
 			IEWLE,
 			OORE,
 			OOHME
@@ -643,7 +643,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"$INVALID_KERNEL if {@code kernel} is a not a valid kernel object.",
-			"$INVALID_VALUE if {@code param_name} is not valid, if {@code param_value} is $NULL or if the size specified by {@code param_value_size} is not valid.",
+			"$INVALID_VALUE if {@code param_name} is not valid, if {@code param_value} is #NULL or if the size specified by {@code param_value_size} is not valid.",
 			"""
 			$INVALID_OPERATION if {@code param_name} = #KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM and {@code param_value} = $TRUE but no devices in
 			context associated with kernel support fine-grain system SVM allocations.
@@ -664,14 +664,14 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"""
 			a list of sampler property names and their corresponding values. Each sampler property name is immediately followed by the corresponding desired
 			value. The list is terminated with {@code 0}. If a supported property and its value is not specified in {@code sampler_properties}, its default
-			value will be used. {@code sampler_properties} can be $NULL in which case the default values for supported sampler properties will be used.
+			value will be used. {@code sampler_properties} can be #NULL in which case the default values for supported sampler properties will be used.
 			"""
 		),
 		ERROR_RET,
 
 		returnDoc =
 		"""
-		a valid non-zero sampler object and $errcode_ret is set to $SUCCESS if the sampler object is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero sampler object and $errcode_ret is set to $SUCCESS if the sampler object is created successfully. Otherwise, it returns a #NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,

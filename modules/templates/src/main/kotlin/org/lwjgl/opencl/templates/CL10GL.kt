@@ -113,7 +113,7 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 
 			returnDoc =
 			"""
-		a valid non-zero OpenCL buffer object and $errcode_ret is set to $SUCCESS if the buffer object is created successfully. Otherwise, it returns a $NULL
+		a valid non-zero OpenCL buffer object and $errcode_ret is set to $SUCCESS if the buffer object is created successfully. Otherwise, it returns a #NULL
 		value with one of the following error values returned in $errcode_ret:
 		${ul(
 				"$INVALID_CONTEXT if {@code context} is not a valid context or was not created from a GL context.",
@@ -168,7 +168,7 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 
 			returnDoc =
 			"""
-		a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
+		a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a #NULL
 		value with one of the following error values returned in $errcode_ret:
 		${ul(
 				"$INVALID_CONTEXT if {@code context} is not a valid context or was not created from a GL context.",
@@ -232,7 +232,7 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 
 			returnDoc =
 			"""
-		a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a #NULL value
 		with one of the following error values returned in $errcode_ret:
 		 ${ul(
 				"$INVALID_CONTEXT if {@code context} is not a valid context or was not created from a GL context.",
@@ -290,7 +290,7 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 
 			returnDoc =
 			"""
-		a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
+		a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a #NULL
 		value with one of the following error values returned in $errcode_ret:
 		${ul(
 				"$INVALID_CONTEXT if {@code context} is not a valid context or was not created from a GL context.",
@@ -314,10 +314,10 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 			cl_mem.IN("memobj", "the memory object being queried"),
 			Check(1)..nullable..cl_gl_object_type_p.OUT(
 				"gl_object_type",
-				"returns the type of GL object attached to {@code memobj}. If {@code gl_object_type} is $NULL, it is ignored.",
+				"returns the type of GL object attached to {@code memobj}. If {@code gl_object_type} is #NULL, it is ignored.",
 				GLObjectTypes
 			),
-			Check(1)..nullable..GLuint_p.OUT("gl_object_name", "the GL object name used to create {@code memobj}. If {@code gl_object_name} is $NULL, it is ignored."),
+			Check(1)..nullable..GLuint_p.OUT("gl_object_name", "the GL object name used to create {@code memobj}. If {@code gl_object_name} is #NULL, it is ignored."),
 
 			returnDoc =
 			"""
@@ -353,7 +353,7 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 				"$INVALID_GL_OBJECT if there is no GL texture object associated with {@code memobj}.",
 				"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return
-			type and {@code param_value} is not $NULL, or if {@code param_value} and {@code param_value_size_ret} are $NULL.
+			type and {@code param_value} is not #NULL, or if {@code param_value} and {@code param_value_size_ret} are #NULL.
 			""",
 				OORE,
 				OOHME
@@ -391,12 +391,12 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 
 			returnDoc =
 			"""
-		$SUCCESS if the function is executed successfully. If {@code num_objects} is 0 and {@code mem_objects} is $NULL the function does nothing and returns
+		$SUCCESS if the function is executed successfully. If {@code num_objects} is 0 and {@code mem_objects} is #NULL the function does nothing and returns
 		$SUCCESS. Otherwise, it returns one of the following errors:
 		${ul(
 				"""
-			$INVALID_VALUE if {@code num_objects} is zero and {@code mem_objects} is not a $NULL value or if {@code num_objects} &gt; 0 and
-			{@code mem_objects} is $NULL.
+			$INVALID_VALUE if {@code num_objects} is zero and {@code mem_objects} is not a #NULL value or if {@code num_objects} &gt; 0 and
+			{@code mem_objects} is #NULL.
 			""",
 				"$INVALID_MEM_OBJECT if memory objects in {@code mem_objects} are not valid OpenCL memory objects.",
 				ICQE,
@@ -430,12 +430,12 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 
 			returnDoc =
 			"""
-		$SUCCESS if the function is executed successfully. If {@code num_objects} is 0 and {@code mem_objects} is $NULL the function does nothing and returns
+		$SUCCESS if the function is executed successfully. If {@code num_objects} is 0 and {@code mem_objects} is #NULL the function does nothing and returns
 		$SUCCESS. Otherwise, it returns one of the following errors:
 		${ul(
 				"""
-			$INVALID_VALUE if {@code num_objects} is zero and {@code mem_objects} is not a $NULL value or if {@code num_objects} &gt; 0 and
-			{@code mem_objects} is $NULL.
+			$INVALID_VALUE if {@code num_objects} is zero and {@code mem_objects} is not a #NULL value or if {@code num_objects} &gt; 0 and
+			{@code mem_objects} is #NULL.
 			""",
 				"$INVALID_MEM_OBJECT if memory objects in {@code mem_objects} are not valid OpenCL memory objects.",
 				ICQE,

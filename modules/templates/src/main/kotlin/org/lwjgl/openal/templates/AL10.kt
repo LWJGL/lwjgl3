@@ -516,7 +516,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		The buffers will be queued in the sequence in which they appear in the array. This command is legal on a source in any playback state (to allow for
 		streaming, queuing has to be possible on a AL_PLAYING source). All buffers in a queue must have the same format and attributes, with the exception of
-		the $NULL buffer (i.e., 0) which can always be queued.
+		the #NULL buffer (i.e., 0) which can always be queued.
 		""",
 
 		ALuint.IN("sourceName", "the target source"),
@@ -708,7 +708,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"""
 		Retrieves extension entry points.
 
-		Returns $NULL if no entry point with the name funcName can be found. Implementations are free to return $NULL if an entry point is present, but not
+		Returns #NULL if no entry point with the name funcName can be found. Implementations are free to return #NULL if an entry point is present, but not
 		applicable for the current context. However the specification does not guarantee this behavior.
 
 		Applications can use alGetProcAddress to obtain core API entry points, not just extensions. This is the recommended way to dynamically load and unload

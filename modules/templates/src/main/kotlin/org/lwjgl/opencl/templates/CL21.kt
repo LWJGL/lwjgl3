@@ -116,7 +116,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		$SUCCESS with a time value in {@code host_timestamp} if provided. Otherwise, it returns one of the following errors:
 		${ul(
 			"$INVALID_DEVICE if {@code device} is not a valid OpenCL device.",
-			"$INVALID_VALUE if {@code host_timestamp} or {@code device_timestamp} is $NULL.",
+			"$INVALID_VALUE if {@code host_timestamp} or {@code device_timestamp} is #NULL.",
 			OORE,
 			OOHME
 		)}
@@ -147,7 +147,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		$SUCCESS with a time value in {@code host_timestamp} if provided. Otherwise, it returns one of the following errors:
 		${ul(
 			"$INVALID_DEVICE if {@code device} is not a valid OpenCL device.",
-			"$INVALID_VALUE if {@code host_timestamp} is $NULL.",
+			"$INVALID_VALUE if {@code host_timestamp} is #NULL.",
 			OORE,
 			OOHME
 		)}
@@ -165,11 +165,11 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 
 		returnDoc =
 		"""
-		a valid non-zero program object and {@code errcode_ret} is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
+		a valid non-zero program object and {@code errcode_ret} is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a #NULL
 		value with one of the following error values returned in {@code errcode_ret}:
 		${ul(
 			ICE,
-			"$INVALID_VALUE if {@code il} is $NULL or if {@code length} is zero.",
+			"$INVALID_VALUE if {@code il} is #NULL or if {@code length} is zero.",
 			"""
 			$INVALID_VALUE if the {@code length}-byte memory pointed to by {@code il} does not contain well-formed intermediate language input that can be
 			consumed by the OpenCL runtime.""",
@@ -207,7 +207,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 
 		returnDoc =
 		"""
-		a valid non-zero kernel object and {@code errcode_ret} is set to $SUCCESS if the kernel is successfully copied. Otherwise it returns a $NULL value with
+		a valid non-zero kernel object and {@code errcode_ret} is set to $SUCCESS if the kernel is successfully copied. Otherwise it returns a #NULL value with
 		one of the following error values returned in {@code errcode_ret}:
 		${ul(
 			"$INVALID_KERNEL if {@code source_kernel} is not a valid kernel object.",
@@ -226,14 +226,14 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 			"device",
 			"""
 			a specific device in the list of devices associated with {@code kernel}. The list of devices is the list of devices in the OpenCL context that is
-			associated with {@code kernel}. If the list of devices associated with kernel is a single device, device can be a $NULL value.
+			associated with {@code kernel}. If the list of devices associated with kernel is a single device, device can be a #NULL value.
 			"""
 		),
 		cl_kernel_sub_group_info.IN("param_name", "the information to query", "$GetKernelSubGroupInfoA $GetKernelSubGroupInfoB"),
 		AutoSize("input_value")..size_t.IN("input_value_size", "the size in bytes of memory pointed to by {@code input_value}"),
 		nullable..const..void_p.IN(
 			"input_value",
-			"a pointer to memory where the appropriate parameterization of the query is passed from. If {@code input_value} is $NULL, it is ignored."
+			"a pointer to memory where the appropriate parameterization of the query is passed from. If {@code input_value} is #NULL, it is ignored."
 		),
 		PARAM_VALUE_SIZE,
 		MultiType(PointerMapping.DATA_POINTER)..nullable..void_p.IN("param_value", param_value),
@@ -244,16 +244,16 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"""
-			$INVALID_DEVICE if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device} is $NULL but there is more than
+			$INVALID_DEVICE if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device} is #NULL but there is more than
 			one device associated with {@code kernel}.
 			""",
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value} is &lt size of return type and
-			{@code param_value} is not $NULL.
+			{@code param_value} is not #NULL.
 			""",
 			"""
 			$INVALID_VALUE if {@code param_name} is {@code KERNEL_SUB_GROUP_SIZE_FOR_NDRANGE} and the size in bytes specified by {@code input_value_size} is not valid
-			or if {@code input_value} is $NULL.
+			or if {@code input_value} is #NULL.
 			""",
 			"$INVALID_KERNEL if {@code kernel} is not a valid kernel object.",
 			OORE,
@@ -281,7 +281,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 			"num_svm_pointers",
 			"""
 			the number of pointers in the specified {@code svm_pointers} array, and the number of sizes in the {@code sizes} array, if {@code sizes} is not
-			$NULL.
+			#NULL.
 			"""
 		),
 		const..void_pp.IN(
@@ -292,7 +292,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 			"sizes",
 			"""
 			an array of sizes. The pair {@code svm_pointers[i]} and {@code sizes[i]} together define the starting address and number of bytes in a range to be
-			migrated. {@code sizes} may be $NULL indicating that every allocation containing any {@code svm_pointer[i]} is to be migrated. Also, if
+			migrated. {@code sizes} may be #NULL indicating that every allocation containing any {@code svm_pointer[i]} is to be migrated. Also, if
 			{@code sizes[i]} is zero, then the entire allocation containing {@code svm_pointer[i]} is migrated.
 			"""
 		),
@@ -307,7 +307,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
 		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same",
-			"$INVALID_VALUE if {@code num_svm_pointers} is zero or {@code svm_pointers} is $NULL.",
+			"$INVALID_VALUE if {@code num_svm_pointers} is zero or {@code svm_pointers} is #NULL.",
 			"""
 			$INVALID_VALUE if {@code sizes[i]} is non-zero range ${code("[svm_pointers[i], svm_pointers[i]+sizes[i])")} is not contained within an existing
 			#SVMAlloc() allocation.

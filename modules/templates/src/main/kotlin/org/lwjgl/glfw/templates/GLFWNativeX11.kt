@@ -18,7 +18,7 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nati
 
 		Note: This function may be called from any thread. Access is not synchronized.
 		""",
-		returnDoc = "The ${code("Display")} used by GLFW, or $NULL if an error occurred.",
+		returnDoc = "The ${code("Display")} used by GLFW, or #NULL if an error occurred.",
 		since = "version 3.0"
 	)
 

@@ -730,16 +730,16 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		Notes:
 		${ul(
-			"Any or all of the version arguments may be $NULL.",
+			"Any or all of the version arguments may be #NULL.",
 			"This function always succeeds.",
 			"This function may be called before #Init().",
 			"This function may be called from any thread."
 		)}
 		""",
 
-		nullable..Check(1)..int_p.OUT("major", "where to store the major version number, or $NULL"),
-		nullable..Check(1)..int_p.OUT("minor", "where to store the minor version number, or $NULL"),
-		nullable..Check(1)..int_p.OUT("rev", "where to store the revision number, or $NULL"),
+		nullable..Check(1)..int_p.OUT("major", "where to store the major version number, or #NULL"),
+		nullable..Check(1)..int_p.OUT("minor", "where to store the minor version number, or #NULL"),
+		nullable..Check(1)..int_p.OUT("rev", "where to store the revision number, or #NULL"),
 		since = "version 1.0"
 	)
 
@@ -784,9 +784,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		)}
 		""",
 
-		nullable..GLFWerrorfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWerrorfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set",
+		returnDoc = "the previously set callback, or #NULL if no callback was set",
 		since = "version 3.0"
 	)
 
@@ -794,7 +794,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"GetMonitors",
 		"""
 		Returns an array of handles for all currently connected monitors. The primary monitor is always first in the returned array. If no monitors were found,
-		this function returns $NULL.
+		this function returns #NULL.
 
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is guaranteed to be valid only until the monitor configuration
 		changes or the library is terminated.
@@ -804,7 +804,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		AutoSizeResult..int_p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
 
-		returnDoc = "an array of monitor handlers, or $NULL if no monitors were found or if an error occured",
+		returnDoc = "an array of monitor handlers, or #NULL if no monitors were found or if an error occured",
 		since = "version 3.0"
 	)
 
@@ -818,7 +818,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The primary monitor is always first in the array returned by #GetMonitors().
 		""",
 
-		returnDoc = "the primary monitor, or $NULL if no monitors were found or if an error occured",
+		returnDoc = "the primary monitor, or #NULL if no monitors were found or if an error occured",
 		since = "version 3.0"
 	)
 
@@ -827,14 +827,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the position, in screen coordinates, of the upper-left corner of the specified monitor.
 
-		Any or all of the position arguments may be $NULL. If an error occurs, all non-$NULL position arguments will be set to zero.
+		Any or all of the position arguments may be #NULL. If an error occurs, all non-#NULL position arguments will be set to zero.
 
 		This function must only be called from the main thread.
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		nullable..Check(1)..int_p.OUT("xpos", "where to store the monitor x-coordinate, or $NULL"),
-		nullable..Check(1)..int_p.OUT("ypos", "where to store the monitor y-coordinate, or $NULL"),
+		nullable..Check(1)..int_p.OUT("xpos", "where to store the monitor x-coordinate, or #NULL"),
+		nullable..Check(1)..int_p.OUT("ypos", "where to store the monitor y-coordinate, or #NULL"),
 		since = "version 3.0"
 	)
 
@@ -847,7 +847,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		<a href="https://en.wikipedia.org/wiki/Extended_display_identification_data">EDID</a> data is incorrect or because the driver does not report it
 		accurately.
 
-		Any or all of the size arguments may be $NULL. If an error occurs, all non-$NULL size arguments will be set to zero.
+		Any or all of the size arguments may be #NULL. If an error occurs, all non-#NULL size arguments will be set to zero.
 
 		Notes:
 		${ul(
@@ -859,8 +859,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		nullable..Check(1)..int_p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or $NULL"),
-		nullable..Check(1)..int_p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or $NULL"),
+		nullable..Check(1)..int_p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or #NULL"),
+		nullable..Check(1)..int_p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or #NULL"),
 		since = "version 3.0"
 	)
 
@@ -878,7 +878,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 
-		returnDoc = "the UTF-8 encoded name of the monitor, or $NULL if an error occured",
+		returnDoc = "the UTF-8 encoded name of the monitor, or #NULL if an error occured",
 		since = "version 3.0"
 	)
 
@@ -891,9 +891,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function must only be called from the main thread.
 		""",
 
-		nullable..GLFWmonitorfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
+		nullable..GLFWmonitorfun.IN("cbfun", "the new callback, or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set or the library had not been initialized",
+		returnDoc = "the previously set callback, or #NULL if no callback was set or the library had not been initialized",
 		since = "version 3.0"
 	)
 
@@ -912,7 +912,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 		AutoSizeResult..int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
 
-		returnDoc = "an array of video modes, or $NULL if an error occured",
+		returnDoc = "an array of video modes, or #NULL if an error occured",
 		since = "version 1.0"
 	)
 
@@ -930,7 +930,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 
-		returnDoc = "the current mode of the monitor, or $NULL if an error occurred",
+		returnDoc = "the current mode of the monitor, or #NULL if an error occurred",
 		since = "version 3.0"
 	)
 
@@ -966,7 +966,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 
-		returnDoc = "the current gamma ramp, or $NULL if an error occurred",
+		returnDoc = "the current gamma ramp, or #NULL if an error occurred",
 		since = "version 3.0"
 	)
 
@@ -1156,10 +1156,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("width", "the desired width, in screen coordinates, of the window"),
 		int.IN("height", "the desired height, in screen coordinates, of the window"),
 		const..charUTF8_p.IN("title", "initial, UTF-8 encoded window title"),
-		nullable..GLFWmonitor.IN("monitor", "the monitor to use for fullscreen mode, or $NULL for windowed mode"),
-		nullable..GLFWwindow.IN("share", " the window whose context to share resources with, or $NULL to not share resources"),
+		nullable..GLFWmonitor.IN("monitor", "the monitor to use for fullscreen mode, or #NULL for windowed mode"),
+		nullable..GLFWwindow.IN("share", " the window whose context to share resources with, or #NULL to not share resources"),
 
-		returnDoc = "the handle of the created window, or $NULL if an error occurred",
+		returnDoc = "the handle of the created window, or #NULL if an error occurred",
 		since = "version 1.0"
 	)
 
@@ -1260,14 +1260,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Retrieves the position, in screen coordinates, of the upper-left corner of the client area of the specified window.
 
-		Any or all of the position arguments may be $NULL. If an error occurs, all non-$NULL position arguments will be set to zero.
+		Any or all of the position arguments may be #NULL. If an error occurs, all non-#NULL position arguments will be set to zero.
 
 		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to query"),
-		nullable..Check(1)..int_p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or $NULL"),
-		nullable..Check(1)..int_p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or $NULL"),
+		nullable..Check(1)..int_p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or #NULL"),
+		nullable..Check(1)..int_p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or #NULL"),
 
 		since = "version 3.0"
 	)
@@ -1299,14 +1299,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Retrieves the size, in screen coordinates, of the client area of the specified window. If you wish to retrieve the size of the framebuffer of the
 		window in pixels, see #GetFramebufferSize().
 
-		Any or all of the size arguments may be $NULL. If an error occurs, all non-$NULL size arguments will be set to zero.
+		Any or all of the size arguments may be #NULL. If an error occurs, all non-#NULL size arguments will be set to zero.
 
 		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose size to retrieve"),
-		nullable..Check(1)..int_p.OUT("width", "where to store the width, in screen coordinates, of the client area, or $NULL"),
-		nullable..Check(1)..int_p.OUT("height", "where to store the height, in screen coordinates, of the client area, or $NULL"),
+		nullable..Check(1)..int_p.OUT("width", "where to store the width, in screen coordinates, of the client area, or #NULL"),
+		nullable..Check(1)..int_p.OUT("height", "where to store the height, in screen coordinates, of the client area, or #NULL"),
 
 		since = "version 1.0"
 	)
@@ -1384,14 +1384,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Retrieves the size, in pixels, of the framebuffer of the specified window. If you wish to retrieve the size of the window in screen coordinates, see
 		#GetWindowSize().
 
-		Any or all of the size arguments may be $NULL. If an error occurs, all non-$NULL size arguments will be set to zero.
+		Any or all of the size arguments may be #NULL. If an error occurs, all non-#NULL size arguments will be set to zero.
 
 		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose framebuffer to query"),
-		nullable..Check(1)..int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or $NULL"),
-		nullable..Check(1)..int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or $NULL"),
+		nullable..Check(1)..int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or #NULL"),
+		nullable..Check(1)..int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or #NULL"),
 
 		since = "version 3.0"
 	)
@@ -1406,16 +1406,16 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Because this function retrieves the size of each window frame edge and not the offset along a particular coordinate axis, the retrieved values will
 		always be zero or positive.
 
-		Any or all of the size arguments may be $NULL. If an error occurs, all non-$NULL size arguments will be set to zero.
+		Any or all of the size arguments may be #NULL. If an error occurs, all non-#NULL size arguments will be set to zero.
 
 	    This function must only be called from the main thread.
 	    """,
 
 		GLFWwindow.IN("window", "the window whose frame size to query"),
-		Check(1)..nullable..int_p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or $NULL"),
-		Check(1)..nullable..int_p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or $NULL"),
-		Check(1)..nullable..int_p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or $NULL"),
-		Check(1)..nullable..int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or $NULL"),
+		Check(1)..nullable..int_p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or #NULL"),
+		Check(1)..nullable..int_p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or #NULL"),
+		Check(1)..nullable..int_p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or #NULL"),
+		Check(1)..nullable..int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or #NULL"),
 
 		since = "version 3.1"
 	)
@@ -1521,7 +1521,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window to query"),
 
-		returnDoc = "the monitor, or $NULL if the window is in windowed mode or an error occurred",
+		returnDoc = "the monitor, or #NULL if the window is in windowed mode or an error occurred",
 		since = "version 3.0"
 	)
 
@@ -1530,12 +1530,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Sets the mode, monitor, video mode and placement of a window.
 
-        This function sets the monitor that the window uses for full screen mode or, if the monitor is $NULL, makes it windowed mode.
+        This function sets the monitor that the window uses for full screen mode or, if the monitor is #NULL, makes it windowed mode.
 
 		When setting a monitor, this function updates the width, height and refresh rate of the desired video mode and switches to the video mode closest to
 		it. The window position is ignored when setting a monitor.
 
-		When the monitor is $NULL, the position, width and height are used to place the window client area. The refresh rate is ignored when no monitor is
+		When the monitor is #NULL, the position, width and height are used to place the window client area. The refresh rate is ignored when no monitor is
 		specified.
 
 		If you only wish to update the resolution of a full screen window or the size of a windowed mode window, see #SetWindowSize().
@@ -1547,7 +1547,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose monitor, size or video mode to set"),
-		nullable..GLFWmonitor.IN("monitor", "the desired monitor, or $NULL to set windowed mode"),
+		nullable..GLFWmonitor.IN("monitor", "the desired monitor, or #NULL to set windowed mode"),
 		int.IN("xpos", "the desired x-coordinate of the upper-left corner of the client area"),
 		int.IN("ypos", "the desired y-coordinate of the upper-left corner of the client area"),
 		int.IN("width", "the desired with, in screen coordinates, of the client area or video mode"),
@@ -1611,7 +1611,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	void(
 		"SetWindowUserPointer",
 		"""
-		Sets the user-defined pointer of the specified window. The current value is retained until the window is destroyed. The initial value is $NULL.
+		Sets the user-defined pointer of the specified window. The current value is retained until the window is destroyed. The initial value is #NULL.
 
 		This function may be called from any thread. Access is not synchronized.
 		""",
@@ -1625,7 +1625,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	opaque_p(
 		"GetWindowUserPointer",
 		"""
-		Returns the current value of the user-defined pointer of the specified window. The initial value is $NULL.
+		Returns the current value of the user-defined pointer of the specified window. The initial value is #NULL.
 
 		This function may be called from any thread. Access is not synchronized.
 		""",
@@ -1637,7 +1637,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 	val CallbackReturnDoc =
 		"""
-		the previously set callback, or $NULL if no callback was set or the library had not been
+		the previously set callback, or #NULL if no callback was set or the library had not been
 		<a href="http://www.glfw.org/docs/latest/intro.html\#intro_init">initialized</a>
 		"""
 
@@ -1653,7 +1653,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
  		""",
 
 		CALLBACK_WINDOW,
-		nullable..GLFWwindowposfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowposfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
 		since = "version 1.0"
@@ -1669,7 +1669,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable..GLFWwindowsizefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowsizefun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
 		since = "version 1.0"
@@ -1693,7 +1693,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable..GLFWwindowclosefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowclosefun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
 		since = "version 2.5"
@@ -1712,7 +1712,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable..GLFWwindowrefreshfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowrefreshfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
 		since = "version 2.5"
@@ -1730,7 +1730,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable..GLFWwindowfocusfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowfocusfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
 		since = "version 3.0"
@@ -1745,7 +1745,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable..GLFWwindowiconifyfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowiconifyfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
 		since = "version 3.0"
@@ -1760,7 +1760,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable..GLFWwindowmaximizefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowmaximizefun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
 		since = "version 3.3"
@@ -1775,7 +1775,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable..GLFWframebuffersizefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWframebuffersizefun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
 		since = "version 3.0"
@@ -1950,7 +1950,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Returns the localized name of the specified printable key. This is intended for displaying key bindings to the user.
 
 		If the key is #KEY_UNKNOWN, the scancode is used instead, otherwise the scancode is ignored. If a non-printable key or (if the key is #KEY_UNKNOWN) a
-		scancode that maps to a non-printable key is specified, this function returns $NULL.
+		scancode that maps to a non-printable key is specified, this function returns #NULL.
 
 		The printable keys are:
 		${ul(
@@ -1985,7 +1985,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("key", "the key to query, or #KEY_UNKNOWN"),
 		int.IN("scancode", "the scancode of the key to query"),
 
-		returnDoc = "the localized name of the key, or $NULL",
+		returnDoc = "the localized name of the key, or #NULL",
 		since = "version 3.2"
 	)
 
@@ -2067,14 +2067,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The coordinates can be converted to their integer equivalents with the Math#floor() function. Casting directly to an integer type works for positive
 		coordinates, but fails for negative ones.
 
-		Any or all of the position arguments may be $NULL. If an error occurs, all non-$NULL position arguments will be set to zero.
+		Any or all of the position arguments may be #NULL. If an error occurs, all non-#NULL position arguments will be set to zero.
 
 		This function must only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the desired window"),
-		nullable..Check(1)..double_p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or $NULL"),
-		nullable..Check(1)..double_p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or $NULL."),
+		nullable..Check(1)..double_p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or #NULL"),
+		nullable..Check(1)..double_p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or #NULL."),
 
 		since = "version 1.0"
 	)
@@ -2124,7 +2124,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("xhot", "the desired x-coordinate, in pixels, of the cursor hotspot"),
 		int.IN("yhot", "the desired y-coordinate, in pixels, of the cursor hotspot"),
 
-		returnDoc = "the handle of the created cursor, or $NULL if an error occurred",
+		returnDoc = "the handle of the created cursor, or #NULL if an error occurred",
 		since = "version 3.1"
 	)
 
@@ -2143,7 +2143,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		int.IN("shape", "one of the standard shapes", CursorShapes),
 
-		returnDoc = "a new cursor ready to use or $NULL if an error occurred",
+		returnDoc = "a new cursor ready to use or #NULL if an error occurred",
 		since = "version 3.1"
 	)
 
@@ -2176,7 +2176,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	    """,
 
 		GLFWwindow.IN("window", "the window to set the system cursor for"),
-		nullable..GLFWcursor.IN("cursor", "the cursor to set, or $NULL to switch back to the default arrow cursor"),
+		nullable..GLFWcursor.IN("cursor", "the cursor to set, or #NULL to switch back to the default arrow cursor"),
 
 		since = "version 3.1"
 	)
@@ -2202,9 +2202,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable..GLFWkeyfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWkeyfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set",
+		returnDoc = "the previously set callback, or #NULL if no callback was set",
 		since = "version 1.0"
 	)
 
@@ -2224,9 +2224,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable..GLFWcharfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWcharfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set",
+		returnDoc = "the previously set callback, or #NULL if no callback was set",
 		since = "version 2.4"
 	)
 
@@ -2245,9 +2245,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable..GLFWcharmodsfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWcharmodsfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set",
+		returnDoc = "the previously set callback, or #NULL if no callback was set",
 		since = "version 3.1"
 	)
 
@@ -2264,9 +2264,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable..GLFWmousebuttonfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWmousebuttonfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set",
+		returnDoc = "the previously set callback, or #NULL if no callback was set",
 		since = "version 1.0"
 	)
 
@@ -2280,9 +2280,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable..GLFWcursorposfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWcursorposfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set",
+		returnDoc = "the previously set callback, or #NULL if no callback was set",
 		since = "version 1.0"
 	)
 
@@ -2295,9 +2295,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable..GLFWcursorenterfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWcursorenterfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set",
+		returnDoc = "the previously set callback, or #NULL if no callback was set",
 		since = "version 3.0"
 	)
 
@@ -2312,9 +2312,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable..GLFWscrollfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWscrollfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set",
+		returnDoc = "the previously set callback, or #NULL if no callback was set",
 		since = "version 2.1"
 	)
 
@@ -2330,9 +2330,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	    """,
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable..GLFWdropfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWdropfun.IN("cbfun", "the new callback or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set",
+		returnDoc = "the previously set callback, or #NULL if no callback was set",
 		since = "version 3.1"
 	)
 
@@ -2355,7 +2355,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the values of all axes of the specified joystick. Each element in the array is a value between -1.0 and 1.0.
 
-		Querying a joystick slot with no device present is not an error, but will cause this function to return $NULL. Call #JoystickPresent() to check device
+		Querying a joystick slot with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
 		presence.
 
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
@@ -2370,7 +2370,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"where to store the number of axis values in the returned array. This is set to zero if the joystick is not present or an error occurred."
 		),
 
-		returnDoc = "an array of axis values, or $NULL if the joystick is not present",
+		returnDoc = "an array of axis values, or #NULL if the joystick is not present",
 		since = "version 2.2"
 	)
 
@@ -2379,7 +2379,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the state of all buttons of the specified joystick. Each element in the array is either #PRESS or #RELEASE.
 
-		Querying a joystick slot with no device present is not an error, but will cause this function to return $NULL. Call #JoystickPresent() to check device
+		Querying a joystick slot with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
 		presence.
 
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
@@ -2394,7 +2394,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"where to store the number of button states in the returned array. This is set to zero if the joystick is not present or an error occurred."
 		),
 
-		returnDoc = "an array of button states, or $NULL if the joystick is not present",
+		returnDoc = "an array of button states, or #NULL if the joystick is not present",
 		since = "version 2.2"
 	)
 
@@ -2403,7 +2403,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"""
 		Returns the name, encoded as UTF-8, of the specified joystick.
 
-		Querying a joystick slot with no device present is not an error, but will cause this function to return $NULL. Call #JoystickPresent() to check device
+		Querying a joystick slot with no device present is not an error, but will cause this function to return #NULL. Call #JoystickPresent() to check device
 		presence.
 
 		The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified joystick is disconnected, this
@@ -2414,7 +2414,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		int.IN("jid", "the joystick to query"),
 
-		returnDoc = "the UTF-8 encoded name of the joystick, or $NULL if the joystick is not present",
+		returnDoc = "the UTF-8 encoded name of the joystick, or #NULL if the joystick is not present",
 		since = "version 3.0"
 	)
 
@@ -2428,9 +2428,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function must only be called from the main thread.
 		""",
 
-		nullable..GLFWjoystickfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
+		nullable..GLFWjoystickfun.IN("cbfun", "the new callback, or #NULL to remove the currently set callback"),
 
-		returnDoc = "the previously set callback, or $NULL if no callback was set or the library had not been initialized",
+		returnDoc = "the previously set callback, or #NULL if no callback was set or the library had not been initialized",
 		since = "version 3.2"
 	)
 
@@ -2454,7 +2454,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"GetClipboardString",
 		"""
 		Returns the contents of the system clipboard, if it contains or is convertible to a UTF-8 encoded string. If the clipboard is empty or if its contents
-		cannot be converted, $NULL is returned and a #FORMAT_UNAVAILABLE error is generated.
+		cannot be converted, #NULL is returned and a #FORMAT_UNAVAILABLE error is generated.
 
 		The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to #GetClipboardString() or
 		#SetClipboardString(), or until the library is terminated.
@@ -2469,7 +2469,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window that will request the clipboard contents"),
 
-		returnDoc = "the contents of the clipboard as a UTF-8 encoded string, or $NULL if an error occurred",
+		returnDoc = "the contents of the clipboard as a UTF-8 encoded string, or #NULL if an error occurred",
 		since = "version 3.0"
 	)
 
@@ -2550,7 +2550,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function may be called from any thread.
 		""",
 
-		nullable..GLFWwindow.IN("window", "the window whose context to make current, or $NULL to detach the current context"),
+		nullable..GLFWwindow.IN("window", "the window whose context to make current, or #NULL to detach the current context"),
 
 		since = "version 3.0"
 	)
@@ -2563,7 +2563,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function may be called from any thread.
 		""",
 
-		returnDoc = "the window whose context is current, or $NULL if no window's context is current",
+		returnDoc = "the window whose context is current, or #NULL if no window's context is current",
 		since = "version 3.0"
 	)
 
@@ -2661,7 +2661,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		${ul(
 			"The address of a given function is not guaranteed to be the same between contexts.",
 			"""
-			This function may return a non-$NULL address despite the associated version or extension not being available. Always check the context version or
+			This function may return a non-#NULL address despite the associated version or extension not being available. Always check the context version or
 			extension string first.
 			""",
 			"The returned function pointer is valid until the context is destroyed or the library is terminated.",
@@ -2671,7 +2671,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		const..charASCII_p.IN("procname", "the ASCII encoded name of the function"),
 
-		returnDoc = "the address of the function, or $NULL if an error occured",
+		returnDoc = "the address of the function, or #NULL if an error occured",
 		since = "version 1.0"
 	)
 }

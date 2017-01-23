@@ -354,7 +354,7 @@ val HiddenAreaMesh_t = struct(OPENVR_PACKAGE, "HiddenAreaMesh", nativeName = "Hi
 	The mesh to draw into the stencil (or depth) buffer to perform early stencil (or depth) kills of pixels that will never appear on the HMD. This mesh draws
 	on all the pixels that will be hidden after distortion.
 
-	If the HMD does not provide a visible area mesh {@code pVertexData} will be $NULL and {@code unTriangleCount} will be 0.
+	If the HMD does not provide a visible area mesh {@code pVertexData} will be #NULL and {@code unTriangleCount} will be 0.
 	"""
 
 	HmdVector2_t.p.buffer("pVertexData", "")

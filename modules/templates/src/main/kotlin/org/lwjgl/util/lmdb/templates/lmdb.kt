@@ -40,7 +40,7 @@ ENABLE_WARNINGS()""")
 		transaction provides a consistent view of the data.
 
 		Once a transaction has been created, a database can be opened within it using #dbi_open(). If only one database will ever be used in the environment, a
-		$NULL can be passed as the database name. For named databases, the #CREATE flag must be used to create the database if it doesn't already exist. Also,
+		#NULL can be passed as the database name. For named databases, the #CREATE flag must be used to create the database if it doesn't already exist. Also,
 		#env_set_maxdbs() must be called after #env_create() and before #env_open() to set the maximum number of named databases you want to support.
 
 		Note: a single transaction can open multiple databases. Generally databases should only be opened once, by the first transaction in the process. After
@@ -460,9 +460,9 @@ ENABLE_WARNINGS()""")
 		"version",
 		"Returns the LMDB library version information.",
 
-		Check(1)..nullable..int_p.OUT("major", "if non-$NULL, the library major version number is copied here"),
-		Check(1)..nullable..int_p.OUT("minor", "if non-$NULL, the library minor version number is copied here"),
-		Check(1)..nullable..int_p.OUT("patch", "if non-$NULL, the library patch version number is copied here"),
+		Check(1)..nullable..int_p.OUT("major", "if non-#NULL, the library major version number is copied here"),
+		Check(1)..nullable..int_p.OUT("minor", "if non-#NULL, the library minor version number is copied here"),
+		Check(1)..nullable..int_p.OUT("patch", "if non-#NULL, the library patch version number is copied here"),
 
 		returnDoc = "the library version as a string"
 	)
@@ -948,7 +948,7 @@ ENABLE_WARNINGS()""")
 		nullable..MDB_txn_p.IN(
 			"parent",
 			"""
-			if this parameter is non-$NULL, the new transaction will be a nested transaction, with the transaction indicated by {@code parent} as its parent.
+			if this parameter is non-#NULL, the new transaction will be a nested transaction, with the transaction indicated by {@code parent} as its parent.
 			Transactions may be nested to any level. A parent transaction and its cursors may not issue any other operations than #txn_commit() and
 			#txn_abort() while it has active child transactions.
 			"""
@@ -1083,14 +1083,14 @@ ENABLE_WARNINGS()""")
 		This function must not be called from multiple concurrent transactions in the same process. A transaction that uses this function must finish (either
 		commit or abort) before any other transaction in the process may use this function.
 
-		To use named databases (with {@code name} != $NULL), #env_set_maxdbs() must be called before opening the environment. Database names are keys in the
+		To use named databases (with {@code name} != #NULL), #env_set_maxdbs() must be called before opening the environment. Database names are keys in the
 		unnamed database, and may be read but not written.
 		""",
 
 		txn_env["txn"],
 		nullable..const..charUTF8_p.IN(
 			"name",
-			"the name of the database to open. If only a single database is needed in the environment, this value may be $NULL."
+			"the name of the database to open. If only a single database is needed in the environment, this value may be #NULL."
 		),
 		unsigned_int.IN(
 			"flags",
@@ -1345,8 +1345,8 @@ ENABLE_WARNINGS()""")
 		This function removes key/data pairs from the database. If the database does not support sorted duplicate data items (#DUPSORT) the data parameter is
 		ignored.
 
-		If the database supports sorted duplicates and the data parameter is $NULL, all of the duplicate data items for the key will be deleted. Otherwise, if
-		the data parameter is non-$NULL only the matching data item will be deleted.
+		If the database supports sorted duplicates and the data parameter is #NULL, all of the duplicate data items for the key will be deleted. Otherwise, if
+		the data parameter is non-#NULL only the matching data item will be deleted.
 
 		This function will return #NOTFOUND if the specified key/data pair is not in the database.
 		""",

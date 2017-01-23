@@ -830,7 +830,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		MultiType(
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT
-		)..nullable..void_p.IN("_dst", "destination index buffer. If this argument it $NULL function will return number of indices after conversion"),
+		)..nullable..void_p.IN("_dst", "destination index buffer. If this argument it #NULL function will return number of indices after conversion"),
 		AutoSize("_dst")..uint32_t.IN(
 			"_dstSize",
 			"""
@@ -1386,7 +1386,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		const..bgfx_memory_t_p.IN("_mem", "DDS, KTX or PVR texture data"),
 		uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
 		MapToInt..uint8_t.IN("_skip", "skip top level mips when parsing texture"),
-		nullable..bgfx_texture_info_t_p.OUT("_info", "when non-$NULL is specified it returns parsed texture information")
+		nullable..bgfx_texture_info_t_p.OUT("_info", "when non-#NULL is specified it returns parsed texture information")
 	)
 
 	bgfx_texture_handle_t(
@@ -1402,7 +1402,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		nullable..const..bgfx_memory_t_p.IN(
 			"_mem",
 			"""
-			texture data. If {@code _mem} is non-$NULL, created texture will be immutable. When {@code _numLayers} is more than 1, expected memory layout is
+			texture data. If {@code _mem} is non-#NULL, created texture will be immutable. When {@code _numLayers} is more than 1, expected memory layout is
 			texture and all mips together for each array element.
 			"""
 		)
@@ -1429,7 +1429,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		bool.IN("_hasMips", "indicates that texture contains full mip-map chain"),
 		bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
 		uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
-		nullable..const..bgfx_memory_t_p.IN("_mem", "texture data. If {@code _mem} is non-$NULL, created texture will be immutable.")
+		nullable..const..bgfx_memory_t_p.IN("_mem", "texture data. If {@code _mem} is non-#NULL, created texture will be immutable.")
 	)
 
 	bgfx_texture_handle_t(
@@ -1444,7 +1444,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 		nullable..const..bgfx_memory_t_p.IN(
 			"_mem",
 			"""
-			texture data. If {@code _mem} is non-$NULL, created texture will be immutable. When {@code _numLayers} is more than 1, expected memory layout is
+			texture data. If {@code _mem} is non-#NULL, created texture will be immutable. When {@code _numLayers} is more than 1, expected memory layout is
 			cubemap texture and all mips together for each array element.
 			"""
 		)
@@ -1847,7 +1847,7 @@ val BGFX = "BGFX".nativeClass(packageName = BGFX_PACKAGE, prefix = "BGFX", prefi
 
 		MapToInt..uint8_t.IN("_id", "view id"),
 		MapToInt..uint8_t.IN("_num", "number of views to remap"),
-		Check("_num")..nullable..const..void_p.IN("_order", "view remap id table. Passing $NULL will reset view ids to default state")
+		Check("_num")..nullable..const..void_p.IN("_order", "view remap id table. Passing #NULL will reset view ids to default state")
 	)
 
 	void(

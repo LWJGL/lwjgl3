@@ -418,7 +418,7 @@ val realloc = "realloc".callback(
 	"Will be called when an allocation is requested.",
 
 	bgfx_allocator_interface_t_p.IN("_this", "the allocator interface"),
-	nullable..opaque_p.IN("_ptr", "the previously allocated memory or $NULL"),
+	nullable..opaque_p.IN("_ptr", "the previously allocated memory or #NULL"),
 	size_t.IN("_size", "the number of bytes to allocate"),
 	size_t.IN("_align", "the allocation alignment, in bytes"),
 	charASCII_p.IN("_file", "file path where allocation was generated"),

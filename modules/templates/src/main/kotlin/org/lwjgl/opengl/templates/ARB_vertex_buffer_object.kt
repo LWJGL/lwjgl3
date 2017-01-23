@@ -176,7 +176,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
 			PointerMapping.DATA_DOUBLE
-		)..const..void_p.IN("data", "a pointer to data that will be copied into the data store for initialization, or $NULL if no data is to be copied"),
+		)..const..void_p.IN("data", "a pointer to data that will be copied into the data store for initialization, or #NULL if no data is to be copied"),
 		GLenum.IN("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
 	)
 

@@ -107,10 +107,10 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		Provides diagnostic information corresponding to problems with calls to #dlopen(), #dlsym(), and #dlclose() in the same thread.
 
 		When there's a problem to report, this function returns a pointer to a null-terminated string describing the problem. Otherwise, this function returns
-		$NULL.
+		#NULL.
 
 		Each call to {@code dlerror} resets its diagnostic buffer. If a program needs to keep a record of past error messages, it must store them itself.
-		Subsequent calls to {@code dlerror} in the same thread with no calls to #dlopen(), #dlsym(), or #dlclose(), return $NULL.
+		Subsequent calls to {@code dlerror} in the same thread with no calls to #dlopen(), #dlsym(), or #dlclose(), return #NULL.
 		"""
 	)
 

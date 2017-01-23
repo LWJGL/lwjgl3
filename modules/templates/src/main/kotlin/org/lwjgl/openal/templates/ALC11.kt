@@ -38,7 +38,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 		"""
 		Allows the application to connect to a capture device.
 
-		The {@code deviceName} argument is a null terminated string that requests a certain device or device configuration. If $NULL is specified, the implementation
+		The {@code deviceName} argument is a null terminated string that requests a certain device or device configuration. If #NULL is specified, the implementation
 		will provide an implementation specific default.
 		""",
 

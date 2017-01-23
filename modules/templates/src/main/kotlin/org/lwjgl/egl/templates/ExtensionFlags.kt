@@ -117,7 +117,7 @@ val KHR_stream_producer_aldatalocator = EXT_FLAG.nativeClassEGL("KHR_stream_prod
 		After the EGLStream is created and connected to a consumer, the OpenMAX AL MediaPlayer object is created by calling &lt;pEngine&gt;'s
 		CreateMediaPlayer() method. The &lt;pImageVideoSnk&gt; argument points to an XADataLocator_EGLStream containing the EGLStreamKHR handle of the stream.
 		The CreateMediaPlayer() method creates a MediaPlayer object and connects it as the producer of the EGLStream. (Note that the pFormat member of the
-		XADataSink structure is ignored in this case and may be $NULL.)
+		XADataSink structure is ignored in this case and may be #NULL.)
 
 		Once connected the MediaPlayer inserts image frames into the EGLStream.
 

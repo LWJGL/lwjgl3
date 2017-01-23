@@ -222,7 +222,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
 
 	par_shapes_mesh_p(
 		"clone",
-		"Makes a deep copy of a mesh. To make a brand new copy, pass $NULL to {@code target}. To avoid memory churn, pass an existing mesh to {@code target}.",
+		"Makes a deep copy of a mesh. To make a brand new copy, pass #NULL to {@code target}. To avoid memory churn, pass an existing mesh to {@code target}.",
 
 		const..par_shapes_mesh_p.IN("mesh", "the mesh to copy"),
 		nullable..par_shapes_mesh_p.INOUT("target", "the target mesh")

@@ -238,7 +238,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 			"length",
 			"""
 			the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than
-			$NULL is passed
+			#NULL is passed
 			"""
 		),
 		Check(1)..GLint_p.OUT("size", "the size of the attribute variable"),

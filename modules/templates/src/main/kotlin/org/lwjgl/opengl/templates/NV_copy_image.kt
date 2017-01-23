@@ -55,7 +55,7 @@ val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV)
 		"CopyImageSubDataNV",
 		"""
 		Behaves identically to the core function #CopyImageSubDataNV(), except that the {@code srcCtx} and {@code dstCtx} parameters specify
-		the contexts in which to look up the source and destination objects, respectively. A value of $NULL for either context indicates that the value which is
+		the contexts in which to look up the source and destination objects, respectively. A value of #NULL for either context indicates that the value which is
 		returned by GLX#glXGetCurrentContext() should be used instead. Both contexts must share the same address space.
 		""",
 

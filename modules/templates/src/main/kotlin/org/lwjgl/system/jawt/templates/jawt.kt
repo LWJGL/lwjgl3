@@ -121,7 +121,7 @@ ENABLE_WARNINGS()
 		EXPLICIT_FUNCTION_ADDRESS,
 		JAWT_DrawingSurface_p.IN("ds", "the {@link JAWTDrawingSurface} to free"),
 
-		returnDoc = "$NULL if an error has occurred."
+		returnDoc = "#NULL if an error has occurred."
 	)
 
 	void(
@@ -157,7 +157,7 @@ ENABLE_WARNINGS()
 			"must be a {@link java.awt.Component Component} (should be a {@link java.awt.Canvas Canvas} or {@link java.awt.Window Window} for native rendering)"
 		),
 
-		returnDoc = "$NULL if an error has occurred"
+		returnDoc = "#NULL if an error has occurred"
 	)
 
 	void(
@@ -189,7 +189,7 @@ ENABLE_WARNINGS()
 		"""
 		Returns a reference to a ##Component from a native platform handle. On Windows, this corresponds to an {@code HWND}; on Solaris and Linux, this is a
 		{@code Drawable}. For other platforms, see the appropriate machine-dependent header file for a description. The reference returned by this function is
-		a local reference that is only valid in this environment. This function returns a $NULL reference if no component could be found with matching platform
+		a local reference that is only valid in this environment. This function returns a #NULL reference if no component could be found with matching platform
 		information.
 		""",
 
@@ -205,7 +205,7 @@ ENABLE_WARNINGS()
 		"""
 		Creates a ##Frame placed in a native container. Container is referenced by the native platform handle. For example on Windows this corresponds to an
 		{@code HWND}. For other platforms, see the appropriate machine-dependent header file for a description. The reference returned by this function is a
-		local reference that is only valid in this environment. This function returns a $NULL reference if no frame could be created with matching platform
+		local reference that is only valid in this environment. This function returns a #NULL reference if no frame could be created with matching platform
 		information.
 		""",
 

@@ -171,7 +171,7 @@ val gdi32 = "GDI32".nativeClass(WINDOWS_PACKAGE, binding = simpleBinding("gdi32"
 			"pixelFormatDescriptor",
 			"""
 			a ##PIXELFORMATDESCRIPTOR structure whose members the function sets with pixel format data. The function stores the number of bytes copied to
-			the structure in the structure's {@code size} member. If, upon entry, {@code pixelFormatDescriptor} is $NULL, the function writes no data to the
+			the structure in the structure's {@code size} member. If, upon entry, {@code pixelFormatDescriptor} is #NULL, the function writes no data to the
 			structure. This is useful when you only want to obtain the maximum pixel format index of a device context.
 			"""
 		)

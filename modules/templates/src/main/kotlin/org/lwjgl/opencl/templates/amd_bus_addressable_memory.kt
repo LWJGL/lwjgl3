@@ -137,7 +137,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 		"""
 	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"$INVALID_OPERATION is generated if any of the pointer parameters of clEnqueueMakeBuffersResidentAMD are $NULL (and count is &gt; 0).",
+			"$INVALID_OPERATION is generated if any of the pointer parameters of clEnqueueMakeBuffersResidentAMD are #NULL (and count is &gt; 0).",
 			"""
 	        $INVALID_OPERATION is generated if any of the mem_objects passed to clEnqueueMakeBuffersResidentAMD was not a valid cl_mem object created with
 	        #MEM_BUS_ADDRESSABLE_AMD flag.

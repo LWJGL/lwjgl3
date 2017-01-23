@@ -248,7 +248,7 @@ val CGL = "CGL".nativeClass(
 
 	CGLContextObj(
 		"GetCurrentContext",
-		"Returns the current rendering context. If there is none, returns $NULL."
+		"Returns the current rendering context. If there is none, returns #NULL."
 	)
 
 	CGLError(
@@ -266,7 +266,7 @@ val CGL = "CGL".nativeClass(
 
 		CGLContextObj.IN(
 			"context",
-			"the rendering context to set as the current rendering context. Pass $NULL to release the current rendering context without assigning a new one."
+			"the rendering context to set as the current rendering context. Pass #NULL to release the current rendering context without assigning a new one."
 		)
 	)
 
@@ -303,12 +303,12 @@ val CGL = "CGL".nativeClass(
 			"""
 			the memory address of a pixel format object. On return, points to a new pixel format object that contains pixel format information and a list of
 			virtual screens. If there are no pixel formats or virtual screens that satisfy the constraints of the buffer and renderer attributes, the value of
-			pix is set to $NULL.
+			pix is set to #NULL.
 			"""
 		),
 		Check(1)..GLint_p.OUT(
 			"npix",
-			"on return, points to the number of virtual screens referenced by pix. If pix is $NULL, the value of {@code npix} is set to 0."
+			"on return, points to the number of virtual screens referenced by pix. If pix is #NULL, the value of {@code npix} is set to 0."
 		)
 	)
 
@@ -386,7 +386,7 @@ val CGL = "CGL".nativeClass(
 			"""
 			the memory address of a renderer information object. On return, points to a renderer information object that describes all renderers that are able
 			to drive the displays specified by the {@code display_mask} parameter. If {@code display_mask} does not specify any displays, the value of
-			{@code rend} is set to $NULL. You must call #DestroyRendererInfo() when you no longer need this object.
+			{@code rend} is set to #NULL. You must call #DestroyRendererInfo() when you no longer need this object.
 			"""
 		),
 		Check(1)..GLint_p.OUT(
@@ -441,14 +441,14 @@ val CGL = "CGL".nativeClass(
 			"""
 			the rendering context with which to share the OpenGL object state — including texture objects, programs and shader display lists, vertex array
 			objects, vertex buffer objects, pixel buffer objects, and frame buffer objects — and the object state associated which each of these object types.
-			Pass $NULL to indicate that no sharing is to take place.
+			Pass #NULL to indicate that no sharing is to take place.
 			"""
 		),
 		Check(1)..CGLContextObj_p.OUT(
 			"ctx",
 			"""
 			the memory address of a context object. On return, points to a new context object with the buffers and attributes specified by the {@code pix}
-			parameter. If the context can not be created as specified, the value of {@code ctx} is set to $NULL.
+			parameter. If the context can not be created as specified, the value of {@code ctx} is set to #NULL.
 			"""
 		)
 	)
@@ -504,7 +504,7 @@ val CGL = "CGL".nativeClass(
 		Each call to CGLReleaseContext decreases the retain count by 1.
 
 		When the retain count reaches 0, all resources associated with the rendering context are freed. If the rendering context that you pass is the current
-		rendering context and it is freed, the current context is set to $NULL and there is no current rendering context after the function executes. After the
+		rendering context and it is freed, the current context is set to #NULL and there is no current rendering context after the function executes. After the
 		context is freed, you must make sure you do not use the destroyed rendering context. This includes using CGL macros in which the rendering context is
 		explicitly passed to OpenGL.
 		""",
@@ -760,7 +760,7 @@ val CGL = "CGL".nativeClass(
 			"baseaddr",
 			"""
 			on return, points to the base address of the offscreen buffer. If the context is not attached to an offscreen drawable object, the value of
-			{@code baseaddr} is set to $NULL.
+			{@code baseaddr} is set to #NULL.
 			"""
 		)
 	)

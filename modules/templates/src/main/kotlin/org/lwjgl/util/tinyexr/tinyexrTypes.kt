@@ -108,8 +108,8 @@ val EXRHeader_p = struct(TINYEXR_PACKAGE, "EXRHeader") {
 }*/
 
 val EXRImage_p = struct(TINYEXR_PACKAGE, "EXRImage") {
-	EXRTile_p.buffer("tiles", "tiled pixel data. The application must reconstruct image from tiles manually. $NULL if scanline format.")
-	nullable..unsigned_char_p.p.member("images", "{@code image[channels][pixels]}. $NULL if tiled format.")
+	EXRTile_p.buffer("tiles", "tiled pixel data. The application must reconstruct image from tiles manually. #NULL if scanline format.")
+	nullable..unsigned_char_p.p.member("images", "{@code image[channels][pixels]}. #NULL if tiled format.")
 	int.member("width", "")
 	int.member("height", "")
 	AutoSize("images")..int.member("num_channels", "")

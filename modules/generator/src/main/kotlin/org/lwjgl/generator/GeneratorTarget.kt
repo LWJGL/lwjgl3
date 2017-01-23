@@ -229,7 +229,11 @@ abstract class GeneratorTarget(
 		if (linkMethod[0] == '\\') {
 			match.value.replace("\\#", "#")
 		} else {
-			var (className, _, classElement) = match.destructured
+			var className = match.groupValues[1]
+			var classElement = match.groupValues[3]
+
+			if (classElement == "NULL")
+				return@replace "{@code NULL}"
 
 			val linkType = if (classElement.endsWith(')')) LinkType.METHOD else LinkType.FIELD
 			var prefix = if (linkType === LinkType.FIELD) prefixConstant else prefixMethod

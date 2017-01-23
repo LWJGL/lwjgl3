@@ -28,7 +28,7 @@ val KHR_debug = "KHRDebug".nativeClassEGL("KHR_debug", postfix = KHR) {
 		To control the volume of debug output, types of messages can be enabled or disabled. The mechanism is controlled by attributes passed to EGL. The state
 		of the message type control can be queried.
 
-		Debug output can be enabled and disabled by changing the callback function. $NULL will disable the feature while a valid function pointer will enable
+		Debug output can be enabled and disabled by changing the callback function. #NULL will disable the feature while a valid function pointer will enable
 		it.
 
 		Finally, this extension defines a mechanism for EGL applications to label their objects (contexts, surfaces, syncs, etc.) with a pointer to an

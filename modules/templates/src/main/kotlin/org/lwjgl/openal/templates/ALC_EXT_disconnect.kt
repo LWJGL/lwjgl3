@@ -39,7 +39,7 @@ val ALC_EXT_disconnect = "EXTDisconnect".nativeClassALC("EXT_disconnect") {
 		that are in the #PAUSED or #INITIAL state do not change on disconnect, but will follow this behaviour if the application later tries to promote them to
 		the #PLAYING state.
 
-		Zombie devices may not have new contexts created on them; #CreateContext() will fail, returning a $NULL pointer, if the specified device has been
+		Zombie devices may not have new contexts created on them; #CreateContext() will fail, returning a #NULL pointer, if the specified device has been
 		disconnected.
 
 		The application may determine if a device has been disconnected by using the #CONNECTED token with ALC10#alcGetIntegerv(). When a device has been

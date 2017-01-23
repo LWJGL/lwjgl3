@@ -288,7 +288,7 @@ val VRApplications = "VRApplications".nativeClass(
 		"LaunchInternalProcess",
 		"""
 		Starts a subprocess within the calling application. This suppresses all application transition UI and automatically identifies the new executable as
-		part of the same application. On success the calling process should exit immediately. If working directory is $NULL or "" the directory portion of the
+		part of the same application. On success the calling process should exit immediately. If working directory is #NULL or "" the directory portion of the
 		binary path will be the working directory.
 		""",
 

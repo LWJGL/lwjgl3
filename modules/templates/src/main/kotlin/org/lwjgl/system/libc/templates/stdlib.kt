@@ -34,7 +34,7 @@ val stdlib = "LibCStdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		"malloc",
 		"""
 		Allocates {@code size} bytes and returns a pointer to the allocated memory. The memory is not initialized. If {@code size} is 0, then malloc() returns
-		either $NULL, or a unique pointer value that can later be successfully passed to #free().
+		either #NULL, or a unique pointer value that can later be successfully passed to #free().
 		""",
 
 		AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
@@ -44,7 +44,7 @@ val stdlib = "LibCStdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		"calloc",
 		"""
 		Allocates memory for an array of {@code nmemb} elements of {@code size} bytes each and returns a pointer to the allocated memory. The memory is set to
-		zero. If {@code nmemb} or {@code size} is 0, then calloc() returns either $NULL, or a unique pointer value that can later be successfully passed to
+		zero. If {@code nmemb} or {@code size} is 0, then calloc() returns either #NULL, or a unique pointer value that can later be successfully passed to
 		#free().
 		""",
 
@@ -57,8 +57,8 @@ val stdlib = "LibCStdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		"""
 		Changes the size of the memory block pointed to by {@code ptr} to {@code size} bytes  The contents will be unchanged in the range from the start of the
 		region up to the minimum of the old and new sizes. If the new size is larger than the old size, the added memory will not be initialized. If
-		{@code ptr} is $NULL, then the call is equivalent to {@code malloc(size)}, for all values of {@code size}; if {@code size} is equal to zero, and
-		{@code ptr} is not $NULL, then the call is equivalent to {@code free(ptr)}. Unless {@code ptr} is $NULL, it must have been returned by an earlier call
+		{@code ptr} is #NULL, then the call is equivalent to {@code malloc(size)}, for all values of {@code size}; if {@code size} is equal to zero, and
+		{@code ptr} is not #NULL, then the call is equivalent to {@code free(ptr)}. Unless {@code ptr} is #NULL, it must have been returned by an earlier call
 		to #malloc(), #calloc() or #realloc(). If the area pointed to was moved, a {@code free(ptr)} is done.
 		""",
 
@@ -70,7 +70,7 @@ val stdlib = "LibCStdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		"free",
 		"""
 		Frees the memory space pointed to by {@code ptr}, which must have been returned by a previous call to #malloc(), #calloc(), or #realloc(). Otherwise,
-		or if {@code free(ptr)} has already been called before, undefined behavior occurs. If ptr is $NULL, no operation is performed.
+		or if {@code free(ptr)} has already been called before, undefined behavior occurs. If ptr is #NULL, no operation is performed.
 		""",
 
 		MultiTypeAll..Unsafe..nullable..void_p.IN("ptr", "the memory space to free")
@@ -93,7 +93,7 @@ val stdlib = "LibCStdlib".nativeClass(packageName = LIBC_PACKAGE) {
 		nativeCall = "\t__aligned_free(ptr);"
 	)..OffHeapOnly..void(
 		"aligned_free",
-		"Frees a block of memory that was allocated with #aligned_alloc(). If ptr is $NULL, no operation is performed.",
+		"Frees a block of memory that was allocated with #aligned_alloc(). If ptr is #NULL, no operation is performed.",
 
 		Unsafe..MultiTypeAll..nullable..void_p.IN("ptr", "the aligned block of memory to free")
 	)

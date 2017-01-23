@@ -107,7 +107,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, prefix = "GLX", prefixMethod = "glX"
 
 		returnDoc =
 		"""
-		a pointer to an {@code XVisualInfo} structure describing the visual that best matches the specified attributes. If no matching visual exists, $NULL is
+		a pointer to an {@code XVisualInfo} structure describing the visual that best matches the specified attributes. If no matching visual exists, #NULL is
 		returned.
 		"""
 	)

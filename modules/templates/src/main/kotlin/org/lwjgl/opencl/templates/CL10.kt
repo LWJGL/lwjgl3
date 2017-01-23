@@ -57,8 +57,8 @@ val ICQE = "$INVALID_COMMAND_QUEUE if {@code command_queue} is not a valid comma
 val ICE = "$INVALID_CONTEXT if {@code context} is not a valid context."
 val IEWLE =
 	"""
-	$INVALID_EVENT_WAIT_LIST if {@code event_wait_list} is $NULL and {@code num_events_in_wait_list} &gt; 0, or {@code event_wait_list} is not
-	$NULL and {@code num_events_in_wait_list} is 0, or if event objects in {@code event_wait_list} are not valid events.
+	$INVALID_EVENT_WAIT_LIST if {@code event_wait_list} is #NULL and {@code num_events_in_wait_list} &gt; 0, or {@code event_wait_list} is not
+	#NULL and {@code num_events_in_wait_list} is 0, or if event objects in {@code event_wait_list} are not valid events.
 	"""
 
 fun MSBOE(buffer: String) =
@@ -74,7 +74,7 @@ fun ESEFEIWLE(operation: String) =
 	"""
 
 val errcode_ret = "{@code errcode_ret}"
-val param_value = "a pointer to memory where the appropriate result being queried is returned. If {@code param_value} is $NULL, it is ignored."
+val param_value = "a pointer to memory where the appropriate result being queried is returned. If {@code param_value} is #NULL, it is ignored."
 
 // Arguments
 
@@ -83,7 +83,7 @@ val NEWL = AutoSize("event_wait_list")..cl_uint.IN("num_events_in_wait_list", "t
 val EWL = nullable..const..cl_event_p.IN(
 	"event_wait_list",
 	"""
-	a list of events that need to complete before this particular command can be executed. If {@code event_wait_list} is $NULL, then this particular command
+	a list of events that need to complete before this particular command can be executed. If {@code event_wait_list} is #NULL, then this particular command
 	does not wait on any event to complete. The events specified in {@code event_wait_list} act as synchronization points. The context associated with events in
 	{@code event_wait_list} and {@code command_queue} must be the same.
 	"""
@@ -93,25 +93,25 @@ val EVENT = Check(1)..nullable..cl_event_p.OUT(
 	"event",
 	"""
 	Returns an event object that identifies this particular command and can be used to query or queue a wait for this particular command to complete.
-	{@code event} can be $NULL in which case it will not be possible for the application to query the status of this command or queue a wait for this command to
-	complete. If the {@code event_wait_list} and the {@code event} arguments are not $NULL, the event argument should not refer to an element of the
+	{@code event} can be #NULL in which case it will not be possible for the application to query the status of this command or queue a wait for this command to
+	complete. If the {@code event_wait_list} and the {@code event} arguments are not #NULL, the event argument should not refer to an element of the
 	{@code event_wait_list} array.
 	"""
 )
 
 val ERROR_RET = Check(1)..nullable..cl_int_p.OUT(
 	"errcode_ret",
-	"will return an appropriate error code. If $errcode_ret is $NULL, no error code is returned."
+	"will return an appropriate error code. If $errcode_ret is #NULL, no error code is returned."
 )
 
 val PARAM_VALUE_SIZE = AutoSize("param_value")..size_t.IN(
 	"param_value_size",
-	"the size in bytes of memory pointed to by {@code param_value}. This size must be &#x2265; size of return type. If {@code param_value} is $NULL, it is ignored."
+	"the size in bytes of memory pointed to by {@code param_value}. This size must be &#x2265; size of return type. If {@code param_value} is #NULL, it is ignored."
 )
 
 val PARAM_VALUE_SIZE_RET = Check(1)..nullable..size_t_p.OUT(
 	"param_value_size_ret",
-	"the actual size in bytes of data being queried by {@code param_value}. If $NULL, it is ignored."
+	"the actual size in bytes of data being queried by {@code param_value}. If #NULL, it is ignored."
 )
 
 val CL10 = "CL10".nativeClassCL("CL10") {
@@ -553,7 +553,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		AutoSize("platforms")..cl_uint.IN(
 			"num_entries",
 			"""
-			the number of {@code cl_platform_id} entries that can be added to {@code platforms}. If {@code platforms} is not $NULL, the {@code num_entries} must
+			the number of {@code cl_platform_id} entries that can be added to {@code platforms}. If {@code platforms} is not #NULL, the {@code num_entries} must
 			be greater than zero.
 			"""
 		),
@@ -561,13 +561,13 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"platforms",
 			"""
 			returns a list of OpenCL platforms found. The {@code cl_platform_id} values returned in {@code platforms} can be used to identify a specific OpenCL
-			platform. If {@code platforms} argument is $NULL, this argument is ignored. The number of OpenCL platforms returned is the minimum of the value
+			platform. If {@code platforms} argument is #NULL, this argument is ignored. The number of OpenCL platforms returned is the minimum of the value
 			specified by {@code num_entries} or the number of OpenCL platforms available.
 			"""
 		),
 		Check(1)..nullable..cl_uint_p.OUT(
 			"num_platforms",
-			"returns the number of OpenCL platforms available. If {@code num_platforms} is $NULL, this argument is ignored."
+			"returns the number of OpenCL platforms available. If {@code num_platforms} is #NULL, this argument is ignored."
 		),
 
 		returnDoc =
@@ -575,8 +575,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"""
-			$INVALID_VALUE if {@code num_entries} is equal to zero and {@code platforms} is not $NULL or if both {@code num_platforms} and
-			{@code platforms} are $NULL.
+			$INVALID_VALUE if {@code num_entries} is equal to zero and {@code platforms} is not #NULL or if both {@code num_platforms} and
+			{@code platforms} are #NULL.
 			""",
 			OOHME
 		)}
@@ -602,7 +602,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"$INVALID_PLATFORM if {@code platform} is not a valid platform.",
 			"""
 			$INVALID_VALUE if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
-			size of return type and {@code param_value} is not a $NULL value.
+			size of return type and {@code param_value} is not a #NULL value.
 			""",
 			OOHME
 		)}
@@ -625,7 +625,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		AutoSize("devices")..cl_uint.IN(
 			"num_entries",
 			"""
-			the number of {@code cl_device_id} entries that can be added to devices. If {@code devices} is not $NULL, the {@code num_entries} must be greater
+			the number of {@code cl_device_id} entries that can be added to devices. If {@code devices} is not #NULL, the {@code num_entries} must be greater
 			than zero.
 			"""
 		),
@@ -633,13 +633,13 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"devices",
 			"""
 			returns a list of OpenCL devices found. The {@code cl_device_id} values returned in {@code devices} can be used to identify a specific OpenCL
-			device. If {@code devices} argument is $NULL, this argument is ignored. The number of OpenCL devices returned is the minimum of the value specified
+			device. If {@code devices} argument is #NULL, this argument is ignored. The number of OpenCL devices returned is the minimum of the value specified
 			by {@code num_entries} or the number of OpenCL devices whose type matches {@code device_type}.
 			"""
 		),
 		Check(1)..nullable..cl_uint_p.OUT(
 			"num_devices",
-			"returns the number of OpenCL devices available that match {@code device_type}. If {@code num_devices} is $NULL, this argument is ignored."
+			"returns the number of OpenCL devices available that match {@code device_type}. If {@code num_devices} is #NULL, this argument is ignored."
 		),
 
 		returnDoc =
@@ -648,7 +648,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		${ul(
 			"$INVALID_PLATFORM if {@code platform} is not a valid platform.",
 			"$INVALID_DEVICE_TYPE if {@code device_type} is not a valid value.",
-			"$INVALID_VALUE if {@code num_entries} is equal to zero and {@code devices} is not $NULL or if both {@code num_devices} and {@code devices} are $NULL.",
+			"$INVALID_VALUE if {@code num_entries} is equal to zero and {@code devices} is not #NULL or if both {@code num_devices} and {@code devices} are #NULL.",
 			"#DEVICE_NOT_FOUND if no OpenCL devices that matched {@code device_type} were found.",
 			OORE,
 			OOHME
@@ -682,7 +682,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"$INVALID_DEVICE if {@code device} is not valid.",
 			"""
 			$INVALID_VALUE if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
-			size of return type and {@code param_value} is not a $NULL value or if {@code param_name} is a value that is available as an extension and the
+			size of return type and {@code param_value} is not a #NULL value or if {@code param_name} is a value that is available as an extension and the
 			corresponding extension is not supported by the device.
 			""",
 			OORE,
@@ -718,28 +718,28 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			information on errors during context creation as well as errors that occur at runtime in this context. This callback function may be called
 			asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 
-			If {@code pfn_notify} is $NULL, no callback function is registered.
+			If {@code pfn_notify} is #NULL, no callback function is registered.
 			"""
 		),
-		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 		ERROR_RET,
 
 		returnDoc =
 		"""
-		a valid non-zero context and $errcode_ret is set to $SUCCESS if the context is created successfully. Otherwise, it returns a $NULL value with the
+		a valid non-zero context and $errcode_ret is set to $SUCCESS if the context is created successfully. Otherwise, it returns a #NULL value with the
 		following error values returned in $errcode_ret:
 		${ul(
 			"""
-			$INVALID_PLATFORM if {@code properties} is $NULL and no platform could be selected or if platform value specified in properties is not a
+			$INVALID_PLATFORM if {@code properties} is #NULL and no platform could be selected or if platform value specified in properties is not a
 			valid platform.
 			""",
 			"""
 			$INVALID_PROPERTY if context property name in {@code properties} is not a supported property name, if the value specified for a
 			supported property name is not valid, or if the same property name is specified more than once.
 			""",
-			"$INVALID_VALUE if {@code devices} is $NULL.",
+			"$INVALID_VALUE if {@code devices} is #NULL.",
 			"$INVALID_VALUE if {@code num_devices} is equal to zero.",
-			"$INVALID_VALUE if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
+			"$INVALID_VALUE if {@code pfn_notify} is #NULL but {@code user_data} is not #NULL.",
 			"$INVALID_DEVICE if {@code devices} contains an invalid device.",
 			"#DEVICE_NOT_AVAILABLE if a device in {@code devices} is currently not available even though the device was returned by #GetDeviceIDs().",
 			OORE,
@@ -761,7 +761,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		),
 		cl_device_type.IN("device_type", "a bit-field that identifies the type of device", DeviceTypes),
 		nullable..cl_context_callback.IN("pfn_notify", "a callback function that can be registered by the application"),
-		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 		ERROR_RET
 	)
 
@@ -827,7 +827,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			ICE,
 			"""
 			$INVALID_VALUE if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
-			size of return type and {@code param_value} is not a $NULL value.
+			size of return type and {@code param_value} is not a #NULL value.
 			""",
 			OORE,
 			OOHME
@@ -861,7 +861,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		a valid non-zero command-queue and $errcode_ret is set to $SUCCESS if the command-queue is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero command-queue and $errcode_ret is set to $SUCCESS if the command-queue is created successfully. Otherwise, it returns a #NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
@@ -938,7 +938,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			ICQE,
 			"""
 			$INVALID_VALUE if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
-			size of return type and {@code param_value} is not a $NULL value.
+			size of return type and {@code param_value} is not a #NULL value.
 			""",
 			OORE,
 			OOHME
@@ -971,7 +971,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		a valid non-zero buffer object and $errcode_ret is set to $SUCCESS if the buffer object is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero buffer object and $errcode_ret is set to $SUCCESS if the buffer object is created successfully. Otherwise, it returns a #NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
@@ -981,8 +981,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			#DEVICE_MAX_MEM_ALLOC_SIZE value all devices in context.
 			""",
 			"""
-			$INVALID_HOST_PTR if {@code host_ptr} is $NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in flags or if
-			{@code host_ptr} is not $NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
+			$INVALID_HOST_PTR if {@code host_ptr} is #NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in flags or if
+			{@code host_ptr} is not #NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
 			""",
 			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for buffer object.",
 			OORE,
@@ -1048,7 +1048,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			""",
 			"$INVALID_MEM_OBJECT if {@code buffer} is not a valid buffer object.",
 			"""
-			$INVALID_VALUE if the region being read specified by {@code (offset, size)} is out of bounds or if {@code ptr} is a $NULL value or if
+			$INVALID_VALUE if the region being read specified by {@code (offset, size)} is out of bounds or if {@code ptr} is a #NULL value or if
 			{@code size} is 0.
 			""",
 			IEWLE,
@@ -1117,7 +1117,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			""",
 			"$INVALID_MEM_OBJECT if {@code buffer} is not a valid buffer object.",
 			"""
-			$INVALID_VALUE if the region being written specified by {@code (offset, size)} is out of bounds or if {@code ptr} is a $NULL value or if
+			$INVALID_VALUE if the region being written specified by {@code (offset, size)} is out of bounds or if {@code ptr} is a #NULL value or if
 			{@code size} is 0.
 			""",
 			IEWLE,
@@ -1232,7 +1232,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		a pointer to the mapped region. The $errcode_ret is set to $SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
+		a pointer to the mapped region. The $errcode_ret is set to $SUCCESS. A #NULL pointer is returned otherwise with one of the following error values
 		returned in $errcode_ret:
 		${ul(
 			ICQE,
@@ -1276,8 +1276,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		size_t.IN(
 			"image_row_pitch",
 			"""
-			the scan-line pitch in bytes. This must be 0 if {@code host_ptr} is $NULL and can be either 0 or &#x2265; {@code image_width * size} of element in
-			bytes if {@code host_ptr} is not $NULL. If {@code host_ptr} is not $NULL and {@code image_row_pitch} = 0, {@code image_row_pitch} is calculated as
+			the scan-line pitch in bytes. This must be 0 if {@code host_ptr} is #NULL and can be either 0 or &#x2265; {@code image_width * size} of element in
+			bytes if {@code host_ptr} is not #NULL. If {@code host_ptr} is not #NULL and {@code image_row_pitch} = 0, {@code image_row_pitch} is calculated as
 			{@code image_width * size of element} in bytes. If {@code image_row_pitch} is not 0, it must be a multiple of the image element size in bytes.
 			"""
 		),
@@ -1297,20 +1297,20 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a #NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
 			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
-			"$INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
+			"$INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is #NULL.",
 			"""
 			$INVALID_IMAGE_SIZE if {@code image_width} or {@code image_height} are 0 or if they exceed values specified in
 			#DEVICE_IMAGE2D_MAX_WIDTH or #DEVICE_IMAGE2D_MAX_HEIGHT respectively for all devices in {@code context} or if values specified
 			by {@code image_row_pitch} do not follow rules described in the argument description.
 			""",
 			"""
-			$INVALID_HOST_PTR if {@code host_ptr} is $NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in flags or if
-			{@code host_ptr} is not $NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
+			$INVALID_HOST_PTR if {@code host_ptr} is #NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in flags or if
+			{@code host_ptr} is not #NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
 			""",
 			"#IMAGE_FORMAT_NOT_SUPPORTED if the {@code image_format} is not supported.",
 			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for image object.",
@@ -1337,16 +1337,16 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		size_t.IN(
 			"image_row_pitch",
 			"""
-			the scan-line pitch in bytes. This must be 0 if {@code host_ptr} is $NULL and can be either 0 or &#x2265; {@code image_width * size} of element in
-			bytes if {@code host_ptr} is not $NULL. If {@code host_ptr} is not $NULL and {@code image_row_pitch} = 0, {@code image_row_pitch} is calculated as
+			the scan-line pitch in bytes. This must be 0 if {@code host_ptr} is #NULL and can be either 0 or &#x2265; {@code image_width * size} of element in
+			bytes if {@code host_ptr} is not #NULL. If {@code host_ptr} is not #NULL and {@code image_row_pitch} = 0, {@code image_row_pitch} is calculated as
 			{@code image_width * size of element} in bytes. If {@code image_row_pitch} is not 0, it must be a multiple of the image element size in bytes.
 			"""
 		),
 		size_t.IN(
 			"image_slice_pitch",
 			"""
-			the size in bytes of each 2D slice in the 3D image. This must be 0 if {@code host_ptr} is $NULL and can be either 0 or &#x2265;
-			{@code image_row_pitch * image_height} if {@code host_ptr} is not $NULL. If {@code host_ptr} is not $NULL and {@code image_slice_pitch = 0},
+			the size in bytes of each 2D slice in the 3D image. This must be 0 if {@code host_ptr} is #NULL and can be either 0 or &#x2265;
+			{@code image_row_pitch * image_height} if {@code host_ptr} is not #NULL. If {@code host_ptr} is not #NULL and {@code image_slice_pitch = 0},
 			{@code image_slice_pitch} is calculated as {@code image_row_pitch * image_height}. If {@code image_slice_pitch} is not 0, it must be a multiple of
 			the {@code image_row_pitch}.
 			"""
@@ -1368,12 +1368,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a #NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
 			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
-			"$INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
+			"$INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is #NULL.",
 			"""
 			$INVALID_IMAGE_SIZE if {@code image_width}, {@code image_height} are 0 or if {@code image_depth} &#x2264; 1 or if they exceed values
 			specified in #DEVICE_IMAGE3D_MAX_WIDTH, #DEVICE_IMAGE3D_MAX_HEIGHT or #DEVICE_IMAGE3D_MAX_DEPTH respectively for
@@ -1381,8 +1381,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			argument descriptions.
 			""",
 			"""
-			$INVALID_HOST_PTR if {@code host_ptr} is $NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in flags or if
-			{@code host_ptr} is not $NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
+			$INVALID_HOST_PTR if {@code host_ptr} is #NULL and #MEM_USE_HOST_PTR or #MEM_COPY_HOST_PTR are set in flags or if
+			{@code host_ptr} is not #NULL but #MEM_COPY_HOST_PTR or #MEM_USE_HOST_PTR are not set in flags.
 			""",
 			"#IMAGE_FORMAT_NOT_SUPPORTED if the {@code image_format} is not supported.",
 			"#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for image object.",
@@ -1421,13 +1421,13 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"image_formats",
 			"""
 			a pointer to a memory location where the list of supported image formats are returned. Each entry describes a ##CLImageFormat structure
-			supported by the OpenCL implementation. If {@code image_formats} is $NULL, it is ignored.
+			supported by the OpenCL implementation. If {@code image_formats} is #NULL, it is ignored.
 			"""
 		),
 		Check(1)..nullable..cl_uint_p.OUT(
 			"num_image_formats",
 			"""
-			the actual number of supported image formats for a specific context and values specified by {@code flags}. If {@code num_image_formats} is $NULL, it
+			the actual number of supported image formats for a specific context and values specified by {@code flags}. If {@code num_image_formats} is #NULL, it
 			is ignored.
 			"""
 		),
@@ -1437,7 +1437,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICE,
-			"$INVALID_VALUE if {@code flags} or {@code image_type} are not valid, or if {@code num_entries} is 0 and {@code image_formats} is not $NULL.",
+			"$INVALID_VALUE if {@code flags} or {@code image_type} are not valid, or if {@code num_entries} is 0 and {@code image_formats} is not #NULL.",
 			OORE,
 			OOHME
 		)}
@@ -1533,7 +1533,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"$INVALID_MEM_OBJECT if {@code image} is not a valid image object.",
 			"""
 			$INVALID_VALUE if the region being read specified by {@code origin} and {@code region} is out of bounds or if {@code ptr} is a
-			$NULL value.
+			#NULL value.
 			""",
 			"""
 			$INVALID_VALUE if values in {@code origin} and {@code region} do not follow rules described in the argument description for
@@ -1660,7 +1660,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"$INVALID_MEM_OBJECT if {@code image} is not a valid image object.",
 			"""
 			$INVALID_VALUE if the region being written specified by {@code origin} and {@code region} is out of bounds or if {@code ptr} is a
-			$NULL value.
+			#NULL value.
 			""",
 			"""
 			$INVALID_VALUE if values in {@code origin} and {@code region} do not follow rules described in the argument description for
@@ -2028,12 +2028,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			must be 1. If {@code image} is a 1D image array object, {@code region[2]} must be 1. The values in {@code region} cannot be 0.
 			"""
 		),
-		Check(1)..size_t_p.OUT("image_row_pitch", "the scan-line pitch in bytes for the mapped region. This must be a non-$NULL value."),
+		Check(1)..size_t_p.OUT("image_row_pitch", "the scan-line pitch in bytes for the mapped region. This must be a non-#NULL value."),
 		Check(1)..nullable..size_t_p.OUT(
 			"image_slice_pitch",
 			"""
 			returns the size in bytes of each 2D slice of a 3D image or the size of each 1D or 2D image in a 1D or 2D image array for the mapped region. For a
-			1D and 2D image, zero is returned if this argument is not $NULL. For a 3D image, 1D and 2D image array, {@code image_slice_pitch} must be a non-$NULL
+			1D and 2D image, zero is returned if this argument is not #NULL. For a 3D image, 1D and 2D image array, {@code image_slice_pitch} must be a non-#NULL
 			value.
 			"""
 		),
@@ -2044,7 +2044,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		a pointer to the mapped region. The $errcode_ret is set to $SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
+		a pointer to the mapped region. The $errcode_ret is set to $SUCCESS. A #NULL pointer is returned otherwise with one of the following error values
 		returned in $errcode_ret:
 		${ul(
 			ICQE,
@@ -2061,8 +2061,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			$INVALID_VALUE if values in {@code origin} and {@code region} do not follow rules described in the argument description for {@code origin}
 			and {@code region}.
 			""",
-			"$INVALID_VALUE if {@code image_row_pitch} is $NULL.",
-			"$INVALID_VALUE if {@code image} is a 3D image, 1D or 2D image array object and {@code image_slice_pitch} is $NULL.",
+			"$INVALID_VALUE if {@code image_row_pitch} is #NULL.",
+			"$INVALID_VALUE if {@code image} is a 3D image, 1D or 2D image array object and {@code image_slice_pitch} is #NULL.",
 			IEWLE,
 			"""
 			$INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code image} are not
@@ -2112,7 +2112,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
-			and {@code param_value} is not $NULL.
+			and {@code param_value} is not #NULL.
 			""",
 			"$INVALID_MEM_OBJECT if {@code image} is a not a valid image object.",
 			OORE,
@@ -2222,7 +2222,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
-			and {@code param_value} is not $NULL.
+			and {@code param_value} is not #NULL.
 			""",
 			"$INVALID_MEM_OBJECT if {@code memobj} is a not a valid memory object.",
 			OORE,
@@ -2249,7 +2249,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		a valid non-zero sampler object and $errcode_ret is set to $SUCCESS if the sampler object is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero sampler object and $errcode_ret is set to $SUCCESS if the sampler object is created successfully. Otherwise, it returns a #NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
@@ -2323,7 +2323,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
-			and {@code param_value} is not $NULL.
+			and {@code param_value} is not #NULL.
 			""",
 			"$INVALID_SAMPLER if {@code sampler} is a not a valid sampler object.",
 			OORE,
@@ -2350,7 +2350,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"lengths",
 			"""
 			an array with the number of chars in each string (the string length). If an element in {@code lengths} is zero, its accompanying string is
-			null-terminated. If {@code lengths} is $NULL, all strings in the {@code strings} argument are considered null-terminated. Any length value passed in
+			null-terminated. If {@code lengths} is #NULL, all strings in the {@code strings} argument are considered null-terminated. Any length value passed in
 			that is greater than zero excludes the null terminator in its count.
 			"""
 		),
@@ -2358,11 +2358,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a #NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
-			"$INVALID_VALUE if {@code count} is zero or if {@code strings} or any entry in {@code strings} is $NULL.",
+			"$INVALID_VALUE if {@code count} is zero or if {@code strings} or any entry in {@code strings} is #NULL.",
 			OORE,
 			OOHME
 		)}
@@ -2397,7 +2397,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		const..cl_device_id_p.IN(
 			"device_list",
 			"""
-			a pointer to a list of devices that are in {@code context}. device_list must be a non-$NULL value. The binaries are loaded for devices specified in
+			a pointer to a list of devices that are in {@code context}. device_list must be a non-#NULL value. The binaries are loaded for devices specified in
 			this list.
 			"""
 		),
@@ -2410,7 +2410,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"""
 			an array of pointers to program binaries to be loaded for devices specified by {@code device_list}. For each device given by {@code device_list[i]},
 			the pointer to the program binary for that device is given by {@code binaries[i]} and the length of this corresponding binary is given by
-			{@code lengths[i]}. {@code lengths[i]} cannot be zero and {@code binaries[i]} cannot be a $NULL pointer.
+			{@code lengths[i]}. {@code lengths[i]} cannot be zero and {@code binaries[i]} cannot be a #NULL pointer.
 			"""
 		),
 		nullable..cl_int_p.OUT(
@@ -2418,21 +2418,21 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"""
 			returns whether the program binary for each device specified in device_list was loaded successfully or not. It is an array of {@code num_devices}
 			entries and returns $SUCCESS in {@code binary_status[i]} if binary was successfully loaded for device specified by {@code device_list[i]};
-			otherwise returns $INVALID_VALUE if {@code lengths[i]} is zero or if {@code binaries[i]} is a $NULL value or $INVALID_BINARY in
-			{@code binary_status[i]} if program binary is not a valid binary for the specified device. If {@code binary_status} is $NULL, it is ignored.
+			otherwise returns $INVALID_VALUE if {@code lengths[i]} is zero or if {@code binaries[i]} is a #NULL value or $INVALID_BINARY in
+			{@code binary_status[i]} if program binary is not a valid binary for the specified device. If {@code binary_status} is #NULL, it is ignored.
 			"""
 		),
 		ERROR_RET,
 
 		returnDoc =
 		"""
-		a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
+		a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a #NULL
 		value with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
-			"$INVALID_VALUE if {@code device_list} is $NULL or {@code num_devices} is zero.",
+			"$INVALID_VALUE if {@code device_list} is #NULL or {@code num_devices} is zero.",
 			"$INVALID_DEVICE if OpenCL devices listed in {@code device_list} are not in the list of devices associated with {@code context}.",
-			"$INVALID_VALUE if {@code lengths} or {@code binaries} are $NULL or if any entry in {@code lengths[i]} is zero or {@code binaries[i]} is $NULL.",
+			"$INVALID_VALUE if {@code lengths} or {@code binaries} are #NULL or if any entry in {@code lengths[i]} is zero or {@code binaries[i]} is #NULL.",
 			"$INVALID_BINARY if an invalid program binary was encountered for any device. {@code binary_status} will return specific status for each device.",
 			OORE,
 			OOHME
@@ -2494,8 +2494,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		SingleValue("device")..nullable..const..cl_device_id_p.IN(
 			"device_list",
 			"""
-			a pointer to a list of devices associated with {@code program}. If {@code device_list} is a $NULL value, the program executable is built for all
-			devices associated with {@code program} for which a source or binary has been loaded. If {@code device_list} is a non-$NULL value, the program
+			a pointer to a list of devices associated with {@code program}. If {@code device_list} is a #NULL value, the program executable is built for all
+			devices associated with {@code program} for which a source or binary has been loaded. If {@code device_list} is a non-#NULL value, the program
 			executable is built for devices specified in this list for which a source or binary has been loaded.
 			"""
 		),
@@ -2507,23 +2507,23 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"pfn_notify",
 			"""
 			a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
-			called when the program executable has been built (successfully or unsuccessfully). If {@code pfn_notify} is not $NULL, {@code clBuildProgram} does
+			called when the program executable has been built (successfully or unsuccessfully). If {@code pfn_notify} is not #NULL, {@code clBuildProgram} does
 			not need to wait for the build to complete and can return immediately once the build operation can begin. The build operation can begin if the
 			context, program whose sources are being compiled and linked, list of devices and build options specified are all valid and appropriate host and
-			device resources needed to perform the build are available. If {@code pfn_notify} is $NULL, {@code clBuildProgram} does not return until the build
+			device resources needed to perform the build are available. If {@code pfn_notify} is #NULL, {@code clBuildProgram} does not return until the build
 			has completed. This callback function may be called asynchronously by the OpenCL implementation. It is the application's responsibility to ensure
 			that the callback function is thread-safe.
 			"""
 		),
-		nullable..opaque_p.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..opaque_p.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 
 		returnDoc =
 		"""
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
-			"$INVALID_VALUE if {@code device_list} is $NULL and {@code num_devices} is &gt; 0, or if {@code device_list} is not $NULL and {@code num_devices} is 0.",
-			"$INVALID_VALUE if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
+			"$INVALID_VALUE if {@code device_list} is #NULL and {@code num_devices} is &gt; 0, or if {@code device_list} is not #NULL and {@code num_devices} is 0.",
+			"$INVALID_VALUE if {@code pfn_notify} is #NULL but {@code user_data} is not #NULL.",
 			"$INVALID_DEVICE if OpenCL devices listed in {@code device_list} are not in the list of devices associated with program.",
 			"""
 			$INVALID_BINARY if {@code program} is created with #CreateProgramWithBinary() and devices listed in {@code device_list} do not have a valid
@@ -2578,7 +2578,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
-			and {@code param_value} is not $NULL.
+			and {@code param_value} is not #NULL.
 			""",
 			"$INVALID_PROGRAM if {@code program} is a not a valid program object.",
 			"""
@@ -2609,7 +2609,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"$INVALID_DEVICE if {@code device} is not in the list of devices associated with program.",
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
-			and {@code param_value} is not $NULL.
+			and {@code param_value} is not #NULL.
 			""",
 			"$INVALID_PROGRAM if {@code program} is a not a valid program object.",
 			OORE,
@@ -2641,7 +2641,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		a valid non-zero kernel object and $errcode_ret is set to $SUCCESS if the kernel object is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero kernel object and $errcode_ret is set to $SUCCESS if the kernel object is created successfully. Otherwise, it returns a #NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
@@ -2651,7 +2651,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			$INVALID_KERNEL_DEFINITION if the function definition for {@code __kernel} function given by {@code kernel_name} such as the number of
 			arguments, the argument types are not the same for all devices for which the program executable has been built.
 			""",
-			"$INVALID_VALUE if {@code kernel_name} is $NULL.",
+			"$INVALID_VALUE if {@code kernel_name} is #NULL.",
 			OORE,
 			OOHME
 		)}
@@ -2672,13 +2672,13 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		nullable..cl_kernel_p.OUT(
 			"kernels",
 			"""
-			the buffer where the kernel objects for kernels in {@code program} will be returned. If {@code kernels} is $NULL, it is ignored. If {@code kernels}
-			is not $NULL, {@code num_kernels} must be greater than or equal to the number of kernels in {@code program}.
+			the buffer where the kernel objects for kernels in {@code program} will be returned. If {@code kernels} is #NULL, it is ignored. If {@code kernels}
+			is not #NULL, {@code num_kernels} must be greater than or equal to the number of kernels in {@code program}.
 			"""
 		),
 		Check(1)..nullable..cl_uint_p.OUT(
 			"num_kernels_ret",
-			"the number of kernels in {@code program}. If {@code num_kernels_ret} is $NULL, it is ignored."
+			"the number of kernels in {@code program}. If {@code num_kernels_ret} is #NULL, it is ignored."
 		),
 
 		returnDoc =
@@ -2687,7 +2687,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		${ul(
 			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
 			"$INVALID_PROGRAM_EXECUTABLE if there is no successfully built executable for any device in {@code program}.",
-			"$INVALID_VALUE if {@code kernels} is not $NULL and {@code num_kernels} is less than the number of kernels in {@code program}.",
+			"$INVALID_VALUE if {@code kernels} is not #NULL and {@code num_kernels} is less than the number of kernels in {@code program}.",
 			OORE,
 			OOHME
 		)}
@@ -2784,13 +2784,13 @@ kernel void image_filter (
 
 			If the argument is a memory object (buffer, image or image array), the {@code arg_value} entry will be a pointer to the appropriate buffer, image or
 			image array object. The memory object must be created with the context associated with the kernel object. If the argument is a buffer object, the
-			{@code arg_value} pointer can be $NULL or point to a $NULL value in which case a $NULL value will be used as the value for the argument declared as
+			{@code arg_value} pointer can be #NULL or point to a #NULL value in which case a #NULL value will be used as the value for the argument declared as
 			a pointer to {@code __global} or {@code __constant} memory in the kernel. If the argument is declared with the {@code __local} qualifier, the
-			{@code arg_value} entry must be $NULL. If the argument is of type {@code sampler_t}, the {@code arg_value} entry must be a pointer to the sampler
+			{@code arg_value} entry must be #NULL. If the argument is of type {@code sampler_t}, the {@code arg_value} entry must be a pointer to the sampler
 			object.
 
 			If the argument is declared to be a pointer of a built-in scalar or vector type, or a user defined structure type in the global or constant address
-			space, the memory object specified as argument value must be a buffer object (or $NULL). If the argument is declared with the {@code __constant}
+			space, the memory object specified as argument value must be a buffer object (or #NULL). If the argument is declared with the {@code __constant}
 			qualifier, the size in bytes of the memory object cannot exceed #DEVICE_MAX_CONSTANT_BUFFER_SIZE and the number of arguments declared as
 			pointers to {@code __constant} memory cannot exceed #DEVICE_MAX_CONSTANT_ARGS.
 
@@ -2846,7 +2846,7 @@ kernel void image_filter (
 		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
-			and {@code param_value} is not $NULL.
+			and {@code param_value} is not #NULL.
 			""",
 			"$INVALID_KERNEL if {@code kernel} is a not a valid kernel object.",
 			OORE,
@@ -2864,7 +2864,7 @@ kernel void image_filter (
 			"device",
 			"""
 			identifies a specific device in the list of devices associated with {@code kernel}. The list of devices is the list of devices in the OpenCL context
-			that is associated with {@code kernel}. If the list of devices associated with {@code kernel} is a single device, {@code device} can be a $NULL value.
+			that is associated with {@code kernel}. If the list of devices associated with {@code kernel} is a single device, {@code device} can be a #NULL value.
 			"""
 		),
 		cl_kernel_work_group_info.IN("param_name", "the information to query", KernelWorkGroupInfo),
@@ -2877,12 +2877,12 @@ kernel void image_filter (
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"""
-			$INVALID_DEVICE if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device} is $NULL but there is
+			$INVALID_DEVICE if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device} is #NULL but there is
 			more than one device associated with {@code kernel}.
 			""",
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
-			and {@code param_value} is not $NULL.
+			and {@code param_value} is not #NULL.
 			""",
 			"""
 			$INVALID_VALUE if {@code param_name} is #KERNEL_GLOBAL_WORK_SIZE and {@code device} is not a custom device or kernel is
@@ -2912,7 +2912,7 @@ kernel void image_filter (
 			"global_work_offset",
 			"""
 			can be used to specify an array of {@code work_dim} unsigned values that describe the offset used to calculate the global ID of a work-item. If
-			{@code global_work_offset} is $NULL, the global IDs start at offset ${code("(0, 0, &hellip; 0)")}.
+			{@code global_work_offset} is #NULL, the global IDs start at offset ${code("(0, 0, &hellip; 0)")}.
 			"""
 		),
 		Check("work_dim")..nullable..const..size_t_p.IN(
@@ -2939,7 +2939,7 @@ kernel void image_filter (
 			${code("__attribute__((reqd_work_group_size(X, Y, Z)))")} qualifier. In this case the size of work group specified by {@code local_work_size} must
 			match the value specified by the {@code reqd_work_group_size} attribute qualifier.
 
-			{@code local_work_size} can also be a $NULL value in which case the OpenCL implementation will determine how to be break the global work-items into
+			{@code local_work_size} can also be a #NULL value in which case the OpenCL implementation will determine how to be break the global work-items into
 			appropriate work-group instances.
 			"""
 		),
@@ -2961,7 +2961,7 @@ kernel void image_filter (
 			"$INVALID_KERNEL_ARGS if the kernel argument values have not been specified.",
 			"$INVALID_WORK_DIMENSION if {@code work_dim} is not a valid value (i.e. a value between 1 and 3).",
 			"""
-			$INVALID_GLOBAL_WORK_SIZE if {@code global_work_size} is $NULL, or if any of the values specified in
+			$INVALID_GLOBAL_WORK_SIZE if {@code global_work_size} is #NULL, or if any of the values specified in
 			${code("global_work_size[0], &hellip; global_work_size[work_dim – 1]")} are 0 or exceed the range given by the {@code sizeof(size_t)} for the device
 			on which the kernel execution will be enqueued.
 			""",
@@ -2979,7 +2979,7 @@ kernel void image_filter (
 			${code("local_work_size[0] * &hellip; * local_work_size[work_dim – 1]")} is greater than the value specified by #DEVICE_MAX_WORK_GROUP_SIZE
 			""",
 			"""
-			$INVALID_WORK_GROUP_SIZE if {@code local_work_size} is $NULL and the ${code("__attribute__((reqd_work_group_size(X, Y, Z)))")} qualifier
+			$INVALID_WORK_GROUP_SIZE if {@code local_work_size} is #NULL and the ${code("__attribute__((reqd_work_group_size(X, Y, Z)))")} qualifier
 			is used to declare the work-group size for kernel in the program source.
 			""",
 			"""
@@ -3063,7 +3063,7 @@ kernel void image_filter (
 			"mem_list",
 			"""
 			a list of valid buffer objects, if {@code num_mem_objects} &gt; 0. The buffer object values specified in {@code mem_list} are memory object handles
-			(cl_mem values) returned by #CreateBuffer() or $NULL.
+			(cl_mem values) returned by #CreateBuffer() or #NULL.
 			"""
 		),
 		SingleValue("memobj_loc")..nullable..const..void_pp.IN(
@@ -3083,14 +3083,14 @@ kernel void image_filter (
 		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
-			"$INVALID_VALUE if {@code user_func} is $NULL.",
+			"$INVALID_VALUE if {@code user_func} is #NULL.",
 			"""
-			$INVALID_VALUE if {@code args} is a $NULL value and {@code cb_args} &gt; 0, or if {@code args} is a $NULL value and
+			$INVALID_VALUE if {@code args} is a #NULL value and {@code cb_args} &gt; 0, or if {@code args} is a #NULL value and
 			{@code num_mem_objects} &gt; 0.
 			""",
-			"$INVALID_VALUE if {@code args} is not $NULL and {@code cb_args} is 0.",
-			"$INVALID_VALUE if {@code num_mem_objects} &gt; 0 and {@code mem_list} or {@code args_mem_loc} are $NULL.",
-			"$INVALID_VALUE if {@code num_mem_objects} = 0 and {@code mem_list} or {@code args_mem_loc} are not $NULL.",
+			"$INVALID_VALUE if {@code args} is not #NULL and {@code cb_args} is 0.",
+			"$INVALID_VALUE if {@code num_mem_objects} &gt; 0 and {@code mem_list} or {@code args_mem_loc} are #NULL.",
+			"$INVALID_VALUE if {@code num_mem_objects} = 0 and {@code mem_list} or {@code args_mem_loc} are not #NULL.",
 			"$INVALID_OPERATION if the device associated with {@code command_queue} cannot execute the native kernel.",
 			"$INVALID_MEM_OBJECT if one or more memory objects specified in {@code mem_list} are not valid or are not buffer objects.",
 			"""
@@ -3122,7 +3122,7 @@ kernel void image_filter (
 		"""
 		$SUCCESS if the execution status of all events in event_list is #COMPLETE. Otherwise, it returns one of the following errors:
 		${ul(
-			"$INVALID_VALUE if {@code num_events} is zero or {@code event_list} is $NULL.",
+			"$INVALID_VALUE if {@code num_events} is zero or {@code event_list} is #NULL.",
 			"$INVALID_CONTEXT if events specified in {@code event_list} do not belong to the same context.",
 			"$INVALID_EVENT if event objects specified in {@code event_list} are not valid event objects.",
 			"#EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST if the execution status of any of the events in {@code event_list} is a negative integer value.",
@@ -3154,7 +3154,7 @@ kernel void image_filter (
 		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
-			and {@code param_value} is not $NULL.
+			and {@code param_value} is not #NULL.
 			""",
 			"$INVALID_VALUE if information to query given in {@code param_name} cannot be queried for event.",
 			"$INVALID_EVENT if {@code event} is a not a valid event object.",
@@ -3227,7 +3227,7 @@ kernel void image_filter (
 		$SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
-			"$INVALID_VALUE if {@code event} is a $NULL value.",
+			"$INVALID_VALUE if {@code event} is a #NULL value.",
 			OORE,
 			OOHME
 		)}
@@ -3268,7 +3268,7 @@ kernel void image_filter (
 		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if the context associated with {@code command_queue} and events in {@code event_list} are not the same.",
-			"$INVALID_VALUE if {@code num_events} is zero or {@code event_list} is $NULL.",
+			"$INVALID_VALUE if {@code num_events} is zero or {@code event_list} is #NULL.",
 			"$INVALID_EVENT if event objects specified in {@code event_list} are not valid events.",
 			OORE,
 			OOHME
@@ -3296,7 +3296,7 @@ kernel void image_filter (
 			""",
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
-			and {@code param_value} is not $NULL.
+			and {@code param_value} is not #NULL.
 			""",
 			"$INVALID_EVENT if {@code event} is a not a valid event object.",
 			OORE,
@@ -3350,8 +3350,8 @@ kernel void image_filter (
 		"GetExtensionFunctionAddress",
 		"""
 		Returns the address of the extension function named by {@code funcname}. The pointer returned should be cast to a function pointer type matching the
-		extension function's definition defined in the appropriate extension specification and header file. A return value of $NULL indicates that the specified
-		function does not exist for the implementation. A non-$NULL return value for {@code clGetExtensionFunctionAddress} does not guarantee that an extension
+		extension function's definition defined in the appropriate extension specification and header file. A return value of #NULL indicates that the specified
+		function does not exist for the implementation. A non-#NULL return value for {@code clGetExtensionFunctionAddress} does not guarantee that an extension
 		function is actually supported. The application must also make a corresponding query using ${code("clGetPlatformInfo(platform, CL_PLATFORM_EXTENSIONS, &hellip; )")}
 		or ${code("clGetDeviceInfo(device, CL_DEVICE_EXTENSIONS, &hellip; )")} to determine if an extension is supported by the OpenCL implementation.
 

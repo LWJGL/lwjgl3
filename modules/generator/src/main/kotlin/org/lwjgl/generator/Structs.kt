@@ -820,7 +820,7 @@ $indentation}"""
 				if (Binding.CHECKS && validations.any()) {
 					println(
 						"""	/**
-	 * Validates pointer members that should not be $NULL.
+	 * Validates pointer members that should not be {@code NULL}.
 	 *
 	 * @param $STRUCT the struct to validate
 	 */

@@ -476,7 +476,7 @@ val X11 = "X11".nativeClass(LINUX_PACKAGE, binding = simpleBinding("X11")) {
 			"display_name",
 			"""
 			the hardware display name, which determines the display and communications domain to be used. On a POSIX-conformant system, if the
-			{@code display_name} is $NULL, it defaults to the value of the DISPLAY environment variable.
+			{@code display_name} is #NULL, it defaults to the value of the DISPLAY environment variable.
 			"""
 		)
 	)

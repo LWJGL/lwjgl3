@@ -9,7 +9,7 @@ import org.lwjgl.system.macosx.*
 
 val ALLOCATOR = nullable..CFAllocatorRef.IN(
 	"allocator",
-	"the allocator to use to allocate memory for the new object. Pass $NULL or {@code kCFAllocatorDefault} to use the current default allocator."
+	"the allocator to use to allocate memory for the new object. Pass #NULL or {@code kCFAllocatorDefault} to use the current default allocator."
 )
 
 val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
@@ -29,7 +29,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"FALSE".."0"
 	)
 
-	macro..CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for $NULL, if you'd rather use a named constant.")
+	macro..CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for #NULL, if you'd rather use a named constant.")
 	macro..CFAllocatorRef("kCFAllocatorSystemDefault", "Default system allocator; you rarely need to use this.")
 	macro..CFAllocatorRef(
 		"kCFAllocatorMalloc",
@@ -135,7 +135,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"Creates an immutable string from a C string.",
 
 		ALLOCATOR,
-		Unsafe..const..char_p.IN("cStr", "the $NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
+		Unsafe..const..char_p.IN("cStr", "the #NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
 		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.", Encodings)
 	)
 
@@ -144,12 +144,12 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"Creates a CFString object from an external C string buffer that might serve as the backing store for the object.",
 
 		ALLOCATOR,
-		Unsafe..const..char_p.IN("cStr", "the $NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
+		Unsafe..const..char_p.IN("cStr", "the #NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
 		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.", Encodings),
 		nullable..CFAllocatorRef.IN(
 			"contentsDeallocator",
 			"""
-			the {@code CFAllocator} object to use to deallocate the external string buffer when it is no longer needed. You can pass $NULL or
+			the {@code CFAllocator} object to use to deallocate the external string buffer when it is no longer needed. You can pass #NULL or
 			{@code kCFAllocatorDefault} to request the default allocator for this purpose. If the buffer does not need to be deallocated, or if you want to
 			assume responsibility for deallocating the buffer (and not have the {@code CFString} object deallocate it), pass {@code kCFAllocatorNull}.
 			"""

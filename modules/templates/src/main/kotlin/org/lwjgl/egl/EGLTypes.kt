@@ -68,16 +68,16 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 	EGLLabelKHR.IN(
 		"threadLabel",
 		"""
-		will contain the label attached to the current thread. The {@code threadLabel} will be $NULL if not set by the application. If the message is from an
-		internal thread, the label will be $NULL.
+		will contain the label attached to the current thread. The {@code threadLabel} will be #NULL if not set by the application. If the message is from an
+		internal thread, the label will be #NULL.
 		"""
 	),
 	EGLLabelKHR.IN(
 		"objectLabel",
 		"""
-		will contain the label attached to the primary object of the message; Labels will be $NULL if not set by the application. The primary object should
+		will contain the label attached to the primary object of the message; Labels will be #NULL if not set by the application. The primary object should
 		be the object the function operates on, see table 13.2 which provides the recommended mapping between functions and their primary object. This
-		{@code objectLabel} may be $NULL even though the application labeled the object. This is because it is possible an error was raised while executing
+		{@code objectLabel} may be #NULL even though the application labeled the object. This is because it is possible an error was raised while executing
 		the command before the primary object was validated, therefore its label can not be included in the callback.
 		"""
 	),
@@ -86,7 +86,7 @@ val EGLDEBUGPROCKHR = "EGLDEBUGPROCKHR".callback(
 		"""
 		will contain a platform specific debug string message; This string should provide added information to the application developer regarding the
 		condition that generated the message. The format of a message is implementation-defined, although it should represent a concise description of the
-		event that caused the message to be generated. Message strings can be $NULL and should not be assumed otherwise.
+		event that caused the message to be generated. Message strings can be #NULL and should not be assumed otherwise.
 		"""
 	)
 ) {

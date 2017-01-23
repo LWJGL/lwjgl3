@@ -53,10 +53,10 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"dlopen",
 		"""
 		Loads the dynamic library file named by the null-terminated string {@code filename} and returns an opaque "handle" for the dynamic library. If
-		{@code filename} is $NULL, then the returned handle is for the main program.
+		{@code filename} is #NULL, then the returned handle is for the main program.
 		""",
 
-		nullable..const..charASCII_p.IN("filename", "the name of the dynamic library to open, or $NULL"),
+		nullable..const..charASCII_p.IN("filename", "the name of the dynamic library to open, or #NULL"),
 		int.IN("mode", "a bitfield", Modes, LinkMode.BITFIELD)
 	)
 
@@ -64,7 +64,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"dlerror",
 		"""
 		Returns a human readable string describing the most recent error that occurred from #dlopen(), #dlsym() or #dlclose() since
-		the last call to {@code dlerror()}. It returns $NULL if no errors have occurred since initialization or since it was last called.
+		the last call to {@code dlerror()}. It returns #NULL if no errors have occurred since initialization or since it was last called.
 		"""
 	)
 
@@ -73,7 +73,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"""
 		Takes a "handle" of a dynamic library returned by #dlopen() and the null-terminated symbol name, returning the address where that symbol is loaded
 		into memory. If the symbol is not found, in the specified library or any of the libraries that were automatically loaded by #dlopen() when that
-		library was loaded, {@code dlsym()} returns $NULL.
+		library was loaded, {@code dlsym()} returns #NULL.
 		""",
 
 		opaque_p.IN("handle", "the dynamic library handle"),

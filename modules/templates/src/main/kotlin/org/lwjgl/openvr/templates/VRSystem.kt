@@ -309,7 +309,7 @@ typedef struct HiddenAreaMesh_t
 		ETrackedDeviceProperty.IN("prop", "which property to get"),
 		Check(1)..nullable..ETrackedPropertyError.p.OUT(
 			"pError",
-			"the error returned when attempting to fetch this property. This can be $NULL if the caller doesn't care about the source of a property error."
+			"the error returned when attempting to fetch this property. This can be #NULL if the caller doesn't care about the source of a property error."
 		)
 	)
 
@@ -393,7 +393,7 @@ typedef struct HiddenAreaMesh_t
 		ETrackingUniverseOrigin.IN("eOrigin", "the tracking system to return the event's pose in", "ETrackingUniverseOrigin_\\w+"),
 		VREvent_t.p.OUT("pEvent", "an event structure to fill with the next event"),
 		Expression("VREvent.SIZEOF")..uint32_t.IN("uncbVREvent", "the size in bytes of the ##VREvent struct"),
-		TrackedDevicePose_t.p.OUT("pTrackedDevicePose", "a pose struct to fill with the returned event's pose. Must not be $NULL.")
+		TrackedDevicePose_t.p.OUT("pTrackedDevicePose", "a pose struct to fill with the returned event's pose. Must not be #NULL.")
 	)
 
 	charASCII_p(
@@ -407,7 +407,7 @@ typedef struct HiddenAreaMesh_t
 		"GetHiddenAreaMesh",
 		"""
 		Returns the hidden area mesh for the current HMD. The pixels covered by this mesh will never be seen by the user after the lens distortion is applied
-		based on visibility to the panels. If this HMD does not have a hidden area mesh, the vertex data and count will be $NULL and 0 respectively.
+		based on visibility to the panels. If this HMD does not have a hidden area mesh, the vertex data and count will be #NULL and 0 respectively.
 
 		This mesh is meant to be rendered into the stencil buffer (or into the depth buffer setting nearz) before rendering each eye's view. This will improve
 		performance by letting the GPU early-reject pixels the user will never see before running the pixel shader.

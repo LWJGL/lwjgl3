@@ -144,7 +144,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 			"length",
 			"""
 			an array with the number of charARBs in each string (the string length). Each element in this array can be set to negative one (or smaller),
-			indicating that its accompanying string is null terminated. If {@code length} is set to $NULL, all strings in the {@code string} argument are
+			indicating that its accompanying string is null terminated. If {@code length} is set to #NULL, all strings in the {@code string} argument are
 			considered null terminated.
 			"""
 		)
@@ -475,7 +475,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 			"length",
 			"""
 			the actual number of characters written by the GL into {@code infoLog} is returned in {@code length}, excluding the null termination. If
-			{@code length} is $NULL then the GL ignores this parameter.
+			{@code length} is #NULL then the GL ignores this parameter.
 			"""
 		),
 		Return(
@@ -497,7 +497,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		AutoSize("obj")..GLsizei.IN("maxCount", "the maximum number of handles the GL is allowed to write into {@code obj}"),
 		Check(1)..nullable..GLsizei_p.OUT(
 			"count",
-			"a buffer in which to return the actual number of object handles written by the GL into {@code obj}. If $NULL then the GL ignores this parameter."
+			"a buffer in which to return the actual number of object handles written by the GL into {@code obj}. If #NULL then the GL ignores this parameter."
 		),
 		GLhandleARB_p.OUT("obj", "a buffer in which to return the attached object handles")
 	)
@@ -561,7 +561,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 			"length",
 			"""
 			a buffer in which to return the actual number of characters written by the GL into {@code name}. This count excludes the null termination. If
-			{@code length} is $NULL then the GL ignores this parameter.
+			{@code length} is #NULL then the GL ignores this parameter.
 			"""
 		),
 		Check(1)..GLint_p.OUT("size", "a buffer in which to return the uniform size. The size is in units of the type returned in {@code type}."),
@@ -606,7 +606,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 			"length",
 			"""
 			a buffer in which to return the actual number of characters written by the GL into {@code source}, excluding the null termination. If
-			{@code length} is $NULL then the GL ignores this parameter.
+			{@code length} is #NULL then the GL ignores this parameter.
 			"""
 		),
 		Return(
