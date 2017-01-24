@@ -11,7 +11,96 @@ import org.lwjgl.vulkan.*
 val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfix = EXT) {
 	documentation =
 		"""
+		<dl>
+			<dt><b>Name String</b></dt>
+			<dd>VK_EXT_debug_report</dd>
+
+			<dt><b>Extension Type</b></dt>
+			<dd>Instance</dd>
+
+			<dt><b>Registered Extension Number</b></dt>
+			<dd>12</dd>
+
+			<dt><b>Last Modified Date</b></dt>
+			<dd>2016-12-08</dd>
+
+			<dt><b>Revision</b></dt>
+			<dd>4</dd>
+
+			<dt><b>IP Status</b></dt>
+			<dd>No known IP claims.</dd>
+
+			<dt><b>Dependencies</b></dt>
+			<dd><ul>
+				<li>This extension is written against version 1.0.27 of the Vulkan API.</li>
+			</ul></dd>
+
+			<dt><b>Contributors</b></dt>
+			<dd><ul>
+				<li>Courtney Goeltzenleuchter, LunarG</li>
+				<li>Dan Ginsburg, Valve</li>
+				<li>Jon Ashburn, LunarG</li>
+				<li>Mark Lobodzinski, LunarG</li>
+			</ul></dd>
+
+			<dt><b>Contacts</b></dt>
+			<dd><ul>
+				<li>Courtney Goeltzenleuchter</li>
+			</ul></dd>
+		</dl>
+
 		Due to the nature of the Vulkan interface, there is very little error information available to the developer and application. By enabling optional validation layers and using the {@code VK_EXT_debug_report} extension, developers <b>can</b> obtain much more detailed feedback on the application's use of Vulkan. This extension define a way for layers and the implementation to call back to the application for events of interest to the application.
+
+		<h5>Examples</h5>
+		{@code VK_EXT_debug_report} allows an application to register multiple callbacks with the validation layers. Some callbacks may log the information to a file, others may cause a debug break point or other application defined behavior. An application can register callbacks even when no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
+
+		To capture issues found while creating or destroying an instance an application can link a ##VkDebugReportCallbackCreateInfoEXT structure to the {@code pNext} element of the ##VkInstanceCreateInfo structure given to #CreateInstance(). This callback is only valid for the duration of the #CreateInstance() and the #DestroyInstance() call. Use #CreateDebugReportCallbackEXT() to create persistent callback objects.
+
+		Example uses: Create three callback objects. One will log errors and warnings to the debug console using Windows {@code OutputDebugString}. The second will cause the debugger to break at that callback when an error happens and the third will log warnings to stdout.
+
+		<pre><code>￿    VkResult res;
+￿    VkDebugReportCallbackEXT cb1, cb2, cb3;
+￿
+￿    VkDebugReportCallbackCreateInfoEXT callback1 = {
+￿            VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,    // sType
+￿            NULL,                                                       // pNext
+￿            VK_DEBUG_REPORT_ERROR_BIT_EXT |                             // flags
+￿            VK_DEBUG_REPORT_WARNING_BIT_EXT,
+￿            myOutputDebugString,                                        // pfnCallback
+￿            NULL                                                        // pUserData
+￿    };
+￿    res = vkCreateDebugReportCallbackEXT(instance, &callback1, &cb1);
+￿    if (res != VK_SUCCESS)
+￿       // Do error handling for VK_ERROR_OUT_OF_MEMORY 
+￿
+￿    callback.flags = VK_DEBUG_REPORT_ERROR_BIT_EXT;
+￿    callback.pfnCallback = myDebugBreak;
+￿    callback.pUserData = NULL;
+￿    res = vkCreateDebugReportCallbackEXT(instance, &callback, &cb2);
+￿    if (res != VK_SUCCESS)
+￿       // Do error handling for VK_ERROR_OUT_OF_MEMORY 
+￿
+￿    VkDebugReportCallbackCreateInfoEXT callback3 = {
+￿            VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,    // sType
+￿            NULL,                                                       // pNext
+￿            VK_DEBUG_REPORT_WARNING_BIT_EXT,                            // flags
+￿            mystdOutLogger,                                             // pfnCallback
+￿            NULL                                                        // pUserData
+￿    };
+￿    res = vkCreateDebugReportCallbackEXT(instance, &callback3, &cb3);
+￿    if (res != VK_SUCCESS)
+￿       // Do error handling for VK_ERROR_OUT_OF_MEMORY 
+￿
+￿    ...
+￿
+￿    // remove callbacks when cleaning up 
+￿    vkDestroyDebugReportCallbackEXT(instance, cb1);
+￿    vkDestroyDebugReportCallbackEXT(instance, cb2);
+￿    vkDestroyDebugReportCallbackEXT(instance, cb3);</code></pre>
+
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		In the initial release of the {@code VK_EXT_debug_report} extension, the token #STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT was used. Starting in version 2 of the extension branch, #STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.
+		</div>
 		"""
 
 	IntConstant(
@@ -244,7 +333,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>{@code object} <b>may</b> be a Vulkan object</li>
+			<li>{@code object} <b>must</b> be a Vulkan object or #NULL_HANDLE</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>

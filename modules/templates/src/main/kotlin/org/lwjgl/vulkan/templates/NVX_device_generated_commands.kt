@@ -11,6 +11,45 @@ import org.lwjgl.vulkan.*
 val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("NVX_device_generated_commands", postfix = NVX) {
 	documentation =
 		"""
+		<dl>
+			<dt><b>Name String</b></dt>
+			<dd>VK_NVX_device_generated_commands</dd>
+
+			<dt><b>Extension Type</b></dt>
+			<dd>Device extension</dd>
+
+			<dt><b>Registered Extension Number</b></dt>
+			<dd>87</dd>
+
+			<dt><b>Last Modified Date</b></dt>
+			<dd>2016-10-31</dd>
+
+			<dt><b>Revision</b></dt>
+			<dd>1</dd>
+
+			<dt><b>Dependencies</b></dt>
+			<dd><ul>
+				<li>This extension is written against version 1.0 of the Vulkan API.</li>
+			</ul></dd>
+
+			<dt><b>Contributors</b></dt>
+			<dd><ul>
+				<li>Pierre Boudier, NVIDIA</li>
+				<li>Christoph Kubisch, NVIDIA</li>
+				<li>Mathias Schott, NVIDIA</li>
+				<li>Jeff Bolz, NVIDIA</li>
+				<li>Eric Werness, NVIDIA</li>
+				<li>Detlef Roettger, NVIDIA</li>
+				<li>Daniel Koch, NVIDIA</li>
+			</ul></dd>
+
+			<dt><b>Contacts</b></dt>
+			<dd><ul>
+				<li>Pierre Boudier, NVIDIA (mailto:pboudier@nvidia.com[pboudier@nvidia.com])</li>
+				<li>Christoph Kubisch, NVIDIA (mailto:ckubisch@nvidia.com[ckubisch@nvidia.com])</li>
+			</ul></dd>
+		</dl>
+
 		This extension allows the device to generate a number of critical commands for command buffers.
 
 		When rendering a large number of objects, the device can be leveraged to implement a number of critical functions, like updating matrices, or implementing occlusion culling, frustum culling, front to back sorting... Implementing those on the device does not require any special extension, since an application is free to define its own data structure, and just process them using shaders.
@@ -23,12 +62,12 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
 		<ul>
 			<li>create its objects as in unextended Vulkan</li>
-			<li>create a VkObjectTableNVX, and register the various Vulkan objects that are needed to evaluate the input parameters.</li>
-			<li>create a VkIndirectCommandsLayoutNVX, which lists the VkIndirectCommandsTokenTypes it wants to dynamically change as atomic command sequence. This step likely involves some internal device code compilation, since the intent is for the GPU to generate the command buffer in the pipeline.</li>
+			<li>create a {@code VkObjectTableNVX}, and register the various Vulkan objects that are needed to evaluate the input parameters.</li>
+			<li>create a {@code VkIndirectCommandsLayoutNVX}, which lists the {@code VkIndirectCommandsTokenTypes} it wants to dynamically change as atomic command sequence. This step likely involves some internal device code compilation, since the intent is for the GPU to generate the command buffer in the pipeline.</li>
 			<li>fill the input buffers with the data for each of the inputs it needs. Each input is an array that will be filled with an index in the object table, instead of using CPU pointers.</li>
 			<li>set up a target secondary command buffer</li>
-			<li>reserve command buffer space via vkCmdReserveSpaceForCommandsNVX in a target command buffer at the position you want the generated commands to be executed.</li>
-			<li>call vkCmdProcessCommandsNVX to create the actual device commands for all sequences based on the array contents into a provided target command buffer.</li>
+			<li>reserve command buffer space via #CmdReserveSpaceForCommandsNVX() in a target command buffer at the position you want the generated commands to be executed.</li>
+			<li>call #CmdProcessCommandsNVX() to create the actual device commands for all sequences based on the array contents into a provided target command buffer.</li>
 			<li>execute the target command buffer like a regular secondary command buffer</li>
 		</ul>
 
@@ -43,7 +82,68 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
 		It is recommended to register a small number of objects and to use dynamic offsets whenever possible.
 
-		While the GPU can be faster than a CPU to generate the commands, it may not happen asynchronously, therefore the primary use-case is generating "less" total work (occlusion culling, classification to use specialized shaders...).
+		While the GPU can be faster than a CPU to generate the commands, it may not happen asynchronously, therefore the primary use-case is generating “less” total work (occlusion culling, classification to use specialized shaders...).
+
+		<h5>Example Code</h5>
+		TODO links to gameworks & designworks samples
+
+		<pre><code>￿  // setup secondary command buffer
+￿    vkBeginCommandBuffer(generatedCmdBuffer, &beginInfo);
+￿    ... setup its state as usual
+￿
+￿  // insert the reservation (there can only be one per command buffer)
+￿  // where the generated calls should be filled into
+￿    VkCmdReserveSpaceForCommandsInfoNVX reserveInfo = { VK_STRUCTURE_TYPE_CMD_RESERVE_SPACE_FOR_COMMANDS_INFO_NVX };
+￿    reserveInfo.objectTable = objectTable;
+￿    reserveInfo.indirectCommandsLayout = deviceGeneratedLayout;
+￿    reserveInfo.maxSequencesCount = myCount;
+￿    vkCmdReserveSpaceForCommandsNVX(generatedCmdBuffer, &reserveInfo);
+￿
+￿    vkEndCommandBuffer(generatedCmdBuffer);
+￿
+￿  // trigger the generation at some point in another primary command buffer
+￿    VkCmdProcessCommandsInfoNVX processInfo = { VK_STRUCTURE_TYPE_CMD_PROCESS_COMMANDS_INFO_NVX };
+￿    processInfo.objectTable = objectTable;
+￿    processInfo.indirectCommandsLayout = deviceGeneratedLayout;
+￿    processInfo.maxSequencesCount = myCount;
+￿    // set the target of the generation (if null we would directly execute with mainCmd)
+￿    processInfo.targetCommandBuffer = generatedCmdBuffer;
+￿    // provide input data
+￿    processInfo.indirectCommandsTokenCount = 3;
+￿    processInfo.pIndirectCommandsTokens = myTokens;
+￿
+￿  // If you modify the input buffer data referenced by VkCmdProcessCommandsInfoNVX,
+￿  // ensure you have added the appropriate barriers prior generation process.
+￿  // When regenerating the content of the same reserved space, ensure prior operations have completed
+￿
+￿    VkMemoryBarrier memoryBarrier = { VK_STRUCTURE_TYPE_MEMORY_BARRIER };
+￿    memoryBarrier.srcAccessMask = ...;
+￿    memoryBarrier.dstAccessMask = VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX;
+￿
+￿    vkCmdPipelineBarrier(mainCmd,
+￿                         // srcStageMaskVK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
+￿                         // dstStageMaskVK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX,
+￿                         // dependencyFlags0,
+￿                         // memoryBarrierCount1,
+￿                         // pMemoryBarriers&memoryBarrier,
+￿                         ...);
+￿
+￿    vkCmdProcessCommandsNVX(mainCmd, &processInfo);
+￿    ...
+￿  // execute the secondary command buffer and ensure the processing that modifies command-buffer content
+￿  // has completed
+￿
+￿    memoryBarrier.srcAccessMask = VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX;
+￿    memoryBarrier.dstAccessMask = VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
+￿
+￿    vkCmdPipelineBarrier(mainCmd,
+￿                         // srcStageMaskVK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX,
+￿                         // dstStageMaskVK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,
+￿                         // dependencyFlags0,
+￿                         // memoryBarrierCount1,
+￿                         // pMemoryBarriers&memoryBarrier,
+￿                         ...)
+￿    vkCmdExecuteCommands(mainCmd, 1, &generatedCmdBuffer);</code></pre>
 		"""
 
 	IntConstant(

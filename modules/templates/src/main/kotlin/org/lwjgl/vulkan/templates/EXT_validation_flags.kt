@@ -11,6 +11,42 @@ import org.lwjgl.vulkan.*
 val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_flags", postfix = EXT) {
 	documentation =
 		"""
+		<dl>
+			<dt><b>Name String</b></dt>
+			<dd>VK_EXT_validation_flags</dd>
+
+			<dt><b>Extension Type</b></dt>
+			<dd>Instance extension</dd>
+
+			<dt><b>Registered Extension Number</b></dt>
+			<dd>62</dd>
+
+			<dt><b>Last Modified Date</b></dt>
+			<dd>2016-09-06</dd>
+
+			<dt><b>Revision</b></dt>
+			<dd>1</dd>
+
+			<dt><b>IP Status</b></dt>
+			<dd>No known IP claims.</dd>
+
+			<dt><b>Dependencies</b></dt>
+			<dd><ul>
+				<li>This extension is written against version 1.0.25 of the Vulkan API.</li>
+			</ul></dd>
+
+			<dt><b>Contributors</b></dt>
+			<dd><ul>
+				<li>Tobin Ehlis, Google</li>
+				<li>Courtney Goeltzenleuchter, Google</li>
+			</ul></dd>
+
+			<dt><b>Contacts</b></dt>
+			<dd><ul>
+				<li>Tobin Ehlis, Google (mailto:tobine@google.com[tobine@google.com])</li>
+			</ul></dd>
+		</dl>
+
 		This extension provides the ##VkValidationFlagsEXT struct that can be included in the {@code pNext} chain at #CreateInstance() time. The new struct contains an array of {@code VkValidationCheckEXT} values that will be disabled by the validation layers.
 		"""
 

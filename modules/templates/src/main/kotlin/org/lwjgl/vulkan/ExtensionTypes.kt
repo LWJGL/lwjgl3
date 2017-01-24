@@ -34,6 +34,10 @@ val VkIndirectCommandsLayoutUsageFlagBitsNVX = "VkIndirectCommandsLayoutUsageFla
 val VkIndirectCommandsTokenTypeNVX = "VkIndirectCommandsTokenTypeNVX".enumType
 val VkObjectEntryUsageFlagBitsNVX = "VkObjectEntryUsageFlagBitsNVX".enumType
 val VkObjectEntryTypeNVX = "VkObjectEntryTypeNVX".enumType
+val VkSurfaceCounterFlagBitsEXT = "VkSurfaceCounterFlagBitsEXT".enumType
+val VkDisplayPowerStateEXT = "VkDisplayPowerStateEXT".enumType
+val VkDeviceEventTypeEXT = "VkDeviceEventTypeEXT".enumType
+val VkDisplayEventTypeEXT = "VkDisplayEventTypeEXT".enumType
 
 // Bitmask types
 val VkSurfaceTransformFlagsKHR = typedef(VkFlags, "VkSurfaceTransformFlagsKHR")
@@ -47,8 +51,10 @@ val VkWin32SurfaceCreateFlagsKHR = typedef(VkFlags, "VkWin32SurfaceCreateFlagsKH
 val VkDebugReportFlagsEXT = typedef(VkFlags, "VkDebugReportFlagsEXT")
 val VkExternalMemoryHandleTypeFlagsNV = typedef(VkFlags, "VkExternalMemoryHandleTypeFlagsNV")
 val VkExternalMemoryFeatureFlagsNV = typedef(VkFlags, "VkExternalMemoryFeatureFlagsNV")
+val VkCommandPoolTrimFlagsKHR = typedef(VkFlags, "VkCommandPoolTrimFlagsKHR")
 val VkIndirectCommandsLayoutUsageFlagsNVX = typedef(VkFlags, "VkIndirectCommandsLayoutUsageFlagsNVX")
 val VkObjectEntryUsageFlagsNVX = typedef(VkFlags, "VkObjectEntryUsageFlagsNVX")
+val VkSurfaceCounterFlagsEXT = typedef(VkFlags, "VkSurfaceCounterFlagsEXT")
 
 // Function pointer types
 val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
@@ -222,7 +228,7 @@ val VkPresentInfoKHR = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PRESENT_INFO_KHR</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}, or a pointer to a valid instance of ##VkDisplayPresentInfoKHR</li>
 			<li>If {@code waitSemaphoreCount} is not 0, and {@code pWaitSemaphores} is not {@code NULL}, {@code pWaitSemaphores} <b>must</b> be a pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
 			<li>{@code pSwapchains} <b>must</b> be a pointer to an array of {@code swapchainCount} valid {@code VkSwapchainKHR} handles</li>
 			<li>{@code pImageIndices} <b>must</b> be a pointer to an array of {@code swapchainCount} {@code uint32_t} values</li>
@@ -872,6 +878,176 @@ val VkWin32KeyedMutexAcquireReleaseInfoNV = struct(VULKAN_PACKAGE, "VkWin32Keyed
 	const..uint64_t_p.member("pReleaseKeys", "a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}.")
 }
 
+val VkPhysicalDeviceFeatures2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures2KHR") {
+	documentation =
+		"""
+		Structure describing the fine-grained features that can be supported by an implementation.
+
+		<h5>Description</h5>
+		<ul>
+			<li>{@code sType} is the type of this structure.</li>
+			<li>{@code pNext} is {@code NULL} or a pointer to an extension-specific structure.</li>
+			<li>{@code features} is a structure of type ##VkPhysicalDeviceFeatures describing the fine-grained features of the Vulkan 1.0 API.</li>
+		</ul>
+
+		The {@code pNext} chain of this structure is used to extend the structure with features defined by extensions. This structure <b>can</b> be used in #GetPhysicalDeviceFeatures2KHR() or <b>can</b> be in the {@code pNext} chain of a ##VkDeviceCreateInfo structure, in which case it controls which features are enabled in the device in lieu of {@code pEnabledFeatures}.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkPhysicalDeviceFeatures, #GetPhysicalDeviceFeatures2KHR()
+		"""
+
+	VkStructureType.member("sType", "")
+	nullable..opaque_p.member("pNext", "")
+	VkPhysicalDeviceFeatures.member("features", "")
+}
+
+val VkPhysicalDeviceProperties2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceProperties2KHR", mutable = false) {
+	documentation =
+		"""
+		Structure specifying physical device properties.
+
+		<h5>Description</h5>
+		The {@code pNext} chain of this structure is used to extend the structure with properties defined by extensions.
+
+		<h5>See Also</h5>
+		##VkPhysicalDeviceProperties, #GetPhysicalDeviceProperties2KHR()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkPhysicalDeviceProperties.member("properties", "a structure of type ##VkPhysicalDeviceProperties describing the properties of the physical device. This structure is written with the same values as if it were written by #GetPhysicalDeviceProperties().")
+}
+
+val VkFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkFormatProperties2KHR", mutable = false) {
+	documentation =
+		"""
+		Structure specifying image format properties.
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkFormatProperties.member("formatProperties", "a structure of type ##VkFormatProperties describing features supported by the requested format.")
+}
+
+val VkImageFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkImageFormatProperties2KHR", mutable = false) {
+	documentation =
+		"""
+		Structure specifying a image format properties.
+
+		<h5>Description</h5>
+		If the combination of parameters to #GetPhysicalDeviceImageFormatProperties2KHR() is not supported by the implementation for use in #CreateImage(), then all members of {@code imageFormatProperties} will be filled with zero.
+
+		<h5>See Also</h5>
+		##VkImageFormatProperties, #GetPhysicalDeviceImageFormatProperties2KHR()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkImageFormatProperties.member("imageFormatProperties", "an instance of a ##VkImageFormatProperties structure in which capabilities are returned.")
+}
+
+val VkPhysicalDeviceImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceImageFormatInfo2KHR") {
+	documentation =
+		"""
+		Structure specifying image creation parameters.
+
+		<h5>Description</h5>
+		The members of ##VkPhysicalDeviceImageFormatInfo2KHR correspond to the arguments to #GetPhysicalDeviceImageFormatProperties(), with {@code sType} and {@code pNext} added for extensibility.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
+			<li>{@code type} <b>must</b> be a valid {@code VkImageType} value</li>
+			<li>{@code tiling} <b>must</b> be a valid {@code VkImageTiling} value</li>
+			<li>{@code usage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
+			<li>{@code usage} <b>must</b> not be 0</li>
+			<li>{@code flags} <b>must</b> be a valid combination of {@code VkImageCreateFlagBits} values</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#GetPhysicalDeviceImageFormatProperties2KHR()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkFormat.member("format", "the image format, corresponding to ##VkImageCreateInfo{@code ::format}.")
+	VkImageType.member("type", "the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}.")
+	VkImageTiling.member("tiling", "the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}.")
+	VkImageUsageFlags.member("usage", "the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}.")
+	VkImageCreateFlags.member("flags", "a bitmask describing additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}.")
+}
+
+val VkQueueFamilyProperties2KHR = struct(VULKAN_PACKAGE, "VkQueueFamilyProperties2KHR", mutable = false) {
+	documentation =
+		"""
+		Structure providing information about a queue family.
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkQueueFamilyProperties.member("queueFamilyProperties", "a structure of type ##VkQueueFamilyProperties which is populated with the same values as in #GetPhysicalDeviceQueueFamilyProperties().")
+}
+
+val VkPhysicalDeviceMemoryProperties2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceMemoryProperties2KHR", mutable = false) {
+	documentation =
+		"""
+		Structure specifying physical device memory properties.
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkPhysicalDeviceMemoryProperties.member("memoryProperties", "a structure of type ##VkPhysicalDeviceMemoryProperties which is populated with the same values as in #GetPhysicalDeviceMemoryProperties().")
+}
+
+val VkSparseImageFormatProperties2KHR = struct(VULKAN_PACKAGE, "VkSparseImageFormatProperties2KHR", mutable = false) {
+	documentation =
+		"""
+		Structure specifying sparse image format properties.
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkSparseImageFormatProperties.member("properties", "a structure of type ##VkSparseImageFormatProperties which is populated with the same values as in #GetPhysicalDeviceSparseImageFormatProperties().")
+}
+
+val VkPhysicalDeviceSparseImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysicalDeviceSparseImageFormatInfo2KHR") {
+	documentation =
+		"""
+		Structure specifying sparse image format inputs.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
+			<li>{@code type} <b>must</b> be a valid {@code VkImageType} value</li>
+			<li>{@code samples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
+			<li>{@code usage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
+			<li>{@code usage} <b>must</b> not be 0</li>
+			<li>{@code tiling} <b>must</b> be a valid {@code VkImageTiling} value</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#GetPhysicalDeviceSparseImageFormatProperties2KHR()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkFormat.member("format", "the image format.")
+	VkImageType.member("type", "the dimensionality of image.")
+	VkSampleCountFlagBits.member("samples", "the number of samples per pixel as defined in {@code VkSampleCountFlagBits}.")
+	VkImageUsageFlags.member("usage", "a bitmask describing the intended usage of the image.")
+	VkImageTiling.member("tiling", "the tiling arrangement of the data elements in memory.")
+}
+
 val VkValidationFlagsEXT = struct(VULKAN_PACKAGE, "VkValidationFlagsEXT") {
 	documentation =
 		"""
@@ -1347,12 +1523,14 @@ val VkObjectTableIndexBufferEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTableInde
 			<li>{@code flags} <b>must</b> be a valid combination of {@code VkObjectEntryUsageFlagBitsNVX} values</li>
 			<li>{@code flags} <b>must</b> not be 0</li>
 			<li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+			<li>{@code indexType} <b>must</b> be a valid {@code VkIndexType} value</li>
 		</ul>
 		"""
 
 	VkObjectEntryTypeNVX.member("type", "")
 	VkObjectEntryUsageFlagsNVX.member("flags", "")
 	VkBuffer.member("buffer", "specifies the {@code VkBuffer} that can be bound as index buffer")
+	VkIndexType.member("indexType", "specifies the {@code VkIndexType} used with this index buffer")
 }
 
 val VkObjectTablePushConstantEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTablePushConstantEntryNVX") {
@@ -1380,4 +1558,144 @@ val VkObjectTablePushConstantEntryNVX = struct(VULKAN_PACKAGE, "VkObjectTablePus
 	VkObjectEntryUsageFlagsNVX.member("flags", "")
 	VkPipelineLayout.member("pipelineLayout", "")
 	VkShaderStageFlags.member("stageFlags", "")
+}
+
+val VkSurfaceCapabilities2EXT = struct(VULKAN_PACKAGE, "VkSurfaceCapabilities2EXT", mutable = false) {
+	documentation =
+		"""
+		Structure describing capabilities of a surface.
+
+		<h5>Description</h5>
+		<ul>
+			<li>{@code sType} is the type of this structure.</li>
+			<li>{@code pNext} is {@code NULL} or a pointer to an extension-specific structure.</li>
+			<li>{@code supportedSurfaceCounters} is a bitfield containing one bit set for each surface counter type supported.</li>
+		</ul>
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code supportedSurfaceCounters} <b>must</b> not include #SURFACE_COUNTER_VBLANK_EXT unless the surface queried is a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#wsi-display-surfaces">display surface</a>.</li>
+		</ul>
+
+		<h5>See Also</h5>
+		##VkExtent2D, #GetPhysicalDeviceSurfaceCapabilities2EXT()
+		"""
+
+	VkStructureType.member("sType", "")
+	nullable..opaque_p.member("pNext", "")
+	uint32_t.member("minImageCount", "")
+	uint32_t.member("maxImageCount", "")
+	VkExtent2D.member("currentExtent", "")
+	VkExtent2D.member("minImageExtent", "")
+	VkExtent2D.member("maxImageExtent", "")
+	uint32_t.member("maxImageArrayLayers", "")
+	VkSurfaceTransformFlagsKHR.member("supportedTransforms", "")
+	VkSurfaceTransformFlagBitsKHR.member("currentTransform", "")
+	VkCompositeAlphaFlagsKHR.member("supportedCompositeAlpha", "")
+	VkImageUsageFlags.member("supportedUsageFlags", "")
+	VkSurfaceCounterFlagsEXT.member("supportedSurfaceCounters", "")
+}
+
+val VkDisplayPowerInfoEXT = struct(VULKAN_PACKAGE, "VkDisplayPowerInfoEXT") {
+	documentation =
+		"""
+		Describe the power state of a display.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code powerState} <b>must</b> be a valid {@code VkDisplayPowerStateEXT} value</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#DisplayPowerControlEXT()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkDisplayPowerStateEXT.member("powerState", """the new power state of the display. Possible values are:
+<pre><code>typedef enum VkDisplayPowerStateEXT {
+￿    VK_DISPLAY_POWER_STATE_OFF_EXT = 0,
+￿    VK_DISPLAY_POWER_STATE_SUSPEND_EXT = 1,
+￿    VK_DISPLAY_POWER_STATE_ON_EXT = 2,
+} VkDisplayPowerStateEXT;</code></pre>
+
+		<ul>
+			<li>#DISPLAY_POWER_STATE_OFF_EXT means the display is powered down.</li>
+			<li>#DISPLAY_POWER_STATE_SUSPEND_EXT means the display is in a low power mode, but <b>may</b> be able to transition back to #DISPLAY_POWER_STATE_ON_EXT more quickly than if it were in #DISPLAY_POWER_STATE_OFF_EXT. This state <b>may</b> be the same as #DISPLAY_POWER_STATE_OFF_EXT.</li>
+			<li>#DISPLAY_POWER_STATE_ON_EXT is powered on.</li>
+		</ul>""")
+}
+
+val VkDeviceEventInfoEXT = struct(VULKAN_PACKAGE, "VkDeviceEventInfoEXT") {
+	documentation =
+		"""
+		Describe a device event to create.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code deviceEvent} <b>must</b> be a valid {@code VkDeviceEventTypeEXT} value</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#RegisterDeviceEventEXT()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkDeviceEventTypeEXT.member("deviceEvent", "")
+}
+
+val VkDisplayEventInfoEXT = struct(VULKAN_PACKAGE, "VkDisplayEventInfoEXT") {
+	documentation =
+		"""
+		Describe a display event to create.
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code displayEvent} <b>must</b> be a valid {@code VkDisplayEventTypeEXT} value</li>
+		</ul>
+
+		<h5>See Also</h5>
+		#RegisterDisplayEventEXT()
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkDisplayEventTypeEXT.member("displayEvent", """specifies when the fence will be signaled. Possible values are:
+<pre><code>typedef enum VkDisplayEventTypeEXT {
+￿    VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT = 0,
+} VkDisplayEventTypeEXT;</code></pre>
+
+		<ul>
+			<li>#DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT occurs when the first pixel of the next display refresh cycle leaves the display engine for the display.</li>
+		</ul>""")
+}
+
+val VkSwapchainCounterCreateInfoEXT = struct(VULKAN_PACKAGE, "VkSwapchainCounterCreateInfoEXT") {
+	documentation =
+		"""
+		Specify the surface counters desired.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>The bits in {@code surfaceCounters} <b>must</b> be supported by ##VkSwapchainCreateInfoKHR{@code ::surface}, as reported by #GetPhysicalDeviceSurfaceCapabilities2EXT().</li>
+		</ul>
+
+		<h5>Valid Usage (Implicit)</h5>
+		<ul>
+			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code surfaceCounters} <b>must</b> be a valid combination of {@code VkSurfaceCounterFlagBitsEXT} values</li>
+		</ul>
+		"""
+
+	VkStructureType.member("sType", "the type of this structure.")
+	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+	VkSurfaceCounterFlagsEXT.member("surfaceCounters", "a bitmask containing a bit set for each surface counter to enable for the swapchain.")
 }

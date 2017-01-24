@@ -12,6 +12,58 @@ import org.lwjgl.vulkan.*
 val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", postfix = KHR) {
 	documentation =
 		"""
+		<dl>
+			<dt><b>Name String</b></dt>
+			<dd>VK_KHR_xlib_surface</dd>
+
+			<dt><b>Extension Type</b></dt>
+			<dd>Instance extension</dd>
+
+			<dt><b>Registered Extension Number</b></dt>
+			<dd>5</dd>
+
+			<dt><b>Last Modified Date</b></dt>
+			<dd>2015-11-28</dd>
+
+			<dt><b>Revision</b></dt>
+			<dd>6</dd>
+
+			<dt><b>IP Status</b></dt>
+			<dd>No known IP claims.</dd>
+
+			<dt><b>Dependencies</b></dt>
+			<dd><ul>
+				<li>This extension is written against version 1.0 of the Vulkan API.</li>
+				<li>Requires VK_KHR_surface.</li>
+			</ul></dd>
+
+			<dt><b>Contributors</b></dt>
+			<dd><ul>
+				<li>Patrick Doane, Blizzard</li>
+				<li>Jason Ekstrand, Intel</li>
+				<li>Ian Elliott, LunarG</li>
+				<li>Courtney Goeltzenleuchter, LunarG</li>
+				<li>Jesse Hall, Google</li>
+				<li>James Jones, NVIDIA</li>
+				<li>Antoine Labour, Google</li>
+				<li>Jon Leech, Khronos</li>
+				<li>David Mao, AMD</li>
+				<li>Norbert Nopper, Freescale</li>
+				<li>Alon Or-bach, Samsung</li>
+				<li>Daniel Rakos, AMD</li>
+				<li>Graham Sellers, AMD</li>
+				<li>Ray Smith, ARM</li>
+				<li>Jeff Vigil, Qualcomm</li>
+				<li>Chia-I Wu, LunarG</li>
+			</ul></dd>
+
+			<dt><b>Contacts</b></dt>
+			<dd><ul>
+				<li>Jesse Hall, Google</li>
+				<li>Ian Elliott, LunarG</li>
+			</ul></dd>
+		</dl>
+
 		The {@code VK_KHR_xlib_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@code VK_KHR_surface} extension) that refers to an X11 {@code Window}, using the Xlib client-side library, as well as a query to determine support for rendering via Xlib.
 		"""
 

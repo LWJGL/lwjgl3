@@ -11,6 +11,45 @@ import org.lwjgl.vulkan.*
 val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasterization_order", postfix = AMD) {
 	documentation =
 		"""
+		<dl>
+			<dt><b>Name String</b></dt>
+			<dd>VK_AMD_rasterization_order</dd>
+
+			<dt><b>Extension Type</b></dt>
+			<dd>Device extension</dd>
+
+			<dt><b>Registered Extension Number</b></dt>
+			<dd>19</dd>
+
+			<dt><b>Last Modified Date</b></dt>
+			<dd>2016-04-25</dd>
+
+			<dt><b>Revision</b></dt>
+			<dd>1</dd>
+
+			<dt><b>IP Status</b></dt>
+			<dd>No known IP claims.</dd>
+
+			<dt><b>Dependencies</b></dt>
+			<dd><ul>
+				<li>This extension is written against version 1.0.11 of the Vulkan API.</li>
+			</ul></dd>
+
+			<dt><b>Contributors</b></dt>
+			<dd><ul>
+				<li>Matthaeus G. Chajdas, AMD</li>
+				<li>Jaakko Konttinen, AMD</li>
+				<li>Daniel Rakos, AMD</li>
+				<li>Graham Sellers, AMD</li>
+				<li>Dominik Witczak, AMD</li>
+			</ul></dd>
+
+			<dt><b>Contacts</b></dt>
+			<dd><ul>
+				<li>Daniel Rakos, AMD</li>
+			</ul></dd>
+		</dl>
+
 		This extension introduces the possibility for the application to control the order of primitive rasterization. In unextended Vulkan, the following stages are guaranteed to execute in <em>API order</em>:
 
 		<ul>
@@ -30,6 +69,9 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
 			<li>If depth testing is used with a comparison operator of #COMPARE_OP_LESS, #COMPARE_OP_LESS_OR_EQUAL, #COMPARE_OP_GREATER, or #COMPARE_OP_GREATER_OR_EQUAL, and the primitives rendered are known to not overlap in clip space.</li>
 			<li>If depth testing is not used and blending is enabled for all attachments with a commutative blend operator.</li>
 		</ul>
+
+		<h5>Examples</h5>
+		None
 		"""
 
 	IntConstant(

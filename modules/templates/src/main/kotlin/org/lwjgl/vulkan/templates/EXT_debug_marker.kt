@@ -11,7 +11,134 @@ import org.lwjgl.vulkan.*
 val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", postfix = EXT) {
 	documentation =
 		"""
+		<dl>
+			<dt><b>Name String</b></dt>
+			<dd>VK_EXT_debug_marker</dd>
+
+			<dt><b>Extension Type</b></dt>
+			<dd>Device extension</dd>
+
+			<dt><b>Registered Extension Number</b></dt>
+			<dd>23</dd>
+
+			<dt><b>Last Modified Date</b></dt>
+			<dd>2016-04-23</dd>
+
+			<dt><b>Revision</b></dt>
+			<dd>3</dd>
+
+			<dt><b>IP Status</b></dt>
+			<dd>No known IP claims.</dd>
+
+			<dt><b>Dependencies</b></dt>
+			<dd><ul>
+				<li>This extension is written against version 1.0.11 of the Vulkan API.</li>
+			</ul></dd>
+
+			<dt><b>Contributors</b></dt>
+			<dd><ul>
+				<li>Baldur Karlsson</li>
+				<li>Dan Ginsburg, Valve</li>
+				<li>Jon Ashburn, LunarG</li>
+				<li>Kyle Spagnoli, NVIDIA</li>
+			</ul></dd>
+
+			<dt><b>Contacts</b></dt>
+			<dd><ul>
+				<li>Baldur Karlsson</li>
+			</ul></dd>
+		</dl>
+
 		The {@code VK_EXT_debug_marker} extension is a device extension. It introduces concepts of object naming and tagging, for better tracking of Vulkan objects, as well as additional commands for recording annotations of named sections of a workload to aid organisation and offline analysis in external tools.
+
+		<h5>Examples</h5>
+		<b>Example 1</b>
+
+		Associate a name with an image, for easier debugging in external tools or with validation layers that can print a friendly name when referring to objects in error messages.
+
+		<pre><code>￿    extern VkDevice device;
+￿    extern VkImage image;
+￿
+￿    // Must call extension functions through a function pointer:
+￿    PFN_vkDebugMarkerSetObjectNameEXT pfnDebugMarkerSetObjectNameEXT = (PFN_vkDebugMarkerSetObjectNameEXT)vkGetDeviceProcAddr(device, "vkDebugMarkerSetObjectNameEXT");
+￿
+￿    // Set a name on the image
+￿    const VkDeviceCreateInfo imageNameInfo =
+￿    {
+￿        VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT, // sType
+￿        NULL,                                           // pNext
+￿        VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT,          // objectType
+￿        (uint64_t)image,                                // object
+￿        "Brick Diffuse Texture",                        // pObjectName
+￿    };
+￿
+￿    pfnDebugMarkerSetObjectNameEXT(device, &imageNameInfo);
+￿
+￿    // A subsequent error might print:
+￿    //   Image 'Brick Diffuse Texture' (0xc0dec0dedeadbeef) is used in a
+￿    //   command buffer with no memory bound to it.</code></pre>
+
+		<b>Example 2</b>
+
+		Annotating regions of a workload with naming information so that offline analysis tools can display a more usable visualisation of the commands submitted.
+
+		<pre><code>￿    extern VkDevice device;
+￿    extern VkCommandBuffer commandBuffer;
+￿
+￿    // Must call extension functions through a function pointer:
+￿    PFN_vkCmdDebugMarkerBeginEXT pfnCmdDebugMarkerBeginEXT = (PFN_vkCmdDebugMarkerBeginEXT)vkGetDeviceProcAddr(device, "vkCmdDebugMarkerBeginEXT");
+￿    PFN_vkCmdDebugMarkerEndEXT pfnCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vkGetDeviceProcAddr(device, "vkCmdDebugMarkerEndEXT");
+￿    PFN_vkCmdDebugMarkerInsertEXT pfnCmdDebugMarkerInsertEXT = (PFN_vkCmdDebugMarkerInsertEXT)vkGetDeviceProcAddr(device, "vkCmdDebugMarkerInsertEXT");
+￿
+￿    // Describe the area being rendered
+￿    const VkDebugMarkerMarkerInfoEXT houseMarker =
+￿    {
+￿        VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT, // sType
+￿        NULL,                                           // pNext
+￿        "Brick House",                                  // pMarkerName
+￿        { 1.0f, 0.0f, 0.0f, 1.0f },                     // color
+￿    };
+￿
+￿    // Start an annotated group of calls under the 'Brick House' name
+￿    pfnCmdDebugMarkerBeginEXT(commandBuffer, &houseMarker);
+￿    {
+￿        // A mutable structure for each part being rendered
+￿        VkDebugMarkerMarkerInfoEXT housePartMarker =
+￿        {
+￿            VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT, // sType
+￿            NULL,                                           // pNext
+￿            NULL,                                           // pMarkerName
+￿            { 0.0f, 0.0f, 0.0f, 0.0f },                     // color
+￿        };
+￿
+￿        // Set the name and insert the marker
+￿        housePartMarker.pMarkerName = "Walls";
+￿        pfnCmdDebugMarkerInsertEXT(commandBuffer, &housePartMarker);
+￿
+￿        // Insert the drawcall for the walls
+￿        vkCmdDrawIndexed(commandBuffer, 1000, 1, 0, 0, 0);
+￿
+￿        // Insert a recursive region for two sets of windows
+￿        housePartMarker.pMarkerName = "Windows";
+￿        pfnCmdDebugMarkerBeginEXT(commandBuffer, &housePartMarker);
+￿        {
+￿            vkCmdDrawIndexed(commandBuffer, 75, 6, 1000, 0, 0);
+￿            vkCmdDrawIndexed(commandBuffer, 100, 2, 1450, 0, 0);
+￿        }
+￿        pfnCmdDebugMarkerEndEXT(commandBuffer);
+￿
+￿        housePartMarker.pMarkerName = "Front Door";
+￿        pfnCmdDebugMarkerInsertEXT(commandBuffer, &housePartMarker);
+￿
+￿        vkCmdDrawIndexed(commandBuffer, 350, 1, 1650, 0, 0);
+￿
+￿        housePartMarker.pMarkerName = "Roof";
+￿        pfnCmdDebugMarkerInsertEXT(commandBuffer, &housePartMarker);
+￿
+￿        vkCmdDrawIndexed(commandBuffer, 500, 1, 2000, 0, 0);
+￿    }
+￿    // End the house annotation started above
+￿    pfnCmdDebugMarkerEndEXT(commandBuffer);</code></pre>
 		"""
 
 	IntConstant(

@@ -27,6 +27,7 @@ val SAMSUNG = "SAMSUNG"
 val SEC = "SEC"
 val TIZEN = "TIZEN"
 val RENDERDOC = "RENDERDOC"
+val NN = "NN"
 
 // Handle types
 val VkInstance = VK_DEFINE_HANDLE("VkInstance")
@@ -403,7 +404,7 @@ val VkAllocationCallbacks = struct(VULKAN_PACKAGE, "VkAllocationCallbacks") {
 		</ul>
 
 		<h5>See Also</h5>
-		##VkAllocationFunction, ##VkFreeFunction, ##VkInternalAllocationNotification, ##VkInternalFreeNotification, ##VkReallocationFunction, #AllocateMemory(), #CreateAndroidSurfaceKHR(), #CreateBuffer(), #CreateBufferView(), #CreateCommandPool(), #CreateComputePipelines(), #CreateDebugReportCallbackEXT(), #CreateDescriptorPool(), #CreateDescriptorSetLayout(), #CreateDevice(), #CreateDisplayModeKHR(), #CreateDisplayPlaneSurfaceKHR(), #CreateEvent(), #CreateFence(), #CreateFramebuffer(), #CreateGraphicsPipelines(), #CreateImage(), #CreateImageView(), #CreateIndirectCommandsLayoutNVX(), #CreateInstance(), #CreateMirSurfaceKHR(), #CreateObjectTableNVX(), #CreatePipelineCache(), #CreatePipelineLayout(), #CreateQueryPool(), #CreateRenderPass(), #CreateSampler(), #CreateSemaphore(), #CreateShaderModule(), #CreateSharedSwapchainsKHR(), #CreateSwapchainKHR(), #CreateWaylandSurfaceKHR(), #CreateWin32SurfaceKHR(), #CreateXcbSurfaceKHR(), #CreateXlibSurfaceKHR(), #DestroyBuffer(), #DestroyBufferView(), #DestroyCommandPool(), #DestroyDebugReportCallbackEXT(), #DestroyDescriptorPool(), #DestroyDescriptorSetLayout(), #DestroyDevice(), #DestroyEvent(), #DestroyFence(), #DestroyFramebuffer(), #DestroyImage(), #DestroyImageView(), #DestroyIndirectCommandsLayoutNVX(), #DestroyInstance(), #DestroyObjectTableNVX(), #DestroyPipeline(), #DestroyPipelineCache(), #DestroyPipelineLayout(), #DestroyQueryPool(), #DestroyRenderPass(), #DestroySampler(), #DestroySemaphore(), #DestroyShaderModule(), #DestroySurfaceKHR(), #DestroySwapchainKHR(), #FreeMemory()
+		##VkAllocationFunction, ##VkFreeFunction, ##VkInternalAllocationNotification, ##VkInternalFreeNotification, ##VkReallocationFunction, #AllocateMemory(), #CreateAndroidSurfaceKHR(), #CreateBuffer(), #CreateBufferView(), #CreateCommandPool(), #CreateComputePipelines(), #CreateDebugReportCallbackEXT(), #CreateDescriptorPool(), #CreateDescriptorSetLayout(), #CreateDevice(), #CreateDisplayModeKHR(), #CreateDisplayPlaneSurfaceKHR(), #CreateEvent(), #CreateFence(), #CreateFramebuffer(), #CreateGraphicsPipelines(), #CreateImage(), #CreateImageView(), #CreateIndirectCommandsLayoutNVX(), #CreateInstance(), #CreateMirSurfaceKHR(), #CreateObjectTableNVX(), #CreatePipelineCache(), #CreatePipelineLayout(), #CreateQueryPool(), #CreateRenderPass(), #CreateSampler(), #CreateSemaphore(), #CreateShaderModule(), #CreateSharedSwapchainsKHR(), #CreateSwapchainKHR(), #CreateViSurfaceNN(), #CreateWaylandSurfaceKHR(), #CreateWin32SurfaceKHR(), #CreateXcbSurfaceKHR(), #CreateXlibSurfaceKHR(), #DestroyBuffer(), #DestroyBufferView(), #DestroyCommandPool(), #DestroyDebugReportCallbackEXT(), #DestroyDescriptorPool(), #DestroyDescriptorSetLayout(), #DestroyDevice(), #DestroyEvent(), #DestroyFence(), #DestroyFramebuffer(), #DestroyImage(), #DestroyImageView(), #DestroyIndirectCommandsLayoutNVX(), #DestroyInstance(), #DestroyObjectTableNVX(), #DestroyPipeline(), #DestroyPipelineCache(), #DestroyPipelineLayout(), #DestroyQueryPool(), #DestroyRenderPass(), #DestroySampler(), #DestroySemaphore(), #DestroyShaderModule(), #DestroySurfaceKHR(), #DestroySwapchainKHR(), #FreeMemory(), #RegisterDeviceEventEXT(), #RegisterDisplayEventEXT()
 		"""
 
 	nullable..opaque_p.member("pUserData", "a value to be interpreted by the implementation of the callbacks. When any of the callbacks in ##VkAllocationCallbacks are called, the Vulkan implementation will pass this value as the first parameter to the callback. This value <b>can</b> vary each time an allocator is passed into a command, even when the same object takes an allocator in multiple commands.")
@@ -602,7 +603,7 @@ val VkPhysicalDeviceFeatures = struct(VULKAN_PACKAGE, "VkPhysicalDeviceFeatures"
 		</ul>
 
 		<h5>See Also</h5>
-		##VkDeviceCreateInfo, #GetPhysicalDeviceFeatures()
+		##VkDeviceCreateInfo, ##VkPhysicalDeviceFeatures2KHR, #GetPhysicalDeviceFeatures()
 		"""
 
 	VkBool32.member("robustBufferAccess", "")
@@ -685,6 +686,8 @@ val VkFormatProperties = struct(VULKAN_PACKAGE, "VkFormatProperties", mutable = 
 ￿    VK_FORMAT_FEATURE_BLIT_DST_BIT = 0x00000800,
 ￿    VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT = 0x00001000,
 ￿    VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG = 0x00002000,
+￿    VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR = 0x00004000,
+￿    VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR = 0x00008000,
 } VkFormatFeatureFlagBits;</code></pre>
 
 		The {@code linearTilingFeatures} and {@code optimalTilingFeatures} members of the ##VkFormatProperties structure describe what features are supported by #IMAGE_TILING_LINEAR and #IMAGE_TILING_OPTIMAL images, respectively.
@@ -719,6 +722,12 @@ val VkFormatProperties = struct(VULKAN_PACKAGE, "VkFormatProperties", mutable = 
 			<dt>#FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</dt>
 			<dd>If the format being queried is a depth/stencil format, this bit only     indicates that the depth aspect (not the stencil aspect) of an image of     this format supports linear filtering, and that linear filtering of the     depth aspect is supported whether depth compare is enabled in the     sampler or not.     If this bit is not present, linear filtering with depth compare disabled     is unsupported and linear filtering with depth compare enabled is     supported, but <b>may</b> compute the filtered value in an     implementation-dependent manner which differs from the normal rules of     linear filtering.     The resulting value <b>must</b> be in the range <code>[0,1]</code> and <b>should</b> be     proportional to, or a weighted average of, the number of comparison     passes or failures.</dd>
 
+			<dt>#FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR</dt>
+			<dd>{@code VkImage} <b>can</b> be used as a source image for <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies">copy commands</a>.</dd>
+
+			<dt>#FORMAT_FEATURE_TRANSFER_DST_BIT_KHR</dt>
+			<dd>{@code VkImage} <b>can</b> be used as a destination image for <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#copies">copy commands</a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#clears">clear commands</a>.</dd>
+
 			<dt>#FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</dt>
 			<dd>{@code VkImage} <b>can</b> be used with a sampler that has either of {@code magFilter} or {@code minFilter} set to #FILTER_CUBIC_IMG, or be the source image for a blit with {@code filter} set to #FILTER_CUBIC_IMG. This bit <b>must</b> only be exposed for formats that also support the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT. If the format being queried is a depth/stencil format, this only indicates that the depth aspect is cubic filterable.</dd>
 		</dl>
@@ -740,13 +749,13 @@ val VkFormatProperties = struct(VULKAN_PACKAGE, "VkFormatProperties", mutable = 
 		</dl>
 
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-		If no format feature flags are supported, then the only possible use would be image transfers - which alone are not useful. As such, if no format feature flags are supported, the format itself is not supported, and images of that format cannot be created.
+		If no format feature flags are supported, the format itself is not supported, and images of that format cannot be created.
 		</div>
 
 		If {@code format} is a block-compression format, then buffers <b>must</b> not support any features for the format.
 
 		<h5>See Also</h5>
-		#GetPhysicalDeviceFormatProperties()
+		##VkFormatProperties2KHR, #GetPhysicalDeviceFormatProperties()
 		"""
 
 	VkFormatFeatureFlags.member("linearTilingFeatures", "describes the features supported by #IMAGE_TILING_LINEAR.")
@@ -778,7 +787,7 @@ val VkImageFormatProperties = struct(VULKAN_PACKAGE, "VkImageFormatProperties", 
 		If the combination of parameters to #GetPhysicalDeviceImageFormatProperties() is not supported by the implementation for use in #CreateImage(), then all members of ##VkImageFormatProperties will be filled with zero.
 
 		<h5>See Also</h5>
-		##VkExtent3D, ##VkExternalImageFormatPropertiesNV, #GetPhysicalDeviceImageFormatProperties()
+		##VkExtent3D, ##VkExternalImageFormatPropertiesNV, ##VkImageFormatProperties2KHR, #GetPhysicalDeviceImageFormatProperties()
 		"""
 
 	VkExtent3D.member("maxExtent", "are the maximum image dimensions. See the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#features-extentperimagetype\">Allowed Extent Values</a> section below for how these values are constrained by {@code type}.")
@@ -958,7 +967,7 @@ val VkPhysicalDeviceProperties = struct(VULKAN_PACKAGE, "VkPhysicalDevicePropert
 		</ul>
 
 		<h5>See Also</h5>
-		##VkPhysicalDeviceLimits, ##VkPhysicalDeviceSparseProperties, #GetPhysicalDeviceProperties()
+		##VkPhysicalDeviceLimits, ##VkPhysicalDeviceProperties2KHR, ##VkPhysicalDeviceSparseProperties, #GetPhysicalDeviceProperties()
 		"""
 
 	uint32_t.member("apiVersion", "the version of Vulkan supported by the device, encoded as described in the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#fundamentals-versionnum\">API Version Numbers and Semantics</a> section.")
@@ -1029,7 +1038,7 @@ val VkQueueFamilyProperties = struct(VULKAN_PACKAGE, "VkQueueFamilyProperties", 
 		Queues supporting graphics and/or compute operations <b>must</b> report <code>(1,1,1)</code> in {@code minImageTransferGranularity}, meaning that there are no additional restrictions on the granularity of image transfer operations for these queues. Other queues supporting image transfer operations are only required: to support whole mip level transfers, thus {@code minImageTransferGranularity} for queues belonging to such queue families <b>may</b> be <code>(0,0,0)</code>.
 
 		<h5>See Also</h5>
-		##VkExtent3D, #GetPhysicalDeviceQueueFamilyProperties()
+		##VkExtent3D, ##VkQueueFamilyProperties2KHR, #GetPhysicalDeviceQueueFamilyProperties()
 		"""
 
 	VkQueueFlags.member("queueFlags", "contains flags indicating the capabilities of the queues in this queue family.")
@@ -1141,7 +1150,7 @@ if (memoryType == -1)
 		The loop will find the first supported memory type that has all bits requested in {@code properties} set. If there is no exact match, it will find a closest match (i.e. a memory type with the fewest additional bits set), which has some additional bits set but which are not detrimental to the behaviors requested by {@code properties}. The application <b>can</b> first search for the optimal properties, e.g. a memory type that is device-local or supports coherent cached accesses, as appropriate for the intended usage, and if such a memory type is not present <b>can</b> fallback to searching for a less optimal but guaranteed set of properties such as "0" or "host-visible and coherent".
 
 		<h5>See Also</h5>
-		##VkMemoryHeap, ##VkMemoryType, #GetPhysicalDeviceMemoryProperties()
+		##VkMemoryHeap, ##VkMemoryType, ##VkPhysicalDeviceMemoryProperties2KHR, #GetPhysicalDeviceMemoryProperties()
 		"""
 
 	AutoSize("memoryTypes")..uint32_t.member("memoryTypeCount", "the number of valid elements in the {@code memoryTypes} array.")
@@ -1191,12 +1200,14 @@ val VkDeviceCreateInfo = struct(VULKAN_PACKAGE, "VkDeviceCreateInfo") {
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>The {@code queueFamilyIndex} member of any given element of {@code pQueueCreateInfos} <b>must</b> be unique within {@code pQueueCreateInfos}</li>
+			<li>If the {@code pNext} chain includes a ##VkPhysicalDeviceFeatures2KHR structure, then {@code pEnabledFeatures} <b>must</b> be {@code NULL}</li>
+			<li>{@code ppEnabledExtensionNames} <b>must</b> not contain both #KHR_maintenance1 and #AMD_negative_viewport_height</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
 			<li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_CREATE_INFO</li>
-			<li>{@code pNext} <b>must</b> be {@code NULL}</li>
+			<li>{@code pNext} <b>must</b> be {@code NULL}, or a pointer to a valid instance of ##VkPhysicalDeviceFeatures2KHR</li>
 			<li>{@code flags} <b>must</b> be 0</li>
 			<li>{@code pQueueCreateInfos} <b>must</b> be a pointer to an array of {@code queueCreateInfoCount} valid ##VkDeviceQueueCreateInfo structures</li>
 			<li>If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} <b>must</b> be a pointer to an array of {@code enabledLayerCount} null-terminated strings</li>
@@ -1908,6 +1919,7 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 			<li>{@code mipLevels} <b>must</b> be greater than 0</li>
 			<li>{@code arrayLayers} <b>must</b> be greater than 0</li>
 			<li>If {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code imageType} must be #IMAGE_TYPE_2D</li>
+			<li>If {@code flags} contains #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR, {@code imageType} must be #IMAGE_TYPE_3D</li>
 			<li>If {@code imageType} is #IMAGE_TYPE_1D, {@code extent.width} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension1D}, or ##VkImageFormatProperties{@code ::maxExtent}.width (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher</li>
 			<li>If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} does not contain #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and {@code extent.height} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension2D}, or ##VkImageFormatProperties{@code ::maxExtent}.width/height (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher</li>
 			<li>If {@code imageType} is #IMAGE_TYPE_2D and {@code flags} contains #IMAGE_CREATE_CUBE_COMPATIBLE_BIT, {@code extent.width} and {@code extent.height} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimensionCube}, or ##VkImageFormatProperties{@code ::maxExtent}.width/height (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher</li>
@@ -2103,7 +2115,8 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>If {@code levelCount} is not #REMAINING_MIP_LEVELS, <code>levelCount</code> <b>must</b> be non-zero and <code>(baseMipLevel &#x002b; levelCount)</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when the image was created</li>
-			<li>If {@code layerCount} is not #REMAINING_ARRAY_LAYERS, <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when the image was created</li>
+			<li>If the {@code imageType} specified in ##VkImageCreateInfo when the image was created was #IMAGE_TYPE_3D and the image view is created with the {@code viewType} of ##VkImageViewCreateInfo set to #VIEW_TYPE_2D_ARRAY then {@code layerCount} <b>must</b> be #REMAINING_ARRAY_LAYERS, or <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code extent.depth} specified in ##VkImageCreateInfo when the image was created</li>
+			<li>If the {@code imageType} specified in ##VkImageCreateInfo when the image was created was not #IMAGE_TYPE_3D or the image view is not created with the {@code viewType} of ##VkImageViewCreateInfo set to #VIEW_TYPE_2D_ARRAY then {@code layerCount} <b>must</b> be #REMAINING_ARRAY_LAYERS, or <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when the image was created</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -2145,6 +2158,8 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
 				<tr><td>CUBE, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} &#x2265; 1 {@code height} = {@code width} {@code depth} = 1 {@code arrayLayers} &#x2265; 6 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_CUBE_COMPATIBLE_BIT</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_CUBE {@code baseArrayLayer} &#x2265; 0 {@code layerCount} = 6</td></tr>
 				<tr><td>CUBE, 1, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} &#x2265; 1 {@code height} = width {@code depth} = 1 <em>N</em> &#x2265; 1 {@code arrayLayers} &#x2265; 6 &#x00d7; <em>N</em> {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_CUBE_COMPATIBLE_BIT</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_CUBE_ARRAY {@code baseArrayLayer} &#x2265; 0 {@code layerCount} = 6 &#x00d7; <em>N</em>, <em>N</em> &#x2265; 1</td></tr>
 				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} &#x2265; 1 {@code height} &#x2265; 1 {@code depth} &#x2265; 1 {@code arrayLayers} = 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_3D {@code baseArrayLayer} = 0 {@code layerCount} = 1</td></tr>
+				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} &#x2265; 1 {@code height} &#x2265; 1 {@code depth} &#x2265; 1 {@code arrayLayers} = 1 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT {@code flags} does not include VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</td><td>{@code viewType} = #VIEW_TYPE_2D {@code levelCount} = 1 {@code baseArrayLayer} &#x2265; 0 {@code layerCount} = 1</td></tr>
+				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} &#x2265; 1 {@code height} &#x2265; 1 {@code depth} &#x2265; 1 {@code arrayLayers} = 1 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT {@code flags} does not include VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</td><td>{@code viewType} = #VIEW_TYPE_2D_ARRAY {@code levelCount} = 1 {@code baseArrayLayer} &#x2265; 0 {@code layerCount} &#x2265; 1</td></tr>
 			</tbody>
 		</table>
 
@@ -2152,10 +2167,12 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
 		<ul>
 			<li>If {@code image} was not created with #IMAGE_CREATE_CUBE_COMPATIBLE_BIT then {@code viewType} <b>must</b> not be #IMAGE_VIEW_TYPE_CUBE or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-imageCubeArray">image cubemap arrays</a> feature is not enabled, {@code viewType} <b>must</b> not be #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
+			<li>If {@code image} was created with #IMAGE_TYPE_3D but without #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR set then {@code viewType} <b>must</b> not be #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-textureCompressionETC2">ETC2 texture compression</a> feature is not enabled, {@code format} <b>must</b> not be #FORMAT_ETC2_R8G8B8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8_SRGB_BLOCK, #FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK, #FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK, #FORMAT_EAC_R11_UNORM_BLOCK, #FORMAT_EAC_R11_SNORM_BLOCK, #FORMAT_EAC_R11G11_UNORM_BLOCK, or #FORMAT_EAC_R11G11_SNORM_BLOCK</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-textureCompressionASTC_LDR">ASTC LDR texture compression</a> feature is not enabled, {@code format} <b>must</b> not be #FORMAT_ASTC_4x4_UNORM_BLOCK, #FORMAT_ASTC_4x4_SRGB_BLOCK, #FORMAT_ASTC_5x4_UNORM_BLOCK, #FORMAT_ASTC_5x4_SRGB_BLOCK, #FORMAT_ASTC_5x5_UNORM_BLOCK, #FORMAT_ASTC_5x5_SRGB_BLOCK, #FORMAT_ASTC_6x5_UNORM_BLOCK, #FORMAT_ASTC_6x5_SRGB_BLOCK, #FORMAT_ASTC_6x6_UNORM_BLOCK, #FORMAT_ASTC_6x6_SRGB_BLOCK, #FORMAT_ASTC_8x5_UNORM_BLOCK, #FORMAT_ASTC_8x5_SRGB_BLOCK, #FORMAT_ASTC_8x6_UNORM_BLOCK, #FORMAT_ASTC_8x6_SRGB_BLOCK, #FORMAT_ASTC_8x8_UNORM_BLOCK, #FORMAT_ASTC_8x8_SRGB_BLOCK, #FORMAT_ASTC_10x5_UNORM_BLOCK, #FORMAT_ASTC_10x5_SRGB_BLOCK, #FORMAT_ASTC_10x6_UNORM_BLOCK, #FORMAT_ASTC_10x6_SRGB_BLOCK, #FORMAT_ASTC_10x8_UNORM_BLOCK, #FORMAT_ASTC_10x8_SRGB_BLOCK, #FORMAT_ASTC_10x10_UNORM_BLOCK, #FORMAT_ASTC_10x10_SRGB_BLOCK, #FORMAT_ASTC_12x10_UNORM_BLOCK, #FORMAT_ASTC_12x10_SRGB_BLOCK, #FORMAT_ASTC_12x12_UNORM_BLOCK, or #FORMAT_ASTC_12x12_SRGB_BLOCK</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-textureCompressionBC">BC texture compression</a> feature is not enabled, {@code format} <b>must</b> not be #FORMAT_BC1_RGB_UNORM_BLOCK, #FORMAT_BC1_RGB_SRGB_BLOCK, #FORMAT_BC1_RGBA_UNORM_BLOCK, #FORMAT_BC1_RGBA_SRGB_BLOCK, #FORMAT_BC2_UNORM_BLOCK, #FORMAT_BC2_SRGB_BLOCK, #FORMAT_BC3_UNORM_BLOCK, #FORMAT_BC3_SRGB_BLOCK, #FORMAT_BC4_UNORM_BLOCK, #FORMAT_BC4_SNORM_BLOCK, #FORMAT_BC5_UNORM_BLOCK, #FORMAT_BC5_SNORM_BLOCK, #FORMAT_BC6H_UFLOAT_BLOCK, #FORMAT_BC6H_SFLOAT_BLOCK, #FORMAT_BC7_UNORM_BLOCK, or #FORMAT_BC7_SRGB_BLOCK</li>
 			<li>If {@code image} was created with #IMAGE_TILING_LINEAR, {@code format} <b>must</b> be format that has at least one supported feature bit present in the value of ##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}</li>
+			<li>{@code image} <b>must</b> have been created with a {@code usage} value containing at least one of #IMAGE_USAGE_SAMPLED_BIT, #IMAGE_USAGE_STORAGE_BIT, #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT</li>
 			<li>If {@code image} was created with #IMAGE_TILING_LINEAR and {@code usage} containing #IMAGE_USAGE_SAMPLED_BIT, {@code format} <b>must</b> be supported for sampled images, as specified by the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}</li>
 			<li>If {@code image} was created with #IMAGE_TILING_LINEAR and {@code usage} containing #IMAGE_USAGE_STORAGE_BIT, {@code format} <b>must</b> be supported for storage images, as specified by the #FORMAT_FEATURE_STORAGE_IMAGE_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}</li>
 			<li>If {@code image} was created with #IMAGE_TILING_LINEAR and {@code usage} containing #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, {@code format} <b>must</b> be supported for color attachments, as specified by the #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT flag in ##VkFormatProperties{@code ::linearTilingFeatures} returned by #GetPhysicalDeviceFormatProperties() with the same value of {@code format}</li>
@@ -2539,7 +2556,7 @@ val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
 		Structure specifying a viewport.
 
 		<h5>Description</h5>
-		The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value latexmath:[<code>\frac{k}{2<sup>m - 1}</code>], where <code>k {elem} { 0, 1, ..., 2</sup>m^-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).
+		The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value k / (2<sup>m</sup> - 1), where <code>k {elem} { 0, 1, ..., 2<sup>m</sup>-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).
 
 		The viewport parameters shown in the above equations are found from these values as
 
@@ -2557,6 +2574,8 @@ val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
 			<dd><code>p<sub>z</sub> = maxDepth - minDepth</code>.</dd>
 		</dl>
 
+		The application <b>can</b> specify a negative term for {@code height}, which has the effect of negating the y coordinate in clip space before performing the transform. When using a negative {@code height}, the application <b>should</b> also adjust the {@code y} value to point to the lower left corner of the viewport instead of the upper left corner. Using the negative {@code height} allows the application to avoid having to negate the y component of the {@code Position} output from the last vertex processing stage in shaders that also target other graphics APIs.
+
 		The width and height of the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-limits-maxViewportDimensions"> implementation-dependent maximum viewport dimensions</a> <b>must</b> be greater than or equal to the width and height of the largest image which <b>can</b> be created and attached to a framebuffer.
 
 		The floating-point viewport bounds are represented with an <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-limits-viewportSubPixelBits">implementation-dependent precision</a>.
@@ -2564,7 +2583,7 @@ val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>{@code width} <b>must</b> be greater than {@code 0.0} and less than or equal to ##VkPhysicalDeviceLimits{@code ::maxViewportDimensions}[0]</li>
-			<li>{@code height} <b>must</b> be greater than {@code 0.0} and less than or equal to ##VkPhysicalDeviceLimits{@code ::maxViewportDimensions}[1]</li>
+			<li>{@code height} <b>must</b> be greater than or equal to -##VkPhysicalDeviceLimits{@code ::maxViewportDimensions}[1] and less than or equal to ##VkPhysicalDeviceLimits{@code ::maxViewportDimensions}[1]</li>
 			<li>If the VK_AMD_negative_viewport_height extension is enabled, {@code height} <b>can</b> also be negative.</li>
 			<li>{@code x} and {@code y} <b>must</b> each be between {@code viewportBoundsRange}[0] and {@code viewportBoundsRange}[1], inclusive</li>
 			<li>{@code x} + {@code width} <b>must</b> be less than or equal to {@code viewportBoundsRange}[1]</li>
@@ -3597,6 +3616,7 @@ val VkFramebufferCreateInfo = struct(VULKAN_PACKAGE, "VkFramebufferCreateInfo") 
 			<li>{@code width} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferWidth}</li>
 			<li>{@code height} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferHeight}</li>
 			<li>{@code layers} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferLayers}</li>
+			<li>Any given element of {@code pAttachments} that is a 2D or 2D array image view taken from a 3D image <b>must</b> not be a depth/stencil format</li>
 		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -4070,11 +4090,14 @@ val VkImageCopy = struct(VULKAN_PACKAGE, "VkImageCopy") {
 		"""
 		Structure specifying an image copy operation.
 
+		<h5>Description</h5>
+		For #IMAGE_TYPE_3D images, copies are performed slice by slice starting with the {@code z} member of the {@code srcOffset} or {@code dstOffset}, and copying {@code depth} slices. For images with multiple layers, copies are performed layer by layer starting with the {@code baseArrayLayer} member of the {@code srcSubresource} or {@code dstSubresource} and copying {@code layerCount} layers. Image data <b>can</b> be copied between images with different image types. If one image is #IMAGE_TYPE_3D and the other image is #IMAGE_TYPE_2D with multiple layers, then each slice is copied to or from a different layer.
+
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>The {@code aspectMask} member of {@code srcSubresource} and {@code dstSubresource} <b>must</b> match</li>
-			<li>The {@code layerCount} member of {@code srcSubresource} and {@code dstSubresource} <b>must</b> match</li>
-			<li>If either of the calling command&#8217;s {@code srcImage} or {@code dstImage} parameters are of {@code VkImageType} #IMAGE_TYPE_3D, the {@code baseArrayLayer} and {@code layerCount} members of both {@code srcSubresource} and {@code dstSubresource} <b>must</b> be 0 and 1, respectively</li>
+			<li>The number of slices of the {@code extent} (for 3D) or layers of the {@code srcSubresource} (for non-3D) <b>must</b> match the number of slices of the {@code extent} (for 3D) or layers of the {@code dstSubresource} (for non-3D)</li>
+			<li>If either of the calling command&#8217;s {@code srcImage} or {@code dstImage} parameters are of {@code VkImageType} #IMAGE_TYPE_3D, the {@code baseArrayLayer} and {@code layerCount} members of the corresponding subresource <b>must</b> be 0 and 1, respectively</li>
 			<li>The {@code aspectMask} member of {@code srcSubresource} <b>must</b> specify aspects present in the calling command&#8217;s {@code srcImage}</li>
 			<li>The {@code aspectMask} member of {@code dstSubresource} <b>must</b> specify aspects present in the calling command&#8217;s {@code dstImage}</li>
 			<li>{@code srcOffset.x} and ({@code extent.width} + {@code srcOffset.x}) <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource width</li>
@@ -4082,11 +4105,13 @@ val VkImageCopy = struct(VULKAN_PACKAGE, "VkImageCopy") {
 			<li>If the calling command&#8217;s {@code srcImage} is of type #IMAGE_TYPE_1D, then {@code srcOffset.y} <b>must</b> be 0 and {@code extent.height} <b>must</b> be 1.</li>
 			<li>{@code srcOffset.z} and ({@code extent.depth} + {@code srcOffset.z}) <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource depth</li>
 			<li>If the calling command&#8217;s {@code srcImage} is of type #IMAGE_TYPE_1D or #IMAGE_TYPE_2D, then {@code srcOffset.z} <b>must</b> be 0 and {@code extent.depth} <b>must</b> be 1.</li>
+			<li>{@code srcSubresource.baseArrayLayer} <b>must</b> be less than and ({@code srcSubresource.layerCount} + {@code srcSubresource.baseArrayLayer}) <b>must</b> be less than or equal to the number of layers in the source image</li>
 			<li>{@code dstOffset.x} and ({@code extent.width} + {@code dstOffset.x}) <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource width</li>
 			<li>{@code dstOffset.y} and ({@code extent.height} + {@code dstOffset.y}) <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource height</li>
 			<li>If the calling command&#8217;s {@code dstImage} is of type #IMAGE_TYPE_1D, then {@code dstOffset.y} <b>must</b> be 0 and {@code extent.height} <b>must</b> be 1.</li>
 			<li>{@code dstOffset.z} and ({@code extent.depth} + {@code dstOffset.z}) <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource depth</li>
 			<li>If the calling command&#8217;s {@code dstImage} is of type #IMAGE_TYPE_1D or #IMAGE_TYPE_2D, then {@code dstOffset.z} <b>must</b> be 0 and {@code extent.depth} <b>must</b> be 1.</li>
+			<li>{@code dstSubresource.baseArrayLayer} <b>must</b> be less than and ({@code dstSubresource.layerCount} + {@code dstSubresource.baseArrayLayer}) <b>must</b> be less than or equal to the number of layers in the destination image</li>
 			<li>
 				If the calling command&#8217;s {@code srcImage} is a compressed format image:
 				<ul>
@@ -4421,9 +4446,9 @@ val VkBufferMemoryBarrier = struct(VULKAN_PACKAGE, "VkBufferMemoryBarrier") {
 		Structure specifying a buffer memory barrier.
 
 		<h5>Description</h5>
-		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to the memory backing the specified buffer range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> source access mask</a> specified by {@code srcAccessMask}.
+		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to memory through the specified buffer range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> source access mask</a> specified by {@code srcAccessMask}. If {@code srcAccessMask} includes #ACCESS_HOST_WRITE_BIT, memory writes performed by that access type are also made visible, as that access type is not performed through a resource.
 
-		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to the memory backing the specified buffer range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> destination access mask</a> specified by {@code dstAccessMask}.
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to memory through the specified buffer range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> destination access mask</a> specified by {@code dstAccessMask}. If {@code dstAccessMask} includes #ACCESS_HOST_WRITE_BIT or #ACCESS_HOST_READ_BIT, available memory writes are also made visible to accesses of those types, as those access types are not performed through a resource.
 
 		If {@code srcQueueFamilyIndex} is not equal to {@code dstQueueFamilyIndex}, and {@code srcQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-queue-transfers-release"> queue family release operation</a> for the specified buffer range, and the second access scope includes no access, as if {@code dstAccessMask} was 0.
 
@@ -4456,8 +4481,8 @@ val VkBufferMemoryBarrier = struct(VULKAN_PACKAGE, "VkBufferMemoryBarrier") {
 	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkAccessFlags.member("srcAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
 	VkAccessFlags.member("dstAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
-	uint32_t.member("srcQueueFamilyIndex", "the source queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>")
-	uint32_t.member("dstQueueFamilyIndex", "the destination queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>")
+	uint32_t.member("srcQueueFamilyIndex", "the source queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>.")
+	uint32_t.member("dstQueueFamilyIndex", "the destination queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>.")
 	VkBuffer.member("buffer", "a handle to the buffer whose backing memory is affected by the barrier.")
 	VkDeviceSize.member("offset", "an offset in bytes into the backing memory for {@code buffer}; this is relative to the base offset as bound to the buffer (see #BindBufferMemory()).")
 	VkDeviceSize.member("size", "a size in bytes of the affected area of backing memory for {@code buffer}, or #WHOLE_SIZE to use the range from {@code offset} to the end of the buffer.")
@@ -4469,9 +4494,9 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 		Structure specifying the parameters of an image memory barrier.
 
 		<h5>Description</h5>
-		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to the memory backing the specified image subresource range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> source access mask</a> specified by {@code srcAccessMask}.
+		The first <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to memory through the specified image subresource range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> source access mask</a> specified by {@code srcAccessMask}. If {@code srcAccessMask} includes #ACCESS_HOST_WRITE_BIT, memory writes performed by that access type are also made visible, as that access type is not performed through a resource.
 
-		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to the memory backing the specified image subresource range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> destination access mask</a> specified by {@code dstAccessMask}.
+		The second <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-dependencies-access-scopes"> access scope</a> is limited to access to memory through the specified image subresource range, via access types in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-access-masks"> destination access mask</a> specified by {@code dstAccessMask}. If {@code dstAccessMask} includes #ACCESS_HOST_WRITE_BIT or #ACCESS_HOST_READ_BIT, available memory writes are also made visible to accesses of those types, as those access types are not performed through a resource.
 
 		If {@code srcQueueFamilyIndex} is not equal to {@code dstQueueFamilyIndex}, and {@code srcQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-queue-transfers-release"> queue family release operation</a> for the specified image subresource range, and the second access scope includes no access, as if {@code dstAccessMask} was 0.
 
@@ -4518,10 +4543,10 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 	VkAccessFlags.member("dstAccessMask", "defines a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
 	VkImageLayout.member("oldLayout", "the old layout in an <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-image-layout-transitions\">image layout transition</a>.")
 	VkImageLayout.member("newLayout", "the new layout in an <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-image-layout-transitions\">image layout transition</a>.")
-	uint32_t.member("srcQueueFamilyIndex", "the source queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>")
-	uint32_t.member("dstQueueFamilyIndex", "the destination queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>")
-	VkImage.member("image", "a handle to the image whose backing memory is affected by the barrier.")
-	VkImageSubresourceRange.member("subresourceRange", "describes an area of the backing memory for {@code image} (see <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#resources-image-views\">the “Image Views” section</a> for the description of ##VkImageSubresourceRange), as well as the set of image subresources whose image layouts are modified.")
+	uint32_t.member("srcQueueFamilyIndex", "the source queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>.")
+	uint32_t.member("dstQueueFamilyIndex", "the destination queue family for a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-queue-transfers\">queue family ownership transfer</a>.")
+	VkImage.member("image", "a handle to the image affected by this barrier.")
+	VkImageSubresourceRange.member("subresourceRange", "describes the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#resources-image-views\">image subresource range</a> within {@code image} that is affected by this barrier.")
 }
 
 val VkRenderPassBeginInfo = struct(VULKAN_PACKAGE, "VkRenderPassBeginInfo") {

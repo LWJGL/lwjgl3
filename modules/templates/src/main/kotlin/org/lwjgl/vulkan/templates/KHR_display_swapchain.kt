@@ -11,7 +11,116 @@ import org.lwjgl.vulkan.*
 val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swapchain", postfix = KHR) {
 	documentation =
 		"""
+		<dl>
+			<dt><b>Name String</b></dt>
+			<dd>VK_KHR_display_swapchain</dd>
+
+			<dt><b>Extension Type</b></dt>
+			<dd>Device extension</dd>
+
+			<dt><b>Registered Extension Number</b></dt>
+			<dd>4</dd>
+
+			<dt><b>Status</b></dt>
+			<dd>Draft.</dd>
+
+			<dt><b>Last Modified Date</b></dt>
+			<dd>2015-11-10</dd>
+
+			<dt><b>Revision</b></dt>
+			<dd>9</dd>
+
+			<dt><b>IP Status</b></dt>
+			<dd>No known IP claims.</dd>
+
+			<dt><b>Dependencies</b></dt>
+			<dd><ul>
+				<li>This extension is written against version 1.0 of the Vulkan API.</li>
+				<li>Requires VK_KHR_swapchain.</li>
+				<li>Requires VK_KHR_display.</li>
+			</ul></dd>
+
+			<dt><b>Contributors</b></dt>
+			<dd><ul>
+				<li>James Jones, NVIDIA</li>
+				<li>Jeff Vigil, Qualcomm</li>
+				<li>Jesse Hall, Google</li>
+			</ul></dd>
+
+			<dt><b>Contacts</b></dt>
+			<dd><ul>
+				<li>James Jones (jajones 'at' nvidia.com)</li>
+			</ul></dd>
+		</dl>
+
 		This extension provides an API to create a swapchain directly on a device's display without any underlying window system.
+
+		<h5>Examples</h5>
+		<b>Example 1</b>
+
+		Create a swapchain on a display mode and plane
+
+		<pre><code>￿    // See VK_KHR_display for an example of how to pick a display,
+￿    // display mode, plane, and how to create a VkSurfaceKHR for
+￿    // that plane.
+￿    extern VkPhysicalDevice physDevice;
+￿    extern VkDisplayModePropertiesKHR myModeProps;
+￿    extern VkSurfaceKHR mySurface;
+￿    extern VkDevice device;
+￿
+￿    uint32_t queueCount, i;
+￿    uint32_t presentQueueFamilyIndex = UINT32_MAX;
+￿    VkBool32 supportsPresent;
+￿
+￿    // Find a queue family that supports presenting to this surface
+￿    uint32_t familyCount;
+￿    vkGetPhysicalDeviceQueueFamilyProperties(physDevice, &familyCount, NULL);
+￿
+￿    for (i = 0; i < familyCount; ++i)
+￿    {
+￿        vkGetPhysicalDeviceSurfaceSupportKHR(physDevice, i, mySurface, &supportsPresent);
+￿
+￿        if (supportsPresent) {
+￿            // Found a queue family that supports present.  See
+￿            // VK_KHR_surface for an example of how to find a queue that
+￿            // supports both presentation and graphics
+￿            presentQueueFamilyIndex = i;
+￿            break;
+￿        }
+￿    }
+￿
+￿    // Figure out which formats and present modes this surface supports.
+￿    uint32_t formatCount;
+￿    vkGetPhysicalDeviceSurfaceFormatsKHR(physDevice, mySurface, &formatCount, NULL);
+￿
+￿    VkSurfaceFormatKHR* formats = (VkSurfaceFormatKHR*)malloc(sizeof(VkSurfaceFormatKHR) * formatCount);
+￿    vkGetPhysicalDeviceSurfaceFormatsKHR(physDevice, mySurface, &formatCount, formats);
+￿
+￿    const VkSwapchainCreateInfoKHR createInfo =
+￿    {
+￿        VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,    // sType
+￿        NULL,                                           // pNext
+￿        0,                                              // flags
+￿        mySurface,                                      // surface
+￿        3,                                              // minImageCount
+￿        formats[0].format,                              // imageFormat
+￿        formats[0].colorSpace,                          // imageColorSpace
+￿        myModeProps.parameters.visibleRegion,           // imageExtent
+￿        1,                                              // imageArrayLayers
+￿        VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,            // imageUsage
+￿        VK_SHARING_MODE_EXCLUSIVE,                      // imageSharingMode
+￿        0,                                              // queueFamilyIndexCount
+￿        NULL,                                           // pQueueFamilyIndices
+￿        VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR,          // preTransform
+￿        VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,              // compositeAlpha
+￿        VK_PRESENT_MODE_FIFO_KHR,                       // presentMode
+￿        VK_TRUE,                                        // clipped
+￿        VK_NULL_HANDLE                                  // oldSwapchain
+￿    };
+￿
+￿    VkSwapchainKHR swapchain;
+￿    // This is equivalent to vkCreateSwapchainKHR.
+￿    vkCreateSharedSwapchainsKHR(device, 1, &createInfo, NULL, &swapchain);</code></pre>
 		"""
 
 	IntConstant(

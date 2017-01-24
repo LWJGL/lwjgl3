@@ -11,9 +11,61 @@ import org.lwjgl.vulkan.*
 val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 	documentation =
 		"""
+		<dl>
+			<dt><b>Name String</b></dt>
+			<dd>VK_KHR_surface</dd>
+
+			<dt><b>Extension Type</b></dt>
+			<dd>Instance extension</dd>
+
+			<dt><b>Registered Extension Number</b></dt>
+			<dd>1</dd>
+
+			<dt><b>Last Modified Date</b></dt>
+			<dd>2016-08-25</dd>
+
+			<dt><b>Revision</b></dt>
+			<dd>25</dd>
+
+			<dt><b>IP Status</b></dt>
+			<dd>No known IP claims.</dd>
+
+			<dt><b>Dependencies</b></dt>
+			<dd><ul>
+				<li>This extension is written against version 1.0 of the Vulkan API.</li>
+			</ul></dd>
+
+			<dt><b>Contributors</b></dt>
+			<dd><ul>
+				<li>Patrick Doane, Blizzard</li>
+				<li>Ian Elliott, LunarG</li>
+				<li>Jesse Hall, Google</li>
+				<li>James Jones, NVIDIA</li>
+				<li>David Mao, AMD</li>
+				<li>Norbert Nopper, Freescale</li>
+				<li>Alon Or-bach, Samsung</li>
+				<li>Daniel Rakos, AMD</li>
+				<li>Graham Sellers, AMD</li>
+				<li>Jeff Vigil, Qualcomm</li>
+				<li>Chia-I Wu, LunarG</li>
+				<li>Jason Ekstrand, Intel</li>
+			</ul></dd>
+
+			<dt><b>Contacts</b></dt>
+			<dd><ul>
+				<li>James Jones, NVIDIA</li>
+				<li>Ian Elliott, LunarG</li>
+			</ul></dd>
+		</dl>
+
 		The {@code VK_KHR_surface} extension is an instance extension. It introduces {@code VkSurfaceKHR} objects, which abstract native platform surface or window objects for use with Vulkan. It also provides a way to determine whether a queue family in a physical device supports presenting to particular surface.
 
 		Separate extensions for each each platform provide the mechanisms for creating {@code VkSurfaceKHR} objects, but once created they may be used in this and other platform-independent extensions, in particular the {@code VK_KHR_swapchain} extension.
+
+		<h5>Examples</h5>
+		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+		The example code for the {@code VK_KHR_surface} and {@code VK_KHR_swapchain} extensions was removed from the appendix after revision 1.0.29. This WSI example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/blob/master/demos/cube.c).
+		</div>
 		"""
 
 	IntConstant(
@@ -55,7 +107,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 		</ul>
 
 		<h5>See Also</h5>
-		##VkDisplaySurfaceCreateInfoKHR, ##VkSurfaceCapabilitiesKHR, {@code VkSurfaceTransformFlagsKHR}, ##VkSwapchainCreateInfoKHR
+		##VkDisplaySurfaceCreateInfoKHR, ##VkSurfaceCapabilities2EXT, ##VkSurfaceCapabilitiesKHR, {@code VkSurfaceTransformFlagsKHR}, ##VkSwapchainCreateInfoKHR
 		""",
 
 		"SURFACE_TRANSFORM_IDENTITY_BIT_KHR".enum(0x00000001),
@@ -99,8 +151,24 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", postfix = KHR) {
 
 		<h5>Description</h5>
 		<ul>
-			<li>#COLOR_SPACE_SRGB_NONLINEAR_KHR: The presentation engine supports the sRGB color space.</li>
+			<li>
+				#COLOR_SPACE_SRGB_NONLINEAR_KHR: The presentation engine supports the sRGB color space.
+				<ul>
+					<li>#COLOR_SPACE_SCRGB_LINEAR_EXT - supports the scRGB color space and applies a linear OETF.</li>
+					<li>#COLOR_SPACE_SCRGB_NONLINEAR_EXT - supports the scRGB color space and applies the scRGB OETF.</li>
+					<li>#COLOR_SPACE_DCI_P3_LINEAR_EXT - supports the DCI-P3 color space and applies a linear OETF.</li>
+					<li>#COLOR_SPACE_DCI_P3_NONLINEAR_EXT - supports the DCI-P3 color space and applies the Gamma 2.6 OETF.</li>
+					<li>#COLOR_SPACE_BT709_LINEAR_EXT - supports the BT709 color space and applies a linear OETF.</li>
+					<li>#COLOR_SPACE_BT709_NONLINEAR_EXT - supports the BT709 color space and applies the SMPTE 170M OETF.</li>
+					<li>#COLOR_SPACE_BT2020_LINEAR_EXT - supports the BT2020 color space and applies a linear OETF.</li>
+					<li>#COLOR_SPACE_BT2020_NONLINEAR_EXT - supports the BT2020 color space and applies the SMPTE 170M OETF.</li>
+					<li>#COLOR_SPACE_ADOBERGB_LINEAR_EXT - supports the AdobeRGB color space and applies a linear OETF.</li>
+					<li>#COLOR_SPACE_ADOBERGB_NONLINEAR_EXT - supports the AdobeRGB color space and applies the Gamma 2.2 OETF.</li>
+				</ul>
+			</li>
 		</ul>
+
+		The color components of Non-linear color space swap chain images have had the appropriate transfer function applied. Vulkan requires that all implementations support the sRGB OETF and EOTF transfer functions when using an SRGB pixel format. Other transfer functions, such as SMPTE 170M, must not: be performed by the implementation, but <b>can</b> be performed by the application shader.
 
 		If {@code pSurfaceFormats} includes an entry whose value for {@code colorSpace} is #COLOR_SPACE_SRGB_NONLINEAR_KHR and whose value for {@code format} is a UNORM (or SRGB) format and the corresponding SRGB (or UNORM) format is a color renderable format for #IMAGE_TILING_OPTIMAL, then {@code pSurfaceFormats} <b>must</b> also contain an entry with the same value for {@code colorSpace} and {@code format} equal to the corresponding SRGB (or UNORM) format.
 
