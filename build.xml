@@ -234,6 +234,7 @@
 			<src path="${src.templates.kotlin}/org/lwjgl/system/dyncall"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/jawt" if:true="${binding.jawt}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/jemalloc" if:true="${binding.jemalloc}"/>
+			<src path="${src.templates.kotlin}/org/lwjgl/system/jni"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/libc"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/linux"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/system/macosx"/>

@@ -123,16 +123,18 @@ class AutoSize(
 class AutoSizeResultParam(val expression: String?) : ParameterModifier {
 	override val isSpecial = true
 	override fun validate(param: Parameter) {
-		if (param.paramType === ParameterType.IN)
-			when (param.nativeType.mapping) {
-				PrimitiveMapping.INT,
-				PrimitiveMapping.POINTER -> {
-				}
-				else                     -> {
-					throw IllegalArgumentException("The AutoSizeResult modifier on input parameters can only be applied on integer primitive types.")
+		if (param.paramType === ParameterType.IN) {
+			if (param.nativeType.mapping.nativeMethodType.isPrimitive) {
+				when (param.nativeType.mapping) {
+					PrimitiveMapping.INT,
+					PrimitiveMapping.POINTER -> {
+					}
+					else                     -> {
+						throw IllegalArgumentException("The AutoSizeResult modifier on input parameters can only be applied on integer primitive types.")
+					}
 				}
 			}
-		else if (param.paramType === ParameterType.OUT) {
+		} else if (param.paramType === ParameterType.OUT) {
 			when (param.nativeType.mapping) {
 				PointerMapping.DATA_INT,
 				PointerMapping.DATA_POINTER -> {

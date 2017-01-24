@@ -11,6 +11,7 @@ import java.lang.reflect.Method;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.jni.JNINativeInterface.*;
 
 /**
  * Base class for dynamically created native functions that call into Java code.
@@ -116,7 +117,7 @@ public abstract class Callback implements Pointer, NativeResource {
 	static long create(String signature, Object instance) {
 		long funcptr = Callback.getNativeFunction(signature.charAt(signature.length() - 1));
 
-		long handle = dcbNewCallback(signature, funcptr, memNewGlobalRef(instance));
+		long handle = dcbNewCallback(signature, funcptr, NewGlobalRef(instance));
 		if ( handle == NULL )
 			throw new IllegalStateException("Failed to create the DCCallback object");
 
@@ -172,7 +173,7 @@ public abstract class Callback implements Pointer, NativeResource {
 	 * @param functionPointer the function pointer
 	 */
 	public static void free(long functionPointer) {
-		memDeleteGlobalRef(dcbGetUserData(functionPointer));
+		DeleteGlobalRef(dcbGetUserData(functionPointer));
 		dcbFreeCallback(functionPointer);
 
 		if ( Configuration.DEBUG_MEMORY_ALLOCATOR.get(false) )

@@ -5,6 +5,7 @@
 package org.lwjgl.system.jawt
 
 import org.lwjgl.generator.*
+import org.lwjgl.system.jni.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.system.windows.*
 
@@ -28,7 +29,7 @@ val JAWT_DrawingSurface_p = struct(JAWT_PACKAGE, "JAWTDrawingSurface", nativeNam
 		All operations on a JAWT_DrawingSurface MUST be performed from the same thread as the call to {@code GetDrawingSurface}.
 		"""
 
-	JNIEnv_p.member(
+	"JNIEnv".p.member(
 		"env",
 		"""
 		Cached reference to the Java environment of the calling thread.

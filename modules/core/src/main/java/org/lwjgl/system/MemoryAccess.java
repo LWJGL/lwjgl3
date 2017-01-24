@@ -11,6 +11,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryAccessJNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
+import static org.lwjgl.system.jni.JNINativeInterface.*;
 import static org.lwjgl.system.libc.LibCString.*;
 
 /** Provides {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}. */
@@ -38,12 +39,6 @@ final class MemoryAccess {
 		return accessor;
 	}
 
-	// Returns the buffer memory address
-	static native long getDirectBufferAddress(Buffer buffer);
-
-	// Returns a new direct ByteBuffer instance
-	static native ByteBuffer newDirectByteBuffer(long address, int capacity);
-
 	/** Implements functionality for {@link MemoryUtil}. */
 	interface MemoryAccessor {
 
@@ -58,10 +53,10 @@ final class MemoryAccess {
 		}
 
 		default long memAddress0(Buffer buffer) {
-			return getDirectBufferAddress(buffer);
+			return GetDirectBufferAddress(buffer);
 		}
 
-		default ByteBuffer memByteBuffer(long address, int capacity)     { return newDirectByteBuffer(address, capacity).order(ByteOrder.nativeOrder()); }
+		default ByteBuffer memByteBuffer(long address, int capacity)     { return NewDirectByteBuffer(address, capacity).order(ByteOrder.nativeOrder()); }
 
 		default ShortBuffer memShortBuffer(long address, int capacity)   { return memByteBuffer(address, capacity << 1).asShortBuffer(); }
 
@@ -162,7 +157,7 @@ final class MemoryAccess {
 			if ( BITS32 )
 				MAGIC_ADDRESS &= 0xFFFFFFFFL;
 
-			ByteBuffer bb = newDirectByteBuffer(MAGIC_ADDRESS, 0);
+			ByteBuffer bb = NewDirectByteBuffer(MAGIC_ADDRESS, 0);
 
 			long offset = 8L; // 8 byte aligned, cannot be at 0
 			while ( true ) {
@@ -175,7 +170,7 @@ final class MemoryAccess {
 		private static long getCapacityOffset() {
 			int MAGIC_CAPACITY = 0x0D15EA5E;
 
-			ByteBuffer bb = newDirectByteBuffer(0L, MAGIC_CAPACITY);
+			ByteBuffer bb = NewDirectByteBuffer(-1L, MAGIC_CAPACITY);
 			bb.limit(0);
 
 			long offset = 4L; // 4 byte aligned, cannot be at 0

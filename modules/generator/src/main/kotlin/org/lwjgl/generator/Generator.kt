@@ -104,6 +104,7 @@ fun main(args: Array<String>) {
 			"org.lwjgl.system",
 			"org.lwjgl.system.dyncall",
 			"org.lwjgl.system.jemalloc",
+			"org.lwjgl.system.jni",
 			"org.lwjgl.system.libc",
 			"org.lwjgl.system.linux",
 			"org.lwjgl.system.macosx",

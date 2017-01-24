@@ -68,20 +68,3 @@ val charASCII_pp = charASCII_p.p
 val charUTF8 = CharType("char", CharMapping.UTF8) // for struct members
 val charUTF8_p = charUTF8.p
 val charUTF8_pp = charUTF8_p.p
-
-// JNI types
-
-val jboolean = IntegerType("jboolean", PrimitiveMapping.BOOLEAN)
-val jbyte = IntegerType("jbyte", PrimitiveMapping.BYTE)
-val jchar = IntegerType("jchar", PrimitiveMapping.SHORT, unsigned = true)
-val jshort = IntegerType("jshort", PrimitiveMapping.SHORT)
-val jint = IntegerType("jint", PrimitiveMapping.INT)
-val jlong = IntegerType("jlong", PrimitiveMapping.LONG)
-
-val jfloat = IntegerType("jfloat", PrimitiveMapping.FLOAT)
-val jdouble = IntegerType("jdouble", PrimitiveMapping.DOUBLE)
-
-val jobject = NativeType("jobject", TypeMapping("jobject", Any::class.java, Any::class.java))
-val jobject_p = "jobject".opaque_p
-
-val JNIEnv_p = "JNIEnv".p

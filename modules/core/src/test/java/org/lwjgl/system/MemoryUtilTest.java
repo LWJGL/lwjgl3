@@ -11,6 +11,7 @@ import java.nio.*;
 import java.nio.charset.StandardCharsets;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.jni.JNINativeInterface.*;
 import static org.testng.Assert.*;
 
 @Test
@@ -71,10 +72,10 @@ public class MemoryUtilTest {
 		for ( int i = 0; i < buffer.capacity(); i++ )
 			buffer.put(i, (byte)i);
 
-		long address = MemoryAccess.getDirectBufferAddress(buffer);
+		long address = GetDirectBufferAddress(buffer);
 		assertTrue(address != NULL);
 
-		ByteBuffer view = MemoryAccess.newDirectByteBuffer(address + 8, 16);
+		ByteBuffer view = NewDirectByteBuffer(address + 8, 16);
 		assertEquals(view.order(), ByteOrder.BIG_ENDIAN);
 		for ( int i = 0; i < view.capacity(); i++ )
 			assertEquals(view.get(i), buffer.get(i + 8));

@@ -39,7 +39,7 @@ internal const val JNIENV = "__env"
 /** Special parameter that generates an explicit function address parameter. */
 val EXPLICIT_FUNCTION_ADDRESS = voidptr.IN(FUNCTION_ADDRESS, "the function address")
 /** Special parameter that will accept the JNI function's JNIEnv* parameter. Hidden in Java code. */
-val JNI_ENV = JNIEnv_p.IN(JNIENV, "the JNI environment struct")
+val JNI_ENV = "JNIEnv".p.IN(JNIENV, "the JNI environment struct")
 
 private val TRY_FINALLY_ALIGN = "^(\\s+)".toRegex(RegexOption.MULTILINE)
 
@@ -890,7 +890,10 @@ class Func(
 
 	private fun getAutoSizeResultExpression(single: Boolean, param: Parameter) =
 		if (param.paramType === IN)
-			param.name.let { if (param.nativeType.mapping === PrimitiveMapping.INT) it else "(int)$it" }
+			param.name.let {
+				val custom = param.get<AutoSizeResultParam>().expression
+				custom?.replace("\$original", it) ?: it.let { if (param.nativeType.mapping === PrimitiveMapping.INT) it else "(int)$it" }
+			}
 		else
 			(
 				if (single)
@@ -901,8 +904,8 @@ class Func(
 					"${param.name}.get(${param.name}.position())"
 			).let {
 				val custom = param.get<AutoSizeResultParam>().expression
-				custom?.replace("\$original", it) ?: it
-			}.let { if (param.nativeType.mapping === PointerMapping.DATA_INT) it else "(int)$it" }
+				custom?.replace("\$original", it) ?: it.let { if (param.nativeType.mapping === PointerMapping.DATA_INT) it else "(int)$it" }
+			}
 
 	private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: ApplyTo, hasFinally: Boolean) {
 		printCode(code.javaBeforeNative, applyTo, "")
@@ -1354,7 +1357,7 @@ class Func(
 		val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
 
 		print("\t${if (constantMacro) "private " else accessModifier}static $retType $name(")
-		printList(parameters.asSequence()) {
+		printList(getParams { it !== JNI_ENV }) {
 			if (it.isAutoSizeResultOut && hideAutoSizeResultParam)
 				null
 			else
@@ -1705,6 +1708,8 @@ class Func(
 					if (has<Address>())
 						print('&')
 				}
+				if (parameters.isNotEmpty() && parameters[0] === JNI_ENV && nativeClass.className == "JNINativeInterface" )
+					print("(*$JNIENV)->")
 				print(nativeName)
 				if (!has<Macro>() || get<Macro>().function) print('(')
 				printList(getNativeParams(withExplicitFunctionAddress = false, withJNIEnv = true)) {

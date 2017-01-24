@@ -131,6 +131,7 @@ EXPORTS
 					<include name="${src.generated.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/dyncall/*.c"/>
 					<include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
+					<include name="${src.generated.native}/system/jni/*.c"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/windows/*.c"/>
 				</fileset>

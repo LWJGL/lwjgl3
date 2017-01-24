@@ -6,6 +6,7 @@ package org.lwjgl.system.jawt.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.system.jawt.*
+import org.lwjgl.system.jni.*
 
 private val JAWT_BINDING = simpleBinding("jawt", callingConvention = CallingConvention.STDCALL)
 val jawt = "JAWTFunctions".nativeClass(JAWT_PACKAGE, prefix = "JAWT_", prefixMethod = "JAWT_", binding = JAWT_BINDING) {
