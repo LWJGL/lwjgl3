@@ -10,8 +10,8 @@
 	<import file="${config}/build-definitions.xml" id="defs"/>
 
 	<!-- *********************************** -->
-	<property name="testng" value="6.8.21"/>
-	<property name="jcommander" value="1.48"/>
+	<property name="testng" value="6.10"/>
+	<property name="jcommander" value="1.60"/>
 	<property name="kotlinc-build" value="1.1-beta"/>
 	<!-- *********************************** -->
 
