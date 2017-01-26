@@ -5,8 +5,6 @@
 package org.lwjgl.system.jni
 
 import org.lwjgl.generator.*
-import java.nio.Buffer
-import java.nio.ByteBuffer
 
 val JNI_PACKAGE = "org.lwjgl.system.jni"
 
@@ -39,6 +37,8 @@ val jdoubleArray = NativeType("jdoubleArray", TypeMapping("jdoubleArray", Double
 val jsize = typedef(jint, "jsize")
 
 val jclass = "jclass".opaque_p
+val jmethodID = "jmethodID".opaque_p
+val jfieldID = "jfieldID".opaque_p
 
 val jobject = NativeType("jobject", TypeMapping("jobject", Any::class.java, Any::class.java))
 val jobject_p = "jobject".opaque_p
@@ -46,8 +46,13 @@ val jobject_p = "jobject".opaque_p
 val jobjectRefType = "jobjectRefType".enumType
 
 val jstring = NativeType("jstring", TypeMapping("jstring", String::class, String::class))
-val java_nio_Buffer = NativeType("jobject", TypeMapping("jobject", Buffer::class, Buffer::class))
-val java_nio_ByteBuffer = NativeType("jobject", TypeMapping("jobject", ByteBuffer::class, ByteBuffer::class))
+
+val java_lang_reflect_Method = java.lang.reflect.Method::class.jobject
+val java_lang_reflect_Field = java.lang.reflect.Field::class.jobject
+val java_nio_Buffer = java.nio.Buffer::class.jobject
+val java_nio_ByteBuffer = java.nio.ByteBuffer::class.jobject
+
+val JavaVM = "JavaVM".opaque_p
 
 val JNINativeMethod_p = struct(JNI_PACKAGE, "JNINativeMethod") {
 	documentation = ""

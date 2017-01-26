@@ -7,7 +7,8 @@ package org.lwjgl.system.jni.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.jni.*
 
-val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefixMethod = "") {
+val JNINativeInterface = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefixMethod = "") {
+	javaImport("java.lang.reflect.*")
 	documentation =
 		"""
 		Bindings to the Java Native Interface (JNI).
@@ -109,6 +110,42 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		),
 
 		returnDoc = "a class object from a fully-qualified name, or #NULL if the class cannot be found"
+	)
+
+	jmethodID(
+		"FromReflectedMethod",
+		"Converts a ##Method or ##Constructor object to a method ID.",
+
+		JNI_ENV,
+		java_lang_reflect_Method.IN("method", "")
+	)
+
+	jfieldID(
+		"FromReflectedField",
+		"Converts a ##Field to a field ID.",
+
+		JNI_ENV,
+		java_lang_reflect_Field.IN("field", "")
+	)
+
+	java_lang_reflect_Method(
+		"ToReflectedMethod",
+		"Converts a method ID derived from {@code cls} to a ##Method or ##Constructor object.",
+
+		JNI_ENV,
+		jclass.IN("cls", ""),
+		jmethodID.IN("methodID", ""),
+		jboolean.IN("isStatic", "must be set to #TRUE if the method ID refers to a static field, and # FALSE otherwise")
+	)
+
+	java_lang_reflect_Method(
+		"ToReflectedField",
+		"Converts a field ID derived from {@code cls} to a ##Field object.",
+
+		JNI_ENV,
+		jclass.IN("cls", ""),
+		jfieldID.IN("fieldID", ""),
+		jboolean.IN("isStatic", "must be set to #TRUE if {@code fieldID} refers to a static field, and #FALSE otherwise")
 	)
 
 	opaque_p(
@@ -245,6 +282,17 @@ val JNINI = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = "JNI", prefix
 		jclass.IN("targetClass", "a Java class object"),
 
 		returnDoc = "“0” on success; returns a negative value on failure"
+	)
+
+	jint(
+		"GetJavaVM",
+		"""
+		Returns the Java VM interface (used in the Invocation API) associated with the current thread. The result is placed at the location pointed to by the
+		second argument, {@code vm}.
+		""",
+
+		JNI_ENV,
+		Check(1)..JavaVM.p.p.OUT("vm", "a pointer to where the result should be placed")
 	)
 
 	void(

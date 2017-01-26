@@ -48,6 +48,9 @@ open class NativeType(
 		"${this.javaClass.simpleName}: $name | ${mapping.jniFunctionType} | ${mapping.nativeMethodType} | ${mapping.javaMethodType}"
 }
 
+// Java instance passed as jobject to native code
+val KClass<*>.jobject: NativeType get() = NativeType("jobject", TypeMapping("jobject", this, this))
+
 abstract class ValueType internal constructor(name: String, mapping: TypeMapping) : NativeType(name, mapping)
 
 // Specialization for primitives.
@@ -153,7 +156,7 @@ class ArrayType internal constructor(
 	type.elementType
 )
 
-// Objects
+// Objects (org.lwjgl.system.Pointer subclasses)
 open class ObjectType(
 	/** The Java wrapper class. */
 	val className: String,
