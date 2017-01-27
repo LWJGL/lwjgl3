@@ -51,7 +51,7 @@ public final class ExampleGL3 extends Demo {
 	private static boolean premult;
 
 	public static void main(String[] args) {
-		GLFWErrorCallback.createThrow().set();
+		GLFWErrorCallback.createPrint().set();
 		if ( !glfwInit() )
 			throw new RuntimeException("Failed to init GLFW.");
 
