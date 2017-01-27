@@ -296,7 +296,7 @@ class Generator(
 
 		Files.list(packageDirectory)
 			.filter { KOTLIN_PATH_MATCHER.matches(it) }
-			.sorted(Path::compareTo)
+			.sorted()
 			.also {
 				it.forEach {
 					try {
