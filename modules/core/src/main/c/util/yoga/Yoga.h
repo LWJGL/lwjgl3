@@ -140,7 +140,7 @@ WIN_EXPORT void YGNodeCopyStyle(const YGNodeRef dstNode, const YGNodeRef srcNode
   WIN_EXPORT type YGNodeLayoutGet##name(const YGNodeRef node)
 
 #define YG_NODE_LAYOUT_EDGE_PROPERTY(type, name) \
-  WIN_EXPORT type YGNodeLayoutGet##name(const YGNodeRef node, const YGEdge edge);
+  WIN_EXPORT type YGNodeLayoutGet##name(const YGNodeRef node, const YGEdge edge)
 
 YG_NODE_PROPERTY(void *, Context, context);
 YG_NODE_PROPERTY(YGMeasureFunc, MeasureFunc, measureFunc);
