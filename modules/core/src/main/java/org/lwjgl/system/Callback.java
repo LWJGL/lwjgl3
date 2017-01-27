@@ -20,6 +20,8 @@ import static org.lwjgl.system.jni.JNINativeInterface.*;
  */
 public abstract class Callback implements Pointer, NativeResource {
 
+	private static final boolean DEBUG_ALLOCATOR = Configuration.DEBUG_MEMORY_ALLOCATOR.get(false);
+
 	private static final long
 		VOID,
 		BOOLEAN,
@@ -121,7 +123,7 @@ public abstract class Callback implements Pointer, NativeResource {
 		if ( handle == NULL )
 			throw new IllegalStateException("Failed to create the DCCallback object");
 
-		if ( Configuration.DEBUG_MEMORY_ALLOCATOR.get(false) )
+		if ( DEBUG_ALLOCATOR )
 			MemoryManage.DebugAllocator.track(handle, 2 * POINTER_SIZE);
 
 		return handle;
@@ -176,7 +178,7 @@ public abstract class Callback implements Pointer, NativeResource {
 		DeleteGlobalRef(dcbGetUserData(functionPointer));
 		dcbFreeCallback(functionPointer);
 
-		if ( Configuration.DEBUG_MEMORY_ALLOCATOR.get(false) )
+		if ( DEBUG_ALLOCATOR )
 			MemoryManage.DebugAllocator.untrack(functionPointer);
 	}
 
