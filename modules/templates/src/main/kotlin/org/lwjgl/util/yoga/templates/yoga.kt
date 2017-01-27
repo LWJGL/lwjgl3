@@ -85,7 +85,6 @@ div {
 		"MeasureModeUndefined".enum,
 		"MeasureModeExactly".enum,
 		"MeasureModeAtMost".enum
-
 	)
 
 	EnumConstant(
@@ -96,7 +95,7 @@ div {
 		"PrintOptionsChildren".enum("", "4")
 	)
 
-	EnumConstant(
+	val Edges = EnumConstant(
 		"YGEdge",
 
 		"EdgeLeft".enum,
@@ -108,7 +107,7 @@ div {
 		"EdgeHorizontal".enum,
 		"EdgeVertical".enum,
 		"EdgeAll".enum
-	)
+	).javaDocLinks
 
 	EnumConstant(
 		"YGPositionType",
@@ -198,25 +197,27 @@ div {
 		""
 	)
 
+	val node = const..YGNodeRef.IN("node", "")
+
 	void(
 		"NodeFree",
 		"",
 
-		const..YGNodeRef.IN("node", "")
+		node
 	)
 
 	void(
 		"NodeFreeRecursive",
 		"",
 
-		const..YGNodeRef.IN("node", "")
+		node
 	)
 
 	void(
 		"NodeReset",
 		"",
 
-		const..YGNodeRef.IN("node", "")
+		node
 	)
 
 	int32_t(
@@ -228,7 +229,7 @@ div {
 		"NodeInsertChild",
 		"",
 
-		const..YGNodeRef.IN("node", ""),
+		node,
 		const..YGNodeRef.IN("child", ""),
 		uint32_t.IN("index", "")
 	)
@@ -237,7 +238,7 @@ div {
 		"NodeRemoveChild",
 		"",
 
-		const..YGNodeRef.IN("node", ""),
+		node,
 		const..YGNodeRef.IN("child", "")
 	)
 
@@ -245,7 +246,7 @@ div {
 		"NodeGetChild",
 		"",
 
-		const..YGNodeRef.IN("node", ""),
+		node,
 		uint32_t.IN("index", "")
 	)
 
@@ -253,24 +254,24 @@ div {
 		"NodeGetParent",
 		"",
 
-		const..YGNodeRef.IN("node", "")
+		node
 	)
 
 	uint32_t(
 		"NodeGetChildCount",
 		"",
 
-		const..YGNodeRef.IN("node", "")
+		node
 	)
 
 	void(
 		"NodeCalculateLayout",
 		"",
 
-		const..YGNodeRef.IN("node", ""),
+		node,
 		float.IN("availableWidth", ""),
 		float.IN("availableHeight", ""),
-		YGDirection.IN("parentDirection", "")
+		YGDirection.IN("parentDirection", "", "Direction\\w+")
 	)
 
 	void(
@@ -282,22 +283,22 @@ div {
 		depends on information not known to YG they must perform this dirty marking manually.
 		""",
 
-		const..YGNodeRef.IN("node", "")
+		node
 	)
 
 	bool(
 		"NodeIsDirty",
 		"",
 
-		const..YGNodeRef.IN("node", "")
+		node
 	)
 
 	void(
 		"NodePrint",
 		"",
 
-		const..YGNodeRef.IN("node", ""),
-		YGPrintOptions.IN("options", "")
+		node,
+		YGPrintOptions.IN("options", "", "PrintOptions\\w+")
 	)
 
 	bool(
@@ -311,7 +312,7 @@ div {
 		"NodeCanUseCachedMeasurement",
 		"",
 
-		YGMeasureMode.IN("widthMode", ""),
+		YGMeasureMode.IN("widthMode", "", "MeasureMode\\w+"),
 		float.IN("width", ""),
 		YGMeasureMode.IN("heightMode", ""),
 		float.IN("height", ""),
@@ -338,7 +339,7 @@ div {
 			"NodeSet$name",
 			"",
 
-			const..YGNodeRef.IN("node", ""),
+			node,
 			type.IN(paramName, "")
 		)
 
@@ -346,7 +347,7 @@ div {
 			"NodeGet$name",
 			"",
 
-			const..YGNodeRef.IN("node", "")
+			node
 		)
 	}
 
@@ -355,15 +356,15 @@ div {
 			"NodeStyleSet$name",
 			documentation,
 
-			const..YGNodeRef.IN("node", ""),
-			type.IN(paramName, "")
+			node,
+			type.IN(paramName, "", if (type.name.startsWith("YG")) "${type.name.substring(2)}\\w+" else "")
 		)
 
 		type(
 			"NodeStyleGet$name",
 			documentation,
 
-			const..YGNodeRef.IN("node", "")
+			node
 		)
 	}
 
@@ -372,7 +373,7 @@ div {
 			"NodeStyleSet$name",
 			documentation,
 
-			const..YGNodeRef.IN("node", ""),
+			node,
 			float.IN(paramName, "")
 		)
 
@@ -380,7 +381,7 @@ div {
 			"NodeStyleSet${name}Percent",
 			documentation,
 
-			const..YGNodeRef.IN("node", ""),
+			node,
 			float.IN(paramName, "")
 		)
 
@@ -388,7 +389,7 @@ div {
 			"NodeStyleGet$name",
 			documentation,
 
-			const..YGNodeRef.IN("node", "")
+			node
 		)
 	}
 
@@ -397,8 +398,8 @@ div {
 			"NodeStyleSet$name",
 			"",
 
-			const..YGNodeRef.IN("node", ""),
-			YGEdge.IN("edge", ""),
+			node,
+			YGEdge.IN("edge", "", Edges),
 			type.IN(paramName, "")
 		)
 
@@ -406,8 +407,8 @@ div {
 			"NodeStyleGet$name",
 			"",
 
-			const..YGNodeRef.IN("node", ""),
-			YGEdge.IN("edge", "")
+			node,
+			YGEdge.IN("edge", "", Edges)
 		)
 	}
 
@@ -416,8 +417,8 @@ div {
 			"NodeStyleSet$name",
 			"",
 
-			const..YGNodeRef.IN("node", ""),
-			YGEdge.IN("edge", ""),
+			node,
+			YGEdge.IN("edge", "", Edges),
 			float.IN(paramName, "")
 		)
 
@@ -425,8 +426,8 @@ div {
 			"NodeStyleSet${name}Percent",
 			"",
 
-			const..YGNodeRef.IN("node", ""),
-			YGEdge.IN("edge", ""),
+			node,
+			YGEdge.IN("edge", "", Edges),
 			float.IN(paramName, "")
 		)
 
@@ -434,8 +435,8 @@ div {
 			"NodeStyleGet$name",
 			"",
 
-			const..YGNodeRef.IN("node", ""),
-			YGEdge.IN("edge", "")
+			node,
+			YGEdge.IN("edge", "", Edges)
 		)
 	}
 
@@ -444,7 +445,20 @@ div {
 			"NodeLayoutGet$name",
 			"",
 
-			const..YGNodeRef.IN("node", "")
+			node
+		)
+	}
+
+	fun YG_NODE_LAYOUT_EDGE_PROPERTY(type: NativeType, name: String) {
+		type(
+			"NodeLayoutGet$name",
+			"""
+			Gets the computed value for this nodes after performing layout. If they were set using pixel values then the returned value will be the same as
+			{@code YGNodeStyleGetXXX}. However if they were set using a percentage value then the returned value is the computed value used during layout.
+			""",
+
+			node,
+			YGEdge.IN("edge", "", Edges)
 		)
 	}
 
@@ -468,7 +482,7 @@ div {
 		"NodeStyleSetFlex",
 		"",
 
-		const..YGNodeRef.IN("node", ""),
+		node,
 		float.IN("flex", "")
 	)
 
@@ -514,30 +528,9 @@ div {
 	YG_NODE_LAYOUT_PROPERTY(float, "Height")
 	YG_NODE_LAYOUT_PROPERTY(YGDirection, "Direction")
 
-	float(
-		"NodeLayoutGetMargin",
-		"""
-		Get the computed margin for this node after performing layout.
-
-		If margin was set using pixel values then the returned value will be the same as #NodeStyleGetMargin(). However if margin was set using a percentage
-		value then the returned value is the computed value used during layout.
-		""",
-
-		const..YGNodeRef.IN("node", ""),
-		YGEdge.IN("edge", "")
-	)
-	float(
-		"NodeLayoutGetPadding",
-		"""
-		Get the computed padding for this node after performing layout.
-
-		If padding was set using pixel values then the returned value will be the same as #NodeStyleGetPadding(). However if padding was set using a percentage
-		value then the returned value is the computed value used during layout.
-		""",
-
-		const..YGNodeRef.IN("node", ""),
-		YGEdge.IN("edge", "")
-	)
+	YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Margin")
+	YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Border")
+	YG_NODE_LAYOUT_EDGE_PROPERTY(float, "Padding")
 
 	void(
 		"SetLogger",
@@ -550,7 +543,7 @@ div {
 		"Log",
 		"",
 
-		YGLogLevel.IN("level", ""),
+		YGLogLevel.IN("level", "", "LogLevel\\w+"),
 		const..charUTF8_p.IN("message", "")
 	)
 
@@ -558,7 +551,7 @@ div {
 		"SetExperimentalFeatureEnabled",
 		"",
 
-		YGExperimentalFeature.IN("feature", ""),
+		YGExperimentalFeature.IN("feature", "", "ExperimentalFeature\\w+"),
 		bool.IN("enabled", "")
 	)
 
@@ -566,7 +559,7 @@ div {
 		"IsExperimentalFeatureEnabled",
 		"",
 
-		YGExperimentalFeature.IN("feature", "")
+		YGExperimentalFeature.IN("feature", "", "ExperimentalFeature\\w+")
 	)
 
 	void(
