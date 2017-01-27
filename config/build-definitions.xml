@@ -267,10 +267,11 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 		<attribute name="name"/>
 		<attribute name="url"/>
 		<attribute name="dest"/>
+		<attribute name="skipexisting" default="true"/>
 
 		<sequential>
 			<quiet>
-				<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true"/>
+				<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true" skipexisting="@{skipexisting}"/>
 			</quiet>
 		</sequential>
 	</macrodef>
@@ -283,7 +284,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 		<attribute name="dest"/>
 
 		<sequential>
-			<get-quiet name="@{name}" url="http://central.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}/@{artifact}.jar"/>
+			<get-quiet name="@{name}" url="http://central.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}/@{artifact}.jar" skipexisting="false"/>
 		</sequential>
 	</macrodef>
 
@@ -293,7 +294,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 		<attribute name="dest" default="${lib}/${platform}/@{artifact}"/>
 
 		<sequential>
-			<get-quiet name="@{name}" url="https://build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="@{dest}"/>
+			<get-quiet name="@{name}" url="https://build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="@{dest}" skipexisting="false"/>
 		</sequential>
 	</macrodef>
 </project>
