@@ -18,6 +18,7 @@
 	<macrodef name="compile">
 		<attribute name="dest"/>
 		<attribute name="lang" default="c"/>
+		<attribute name="lto" default="-flto"/>
 		<attribute name="flags"/>
 		<attribute name="relative" default="true"/>
 		<element name="source" implicit="true"/>
@@ -31,7 +32,7 @@
 				<arg line="-c -std=c++11" if:set="cpp"/>
 				<arg line="-m64" if:true="${build.arch.x64}"/>
 				<arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
-				<arg line="-O3 -flto -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
+				<arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
 
 				<arg value="-I${jni.headers}"/>
 				<arg value="-I${jni.headers}/linux"/>
@@ -61,6 +62,7 @@
 			<local name="lib-uptodate"/>
 			<uptodate property="lib-uptodate" targetfile="${lib}/lib@{name}${LIB_POSTFIX}.so">
 				<srcfiles file="config/${platform}/build.xml"/>
+				<srcfiles file="${bin.native}/wrap_memcpy.o" if:true="${build.arch.x64}"/>
 				<srcfiles dir="@{dest}" includes="**"/>
 			</uptodate>
 
@@ -105,7 +107,7 @@
 	</macrodef>
 	
 	<target name="compile-native-platform">
-		<compile dest="${bin.native}" flags="">
+		<compile dest="${bin.native}" flags="" lto="">
 			<fileset dir="." includes="${src.native}/system/linux/wrap_memcpy.c"/>
 		</compile>
 
