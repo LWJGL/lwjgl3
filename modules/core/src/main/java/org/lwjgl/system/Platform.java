@@ -9,22 +9,22 @@ import java.util.regex.Pattern;
 public enum Platform {
 
 	LINUX("Linux") {
-		private final Pattern SO = Pattern.compile("lib\\w+[.]so(?:[.]\\d+){0,3}");
+		private final Pattern SO = Pattern.compile("(?:^|/)lib\\w+[.]so(?:[.]\\d+){0,3}$");
 
 		@Override
 		String mapLibraryName(String name) {
-			if ( SO.matcher(name).matches() )
+			if ( SO.matcher(name).find() )
 				return name;
 
 			return System.mapLibraryName(name);
 		}
 	},
 	MACOSX("Mac OS X") {
-		private final Pattern DYLIB = Pattern.compile("lib\\w+[.]dylib");
+		private final Pattern DYLIB = Pattern.compile("(?:^|/)lib\\w+[.]dylib$");
 
 		@Override
 		String mapLibraryName(String name) {
-			if ( DYLIB.matcher(name).matches() )
+			if ( DYLIB.matcher(name).find() )
 				return name;
 
 			return System.mapLibraryName(name);
