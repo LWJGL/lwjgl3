@@ -74,26 +74,24 @@ public final class PerfTestMH {
 		);
 		MethodHandle testExtern = testExternNMH.getHandle();
 
-		try {
-			long t = 0;
-			for ( int i = 0; i < 10000; i++ ) {
-				t += System.nanoTime();
-			}
-			if ( t == 0 )
-				throw new IllegalStateException();
-
-			for ( int i = 0; i < 3; i++ ) {
-				System.out.println();
-				benchGL();
-				benchExplicit(caps);
-				benchThreadLocal();
-				benchExtern(testExtern);
-			}
-		} finally {
-			testExternNMH.free();
-			testThreadLocalNMH.free();
-			testExplicitNMH.free();
+		long t = 0;
+		for ( int i = 0; i < 10000; i++ ) {
+			t += System.nanoTime();
 		}
+		if ( t == 0 )
+			throw new IllegalStateException();
+
+		for ( int i = 0; i < 3; i++ ) {
+			System.out.println();
+			benchGL();
+			benchExplicit(caps);
+			benchThreadLocal();
+			benchExtern(testExtern);
+		}
+
+		testExternNMH.free();
+		testThreadLocalNMH.free();
+		testExplicitNMH.free();
 
 		glfwTerminate();
 	}
@@ -128,16 +126,9 @@ public final class PerfTestMH {
 
 	private static long benchThreadLocal(int loops) {
 		long t = System.nanoTime();
-		MethodHandle handle = testThreadLocal;
-		try {
-			handle.invokeExact(0, 0);
-		} catch (Throwable throwable) {
-			throw new RuntimeException(throwable);
-		}
-
 		for ( int i = 0; i < loops; i++ ) {
 			try {
-				handle.invokeExact(0, 0);
+				testThreadLocal.invokeExact(0, 0);
 			} catch (Throwable ignored) {
 			}
 		}
@@ -161,7 +152,6 @@ public final class PerfTestMH {
 			} catch (Throwable ignored) {
 			}
 		}
-
 		t = System.nanoTime() - t;
 		return t;
 	}
