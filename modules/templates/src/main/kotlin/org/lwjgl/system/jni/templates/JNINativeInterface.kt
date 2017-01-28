@@ -78,7 +78,9 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = 
 		returnDoc = "the major version number in the higher 16 bits and the minor version number in the lower 16 bits"
 	)
 
-	jclass(
+	Code(
+		nativeCall = "\treturn (jlong)(intptr_t)(*__env)->NewGlobalRef(__env, (*__env)->FindClass(__env, name));"
+	)..jclass(
 		"FindClass",
 		"""
 		Returns a class object from a fully-qualified name.
@@ -98,6 +100,14 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = 
 		The array type signature of the array class {@code java.lang.Object[]} is:
 		${codeBlock("""
 "[Ljava/lang/Object;"""")}
+
+		${note(
+			"""
+			The {@code jclass} returned by {@code FindClass} is a local reference and cannot be returned directly from the JNI function. For this reason LWJGL
+			passes it to #NewGlobalRef() and that reference is returned instead. Users of this method must call #DeleteGlobalRef() when the {@code jclass} is
+			no longer used.
+			"""
+		)}
 		""",
 
 		JNI_ENV,
