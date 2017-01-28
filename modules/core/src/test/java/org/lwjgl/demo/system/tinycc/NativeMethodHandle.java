@@ -17,7 +17,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.util.stream.*;
 
-import static org.lwjgl.system.JNITinyHeader.prependJNIHeader;
+import static org.lwjgl.system.JNITinyHeader.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jni.JNINativeInterface.*;
@@ -44,7 +44,7 @@ public class NativeMethodHandle implements NativeResource {
 
 	public enum CallConvention {
 		DEFAULT(""),
-		STDCALL("__stdcall ");
+		STDCALL("JNICALL ");
 
 		final String modifier;
 
@@ -110,17 +110,27 @@ public class NativeMethodHandle implements NativeResource {
 		tcc_set_output_type(tcc, TCC_OUTPUT_MEMORY);
 
 		int poffset = mode == Mode.EXPLICIT ? 1 : 0;
+
+		String declarationKeyword;
+		String declarationName;
+		if ( mode == Mode.EXTERN ) {
+			declarationKeyword = "extern";
+			declarationName = callConvention.modifier + "func";
+		} else {
+			declarationKeyword = "typedef";
+			declarationName = "(" + callConvention.modifier + "*FuncPROC)";
+		}
+
 		String source = "" +
-			"typedef void (" + callConvention.modifier + "*FuncPROC) (" + Stream.of(ptypes)
+			declarationKeyword + " " + getNativeType(rtype) + " " + declarationName + "(" + Stream.of(ptypes)
 			.map(NativeMethodHandle::getNativeType)
 			.collect(Collectors.joining(", ")) + ");\n" +
-			(mode == Mode.EXTERN ? "extern FuncPROC func;\n" : "") +
 			"\n" +
-			"JNIEXPORT void JNICALL call(JNIEnv *__env, jclass clazz" + IntStream.range(0, ptypesJNI.length)
+			"JNIEXPORT " + getNativeType(rtype) + " JNICALL call(JNIEnv *__env, jclass clazz" + IntStream.range(0, ptypesJNI.length)
 			.mapToObj(i -> getNativeType(ptypesJNI[i]) + " arg" + i)
 			.collect(Collectors.joining(", ", ptypesJNI.length == 0 ? "" : ", ", "")) + ") {\n" +
 			mode.getFunctionAddress(ptr) +
-			"\tfunc(" + IntStream.range(poffset, ptypes.length + poffset)
+			"\t" + (rtype == void.class ? "" : "return ") + "func(" + IntStream.range(poffset, ptypes.length + poffset)
 			.mapToObj(i -> "arg" + i)
 			.collect(Collectors.joining(", ")) + ");\n" +
 			"}\n";

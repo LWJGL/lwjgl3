@@ -76,7 +76,7 @@ public final class PerfTest {
 
 		String source = "" +
 			"typedef void (JNICALL *glVertexAttribI1iPROC) (jint, jint);\n" +
-			"extern glVertexAttribI1iPROC glVertexAttribI1i;\n" +
+			"extern void JNICALL glVertexAttribI1i(jint, jint);\n" +
 			"\n" +
 			"JNIEXPORT void JNICALL testExplicit(JNIEnv *__env, jclass clazz, jlong __functionAddress, jint index, jint x) {\n" +
 			"  glVertexAttribI1iPROC glVertexAttribI1i = (glVertexAttribI1iPROC)(intptr_t)__functionAddress;\n" +
@@ -84,7 +84,7 @@ public final class PerfTest {
 			"}\n" +
 			"\n" +
 			"JNIEXPORT void JNICALL testThreadLocal(JNIEnv *__env, jclass clazz, jint index, jint x) {\n" +
-			"  glVertexAttribI1iPROC glVertexAttribI1i = (glVertexAttribI1iPROC)(intptr_t)((void **)(*__env)->reserved3)[1968];" +
+			"  glVertexAttribI1iPROC glVertexAttribI1i = (glVertexAttribI1iPROC)(intptr_t)((void **)(*__env)->reserved3)[1968];\n" +
 			"  glVertexAttribI1i(index, x);\n" +
 			"}\n" +
 			"\n" +
