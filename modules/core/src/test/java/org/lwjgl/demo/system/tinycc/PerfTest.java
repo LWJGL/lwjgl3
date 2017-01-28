@@ -46,10 +46,6 @@ public final class PerfTest {
 		return t;
 	}
 
-	// ------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------
-
 	public static final class JNITest {
 
 		private JNITest() {
@@ -63,7 +59,7 @@ public final class PerfTest {
 
 	}
 
-	public static void main0(String[] args) {
+	public static void main(String[] args) {
 		glfwInit();
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		long window = glfwCreateWindow(100, 100, "TinyCC Perf Test", NULL, NULL);
@@ -199,138 +195,6 @@ public final class PerfTest {
 		for ( int i = 0; i < loops; i++ ) {
 			JNITest.testExtern(0, 0);
 		}
-		t = System.nanoTime() - t;
-		return t;
-	}
-
-	// ------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------
-	// ------------------------------------------------------------------------------------------
-
-	private static final NativeMethodHandle testExplicitNMH = NativeMethodHandle.create(
-		NativeMethodHandle.Mode.EXPLICIT,
-		NativeMethodHandle.CallConvention.STDCALL,
-		void.class,
-		int.class, int.class
-	);
-
-	private static final NativeMethodHandle testThreadLocalNMH = NativeMethodHandle.create(
-		NativeMethodHandle.Mode.THREAD_LOCAL,
-		NativeMethodHandle.CallConvention.STDCALL,
-		1968,
-		void.class,
-		int.class, int.class
-	);
-
-	private static final MethodHandle testExplicit    = testExplicitNMH.getHandle();
-	private static final MethodHandle testThreadLocal = testThreadLocalNMH.getHandle();
-
-
-	public static void main(String[] args) {
-		glfwInit();
-		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-		long window = glfwCreateWindow(100, 100, "TinyCC Perf Test", NULL, NULL);
-
-		glfwMakeContextCurrent(window);
-		GLCapabilities caps = GL.createCapabilities();
-
-		NativeMethodHandle testExternNMH = NativeMethodHandle.create(
-			NativeMethodHandle.Mode.EXTERN,
-			NativeMethodHandle.CallConvention.STDCALL,
-			caps.glVertexAttribI1i,
-			void.class,
-			int.class, int.class
-		);
-		MethodHandle testExtern = testExternNMH.getHandle();
-
-		try {
-			long t = 0;
-			for ( int i = 0; i < 10000; i++ ) {
-				t += System.nanoTime();
-			}
-			if ( t == 0 )
-				throw new IllegalStateException();
-
-			for ( int i = 0; i < 3; i++ ) {
-				System.out.println();
-				benchGL();
-				benchExplicitMH(caps);
-				benchThreadLocalMH();
-				benchExternMH(testExtern);
-			}
-		} finally {
-			testExternNMH.free();
-			testThreadLocalNMH.free();
-			testExplicitNMH.free();
-		}
-
-		glfwTerminate();
-	}
-
-	private static void benchExplicitMH(GLCapabilities caps) {
-		long t = 0;
-		for ( int i = 0; i < 10000; i++ ) {
-			t += benchExplicitMH(10000, caps.glVertexAttribI1i);
-		}
-		System.out.println("Explicit MH   : " + t / 10000 / 10000.0);
-	}
-
-	private static long benchExplicitMH(int loops, long func) {
-		long t = System.nanoTime();
-		for ( int i = 0; i < loops; i++ ) {
-			try {
-				testExplicit.invokeExact(func, 0, 0);
-			} catch (Throwable ignored) {
-			}
-		}
-		t = System.nanoTime() - t;
-		return t;
-	}
-
-	private static void benchThreadLocalMH() {
-		long t = 0;
-		for ( int i = 0; i < 10000; i++ ) {
-			t += benchThreadLocalMH(10000);
-		}
-		System.out.println("ThreadLocal MH: " + t / 10000 / 10000.0);
-	}
-
-	private static long benchThreadLocalMH(int loops) {
-		long t = System.nanoTime();
-		MethodHandle handle = testThreadLocal;
-		try {
-			handle.invokeExact(0, 0);
-		} catch (Throwable throwable) {
-			throw new RuntimeException(throwable);
-		}
-
-		for ( int i = 0; i < loops; i++ ) {
-			try {
-				handle.invokeExact(0, 0);
-			} catch (Throwable ignored) {
-			}
-		}
-		t = System.nanoTime() - t;
-		return t;
-	}
-
-	private static void benchExternMH(MethodHandle handle) {
-		long t = 0;
-		for ( int i = 0; i < 10000; i++ ) {
-			t += benchExternMH(handle, 10000);
-		}
-		System.out.println("Extern MH     : " + t / 10000 / 10000.0);
-	}
-
-	private static long benchExternMH(MethodHandle handle, int loops) {
-		long t = System.nanoTime();
-		for ( int i = 0; i < loops; i++ ) {
-			try {
-				handle.invokeExact(0, 0);
-			} catch (Throwable ignored) {
-			}
-		}
-
 		t = System.nanoTime() - t;
 		return t;
 	}
