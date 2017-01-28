@@ -56,6 +56,7 @@ enum class Binding(
 	PAR("binding.par", "org.lwjgl.util.par"),
 	SSE("binding.sse", "org.lwjgl.util.simd"),
 	STB("binding.stb", "org.lwjgl.stb"),
+	TINYCC("binding.tinycc", "org.lwjgl.system.tinycc", arrayOverloads = false),
 	TINYEXR("binding.tinyexr", "org.lwjgl.util.tinyexr", arrayOverloads = false),
 	TINYFD("binding.tinyfd", "org.lwjgl.util.tinyfd"),
 	VULKAN("binding.vulkan", "org.lwjgl.vulkan"),

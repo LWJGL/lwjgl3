@@ -32,6 +32,7 @@ This script is included in /config/build-definitions.xml.
 	<property name="binding.par" value="true"/>
 	<property name="binding.sse" value="true"/>
 	<property name="binding.stb" value="true"/>
+	<property name="binding.tinycc" value="true"/>
 	<property name="binding.tinyexr" value="true"/>
 	<property name="binding.tinyfd" value="true"/>
 	<property name="binding.vulkan" value="true"/>

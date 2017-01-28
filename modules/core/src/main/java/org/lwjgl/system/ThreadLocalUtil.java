@@ -90,11 +90,15 @@ public final class ThreadLocalUtil {
 	capabilities instance).
 	*/
 
+	public static final long GET_JNI_ENV = getJNIEnvPROC();
+
 	/** The global JNIEnv. */
 	private static final long JNI_NATIVE_INTERFACE = getThreadJNIEnv();
 
 	private ThreadLocalUtil() {
 	}
+
+	private static native long getJNIEnvPROC();
 
 	private static native long getThreadJNIEnv();
 

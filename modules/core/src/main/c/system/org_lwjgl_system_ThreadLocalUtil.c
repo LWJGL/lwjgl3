@@ -9,7 +9,18 @@ ENABLE_WARNINGS()
 
 extern jvmtiEnv* jvmti;
 
+static JNIEnv* getJNIEnv(jboolean *async) {
+    return getEnv(async);
+}
+
 EXTERN_C_ENTER
+
+// getJNIEnvPROC()J
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_getJNIEnvPROC(JNIEnv *env, jclass clazz) {
+	UNUSED_PARAMS(env, clazz)
+
+    return (jlong)(intptr_t)&getJNIEnv;
+}
 
 // getJNIEnv()J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_getThreadJNIEnv(JNIEnv *env, jclass clazz) {
