@@ -75,7 +75,7 @@ public final class PerfTest {
 		tcc_set_output_type(tcc, TCC_OUTPUT_MEMORY);
 
 		String source = "" +
-			"typedef void (__stdcall *glVertexAttribI1iPROC) (jint, jint);\n" +
+			"typedef void (JNICALL *glVertexAttribI1iPROC) (jint, jint);\n" +
 			"extern glVertexAttribI1iPROC glVertexAttribI1i;\n" +
 			"\n" +
 			"JNIEXPORT void JNICALL testExplicit(JNIEnv *__env, jclass clazz, jlong __functionAddress, jint index, jint x) {\n" +
