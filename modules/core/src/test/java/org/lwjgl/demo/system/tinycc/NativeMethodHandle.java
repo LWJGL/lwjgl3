@@ -4,13 +4,11 @@
  */
 package org.lwjgl.demo.system.tinycc;
 
-import javassist.ClassPool;
-import javassist.bytecode.AccessFlag;
-import javassist.bytecode.ClassFile;
-import javassist.bytecode.MethodInfo;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.*;
 import org.lwjgl.system.jni.JNINativeMethod;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -154,6 +152,8 @@ public class NativeMethodHandle implements NativeResource {
 		String className = "JNI" + callConvention.name() + mode.ordinal() + '$' + Stream.of(ptypesJNI)
 			.map(NativeMethodHandle::getJNISignature)
 			.collect(Collectors.joining()) + '$' + getJNISignature(rtype);
+		String fqn = "org.lwjgl.system." + className;
+		String fqnInternal = fqn.replace('.', '/');
 
 		try ( MemoryStack stack = stackPush() ) {
 			JNINativeMethod.Buffer methods = JNINativeMethod.calloc(1);
@@ -162,18 +162,12 @@ public class NativeMethodHandle implements NativeResource {
 				.signature(stack.UTF8(getJNISignature(mode, rtype, ptypesJNI)))
 				.fnPtr(call);
 
-			ClassFile cf = new ClassFile(false, "org.lwjgl.system." + className, null);
-			cf.setMajorVersion(52);
-			cf.setMinorVersion(0);
-			cf.setAccessFlags(AccessFlag.PUBLIC | AccessFlag.FINAL);
+			ClassWriter cw = new ClassWriter(0);
+			cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC | Opcodes.ACC_SUPER | Opcodes.ACC_FINAL, fqnInternal, null, "java/lang/Object", null);
+			cw.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC | Opcodes.ACC_NATIVE, "call", getJNISignature(mode, rtype, ptypesJNI), null, null);
+			Class<?> clazz = ClassUtils.defineClass(NativeMethodHandle.class.getClassLoader(), NativeMethodHandle.class, fqn, cw.toByteArray(), null);
 
-			MethodInfo m = new MethodInfo(cf.getConstPool(), "call", getJNISignature(mode, rtype, ptypesJNI));
-			m.setAccessFlags(AccessFlag.PUBLIC | AccessFlag.STATIC | AccessFlag.NATIVE);
-			cf.addMethod(m);
-
-			Class<?> clazz = ClassPool.getDefault().makeClass(cf).toClass();
-
-			if ( RegisterNatives(FindClass("org/lwjgl/system/" + className), methods) != 0 )
+			if ( RegisterNatives(clazz, methods) != 0 )
 				throw new IllegalStateException("Failed to register JNI natives");
 
 			handle = MethodHandles

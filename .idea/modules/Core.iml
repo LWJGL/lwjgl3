@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/../../bin/Core" />
     <output-test url="file://$MODULE_DIR$/../../bin/Tests" />
     <exclude-output />
@@ -13,7 +13,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="TestNG" level="project" />
+    <orderEntry type="library" scope="TEST" name="asm" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Ant Launcher" level="project" />
-    <orderEntry type="library" name="javassist" level="project" />
   </component>
 </module>

@@ -228,7 +228,7 @@ public final class CallbackTest {
 				throw new IllegalStateException("Compilation failed.");
 
 			tcc_add_symbol(tcc, "getEnv", ThreadLocalUtil.GET_JNI_ENV);
-			addSymbol(tcc, block, 2, "callback", FindClass(method.getDeclaringClass().getName().replace('.', '/')));
+			addSymbol(tcc, block, 2, "callback", NewGlobalRef(method.getDeclaringClass()));
 			addSymbol(tcc, block, 3, "method", FromReflectedMethod(method));
 		}
 
