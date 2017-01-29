@@ -11,6 +11,7 @@
 
 	<!-- *********************************** -->
 	<property name="javassist" value="3.22.0-CR1"/>
+	<property name="asm" value="5.2"/>
 	<property name="testng" value="6.10"/>
 	<property name="jcommander" value="1.60"/>
 	<property name="kotlinc-version" value="1.1-beta"/>
@@ -73,6 +74,7 @@
 	<!-- Downloads the Java dependencies. -->
 	<target name="-lib-download" unless="lib-uptodate">
 		<update-mvn name="Javassist" group="org/javassist" artifact="javassist" version="${javassist}" dest="${lib}"/>
+		<update-mvn name="ASM" group="org/ow2/asm" artifact="asm" version="${asm}" dest="${lib}"/>
 		<update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}"/>
 		<update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
 

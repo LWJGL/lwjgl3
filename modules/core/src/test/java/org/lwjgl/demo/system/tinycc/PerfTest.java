@@ -10,8 +10,6 @@ import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.jni.JNINativeMethod;
 import org.lwjgl.system.tinycc.ErrorCallback;
 
-import java.lang.invoke.MethodHandle;
-
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.system.JNITinyHeader.*;
@@ -120,10 +118,7 @@ public final class PerfTest {
 				.signature(stack.UTF8("(II)V"))
 				.fnPtr(testExtern_p);
 
-			if ( RegisterNatives(
-				FindClass("org/lwjgl/demo/system/tinycc/PerfTest$JNITest"),
-				methods
-			) != 0 )
+			if ( RegisterNatives(JNITest.class, methods) != 0 )
 				throw new IllegalStateException("Failed to register JNI natives");
 
 			long t = 0;

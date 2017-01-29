@@ -135,10 +135,7 @@ public final class HelloTinyCC {
 				.signature(stack.UTF8("()I"))
 				.fnPtr(func);
 
-			RegisterNatives(
-				FindClass("org/lwjgl/demo/system/tinycc/HelloTinyCC$JNITest"),
-				methods
-			);
+			RegisterNatives(JNITest.class, methods);
 
 			System.out.println("JNITest.getPointerSize() = " + JNITest.getPointerSize());
 		} finally {

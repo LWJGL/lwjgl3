@@ -79,7 +79,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = 
 	)
 
 	Code(
-		nativeCall = "\treturn (jlong)(intptr_t)(*__env)->NewGlobalRef(__env, (*__env)->FindClass(__env, name));"
+		nativeCall = "\treturn (*__env)->FindClass(__env, name);"
 	)..jclass(
 		"FindClass",
 		"""
@@ -120,6 +120,16 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = 
 		),
 
 		returnDoc = "a class object from a fully-qualified name, or #NULL if the class cannot be found"
+	)
+
+	Code(
+		nativeCall = "\tUNUSED_PARAM(__env); return (jlong)(intptr_t)klass;"
+	)..opaque_p(
+		"ClassToPointer",
+		"Helper function to convert a Class to a long pointer",
+
+		JNI_ENV,
+		jclass.IN("klass", "")
 	)
 
 	jmethodID(
