@@ -289,6 +289,11 @@ public class Configuration<T> {
 	/** Similar to {@link #LIBRARY_NAME} for the OpenVR library (<b>org.lwjgl.openvr.libname</b>). */
 	public static final Configuration<String> OPENVR_LIBRARY_NAME = new Configuration<>("org.lwjgl.openvr.libname", StateInit.STRING);
 
+	// -- TINYCC
+
+	/** Similar to {@link #LIBRARY_NAME} for the TINYCC library (<b>org.lwjgl.system.tinycc.libname</b>). */
+	public static final Configuration<String> TINYCC_LIBRARY_NAME = new Configuration<>("org.lwjgl.system.tinycc.libname", StateInit.STRING);
+
 	// -- VULKAN
 
 	/** Similar to {@link #EGL_EXPLICIT_INIT} for the Vulkan library (<b>org.lwjgl.vulkan.explicitInit</b>). */

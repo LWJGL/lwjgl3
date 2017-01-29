@@ -160,6 +160,11 @@ enum Artifacts {
 		"Single-file public domain libraries for fonts, images, ogg vorbis files and more.",
 		Platforms.ALL
 	),
+	TINYCC(
+		"lwjgl-tinycc", "LWJGL - TinyCC",
+		"TinyCC is a small but hyper fast C compiler.",
+		Platforms.ALL
+	),
 	TINYEXR(
 		"lwjgl-tinyexr", "LWJGL - Tiny OpenEXR",
 		"A small library to load and save OpenEXR(.exr) images.",
