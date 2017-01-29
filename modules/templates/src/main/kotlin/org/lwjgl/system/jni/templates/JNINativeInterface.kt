@@ -100,14 +100,6 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = 
 		The array type signature of the array class {@code java.lang.Object[]} is:
 		${codeBlock("""
 "[Ljava/lang/Object;"""")}
-
-		${note(
-			"""
-			The {@code jclass} returned by {@code FindClass} is a local reference and cannot be returned directly from the JNI function. For this reason LWJGL
-			passes it to #NewGlobalRef() and that reference is returned instead. Users of this method must call #DeleteGlobalRef() when the {@code jclass} is
-			no longer used.
-			"""
-		)}
 		""",
 
 		JNI_ENV,
@@ -123,10 +115,18 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = 
 	)
 
 	Code(
-		nativeCall = "\tUNUSED_PARAM(__env); return (jlong)(intptr_t)klass;"
+		nativeCall = "\treturn (jlong)(intptr_t)(*__env)->NewGlobalRef(__env, klass);"
 	)..opaque_p(
 		"ClassToPointer",
-		"Helper function to convert a Class to a long pointer",
+		"""
+		Converts a Class object to a long.
+		${note(
+        """
+        The long returned by this method will be a global reference. Users of this method must call #DeleteGlobalRef() when the value returned by
+        this method is no longer used.
+        """
+    )}
+		""",
 
 		JNI_ENV,
 		jclass.IN("klass", "")

@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
- * Utility methods to define a {@link Class} within the JVM and instantiate a class without calling any constructor.
+ * Utility methods to define a {@link Class} within the JVM.
  */
 class ClassUtils {
 

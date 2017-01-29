@@ -486,7 +486,6 @@
 		<lwjgl.javac srcdir="${src.tests}" destdir="${bin.tests}" taskname="javac: Tests">
 			<classpath>
 				<pathelement path="${bin.core}"/>
-				<pathelement path="${lib}/javassist.jar"/>
 				<pathelement path="${lib}/asm.jar"/>
 				<pathelement path="${lib}/testng.jar"/>
 			</classpath>
@@ -546,7 +545,6 @@
 	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native, -init-runtime">
 		<testng outputDir="${bin.html.tests}" classpathref="runtime.classpath" taskname="Tests">
 			<classpath>
-				<pathelement path="${lib}/javassist.jar"/>
 				<pathelement path="${lib}/asm.jar"/>
 				<pathelement path="${lib}/jcommander.jar"/>
 			</classpath>
@@ -579,7 +577,6 @@
 
 		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="${failonerror}" spawn="${spawn}" taskname="Demo">
 			<classpath>
-				<pathelement path="${lib}/javassist.jar"/>
 				<pathelement path="${lib}/asm.jar"/>
 				<pathelement path="${lib}/testng.jar"/>
 			</classpath>

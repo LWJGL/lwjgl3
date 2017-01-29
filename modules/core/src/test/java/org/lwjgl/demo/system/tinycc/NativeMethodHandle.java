@@ -4,10 +4,6 @@
  */
 package org.lwjgl.demo.system.tinycc;
 
-import javassist.ClassPool;
-import javassist.bytecode.AccessFlag;
-import javassist.bytecode.ClassFile;
-import javassist.bytecode.MethodInfo;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.*;
 import org.lwjgl.system.jni.JNINativeMethod;
@@ -26,8 +22,6 @@ import static org.lwjgl.system.jni.JNINativeInterface.*;
 import static org.lwjgl.system.tinycc.TinyCC.*;
 
 public class NativeMethodHandle implements NativeResource {
-
-	private static final boolean USE_ASM = true;
 
 	public enum Mode {
 		EXPLICIT {
@@ -168,22 +162,10 @@ public class NativeMethodHandle implements NativeResource {
 				.signature(stack.UTF8(getJNISignature(mode, rtype, ptypesJNI)))
 				.fnPtr(call);
 
-			Class<?> clazz;
-			if (USE_ASM) {
-				ClassWriter cw = new ClassWriter(0);
-				cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC | Opcodes.ACC_SUPER | Opcodes.ACC_FINAL, fqnInternal, null, "java/lang/Object", null);
-				cw.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC | Opcodes.ACC_NATIVE, "call", getJNISignature(mode, rtype, ptypesJNI), null, null);
-			    clazz = ClassUtils.defineClass(NativeMethodHandle.class.getClassLoader(), NativeMethodHandle.class, fqn, cw.toByteArray(), null);
-			} else {
-				ClassFile cf = new ClassFile(false, fqn, null);
-				cf.setMajorVersion(52);
-				cf.setMinorVersion(0);
-				cf.setAccessFlags(AccessFlag.PUBLIC | AccessFlag.FINAL);
-				MethodInfo m = new MethodInfo(cf.getConstPool(), "call", getJNISignature(mode, rtype, ptypesJNI));
-				m.setAccessFlags(AccessFlag.PUBLIC | AccessFlag.STATIC | AccessFlag.NATIVE);
-				cf.addMethod(m);
-				clazz = ClassPool.getDefault().makeClass(cf).toClass();
-			}
+			ClassWriter cw = new ClassWriter(0);
+			cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC | Opcodes.ACC_SUPER | Opcodes.ACC_FINAL, fqnInternal, null, "java/lang/Object", null);
+			cw.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC | Opcodes.ACC_NATIVE, "call", getJNISignature(mode, rtype, ptypesJNI), null, null);
+			Class<?> clazz = ClassUtils.defineClass(NativeMethodHandle.class.getClassLoader(), NativeMethodHandle.class, fqn, cw.toByteArray(), null);
 
 			if ( RegisterNatives(clazz, methods) != 0 )
 				throw new IllegalStateException("Failed to register JNI natives");
