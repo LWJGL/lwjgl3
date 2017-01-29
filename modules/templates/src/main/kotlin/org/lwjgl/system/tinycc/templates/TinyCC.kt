@@ -13,7 +13,7 @@ val TinyCC = "TinyCC".nativeClass(TINYCC_PACKAGE, prefix = "TCC", prefixMethod =
 	EnumConstant(
 		"Output types.",
 
-		"OUTPUT_MEMORY".enum("output will be run in memory (default)", "1"),
+		"OUTPUT_MEMORY".enum("output will be run in memory", "1"),
 		"OUTPUT_EXE".enum("executable file", "2"),
 		"OUTPUT_DLL".enum("dynamic library", "3"),
 		"OUTPUT_OBJ".enum("object file", "4"),
