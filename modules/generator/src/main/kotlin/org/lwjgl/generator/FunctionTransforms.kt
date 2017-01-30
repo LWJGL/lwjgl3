@@ -130,7 +130,7 @@ internal class AutoTypeParamTransform(val autoType: String) : FunctionTransform<
 }
 
 internal class AutoTypeTargetTransform(val autoType: PointerMapping) : FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String) = "${autoType.javaMethodType.simpleName} ${param.name}"
+	override fun transformDeclaration(param: Parameter, original: String) = "${autoType.javaMethodName} ${param.name}"
 	override fun transformCall(param: Parameter, original: String) = original
 }
 
@@ -317,7 +317,7 @@ internal class BufferReturnTransform(
 ) : FunctionTransform<ReturnValue>, ReturnLaterTransform {
 
 	override fun transformDeclaration(param: ReturnValue, original: String): String? = if (charMapping == null)
-		(outParam.nativeType.mapping as PointerMapping).javaMethodType.simpleName
+		(outParam.nativeType.mapping as PointerMapping).javaMethodName
 	else
 		"String"
 

@@ -844,7 +844,7 @@ class Func(
 					val bufferType = if (isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA)
 						"ByteBuffer"
 					else
-						returns.nativeType.mapping.javaMethodType.simpleName
+						returns.nativeType.mapping.javaMethodName
 
 					print("return mem$bufferType")
 					if (isNullTerminated)
@@ -1484,7 +1484,7 @@ class Func(
 					val bufferType = if (isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA)
 						"ByteBuffer"
 					else
-						returns.nativeType.mapping.javaMethodType.simpleName
+						returns.nativeType.mapping.javaMethodName
 
 					val builder = StringBuilder()
 					builder.append("mem$bufferType")

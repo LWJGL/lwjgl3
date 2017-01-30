@@ -38,14 +38,14 @@ open class NativeType(
 
 	/** The native method argument type. */
 	internal val nativeMethodType
-		get() = mapping.nativeMethodType.simpleName
+		get() = mapping.nativeMethodName
 
 	/** The Java method argument type. */
 	internal open val javaMethodType
-		get() = if (this.mapping === PrimitiveMapping.BOOLEAN4) "boolean" else mapping.javaMethodType.simpleName
+		get() = if (this.mapping === PrimitiveMapping.BOOLEAN4) "boolean" else mapping.javaMethodName
 
 	override fun toString() =
-		"${this.javaClass.simpleName}: $name | ${mapping.jniFunctionType} | ${mapping.nativeMethodType} | ${mapping.javaMethodType}"
+		"${this.javaClass.simpleName}: $name | $jniFunctionType | $nativeMethodType | $javaMethodType"
 }
 
 // Java instance passed as jobject to native code
@@ -208,6 +208,16 @@ open class TypeMapping(
 		val VOID = TypeMapping("void", Void.TYPE, Void.TYPE)
 	}
 
+	private val Class<*>.javaName get() = this.typeParameters.let {
+		if (it.isEmpty())
+			this.simpleName
+		else
+			"${this.simpleName}<${it.indices.map { '?' }.joinToString(", ")}>"
+	}
+
+	internal val nativeMethodName get() = nativeMethodType.javaName
+	internal val javaMethodName get() = javaMethodType.javaName
+
 	internal val jniSignatureStrict get() = when (this.nativeMethodType) {
 		Boolean::class.java -> "Z"
 		Byte::class.java    -> "B"
@@ -307,7 +317,7 @@ open class PointerMapping private constructor(
 
 	internal val isMultiByte = byteShift != null && byteShift != "0"
 
-	internal val box = super.javaMethodType.simpleName.substringBefore("Buffer")
+	internal val box = super.javaMethodName.substringBefore("Buffer")
 	internal val primitive get() = when (this) {
 		DATA_BOOLEAN -> "boolean"
 		DATA_POINTER -> "long"

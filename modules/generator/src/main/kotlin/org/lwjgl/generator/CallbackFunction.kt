@@ -49,7 +49,7 @@ class CallbackFunction(
 		else if (mapping == PrimitiveMapping.BOOLEAN)
 			"Bool"
 		else
-			(mapping as PrimitiveMapping).javaMethodType.simpleName.upperCaseFirst
+			(mapping as PrimitiveMapping).javaMethodName.upperCaseFirst
 
 	override fun PrintWriter.generateJava() {
 		print(HEADER)

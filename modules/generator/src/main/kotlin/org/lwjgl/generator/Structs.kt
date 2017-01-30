@@ -1115,7 +1115,7 @@ ${validations.joinToString("\n")}
 						} else if (it.nativeType is StructType)
 							"${it.nativeType.javaMethodType}.Buffer $param"
 						else
-							"${it.primitiveMapping.toPointer.javaMethodType.simpleName} $param"
+							"${it.primitiveMapping.toPointer.javaMethodName} $param"
 					} else if (it.nativeType is PointerType && it.nativeType.elementType is StructType) {
 						val structType = it.nativeType.javaMethodType
 						if (it is StructMemberBuffer)
@@ -1195,7 +1195,7 @@ ${validations.joinToString("\n")}
 					else
 						it
 				}
-				.let { if ((capacity.nativeType.mapping as PrimitiveMapping).bytes < 4) "(${capacity.nativeType.mapping.javaMethodType})$it" else it }
+				.let { if ((capacity.nativeType.mapping as PrimitiveMapping).bytes < 4) "(${capacity.nativeType.javaMethodType})$it" else it }
 				.let { if (offset != 0) "$it - $offset" else it }
 
 			print(prefix)
@@ -1323,7 +1323,7 @@ ${validations.joinToString("\n")}
 					} else {
 						val mapping = it.primitiveMapping
 						val bytesPerElement = if (mapping === PrimitiveMapping.POINTER) "POINTER_SIZE" else mapping.bytes.toString()
-						val bufferType = mapping.toPointer.javaMethodType.simpleName
+						val bufferType = mapping.toPointer.javaMethodName
 
 						if (it.public)
 							println("\t/** Unsafe version of {@link #$setter($bufferType) $setter}. */")
@@ -1439,13 +1439,13 @@ ${validations.joinToString("\n")}
 						if (overrides) println("$indent@Override")
 						println("${indent}public $returnType $setter(ByteBuffer value) { $n$setter($ADDRESS, value); return this; }")
 					} else {
-						val bufferType = it.primitiveMapping.toPointer.javaMethodType.simpleName
+						val bufferType = it.primitiveMapping.toPointer.javaMethodName
 						println("$indent/** Copies the specified {@link $bufferType} to the {@code $field} field. */")
 						if (overrides) println("$indent@Override")
 						println("${indent}public $returnType $setter($bufferType value) { $n$setter($ADDRESS, value); return this; }")
 						println("$indent/** Sets the specified value at the specified index of the {@code $field} field. */")
 						if (overrides) println("$indent@Override")
-						println("${indent}public $returnType $setter(int index, ${it.nativeType.mapping.javaMethodType} value) { $n$setter($ADDRESS, index, value); return this; }")
+						println("${indent}public $returnType $setter(int index, ${it.nativeType.javaMethodType} value) { $n$setter($ADDRESS, index, value); return this; }")
 					}
 				} else if (it.nativeType is CharSequenceType) {
 					println("$indent/** Sets the address of the specified encoded string to the {@code $field} field. */")
@@ -1556,7 +1556,7 @@ ${validations.joinToString("\n")}
 						println("\tpublic static String n${getter}String(long $STRUCT) { return mem${mapping.charset}(${if (capacity != null) "n$getter($STRUCT)" else "$STRUCT + $field"}); }")
 					} else {
 						val mapping = it.primitiveMapping
-						val bufferType = mapping.toPointer.javaMethodType.simpleName
+						val bufferType = mapping.toPointer.javaMethodName
 
 						if (it.public)
 							println("\t/** Unsafe version of {@link #$getter}. */")
@@ -1676,7 +1676,7 @@ ${validations.joinToString("\n")}
 						if (overrides) println("$indent@Override")
 						println("${indent}public String ${getter}String() { return $n${getter}String($ADDRESS); }")
 					} else {
-						val bufferType = it.primitiveMapping.toPointer.javaMethodType.simpleName
+						val bufferType = it.primitiveMapping.toPointer.javaMethodName
 						println("$indent/** Returns a {@link $bufferType} view of the {@code $getter} field. */")
 						if (overrides) println("$indent@Override")
 						println("${indent}public $bufferType $getter() { return $n$getter($ADDRESS); }")
