@@ -78,40 +78,6 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(JNI_PACKAGE, prefix = 
 		returnDoc = "the major version number in the higher 16 bits and the minor version number in the lower 16 bits"
 	)
 
-	jclass(
-		"FindClass",
-		"""
-		Returns a class object from a fully-qualified name.
-
-		The Java security model allows non-system classes to load and call native methods. {@code FindClass} Locates the class loader associated with the
-		current native method; that is, the class loader of the class that declared the native method. If the native method belongs to a system class, no class
-		loader will be involved. Otherwise, the proper class loader will be invoked to load and link the named class.
-
-		When FindClass is called through the Invocation Interface, there is no current native method or its associated class loader. In that case, the result
-		of ClassLoader#getSystemClassLoader() is used. This is the class loader the virtual machine creates for applications, and is able to locate
-		classes listed in the {@code java.class.path} property.
-
-		The {@code name} argument is a fully-qualified class name or an array type signature. For example, the fully-qualified class name for the
-		{@code java.lang.String} class is:
-		${codeBlock("""
-"java/lang/String"""")}
-		The array type signature of the array class {@code java.lang.Object[]} is:
-		${codeBlock("""
-"[Ljava/lang/Object;"""")}
-		""",
-
-		JNI_ENV,
-		const..charUTF8_p.IN(
-			"name",
-			"""
-            a fully-qualified class name (that is, a package name, delimited by “/”, followed by the class name). If the name begins with “[“ (the array
-            signature character), it returns an array class. The string is encoded in modified UTF-8.
-			"""
-		),
-
-		returnDoc = "a class object from a fully-qualified name, or #NULL if the class cannot be found"
-	)
-
 	jmethodID(
 		"FromReflectedMethod",
 		"Converts a ##Method or ##Constructor object to a method ID.",

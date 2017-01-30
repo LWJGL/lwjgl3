@@ -36,7 +36,7 @@ val jdoubleArray = NativeType("jdoubleArray", TypeMapping("jdoubleArray", Double
 
 val jsize = typedef(jint, "jsize")
 
-val jclass = "jclass".opaque_p
+val jclass = NativeType("jclass", TypeMapping("jclass", Class::class, Class::class))
 val jmethodID = "jmethodID".opaque_p
 val jfieldID = "jfieldID".opaque_p
 
