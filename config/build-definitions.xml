@@ -102,6 +102,9 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 		<isset property="env.LWJGL_BUILD_OFFLINE"/>
 	</condition>
 
+	<condition property="platform.android">
+		<isset property="env.ANDROID"/>
+	</condition>
 	<condition property="platform.windows">
 		<os family="Windows"/>
 	</condition>
@@ -118,6 +121,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 		<os name="Mac OS X"/>
 	</condition>
 
+	<property name="platform" value="android" if:set="platform.android"/>
 	<property name="platform" value="windows" if:set="platform.windows"/>
 	<property name="platform" value="linux" if:set="platform.linux"/>
 	<property name="platform" value="freebsd" if:set="platform.freebsd"/>

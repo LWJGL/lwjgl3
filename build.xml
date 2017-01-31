@@ -538,7 +538,7 @@
 		</path>
 	</target>
 
-	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native, -init-runtime">
+	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native, -init-runtime" unless="platform.android">
 		<testng outputDir="${bin.html.tests}" classpathref="runtime.classpath" taskname="Tests">
 			<classpath>
 				<pathelement path="${lib}/jcommander.jar"/>

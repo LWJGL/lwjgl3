@@ -1,0 +1,247 @@
+<!--
+  ~ Copyright LWJGL. All rights reserved.
+  ~ License terms: https://www.lwjgl.org/license
+  -->
+<project name="native-android" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
+	<import file="../build-definitions.xml"/>
+
+  <!-- The following properties should be changed/overwritten by environment variables. -->
+	<property name="ANDROID_NDK_HOME" value="${env.ANDROID_NDK_HOME}" />
+	<property name="ANDROID_PLATFORM" value="24" />
+	<property name="ANDROID_SDK_ARCH" value="arch-arm64" />
+	<property name="ANDROID_NDK_ARCH" value="aarch64" />
+	<property name="ANDROID_COMPILER" value="aarch64-linux-android-gcc" />
+
+	<property name="src.native.rel" value="../../../../${src.native}"/>
+
+	<macrodef name="compile">
+		<attribute name="dest"/>
+		<attribute name="lang" default="c"/>
+		<attribute name="lto" default="-flto"/>
+		<attribute name="flags"/>
+		<attribute name="relative" default="true"/>
+		<element name="source" implicit="true"/>
+		<sequential>
+			<local name="cpp"/>
+			<condition property="cpp"><equals arg1="@{lang}" arg2="c++"/></condition>
+
+			<mkdir dir="@{dest}"/>
+			<apply dir="@{dest}" executable="${ANDROID_COMPILER}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+			  <arg line="--sysroot=${ANDROID_NDK_HOME}/platforms/android-${ANDROID_PLATFORM}/${ANDROID_SDK_ARCH}"/>
+				<arg line="-c -std=c11" unless:set="cpp"/>
+				<arg line="-c -std=c++11" if:set="cpp"/>
+				<arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
+
+<!--
+				<arg value="-I${jni.headers}"/>
+				<arg value="-I${jni.headers}/linux"/>
+-->
+<!--
+				<arg value="-I${ANDROID_NDK_HOME}/platforms/android-24/arch-arm64/usr/include"/>
+-->
+
+				<arg value="-I${src.native.rel}/system"/>
+				<arg value="-I${src.native.rel}/system/linux"/>
+
+				<source/>
+
+				<regexpmapper from="(\w+)\.cc?" to="\1.o"/>
+			</apply>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="build">
+		<attribute name="name"/>
+		<attribute name="dest"/>
+		<attribute name="lang" default="c"/>
+		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -Wno-extended-offsetof"/>
+		<element name="source"/>
+		<element name="link" optional="true"/>
+		<sequential>
+			<compile dest="@{dest}" lang="@{lang}" flags="@{flags}">
+				<source/>
+			</compile>
+
+			<local name="lib-uptodate"/>
+			<uptodate property="lib-uptodate" targetfile="${lib}/lib@{name}.so">
+				<srcfiles file="config/${platform}/build.xml"/>
+				<!--<srcfiles file="${bin.native}/wrap_memcpy.o" if:true="${build.arch.aarch64}"/>-->
+				<srcfiles dir="@{dest}" includes="**"/>
+			</uptodate>
+
+			<!-- Lazily update dependencies -->
+			<local name="update-dependencies"/>
+			<condition property="update-dependencies" value="true">
+				<not>
+					<or>
+						<isset property="dependencies-uptodate"/>
+						<isset property="lib-uptodate"/>
+						<istrue value="${build.offline}"/>
+					</or>
+				</not>
+			</condition>
+			<antcall target="-update-dependencies" if:set="update-dependencies"/>
+			<property name="dependencies-uptodate" value="true" if:set="update-dependencies"/>
+
+			<local name="version.script"/>
+			<property name="version.script" location="config/android/version.script"/>
+
+			<echo message="Linking @{name}" taskname="${ANDROID_COMPILER}" unless:set="lib-uptodate"/>
+			<apply executable="${ANDROID_COMPILER}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+				<srcfile/>
+				<arg value="-shared"/>
+				<arg line="--sysroot=${ANDROID_NDK_HOME}/platforms/android-${ANDROID_PLATFORM}/${ANDROID_SDK_ARCH}"/>
+				<arg line="-z noexecstack"/>
+				<arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib@{name}.so"/>
+
+				<arg line="-Wl,--version-script,${version.script}"/>
+				<!--
+				-->
+				<fileset dir="@{dest}" includes="*.o"/>
+				<link/>
+			</apply>
+
+			<apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
+				<filelist dir="${lib}" files="lib@{name}.so"/>
+			</apply>
+		</sequential>
+	</macrodef>
+	
+	<target name="compile-native-platform">
+		<compile dest="${bin.native}" flags="" lto="">
+			<fileset dir="." includes="${src.native}/system/linux/wrap_memcpy.c"/>
+		</compile>
+
+		<!-- CORE -->
+		<build name="lwjgl" dest="${bin.native}/core">
+			<source>
+				<arg value="-I${src.native.rel}/system/dyncall"/>
+				<fileset dir=".">
+					<include name="${src.native}/system/*.c"/>
+					<exclude name="${src.native}/system/lwjgl_malloc.c"/>
+					<include name="${src.generated.native}/system/*.c"/>
+					<include name="${src.generated.native}/system/dyncall/*.c"/>
+					<include name="${src.generated.native}/system/jawt/*.c" if:true="${binding.jawt}"/>
+					<include name="${src.generated.native}/system/jni/*.c"/>
+					<include name="${src.generated.native}/system/libc/*.c"/>
+					<include name="${src.generated.native}/system/linux/*.c"/>
+				</fileset>
+			</source>
+			<link>
+				<fileset dir="${lib}/android/${build.arch}/">
+					<include name="libdyn*.a"/>
+				</fileset>
+			</link>
+		</build>
+
+		<!-- LMDB -->
+		<compile dest="${bin.native}/lmdb" flags="-Wno-format-extra-args" if:true="${binding.lmdb}">
+			<arg value="-I${src.native.rel}/util/lmdb"/>
+			<arg value="-DMDB_USE_ROBUST=0"/>
+			<fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
+		</compile>
+		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
+			<source>
+				<arg value="-I${src.native.rel}/util/lmdb"/>
+				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
+			</source>
+		</build>
+
+		<!-- NanoVG -->
+		<build name="lwjgl_nanovg" dest="${bin.native}/nanovg" if:true="${binding.nanovg}">
+			<source>
+				<arg value="-I${src.native.rel}/nanovg"/>
+				<arg value="-isystem${src.native.rel}/stb"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.generated.native}/nanovg/*.c"/>
+			</source>
+		</build>
+
+		<!-- Nuklear -->
+		<build name="lwjgl_nuklear" dest="${bin.native}/nuklear" if:true="${binding.nuklear}">
+			<source>
+				<arg value="-I${src.native.rel}/nuklear"/>
+				<fileset dir="." includes="${src.generated.native}/nuklear/*.c"/>
+			</source>
+		</build>
+
+		<!-- OpenGL -->
+		<build name="lwjgl_opengl" dest="${bin.native}/opengl" if:true="${binding.opengl}">
+			<source>
+				<arg value="-I${src.native.rel}/opengl"/>
+				<fileset dir="." includes="${src.generated.native}/opengl/*.c"/>
+			</source>
+		</build>
+
+		<!-- OpenGL ES -->
+		<build name="lwjgl_opengles" dest="${bin.native}/opengles" if:true="${binding.opengles}">
+			<source>
+				<arg value="-I${src.native.rel}/opengles"/>
+				<fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
+			</source>
+		</build>
+
+		<!-- OpenVR -->
+		<build name="lwjgl_openvr" dest="${bin.native}/openvr" if:true="${binding.openvr}">
+			<source>
+				<fileset dir="." includes="${src.generated.native}/openvr/*.c"/>
+			</source>
+		</build>
+
+		<!-- ParShapes -->
+		<build name="lwjgl_par" dest="${bin.native}/par" if:true="${binding.par}">
+			<source>
+				<arg value="-I${src.native.rel}/util/par"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.generated.native}/util/par/*.c"/>
+			</source>
+		</build>
+
+		<!-- stb -->
+		<build name="lwjgl_stb" dest="${bin.native}/stb" if:true="${binding.stb}">
+			<source>
+				<arg value="-isystem${src.native.rel}/stb"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
+			</source>
+		</build>
+
+		<!-- xxHash -->
+		<build name="lwjgl_xxhash" dest="${bin.native}/xxhash" if:true="${binding.xxhash}">
+			<source>
+				<arg value="-I${src.native.rel}/system"/>
+				<arg value="-I${src.native.rel}/util/xxhash"/>
+				<fileset dir="." includes="${src.native}/system/lwjgl_malloc.c"/>
+				<fileset dir="." includes="${src.generated.native}/util/xxhash/*.c"/>
+			</source>
+		</build>
+
+		<!-- yoga -->
+		<compile dest="${bin.native}/yoga" flags="" if:true="${binding.yoga}">
+			<arg value="-I${src.native.rel}/util/yoga"/>
+			<fileset dir="." includes="${src.native}/util/yoga/*.c"/>
+		</compile>
+		<build name="lwjgl_yoga" dest="${bin.native}/yoga" if:true="${binding.yoga}">
+			<source>
+				<arg value="-I${src.native.rel}/util/yoga"/>
+				<fileset dir="." includes="${src.generated.native}/util/yoga/*.c"/>
+			</source>
+		</build>
+	</target>	
+
+	<target name="-update-dependencies" unless="${build.offline}">
+		<mkdir dir="${lib}/android"/>
+		<mkdir dir="${lib}/android/${ANDROID_NDK_ARCH}"/>
+
+		<update-dependency name="dyncall" artifact="${ANDROID_NDK_ARCH}/libdyncall_s.a"/>
+		<update-dependency name="dyncallback" artifact="${ANDROID_NDK_ARCH}/libdyncallback_s.a"/>
+		<update-dependency name="dynload" artifact="${ANDROID_NDK_ARCH}/libdynload_s.a"/>
+
+		<!--<update-dependency name="Assimp" artifact="${ANDROID_NDK_ARCH}/libassimp.so" dest="${lib}" if:true="${binding.assimp}"/>-->
+		<!--<update-dependency name="bgfx" artifact="${ANDROID_NDK_ARCH}/libbgfx.so" dest="${lib}" if:true="${binding.bgfx}"/>-->
+		<!--<update-dependency name="jemalloc" artifact="${ANDROID_NDK_ARCH}/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>-->
+		<!--<update-dependency name="GLFW" artifact="${ANDROID_NDK_ARCH}/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>-->
+		<!--<update-dependency name="OpenAL32" artifact="${ANDROID_NDK_ARCH}/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>-->
+		<!--<update-dependency name="OpenVR" artifact="${ANDROID_NDK_ARCH}/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>-->
+	</target>
+</project>

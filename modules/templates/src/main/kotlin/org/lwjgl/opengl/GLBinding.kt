@@ -27,7 +27,7 @@ private object BufferOffsetTransform : FunctionTransform<Parameter>, SkipCheckFu
 val GLBinding = Generator.register(object : APIBinding(
 	OPENGL_PACKAGE,
 	CAPABILITIES_CLASS,
-	APICapabilities.JNI_CAPABILITIES
+	APICapabilities.JAVA_CAPABILITIES
 ) {
 
 	private val GLCorePattern = "GL[1-9][0-9]".toRegex()

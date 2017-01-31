@@ -7,6 +7,7 @@
 #endif
 #include "common_tools.h"
 #include "dyncall_callback.h"
+#include <stdio.h>
 
 static jmethodID
 	javaCallbackV,
