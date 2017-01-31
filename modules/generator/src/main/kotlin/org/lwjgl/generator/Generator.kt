@@ -74,7 +74,7 @@ enum class Binding(
 		get() = System.getProperty(key, "false").toBoolean()
 }
 
-fun dependsOn(binding: Binding, init: () -> NativeClass): NativeClass? = if (binding.enabled) init() else null
+fun String.dependsOn(vararg bindings: Binding): String? = if (bindings.any { it.enabled }) this else null
 
 fun main(args: Array<String>) {
 	if (args.size < 2)

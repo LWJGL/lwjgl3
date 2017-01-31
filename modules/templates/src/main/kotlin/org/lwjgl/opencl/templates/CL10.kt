@@ -324,9 +324,9 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"cl_context_info + cl_context_properties",
 
 		"CONTEXT_PLATFORM"..0x1084
-	).javaDocLinks + """ #CONTEXT_INTEROP_USER_SYNC #GL_CONTEXT_KHR #EGL_DISPLAY_KHR #GLX_DISPLAY_KHR
-	#WGL_HDC_KHR #CGL_SHAREGROUP_KHR
-	"""
+	).javaDocLinks + " #CONTEXT_INTEROP_USER_SYNC${if (Binding.OPENGL.enabled || Binding.OPENGLES.enabled)
+		" #GL_CONTEXT_KHR #EGL_DISPLAY_KHR #GLX_DISPLAY_KHR #WGL_HDC_KHR #CGL_SHAREGROUP_KHR" else ""
+	}"
 
 	val CommandQueueInfo = IntConstant(
 		"cl_command_queue_info",
