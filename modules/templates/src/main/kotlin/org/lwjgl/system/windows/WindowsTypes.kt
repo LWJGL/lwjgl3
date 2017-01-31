@@ -78,7 +78,7 @@ val HMONITOR = typedef(HANDLE, "HMONITOR")
 
 val COLORREF = typedef(DWORD, "COLORREF")
 
-val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
+/*val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 	documentation = "Contains the x and y coordinates of a point."
 
 	FLOAT.member("x", "specifies the horizontal (x) coordinate of a point")
@@ -94,7 +94,7 @@ val GLYPHMETRICSFLOAT = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT", mutable = f
 	FLOAT.member("gmfCellIncX", "specifies the horizontal distance from the origin of the current character cell to the origin of the next character cell")
 	FLOAT.member("gmfCellIncY", "specifies the vertical distance from the origin of the current character cell to the origin of the next character cell")
 }
-val LPGLYPHMETRICSFLOAT = GLYPHMETRICSFLOAT.p("LPGLYPHMETRICSFLOAT")
+val LPGLYPHMETRICSFLOAT = GLYPHMETRICSFLOAT.p("LPGLYPHMETRICSFLOAT")*/
 
 val POINT = struct(WINDOWS_PACKAGE, "POINT") {
 	documentation = "Defines the x- and y- coordinates of a point."

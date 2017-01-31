@@ -171,6 +171,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, prefix = "WGL", binding = GLBinding.
 	WINGDIAPI DWORD WINAPI SwapMultipleBuffers(UINT, CONST WGLSWAP *);
 	*/
 
+	/*
 	NativeName("wglUseFontBitmapsW")..BOOL(
 		"UseFontBitmaps",
 		"""
@@ -246,4 +247,5 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, prefix = "WGL", binding = GLBinding.
 			"""
 		)
 	)
+	*/
 }
