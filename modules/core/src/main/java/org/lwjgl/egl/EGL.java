@@ -7,9 +7,7 @@ package org.lwjgl.egl;
 import org.lwjgl.system.*;
 
 import java.nio.ByteBuffer;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.egl.EGL10.*;
@@ -89,7 +87,7 @@ public final class EGL {
 
 				@Override
 				public long getFunctionAddress(ByteBuffer functionName) {
-					long address = invokePP(eglGetProcAddress, memAddress(functionName));
+					long address = callPP(eglGetProcAddress, memAddress(functionName));
 					if ( address == NULL ) {
 						address = library.getFunctionAddress(functionName);
 						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
@@ -147,21 +145,40 @@ public final class EGL {
 	}
 
 	private static EGLCapabilities createClientCapabilities() {
-		long QueryString = functionProvider.getFunctionAddress("eglQueryString");
-		long versionString = invokePP(QueryString, EGL_NO_DISPLAY, EGL_VERSION);
-
 		Set<String> ext = new HashSet<>(32);
 
-		if ( versionString == NULL )
-			invokeI(functionProvider.getFunctionAddress("eglGetError")); // clear error
-		else {
-			APIVersion version = apiParseVersion(memASCII(versionString), "EGL");
+		long QueryString = functionProvider.getFunctionAddress("eglQueryString");
 
-			addEGLVersions(version.major, version.minor, ext);
-			addExtensions(memASCII(invokePP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS)), ext);
+		// Available on EGL 1.5 or EGL_EXT_client_extensions
+		long extensionsString = callPP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS);
+		if ( extensionsString == NULL ) {
+			callI(functionProvider.getFunctionAddress("eglGetError")); // clear error
+		} else {
+			// Available on EGL 1.5 only
+			long versionString = callPP(QueryString, EGL_NO_DISPLAY, EGL_VERSION);
+			if ( versionString == NULL )
+				callI(functionProvider.getFunctionAddress("eglGetError")); // clear error
+			else {
+				APIVersion version = apiParseVersion(memASCII(versionString), "EGL");
+				addEGLVersions(version.major, version.minor, ext);
+			}
 		}
 
 		return new EGLCapabilities(functionProvider, ext);
+	}
+
+	/**
+	 * Creates an {@link EGLCapabilities} instance for the specified EGLDisplay handle.
+	 *
+	 * <p>This method call is relatively expensive. The result should be cached and reused.</p>
+	 *
+	 * @param dpy the EGLDisplay to query
+	 *
+	 * @return the {@link EGLCapabilities instance}
+	 */
+	public static EGLCapabilities createDisplayCapabilities(long dpy) {
+		APIVersion version = apiParseVersion(eglQueryString(dpy, EGL_VERSION));
+		return createDisplayCapabilities(dpy, version.major, version.minor);
 	}
 
 	/**
@@ -187,7 +204,7 @@ public final class EGL {
 	}
 
 	private static void addEGLVersions(int MAJOR, int MINOR, Set<String> supportedExtensions) {
-		int[][] versions = new int[][] {
+		int[][] versions = new int[][]{
 			{ 0, 1, 2, 3, 4, 5 } // 10, 11, 12, 13, 14, 15
 		};
 
