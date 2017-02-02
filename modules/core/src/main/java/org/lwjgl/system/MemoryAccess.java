@@ -28,7 +28,9 @@ final class MemoryAccess {
         MemoryAccessor accessor;
         try {
             // Depends on sun.misc.Unsafe
-            accessor = new MemoryAccessorUnsafe();
+            accessor = Platform.get() == Platform.ANDROID
+                ? (Pointer.BITS32 ? new MemoryAccessorUnsafeAndroid.Arch32() : new MemoryAccessorUnsafeAndroid.Arch64())
+                : new MemoryAccessorUnsafe();
         } catch (Throwable t) {
             t.printStackTrace(DEBUG_STREAM);
             DEBUG_STREAM
@@ -98,32 +100,18 @@ final class MemoryAccess {
     private static final class MemoryAccessorJNI implements MemoryAccessor {
     }
 
-    /** Implementation using sun.misc.Unsafe. */
-    private static final class MemoryAccessorUnsafe implements MemoryAccessor {
+    /** Base implementation using sun.misc.Unsafe. */
+    private abstract static class MemoryAccessorUnsafeBase implements MemoryAccessor {
 
-        private static final Class<? extends ByteBuffer>   BYTE_BUFFER;
-        private static final Class<? extends ShortBuffer>  SHORT_BUFFER;
-        private static final Class<? extends CharBuffer>   CHAR_BUFFER;
-        private static final Class<? extends IntBuffer>    INT_BUFFER;
-        private static final Class<? extends LongBuffer>   LONG_BUFFER;
-        private static final Class<? extends FloatBuffer>  FLOAT_BUFFER;
-        private static final Class<? extends DoubleBuffer> DOUBLE_BUFFER;
+        private static final Class<? extends ByteBuffer> BYTE_BUFFER;
 
-        private static final sun.misc.Unsafe UNSAFE;
+        protected static final sun.misc.Unsafe UNSAFE;
 
-        private static final long ADDRESS;
-        private static final long CAPACITY;
+        protected static final long ADDRESS;
+        protected static final long CAPACITY;
 
         static {
-            ByteBuffer bb = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
-
-            BYTE_BUFFER = bb.getClass();
-            SHORT_BUFFER = bb.asShortBuffer().getClass();
-            CHAR_BUFFER = bb.asCharBuffer().getClass();
-            INT_BUFFER = bb.asIntBuffer().getClass();
-            LONG_BUFFER = bb.asLongBuffer().getClass();
-            FLOAT_BUFFER = bb.asFloatBuffer().getClass();
-            DOUBLE_BUFFER = bb.asDoubleBuffer().getClass();
+            BYTE_BUFFER = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder()).getClass();
 
             try {
                 UNSAFE = getUnsafeInstance();
@@ -167,7 +155,7 @@ final class MemoryAccess {
             }
         }
 
-        MemoryAccessorUnsafe() {
+        protected MemoryAccessorUnsafeBase() {
         }
 
         @Override
@@ -180,29 +168,12 @@ final class MemoryAccess {
             return UNSAFE.getLong(buffer, ADDRESS);
         }
 
-        @Override public ByteBuffer memByteBuffer(long address, int capacity)     { return setup(BYTE_BUFFER, address, capacity).order(ByteOrder.nativeOrder()); }
-        @Override public ShortBuffer memShortBuffer(long address, int capacity)   { return setup(SHORT_BUFFER, address, capacity); }
-        @Override public CharBuffer memCharBuffer(long address, int capacity)     { return setup(CHAR_BUFFER, address, capacity); }
-        @Override public IntBuffer memIntBuffer(long address, int capacity)       { return setup(INT_BUFFER, address, capacity); }
-        @Override public LongBuffer memLongBuffer(long address, int capacity)     { return setup(LONG_BUFFER, address, capacity); }
-        @Override public FloatBuffer memFloatBuffer(long address, int capacity)   { return setup(FLOAT_BUFFER, address, capacity); }
-        @Override public DoubleBuffer memDoubleBuffer(long address, int capacity) { return setup(DOUBLE_BUFFER, address, capacity); }
-
-        @SuppressWarnings("unchecked")
-        private static <T extends Buffer> T setup(Class<T> clazz, long address, int capacity) {
-            T buffer;
-            try {
-                buffer = (T)UNSAFE.allocateInstance(clazz);
-            } catch (InstantiationException e) {
-                throw new UnsupportedOperationException(e);
-            }
-
-            UNSAFE.putLong(buffer, ADDRESS, address);
-            UNSAFE.putInt(buffer, CAPACITY, capacity);
-
-            buffer.clear();
-            return buffer;
+        @Override
+        public ByteBuffer memByteBuffer(long address, int capacity) {
+            return setup(BYTE_BUFFER, address, capacity).order(ByteOrder.nativeOrder());
         }
+
+        protected abstract <T extends Buffer> T setup(Class<T> clazz, long address, int capacity);
 
         //  Left-shifts value by bytes*8 bits in big-endian archictures.
         // Right-shifts value by bytes*8 bits in little-endian archictures.
@@ -363,11 +334,6 @@ final class MemoryAccess {
         }
 
         @Override
-        public long memGetAddress(long ptr) {
-            return UNSAFE.getAddress(ptr);
-        }
-
-        @Override
         public void memPutByte(long ptr, byte value) {
             UNSAFE.putByte(ptr, value);
         }
@@ -395,11 +361,6 @@ final class MemoryAccess {
         @Override
         public void memPutDouble(long ptr, double value) {
             UNSAFE.putDouble(ptr, value);
-        }
-
-        @Override
-        public void memPutAddress(long ptr, long value) {
-            UNSAFE.putAddress(ptr, value);
         }
 
         @Override
@@ -638,6 +599,122 @@ final class MemoryAccess {
 
                 return p;
             }
+        }
+
+    }
+
+    /** Implementation using sun.misc.Unsafe on OpenJDK. */
+    private static class MemoryAccessorUnsafe extends MemoryAccessorUnsafeBase {
+
+        private static final Class<? extends ShortBuffer>  SHORT_BUFFER;
+        private static final Class<? extends CharBuffer>   CHAR_BUFFER;
+        private static final Class<? extends IntBuffer>    INT_BUFFER;
+        private static final Class<? extends LongBuffer>   LONG_BUFFER;
+        private static final Class<? extends FloatBuffer>  FLOAT_BUFFER;
+        private static final Class<? extends DoubleBuffer> DOUBLE_BUFFER;
+
+        static {
+            ByteBuffer bb = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
+
+            SHORT_BUFFER = bb.asShortBuffer().getClass();
+            CHAR_BUFFER = bb.asCharBuffer().getClass();
+            INT_BUFFER = bb.asIntBuffer().getClass();
+            LONG_BUFFER = bb.asLongBuffer().getClass();
+            FLOAT_BUFFER = bb.asFloatBuffer().getClass();
+            DOUBLE_BUFFER = bb.asDoubleBuffer().getClass();
+        }
+
+        MemoryAccessorUnsafe() {
+        }
+
+        @Override public ShortBuffer memShortBuffer(long address, int capacity)   { return setup(SHORT_BUFFER, address, capacity); }
+        @Override public CharBuffer memCharBuffer(long address, int capacity)     { return setup(CHAR_BUFFER, address, capacity); }
+        @Override public IntBuffer memIntBuffer(long address, int capacity)       { return setup(INT_BUFFER, address, capacity); }
+        @Override public LongBuffer memLongBuffer(long address, int capacity)     { return setup(LONG_BUFFER, address, capacity); }
+        @Override public FloatBuffer memFloatBuffer(long address, int capacity)   { return setup(FLOAT_BUFFER, address, capacity); }
+        @Override public DoubleBuffer memDoubleBuffer(long address, int capacity) { return setup(DOUBLE_BUFFER, address, capacity); }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        protected <T extends Buffer> T setup(Class<T> clazz, long address, int capacity) {
+            T buffer;
+            try {
+                buffer = (T)UNSAFE.allocateInstance(clazz);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+
+            UNSAFE.putLong(buffer, ADDRESS, address);
+            UNSAFE.putInt(buffer, CAPACITY, capacity);
+
+            buffer.clear();
+            return buffer;
+        }
+
+        @Override
+        public long memGetAddress(long ptr) {
+            return UNSAFE.getAddress(ptr);
+        }
+
+        @Override
+        public void memPutAddress(long ptr, long value) {
+            UNSAFE.putAddress(ptr, value);
+        }
+
+    }
+
+    /** Implementation using sun.misc.Unsafe on Android. */
+    private abstract static class MemoryAccessorUnsafeAndroid extends MemoryAccessorUnsafeBase {
+
+        private static final long   MEMORY_REF;
+        private static final Object MEMORY_REF_INSTANCE; // MemoryRef
+
+        static {
+            ByteBuffer bb = NewDirectByteBuffer(0xDEADBEEFL, 0);
+            try {
+                java.lang.reflect.Field memoryRefField = bb.getClass().getDeclaredField("memoryRef");
+                MEMORY_REF = UNSAFE.objectFieldOffset(memoryRefField);
+                MEMORY_REF_INSTANCE = UNSAFE.getObject(bb, MEMORY_REF);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+
+        protected MemoryAccessorUnsafeAndroid() {
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        protected <T extends Buffer> T setup(Class<T> clazz, long address, int capacity) {
+            T buffer;
+            try {
+                buffer = (T)UNSAFE.allocateInstance(clazz);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+
+            UNSAFE.putLong(buffer, ADDRESS, address);
+            UNSAFE.putInt(buffer, CAPACITY, capacity);
+            UNSAFE.putObject(buffer, MEMORY_REF, MEMORY_REF_INSTANCE);
+
+            buffer.clear();
+            return buffer;
+        }
+
+        private static class Arch32 extends MemoryAccessorUnsafeAndroid {
+            @Override
+            public long memGetAddress(long ptr) { return memGetInt(ptr); }
+
+            @Override
+            public void memPutAddress(long ptr, long value) { memPutInt(ptr, (int)(value & 0xFFFFFFFF)); }
+        }
+
+        private static class Arch64 extends MemoryAccessorUnsafeAndroid {
+            @Override
+            public long memGetAddress(long ptr) { return memGetLong(ptr); }
+
+            @Override
+            public void memPutAddress(long ptr, long value) { memPutLong(ptr, value); }
         }
 
     }
