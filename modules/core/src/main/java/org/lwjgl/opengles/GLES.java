@@ -157,6 +157,7 @@ public final class GLES {
 	public static void setCapabilities(GLESCapabilities caps) {
 		capabilitiesTLS.set(caps);
 		ThreadLocalUtil.setEnv(caps == null ? NULL : memAddress(caps.addresses), 3);
+		icd.set(caps);
 	}
 
 	/**
