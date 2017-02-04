@@ -171,7 +171,7 @@ class Func(
 	}
 
 	private val isNativeOnly
-		get() = nativeClass.binding == null &&
+		get() = (nativeClass.binding == null || nativeClass.binding.apiCapabilities === APICapabilities.JNI_CAPABILITIES) &&
 		        !(
 			        modifiers.any { it.value.isSpecial }
 			        || this.returns.isSpecial
