@@ -12,19 +12,15 @@ import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.Callback;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.Platform;
-import org.lwjgl.system.macosx.ObjCRuntime;
 
 import java.nio.IntBuffer;
 
 import static org.lwjgl.demo.glfw.GLFWUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFWNativeCocoa.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.macosx.ObjCRuntime.*;
 
 /** The Gears demo implemented using GLFW. */
 public class Gears extends AbstractGears {
@@ -58,6 +54,13 @@ public class Gears extends AbstractGears {
 	}
 
 	private static void framebufferSizeChanged(long window, int width, int height) {
+		float f = height / (float)width;
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
+		glMatrixMode(GL_MODELVIEW);
+
 		glViewport(0, 0, width, height);
 	}
 
@@ -96,7 +99,7 @@ public class Gears extends AbstractGears {
 		*/
 
 		glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, GLFW_DONT_CARE, GLFW_DONT_CARE);
-		glfwSetWindowAspectRatio(window, 1, 1);
+		//glfwSetWindowAspectRatio(window, 1, 1);
 
 		long monitor = glfwGetPrimaryMonitor();
 		GLFWVidMode vidmode = glfwGetVideoMode(monitor);

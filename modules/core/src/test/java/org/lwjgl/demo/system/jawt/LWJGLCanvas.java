@@ -82,6 +82,14 @@ public class LWJGLCanvas extends Canvas {
 						}
 
 						glViewport(0, 0, getWidth(), getHeight());
+
+						float f = getHeight() / (float)getWidth();
+
+						glMatrixMode(GL_PROJECTION);
+						glLoadIdentity();
+						glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
+						glMatrixMode(GL_MODELVIEW);
+
 						gears.renderLoop();
 						SwapBuffers(hdc);
 

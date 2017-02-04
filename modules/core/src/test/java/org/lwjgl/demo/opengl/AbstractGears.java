@@ -37,7 +37,6 @@ public class AbstractGears {
 
 		try ( MemoryStack s = stackPush() ) {
 			// setup ogl
-			glLightfv(GL_LIGHT0, GL_POSITION, s.floats(5.0f, 5.0f, 10.0f, 0.0f));
 			glEnable(GL_CULL_FACE);
 			glEnable(GL_LIGHTING);
 			glEnable(GL_LIGHT0);
@@ -65,9 +64,6 @@ public class AbstractGears {
 
 		glEnable(GL_NORMALIZE);
 
-		glMatrixMode(GL_PROJECTION);
-
-		glFrustum(-1.0f, 1.0f, -1.0f, 1.0f, 5.0f, 60.0f);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		glTranslatef(0.0f, 0.0f, -40.0f);
@@ -82,6 +78,10 @@ public class AbstractGears {
 		glRotatef(view_rotx, 1.0f, 0.0f, 0.0f);
 		glRotatef(view_roty, 0.0f, 1.0f, 0.0f);
 		glRotatef(view_rotz, 0.0f, 0.0f, 1.0f);
+
+		try ( MemoryStack s = stackPush() ) {
+			glLightfv(GL_LIGHT0, GL_POSITION, s.floats(5.0f, 5.0f, 10.0f, 0.0f));
+		}
 
 		glPushMatrix();
 		glTranslatef(-3.0f, -2.0f, 0.0f);
