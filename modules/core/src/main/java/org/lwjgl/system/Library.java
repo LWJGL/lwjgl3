@@ -9,6 +9,7 @@ import org.lwjgl.Version;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
@@ -16,9 +17,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.regex.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
@@ -71,6 +71,8 @@ public final class Library {
 	@SuppressWarnings("try")
 	public static void loadSystem(String name) throws UnsatisfiedLinkError {
 		apiLog("Loading library (system): " + name);
+
+		// METHOD 1: absolute path
 		if ( Paths.get(name).isAbsolute() ) {
 			System.load(name);
 			apiLog("\tSuccess");
@@ -79,9 +81,9 @@ public final class Library {
 
 		String libName = Platform.get().mapLibraryName(name);
 
+		// METHOD 2: org.lwjgl.librarypath
 		URL libURL = Library.class.getResource("/" + libName);
 		if ( libURL == null ) {
-			// Try org.lwjgl.librarypath
 			if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
 				return;
 		} else {
@@ -102,7 +104,7 @@ public final class Library {
 			}
 		}
 
-		// Then java.library.path
+		// METHOD 3: System.loadLibrary
 		try {
 			System.loadLibrary(name);
 
@@ -172,6 +174,8 @@ public final class Library {
 	@SuppressWarnings("try")
 	public static SharedLibrary loadNative(String name, boolean bundledWithLWJGL) {
 		apiLog("Loading library: " + name);
+
+		// METHOD 1: absolute path
 		if ( new File(name).isAbsolute() ) {
 			SharedLibrary lib = apiCreateLibrary(name);
 			apiLog("\tSuccess");
@@ -181,9 +185,9 @@ public final class Library {
 		String libName = Platform.get().mapLibraryName(name);
 		SharedLibrary lib;
 
+		// METHOD 2: org.lwjgl.librarypath
 		URL libURL = Library.class.getResource("/" + libName);
 		if ( libURL == null ) {
-			// Try org.lwjgl.librarypath
 			lib = loadNative(libName, Configuration.LIBRARY_PATH);
 			if ( lib != null )
 				return lib;
@@ -204,15 +208,35 @@ public final class Library {
 			}
 		}
 
-		// Then java.library.path
-		String paths = System.getProperty(JAVA_LIBRARY_PATH);
-		if ( paths != null ) {
-			lib = loadNative(libName, JAVA_LIBRARY_PATH, paths);
-			if ( lib != null )
-				return lib;
+		// METHOD 3: System.loadLibrary (emulated)
+		{
+			if ( Configuration.EMULATE_SYSTEM_LOADLIBRARY.get(false) ) {
+				// Try ClassLoader::findLibrary (e.g. OSGi bundle)
+				try {
+					Method findLibrary = ClassLoader.class.getDeclaredMethod("findLibrary", String.class);
+					findLibrary.setAccessible(true);
+
+					String libPath = (String)findLibrary.invoke(Library.class.getClassLoader(), name);
+					if ( libPath != null ) {
+						lib = apiCreateLibrary(libPath);
+						apiLog(String.format("\tLoaded from ClassLoader provided path: %s", libPath));
+						return lib;
+					}
+				} catch (Exception ignored) {
+					// This will fail on JDK 9 without --add-opens java.base/java.lang=ALL-UNNAMED
+				}
+			}
+
+			// Then java.library.path
+			String paths = System.getProperty(JAVA_LIBRARY_PATH);
+			if ( paths != null ) {
+				lib = loadNative(libName, JAVA_LIBRARY_PATH, paths);
+				if ( lib != null )
+					return lib;
+			}
 		}
 
-		// Then the OS paths
+		// METHOD 4: system-specific
 		try {
 			lib = apiCreateLibrary(libName);
 			apiLog("\tLoaded from system paths");

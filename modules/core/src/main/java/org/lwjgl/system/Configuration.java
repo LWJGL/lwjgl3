@@ -60,7 +60,7 @@ public class Configuration<T> {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.system.SharedLibraryExtractPath</b><br>
-	 * &nbsp; &nbsp;Usage: Dynamic<br>
+	 * &nbsp; &nbsp;Usage: Dynamic</p>
 	 */
 	public static final Configuration<String> SHARED_LIBRARY_EXTRACT_PATH = new Configuration<>(
 		"org.lwjgl.system.SharedLibraryExtractPath",
@@ -68,11 +68,23 @@ public class Configuration<T> {
 	);
 
 	/**
+	 * EXPERIMENTAL: Emulates {@link System#loadLibrary} behavior in {@link Library#loadNative(String)}.
+	 *
+	 * <p style="font-family: monospace">
+	 * Property: <b>org.lwjgl.system.EmulateSystemLoadLibrary</b><br>
+	 * &nbsp; &nbsp;Usage: Dynamic</p>
+	 */
+	public static final Configuration<Boolean> EMULATE_SYSTEM_LOADLIBRARY = new Configuration<>(
+		"org.lwjgl.system.EmulateSystemLoadLibrary",
+		StateInit.BOOLEAN
+	);
+
+	/**
 	 * Can be used to override the LWJGL library name. It can be an absolute path.
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.libname</b><br>
-	 * &nbsp; &nbsp;Usage: Dynamic<br>
+	 * &nbsp; &nbsp;Usage: Dynamic</p>
 	 */
 	public static final Configuration<String> LIBRARY_NAME = new Configuration<>("org.lwjgl.libname", StateInit.STRING);
 
@@ -91,7 +103,7 @@ public class Configuration<T> {
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.system.allocator</b><br>
 	 * &nbsp; &nbsp; Type: String or a {@link MemoryAllocator} instance<br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Object> MEMORY_ALLOCATOR = new Configuration<>("org.lwjgl.system.allocator", StateInit.STRING);
 
@@ -103,7 +115,7 @@ public class Configuration<T> {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.system.stackSize</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Integer> STACK_SIZE = new Configuration<>("org.lwjgl.system.stackSize", StateInit.INT);
 
@@ -113,7 +125,7 @@ public class Configuration<T> {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.NoChecks</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Boolean> DISABLE_CHECKS = new Configuration<>("org.lwjgl.util.NoChecks", StateInit.BOOLEAN);
 
@@ -123,7 +135,7 @@ public class Configuration<T> {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.Debug</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Boolean> DEBUG = new Configuration<>("org.lwjgl.util.Debug", StateInit.BOOLEAN);
 
@@ -134,7 +146,7 @@ public class Configuration<T> {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.DebugLoader</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Boolean> DEBUG_LOADER = new Configuration<>("org.lwjgl.util.DebugLoader", StateInit.BOOLEAN);
 
@@ -148,7 +160,7 @@ public class Configuration<T> {
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.DebugStream</b><br>
 	 * &nbsp; &nbsp; Type: String or a {@link PrintStream} instance<br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Object> DEBUG_STREAM = new Configuration<>("org.lwjgl.util.DebugStream", StateInit.STRING);
 
@@ -162,7 +174,7 @@ public class Configuration<T> {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.DebugAllocator</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR = new Configuration<>("org.lwjgl.util.DebugAllocator", StateInit.BOOLEAN);
 
@@ -175,7 +187,7 @@ public class Configuration<T> {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.DebugStack</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Boolean> DEBUG_STACK = new Configuration<>("org.lwjgl.util.DebugStack", StateInit.BOOLEAN);
 
@@ -188,7 +200,7 @@ public class Configuration<T> {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.DebugFunctions</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Boolean> DEBUG_FUNCTIONS = new Configuration<>("org.lwjgl.util.DebugFunctions", StateInit.BOOLEAN);
 
@@ -209,7 +221,7 @@ public class Configuration<T> {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.egl.explicitInit</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Boolean> EGL_EXPLICIT_INIT = new Configuration<>("org.lwjgl.egl.explicitInit", StateInit.BOOLEAN);
 
@@ -227,7 +239,7 @@ public class Configuration<T> {
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.glfw.checkThread0</b><br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Boolean> GLFW_CHECK_THREAD0 = new Configuration<>("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
 
@@ -269,7 +281,7 @@ public class Configuration<T> {
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.opengl.maxVersion</b><br>
 	 * &nbsp; &nbsp; Type: String (M.n) or an {@link APIUtil.APIVersion} instance<br>
-	 * &nbsp; &nbsp;Usage: Static<br>
+	 * &nbsp; &nbsp;Usage: Static</p>
 	 */
 	public static final Configuration<Object> OPENGL_MAXVERSION = new Configuration<>("org.lwjgl.opengl.maxVersion", StateInit.STRING);
 
