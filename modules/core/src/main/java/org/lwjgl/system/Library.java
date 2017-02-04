@@ -103,20 +103,21 @@ public final class Library {
 		}
 
 		// Then java.library.path
-		String paths = System.getProperty(JAVA_LIBRARY_PATH);
-		if ( paths != null ) {
-			try {
-				System.loadLibrary(name);
+		try {
+			System.loadLibrary(name);
 
-				Path libFile = findLibrary(paths, libName);
-				if ( libFile != null ) {
-					apiLog(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));
-					checkHash(libFile);
-				}
-				return;
-			} catch (Throwable t) {
-				apiLog(String.format("\t%s not found in %s", libName, JAVA_LIBRARY_PATH));
-			}
+			// Success, but java.library.path might be still empty, or not include the library.
+			// In that case, ClassLoader::findLibrary was used to return the library path (e.g. OSGi does this with native libraries in bundles).
+			String paths = System.getProperty(JAVA_LIBRARY_PATH);
+			Path libFile = paths == null ? null : findLibrary(paths, libName);
+			if ( libFile != null ) {
+				apiLog(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));
+				checkHash(libFile);
+			} else
+				apiLog("\tLoaded from a ClassLoader provided path.");
+			return;
+		} catch (Throwable t) {
+			apiLog(String.format("\t%s not found in %s", libName, JAVA_LIBRARY_PATH));
 		}
 
 		printError(true);
