@@ -149,7 +149,7 @@ fun simpleBinding(
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
 		val libraryReference = libraryName.toUpperCase()
 
-		println("\n\tprivate static final SharedLibrary $libraryReference = Library.loadNative($libraryExpression${if (bundledWithLWJGL) ", true" else ""});\n")
+		println("\n\tprivate static final SharedLibrary $libraryReference = Library.loadNative(${nativeClass.className}.class, $libraryExpression${if (bundledWithLWJGL) ", true" else ""});\n")
 		print("\t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
 		generateFunctionsClass(nativeClass)
 		println("""
@@ -255,7 +255,7 @@ class NativeClass(
 			return
 
 		functions.asSequence()
-			.filter { it.hasArrayOverloads }
+			.filter(Func::hasArrayOverloads)
 			.forEach { func ->
 				val multiTypeParams = func.parameters.filter { it.has<MultiType>() }
 				val autoSizeResultOutParams = func.parameters.count { it.isAutoSizeResultOut }
@@ -513,13 +513,13 @@ class NativeClass(
 			else if (library.endsWith(");"))
 				"\n\tstatic { $library }"
 			else
-				"\n\tstatic { Library.loadSystem(Platform.mapLibraryNameBundled(\"$library\")); }"
+				"\n\tstatic { Library.loadSystem($className.class, Platform.mapLibraryNameBundled(\"$library\")); }"
 			)
 		}
 
 		if (hasFunctions || binding is SimpleBinding) {
 			if (binding != null) {
-				if (binding !is SimpleBinding && functions.any { it.hasCustomJNI })
+				if (binding !is SimpleBinding && functions.any(Func::hasCustomJNI))
 					libraryInit()
 
 				printCustomMethods(static = true)
@@ -561,7 +561,7 @@ class NativeClass(
 		print("\n}")
 	}
 
-	override val skipNative get() = functions.none { it.hasCustomJNI }
+	override val skipNative get() = functions.none(Func::hasCustomJNI)
 
 	override fun PrintWriter.generateNative() {
 		print(HEADER)
@@ -570,14 +570,14 @@ class NativeClass(
 		if (binding != null) {
 			// Generate typedefs for casting the function pointers
 			println()
-			functions.asSequence().filter { it.hasCustomJNI }.forEach {
+			functions.asSequence().filter(Func::hasCustomJNI).forEach {
 				it.generateFunctionDefinition(this)
 			}
 		}
 
 		println("\nEXTERN_C_ENTER")
 
-		genFunctions.asSequence().filter { it.hasCustomJNI }.forEach {
+		genFunctions.asSequence().filter(Func::hasCustomJNI).forEach {
 			println()
 			it.generateFunction(this)
 		}
@@ -592,7 +592,7 @@ class NativeClass(
 
 	fun printPointers(
 		out: PrintWriter,
-		printPointer: (func: Func) -> String = { it.name },
+		printPointer: (func: Func) -> String = Func::name,
 		filter: ((Func) -> Boolean)? = null
 	) {
 		out.print("\n\t\t\t")

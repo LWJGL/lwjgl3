@@ -46,13 +46,13 @@ public final class VK {
 		SharedLibrary VK;
 		switch ( Platform.get() ) {
 			case LINUX:
-				VK = Library.loadNative(Configuration.VULKAN_LIBRARY_NAME, "libvulkan.so.1");
+				VK = Library.loadNative(VK.class, Configuration.VULKAN_LIBRARY_NAME, "libvulkan.so.1");
 				break;
 			case WINDOWS:
-				VK = Library.loadNative(Configuration.VULKAN_LIBRARY_NAME, "vulkan-1");
+				VK = Library.loadNative(VK.class, Configuration.VULKAN_LIBRARY_NAME, "vulkan-1");
 				break;
 			case MACOSX:
-				VK = Library.loadNative(Configuration.VULKAN_LIBRARY_NAME); // there may be Vulkan-over-Metal emulation libraries on OS X
+				VK = Library.loadNative(VK.class, Configuration.VULKAN_LIBRARY_NAME); // there may be Vulkan-over-Metal emulation libraries on OS X
 				break;
 			default:
 				throw new IllegalStateException();
@@ -71,7 +71,7 @@ public final class VK {
 	 * @see #create(FunctionProvider)
 	 */
 	public static void create(String libName) {
-		create(Library.loadNative(libName));
+		create(Library.loadNative(VK.class, libName));
 	}
 
 	private static void create(SharedLibrary VULKAN) {

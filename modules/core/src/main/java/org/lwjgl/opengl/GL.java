@@ -73,7 +73,7 @@ public final class GL {
 	private static GLXCapabilities capabilitiesGLX;
 
 	static {
-		Library.loadSystem(Platform.mapLibraryNameBundled("lwjgl_opengl"));
+		Library.loadSystem(GL.class, Platform.mapLibraryNameBundled("lwjgl_opengl"));
 
 		MAX_VERSION = apiParseVersion(Configuration.OPENGL_MAXVERSION);
 
@@ -93,15 +93,15 @@ public final class GL {
 		SharedLibrary GL;
 		switch ( Platform.get() ) {
 			case LINUX:
-				GL = Library.loadNative(Configuration.OPENGL_LIBRARY_NAME, "libGL.so.1", "libGL.so");
+				GL = Library.loadNative(GL.class, Configuration.OPENGL_LIBRARY_NAME, "libGL.so.1", "libGL.so");
 				break;
 			case MACOSX:
 				GL = Configuration.OPENGL_LIBRARY_NAME.get() != null
-					? Library.loadNative(Configuration.OPENGL_LIBRARY_NAME)
+					? Library.loadNative(GL.class, Configuration.OPENGL_LIBRARY_NAME)
 					: MacOSXLibrary.getWithIdentifier("com.apple.opengl");
 				break;
 			case WINDOWS:
-				GL = Library.loadNative(Configuration.OPENGL_LIBRARY_NAME, "opengl32");
+				GL = Library.loadNative(GL.class, Configuration.OPENGL_LIBRARY_NAME, "opengl32");
 				break;
 			default:
 				throw new IllegalStateException();
@@ -115,7 +115,7 @@ public final class GL {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		create(Library.loadNative(libName));
+		create(Library.loadNative(GL.class, libName));
 	}
 
 	private abstract static class SharedLibraryGL extends SharedLibrary.Delegate {

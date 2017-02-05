@@ -51,13 +51,13 @@ public final class EGL {
 		SharedLibrary EGL;
 		switch ( Platform.get() ) {
 			case LINUX:
-				EGL = Library.loadNative(Configuration.EGL_LIBRARY_NAME, "libEGL.so.1");
+				EGL = Library.loadNative(EGL.class, Configuration.EGL_LIBRARY_NAME, "libEGL.so.1");
 				break;
 			case MACOSX:
-				EGL = Library.loadNative(Configuration.EGL_LIBRARY_NAME, "EGL");
+				EGL = Library.loadNative(EGL.class, Configuration.EGL_LIBRARY_NAME, "EGL");
 				break;
 			case WINDOWS:
-				EGL = Library.loadNative(Configuration.EGL_LIBRARY_NAME, "libEGL", "EGL");
+				EGL = Library.loadNative(EGL.class, Configuration.EGL_LIBRARY_NAME, "libEGL", "EGL");
 				break;
 			default:
 				throw new IllegalStateException();
@@ -71,7 +71,7 @@ public final class EGL {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		create(Library.loadNative(libName));
+		create(Library.loadNative(EGL.class, libName));
 	}
 
 	private static void create(SharedLibrary EGL) {

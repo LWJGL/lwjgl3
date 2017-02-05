@@ -50,7 +50,7 @@ public final class Library {
 			);
 		}
 
-		loadSystem(JNI_LIBRARY_NAME);
+		loadSystem(Library.class, JNI_LIBRARY_NAME);
 	}
 
 	private Library() {}
@@ -60,16 +60,22 @@ public final class Library {
 		// intentionally empty to trigger static initializer
 	}
 
+	/** Calls {@link #loadSystem(Class, String)} using {@code Library.class} as the context parameter. */
+	public static void loadSystem(String name) throws UnsatisfiedLinkError {
+		loadSystem(Library.class, name);
+	}
+
 	/**
 	 * Loads a shared library using {@link System#load}.
 	 *
-	 * @param name the library name. If not an absolute path, it must be the plain library name, without an OS specific prefix or file extension (e.g. GL, not
-	 *             libGL.so)
+	 * @param context the class to use to discover the shared library in the classpath
+	 * @param name    the library name. If not an absolute path, it must be the plain library name, without an OS specific prefix or file extension (e.g. GL, not
+	 *                libGL.so)
 	 *
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
 	@SuppressWarnings("try")
-	public static void loadSystem(String name) throws UnsatisfiedLinkError {
+	public static void loadSystem(Class<?> context, String name) throws UnsatisfiedLinkError {
 		apiLog("Loading library (system): " + name);
 
 		// METHOD 1: absolute path
@@ -82,7 +88,7 @@ public final class Library {
 		String libName = Platform.get().mapLibraryName(name);
 
 		// METHOD 2: org.lwjgl.librarypath
-		URL libURL = Library.class.getResource("/" + libName);
+		URL libURL = context.getResource("/" + libName);
 		if ( libURL == null ) {
 			if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
 				return;
@@ -144,24 +150,33 @@ public final class Library {
 		return true;
 	}
 
-	/**
-	 * Loads a shared library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
-	 * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
-	 *
-	 * @param name the library name. OS-specific prefixes and file extensions are optional (e.g. both {@code "GL"} and {@code "libGL.so.1"} are valid on Linux)
-	 *
-	 * @return the shared library
-	 *
-	 * @throws UnsatisfiedLinkError if the library could not be loaded
-	 */
+	/** Calls {@link #loadNative(Class, String)} using {@code Library.class} as the context parameter. */
 	public static SharedLibrary loadNative(String name) {
-		return loadNative(name, false);
+		return loadNative(Library.class, name);
 	}
 
 	/**
 	 * Loads a shared library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
 	 * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
 	 *
+	 * @param context the class to use to discover the shared library in the classpath
+	 * @param name    the library name. OS-specific prefixes and file extensions are optional (e.g. both {@code "GL"} and {@code "libGL.so.1"} are
+	 *                valid on Linux)
+	 *
+	 * @return the shared library
+	 *
+	 * @throws UnsatisfiedLinkError if the library could not be loaded
+	 */
+	@SuppressWarnings("try")
+	public static SharedLibrary loadNative(Class<?> context, String name) {
+		return loadNative(context, name, false);
+	}
+
+	/**
+	 * Loads a shared library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
+	 * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
+	 *
+	 * @param context          the class to use to discover the shared library in the classpath
 	 * @param name             the library name. OS-specific prefixes and file extensions are optional (e.g. both {@code "GL"} and {@code "libGL.so.1"} are
 	 *                         valid on Linux)
 	 * @param bundledWithLWJGL whether the default LWJGL distribution includes the shared library. This flag does not affect the shared library loading
@@ -172,7 +187,7 @@ public final class Library {
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
 	@SuppressWarnings("try")
-	public static SharedLibrary loadNative(String name, boolean bundledWithLWJGL) {
+	public static SharedLibrary loadNative(Class<?> context, String name, boolean bundledWithLWJGL) {
 		apiLog("Loading library: " + name);
 
 		// METHOD 1: absolute path
@@ -186,7 +201,7 @@ public final class Library {
 		SharedLibrary lib;
 
 		// METHOD 2: org.lwjgl.librarypath
-		URL libURL = Library.class.getResource("/" + libName);
+		URL libURL = context.getResource("/" + libName);
 		if ( libURL == null ) {
 			lib = loadNative(libName, Configuration.LIBRARY_PATH);
 			if ( lib != null )
@@ -216,7 +231,7 @@ public final class Library {
 					Method findLibrary = ClassLoader.class.getDeclaredMethod("findLibrary", String.class);
 					findLibrary.setAccessible(true);
 
-					String libPath = (String)findLibrary.invoke(Library.class.getClassLoader(), name);
+					String libPath = (String)findLibrary.invoke(context.getClassLoader(), name);
 					if ( libPath != null ) {
 						lib = apiCreateLibrary(libPath);
 						apiLog(String.format("\tLoaded from ClassLoader provided path: %s", libPath));
@@ -283,22 +298,22 @@ public final class Library {
 	 *
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
-	public static SharedLibrary loadNative(Configuration<String> name, String... defaultNames) {
+	public static SharedLibrary loadNative(Class<?> context, Configuration<String> name, String... defaultNames) {
 		if ( name.get() != null )
-			return loadNative(name.get());
+			return loadNative(context, name.get());
 		else if ( defaultNames.length <= 1 ) {
 			if ( defaultNames.length == 0 )
 				throw new RuntimeException("No default names specified.");
 
-			return loadNative(defaultNames[0]);
+			return loadNative(context, defaultNames[0]);
 		} else {
 			SharedLibrary library = null;
 			try {
-				library = Library.loadNative(defaultNames[0]); // try first
+				library = Library.loadNative(context, defaultNames[0]); // try first
 			} catch (Throwable t) {
 				for ( int i = 1; i < defaultNames.length; i++ ) { // try alternatives
 					try {
-						library = Library.loadNative(defaultNames[i]);
+						library = Library.loadNative(context, defaultNames[i]);
 						break;
 					} catch (Throwable ignored) {
 					}

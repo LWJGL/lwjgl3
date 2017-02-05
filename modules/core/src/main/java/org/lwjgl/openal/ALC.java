@@ -102,7 +102,7 @@ public final class ALC {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		SharedLibrary OPENAL = Library.loadNative(libName);
+		SharedLibrary OPENAL = Library.loadNative(ALC.class, libName);
 		try {
 			create(new SharedLibraryAL(OPENAL));
 		} catch (RuntimeException e) {
