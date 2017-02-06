@@ -31,7 +31,13 @@ public class MemoryStack implements AutoCloseable {
 
     private static final boolean DEBUG_STACK = Configuration.DEBUG_STACK.get(false);
 
-    private static final ThreadLocal<MemoryStack> TLS = ThreadLocal.withInitial(MemoryStack::create);
+    @SuppressWarnings("AnonymousHasLambdaAlternative")
+    private static final ThreadLocal<MemoryStack> TLS = new ThreadLocal<MemoryStack>() {
+        @Override
+        protected MemoryStack initialValue() {
+            return MemoryStack.create();
+        }
+    };
 
     static {
         if (DEFAULT_STACK_SIZE < 0) {

@@ -371,7 +371,7 @@ internal open class PointerArrayTransform(val paramType: String) : FunctionTrans
             return
 
         println((if (paramType.isNotEmpty()) param.name else pointerArray.singleName).let {
-            "$t$t${t}long ${param.name}$POINTER_POSTFIX = org.lwjgl.system.APIUtil.apiArray(stack,${if (pointerArray.elementType is CharSequenceType) " MemoryUtil::mem${pointerArray.elementType.charMapping.charset}," else ""} $it);"
+            "$t$t${t}long ${param.name}$POINTER_POSTFIX = org.lwjgl.system.APIUtil.apiArray(stack,${if (pointerArray.elementType is CharSequenceType) " org.lwjgl.system.APIUtil.Encoder.${pointerArray.elementType.charMapping.charset}," else ""} $it);"
         })
     }
 
@@ -413,7 +413,7 @@ internal class PointerArrayLengthsTransform(
 
         val lengthType = (param.nativeType.mapping as PointerMapping).box[0].toLowerCase()
         println((if (multi) arrayParam.name else pointerArray.singleName).let {
-            "$t$t${t}long ${arrayParam.name}$POINTER_POSTFIX = org.lwjgl.system.APIUtil.apiArray$lengthType(stack,${if (pointerArray.elementType is CharSequenceType) " MemoryUtil::mem${pointerArray.elementType.charMapping.charset}," else ""} $it);"
+            "$t$t${t}long ${arrayParam.name}$POINTER_POSTFIX = org.lwjgl.system.APIUtil.apiArray$lengthType(stack,${if (pointerArray.elementType is CharSequenceType) " org.lwjgl.system.APIUtil.Encoder.${pointerArray.elementType.charMapping.charset}," else ""} $it);"
         })
     }
 }

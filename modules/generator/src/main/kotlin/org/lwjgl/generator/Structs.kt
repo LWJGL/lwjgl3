@@ -1163,8 +1163,8 @@ ${validations.joinToString("\n")}
             else {
                 val mapping = type.mapping as PrimitiveMapping
                 when (mapping.bytes) {
-                    1    -> "Byte.toUnsignedInt($it)"
-                    2    -> "Short.toUnsignedInt($it)"
+                    1    -> "MathUtil.mathUnsignedInt8($it)"
+                    2    -> "MathUtil.mathUnsignedInt16($it)"
                     else -> it
                 }
             }

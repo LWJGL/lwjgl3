@@ -10,7 +10,6 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
 import java.nio.channels.*;
-import java.nio.file.*;
 import java.security.*;
 import java.util.*;
 import java.util.function.*;
@@ -28,7 +27,7 @@ import static org.lwjgl.system.Checks.*;
 public final class Library {
 
     /** The LWJGL shared library name. */
-    public static final String JNI_LIBRARY_NAME = Configuration.LIBRARY_NAME.get(System.getProperty("os.arch").contains("64") ? "lwjgl" : "lwjgl32");
+    public static final String JNI_LIBRARY_NAME = Configuration.LIBRARY_NAME.get(Platform.get() != Platform.WINDOWS || System.getProperty("os.arch").contains("64") ? "lwjgl" : "lwjgl32");
 
     private static final String JAVA_LIBRARY_PATH = "java.library.path";
 
@@ -88,7 +87,7 @@ public final class Library {
         apiLog("Loading library (system): " + name);
 
         // METHOD 1: absolute path
-        if (Paths.get(name).isAbsolute()) {
+        if (new File(name).isAbsolute()) {
             load.accept(name);
             apiLog("\tSuccess");
             return;
@@ -130,7 +129,7 @@ public final class Library {
             // Success, but java.library.path might be still empty, or not include the library.
             // In that case, ClassLoader::findLibrary was used to return the library path (e.g. OSGi does this with native libraries in bundles).
             String paths   = System.getProperty(JAVA_LIBRARY_PATH);
-            Path   libFile = paths == null ? null : findLibrary(paths, libName);
+            File   libFile = paths == null ? null : findLibrary(paths, libName);
             if (libFile != null) {
                 apiLog(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));
                 checkHash(context, libFile);
@@ -152,13 +151,13 @@ public final class Library {
     }
 
     private static boolean loadSystem(Consumer<String> load, Class<?> context, String libName, String property, String paths) {
-        Path libFile = findLibrary(paths, libName);
+        File libFile = findLibrary(paths, libName);
         if (libFile == null) {
             apiLog(String.format("\t%s not found in %s=%s", libName, property, paths));
             return false;
         }
 
-        load.accept(libFile.toAbsolutePath().toString());
+        load.accept(libFile.getAbsolutePath());
         apiLog(String.format("\tLoaded from %s: %s", property, libFile));
         checkHash(context, libFile);
         return true;
@@ -313,7 +312,7 @@ public final class Library {
     }
 
     private static SharedLibrary loadNative(Class<?> context, String libName, String property, String paths) {
-        Path libFile = findLibrary(paths, libName);
+        File libFile = findLibrary(paths, libName);
         if (libFile == null) {
             apiLog(String.format("\t%s not found in %s=%s", libName, property, paths));
             return null;
@@ -365,11 +364,11 @@ public final class Library {
         }
     }
 
-    private static Path findLibrary(String path, String libName) {
+    private static File findLibrary(String path, String libName) {
         for (String directory : PATH_SEPARATOR.split(path)) {
-            Path p = Paths.get(directory, libName);
-            if (Files.isReadable(p)) {
-                return p;
+            File f = new File(directory, libName);
+            if (f.isFile() && f.canRead()) {
+                return f;
             }
         }
         return null;
@@ -401,7 +400,7 @@ public final class Library {
      * @param context the class to use to discover the shared library hash in the classpath
      * @param libFile the library file loaded
      */
-    private static void checkHash(Class<?> context, Path libFile) {
+    private static void checkHash(Class<?> context, File libFile) {
         if (!CHECKS) {
             return;
         }
@@ -410,7 +409,7 @@ public final class Library {
             URL classesURL = null;
             URL nativesURL = null;
 
-            Enumeration<URL> resources = context.getClassLoader().getResources(libFile.getFileName() + ".sha1");
+            Enumeration<URL> resources = context.getClassLoader().getResources(libFile.getName() + ".sha1");
             while (resources.hasMoreElements()) {
                 URL url = resources.nextElement();
                 if (NATIVES_JAR.matcher(url.toExternalForm()).find()) {
@@ -449,9 +448,9 @@ public final class Library {
         return hash;
     }
 
-    private static byte[] getSHA1(Path libFile) throws NoSuchAlgorithmException, IOException {
+    private static byte[] getSHA1(File libFile) throws NoSuchAlgorithmException, IOException {
         MessageDigest digest = MessageDigest.getInstance("SHA-1");
-        try (InputStream input = Files.newInputStream(libFile)) {
+        try (InputStream input = new FileInputStream(libFile)) {
             byte[] buffer = new byte[8 * 1024];
             for (int n; (n = input.read(buffer)) != -1; ) {
                 digest.update(buffer, 0, n);

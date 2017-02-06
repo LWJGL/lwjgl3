@@ -15,10 +15,6 @@
         <isset property="build.arch.64"/>
     </condition>
 
-    <condition property="ndk.platform" value="21" else="9"> <!-- Minimum possible until we add bindings to Android APIs -->
-        <isset property="build.arch.64"/>
-    </condition>
-
     <property name="src.native.rel" value="../../../../${src.native}"/>
 
     <macrodef name="compile">
@@ -35,9 +31,10 @@
             <apply dir="@{dest}" executable="${ndk.bin}/${ndk.toolchain}-gcc" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
                 <arg line="-c -std=c11" unless:set="cpp"/>
                 <arg line="-c -std=c++11" if:set="cpp"/>
+                <arg line="-march=armv7-a -mthumb -mfloat-abi=softfp -mfpu=neon" if:set="build.arch.32"/>
                 <arg line="-O3 -flto -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DNDEBUG -DLWJGL_LINUX -DLWJGL_ANDROID -DLWJGL${build.arch.bits}"/>
 
-                <arg line="--sysroot=${ndk.home}/platforms/android-${ndk.platform}/arch-${ndk.arch}"/>
+                <arg line="--sysroot=${ndk.home}/platforms/android-${android.platform}/arch-${ndk.arch}"/>
 
                 <arg value="-I${src.native.rel}/system"/>
                 <arg value="-I${src.native.rel}/system/linux"/>
@@ -78,8 +75,9 @@
             <apply executable="${ndk.bin}/${ndk.toolchain}-gcc" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
                 <arg value="-shared"/>
-                <arg line="--sysroot=${ndk.home}/platforms/android-${ndk.platform}/arch-${ndk.arch}"/>
+                <arg line="--sysroot=${ndk.home}/platforms/android-${android.platform}/arch-${ndk.arch}"/>
                 <arg line="-z noexecstack"/>
+                <arg line="-march=armv7-a -Wl,--fix-cortex-a8" if:set="build.arch.32"/>
                 <arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib@{name}.so"/>
 
                 <arg line="-Wl,--version-script,${version.script}"/>

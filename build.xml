@@ -104,6 +104,7 @@
     <target name="clean-java" description="Deletes Java binary files produced by this script">
         <delete dir="${bin.core}"/>
         <delete dir="${bin.tests}"/>
+        <delete dir="${bin.android}" if:set="platform.android"/>
     </target>
 
     <target name="clean-native" description="Deletes native binary files produced by this script">
@@ -130,7 +131,10 @@
         <delete dir="${src.generated.native}"/>
     </target>
 
-    <target name="all" description="Builds LWJGL and runs the tests" depends="compile-templates, tests"/>
+    <target name="all" description="Builds LWJGL and runs the tests" depends="compile-templates">
+        <antcall target="tests" unless:set="platform.android"/>
+        <antcall target="aar" if:set="platform.android"/>
+    </target>
 
     <target name="-compile-generator" depends="init">
         <local name="generator-uptodate"/>
@@ -364,13 +368,20 @@
             <src>
                 <pathelement path="${src.core}"/>
                 <pathelement path="${src.generated.java}"/>
+                <pathelement path="${src.core}/../android" if:set="platform.android"/>
             </src>
 
-            <include name="**/*.java"/>
+            <include name="org/lwjgl/**/*.java"/>
             <exclude name="**/package-info.java"/>
+
+            <include name="lang/invoke/*.java" if:set="platform.android"/>
+            <include name="sun/misc/Unsafe.java" if:set="platform.android"/>
 
             <patternset refid="excluded.sources.withCore"/>
             <patternset refid="excluded.sources"/>
+
+            <!-- Unsupported API protection -->
+            <compilerarg value="-Xbootclasspath:${env.ANDROID_SDK_HOME}/platforms/android-${android.platform}/android.jar" if:set="platform.android"/>
 
             <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
             <compilerarg value="-XDignore.symbol.file=true"/>
@@ -385,7 +396,10 @@
             <sysproperty key="retrolambda.inputDir" value="${bin.core}"/>
             <sysproperty key="retrolambda.classpath" value="${bin.core}"/>
             <sysproperty key="retrolambda.outputDir" value="${bin.android.classes}"/>
-    </java>
+        </java>
+
+        <delete dir="${bin.android.classes}/java"/>
+        <delete dir="${bin.android.classes}/sun"/>
     </target>
 
     <target name="aar" description="Builds the Android archive" depends="retrolambda, compile-native">
@@ -401,7 +415,7 @@
             <!-- Include the classes.jar -->
             <zipfileset dir="${bin.android}" includes="classes.jar"/>
             <!-- Include all natives -->
-            <zipfileset dir="${lib}" includes="*.so" prefix="jni/arm64-v8a"/>
+            <zipfileset dir="${lib}" includes="*.so" prefix="jni/${build.arch}"/>
         </zip>
     </target>
 

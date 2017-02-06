@@ -334,8 +334,27 @@ public final class APIUtil {
 
     // ----------------------------------------
 
-    public interface Encoder {
-        ByteBuffer encode(CharSequence text, boolean nullTerminated);
+    public enum Encoder {
+        ASCII {
+            @Override
+            protected ByteBuffer encode(CharSequence text, boolean nullTerminated) {
+                return memASCII(text, nullTerminated);
+            }
+        },
+        UTF8 {
+            @Override
+            protected ByteBuffer encode(CharSequence text, boolean nullTerminated) {
+                return memUTF8(text, nullTerminated);
+            }
+        },
+        UTF16 {
+            @Override
+            protected ByteBuffer encode(CharSequence text, boolean nullTerminated) {
+                return memUTF16(text, nullTerminated);
+            }
+        };
+
+        protected abstract ByteBuffer encode(CharSequence text, boolean nullTerminated);
     }
 
     /**

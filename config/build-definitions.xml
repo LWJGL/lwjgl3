@@ -106,6 +106,8 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="build.platform" value="macosx" if:set="platform.macosx"/>
     <property name="build.platform" value="windows" if:set="platform.windows"/>
 
+    <property name="android.platform" value="24" if:set="platform.android"/>
+
     <!--
         The target native architecture. By default, os.arch of the JVM that runs ANT is used, but this can be overriden for cross-compiling to another
         architecture.

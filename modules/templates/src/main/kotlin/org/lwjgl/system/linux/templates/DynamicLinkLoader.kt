@@ -19,19 +19,19 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
         "The {@code mode} argument to #dlopen() contains one of the following.",
 
         "RTLD_LAZY"..0x00001,
-        "RTLD_NOW"..0x00002,
         "RTLD_BINDING_MASK"..0x3,
         "RTLD_NOLOAD"..0x00004,
         "RTLD_DEEPBIND"..0x00008
     ).javaDocLinks + " #RTLD_GLOBAL #RTLD_LOCAL #RTLD_NODELETE"
 
-    IntConstant(
+    // These two have different values on different systems
+    macro..int("RTLD_NOW", "")
+    macro..int(
+        "RTLD_GLOBAL",
         """
-        If the following bit is set in the {@code mode} argument to #dlopen(), the symbols of the loaded object and its dependencies are made visible as
-        if the object were linked directly into the program.
-        """,
-
-        "RTLD_GLOBAL"..0x00100
+        If the following bit is set in the {@code mode} argument to #dlopen(), the symbols of the loaded object and its dependencies are made visible as if the
+        object were linked directly into the program.
+        """
     )
 
     IntConstant(

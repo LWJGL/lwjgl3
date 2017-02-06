@@ -40,4 +40,26 @@ public final class MathUtil {
         return 1 << (32 - Integer.numberOfLeadingZeros(value - 1));
     }
 
+    /**
+     * Converts the specified unsigned byte to an int.
+     *
+     * @param value the unsigned byte value
+     *
+     * @return the int value
+     */
+    public static int mathUnsignedInt8(byte value) {
+        return value & 0xFF;
+    }
+
+    /**
+     * Converts the specified unsigned short to an int.
+     *
+     * @param value the unsigned short value
+     *
+     * @return the int value
+     */
+    public static int mathUnsignedInt16(short value) {
+        return value & 0xFFFF;
+    }
+
 }
