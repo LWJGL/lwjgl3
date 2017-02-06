@@ -130,6 +130,7 @@ EXPORTS
 				</fileset>
 			</source>
 			<beforeLink>
+				<mkdir dir="${lib}/windows/${build.arch}"/>
 				<parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
 					<update-dependency name="dyncall" artifact="${build.arch}/dyncall_s.lib"/>
 					<update-dependency name="dyncallback" artifact="${build.arch}/dyncallback_s.lib"/>

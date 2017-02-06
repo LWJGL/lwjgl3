@@ -131,6 +131,7 @@
 				</fileset>
 			</source>
 			<beforeLink>
+				<mkdir dir="${lib}/macosx/x64"/>
 				<parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
 					<update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
 					<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
