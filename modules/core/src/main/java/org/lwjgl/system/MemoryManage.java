@@ -4,16 +4,14 @@
  */
 package org.lwjgl.system;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.*;
+import java.util.Map.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.StackWalkUtil.*;
 import static org.lwjgl.system.libc.LibCStdlib.*;
 
 /** Provides {@link MemoryAllocator} implementations for {@link MemoryUtil} to use. */
@@ -98,8 +96,6 @@ final class MemoryManage {
 
 	}
 
-	// TODO: evaluate performance and optimize
-
 	/** Wraps a MemoryAllocator to track allocations and detect memory leaks. */
 	static class DebugAllocator implements MemoryAllocator {
 
@@ -126,7 +122,7 @@ final class MemoryManage {
 						THREADS.get(allocation.threadId),
 						Long.toHexString(address).toUpperCase()
 					);
-					for ( StackTraceElement el : allocation.stackTrace )
+					for ( Object el : allocation.stackTrace )
 						DEBUG_STREAM.format("\tat %s\n", el.toString());
 				}
 			}));
@@ -200,14 +196,7 @@ final class MemoryManage {
 				if ( !THREADS.containsKey(threadId) )
 					THREADS.put(threadId, t.getName());
 
-				StackTraceElement[] stackTrace = t.getStackTrace();
-				int depth = Math.min(stackTrace.length, 4);
-				for ( ; depth < stackTrace.length; depth++ ) {
-					if ( !"org.lwjgl.system.MemoryUtil".equals(stackTrace[depth].getClassName()) )
-						break;
-				}
-
-				Allocation allocation = ALLOCATIONS.put(address, new Allocation(Arrays.copyOfRange(stackTrace, depth, stackTrace.length), size));
+				Allocation allocation = ALLOCATIONS.put(address, new Allocation(stackWalkGetTrace(4, MemoryUtil.class), size));
 				if ( allocation != null )
 					throw new IllegalStateException("The memory address specified is already being tracked");
 			}
@@ -226,16 +215,24 @@ final class MemoryManage {
 
 		private static class Allocation {
 
-			final StackTraceElement[] stackTrace;
+			private final Object[] stackTrace;
+
+			private StackTraceElement[] elements; // lazy init
 
 			final long size;
-
 			final long threadId;
 
-			Allocation(StackTraceElement[] stackTrace, long size) {
+			Allocation(Object[] stackTrace, long size) {
 				this.stackTrace = stackTrace;
 				this.size = size;
 				this.threadId = Thread.currentThread().getId();
+			}
+
+			private StackTraceElement[] getElements() {
+				if ( elements == null )
+					elements = stackWalkArray(stackTrace);
+
+				return elements;
 			}
 
 			@Override
@@ -245,25 +242,23 @@ final class MemoryManage {
 
 				Allocation that = (Allocation)o;
 
-				return Arrays.equals(stackTrace, that.stackTrace);
+				return Arrays.equals(this.getElements(), that.getElements());
 			}
 
 			@Override
 			public int hashCode() {
-				return Arrays.hashCode(stackTrace);
+				return Arrays.hashCode(getElements());
 			}
 
 		}
 
 		static void report(MemoryAllocationReport report) {
 			for ( Allocation allocation : ALLOCATIONS.values() )
-				report.invoke(allocation.size, allocation.threadId, THREADS.get(allocation.threadId), allocation.stackTrace);
+				report.invoke(allocation.size, allocation.threadId, THREADS.get(allocation.threadId), allocation.getElements());
 		}
 
 		private static <T> void aggregate(T t, long size, Map<T, AtomicLong> map) {
-			AtomicLong node = map.get(t);
-			if ( node == null )
-				map.put(t, node = new AtomicLong());
+			AtomicLong node = map.computeIfAbsent(t, k -> new AtomicLong());
 			node.set(node.get() + size);
 		}
 
@@ -289,14 +284,12 @@ final class MemoryManage {
 					}
 					break;
 				case GROUP_BY_METHOD:
-					// Group by StackTraceElement[0]
+					// Group by stackTrace[0]
 					if ( groupByThread ) {
 						Map<Long, Map<StackTraceElement, AtomicLong>> mapThreadMethod = new HashMap<>();
 						for ( Allocation allocation : ALLOCATIONS.values() ) {
-							Map<StackTraceElement, AtomicLong> mapMethod = mapThreadMethod.get(allocation.threadId);
-							if ( mapMethod == null )
-								mapThreadMethod.put(allocation.threadId, mapMethod = new HashMap<>());
-							aggregate(allocation.stackTrace[0], allocation.size, mapMethod);
+							Map<StackTraceElement, AtomicLong> mapMethod = mapThreadMethod.computeIfAbsent(allocation.threadId, k -> new HashMap<>());
+							aggregate(allocation.getElements()[0], allocation.size, mapMethod);
 						}
 
 						for ( Entry<Long, Map<StackTraceElement, AtomicLong>> tms : mapThreadMethod.entrySet() ) {
@@ -309,19 +302,17 @@ final class MemoryManage {
 					} else {
 						Map<StackTraceElement, AtomicLong> mapMethod = new HashMap<>();
 						for ( Allocation allocation : ALLOCATIONS.values() )
-							aggregate(allocation.stackTrace[0], allocation.size, mapMethod);
+							aggregate(allocation.getElements()[0], allocation.size, mapMethod);
 						for ( Entry<StackTraceElement, AtomicLong> ms : mapMethod.entrySet() )
 							report.invoke(ms.getValue().get(), NULL, null, ms.getKey());
 					}
 					break;
 				case GROUP_BY_STACKTRACE:
-					// Group by StackTraceElement[]
+					// Group by stackTrace[]
 					if ( groupByThread ) {
 						Map<Long, Map<Allocation, AtomicLong>> mapThreadStackTrace = new HashMap<>();
 						for ( Allocation allocation : ALLOCATIONS.values() ) {
-							Map<Allocation, AtomicLong> mapStackTrace = mapThreadStackTrace.get(allocation.threadId);
-							if ( mapStackTrace == null )
-								mapThreadStackTrace.put(allocation.threadId, mapStackTrace = new HashMap<>());
+							Map<Allocation, AtomicLong> mapStackTrace = mapThreadStackTrace.computeIfAbsent(allocation.threadId, k -> new HashMap<>());
 							aggregate(allocation, allocation.size, mapStackTrace);
 						}
 
@@ -330,14 +321,14 @@ final class MemoryManage {
 							Map<Allocation, AtomicLong> mapStackTrace = tss.getValue();
 
 							for ( Entry<Allocation, AtomicLong> ss : mapStackTrace.entrySet() )
-								report.invoke(ss.getValue().get(), threadId, THREADS.get(threadId), ss.getKey().stackTrace);
+								report.invoke(ss.getValue().get(), threadId, THREADS.get(threadId), ss.getKey().getElements());
 						}
 					} else {
 						Map<Allocation, AtomicLong> mapStackTrace = new HashMap<>();
 						for ( Allocation allocation : ALLOCATIONS.values() )
 							aggregate(allocation, allocation.size, mapStackTrace);
 						for ( Entry<Allocation, AtomicLong> ss : mapStackTrace.entrySet() )
-							report.invoke(ss.getValue().get(), NULL, null, ss.getKey().stackTrace);
+							report.invoke(ss.getValue().get(), NULL, null, ss.getKey().getElements());
 					}
 					break;
 			}

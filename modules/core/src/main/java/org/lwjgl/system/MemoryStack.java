@@ -8,13 +8,14 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 
 import java.nio.*;
-import java.util.Arrays;
+import java.util.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
+import static org.lwjgl.system.StackWalkUtil.*;
 
 /**
  * An off-heap memory stack.
@@ -134,11 +135,11 @@ public class MemoryStack implements AutoCloseable {
 	/** Stores the method that pushed a frame and checks if it is the same method when the frame is popped. */
 	private static class DebugMemoryStack extends MemoryStack {
 
-		private StackTraceElement[] debugFrames;
+		private Object[] debugFrames;
 
 		DebugMemoryStack(int size) {
 			super(size);
-			debugFrames = new StackTraceElement[DEFAULT_STACK_FRAMES];
+			debugFrames = new Object[DEFAULT_STACK_FRAMES];
 		}
 
 		@Override
@@ -146,7 +147,7 @@ public class MemoryStack implements AutoCloseable {
 			if ( frameIndex == debugFrames.length )
 				frameOverflow();
 
-			debugFrames[frameIndex] = getMethod();
+			debugFrames[frameIndex] = stackWalkGetMethod(2, MemoryStack.class);
 
 			return super.push();
 		}
@@ -157,12 +158,17 @@ public class MemoryStack implements AutoCloseable {
 
 		@Override
 		public MemoryStack pop() {
-			StackTraceElement popped = getMethod();
-
-			StackTraceElement pushed = debugFrames[frameIndex - 1];
+			checkPop(
+				stackWalkGetMethod(2, MemoryStack.class),
+				debugFrames[frameIndex - 1]
+			);
 			debugFrames[frameIndex - 1] = null;
 
-			if ( !popped.getClassName().equals(pushed.getClassName()) || !popped.getMethodName().equals(pushed.getMethodName()) )
+			return super.pop();
+		}
+
+		private static void checkPop(Object popped, Object pushed) {
+			if ( !stackWalkIsSameMethod(popped, pushed) )
 				//noinspection resource
 				DEBUG_STREAM.format(
 					"[LWJGL] Asymmetric pop detected:\n\tPUSHED: %s\n\tPOPPED: %s\n\tTHREAD: %s\n",
@@ -170,18 +176,8 @@ public class MemoryStack implements AutoCloseable {
 					popped.toString(),
 					Thread.currentThread()
 				);
-
-			return super.pop();
 		}
 
-		private static StackTraceElement getMethod() {
-			StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			for ( int i = 1; i < stacktrace.length; i++ ) {
-				if ( !stacktrace[i].getClassName().startsWith(MemoryStack.class.getName()) )
-					return stacktrace[i];
-			}
-			throw new IllegalStateException();
-		}
 	}
 
 	/**

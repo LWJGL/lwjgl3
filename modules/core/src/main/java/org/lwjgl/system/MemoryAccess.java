@@ -442,217 +442,219 @@ final class MemoryAccess {
 
 			// The benefit comes from extracting the implementation to a separate method that only receives a raw pointer. This enables inlining of the base
 			// method and, in many cases, elimination of the ByteBuffer allocation via escape analysis.
-			return new MemoryTextUtil() {
-				@Override
-				int strlen64NT1(long address, int maxLength) {
-					int i = 0;
+			return new MemoryTextUtilUnsafe();
+		}
 
-					if ( 8 <= maxLength ) {
-						int misalignment = (int)address & 7;
-						if ( misalignment != 0 ) {
-							// Align to 8 bytes
-							for ( int len = 8 - misalignment; i < len; i++ ) {
-								if ( memGetByte(address + i) == 0 )
-									return i;
-							}
+		private static class MemoryTextUtilUnsafe extends MemoryTextUtil {
+			@Override
+			int strlen64NT1(long address, int maxLength) {
+				int i = 0;
+
+				if ( 8 <= maxLength ) {
+					int misalignment = (int)address & 7;
+					if ( misalignment != 0 ) {
+						// Align to 8 bytes
+						for ( int len = 8 - misalignment; i < len; i++ ) {
+							if ( UNSAFE.getByte(address + i) == 0 )
+								return i;
 						}
-
-						// Aligned longs for performance
-						do {
-							long v = memGetLong(address + i);
-							if ( ((v - 0x0101010101010101L) & ~v & 0x8080808080808080L) != 0 )
-								break;
-							i += 8;
-						} while ( i <= maxLength - 8 );
 					}
 
-					// Tail
-					for ( ; i < maxLength; i++ ) {
-						if ( memGetByte(address + i) == 0 )
+					// Aligned longs for performance
+					do {
+						long v = UNSAFE.getLong(address + i);
+						if ( ((v - 0x0101010101010101L) & ~v & 0x8080808080808080L) != 0 )
 							break;
-					}
-
-					return i;
+						i += 8;
+					} while ( i <= maxLength - 8 );
 				}
 
-				@Override
-				int strlen64NT2(long address, int maxLength) {
-					int i = 0;
+				// Tail
+				for ( ; i < maxLength; i++ ) {
+					if ( UNSAFE.getByte(address + i) == 0 )
+						break;
+				}
 
-					if ( 8 <= maxLength ) {
-						int misalignment = (int)address & 7;
-						if ( misalignment != 0 ) {
-							// Align to 8 bytes
-							for ( int len = 8 - misalignment; i < len; i += 2 ) {
-								if ( memGetShort(address + i) == 0 )
-									return i;
-							}
+				return i;
+			}
+
+			@Override
+			int strlen64NT2(long address, int maxLength) {
+				int i = 0;
+
+				if ( 8 <= maxLength ) {
+					int misalignment = (int)address & 7;
+					if ( misalignment != 0 ) {
+						// Align to 8 bytes
+						for ( int len = 8 - misalignment; i < len; i += 2 ) {
+							if ( UNSAFE.getShort(address + i) == 0 )
+								return i;
 						}
-
-						// Aligned longs for performance
-						do {
-							long v = memGetLong(address + i);
-							if ( ((v - 0x0001000100010001L) & ~v & 0x8000800080008000L) != 0 )
-								break;
-							i += 8;
-						} while ( i <= maxLength - 8 );
 					}
 
-					// Tail
-					for ( ; i < maxLength; i += 2 ) {
-						if ( memGetShort(address + i) == 0 )
+					// Aligned longs for performance
+					do {
+						long v = UNSAFE.getLong(address + i);
+						if ( ((v - 0x0001000100010001L) & ~v & 0x8000800080008000L) != 0 )
 							break;
-					}
-
-					return i;
+						i += 8;
+					} while ( i <= maxLength - 8 );
 				}
 
-				@Override
-				int strlen32NT1(long address, int maxLength) {
-					int i = 0;
+				// Tail
+				for ( ; i < maxLength; i += 2 ) {
+					if ( UNSAFE.getShort(address + i) == 0 )
+						break;
+				}
 
-					if ( 4 <= maxLength ) {
-						int misalignment = (int)address & 3;
-						if ( misalignment != 0 ) {
-							// Align to 4 bytes
-							for ( int len = 4 - misalignment; i < len; i++ ) {
-								if ( memGetByte(address + i) == 0 )
-									return i;
-							}
+				return i;
+			}
+
+			@Override
+			int strlen32NT1(long address, int maxLength) {
+				int i = 0;
+
+				if ( 4 <= maxLength ) {
+					int misalignment = (int)address & 3;
+					if ( misalignment != 0 ) {
+						// Align to 4 bytes
+						for ( int len = 4 - misalignment; i < len; i++ ) {
+							if ( UNSAFE.getByte(address + i) == 0 )
+								return i;
 						}
-
-						// Aligned ints for performance
-						do {
-							int v = memGetInt(address + i);
-							if ( ((v - 0x01010101) & ~v & 0x80808080) != 0 )
-								break;
-							i += 4;
-						} while ( i <= maxLength - 4 );
 					}
 
-					// Tail
-					for ( ; i < maxLength; i++ ) {
-						if ( memGetByte(address + i) == 0 )
+					// Aligned ints for performance
+					do {
+						int v = UNSAFE.getInt(address + i);
+						if ( ((v - 0x01010101) & ~v & 0x80808080) != 0 )
 							break;
-					}
-
-					return i;
+						i += 4;
+					} while ( i <= maxLength - 4 );
 				}
 
-				@Override
-				int strlen32NT2(long address, int maxLength) {
-					int i = 0;
+				// Tail
+				for ( ; i < maxLength; i++ ) {
+					if ( UNSAFE.getByte(address + i) == 0 )
+						break;
+				}
 
-					if ( 4 <= maxLength ) {
-						int misalignment = (int)address & 3;
-						if ( misalignment != 0 ) {
-							// Align to 4 bytes
-							for ( int len = 4 - misalignment; i < len; i += 2 ) {
-								if ( memGetShort(address + i) == 0 )
-									return i;
-							}
+				return i;
+			}
+
+			@Override
+			int strlen32NT2(long address, int maxLength) {
+				int i = 0;
+
+				if ( 4 <= maxLength ) {
+					int misalignment = (int)address & 3;
+					if ( misalignment != 0 ) {
+						// Align to 4 bytes
+						for ( int len = 4 - misalignment; i < len; i += 2 ) {
+							if ( UNSAFE.getShort(address + i) == 0 )
+								return i;
 						}
-
-						// Aligned longs for performance
-						do {
-							int v = memGetInt(address + i);
-							if ( ((v - 0x00010001) & ~v & 0x80008000) != 0 )
-								break;
-							i += 4;
-						} while ( i <= maxLength - 4 );
 					}
 
-					// Tail
-					for ( ; i < maxLength; i += 2 ) {
-						if ( memGetShort(address + i) == 0 )
+					// Aligned longs for performance
+					do {
+						int v = UNSAFE.getInt(address + i);
+						if ( ((v - 0x00010001) & ~v & 0x80008000) != 0 )
 							break;
-					}
-
-					return i;
+						i += 4;
+					} while ( i <= maxLength - 4 );
 				}
 
-				@Override
-				int encodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
-					return encodeASCII(text, nullTerminated, memAddress(target) + offset);
+				// Tail
+				for ( ; i < maxLength; i += 2 ) {
+					if ( UNSAFE.getShort(address + i) == 0 )
+						break;
 				}
 
-				private int encodeASCII(CharSequence text, boolean nullTerminated, long target) {
-					int p = 0, len = text.length();
+				return i;
+			}
 
-					for ( ; p < len; p++ )
-						memPutByte(target + p, (byte)text.charAt(p));
+			@Override
+			int encodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+				return encodeASCII(text, nullTerminated, memAddress(target) + offset);
+			}
 
-					if ( nullTerminated )
-						memPutByte(target + p++, (byte)0);
+			private static int encodeASCII(CharSequence text, boolean nullTerminated, long target) {
+				int p = 0, len = text.length();
 
-					return p;
+				for ( ; p < len; p++ )
+					UNSAFE.putByte(target + p, (byte)text.charAt(p));
+
+				if ( nullTerminated )
+					UNSAFE.putByte(target + p++, (byte)0);
+
+				return p;
+			}
+
+			@Override
+			int encodeUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+				return encodeUTF8(text, nullTerminated, memAddress(target) + offset);
+			}
+
+			private static int encodeUTF8(CharSequence text, boolean nullTerminated, long target) {
+				int i = 0, len = text.length(), p = 0;
+
+				char c;
+
+				// ASCII fast path
+				while ( i < len && (c = text.charAt(i)) < 0x80 ) {
+					UNSAFE.putByte(target + p++, (byte)c);
+					i++;
 				}
 
-				@Override
-				int encodeUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
-					return encodeUTF8(text, nullTerminated, memAddress(target) + offset);
-				}
-
-				private int encodeUTF8(CharSequence text, boolean nullTerminated, long target) {
-					int i = 0, len = text.length(), p = 0;
-
-					char c;
-
-					// ASCII fast path
-					while ( i < len && (c = text.charAt(i)) < 0x80 ) {
-						memPutByte(target + p++, (byte)c);
-						i++;
-					}
-
-					// Slow path
-					while ( i < len ) {
-						c = text.charAt(i++);
-						if ( c < 0x80 ) {
-							memPutByte(target + p++, (byte)c);
+				// Slow path
+				while ( i < len ) {
+					c = text.charAt(i++);
+					if ( c < 0x80 ) {
+						UNSAFE.putByte(target + p++, (byte)c);
+					} else {
+						int cp = c;
+						if ( c < 0x800 ) {
+							UNSAFE.putByte(target + p++, (byte)(0xC0 | cp >> 6));
 						} else {
-							int cp = c;
-							if ( c < 0x800 ) {
-								memPutByte(target + p++, (byte)(0xC0 | cp >> 6));
+							if ( !isHighSurrogate(c) ) {
+								UNSAFE.putByte(target + p++, (byte)(0xE0 | cp >> 12));
 							} else {
-								if ( !isHighSurrogate(c) ) {
-									memPutByte(target + p++, (byte)(0xE0 | cp >> 12));
-								} else {
-									cp = toCodePoint(c, text.charAt(i++));
+								cp = toCodePoint(c, text.charAt(i++));
 
-									memPutByte(target + p++, (byte)(0xF0 | cp >> 18));
-									memPutByte(target + p++, (byte)(0x80 | cp >> 12 & 0x3F));
-								}
-								memPutByte(target + p++, (byte)(0x80 | cp >> 6 & 0x3F));
+								UNSAFE.putByte(target + p++, (byte)(0xF0 | cp >> 18));
+								UNSAFE.putByte(target + p++, (byte)(0x80 | cp >> 12 & 0x3F));
 							}
-							memPutByte(target + p++, (byte)(0x80 | cp & 0x3F));
+							UNSAFE.putByte(target + p++, (byte)(0x80 | cp >> 6 & 0x3F));
 						}
+						UNSAFE.putByte(target + p++, (byte)(0x80 | cp & 0x3F));
 					}
-
-					if ( nullTerminated )
-						memPutByte(target + p, (byte)0);
-
-					return p;
 				}
 
-				@Override
-				int encodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
-					return encodeUTF16(text, nullTerminated, memAddress(target) + offset);
+				if ( nullTerminated )
+					UNSAFE.putByte(target + p, (byte)0);
+
+				return p;
+			}
+
+			@Override
+			int encodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+				return encodeUTF16(text, nullTerminated, memAddress(target) + offset);
+			}
+
+			private static int encodeUTF16(CharSequence text, boolean nullTerminated, long target) {
+				int p = 0, len = text.length();
+
+				for ( int i = 0; i < len; i++, p += 2 )
+					UNSAFE.putShort(target + p, (short)text.charAt(i));
+
+				if ( nullTerminated ) {
+					UNSAFE.putShort(target + p, (short)0);
+					p += 2;
 				}
 
-				private int encodeUTF16(CharSequence text, boolean nullTerminated, long target) {
-					int p = 0, len = text.length();
-
-					for ( int i = 0; i < len; i++, p += 2 )
-						memPutShort(target + p, (short)text.charAt(i));
-
-					if ( nullTerminated ) {
-						memPutShort(target + p, (short)0);
-						p += 2;
-					}
-
-					return p;
-				}
-			};
+				return p;
+			}
 		}
 
 	}

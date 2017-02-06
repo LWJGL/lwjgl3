@@ -800,6 +800,7 @@
 		<attribute name="title"/>
 		<attribute name="java-only" default="false"/>
 		<attribute name="native-library" default=""/>
+		<attribute name="multi-release" default="false"/>
 		<attribute name="license" default=""/>
 		<element name="natives" optional="true"/>
 		<element name="classes" optional="true"/>
@@ -837,6 +838,7 @@
 							<attribute name="Implementation-Title" value="${module}"/>
 							<attribute name="Implementation-Version" value="${revision}"/>
 							<attribute name="Implementation-Vendor" value="lwjgl.org"/>
+							<attribute name="Multi-Release" value="true" if:true="@{multi-release}"/>
 						</section>
 					</manifest>
 
@@ -929,6 +931,16 @@
 		</sequential>
 	</macrodef>
 
+	<target name="-multi-release-9">
+		<mkdir dir="${bin.core}/META-INF/versions/9"/>
+		<lwjgl.javac destdir="${bin.core}/META-INF/versions/9" taskname="javac: Core - Java 9">
+			<src>
+				<pathelement path="${src.core}9"/>
+			</src>
+			<include name="**/*.java"/>
+		</lwjgl.javac>
+	</target>
+
 	<target name="release" depends="compile,-build-version">
 		<local name="revision"/>
 		<condition property="revision" value="build ${build.revision}" else="SNAPSHOT">
@@ -945,14 +957,25 @@
 		<echo file="${release}/build.txt" if:set="build.revision">LWJGL ${build.version} ${revision}</echo>
 		<echo file="${release}/build.txt" unless:set="build.revision">LWJGL ${build.version}</echo>
 
+		<local name="multi-release"/>
+		<condition property="multi-release" value="true" else="false">
+			<isset property="jdk9"/>
+		</condition>
+
+		<antcall target="-multi-release-9" if:set="jdk9"/>
+
 		<!-- CORE -->
-		<release-module package="org.lwjgl" name="core" module-name="lwjgl" native-library="lwjgl" title="Core">
+		<release-module package="org.lwjgl" name="core" module-name="lwjgl" native-library="lwjgl" multi-release="${multi-release}" title="Core">
 			<classes>
 				<fileset dir="${bin.core}">
 					<include name="org/lwjgl/*.class"/>
 					<include name="org/lwjgl/system/**"/>
 					<exclude name="org/lwjgl/system/jawt/**"/>
 					<exclude name="org/lwjgl/system/jemalloc/**"/>
+				</fileset>
+
+				<fileset dir="${bin.core}" if:set="jdk9">
+					<include name="META-INF/versions/9/**"/>
 				</fileset>
 			</classes>
 			<sources>

@@ -8,7 +8,7 @@ import org.lwjgl.system.MemoryUtil.MemoryAllocator;
 
 import java.io.File;
 import java.io.PrintStream;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * This class can be used to programmatically set the LWJGL runtime configuration. It is an alternative to using system properties.
@@ -309,31 +309,15 @@ public class Configuration<T> {
 	/** Similar to {@link #LIBRARY_NAME} for the Vulkan library (<b>org.lwjgl.vulkan.libname</b>). */
 	public static final Configuration<String> VULKAN_LIBRARY_NAME = new Configuration<>("org.lwjgl.vulkan.libname", StateInit.STRING);
 
-	private abstract static class StateInit<T> {
-		static final StateInit<Boolean> BOOLEAN = new StateInit<Boolean>() {
-			@Override
-			Boolean getState(String property) {
-				String value = System.getProperty(property);
-				return value == null ? null : Boolean.parseBoolean(value);
-			}
+	private interface StateInit<T> extends Function<String, T> {
+		StateInit<Boolean> BOOLEAN = property -> {
+			String value = System.getProperty(property);
+			return value == null ? null : Boolean.parseBoolean(value);
 		};
 
-		static final StateInit<Integer> INT = new StateInit<Integer>() {
-			@Override
-			Integer getState(String property) {
-				return Integer.getInteger(property);
-			}
-		};
+		StateInit<Integer> INT = Integer::getInteger;
 
-		static final StateInit<String> STRING = new StateInit<String>() {
-			@Override
-			String getState(String property) {
-				return System.getProperty(property);
-
-			}
-		};
-
-		abstract T getState(String property);
+		StateInit<String> STRING = System::getProperty;
 	}
 
 	private final String property;
@@ -342,7 +326,7 @@ public class Configuration<T> {
 
 	Configuration(String property, StateInit<? extends T> init) {
 		this.property = property;
-		this.state = init.getState(property);
+		this.state = init.apply(property);
 	}
 
 	public String getProperty() {
