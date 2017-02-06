@@ -48,7 +48,7 @@ typedef struct HiddenAreaMesh_t
 {
     struct HmdVector2_t * pVertexData;
     uint32_t unTriangleCount;
-    #ifdef LWJGL_x64
+    #ifdef LWJGL64
         char __padding[4];
     #endif
 } HiddenAreaMesh_t;""")

@@ -9,8 +9,6 @@ Defines global properties and useful macros.
 This script is included in /build.xml and /config/update-dependencies.xml.
 -->
 <project name="definitions" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
-    <import file="build-bindings.xml"/>
-
     <!-- ================================================================== -->
     <!-- Global properties for build                                        -->
     <!-- ================================================================== -->
@@ -85,14 +83,42 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="release.native" location="${release}/native" relative="true"/>
     <property name="release.doc" location="${release}/doc" relative="true"/>
 
+    <!-- The target platform. Can be overriden for cross-compiling to another platform. -->
+    <property name="build.platform" value="${env.LWJGL_BUILD_PLATFORM}" if:set="env.LWJGL_BUILD_PLATFORM"/>
+
+    <condition property="platform.android">
+        <isset property="env.ANDROID_NDK_HOME"/>
+    </condition>
+    <condition property="platform.windows">
+        <os family="Windows"/>
+    </condition>
+    <condition property="platform.linux">
+        <os name="Linux"/>
+    </condition>
+    <condition property="platform.macosx">
+        <os name="Mac OS X"/>
+    </condition>
+
+    <property name="build.platform" value="android" if:set="platform.android"/>
+    <property name="build.platform" value="linux" if:set="platform.linux"/>
+    <property name="build.platform" value="macosx" if:set="platform.macosx"/>
+    <property name="build.platform" value="windows" if:set="platform.windows"/>
+
     <!--
-        The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM
-        that runs ANT is used, but this can be overriden for cross-compiling to another architecture.
+        The target native architecture. By default, os.arch of the JVM that runs ANT is used, but this can be overriden for cross-compiling to another
+        architecture.
     -->
     <property name="build.arch" value="${env.LWJGL_BUILD_ARCH}" if:set="env.LWJGL_BUILD_ARCH"/>
-    <condition property="build.arch" value="x64" else="x86" unless:set="build.arch"> <!-- Normalize os.arch -->
+    <condition property="build.arch" value="arm64-v8a" else="armeabi-v7a" if:set="platform.android">
         <contains string="${os.arch}" substring="64"/>
     </condition>
+    <condition property="build.arch" value="x64" else="x86"> <!-- Normalize os.arch -->
+        <contains string="${os.arch}" substring="64"/>
+    </condition>
+    <condition property="build.arch.bits" value="64" else="32">
+        <contains string="${build.arch}" substring="64"/>
+    </condition>
+    <condition property="build.arch.64"><equals arg1="${build.arch.bits}" arg2="64"/></condition>
 
     <!--
         Offline build flag. This is useful when working offline, or when custom binary dependencies
@@ -102,32 +128,6 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <isset property="env.LWJGL_BUILD_OFFLINE"/>
     </condition>
 
-    <condition property="platform.android">
-        <isset property="env.ANDROID"/>
-    </condition>
-    <condition property="platform.windows">
-        <os family="Windows"/>
-    </condition>
-    <condition property="platform.linux">
-        <os name="Linux"/>
-    </condition>
-    <condition property="platform.freebsd">
-        <os name="FreeBSD"/>
-    </condition>
-    <condition property="platform.solaris">
-        <os name="SunOS"/>
-    </condition>
-    <condition property="platform.macosx">
-        <os name="Mac OS X"/>
-    </condition>
-
-    <property name="platform" value="android" if:set="platform.android"/>
-    <property name="platform" value="windows" if:set="platform.windows"/>
-    <property name="platform" value="linux" if:set="platform.linux"/>
-    <property name="platform" value="freebsd" if:set="platform.freebsd"/>
-    <property name="platform" value="solaris" if:set="platform.solaris"/>
-    <property name="platform" value="macosx" if:set="platform.macosx"/>
-
     <!-- JDK version -->
     <condition property="jdk9">
         <matches string="${java.version}" pattern="^(9|\d\d+)[.-]"/>
@@ -136,7 +136,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="jni.headers" location="${java.home}/../include" unless:set="jdk9"/>
 
     <!-- Different location per platform/architecture. This is intentional. -->
-    <property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>
+    <property name="bin.native" location="${bin}/${build.platform}/${build.arch}" relative="true"/>
 
     <presetdef name="lwjgl.javac">
         <javac sourcepath="" debug="yes" encoding="UTF-8">
@@ -295,10 +295,12 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <macrodef name="update-dependency">
         <attribute name="name"/>
         <attribute name="artifact"/>
-        <attribute name="dest" default="${lib}/${platform}/@{artifact}"/>
+        <attribute name="dest" default="${lib}/${build.platform}/@{artifact}"/>
 
         <sequential>
-            <get-quiet name="@{name}" url="https://build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="@{dest}" skipexisting="false"/>
+            <get-quiet name="@{name}" url="https://build.lwjgl.org/${build.type}/${build.platform}/@{artifact}" dest="@{dest}" skipexisting="false"/>
         </sequential>
     </macrodef>
+
+    <import file="build-bindings.xml"/>
 </project>

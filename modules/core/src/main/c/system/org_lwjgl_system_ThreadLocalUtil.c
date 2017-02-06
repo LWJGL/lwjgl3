@@ -6,20 +6,20 @@
     __pragma(warning(disable : 4710))
 #endif
 #include "common_tools.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-#ifndef __ANDROID__
+#ifdef LWJGL_ANDROID
+    #define JNI_ENV_STRUCT struct JNINativeInterface
+#else
+    #define JNI_ENV_STRUCT struct JNINativeInterface_
+
 DISABLE_WARNINGS()
 #include <jvmti.h>
 ENABLE_WARNINGS()
-#endif
 
-#ifndef __ANDROID__
 extern jvmtiEnv* jvmti;
 #endif
-
-static JNIEnv* getJNIEnv(jboolean *async) {
-    return getEnv(async);
-}
 
 static jint JNICALL functionMissingAbort(void) {
     fprintf(stderr, "[LWJGL] A function that is not available in the current context was called. The JVM will abort execution. Inspect the crash log to find the responsible Java frames.\n");
@@ -29,53 +29,57 @@ static jint JNICALL functionMissingAbort(void) {
 
 EXTERN_C_ENTER
 
-// getJNIEnvPROC()J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_getJNIEnvPROC(JNIEnv *env, jclass clazz) {
-    UNUSED_PARAMS(env, clazz)
-
-    return (jlong)(intptr_t)&getJNIEnv;
-}
-
-// getJNIEnv()J
+// getThreadJNIEnv()J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_getThreadJNIEnv(JNIEnv *env, jclass clazz) {
     UNUSED_PARAM(clazz)
 
     return (jlong)(intptr_t)*env;
 }
 
-// setJNIEnv(J)V
+// setThreadJNIEnv(J)V
 JNIEXPORT void JNICALL Java_org_lwjgl_system_ThreadLocalUtil_setThreadJNIEnv(JNIEnv *env, jclass clazz, jlong function_tableAddress) {
     UNUSED_PARAM(clazz)
-#ifndef __ANDROID__
-    jniNativeInterface *function_table = (jniNativeInterface *)(intptr_t)function_tableAddress;
+
+    JNI_ENV_STRUCT *function_table = (JNI_ENV_STRUCT *)(intptr_t)function_tableAddress;
     *env = function_table;
-#else
-    UNUSED_PARAM(env)
-    UNUSED_PARAM(function_tableAddress)
-#endif
 }
 
 // jvmtiGetJNIFunctionTable()J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_jvmtiGetJNIFunctionTable(JNIEnv *env, jclass clazz) {
     UNUSED_PARAMS(env, clazz)
 
-#ifndef __ANDROID__
+#ifdef LWJGL_ANDROID
+    // Android does not have jvmti, so a copy must be created manually
+    int functions;
+    switch ((*env)->GetVersion(env)) {
+        case JNI_VERSION_1_6:
+        case /*JNI_VERSION_1_8*/0x00010008:
+            functions = 229;
+            break;
+        case /*JNI_VERSION_9*/0x00090000:
+        default:
+            functions = 230; // adds GetModule
+            break;
+    }
+    size_t structSize = sizeof(void *) * (4 /* reserved0-3 */ + functions);
+
+    JNI_ENV_STRUCT *function_table = (JNI_ENV_STRUCT *)malloc(structSize);
+    memcpy(function_table, *env, structSize);
+#else
     jniNativeInterface *function_table = NULL;
     (*jvmti)->GetJNIFunctionTable(jvmti, &function_table);
-    return (jlong)(intptr_t)function_table;
-#else
-    return 0L;
 #endif
+    return (jlong)(intptr_t)function_table;
 }
 
 // jvmtiDeallocate(J)V
 JNIEXPORT void JNICALL Java_org_lwjgl_system_ThreadLocalUtil_jvmtiDeallocate(JNIEnv *env, jclass clazz, jlong memAddress) {
     UNUSED_PARAMS(env, clazz)
-#ifndef __ANDROID__
-    unsigned char *mem = (unsigned char *)(intptr_t)memAddress;
-    (*jvmti)->Deallocate(jvmti, mem);
+
+#ifdef LWJGL_ANDROID
+    free((void *)(intptr_t)memAddress);
 #else
-    UNUSED_PARAM(memAddress)
+    (*jvmti)->Deallocate(jvmti, (unsigned char *)(intptr_t)memAddress);
 #endif
 }
 

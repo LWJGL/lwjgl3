@@ -6,7 +6,7 @@
     <import file="../build-definitions.xml"/>
 
     <condition property="LIB_POSTFIX" value="" else="32">
-        <equals arg1="${build.arch}" arg2="x64"/>
+        <isset property="build.arch.64"/>
     </condition>
 
     <macrodef name="compile">
@@ -17,7 +17,7 @@
         <sequential>
             <mkdir dir="@{dest}"/>
             <apply executable="cl" dest="@{dest}" skipemptyfilesets="true" failonerror="true" relative="@{relative}" parallel="true" taskname="Compiler">
-                <arg line="/c @{flags} /EHsc /Ox /GF /Gy /GL /GR- /GS- /MT /MP /nologo /DNDEBUG /DLWJGL_WINDOWS /DLWJGL_${build.arch}"/>
+                <arg line="/c @{flags} /EHsc /Ox /GF /Gy /GL /GR- /GS- /MT /MP /nologo /DNDEBUG /DLWJGL_WINDOWS /DLWJGL${build.arch.bits}"/>
 
                 <arg value="/Fo@{dest}\"/>
 
@@ -53,7 +53,7 @@
 
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib}/@{name}${LIB_POSTFIX}.dll">
-                <srcfiles file="config/${platform}/build.xml"/>
+                <srcfiles file="config/${build.platform}/build.xml"/>
                 <srcfiles dir="@{dest}" includes="**"/>
             </uptodate>
 
@@ -66,7 +66,7 @@
             <condition property="undecorate" value="true">
                 <and>
                     <not><isset property="lib-uptodate"/></not>
-                    <equals arg1="${build.arch}" arg2="x86"/>
+                    <not><isset property="build.arch.64"/></not>
                 </and>
             </condition>
             <concat destfile="${bin.native}/build/@{name}${LIB_POSTFIX}.def" if:set="undecorate">

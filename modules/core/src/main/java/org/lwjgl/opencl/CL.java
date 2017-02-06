@@ -50,6 +50,9 @@ public final class CL {
         SharedLibrary CL;
         switch (Platform.get()) {
             case LINUX:
+                CL = Library.loadNative(CL.class, Configuration.OPENCL_LIBRARY_NAME, "libOpenCL.so.1", "OpenCL");
+                break;
+            case ANDROID:
             case WINDOWS:
                 CL = Library.loadNative(CL.class, Configuration.OPENCL_LIBRARY_NAME, "OpenCL");
                 break;

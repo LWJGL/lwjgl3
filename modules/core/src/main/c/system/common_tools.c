@@ -6,31 +6,35 @@
     __pragma(warning(disable : 4710))
 #endif
 #include "common_tools.h"
-DISABLE_WARNINGS()
-#ifdef __ANDROID__
-#include <jni.h>
-#else
-#include <jvmti.h>
-#endif
-ENABLE_WARNINGS()
 #include <stdlib.h>
 #include <errno.h>
 #include <stdio.h>
 
 JavaVM *jvm;
-#ifndef __ANDROID__
-jvmtiEnv *jvmti;
+
+#ifdef LWJGL_ANDROID
+    #define JNI_VERSION JNI_VERSION_1_6
+    #define ATTACH_ENV_CAST
+#else
+    #define JNI_VERSION JNI_VERSION_1_8
+    #define ATTACH_ENV_CAST (void**)
+
+    DISABLE_WARNINGS()
+    #include <jvmti.h>
+    ENABLE_WARNINGS()
+
+    jvmtiEnv *jvmti;
 #endif
 
 inline JNIEnv *getThreadEnv(void) {
     JNIEnv *env;
-    (*jvm)->GetEnv(jvm, (void **)&env, JNI_VERSION_1_6);
+    (*jvm)->GetEnv(jvm, (void **)&env, JNI_VERSION);
     return env;
 }
 
 inline JNIEnv *attachCurrentThreadAsDaemon(void) {
     JNIEnv *env;
-    (*jvm)->AttachCurrentThreadAsDaemon(jvm, &env, NULL);
+    (*jvm)->AttachCurrentThreadAsDaemon(jvm, ATTACH_ENV_CAST&env, NULL);
     if ( env == NULL ) {
         fprintf(stderr, "[LWJGL] Failed to attach native thread to the JVM.");
         fflush(stderr);
@@ -196,22 +200,22 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
 
     jvm = vm;
 
-#ifndef __ANDROID__
+#ifndef LWJGL_ANDROID
     if ((*jvm)->GetEnv(jvm, (void **)&jvmti, JVMTI_VERSION_1_2) != JNI_OK) {
         fprintf(stderr, "[LWJGL] Failed to retrieve the JVMTI interface pointer.");
         fflush(stderr);
     }
+#endif
 
     envTLSInit();
-#endif
-    return JNI_VERSION_1_6;
+    return JNI_VERSION;
 }
 
 JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved) {
     UNUSED_PARAMS(vm, reserved);
-#ifndef __ANDROID__
     envTLSDestroy();
 
+#ifndef LWJGL_ANDROID
     (*jvmti)->DisposeEnvironment(jvmti);
 #endif
 }

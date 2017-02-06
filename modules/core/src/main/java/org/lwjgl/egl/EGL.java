@@ -51,6 +51,9 @@ public final class EGL {
     public static void create() {
         SharedLibrary EGL;
         switch (Platform.get()) {
+            case ANDROID:
+                EGL = Library.loadNative(EGL.class, Configuration.EGL_LIBRARY_NAME, "libEGL.so");
+                break;
             case LINUX:
                 EGL = Library.loadNative(EGL.class, Configuration.EGL_LIBRARY_NAME, "libEGL.so.1");
                 break;

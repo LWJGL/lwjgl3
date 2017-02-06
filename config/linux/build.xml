@@ -6,11 +6,7 @@
     <import file="../build-definitions.xml"/>
 
     <condition property="LIB_POSTFIX" value="" else="32">
-        <equals arg1="${build.arch}" arg2="x64"/>
-    </condition>
-
-    <condition property="build.arch.x64" value="true" else="false">
-        <equals arg1="${build.arch}" arg2="x64"/>
+        <isset property="build.arch.64"/>
     </condition>
 
     <property name="src.native.rel" value="../../../../${src.native}"/>
@@ -30,9 +26,9 @@
             <apply dir="@{dest}" executable="gcc" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
                 <arg line="-c -std=c11" unless:set="cpp"/>
                 <arg line="-c -std=c++11" if:set="cpp"/>
-                <arg line="-m64" if:true="${build.arch.x64}"/>
-                <arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
-                <arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
+                <arg line="-m${build.arch.bits}"/>
+                <arg line="-mfpmath=sse -msse -msse2" unless:set="build.arch.64"/>
+                <arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DNDEBUG -DLWJGL_LINUX -DLWJGL${build.arch.bits}"/>
 
                 <arg value="-I${jni.headers}"/>
                 <arg value="-I${jni.headers}/linux"/>
@@ -64,28 +60,27 @@
 
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib}/lib@{name}${LIB_POSTFIX}.so">
-                <srcfiles file="config/${platform}/build.xml"/>
-                <srcfiles file="${bin.native}/wrap_memcpy.o" if:true="${build.arch.x64}"/>
+                <srcfiles file="config/${build.platform}/build.xml"/>
+                <srcfiles file="${bin.native}/wrap_memcpy.o" if:set="build.arch.64"/>
                 <srcfiles dir="@{dest}" includes="**"/>
             </uptodate>
 
             <local name="version.script"/>
-            <property name="version.script" location="config/linux/version.script"/>
+            <property name="version.script" location="config/linux/version.script" relative="true"/>
 
             <echo message="Linking @{name}" taskname="gcc" unless:set="lib-uptodate"/>
             <beforeLink/>
             <apply executable="gcc" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
                 <arg value="-shared"/>
-                <arg value="-m64" if:true="${build.arch.x64}"/>
-                <arg value="-m32" unless:true="${build.arch.x64}"/>
+                <arg value="-m${build.arch.bits}"/>
 
                 <arg line="-z noexecstack"/>
                 <arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib@{name}${LIB_POSTFIX}.so"/>
 
                 <arg line="-Wl,--version-script,${version.script}"/>
-                <arg line="-Wl,--wrap,memcpy" if:true="${build.arch.x64}"/>
-                <fileset dir="${bin.native}" includes="wrap_memcpy.o" if:true="${build.arch.x64}"/>
+                <arg line="-Wl,--wrap,memcpy" if:set="build.arch.64"/>
+                <fileset dir="${bin.native}" includes="wrap_memcpy.o" if:set="build.arch.64"/>
                 <fileset dir="@{dest}" includes="*.o"/>
                 <link/>
             </apply>

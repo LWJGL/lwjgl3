@@ -10,7 +10,7 @@
 
     <import file="${config}/build-definitions.xml"/>
     <import file="${config}/build-assets.xml"/>
-    <import file="${config}/${platform}/build.xml"/>
+    <import file="${config}/${build.platform}/build.xml"/>
 
     <!-- Initialize build -->
     <target name="init" description="Initializes the directories required by the build process">
@@ -24,6 +24,7 @@
 
         <echo taskname="override" message="Build type: ${build.type}" if:set="env.LWJGL_BUILD_TYPE"/>
         <echo taskname="override" message="Build output: ${build.output}" if:set="env.LWJGL_BUILD_OUTPUT"/>
+        <echo taskname="override" message="Build platform: ${build.platform}" if:set="env.LWJGL_BUILD_PLATFORM"/>
         <echo taskname="override" message="Build architecture: ${build.arch}" if:set="env.LWJGL_BUILD_ARCH"/>
         <echo taskname="override" message="Build offline: ${build.offline}" if:set="env.LWJGL_BUILD_OFFLINE"/>
 
@@ -579,7 +580,7 @@
             <jvmarg value="-Xss256k"/> <!-- for StackTest::testSOE -->
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
 
-            <xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
+            <xmlfileset dir="${config}" includes="tests.xml,tests_${build.platform}.xml"/>
         </testng>
     </target>
 
@@ -699,7 +700,7 @@
         <property name="revision" value="liblwjgl.so.git" if:set="platform.linux"/>
         <property name="revision" value="liblwjgl.dylib.git" if:set="platform.macosx"/>
         <condition property="revision" value="lwjgl.dll.git" else="lwjgl32.dll.git" if:set="platform.windows">
-            <equals arg1="${build.arch}" arg2="x64"/>
+            <isset property="build.arch.64"/>
         </condition>
 
         <exec executable="git" failonerror="true" output="${lib}/${revision}" taskname="Git revision">
@@ -712,12 +713,12 @@
         <local name="libraries"/>
         <property name="libraries" value="liblwjgl*" unless:set="platform.windows"/>
         <condition property="libraries" value="lwjgl*" else="lwjgl*32.*" if:set="platform.windows">
-            <equals arg1="${build.arch}" arg2="x64"/>
+            <isset property="build.arch.64"/>
         </condition>
 
         <local name="exclude_libraries"/>
         <condition property="exclude_libraries" value="lwjgl*32.*" if:set="platform.windows">
-            <equals arg1="${build.arch}" arg2="x64"/>
+            <isset property="build.arch.64"/>
         </condition>
 
         <apply executable="aws" failonerror="true" relative="true" taskname="S3 upload">
@@ -726,7 +727,7 @@
 
             <srcfile/>
 
-            <arg value="s3://build.lwjgl.org/${build.type}/${platform}/${build.arch}/"/>
+            <arg value="s3://build.lwjgl.org/${build.type}/${build.platform}/${build.arch}/"/>
             <arg line='--acl public-read --storage-class REDUCED_REDUNDANCY --cache-control "public, must-revalidate, proxy-revalidate, max-age=0"'/>
 
             <fileset dir=".">

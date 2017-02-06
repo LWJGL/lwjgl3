@@ -5,19 +5,23 @@
 <project name="native-android" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
     <import file="../build-definitions.xml"/>
 
-  <!-- The following properties should be changed/overwritten by environment variables. -->
-    <property name="ANDROID_NDK_HOME" value="${env.ANDROID_NDK_HOME}" />
-    <property name="ANDROID_PLATFORM" value="24" />
-    <property name="ANDROID_SDK_ARCH" value="arch-arm64" />
-    <property name="ANDROID_NDK_ARCH" value="aarch64" />
-    <property name="ANDROID_COMPILER" value="aarch64-linux-android-gcc" />
+    <condition property="ndk.arch" value="arm64" else="arm">
+        <isset property="build.arch.64"/>
+    </condition>
+
+    <condition property="ndk.toolchain" value="aarch64-linux-android" else="arm-linux-androideabi">
+        <isset property="build.arch.64"/>
+    </condition>
+
+    <condition property="ndk.platform" value="21" else="9"> <!-- Minimum possible until we add bindings to Android APIs -->
+        <isset property="build.arch.64"/>
+    </condition>
 
     <property name="src.native.rel" value="../../../../${src.native}"/>
 
     <macrodef name="compile">
         <attribute name="dest"/>
         <attribute name="lang" default="c"/>
-        <attribute name="lto" default="-flto"/>
         <attribute name="flags"/>
         <attribute name="relative" default="true"/>
         <element name="source" implicit="true"/>
@@ -26,11 +30,12 @@
             <condition property="cpp"><equals arg1="@{lang}" arg2="c++"/></condition>
 
             <mkdir dir="@{dest}"/>
-            <apply dir="@{dest}" executable="${ANDROID_COMPILER}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-              <arg line="--sysroot=${ANDROID_NDK_HOME}/platforms/android-${ANDROID_PLATFORM}/${ANDROID_SDK_ARCH}"/>
+            <apply dir="@{dest}" executable="${ndk.bin}/${ndk.toolchain}-gcc" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
                 <arg line="-c -std=c11" unless:set="cpp"/>
                 <arg line="-c -std=c++11" if:set="cpp"/>
-                <arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
+                <arg line="-O3 -flto -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DNDEBUG -DLWJGL_LINUX -DLWJGL_ANDROID -DLWJGL${build.arch.bits}"/>
+
+                <arg line="--sysroot=${env.ANDROID_NDK_HOME}/platforms/android-${ndk.platform}/arch-${ndk.arch}"/>
 
                 <arg value="-I${src.native.rel}/system"/>
                 <arg value="-I${src.native.rel}/system/linux"/>
@@ -59,19 +64,19 @@
 
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib}/lib@{name}.so">
-                <srcfiles file="config/${platform}/build.xml"/>
+                <srcfiles file="config/${build.platform}/build.xml"/>
                 <srcfiles dir="@{dest}" includes="**"/>
             </uptodate>
 
             <local name="version.script"/>
-            <property name="version.script" location="config/android/version.script"/>
+            <property name="version.script" location="config/android/version.script" relative="true"/>
 
-            <echo message="Linking @{name}" taskname="${ANDROID_COMPILER}" unless:set="lib-uptodate"/>
+            <echo message="Linking @{name}" taskname="gcc" unless:set="lib-uptodate"/>
             <beforeLink/>
-            <apply executable="${ANDROID_COMPILER}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+            <apply executable="${ndk.bin}/${ndk.toolchain}-gcc" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
                 <arg value="-shared"/>
-                <arg line="--sysroot=${ANDROID_NDK_HOME}/platforms/android-${ANDROID_PLATFORM}/${ANDROID_SDK_ARCH}"/>
+                <arg line="--sysroot=${env.ANDROID_NDK_HOME}/platforms/android-${ndk.platform}/arch-${ndk.arch}"/>
                 <arg line="-z noexecstack"/>
                 <arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib@{name}.so"/>
 
@@ -80,7 +85,7 @@
                 <link/>
             </apply>
 
-            <apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
+            <apply executable="${ndk.bin}/${ndk.toolchain}-strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
                 <filelist dir="${lib}" files="lib@{name}.so"/>
             </apply>
             <delete file="${lib}/touch_android_${build.arch}.txt" quiet="true" unless:set="lib-uptodate"/>
@@ -88,9 +93,35 @@
     </macrodef>
 
     <target name="compile-native-platform">
-        <compile dest="${bin.native}" flags="" lto="">
-            <fileset dir="." includes="${src.native}/system/linux/wrap_memcpy.c"/>
-        </compile>
+        <script language="nashorn">
+        var Paths = Java.type("java.nio.file.Paths");
+        var Files = Java.type("java.nio.file.Files");
+
+        var toolchain = LWJGL.getProperty("ndk.toolchain");
+        var ANDROID_NDK_HOME = LWJGL.getProperty("env.ANDROID_NDK_HOME");
+
+        var toolchains = Paths.get(ANDROID_NDK_HOME + "/toolchains");
+        var root = Files.list(toolchains)
+            .filter(function(it) { return it.getFileName().toString().startsWith(toolchain); })
+            .findFirst()
+            .get();
+
+        var version = root.getFileName().toString();
+        LWJGL.setProperty(
+            "ndk.gcc.version",
+            version.substring(version.lastIndexOf('-') + 1)
+        );
+
+        LWJGL.setProperty("ndk.bin", Paths.get(
+            Files
+                .list(Paths.get(root, "prebuilt"))
+                .findFirst()
+                .get(),
+            "bin"
+        ).toString());
+        </script>
+        <property name="ndk.gcc.version" value=""/>
+        <property name="ndk.bin" value=""/>
 
         <parallel threadsPerProcessor="2" failonany="true">
 
@@ -112,9 +143,9 @@
             <beforeLink>
                 <mkdir dir="${lib}/android/${build.arch}"/>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
-                    <update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
-                    <update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
-                    <update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
+                    <update-dependency name="dyncall" artifact="${build.arch}/libdyncall_s.a"/>
+                    <update-dependency name="dyncallback" artifact="${build.arch}/libdyncallback_s.a"/>
+                    <update-dependency name="dynload" artifact="${build.arch}/libdynload_s.a"/>
                 </parallel>
             </beforeLink>
             <link>
@@ -202,6 +233,8 @@
         <build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" if:true="${binding.tinyexr}">
             <beforeCompile>
                 <compile dest="@{dest}" lang="c++" flags="">
+                    <arg line="-isystem${env.ANDROID_NDK_HOME}/sources/cxx-stl/gnu-libstdc++/${ndk.gcc.version}/include" if:set="cpp"/>
+                    <arg line="-isystem${env.ANDROID_NDK_HOME}/sources/cxx-stl/gnu-libstdc++/${ndk.gcc.version}/libs/${build.arch}/include" if:set="cpp"/>
                     <arg value="-I${src.native.rel}/util/tinyexr"/>
                     <fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
                 </compile>
