@@ -388,6 +388,23 @@
     </java>
     </target>
 
+    <target name="aar" description="Builds the Android archive" depends="retrolambda, compile-native">
+        <jar destfile="${bin.android}/classes.jar" level="9" index="true" indexmetainf="true">
+            <fileset dir="${bin.android.classes}">
+                <include name="**"/>
+            </fileset>
+        </jar>
+
+        <zip destfile="${bin.android}/lwjgl.aar" level="9">
+            <!-- Include the AndroidManifest.xml -->
+            <zipfileset dir="config/android" includes="AndroidManifest.xml"/>
+            <!-- Include the classes.jar -->
+            <zipfileset dir="${bin.android}" includes="classes.jar"/>
+            <!-- Include all natives -->
+            <zipfileset dir="${lib}" includes="*.so" prefix="jni/arm64-v8a"/>
+        </zip>
+    </target>
+
     <target name="compile-native" description="Compiles the native source code" depends="init, compile">
         <antcall target="compile-native-platform"/>
     </target>
