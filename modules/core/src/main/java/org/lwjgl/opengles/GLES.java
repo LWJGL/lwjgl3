@@ -201,7 +201,7 @@ public final class GLES {
 					"Core OpenGL ES functions could not be found. Make sure that the OpenGL ES library has been loaded correctly."
 				);
 
-			int errorCode = invokeI(GetError);
+			int errorCode = callI(GetError);
 			if ( errorCode != GL_NO_ERROR )
 				apiLog(String.format("An OpenGL ES context was in an error state before the creation of its capabilities instance. Error: [0x%X]", errorCode));
 
@@ -212,15 +212,15 @@ public final class GLES {
 				IntBuffer pi = stack.ints(0);
 
 				// Try the 3.0+ version query first
-				invokePV(GetIntegerv, GL_MAJOR_VERSION, memAddress(pi));
-				if ( invokeI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = pi.get(0)) ) {
+				callPV(GetIntegerv, GL_MAJOR_VERSION, memAddress(pi));
+				if ( callI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = pi.get(0)) ) {
 					// We're on an 3.0+ context.
-					invokePV(GetIntegerv, GL_MINOR_VERSION, memAddress(pi));
+					callPV(GetIntegerv, GL_MINOR_VERSION, memAddress(pi));
 					minorVersion = pi.get(0);
 				} else {
 					// Fallback to the string query.
-					long versionString = invokeP(GetString, GL_VERSION);
-					if ( versionString == NULL || invokeI(GetError) != GL_NO_ERROR )
+					long versionString = callP(GetString, GL_VERSION);
+					if ( versionString == NULL || callI(GetError) != GL_NO_ERROR )
 						throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
 
 					APIVersion version = apiParseVersion(memUTF8(versionString), "OpenGL ES");
@@ -257,7 +257,7 @@ public final class GLES {
 
 			if ( majorVersion < 3 ) {
 				// Parse EXTENSIONS string
-				String extensionsString = memASCII(check(invokeP(GetString, GL_EXTENSIONS)));
+				String extensionsString = memASCII(check(callP(GetString, GL_EXTENSIONS)));
 				if ( extensionsString != null ) {
 					StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 					while ( tokenizer.hasMoreTokens() )
@@ -270,7 +270,7 @@ public final class GLES {
 				try ( MemoryStack stack = stackPush() ) {
 					IntBuffer pi = stack.ints(0);
 
-					invokePV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
+					callPV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
 					extensionCount = pi.get(0);
 				}
 

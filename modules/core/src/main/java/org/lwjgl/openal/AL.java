@@ -145,7 +145,7 @@ public final class AL {
 				throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that the OpenAL library has been loaded correctly.");
 
 			long versionString = invokeP(GetString, AL_VERSION);
-			if ( versionString == NULL || callI(GetError) != AL_NO_ERROR )
+			if ( versionString == NULL || invokeI(GetError) != AL_NO_ERROR )
 				throw new IllegalStateException("There is no OpenAL context current in the current thread or process.");
 
 			APIVersion apiVersion = apiParseVersion(memASCII(versionString));
