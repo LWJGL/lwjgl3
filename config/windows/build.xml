@@ -38,11 +38,13 @@
 		<attribute name="name"/>
 		<attribute name="dest"/>
 		<attribute name="flags" default="/Wall /WX"/>
+		<element name="custom" optional="true"/>
 		<element name="compileargs" optional="true"/>
 		<element name="source"/>
 		<element name="link" optional="true"/>
 		<element name="linkargs" optional="true"/>
 		<sequential>
+			<custom/>
 			<compile dest="@{dest}" flags="@{flags}">
 				<compileargs/>
 				<source/>
@@ -65,8 +67,8 @@
 					</or>
 				</not>
 			</condition>
-			<antcall target="-update-dependencies-${build.arch}" if:set="update-dependencies"/>
 			<property name="dependencies-uptodate" value="true" if:set="update-dependencies"/>
+			<antcall target="-update-dependencies-${build.arch}" if:set="update-dependencies"/>
 
 			<!--
 				x86: Generate DEF file to drop __stdcall decorations from JavaCritical
@@ -119,6 +121,8 @@ EXPORTS
 	<target name="compile-native-platform">
 		<mkdir dir="${bin.native}/build"/>
 
+		<parallel threadsPerProcessor="1" failonany="true">
+
 		<!-- CORE -->
 		<build name="lwjgl" dest="${bin.native}/core">
 			<compileargs>
@@ -144,11 +148,13 @@ EXPORTS
 		</build>
 
 		<!-- LMDB -->
-		<compile dest="${bin.native}/lmdb" flags="/W0" if:true="${binding.lmdb}">
-			<arg value="/I${src.native}\util\lmdb"/>
-			<fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
-		</compile>
 		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
+			<custom>
+				<compile dest="@{dest}" flags="/W0">
+					<arg value="/I${src.native}\util\lmdb"/>
+					<fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
+				</compile>
+			</custom>
 			<compileargs>
 				<arg value="/I${src.native}\util\lmdb"/>
 			</compileargs>
@@ -174,13 +180,15 @@ EXPORTS
 		</build>
 
 		<!-- NativeFileDialog -->
-		<compile dest="${bin.native}/nfd" flags="" if:true="${binding.nfd}">
-			<arg value="/I${src.native}\util\nfd"/>
-			<arg value="/I${src.native}\util\nfd\include"/>
-			<fileset dir="." includes="${src.native}/util/nfd/nfd_common.c"/>
-			<fileset dir="." includes="${src.native}/util/nfd/nfd_win.cpp"/>
-		</compile>
 		<build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
+			<custom>
+				<compile dest="@{dest}" flags="">
+					<arg value="/I${src.native}\util\nfd"/>
+					<arg value="/I${src.native}\util\nfd\include"/>
+					<fileset dir="." includes="${src.native}/util/nfd/nfd_common.c"/>
+					<fileset dir="." includes="${src.native}/util/nfd/nfd_win.cpp"/>
+				</compile>
+			</custom>
 			<compileargs>
 				<arg value="/I${src.native}\util\nfd"/>
 				<arg value="/I${src.native}\util\nfd\include"/>
@@ -206,11 +214,13 @@ EXPORTS
 		</build>
 
 		<!-- LibOVR -->
-		<compile dest="${bin.native}/ovr" flags="" relative="false" if:true="${binding.ovr}">
-			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
-			<fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*.cpp"/>
-		</compile>
 		<build name="lwjgl_ovr" dest="${bin.native}/ovr" if:true="${binding.ovr}">
+			<custom>
+				<compile dest="@{dest}" flags="" relative="false">
+					<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
+					<fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*.cpp"/>
+				</compile>
+			</custom>
 			<compileargs>
 				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
 				<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Src"/>
@@ -280,11 +290,13 @@ EXPORTS
 		</build>
 
 		<!-- tinyexr -->
-		<compile dest="${bin.native}/tinyexr" flags="" if:true="${binding.tinyexr}">
-			<arg value="/I${src.native}\util\tinyexr"/>
-			<fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
-		</compile>
 		<build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" if:true="${binding.tinyexr}">
+			<custom>
+				<compile dest="@{dest}" flags="">
+					<arg value="/I${src.native}\util\tinyexr"/>
+					<fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
+				</compile>
+			</custom>
 			<compileargs>
 				<arg value="/I${src.native}\util\tinyexr"/>
 			</compileargs>
@@ -294,11 +306,13 @@ EXPORTS
 		</build>
 
 		<!-- tiny file dialogs -->
-		<compile dest="${bin.native}/tinyfd" flags="" if:true="${binding.tinyfd}">
-			<arg value="/I${src.native}\util\tinyfd"/>
-			<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
-		</compile>
 		<build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
+			<custom>
+				<compile dest="@{dest}" flags="">
+					<arg value="/I${src.native}\util\tinyfd"/>
+					<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
+				</compile>
+			</custom>
 			<compileargs>
 				<arg value="/I${src.native}\util\tinyfd"/>
 			</compileargs>
@@ -326,11 +340,13 @@ EXPORTS
 		</build>
 
 		<!-- yoga -->
-		<compile dest="${bin.native}/yoga" flags="" if:true="${binding.yoga}">
-			<arg value="/I${src.native}\util\yoga"/>
-			<fileset dir="." includes="${src.native}/util/yoga/*.c"/>
-		</compile>
 		<build name="lwjgl_yoga" dest="${bin.native}/yoga" if:true="${binding.yoga}">
+			<custom>
+				<compile dest="@{dest}" flags="">
+					<arg value="/I${src.native}\util\yoga"/>
+					<fileset dir="." includes="${src.native}/util/yoga/*.c"/>
+				</compile>
+			</custom>
 			<compileargs>
 				<arg value="/I${src.native}\util\yoga"/>
 			</compileargs>
@@ -338,10 +354,14 @@ EXPORTS
 				<fileset dir="." includes="${src.generated.native}/util/yoga/*.c"/>
 			</source>
 		</build>
+
+		</parallel>
 	</target>
 
 	<target name="-update-dependencies-x86">
 		<mkdir dir="${lib}/windows/x86"/>
+
+		<parallel threadsPerProcessor="4" failonany="true">
 
 		<update-dependency name="dyncall (x86)" artifact="x86/dyncall_s.lib"/>
 		<update-dependency name="dyncallback (x86)" artifact="x86/dyncallback_s.lib"/>
@@ -353,10 +373,14 @@ EXPORTS
 		<update-dependency name="GLFW (x86)" artifact="x86/glfw32.dll" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" dest="${lib}" if:true="${binding.openal}"/>
 		<update-dependency name="OpenVR (x86)" artifact="x86/openvr_api32.dll" dest="${lib}" if:true="${binding.openvr}"/>
+
+		</parallel>
 	</target>
 
 	<target name="-update-dependencies-x64">
 		<mkdir dir="${lib}/windows/x64"/>
+
+		<parallel threadsPerProcessor="4" failonany="true">
 
 		<update-dependency name="dyncall (x64)" artifact="x64/dyncall_s.lib"/>
 		<update-dependency name="dyncallback (x64)" artifact="x64/dyncallback_s.lib"/>
@@ -368,5 +392,7 @@ EXPORTS
 		<update-dependency name="GLFW (x64)" artifact="x64/glfw.dll" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL.dll" dest="${lib}" if:true="${binding.openal}"/>
 		<update-dependency name="OpenVR (x64)" artifact="x64/openvr_api.dll" dest="${lib}" if:true="${binding.openvr}"/>
+
+		</parallel>
 	</target>
 </project>

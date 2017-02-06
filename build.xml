@@ -131,7 +131,7 @@
 
 	<target name="all" description="Builds LWJGL and runs the tests" depends="compile-templates, tests"/>
 
-	<target name="-compile-generator" description="Compiles the Generator module" depends="init">
+	<target name="-compile-generator" depends="init">
 		<local name="generator-uptodate"/>
 		<dir-uptodate src="${src.generator}/kotlin" dst="${bin.generator}" property="generator-uptodate"/>
 
@@ -144,6 +144,7 @@
 
 			<src path="${src.generator}/kotlin"/>
 		</kotlinc>
+		<touch file="${bin.generator}/touch.txt"/>
 
 		<lwjgl.javac
 			destdir="${bin.generator}"
@@ -250,6 +251,12 @@
 			<src path="${src.templates.kotlin}/org/lwjgl/util/xxhash" if:true="${binding.xxhash}"/>
 			<src path="${src.templates.kotlin}/org/lwjgl/util/yoga" if:true="${binding.yoga}"/>
 		</kotlinc>
+		<touch file="${bin.templates}/touch.txt"/>
+	</target>
+
+	<target name="touch-kotlinc" description="Used for touching from an IDE">
+		<touch file="${bin.generator}/touch.txt"/>
+		<touch file="${bin.templates}/touch.txt"/>
 	</target>
 
 	<target name="formatter" description="Runs the template formatter tool" depends="-compile-generator">
@@ -273,9 +280,28 @@
 		<local name="generated-uptodate"/>
 		<uptodate property="generated-uptodate" targetfile="${src.generated}/touch.txt">
 			<srcfiles dir="${config}" includes="build-bindings.xml"/>
-			<srcfiles dir="${bin.generator}" includes="**"/>
-			<srcfiles dir="${bin.templates}" includes="**"/>
+			<srcfiles dir="${bin.generator}" includes="touch.xml"/>
+			<srcfiles dir="${bin.templates}" includes="touch.xml"/>
 		</uptodate>
+		<property name="generated-uptodate" value="true"/>
+
+		<local name="bindings"/>
+		<script language="javascript" unless:set="generated-uptodate"><![CDATA[
+		var props = LWJGL.getProperties();
+
+		var jvmargs = ["-Dbinding.DISABLE_CHECKS=" + props.get("binding.DISABLE_CHECKS")];
+
+		var iter = props.entrySet().iterator();
+		var c = 0;
+		while ( iter.hasNext() ) {
+			var prop = iter.next();
+			var name = prop.getKey();
+			if ( name.startsWith("binding.") && name.indexOf('_') === -1 && prop.getValue() == "true" )
+				jvmargs.push("-D" + name + "=true");
+		}
+
+		LWJGL.setProperty("bindings", jvmargs.join(" "));
+		]]></script>
 
 		<java
 			classname="org.lwjgl.generator.GeneratorKt"
@@ -709,12 +735,19 @@
 		</apply>
 	</target>
 
+	<macrodef name="get-release">
+		<attribute name="url"/>
+
+		<sequential>
+			<get src="https://build.lwjgl.org/${build.type}/@{url}" dest="${release}/${module}/native" verbose="false" usetimestamp="true"/>
+		</sequential>
+	</macrodef>
+
 	<macrodef name="release-natives">
-		<attribute name="module"/>
 		<attribute name="native-library"/>
 		<element name="content" optional="true" implicit="true"/>
 		<sequential>
-			<mkdir dir="${release}/@{module}/native"/>
+			<mkdir dir="${release}/${module}/native"/>
 
 			<local name="auto-natives"/>
 			<condition property="auto-natives">
@@ -730,36 +763,40 @@
 				</not>
 			</condition>
 
-			<get dest="${release}/@{module}/native" verbose="false" usetimestamp="true">
-				<url url="https://build.lwjgl.org/${build.type}/linux/x64/lib@{native-library}.so" if:set="auto-natives"/>
-				<url url="https://build.lwjgl.org/${build.type}/macosx/x64/lib@{native-library}.dylib" if:set="auto-natives"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x64/@{native-library}.dll" if:set="auto-natives"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x86/@{native-library}32.dll" if:set="auto-natives"/>
+			<parallel threadsPerProcessor="4" failonany="true">
+				<get-release url="linux/x64/lib@{native-library}.so" if:set="auto-natives"/>
+				<get-release url="macosx/x64/lib@{native-library}.dylib" if:set="auto-natives"/>
+				<get-release url="windows/x64/@{native-library}.dll" if:set="auto-natives"/>
+				<get-release url="windows/x86/@{native-library}32.dll" if:set="auto-natives"/>
 
-				<url url="https://build.lwjgl.org/${build.type}/linux/x64/lib@{native-library}.so.git" if:set="git-revision"/>
-				<url url="https://build.lwjgl.org/${build.type}/macosx/x64/lib@{native-library}.dylib.git" if:set="git-revision"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x64/@{native-library}.dll.git" if:set="git-revision"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x86/@{native-library}32.dll.git" if:set="git-revision"/>
+				<get-release url="linux/x64/lib@{native-library}.so.git" if:set="git-revision"/>
+				<get-release url="macosx/x64/lib@{native-library}.dylib.git" if:set="git-revision"/>
+				<get-release url="windows/x64/@{native-library}.dll.git" if:set="git-revision"/>
+				<get-release url="windows/x86/@{native-library}32.dll.git" if:set="git-revision"/>
 
 				<content/>
-			</get>
+			</parallel>
+
 			<checksum algorithm="SHA-1" fileext=".sha1">
-				<fileset dir="${release}/@{module}/native">
+				<fileset dir="${release}/${module}/native">
 					<include name="*.dll"/>
 					<include name="*.dylib"/>
 					<include name="*.so"/>
 				</fileset>
 			</checksum>
-			<zip destfile="${release}/@{module}/@{module}-natives-windows.jar" basedir="${release}/@{module}/native" includes="*.dll*" level="9"/>
-			<zip destfile="${release}/@{module}/@{module}-natives-macos.jar" basedir="${release}/@{module}/native" includes="*.dylib*" level="9"/>
-			<zip destfile="${release}/@{module}/@{module}-natives-linux.jar" basedir="${release}/@{module}/native" includes="*.so*" level="9"/>
+
+			<parallel threadsPerProcessor="2" failonany="true">
+				<zip destfile="${release}/${module}/${module}-natives-windows.jar" basedir="${release}/${module}/native" includes="*.dll*" level="9"/>
+				<zip destfile="${release}/${module}/${module}-natives-macos.jar" basedir="${release}/${module}/native" includes="*.dylib*" level="9"/>
+				<zip destfile="${release}/${module}/${module}-natives-linux.jar" basedir="${release}/${module}/native" includes="*.so*" level="9"/>
+			</parallel>
 		</sequential>
 	</macrodef>
 
 	<macrodef name="release-module">
 		<attribute name="package"/>
 		<attribute name="name"/>
-		<attribute name="module" default="lwjgl-@{name}"/>
+		<attribute name="module-name" default="lwjgl-@{name}"/>
 		<attribute name="title"/>
 		<attribute name="java-only" default="false"/>
 		<attribute name="native-library" default=""/>
@@ -769,12 +806,14 @@
 		<element name="sources" optional="true"/>
 		<element name="custom" optional="true"/>
 		<sequential>
+			<local name="module"/>
+			<property name="module" value="@{module-name}"/>
+
 			<!-- Bundle natives -->
-			<release-natives module="@{module}" native-library="@{native-library}" unless:true="@{java-only}">
+			<release-natives native-library="@{native-library}" unless:true="@{java-only}">
 				<natives/>
 			</release-natives>
 
-			<!-- Bundle classes -->
 			<local name="module.package"/>
 			<script language="javascript"><![CDATA[
 			var package = "@{package}";
@@ -784,79 +823,87 @@
 			<condition property="module.package.skip" value="true">
 				<equals arg1="@{name}" arg2="core"/>
 			</condition>
-			<jar destfile="${release}/@{module}/@{module}.jar" level="9" index="true" indexmetainf="true">
-				<manifest>
-					<section name="org/lwjgl/">
-						<attribute name="Specification-Title" value="Lightweight Java Game Library - @{title}"/>
-						<attribute name="Specification-Version" value="${build.version}"/>
-						<attribute name="Specification-Vendor" value="lwjgl.org"/>
-						<attribute name="Implementation-Title" value="@{module}"/>
-						<attribute name="Implementation-Version" value="${revision}"/>
-						<attribute name="Implementation-Vendor" value="lwjgl.org"/>
-					</section>
-				</manifest>
 
-				<fileset dir="${release}/@{module}/native" unless:true="@{java-only}">
-					<include name="*.sha1"/>
-				</fileset>
-				<fileset dir="${bin.core}" unless:set="module.package.skip">
-					<include name="${module.package}/**"/>
-				</fileset>
-				<classes/>
-			</jar>
-			<delete dir="${release}/@{module}/native" unless:true="@{java-only}"/>
+			<parallel threadsPerProcessor="1" failonany="true">
+
+			<!-- Bundle classes -->
+			<sequential>
+				<jar destfile="${release}/${module}/${module}.jar" level="9" index="true" indexmetainf="true">
+					<manifest>
+						<section name="org/lwjgl/">
+							<attribute name="Specification-Title" value="Lightweight Java Game Library - @{title}"/>
+							<attribute name="Specification-Version" value="${build.version}"/>
+							<attribute name="Specification-Vendor" value="lwjgl.org"/>
+							<attribute name="Implementation-Title" value="${module}"/>
+							<attribute name="Implementation-Version" value="${revision}"/>
+							<attribute name="Implementation-Vendor" value="lwjgl.org"/>
+						</section>
+					</manifest>
+
+					<fileset dir="${release}/${module}/native" unless:true="@{java-only}">
+						<include name="*.sha1"/>
+					</fileset>
+					<fileset dir="${bin.core}" unless:set="module.package.skip">
+						<include name="${module.package}/**"/>
+					</fileset>
+					<classes/>
+				</jar>
+				<delete dir="${release}/${module}/native" unless:true="@{java-only}"/>
+			</sequential>
 
 			<!-- Bundle javadoc -->
-			<mkdir dir="${release}/@{module}/javadoc"/>
-			<javadoc
-				destdir="${release}/@{module}/javadoc"
-				source="1.8"
-				windowtitle="LWJGL ${build.version} - @{title}"
-				encoding="UTF-8"
-				docencoding="UTF-8"
-				charset="UTF-8"
-				useexternalfile="true"
-				nohelp="true"
-				notree="true"
-				public="true"
-				doclet="org.lwjgl.system.ExcludeDoclet"
-				docletpath="${bin.generator}"
-				failonerror="true"
-			>
-				<doctitle><![CDATA[<h1>LWJGL - @{title}</h1>]]></doctitle>
-				<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="https://www.lwjgl.org/license">License terms</a>.</i>]]></bottom>
+			<sequential>
+				<mkdir dir="${release}/${module}/javadoc"/>
+				<javadoc
+					destdir="${release}/${module}/javadoc"
+					source="1.8"
+					windowtitle="LWJGL ${build.version} - @{title}"
+					encoding="UTF-8"
+					docencoding="UTF-8"
+					charset="UTF-8"
+					useexternalfile="true"
+					nohelp="true"
+					notree="true"
+					public="true"
+					doclet="org.lwjgl.system.ExcludeDoclet"
+					docletpath="${bin.generator}"
+					failonerror="true"
+				>
+					<doctitle><![CDATA[<h1>LWJGL - @{title}</h1>]]></doctitle>
+					<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="https://www.lwjgl.org/license">License terms</a>.</i>]]></bottom>
 
-				<classpath>
-					<pathelement path="${src.core}"/>
-					<pathelement path="${src.generated.java}"/>
-				</classpath>
+					<classpath>
+						<pathelement path="${src.core}"/>
+						<pathelement path="${src.generated.java}"/>
+					</classpath>
 
-				<fileset dir="${src.generated.java}" unless:set="module.package.skip">
-					<include name="${module.package}/**"/>
-				</fileset>
-				<sources/>
+					<fileset dir="${src.generated.java}" unless:set="module.package.skip">
+						<include name="${module.package}/**"/>
+					</fileset>
+					<sources/>
 
-				<arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
+					<arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 
-				<arg value="-Xdoclint:none"/>
-				<arg line="-Xmaxwarns 1"/>
-				<arg value="-html5" if:set="jdk9"/>
-				<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
-				<arg line="-J-Dfile.encoding=UTF8"/>
-				<arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
-			</javadoc>
-			<get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/@{module}/javadoc"/>
+					<arg value="-Xdoclint:none"/>
+					<arg line="-Xmaxwarns 1"/>
+					<arg value="-html5" if:set="jdk9"/>
+					<arg value="-stylesheetfile ${config}/javadoc.css" if:set="jdk9"/>
+					<arg line="-J-Dfile.encoding=UTF8"/>
+					<arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
+				</javadoc>
+				<get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/${module}/javadoc"/>
 
-			<java classname="org.lwjgl.system.JavadocPostProcess" fork="true" failonerror="true">
-				<classpath path="${bin.generator}"/>
+				<java classname="org.lwjgl.system.JavadocPostProcess" fork="true" failonerror="true">
+					<classpath path="${bin.generator}"/>
 
-				<arg value="${release}/@{module}/javadoc/org/lwjgl"/>
-			</java>
-			<zip destfile="${release}/@{module}/@{module}-javadoc.jar" basedir="${release}/@{module}/javadoc" includes="**" level="9"/>
-			<delete dir="${release}/@{module}/javadoc"/>
+					<arg value="${release}/${module}/javadoc/org/lwjgl"/>
+				</java>
+				<zip destfile="${release}/${module}/${module}-javadoc.jar" basedir="${release}/${module}/javadoc" includes="**" level="9"/>
+				<delete dir="${release}/${module}/javadoc"/>
+			</sequential>
 
 			<!-- Bundle source -->
-			<jar destfile="${release}/@{module}/@{module}-sources.jar" level="9">
+			<jar destfile="${release}/${module}/${module}-sources.jar" level="9">
 				<fileset dir="${src.generated.java}" unless:set="module.package.skip">
 					<include name="${module.package}/**"/>
 				</fileset>
@@ -864,17 +911,21 @@
 			</jar>
 
 			<!-- Copy license -->
-			<local name="auto-license"/>
-			<condition property="auto-license" value="false" else="true">
-				<length string="@{license}" length="0"/>
-			</condition>
-			<copy todir="${release}/@{module}" if:true="${auto-license}">
-				<fileset dir="${doc}/3rdparty">
-					<include name="@{license}*"/>
-				</fileset>
-			</copy>
+			<sequential>
+				<local name="auto-license"/>
+				<condition property="auto-license" value="false" else="true">
+					<length string="@{license}" length="0"/>
+				</condition>
+				<copy todir="${release}/${module}" if:true="${auto-license}">
+					<fileset dir="${doc}/3rdparty">
+						<include name="@{license}*"/>
+					</fileset>
+				</copy>
 
-			<custom/>
+				<custom/>
+			</sequential>
+
+			</parallel>
 		</sequential>
 	</macrodef>
 
@@ -895,7 +946,7 @@
 		<echo file="${release}/build.txt" unless:set="build.revision">LWJGL ${build.version}</echo>
 
 		<!-- CORE -->
-		<release-module package="org.lwjgl" name="core" module="lwjgl" native-library="lwjgl" title="Core">
+		<release-module package="org.lwjgl" name="core" module-name="lwjgl" native-library="lwjgl" title="Core">
 			<classes>
 				<fileset dir="${bin.core}">
 					<include name="org/lwjgl/*.class"/>
@@ -970,15 +1021,15 @@
 		<!-- OpenAL -->
 		<release-module package="org.lwjgl.openal" name="openal" title="OpenAL" license="openal" if:true="${binding.openal}">
 			<natives>
-				<url url="https://build.lwjgl.org/${build.type}/linux/x64/libopenal.so"/>
-				<url url="https://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x64/OpenAL.dll"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll"/>
+				<get-release url="linux/x64/libopenal.so"/>
+				<get-release url="macosx/x64/libopenal.dylib"/>
+				<get-release url="windows/x64/OpenAL.dll"/>
+				<get-release url="windows/x86/OpenAL32.dll"/>
 
-				<url url="https://build.lwjgl.org/${build.type}/linux/x64/libopenal.so.git"/>
-				<url url="https://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib.git"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x64/OpenAL.dll.git"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll.git"/>
+				<get-release url="linux/x64/libopenal.so.git"/>
+				<get-release url="macosx/x64/libopenal.dylib.git"/>
+				<get-release url="windows/x64/OpenAL.dll.git"/>
+				<get-release url="windows/x86/OpenAL32.dll.git"/>
 			</natives>
 			<sources>
 				<fileset dir="${src.core}"><include name="org/lwjgl/openal/**"/></fileset>
@@ -1009,24 +1060,24 @@
 		<!-- OpenVR -->
 		<release-module package="org.lwjgl.openvr" name="openvr" title="OpenVR" license="openvr" if:true="${binding.openvr}">
 			<natives>
-				<url url="https://build.lwjgl.org/${build.type}/linux/x64/liblwjgl_openvr.so"/>
-				<url url="https://build.lwjgl.org/${build.type}/linux/x64/libopenvr_api.so"/>
+				<get-release url="linux/x64/liblwjgl_openvr.so"/>
+				<get-release url="linux/x64/libopenvr_api.so"/>
 
-				<url url="https://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl_openvr.dylib"/>
-				<url url="https://build.lwjgl.org/${build.type}/macosx/x64/libopenvr_api.dylib"/>
+				<get-release url="macosx/x64/liblwjgl_openvr.dylib"/>
+				<get-release url="macosx/x64/libopenvr_api.dylib"/>
 
-				<url url="https://build.lwjgl.org/${build.type}/windows/x64/lwjgl_openvr.dll"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x86/lwjgl_openvr32.dll"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x64/openvr_api.dll"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x86/openvr_api32.dll"/>
+				<get-release url="windows/x64/lwjgl_openvr.dll"/>
+				<get-release url="windows/x86/lwjgl_openvr32.dll"/>
+				<get-release url="windows/x64/openvr_api.dll"/>
+				<get-release url="windows/x86/openvr_api32.dll"/>
 			</natives>
 		</release-module>
 
 		<!-- LibOVR -->
 		<release-module package="org.lwjgl.ovr" name="ovr" title="LibOVR" license="oculus" if:true="${binding.ovr}">
 			<natives>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x64/lwjgl_ovr.dll"/>
-				<url url="https://build.lwjgl.org/${build.type}/windows/x86/lwjgl_ovr32.dll"/>
+				<get-release url="windows/x64/lwjgl_ovr.dll"/>
+				<get-release url="windows/x86/lwjgl_ovr32.dll"/>
 			</natives>
 		</release-module>
 

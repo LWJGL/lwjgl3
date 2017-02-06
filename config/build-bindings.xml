@@ -76,24 +76,6 @@ This script is included in /config/build-definitions.xml.
 			</and>
 		</condition>
 		<fail if="dependency_problem" message="The stb and OpenGL or OpenGL ES bindings are required."/>
-
-		<local name="bindings.list"/>
-		<script language="javascript">
-			var props = LWJGL.getProperties();
-
-			var jvmargs = ["-Dbinding.DISABLE_CHECKS=" + props.get("binding.DISABLE_CHECKS")];
-
-			var iter = props.entrySet().iterator();
-			while ( iter.hasNext() ) {
-				var prop = iter.next();
-				var name = prop.getKey();
-				if ( name.startsWith("binding.") &amp;&amp; name.indexOf('_') === -1 &amp;&amp; prop.getValue() == "true" )
-					jvmargs.push("-D" + name + "=true");
-			}
-
-			LWJGL.setProperty("bindings.list", jvmargs.join(" "));
-		</script>
-		<property name="bindings" value="${bindings.list}"/>
 	</target>
 
 </project>

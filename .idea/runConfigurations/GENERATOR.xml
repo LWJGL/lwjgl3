@@ -11,6 +11,8 @@
     <option name="PASS_PARENT_ENVS" value="true" />
     <module name="Templates" />
     <envs />
-    <method />
+    <method>
+      <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/build.xml" target="touch-kotlinc" />
+    </method>
   </configuration>
 </component>
