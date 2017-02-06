@@ -12,8 +12,8 @@
 	<!-- *********************************** -->
 	<property name="testng" value="6.10"/>
 	<property name="jcommander" value="1.60"/>
-	<property name="kotlinc-version" value="1.1-beta"/>
-	<property name="kotlinc-build" value="1.1.0-beta-17"/>
+	<property name="kotlinc-version" value="1.1-beta2"/>
+	<property name="kotlinc-build" value="1.1.0-beta-37"/>
 	<!-- *********************************** -->
 
 	<target name="-dependencies-uptodate">
