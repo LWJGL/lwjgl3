@@ -93,7 +93,7 @@
 			<apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
 				<filelist dir="${lib}" files="lib@{name}${LIB_POSTFIX}.so"/>
 			</apply>
-			<delete file="${lib}/touch_linux.txt" quiet="false" unless:set="lib-uptodate"/>
+			<delete file="${lib}/touch_linux.txt" quiet="true" unless:set="lib-uptodate"/>
 		</sequential>
 	</macrodef>
 	

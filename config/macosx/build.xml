@@ -106,7 +106,7 @@
 				<arg value="-r"/>
 				<filelist dir="${lib}" files="lib@{name}.dylib"/>
 			</apply>
-			<delete file="${lib}/touch_macos.txt" quiet="false" unless:set="lib-uptodate"/>
+			<delete file="${lib}/touch_macos.txt" quiet="true" unless:set="lib-uptodate"/>
 		</sequential>
 	</macrodef>
 

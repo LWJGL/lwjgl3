@@ -103,7 +103,7 @@ EXPORTS
 			</apply>
 
 			<move file="${bin.native}/build/@{name}${LIB_POSTFIX}.dll" todir="${lib}" unless:set="lib-uptodate"/>
-			<delete file="${lib}/touch_windows_${build.arch}.txt" quiet="false" unless:set="lib-uptodate"/>
+			<delete file="${lib}/touch_windows_${build.arch}.txt" quiet="true" unless:set="lib-uptodate"/>
 		</sequential>
 	</macrodef>
 
