@@ -52,11 +52,12 @@
 		<attribute name="dest"/>
 		<attribute name="lang" default="c"/>
 		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
-		<element name="custom" optional="true"/>
+		<element name="beforeCompile" optional="true"/>
 		<element name="source"/>
+		<element name="beforeLink" optional="true"/>
 		<element name="link" optional="true"/>
 		<sequential>
-			<custom/>
+			<beforeCompile/>
 			<compile dest="@{dest}" lang="@{lang}" flags="@{flags}">
 				<source/>
 			</compile>
@@ -68,24 +69,11 @@
 				<srcfiles dir="@{dest}" includes="**"/>
 			</uptodate>
 
-			<!-- Lazily update dependencies -->
-			<local name="update-dependencies"/>
-			<condition property="update-dependencies" value="true">
-				<not>
-					<or>
-						<isset property="dependencies-uptodate"/>
-						<isset property="lib-uptodate"/>
-						<istrue value="${build.offline}"/>
-					</or>
-				</not>
-			</condition>
-			<property name="dependencies-uptodate" value="true" if:set="update-dependencies"/>
-			<antcall target="-update-dependencies" if:set="update-dependencies"/>
-
 			<local name="version.script"/>
 			<property name="version.script" location="config/linux/version.script"/>
 
 			<echo message="Linking @{name}" taskname="gcc" unless:set="lib-uptodate"/>
+			<beforeLink/>
 			<apply executable="gcc" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
 				<srcfile/>
 				<arg value="-shared"/>
@@ -105,6 +93,7 @@
 			<apply executable="strip" failonerror="true" taskname="Symbol strip" unless:set="lib-uptodate">
 				<filelist dir="${lib}" files="lib@{name}${LIB_POSTFIX}.so"/>
 			</apply>
+			<delete file="${lib}/touch_linux.txt" quiet="false" unless:set="lib-uptodate"/>
 		</sequential>
 	</macrodef>
 	
@@ -130,6 +119,13 @@
 					<include name="${src.generated.native}/system/linux/*.c"/>
 				</fileset>
 			</source>
+			<beforeLink>
+				<parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
+					<update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
+					<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
+					<update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
+				</parallel>
+			</beforeLink>
 			<link>
 				<fileset dir="${lib}/linux/${build.arch}/">
 					<include name="libdyn*.a"/>
@@ -139,13 +135,13 @@
 
 		<!-- LMDB -->
 		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
-			<custom>
+			<beforeCompile>
 				<compile dest="@{dest}" flags="-Wno-format-extra-args">
 					<arg value="-I${src.native.rel}/util/lmdb"/>
 					<arg value="-DMDB_USE_ROBUST=0"/>
 					<fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
 				</compile>
-			</custom>
+			</beforeCompile>
 			<source>
 				<arg value="-I${src.native.rel}/util/lmdb"/>
 				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
@@ -164,7 +160,7 @@
 
 		<!-- NativeFileDialog -->
 		<build name="lwjgl_nfd" dest="${bin.native}/nfd" if:true="${binding.nfd}">
-			<custom>
+			<beforeCompile>
 				<local name="gtk3"/>
 				<local name="stderr"/>
 				<exec outputproperty="gtk3" errorproperty="stderr" executable="pkg-config" failonerror="true" taskname="gtk-3.0">
@@ -178,7 +174,7 @@
 					<fileset dir="." includes="${src.native}/util/nfd/nfd_common.c"/>
 					<fileset dir="." includes="${src.native}/util/nfd/nfd_gtk.c"/>
 				</compile>
-			</custom>
+			</beforeCompile>
 			<source>
 				<arg value="-I${src.native.rel}/util/nfd"/>
 				<arg value="-I${src.native.rel}/util/nfd/include"/>
@@ -250,12 +246,12 @@
 
 		<!-- tinyexr -->
 		<build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" if:true="${binding.tinyexr}">
-			<custom>
+			<beforeCompile>
 				<compile dest="@{dest}" lang="c++" flags="">
 					<arg value="-I${src.native.rel}/util/tinyexr"/>
 					<fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
 				</compile>
-			</custom>
+			</beforeCompile>
 			<source>
 				<arg value="-I${src.native.rel}/util/tinyexr"/>
 				<fileset dir="." includes="${src.generated.native}/util/tinyexr/*.c"/>
@@ -264,12 +260,12 @@
 
 		<!-- tiny file dialogs -->
 		<build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
-			<custom>
+			<beforeCompile>
 				<compile dest="@{dest}" flags="">
 					<arg value="-I${src.native.rel}/util/tinyfd"/>
 					<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
 				</compile>
-			</custom>
+			</beforeCompile>
 			<source>
 				<arg value="-I${src.native.rel}/util/tinyfd"/>
 				<fileset dir="." includes="${src.generated.native}/util/tinyfd/*.c"/>
@@ -288,12 +284,12 @@
 
 		<!-- yoga -->
 		<build name="lwjgl_yoga" dest="${bin.native}/yoga" if:true="${binding.yoga}">
-			<custom>
+			<beforeCompile>
 				<compile dest="@{dest}" flags="">
 					<arg value="-I${src.native.rel}/util/yoga"/>
 					<fileset dir="." includes="${src.native}/util/yoga/*.c"/>
 				</compile>
-			</custom>
+			</beforeCompile>
 			<source>
 				<arg value="-I${src.native.rel}/util/yoga"/>
 				<fileset dir="." includes="${src.generated.native}/util/yoga/*.c"/>
@@ -301,25 +297,32 @@
 		</build>
 
 		</parallel>
+
+		<local name="native-dependencies-uptodate"/>
+		<condition property="native-dependencies-uptodate" value="true">
+			<or>
+				<istrue value="${build.offline}"/>
+				<resourceexists>
+					<file file="${lib}/touch_linux.txt"/>
+				</resourceexists>
+			</or>
+		</condition>
+
+		<sequential unless:set="native-dependencies-uptodate">
+			<mkdir dir="${lib}/linux/x64"/>
+
+			<parallel threadsPerProcessor="4" failonany="true">
+
+			<update-dependency name="Assimp" artifact="x64/libassimp.so" dest="${lib}" if:true="${binding.assimp}"/>
+			<update-dependency name="bgfx" artifact="x64/libbgfx.so" dest="${lib}" if:true="${binding.bgfx}"/>
+			<update-dependency name="jemalloc" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>
+			<update-dependency name="GLFW" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
+			<update-dependency name="OpenAL32" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
+			<update-dependency name="OpenVR" artifact="x64/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
+
+			</parallel>
+
+			<touch file="${lib}/touch_linux.txt" verbose="false"/>
+		</sequential>
 	</target>	
-
-	<target name="-update-dependencies" unless="${build.offline}">
-		<mkdir dir="${lib}/linux"/>
-		<mkdir dir="${lib}/linux/x64"/>
-
-		<parallel threadsPerProcessor="4" failonany="true">
-
-		<update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
-		<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
-		<update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
-
-		<update-dependency name="Assimp" artifact="x64/libassimp.so" dest="${lib}" if:true="${binding.assimp}"/>
-		<update-dependency name="bgfx" artifact="x64/libbgfx.so" dest="${lib}" if:true="${binding.bgfx}"/>
-		<update-dependency name="jemalloc" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>
-		<update-dependency name="GLFW" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
-		<update-dependency name="OpenAL32" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
-		<update-dependency name="OpenVR" artifact="x64/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
-
-		</parallel>
-	</target>
 </project>

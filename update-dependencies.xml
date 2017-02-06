@@ -4,7 +4,7 @@
   -->
 
 <!-- Downloads LWJGL's library dependencies. -->
-<project name="LWJGL" basedir="." default="update-dependencies">
+<project name="LWJGL" basedir="." default="update-dependencies" xmlns:if="ant:if" xmlns:unless="ant:unless">
 
 	<property name="config" location="config" relative="true"/>
 	<import file="${config}/build-definitions.xml" id="defs"/>
@@ -16,7 +16,7 @@
 	<property name="kotlinc-build" value="1.1.0-beta-37"/>
 	<!-- *********************************** -->
 
-	<target name="-dependencies-uptodate">
+	<target name="check-dependencies" description="Updates LWJGL dependencies, if required" unless="${build.offline}">
 		<!-- Checks if the Kotlin compiler must be updated -->
 		<local name="kotlinc-build-current"/>
 		<loadfile property="kotlinc-build-current" srcfile="${kotlinc}/build.txt" quiet="true" taskname="kotlinc"/>
@@ -29,20 +29,15 @@
 
 		<uptodate property="lib-uptodate" srcfile="update-dependencies.xml" targetfile="${lib}/touch.txt"/>
 
+		<local name="dependencies-uptodate"/>
 		<condition property="dependencies-uptodate">
 			<and>
 				<isset property="kotlinc-uptodate"/>
 				<isset property="lib-uptodate"/>
 			</and>
 		</condition>
-	</target>
 
-	<target name="check-dependencies"
-	        description="Updates LWJGL dependencies, if required"
-	        depends="-dependencies-uptodate"
-	        unless="dependencies-uptodate"
-		>
-		<antcall target="update-dependencies"/>
+		<antcall target="update-dependencies" unless:set="dependencies-uptodate"/>
 	</target>
 
 	<target name="update-dependencies" description="Updates LWJGL dependencies" unless="${build.offline}">
@@ -78,6 +73,7 @@
 	</target>
 
 	<target name="clean" description="Deletes LWJGL dependencies">
+		<delete taskname="kotlinc" dir="${lib}/kotlinc"/>
 		<delete taskname="JCommander" file="${lib}/jcommander.jar"/>
 		<delete taskname="TestNG" file="${lib}/testng.jar"/>
 	</target>

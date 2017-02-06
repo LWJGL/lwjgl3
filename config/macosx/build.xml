@@ -76,11 +76,12 @@
 		<attribute name="linker" default="clang"/>
 		<attribute name="lang" default="c"/>
 		<attribute name="flags" default="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
-		<element name="custom" optional="true"/>
+		<element name="beforeCompile" optional="true"/>
 		<element name="source"/>
+		<element name="beforeLink" optional="true"/>
 		<element name="link" optional="true"/>
 		<sequential>
-			<custom/>
+			<beforeCompile/>
 			<compile dest="@{dest}" lang="@{lang}" flags="@{flags}">
 				<source/>
 			</compile>
@@ -91,21 +92,8 @@
 				<srcfiles dir="@{dest}" includes="**"/>
 			</uptodate>
 
-			<!-- Lazily update dependencies -->
-			<local name="update-dependencies"/>
-			<condition property="update-dependencies" value="true">
-				<not>
-					<or>
-						<isset property="dependencies-uptodate"/>
-						<isset property="lib-uptodate"/>
-						<istrue value="${build.offline}"/>
-					</or>
-				</not>
-			</condition>
-			<property name="dependencies-uptodate" value="true" if:set="update-dependencies"/>
-			<antcall target="-update-dependencies" if:set="update-dependencies"/>
-
 			<echo message="Linking @{name}" taskname="@{linker}" unless:set="lib-uptodate"/>
+			<beforeLink/>
 			<apply executable="@{linker}" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
 				<srcfile/>
 				<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/lib@{name}.dylib -O3 -flto -fPIC'/>
@@ -118,6 +106,7 @@
 				<arg value="-r"/>
 				<filelist dir="${lib}" files="lib@{name}.dylib"/>
 			</apply>
+			<delete file="${lib}/touch_macos.txt" quiet="false" unless:set="lib-uptodate"/>
 		</sequential>
 	</macrodef>
 
@@ -141,6 +130,13 @@
 					<include name="${src.generated.native}/system/macosx/*.c"/>
 				</fileset>
 			</source>
+			<beforeLink>
+				<parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
+					<update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
+					<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
+					<update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
+				</parallel>
+			</beforeLink>
 			<link>
 				<arg line="-framework CoreFoundation"/>
 				<fileset dir="${lib}/macosx/${build.arch}/">
@@ -151,12 +147,12 @@
 
 		<!-- LMDB -->
 		<build name="lwjgl_lmdb" dest="${bin.native}/lmdb" if:true="${binding.lmdb}">
-			<custom>
+			<beforeCompile>
 				<compile dest="@{dest}" flags="-Wno-format-extra-args">
 					<arg value="-I${src.native.rel}/util/lmdb"/>
 					<fileset dir="." includes="${src.native}/util/lmdb/*.c"/>
 				</compile>
-			</custom>
+			</beforeCompile>
 			<source>
 				<arg value="-I${src.native.rel}/util/lmdb"/>
 				<fileset dir="." includes="${src.generated.native}/util/lmdb/*.c"/>
@@ -247,12 +243,12 @@
 
 		<!-- tinyexr -->
 		<build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" linker="clang++" if:true="${binding.tinyexr}">
-			<custom>
+			<beforeCompile>
 				<compile dest="@{dest}" lang="c++" flags="">
 					<arg value="-I${src.native.rel}/util/tinyexr"/>
 					<fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
 				</compile>
-			</custom>
+			</beforeCompile>
 			<source>
 				<arg value="-I${src.native.rel}/util/tinyexr"/>
 				<fileset dir="." includes="${src.generated.native}/util/tinyexr/*.c"/>
@@ -261,12 +257,12 @@
 
 		<!-- tiny file dialogs -->
 		<build name="lwjgl_tinyfd" dest="${bin.native}/tinyfd" if:true="${binding.tinyfd}">
-			<custom>
+			<beforeCompile>
 				<compile dest="@{dest}" flags="">
 					<arg value="-I${src.native.rel}/util/tinyfd"/>
 					<fileset dir="." includes="${src.native}/util/tinyfd/*.c"/>
 				</compile>
-			</custom>
+			</beforeCompile>
 			<source>
 				<arg value="-I${src.native.rel}/util/tinyfd"/>
 				<fileset dir="." includes="${src.generated.native}/util/tinyfd/*.c"/>
@@ -285,12 +281,12 @@
 
 		<!-- yoga -->
 		<build name="lwjgl_yoga" dest="${bin.native}/yoga" if:true="${binding.yoga}">
-			<custom>
+			<beforeCompile>
 				<compile dest="@{dest}" flags="">
 					<arg value="-I${src.native.rel}/util/yoga"/>
 					<fileset dir="." includes="${src.native}/util/yoga/*.c"/>
 				</compile>
-			</custom>
+			</beforeCompile>
 			<source>
 				<arg value="-I${src.native.rel}/util/yoga"/>
 				<fileset dir="." includes="${src.generated.native}/util/yoga/*.c"/>
@@ -298,24 +294,32 @@
 		</build>
 
 		</parallel>
-	</target>
 
-	<target name="-update-dependencies" unless="${build.offline}">
-		<mkdir dir="${lib}/macosx/x64"/>
+		<local name="native-dependencies-uptodate"/>
+		<condition property="native-dependencies-uptodate" value="true">
+			<or>
+				<istrue value="${build.offline}"/>
+				<resourceexists>
+					<file file="${lib}/touch_macos.txt"/>
+				</resourceexists>
+			</or>
+		</condition>
 
-		<parallel threadsPerProcessor="4" failonany="true">
+		<sequential unless:set="native-dependencies-uptodate">
+			<mkdir dir="${lib}/macosx/x64"/>
 
-		<update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
-		<update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
-		<update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
+			<parallel threadsPerProcessor="4" failonany="true">
 
-		<update-dependency name="Assimp" artifact="x64/libassimp.dylib" dest="${lib}" if:true="${binding.assimp}"/>
-		<update-dependency name="bgfx" artifact="x64/libbgfx.dylib" dest="${lib}" if:true="${binding.bgfx}"/>
-		<update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}" if:true="${binding.jemalloc}"/>
-		<update-dependency name="GLFW" artifact="x64/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
-		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
-		<update-dependency name="OpenVR" artifact="x64/libopenvr_api.dylib" dest="${lib}" if:true="${binding.openvr}"/>
+			<update-dependency name="Assimp" artifact="x64/libassimp.dylib" dest="${lib}" if:true="${binding.assimp}"/>
+			<update-dependency name="bgfx" artifact="x64/libbgfx.dylib" dest="${lib}" if:true="${binding.bgfx}"/>
+			<update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}" if:true="${binding.jemalloc}"/>
+			<update-dependency name="GLFW" artifact="x64/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
+			<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
+			<update-dependency name="OpenVR" artifact="x64/libopenvr_api.dylib" dest="${lib}" if:true="${binding.openvr}"/>
 
-		</parallel>
+			</parallel>
+
+			<touch file="${lib}/touch_macos.txt" verbose="false"/>
+		</sequential>
 	</target>
 </project>
