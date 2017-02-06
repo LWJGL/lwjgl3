@@ -5,6 +5,8 @@
 <project name="native-android" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
     <import file="../build-definitions.xml"/>
 
+    <property name="ndk.home" value="${env.ANDROID_SDK_HOME}/ndk-bundle"/>
+
     <condition property="ndk.arch" value="arm64" else="arm">
         <isset property="build.arch.64"/>
     </condition>
@@ -35,7 +37,7 @@
                 <arg line="-c -std=c++11" if:set="cpp"/>
                 <arg line="-O3 -flto -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_XOPEN_SOURCE=700 -DNDEBUG -DLWJGL_LINUX -DLWJGL_ANDROID -DLWJGL${build.arch.bits}"/>
 
-                <arg line="--sysroot=${env.ANDROID_NDK_HOME}/platforms/android-${ndk.platform}/arch-${ndk.arch}"/>
+                <arg line="--sysroot=${ndk.home}/platforms/android-${ndk.platform}/arch-${ndk.arch}"/>
 
                 <arg value="-I${src.native.rel}/system"/>
                 <arg value="-I${src.native.rel}/system/linux"/>
@@ -76,7 +78,7 @@
             <apply executable="${ndk.bin}/${ndk.toolchain}-gcc" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
                 <srcfile/>
                 <arg value="-shared"/>
-                <arg line="--sysroot=${env.ANDROID_NDK_HOME}/platforms/android-${ndk.platform}/arch-${ndk.arch}"/>
+                <arg line="--sysroot=${ndk.home}/platforms/android-${ndk.platform}/arch-${ndk.arch}"/>
                 <arg line="-z noexecstack"/>
                 <arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib@{name}.so"/>
 
@@ -98,10 +100,7 @@
         var Files = Java.type("java.nio.file.Files");
 
         var toolchain = LWJGL.getProperty("ndk.toolchain");
-        var ANDROID_NDK_HOME = LWJGL.getProperty("env.ANDROID_NDK_HOME");
-
-        var toolchains = Paths.get(ANDROID_NDK_HOME + "/toolchains");
-        var root = Files.list(toolchains)
+        var root = Files.list(Paths.get(LWJGL.getProperty("ndk.home") + "/toolchains"))
             .filter(function(it) { return it.getFileName().toString().startsWith(toolchain); })
             .findFirst()
             .get();
@@ -233,8 +232,8 @@
         <build name="lwjgl_tinyexr" dest="${bin.native}/tinyexr" if:true="${binding.tinyexr}">
             <beforeCompile>
                 <compile dest="@{dest}" lang="c++" flags="">
-                    <arg line="-isystem${env.ANDROID_NDK_HOME}/sources/cxx-stl/gnu-libstdc++/${ndk.gcc.version}/include" if:set="cpp"/>
-                    <arg line="-isystem${env.ANDROID_NDK_HOME}/sources/cxx-stl/gnu-libstdc++/${ndk.gcc.version}/libs/${build.arch}/include" if:set="cpp"/>
+                    <arg line="-isystem${ndk.home}/sources/cxx-stl/gnu-libstdc++/${ndk.gcc.version}/include" if:set="cpp"/>
+                    <arg line="-isystem${ndk.home}/sources/cxx-stl/gnu-libstdc++/${ndk.gcc.version}/libs/${build.arch}/include" if:set="cpp"/>
                     <arg value="-I${src.native.rel}/util/tinyexr"/>
                     <fileset dir="." includes="${src.native}/util/tinyexr/*.cc"/>
                 </compile>

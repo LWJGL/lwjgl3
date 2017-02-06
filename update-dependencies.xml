@@ -14,6 +14,7 @@
     <property name="jcommander" value="1.60"/>
     <property name="kotlinc-version" value="1.1.2"/>
     <property name="kotlinc-build" value="1.1.2"/>
+    <property name="retrolambda" value="2.5.1"/>
     <!-- *********************************** -->
 
     <target name="check-dependencies" description="Updates LWJGL dependencies, if required" unless="${build.offline}">
@@ -68,6 +69,7 @@
     <target name="-lib-download" unless="lib-uptodate">
         <update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}"/>
         <update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
+        <update-mvn name="Retrolambda" group="net/orfjackal/retrolambda" artifact="retrolambda" version="${retrolambda}" dest="${lib}" if:set="platform.android"/>
 
         <touch file="${lib}/touch.txt" verbose="false"/>
     </target>

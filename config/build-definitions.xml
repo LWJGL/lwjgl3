@@ -72,6 +72,8 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="bin.generator" location="${bin}/Generator" relative="true"/>
     <property name="bin.templates" location="${bin}/Templates" relative="true"/>
     <property name="bin.core" location="${bin}/Core" relative="true"/>
+    <property name="bin.android" location="${bin}/android" relative="true"/>
+    <property name="bin.android.classes" location="${bin.android}/classes" relative="true"/>
     <property name="bin.tests" location="${bin}/Tests" relative="true"/>
 
     <property name="bin.html" location="${bin}/HTML" relative="true"/>
@@ -87,7 +89,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="build.platform" value="${env.LWJGL_BUILD_PLATFORM}" if:set="env.LWJGL_BUILD_PLATFORM"/>
 
     <condition property="platform.android">
-        <isset property="env.ANDROID_NDK_HOME"/>
+        <isset property="env.ANDROID_SDK_HOME"/>
     </condition>
     <condition property="platform.windows">
         <os family="Windows"/>
@@ -119,6 +121,10 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <contains string="${build.arch}" substring="64"/>
     </condition>
     <condition property="build.arch.64"><equals arg1="${build.arch.bits}" arg2="64"/></condition>
+
+    <condition property="batch.extension" value=".bat" else=".sh">
+        <isset property="platform.windows"/>
+    </condition>
 
     <!--
         Offline build flag. This is useful when working offline, or when custom binary dependencies
