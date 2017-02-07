@@ -4,8 +4,10 @@
  */
 package org.lwjgl.system;
 
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.testng.Assert.*;
 
@@ -77,6 +79,8 @@ public class StackTest {
 
 	@Test(expectedExceptions = OutOfMemoryError.class)
 	public void testOOME() {
+		if (!CHECKS) throw new SkipException("This test may not run with checks disabled.");
+
 		MemoryStack stack = new MemoryStack(8);
 
 		stack.push();
