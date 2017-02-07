@@ -523,6 +523,7 @@
 			<include name="org/lwjgl/demo/openal/**" if:true="${binding.openal}"/>
 			<exclude name="org/lwjgl/demo/openal/ALCDemo.java" unless:true="${openal}"/>
 			<exclude name="org/lwjgl/demo/openal/EFXTest.java" unless:true="${openal}"/>
+			<exclude name="org/lwjgl/demo/openal/HRTFDemo.java" unless:true="${openal}"/>
 
 			<include name="org/lwjgl/demo/opencl/**" if:true="${opencl}"/>
 			<include name="org/lwjgl/demo/opencl/CLDemo.java" if:true="${binding.opencl}"/>
