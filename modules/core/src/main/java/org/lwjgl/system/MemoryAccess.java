@@ -305,62 +305,62 @@ final class MemoryAccess {
 
         @Override
         public byte memGetByte(long ptr) {
-            return UNSAFE.getByte(ptr);
+            return UNSAFE.getByte(null, ptr);
         }
 
         @Override
         public short memGetShort(long ptr) {
-            return UNSAFE.getShort(ptr);
+            return UNSAFE.getShort(null, ptr);
         }
 
         @Override
         public int memGetInt(long ptr) {
-            return UNSAFE.getInt(ptr);
+            return UNSAFE.getInt(null, ptr);
         }
 
         @Override
         public long memGetLong(long ptr) {
-            return UNSAFE.getLong(ptr);
+            return UNSAFE.getLong(null, ptr);
         }
 
         @Override
         public float memGetFloat(long ptr) {
-            return UNSAFE.getFloat(ptr);
+            return UNSAFE.getFloat(null, ptr);
         }
 
         @Override
         public double memGetDouble(long ptr) {
-            return UNSAFE.getDouble(ptr);
+            return UNSAFE.getDouble(null, ptr);
         }
 
         @Override
         public void memPutByte(long ptr, byte value) {
-            UNSAFE.putByte(ptr, value);
+            UNSAFE.putByte(null, ptr, value);
         }
 
         @Override
         public void memPutShort(long ptr, short value) {
-            UNSAFE.putShort(ptr, value);
+            UNSAFE.putShort(null, ptr, value);
         }
 
         @Override
         public void memPutInt(long ptr, int value) {
-            UNSAFE.putInt(ptr, value);
+            UNSAFE.putInt(null, ptr, value);
         }
 
         @Override
         public void memPutLong(long ptr, long value) {
-            UNSAFE.putLong(ptr, value);
+            UNSAFE.putLong(null, ptr, value);
         }
 
         @Override
         public void memPutFloat(long ptr, float value) {
-            UNSAFE.putFloat(ptr, value);
+            UNSAFE.putFloat(null, ptr, value);
         }
 
         @Override
         public void memPutDouble(long ptr, double value) {
-            UNSAFE.putDouble(ptr, value);
+            UNSAFE.putDouble(null, ptr, value);
         }
 
         @Override
@@ -383,7 +383,7 @@ final class MemoryAccess {
                     if (misalignment != 0) {
                         // Align to 8 bytes
                         for (int len = 8 - misalignment; i < len; i++) {
-                            if (UNSAFE.getByte(address + i) == 0) {
+                            if (UNSAFE.getByte(null, address + i) == 0) {
                                 return i;
                             }
                         }
@@ -391,7 +391,7 @@ final class MemoryAccess {
 
                     // Aligned longs for performance
                     do {
-                        long v = UNSAFE.getLong(address + i);
+                        long v = UNSAFE.getLong(null, address + i);
                         if (((v - 0x0101010101010101L) & ~v & 0x8080808080808080L) != 0) {
                             break;
                         }
@@ -401,7 +401,7 @@ final class MemoryAccess {
 
                 // Tail
                 for (; i < maxLength; i++) {
-                    if (UNSAFE.getByte(address + i) == 0) {
+                    if (UNSAFE.getByte(null, address + i) == 0) {
                         break;
                     }
                 }
@@ -418,7 +418,7 @@ final class MemoryAccess {
                     if (misalignment != 0) {
                         // Align to 8 bytes
                         for (int len = 8 - misalignment; i < len; i += 2) {
-                            if (UNSAFE.getShort(address + i) == 0) {
+                            if (UNSAFE.getShort(null, address + i) == 0) {
                                 return i;
                             }
                         }
@@ -426,7 +426,7 @@ final class MemoryAccess {
 
                     // Aligned longs for performance
                     do {
-                        long v = UNSAFE.getLong(address + i);
+                        long v = UNSAFE.getLong(null, address + i);
                         if (((v - 0x0001000100010001L) & ~v & 0x8000800080008000L) != 0) {
                             break;
                         }
@@ -436,7 +436,7 @@ final class MemoryAccess {
 
                 // Tail
                 for (; i < maxLength; i += 2) {
-                    if (UNSAFE.getShort(address + i) == 0) {
+                    if (UNSAFE.getShort(null, address + i) == 0) {
                         break;
                     }
                 }
@@ -453,7 +453,7 @@ final class MemoryAccess {
                     if (misalignment != 0) {
                         // Align to 4 bytes
                         for (int len = 4 - misalignment; i < len; i++) {
-                            if (UNSAFE.getByte(address + i) == 0) {
+                            if (UNSAFE.getByte(null, address + i) == 0) {
                                 return i;
                             }
                         }
@@ -461,7 +461,7 @@ final class MemoryAccess {
 
                     // Aligned ints for performance
                     do {
-                        int v = UNSAFE.getInt(address + i);
+                        int v = UNSAFE.getInt(null, address + i);
                         if (((v - 0x01010101) & ~v & 0x80808080) != 0) {
                             break;
                         }
@@ -471,7 +471,7 @@ final class MemoryAccess {
 
                 // Tail
                 for (; i < maxLength; i++) {
-                    if (UNSAFE.getByte(address + i) == 0) {
+                    if (UNSAFE.getByte(null, address + i) == 0) {
                         break;
                     }
                 }
@@ -488,7 +488,7 @@ final class MemoryAccess {
                     if (misalignment != 0) {
                         // Align to 4 bytes
                         for (int len = 4 - misalignment; i < len; i += 2) {
-                            if (UNSAFE.getShort(address + i) == 0) {
+                            if (UNSAFE.getShort(null, address + i) == 0) {
                                 return i;
                             }
                         }
@@ -496,7 +496,7 @@ final class MemoryAccess {
 
                     // Aligned longs for performance
                     do {
-                        int v = UNSAFE.getInt(address + i);
+                        int v = UNSAFE.getInt(null, address + i);
                         if (((v - 0x00010001) & ~v & 0x80008000) != 0) {
                             break;
                         }
@@ -506,7 +506,7 @@ final class MemoryAccess {
 
                 // Tail
                 for (; i < maxLength; i += 2) {
-                    if (UNSAFE.getShort(address + i) == 0) {
+                    if (UNSAFE.getShort(null, address + i) == 0) {
                         break;
                     }
                 }
@@ -523,11 +523,11 @@ final class MemoryAccess {
                 int p = 0, len = text.length();
 
                 for (; p < len; p++) {
-                    UNSAFE.putByte(target + p, (byte)text.charAt(p));
+                    UNSAFE.putByte(null, target + p, (byte)text.charAt(p));
                 }
 
                 if (nullTerminated) {
-                    UNSAFE.putByte(target + p++, (byte)0);
+                    UNSAFE.putByte(null, target + p++, (byte)0);
                 }
 
                 return p;
@@ -545,7 +545,7 @@ final class MemoryAccess {
 
                 // ASCII fast path
                 while (i < len && (c = text.charAt(i)) < 0x80) {
-                    UNSAFE.putByte(target + p++, (byte)c);
+                    UNSAFE.putByte(null, target + p++, (byte)c);
                     i++;
                 }
 
@@ -553,28 +553,28 @@ final class MemoryAccess {
                 while (i < len) {
                     c = text.charAt(i++);
                     if (c < 0x80) {
-                        UNSAFE.putByte(target + p++, (byte)c);
+                        UNSAFE.putByte(null, target + p++, (byte)c);
                     } else {
                         int cp = c;
                         if (c < 0x800) {
-                            UNSAFE.putByte(target + p++, (byte)(0xC0 | cp >> 6));
+                            UNSAFE.putByte(null, target + p++, (byte)(0xC0 | cp >> 6));
                         } else {
                             if (!isHighSurrogate(c)) {
-                                UNSAFE.putByte(target + p++, (byte)(0xE0 | cp >> 12));
+                                UNSAFE.putByte(null, target + p++, (byte)(0xE0 | cp >> 12));
                             } else {
                                 cp = toCodePoint(c, text.charAt(i++));
 
-                                UNSAFE.putByte(target + p++, (byte)(0xF0 | cp >> 18));
-                                UNSAFE.putByte(target + p++, (byte)(0x80 | cp >> 12 & 0x3F));
+                                UNSAFE.putByte(null, target + p++, (byte)(0xF0 | cp >> 18));
+                                UNSAFE.putByte(null, target + p++, (byte)(0x80 | cp >> 12 & 0x3F));
                             }
-                            UNSAFE.putByte(target + p++, (byte)(0x80 | cp >> 6 & 0x3F));
+                            UNSAFE.putByte(null, target + p++, (byte)(0x80 | cp >> 6 & 0x3F));
                         }
-                        UNSAFE.putByte(target + p++, (byte)(0x80 | cp & 0x3F));
+                        UNSAFE.putByte(null, target + p++, (byte)(0x80 | cp & 0x3F));
                     }
                 }
 
                 if (nullTerminated) {
-                    UNSAFE.putByte(target + p, (byte)0);
+                    UNSAFE.putByte(null, target + p, (byte)0);
                 }
 
                 return p;
@@ -589,11 +589,11 @@ final class MemoryAccess {
                 int p = 0, len = text.length();
 
                 for (int i = 0; i < len; i++, p += 2) {
-                    UNSAFE.putShort(target + p, (short)text.charAt(i));
+                    UNSAFE.putShort(null, target + p, (short)text.charAt(i));
                 }
 
                 if (nullTerminated) {
-                    UNSAFE.putShort(target + p, (short)0);
+                    UNSAFE.putShort(null, target + p, (short)0);
                     p += 2;
                 }
 
@@ -703,18 +703,18 @@ final class MemoryAccess {
 
         private static class Arch32 extends MemoryAccessorUnsafeAndroid {
             @Override
-            public long memGetAddress(long ptr) { return memGetInt(ptr); }
+            public long memGetAddress(long ptr) { return UNSAFE.getInt(null, ptr); }
 
             @Override
-            public void memPutAddress(long ptr, long value) { memPutInt(ptr, (int)(value & 0xFFFFFFFF)); }
+            public void memPutAddress(long ptr, long value) { UNSAFE.putInt(null, ptr, (int)(value & 0xFFFFFFFF)); }
         }
 
         private static class Arch64 extends MemoryAccessorUnsafeAndroid {
             @Override
-            public long memGetAddress(long ptr) { return memGetLong(ptr); }
+            public long memGetAddress(long ptr) { return UNSAFE.getLong(null, ptr); }
 
             @Override
-            public void memPutAddress(long ptr, long value) { memPutLong(ptr, value); }
+            public void memPutAddress(long ptr, long value) { UNSAFE.putLong(null, ptr, value); }
         }
 
     }

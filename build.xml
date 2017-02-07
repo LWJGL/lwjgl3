@@ -104,7 +104,7 @@
     <target name="clean-java" description="Deletes Java binary files produced by this script">
         <delete dir="${bin.core}"/>
         <delete dir="${bin.tests}"/>
-        <delete dir="${bin.android}" if:set="platform.android"/>
+        <delete dir="${bin.android.classes}" if:set="platform.android"/>
     </target>
 
     <target name="clean-native" description="Deletes native binary files produced by this script">
@@ -368,7 +368,7 @@
             <src>
                 <pathelement path="${src.core}"/>
                 <pathelement path="${src.generated.java}"/>
-                <pathelement path="${src.core}/../android" if:set="platform.android"/>
+                <pathelement path="${src.core}/../androidboot" if:set="platform.android"/>
             </src>
 
             <include name="org/lwjgl/**/*.java"/>
@@ -389,7 +389,25 @@
     </target>
 
     <target name="retrolambda" description="Backports the Java 1.8 classes to Java 1.7" depends="compile">
+        <delete dir="${bin.android.classes}"/>
         <mkdir dir="${bin.android.classes}"/>
+
+        <delete>
+            <fileset dir="${bin.core}/org/lwjgl/system" includes="MemoryAccess*.class" excludes="MemoryAccessJNI.class"/>
+            <fileset dir="${bin.core}/org/lwjgl/system" includes="MemoryUtil*.class"/>
+        </delete>
+
+        <lwjgl.javac destdir="${bin.core}" taskname="javac: Core - Android">
+            <src>
+                <pathelement path="${src.core}/../android"/>
+            </src>
+
+            <include name="libcore/io/Memory.java"/>
+            <include name="org/lwjgl/system/*.java"/>
+
+            <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
+            <compilerarg value="-XDignore.symbol.file=true"/>
+        </lwjgl.javac>
 
         <java jar="${lib}/retrolambda.jar" fork="true" failonerror="true">
             <sysproperty key="retrolambda.defaultMethods" value="true"/>
@@ -397,15 +415,14 @@
             <sysproperty key="retrolambda.classpath" value="${bin.core}"/>
             <sysproperty key="retrolambda.outputDir" value="${bin.android.classes}"/>
         </java>
-
-        <delete dir="${bin.android.classes}/java"/>
-        <delete dir="${bin.android.classes}/sun"/>
     </target>
 
     <target name="aar" description="Builds the Android archive" depends="retrolambda, compile-native">
         <jar destfile="${bin.android}/classes.jar" level="9" index="true" indexmetainf="true">
             <fileset dir="${bin.android.classes}">
-                <include name="**"/>
+                <include name="org/lwjgl/**"/>
+                <include name="libcore/io/**"/>
+                <include name="sun/misc/**"/>
             </fileset>
         </jar>
 

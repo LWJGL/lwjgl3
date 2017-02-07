@@ -332,7 +332,10 @@ public final class GLES {
         public void set(GLESCapabilities caps) {
             if (caps != null && tempCaps != null && !ThreadLocalUtil.compareCapabilities(tempCaps.addresses, caps.addresses)) {
                 apiLog("[WARNING] Incompatible context detected. Falling back to thread-local lookup for GLES contexts.");
-                icd = GLES::getCapabilities; // fall back to thread/process lookup
+                icd = new ICD() {
+                    @Override
+                    public GLESCapabilities get() {return getCapabilities();}
+                }; // fall back to thread/process lookup
                 return;
             }
 

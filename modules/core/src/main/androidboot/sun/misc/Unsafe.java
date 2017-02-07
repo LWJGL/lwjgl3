@@ -85,7 +85,7 @@ public final class Unsafe {
     public native int addressSize();
     public native int pageSize();
 
-    public native Object allocateInstance(Class<?> c);
+    public native Object allocateInstance(Class<?> c) throws InstantiationException;
 
     public native boolean compareAndSwapObject(Object o, long offset, Object expected, Object x);
     public native boolean compareAndSwapInt(Object o, long offset, int expected, int x);

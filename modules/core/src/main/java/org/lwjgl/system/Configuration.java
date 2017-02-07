@@ -309,14 +309,23 @@ public class Configuration<T> {
     public static final Configuration<String> VULKAN_LIBRARY_NAME = new Configuration<>("org.lwjgl.vulkan.libname", StateInit.STRING);
 
     private interface StateInit<T> extends Function<String, T> {
-        StateInit<Boolean> BOOLEAN = property -> {
-            String value = System.getProperty(property);
-            return value == null ? null : Boolean.parseBoolean(value);
+        StateInit<Boolean> BOOLEAN = new StateInit<Boolean>() {
+            @Override
+            public Boolean apply(String property) {
+                String value = System.getProperty(property);
+                return value == null ? null : Boolean.parseBoolean(value);
+            }
         };
 
-        StateInit<Integer> INT = Integer::getInteger;
+        StateInit<Integer> INT = new StateInit<Integer>() {
+            @Override
+            public Integer apply(String nm) { return Integer.getInteger(nm); }
+        };
 
-        StateInit<String> STRING = System::getProperty;
+        StateInit<String> STRING = new StateInit<String>() {
+            @Override
+            public String apply(String key) { return System.getProperty(key); }
+        };
     }
 
     private final String property;
