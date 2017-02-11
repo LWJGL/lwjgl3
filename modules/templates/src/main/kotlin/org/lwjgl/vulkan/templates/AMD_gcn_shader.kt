@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val AMD_gcn_shader = "AMDGCNShader".nativeClassVK("AMD_gcn_shader", postfix = AMD) {
+val AMD_gcn_shader = "AMDGCNShader".nativeClassVK("AMD_gcn_shader", type = "device", postfix = AMD) {
 	documentation =
 		"""
 		<dl>

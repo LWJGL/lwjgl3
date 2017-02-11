@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapchain_colorspace", postfix = EXT) {
+val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapchain_colorspace", type = "device", postfix = EXT) {
 	documentation =
 		"""
 		<dl>

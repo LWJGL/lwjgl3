@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_display_surface_counter", postfix = EXT) {
+val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_display_surface_counter", type = "instance", postfix = EXT) {
 	documentation =
 		"""
 		<dl>

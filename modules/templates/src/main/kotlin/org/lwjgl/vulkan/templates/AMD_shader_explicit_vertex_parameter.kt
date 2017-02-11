@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val AMD_shader_explicit_vertex_parameter = "AMDShaderExplicitVertexParameter".nativeClassVK("AMD_shader_explicit_vertex_parameter", postfix = AMD) {
+val AMD_shader_explicit_vertex_parameter = "AMDShaderExplicitVertexParameter".nativeClassVK("AMD_shader_explicit_vertex_parameter", type = "device", postfix = AMD) {
 	documentation =
 		"""
 		<dl>

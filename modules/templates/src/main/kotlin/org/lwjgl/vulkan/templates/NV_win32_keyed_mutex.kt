@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mutex", postfix = NV) {
+val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mutex", type = "device", postfix = NV) {
 	documentation =
 		"""
 		<dl>

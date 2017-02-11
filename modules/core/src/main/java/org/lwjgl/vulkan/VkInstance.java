@@ -12,7 +12,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /** Wraps a Vulkan instance handle. */
-public class VkInstance extends DispatchableHandle {
+public class VkInstance extends DispatchableHandleInstance {
 
 	/**
 	 * Creates a {@link VkInstance} instance for the specified native handle.
@@ -24,7 +24,7 @@ public class VkInstance extends DispatchableHandle {
 		super(handle, getInstanceCapabilities(handle, ci));
 	}
 
-	private static VKCapabilities getInstanceCapabilities(long handle, VkInstanceCreateInfo ci) {
+	private static VKCapabilitiesInstance getInstanceCapabilities(long handle, VkInstanceCreateInfo ci) {
 		VkApplicationInfo appInfo = ci.pApplicationInfo();
 		int apiVersion;
 		if ( appInfo != null )
@@ -38,23 +38,12 @@ public class VkInstance extends DispatchableHandle {
 		if ( GetInstanceProcAddr == NULL )
 			throw new IllegalStateException("A core Vulkan function is missing. Make sure that Vulkan is available.");
 
-		return new VKCapabilities(functionName -> {
-			long address = GetInstanceProcAddr(GetInstanceProcAddr, handle, memAddress(functionName));
-			if ( address == NULL ) {
-				address = VK.getFunctionProvider().getFunctionAddress(functionName);
-				if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-					apiLog("Failed to locate address for VK instance function " + memASCII(functionName));
-			}
+		return new VKCapabilitiesInstance(functionName -> {
+			long address = callPPP(GetInstanceProcAddr, handle, memAddress(functionName));
+			if ( address == NULL && Checks.DEBUG_FUNCTIONS )
+				apiLog("Failed to locate address for VK instance function " + memASCII(functionName));
 			return address;
 		}, apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()));
-	}
-
-	static long GetInstanceProcAddr(long __functionAddress, long handle, long functionName) {
-		long address = callPPP(__functionAddress, handle, functionName);
-		if ( address == NULL )
-			address = callPPP(__functionAddress, NULL, functionName);
-
-		return address;
 	}
 
 }

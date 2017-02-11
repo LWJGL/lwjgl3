@@ -6,15 +6,14 @@ package org.lwjgl.vulkan;
 
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.*;
+import org.lwjgl.system.MemoryStack;
 
-import java.nio.ByteBuffer;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.VK10.*;
 
@@ -28,7 +27,7 @@ public final class VK {
 
 	private static FunctionProvider functionProvider;
 
-	private static VKCapabilities globalCommands;
+	private static GlobalCommands globalCommands;
 
 	static {
 		if ( !Configuration.VULKAN_EXPLICIT_INIT.get(false) )
@@ -74,34 +73,6 @@ public final class VK {
 		create(Library.loadNative(VK.class, libName));
 	}
 
-	private static void create(SharedLibrary VULKAN) {
-		try {
-			create((FunctionProvider)new SharedLibrary.Delegate(VULKAN) {
-				private final long GetInstanceProcAddr = library.getFunctionAddress("vkGetInstanceProcAddr");
-
-				{
-					if ( GetInstanceProcAddr == NULL )
-						throw new IllegalStateException("A core Vulkan function is missing. Make sure that Vulkan is available.");
-				}
-
-				@Override
-				public long getFunctionAddress(ByteBuffer functionName) {
-					long address = callPPP(GetInstanceProcAddr, NULL, memAddress(functionName));
-					if ( address == NULL ) {
-						address = library.getFunctionAddress(functionName);
-						if ( address == NULL && Checks.DEBUG_FUNCTIONS )
-							apiLog("Failed to locate address for VK function " + memASCII(functionName));
-					}
-
-					return address;
-				}
-			});
-		} catch (RuntimeException e) {
-			VULKAN.free();
-			throw e;
-		}
-	}
-
 	/**
 	 * Initializes Vulkan with the specified {@link FunctionProvider}. This method can be used to implement custom Vulkan library loading.
 	 *
@@ -112,12 +83,7 @@ public final class VK {
 			throw new IllegalStateException("Vulkan has already been created.");
 
 		VK.functionProvider = functionProvider;
-
-		globalCommands = new VKCapabilities(functionProvider, 0, Collections.emptySet());
-		if ( globalCommands.vkCreateInstance == NULL ||
-			globalCommands.vkEnumerateInstanceExtensionProperties == NULL ||
-			globalCommands.vkEnumerateInstanceLayerProperties == NULL )
-			throw new IllegalStateException("Vulkan 1.0 is missing. Make sure that Vulkan is available.");
+		globalCommands = new GlobalCommands(functionProvider);
 	}
 
 	/** Unloads the Vulkan shared library. */
@@ -136,8 +102,36 @@ public final class VK {
 		return functionProvider;
 	}
 
-	/** Returns the {@link VKCapabilities} instance for global commands. */
-	static VKCapabilities getGlobalCommands() { return globalCommands; }
+	static class GlobalCommands {
+
+		final long vkGetInstanceProcAddr;
+
+		final long vkCreateInstance;
+		final long vkEnumerateInstanceExtensionProperties;
+		final long vkEnumerateInstanceLayerProperties;
+
+		GlobalCommands(FunctionProvider library) {
+			vkGetInstanceProcAddr = library.getFunctionAddress("vkGetInstanceProcAddr");
+			if ( vkGetInstanceProcAddr == NULL )
+				throw new IllegalArgumentException("A critical function is missing. Make sure that Vulkan is available.");
+
+			vkCreateInstance = getFunctionAddress("vkCreateInstance");
+			vkEnumerateInstanceExtensionProperties = getFunctionAddress("vkEnumerateInstanceExtensionProperties");
+			vkEnumerateInstanceLayerProperties = getFunctionAddress("vkEnumerateInstanceLayerProperties");
+		}
+
+		private long getFunctionAddress(String name) {
+			try ( MemoryStack stack = stackPush() ) {
+				long address = callPPP(vkGetInstanceProcAddr, NULL, memAddress(stack.ASCII(name)));
+				if ( address == NULL )
+					throw new IllegalArgumentException("A critical function is missing. Make sure that Vulkan is available.");
+				return address;
+			}
+		}
+	}
+
+	/** Returns the Vulkan global commands. */
+	static GlobalCommands getGlobalCommands() { return globalCommands; }
 
 	static Set<String> getEnabledExtensionSet(int apiVersion, PointerBuffer extensionNames) {
 		Set<String> enabledExtensions = new HashSet<>(16);
@@ -172,6 +166,10 @@ public final class VK {
 
 		apiLog("[VK] " + extension + " was reported as available but an entry point is missing.");
 		return null;
+	}
+
+	static long isSupported(FunctionProvider provider, String functionName, boolean extensionSupported) {
+		return extensionSupported ? provider.getFunctionAddress(functionName) : NULL;
 	}
 
 }

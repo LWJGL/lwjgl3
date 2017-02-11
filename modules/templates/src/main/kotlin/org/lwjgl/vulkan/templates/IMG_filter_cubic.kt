@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", postfix = IMG) {
+val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", type = "device", postfix = IMG) {
 	documentation =
 		"""
 		<dl>

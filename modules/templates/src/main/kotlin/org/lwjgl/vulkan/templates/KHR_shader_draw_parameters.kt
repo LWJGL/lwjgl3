@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val KHR_shader_draw_parameters = "KHRShaderDrawParameters".nativeClassVK("KHR_shader_draw_parameters", postfix = KHR) {
+val KHR_shader_draw_parameters = "KHRShaderDrawParameters".nativeClassVK("KHR_shader_draw_parameters", type = "device", postfix = KHR) {
 	documentation =
 		"""
 		<dl>

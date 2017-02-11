@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val NV_dedicated_allocation = "NVDedicatedAllocation".nativeClassVK("NV_dedicated_allocation", postfix = NV) {
+val NV_dedicated_allocation = "NVDedicatedAllocation".nativeClassVK("NV_dedicated_allocation", type = "device", postfix = NV) {
 	documentation =
 		"""
 		<dl>

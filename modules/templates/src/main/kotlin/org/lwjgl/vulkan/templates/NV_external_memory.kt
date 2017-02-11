@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val NV_external_memory = "NVExternalMemory".nativeClassVK("NV_external_memory", postfix = NV) {
+val NV_external_memory = "NVExternalMemory".nativeClassVK("NV_external_memory", type = "device", postfix = NV) {
 	documentation =
 		"""
 		<dl>

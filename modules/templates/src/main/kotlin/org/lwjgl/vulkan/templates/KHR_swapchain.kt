@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR) {
+val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device", postfix = KHR) {
 	documentation =
 		"""
 		<dl>

@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.vulkan.*
 
-val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquire_xlib_display", postfix = EXT) {
+val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquire_xlib_display", type = "instance", postfix = EXT) {
 	documentation =
 		"""
 		<dl>

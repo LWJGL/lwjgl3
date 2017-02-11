@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 import org.lwjgl.vulkan.*
 
-val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", postfix = KHR) {
+val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", type = "instance", postfix = KHR) {
 	documentation =
 		"""
 		<dl>

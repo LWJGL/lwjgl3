@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_flags", postfix = EXT) {
+val EXT_validation_flags = "EXTValidationFlags".nativeClassVK("EXT_validation_flags", type = "instance", postfix = EXT) {
 	documentation =
 		"""
 		<dl>

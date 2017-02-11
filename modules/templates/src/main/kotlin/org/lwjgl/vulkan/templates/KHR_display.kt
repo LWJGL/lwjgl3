@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", postfix = KHR) {
+val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", postfix = KHR) {
 	documentation =
 		"""
 		<dl>

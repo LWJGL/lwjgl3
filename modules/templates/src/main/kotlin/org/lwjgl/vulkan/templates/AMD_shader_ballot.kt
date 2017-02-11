@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val AMD_shader_ballot = "AMDShaderBallot".nativeClassVK("AMD_shader_ballot", postfix = AMD) {
+val AMD_shader_ballot = "AMDShaderBallot".nativeClassVK("AMD_shader_ballot", type = "device", postfix = AMD) {
 	documentation =
 		"""
 		<dl>

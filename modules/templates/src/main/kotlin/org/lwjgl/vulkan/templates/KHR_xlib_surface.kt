@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.vulkan.*
 
-val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", postfix = KHR) {
+val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", type = "instance", postfix = KHR) {
 	documentation =
 		"""
 		<dl>

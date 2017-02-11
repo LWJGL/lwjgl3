@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("NVX_device_generated_commands", postfix = NVX) {
+val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("NVX_device_generated_commands", type = "device", postfix = NVX) {
 	documentation =
 		"""
 		<dl>

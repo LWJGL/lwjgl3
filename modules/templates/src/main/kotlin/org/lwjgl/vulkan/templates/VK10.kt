@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = VK_BINDING) {
+val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = VK_BINDING_INSTANCE) {
 	documentation =
 		"""
 		The core Vulkan 1.0 functionality.
@@ -2902,7 +2902,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		VkPhysicalDeviceMemoryProperties.p.OUT("pMemoryProperties", "points to an instance of ##VkPhysicalDeviceMemoryProperties structure in which the properties are returned.")
 	)
 
-	PFN_vkVoidFunction(
+	GlobalCommand..PFN_vkVoidFunction(
 		"GetInstanceProcAddr",
 		"""
 		Return a function pointer for a command.

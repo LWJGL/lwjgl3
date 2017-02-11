@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", postfix = EXT) {
+val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type = "device", postfix = EXT) {
 	documentation =
 		"""
 		<dl>

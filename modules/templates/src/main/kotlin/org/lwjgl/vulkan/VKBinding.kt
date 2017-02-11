@@ -5,6 +5,7 @@
 package org.lwjgl.vulkan
 
 import org.lwjgl.generator.*
+import org.lwjgl.vulkan.templates.*
 import java.io.*
 
 private val NativeClass.capName: String
@@ -17,11 +18,31 @@ private val NativeClass.capName: String
 		"${prefixTemplate}_$templateName"
 	}
 
-private val CAPABILITIES_CLASS = "VKCapabilities"
+private val CAPS_INSTANCE = "VKCapabilitiesInstance"
+private val CAPS_DEVICE = "VKCapabilitiesDevice"
 
-val VK_BINDING = Generator.register(object : APIBinding(
+private val EXTENSION_TYPES = HashMap<String, String>()
+private val DEVICE_EXTENSIONS = ArrayList<NativeClass>()
+
+private val Func.addressType: Long get() {
+	return when {
+		name == "vkGetInstanceProcAddr" -> 0 // dlsym/GetProcAddress
+		when (name) {
+			"vkEnumerateInstanceExtensionProperties",
+			"vkEnumerateInstanceLayerProperties",
+			"vkCreateInstance" -> true
+			else               -> false
+		}                               -> 1 // vkGetInstanceProcAddr: VK_NULL_HANDLE
+		parameters[0].nativeType.let {
+			it === VkInstance || it === VkPhysicalDevice
+		}                               -> 2 // vkGetInstanceProcAddr: instance handle
+		else                            -> 3 // vkGetDeviceProcAddr  : device handle
+	}
+}
+
+val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
 	VULKAN_PACKAGE,
-	CAPABILITIES_CLASS,
+	CAPS_INSTANCE,
 	APICapabilities.PARAM_CAPABILITIES
 ) {
 
@@ -36,24 +57,38 @@ val VK_BINDING = Generator.register(object : APIBinding(
 	}
 
 	override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-		println("\n\tstatic boolean isAvailable($CAPABILITIES_CLASS caps) {")
-		print("\t\treturn checkFunctions(")
-		nativeClass.printPointers(this, { "caps.${it.name}" }) {
-			!it.has<Macro>()
+		val hasInstanceFunctions = EXTENSION_TYPES[nativeClass.templateName] == "instance" || nativeClass.functions.any { it.addressType == 2L }
+		if (hasInstanceFunctions) {
+			println("\n\tstatic boolean isAvailable($CAPS_INSTANCE caps) {")
+			print("\t\treturn checkFunctions(")
+			nativeClass.printPointers(this, { "caps.${it.name}" }) {
+				it.addressType == 2L && !it.has<Macro>()
+			}
+			println(");")
+			println("\t}")
 		}
-		println(");")
-		println("\t}")
+
+		if (EXTENSION_TYPES[nativeClass.templateName] == "device" || (nativeClass.templateName.startsWith("VK") && nativeClass.functions.any { it.addressType == 3L })) {
+			println("\n\tstatic boolean isAvailable(${if (hasInstanceFunctions) "$CAPS_INSTANCE capsInstance, " else ""}$CAPS_DEVICE caps) {")
+			print("\t\treturn ${if (hasInstanceFunctions) "isAvailable(capsInstance) && " else ""}checkFunctions(")
+			nativeClass.printPointers(this, { "caps.${it.name}" }) {
+				it.addressType == 3L && !it.has<Macro>()
+			}
+			println(");")
+			println("\t}")
+		}
 	}
 
 	init {
 		javaImport("static org.lwjgl.system.MemoryUtil.*")
+		javaImport("static org.lwjgl.vulkan.VK.*")
 
-		documentation = "Defines the capabilities of a Vulkan {@code VkInstance} or {@code VkDevice}."
+		documentation = "Defines the capabilities of a Vulkan {@code VkInstance}."
 	}
 
 	override fun PrintWriter.generateJava() {
 		generateJavaPreamble()
-		println("public class $CAPABILITIES_CLASS {")
+		println("public class $CAPS_INSTANCE {")
 
 		val classes = super.getClasses { o1, o2 ->
 			// Core functionality first, extensions after
@@ -64,6 +99,8 @@ val VK_BINDING = Generator.register(object : APIBinding(
 				(if (isVK1) -1 else 1)
 			else
 				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
+		}.filter {
+			EXTENSION_TYPES[it.templateName] ?: "instance" == "instance" || it.functions.any { it.addressType == 2L }
 		}
 
 		classes.asSequence()
@@ -72,8 +109,93 @@ val VK_BINDING = Generator.register(object : APIBinding(
 				println("\n\t// ${it.templateName}")
 				println("\tpublic final long")
 				println(it.functions.asSequence()
-					.filter { !it.has<Macro>() }
-					.map { it.name }
+					.filter { it.addressType == 2L && !it.has<Macro>() }
+					.map(Func::name)
+					.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";")
+				)
+			}
+
+		println("""
+	/** The Vulkan API version number. */
+	public final int apiVersion;
+""")
+
+		classes
+			.filter { EXTENSION_TYPES[it.templateName] ?: "instance" == "instance" }
+			.forEach {
+				println(it.getCapabilityJavadoc())
+				println("\tpublic final boolean ${it.capName};")
+			}
+
+		println("""
+	$CAPS_INSTANCE(FunctionProvider provider, int apiVersion, Set<String> ext) {
+		this.apiVersion = apiVersion;
+
+		boolean supported;""")
+		classes.forEach {
+			val capName = it.capName
+			if (it.hasNativeFunctions) {
+				println("\n\t\t{")
+				val isInstanceExtension = EXTENSION_TYPES[it.templateName] ?: "instance" == "instance"
+				if (isInstanceExtension)
+					println("\t\t\tsupported = ext.contains(\"$capName\");")
+				println(it.functions.asSequence()
+					.filter { it.addressType == 2L && !it.has<Macro>() }
+					.map { "${it.name} = isSupported(provider, ${it.functionAddress}, ${if (isInstanceExtension) "supported" else "true"});" }.joinToString("\n\t\t\t", prefix = "\t\t\t"))
+				if (isInstanceExtension)
+					println("\t\t\t$capName = supported && VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(this));")
+				print("\t\t}")
+			} else {
+				print("\n\t\t$capName = ext.contains(\"$capName\");")
+			}
+		}
+		println("""
+	}
+
+}""")
+	}
+
+})
+
+val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(VULKAN_PACKAGE, CAPS_DEVICE ) {
+
+	init {
+		javaImport(
+			"java.util.Set",
+			"org.lwjgl.system.*",
+			"static org.lwjgl.system.MemoryUtil.*",
+			"static org.lwjgl.vulkan.VK.*"
+		)
+
+		documentation = "Defines the capabilities of a Vulkan {@code VkDevice}."
+	}
+
+	override fun PrintWriter.generateJava() {
+		DEVICE_EXTENSIONS.add(VK10)
+
+		generateJavaPreamble()
+		println("public class $CAPS_DEVICE {")
+
+		val classes = DEVICE_EXTENSIONS
+		classes.sortWith(Comparator { o1, o2 ->
+			// Core functionality first, extensions after
+			val isVK1 = o1.templateName.startsWith("VK")
+			val isVK2 = o2.templateName.startsWith("VK")
+
+			if (isVK1 xor isVK2)
+				(if (isVK1) -1 else 1)
+			else
+				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
+		})
+
+		classes.asSequence()
+			.filter { it.hasNativeFunctions }
+			.forEach {
+				println("\n\t// ${it.templateName}")
+				println("\tpublic final long")
+				println(it.functions.asSequence()
+					.filter { it.addressType == 3L && !it.has<Macro>() }
+					.map(Func::name)
 					.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";")
 				)
 			}
@@ -89,36 +211,27 @@ val VK_BINDING = Generator.register(object : APIBinding(
 		}
 
 		println("""
-	$CAPABILITIES_CLASS(FunctionProvider provider, int apiVersion, Set<String> ext) {
-		this.apiVersion = apiVersion;
+	$CAPS_DEVICE(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
+		this.apiVersion = capsInstance.apiVersion;
 
 		boolean supported;""")
 		classes.forEach {
 			val capName = it.capName
 			if (it.hasNativeFunctions) {
 				println("\n\t\t{")
-				if (it.templateName == "VK10") {
-					println(it.functions.asSequence()
-						.filter { !it.has<Macro>() }
-						.map { "${it.name} = provider.getFunctionAddress(${it.functionAddress});" }.joinToString("\n\t\t\t", prefix = "\t\t\t"))
-					println("\t\t\t$capName = VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(this));")
-				} else {
-					println("\t\t\tsupported = ext.contains(\"$capName\");")
-					println(it.functions.asSequence()
-						.filter { !it.has<Macro>() }
-						.map { "${it.name} = isSupported(provider, ${it.functionAddress}, supported);" }.joinToString("\n\t\t\t", prefix = "\t\t\t"))
-					println("\t\t\t$capName = supported && VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(this));")
-				}
+				println("\t\t\tsupported = ext.contains(\"$capName\");")
+				println(it.functions.asSequence()
+					.filter { it.addressType == 3L && !it.has<Macro>() }
+					.map { "${it.name} = isSupported(provider, ${it.functionAddress}, supported);" }.joinToString("\n\t\t\t", prefix = "\t\t\t"))
+				println("\t\t\t$capName = supported && VK.checkExtension(\"$capName\", ${if (capName == it.className) "$VULKAN_PACKAGE.${it.className}" else it.className}.isAvailable(${
+				if (it.functions.any { it.addressType == 2L }) "capsInstance, " else ""
+				}this));")
 				print("\t\t}")
 			} else {
 				print("\n\t\t$capName = ext.contains(\"$capName\");")
 			}
 		}
 		println("""
-	}
-
-	private static long isSupported(FunctionProvider provider, String functionName, boolean extensionSupported) {
-		return extensionSupported ? provider.getFunctionAddress(functionName) : NULL;
 	}
 
 }""")
@@ -132,18 +245,27 @@ val GlobalCommand = Capabilities("VK.getGlobalCommands()")
 
 fun String.nativeClassVK(
 	templateName: String,
-	nativeSubPath: String = "",
+	type: String,
 	prefix: String = "VK",
 	prefixMethod: String = prefix.toLowerCase(),
 	postfix: String = "",
 	init: (NativeClass.() -> Unit)? = null
-) = nativeClass(
-	VULKAN_PACKAGE,
-	templateName,
-	nativeSubPath = nativeSubPath,
-	prefix = prefix,
-	prefixMethod = prefixMethod,
-	postfix = postfix,
-	binding = VK_BINDING,
-	init = init
-)
+): NativeClass {
+	EXTENSION_TYPES[templateName] = type
+
+	val ext = nativeClass(
+		VULKAN_PACKAGE,
+		templateName,
+		prefix = prefix,
+		prefixMethod = prefixMethod,
+		postfix = postfix,
+		binding = VK_BINDING_INSTANCE,
+		init = init
+	)
+
+	// There are device extensions with instance functions (currently only NVX_device_generated_commands, a spec bug?)
+	if (type == "device")
+		DEVICE_EXTENSIONS.add(ext)
+
+	return ext
+}

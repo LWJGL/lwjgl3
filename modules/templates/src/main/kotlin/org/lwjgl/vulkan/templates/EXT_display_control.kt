@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control", postfix = EXT) {
+val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control", type = "device", postfix = EXT) {
 	documentation =
 		"""
 		<dl>

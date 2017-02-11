@@ -5,7 +5,7 @@
 package org.lwjgl.vulkan;
 
 /** Wraps a Vulkan physical device handle. */
-public class VkPhysicalDevice extends DispatchableHandle {
+public class VkPhysicalDevice extends DispatchableHandleInstance {
 
 	private final VkInstance instance;
 

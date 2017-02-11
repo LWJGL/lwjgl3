@@ -5,7 +5,7 @@
 package org.lwjgl.vulkan;
 
 /** Wraps a Vulkan queue handle. */
-public class VkQueue extends DispatchableHandle {
+public class VkQueue extends DispatchableHandleDevice {
 
 	/**
 	 * Creates a {@code VkQueue} using the specified native handle and device.

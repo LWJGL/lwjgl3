@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val NV_glsl_shader = "NVGLSLShader".nativeClassVK("NV_glsl_shader", postfix = NV) {
+val NV_glsl_shader = "NVGLSLShader".nativeClassVK("NV_glsl_shader", type = "device", postfix = NV) {
 	documentation =
 		"""
 		<dl>

@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasterization_order", postfix = AMD) {
+val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasterization_order", type = "device", postfix = AMD) {
 	documentation =
 		"""
 		<dl>

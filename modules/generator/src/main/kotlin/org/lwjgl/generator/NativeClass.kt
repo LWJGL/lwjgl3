@@ -77,16 +77,6 @@ abstract class APIBinding(
 	/** Can be overriden to generate binding-specific javadoc. If this function returns false, the default javadoc will be generated. */
 	open fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String) = false
 
-	protected fun NativeClass.getCapabilityJavadoc(): String {
-		val documentation = this.documentation
-		return (if (documentation == null)
-			"When true, {@code $templateName} is supported."
-		else if (hasBody)
-			"When true, {@link $className} is supported."
-		else
-			processDocumentation(documentation)).toJavaDoc()
-	}
-
 	/** Can be overriden to implement a custom condition for checking the function address. */
 	open fun shouldCheckFunctionAddress(function: Func) = apiCapabilities.ordinal > 1
 
@@ -730,6 +720,16 @@ class NativeClass(
 			else
 				it
 		}
+	}
+
+	fun getCapabilityJavadoc(): String {
+		val documentation = this.documentation
+		return (if (documentation == null)
+			"When true, {@code $templateName} is supported."
+		else if (hasBody)
+			"When true, {@link $className} is supported."
+		else
+			processDocumentation(documentation)).toJavaDoc()
 	}
 
 }

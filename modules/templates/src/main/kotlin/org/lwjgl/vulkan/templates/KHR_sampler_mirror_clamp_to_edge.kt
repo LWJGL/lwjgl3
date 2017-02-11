@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClassVK("KHR_sampler_mirror_clamp_to_edge", postfix = KHR) {
+val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClassVK("KHR_sampler_mirror_clamp_to_edge", type = "device", postfix = KHR) {
 	documentation =
 		"""
 		<dl>

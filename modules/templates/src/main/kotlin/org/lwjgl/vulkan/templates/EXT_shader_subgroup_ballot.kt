@@ -8,7 +8,7 @@ package org.lwjgl.vulkan.templates
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.*
 
-val EXT_shader_subgroup_ballot = "EXTShaderSubgroupBallot".nativeClassVK("EXT_shader_subgroup_ballot", postfix = EXT) {
+val EXT_shader_subgroup_ballot = "EXTShaderSubgroupBallot".nativeClassVK("EXT_shader_subgroup_ballot", type = "device", postfix = EXT) {
 	documentation =
 		"""
 		<dl>

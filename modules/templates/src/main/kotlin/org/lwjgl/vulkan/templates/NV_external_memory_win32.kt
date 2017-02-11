@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 import org.lwjgl.vulkan.*
 
-val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_external_memory_win32", postfix = NV) {
+val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_external_memory_win32", type = "device", postfix = NV) {
 	documentation =
 		"""
 		<dl>
