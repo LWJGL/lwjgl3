@@ -102,13 +102,13 @@ E = 12.92  &times;  L for 0 &le; L &lt 0.0031308
 	IntConstant(
 		"The extension specification version.",
 
-		"SWAPCHAIN_COLOR_SPACE_SPEC_VERSION".."1"
+		"EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION".."1"
 	)
 
 	StringConstant(
 		"The extension name.",
 
-		"SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME".."VK_EXT_swapchain_colorspace"
+		"EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME".."VK_EXT_swapchain_colorspace"
 	)
 
 	EnumConstant(

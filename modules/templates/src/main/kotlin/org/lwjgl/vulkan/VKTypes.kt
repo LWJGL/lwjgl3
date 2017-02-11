@@ -28,6 +28,8 @@ val SEC = "SEC"
 val TIZEN = "TIZEN"
 val RENDERDOC = "RENDERDOC"
 val NN = "NN"
+val KHR = "KHR"
+val EXT = "EXT"
 
 // Handle types
 val VkInstance = VK_DEFINE_HANDLE("VkInstance")
@@ -791,7 +793,7 @@ val VkImageFormatProperties = struct(VULKAN_PACKAGE, "VkImageFormatProperties", 
 		"""
 
 	VkExtent3D.member("maxExtent", "are the maximum image dimensions. See the <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#features-extentperimagetype\">Allowed Extent Values</a> section below for how these values are constrained by {@code type}.")
-	uint32_t.member("maxMipLevels", "the maximum number of mipmap levels. {@code maxMipLevels} <b>must</b> either be equal to 1 (valid only if {@code tiling} is #IMAGE_TILING_LINEAR) or be equal to <code>&#x2308;log<sub>2</sub>(max(width, height, depth))&#x2309; &#x002b; 1</code>. <code>width</code>, <code>height</code>, and <code>depth</code> are taken from the corresponding members of {@code maxExtent}.")
+	uint32_t.member("maxMipLevels", "the maximum number of mipmap levels. {@code maxMipLevels} <b>must</b> either be equal to 1 (valid only if {@code tiling} is #IMAGE_TILING_LINEAR) or be equal to <code>⌈log<sub>2</sub>(max(width, height, depth))⌉ + 1</code>. <code>width</code>, <code>height</code>, and <code>depth</code> are taken from the corresponding members of {@code maxExtent}.")
 	uint32_t.member("maxArrayLayers", "the maximum number of array layers. {@code maxArrayLayers} <b>must</b> either be equal to 1 or be greater than or equal to the {@code maxImageArrayLayers} member of ##VkPhysicalDeviceLimits. A value of 1 is valid only if {@code tiling} is #IMAGE_TILING_LINEAR or if {@code type} is #IMAGE_TYPE_3D.")
 	VkSampleCountFlags.member("sampleCounts", "a bitmask of {@code VkSampleCountFlagBits} specifying all the supported sample counts for this image as described <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#features-supported-sample-counts\">below</a>.")
 	VkDeviceSize.member("maxResourceSize", "an upper bound on the total image size in bytes, inclusive of all image subresources. Implementations <b>may</b> have an address space limit on total size of a resource, which is advertised by this property. {@code maxResourceSize} <b>must</b> be at least 2<sup>31</sup>.")
@@ -889,10 +891,8 @@ val VkPhysicalDeviceLimits = struct(VULKAN_PACKAGE, "VkPhysicalDeviceLimits", mu
 	float.member("maxSamplerAnisotropy", "the maximum degree of sampler anisotropy. The maximum degree of anisotropic filtering used for an image sampling operation is the minimum of the {@code maxAnisotropy} member of the ##VkSamplerCreateInfo structure and this limit. See <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#samplers-maxAnisotropy\">samplers-maxAnisotropy</a>.")
 	uint32_t.member("maxViewports", "the maximum number of active viewports. The {@code viewportCount} member of the ##VkPipelineViewportStateCreateInfo structure that is provided at pipeline creation <b>must</b> be less than or equal to this limit.")
 	uint32_t.array("maxViewportDimensions", "are the maximum viewport dimensions in the X (width) and Y (height) dimensions, respectively. The maximum viewport dimensions <b>must</b> be greater than or equal to the largest image which <b>can</b> be created and used as a framebuffer attachment. See <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#vertexpostproc-viewport\">Controlling the Viewport</a>.", size = 2)
-	float.array("viewportBoundsRange", """the <code>[minimum, maximum]</code> range that the corners of a viewport <b>must</b> be contained in. This range <b>must</b> be at least
-<code>[-2 {times} size, 2 {times} size - 1]</code>, where <code>size = max(maxViewportDimensions[0], maxViewportDimensions[1])</code> See <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-viewport">Controlling the Viewport</a>.
-
-		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+	float.array("viewportBoundsRange", """the <code>[minimum, maximum]</code> range that the corners of a viewport <b>must</b> be contained in. This range <b>must</b> be at least <code>[-2 × size, 2 × size - 1]</code>, where <code>size = max(maxViewportDimensions[0], maxViewportDimensions[1])</code>. See <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vertexpostproc-viewport">Controlling the Viewport</a>.
+<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
 		The intent of the {@code viewportBoundsRange} limit is to allow a maximum sized viewport to be arbitrarily shifted relative to the output target as long as at least some portion intersects. This would give a bounds limit of <code>[-size + 1, 2 {times} size - 1]</code> which would allow all possible non-empty-set intersections of the output target and the viewport. Since these numbers are typically powers of two, picking the signed number range using the smallest possible number of bits ends up with the specified range.
 		</div>""", size = 2)
 	uint32_t.member("viewportSubPixelBits", "the number of bits of subpixel precision for viewport bounds. The subpixel precision that floating-point viewport bounds are interpreted at is given by this limit.")
@@ -962,7 +962,7 @@ val VkPhysicalDeviceProperties = struct(VULKAN_PACKAGE, "VkPhysicalDevicePropert
 
 		<ul>
 			<li>For purposes of physical device identification, the <em>vendor</em> of a physical device is the entity responsible for the most salient characteristics of the hardware represented by the physical device handle. In the case of a discrete GPU, this <b>should</b> be the GPU chipset vendor. In the case of a GPU or other accelerator integrated into a system-on-chip (SoC), this <b>should</b> be the supplier of the silicon IP used to create the GPU or other accelerator.</li>
-			<li>If the vendor of the physical device has a valid PCI vendor ID issued by <a href="https://pcisig.com/">PCI-SIG</a>, that ID <b>should</b> be used to construct {@code vendorID} as described above for PCI-based implementations. Implementations that do not return a PCI vendor ID in {@code vendorID} <b>must</b> return a valid Khronos vendor ID, obtained as described in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vulkan-styleguide">Vulkan Documentation and Extensions</a> document in the section “Registering a Vendor ID with Khronos”. Khronos vendor IDs are allocated starting at 0x10000, to distinguish them from the PCI vendor ID namespace.</li>
+			<li>If the vendor of the physical device has a valid PCI vendor ID issued by <a href="https://pcisig.com/">PCI-SIG</a>, that ID <b>should</b> be used to construct {@code vendorID} as described above for PCI-based implementations. Implementations that do not return a PCI vendor ID in {@code vendorID} <b>must</b> return a valid Khronos vendor ID, obtained as described in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#vulkan-styleguide">Vulkan Documentation and Extensions</a> document in the section "{@code Registering a Vendor ID with Khronos}". Khronos vendor IDs are allocated starting at 0x10000, to distinguish them from the PCI vendor ID namespace.</li>
 			<li>The vendor of the physical device is responsible for selecting {@code deviceID}. The value selected <b>should</b> uniquely identify both the device version and any major configuration options (for example, core count in the case of multicore devices). The same device ID <b>should</b> be used for all physical implementations of that device version and configuration. For example, all uses of a specific silicon IP GPU version and configuration <b>should</b> use the same device ID, even if those uses occur in different SoCs.</li>
 		</ul>
 
@@ -1100,7 +1100,7 @@ val VkPhysicalDeviceMemoryProperties = struct(VULKAN_PACKAGE, "VkPhysicalDeviceM
 
 		The number of memory heaps is given by {@code memoryHeapCount} and is less than or equal to #MAX_MEMORY_HEAPS. Each heap is described by an element of the {@code memoryHeaps} array, as a ##VkMemoryHeap structure. The number of memory types available across all memory heaps is given by {@code memoryTypeCount} and is less than or equal to #MAX_MEMORY_TYPES. Each memory type is described by an element of the {@code memoryTypes} array, as a ##VkMemoryType structure.
 
-		At least one heap <b>must</b> include #MEMORY_HEAP_DEVICE_LOCAL_BIT in ##VkMemoryHeap{@code ::flags}. If there are multiple heaps that all have similar performance characteristics, they <b>may</b> all include #MEMORY_HEAP_DEVICE_LOCAL_BIT. In a unified memory architecture (UMA) system, there is often only a single memory heap which is considered to be equally “local” to the host and to the device, and such an implementation <b>must</b> advertise the heap as device-local.
+		At least one heap <b>must</b> include #MEMORY_HEAP_DEVICE_LOCAL_BIT in ##VkMemoryHeap{@code ::flags}. If there are multiple heaps that all have similar performance characteristics, they <b>may</b> all include #MEMORY_HEAP_DEVICE_LOCAL_BIT. In a unified memory architecture (UMA) system, there is often only a single memory heap which is considered to be equally "{@code local}" to the host and to the device, and such an implementation <b>must</b> advertise the heap as device-local.
 
 		Each memory type returned by #GetPhysicalDeviceMemoryProperties() <b>must</b> have its {@code propertyFlags} set to one of the following values:
 
@@ -1261,6 +1261,9 @@ val VkSubmitInfo = struct(VULKAN_PACKAGE, "VkSubmitInfo") {
 		"""
 		Structure specifying a queue submit operation.
 
+		<h5>Description</h5>
+		The order that command buffers appear in {@code pCommandBuffers} is used to determine <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-submission-order"> submission order</a>, and thus all the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-implicit"> implicit ordering guarantees</a> that respect it. Other than these implicit ordering guarantees and any <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> explicit synchronization primitives</a>, these command buffers <b>may</b> overlap or otherwise execute out of order.
+
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>Any given element of {@code pCommandBuffers} <b>must</b> either have been recorded with the #COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT, or not currently be executing on the device</li>
@@ -1298,7 +1301,7 @@ val VkSubmitInfo = struct(VULKAN_PACKAGE, "VkSubmitInfo") {
 	const..VkSemaphore.p.member("pWaitSemaphores", "a pointer to an array of semaphores upon which to wait before the command buffers for this batch begin execution. If semaphores to wait on are provided, they define a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-semaphores-waiting\">semaphore wait operation</a>.")
 	const..VkPipelineStageFlags.p.member("pWaitDstStageMask", "a pointer to an array of pipeline stages at which each corresponding semaphore wait will occur.")
 	AutoSize("pCommandBuffers", optional = true)..uint32_t.member("commandBufferCount", "the number of command buffers to execute in the batch.")
-	const..VkCommandBuffer.p.member("pCommandBuffers", "a pointer to an array of command buffers to execute in the batch. The command buffers submitted in a batch begin execution in the order they appear in {@code pCommandBuffers}, but <b>may</b> complete out of order.")
+	const..VkCommandBuffer.p.member("pCommandBuffers", "a pointer to an array of command buffers to execute in the batch.")
 	AutoSize("pSignalSemaphores", optional = true)..uint32_t.member("signalSemaphoreCount", "the number of semaphores to be signaled once the commands specified in {@code pCommandBuffers} have completed execution.")
 	const..VkSemaphore.p.member("pSignalSemaphores", "a pointer to an array of semaphores which will be signaled when the command buffers for this batch have completed execution. If semaphores to be signaled are provided, they define a <a href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\\#synchronization-semaphores-signaling\">semaphore signal operation</a>.")
 }
@@ -1428,7 +1431,7 @@ val VkSparseMemoryBind = struct(VULKAN_PACKAGE, "VkSparseMemoryBind") {
 		<dl>
 			<dd><code>metadataRegion = [base, base + imageMipTailSize)</code></dd>
 
-			<dd><code>base = imageMipTailOffset + imageMipTailStride &#x00d7; n</code></dd>
+			<dd><code>base = imageMipTailOffset + imageMipTailStride × n</code></dd>
 		</dl>
 
 		and {@code imageMipTailOffset}, {@code imageMipTailSize}, and {@code imageMipTailStride} values are from the ##VkSparseImageMemoryRequirements corresponding to the metadata aspect of the image, and <code>n</code> is a valid array layer index for the image,
@@ -1927,7 +1930,7 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 			<li>If {@code imageType} is #IMAGE_TYPE_3D, {@code extent.width}, {@code extent.height} and {@code extent.depth} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxImageDimension3D}, or ##VkImageFormatProperties{@code ::maxExtent}.width/height/depth (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure) - whichever is higher</li>
 			<li>If {@code imageType} is #IMAGE_TYPE_1D, both {@code extent.height} and {@code extent.depth} <b>must</b> be 1</li>
 			<li>If {@code imageType} is #IMAGE_TYPE_2D, {@code extent.depth} <b>must</b> be 1</li>
-			<li>{@code mipLevels} <b>must</b> be less than or equal to <code>&#x230a;log<sub>2</sub>(max(extent.width, extent.height, extent.depth))&#x230b; + 1</code>.</li>
+			<li>{@code mipLevels} <b>must</b> be less than or equal to <code>⌊log<sub>2</sub>(max(extent.width, extent.height, extent.depth))⌋ + 1</code>.</li>
 			<li>If any of {@code extent.width}, {@code extent.height}, or {@code extent.depth} are greater than the equivalently named members of ##VkPhysicalDeviceLimits{@code ::maxImageDimension3D}, {@code mipLevels} <b>must</b> be less than or equal to ##VkImageFormatProperties{@code ::maxMipLevels} (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure)</li>
 			<li>{@code arrayLayers} <b>must</b> be less than or equal to ##VkImageFormatProperties{@code ::maxArrayLayers} (as returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure)</li>
 			<li>If {@code imageType} is #IMAGE_TYPE_3D, {@code arrayLayers} <b>must</b> be 1.</li>
@@ -2114,7 +2117,7 @@ val VkImageSubresourceRange = struct(VULKAN_PACKAGE, "VkImageSubresourceRange") 
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>If {@code levelCount} is not #REMAINING_MIP_LEVELS, <code>levelCount</code> <b>must</b> be non-zero and <code>(baseMipLevel &#x002b; levelCount)</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when the image was created</li>
+			<li>If {@code levelCount} is not #REMAINING_MIP_LEVELS, <code>levelCount</code> <b>must</b> be non-zero and <code>(baseMipLevel + levelCount)</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in ##VkImageCreateInfo when the image was created</li>
 			<li>If the {@code imageType} specified in ##VkImageCreateInfo when the image was created was #IMAGE_TYPE_3D and the image view is created with the {@code viewType} of ##VkImageViewCreateInfo set to #VIEW_TYPE_2D_ARRAY then {@code layerCount} <b>must</b> be #REMAINING_ARRAY_LAYERS, or <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code extent.depth} specified in ##VkImageCreateInfo when the image was created</li>
 			<li>If the {@code imageType} specified in ##VkImageCreateInfo when the image was created was not #IMAGE_TYPE_3D or the image view is not created with the {@code viewType} of ##VkImageViewCreateInfo set to #VIEW_TYPE_2D_ARRAY then {@code layerCount} <b>must</b> be #REMAINING_ARRAY_LAYERS, or <code>layerCount</code> <b>must</b> be non-zero and <code>(baseArrayLayer + layerCount)</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in ##VkImageCreateInfo when the image was created</li>
 		</ul>
@@ -2149,17 +2152,17 @@ val VkImageViewCreateInfo = struct(VULKAN_PACKAGE, "VkImageViewCreateInfo") {
 			<thead><tr><th>Dim, Arrayed, MS</th><th>Image parameters</th><th>View parameters</th></tr></thead>
 			<tbody>
 				<tr><td></td><td>{@code imageType} = ci.{@code imageType} {@code width} = ci.{@code extent.width} {@code height} = ci.{@code extent.height} {@code depth} = ci.{@code extent.depth} {@code arrayLayers} = ci.{@code arrayLayers} {@code samples} = ci.{@code samples} where ci is the ##VkImageCreateInfo used to create {@code image}.</td><td>{@code baseArrayLayer} and {@code layerCount} are members of the {@code subresourceRange} member.</td></tr>
-				<tr><td>1D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_1D {@code width} &#x2265; 1 {@code height} = 1 {@code depth} = 1 {@code arrayLayers} &#x2265; 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_1D {@code baseArrayLayer} &#x2265; 0 {@code layerCount} = 1</td></tr>
-				<tr><td>1D, 1, 0</td><td>{@code imageType} = #IMAGE_TYPE_1D {@code width} &#x2265; 1 {@code height} = 1 {@code depth} = 1 {@code arrayLayers} &#x2265; 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_1D_ARRAY {@code baseArrayLayer} &#x2265; 0 {@code layerCount} &#x2265; 1</td></tr>
-				<tr><td>2D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} &#x2265; 1 {@code height} &#x2265; 1 {@code depth} = 1 {@code arrayLayers} &#x2265; 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D {@code baseArrayLayer} &#x2265; 0 {@code layerCount} = 1</td></tr>
-				<tr><td>2D, 1, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} &#x2265; 1 {@code height} &#x2265; 1 {@code depth} = 1 {@code arrayLayers} &#x2265; 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D_ARRAY {@code baseArrayLayer} &#x2265; 0 {@code layerCount} &#x2265; 1</td></tr>
-				<tr><td>2D, 0, 1</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} &#x2265; 1 {@code height} &#x2265; 1 {@code depth} = 1 {@code arrayLayers} &#x2265; 1 {@code samples} &gt; 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D {@code baseArrayLayer} &#x2265; 0 {@code layerCount} = 1</td></tr>
-				<tr><td>2D, 1, 1</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} &#x2265; 1 {@code height} &#x2265; 1 {@code depth} = 1 {@code arrayLayers} &#x2265; 1 {@code samples} &gt; 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D_ARRAY {@code baseArrayLayer} &#x2265; 0 {@code layerCount} &#x2265; 1</td></tr>
-				<tr><td>CUBE, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} &#x2265; 1 {@code height} = {@code width} {@code depth} = 1 {@code arrayLayers} &#x2265; 6 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_CUBE_COMPATIBLE_BIT</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_CUBE {@code baseArrayLayer} &#x2265; 0 {@code layerCount} = 6</td></tr>
-				<tr><td>CUBE, 1, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} &#x2265; 1 {@code height} = width {@code depth} = 1 <em>N</em> &#x2265; 1 {@code arrayLayers} &#x2265; 6 &#x00d7; <em>N</em> {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_CUBE_COMPATIBLE_BIT</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_CUBE_ARRAY {@code baseArrayLayer} &#x2265; 0 {@code layerCount} = 6 &#x00d7; <em>N</em>, <em>N</em> &#x2265; 1</td></tr>
-				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} &#x2265; 1 {@code height} &#x2265; 1 {@code depth} &#x2265; 1 {@code arrayLayers} = 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_3D {@code baseArrayLayer} = 0 {@code layerCount} = 1</td></tr>
-				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} &#x2265; 1 {@code height} &#x2265; 1 {@code depth} &#x2265; 1 {@code arrayLayers} = 1 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT {@code flags} does not include VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</td><td>{@code viewType} = #VIEW_TYPE_2D {@code levelCount} = 1 {@code baseArrayLayer} &#x2265; 0 {@code layerCount} = 1</td></tr>
-				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} &#x2265; 1 {@code height} &#x2265; 1 {@code depth} &#x2265; 1 {@code arrayLayers} = 1 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT {@code flags} does not include VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</td><td>{@code viewType} = #VIEW_TYPE_2D_ARRAY {@code levelCount} = 1 {@code baseArrayLayer} &#x2265; 0 {@code layerCount} &#x2265; 1</td></tr>
+				<tr><td>1D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_1D {@code width} ≥ 1 {@code height} = 1 {@code depth} = 1 {@code arrayLayers} ≥ 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_1D {@code baseArrayLayer} ≥ 0 {@code layerCount} = 1</td></tr>
+				<tr><td>1D, 1, 0</td><td>{@code imageType} = #IMAGE_TYPE_1D {@code width} ≥ 1 {@code height} = 1 {@code depth} = 1 {@code arrayLayers} ≥ 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_1D_ARRAY {@code baseArrayLayer} ≥ 0 {@code layerCount} ≥ 1</td></tr>
+				<tr><td>2D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} = 1 {@code arrayLayers} ≥ 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D {@code baseArrayLayer} ≥ 0 {@code layerCount} = 1</td></tr>
+				<tr><td>2D, 1, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} = 1 {@code arrayLayers} ≥ 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D_ARRAY {@code baseArrayLayer} ≥ 0 {@code layerCount} ≥ 1</td></tr>
+				<tr><td>2D, 0, 1</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} = 1 {@code arrayLayers} ≥ 1 {@code samples} &gt; 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D {@code baseArrayLayer} ≥ 0 {@code layerCount} = 1</td></tr>
+				<tr><td>2D, 1, 1</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} = 1 {@code arrayLayers} ≥ 1 {@code samples} &gt; 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_2D_ARRAY {@code baseArrayLayer} ≥ 0 {@code layerCount} ≥ 1</td></tr>
+				<tr><td>CUBE, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} ≥ 1 {@code height} = {@code width} {@code depth} = 1 {@code arrayLayers} ≥ 6 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_CUBE_COMPATIBLE_BIT</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_CUBE {@code baseArrayLayer} ≥ 0 {@code layerCount} = 6</td></tr>
+				<tr><td>CUBE, 1, 0</td><td>{@code imageType} = #IMAGE_TYPE_2D {@code width} ≥ 1 {@code height} = width {@code depth} = 1 <em>N</em> ≥ 1 {@code arrayLayers} ≥ 6 × <em>N</em> {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_CUBE_COMPATIBLE_BIT</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_CUBE_ARRAY {@code baseArrayLayer} ≥ 0 {@code layerCount} = 6 × <em>N</em>, <em>N</em> ≥ 1</td></tr>
+				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} ≥ 1 {@code arrayLayers} = 1 {@code samples} = 1</td><td>{@code viewType} = #IMAGE_VIEW_TYPE_3D {@code baseArrayLayer} = 0 {@code layerCount} = 1</td></tr>
+				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} ≥ 1 {@code arrayLayers} = 1 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT {@code flags} does not include VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</td><td>{@code viewType} = #VIEW_TYPE_2D {@code levelCount} = 1 {@code baseArrayLayer} ≥ 0 {@code layerCount} = 1</td></tr>
+				<tr><td>3D, 0, 0</td><td>{@code imageType} = #IMAGE_TYPE_3D {@code width} ≥ 1 {@code height} ≥ 1 {@code depth} ≥ 1 {@code arrayLayers} = 1 {@code samples} = 1 {@code flags} includes #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT {@code flags} does not include VK_IMAGE_CREATE_SPARSE_BINDING_BIT, VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</td><td>{@code viewType} = #VIEW_TYPE_2D_ARRAY {@code levelCount} = 1 {@code baseArrayLayer} ≥ 0 {@code layerCount} ≥ 1</td></tr>
 			</tbody>
 		</table>
 
@@ -2520,7 +2523,7 @@ val VkPipelineInputAssemblyStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineI
 	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	VkPipelineInputAssemblyStateCreateFlags.member("flags", "reserved for future use.")
 	VkPrimitiveTopology.member("topology", "a {@code VkPrimitiveTopology} defining the primitive topology, as described below.")
-	VkBool32.member("primitiveRestartEnable", "controls whether a special vertex index value is treated as restarting the assembly of primitives. This enable only applies to indexed draws (#CmdDrawIndexed() and #CmdDrawIndexedIndirect()), and the special index value is either 0xFFFFFFFF when the {@code indexType} parameter of #CmdBindIndexBuffer() is equal to #INDEX_TYPE_UINT32, or 0xFFFF when {@code indexType} is equal to #INDEX_TYPE_UINT16. Primitive restart is not allowed for “list” topologies.")
+	VkBool32.member("primitiveRestartEnable", "controls whether a special vertex index value is treated as restarting the assembly of primitives. This enable only applies to indexed draws (#CmdDrawIndexed() and #CmdDrawIndexedIndirect()), and the special index value is either 0xFFFFFFFF when the {@code indexType} parameter of #CmdBindIndexBuffer() is equal to #INDEX_TYPE_UINT32, or 0xFFFF when {@code indexType} is equal to #INDEX_TYPE_UINT16. Primitive restart is not allowed for \"{@code list}\" topologies.")
 }
 
 val VkPipelineTessellationStateCreateInfo = struct(VULKAN_PACKAGE, "VkPipelineTessellationStateCreateInfo") {
@@ -2556,7 +2559,7 @@ val VkViewport = struct(VULKAN_PACKAGE, "VkViewport") {
 		Structure specifying a viewport.
 
 		<h5>Description</h5>
-		The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value k / (2<sup>m</sup> - 1), where <code>k {elem} { 0, 1, ..., 2<sup>m</sup>-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).
+		The framebuffer depth coordinate <code>z<sub>f</sub></code> <b>may</b> be represented using either a fixed-point or floating-point representation. However, a floating-point representation <b>must</b> be used if the depth/stencil attachment has a floating-point depth component. If an <code>m</code>-bit fixed-point representation is used, we assume that it represents each value latexmath:[\frac{k}{2<sup>m - 1}], where <code>k {elem} { 0, 1, ..., 2</sup>m^-1 }</code>, as <code>k</code> (e.g. 1.0 is represented in binary as a string of all ones).
 
 		The viewport parameters shown in the above equations are found from these values as
 
@@ -2945,11 +2948,10 @@ val VkGraphicsPipelineCreateInfo = struct(VULKAN_PACKAGE, "VkGraphicsPipelineCre
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is not {@code -1}, {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
-			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is not {@code -1}, it <b>must</b> be a valid index into the calling command&#8217;s {@code pCreateInfos} parameter</li>
-			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be {@code -1}</li>
-			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, {@code basePipelineHandle} <b>must</b> be a valid {@code VkPipeline} handle</li>
-			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, it <b>must</b> be a valid handle to a graphics {@code VkPipeline}</li>
+			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is -1, {@code basePipelineHandle} <b>must</b> be a valid handle to a graphics {@code VkPipeline}</li>
+			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be a valid index into the calling command&#8217;s {@code pCreateInfos} parameter</li>
+			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is not -1, {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
+			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be -1</li>
 			<li>The {@code stage} member of each element of {@code pStages} <b>must</b> be unique</li>
 			<li>The {@code stage} member of one element of {@code pStages} <b>must</b> be #SHADER_STAGE_VERTEX_BIT</li>
 			<li>The {@code stage} member of any given element of {@code pStages} <b>must</b> not be #SHADER_STAGE_COMPUTE_BIT</li>
@@ -3039,11 +3041,10 @@ val VkComputePipelineCreateInfo = struct(VULKAN_PACKAGE, "VkComputePipelineCreat
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is not {@code -1}, {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
-			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is not {@code -1}, it <b>must</b> be a valid index into the calling command&#8217;s {@code pCreateInfos} parameter</li>
-			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be {@code -1}</li>
-			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, {@code basePipelineHandle} <b>must</b> be a valid {@code VkPipeline} handle</li>
-			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, it <b>must</b> be a valid handle to a compute {@code VkPipeline}</li>
+			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is -1, {@code basePipelineHandle} <b>must</b> be a valid handle to a compute {@code VkPipeline}</li>
+			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be a valid index into the calling command&#8217;s {@code pCreateInfos} parameter</li>
+			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is not -1, {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
+			<li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be -1</li>
 			<li>The {@code stage} member of {@code stage} <b>must</b> be #SHADER_STAGE_COMPUTE_BIT</li>
 			<li>The shader code for the entry point identified by {@code stage} and the rest of the state identified by this structure <b>must</b> adhere to the pipeline linking rules described in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#interfaces">Shader Interfaces</a> chapter</li>
 			<li>{@code layout} <b>must</b> be <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#descriptorsets-pipelinelayout-consistency">consistent</a> with the layout of the compute shader specified in {@code stage}</li>
@@ -3960,7 +3961,7 @@ val VkCommandBufferAllocateInfo = struct(VULKAN_PACKAGE, "VkCommandBufferAllocat
 
 	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-	VkCommandPool.member("commandPool", "the name of the command pool that the command buffers allocate their memory from.")
+	VkCommandPool.member("commandPool", "the command pool from which the command buffers are allocated.")
 	VkCommandBufferLevel.member("level", """determines whether the command buffers are primary or secondary command buffers. Possible values include:
 <pre><code>typedef enum VkCommandBufferLevel {
 ￿    VK_COMMAND_BUFFER_LEVEL_PRIMARY = 0,
@@ -4165,7 +4166,6 @@ val VkImageBlit = struct(VULKAN_PACKAGE, "VkImageBlit") {
 			<li>If either of the calling command&#8217;s {@code srcImage} or {@code dstImage} parameters are of {@code VkImageType} #IMAGE_TYPE_3D, the {@code baseArrayLayer} and {@code layerCount} members of both {@code srcSubresource} and {@code dstSubresource} <b>must</b> be 0 and 1, respectively</li>
 			<li>The {@code aspectMask} member of {@code srcSubresource} <b>must</b> specify aspects present in the calling command&#8217;s {@code srcImage}</li>
 			<li>The {@code aspectMask} member of {@code dstSubresource} <b>must</b> specify aspects present in the calling command&#8217;s {@code dstImage}</li>
-			<li>The {@code layerCount} member of {@code dstSubresource} <b>must</b> be equal to the {@code layerCount} member of {@code srcSubresource}</li>
 			<li>{@code srcOffset}[0].{@code x} and {@code srcOffset}[1].{@code x} <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource width</li>
 			<li>{@code srcOffset}[0].{@code y} and {@code srcOffset}[1].{@code y} <b>must</b> both be greater than or equal to 0 and less than or equal to the source image subresource height</li>
 			<li>If the calling command&#8217;s {@code srcImage} is of type #IMAGE_TYPE_1D, then {@code srcOffset}[0].y <b>must</b> be 0 and {@code srcOffset}[1].y <b>must</b> be 1.</li>
@@ -4502,7 +4502,9 @@ val VkImageMemoryBarrier = struct(VULKAN_PACKAGE, "VkImageMemoryBarrier") {
 
 		If {@code dstQueueFamilyIndex} is not equal to {@code srcQueueFamilyIndex}, and {@code dstQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-queue-transfers-acquire"> queue family acquire operation</a> for the specified image subresource range, and the first access scope includes no access, as if {@code srcAccessMask} was 0.
 
-		If {@code oldLayout} is not equal to {@code newLayout}, then the memory barrier defines an <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-image-layout-transitions"> image layout transition</a> for the specified image subresource range. Layout transitions that are performed via image memory barriers automatically happen-after layout transitions previously submitted to the same queue, and automatically happen-before layout transitions subsequently submitted to the same queue; this includes layout transitions that occur as part of a render pass instance, in both cases.
+		If {@code oldLayout} is not equal to {@code newLayout}, then the memory barrier defines an <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-image-layout-transitions"> image layout transition</a> for the specified image subresource range.
+
+		Layout transitions that are performed via image memory barriers execute in their entirety in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-submission-order"> submission order</a>, relative to other image layout transitions submitted to the same queue, including those performed by <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#renderpass"> render passes</a>. In effect there is an implicit execution dependency from each such layout transition to all layout transitions previously submitted to the same queue.
 
 		<h5>Valid Usage</h5>
 		<ul>

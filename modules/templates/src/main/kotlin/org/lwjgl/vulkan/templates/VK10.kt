@@ -204,7 +204,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			<li>If an allocation is scoped to the duration of a command, the allocator will use the #SYSTEM_ALLOCATION_SCOPE_COMMAND allocation scope. The most specific allocator available is used: if the object being created or manipulated has an allocator, that object&#8217;s allocator will be used, else if the parent {@code VkDevice} has an allocator it will be used, else if the parent {@code VkInstance} has an allocator it will be used. Else,</li>
 			<li>If an allocation is associated with an object of type {@code VkPipelineCache}, the allocator will use the #SYSTEM_ALLOCATION_SCOPE_CACHE allocation scope. The most specific allocator available is used (pipeline cache, else device, else instance). Else,</li>
 			<li>If an allocation is scoped to the lifetime of an object, that object is being created or manipulated by the command, and that object&#8217;s type is not {@code VkDevice} or {@code VkInstance}, the allocator will use an allocation scope of #SYSTEM_ALLOCATION_SCOPE_OBJECT. The most specific allocator available is used (object, else device, else instance). Else,</li>
-			<li>If an allocation is scoped to the lifetime of a device, the allocator will use an allocation scope of ename VK_SYSTEM_ALLOCATION_SCOPE_DEVICE. The most specific allocator available is used (device, else instance). Else,</li>
+			<li>If an allocation is scoped to the lifetime of a device, the allocator will use an allocation scope of #SYSTEM_ALLOCATION_SCOPE_DEVICE. The most specific allocator available is used (device, else instance). Else,</li>
 			<li>If the allocation is scoped to the lifetime of an instance and the instance has an allocator, its allocator will be used with an allocation scope of #SYSTEM_ALLOCATION_SCOPE_INSTANCE.</li>
 			<li>Otherwise an implementation will allocate memory through an alternative mechanism that is unspecified.</li>
 		</ul>
@@ -1594,7 +1594,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			<li>#IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL: <b>must</b> only be used as a read-only image in a shader (which <b>can</b> be read as a sampled image, combined image/sampler and/or input attachment). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled.</li>
 			<li>#IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL: <b>must</b> only be used as a source image of a transfer command (see the definition of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-pipeline-stages-transfer">#PIPELINE_STAGE_TRANSFER_BIT</a>). This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_SRC_BIT usage bit enabled.</li>
 			<li>#IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL: <b>must</b> only be used as a destination image of a transfer command. This layout is valid only for image subresources of images created with the #IMAGE_USAGE_TRANSFER_DST_BIT usage bit enabled.</li>
-			<li>#IMAGE_LAYOUT_PRESENT_SRC_KHR: <b>must</b> only be used for presenting a swapchain image for display. A swapchain&#8217;s image <b>must</b> be transitioned to this layout before calling #QueuePresentKHR(), and <b>must</b> be transitioned away from this layout after calling #AcquireNextImageKHR().</li>
+			<li>#IMAGE_LAYOUT_PRESENT_SRC_KHR: <b>must</b> only be used for presenting a presentable image for display. A swapchain&#8217;s image <b>must</b> be transitioned to this layout before calling #QueuePresentKHR(), and <b>must</b> be transitioned away from this layout after calling #AcquireNextImageKHR().</li>
 		</ul>
 
 		For each mechanism of accessing an image in the API, there is a parameter or structure member that controls the image layout used to access the image. For transfer commands, this is a parameter to the command (see <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#clears>> and <<copies>>). For use as a framebuffer attachment"> this is a member in the substructures of the ##VkRenderPassCreateInfo (see <<renderpass,Render Pass</a>). For use in a descriptor set, this is a member in the ##VkDescriptorImageInfo structure (see <<descriptorsets-updates>>). At the time that any command buffer command accessing an image executes on any queue, the layouts of the image subresources that are accessed <b>must</b> all match the layout specified via the API controlling those accesses.
@@ -1812,10 +1812,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			<li>#COMPARE_OP_NEVER: the test never passes.</li>
 			<li>#COMPARE_OP_LESS: the test passes when <code>R &lt; S</code>.</li>
 			<li>#COMPARE_OP_EQUAL: the test passes when <code>R = S</code>.</li>
-			<li>#COMPARE_OP_LESS_OR_EQUAL: the test passes when <code>R &#x2264; S</code>.</li>
+			<li>#COMPARE_OP_LESS_OR_EQUAL: the test passes when <code>R ≤ S</code>.</li>
 			<li>#COMPARE_OP_GREATER: the test passes when <code>R &gt; S</code>.</li>
-			<li>#COMPARE_OP_NOT_EQUAL: the test passes when <code>R &#x2260; S</code>.</li>
-			<li>#COMPARE_OP_GREATER_OR_EQUAL: the test passes when <code>R &#x2265; S</code>.</li>
+			<li>#COMPARE_OP_NOT_EQUAL: the test passes when <code>R ≠ S</code>.</li>
+			<li>#COMPARE_OP_GREATER_OR_EQUAL: the test passes when <code>R ≥ S</code>.</li>
 			<li>#COMPARE_OP_ALWAYS: the test always passes.</li>
 		</ul>
 
@@ -1883,10 +1883,10 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		The logical operations supported by Vulkan are summarized in the following table in which
 
 		<ul>
-			<li><code>&#x00ac;</code> is bitwise invert,</li>
-			<li><code>&#x2227;</code> is bitwise and,</li>
-			<li><code>&#x2228;</code> is bitwise or,</li>
-			<li><code>&#x2295;</code> is bitwise exclusive or,</li>
+			<li><code>¬</code> is bitwise invert,</li>
+			<li><code>∧</code> is bitwise and,</li>
+			<li><code>∨</code> is bitwise or,</li>
+			<li><code>⊕</code> is bitwise exclusive or,</li>
 			<li><code>s</code> is the fragment&#8217;s <code>R<sub>s0</sub>, G<sub>s0</sub>, B<sub>s0</sub></code> or <code>A<sub>s0</sub></code> component value for the fragment output corresponding to the color attachment being updated, and</li>
 			<li><code>d</code> is the color attachment&#8217;s <code>R, G, B</code> or <code>A</code> component value:</li>
 		</ul>
@@ -1896,20 +1896,20 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			<thead><tr><th>Mode</th><th>Operation</th></tr></thead>
 			<tbody>
 				<tr><td>#LOGIC_OP_CLEAR</td><td><code>0</code></td></tr>
-				<tr><td>#LOGIC_OP_AND</td><td><code>s &#x2227; d</code></td></tr>
-				<tr><td>#LOGIC_OP_AND_REVERSE</td><td><code>s &#x2227; &#x00ac; d</code></td></tr>
+				<tr><td>#LOGIC_OP_AND</td><td><code>s ∧ d</code></td></tr>
+				<tr><td>#LOGIC_OP_AND_REVERSE</td><td><code>s ∧ ¬ d</code></td></tr>
 				<tr><td>#LOGIC_OP_COPY</td><td><code>s</code></td></tr>
-				<tr><td>#LOGIC_OP_AND_INVERTED</td><td><code>&#x00ac; s &#x2227; d</code></td></tr>
+				<tr><td>#LOGIC_OP_AND_INVERTED</td><td><code>¬ s ∧ d</code></td></tr>
 				<tr><td>#LOGIC_OP_NO_OP</td><td><code>d</code></td></tr>
-				<tr><td>#LOGIC_OP_XOR</td><td><code>s &#x2295; d</code></td></tr>
-				<tr><td>#LOGIC_OP_OR</td><td><code>s &#x2228; d</code></td></tr>
-				<tr><td>#LOGIC_OP_NOR</td><td><code>&#x00ac; (s &#x2228; d)</code></td></tr>
-				<tr><td>#LOGIC_OP_EQUIVALENT</td><td><code>&#x00ac; (s &#x2295; d)</code></td></tr>
-				<tr><td>#LOGIC_OP_INVERT</td><td><code>&#x00ac; d</code></td></tr>
-				<tr><td>#LOGIC_OP_OR_REVERSE</td><td><code>s &#x2228; &#x00ac; d</code></td></tr>
-				<tr><td>#LOGIC_OP_COPY_INVERTED</td><td><code>&#x00ac; s</code></td></tr>
-				<tr><td>#LOGIC_OP_OR_INVERTED</td><td><code>&#x00ac; s &#x2228; d</code></td></tr>
-				<tr><td>#LOGIC_OP_NAND</td><td><code>&#x00ac; (s &#x2227; d)</code></td></tr>
+				<tr><td>#LOGIC_OP_XOR</td><td><code>s ⊕ d</code></td></tr>
+				<tr><td>#LOGIC_OP_OR</td><td><code>s ∨ d</code></td></tr>
+				<tr><td>#LOGIC_OP_NOR</td><td><code>¬ (s ∨ d)</code></td></tr>
+				<tr><td>#LOGIC_OP_EQUIVALENT</td><td><code>¬ (s ⊕ d)</code></td></tr>
+				<tr><td>#LOGIC_OP_INVERT</td><td><code>¬ d</code></td></tr>
+				<tr><td>#LOGIC_OP_OR_REVERSE</td><td><code>s ∨ ¬ d</code></td></tr>
+				<tr><td>#LOGIC_OP_COPY_INVERTED</td><td><code>¬ s</code></td></tr>
+				<tr><td>#LOGIC_OP_OR_INVERTED</td><td><code>¬ s ∨ d</code></td></tr>
+				<tr><td>#LOGIC_OP_NAND</td><td><code>¬ (s ∧ d)</code></td></tr>
 				<tr><td>#LOGIC_OP_SET</td><td>all 1s</td></tr>
 			</tbody>
 		</table>
@@ -2018,9 +2018,9 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		<table class="lwjgl">
 			<thead><tr><th>VkBlendOp</th><th>RGB Components</th><th>Alpha Component</th></tr></thead>
 			<tbody>
-				<tr><td>#BLEND_OP_ADD</td><td><code>R = R<sub>s0</sub> &#x00d7; S<sub>r</sub> + R<sub>d</sub> &#x00d7; D<sub>r</sub></code> <code>G = G<sub>s0</sub> &#x00d7; S<sub>g</sub> + G<sub>d</sub> &#x00d7; D<sub>g</sub></code> <code>B = B<sub>s0</sub> &#x00d7; S<sub>b</sub> + B<sub>d</sub> &#x00d7; D<sub>b</sub></code></td><td><code>A = A<sub>s0</sub> &#x00d7; S<sub>a</sub> + A<sub>d</sub> &#x00d7; D<sub>a</sub></code></td></tr>
-				<tr><td>#BLEND_OP_SUBTRACT</td><td><code>R = R<sub>s0</sub> &#x00d7; S<sub>r</sub> - R<sub>d</sub> &#x00d7; D<sub>r</sub></code> <code>G = G<sub>s0</sub> &#x00d7; S<sub>g</sub> - G<sub>d</sub> &#x00d7; D<sub>g</sub></code> <code>B = B<sub>s0</sub> &#x00d7; S<sub>b</sub> - B<sub>d</sub> &#x00d7; D<sub>b</sub></code></td><td><code>A = A<sub>s0</sub> &#x00d7; S<sub>a</sub> - A<sub>d</sub> &#x00d7; D<sub>a</sub></code></td></tr>
-				<tr><td>#BLEND_OP_REVERSE_SUBTRACT</td><td><code>R = R<sub>d</sub> &#x00d7; D<sub>r</sub> - R<sub>s0</sub> &#x00d7; S<sub>r</sub></code> <code>G = G<sub>d</sub> &#x00d7; D<sub>g</sub> - G<sub>s0</sub> &#x00d7; S<sub>g</sub></code> <code>B = B<sub>d</sub> &#x00d7; D<sub>b</sub> - B<sub>s0</sub> &#x00d7; S<sub>b</sub></code></td><td><code>A = A<sub>d</sub> &#x00d7; D<sub>a</sub> - A<sub>s0</sub> &#x00d7; S<sub>a</sub></code></td></tr>
+				<tr><td>#BLEND_OP_ADD</td><td><code>R = R<sub>s0</sub> × S<sub>r</sub> + R<sub>d</sub> × D<sub>r</sub></code> <code>G = G<sub>s0</sub> × S<sub>g</sub> + G<sub>d</sub> × D<sub>g</sub></code> <code>B = B<sub>s0</sub> × S<sub>b</sub> + B<sub>d</sub> × D<sub>b</sub></code></td><td><code>A = A<sub>s0</sub> × S<sub>a</sub> + A<sub>d</sub> × D<sub>a</sub></code></td></tr>
+				<tr><td>#BLEND_OP_SUBTRACT</td><td><code>R = R<sub>s0</sub> × S<sub>r</sub> - R<sub>d</sub> × D<sub>r</sub></code> <code>G = G<sub>s0</sub> × S<sub>g</sub> - G<sub>d</sub> × D<sub>g</sub></code> <code>B = B<sub>s0</sub> × S<sub>b</sub> - B<sub>d</sub> × D<sub>b</sub></code></td><td><code>A = A<sub>s0</sub> × S<sub>a</sub> - A<sub>d</sub> × D<sub>a</sub></code></td></tr>
+				<tr><td>#BLEND_OP_REVERSE_SUBTRACT</td><td><code>R = R<sub>d</sub> × D<sub>r</sub> - R<sub>s0</sub> × S<sub>r</sub></code> <code>G = G<sub>d</sub> × D<sub>g</sub> - G<sub>s0</sub> × S<sub>g</sub></code> <code>B = B<sub>d</sub> × D<sub>b</sub> - B<sub>s0</sub> × S<sub>b</sub></code></td><td><code>A = A<sub>d</sub> × D<sub>a</sub> - A<sub>s0</sub> × S<sub>a</sub></code></td></tr>
 				<tr><td>#BLEND_OP_MIN</td><td><code>R = min(R<sub>s0</sub>,R<sub>d</sub>)</code> <code>G = min(G<sub>s0</sub>,G<sub>d</sub>)</code> <code>B = min(B<sub>s0</sub>,B<sub>d</sub>)</code></td><td><code>A = min(A<sub>s0</sub>,A<sub>d</sub>)</code></td></tr>
 				<tr><td>#BLEND_OP_MAX</td><td><code>R = max(R<sub>s0</sub>,R<sub>d</sub>)</code> <code>G = max(G<sub>s0</sub>,G<sub>d</sub>)</code> <code>B = max(B<sub>s0</sub>,B<sub>d</sub>)</code></td><td><code>A = max(A<sub>s0</sub>,A<sub>d</sub>)</code></td></tr>
 			</tbody>
@@ -2943,7 +2943,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 			<dd>The returned function pointer <b>must</b> only be called with a dispatchable object (the first parameter) that is {@code instance} or a child of {@code instance}. e.g. {@code VkInstance}, {@code VkPhysicalDevice}, {@code VkDevice}, {@code VkQueue}, or {@code VkCommandBuffer}.</dd>
 
 			<dt>2</dt>
-			<dd>An “available extension” is an extension function supported by any of the loader, driver or layer.</dd>
+			<dd>An "{@code available extension}" is an extension function supported by any of the loader, driver or layer.</dd>
 		</dl>
 
 		<h5>Valid Usage (Implicit)</h5>
@@ -3379,6 +3379,8 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		Fence and semaphore operations submitted with #QueueSubmit() have additional ordering constraints compared to other submission commands, with dependencies involving previous and subsequent queue operations. Information about these additional constraints can be found in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores"> semaphore</a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-fences"> fence</a> sections of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> the synchronization chapter</a>.
 
 		Details on the interaction of {@code pWaitDstStageMask} with synchronization are described in the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-semaphores-waiting"> semaphore wait operation</a> section of <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> the synchronization chapter</a>.
+
+		The order that batches appear in {@code pSubmits} is used to determine <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-submission-order"> submission order</a>, and thus all the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization-implicit"> implicit ordering guarantees</a> that respect it. Other than these implicit ordering guarantees and any <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#synchronization"> explicit synchronization primitives</a>, these batches <b>may</b> overlap or otherwise execute out of order.
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -7029,7 +7031,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		""",
 
 		VkDevice.IN("device", "the logical device that owns the command pool."),
-		VkCommandPool.IN("commandPool", "the handle of the command pool that the command buffers were allocated from."),
+		VkCommandPool.IN("commandPool", "the command pool from which the command buffers were allocated."),
 		AutoSize("pCommandBuffers")..uint32_t.IN("commandBufferCount", "the length of the {@code pCommandBuffers} array."),
 		const..VkCommandBuffer.p.IN("pCommandBuffers", "an array of handles of command buffers to free.")
 	)
@@ -7760,7 +7762,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 
 		<h5>Valid Usage</h5>
 		<ul>
-			<li>Any given element of {@code pDescriptorSets} <b>must</b> have been allocated with a {@code VkDescriptorSetLayout} that matches (is the same as, or defined identically to) the {@code VkDescriptorSetLayout} at set <em>n</em> in {@code layout}, where <em>n</em> is the sum of {@code firstSet} and the index into {@code pDescriptorSets}</li>
+			<li>Any given element of {@code pDescriptorSets} <b>must</b> have been allocated with a {@code VkDescriptorSetLayout} that matches (is the same as, or identically defined as) the {@code VkDescriptorSetLayout} at set <em>n</em> in {@code layout}, where <em>n</em> is the sum of {@code firstSet} and the index into {@code pDescriptorSets}</li>
 			<li>{@code dynamicOffsetCount} <b>must</b> be equal to the total number of dynamic descriptors in {@code pDescriptorSets}</li>
 			<li>The sum of {@code firstSet} and {@code descriptorSetCount} <b>must</b> be less than or equal to ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount} provided when {@code layout} was created</li>
 			<li>{@code pipelineBindPoint} <b>must</b> be supported by the {@code commandBuffer}&#8217;s parent {@code VkCommandPool}&#8217;s queue family</li>
@@ -8092,8 +8094,8 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <b>must</b> have valid buffers bound</li>
 			<li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS</li>
 			<li>If the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state <b>must</b> have been set on the current command buffer</li>
-			<li>If {@code drawCount} is equal to 1, <code>(offset &#x002b; sizeof(##VkDrawIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
-			<li>If {@code drawCount} is greater than 1, <code>(stride &#x00d7; (drawCount - 1) + offset &#x002b; sizeof(##VkDrawIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
+			<li>If {@code drawCount} is equal to 1, <code>(offset sizeof(##VkDrawIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
+			<li>If {@code drawCount} is greater than 1, <code>(stride × (drawCount - 1) + offset sizeof(##VkDrawIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
 			<li>{@code drawCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDrawIndirectCount}</li>
 			<li>Every input attachment used by the current subpass <b>must</b> be bound to the pipeline via a descriptor set</li>
 			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
@@ -8169,8 +8171,8 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <b>must</b> have valid buffers bound</li>
 			<li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS</li>
 			<li>If the {@code VkPipeline} object currently bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state <b>must</b> have been set on the current command buffer</li>
-			<li>If {@code drawCount} is equal to 1, <code>(offset &#x002b; sizeof(##VkDrawIndexedIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
-			<li>If {@code drawCount} is greater than 1, <code>(stride &#x00d7; (drawCount - 1) + offset &#x002b; sizeof(##VkDrawIndexedIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
+			<li>If {@code drawCount} is equal to 1, <code>(offset sizeof(##VkDrawIndexedIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
+			<li>If {@code drawCount} is greater than 1, <code>(stride × (drawCount - 1) + offset sizeof(##VkDrawIndexedIndirectCommand))</code> <b>must</b> be less than or equal to the size of {@code buffer}</li>
 			<li>{@code drawCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxDrawIndirectCount}</li>
 			<li>Every input attachment used by the current subpass <b>must</b> be bound to the pipeline via a descriptor set</li>
 			<li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} currently bound to #PIPELINE_BIND_POINT_GRAPHICS uses unnormalized coordinates, it <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
@@ -8542,11 +8544,11 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 			<li>
 				For each destination texel, the integer coordinate of that texel is converted to an unnormalized texture coordinate, using the effective inverse of the equations described in <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#textures-unnormalized-to-integer">unnormalized to integer conversion</a>:
 				<dl>
-			<dd><code>u<sub>base</sub> = i + &#x00bd;</code></dd>
+			<dd><code>u<sub>base</sub> = i + ½</code></dd>
 
-					<dd><code>v<sub>base</sub> = j + &#x00bd;</code></dd>
+					<dd><code>v<sub>base</sub> = j + ½</code></dd>
 
-					<dd><code>w<sub>base</sub> = k + &#x00bd;</code></dd>
+					<dd><code>w<sub>base</sub> = k + ½</code></dd>
 				</dl>
 			</li>
 			<li>
@@ -8848,7 +8850,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 
 		The source data is copied from the user pointer to the command buffer when the command is called.
 
-		#CmdUpdateBuffer() is only allowed outside of a render pass. This command is treated as “transfer” operation, for the purposes of synchronization barriers. The #BUFFER_USAGE_TRANSFER_DST_BIT <b>must</b> be specified in {@code usage} of ##VkBufferCreateInfo in order for the buffer to be compatible with #CmdUpdateBuffer().
+		#CmdUpdateBuffer() is only allowed outside of a render pass. This command is treated as "{@code transfer}" operation, for the purposes of synchronization barriers. The #BUFFER_USAGE_TRANSFER_DST_BIT <b>must</b> be specified in {@code usage} of ##VkBufferCreateInfo in order for the buffer to be compatible with #CmdUpdateBuffer().
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -8909,7 +8911,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 ￿    uint32_t                                    data);</code></pre>
 
 		<h5>Description</h5>
-		#CmdFillBuffer() is treated as “transfer” operation for the purposes of synchronization barriers. The #BUFFER_USAGE_TRANSFER_DST_BIT <b>must</b> be specified in {@code usage} of ##VkBufferCreateInfo in order for the buffer to be compatible with #CmdFillBuffer().
+		#CmdFillBuffer() is treated as "{@code transfer}" operation for the purposes of synchronization barriers. The #BUFFER_USAGE_TRANSFER_DST_BIT <b>must</b> be specified in {@code usage} of ##VkBufferCreateInfo in order for the buffer to be compatible with #CmdFillBuffer().
 
 		<h5>Valid Usage</h5>
 		<ul>
@@ -9948,6 +9950,10 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 		<h5>Valid Usage</h5>
 		<ul>
 			<li>If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the ##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with #IMAGE_USAGE_COLOR_ATTACHMENT_BIT set</li>
+		</ul>
+
+		<h5>Valid Usage</h5>
+		<ul>
 			<li>If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the ##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is #IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT set</li>
 			<li>If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the ##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is #IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with #IMAGE_USAGE_SAMPLED_BIT or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT set</li>
 			<li>If any of the {@code initialLayout} or {@code finalLayout} member of the ##VkAttachmentDescription structures or the {@code layout} member of the ##VkAttachmentReference structures specified when creating the render pass specified in the {@code renderPass} member of {@code pRenderPassBegin} is #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL then the corresponding attachment image subresource of the framebuffer specified in the {@code framebuffer} member of {@code pRenderPassBegin} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT set</li>

@@ -22,10 +22,10 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", postfi
 			<dd>23</dd>
 
 			<dt><b>Last Modified Date</b></dt>
-			<dd>2016-04-23</dd>
+			<dd>2017-01-31</dd>
 
 			<dt><b>Revision</b></dt>
-			<dd>3</dd>
+			<dd>4</dd>
 
 			<dt><b>IP Status</b></dt>
 			<dd>No known IP claims.</dd>
@@ -33,6 +33,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", postfi
 			<dt><b>Dependencies</b></dt>
 			<dd><ul>
 				<li>This extension is written against version 1.0.11 of the Vulkan API.</li>
+				<li>Requires VK_EXT_debug_report.</li>
 			</ul></dd>
 
 			<dt><b>Contributors</b></dt>
@@ -144,7 +145,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", postfi
 	IntConstant(
 		"The extension specification version.",
 
-		"EXT_DEBUG_MARKER_SPEC_VERSION".."3"
+		"EXT_DEBUG_MARKER_SPEC_VERSION".."4"
 	)
 
 	StringConstant(

@@ -92,6 +92,80 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 
 		If the application returns #TRUE from its callback and the Vulkan call being aborted returns a {@code VkResult}, the layer will return #ERROR_VALIDATION_FAILED_EXT.
 
+		The object types are:
+
+		<pre><code>typedef enum VkDebugReportObjectTypeEXT {
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT = 0,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT = 1,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT = 2,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT = 3,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT = 4,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT = 5,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT = 6,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT = 7,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT = 8,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT = 9,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT = 10,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT = 11,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT = 12,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT = 13,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT = 14,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT = 15,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT = 16,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT = 17,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT = 18,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT = 19,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT = 20,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT = 21,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT = 22,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT = 23,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT = 24,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT = 25,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT = 26,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT = 27,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT = 28,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT = 29,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT = 30,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT = 31,
+￿    VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT = 32,
+} VkDebugReportObjectTypeEXT;</code></pre>
+
+		<ul>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT is an unknown object.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT is a {@code VkInstance}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT is a {@code VkPhysicalDevice}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT is a {@code VkDevice}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT is a {@code VkQueue}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT is a {@code VkSemaphore}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT is a {@code VkCommandBuffer}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT is a {@code VkFence}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT is a {@code VkDeviceMemory}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT is a {@code VkBuffer}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT is a {@code VkImage}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT is a {@code VkEvent}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT is a {@code VkQueryPool}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT is a {@code VkBufferView}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT is a {@code VkImageView}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT is a {@code VkShaderModule}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT is a {@code VkPipelineCache}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT is a {@code VkPipelineLayout}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT is a {@code VkRenderPass}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT is a {@code VkPipeline}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT is a {@code VkDescriptorSetLayout}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT is a {@code VkSampler}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT is a {@code VkDescriptorPool}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT is a {@code VkDescriptorSet}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT is a {@code VkFramebuffer}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT is a {@code VkCommandPool}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT is a {@code VkSurfaceKHR}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT is a {@code VkSwapchainKHR}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT is a {@code VkDebugReportCallbackEXT}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT is a {@code VkDisplayKHR}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT is a {@code VkDisplayModeKHR}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT is a {@code VkObjectTableNVX}.</li>
+			<li>#DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT is a {@code VkIndirectCommandsLayoutNVX}.</li>
+		</ul>
+
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
 		The primary expected use of #ERROR_VALIDATION_FAILED_EXT is for validation layer testing. It is not expected that an application would see this error code during normal use of the validation layers.
 		</div>
@@ -118,14 +192,14 @@ val VkSurfaceCapabilitiesKHR = struct(VULKAN_PACKAGE, "VkSurfaceCapabilitiesKHR"
 		"""
 
 	uint32_t.member("minImageCount", "the minimum number of images the specified device supports for a swapchain created for the surface, and will be at least one.")
-	uint32_t.member("maxImageCount", "the maximum number of images the specified device supports for a swapchain created for the surface, and will be either 0, or greater than or equal to {@code minImageCount}. A value of 0 means that there is no limit on the number of images, though there <b>may</b> be limits related to the total amount of memory used by swapchain images.")
+	uint32_t.member("maxImageCount", "the maximum number of images the specified device supports for a swapchain created for the surface, and will be either 0, or greater than or equal to {@code minImageCount}. A value of 0 means that there is no limit on the number of images, though there <b>may</b> be limits related to the total amount of memory used by presentable images.")
 	VkExtent2D.member("currentExtent", "the current width and height of the surface, or the special value <code>(0xFFFFFFFF, 0xFFFFFFFF)</code> indicating that the surface size will be determined by the extent of a swapchain targeting the surface.")
 	VkExtent2D.member("minImageExtent", "contains the smallest valid swapchain extent for the surface on the specified device. The {@code width} and {@code height} of the extent will each be less than or equal to the corresponding {@code width} and {@code height} of {@code currentExtent}, unless {@code currentExtent} has the special value described above.")
 	VkExtent2D.member("maxImageExtent", "contains the largest valid swapchain extent for the surface on the specified device. The {@code width} and {@code height} of the extent will each be greater than or equal to the corresponding {@code width} and {@code height} of {@code minImageExtent}. The {@code width} and {@code height} of the extent will each be greater than or equal to the corresponding {@code width} and {@code height} of {@code currentExtent}, unless {@code currentExtent} has the special value described above.")
-	uint32_t.member("maxImageArrayLayers", "the maximum number of layers swapchain images <b>can</b> have for a swapchain created for this device and surface, and will be at least one.")
+	uint32_t.member("maxImageArrayLayers", "the maximum number of layers presentable images <b>can</b> have for a swapchain created for this device and surface, and will be at least one.")
 	VkSurfaceTransformFlagsKHR.member("supportedTransforms", "a bitmask of {@code VkSurfaceTransformFlagBitsKHR}, describing the presentation transforms supported for the surface on the specified device, and at least one bit will be set.")
 	VkSurfaceTransformFlagBitsKHR.member("currentTransform", "the surface&#8217;s current transform relative to the presentation engine&#8217;s natural orientation, as described by {@code VkSurfaceTransformFlagBitsKHR}.")
-	VkCompositeAlphaFlagsKHR.member("supportedCompositeAlpha", "a bitmask of {@code VkCompositeAlphaFlagBitsKHR}, representing the alpha compositing modes supported by the presentation engine for the surface on the specified device, and at least one bit will be set. Opaque composition <b>can</b> be achieved in any alpha compositing mode by either using a swapchain image format that has no alpha component, or by ensuring that all pixels in the swapchain images have an alpha value of 1.0.")
+	VkCompositeAlphaFlagsKHR.member("supportedCompositeAlpha", "a bitmask of {@code VkCompositeAlphaFlagBitsKHR}, representing the alpha compositing modes supported by the presentation engine for the surface on the specified device, and at least one bit will be set. Opaque composition <b>can</b> be achieved in any alpha compositing mode by either using an image format that has no alpha component, or by ensuring that all pixels in the presentable images have an alpha value of 1.0.")
 	VkImageUsageFlags.member("supportedUsageFlags", "a bitmask of {@code VkImageUsageFlagBits} representing the ways the application <b>can</b> use the presentable images of a swapchain created for the surface on the specified device. #IMAGE_USAGE_COLOR_ATTACHMENT_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional usages.")
 }
 
@@ -829,7 +903,7 @@ val VkExportMemoryWin32HandleInfoNV = struct(VULKAN_PACKAGE, "VkExportMemoryWin3
 		specify security attributes and access rights for Win32 memory handles.
 
 		<h5>Description</h5>
-		If this structure is not present, or if {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for “Synchronization Object Security and Access Rights”[1]. Further, if the structure is not present, the access rights will be
+		If this structure is not present, or if {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"[1]. Further, if the structure is not present, the access rights will be
 
 		{@code DXGI_SHARED_RESOURCE_READ} | {@code DXGI_SHARED_RESOURCE_WRITE}
 
@@ -1022,6 +1096,11 @@ val VkPhysicalDeviceSparseImageFormatInfo2KHR = struct(VULKAN_PACKAGE, "VkPhysic
 	documentation =
 		"""
 		Structure specifying sparse image format inputs.
+
+		<h5>Valid Usage</h5>
+		<ul>
+			<li>{@code samples} <b>must</b> be a bit value that is set in ##VkImageFormatProperties{@code ::sampleCounts} returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, and {@code usage} equal to those in this command and {@code flags} equal to the value that is set in ##VkImageCreateInfo{@code ::flags} when the image is created</li>
+		</ul>
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>

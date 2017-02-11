@@ -48,7 +48,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
 
 		{@code VK_KHR_sampler_mirror_clamp_to_edge} extends the set of sampler address modes to include an additional mode (#SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE) that effectively uses a texture map twice as large as the original image in which the additional half of the new image is a mirror image of the original image.
 
-		This new mode relaxes the need to generate images whose opposite edges match by using the original image to generate a matching “mirror image”. This mode allows the texture to be mirrored only once in the negative s, t, and r directions.
+		This new mode relaxes the need to generate images whose opposite edges match by using the original image to generate a matching "{@code mirror image}". This mode allows the texture to be mirrored only once in the negative s, t, and r directions.
 
 		<h5>Example</h5>
 		Creating a sampler with the new address mode in each dimension

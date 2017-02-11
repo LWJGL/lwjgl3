@@ -22,10 +22,10 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 			<dd>12</dd>
 
 			<dt><b>Last Modified Date</b></dt>
-			<dd>2016-12-08</dd>
+			<dd>2017-01-31</dd>
 
 			<dt><b>Revision</b></dt>
-			<dd>4</dd>
+			<dd>5</dd>
 
 			<dt><b>IP Status</b></dt>
 			<dd>No known IP claims.</dd>
@@ -106,7 +106,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 	IntConstant(
 		"The extension specification version.",
 
-		"EXT_DEBUG_REPORT_SPEC_VERSION".."4"
+		"EXT_DEBUG_REPORT_SPEC_VERSION".."5"
 	)
 
 	StringConstant(
@@ -135,6 +135,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", postfi
 		For more information, see:
 
 		<ul>
+			<li>The reference page for ##VkDebugReportCallbackEXT, where this interface is defined.</li>
 			<li>The See Also section for other reference pages using this type.</li>
 			<li>The Vulkan Specification.</li>
 		</ul>

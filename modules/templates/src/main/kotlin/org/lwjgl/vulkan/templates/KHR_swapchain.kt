@@ -246,7 +246,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", postfix = KHR)
 
 		VkDevice.IN("device", "the device associated with {@code swapchain}."),
 		VkSwapchainKHR.IN("swapchain", "the swapchain to query."),
-		AutoSize("pSwapchainImages")..Check(1)..uint32_t_p.INOUT("pSwapchainImageCount", "a pointer to an integer related to the number of swapchain images available or queried, as described below."),
+		AutoSize("pSwapchainImages")..Check(1)..uint32_t_p.INOUT("pSwapchainImageCount", "a pointer to an integer related to the number of presentable images available or queried, as described below."),
 		nullable..VkImage.p.OUT("pSwapchainImages", "either {@code NULL} or a pointer to an array of {@code VkImage} handles.")
 	)
 
