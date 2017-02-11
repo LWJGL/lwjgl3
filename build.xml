@@ -280,8 +280,8 @@
 		<local name="generated-uptodate"/>
 		<uptodate property="generated-uptodate" targetfile="${src.generated}/touch.txt">
 			<srcfiles dir="${config}" includes="build-bindings.xml"/>
-			<srcfiles dir="${bin.generator}" includes="touch.xml"/>
-			<srcfiles dir="${bin.templates}" includes="touch.xml"/>
+			<srcfiles dir="${bin.generator}" includes="touch.txt"/>
+			<srcfiles dir="${bin.templates}" includes="touch.txt"/>
 		</uptodate>
 
 		<local name="bindings"/>
