@@ -326,70 +326,56 @@ public final class HelloVulkan {
 	/**
 	 * Return true if all layer names specified in {@code check_names} can be found in given {@code layer} properties.
 	 */
-	private static boolean demo_check_layers(PointerBuffer check_names, VkLayerProperties.Buffer layers) {
-		for ( int i = 0; i < check_names.remaining(); i++ ) {
+	private static PointerBuffer demo_check_layers(MemoryStack stack, VkLayerProperties.Buffer available, String... layers) {
+		PointerBuffer required = stack.mallocPointer(layers.length);
+		for ( int i = 0; i < layers.length; i++ ) {
 			boolean found = false;
 
-			for ( int j = 0; j < layers.capacity(); j++ ) {
-				layers.position(j);
-				if ( check_names.getStringASCII(i).equals(layers.layerNameString()) ) {
+			for ( int j = 0; j < available.capacity(); j++ ) {
+				available.position(j);
+				if ( layers[i].equals(available.layerNameString()) ) {
 					found = true;
 					break;
 				}
 			}
 
 			if ( !found ) {
-				System.err.format("Cannot find layer: %s\n", check_names.getStringASCII(i));
-				return false;
+				System.err.format("Cannot find layer: %s\n", layers[i]);
+				return null;
 			}
+
+			required.put(i, stack.ASCII(layers[i]));
 		}
 
-		return true;
+		return required;
 	}
 
 	private void demo_init_vk() {
-		String[] instance_validation_layers_alt1 = {
-			"VK_LAYER_LUNARG_standard_validation"
-		};
-
-		String[] instance_validation_layers_alt2 = {
-			"VK_LAYER_GOOGLE_threading", "VK_LAYER_LUNARG_parameter_validation",
-			"VK_LAYER_LUNARG_object_tracker", "VK_LAYER_LUNARG_image",
-			"VK_LAYER_LUNARG_core_validation", "VK_LAYER_LUNARG_swapchain",
-			"VK_LAYER_GOOGLE_unique_objects"
-		};
-
-		PointerBuffer instance_validation_layers = null;
 		try ( MemoryStack stack = stackPush() ) {
-			boolean validation_found = false;
+			PointerBuffer requiredLayers = null;
 			if ( VALIDATE ) {
 				check(vkEnumerateInstanceLayerProperties(ip, null));
 
 				if ( ip.get(0) > 0 ) {
-					VkLayerProperties.Buffer instance_layers = VkLayerProperties.mallocStack(ip.get(0), stack);
-					check(vkEnumerateInstanceLayerProperties(ip, instance_layers));
+					VkLayerProperties.Buffer availableLayers = VkLayerProperties.mallocStack(ip.get(0), stack);
+					check(vkEnumerateInstanceLayerProperties(ip, availableLayers));
 
-					instance_validation_layers = stack.mallocPointer(instance_validation_layers_alt1.length);
-					for ( int i = 0; i < instance_validation_layers_alt1.length; i++ ) {
-						instance_validation_layers.put(i, stack.ASCII(instance_validation_layers_alt1[i]));
-					}
-
-					validation_found = demo_check_layers(instance_validation_layers, instance_layers);
-
-					if ( !validation_found ) {
-						// use alternative set of validation layers
-						instance_validation_layers = stack.mallocPointer(instance_validation_layers_alt2.length);
-						for ( int i = 0; i < instance_validation_layers_alt1.length; i++ ) {
-							instance_validation_layers.put(i, stack.ASCII(instance_validation_layers_alt2[i]));
-						}
-
-						validation_found = demo_check_layers(instance_validation_layers, instance_layers);
-					}
+					requiredLayers = demo_check_layers(
+						stack, availableLayers,
+						"VK_LAYER_LUNARG_standard_validation"
+					);
+					if ( requiredLayers == null ) // use alternative set of validation layers
+						requiredLayers = demo_check_layers(
+							stack, availableLayers,
+							"VK_LAYER_GOOGLE_threading", "VK_LAYER_LUNARG_parameter_validation",
+							"VK_LAYER_LUNARG_object_tracker", "VK_LAYER_LUNARG_image",
+							"VK_LAYER_LUNARG_core_validation", "VK_LAYER_LUNARG_swapchain",
+							"VK_LAYER_GOOGLE_unique_objects"
+						);
 				}
 
-				if ( !validation_found ) {
+				if ( requiredLayers == null )
 					throw new IllegalStateException("vkEnumerateInstanceLayerProperties failed to find required validation layer.");
-				}
 			}
 
 			PointerBuffer required_extensions = glfwGetRequiredInstanceExtensions();
@@ -433,7 +419,7 @@ public final class HelloVulkan {
 				.pNext(NULL)
 				.flags(0)
 				.pApplicationInfo(app)
-				.ppEnabledLayerNames(instance_validation_layers)
+				.ppEnabledLayerNames(requiredLayers)
 				.ppEnabledExtensionNames(extension_names);
 			extension_names.clear();
 
@@ -1080,7 +1066,7 @@ public final class HelloVulkan {
 
 	private void demo_prepare_textures() {
 		int tex_format = VK_FORMAT_B8G8R8A8_UNORM;
-		int[][] tex_colors = {{0xffff0000, 0xff00ff00}};
+		int[][] tex_colors = { { 0xffff0000, 0xff00ff00 } };
 
 		try ( MemoryStack stack = stackPush() ) {
 			VkFormatProperties props = VkFormatProperties.mallocStack(stack);
@@ -1225,9 +1211,9 @@ public final class HelloVulkan {
 	private void demo_prepare_vertices() {
 		float[][] vb = {
 		    /*      position             texcoord */
-			{-1.0f, -1.0f, 0.25f, 0.0f, 0.0f},
-			{1.0f, -1.0f, 0.25f, 1.0f, 0.0f},
-			{0.0f, 1.0f, 1.0f, 0.5f, 1.0f},
+			{ -1.0f, -1.0f, 0.25f, 0.0f, 0.0f },
+			{ 1.0f, -1.0f, 0.25f, 1.0f, 0.0f },
+			{ 0.0f, 1.0f, 1.0f, 0.5f, 1.0f },
 		};
 
 		try ( MemoryStack stack = stackPush() ) {
