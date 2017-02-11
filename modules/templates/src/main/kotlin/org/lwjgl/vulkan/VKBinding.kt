@@ -80,7 +80,6 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
 	}
 
 	init {
-		javaImport("static org.lwjgl.system.MemoryUtil.*")
 		javaImport("static org.lwjgl.vulkan.VK.*")
 
 		documentation = "Defines the capabilities of a Vulkan {@code VkInstance}."
@@ -163,7 +162,6 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(VULKAN_PACKA
 		javaImport(
 			"java.util.Set",
 			"org.lwjgl.system.*",
-			"static org.lwjgl.system.MemoryUtil.*",
 			"static org.lwjgl.vulkan.VK.*"
 		)
 
