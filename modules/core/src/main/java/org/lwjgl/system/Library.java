@@ -40,6 +40,8 @@ public final class Library {
 
 	private static final Pattern NATIVES_JAR = Pattern.compile("/[\\w-]+?-natives-\\w+.jar!/");
 
+	private static final SystemLibraryLoader SYSTEM_LIBRARY_LOADER;
+
 	static {
 		if ( DEBUG ) {
 			apiLog("Version: " + Version.getVersion());
@@ -49,6 +51,8 @@ public final class Library {
 				"\tJVM: " + System.getProperty("java.vm.name") + " v" + System.getProperty("java.vm.version") + " by " + System.getProperty("java.vm.vendor")
 			);
 		}
+
+		SYSTEM_LIBRARY_LOADER = getSystemLibraryLoader();
 
 		loadSystem(Library.class, JNI_LIBRARY_NAME);
 	}
@@ -90,7 +94,7 @@ public final class Library {
 		// METHOD 2: org.lwjgl.librarypath
 		URL libURL = context.getResource("/" + libName);
 		if ( libURL == null ) {
-			if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
+			if ( loadSystem(context, libName, Configuration.LIBRARY_PATH) )
 				return;
 		} else {
 			// Always use the SLL if the library is found in the classpath,
@@ -101,7 +105,7 @@ public final class Library {
 					apiLog("\tUsing SharedLibraryLoader...");
 				// Extract from classpath and try org.lwjgl.librarypath
 				try ( FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL) ) {
-					if ( loadSystem(libName, Configuration.LIBRARY_PATH) )
+					if ( loadSystem(context, libName, Configuration.LIBRARY_PATH) )
 						return;
 				}
 			} catch (Exception e) {
@@ -112,7 +116,7 @@ public final class Library {
 
 		// METHOD 3: System.loadLibrary
 		try {
-			System.loadLibrary(name);
+			SYSTEM_LIBRARY_LOADER.loadLibrary(context, name);
 
 			// Success, but java.library.path might be still empty, or not include the library.
 			// In that case, ClassLoader::findLibrary was used to return the library path (e.g. OSGi does this with native libraries in bundles).
@@ -120,7 +124,7 @@ public final class Library {
 			Path libFile = paths == null ? null : findLibrary(paths, libName);
 			if ( libFile != null ) {
 				apiLog(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));
-				checkHash(libFile);
+				checkHash(context, libFile);
 			} else
 				apiLog("\tLoaded from a ClassLoader provided path.");
 			return;
@@ -132,12 +136,12 @@ public final class Library {
 		throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
 	}
 
-	private static boolean loadSystem(String libName, Configuration<String> property) {
+	private static boolean loadSystem(Class<?> context, String libName, Configuration<String> property) {
 		String paths = property.get();
-		return paths != null && loadSystem(libName, property.getProperty(), paths);
+		return paths != null && loadSystem(context, libName, property.getProperty(), paths);
 	}
 
-	private static boolean loadSystem(String libName, String property, String paths) {
+	private static boolean loadSystem(Class<?> context, String libName, String property, String paths) {
 		Path libFile = findLibrary(paths, libName);
 		if ( libFile == null ) {
 			apiLog(String.format("\t%s not found in %s=%s", libName, property, paths));
@@ -146,7 +150,7 @@ public final class Library {
 
 		System.load(libFile.toAbsolutePath().toString());
 		apiLog(String.format("\tLoaded from %s: %s", property, libFile));
-		checkHash(libFile);
+		checkHash(context, libFile);
 		return true;
 	}
 
@@ -203,7 +207,7 @@ public final class Library {
 		// METHOD 2: org.lwjgl.librarypath
 		URL libURL = context.getResource("/" + libName);
 		if ( libURL == null ) {
-			lib = loadNative(libName, Configuration.LIBRARY_PATH);
+			lib = loadNative(context, libName, Configuration.LIBRARY_PATH);
 			if ( lib != null )
 				return lib;
 		} else {
@@ -215,7 +219,7 @@ public final class Library {
 					apiLog("\tUsing SharedLibraryLoader...");
 				// Extract from classpath and try org.lwjgl.librarypath
 				try ( FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL) ) {
-					return loadNative(libName, Configuration.LIBRARY_PATH);
+					return loadNative(context, libName, Configuration.LIBRARY_PATH);
 				}
 			} catch (Exception e) {
 				if ( debugLoader )
@@ -245,7 +249,7 @@ public final class Library {
 			// Then java.library.path
 			String paths = System.getProperty(JAVA_LIBRARY_PATH);
 			if ( paths != null ) {
-				lib = loadNative(libName, JAVA_LIBRARY_PATH, paths);
+				lib = loadNative(context, libName, JAVA_LIBRARY_PATH, paths);
 				if ( lib != null )
 					return lib;
 			}
@@ -264,17 +268,17 @@ public final class Library {
 		throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
 	}
 
-	private static SharedLibrary loadNative(String libName, Configuration<String> property) {
+	private static SharedLibrary loadNative(Class<?> context, String libName, Configuration<String> property) {
 		String paths = property.get();
 		if ( paths != null ) {
-			SharedLibrary lib = loadNative(libName, property.getProperty(), paths);
+			SharedLibrary lib = loadNative(context, libName, property.getProperty(), paths);
 			if ( lib != null )
 				return lib;
 		}
 		return null;
 	}
 
-	private static SharedLibrary loadNative(String libName, String property, String paths) {
+	private static SharedLibrary loadNative(Class<?> context, String libName, String property, String paths) {
 		Path libFile = findLibrary(paths, libName);
 		if ( libFile == null ) {
 			apiLog(String.format("\t%s not found in %s=%s", libName, property, paths));
@@ -283,7 +287,7 @@ public final class Library {
 
 		SharedLibrary lib = apiCreateLibrary(libFile.toString());
 		apiLog(String.format("\tLoaded from %s: %s", property, libFile));
-		checkHash(libFile);
+		checkHash(context, libFile);
 		return lib;
 	}
 
@@ -338,9 +342,9 @@ public final class Library {
 		DEBUG_STREAM.println(
 			"[LWJGL] Failed to load a library. Possible solutions:\n" + (bundledWithLWJGL
 				? "\ta) Add the directory that contains the shared library to -Djava.library.path or -Dorg.lwjgl.librarypath.\n" +
-				"\tb) Add the JAR that contains the shared library to the classpath."
+				  "\tb) Add the JAR that contains the shared library to the classpath."
 				: "\ta) Install the library or the driver that provides the library.\n" +
-				"\tb) Ensure that the library is accessible from the system library paths."
+				  "\tb) Ensure that the library is accessible from the system library paths."
 			)
 		);
 
@@ -356,9 +360,10 @@ public final class Library {
 	 *
 	 * <p>This check prints a simple warning when there's a hash mismatch, to help diagnose installation/classpath issues. It is not a security feature.</p>
 	 *
+	 * @param context the class to use to discover the shared library hash in the classpath
 	 * @param libFile the library file loaded
 	 */
-	private static void checkHash(Path libFile) {
+	private static void checkHash(Class<?> context, Path libFile) {
 		if ( !CHECKS )
 			return;
 
@@ -366,7 +371,7 @@ public final class Library {
 			URL classesURL = null;
 			URL nativesURL = null;
 
-			Enumeration<URL> resources = Library.class.getClassLoader().getResources(libFile.getFileName() + ".sha1");
+			Enumeration<URL> resources = context.getClassLoader().getResources(libFile.getFileName() + ".sha1");
 			while ( resources.hasMoreElements() ) {
 				URL url = resources.nextElement();
 				if ( NATIVES_JAR.matcher(url.toExternalForm()).find() )
@@ -384,10 +389,10 @@ public final class Library {
 
 			if ( !Arrays.equals(expected, actual) )
 				DEBUG_STREAM.println("[LWJGL] [WARNING] Mismatch detected between the Java and native libraries.");
-		} catch (Exception e) {
+		} catch (Throwable t) {
 			if ( DEBUG ) {
 				apiLog("Failed to verify native library.");
-				e.printStackTrace();
+				t.printStackTrace();
 			}
 		}
 	}
@@ -409,6 +414,27 @@ public final class Library {
 				digest.update(buffer, 0, n);
 		}
 		return digest.digest();
+	}
+
+	private interface SystemLibraryLoader {
+		void loadLibrary(Class<?> context, String libname) throws Throwable;
+	}
+
+	private static SystemLibraryLoader getSystemLibraryLoader() {
+		try {
+			// Try to use Runtime.getRuntime().loadLibrary0 so that the correct ClassLoader is used, based on the class context.
+			try {
+				Method loadLibrary0 = Runtime.getRuntime().getClass().getDeclaredMethod("loadLibrary0", Class.class, String.class);
+				loadLibrary0.setAccessible(true);
+				return loadLibrary0::invoke;
+			} catch (NoSuchMethodException ignored) {
+				Method loadLibrary0 = Runtime.getRuntime().getClass().getDeclaredMethod("loadLibrary0", ClassLoader.class, String.class);
+				loadLibrary0.setAccessible(true);
+				return (context, libName) -> loadLibrary0.invoke(context.getClassLoader(), libName);
+			}
+		} catch (Exception ignored) {
+			return (context, libName) -> System.loadLibrary(libName);
+		}
 	}
 
 }
