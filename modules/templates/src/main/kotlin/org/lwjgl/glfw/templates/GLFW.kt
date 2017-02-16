@@ -435,7 +435,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 			{@code GetWindowAttrib}: Indicates whether the specified window is maximized, whether by the user or #MaximizeWindow().
 			""",
-			0x00020008)
+			0x00020008),
+		"CENTER_CURSOR".enum(
+			"""
+			{@code WindowHint}: Specifies whether the cursor should be centered over newly created full screen windows. This hint is ignored for windowed mode
+			windows.
+			""",
+			0x00020009)
 	).javaDocLinks
 
 	IntConstant(
@@ -637,6 +643,16 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"Specifies whether to activate frame autosaving on macOS. This is ignored on other platforms.",
 
 		"COCOA_FRAME_AUTOSAVE"..0x00023002
+	)
+
+	IntConstant(
+		"""
+		Specifies whether to enable Automatic Graphics Switching, i.e. to allow the system to choose the integrated GPU for the OpenGL context and move it
+		between GPUs if necessary or whether to force it to always run on the discrete GPU. This only affects systems with both integrated and discrete GPUs.
+		This is ignored on other platforms.
+		""",
+
+		"COCOA_GRAPHICS_SWITCHING"..0x00023003
 	)
 
 	val ClientAPIValues = IntConstant(
@@ -1025,6 +1041,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			tr(td("#AUTO_ICONIFY"), td("#TRUE"), td("#TRUE or #FALSE")),
 			tr(td("#FLOATING"), td("#FALSE"), td("#TRUE or #FALSE")),
 			tr(td("#MAXIMIZED"), td("#FALSE"), td("#TRUE or #FALSE")),
+			tr(td("#CENTER_CURSOR"), td("#TRUE"), td("#TRUE or #FALSE")),
 
 			tr(td("#RED_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
 			tr(td("#GREEN_BITS"), td("8"), td("0 to Integer#MAX_VALUE or #DONT_CARE")),
@@ -1045,19 +1062,21 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			tr(td("#DOUBLEBUFFER"), td("#TRUE"), td("#TRUE or #FALSE")),
 
 			tr(td("#CLIENT_API"), td("#OPENGL_API"), td(ClientAPIValues)),
+			tr(td("#CONTEXT_CREATION_API"), td("#NATIVE_CONTEXT_API"), td(ContextCreationAPIValues)),
 			tr(td("#CONTEXT_VERSION_MAJOR"), td("1"), td("Any valid major version number of the chosen client API")),
 			tr(td("#CONTEXT_VERSION_MINOR"), td("0"), td("Any valid minor version number of the chosen client API")),
 
 			tr(td("#CONTEXT_ROBUSTNESS"), td("#NO_ROBUSTNESS"), td(ContextRobustnessValues)),
 			tr(td("#CONTEXT_RELEASE_BEHAVIOR"), td("#ANY_RELEASE_BEHAVIOR"), td(ContextReleaseBehaviorValues)),
 			tr(td("#CONTEXT_NO_ERROR"), td("#FALSE"), td("#TRUE or #FALSE")),
-			tr(td("#CONTEXT_CREATION_API"), td("#NATIVE_CONTEXT_API"), td(ContextCreationAPIValues)),
 
 			tr(td("#OPENGL_FORWARD_COMPAT"), td("#FALSE"), td("#TRUE or #FALSE")),
 			tr(td("#OPENGL_DEBUG_CONTEXT"), td("#FALSE"), td("#TRUE or #FALSE")),
 			tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues)),
 
-			tr(td("#COCOA_RETINA_FRAMEBUFFER"), td("#TRUE"), td("#TRUE or #FALSE"))
+			tr(td("#COCOA_RETINA_FRAMEBUFFER"), td("#TRUE"), td("#TRUE or #FALSE")),
+			tr(td("#COCOA_FRAME_AUTOSAVE"), td("#FALSE"), td("#TRUE or #FALSE")),
+			tr(td("#COCOA_GRAPHICS_SWITCHING"), td("#FALSE"), td("#TRUE or #FALSE"))
 		)}
 
 		This function must only be called from the main thread.
@@ -2633,7 +2652,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		As this functions retrieves and searches one or more extension strings each call, it is recommended that you cache its results if it is going to be used
 		frequently. The extension strings will not change during the lifetime of a context, so there is no danger in doing this.
 
-		This function does not apply to Vulkan. If you are using Vulkan, see #GetRequiredInstanceExtensions(),
+		This function does not apply to Vulkan. If you are using Vulkan, see {@code glfwGetRequiredInstanceExtensions},
 		{@code vkEnumerateInstanceExtensionProperties} and {@code vkEnumerateDeviceExtensionProperties} instead.
 
 		This function may be called from any thread.
@@ -2654,7 +2673,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		A context must be current on the calling thread.  Calling this function without a current context will cause a #NO_CURRENT_CONTEXT error.
 
-		This function does not apply to Vulkan. If you are rendering with Vulkan, #GetInstanceProcAddress(), {@code vkGetInstanceProcAddr} and
+		This function does not apply to Vulkan. If you are rendering with Vulkan, {@code glfwGetInstanceProcAddress}, {@code vkGetInstanceProcAddr} and
 		{@code vkGetDeviceProcAddr} instead.
 
 		Notes:
