@@ -13,6 +13,7 @@
     <orderEntry type="library" scope="TEST" name="TestNG" level="project" />
     <orderEntry type="library" scope="TEST" name="JOML" level="project" />
     <orderEntry type="library" scope="TEST" name="jsr305" level="project" />
+    <orderEntry type="library" name="JMH" level="project" />
     <orderEntry type="module" module-name="core" scope="TEST" />
     <orderEntry type="module" module-name="assimp" scope="TEST" />
     <orderEntry type="module" module-name="bgfx" scope="TEST" />

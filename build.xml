@@ -571,6 +571,8 @@
                 <pathelement path="${lib}/java/jsr305.jar"/>
                 <pathelement path="${lib}/java/testng.jar"/>
                 <pathelement path="${lib}/java/joml.jar"/>
+                <pathelement path="${lib}/java/jmh-core.jar"/>
+                <pathelement path="${lib}/java/jmh-generator-annprocess.jar"/>
             </classpath>
 
             <!-- Demos -->
@@ -610,6 +612,9 @@
             <include name="org/lwjgl/demo/util/zstd/**" if:true="${binding.zstd}"/>
 
             <include name="org/lwjgl/demo/vulkan/**" if:set="test.vulkan"/>
+
+            <!-- Benchmarks -->
+            <include name="org/lwjgl/jmh/**"/>
         </lwjgl.javac>
     </target>
 
@@ -657,6 +662,9 @@
                 <pathelement path="${test.resources}"/>
                 <pathelement path="${lib}/java/testng.jar"/>
                 <pathelement path="${lib}/java/joml.jar"/>
+                <pathelement path="${lib}/java/jmh-core.jar"/>
+                <pathelement path="${lib}/java/commons-math3.jar"/>
+                <pathelement path="${lib}/java/jopt-simple.jar"/>
             </classpath>
 
             <jvmarg value="-Djava.library.path=${lib}"/>
