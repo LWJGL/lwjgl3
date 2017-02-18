@@ -1815,6 +1815,13 @@ nk_style_pop_vec2(ctx);""")}
 			nk_flags.IN("flags", "", EditFlags)
 		)
 
+		void(
+			"edit_unfocus",
+			"",
+
+			ctx
+		)
+
 		nk_flags(
 			"edit_string",
 			"",

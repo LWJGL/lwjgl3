@@ -1,5 +1,5 @@
 /*
- Nuklear - 1.32.0 - public domain
+ Nuklear - 1.33.0 - public domain
  no warrenty implied; use at your own risk.
  authored from 2015-2016 by Micha Mettke
 
@@ -356,10 +356,10 @@ extern "C" {
     #endif
   #endif
   #ifndef NK_SIZE_TYPE
-    #if (defined(__WIN32) || defined(WIN32)) && defined(_MSC_VER)
-      #define NK_SIZE_TYPE __int32
-    #elif defined(__WIN64) && defined(_MSC_VER)
-      #define NK_SIZE_TYPE __int64
+    #if defined(_WIN64) && defined(_MSC_VER)
+      #define NK_SIZE_TYPE unsigned __int64
+    #elif (defined(_WIN32) || defined(WIN32)) && defined(_MSC_VER)
+      #define NK_SIZE_TYPE unsigned __int32
     #elif defined(__GNUC__) || defined(__clang__)
       #if defined(__x86_64__) || defined(__ppc64__)
         #define NK_SIZE_TYPE unsigned long
@@ -371,10 +371,10 @@ extern "C" {
     #endif
   #endif
   #ifndef NK_POINTER_TYPE
-    #if (defined(__WIN32) || defined(WIN32)) && defined(_MSC_VER)
-      #define NK_POINTER_TYPE unsigned __int32
-    #elif defined(__WIN64) && defined(_MSC_VER)
+    #if defined(_WIN64) && defined(_MSC_VER)
       #define NK_POINTER_TYPE unsigned __int64
+    #elif (defined(_WIN32) || defined(WIN32)) && defined(_MSC_VER)
+      #define NK_POINTER_TYPE unsigned __int32
     #elif defined(__GNUC__) || defined(__clang__)
       #if defined(__x86_64__) || defined(__ppc64__)
         #define NK_POINTER_TYPE unsigned long
@@ -689,7 +689,7 @@ enum nk_panel_flags {
     NK_WINDOW_TITLE             = NK_FLAG(6), /* Forces a header at the top at the window showing the title */
     NK_WINDOW_SCROLL_AUTO_HIDE  = NK_FLAG(7), /* Automatically hides the window scrollbar if no user interaction: also requires delta time in `nk_context` to be set each frame */
     NK_WINDOW_BACKGROUND        = NK_FLAG(8), /* Always keep window in the background */
-    NK_WINDOW_SCALE_LEFT        = NK_FLAG(9), /* Puts window scaler in the left-ottom corner instead right-bottom*/
+    NK_WINDOW_SCALE_LEFT        = NK_FLAG(9) /* Puts window scaler in the left-ottom corner instead right-bottom*/
 };
 
 /* context */
@@ -893,7 +893,8 @@ NK_API float                    nk_propertyf(struct nk_context*, const char *nam
 NK_API double                   nk_propertyd(struct nk_context*, const char *name, double min, double val, double max, double step, float inc_per_pixel);
 
 /* Widgets: TextEdit */
-NK_API void                     nk_edit_focus(struct nk_context *ctx, nk_flags flags);
+NK_API void                     nk_edit_focus(struct nk_context*, nk_flags flags);
+NK_API void                     nk_edit_unfocus(struct nk_context*);
 NK_API nk_flags                 nk_edit_string(struct nk_context*, nk_flags, char *buffer, int *len, int max, nk_plugin_filter);
 NK_API nk_flags                 nk_edit_buffer(struct nk_context*, nk_flags, struct nk_text_edit*, nk_plugin_filter);
 NK_API nk_flags                 nk_edit_string_zero_terminated(struct nk_context*, nk_flags, char *buffer, int max, nk_plugin_filter);
@@ -3139,7 +3140,7 @@ template<typename T> struct nk_alignof{struct Big {T x; char c;}; enum {
 #define NK_SINT_MIN (-2147483647)
 #define NK_SINT_MAX 2147483647
 #define NK_UINT_MIN 0
-#define NK_UINT_MAX 4294967295
+#define NK_UINT_MAX 4294967295u
 
 /* Make sure correct type size:
  * This will fire with a negative subscript error if the type sizes
@@ -3740,7 +3741,7 @@ nk_strmatch_fuzzy_text(const char *str, int str_len,
 
         int next_match = *pattern_iter != '\0' &&
             nk_to_lower(pattern_letter) == nk_to_lower(str_letter);
-        int rematch = best_letter && nk_to_lower(*best_letter) == nk_to_lower(str_letter);
+        int rematch = best_letter && nk_to_upper(*best_letter) == nk_to_upper(str_letter);
 
         int advanced = next_match && best_letter;
         int pattern_repeat = best_letter && *pattern_iter != '\0';
@@ -13431,8 +13432,8 @@ nk_slider_behavior(nk_flags *state, struct nk_rect *logical_cursor,
     if (left_mouse_down && left_mouse_click_in_cursor)
     {
         float ratio = 0;
-        const float d = in->mouse.pos.x - (visual_cursor->x + visual_cursor->w / 2.0f);
-        const float pxstep = (bounds.w - (2 * style->padding.x)) / slider_steps;
+        const float d = in->mouse.pos.x - (visual_cursor->x+visual_cursor->w*0.5f);
+        const float pxstep = bounds.w / slider_steps;
 
         /* only update value if the next slider step is reached */
         *state = NK_WIDGET_STATE_ACTIVE;
@@ -13442,7 +13443,7 @@ nk_slider_behavior(nk_flags *state, struct nk_rect *logical_cursor,
             slider_value = NK_CLAMP(slider_min, slider_value, slider_max);
             ratio = (slider_value - slider_min)/slider_step;
             logical_cursor->x = bounds.x + (logical_cursor->w * ratio);
-            in->mouse.buttons[NK_BUTTON_LEFT].clicked_pos.x = logical_cursor->x + logical_cursor->w/2.0f;
+            in->mouse.buttons[NK_BUTTON_LEFT].clicked_pos.x = logical_cursor->x;
         }
     }
 
@@ -13572,6 +13573,10 @@ nk_do_slider(nk_flags *state,
         bounds.w = bounds.w - (2*button.w + 2*style->spacing.x);
     }
 
+    /* remove one cursor size to support visual cursor */
+    bounds.x += style->cursor_size.x*0.5f;
+    bounds.w -= style->cursor_size.x;
+
     /* make sure the provided values are correct */
     slider_max = NK_MAX(min, max);
     slider_min = NK_MIN(min, max);
@@ -13579,10 +13584,6 @@ nk_do_slider(nk_flags *state,
     slider_range = slider_max - slider_min;
     slider_steps = slider_range / step;
     cursor_offset = (slider_value - slider_min) / step;
-
-    /* remove one cursor size to support visual cursor */
-    bounds.x += style->cursor_size.x*0.5f;
-    bounds.w -= style->cursor_size.x;
 
     /* calculate cursor
     Basically you have two cursors. One for visual representation and interaction
@@ -13595,7 +13596,7 @@ nk_do_slider(nk_flags *state,
     visual_cursor.h = style->cursor_size.y;
     visual_cursor.w = style->cursor_size.x;
     visual_cursor.y = (bounds.y + bounds.h*0.5f) - visual_cursor.h*0.5f;
-    visual_cursor.x = (logical_cursor.x + logical_cursor.w*0.5f) - visual_cursor.w*0.5f;
+    visual_cursor.x = logical_cursor.x - visual_cursor.w*0.5f;
 
     slider_value = nk_slider_behavior(state, &logical_cursor, &visual_cursor,
         in, style, bounds, slider_min, slider_max, slider_value, step, slider_steps);
@@ -16093,6 +16094,12 @@ nk_clear(struct nk_context *ctx)
             continue;
         }
 
+        /* remove hotness from hidden or closed windows*/
+        if (((iter->flags & NK_WINDOW_HIDDEN) ||
+            (iter->flags & NK_WINDOW_CLOSED)) &&
+            iter == ctx->active)
+            ctx->active = iter->next;
+
         /* free unused popup windows */
         if (iter->popup.win && iter->popup.win->seq != ctx->seq) {
             nk_free_window(ctx, iter->popup.win);
@@ -16856,7 +16863,7 @@ nk_panel_end(struct nk_context *ctx)
             if (nk_input_is_mouse_down(in, NK_BUTTON_LEFT) && left_mouse_down && left_mouse_click_in_scaler) {
                 float delta_x = in->mouse.delta.x;
                 if (layout->flags & NK_WINDOW_SCALE_LEFT) {
-                    delta_x = -delta_x;
+                    delta_x =- delta_x;
                     window->bounds.x += in->mouse.delta.x;
                 }
                 window->bounds.w = NK_MAX(window_size.x, window->bounds.w + delta_x);
@@ -17305,7 +17312,7 @@ nk_begin_titled(struct nk_context *ctx, const char *name, const char *title,
          *      provided demo backends). */
         NK_ASSERT(win->seq != ctx->seq);
         win->seq = ctx->seq;
-        if (!ctx->active)
+        if (!ctx->active && !(win->flags & NK_WINDOW_HIDDEN))
             ctx->active = win;
     }
     if (win->flags & NK_WINDOW_HIDDEN) {
@@ -17719,9 +17726,9 @@ nk_window_show(struct nk_context *ctx, const char *name, enum nk_show_states s)
     title_hash = nk_murmur_hash(name, (int)title_len, NK_WINDOW_TITLE);
     win = nk_find_window(ctx, title_hash, name);
     if (!win) return;
-    if (s == NK_HIDDEN)
+    if (s == NK_HIDDEN) {
         win->flags |= NK_WINDOW_HIDDEN;
-    else win->flags &= ~(nk_flags)NK_WINDOW_HIDDEN;
+    } else win->flags &= ~(nk_flags)NK_WINDOW_HIDDEN;
 }
 
 NK_API void
@@ -18161,6 +18168,13 @@ nk_layout_row_template_end(struct nk_context *ctx)
     struct nk_window *win;
     struct nk_panel *layout;
 
+    int i = 0;
+    int variable_count = 0;
+    int min_variable_count = 0;
+    float min_fixed_width = 0.0f;
+    float total_fixed_width = 0.0f;
+    float max_variable_width = 0.0f;
+
     NK_ASSERT(ctx);
     NK_ASSERT(ctx->current);
     NK_ASSERT(ctx->current->layout);
@@ -18171,13 +18185,6 @@ nk_layout_row_template_end(struct nk_context *ctx)
     layout = win->layout;
     NK_ASSERT(layout->row.type == NK_LAYOUT_TEMPLATE);
     if (layout->row.type != NK_LAYOUT_TEMPLATE) return;
-
-    {int i = 0;
-    int variable_count = 0;
-    int min_variable_count = 0;
-    float min_fixed_width = 0.0f;
-    float total_fixed_width = 0.0f;
-    float max_variable_width = 0.0f;
     for (i = 0; i < layout->row.columns; ++i) {
         float width = layout->row.templates[i];
         if (width >= 0.0f) {
@@ -18204,7 +18211,7 @@ nk_layout_row_template_end(struct nk_context *ctx)
             float *width = &layout->row.templates[i];
             *width = (*width >= 0.0f)? *width: (*width < -1.0f && !enough_space)? -(*width): var_width;
         }
-    }}
+    }
 }
 
 NK_API void
@@ -19805,6 +19812,19 @@ nk_edit_focus(struct nk_context *ctx, nk_flags flags)
         win->edit.mode = NK_TEXT_EDIT_MODE_INSERT;
 }
 
+NK_API void
+nk_edit_unfocus(struct nk_context *ctx)
+{
+    struct nk_window *win;
+    NK_ASSERT(ctx);
+    NK_ASSERT(ctx->current);
+    if (!ctx || !ctx->current) return;
+
+    win = ctx->current;
+    win->edit.active = nk_false;
+    win->edit.name = 0;
+}
+
 NK_API nk_flags
 nk_edit_string(struct nk_context *ctx, nk_flags flags,
     char *memory, int *len, int max, nk_plugin_filter filter)
@@ -20552,7 +20572,6 @@ nk_group_scrolled_offset_begin(struct nk_context *ctx,
     win->layout = panel.layout;
     ctx->current = win;
     return 1;
-
 }
 
 NK_API void
@@ -20761,6 +20780,7 @@ nk_popup_begin(struct nk_context *ctx, enum nk_popup_type type,
     win = ctx->current;
     panel = win->layout;
     NK_ASSERT(!(panel->type & NK_PANEL_SET_POPUP) && "popups are not allowed to have popups");
+    (void)panel;
     title_len = (int)nk_strlen(title);
     title_hash = nk_murmur_hash(title, (int)title_len, NK_PANEL_POPUP);
 
@@ -20855,6 +20875,7 @@ nk_nonblock_begin(struct nk_context *ctx,
     win = ctx->current;
     panel = win->layout;
     NK_ASSERT(!(panel->type & NK_PANEL_SET_POPUP));
+    (void)panel;
     popup = win->popup.win;
     if (!popup) {
         /* create window for nonblocking popup */
