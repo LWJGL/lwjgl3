@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014 - 2016, Syoyo Fujita
+Copyright (c) 2014 - 2017, Syoyo Fujita
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -9,7 +9,7 @@ modification, are permitted provided that the following conditions are met:
     * Redistributions in binary form must reproduce the above copyright
       notice, this list of conditions and the following disclaimer in the
       documentation and/or other materials provided with the distribution.
-    * Neither the name of the <organization> nor the
+    * Neither the name of the Syoyo Fujita nor the
       names of its contributors may be used to endorse or promote products
       derived from this software without specific prior written permission.
 
@@ -412,7 +412,12 @@ extern int LoadEXRFromMemory(float *out_rgba, const unsigned char *memory,
 }
 #endif
 
+#endif  // TINYEXR_H_
+
 #ifdef TINYEXR_IMPLEMENTATION
+#ifndef TINYEXR_IMPLEMENTATION_DEIFNED
+#define TINYEXR_IMPLEMENTATION_DEIFNED
+
 #include <algorithm>
 #include <cassert>
 #include <cstdio>
@@ -427,9 +432,6 @@ extern int LoadEXRFromMemory(float *out_rgba, const unsigned char *memory,
 // C++11
 #include <cstdint>
 #endif  // __cplusplus > 199711L
-
-// @todo { remove including tinyexr.h }
-#include "tinyexr.h"
 
 #ifdef _OPENMP
 #include <omp.h>
@@ -735,7 +737,7 @@ namespace miniz {
 #ifndef MINIZ_HEADER_INCLUDED
 #define MINIZ_HEADER_INCLUDED
 
-#include <stdlib.h>
+//#include <stdlib.h>
 
 // Defines to completely disable specific portions of miniz.c:
 // If all macros here are defined the only functionality remaining will be
@@ -753,7 +755,7 @@ namespace miniz {
 #define MINIZ_NO_TIME
 
 // Define MINIZ_NO_ARCHIVE_APIS to disable all ZIP archive API's.
-//#define MINIZ_NO_ARCHIVE_APIS
+#define MINIZ_NO_ARCHIVE_APIS
 
 // Define MINIZ_NO_ARCHIVE_APIS to disable all writing related ZIP archive
 // API's.
@@ -783,7 +785,7 @@ namespace miniz {
 #endif
 
 #if !defined(MINIZ_NO_TIME) && !defined(MINIZ_NO_ARCHIVE_APIS)
-#include <time.h>
+//#include <time.h>
 #endif
 
 #if defined(_M_IX86) || defined(_M_X64) || defined(__i386__) || \
@@ -1804,8 +1806,8 @@ typedef unsigned char mz_validate_uint16[sizeof(mz_uint16) == 2 ? 1 : -1];
 typedef unsigned char mz_validate_uint32[sizeof(mz_uint32) == 4 ? 1 : -1];
 typedef unsigned char mz_validate_uint64[sizeof(mz_uint64) == 8 ? 1 : -1];
 
-#include <assert.h>
-#include <string.h>
+//#include <assert.h>
+//#include <string.h>
 
 #define MZ_ASSERT(x) assert(x)
 
@@ -4498,6 +4500,7 @@ void *tdefl_write_image_to_png_file_in_memory(const void *pImage, int w, int h,
 // ------------------- .ZIP archive reading
 
 #ifndef MINIZ_NO_ARCHIVE_APIS
+#error "No arvhive APIs"
 
 #ifdef MINIZ_NO_STDIO
 #define MZ_FILE void *
@@ -9431,7 +9434,7 @@ static void DecodePixelData(/* out */ unsigned char **out_images,
                                       static_cast<size_t>(num_lines) *
                                       pixel_data_size);
 
-    unsigned long dstLen = outBuf.size();
+    unsigned long dstLen = static_cast<unsigned long>(outBuf.size());
     assert(dstLen > 0);
     tinyexr::DecompressZip(reinterpret_cast<unsigned char *>(&outBuf.at(0)),
                            &dstLen, data_ptr,
@@ -9554,7 +9557,7 @@ static void DecodePixelData(/* out */ unsigned char **out_images,
                                       static_cast<size_t>(num_lines) *
                                       pixel_data_size);
 
-    unsigned long dstLen = outBuf.size();
+    unsigned long dstLen = static_cast<unsigned long>(outBuf.size());
     assert(dstLen > 0);
     tinyexr::DecompressRle(reinterpret_cast<unsigned char *>(&outBuf.at(0)),
                            dstLen, data_ptr,
@@ -11235,15 +11238,15 @@ size_t SaveEXRImageToMemory(const EXRImage *exr_image,
                (exr_header->compression_type == TINYEXR_COMPRESSIONTYPE_ZIP)) {
 #if TINYEXR_USE_MINIZ
       std::vector<unsigned char> block(
-          tinyexr::miniz::mz_compressBound(buf.size()));
+          tinyexr::miniz::mz_compressBound(static_cast<unsigned long>(buf.size())));
 #else
-      std::vector<unsigned char> block(compressBound(buf.size()));
+      std::vector<unsigned char> block(compressBound(static_cast<uLong>(buf.size())));
 #endif
       tinyexr::tinyexr_uint64 outSize = block.size();
 
       tinyexr::CompressZip(&block.at(0), outSize,
                            reinterpret_cast<const unsigned char *>(&buf.at(0)),
-                           buf.size());
+                           static_cast<unsigned long>(buf.size()));
 
       // 4 byte: scan line
       // 4 byte: data size
@@ -11268,7 +11271,7 @@ size_t SaveEXRImageToMemory(const EXRImage *exr_image,
 
       tinyexr::CompressRle(&block.at(0), outSize,
                            reinterpret_cast<const unsigned char *>(&buf.at(0)),
-                           buf.size());
+                           static_cast<unsigned long>(buf.size()));
 
       // 4 byte: scan line
       // 4 byte: data size
@@ -11682,10 +11685,10 @@ int LoadDeepEXR(DeepImage *deep_image, const char *filename, const char **err) {
 
     // decode pixel offset table.
     {
-      unsigned long dstLen = pixelOffsetTable.size() * sizeof(int);
+      unsigned long dstLen = static_cast<unsigned long>(pixelOffsetTable.size() * sizeof(int));
       tinyexr::DecompressZip(
           reinterpret_cast<unsigned char *>(&pixelOffsetTable.at(0)), &dstLen,
-          data_ptr + 28, static_cast<size_t>(packedOffsetTableSize));
+          data_ptr + 28, static_cast<unsigned long>(packedOffsetTableSize));
 
       assert(dstLen == pixelOffsetTable.size() * sizeof(int));
       for (size_t i = 0; i < static_cast<size_t>(data_width); i++) {
@@ -11702,7 +11705,7 @@ int LoadDeepEXR(DeepImage *deep_image, const char *filename, const char **err) {
       tinyexr::DecompressZip(
           reinterpret_cast<unsigned char *>(&sample_data.at(0)), &dstLen,
           data_ptr + 28 + packedOffsetTableSize,
-          static_cast<size_t>(packedSampleDataSize));
+          static_cast<unsigned long>(packedSampleDataSize));
       assert(dstLen == static_cast<unsigned long>(unpackedSampleDataSize));
     }
 
@@ -12378,6 +12381,6 @@ int SaveEXR(const float *data, int width, int height, int components,
 #pragma warning(pop)
 #endif
 
-#endif
+#endif  // TINYEXR_IMPLEMENTATION_DEIFNED
+#endif  // TINYEXR_IMPLEMENTATION
 
-#endif  // TINYEXR_H_
