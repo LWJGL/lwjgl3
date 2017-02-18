@@ -10,400 +10,399 @@ package org.lwjgl.util.yoga;
 
 import org.testng.annotations.Test;
 
-import static org.lwjgl.util.yoga.Yoga.*;
+import static org.lwjgl.util.yoga.YogaNode.*;
 import static org.testng.Assert.*;
 
-/* LWJGL port of the corresponding Yoga test. */
 public class YGFlexTest {
 	@Test
 	public void test_flex_basis_flex_grow_column() {
-		long root = YGNodeNew();
-		YGNodeStyleSetWidth(root, 100f);
-		YGNodeStyleSetHeight(root, 100f);
+		YogaNode root = new YogaNode();
+		root.setWidth(100f);
+		root.setHeight(100f);
 
-		long root_child0 = YGNodeNew();
-		YGNodeStyleSetFlexGrow(root_child0, 1f);
-		YGNodeStyleSetFlexBasis(root_child0, 50f);
-		YGNodeInsertChild(root, root_child0, 0);
+		YogaNode root_child0 = new YogaNode();
+		root_child0.setFlexGrow(1f);
+		root_child0.setFlexBasis(50f);
+		root.addChildAt(root_child0, 0);
 
-		long root_child1 = YGNodeNew();
-		YGNodeStyleSetFlexGrow(root_child1, 1f);
-		YGNodeInsertChild(root, root_child1, 1);
-		YGNodeStyleSetDirection(root, YGDirectionLTR);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		YogaNode root_child1 = new YogaNode();
+		root_child1.setFlexGrow(1f);
+		root.addChildAt(root_child1, 1);
+		root.setDirection(YogaDirection.LTR);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(75f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(75f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(75f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(25f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(75f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(25f, root_child1.getLayoutHeight(), 0.0f);
 
-		YGNodeStyleSetDirection(root, YGDirectionRTL);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		root.setDirection(YogaDirection.RTL);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(75f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(75f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(75f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(25f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(75f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(25f, root_child1.getLayoutHeight(), 0.0f);
 	}
 
 	@Test
 	public void test_flex_basis_flex_grow_row() {
-		long root = YGNodeNew();
-		YGNodeStyleSetFlexDirection(root, YGFlexDirectionRow);
-		YGNodeStyleSetWidth(root, 100f);
-		YGNodeStyleSetHeight(root, 100f);
+		YogaNode root = new YogaNode();
+		root.setFlexDirection(YogaFlexDirection.ROW);
+		root.setWidth(100f);
+		root.setHeight(100f);
 
-		long root_child0 = YGNodeNew();
-		YGNodeStyleSetFlexGrow(root_child0, 1f);
-		YGNodeStyleSetFlexBasis(root_child0, 50f);
-		YGNodeInsertChild(root, root_child0, 0);
+		YogaNode root_child0 = new YogaNode();
+		root_child0.setFlexGrow(1f);
+		root_child0.setFlexBasis(50f);
+		root.addChildAt(root_child0, 0);
 
-		long root_child1 = YGNodeNew();
-		YGNodeStyleSetFlexGrow(root_child1, 1f);
-		YGNodeInsertChild(root, root_child1, 1);
-		YGNodeStyleSetDirection(root, YGDirectionLTR);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		YogaNode root_child1 = new YogaNode();
+		root_child1.setFlexGrow(1f);
+		root.addChildAt(root_child1, 1);
+		root.setDirection(YogaDirection.LTR);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(75f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(75f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(75f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(25f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(75f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(25f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root_child1.getLayoutHeight(), 0.0f);
 
-		YGNodeStyleSetDirection(root, YGDirectionRTL);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		root.setDirection(YogaDirection.RTL);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(25f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(75f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(25f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(75f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(25f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(25f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root_child1.getLayoutHeight(), 0.0f);
 	}
 
 	@Test
 	public void test_flex_basis_flex_shrink_column() {
-		long root = YGNodeNew();
-		YGNodeStyleSetWidth(root, 100f);
-		YGNodeStyleSetHeight(root, 100f);
+		YogaNode root = new YogaNode();
+		root.setWidth(100f);
+		root.setHeight(100f);
 
-		long root_child0 = YGNodeNew();
-		YGNodeStyleSetFlexShrink(root_child0, 1f);
-		YGNodeStyleSetFlexBasis(root_child0, 100f);
-		YGNodeInsertChild(root, root_child0, 0);
+		YogaNode root_child0 = new YogaNode();
+		root_child0.setFlexShrink(1f);
+		root_child0.setFlexBasis(100f);
+		root.addChildAt(root_child0, 0);
 
-		long root_child1 = YGNodeNew();
-		YGNodeStyleSetFlexBasis(root_child1, 50f);
-		YGNodeInsertChild(root, root_child1, 1);
-		YGNodeStyleSetDirection(root, YGDirectionLTR);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		YogaNode root_child1 = new YogaNode();
+		root_child1.setFlexBasis(50f);
+		root.addChildAt(root_child1, 1);
+		root.setDirection(YogaDirection.LTR);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(50f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(50f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(50f, root_child1.getLayoutHeight(), 0.0f);
 
-		YGNodeStyleSetDirection(root, YGDirectionRTL);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		root.setDirection(YogaDirection.RTL);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(50f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(50f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(50f, root_child1.getLayoutHeight(), 0.0f);
 	}
 
 	@Test
 	public void test_flex_basis_flex_shrink_row() {
-		long root = YGNodeNew();
-		YGNodeStyleSetFlexDirection(root, YGFlexDirectionRow);
-		YGNodeStyleSetWidth(root, 100f);
-		YGNodeStyleSetHeight(root, 100f);
+		YogaNode root = new YogaNode();
+		root.setFlexDirection(YogaFlexDirection.ROW);
+		root.setWidth(100f);
+		root.setHeight(100f);
 
-		long root_child0 = YGNodeNew();
-		YGNodeStyleSetFlexShrink(root_child0, 1f);
-		YGNodeStyleSetFlexBasis(root_child0, 100f);
-		YGNodeInsertChild(root, root_child0, 0);
+		YogaNode root_child0 = new YogaNode();
+		root_child0.setFlexShrink(1f);
+		root_child0.setFlexBasis(100f);
+		root.addChildAt(root_child0, 0);
 
-		long root_child1 = YGNodeNew();
-		YGNodeStyleSetFlexBasis(root_child1, 50f);
-		YGNodeInsertChild(root, root_child1, 1);
-		YGNodeStyleSetDirection(root, YGDirectionLTR);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		YogaNode root_child1 = new YogaNode();
+		root_child1.setFlexBasis(50f);
+		root.addChildAt(root_child1, 1);
+		root.setDirection(YogaDirection.LTR);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(50f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(50f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(50f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(50f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root_child1.getLayoutHeight(), 0.0f);
 
-		YGNodeStyleSetDirection(root, YGDirectionRTL);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		root.setDirection(YogaDirection.RTL);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(50f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(50f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(50f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(50f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root_child1.getLayoutHeight(), 0.0f);
 	}
 
 	@Test
 	public void test_flex_shrink_to_zero() {
-		long root = YGNodeNew();
-		YGNodeStyleSetHeight(root, 75f);
+		YogaNode root = new YogaNode();
+		root.setHeight(75f);
 
-		long root_child0 = YGNodeNew();
-		YGNodeStyleSetWidth(root_child0, 50f);
-		YGNodeStyleSetHeight(root_child0, 50f);
-		YGNodeInsertChild(root, root_child0, 0);
+		YogaNode root_child0 = new YogaNode();
+		root_child0.setWidth(50f);
+		root_child0.setHeight(50f);
+		root.addChildAt(root_child0, 0);
 
-		long root_child1 = YGNodeNew();
-		YGNodeStyleSetFlexShrink(root_child1, 1f);
-		YGNodeStyleSetWidth(root_child1, 50f);
-		YGNodeStyleSetHeight(root_child1, 50f);
-		YGNodeInsertChild(root, root_child1, 1);
+		YogaNode root_child1 = new YogaNode();
+		root_child1.setFlexShrink(1f);
+		root_child1.setWidth(50f);
+		root_child1.setHeight(50f);
+		root.addChildAt(root_child1, 1);
 
-		long root_child2 = YGNodeNew();
-		YGNodeStyleSetWidth(root_child2, 50f);
-		YGNodeStyleSetHeight(root_child2, 50f);
-		YGNodeInsertChild(root, root_child2, 2);
-		YGNodeStyleSetDirection(root, YGDirectionLTR);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		YogaNode root_child2 = new YogaNode();
+		root_child2.setWidth(50f);
+		root_child2.setHeight(50f);
+		root.addChildAt(root_child2, 2);
+		root.setDirection(YogaDirection.LTR);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(75f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(50f, root.getLayoutWidth(), 0.0f);
+		assertEquals(75f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(50f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(50f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(50f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(50f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(0f, root_child1.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child2), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetTop(root_child2), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root_child2), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetHeight(root_child2), 0.0f);
+		assertEquals(0f, root_child2.getLayoutX(), 0.0f);
+		assertEquals(50f, root_child2.getLayoutY(), 0.0f);
+		assertEquals(50f, root_child2.getLayoutWidth(), 0.0f);
+		assertEquals(50f, root_child2.getLayoutHeight(), 0.0f);
 
-		YGNodeStyleSetDirection(root, YGDirectionRTL);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		root.setDirection(YogaDirection.RTL);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(75f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(50f, root.getLayoutWidth(), 0.0f);
+		assertEquals(75f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(50f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(50f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(50f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(50f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(0f, root_child1.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child2), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetTop(root_child2), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetWidth(root_child2), 0.0f);
-		assertEquals(50f, YGNodeLayoutGetHeight(root_child2), 0.0f);
+		assertEquals(0f, root_child2.getLayoutX(), 0.0f);
+		assertEquals(50f, root_child2.getLayoutY(), 0.0f);
+		assertEquals(50f, root_child2.getLayoutWidth(), 0.0f);
+		assertEquals(50f, root_child2.getLayoutHeight(), 0.0f);
 	}
 
 	@Test
 	public void test_flex_basis_overrides_main_size() {
-		long root = YGNodeNew();
-		YGNodeStyleSetWidth(root, 100f);
-		YGNodeStyleSetHeight(root, 100f);
+		YogaNode root = new YogaNode();
+		root.setWidth(100f);
+		root.setHeight(100f);
 
-		long root_child0 = YGNodeNew();
-		YGNodeStyleSetFlexGrow(root_child0, 1f);
-		YGNodeStyleSetFlexBasis(root_child0, 50f);
-		YGNodeStyleSetHeight(root_child0, 20f);
-		YGNodeInsertChild(root, root_child0, 0);
+		YogaNode root_child0 = new YogaNode();
+		root_child0.setFlexGrow(1f);
+		root_child0.setFlexBasis(50f);
+		root_child0.setHeight(20f);
+		root.addChildAt(root_child0, 0);
 
-		long root_child1 = YGNodeNew();
-		YGNodeStyleSetFlexGrow(root_child1, 1f);
-		YGNodeStyleSetHeight(root_child1, 10f);
-		YGNodeInsertChild(root, root_child1, 1);
+		YogaNode root_child1 = new YogaNode();
+		root_child1.setFlexGrow(1f);
+		root_child1.setHeight(10f);
+		root.addChildAt(root_child1, 1);
 
-		long root_child2 = YGNodeNew();
-		YGNodeStyleSetFlexGrow(root_child2, 1f);
-		YGNodeStyleSetHeight(root_child2, 10f);
-		YGNodeInsertChild(root, root_child2, 2);
-		YGNodeStyleSetDirection(root, YGDirectionLTR);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		YogaNode root_child2 = new YogaNode();
+		root_child2.setFlexGrow(1f);
+		root_child2.setHeight(10f);
+		root.addChildAt(root_child2, 2);
+		root.setDirection(YogaDirection.LTR);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(60f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(60f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(60f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(20f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(60f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(20f, root_child1.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child2), 0.0f);
-		assertEquals(80f, YGNodeLayoutGetTop(root_child2), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child2), 0.0f);
-		assertEquals(20f, YGNodeLayoutGetHeight(root_child2), 0.0f);
+		assertEquals(0f, root_child2.getLayoutX(), 0.0f);
+		assertEquals(80f, root_child2.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child2.getLayoutWidth(), 0.0f);
+		assertEquals(20f, root_child2.getLayoutHeight(), 0.0f);
 
-		YGNodeStyleSetDirection(root, YGDirectionRTL);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		root.setDirection(YogaDirection.RTL);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(60f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(60f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child1), 0.0f);
-		assertEquals(60f, YGNodeLayoutGetTop(root_child1), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child1), 0.0f);
-		assertEquals(20f, YGNodeLayoutGetHeight(root_child1), 0.0f);
+		assertEquals(0f, root_child1.getLayoutX(), 0.0f);
+		assertEquals(60f, root_child1.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child1.getLayoutWidth(), 0.0f);
+		assertEquals(20f, root_child1.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child2), 0.0f);
-		assertEquals(80f, YGNodeLayoutGetTop(root_child2), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child2), 0.0f);
-		assertEquals(20f, YGNodeLayoutGetHeight(root_child2), 0.0f);
+		assertEquals(0f, root_child2.getLayoutX(), 0.0f);
+		assertEquals(80f, root_child2.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child2.getLayoutWidth(), 0.0f);
+		assertEquals(20f, root_child2.getLayoutHeight(), 0.0f);
 	}
 
 	@Test
 	public void test_flex_grow_shrink_at_most() {
-		long root = YGNodeNew();
-		YGNodeStyleSetWidth(root, 100f);
-		YGNodeStyleSetHeight(root, 100f);
+		YogaNode root = new YogaNode();
+		root.setWidth(100f);
+		root.setHeight(100f);
 
-		long root_child0 = YGNodeNew();
-		YGNodeInsertChild(root, root_child0, 0);
+		YogaNode root_child0 = new YogaNode();
+		root.addChildAt(root_child0, 0);
 
-		long root_child0_child0 = YGNodeNew();
-		YGNodeStyleSetFlexGrow(root_child0_child0, 1f);
-		YGNodeStyleSetFlexShrink(root_child0_child0, 1f);
-		YGNodeInsertChild(root_child0, root_child0_child0, 0);
-		YGNodeStyleSetDirection(root, YGDirectionLTR);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		YogaNode root_child0_child0 = new YogaNode();
+		root_child0_child0.setFlexGrow(1f);
+		root_child0_child0.setFlexShrink(1f);
+		root_child0.addChildAt(root_child0_child0, 0);
+		root.setDirection(YogaDirection.LTR);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child0_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetHeight(root_child0_child0), 0.0f);
+		assertEquals(0f, root_child0_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0_child0.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child0_child0.getLayoutWidth(), 0.0f);
+		assertEquals(0f, root_child0_child0.getLayoutHeight(), 0.0f);
 
-		YGNodeStyleSetDirection(root, YGDirectionRTL);
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeLayoutGetDirection(root));
+		root.setDirection(YogaDirection.RTL);
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetHeight(root), 0.0f);
+		assertEquals(0f, root.getLayoutX(), 0.0f);
+		assertEquals(0f, root.getLayoutY(), 0.0f);
+		assertEquals(100f, root.getLayoutWidth(), 0.0f);
+		assertEquals(100f, root.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetHeight(root_child0), 0.0f);
+		assertEquals(0f, root_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child0.getLayoutWidth(), 0.0f);
+		assertEquals(0f, root_child0.getLayoutHeight(), 0.0f);
 
-		assertEquals(0f, YGNodeLayoutGetLeft(root_child0_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetTop(root_child0_child0), 0.0f);
-		assertEquals(100f, YGNodeLayoutGetWidth(root_child0_child0), 0.0f);
-		assertEquals(0f, YGNodeLayoutGetHeight(root_child0_child0), 0.0f);
+		assertEquals(0f, root_child0_child0.getLayoutX(), 0.0f);
+		assertEquals(0f, root_child0_child0.getLayoutY(), 0.0f);
+		assertEquals(100f, root_child0_child0.getLayoutWidth(), 0.0f);
+		assertEquals(0f, root_child0_child0.getLayoutHeight(), 0.0f);
 	}
 
 }

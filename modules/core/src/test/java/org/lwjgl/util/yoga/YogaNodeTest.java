@@ -17,21 +17,47 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libc.LibCStdio.*;
 import static org.lwjgl.util.yoga.Yoga.*;
+import static org.lwjgl.util.yoga.YogaNode.*;
 import static org.testng.Assert.*;
 
-/* LWJGL port of the corresponding Yoga test. */
 public class YogaNodeTest {
 
 	@Test
 	public void testInit() {
 		int refCount = YGNodeGetInstanceCount();
-		long node = YGNodeNew();
+		new YogaNode();
 		assertEquals(refCount + 1, YGNodeGetInstanceCount());
-		YGNodeFree(node);
 	}
 
-	private static void setMeasureFunc(long node, float testWidth, float testHeight) {
-		YGNodeSetMeasureFunc(node, (n, width, widthMode, height, heightMode) -> {
+	@Test
+	public void testBaseline() {
+		YogaNode root = new YogaNode();
+		root.setFlexDirection(YogaFlexDirection.ROW);
+		root.setAlignItems(YogaAlign.BASELINE);
+		root.setWidth(100);
+		root.setHeight(100);
+
+		YogaNode child1 = new YogaNode();
+		child1.setWidth(40);
+		child1.setHeight(40);
+		root.addChildAt(child1, 0);
+
+		YogaNode child2 = new YogaNode();
+		child2.setWidth(40);
+		child2.setHeight(40);
+		YGNodeSetBaselineFunc(child2.node, (node, width, height) -> 0);
+		root.addChildAt(child2, 1);
+
+		root.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+
+		assertEquals(0, (int)child1.getLayoutY());
+		assertEquals(40, (int)child2.getLayoutY());
+
+		YGNodeGetBaselineFunc(child2.node).free();
+	}
+
+	private static YGMeasureFunc getTestMeasureFunc(float testWidth, float testHeight) {
+		return YGMeasureFunc.create((node, width, widthMode, height, heightMode) -> {
 			try ( MemoryStack stack = stackPush() ) {
 				return YGMeasureFunc.toLong(
 					YGSize.mallocStack(stack)
@@ -43,78 +69,50 @@ public class YogaNodeTest {
 	}
 
 	@Test
-	public void testBaseline() {
-		long root = YGNodeNew();
-		YGNodeStyleSetFlexDirection(root, YGFlexDirectionRow);
-		YGNodeStyleSetAlignItems(root, YGAlignBaseline);
-		YGNodeStyleSetWidth(root, 100);
-		YGNodeStyleSetHeight(root, 100);
-
-		long child1 = YGNodeNew();
-		YGNodeStyleSetWidth(child1, 40);
-		YGNodeStyleSetHeight(child1, 40);
-		YGNodeInsertChild(root, child1, 0);
-
-		long child2 = YGNodeNew();
-		YGNodeStyleSetWidth(child2, 40);
-		YGNodeStyleSetHeight(child2, 40);
-		YGNodeSetBaselineFunc(child2, (node, width, height) -> 0);
-		YGNodeInsertChild(root, child2, 1);
-
-		YGNodeCalculateLayout(root, YGUndefined, YGUndefined, YGNodeStyleGetDirection(root));
-
-		assertEquals(0, (int)YGNodeLayoutGetTop(child1));
-		assertEquals(40, (int)YGNodeLayoutGetTop(child2));
-
-		YGNodeGetBaselineFunc(child2).free();
-	}
-
-	@Test
 	public void testMeasure() {
-		long node = YGNodeNew();
-		setMeasureFunc(node, 100, 100);
-		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
-		assertEquals(100, (int)YGNodeLayoutGetWidth(node));
-		assertEquals(100, (int)YGNodeLayoutGetHeight(node));
+		YogaNode node = new YogaNode();
 
-		YGNodeGetMeasureFunc(node).free();
-		YGNodeFree(node);
+		try ( YGMeasureFunc measureFunc = getTestMeasureFunc(100, 100) ) {
+			YGNodeSetMeasureFunc(node.node, measureFunc);
+			node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+			assertEquals(100, (int)node.getLayoutWidth());
+			assertEquals(100, (int)node.getLayoutHeight());
+		}
 	}
 
 	@Test
 	public void testMeasureFloat() {
-		long node = YGNodeNew();
-		setMeasureFunc(node, 100.5f, 100.5f);
-		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
-		assertEquals(100.5f, YGNodeLayoutGetWidth(node), 0.0f);
-		assertEquals(100.5f, YGNodeLayoutGetHeight(node), 0.0f);
+		YogaNode node = new YogaNode();
 
-		YGNodeGetMeasureFunc(node).free();
-		YGNodeFree(node);
+		try ( YGMeasureFunc measureFunc = getTestMeasureFunc(100.5f, 100.5f) ) {
+			YGNodeSetMeasureFunc(node.node, measureFunc);
+			node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+			assertEquals(100.5f, node.getLayoutWidth(), 0.0f);
+			assertEquals(100.5f, node.getLayoutHeight(), 0.0f);
+		}
 	}
 
 	@Test
 	public void testMeasureFloatMin() {
-		long node = YGNodeNew();
-		setMeasureFunc(node, Float.MIN_VALUE, Float.MIN_VALUE);
-		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
-		assertEquals(Float.MIN_VALUE, YGNodeLayoutGetWidth(node), 0.0f);
-		assertEquals(Float.MIN_VALUE, YGNodeLayoutGetHeight(node), 0.0f);
-
-		YGNodeGetMeasureFunc(node).free();
-		YGNodeFree(node);
+		YogaNode node = new YogaNode();
+		try ( YGMeasureFunc measureFunc = getTestMeasureFunc(Float.MIN_VALUE, Float.MIN_VALUE) ) {
+			YGNodeSetMeasureFunc(node.node, measureFunc);
+			node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+			assertEquals(Float.MIN_VALUE, node.getLayoutWidth(), 0.0f);
+			assertEquals(Float.MIN_VALUE, node.getLayoutHeight(), 0.0f);
+		}
 	}
 
 	@Test
 	public void testMeasureFloatMax() {
-		long node = YGNodeNew();
-		setMeasureFunc(node, Float.MAX_VALUE, Float.MAX_VALUE);
-		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
-		assertEquals(Float.MAX_VALUE, YGNodeLayoutGetWidth(node), 0.0f);
-		assertEquals(Float.MAX_VALUE, YGNodeLayoutGetHeight(node), 0.0f);
+		YogaNode node = new YogaNode();
 
-		YGNodeGetMeasureFunc(node).free();
-		YGNodeFree(node);
+		try ( YGMeasureFunc measureFunc = getTestMeasureFunc(Float.MAX_VALUE, Float.MAX_VALUE) ) {
+			YGNodeSetMeasureFunc(node.node, measureFunc);
+			node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+			assertEquals(Float.MAX_VALUE, node.getLayoutWidth(), 0.0f);
+			assertEquals(Float.MAX_VALUE, node.getLayoutHeight(), 0.0f);
+		}
 	}
 
 	private int    mLogLevel;
@@ -168,69 +166,93 @@ public class YogaNodeTest {
 		try ( MemoryStack stack = stackPush() ) {
 			YGValue v = YGValue.mallocStack(stack);
 
-			long node0 = YGNodeNew();
-			assertTrue(YGFloatIsUndefined(YGNodeStyleGetMaxHeight(node0, v).value()));
+			YogaNode node0 = new YogaNode();
+			assertTrue(YogaConstants.isUndefined(node0.getMaxHeight(v)));
 
-			long node1 = YGNodeNew();
-			YGNodeStyleSetMaxHeight(node1, 100);
+			YogaNode node1 = new YogaNode();
+			node1.setMaxHeight(100);
 
-			YGNodeCopyStyle(node0, node1);
-			assertEquals(100, (int)YGNodeStyleGetMaxHeight(node0, v).value());
-
-			YGNodeFree(node1);
-			YGNodeFree(node0);
+			node0.copyStyle(node1);
+			assertEquals(100, (int)node0.getMaxHeight(v).value());
 		}
 	}
 
-
 	@Test
 	public void testLayoutMargin() {
-		long node = YGNodeNew();
+		YogaNode node = new YogaNode();
+		node.setWidth(100);
+		node.setHeight(100);
+		node.setMargin(YogaEdge.START, 1);
+		node.setMargin(YogaEdge.END, 2);
+		node.setMargin(YogaEdge.TOP, 3);
+		node.setMargin(YogaEdge.BOTTOM, 4);
+		node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		YGNodeStyleSetWidth(node, 100);
-		YGNodeStyleSetHeight(node, 100);
-		YGNodeStyleSetMargin(node, YGEdgeStart, 1);
-		YGNodeStyleSetMargin(node, YGEdgeEnd, 2);
-		YGNodeStyleSetMargin(node, YGEdgeTop, 3);
-		YGNodeStyleSetMargin(node, YGEdgeBottom, 4);
-
-		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
-
-		try ( MemoryStack stack = stackPush() ) {
-			YGValue v = YGValue.mallocStack(stack);
-
-			assertEquals(1, (int)YGNodeStyleGetMargin(node, YGEdgeStart, v).value());
-			assertEquals(2, (int)YGNodeStyleGetMargin(node, YGEdgeEnd, v).value());
-			assertEquals(3, (int)YGNodeStyleGetMargin(node, YGEdgeTop, v).value());
-			assertEquals(4, (int)YGNodeStyleGetMargin(node, YGEdgeBottom, v).value());
-		}
-
-		YGNodeFree(node);
+		assertEquals(1, (int)node.getLayoutMargin(YogaEdge.LEFT));
+		assertEquals(2, (int)node.getLayoutMargin(YogaEdge.RIGHT));
+		assertEquals(3, (int)node.getLayoutMargin(YogaEdge.TOP));
+		assertEquals(4, (int)node.getLayoutMargin(YogaEdge.BOTTOM));
 	}
 
 	@Test
 	public void testLayoutPadding() {
-		long node = YGNodeNew();
+		YogaNode node = new YogaNode();
+		node.setWidth(100);
+		node.setHeight(100);
+		node.setPadding(YogaEdge.START, 1);
+		node.setPadding(YogaEdge.END, 2);
+		node.setPadding(YogaEdge.TOP, 3);
+		node.setPadding(YogaEdge.BOTTOM, 4);
+		node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
 
-		YGNodeStyleSetWidth(node, 100);
-		YGNodeStyleSetHeight(node, 100);
-		YGNodeStyleSetPadding(node, YGEdgeStart, 1);
-		YGNodeStyleSetPadding(node, YGEdgeEnd, 2);
-		YGNodeStyleSetPadding(node, YGEdgeTop, 3);
-		YGNodeStyleSetPadding(node, YGEdgeBottom, 4);
+		assertEquals(1, (int)node.getLayoutPadding(YogaEdge.LEFT));
+		assertEquals(2, (int)node.getLayoutPadding(YogaEdge.RIGHT));
+		assertEquals(3, (int)node.getLayoutPadding(YogaEdge.TOP));
+		assertEquals(4, (int)node.getLayoutPadding(YogaEdge.BOTTOM));
+	}
 
-		YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGNodeStyleGetDirection(node));
+	@Test
+	public void testLayoutBorder() {
+		YogaNode node = new YogaNode();
+		node.setWidth(100);
+		node.setHeight(100);
+		node.setBorder(YogaEdge.START, 1);
+		node.setBorder(YogaEdge.END, 2);
+		node.setBorder(YogaEdge.TOP, 3);
+		node.setBorder(YogaEdge.BOTTOM, 4);
+		node.calculateLayout(YogaConstants.UNDEFINED, YogaConstants.UNDEFINED);
+
+		assertEquals(1, (int)node.getLayoutBorder(YogaEdge.LEFT));
+		assertEquals(2, (int)node.getLayoutBorder(YogaEdge.RIGHT));
+		assertEquals(3, (int)node.getLayoutBorder(YogaEdge.TOP));
+		assertEquals(4, (int)node.getLayoutBorder(YogaEdge.BOTTOM));
+	}
+
+	@Test
+	public void testPercentPaddingOnRoot() {
+		YogaNode node = new YogaNode();
+		node.setPaddingPercent(YogaEdge.ALL, 10);
+		node.calculateLayout(50, 50);
+
+		assertEquals(5, (int)node.getLayoutPadding(YogaEdge.LEFT));
+		assertEquals(5, (int)node.getLayoutPadding(YogaEdge.RIGHT));
+		assertEquals(5, (int)node.getLayoutPadding(YogaEdge.TOP));
+		assertEquals(5, (int)node.getLayoutPadding(YogaEdge.BOTTOM));
+	}
+
+	@Test
+	public void testDefaultEdgeValues() {
+		YogaNode node = new YogaNode();
 
 		try ( MemoryStack stack = stackPush() ) {
 			YGValue v = YGValue.mallocStack(stack);
 
-			assertEquals(1, (int)YGNodeStyleGetPadding(node, YGEdgeStart, v).value());
-			assertEquals(2, (int)YGNodeStyleGetPadding(node, YGEdgeEnd, v).value());
-			assertEquals(3, (int)YGNodeStyleGetPadding(node, YGEdgeTop, v).value());
-			assertEquals(4, (int)YGNodeStyleGetPadding(node, YGEdgeBottom, v).value());
+			for ( YogaEdge edge : YogaEdge.values() ) {
+				assertEquals(YogaUnit.UNDEFINED, node.getMargin(edge, v).unit());
+				assertEquals(YogaUnit.UNDEFINED, node.getPadding(edge, v).unit());
+				assertEquals(YogaUnit.UNDEFINED, node.getPosition(edge, v).unit());
+				assertTrue(YogaConstants.isUndefined(node.getBorder(edge)));
+			}
 		}
-
-		YGNodeFree(node);
 	}
-
 }
