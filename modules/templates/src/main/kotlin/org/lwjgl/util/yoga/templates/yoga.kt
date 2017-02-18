@@ -71,28 +71,38 @@ div {
 	)
 
 	EnumConstant(
-		"YGFlexDirection",
+		"YGAlign",
 
-		"FlexDirectionColumn".enum,
-		"FlexDirectionColumnReverse".enum,
-		"FlexDirectionRow".enum,
-		"FlexDirectionRowReverse".enum
+		"AlignAuto".enum,
+		"AlignFlexStart".enum,
+		"AlignCenter".enum,
+		"AlignFlexEnd".enum,
+		"AlignStretch".enum,
+		"AlignBaseline".enum,
+		"AlignSpaceBetween".enum,
+		"AlignSpaceAround".enum
 	)
 
 	EnumConstant(
-		"YGMeasureMode",
+		"YGDimension",
 
-		"MeasureModeUndefined".enum,
-		"MeasureModeExactly".enum,
-		"MeasureModeAtMost".enum
+		"DimensionWidth".enum,
+		"DimensionHeight".enum
 	)
 
 	EnumConstant(
-		"YGPrintOptions",
+		"YGDirection",
 
-		"PrintOptionsLayout".enum("", "1"),
-		"PrintOptionsStyle".enum("", "2"),
-		"PrintOptionsChildren".enum("", "4")
+		"DirectionInherit".enum,
+		"DirectionLTR".enum,
+		"DirectionRTL".enum
+	)
+
+	EnumConstant(
+		"YGDisplay",
+
+		"DisplayFlex".enum,
+		"DisplayNone".enum
 	)
 
 	val Edges = EnumConstant(
@@ -110,17 +120,19 @@ div {
 	).javaDocLinks
 
 	EnumConstant(
-		"YGPositionType",
+		"YGExperimentalFeature",
 
-		"PositionTypeRelative".enum,
-		"PositionTypeAbsolute".enum
+		"ExperimentalFeatureRounding".enum,
+		"ExperimentalFeatureWebFlexBasis".enum
 	)
 
 	EnumConstant(
-		"YGDimension",
+		"YGFlexDirection",
 
-		"DimensionWidth".enum,
-		"DimensionHeight".enum
+		"FlexDirectionColumn".enum,
+		"FlexDirectionColumnReverse".enum,
+		"FlexDirectionRow".enum,
+		"FlexDirectionRowReverse".enum
 	)
 
 	EnumConstant(
@@ -134,14 +146,6 @@ div {
 	)
 
 	EnumConstant(
-		"YGDirection",
-
-		"DirectionInherit".enum,
-		"DirectionLTR".enum,
-		"DirectionRTL".enum
-	)
-
-	EnumConstant(
 		"YGLogLevel",
 
 		"LogLevelError".enum,
@@ -152,10 +156,11 @@ div {
 	)
 
 	EnumConstant(
-		"YGWrap",
+		"YGMeasureMode",
 
-		"WrapNoWrap".enum,
-		"WrapWrap".enum
+		"MeasureModeUndefined".enum,
+		"MeasureModeExactly".enum,
+		"MeasureModeAtMost".enum
 	)
 
 	EnumConstant(
@@ -167,29 +172,35 @@ div {
 	)
 
 	EnumConstant(
-		"YGExperimentalFeature",
+		"YGPositionType",
 
-		"ExperimentalFeatureRounding".enum,
-		"ExperimentalFeatureWebFlexBasis".enum
+		"PositionTypeRelative".enum,
+		"PositionTypeAbsolute".enum
 	)
 
 	EnumConstant(
-		"YGAlign",
+		"YGPrintOptions",
 
-		"AlignAuto".enum,
-		"AlignFlexStart".enum,
-		"AlignCenter".enum,
-		"AlignFlexEnd".enum,
-		"AlignStretch".enum,
-		"AlignBaseline".enum
+		"PrintOptionsLayout".enum("", "1"),
+		"PrintOptionsStyle".enum("", "2"),
+		"PrintOptionsChildren".enum("", "4")
 	)
 
 	EnumConstant(
 		"YGUnit",
 
 		"UnitUndefined".enum,
-		"UnitPixel".enum,
-		"UnitPercent".enum
+		"UnitPoint".enum,
+		"UnitPercent".enum,
+		"UnitAuto".enum
+	)
+
+	EnumConstant(
+		"YGWrap",
+
+		"WrapNoWrap".enum,
+		"WrapWrap".enum,
+		"WrapReverse".enum
 	)
 
 	YGNodeRef(
@@ -393,6 +404,16 @@ div {
 		)
 	}
 
+	fun YG_NODE_STYLE_PROPERTY_UNIT_AUTO(type: NativeType, name: String, paramName: String, documentation: String = "") {
+		YG_NODE_STYLE_PROPERTY_UNIT(type, name, paramName, documentation);
+		void(
+			"NodeStyleSet${name}Auto",
+			documentation,
+
+			node
+		)
+	}
+
 	fun YG_NODE_STYLE_EDGE_PROPERTY(type: NativeType, name: String, paramName: String) {
 		void(
 			"NodeStyleSet$name",
@@ -440,6 +461,16 @@ div {
 		)
 	}
 
+	fun YG_NODE_STYLE_EDGE_PROPERTY_UNIT_AUTO(type: NativeType, name: String) {
+		void(
+			"NodeStyleSet${name}Auto",
+			"",
+
+			node,
+			YGEdge.IN("edge", "", Edges)
+		)
+	}
+
 	fun YG_NODE_LAYOUT_PROPERTY(type: NativeType, name: String) {
 		type(
 			"NodeLayoutGet$name",
@@ -453,7 +484,7 @@ div {
 		type(
 			"NodeLayoutGet$name",
 			"""
-			Gets the computed value for this nodes after performing layout. If they were set using pixel values then the returned value will be the same as
+			Gets the computed value for this nodes after performing layout. If they were set using point values then the returned value will be the same as
 			{@code YGNodeStyleGetXXX}. However if they were set using a percentage value then the returned value is the computed value used during layout.
 			""",
 
@@ -477,6 +508,7 @@ div {
 	YG_NODE_STYLE_PROPERTY(YGPositionType, "PositionType", "positionType")
 	YG_NODE_STYLE_PROPERTY(YGWrap, "FlexWrap", "flexWrap")
 	YG_NODE_STYLE_PROPERTY(YGOverflow, "Overflow", "overflow")
+	YG_NODE_STYLE_PROPERTY(YGDisplay, "Display", "display")
 
 	void(
 		"NodeStyleSetFlex",
@@ -488,15 +520,16 @@ div {
 
 	YG_NODE_STYLE_PROPERTY(float, "FlexGrow", "flexGrow")
 	YG_NODE_STYLE_PROPERTY(float, "FlexShrink", "flexShrink")
-	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "FlexBasis", "flexBasis")
+	YG_NODE_STYLE_PROPERTY_UNIT_AUTO(YGValue, "FlexBasis", "flexBasis")
 
 	YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Position", "position")
 	YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Margin", "margin")
+	YG_NODE_STYLE_EDGE_PROPERTY_UNIT_AUTO(YGValue, "Margin")
 	YG_NODE_STYLE_EDGE_PROPERTY_UNIT(YGValue, "Padding", "padding")
 	YG_NODE_STYLE_EDGE_PROPERTY(float, "Border", "border")
 
-	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "Width", "width")
-	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "Height", "height")
+	YG_NODE_STYLE_PROPERTY_UNIT_AUTO(YGValue, "Width", "width")
+	YG_NODE_STYLE_PROPERTY_UNIT_AUTO(YGValue, "Height", "height")
 	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MinWidth", "minWidth")
 	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MinHeight", "minHeight")
 	YG_NODE_STYLE_PROPERTY_UNIT(YGValue, "MaxWidth", "maxWidth")

@@ -491,7 +491,7 @@ $indentation}"""
 
 		val mallocable = mutable || usageOutput || (usageInput && !usageResultPointer)
 
-		if (mallocable || members.any { it.nativeType.let { it is PointerType && it.mapping === PointerMapping.DATA_POINTER && it.elementType !is StructType } })
+		if (mallocable || members.any { m -> m.nativeType.let { it is PointerType && it.mapping === PointerMapping.DATA_POINTER && (it.elementType !is StructType || m is StructMemberArray) } })
 			println("import org.lwjgl.*;")
 		println("import org.lwjgl.system.*;\n")
 

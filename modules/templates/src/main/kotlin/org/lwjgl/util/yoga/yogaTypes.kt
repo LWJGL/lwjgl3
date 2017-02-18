@@ -48,19 +48,20 @@ float h = layout.dimensions(YGDimensionHeight);""")}
 
 val YGNodeRef = "YGNodeRef".opaque_p
 
-val YGUnit = "YGUnit".enumType
+val YGAlign = "YGAlign".enumType
 val YGDirection = "YGDirection".enumType
-val YGPrintOptions = "YGPrintOptions".enumType
-val YGMeasureMode = "YGMeasureMode".enumType
+val YGDisplay = "YGDisplay".enumType
+val YGEdge = "YGEdge".enumType
+val YGExperimentalFeature = "YGExperimentalFeature".enumType
 val YGFlexDirection = "YGFlexDirection".enumType
 val YGJustify = "YGJustify".enumType
-val YGAlign = "YGAlign".enumType
-val YGPositionType = "YGPositionType".enumType
-val YGWrap = "YGWrap".enumType
-val YGOverflow = "YGOverflow".enumType
-val YGEdge = "YGEdge".enumType
 val YGLogLevel = "YGLogLevel".enumType
-val YGExperimentalFeature = "YGExperimentalFeature".enumType
+val YGMeasureMode = "YGMeasureMode".enumType
+val YGOverflow = "YGOverflow".enumType
+val YGPositionType = "YGPositionType".enumType
+val YGPrintOptions = "YGPrintOptions".enumType
+val YGUnit = "YGUnit".enumType
+val YGWrap = "YGWrap".enumType
 
 val YGSize = struct(YOGA_PACKAGE, "YGSize") {
 	float.member("width", "")
@@ -191,6 +192,7 @@ val YGStyle = struct(YOGA_PACKAGE, "YGStyle", mutable = false) {
 	YGPositionType.member("positionType", "")
 	YGWrap.member("flexWrap", "")
 	YGOverflow.member("overflow", "")
+	YGDisplay.member("display", "")
 	float.member("flex", "")
 	float.member("flexGrow", "")
 	float.member("flexShrink", "")
@@ -225,4 +227,6 @@ val YGNode = struct(YOGA_PACKAGE, "YGNode", mutable = false) {
 
 	bool.member("isDirty", "")
 	bool.member("hasNewLayout", "")
+
+	YGValue.p.array("resolvedDimensions", "", size = 2)
 }
