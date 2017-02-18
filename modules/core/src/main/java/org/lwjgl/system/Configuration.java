@@ -111,7 +111,7 @@ public class Configuration<T> {
 	 * Sets the stack size, in kilobytes, that will be used in the default {@link MemoryStack} constructor. This value is also used for the LWJGL-managed,
 	 * thread-local, {@link MemoryStack} instances.
 	 *
-	 * <p>If this option is not set, it defaults to 32.</p>
+	 * <p>If this option is not set, it defaults to 64.</p>
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.system.stackSize</b><br>
