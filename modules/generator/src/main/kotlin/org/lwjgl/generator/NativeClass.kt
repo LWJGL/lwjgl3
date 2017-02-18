@@ -503,7 +503,7 @@ class NativeClass(
 			else if (library.endsWith(");"))
 				"\n\tstatic { $library }"
 			else
-				"\n\tstatic { Library.loadSystem($className.class, Platform.mapLibraryNameBundled(\"$library\")); }"
+				"\n\tstatic { Library.loadSystem(System::loadLibrary, $className.class, Platform.mapLibraryNameBundled(\"$library\")); }"
 			)
 		}
 

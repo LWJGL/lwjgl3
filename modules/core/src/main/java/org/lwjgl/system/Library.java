@@ -18,6 +18,7 @@ import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.function.*;
 import java.util.regex.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -40,8 +41,6 @@ public final class Library {
 
 	private static final Pattern NATIVES_JAR = Pattern.compile("/[\\w-]+?-natives-\\w+.jar!/");
 
-	private static final SystemLibraryLoader SYSTEM_LIBRARY_LOADER;
-
 	static {
 		if ( DEBUG ) {
 			apiLog("Version: " + Version.getVersion());
@@ -52,9 +51,7 @@ public final class Library {
 			);
 		}
 
-		SYSTEM_LIBRARY_LOADER = getSystemLibraryLoader();
-
-		loadSystem(Library.class, JNI_LIBRARY_NAME);
+		loadSystem(JNI_LIBRARY_NAME);
 	}
 
 	private Library() {}
@@ -64,22 +61,29 @@ public final class Library {
 		// intentionally empty to trigger static initializer
 	}
 
-	/** Calls {@link #loadSystem(Class, String)} using {@code Library.class} as the context parameter. */
+	/**
+	 * Loads a JNI shared library.
+	 *
+	 * @param name the library name. If not an absolute path, it must be the plain library name, without an OS specific prefix or file extension (e.g. GL, not
+	 *             libGL.so)
+	 */
 	public static void loadSystem(String name) throws UnsatisfiedLinkError {
-		loadSystem(Library.class, name);
+		loadSystem(System::loadLibrary, Library.class, name);
 	}
 
 	/**
-	 * Loads a shared library using {@link System#load}.
+	 * Loads a JNI shared library.
 	 *
-	 * @param context the class to use to discover the shared library in the classpath
-	 * @param name    the library name. If not an absolute path, it must be the plain library name, without an OS specific prefix or file extension (e.g. GL, not
-	 *                libGL.so)
+	 * @param loadLibrary should be the {@code System::loadLibrary} expression. This ensures that {@code System.loadLibrary} has the same caller as this
+	 *                    method.
+	 * @param context     the class to use to discover the shared library in the classpath
+	 * @param name        the library name. If not an absolute path, it must be the plain library name, without an OS specific prefix or file extension (e.g.
+	 *                    GL, not libGL.so)
 	 *
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
 	@SuppressWarnings("try")
-	public static void loadSystem(Class<?> context, String name) throws UnsatisfiedLinkError {
+	public static void loadSystem(Consumer<String> loadLibrary, Class<?> context, String name) throws UnsatisfiedLinkError {
 		apiLog("Loading library (system): " + name);
 
 		// METHOD 1: absolute path
@@ -116,7 +120,7 @@ public final class Library {
 
 		// METHOD 3: System.loadLibrary
 		try {
-			SYSTEM_LIBRARY_LOADER.loadLibrary(context, name);
+			loadLibrary.accept(name);
 
 			// Success, but java.library.path might be still empty, or not include the library.
 			// In that case, ClassLoader::findLibrary was used to return the library path (e.g. OSGi does this with native libraries in bundles).
@@ -414,27 +418,6 @@ public final class Library {
 				digest.update(buffer, 0, n);
 		}
 		return digest.digest();
-	}
-
-	private interface SystemLibraryLoader {
-		void loadLibrary(Class<?> context, String libname) throws Throwable;
-	}
-
-	private static SystemLibraryLoader getSystemLibraryLoader() {
-		try {
-			// Try to use Runtime.getRuntime().loadLibrary0 so that the correct ClassLoader is used, based on the class context.
-			try {
-				Method loadLibrary0 = Runtime.getRuntime().getClass().getDeclaredMethod("loadLibrary0", Class.class, String.class);
-				loadLibrary0.setAccessible(true);
-				return loadLibrary0::invoke;
-			} catch (NoSuchMethodException ignored) {
-				Method loadLibrary0 = Runtime.getRuntime().getClass().getDeclaredMethod("loadLibrary0", ClassLoader.class, String.class);
-				loadLibrary0.setAccessible(true);
-				return (context, libName) -> loadLibrary0.invoke(context.getClassLoader(), libName);
-			}
-		} catch (Exception ignored) {
-			return (context, libName) -> System.loadLibrary(libName);
-		}
 	}
 
 }
