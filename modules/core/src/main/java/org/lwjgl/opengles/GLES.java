@@ -58,7 +58,7 @@ public final class GLES {
 	private static ICD icd = new ICDStatic();
 
 	static {
-		Library.loadSystem(System::loadLibrary, GLES.class, Platform.mapLibraryNameBundled("lwjgl_opengles"));
+		Library.loadSystem(System::load, System::loadLibrary, GLES.class, Platform.mapLibraryNameBundled("lwjgl_opengles"));
 
 		MAX_VERSION = apiParseVersion(Configuration.OPENGLES_MAXVERSION);
 

@@ -234,7 +234,7 @@ class Generator(
 
 	static {
 		String libName = Platform.mapLibraryNameBundled("lwjgl_$libraryName");
-		Library.loadSystem(System::loadLibrary, $className.class, libName);${if (setupAllocator) """
+		Library.loadSystem(System::load, System::loadLibrary, $className.class, libName);${if (setupAllocator) """
 
 		MemoryAllocator allocator = getAllocator();
 		setupMalloc(

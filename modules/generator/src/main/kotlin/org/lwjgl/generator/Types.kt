@@ -45,7 +45,7 @@ open class NativeType(
 		get() = if (this.mapping === PrimitiveMapping.BOOLEAN4) "boolean" else mapping.javaMethodName
 
 	override fun toString() =
-		"${this.javaClass.simpleName}: $name | $jniFunctionType | $nativeMethodType | $javaMethodType"
+		"${this::class.java.simpleName}: $name | $jniFunctionType | $nativeMethodType | $javaMethodType"
 }
 
 // Java instance passed as jobject to native code

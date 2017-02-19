@@ -1368,7 +1368,7 @@ class Func(
 			if (!parameters.isEmpty())
 				print(", ")
 			print("ByteBuffer $MAP_OLD")
-		} else if (returnTransform != null && returnTransform.javaClass === MapPointerExplicitTransform::class.java) {
+		} else if (returnTransform != null && returnTransform::class.java === MapPointerExplicitTransform::class.java) {
 			if (!parameters.isEmpty())
 				print(", ")
 			val mapPointerExplicit = returnTransform as MapPointerExplicitTransform

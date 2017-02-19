@@ -68,12 +68,13 @@ public final class Library {
 	 *             libGL.so)
 	 */
 	public static void loadSystem(String name) throws UnsatisfiedLinkError {
-		loadSystem(System::loadLibrary, Library.class, name);
+		loadSystem(System::load, System::loadLibrary, Library.class, name);
 	}
 
 	/**
 	 * Loads a JNI shared library.
 	 *
+	 * @param load        should be the {@code System::load} expression. This ensures that {@code System.load} has the same caller as this method.
 	 * @param loadLibrary should be the {@code System::loadLibrary} expression. This ensures that {@code System.loadLibrary} has the same caller as this
 	 *                    method.
 	 * @param context     the class to use to discover the shared library in the classpath
@@ -83,12 +84,17 @@ public final class Library {
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
 	@SuppressWarnings("try")
-	public static void loadSystem(Consumer<String> loadLibrary, Class<?> context, String name) throws UnsatisfiedLinkError {
+	public static void loadSystem(
+		Consumer<String> load,
+		Consumer<String> loadLibrary,
+		Class<?> context,
+		String name
+	) throws UnsatisfiedLinkError {
 		apiLog("Loading library (system): " + name);
 
 		// METHOD 1: absolute path
 		if ( Paths.get(name).isAbsolute() ) {
-			System.load(name);
+			load.accept(name);
 			apiLog("\tSuccess");
 			return;
 		}
@@ -98,7 +104,7 @@ public final class Library {
 		// METHOD 2: org.lwjgl.librarypath
 		URL libURL = context.getResource("/" + libName);
 		if ( libURL == null ) {
-			if ( loadSystem(context, libName, Configuration.LIBRARY_PATH) )
+			if ( loadSystem(load, context, libName, Configuration.LIBRARY_PATH) )
 				return;
 		} else {
 			// Always use the SLL if the library is found in the classpath,
@@ -109,7 +115,7 @@ public final class Library {
 					apiLog("\tUsing SharedLibraryLoader...");
 				// Extract from classpath and try org.lwjgl.librarypath
 				try ( FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL) ) {
-					if ( loadSystem(context, libName, Configuration.LIBRARY_PATH) )
+					if ( loadSystem(load, context, libName, Configuration.LIBRARY_PATH) )
 						return;
 				}
 			} catch (Exception e) {
@@ -140,19 +146,19 @@ public final class Library {
 		throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
 	}
 
-	private static boolean loadSystem(Class<?> context, String libName, Configuration<String> property) {
+	private static boolean loadSystem(Consumer<String> load, Class<?> context, String libName, Configuration<String> property) {
 		String paths = property.get();
-		return paths != null && loadSystem(context, libName, property.getProperty(), paths);
+		return paths != null && loadSystem(load, context, libName, property.getProperty(), paths);
 	}
 
-	private static boolean loadSystem(Class<?> context, String libName, String property, String paths) {
+	private static boolean loadSystem(Consumer<String> load, Class<?> context, String libName, String property, String paths) {
 		Path libFile = findLibrary(paths, libName);
 		if ( libFile == null ) {
 			apiLog(String.format("\t%s not found in %s=%s", libName, property, paths));
 			return false;
 		}
 
-		System.load(libFile.toAbsolutePath().toString());
+		load.accept(libFile.toAbsolutePath().toString());
 		apiLog(String.format("\tLoaded from %s: %s", property, libFile));
 		checkHash(context, libFile);
 		return true;

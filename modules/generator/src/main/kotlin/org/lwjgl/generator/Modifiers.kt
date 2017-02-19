@@ -60,7 +60,7 @@ abstract class ModifierTarget<T : TemplateModifier> {
 		modifiers.forEach {
 			val old = this._modifiers.put(it::class, it)
 			if (old != null)
-				throw IllegalArgumentException("Template modifier ${it.javaClass.simpleName} specified more than once.")
+				throw IllegalArgumentException("Template modifier ${it::class.java.simpleName} specified more than once.")
 		}
 
 		modifiers.forEach {

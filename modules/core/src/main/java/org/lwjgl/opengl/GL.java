@@ -73,7 +73,7 @@ public final class GL {
 	private static GLXCapabilities capabilitiesGLX;
 
 	static {
-		Library.loadSystem(System::loadLibrary, GL.class, Platform.mapLibraryNameBundled("lwjgl_opengl"));
+		Library.loadSystem(System::load, System::loadLibrary, GL.class, Platform.mapLibraryNameBundled("lwjgl_opengl"));
 
 		MAX_VERSION = apiParseVersion(Configuration.OPENGL_MAXVERSION);
 
