@@ -30,6 +30,7 @@ val RENDERDOC = "RENDERDOC"
 val NN = "NN"
 val KHR = "KHR"
 val EXT = "EXT"
+val MESA = "MESA"
 
 // Handle types
 val VkInstance = VK_DEFINE_HANDLE("VkInstance")
@@ -1938,6 +1939,7 @@ val VkImageCreateInfo = struct(VULKAN_PACKAGE, "VkImageCreateInfo") {
 			<li>If {@code usage} includes #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, then bits other than #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, and #IMAGE_USAGE_INPUT_ATTACHMENT_BIT <b>must</b> not be set</li>
 			<li>If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent.width} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferWidth}</li>
 			<li>If {@code usage} includes #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT, {@code extent.height} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferHeight}</li>
+			<li>If {@code usage} includes #IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT, {@code usage} <b>must</b> also contain at least one of #IMAGE_USAGE_COLOR_ATTACHMENT_BIT, #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, or #IMAGE_USAGE_INPUT_ATTACHMENT_BIT.</li>
 			<li>{@code samples} <b>must</b> be a bit value that is set in ##VkImageFormatProperties{@code ::sampleCounts} returned by #GetPhysicalDeviceImageFormatProperties() with {@code format}, {@code type}, {@code tiling}, {@code usage}, and {@code flags} equal to those in this structure</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-textureCompressionETC2">ETC2 texture compression</a> feature is not enabled, {@code format} <b>must</b> not be #FORMAT_ETC2_R8G8B8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8_SRGB_BLOCK, #FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK, #FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK, #FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK, #FORMAT_EAC_R11_UNORM_BLOCK, #FORMAT_EAC_R11_SNORM_BLOCK, #FORMAT_EAC_R11G11_UNORM_BLOCK, or #FORMAT_EAC_R11G11_SNORM_BLOCK</li>
 			<li>If the <a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/xhtml/vkspec.html\#features-features-textureCompressionASTC_LDR">ASTC LDR texture compression</a> feature is not enabled, {@code format} <b>must</b> not be #FORMAT_ASTC_4x4_UNORM_BLOCK, #FORMAT_ASTC_4x4_SRGB_BLOCK, #FORMAT_ASTC_5x4_UNORM_BLOCK, #FORMAT_ASTC_5x4_SRGB_BLOCK, #FORMAT_ASTC_5x5_UNORM_BLOCK, #FORMAT_ASTC_5x5_SRGB_BLOCK, #FORMAT_ASTC_6x5_UNORM_BLOCK, #FORMAT_ASTC_6x5_SRGB_BLOCK, #FORMAT_ASTC_6x6_UNORM_BLOCK, #FORMAT_ASTC_6x6_SRGB_BLOCK, #FORMAT_ASTC_8x5_UNORM_BLOCK, #FORMAT_ASTC_8x5_SRGB_BLOCK, #FORMAT_ASTC_8x6_UNORM_BLOCK, #FORMAT_ASTC_8x6_SRGB_BLOCK, #FORMAT_ASTC_8x8_UNORM_BLOCK, #FORMAT_ASTC_8x8_SRGB_BLOCK, #FORMAT_ASTC_10x5_UNORM_BLOCK, #FORMAT_ASTC_10x5_SRGB_BLOCK, #FORMAT_ASTC_10x6_UNORM_BLOCK, #FORMAT_ASTC_10x6_SRGB_BLOCK, #FORMAT_ASTC_10x8_UNORM_BLOCK, #FORMAT_ASTC_10x8_SRGB_BLOCK, #FORMAT_ASTC_10x10_UNORM_BLOCK, #FORMAT_ASTC_10x10_SRGB_BLOCK, #FORMAT_ASTC_12x10_UNORM_BLOCK, #FORMAT_ASTC_12x10_SRGB_BLOCK, #FORMAT_ASTC_12x12_UNORM_BLOCK, or #FORMAT_ASTC_12x12_SRGB_BLOCK</li>
@@ -3614,8 +3616,11 @@ val VkFramebufferCreateInfo = struct(VULKAN_PACKAGE, "VkFramebufferCreateInfo") 
 			<li>Any given element of {@code pAttachments} <b>must</b> have dimensions at least as large as the corresponding framebuffer dimension</li>
 			<li>Any given element of {@code pAttachments} <b>must</b> only specify a single mip level</li>
 			<li>Any given element of {@code pAttachments} <b>must</b> have been created with the identity swizzle</li>
+			<li>{@code width} <b>must</b> be greater than 0.</li>
 			<li>{@code width} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferWidth}</li>
+			<li>{@code height} <b>must</b> be greater than 0.</li>
 			<li>{@code height} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferHeight}</li>
+			<li>{@code layers} <b>must</b> be greater than 0.</li>
 			<li>{@code layers} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxFramebufferLayers}</li>
 			<li>Any given element of {@code pAttachments} that is a 2D or 2D array image view taken from a 3D image <b>must</b> not be a depth/stencil format</li>
 		</ul>

@@ -1279,7 +1279,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 		</ul>
 
 		<div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-		An execution dependency with only #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT in the destination stage mask will only prevent that stage from executing in subsequently submitted commands. As this stage doesn't perform any actual execution, this is not observable - in effect, it does not delay processing of subsequent commands. Similarly an execution dependency with only #PIPELINE_STAGE_TOP_OF_PIPE_BIT in the source stage mask will effectively not wait for any prior commands to complete.
+		An execution dependency with only #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT in the destination stage mask will only prevent that stage from executing in subsequently submitted commands. As this stage does not perform any actual execution, this is not observable - in effect, it does not delay processing of subsequent commands. Similarly an execution dependency with only #PIPELINE_STAGE_TOP_OF_PIPE_BIT in the source stage mask will effectively not wait for any prior commands to complete.
 
 		When defining a memory dependency, using only #PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT or #PIPELINE_STAGE_TOP_OF_PIPE_BIT would never make any accesses available and/or visible because these stages do not access memory.
 
@@ -6957,7 +6957,7 @@ val VK10 = "VK10".nativeClass(VULKAN_PACKAGE, "VK10", prefix = "VK", binding = V
 ￿    VkCommandBuffer*                            pCommandBuffers);</code></pre>
 
 		<h5>Description</h5>
-		#AllocateCommandBuffers() <b>can</b> be used to create multiple command buffers. If the creation of any of those command buffers fails, the implementation <b>must</b> destroy all successfully created command buffer objects from this command, set all entries of the {@code pCommandBuffers} array to #NULL_HANDLE and return the error.
+		#AllocateCommandBuffers() <b>can</b> be used to create multiple command buffers. If the creation of any of those command buffers fails, the implementation <b>must</b> destroy all successfully created command buffer objects from this command, set all entries of the {@code pCommandBuffers} array to {@code NULL} and return the error.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
@@ -9025,7 +9025,7 @@ o = min(m &times; depthBiasSlopeFactor + r &times; depthBiasConstantFactor, dept
 	void(
 		"CmdClearDepthStencilImage",
 		"""
-		Fill regions of a combined depth-stencil image.
+		Fill regions of a combined depth/stencil image.
 
 		<h5>C Specification</h5>
 		To clear one or more subranges of a depth/stencil image, call:

@@ -66,8 +66,8 @@ val PFN_vkDebugReportCallbackEXT = "PFN_vkDebugReportCallbackEXT".callback(
 	uint64_t.IN("object", "gives the object where the issue was detected. {@code object} may be #NULL_HANDLE if there is no object associated with the event."),
 	size_t.IN("location", "a component (layer, driver, loader) defined value that indicates the <em>location</em> of the trigger. This is an optional value."),
 	int32_t.IN("messageCode", "a layer-defined value indicating what test triggered this callback."),
-	const..char_p.IN("pLayerPrefix", "the abbreviation of the component making the callback."),
-	const..char_p.IN("pMessage", "a null-terminated string detailing the trigger conditions."),
+	const..char_p.IN("pLayerPrefix", "the abbreviation of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
+	const..char_p.IN("pMessage", "a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
 	opaque_p.IN("pUserData", "the user data given when the DebugReportCallback was created.")
 ) {
 	documentation =
@@ -317,7 +317,7 @@ val VkPresentInfoKHR = struct(VULKAN_PACKAGE, "VkPresentInfoKHR") {
 	VkStructureType.member("sType", "the type of this structure.")
 	nullable..const..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
 	AutoSize("pWaitSemaphores", optional = true)..uint32_t.member("waitSemaphoreCount", "the number of semaphores to wait for before issuing the present request. The number <b>may</b> be zero.")
-	nullable..const..VkSemaphore.p.member("pWaitSemaphores", "if not #NULL_HANDLE, is an array of {@code VkSemaphore} objects with {@code waitSemaphoreCount} entries, and specifies the semaphores to wait for before issuing the present request.")
+	nullable..const..VkSemaphore.p.member("pWaitSemaphores", "if not {@code NULL}, is an array of {@code VkSemaphore} objects with {@code waitSemaphoreCount} entries, and specifies the semaphores to wait for before issuing the present request.")
 	AutoSize("pSwapchains", "pImageIndices", "pResults")..uint32_t.member("swapchainCount", "the number of swapchains being presented to by this command.")
 	const..VkSwapchainKHR.p.member("pSwapchains", "an array of {@code VkSwapchainKHR} objects with {@code swapchainCount} entries. A given swapchain <b>must</b> not appear in this list more than once.")
 	const..uint32_t_p.member("pImageIndices", "an array of indices into the array of each swapchain&#8217;s presentable images, with {@code swapchainCount} entries. Each entry in this array identifies the image to present on the corresponding entry in the {@code pSwapchains} array.")
@@ -622,7 +622,7 @@ val VkDebugReportCallbackCreateInfoEXT = struct(VULKAN_PACKAGE, "VkDebugReportCa
 
 		<ul>
 			<li>#DEBUG_REPORT_ERROR_BIT_EXT indicates an error that may cause undefined results, including an application crash.</li>
-			<li>#DEBUG_REPORT_WARNING_BIT_EXT indicates use of Vulkan that may expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases may point to behavior that is almost certainly bad when unintended such as using an image whose memory hasn&#8217;t been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
+			<li>#DEBUG_REPORT_WARNING_BIT_EXT indicates use of Vulkan that may expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases may point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
 			<li>#DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT indicates a potentially non-optimal use of Vulkan. E.g. using #CmdClearColorImage() when a RenderPass load_op would have worked.</li>
 			<li>#DEBUG_REPORT_INFORMATION_BIT_EXT indicates an informational message such as resource details that may be handy when debugging an application.</li>
 			<li>#DEBUG_REPORT_DEBUG_BIT_EXT indicates diagnostic information from the loader and layers.</li>
@@ -1374,11 +1374,11 @@ val VkCmdProcessCommandsInfoNVX = struct(VULKAN_PACKAGE, "VkCmdProcessCommandsIn
 	VkIndirectCommandsLayoutNVX.member("indirectCommandsLayout", "the {@code VkIndirectCommandsLayoutNVX} that provides the command sequence to generate.")
 	AutoSize("pIndirectCommandsTokens")..uint32_t.member("indirectCommandsTokenCount", "defines the number of input tokens used.")
 	const..VkIndirectCommandsTokenNVX.p.buffer("pIndirectCommandsTokens", "provides an array of ##VkIndirectCommandsTokenNVX that reference the input data for each token command.")
-	uint32_t.member("maxSequencesCount", "the maximum number of sequences for which command buffer space will be reserved. If {@code sequencesCountBuffer} is {@code NULL}, this is also the actual number of sequences generated.")
-	nullable..VkCommandBuffer.member("targetCommandBuffer", "<b>can</b> be the secondary {@code VkCommandBuffer} in which the commands should be recorded. If {@code NULL} an implicit reservation as well as execution takes place on the processing {@code VkCommandBuffer}.")
+	uint32_t.member("maxSequencesCount", "the maximum number of sequences for which command buffer space will be reserved. If {@code sequencesCountBuffer} is #NULL_HANDLE, this is also the actual number of sequences generated.")
+	nullable..VkCommandBuffer.member("targetCommandBuffer", "<b>can</b> be the secondary {@code VkCommandBuffer} in which the commands should be recorded. If {@code targetCommandBuffer} is {@code NULL} an implicit reservation as well as execution takes place on the processing {@code VkCommandBuffer}.")
 	VkBuffer.member("sequencesCountBuffer", "<b>can</b> be {@code VkBuffer} from which the actual amount of sequences is sourced from as ftext:uint32_t value.")
 	VkDeviceSize.member("sequencesCountOffset", "the byte offset into {@code sequencesCountBuffer} where the count value is stored.")
-	VkBuffer.member("sequencesIndexBuffer", "<b>must</b> be set if {@code indirectCommandsLayout}&#8217;s #INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX is set and provides the used sequence indices as ftext:uint32_t array. Otherwise it <b>must</b> be {@code NULL}.")
+	VkBuffer.member("sequencesIndexBuffer", "<b>must</b> be set if {@code indirectCommandsLayout}&#8217;s #INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX is set and provides the used sequence indices as ftext:uint32_t array. Otherwise it <b>must</b> be #NULL_HANDLE.")
 	VkDeviceSize.member("sequencesIndexOffset", "the byte offset into {@code sequencesIndexBuffer} where the index values start.")
 }
 

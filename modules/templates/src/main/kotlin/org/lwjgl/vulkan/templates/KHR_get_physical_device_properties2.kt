@@ -233,7 +233,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 		<h5>Description</h5>
 		#GetPhysicalDeviceImageFormatProperties2KHR() behaves similarly to #GetPhysicalDeviceImageFormatProperties(), with the ability to return extended information via chained output structures.
 
-		If the loader implementation emulates #GetPhysicalDeviceImageFormatProperties2KHR() on a device that doesn't support the extension, and the query involves a structure the loader does not support, #GetPhysicalDeviceImageFormatProperties2KHR() returns #ERROR_FORMAT_NOT_SUPPORTED.
+		If the loader implementation emulates #GetPhysicalDeviceImageFormatProperties2KHR() on a device that does not support the extension, and the query involves a structure the loader does not support, #GetPhysicalDeviceImageFormatProperties2KHR() returns #ERROR_FORMAT_NOT_SUPPORTED.
 
 		<h5>Valid Usage (Implicit)</h5>
 		<ul>
