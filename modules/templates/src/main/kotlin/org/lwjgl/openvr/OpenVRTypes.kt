@@ -75,6 +75,8 @@ val VROverlayFlags = "VROverlayFlags".enumType
 val VROverlayInputMethod = "VROverlayInputMethod".enumType
 val VROverlayTransformType = "VROverlayTransformType".enumType
 
+val PropertyContainerHandle_t = typedef(uint64_t, "PropertyContainerHandle_t")
+val PropertyTypeTag_t = typedef(uint32_t, "PropertyTypeTag_t")
 val ScreenshotHandle_t = typedef(uint32_t, "ScreenshotHandle_t")
 val TextureID_t = typedef(int32_t, "TextureID_t")
 val TrackedCameraHandle_t = typedef(uint64_t, "TrackedCameraHandle_t")
@@ -285,6 +287,11 @@ val VREvent_MessageOverlay_t = struct(OPENVR_PACKAGE, "VREventMessageOverlay", n
 	uint32_t.member("unVRMessageOverlayResponse", "").links("VRMessageOverlayResponse_\\w+")
 }
 
+val VREvent_Property_t = struct(OPENVR_PACKAGE, "VREventProperty", nativeName = "VREvent_Property_t") {
+	PropertyContainerHandle_t.member("container", "")
+	ETrackedDeviceProperty.member("prop", "").links("ETrackedDeviceProperty_\\w+")
+}
+
 val VREvent_Data_t = union(OPENVR_PACKAGE, "VREventData", nativeName = "VREvent_Data_t") {
 	VREvent_Reserved_t.member("reserved", "")
 	VREvent_Controller_t.member("controller", "")
@@ -305,6 +312,7 @@ val VREvent_Data_t = union(OPENVR_PACKAGE, "VREventData", nativeName = "VREvent_
 	VREvent_ApplicationLaunch_t.member("applicationLaunch", "")
 	VREvent_EditingCameraSurface_t.member("cameraSurface", "")
 	VREvent_MessageOverlay_t.member("messageOverlay", "")
+	VREvent_Property_t.member("property", "")
 }
 
 val VREvent_t = struct(OPENVR_PACKAGE, "VREvent", nativeName = "VREvent_t") {

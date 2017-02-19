@@ -296,4 +296,13 @@ val VRApplications = "VRApplications".nativeClass(
 		const..charASCII_p.IN("pchArguments", ""),
 		const..charASCII_p.IN("pchWorkingDirectory", "")
 	)
+
+	uint32_t(
+		"GetCurrentSceneProcessId",
+		"""
+		Returns the current scene process ID according to the application system. A scene process will get scene focus once it starts rendering, but it will
+		appear here once it calls {@code VR_Init} with the Scene application.
+		* type.
+		"""
+	)
 }

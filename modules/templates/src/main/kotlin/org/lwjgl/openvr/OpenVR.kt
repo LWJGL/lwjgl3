@@ -16,7 +16,7 @@ private fun PrintWriter.generateCapabilitiesClass(nativeClass: NativeClass) {
 
 	println("\t\tpublic final long")
 	println(nativeClass.functions
-		.map { it.simpleName }
+		.map(Func::simpleName)
 		.joinToString(",\n\t\t\t", prefix = "\t\t\t", postfix = ";"))
 
 	println("\n\t\tpublic ${nativeClass.capabilitiesClass}(long tableAddress) {")

@@ -59,7 +59,7 @@ private val EGLBinding = Generator.register(object : APIBinding(
 			.toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
 
 		println("\tpublic final long")
-		println(addresses.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
+		println(addresses.map(Func::name).joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
 
 		classes.forEach {
 			println(it.getCapabilityJavadoc())

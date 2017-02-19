@@ -315,11 +315,22 @@ typedef struct HmdColor_t
 
 	EVRCompositorError(
 		"GetMirrorTextureD3D11",
-		"Opens a shared D3D11 texture with the undistorted composited image for each eye.",
+		"""
+		Opens a shared D3D11 texture with the undistorted composited image for each eye.
+
+		Use #ReleaseMirrorTextureD3D11() when finished instead of calling Release on the resource itself.
+		""",
 
 		EVREye.IN("eEye", ""),
 		opaque_p.IN("pD3D11DeviceOrResource", ""),
 		Check(1)..void_pp.OUT("ppD3D11ShaderResourceView", "")
+	)
+
+	void(
+		"ReleaseMirrorTextureD3D11",
+		"Releases a shared D3D11 texture.",
+
+		opaque_p.IN("pD3D11ShaderResourceView", "")
 	)
 
 	EVRCompositorError(

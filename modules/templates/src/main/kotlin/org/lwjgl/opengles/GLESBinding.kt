@@ -105,7 +105,7 @@ private val GLESBinding = Generator.register(object : APIBinding(
 
 		println("\tpublic final long")
 		println(functions
-			.map { it.name }
+			.map(Func::name)
 			.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n"))
 
 		classes.forEach {

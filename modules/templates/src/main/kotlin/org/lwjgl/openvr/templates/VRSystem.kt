@@ -152,8 +152,7 @@ typedef struct HiddenAreaMesh_t
 		<h3>D3D10/11 Only</h3>
 
 		Returns the adapter index that the user should pass into {@code EnumAdapters} to create the device and swap chain in DX10 and DX11. If an error occurs
-		the index will be set to -1. The index will also be -1 if the headset is in direct mode on the driver side instead of using the compositor's builtin
-		direct mode support.
+		the index will be set to -1.
 		""",
 
 		Check(1)..int32_t_p.OUT("pnAdapterIndex", "the index of the adapter to use for this display")

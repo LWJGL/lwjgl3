@@ -49,7 +49,7 @@ val WGLBinding = Generator.register(object : APIBinding(
 			.toSortedSet(Comparator<Func> { o1, o2 -> o1.name.compareTo(o2.name) })
 
 		println("\tpublic final long")
-		println(functions.map { it.name }.joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n")
+		println(functions.map(Func::name).joinToString(",\n\t\t", prefix = "\t\t", postfix = ";\n")
 		)
 
 		classes.forEach {
