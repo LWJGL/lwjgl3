@@ -13420,6 +13420,7 @@ nk_slider_behavior(nk_flags *state, struct nk_rect *logical_cursor,
     float slider_min, float slider_max, float slider_value,
     float slider_step, float slider_steps)
 {
+    UNUSED_PARAM(style)
     int left_mouse_down;
     int left_mouse_click_in_cursor;
 
@@ -16863,7 +16864,7 @@ nk_panel_end(struct nk_context *ctx)
             if (nk_input_is_mouse_down(in, NK_BUTTON_LEFT) && left_mouse_down && left_mouse_click_in_scaler) {
                 float delta_x = in->mouse.delta.x;
                 if (layout->flags & NK_WINDOW_SCALE_LEFT) {
-                    delta_x =- delta_x;
+                    delta_x -= delta_x;
                     window->bounds.x += in->mouse.delta.x;
                 }
                 window->bounds.w = NK_MAX(window_size.x, window->bounds.w + delta_x);
