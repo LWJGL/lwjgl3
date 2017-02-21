@@ -18,6 +18,31 @@ private val EGLBinding = Generator.register(object : APIBinding(
 	APICapabilities.JAVA_CAPABILITIES
 ) {
 
+	override fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String): Boolean {
+		if (function.nativeClass.templateName.startsWith("EGL")) {
+			writer.printOpenGLJavaDoc(documentation, function.nativeName)
+			return true
+		}
+		return false
+	}
+
+	private fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String) {
+		val link = url("https://www.khronos.org/registry/EGL/sdk/docs/man/html/$function.xhtml", "Reference Page")
+
+		if (documentation.isEmpty())
+			println("\t/** $link */")
+		else {
+			print("\t/**\n\t * <p>$link</p>\n\t * \n")
+			if (documentation.indexOf('\n') == -1) {
+				print("\t * ")
+				println(documentation.substring("\t/** ".length, documentation.length - 3))
+				println("\t */")
+			} else {
+				println(documentation.substring("\t/**\n".length))
+			}
+		}
+	}
+
 	override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "CL10"
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
