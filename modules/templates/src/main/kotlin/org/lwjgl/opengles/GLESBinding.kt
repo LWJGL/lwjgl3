@@ -65,6 +65,56 @@ private val GLESBinding = Generator.register(object : APIBinding(
 		}
 	}
 
+	override fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String): Boolean {
+		if (function.nativeClass.templateName.startsWith("GLES")) {
+			writer.printOpenGLJavaDoc(documentation, function.nativeName)
+			return true
+		}
+		return false
+	}
+
+	private val VECTOR_SUFFIX = "^gl(\\w+?)[ILP]?(?:Matrix)?\\d+(x\\d+)?N?u?(?:[bsifd]|i64)_?v?$".toRegex()
+	private val VECTOR_SUFFIX2 = "^gl(?:(Get)n?)?(\\w+?)[ILP]?\\d*N?u?(?:[bsifd]|i64)v$".toRegex()
+	private val NAMED = "^gl(\\w+?)?Named([A-Z]\\w*)$".toRegex()
+
+	private fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String) {
+		val page = VECTOR_SUFFIX.find(function).let {
+			if (it == null)
+				function
+			else
+				"gl${it.groupValues[1]}"
+		}.let { page ->
+			VECTOR_SUFFIX2.find(page).let {
+				if (it == null)
+					page
+				else
+					"gl${it.groupValues[1]}${it.groupValues[2]}"
+			}
+		}.let { page ->
+			NAMED.find(page).let {
+				if (it == null)
+					page
+				else
+					"gl${it.groupValues[1]}${it.groupValues[2]}"
+			}
+		}
+
+		val link = url("http://docs.gl/es3/$page", "Reference Page")
+
+		if (documentation.isEmpty())
+			println("\t/** $link */")
+		else {
+			print("\t/**\n\t * <p>$link</p>\n\t * \n")
+			if (documentation.indexOf('\n') == -1) {
+				print("\t * ")
+				println(documentation.substring("\t/** ".length, documentation.length - 3))
+				println("\t */")
+			} else {
+				println(documentation.substring("\t/**\n".length))
+			}
+		}
+	}
+
 	override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "GLES20"
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
