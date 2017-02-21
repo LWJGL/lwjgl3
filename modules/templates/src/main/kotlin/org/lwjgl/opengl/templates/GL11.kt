@@ -1208,7 +1208,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("mode", "specifies which material property or properties track the current color", "#EMISSION #AMBIENT #DIFFUSE #SPECULAR #AMBIENT_AND_DIFFUSE")
 	)
 
-	DeprecatedGL..void(
+	OffHeapOnly..DeprecatedGL..void(
 		"ColorPointer",
 		"Specifies the location and organization of a color array.",
 
@@ -1377,7 +1377,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		Check(1)..const..GLboolean_p.IN("flag", "the edge flag buffer")
 	)
 
-	DeprecatedGL..void(
+	OffHeapOnly..DeprecatedGL..void(
 		"EdgeFlagPointer",
 		"Specifies the location and organization of an edge flag array.",
 
@@ -1996,7 +1996,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLuint.IN("mask", "the color index mask value")
 	)
 
-	DeprecatedGL..void(
+	OffHeapOnly..DeprecatedGL..void(
 		"IndexPointer",
 		"Specifies the location and organization of a color index array.",
 
@@ -2443,7 +2443,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	DeprecatedGL..void("Normal3iv", "Pointer version of #Normal3i().", Check(3)..const..GLint_p.IN("v", normalBuffer))
 	DeprecatedGL..void("Normal3dv", "Pointer version of #Normal3d().", Check(3)..const..GLdouble_p.IN("v", normalBuffer))
 
-	DeprecatedGL..void(
+	OffHeapOnly..DeprecatedGL..void(
 		"NormalPointer",
 		"Specifies the location and organization of a normal array.",
 
@@ -3108,7 +3108,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	DeprecatedGL..void("TexCoord4iv", "Pointer version of #TexCoord4i().", Check(4)..const..GLint_p.IN("v", texCoordBuffer))
 	DeprecatedGL..void("TexCoord4dv", "Pointer version of #TexCoord4d().", Check(4)..const..GLdouble_p.IN("v", texCoordBuffer))
 
-	DeprecatedGL..void(
+	OffHeapOnly..DeprecatedGL..void(
 		"TexCoordPointer",
 		"Specifies the location and organization of a texture coordinate array.",
 
@@ -3533,7 +3533,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	DeprecatedGL..void("Vertex4iv", "Pointer version of #Vertex4i().", Check(4)..const..GLint_p.IN("coords", vertexBuffer))
 	DeprecatedGL..void("Vertex4dv", "Pointer version of #Vertex4d().", Check(4)..const..GLdouble_p.IN("coords", vertexBuffer))
 
-	DeprecatedGL..void(
+	OffHeapOnly..DeprecatedGL..void(
 		"VertexPointer",
 		"Specifies the location and organization of a vertex array.",
 

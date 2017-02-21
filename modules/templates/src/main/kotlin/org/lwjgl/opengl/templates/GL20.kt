@@ -645,7 +645,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 	void("VertexAttrib4Nusv", "Normalized unsigned short pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLushort_p.IN("v", vertexAttribBuffer))
 	void("VertexAttrib4Nuiv", "Normalized unsigned int pointer version of #VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLuint_p.IN("v", vertexAttribBuffer))
 
-	void(
+	OffHeapOnly..void(
 		"VertexAttribPointer",
 		"Specifies the location and organization of a vertex attribute array.",
 

@@ -194,7 +194,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		Check(1)..const..GLdouble_p.IN("coord", "the fog coordinate value")
 	)
 
-	DeprecatedGL..void(
+	OffHeapOnly..DeprecatedGL..void(
 		"FogCoordPointer",
 		"Specifies the location and organization of a fog coordinate array.",
 
@@ -342,7 +342,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 	DeprecatedGL..void("SecondaryColor3usv", "Pointer version of #SecondaryColor3us().", Check(3)..const..GLushort_p.IN("v", colorBuffer))
 	DeprecatedGL..void("SecondaryColor3uiv", "Pointer version of #SecondaryColor3ui().", Check(3)..const..GLuint_p.IN("v", colorBuffer))
 
-	DeprecatedGL..void(
+	OffHeapOnly..DeprecatedGL..void(
 		"SecondaryColorPointer",
 		"Specifies the location and organization of a secondary color array.",
 

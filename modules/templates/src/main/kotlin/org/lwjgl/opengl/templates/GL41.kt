@@ -904,7 +904,7 @@ if (shader) {
 	void("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), Check(3)..const..GLdouble_p.IN("v", attribBuffer))
 	void("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), Check(4)..const..GLdouble_p.IN("v", attribBuffer))
 
-	void(
+	OffHeapOnly..void(
 		"VertexAttribLPointer",
 		"Specifies the location and organization of a 64-bit vertex attribute array.",
 

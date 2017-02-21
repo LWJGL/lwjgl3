@@ -1570,7 +1570,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		Check(4)..const..GLfloat_p.IN("v", "")
 	)
 
-	void(
+	OffHeapOnly..void(
 		"VertexAttribPointer",
 		"",
 

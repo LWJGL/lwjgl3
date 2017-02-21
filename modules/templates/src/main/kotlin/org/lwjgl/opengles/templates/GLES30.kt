@@ -740,7 +740,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
 		)..GLcharASCII_p.OUT("name", "")
 	)
 
-	void(
+	OffHeapOnly..void(
 		"VertexAttribIPointer",
 		"",
 

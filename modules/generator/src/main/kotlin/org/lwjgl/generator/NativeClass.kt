@@ -311,7 +311,7 @@ class NativeClass(
 										it.paramType,
 										it.documentation
 									).copyModifiers(it).removeArrayModifiers().replaceModifier<Check> {
-										if (it.expression == "0")
+										if (it === Unsafe)
 											it
 										else
 											Check("${it.expression.let { if (it.contains(' ')) "($it)" else it }} >> ${autoType.byteShift}")

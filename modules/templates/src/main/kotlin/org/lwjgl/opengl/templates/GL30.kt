@@ -205,7 +205,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 	void("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLbyte_p.IN("v", vertexAttribBuffer))
 	void("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLshort_p.IN("v", vertexAttribBuffer))
 
-	void(
+	OffHeapOnly..void(
 		"VertexAttribIPointer",
 		"Specifies the location and organization of a pure integer vertex attribute array.",
 

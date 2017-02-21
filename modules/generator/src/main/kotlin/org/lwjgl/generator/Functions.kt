@@ -434,7 +434,7 @@ class Func(
 			if (it.has<Check>()) {
 				val check = it.get<Check>()
 				val transform = transforms?.get(it)
-				if (check.expression != "0" && transform !is SkipCheckFunctionTransform) {
+				if (check !== Unsafe && transform !is SkipCheckFunctionTransform) {
 					val DEBUG = if (check.debug) "if ( DEBUG )\n\t\t\t\t" else ""
 
 					if (it.has<MultiType>())
