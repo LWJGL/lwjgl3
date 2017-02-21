@@ -34,7 +34,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 
 	val blendEquations = "#FUNC_ADD #FUNC_SUBTRACT #FUNC_REVERSE_SUBTRACT #MIN #MAX"
 
-	ReferenceGL("glBlendEquation")..void(
+	void(
 		"BlendEquationi",
 		"Specifies the equation used for both the RGB blend equation and the Alpha blend equation for the specified draw buffer.",
 
@@ -42,7 +42,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 		GLenum.IN("mode", "how source and destination colors are combined", blendEquations)
 	)
 
-	ReferenceGL("glBlendEquationSeparate")..void(
+	void(
 		"BlendEquationSeparatei",
 		"Sets the RGB blend equation and the alpha blend equation separately for the specified draw buffer.",
 
@@ -777,7 +777,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("id", "the name of a query object")
 	)
 
-	ReferenceGL("glBeginQueryIndexed")..void(
+	void(
 		"EndQueryIndexed",
 		"Ends a query object on an indexed target",
 

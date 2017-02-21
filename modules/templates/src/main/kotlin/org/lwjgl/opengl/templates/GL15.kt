@@ -329,7 +329,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		GLuint.IN("id", "the name of a query object")
 	)
 
-	ReferenceGL("glBeginQuery")..void(
+	void(
 		"EndQuery",
 		"Marks the end of the sequence of commands to be tracked for the active query specified by {@code target}.",
 

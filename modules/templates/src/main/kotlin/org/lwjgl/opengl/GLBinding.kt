@@ -30,8 +30,6 @@ val GLBinding = Generator.register(object : APIBinding(
 	APICapabilities.JNI_CAPABILITIES
 ) {
 
-	private val GLCorePattern = "GL[1-9][0-9]".toRegex()
-
 	private val classes: List<NativeClass> by lazy {
 		super.getClasses { o1, o2 ->
 			// Core functionality first, extensions after
@@ -75,15 +73,60 @@ val GLBinding = Generator.register(object : APIBinding(
 	}
 
 	override fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String): Boolean {
-		if (GLCorePattern.matches(function.nativeClass.className)) {
-			val xmlName = if (function.has<ReferenceGL>())
-				function.get<ReferenceGL>().function
-			else
-				function.stripPostfix(stripType = true)
-			writer.printOpenGLJavaDoc(documentation, xmlName, function has DeprecatedGL)
+		if (function.nativeClass.templateName.startsWith("GL")) {
+			writer.printOpenGLJavaDoc(documentation, function.nativeName, function has DeprecatedGL)
 			return true
 		}
 		return false
+	}
+
+	private val VECTOR_SUFFIX = "^gl(\\w+?)[ILP]?(?:Matrix)?\\d+(x\\d+)?N?u?(?:[bsifd]|i64)_?v?$".toRegex()
+	private val VECTOR_SUFFIX2 = "^gl(?:(Get)n?)?(\\w+?)[ILP]?\\d*N?u?(?:[bsifd]|i64)v$".toRegex()
+	private val NAMED = "^gl(\\w+?)?Named([A-Z]\\w*)$".toRegex()
+
+	private fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, deprecated: Boolean) {
+		val page = VECTOR_SUFFIX.find(function).let {
+			if (it == null)
+				function
+			else
+				"gl${it.groupValues[1]}"
+		}.let { page ->
+			VECTOR_SUFFIX2.find(page).let {
+				if (it == null)
+					page
+				else if (page == "glScissorIndexedv")
+					"glScissorIndexed"
+				else
+					"gl${it.groupValues[1]}${it.groupValues[2]}"
+			}
+		}.let { page ->
+			NAMED.find(page).let {
+				if (it == null)
+					page
+				else
+					"gl${it.groupValues[1]}${it.groupValues[2]}"
+			}
+		}
+
+		val link = url("http://docs.gl/gl${if (deprecated) "3" else "4"}/$page", "Reference Page")
+		val injectedJavaDoc =
+			if (deprecated)
+				"$link - <em>This function is deprecated and unavailable in the Core profile</em>"
+			else
+				link
+
+		if (documentation.isEmpty())
+			println("\t/** $injectedJavaDoc */")
+		else {
+			print("\t/**\n\t * <p>$injectedJavaDoc</p>\n\t * \n")
+			if (documentation.indexOf('\n') == -1) {
+				print("\t * ")
+				println(documentation.substring("\t/** ".length, documentation.length - 3))
+				println("\t */")
+			} else {
+				println(documentation.substring("\t/**\n".length))
+			}
+		}
 	}
 
 	private val Iterable<Func>.hasDeprecated: Boolean

@@ -932,7 +932,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("target", "the OpenGL state to enable")
 	)
 
-	ReferenceGL("glEnable")..void(
+	void(
 		"Disable",
 		"Disables the specified OpenGL state.",
 
@@ -1605,7 +1605,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		Check(4)..GLdouble_p.OUT("equation", "a buffer in which to place the returned values")
 	)
 
-	ReferenceGL("glGet")..void(
+	void(
 		"GetBooleanv",
 		"""
 		Returns the current boolean value of the specified state variable.
@@ -1619,7 +1619,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		Check(1)..ReturnParam..GLboolean_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
-	ReferenceGL("glGet")..void(
+	void(
 		"GetFloatv",
 		"""
 		Returns the current float value of the specified state variable.
@@ -1633,7 +1633,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		Check(1)..ReturnParam..GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
-	ReferenceGL("glGet")..void(
+	void(
 		"GetIntegerv",
 		"""
 		Returns the current integer value of the specified state variable.
@@ -1647,7 +1647,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		Check(1)..ReturnParam..GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
-	ReferenceGL("glGet")..void(
+	void(
 		"GetDoublev",
 		"""
 		Returns the current double value of the specified state variable.

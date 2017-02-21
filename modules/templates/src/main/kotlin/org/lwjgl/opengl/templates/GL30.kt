@@ -377,7 +377,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("mode", "how {@code glBeginConditionalRender} interprets the results of the occlusion query", CONDITIONAL_RENDER_MODES)
 	)
 
-	ReferenceGL("glBeginConditionalRender")..void(
+	void(
 		"EndConditionalRender",
 		"Ends conditional rendering."
 	)
@@ -1056,7 +1056,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLboolean.IN("a", "whether A values are written or not")
 	)
 
-	ReferenceGL("glGet")..void(
+	void(
 		"GetBooleani_v",
 		"Queries the boolean value of an indexed state variable.",
 
@@ -1065,7 +1065,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		Check(1)..ReturnParam..GLboolean_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
-	ReferenceGL("glGet")..void(
+	void(
 		"GetIntegeri_v",
 		"Queries the integer value of an indexed state variable.",
 
@@ -1253,7 +1253,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)
 	)
 
-	ReferenceGL("glBeginTransformFeedback")..void("EndTransformFeedback", "Ends transform feedback operation.")
+	void("EndTransformFeedback", "Ends transform feedback operation.")
 
 	void(
 		"TransformFeedbackVaryings",

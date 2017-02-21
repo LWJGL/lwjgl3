@@ -89,7 +89,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		Check(1)..ReturnParam..GLint_p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
 	)
 
-	ReferenceGL("DepthRange")..void(
+	void(
 		"DepthRangef",
 		"Specifies mapping of depth values from normalized device coordinates to window coordinates",
 
@@ -149,7 +149,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		AutoSize("binary")..GLsizei.IN("length", "the number of bytes contained in {@code binary}")
 	)
 
-	ReferenceGL("glProgramParameter")..void(
+	void(
 		"ProgramParameteri",
 		"Specifies the integer value of a program object parameter.",
 
@@ -304,9 +304,7 @@ if (shader) {
 	val uniMatrixTranspose = "whether to transpose the matrix as the values are loaded into the uniform variable"
 	val uniMatrixValue = "an array of {@code count} values that will be used to update the specified uniform matrix variable"
 
-	val ProgramUniformRef = ReferenceGL("glProgramUniform")
-
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform1i",
 		"Specifies the value of an int uniform variable for a specified program object.",
 
@@ -315,7 +313,7 @@ if (shader) {
 		GLint.IN("x", uniX)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform2i",
 		"Specifies the value of an ivec2 uniform variable for a specified program object.",
 
@@ -325,7 +323,7 @@ if (shader) {
 		GLint.IN("y", uniY)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform3i",
 		"Specifies the value of an ivec3 uniform variable for a specified program object.",
 
@@ -336,7 +334,7 @@ if (shader) {
 		GLint.IN("z", uniZ)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform4i",
 		"Specifies the value of an ivec4 uniform variable for a specified program object.",
 
@@ -348,7 +346,7 @@ if (shader) {
 		GLint.IN("w", uniW)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform1ui",
 		"Specifies the value of a uint uniform variable for a specified program object.",
 
@@ -357,7 +355,7 @@ if (shader) {
 		GLuint.IN("x", uniX)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform2ui",
 		"Specifies the value of a uvec2 uniform variable for a specified program object.",
 
@@ -367,7 +365,7 @@ if (shader) {
 		GLuint.IN("y", uniY)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform3ui",
 		"Specifies the value of a uvec3 uniform variable for a specified program object.",
 
@@ -378,7 +376,7 @@ if (shader) {
 		GLuint.IN("z", uniZ)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform4ui",
 		"Specifies the value of a uvec4 uniform variable for a specified program object.",
 
@@ -390,7 +388,7 @@ if (shader) {
 		GLuint.IN("w", uniW)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform1f",
 		"Specifies the value of a float uniform variable for a specified program object.",
 
@@ -399,7 +397,7 @@ if (shader) {
 		GLfloat.IN("x", uniX)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform2f",
 		"Specifies the value of a vec2 uniform variable for a specified program object.",
 
@@ -409,7 +407,7 @@ if (shader) {
 		GLfloat.IN("y", uniY)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform3f",
 		"Specifies the value of a vec3 uniform variable for a specified program object.",
 
@@ -420,7 +418,7 @@ if (shader) {
 		GLfloat.IN("z", uniZ)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform4f",
 		"Specifies the value of a vec4 uniform variable for a specified program object.",
 
@@ -432,7 +430,7 @@ if (shader) {
 		GLfloat.IN("w", uniW)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform1d",
 		"Specifies the value of a double uniform variable for a specified program object.",
 
@@ -441,7 +439,7 @@ if (shader) {
 		GLdouble.IN("x", uniX)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform2d",
 		"Specifies the value of a dvec2 uniform variable for a specified program object.",
 
@@ -451,7 +449,7 @@ if (shader) {
 		GLdouble.IN("y", uniY)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform3d",
 		"Specifies the value of a dvec3 uniform variable for a specified program object.",
 
@@ -462,7 +460,7 @@ if (shader) {
 		GLdouble.IN("z", uniZ)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform4d",
 		"Specifies the value of a dvec4 uniform variable for a specified program object.",
 
@@ -474,7 +472,7 @@ if (shader) {
 		GLdouble.IN("w", uniW)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform1iv",
 		"Specifies the value of a single float uniform variable or a float uniform variable array for a specified program object.",
 
@@ -484,7 +482,7 @@ if (shader) {
 		const..GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform2iv",
 		"Specifies the value of a single ivec2 uniform variable or an ivec2 uniform variable array for a specified program object.",
 
@@ -494,7 +492,7 @@ if (shader) {
 		const..GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform3iv",
 		"Specifies the value of a single ivec3 uniform variable or an ivec3 uniform variable array for a specified program object.",
 
@@ -504,7 +502,7 @@ if (shader) {
 		const..GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform4iv",
 		"Specifies the value of a single ivec4 uniform variable or an ivec4 uniform variable array for a specified program object.",
 
@@ -514,7 +512,7 @@ if (shader) {
 		const..GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform1uiv",
 		"Specifies the value of a single uint uniform variable or a uint uniform variable array for a specified program object.",
 
@@ -524,7 +522,7 @@ if (shader) {
 		const..GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform2uiv",
 		"Specifies the value of a single uvec2 uniform variable or a uvec2 uniform variable array for a specified program object.",
 
@@ -534,7 +532,7 @@ if (shader) {
 		const..GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform3uiv",
 		"Specifies the value of a single uvec3 uniform variable or a uvec3 uniform variable array for a specified program object.",
 
@@ -544,7 +542,7 @@ if (shader) {
 		const..GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform4uiv",
 		"Specifies the value of a single uvec4 uniform variable or a uvec4 uniform variable array for a specified program object.",
 
@@ -554,7 +552,7 @@ if (shader) {
 		const..GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform1fv",
 		"Specifies the value of a single float uniform variable or a float uniform variable array for a specified program object.",
 
@@ -564,7 +562,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform2fv",
 		"Specifies the value of a single vec2 uniform variable or a vec2 uniform variable array for a specified program object.",
 
@@ -574,7 +572,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform3fv",
 		"Specifies the value of a single vec3 uniform variable or a vec3 uniform variable array for a specified program object.",
 
@@ -584,7 +582,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform4fv",
 		"Specifies the value of a single vec4 uniform variable or a vec4 uniform variable array for a specified program object.",
 
@@ -594,7 +592,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform1dv",
 		"Specifies the value of a single double uniform variable or a double uniform variable array for a specified program object.",
 
@@ -604,7 +602,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform2dv",
 		"Specifies the value of a single dvec2 uniform variable or a dvec2 uniform variable array for a specified program object.",
 
@@ -614,7 +612,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform3dv",
 		"Specifies the value of a single dvec3 uniform variable or a dvec3 uniform variable array for a specified program object.",
 
@@ -624,7 +622,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniform4dv",
 		"Specifies the value of a single dvec4 uniform variable or a dvec4 uniform variable array for a specified program object.",
 
@@ -634,7 +632,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix2fv",
 		"Specifies the value of a single mat2 uniform variable or a mat2 uniform variable array for the current program object.",
 
@@ -645,7 +643,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix3fv",
 		"Specifies the value of a single mat3 uniform variable or a mat3 uniform variable array for the current program object.",
 
@@ -656,7 +654,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix4fv",
 		"Specifies the value of a single mat4 uniform variable or a mat4 uniform variable array for the current program object.",
 
@@ -667,7 +665,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix2dv",
 		"Specifies the value of a single dmat2 uniform variable or a dmat2 uniform variable array for the current program object.",
 
@@ -678,7 +676,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix3dv",
 		"Specifies the value of a single dmat3 uniform variable or a dmat3 uniform variable array for the current program object.",
 
@@ -689,7 +687,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix4dv",
 		"Specifies the value of a single dmat4 uniform variable or a dmat4 uniform variable array for the current program object.",
 
@@ -700,7 +698,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix2x3fv",
 		"Specifies the value of a single mat2x3 uniform variable or a mat2x3 uniform variable array for the current program object.",
 
@@ -711,7 +709,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix3x2fv",
 		"Specifies the value of a single mat3x2 uniform variable or a mat3x2 uniform variable array for the current program object.",
 
@@ -722,7 +720,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix2x4fv",
 		"Specifies the value of a single mat2x4 uniform variable or a mat2x4 uniform variable array for the current program object.",
 
@@ -733,7 +731,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix4x2fv",
 		"Specifies the value of a single mat4x2 uniform variable or a mat4x2 uniform variable array for the current program object.",
 
@@ -744,7 +742,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix3x4fv",
 		"Specifies the value of a single mat3x4 uniform variable or a mat3x4 uniform variable array for the current program object.",
 
@@ -755,7 +753,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix4x3fv",
 		"Specifies the value of a single mat4x3 uniform variable or a mat4x3 uniform variable array for the current program object.",
 
@@ -766,7 +764,7 @@ if (shader) {
 		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix2x3dv",
 		"Specifies the value of a single dmat2x3 uniform variable or a dmat2x3 uniform variable array for the current program object.",
 
@@ -777,7 +775,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix3x2dv",
 		"Specifies the value of a single dmat3x2 uniform variable or a dmat3x2 uniform variable array for the current program object.",
 
@@ -788,7 +786,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix2x4dv",
 		"Specifies the value of a single dmat2x4 uniform variable or a dmat2x4 uniform variable array for the current program object.",
 
@@ -799,7 +797,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix4x2dv",
 		"Specifies the value of a single dmat4x2 uniform variable or a dmat4x2 uniform variable array for the current program object.",
 
@@ -810,7 +808,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix3x4dv",
 		"Specifies the value of a single dmat3x4 uniform variable or a dmat3x4 uniform variable array for the current program object.",
 
@@ -821,7 +819,7 @@ if (shader) {
 		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef..void(
+	void(
 		"ProgramUniformMatrix4x3dv",
 		"Specifies the value of a single dmat4x3 uniform variable or a dmat4x3 uniform variable array for the current program object.",
 
@@ -863,9 +861,7 @@ if (shader) {
 	val attribW = "the vertex attribute w component"
 	val attribBuffer = "the vertex attribute buffer"
 
-	val VertexAttribRef = ReferenceGL("glVertexAttrib")
-
-	VertexAttribRef..void(
+	void(
 		"VertexAttribL1d",
 		"Specifies the value of a generic vertex attribute. The y and z components are implicitly set to 0.0 and w to 1.0.",
 
@@ -873,7 +869,7 @@ if (shader) {
 		GLdouble.IN("x", attribX)
 	)
 
-	VertexAttribRef..void(
+	void(
 		"VertexAttribL2d",
 		"Specifies the value of a generic vertex attribute. The y component is implicitly set to 0.0 and w to 1.0.",
 
@@ -882,7 +878,7 @@ if (shader) {
 		GLdouble.IN("y", attribY)
 	)
 
-	VertexAttribRef..void(
+	void(
 		"VertexAttribL3d",
 		"Specifies the value of a generic vertex attribute. The w is implicitly set to 1.0.",
 
@@ -892,7 +888,7 @@ if (shader) {
 		GLdouble.IN("z", attribZ)
 	)
 
-	VertexAttribRef..void(
+	void(
 		"VertexAttribL4d",
 		"Specifies the value of a generic vertex attribute.",
 
@@ -903,12 +899,12 @@ if (shader) {
 		GLdouble.IN("w", attribW)
 	)
 
-	VertexAttribRef..void("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), Check(1)..const..GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef..void("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), Check(2)..const..GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef..void("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), Check(3)..const..GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef..void("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), Check(4)..const..GLdouble_p.IN("v", attribBuffer))
+	void("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), Check(1)..const..GLdouble_p.IN("v", attribBuffer))
+	void("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), Check(2)..const..GLdouble_p.IN("v", attribBuffer))
+	void("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), Check(3)..const..GLdouble_p.IN("v", attribBuffer))
+	void("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), Check(4)..const..GLdouble_p.IN("v", attribBuffer))
 
-	ReferenceGL("glVertexAttribPointer")..void(
+	void(
 		"VertexAttribLPointer",
 		"Specifies the location and organization of a 64-bit vertex attribute array.",
 
@@ -931,7 +927,7 @@ if (shader) {
 		)
 	)
 
-	ReferenceGL("glGetVertexAttrib")..void(
+	void(
 		"GetVertexAttribLdv",
 		"Double version of #GetVertexAttribiv().",
 
@@ -967,7 +963,7 @@ if (shader) {
 		const..GLfloat_p.IN("v", "an array containing the viewport parameters")
 	)
 
-	ReferenceGL("glViewportIndexed")..void(
+	void(
 		"ViewportIndexedf",
 		"Sets a specified viewport.",
 

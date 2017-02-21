@@ -498,7 +498,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLuint64.IN("timeout", "the timeout that the server should wait before continuing", "#TIMEOUT_IGNORED")
 	)
 
-	ReferenceGL("glGet")..void(
+	void(
 		"GetInteger64v",
 		"Returns the 64bit integer value or values of a selected parameter.",
 
@@ -506,7 +506,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		Check(1)..ReturnParam..GLint64_p.OUT("params", "the value or values of the specified parameter")
 	)
 
-	ReferenceGL("glGet")..void(
+	void(
 		"GetInteger64i_v",
 		"Queries the 64bit integer value of an indexed state variable.",
 

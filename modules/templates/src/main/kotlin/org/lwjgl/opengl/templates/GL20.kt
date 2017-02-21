@@ -685,7 +685,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		GLuint.IN("index", "the index of the generic vertex attribute to be enabled")
 	)
 
-	ReferenceGL("glEnableVertexAttribArray")..void(
+	void(
 		"DisableVertexAttribArray",
 		"Disables a generic vertex attribute array.",
 

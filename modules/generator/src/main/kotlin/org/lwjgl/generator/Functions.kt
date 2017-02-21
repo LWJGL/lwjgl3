@@ -107,7 +107,7 @@ class Func(
 	internal val accessModifier
 		get() = (if (has<AccessModifier>()) get<AccessModifier>().access else nativeClass.access).modifier
 
-	fun stripPostfix(functionName: String = name, stripType: Boolean): String {
+	private fun stripPostfix(functionName: String = name): String {
 		if (!hasNativeParams)
 			return functionName
 
@@ -122,33 +122,10 @@ class Func(
 		else
 			postfix = ""
 
-		var cutCount = if (name.endsWith("v")) {
-			if (name.endsWith("_v")) 2 else 1
-		} else
-			0
-
-		if (stripType) {
-			val pointerMapping = param.nativeType.mapping as PointerMapping
-			val typeSuffix = when (pointerMapping) {
-				PointerMapping.DATA_SHORT  -> "s"
-				PointerMapping.DATA_INT    -> "i"
-				PointerMapping.DATA_LONG   -> "i64"
-				PointerMapping.DATA_FLOAT  -> "f"
-				PointerMapping.DATA_DOUBLE -> "d"
-				else                       -> ""
-			}
-
-			if (typeSuffix != "") {
-				val offset = name.length - cutCount
-				if (typeSuffix == name.substring(offset - typeSuffix.length, offset))
-					cutCount += typeSuffix.length
-
-				if (name[name.length - cutCount - 1] == 'u')
-					cutCount++
-			}
-		}
-
-		return name.substring(0, name.length - cutCount) + postfix
+		return (if (name.endsWith("v"))
+			name.substring(0, name.length - (if (name.endsWith("_v")) 2 else 1))
+		else
+			name) + postfix
 	}
 
 	val javaDocLink
@@ -607,8 +584,11 @@ class Func(
 			return
 
 		val javadoc = documentation { it !== JNI_ENV }
-		if (javadoc.isEmpty())
+		if (javadoc.isEmpty()) {
+			if (verbose)
+				nativeClass.binding?.printCustomJavadoc(this, this@Func, javadoc)
 			return
+		}
 
 		if (verbose) {
 			if (!(nativeClass.binding?.printCustomJavadoc(this, this@Func, javadoc) ?: false))
@@ -757,7 +737,8 @@ class Func(
 
 	private fun PrintWriter.printDocumentation(parameterFilter: (Parameter) -> Boolean) {
 		val doc = documentation(parameterFilter)
-		if (doc.isNotEmpty() && !(nativeClass.binding?.printCustomJavadoc(this, this@Func, doc) ?: false))
+		val custom = nativeClass.binding?.printCustomJavadoc(this, this@Func, doc) ?: false
+		if (!custom && doc.isNotEmpty())
 			println(doc)
 	}
 
@@ -1081,7 +1062,7 @@ class Func(
 					if (!hasParam { it.has<SingleValue>() || it.has<PointerArray>() }) {
 						// Skip, we inject the Return alternative in these transforms
 						applyReturnValueTransforms(it)
-						generateAlternativeMethod(stripPostfix(name, stripType = false), transforms)
+						generateAlternativeMethod(stripPostfix(), transforms)
 					}
 				} else if (it.nativeType is CharSequenceType) {
 					// Remove any transform from the maxLength parameter
@@ -1303,7 +1284,7 @@ class Func(
 				true
 			}
 		} != 0)
-			generateAlternativeMethod(stripPostfix(name, stripType = false), transforms)
+			generateAlternativeMethod(stripPostfix(), transforms)
 	}
 
 	private fun <T : QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, Transform>, original: String): String? {
@@ -1340,7 +1321,8 @@ class Func(
 		if (!constantMacro) {
 			if (description != null) {
 				val doc = nativeClass.processDocumentation("$description $javaDocLink").toJavaDoc()
-				if (!(nativeClass.binding?.printCustomJavadoc(this, this@Func, doc) ?: false) && doc.isNotEmpty())
+				val custom = nativeClass.binding?.printCustomJavadoc(this, this@Func, doc) ?: false
+				if (!custom && doc.isNotEmpty())
 					println(doc)
 			} else {
 				val hideAutoSizeResult = parameters.count { it.isAutoSizeResultOut } == 1
