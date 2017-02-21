@@ -118,7 +118,7 @@ val CL10GL = "CL10GL".dependsOn(Binding.OPENGL, Binding.OPENGLES)?.nativeClassCL
 		"""
 	)
 
-	cl_mem(
+	DeprecatedCL("1.1")..cl_mem(
 		"CreateFromGLTexture2D",
 		"""
 		Creates an OpenCL 2D image object from an OpenGL 2D texture object, or a single face of an OpenGL cubemap texture object.
@@ -186,7 +186,7 @@ val CL10GL = "CL10GL".dependsOn(Binding.OPENGL, Binding.OPENGLES)?.nativeClassCL
 		"""
 	)
 
-	cl_mem(
+	DeprecatedCL("1.1")..cl_mem(
 		"CreateFromGLTexture3D",
 		"""
 		Creates an OpenCL 3D image object from an OpenGL 3D texture object.

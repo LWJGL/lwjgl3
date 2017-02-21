@@ -837,7 +837,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 	// ------------------[ OPENCL Runtime ]------------------
 
-	cl_command_queue(
+	DeprecatedCL("1.2")..cl_command_queue(
 		"CreateCommandQueue",
 		"""
 		Creates a command-queue on a specific device.
@@ -1264,7 +1264,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_mem(
+	DeprecatedCL("1.1")..cl_mem(
 		"CreateImage2D",
 		"Creates a 2D image object.",
 
@@ -1324,7 +1324,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_mem(
+	DeprecatedCL("1.1")..cl_mem(
 		"CreateImage3D",
 		"Creates a 3D image object.",
 
@@ -2231,7 +2231,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_sampler(
+	DeprecatedCL("1.2")..cl_sampler(
 		"CreateSampler",
 		"""
 		Creates a sampler object.
@@ -2550,7 +2550,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int(
+	DeprecatedCL("1.1")..cl_int(
 		"UnloadCompiler",
 		"""
 		Allows the implementation to release the resources allocated by the OpenCL compiler. This is a hint from the application and does not guarantee that the
@@ -3016,7 +3016,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int(
+	DeprecatedCL("1.2")..cl_int(
 		"EnqueueTask",
 		"""
 		Enqueues a command to execute a kernel on a device. The kernel is executed using a single work-item.
@@ -3211,7 +3211,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int(
+	DeprecatedCL("1.1")..cl_int(
 		"EnqueueMarker",
 		"""
 		Enqueues a marker command to {@code command_queue}. The marker command is not completed until all commands enqueued before it have completed. The marker
@@ -3234,7 +3234,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int(
+	DeprecatedCL("1.1")..cl_int(
 		"EnqueueBarrier",
 		"""
 		Enqueues a barrier operation. The {@code clEnqueueBarrier} command ensures that all queued commands in {@code command_queue} have finished execution
@@ -3254,7 +3254,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int(
+	DeprecatedCL("1.1")..cl_int(
 		"EnqueueWaitForEvents",
 		"Enqueues a wait for a specific event or a list of events to complete before any future commands queued in the command-queue are executed.",
 
@@ -3346,7 +3346,7 @@ kernel void image_filter (
 		cl_command_queue.IN("command_queue", "the command-queue")
 	)
 
-	opaque_p(
+	DeprecatedCL("1.1")..opaque_p(
 		"GetExtensionFunctionAddress",
 		"""
 		Returns the address of the extension function named by {@code funcname}. The pointer returned should be cast to a function pointer type matching the

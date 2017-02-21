@@ -25,6 +25,36 @@ private val CLBinding = Generator.register(object : APIBinding(
 	APICapabilities.JAVA_CAPABILITIES
 ) {
 
+	override fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String): Boolean {
+		if (function.nativeClass.templateName.startsWith("CL")) {
+			writer.printOpenGLJavaDoc(documentation, function.nativeName, if (function.has<DeprecatedCL>()) function.get<DeprecatedCL>().after else "2.1")
+			return true
+		}
+		return false
+	}
+
+	private fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, version: String) {
+		val link = url("https://www.khronos.org/registry/OpenCL/sdk/$version/docs/man/xhtml/$function.html", "Reference Page")
+		val injectedJavaDoc =
+			if (version != "2.1")
+				"$link - <em>This function is deprecated after OpenCL $version</em>"
+			else
+				link
+
+		if (documentation.isEmpty())
+			println("\t/** $injectedJavaDoc */")
+		else {
+			print("\t/**\n\t * <p>$injectedJavaDoc</p>\n\t * \n")
+			if (documentation.indexOf('\n') == -1) {
+				print("\t * ")
+				println(documentation.substring("\t/** ".length, documentation.length - 3))
+				println("\t */")
+			} else {
+				println(documentation.substring("\t/**\n".length))
+			}
+		}
+	}
+
 	override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "CL10"
 
 	override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
