@@ -5,7 +5,6 @@
 package org.lwjgl;
 
 import org.lwjgl.system.CustomBuffer;
-import org.lwjgl.system.MemoryUtil;
 import org.lwjgl.system.Pointer;
 
 import java.nio.*;
@@ -53,17 +52,6 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
 	public static PointerBuffer create(ByteBuffer source) {
 		int capacity = source.remaining() >> POINTER_SHIFT;
 		return new PointerBuffer(memAddress(source), source, -1, 0, capacity, capacity);
-	}
-
-	/** @see MemoryUtil#memSetupBuffer(PointerBuffer, long, int) */
-	public static PointerBuffer setup(PointerBuffer buffer, long address, int capacity) {
-		buffer.address = address;
-		buffer.capacity = capacity;
-
-		buffer.container = null;
-
-		buffer.clear();
-		return buffer;
 	}
 
 	@Override
