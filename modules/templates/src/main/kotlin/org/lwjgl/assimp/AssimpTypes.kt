@@ -436,7 +436,7 @@ val aiMesh_pp = struct(ASSIMP_PACKAGE, "AIMesh", nativeName = "struct aiMesh") {
 	)
 }.p.p
 
-val aiUVTransform_p = struct(ASSIMP_PACKAGE, "AIUVTransform", "aiUVTransform", mutable = false) {
+val aiUVTransform_p = struct(ASSIMP_PACKAGE, "AIUVTransform", nativeName = "struct aiUVTransform", mutable = false) {
 	documentation =
 		"""
         Defines how an UV channel is transformed.
@@ -457,7 +457,7 @@ val aiUVTransform_p = struct(ASSIMP_PACKAGE, "AIUVTransform", "aiUVTransform", m
 
 val aiPropertyTypeInfo = "aiPropertyTypeInfo".enumType
 
-val aiMaterialProperty_pp = struct(ASSIMP_PACKAGE, "AIMaterialProperty", "aiMaterialProperty", mutable = false) {
+val aiMaterialProperty_pp = struct(ASSIMP_PACKAGE, "AIMaterialProperty", nativeName = "struct aiMaterialProperty", mutable = false) {
 	documentation =
 		"""
         Data structure for a single material property.
