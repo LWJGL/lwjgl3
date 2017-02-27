@@ -523,6 +523,28 @@ val nk_command_text = struct(NUKLEAR_PACKAGE, "NkCommandText", nativeName = "str
 	char.array("string", "", size = 1)
 }*/
 
+val nk_command_custom_callback = "nk_command_custom_callback".callback(
+	NUKLEAR_PACKAGE, void_p, "NkCommandCustomCallback",
+	"",
+
+	opaque_p.IN("canvas", ""),
+	short.IN("x", ""),
+	short.IN("y", ""),
+	unsigned_short.IN("w", ""),
+	unsigned_short.IN("h", ""),
+	nk_handle_in_callback.IN("callback_data", "")
+)
+
+/*val nk_command_custom = struct(NUKLEAR_PACKAGE, "NkCommandCustom", nativeName = "struct nk_command_custom") {
+	nk_command.member("header", "")
+	short.member("x", "")
+	short.member("y", "")
+	unsigned_short.member("w", "")
+	unsigned_short.member("h", "")
+	nk_handle.member("callback_data", "")
+	nk_command_custom_callback.member("callback", "")
+}*/
+
 val nk_command_buffer = struct(NUKLEAR_PACKAGE, "NkCommandBuffer", nativeName = "struct nk_command_buffer", mutable = false) {
 	nullable..nk_buffer_p.member("base", "")
 	nk_rect.member("clip", "")

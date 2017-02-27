@@ -627,7 +627,8 @@ nk_style_pop_vec2(ctx);""")}
 		"COMMAND_POLYGON_FILLED".enum,
 		"COMMAND_POLYLINE".enum,
 		"COMMAND_TEXT".enum,
-		"COMMAND_IMAGE".enum
+		"COMMAND_IMAGE".enum,
+		"COMMAND_CUSTOM".enum
 	)
 
 	EnumConstant(
@@ -4027,14 +4028,6 @@ nk_style_pop_vec2(ctx);""")}
 		)
 
 		void(
-			"push_scissor",
-			"",
-
-			nk_command_buffer_p.IN("b", ""),
-			nk_rect.IN("rect", "")
-		)
-
-		void(
 			"draw_image",
 			"",
 
@@ -4055,6 +4048,24 @@ nk_style_pop_vec2(ctx);""")}
 			const..nk_user_font_p.IN("font", ""),
 			nk_color.IN("bg", ""),
 			nk_color.IN("fg", "")
+		)
+
+		void(
+			"push_scissor",
+			"",
+
+			nk_command_buffer_p.IN("b", ""),
+			nk_rect.IN("rect", "")
+		)
+
+		void(
+			"push_custom",
+			"",
+
+			nk_command_buffer_p.IN("b", ""),
+			nk_rect.IN("rect", ""),
+			nk_command_custom_callback.IN("callback", ""),
+			nk_handle.IN("usr", "")
 		)
 
 		const..nk_command.p(
