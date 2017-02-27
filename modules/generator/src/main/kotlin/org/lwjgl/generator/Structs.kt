@@ -637,13 +637,6 @@ $indentation}"""
 				}
 
 				print("""
-	/** Unsafe version of {@link #set($className) set}. */${if (extends != null) """
-	@Override""" else ""}
-	public $className nset(long struct) {
-		memCopy(struct, $ADDRESS, SIZEOF);
-		return this;
-	}
-
 	/**
 	 * Copies the specified struct data to this struct.
 	 *
@@ -652,7 +645,8 @@ $indentation}"""
 	 * @return this struct
 	 */
 	public $className set($className src) {
-		return nset(src.$ADDRESS);
+		memCopy(src.$ADDRESS, $ADDRESS, SIZEOF);
+		return this;
 	}
 """)
 			}
@@ -1682,7 +1676,7 @@ ${validations.joinToString("\n")}
 						println("${indent}public $bufferType $getter() { return $n$getter($ADDRESS); }")
 						println("$indent/** Returns the value at the specified index of the {@code $getter} field. */")
 						if (overrides) println("$indent@Override")
-						println("${indent}public ${it.nativeType.javaMethodType} $getter(int index) { return $n$getter($ADDRESS, index); }")
+						println("${indent}public ${it.nativeType.nativeMethodType} $getter(int index) { return $n$getter($ADDRESS, index); }")
 					}
 				} else if (it.nativeType is CharSequenceType) {
 					println("$indent/** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code $getter} field. */")
@@ -1714,8 +1708,6 @@ $indent */""")
 							println("${indent}public $returnType $getter() { return $n$getter($ADDRESS); }")
 						}
 					} else {
-
-
 						if (getReferenceMember<AutoSizeMember>(it.name) == null) {
 							println(
 								"""$indent/**
