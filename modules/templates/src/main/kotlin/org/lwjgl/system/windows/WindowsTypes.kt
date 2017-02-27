@@ -51,13 +51,10 @@ val LPARAM = typedef(LONG_PTR, "LPARAM")
 val CHAR = CharType("CHAR", CharMapping.ASCII)
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 
-val LPCTSTR = CharSequenceType(
-	name = "LPCTSTR",
-	includesPointer = true,
-	charMapping = CharMapping.UTF16
-)
-
 val LPCSTR = CharSequenceType("LPCSTR", includesPointer = true)
+val LPCWSTR = CharSequenceType("LPCWSTR", includesPointer = true, charMapping = CharMapping.UTF16)
+val LPCTSTR = CharSequenceType("LPCTSTR", includesPointer = true, charMapping = CharMapping.UTF16)
+
 val FARPROC = "FARPROC".opaque_p
 val PROC = "PROC".opaque_p
 val LPVOID = "LPVOID".opaque_p

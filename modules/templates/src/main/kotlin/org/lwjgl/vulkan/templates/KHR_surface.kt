@@ -446,6 +446,6 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 		VkPhysicalDevice.IN("physicalDevice", "the physical device that will be associated with the swapchain to be created, as described for #CreateSwapchainKHR()."),
 		VkSurfaceKHR.IN("surface", "the surface that will be associated with the swapchain."),
 		AutoSize("pPresentModes")..Check(1)..uint32_t_p.INOUT("pPresentModeCount", "a pointer to an integer related to the number of presentation modes available or queried, as described below."),
-		nullable..VkPresentModeKHR.p.OUT("pPresentModes", "either {@code NULL} or a pointer to an array of {@code VkPresentModeKHR} structures.")
+		nullable..VkPresentModeKHR.p.OUT("pPresentModes", "either {@code NULL} or a pointer to an array of {@code VkPresentModeKHR} values.")
 	)
 }

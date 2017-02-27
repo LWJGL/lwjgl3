@@ -82,7 +82,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
 		It is recommended to register a small number of objects and to use dynamic offsets whenever possible.
 
-		While the GPU can be faster than a CPU to generate the commands, it may not happen asynchronously, therefore the primary use-case is generating “less” total work (occlusion culling, classification to use specialized shaders...).
+		While the GPU can be faster than a CPU to generate the commands, it may not happen asynchronously, therefore the primary use-case is generating "{@code less}" total work (occlusion culling, classification to use specialized shaders...).
 
 		<h5>Example Code</h5>
 		TODO links to gameworks & designworks samples

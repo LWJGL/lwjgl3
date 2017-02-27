@@ -7,6 +7,8 @@ package org.lwjgl.vulkan
 import org.lwjgl.generator.*
 import org.lwjgl.vulkan.templates.*
 
+val KHX = "KHX"
+
 fun templateCustomization() {
 	PFN_vkDebugReportCallbackEXT.signature.apply {
 		additionalCode = """
@@ -128,5 +130,20 @@ fun templateCustomization() {
 		SingleValue("pRegion")..this["CmdResolveImage"].getParam("pRegions")
 		SingleValue("pCommandBuffer")..this["CmdExecuteCommands"].getParam("pCommandBuffers")
 		SingleValue("pCommandBuffer")..this["FreeCommandBuffers"].getParam("pCommandBuffers")
+	}
+
+	VkDeviceGroupPresentCapabilitiesKHX.definition.apply {
+		javaImport("static org.lwjgl.vulkan.KHXDeviceGroupCreation.*")
+	}
+
+	VkPhysicalDeviceGroupPropertiesKHX.definition.apply {
+		javaImport("static org.lwjgl.vulkan.KHXDeviceGroupCreation.*")
+	}
+
+	VkPhysicalDeviceIDPropertiesKHX.definition.apply {
+		javaImport(
+			"static org.lwjgl.vulkan.VK10.*",
+			"static org.lwjgl.vulkan.KHXExternalMemoryCapabilities.*"
+		)
 	}
 }
