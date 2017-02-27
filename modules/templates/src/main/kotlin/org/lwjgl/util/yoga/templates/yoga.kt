@@ -581,6 +581,13 @@ div {
 	)
 
 	void(
+		"SetPointScaleFactor",
+		"Set this to number of pixels in 1 point to round calculation results. If you want to avoid rounding set {@code PointScaleFactor} to 0.",
+
+		float.IN("pixelsInPoint", "")
+	)
+
+	void(
 		"SetExperimentalFeatureEnabled",
 		"",
 
