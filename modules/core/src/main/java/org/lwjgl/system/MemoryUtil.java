@@ -8,6 +8,7 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.MemoryAccess.MemoryAccessor;
 import org.lwjgl.system.MemoryManage.DebugAllocator;
 import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.Aggregate;
+import org.lwjgl.system.jni.JNINativeInterface;
 
 import java.nio.*;
 import java.util.*;
@@ -16,6 +17,7 @@ import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.LazyInit.*;
 import static org.lwjgl.system.Pointer.*;
+import static org.lwjgl.system.jni.JNINativeInterface.*;
 
 /**
  * This class provides functionality for managing native memory.
@@ -1118,6 +1120,30 @@ public final class MemoryUtil {
 	 * @return the object pointed to by {@code globalRef}
 	 */
 	public static native <T> T memGlobalRefToObject(long globalRef);
+
+	/** Deprecated, use {@link JNINativeInterface#NewGlobalRef} instead. */
+	@Deprecated
+	public static long memNewGlobalRef(Object obj) {
+		return NewGlobalRef(obj);
+	}
+
+	/** Deprecated, use {@link JNINativeInterface#DeleteGlobalRef} instead. */
+	@Deprecated
+	public static void memDeleteGlobalRef(long globalRef) {
+		DeleteGlobalRef(globalRef);
+	}
+
+	/** Deprecated, use {@link JNINativeInterface#NewWeakGlobalRef} instead. */
+	@Deprecated
+	public static long memNewWeakGlobalRef(Object obj) {
+		return NewWeakGlobalRef(obj);
+	}
+
+	/** Deprecated, use {@link JNINativeInterface#DeleteWeakGlobalRef} instead. */
+	@Deprecated
+	public static void memDeleteWeakGlobalRef(long globalRef) {
+		DeleteWeakGlobalRef(globalRef);
+	}
 
 	/*  -------------------------------------
 		-------------------------------------
