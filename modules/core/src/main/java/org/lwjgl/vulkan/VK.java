@@ -51,7 +51,7 @@ public final class VK {
 				VK = Library.loadNative(VK.class, Configuration.VULKAN_LIBRARY_NAME, "vulkan-1");
 				break;
 			case MACOSX:
-				VK = Library.loadNative(VK.class, Configuration.VULKAN_LIBRARY_NAME); // there may be Vulkan-over-Metal emulation libraries on OS X
+				VK = Library.loadNative(VK.class, Configuration.VULKAN_LIBRARY_NAME); // Vulkan-over-Metal emulation, e.g. MoltenVK
 				break;
 			default:
 				throw new IllegalStateException();

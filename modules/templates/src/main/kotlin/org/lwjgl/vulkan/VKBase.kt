@@ -17,6 +17,8 @@ fun config() {
 
 		Experimental extensions (KHX, NVX, etc) is not supported API. When such an extension is promoted to stable, the corresponding experimental bindings
 		will be removed.
+
+		<b>macOS</b>: Vulkan can be used on macOS with a solution that emulates it over Metal, like ${url("https://moltengl.com/moltenvk/", "MoltenVK")}.
 		"""
 	)
 }
